@@ -1,7 +1,6 @@
 package android.widget;
 
 import android.Manifest;
-import android.R;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
@@ -21,6 +20,7 @@ import android.content.UndoManager;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.content.res.ColorStateList;
+import android.content.res.CompatibilityInfo;
 import android.content.res.Configuration;
 import android.content.res.FontScaleConverterFactory;
 import android.content.res.Resources;
@@ -29,6 +29,7 @@ import android.content.res.XmlResourceParser;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.BaseCanvas;
 import android.graphics.BlendMode;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Insets;
 import android.graphics.Matrix;
@@ -164,6 +165,7 @@ import android.view.WindowManager;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
 import android.view.accessibility.AccessibilityNodeInfo;
+import android.view.animation.AnimationUtils;
 import android.view.autofill.AutofillManager;
 import android.view.autofill.AutofillValue;
 import android.view.autofill.Helper;
@@ -210,6 +212,8 @@ import android.view.translation.ViewTranslationRequest;
 import android.widget.AccessibilityIterators;
 import android.widget.Editor;
 import android.widget.RemoteViews;
+import com.android.internal.R;
+import com.android.internal.accessibility.util.AccessibilityUtils;
 import com.android.internal.graphics.ColorUtils;
 import com.android.internal.inputmethod.EditableInputConnection;
 import com.android.internal.logging.MetricsLogger;
@@ -229,6 +233,7 @@ import com.samsung.android.cover.ICoverManager;
 import com.samsung.android.graphics.imagefilter.ShaderAssembler;
 import com.samsung.android.infoextraction.SemInfoExtractionManager;
 import com.samsung.android.penselect.PenSelectionController;
+import com.samsung.android.rune.CoreRune;
 import com.samsung.android.rune.ViewRune;
 import com.samsung.android.sdk.sfe.SFText;
 import com.samsung.android.sepunion.UnionConstants;
@@ -314,13 +319,13 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     static final int ID_PASTE_AS_PLAIN_TEXT = 16908337;
     static final int ID_REDO = 16908339;
     static final int ID_REPLACE = 16908340;
-    static final int ID_SCAN_TEXT = 16909640;
+    static final int ID_SCAN_TEXT = 16909641;
     static final int ID_SELECT_ALL = 16908319;
     static final int ID_SHARE = 16908341;
-    static final int ID_SSS_TRANSLATE = 16909873;
+    static final int ID_SSS_TRANSLATE = 16909874;
     static final int ID_UNDO = 16908338;
-    static final int ID_WEBSEARCH = 16910075;
-    static final int ID_WRITING_TOOLKIT = 16910090;
+    static final int ID_WEBSEARCH = 16910076;
+    static final int ID_WRITING_TOOLKIT = 16910091;
     private static final int KEY_DOWN_HANDLED_BY_KEY_LISTENER = 1;
     private static final int KEY_DOWN_HANDLED_BY_MOVEMENT_METHOD = 2;
     private static final int KEY_EVENT_HANDLED = -1;
@@ -1137,53 +1142,1868 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
 
     /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Failed to find 'out' block for switch in B:41:0x0285. Please report as an issue. */
-    /* JADX WARN: Failed to find 'out' block for switch in B:42:0x0288. Please report as an issue. */
-    /* JADX WARN: Failed to find 'out' block for switch in B:43:0x028b. Please report as an issue. */
-    /* JADX WARN: Removed duplicated region for block: B:198:0x0bf8  */
-    /* JADX WARN: Removed duplicated region for block: B:200:0x0bfd  */
-    /* JADX WARN: Removed duplicated region for block: B:205:0x0c0f A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:209:0x0c54  */
-    /* JADX WARN: Removed duplicated region for block: B:216:0x0c61  */
-    /* JADX WARN: Removed duplicated region for block: B:227:0x0c9a A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:233:0x0cc9  */
-    /* JADX WARN: Removed duplicated region for block: B:236:0x0cd4 A[ADDED_TO_REGION] */
-    /* JADX WARN: Removed duplicated region for block: B:242:0x0ceb  */
-    /* JADX WARN: Removed duplicated region for block: B:246:0x0d19  */
-    /* JADX WARN: Removed duplicated region for block: B:249:0x0d1f  */
-    /* JADX WARN: Removed duplicated region for block: B:251:0x0d23  */
-    /* JADX WARN: Removed duplicated region for block: B:254:0x0d2a  */
-    /* JADX WARN: Removed duplicated region for block: B:257:0x0d3d  */
-    /* JADX WARN: Removed duplicated region for block: B:261:0x0d49  */
-    /* JADX WARN: Removed duplicated region for block: B:265:0x0d55  */
-    /* JADX WARN: Removed duplicated region for block: B:270:0x0d67  */
-    /* JADX WARN: Removed duplicated region for block: B:273:0x0d73  */
-    /* JADX WARN: Removed duplicated region for block: B:302:0x0dc6  */
-    /* JADX WARN: Removed duplicated region for block: B:305:0x0dd3  */
-    /* JADX WARN: Removed duplicated region for block: B:308:0x0dda  */
-    /* JADX WARN: Removed duplicated region for block: B:311:0x0de4  */
-    /* JADX WARN: Removed duplicated region for block: B:314:0x0ded  */
-    /* JADX WARN: Removed duplicated region for block: B:333:0x0e34  */
-    /* JADX WARN: Removed duplicated region for block: B:336:0x0e3b  */
-    /* JADX WARN: Removed duplicated region for block: B:339:0x0e42  */
-    /* JADX WARN: Removed duplicated region for block: B:342:0x0e4d  */
-    /* JADX WARN: Removed duplicated region for block: B:349:0x0e2a  */
-    /* JADX WARN: Removed duplicated region for block: B:353:0x0cf8  */
-    /* JADX WARN: Removed duplicated region for block: B:361:0x0c93  */
-    /* JADX WARN: Removed duplicated region for block: B:364:0x0c1f  */
-    /* JADX WARN: Removed duplicated region for block: B:366:0x0c28  */
-    /* JADX WARN: Removed duplicated region for block: B:368:0x0c35  */
-    /* JADX WARN: Removed duplicated region for block: B:369:0x0c32  */
+    /* JADX WARN: Failed to find 'out' block for switch in B:43:0x0285. Please report as an issue. */
+    /* JADX WARN: Failed to find 'out' block for switch in B:44:0x0288. Please report as an issue. */
+    /* JADX WARN: Failed to find 'out' block for switch in B:45:0x028b. Please report as an issue. */
+    /* JADX WARN: Removed duplicated region for block: B:267:0x0bf8  */
+    /* JADX WARN: Removed duplicated region for block: B:269:0x0bfd  */
+    /* JADX WARN: Removed duplicated region for block: B:274:0x0c0f A[ADDED_TO_REGION] */
+    /* JADX WARN: Removed duplicated region for block: B:277:0x0c1b  */
+    /* JADX WARN: Removed duplicated region for block: B:279:0x0c1f  */
+    /* JADX WARN: Removed duplicated region for block: B:281:0x0c28  */
+    /* JADX WARN: Removed duplicated region for block: B:282:0x0c32  */
+    /* JADX WARN: Removed duplicated region for block: B:284:0x0c35  */
+    /* JADX WARN: Removed duplicated region for block: B:287:0x0c54  */
+    /* JADX WARN: Removed duplicated region for block: B:294:0x0c61  */
+    /* JADX WARN: Removed duplicated region for block: B:307:0x0c93  */
+    /* JADX WARN: Removed duplicated region for block: B:309:0x0c9a A[ADDED_TO_REGION] */
+    /* JADX WARN: Removed duplicated region for block: B:314:0x0ca3  */
+    /* JADX WARN: Removed duplicated region for block: B:317:0x0cc9  */
+    /* JADX WARN: Removed duplicated region for block: B:320:0x0cd4 A[ADDED_TO_REGION] */
+    /* JADX WARN: Removed duplicated region for block: B:324:0x0ce5  */
+    /* JADX WARN: Removed duplicated region for block: B:327:0x0ceb  */
+    /* JADX WARN: Removed duplicated region for block: B:329:0x0cf8  */
+    /* JADX WARN: Removed duplicated region for block: B:335:0x0d19  */
+    /* JADX WARN: Removed duplicated region for block: B:338:0x0d1f  */
+    /* JADX WARN: Removed duplicated region for block: B:340:0x0d23  */
+    /* JADX WARN: Removed duplicated region for block: B:343:0x0d2a  */
+    /* JADX WARN: Removed duplicated region for block: B:346:0x0d3d  */
+    /* JADX WARN: Removed duplicated region for block: B:350:0x0d46  */
+    /* JADX WARN: Removed duplicated region for block: B:352:0x0d49  */
+    /* JADX WARN: Removed duplicated region for block: B:356:0x0d52  */
+    /* JADX WARN: Removed duplicated region for block: B:358:0x0d55  */
+    /* JADX WARN: Removed duplicated region for block: B:362:0x0d5e  */
+    /* JADX WARN: Removed duplicated region for block: B:365:0x0d67  */
+    /* JADX WARN: Removed duplicated region for block: B:368:0x0d73  */
+    /* JADX WARN: Removed duplicated region for block: B:393:0x0dc6  */
+    /* JADX WARN: Removed duplicated region for block: B:396:0x0dd3  */
+    /* JADX WARN: Removed duplicated region for block: B:399:0x0dda  */
+    /* JADX WARN: Removed duplicated region for block: B:402:0x0de4  */
+    /* JADX WARN: Removed duplicated region for block: B:405:0x0ded  */
+    /* JADX WARN: Removed duplicated region for block: B:422:0x0e2a  */
+    /* JADX WARN: Removed duplicated region for block: B:425:0x0e34  */
+    /* JADX WARN: Removed duplicated region for block: B:428:0x0e3b  */
+    /* JADX WARN: Removed duplicated region for block: B:431:0x0e42  */
+    /* JADX WARN: Removed duplicated region for block: B:434:0x0e4d  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public TextView(android.content.Context r56, android.util.AttributeSet r57, int r58, int r59) {
-        /*
-            Method dump skipped, instructions count: 3840
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.TextView.<init>(android.content.Context, android.util.AttributeSet, int, int):void");
+    public TextView(Context context, AttributeSet attributeSet, int i, int i2) throws Resources.NotFoundException, ClassNotFoundException {
+        TextView textView;
+        Context context2;
+        AttributeSet attributeSet2;
+        int i3;
+        int i4;
+        TypedArray typedArrayObtainStyledAttributes;
+        boolean z;
+        BufferType bufferType;
+        Editor editor;
+        ColorStateList colorStateList;
+        boolean z2;
+        boolean z3;
+        int i5;
+        InputFilter.LengthFilter lengthFilter;
+        CharSequence charSequence;
+        int focusable;
+        int indexCount;
+        int i6;
+        Editor editor2;
+        int i7;
+        int i8;
+        float f;
+        int i9;
+        TextKeyListener.Capitalize capitalize;
+        int i10;
+        int i11;
+        int i12;
+        int i13;
+        int i14;
+        BlendMode blendMode;
+        boolean z4;
+        boolean z5;
+        boolean z6;
+        String str;
+        boolean z7;
+        String str2;
+        boolean z8;
+        boolean z9;
+        super(context, attributeSet, i, i2);
+        String str3 = "Failure reading input extras";
+        String str4 = LOG_TAG;
+        this.mRestrictionPolicy = null;
+        this.mSingleLineLengthFilter = null;
+        this.mDisableWritingToolkitMenu = false;
+        this.mEditableFactory = Editable.Factory.getInstance();
+        this.mSpannableFactory = Spannable.Factory.getInstance();
+        this.mCursorVisibleFromAttr = true;
+        this.mIsThemeDeviceDefault = false;
+        this.mChangedSelectionBySIP = false;
+        this.mSemClipboardManager = null;
+        this.mKeycodeDpadCenterStatus = false;
+        this.mButtonShapePaint = null;
+        this.mButtonShapeRect = null;
+        this.mButtonShapeTextColor = null;
+        this.mIsNightMode = false;
+        this.mIsButtonShapeTarget = false;
+        this.mButtonShapeSettingEnabled = false;
+        this.mCursorThicknessScale = 1.0f;
+        this.mDrawTextStrikeAnimator = null;
+        this.mDrawStrikeAnimationValue = 0.0f;
+        this.mStrikeThroughPaint = null;
+        this.mTextStrikeThroughEnabled = false;
+        this.mLineIsDrawed = false;
+        this.mMarqueeRepeatLimit = 3;
+        this.mLastLayoutDirection = -1;
+        this.mMarqueeFadeMode = 0;
+        this.mBufferType = BufferType.NORMAL;
+        this.mDisplayText = null;
+        this.mUseDisplayText = false;
+        this.mSkipUpdateDisplayText = false;
+        this.mhasMultiSelection = false;
+        this.mEnableMultiSelection = true;
+        this.mEnableLinkPreview = false;
+        this.mCanTextMultiSelection = false;
+        this.mMultiHighlightColor = -1728022343;
+        this.mIsShowingLinkPreview = false;
+        this.HOVER_INTERVAL = 300;
+        this.mHoveredSpan = null;
+        this.mHoverEnterTime = -1L;
+        this.mHoverExitTime = -1L;
+        this.TOUCH_DELTA = 12.0f;
+        this.mWordIteratorForMultiSelection = null;
+        this.mPenSelectionController = null;
+        this.mLocalesChanged = false;
+        this.mTextSizeUnit = -1;
+        this.mLineBreakStyle = 0;
+        this.mLineBreakWordStyle = 0;
+        this.mTextEffect = null;
+        this.mFontFamily = Typeface.DEFAULT_FAMILY;
+        this.mListenerChanged = false;
+        this.mGravity = 8388659;
+        this.mLinksClickable = true;
+        this.mSpacingMult = 1.0f;
+        this.mSpacingAdd = 0.0f;
+        this.mMaximum = Integer.MAX_VALUE;
+        this.mMaxMode = 1;
+        this.mMinimum = 0;
+        this.mMinMode = 1;
+        this.mOldMaximum = Integer.MAX_VALUE;
+        this.mOldMaxMode = 1;
+        this.mMaxWidth = Integer.MAX_VALUE;
+        this.mMaxWidthMode = 2;
+        this.mMinWidth = 0;
+        this.mMinWidthMode = 2;
+        this.mDesiredHeightAtMeasure = -1;
+        this.mIncludePad = true;
+        this.mDeferScroll = -1;
+        this.mFilters = NO_FILTERS;
+        this.mHighlightColor = 1714664933;
+        this.mHighlightPathBogus = true;
+        this.mSearchResultHighlights = null;
+        this.mSearchResultHighlightPaint = null;
+        this.mFocusedSearchResultHighlightPaint = null;
+        this.mFocusedSearchResultHighlightColor = -27086;
+        this.mSearchResultHighlightColor = -256;
+        this.mFocusedSearchResultIndex = -1;
+        this.mGesturePreviewHighlightStart = -1;
+        this.mGesturePreviewHighlightEnd = -1;
+        this.mPathRecyclePool = new ArrayList();
+        this.mHighlightPathsBogus = true;
+        this.mPrimePointerId = -1;
+        this.mDeviceProvisionedState = 0;
+        this.mLastInputSource = 4098;
+        this.mAutoSizeTextType = 0;
+        this.mNeedsAutoSizeText = false;
+        this.mAutoSizeStepGranularityInPx = -1.0f;
+        this.mAutoSizeMinTextSizeInPx = -1.0f;
+        this.mAutoSizeMaxTextSizeInPx = -1.0f;
+        this.mAutoSizeTextSizesInPx = EmptyArray.INT;
+        this.mHasPresetAutoSizeValues = false;
+        this.mTextSetFromXmlOrResourceId = false;
+        this.mTextId = 0;
+        this.mHintId = 0;
+        this.mIsTouchDown = false;
+        this.mMultiSelectPopupWindow = MultiSelectPopupWindow.getInstance();
+        if (getImportantForAutofill() == 0) {
+            setImportantForAutofill(1);
+        }
+        if (getImportantForContentCapture() == 0) {
+            setImportantForContentCapture(1);
+        }
+        this.mActionModeFlags = 241664;
+        setTextInternal("");
+        Resources resources = getResources();
+        CompatibilityInfo compatibilityInfo = resources.getCompatibilityInfo();
+        TextPaint textPaint = new TextPaint(1);
+        this.mTextPaint = textPaint;
+        textPaint.density = resources.getDisplayMetrics().density;
+        textPaint.setCompatibilityScaling(compatibilityInfo.applicationScale);
+        Paint paint = new Paint(1);
+        this.mHighlightPaint = paint;
+        paint.setCompatibilityScaling(compatibilityInfo.applicationScale);
+        if (ViewRune.WIDGET_PEN_SUPPORTED) {
+            Paint paint2 = new Paint(1);
+            this.mMultiHighlightPaint = paint2;
+            paint2.setCompatibilityScaling(compatibilityInfo.applicationScale);
+            this.TOUCH_DELTA = textPaint.density * 12.0f;
+        }
+        this.mMovement = getDefaultMovementMethod();
+        this.mTransformation = null;
+        TextAppearanceAttributes textAppearanceAttributes = new TextAppearanceAttributes();
+        textAppearanceAttributes.mTextColor = ColorStateList.valueOf(-16777216);
+        textAppearanceAttributes.mTextSize = 15;
+        this.mBreakStrategy = 0;
+        this.mHyphenationFrequency = 0;
+        this.mJustificationMode = 0;
+        this.mLastOrientation = getResources().getConfiguration().orientation;
+        Resources.Theme theme = context.getTheme();
+        TypedArray typedArrayObtainStyledAttributes2 = theme.obtainStyledAttributes(new int[]{R.attr.parentIsDeviceDefault});
+        if (typedArrayObtainStyledAttributes2.getBoolean(0, true)) {
+            this.mIsThemeDeviceDefault = true;
+        }
+        typedArrayObtainStyledAttributes2.recycle();
+        if (this.mIsThemeDeviceDefault) {
+            textPaint.setFlags(textPaint.getFlags() | 192);
+        }
+        TypedArray typedArrayObtainStyledAttributes3 = theme.obtainStyledAttributes(attributeSet, R.styleable.TextViewAppearance, i, i2);
+        saveAttributeDataForStyleable(context, R.styleable.TextViewAppearance, attributeSet, typedArrayObtainStyledAttributes3, i, i2);
+        int resourceId = typedArrayObtainStyledAttributes3.getResourceId(0, -1);
+        typedArrayObtainStyledAttributes3.recycle();
+        if (resourceId != -1) {
+            typedArrayObtainStyledAttributes = theme.obtainStyledAttributes(resourceId, R.styleable.TextAppearance);
+            textView = this;
+            context2 = context;
+            attributeSet2 = attributeSet;
+            i3 = i;
+            i4 = i2;
+            textView.saveAttributeDataForStyleable(context2, R.styleable.TextAppearance, null, typedArrayObtainStyledAttributes, 0, resourceId);
+        } else {
+            textView = this;
+            context2 = context;
+            attributeSet2 = attributeSet;
+            i3 = i;
+            i4 = i2;
+            typedArrayObtainStyledAttributes = null;
+        }
+        if (typedArrayObtainStyledAttributes != null) {
+            textView.readTextAppearance(context2, typedArrayObtainStyledAttributes, textAppearanceAttributes, false);
+            textAppearanceAttributes.mFontFamilyExplicit = false;
+            typedArrayObtainStyledAttributes.recycle();
+        }
+        boolean defaultEditable = textView.getDefaultEditable();
+        TypedArray typedArrayObtainStyledAttributes4 = theme.obtainStyledAttributes(attributeSet2, R.styleable.TextView, i3, i4);
+        textView.saveAttributeDataForStyleable(context2, R.styleable.TextView, attributeSet2, typedArrayObtainStyledAttributes4, i3, i4);
+        textView.readTextAppearance(context2, typedArrayObtainStyledAttributes4, textAppearanceAttributes, true);
+        int indexCount2 = typedArrayObtainStyledAttributes4.getIndexCount();
+        int i15 = 0;
+        int i16 = 0;
+        int i17 = 0;
+        boolean z10 = false;
+        boolean z11 = false;
+        boolean z12 = false;
+        int i18 = 0;
+        boolean z13 = false;
+        boolean z14 = false;
+        int dimensionPixelSize = 0;
+        boolean z15 = false;
+        boolean z16 = false;
+        CharSequence text = "";
+        boolean z17 = defaultEditable;
+        int i19 = -1;
+        int i20 = -1;
+        int i21 = -1;
+        float fApplyDimension = -1.0f;
+        int dimensionPixelSize2 = -1;
+        int dimensionPixelSize3 = -1;
+        int complexUnit = -1;
+        float dimension = -1.0f;
+        float dimensionPixelSize4 = -1.0f;
+        float dimension2 = -1.0f;
+        CharSequence text2 = null;
+        CharSequence text3 = null;
+        BlendMode blendMode2 = null;
+        Drawable drawable = null;
+        Drawable drawable2 = null;
+        Drawable drawable3 = null;
+        Drawable drawable4 = null;
+        Drawable drawable5 = null;
+        Drawable drawable6 = null;
+        ColorStateList colorStateList2 = null;
+        CharSequence text4 = null;
+        while (i15 < indexCount2) {
+            int index = typedArrayObtainStyledAttributes4.getIndex(i15);
+            if (index == 0) {
+                i11 = indexCount2;
+                i12 = i15;
+                i13 = i17;
+                i14 = dimensionPixelSize;
+                blendMode = blendMode2;
+                z4 = z12;
+                z5 = z11;
+                z6 = z17;
+                str = str3;
+                z7 = z14;
+                str2 = str4;
+                z8 = z10;
+                textView.setEnabled(typedArrayObtainStyledAttributes4.getBoolean(index, textView.isEnabled()));
+            } else if (index == 67) {
+                i11 = indexCount2;
+                i12 = i15;
+                i13 = i17;
+                i14 = dimensionPixelSize;
+                blendMode = blendMode2;
+                z4 = z12;
+                z5 = z11;
+                z6 = z17;
+                str = str3;
+                z7 = z14;
+                str2 = str4;
+                z8 = z10;
+                textView.setTextIsSelectable(typedArrayObtainStyledAttributes4.getBoolean(index, false));
+            } else if (index == 70) {
+                i11 = indexCount2;
+                i12 = i15;
+                i13 = i17;
+                i14 = dimensionPixelSize;
+                blendMode = blendMode2;
+                z4 = z12;
+                z5 = z11;
+                z6 = z17;
+                str = str3;
+                z7 = z14;
+                str2 = str4;
+                z8 = z10;
+                textView.mCursorDrawableRes = typedArrayObtainStyledAttributes4.getResourceId(index, 0);
+            } else if (index != 71) {
+                if (index == 73) {
+                    i11 = indexCount2;
+                    i12 = i15;
+                    i14 = dimensionPixelSize;
+                    z4 = z12;
+                    z5 = z11;
+                    z6 = z17;
+                    str = str3;
+                    z7 = z14;
+                    str2 = str4;
+                    drawable5 = typedArrayObtainStyledAttributes4.getDrawable(index);
+                } else if (index == 74) {
+                    i11 = indexCount2;
+                    i12 = i15;
+                    i14 = dimensionPixelSize;
+                    z4 = z12;
+                    z5 = z11;
+                    z6 = z17;
+                    str = str3;
+                    z7 = z14;
+                    str2 = str4;
+                    drawable6 = typedArrayObtainStyledAttributes4.getDrawable(index);
+                } else if (index == 97) {
+                    i11 = indexCount2;
+                    i12 = i15;
+                    i13 = i17;
+                    i14 = dimensionPixelSize;
+                    blendMode = blendMode2;
+                    z4 = z12;
+                    z5 = z11;
+                    z6 = z17;
+                    str = str3;
+                    z7 = z14;
+                    str2 = str4;
+                    z8 = z10;
+                    textView.mLineBreakStyle = typedArrayObtainStyledAttributes4.getInt(index, 0);
+                } else if (index != 98) {
+                    switch (index) {
+                        case 9:
+                            i11 = indexCount2;
+                            i12 = i15;
+                            i14 = dimensionPixelSize;
+                            z4 = z12;
+                            z5 = z11;
+                            z6 = z17;
+                            str = str3;
+                            z7 = z14;
+                            str2 = str4;
+                            i19 = typedArrayObtainStyledAttributes4.getInt(index, i19);
+                            break;
+                        case 10:
+                            i11 = indexCount2;
+                            i12 = i15;
+                            i13 = i17;
+                            i14 = dimensionPixelSize;
+                            blendMode = blendMode2;
+                            z4 = z12;
+                            z5 = z11;
+                            z6 = z17;
+                            str = str3;
+                            z7 = z14;
+                            str2 = str4;
+                            z8 = z10;
+                            textView.setGravity(typedArrayObtainStyledAttributes4.getInt(index, -1));
+                            break;
+                        case 11:
+                            i11 = indexCount2;
+                            i12 = i15;
+                            i13 = i17;
+                            i14 = dimensionPixelSize;
+                            blendMode = blendMode2;
+                            z4 = z12;
+                            z5 = z11;
+                            z6 = z17;
+                            str = str3;
+                            z7 = z14;
+                            str2 = str4;
+                            z8 = z10;
+                            textView.mAutoLinkMask = typedArrayObtainStyledAttributes4.getInt(index, 0);
+                            break;
+                        case 12:
+                            i11 = indexCount2;
+                            i12 = i15;
+                            i13 = i17;
+                            i14 = dimensionPixelSize;
+                            blendMode = blendMode2;
+                            z4 = z12;
+                            z5 = z11;
+                            z6 = z17;
+                            str = str3;
+                            z7 = z14;
+                            str2 = str4;
+                            z8 = z10;
+                            textView.mLinksClickable = typedArrayObtainStyledAttributes4.getBoolean(index, true);
+                            break;
+                        case 13:
+                            i11 = indexCount2;
+                            i12 = i15;
+                            i13 = i17;
+                            i14 = dimensionPixelSize;
+                            blendMode = blendMode2;
+                            z4 = z12;
+                            z5 = z11;
+                            z6 = z17;
+                            str = str3;
+                            z7 = z14;
+                            str2 = str4;
+                            z8 = z10;
+                            textView.setMaxWidth(typedArrayObtainStyledAttributes4.getDimensionPixelSize(index, -1));
+                            break;
+                        case 14:
+                            i11 = indexCount2;
+                            i12 = i15;
+                            i13 = i17;
+                            i14 = dimensionPixelSize;
+                            blendMode = blendMode2;
+                            z4 = z12;
+                            z5 = z11;
+                            z6 = z17;
+                            str = str3;
+                            z7 = z14;
+                            str2 = str4;
+                            z8 = z10;
+                            textView.setMaxHeight(typedArrayObtainStyledAttributes4.getDimensionPixelSize(index, -1));
+                            break;
+                        case 15:
+                            i11 = indexCount2;
+                            i12 = i15;
+                            i13 = i17;
+                            i14 = dimensionPixelSize;
+                            blendMode = blendMode2;
+                            z4 = z12;
+                            z5 = z11;
+                            z6 = z17;
+                            str = str3;
+                            z7 = z14;
+                            str2 = str4;
+                            z8 = z10;
+                            textView.setMinWidth(typedArrayObtainStyledAttributes4.getDimensionPixelSize(index, -1));
+                            break;
+                        case 16:
+                            i11 = indexCount2;
+                            i12 = i15;
+                            i13 = i17;
+                            i14 = dimensionPixelSize;
+                            blendMode = blendMode2;
+                            z4 = z12;
+                            z5 = z11;
+                            z6 = z17;
+                            str = str3;
+                            z7 = z14;
+                            str2 = str4;
+                            z8 = z10;
+                            textView.setMinHeight(typedArrayObtainStyledAttributes4.getDimensionPixelSize(index, -1));
+                            break;
+                        case 17:
+                            i11 = indexCount2;
+                            i12 = i15;
+                            i14 = dimensionPixelSize;
+                            z4 = z12;
+                            z5 = z11;
+                            z6 = z17;
+                            str = str3;
+                            z7 = z14;
+                            str2 = str4;
+                            i17 = typedArrayObtainStyledAttributes4.getInt(index, i17);
+                            break;
+                        case 18:
+                            i11 = indexCount2;
+                            i12 = i15;
+                            i14 = dimensionPixelSize;
+                            boolean z18 = z12;
+                            boolean z19 = z11;
+                            boolean z20 = z17;
+                            str = str3;
+                            z7 = z14;
+                            str2 = str4;
+                            textView.mTextId = typedArrayObtainStyledAttributes4.getResourceId(index, 0);
+                            text = typedArrayObtainStyledAttributes4.getText(index);
+                            z9 = z20;
+                            z11 = z19;
+                            z12 = z18;
+                            z16 = true;
+                            dimensionPixelSize = i14;
+                            break;
+                        case 19:
+                            i11 = indexCount2;
+                            i12 = i15;
+                            i14 = dimensionPixelSize;
+                            z4 = z12;
+                            z5 = z11;
+                            z6 = z17;
+                            str = str3;
+                            z7 = z14;
+                            str2 = str4;
+                            textView.mHintId = typedArrayObtainStyledAttributes4.getResourceId(index, 0);
+                            text4 = typedArrayObtainStyledAttributes4.getText(index);
+                            break;
+                        case 20:
+                            i11 = indexCount2;
+                            i12 = i15;
+                            i14 = dimensionPixelSize;
+                            blendMode = blendMode2;
+                            z4 = z12;
+                            z5 = z11;
+                            z6 = z17;
+                            str = str3;
+                            z7 = z14;
+                            str2 = str4;
+                            z8 = z10;
+                            textView.setTextScaleX(typedArrayObtainStyledAttributes4.getFloat(index, 1.0f));
+                            i13 = i17;
+                            break;
+                        case 21:
+                            i11 = indexCount2;
+                            i12 = i15;
+                            i14 = dimensionPixelSize;
+                            blendMode = blendMode2;
+                            z4 = z12;
+                            z5 = z11;
+                            z6 = z17;
+                            str = str3;
+                            z7 = z14;
+                            str2 = str4;
+                            z8 = z10;
+                            if (!typedArrayObtainStyledAttributes4.getBoolean(index, true)) {
+                                textView.setCursorVisible(false);
+                            }
+                            i13 = i17;
+                            break;
+                        case 22:
+                            i11 = indexCount2;
+                            i12 = i15;
+                            i14 = dimensionPixelSize;
+                            blendMode = blendMode2;
+                            z4 = z12;
+                            z5 = z11;
+                            z6 = z17;
+                            str = str3;
+                            z7 = z14;
+                            str2 = str4;
+                            z8 = z10;
+                            textView.setMaxLines(typedArrayObtainStyledAttributes4.getInt(index, -1));
+                            i13 = i17;
+                            break;
+                        case 23:
+                            i11 = indexCount2;
+                            i12 = i15;
+                            i14 = dimensionPixelSize;
+                            blendMode = blendMode2;
+                            z4 = z12;
+                            z5 = z11;
+                            z6 = z17;
+                            str = str3;
+                            z7 = z14;
+                            str2 = str4;
+                            z8 = z10;
+                            textView.setLines(typedArrayObtainStyledAttributes4.getInt(index, -1));
+                            i13 = i17;
+                            break;
+                        case 24:
+                            i11 = indexCount2;
+                            i12 = i15;
+                            i14 = dimensionPixelSize;
+                            blendMode = blendMode2;
+                            z4 = z12;
+                            z5 = z11;
+                            z6 = z17;
+                            str = str3;
+                            z7 = z14;
+                            str2 = str4;
+                            z8 = z10;
+                            textView.setHeight(typedArrayObtainStyledAttributes4.getDimensionPixelSize(index, -1));
+                            i13 = i17;
+                            break;
+                        case 25:
+                            i11 = indexCount2;
+                            i12 = i15;
+                            i14 = dimensionPixelSize;
+                            blendMode = blendMode2;
+                            z4 = z12;
+                            z5 = z11;
+                            z6 = z17;
+                            str = str3;
+                            z7 = z14;
+                            str2 = str4;
+                            z8 = z10;
+                            textView.setMinLines(typedArrayObtainStyledAttributes4.getInt(index, -1));
+                            i13 = i17;
+                            break;
+                        case 26:
+                            i11 = indexCount2;
+                            i12 = i15;
+                            i14 = dimensionPixelSize;
+                            blendMode = blendMode2;
+                            z4 = z12;
+                            z5 = z11;
+                            z6 = z17;
+                            str = str3;
+                            z7 = z14;
+                            str2 = str4;
+                            z8 = z10;
+                            textView.setMaxEms(typedArrayObtainStyledAttributes4.getInt(index, -1));
+                            i13 = i17;
+                            break;
+                        case 27:
+                            i11 = indexCount2;
+                            i12 = i15;
+                            i14 = dimensionPixelSize;
+                            blendMode = blendMode2;
+                            z4 = z12;
+                            z5 = z11;
+                            z6 = z17;
+                            str = str3;
+                            z7 = z14;
+                            str2 = str4;
+                            z8 = z10;
+                            textView.setEms(typedArrayObtainStyledAttributes4.getInt(index, -1));
+                            i13 = i17;
+                            break;
+                        case 28:
+                            i11 = indexCount2;
+                            i12 = i15;
+                            i14 = dimensionPixelSize;
+                            blendMode = blendMode2;
+                            z4 = z12;
+                            z5 = z11;
+                            z6 = z17;
+                            str = str3;
+                            z7 = z14;
+                            str2 = str4;
+                            z8 = z10;
+                            textView.setWidth(typedArrayObtainStyledAttributes4.getDimensionPixelSize(index, -1));
+                            i13 = i17;
+                            break;
+                        case 29:
+                            i11 = indexCount2;
+                            i12 = i15;
+                            i14 = dimensionPixelSize;
+                            blendMode = blendMode2;
+                            z4 = z12;
+                            z5 = z11;
+                            z6 = z17;
+                            str = str3;
+                            z7 = z14;
+                            str2 = str4;
+                            z8 = z10;
+                            textView.setMinEms(typedArrayObtainStyledAttributes4.getInt(index, -1));
+                            i13 = i17;
+                            break;
+                        case 30:
+                            i11 = indexCount2;
+                            i12 = i15;
+                            i14 = dimensionPixelSize;
+                            blendMode = blendMode2;
+                            z4 = z12;
+                            z5 = z11;
+                            z6 = z17;
+                            str = str3;
+                            z7 = z14;
+                            str2 = str4;
+                            z8 = z10;
+                            if (typedArrayObtainStyledAttributes4.getBoolean(index, false)) {
+                                textView.setHorizontallyScrolling(true);
+                            }
+                            i13 = i17;
+                            break;
+                        case 31:
+                            i11 = indexCount2;
+                            i12 = i15;
+                            z9 = z17;
+                            i14 = dimensionPixelSize;
+                            str = str3;
+                            z4 = z12;
+                            z7 = z14;
+                            str2 = str4;
+                            z10 = typedArrayObtainStyledAttributes4.getBoolean(index, z10);
+                            z12 = z4;
+                            dimensionPixelSize = i14;
+                            break;
+                        case 32:
+                            i11 = indexCount2;
+                            i12 = i15;
+                            z9 = z17;
+                            i14 = dimensionPixelSize;
+                            str = str3;
+                            z7 = z14;
+                            str2 = str4;
+                            z11 = typedArrayObtainStyledAttributes4.getBoolean(index, z11);
+                            dimensionPixelSize = i14;
+                            break;
+                        case 33:
+                            i11 = indexCount2;
+                            i12 = i15;
+                            z9 = z17;
+                            str = str3;
+                            z7 = z14;
+                            str2 = str4;
+                            z12 = typedArrayObtainStyledAttributes4.getBoolean(index, z12);
+                            break;
+                        case 34:
+                            i11 = indexCount2;
+                            i12 = i15;
+                            boolean z21 = z17;
+                            i14 = dimensionPixelSize;
+                            blendMode = blendMode2;
+                            str = str3;
+                            z7 = z14;
+                            str2 = str4;
+                            if (!typedArrayObtainStyledAttributes4.getBoolean(index, true)) {
+                                textView.setIncludeFontPadding(false);
+                            }
+                            i13 = i17;
+                            z8 = z10;
+                            z4 = z12;
+                            z5 = z11;
+                            z6 = z21;
+                            break;
+                        case 35:
+                            i11 = indexCount2;
+                            i12 = i15;
+                            z9 = z17;
+                            str = str3;
+                            z7 = z14;
+                            str2 = str4;
+                            i21 = typedArrayObtainStyledAttributes4.getInt(index, -1);
+                            break;
+                        default:
+                            switch (index) {
+                                case 40:
+                                    i11 = indexCount2;
+                                    i12 = i15;
+                                    z9 = z17;
+                                    str = str3;
+                                    z7 = z14;
+                                    str2 = str4;
+                                    i18 = typedArrayObtainStyledAttributes4.getInt(index, i18);
+                                    break;
+                                case 41:
+                                    i11 = indexCount2;
+                                    i12 = i15;
+                                    z9 = z17;
+                                    str = str3;
+                                    z7 = z14;
+                                    str2 = str4;
+                                    text3 = typedArrayObtainStyledAttributes4.getText(index);
+                                    break;
+                                case 42:
+                                    i11 = indexCount2;
+                                    i12 = i15;
+                                    z9 = z17;
+                                    str = str3;
+                                    z7 = z14;
+                                    str2 = str4;
+                                    z13 = typedArrayObtainStyledAttributes4.getBoolean(index, z13);
+                                    break;
+                                case 43:
+                                    i11 = indexCount2;
+                                    i12 = i15;
+                                    z9 = z17;
+                                    str = str3;
+                                    z7 = z14;
+                                    text2 = typedArrayObtainStyledAttributes4.getText(index);
+                                    str2 = str4;
+                                    break;
+                                case 44:
+                                    i11 = indexCount2;
+                                    i12 = i15;
+                                    z9 = z17;
+                                    str = str3;
+                                    z7 = z14;
+                                    i20 = typedArrayObtainStyledAttributes4.getInt(index, i20);
+                                    str2 = str4;
+                                    break;
+                                case 45:
+                                    i11 = indexCount2;
+                                    i12 = i15;
+                                    z9 = z17;
+                                    str = str3;
+                                    z14 = typedArrayObtainStyledAttributes4.getBoolean(index, z14);
+                                    z7 = z14;
+                                    str2 = str4;
+                                    break;
+                                case 46:
+                                    i11 = indexCount2;
+                                    i12 = i15;
+                                    z9 = typedArrayObtainStyledAttributes4.getBoolean(index, z17);
+                                    str = str3;
+                                    z7 = z14;
+                                    str2 = str4;
+                                    break;
+                                case 47:
+                                    i11 = indexCount2;
+                                    i12 = i15;
+                                    i14 = dimensionPixelSize;
+                                    blendMode = blendMode2;
+                                    textView.mFreezesText = typedArrayObtainStyledAttributes4.getBoolean(index, false);
+                                    i13 = i17;
+                                    z4 = z12;
+                                    z5 = z11;
+                                    z6 = z17;
+                                    str = str3;
+                                    z7 = z14;
+                                    str2 = str4;
+                                    z8 = z10;
+                                    break;
+                                case 48:
+                                    i11 = indexCount2;
+                                    i12 = i15;
+                                    drawable2 = typedArrayObtainStyledAttributes4.getDrawable(index);
+                                    z9 = z17;
+                                    str = str3;
+                                    z7 = z14;
+                                    str2 = str4;
+                                    break;
+                                case 49:
+                                    i11 = indexCount2;
+                                    i12 = i15;
+                                    drawable4 = typedArrayObtainStyledAttributes4.getDrawable(index);
+                                    z9 = z17;
+                                    str = str3;
+                                    z7 = z14;
+                                    str2 = str4;
+                                    break;
+                                case 50:
+                                    i11 = indexCount2;
+                                    i12 = i15;
+                                    drawable = typedArrayObtainStyledAttributes4.getDrawable(index);
+                                    z9 = z17;
+                                    str = str3;
+                                    z7 = z14;
+                                    str2 = str4;
+                                    break;
+                                case 51:
+                                    i11 = indexCount2;
+                                    i12 = i15;
+                                    drawable3 = typedArrayObtainStyledAttributes4.getDrawable(index);
+                                    z9 = z17;
+                                    str = str3;
+                                    z7 = z14;
+                                    str2 = str4;
+                                    break;
+                                case 52:
+                                    i11 = indexCount2;
+                                    i12 = i15;
+                                    dimensionPixelSize = typedArrayObtainStyledAttributes4.getDimensionPixelSize(index, dimensionPixelSize);
+                                    z9 = z17;
+                                    str = str3;
+                                    z7 = z14;
+                                    str2 = str4;
+                                    break;
+                                case 53:
+                                    i11 = indexCount2;
+                                    i12 = i15;
+                                    blendMode = blendMode2;
+                                    textView.mSpacingAdd = typedArrayObtainStyledAttributes4.getDimensionPixelSize(index, (int) textView.mSpacingAdd);
+                                    i13 = i17;
+                                    i14 = dimensionPixelSize;
+                                    z4 = z12;
+                                    z5 = z11;
+                                    z6 = z17;
+                                    str = str3;
+                                    z7 = z14;
+                                    str2 = str4;
+                                    z8 = z10;
+                                    break;
+                                case 54:
+                                    i11 = indexCount2;
+                                    i12 = i15;
+                                    blendMode = blendMode2;
+                                    textView.mSpacingMult = typedArrayObtainStyledAttributes4.getFloat(index, textView.mSpacingMult);
+                                    i13 = i17;
+                                    i14 = dimensionPixelSize;
+                                    z4 = z12;
+                                    z5 = z11;
+                                    z6 = z17;
+                                    str = str3;
+                                    z7 = z14;
+                                    str2 = str4;
+                                    z8 = z10;
+                                    break;
+                                case 55:
+                                    i11 = indexCount2;
+                                    i12 = i15;
+                                    blendMode = blendMode2;
+                                    textView.setMarqueeRepeatLimit(typedArrayObtainStyledAttributes4.getInt(index, textView.mMarqueeRepeatLimit));
+                                    i13 = i17;
+                                    i14 = dimensionPixelSize;
+                                    z4 = z12;
+                                    z5 = z11;
+                                    z6 = z17;
+                                    str = str3;
+                                    z7 = z14;
+                                    str2 = str4;
+                                    z8 = z10;
+                                    break;
+                                case 56:
+                                    i11 = indexCount2;
+                                    i12 = i15;
+                                    i16 = typedArrayObtainStyledAttributes4.getInt(index, 0);
+                                    z9 = z17;
+                                    str = str3;
+                                    z7 = z14;
+                                    str2 = str4;
+                                    break;
+                                case 57:
+                                    i11 = indexCount2;
+                                    i12 = i15;
+                                    blendMode = blendMode2;
+                                    textView.setPrivateImeOptions(typedArrayObtainStyledAttributes4.getString(index));
+                                    i13 = i17;
+                                    i14 = dimensionPixelSize;
+                                    z4 = z12;
+                                    z5 = z11;
+                                    z6 = z17;
+                                    str = str3;
+                                    z7 = z14;
+                                    str2 = str4;
+                                    z8 = z10;
+                                    break;
+                                case 58:
+                                    i11 = indexCount2;
+                                    i12 = i15;
+                                    blendMode = blendMode2;
+                                    try {
+                                        textView.setInputExtras(typedArrayObtainStyledAttributes4.getResourceId(index, 0));
+                                    } catch (IOException e) {
+                                        Log.w(str4, str3, e);
+                                    } catch (XmlPullParserException e2) {
+                                        Log.w(str4, str3, e2);
+                                    }
+                                    i13 = i17;
+                                    i14 = dimensionPixelSize;
+                                    z4 = z12;
+                                    z5 = z11;
+                                    z6 = z17;
+                                    str = str3;
+                                    z7 = z14;
+                                    str2 = str4;
+                                    z8 = z10;
+                                    break;
+                                case 59:
+                                    i11 = indexCount2;
+                                    i12 = i15;
+                                    blendMode = blendMode2;
+                                    textView.createEditorIfNeeded();
+                                    textView.mEditor.createInputContentTypeIfNeeded();
+                                    textView.mEditor.mInputContentType.imeOptions = typedArrayObtainStyledAttributes4.getInt(index, textView.mEditor.mInputContentType.imeOptions);
+                                    i13 = i17;
+                                    i14 = dimensionPixelSize;
+                                    z4 = z12;
+                                    z5 = z11;
+                                    z6 = z17;
+                                    str = str3;
+                                    z7 = z14;
+                                    str2 = str4;
+                                    z8 = z10;
+                                    break;
+                                case 60:
+                                    i11 = indexCount2;
+                                    i12 = i15;
+                                    blendMode = blendMode2;
+                                    textView.createEditorIfNeeded();
+                                    textView.mEditor.createInputContentTypeIfNeeded();
+                                    textView.mEditor.mInputContentType.imeActionLabel = typedArrayObtainStyledAttributes4.getText(index);
+                                    i13 = i17;
+                                    i14 = dimensionPixelSize;
+                                    z4 = z12;
+                                    z5 = z11;
+                                    z6 = z17;
+                                    str = str3;
+                                    z7 = z14;
+                                    str2 = str4;
+                                    z8 = z10;
+                                    break;
+                                case 61:
+                                    i11 = indexCount2;
+                                    i12 = i15;
+                                    blendMode = blendMode2;
+                                    textView.createEditorIfNeeded();
+                                    textView.mEditor.createInputContentTypeIfNeeded();
+                                    textView.mEditor.mInputContentType.imeActionId = typedArrayObtainStyledAttributes4.getInt(index, textView.mEditor.mInputContentType.imeActionId);
+                                    i13 = i17;
+                                    i14 = dimensionPixelSize;
+                                    z4 = z12;
+                                    z5 = z11;
+                                    z6 = z17;
+                                    str = str3;
+                                    z7 = z14;
+                                    str2 = str4;
+                                    z8 = z10;
+                                    break;
+                                case 62:
+                                    i11 = indexCount2;
+                                    i12 = i15;
+                                    blendMode = blendMode2;
+                                    textView.mTextSelectHandleLeftRes = typedArrayObtainStyledAttributes4.getResourceId(index, 0);
+                                    i13 = i17;
+                                    i14 = dimensionPixelSize;
+                                    z4 = z12;
+                                    z5 = z11;
+                                    z6 = z17;
+                                    str = str3;
+                                    z7 = z14;
+                                    str2 = str4;
+                                    z8 = z10;
+                                    break;
+                                case 63:
+                                    i11 = indexCount2;
+                                    i12 = i15;
+                                    blendMode = blendMode2;
+                                    textView.mTextSelectHandleRightRes = typedArrayObtainStyledAttributes4.getResourceId(index, 0);
+                                    i13 = i17;
+                                    i14 = dimensionPixelSize;
+                                    z4 = z12;
+                                    z5 = z11;
+                                    z6 = z17;
+                                    str = str3;
+                                    z7 = z14;
+                                    str2 = str4;
+                                    z8 = z10;
+                                    break;
+                                case 64:
+                                    i11 = indexCount2;
+                                    i12 = i15;
+                                    blendMode = blendMode2;
+                                    textView.mTextSelectHandleRes = typedArrayObtainStyledAttributes4.getResourceId(index, 0);
+                                    i13 = i17;
+                                    i14 = dimensionPixelSize;
+                                    z4 = z12;
+                                    z5 = z11;
+                                    z6 = z17;
+                                    str = str3;
+                                    z7 = z14;
+                                    str2 = str4;
+                                    z8 = z10;
+                                    break;
+                                default:
+                                    switch (index) {
+                                        case 79:
+                                            i11 = indexCount2;
+                                            i12 = i15;
+                                            colorStateList2 = typedArrayObtainStyledAttributes4.getColorStateList(index);
+                                            z9 = z17;
+                                            str = str3;
+                                            z7 = z14;
+                                            str2 = str4;
+                                            break;
+                                        case 80:
+                                            i11 = indexCount2;
+                                            i12 = i15;
+                                            blendMode2 = Drawable.parseBlendMode(typedArrayObtainStyledAttributes4.getInt(index, -1), blendMode2);
+                                            z9 = z17;
+                                            str = str3;
+                                            z7 = z14;
+                                            str2 = str4;
+                                            break;
+                                        case 81:
+                                            i11 = indexCount2;
+                                            i12 = i15;
+                                            textView.mBreakStrategy = typedArrayObtainStyledAttributes4.getInt(index, 0);
+                                            i13 = i17;
+                                            i14 = dimensionPixelSize;
+                                            blendMode = blendMode2;
+                                            z4 = z12;
+                                            z5 = z11;
+                                            z6 = z17;
+                                            str = str3;
+                                            z7 = z14;
+                                            str2 = str4;
+                                            z8 = z10;
+                                            break;
+                                        case 82:
+                                            i11 = indexCount2;
+                                            i12 = i15;
+                                            textView.mHyphenationFrequency = typedArrayObtainStyledAttributes4.getInt(index, 0);
+                                            i13 = i17;
+                                            i14 = dimensionPixelSize;
+                                            blendMode = blendMode2;
+                                            z4 = z12;
+                                            z5 = z11;
+                                            z6 = z17;
+                                            str = str3;
+                                            z7 = z14;
+                                            str2 = str4;
+                                            z8 = z10;
+                                            break;
+                                        case 83:
+                                            i11 = indexCount2;
+                                            i12 = i15;
+                                            textView.createEditorIfNeeded();
+                                            textView.mEditor.mAllowUndo = typedArrayObtainStyledAttributes4.getBoolean(index, true);
+                                            i13 = i17;
+                                            i14 = dimensionPixelSize;
+                                            blendMode = blendMode2;
+                                            z4 = z12;
+                                            z5 = z11;
+                                            z6 = z17;
+                                            str = str3;
+                                            z7 = z14;
+                                            str2 = str4;
+                                            z8 = z10;
+                                            break;
+                                        case 84:
+                                            i11 = indexCount2;
+                                            i12 = i15;
+                                            textView.mAutoSizeTextType = typedArrayObtainStyledAttributes4.getInt(index, 0);
+                                            i13 = i17;
+                                            i14 = dimensionPixelSize;
+                                            blendMode = blendMode2;
+                                            z4 = z12;
+                                            z5 = z11;
+                                            z6 = z17;
+                                            str = str3;
+                                            z7 = z14;
+                                            str2 = str4;
+                                            z8 = z10;
+                                            break;
+                                        case 85:
+                                            i11 = indexCount2;
+                                            i12 = i15;
+                                            dimension2 = typedArrayObtainStyledAttributes4.getDimension(index, -1.0f);
+                                            z9 = z17;
+                                            str = str3;
+                                            z7 = z14;
+                                            str2 = str4;
+                                            break;
+                                        case 86:
+                                            i11 = indexCount2;
+                                            i12 = i15;
+                                            int resourceId2 = typedArrayObtainStyledAttributes4.getResourceId(index, 0);
+                                            if (resourceId2 > 0) {
+                                                TypedArray typedArrayObtainTypedArray = typedArrayObtainStyledAttributes4.getResources().obtainTypedArray(resourceId2);
+                                                textView.setupAutoSizeUniformPresetSizes(typedArrayObtainTypedArray);
+                                                typedArrayObtainTypedArray.recycle();
+                                            }
+                                            i13 = i17;
+                                            i14 = dimensionPixelSize;
+                                            blendMode = blendMode2;
+                                            z4 = z12;
+                                            z5 = z11;
+                                            z6 = z17;
+                                            str = str3;
+                                            z7 = z14;
+                                            str2 = str4;
+                                            z8 = z10;
+                                            break;
+                                        case 87:
+                                            i11 = indexCount2;
+                                            i12 = i15;
+                                            fApplyDimension = typedArrayObtainStyledAttributes4.getDimension(index, -1.0f);
+                                            z9 = z17;
+                                            str = str3;
+                                            z7 = z14;
+                                            str2 = str4;
+                                            break;
+                                        case 88:
+                                            i11 = indexCount2;
+                                            i12 = i15;
+                                            dimension = typedArrayObtainStyledAttributes4.getDimension(index, -1.0f);
+                                            z9 = z17;
+                                            str = str3;
+                                            z7 = z14;
+                                            str2 = str4;
+                                            break;
+                                        case 89:
+                                            i11 = indexCount2;
+                                            i12 = i15;
+                                            textView.mJustificationMode = typedArrayObtainStyledAttributes4.getInt(index, 0);
+                                            i13 = i17;
+                                            i14 = dimensionPixelSize;
+                                            blendMode = blendMode2;
+                                            z4 = z12;
+                                            z5 = z11;
+                                            z6 = z17;
+                                            str = str3;
+                                            z7 = z14;
+                                            str2 = str4;
+                                            z8 = z10;
+                                            break;
+                                        default:
+                                            switch (index) {
+                                                case 92:
+                                                    i11 = indexCount2;
+                                                    i12 = i15;
+                                                    dimensionPixelSize2 = typedArrayObtainStyledAttributes4.getDimensionPixelSize(index, -1);
+                                                    z9 = z17;
+                                                    str = str3;
+                                                    z7 = z14;
+                                                    str2 = str4;
+                                                    break;
+                                                case 93:
+                                                    i11 = indexCount2;
+                                                    i12 = i15;
+                                                    dimensionPixelSize3 = typedArrayObtainStyledAttributes4.getDimensionPixelSize(index, -1);
+                                                    z9 = z17;
+                                                    str = str3;
+                                                    z7 = z14;
+                                                    str2 = str4;
+                                                    break;
+                                                case 94:
+                                                    TypedValue typedValuePeekValue = typedArrayObtainStyledAttributes4.peekValue(index);
+                                                    i11 = indexCount2;
+                                                    if (typedValuePeekValue != null) {
+                                                        i12 = i15;
+                                                        if (typedValuePeekValue.type == 5) {
+                                                            complexUnit = typedValuePeekValue.getComplexUnit();
+                                                            dimensionPixelSize4 = TypedValue.complexToFloat(typedValuePeekValue.data);
+                                                        }
+                                                        z9 = z17;
+                                                        str = str3;
+                                                        z7 = z14;
+                                                        str2 = str4;
+                                                        break;
+                                                    } else {
+                                                        i12 = i15;
+                                                    }
+                                                    dimensionPixelSize4 = typedArrayObtainStyledAttributes4.getDimensionPixelSize(index, -1);
+                                                    z9 = z17;
+                                                    str = str3;
+                                                    z7 = z14;
+                                                    str2 = str4;
+                                                default:
+                                                    switch (index) {
+                                                        case 101:
+                                                            textView.mUseBoundsForWidth = typedArrayObtainStyledAttributes4.getBoolean(index, false);
+                                                            i11 = indexCount2;
+                                                            i12 = i15;
+                                                            z9 = z17;
+                                                            z15 = true;
+                                                            str = str3;
+                                                            z7 = z14;
+                                                            str2 = str4;
+                                                            break;
+                                                        case 102:
+                                                            textView.mUseLocalePreferredLineHeightForMinimum = typedArrayObtainStyledAttributes4.getBoolean(index, false);
+                                                            i11 = indexCount2;
+                                                            i12 = i15;
+                                                            i13 = i17;
+                                                            i14 = dimensionPixelSize;
+                                                            blendMode = blendMode2;
+                                                            z4 = z12;
+                                                            z5 = z11;
+                                                            z6 = z17;
+                                                            str = str3;
+                                                            z7 = z14;
+                                                            str2 = str4;
+                                                            z8 = z10;
+                                                            break;
+                                                        case 103:
+                                                            textView.mShiftDrawingOffsetForStartOverhang = typedArrayObtainStyledAttributes4.getBoolean(index, false);
+                                                            i11 = indexCount2;
+                                                            i12 = i15;
+                                                            i13 = i17;
+                                                            i14 = dimensionPixelSize;
+                                                            blendMode = blendMode2;
+                                                            z4 = z12;
+                                                            z5 = z11;
+                                                            z6 = z17;
+                                                            str = str3;
+                                                            z7 = z14;
+                                                            str2 = str4;
+                                                            z8 = z10;
+                                                            break;
+                                                        case 104:
+                                                            textView.mTextEditSuggestionContainerLayout = typedArrayObtainStyledAttributes4.getResourceId(index, 0);
+                                                            i11 = indexCount2;
+                                                            i12 = i15;
+                                                            i13 = i17;
+                                                            i14 = dimensionPixelSize;
+                                                            blendMode = blendMode2;
+                                                            z4 = z12;
+                                                            z5 = z11;
+                                                            z6 = z17;
+                                                            str = str3;
+                                                            z7 = z14;
+                                                            str2 = str4;
+                                                            z8 = z10;
+                                                            break;
+                                                        case 105:
+                                                            textView.mTextEditSuggestionHighlightStyle = typedArrayObtainStyledAttributes4.getResourceId(index, 0);
+                                                            i11 = indexCount2;
+                                                            i12 = i15;
+                                                            i13 = i17;
+                                                            i14 = dimensionPixelSize;
+                                                            blendMode = blendMode2;
+                                                            z4 = z12;
+                                                            z5 = z11;
+                                                            z6 = z17;
+                                                            str = str3;
+                                                            z7 = z14;
+                                                            str2 = str4;
+                                                            z8 = z10;
+                                                            break;
+                                                        default:
+                                                            i11 = indexCount2;
+                                                            i12 = i15;
+                                                            i13 = i17;
+                                                            i14 = dimensionPixelSize;
+                                                            blendMode = blendMode2;
+                                                            z4 = z12;
+                                                            z5 = z11;
+                                                            z6 = z17;
+                                                            str = str3;
+                                                            z7 = z14;
+                                                            str2 = str4;
+                                                            z8 = z10;
+                                                            break;
+                                                    }
+                                            }
+                                    }
+                            }
+                    }
+                    str4 = str2;
+                    indexCount2 = i11;
+                    z14 = z7;
+                    str3 = str;
+                    z17 = z9;
+                    i15 = i12 + 1;
+                } else {
+                    i11 = indexCount2;
+                    i12 = i15;
+                    i13 = i17;
+                    i14 = dimensionPixelSize;
+                    blendMode = blendMode2;
+                    z4 = z12;
+                    z5 = z11;
+                    z6 = z17;
+                    str = str3;
+                    z7 = z14;
+                    str2 = str4;
+                    z8 = z10;
+                    textView.mLineBreakWordStyle = typedArrayObtainStyledAttributes4.getInt(index, 0);
+                }
+                z9 = z6;
+                z11 = z5;
+                z12 = z4;
+                dimensionPixelSize = i14;
+                str4 = str2;
+                indexCount2 = i11;
+                z14 = z7;
+                str3 = str;
+                z17 = z9;
+                i15 = i12 + 1;
+            } else {
+                i11 = indexCount2;
+                i12 = i15;
+                i13 = i17;
+                i14 = dimensionPixelSize;
+                blendMode = blendMode2;
+                z4 = z12;
+                z5 = z11;
+                z6 = z17;
+                str = str3;
+                z7 = z14;
+                str2 = str4;
+                z8 = z10;
+                textView.mTextEditSuggestionItemLayout = typedArrayObtainStyledAttributes4.getResourceId(index, 0);
+            }
+            blendMode2 = blendMode;
+            i17 = i13;
+            z10 = z8;
+            z9 = z6;
+            z11 = z5;
+            z12 = z4;
+            dimensionPixelSize = i14;
+            str4 = str2;
+            indexCount2 = i11;
+            z14 = z7;
+            str3 = str;
+            z17 = z9;
+            i15 = i12 + 1;
+        }
+        int i22 = i17;
+        boolean z22 = z10;
+        boolean z23 = z14;
+        int i23 = dimensionPixelSize;
+        BlendMode blendMode3 = blendMode2;
+        boolean z24 = z12;
+        boolean z25 = z11;
+        boolean z26 = z17;
+        typedArrayObtainStyledAttributes4.recycle();
+        BufferType bufferType2 = BufferType.EDITABLE;
+        int inputType = i16;
+        int i24 = inputType & 4095;
+        boolean z27 = i24 == 129;
+        boolean z28 = i24 == 225;
+        boolean z29 = i24 == 18;
+        int i25 = context2.getApplicationInfo().targetSdkVersion;
+        int i26 = i21;
+        textView.mUseInternationalizedInput = i25 >= 26;
+        if (CompatChanges.isChangeEnabled(BORINGLAYOUT_FALLBACK_LINESPACING)) {
+            textView.mUseFallbackLineSpacing = 2;
+        } else if (CompatChanges.isChangeEnabled(STATICLAYOUT_FALLBACK_LINESPACING)) {
+            textView.mUseFallbackLineSpacing = 1;
+        } else {
+            textView.mUseFallbackLineSpacing = 0;
+        }
+        if (!z15) {
+            textView.mUseBoundsForWidth = CompatChanges.isChangeEnabled(USE_BOUNDS_FOR_WIDTH);
+        }
+        textView.mUseTextPaddingForUiTranslation = i25 <= 30;
+        if (text2 != null) {
+            try {
+                Class<?> cls = Class.forName(text2.toString());
+                try {
+                    textView.createEditorIfNeeded();
+                    textView.mEditor.mKeyListener = (KeyListener) cls.newInstance();
+                    try {
+                        Editor editor3 = textView.mEditor;
+                        if (inputType == 0) {
+                            inputType = editor3.mKeyListener.getInputType();
+                        }
+                        editor3.mInputType = inputType;
+                    } catch (IncompatibleClassChangeError unused) {
+                        textView.mEditor.mInputType = 1;
+                    }
+                } catch (IllegalAccessException e3) {
+                    throw new RuntimeException(e3);
+                } catch (InstantiationException e4) {
+                    throw new RuntimeException(e4);
+                }
+            } catch (ClassNotFoundException e5) {
+                throw new RuntimeException(e5);
+            }
+        } else if (text3 != null) {
+            textView.createEditorIfNeeded();
+            textView.mEditor.mKeyListener = DigitsKeyListener.getInstance(text3.toString());
+            textView.mEditor.mInputType = inputType == 0 ? 1 : inputType;
+        } else {
+            if (inputType != 0) {
+                textView.setInputType(inputType, true);
+                bufferType = bufferType2;
+                z = !isMultilineInputType(inputType);
+                editor = textView.mEditor;
+                if (editor != null) {
+                    editor.adjustInputType(z22, z27, z28, z29);
+                }
+                if (z24) {
+                    textView.createEditorIfNeeded();
+                    textView.mEditor.mSelectAllOnFocus = true;
+                    if (bufferType == BufferType.NORMAL) {
+                        bufferType = BufferType.SPANNABLE;
+                    }
+                }
+                colorStateList = colorStateList2;
+                if (colorStateList != null || blendMode3 != null) {
+                    if (textView.mDrawables == null) {
+                        textView.mDrawables = new Drawables(context2);
+                    }
+                    if (colorStateList == null) {
+                        textView.mDrawables.mTintList = colorStateList;
+                        z2 = true;
+                        textView.mDrawables.mHasTint = true;
+                    } else {
+                        z2 = true;
+                    }
+                    if (blendMode3 != null) {
+                        textView.mDrawables.mBlendMode = blendMode3;
+                        textView.mDrawables.mHasTintMode = z2;
+                    }
+                }
+                textView.setCompoundDrawablesWithIntrinsicBounds(drawable, drawable2, drawable3, drawable4);
+                textView.setRelativeDrawablesIfNeeded(drawable5, drawable6);
+                textView.setCompoundDrawablePadding(i23);
+                textView.setInputTypeSingleLine(z);
+                textView.applySingleLine(z, z, z, false);
+                if (z && textView.getKeyListener() == null && i19 == -1) {
+                    i19 = 3;
+                }
+                if (i19 == 1) {
+                    textView.setEllipsize(TextUtils.TruncateAt.START);
+                } else if (i19 == 2) {
+                    textView.setEllipsize(TextUtils.TruncateAt.MIDDLE);
+                } else if (i19 == 3) {
+                    textView.setEllipsize(TextUtils.TruncateAt.END);
+                } else if (i19 == 4) {
+                    if (ViewConfiguration.get(context2).isFadingMarqueeEnabled()) {
+                        textView.setHorizontalFadingEdgeEnabled(true);
+                        textView.mMarqueeFadeMode = 0;
+                    } else {
+                        textView.setHorizontalFadingEdgeEnabled(false);
+                        textView.mMarqueeFadeMode = 1;
+                    }
+                    textView.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+                }
+                z3 = z22 || z27 || z28 || z29;
+                textView.mFontWeightAdjustment = textView.getContext().getResources().getConfiguration().fontWeightAdjustment;
+                textView.applyTextAppearance(textAppearanceAttributes);
+                textView.mCursorThicknessScale = textView.getContext().getResources().getConfiguration().semCursorThicknessScale;
+                if (z3) {
+                    textView.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }
+                if (bufferType == BufferType.EDITABLE && z) {
+                    i5 = i26;
+                    if (i5 == -1) {
+                        textView.mSingleLineLengthFilter = new InputFilter.LengthFilter(5000);
+                    }
+                } else {
+                    i5 = i26;
+                }
+                lengthFilter = textView.mSingleLineLengthFilter;
+                if (lengthFilter != null) {
+                    textView.setFilters(new InputFilter[]{lengthFilter});
+                } else if (i5 >= 0) {
+                    textView.setFilters(new InputFilter[]{new InputFilter.LengthFilter(i5)});
+                } else {
+                    textView.setFilters(NO_FILTERS);
+                }
+                textView.setText(text, bufferType);
+                if (textView.mText == null) {
+                    textView.mText = "";
+                }
+                if (textView.mTransformed == null) {
+                    textView.mTransformed = "";
+                }
+                if (z16) {
+                    textView.mTextSetFromXmlOrResourceId = true;
+                }
+                charSequence = text4;
+                if (charSequence != null) {
+                    textView.setHint(charSequence);
+                }
+                TypedArray typedArrayObtainStyledAttributes5 = context2.obtainStyledAttributes(attributeSet, R.styleable.View, i, i2);
+                boolean z30 = (textView.mMovement == null && textView.getKeyListener() == null) ? false : true;
+                boolean z31 = z30 || textView.isClickable();
+                boolean z32 = z30 || textView.isLongClickable();
+                focusable = textView.getFocusable();
+                if (CoreRune.DIRECT_WRITING) {
+                    textView.setAutoHandwritingEnabled(true);
+                }
+                indexCount = typedArrayObtainStyledAttributes5.getIndexCount();
+                boolean z33 = true;
+                for (i6 = 0; i6 < indexCount; i6++) {
+                    int index2 = typedArrayObtainStyledAttributes5.getIndex(i6);
+                    if (index2 == 19) {
+                        TypedValue typedValue = new TypedValue();
+                        if (typedArrayObtainStyledAttributes5.getValue(index2, typedValue)) {
+                            if (typedValue.type == 18) {
+                                focusable = typedValue.data == 0 ? 0 : 1;
+                            } else {
+                                focusable = typedValue.data;
+                            }
+                        }
+                    } else if (index2 == 107) {
+                        z33 = typedArrayObtainStyledAttributes5.getBoolean(index2, true);
+                    } else if (index2 == 30) {
+                        z31 = typedArrayObtainStyledAttributes5.getBoolean(index2, z31);
+                    } else if (index2 == 31) {
+                        z32 = typedArrayObtainStyledAttributes5.getBoolean(index2, z32);
+                    }
+                }
+                typedArrayObtainStyledAttributes5.recycle();
+                if (focusable != textView.getFocusable()) {
+                    textView.setFocusable(focusable);
+                }
+                textView.setClickable(z31);
+                textView.setLongClickable(z32);
+                if (!CoreRune.DIRECT_WRITING) {
+                    textView.setAutoHandwritingEnabled(z33);
+                }
+                editor2 = textView.mEditor;
+                if (editor2 != null) {
+                    editor2.prepareCursorControllers();
+                }
+                if (textView.getImportantForAccessibility() == 0) {
+                    textView.setImportantForAccessibility(1);
+                }
+                if (textView.supportsAutoSizeText()) {
+                    if (textView.mAutoSizeTextType == 1) {
+                        if (!textView.mHasPresetAutoSizeValues) {
+                            DisplayMetrics displayMetrics = textView.getResources().getDisplayMetrics();
+                            if (fApplyDimension == -1.0f) {
+                                i9 = 2;
+                                fApplyDimension = TypedValue.applyDimension(2, 12.0f, displayMetrics);
+                            } else {
+                                i9 = 2;
+                            }
+                            textView.validateAndSetAutoSizeTextTypeUniformConfiguration(fApplyDimension, dimension == -1.0f ? TypedValue.applyDimension(i9, 112.0f, displayMetrics) : dimension, dimension2 == -1.0f ? 1.0f : dimension2);
+                        }
+                        textView.setupAutoSizeText();
+                    }
+                } else {
+                    textView.mAutoSizeTextType = 0;
+                }
+                if (textView.getHoverUIFeatureLevel() >= 2) {
+                    textView.semSetHoverPopupType(2);
+                }
+                i7 = dimensionPixelSize2;
+                if (i7 >= 0) {
+                    textView.setFirstBaselineToTopHeight(i7);
+                }
+                i8 = dimensionPixelSize3;
+                if (i8 >= 0) {
+                    textView.setLastBaselineToBottomHeight(i8);
+                }
+                f = dimensionPixelSize4;
+                if (f >= 0.0f) {
+                    int i27 = complexUnit;
+                    if (i27 == -1) {
+                        textView.setLineHeightPx(f);
+                    } else {
+                        textView.setLineHeight(i27, f);
+                    }
+                }
+                textView.mFontFamily = textAppearanceAttributes.mFontFamily;
+            }
+            if (z13) {
+                textView.createEditorIfNeeded();
+                textView.mEditor.mKeyListener = DialerKeyListener.getInstance();
+                textView.mEditor.mInputType = 3;
+            } else if (i18 != 0) {
+                textView.createEditorIfNeeded();
+                textView.mEditor.mKeyListener = DigitsKeyListener.getInstance(null, (i18 & 2) != 0, (i18 & 4) != 0);
+                textView.mEditor.mInputType = textView.mEditor.mKeyListener.getInputType();
+            } else if (z23 || i20 != -1) {
+                if (i20 == 1) {
+                    capitalize = TextKeyListener.Capitalize.SENTENCES;
+                    i10 = 16385;
+                } else if (i20 == 2) {
+                    capitalize = TextKeyListener.Capitalize.WORDS;
+                    i10 = 8193;
+                } else if (i20 == 3) {
+                    capitalize = TextKeyListener.Capitalize.CHARACTERS;
+                    i10 = 4097;
+                } else {
+                    capitalize = TextKeyListener.Capitalize.NONE;
+                    i10 = 1;
+                }
+                textView.createEditorIfNeeded();
+                textView.mEditor.mKeyListener = TextKeyListener.getInstance(z23, capitalize);
+                textView.mEditor.mInputType = i10;
+            } else if (z26) {
+                textView.createEditorIfNeeded();
+                textView.mEditor.mKeyListener = TextKeyListener.getInstance();
+                textView.mEditor.mInputType = 1;
+            } else {
+                if (textView.isTextSelectable()) {
+                    Editor editor4 = textView.mEditor;
+                    if (editor4 != null) {
+                        editor4.mKeyListener = null;
+                        textView.mEditor.mInputType = 0;
+                    }
+                    bufferType = BufferType.SPANNABLE;
+                    textView.setMovementMethod(ArrowKeyMovementMethod.getInstance());
+                } else {
+                    Editor editor5 = textView.mEditor;
+                    if (editor5 != null) {
+                        editor5.mKeyListener = null;
+                    }
+                    if (i22 == 0) {
+                        bufferType = BufferType.NORMAL;
+                    } else if (i22 == 1) {
+                        bufferType = BufferType.SPANNABLE;
+                    } else if (i22 == 2) {
+                        bufferType = BufferType.EDITABLE;
+                    }
+                }
+                z = z25;
+                editor = textView.mEditor;
+                if (editor != null) {
+                }
+                if (z24) {
+                }
+                colorStateList = colorStateList2;
+                if (colorStateList != null) {
+                    if (textView.mDrawables == null) {
+                    }
+                    if (colorStateList == null) {
+                    }
+                    if (blendMode3 != null) {
+                    }
+                }
+                textView.setCompoundDrawablesWithIntrinsicBounds(drawable, drawable2, drawable3, drawable4);
+                textView.setRelativeDrawablesIfNeeded(drawable5, drawable6);
+                textView.setCompoundDrawablePadding(i23);
+                textView.setInputTypeSingleLine(z);
+                textView.applySingleLine(z, z, z, false);
+                if (z) {
+                    i19 = 3;
+                }
+                if (i19 == 1) {
+                }
+                if (z22) {
+                }
+                textView.mFontWeightAdjustment = textView.getContext().getResources().getConfiguration().fontWeightAdjustment;
+                textView.applyTextAppearance(textAppearanceAttributes);
+                textView.mCursorThicknessScale = textView.getContext().getResources().getConfiguration().semCursorThicknessScale;
+                if (z3) {
+                }
+                if (bufferType == BufferType.EDITABLE) {
+                    i5 = i26;
+                }
+                lengthFilter = textView.mSingleLineLengthFilter;
+                if (lengthFilter != null) {
+                }
+                textView.setText(text, bufferType);
+                if (textView.mText == null) {
+                }
+                if (textView.mTransformed == null) {
+                }
+                if (z16) {
+                }
+                charSequence = text4;
+                if (charSequence != null) {
+                }
+                TypedArray typedArrayObtainStyledAttributes52 = context2.obtainStyledAttributes(attributeSet, R.styleable.View, i, i2);
+                if (textView.mMovement == null) {
+                }
+                if (z30) {
+                }
+                if (z30) {
+                }
+                focusable = textView.getFocusable();
+                if (CoreRune.DIRECT_WRITING) {
+                }
+                indexCount = typedArrayObtainStyledAttributes52.getIndexCount();
+                boolean z332 = true;
+                while (i6 < indexCount) {
+                }
+                typedArrayObtainStyledAttributes52.recycle();
+                if (focusable != textView.getFocusable()) {
+                }
+                textView.setClickable(z31);
+                textView.setLongClickable(z32);
+                if (!CoreRune.DIRECT_WRITING) {
+                }
+                editor2 = textView.mEditor;
+                if (editor2 != null) {
+                }
+                if (textView.getImportantForAccessibility() == 0) {
+                }
+                if (textView.supportsAutoSizeText()) {
+                }
+                if (textView.getHoverUIFeatureLevel() >= 2) {
+                }
+                i7 = dimensionPixelSize2;
+                if (i7 >= 0) {
+                }
+                i8 = dimensionPixelSize3;
+                if (i8 >= 0) {
+                }
+                f = dimensionPixelSize4;
+                if (f >= 0.0f) {
+                }
+                textView.mFontFamily = textAppearanceAttributes.mFontFamily;
+            }
+        }
+        bufferType = bufferType2;
+        z = z25;
+        editor = textView.mEditor;
+        if (editor != null) {
+        }
+        if (z24) {
+        }
+        colorStateList = colorStateList2;
+        if (colorStateList != null) {
+        }
+        textView.setCompoundDrawablesWithIntrinsicBounds(drawable, drawable2, drawable3, drawable4);
+        textView.setRelativeDrawablesIfNeeded(drawable5, drawable6);
+        textView.setCompoundDrawablePadding(i23);
+        textView.setInputTypeSingleLine(z);
+        textView.applySingleLine(z, z, z, false);
+        if (z) {
+        }
+        if (i19 == 1) {
+        }
+        if (z22) {
+        }
+        textView.mFontWeightAdjustment = textView.getContext().getResources().getConfiguration().fontWeightAdjustment;
+        textView.applyTextAppearance(textAppearanceAttributes);
+        textView.mCursorThicknessScale = textView.getContext().getResources().getConfiguration().semCursorThicknessScale;
+        if (z3) {
+        }
+        if (bufferType == BufferType.EDITABLE) {
+        }
+        lengthFilter = textView.mSingleLineLengthFilter;
+        if (lengthFilter != null) {
+        }
+        textView.setText(text, bufferType);
+        if (textView.mText == null) {
+        }
+        if (textView.mTransformed == null) {
+        }
+        if (z16) {
+        }
+        charSequence = text4;
+        if (charSequence != null) {
+        }
+        TypedArray typedArrayObtainStyledAttributes522 = context2.obtainStyledAttributes(attributeSet, R.styleable.View, i, i2);
+        if (textView.mMovement == null) {
+        }
+        if (z30) {
+        }
+        if (z30) {
+        }
+        focusable = textView.getFocusable();
+        if (CoreRune.DIRECT_WRITING) {
+        }
+        indexCount = typedArrayObtainStyledAttributes522.getIndexCount();
+        boolean z3322 = true;
+        while (i6 < indexCount) {
+        }
+        typedArrayObtainStyledAttributes522.recycle();
+        if (focusable != textView.getFocusable()) {
+        }
+        textView.setClickable(z31);
+        textView.setLongClickable(z32);
+        if (!CoreRune.DIRECT_WRITING) {
+        }
+        editor2 = textView.mEditor;
+        if (editor2 != null) {
+        }
+        if (textView.getImportantForAccessibility() == 0) {
+        }
+        if (textView.supportsAutoSizeText()) {
+        }
+        if (textView.getHoverUIFeatureLevel() >= 2) {
+        }
+        i7 = dimensionPixelSize2;
+        if (i7 >= 0) {
+        }
+        i8 = dimensionPixelSize3;
+        if (i8 >= 0) {
+        }
+        f = dimensionPixelSize4;
+        if (f >= 0.0f) {
+        }
+        textView.mFontFamily = textAppearanceAttributes.mFontFamily;
     }
 
     private void setTextInternal(CharSequence charSequence) {
@@ -1227,16 +3047,16 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         if (supportsAutoSizeText()) {
             int length = iArr.length;
             if (length > 0) {
-                int[] iArr2 = new int[length];
+                int[] iArrCopyOf = new int[length];
                 if (i == 0) {
-                    iArr2 = Arrays.copyOf(iArr, length);
+                    iArrCopyOf = Arrays.copyOf(iArr, length);
                 } else {
                     DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
                     for (int i2 = 0; i2 < length; i2++) {
-                        iArr2[i2] = Math.round(TypedValue.applyDimension(i, iArr[i2], displayMetrics));
+                        iArrCopyOf[i2] = Math.round(TypedValue.applyDimension(i, iArr[i2], displayMetrics));
                     }
                 }
-                this.mAutoSizeTextSizesInPx = cleanupAutoSizePresetSizes(iArr2);
+                this.mAutoSizeTextSizesInPx = cleanupAutoSizePresetSizes(iArrCopyOf);
                 if (!setupAutoSizeUniformPresetSizesConfiguration()) {
                     throw new IllegalArgumentException("None of the preset sizes is valid: " + Arrays.toString(iArr));
                 }
@@ -1340,9 +3160,9 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     private boolean setupAutoSizeText() {
         if (supportsAutoSizeText() && this.mAutoSizeTextType == 1) {
             if (!this.mHasPresetAutoSizeValues || this.mAutoSizeTextSizesInPx.length == 0) {
-                int floor = ((int) Math.floor((this.mAutoSizeMaxTextSizeInPx - this.mAutoSizeMinTextSizeInPx) / this.mAutoSizeStepGranularityInPx)) + 1;
-                int[] iArr = new int[floor];
-                for (int i = 0; i < floor; i++) {
+                int iFloor = ((int) Math.floor((this.mAutoSizeMaxTextSizeInPx - this.mAutoSizeMinTextSizeInPx) / this.mAutoSizeStepGranularityInPx)) + 1;
+                int[] iArr = new int[iFloor];
+                for (int i = 0; i < iFloor; i++) {
                     iArr[i] = Math.round(this.mAutoSizeMinTextSizeInPx + (i * this.mAutoSizeStepGranularityInPx));
                 }
                 this.mAutoSizeTextSizesInPx = cleanupAutoSizePresetSizes(iArr);
@@ -1505,7 +3325,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
 
     @Override // android.view.View
     @RemotableViewMethod
-    public void setEnabled(boolean z) {
+    public void setEnabled(boolean z) throws Resources.NotFoundException {
         InputMethodManager inputMethodManager;
         InputMethodManager inputMethodManager2;
         if (z == isEnabled()) {
@@ -1530,15 +3350,15 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     public void setTypeface(Typeface typeface, int i) {
-        Typeface create;
+        Typeface typefaceCreate;
         if (i > 0) {
             if (typeface == null) {
-                create = Typeface.defaultFromStyle(i);
+                typefaceCreate = Typeface.defaultFromStyle(i);
             } else {
-                create = Typeface.create(typeface, i);
+                typefaceCreate = Typeface.create(typeface, i);
             }
-            setTypeface(create);
-            int i2 = (~(create != null ? create.getStyle() : 0)) & i;
+            setTypeface(typefaceCreate);
+            int i2 = (~(typefaceCreate != null ? typefaceCreate.getStyle() : 0)) & i;
             this.mTextPaint.setFakeBoldText((i2 & 1) != 0);
             this.mTextPaint.setTextSkewX((i2 & 2) != 0 ? -0.25f : 0.0f);
             return;
@@ -2407,16 +4227,16 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         return this.mCursorDrawable;
     }
 
-    public void setTextAppearance(int i) {
+    public void setTextAppearance(int i) throws Resources.NotFoundException {
         setTextAppearance(this.mContext, i);
     }
 
     @Deprecated
-    public void setTextAppearance(Context context, int i) {
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(i, R.styleable.TextAppearance);
+    public void setTextAppearance(Context context, int i) throws Resources.NotFoundException {
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(i, android.R.styleable.TextAppearance);
         TextAppearanceAttributes textAppearanceAttributes = new TextAppearanceAttributes();
-        readTextAppearance(context, obtainStyledAttributes, textAppearanceAttributes, false);
-        obtainStyledAttributes.recycle();
+        readTextAppearance(context, typedArrayObtainStyledAttributes, textAppearanceAttributes, false);
+        typedArrayObtainStyledAttributes.recycle();
         applyTextAppearance(textAppearanceAttributes);
         this.mFontFamily = textAppearanceAttributes.mFontFamily;
     }
@@ -2497,17 +4317,17 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
 
     private void readTextAppearance(Context context, TypedArray typedArray, TextAppearanceAttributes textAppearanceAttributes, boolean z) {
         int i;
-        int i2;
         int indexCount = typedArray.getIndexCount();
-        while (i < indexCount) {
-            int index = typedArray.getIndex(i);
+        for (int i2 = 0; i2 < indexCount; i2++) {
+            int index = typedArray.getIndex(i2);
             if (z) {
-                i2 = sAppearanceValues.get(index, -1);
-                i = i2 == -1 ? i + 1 : 0;
+                i = sAppearanceValues.get(index, -1);
+                if (i == -1) {
+                }
             } else {
-                i2 = index;
+                i = index;
             }
-            switch (i2) {
+            switch (i) {
                 case 0:
                     textAppearanceAttributes.mTextSize = typedArray.getDimensionPixelSize(index, textAppearanceAttributes.mTextSize);
                     textAppearanceAttributes.mTextSizeUnit = typedArray.peekValue(index).getComplexUnit();
@@ -2516,6 +4336,8 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
                     textAppearanceAttributes.mTypefaceIndex = typedArray.getInt(index, textAppearanceAttributes.mTypefaceIndex);
                     if (textAppearanceAttributes.mTypefaceIndex != -1 && !textAppearanceAttributes.mFontFamilyExplicit) {
                         textAppearanceAttributes.mFontFamily = null;
+                        break;
+                    } else {
                         break;
                     }
                     break;
@@ -2584,16 +4406,16 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
                     break;
                 case 19:
                     String string = typedArray.getString(index);
-                    if (string == null) {
-                        break;
-                    } else {
-                        LocaleList forLanguageTags = LocaleList.forLanguageTags(string);
-                        if (!forLanguageTags.isEmpty()) {
-                            textAppearanceAttributes.mTextLocales = forLanguageTags;
+                    if (string != null) {
+                        LocaleList localeListForLanguageTags = LocaleList.forLanguageTags(string);
+                        if (localeListForLanguageTags.isEmpty()) {
                             break;
                         } else {
+                            textAppearanceAttributes.mTextLocales = localeListForLanguageTags;
                             break;
                         }
+                    } else {
+                        break;
                     }
                 case 20:
                     textAppearanceAttributes.mHasLineBreakStyle = true;
@@ -2717,10 +4539,10 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         } else {
             dateTimeKeyListener = DateTimeKeyListener.getInstance(locale);
         }
-        boolean isPasswordInputType = isPasswordInputType(this.mEditor.mInputType);
+        boolean zIsPasswordInputType = isPasswordInputType(this.mEditor.mInputType);
         setKeyListenerOnly(dateTimeKeyListener);
         setInputTypeFromEditor();
-        if (isPasswordInputType) {
+        if (zIsPasswordInputType) {
             int i = this.mEditor.mInputType & 15;
             if (i == 1) {
                 this.mEditor.mInputType |= 128;
@@ -2883,11 +4705,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
                     typeface = Typeface.DEFAULT;
                 }
             } else {
-                int min = Math.min(Math.max(typeface.getWeight() + this.mFontWeightAdjustment, 1), 1000);
-                boolean z = ((typeface != null ? typeface.getStyle() : 0) & 2) != 0;
-                if (!typeface.mFromBuilder) {
-                    typeface = Typeface.create(typeface, min, z);
-                }
+                typeface = Typeface.create(typeface, Math.min(Math.max(typeface.getWeight() + this.mFontWeightAdjustment, 1), 1000), ((typeface != null ? typeface.getStyle() : 0) & 2) != 0);
             }
         }
         if (this.mTextPaint.getTypeface() != typeface) {
@@ -3127,40 +4945,40 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     @RemotableViewMethod
     public boolean setFontVariationSettings(String str) {
         String fontVariationSettings = this.mTextPaint.getFontVariationSettings();
-        boolean z = true;
+        boolean fontVariationSettings2 = true;
         if (str != fontVariationSettings && (str == null || !str.equals(fontVariationSettings))) {
             if (Flags.typefaceRedesignReadonly()) {
                 int i = this.mFontWeightAdjustment;
                 if (i != 0 && i != Integer.MAX_VALUE) {
-                    List<FontVariationAxis> fromFontVariationSettingsForList = FontVariationAxis.fromFontVariationSettingsForList(str);
-                    if (fromFontVariationSettingsForList == null) {
+                    List<FontVariationAxis> listFromFontVariationSettingsForList = FontVariationAxis.fromFontVariationSettingsForList(str);
+                    if (listFromFontVariationSettingsForList == null) {
                         return false;
                     }
-                    boolean z2 = false;
-                    for (int i2 = 0; i2 < fromFontVariationSettingsForList.size(); i2++) {
-                        FontVariationAxis fontVariationAxis = fromFontVariationSettingsForList.get(i2);
+                    boolean z = false;
+                    for (int i2 = 0; i2 < listFromFontVariationSettingsForList.size(); i2++) {
+                        FontVariationAxis fontVariationAxis = listFromFontVariationSettingsForList.get(i2);
                         if (fontVariationAxis.getOpenTypeTagValue() == 2003265652) {
-                            fromFontVariationSettingsForList.set(i2, new FontVariationAxis("wght", Math.clamp(fontVariationAxis.getStyleValue() + this.mFontWeightAdjustment, 1.0f, 1000.0f)));
-                            z2 = true;
+                            listFromFontVariationSettingsForList.set(i2, new FontVariationAxis("wght", Math.clamp(fontVariationAxis.getStyleValue() + this.mFontWeightAdjustment, 1.0f, 1000.0f)));
+                            z = true;
                         }
                     }
-                    if (!z2) {
-                        fromFontVariationSettingsForList.add(new FontVariationAxis("wght", Math.clamp(this.mFontWeightAdjustment + 400, 1, 1000)));
+                    if (!z) {
+                        listFromFontVariationSettingsForList.add(new FontVariationAxis("wght", Math.clamp(this.mFontWeightAdjustment + 400, 1, 1000)));
                     }
-                    this.mTextPaint.setFontVariationSettings(FontVariationAxis.toFontVariationSettings(fromFontVariationSettingsForList));
+                    this.mTextPaint.setFontVariationSettings(FontVariationAxis.toFontVariationSettings(listFromFontVariationSettingsForList));
                 } else {
                     this.mTextPaint.setFontVariationSettings(str);
                 }
             } else {
-                z = this.mTextPaint.setFontVariationSettings(str);
+                fontVariationSettings2 = this.mTextPaint.setFontVariationSettings(str);
             }
-            if (z && this.mLayout != null) {
+            if (fontVariationSettings2 && this.mLayout != null) {
                 nullLayouts();
                 requestLayout();
                 invalidate();
             }
         }
-        return z;
+        return fontVariationSettings2;
     }
 
     @RemotableViewMethod
@@ -3704,64 +5522,44 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         setMovementMethod(LinkMovementMethod.getInstance());
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:14:0x003e, code lost:
-    
-        if (r6.mText.length() == 0) goto L19;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:18:0x0041  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     private void updateTextColors() {
-        /*
-            r6 = this;
-            int[] r0 = r6.getDrawableState()
-            android.content.res.ColorStateList r1 = r6.mTextColor
-            r2 = 0
-            int r1 = r1.getColorForState(r0, r2)
-            r6.mButtonShapeColor = r1
-            int r3 = r6.mCurTextColor
-            r4 = 1
-            if (r1 == r3) goto L16
-            r6.mCurTextColor = r1
-            r1 = r4
-            goto L17
-        L16:
-            r1 = r2
-        L17:
-            android.content.res.ColorStateList r3 = r6.mLinkTextColor
-            if (r3 == 0) goto L2a
-            int r3 = r3.getColorForState(r0, r2)
-            android.text.TextPaint r5 = r6.mTextPaint
-            int r5 = r5.linkColor
-            if (r3 == r5) goto L2a
-            android.text.TextPaint r1 = r6.mTextPaint
-            r1.linkColor = r3
-            r1 = r4
-        L2a:
-            android.content.res.ColorStateList r3 = r6.mHintTextColor
-            if (r3 == 0) goto L41
-            int r0 = r3.getColorForState(r0, r2)
-            int r2 = r6.mCurHintTextColor
-            if (r0 == r2) goto L41
-            r6.mCurHintTextColor = r0
-            java.lang.CharSequence r0 = r6.mText
-            int r0 = r0.length()
-            if (r0 != 0) goto L41
-            goto L42
-        L41:
-            r4 = r1
-        L42:
-            if (r4 == 0) goto L4e
-            android.widget.Editor r0 = r6.mEditor
-            if (r0 == 0) goto L4b
-            r0.invalidateTextDisplayList()
-        L4b:
-            r6.invalidate()
-        L4e:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.TextView.updateTextColors():void");
+        boolean z;
+        int colorForState;
+        int colorForState2;
+        int[] drawableState = getDrawableState();
+        int colorForState3 = this.mTextColor.getColorForState(drawableState, 0);
+        this.mButtonShapeColor = colorForState3;
+        boolean z2 = true;
+        if (colorForState3 != this.mCurTextColor) {
+            this.mCurTextColor = colorForState3;
+            z = true;
+        } else {
+            z = false;
+        }
+        ColorStateList colorStateList = this.mLinkTextColor;
+        if (colorStateList != null && (colorForState2 = colorStateList.getColorForState(drawableState, 0)) != this.mTextPaint.linkColor) {
+            this.mTextPaint.linkColor = colorForState2;
+            z = true;
+        }
+        ColorStateList colorStateList2 = this.mHintTextColor;
+        if (colorStateList2 == null || (colorForState = colorStateList2.getColorForState(drawableState, 0)) == this.mCurHintTextColor) {
+            z2 = z;
+        } else {
+            this.mCurHintTextColor = colorForState;
+            if (this.mText.length() != 0) {
+            }
+        }
+        if (z2) {
+            Editor editor = this.mEditor;
+            if (editor != null) {
+                editor.invalidateTextDisplayList();
+            }
+            invalidate();
+        }
     }
 
     @Override // android.view.View
@@ -3798,25 +5596,25 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
 
     @Override // android.view.View
     public Parcelable onSaveInstanceState() {
-        int i;
-        int i2;
-        Parcelable onSaveInstanceState = super.onSaveInstanceState();
+        int selectionStart;
+        int selectionEnd;
+        Parcelable parcelableOnSaveInstanceState = super.onSaveInstanceState();
         boolean freezesText = getFreezesText();
         boolean z = false;
         if (this.mText != null) {
-            i = getSelectionStart();
-            i2 = getSelectionEnd();
-            if (i >= 0 || i2 >= 0) {
+            selectionStart = getSelectionStart();
+            selectionEnd = getSelectionEnd();
+            if (selectionStart >= 0 || selectionEnd >= 0) {
                 z = true;
             }
         } else {
-            i = -1;
-            i2 = -1;
+            selectionStart = -1;
+            selectionEnd = -1;
         }
         if (!freezesText && !z) {
-            return onSaveInstanceState;
+            return parcelableOnSaveInstanceState;
         }
-        SavedState savedState = new SavedState(onSaveInstanceState);
+        SavedState savedState = new SavedState(parcelableOnSaveInstanceState);
         if (freezesText) {
             CharSequence charSequence = this.mText;
             if (charSequence instanceof Spanned) {
@@ -3831,10 +5629,10 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
             }
         }
         if (z) {
-            savedState.selStart = i;
-            savedState.selEnd = i2;
+            savedState.selStart = selectionStart;
+            savedState.selEnd = selectionEnd;
         }
-        if (isFocused() && i >= 0 && i2 >= 0) {
+        if (isFocused() && selectionStart >= 0 && selectionEnd >= 0) {
             savedState.frozenWithFocus = true;
         }
         savedState.error = getError();
@@ -3930,7 +5728,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         return new Runnable() { // from class: android.widget.TextView$$ExternalSyntheticLambda3
             @Override // java.lang.Runnable
             public final void run() {
-                TextView.this.lambda$setTextAsync$0(charSequence);
+                this.f$0.lambda$setTextAsync$0(charSequence);
             }
         };
     }
@@ -3946,53 +5744,257 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:128:0x0299  */
-    /* JADX WARN: Removed duplicated region for block: B:131:0x02a6  */
-    /* JADX WARN: Removed duplicated region for block: B:133:0x02b1  */
-    /* JADX WARN: Removed duplicated region for block: B:136:0x02be  */
-    /* JADX WARN: Removed duplicated region for block: B:139:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:140:0x02b7  */
-    /* JADX WARN: Removed duplicated region for block: B:141:0x02aa  */
-    /* JADX WARN: Removed duplicated region for block: B:151:0x0268  */
-    /* JADX WARN: Removed duplicated region for block: B:152:0x026d  */
-    /* JADX WARN: Removed duplicated region for block: B:156:0x01db  */
-    /* JADX WARN: Removed duplicated region for block: B:157:0x015b  */
-    /* JADX WARN: Removed duplicated region for block: B:169:0x00a8  */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x00a4  */
-    /* JADX WARN: Removed duplicated region for block: B:58:0x0143  */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x0154  */
-    /* JADX WARN: Removed duplicated region for block: B:64:0x0161  */
-    /* JADX WARN: Removed duplicated region for block: B:87:0x01a3  */
-    /* JADX WARN: Removed duplicated region for block: B:96:0x01d8  */
-    /* JADX WARN: Removed duplicated region for block: B:99:0x01e5  */
+    /* JADX WARN: Removed duplicated region for block: B:160:0x0299  */
+    /* JADX WARN: Removed duplicated region for block: B:163:0x02a6  */
+    /* JADX WARN: Removed duplicated region for block: B:164:0x02aa  */
+    /* JADX WARN: Removed duplicated region for block: B:167:0x02b1  */
+    /* JADX WARN: Removed duplicated region for block: B:168:0x02b7  */
+    /* JADX WARN: Removed duplicated region for block: B:171:0x02be  */
+    /* JADX WARN: Removed duplicated region for block: B:177:? A[RETURN, SYNTHETIC] */
     /* JADX WARN: Type inference failed for: r14v0 */
     /* JADX WARN: Type inference failed for: r14v1 */
     /* JADX WARN: Type inference failed for: r14v2, types: [boolean, int] */
     /* JADX WARN: Type inference failed for: r14v3 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private void setText(java.lang.CharSequence r18, android.widget.TextView.BufferType r19, boolean r20, int r21) {
-        /*
-            Method dump skipped, instructions count: 711
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.TextView.setText(java.lang.CharSequence, android.widget.TextView$BufferType, boolean, int):void");
+    private void setText(CharSequence charSequence, BufferType bufferType, boolean z, int i) {
+        int length;
+        CharSequence charSequenceNewSpannable;
+        ?? r14;
+        Editor editor;
+        boolean z2;
+        Spannable spannableNewSpannable;
+        BufferType bufferType2 = bufferType;
+        Editor editor2 = this.mEditor;
+        if (editor2 != null) {
+            editor2.beforeSetText();
+        }
+        this.mTextSetFromXmlOrResourceId = false;
+        CharSequence charSequenceRemoveSuggestionSpans = charSequence == null ? "" : charSequence;
+        if (!isSuggestionsEnabled()) {
+            charSequenceRemoveSuggestionSpans = removeSuggestionSpans(charSequenceRemoveSuggestionSpans);
+        }
+        if (!this.mUserSetTextScaleX) {
+            this.mTextPaint.setTextScaleX(1.0f);
+        }
+        if ((charSequenceRemoveSuggestionSpans instanceof Spanned) && ((Spanned) charSequenceRemoveSuggestionSpans).getSpanStart(TextUtils.TruncateAt.MARQUEE) >= 0) {
+            if (ViewConfiguration.get(this.mContext).isFadingMarqueeEnabled()) {
+                setHorizontalFadingEdgeEnabled(true);
+                this.mMarqueeFadeMode = 0;
+            } else {
+                setHorizontalFadingEdgeEnabled(false);
+                this.mMarqueeFadeMode = 1;
+            }
+            setEllipsize(TextUtils.TruncateAt.MARQUEE);
+        }
+        int length2 = this.mFilters.length;
+        CharSequence charSequence2 = charSequenceRemoveSuggestionSpans;
+        int i2 = 0;
+        while (i2 < length2) {
+            CharSequence charSequenceFilter = this.mFilters[i2].filter(charSequence2, 0, charSequence2.length(), EMPTY_SPANNED, 0, 0);
+            if (charSequenceFilter != null) {
+                charSequence2 = charSequenceFilter;
+            }
+            i2++;
+            charSequence2 = charSequence2;
+        }
+        if (z) {
+            CharSequence charSequence3 = this.mText;
+            if (charSequence3 == null) {
+                sendBeforeTextChanged("", 0, 0, charSequence2.length());
+                length = i;
+            } else {
+                length = charSequence3.length();
+                sendBeforeTextChanged(this.mText, 0, length, charSequence2.length());
+            }
+        } else {
+            length = i;
+        }
+        ArrayList<TextWatcher> arrayList = this.mListeners;
+        boolean z3 = (arrayList == null || arrayList.size() == 0) ? false : true;
+        PrecomputedText precomputedText = charSequence2 instanceof PrecomputedText ? (PrecomputedText) charSequence2 : null;
+        if (bufferType2 == BufferType.EDITABLE || getKeyListener() != null || z3) {
+            createEditorIfNeeded();
+            this.mEditor.forgetUndoRedo();
+            this.mEditor.scheduleRestartInputForSetText();
+            Editable editableNewEditable = this.mEditableFactory.newEditable(charSequence2);
+            setFilters(editableNewEditable, this.mFilters);
+            charSequenceNewSpannable = editableNewEditable;
+        } else if (precomputedText != null) {
+            if (this.mTextDir == null) {
+                this.mTextDir = getTextDirectionHeuristic();
+            }
+            int iCheckResultUsable = precomputedText.getParams().checkResultUsable(getPaint(), this.mTextDir, this.mBreakStrategy, this.mHyphenationFrequency, LineBreakConfig.getLineBreakConfig(this.mLineBreakStyle, this.mLineBreakWordStyle));
+            charSequenceNewSpannable = charSequence2;
+            if (iCheckResultUsable == 0) {
+                throw new IllegalArgumentException("PrecomputedText's Parameters don't match the parameters of this TextView.Consider using setTextMetricsParams(precomputedText.getParams()) to override the settings of this TextView: PrecomputedText: " + precomputedText.getParams() + "TextView: " + getTextMetricsParams());
+            }
+            if (iCheckResultUsable == 1) {
+                PrecomputedText.create(precomputedText, getTextMetricsParams());
+                charSequenceNewSpannable = charSequence2;
+            }
+        } else if (bufferType2 == BufferType.SPANNABLE || this.mMovement != null) {
+            charSequenceNewSpannable = this.mSpannableFactory.newSpannable(charSequence2);
+        } else {
+            boolean z4 = charSequence2 instanceof CharWrapper;
+            charSequenceNewSpannable = charSequence2;
+            if (!z4) {
+                charSequenceNewSpannable = TextUtils.stringOrSpannedString(charSequence2);
+            }
+        }
+        if (ViewRune.WIDGET_PEN_SUPPORTED) {
+            this.mDisplayText = null;
+            this.mUseDisplayText = false;
+        }
+        int iTextOrSpanChanged = AccessibilityManager.getInstance(this.mContext).isEnabled() ? AccessibilityUtils.textOrSpanChanged(charSequenceNewSpannable, this.mText) : 0;
+        CharSequence charSequence4 = charSequenceNewSpannable;
+        if (this.mAutoLinkMask != 0) {
+            if (bufferType2 == BufferType.EDITABLE || (charSequenceNewSpannable instanceof Spannable)) {
+                spannableNewSpannable = (Spannable) charSequenceNewSpannable;
+            } else {
+                spannableNewSpannable = this.mSpannableFactory.newSpannable(charSequenceNewSpannable);
+            }
+            charSequence4 = charSequenceNewSpannable;
+            if (Linkify.addLinks(spannableNewSpannable, this.mAutoLinkMask)) {
+                bufferType2 = bufferType2 == BufferType.EDITABLE ? BufferType.EDITABLE : BufferType.SPANNABLE;
+                setTextInternal(spannableNewSpannable);
+                if (iTextOrSpanChanged == 0) {
+                    iTextOrSpanChanged = 2;
+                }
+                if (this.mLinksClickable && !textCanBeSelected()) {
+                    setMovementMethod(LinkMovementMethod.getInstance());
+                }
+                charSequence4 = spannableNewSpannable;
+            }
+        }
+        boolean zIsEmpty = TextUtils.isEmpty(charSequence4);
+        CharSequence charSequence5 = charSequence4;
+        if (!zIsEmpty) {
+            boolean z5 = charSequence4 instanceof SpannedString;
+            charSequence5 = charSequence4;
+            if (!z5) {
+                boolean z6 = charSequence4 instanceof Spannable;
+                charSequence5 = charSequence4;
+                if (!z6) {
+                    boolean zSemNeedMoreWidth = TextUtils.semNeedMoreWidth(charSequence4.charAt(charSequence4.length() - 1));
+                    charSequence5 = charSequence4;
+                    if (zSemNeedMoreWidth) {
+                        charSequence5 = charSequence4.toString() + (char) 160;
+                    }
+                }
+            }
+        }
+        this.mBufferType = bufferType2;
+        setTextInternal(charSequence5);
+        TransformationMethod transformationMethod = this.mTransformation;
+        if (transformationMethod == null) {
+            this.mTransformed = charSequence5;
+        } else {
+            this.mTransformed = transformationMethod.getTransformation(charSequence5, this);
+        }
+        if (this.mTransformed == null) {
+            this.mTransformed = "";
+        }
+        int length3 = charSequence5.length();
+        boolean z7 = this.mTransformed instanceof OffsetMapping;
+        if ((charSequence5 instanceof Spannable) && (!this.mAllowTransformationLengthChange || z7)) {
+            Spannable spannable = (Spannable) charSequence5;
+            for (ChangeWatcher changeWatcher : (ChangeWatcher[]) spannable.getSpans(0, spannable.length(), ChangeWatcher.class)) {
+                spannable.removeSpan(changeWatcher);
+            }
+            if (this.mChangeWatcher == null) {
+                this.mChangeWatcher = new ChangeWatcher();
+            }
+            spannable.setSpan(this.mChangeWatcher, 0, length3, 6553618);
+            Editor editor3 = this.mEditor;
+            if (editor3 != null) {
+                editor3.addSpanWatchers(spannable);
+            }
+            TransformationMethod transformationMethod2 = this.mTransformation;
+            if (transformationMethod2 != null) {
+                z2 = false;
+                spannable.setSpan(transformationMethod2, 0, length3, ((z7 ? 200 : 0) << 16) | 18);
+            } else {
+                z2 = false;
+            }
+            MovementMethod movementMethod = this.mMovement;
+            if (movementMethod != null) {
+                movementMethod.initialize(this, spannable);
+                Editor editor4 = this.mEditor;
+                if (editor4 != null) {
+                    editor4.mSelectionMoved = z2;
+                }
+            }
+        } else {
+            if (ViewRune.WIDGET_PEN_SUPPORTED && !TextUtils.isEmpty(this.mTransformed)) {
+                if (this.mTransformed.length() > 5000) {
+                    r14 = 0;
+                    semSetMultiSelectionEnabled(false);
+                } else {
+                    SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(this.mTransformed);
+                    this.mDisplayText = spannableStringBuilder;
+                    SpannableStringBuilder spannableStringBuilder2 = spannableStringBuilder;
+                    if (this.mChangeWatcher == null) {
+                        this.mChangeWatcher = new ChangeWatcher();
+                    }
+                    r14 = 0;
+                    spannableStringBuilder2.setSpan(this.mChangeWatcher, 0, this.mDisplayText.length(), 6553618);
+                    this.mUseDisplayText = true;
+                    this.mSkipUpdateDisplayText = true;
+                }
+            }
+            if (this.mLayout != null) {
+                checkForRelayout();
+            }
+            sendOnTextChanged(charSequence5, r14, length, length3);
+            onTextChanged(charSequence5, r14, length, length3);
+            this.mHideHint = r14;
+            if (iTextOrSpanChanged != 1) {
+                notifyViewAccessibilityStateChangedIfNeeded(2);
+            } else if (iTextOrSpanChanged == 2) {
+                notifyViewAccessibilityStateChangedIfNeeded(r14);
+            }
+            if (!z3) {
+                sendAfterTextChanged((Editable) charSequence5);
+            } else {
+                notifyListeningManagersAfterTextChanged();
+            }
+            editor = this.mEditor;
+            if (editor == null) {
+                editor.prepareCursorControllers();
+                this.mEditor.maybeFireScheduledRestartInputForSetText();
+                return;
+            }
+            return;
+        }
+        r14 = 0;
+        if (this.mLayout != null) {
+        }
+        sendOnTextChanged(charSequence5, r14, length, length3);
+        onTextChanged(charSequence5, r14, length, length3);
+        this.mHideHint = r14;
+        if (iTextOrSpanChanged != 1) {
+        }
+        if (!z3) {
+        }
+        editor = this.mEditor;
+        if (editor == null) {
+        }
     }
 
     public final void setText(char[] cArr, int i, int i2) {
-        int i3;
+        int length;
         if (i < 0 || i2 < 0 || i + i2 > cArr.length) {
             throw new IndexOutOfBoundsException(i + ", " + i2);
         }
         CharSequence charSequence = this.mText;
         if (charSequence != null) {
-            i3 = charSequence.length();
-            sendBeforeTextChanged(this.mText, 0, i3, i2);
+            length = charSequence.length();
+            sendBeforeTextChanged(this.mText, 0, length, i2);
         } else {
             sendBeforeTextChanged("", 0, 0, i2);
-            i3 = 0;
+            length = 0;
         }
         CharWrapper charWrapper = this.mCharWrapper;
         if (charWrapper == null) {
@@ -4000,7 +6002,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         } else {
             charWrapper.set(cArr, i, i2);
         }
-        setText(this.mCharWrapper, this.mBufferType, false, i3);
+        setText(this.mCharWrapper, this.mBufferType, false, length);
     }
 
     public final void setTextKeepState(CharSequence charSequence, BufferType bufferType) {
@@ -4074,100 +6076,80 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     CharSequence removeSuggestionSpans(CharSequence charSequence) {
-        Spannable newSpannable;
+        Spannable spannableNewSpannable;
         if (charSequence instanceof Spanned) {
             if (charSequence instanceof Spannable) {
-                newSpannable = (Spannable) charSequence;
+                spannableNewSpannable = (Spannable) charSequence;
             } else {
-                newSpannable = this.mSpannableFactory.newSpannable(charSequence);
+                spannableNewSpannable = this.mSpannableFactory.newSpannable(charSequence);
             }
-            SuggestionSpan[] suggestionSpanArr = (SuggestionSpan[]) newSpannable.getSpans(0, charSequence.length(), SuggestionSpan.class);
+            SuggestionSpan[] suggestionSpanArr = (SuggestionSpan[]) spannableNewSpannable.getSpans(0, charSequence.length(), SuggestionSpan.class);
             if (suggestionSpanArr.length != 0) {
                 for (SuggestionSpan suggestionSpan : suggestionSpanArr) {
-                    newSpannable.removeSpan(suggestionSpan);
+                    spannableNewSpannable.removeSpan(suggestionSpan);
                 }
-                return newSpannable;
+                return spannableNewSpannable;
             }
         }
         return charSequence;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:26:0x0048, code lost:
-    
-        if (r6.mTransformation == android.text.method.PasswordTransformationMethod.getInstance()) goto L10;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0061  */
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0070  */
-    /* JADX WARN: Removed duplicated region for block: B:16:? A[RETURN, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:19:0x0056  */
+    /* JADX WARN: Removed duplicated region for block: B:22:0x0061  */
+    /* JADX WARN: Removed duplicated region for block: B:25:0x0070  */
+    /* JADX WARN: Removed duplicated region for block: B:27:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void setInputType(int r13) {
-        /*
-            r12 = this;
-            int r0 = r12.getInputType()
-            boolean r0 = isPasswordInputType(r0)
-            int r1 = r12.getInputType()
-            boolean r1 = isVisiblePasswordInputType(r1)
-            r2 = 0
-            r12.setInputType(r13, r2)
-            boolean r3 = isPasswordInputType(r13)
-            boolean r4 = isVisiblePasswordInputType(r13)
-            r5 = 1
-            if (r3 == 0) goto L28
-            android.text.method.PasswordTransformationMethod r0 = android.text.method.PasswordTransformationMethod.getInstance()
-            r12.setTransformationMethod(r0)
-        L26:
-            r6 = r12
-            goto L4b
-        L28:
-            if (r4 == 0) goto L35
-            android.text.method.TransformationMethod r0 = r12.mTransformation
-            android.text.method.PasswordTransformationMethod r1 = android.text.method.PasswordTransformationMethod.getInstance()
-            if (r0 != r1) goto L26
-            r6 = r12
-        L33:
-            r2 = r5
-            goto L4b
-        L35:
-            if (r0 != 0) goto L39
-            if (r1 == 0) goto L26
-        L39:
-            r10 = 0
-            r11 = -1
-            r7 = 0
-            r8 = 0
-            r9 = -1
-            r6 = r12
-            r6.setTypefaceFromAttrs(r7, r8, r9, r10, r11)
-            android.text.method.TransformationMethod r12 = r6.mTransformation
-            android.text.method.PasswordTransformationMethod r0 = android.text.method.PasswordTransformationMethod.getInstance()
-            if (r12 != r0) goto L4b
-            goto L33
-        L4b:
-            boolean r12 = isMultilineInputType(r13)
-            r12 = r12 ^ r5
-            boolean r13 = r6.mSingleLine
-            if (r13 != r12) goto L56
-            if (r2 == 0) goto L5b
-        L56:
-            r13 = r3 ^ 1
-            r6.applySingleLine(r12, r13, r5, r5)
-        L5b:
-            boolean r12 = r6.isSuggestionsEnabled()
-            if (r12 != 0) goto L6a
-            java.lang.CharSequence r12 = r6.mText
-            java.lang.CharSequence r12 = r6.removeSuggestionSpans(r12)
-            r6.setTextInternal(r12)
-        L6a:
-            android.view.inputmethod.InputMethodManager r12 = r6.getInputMethodManager()
-            if (r12 == 0) goto L73
-            r12.restartInput(r6)
-        L73:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.TextView.setInputType(int):void");
+    public void setInputType(int i) {
+        TextView textView;
+        boolean z;
+        InputMethodManager inputMethodManager;
+        boolean zIsPasswordInputType = isPasswordInputType(getInputType());
+        boolean zIsVisiblePasswordInputType = isVisiblePasswordInputType(getInputType());
+        boolean z2 = false;
+        setInputType(i, false);
+        boolean zIsPasswordInputType2 = isPasswordInputType(i);
+        boolean zIsVisiblePasswordInputType2 = isVisiblePasswordInputType(i);
+        if (zIsPasswordInputType2) {
+            setTransformationMethod(PasswordTransformationMethod.getInstance());
+        } else {
+            if (zIsVisiblePasswordInputType2) {
+                if (this.mTransformation == PasswordTransformationMethod.getInstance()) {
+                    textView = this;
+                    z2 = true;
+                }
+            } else if (zIsPasswordInputType || zIsVisiblePasswordInputType) {
+                textView = this;
+                textView.setTypefaceFromAttrs(null, null, -1, 0, -1);
+                if (textView.mTransformation == PasswordTransformationMethod.getInstance()) {
+                    z2 = true;
+                }
+            }
+            z = !isMultilineInputType(i);
+            if (textView.mSingleLine == z || z2) {
+                textView.applySingleLine(z, !zIsPasswordInputType2, true, true);
+            }
+            if (!textView.isSuggestionsEnabled()) {
+                textView.setTextInternal(textView.removeSuggestionSpans(textView.mText));
+            }
+            inputMethodManager = textView.getInputMethodManager();
+            if (inputMethodManager == null) {
+                inputMethodManager.restartInput(textView);
+                return;
+            }
+            return;
+        }
+        textView = this;
+        z = !isMultilineInputType(i);
+        if (textView.mSingleLine == z) {
+            textView.applySingleLine(z, !zIsPasswordInputType2, true, true);
+        }
+        if (!textView.isSuggestionsEnabled()) {
+        }
+        inputMethodManager = textView.getInputMethodManager();
+        if (inputMethodManager == null) {
+        }
     }
 
     boolean hasPasswordTransformationMethod() {
@@ -4325,15 +6307,15 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
                 return;
             }
             if (i == 5) {
-                View focusSearch = focusSearch(2);
-                if (focusSearch != null && !focusSearch.requestFocus(2)) {
+                View viewFocusSearch = focusSearch(2);
+                if (viewFocusSearch != null && !viewFocusSearch.requestFocus(2)) {
                     throw new IllegalStateException("focus search returned a view that wasn't able to take focus!");
                 }
                 return;
             }
             if (i == 7) {
-                View focusSearch2 = focusSearch(1);
-                if (focusSearch2 != null && !focusSearch2.requestFocus(1)) {
+                View viewFocusSearch2 = focusSearch(1);
+                if (viewFocusSearch2 != null && !viewFocusSearch2.requestFocus(1)) {
                     throw new IllegalStateException("focus search returned a view that wasn't able to take focus!");
                 }
                 return;
@@ -4349,9 +6331,9 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         }
         ViewRootImpl viewRootImpl = getViewRootImpl();
         if (viewRootImpl != null) {
-            long uptimeMillis = SystemClock.uptimeMillis();
-            viewRootImpl.dispatchKeyFromIme(new KeyEvent(uptimeMillis, uptimeMillis, 0, 66, 0, 0, -1, 0, 22));
-            viewRootImpl.dispatchKeyFromIme(new KeyEvent(SystemClock.uptimeMillis(), uptimeMillis, 1, 66, 0, 0, -1, 0, 22));
+            long jUptimeMillis = SystemClock.uptimeMillis();
+            viewRootImpl.dispatchKeyFromIme(new KeyEvent(jUptimeMillis, jUptimeMillis, 0, 66, 0, 0, -1, 0, 22));
+            viewRootImpl.dispatchKeyFromIme(new KeyEvent(SystemClock.uptimeMillis(), jUptimeMillis, 1, 66, 0, 0, -1, 0, 22));
         }
     }
 
@@ -4372,7 +6354,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         return this.mEditor.mInputContentType.privateImeOptions;
     }
 
-    public void setInputExtras(int i) throws XmlPullParserException, IOException {
+    public void setInputExtras(int i) throws XmlPullParserException, Resources.NotFoundException, IOException {
         createEditorIfNeeded();
         XmlResourceParser xml = getResources().getXml(i);
         this.mEditor.createInputContentTypeIfNeeded();
@@ -4431,7 +6413,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
             setError(null, null);
             return;
         }
-        Drawable drawable = getContext().getDrawable(com.android.internal.R.drawable.indicator_input_error);
+        Drawable drawable = getContext().getDrawable(R.drawable.indicator_input_error);
         drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
         setError(charSequence, drawable);
     }
@@ -4443,7 +6425,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     @Override // android.view.View
-    protected boolean setFrame(int i, int i2, int i3, int i4) {
+    protected boolean setFrame(int i, int i2, int i3, int i4) throws Resources.NotFoundException {
         boolean frame = super.setFrame(i, i2, i3, i4);
         Editor editor = this.mEditor;
         if (editor != null) {
@@ -4565,11 +6547,11 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         if (this.mEditor.mDrawableForCursor == null) {
             RectF rectF = TEMP_RECTF;
             synchronized (rectF) {
-                float ceil = (float) Math.ceil(this.mTextPaint.getStrokeWidth());
-                if (ceil < 1.0f) {
-                    ceil = 1.0f;
+                float fCeil = (float) Math.ceil(this.mTextPaint.getStrokeWidth());
+                if (fCeil < 1.0f) {
+                    fCeil = 1.0f;
                 }
-                float f = ceil / 2.0f;
+                float f = fCeil / 2.0f;
                 this.mHighlightPath.computeBounds(rectF, false);
                 float f2 = compoundPaddingLeft;
                 float f3 = extendedPaddingTop;
@@ -4599,14 +6581,14 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
             invalidate();
             return;
         }
-        int originalToTransformed = originalToTransformed(i, 1);
-        int originalToTransformed2 = originalToTransformed(i2, 1);
-        int lineForOffset = this.mLayout.getLineForOffset(originalToTransformed);
+        int iOriginalToTransformed = originalToTransformed(i, 1);
+        int iOriginalToTransformed2 = originalToTransformed(i2, 1);
+        int lineForOffset = this.mLayout.getLineForOffset(iOriginalToTransformed);
         int lineTop = this.mLayout.getLineTop(lineForOffset);
         if (lineForOffset > 0) {
             lineTop -= this.mLayout.getLineDescent(lineForOffset - 1);
         }
-        int lineForOffset2 = originalToTransformed == originalToTransformed2 ? lineForOffset : this.mLayout.getLineForOffset(originalToTransformed2);
+        int lineForOffset2 = iOriginalToTransformed == iOriginalToTransformed2 ? lineForOffset : this.mLayout.getLineForOffset(iOriginalToTransformed2);
         int lineBottom = this.mLayout.getLineBottom(lineForOffset2);
         if (z && (editor = this.mEditor) != null && editor.mDrawableForCursor != null) {
             Rect bounds = this.mEditor.mDrawableForCursor.getBounds();
@@ -4616,8 +6598,8 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         int compoundPaddingLeft = getCompoundPaddingLeft();
         int extendedPaddingTop = getExtendedPaddingTop() + getVerticalOffset(true);
         if (lineForOffset == lineForOffset2 && !z) {
-            width = ((int) (this.mLayout.getPrimaryHorizontal(originalToTransformed2) + 1.0d)) + compoundPaddingLeft;
-            compoundPaddingLeft = ((int) this.mLayout.getPrimaryHorizontal(originalToTransformed)) + compoundPaddingLeft;
+            width = ((int) (this.mLayout.getPrimaryHorizontal(iOriginalToTransformed2) + 1.0d)) + compoundPaddingLeft;
+            compoundPaddingLeft = ((int) this.mLayout.getPrimaryHorizontal(iOriginalToTransformed)) + compoundPaddingLeft;
         } else {
             width = getWidth() - getCompoundPaddingRight();
         }
@@ -4740,15 +6722,15 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     @Override // android.view.View
     protected boolean verifyDrawable(Drawable drawable) {
         Drawables drawables;
-        boolean verifyDrawable = super.verifyDrawable(drawable);
-        if (!verifyDrawable && (drawables = this.mDrawables) != null) {
+        boolean zVerifyDrawable = super.verifyDrawable(drawable);
+        if (!zVerifyDrawable && (drawables = this.mDrawables) != null) {
             for (Drawable drawable2 : drawables.mShowing) {
                 if (drawable == drawable2) {
                     return true;
                 }
             }
         }
-        return verifyDrawable;
+        return zVerifyDrawable;
     }
 
     @Override // android.view.View
@@ -4772,39 +6754,39 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         boolean z = false;
         if (verifyDrawable(drawable)) {
             Rect bounds = drawable.getBounds();
-            int i3 = this.mScrollX;
-            int i4 = this.mScrollY;
+            int compoundPaddingRight = this.mScrollX;
+            int i3 = this.mScrollY;
             Drawables drawables = this.mDrawables;
             if (drawables != null) {
                 if (drawable == drawables.mShowing[0]) {
                     compoundPaddingTop = getCompoundPaddingTop();
                     int compoundPaddingBottom = ((this.mBottom - this.mTop) - getCompoundPaddingBottom()) - compoundPaddingTop;
-                    i3 += this.mPaddingLeft;
+                    compoundPaddingRight += this.mPaddingLeft;
                     i2 = (compoundPaddingBottom - drawables.mDrawableHeightLeft) / 2;
                 } else if (drawable == drawables.mShowing[2]) {
                     compoundPaddingTop = getCompoundPaddingTop();
                     int compoundPaddingBottom2 = ((this.mBottom - this.mTop) - getCompoundPaddingBottom()) - compoundPaddingTop;
-                    i3 += ((this.mRight - this.mLeft) - this.mPaddingRight) - drawables.mDrawableSizeRight;
+                    compoundPaddingRight += ((this.mRight - this.mLeft) - this.mPaddingRight) - drawables.mDrawableSizeRight;
                     i2 = (compoundPaddingBottom2 - drawables.mDrawableHeightRight) / 2;
                 } else {
                     if (drawable == drawables.mShowing[1]) {
                         int compoundPaddingLeft = getCompoundPaddingLeft();
-                        i3 += compoundPaddingLeft + (((((this.mRight - this.mLeft) - getCompoundPaddingRight()) - compoundPaddingLeft) - drawables.mDrawableWidthTop) / 2);
+                        compoundPaddingRight += compoundPaddingLeft + (((((this.mRight - this.mLeft) - getCompoundPaddingRight()) - compoundPaddingLeft) - drawables.mDrawableWidthTop) / 2);
                         i = this.mPaddingTop;
                     } else if (drawable == drawables.mShowing[3]) {
                         int compoundPaddingLeft2 = getCompoundPaddingLeft();
-                        i3 += compoundPaddingLeft2 + (((((this.mRight - this.mLeft) - getCompoundPaddingRight()) - compoundPaddingLeft2) - drawables.mDrawableWidthBottom) / 2);
+                        compoundPaddingRight += compoundPaddingLeft2 + (((((this.mRight - this.mLeft) - getCompoundPaddingRight()) - compoundPaddingLeft2) - drawables.mDrawableWidthBottom) / 2);
                         i = ((this.mBottom - this.mTop) - this.mPaddingBottom) - drawables.mDrawableSizeBottom;
                     }
-                    i4 += i;
+                    i3 += i;
                     z = true;
                 }
                 i = compoundPaddingTop + i2;
-                i4 += i;
+                i3 += i;
                 z = true;
             }
             if (z) {
-                invalidate(bounds.left + i3, bounds.top + i4, bounds.right + i3, bounds.bottom + i4);
+                invalidate(bounds.left + compoundPaddingRight, bounds.top + i3, bounds.right + compoundPaddingRight, bounds.bottom + i3);
             }
         }
         if (z) {
@@ -4848,25 +6830,25 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
 
     @Override // android.view.View
     protected int[] onCreateDrawableState(int i) {
-        int[] onCreateDrawableState;
+        int[] iArrOnCreateDrawableState;
         if (this.mSingleLine) {
-            onCreateDrawableState = super.onCreateDrawableState(i);
+            iArrOnCreateDrawableState = super.onCreateDrawableState(i);
         } else {
-            onCreateDrawableState = super.onCreateDrawableState(i + 1);
-            mergeDrawableStates(onCreateDrawableState, MULTILINE_STATE_SET);
+            iArrOnCreateDrawableState = super.onCreateDrawableState(i + 1);
+            mergeDrawableStates(iArrOnCreateDrawableState, MULTILINE_STATE_SET);
         }
         if (isTextSelectable()) {
-            int length = onCreateDrawableState.length;
+            int length = iArrOnCreateDrawableState.length;
             for (int i2 = 0; i2 < length; i2++) {
-                if (onCreateDrawableState[i2] == 16842919) {
+                if (iArrOnCreateDrawableState[i2] == 16842919) {
                     int[] iArr = new int[length - 1];
-                    System.arraycopy(onCreateDrawableState, 0, iArr, 0, i2);
-                    System.arraycopy(onCreateDrawableState, i2 + 1, iArr, i2, (length - i2) - 1);
+                    System.arraycopy(iArrOnCreateDrawableState, 0, iArr, 0, i2);
+                    System.arraycopy(iArrOnCreateDrawableState, i2 + 1, iArr, i2, (length - i2) - 1);
                     return iArr;
                 }
             }
         }
-        return onCreateDrawableState;
+        return iArrOnCreateDrawableState;
     }
 
     private void maybeUpdateHighlightPaths() {
@@ -4904,7 +6886,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
                             this.mLayout.getSelection(i4, i5, new Layout.SelectionRectangleConsumer() { // from class: android.widget.TextView$$ExternalSyntheticLambda0
                                 @Override // android.text.Layout.SelectionRectangleConsumer
                                 public final void accept(float f, float f2, float f3, float f4, int i6) {
-                                    Path.this.addRect(f, f2, f3, f4, Path.Direction.CW);
+                                    path2.addRect(f, f2, f3, f4, Path.Direction.CW);
                                 }
                             });
                             z = true;
@@ -4974,14 +6956,14 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
                         this.mLayout.getSelection(i3, i4, new Layout.SelectionRectangleConsumer() { // from class: android.widget.TextView$$ExternalSyntheticLambda6
                             @Override // android.text.Layout.SelectionRectangleConsumer
                             public final void accept(float f, float f2, float f3, float f4, int i5) {
-                                Path.this.addRect(f, f2, f3, f4, Path.Direction.CW);
+                                path2.addRect(f, f2, f3, f4, Path.Direction.CW);
                             }
                         });
                     } else {
                         this.mLayout.getSelection(i3, i4, new Layout.SelectionRectangleConsumer() { // from class: android.widget.TextView$$ExternalSyntheticLambda7
                             @Override // android.text.Layout.SelectionRectangleConsumer
                             public final void accept(float f, float f2, float f3, float f4, int i5) {
-                                Path.this.addRect(f, f2, f3, f4, Path.Direction.CW);
+                                path.addRect(f, f2, f3, f4, Path.Direction.CW);
                             }
                         });
                         z = true;
@@ -5072,22 +7054,273 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         return null;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:120:0x037f  */
-    /* JADX WARN: Removed duplicated region for block: B:136:0x03dc  */
-    /* JADX WARN: Removed duplicated region for block: B:144:0x03f4  */
-    /* JADX WARN: Removed duplicated region for block: B:152:0x0402  */
-    /* JADX WARN: Removed duplicated region for block: B:153:0x03de  */
+    /* JADX WARN: Removed duplicated region for block: B:129:0x037f  */
+    /* JADX WARN: Removed duplicated region for block: B:145:0x03dc  */
+    /* JADX WARN: Removed duplicated region for block: B:146:0x03de  */
+    /* JADX WARN: Removed duplicated region for block: B:154:0x03f4  */
+    /* JADX WARN: Removed duplicated region for block: B:155:0x0402  */
     @Override // android.view.View
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    protected void onDraw(android.graphics.Canvas r25) {
-        /*
-            Method dump skipped, instructions count: 1091
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.TextView.onDraw(android.graphics.Canvas):void");
+    protected void onDraw(Canvas canvas) {
+        int i;
+        int i2;
+        int i3;
+        int i4;
+        int i5;
+        int i6;
+        int verticalOffset;
+        int i7;
+        int iFloor;
+        Paint paint;
+        Editor editor;
+        int i8;
+        Canvas canvas2;
+        Path path;
+        Paint paint2;
+        Layout layout;
+        Marquee marquee;
+        int i9;
+        restartMarqueeIfNeeded();
+        super.onDraw(canvas);
+        SFText sFText = this.mTextEffect;
+        if (sFText != null && sFText.hasEffect()) {
+            int buttonShapeTextColor = this.mCurTextColor;
+            if (this.mLayout == null) {
+                assumeLayout();
+            }
+            if (this.mHint != null && this.mText.length() == 0 && this.mHintTextColor != null) {
+                buttonShapeTextColor = this.mCurHintTextColor;
+            }
+            if (this.mButtonShapeSettingEnabled && this.mIsButtonShapeTarget && !TextUtils.isEmpty(this.mText)) {
+                buttonShapeTextColor = getButtonShapeTextColor();
+            }
+            this.mTextPaint.setColor(buttonShapeTextColor);
+            Log.d(LOG_TAG, "TextView : Paint's Alpha value = " + getPaint().getAlpha());
+            this.mTextEffect.setOwnerView(this);
+            this.mTextEffect.setLines(this.mTextEffectLines);
+            this.mTextEffect.setFontFamily(this.mFontFamily);
+            if (this.mTextEffect.render(canvas, getScrollX(), getScrollY())) {
+                return;
+            }
+        }
+        int compoundPaddingLeft = getCompoundPaddingLeft();
+        int compoundPaddingTop = getCompoundPaddingTop();
+        int compoundPaddingRight = getCompoundPaddingRight();
+        int compoundPaddingBottom = getCompoundPaddingBottom();
+        int i10 = this.mScrollX;
+        int i11 = this.mScrollY;
+        int i12 = this.mRight;
+        int i13 = this.mLeft;
+        int i14 = this.mBottom;
+        int i15 = this.mTop;
+        boolean zIsLayoutRtl = isLayoutRtl();
+        int horizontalOffsetForDrawables = getHorizontalOffsetForDrawables();
+        int i16 = zIsLayoutRtl ? 0 : horizontalOffsetForDrawables;
+        if (!zIsLayoutRtl) {
+            horizontalOffsetForDrawables = 0;
+        }
+        Drawables drawables = this.mDrawables;
+        if (drawables != null) {
+            int i17 = ((i14 - i15) - compoundPaddingBottom) - compoundPaddingTop;
+            int i18 = ((i12 - i13) - compoundPaddingRight) - compoundPaddingLeft;
+            if (drawables.mShowing[0] != null) {
+                canvas.save();
+                i = 3;
+                canvas.translate(this.mPaddingLeft + i10 + i16, i11 + compoundPaddingTop + ((i17 - drawables.mDrawableHeightLeft) / 2));
+                drawables.mShowing[0].draw(canvas);
+                canvas.restore();
+            } else {
+                i = 3;
+            }
+            if (drawables.mShowing[2] != null) {
+                canvas.save();
+                canvas.translate(((((i10 + i12) - i13) - this.mPaddingRight) - drawables.mDrawableSizeRight) - horizontalOffsetForDrawables, i11 + compoundPaddingTop + ((i17 - drawables.mDrawableHeightRight) / 2));
+                drawables.mShowing[2].draw(canvas);
+                canvas.restore();
+            }
+            if (drawables.mShowing[1] != null) {
+                canvas.save();
+                canvas.translate(i10 + compoundPaddingLeft + ((i18 - drawables.mDrawableWidthTop) / 2), this.mPaddingTop + i11);
+                drawables.mShowing[1].draw(canvas);
+                canvas.restore();
+            }
+            if (drawables.mShowing[i] != null) {
+                canvas.save();
+                canvas.translate(i10 + compoundPaddingLeft + ((i18 - drawables.mDrawableWidthBottom) / 2), (((i11 + i14) - i15) - this.mPaddingBottom) - drawables.mDrawableSizeBottom);
+                drawables.mShowing[i].draw(canvas);
+                canvas.restore();
+            }
+        } else {
+            i = 3;
+        }
+        int buttonShapeTextColor2 = this.mCurTextColor;
+        if (this.mLayout == null) {
+            assumeLayout();
+        }
+        Layout layout2 = this.mLayout;
+        if (this.mHint != null && !this.mHideHint && this.mText.length() == 0) {
+            if (this.mHintTextColor != null) {
+                buttonShapeTextColor2 = this.mCurHintTextColor;
+            }
+            layout2 = this.mHintLayout;
+        }
+        if (this.mButtonShapeSettingEnabled && this.mIsButtonShapeTarget && !TextUtils.isEmpty(this.mText)) {
+            buttonShapeTextColor2 = getButtonShapeTextColor();
+        }
+        this.mTextPaint.setColor(buttonShapeTextColor2);
+        this.mTextPaint.drawableState = getDrawableState();
+        canvas.save();
+        if (!this.mButtonShapeSettingEnabled || !this.mIsButtonShapeTarget || this.mButtonShapePaint == null || this.mButtonShapeRect == null || TextUtils.isEmpty(this.mText)) {
+            i2 = compoundPaddingLeft;
+            i3 = compoundPaddingTop;
+            i4 = compoundPaddingBottom;
+            i5 = i10;
+        } else {
+            int compoundPaddingLeft2 = getCompoundPaddingLeft();
+            int extendedPaddingTop = getExtendedPaddingTop();
+            if ((this.mGravity & 112) != 48) {
+                i9 = 0;
+                extendedPaddingTop += getVerticalOffset(false);
+            } else {
+                i9 = 0;
+            }
+            int lineForOffset = this.mLayout.getLineForOffset(i9);
+            i2 = compoundPaddingLeft;
+            int lineForOffset2 = this.mLayout.getLineForOffset(this.mText.length());
+            float lineLeft = this.mLayout.getLineLeft(lineForOffset);
+            i3 = compoundPaddingTop;
+            float lineRight = this.mLayout.getLineRight(lineForOffset);
+            i4 = compoundPaddingBottom;
+            int i19 = lineForOffset;
+            while (i19 <= lineForOffset2) {
+                int i20 = i10;
+                if (lineLeft > this.mLayout.getLineLeft(i19)) {
+                    lineLeft = this.mLayout.getLineLeft(i19);
+                }
+                if (lineRight < this.mLayout.getLineRight(i19)) {
+                    lineRight = this.mLayout.getLineRight(i19);
+                }
+                i19++;
+                i10 = i20;
+            }
+            i5 = i10;
+            this.mButtonShapePaint.setAlpha(this.mButtonShapeAlpha);
+            this.mButtonShapePaint.setColor(this.mButtonShapeColor);
+            RectF rectF = this.mButtonShapeRect;
+            float lineTop = this.mLayout.getLineTop(lineForOffset);
+            float f = extendedPaddingTop;
+            rectF.top = (lineTop + f) - this.mButtonShapeOutlineStrokeTop;
+            this.mButtonShapeRect.bottom = this.mLayout.getLineBottom(lineForOffset2) + f + this.mButtonShapeOutlineStrokeBottom;
+            float f2 = compoundPaddingLeft2;
+            this.mButtonShapeRect.left = (((float) Math.floor(lineLeft)) + f2) - this.mButtonShapeOutlineStrokeHorizontal;
+            this.mButtonShapeRect.right = ((float) Math.ceil(lineRight)) + f2 + this.mButtonShapeOutlineStrokeHorizontal;
+            RectF rectF2 = this.mButtonShapeRect;
+            int i21 = this.mButtonShapeOutlineRadius;
+            canvas.drawRoundRect(rectF2, i21, i21, this.mButtonShapePaint);
+        }
+        int extendedPaddingTop2 = getExtendedPaddingTop();
+        int extendedPaddingBottom = getExtendedPaddingBottom();
+        int height = this.mLayout.getHeight() - (((this.mBottom - this.mTop) - i4) - i3);
+        float fMin = i2 + i5;
+        float fMin2 = i11 == 0 ? 0.0f : extendedPaddingTop2 + i11;
+        float compoundPaddingRight2 = ((i12 - i13) - getCompoundPaddingRight()) + i5;
+        int i22 = (i14 - i15) + i11;
+        if (i11 == height) {
+            extendedPaddingBottom = 0;
+        }
+        float fMax = i22 - extendedPaddingBottom;
+        float f3 = this.mShadowRadius;
+        if (f3 != 0.0f) {
+            fMin += Math.min(0.0f, this.mShadowDx - f3);
+            compoundPaddingRight2 += Math.max(0.0f, this.mShadowDx + this.mShadowRadius);
+            fMin2 += Math.min(0.0f, this.mShadowDy - this.mShadowRadius);
+            fMax += Math.max(0.0f, this.mShadowDy + this.mShadowRadius);
+        }
+        canvas.clipRect(fMin, fMin2, compoundPaddingRight2, fMax);
+        if ((this.mGravity & 112) != 48) {
+            int verticalOffset2 = getVerticalOffset(false);
+            i6 = 1;
+            verticalOffset = getVerticalOffset(true);
+            i7 = verticalOffset2;
+        } else {
+            i6 = 1;
+            verticalOffset = 0;
+            i7 = 0;
+        }
+        if (CoreRune.GRAPHICS_RENDERER_HCF && isHighContrastTextEnabled()) {
+            if ((this.mGravity & 7) == i6 || !isEditorNotFull()) {
+                iFloor = 0;
+            } else {
+                iFloor = (int) Math.floor((this.mTextPaint.getHCTStrokeWidth() / 2.0f) * (isRightAligned() ? -1 : 1));
+            }
+            int iFloor2 = (this.mGravity & 112) != 16 ? (int) Math.floor(this.mTextPaint.getHCTStrokeWidth() / 2.0f) : 0;
+            canvas.translate(i2 + iFloor, extendedPaddingTop2 + i7 + iFloor2);
+            int absoluteGravity = Gravity.getAbsoluteGravity(this.mGravity, getLayoutDirection());
+            if (isMarqueeFadeEnabled()) {
+                if (!this.mSingleLine && getLineCount() == 1 && canMarquee() && (absoluteGravity & 7) != i) {
+                    canvas.translate(layout2.getParagraphDirection(0) * (this.mLayout.getLineRight(0) - ((this.mRight - this.mLeft) - (getCompoundPaddingLeft() + getCompoundPaddingRight()))), 0.0f);
+                }
+                Marquee marquee2 = this.mMarquee;
+                if (marquee2 != null && marquee2.isRunning()) {
+                    canvas.translate(layout2.getParagraphDirection(0) * (-this.mMarquee.getScroll()), 0.0f);
+                }
+            }
+            int i23 = verticalOffset - i7;
+            maybeUpdateHighlightPaths();
+            Path updatedHighlightPath = !hasGesturePreviewHighlight() ? null : getUpdatedHighlightPath();
+            paint = this.mHighlightPaint;
+            if (ViewRune.WIDGET_PEN_SUPPORTED && this.mhasMultiSelection) {
+                paint = this.mMultiHighlightPaint;
+            }
+            Paint paint3 = paint;
+            editor = this.mEditor;
+            if (editor == null) {
+                i8 = i23;
+                path = updatedHighlightPath;
+                layout = layout2;
+                editor.onDraw(canvas, layout, this.mHighlightPaths, this.mHighlightPaints, path, paint3, i8);
+                canvas2 = canvas;
+                paint2 = paint3;
+            } else {
+                Layout layout3 = layout2;
+                i8 = i23;
+                canvas2 = canvas;
+                layout3.draw(canvas2, this.mHighlightPaths, this.mHighlightPaints, updatedHighlightPath, paint3, i8);
+                path = updatedHighlightPath;
+                paint2 = paint3;
+                layout = layout3;
+            }
+            marquee = this.mMarquee;
+            if (marquee != null && marquee.shouldDrawGhost()) {
+                canvas2.translate(layout.getParagraphDirection(0) * this.mMarquee.getGhostOffset(), 0.0f);
+                layout.draw(canvas, this.mHighlightPaths, this.mHighlightPaints, path, paint2, i8);
+            }
+            canvas.restore();
+        }
+        iFloor = 0;
+        canvas.translate(i2 + iFloor, extendedPaddingTop2 + i7 + iFloor2);
+        int absoluteGravity2 = Gravity.getAbsoluteGravity(this.mGravity, getLayoutDirection());
+        if (isMarqueeFadeEnabled()) {
+        }
+        int i232 = verticalOffset - i7;
+        maybeUpdateHighlightPaths();
+        Path updatedHighlightPath2 = !hasGesturePreviewHighlight() ? null : getUpdatedHighlightPath();
+        paint = this.mHighlightPaint;
+        if (ViewRune.WIDGET_PEN_SUPPORTED) {
+            paint = this.mMultiHighlightPaint;
+        }
+        Paint paint32 = paint;
+        editor = this.mEditor;
+        if (editor == null) {
+        }
+        marquee = this.mMarquee;
+        if (marquee != null) {
+            canvas2.translate(layout.getParagraphDirection(0) * this.mMarquee.getGhostOffset(), 0.0f);
+            layout.draw(canvas, this.mHighlightPaths, this.mHighlightPaints, path, paint2, i8);
+        }
+        canvas.restore();
     }
 
     @Override // android.view.View
@@ -5283,36 +7516,36 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
 
     @Override // android.view.View, android.view.KeyEvent.Callback
     public boolean onKeyMultiple(int i, int i2, KeyEvent keyEvent) {
-        KeyEvent changeAction = KeyEvent.changeAction(keyEvent, 0);
-        int doKeyDown = doKeyDown(i, changeAction, keyEvent);
-        if (doKeyDown == 0) {
+        KeyEvent keyEventChangeAction = KeyEvent.changeAction(keyEvent, 0);
+        int iDoKeyDown = doKeyDown(i, keyEventChangeAction, keyEvent);
+        if (iDoKeyDown == 0) {
             return super.onKeyMultiple(i, i2, keyEvent);
         }
-        if (doKeyDown == -1) {
+        if (iDoKeyDown == -1) {
             return true;
         }
         int i3 = i2 - 1;
-        KeyEvent changeAction2 = KeyEvent.changeAction(keyEvent, 1);
-        if (doKeyDown == 1) {
-            this.mEditor.mKeyListener.onKeyUp(this, (Editable) this.mText, i, changeAction2);
+        KeyEvent keyEventChangeAction2 = KeyEvent.changeAction(keyEvent, 1);
+        if (iDoKeyDown == 1) {
+            this.mEditor.mKeyListener.onKeyUp(this, (Editable) this.mText, i, keyEventChangeAction2);
             while (true) {
                 i3--;
                 if (i3 <= 0) {
                     break;
                 }
-                this.mEditor.mKeyListener.onKeyDown(this, (Editable) this.mText, i, changeAction);
-                this.mEditor.mKeyListener.onKeyUp(this, (Editable) this.mText, i, changeAction2);
+                this.mEditor.mKeyListener.onKeyDown(this, (Editable) this.mText, i, keyEventChangeAction);
+                this.mEditor.mKeyListener.onKeyUp(this, (Editable) this.mText, i, keyEventChangeAction2);
             }
             hideErrorIfUnchanged();
-        } else if (doKeyDown == 2) {
-            this.mMovement.onKeyUp(this, this.mSpannable, i, changeAction2);
+        } else if (iDoKeyDown == 2) {
+            this.mMovement.onKeyUp(this, this.mSpannable, i, keyEventChangeAction2);
             while (true) {
                 i3--;
                 if (i3 <= 0) {
                     break;
                 }
-                this.mMovement.onKeyDown(this, this.mSpannable, i, changeAction);
-                this.mMovement.onKeyUp(this, this.mSpannable, i, changeAction2);
+                this.mMovement.onKeyDown(this, this.mSpannable, i, keyEventChangeAction);
+                this.mMovement.onKeyUp(this, this.mSpannable, i, keyEventChangeAction2);
             }
         }
         return true;
@@ -5330,6 +7563,10 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         return editor != null && (editor.mInputType & 15) == 1 && ((i = this.mEditor.mInputType & InputType.TYPE_MASK_VARIATION) == 32 || i == 48);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:86:0x00e7  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     private int doKeyDown(int i, KeyEvent keyEvent, KeyEvent keyEvent2) {
         if (!isEnabled()) {
             return 0;
@@ -5349,64 +7586,63 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
                 return 0;
             }
         } else if (i != 61) {
-            if (i != 66) {
-                if (i != 124) {
-                    if (i != 160) {
-                        if (i != 111) {
-                            if (i != 112) {
-                                switch (i) {
-                                    case 277:
-                                        if (keyEvent.hasNoModifiers() && canCut() && onTextContextMenuItem(16908320)) {
-                                            return -1;
-                                        }
-                                        break;
-                                    case 278:
-                                        if (keyEvent.hasNoModifiers() && canCopy() && onTextContextMenuItem(16908321)) {
-                                            return -1;
-                                        }
-                                        break;
-                                    case 279:
-                                        if (keyEvent.hasNoModifiers() && canPaste() && onTextContextMenuItem(16908322)) {
-                                            return -1;
-                                        }
-                                        break;
-                                }
-                            } else if (keyEvent.hasModifiers(1) && canCut() && onTextContextMenuItem(16908320)) {
-                                return -1;
-                            }
-                        } else if (Flags.escapeClearsFocus() && keyEvent.hasNoModifiers()) {
-                            Editor editor2 = this.mEditor;
-                            if (editor2 != null && editor2.getTextActionMode() != null) {
-                                stopTextActionMode();
-                                return -1;
-                            }
-                            if (hasFocus()) {
-                                clearFocusInternal(null, true, false);
-                                InputMethodManager inputMethodManager = getInputMethodManager();
-                                if (inputMethodManager != null) {
-                                    inputMethodManager.hideSoftInputFromView(this, 0);
-                                }
-                                return -1;
-                            }
-                        }
-                    }
-                } else if (keyEvent.hasModifiers(4096) && canCopy()) {
-                    if (onTextContextMenuItem(16908321)) {
+            if (i == 66) {
+                if (keyEvent.hasNoModifiers()) {
+                    Editor editor2 = this.mEditor;
+                    if (editor2 != null && editor2.mInputContentType != null && this.mEditor.mInputContentType.onEditorActionListener != null && this.mEditor.mInputContentType.onEditorActionListener.onEditorAction(this, getActionIdForEnterEvent(), keyEvent)) {
+                        this.mEditor.mInputContentType.enterDown = true;
                         return -1;
                     }
-                } else if (keyEvent.hasModifiers(1) && canPaste() && onTextContextMenuItem(16908322)) {
+                    if ((keyEvent.getFlags() & 16) != 0 || shouldAdvanceFocusOnEnter()) {
+                        return hasOnClickListeners() ? 0 : -1;
+                    }
+                }
+            } else if (i != 124) {
+                if (i != 160) {
+                    if (i != 111) {
+                        if (i != 112) {
+                            switch (i) {
+                                case 277:
+                                    if (keyEvent.hasNoModifiers() && canCut() && onTextContextMenuItem(16908320)) {
+                                        return -1;
+                                    }
+                                    break;
+                                case 278:
+                                    if (keyEvent.hasNoModifiers() && canCopy() && onTextContextMenuItem(16908321)) {
+                                        return -1;
+                                    }
+                                    break;
+                                case 279:
+                                    if (keyEvent.hasNoModifiers() && canPaste() && onTextContextMenuItem(16908322)) {
+                                        return -1;
+                                    }
+                                    break;
+                            }
+                        } else if (keyEvent.hasModifiers(1) && canCut() && onTextContextMenuItem(16908320)) {
+                            return -1;
+                        }
+                    } else if (Flags.escapeClearsFocus() && keyEvent.hasNoModifiers()) {
+                        Editor editor3 = this.mEditor;
+                        if (editor3 != null && editor3.getTextActionMode() != null) {
+                            stopTextActionMode();
+                            return -1;
+                        }
+                        if (hasFocus()) {
+                            clearFocusInternal(null, true, false);
+                            InputMethodManager inputMethodManager = getInputMethodManager();
+                            if (inputMethodManager != null) {
+                                inputMethodManager.hideSoftInputFromView(this, 0);
+                            }
+                            return -1;
+                        }
+                    }
+                }
+            } else if (keyEvent.hasModifiers(4096) && canCopy()) {
+                if (onTextContextMenuItem(16908321)) {
                     return -1;
                 }
-            }
-            if (keyEvent.hasNoModifiers()) {
-                Editor editor3 = this.mEditor;
-                if (editor3 != null && editor3.mInputContentType != null && this.mEditor.mInputContentType.onEditorActionListener != null && this.mEditor.mInputContentType.onEditorActionListener.onEditorAction(this, getActionIdForEnterEvent(), keyEvent)) {
-                    this.mEditor.mInputContentType.enterDown = true;
-                    return -1;
-                }
-                if ((keyEvent.getFlags() & 16) != 0 || shouldAdvanceFocusOnEnter()) {
-                    return hasOnClickListeners() ? 0 : -1;
-                }
+            } else if (keyEvent.hasModifiers(1) && canPaste() && onTextContextMenuItem(16908322)) {
+                return -1;
             }
         } else if (keyEvent.hasNoModifiers() || keyEvent.hasModifiers(1)) {
             return 0;
@@ -5416,22 +7652,23 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
             if (keyEvent2 != null) {
                 try {
                     beginBatchEdit();
-                    boolean onKeyOther = this.mEditor.mKeyListener.onKeyOther(this, (Editable) this.mText, keyEvent2);
+                    boolean zOnKeyOther = this.mEditor.mKeyListener.onKeyOther(this, (Editable) this.mText, keyEvent2);
                     hideErrorIfUnchanged();
-                    if (onKeyOther) {
+                    if (zOnKeyOther) {
                         return -1;
                     }
                 } catch (AbstractMethodError unused) {
                 } finally {
                     endBatchEdit();
                 }
-            }
-            beginBatchEdit();
-            boolean onKeyDown = this.mEditor.mKeyListener.onKeyDown(this, (Editable) this.mText, i, keyEvent);
-            endBatchEdit();
-            hideErrorIfUnchanged();
-            if (onKeyDown) {
-                return 1;
+            } else {
+                beginBatchEdit();
+                boolean zOnKeyDown = this.mEditor.mKeyListener.onKeyDown(this, (Editable) this.mText, i, keyEvent);
+                endBatchEdit();
+                hideErrorIfUnchanged();
+                if (zOnKeyDown) {
+                    return 1;
+                }
             }
         }
         MovementMethod movementMethod = this.mMovement;
@@ -5446,16 +7683,17 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
                 if (keyEvent.getSource() == 257 && isDirectionalNavigationKey(i)) {
                     return -1;
                 }
-            }
-            if (this.mMovement.onKeyDown(this, this.mSpannable, i, keyEvent)) {
-                if (keyEvent.getRepeatCount() != 0 || KeyEvent.isModifierKey(i)) {
+            } else {
+                if (this.mMovement.onKeyDown(this, this.mSpannable, i, keyEvent)) {
+                    if (keyEvent.getRepeatCount() != 0 || KeyEvent.isModifierKey(i)) {
+                        return 2;
+                    }
+                    this.mPreventDefaultMovement = true;
                     return 2;
                 }
-                this.mPreventDefaultMovement = true;
-                return 2;
-            }
-            if (keyEvent.getSource() == 257) {
-                return -1;
+                if (keyEvent.getSource() == 257) {
+                    return -1;
+                }
             }
         }
         return (!this.mPreventDefaultMovement || KeyEvent.isModifierKey(i)) ? 0 : -1;
@@ -5505,9 +7743,9 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
                 }
             }
             if (((keyEvent.getFlags() & 16) != 0 || shouldAdvanceFocusOnEnter()) && !hasOnClickListeners()) {
-                View focusSearch = focusSearch(130);
-                if (focusSearch != null) {
-                    if (!focusSearch.requestFocus(130)) {
+                View viewFocusSearch = focusSearch(130);
+                if (viewFocusSearch != null) {
+                    if (!viewFocusSearch.requestFocus(130)) {
                         throw new IllegalStateException("focus search returned a view that wasn't able to take focus!");
                     }
                     super.onKeyUp(i, keyEvent);
@@ -5556,8 +7794,8 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     private boolean hasEditorInFocusSearchDirection(int i) {
-        View focusSearch = focusSearch(i);
-        return focusSearch != null && focusSearch.onCheckIsTextEditor();
+        View viewFocusSearch = focusSearch(i);
+        return viewFocusSearch != null && viewFocusSearch.onCheckIsTextEditor();
     }
 
     @Override // android.view.View
@@ -5610,12 +7848,12 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
                 editorInfo.setInitialSurroundingText(this.mText);
                 editorInfo.contentMimeTypes = getReceiveContentMimeTypes();
                 if (android.view.inputmethod.Flags.editorinfoHandwritingEnabled()) {
-                    boolean isAutoHandwritingEnabled = isAutoHandwritingEnabled();
-                    editorInfo.setStylusHandwritingEnabled(isAutoHandwritingEnabled);
+                    boolean zIsAutoHandwritingEnabled = isAutoHandwritingEnabled();
+                    editorInfo.setStylusHandwritingEnabled(zIsAutoHandwritingEnabled);
                     if (editorInfo.extras == null) {
                         editorInfo.extras = new Bundle();
                     }
-                    editorInfo.extras.putBoolean(EditorInfo.STYLUS_HANDWRITING_ENABLED_ANDROIDX_EXTRAS_KEY, isAutoHandwritingEnabled);
+                    editorInfo.extras.putBoolean(EditorInfo.STYLUS_HANDWRITING_ENABLED_ANDROIDX_EXTRAS_KEY, zIsAutoHandwritingEnabled);
                 }
                 if (android.view.inputmethod.Flags.writingTools()) {
                     editorInfo.setWritingToolsEnabled(isSuggestionsEnabled());
@@ -5785,7 +8023,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
             cancellationSignal.setOnCancelListener(new CancellationSignal.OnCancelListener() { // from class: android.widget.TextView$$ExternalSyntheticLambda4
                 @Override // android.os.CancellationSignal.OnCancelListener
                 public final void onCancel() {
-                    TextView.this.clearGesturePreviewHighlight();
+                    this.f$0.clearGesturePreviewHighlight();
                 }
             });
         }
@@ -5884,53 +8122,53 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     private int[] adjustHandwritingDeleteGestureRange(int[] iArr) {
-        int i = iArr[0];
-        int i2 = iArr[1];
-        int codePointBefore = i > 0 ? Character.codePointBefore(this.mText, i) : 10;
-        int codePointAt = i2 < this.mText.length() ? Character.codePointAt(this.mText, i2) : 10;
-        if (TextUtils.isWhitespaceExceptNewline(codePointBefore) && (TextUtils.isWhitespace(codePointAt) || TextUtils.isPunctuation(codePointAt))) {
+        int iCharCount = iArr[0];
+        int iCharCount2 = iArr[1];
+        int iCodePointBefore = iCharCount > 0 ? Character.codePointBefore(this.mText, iCharCount) : 10;
+        int iCodePointAt = iCharCount2 < this.mText.length() ? Character.codePointAt(this.mText, iCharCount2) : 10;
+        if (TextUtils.isWhitespaceExceptNewline(iCodePointBefore) && (TextUtils.isWhitespace(iCodePointAt) || TextUtils.isPunctuation(iCodePointAt))) {
             do {
-                i -= Character.charCount(codePointBefore);
-                if (i == 0) {
+                iCharCount -= Character.charCount(iCodePointBefore);
+                if (iCharCount == 0) {
                     break;
                 }
-                codePointBefore = Character.codePointBefore(this.mText, i);
-            } while (TextUtils.isWhitespaceExceptNewline(codePointBefore));
-            return new int[]{i, i2};
+                iCodePointBefore = Character.codePointBefore(this.mText, iCharCount);
+            } while (TextUtils.isWhitespaceExceptNewline(iCodePointBefore));
+            return new int[]{iCharCount, iCharCount2};
         }
-        if (!TextUtils.isWhitespaceExceptNewline(codePointAt) || (!TextUtils.isWhitespace(codePointBefore) && !TextUtils.isPunctuation(codePointBefore))) {
+        if (!TextUtils.isWhitespaceExceptNewline(iCodePointAt) || (!TextUtils.isWhitespace(iCodePointBefore) && !TextUtils.isPunctuation(iCodePointBefore))) {
             return iArr;
         }
         do {
-            i2 += Character.charCount(codePointAt);
-            if (i2 == this.mText.length()) {
+            iCharCount2 += Character.charCount(iCodePointAt);
+            if (iCharCount2 == this.mText.length()) {
                 break;
             }
-            codePointAt = Character.codePointAt(this.mText, i2);
-        } while (TextUtils.isWhitespaceExceptNewline(codePointAt));
-        return new int[]{i, i2};
+            iCodePointAt = Character.codePointAt(this.mText, iCharCount2);
+        } while (TextUtils.isWhitespaceExceptNewline(iCodePointAt));
+        return new int[]{iCharCount, iCharCount2};
     }
 
     public int performHandwritingInsertGesture(InsertGesture insertGesture) {
         if (isOffsetMappingAvailable()) {
             return 3;
         }
-        PointF convertFromScreenToContentCoordinates = convertFromScreenToContentCoordinates(insertGesture.getInsertionPoint());
-        int lineForHandwritingGesture = getLineForHandwritingGesture(convertFromScreenToContentCoordinates);
+        PointF pointFConvertFromScreenToContentCoordinates = convertFromScreenToContentCoordinates(insertGesture.getInsertionPoint());
+        int lineForHandwritingGesture = getLineForHandwritingGesture(pointFConvertFromScreenToContentCoordinates);
         if (lineForHandwritingGesture == -1) {
             return handleGestureFailure(insertGesture);
         }
-        return tryInsertTextForHandwritingGesture(this.mLayout.getOffsetForHorizontal(lineForHandwritingGesture, convertFromScreenToContentCoordinates.x), insertGesture.getTextToInsert(), insertGesture);
+        return tryInsertTextForHandwritingGesture(this.mLayout.getOffsetForHorizontal(lineForHandwritingGesture, pointFConvertFromScreenToContentCoordinates.x), insertGesture.getTextToInsert(), insertGesture);
     }
 
     public int performHandwritingRemoveSpaceGesture(RemoveSpaceGesture removeSpaceGesture) {
         if (isOffsetMappingAvailable()) {
             return 3;
         }
-        PointF convertFromScreenToContentCoordinates = convertFromScreenToContentCoordinates(removeSpaceGesture.getStartPoint());
-        PointF convertFromScreenToContentCoordinates2 = convertFromScreenToContentCoordinates(removeSpaceGesture.getEndPoint());
-        int lineForHandwritingGesture = getLineForHandwritingGesture(convertFromScreenToContentCoordinates);
-        int lineForHandwritingGesture2 = getLineForHandwritingGesture(convertFromScreenToContentCoordinates2);
+        PointF pointFConvertFromScreenToContentCoordinates = convertFromScreenToContentCoordinates(removeSpaceGesture.getStartPoint());
+        PointF pointFConvertFromScreenToContentCoordinates2 = convertFromScreenToContentCoordinates(removeSpaceGesture.getEndPoint());
+        int lineForHandwritingGesture = getLineForHandwritingGesture(pointFConvertFromScreenToContentCoordinates);
+        int lineForHandwritingGesture2 = getLineForHandwritingGesture(pointFConvertFromScreenToContentCoordinates2);
         if (lineForHandwritingGesture != -1) {
             if (lineForHandwritingGesture2 != -1) {
                 lineForHandwritingGesture = Math.min(lineForHandwritingGesture, lineForHandwritingGesture2);
@@ -5940,29 +8178,29 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
             return handleGestureFailure(removeSpaceGesture);
         }
         float lineTop = (this.mLayout.getLineTop(lineForHandwritingGesture2) + this.mLayout.getLineBottom(lineForHandwritingGesture2, false)) / 2.0f;
-        int[] rangeForRect = this.mLayout.getRangeForRect(new RectF(Math.min(convertFromScreenToContentCoordinates.x, convertFromScreenToContentCoordinates2.x), lineTop + 0.1f, Math.max(convertFromScreenToContentCoordinates.x, convertFromScreenToContentCoordinates2.x), lineTop - 0.1f), new GraphemeClusterSegmentFinder(this.mText, this.mTextPaint), Layout.INCLUSION_STRATEGY_ANY_OVERLAP);
+        int[] rangeForRect = this.mLayout.getRangeForRect(new RectF(Math.min(pointFConvertFromScreenToContentCoordinates.x, pointFConvertFromScreenToContentCoordinates2.x), lineTop + 0.1f, Math.max(pointFConvertFromScreenToContentCoordinates.x, pointFConvertFromScreenToContentCoordinates2.x), lineTop - 0.1f), new GraphemeClusterSegmentFinder(this.mText, this.mTextPaint), Layout.INCLUSION_STRATEGY_ANY_OVERLAP);
         if (rangeForRect == null) {
             return handleGestureFailure(removeSpaceGesture);
         }
         int i = rangeForRect[0];
-        int i2 = rangeForRect[1];
+        int iEnd = rangeForRect[1];
         Pattern whitespacePattern = getWhitespacePattern();
-        Matcher matcher = whitespacePattern.matcher(this.mText.subSequence(i, i2));
-        int i3 = -1;
+        Matcher matcher = whitespacePattern.matcher(this.mText.subSequence(i, iEnd));
+        int iStart = -1;
         while (matcher.find()) {
-            i3 = matcher.start() + i;
-            getEditableText().delete(i3, i + matcher.end());
-            i2 -= matcher.end() - matcher.start();
-            if (i3 == i2) {
+            iStart = matcher.start() + i;
+            getEditableText().delete(iStart, i + matcher.end());
+            iEnd -= matcher.end() - matcher.start();
+            if (iStart == iEnd) {
                 break;
             }
-            matcher = whitespacePattern.matcher(this.mText.subSequence(i3, i2));
-            i = i3;
+            matcher = whitespacePattern.matcher(this.mText.subSequence(iStart, iEnd));
+            i = iStart;
         }
-        if (i3 == -1) {
+        if (iStart == -1) {
             return handleGestureFailure(removeSpaceGesture);
         }
-        Selection.setSelection(getEditableText(), i3);
+        Selection.setSelection(getEditableText(), iStart);
         return 1;
     }
 
@@ -5970,52 +8208,52 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         if (isOffsetMappingAvailable()) {
             return 3;
         }
-        PointF convertFromScreenToContentCoordinates = convertFromScreenToContentCoordinates(joinOrSplitGesture.getJoinOrSplitPoint());
-        int lineForHandwritingGesture = getLineForHandwritingGesture(convertFromScreenToContentCoordinates);
+        PointF pointFConvertFromScreenToContentCoordinates = convertFromScreenToContentCoordinates(joinOrSplitGesture.getJoinOrSplitPoint());
+        int lineForHandwritingGesture = getLineForHandwritingGesture(pointFConvertFromScreenToContentCoordinates);
         if (lineForHandwritingGesture == -1) {
             return handleGestureFailure(joinOrSplitGesture);
         }
-        int offsetForHorizontal = this.mLayout.getOffsetForHorizontal(lineForHandwritingGesture, convertFromScreenToContentCoordinates.x);
+        int offsetForHorizontal = this.mLayout.getOffsetForHorizontal(lineForHandwritingGesture, pointFConvertFromScreenToContentCoordinates.x);
         if (this.mLayout.isLevelBoundary(offsetForHorizontal)) {
             return handleGestureFailure(joinOrSplitGesture);
         }
-        int i = offsetForHorizontal;
-        while (i > 0) {
-            int codePointBefore = Character.codePointBefore(this.mText, i);
-            if (!TextUtils.isWhitespace(codePointBefore)) {
+        int iCharCount = offsetForHorizontal;
+        while (iCharCount > 0) {
+            int iCodePointBefore = Character.codePointBefore(this.mText, iCharCount);
+            if (!TextUtils.isWhitespace(iCodePointBefore)) {
                 break;
             }
-            i -= Character.charCount(codePointBefore);
+            iCharCount -= Character.charCount(iCodePointBefore);
         }
         while (offsetForHorizontal < this.mText.length()) {
-            int codePointAt = Character.codePointAt(this.mText, offsetForHorizontal);
-            if (!TextUtils.isWhitespace(codePointAt)) {
+            int iCodePointAt = Character.codePointAt(this.mText, offsetForHorizontal);
+            if (!TextUtils.isWhitespace(iCodePointAt)) {
                 break;
             }
-            offsetForHorizontal += Character.charCount(codePointAt);
+            offsetForHorizontal += Character.charCount(iCodePointAt);
         }
-        if (i < offsetForHorizontal) {
-            Selection.setSelection(getEditableText(), i);
-            getEditableText().delete(i, offsetForHorizontal);
+        if (iCharCount < offsetForHorizontal) {
+            Selection.setSelection(getEditableText(), iCharCount);
+            getEditableText().delete(iCharCount, offsetForHorizontal);
             return 1;
         }
-        return tryInsertTextForHandwritingGesture(i, " ", joinOrSplitGesture);
+        return tryInsertTextForHandwritingGesture(iCharCount, " ", joinOrSplitGesture);
     }
 
     public int performHandwritingInsertModeGesture(InsertModeGesture insertModeGesture) {
-        PointF convertFromScreenToContentCoordinates = convertFromScreenToContentCoordinates(insertModeGesture.getInsertionPoint());
-        int lineForHandwritingGesture = getLineForHandwritingGesture(convertFromScreenToContentCoordinates);
+        PointF pointFConvertFromScreenToContentCoordinates = convertFromScreenToContentCoordinates(insertModeGesture.getInsertionPoint());
+        int lineForHandwritingGesture = getLineForHandwritingGesture(pointFConvertFromScreenToContentCoordinates);
         CancellationSignal cancellationSignal = insertModeGesture.getCancellationSignal();
         if (lineForHandwritingGesture == -1 || cancellationSignal == null) {
             return handleGestureFailure(insertModeGesture);
         }
-        if (!this.mEditor.enterInsertMode(this.mLayout.getOffsetForHorizontal(lineForHandwritingGesture, convertFromScreenToContentCoordinates.x))) {
+        if (!this.mEditor.enterInsertMode(this.mLayout.getOffsetForHorizontal(lineForHandwritingGesture, pointFConvertFromScreenToContentCoordinates.x))) {
             return 3;
         }
         cancellationSignal.setOnCancelListener(new CancellationSignal.OnCancelListener() { // from class: android.widget.TextView$$ExternalSyntheticLambda5
             @Override // android.os.CancellationSignal.OnCancelListener
             public final void onCancel() {
-                TextView.this.lambda$performHandwritingInsertModeGesture$4();
+                this.f$0.lambda$performHandwritingInsertModeGesture$4();
             }
         });
         return 1;
@@ -6039,86 +8277,19 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         return 5;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:18:0x0061, code lost:
-    
-        if (r8.y <= (r7.mLayout.getLineBottom(r0, false) + r1)) goto L14;
-     */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    private int getLineForHandwritingGesture(android.graphics.PointF r8) {
-        /*
-            r7 = this;
-            android.text.Layout r0 = r7.mLayout
-            float r1 = r8.y
-            int r1 = (int) r1
-            int r0 = r0.getLineForVertical(r1)
-            android.content.Context r1 = r7.mContext
-            android.view.ViewConfiguration r1 = android.view.ViewConfiguration.get(r1)
-            int r1 = r1.getScaledHandwritingGestureLineMargin()
-            android.text.Layout r2 = r7.mLayout
-            int r2 = r2.getLineCount()
-            int r2 = r2 + (-1)
-            r3 = 0
-            r4 = -1
-            if (r0 >= r2) goto L47
-            float r2 = r8.y
-            android.text.Layout r5 = r7.mLayout
-            int r5 = r5.getLineBottom(r0)
-            int r5 = r5 - r1
-            float r5 = (float) r5
-            int r2 = (r2 > r5 ? 1 : (r2 == r5 ? 0 : -1))
-            if (r2 <= 0) goto L47
-            float r2 = r8.y
-            android.text.Layout r5 = r7.mLayout
-            int r5 = r5.getLineBottom(r0, r3)
-            android.text.Layout r6 = r7.mLayout
-            int r6 = r6.getLineBottom(r0)
-            int r5 = r5 + r6
-            float r5 = (float) r5
-            r6 = 1073741824(0x40000000, float:2.0)
-            float r5 = r5 / r6
-            int r2 = (r2 > r5 ? 1 : (r2 == r5 ? 0 : -1))
-            if (r2 <= 0) goto L47
-            int r0 = r0 + 1
-            goto L64
-        L47:
-            float r2 = r8.y
-            android.text.Layout r5 = r7.mLayout
-            int r5 = r5.getLineTop(r0)
-            int r5 = r5 - r1
-            float r5 = (float) r5
-            int r2 = (r2 > r5 ? 1 : (r2 == r5 ? 0 : -1))
-            if (r2 < 0) goto L7c
-            float r2 = r8.y
-            android.text.Layout r5 = r7.mLayout
-            int r3 = r5.getLineBottom(r0, r3)
-            int r3 = r3 + r1
-            float r3 = (float) r3
-            int r2 = (r2 > r3 ? 1 : (r2 == r3 ? 0 : -1))
-            if (r2 <= 0) goto L64
-            goto L7c
-        L64:
-            float r2 = r8.x
-            int r3 = -r1
-            float r3 = (float) r3
-            int r2 = (r2 > r3 ? 1 : (r2 == r3 ? 0 : -1))
-            if (r2 < 0) goto L7c
-            float r8 = r8.x
-            android.text.Layout r7 = r7.mLayout
-            int r7 = r7.getWidth()
-            int r7 = r7 + r1
-            float r7 = (float) r7
-            int r7 = (r8 > r7 ? 1 : (r8 == r7 ? 0 : -1))
-            if (r7 <= 0) goto L7b
-            goto L7c
-        L7b:
-            return r0
-        L7c:
-            return r4
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.TextView.getLineForHandwritingGesture(android.graphics.PointF):int");
+    private int getLineForHandwritingGesture(PointF pointF) {
+        int lineForVertical = this.mLayout.getLineForVertical((int) pointF.y);
+        int scaledHandwritingGestureLineMargin = ViewConfiguration.get(this.mContext).getScaledHandwritingGestureLineMargin();
+        if (lineForVertical >= this.mLayout.getLineCount() - 1 || pointF.y <= this.mLayout.getLineBottom(lineForVertical) - scaledHandwritingGestureLineMargin || pointF.y <= (this.mLayout.getLineBottom(lineForVertical, false) + this.mLayout.getLineBottom(lineForVertical)) / 2.0f) {
+            if (pointF.y >= this.mLayout.getLineTop(lineForVertical) - scaledHandwritingGestureLineMargin && pointF.y <= this.mLayout.getLineBottom(lineForVertical, false) + scaledHandwritingGestureLineMargin) {
+            }
+            return -1;
+        }
+        lineForVertical++;
+        if (pointF.x < (-scaledHandwritingGestureLineMargin) || pointF.x > this.mLayout.getWidth() + scaledHandwritingGestureLineMargin) {
+            return -1;
+        }
+        return lineForVertical;
     }
 
     private int[] getRangeForRect(RectF rectF, int i) {
@@ -6280,12 +8451,12 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         if (charSequence != null) {
             int i9 = z5 ? i7 : i8;
             if (metrics2 == UNKNOWN_BORING) {
-                BoringLayout.Metrics isBoring = BoringLayout.isBoring(charSequence, this.mTextPaint, textDirectionHeuristic3, isFallbackLineSpacingForBoringLayout(), getResolvedMinimumFontMetrics(), this.mHintBoring);
+                BoringLayout.Metrics metricsIsBoring = BoringLayout.isBoring(charSequence, this.mTextPaint, textDirectionHeuristic3, isFallbackLineSpacingForBoringLayout(), getResolvedMinimumFontMetrics(), this.mHintBoring);
                 textDirectionHeuristic = textDirectionHeuristic3;
-                if (isBoring != null) {
-                    this.mHintBoring = isBoring;
+                if (metricsIsBoring != null) {
+                    this.mHintBoring = metricsIsBoring;
                 }
-                metrics3 = isBoring;
+                metrics3 = metricsIsBoring;
             } else {
                 textDirectionHeuristic = textDirectionHeuristic3;
                 metrics3 = metrics2;
@@ -6318,10 +8489,10 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
                             i5 = paragraphDirection;
                             textDirectionHeuristic2 = textDirectionHeuristic;
                             i9 = i6;
-                            BoringLayout make = BoringLayout.make(textView.mHint, textView.mTextPaint, i9, layoutAlignment, textView.mSpacingMult, textView.mSpacingAdd, metrics3, textView.mIncludePad, textView.mEllipsize, i3);
+                            BoringLayout boringLayoutMake = BoringLayout.make(textView.mHint, textView.mTextPaint, i9, layoutAlignment, textView.mSpacingMult, textView.mSpacingAdd, metrics3, textView.mIncludePad, textView.mEllipsize, i3);
                             layoutAlignment = layoutAlignment;
                             i4 = i3;
-                            textView.mHintLayout = make;
+                            textView.mHintLayout = boringLayoutMake;
                         }
                     }
                 }
@@ -6370,18 +8541,87 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         return this.mSpannable != null && this.mPrecomputed == null;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x015d  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x01d1 A[RETURN] */
+    /* JADX WARN: Removed duplicated region for block: B:46:0x015d  */
+    /* JADX WARN: Removed duplicated region for block: B:55:0x01d1 A[RETURN] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    protected android.text.Layout makeSingleLayout(int r17, android.text.BoringLayout.Metrics r18, int r19, android.text.Layout.Alignment r20, boolean r21, android.text.TextUtils.TruncateAt r22, boolean r23) {
-        /*
-            Method dump skipped, instructions count: 466
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.TextView.makeSingleLayout(int, android.text.BoringLayout$Metrics, int, android.text.Layout$Alignment, boolean, android.text.TextUtils$TruncateAt, boolean):android.text.Layout");
+    protected Layout makeSingleLayout(int i, BoringLayout.Metrics metrics, int i2, Layout.Alignment alignment, boolean z, TextUtils.TruncateAt truncateAt, boolean z2) {
+        BoringLayout.Metrics metrics2;
+        int i3;
+        TextUtils.TruncateAt truncateAt2;
+        BoringLayout boringLayout;
+        BoringLayout boringLayout2;
+        BoringLayout boringLayout3;
+        int i4 = i;
+        Layout.Alignment alignment2 = alignment;
+        CharSequence charSequence = this.mTransformed;
+        if (ViewRune.WIDGET_PEN_SUPPORTED && this.mUseDisplayText) {
+            charSequence = this.mDisplayText;
+        }
+        CharSequence charSequence2 = charSequence;
+        Layout boringLayout4 = null;
+        boringLayout4 = null;
+        boringLayout4 = null;
+        if (useDynamicLayout()) {
+            boringLayout4 = DynamicLayout.Builder.obtain(this.mText, this.mTextPaint, i4).setDisplayText(charSequence2).setAlignment(alignment2).setTextDirection(this.mTextDir).setLineSpacing(this.mSpacingAdd, this.mSpacingMult).setIncludePad(this.mIncludePad).setUseLineSpacingFromFallbacks(isFallbackLineSpacingForStaticLayout()).setBreakStrategy(this.mBreakStrategy).setHyphenationFrequency(this.mHyphenationFrequency).setJustificationMode(this.mJustificationMode).setLineBreakConfig(LineBreakConfig.getLineBreakConfig(this.mLineBreakStyle, this.mLineBreakWordStyle)).setUseBoundsForWidth(this.mUseBoundsForWidth).setEllipsize(getKeyListener() == null ? truncateAt : null).setEllipsizedWidth(i2).setMinimumFontMetrics(getResolvedMinimumFontMetrics()).build();
+        } else {
+            if (metrics == UNKNOWN_BORING) {
+                BoringLayout.Metrics metricsIsBoring = BoringLayout.isBoring(charSequence2, this.mTextPaint, this.mTextDir, isFallbackLineSpacingForBoringLayout(), getResolvedMinimumFontMetrics(), this.mBoring);
+                if (metricsIsBoring != null) {
+                    this.mBoring = metricsIsBoring;
+                }
+                metrics2 = metricsIsBoring;
+            } else {
+                metrics2 = metrics;
+            }
+            if (metrics2 != null) {
+                if (metrics2.width > i4 || (truncateAt != null && metrics2.width > i2)) {
+                    if (z && metrics2.width <= i4) {
+                        if (z2 && (boringLayout = this.mSavedLayout) != null) {
+                            alignment2 = alignment;
+                            boringLayout4 = boringLayout.replaceOrMake(charSequence2, this.mTextPaint, i4, alignment2, this.mSpacingMult, this.mSpacingAdd, metrics2, this.mIncludePad, truncateAt, i2, isFallbackLineSpacingForBoringLayout(), this.mUseBoundsForWidth, getResolvedMinimumFontMetrics());
+                            i4 = i;
+                            i3 = i2;
+                        } else {
+                            i4 = i;
+                            i3 = i2;
+                            alignment2 = alignment;
+                            truncateAt2 = truncateAt;
+                            boringLayout4 = new BoringLayout(charSequence2, this.mTextPaint, i4, alignment2, this.mSpacingMult, this.mSpacingAdd, this.mIncludePad, isFallbackLineSpacingForBoringLayout(), i3, truncateAt2, metrics2, this.mUseBoundsForWidth, this.mShiftDrawingOffsetForStartOverhang, getResolvedMinimumFontMetrics());
+                        }
+                    }
+                    truncateAt2 = truncateAt;
+                } else {
+                    if (z2 && (boringLayout3 = this.mSavedLayout) != null) {
+                        boringLayout2 = boringLayout3.replaceOrMake(charSequence2, this.mTextPaint, i4, alignment2, this.mSpacingMult, this.mSpacingAdd, metrics2, this.mIncludePad, null, i, isFallbackLineSpacingForBoringLayout(), this.mUseBoundsForWidth, getResolvedMinimumFontMetrics());
+                        i4 = i;
+                    } else {
+                        i4 = i;
+                        boringLayout2 = new BoringLayout(charSequence2, this.mTextPaint, i4, alignment, this.mSpacingMult, this.mSpacingAdd, this.mIncludePad, isFallbackLineSpacingForBoringLayout(), i, null, metrics2, this.mUseBoundsForWidth, this.mShiftDrawingOffsetForStartOverhang, getResolvedMinimumFontMetrics());
+                    }
+                    boringLayout4 = boringLayout2;
+                    if (z2) {
+                        this.mSavedLayout = (BoringLayout) boringLayout4;
+                    }
+                }
+                i3 = i2;
+                alignment2 = alignment;
+                truncateAt2 = truncateAt;
+            }
+            if (boringLayout4 == null) {
+                return boringLayout4;
+            }
+            StaticLayout.Builder minimumFontMetrics = StaticLayout.Builder.obtain(charSequence2, 0, charSequence2.length(), this.mTextPaint, i4).setAlignment(alignment2).setTextDirection(this.mTextDir).setLineSpacing(this.mSpacingAdd, this.mSpacingMult).setIncludePad(this.mIncludePad).setUseLineSpacingFromFallbacks(isFallbackLineSpacingForStaticLayout()).setBreakStrategy(this.mBreakStrategy).setHyphenationFrequency(this.mHyphenationFrequency).setJustificationMode(this.mJustificationMode).setMaxLines(this.mMaxMode == 1 ? this.mMaximum : Integer.MAX_VALUE).setLineBreakConfig(LineBreakConfig.getLineBreakConfig(this.mLineBreakStyle, this.mLineBreakWordStyle)).setUseBoundsForWidth(this.mUseBoundsForWidth).setMinimumFontMetrics(getResolvedMinimumFontMetrics());
+            if (z) {
+                minimumFontMetrics.setEllipsize(truncateAt2).setEllipsizedWidth(i3);
+            }
+            return minimumFontMetrics.build();
+        }
+        truncateAt2 = truncateAt;
+        i3 = i2;
+        if (boringLayout4 == null) {
+        }
     }
 
     private boolean compressText(float f) {
@@ -6409,14 +8649,14 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
                 return -1;
             }
         }
-        float f = 0.0f;
+        float fMax = 0.0f;
         for (int i2 = 0; i2 < lineCount; i2++) {
-            f = Math.max(f, layout.getLineMax(i2));
+            fMax = Math.max(fMax, layout.getLineMax(i2));
         }
         if (z) {
-            f = Math.max(f, layout.computeDrawingBoundingBox().width());
+            fMax = Math.max(fMax, layout.computeDrawingBoundingBox().width());
         }
-        return (int) Math.ceil(f);
+        return (int) Math.ceil(fMax);
     }
 
     public void setIncludeFontPadding(boolean z) {
@@ -6434,21 +8674,256 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         return this.mIncludePad;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:21:0x025c  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x0292  */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x02ea  */
-    /* JADX WARN: Removed duplicated region for block: B:64:0x025f  */
+    /* JADX WARN: Removed duplicated region for block: B:129:0x025c  */
+    /* JADX WARN: Removed duplicated region for block: B:130:0x025f  */
+    /* JADX WARN: Removed duplicated region for block: B:140:0x0292  */
+    /* JADX WARN: Removed duplicated region for block: B:151:0x02bf  */
+    /* JADX WARN: Removed duplicated region for block: B:161:0x02ea  */
     @Override // android.view.View
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    protected void onMeasure(int r27, int r28) {
-        /*
-            Method dump skipped, instructions count: 786
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.TextView.onMeasure(int, int):void");
+    protected void onMeasure(int i, int i2) {
+        BoringLayout.Metrics metricsIsBoring;
+        boolean z;
+        int i3;
+        int iMax;
+        int i4;
+        int iMin;
+        int iMax2;
+        BoringLayout.Metrics metrics;
+        int iMin2;
+        int i5;
+        BoringLayout.Metrics metricsIsBoring2;
+        int i6;
+        int i7;
+        int i8;
+        int i9;
+        int i10;
+        int i11;
+        CharSequence textForMultiSelection;
+        int multiSelectionCount;
+        int i12;
+        int i13;
+        int mode = View.MeasureSpec.getMode(i);
+        int mode2 = View.MeasureSpec.getMode(i2);
+        int size = View.MeasureSpec.getSize(i);
+        int size2 = View.MeasureSpec.getSize(i2);
+        BoringLayout.Metrics metrics2 = UNKNOWN_BORING;
+        if (this.mTextDir == null) {
+            this.mTextDir = getTextDirectionHeuristic();
+        }
+        float f = mode == Integer.MIN_VALUE ? size : Float.MAX_VALUE;
+        if (mode == 1073741824) {
+            metrics = metrics2;
+            i3 = 1;
+            i5 = -1;
+            z = false;
+            iMin2 = size;
+        } else {
+            Layout layout = this.mLayout;
+            int iDesired = (layout == null || this.mEllipsize != null) ? -1 : desired(layout, this.mUseBoundsForWidth);
+            if (iDesired < 0) {
+                metricsIsBoring = BoringLayout.isBoring(this.mTransformed, this.mTextPaint, this.mTextDir, isFallbackLineSpacingForBoringLayout(), getResolvedMinimumFontMetrics(), this.mBoring);
+                if (metricsIsBoring != null) {
+                    this.mBoring = metricsIsBoring;
+                }
+                z = false;
+            } else {
+                metricsIsBoring = metrics2;
+                z = true;
+            }
+            if (metricsIsBoring == null || metricsIsBoring == metrics2) {
+                if (iDesired < 0) {
+                    CharSequence charSequence = this.mTransformed;
+                    i3 = 1;
+                    iDesired = (int) Math.ceil(Layout.getDesiredWidthWithLimit(charSequence, 0, charSequence.length(), this.mTextPaint, this.mTextDir, f, this.mUseBoundsForWidth));
+                } else {
+                    i3 = 1;
+                }
+                iMax = iDesired;
+                i4 = iMax;
+            } else {
+                if (this.mUseBoundsForWidth) {
+                    RectF drawingBoundingBox = metricsIsBoring.getDrawingBoundingBox();
+                    iMax = Math.max(metricsIsBoring.width, (int) Math.ceil(Math.max(drawingBoundingBox.right, metricsIsBoring.width) - Math.min(drawingBoundingBox.left, 0.0f)));
+                } else {
+                    iMax = metricsIsBoring.width;
+                }
+                i3 = 1;
+                i4 = iDesired;
+            }
+            if (CoreRune.GRAPHICS_RENDERER_HCF && isHighContrastTextEnabled()) {
+                iMax += (int) Math.ceil(this.mTextPaint.getHCTStrokeWidth());
+            }
+            Drawables drawables = this.mDrawables;
+            if (drawables != null) {
+                iMax = Math.max(Math.max(iMax, drawables.mDrawableWidthTop), drawables.mDrawableWidthBottom);
+            }
+            if (this.mHint != null) {
+                Layout layout2 = this.mHintLayout;
+                int iDesired2 = (layout2 == null || this.mEllipsize != null) ? -1 : desired(layout2, this.mUseBoundsForWidth);
+                if (iDesired2 < 0) {
+                    metricsIsBoring2 = BoringLayout.isBoring(this.mHint, this.mTextPaint, this.mTextDir, isFallbackLineSpacingForBoringLayout(), getResolvedMinimumFontMetrics(), this.mHintBoring);
+                    if (metricsIsBoring2 != null) {
+                        this.mHintBoring = metricsIsBoring2;
+                    }
+                } else {
+                    metricsIsBoring2 = metrics2;
+                }
+                if (metricsIsBoring2 == null || metricsIsBoring2 == metrics2) {
+                    if (iDesired2 < 0) {
+                        CharSequence charSequence2 = this.mHint;
+                        i6 = iMax;
+                        iDesired2 = (int) Math.ceil(Layout.getDesiredWidthWithLimit(charSequence2, 0, charSequence2.length(), this.mTextPaint, this.mTextDir, f, this.mUseBoundsForWidth));
+                    } else {
+                        i6 = iMax;
+                    }
+                    iMax = iDesired2;
+                } else {
+                    int i14 = iMax;
+                    iMax = metricsIsBoring2.width;
+                    i6 = i14;
+                }
+                if (iMax <= i6) {
+                    iMax = i6;
+                }
+                metrics2 = metricsIsBoring2;
+            }
+            int compoundPaddingLeft = iMax + getCompoundPaddingLeft() + getCompoundPaddingRight();
+            if (this.mMaxWidthMode == i3) {
+                iMin = Math.min(compoundPaddingLeft, this.mMaxWidth * getLineHeight());
+            } else {
+                iMin = Math.min(compoundPaddingLeft, this.mMaxWidth);
+            }
+            if (this.mMinWidthMode == i3) {
+                iMax2 = Math.max(iMin, this.mMinWidth * getLineHeight());
+            } else {
+                iMax2 = Math.max(iMin, this.mMinWidth);
+            }
+            int iMax3 = Math.max(iMax2, getSuggestedMinimumWidth());
+            if (mode == Integer.MIN_VALUE) {
+                BoringLayout.Metrics metrics3 = metricsIsBoring;
+                metrics = metrics2;
+                metrics2 = metrics3;
+                iMin2 = Math.min(size, iMax3);
+            } else {
+                BoringLayout.Metrics metrics4 = metricsIsBoring;
+                metrics = metrics2;
+                metrics2 = metrics4;
+                iMin2 = iMax3;
+            }
+            i5 = i4;
+        }
+        int compoundPaddingLeft2 = (iMin2 - getCompoundPaddingLeft()) - getCompoundPaddingRight();
+        int i15 = this.mHorizontallyScrolling ? 1048576 : compoundPaddingLeft2;
+        Layout layout3 = this.mHintLayout;
+        int width = layout3 == null ? i15 : layout3.getWidth();
+        Layout layout4 = this.mLayout;
+        if (layout4 == null) {
+            i7 = i3;
+            i8 = 0;
+            i9 = 1073741824;
+            i10 = -1;
+            makeNewLayout(i15, i15, metrics2, metrics, (iMin2 - getCompoundPaddingLeft()) - getCompoundPaddingRight(), false);
+        } else {
+            i7 = i3;
+            i8 = 0;
+            i9 = 1073741824;
+            i10 = -1;
+            int i16 = (layout4.getWidth() == i15 && width == i15 && this.mLayout.getEllipsizedWidth() == (iMin2 - getCompoundPaddingLeft()) - getCompoundPaddingRight()) ? 0 : i7;
+            int i17 = (this.mHint != null || this.mEllipsize != null || i15 <= this.mLayout.getWidth() || (!(this.mLayout instanceof BoringLayout) && (!z || i5 < 0 || i5 > i15))) ? 0 : i7;
+            int i18 = (this.mMaxMode == this.mOldMaxMode && this.mMaximum == this.mOldMaximum) ? 0 : i7;
+            if (i16 != 0 || i18 != 0) {
+                if (i18 == 0 && i17 != 0) {
+                    this.mLayout.increaseWidthTo(i15);
+                } else {
+                    i11 = i7;
+                    makeNewLayout(i15, i15, metrics2, metrics, (iMin2 - getCompoundPaddingLeft()) - getCompoundPaddingRight(), false);
+                }
+            }
+            if (mode2 != i9) {
+                this.mDesiredHeightAtMeasure = i10;
+            } else {
+                int desiredHeight = getDesiredHeight();
+                this.mDesiredHeightAtMeasure = desiredHeight;
+                if (mode2 == Integer.MIN_VALUE) {
+                    desiredHeight = Math.min(desiredHeight, size2);
+                }
+                size2 = desiredHeight;
+                if (CoreRune.GRAPHICS_RENDERER_HCF && isHighContrastTextEnabled()) {
+                    size2 += (int) Math.ceil(this.mTextPaint.getHCTStrokeWidth());
+                }
+            }
+            int compoundPaddingTop = (size2 - getCompoundPaddingTop()) - getCompoundPaddingBottom();
+            if (this.mMaxMode == i11) {
+                int lineCount = this.mLayout.getLineCount();
+                int i19 = this.mMaximum;
+                if (lineCount > i19) {
+                    compoundPaddingTop = Math.min(compoundPaddingTop, this.mLayout.getLineTop(i19));
+                }
+            }
+            if (this.mMovement == null || this.mLayout.getWidth() > compoundPaddingLeft2 || this.mLayout.getHeight() > compoundPaddingTop) {
+                registerForPreDraw();
+            } else {
+                scrollTo(i8, i8);
+            }
+            if (ViewRune.WIDGET_PEN_SUPPORTED && this.mhasMultiSelection) {
+                textForMultiSelection = getTextForMultiSelection();
+                int[] iArr = new int[2];
+                boolean visibleTextRange = getVisibleTextRange(iArr);
+                if (textForMultiSelection != null && visibleTextRange) {
+                    Spannable spannable = (Spannable) textForMultiSelection;
+                    int[] multiSelectionStart = MultiSelection.getMultiSelectionStart(spannable);
+                    int[] multiSelectionEnd = MultiSelection.getMultiSelectionEnd(spannable);
+                    multiSelectionCount = MultiSelection.getMultiSelectionCount(spannable);
+                    for (i12 = i8; i12 < multiSelectionCount; i12++) {
+                        int i20 = multiSelectionStart[i12];
+                        int i21 = multiSelectionEnd[i12];
+                        int i22 = iArr[i8];
+                        if (i20 < i22) {
+                            i13 = i22;
+                        } else {
+                            i13 = iArr[i11];
+                            if (i20 <= i13) {
+                                i13 = i20;
+                            }
+                        }
+                        if (i21 >= i22 && i21 <= (i22 = iArr[i11])) {
+                            i22 = i21;
+                        }
+                        if (i20 != i13 || i21 != i22) {
+                            clearMultiSelection();
+                            break;
+                        }
+                    }
+                }
+            }
+            setMeasuredDimension(iMin2, size2);
+        }
+        i11 = i7;
+        if (mode2 != i9) {
+        }
+        int compoundPaddingTop2 = (size2 - getCompoundPaddingTop()) - getCompoundPaddingBottom();
+        if (this.mMaxMode == i11) {
+        }
+        if (this.mMovement == null) {
+            registerForPreDraw();
+        }
+        if (ViewRune.WIDGET_PEN_SUPPORTED) {
+            textForMultiSelection = getTextForMultiSelection();
+            int[] iArr2 = new int[2];
+            boolean visibleTextRange2 = getVisibleTextRange(iArr2);
+            if (textForMultiSelection != null) {
+                Spannable spannable2 = (Spannable) textForMultiSelection;
+                int[] multiSelectionStart2 = MultiSelection.getMultiSelectionStart(spannable2);
+                int[] multiSelectionEnd2 = MultiSelection.getMultiSelectionEnd(spannable2);
+                multiSelectionCount = MultiSelection.getMultiSelectionCount(spannable2);
+                while (i12 < multiSelectionCount) {
+                }
+            }
+        }
+        setMeasuredDimension(iMin2, size2);
     }
 
     private void autoSizeText() {
@@ -6470,9 +8945,9 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
                     rectF.setEmpty();
                     rectF.right = measuredWidth;
                     rectF.bottom = measuredHeight;
-                    float findLargestTextSizeWhichFits = findLargestTextSizeWhichFits(rectF);
-                    if (findLargestTextSizeWhichFits != getTextSize()) {
-                        setTextSizeInternal(0, findLargestTextSizeWhichFits, false);
+                    float fFindLargestTextSizeWhichFits = findLargestTextSizeWhichFits(rectF);
+                    if (fFindLargestTextSizeWhichFits != getTextSize()) {
+                        setTextSizeInternal(0, fFindLargestTextSizeWhichFits, false);
                         BoringLayout.Metrics metrics = UNKNOWN_BORING;
                         textView = this;
                         textView.makeNewLayout(measuredWidth, 0, metrics, metrics, ((this.mRight - this.mLeft) - getCompoundPaddingLeft()) - getCompoundPaddingRight(), false);
@@ -6508,9 +8983,9 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     private boolean suggestedSizeFitsInSpace(int i, RectF rectF) {
-        CharSequence charSequence = this.mTransformed;
-        if (charSequence == null) {
-            charSequence = getText();
+        CharSequence text = this.mTransformed;
+        if (text == null) {
+            text = getText();
         }
         int maxLines = getMaxLines();
         TextPaint textPaint = this.mTempTextPaint;
@@ -6521,10 +8996,10 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         }
         this.mTempTextPaint.set(getPaint());
         this.mTempTextPaint.setTextSize(i);
-        StaticLayout.Builder obtain = StaticLayout.Builder.obtain(charSequence, 0, charSequence.length(), this.mTempTextPaint, Math.round(rectF.right));
-        obtain.setAlignment(getLayoutAlignment()).setLineSpacing(getLineSpacingExtra(), getLineSpacingMultiplier()).setIncludePad(getIncludeFontPadding()).setUseLineSpacingFromFallbacks(isFallbackLineSpacingForStaticLayout()).setBreakStrategy(getBreakStrategy()).setHyphenationFrequency(getHyphenationFrequency()).setJustificationMode(getJustificationMode()).setMaxLines(this.mMaxMode == 1 ? this.mMaximum : Integer.MAX_VALUE).setTextDirection(getTextDirectionHeuristic()).setLineBreakConfig(LineBreakConfig.getLineBreakConfig(this.mLineBreakStyle, this.mLineBreakWordStyle)).setUseBoundsForWidth(this.mUseBoundsForWidth).setMinimumFontMetrics(getResolvedMinimumFontMetrics());
-        StaticLayout build = obtain.build();
-        return (maxLines == -1 || build.getLineCount() <= maxLines) && ((float) build.getHeight()) <= rectF.bottom;
+        StaticLayout.Builder builderObtain = StaticLayout.Builder.obtain(text, 0, text.length(), this.mTempTextPaint, Math.round(rectF.right));
+        builderObtain.setAlignment(getLayoutAlignment()).setLineSpacing(getLineSpacingExtra(), getLineSpacingMultiplier()).setIncludePad(getIncludeFontPadding()).setUseLineSpacingFromFallbacks(isFallbackLineSpacingForStaticLayout()).setBreakStrategy(getBreakStrategy()).setHyphenationFrequency(getHyphenationFrequency()).setJustificationMode(getJustificationMode()).setMaxLines(this.mMaxMode == 1 ? this.mMaximum : Integer.MAX_VALUE).setTextDirection(getTextDirectionHeuristic()).setLineBreakConfig(LineBreakConfig.getLineBreakConfig(this.mLineBreakStyle, this.mLineBreakWordStyle)).setUseBoundsForWidth(this.mUseBoundsForWidth).setMinimumFontMetrics(getResolvedMinimumFontMetrics());
+        StaticLayout staticLayoutBuild = builderObtain.build();
+        return (maxLines == -1 || staticLayoutBuild.getLineCount() <= maxLines) && ((float) staticLayoutBuild.getHeight()) <= rectF.bottom;
     }
 
     private int getDesiredHeight() {
@@ -6543,94 +9018,52 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         }
         int lineCount = layout.getLineCount();
         int compoundPaddingTop = getCompoundPaddingTop() + getCompoundPaddingBottom();
-        int i2 = height + compoundPaddingTop;
+        int iMax = height + compoundPaddingTop;
         if (this.mMaxMode != 1) {
-            i2 = Math.min(i2, this.mMaximum);
+            iMax = Math.min(iMax, this.mMaximum);
         } else if (z && lineCount > (i = this.mMaximum) && ((layout instanceof DynamicLayout) || (layout instanceof BoringLayout))) {
             int lineTop = layout.getLineTop(i);
             if (drawables != null) {
                 lineTop = Math.max(Math.max(lineTop, drawables.mDrawableHeightLeft), drawables.mDrawableHeightRight);
             }
-            i2 = lineTop + compoundPaddingTop;
+            iMax = lineTop + compoundPaddingTop;
             lineCount = this.mMaximum;
         }
         if (this.mMinMode == 1) {
             if (lineCount < this.mMinimum) {
-                i2 += getLineHeight() * (this.mMinimum - lineCount);
+                iMax += getLineHeight() * (this.mMinimum - lineCount);
             }
         } else {
-            i2 = Math.max(i2, this.mMinimum);
+            iMax = Math.max(iMax, this.mMinimum);
         }
-        return Math.max(i2, getSuggestedMinimumHeight());
+        return Math.max(iMax, getSuggestedMinimumHeight());
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:14:0x0036, code lost:
-    
-        if (r0 != getHeight()) goto L23;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:15:0x004c, code lost:
-    
-        r1 = true;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:21:0x004a, code lost:
-    
-        if (getDesiredHeight() != r6.mDesiredHeightAtMeasure) goto L23;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:23:0x004c  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     private void checkForResize() {
-        /*
-            r6 = this;
-            android.text.Layout r0 = r6.mLayout
-            r1 = 0
-            if (r0 == 0) goto L4d
-            android.view.ViewGroup$LayoutParams r0 = r6.mLayoutParams
-            int r0 = r0.width
-            r2 = -2
-            r3 = 1
-            if (r0 != r2) goto L11
-            r6.invalidate()
-            r1 = r3
-        L11:
-            android.view.ViewGroup$LayoutParams r0 = r6.mLayoutParams
-            int r0 = r0.height
-            if (r0 != r2) goto L39
-            int r0 = r6.getDesiredHeight()
-            boolean r2 = com.samsung.android.rune.CoreRune.GRAPHICS_RENDERER_HCF
-            if (r2 == 0) goto L32
-            boolean r2 = r6.isHighContrastTextEnabled()
-            if (r2 == 0) goto L32
-            android.text.TextPaint r2 = r6.mTextPaint
-            float r2 = r2.getHCTStrokeWidth()
-            double r4 = (double) r2
-            double r4 = java.lang.Math.ceil(r4)
-            int r2 = (int) r4
-            int r0 = r0 + r2
-        L32:
-            int r2 = r6.getHeight()
-            if (r0 == r2) goto L4d
-            goto L4c
-        L39:
-            android.view.ViewGroup$LayoutParams r0 = r6.mLayoutParams
-            int r0 = r0.height
-            r2 = -1
-            if (r0 != r2) goto L4d
-            int r0 = r6.mDesiredHeightAtMeasure
-            if (r0 < 0) goto L4d
-            int r0 = r6.getDesiredHeight()
-            int r2 = r6.mDesiredHeightAtMeasure
-            if (r0 == r2) goto L4d
-        L4c:
-            r1 = r3
-        L4d:
-            if (r1 == 0) goto L52
-            r6.requestLayout()
-        L52:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.TextView.checkForResize():void");
+        boolean z = false;
+        if (this.mLayout != null) {
+            if (this.mLayoutParams.width == -2) {
+                invalidate();
+                z = true;
+            }
+            if (this.mLayoutParams.height == -2) {
+                int desiredHeight = getDesiredHeight();
+                if (CoreRune.GRAPHICS_RENDERER_HCF && isHighContrastTextEnabled()) {
+                    desiredHeight += (int) Math.ceil(this.mTextPaint.getHCTStrokeWidth());
+                }
+                if (desiredHeight != getHeight()) {
+                    z = true;
+                }
+            } else if (this.mLayoutParams.height == -1 && this.mDesiredHeightAtMeasure >= 0 && getDesiredHeight() != this.mDesiredHeightAtMeasure) {
+            }
+        }
+        if (z) {
+            requestLayout();
+        }
     }
 
     private void checkForRelayout() {
@@ -6677,147 +9110,187 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         return (!TextUtils.isEmpty(this.mText) || TextUtils.isEmpty(this.mHint) || this.mHideHint) ? false : true;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:30:0x007f, code lost:
-    
-        if (r6 < 0) goto L30;
-     */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
     private boolean bringTextIntoView() {
-        /*
-            r12 = this;
-            boolean r0 = r12.isShowingHint()
-            if (r0 == 0) goto L9
-            android.text.Layout r0 = r12.mHintLayout
-            goto Lb
-        L9:
-            android.text.Layout r0 = r12.mLayout
-        Lb:
-            int r1 = r12.mGravity
-            r1 = r1 & 112(0x70, float:1.57E-43)
-            r2 = 80
-            r3 = 1
-            r4 = 0
-            if (r1 != r2) goto L1b
-            int r1 = r0.getLineCount()
-            int r1 = r1 - r3
-            goto L1c
-        L1b:
-            r1 = r4
-        L1c:
-            android.text.Layout$Alignment r5 = r0.getParagraphAlignment(r1)
-            int r6 = r0.getParagraphDirection(r1)
-            int r7 = r12.mRight
-            int r8 = r12.mLeft
-            int r7 = r7 - r8
-            int r8 = r12.getCompoundPaddingLeft()
-            int r7 = r7 - r8
-            int r8 = r12.getCompoundPaddingRight()
-            int r7 = r7 - r8
-            int r8 = r12.mBottom
-            int r9 = r12.mTop
-            int r8 = r8 - r9
-            int r9 = r12.getExtendedPaddingTop()
-            int r8 = r8 - r9
-            int r9 = r12.getExtendedPaddingBottom()
-            int r8 = r8 - r9
-            int r9 = r0.getHeight()
-            android.text.Layout$Alignment r10 = android.text.Layout.Alignment.ALIGN_NORMAL
-            if (r5 != r10) goto L52
-            if (r6 != r3) goto L4f
-            android.text.Layout$Alignment r5 = android.text.Layout.Alignment.ALIGN_LEFT
-            goto L5d
-        L4f:
-            android.text.Layout$Alignment r5 = android.text.Layout.Alignment.ALIGN_RIGHT
-            goto L5d
-        L52:
-            android.text.Layout$Alignment r10 = android.text.Layout.Alignment.ALIGN_OPPOSITE
-            if (r5 != r10) goto L5d
-            if (r6 != r3) goto L5b
-            android.text.Layout$Alignment r5 = android.text.Layout.Alignment.ALIGN_RIGHT
-            goto L5d
-        L5b:
-            android.text.Layout$Alignment r5 = android.text.Layout.Alignment.ALIGN_LEFT
-        L5d:
-            android.text.Layout$Alignment r10 = android.text.Layout.Alignment.ALIGN_CENTER
-            if (r5 != r10) goto L82
-            float r5 = r0.getLineLeft(r1)
-            double r10 = (double) r5
-            double r10 = java.lang.Math.floor(r10)
-            int r5 = (int) r10
-            float r0 = r0.getLineRight(r1)
-            double r0 = (double) r0
-            double r0 = java.lang.Math.ceil(r0)
-            int r0 = (int) r0
-            int r1 = r0 - r5
-            if (r1 >= r7) goto L7f
-            int r0 = r0 + r5
-            int r0 = r0 / 2
-            int r7 = r7 / 2
-            goto L90
-        L7f:
-            if (r6 >= 0) goto L9d
-            goto L90
-        L82:
-            android.text.Layout$Alignment r6 = android.text.Layout.Alignment.ALIGN_RIGHT
-            if (r5 != r6) goto L93
-            float r0 = r0.getLineRight(r1)
-            double r0 = (double) r0
-            double r0 = java.lang.Math.ceil(r0)
-            int r0 = (int) r0
-        L90:
-            int r5 = r0 - r7
-            goto L9d
-        L93:
-            float r0 = r0.getLineLeft(r1)
-            double r0 = (double) r0
-            double r0 = java.lang.Math.floor(r0)
-            int r5 = (int) r0
-        L9d:
-            if (r9 >= r8) goto La1
-        L9f:
-            r9 = r4
-            goto La8
-        La1:
-            int r0 = r12.mGravity
-            r0 = r0 & 112(0x70, float:1.57E-43)
-            if (r0 != r2) goto L9f
-            int r9 = r9 - r8
-        La8:
-            int r0 = r12.mScrollX
-            if (r5 != r0) goto Lb2
-            int r0 = r12.mScrollY
-            if (r9 == r0) goto Lb1
-            goto Lb2
-        Lb1:
-            return r4
-        Lb2:
-            r12.scrollTo(r5, r9)
-            return r3
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.TextView.bringTextIntoView():boolean");
+        int iFloor;
+        int iCeil;
+        Layout layout = isShowingHint() ? this.mHintLayout : this.mLayout;
+        int lineCount = (this.mGravity & 112) == 80 ? layout.getLineCount() - 1 : 0;
+        Layout.Alignment paragraphAlignment = layout.getParagraphAlignment(lineCount);
+        int paragraphDirection = layout.getParagraphDirection(lineCount);
+        int compoundPaddingLeft = ((this.mRight - this.mLeft) - getCompoundPaddingLeft()) - getCompoundPaddingRight();
+        int extendedPaddingTop = ((this.mBottom - this.mTop) - getExtendedPaddingTop()) - getExtendedPaddingBottom();
+        int height = layout.getHeight();
+        if (paragraphAlignment == Layout.Alignment.ALIGN_NORMAL) {
+            paragraphAlignment = paragraphDirection == 1 ? Layout.Alignment.ALIGN_LEFT : Layout.Alignment.ALIGN_RIGHT;
+        } else if (paragraphAlignment == Layout.Alignment.ALIGN_OPPOSITE) {
+            paragraphAlignment = paragraphDirection == 1 ? Layout.Alignment.ALIGN_RIGHT : Layout.Alignment.ALIGN_LEFT;
+        }
+        if (paragraphAlignment == Layout.Alignment.ALIGN_CENTER) {
+            iFloor = (int) Math.floor(layout.getLineLeft(lineCount));
+            iCeil = (int) Math.ceil(layout.getLineRight(lineCount));
+            if (iCeil - iFloor < compoundPaddingLeft) {
+                iCeil = (iCeil + iFloor) / 2;
+                compoundPaddingLeft /= 2;
+            } else if (paragraphDirection < 0) {
+            }
+            iFloor = iCeil - compoundPaddingLeft;
+        } else if (paragraphAlignment == Layout.Alignment.ALIGN_RIGHT) {
+            iCeil = (int) Math.ceil(layout.getLineRight(lineCount));
+            iFloor = iCeil - compoundPaddingLeft;
+        } else {
+            iFloor = (int) Math.floor(layout.getLineLeft(lineCount));
+        }
+        int i = (height >= extendedPaddingTop && (this.mGravity & 112) == 80) ? height - extendedPaddingTop : 0;
+        if (iFloor == this.mScrollX && i == this.mScrollY) {
+            return false;
+        }
+        scrollTo(iFloor, i);
+        return true;
     }
 
     public boolean bringPointIntoView(int i) {
         return bringPointIntoView(i, false);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:57:0x00ef, code lost:
-    
-        if ((r11 - r10) < r12) goto L66;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:66:0x00f1  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public boolean bringPointIntoView(int r18, boolean r19) {
-        /*
-            Method dump skipped, instructions count: 436
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.TextView.bringPointIntoView(int, boolean):boolean");
+    public boolean bringPointIntoView(int i, boolean z) {
+        int paragraphDirection;
+        boolean z2;
+        if (isLayoutRequested()) {
+            this.mDeferScroll = i;
+            return false;
+        }
+        int iOriginalToTransformed = originalToTransformed(i, 1);
+        Layout layout = isShowingHint() ? this.mHintLayout : this.mLayout;
+        if (layout == null) {
+            return false;
+        }
+        int lineForOffset = layout.getLineForOffset(iOriginalToTransformed);
+        int i2 = AnonymousClass8.$SwitchMap$android$text$Layout$Alignment[layout.getParagraphAlignment(lineForOffset).ordinal()];
+        if (i2 == 1) {
+            paragraphDirection = 1;
+        } else if (i2 == 2) {
+            paragraphDirection = -1;
+        } else if (i2 == 3) {
+            paragraphDirection = layout.getParagraphDirection(lineForOffset);
+        } else {
+            paragraphDirection = i2 != 4 ? 0 : -layout.getParagraphDirection(lineForOffset);
+        }
+        int primaryHorizontal = (int) layout.getPrimaryHorizontal(iOriginalToTransformed, paragraphDirection > 0);
+        int lineTop = layout.getLineTop(lineForOffset);
+        int lineTop2 = layout.getLineTop(lineForOffset + 1);
+        int iFloor = (int) Math.floor(layout.getLineLeft(lineForOffset));
+        int iCeil = (int) Math.ceil(layout.getLineRight(lineForOffset));
+        int height = layout.getHeight();
+        int compoundPaddingLeft = ((this.mRight - this.mLeft) - getCompoundPaddingLeft()) - getCompoundPaddingRight();
+        int extendedPaddingTop = ((this.mBottom - this.mTop) - getExtendedPaddingTop()) - getExtendedPaddingBottom();
+        if (!this.mHorizontallyScrolling && iCeil - iFloor > compoundPaddingLeft && iCeil > primaryHorizontal) {
+            iCeil = Math.max(primaryHorizontal, iFloor + compoundPaddingLeft);
+        }
+        int i3 = (lineTop2 - lineTop) / 2;
+        int i4 = extendedPaddingTop / 4;
+        if (i3 <= i4) {
+            i4 = i3;
+        }
+        int i5 = compoundPaddingLeft / 4;
+        if (i3 > i5) {
+            i3 = i5;
+        }
+        int i6 = this.mScrollX;
+        int i7 = this.mScrollY;
+        if (lineTop - i7 < i4) {
+            i7 = lineTop - i4;
+        }
+        int i8 = extendedPaddingTop - i4;
+        if (lineTop2 - i7 > i8) {
+            i7 = lineTop2 - i8;
+        }
+        if (height - i7 < extendedPaddingTop) {
+            i7 = height - extendedPaddingTop;
+        }
+        if (0 - i7 > 0) {
+            i7 = 0;
+        }
+        if (paragraphDirection != 0) {
+            if (primaryHorizontal - i6 < i3) {
+                i6 = primaryHorizontal - i3;
+            }
+            int i9 = compoundPaddingLeft - i3;
+            if (primaryHorizontal - i6 > i9) {
+                i6 = primaryHorizontal - i9;
+            }
+        }
+        if (paragraphDirection < 0) {
+            if (iFloor - i6 <= 0) {
+                iFloor = i6;
+            }
+            if (iCeil - iFloor < compoundPaddingLeft) {
+                iFloor = iCeil - compoundPaddingLeft;
+            }
+        } else if (paragraphDirection > 0) {
+            if (iCeil - i6 < compoundPaddingLeft) {
+                i6 = iCeil - compoundPaddingLeft;
+            }
+            if (iFloor - i6 <= 0) {
+                iFloor = i6;
+            }
+        } else {
+            int i10 = iCeil - iFloor;
+            if (i10 <= compoundPaddingLeft) {
+                iFloor -= (compoundPaddingLeft - i10) / 2;
+            } else if (primaryHorizontal <= iCeil - i3) {
+                if (primaryHorizontal >= iFloor + i3 && iFloor <= i6) {
+                    if (iCeil >= i6 + compoundPaddingLeft) {
+                        if (primaryHorizontal - i6 < i3) {
+                            i6 = primaryHorizontal - i3;
+                        }
+                        iFloor = i6;
+                        int i11 = compoundPaddingLeft - i3;
+                        if (primaryHorizontal - iFloor > i11) {
+                            iFloor = primaryHorizontal - i11;
+                        }
+                    }
+                }
+            }
+        }
+        if (iFloor == this.mScrollX && i7 == this.mScrollY) {
+            z2 = false;
+        } else {
+            if (this.mScroller == null) {
+                scrollTo(iFloor, i7);
+            } else {
+                long jCurrentAnimationTimeMillis = AnimationUtils.currentAnimationTimeMillis() - this.mLastScroll;
+                int i12 = iFloor - this.mScrollX;
+                int i13 = i7 - this.mScrollY;
+                if (jCurrentAnimationTimeMillis > 250) {
+                    this.mScroller.startScroll(this.mScrollX, this.mScrollY, i12, i13);
+                    awakenScrollBars(this.mScroller.getDuration());
+                    invalidate();
+                } else {
+                    if (!this.mScroller.isFinished()) {
+                        this.mScroller.abortAnimation();
+                    }
+                    scrollBy(i12, i13);
+                }
+                this.mLastScroll = AnimationUtils.currentAnimationTimeMillis();
+            }
+            z2 = true;
+        }
+        if (z || isFocused()) {
+            if (this.mTempRect == null) {
+                this.mTempRect = new Rect();
+            }
+            this.mTempRect.set(primaryHorizontal - 2, lineTop, primaryHorizontal + 2, lineTop2);
+            getInterestingRect(this.mTempRect, lineForOffset);
+            this.mTempRect.offset(this.mScrollX, this.mScrollY);
+            if (requestRectangleOnScreen(this.mTempRect)) {
+                return true;
+            }
+        }
+        return z2;
     }
 
     /* renamed from: android.widget.TextView$8, reason: invalid class name */
@@ -6915,12 +9388,12 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     private void convertFromViewportToContentCoordinates(Rect rect) {
-        int viewportToContentHorizontalOffset = viewportToContentHorizontalOffset();
-        rect.left += viewportToContentHorizontalOffset;
-        rect.right += viewportToContentHorizontalOffset;
-        int viewportToContentVerticalOffset = viewportToContentVerticalOffset();
-        rect.top += viewportToContentVerticalOffset;
-        rect.bottom += viewportToContentVerticalOffset;
+        int iViewportToContentHorizontalOffset = viewportToContentHorizontalOffset();
+        rect.left += iViewportToContentHorizontalOffset;
+        rect.right += iViewportToContentHorizontalOffset;
+        int iViewportToContentVerticalOffset = viewportToContentVerticalOffset();
+        rect.top += iViewportToContentVerticalOffset;
+        rect.bottom += iViewportToContentVerticalOffset;
     }
 
     private PointF convertFromScreenToContentCoordinates(PointF pointF) {
@@ -7282,12 +9755,12 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     public void removeTextChangedListener(TextWatcher textWatcher) {
-        int indexOf;
+        int iIndexOf;
         ArrayList<TextWatcher> arrayList = this.mListeners;
-        if (arrayList == null || (indexOf = arrayList.indexOf(textWatcher)) < 0) {
+        if (arrayList == null || (iIndexOf = arrayList.indexOf(textWatcher)) < 0) {
             return;
         }
-        this.mListeners.remove(indexOf);
+        this.mListeners.remove(iIndexOf);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -7444,12 +9917,12 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     void spanChange(Spanned spanned, Object obj, int i, int i2, int i3, int i4) {
-        int i5;
+        int selectionEnd;
         boolean z;
         boolean z2;
         Editor editor = this.mEditor;
         Editor.InputMethodState inputMethodState = editor == null ? null : editor.mInputMethodState;
-        int i6 = -1;
+        int selectionStart = -1;
         if (ViewRune.WIDGET_PEN_SUPPORTED) {
             if (obj == MultiSelection.CURRENT_SELECTION_END) {
                 if (i >= 0 || i2 >= 0) {
@@ -7461,17 +9934,17 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
                         editor2.makeBlink();
                     }
                 }
-                i5 = i2;
+                selectionEnd = i2;
                 z2 = true;
             } else {
                 z2 = false;
-                i5 = -1;
+                selectionEnd = -1;
             }
             if (obj == MultiSelection.CURRENT_SELECTION_START) {
                 if (i >= 0 || i2 >= 0) {
                     invalidateCursor(MultiSelection.getSelectionEnd(spanned), i, i2);
                 }
-                i6 = i2;
+                selectionStart = i2;
                 z2 = true;
             }
             if (z2) {
@@ -7481,7 +9954,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
                 }
             }
         } else {
-            i5 = -1;
+            selectionEnd = -1;
         }
         if (obj == Selection.SELECTION_END) {
             if (i >= 0 || i2 >= 0) {
@@ -7493,7 +9966,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
                     editor3.makeBlink();
                 }
             }
-            i5 = i2;
+            selectionEnd = i2;
             z = true;
         } else {
             z = false;
@@ -7502,7 +9975,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
             if (i >= 0 || i2 >= 0) {
                 invalidateCursor(Selection.getSelectionEnd(spanned), i, i2);
             }
-            i6 = i2;
+            selectionStart = i2;
             z = true;
         }
         if (z) {
@@ -7512,11 +9985,11 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
                 this.mEditor.mSelectionMoved = true;
             }
             if ((spanned.getSpanFlags(obj) & 512) == 0) {
-                if (i6 < 0) {
-                    i6 = Selection.getSelectionStart(spanned);
+                if (selectionStart < 0) {
+                    selectionStart = Selection.getSelectionStart(spanned);
                 }
-                if (i5 < 0) {
-                    i5 = Selection.getSelectionEnd(spanned);
+                if (selectionEnd < 0) {
+                    selectionEnd = Selection.getSelectionEnd(spanned);
                 }
                 Editor editor4 = this.mEditor;
                 if (editor4 != null) {
@@ -7525,7 +9998,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
                         setHasTransientState(false);
                     }
                 }
-                onSelectionChanged(i6, i5);
+                onSelectionChanged(selectionStart, selectionEnd);
             }
         }
         if ((obj instanceof UpdateAppearance) || (obj instanceof ParagraphStyle) || (obj instanceof CharacterStyle)) {
@@ -7590,7 +10063,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     @Override // android.view.View
-    protected void onFocusChanged(boolean z, int i, Rect rect) {
+    protected void onFocusChanged(boolean z, int i, Rect rect) throws Resources.NotFoundException {
         TextView textView;
         boolean z2;
         int i2;
@@ -7663,9 +10136,9 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
 
     @Override // android.view.View
     public void setSelected(boolean z) {
-        boolean isSelected = isSelected();
+        boolean zIsSelected = isSelected();
         super.setSelected(z);
-        if (z == isSelected || this.mEllipsize != TextUtils.TruncateAt.MARQUEE) {
+        if (z == zIsSelected || this.mEllipsize != TextUtils.TruncateAt.MARQUEE) {
             return;
         }
         if (z) {
@@ -7675,53 +10148,31 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:17:0x001a, code lost:
-    
-        if (r7 == false) goto L11;
-     */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    boolean isFromPrimePointer(android.view.MotionEvent r6, boolean r7) {
-        /*
-            r5 = this;
-            int r0 = r5.mPrimePointerId
-            r1 = 0
-            r2 = 1
-            r3 = -1
-            if (r0 != r3) goto L10
-            int r0 = r6.getPointerId(r1)
-            r5.mPrimePointerId = r0
-            r5.mIsPrimePointerFromHandleView = r7
-            goto L1c
-        L10:
-            int r4 = r6.getPointerId(r1)
-            if (r0 == r4) goto L1c
-            boolean r0 = r5.mIsPrimePointerFromHandleView
-            if (r0 == 0) goto L1d
-            if (r7 == 0) goto L1d
-        L1c:
-            r1 = r2
-        L1d:
-            int r7 = r6.getActionMasked()
-            if (r7 == r2) goto L2c
-            int r6 = r6.getActionMasked()
-            r7 = 3
-            if (r6 != r7) goto L2b
-            goto L2c
-        L2b:
-            return r1
-        L2c:
-            r5.mPrimePointerId = r3
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.TextView.isFromPrimePointer(android.view.MotionEvent, boolean):boolean");
+    boolean isFromPrimePointer(MotionEvent motionEvent, boolean z) {
+        int i = this.mPrimePointerId;
+        boolean z2 = false;
+        if (i == -1) {
+            this.mPrimePointerId = motionEvent.getPointerId(0);
+            this.mIsPrimePointerFromHandleView = z;
+        } else {
+            if (i == motionEvent.getPointerId(0) || (this.mIsPrimePointerFromHandleView && z)) {
+            }
+            if (motionEvent.getActionMasked() == 1 && motionEvent.getActionMasked() != 3) {
+                return z2;
+            }
+            this.mPrimePointerId = -1;
+            return z2;
+        }
+        z2 = true;
+        if (motionEvent.getActionMasked() == 1) {
+        }
+        this.mPrimePointerId = -1;
+        return z2;
     }
 
     @Override // android.view.View
     public boolean onTouchEvent(MotionEvent motionEvent) {
-        boolean z;
+        boolean zOnTouchEvent;
         Editor editor;
         Editor editor2;
         InputMethodManager inputMethodManager;
@@ -7739,54 +10190,54 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
                 return true;
             }
         }
-        boolean onTouchEvent = super.onTouchEvent(motionEvent);
+        boolean zOnTouchEvent2 = super.onTouchEvent(motionEvent);
         Editor editor3 = this.mEditor;
         if (editor3 != null && editor3.mDiscardNextActionUp && actionMasked == 1) {
             this.mEditor.mDiscardNextActionUp = false;
             if (this.mEditor.mIsInsertionActionModeStartPending) {
                 this.mEditor.startInsertionActionMode();
                 this.mEditor.mIsInsertionActionModeStartPending = false;
-                return onTouchEvent;
+                return zOnTouchEvent2;
             }
         } else {
             if (Flags.handwritingEndOfLineTap() && actionMasked == 1 && shouldStartHandwritingForEndOfLineTap(motionEvent) && (inputMethodManager = getInputMethodManager()) != null) {
                 inputMethodManager.startStylusHandwriting(this);
                 return true;
             }
-            boolean z2 = actionMasked == 1 && ((editor2 = this.mEditor) == null || !editor2.mIgnoreActionUpEvent) && isFocused() && (motionEvent.getToolType(0) != 2 || (motionEvent.getButtonState() & 32) == 0);
+            boolean z = actionMasked == 1 && ((editor2 = this.mEditor) == null || !editor2.mIgnoreActionUpEvent) && isFocused() && (motionEvent.getToolType(0) != 2 || (motionEvent.getButtonState() & 32) == 0);
             if ((this.mMovement != null || onCheckIsTextEditor()) && isEnabled() && (this.mText instanceof Spannable) && this.mLayout != null) {
                 MovementMethod movementMethod = this.mMovement;
                 if (movementMethod != null) {
-                    z = movementMethod.onTouchEvent(this, this.mSpannable, motionEvent);
-                    if ((MetaKeyKeyListener.getMetaState((Spannable) this.mText, 1) == 1) && actionMasked == 1 && z && (editor = this.mEditor) != null) {
+                    zOnTouchEvent = movementMethod.onTouchEvent(this, this.mSpannable, motionEvent);
+                    if ((MetaKeyKeyListener.getMetaState((Spannable) this.mText, 1) == 1) && actionMasked == 1 && zOnTouchEvent && (editor = this.mEditor) != null) {
                         editor.startSelectionActionModeAsync(false);
                     }
                 } else {
-                    z = false;
+                    zOnTouchEvent = false;
                 }
-                boolean isTextSelectable = isTextSelectable();
-                if (z2 && this.mLinksClickable && this.mAutoLinkMask != 0 && isTextSelectable) {
+                boolean zIsTextSelectable = isTextSelectable();
+                if (z && this.mLinksClickable && this.mAutoLinkMask != 0 && zIsTextSelectable) {
                     ClickableSpan[] clickableSpanArr = (ClickableSpan[]) this.mSpannable.getSpans(getSelectionStart(), getSelectionEnd(), ClickableSpan.class);
                     if (clickableSpanArr.length > 0) {
                         clickableSpanArr[0].onClick(this);
-                        z = true;
+                        zOnTouchEvent = true;
                     }
                 }
-                if (z2 && (isTextEditable() || isTextSelectable)) {
+                if (z && (isTextEditable() || zIsTextSelectable)) {
                     InputMethodManager inputMethodManager2 = getInputMethodManager();
                     viewClicked(inputMethodManager2);
                     if (isTextEditable() && this.mEditor.mShowSoftInputOnFocus && inputMethodManager2 != null && !showAutofillDialog()) {
                         inputMethodManager2.showSoftInput(this, 0);
                     }
                     this.mEditor.onTouchUpEvent(motionEvent);
-                    z = true;
+                    zOnTouchEvent = true;
                 }
-                if (z) {
+                if (zOnTouchEvent) {
                     return true;
                 }
             }
         }
-        return onTouchEvent;
+        return zOnTouchEvent2;
     }
 
     private boolean shouldStartHandwritingForEndOfLineTap(MotionEvent motionEvent) {
@@ -7802,8 +10253,8 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         if (lineEnd != selectionStart || getLineAtCoordinate(motionEvent.getY()) != lineForOffset) {
             return false;
         }
-        float convertToLocalHorizontalCoordinate = convertToLocalHorizontalCoordinate(motionEvent.getX());
-        if (this.mLayout.getParagraphDirection(lineForOffset) != -1 ? convertToLocalHorizontalCoordinate > this.mLayout.getLineRight(lineForOffset) : convertToLocalHorizontalCoordinate < this.mLayout.getLineLeft(lineForOffset)) {
+        float fConvertToLocalHorizontalCoordinate = convertToLocalHorizontalCoordinate(motionEvent.getX());
+        if (this.mLayout.getParagraphDirection(lineForOffset) != -1 ? fConvertToLocalHorizontalCoordinate > this.mLayout.getLineRight(lineForOffset) : fConvertToLocalHorizontalCoordinate < this.mLayout.getLineLeft(lineForOffset)) {
             return isStylusHandwritingAvailable();
         }
         return false;
@@ -7940,12 +10391,12 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         if (horizontalFadingEdgeLength == 0) {
             return 0.0f;
         }
-        float abs = Math.abs(f - f2);
+        float fAbs = Math.abs(f - f2);
         float f3 = horizontalFadingEdgeLength;
-        if (abs > f3) {
+        if (fAbs > f3) {
             return 1.0f;
         }
-        return abs / f3;
+        return fAbs / f3;
     }
 
     private boolean isMarqueeFadeEnabled() {
@@ -7986,21 +10437,21 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         }
     }
 
-    public static ColorStateList getTextColors(Context context, TypedArray typedArray) {
+    public static ColorStateList getTextColors(Context context, TypedArray typedArray) throws Resources.NotFoundException {
         int resourceId;
         typedArray.getClass();
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(R.styleable.TextView);
-        ColorStateList colorStateList = obtainStyledAttributes.getColorStateList(5);
-        if (colorStateList == null && (resourceId = obtainStyledAttributes.getResourceId(1, 0)) != 0) {
-            TypedArray obtainStyledAttributes2 = context.obtainStyledAttributes(resourceId, R.styleable.TextAppearance);
-            colorStateList = obtainStyledAttributes2.getColorStateList(3);
-            obtainStyledAttributes2.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(android.R.styleable.TextView);
+        ColorStateList colorStateList = typedArrayObtainStyledAttributes.getColorStateList(5);
+        if (colorStateList == null && (resourceId = typedArrayObtainStyledAttributes.getResourceId(1, 0)) != 0) {
+            TypedArray typedArrayObtainStyledAttributes2 = context.obtainStyledAttributes(resourceId, android.R.styleable.TextAppearance);
+            colorStateList = typedArrayObtainStyledAttributes2.getColorStateList(3);
+            typedArrayObtainStyledAttributes2.recycle();
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
         return colorStateList;
     }
 
-    public static int getTextColor(Context context, TypedArray typedArray, int i) {
+    public static int getTextColor(Context context, TypedArray typedArray, int i) throws Resources.NotFoundException {
         ColorStateList textColors = getTextColors(context, typedArray);
         return textColors == null ? i : textColors.getDefaultColor();
     }
@@ -8195,9 +10646,9 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
                 return;
             }
             if (hasPasswordTransformationMethod() && this.mText.length() > 0) {
-                String charSequence = textForAccessibility.subSequence(0, textForAccessibility.length() - 1).toString();
+                String string = textForAccessibility.subSequence(0, textForAccessibility.length() - 1).toString();
                 StringBuilder sb = new StringBuilder();
-                sb.append(charSequence);
+                sb.append(string);
                 sb.append(this.mText.charAt(r3.length() - 1));
                 accessibilityEvent.getText().add(sb.toString());
                 return;
@@ -8215,10 +10666,10 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     protected void onProvideStructure(ViewStructure viewStructure, int i, int i2) {
         Editor editor;
         int lineAtCoordinateUnclamped;
-        int i3;
-        int i4;
+        int lineAtCoordinateUnclamped2;
+        int max;
         super.onProvideStructure(viewStructure, i, i2);
-        int i5 = 0;
+        int i3 = 0;
         boolean z = hasPasswordTransformationMethod() || isPasswordInputType(getInputType());
         if (i == 1 || i == 2) {
             if (i == 1) {
@@ -8258,7 +10709,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
             } else {
                 int[] iArr = new int[2];
                 getLocationInWindow(iArr);
-                int i6 = iArr[1];
+                int i4 = iArr[1];
                 ViewParent parent = getParent();
                 View view = this;
                 while (parent instanceof View) {
@@ -8266,39 +10717,39 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
                     parent = view.getParent();
                 }
                 int height = view.getHeight();
-                if (i6 >= 0) {
-                    i3 = getLineAtCoordinateUnclamped(0.0f);
+                if (i4 >= 0) {
+                    lineAtCoordinateUnclamped2 = getLineAtCoordinateUnclamped(0.0f);
                     lineAtCoordinateUnclamped = getLineAtCoordinateUnclamped(height - 1);
                 } else {
-                    int lineAtCoordinateUnclamped2 = getLineAtCoordinateUnclamped(-i6);
-                    lineAtCoordinateUnclamped = getLineAtCoordinateUnclamped((height - 1) - i6);
-                    i3 = lineAtCoordinateUnclamped2;
+                    int lineAtCoordinateUnclamped3 = getLineAtCoordinateUnclamped(-i4);
+                    lineAtCoordinateUnclamped = getLineAtCoordinateUnclamped((height - 1) - i4);
+                    lineAtCoordinateUnclamped2 = lineAtCoordinateUnclamped3;
                 }
-                int i7 = (lineAtCoordinateUnclamped - i3) / 2;
-                int i8 = i3 - i7;
-                if (i8 < 0) {
-                    i8 = 0;
+                int i5 = (lineAtCoordinateUnclamped - lineAtCoordinateUnclamped2) / 2;
+                int i6 = lineAtCoordinateUnclamped2 - i5;
+                if (i6 < 0) {
+                    i6 = 0;
                 }
-                int i9 = lineAtCoordinateUnclamped + i7;
-                if (i9 >= lineCount) {
-                    i9 = lineCount - 1;
+                int i7 = lineAtCoordinateUnclamped + i5;
+                if (i7 >= lineCount) {
+                    i7 = lineCount - 1;
                 }
-                int transformedToOriginal = transformedToOriginal(layout.getLineStart(i8), 0);
-                int transformedToOriginal2 = transformedToOriginal(layout.getLineEnd(i9), 0);
+                int iTransformedToOriginal = transformedToOriginal(layout.getLineStart(i6), 0);
+                int iTransformedToOriginal2 = transformedToOriginal(layout.getLineEnd(i7), 0);
                 int selectionStart = getSelectionStart();
                 int selectionEnd = getSelectionEnd();
                 if (selectionStart < selectionEnd) {
-                    if (selectionStart < transformedToOriginal) {
-                        transformedToOriginal = selectionStart;
+                    if (selectionStart < iTransformedToOriginal) {
+                        iTransformedToOriginal = selectionStart;
                     }
-                    if (selectionEnd > transformedToOriginal2) {
-                        transformedToOriginal2 = selectionEnd;
+                    if (selectionEnd > iTransformedToOriginal2) {
+                        iTransformedToOriginal2 = selectionEnd;
                     }
                 }
                 CharSequence text2 = getText();
                 if (text2 != null) {
-                    if (transformedToOriginal > 0 || transformedToOriginal2 < text2.length()) {
-                        text2 = text2.subSequence(Math.min(transformedToOriginal, text2.length()), Math.min(transformedToOriginal2, text2.length()));
+                    if (iTransformedToOriginal > 0 || iTransformedToOriginal2 < text2.length()) {
+                        text2 = text2.subSequence(Math.min(iTransformedToOriginal, text2.length()), Math.min(iTransformedToOriginal2, text2.length()));
                     }
                     if (i == 1) {
                         viewStructure.setText(text2);
@@ -8309,21 +10760,21 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
             }
             if (i == 0 || i == 2) {
                 int typefaceStyle = getTypefaceStyle();
-                int i10 = (typefaceStyle & 1) != 0 ? 1 : 0;
+                int i8 = (typefaceStyle & 1) != 0 ? 1 : 0;
                 if ((typefaceStyle & 2) != 0) {
-                    i10 |= 2;
+                    i8 |= 2;
                 }
                 int flags = this.mTextPaint.getFlags();
                 if ((flags & 32) != 0) {
-                    i10 |= 1;
+                    i8 |= 1;
                 }
                 if ((flags & 8) != 0) {
-                    i10 |= 4;
+                    i8 |= 4;
                 }
                 if ((flags & 16) != 0) {
-                    i10 |= 8;
+                    i8 |= 8;
                 }
-                viewStructure.setTextStyle(getTextSize(), getCurrentTextColor(), 1, i10);
+                viewStructure.setTextStyle(getTextSize(), getCurrentTextColor(), 1, i8);
             }
             if (i == 1 || i == 2) {
                 viewStructure.setMinTextEms(getMinEms());
@@ -8331,18 +10782,18 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
                 InputFilter[] filters = getFilters();
                 int length = filters.length;
                 while (true) {
-                    if (i5 >= length) {
-                        i4 = -1;
+                    if (i3 >= length) {
+                        max = -1;
                         break;
                     }
-                    InputFilter inputFilter = filters[i5];
+                    InputFilter inputFilter = filters[i3];
                     if (inputFilter instanceof InputFilter.LengthFilter) {
-                        i4 = ((InputFilter.LengthFilter) inputFilter).getMax();
+                        max = ((InputFilter.LengthFilter) inputFilter).getMax();
                         break;
                     }
-                    i5++;
+                    i3++;
                 }
-                viewStructure.setMaxTextLength(i4);
+                viewStructure.setMaxTextLength(max);
             }
         }
         if (this.mHintId != 0) {
@@ -8414,7 +10865,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     @Override // android.view.View
-    public void onInitializeAccessibilityNodeInfoInternal(AccessibilityNodeInfo accessibilityNodeInfo) {
+    public void onInitializeAccessibilityNodeInfoInternal(AccessibilityNodeInfo accessibilityNodeInfo) throws Resources.NotFoundException {
         super.onInitializeAccessibilityNodeInfoInternal(accessibilityNodeInfo);
         accessibilityNodeInfo.setPassword(hasPasswordTransformationMethod());
         accessibilityNodeInfo.setText(getTextForAccessibility());
@@ -8434,7 +10885,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
                 accessibilityNodeInfo.setError(this.mEditor.mError);
             }
             if (isTextEditable() && isFocused()) {
-                CharSequence string = this.mContext.getResources().getString(com.android.internal.R.string.keyboardview_keycode_enter);
+                CharSequence string = this.mContext.getResources().getString(R.string.keyboardview_keycode_enter);
                 if (getImeActionLabel() != null) {
                     string = getImeActionLabel();
                 }
@@ -8469,7 +10920,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
                 accessibilityNodeInfo.addAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_SHOW_TEXT_SUGGESTIONS);
             }
             if (canShare()) {
-                accessibilityNodeInfo.addAction(new AccessibilityNodeInfo.AccessibilityAction(268435456, getResources().getString(com.android.internal.R.string.share)));
+                accessibilityNodeInfo.addAction(new AccessibilityNodeInfo.AccessibilityAction(268435456, getResources().getString(R.string.share)));
             }
             if (canProcessText()) {
                 this.mEditor.mProcessTextIntentActionsHandler.onInitializeAccessibilityNodeInfo(accessibilityNodeInfo);
@@ -8504,9 +10955,9 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     @Override // android.view.View
     public void addExtraDataToAccessibilityNodeInfo(AccessibilityNodeInfo accessibilityNodeInfo, String str, Bundle bundle) {
         RectF characterBounds;
-        boolean equals = str.equals(AccessibilityNodeInfo.EXTRA_DATA_TEXT_CHARACTER_LOCATION_KEY);
+        boolean zEquals = str.equals(AccessibilityNodeInfo.EXTRA_DATA_TEXT_CHARACTER_LOCATION_KEY);
         boolean z = android.view.accessibility.Flags.a11yCharacterInWindowApi() && str.equals(AccessibilityNodeInfo.EXTRA_DATA_TEXT_CHARACTER_LOCATION_IN_WINDOW_KEY);
-        if (bundle != null && (equals || z)) {
+        if (bundle != null && (zEquals || z)) {
             int i = bundle.getInt(AccessibilityNodeInfo.EXTRA_DATA_TEXT_CHARACTER_LOCATION_ARG_START_INDEX, -1);
             int i2 = bundle.getInt(AccessibilityNodeInfo.EXTRA_DATA_TEXT_CHARACTER_LOCATION_ARG_LENGTH, -1);
             if (i2 <= 0 || i < 0 || i >= this.mText.length()) {
@@ -8516,11 +10967,11 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
             RectF[] rectFArr = new RectF[i2];
             CursorAnchorInfo.Builder builder = new CursorAnchorInfo.Builder();
             populateCharacterBounds(builder, i, Math.min(i + i2, length()), viewportToContentHorizontalOffset(), viewportToContentVerticalOffset());
-            CursorAnchorInfo build = builder.setMatrix(null).build();
+            CursorAnchorInfo cursorAnchorInfoBuild = builder.setMatrix(null).build();
             for (int i3 = 0; i3 < i2; i3++) {
                 int i4 = i + i3;
-                if ((build.getCharacterBoundsFlags(i4) & 1) == 1 && (characterBounds = build.getCharacterBounds(i4)) != null) {
-                    if (equals) {
+                if ((cursorAnchorInfoBuild.getCharacterBoundsFlags(i4) & 1) == 1 && (characterBounds = cursorAnchorInfoBuild.getCharacterBounds(i4)) != null) {
+                    if (zEquals) {
                         mapRectFromViewToScreenCoords(characterBounds, true);
                     } else if (z) {
                         mapRectFromViewToWindowCoords(characterBounds, true);
@@ -8532,11 +10983,11 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
             return;
         }
         if (str.equals(AccessibilityNodeInfo.EXTRA_DATA_RENDERING_INFO_KEY)) {
-            AccessibilityNodeInfo.ExtraRenderingInfo obtain = AccessibilityNodeInfo.ExtraRenderingInfo.obtain();
-            obtain.setLayoutSize(getLayoutParams().width, getLayoutParams().height);
-            obtain.setTextSizeInPx(getTextSize());
-            obtain.setTextSizeUnit(getTextSizeUnit());
-            accessibilityNodeInfo.setExtraRenderingInfo(obtain);
+            AccessibilityNodeInfo.ExtraRenderingInfo extraRenderingInfoObtain = AccessibilityNodeInfo.ExtraRenderingInfo.obtain();
+            extraRenderingInfoObtain.setLayoutSize(getLayoutParams().width, getLayoutParams().height);
+            extraRenderingInfoObtain.setTextSizeInPx(getTextSize());
+            extraRenderingInfoObtain.setTextSizeUnit(getTextSizeUnit());
+            accessibilityNodeInfo.setExtraRenderingInfo(extraRenderingInfoObtain);
         }
     }
 
@@ -8615,10 +11066,10 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
             float f4 = characterBounds[i5 + 1];
             float f5 = characterBounds[i5 + 2];
             float f6 = characterBounds[i5 + 3];
-            boolean intersects = rectF.intersects(f3, f4, f5, f6);
-            int i6 = intersects;
+            boolean zIntersects = rectF.intersects(f3, f4, f5, f6);
+            int i6 = zIntersects;
             if (!rectF.contains(f3, f4, f5, f6)) {
-                i6 = (intersects ? 1 : 0) | 2;
+                i6 = (zIntersects ? 1 : 0) | 2;
             }
             if (this.mLayout.isRtlCharAt(i4)) {
                 i6 = (i6 == true ? 1 : 0) | 4;
@@ -8691,8 +11142,8 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
             builder2.setEditorBoundsInfo(new EditorBoundsInfo.Builder().setEditorBounds(rectF).setHandwritingBounds(rectF2).build());
         }
         if (z8 || z9 || z10) {
-            float viewportToContentHorizontalOffset = viewportToContentHorizontalOffset();
-            float viewportToContentVerticalOffset = viewportToContentVerticalOffset();
+            float fViewportToContentHorizontalOffset = viewportToContentHorizontalOffset();
+            float fViewportToContentVerticalOffset = viewportToContentVerticalOffset();
             boolean z12 = getTransformationMethod() != null && (getTransformed() instanceof OffsetMapping);
             if (z8 && !z12) {
                 CharSequence text = getText();
@@ -8706,7 +11157,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
                     }
                     if (composingSpanStart >= 0 && composingSpanStart < composingSpanEnd) {
                         builder2.setComposingText(composingSpanStart, text.subSequence(composingSpanStart, composingSpanEnd));
-                        populateCharacterBounds(builder2, composingSpanStart, composingSpanEnd, viewportToContentHorizontalOffset, viewportToContentVerticalOffset);
+                        populateCharacterBounds(builder2, composingSpanStart, composingSpanEnd, fViewportToContentHorizontalOffset, fViewportToContentVerticalOffset);
                     }
                 }
             }
@@ -8714,20 +11165,20 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
             if (!z9 || selectionStart < 0) {
                 builder2 = builder;
             } else {
-                int originalToTransformed = textView.originalToTransformed(selectionStart, 1);
-                float primaryHorizontal = layout.getPrimaryHorizontal(originalToTransformed, layout.shouldClampCursor(layout.getLineForOffset(originalToTransformed))) + viewportToContentHorizontalOffset;
-                float lineTop = layout.getLineTop(r1) + viewportToContentVerticalOffset;
-                float lineBaseline = layout.getLineBaseline(r1) + viewportToContentVerticalOffset;
-                float lineBottom = layout.getLineBottom(r1, false) + viewportToContentVerticalOffset;
-                boolean isPositionVisible = textView.isPositionVisible(primaryHorizontal, lineTop);
-                boolean isPositionVisible2 = textView.isPositionVisible(primaryHorizontal, lineBottom);
-                if (!isPositionVisible && !isPositionVisible2) {
+                int iOriginalToTransformed = textView.originalToTransformed(selectionStart, 1);
+                float primaryHorizontal = layout.getPrimaryHorizontal(iOriginalToTransformed, layout.shouldClampCursor(layout.getLineForOffset(iOriginalToTransformed))) + fViewportToContentHorizontalOffset;
+                float lineTop = layout.getLineTop(r1) + fViewportToContentVerticalOffset;
+                float lineBaseline = layout.getLineBaseline(r1) + fViewportToContentVerticalOffset;
+                float lineBottom = layout.getLineBottom(r1, false) + fViewportToContentVerticalOffset;
+                boolean zIsPositionVisible = textView.isPositionVisible(primaryHorizontal, lineTop);
+                boolean zIsPositionVisible2 = textView.isPositionVisible(primaryHorizontal, lineBottom);
+                if (!zIsPositionVisible && !zIsPositionVisible2) {
                     i2 = 0;
                 }
-                if (!isPositionVisible || !isPositionVisible2) {
+                if (!zIsPositionVisible || !zIsPositionVisible2) {
                     i2 |= 2;
                 }
-                if (layout.isRtlCharAt(originalToTransformed)) {
+                if (layout.isRtlCharAt(iOriginalToTransformed)) {
                     i2 |= 4;
                 }
                 builder.setInsertionMarkerLocation(primaryHorizontal, lineTop, lineBaseline, lineBottom, i2);
@@ -8737,19 +11188,19 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
                 if (Flags.handwritingGestureWithTransformation()) {
                     RectF rectF3 = new RectF();
                     if (textView.getContentVisibleRect(rectF3)) {
-                        float f = rectF3.top - viewportToContentVerticalOffset;
-                        float f2 = rectF3.bottom - viewportToContentVerticalOffset;
+                        float f = rectF3.top - fViewportToContentVerticalOffset;
+                        float f2 = rectF3.bottom - fViewportToContentVerticalOffset;
                         int lineForVertical = layout.getLineForVertical((int) Math.ceil(f2));
                         for (int lineForVertical2 = layout.getLineForVertical((int) Math.floor(f)); lineForVertical2 <= lineForVertical; lineForVertical2++) {
-                            builder2.addVisibleLineBounds(layout.getLineLeft(lineForVertical2) + viewportToContentHorizontalOffset, layout.getLineTop(lineForVertical2) + viewportToContentVerticalOffset, layout.getLineRight(lineForVertical2) + viewportToContentHorizontalOffset, layout.getLineBottom(lineForVertical2, false) + viewportToContentVerticalOffset);
+                            builder2.addVisibleLineBounds(layout.getLineLeft(lineForVertical2) + fViewportToContentHorizontalOffset, layout.getLineTop(lineForVertical2) + fViewportToContentVerticalOffset, layout.getLineRight(lineForVertical2) + fViewportToContentHorizontalOffset, layout.getLineBottom(lineForVertical2, false) + fViewportToContentVerticalOffset);
                         }
                     }
                 } else {
                     if (textView.getContentVisibleRect(new Rect())) {
-                        float f3 = r0.top - viewportToContentVerticalOffset;
-                        int lineForVertical3 = layout.getLineForVertical((int) Math.ceil(r0.bottom - viewportToContentVerticalOffset));
+                        float f3 = r0.top - fViewportToContentVerticalOffset;
+                        int lineForVertical3 = layout.getLineForVertical((int) Math.ceil(r0.bottom - fViewportToContentVerticalOffset));
                         for (int lineForVertical4 = layout.getLineForVertical((int) Math.floor(f3)); lineForVertical4 <= lineForVertical3; lineForVertical4++) {
-                            builder2.addVisibleLineBounds(layout.getLineLeft(lineForVertical4) + viewportToContentHorizontalOffset, layout.getLineTop(lineForVertical4) + viewportToContentVerticalOffset, layout.getLineRight(lineForVertical4) + viewportToContentHorizontalOffset, layout.getLineBottom(lineForVertical4, false) + viewportToContentVerticalOffset);
+                            builder2.addVisibleLineBounds(layout.getLineLeft(lineForVertical4) + fViewportToContentHorizontalOffset, layout.getLineTop(lineForVertical4) + fViewportToContentVerticalOffset, layout.getLineRight(lineForVertical4) + fViewportToContentHorizontalOffset, layout.getLineBottom(lineForVertical4, false) + fViewportToContentVerticalOffset);
                         }
                     }
                 }
@@ -8776,11 +11227,11 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         if (!matrix.invert(matrix2)) {
             return null;
         }
-        float viewportToContentHorizontalOffset = viewportToContentHorizontalOffset();
-        float viewportToContentVerticalOffset = viewportToContentVerticalOffset();
+        float fViewportToContentHorizontalOffset = viewportToContentHorizontalOffset();
+        float fViewportToContentVerticalOffset = viewportToContentVerticalOffset();
         RectF rectF2 = new RectF(rectF);
         matrix2.mapRect(rectF2);
-        rectF2.offset(-viewportToContentHorizontalOffset, -viewportToContentVerticalOffset);
+        rectF2.offset(-fViewportToContentHorizontalOffset, -fViewportToContentVerticalOffset);
         if (!rectF2.intersects(0.0f, 0.0f, layout.getWidth(), layout.getHeight()) || text.length() == 0) {
             TextBoundsInfo.Builder builder = new TextBoundsInfo.Builder(0, 0);
             SegmentFinder.PrescribedSegmentFinder prescribedSegmentFinder = new SegmentFinder.PrescribedSegmentFinder(new int[0]);
@@ -8791,7 +11242,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         int lineForVertical2 = layout.getLineForVertical((int) Math.floor(rectF2.bottom));
         int lineStart = layout.getLineStart(lineForVertical);
         int lineEnd = layout.getLineEnd(lineForVertical2);
-        float[] characterBounds = getCharacterBounds(lineStart, lineEnd, viewportToContentHorizontalOffset, viewportToContentVerticalOffset);
+        float[] characterBounds = getCharacterBounds(lineStart, lineEnd, fViewportToContentHorizontalOffset, fViewportToContentVerticalOffset);
         int i = lineEnd - lineStart;
         int[] iArr = new int[i];
         int[] iArr2 = new int[i];
@@ -8810,10 +11261,10 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
             int i4 = lineForVertical;
             boolean z = layout.getParagraphDirection(i2) == -1;
             while (lineStart2 < lineEnd2) {
-                boolean isWhitespace = TextUtils.isWhitespace(text.charAt(lineStart2));
-                int i5 = isWhitespace;
+                boolean zIsWhitespace = TextUtils.isWhitespace(text.charAt(lineStart2));
+                int i5 = zIsWhitespace;
                 if (TextUtils.isPunctuation(Character.codePointAt(text, lineStart2))) {
-                    i5 = (isWhitespace ? 1 : 0) | 4;
+                    i5 = (zIsWhitespace ? 1 : 0) | 4;
                 }
                 int i6 = i5;
                 if (TextUtils.isNewline(Character.codePointAt(text, lineStart2))) {
@@ -9022,20 +11473,20 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     void sendAccessibilityEventTypeViewTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-        AccessibilityEvent obtain = AccessibilityEvent.obtain(16);
-        obtain.setFromIndex(i);
-        obtain.setRemovedCount(i2);
-        obtain.setAddedCount(i3);
-        obtain.setBeforeText(charSequence);
-        sendAccessibilityEventUnchecked(obtain);
+        AccessibilityEvent accessibilityEventObtain = AccessibilityEvent.obtain(16);
+        accessibilityEventObtain.setFromIndex(i);
+        accessibilityEventObtain.setRemovedCount(i2);
+        accessibilityEventObtain.setAddedCount(i3);
+        accessibilityEventObtain.setBeforeText(charSequence);
+        sendAccessibilityEventUnchecked(accessibilityEventObtain);
     }
 
     void sendAccessibilityEventTypeViewTextChanged(CharSequence charSequence, int i, int i2) {
-        AccessibilityEvent obtain = AccessibilityEvent.obtain(16);
-        obtain.setFromIndex(i);
-        obtain.setToIndex(i2);
-        obtain.setBeforeText(charSequence);
-        sendAccessibilityEventUnchecked(obtain);
+        AccessibilityEvent accessibilityEventObtain = AccessibilityEvent.obtain(16);
+        accessibilityEventObtain.setFromIndex(i);
+        accessibilityEventObtain.setToIndex(i2);
+        accessibilityEventObtain.setBeforeText(charSequence);
+        sendAccessibilityEventUnchecked(accessibilityEventObtain);
     }
 
     private InputMethodManager getInputMethodManager() {
@@ -9048,32 +11499,32 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     public boolean onTextContextMenuItem(int i) {
-        int i2;
-        String list;
-        boolean isTextEditable;
+        int iMax;
+        String string;
+        boolean zIsTextEditable;
         int length = this.mText.length();
         if (isFocused()) {
             int selectionStart = getSelectionStart();
             int selectionEnd = getSelectionEnd();
-            i2 = Math.max(0, Math.min(selectionStart, selectionEnd));
+            iMax = Math.max(0, Math.min(selectionStart, selectionEnd));
             length = Math.max(0, Math.max(selectionStart, selectionEnd));
         } else {
-            i2 = 0;
+            iMax = 0;
         }
         switch (i) {
             case 16908319:
-                boolean hasSelection = hasSelection();
+                boolean zHasSelection = hasSelection();
                 selectAllText();
                 Editor editor = this.mEditor;
-                if (editor != null && hasSelection) {
+                if (editor != null && zHasSelection) {
                     editor.invalidateActionModeAsync();
                 }
                 return true;
             case 16908320:
-                if (setPrimaryClip(ClipData.newPlainText(null, getTransformedText(i2, length)))) {
-                    deleteText_internal(i2, length);
+                if (setPrimaryClip(ClipData.newPlainText(null, getTransformedText(iMax, length)))) {
+                    deleteText_internal(iMax, length);
                 } else {
-                    Toast.makeText(getContext(), com.android.internal.R.string.failed_to_copy_to_clipboard, 0).show();
+                    Toast.makeText(getContext(), R.string.failed_to_copy_to_clipboard, 0).show();
                 }
                 return true;
             case 16908321:
@@ -9082,7 +11533,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
                 if (setPrimaryClip(ClipData.newPlainText(null, getTransformedText(Math.max(0, Math.min(selectionStart2, selectionEnd2)), Math.max(0, Math.max(selectionStart2, selectionEnd2)))))) {
                     stopTextActionMode();
                 } else {
-                    Toast.makeText(getContext(), com.android.internal.R.string.failed_to_copy_to_clipboard, 0).show();
+                    Toast.makeText(getContext(), R.string.failed_to_copy_to_clipboard, 0).show();
                 }
                 return true;
             case 16908322:
@@ -9134,7 +11585,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
                                 Log.d(LOG_TAG, "Clipboard is not shown");
                                 return false;
                             case 16909029:
-                                deleteText_internal(i2, length);
+                                deleteText_internal(iMax, length);
                                 return true;
                             case 16909130:
                                 Editor editor5 = this.mEditor;
@@ -9148,13 +11599,13 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
                             case 16909333:
                                 ComponentName componentName = new ComponentName("com.android.settings", "com.samsung.android.settings.display.SecProcessTextManageAppsFragment");
                                 if (!this.mContext.canStartActivityForResult()) {
-                                    list = "";
+                                    string = "";
                                 } else {
-                                    list = getContext().getPackageManager().queryIntentActivities(new Intent().setAction(Intent.ACTION_PROCESS_TEXT).setType("text/plain"), 0).toString();
+                                    string = getContext().getPackageManager().queryIntentActivities(new Intent().setAction(Intent.ACTION_PROCESS_TEXT).setType("text/plain"), 0).toString();
                                 }
-                                getContext().startActivity(new Intent().setComponent(componentName).putExtra("resolveInfo", list));
+                                getContext().startActivity(new Intent().setComponent(componentName).putExtra("resolveInfo", string));
                                 return true;
-                            case 16909640:
+                            case 16909641:
                                 if (ViewRune.SUPPORT_EAGLE_EYE) {
                                     InputMethodManager inputMethodManager2 = (InputMethodManager) this.mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
                                     if (inputMethodManager2 != null) {
@@ -9168,24 +11619,24 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
                                     return false;
                                 }
                                 break;
-                            case 16909873:
+                            case 16909874:
                                 String selectedText = getSelectedText();
                                 this.mPrevSelectionStartForSSS = getSelectionStart();
                                 this.mPrevSelectionEndForSSS = getSelectionEnd();
-                                Intent putExtra = new Intent().setAction(ACTION_SSS_TRANSLATE).putExtra(Intent.EXTRA_TEXT, selectedText).putExtra("needsTranslatedTextResult", canSSSPaste());
-                                putExtra.setFlags(0);
+                                Intent intentPutExtra = new Intent().setAction(ACTION_SSS_TRANSLATE).putExtra(Intent.EXTRA_TEXT, selectedText).putExtra("needsTranslatedTextResult", canSSSPaste());
+                                intentPutExtra.setFlags(0);
                                 try {
-                                    startActivityForResult(putExtra, 101);
+                                    startActivityForResult(intentPutExtra, 101);
                                 } catch (ActivityNotFoundException e) {
                                     Log.e(LOG_TAG, "sssTranslate failed");
                                     Log.e(LOG_TAG, "ActivityNotFoundException", e);
                                 }
                                 return true;
-                            case 16910075:
+                            case 16910076:
                                 Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
-                                String charSequence = this.mTransformed.subSequence(i2, length).toString();
+                                String string2 = this.mTransformed.subSequence(iMax, length).toString();
                                 intent.putExtra(SearchManager.EXTRA_NEW_SEARCH, true);
-                                intent.putExtra("query", charSequence);
+                                intent.putExtra("query", string2);
                                 intent.putExtra(Browser.EXTRA_APPLICATION_ID, getContext().getPackageName());
                                 try {
                                     intent.setFlags(268435456);
@@ -9195,21 +11646,21 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
                                     Log.e(LOG_TAG, "ActivityNotFoundException", e2);
                                 }
                                 return true;
-                            case 16910090:
+                            case 16910091:
                                 InputMethodManager inputMethodManager3 = (InputMethodManager) this.mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
                                 if (inputMethodManager3 != null) {
                                     Bundle bundle3 = new Bundle();
                                     bundle3.putString(SemInputMethodManagerUtils.KEY_SELECTED_TEXT, getSelectedText());
                                     inputMethodManager3.sendAppPrivateCommand(this, SemInputMethodManagerUtils.ACTION_SHOW_TOOLKIT_HBD, bundle3);
                                 }
-                                if (ViewRune.SUPPORT_WRITING_TOOLKIT_ACTIVITY && !(isTextEditable = isTextEditable())) {
+                                if (ViewRune.SUPPORT_WRITING_TOOLKIT_ACTIVITY && !(zIsTextEditable = isTextEditable())) {
                                     String selectedText2 = getSelectedText();
                                     this.mPrevSelectionStartForSSS = getSelectionStart();
                                     this.mPrevSelectionEndForSSS = getSelectionEnd();
-                                    Intent putExtra2 = new Intent().setAction("com.samsung.android.intent.action.WritingToolkit").setData(Uri.parse("honeyboard://writing-toolkit")).putExtra("toolkitSubject", selectedText2).putExtra("isTextEditable", isTextEditable);
-                                    putExtra2.setFlags(0);
+                                    Intent intentPutExtra2 = new Intent().setAction("com.samsung.android.intent.action.WritingToolkit").setData(Uri.parse("honeyboard://writing-toolkit")).putExtra("toolkitSubject", selectedText2).putExtra("isTextEditable", zIsTextEditable);
+                                    intentPutExtra2.setFlags(0);
                                     try {
-                                        startActivityForResult(putExtra2, 102);
+                                        startActivityForResult(intentPutExtra2, 102);
                                     } catch (ActivityNotFoundException e3) {
                                         Log.e(LOG_TAG, "ActivityNotFoundException", e3);
                                     }
@@ -9239,32 +11690,32 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
 
     @Override // android.view.View
     public boolean performLongClick() {
-        boolean z;
+        boolean zPerformLongClick;
         Editor editor = this.mEditor;
         if (editor != null) {
             editor.mIsBeingLongClicked = true;
         }
-        boolean performLongClick = super.performLongClick();
+        boolean zPerformLongClick2 = super.performLongClick();
         Editor editor2 = this.mEditor;
         if (editor2 != null) {
-            z = editor2.performLongClick(performLongClick) | performLongClick;
+            zPerformLongClick = editor2.performLongClick(zPerformLongClick2) | zPerformLongClick2;
             this.mEditor.mIsBeingLongClicked = false;
             this.mEditor.mIsSelectedByLongClick = true;
         } else {
-            z = performLongClick;
+            zPerformLongClick = zPerformLongClick2;
         }
-        if (z) {
-            if (!performLongClick) {
+        if (zPerformLongClick) {
+            if (!zPerformLongClick2) {
                 performHapticFeedback(HapticFeedbackConstants.semGetVibrationIndex(1));
             }
             Editor editor3 = this.mEditor;
             if (editor3 != null) {
                 editor3.mDiscardNextActionUp = true;
             }
-            return z;
+            return zPerformLongClick;
         }
         MetricsLogger.action(this.mContext, MetricsProto.MetricsEvent.TEXT_LONGPRESS, 0);
-        return z;
+        return zPerformLongClick;
     }
 
     @Override // android.view.View
@@ -9340,13 +11791,13 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
                 } else {
                     str = TextClassifier.WIDGET_TYPE_UNSELECTABLE_TEXTVIEW;
                 }
-                TextClassificationContext build = new TextClassificationContext.Builder(this.mContext.getPackageName(), str).build();
-                this.mTextClassificationContext = build;
+                TextClassificationContext textClassificationContextBuild = new TextClassificationContext.Builder(this.mContext.getPackageName(), str).build();
+                this.mTextClassificationContext = textClassificationContextBuild;
                 TextClassifier textClassifier2 = this.mTextClassifier;
                 if (textClassifier2 != null) {
-                    this.mTextClassificationSession = textClassificationManagerForUser.createTextClassificationSession(build, textClassifier2);
+                    this.mTextClassificationSession = textClassificationManagerForUser.createTextClassificationSession(textClassificationContextBuild, textClassifier2);
                 } else {
-                    this.mTextClassificationSession = textClassificationManagerForUser.createTextClassificationSession(build);
+                    this.mTextClassificationSession = textClassificationManagerForUser.createTextClassificationSession(textClassificationContextBuild);
                 }
             } else {
                 this.mTextClassificationSession = TextClassifier.NO_OP;
@@ -9391,13 +11842,11 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         if (spanStart < 0 || spanEnd > this.mText.length() || spanStart >= spanEnd) {
             return false;
         }
-        final TextClassification.Request build = new TextClassification.Request.Builder(this.mText, spanStart, spanEnd).setDefaultLocales(getTextLocales()).build();
+        final TextClassification.Request requestBuild = new TextClassification.Request.Builder(this.mText, spanStart, spanEnd).setDefaultLocales(getTextLocales()).build();
         Supplier supplier = new Supplier() { // from class: android.widget.TextView$$ExternalSyntheticLambda1
             @Override // java.util.function.Supplier
             public final Object get() {
-                TextClassification lambda$handleClick$5;
-                lambda$handleClick$5 = TextView.this.lambda$handleClick$5(build);
-                return lambda$handleClick$5;
+                return this.f$0.lambda$handleClick$5(requestBuild);
             }
         };
         CompletableFuture.supplyAsync(supplier).completeOnTimeout(null, 1L, TimeUnit.SECONDS).thenAccept(new Consumer() { // from class: android.widget.TextView$$ExternalSyntheticLambda2
@@ -9468,7 +11917,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     public boolean canShare() {
-        return !isFlipCoverClosed() && getContext().canStartActivityForResult() && isDeviceProvisioned() && getContext().getResources().getBoolean(com.android.internal.R.bool.config_textShareSupported) && canCopy() && isFinishSetupWizard() && (this.mActionModeFlags & 8192) == 8192;
+        return !isFlipCoverClosed() && getContext().canStartActivityForResult() && isDeviceProvisioned() && getContext().getResources().getBoolean(R.bool.config_textShareSupported) && canCopy() && isFinishSetupWizard() && (this.mActionModeFlags & 8192) == 8192;
     }
 
     boolean isDeviceProvisioned() {
@@ -9528,10 +11977,10 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     private void shareSelectedText() {
-        Intent makeChooserIntent = makeChooserIntent(false);
-        if (makeChooserIntent != null) {
-            makeChooserIntent.setFlags(268435456);
-            getContext().startActivity(makeChooserIntent);
+        Intent intentMakeChooserIntent = makeChooserIntent(false);
+        if (intentMakeChooserIntent != null) {
+            intentMakeChooserIntent.setFlags(268435456);
+            getContext().startActivity(intentMakeChooserIntent);
             Selection.setSelection(this.mSpannable, getSelectionEnd());
         }
     }
@@ -9803,7 +12252,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     @Override // android.view.View
-    protected void encodeProperties(ViewHierarchyEncoder viewHierarchyEncoder) {
+    protected void encodeProperties(ViewHierarchyEncoder viewHierarchyEncoder) throws Resources.NotFoundException, IOException {
         super.encodeProperties(viewHierarchyEncoder);
         TextUtils.TruncateAt ellipsize = getEllipsize();
         viewHierarchyEncoder.addProperty("text:ellipsize", ellipsize == null ? null : ellipsize.name());
@@ -10309,7 +12758,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
             super.setInstanceByType(i);
             if (i == 2) {
                 this.mPopupGravity = 12849;
-                this.mAnimationStyle = com.android.internal.R.style.Animation_HoverPopup;
+                this.mAnimationStyle = R.style.Animation_HoverPopup;
                 this.mHoverDetectTimeMS = 300;
             }
         }
@@ -10324,7 +12773,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
 
         @Override // com.samsung.android.widget.SemHoverPopupWindow
         protected void makeDefaultContentView() {
-            LayoutInflater from;
+            LayoutInflater layoutInflaterFrom;
             TextView textView;
             int i = TextView.this.mContext.getResources().getConfiguration().orientation;
             TextView textView2 = null;
@@ -10332,11 +12781,11 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
                 TypedValue typedValue = new TypedValue();
                 TextView.this.mContext.getTheme().resolveAttribute(16843945, typedValue, false);
                 if (!TextView.this.mIsThemeDeviceDefault || typedValue.data == 0) {
-                    from = LayoutInflater.from(TextView.this.mContext);
+                    layoutInflaterFrom = LayoutInflater.from(TextView.this.mContext);
                 } else {
-                    from = LayoutInflater.from(new ContextThemeWrapper(TextView.this.mContext, typedValue.data));
+                    layoutInflaterFrom = LayoutInflater.from(new ContextThemeWrapper(TextView.this.mContext, typedValue.data));
                 }
-                TextView textView3 = (TextView) from.inflate(com.android.internal.R.layout.hover_text_popup, (ViewGroup) null);
+                TextView textView3 = (TextView) layoutInflaterFrom.inflate(R.layout.hover_text_popup, (ViewGroup) null);
                 textView3.semSetHoverPopupType(0);
                 textView3.setId(ID_INFO_VIEW);
                 this.mInitialMaxLine = textView3.getMaxLines();
@@ -10363,9 +12812,9 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
             this.mStrikeThroughPaint.setStrokeWidth(Math.max(getTextSize() / 18.0f, 1.0f));
         }
         if (this.mDrawTextStrikeAnimator == null) {
-            ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-            this.mDrawTextStrikeAnimator = ofFloat;
-            ofFloat.setDuration(400L);
+            ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+            this.mDrawTextStrikeAnimator = valueAnimatorOfFloat;
+            valueAnimatorOfFloat.setDuration(400L);
             this.mDrawTextStrikeAnimator.addListener(new AnimatorListenerAdapter() { // from class: android.widget.TextView.4
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public void onAnimationEnd(Animator animator) {
@@ -10382,131 +12831,61 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:29:0x007d  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x0090  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x0097  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x00b4  */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x00b7 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:41:0x0093  */
+    /* JADX WARN: Removed duplicated region for block: B:25:0x005f  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private void drawTextStrikethrough(android.graphics.Canvas r18, int r19) {
-        /*
-            r17 = this;
-            r0 = r17
-            r1 = r18
-            int r7 = r0.getTotalPaddingLeft()
-            int r8 = r0.getTotalPaddingTop()
-            int r9 = r0.getLineCount()
-            android.text.Layout r10 = r0.getLayout()
-            android.graphics.Paint r2 = r0.mStrikeThroughPaint
-            if (r2 == 0) goto L1d
-            r3 = r19
-            r2.setColor(r3)
-        L1d:
-            boolean r2 = r0.mTextStrikeThroughEnabled
-            if (r2 == 0) goto Lbc
-            float r2 = r0.mDrawStrikeAnimationValue
-            r11 = 0
-            int r2 = (r2 > r11 ? 1 : (r2 == r11 ? 0 : -1))
-            if (r2 <= 0) goto Lbc
-            android.graphics.Paint r2 = r0.mStrikeThroughPaint
-            if (r2 == 0) goto Lbc
-            if (r9 <= 0) goto Lbc
-            float[] r12 = new float[r9]
-            r13 = 0
-            r2 = r13
-        L32:
-            if (r2 >= r9) goto L46
-            float r3 = r10.getLineWidth(r2)
-            r12[r2] = r3
-            if (r2 <= 0) goto L43
-            int r4 = r2 + (-1)
-            r4 = r12[r4]
-            float r3 = r3 + r4
-            r12[r2] = r3
-        L43:
-            int r2 = r2 + 1
-            goto L32
-        L46:
-            int r2 = r9 + (-1)
-            r2 = r12[r2]
-            float r3 = r0.mDrawStrikeAnimationValue
-            float r14 = r2 * r3
-            r15 = r13
-        L4f:
-            if (r15 >= r9) goto Lbc
-            if (r15 != 0) goto L55
-            r2 = r11
-            goto L59
-        L55:
-            int r2 = r15 + (-1)
-            r2 = r12[r2]
-        L59:
-            r3 = r12[r15]
-            int r4 = (r14 > r2 ? 1 : (r14 == r2 ? 0 : -1))
-            if (r4 > 0) goto L61
-        L5f:
-            r2 = r11
-            goto L72
-        L61:
-            int r4 = (r14 > r2 ? 1 : (r14 == r2 ? 0 : -1))
-            if (r4 <= 0) goto L6c
-            int r4 = (r14 > r3 ? 1 : (r14 == r3 ? 0 : -1))
-            if (r4 > 0) goto L6c
-            float r2 = r14 - r2
-            goto L72
-        L6c:
-            int r4 = (r14 > r3 ? 1 : (r14 == r3 ? 0 : -1))
-            if (r4 <= 0) goto L5f
-            float r2 = r3 - r2
-        L72:
-            r10.getLineTop(r15)
-            int r3 = r10.getLineBaseline(r15)
-            int r3 = r3 + r8
-            float r3 = (float) r3
-            if (r15 != 0) goto L80
-            r10.getTopPadding()
-        L80:
-            float r4 = r0.getTextSize()
-            r5 = -1097709275(0xffffffffbe924925, float:-0.2857143)
-            float r4 = r4 * r5
-            float r3 = r3 + r4
-            int r4 = r0.getLayoutDirection()
-            r5 = 1
-            if (r4 != r5) goto L93
-            r16 = r5
-            goto L95
-        L93:
-            r16 = r13
-        L95:
-            if (r16 == 0) goto La9
-            r1.save()
-            int r4 = r0.getWidth()
-            float r4 = (float) r4
-            r1.translate(r4, r11)
-            r4 = -1082130432(0xffffffffbf800000, float:-1.0)
-            r5 = 1065353216(0x3f800000, float:1.0)
-            r1.scale(r4, r5)
-        La9:
-            r4 = r2
-            float r2 = (float) r7
-            float r4 = r4 + r2
-            android.graphics.Paint r6 = r0.mStrikeThroughPaint
-            r5 = r3
-            r1.drawLine(r2, r3, r4, r5, r6)
-            if (r16 == 0) goto Lb7
-            r18.restore()
-        Lb7:
-            int r15 = r15 + 1
-            r1 = r18
-            goto L4f
-        Lbc:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.TextView.drawTextStrikethrough(android.graphics.Canvas, int):void");
+    private void drawTextStrikethrough(Canvas canvas, int i) {
+        float f;
+        Canvas canvas2 = canvas;
+        int totalPaddingLeft = getTotalPaddingLeft();
+        int totalPaddingTop = getTotalPaddingTop();
+        int lineCount = getLineCount();
+        Layout layout = getLayout();
+        Paint paint = this.mStrikeThroughPaint;
+        if (paint != null) {
+            paint.setColor(i);
+        }
+        if (!this.mTextStrikeThroughEnabled || this.mDrawStrikeAnimationValue <= 0.0f || this.mStrikeThroughPaint == null || lineCount <= 0) {
+            return;
+        }
+        float[] fArr = new float[lineCount];
+        for (int i2 = 0; i2 < lineCount; i2++) {
+            float lineWidth = layout.getLineWidth(i2);
+            fArr[i2] = lineWidth;
+            if (i2 > 0) {
+                fArr[i2] = lineWidth + fArr[i2 - 1];
+            }
+        }
+        float f2 = fArr[lineCount - 1] * this.mDrawStrikeAnimationValue;
+        int i3 = 0;
+        while (i3 < lineCount) {
+            float f3 = i3 == 0 ? 0.0f : fArr[i3 - 1];
+            float f4 = fArr[i3];
+            if (f2 > f3) {
+                f = (f2 <= f3 || f2 > f4) ? f2 > f4 ? f4 - f3 : 0.0f : f2 - f3;
+            }
+            layout.getLineTop(i3);
+            float lineBaseline = layout.getLineBaseline(i3) + totalPaddingTop;
+            if (i3 == 0) {
+                layout.getTopPadding();
+            }
+            float textSize = lineBaseline + (getTextSize() * (-0.2857143f));
+            boolean z = getLayoutDirection() == 1;
+            if (z) {
+                canvas2.save();
+                canvas2.translate(getWidth(), 0.0f);
+                canvas2.scale(-1.0f, 1.0f);
+            }
+            float f5 = f;
+            float f6 = totalPaddingLeft;
+            canvas2.drawLine(f6, textSize, f5 + f6, textSize, this.mStrikeThroughPaint);
+            if (z) {
+                canvas.restore();
+            }
+            i3++;
+            canvas2 = canvas;
+        }
     }
 
     public void semSetAnimatedStrike(boolean z) {
@@ -10561,40 +12940,44 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         return getVisibility() == 0 && compoundPaddingLeft > 0 && getLineCount() == 1 && getLayout() != null && (((int) getLayout().getLineWidth(0)) > compoundPaddingLeft || getLayout().getEllipsisCount(0) > 0);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:42:0x0081  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public static void semSetSelection(Spannable spannable, int i, int i2) {
         int i3;
         int i4;
         int length = spannable.length();
-        try {
-            if ((i > 0 && i < length) || (i2 > 0 && i2 < length)) {
-                boolean z = i > 0 && i < length && (TextUtils.isCombinedCode(spannable.charAt(i)) || spannable.charAt(i + (-1)) == Emoji.ZERO_WIDTH_JOINER);
-                if (i2 > 0 && i2 < length) {
-                    char charAt = spannable.charAt(i2);
-                    if (!z && (TextUtils.isCombinedCode(charAt) || spannable.charAt(i2 - 1) == Emoji.ZERO_WIDTH_JOINER)) {
-                        z = true;
-                    }
-                }
-                if (z) {
-                    float[] fArr = new float[length];
-                    char[] cArr = new char[length];
-                    Paint paint = new Paint(1);
-                    TextUtils.getChars(spannable, 0, length, cArr, 0);
-                    paint.getTextRunAdvances(cArr, 0, length, 0, length, false, fArr, 0);
-                    int i5 = i;
-                    while (i5 < length && fArr[i5] == 0.0f && cArr[i5] != '\n') {
-                        i5++;
-                    }
-                    i4 = i2;
-                    while (i4 < length && fArr[i4] == 0.0f && cArr[i4] != '\n') {
-                        i4++;
-                    }
-                    i3 = i5;
-                    Selection.setSelection(spannable, i3, i4);
-                    return;
+        if ((i <= 0 || i >= length) && (i2 <= 0 || i2 >= length)) {
+            i3 = i;
+            i4 = i2;
+        } else {
+            boolean z = i > 0 && i < length && (TextUtils.isCombinedCode(spannable.charAt(i)) || spannable.charAt(i + (-1)) == Emoji.ZERO_WIDTH_JOINER);
+            if (i2 > 0 && i2 < length) {
+                char cCharAt = spannable.charAt(i2);
+                if (!z && (TextUtils.isCombinedCode(cCharAt) || spannable.charAt(i2 - 1) == Emoji.ZERO_WIDTH_JOINER)) {
+                    z = true;
                 }
             }
+            if (z) {
+                float[] fArr = new float[length];
+                char[] cArr = new char[length];
+                Paint paint = new Paint(1);
+                TextUtils.getChars(spannable, 0, length, cArr, 0);
+                paint.getTextRunAdvances(cArr, 0, length, 0, length, false, fArr, 0);
+                int i5 = i;
+                while (i5 < length && fArr[i5] == 0.0f && cArr[i5] != '\n') {
+                    i5++;
+                }
+                i4 = i2;
+                while (i4 < length && fArr[i4] == 0.0f && cArr[i4] != '\n') {
+                    i4++;
+                }
+                i3 = i5;
+            }
+        }
+        try {
             Selection.setSelection(spannable, i3, i4);
-            return;
         } catch (IndexOutOfBoundsException e) {
             Log.e(LOG_TAG, "TextView.semSetSelection");
             Log.e(LOG_TAG, "text : " + ((Object) spannable));
@@ -10602,8 +12985,6 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
             Log.e(LOG_TAG, "start : " + i3 + ", stop" + i4);
             throw e;
         }
-        i3 = i;
-        i4 = i2;
     }
 
     public static void semSetSelection(Spannable spannable, int i) {
@@ -10683,9 +13064,9 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         if (inputMethodManager == null) {
             return false;
         }
-        boolean semIsAccessoryKeyboard = inputMethodManager.semIsAccessoryKeyboard();
+        boolean zSemIsAccessoryKeyboard = inputMethodManager.semIsAccessoryKeyboard();
         int i = Settings.Secure.getInt(this.mContext.getContentResolver(), Settings.Secure.SHOW_IME_WITH_HARD_KEYBOARD, 0);
-        if (semIsAccessoryKeyboard && i != 1) {
+        if (zSemIsAccessoryKeyboard && i != 1) {
             Log.d(LOG_TAG, "isAccessoryKeyboard is true, showImeWithHardKeyboard : " + i);
             return false;
         }
@@ -10721,9 +13102,9 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         }
         Editor editor = this.mEditor;
         if ((editor == null || editor.mShowSoftInputOnFocus) && !isKeyguardLocked() && isFinishSetupWizard() && Settings.System.getInt(this.mContext.getContentResolver(), Settings.System.SEM_EMERGENCY_MODE, 0) != 1 && (inputMethodManager = (InputMethodManager) this.mContext.getSystemService(Context.INPUT_METHOD_SERVICE)) != null) {
-            boolean semIsAccessoryKeyboard = inputMethodManager.semIsAccessoryKeyboard();
+            boolean zSemIsAccessoryKeyboard = inputMethodManager.semIsAccessoryKeyboard();
             int i = Settings.Secure.getInt(this.mContext.getContentResolver(), Settings.Secure.SHOW_IME_WITH_HARD_KEYBOARD, 0);
-            if (semIsAccessoryKeyboard && i != 1) {
+            if (zSemIsAccessoryKeyboard && i != 1) {
                 return false;
             }
             String stringForUser = Settings.Secure.getStringForUser(this.mContext.getContentResolver(), Settings.Secure.DEFAULT_INPUT_METHOD, -3);
@@ -10777,8 +13158,8 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         if (privateImeOptions == null) {
             return false;
         }
-        List asList = Arrays.asList(privateImeOptions.split(NavigationBarInflaterView.GRAVITY_SEPARATOR));
-        return asList.contains("inputType=month_edittext") || asList.contains("inputType=ipAddress");
+        List listAsList = Arrays.asList(privateImeOptions.split(NavigationBarInflaterView.GRAVITY_SEPARATOR));
+        return listAsList.contains("inputType=month_edittext") || listAsList.contains("inputType=ipAddress");
     }
 
     protected SemClipboardManager getSemClipboardManager() {
@@ -10840,11 +13221,11 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
                 if (action != 1) {
                     return;
                 }
-                long uptimeMillis = SystemClock.uptimeMillis() - this.mPressTime;
-                float abs = Math.abs(rawX - this.mStartX);
-                float abs2 = Math.abs(rawY - this.mStartY);
-                boolean z = (abs * abs) + (abs2 * abs2) <= TextView.this.TOUCH_DELTA * TextView.this.TOUCH_DELTA;
-                if (!MultiSelection.getIsMultiSelectingText() && uptimeMillis < 1000 && z) {
+                long jUptimeMillis = SystemClock.uptimeMillis() - this.mPressTime;
+                float fAbs = Math.abs(rawX - this.mStartX);
+                float fAbs2 = Math.abs(rawY - this.mStartY);
+                boolean z = (fAbs * fAbs) + (fAbs2 * fAbs2) <= TextView.this.TOUCH_DELTA * TextView.this.TOUCH_DELTA;
+                if (!MultiSelection.getIsMultiSelectingText() && jUptimeMillis < 1000 && z) {
                     if (TextView.this.getPenSelectionController().isPenSelectionArea(TextView.this.getContext(), TextView.this.getRootView(), (int) rawX, (int) rawY)) {
                         return;
                     }
@@ -10861,11 +13242,11 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
 
     @Override // android.view.View
     public boolean performClick() {
-        boolean performClick = super.performClick();
-        if (ViewRune.WIDGET_PEN_SUPPORTED && performClick && this.mhasMultiSelection) {
+        boolean zPerformClick = super.performClick();
+        if (ViewRune.WIDGET_PEN_SUPPORTED && zPerformClick && this.mhasMultiSelection) {
             clearMultiSelection();
         }
-        return performClick;
+        return zPerformClick;
     }
 
     public static final boolean semIsTextSelectionProgressing() {
@@ -10972,9 +13353,9 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     private boolean isCoverOpened() {
         if (ViewRune.WIDGET_PEN_SUPPORTED) {
             try {
-                ICoverManager asInterface = ICoverManager.Stub.asInterface(ServiceManager.getService(UnionConstants.SERVICE_COVER));
-                if (asInterface != null) {
-                    return asInterface.getCoverState().getSwitchState();
+                ICoverManager iCoverManagerAsInterface = ICoverManager.Stub.asInterface(ServiceManager.getService(UnionConstants.SERVICE_COVER));
+                if (iCoverManagerAsInterface != null) {
+                    return iCoverManagerAsInterface.getCoverState().getSwitchState();
                 }
             } catch (Exception unused) {
                 Log.w(LOG_TAG, "isCoverOpened() : RemoteException!!!!");
@@ -11001,11 +13382,11 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
             Log.d(LOG_TAG, "keyGuard Service is null");
             return false;
         }
-        boolean isKeyguardLocked = keyguardManager.isKeyguardLocked();
-        if (isKeyguardLocked) {
+        boolean zIsKeyguardLocked = keyguardManager.isKeyguardLocked();
+        if (zIsKeyguardLocked) {
             Log.d(LOG_TAG, "Keyguard is Locked!");
         }
-        return isKeyguardLocked;
+        return zIsKeyguardLocked;
     }
 
     private boolean isSubWindow() {
@@ -11211,13 +13592,13 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
                     Log.e(LOG_TAG, "AirDic : line = " + lineAtCoordinate + ", sLine = " + lineForOffset + ", eLine = " + lineForOffset2);
                     return null;
                 }
-                CharSequence subSequence = textForMultiSelection.subSequence(beginning, end);
+                CharSequence charSequenceSubSequence = textForMultiSelection.subSequence(beginning, end);
                 int lineTop = layout.getLineTop(lineAtCoordinate);
                 int lineBottom = layout.getLineBottom(lineAtCoordinate);
                 rect2.setEmpty();
                 layout.getSelectionRect(lineAtCoordinate, beginning, end, lineTop, lineBottom, rect2);
                 rect2.offset((screenPointOfView.x + getTotalPaddingLeft()) - getScrollX(), (screenPointOfView.y + getTotalPaddingTop()) - getScrollY());
-                return subSequence;
+                return charSequenceSubSequence;
             }
         }
         return null;
@@ -11420,8 +13801,8 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     /* JADX INFO: Access modifiers changed from: private */
     public boolean selectCurrentWordForMultiSelection(int i, int i2) {
         CharSequence textForMultiSelection;
-        int i3;
-        int i4;
+        int spanStart;
+        int spanEnd;
         if (!ViewRune.WIDGET_PEN_SUPPORTED || (textForMultiSelection = getTextForMultiSelection()) == null) {
             return false;
         }
@@ -11430,9 +13811,9 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
             return true;
         }
         int inputType = getInputType();
-        int i5 = inputType & 15;
-        int i6 = inputType & InputType.TYPE_MASK_VARIATION;
-        if (i5 == 2 || i5 == 3 || i5 == 4 || i6 == 16 || i6 == 32 || i6 == 208 || i6 == 176) {
+        int i3 = inputType & 15;
+        int i4 = inputType & InputType.TYPE_MASK_VARIATION;
+        if (i3 == 2 || i3 == 3 || i3 == 4 || i4 == 16 || i4 == 32 || i4 == 208 || i4 == 176) {
             MultiSelection.selectAll((Spannable) textForMultiSelection);
             return true;
         }
@@ -11440,8 +13821,8 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         URLSpan[] uRLSpanArr = (URLSpan[]) spanned.getSpans(i, i2, URLSpan.class);
         if (uRLSpanArr.length >= 1) {
             URLSpan uRLSpan = uRLSpanArr[0];
-            i3 = spanned.getSpanStart(uRLSpan);
-            i4 = spanned.getSpanEnd(uRLSpan);
+            spanStart = spanned.getSpanStart(uRLSpan);
+            spanEnd = spanned.getSpanEnd(uRLSpan);
         } else {
             if (this.mWordIteratorForMultiSelection == null) {
                 this.mWordIteratorForMultiSelection = new WordIterator(getTextServicesLocale());
@@ -11450,14 +13831,14 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
             int beginning = this.mWordIteratorForMultiSelection.getBeginning(i);
             int end = this.mWordIteratorForMultiSelection.getEnd(i2);
             if (beginning != -1 && end != -1 && beginning != end) {
-                i3 = beginning;
-                i4 = end;
+                spanStart = beginning;
+                spanEnd = end;
             }
             return false;
         }
-        if (i3 >= 0 && i4 >= 0 && i3 < i4) {
+        if (spanStart >= 0 && spanEnd >= 0 && spanStart < spanEnd) {
             this.mIsTouchDown = false;
-            MultiSelection.setSelection((Spannable) textForMultiSelection, i3, i4);
+            MultiSelection.setSelection((Spannable) textForMultiSelection, spanStart, spanEnd);
             return true;
         }
         return false;
@@ -11600,9 +13981,9 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
                 break;
             case 16909394:
                 try {
-                    Intent makeChooserIntent = makeChooserIntent(true);
-                    makeChooserIntent.addFlags(268435456);
-                    getContext().startActivity(makeChooserIntent);
+                    Intent intentMakeChooserIntent = makeChooserIntent(true);
+                    intentMakeChooserIntent.addFlags(268435456);
+                    getContext().startActivity(intentMakeChooserIntent);
                     break;
                 } catch (ActivityNotFoundException e) {
                     Log.e(LOG_TAG, "Share failed");
@@ -11646,7 +14027,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     @Override // android.view.View
-    public boolean onHoverEvent(MotionEvent motionEvent) {
+    public boolean onHoverEvent(MotionEvent motionEvent) throws IllegalStateException, IllegalArgumentException {
         long j;
         long j2;
         float primaryHorizontal;
@@ -11732,11 +14113,11 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
                         this.mIsShowingLinkPreview = true;
                         int spanStart = spannable.getSpanStart(uRLSpanArr[0]);
                         int spanEnd = spannable.getSpanEnd(uRLSpanArr[0]);
-                        String charSequence = textForMultiSelection.subSequence(spanStart, spanEnd).toString();
-                        if (emailPattern.matcher(charSequence).find()) {
+                        String string = textForMultiSelection.subSequence(spanStart, spanEnd).toString();
+                        if (emailPattern.matcher(string).find()) {
                             return super.onHoverEvent(motionEvent);
                         }
-                        if (!urlPattern.matcher(charSequence).find()) {
+                        if (!urlPattern.matcher(string).find()) {
                             return super.onHoverEvent(motionEvent);
                         }
                         int lineForOffset = layout.getLineForOffset(spanStart);
@@ -11787,8 +14168,8 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
                                         int i4 = (int) (rawYForScaledWindow + y3);
                                         Rect rect = new Rect();
                                         rect.set(rawXForScaledWindow, i3, rawXForScaledWindow + 1, i4);
-                                        if (!TextUtils.isEmpty(charSequence)) {
-                                            semInfoExtractionManager.showLinkPreview(charSequence, rect);
+                                        if (!TextUtils.isEmpty(string)) {
+                                            semInfoExtractionManager.showLinkPreview(string, rect);
                                             this.mIsShowingLinkPreview = false;
                                         }
                                     }
@@ -11871,7 +14252,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         }
 
         @Override // android.view.ViewTreeObserver.SemOnStylusButtonEventListener
-        public void onStylusButtonEvent(MotionEvent motionEvent) {
+        public void onStylusButtonEvent(MotionEvent motionEvent) throws IllegalArgumentException {
             if (ViewRune.WIDGET_PEN_SUPPORTED) {
                 int actionMasked = motionEvent.getActionMasked();
                 if (motionEvent.getToolType(0) == 2 && TextView.this.mEnableMultiSelection) {
@@ -12096,7 +14477,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
                         }
                         TextView.mShowPenSelectionRunnable = new Runnable() { // from class: android.widget.TextView.StylusEventListener.1
                             @Override // java.lang.Runnable
-                            public void run() {
+                            public void run() throws IllegalArgumentException {
                                 CharSequence textForMultiSelection2 = TextView.this.getTextForMultiSelection();
                                 if (TextView.this.selectCurrentWordForMultiSelection(StylusEventListener.this.mStartCurPosition, StylusEventListener.this.mEndCurPosition)) {
                                     Spannable spannable3 = (Spannable) textForMultiSelection2;
@@ -12200,25 +14581,25 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         Resources resources = getResources();
         this.mIsNightMode = (resources.getConfiguration().uiMode & 48) == 32;
         this.mButtonShapeSettingEnabled = resources.getConfiguration().semButtonShapeEnabled == 1;
-        this.mButtonShapeTextColorLight = resources.getColor(com.android.internal.R.color.sem_button_shape_text_color_light, null);
-        this.mButtonShapeTextColorDark = resources.getColor(com.android.internal.R.color.sem_button_shape_text_color_dark, null);
-        this.mButtonShapeOutlineStrokeEnabled = resources.getInteger(com.android.internal.R.integer.sem_button_shape_outline_stroke_enabled);
-        this.mButtonShapeOutlineStrokeDisabled = resources.getInteger(com.android.internal.R.integer.sem_button_shape_outline_stroke_disabled);
+        this.mButtonShapeTextColorLight = resources.getColor(R.color.sem_button_shape_text_color_light, null);
+        this.mButtonShapeTextColorDark = resources.getColor(R.color.sem_button_shape_text_color_dark, null);
+        this.mButtonShapeOutlineStrokeEnabled = resources.getInteger(R.integer.sem_button_shape_outline_stroke_enabled);
+        this.mButtonShapeOutlineStrokeDisabled = resources.getInteger(R.integer.sem_button_shape_outline_stroke_disabled);
         this.mButtonShapeAlpha = this.mButtonShapeOutlineStrokeEnabled;
-        this.mButtonShapeOutlineStrokeTop = resources.getDimensionPixelSize(com.android.internal.R.dimen.sem_button_shape_outline_stroke_top);
-        this.mButtonShapeOutlineStrokeBottom = resources.getDimensionPixelSize(com.android.internal.R.dimen.sem_button_shape_outline_stroke_bottom);
-        this.mButtonShapeOutlineStrokeHorizontal = resources.getDimensionPixelSize(com.android.internal.R.dimen.sem_button_shape_outline_stroke_horizontal);
-        this.mButtonShapeOutlineRadius = resources.getDimensionPixelSize(com.android.internal.R.dimen.sem_button_shape_outline_radius);
+        this.mButtonShapeOutlineStrokeTop = resources.getDimensionPixelSize(R.dimen.sem_button_shape_outline_stroke_top);
+        this.mButtonShapeOutlineStrokeBottom = resources.getDimensionPixelSize(R.dimen.sem_button_shape_outline_stroke_bottom);
+        this.mButtonShapeOutlineStrokeHorizontal = resources.getDimensionPixelSize(R.dimen.sem_button_shape_outline_stroke_horizontal);
+        this.mButtonShapeOutlineRadius = resources.getDimensionPixelSize(R.dimen.sem_button_shape_outline_radius);
     }
 
     private int getButtonShapeTextColor() {
-        double calculateLuminance = ColorUtils.calculateLuminance(this.mButtonShapeColor);
-        this.mButtonShapeLuminance = calculateLuminance;
+        double dCalculateLuminance = ColorUtils.calculateLuminance(this.mButtonShapeColor);
+        this.mButtonShapeLuminance = dCalculateLuminance;
         Integer num = this.mButtonShapeTextColor;
         if (num != null) {
             return num.intValue();
         }
-        return this.mIsNightMode ? (calculateLuminance <= SContextConstants.ENVIRONMENT_VALUE_UNKNOWN || calculateLuminance >= 0.25d) ? this.mButtonShapeTextColorDark : this.mButtonShapeTextColorLight : calculateLuminance > 0.8d ? this.mButtonShapeTextColorDark : this.mButtonShapeTextColorLight;
+        return this.mIsNightMode ? (dCalculateLuminance <= SContextConstants.ENVIRONMENT_VALUE_UNKNOWN || dCalculateLuminance >= 0.25d) ? this.mButtonShapeTextColorDark : this.mButtonShapeTextColorLight : dCalculateLuminance > 0.8d ? this.mButtonShapeTextColorDark : this.mButtonShapeTextColorLight;
     }
 
     public void setCursorThicknessScale(float f) {
@@ -12235,27 +14616,27 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     void startChooserPopupActivity(Point point, boolean z) {
-        Intent makeChooserIntent = makeChooserIntent(z);
-        if (makeChooserIntent == null) {
+        Intent intentMakeChooserIntent = makeChooserIntent(z);
+        if (intentMakeChooserIntent == null) {
             return;
         }
-        ActivityOptions makeBasic = ActivityOptions.makeBasic();
-        makeBasic.semSetChooserPopOverPosition(getPosition(point));
-        makeChooserIntent.setFlags(268435456);
-        getContext().startActivity(makeChooserIntent, makeBasic.toBundle());
+        ActivityOptions activityOptionsMakeBasic = ActivityOptions.makeBasic();
+        activityOptionsMakeBasic.semSetChooserPopOverPosition(getPosition(point));
+        intentMakeChooserIntent.setFlags(268435456);
+        getContext().startActivity(intentMakeChooserIntent, activityOptionsMakeBasic.toBundle());
         if (z) {
             return;
         }
         Selection.setSelection(this.mSpannable, getSelectionEnd());
     }
 
-    private int getPosition(Point point) {
+    private int getPosition(Point point) throws Resources.NotFoundException {
         int i;
         Resources resources = getResources();
         DisplayMetrics displayMetrics = resources.getDisplayMetrics();
         int i2 = displayMetrics.heightPixels;
         int i3 = displayMetrics.widthPixels;
-        int dimensionPixelSize = resources.getDimensionPixelSize(com.android.internal.R.dimen.status_bar_height);
+        int dimensionPixelSize = resources.getDimensionPixelSize(R.dimen.status_bar_height);
         Point point2 = new Point();
         point2.x = i3 / 3;
         point2.y = (i2 - dimensionPixelSize) / 3;
@@ -12269,13 +14650,13 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
 
     private Intent makeChooserIntent(boolean z) {
         String selectedText;
-        String str;
+        String string;
         if (z) {
             selectedText = getPenSelectionController().getPenSelectionContents(getContext(), getRootView());
-            str = getContext().getString(com.android.internal.R.string.share);
+            string = getContext().getString(R.string.share);
         } else {
             selectedText = getSelectedText();
-            str = null;
+            string = null;
         }
         if (selectedText == null || selectedText.isEmpty()) {
             return null;
@@ -12284,7 +14665,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         intent.setType("text/plain");
         intent.removeExtra(Intent.EXTRA_TEXT);
         intent.putExtra(Intent.EXTRA_TEXT, (String) TextUtils.trimToParcelableSize(selectedText));
-        return Intent.createChooser(intent, str);
+        return Intent.createChooser(intent, string);
     }
 
     boolean canSSSPaste() {

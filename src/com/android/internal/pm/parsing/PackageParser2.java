@@ -50,23 +50,21 @@ public class PackageParser2 implements AutoCloseable {
             displayMetrics = new DisplayMetrics();
             displayMetrics.setToDefaults();
         }
-        Application currentApplication = ActivityThread.currentApplication();
-        List<PermissionManager.SplitPermissionInfo> splitPermissions = (currentApplication == null || (permissionManager = (PermissionManager) currentApplication.getSystemService(PermissionManager.class)) == null) ? null : permissionManager.getSplitPermissions();
+        Application applicationCurrentApplication = ActivityThread.currentApplication();
+        List<PermissionManager.SplitPermissionInfo> splitPermissions = (applicationCurrentApplication == null || (permissionManager = (PermissionManager) applicationCurrentApplication.getSystemService(PermissionManager.class)) == null) ? null : permissionManager.getSplitPermissions();
         splitPermissions = splitPermissions == null ? new ArrayList<>() : splitPermissions;
         this.mCacher = iPackageCacher;
         this.mParsingUtils = new ParsingPackageUtils(strArr, displayMetrics, splitPermissions, callback);
         final ParseInput.Callback callback2 = new ParseInput.Callback() { // from class: com.android.internal.pm.parsing.PackageParser2$$ExternalSyntheticLambda1
             @Override // android.content.pm.parsing.result.ParseInput.Callback
             public final boolean isChangeEnabled(long j, String str, int i) {
-                boolean lambda$new$1;
-                lambda$new$1 = PackageParser2.this.lambda$new$1(callback, j, str, i);
-                return lambda$new$1;
+                return this.f$0.lambda$new$1(callback, j, str, i);
             }
         };
         this.mSharedResult = ThreadLocal.withInitial(new Supplier() { // from class: com.android.internal.pm.parsing.PackageParser2$$ExternalSyntheticLambda2
             @Override // java.util.function.Supplier
             public final Object get() {
-                return PackageParser2.lambda$new$2(ParseInput.Callback.this);
+                return PackageParser2.lambda$new$2(callback2);
             }
         });
     }
@@ -86,41 +84,41 @@ public class PackageParser2 implements AutoCloseable {
     public ParsedPackage parsePackage(File file, int i, boolean z) throws PackageParserException {
         IPackageCacher iPackageCacher;
         ParsedPackage cachedResult;
-        File[] listFiles = file.listFiles();
-        if (ArrayUtils.size(listFiles) == 1 && listFiles[0].isDirectory()) {
-            file = listFiles[0];
+        File[] fileArrListFiles = file.listFiles();
+        if (ArrayUtils.size(fileArrListFiles) == 1 && fileArrListFiles[0].isDirectory()) {
+            file = fileArrListFiles[0];
         }
         if (z && (iPackageCacher = this.mCacher) != null && (cachedResult = iPackageCacher.getCachedResult(file, i)) != null) {
             return cachedResult;
         }
         boolean z2 = LOG_PARSE_TIMINGS;
-        long uptimeMillis = z2 ? SystemClock.uptimeMillis() : 0L;
-        ParseResult<ParsingPackage> parsePackage = this.mParsingUtils.parsePackage(this.mSharedResult.get().reset(), file, i);
-        if (parsePackage.isError()) {
-            throw new PackageParserException(parsePackage.getErrorCode(), parsePackage.getErrorMessage(), parsePackage.getException());
+        long jUptimeMillis = z2 ? SystemClock.uptimeMillis() : 0L;
+        ParseResult<ParsingPackage> parseResult = this.mParsingUtils.parsePackage(this.mSharedResult.get().reset(), file, i);
+        if (parseResult.isError()) {
+            throw new PackageParserException(parseResult.getErrorCode(), parseResult.getErrorMessage(), parseResult.getException());
         }
-        ParsedPackage hideAsParsed = parsePackage.getResult().hideAsParsed();
-        long uptimeMillis2 = z2 ? SystemClock.uptimeMillis() : 0L;
+        ParsedPackage parsedPackageHideAsParsed = parseResult.getResult().hideAsParsed();
+        long jUptimeMillis2 = z2 ? SystemClock.uptimeMillis() : 0L;
         IPackageCacher iPackageCacher2 = this.mCacher;
         if (iPackageCacher2 != null) {
-            iPackageCacher2.cacheResult(file, i, hideAsParsed);
+            iPackageCacher2.cacheResult(file, i, parsedPackageHideAsParsed);
         }
         if (z2) {
-            long j = uptimeMillis2 - uptimeMillis;
-            long uptimeMillis3 = SystemClock.uptimeMillis() - uptimeMillis2;
-            if (j + uptimeMillis3 > 100) {
-                Slog.i("PackageParsing", "Parse times for '" + file + "': parse=" + j + "ms, update_cache=" + uptimeMillis3 + " ms");
+            long j = jUptimeMillis2 - jUptimeMillis;
+            long jUptimeMillis3 = SystemClock.uptimeMillis() - jUptimeMillis2;
+            if (j + jUptimeMillis3 > 100) {
+                Slog.i("PackageParsing", "Parse times for '" + file + "': parse=" + j + "ms, update_cache=" + jUptimeMillis3 + " ms");
             }
         }
-        return hideAsParsed;
+        return parsedPackageHideAsParsed;
     }
 
     public ParsedPackage parsePackageFromPackageLite(PackageLite packageLite, int i) throws PackageParserException {
-        ParseResult<ParsingPackage> parsePackageFromPackageLite = this.mParsingUtils.parsePackageFromPackageLite(this.mSharedResult.get().reset(), packageLite, i);
-        if (parsePackageFromPackageLite.isError()) {
-            throw new PackageParserException(parsePackageFromPackageLite.getErrorCode(), parsePackageFromPackageLite.getErrorMessage(), parsePackageFromPackageLite.getException());
+        ParseResult<ParsingPackage> packageFromPackageLite = this.mParsingUtils.parsePackageFromPackageLite(this.mSharedResult.get().reset(), packageLite, i);
+        if (packageFromPackageLite.isError()) {
+            throw new PackageParserException(packageFromPackageLite.getErrorCode(), packageFromPackageLite.getErrorMessage(), packageFromPackageLite.getException());
         }
-        return parsePackageFromPackageLite.getResult().hideAsParsed();
+        return packageFromPackageLite.getResult().hideAsParsed();
     }
 
     @Override // java.lang.AutoCloseable

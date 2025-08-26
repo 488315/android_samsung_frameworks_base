@@ -26,7 +26,6 @@ import kotlin.text.MatcherMatchResult;
 import kotlin.text.MatcherMatchResult$groupValues$1;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class LogcatEchoTrackerCommand extends ParseableCommand {
     public static final /* synthetic */ KProperty[] $$delegatedProperties;
@@ -36,7 +35,6 @@ public final class LogcatEchoTrackerCommand extends ParseableCommand {
     public final Flag list$delegate;
     public final SingleArgParamOptional tag$delegate;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -81,12 +79,12 @@ public final class LogcatEchoTrackerCommand extends ParseableCommand {
     /* JADX WARN: Type inference failed for: r0v6, types: [kotlin.text.MatcherMatchResult$groupValues$1] */
     /* JADX WARN: Type inference failed for: r1v23, types: [kotlin.text.MatcherMatchResult$groupValues$1] */
     public static Outcome parseTagStructure(String str, EchoOverrideType echoOverrideType) {
-        final MatcherMatchResult matchEntire = LogcatEchoTrackerCommandKt.OVERRIDE_PATTERN.matchEntire(str);
-        if (matchEntire == null) {
+        final MatcherMatchResult matcherMatchResultMatchEntire = LogcatEchoTrackerCommandKt.OVERRIDE_PATTERN.matchEntire(str);
+        if (matcherMatchResultMatchEntire == null) {
             return new Outcome.Failure("Cannot parse override format, must be `<name>:<level>`");
         }
-        if (matchEntire.groupValues_ == null) {
-            matchEntire.groupValues_ = new AbstractList() { // from class: kotlin.text.MatcherMatchResult$groupValues$1
+        if (matcherMatchResultMatchEntire.groupValues_ == null) {
+            matcherMatchResultMatchEntire.groupValues_ = new AbstractList() { // from class: kotlin.text.MatcherMatchResult$groupValues$1
                 @Override // kotlin.collections.AbstractCollection, java.util.Collection, java.util.List
                 public final /* bridge */ boolean contains(Object obj) {
                     if (obj instanceof String) {
@@ -97,13 +95,13 @@ public final class LogcatEchoTrackerCommand extends ParseableCommand {
 
                 @Override // java.util.List
                 public final Object get(int i) {
-                    String group = MatcherMatchResult.this.matcher.group(i);
-                    return group == null ? "" : group;
+                    String strGroup = matcherMatchResultMatchEntire.matcher.group(i);
+                    return strGroup == null ? "" : strGroup;
                 }
 
                 @Override // kotlin.collections.AbstractCollection
                 public final int getSize() {
-                    return MatcherMatchResult.this.matcher.groupCount() + 1;
+                    return matcherMatchResultMatchEntire.matcher.groupCount() + 1;
                 }
 
                 @Override // kotlin.collections.AbstractList, java.util.List
@@ -123,11 +121,11 @@ public final class LogcatEchoTrackerCommand extends ParseableCommand {
                 }
             };
         }
-        MatcherMatchResult$groupValues$1 matcherMatchResult$groupValues$1 = matchEntire.groupValues_;
+        MatcherMatchResult$groupValues$1 matcherMatchResult$groupValues$1 = matcherMatchResultMatchEntire.groupValues_;
         matcherMatchResult$groupValues$1.getClass();
         String str2 = (String) matcherMatchResult$groupValues$1.get(1);
-        if (matchEntire.groupValues_ == null) {
-            matchEntire.groupValues_ = new AbstractList() { // from class: kotlin.text.MatcherMatchResult$groupValues$1
+        if (matcherMatchResultMatchEntire.groupValues_ == null) {
+            matcherMatchResultMatchEntire.groupValues_ = new AbstractList() { // from class: kotlin.text.MatcherMatchResult$groupValues$1
                 @Override // kotlin.collections.AbstractCollection, java.util.Collection, java.util.List
                 public final /* bridge */ boolean contains(Object obj) {
                     if (obj instanceof String) {
@@ -138,13 +136,13 @@ public final class LogcatEchoTrackerCommand extends ParseableCommand {
 
                 @Override // java.util.List
                 public final Object get(int i) {
-                    String group = MatcherMatchResult.this.matcher.group(i);
-                    return group == null ? "" : group;
+                    String strGroup = matcherMatchResultMatchEntire.matcher.group(i);
+                    return strGroup == null ? "" : strGroup;
                 }
 
                 @Override // kotlin.collections.AbstractCollection
                 public final int getSize() {
-                    return MatcherMatchResult.this.matcher.groupCount() + 1;
+                    return matcherMatchResultMatchEntire.matcher.groupCount() + 1;
                 }
 
                 @Override // kotlin.collections.AbstractList, java.util.List
@@ -164,7 +162,7 @@ public final class LogcatEchoTrackerCommand extends ParseableCommand {
                 }
             };
         }
-        MatcherMatchResult$groupValues$1 matcherMatchResult$groupValues$12 = matchEntire.groupValues_;
+        MatcherMatchResult$groupValues$1 matcherMatchResult$groupValues$12 = matcherMatchResultMatchEntire.groupValues_;
         matcherMatchResult$groupValues$12.getClass();
         String str3 = (String) matcherMatchResult$groupValues$12.get(2);
         LogLevel logLevel = null;
@@ -263,15 +261,15 @@ public final class LogcatEchoTrackerCommand extends ParseableCommand {
         String str2 = (String) this.tag$delegate.getValue(this, kPropertyArr[1]);
         LogcatEchoTrackerDebug logcatEchoTrackerDebug = this.echoTracker;
         if (str != null) {
-            Outcome parseTagStructure = parseTagStructure(str, EchoOverrideType.BUFFER);
-            if (!(parseTagStructure instanceof Outcome.Success)) {
-                if (!(parseTagStructure instanceof Outcome.Failure)) {
+            Outcome tagStructure = parseTagStructure(str, EchoOverrideType.BUFFER);
+            if (!(tagStructure instanceof Outcome.Success)) {
+                if (!(tagStructure instanceof Outcome.Failure)) {
                     throw new NoWhenBranchMatchedException();
                 }
-                printWriter.println(((Outcome.Failure) parseTagStructure).message);
+                printWriter.println(((Outcome.Failure) tagStructure).message);
                 return;
             } else {
-                ParsedOverride parsedOverride = (ParsedOverride) ((Outcome.Success) parseTagStructure).value;
+                ParsedOverride parsedOverride = (ParsedOverride) ((Outcome.Success) tagStructure).value;
                 EchoOverrideType echoOverrideType = parsedOverride.type;
                 logcatEchoTrackerDebug.getClass();
                 LogcatEchoTrackerDebug$setEchoLevel$1 logcatEchoTrackerDebug$setEchoLevel$1 = new LogcatEchoTrackerDebug$setEchoLevel$1(logcatEchoTrackerDebug, echoOverrideType, parsedOverride.level, parsedOverride.name, null);
@@ -280,15 +278,15 @@ public final class LogcatEchoTrackerCommand extends ParseableCommand {
             }
         }
         if (str2 != null) {
-            Outcome parseTagStructure2 = parseTagStructure(str2, EchoOverrideType.TAG);
-            if (!(parseTagStructure2 instanceof Outcome.Success)) {
-                if (!(parseTagStructure2 instanceof Outcome.Failure)) {
+            Outcome tagStructure2 = parseTagStructure(str2, EchoOverrideType.TAG);
+            if (!(tagStructure2 instanceof Outcome.Success)) {
+                if (!(tagStructure2 instanceof Outcome.Failure)) {
                     throw new NoWhenBranchMatchedException();
                 }
-                printWriter.println(((Outcome.Failure) parseTagStructure2).message);
+                printWriter.println(((Outcome.Failure) tagStructure2).message);
                 return;
             } else {
-                ParsedOverride parsedOverride2 = (ParsedOverride) ((Outcome.Success) parseTagStructure2).value;
+                ParsedOverride parsedOverride2 = (ParsedOverride) ((Outcome.Success) tagStructure2).value;
                 EchoOverrideType echoOverrideType2 = parsedOverride2.type;
                 logcatEchoTrackerDebug.getClass();
                 LogcatEchoTrackerDebug$setEchoLevel$1 logcatEchoTrackerDebug$setEchoLevel$12 = new LogcatEchoTrackerDebug$setEchoLevel$1(logcatEchoTrackerDebug, echoOverrideType2, parsedOverride2.level, parsedOverride2.name, null);

@@ -7,11 +7,9 @@ import android.net.Uri;
 import android.os.Binder;
 import android.os.Bundle;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class RoutineSdkContentProvider extends ContentProvider {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.samsung.android.sdk.routines.v3.internal.RoutineSdkContentProvider$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] a;
@@ -33,7 +31,7 @@ public final class RoutineSdkContentProvider extends ContentProvider {
     @Override // android.content.ContentProvider
     public final Bundle call(String str, String str2, Bundle bundle) {
         ExtraValue extraValue;
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             if (getContext() == null) {
                 Log.a("RoutineSdkContentProvider", "call - context is null");
@@ -49,8 +47,8 @@ public final class RoutineSdkContentProvider extends ContentProvider {
                 return null;
             }
             int[] iArr = AnonymousClass1.a;
-            ExtraValue[] values = ExtraValue.values();
-            int length = values.length;
+            ExtraValue[] extraValueArrValues = ExtraValue.values();
+            int length = extraValueArrValues.length;
             int i = 0;
             while (true) {
                 if (i >= length) {
@@ -58,7 +56,7 @@ public final class RoutineSdkContentProvider extends ContentProvider {
                     extraValue = ExtraValue.UNKNOWN;
                     break;
                 }
-                extraValue = values[i];
+                extraValue = extraValueArrValues[i];
                 if (extraValue.a.equals(string)) {
                     break;
                 }
@@ -74,7 +72,7 @@ public final class RoutineSdkContentProvider extends ContentProvider {
             Log.a("RoutineSdkContentProvider", "call - not supported callType: " + string);
             return null;
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 

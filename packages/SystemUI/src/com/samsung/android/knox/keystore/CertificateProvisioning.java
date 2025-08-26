@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class CertificateProvisioning {
     public static final String CA_CERTIFICATE = "CACERT_";
@@ -82,9 +81,9 @@ public class CertificateProvisioning {
         if (getService() != null) {
             ArrayList arrayList = new ArrayList();
             try {
-                int generateToken = generateToken(0, 100);
+                int iGenerateToken = generateToken(0, 100);
                 do {
-                    certificatesFromKeystore = this.mSecurityService.getCertificatesFromKeystore(this.mContextInfo, i, generateToken);
+                    certificatesFromKeystore = this.mSecurityService.getCertificatesFromKeystore(this.mContextInfo, i, iGenerateToken);
                     if (certificatesFromKeystore != null) {
                         arrayList.addAll(certificatesFromKeystore);
                     }

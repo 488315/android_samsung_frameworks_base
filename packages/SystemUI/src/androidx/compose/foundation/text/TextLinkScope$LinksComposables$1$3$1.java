@@ -20,7 +20,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.SharedFlowImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class TextLinkScope$LinksComposables$1$3$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ LinkStateInteractionSourceObserver $linkStateObserver;
@@ -43,7 +42,7 @@ final class TextLinkScope$LinksComposables$1$3$1 extends SuspendLambda implement
     }
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
-    public final Object invokeSuspend(Object obj) {
+    public final Object invokeSuspend(Object obj) throws Throwable {
         Object obj2 = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i == 0) {
@@ -58,7 +57,7 @@ final class TextLinkScope$LinksComposables$1$3$1 extends SuspendLambda implement
                 public final Object emit(Object obj3, Continuation continuation) {
                     Interaction interaction = (Interaction) obj3;
                     boolean z = interaction instanceof HoverInteraction$Enter ? true : interaction instanceof FocusInteraction$Focus ? true : interaction instanceof PressInteraction$Press;
-                    MutableObjectList mutableObjectList2 = MutableObjectList.this;
+                    MutableObjectList mutableObjectList2 = mutableObjectList;
                     if (z) {
                         mutableObjectList2.add(interaction);
                     } else if (interaction instanceof HoverInteraction$Exit) {
@@ -96,11 +95,11 @@ final class TextLinkScope$LinksComposables$1$3$1 extends SuspendLambda implement
                 }
             };
             interactions.getClass();
-            Object collect$suspendImpl = SharedFlowImpl.collect$suspendImpl(interactions, flowCollector, this);
-            if (collect$suspendImpl != obj2) {
-                collect$suspendImpl = Unit.INSTANCE;
+            Object objCollect$suspendImpl = SharedFlowImpl.collect$suspendImpl(interactions, flowCollector, this);
+            if (objCollect$suspendImpl != obj2) {
+                objCollect$suspendImpl = Unit.INSTANCE;
             }
-            if (collect$suspendImpl == obj2) {
+            if (objCollect$suspendImpl == obj2) {
                 return obj2;
             }
         } else {

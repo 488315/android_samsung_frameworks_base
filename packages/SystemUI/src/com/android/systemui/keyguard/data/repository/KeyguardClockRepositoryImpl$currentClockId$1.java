@@ -13,7 +13,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class KeyguardClockRepositoryImpl$currentClockId$1 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -51,18 +50,18 @@ final class KeyguardClockRepositoryImpl$currentClockId$1 extends SuspendLambda i
             final ?? r1 = new ClockRegistry.ClockChangeListener() { // from class: com.android.systemui.keyguard.data.repository.KeyguardClockRepositoryImpl$currentClockId$1$listener$1
                 @Override // com.android.systemui.shared.clocks.ClockRegistry.ClockChangeListener
                 public final void onCurrentClockChanged() {
-                    ((ChannelCoroutine) ProducerScope.this).mo3456trySendJP2dKIU(keyguardClockRepositoryImpl.clockRegistry.getCurrentClockId());
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(keyguardClockRepositoryImpl.clockRegistry.getCurrentClockId());
                 }
             };
             ClockRegistry clockRegistry = this.this$0.clockRegistry;
             clockRegistry.f104assert.isMainThread();
             ((ArrayList) clockRegistry.clockChangeListeners).add(r1);
-            ((ChannelCoroutine) producerScope).mo3456trySendJP2dKIU(this.this$0.clockRegistry.getCurrentClockId());
+            ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(this.this$0.clockRegistry.getCurrentClockId());
             final KeyguardClockRepositoryImpl keyguardClockRepositoryImpl2 = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.keyguard.data.repository.KeyguardClockRepositoryImpl$currentClockId$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    ClockRegistry clockRegistry2 = KeyguardClockRepositoryImpl.this.clockRegistry;
+                    ClockRegistry clockRegistry2 = keyguardClockRepositoryImpl2.clockRegistry;
                     KeyguardClockRepositoryImpl$currentClockId$1$listener$1 keyguardClockRepositoryImpl$currentClockId$1$listener$1 = r1;
                     clockRegistry2.f104assert.isMainThread();
                     ((ArrayList) clockRegistry2.clockChangeListeners).remove(keyguardClockRepositoryImpl$currentClockId$1$listener$1);

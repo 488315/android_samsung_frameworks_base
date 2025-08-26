@@ -9,7 +9,6 @@ import androidx.appcompat.R$styleable;
 import androidx.appcompat.app.AppCompatDelegateImpl;
 import androidx.appcompat.view.ActionMode;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class ActionBar {
     public boolean closeOptionsMenu() {
@@ -54,16 +53,15 @@ public abstract class ActionBar {
         return null;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class LayoutParams extends ViewGroup.MarginLayoutParams {
         public int gravity;
 
         public LayoutParams(Context context, AttributeSet attributeSet) {
             super(context, attributeSet);
             this.gravity = 0;
-            TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.ActionBarLayout);
-            this.gravity = obtainStyledAttributes.getInt(0, 0);
-            obtainStyledAttributes.recycle();
+            TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.ActionBarLayout);
+            this.gravity = typedArrayObtainStyledAttributes.getInt(0, 0);
+            typedArrayObtainStyledAttributes.recycle();
         }
 
         public LayoutParams(int i, int i2) {

@@ -439,11 +439,11 @@ public final class AudioFormat implements Parcelable {
         if (i == 1) {
             throw new IllegalArgumentException("Illegal CHANNEL_OUT_DEFAULT channel mask for input.");
         }
-        int channelCountFromOutChannelMask = channelCountFromOutChannelMask(i);
-        if (channelCountFromOutChannelMask == 1) {
+        int iChannelCountFromOutChannelMask = channelCountFromOutChannelMask(i);
+        if (iChannelCountFromOutChannelMask == 1) {
             return 16;
         }
-        if (channelCountFromOutChannelMask == 2) {
+        if (iChannelCountFromOutChannelMask == 2) {
             return 12;
         }
         throw new IllegalArgumentException("Unsupported channel configuration for input.");
@@ -684,17 +684,17 @@ public final class AudioFormat implements Parcelable {
         if (iArr == null) {
             return null;
         }
-        int[] copyOf = Arrays.copyOf(iArr, iArr.length);
+        int[] iArrCopyOf = Arrays.copyOf(iArr, iArr.length);
         int i = 0;
-        for (int i2 = 0; i2 < copyOf.length; i2++) {
-            if (isPublicEncoding(copyOf[i2])) {
+        for (int i2 = 0; i2 < iArrCopyOf.length; i2++) {
+            if (isPublicEncoding(iArrCopyOf[i2])) {
                 if (i != i2) {
-                    copyOf[i] = copyOf[i2];
+                    iArrCopyOf[i] = iArrCopyOf[i2];
                 }
                 i++;
             }
         }
-        return Arrays.copyOf(copyOf, i);
+        return Arrays.copyOf(iArrCopyOf, i);
     }
 
     public AudioFormat() {
@@ -706,28 +706,28 @@ public final class AudioFormat implements Parcelable {
     }
 
     private AudioFormat(int i, int i2, int i3, int i4, int i5) {
-        int i6;
+        int bytesPerSample;
         this.mPropertySetMask = i;
-        int i7 = 0;
+        int i6 = 0;
         i2 = (i & 1) == 0 ? 0 : i2;
         this.mEncoding = i2;
         this.mSampleRate = (i & 2) == 0 ? 0 : i3;
         this.mChannelMask = (i & 4) == 0 ? 0 : i4;
         this.mChannelIndexMask = (i & 8) == 0 ? 0 : i5;
-        int bitCount = Integer.bitCount(getChannelIndexMask());
-        int channelCountFromOutChannelMask = channelCountFromOutChannelMask(getChannelMask());
-        if (channelCountFromOutChannelMask == 0) {
-            i7 = bitCount;
-        } else if (channelCountFromOutChannelMask == bitCount || bitCount == 0) {
-            i7 = channelCountFromOutChannelMask;
+        int iBitCount = Integer.bitCount(getChannelIndexMask());
+        int iChannelCountFromOutChannelMask = channelCountFromOutChannelMask(getChannelMask());
+        if (iChannelCountFromOutChannelMask == 0) {
+            i6 = iBitCount;
+        } else if (iChannelCountFromOutChannelMask == iBitCount || iBitCount == 0) {
+            i6 = iChannelCountFromOutChannelMask;
         }
-        this.mChannelCount = i7;
+        this.mChannelCount = i6;
         try {
-            i6 = getBytesPerSample(i2) * i7;
+            bytesPerSample = getBytesPerSample(i2) * i6;
         } catch (IllegalArgumentException unused) {
-            i6 = 1;
+            bytesPerSample = 1;
         }
-        this.mFrameSizeInBytes = i6 != 0 ? i6 : 1;
+        this.mFrameSizeInBytes = bytesPerSample != 0 ? bytesPerSample : 1;
     }
 
     public int getEncoding() {

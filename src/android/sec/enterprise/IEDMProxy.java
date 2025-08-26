@@ -912,9 +912,9 @@ public interface IEDMProxy extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IEDMProxy.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IEDMProxy)) {
-                return (IEDMProxy) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IEDMProxy.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IEDMProxy)) {
+                return (IEDMProxy) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -1162,182 +1162,182 @@ public interface IEDMProxy extends IInterface {
             }
             switch (i) {
                 case 1:
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    addCallsCount(readString);
+                    addCallsCount(string);
                     parcel2.writeNoException();
                     return true;
                 case 2:
-                    boolean isCallingCaptureEnabled = isCallingCaptureEnabled();
+                    boolean zIsCallingCaptureEnabled = isCallingCaptureEnabled();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isCallingCaptureEnabled);
+                    parcel2.writeBoolean(zIsCallingCaptureEnabled);
                     return true;
                 case 3:
-                    String readString2 = parcel.readString();
-                    String readString3 = parcel.readString();
-                    String readString4 = parcel.readString();
-                    String readString5 = parcel.readString();
-                    boolean readBoolean = parcel.readBoolean();
+                    String string2 = parcel.readString();
+                    String string3 = parcel.readString();
+                    String string4 = parcel.readString();
+                    String string5 = parcel.readString();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    storeCalling(readString2, readString3, readString4, readString5, readBoolean);
+                    storeCalling(string2, string3, string4, string5, z);
                     parcel2.writeNoException();
                     return true;
                 case 4:
-                    boolean isSMSCaptureEnabled = isSMSCaptureEnabled();
+                    boolean zIsSMSCaptureEnabled = isSMSCaptureEnabled();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSMSCaptureEnabled);
+                    parcel2.writeBoolean(zIsSMSCaptureEnabled);
                     return true;
                 case 5:
-                    String readString6 = parcel.readString();
-                    String readString7 = parcel.readString();
-                    String readString8 = parcel.readString();
-                    boolean readBoolean2 = parcel.readBoolean();
+                    String string6 = parcel.readString();
+                    String string7 = parcel.readString();
+                    String string8 = parcel.readString();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    storeSMS(readString6, readString7, readString8, readBoolean2);
+                    storeSMS(string6, string7, string8, z2);
                     parcel2.writeNoException();
                     return true;
                 case 6:
-                    String readString9 = parcel.readString();
-                    int readInt = parcel.readInt();
+                    String string9 = parcel.readString();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    byte[] applicationIconFromDb = getApplicationIconFromDb(readString9, readInt);
+                    byte[] applicationIconFromDb = getApplicationIconFromDb(string9, i3);
                     parcel2.writeNoException();
                     parcel2.writeByteArray(applicationIconFromDb);
                     return true;
                 case 7:
-                    boolean readBoolean3 = parcel.readBoolean();
+                    boolean z3 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean allowBluetoothDataTransfer = getAllowBluetoothDataTransfer(readBoolean3);
+                    boolean allowBluetoothDataTransfer = getAllowBluetoothDataTransfer(z3);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(allowBluetoothDataTransfer);
                     return true;
                 case 8:
-                    boolean isOutgoingCallsAllowed = isOutgoingCallsAllowed();
+                    boolean zIsOutgoingCallsAllowed = isOutgoingCallsAllowed();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isOutgoingCallsAllowed);
+                    parcel2.writeBoolean(zIsOutgoingCallsAllowed);
                     return true;
                 case 9:
-                    String readString10 = parcel.readString();
+                    String string10 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isBluetoothUUIDAllowed = isBluetoothUUIDAllowed(readString10);
+                    boolean zIsBluetoothUUIDAllowed = isBluetoothUUIDAllowed(string10);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isBluetoothUUIDAllowed);
+                    parcel2.writeBoolean(zIsBluetoothUUIDAllowed);
                     return true;
                 case 10:
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isProfileEnabled = isProfileEnabled(readInt2);
+                    boolean zIsProfileEnabled = isProfileEnabled(i4);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isProfileEnabled);
+                    parcel2.writeBoolean(zIsProfileEnabled);
                     return true;
                 case 11:
-                    String readString11 = parcel.readString();
+                    String string11 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isBluetoothDeviceAllowed = isBluetoothDeviceAllowed(readString11);
+                    boolean zIsBluetoothDeviceAllowed = isBluetoothDeviceAllowed(string11);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isBluetoothDeviceAllowed);
+                    parcel2.writeBoolean(zIsBluetoothDeviceAllowed);
                     return true;
                 case 12:
-                    boolean isPairingEnabled = isPairingEnabled();
+                    boolean zIsPairingEnabled = isPairingEnabled();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isPairingEnabled);
+                    parcel2.writeBoolean(zIsPairingEnabled);
                     return true;
                 case 13:
-                    boolean isDiscoverableEnabled = isDiscoverableEnabled();
+                    boolean zIsDiscoverableEnabled = isDiscoverableEnabled();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isDiscoverableEnabled);
+                    parcel2.writeBoolean(zIsDiscoverableEnabled);
                     return true;
                 case 14:
-                    boolean isBluetoothEnabled = isBluetoothEnabled();
+                    boolean zIsBluetoothEnabled = isBluetoothEnabled();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isBluetoothEnabled);
+                    parcel2.writeBoolean(zIsBluetoothEnabled);
                     return true;
                 case 15:
-                    int readInt3 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean browserSettingStatus = getBrowserSettingStatus(readInt3);
+                    boolean browserSettingStatus = getBrowserSettingStatus(i5);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(browserSettingStatus);
                     return true;
                 case 16:
-                    boolean isRoamingPushEnabled = isRoamingPushEnabled();
+                    boolean zIsRoamingPushEnabled = isRoamingPushEnabled();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isRoamingPushEnabled);
+                    parcel2.writeBoolean(zIsRoamingPushEnabled);
                     return true;
                 case 17:
-                    boolean isRoamingDataEnabled = isRoamingDataEnabled();
+                    boolean zIsRoamingDataEnabled = isRoamingDataEnabled();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isRoamingDataEnabled);
+                    parcel2.writeBoolean(zIsRoamingDataEnabled);
                     return true;
                 case 18:
-                    boolean readBoolean4 = parcel.readBoolean();
+                    boolean z4 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isClipboardAllowed = isClipboardAllowed(readBoolean4);
+                    boolean zIsClipboardAllowed = isClipboardAllowed(z4);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isClipboardAllowed);
+                    parcel2.writeBoolean(zIsClipboardAllowed);
                     return true;
                 case 19:
-                    boolean readBoolean5 = parcel.readBoolean();
+                    boolean z5 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isMicrophoneEnabled = isMicrophoneEnabled(readBoolean5);
+                    boolean zIsMicrophoneEnabled = isMicrophoneEnabled(z5);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isMicrophoneEnabled);
+                    parcel2.writeBoolean(zIsMicrophoneEnabled);
                     return true;
                 case 20:
-                    boolean readBoolean6 = parcel.readBoolean();
+                    boolean z6 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean emergencyCallOnly = getEmergencyCallOnly(readBoolean6);
+                    boolean emergencyCallOnly = getEmergencyCallOnly(z6);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(emergencyCallOnly);
                     return true;
                 case 21:
-                    boolean addNumberOfIncomingCalls = addNumberOfIncomingCalls();
+                    boolean zAddNumberOfIncomingCalls = addNumberOfIncomingCalls();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(addNumberOfIncomingCalls);
+                    parcel2.writeBoolean(zAddNumberOfIncomingCalls);
                     return true;
                 case 22:
-                    boolean addNumberOfOutgoingCalls = addNumberOfOutgoingCalls();
+                    boolean zAddNumberOfOutgoingCalls = addNumberOfOutgoingCalls();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(addNumberOfOutgoingCalls);
+                    parcel2.writeBoolean(zAddNumberOfOutgoingCalls);
                     return true;
                 case 23:
-                    boolean isLimitNumberOfSmsEnabled = isLimitNumberOfSmsEnabled();
+                    boolean zIsLimitNumberOfSmsEnabled = isLimitNumberOfSmsEnabled();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isLimitNumberOfSmsEnabled);
+                    parcel2.writeBoolean(zIsLimitNumberOfSmsEnabled);
                     return true;
                 case 24:
-                    boolean addNumberOfIncomingSms = addNumberOfIncomingSms();
+                    boolean zAddNumberOfIncomingSms = addNumberOfIncomingSms();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(addNumberOfIncomingSms);
+                    parcel2.writeBoolean(zAddNumberOfIncomingSms);
                     return true;
                 case 25:
-                    boolean addNumberOfOutgoingSms = addNumberOfOutgoingSms();
+                    boolean zAddNumberOfOutgoingSms = addNumberOfOutgoingSms();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(addNumberOfOutgoingSms);
+                    parcel2.writeBoolean(zAddNumberOfOutgoingSms);
                     return true;
                 case 26:
-                    boolean decreaseNumberOfOutgoingSms = decreaseNumberOfOutgoingSms();
+                    boolean zDecreaseNumberOfOutgoingSms = decreaseNumberOfOutgoingSms();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(decreaseNumberOfOutgoingSms);
+                    parcel2.writeBoolean(zDecreaseNumberOfOutgoingSms);
                     return true;
                 case 27:
-                    String readString12 = parcel.readString();
+                    String string12 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean canOutgoingSms = canOutgoingSms(readString12);
+                    boolean zCanOutgoingSms = canOutgoingSms(string12);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(canOutgoingSms);
+                    parcel2.writeBoolean(zCanOutgoingSms);
                     return true;
                 case 28:
-                    String readString13 = parcel.readString();
+                    String string13 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean canIncomingSms = canIncomingSms(readString13);
+                    boolean zCanIncomingSms = canIncomingSms(string13);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(canIncomingSms);
+                    parcel2.writeBoolean(zCanIncomingSms);
                     return true;
                 case 29:
-                    boolean isSmsPatternCheckRequired = isSmsPatternCheckRequired();
+                    boolean zIsSmsPatternCheckRequired = isSmsPatternCheckRequired();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSmsPatternCheckRequired);
+                    parcel2.writeBoolean(zIsSmsPatternCheckRequired);
                     return true;
                 case 30:
                     String ntpServer = getNtpServer();
@@ -1350,244 +1350,244 @@ public interface IEDMProxy extends IInterface {
                     parcel2.writeLong(ntpTimeout);
                     return true;
                 case 32:
-                    boolean shallForceNtpMdmValues = shallForceNtpMdmValues();
+                    boolean zShallForceNtpMdmValues = shallForceNtpMdmValues();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(shallForceNtpMdmValues);
+                    parcel2.writeBoolean(zShallForceNtpMdmValues);
                     return true;
                 case 33:
-                    boolean isNtpSetByMDM = isNtpSetByMDM();
+                    boolean zIsNtpSetByMDM = isNtpSetByMDM();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isNtpSetByMDM);
+                    parcel2.writeBoolean(zIsNtpSetByMDM);
                     return true;
                 case 34:
-                    boolean isScreenLockPatternVisibilityEnabled = isScreenLockPatternVisibilityEnabled();
+                    boolean zIsScreenLockPatternVisibilityEnabled = isScreenLockPatternVisibilityEnabled();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isScreenLockPatternVisibilityEnabled);
+                    parcel2.writeBoolean(zIsScreenLockPatternVisibilityEnabled);
                     return true;
                 case 35:
-                    int readInt4 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isScreenLockPatternVisibilityEnabledAsUser = isScreenLockPatternVisibilityEnabledAsUser(readInt4);
+                    boolean zIsScreenLockPatternVisibilityEnabledAsUser = isScreenLockPatternVisibilityEnabledAsUser(i6);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isScreenLockPatternVisibilityEnabledAsUser);
+                    parcel2.writeBoolean(zIsScreenLockPatternVisibilityEnabledAsUser);
                     return true;
                 case 36:
-                    boolean isFactoryResetAllowed = isFactoryResetAllowed();
+                    boolean zIsFactoryResetAllowed = isFactoryResetAllowed();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isFactoryResetAllowed);
+                    parcel2.writeBoolean(zIsFactoryResetAllowed);
                     return true;
                 case 37:
-                    boolean readBoolean7 = parcel.readBoolean();
+                    boolean z7 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isTaskManagerAllowed = isTaskManagerAllowed(readBoolean7);
+                    boolean zIsTaskManagerAllowed = isTaskManagerAllowed(z7);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isTaskManagerAllowed);
+                    parcel2.writeBoolean(zIsTaskManagerAllowed);
                     return true;
                 case 38:
-                    boolean isIncomingSmsAllowed = isIncomingSmsAllowed();
+                    boolean zIsIncomingSmsAllowed = isIncomingSmsAllowed();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isIncomingSmsAllowed);
+                    parcel2.writeBoolean(zIsIncomingSmsAllowed);
                     return true;
                 case 39:
-                    boolean isOutgoingSmsAllowed = isOutgoingSmsAllowed();
+                    boolean zIsOutgoingSmsAllowed = isOutgoingSmsAllowed();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isOutgoingSmsAllowed);
+                    parcel2.writeBoolean(zIsOutgoingSmsAllowed);
                     return true;
                 case 40:
-                    boolean isBluetoothLogEnabled = isBluetoothLogEnabled();
+                    boolean zIsBluetoothLogEnabled = isBluetoothLogEnabled();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isBluetoothLogEnabled);
+                    parcel2.writeBoolean(zIsBluetoothLogEnabled);
                     return true;
                 case 41:
-                    String readString14 = parcel.readString();
-                    String readString15 = parcel.readString();
+                    String string14 = parcel.readString();
+                    String string15 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    bluetoothLog(readString14, readString15);
+                    bluetoothLog(string14, string15);
                     parcel2.writeNoException();
                     return true;
                 case 42:
-                    boolean isIncomingMmsAllowed = isIncomingMmsAllowed();
+                    boolean zIsIncomingMmsAllowed = isIncomingMmsAllowed();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isIncomingMmsAllowed);
+                    parcel2.writeBoolean(zIsIncomingMmsAllowed);
                     return true;
                 case 43:
-                    boolean readBoolean8 = parcel.readBoolean();
+                    boolean z8 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isBackupAllowed = isBackupAllowed(readBoolean8);
+                    boolean zIsBackupAllowed = isBackupAllowed(z8);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isBackupAllowed);
+                    parcel2.writeBoolean(zIsBackupAllowed);
                     return true;
                 case 44:
-                    int readInt5 = parcel.readInt();
-                    int readInt6 = parcel.readInt();
-                    int readInt7 = parcel.readInt();
-                    boolean readBoolean9 = parcel.readBoolean();
-                    String readString16 = parcel.readString();
-                    String readString17 = parcel.readString();
+                    int i7 = parcel.readInt();
+                    int i8 = parcel.readInt();
+                    int i9 = parcel.readInt();
+                    boolean z9 = parcel.readBoolean();
+                    String string16 = parcel.readString();
+                    String string17 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    logEventForLegacyComponents(readInt5, readInt6, readInt7, readBoolean9, readString16, readString17);
+                    logEventForLegacyComponents(i7, i8, i9, z9, string16, string17);
                     parcel2.writeNoException();
                     return true;
                 case 45:
-                    int readInt8 = parcel.readInt();
-                    int readInt9 = parcel.readInt();
-                    String readString18 = parcel.readString();
-                    int readInt10 = parcel.readInt();
+                    int i10 = parcel.readInt();
+                    int i11 = parcel.readInt();
+                    String string18 = parcel.readString();
+                    int i12 = parcel.readInt();
                     AuditLogParams auditLogParams = (AuditLogParams) parcel.readTypedObject(AuditLogParams.CREATOR);
                     parcel.enforceNoDataAvail();
-                    logEventAsUser(readInt8, readInt9, readString18, readInt10, auditLogParams);
+                    logEventAsUser(i10, i11, string18, i12, auditLogParams);
                     parcel2.writeNoException();
                     return true;
                 case 46:
-                    int readInt11 = parcel.readInt();
+                    int i13 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isAuditLogEnabledAsUser = isAuditLogEnabledAsUser(readInt11);
+                    boolean zIsAuditLogEnabledAsUser = isAuditLogEnabledAsUser(i13);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isAuditLogEnabledAsUser);
+                    parcel2.writeBoolean(zIsAuditLogEnabledAsUser);
                     return true;
                 case 47:
-                    String readString19 = parcel.readString();
-                    String readString20 = parcel.readString();
-                    boolean readBoolean10 = parcel.readBoolean();
-                    int readInt12 = parcel.readInt();
+                    String string19 = parcel.readString();
+                    String string20 = parcel.readString();
+                    boolean z10 = parcel.readBoolean();
+                    int i14 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    notifyCertificateFailureAsUser(readString19, readString20, readBoolean10, readInt12);
+                    notifyCertificateFailureAsUser(string19, string20, z10, i14);
                     parcel2.writeNoException();
                     return true;
                 case 48:
-                    boolean isRevocationCheckEnabled = isRevocationCheckEnabled();
+                    boolean zIsRevocationCheckEnabled = isRevocationCheckEnabled();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isRevocationCheckEnabled);
+                    parcel2.writeBoolean(zIsRevocationCheckEnabled);
                     return true;
                 case 49:
-                    boolean isOcspCheckEnabled = isOcspCheckEnabled();
+                    boolean zIsOcspCheckEnabled = isOcspCheckEnabled();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isOcspCheckEnabled);
+                    parcel2.writeBoolean(zIsOcspCheckEnabled);
                     return true;
                 case 50:
-                    byte[] createByteArray = parcel.createByteArray();
-                    boolean readBoolean11 = parcel.readBoolean();
-                    boolean readBoolean12 = parcel.readBoolean();
-                    int readInt13 = parcel.readInt();
+                    byte[] bArrCreateByteArray = parcel.createByteArray();
+                    boolean z11 = parcel.readBoolean();
+                    boolean z12 = parcel.readBoolean();
+                    int i15 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isCaCertificateTrustedAsUser = isCaCertificateTrustedAsUser(createByteArray, readBoolean11, readBoolean12, readInt13);
+                    boolean zIsCaCertificateTrustedAsUser = isCaCertificateTrustedAsUser(bArrCreateByteArray, z11, z12, i15);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isCaCertificateTrustedAsUser);
+                    parcel2.writeBoolean(zIsCaCertificateTrustedAsUser);
                     return true;
                 case 51:
-                    int readInt14 = parcel.readInt();
+                    int i16 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isCertificateTrustedUntrustedEnabledAsUser = isCertificateTrustedUntrustedEnabledAsUser(readInt14);
+                    boolean zIsCertificateTrustedUntrustedEnabledAsUser = isCertificateTrustedUntrustedEnabledAsUser(i16);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isCertificateTrustedUntrustedEnabledAsUser);
+                    parcel2.writeBoolean(zIsCertificateTrustedUntrustedEnabledAsUser);
                     return true;
                 case 52:
-                    int readInt15 = parcel.readInt();
+                    int i17 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isCertificateValidationAtInstallEnabledAsUser = isCertificateValidationAtInstallEnabledAsUser(readInt15);
+                    boolean zIsCertificateValidationAtInstallEnabledAsUser = isCertificateValidationAtInstallEnabledAsUser(i17);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isCertificateValidationAtInstallEnabledAsUser);
+                    parcel2.writeBoolean(zIsCertificateValidationAtInstallEnabledAsUser);
                     return true;
                 case 53:
-                    boolean readBoolean13 = parcel.readBoolean();
+                    boolean z13 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isAudioRecordAllowed = isAudioRecordAllowed(readBoolean13);
+                    boolean zIsAudioRecordAllowed = isAudioRecordAllowed(z13);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isAudioRecordAllowed);
+                    parcel2.writeBoolean(zIsAudioRecordAllowed);
                     return true;
                 case 54:
-                    boolean readBoolean14 = parcel.readBoolean();
+                    boolean z14 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isVideoRecordAllowed = isVideoRecordAllowed(readBoolean14);
+                    boolean zIsVideoRecordAllowed = isVideoRecordAllowed(z14);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isVideoRecordAllowed);
+                    parcel2.writeBoolean(zIsVideoRecordAllowed);
                     return true;
                 case 55:
-                    String readString21 = parcel.readString();
-                    int readInt16 = parcel.readInt();
+                    String string21 = parcel.readString();
+                    int i18 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    notifyCertificateRemovedAsUser(readString21, readInt16);
+                    notifyCertificateRemovedAsUser(string21, i18);
                     parcel2.writeNoException();
                     return true;
                 case 56:
-                    byte[] createByteArray2 = parcel.createByteArray();
-                    int readInt17 = parcel.readInt();
+                    byte[] bArrCreateByteArray2 = parcel.createByteArray();
+                    int i19 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int validateCertificateAtInstallAsUser = validateCertificateAtInstallAsUser(createByteArray2, readInt17);
+                    int iValidateCertificateAtInstallAsUser = validateCertificateAtInstallAsUser(bArrCreateByteArray2, i19);
                     parcel2.writeNoException();
-                    parcel2.writeInt(validateCertificateAtInstallAsUser);
+                    parcel2.writeInt(iValidateCertificateAtInstallAsUser);
                     return true;
                 case 57:
-                    boolean isClipboardShareAllowed = isClipboardShareAllowed();
+                    boolean zIsClipboardShareAllowed = isClipboardShareAllowed();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isClipboardShareAllowed);
+                    parcel2.writeBoolean(zIsClipboardShareAllowed);
                     return true;
                 case 58:
-                    boolean isBlockSmsWithStorageEnabled = isBlockSmsWithStorageEnabled();
+                    boolean zIsBlockSmsWithStorageEnabled = isBlockSmsWithStorageEnabled();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isBlockSmsWithStorageEnabled);
+                    parcel2.writeBoolean(zIsBlockSmsWithStorageEnabled);
                     return true;
                 case 59:
-                    boolean isBlockMmsWithStorageEnabled = isBlockMmsWithStorageEnabled();
+                    boolean zIsBlockMmsWithStorageEnabled = isBlockMmsWithStorageEnabled();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isBlockMmsWithStorageEnabled);
+                    parcel2.writeBoolean(zIsBlockMmsWithStorageEnabled);
                     return true;
                 case 60:
-                    boolean readBoolean15 = parcel.readBoolean();
-                    byte[] createByteArray3 = parcel.createByteArray();
-                    String readString22 = parcel.readString();
-                    int readInt18 = parcel.readInt();
-                    String readString23 = parcel.readString();
-                    String readString24 = parcel.readString();
-                    String readString25 = parcel.readString();
+                    boolean z15 = parcel.readBoolean();
+                    byte[] bArrCreateByteArray3 = parcel.createByteArray();
+                    String string22 = parcel.readString();
+                    int i20 = parcel.readInt();
+                    String string23 = parcel.readString();
+                    String string24 = parcel.readString();
+                    String string25 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    storeBlockedSmsMms(readBoolean15, createByteArray3, readString22, readInt18, readString23, readString24, readString25);
+                    storeBlockedSmsMms(z15, bArrCreateByteArray3, string22, i20, string23, string24, string25);
                     parcel2.writeNoException();
                     return true;
                 case 61:
-                    boolean isWapPushAllowed = isWapPushAllowed();
+                    boolean zIsWapPushAllowed = isWapPushAllowed();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isWapPushAllowed);
+                    parcel2.writeBoolean(zIsWapPushAllowed);
                     return true;
                 case 62:
-                    String readString26 = parcel.readString();
-                    String readString27 = parcel.readString();
-                    boolean readBoolean16 = parcel.readBoolean();
+                    String string26 = parcel.readString();
+                    String string27 = parcel.readString();
+                    boolean z16 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isAccountRemovalAllowed = isAccountRemovalAllowed(readString26, readString27, readBoolean16);
+                    boolean zIsAccountRemovalAllowed = isAccountRemovalAllowed(string26, string27, z16);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isAccountRemovalAllowed);
+                    parcel2.writeBoolean(zIsAccountRemovalAllowed);
                     return true;
                 case 63:
-                    String readString28 = parcel.readString();
-                    int readInt19 = parcel.readInt();
+                    String string28 = parcel.readString();
+                    int i21 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    String applicationNameFromDb = getApplicationNameFromDb(readString28, readInt19);
+                    String applicationNameFromDb = getApplicationNameFromDb(string28, i21);
                     parcel2.writeNoException();
                     parcel2.writeString(applicationNameFromDb);
                     return true;
                 case 64:
-                    String readString29 = parcel.readString();
-                    String readString30 = parcel.readString();
-                    int readInt20 = parcel.readInt();
+                    String string29 = parcel.readString();
+                    String string30 = parcel.readString();
+                    int i22 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    String applicationNameForComponent = getApplicationNameForComponent(readString29, readString30, readInt20);
+                    String applicationNameForComponent = getApplicationNameForComponent(string29, string30, i22);
                     parcel2.writeNoException();
                     parcel2.writeString(applicationNameForComponent);
                     return true;
                 case 65:
-                    int readInt21 = parcel.readInt();
+                    int i23 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isAnyApplicationNameChangedAsUser = isAnyApplicationNameChangedAsUser(readInt21);
+                    boolean zIsAnyApplicationNameChangedAsUser = isAnyApplicationNameChangedAsUser(i23);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isAnyApplicationNameChangedAsUser);
+                    parcel2.writeBoolean(zIsAnyApplicationNameChangedAsUser);
                     return true;
                 case 66:
-                    int readInt22 = parcel.readInt();
+                    int i24 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isCopyContactToSimAllowed = isCopyContactToSimAllowed(readInt22);
+                    boolean zIsCopyContactToSimAllowed = isCopyContactToSimAllowed(i24);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isCopyContactToSimAllowed);
+                    parcel2.writeBoolean(zIsCopyContactToSimAllowed);
                     return true;
                 case 67:
                     boolean proKioskState = getProKioskState();
@@ -1670,17 +1670,17 @@ public interface IEDMProxy extends IInterface {
                     parcel2.writeBoolean(usbNetStateInternal);
                     return true;
                 case 83:
-                    int readInt23 = parcel.readInt();
+                    int i25 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    String usbNetAddress = getUsbNetAddress(readInt23);
+                    String usbNetAddress = getUsbNetAddress(i25);
                     parcel2.writeNoException();
                     parcel2.writeString(usbNetAddress);
                     return true;
                 case 84:
-                    String readString31 = parcel.readString();
-                    int readInt24 = parcel.readInt();
+                    String string31 = parcel.readString();
+                    int i26 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    Bundle applicationRestrictions = getApplicationRestrictions(readString31, readInt24);
+                    Bundle applicationRestrictions = getApplicationRestrictions(string31, i26);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(applicationRestrictions, 1);
                     return true;
@@ -1690,94 +1690,94 @@ public interface IEDMProxy extends IInterface {
                     parcel2.writeBoolean(extendedCallInfoState);
                     return true;
                 case 86:
-                    String readString32 = parcel.readString();
+                    String string32 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isAllowedMamPackage = isAllowedMamPackage(readString32);
+                    boolean zIsAllowedMamPackage = isAllowedMamPackage(string32);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isAllowedMamPackage);
+                    parcel2.writeBoolean(zIsAllowedMamPackage);
                     return true;
                 case 87:
-                    String readString33 = parcel.readString();
-                    String readString34 = parcel.readString();
+                    String string33 = parcel.readString();
+                    String string34 = parcel.readString();
                     Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                    int readInt25 = parcel.readInt();
+                    int i27 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setKeyedAppStatesReport(readString33, readString34, bundle, readInt25);
+                    setKeyedAppStatesReport(string33, string34, bundle, i27);
                     parcel2.writeNoException();
                     return true;
                 case 88:
-                    int readInt26 = parcel.readInt();
+                    int i28 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isKnoxBluetoothEnabled = isKnoxBluetoothEnabled(readInt26);
+                    boolean zIsKnoxBluetoothEnabled = isKnoxBluetoothEnabled(i28);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isKnoxBluetoothEnabled);
+                    parcel2.writeBoolean(zIsKnoxBluetoothEnabled);
                     return true;
                 case 89:
-                    int readInt27 = parcel.readInt();
-                    int readInt28 = parcel.readInt();
+                    int i29 = parcel.readInt();
+                    int i30 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isPackageAllowedToAccessExternalSdcard = isPackageAllowedToAccessExternalSdcard(readInt27, readInt28);
+                    boolean zIsPackageAllowedToAccessExternalSdcard = isPackageAllowedToAccessExternalSdcard(i29, i30);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isPackageAllowedToAccessExternalSdcard);
+                    parcel2.writeBoolean(zIsPackageAllowedToAccessExternalSdcard);
                     return true;
                 case 90:
-                    String readString35 = parcel.readString();
+                    String string35 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    byte[] ucmGetCertificateChain = ucmGetCertificateChain(readString35);
+                    byte[] bArrUcmGetCertificateChain = ucmGetCertificateChain(string35);
                     parcel2.writeNoException();
-                    parcel2.writeByteArray(ucmGetCertificateChain);
+                    parcel2.writeByteArray(bArrUcmGetCertificateChain);
                     return true;
                 case 91:
-                    String readString36 = parcel.readString();
-                    byte[] createByteArray4 = parcel.createByteArray();
-                    String readString37 = parcel.readString();
+                    String string36 = parcel.readString();
+                    byte[] bArrCreateByteArray4 = parcel.createByteArray();
+                    String string37 = parcel.readString();
                     Bundle bundle2 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    byte[] ucmDecrypt = ucmDecrypt(readString36, createByteArray4, readString37, bundle2);
+                    byte[] bArrUcmDecrypt = ucmDecrypt(string36, bArrCreateByteArray4, string37, bundle2);
                     parcel2.writeNoException();
-                    parcel2.writeByteArray(ucmDecrypt);
+                    parcel2.writeByteArray(bArrUcmDecrypt);
                     return true;
                 case 92:
-                    String readString38 = parcel.readString();
-                    byte[] createByteArray5 = parcel.createByteArray();
-                    String readString39 = parcel.readString();
+                    String string38 = parcel.readString();
+                    byte[] bArrCreateByteArray5 = parcel.createByteArray();
+                    String string39 = parcel.readString();
                     Bundle bundle3 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    byte[] ucmEncrypt = ucmEncrypt(readString38, createByteArray5, readString39, bundle3);
+                    byte[] bArrUcmEncrypt = ucmEncrypt(string38, bArrCreateByteArray5, string39, bundle3);
                     parcel2.writeNoException();
-                    parcel2.writeByteArray(ucmEncrypt);
+                    parcel2.writeByteArray(bArrUcmEncrypt);
                     return true;
                 case 93:
-                    String readString40 = parcel.readString();
-                    byte[] createByteArray6 = parcel.createByteArray();
-                    String readString41 = parcel.readString();
+                    String string40 = parcel.readString();
+                    byte[] bArrCreateByteArray6 = parcel.createByteArray();
+                    String string41 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    byte[] ucmSign = ucmSign(readString40, createByteArray6, readString41);
+                    byte[] bArrUcmSign = ucmSign(string40, bArrCreateByteArray6, string41);
                     parcel2.writeNoException();
-                    parcel2.writeByteArray(ucmSign);
+                    parcel2.writeByteArray(bArrUcmSign);
                     return true;
                 case 94:
-                    String readString42 = parcel.readString();
-                    byte[] createByteArray7 = parcel.createByteArray();
-                    String readString43 = parcel.readString();
+                    String string42 = parcel.readString();
+                    byte[] bArrCreateByteArray7 = parcel.createByteArray();
+                    String string43 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    byte[] ucmMac = ucmMac(readString42, createByteArray7, readString43);
+                    byte[] bArrUcmMac = ucmMac(string42, bArrCreateByteArray7, string43);
                     parcel2.writeNoException();
-                    parcel2.writeByteArray(ucmMac);
+                    parcel2.writeByteArray(bArrUcmMac);
                     return true;
                 case 95:
-                    String readString44 = parcel.readString();
-                    String readString45 = parcel.readString();
-                    byte[] createByteArray8 = parcel.createByteArray();
+                    String string44 = parcel.readString();
+                    String string45 = parcel.readString();
+                    byte[] bArrCreateByteArray8 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    byte[] keyAgreement = keyAgreement(readString44, readString45, createByteArray8);
+                    byte[] bArrKeyAgreement = keyAgreement(string44, string45, bArrCreateByteArray8);
                     parcel2.writeNoException();
-                    parcel2.writeByteArray(keyAgreement);
+                    parcel2.writeByteArray(bArrKeyAgreement);
                     return true;
                 case 96:
-                    String readString46 = parcel.readString();
+                    String string46 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    List<String> eLMPermissions = getELMPermissions(readString46);
+                    List<String> eLMPermissions = getELMPermissions(string46);
                     parcel2.writeNoException();
                     parcel2.writeStringList(eLMPermissions);
                     return true;
@@ -1787,93 +1787,93 @@ public interface IEDMProxy extends IInterface {
                     parcel2.writeBoolean(addHomeShorcutRequested);
                     return true;
                 case 98:
-                    ISystemUIAdapterCallback asInterface = ISystemUIAdapterCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ISystemUIAdapterCallback iSystemUIAdapterCallbackAsInterface = ISystemUIAdapterCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    boolean registerSystemUICallback = registerSystemUICallback(asInterface);
+                    boolean zRegisterSystemUICallback = registerSystemUICallback(iSystemUIAdapterCallbackAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(registerSystemUICallback);
+                    parcel2.writeBoolean(zRegisterSystemUICallback);
                     return true;
                 case 99:
-                    boolean isMockLocationEnabled = isMockLocationEnabled();
+                    boolean zIsMockLocationEnabled = isMockLocationEnabled();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isMockLocationEnabled);
+                    parcel2.writeBoolean(zIsMockLocationEnabled);
                     return true;
                 case 100:
-                    int readInt29 = parcel.readInt();
+                    int i31 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isGoogleAccountsAutoSyncAllowedAsUser = isGoogleAccountsAutoSyncAllowedAsUser(readInt29);
+                    boolean zIsGoogleAccountsAutoSyncAllowedAsUser = isGoogleAccountsAutoSyncAllowedAsUser(i31);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isGoogleAccountsAutoSyncAllowedAsUser);
+                    parcel2.writeBoolean(zIsGoogleAccountsAutoSyncAllowedAsUser);
                     return true;
                 case 101:
-                    int readInt30 = parcel.readInt();
+                    int i32 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isPackageInAvrWhitelist = isPackageInAvrWhitelist(readInt30);
+                    boolean zIsPackageInAvrWhitelist = isPackageInAvrWhitelist(i32);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isPackageInAvrWhitelist);
+                    parcel2.writeBoolean(zIsPackageInAvrWhitelist);
                     return true;
                 case 102:
-                    boolean readBoolean17 = parcel.readBoolean();
-                    int readInt31 = parcel.readInt();
+                    boolean z17 = parcel.readBoolean();
+                    int i33 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    notifyPasswordPolicyOneLockChanged(readBoolean17, readInt31);
+                    notifyPasswordPolicyOneLockChanged(z17, i33);
                     parcel2.writeNoException();
                     return true;
                 case 103:
-                    int readInt32 = parcel.readInt();
+                    int i34 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isIncomingSmsAllowedFromSimSlot = isIncomingSmsAllowedFromSimSlot(readInt32);
+                    boolean zIsIncomingSmsAllowedFromSimSlot = isIncomingSmsAllowedFromSimSlot(i34);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isIncomingSmsAllowedFromSimSlot);
+                    parcel2.writeBoolean(zIsIncomingSmsAllowedFromSimSlot);
                     return true;
                 case 104:
-                    int readInt33 = parcel.readInt();
+                    int i35 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isOutgoingSmsAllowedFromSimSlot = isOutgoingSmsAllowedFromSimSlot(readInt33);
+                    boolean zIsOutgoingSmsAllowedFromSimSlot = isOutgoingSmsAllowedFromSimSlot(i35);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isOutgoingSmsAllowedFromSimSlot);
+                    parcel2.writeBoolean(zIsOutgoingSmsAllowedFromSimSlot);
                     return true;
                 case 105:
-                    int readInt34 = parcel.readInt();
+                    int i36 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isMmsAllowedFromSimSlot = isMmsAllowedFromSimSlot(readInt34);
+                    boolean zIsMmsAllowedFromSimSlot = isMmsAllowedFromSimSlot(i36);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isMmsAllowedFromSimSlot);
+                    parcel2.writeBoolean(zIsMmsAllowedFromSimSlot);
                     return true;
                 case 106:
-                    int readInt35 = parcel.readInt();
+                    int i37 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isOutgoingCallAllowedFromSimSlot = isOutgoingCallAllowedFromSimSlot(readInt35);
+                    boolean zIsOutgoingCallAllowedFromSimSlot = isOutgoingCallAllowedFromSimSlot(i37);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isOutgoingCallAllowedFromSimSlot);
+                    parcel2.writeBoolean(zIsOutgoingCallAllowedFromSimSlot);
                     return true;
                 case 107:
-                    int readInt36 = parcel.readInt();
+                    int i38 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isIncomingCallAllowedFromSimSlot = isIncomingCallAllowedFromSimSlot(readInt36);
+                    boolean zIsIncomingCallAllowedFromSimSlot = isIncomingCallAllowedFromSimSlot(i38);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isIncomingCallAllowedFromSimSlot);
+                    parcel2.writeBoolean(zIsIncomingCallAllowedFromSimSlot);
                     return true;
                 case 108:
-                    String readString47 = parcel.readString();
+                    String string47 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean canOutgoingCall = canOutgoingCall(readString47);
+                    boolean zCanOutgoingCall = canOutgoingCall(string47);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(canOutgoingCall);
+                    parcel2.writeBoolean(zCanOutgoingCall);
                     return true;
                 case 109:
-                    String readString48 = parcel.readString();
+                    String string48 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean canIncomingCall = canIncomingCall(readString48);
+                    boolean zCanIncomingCall = canIncomingCall(string48);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(canIncomingCall);
+                    parcel2.writeBoolean(zCanIncomingCall);
                     return true;
                 case 110:
-                    int readInt37 = parcel.readInt();
+                    int i39 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isDataAllowedFromSimSlot = isDataAllowedFromSimSlot(readInt37);
+                    boolean zIsDataAllowedFromSimSlot = isDataAllowedFromSimSlot(i39);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isDataAllowedFromSimSlot);
+                    parcel2.writeBoolean(zIsDataAllowedFromSimSlot);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -1898,1755 +1898,1755 @@ public interface IEDMProxy extends IInterface {
 
             @Override // android.sec.enterprise.IEDMProxy
             public void addCallsCount(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isCallingCaptureEnabled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public void storeCalling(String str, String str2, String str3, String str4, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeString(str4);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeString(str4);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isSMSCaptureEnabled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public void storeSMS(String str, String str2, String str3, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public byte[] getApplicationIconFromDb(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean getAllowBluetoothDataTransfer(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isOutgoingCallsAllowed() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isBluetoothUUIDAllowed(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isProfileEnabled(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isBluetoothDeviceAllowed(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isPairingEnabled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isDiscoverableEnabled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isBluetoothEnabled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean getBrowserSettingStatus(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isRoamingPushEnabled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isRoamingDataEnabled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isClipboardAllowed(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isMicrophoneEnabled(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean getEmergencyCallOnly(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean addNumberOfIncomingCalls() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean addNumberOfOutgoingCalls() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isLimitNumberOfSmsEnabled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean addNumberOfIncomingSms() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean addNumberOfOutgoingSms() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean decreaseNumberOfOutgoingSms() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    this.mRemote.transact(26, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    this.mRemote.transact(26, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean canOutgoingSms(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(27, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(27, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean canIncomingSms(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(28, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(28, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isSmsPatternCheckRequired() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    this.mRemote.transact(29, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    this.mRemote.transact(29, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public String getNtpServer() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    this.mRemote.transact(30, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    this.mRemote.transact(30, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public long getNtpTimeout() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    this.mRemote.transact(31, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    this.mRemote.transact(31, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean shallForceNtpMdmValues() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    this.mRemote.transact(32, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    this.mRemote.transact(32, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isNtpSetByMDM() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    this.mRemote.transact(33, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    this.mRemote.transact(33, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isScreenLockPatternVisibilityEnabled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    this.mRemote.transact(34, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    this.mRemote.transact(34, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isScreenLockPatternVisibilityEnabledAsUser(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(35, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(35, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isFactoryResetAllowed() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    this.mRemote.transact(36, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    this.mRemote.transact(36, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isTaskManagerAllowed(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(37, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(37, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isIncomingSmsAllowed() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    this.mRemote.transact(38, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    this.mRemote.transact(38, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isOutgoingSmsAllowed() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    this.mRemote.transact(39, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    this.mRemote.transact(39, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isBluetoothLogEnabled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    this.mRemote.transact(40, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    this.mRemote.transact(40, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public void bluetoothLog(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(41, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(41, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isIncomingMmsAllowed() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    this.mRemote.transact(42, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    this.mRemote.transact(42, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isBackupAllowed(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(43, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(43, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public void logEventForLegacyComponents(int i, int i2, int i3, boolean z, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeBoolean(z);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(44, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(44, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public void logEventAsUser(int i, int i2, String str, int i3, AuditLogParams auditLogParams) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str);
-                    obtain.writeInt(i3);
-                    obtain.writeTypedObject(auditLogParams, 0);
-                    this.mRemote.transact(45, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeTypedObject(auditLogParams, 0);
+                    this.mRemote.transact(45, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isAuditLogEnabledAsUser(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(46, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(46, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public void notifyCertificateFailureAsUser(String str, String str2, boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(47, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(47, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isRevocationCheckEnabled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    this.mRemote.transact(48, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    this.mRemote.transact(48, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isOcspCheckEnabled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    this.mRemote.transact(49, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    this.mRemote.transact(49, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isCaCertificateTrustedAsUser(byte[] bArr, boolean z, boolean z2, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(50, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(50, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isCertificateTrustedUntrustedEnabledAsUser(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(51, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(51, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isCertificateValidationAtInstallEnabledAsUser(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(52, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(52, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isAudioRecordAllowed(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(53, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(53, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isVideoRecordAllowed(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(54, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(54, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public void notifyCertificateRemovedAsUser(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(55, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(55, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public int validateCertificateAtInstallAsUser(byte[] bArr, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(56, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(56, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isClipboardShareAllowed() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    this.mRemote.transact(57, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    this.mRemote.transact(57, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isBlockSmsWithStorageEnabled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    this.mRemote.transact(58, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    this.mRemote.transact(58, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isBlockMmsWithStorageEnabled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    this.mRemote.transact(59, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    this.mRemote.transact(59, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public void storeBlockedSmsMms(boolean z, byte[] bArr, String str, int i, String str2, String str3, String str4) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeString(str4);
-                    this.mRemote.transact(60, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeString(str4);
+                    this.mRemote.transact(60, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isWapPushAllowed() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    this.mRemote.transact(61, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    this.mRemote.transact(61, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isAccountRemovalAllowed(String str, String str2, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(62, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(62, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public String getApplicationNameFromDb(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(63, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(63, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public String getApplicationNameForComponent(String str, String str2, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(64, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(64, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isAnyApplicationNameChangedAsUser(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(65, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(65, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isCopyContactToSimAllowed(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(66, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(66, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean getProKioskState() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    this.mRemote.transact(67, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    this.mRemote.transact(67, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean getProKioskNotificationMessagesState() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    this.mRemote.transact(68, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    this.mRemote.transact(68, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public int getProKioskHideNotificationMessages() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    this.mRemote.transact(69, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    this.mRemote.transact(69, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public int getVolumeControlStream() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    this.mRemote.transact(70, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    this.mRemote.transact(70, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean getToastEnabledState() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    this.mRemote.transact(71, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    this.mRemote.transact(71, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean getToastShowPackageNameState() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    this.mRemote.transact(72, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    this.mRemote.transact(72, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public int getSensorDisabled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    this.mRemote.transact(73, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    this.mRemote.transact(73, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean getVolumePanelEnabledState() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    this.mRemote.transact(74, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    this.mRemote.transact(74, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean getVolumeButtonRotationState() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    this.mRemote.transact(75, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    this.mRemote.transact(75, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean getToastGravityEnabledState() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    this.mRemote.transact(76, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    this.mRemote.transact(76, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public int getToastGravity() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    this.mRemote.transact(77, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    this.mRemote.transact(77, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public int getToastGravityXOffset() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    this.mRemote.transact(78, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    this.mRemote.transact(78, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public int getToastGravityYOffset() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    this.mRemote.transact(79, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    this.mRemote.transact(79, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public int getKeyboardMode() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    this.mRemote.transact(80, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    this.mRemote.transact(80, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean getWifiState() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    this.mRemote.transact(81, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    this.mRemote.transact(81, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean getUsbNetStateInternal() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    this.mRemote.transact(82, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    this.mRemote.transact(82, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public String getUsbNetAddress(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(83, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(83, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public Bundle getApplicationRestrictions(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(84, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(84, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean getExtendedCallInfoState() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    this.mRemote.transact(85, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    this.mRemote.transact(85, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isAllowedMamPackage(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(86, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(86, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public void setKeyedAppStatesReport(String str, String str2, Bundle bundle, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(87, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(87, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isKnoxBluetoothEnabled(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(88, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(88, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isPackageAllowedToAccessExternalSdcard(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(89, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(89, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public byte[] ucmGetCertificateChain(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(90, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(90, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public byte[] ucmDecrypt(String str, byte[] bArr, String str2, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeString(str2);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(91, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(91, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public byte[] ucmEncrypt(String str, byte[] bArr, String str2, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeString(str2);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(92, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(92, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public byte[] ucmSign(String str, byte[] bArr, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(93, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(93, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public byte[] ucmMac(String str, byte[] bArr, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(94, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(94, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public byte[] keyAgreement(String str, String str2, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(95, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(95, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public List<String> getELMPermissions(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(96, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(96, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean getAddHomeShorcutRequested() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    this.mRemote.transact(97, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    this.mRemote.transact(97, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean registerSystemUICallback(ISystemUIAdapterCallback iSystemUIAdapterCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSystemUIAdapterCallback);
-                    this.mRemote.transact(98, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSystemUIAdapterCallback);
+                    this.mRemote.transact(98, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isMockLocationEnabled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    this.mRemote.transact(99, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    this.mRemote.transact(99, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isGoogleAccountsAutoSyncAllowedAsUser(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(100, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(100, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isPackageInAvrWhitelist(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(101, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(101, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public void notifyPasswordPolicyOneLockChanged(boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(102, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(102, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isIncomingSmsAllowedFromSimSlot(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(103, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(103, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isOutgoingSmsAllowedFromSimSlot(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(104, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(104, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isMmsAllowedFromSimSlot(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(105, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(105, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isOutgoingCallAllowedFromSimSlot(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(106, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(106, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isIncomingCallAllowedFromSimSlot(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(107, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(107, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean canOutgoingCall(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(108, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(108, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean canIncomingCall(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(109, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(109, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.sec.enterprise.IEDMProxy
             public boolean isDataAllowedFromSimSlot(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(110, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IEDMProxy.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(110, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

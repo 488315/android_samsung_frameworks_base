@@ -53,9 +53,9 @@ public interface IBackAnimationRunner extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IBackAnimationRunner.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IBackAnimationRunner)) {
-                return (IBackAnimationRunner) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IBackAnimationRunner.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IBackAnimationRunner)) {
+                return (IBackAnimationRunner) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -88,10 +88,10 @@ public interface IBackAnimationRunner extends IInterface {
                 onAnimationCancelled();
             } else if (i == 3) {
                 RemoteAnimationTarget[] remoteAnimationTargetArr = (RemoteAnimationTarget[]) parcel.createTypedArray(RemoteAnimationTarget.CREATOR);
-                IBinder readStrongBinder = parcel.readStrongBinder();
-                IBackAnimationFinishedCallback asInterface = IBackAnimationFinishedCallback.Stub.asInterface(parcel.readStrongBinder());
+                IBinder strongBinder = parcel.readStrongBinder();
+                IBackAnimationFinishedCallback iBackAnimationFinishedCallbackAsInterface = IBackAnimationFinishedCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                onAnimationStart(remoteAnimationTargetArr, readStrongBinder, asInterface);
+                onAnimationStart(remoteAnimationTargetArr, strongBinder, iBackAnimationFinishedCallbackAsInterface);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -116,26 +116,26 @@ public interface IBackAnimationRunner extends IInterface {
 
             @Override // android.window.IBackAnimationRunner
             public void onAnimationCancelled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IBackAnimationRunner.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IBackAnimationRunner.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.IBackAnimationRunner
             public void onAnimationStart(RemoteAnimationTarget[] remoteAnimationTargetArr, IBinder iBinder, IBackAnimationFinishedCallback iBackAnimationFinishedCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IBackAnimationRunner.DESCRIPTOR);
-                    obtain.writeTypedArray(remoteAnimationTargetArr, 0);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeStrongInterface(iBackAnimationFinishedCallback);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IBackAnimationRunner.DESCRIPTOR);
+                    parcelObtain.writeTypedArray(remoteAnimationTargetArr, 0);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeStrongInterface(iBackAnimationFinishedCallback);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

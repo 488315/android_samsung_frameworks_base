@@ -18,13 +18,11 @@ import kotlin.collections.EmptyList;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class AuxiliaryPersistenceWrapper {
     public List favorites;
     public final ControlsFavoritePersistenceWrapper persistenceWrapper;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -34,14 +32,12 @@ public final class AuxiliaryPersistenceWrapper {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DeletionJobService extends JobService {
         public static final Companion Companion = new Companion(null);
         public static final int DELETE_FILE_JOB_ID = 1000;
         public static final String USER = "USER";
         public static final long WEEK_IN_MILLIS = TimeUnit.DAYS.toMillis(7);
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();

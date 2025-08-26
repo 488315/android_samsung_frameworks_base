@@ -12,7 +12,6 @@ import android.view.ViewOutlineProvider;
 import android.widget.FrameLayout;
 import com.google.android.setupdesign.R$styleable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class Illustration extends FrameLayout {
     public float aspectRatio;
@@ -37,9 +36,9 @@ public class Illustration extends FrameLayout {
             return;
         }
         if (attributeSet != null) {
-            TypedArray obtainStyledAttributes = getContext().obtainStyledAttributes(attributeSet, R$styleable.SudIllustration, i, 0);
-            this.aspectRatio = obtainStyledAttributes.getFloat(0, 0.0f);
-            obtainStyledAttributes.recycle();
+            TypedArray typedArrayObtainStyledAttributes = getContext().obtainStyledAttributes(attributeSet, R$styleable.SudIllustration, i, 0);
+            this.aspectRatio = typedArrayObtainStyledAttributes.getFloat(0, 0.0f);
+            typedArrayObtainStyledAttributes.recycle();
         }
         this.baselineGridSize = getResources().getDisplayMetrics().density * 8.0f;
         setWillNotDraw(false);

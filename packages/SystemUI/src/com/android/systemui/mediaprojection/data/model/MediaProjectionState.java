@@ -5,11 +5,9 @@ import androidx.compose.animation.core.TransitionKt$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public interface MediaProjectionState {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class NotProjecting implements MediaProjectionState {
         public static final NotProjecting INSTANCE = new NotProjecting();
 
@@ -29,12 +27,10 @@ public interface MediaProjectionState {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Projecting implements MediaProjectionState {
         public final String hostDeviceName;
         public final String hostPackage;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class EntireScreen extends Projecting {
             public final String hostDeviceName;
             public final String hostPackage;
@@ -65,9 +61,9 @@ public interface MediaProjectionState {
             }
 
             public final int hashCode() {
-                int hashCode = this.hostPackage.hashCode() * 31;
+                int iHashCode = this.hostPackage.hashCode() * 31;
                 String str = this.hostDeviceName;
-                return hashCode + (str == null ? 0 : str.hashCode());
+                return iHashCode + (str == null ? 0 : str.hashCode());
             }
 
             public final String toString() {
@@ -84,7 +80,6 @@ public interface MediaProjectionState {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class NoScreen extends Projecting {
             public final String hostDeviceName;
             public final String hostPackage;
@@ -115,9 +110,9 @@ public interface MediaProjectionState {
             }
 
             public final int hashCode() {
-                int hashCode = this.hostPackage.hashCode() * 31;
+                int iHashCode = this.hostPackage.hashCode() * 31;
                 String str = this.hostDeviceName;
-                return hashCode + (str == null ? 0 : str.hashCode());
+                return iHashCode + (str == null ? 0 : str.hashCode());
             }
 
             public final String toString() {
@@ -134,7 +129,6 @@ public interface MediaProjectionState {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class SingleTask extends Projecting {
             public final String hostDeviceName;
             public final String hostPackage;
@@ -169,9 +163,9 @@ public interface MediaProjectionState {
             }
 
             public final int hashCode() {
-                int hashCode = this.hostPackage.hashCode() * 31;
+                int iHashCode = this.hostPackage.hashCode() * 31;
                 String str = this.hostDeviceName;
-                return this.task.hashCode() + ((hashCode + (str == null ? 0 : str.hashCode())) * 31);
+                return this.task.hashCode() + ((iHashCode + (str == null ? 0 : str.hashCode())) * 31);
             }
 
             public final String toString() {

@@ -5,6 +5,7 @@ import android.hardware.display.DisplayManager;
 import android.hardware.input.InputManager;
 import android.os.Bundle;
 import android.os.Looper;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.Display;
 import android.view.InputChannel;
@@ -27,7 +28,6 @@ public class MCTriggerManager {
     int DEX_DISPLAY = -1;
     private final int FLAG_EXTERNAL_DESKTOP_WINDOWING = 131072;
     private final String AUTHORITY = "com.samsung.android.inputshare.settings.provider";
-    private final String KEY_MC_ACTION = "KEY_MC_ACTION";
     private final String MC_METHOD = "MC_DEX_CHECK";
     private final DisplayManager.DisplayListener mDisplayListener = new DisplayManager.DisplayListener() { // from class: com.samsung.android.multicontrol.MCTriggerManager.1
         @Override // android.hardware.display.DisplayManager.DisplayListener
@@ -36,24 +36,32 @@ public class MCTriggerManager {
 
         @Override // android.hardware.display.DisplayManager.DisplayListener
         public void onDisplayRemoved(int i) {
-            if (MCTriggerManager.this.DEX_DISPLAY == i) {
-                MCTriggerManager.this.DEX_DISPLAY = -1;
-                if (MCTriggerManager.this.isEnabled) {
-                    MCTriggerManager.this.enable(false);
-                    MCTriggerManager.this.enable(true);
+            try {
+                Log.i(MCTriggerManager.this.TAG, "[onDisplayRemoved] displayId=" + i + ", DEX_DISPLAY=" + MCTriggerManager.this.DEX_DISPLAY);
+                if (MCTriggerManager.this.DEX_DISPLAY == i) {
+                    MCTriggerManager.this.DEX_DISPLAY = -1;
+                    if (Settings.System.getInt(MCTriggerManager.this.mContext.getContentResolver(), "multi_control_enabled", 1) == 1) {
+                        MCTriggerManager.this.enable(true);
+                    }
                 }
+            } catch (Exception e) {
+                Log.e(MCTriggerManager.this.TAG, "[onDisplayRemoved]", e);
             }
         }
 
         @Override // android.hardware.display.DisplayManager.DisplayListener
         public void onDisplayChanged(int i) {
-            if (MCTriggerManager.this.isDesktopModeEnabled(i)) {
-                MCTriggerManager.this.DEX_DISPLAY = i;
-                MCTriggerManager.this.mContext.getContentResolver().call("com.samsung.android.inputshare.settings.provider", "MC_DEX_CHECK", (String) null, new Bundle());
-                if (MCTriggerManager.this.isEnabled) {
-                    MCTriggerManager.this.enable(false);
-                    MCTriggerManager.this.enable(true);
+            try {
+                if (MCTriggerManager.this.isDesktopModeEnabled(i)) {
+                    Log.i(MCTriggerManager.this.TAG, "[onDisplayChanged] desktop mode enabled, displayId=" + i);
+                    MCTriggerManager.this.DEX_DISPLAY = i;
+                    if (MCTriggerManager.this.isEnabled) {
+                        MCTriggerManager.this.enable(false);
+                    }
+                    MCTriggerManager.this.mContext.getContentResolver().call("com.samsung.android.inputshare.settings.provider", "MC_DEX_CHECK", (String) null, new Bundle());
                 }
+            } catch (Exception e) {
+                Log.e(MCTriggerManager.this.TAG, "[onDisplayChanged]", e);
             }
         }
     };
@@ -83,48 +91,52 @@ public class MCTriggerManager {
     }
 
     public void enable(boolean z) {
-        if (z) {
+        try {
+            if (z) {
+                if (this.isEnabled) {
+                    return;
+                }
+                Log.i(this.TAG, "[enable] true");
+                this.isEnabled = true;
+                InputMonitor inputMonitorMonitorGestureInput = ((InputManager) this.mContext.getSystemService("input")).monitorGestureInput("MultiControl_0", 0);
+                this.mInputMonitor = inputMonitorMonitorGestureInput;
+                this.mInputChannel = inputMonitorMonitorGestureInput.getInputChannel();
+                this.mInputReceiver = new MCInputEventReceiver(this.mContext, 0, this.mInputMonitor, this.mInputChannel, this.mLooper);
+                if (isDesktopModeEnabled(this.DEX_DISPLAY)) {
+                    InputMonitor inputMonitorMonitorGestureInput2 = ((InputManager) this.mContext.createDisplayContext(((DisplayManager) this.mContext.getSystemService(Context.DISPLAY_SERVICE)).getDisplay(this.DEX_DISPLAY)).getSystemService("input")).monitorGestureInput("MultiControl_2", this.DEX_DISPLAY);
+                    this.mDexInputMonitor = inputMonitorMonitorGestureInput2;
+                    this.mDexInputChannel = inputMonitorMonitorGestureInput2.getInputChannel();
+                    this.mDexInputReceiver = new MCInputEventReceiver(this.mContext, this.DEX_DISPLAY, this.mDexInputMonitor, this.mDexInputChannel, this.mLooper);
+                    return;
+                }
+                return;
+            }
             if (this.isEnabled) {
-                return;
+                this.isEnabled = false;
+                Log.i(this.TAG, "[enable] false");
+                InputMonitor inputMonitor = this.mInputMonitor;
+                if (inputMonitor != null) {
+                    inputMonitor.dispose();
+                }
+                MCInputEventReceiver mCInputEventReceiver = this.mInputReceiver;
+                if (mCInputEventReceiver != null) {
+                    mCInputEventReceiver.dispose();
+                }
+                InputMonitor inputMonitor2 = this.mDexInputMonitor;
+                if (inputMonitor2 != null) {
+                    inputMonitor2.dispose();
+                }
+                MCInputEventReceiver mCInputEventReceiver2 = this.mDexInputReceiver;
+                if (mCInputEventReceiver2 != null) {
+                    mCInputEventReceiver2.dispose();
+                }
+                this.mDexInputReceiver = null;
+                this.mInputReceiver = null;
+                this.mInputMonitor = null;
+                this.mDexInputMonitor = null;
             }
-            Log.i(this.TAG, "[enable] true");
-            this.isEnabled = true;
-            InputMonitor monitorGestureInput = ((InputManager) this.mContext.getSystemService("input")).monitorGestureInput("MultiControl_0", 0);
-            this.mInputMonitor = monitorGestureInput;
-            this.mInputChannel = monitorGestureInput.getInputChannel();
-            this.mInputReceiver = new MCInputEventReceiver(this.mContext, 0, this.mInputMonitor, this.mInputChannel, this.mLooper);
-            if (isDesktopModeEnabled(this.DEX_DISPLAY)) {
-                InputMonitor monitorGestureInput2 = ((InputManager) this.mContext.createDisplayContext(((DisplayManager) this.mContext.getSystemService(Context.DISPLAY_SERVICE)).getDisplay(this.DEX_DISPLAY)).getSystemService("input")).monitorGestureInput("MultiControl_2", this.DEX_DISPLAY);
-                this.mDexInputMonitor = monitorGestureInput2;
-                this.mDexInputChannel = monitorGestureInput2.getInputChannel();
-                this.mDexInputReceiver = new MCInputEventReceiver(this.mContext, this.DEX_DISPLAY, this.mDexInputMonitor, this.mDexInputChannel, this.mLooper);
-                return;
-            }
-            return;
-        }
-        if (this.isEnabled) {
-            this.isEnabled = false;
-            Log.i(this.TAG, "[enable] false");
-            InputMonitor inputMonitor = this.mInputMonitor;
-            if (inputMonitor != null) {
-                inputMonitor.dispose();
-            }
-            MCInputEventReceiver mCInputEventReceiver = this.mInputReceiver;
-            if (mCInputEventReceiver != null) {
-                mCInputEventReceiver.dispose();
-            }
-            InputMonitor inputMonitor2 = this.mDexInputMonitor;
-            if (inputMonitor2 != null) {
-                inputMonitor2.dispose();
-            }
-            MCInputEventReceiver mCInputEventReceiver2 = this.mDexInputReceiver;
-            if (mCInputEventReceiver2 != null) {
-                mCInputEventReceiver2.dispose();
-            }
-            this.mDexInputReceiver = null;
-            this.mInputReceiver = null;
-            this.mInputMonitor = null;
-            this.mDexInputMonitor = null;
+        } catch (Exception e) {
+            Log.e(this.TAG, "[enable]", e);
         }
     }
 

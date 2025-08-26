@@ -62,9 +62,9 @@ public interface IAGnssRil extends android.hardware.gnss.V1_0.IAGnssRil {
         if (iHwBinder == null) {
             return null;
         }
-        IHwInterface queryLocalInterface = iHwBinder.queryLocalInterface(kInterfaceName);
-        if (queryLocalInterface != null && (queryLocalInterface instanceof IAGnssRil)) {
-            return (IAGnssRil) queryLocalInterface;
+        IHwInterface iHwInterfaceQueryLocalInterface = iHwBinder.queryLocalInterface(kInterfaceName);
+        if (iHwInterfaceQueryLocalInterface != null && (iHwInterfaceQueryLocalInterface instanceof IAGnssRil)) {
+            return (IAGnssRil) iHwInterfaceQueryLocalInterface;
         }
         Proxy proxy = new Proxy(iHwBinder);
         try {
@@ -169,13 +169,13 @@ public interface IAGnssRil extends android.hardware.gnss.V1_0.IAGnssRil {
 
         public static final ArrayList<NetworkAttributes> readVectorFromParcel(HwParcel hwParcel) {
             ArrayList<NetworkAttributes> arrayList = new ArrayList<>();
-            HwBlob readBuffer = hwParcel.readBuffer(16L);
-            int int32 = readBuffer.getInt32(8L);
-            HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
+            HwBlob buffer = hwParcel.readBuffer(16L);
+            int int32 = buffer.getInt32(8L);
+            HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 32, buffer.handle(), 0L, true);
             arrayList.clear();
             for (int i = 0; i < int32; i++) {
                 NetworkAttributes networkAttributes = new NetworkAttributes();
-                networkAttributes.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 32);
+                networkAttributes.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 32);
                 arrayList.add(networkAttributes);
             }
             return arrayList;
@@ -399,13 +399,13 @@ public interface IAGnssRil extends android.hardware.gnss.V1_0.IAGnssRil {
                 hwParcel2.verifySuccess();
                 hwParcel.releaseTemporaryStorage();
                 ArrayList<byte[]> arrayList = new ArrayList<>();
-                HwBlob readBuffer = hwParcel2.readBuffer(16L);
-                int int32 = readBuffer.getInt32(8L);
-                HwBlob readEmbeddedBuffer = hwParcel2.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
+                HwBlob buffer = hwParcel2.readBuffer(16L);
+                int int32 = buffer.getInt32(8L);
+                HwBlob embeddedBuffer = hwParcel2.readEmbeddedBuffer(int32 * 32, buffer.handle(), 0L, true);
                 arrayList.clear();
                 for (int i = 0; i < int32; i++) {
                     byte[] bArr = new byte[32];
-                    readEmbeddedBuffer.copyToInt8Array(i * 32, bArr, 32);
+                    embeddedBuffer.copyToInt8Array(i * 32, bArr, 32);
                     arrayList.add(bArr);
                 }
                 return arrayList;
@@ -581,34 +581,34 @@ public interface IAGnssRil extends android.hardware.gnss.V1_0.IAGnssRil {
                     return;
                 case 4:
                     hwParcel.enforceInterface(android.hardware.gnss.V1_0.IAGnssRil.kInterfaceName);
-                    boolean updateNetworkState = updateNetworkState(hwParcel.readBool(), hwParcel.readInt8(), hwParcel.readBool());
+                    boolean zUpdateNetworkState = updateNetworkState(hwParcel.readBool(), hwParcel.readInt8(), hwParcel.readBool());
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeBool(updateNetworkState);
+                    hwParcel2.writeBool(zUpdateNetworkState);
                     hwParcel2.send();
                     return;
                 case 5:
                     hwParcel.enforceInterface(android.hardware.gnss.V1_0.IAGnssRil.kInterfaceName);
-                    boolean updateNetworkAvailability = updateNetworkAvailability(hwParcel.readBool(), hwParcel.readString());
+                    boolean zUpdateNetworkAvailability = updateNetworkAvailability(hwParcel.readBool(), hwParcel.readString());
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeBool(updateNetworkAvailability);
+                    hwParcel2.writeBool(zUpdateNetworkAvailability);
                     hwParcel2.send();
                     return;
                 case 6:
                     hwParcel.enforceInterface(IAGnssRil.kInterfaceName);
                     NetworkAttributes networkAttributes = new NetworkAttributes();
                     networkAttributes.readFromParcel(hwParcel);
-                    boolean updateNetworkState_2_0 = updateNetworkState_2_0(networkAttributes);
+                    boolean zUpdateNetworkState_2_0 = updateNetworkState_2_0(networkAttributes);
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeBool(updateNetworkState_2_0);
+                    hwParcel2.writeBool(zUpdateNetworkState_2_0);
                     hwParcel2.send();
                     return;
                 default:
                     switch (i) {
                         case 256067662:
                             hwParcel.enforceInterface(IBase.kInterfaceName);
-                            ArrayList<String> interfaceChain = interfaceChain();
+                            ArrayList<String> arrayListInterfaceChain = interfaceChain();
                             hwParcel2.writeStatus(0);
-                            hwParcel2.writeStringVector(interfaceChain);
+                            hwParcel2.writeStringVector(arrayListInterfaceChain);
                             hwParcel2.send();
                             return;
                         case 256131655:
@@ -619,9 +619,9 @@ public interface IAGnssRil extends android.hardware.gnss.V1_0.IAGnssRil {
                             return;
                         case 256136003:
                             hwParcel.enforceInterface(IBase.kInterfaceName);
-                            String interfaceDescriptor = interfaceDescriptor();
+                            String strInterfaceDescriptor = interfaceDescriptor();
                             hwParcel2.writeStatus(0);
-                            hwParcel2.writeString(interfaceDescriptor);
+                            hwParcel2.writeString(strInterfaceDescriptor);
                             hwParcel2.send();
                             return;
                         case 256398152:

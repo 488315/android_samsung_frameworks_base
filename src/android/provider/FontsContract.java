@@ -18,7 +18,6 @@ import android.os.CancellationSignal;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.ParcelFileDescriptor;
-import android.provider.FontsContract;
 import android.util.Log;
 import android.util.LruCache;
 import com.android.internal.util.Preconditions;
@@ -209,14 +208,14 @@ public class FontsContract {
                 sHandler = new Handler(sThread.getLooper());
             }
             final ReentrantLock reentrantLock = new ReentrantLock();
-            final Condition newCondition = reentrantLock.newCondition();
+            final Condition conditionNewCondition = reentrantLock.newCondition();
             final AtomicReference atomicReference = new AtomicReference();
             final AtomicBoolean atomicBoolean = new AtomicBoolean(true);
             final AtomicBoolean atomicBoolean2 = new AtomicBoolean(false);
             sHandler.post(new Runnable() { // from class: android.provider.FontsContract$$ExternalSyntheticLambda13
                 @Override // java.lang.Runnable
-                public final void run() {
-                    FontsContract.lambda$getFontSync$0(FontRequest.this, identifier, atomicReference, reentrantLock, atomicBoolean2, atomicBoolean, newCondition);
+                public final void run() throws Throwable {
+                    FontsContract.lambda$getFontSync$0(fontRequest, identifier, atomicReference, reentrantLock, atomicBoolean2, atomicBoolean, conditionNewCondition);
                 }
             });
             Handler handler = sHandler;
@@ -231,7 +230,7 @@ public class FontsContract {
                 }
                 do {
                     try {
-                        nanos = newCondition.awaitNanos(nanos);
+                        nanos = conditionNewCondition.awaitNanos(nanos);
                     } catch (InterruptedException unused) {
                     }
                     if (!atomicBoolean.get()) {
@@ -247,15 +246,15 @@ public class FontsContract {
         }
     }
 
-    static /* synthetic */ void lambda$getFontSync$0(FontRequest fontRequest, String str, AtomicReference atomicReference, Lock lock, AtomicBoolean atomicBoolean, AtomicBoolean atomicBoolean2, Condition condition) {
+    static /* synthetic */ void lambda$getFontSync$0(FontRequest fontRequest, String str, AtomicReference atomicReference, Lock lock, AtomicBoolean atomicBoolean, AtomicBoolean atomicBoolean2, Condition condition) throws Throwable {
         try {
-            FontFamilyResult fetchFonts = fetchFonts(sContext, null, fontRequest);
-            if (fetchFonts.getStatusCode() == 0) {
-                Typeface buildTypeface = buildTypeface(sContext, null, fetchFonts.getFonts());
-                if (buildTypeface != null) {
-                    sTypefaceCache.put(str, buildTypeface);
+            FontFamilyResult fontFamilyResultFetchFonts = fetchFonts(sContext, null, fontRequest);
+            if (fontFamilyResultFetchFonts.getStatusCode() == 0) {
+                Typeface typefaceBuildTypeface = buildTypeface(sContext, null, fontFamilyResultFetchFonts.getFonts());
+                if (typefaceBuildTypeface != null) {
+                    sTypefaceCache.put(str, typefaceBuildTypeface);
                 }
-                atomicReference.set(buildTypeface);
+                atomicReference.set(typefaceBuildTypeface);
             }
         } catch (PackageManager.NameNotFoundException unused) {
         }
@@ -277,39 +276,39 @@ public class FontsContract {
             handler2.post(new Runnable() { // from class: android.provider.FontsContract$$ExternalSyntheticLambda10
                 @Override // java.lang.Runnable
                 public final void run() {
-                    FontsContract.FontRequestCallback.this.onTypefaceRetrieved(typeface);
+                    fontRequestCallback.onTypefaceRetrieved(typeface);
                 }
             });
         } else {
             handler.post(new Runnable() { // from class: android.provider.FontsContract$$ExternalSyntheticLambda11
                 @Override // java.lang.Runnable
-                public final void run() {
-                    FontsContract.lambda$requestFonts$12(Context.this, cancellationSignal, fontRequest, handler2, fontRequestCallback);
+                public final void run() throws Throwable {
+                    FontsContract.lambda$requestFonts$12(context, cancellationSignal, fontRequest, handler2, fontRequestCallback);
                 }
             });
         }
     }
 
-    static /* synthetic */ void lambda$requestFonts$12(Context context, CancellationSignal cancellationSignal, FontRequest fontRequest, Handler handler, final FontRequestCallback fontRequestCallback) {
+    static /* synthetic */ void lambda$requestFonts$12(Context context, CancellationSignal cancellationSignal, FontRequest fontRequest, Handler handler, final FontRequestCallback fontRequestCallback) throws Throwable {
         try {
-            FontFamilyResult fetchFonts = fetchFonts(context, cancellationSignal, fontRequest);
+            FontFamilyResult fontFamilyResultFetchFonts = fetchFonts(context, cancellationSignal, fontRequest);
             final Typeface typeface = sTypefaceCache.get(fontRequest.getIdentifier());
             if (typeface != null) {
                 handler.post(new Runnable() { // from class: android.provider.FontsContract$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        FontsContract.FontRequestCallback.this.onTypefaceRetrieved(typeface);
+                        fontRequestCallback.onTypefaceRetrieved(typeface);
                     }
                 });
                 return;
             }
-            if (fetchFonts.getStatusCode() != 0) {
-                int statusCode = fetchFonts.getStatusCode();
+            if (fontFamilyResultFetchFonts.getStatusCode() != 0) {
+                int statusCode = fontFamilyResultFetchFonts.getStatusCode();
                 if (statusCode == 1) {
                     handler.post(new Runnable() { // from class: android.provider.FontsContract$$ExternalSyntheticLambda2
                         @Override // java.lang.Runnable
                         public final void run() {
-                            FontsContract.FontRequestCallback.this.onTypefaceRequestFailed(-2);
+                            fontRequestCallback.onTypefaceRequestFailed(-2);
                         }
                     });
                     return;
@@ -317,7 +316,7 @@ public class FontsContract {
                     handler.post(new Runnable() { // from class: android.provider.FontsContract$$ExternalSyntheticLambda3
                         @Override // java.lang.Runnable
                         public final void run() {
-                            FontsContract.FontRequestCallback.this.onTypefaceRequestFailed(-3);
+                            fontRequestCallback.onTypefaceRequestFailed(-3);
                         }
                     });
                     return;
@@ -325,18 +324,18 @@ public class FontsContract {
                     handler.post(new Runnable() { // from class: android.provider.FontsContract$$ExternalSyntheticLambda4
                         @Override // java.lang.Runnable
                         public final void run() {
-                            FontsContract.FontRequestCallback.this.onTypefaceRequestFailed(-3);
+                            fontRequestCallback.onTypefaceRequestFailed(-3);
                         }
                     });
                     return;
                 }
             }
-            FontInfo[] fonts = fetchFonts.getFonts();
+            FontInfo[] fonts = fontFamilyResultFetchFonts.getFonts();
             if (fonts == null || fonts.length == 0) {
                 handler.post(new Runnable() { // from class: android.provider.FontsContract$$ExternalSyntheticLambda5
                     @Override // java.lang.Runnable
                     public final void run() {
-                        FontsContract.FontRequestCallback.this.onTypefaceRequestFailed(1);
+                        fontRequestCallback.onTypefaceRequestFailed(1);
                     }
                 });
                 return;
@@ -348,7 +347,7 @@ public class FontsContract {
                         handler.post(new Runnable() { // from class: android.provider.FontsContract$$ExternalSyntheticLambda6
                             @Override // java.lang.Runnable
                             public final void run() {
-                                FontsContract.FontRequestCallback.this.onTypefaceRequestFailed(-3);
+                                fontRequestCallback.onTypefaceRequestFailed(-3);
                             }
                         });
                         return;
@@ -356,27 +355,27 @@ public class FontsContract {
                         handler.post(new Runnable() { // from class: android.provider.FontsContract$$ExternalSyntheticLambda7
                             @Override // java.lang.Runnable
                             public final void run() {
-                                FontsContract.FontRequestCallback.this.onTypefaceRequestFailed(resultCode);
+                                fontRequestCallback.onTypefaceRequestFailed(resultCode);
                             }
                         });
                         return;
                     }
                 }
             }
-            final Typeface buildTypeface = buildTypeface(context, cancellationSignal, fonts);
-            if (buildTypeface == null) {
+            final Typeface typefaceBuildTypeface = buildTypeface(context, cancellationSignal, fonts);
+            if (typefaceBuildTypeface == null) {
                 handler.post(new Runnable() { // from class: android.provider.FontsContract$$ExternalSyntheticLambda8
                     @Override // java.lang.Runnable
                     public final void run() {
-                        FontsContract.FontRequestCallback.this.onTypefaceRequestFailed(-3);
+                        fontRequestCallback.onTypefaceRequestFailed(-3);
                     }
                 });
             } else {
-                sTypefaceCache.put(fontRequest.getIdentifier(), buildTypeface);
+                sTypefaceCache.put(fontRequest.getIdentifier(), typefaceBuildTypeface);
                 handler.post(new Runnable() { // from class: android.provider.FontsContract$$ExternalSyntheticLambda9
                     @Override // java.lang.Runnable
                     public final void run() {
-                        FontsContract.FontRequestCallback.this.onTypefaceRetrieved(buildTypeface);
+                        fontRequestCallback.onTypefaceRetrieved(typefaceBuildTypeface);
                     }
                 });
             }
@@ -384,7 +383,7 @@ public class FontsContract {
             handler.post(new Runnable() { // from class: android.provider.FontsContract$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    FontsContract.FontRequestCallback.this.onTypefaceRequestFailed(-1);
+                    fontRequestCallback.onTypefaceRequestFailed(-1);
                 }
             });
         }
@@ -405,13 +404,13 @@ public class FontsContract {
         }
     }
 
-    public static Typeface buildTypeface(Context context, CancellationSignal cancellationSignal, FontInfo[] fontInfoArr) {
+    public static Typeface buildTypeface(Context context, CancellationSignal cancellationSignal, FontInfo[] fontInfoArr) throws Throwable {
         int i;
         if (context.isRestricted()) {
             return null;
         }
-        Map<Uri, ByteBuffer> prepareFontData = prepareFontData(context, fontInfoArr, cancellationSignal);
-        if (prepareFontData.isEmpty()) {
+        Map<Uri, ByteBuffer> mapPrepareFontData = prepareFontData(context, fontInfoArr, cancellationSignal);
+        if (mapPrepareFontData.isEmpty()) {
             return null;
         }
         int length = fontInfoArr.length;
@@ -422,14 +421,14 @@ public class FontsContract {
                 break;
             }
             FontInfo fontInfo = fontInfoArr[i2];
-            ByteBuffer byteBuffer = prepareFontData.get(fontInfo.getUri());
+            ByteBuffer byteBuffer = mapPrepareFontData.get(fontInfo.getUri());
             if (byteBuffer != null) {
                 try {
-                    Font build = new Font.Builder(byteBuffer).setWeight(fontInfo.getWeight()).setSlant(fontInfo.isItalic() ? 1 : 0).setTtcIndex(fontInfo.getTtcIndex()).setFontVariationSettings(fontInfo.getAxes()).build();
+                    Font fontBuild = new Font.Builder(byteBuffer).setWeight(fontInfo.getWeight()).setSlant(fontInfo.isItalic() ? 1 : 0).setTtcIndex(fontInfo.getTtcIndex()).setFontVariationSettings(fontInfo.getAxes()).build();
                     if (builder == null) {
-                        builder = new FontFamily.Builder(build);
+                        builder = new FontFamily.Builder(fontBuild);
                     } else {
-                        builder.addFont(build);
+                        builder.addFont(fontBuild);
                     }
                 } catch (IOException unused) {
                 } catch (IllegalArgumentException unused2) {
@@ -441,91 +440,101 @@ public class FontsContract {
         if (builder == null) {
             return null;
         }
-        FontFamily build2 = builder.build();
+        FontFamily fontFamilyBuild = builder.build();
         FontStyle fontStyle = new FontStyle(400, 0);
-        Font font = build2.getFont(0);
+        Font font = fontFamilyBuild.getFont(0);
         int matchScore = fontStyle.getMatchScore(font.getStyle());
-        for (i = 1; i < build2.getSize(); i++) {
-            Font font2 = build2.getFont(i);
+        for (i = 1; i < fontFamilyBuild.getSize(); i++) {
+            Font font2 = fontFamilyBuild.getFont(i);
             int matchScore2 = fontStyle.getMatchScore(font2.getStyle());
             if (matchScore2 < matchScore) {
                 font = font2;
                 matchScore = matchScore2;
             }
         }
-        return new Typeface.CustomFallbackBuilder(build2).setStyle(font.getStyle()).build();
+        return new Typeface.CustomFallbackBuilder(fontFamilyBuild).setStyle(font.getStyle()).build();
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:36:0x006c A[Catch: IOException -> 0x0072, TRY_ENTER, TRY_LEAVE, TryCatch #4 {IOException -> 0x0072, blocks: (B:13:0x002c, B:36:0x006c), top: B:51:0x002c }] */
+    /* JADX WARN: Removed duplicated region for block: B:6:0x0018  */
     /* JADX WARN: Unreachable blocks removed: 1, instructions: 1 */
-    private static Map<Uri, ByteBuffer> prepareFontData(Context context, FontInfo[] fontInfoArr, CancellationSignal cancellationSignal) {
-        HashMap hashMap = new HashMap();
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    private static Map<Uri, ByteBuffer> prepareFontData(Context context, FontInfo[] fontInfoArr, CancellationSignal cancellationSignal) throws Throwable {
+        ParcelFileDescriptor parcelFileDescriptorOpenFileDescriptor;
+        HashMap map = new HashMap();
         ContentResolver contentResolver = context.getContentResolver();
         for (FontInfo fontInfo : fontInfoArr) {
             if (fontInfo.getResultCode() == 0) {
                 Uri uri = fontInfo.getUri();
-                if (!hashMap.containsKey(uri)) {
-                    MappedByteBuffer mappedByteBuffer = null;
+                if (!map.containsKey(uri)) {
+                    MappedByteBuffer map2 = null;
                     try {
-                        ParcelFileDescriptor openFileDescriptor = contentResolver.openFileDescriptor(uri, "r", cancellationSignal);
-                        if (openFileDescriptor != null) {
+                        parcelFileDescriptorOpenFileDescriptor = contentResolver.openFileDescriptor(uri, "r", cancellationSignal);
+                    } catch (IOException unused) {
+                    }
+                    if (parcelFileDescriptorOpenFileDescriptor != null) {
+                        try {
+                            FileInputStream fileInputStream = new FileInputStream(parcelFileDescriptorOpenFileDescriptor.getFileDescriptor());
                             try {
-                                FileInputStream fileInputStream = new FileInputStream(openFileDescriptor.getFileDescriptor());
-                                try {
-                                    FileChannel channel = fileInputStream.getChannel();
-                                    mappedByteBuffer = channel.map(FileChannel.MapMode.READ_ONLY, 0L, channel.size());
-                                    fileInputStream.close();
-                                } finally {
-                                }
-                            } catch (IOException unused) {
-                            } catch (Throwable th) {
-                                try {
-                                    if (openFileDescriptor != null) {
-                                        try {
-                                            openFileDescriptor.close();
-                                        } catch (Throwable th2) {
-                                            th.addSuppressed(th2);
-                                        }
+                                FileChannel channel = fileInputStream.getChannel();
+                                map2 = channel.map(FileChannel.MapMode.READ_ONLY, 0L, channel.size());
+                                fileInputStream.close();
+                            } finally {
+                            }
+                        } catch (IOException unused2) {
+                        } catch (Throwable th) {
+                            try {
+                                if (parcelFileDescriptorOpenFileDescriptor != null) {
+                                    try {
+                                        parcelFileDescriptorOpenFileDescriptor.close();
+                                    } catch (Throwable th2) {
+                                        th.addSuppressed(th2);
                                     }
-                                    throw th;
-                                } catch (IOException unused2) {
-                                    mappedByteBuffer = null;
                                 }
+                                throw th;
+                            } catch (IOException unused3) {
+                                map2 = null;
                             }
                         }
-                        if (openFileDescriptor != null) {
-                            openFileDescriptor.close();
+                        if (parcelFileDescriptorOpenFileDescriptor != null) {
+                            parcelFileDescriptorOpenFileDescriptor.close();
                         }
-                    } catch (IOException unused3) {
+                        map.put(uri, map2);
+                    } else {
+                        if (parcelFileDescriptorOpenFileDescriptor != null) {
+                        }
+                        map.put(uri, map2);
                     }
-                    hashMap.put(uri, mappedByteBuffer);
                 }
             }
         }
-        return Collections.unmodifiableMap(hashMap);
+        return Collections.unmodifiableMap(map);
     }
 
     public static ProviderInfo getProvider(PackageManager packageManager, FontRequest fontRequest) throws PackageManager.NameNotFoundException {
         String providerAuthority = fontRequest.getProviderAuthority();
-        ProviderInfo resolveContentProvider = packageManager.resolveContentProvider(providerAuthority, 0);
-        if (resolveContentProvider == null) {
+        ProviderInfo providerInfoResolveContentProvider = packageManager.resolveContentProvider(providerAuthority, 0);
+        if (providerInfoResolveContentProvider == null) {
             throw new PackageManager.NameNotFoundException("No package found for authority: " + providerAuthority);
         }
-        if (!resolveContentProvider.packageName.equals(fontRequest.getProviderPackage())) {
+        if (!providerInfoResolveContentProvider.packageName.equals(fontRequest.getProviderPackage())) {
             throw new PackageManager.NameNotFoundException("Found content provider " + providerAuthority + ", but package was not " + fontRequest.getProviderPackage());
         }
-        if (!resolveContentProvider.applicationInfo.isSystemApp()) {
-            List<byte[]> convertToByteArrayList = convertToByteArrayList(packageManager.getPackageInfo(resolveContentProvider.packageName, 64).signatures);
-            Collections.sort(convertToByteArrayList, sByteArrayComparator);
+        if (!providerInfoResolveContentProvider.applicationInfo.isSystemApp()) {
+            List<byte[]> listConvertToByteArrayList = convertToByteArrayList(packageManager.getPackageInfo(providerInfoResolveContentProvider.packageName, 64).signatures);
+            Collections.sort(listConvertToByteArrayList, sByteArrayComparator);
             List<List<byte[]>> certificates = fontRequest.getCertificates();
             for (int i = 0; i < certificates.size(); i++) {
                 ArrayList arrayList = new ArrayList(certificates.get(i));
                 Collections.sort(arrayList, sByteArrayComparator);
-                if (!equalsByteArrayList(convertToByteArrayList, arrayList)) {
+                if (!equalsByteArrayList(listConvertToByteArrayList, arrayList)) {
                 }
             }
             return null;
         }
-        return resolveContentProvider;
+        return providerInfoResolveContentProvider;
     }
 
     static /* synthetic */ int lambda$static$13(byte[] bArr, byte[] bArr2) {
@@ -564,50 +573,50 @@ public class FontsContract {
 
     public static FontInfo[] getFontFromProvider(Context context, FontRequest fontRequest, String str, CancellationSignal cancellationSignal) {
         ArrayList arrayList;
-        Uri withAppendedId;
+        Uri uriWithAppendedId;
         int i;
         boolean z;
         ArrayList arrayList2 = new ArrayList();
-        Uri build = new Uri.Builder().scheme("content").authority(str).build();
-        Uri build2 = new Uri.Builder().scheme("content").authority(str).appendPath("file").build();
-        Cursor query = context.getContentResolver().query(build, new String[]{"_id", Columns.FILE_ID, Columns.TTC_INDEX, Columns.VARIATION_SETTINGS, Columns.WEIGHT, Columns.ITALIC, Columns.RESULT_CODE}, "query = ?", new String[]{fontRequest.getQuery()}, null, cancellationSignal);
-        if (query != null) {
+        Uri uriBuild = new Uri.Builder().scheme("content").authority(str).build();
+        Uri uriBuild2 = new Uri.Builder().scheme("content").authority(str).appendPath("file").build();
+        Cursor cursorQuery = context.getContentResolver().query(uriBuild, new String[]{"_id", Columns.FILE_ID, Columns.TTC_INDEX, Columns.VARIATION_SETTINGS, Columns.WEIGHT, Columns.ITALIC, Columns.RESULT_CODE}, "query = ?", new String[]{fontRequest.getQuery()}, null, cancellationSignal);
+        if (cursorQuery != null) {
             try {
-                if (query.getCount() > 0) {
-                    int columnIndex = query.getColumnIndex(Columns.RESULT_CODE);
+                if (cursorQuery.getCount() > 0) {
+                    int columnIndex = cursorQuery.getColumnIndex(Columns.RESULT_CODE);
                     ArrayList arrayList3 = new ArrayList();
-                    int columnIndexOrThrow = query.getColumnIndexOrThrow("_id");
-                    int columnIndex2 = query.getColumnIndex(Columns.FILE_ID);
-                    int columnIndex3 = query.getColumnIndex(Columns.TTC_INDEX);
-                    int columnIndex4 = query.getColumnIndex(Columns.VARIATION_SETTINGS);
-                    int columnIndex5 = query.getColumnIndex(Columns.WEIGHT);
-                    int columnIndex6 = query.getColumnIndex(Columns.ITALIC);
-                    while (query.moveToNext()) {
-                        int i2 = columnIndex != -1 ? query.getInt(columnIndex) : 0;
-                        int i3 = columnIndex3 != -1 ? query.getInt(columnIndex3) : 0;
-                        String string = columnIndex4 != -1 ? query.getString(columnIndex4) : null;
+                    int columnIndexOrThrow = cursorQuery.getColumnIndexOrThrow("_id");
+                    int columnIndex2 = cursorQuery.getColumnIndex(Columns.FILE_ID);
+                    int columnIndex3 = cursorQuery.getColumnIndex(Columns.TTC_INDEX);
+                    int columnIndex4 = cursorQuery.getColumnIndex(Columns.VARIATION_SETTINGS);
+                    int columnIndex5 = cursorQuery.getColumnIndex(Columns.WEIGHT);
+                    int columnIndex6 = cursorQuery.getColumnIndex(Columns.ITALIC);
+                    while (cursorQuery.moveToNext()) {
+                        int i2 = columnIndex != -1 ? cursorQuery.getInt(columnIndex) : 0;
+                        int i3 = columnIndex3 != -1 ? cursorQuery.getInt(columnIndex3) : 0;
+                        String string = columnIndex4 != -1 ? cursorQuery.getString(columnIndex4) : null;
                         if (columnIndex2 == -1) {
                             arrayList = arrayList3;
-                            withAppendedId = ContentUris.withAppendedId(build, query.getLong(columnIndexOrThrow));
+                            uriWithAppendedId = ContentUris.withAppendedId(uriBuild, cursorQuery.getLong(columnIndexOrThrow));
                         } else {
                             arrayList = arrayList3;
-                            withAppendedId = ContentUris.withAppendedId(build2, query.getLong(columnIndex2));
+                            uriWithAppendedId = ContentUris.withAppendedId(uriBuild2, cursorQuery.getLong(columnIndex2));
                         }
                         if (columnIndex5 == -1 || columnIndex6 == -1) {
                             i = 400;
                             z = false;
                         } else {
-                            i = query.getInt(columnIndex5);
+                            i = cursorQuery.getInt(columnIndex5);
                             boolean z2 = true;
-                            if (query.getInt(columnIndex6) != 1) {
+                            if (cursorQuery.getInt(columnIndex6) != 1) {
                                 z2 = false;
                             }
                             z = z2;
                         }
-                        FontVariationAxis[] fromFontVariationSettings = FontVariationAxis.fromFontVariationSettings(string);
-                        Uri uri = withAppendedId;
+                        FontVariationAxis[] fontVariationAxisArrFromFontVariationSettings = FontVariationAxis.fromFontVariationSettings(string);
+                        Uri uri = uriWithAppendedId;
                         ArrayList arrayList4 = arrayList;
-                        arrayList4.add(new FontInfo(uri, i3, fromFontVariationSettings, i, z, i2));
+                        arrayList4.add(new FontInfo(uri, i3, fontVariationAxisArrFromFontVariationSettings, i, z, i2));
                         arrayList3 = arrayList4;
                     }
                     arrayList2 = arrayList3;
@@ -615,8 +624,8 @@ public class FontsContract {
             } finally {
             }
         }
-        if (query != null) {
-            query.close();
+        if (cursorQuery != null) {
+            cursorQuery.close();
         }
         return (FontInfo[]) arrayList2.toArray(new FontInfo[0]);
     }

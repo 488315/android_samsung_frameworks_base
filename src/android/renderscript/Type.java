@@ -84,7 +84,7 @@ public class Type extends BaseObj {
     }
 
     void calcElementCount() {
-        boolean hasMipmaps = hasMipmaps();
+        boolean zHasMipmaps = hasMipmaps();
         int x = getX();
         int y = getY();
         int z = getZ();
@@ -99,7 +99,7 @@ public class Type extends BaseObj {
             z = 1;
         }
         int i2 = x * y * z * i;
-        while (hasMipmaps && (x > 1 || y > 1 || z > 1)) {
+        while (zHasMipmaps && (x > 1 || y > 1 || z > 1)) {
             if (x > 1) {
                 x >>= 1;
             }

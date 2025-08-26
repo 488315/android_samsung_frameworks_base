@@ -104,22 +104,22 @@ class Tokenizer {
 
         @Override // android.media.Tokenizer.TokenizerPhase
         public void tokenize() {
-            String[] split;
+            String[] strArrSplit;
             if (!this.mAtAnnotation) {
                 Tokenizer.this.mHandledLen++;
             }
             if (Tokenizer.this.mHandledLen < Tokenizer.this.mLine.length()) {
                 if (this.mAtAnnotation || Tokenizer.this.mLine.charAt(Tokenizer.this.mHandledLen) == '/') {
-                    split = Tokenizer.this.mLine.substring(Tokenizer.this.mHandledLen).split(">");
+                    strArrSplit = Tokenizer.this.mLine.substring(Tokenizer.this.mHandledLen).split(">");
                 } else {
-                    split = Tokenizer.this.mLine.substring(Tokenizer.this.mHandledLen).split("[\t\f >]");
+                    strArrSplit = Tokenizer.this.mLine.substring(Tokenizer.this.mHandledLen).split("[\t\f >]");
                 }
-                String substring = Tokenizer.this.mLine.substring(Tokenizer.this.mHandledLen, Tokenizer.this.mHandledLen + split[0].length());
-                Tokenizer.this.mHandledLen += split[0].length();
+                String strSubstring = Tokenizer.this.mLine.substring(Tokenizer.this.mHandledLen, Tokenizer.this.mHandledLen + strArrSplit[0].length());
+                Tokenizer.this.mHandledLen += strArrSplit[0].length();
                 if (this.mAtAnnotation) {
-                    this.mAnnotation += " " + substring;
+                    this.mAnnotation += " " + strSubstring;
                 } else {
-                    this.mName = substring;
+                    this.mName = strSubstring;
                 }
             }
             this.mAtAnnotation = true;
@@ -133,7 +133,7 @@ class Tokenizer {
         }
 
         private void yield_tag() {
-            String[] strArr;
+            String[] strArrSplit;
             if (this.mName.startsWith("/")) {
                 Tokenizer.this.mListener.onEnd(this.mName.substring(1));
                 return;
@@ -147,23 +147,23 @@ class Tokenizer {
                     return;
                 }
             }
-            String replaceAll = this.mAnnotation.replaceAll("\\s+", " ");
-            this.mAnnotation = replaceAll;
-            if (replaceAll.startsWith(" ")) {
+            String strReplaceAll = this.mAnnotation.replaceAll("\\s+", " ");
+            this.mAnnotation = strReplaceAll;
+            if (strReplaceAll.startsWith(" ")) {
                 this.mAnnotation = this.mAnnotation.substring(1);
             }
             if (this.mAnnotation.endsWith(" ")) {
                 String str = this.mAnnotation;
                 this.mAnnotation = str.substring(0, str.length() - 1);
             }
-            int indexOf = this.mName.indexOf(46);
-            if (indexOf >= 0) {
-                strArr = this.mName.substring(indexOf + 1).split("\\.");
-                this.mName = this.mName.substring(0, indexOf);
+            int iIndexOf = this.mName.indexOf(46);
+            if (iIndexOf >= 0) {
+                strArrSplit = this.mName.substring(iIndexOf + 1).split("\\.");
+                this.mName = this.mName.substring(0, iIndexOf);
             } else {
-                strArr = null;
+                strArrSplit = null;
             }
-            Tokenizer.this.mListener.onStart(this.mName, strArr, this.mAnnotation);
+            Tokenizer.this.mListener.onStart(this.mName, strArrSplit, this.mAnnotation);
         }
     }
 

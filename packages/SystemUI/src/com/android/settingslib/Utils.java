@@ -29,7 +29,6 @@ import com.android.launcher3.util.UserIconInfo;
 import com.android.systemui.R;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class Utils {
     static final String STORAGE_MANAGER_ENABLED_PROPERTY = "ro.storage_manager.enabled";
@@ -41,62 +40,58 @@ public class Utils {
     public static String sSharedSystemSharedLibPackageName;
     public static Signature[] sSystemSignature;
 
+    /* JADX WARN: Removed duplicated region for block: B:14:0x0039  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public static FastBitmapDrawable getBadgedIcon(Context context, ApplicationInfo applicationInfo) {
         int i;
-        IconFactory obtain;
         UserInfo userInfo;
-        Drawable loadUnbadgedIcon = applicationInfo.loadUnbadgedIcon(context.getPackageManager());
+        Drawable drawableLoadUnbadgedIcon = applicationInfo.loadUnbadgedIcon(context.getPackageManager());
         UserHandle userHandleForUid = UserHandle.getUserHandleForUid(applicationInfo.uid);
         try {
             userInfo = ((UserManager) context.getSystemService(UserManager.class)).getUserInfo(userHandleForUid.getIdentifier());
         } catch (Exception unused) {
         }
+        if (userInfo == null) {
+            i = 0;
+        } else if (userInfo.isCloneProfile()) {
+            i = 2;
+        } else if (userInfo.isManagedProfile()) {
+            i = 1;
+        } else if (userInfo.isPrivateProfile()) {
+            i = 3;
+        }
+        IconFactory iconFactoryObtain = IconFactory.obtain(context);
         try {
-            if (userInfo != null) {
-                if (userInfo.isCloneProfile()) {
-                    i = 2;
-                } else if (userInfo.isManagedProfile()) {
-                    i = 1;
-                } else if (userInfo.isPrivateProfile()) {
-                    i = 3;
-                }
-                obtain = IconFactory.obtain(context);
-                BaseIconFactory.IconOptions iconOptions = new BaseIconFactory.IconOptions();
-                iconOptions.mUserIconInfo = new UserIconInfo(userHandleForUid, i);
-                FastBitmapDrawable newIcon$1 = obtain.createBadgedIconBitmap(loadUnbadgedIcon, iconOptions).newIcon$1(0, context);
-                obtain.close();
-                return newIcon$1;
-            }
-            BaseIconFactory.IconOptions iconOptions2 = new BaseIconFactory.IconOptions();
-            iconOptions2.mUserIconInfo = new UserIconInfo(userHandleForUid, i);
-            FastBitmapDrawable newIcon$12 = obtain.createBadgedIconBitmap(loadUnbadgedIcon, iconOptions2).newIcon$1(0, context);
-            obtain.close();
-            return newIcon$12;
+            BaseIconFactory.IconOptions iconOptions = new BaseIconFactory.IconOptions();
+            iconOptions.mUserIconInfo = new UserIconInfo(userHandleForUid, i);
+            FastBitmapDrawable fastBitmapDrawableNewIcon$1 = iconFactoryObtain.createBadgedIconBitmap(drawableLoadUnbadgedIcon, iconOptions).newIcon$1(0, context);
+            iconFactoryObtain.close();
+            return fastBitmapDrawableNewIcon$1;
         } catch (Throwable th) {
             try {
-                obtain.close();
+                iconFactoryObtain.close();
             } catch (Throwable th2) {
                 th.addSuppressed(th2);
             }
             throw th;
         }
-        i = 0;
-        obtain = IconFactory.obtain(context);
     }
 
     public static ColorStateList getColorAttr(int i, Context context) {
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(new int[]{i});
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(new int[]{i});
         try {
-            return obtainStyledAttributes.getColorStateList(0);
+            return typedArrayObtainStyledAttributes.getColorStateList(0);
         } finally {
-            obtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes.recycle();
         }
     }
 
     public static int getColorAttrDefaultColor(Context context, int i, int i2) {
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(new int[]{i});
-        int color = obtainStyledAttributes.getColor(0, i2);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(new int[]{i});
+        int color = typedArrayObtainStyledAttributes.getColor(0, i2);
+        typedArrayObtainStyledAttributes.recycle();
         return color;
     }
 
@@ -105,9 +100,9 @@ public class Utils {
     }
 
     public static int getThemeAttr(int i, Context context) {
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(new int[]{i});
-        int resourceId = obtainStyledAttributes.getResourceId(0, 0);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(new int[]{i});
+        int resourceId = typedArrayObtainStyledAttributes.getResourceId(0, 0);
+        typedArrayObtainStyledAttributes.recycle();
         return resourceId;
     }
 
@@ -125,23 +120,17 @@ public class Utils {
         return (voiceRegState == 3 || voiceRegState == 1 || voiceRegState == 2) ? false : true;
     }
 
-    public static boolean isSystemPackage(Resources resources, PackageManager packageManager, PackageInfo packageInfo) {
-        Signature signature;
+    public static boolean isSystemPackage(Resources resources, PackageManager packageManager, PackageInfo packageInfo) throws Resources.NotFoundException, PackageManager.NameNotFoundException {
         PackageInfo packageInfo2;
         Signature[] signatureArr;
-        WebViewProviderInfo webViewProviderInfo = null;
+        WebViewProviderInfo defaultWebViewPackage = null;
         if (sSystemSignature == null) {
             Signature[] signatureArr2 = new Signature[1];
             try {
                 packageInfo2 = packageManager.getPackageInfo("android", 64);
             } catch (PackageManager.NameNotFoundException unused) {
             }
-            if (packageInfo2 != null && (signatureArr = packageInfo2.signatures) != null && signatureArr.length > 0) {
-                signature = signatureArr[0];
-                signatureArr2[0] = signature;
-                sSystemSignature = signatureArr2;
-            }
-            signature = null;
+            Signature signature = (packageInfo2 == null || (signatureArr = packageInfo2.signatures) == null || signatureArr.length <= 0) ? null : signatureArr[0];
             signatureArr2[0] = signature;
             sSystemSignature = signatureArr2;
         }
@@ -170,13 +159,13 @@ public class Utils {
             try {
                 IWebViewUpdateService updateService = WebViewFactory.getUpdateService();
                 if (updateService != null) {
-                    webViewProviderInfo = updateService.getDefaultWebViewPackage();
+                    defaultWebViewPackage = updateService.getDefaultWebViewPackage();
                 }
             } catch (RemoteException e) {
                 Log.e("Utils", "RemoteException when trying to fetch default WebView package Name", e);
             }
-            if (webViewProviderInfo != null) {
-                sDefaultWebViewPackageName = webViewProviderInfo.packageName;
+            if (defaultWebViewPackage != null) {
+                sDefaultWebViewPackageName = defaultWebViewPackage.packageName;
             }
             str2 = sDefaultWebViewPackageName;
         }
@@ -188,9 +177,9 @@ public class Utils {
             Intent intent = new Intent("android.intent.action.INSTALL_PACKAGE");
             intent.addCategory("android.intent.category.DEFAULT");
             intent.setDataAndType(Uri.parse("content://com.example/foo.apk"), "application/vnd.android.package-archive");
-            List<ResolveInfo> queryIntentActivities = packageManager.queryIntentActivities(intent, 128);
-            if (queryIntentActivities.size() == 1) {
-                ResolveInfo resolveInfo = queryIntentActivities.get(0);
+            List<ResolveInfo> listQueryIntentActivities = packageManager.queryIntentActivities(intent, 128);
+            if (listQueryIntentActivities.size() == 1) {
+                ResolveInfo resolveInfo = listQueryIntentActivities.get(0);
                 if (resolveInfo.activityInfo.applicationInfo.isPrivilegedApp()) {
                     sPackageInstallerPackageName = resolveInfo.getComponentInfo().packageName;
                 }
@@ -200,7 +189,7 @@ public class Utils {
         if (str.equals(str3)) {
             return true;
         }
-        String string = resources.getString(android.R.string.dump_heap_title);
+        String string = resources.getString(android.R.string.duration_days_relative_future);
         return string != null && string.equals(str);
     }
 }

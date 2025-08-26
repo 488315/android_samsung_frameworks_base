@@ -67,9 +67,9 @@ public interface ICas extends android.hardware.cas.V1_1.ICas {
         if (iHwBinder == null) {
             return null;
         }
-        IHwInterface queryLocalInterface = iHwBinder.queryLocalInterface(kInterfaceName);
-        if (queryLocalInterface != null && (queryLocalInterface instanceof ICas)) {
-            return (ICas) queryLocalInterface;
+        IHwInterface iHwInterfaceQueryLocalInterface = iHwBinder.queryLocalInterface(kInterfaceName);
+        if (iHwInterfaceQueryLocalInterface != null && (iHwInterfaceQueryLocalInterface instanceof ICas)) {
+            return (ICas) iHwInterfaceQueryLocalInterface;
         }
         Proxy proxy = new Proxy(iHwBinder);
         try {
@@ -392,13 +392,13 @@ public interface ICas extends android.hardware.cas.V1_1.ICas {
                 hwParcel2.verifySuccess();
                 hwParcel.releaseTemporaryStorage();
                 ArrayList<byte[]> arrayList = new ArrayList<>();
-                HwBlob readBuffer = hwParcel2.readBuffer(16L);
-                int int32 = readBuffer.getInt32(8L);
-                HwBlob readEmbeddedBuffer = hwParcel2.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
+                HwBlob buffer = hwParcel2.readBuffer(16L);
+                int int32 = buffer.getInt32(8L);
+                HwBlob embeddedBuffer = hwParcel2.readEmbeddedBuffer(int32 * 32, buffer.handle(), 0L, true);
                 arrayList.clear();
                 for (int i = 0; i < int32; i++) {
                     byte[] bArr = new byte[32];
-                    readEmbeddedBuffer.copyToInt8Array(i * 32, bArr, 32);
+                    embeddedBuffer.copyToInt8Array(i * 32, bArr, 32);
                     arrayList.add(bArr);
                 }
                 return arrayList;
@@ -572,9 +572,9 @@ public interface ICas extends android.hardware.cas.V1_1.ICas {
                     return;
                 case 3:
                     hwParcel.enforceInterface(android.hardware.cas.V1_0.ICas.kInterfaceName);
-                    int closeSession = closeSession(hwParcel.readInt8Vector());
+                    int iCloseSession = closeSession(hwParcel.readInt8Vector());
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeInt32(closeSession);
+                    hwParcel2.writeInt32(iCloseSession);
                     hwParcel2.send();
                     return;
                 case 4:
@@ -586,51 +586,51 @@ public interface ICas extends android.hardware.cas.V1_1.ICas {
                     return;
                 case 5:
                     hwParcel.enforceInterface(android.hardware.cas.V1_0.ICas.kInterfaceName);
-                    int processEcm = processEcm(hwParcel.readInt8Vector(), hwParcel.readInt8Vector());
+                    int iProcessEcm = processEcm(hwParcel.readInt8Vector(), hwParcel.readInt8Vector());
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeInt32(processEcm);
+                    hwParcel2.writeInt32(iProcessEcm);
                     hwParcel2.send();
                     return;
                 case 6:
                     hwParcel.enforceInterface(android.hardware.cas.V1_0.ICas.kInterfaceName);
-                    int processEmm = processEmm(hwParcel.readInt8Vector());
+                    int iProcessEmm = processEmm(hwParcel.readInt8Vector());
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeInt32(processEmm);
+                    hwParcel2.writeInt32(iProcessEmm);
                     hwParcel2.send();
                     return;
                 case 7:
                     hwParcel.enforceInterface(android.hardware.cas.V1_0.ICas.kInterfaceName);
-                    int sendEvent = sendEvent(hwParcel.readInt32(), hwParcel.readInt32(), hwParcel.readInt8Vector());
+                    int iSendEvent = sendEvent(hwParcel.readInt32(), hwParcel.readInt32(), hwParcel.readInt8Vector());
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeInt32(sendEvent);
+                    hwParcel2.writeInt32(iSendEvent);
                     hwParcel2.send();
                     return;
                 case 8:
                     hwParcel.enforceInterface(android.hardware.cas.V1_0.ICas.kInterfaceName);
-                    int provision = provision(hwParcel.readString());
+                    int iProvision = provision(hwParcel.readString());
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeInt32(provision);
+                    hwParcel2.writeInt32(iProvision);
                     hwParcel2.send();
                     return;
                 case 9:
                     hwParcel.enforceInterface(android.hardware.cas.V1_0.ICas.kInterfaceName);
-                    int refreshEntitlements = refreshEntitlements(hwParcel.readInt32(), hwParcel.readInt8Vector());
+                    int iRefreshEntitlements = refreshEntitlements(hwParcel.readInt32(), hwParcel.readInt8Vector());
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeInt32(refreshEntitlements);
+                    hwParcel2.writeInt32(iRefreshEntitlements);
                     hwParcel2.send();
                     return;
                 case 10:
                     hwParcel.enforceInterface(android.hardware.cas.V1_0.ICas.kInterfaceName);
-                    int release = release();
+                    int iRelease = release();
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeInt32(release);
+                    hwParcel2.writeInt32(iRelease);
                     hwParcel2.send();
                     return;
                 case 11:
                     hwParcel.enforceInterface(android.hardware.cas.V1_1.ICas.kInterfaceName);
-                    int sendSessionEvent = sendSessionEvent(hwParcel.readInt8Vector(), hwParcel.readInt32(), hwParcel.readInt32(), hwParcel.readInt8Vector());
+                    int iSendSessionEvent = sendSessionEvent(hwParcel.readInt8Vector(), hwParcel.readInt32(), hwParcel.readInt32(), hwParcel.readInt8Vector());
                     hwParcel2.writeStatus(0);
-                    hwParcel2.writeInt32(sendSessionEvent);
+                    hwParcel2.writeInt32(iSendSessionEvent);
                     hwParcel2.send();
                     return;
                 case 12:
@@ -649,9 +649,9 @@ public interface ICas extends android.hardware.cas.V1_1.ICas {
                     switch (i) {
                         case 256067662:
                             hwParcel.enforceInterface(IBase.kInterfaceName);
-                            ArrayList<String> interfaceChain = interfaceChain();
+                            ArrayList<String> arrayListInterfaceChain = interfaceChain();
                             hwParcel2.writeStatus(0);
-                            hwParcel2.writeStringVector(interfaceChain);
+                            hwParcel2.writeStringVector(arrayListInterfaceChain);
                             hwParcel2.send();
                             return;
                         case 256131655:
@@ -662,9 +662,9 @@ public interface ICas extends android.hardware.cas.V1_1.ICas {
                             return;
                         case 256136003:
                             hwParcel.enforceInterface(IBase.kInterfaceName);
-                            String interfaceDescriptor = interfaceDescriptor();
+                            String strInterfaceDescriptor = interfaceDescriptor();
                             hwParcel2.writeStatus(0);
-                            hwParcel2.writeString(interfaceDescriptor);
+                            hwParcel2.writeString(strInterfaceDescriptor);
                             hwParcel2.send();
                             return;
                         case 256398152:

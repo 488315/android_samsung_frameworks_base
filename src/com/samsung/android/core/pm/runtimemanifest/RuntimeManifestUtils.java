@@ -75,7 +75,7 @@ public class RuntimeManifestUtils {
         sIsTest = z;
     }
 
-    static List<RuntimeManifestPolicies.PolicyInfo> parseOverlayPolicies(XmlResourceParser xmlResourceParser, Resources resources) throws IOException, XmlPullParserException {
+    static List<RuntimeManifestPolicies.PolicyInfo> parseOverlayPolicies(XmlResourceParser xmlResourceParser, Resources resources) throws XmlPullParserException, IOException {
         ArrayList arrayList = new ArrayList();
         int depth = xmlResourceParser.getDepth();
         while (true) {
@@ -111,31 +111,31 @@ public class RuntimeManifestUtils {
                     if (!TextUtils.isEmpty(attributeValue6)) {
                         policyInfo.setPropertyValue(attributeValue6);
                     }
-                    TypedArray obtainAttributes = resources.obtainAttributes(xmlResourceParser, R.styleable.AndroidManifestActivity);
+                    TypedArray typedArrayObtainAttributes = resources.obtainAttributes(xmlResourceParser, R.styleable.AndroidManifestActivity);
                     try {
-                        TypedValue peekValue = obtainAttributes.peekValue(1);
-                        if (peekValue != null) {
-                            if (peekValue.resourceId == 0) {
+                        TypedValue typedValuePeekValue = typedArrayObtainAttributes.peekValue(1);
+                        if (typedValuePeekValue != null) {
+                            if (typedValuePeekValue.resourceId == 0) {
                                 policyInfo.setLabelRes(0);
-                                policyInfo.setCoercedLabel(peekValue.coerceToString());
+                                policyInfo.setCoercedLabel(typedValuePeekValue.coerceToString());
                             } else {
-                                policyInfo.setLabelRes(peekValue.resourceId);
+                                policyInfo.setLabelRes(typedValuePeekValue.resourceId);
                                 policyInfo.setCoercedLabel(null);
                             }
                         }
-                        int resourceId = obtainAttributes.getResourceId(2, 0);
+                        int resourceId = typedArrayObtainAttributes.getResourceId(2, 0);
                         if (resourceId != 0) {
                             policyInfo.setIconRes(resourceId);
                         }
-                        if (obtainAttributes.hasValueOrEmpty(5)) {
-                            policyInfo.setEnabled(obtainAttributes.getBoolean(5, true));
+                        if (typedArrayObtainAttributes.hasValueOrEmpty(5)) {
+                            policyInfo.setEnabled(typedArrayObtainAttributes.getBoolean(5, true));
                         }
-                        obtainAttributes.recycle();
-                        obtainAttributes = resources.obtainAttributes(xmlResourceParser, R.styleable.AndroidManifestIntentFilter);
+                        typedArrayObtainAttributes.recycle();
+                        typedArrayObtainAttributes = resources.obtainAttributes(xmlResourceParser, R.styleable.AndroidManifestIntentFilter);
                         try {
-                            policyInfo.setPriority(obtainAttributes.getInt(2, 0));
+                            policyInfo.setPriority(typedArrayObtainAttributes.getInt(2, 0));
                             arrayList.add(policyInfo);
-                            obtainAttributes.recycle();
+                            typedArrayObtainAttributes.recycle();
                             Slog.d("RuntimeManifestUtils", "Parsed " + policyInfo.toString());
                         } finally {
                         }
@@ -150,13 +150,13 @@ public class RuntimeManifestUtils {
         return arrayList;
     }
 
-    public static RuntimeManifestPolicies parseRuntimeManifestPolicies(XmlResourceParser xmlResourceParser, Resources resources) throws IOException, XmlPullParserException {
+    public static RuntimeManifestPolicies parseRuntimeManifestPolicies(XmlResourceParser xmlResourceParser, Resources resources) throws XmlPullParserException, IOException {
         RuntimeManifestPolicies runtimeManifestPolicies = new RuntimeManifestPolicies();
         ArrayList arrayList = new ArrayList();
-        HashMap hashMap = new HashMap();
-        HashMap hashMap2 = new HashMap();
-        HashMap hashMap3 = new HashMap();
-        HashMap hashMap4 = new HashMap();
+        HashMap map = new HashMap();
+        HashMap map2 = new HashMap();
+        HashMap map3 = new HashMap();
+        HashMap map4 = new HashMap();
         XmlUtils.beginDocument(xmlResourceParser, TAG_RUNTIME_MANIFEST);
         while (true) {
             XmlUtils.nextElement(xmlResourceParser);
@@ -165,44 +165,44 @@ public class RuntimeManifestUtils {
                 if (name.equals("application")) {
                     arrayList.addAll(parseOverlayPolicies(xmlResourceParser, resources));
                 } else {
-                    TypedArray obtainAttributes = resources.obtainAttributes(xmlResourceParser, R.styleable.AndroidManifestActivity);
+                    TypedArray typedArrayObtainAttributes = resources.obtainAttributes(xmlResourceParser, R.styleable.AndroidManifestActivity);
                     try {
-                        String string = obtainAttributes.getString(3);
+                        String string = typedArrayObtainAttributes.getString(3);
                         if (string == null) {
                             continue;
                         } else if (name.equals("activity")) {
-                            List<RuntimeManifestPolicies.PolicyInfo> parseOverlayPolicies = parseOverlayPolicies(xmlResourceParser, resources);
-                            if (!hashMap.containsKey(string) && parseOverlayPolicies.size() > 0) {
-                                hashMap.put(string, parseOverlayPolicies);
+                            List<RuntimeManifestPolicies.PolicyInfo> overlayPolicies = parseOverlayPolicies(xmlResourceParser, resources);
+                            if (!map.containsKey(string) && overlayPolicies.size() > 0) {
+                                map.put(string, overlayPolicies);
                             }
                         } else if (name.equals("receiver")) {
-                            List<RuntimeManifestPolicies.PolicyInfo> parseOverlayPolicies2 = parseOverlayPolicies(xmlResourceParser, resources);
-                            if (!hashMap2.containsKey(string) && parseOverlayPolicies2.size() > 0) {
-                                hashMap2.put(string, parseOverlayPolicies2);
+                            List<RuntimeManifestPolicies.PolicyInfo> overlayPolicies2 = parseOverlayPolicies(xmlResourceParser, resources);
+                            if (!map2.containsKey(string) && overlayPolicies2.size() > 0) {
+                                map2.put(string, overlayPolicies2);
                             }
                         } else if (name.equals("service")) {
-                            List<RuntimeManifestPolicies.PolicyInfo> parseOverlayPolicies3 = parseOverlayPolicies(xmlResourceParser, resources);
-                            if (!hashMap3.containsKey(string) && parseOverlayPolicies3.size() > 0) {
-                                hashMap3.put(string, parseOverlayPolicies3);
+                            List<RuntimeManifestPolicies.PolicyInfo> overlayPolicies3 = parseOverlayPolicies(xmlResourceParser, resources);
+                            if (!map3.containsKey(string) && overlayPolicies3.size() > 0) {
+                                map3.put(string, overlayPolicies3);
                             }
                         } else if (name.equals(TAG_PROVIDER)) {
-                            List<RuntimeManifestPolicies.PolicyInfo> parseOverlayPolicies4 = parseOverlayPolicies(xmlResourceParser, resources);
-                            if (!hashMap4.containsKey(string) && parseOverlayPolicies4.size() > 0) {
-                                hashMap4.put(string, parseOverlayPolicies4);
+                            List<RuntimeManifestPolicies.PolicyInfo> overlayPolicies4 = parseOverlayPolicies(xmlResourceParser, resources);
+                            if (!map4.containsKey(string) && overlayPolicies4.size() > 0) {
+                                map4.put(string, overlayPolicies4);
                             }
                         } else {
                             throw new XmlPullParserException("Unknown element under <runtime-manifest>: " + name);
                         }
                     } finally {
-                        obtainAttributes.recycle();
+                        typedArrayObtainAttributes.recycle();
                     }
                 }
             } else {
                 runtimeManifestPolicies.addApplicationPolicies(arrayList);
-                runtimeManifestPolicies.addActivityPolicies(hashMap);
-                runtimeManifestPolicies.addReceiverPolicies(hashMap2);
-                runtimeManifestPolicies.addServicePolicies(hashMap3);
-                runtimeManifestPolicies.addProviderPolicies(hashMap4);
+                runtimeManifestPolicies.addActivityPolicies(map);
+                runtimeManifestPolicies.addReceiverPolicies(map2);
+                runtimeManifestPolicies.addServicePolicies(map3);
+                runtimeManifestPolicies.addProviderPolicies(map4);
                 return runtimeManifestPolicies;
             }
         }
@@ -261,13 +261,13 @@ public class RuntimeManifestUtils {
         if (charSequence == null || charSequence.length() <= 0) {
             return null;
         }
-        String charSequence2 = charSequence.toString();
-        if (charSequence2.charAt(0) == '.') {
-            return str + charSequence2;
+        String string = charSequence.toString();
+        if (string.charAt(0) == '.') {
+            return str + string;
         }
-        if (charSequence2.indexOf(46) >= 0) {
-            return charSequence2;
+        if (string.indexOf(46) >= 0) {
+            return string;
         }
-        return str + '.' + charSequence2;
+        return str + '.' + string;
     }
 }

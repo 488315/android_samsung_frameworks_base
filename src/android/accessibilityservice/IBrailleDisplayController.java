@@ -66,9 +66,9 @@ public interface IBrailleDisplayController extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IBrailleDisplayController.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IBrailleDisplayController)) {
-                return (IBrailleDisplayController) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IBrailleDisplayController.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IBrailleDisplayController)) {
+                return (IBrailleDisplayController) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -104,18 +104,18 @@ public interface IBrailleDisplayController extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IBrailleDisplayConnection asInterface = IBrailleDisplayConnection.Stub.asInterface(parcel.readStrongBinder());
-                byte[] createByteArray = parcel.createByteArray();
+                IBrailleDisplayConnection iBrailleDisplayConnectionAsInterface = IBrailleDisplayConnection.Stub.asInterface(parcel.readStrongBinder());
+                byte[] bArrCreateByteArray = parcel.createByteArray();
                 parcel.enforceNoDataAvail();
-                onConnected(asInterface, createByteArray);
+                onConnected(iBrailleDisplayConnectionAsInterface, bArrCreateByteArray);
             } else if (i == 2) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onConnectionFailed(readInt);
+                onConnectionFailed(i3);
             } else if (i == 3) {
-                byte[] createByteArray2 = parcel.createByteArray();
+                byte[] bArrCreateByteArray2 = parcel.createByteArray();
                 parcel.enforceNoDataAvail();
-                onInput(createByteArray2);
+                onInput(bArrCreateByteArray2);
             } else if (i == 4) {
                 onDisconnected();
             } else {
@@ -142,49 +142,49 @@ public interface IBrailleDisplayController extends IInterface {
 
             @Override // android.accessibilityservice.IBrailleDisplayController
             public void onConnected(IBrailleDisplayConnection iBrailleDisplayConnection, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IBrailleDisplayController.DESCRIPTOR);
-                    obtain.writeStrongInterface(iBrailleDisplayConnection);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IBrailleDisplayController.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iBrailleDisplayConnection);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IBrailleDisplayController
             public void onConnectionFailed(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IBrailleDisplayController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IBrailleDisplayController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IBrailleDisplayController
             public void onInput(byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IBrailleDisplayController.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IBrailleDisplayController.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IBrailleDisplayController
             public void onDisconnected() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IBrailleDisplayController.DESCRIPTOR);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IBrailleDisplayController.DESCRIPTOR);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

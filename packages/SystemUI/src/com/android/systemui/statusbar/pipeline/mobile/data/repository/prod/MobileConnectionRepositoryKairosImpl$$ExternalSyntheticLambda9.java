@@ -9,7 +9,6 @@ import com.android.systemui.statusbar.pipeline.mobile.data.model.SubscriptionMod
 import com.android.systemui.statusbar.pipeline.mobile.util.MobileMappingsProxyImpl;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class MobileConnectionRepositoryKairosImpl$$ExternalSyntheticLambda9 implements Function2 {
     public final /* synthetic */ int $r8$classId;
@@ -28,23 +27,23 @@ public final /* synthetic */ class MobileConnectionRepositoryKairosImpl$$Externa
                 MobileConnectionRepositoryKairosImpl mobileConnectionRepositoryKairosImpl = (MobileConnectionRepositoryKairosImpl) this.f$0;
                 if (telephonyDisplayInfo != null) {
                     int overrideNetworkType = telephonyDisplayInfo.getOverrideNetworkType();
-                    Integer valueOf = Integer.valueOf(overrideNetworkType);
+                    Integer numValueOf = Integer.valueOf(overrideNetworkType);
                     if (overrideNetworkType == 0) {
-                        valueOf = null;
+                        numValueOf = null;
                     }
-                    if (valueOf != null) {
-                        int intValue = valueOf.intValue();
+                    if (numValueOf != null) {
+                        int iIntValue = numValueOf.intValue();
                         ((MobileMappingsProxyImpl) mobileConnectionRepositoryKairosImpl.mobileMappingsProxy).getClass();
-                        return new ResolvedNetworkType.OverrideNetworkType(MobileMappings.toDisplayIconKey(intValue));
+                        return new ResolvedNetworkType.OverrideNetworkType(MobileMappings.toDisplayIconKey(iIntValue));
                     }
                 }
                 if (telephonyDisplayInfo != null) {
                     int networkType = telephonyDisplayInfo.getNetworkType();
-                    Integer valueOf2 = networkType != 0 ? Integer.valueOf(networkType) : null;
-                    if (valueOf2 != null) {
-                        int intValue2 = valueOf2.intValue();
+                    Integer numValueOf2 = networkType != 0 ? Integer.valueOf(networkType) : null;
+                    if (numValueOf2 != null) {
+                        int iIntValue2 = numValueOf2.intValue();
                         ((MobileMappingsProxyImpl) mobileConnectionRepositoryKairosImpl.mobileMappingsProxy).getClass();
-                        return new ResolvedNetworkType.DefaultNetworkType(Integer.toString(intValue2));
+                        return new ResolvedNetworkType.DefaultNetworkType(Integer.toString(iIntValue2));
                     }
                 }
                 return ResolvedNetworkType.UnknownNetworkType.INSTANCE;

@@ -11,7 +11,6 @@ import android.widget.LinearLayout;
 import com.android.systemui.R;
 import com.android.systemui.util.DelayableMarqueeTextView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class MediaNowPlayingView extends LinearLayout {
     public final ImageView mImage1;
@@ -37,21 +36,21 @@ public class MediaNowPlayingView extends LinearLayout {
         imageView.setScaleY(0.083333336f);
         imageView2.setScaleY(0.083333336f);
         imageView3.setScaleY(0.083333336f);
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(imageView, "scaleY", 0.41666666f, 0.25f, 0.41666666f, 0.5833333f, 0.75f, 0.8333333f, 0.9166667f, 1.0f, 0.9166667f, 1.0f, 0.8333333f, 0.6666667f, 0.5f, 0.33333334f, 0.16666667f, 0.33333334f, 0.5f, 0.5833333f, 0.75f, 0.9166667f, 0.75f, 0.5833333f, 0.41666666f, 0.25f, 0.41666666f, 0.6666667f, 0.41666666f, 0.25f, 0.33333334f, 0.41666666f);
-        this.mObjectAnimator1 = ofFloat;
-        ofFloat.setRepeatCount(-1);
-        ofFloat.setDuration(2320L);
-        ofFloat.setInterpolator(linearInterpolator);
-        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(imageView2, "scaleY", 1.0f, 0.9166667f, 0.8333333f, 0.9166667f, 1.0f, 0.9166667f, 0.75f, 0.5833333f, 0.75f, 0.9166667f, 1.0f, 0.8333333f, 0.6666667f, 0.8333333f, 1.0f, 0.9166667f, 0.75f, 0.41666666f, 0.25f, 0.41666666f, 0.6666667f, 0.8333333f, 1.0f, 0.8333333f, 0.75f, 0.6666667f, 1.0f);
-        this.mObjectAnimator2 = ofFloat2;
-        ofFloat2.setRepeatCount(-1);
-        ofFloat2.setDuration(2080L);
-        ofFloat2.setInterpolator(linearInterpolator);
-        ObjectAnimator ofFloat3 = ObjectAnimator.ofFloat(imageView3, "scaleY", 0.6666667f, 0.75f, 0.8333333f, 1.0f, 0.9166667f, 0.75f, 0.5833333f, 0.41666666f, 0.5833333f, 0.6666667f, 0.75f, 1.0f, 0.9166667f, 1.0f, 0.75f, 0.5833333f, 0.75f, 0.9166667f, 1.0f, 0.8333333f, 0.6666667f, 0.75f, 0.5833333f, 0.41666666f, 0.25f, 0.6666667f);
-        this.mObjectAnimator3 = ofFloat3;
-        ofFloat3.setRepeatCount(-1);
-        ofFloat3.setDuration(DelayableMarqueeTextView.DEFAULT_MARQUEE_DELAY);
-        ofFloat3.setInterpolator(linearInterpolator);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(imageView, "scaleY", 0.41666666f, 0.25f, 0.41666666f, 0.5833333f, 0.75f, 0.8333333f, 0.9166667f, 1.0f, 0.9166667f, 1.0f, 0.8333333f, 0.6666667f, 0.5f, 0.33333334f, 0.16666667f, 0.33333334f, 0.5f, 0.5833333f, 0.75f, 0.9166667f, 0.75f, 0.5833333f, 0.41666666f, 0.25f, 0.41666666f, 0.6666667f, 0.41666666f, 0.25f, 0.33333334f, 0.41666666f);
+        this.mObjectAnimator1 = objectAnimatorOfFloat;
+        objectAnimatorOfFloat.setRepeatCount(-1);
+        objectAnimatorOfFloat.setDuration(2320L);
+        objectAnimatorOfFloat.setInterpolator(linearInterpolator);
+        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(imageView2, "scaleY", 1.0f, 0.9166667f, 0.8333333f, 0.9166667f, 1.0f, 0.9166667f, 0.75f, 0.5833333f, 0.75f, 0.9166667f, 1.0f, 0.8333333f, 0.6666667f, 0.8333333f, 1.0f, 0.9166667f, 0.75f, 0.41666666f, 0.25f, 0.41666666f, 0.6666667f, 0.8333333f, 1.0f, 0.8333333f, 0.75f, 0.6666667f, 1.0f);
+        this.mObjectAnimator2 = objectAnimatorOfFloat2;
+        objectAnimatorOfFloat2.setRepeatCount(-1);
+        objectAnimatorOfFloat2.setDuration(2080L);
+        objectAnimatorOfFloat2.setInterpolator(linearInterpolator);
+        ObjectAnimator objectAnimatorOfFloat3 = ObjectAnimator.ofFloat(imageView3, "scaleY", 0.6666667f, 0.75f, 0.8333333f, 1.0f, 0.9166667f, 0.75f, 0.5833333f, 0.41666666f, 0.5833333f, 0.6666667f, 0.75f, 1.0f, 0.9166667f, 1.0f, 0.75f, 0.5833333f, 0.75f, 0.9166667f, 1.0f, 0.8333333f, 0.6666667f, 0.75f, 0.5833333f, 0.41666666f, 0.25f, 0.6666667f);
+        this.mObjectAnimator3 = objectAnimatorOfFloat3;
+        objectAnimatorOfFloat3.setRepeatCount(-1);
+        objectAnimatorOfFloat3.setDuration(DelayableMarqueeTextView.DEFAULT_MARQUEE_DELAY);
+        objectAnimatorOfFloat3.setInterpolator(linearInterpolator);
     }
 
     @Override // android.view.ViewGroup, android.view.View

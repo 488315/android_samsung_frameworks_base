@@ -126,7 +126,7 @@ public class SystemProperties {
                 return;
             }
             ArrayList arrayList2 = new ArrayList(arrayList);
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             for (int i = 0; i < arrayList2.size(); i++) {
                 try {
                     try {
@@ -135,7 +135,7 @@ public class SystemProperties {
                         Log.e(TAG, "Exception in SystemProperties change callback", th);
                     }
                 } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
         }
@@ -152,7 +152,7 @@ public class SystemProperties {
         native_report_sysprop_change();
     }
 
-    public static String digestOf(String... strArr) {
+    public static String digestOf(String... strArr) throws NoSuchAlgorithmException {
         Arrays.sort(strArr);
         try {
             MessageDigest messageDigest = MessageDigest.getInstance("SHA-1");
@@ -169,11 +169,11 @@ public class SystemProperties {
     }
 
     public static Handle find(String str) {
-        long native_find = native_find(str);
-        if (native_find == 0) {
+        long jNative_find = native_find(str);
+        if (jNative_find == 0) {
             return null;
         }
-        return new Handle(native_find);
+        return new Handle(jNative_find);
     }
 
     public static final class Handle {

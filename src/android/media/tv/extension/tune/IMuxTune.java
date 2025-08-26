@@ -46,9 +46,9 @@ public interface IMuxTune extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.tune.IMuxTune");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IMuxTune)) {
-                return (IMuxTune) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.tune.IMuxTune");
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IMuxTune)) {
+                return (IMuxTune) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -75,12 +75,12 @@ public interface IMuxTune extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                String readString = parcel.readString();
+                int i3 = parcel.readInt();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                IMuxTuneSession createSession = createSession(readInt, readString);
+                IMuxTuneSession iMuxTuneSessionCreateSession = createSession(i3, string);
                 parcel2.writeNoException();
-                parcel2.writeStrongInterface(createSession);
+                parcel2.writeStrongInterface(iMuxTuneSessionCreateSession);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -104,18 +104,18 @@ public interface IMuxTune extends IInterface {
 
             @Override // android.media.tv.extension.tune.IMuxTune
             public IMuxTuneSession createSession(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.tune.IMuxTune");
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IMuxTuneSession.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.tune.IMuxTune");
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IMuxTuneSession.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

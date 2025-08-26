@@ -28,7 +28,7 @@ public class TimeVariables {
     }
 
     public void updateTime(RemoteContext remoteContext) {
-        ZoneId systemDefault = ZoneId.systemDefault();
-        updateTime(remoteContext, systemDefault, LocalDateTime.now(systemDefault));
+        ZoneId zoneIdSystemDefault = ZoneId.systemDefault();
+        updateTime(remoteContext, zoneIdSystemDefault, LocalDateTime.now(zoneIdSystemDefault));
     }
 }

@@ -15,14 +15,12 @@ import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class RepeatWhenAttachedKt$isWindowVisible$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ View $this_isWindowVisible;
     /* synthetic */ Object L$0;
     int label;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.lifecycle.RepeatWhenAttachedKt$isWindowVisible$1$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ View $this_isWindowVisible;
@@ -54,9 +52,9 @@ final class RepeatWhenAttachedKt$isWindowVisible$1 extends SuspendLambda impleme
             if (i == 0) {
                 ResultKt.throwOnFailure(obj);
                 FlowCollector flowCollector = (FlowCollector) this.L$0;
-                Boolean valueOf = Boolean.valueOf(this.$this_isWindowVisible.getWindowVisibility() == 0);
+                Boolean boolValueOf = Boolean.valueOf(this.$this_isWindowVisible.getWindowVisibility() == 0);
                 this.label = 1;
-                if (flowCollector.emit(valueOf, this) == coroutineSingletons) {
+                if (flowCollector.emit(boolValueOf, this) == coroutineSingletons) {
                     return coroutineSingletons;
                 }
             } else {
@@ -97,9 +95,9 @@ final class RepeatWhenAttachedKt$isWindowVisible$1 extends SuspendLambda impleme
         ViewTreeObserver viewTreeObserver = (ViewTreeObserver) this.L$0;
         if (viewTreeObserver != null) {
             CoroutineContext coroutineContext = RepeatWhenAttachedKt.MAIN_DISPATCHER_SINGLETON;
-            Flow conflatedCallbackFlow = FlowConflatedKt.conflatedCallbackFlow(new RepeatWhenAttachedKt$isWindowVisible$2(viewTreeObserver, null));
-            if (conflatedCallbackFlow != null) {
-                return new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new AnonymousClass1(this.$this_isWindowVisible, null), conflatedCallbackFlow);
+            Flow flowConflatedCallbackFlow = FlowConflatedKt.conflatedCallbackFlow(new RepeatWhenAttachedKt$isWindowVisible$2(viewTreeObserver, null));
+            if (flowConflatedCallbackFlow != null) {
+                return new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new AnonymousClass1(this.$this_isWindowVisible, null), flowConflatedCallbackFlow);
             }
         }
         return EmptyFlow.INSTANCE;

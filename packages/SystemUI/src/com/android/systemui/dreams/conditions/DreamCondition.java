@@ -8,7 +8,6 @@ import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class DreamCondition extends Condition {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -25,7 +24,7 @@ public final class DreamCondition extends Condition {
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
             public final void onDreamingStateChanged(boolean z) {
                 int i = DreamCondition.$r8$clinit;
-                DreamCondition.this.updateCondition(z);
+                this.this$0.updateCondition(z);
             }
         };
     }

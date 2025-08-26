@@ -6,7 +6,6 @@ import com.google.zxing.FormatException;
 import java.util.Collection;
 import java.util.Collections;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class EAN13Writer extends UPCEANWriter {
     @Override // com.google.zxing.oned.OneDimensionalCodeWriter
@@ -33,19 +32,19 @@ public final class EAN13Writer extends UPCEANWriter {
         OneDimensionalCodeWriter.checkNumeric(str);
         int i = EAN13Reader.FIRST_DIGIT_ENCODINGS[Character.digit(str.charAt(0), 10)];
         boolean[] zArr = new boolean[95];
-        int appendPattern = OneDimensionalCodeWriter.appendPattern(zArr, 0, UPCEANReader.START_END_PATTERN, true);
+        int iAppendPattern = OneDimensionalCodeWriter.appendPattern(zArr, 0, UPCEANReader.START_END_PATTERN, true);
         for (int i2 = 1; i2 <= 6; i2++) {
-            int digit = Character.digit(str.charAt(i2), 10);
+            int iDigit = Character.digit(str.charAt(i2), 10);
             if (((i >> (6 - i2)) & 1) == 1) {
-                digit += 10;
+                iDigit += 10;
             }
-            appendPattern += OneDimensionalCodeWriter.appendPattern(zArr, appendPattern, UPCEANReader.L_AND_G_PATTERNS[digit], false);
+            iAppendPattern += OneDimensionalCodeWriter.appendPattern(zArr, iAppendPattern, UPCEANReader.L_AND_G_PATTERNS[iDigit], false);
         }
-        int appendPattern2 = OneDimensionalCodeWriter.appendPattern(zArr, appendPattern, UPCEANReader.MIDDLE_PATTERN, false) + appendPattern;
+        int iAppendPattern2 = OneDimensionalCodeWriter.appendPattern(zArr, iAppendPattern, UPCEANReader.MIDDLE_PATTERN, false) + iAppendPattern;
         for (int i3 = 7; i3 <= 12; i3++) {
-            appendPattern2 += OneDimensionalCodeWriter.appendPattern(zArr, appendPattern2, UPCEANReader.L_PATTERNS[Character.digit(str.charAt(i3), 10)], true);
+            iAppendPattern2 += OneDimensionalCodeWriter.appendPattern(zArr, iAppendPattern2, UPCEANReader.L_PATTERNS[Character.digit(str.charAt(i3), 10)], true);
         }
-        OneDimensionalCodeWriter.appendPattern(zArr, appendPattern2, UPCEANReader.START_END_PATTERN, true);
+        OneDimensionalCodeWriter.appendPattern(zArr, iAppendPattern2, UPCEANReader.START_END_PATTERN, true);
         return zArr;
     }
 

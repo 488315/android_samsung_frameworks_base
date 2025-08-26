@@ -2,7 +2,6 @@ package androidx.compose.ui.input.pointer.util;
 
 import java.util.Arrays;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class PointerIdArray {
     public long[] internalArray = new long[2];
@@ -13,12 +12,12 @@ public final class PointerIdArray {
             return;
         }
         int i = this.size;
-        long[] jArr = this.internalArray;
-        if (i >= jArr.length) {
-            jArr = Arrays.copyOf(jArr, Math.max(i + 1, jArr.length * 2));
-            this.internalArray = jArr;
+        long[] jArrCopyOf = this.internalArray;
+        if (i >= jArrCopyOf.length) {
+            jArrCopyOf = Arrays.copyOf(jArrCopyOf, Math.max(i + 1, jArrCopyOf.length * 2));
+            this.internalArray = jArrCopyOf;
         }
-        jArr[i] = j;
+        jArrCopyOf[i] = j;
         if (i >= this.size) {
             this.size = i + 1;
         }

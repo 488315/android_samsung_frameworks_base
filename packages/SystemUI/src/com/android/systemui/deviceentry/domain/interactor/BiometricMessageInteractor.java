@@ -3,15 +3,31 @@ package com.android.systemui.deviceentry.domain.interactor;
 import android.content.res.Resources;
 import com.android.systemui.R;
 import com.android.systemui.biometrics.domain.interactor.FingerprintPropertyInteractor;
+import com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor;
+import com.android.systemui.deviceentry.shared.model.ErrorFaceAuthenticationStatus;
+import com.android.systemui.deviceentry.shared.model.FaceFailureMessage;
+import com.android.systemui.deviceentry.shared.model.FaceLockoutMessage;
+import com.android.systemui.deviceentry.shared.model.FaceMessage;
+import com.android.systemui.deviceentry.shared.model.FaceTimeoutMessage;
+import com.android.systemui.deviceentry.shared.model.FailedFaceAuthenticationStatus;
+import com.android.systemui.deviceentry.shared.model.FingerprintLockoutMessage;
+import com.android.systemui.deviceentry.shared.model.FingerprintMessage;
+import com.android.systemui.deviceentry.shared.model.HelpFaceAuthenticationStatus;
 import com.android.systemui.keyguard.domain.interactor.DevicePostureInteractor;
 import com.android.systemui.keyguard.shared.model.DevicePosture;
+import com.android.systemui.keyguard.shared.model.ErrorFingerprintAuthenticationStatus;
+import com.android.systemui.keyguard.shared.model.HelpFingerprintAuthenticationStatus;
 import com.android.systemui.util.kotlin.FlowKt;
 import java.util.Set;
+import kotlin.NoWhenBranchMatchedException;
+import kotlin.Pair;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.collections.ArraysKt___ArraysKt;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlin.jvm.functions.Function1;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$unsafeFlow$1;
@@ -19,7 +35,6 @@ import kotlinx.coroutines.flow.StateFlow;
 import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 import kotlinx.coroutines.flow.internal.ChannelLimitedFlowMerge;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class BiometricMessageInteractor {
     public final DeviceEntryBiometricSettingsInteractor biometricSettingsInteractor;
@@ -40,7 +55,6 @@ public final class BiometricMessageInteractor {
     public final ChannelLimitedFlowMerge fingerprintMessage;
     public final Resources resources;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -85,7 +99,6 @@ public final class BiometricMessageInteractor {
         final Flow authenticationStatus = deviceEntryFaceAuthInteractor.getAuthenticationStatus();
         final ?? r1 = new Flow() { // from class: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterIsInstance$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterIsInstance$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -113,72 +126,53 @@ public final class BiometricMessageInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterIsInstance$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterIsInstance$1$2$1 r0 = (com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterIsInstance$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterIsInstance$1$2$1 r0 = new com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterIsInstance$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L41
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        boolean r6 = r5 instanceof com.android.systemui.deviceentry.shared.model.HelpFaceAuthenticationStatus
-                        if (r6 == 0) goto L41
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L41
-                        return r1
-                    L41:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterIsInstance$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        if (obj instanceof HelpFaceAuthenticationStatus) {
+                            anonymousClass1.label = 1;
+                            if (this.$this_unsafeFlow.emit(obj, anonymousClass1) == coroutineSingletons) {
+                                return coroutineSingletons;
+                            }
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = authenticationStatus.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         };
         this.faceHelp = r1;
         final Flow authenticationStatus2 = deviceEntryFaceAuthInteractor.getAuthenticationStatus();
         final ?? r2 = new Flow() { // from class: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterIsInstance$2
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterIsInstance$2$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -206,72 +200,53 @@ public final class BiometricMessageInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterIsInstance$2.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterIsInstance$2$2$1 r0 = (com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterIsInstance$2.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterIsInstance$2$2$1 r0 = new com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterIsInstance$2$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L41
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        boolean r6 = r5 instanceof com.android.systemui.deviceentry.shared.model.ErrorFaceAuthenticationStatus
-                        if (r6 == 0) goto L41
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L41
-                        return r1
-                    L41:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterIsInstance$2.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        if (obj instanceof ErrorFaceAuthenticationStatus) {
+                            anonymousClass1.label = 1;
+                            if (this.$this_unsafeFlow.emit(obj, anonymousClass1) == coroutineSingletons) {
+                                return coroutineSingletons;
+                            }
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = authenticationStatus2.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         };
         this.faceError = r2;
         final Flow authenticationStatus3 = deviceEntryFaceAuthInteractor.getAuthenticationStatus();
         ?? r0 = new Flow() { // from class: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterIsInstance$3
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterIsInstance$3$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -299,74 +274,55 @@ public final class BiometricMessageInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterIsInstance$3.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterIsInstance$3$2$1 r0 = (com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterIsInstance$3.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterIsInstance$3$2$1 r0 = new com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterIsInstance$3$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L41
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        boolean r6 = r5 instanceof com.android.systemui.deviceentry.shared.model.FailedFaceAuthenticationStatus
-                        if (r6 == 0) goto L41
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L41
-                        return r1
-                    L41:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterIsInstance$3.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        if (obj instanceof FailedFaceAuthenticationStatus) {
+                            anonymousClass1.label = 1;
+                            if (this.$this_unsafeFlow.emit(obj, anonymousClass1) == coroutineSingletons) {
+                                return coroutineSingletons;
+                            }
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = authenticationStatus3.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         };
         this.faceFailure = r0;
         this.coExFaceAcquisitionMsgIdsToShowDefault = ArraysKt___ArraysKt.toSet(resources.getIntArray(R.array.config_face_help_msgs_when_fingerprint_enrolled));
         this.coExFaceAcquisitionMsgIdsToShowUnfolded = ArraysKt___ArraysKt.toSet(resources.getIntArray(R.array.config_face_help_msgs_when_fingerprint_enrolled_unfolded));
         final DeviceEntryFingerprintAuthInteractor$special$$inlined$filterIsInstance$2 deviceEntryFingerprintAuthInteractor$special$$inlined$filterIsInstance$2 = deviceEntryFingerprintAuthInteractor.fingerprintError;
-        final Flow sample = FlowKt.sample(new Flow() { // from class: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterNot$1
+        final Flow flowSample = FlowKt.sample(new Flow() { // from class: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterNot$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterNot$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -396,83 +352,53 @@ public final class BiometricMessageInteractor {
                     this.this$0 = biometricMessageInteractor;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterNot$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterNot$1$2$1 r0 = (com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterNot$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterNot$1$2$1 r0 = new com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterNot$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L54
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        r6 = r5
-                        com.android.systemui.keyguard.shared.model.ErrorFingerprintAuthenticationStatus r6 = (com.android.systemui.keyguard.shared.model.ErrorFingerprintAuthenticationStatus) r6
-                        com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor r2 = r4.this$0
-                        r2.getClass()
-                        int r6 = r6.msgId
-                        r2 = 5
-                        if (r6 == r2) goto L54
-                        r2 = 10
-                        if (r6 != r2) goto L44
-                        goto L54
-                    L44:
-                        r2 = 19
-                        if (r6 != r2) goto L49
-                        goto L54
-                    L49:
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L54
-                        return r1
-                    L54:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterNot$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        this.this$0.getClass();
+                        int i3 = ((ErrorFingerprintAuthenticationStatus) obj).msgId;
+                        if (i3 != 5 && i3 != 10 && i3 != 19) {
+                            anonymousClass1.label = 1;
+                            if (this.$this_unsafeFlow.emit(obj, anonymousClass1) == coroutineSingletons) {
+                                return coroutineSingletons;
+                            }
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, this), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = deviceEntryFingerprintAuthInteractor$special$$inlined$filterIsInstance$2.collect(new AnonymousClass2(flowCollector, this), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         }, deviceEntryBiometricSettingsInteractor.fingerprintAuthCurrentlyAllowed, BiometricMessageInteractor$fingerprintErrorMessage$4.INSTANCE);
         final Flow flow = new Flow() { // from class: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filter$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filter$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -500,82 +426,54 @@ public final class BiometricMessageInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filter$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filter$1$2$1 r0 = (com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filter$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filter$1$2$1 r0 = new com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filter$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L5b
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        r6 = r5
-                        kotlin.Pair r6 = (kotlin.Pair) r6
-                        java.lang.Object r2 = r6.component1()
-                        com.android.systemui.keyguard.shared.model.ErrorFingerprintAuthenticationStatus r2 = (com.android.systemui.keyguard.shared.model.ErrorFingerprintAuthenticationStatus) r2
-                        java.lang.Object r6 = r6.component2()
-                        java.lang.Boolean r6 = (java.lang.Boolean) r6
-                        boolean r6 = r6.booleanValue()
-                        if (r6 != 0) goto L50
-                        int r6 = r2.msgId
-                        r2 = 7
-                        if (r6 == r2) goto L50
-                        r2 = 9
-                        if (r6 != r2) goto L5b
-                    L50:
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L5b
-                        return r1
-                    L5b:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filter$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    int i;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i2 = anonymousClass1.label;
+                        if ((i2 & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i2 - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i3 = anonymousClass1.label;
+                    if (i3 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        Pair pair = (Pair) obj;
+                        ErrorFingerprintAuthenticationStatus errorFingerprintAuthenticationStatus = (ErrorFingerprintAuthenticationStatus) pair.component1();
+                        if (((Boolean) pair.component2()).booleanValue() || (i = errorFingerprintAuthenticationStatus.msgId) == 7 || i == 9) {
+                            anonymousClass1.label = 1;
+                            if (this.$this_unsafeFlow.emit(obj, anonymousClass1) == coroutineSingletons) {
+                                return coroutineSingletons;
+                            }
+                        }
+                    } else {
+                        if (i3 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flowSample.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         };
         ?? r6 = new Flow() { // from class: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$map$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -602,94 +500,56 @@ public final class BiometricMessageInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$map$1$2$1 r0 = (com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$map$1$2$1 r0 = new com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$map$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L61
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        kotlin.Pair r5 = (kotlin.Pair) r5
-                        java.lang.Object r5 = r5.component1()
-                        com.android.systemui.keyguard.shared.model.ErrorFingerprintAuthenticationStatus r5 = (com.android.systemui.keyguard.shared.model.ErrorFingerprintAuthenticationStatus) r5
-                        int r6 = r5.msgId
-                        r2 = 7
-                        if (r6 == r2) goto L46
-                        r2 = 9
-                        if (r6 != r2) goto L44
-                        goto L46
-                    L44:
-                        r6 = 0
-                        goto L47
-                    L46:
-                        r6 = r3
-                    L47:
-                        java.lang.String r5 = r5.msg
-                        if (r6 == 0) goto L51
-                        com.android.systemui.deviceentry.shared.model.FingerprintLockoutMessage r6 = new com.android.systemui.deviceentry.shared.model.FingerprintLockoutMessage
-                        r6.<init>(r5)
-                        goto L56
-                    L51:
-                        com.android.systemui.deviceentry.shared.model.FingerprintMessage r6 = new com.android.systemui.deviceentry.shared.model.FingerprintMessage
-                        r6.<init>(r5)
-                    L56:
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r6, r0)
-                        if (r4 != r1) goto L61
-                        return r1
-                    L61:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        ErrorFingerprintAuthenticationStatus errorFingerprintAuthenticationStatus = (ErrorFingerprintAuthenticationStatus) ((Pair) obj).component1();
+                        int i3 = errorFingerprintAuthenticationStatus.msgId;
+                        boolean z = i3 == 7 || i3 == 9;
+                        String str = errorFingerprintAuthenticationStatus.msg;
+                        Object fingerprintLockoutMessage = z ? new FingerprintLockoutMessage(str) : new FingerprintMessage(str);
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(fingerprintLockoutMessage, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flow.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         };
         this.fingerprintErrorMessage = r6;
-        final Flow sample2 = FlowKt.sample(deviceEntryFingerprintAuthInteractor.fingerprintHelp, deviceEntryBiometricSettingsInteractor.fingerprintAuthCurrentlyAllowed, BiometricMessageInteractor$fingerprintHelpMessage$3.INSTANCE);
+        final Flow flowSample2 = FlowKt.sample(deviceEntryFingerprintAuthInteractor.fingerprintHelp, deviceEntryBiometricSettingsInteractor.fingerprintAuthCurrentlyAllowed, BiometricMessageInteractor$fingerprintHelpMessage$3.INSTANCE);
         final Flow flow2 = new Flow() { // from class: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filter$2
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filter$2$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -717,74 +577,51 @@ public final class BiometricMessageInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filter$2.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filter$2$2$1 r0 = (com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filter$2.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filter$2$2$1 r0 = new com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filter$2$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L4c
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        r6 = r5
-                        kotlin.Pair r6 = (kotlin.Pair) r6
-                        java.lang.Object r6 = r6.component2()
-                        java.lang.Boolean r6 = (java.lang.Boolean) r6
-                        boolean r6 = r6.booleanValue()
-                        if (r6 == 0) goto L4c
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L4c
-                        return r1
-                    L4c:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filter$2.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        if (((Boolean) ((Pair) obj).component2()).booleanValue()) {
+                            anonymousClass1.label = 1;
+                            if (this.$this_unsafeFlow.emit(obj, anonymousClass1) == coroutineSingletons) {
+                                return coroutineSingletons;
+                            }
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flowSample2.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         };
         ?? r9 = new Flow() { // from class: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$map$2
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$map$2$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -811,78 +648,54 @@ public final class BiometricMessageInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$map$2.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$map$2$2$1 r0 = (com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$map$2.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$map$2$2$1 r0 = new com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$map$2$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L4c
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        kotlin.Pair r5 = (kotlin.Pair) r5
-                        java.lang.Object r5 = r5.component1()
-                        com.android.systemui.keyguard.shared.model.HelpFingerprintAuthenticationStatus r5 = (com.android.systemui.keyguard.shared.model.HelpFingerprintAuthenticationStatus) r5
-                        com.android.systemui.deviceentry.shared.model.FingerprintMessage r6 = new com.android.systemui.deviceentry.shared.model.FingerprintMessage
-                        java.lang.String r5 = r5.msg
-                        r6.<init>(r5)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r6, r0)
-                        if (r4 != r1) goto L4c
-                        return r1
-                    L4c:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$map$2.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        FingerprintMessage fingerprintMessage = new FingerprintMessage(((HelpFingerprintAuthenticationStatus) ((Pair) obj).component1()).msg);
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(fingerprintMessage, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flow2.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         };
         this.fingerprintHelpMessage = r9;
-        ChannelFlowTransformLatest transformLatest = kotlinx.coroutines.flow.FlowKt.transformLatest(fingerprintPropertyInteractor.isUdfps, new BiometricMessageInteractor$special$$inlined$flatMapLatest$1(null, deviceEntryFingerprintAuthInteractor, this));
-        this.fingerprintFailMessage = transformLatest;
+        ChannelFlowTransformLatest channelFlowTransformLatestTransformLatest = kotlinx.coroutines.flow.FlowKt.transformLatest(fingerprintPropertyInteractor.isUdfps, new BiometricMessageInteractor$special$$inlined$flatMapLatest$1(null, deviceEntryFingerprintAuthInteractor, this));
+        this.fingerprintFailMessage = channelFlowTransformLatestTransformLatest;
         final Flow flow3 = devicePostureInteractor.posture;
         this.coExFaceAcquisitionMsgIdsToShow = new Flow() { // from class: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$map$3
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$map$3$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -911,99 +724,66 @@ public final class BiometricMessageInteractor {
                     this.this$0 = biometricMessageInteractor;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$map$3.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$map$3$2$1 r0 = (com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$map$3.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$map$3$2$1 r0 = new com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$map$3$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L63
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        com.android.systemui.keyguard.shared.model.DevicePosture r5 = (com.android.systemui.keyguard.shared.model.DevicePosture) r5
-                        int[] r6 = com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor.WhenMappings.$EnumSwitchMapping$0
-                        int r5 = r5.ordinal()
-                        r5 = r6[r5]
-                        com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor r6 = r4.this$0
-                        if (r5 == r3) goto L56
-                        r2 = 2
-                        if (r5 == r2) goto L53
-                        r2 = 3
-                        if (r5 == r2) goto L53
-                        r2 = 4
-                        if (r5 == r2) goto L53
-                        r2 = 5
-                        if (r5 != r2) goto L4d
-                        goto L53
-                    L4d:
-                        kotlin.NoWhenBranchMatchedException r4 = new kotlin.NoWhenBranchMatchedException
-                        r4.<init>()
-                        throw r4
-                    L53:
-                        java.util.Set r5 = r6.coExFaceAcquisitionMsgIdsToShowDefault
-                        goto L58
-                    L56:
-                        java.util.Set r5 = r6.coExFaceAcquisitionMsgIdsToShowUnfolded
-                    L58:
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L63
-                        return r1
-                    L63:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$map$3.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    Set set;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        int i3 = BiometricMessageInteractor.WhenMappings.$EnumSwitchMapping$0[((DevicePosture) obj).ordinal()];
+                        BiometricMessageInteractor biometricMessageInteractor = this.this$0;
+                        if (i3 == 1) {
+                            set = biometricMessageInteractor.coExFaceAcquisitionMsgIdsToShowUnfolded;
+                        } else {
+                            if (i3 != 2 && i3 != 3 && i3 != 4 && i3 != 5) {
+                                throw new NoWhenBranchMatchedException();
+                            }
+                            set = biometricMessageInteractor.coExFaceAcquisitionMsgIdsToShowDefault;
+                        }
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(set, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, this), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flow3.collect(new AnonymousClass2(flowCollector, this), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         };
-        this.fingerprintMessage = kotlinx.coroutines.flow.FlowKt.merge(r6, transformLatest, r9);
+        this.fingerprintMessage = kotlinx.coroutines.flow.FlowKt.merge(r6, channelFlowTransformLatestTransformLatest, r9);
         BiometricMessageInteractor$filterConditionForFaceHelpMessages$3 biometricMessageInteractor$filterConditionForFaceHelpMessages$3 = BiometricMessageInteractor$filterConditionForFaceHelpMessages$3.INSTANCE;
         StateFlow stateFlow = deviceEntryBiometricSettingsInteractor.isFingerprintAuthEnrolledAndEnabled;
         FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 flowKt__ZipKt$combine$$inlined$unsafeFlow$1 = deviceEntryBiometricSettingsInteractor.faceAuthCurrentlyAllowed;
-        ChannelFlowTransformLatest transformLatest2 = kotlinx.coroutines.flow.FlowKt.transformLatest(new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(stateFlow, flowKt__ZipKt$combine$$inlined$unsafeFlow$1, biometricMessageInteractor$filterConditionForFaceHelpMessages$3), new BiometricMessageInteractor$special$$inlined$flatMapLatest$2(null, this));
-        this.filterConditionForFaceHelpMessages = transformLatest2;
-        final Flow sample3 = FlowKt.sample(new Flow() { // from class: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterNot$2
+        ChannelFlowTransformLatest channelFlowTransformLatestTransformLatest2 = kotlinx.coroutines.flow.FlowKt.transformLatest(new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(stateFlow, flowKt__ZipKt$combine$$inlined$unsafeFlow$1, biometricMessageInteractor$filterConditionForFaceHelpMessages$3), new BiometricMessageInteractor$special$$inlined$flatMapLatest$2(null, this));
+        this.filterConditionForFaceHelpMessages = channelFlowTransformLatestTransformLatest2;
+        final Flow flowSample3 = FlowKt.sample(new Flow() { // from class: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterNot$2
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterNot$2$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FaceHelpMessageDeferralInteractor $faceHelpMessageDeferralInteractor$inlined;
@@ -1033,77 +813,51 @@ public final class BiometricMessageInteractor {
                     this.$faceHelpMessageDeferralInteractor$inlined = faceHelpMessageDeferralInteractor;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterNot$2.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterNot$2$2$1 r0 = (com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterNot$2.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterNot$2$2$1 r0 = new com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterNot$2$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L52
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        r6 = r5
-                        com.android.systemui.deviceentry.shared.model.HelpFaceAuthenticationStatus r6 = (com.android.systemui.deviceentry.shared.model.HelpFaceAuthenticationStatus) r6
-                        int r6 = r6.msgId
-                        com.android.systemui.deviceentry.domain.interactor.FaceHelpMessageDeferralInteractor r2 = r4.$faceHelpMessageDeferralInteractor$inlined
-                        com.android.systemui.biometrics.FaceHelpMessageDeferral r2 = r2.faceHelpMessageDeferral
-                        java.util.Set r2 = r2.messagesToDefer
-                        java.lang.Integer r6 = java.lang.Integer.valueOf(r6)
-                        boolean r6 = r2.contains(r6)
-                        if (r6 != 0) goto L52
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L52
-                        return r1
-                    L52:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterNot$2.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        if (!this.$faceHelpMessageDeferralInteractor$inlined.faceHelpMessageDeferral.messagesToDefer.contains(Integer.valueOf(((HelpFaceAuthenticationStatus) obj).msgId))) {
+                            anonymousClass1.label = 1;
+                            if (this.$this_unsafeFlow.emit(obj, anonymousClass1) == coroutineSingletons) {
+                                return coroutineSingletons;
+                            }
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, faceHelpMessageDeferralInteractor), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = r1.collect(new AnonymousClass2(flowCollector, faceHelpMessageDeferralInteractor), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
-        }, transformLatest2, BiometricMessageInteractor$faceHelpMessage$4.INSTANCE);
+        }, channelFlowTransformLatestTransformLatest2, BiometricMessageInteractor$faceHelpMessage$4.INSTANCE);
         final Flow flow4 = new Flow() { // from class: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filter$3
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filter$3$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -1131,78 +885,52 @@ public final class BiometricMessageInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filter$3.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filter$3$2$1 r0 = (com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filter$3.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filter$3$2$1 r0 = new com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filter$3$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L58
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        r6 = r5
-                        kotlin.Pair r6 = (kotlin.Pair) r6
-                        java.lang.Object r2 = r6.component1()
-                        com.android.systemui.deviceentry.shared.model.HelpFaceAuthenticationStatus r2 = (com.android.systemui.deviceentry.shared.model.HelpFaceAuthenticationStatus) r2
-                        java.lang.Object r6 = r6.component2()
-                        kotlin.jvm.functions.Function1 r6 = (kotlin.jvm.functions.Function1) r6
-                        java.lang.Object r6 = r6.mo779invoke(r2)
-                        java.lang.Boolean r6 = (java.lang.Boolean) r6
-                        boolean r6 = r6.booleanValue()
-                        if (r6 == 0) goto L58
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L58
-                        return r1
-                    L58:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filter$3.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        Pair pair = (Pair) obj;
+                        if (((Boolean) ((Function1) pair.component2()).mo781invoke((HelpFaceAuthenticationStatus) pair.component1())).booleanValue()) {
+                            anonymousClass1.label = 1;
+                            if (this.$this_unsafeFlow.emit(obj, anonymousClass1) == coroutineSingletons) {
+                                return coroutineSingletons;
+                            }
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flowSample3.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         };
         ?? r62 = new Flow() { // from class: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$map$4
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$map$4$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -1229,76 +957,52 @@ public final class BiometricMessageInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$map$4.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$map$4$2$1 r0 = (com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$map$4.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$map$4$2$1 r0 = new com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$map$4$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L4c
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        kotlin.Pair r5 = (kotlin.Pair) r5
-                        java.lang.Object r5 = r5.component1()
-                        com.android.systemui.deviceentry.shared.model.HelpFaceAuthenticationStatus r5 = (com.android.systemui.deviceentry.shared.model.HelpFaceAuthenticationStatus) r5
-                        com.android.systemui.deviceentry.shared.model.FaceMessage r6 = new com.android.systemui.deviceentry.shared.model.FaceMessage
-                        java.lang.String r5 = r5.msg
-                        r6.<init>(r5)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r6, r0)
-                        if (r4 != r1) goto L4c
-                        return r1
-                    L4c:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$map$4.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        FaceMessage faceMessage = new FaceMessage(((HelpFaceAuthenticationStatus) ((Pair) obj).component1()).msg);
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(faceMessage, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flow4.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         };
         this.faceHelpMessage = r62;
-        final Flow sample4 = FlowKt.sample(r0, flowKt__ZipKt$combine$$inlined$unsafeFlow$1);
+        final Flow flowSample4 = FlowKt.sample(r0, flowKt__ZipKt$combine$$inlined$unsafeFlow$1);
         final Flow flow5 = new Flow() { // from class: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filter$4
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filter$4$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -1326,72 +1030,51 @@ public final class BiometricMessageInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filter$4.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filter$4$2$1 r0 = (com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filter$4.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filter$4$2$1 r0 = new com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filter$4$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L46
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        r6 = r5
-                        java.lang.Boolean r6 = (java.lang.Boolean) r6
-                        boolean r6 = r6.booleanValue()
-                        if (r6 == 0) goto L46
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L46
-                        return r1
-                    L46:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filter$4.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        if (((Boolean) obj).booleanValue()) {
+                            anonymousClass1.label = 1;
+                            if (this.$this_unsafeFlow.emit(obj, anonymousClass1) == coroutineSingletons) {
+                                return coroutineSingletons;
+                            }
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flowSample4.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         };
         ?? r7 = new Flow() { // from class: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$map$5
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$map$5$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -1420,77 +1103,52 @@ public final class BiometricMessageInteractor {
                     this.this$0 = biometricMessageInteractor;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$map$5.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$map$5$2$1 r0 = (com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$map$5.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$map$5$2$1 r0 = new com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$map$5$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L52
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        java.lang.Boolean r5 = (java.lang.Boolean) r5
-                        r5.getClass()
-                        com.android.systemui.deviceentry.shared.model.FaceFailureMessage r5 = new com.android.systemui.deviceentry.shared.model.FaceFailureMessage
-                        com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor r6 = r4.this$0
-                        android.content.res.Resources r6 = r6.resources
-                        r2 = 2131953949(0x7f13091d, float:1.9544383E38)
-                        java.lang.String r6 = r6.getString(r2)
-                        r5.<init>(r6)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L52
-                        return r1
-                    L52:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$map$5.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        ((Boolean) obj).getClass();
+                        FaceFailureMessage faceFailureMessage = new FaceFailureMessage(this.this$0.resources.getString(R.string.keyguard_face_failed));
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(faceFailureMessage, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, this), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flow5.collect(new AnonymousClass2(flowCollector, this), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         };
         this.faceFailureMessage = r7;
-        final Flow sample5 = FlowKt.sample(new Flow() { // from class: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterNot$3
+        final Flow flowSample5 = FlowKt.sample(new Flow() { // from class: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterNot$3
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterNot$3$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -1520,81 +1178,53 @@ public final class BiometricMessageInteractor {
                     this.this$0 = biometricMessageInteractor;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterNot$3.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterNot$3$2$1 r0 = (com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterNot$3.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterNot$3$2$1 r0 = new com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterNot$3$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L4f
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        r6 = r5
-                        com.android.systemui.deviceentry.shared.model.ErrorFaceAuthenticationStatus r6 = (com.android.systemui.deviceentry.shared.model.ErrorFaceAuthenticationStatus) r6
-                        com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor r2 = r4.this$0
-                        r2.getClass()
-                        int r6 = r6.msgId
-                        r2 = 5
-                        if (r6 != r2) goto L40
-                        goto L4f
-                    L40:
-                        r2 = 2
-                        if (r6 != r2) goto L44
-                        goto L4f
-                    L44:
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L4f
-                        return r1
-                    L4f:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filterNot$3.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        this.this$0.getClass();
+                        int i3 = ((ErrorFaceAuthenticationStatus) obj).msgId;
+                        if (i3 != 5 && i3 != 2) {
+                            anonymousClass1.label = 1;
+                            if (this.$this_unsafeFlow.emit(obj, anonymousClass1) == coroutineSingletons) {
+                                return coroutineSingletons;
+                            }
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, this), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = r2.collect(new AnonymousClass2(flowCollector, this), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         }, flowKt__ZipKt$combine$$inlined$unsafeFlow$1, BiometricMessageInteractor$faceErrorMessage$4.INSTANCE);
         final Flow flow6 = new Flow() { // from class: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filter$5
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filter$5$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -1622,79 +1252,53 @@ public final class BiometricMessageInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filter$5.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filter$5$2$1 r0 = (com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filter$5.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filter$5$2$1 r0 = new com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filter$5$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L58
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        r6 = r5
-                        kotlin.Pair r6 = (kotlin.Pair) r6
-                        java.lang.Object r2 = r6.component1()
-                        com.android.systemui.deviceentry.shared.model.ErrorFaceAuthenticationStatus r2 = (com.android.systemui.deviceentry.shared.model.ErrorFaceAuthenticationStatus) r2
-                        java.lang.Object r6 = r6.component2()
-                        java.lang.Boolean r6 = (java.lang.Boolean) r6
-                        boolean r6 = r6.booleanValue()
-                        if (r6 != 0) goto L4d
-                        boolean r6 = r2.isLockoutError()
-                        if (r6 == 0) goto L58
-                    L4d:
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L58
-                        return r1
-                    L58:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$filter$5.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        Pair pair = (Pair) obj;
+                        ErrorFaceAuthenticationStatus errorFaceAuthenticationStatus = (ErrorFaceAuthenticationStatus) pair.component1();
+                        if (((Boolean) pair.component2()).booleanValue() || errorFaceAuthenticationStatus.isLockoutError()) {
+                            anonymousClass1.label = 1;
+                            if (this.$this_unsafeFlow.emit(obj, anonymousClass1) == coroutineSingletons) {
+                                return coroutineSingletons;
+                            }
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flowSample5.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         };
         ?? r8 = new Flow() { // from class: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$map$6
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$map$6$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FaceHelpMessageDeferralInteractor $faceHelpMessageDeferralInteractor$inlined;
@@ -1723,92 +1327,55 @@ public final class BiometricMessageInteractor {
                     this.$faceHelpMessageDeferralInteractor$inlined = faceHelpMessageDeferralInteractor;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r6, kotlin.coroutines.Continuation r7) {
-                    /*
-                        r5 = this;
-                        boolean r0 = r7 instanceof com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$map$6.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r7
-                        com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$map$6$2$1 r0 = (com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$map$6.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$map$6$2$1 r0 = new com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$map$6$2$1
-                        r0.<init>(r7)
-                    L18:
-                        java.lang.Object r7 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r7)
-                        goto L77
-                    L27:
-                        java.lang.IllegalStateException r5 = new java.lang.IllegalStateException
-                        java.lang.String r6 = "call to 'resume' before 'invoke' with coroutine"
-                        r5.<init>(r6)
-                        throw r5
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r7)
-                        kotlin.Pair r6 = (kotlin.Pair) r6
-                        java.lang.Object r6 = r6.component1()
-                        com.android.systemui.deviceentry.shared.model.ErrorFaceAuthenticationStatus r6 = (com.android.systemui.deviceentry.shared.model.ErrorFaceAuthenticationStatus) r6
-                        int r7 = r6.msgId
-                        r2 = 3
-                        java.lang.String r4 = r6.msg
-                        if (r7 != r2) goto L5b
-                        com.android.systemui.deviceentry.domain.interactor.FaceHelpMessageDeferralInteractor r6 = r5.$faceHelpMessageDeferralInteractor$inlined
-                        com.android.systemui.biometrics.FaceHelpMessageDeferral r6 = r6.faceHelpMessageDeferral
-                        java.lang.CharSequence r6 = r6.getDeferredMessage()
-                        if (r6 == 0) goto L55
-                        com.android.systemui.deviceentry.shared.model.FaceMessage r7 = new com.android.systemui.deviceentry.shared.model.FaceMessage
-                        java.lang.String r6 = r6.toString()
-                        r7.<init>(r6)
-                        goto L6c
-                    L55:
-                        com.android.systemui.deviceentry.shared.model.FaceTimeoutMessage r7 = new com.android.systemui.deviceentry.shared.model.FaceTimeoutMessage
-                        r7.<init>(r4)
-                        goto L6c
-                    L5b:
-                        boolean r6 = r6.isLockoutError()
-                        if (r6 == 0) goto L67
-                        com.android.systemui.deviceentry.shared.model.FaceLockoutMessage r7 = new com.android.systemui.deviceentry.shared.model.FaceLockoutMessage
-                        r7.<init>(r4)
-                        goto L6c
-                    L67:
-                        com.android.systemui.deviceentry.shared.model.FaceMessage r7 = new com.android.systemui.deviceentry.shared.model.FaceMessage
-                        r7.<init>(r4)
-                    L6c:
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r5 = r5.$this_unsafeFlow
-                        java.lang.Object r5 = r5.emit(r7, r0)
-                        if (r5 != r1) goto L77
-                        return r1
-                    L77:
-                        kotlin.Unit r5 = kotlin.Unit.INSTANCE
-                        return r5
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.deviceentry.domain.interactor.BiometricMessageInteractor$special$$inlined$map$6.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    Object faceLockoutMessage;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        ErrorFaceAuthenticationStatus errorFaceAuthenticationStatus = (ErrorFaceAuthenticationStatus) ((Pair) obj).component1();
+                        int i3 = errorFaceAuthenticationStatus.msgId;
+                        String str = errorFaceAuthenticationStatus.msg;
+                        if (i3 == 3) {
+                            CharSequence deferredMessage = this.$faceHelpMessageDeferralInteractor$inlined.faceHelpMessageDeferral.getDeferredMessage();
+                            faceLockoutMessage = deferredMessage != null ? new FaceMessage(deferredMessage.toString()) : new FaceTimeoutMessage(str);
+                        } else {
+                            faceLockoutMessage = errorFaceAuthenticationStatus.isLockoutError() ? new FaceLockoutMessage(str) : new FaceMessage(str);
+                        }
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(faceLockoutMessage, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, faceHelpMessageDeferralInteractor), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flow6.collect(new AnonymousClass2(flowCollector, faceHelpMessageDeferralInteractor), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         };
         this.faceErrorMessage = r8;

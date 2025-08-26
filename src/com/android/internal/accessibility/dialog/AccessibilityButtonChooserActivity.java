@@ -51,17 +51,17 @@ public class AccessibilityButtonChooserActivity extends Activity {
             resolverDrawerLayout.setOnDismissedListener(new ResolverDrawerLayout.OnDismissedListener() { // from class: com.android.internal.accessibility.dialog.AccessibilityButtonChooserActivity$$ExternalSyntheticLambda0
                 @Override // com.android.internal.widget.ResolverDrawerLayout.OnDismissedListener
                 public final void onDismissed() {
-                    AccessibilityButtonChooserActivity.this.finish();
+                    this.f$0.finish();
                 }
             });
         }
         Settings.Secure.getString(getContentResolver(), Settings.Secure.ACCESSIBILITY_BUTTON_TARGET_COMPONENT);
-        boolean isTouchExplorationEnabled = ((AccessibilityManager) getSystemService(AccessibilityManager.class)).isTouchExplorationEnabled();
+        boolean zIsTouchExplorationEnabled = ((AccessibilityManager) getSystemService(AccessibilityManager.class)).isTouchExplorationEnabled();
         boolean z = 2 == getResources().getInteger(R.integer.config_navBarInteractionMode);
         int intExtra = Flags.a11yStandaloneGestureEnabled() ? getIntent().getIntExtra(EXTRA_TYPE_TO_CHOOSE, 1) : 1;
         if (z) {
-            ((TextView) findViewById(R.id.accessibility_button_prompt_prologue)).setText(isTouchExplorationEnabled ? R.string.accessibility_gesture_3finger_prompt_text : R.string.accessibility_gesture_prompt_text);
-            ((TextView) findViewById(R.id.accessibility_button_prompt)).setText(isTouchExplorationEnabled ? R.string.accessibility_gesture_3finger_instructional_text : R.string.accessibility_gesture_instructional_text);
+            ((TextView) findViewById(R.id.accessibility_button_prompt_prologue)).setText(zIsTouchExplorationEnabled ? R.string.accessibility_gesture_3finger_prompt_text : R.string.accessibility_gesture_prompt_text);
+            ((TextView) findViewById(R.id.accessibility_button_prompt)).setText(zIsTouchExplorationEnabled ? R.string.accessibility_gesture_3finger_instructional_text : R.string.accessibility_gesture_instructional_text);
         }
         this.mTargets.addAll(AccessibilityTargetHelper.getTargets(this, intExtra));
         GridView gridView = (GridView) findViewById(R.id.accessibility_button_chooser_grid);
@@ -69,7 +69,7 @@ public class AccessibilityButtonChooserActivity extends Activity {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() { // from class: com.android.internal.accessibility.dialog.AccessibilityButtonChooserActivity$$ExternalSyntheticLambda1
             @Override // android.widget.AdapterView.OnItemClickListener
             public final void onItemClick(AdapterView adapterView, View view, int i2, long j) {
-                AccessibilityButtonChooserActivity.this.lambda$onCreate$0(adapterView, view, i2, j);
+                this.f$0.lambda$onCreate$0(adapterView, view, i2, j);
             }
         });
     }

@@ -6,6 +6,7 @@ import com.android.systemui.shade.domain.interactor.SecQSExpansionStateInteracto
 import com.android.systemui.statusbar.notification.collection.NotifPipeline;
 import com.android.systemui.statusbar.notification.collection.NotificationEntry;
 import com.android.systemui.statusbar.notification.collection.PipelineEntry;
+import com.android.systemui.statusbar.notification.collection.coordinator.HeadsUpCoordinator;
 import com.android.systemui.statusbar.notification.collection.coordinator.dagger.CoordinatorScope;
 import com.android.systemui.statusbar.notification.collection.listbuilder.OnBeforeFinalizeFilterListener;
 import com.android.systemui.statusbar.notification.headsup.HeadsUpManager;
@@ -16,7 +17,6 @@ import java.util.List;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @CoordinatorScope
 /* loaded from: classes3.dex */
 public final class VoipCallPopUpCoordinator implements Coordinator {
@@ -29,7 +29,6 @@ public final class VoipCallPopUpCoordinator implements Coordinator {
     public static final Companion Companion = new Companion(null);
     public static final int $stable = 8;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -62,8 +61,7 @@ public final class VoipCallPopUpCoordinator implements Coordinator {
                         this.executor.executeDelayed(new Runnable() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.VoipCallPopUpCoordinator$onBeforeFinalizeFilterList$1$1
                             @Override // java.lang.Runnable
                             public final void run() {
-                                HeadsUpManager headsUpManager;
-                                headsUpManager = VoipCallPopUpCoordinator.this.headsUpManager;
+                                HeadsUpManager headsUpManager = this.this$0.headsUpManager;
                                 NotificationEntry notificationEntry2 = (NotificationEntry) pipelineEntry;
                                 ArrayList arrayList = (ArrayList) ((HeadsUpManagerImpl) headsUpManager).mCallbacks;
                                 int size = arrayList.size();
@@ -71,7 +69,7 @@ public final class VoipCallPopUpCoordinator implements Coordinator {
                                 while (i < size) {
                                     Object obj = arrayList.get(i);
                                     i++;
-                                    ((HeadsUpCoordinator$attach$4) obj).turnToHeadsUp(notificationEntry2);
+                                    ((HeadsUpCoordinator.AnonymousClass4) obj).turnToHeadsUp(notificationEntry2);
                                 }
                             }
                         }, 1000L);
@@ -84,7 +82,7 @@ public final class VoipCallPopUpCoordinator implements Coordinator {
 
     @Override // com.android.systemui.statusbar.notification.collection.coordinator.Coordinator
     public void attach(NotifPipeline notifPipeline) {
-        notifPipeline.addOnBeforeFinalizeFilterListener(new OnBeforeFinalizeFilterListener() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.VoipCallPopUpCoordinator$attach$1
+        notifPipeline.addOnBeforeFinalizeFilterListener(new OnBeforeFinalizeFilterListener() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.VoipCallPopUpCoordinator.attach.1
             @Override // com.android.systemui.statusbar.notification.collection.listbuilder.OnBeforeFinalizeFilterListener
             public final void onBeforeFinalizeFilter(List<? extends PipelineEntry> list) {
                 VoipCallPopUpCoordinator.this.onBeforeFinalizeFilterList(list);

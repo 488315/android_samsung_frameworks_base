@@ -13,7 +13,6 @@ import kotlin.jvm.functions.Function3;
 import kotlin.jvm.functions.Function4;
 import kotlin.jvm.functions.Function5;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ContentListState {
     public final SnapshotStateList list;
@@ -51,7 +50,7 @@ public final class ContentListState {
             }
             i = i2;
         }
-        contentListState.onReorderWidgets.mo779invoke(MapsKt__MapsKt.toMap(arrayList));
+        contentListState.onReorderWidgets.mo781invoke(MapsKt__MapsKt.toMap(arrayList));
     }
 
     public final boolean isItemEditable(int i) {

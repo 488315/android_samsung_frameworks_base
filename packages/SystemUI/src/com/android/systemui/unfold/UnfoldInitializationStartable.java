@@ -2,7 +2,7 @@ package com.android.systemui.unfold;
 
 import android.view.Display;
 import com.android.systemui.CoreStartable;
-import com.android.systemui.unfold.UnfoldTransitionWallpaperController;
+import com.android.systemui.unfold.UnfoldTransitionWallpaperController.TransitionListener;
 import com.android.systemui.unfold.progress.UnfoldTransitionProgressForwarder;
 import com.android.systemui.unfold.updates.DeviceFoldStateProvider;
 import com.android.systemui.unfold.updates.RotationChangeProvider;
@@ -13,7 +13,6 @@ import java.util.Optional;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class UnfoldInitializationStartable implements CoreStartable {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -37,14 +36,14 @@ public final class UnfoldInitializationStartable implements CoreStartable {
         this.unfoldComponentOptional.ifPresent(new UnfoldInitializationStartable$sam$java_util_function_Consumer$0(new Function1() { // from class: com.android.systemui.unfold.UnfoldInitializationStartable$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 switch (i) {
                     case 0:
                         SysUIUnfoldComponent sysUIUnfoldComponent = (SysUIUnfoldComponent) obj;
                         int i2 = UnfoldInitializationStartable.$r8$clinit;
                         UnfoldTransitionWallpaperController unfoldTransitionWallpaperController = sysUIUnfoldComponent.getUnfoldTransitionWallpaperController();
                         unfoldTransitionWallpaperController.getClass();
-                        unfoldTransitionWallpaperController.unfoldTransitionProgressProvider.addCallback(new UnfoldTransitionWallpaperController.TransitionListener(unfoldTransitionWallpaperController));
+                        unfoldTransitionWallpaperController.unfoldTransitionProgressProvider.addCallback(unfoldTransitionWallpaperController.new TransitionListener());
                         sysUIUnfoldComponent.getUnfoldHapticsPlayer();
                         NaturalRotationUnfoldProgressProvider naturalRotationUnfoldProgressProvider = sysUIUnfoldComponent.getNaturalRotationUnfoldProgressProvider();
                         NaturalRotationUnfoldProgressProvider$rotationListener$1 naturalRotationUnfoldProgressProvider$rotationListener$1 = naturalRotationUnfoldProgressProvider.rotationListener;
@@ -84,14 +83,14 @@ public final class UnfoldInitializationStartable implements CoreStartable {
         this.foldStateLoggingProviderOptional.ifPresent(new UnfoldInitializationStartable$sam$java_util_function_Consumer$0(new Function1() { // from class: com.android.systemui.unfold.UnfoldInitializationStartable$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 switch (i2) {
                     case 0:
                         SysUIUnfoldComponent sysUIUnfoldComponent = (SysUIUnfoldComponent) obj;
                         int i22 = UnfoldInitializationStartable.$r8$clinit;
                         UnfoldTransitionWallpaperController unfoldTransitionWallpaperController = sysUIUnfoldComponent.getUnfoldTransitionWallpaperController();
                         unfoldTransitionWallpaperController.getClass();
-                        unfoldTransitionWallpaperController.unfoldTransitionProgressProvider.addCallback(new UnfoldTransitionWallpaperController.TransitionListener(unfoldTransitionWallpaperController));
+                        unfoldTransitionWallpaperController.unfoldTransitionProgressProvider.addCallback(unfoldTransitionWallpaperController.new TransitionListener());
                         sysUIUnfoldComponent.getUnfoldHapticsPlayer();
                         NaturalRotationUnfoldProgressProvider naturalRotationUnfoldProgressProvider = sysUIUnfoldComponent.getNaturalRotationUnfoldProgressProvider();
                         NaturalRotationUnfoldProgressProvider$rotationListener$1 naturalRotationUnfoldProgressProvider$rotationListener$1 = naturalRotationUnfoldProgressProvider.rotationListener;
@@ -131,14 +130,14 @@ public final class UnfoldInitializationStartable implements CoreStartable {
         this.foldStateLoggerOptional.ifPresent(new UnfoldInitializationStartable$sam$java_util_function_Consumer$0(new Function1() { // from class: com.android.systemui.unfold.UnfoldInitializationStartable$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 switch (i3) {
                     case 0:
                         SysUIUnfoldComponent sysUIUnfoldComponent = (SysUIUnfoldComponent) obj;
                         int i22 = UnfoldInitializationStartable.$r8$clinit;
                         UnfoldTransitionWallpaperController unfoldTransitionWallpaperController = sysUIUnfoldComponent.getUnfoldTransitionWallpaperController();
                         unfoldTransitionWallpaperController.getClass();
-                        unfoldTransitionWallpaperController.unfoldTransitionProgressProvider.addCallback(new UnfoldTransitionWallpaperController.TransitionListener(unfoldTransitionWallpaperController));
+                        unfoldTransitionWallpaperController.unfoldTransitionProgressProvider.addCallback(unfoldTransitionWallpaperController.new TransitionListener());
                         sysUIUnfoldComponent.getUnfoldHapticsPlayer();
                         NaturalRotationUnfoldProgressProvider naturalRotationUnfoldProgressProvider = sysUIUnfoldComponent.getNaturalRotationUnfoldProgressProvider();
                         NaturalRotationUnfoldProgressProvider$rotationListener$1 naturalRotationUnfoldProgressProvider$rotationListener$1 = naturalRotationUnfoldProgressProvider.rotationListener;

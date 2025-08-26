@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import com.android.net.module.util.ProxyUtils;
+import java.io.IOException;
 import java.net.InetAddress;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -19,8 +20,11 @@ import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.KeyStore;
+import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
 import java.security.Security;
+import java.security.cert.CertificateException;
 import java.security.spec.InvalidParameterSpecException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -147,7 +151,7 @@ public final class KnoxVpnProfile implements Parcelable {
         this.isRestrictedToTestNetworks = z;
     }
 
-    public KnoxVpnProfile(Parcel parcel) {
+    public KnoxVpnProfile(Parcel parcel) throws ClassNotFoundException, IOException {
         this.name = "";
         this.type = 0;
         this.server = "";
@@ -250,59 +254,58 @@ public final class KnoxVpnProfile implements Parcelable {
         parcel.writeString(this.ipSecCACertValue);
     }
 
-    public static KnoxVpnProfile decode(String str, byte[] bArr) {
-        String[] split;
+    public static KnoxVpnProfile decode(String str, byte[] bArr) throws NumberFormatException {
+        String[] strArrSplit;
         if (str == null) {
             return null;
         }
         try {
-            split = new String(bArr, StandardCharsets.UTF_8).split(VALUE_DELIMITER, -1);
+            strArrSplit = new String(bArr, StandardCharsets.UTF_8).split(VALUE_DELIMITER, -1);
         } catch (Exception unused) {
         }
-        if ((split.length < 18 || split.length > 23) && split.length != 28 && split.length != 29) {
+        if ((strArrSplit.length < 18 || strArrSplit.length > 23) && strArrSplit.length != 28 && strArrSplit.length != 29) {
             return null;
         }
-        KnoxVpnProfile knoxVpnProfile = new KnoxVpnProfile(str, split.length >= 29 ? Boolean.parseBoolean(split[28]) : false);
-        knoxVpnProfile.name = split[0];
-        int parseInt = Integer.parseInt(split[1]);
-        knoxVpnProfile.type = parseInt;
-        if (parseInt >= 0 && parseInt <= 8) {
-            knoxVpnProfile.server = split[2];
-            knoxVpnProfile.username = split[3];
-            knoxVpnProfile.password = split[4];
-            knoxVpnProfile.dnsServers = split[5];
-            knoxVpnProfile.searchDomains = split[6];
-            knoxVpnProfile.routes = split[7];
-            knoxVpnProfile.mppe = Boolean.parseBoolean(split[8]);
-            knoxVpnProfile.l2tpSecret = split[9];
-            knoxVpnProfile.ipsecIdentifier = split[10];
-            knoxVpnProfile.ipsecSecret = split[11];
-            knoxVpnProfile.ipsecUserCert = split[12];
-            knoxVpnProfile.ipsecCaCert = split[13];
-            knoxVpnProfile.ipsecServerCert = split.length > 14 ? split[14] : "";
-            knoxVpnProfile.ocspServerUrl = split.length > 15 ? split[15] : "";
-            knoxVpnProfile.isPFS = split.length > 16 ? Boolean.valueOf(split[16]).booleanValue() : false;
-            knoxVpnProfile.isPasswordIvParams = split.length > 17 ? split[17] : "";
-            knoxVpnProfile.isIpsecSecretIvParams = split.length > 18 ? split[18] : "";
-            if (split.length > 19) {
-                String str2 = split.length > 19 ? split[19] : "";
-                String str3 = split.length > 20 ? split[20] : "";
-                String str4 = split.length > 21 ? split[21] : "";
-                String str5 = split.length > 22 ? split[22] : "";
-                if (str2.isEmpty() && str3.isEmpty() && str4.isEmpty()) {
-                    if (!str5.isEmpty()) {
-                        knoxVpnProfile.proxy = ProxyInfo.buildPacProxy(Uri.parse(str5));
-                    }
+        KnoxVpnProfile knoxVpnProfile = new KnoxVpnProfile(str, strArrSplit.length >= 29 ? Boolean.parseBoolean(strArrSplit[28]) : false);
+        knoxVpnProfile.name = strArrSplit[0];
+        int i = Integer.parseInt(strArrSplit[1]);
+        knoxVpnProfile.type = i;
+        if (i >= 0 && i <= 8) {
+            knoxVpnProfile.server = strArrSplit[2];
+            knoxVpnProfile.username = strArrSplit[3];
+            knoxVpnProfile.password = strArrSplit[4];
+            knoxVpnProfile.dnsServers = strArrSplit[5];
+            knoxVpnProfile.searchDomains = strArrSplit[6];
+            knoxVpnProfile.routes = strArrSplit[7];
+            knoxVpnProfile.mppe = Boolean.parseBoolean(strArrSplit[8]);
+            knoxVpnProfile.l2tpSecret = strArrSplit[9];
+            knoxVpnProfile.ipsecIdentifier = strArrSplit[10];
+            knoxVpnProfile.ipsecSecret = strArrSplit[11];
+            knoxVpnProfile.ipsecUserCert = strArrSplit[12];
+            knoxVpnProfile.ipsecCaCert = strArrSplit[13];
+            knoxVpnProfile.ipsecServerCert = strArrSplit.length > 14 ? strArrSplit[14] : "";
+            knoxVpnProfile.ocspServerUrl = strArrSplit.length > 15 ? strArrSplit[15] : "";
+            knoxVpnProfile.isPFS = strArrSplit.length > 16 ? Boolean.valueOf(strArrSplit[16]).booleanValue() : false;
+            knoxVpnProfile.isPasswordIvParams = strArrSplit.length > 17 ? strArrSplit[17] : "";
+            knoxVpnProfile.isIpsecSecretIvParams = strArrSplit.length > 18 ? strArrSplit[18] : "";
+            if (strArrSplit.length > 19) {
+                String str2 = strArrSplit.length > 19 ? strArrSplit[19] : "";
+                String str3 = strArrSplit.length > 20 ? strArrSplit[20] : "";
+                String str4 = strArrSplit.length > 21 ? strArrSplit[21] : "";
+                String str5 = strArrSplit.length > 22 ? strArrSplit[22] : "";
+                if (!str2.isEmpty() || !str3.isEmpty() || !str4.isEmpty()) {
+                    knoxVpnProfile.proxy = ProxyInfo.buildDirectProxy(str2, str3.isEmpty() ? 0 : Integer.parseInt(str3), ProxyUtils.exclusionStringAsList(str4));
+                } else if (!str5.isEmpty()) {
+                    knoxVpnProfile.proxy = ProxyInfo.buildPacProxy(Uri.parse(str5));
                 }
-                knoxVpnProfile.proxy = ProxyInfo.buildDirectProxy(str2, str3.isEmpty() ? 0 : Integer.parseInt(str3), ProxyUtils.exclusionStringAsList(str4));
             }
-            if (split.length >= 28) {
-                knoxVpnProfile.mAllowedAlgorithms = Arrays.asList(split[23].split(","));
-                knoxVpnProfile.isBypassable = Boolean.parseBoolean(split[24]);
-                knoxVpnProfile.isMetered = Boolean.parseBoolean(split[25]);
-                knoxVpnProfile.maxMtu = Integer.parseInt(split[26]);
-                knoxVpnProfile.areAuthParamsInline = Boolean.parseBoolean(split[27]);
-                knoxVpnProfile.ipSecCACertValue = split.length > 28 ? split[28] : "";
+            if (strArrSplit.length >= 28) {
+                knoxVpnProfile.mAllowedAlgorithms = Arrays.asList(strArrSplit[23].split(","));
+                knoxVpnProfile.isBypassable = Boolean.parseBoolean(strArrSplit[24]);
+                knoxVpnProfile.isMetered = Boolean.parseBoolean(strArrSplit[25]);
+                knoxVpnProfile.maxMtu = Integer.parseInt(strArrSplit[26]);
+                knoxVpnProfile.areAuthParamsInline = Boolean.parseBoolean(strArrSplit[27]);
+                knoxVpnProfile.ipSecCACertValue = strArrSplit.length > 28 ? strArrSplit[28] : "";
             }
             knoxVpnProfile.saveLogin = (knoxVpnProfile.username.isEmpty() && knoxVpnProfile.password.isEmpty()) ? false : true;
             return knoxVpnProfile;
@@ -466,7 +469,7 @@ public final class KnoxVpnProfile implements Parcelable {
         return bArr;
     }
 
-    private static String[] doEncrypt(Key key, String str) {
+    private static String[] doEncrypt(Key key, String str) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException {
         try {
             Cipher cipher = Cipher.getInstance("AES/CBC/PKCS7Padding");
             cipher.init(1, key);
@@ -478,13 +481,13 @@ public final class KnoxVpnProfile implements Parcelable {
         }
     }
 
-    private static String doDecrypt(Key key, String str, String str2) {
+    private static String doDecrypt(Key key, String str, String str2) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, InvalidAlgorithmParameterException {
         try {
-            byte[] decode = Base64.decode(str, 2);
+            byte[] bArrDecode = Base64.decode(str, 2);
             IvParameterSpec ivParameterSpec = new IvParameterSpec(hex2Bytes(new String(Base64.decode(str2, 2), StandardCharsets.UTF_8)));
             Cipher cipher = Cipher.getInstance("AES/CBC/PKCS7Padding");
             cipher.init(2, key, ivParameterSpec);
-            return new String(Base64.decode(cipher.doFinal(decode), 2), StandardCharsets.UTF_8).intern();
+            return new String(Base64.decode(cipher.doFinal(bArrDecode), 2), StandardCharsets.UTF_8).intern();
         } catch (IllegalArgumentException | NullPointerException | InvalidAlgorithmParameterException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException e) {
             Log.e(TAG, "Failed to decrypt: " + e.toString());
             e.printStackTrace();
@@ -492,7 +495,7 @@ public final class KnoxVpnProfile implements Parcelable {
         }
     }
 
-    private static Key getSecretKey(boolean z) {
+    private static Key getSecretKey(boolean z) throws NoSuchAlgorithmException, IOException, KeyStoreException, CertificateException, NoSuchProviderException, InvalidAlgorithmParameterException {
         try {
             KeyStore keyStore = KeyStore.getInstance("AndroidKeyStore");
             keyStore.load(null);
@@ -516,25 +519,25 @@ public final class KnoxVpnProfile implements Parcelable {
 
     private static void encrypt(KnoxVpnProfile knoxVpnProfile) {
         Key secretKey;
-        String[] doEncrypt;
-        String[] doEncrypt2;
+        String[] strArrDoEncrypt;
+        String[] strArrDoEncrypt2;
         if ((knoxVpnProfile.ipsecSecret.isEmpty() && knoxVpnProfile.password.isEmpty()) || (secretKey = getSecretKey(true)) == null) {
             return;
         }
-        if (!knoxVpnProfile.ipsecSecret.isEmpty() && (doEncrypt2 = doEncrypt(secretKey, knoxVpnProfile.ipsecSecret)) != null) {
-            knoxVpnProfile.ipsecSecret = doEncrypt2[0];
-            knoxVpnProfile.isIpsecSecretIvParams = doEncrypt2[1];
+        if (!knoxVpnProfile.ipsecSecret.isEmpty() && (strArrDoEncrypt2 = doEncrypt(secretKey, knoxVpnProfile.ipsecSecret)) != null) {
+            knoxVpnProfile.ipsecSecret = strArrDoEncrypt2[0];
+            knoxVpnProfile.isIpsecSecretIvParams = strArrDoEncrypt2[1];
         }
-        if (knoxVpnProfile.password.isEmpty() || (doEncrypt = doEncrypt(secretKey, knoxVpnProfile.password)) == null) {
+        if (knoxVpnProfile.password.isEmpty() || (strArrDoEncrypt = doEncrypt(secretKey, knoxVpnProfile.password)) == null) {
             return;
         }
-        knoxVpnProfile.password = doEncrypt[0];
-        knoxVpnProfile.isPasswordIvParams = doEncrypt[1];
+        knoxVpnProfile.password = strArrDoEncrypt[0];
+        knoxVpnProfile.isPasswordIvParams = strArrDoEncrypt[1];
     }
 
     public static void decrypt(KnoxVpnProfile knoxVpnProfile) {
-        String doDecrypt;
-        String doDecrypt2;
+        String strDoDecrypt;
+        String strDoDecrypt2;
         if (!knoxVpnProfile.isIpsecSecretIvParams.isEmpty() || !knoxVpnProfile.isPasswordIvParams.isEmpty()) {
             boolean z = false;
             try {
@@ -544,11 +547,11 @@ public final class KnoxVpnProfile implements Parcelable {
                         AndroidKeyStoreProvider.install();
                         z = true;
                     }
-                    if (!knoxVpnProfile.ipsecSecret.isEmpty() && (doDecrypt2 = doDecrypt(secretKey, knoxVpnProfile.ipsecSecret, knoxVpnProfile.isIpsecSecretIvParams)) != null) {
-                        knoxVpnProfile.ipsecSecret = doDecrypt2;
+                    if (!knoxVpnProfile.ipsecSecret.isEmpty() && (strDoDecrypt2 = doDecrypt(secretKey, knoxVpnProfile.ipsecSecret, knoxVpnProfile.isIpsecSecretIvParams)) != null) {
+                        knoxVpnProfile.ipsecSecret = strDoDecrypt2;
                     }
-                    if (!knoxVpnProfile.password.isEmpty() && (doDecrypt = doDecrypt(secretKey, knoxVpnProfile.password, knoxVpnProfile.isPasswordIvParams)) != null) {
-                        knoxVpnProfile.password = doDecrypt;
+                    if (!knoxVpnProfile.password.isEmpty() && (strDoDecrypt = doDecrypt(secretKey, knoxVpnProfile.password, knoxVpnProfile.isPasswordIvParams)) != null) {
+                        knoxVpnProfile.password = strDoDecrypt;
                     }
                     if (z) {
                         Security.removeProvider(ANDROID_BC_PROVIDER);
@@ -566,10 +569,10 @@ public final class KnoxVpnProfile implements Parcelable {
     }
 
     private static byte[] intToByteArray(int i) {
-        ByteBuffer allocate = ByteBuffer.allocate(4);
-        allocate.putInt(i);
-        allocate.order(ByteOrder.BIG_ENDIAN);
-        return allocate.array();
+        ByteBuffer byteBufferAllocate = ByteBuffer.allocate(4);
+        byteBufferAllocate.putInt(i);
+        byteBufferAllocate.order(ByteOrder.BIG_ENDIAN);
+        return byteBufferAllocate.array();
     }
 
     private static int byteArrayToInt(byte[] bArr) {

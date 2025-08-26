@@ -27,39 +27,41 @@ public class PreferredActivityBackupHelper extends BlobBackupHelper {
         this.mUserId = i;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:18:0x003d  */
     @Override // android.app.backup.BlobBackupHelper
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     protected byte[] getBackupPayload(String str) {
         char c;
         IPackageManager packageManager = AppGlobals.getPackageManager();
         try {
             switch (str.hashCode()) {
                 case -696985986:
-                    if (str.equals(KEY_DEFAULT_APPS)) {
+                    if (!str.equals(KEY_DEFAULT_APPS)) {
+                        c = 65535;
+                        break;
+                    } else {
                         c = 1;
                         break;
                     }
-                    c = 65535;
-                    break;
                 case -549387132:
                     if (str.equals(KEY_DOMAIN_VERIFICATION)) {
                         c = 3;
                         break;
                     }
-                    c = 65535;
                     break;
                 case -429170260:
                     if (str.equals(KEY_INTENT_VERIFICATION)) {
                         c = 2;
                         break;
                     }
-                    c = 65535;
                     break;
                 case 1336142555:
                     if (str.equals(KEY_PREFERRED)) {
                         c = 0;
                         break;
                     }
-                    c = 65535;
                     break;
                 default:
                     c = 65535;
@@ -84,39 +86,41 @@ public class PreferredActivityBackupHelper extends BlobBackupHelper {
         return null;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:18:0x003c  */
     @Override // android.app.backup.BlobBackupHelper
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     protected void applyRestoredPayload(String str, byte[] bArr) {
         char c;
         IPackageManager packageManager = AppGlobals.getPackageManager();
         try {
             switch (str.hashCode()) {
                 case -696985986:
-                    if (str.equals(KEY_DEFAULT_APPS)) {
+                    if (!str.equals(KEY_DEFAULT_APPS)) {
+                        c = 65535;
+                        break;
+                    } else {
                         c = 1;
                         break;
                     }
-                    c = 65535;
-                    break;
                 case -549387132:
                     if (str.equals(KEY_DOMAIN_VERIFICATION)) {
                         c = 3;
                         break;
                     }
-                    c = 65535;
                     break;
                 case -429170260:
                     if (str.equals(KEY_INTENT_VERIFICATION)) {
                         c = 2;
                         break;
                     }
-                    c = 65535;
                     break;
                 case 1336142555:
                     if (str.equals(KEY_PREFERRED)) {
                         c = 0;
                         break;
                     }
-                    c = 65535;
                     break;
                 default:
                     c = 65535;

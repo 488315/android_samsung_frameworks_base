@@ -31,14 +31,14 @@ public class LongArrayQueue {
         if (i < this.mValues.length) {
             throw new IllegalStateException("Queue not full yet!");
         }
-        long[] newUnpaddedLongArray = ArrayUtils.newUnpaddedLongArray(GrowingArrayUtils.growSize(i));
+        long[] jArrNewUnpaddedLongArray = ArrayUtils.newUnpaddedLongArray(GrowingArrayUtils.growSize(i));
         long[] jArr = this.mValues;
         int length = jArr.length;
         int i2 = this.mHead;
         int i3 = length - i2;
-        System.arraycopy(jArr, i2, newUnpaddedLongArray, 0, i3);
-        System.arraycopy(this.mValues, 0, newUnpaddedLongArray, i3, this.mHead);
-        this.mValues = newUnpaddedLongArray;
+        System.arraycopy(jArr, i2, jArrNewUnpaddedLongArray, 0, i3);
+        System.arraycopy(this.mValues, 0, jArrNewUnpaddedLongArray, i3, this.mHead);
+        this.mValues = jArrNewUnpaddedLongArray;
         this.mHead = 0;
         this.mTail = this.mSize;
     }
@@ -97,11 +97,11 @@ public class LongArrayQueue {
         if (this.mSize == 0) {
             throw new NoSuchElementException("Queue is empty!");
         }
-        int i = this.mTail;
-        if (i == 0) {
-            i = this.mValues.length;
+        int length = this.mTail;
+        if (length == 0) {
+            length = this.mValues.length;
         }
-        return this.mValues[i - 1];
+        return this.mValues[length - 1];
     }
 
     public String toString() {

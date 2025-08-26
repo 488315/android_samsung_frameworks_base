@@ -4,13 +4,11 @@ import java.io.Serializable;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class Result<T> implements Serializable {
     public static final /* synthetic */ int $r8$clinit = 0;
     private final Object value;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -20,7 +18,6 @@ public final class Result<T> implements Serializable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Failure implements Serializable {
         public final Throwable exception;
 
@@ -50,12 +47,12 @@ public final class Result<T> implements Serializable {
     }
 
     /* renamed from: box-impl, reason: not valid java name */
-    public static final /* synthetic */ Result m3421boximpl(Object obj) {
+    public static final /* synthetic */ Result m3441boximpl(Object obj) {
         return new Result(obj);
     }
 
     /* renamed from: exceptionOrNull-impl, reason: not valid java name */
-    public static final Throwable m3422exceptionOrNullimpl(Object obj) {
+    public static final Throwable m3442exceptionOrNullimpl(Object obj) {
         if (obj instanceof Failure) {
             return ((Failure) obj).exception;
         }
@@ -83,7 +80,7 @@ public final class Result<T> implements Serializable {
     }
 
     /* renamed from: unbox-impl, reason: not valid java name */
-    public final /* synthetic */ Object m3423unboximpl() {
+    public final /* synthetic */ Object m3443unboximpl() {
         return this.value;
     }
 }

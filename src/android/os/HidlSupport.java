@@ -43,9 +43,7 @@ public class HidlSupport {
             return objArr.length == objArr2.length && IntStream.range(0, objArr.length).allMatch(new IntPredicate() { // from class: android.os.HidlSupport$$ExternalSyntheticLambda2
                 @Override // java.util.function.IntPredicate
                 public final boolean test(int i) {
-                    boolean deepEquals;
-                    deepEquals = HidlSupport.deepEquals(objArr[i], objArr2[i]);
-                    return deepEquals;
+                    return HidlSupport.deepEquals(objArr[i], objArr2[i]);
                 }
             });
         }
@@ -59,9 +57,7 @@ public class HidlSupport {
             return list2.stream().allMatch(new Predicate() { // from class: android.os.HidlSupport$$ExternalSyntheticLambda3
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj3) {
-                    boolean deepEquals;
-                    deepEquals = HidlSupport.deepEquals(it.next(), obj3);
-                    return deepEquals;
+                    return HidlSupport.deepEquals(it.next(), obj3);
                 }
             });
         }
@@ -94,9 +90,7 @@ public class HidlSupport {
             return Arrays.hashCode(Arrays.stream((Object[]) obj).mapToInt(new ToIntFunction() { // from class: android.os.HidlSupport$$ExternalSyntheticLambda0
                 @Override // java.util.function.ToIntFunction
                 public final int applyAsInt(Object obj2) {
-                    int deepHashCode;
-                    deepHashCode = HidlSupport.deepHashCode(obj2);
-                    return deepHashCode;
+                    return HidlSupport.deepHashCode(obj2);
                 }
             }).toArray());
         }
@@ -104,9 +98,7 @@ public class HidlSupport {
             return Arrays.hashCode(((List) obj).stream().mapToInt(new ToIntFunction() { // from class: android.os.HidlSupport$$ExternalSyntheticLambda1
                 @Override // java.util.function.ToIntFunction
                 public final int applyAsInt(Object obj2) {
-                    int deepHashCode;
-                    deepHashCode = HidlSupport.deepHashCode(obj2);
-                    return deepHashCode;
+                    return HidlSupport.deepHashCode(obj2);
                 }
             }).toArray());
         }

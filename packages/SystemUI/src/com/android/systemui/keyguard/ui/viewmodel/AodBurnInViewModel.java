@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.SharingStarted;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class AodBurnInViewModel {
     public final AodToLockscreenTransitionViewModel aodToLockscreenTransitionViewModel;
@@ -37,8 +36,8 @@ public final class AodBurnInViewModel {
         this.aodToLockscreenTransitionViewModel = aodToLockscreenTransitionViewModel;
         this.occludedToLockscreenTransitionViewModel = occludedToLockscreenTransitionViewModel;
         this.keyguardClockViewModel = keyguardClockViewModel;
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(new BurnInParameters(0, 0, null, null, 15, null));
-        this.burnInParams = MutableStateFlow;
-        this.movement = FlowKt.stateIn(FlowKt.transformLatest(MutableStateFlow, new AodBurnInViewModel$special$$inlined$flatMapLatest$1(null, this)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(SharingStarted.Companion, 3), new BurnInModel(0, 0, 0.0f, false, 15, null));
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(new BurnInParameters(0, 0, null, null, 15, null));
+        this.burnInParams = stateFlowImplMutableStateFlow;
+        this.movement = FlowKt.stateIn(FlowKt.transformLatest(stateFlowImplMutableStateFlow, new AodBurnInViewModel$special$$inlined$flatMapLatest$1(null, this)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(SharingStarted.Companion, 3), new BurnInModel(0, 0, 0.0f, false, 15, null));
     }
 }

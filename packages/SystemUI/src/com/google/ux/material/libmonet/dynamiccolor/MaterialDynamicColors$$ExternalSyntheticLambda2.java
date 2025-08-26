@@ -6,7 +6,6 @@ import com.google.ux.material.libmonet.hct.Hct;
 import com.google.ux.material.libmonet.palettes.TonalPalette;
 import java.util.function.Function;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final /* synthetic */ class MaterialDynamicColors$$ExternalSyntheticLambda2 implements Function {
     public final /* synthetic */ int $r8$classId;
@@ -35,9 +34,9 @@ public final /* synthetic */ class MaterialDynamicColors$$ExternalSyntheticLambd
                 MaterialDynamicColors materialDynamicColors = this.f$0;
                 DynamicScheme dynamicScheme = (DynamicScheme) obj;
                 materialDynamicColors.getClass();
-                boolean isMonochrome = MaterialDynamicColors.isMonochrome(dynamicScheme);
+                boolean zIsMonochrome = MaterialDynamicColors.isMonochrome(dynamicScheme);
                 boolean z = dynamicScheme.isDark;
-                if (isMonochrome) {
+                if (zIsMonochrome) {
                     return Double.valueOf(z ? 0.0d : 100.0d);
                 }
                 if (materialDynamicColors.isFidelity(dynamicScheme)) {
@@ -89,22 +88,22 @@ public final /* synthetic */ class MaterialDynamicColors$$ExternalSyntheticLambd
                 TonalPalette tonalPalette = dynamicScheme3.secondaryPalette;
                 double d2 = tonalPalette.hue;
                 double d3 = tonalPalette.chroma;
-                Hct from = Hct.from(d2, d3, d);
-                double d4 = from.chroma;
+                Hct hctFrom = Hct.from(d2, d3, d);
+                double d4 = hctFrom.chroma;
                 if (d4 < d3) {
-                    double d5 = d4;
-                    while (from.chroma < d3) {
-                        double d6 = (!dynamicScheme3.isDark ? -1.0d : 1.0d) + d;
-                        Hct from2 = Hct.from(d2, d3, d6);
-                        double d7 = from2.chroma;
-                        if (d5 <= d7 && Math.abs(d7 - d3) >= 0.4d) {
-                            if (Math.abs(from2.chroma - d3) < Math.abs(from.chroma - d3)) {
-                                from = from2;
+                    double dMax = d4;
+                    while (hctFrom.chroma < d3) {
+                        double d5 = (!dynamicScheme3.isDark ? -1.0d : 1.0d) + d;
+                        Hct hctFrom2 = Hct.from(d2, d3, d5);
+                        double d6 = hctFrom2.chroma;
+                        if (dMax <= d6 && Math.abs(d6 - d3) >= 0.4d) {
+                            if (Math.abs(hctFrom2.chroma - d3) < Math.abs(hctFrom.chroma - d3)) {
+                                hctFrom = hctFrom2;
                             }
-                            d5 = Math.max(d5, from2.chroma);
-                            d = d6;
+                            dMax = Math.max(dMax, hctFrom2.chroma);
+                            d = d5;
                         } else {
-                            d = d6;
+                            d = d5;
                         }
                     }
                 }
@@ -119,17 +118,17 @@ public final /* synthetic */ class MaterialDynamicColors$$ExternalSyntheticLambd
                 MaterialDynamicColors materialDynamicColors9 = this.f$0;
                 DynamicScheme dynamicScheme4 = (DynamicScheme) obj;
                 materialDynamicColors9.getClass();
-                boolean isMonochrome2 = MaterialDynamicColors.isMonochrome(dynamicScheme4);
+                boolean zIsMonochrome2 = MaterialDynamicColors.isMonochrome(dynamicScheme4);
                 boolean z4 = dynamicScheme4.isDark;
-                if (isMonochrome2) {
+                if (zIsMonochrome2) {
                     return Double.valueOf(z4 ? 60.0d : 49.0d);
                 }
                 if (!materialDynamicColors9.isFidelity(dynamicScheme4)) {
                     return Double.valueOf(z4 ? 30.0d : 90.0d);
                 }
-                double d8 = dynamicScheme4.sourceColorHct.tone;
+                double d7 = dynamicScheme4.sourceColorHct.tone;
                 TonalPalette tonalPalette2 = dynamicScheme4.tertiaryPalette;
-                return Double.valueOf(DislikeAnalyzer.fixIfDisliked(Hct.from(tonalPalette2.hue, tonalPalette2.chroma, d8)).tone);
+                return Double.valueOf(DislikeAnalyzer.fixIfDisliked(Hct.from(tonalPalette2.hue, tonalPalette2.chroma, d7)).tone);
             case 18:
                 MaterialDynamicColors materialDynamicColors10 = this.f$0;
                 return new ToneDeltaPair(materialDynamicColors10.tertiaryContainer(), materialDynamicColors10.tertiary(), 10.0d, TonePolarity.NEARER, false);
@@ -142,9 +141,9 @@ public final /* synthetic */ class MaterialDynamicColors$$ExternalSyntheticLambd
                 MaterialDynamicColors materialDynamicColors12 = this.f$0;
                 DynamicScheme dynamicScheme5 = (DynamicScheme) obj;
                 materialDynamicColors12.getClass();
-                boolean isMonochrome3 = MaterialDynamicColors.isMonochrome(dynamicScheme5);
+                boolean zIsMonochrome3 = MaterialDynamicColors.isMonochrome(dynamicScheme5);
                 boolean z5 = dynamicScheme5.isDark;
-                if (isMonochrome3) {
+                if (zIsMonochrome3) {
                     return Double.valueOf(z5 ? 90.0d : 10.0d);
                 }
                 if (materialDynamicColors12.isFidelity(dynamicScheme5)) {

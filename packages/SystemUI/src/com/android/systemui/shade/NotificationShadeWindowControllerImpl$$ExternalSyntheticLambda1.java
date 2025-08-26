@@ -14,7 +14,6 @@ import java.util.Iterator;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class NotificationShadeWindowControllerImpl$$ExternalSyntheticLambda1 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -41,7 +40,7 @@ public final /* synthetic */ class NotificationShadeWindowControllerImpl$$Extern
                         @Override // java.lang.Runnable
                         public final void run() {
                             try {
-                                SecNotificationShadeWindowControllerHelperImpl.this.activityManager.setHasTopUi(z);
+                                secNotificationShadeWindowControllerHelperImpl.activityManager.setHasTopUi(z);
                             } catch (RemoteException e) {
                                 Log.e("NotificationShadeWindowController", "Failed to call setHasTopUi", e);
                             }
@@ -73,7 +72,7 @@ public final /* synthetic */ class NotificationShadeWindowControllerImpl$$Extern
                     @Override // com.android.systemui.statusbar.policy.KeyguardStateController.Callback
                     public final void onKeyguardFadingAwayChanged() {
                         int i3 = KeyguardVisibilityMonitor.$r8$clinit;
-                        KeyguardVisibilityMonitor keyguardVisibilityMonitor2 = KeyguardVisibilityMonitor.this;
+                        KeyguardVisibilityMonitor keyguardVisibilityMonitor2 = keyguardVisibilityMonitor;
                         Log.d("KeyguardVisible", "onKeyguardFadingAwayChanged " + ((KeyguardStateControllerImpl) keyguardVisibilityMonitor2.getKeyguardStateController()).mKeyguardFadingAway);
                         if (((KeyguardStateControllerImpl) keyguardVisibilityMonitor2.getKeyguardStateController()).mKeyguardFadingAway) {
                             return;
@@ -84,7 +83,7 @@ public final /* synthetic */ class NotificationShadeWindowControllerImpl$$Extern
                     @Override // com.android.systemui.statusbar.policy.KeyguardStateController.Callback
                     public final void onKeyguardGoingAwayChanged() {
                         int i3 = KeyguardVisibilityMonitor.$r8$clinit;
-                        KeyguardVisibilityMonitor keyguardVisibilityMonitor2 = KeyguardVisibilityMonitor.this;
+                        KeyguardVisibilityMonitor keyguardVisibilityMonitor2 = keyguardVisibilityMonitor;
                         Log.d("KeyguardVisible", "onKeyguardGoingAwayChanged " + ((KeyguardStateControllerImpl) keyguardVisibilityMonitor2.getKeyguardStateController()).mKeyguardGoingAway);
                         if (((KeyguardStateControllerImpl) keyguardVisibilityMonitor2.getKeyguardStateController()).mKeyguardGoingAway) {
                             return;
@@ -97,18 +96,18 @@ public final /* synthetic */ class NotificationShadeWindowControllerImpl$$Extern
                     @Override // com.android.systemui.shade.ShadeExpansionListener
                     public final void onPanelExpansionChanged(ShadeExpansionChangeEvent shadeExpansionChangeEvent) {
                         int i3 = KeyguardVisibilityMonitor.$r8$clinit;
-                        KeyguardVisibilityMonitor keyguardVisibilityMonitor2 = KeyguardVisibilityMonitor.this;
+                        KeyguardVisibilityMonitor keyguardVisibilityMonitor2 = keyguardVisibilityMonitor;
                         keyguardVisibilityMonitor2.panelLog(shadeExpansionChangeEvent, null);
                         keyguardVisibilityMonitor2.panelExpansionChangeEvent = shadeExpansionChangeEvent;
                     }
                 });
                 shadeExpansionStateManager.stateListeners.add(new ShadeStateListener() { // from class: com.android.systemui.keyguard.KeyguardVisibilityMonitor$registerMonitor$3$2
                     @Override // com.android.systemui.shade.ShadeStateListener
-                    public final void onPanelStateChanged$1(int i3) {
-                        Integer valueOf = Integer.valueOf(i3);
+                    public final void onPanelStateChanged$2(int i3) {
+                        Integer numValueOf = Integer.valueOf(i3);
                         int i4 = KeyguardVisibilityMonitor.$r8$clinit;
-                        KeyguardVisibilityMonitor keyguardVisibilityMonitor2 = KeyguardVisibilityMonitor.this;
-                        keyguardVisibilityMonitor2.panelLog(null, valueOf);
+                        KeyguardVisibilityMonitor keyguardVisibilityMonitor2 = keyguardVisibilityMonitor;
+                        keyguardVisibilityMonitor2.panelLog(null, numValueOf);
                         if (keyguardVisibilityMonitor2.panelState != i3) {
                             Iterator it = CollectionsKt___CollectionsKt.toList(keyguardVisibilityMonitor2.panelStateChangedListeners).iterator();
                             while (it.hasNext()) {

@@ -153,15 +153,12 @@ public class Base64 {
                     }
                     i8++;
                     i7 = i12;
-                } else {
-                    if (i12 < 0) {
-                        if (i12 != -1) {
-                            this.state = 6;
-                            return false;
-                        }
-                    }
+                } else if (i12 >= 0) {
                     i8++;
                     i7 = i12;
+                } else if (i12 != -1) {
+                    this.state = 6;
+                    return false;
                 }
                 i9 = i11;
             }
@@ -266,7 +263,11 @@ public class Base64 {
             return ((i * 8) / 5) + 10;
         }
 
+        /* JADX WARN: Removed duplicated region for block: B:12:0x0050  */
         @Override // android.util.Base64.Coder
+        /*
+            Code decompiled incorrectly, please refer to instructions dump.
+        */
         public boolean process(byte[] bArr, int i, int i2, boolean z) {
             int i3;
             int i4;
@@ -289,17 +290,14 @@ public class Base64 {
                     i4 = ((bArr4[1] & 255) << 8) | ((bArr4[0] & 255) << 16) | (bArr[i] & 255);
                     this.tailLen = 0;
                     i3 = i7;
+                } else {
+                    i3 = i;
+                    i4 = -1;
                 }
-                i3 = i;
-                i4 = -1;
-            } else {
-                if (i + 2 <= i9) {
-                    i3 = i + 2;
-                    i4 = (bArr[i + 1] & 255) | ((this.tail[0] & 255) << 16) | ((bArr[i] & 255) << 8);
-                    this.tailLen = 0;
-                }
-                i3 = i;
-                i4 = -1;
+            } else if (i + 2 <= i9) {
+                i3 = i + 2;
+                i4 = (bArr[i + 1] & 255) | ((this.tail[0] & 255) << 16) | ((bArr[i] & 255) << 8);
+                this.tailLen = 0;
             }
             if (i4 != -1) {
                 bArr3[0] = bArr2[(i4 >> 18) & 63];

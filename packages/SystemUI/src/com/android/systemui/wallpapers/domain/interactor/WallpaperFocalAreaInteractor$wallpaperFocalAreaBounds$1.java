@@ -15,7 +15,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function5;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class WallpaperFocalAreaInteractor$wallpaperFocalAreaBounds$1 extends SuspendLambda implements Function5 {
     /* synthetic */ float F$0;
@@ -33,15 +32,15 @@ final class WallpaperFocalAreaInteractor$wallpaperFocalAreaBounds$1 extends Susp
 
     @Override // kotlin.jvm.functions.Function5
     public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4, Object obj5) {
-        boolean booleanValue = ((Boolean) obj).booleanValue();
-        float floatValue = ((Number) obj2).floatValue();
-        float floatValue2 = ((Number) obj3).floatValue();
-        float floatValue3 = ((Number) obj4).floatValue();
+        boolean zBooleanValue = ((Boolean) obj).booleanValue();
+        float fFloatValue = ((Number) obj2).floatValue();
+        float fFloatValue2 = ((Number) obj3).floatValue();
+        float fFloatValue3 = ((Number) obj4).floatValue();
         WallpaperFocalAreaInteractor$wallpaperFocalAreaBounds$1 wallpaperFocalAreaInteractor$wallpaperFocalAreaBounds$1 = new WallpaperFocalAreaInteractor$wallpaperFocalAreaBounds$1(this.this$0, (Continuation) obj5);
-        wallpaperFocalAreaInteractor$wallpaperFocalAreaBounds$1.Z$0 = booleanValue;
-        wallpaperFocalAreaInteractor$wallpaperFocalAreaBounds$1.F$0 = floatValue;
-        wallpaperFocalAreaInteractor$wallpaperFocalAreaBounds$1.F$1 = floatValue2;
-        wallpaperFocalAreaInteractor$wallpaperFocalAreaBounds$1.F$2 = floatValue3;
+        wallpaperFocalAreaInteractor$wallpaperFocalAreaBounds$1.Z$0 = zBooleanValue;
+        wallpaperFocalAreaInteractor$wallpaperFocalAreaBounds$1.F$0 = fFloatValue;
+        wallpaperFocalAreaInteractor$wallpaperFocalAreaBounds$1.F$1 = fFloatValue2;
+        wallpaperFocalAreaInteractor$wallpaperFocalAreaBounds$1.F$2 = fFloatValue3;
         return wallpaperFocalAreaInteractor$wallpaperFocalAreaBounds$1.invokeSuspend(Unit.INSTANCE);
     }
 
@@ -67,16 +66,16 @@ final class WallpaperFocalAreaInteractor$wallpaperFocalAreaBounds$1 extends Susp
         }
         RectF rectF = new RectF(0.0f, 0.0f, this.this$0.context.getResources().getDisplayMetrics().widthPixels, this.this$0.context.getResources().getDisplayMetrics().heightPixels);
         RectF rectF2 = new RectF(rectF.centerX() - ((rectF.width() / 2.0f) / f5), rectF.centerY() - ((rectF.height() / 2.0f) / f5), ((rectF.width() / 2.0f) / f5) + rectF.centerX(), ((rectF.height() / 2.0f) / f5) + rectF.centerY());
-        float m = ActionRow$$ExternalSyntheticOutline0.m(this.this$0.context, 1, this.this$0.context.getResources().getBoolean(R.bool.center_align_focal_area_shape) ? 500 : 400);
+        float fM = ActionRow$$ExternalSyntheticOutline0.m(this.this$0.context, 1, this.this$0.context.getResources().getBoolean(R.bool.center_align_focal_area_shape) ? 500 : 400);
         if (z) {
-            float f6 = m / 2.0f;
+            float f6 = fM / 2.0f;
             pair = new Pair(new Float(rectF2.centerX() - f6), new Float(rectF2.centerX() + f6));
         } else {
-            float min = Math.min(rectF2.width(), m) / 2.0f;
-            pair = new Pair(new Float(rectF2.centerX() - min), new Float(rectF2.centerX() + min));
+            float fMin = Math.min(rectF2.width(), fM) / 2.0f;
+            pair = new Pair(new Float(rectF2.centerX() - fMin), new Float(rectF2.centerX() + fMin));
         }
-        float floatValue = ((Number) pair.component1()).floatValue();
-        float floatValue2 = ((Number) pair.component2()).floatValue();
+        float fFloatValue = ((Number) pair.component1()).floatValue();
+        float fFloatValue2 = ((Number) pair.component2()).floatValue();
         float f7 = (this.this$0.context.getResources().getDisplayMetrics().heightPixels - f3) / f5;
         if (this.this$0.context.getResources().getBoolean(R.bool.center_align_focal_area_shape)) {
             f = rectF2.top + f7;
@@ -89,7 +88,7 @@ final class WallpaperFocalAreaInteractor$wallpaperFocalAreaBounds$1 extends Susp
             }
             f = f8 + (f2 / f5);
         }
-        RectF rectF3 = new RectF(floatValue, f, floatValue2, rectF2.bottom - f7);
+        RectF rectF3 = new RectF(fFloatValue, f, fFloatValue2, rectF2.bottom - f7);
         Log.d(WallpaperFocalAreaInteractor.TAG, "Focal area changes to " + rectF3);
         return rectF3;
     }

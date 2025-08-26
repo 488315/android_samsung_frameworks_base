@@ -12,7 +12,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class EditModeViewModel$tiles$1$2 extends SuspendLambda implements Function3 {
     /* synthetic */ Object L$0;
@@ -49,18 +48,18 @@ final class EditModeViewModel$tiles$1$2 extends SuspendLambda implements Functio
             Text text = unloadedEditTileViewModel.label;
             Text.Companion companion = Text.Companion;
             companion.getClass();
-            String loadText = Text.Companion.loadText(text, context);
+            String strLoadText = Text.Companion.loadText(text, context);
             AnnotatedString annotatedString = null;
-            AnnotatedString annotatedString2 = loadText != null ? new AnnotatedString(loadText, null, 2, null) : null;
+            AnnotatedString annotatedString2 = strLoadText != null ? new AnnotatedString(strLoadText, null, 2, null) : null;
             if (annotatedString2 == null) {
                 annotatedString2 = new AnnotatedString(unloadedEditTileViewModel.tileSpec.getSpec(), null, 2, null);
             }
             Text text2 = unloadedEditTileViewModel.appName;
             if (text2 != null) {
                 companion.getClass();
-                String loadText2 = Text.Companion.loadText(text2, context);
-                if (loadText2 != null) {
-                    annotatedString = new AnnotatedString(loadText2, null, 2, null);
+                String strLoadText2 = Text.Companion.loadText(text2, context);
+                if (strLoadText2 != null) {
+                    annotatedString = new AnnotatedString(strLoadText2, null, 2, null);
                 }
             }
             AnnotatedString annotatedString3 = annotatedString2;

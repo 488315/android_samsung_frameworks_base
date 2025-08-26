@@ -13,7 +13,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.StateFlowImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class FromOccludedTransitionInteractor$listenForOccludedToLockscreenOrHub$2 extends SuspendLambda implements Function2 {
     int label;
@@ -52,11 +51,11 @@ final class FromOccludedTransitionInteractor$listenForOccludedToLockscreenOrHub$
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 public final Object emit(Object obj2, Continuation continuation) {
                     Quint quint = (Quint) obj2;
-                    boolean booleanValue = ((Boolean) quint.component3()).booleanValue();
-                    boolean booleanValue2 = ((Boolean) quint.component4()).booleanValue();
+                    boolean zBooleanValue = ((Boolean) quint.component3()).booleanValue();
+                    boolean zBooleanValue2 = ((Boolean) quint.component4()).booleanValue();
                     ((Boolean) quint.component5()).getClass();
-                    Object access$startTransitionToLockscreenOrHub = FromOccludedTransitionInteractor.access$startTransitionToLockscreenOrHub(FromOccludedTransitionInteractor.this, booleanValue, booleanValue2, continuation);
-                    return access$startTransitionToLockscreenOrHub == CoroutineSingletons.COROUTINE_SUSPENDED ? access$startTransitionToLockscreenOrHub : Unit.INSTANCE;
+                    Object objAccess$startTransitionToLockscreenOrHub = FromOccludedTransitionInteractor.access$startTransitionToLockscreenOrHub(fromOccludedTransitionInteractor2, zBooleanValue, zBooleanValue2, continuation);
+                    return objAccess$startTransitionToLockscreenOrHub == CoroutineSingletons.COROUTINE_SUSPENDED ? objAccess$startTransitionToLockscreenOrHub : Unit.INSTANCE;
                 }
             };
             this.label = 1;

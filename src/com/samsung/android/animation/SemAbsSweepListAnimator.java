@@ -73,67 +73,44 @@ abstract class SemAbsSweepListAnimator {
         return null;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:14:0x001b, code lost:
-    
-        if (r0 != 6) goto L21;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:20:0x002e  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public boolean onInterceptTouchEvent(android.view.MotionEvent r5) {
-        /*
-            r4 = this;
-            boolean r0 = r4.isTouchEventSkipped()
-            r1 = 0
-            if (r0 == 0) goto L8
-            return r1
-        L8:
-            r4.addVelocityTracker(r5)
-            int r0 = r5.getAction()
-            if (r0 == 0) goto L32
-            r2 = 1
-            if (r0 == r2) goto L2e
-            r3 = 2
-            if (r0 == r3) goto L22
-            r2 = 3
-            if (r0 == r2) goto L1e
-            r2 = 6
-            if (r0 == r2) goto L2e
-            goto L31
-        L1e:
-            r4.handleTouchCancelEvent(r5)
-            goto L31
-        L22:
-            float r5 = r4.calculateDistanceX(r5)
-            int r4 = r4.mScaledTouchSlop
-            float r4 = (float) r4
-            int r4 = (r5 > r4 ? 1 : (r5 == r4 ? 0 : -1))
-            if (r4 <= 0) goto L31
-            return r2
-        L2e:
-            r4.handleTouchUpEvent(r5)
-        L31:
-            return r1
-        L32:
-            float r0 = r5.getX()
-            r4.mDownX = r0
-            r4.handleTouchDownEvent(r5)
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.animation.SemAbsSweepListAnimator.onInterceptTouchEvent(android.view.MotionEvent):boolean");
+    public boolean onInterceptTouchEvent(MotionEvent motionEvent) {
+        if (isTouchEventSkipped()) {
+            return false;
+        }
+        addVelocityTracker(motionEvent);
+        int action = motionEvent.getAction();
+        if (action == 0) {
+            this.mDownX = motionEvent.getX();
+            handleTouchDownEvent(motionEvent);
+            return false;
+        }
+        if (action == 1) {
+            handleTouchUpEvent(motionEvent);
+        } else if (action != 2) {
+            if (action == 3) {
+                handleTouchCancelEvent(motionEvent);
+            } else if (action == 6) {
+            }
+        } else if (calculateDistanceX(motionEvent) > this.mScaledTouchSlop) {
+            return true;
+        }
+        return false;
     }
 
     private boolean handleTouchDownEvent(MotionEvent motionEvent) {
         if (this.mListView == null) {
             return false;
         }
-        View findTouchedView = findTouchedView(motionEvent);
-        this.mForegroundView = findTouchedView;
-        if (findTouchedView == null) {
+        View viewFindTouchedView = findTouchedView(motionEvent);
+        this.mForegroundView = viewFindTouchedView;
+        if (viewFindTouchedView == null) {
             return false;
         }
-        int positionForView = this.mListView.getPositionForView(findTouchedView);
+        int positionForView = this.mListView.getPositionForView(viewFindTouchedView);
         this.mCurrentPosition = positionForView;
         if (positionForView == -1 || positionForView < this.mListView.getFirstVisiblePosition() || this.mCurrentPosition > this.mListView.getLastVisiblePosition()) {
             return false;
@@ -162,13 +139,13 @@ abstract class SemAbsSweepListAnimator {
         this.upY = y;
         float f = this.downX - this.upX;
         float f2 = this.downY - y;
-        double cos = Math.cos(Math.abs(f / Math.sqrt(Math.abs(f * f) + Math.abs(f2 * f2))));
+        double dCos = Math.cos(Math.abs(f / Math.sqrt(Math.abs(f * f) + Math.abs(f2 * f2))));
         if (this.mSwiping) {
             onActionMove(motionEvent, this.mForegroundView, this.mCurrentPosition);
             trackSweepDistanceAndDirection(motionEvent);
             return true;
         }
-        if (cos >= 0.5699999928474426d) {
+        if (dCos >= 0.5699999928474426d) {
             return false;
         }
         onActionMove(motionEvent, this.mForegroundView, this.mCurrentPosition);
@@ -367,9 +344,9 @@ abstract class SemAbsSweepListAnimator {
     }
 
     protected BitmapDrawable getBitmapDrawableFromView(View view) {
-        Bitmap createBitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
-        view.draw(new Canvas(createBitmap));
-        BitmapDrawable bitmapDrawable = new BitmapDrawable(this.mListView.getResources(), createBitmap);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
+        view.draw(new Canvas(bitmapCreateBitmap));
+        BitmapDrawable bitmapDrawable = new BitmapDrawable(this.mListView.getResources(), bitmapCreateBitmap);
         bitmapDrawable.setBounds(new Rect(view.getLeft(), view.getTop(), view.getRight(), view.getBottom()));
         return bitmapDrawable;
     }

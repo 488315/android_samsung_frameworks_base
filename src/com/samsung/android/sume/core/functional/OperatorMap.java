@@ -93,10 +93,10 @@ public class OperatorMap implements Operator {
         }
 
         static /* synthetic */ float lambda$new$2(MutableMediaFormat mutableMediaFormat, final MediaFormat mediaFormat, OpPriorityCompute opPriorityCompute) {
-            boolean allMatch = Arrays.stream(new String[]{"split-type", "merge-type"}).map(new Function() { // from class: com.samsung.android.sume.core.functional.OperatorMap$1$$ExternalSyntheticLambda9
+            boolean zAllMatch = Arrays.stream(new String[]{"split-type", "merge-type"}).map(new Function() { // from class: com.samsung.android.sume.core.functional.OperatorMap$1$$ExternalSyntheticLambda9
                 @Override // java.util.function.Function
                 public final Object apply(Object obj) {
-                    return OperatorMap.AnonymousClass1.lambda$new$0(MediaFormat.this, (String) obj);
+                    return OperatorMap.AnonymousClass1.lambda$new$0(mediaFormat, (String) obj);
                 }
             }).allMatch(new Predicate() { // from class: com.samsung.android.sume.core.functional.OperatorMap$1$$ExternalSyntheticLambda10
                 @Override // java.util.function.Predicate
@@ -106,7 +106,7 @@ public class OperatorMap implements Operator {
             });
             boolean z = mutableMediaFormat.size() != 0;
             boolean z2 = mediaFormat.size() != 0;
-            if (!allMatch || !z || !z2) {
+            if (!zAllMatch || !z || !z2) {
                 return -1.0f;
             }
             if (mutableMediaFormat.getCols() == mediaFormat.getCols() && mutableMediaFormat.getRows() == mediaFormat.getRows()) {
@@ -173,39 +173,39 @@ public class OperatorMap implements Operator {
     public MutableMediaBuffer run(MediaBuffer mediaBuffer, final MutableMediaBuffer mutableMediaBuffer) throws UnsupportedOperationException {
         final MutableMediaFormat mutableFormat = mediaBuffer.getFormat().toMutableFormat();
         if (!this.usePersistentFormat || this.processorList == null) {
-            final HashMap hashMap = new HashMap();
+            final HashMap map = new HashMap();
             this.processorMap.values().forEach(new Consumer() { // from class: com.samsung.android.sume.core.functional.OperatorMap$$ExternalSyntheticLambda3
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    OperatorMap.lambda$run$0(MutableMediaFormat.this, mutableMediaBuffer, hashMap, (Operator) obj);
+                    OperatorMap.lambda$run$0(mutableFormat, mutableMediaBuffer, map, (Operator) obj);
                 }
             });
-            this.processorList = (List) hashMap.entrySet().stream().sorted(Map.Entry.comparingByKey()).map(new OperatorMap$$ExternalSyntheticLambda4()).collect(Collectors.toList());
+            this.processorList = (List) map.entrySet().stream().sorted(Map.Entry.comparingByKey()).map(new OperatorMap$$ExternalSyntheticLambda4()).collect(Collectors.toList());
         }
-        MutableMediaBuffer mutableOf = MediaBuffer.mutableOf(mediaBuffer);
+        MutableMediaBuffer mutableMediaBufferMutableOf = MediaBuffer.mutableOf(mediaBuffer);
         Iterator<Operator> it = this.processorList.iterator();
         while (it.hasNext()) {
             try {
-                it.next().run((MediaBuffer) mutableOf, mutableMediaBuffer);
-                MediaBuffer moveTo = mutableMediaBuffer.moveTo(mutableOf);
-                if (moveTo != mediaBuffer && moveTo != mutableMediaBuffer.get()) {
-                    moveTo.release();
+                it.next().run((MediaBuffer) mutableMediaBufferMutableOf, mutableMediaBuffer);
+                MediaBuffer mediaBufferMoveTo = mutableMediaBuffer.moveTo(mutableMediaBufferMutableOf);
+                if (mediaBufferMoveTo != mediaBuffer && mediaBufferMoveTo != mutableMediaBuffer.get()) {
+                    mediaBufferMoveTo.release();
                 }
             } catch (UnsupportedOperationException unused) {
                 Log.d(TAG, "restore format:\nformat=" + mutableMediaBuffer + "\nibuf=" + mediaBuffer);
             }
         }
         if (mutableMediaBuffer.isEmpty()) {
-            mutableMediaBuffer.put((MediaBuffer) mutableOf);
+            mutableMediaBuffer.put((MediaBuffer) mutableMediaBufferMutableOf);
         }
         return mutableMediaBuffer;
     }
 
     /* JADX WARN: Multi-variable type inference failed */
     static /* synthetic */ void lambda$run$0(MutableMediaFormat mutableMediaFormat, MutableMediaBuffer mutableMediaBuffer, Map map, Operator operator) {
-        float compute = ((OpPriorityComputable) operator).compute(mutableMediaFormat, mutableMediaBuffer.getFormat());
-        if (compute != -1.0f) {
-            map.put(Float.valueOf(compute), operator);
+        float fCompute = ((OpPriorityComputable) operator).compute(mutableMediaFormat, mutableMediaBuffer.getFormat());
+        if (fCompute != -1.0f) {
+            map.put(Float.valueOf(fCompute), operator);
         }
     }
 
@@ -220,7 +220,7 @@ public class OperatorMap implements Operator {
         }).forEach(new Consumer() { // from class: com.samsung.android.sume.core.functional.OperatorMap$$ExternalSyntheticLambda6
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                OperatorMap.this.m9575x20aa76dd((OpPriorityComputable) obj);
+                this.f$0.m9588x20aa76dd((OpPriorityComputable) obj);
             }
         });
     }
@@ -231,7 +231,7 @@ public class OperatorMap implements Operator {
     }
 
     /* renamed from: lambda$config$2$com-samsung-android-sume-core-functional-OperatorMap, reason: not valid java name */
-    /* synthetic */ void m9575x20aa76dd(OpPriorityComputable opPriorityComputable) {
+    /* synthetic */ void m9588x20aa76dd(OpPriorityComputable opPriorityComputable) {
         opPriorityComputable.setComputeBridge(priorityCheckMap.get(opPriorityComputable.getType()), this.priorityCompute);
     }
 
@@ -245,9 +245,7 @@ public class OperatorMap implements Operator {
         }, new Function() { // from class: com.samsung.android.sume.core.functional.OperatorMap$$ExternalSyntheticLambda1
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                Float valueOf;
-                valueOf = Float.valueOf(((OpPriorityComputable.ComputeBridge) ((Map.Entry) obj).getValue()).compute(MutableMediaFormat.this, mediaFormat, opPriorityByDataSize));
-                return valueOf;
+                return Float.valueOf(((OpPriorityComputable.ComputeBridge) ((Map.Entry) obj).getValue()).compute(mutableMediaFormat, mediaFormat, opPriorityByDataSize));
             }
         }))).entrySet().stream().filter(new Predicate() { // from class: com.samsung.android.sume.core.functional.OperatorMap$$ExternalSyntheticLambda2
             @Override // java.util.function.Predicate

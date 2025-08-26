@@ -1,6 +1,7 @@
 package com.android.wm.shell.pip.phone;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.graphics.Region;
 import android.os.Bundle;
@@ -22,7 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PipAccessibilityInteractionConnection {
     public List mAccessibilityNodeInfoList;
@@ -42,11 +42,9 @@ public class PipAccessibilityInteractionConnection {
     public final Rect mTmpBounds = new Rect();
     public final PipAccessibilityInteractionConnectionImpl mConnectionImpl = new PipAccessibilityInteractionConnectionImpl(this, 0);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface AccessibilityCallbacks {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PipAccessibilityInteractionConnectionImpl extends IAccessibilityInteractionConnection.Stub {
         public /* synthetic */ PipAccessibilityInteractionConnectionImpl(PipAccessibilityInteractionConnection pipAccessibilityInteractionConnection, int i) {
             this();
@@ -55,17 +53,13 @@ public class PipAccessibilityInteractionConnection {
         public final void findAccessibilityNodeInfoByAccessibilityId(final long j, final Region region, final int i, final IAccessibilityInteractionConnectionCallback iAccessibilityInteractionConnectionCallback, final int i2, final int i3, final long j2, final MagnificationSpec magnificationSpec, float[] fArr, final Bundle bundle) {
             PipAccessibilityInteractionConnection.this.mMainExcutor.execute(new Runnable(j, region, i, iAccessibilityInteractionConnectionCallback, i2, i3, j2, magnificationSpec, bundle) { // from class: com.android.wm.shell.pip.phone.PipAccessibilityInteractionConnection$PipAccessibilityInteractionConnectionImpl$$ExternalSyntheticLambda0
                 public final /* synthetic */ long f$1;
+                public final /* synthetic */ Region f$2;
                 public final /* synthetic */ int f$3;
                 public final /* synthetic */ IAccessibilityInteractionConnectionCallback f$4;
 
-                {
-                    this.f$3 = i;
-                    this.f$4 = iAccessibilityInteractionConnectionCallback;
-                }
-
                 @Override // java.lang.Runnable
                 public final void run() {
-                    PipAccessibilityInteractionConnection.PipAccessibilityInteractionConnectionImpl pipAccessibilityInteractionConnectionImpl = PipAccessibilityInteractionConnection.PipAccessibilityInteractionConnectionImpl.this;
+                    PipAccessibilityInteractionConnection.PipAccessibilityInteractionConnectionImpl pipAccessibilityInteractionConnectionImpl = this.f$0;
                     long j3 = this.f$1;
                     int i4 = this.f$3;
                     IAccessibilityInteractionConnectionCallback iAccessibilityInteractionConnectionCallback2 = this.f$4;
@@ -104,8 +98,8 @@ public class PipAccessibilityInteractionConnection {
                 public final /* synthetic */ IAccessibilityInteractionConnectionCallback f$5;
 
                 @Override // java.lang.Runnable
-                public final void run() {
-                    PipAccessibilityInteractionConnection.PipAccessibilityInteractionConnectionImpl pipAccessibilityInteractionConnectionImpl = PipAccessibilityInteractionConnection.PipAccessibilityInteractionConnectionImpl.this;
+                public final void run() throws Resources.NotFoundException {
+                    PipAccessibilityInteractionConnection.PipAccessibilityInteractionConnectionImpl pipAccessibilityInteractionConnectionImpl = this.f$0;
                     long j3 = this.f$1;
                     int i5 = this.f$2;
                     Bundle bundle2 = this.f$3;
@@ -117,11 +111,11 @@ public class PipAccessibilityInteractionConnection {
                     if (j3 == AccessibilityNodeInfo.ROOT_NODE_ID) {
                         PipBoundsState pipBoundsState = pipAccessibilityInteractionConnection.mPipBoundsState;
                         if (i5 == R.id.action_pip_resize) {
-                            int width = pipBoundsState.getBounds().width();
-                            int width2 = pipAccessibilityInteractionConnection.mNormalBounds.width();
+                            int iWidth = pipBoundsState.getBounds().width();
+                            int iWidth2 = pipAccessibilityInteractionConnection.mNormalBounds.width();
                             PipTaskOrganizer pipTaskOrganizer = pipAccessibilityInteractionConnection.mTaskOrganizer;
                             PipSnapAlgorithm pipSnapAlgorithm = pipAccessibilityInteractionConnection.mSnapAlgorithm;
-                            if (width == width2 && pipBoundsState.getBounds().height() == pipAccessibilityInteractionConnection.mNormalBounds.height()) {
+                            if (iWidth == iWidth2 && pipBoundsState.getBounds().height() == pipAccessibilityInteractionConnection.mNormalBounds.height()) {
                                 PipSnapAlgorithm.applySnapFraction(pipAccessibilityInteractionConnection.mExpandedBounds, pipAccessibilityInteractionConnection.mExpandedMovementBounds, pipSnapAlgorithm.getSnapFraction(0, pipBoundsState.getBounds(), pipAccessibilityInteractionConnection.mNormalMovementBounds));
                                 final int i7 = 0;
                                 pipTaskOrganizer.scheduleFinishResizePip(pipAccessibilityInteractionConnection.mExpandedBounds, 0, new Consumer() { // from class: com.android.wm.shell.pip.phone.PipAccessibilityInteractionConnection$$ExternalSyntheticLambda0
@@ -170,8 +164,8 @@ public class PipAccessibilityInteractionConnection {
                                 PipBoundsState pipBoundsState2 = pipMotionHelper.mPipBoundsState;
                                 pipBoundsState2.mPipDisplayLayoutState.getDisplayLayout();
                                 int i9 = pipBoundsState2.getBounds().left == pipBoundsState2.mMovementBounds.left ? 1 : 2;
-                                float width3 = i9 == 1 ? (pipBoundsState2.mStashOffset - pipBoundsState2.getBounds().width()) + pipBoundsState2.getStashInsets().left : (pipBoundsState2.mPipDisplayLayoutState.getDisplayBounds().right - pipBoundsState2.mStashOffset) - pipBoundsState2.getStashInsets().right;
-                                rect.set((int) width3, pipBoundsState2.getBounds().top, (int) (width3 + pipBoundsState2.getBounds().width()), pipBoundsState2.getBounds().bottom);
+                                float fWidth = i9 == 1 ? (pipBoundsState2.mStashOffset - pipBoundsState2.getBounds().width()) + pipBoundsState2.getStashInsets().left : (pipBoundsState2.mPipDisplayLayoutState.getDisplayBounds().right - pipBoundsState2.mStashOffset) - pipBoundsState2.getStashInsets().right;
+                                rect.set((int) fWidth, pipBoundsState2.getBounds().top, (int) (fWidth + pipBoundsState2.getBounds().width()), pipBoundsState2.getBounds().bottom);
                                 pipMotionHelper.resizeAndAnimatePipUnchecked$1(rect);
                                 pipBoundsState2.setStashed(i9, false);
                             } else if (i5 == R.id.action_pip_unstash) {
@@ -238,20 +232,20 @@ public class PipAccessibilityInteractionConnection {
             this.mAccessibilityNodeInfoList = new ArrayList(1);
         }
         Context context = this.mContext;
-        AccessibilityNodeInfo obtain = AccessibilityNodeInfo.obtain();
-        obtain.setSourceNodeId(AccessibilityNodeInfo.ROOT_NODE_ID, -3);
-        obtain.addAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_CLICK);
-        obtain.addAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_DISMISS);
-        obtain.addAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_MOVE_WINDOW);
-        obtain.addAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_EXPAND);
-        obtain.addAction(new AccessibilityNodeInfo.AccessibilityAction(R.id.action_pip_resize, context.getString(R.string.accessibility_action_pip_resize)));
-        obtain.addAction(new AccessibilityNodeInfo.AccessibilityAction(R.id.action_pip_stash, context.getString(R.string.accessibility_action_pip_stash)));
-        obtain.addAction(new AccessibilityNodeInfo.AccessibilityAction(R.id.action_pip_unstash, context.getString(R.string.accessibility_action_pip_unstash)));
-        obtain.setImportantForAccessibility(true);
-        obtain.setClickable(true);
-        obtain.setVisibleToUser(true);
+        AccessibilityNodeInfo accessibilityNodeInfoObtain = AccessibilityNodeInfo.obtain();
+        accessibilityNodeInfoObtain.setSourceNodeId(AccessibilityNodeInfo.ROOT_NODE_ID, -3);
+        accessibilityNodeInfoObtain.addAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_CLICK);
+        accessibilityNodeInfoObtain.addAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_DISMISS);
+        accessibilityNodeInfoObtain.addAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_MOVE_WINDOW);
+        accessibilityNodeInfoObtain.addAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_EXPAND);
+        accessibilityNodeInfoObtain.addAction(new AccessibilityNodeInfo.AccessibilityAction(R.id.action_pip_resize, context.getString(R.string.accessibility_action_pip_resize)));
+        accessibilityNodeInfoObtain.addAction(new AccessibilityNodeInfo.AccessibilityAction(R.id.action_pip_stash, context.getString(R.string.accessibility_action_pip_stash)));
+        accessibilityNodeInfoObtain.addAction(new AccessibilityNodeInfo.AccessibilityAction(R.id.action_pip_unstash, context.getString(R.string.accessibility_action_pip_unstash)));
+        accessibilityNodeInfoObtain.setImportantForAccessibility(true);
+        accessibilityNodeInfoObtain.setClickable(true);
+        accessibilityNodeInfoObtain.setVisibleToUser(true);
         this.mAccessibilityNodeInfoList.clear();
-        this.mAccessibilityNodeInfoList.add(obtain);
+        this.mAccessibilityNodeInfoList.add(accessibilityNodeInfoObtain);
         return this.mAccessibilityNodeInfoList;
     }
 }

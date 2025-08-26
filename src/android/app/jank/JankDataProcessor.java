@@ -65,20 +65,20 @@ public class JankDataProcessor {
         if (this.mPendingJankStats.size() > 25) {
             return;
         }
-        PendingJankStat acquire = this.mPendingJankStatsPool.acquire();
-        if (acquire == null) {
-            acquire = new PendingJankStat();
+        PendingJankStat pendingJankStatAcquire = this.mPendingJankStatsPool.acquire();
+        if (pendingJankStatAcquire == null) {
+            pendingJankStatAcquire = new PendingJankStat();
         }
-        acquire.clearStats();
-        acquire.mActivityName = str2;
-        acquire.mUid = appJankStats.getUid();
-        acquire.mWidgetId = appJankStats.getWidgetId();
-        acquire.mWidgetCategory = appJankStats.getWidgetCategory();
-        acquire.mWidgetState = appJankStats.getWidgetState();
-        acquire.mTotalFrames = appJankStats.getTotalFrameCount();
-        acquire.mJankyFrames = appJankStats.getJankyFrameCount();
-        mergeOverrunHistograms(acquire.mFrameOverrunBuckets, appJankStats.getRelativeFrameTimeHistogram().getBucketCounters());
-        this.mPendingJankStats.put(str, acquire);
+        pendingJankStatAcquire.clearStats();
+        pendingJankStatAcquire.mActivityName = str2;
+        pendingJankStatAcquire.mUid = appJankStats.getUid();
+        pendingJankStatAcquire.mWidgetId = appJankStats.getWidgetId();
+        pendingJankStatAcquire.mWidgetCategory = appJankStats.getWidgetCategory();
+        pendingJankStatAcquire.mWidgetState = appJankStats.getWidgetState();
+        pendingJankStatAcquire.mTotalFrames = appJankStats.getTotalFrameCount();
+        pendingJankStatAcquire.mJankyFrames = appJankStats.getJankyFrameCount();
+        mergeOverrunHistograms(pendingJankStatAcquire.mFrameOverrunBuckets, appJankStats.getRelativeFrameTimeHistogram().getBucketCounters());
+        this.mPendingJankStats.put(str, pendingJankStatAcquire);
     }
 
     private void mergeOverrunHistograms(int[] iArr, int[] iArr2) {
@@ -108,29 +108,29 @@ public class JankDataProcessor {
     }
 
     private void recordFrameCount(SurfaceControl.JankData jankData, StateTracker.StateData stateData, String str, int i) {
-        PendingJankStat pendingJankStat = this.mPendingJankStats.get(stateData.mStateDataKey);
-        if (pendingJankStat == null) {
+        PendingJankStat pendingJankStatAcquire = this.mPendingJankStats.get(stateData.mStateDataKey);
+        if (pendingJankStatAcquire == null) {
             if (this.mPendingJankStats.size() > 25) {
                 return;
             }
-            pendingJankStat = this.mPendingJankStatsPool.acquire();
-            if (pendingJankStat == null) {
-                pendingJankStat = new PendingJankStat();
+            pendingJankStatAcquire = this.mPendingJankStatsPool.acquire();
+            if (pendingJankStatAcquire == null) {
+                pendingJankStatAcquire = new PendingJankStat();
             }
-            pendingJankStat.clearStats();
-            pendingJankStat.mActivityName = str;
-            pendingJankStat.mUid = i;
-            this.mPendingJankStats.put(stateData.mStateDataKey, pendingJankStat);
+            pendingJankStatAcquire.clearStats();
+            pendingJankStatAcquire.mActivityName = str;
+            pendingJankStatAcquire.mUid = i;
+            this.mPendingJankStats.put(stateData.mStateDataKey, pendingJankStatAcquire);
         }
-        if (pendingJankStat.processedVsyncId == jankData.getVsyncId()) {
+        if (pendingJankStatAcquire.processedVsyncId == jankData.getVsyncId()) {
             return;
         }
-        pendingJankStat.mTotalFrames++;
+        pendingJankStatAcquire.mTotalFrames++;
         if ((jankData.getJankType() & 2) != 0) {
-            pendingJankStat.mJankyFrames++;
+            pendingJankStatAcquire.mJankyFrames++;
         }
-        pendingJankStat.recordFrameOverrun(jankData.getActualAppFrameTimeNanos());
-        pendingJankStat.processedVsyncId = jankData.getVsyncId();
+        pendingJankStatAcquire.recordFrameOverrun(jankData.getActualAppFrameTimeNanos());
+        pendingJankStatAcquire.processedVsyncId = jankData.getVsyncId();
     }
 
     public void logMetricCounts() {
@@ -138,7 +138,7 @@ public class JankDataProcessor {
             this.mPendingJankStats.values().forEach(new Consumer() { // from class: android.app.jank.JankDataProcessor$$ExternalSyntheticLambda0
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    JankDataProcessor.this.lambda$logMetricCounts$0((JankDataProcessor.PendingJankStat) obj);
+                    this.f$0.lambda$logMetricCounts$0((JankDataProcessor.PendingJankStat) obj);
                 }
             });
             this.mPendingJankStats.clear();
@@ -295,8 +295,8 @@ public class JankDataProcessor {
         public void recordFrameOverrun(long j) {
             try {
                 int[] iArr = this.mFrameOverrunBuckets;
-                int indexForFrameOverrun = indexForFrameOverrun(((int) j) / 1000000);
-                iArr[indexForFrameOverrun] = iArr[indexForFrameOverrun] + 1;
+                int iIndexForFrameOverrun = indexForFrameOverrun(((int) j) / 1000000);
+                iArr[iIndexForFrameOverrun] = iArr[iIndexForFrameOverrun] + 1;
             } catch (IndexOutOfBoundsException unused) {
             }
         }

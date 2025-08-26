@@ -34,7 +34,6 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class InstantAppNotifier implements CoreStartable, CommandQueue.Callbacks, KeyguardStateController.Callback {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -48,7 +47,6 @@ public class InstantAppNotifier implements CoreStartable, CommandQueue.Callbacks
     public final ArraySet mCurrentNotifs = new ArraySet();
     public final UserTracker.Callback mUserSwitchListener = new AnonymousClass1();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.notification.InstantAppNotifier$1, reason: invalid class name */
     class AnonymousClass1 implements UserTracker.Callback {
         public AnonymousClass1() {
@@ -59,7 +57,7 @@ public class InstantAppNotifier implements CoreStartable, CommandQueue.Callbacks
             InstantAppNotifier.this.mHandler.post(new Runnable() { // from class: com.android.systemui.statusbar.notification.InstantAppNotifier$1$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    InstantAppNotifier.AnonymousClass1 anonymousClass1 = InstantAppNotifier.AnonymousClass1.this;
+                    InstantAppNotifier.AnonymousClass1 anonymousClass1 = this.f$0;
                     anonymousClass1.getClass();
                     int i2 = InstantAppNotifier.$r8$clinit;
                     InstantAppNotifier.this.updateForegroundInstantApps();
@@ -108,25 +106,25 @@ public class InstantAppNotifier implements CoreStartable, CommandQueue.Callbacks
 
     public final void postInstantAppNotif(String str, int i, ApplicationInfo applicationInfo, NotificationManager notificationManager, int i2) {
         String str2;
-        PendingIntent pendingIntent;
+        PendingIntent activityAsUser;
         Intent intent;
-        PendingIntent pendingIntent2;
+        PendingIntent pendingIntent;
         Notification.Builder builder;
-        ComponentName componentName;
+        ComponentName instantAppInstallerComponent;
         Bundle bundle = new Bundle();
         bundle.putString("android.substName", this.mContext.getString(R.string.instant_apps));
         this.mCurrentNotifs.add(new Pair(str, Integer.valueOf(i)));
         String string = this.mContext.getString(R.string.instant_apps_help_url);
-        boolean isEmpty = string.isEmpty();
-        String string2 = this.mContext.getString(!isEmpty ? R.string.instant_apps_message_with_help : R.string.instant_apps_message);
-        UserHandle of = UserHandle.of(i);
-        Notification.Action build = new Notification.Action.Builder((Icon) null, this.mContext.getString(R.string.app_info), PendingIntent.getActivityAsUser(this.mContext, 0, new Intent("android.settings.APPLICATION_DETAILS_SETTINGS").setData(Uri.fromParts("package", str, null)), 67108864, null, of)).build();
-        if (isEmpty) {
+        boolean zIsEmpty = string.isEmpty();
+        String string2 = this.mContext.getString(!zIsEmpty ? R.string.instant_apps_message_with_help : R.string.instant_apps_message);
+        UserHandle userHandleOf = UserHandle.of(i);
+        Notification.Action actionBuild = new Notification.Action.Builder((Icon) null, this.mContext.getString(R.string.app_info), PendingIntent.getActivityAsUser(this.mContext, 0, new Intent("android.settings.APPLICATION_DETAILS_SETTINGS").setData(Uri.fromParts("package", str, null)), 67108864, null, userHandleOf)).build();
+        if (zIsEmpty) {
             str2 = "android.intent.action.VIEW";
-            pendingIntent = null;
+            activityAsUser = null;
         } else {
             str2 = "android.intent.action.VIEW";
-            pendingIntent = PendingIntent.getActivityAsUser(this.mContext, 0, new Intent("android.intent.action.VIEW").setData(Uri.parse(string)), 67108864, null, of);
+            activityAsUser = PendingIntent.getActivityAsUser(this.mContext, 0, new Intent("android.intent.action.VIEW").setData(Uri.parse(string)), 67108864, null, userHandleOf);
         }
         int i3 = 0;
         List recentTasks = ActivityTaskManager.getInstance().getRecentTasks(5, 0, i);
@@ -144,23 +142,23 @@ public class InstantAppNotifier implements CoreStartable, CommandQueue.Callbacks
         }
         Notification.Builder builder2 = new Notification.Builder(this.mContext, NotificationChannels.INSTANT);
         if (intent == null || !intent.isWebIntent()) {
-            pendingIntent2 = pendingIntent;
+            pendingIntent = activityAsUser;
             builder = builder2;
         } else {
             intent.setComponent(null).setPackage(null).addFlags(Integer.MIN_VALUE).addFlags(268435456);
-            pendingIntent2 = pendingIntent;
-            PendingIntent activityAsUser = PendingIntent.getActivityAsUser(this.mContext, 0, intent, 67108864, ActivityOptions.makeBasic().setPendingIntentCreatorBackgroundActivityStartMode(1).toBundle(), of);
+            pendingIntent = activityAsUser;
+            PendingIntent activityAsUser2 = PendingIntent.getActivityAsUser(this.mContext, 0, intent, 67108864, ActivityOptions.makeBasic().setPendingIntentCreatorBackgroundActivityStartMode(1).toBundle(), userHandleOf);
             try {
-                componentName = AppGlobals.getPackageManager().getInstantAppInstallerComponent();
+                instantAppInstallerComponent = AppGlobals.getPackageManager().getInstantAppInstallerComponent();
             } catch (RemoteException e) {
                 e.rethrowFromSystemServer();
-                componentName = null;
+                instantAppInstallerComponent = null;
             }
-            Notification.Action build2 = new Notification.Action.Builder((Icon) null, this.mContext.getString(R.string.go_to_web), PendingIntent.getActivityAsUser(this.mContext, 0, new Intent().setComponent(componentName).setAction(str2).addCategory("android.intent.category.BROWSABLE").setIdentifier("unique:" + System.currentTimeMillis()).putExtra("android.intent.extra.PACKAGE_NAME", applicationInfo.packageName).putExtra("android.intent.extra.VERSION_CODE", applicationInfo.versionCode & Integer.MAX_VALUE).putExtra("android.intent.extra.LONG_VERSION_CODE", applicationInfo.longVersionCode).putExtra("android.intent.extra.INSTANT_APP_FAILURE", activityAsUser), 67108864, null, of)).build();
+            Notification.Action actionBuild2 = new Notification.Action.Builder((Icon) null, this.mContext.getString(R.string.go_to_web), PendingIntent.getActivityAsUser(this.mContext, 0, new Intent().setComponent(instantAppInstallerComponent).setAction(str2).addCategory("android.intent.category.BROWSABLE").setIdentifier("unique:" + System.currentTimeMillis()).putExtra("android.intent.extra.PACKAGE_NAME", applicationInfo.packageName).putExtra("android.intent.extra.VERSION_CODE", applicationInfo.versionCode & Integer.MAX_VALUE).putExtra("android.intent.extra.LONG_VERSION_CODE", applicationInfo.longVersionCode).putExtra("android.intent.extra.INSTANT_APP_FAILURE", activityAsUser2), 67108864, null, userHandleOf)).build();
             builder = builder2;
-            builder.addAction(build2);
+            builder.addAction(actionBuild2);
         }
-        Notification.Builder color = builder.addExtras(bundle).addAction(build).setContentIntent(pendingIntent2).setColor(this.mContext.getColor(R.color.instant_apps_color));
+        Notification.Builder color = builder.addExtras(bundle).addAction(actionBuild).setContentIntent(pendingIntent).setColor(this.mContext.getColor(R.color.instant_apps_color));
         Context context = this.mContext;
         notificationManager.notifyAsUser(str, 7, color.setContentTitle(context.getString(R.string.instant_apps_title, applicationInfo.loadLabel(context.getPackageManager()))).setLargeIcon(Icon.createWithResource(str, applicationInfo.icon)).setSmallIcon(Icon.createWithResource(this.mContext.getPackageName(), R.drawable.instant_icon)).setContentText(string2).setStyle(new Notification.BigTextStyle().bigText(string2)).setOngoing(true).build(), new UserHandle(i));
     }
@@ -190,7 +188,7 @@ public class InstantAppNotifier implements CoreStartable, CommandQueue.Callbacks
             @Override // java.lang.Runnable
             public final void run() {
                 int windowingMode;
-                final InstantAppNotifier instantAppNotifier = InstantAppNotifier.this;
+                final InstantAppNotifier instantAppNotifier = this.f$0;
                 final NotificationManager notificationManager2 = notificationManager;
                 IPackageManager iPackageManager = packageManager;
                 int i = InstantAppNotifier.$r8$clinit;
@@ -207,7 +205,7 @@ public class InstantAppNotifier implements CoreStartable, CommandQueue.Callbacks
                 arraySet.forEach(new Consumer() { // from class: com.android.systemui.statusbar.notification.InstantAppNotifier$$ExternalSyntheticLambda1
                     @Override // java.util.function.Consumer
                     public final void accept(Object obj) {
-                        InstantAppNotifier instantAppNotifier2 = InstantAppNotifier.this;
+                        InstantAppNotifier instantAppNotifier2 = instantAppNotifier;
                         NotificationManager notificationManager3 = notificationManager2;
                         Pair pair = (Pair) obj;
                         instantAppNotifier2.mCurrentNotifs.remove(pair);

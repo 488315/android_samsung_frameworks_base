@@ -268,14 +268,14 @@ public final class CursorAnchorInfo implements Parcelable {
 
     /* JADX INFO: Access modifiers changed from: private */
     public static CursorAnchorInfo create(Builder builder) {
-        SparseRectFArray build = builder.mCharacterBoundsArrayBuilder != null ? builder.mCharacterBoundsArrayBuilder.build() : null;
+        SparseRectFArray sparseRectFArrayBuild = builder.mCharacterBoundsArrayBuilder != null ? builder.mCharacterBoundsArrayBuilder.build() : null;
         float[] fArr = new float[9];
         if (builder.mMatrixInitialized) {
             System.arraycopy(builder.mMatrixValues, 0, fArr, 0, 9);
         } else {
             Matrix.IDENTITY_MATRIX.getValues(fArr);
         }
-        return new CursorAnchorInfo(builder.mSelectionStart, builder.mSelectionEnd, builder.mComposingTextStart, builder.mComposingText, builder.mInsertionMarkerFlags, builder.mInsertionMarkerHorizontal, builder.mInsertionMarkerTop, builder.mInsertionMarkerBaseline, builder.mInsertionMarkerBottom, build, builder.mEditorBoundsInfo, fArr, Arrays.copyOf(builder.mVisibleLineBounds, builder.mVisibleLineBoundsCount), builder.mTextAppearanceInfo);
+        return new CursorAnchorInfo(builder.mSelectionStart, builder.mSelectionEnd, builder.mComposingTextStart, builder.mComposingText, builder.mInsertionMarkerFlags, builder.mInsertionMarkerHorizontal, builder.mInsertionMarkerTop, builder.mInsertionMarkerBaseline, builder.mInsertionMarkerBottom, sparseRectFArrayBuild, builder.mEditorBoundsInfo, fArr, Arrays.copyOf(builder.mVisibleLineBounds, builder.mVisibleLineBoundsCount), builder.mTextAppearanceInfo);
     }
 
     private CursorAnchorInfo(int i, int i2, int i3, CharSequence charSequence, int i4, float f, float f2, float f3, float f4, SparseRectFArray sparseRectFArray, EditorBoundsInfo editorBoundsInfo, float[] fArr, float[] fArr2, TextAppearanceInfo textAppearanceInfo) {

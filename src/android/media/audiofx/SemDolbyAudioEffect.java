@@ -37,7 +37,7 @@ public class SemDolbyAudioEffect extends AudioEffect {
     public @interface DialogEnhancerType {
     }
 
-    public SemDolbyAudioEffect(UUID uuid, int i, int i2) throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException, RuntimeException {
+    public SemDolbyAudioEffect(UUID uuid, int i, int i2) throws RuntimeException {
         super(uuid, EFFECT_TYPE_NULL, i, i2);
         if (i2 == 0) {
             Log.w(TAG, "WARNING: attaching a SemDolbyAudioEffect to global output mix is deprecated!");

@@ -21,14 +21,10 @@ public class SemEnterpriseDeviceManager {
     }
 
     public static synchronized SemEnterpriseDeviceManager getInstance(Context context) {
-        SemEnterpriseDeviceManager semEnterpriseDeviceManager;
-        synchronized (SemEnterpriseDeviceManager.class) {
-            if (mSemEnterpriseDeviceManager == null && context != null) {
-                mSemEnterpriseDeviceManager = createInstance(context);
-            }
-            semEnterpriseDeviceManager = mSemEnterpriseDeviceManager;
+        if (mSemEnterpriseDeviceManager == null && context != null) {
+            mSemEnterpriseDeviceManager = createInstance(context);
         }
-        return semEnterpriseDeviceManager;
+        return mSemEnterpriseDeviceManager;
     }
 
     public Bundle getApplicationRestrictions(String str) {

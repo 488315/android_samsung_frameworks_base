@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class CastControllerImpl implements CastController {
     public boolean mCallbackRegistered;
@@ -44,11 +43,11 @@ public class CastControllerImpl implements CastController {
             LogLevel logLevel = LogLevel.DEBUG;
             CastControllerLogger$$ExternalSyntheticLambda0 castControllerLogger$$ExternalSyntheticLambda0 = new CastControllerLogger$$ExternalSyntheticLambda0(8);
             LogBuffer logBuffer = castControllerLogger.logger;
-            LogMessage obtain = logBuffer.obtain("CastController", logLevel, castControllerLogger$$ExternalSyntheticLambda0, null);
+            LogMessage logMessageObtain = logBuffer.obtain("CastController", logLevel, castControllerLogger$$ExternalSyntheticLambda0, null);
             CastControllerLogger.Companion.getClass();
-            ((LogMessageImpl) obtain).str1 = CastControllerLogger.Companion.toLogString(routeInfo);
-            logBuffer.commit(obtain);
-            CastControllerImpl.m3084$$Nest$mupdateRemoteDisplays(CastControllerImpl.this);
+            ((LogMessageImpl) logMessageObtain).str1 = CastControllerLogger.Companion.toLogString(routeInfo);
+            logBuffer.commit(logMessageObtain);
+            CastControllerImpl.m3101$$Nest$mupdateRemoteDisplays(CastControllerImpl.this);
         }
 
         @Override // android.media.MediaRouter.SimpleCallback, android.media.MediaRouter.Callback
@@ -58,11 +57,11 @@ public class CastControllerImpl implements CastController {
             LogLevel logLevel = LogLevel.DEBUG;
             CastControllerLogger$$ExternalSyntheticLambda0 castControllerLogger$$ExternalSyntheticLambda0 = new CastControllerLogger$$ExternalSyntheticLambda0(3);
             LogBuffer logBuffer = castControllerLogger.logger;
-            LogMessage obtain = logBuffer.obtain("CastController", logLevel, castControllerLogger$$ExternalSyntheticLambda0, null);
+            LogMessage logMessageObtain = logBuffer.obtain("CastController", logLevel, castControllerLogger$$ExternalSyntheticLambda0, null);
             CastControllerLogger.Companion.getClass();
-            ((LogMessageImpl) obtain).str1 = CastControllerLogger.Companion.toLogString(routeInfo);
-            logBuffer.commit(obtain);
-            CastControllerImpl.m3084$$Nest$mupdateRemoteDisplays(CastControllerImpl.this);
+            ((LogMessageImpl) logMessageObtain).str1 = CastControllerLogger.Companion.toLogString(routeInfo);
+            logBuffer.commit(logMessageObtain);
+            CastControllerImpl.m3101$$Nest$mupdateRemoteDisplays(CastControllerImpl.this);
         }
 
         @Override // android.media.MediaRouter.SimpleCallback, android.media.MediaRouter.Callback
@@ -72,11 +71,11 @@ public class CastControllerImpl implements CastController {
             LogLevel logLevel = LogLevel.DEBUG;
             CastControllerLogger$$ExternalSyntheticLambda0 castControllerLogger$$ExternalSyntheticLambda0 = new CastControllerLogger$$ExternalSyntheticLambda0(5);
             LogBuffer logBuffer = castControllerLogger.logger;
-            LogMessage obtain = logBuffer.obtain("CastController", logLevel, castControllerLogger$$ExternalSyntheticLambda0, null);
+            LogMessage logMessageObtain = logBuffer.obtain("CastController", logLevel, castControllerLogger$$ExternalSyntheticLambda0, null);
             CastControllerLogger.Companion.getClass();
-            ((LogMessageImpl) obtain).str1 = CastControllerLogger.Companion.toLogString(routeInfo);
-            logBuffer.commit(obtain);
-            CastControllerImpl.m3084$$Nest$mupdateRemoteDisplays(CastControllerImpl.this);
+            ((LogMessageImpl) logMessageObtain).str1 = CastControllerLogger.Companion.toLogString(routeInfo);
+            logBuffer.commit(logMessageObtain);
+            CastControllerImpl.m3101$$Nest$mupdateRemoteDisplays(CastControllerImpl.this);
         }
 
         @Override // android.media.MediaRouter.SimpleCallback, android.media.MediaRouter.Callback
@@ -86,13 +85,13 @@ public class CastControllerImpl implements CastController {
             LogLevel logLevel = LogLevel.DEBUG;
             CastControllerLogger$$ExternalSyntheticLambda0 castControllerLogger$$ExternalSyntheticLambda0 = new CastControllerLogger$$ExternalSyntheticLambda0(6);
             LogBuffer logBuffer = castControllerLogger.logger;
-            LogMessage obtain = logBuffer.obtain("CastController", logLevel, castControllerLogger$$ExternalSyntheticLambda0, null);
+            LogMessage logMessageObtain = logBuffer.obtain("CastController", logLevel, castControllerLogger$$ExternalSyntheticLambda0, null);
             CastControllerLogger.Companion.getClass();
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
             logMessageImpl.str1 = CastControllerLogger.Companion.toLogString(routeInfo);
             logMessageImpl.int1 = i;
-            logBuffer.commit(obtain);
-            CastControllerImpl.m3084$$Nest$mupdateRemoteDisplays(CastControllerImpl.this);
+            logBuffer.commit(logMessageObtain);
+            CastControllerImpl.m3101$$Nest$mupdateRemoteDisplays(CastControllerImpl.this);
         }
 
         @Override // android.media.MediaRouter.SimpleCallback, android.media.MediaRouter.Callback
@@ -102,27 +101,27 @@ public class CastControllerImpl implements CastController {
             LogLevel logLevel = LogLevel.DEBUG;
             CastControllerLogger$$ExternalSyntheticLambda0 castControllerLogger$$ExternalSyntheticLambda0 = new CastControllerLogger$$ExternalSyntheticLambda0(4);
             LogBuffer logBuffer = castControllerLogger.logger;
-            LogMessage obtain = logBuffer.obtain("CastController", logLevel, castControllerLogger$$ExternalSyntheticLambda0, null);
+            LogMessage logMessageObtain = logBuffer.obtain("CastController", logLevel, castControllerLogger$$ExternalSyntheticLambda0, null);
             CastControllerLogger.Companion.getClass();
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
             logMessageImpl.str1 = CastControllerLogger.Companion.toLogString(routeInfo);
             logMessageImpl.int1 = i;
-            logBuffer.commit(obtain);
-            CastControllerImpl.m3084$$Nest$mupdateRemoteDisplays(CastControllerImpl.this);
+            logBuffer.commit(logMessageObtain);
+            CastControllerImpl.m3101$$Nest$mupdateRemoteDisplays(CastControllerImpl.this);
         }
     };
 
     /* renamed from: -$$Nest$msetProjection, reason: not valid java name */
-    public static void m3083$$Nest$msetProjection(CastControllerImpl castControllerImpl, MediaProjectionInfo mediaProjectionInfo, boolean z) {
+    public static void m3100$$Nest$msetProjection(CastControllerImpl castControllerImpl, MediaProjectionInfo mediaProjectionInfo, boolean z) {
         boolean z2;
         MediaProjectionInfo mediaProjectionInfo2 = castControllerImpl.mProjection;
         synchronized (castControllerImpl.mProjectionLock) {
             try {
-                boolean equals = Objects.equals(mediaProjectionInfo, castControllerImpl.mProjection);
+                boolean zEquals = Objects.equals(mediaProjectionInfo, castControllerImpl.mProjection);
                 z2 = true;
-                if (z && !equals) {
+                if (z && !zEquals) {
                     castControllerImpl.mProjection = mediaProjectionInfo;
-                } else if (z || !equals) {
+                } else if (z || !zEquals) {
                     z2 = false;
                 } else {
                     castControllerImpl.mProjection = null;
@@ -138,17 +137,17 @@ public class CastControllerImpl implements CastController {
             LogLevel logLevel = LogLevel.DEBUG;
             CastControllerLogger$$ExternalSyntheticLambda0 castControllerLogger$$ExternalSyntheticLambda0 = new CastControllerLogger$$ExternalSyntheticLambda0(7);
             LogBuffer logBuffer = castControllerLogger.logger;
-            LogMessage obtain = logBuffer.obtain("CastController", logLevel, castControllerLogger$$ExternalSyntheticLambda0, null);
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+            LogMessage logMessageObtain = logBuffer.obtain("CastController", logLevel, castControllerLogger$$ExternalSyntheticLambda0, null);
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
             logMessageImpl.str1 = String.valueOf(mediaProjectionInfo2);
             logMessageImpl.str2 = String.valueOf(mediaProjectionInfo3);
-            logBuffer.commit(obtain);
+            logBuffer.commit(logMessageObtain);
             castControllerImpl.fireOnCastDevicesChanged();
         }
     }
 
     /* renamed from: -$$Nest$mupdateRemoteDisplays, reason: not valid java name */
-    public static void m3084$$Nest$mupdateRemoteDisplays(CastControllerImpl castControllerImpl) {
+    public static void m3101$$Nest$mupdateRemoteDisplays(CastControllerImpl castControllerImpl) {
         synchronized (castControllerImpl.mRoutes) {
             try {
                 castControllerImpl.mRoutes.clear();
@@ -182,11 +181,11 @@ public class CastControllerImpl implements CastController {
     public CastControllerImpl(Context context, PackageManager packageManager, DumpManager dumpManager, CastControllerLogger castControllerLogger) {
         ?? r0 = new MediaProjectionManager.Callback() { // from class: com.android.systemui.statusbar.policy.CastControllerImpl.2
             public final void onStart(MediaProjectionInfo mediaProjectionInfo) {
-                CastControllerImpl.m3083$$Nest$msetProjection(CastControllerImpl.this, mediaProjectionInfo, true);
+                CastControllerImpl.m3100$$Nest$msetProjection(CastControllerImpl.this, mediaProjectionInfo, true);
             }
 
             public final void onStop(MediaProjectionInfo mediaProjectionInfo) {
-                CastControllerImpl.m3083$$Nest$msetProjection(CastControllerImpl.this, mediaProjectionInfo, false);
+                CastControllerImpl.m3100$$Nest$msetProjection(CastControllerImpl.this, mediaProjectionInfo, false);
             }
         };
         this.mProjectionCallback = r0;
@@ -283,15 +282,15 @@ public class CastControllerImpl implements CastController {
     }
 
     public final void handleDiscoveryChangeLocked() {
-        boolean isEmpty;
+        boolean zIsEmpty;
         if (this.mCallbackRegistered) {
             this.mMediaRouter.removeCallback(this.mMediaCallback);
             this.mCallbackRegistered = false;
         }
         synchronized (this.mCallbacks) {
-            isEmpty = this.mCallbacks.isEmpty();
+            zIsEmpty = this.mCallbacks.isEmpty();
         }
-        if (isEmpty) {
+        if (zIsEmpty) {
             return;
         }
         this.mMediaRouter.addCallback(4, this.mMediaCallback, 8);
@@ -316,9 +315,9 @@ public class CastControllerImpl implements CastController {
         LogLevel logLevel = LogLevel.DEBUG;
         CastControllerLogger$$ExternalSyntheticLambda0 castControllerLogger$$ExternalSyntheticLambda0 = new CastControllerLogger$$ExternalSyntheticLambda0(1);
         LogBuffer logBuffer = castControllerLogger.logger;
-        LogMessage obtain = logBuffer.obtain("CastController", logLevel, castControllerLogger$$ExternalSyntheticLambda0, null);
-        ((LogMessageImpl) obtain).bool1 = z;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("CastController", logLevel, castControllerLogger$$ExternalSyntheticLambda0, null);
+        ((LogMessageImpl) logMessageObtain).bool1 = z;
+        logBuffer.commit(logMessageObtain);
         if (!z) {
             logBuffer.commit(logBuffer.obtain("CastController", logLevel, new CastControllerLogger$$ExternalSyntheticLambda0(2), null));
             this.mMediaRouter.getFallbackRoute().select();
@@ -329,8 +328,8 @@ public class CastControllerImpl implements CastController {
             this.mProjectionManager.stopActiveProjection(i);
             return;
         }
-        LogMessage obtain2 = logBuffer.obtain("CastController", LogLevel.WARNING, new CastControllerLogger$$ExternalSyntheticLambda0(0), null);
-        ((LogMessageImpl) obtain2).str1 = mediaProjectionInfo.toString();
-        logBuffer.commit(obtain2);
+        LogMessage logMessageObtain2 = logBuffer.obtain("CastController", LogLevel.WARNING, new CastControllerLogger$$ExternalSyntheticLambda0(0), null);
+        ((LogMessageImpl) logMessageObtain2).str1 = mediaProjectionInfo.toString();
+        logBuffer.commit(logMessageObtain2);
     }
 }

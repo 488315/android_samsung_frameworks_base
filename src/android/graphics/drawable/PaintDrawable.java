@@ -43,13 +43,13 @@ public class PaintDrawable extends ShapeDrawable {
     @Override // android.graphics.drawable.ShapeDrawable
     protected boolean inflateTag(String str, Resources resources, XmlPullParser xmlPullParser, AttributeSet attributeSet) {
         if (str.equals("corners")) {
-            TypedArray obtainAttributes = resources.obtainAttributes(attributeSet, R.styleable.DrawableCorners);
-            int dimensionPixelSize = obtainAttributes.getDimensionPixelSize(0, 0);
+            TypedArray typedArrayObtainAttributes = resources.obtainAttributes(attributeSet, R.styleable.DrawableCorners);
+            int dimensionPixelSize = typedArrayObtainAttributes.getDimensionPixelSize(0, 0);
             setCornerRadius(dimensionPixelSize);
-            int dimensionPixelSize2 = obtainAttributes.getDimensionPixelSize(1, dimensionPixelSize);
-            int dimensionPixelSize3 = obtainAttributes.getDimensionPixelSize(2, dimensionPixelSize);
-            int dimensionPixelSize4 = obtainAttributes.getDimensionPixelSize(3, dimensionPixelSize);
-            int dimensionPixelSize5 = obtainAttributes.getDimensionPixelSize(4, dimensionPixelSize);
+            int dimensionPixelSize2 = typedArrayObtainAttributes.getDimensionPixelSize(1, dimensionPixelSize);
+            int dimensionPixelSize3 = typedArrayObtainAttributes.getDimensionPixelSize(2, dimensionPixelSize);
+            int dimensionPixelSize4 = typedArrayObtainAttributes.getDimensionPixelSize(3, dimensionPixelSize);
+            int dimensionPixelSize5 = typedArrayObtainAttributes.getDimensionPixelSize(4, dimensionPixelSize);
             if (dimensionPixelSize2 != dimensionPixelSize || dimensionPixelSize3 != dimensionPixelSize || dimensionPixelSize4 != dimensionPixelSize || dimensionPixelSize5 != dimensionPixelSize) {
                 float f = dimensionPixelSize2;
                 float f2 = dimensionPixelSize3;
@@ -57,7 +57,7 @@ public class PaintDrawable extends ShapeDrawable {
                 float f4 = dimensionPixelSize5;
                 setCornerRadii(new float[]{f, f, f2, f2, f3, f3, f4, f4});
             }
-            obtainAttributes.recycle();
+            typedArrayObtainAttributes.recycle();
             return true;
         }
         return super.inflateTag(str, resources, xmlPullParser, attributeSet);

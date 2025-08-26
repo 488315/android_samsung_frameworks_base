@@ -4,8 +4,8 @@ import gov.nist.javax.sip.header.AddressParametersHeader;
 import gov.nist.javax.sip.header.RecordRoute;
 import gov.nist.javax.sip.header.RecordRouteList;
 import gov.nist.javax.sip.header.SIPHeader;
+import java.text.ParseException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class RecordRouteParser extends AddressParametersParser {
     public RecordRouteParser(String str) {
@@ -13,8 +13,8 @@ public class RecordRouteParser extends AddressParametersParser {
     }
 
     @Override // gov.nist.javax.sip.parser.HeaderParser
-    public final SIPHeader parse() {
-        char lookAhead;
+    public final SIPHeader parse() throws ParseException {
+        char cLookAhead;
         RecordRouteList recordRouteList = new RecordRouteList();
         this.lexer.match(2092);
         this.lexer.SPorHT();
@@ -25,14 +25,14 @@ public class RecordRouteParser extends AddressParametersParser {
             parse((AddressParametersHeader) recordRoute);
             recordRouteList.add((SIPHeader) recordRoute);
             this.lexer.SPorHT();
-            lookAhead = this.lexer.lookAhead(0);
-            if (lookAhead != ',') {
+            cLookAhead = this.lexer.lookAhead(0);
+            if (cLookAhead != ',') {
                 break;
             }
             this.lexer.match(44);
             this.lexer.SPorHT();
         }
-        if (lookAhead == '\n') {
+        if (cLookAhead == '\n') {
             return recordRouteList;
         }
         throw createParseException("unexpected char");

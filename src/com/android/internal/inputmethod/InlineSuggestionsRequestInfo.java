@@ -89,12 +89,12 @@ public final class InlineSuggestionsRequestInfo implements Parcelable {
     InlineSuggestionsRequestInfo(Parcel parcel) {
         ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
         AutofillId autofillId = (AutofillId) parcel.readTypedObject(AutofillId.CREATOR);
-        Bundle readBundle = parcel.readBundle();
+        Bundle bundle = parcel.readBundle();
         this.mComponentName = componentName;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) componentName);
         this.mAutofillId = autofillId;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) autofillId);
-        this.mUiExtras = readBundle;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readBundle);
+        this.mUiExtras = bundle;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) bundle);
     }
 }

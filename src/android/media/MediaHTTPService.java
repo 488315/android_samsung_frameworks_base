@@ -26,17 +26,17 @@ public class MediaHTTPService extends IMediaHTTPService.Stub {
     public IMediaHTTPConnection makeHTTPConnection() {
         synchronized (this.mCookieStoreInitializedLock) {
             if (!this.mCookieStoreInitialized) {
-                CookieHandler cookieHandler = CookieHandler.getDefault();
-                if (cookieHandler == null) {
-                    cookieHandler = new CookieManager();
-                    CookieHandler.setDefault(cookieHandler);
-                    Log.v(TAG, "makeHTTPConnection: CookieManager created: " + cookieHandler);
+                CookieHandler cookieManager = CookieHandler.getDefault();
+                if (cookieManager == null) {
+                    cookieManager = new CookieManager();
+                    CookieHandler.setDefault(cookieManager);
+                    Log.v(TAG, "makeHTTPConnection: CookieManager created: " + cookieManager);
                 } else {
-                    Log.v(TAG, "makeHTTPConnection: CookieHandler (" + cookieHandler + ") exists.");
+                    Log.v(TAG, "makeHTTPConnection: CookieHandler (" + cookieManager + ") exists.");
                 }
                 if (this.mCookies != null) {
-                    if (cookieHandler instanceof CookieManager) {
-                        CookieStore cookieStore = ((CookieManager) cookieHandler).getCookieStore();
+                    if (cookieManager instanceof CookieManager) {
+                        CookieStore cookieStore = ((CookieManager) cookieManager).getCookieStore();
                         Iterator<HttpCookie> it = this.mCookies.iterator();
                         while (it.hasNext()) {
                             try {
@@ -50,7 +50,7 @@ public class MediaHTTPService extends IMediaHTTPService.Stub {
                     }
                 }
                 this.mCookieStoreInitialized = true;
-                Log.v(TAG, "makeHTTPConnection(" + this + "): cookieHandler: " + cookieHandler + " Cookies: " + this.mCookies);
+                Log.v(TAG, "makeHTTPConnection(" + this + "): cookieHandler: " + cookieManager + " Cookies: " + this.mCookies);
             }
         }
         return new MediaHTTPConnection();

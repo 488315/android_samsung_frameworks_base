@@ -5,7 +5,6 @@ import android.provider.BaseColumns;
 import com.sec.ims.configuration.DATA;
 import java.util.HashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ImsSettings {
     public static final String AUTHORITY = "com.sec.ims.settings";
@@ -14,24 +13,20 @@ public class ImsSettings {
     public static final String TYPE_INT = "INT";
     public static final String TYPE_TEXT = "TEXT";
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DmConfigTable {
         public static final Uri CONTENT_URI = Uri.parse(DATA.URI.DMCONFIG_PROVIDER);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DnsQueryTable implements BaseColumns {
         public static final Uri CONTENT_URI = Uri.parse("content://com.sec.ims.settings/dnsblock");
         public static final String DNS_BLOCK_ENABLE = "DNS_BLOCK_ENABLE";
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class GcfConfigTable implements BaseColumns {
         public static final Uri CONTENT_URI = Uri.parse("content://com.sec.ims.settings/gcfconfig");
         public static final String GCF_CONFIG_ENABLE = "GCF_CONFIG_ENABLE";
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class GlobalTable implements BaseColumns {
         public static final Uri CONTENT_URI = Uri.parse("content://com.sec.ims.settings/global");
         public static final String DM_APP_ID = "dm_app_id";
@@ -51,27 +46,23 @@ public class ImsSettings {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class IdcConfigTable implements BaseColumns {
         public static final Uri CONTENT_URI = Uri.parse("content://com.sec.ims.settings/idcconfig");
         public static final String IDC_APPDATA_PROCESS_MODE = "IDC_APPDATA_PROCESS_MODE";
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ImsServiceSwitchTable {
         public static final String ENABLED = "enabled";
         public static final String NAME = "name";
         public static final String[] PROJECTION = {"name", "enabled"};
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ImsUserSettingTable {
         public static final String NAME = "name";
         public static final String[] PROJECTION = {"name", "value"};
         public static final String VALUE = "value";
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class MDMN {
         public static final String DEVICE_GROUP = "DeviceGroup";
         public static final String JANSKY = "Jansky";
@@ -87,7 +78,6 @@ public class ImsSettings {
         public static final String V4B = "V4B";
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ProfileIdTable implements BaseColumns {
         public static final String MCCMNC = "mccmnc";
         public static final String MNO_NAME = "mnoname";
@@ -96,10 +86,10 @@ public class ImsSettings {
         private static final HashMap<String, String> mTableMap;
 
         static {
-            HashMap<String, String> hashMap = new HashMap<>();
-            mTableMap = hashMap;
-            hashMap.put("_id", "INTEGER PRIMARY KEY");
-            hashMap.put("mccmnc", ImsSettings.TYPE_TEXT);
+            HashMap<String, String> map = new HashMap<>();
+            mTableMap = map;
+            map.put("_id", "INTEGER PRIMARY KEY");
+            map.put("mccmnc", ImsSettings.TYPE_TEXT);
         }
 
         private ProfileIdTable() {
@@ -110,7 +100,6 @@ public class ImsSettings {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ProfileTable implements BaseColumns {
         public static final Uri CONTENT_URI = Uri.parse("content://com.sec.ims.settings/profile");
         public static final String DOMAIN = "domain";

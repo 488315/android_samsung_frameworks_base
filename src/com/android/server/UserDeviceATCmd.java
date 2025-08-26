@@ -45,10 +45,9 @@ public class UserDeviceATCmd implements IWorkOnAt {
     public String processCmd(String str) {
         String str2;
         String str3;
-        String str4;
-        String[] parsingParam = parsingParam(str);
+        String[] strArrParsingParam = parsingParam(str);
         String[] strArr = {"0,0,0,0", "1,0,0,0", "0,1,0,0", "0,2,0,0"};
-        if (parsingParam == null) {
+        if (strArrParsingParam == null) {
             Slog.i(TAG, "processCmd: params is null");
             return AT_RESPONSE_INVALID_PARAM;
         }
@@ -62,50 +61,42 @@ public class UserDeviceATCmd implements IWorkOnAt {
             return AT_RESPONSE_CONN_FAILED;
         }
         try {
-            String str5 = parsingParam[0] + ",";
-            String str6 = strArr[0];
-            if (str6.equals(str.substring(0, str6.length()))) {
+            String str4 = strArrParsingParam[0] + ",";
+            String str5 = strArr[0];
+            if (str5.equals(str.substring(0, str5.length()))) {
                 Slog.i(TAG, "AT+URDEVICE=0,0,0,0");
                 if (this.mEMMgr.removeToken() == 1) {
-                    str4 = str5 + "OK";
+                    str3 = str4 + "OK";
                 } else {
-                    str4 = str5 + "NG";
+                    str3 = str4 + "NG";
                 }
-                String str7 = str4;
+                String str6 = str3;
                 Slog.i(TAG, "0,0,0,0 is complete.");
-                return str7;
+                return str6;
             }
-            String str8 = strArr[1];
-            if (str8.equals(str.substring(0, str8.length()))) {
+            String str7 = strArr[1];
+            if (str7.equals(str.substring(0, str7.length()))) {
                 Slog.i(TAG, "AT+URDEVICE=1,0,0,0");
-                String str9 = "0";
-                String str10 = SystemProperties.get(EM_PROPERTY);
-                if (!str10.equals(EM_PROPERTY_STATE_USR) && !str10.equals(EM_PROPERTY_STATE_USR_WITH_EM)) {
-                    if (str10.equals(EM_PROPERTY_STATE_DEV)) {
-                        str9 = "1";
-                    }
-                    str3 = "NONE";
-                    if (Build.VERSION.DEVICE_INITIAL_SDK_INT < 28 && this.mEMMgr.isTokenInstalled() == 1) {
-                        str3 = AT_RESPONSE_EXIST_EM_TOKEN;
-                    }
-                    String str11 = str5 + makeResCmd(str9, str3);
-                    Slog.i(TAG, "1,0,0,0 is complete.");
-                    return str11;
+                String str8 = "0";
+                String str9 = SystemProperties.get(EM_PROPERTY);
+                if (str9.equals(EM_PROPERTY_STATE_USR) || str9.equals(EM_PROPERTY_STATE_USR_WITH_EM)) {
+                    str8 = AT_RESPONSE_USR;
+                } else if (str9.equals(EM_PROPERTY_STATE_DEV)) {
+                    str8 = "1";
                 }
-                str9 = AT_RESPONSE_USR;
-                str3 = "NONE";
-                if (Build.VERSION.DEVICE_INITIAL_SDK_INT < 28) {
-                    str3 = AT_RESPONSE_EXIST_EM_TOKEN;
+                String str10 = "NONE";
+                if (Build.VERSION.DEVICE_INITIAL_SDK_INT < 28 && this.mEMMgr.isTokenInstalled() == 1) {
+                    str10 = AT_RESPONSE_EXIST_EM_TOKEN;
                 }
-                String str112 = str5 + makeResCmd(str9, str3);
+                String str11 = str4 + makeResCmd(str8, str10);
                 Slog.i(TAG, "1,0,0,0 is complete.");
-                return str112;
+                return str11;
             }
             String str12 = strArr[2];
             if (str12.equals(str.substring(0, str12.length()))) {
                 Slog.i(TAG, "AT+URDEVICE=0,1,0,0");
                 SystemProperties.set(ANDROID_RB_PROPERTY, "reboot,em_mode_force_user");
-                String str13 = str5 + "OK";
+                String str13 = str4 + "OK";
                 Slog.i(TAG, "0,1,0,0 is complete.");
                 return str13;
             }
@@ -113,15 +104,15 @@ public class UserDeviceATCmd implements IWorkOnAt {
             if (str14.equals(str.substring(0, str14.length()))) {
                 Slog.i(TAG, "AT+URDEVICE=0,2,0,0");
                 if (this.mEMMgr.sendFuseCmd() == 1) {
-                    str2 = str5 + "OK";
+                    str2 = str4 + "OK";
                 } else {
-                    str2 = str5 + "NG";
+                    str2 = str4 + "NG";
                 }
                 String str15 = str2;
                 Slog.i(TAG, "0,2,0,0 is complete.");
                 return str15;
             }
-            return str5 + AT_RESPONSE_INVALID_PARAM;
+            return str4 + AT_RESPONSE_INVALID_PARAM;
         } catch (Exception e) {
             String str16 = "" + AT_RESPONSE_EXCEPTION;
             e.printStackTrace();

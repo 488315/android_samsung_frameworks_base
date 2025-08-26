@@ -3,6 +3,5 @@
     <style name="volume_dialog_theme" parent="@style/Theme.SystemUI">
         <item name="android:colorAccent">@color/tv_volume_dialog_accent</item>
         <item name="android:dialogCornerRadius">@dimen/volume_dialog_panel_width_half</item>
-        <item name="android:tooltipHorizontalPadding">@color/tv_volume_dialog_accent</item>
     </style>
 </resources>

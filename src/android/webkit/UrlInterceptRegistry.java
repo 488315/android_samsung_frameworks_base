@@ -13,83 +13,63 @@ public final class UrlInterceptRegistry {
     private static LinkedList mHandlerList;
 
     private static synchronized LinkedList getHandlers() {
-        LinkedList linkedList;
-        synchronized (UrlInterceptRegistry.class) {
-            if (mHandlerList == null) {
-                mHandlerList = new LinkedList();
-            }
-            linkedList = mHandlerList;
+        if (mHandlerList == null) {
+            mHandlerList = new LinkedList();
         }
-        return linkedList;
+        return mHandlerList;
     }
 
     @Deprecated
     public static synchronized void setUrlInterceptDisabled(boolean z) {
-        synchronized (UrlInterceptRegistry.class) {
-            mDisabled = z;
-        }
+        mDisabled = z;
     }
 
     @Deprecated
     public static synchronized boolean urlInterceptDisabled() {
-        boolean z;
-        synchronized (UrlInterceptRegistry.class) {
-            z = mDisabled;
-        }
-        return z;
+        return mDisabled;
     }
 
     @Deprecated
     public static synchronized boolean registerHandler(UrlInterceptHandler urlInterceptHandler) {
-        synchronized (UrlInterceptRegistry.class) {
-            if (getHandlers().contains(urlInterceptHandler)) {
-                return false;
-            }
-            getHandlers().addFirst(urlInterceptHandler);
-            return true;
+        if (getHandlers().contains(urlInterceptHandler)) {
+            return false;
         }
+        getHandlers().addFirst(urlInterceptHandler);
+        return true;
     }
 
     @Deprecated
     public static synchronized boolean unregisterHandler(UrlInterceptHandler urlInterceptHandler) {
-        boolean remove;
-        synchronized (UrlInterceptRegistry.class) {
-            remove = getHandlers().remove(urlInterceptHandler);
-        }
-        return remove;
+        return getHandlers().remove(urlInterceptHandler);
     }
 
     @Deprecated
     public static synchronized CacheManager.CacheResult getSurrogate(String str, Map<String, String> map) {
-        synchronized (UrlInterceptRegistry.class) {
-            if (urlInterceptDisabled()) {
-                return null;
-            }
-            ListIterator listIterator = getHandlers().listIterator();
-            while (listIterator.hasNext()) {
-                CacheManager.CacheResult service = ((UrlInterceptHandler) listIterator.next()).service(str, map);
-                if (service != null) {
-                    return service;
-                }
-            }
+        if (urlInterceptDisabled()) {
             return null;
         }
+        ListIterator listIterator = getHandlers().listIterator();
+        while (listIterator.hasNext()) {
+            CacheManager.CacheResult cacheResultService = ((UrlInterceptHandler) listIterator.next()).service(str, map);
+            if (cacheResultService != null) {
+                return cacheResultService;
+            }
+        }
+        return null;
     }
 
     @Deprecated
     public static synchronized PluginData getPluginData(String str, Map<String, String> map) {
-        synchronized (UrlInterceptRegistry.class) {
-            if (urlInterceptDisabled()) {
-                return null;
-            }
-            ListIterator listIterator = getHandlers().listIterator();
-            while (listIterator.hasNext()) {
-                PluginData pluginData = ((UrlInterceptHandler) listIterator.next()).getPluginData(str, map);
-                if (pluginData != null) {
-                    return pluginData;
-                }
-            }
+        if (urlInterceptDisabled()) {
             return null;
         }
+        ListIterator listIterator = getHandlers().listIterator();
+        while (listIterator.hasNext()) {
+            PluginData pluginData = ((UrlInterceptHandler) listIterator.next()).getPluginData(str, map);
+            if (pluginData != null) {
+                return pluginData;
+            }
+        }
+        return null;
     }
 }

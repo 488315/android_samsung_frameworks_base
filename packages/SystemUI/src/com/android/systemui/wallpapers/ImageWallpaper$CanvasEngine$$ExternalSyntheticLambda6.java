@@ -12,7 +12,6 @@ import com.android.systemui.wallpaper.glwallpaper.ImageSmartCropper;
 import com.android.systemui.wallpaper.log.WallpaperLoggerImpl;
 import com.android.systemui.wallpapers.ImageWallpaper;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class ImageWallpaper$CanvasEngine$$ExternalSyntheticLambda6 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -36,18 +35,18 @@ public final /* synthetic */ class ImageWallpaper$CanvasEngine$$ExternalSyntheti
                     ImageWallpaperCanvasHelper imageWallpaperCanvasHelper = canvasEngine.mHelper;
                     imageWallpaperCanvasHelper.getClass();
                     StringBuilder sb = new StringBuilder();
-                    boolean z = true;
-                    boolean z2 = false;
-                    boolean z3 = (configuration.uiMode & 32) != 0;
-                    if (imageWallpaperCanvasHelper.mIsNightModeOn != z3) {
-                        imageWallpaperCanvasHelper.mIsNightModeOn = z3;
+                    boolean zUpdateSurfaceSizeIfNeed = true;
+                    boolean z = false;
+                    boolean z2 = (configuration.uiMode & 32) != 0;
+                    if (imageWallpaperCanvasHelper.mIsNightModeOn != z2) {
+                        imageWallpaperCanvasHelper.mIsNightModeOn = z2;
                         sb.append(" Dark Mode change " + imageWallpaperCanvasHelper.mIsNightModeOn);
-                        z2 = true;
+                        z = true;
                     }
                     if (imageWallpaperCanvasHelper.mCurDensityDpi != configuration.densityDpi) {
                         sb.append(" onConfigurationChanged  mCurDensityDpi " + imageWallpaperCanvasHelper.mCurDensityDpi + " -> " + configuration.densityDpi);
                         imageWallpaperCanvasHelper.mCurDensityDpi = configuration.densityDpi;
-                        z2 = true;
+                        z = true;
                     }
                     int i = configuration.orientation;
                     sb.append(" onConfigurationChanged   " + configuration);
@@ -57,17 +56,17 @@ public final /* synthetic */ class ImageWallpaper$CanvasEngine$$ExternalSyntheti
                         imageWallpaperCanvasHelper.mOrientation = i;
                         if (!imageWallpaperCanvasHelper.hasIntelligentCropHints(imageWallpaperCanvasHelper.getCurrentWhich()) && imageSmartCropper != null && imageSmartCropper.needToSmartCrop()) {
                             ImageSmartCropper.checkDisplaySize(configuration);
-                            z2 = true;
+                            z = true;
                         }
                     }
-                    boolean z4 = LsRune.WALLPAPER_SUB_DISPLAY_MODE;
-                    if (z4) {
+                    boolean z3 = LsRune.WALLPAPER_SUB_DISPLAY_MODE;
+                    if (z3) {
                         sb.append(" ,  DeviceDisplay type " + imageWallpaperCanvasHelper.mDeviceDisplayType + " -> " + configuration.semDisplayDeviceType);
                         if (imageWallpaperCanvasHelper.mDeviceDisplayType != configuration.semDisplayDeviceType) {
                             if (imageWallpaperCanvasHelper.mLidState != imageWallpaperCanvasHelper.mWallpaperManager.getLidState() && ((DesktopManager) Dependency.sDependency.getDependencyInner(DesktopManager.class)).isDualView()) {
                                 sb.append(", Dual dex mode . Update Now. " + ImageWallpaperCanvasHelper.convertLidStateToString(imageWallpaperCanvasHelper.mLidState) + " -> " + ImageWallpaperCanvasHelper.convertLidStateToString(imageWallpaperCanvasHelper.mWallpaperManager.getLidState()));
                                 imageWallpaperCanvasHelper.setLidState(imageWallpaperCanvasHelper.mWallpaperManager.getLidState());
-                                z2 = true;
+                                z = true;
                             }
                             if (imageSmartCropper != null && imageSmartCropper.needToSmartCrop()) {
                                 ImageSmartCropper.checkDisplaySize(configuration);
@@ -75,13 +74,13 @@ public final /* synthetic */ class ImageWallpaper$CanvasEngine$$ExternalSyntheti
                             imageWallpaperCanvasHelper.mDeviceDisplayType = configuration.semDisplayDeviceType;
                         }
                     }
-                    ((WallpaperLoggerImpl) imageWallpaperCanvasHelper.mLoggerWrapper).log(imageWallpaperCanvasHelper.TAG, sb.toString() + " isNeedReDraw " + z2);
-                    if (z2) {
+                    ((WallpaperLoggerImpl) imageWallpaperCanvasHelper.mLoggerWrapper).log(imageWallpaperCanvasHelper.TAG, sb.toString() + " isNeedReDraw " + z);
+                    if (z) {
                         int currentWhich = canvasEngine.mHelper.getCurrentWhich();
-                        if (z4 && !LsRune.SUBSCREEN_WATCHFACE) {
-                            z = true ^ canvasEngine.updateSurfaceSizeIfNeed(currentWhich);
+                        if (z3 && !LsRune.SUBSCREEN_WATCHFACE) {
+                            zUpdateSurfaceSizeIfNeed = true ^ canvasEngine.updateSurfaceSizeIfNeed(currentWhich);
                         }
-                        if (z) {
+                        if (zUpdateSurfaceSizeIfNeed) {
                             canvasEngine.updateRendering(currentWhich);
                             break;
                         }
@@ -99,7 +98,7 @@ public final /* synthetic */ class ImageWallpaper$CanvasEngine$$ExternalSyntheti
                     Log.i(canvasEngine2.TAG, " mPluginHomeWallpaperConsumer " + ImageWallpaper.this.mSubWallpaperType + " -> " + ((CoverWallpaperController) ImageWallpaper.this.mCoverWallpaper).getWallpaperType() + " , " + bool);
                     ImageWallpaper imageWallpaper = ImageWallpaper.this;
                     imageWallpaper.mSubWallpaperType = ((CoverWallpaperController) imageWallpaper.mCoverWallpaper).getWallpaperType();
-                    ImageWallpaper.CanvasEngine.m3213$$Nest$mupdatePluginWallpaper(ImageWallpaper.CanvasEngine.this);
+                    ImageWallpaper.CanvasEngine.m3230$$Nest$mupdatePluginWallpaper(ImageWallpaper.CanvasEngine.this);
                     break;
                 }
             default:

@@ -1,21 +1,29 @@
 package com.android.systemui.statusbar.notification.stack.ui.viewmodel;
 
+import com.android.systemui.keyguard.domain.interactor.KeyguardInteractor$$ExternalSyntheticOutline0;
+import com.android.systemui.keyguard.domain.interactor.KeyguardTransitionInteractor;
+import com.android.systemui.keyguard.shared.model.Edge;
+import com.android.systemui.keyguard.shared.model.KeyguardState;
 import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
+import kotlin.jvm.internal.Ref$BooleanRef;
+import kotlinx.coroutines.JobKt;
+import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
+import kotlinx.coroutines.flow.FlowKt;
+import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$unsafeFlow$1;
+import kotlinx.coroutines.flow.SafeFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class SharedNotificationContainerViewModel$shadeCollapseFadeIn$1 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
     int label;
     final /* synthetic */ SharedNotificationContainerViewModel this$0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.notification.stack.ui.viewmodel.SharedNotificationContainerViewModel$shadeCollapseFadeIn$1$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         /* synthetic */ boolean Z$0;
@@ -50,7 +58,6 @@ final class SharedNotificationContainerViewModel$shadeCollapseFadeIn$1 extends S
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.notification.stack.ui.viewmodel.SharedNotificationContainerViewModel$shadeCollapseFadeIn$1$2, reason: invalid class name */
     final class AnonymousClass2 extends SuspendLambda implements Function2 {
         /* synthetic */ boolean Z$0;
@@ -103,135 +110,126 @@ final class SharedNotificationContainerViewModel$shadeCollapseFadeIn$1 extends S
         return ((SharedNotificationContainerViewModel$shadeCollapseFadeIn$1) create((FlowCollector) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:15:0x006c, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:29:0x00c0, code lost:
     
-        if (r1.emit(r12, r11) != r0) goto L25;
+        if (r12.collect(r7, r11) != r0) goto L9;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:17:0x0080, code lost:
-    
-        if (kotlinx.coroutines.flow.FlowKt.first(r12, r7, r11) == r0) goto L30;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:19:0x00c0, code lost:
-    
-        if (r12.collect(r7, r11) == r0) goto L30;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:11:0x004d  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x00c3  */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:19:0x00c0 -> B:8:0x001a). Please report as a decompilation issue!!! */
+    /* JADX WARN: Removed duplicated region for block: B:18:0x004d  */
+    /* JADX WARN: Removed duplicated region for block: B:25:0x006f A[PHI: r1
+      0x006f: PHI (r1v2 kotlinx.coroutines.flow.FlowCollector) = (r1v3 kotlinx.coroutines.flow.FlowCollector), (r1v14 kotlinx.coroutines.flow.FlowCollector) binds: [B:23:0x006c, B:13:0x002c] A[DONT_GENERATE, DONT_INLINE]] */
+    /* JADX WARN: Removed duplicated region for block: B:28:0x0083 A[PHI: r1
+      0x0083: PHI (r1v1 kotlinx.coroutines.flow.FlowCollector) = (r1v2 kotlinx.coroutines.flow.FlowCollector), (r1v16 kotlinx.coroutines.flow.FlowCollector) binds: [B:26:0x0080, B:12:0x0024] A[DONT_GENERATE, DONT_INLINE]] */
+    /* JADX WARN: Removed duplicated region for block: B:31:0x00c3  */
+    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:29:0x00c0 -> B:9:0x001a). Please report as a decompilation issue!!! */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object invokeSuspend(java.lang.Object r12) {
-        /*
-            r11 = this;
-            kotlin.coroutines.intrinsics.CoroutineSingletons r0 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r1 = r11.label
-            r2 = 0
-            r3 = 4
-            r4 = 3
-            r5 = 2
-            r6 = 1
-            if (r1 == 0) goto L3c
-            if (r1 == r6) goto L34
-            if (r1 == r5) goto L2c
-            if (r1 == r4) goto L24
-            if (r1 != r3) goto L1c
-            java.lang.Object r1 = r11.L$0
-            kotlinx.coroutines.flow.FlowCollector r1 = (kotlinx.coroutines.flow.FlowCollector) r1
-            kotlin.ResultKt.throwOnFailure(r12)
-        L1a:
-            r12 = r1
-            goto L43
-        L1c:
-            java.lang.IllegalStateException r11 = new java.lang.IllegalStateException
-            java.lang.String r12 = "call to 'resume' before 'invoke' with coroutine"
-            r11.<init>(r12)
-            throw r11
-        L24:
-            java.lang.Object r1 = r11.L$0
-            kotlinx.coroutines.flow.FlowCollector r1 = (kotlinx.coroutines.flow.FlowCollector) r1
-            kotlin.ResultKt.throwOnFailure(r12)
-            goto L83
-        L2c:
-            java.lang.Object r1 = r11.L$0
-            kotlinx.coroutines.flow.FlowCollector r1 = (kotlinx.coroutines.flow.FlowCollector) r1
-            kotlin.ResultKt.throwOnFailure(r12)
-            goto L6f
-        L34:
-            java.lang.Object r1 = r11.L$0
-            kotlinx.coroutines.flow.FlowCollector r1 = (kotlinx.coroutines.flow.FlowCollector) r1
-            kotlin.ResultKt.throwOnFailure(r12)
-            goto L62
-        L3c:
-            kotlin.ResultKt.throwOnFailure(r12)
-            java.lang.Object r12 = r11.L$0
-            kotlinx.coroutines.flow.FlowCollector r12 = (kotlinx.coroutines.flow.FlowCollector) r12
-        L43:
-            kotlin.coroutines.CoroutineContext r1 = r11.getContext()
-            boolean r1 = kotlinx.coroutines.JobKt.isActive(r1)
-            if (r1 == 0) goto Lc3
-            com.android.systemui.statusbar.notification.stack.ui.viewmodel.SharedNotificationContainerViewModel r1 = r11.this$0
-            kotlinx.coroutines.flow.Flow r1 = r1.isShadeLocked
-            com.android.systemui.statusbar.notification.stack.ui.viewmodel.SharedNotificationContainerViewModel$shadeCollapseFadeIn$1$1 r7 = new com.android.systemui.statusbar.notification.stack.ui.viewmodel.SharedNotificationContainerViewModel$shadeCollapseFadeIn$1$1
-            r7.<init>(r2)
-            r11.L$0 = r12
-            r11.label = r6
-            java.lang.Object r1 = kotlinx.coroutines.flow.FlowKt.first(r1, r7, r11)
-            if (r1 != r0) goto L61
-            goto Lc2
-        L61:
-            r1 = r12
-        L62:
-            java.lang.Boolean r12 = java.lang.Boolean.FALSE
-            r11.L$0 = r1
-            r11.label = r5
-            java.lang.Object r12 = r1.emit(r12, r11)
-            if (r12 != r0) goto L6f
-            goto Lc2
-        L6f:
-            com.android.systemui.statusbar.notification.stack.ui.viewmodel.SharedNotificationContainerViewModel r12 = r11.this$0
-            kotlinx.coroutines.flow.Flow r12 = r12.isShadeLocked
-            com.android.systemui.statusbar.notification.stack.ui.viewmodel.SharedNotificationContainerViewModel$shadeCollapseFadeIn$1$2 r7 = new com.android.systemui.statusbar.notification.stack.ui.viewmodel.SharedNotificationContainerViewModel$shadeCollapseFadeIn$1$2
-            r7.<init>(r2)
-            r11.L$0 = r1
-            r11.label = r4
-            java.lang.Object r12 = kotlinx.coroutines.flow.FlowKt.first(r12, r7, r11)
-            if (r12 != r0) goto L83
-            goto Lc2
-        L83:
-            com.android.systemui.statusbar.notification.stack.ui.viewmodel.SharedNotificationContainerViewModel r12 = r11.this$0
-            r12.getClass()
-            kotlin.jvm.internal.Ref$BooleanRef r7 = new kotlin.jvm.internal.Ref$BooleanRef
-            r7.<init>()
-            r7.element = r6
-            com.android.systemui.keyguard.shared.model.Edge$Companion r8 = com.android.systemui.keyguard.shared.model.Edge.Companion
-            com.android.systemui.keyguard.shared.model.KeyguardState r9 = com.android.systemui.keyguard.shared.model.KeyguardState.LOCKSCREEN
-            com.android.systemui.keyguard.shared.model.KeyguardState r10 = com.android.systemui.keyguard.shared.model.KeyguardState.AOD
-            com.android.systemui.keyguard.shared.model.Edge$StateToState r8 = com.android.systemui.keyguard.domain.interactor.KeyguardInteractor$$ExternalSyntheticOutline0.m(r8, r9, r10)
-            java.lang.String r9 = com.android.systemui.keyguard.domain.interactor.KeyguardTransitionInteractor.TAG
-            com.android.systemui.keyguard.domain.interactor.KeyguardTransitionInteractor r9 = r12.keyguardTransitionInteractor
-            kotlinx.coroutines.flow.Flow r8 = r9.isInTransition(r8, r2)
-            com.android.systemui.statusbar.notification.stack.ui.viewmodel.SharedNotificationContainerViewModel$awaitCollapse$3 r9 = com.android.systemui.statusbar.notification.stack.ui.viewmodel.SharedNotificationContainerViewModel$awaitCollapse$3.INSTANCE
-            kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 r10 = new kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$unsafeFlow$1
-            kotlinx.coroutines.flow.StateFlow r12 = r12.isOnLockscreenWithoutShade
-            r10.<init>(r12, r8, r9)
-            com.android.systemui.statusbar.notification.stack.ui.viewmodel.SharedNotificationContainerViewModel$awaitCollapse$4 r12 = new com.android.systemui.statusbar.notification.stack.ui.viewmodel.SharedNotificationContainerViewModel$awaitCollapse$4
-            r12.<init>(r7, r2)
-            kotlinx.coroutines.flow.SafeFlow r12 = kotlinx.coroutines.flow.FlowKt.transformWhile(r10, r12)
-            com.android.systemui.statusbar.notification.stack.ui.viewmodel.SharedNotificationContainerViewModel$shadeCollapseFadeIn$1$3 r7 = new com.android.systemui.statusbar.notification.stack.ui.viewmodel.SharedNotificationContainerViewModel$shadeCollapseFadeIn$1$3
-            r7.<init>()
-            r11.L$0 = r1
-            r11.label = r3
-            java.lang.Object r12 = r12.collect(r7, r11)
-            if (r12 != r0) goto L1a
-        Lc2:
-            return r0
-        Lc3:
-            kotlin.Unit r11 = kotlin.Unit.INSTANCE
-            return r11
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.notification.stack.ui.viewmodel.SharedNotificationContainerViewModel$shadeCollapseFadeIn$1.invokeSuspend(java.lang.Object):java.lang.Object");
+    public final Object invokeSuspend(Object obj) {
+        FlowCollector flowCollector;
+        final FlowCollector flowCollector2;
+        Flow flow;
+        AnonymousClass2 anonymousClass2;
+        Boolean bool;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i = this.label;
+        if (i == 0) {
+            ResultKt.throwOnFailure(obj);
+            flowCollector = (FlowCollector) this.L$0;
+            if (JobKt.isActive(getContext())) {
+            }
+        } else {
+            if (i == 1) {
+                flowCollector2 = (FlowCollector) this.L$0;
+                ResultKt.throwOnFailure(obj);
+                bool = Boolean.FALSE;
+                this.L$0 = flowCollector2;
+                this.label = 2;
+                if (flowCollector2.emit(bool, this) != coroutineSingletons) {
+                }
+                return coroutineSingletons;
+            }
+            if (i == 2) {
+                flowCollector2 = (FlowCollector) this.L$0;
+                ResultKt.throwOnFailure(obj);
+                flow = this.this$0.isShadeLocked;
+                anonymousClass2 = new AnonymousClass2(null);
+                this.L$0 = flowCollector2;
+                this.label = 3;
+                if (FlowKt.first(flow, anonymousClass2, this) != coroutineSingletons) {
+                }
+                return coroutineSingletons;
+            }
+            if (i != 3) {
+                if (i != 4) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                flowCollector2 = (FlowCollector) this.L$0;
+                ResultKt.throwOnFailure(obj);
+                flowCollector = flowCollector2;
+                if (JobKt.isActive(getContext())) {
+                    return Unit.INSTANCE;
+                }
+                Flow flow2 = this.this$0.isShadeLocked;
+                AnonymousClass1 anonymousClass1 = new AnonymousClass1(null);
+                this.L$0 = flowCollector;
+                this.label = 1;
+                if (FlowKt.first(flow2, anonymousClass1, this) != coroutineSingletons) {
+                    flowCollector2 = flowCollector;
+                    bool = Boolean.FALSE;
+                    this.L$0 = flowCollector2;
+                    this.label = 2;
+                    if (flowCollector2.emit(bool, this) != coroutineSingletons) {
+                        flow = this.this$0.isShadeLocked;
+                        anonymousClass2 = new AnonymousClass2(null);
+                        this.L$0 = flowCollector2;
+                        this.label = 3;
+                        if (FlowKt.first(flow, anonymousClass2, this) != coroutineSingletons) {
+                            SharedNotificationContainerViewModel sharedNotificationContainerViewModel = this.this$0;
+                            sharedNotificationContainerViewModel.getClass();
+                            Ref$BooleanRef ref$BooleanRef = new Ref$BooleanRef();
+                            ref$BooleanRef.element = true;
+                            Edge.StateToState stateToStateM = KeyguardInteractor$$ExternalSyntheticOutline0.m(Edge.Companion, KeyguardState.LOCKSCREEN, KeyguardState.AOD);
+                            String str = KeyguardTransitionInteractor.TAG;
+                            SafeFlow safeFlowTransformWhile = FlowKt.transformWhile(new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(sharedNotificationContainerViewModel.isOnLockscreenWithoutShade, sharedNotificationContainerViewModel.keyguardTransitionInteractor.isInTransition(stateToStateM, null), SharedNotificationContainerViewModel$awaitCollapse$3.INSTANCE), new SharedNotificationContainerViewModel$awaitCollapse$4(ref$BooleanRef, null));
+                            FlowCollector flowCollector3 = new FlowCollector() { // from class: com.android.systemui.statusbar.notification.stack.ui.viewmodel.SharedNotificationContainerViewModel$shadeCollapseFadeIn$1.3
+                                @Override // kotlinx.coroutines.flow.FlowCollector
+                                public final Object emit(Object obj2, Continuation continuation) {
+                                    if (!((Boolean) obj2).booleanValue()) {
+                                        return Unit.INSTANCE;
+                                    }
+                                    Object objEmit = flowCollector2.emit(Boolean.TRUE, continuation);
+                                    return objEmit == CoroutineSingletons.COROUTINE_SUSPENDED ? objEmit : Unit.INSTANCE;
+                                }
+                            };
+                            this.L$0 = flowCollector2;
+                            this.label = 4;
+                        }
+                    }
+                }
+                return coroutineSingletons;
+            }
+            flowCollector2 = (FlowCollector) this.L$0;
+            ResultKt.throwOnFailure(obj);
+            SharedNotificationContainerViewModel sharedNotificationContainerViewModel2 = this.this$0;
+            sharedNotificationContainerViewModel2.getClass();
+            Ref$BooleanRef ref$BooleanRef2 = new Ref$BooleanRef();
+            ref$BooleanRef2.element = true;
+            Edge.StateToState stateToStateM2 = KeyguardInteractor$$ExternalSyntheticOutline0.m(Edge.Companion, KeyguardState.LOCKSCREEN, KeyguardState.AOD);
+            String str2 = KeyguardTransitionInteractor.TAG;
+            SafeFlow safeFlowTransformWhile2 = FlowKt.transformWhile(new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(sharedNotificationContainerViewModel2.isOnLockscreenWithoutShade, sharedNotificationContainerViewModel2.keyguardTransitionInteractor.isInTransition(stateToStateM2, null), SharedNotificationContainerViewModel$awaitCollapse$3.INSTANCE), new SharedNotificationContainerViewModel$awaitCollapse$4(ref$BooleanRef2, null));
+            FlowCollector flowCollector32 = new FlowCollector() { // from class: com.android.systemui.statusbar.notification.stack.ui.viewmodel.SharedNotificationContainerViewModel$shadeCollapseFadeIn$1.3
+                @Override // kotlinx.coroutines.flow.FlowCollector
+                public final Object emit(Object obj2, Continuation continuation) {
+                    if (!((Boolean) obj2).booleanValue()) {
+                        return Unit.INSTANCE;
+                    }
+                    Object objEmit = flowCollector2.emit(Boolean.TRUE, continuation);
+                    return objEmit == CoroutineSingletons.COROUTINE_SUSPENDED ? objEmit : Unit.INSTANCE;
+                }
+            };
+            this.L$0 = flowCollector2;
+            this.label = 4;
+        }
     }
 }

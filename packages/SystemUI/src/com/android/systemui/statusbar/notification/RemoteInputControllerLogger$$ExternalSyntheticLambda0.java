@@ -6,14 +6,13 @@ import com.android.keyguard.KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutli
 import com.android.systemui.log.core.LogMessage;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class RemoteInputControllerLogger$$ExternalSyntheticLambda0 implements Function1 {
     public final /* synthetic */ int $r8$classId;
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
         LogMessage logMessage = (LogMessage) obj;
         switch (this.$r8$classId) {
             case 0:
@@ -25,14 +24,14 @@ public final /* synthetic */ class RemoteInputControllerLogger$$ExternalSyntheti
                 boolean bool2 = logMessage.getBool2();
                 boolean bool3 = logMessage.getBool3();
                 boolean bool4 = logMessage.getBool4();
-                StringBuilder m = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("removeRemoteInput reason: ", str2, " entry: ", str1, ", style: ");
-                m.append(str3);
-                m.append(", remoteEditImeVisible: ");
-                m.append(bool1);
-                m.append(", remoteEditImeAnimatingAway: ");
-                KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(m, bool2, ", isRemoteInputActiveForEntry: ", bool3, ", isRemoteInputActive: ");
-                m.append(bool4);
-                return m.toString();
+                StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("removeRemoteInput reason: ", str2, " entry: ", str1, ", style: ");
+                sbM.append(str3);
+                sbM.append(", remoteEditImeVisible: ");
+                sbM.append(bool1);
+                sbM.append(", remoteEditImeAnimatingAway: ");
+                KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sbM, bool2, ", isRemoteInputActiveForEntry: ", bool3, ", isRemoteInputActive: ");
+                sbM.append(bool4);
+                return sbM.toString();
             case 1:
                 int i2 = RemoteInputControllerLogger.$r8$clinit;
                 String str22 = logMessage.getStr2();
@@ -45,13 +44,13 @@ public final /* synthetic */ class RemoteInputControllerLogger$$ExternalSyntheti
                 String str32 = logMessage.getStr3();
                 boolean bool12 = logMessage.getBool1();
                 boolean bool22 = logMessage.getBool2();
-                StringBuilder m2 = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("addRemoteInput reason:", str23, " entry: ", str13, ", style:");
-                m2.append(str32);
-                m2.append(", isAlreadyActive: ");
-                m2.append(bool12);
-                m2.append(", isFound:");
-                m2.append(bool22);
-                return m2.toString();
+                StringBuilder sbM2 = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("addRemoteInput reason:", str23, " entry: ", str13, ", style:");
+                sbM2.append(str32);
+                sbM2.append(", isAlreadyActive: ");
+                sbM2.append(bool12);
+                sbM2.append(", isFound:");
+                sbM2.append(bool22);
+                return sbM2.toString();
         }
     }
 }

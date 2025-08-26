@@ -8,7 +8,6 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class NonOverlappingLinearLayoutWithForeground extends LinearLayout {
     public NonOverlappingLinearLayoutWithForeground(Context context) {
@@ -45,11 +44,11 @@ public class NonOverlappingLinearLayoutWithForeground extends LinearLayout {
         if (context.getApplicationInfo().targetSdkVersion >= 23) {
             return;
         }
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, new int[]{R.attr.foreground});
-        Drawable drawable = obtainStyledAttributes.getDrawable(0);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, new int[]{R.attr.foreground});
+        Drawable drawable = typedArrayObtainStyledAttributes.getDrawable(0);
         if (drawable != null) {
             setForeground(drawable);
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
     }
 }

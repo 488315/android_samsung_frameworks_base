@@ -19,14 +19,14 @@ public class SliceQuery {
     }
 
     public static SliceItem getPrimaryIcon(Slice slice) {
-        SliceItem find;
+        SliceItem sliceItemFind;
         for (SliceItem sliceItem : slice.getItems()) {
             if (Objects.equals(sliceItem.getFormat(), "image")) {
                 return sliceItem;
             }
             if (!compareTypes(sliceItem, "slice") || !sliceItem.hasHint(Slice.HINT_LIST)) {
-                if (!sliceItem.hasHint(Slice.HINT_ACTIONS) && !sliceItem.hasHint(Slice.HINT_LIST_ITEM) && !compareTypes(sliceItem, "action") && (find = find(sliceItem, "image")) != null) {
-                    return find;
+                if (!sliceItem.hasHint(Slice.HINT_ACTIONS) && !sliceItem.hasHint(Slice.HINT_LIST_ITEM) && !compareTypes(sliceItem, "action") && (sliceItemFind = find(sliceItem, "image")) != null) {
+                    return sliceItemFind;
                 }
             }
         }
@@ -36,9 +36,9 @@ public class SliceQuery {
     public static SliceItem findNotContaining(SliceItem sliceItem, List<SliceItem> list) {
         SliceItem sliceItem2 = null;
         while (sliceItem2 == null && list.size() != 0) {
-            SliceItem remove = list.remove(0);
-            if (!contains(sliceItem, remove)) {
-                sliceItem2 = remove;
+            SliceItem sliceItemRemove = list.remove(0);
+            if (!contains(sliceItem, sliceItemRemove)) {
+                sliceItem2 = sliceItemRemove;
             }
         }
         return sliceItem2;
@@ -51,7 +51,7 @@ public class SliceQuery {
         return stream(sliceItem).filter(new Predicate() { // from class: android.app.slice.SliceQuery$$ExternalSyntheticLambda2
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                return SliceQuery.lambda$contains$0(SliceItem.this, (SliceItem) obj);
+                return SliceQuery.lambda$contains$0(sliceItem2, (SliceItem) obj);
             }
         }).findAny().isPresent();
     }

@@ -56,21 +56,21 @@ public class ExternalVibration implements Parcelable {
     }
 
     private static AudioAttributes readAudioAttributes(Parcel parcel) {
-        int readInt = parcel.readInt();
-        int readInt2 = parcel.readInt();
-        int readInt3 = parcel.readInt();
-        int readInt4 = parcel.readInt();
+        int i = parcel.readInt();
+        int i2 = parcel.readInt();
+        int i3 = parcel.readInt();
+        int i4 = parcel.readInt();
         HashSet<String> hashSet = new HashSet<>();
         for (String str : parcel.readString().split(NavigationBarInflaterView.GRAVITY_SEPARATOR)) {
             hashSet.add(str);
         }
         AudioAttributes.Builder builder = new AudioAttributes.Builder();
-        if (AudioAttributes.isSystemUsage(readInt)) {
-            builder.setSystemUsage(readInt);
+        if (AudioAttributes.isSystemUsage(i)) {
+            builder.setSystemUsage(i);
         } else {
-            builder.setUsage(readInt);
+            builder.setUsage(i);
         }
-        return builder.setContentType(readInt2).setCapturePreset(readInt3).setFlags(readInt4).addTags(hashSet).build();
+        return builder.setContentType(i2).setCapturePreset(i3).setFlags(i4).addTags(hashSet).build();
     }
 
     public int getUid() {

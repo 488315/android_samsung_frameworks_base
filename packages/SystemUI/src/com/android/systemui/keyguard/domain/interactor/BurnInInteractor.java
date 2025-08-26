@@ -6,10 +6,14 @@ import com.android.systemui.common.ui.domain.interactor.ConfigurationInteractor;
 import com.android.systemui.common.ui.domain.interactor.ConfigurationInteractorImpl;
 import com.android.systemui.doze.util.BurnInHelperKt;
 import com.android.systemui.doze.util.BurnInHelperWrapper;
+import com.android.systemui.keyguard.shared.model.BurnInModel;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
+import kotlin.jvm.functions.Function3;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
@@ -20,7 +24,6 @@ import kotlinx.coroutines.flow.SharingStarted;
 import kotlinx.coroutines.flow.StartedWhileSubscribed;
 import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class BurnInInteractor {
     public final BurnInHelperWrapper burnInHelperWrapper;
@@ -31,28 +34,61 @@ public final class BurnInInteractor {
     public final KeyguardInteractor keyguardInteractor;
     public final ReadonlyStateFlow udfpsProgress;
 
+    /* renamed from: com.android.systemui.keyguard.domain.interactor.BurnInInteractor$burnIn$2, reason: invalid class name */
+    final class AnonymousClass2 extends SuspendLambda implements Function3 {
+        /* synthetic */ int I$0;
+        /* synthetic */ int I$1;
+        int label;
+
+        public AnonymousClass2(Continuation continuation) {
+            super(3, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function3
+        public final Object invoke(Object obj, Object obj2, Object obj3) {
+            int iIntValue = ((Number) obj).intValue();
+            int iIntValue2 = ((Number) obj2).intValue();
+            AnonymousClass2 anonymousClass2 = BurnInInteractor.this.new AnonymousClass2((Continuation) obj3);
+            anonymousClass2.I$0 = iIntValue;
+            anonymousClass2.I$1 = iIntValue2;
+            return anonymousClass2.invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            int i = this.I$0;
+            int i2 = this.I$1;
+            BurnInInteractor.this.burnInHelperWrapper.getClass();
+            return new BurnInModel(i, i2, BurnInHelperKt.zigzag(System.currentTimeMillis() / 60000.0f, 0.2f, 181.0f) + 0.8f, false, 8, null);
+        }
+    }
+
     public BurnInInteractor(Context context, BurnInHelperWrapper burnInHelperWrapper, CoroutineScope coroutineScope, ConfigurationInteractor configurationInteractor, KeyguardInteractor keyguardInteractor) {
         this.context = context;
         this.burnInHelperWrapper = burnInHelperWrapper;
         this.configurationInteractor = configurationInteractor;
         this.keyguardInteractor = keyguardInteractor;
-        ChannelFlowTransformLatest transformLatest = FlowKt.transformLatest(((ConfigurationInteractorImpl) configurationInteractor).scaleForResolution, new BurnInInteractor$burnInOffsetDefinedInPixels$$inlined$flatMapLatest$1(null, this, R.dimen.udfps_burn_in_offset_x, true));
+        ChannelFlowTransformLatest channelFlowTransformLatestTransformLatest = FlowKt.transformLatest(((ConfigurationInteractorImpl) configurationInteractor).scaleForResolution, new BurnInInteractor$burnInOffsetDefinedInPixels$$inlined$flatMapLatest$1(null, this, R.dimen.udfps_burn_in_offset_x, true));
         SharingStarted.Companion companion = SharingStarted.Companion;
-        this.deviceEntryIconXOffset = FlowKt.stateIn(transformLatest, coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), 0);
+        this.deviceEntryIconXOffset = FlowKt.stateIn(channelFlowTransformLatestTransformLatest, coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), 0);
         this.deviceEntryIconYOffset = FlowKt.stateIn(FlowKt.transformLatest(((ConfigurationInteractorImpl) configurationInteractor).scaleForResolution, new BurnInInteractor$burnInOffsetDefinedInPixels$$inlined$flatMapLatest$1(null, this, R.dimen.udfps_burn_in_offset_y, false)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), 0);
-        ChannelFlowTransformLatest mapLatest = FlowKt.mapLatest(keyguardInteractor.dozeTimeTick, new BurnInInteractor$udfpsProgress$1(this, null));
-        StartedWhileSubscribed WhileSubscribed$default = SharingStarted.Companion.WhileSubscribed$default(companion, 3);
+        ChannelFlowTransformLatest channelFlowTransformLatestMapLatest = FlowKt.mapLatest(keyguardInteractor.dozeTimeTick, new BurnInInteractor$udfpsProgress$1(this, null));
+        StartedWhileSubscribed startedWhileSubscribedWhileSubscribed$default = SharingStarted.Companion.WhileSubscribed$default(companion, 3);
         burnInHelperWrapper.getClass();
-        this.udfpsProgress = FlowKt.stateIn(mapLatest, coroutineScope, WhileSubscribed$default, Float.valueOf(BurnInHelperKt.zigzag(System.currentTimeMillis() / 60000.0f, 1.0f, 89.0f)));
+        this.udfpsProgress = FlowKt.stateIn(channelFlowTransformLatestMapLatest, coroutineScope, startedWhileSubscribedWhileSubscribed$default, Float.valueOf(BurnInHelperKt.zigzag(System.currentTimeMillis() / 60000.0f, 1.0f, 89.0f)));
     }
 
     public final Flow burnIn(final int i) {
         ConfigurationInteractor configurationInteractor = this.configurationInteractor;
-        ChannelFlowTransformLatest transformLatest = FlowKt.transformLatest(((ConfigurationInteractorImpl) configurationInteractor).onAnyConfigurationChange, new BurnInInteractor$burnInOffset$$inlined$flatMapLatest$1(null, this, R.dimen.burn_in_prevention_offset_x, true));
-        final ChannelFlowTransformLatest transformLatest2 = FlowKt.transformLatest(((ConfigurationInteractorImpl) configurationInteractor).onAnyConfigurationChange, new BurnInInteractor$burnInOffset$$inlined$flatMapLatest$1(null, this, i, false));
-        return FlowKt.distinctUntilChanged(new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(transformLatest, new Flow() { // from class: com.android.systemui.keyguard.domain.interactor.BurnInInteractor$burnIn$$inlined$map$1
+        ChannelFlowTransformLatest channelFlowTransformLatestTransformLatest = FlowKt.transformLatest(((ConfigurationInteractorImpl) configurationInteractor).onAnyConfigurationChange, new BurnInInteractor$burnInOffset$$inlined$flatMapLatest$1(null, this, R.dimen.burn_in_prevention_offset_x, true));
+        final ChannelFlowTransformLatest channelFlowTransformLatestTransformLatest2 = FlowKt.transformLatest(((ConfigurationInteractorImpl) configurationInteractor).onAnyConfigurationChange, new BurnInInteractor$burnInOffset$$inlined$flatMapLatest$1(null, this, i, false));
+        return FlowKt.distinctUntilChanged(new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(channelFlowTransformLatestTransformLatest, new Flow() { // from class: com.android.systemui.keyguard.domain.interactor.BurnInInteractor$burnIn$$inlined$map$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.keyguard.domain.interactor.BurnInInteractor$burnIn$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -83,75 +119,47 @@ public final class BurnInInteractor {
                     this.$yDimenResourceId$inlined = i;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.keyguard.domain.interactor.BurnInInteractor$burnIn$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.keyguard.domain.interactor.BurnInInteractor$burnIn$$inlined$map$1$2$1 r0 = (com.android.systemui.keyguard.domain.interactor.BurnInInteractor$burnIn$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.keyguard.domain.interactor.BurnInInteractor$burnIn$$inlined$map$1$2$1 r0 = new com.android.systemui.keyguard.domain.interactor.BurnInInteractor$burnIn$$inlined$map$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L59
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        java.lang.Number r5 = (java.lang.Number) r5
-                        int r5 = r5.intValue()
-                        int r5 = r5 * 2
-                        com.android.systemui.keyguard.domain.interactor.BurnInInteractor r6 = r4.this$0
-                        android.content.Context r6 = r6.context
-                        android.content.res.Resources r6 = r6.getResources()
-                        int r2 = r4.$yDimenResourceId$inlined
-                        int r6 = r6.getDimensionPixelSize(r2)
-                        int r5 = r5 - r6
-                        java.lang.Integer r6 = new java.lang.Integer
-                        r6.<init>(r5)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r6, r0)
-                        if (r4 != r1) goto L59
-                        return r1
-                    L59:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyguard.domain.interactor.BurnInInteractor$burnIn$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        Integer num = new Integer((((Number) obj).intValue() * 2) - this.this$0.context.getResources().getDimensionPixelSize(this.$yDimenResourceId$inlined));
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(num, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, this, i), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = channelFlowTransformLatestTransformLatest2.collect(new AnonymousClass2(flowCollector, this, i), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
-        }, new BurnInInteractor$burnIn$2(this, null)));
+        }, new AnonymousClass2(null)));
     }
 }

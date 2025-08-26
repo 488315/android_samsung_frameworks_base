@@ -8,7 +8,6 @@ import com.android.systemui.qs.shared.model.TileCategory;
 import java.util.Set;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class UnloadedEditTileViewModel {
     public final Text appName;
@@ -41,9 +40,9 @@ public final class UnloadedEditTileViewModel {
     }
 
     public final int hashCode() {
-        int hashCode = (this.label.hashCode() + ((this.icon.hashCode() + (this.tileSpec.hashCode() * 31)) * 31)) * 31;
+        int iHashCode = (this.label.hashCode() + ((this.icon.hashCode() + (this.tileSpec.hashCode() * 31)) * 31)) * 31;
         Text text = this.appName;
-        return this.category.hashCode() + ((this.availableEditActions.hashCode() + TransitionData$$ExternalSyntheticOutline0.m((hashCode + (text == null ? 0 : text.hashCode())) * 31, 31, this.isCurrent)) * 31);
+        return this.category.hashCode() + ((this.availableEditActions.hashCode() + TransitionData$$ExternalSyntheticOutline0.m((iHashCode + (text == null ? 0 : text.hashCode())) * 31, 31, this.isCurrent)) * 31);
     }
 
     public final String toString() {

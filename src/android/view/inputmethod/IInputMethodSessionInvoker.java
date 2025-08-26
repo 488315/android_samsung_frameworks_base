@@ -51,7 +51,7 @@ final class IInputMethodSessionInvoker {
             handler.post(new Runnable() { // from class: android.view.inputmethod.IInputMethodSessionInvoker$$ExternalSyntheticLambda5
                 @Override // java.lang.Runnable
                 public final void run() {
-                    IInputMethodSessionInvoker.this.finishInputInternal();
+                    this.f$0.finishInputInternal();
                 }
             });
         }
@@ -74,7 +74,7 @@ final class IInputMethodSessionInvoker {
             handler.post(new Runnable() { // from class: android.view.inputmethod.IInputMethodSessionInvoker$$ExternalSyntheticLambda4
                 @Override // java.lang.Runnable
                 public final void run() {
-                    IInputMethodSessionInvoker.this.lambda$updateCursorAnchorInfo$0(cursorAnchorInfo);
+                    this.f$0.lambda$updateCursorAnchorInfo$0(cursorAnchorInfo);
                 }
             });
         }
@@ -98,7 +98,7 @@ final class IInputMethodSessionInvoker {
             handler.post(new Runnable() { // from class: android.view.inputmethod.IInputMethodSessionInvoker$$ExternalSyntheticLambda6
                 @Override // java.lang.Runnable
                 public final void run() {
-                    IInputMethodSessionInvoker.this.lambda$displayCompletions$1(completionInfoArr);
+                    this.f$0.lambda$displayCompletions$1(completionInfoArr);
                 }
             });
         }
@@ -126,7 +126,7 @@ final class IInputMethodSessionInvoker {
             handler.post(new Runnable() { // from class: android.view.inputmethod.IInputMethodSessionInvoker$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    IInputMethodSessionInvoker.this.lambda$updateExtractedText$2(i, extractedText);
+                    this.f$0.lambda$updateExtractedText$2(i, extractedText);
                 }
             });
         }
@@ -150,7 +150,7 @@ final class IInputMethodSessionInvoker {
             handler.post(new Runnable() { // from class: android.view.inputmethod.IInputMethodSessionInvoker$$ExternalSyntheticLambda7
                 @Override // java.lang.Runnable
                 public final void run() {
-                    IInputMethodSessionInvoker.this.lambda$appPrivateCommand$3(str, bundle);
+                    this.f$0.lambda$appPrivateCommand$3(str, bundle);
                 }
             });
         }
@@ -174,7 +174,7 @@ final class IInputMethodSessionInvoker {
             handler.post(new Runnable() { // from class: android.view.inputmethod.IInputMethodSessionInvoker$$ExternalSyntheticLambda3
                 @Override // java.lang.Runnable
                 public final void run() {
-                    IInputMethodSessionInvoker.this.lambda$viewClicked$4(z);
+                    this.f$0.lambda$viewClicked$4(z);
                 }
             });
         }
@@ -198,7 +198,7 @@ final class IInputMethodSessionInvoker {
             handler.post(new Runnable() { // from class: android.view.inputmethod.IInputMethodSessionInvoker$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    IInputMethodSessionInvoker.this.lambda$updateCursor$5(rect);
+                    this.f$0.lambda$updateCursor$5(rect);
                 }
             });
         }
@@ -222,7 +222,7 @@ final class IInputMethodSessionInvoker {
             handler.post(new Runnable() { // from class: android.view.inputmethod.IInputMethodSessionInvoker$$ExternalSyntheticLambda8
                 @Override // java.lang.Runnable
                 public final void run() {
-                    IInputMethodSessionInvoker.this.lambda$updateSelection$6(i, i2, i3, i4, i5, i6);
+                    this.f$0.lambda$updateSelection$6(i, i2, i3, i4, i5, i6);
                 }
             });
         }
@@ -246,7 +246,7 @@ final class IInputMethodSessionInvoker {
             handler.post(new Runnable() { // from class: android.view.inputmethod.IInputMethodSessionInvoker$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    IInputMethodSessionInvoker.this.lambda$invalidateInput$7(editorInfo, iRemoteInputConnection, i);
+                    this.f$0.lambda$invalidateInput$7(editorInfo, iRemoteInputConnection, i);
                 }
             });
         }

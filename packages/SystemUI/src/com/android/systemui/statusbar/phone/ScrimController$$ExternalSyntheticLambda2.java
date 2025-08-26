@@ -3,7 +3,6 @@ package com.android.systemui.statusbar.phone;
 import com.android.internal.colorextraction.ColorExtractor;
 import com.android.internal.util.function.TriConsumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class ScrimController$$ExternalSyntheticLambda2 implements TriConsumer {
     public final /* synthetic */ LightBarController f$0;
@@ -15,7 +14,7 @@ public final /* synthetic */ class ScrimController$$ExternalSyntheticLambda2 imp
     public final void accept(Object obj, Object obj2, Object obj3) {
         LightBarController lightBarController = this.f$0;
         ScrimState scrimState = (ScrimState) obj;
-        float floatValue = ((Float) obj2).floatValue();
+        float fFloatValue = ((Float) obj2).floatValue();
         ColorExtractor.GradientColors gradientColors = (ColorExtractor.GradientColors) obj3;
         LightBarControllerImpl lightBarControllerImpl = (LightBarControllerImpl) lightBarController;
         boolean z = lightBarControllerImpl.mBouncerVisible;
@@ -23,11 +22,11 @@ public final /* synthetic */ class ScrimController$$ExternalSyntheticLambda2 imp
         boolean z3 = lightBarControllerImpl.mForceLightForScrim;
         boolean z4 = scrimState == ScrimState.BOUNCER || scrimState == ScrimState.BOUNCER_SCRIMMED;
         lightBarControllerImpl.mBouncerVisible = z4;
-        boolean z5 = z4 || floatValue >= 0.1f;
-        boolean supportsDarkText = gradientColors.supportsDarkText();
-        boolean z6 = z5 && !supportsDarkText;
+        boolean z5 = z4 || fFloatValue >= 0.1f;
+        boolean zSupportsDarkText = gradientColors.supportsDarkText();
+        boolean z6 = z5 && !zSupportsDarkText;
         lightBarControllerImpl.mForceDarkForScrim = z6;
-        boolean z7 = z5 && supportsDarkText;
+        boolean z7 = z5 && zSupportsDarkText;
         lightBarControllerImpl.mForceLightForScrim = z7;
         if (lightBarControllerImpl.mBouncerVisible != z) {
             lightBarControllerImpl.reevaluate();

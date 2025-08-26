@@ -8,7 +8,6 @@ import androidx.compose.ui.node.TraversableNodeKt;
 import androidx.compose.ui.semantics.SemanticsPropertyReceiver;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ChildSemanticsNode extends Modifier.Node implements SemanticsModifierNode {
     public Function1 properties;
@@ -19,31 +18,31 @@ public final class ChildSemanticsNode extends Modifier.Node implements Semantics
 
     @Override // androidx.compose.ui.node.SemanticsModifierNode
     public final void applySemantics(final SemanticsPropertyReceiver semanticsPropertyReceiver) {
-        TraversableNodeKt.traverseAncestors(this, ParentSemanticsNodeKey.INSTANCE, new Function1() { // from class: androidx.compose.material3.internal.ChildSemanticsNode$applySemantics$1
+        TraversableNodeKt.traverseAncestors(this, ParentSemanticsNodeKey.INSTANCE, new Function1() { // from class: androidx.compose.material3.internal.ChildSemanticsNode.applySemantics.1
             {
                 super(1);
             }
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 ParentSemanticsNode parentSemanticsNode = (ParentSemanticsNode) ((TraversableNode) obj);
-                SemanticsPropertyReceiver semanticsPropertyReceiver2 = SemanticsPropertyReceiver.this;
+                SemanticsPropertyReceiver semanticsPropertyReceiver2 = semanticsPropertyReceiver;
                 parentSemanticsNode.semanticsConsumed = true;
-                parentSemanticsNode.properties.mo779invoke(semanticsPropertyReceiver2);
+                parentSemanticsNode.properties.mo781invoke(semanticsPropertyReceiver2);
                 SemanticsModifierNodeKt.invalidateSemantics(parentSemanticsNode);
                 return Boolean.FALSE;
             }
         });
-        this.properties.mo779invoke(semanticsPropertyReceiver);
+        this.properties.mo781invoke(semanticsPropertyReceiver);
     }
 
     @Override // androidx.compose.ui.Modifier.Node
     public final void onDetach() {
-        TraversableNodeKt.traverseAncestors(this, ParentSemanticsNodeKey.INSTANCE, new Function1() { // from class: androidx.compose.material3.internal.ChildSemanticsNode$onDetach$1
+        TraversableNodeKt.traverseAncestors(this, ParentSemanticsNodeKey.INSTANCE, new Function1() { // from class: androidx.compose.material3.internal.ChildSemanticsNode.onDetach.1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 ParentSemanticsNode parentSemanticsNode = (ParentSemanticsNode) ((TraversableNode) obj);
                 parentSemanticsNode.semanticsConsumed = false;
                 SemanticsModifierNodeKt.invalidateSemantics(parentSemanticsNode);

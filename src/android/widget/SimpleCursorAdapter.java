@@ -46,21 +46,21 @@ public class SimpleCursorAdapter extends ResourceCursorAdapter {
         int length = iArr.length;
         int[] iArr2 = this.mFrom;
         for (int i = 0; i < length; i++) {
-            View findViewById = view.findViewById(iArr[i]);
-            if (findViewById != null) {
-                if (viewBinder != null ? viewBinder.setViewValue(findViewById, cursor, iArr2[i]) : false) {
+            View viewFindViewById = view.findViewById(iArr[i]);
+            if (viewFindViewById != null) {
+                if (viewBinder != null ? viewBinder.setViewValue(viewFindViewById, cursor, iArr2[i]) : false) {
                     continue;
                 } else {
                     String string = cursor.getString(iArr2[i]);
                     if (string == null) {
                         string = "";
                     }
-                    if (findViewById instanceof TextView) {
-                        setViewText((TextView) findViewById, string);
-                    } else if (findViewById instanceof ImageView) {
-                        setViewImage((ImageView) findViewById, string);
+                    if (viewFindViewById instanceof TextView) {
+                        setViewText((TextView) viewFindViewById, string);
+                    } else if (viewFindViewById instanceof ImageView) {
+                        setViewImage((ImageView) viewFindViewById, string);
                     } else {
-                        throw new IllegalStateException(findViewById.getClass().getName() + " is not a  view that can be bounds by this SimpleCursorAdapter");
+                        throw new IllegalStateException(viewFindViewById.getClass().getName() + " is not a  view that can be bounds by this SimpleCursorAdapter");
                     }
                 }
             }

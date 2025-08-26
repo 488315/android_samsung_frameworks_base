@@ -40,7 +40,7 @@ public class KeyAgreementSpi extends BaseAgreementSpi {
     }
 
     @Override // javax.crypto.KeyAgreementSpi
-    protected Key engineDoPhase(Key key, boolean z) throws InvalidKeyException, IllegalStateException {
+    protected Key engineDoPhase(Key key, boolean z) throws IllegalStateException, InvalidKeyException {
         if (this.parameters == null) {
             throw new IllegalStateException(this.kaAlgorithm + " not initialised.");
         }

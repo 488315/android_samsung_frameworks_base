@@ -10,7 +10,6 @@ import java.io.PrintWriter;
 import java.util.List;
 import kotlin.text.StringsKt__IndentKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class LetterboxAppearanceCalculator implements Dumpable {
     public final int darkAppearanceIconColor;
@@ -32,7 +31,7 @@ public final class LetterboxAppearanceCalculator implements Dumpable {
     @Override // com.android.systemui.Dumpable
     public final void dump(PrintWriter printWriter, String[] strArr) {
         Integer num = this.lastAppearance;
-        String flagsToString = num != null ? ViewDebug.flagsToString(InsetsFlags.class, "appearance", num.intValue()) : null;
-        printWriter.println(StringsKt__IndentKt.trimIndent("\n           lastAppearance: " + flagsToString + "\n           lastAppearanceRegion: " + this.lastAppearanceRegions + ",\n           lastLetterboxes: " + this.lastLetterboxes + ",\n           lastLetterboxAppearance: " + this.lastLetterboxAppearance + "\n       "));
+        String strFlagsToString = num != null ? ViewDebug.flagsToString(InsetsFlags.class, "appearance", num.intValue()) : null;
+        printWriter.println(StringsKt__IndentKt.trimIndent("\n           lastAppearance: " + strFlagsToString + "\n           lastAppearanceRegion: " + this.lastAppearanceRegions + ",\n           lastLetterboxes: " + this.lastLetterboxes + ",\n           lastLetterboxAppearance: " + this.lastLetterboxAppearance + "\n       "));
     }
 }

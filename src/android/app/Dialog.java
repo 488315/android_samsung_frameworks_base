@@ -15,6 +15,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.provider.Settings;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.ActionMode;
@@ -178,7 +179,7 @@ public class Dialog implements DialogInterface, Window.Callback, KeyEvent.Callba
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$new$0(View view, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8) {
+    public /* synthetic */ void lambda$new$0(View view, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8) throws Resources.NotFoundException {
         this.mNeedToUpdate = isNeedToUpdateAttributes(view);
         alignToAnchor();
     }
@@ -202,7 +203,7 @@ public class Dialog implements DialogInterface, Window.Callback, KeyEvent.Callba
         this.mDismissAction = new Runnable() { // from class: android.app.Dialog$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                Dialog.this.dismissDialog();
+                this.f$0.dismissDialog();
             }
         };
         this.mHasFocus = false;
@@ -212,8 +213,8 @@ public class Dialog implements DialogInterface, Window.Callback, KeyEvent.Callba
         this.mRootViewSwWidthDp = 0;
         this.mOnLayoutChangeListener = new View.OnLayoutChangeListener() { // from class: android.app.Dialog$$ExternalSyntheticLambda1
             @Override // android.view.View.OnLayoutChangeListener
-            public final void onLayoutChange(View view, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9) {
-                Dialog.this.lambda$new$0(view, i2, i3, i4, i5, i6, i7, i8, i9);
+            public final void onLayoutChange(View view, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9) throws Resources.NotFoundException {
+                this.f$0.lambda$new$0(view, i2, i3, i4, i5, i6, i7, i8, i9);
             }
         };
         this.mRemoveOnLayoutChangeListnerRunnable = null;
@@ -236,7 +237,7 @@ public class Dialog implements DialogInterface, Window.Callback, KeyEvent.Callba
         phoneWindow.setOnWindowSwipeDismissedCallback(new Window.OnWindowSwipeDismissedCallback() { // from class: android.app.Dialog$$ExternalSyntheticLambda2
             @Override // android.view.Window.OnWindowSwipeDismissedCallback
             public final void onWindowSwipeDismissed() {
-                Dialog.this.lambda$new$1();
+                this.f$0.lambda$new$1();
             }
         });
         phoneWindow.setWindowManager(windowManager, null, null);
@@ -250,7 +251,7 @@ public class Dialog implements DialogInterface, Window.Callback, KeyEvent.Callba
             Log.e(TAG, "exceptioin!! " + e);
         }
         Activity activityContext = getActivityContext(context);
-        boolean equals = (activityContext == null || (activityInfo = activityContext.getActivityInfo()) == null || activityInfo.metaData == null) ? false : SAMSUNG_BASIC_INTERACTION_METADATA_VALUE.equals(activityInfo.metaData.getString(SAMSUNG_BASIC_INTERACTION_METADATA_NAME));
+        boolean zEquals = (activityContext == null || (activityInfo = activityContext.getActivityInfo()) == null || activityInfo.metaData == null) ? false : SAMSUNG_BASIC_INTERACTION_METADATA_VALUE.equals(activityInfo.metaData.getString(SAMSUNG_BASIC_INTERACTION_METADATA_NAME));
         TypedValue typedValue2 = new TypedValue();
         context.getTheme().resolveAttribute(R.attr.parentIsDeviceDefault, typedValue2, false);
         if (typedValue2.data != 0) {
@@ -262,8 +263,8 @@ public class Dialog implements DialogInterface, Window.Callback, KeyEvent.Callba
                 phoneWindow.setGravity(80);
             }
         }
-        Log.i(TAG, "mIsDeviceDefault = " + this.mIsDeviceDefault + ", mIsSamsungBasicInteraction = " + this.mIsSamsungBasicInteraction + ", isMetaDataInActivity = " + equals);
-        if (this.mIsSamsungBasicInteraction || equals) {
+        Log.i(TAG, "mIsDeviceDefault = " + this.mIsDeviceDefault + ", mIsSamsungBasicInteraction = " + this.mIsSamsungBasicInteraction + ", isMetaDataInActivity = " + zEquals);
+        if (this.mIsSamsungBasicInteraction || zEquals) {
             phoneWindow.setGravity(80);
         }
         this.mListenersHandler = new ListenersHandler(this);
@@ -393,11 +394,11 @@ public class Dialog implements DialogInterface, Window.Callback, KeyEvent.Callba
         sendShowMessage();
     }
 
-    public void semSetAnchor(View view) {
+    public void semSetAnchor(View view) throws Resources.NotFoundException {
         semSetAnchor(view, 0);
     }
 
-    public void semSetAnchor(View view, int i) {
+    public void semSetAnchor(View view, int i) throws Resources.NotFoundException {
         if (isSupportAnchor()) {
             Log.i(TAG, "semSetAnchor anchorView = " + view + " , anchorType : " + i);
             this.mAnchorView = view;
@@ -410,7 +411,7 @@ public class Dialog implements DialogInterface, Window.Callback, KeyEvent.Callba
                 this.mRemoveOnLayoutChangeListnerRunnable = new Runnable() { // from class: android.app.Dialog$$ExternalSyntheticLambda3
                     @Override // java.lang.Runnable
                     public final void run() {
-                        Dialog.this.lambda$semSetAnchor$2();
+                        this.f$0.lambda$semSetAnchor$2();
                     }
                 };
                 this.mNeedToUpdate = isNeedToUpdateAttributes(this.mRootView);
@@ -451,7 +452,7 @@ public class Dialog implements DialogInterface, Window.Callback, KeyEvent.Callba
         return z2;
     }
 
-    private void alignToAnchor() {
+    private void alignToAnchor() throws Resources.NotFoundException {
         View view;
         WindowInsets rootWindowInsets;
         Resources resources = this.mContext.getResources();
@@ -505,105 +506,68 @@ public class Dialog implements DialogInterface, Window.Callback, KeyEvent.Callba
                 }
                 width = dimensionPixelSize2;
             }
-            int semGetDialogWidth = (semGetDialogWidth() - width) / 2;
+            int iSemGetDialogWidth = (semGetDialogWidth() - width) / 2;
             attributes.gravity = 51;
-            attributes.x = iArr[0] - semGetDialogWidth;
+            attributes.x = iArr[0] - iSemGetDialogWidth;
             attributes.y = ((iArr[1] + height) - dimensionPixelSize) + resources.getDimensionPixelSize(R.dimen.sem_dialog_window_margin_in_large);
             this.mWindow.setAttributes(attributes);
             this.mNeedToUpdate = false;
         }
     }
 
-    public void semSetAnchor(int i, int i2) {
+    public void semSetAnchor(int i, int i2) throws Resources.NotFoundException {
         Resources resources = this.mContext.getResources();
         if (isSupportAnchor()) {
             Log.i(TAG, "semSetAnchor set x : " + i + ", y : " + i2);
-            int semGetDialogWidth = semGetDialogWidth();
+            int iSemGetDialogWidth = semGetDialogWidth();
             int dimensionPixelSize = resources.getConfiguration().windowConfiguration.isPopOver() ? 0 : resources.getDimensionPixelSize(R.dimen.status_bar_height);
             WindowManager.LayoutParams attributes = this.mWindow.getAttributes();
             attributes.gravity = 51;
-            attributes.x = i - (semGetDialogWidth / 2);
+            attributes.x = i - (iSemGetDialogWidth / 2);
             attributes.y = (i2 - dimensionPixelSize) + resources.getDimensionPixelSize(R.dimen.sem_dialog_window_margin_in_large);
             this.mWindow.setAttributes(attributes);
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x005d  */
+    /* JADX WARN: Removed duplicated region for block: B:18:0x005d  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private int semGetDialogWidth() {
-        /*
-            r8 = this;
-            android.content.Context r0 = r8.mContext
-            android.content.res.Resources r0 = r0.getResources()
-            android.content.res.Configuration r1 = r0.getConfiguration()
-            int r1 = r1.screenWidthDp
-            float r1 = (float) r1
-            android.util.DisplayMetrics r2 = r0.getDisplayMetrics()
-            r3 = 1
-            float r1 = android.util.TypedValue.applyDimension(r3, r1, r2)
-            android.content.res.Configuration r2 = r0.getConfiguration()
-            int r2 = r2.orientation
-            r4 = 0
-            if (r2 != r3) goto L21
-            r2 = r3
-            goto L22
-        L21:
-            r2 = r4
-        L22:
-            android.util.DisplayMetrics r5 = r0.getDisplayMetrics()
-            android.util.TypedValue r6 = new android.util.TypedValue
-            r6.<init>()
-            if (r2 == 0) goto L3a
-            android.content.Context r8 = r8.mContext
-            android.content.res.Resources$Theme r8 = r8.getTheme()
-            r2 = 16843607(0x1010357, float:2.3695954E-38)
-            r8.resolveAttribute(r2, r6, r3)
-            goto L46
-        L3a:
-            android.content.Context r8 = r8.mContext
-            android.content.res.Resources$Theme r8 = r8.getTheme()
-            r2 = 16843606(0x1010356, float:2.3695951E-38)
-            r8.resolveAttribute(r2, r6, r3)
-        L46:
-            int r8 = r6.type
-            r2 = 6
-            r7 = 5
-            if (r8 != r7) goto L52
-            float r8 = r6.getDimension(r5)
-        L50:
-            int r4 = (int) r8
-            goto L5b
-        L52:
-            int r8 = r6.type
-            if (r8 != r2) goto L5b
-            float r8 = r6.getFraction(r1, r1)
-            goto L50
-        L5b:
-            if (r4 != 0) goto L7c
-            r8 = 17106046(0x105047e, float:2.4431465E-38)
-            r0.getValue(r8, r6, r3)
-            int r8 = r6.type
-            if (r8 != r7) goto L6d
-            float r8 = r6.getDimension(r5)
-        L6b:
-            int r8 = (int) r8
-            return r8
-        L6d:
-            int r8 = r6.type
-            if (r8 != r2) goto L7c
-            int r8 = r5.widthPixels
-            float r8 = (float) r8
-            int r0 = r5.widthPixels
-            float r0 = (float) r0
-            float r8 = r6.getFraction(r8, r0)
-            goto L6b
-        L7c:
-            return r4
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.app.Dialog.semGetDialogWidth():int");
+    private int semGetDialogWidth() throws Resources.NotFoundException {
+        float fraction;
+        float fraction2;
+        Resources resources = this.mContext.getResources();
+        float fApplyDimension = TypedValue.applyDimension(1, resources.getConfiguration().screenWidthDp, resources.getDisplayMetrics());
+        int i = 0;
+        boolean z = resources.getConfiguration().orientation == 1;
+        DisplayMetrics displayMetrics = resources.getDisplayMetrics();
+        TypedValue typedValue = new TypedValue();
+        if (z) {
+            this.mContext.getTheme().resolveAttribute(16843607, typedValue, true);
+        } else {
+            this.mContext.getTheme().resolveAttribute(16843606, typedValue, true);
+        }
+        if (typedValue.type == 5) {
+            fraction = typedValue.getDimension(displayMetrics);
+        } else {
+            if (typedValue.type == 6) {
+                fraction = typedValue.getFraction(fApplyDimension, fApplyDimension);
+            }
+            if (i == 0) {
+                resources.getValue(R.dimen.sem_config_prefDialogWidth, typedValue, true);
+                if (typedValue.type == 5) {
+                    fraction2 = typedValue.getDimension(displayMetrics);
+                } else if (typedValue.type == 6) {
+                    fraction2 = typedValue.getFraction(displayMetrics.widthPixels, displayMetrics.widthPixels);
+                }
+                return (int) fraction2;
+            }
+            return i;
+        }
+        i = (int) fraction;
+        if (i == 0) {
+        }
+        return i;
     }
 
     public void hide() {
@@ -681,7 +645,7 @@ public class Dialog implements DialogInterface, Window.Callback, KeyEvent.Callba
             this.mDefaultBackCallback = new OnBackInvokedCallback() { // from class: android.app.Dialog$$ExternalSyntheticLambda4
                 @Override // android.window.OnBackInvokedCallback
                 public final void onBackInvoked() {
-                    Dialog.this.onBackPressed();
+                    this.f$0.onBackPressed();
                 }
             };
             getOnBackInvokedDispatcher().registerSystemOnBackInvokedCallback(this.mDefaultBackCallback);
@@ -947,11 +911,11 @@ public class Dialog implements DialogInterface, Window.Callback, KeyEvent.Callba
         }
     }
 
-    public void registerForContextMenu(View view) {
+    public void registerForContextMenu(View view) throws Resources.NotFoundException {
         view.setOnCreateContextMenuListener(this);
     }
 
-    public void unregisterForContextMenu(View view) {
+    public void unregisterForContextMenu(View view) throws Resources.NotFoundException {
         view.setOnCreateContextMenuListener(null);
     }
 

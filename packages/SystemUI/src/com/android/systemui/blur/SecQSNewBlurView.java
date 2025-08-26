@@ -10,10 +10,10 @@ import android.widget.ImageView;
 import com.android.internal.graphics.drawable.BackgroundBlurDrawable;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SecQSNewBlurView extends FrameLayout {
     public ImageView imageView;
+    public boolean isBlurBlocked;
     public final int[] newPos;
     public final QSColorCurve qsColorCurve;
 
@@ -30,6 +30,11 @@ public final class SecQSNewBlurView extends FrameLayout {
         if (imageView != null) {
             imageView.setImageDrawable(getContext().getDrawable(R.drawable.qs_blur_gradient_drawable));
         }
+        SemBlurInfo.Builder builder = new SemBlurInfo.Builder(0);
+        builder.setBackgroundCornerRadius(getContext().getResources().getDimensionPixelSize(R.dimen.qs_pop_over_corner_radius));
+        builder.setRadius(0);
+        semSetBlurInfo(builder.build());
+        setAlpha(getAlpha());
     }
 
     @Override // android.view.View
@@ -37,14 +42,25 @@ public final class SecQSNewBlurView extends FrameLayout {
         super.onFinishInflate();
         setBackground(getContext().getDrawable(R.drawable.qs_blur_drawable));
         this.imageView = (ImageView) findViewById(R.id.qs_blur_gradient);
+        SemBlurInfo.Builder builder = new SemBlurInfo.Builder(0);
+        builder.setBackgroundCornerRadius(getContext().getResources().getDimensionPixelSize(R.dimen.qs_pop_over_corner_radius));
+        builder.setRadius(0);
+        semSetBlurInfo(builder.build());
     }
 
     @Override // android.view.View
     public final void setAlpha(float f) {
+        if (this.isBlurBlocked) {
+            f = 0.0f;
+        }
         super.setAlpha(f);
         Drawable background = getBackground();
         if (background != null) {
             background.setAlpha((int) (255.0f * f));
+        }
+        ImageView imageView = this.imageView;
+        if (imageView != null) {
+            imageView.setAlpha(f);
         }
         BackgroundBlurDrawable background2 = getBackground();
         BackgroundBlurDrawable backgroundBlurDrawable = background2 instanceof BackgroundBlurDrawable ? background2 : null;

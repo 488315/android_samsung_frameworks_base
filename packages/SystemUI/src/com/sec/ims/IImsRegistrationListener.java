@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface IImsRegistrationListener extends IInterface {
     public static final String DESCRIPTOR = "com.sec.ims.IImsRegistrationListener";
@@ -15,12 +14,10 @@ public interface IImsRegistrationListener extends IInterface {
 
     void onRegistered(ImsRegistration imsRegistration) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IImsRegistrationListener {
         static final int TRANSACTION_onDeregistered = 2;
         static final int TRANSACTION_onRegistered = 1;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements IImsRegistrationListener {
             private IBinder mRemote;
 
@@ -39,26 +36,26 @@ public interface IImsRegistrationListener extends IInterface {
 
             @Override // com.sec.ims.IImsRegistrationListener
             public void onDeregistered(ImsRegistration imsRegistration, ImsRegistrationError imsRegistrationError) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImsRegistrationListener.DESCRIPTOR);
-                    obtain.writeTypedObject(imsRegistration, 0);
-                    obtain.writeTypedObject(imsRegistrationError, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImsRegistrationListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(imsRegistration, 0);
+                    parcelObtain.writeTypedObject(imsRegistrationError, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.IImsRegistrationListener
             public void onRegistered(ImsRegistration imsRegistration) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImsRegistrationListener.DESCRIPTOR);
-                    obtain.writeTypedObject(imsRegistration, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImsRegistrationListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(imsRegistration, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -71,8 +68,8 @@ public interface IImsRegistrationListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IImsRegistrationListener.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IImsRegistrationListener)) ? new Proxy(iBinder) : (IImsRegistrationListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IImsRegistrationListener.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IImsRegistrationListener)) ? new Proxy(iBinder) : (IImsRegistrationListener) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder
@@ -106,7 +103,6 @@ public interface IImsRegistrationListener extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements IImsRegistrationListener {
         @Override // android.os.IInterface
         public IBinder asBinder() {

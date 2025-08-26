@@ -1,7 +1,14 @@
 package androidx.compose.foundation;
 
+import androidx.compose.animation.core.Animatable;
+import androidx.compose.animation.core.AnimationSpec;
+import androidx.compose.animation.core.AnimationSpecKt;
+import androidx.compose.animation.core.EasingKt;
+import androidx.compose.animation.core.StartOffset;
+import androidx.compose.animation.core.TweenSpec;
 import androidx.compose.runtime.SnapshotMutableStateImpl;
 import androidx.compose.runtime.SnapshotStateKt;
+import androidx.compose.ui.node.DelegatableNodeKt;
 import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
@@ -13,13 +20,11 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.SafeFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class MarqueeModifierNode$runAnimation$2 extends SuspendLambda implements Function2 {
     int label;
     final /* synthetic */ MarqueeModifierNode this$0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.compose.foundation.MarqueeModifierNode$runAnimation$2$2, reason: invalid class name */
     final class AnonymousClass2 extends SuspendLambda implements Function2 {
         /* synthetic */ Object L$0;
@@ -45,25 +50,88 @@ final class MarqueeModifierNode$runAnimation$2 extends SuspendLambda implements 
             return ((AnonymousClass2) create((Float) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
         }
 
-        /* JADX WARN: Code restructure failed: missing block: B:18:0x00d7, code lost:
+        /* JADX WARN: Code restructure failed: missing block: B:33:0x00d7, code lost:
         
-            if (r0.snapTo(r1, r19) == r7) goto L39;
-         */
-        /* JADX WARN: Code restructure failed: missing block: B:23:0x00c5, code lost:
-        
-            if (androidx.compose.animation.core.Animatable.animateTo$default(r3, r0, r2, null, null, r19, 12) == r7) goto L39;
+            if (r0.snapTo(r1, r19) != r7) goto L35;
          */
         @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final java.lang.Object invokeSuspend(java.lang.Object r20) {
-            /*
-                Method dump skipped, instructions count: 244
-                To view this dump change 'Code comments level' option to 'DEBUG'
-            */
-            throw new UnsupportedOperationException("Method not decompiled: androidx.compose.foundation.MarqueeModifierNode$runAnimation$2.AnonymousClass2.invokeSuspend(java.lang.Object):java.lang.Object");
+        public final Object invokeSuspend(Object obj) throws Throwable {
+            Float f;
+            AnimationSpec animationSpec;
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            try {
+            } catch (Throwable th) {
+                Animatable animatable = this.this$0.offset;
+                Float f2 = new Float(0.0f);
+                this.L$0 = th;
+                this.L$1 = null;
+                this.label = 4;
+                if (animatable.snapTo(f2, this) != coroutineSingletons) {
+                    throw th;
+                }
+            }
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                f = (Float) this.L$0;
+                if (f == null) {
+                    return Unit.INSTANCE;
+                }
+                int i2 = this.this$0.iterations;
+                float fFloatValue = f.floatValue();
+                MarqueeModifierNode marqueeModifierNode = this.this$0;
+                int i3 = marqueeModifierNode.initialDelayMillis;
+                int i4 = marqueeModifierNode.delayMillis;
+                TweenSpec tweenSpec = new TweenSpec((int) Math.ceil(fFloatValue / (Math.abs(DelegatableNodeKt.requireLayoutNode(marqueeModifierNode).density.mo58toPx0680j_4(marqueeModifierNode.velocity)) / 1000.0f)), i4, EasingKt.LinearEasing);
+                long jM12constructorimpl$default = StartOffset.m12constructorimpl$default((-i4) + i3);
+                AnimationSpec animationSpecM9infiniteRepeatable9IiC70o$default = i2 == Integer.MAX_VALUE ? AnimationSpecKt.m9infiniteRepeatable9IiC70o$default(2, tweenSpec, null, jM12constructorimpl$default) : AnimationSpecKt.m10repeatable91I0pcU$default(i2, tweenSpec, null, jM12constructorimpl$default, 4);
+                Animatable animatable2 = this.this$0.offset;
+                Float f3 = new Float(0.0f);
+                this.L$0 = f;
+                this.L$1 = animationSpecM9infiniteRepeatable9IiC70o$default;
+                this.label = 1;
+                if (animatable2.snapTo(f3, this) != coroutineSingletons) {
+                    animationSpec = animationSpecM9infiniteRepeatable9IiC70o$default;
+                }
+                return coroutineSingletons;
+            }
+            if (i == 1) {
+                AnimationSpec animationSpec2 = (AnimationSpec) this.L$1;
+                Float f4 = (Float) this.L$0;
+                ResultKt.throwOnFailure(obj);
+                animationSpec = animationSpec2;
+                f = f4;
+            } else {
+                if (i != 2) {
+                    if (i == 3) {
+                        ResultKt.throwOnFailure(obj);
+                        return Unit.INSTANCE;
+                    }
+                    if (i != 4) {
+                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                    }
+                    Throwable th2 = (Throwable) this.L$0;
+                    ResultKt.throwOnFailure(obj);
+                    throw th2;
+                }
+                ResultKt.throwOnFailure(obj);
+                Animatable animatable3 = this.this$0.offset;
+                Float f5 = new Float(0.0f);
+                this.label = 3;
+            }
+            Animatable animatable4 = this.this$0.offset;
+            this.L$0 = null;
+            this.L$1 = null;
+            this.label = 2;
+            if (Animatable.animateTo$default(animatable4, f, animationSpec, null, null, this, 12) != coroutineSingletons) {
+                Animatable animatable32 = this.this$0.offset;
+                Float f52 = new Float(0.0f);
+                this.label = 3;
+            }
+            return coroutineSingletons;
         }
     }
 
@@ -90,27 +158,27 @@ final class MarqueeModifierNode$runAnimation$2 extends SuspendLambda implements 
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             final MarqueeModifierNode marqueeModifierNode = this.this$0;
-            SafeFlow snapshotFlow = SnapshotStateKt.snapshotFlow(new Function0() { // from class: androidx.compose.foundation.MarqueeModifierNode$runAnimation$2.1
+            SafeFlow safeFlowSnapshotFlow = SnapshotStateKt.snapshotFlow(new Function0() { // from class: androidx.compose.foundation.MarqueeModifierNode$runAnimation$2.1
                 {
                     super(0);
                 }
 
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    if (MarqueeModifierNode.this.getContentWidth() <= MarqueeModifierNode.this.getContainerWidth()) {
+                    if (marqueeModifierNode.getContentWidth() <= marqueeModifierNode.getContainerWidth()) {
                         return null;
                     }
-                    int i2 = ((MarqueeAnimationMode) ((SnapshotMutableStateImpl) MarqueeModifierNode.this.animationMode$delegate).getValue()).value;
+                    int i2 = ((MarqueeAnimationMode) ((SnapshotMutableStateImpl) marqueeModifierNode.animationMode$delegate).getValue()).value;
                     MarqueeAnimationMode.Companion.getClass();
-                    if (i2 != MarqueeAnimationMode.WhileFocused || ((Boolean) ((SnapshotMutableStateImpl) MarqueeModifierNode.this.hasFocus$delegate).getValue()).booleanValue()) {
-                        return Float.valueOf(MarqueeModifierNode.this.getContentWidth() + MarqueeModifierNode.this.getSpacingPx());
+                    if (i2 != MarqueeAnimationMode.WhileFocused || ((Boolean) ((SnapshotMutableStateImpl) marqueeModifierNode.hasFocus$delegate).getValue()).booleanValue()) {
+                        return Float.valueOf(marqueeModifierNode.getContentWidth() + marqueeModifierNode.getSpacingPx());
                     }
                     return null;
                 }
             });
             AnonymousClass2 anonymousClass2 = new AnonymousClass2(this.this$0, null);
             this.label = 1;
-            if (FlowKt.collectLatest(snapshotFlow, anonymousClass2, this) == coroutineSingletons) {
+            if (FlowKt.collectLatest(safeFlowSnapshotFlow, anonymousClass2, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

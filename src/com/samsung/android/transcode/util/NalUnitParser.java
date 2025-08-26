@@ -104,20 +104,20 @@ public class NalUnitParser {
     }
 
     public NalUnitParser(ByteBuffer byteBuffer) {
-        int position = byteBuffer.position();
+        int iPosition = byteBuffer.position();
         LogS.i(TAG, "input buffer size : " + byteBuffer.remaining());
-        int min = Math.min(512, byteBuffer.remaining());
-        this.mBufferSize = min;
-        byte[] bArr = new byte[min];
+        int iMin = Math.min(512, byteBuffer.remaining());
+        this.mBufferSize = iMin;
+        byte[] bArr = new byte[iMin];
         this.mBuffer = bArr;
-        byteBuffer.get(bArr, 0, min);
-        byteBuffer.position(position);
+        byteBuffer.get(bArr, 0, iMin);
+        byteBuffer.position(iPosition);
         this.mNalStartPos = findNalStartCode(this.mBuffer, 0);
     }
 
     public boolean findHDRStaticMeta() {
-        int findNalStartCode;
-        int findNalStartCode2;
+        int iFindNalStartCode;
+        int iFindNalStartCode2;
         boolean z;
         if (this.mNalStartPos < 0) {
             LogS.e(TAG, "there is no nal start code");
@@ -130,33 +130,33 @@ public class NalUnitParser {
         }
         int i = this.mMasteringDisplayColorMetaStartPos;
         if (i == this.mContentsLevelInfoMetaStartPos) {
-            findNalStartCode = findNalStartCode(this.mBuffer, i + 4);
-            findNalStartCode2 = findNalStartCode;
+            iFindNalStartCode = findNalStartCode(this.mBuffer, i + 4);
+            iFindNalStartCode2 = iFindNalStartCode;
             z = true;
         } else {
-            findNalStartCode = findNalStartCode(this.mBuffer, i + 4);
+            iFindNalStartCode = findNalStartCode(this.mBuffer, i + 4);
             if (findContentLightLevel()) {
-                findNalStartCode2 = findNalStartCode(this.mBuffer, this.mContentsLevelInfoMetaStartPos + 4);
+                iFindNalStartCode2 = findNalStartCode(this.mBuffer, this.mContentsLevelInfoMetaStartPos + 4);
                 z = false;
             } else {
                 LogS.e(TAG, "cannot find Content light level info meta");
                 return false;
             }
         }
-        LogS.e(TAG, "Mastering display color meta buffer position : " + this.mMasteringDisplayColorMetaStartPos + " ~ " + findNalStartCode);
-        LogS.e(TAG, "Content light level info meta buffer position : " + this.mContentsLevelInfoMetaStartPos + " ~ " + findNalStartCode2);
-        int i2 = findNalStartCode - this.mMasteringDisplayColorMetaStartPos;
+        LogS.e(TAG, "Mastering display color meta buffer position : " + this.mMasteringDisplayColorMetaStartPos + " ~ " + iFindNalStartCode);
+        LogS.e(TAG, "Content light level info meta buffer position : " + this.mContentsLevelInfoMetaStartPos + " ~ " + iFindNalStartCode2);
+        int i2 = iFindNalStartCode - this.mMasteringDisplayColorMetaStartPos;
         StringBuilder sb = new StringBuilder("Mastering display color meta data size : ");
         sb.append(i2);
         LogS.e(TAG, sb.toString());
-        int i3 = z ? 0 : findNalStartCode2 - this.mContentsLevelInfoMetaStartPos;
+        int i3 = z ? 0 : iFindNalStartCode2 - this.mContentsLevelInfoMetaStartPos;
         if (i2 < 0 || i3 < 0) {
             LogS.e(TAG, "invalid size : " + i2 + " " + i3);
             return false;
         }
-        ByteBuffer allocate = ByteBuffer.allocate(i2 + i3);
-        this.mHdrStaticMeta = allocate;
-        allocate.put(this.mBuffer, this.mMasteringDisplayColorMetaStartPos, i2);
+        ByteBuffer byteBufferAllocate = ByteBuffer.allocate(i2 + i3);
+        this.mHdrStaticMeta = byteBufferAllocate;
+        byteBufferAllocate.put(this.mBuffer, this.mMasteringDisplayColorMetaStartPos, i2);
         if (!z) {
             LogS.e(TAG, "Content light level info meta data size : " + i3);
             this.mHdrStaticMeta.put(this.mBuffer, this.mContentsLevelInfoMetaStartPos, i3);
@@ -170,25 +170,25 @@ public class NalUnitParser {
     }
 
     public ByteBuffer insertHDRStaticMeta(ByteBuffer byteBuffer, int i, boolean z) {
-        int i2;
+        int iFindNalStartCode;
         ByteBuffer byteBuffer2 = this.mHdrStaticMeta;
         if (byteBuffer2 != null && byteBuffer2.capacity() != 0) {
             byte[] bArr = new byte[i];
             byteBuffer.get(bArr, byteBuffer.position(), i);
-            int findPPSPosition = findPPSPosition(bArr, z);
-            LogS.d(TAG, "ppsPos : " + findPPSPosition);
-            if (findPPSPosition >= 0) {
-                i2 = findNalStartCode(bArr, findPPSPosition + 4);
-                LogS.d(TAG, "ppsEndPos : " + findPPSPosition);
+            int iFindPPSPosition = findPPSPosition(bArr, z);
+            LogS.d(TAG, "ppsPos : " + iFindPPSPosition);
+            if (iFindPPSPosition >= 0) {
+                iFindNalStartCode = findNalStartCode(bArr, iFindPPSPosition + 4);
+                LogS.d(TAG, "ppsEndPos : " + iFindPPSPosition);
             } else {
-                i2 = -1;
+                iFindNalStartCode = -1;
             }
             byteBuffer = ByteBuffer.allocate(this.mHdrStaticMeta.limit() + i);
             this.mHdrStaticMeta.position(0);
-            if (i2 > 0) {
-                byteBuffer.put(bArr, 0, i2);
+            if (iFindNalStartCode > 0) {
+                byteBuffer.put(bArr, 0, iFindNalStartCode);
                 byteBuffer.put(this.mHdrStaticMeta);
-                byteBuffer.put(bArr, i2, i - i2);
+                byteBuffer.put(bArr, iFindNalStartCode, i - iFindNalStartCode);
                 return byteBuffer;
             }
             byteBuffer.put(this.mHdrStaticMeta);
@@ -198,13 +198,13 @@ public class NalUnitParser {
     }
 
     private int findPPSPosition(byte[] bArr, boolean z) {
-        int findNalStartCode;
+        int iFindNalStartCode;
         int i = 0;
-        while (bArr.length - i >= NAL_START_CODE.length && (findNalStartCode = findNalStartCode(bArr, i)) >= 0) {
-            if (isPPSNalUnit(bArr, findNalStartCode, z)) {
-                return findNalStartCode;
+        while (bArr.length - i >= NAL_START_CODE.length && (iFindNalStartCode = findNalStartCode(bArr, i)) >= 0) {
+            if (isPPSNalUnit(bArr, iFindNalStartCode, z)) {
+                return iFindNalStartCode;
             }
-            i = findNalStartCode + 4;
+            i = iFindNalStartCode + 4;
         }
         return -1;
     }

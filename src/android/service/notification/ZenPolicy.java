@@ -10,6 +10,7 @@ import android.provider.Contacts;
 import android.util.proto.ProtoOutputStream;
 import com.samsung.android.knox.analytics.database.Contract;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -940,6 +941,11 @@ public final class ZenPolicy implements Parcelable {
         return stateToBoolean(getZenPolicyVisualEffectState(i), z);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:17:0x003b  */
+    /* JADX WARN: Removed duplicated region for block: B:22:0x0047  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public void apply(ZenPolicy zenPolicy) {
         int i;
         if (zenPolicy == null) {
@@ -955,20 +961,18 @@ public final class ZenPolicy implements Parcelable {
                         int i4 = zenPolicy.mPriorityMessages;
                         if (i3 < i4) {
                             this.mPriorityMessages = i4;
-                        }
-                    }
-                    if (i2 == 3) {
-                        int i5 = this.mPriorityCalls;
-                        int i6 = zenPolicy.mPriorityCalls;
-                        if (i5 < i6) {
-                            this.mPriorityCalls = i6;
-                        }
-                    }
-                    if (i2 == 8) {
-                        int i7 = this.mConversationSenders;
-                        int i8 = zenPolicy.mConversationSenders;
-                        if (i7 < i8) {
-                            this.mConversationSenders = i8;
+                        } else if (i2 == 3) {
+                            int i5 = this.mPriorityCalls;
+                            int i6 = zenPolicy.mPriorityCalls;
+                            if (i5 < i6) {
+                                this.mPriorityCalls = i6;
+                            } else if (i2 == 8) {
+                                int i7 = this.mConversationSenders;
+                                int i8 = zenPolicy.mConversationSenders;
+                                if (i7 < i8) {
+                                    this.mConversationSenders = i8;
+                                }
+                            }
                         }
                     }
                 }
@@ -1001,43 +1005,43 @@ public final class ZenPolicy implements Parcelable {
     }
 
     public ZenPolicy overwrittenWith(ZenPolicy zenPolicy) {
-        ZenPolicy copy = copy();
+        ZenPolicy zenPolicyCopy = copy();
         if (zenPolicy == null) {
-            return copy;
+            return zenPolicyCopy;
         }
         for (int i = 0; i < this.mPriorityCategories.size(); i++) {
             Integer num = zenPolicy.mPriorityCategories.get(i);
             if (num.intValue() != 0) {
-                copy.mPriorityCategories.set(i, num);
+                zenPolicyCopy.mPriorityCategories.set(i, num);
                 if (i == 2) {
-                    copy.mPriorityMessages = zenPolicy.mPriorityMessages;
+                    zenPolicyCopy.mPriorityMessages = zenPolicy.mPriorityMessages;
                 } else if (i == 3) {
-                    copy.mPriorityCalls = zenPolicy.mPriorityCalls;
+                    zenPolicyCopy.mPriorityCalls = zenPolicy.mPriorityCalls;
                 } else if (i == 8) {
-                    copy.mConversationSenders = zenPolicy.mConversationSenders;
+                    zenPolicyCopy.mConversationSenders = zenPolicy.mConversationSenders;
                 }
             }
         }
         for (int i2 = 0; i2 < this.mVisualEffects.size(); i2++) {
             if (zenPolicy.mVisualEffects.get(i2).intValue() != 0) {
-                copy.mVisualEffects.set(i2, zenPolicy.mVisualEffects.get(i2));
+                zenPolicyCopy.mVisualEffects.set(i2, zenPolicy.mVisualEffects.get(i2));
             }
         }
         int i3 = zenPolicy.mAllowChannels;
         if (i3 != 0) {
-            copy.mAllowChannels = i3;
+            zenPolicyCopy.mAllowChannels = i3;
         }
-        copy.mAppBypassDndFlag = zenPolicy.mAppBypassDndFlag;
-        copy.mExceptionContactsFlag = zenPolicy.mExceptionContactsFlag;
-        copy.mAppsToBypassDnd = zenPolicy.mAppsToBypassDnd == null ? new ArrayList<>() : new ArrayList<>(zenPolicy.mAppsToBypassDnd);
-        copy.mExceptionContacts = zenPolicy.mExceptionContacts == null ? new ArrayList<>() : new ArrayList<>(zenPolicy.mExceptionContacts);
-        copy.mIsContactsOverridden = zenPolicy.mIsContactsOverridden;
-        copy.mIsAppBypassDndOverridden = zenPolicy.mIsAppBypassDndOverridden;
-        return copy;
+        zenPolicyCopy.mAppBypassDndFlag = zenPolicy.mAppBypassDndFlag;
+        zenPolicyCopy.mExceptionContactsFlag = zenPolicy.mExceptionContactsFlag;
+        zenPolicyCopy.mAppsToBypassDnd = zenPolicy.mAppsToBypassDnd == null ? new ArrayList<>() : new ArrayList<>(zenPolicy.mAppsToBypassDnd);
+        zenPolicyCopy.mExceptionContacts = zenPolicy.mExceptionContacts == null ? new ArrayList<>() : new ArrayList<>(zenPolicy.mExceptionContacts);
+        zenPolicyCopy.mIsContactsOverridden = zenPolicy.mIsContactsOverridden;
+        zenPolicyCopy.mIsAppBypassDndOverridden = zenPolicy.mIsAppBypassDndOverridden;
+        return zenPolicyCopy;
     }
 
     public void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         protoOutputStream.write(1159641169921L, getPriorityCategoryReminders());
         protoOutputStream.write(1159641169922L, getPriorityCategoryEvents());
         protoOutputStream.write(1159641169923L, getPriorityCategoryMessages());
@@ -1055,10 +1059,10 @@ public final class ZenPolicy implements Parcelable {
         protoOutputStream.write(1159641169935L, getVisualEffectNotificationList());
         protoOutputStream.write(1159641169937L, getPriorityMessageSenders());
         protoOutputStream.write(1159641169936L, getPriorityCallSenders());
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 
-    public byte[] toProto() {
+    public byte[] toProto() throws IOException {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         ProtoOutputStream protoOutputStream = new ProtoOutputStream(byteArrayOutputStream);
         protoOutputStream.write(1159641169921L, getPriorityCategoryCalls());
@@ -1086,13 +1090,13 @@ public final class ZenPolicy implements Parcelable {
     }
 
     public ZenPolicy copy() {
-        Parcel obtain = Parcel.obtain();
+        Parcel parcelObtain = Parcel.obtain();
         try {
-            writeToParcel(obtain, 0);
-            obtain.setDataPosition(0);
-            return CREATOR.createFromParcel(obtain);
+            writeToParcel(parcelObtain, 0);
+            parcelObtain.setDataPosition(0);
+            return CREATOR.createFromParcel(parcelObtain);
         } finally {
-            obtain.recycle();
+            parcelObtain.recycle();
         }
     }
 }

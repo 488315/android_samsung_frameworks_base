@@ -45,9 +45,9 @@ public interface ISatelliteDatagramCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISatelliteDatagramCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISatelliteDatagramCallback)) {
-                return (ISatelliteDatagramCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISatelliteDatagramCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISatelliteDatagramCallback)) {
+                return (ISatelliteDatagramCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,12 +74,12 @@ public interface ISatelliteDatagramCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                long readLong = parcel.readLong();
+                long j = parcel.readLong();
                 SatelliteDatagram satelliteDatagram = (SatelliteDatagram) parcel.readTypedObject(SatelliteDatagram.CREATOR);
-                int readInt = parcel.readInt();
-                IVoidConsumer asInterface = IVoidConsumer.Stub.asInterface(parcel.readStrongBinder());
+                int i3 = parcel.readInt();
+                IVoidConsumer iVoidConsumerAsInterface = IVoidConsumer.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                onSatelliteDatagramReceived(readLong, satelliteDatagram, readInt, asInterface);
+                onSatelliteDatagramReceived(j, satelliteDatagram, i3, iVoidConsumerAsInterface);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -103,16 +103,16 @@ public interface ISatelliteDatagramCallback extends IInterface {
 
             @Override // android.telephony.satellite.ISatelliteDatagramCallback
             public void onSatelliteDatagramReceived(long j, SatelliteDatagram satelliteDatagram, int i, IVoidConsumer iVoidConsumer) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISatelliteDatagramCallback.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeTypedObject(satelliteDatagram, 0);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iVoidConsumer);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISatelliteDatagramCallback.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeTypedObject(satelliteDatagram, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iVoidConsumer);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -36,13 +36,13 @@ public final class CellInfoLte {
 
     public static final ArrayList<CellInfoLte> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<CellInfoLte> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 72, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 72, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             CellInfoLte cellInfoLte = new CellInfoLte();
-            cellInfoLte.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 72);
+            cellInfoLte.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 72);
             arrayList.add(cellInfoLte);
         }
         return arrayList;

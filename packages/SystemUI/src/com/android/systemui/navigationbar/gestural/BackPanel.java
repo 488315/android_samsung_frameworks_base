@@ -20,7 +20,6 @@ import kotlin.Unit;
 import kotlin.collections.ArraysKt___ArraysKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class BackPanel extends View {
     public final Set allAnimatedFloat;
@@ -54,20 +53,20 @@ public class BackPanel extends View {
         this.arrowBackgroundRect = new RectF();
         Paint paint2 = new Paint();
         this.arrowBackgroundPaint = paint2;
-        Float valueOf = Float.valueOf(1.0f);
+        Float fValueOf = Float.valueOf(1.0f);
         int i = 12;
         DefaultConstructorMarker defaultConstructorMarker = null;
         Float f = null;
         Float f2 = null;
-        AnimatedFloat animatedFloat = new AnimatedFloat(this, "arrowLength", valueOf, f, f2, i, defaultConstructorMarker);
+        AnimatedFloat animatedFloat = new AnimatedFloat(this, "arrowLength", fValueOf, f, f2, i, defaultConstructorMarker);
         this.arrowLength = animatedFloat;
         AnimatedFloat animatedFloat2 = new AnimatedFloat(this, "arrowHeight", Float.valueOf(0.1f), f, f2, i, defaultConstructorMarker);
         this.arrowHeight = animatedFloat2;
-        Float valueOf2 = Float.valueOf(0.0f);
+        Float fValueOf2 = Float.valueOf(0.0f);
         int i2 = 8;
-        AnimatedFloat animatedFloat3 = new AnimatedFloat(this, "backgroundWidth", valueOf, valueOf2, f2, i2, defaultConstructorMarker);
+        AnimatedFloat animatedFloat3 = new AnimatedFloat(this, "backgroundWidth", fValueOf, fValueOf2, f2, i2, defaultConstructorMarker);
         this.backgroundWidth = animatedFloat3;
-        this.backgroundHeight = new AnimatedFloat(this, "backgroundHeight", valueOf, valueOf2, f2, i2, defaultConstructorMarker);
+        this.backgroundHeight = new AnimatedFloat(this, "backgroundHeight", fValueOf, fValueOf2, f2, i2, defaultConstructorMarker);
         int i3 = 14;
         Float f3 = null;
         Float f4 = null;
@@ -75,17 +74,17 @@ public class BackPanel extends View {
         this.backgroundEdgeCornerRadius = animatedFloat4;
         AnimatedFloat animatedFloat5 = new AnimatedFloat(this, "backgroundFarCornerRadius", f3, f4, f2, i3, defaultConstructorMarker);
         this.backgroundFarCornerRadius = animatedFloat5;
-        AnimatedFloat animatedFloat6 = new AnimatedFloat(this, "scale", Float.valueOf(0.002f), valueOf2, f2, 8, defaultConstructorMarker);
+        AnimatedFloat animatedFloat6 = new AnimatedFloat(this, "scale", Float.valueOf(0.002f), fValueOf2, f2, 8, defaultConstructorMarker);
         this.scale = animatedFloat6;
         DefaultConstructorMarker defaultConstructorMarker2 = null;
         Float f5 = null;
-        AnimatedFloat animatedFloat7 = new AnimatedFloat(this, "scalePivotX", valueOf, Float.valueOf(animatedFloat3.pos / 2), f5, 8, defaultConstructorMarker2);
+        AnimatedFloat animatedFloat7 = new AnimatedFloat(this, "scalePivotX", fValueOf, Float.valueOf(animatedFloat3.pos / 2), f5, 8, defaultConstructorMarker2);
         this.scalePivotX = animatedFloat7;
         AnimatedFloat animatedFloat8 = new AnimatedFloat(this, "horizontalTranslation", null, null, f5, 14, defaultConstructorMarker2);
         this.horizontalTranslation = animatedFloat8;
-        AnimatedFloat animatedFloat9 = new AnimatedFloat("arrowAlpha", Float.valueOf(0.00390625f), valueOf2, valueOf);
+        AnimatedFloat animatedFloat9 = new AnimatedFloat("arrowAlpha", Float.valueOf(0.00390625f), fValueOf2, fValueOf);
         this.arrowAlpha = animatedFloat9;
-        AnimatedFloat animatedFloat10 = new AnimatedFloat("backgroundAlpha", Float.valueOf(0.00390625f), valueOf2, valueOf);
+        AnimatedFloat animatedFloat10 = new AnimatedFloat("backgroundAlpha", Float.valueOf(0.00390625f), fValueOf2, fValueOf);
         this.backgroundAlpha = animatedFloat10;
         this.allAnimatedFloat = ArraysKt___ArraysKt.toSet(new AnimatedFloat[]{animatedFloat, animatedFloat2, animatedFloat3, animatedFloat4, animatedFloat5, animatedFloat7, animatedFloat6, animatedFloat8, animatedFloat9, animatedFloat10});
         this.verticalTranslation = new AnimatedFloat(this, "verticalTranslation", null, null, null, 14, null);
@@ -212,10 +211,10 @@ public class BackPanel extends View {
             canvas.scale(-1.0f, 1.0f, 0.0f, 0.0f);
             canvas.translate(-f9, 0.0f);
         }
-        Path calculateArrowPath$frameworks__base__packages__SystemUI__android_common__SystemUI_core = calculateArrowPath$frameworks__base__packages__SystemUI__android_common__SystemUI_core(f9, f10);
+        Path pathCalculateArrowPath$frameworks__base__packages__SystemUI__android_common__SystemUI_core = calculateArrowPath$frameworks__base__packages__SystemUI__android_common__SystemUI_core(f9, f10);
         Paint paint2 = this.arrowPaint;
         paint2.setAlpha((int) (MathUtils.min(this.arrowAlpha.pos, this.backgroundAlpha.pos) * f8));
-        canvas.drawPath(calculateArrowPath$frameworks__base__packages__SystemUI__android_common__SystemUI_core, paint2);
+        canvas.drawPath(pathCalculateArrowPath$frameworks__base__packages__SystemUI__android_common__SystemUI_core, paint2);
         canvas.restore();
         if (this.trackingBackArrowLatency) {
             this.latencyTracker.onActionEnd(15);
@@ -251,7 +250,6 @@ public class BackPanel extends View {
         this.arrowBackgroundPaint.setColor(getContext().getColor(z ? R.color.secondary_text_nofocus : R.color.shadow));
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AnimatedFloat {
         public final SpringAnimation animation;
         public float pos;
@@ -293,9 +291,9 @@ public class BackPanel extends View {
             }
             SpringAnimation springAnimation = animatedFloat.animation;
             if (f2 != null) {
-                float floatValue = f2.floatValue();
+                float fFloatValue = f2.floatValue();
                 springAnimation.cancel();
-                springAnimation.mVelocity = floatValue;
+                springAnimation.mVelocity = fFloatValue;
             }
             springAnimation.animateToFinalPosition(animatedFloat.restingPosition + f);
         }
@@ -323,21 +321,21 @@ public class BackPanel extends View {
         }
 
         public final void stretchBy(Float f, float f2) {
-            float floatValue = f != null ? f.floatValue() : 0.0f;
+            float fFloatValue = f != null ? f.floatValue() : 0.0f;
             float f3 = this.restingPosition;
-            this.animation.animateToFinalPosition(f3 + ((floatValue - f3) * f2));
+            this.animation.animateToFinalPosition(f3 + ((fFloatValue - f3) * f2));
         }
 
         public final void updateRestingPosition(boolean z, Float f) {
             if (f == null) {
                 return;
             }
-            float floatValue = f.floatValue();
-            this.restingPosition = floatValue;
+            float fFloatValue = f.floatValue();
+            this.restingPosition = fFloatValue;
             if (z) {
-                this.animation.animateToFinalPosition(floatValue);
+                this.animation.animateToFinalPosition(fFloatValue);
             } else {
-                snapTo(floatValue);
+                snapTo(fFloatValue);
             }
         }
 

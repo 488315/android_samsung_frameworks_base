@@ -30,7 +30,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class UserSwitcherDialogCoordinator$startHandlingDialogShowRequests$1 extends SuspendLambda implements Function2 {
     int label;
@@ -65,7 +64,7 @@ final class UserSwitcherDialogCoordinator$startHandlingDialogShowRequests$1 exte
                 public final Object emit(Object obj2, Continuation continuation) {
                     Pair pair;
                     ShowDialogRequestModel showDialogRequestModel = (ShowDialogRequestModel) obj2;
-                    UserSwitcherDialogCoordinator userSwitcherDialogCoordinator2 = UserSwitcherDialogCoordinator.this;
+                    UserSwitcherDialogCoordinator userSwitcherDialogCoordinator2 = userSwitcherDialogCoordinator;
                     Context context = ((ShadeDialogContextInteractorImpl) ((ShadeDialogContextInteractor) userSwitcherDialogCoordinator2.shadeDialogContextInteractor.get())).getContext();
                     boolean z = showDialogRequestModel instanceof ShowDialogRequestModel.ShowAddUserDialog;
                     Lazy lazy = userSwitcherDialogCoordinator2.dialogTransitionAnimator;

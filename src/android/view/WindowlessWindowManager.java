@@ -343,9 +343,9 @@ public class WindowlessWindowManager implements IWindowSession {
 
     @Override // android.view.IWindowSession
     public int addToDisplay(IWindow iWindow, WindowManager.LayoutParams layoutParams, int i, int i2, int i3, InputChannel inputChannel, InsetsState insetsState, InsetsSourceControl.Array array, Rect rect, float[] fArr) {
-        SurfaceControl build = new SurfaceControl.Builder().setName(layoutParams.getTitle().toString() + "Leash").setCallsite("WindowlessWindowManager.addToDisplay").setParent(getParentSurface(iWindow, layoutParams)).build();
-        SurfaceControl build2 = new SurfaceControl.Builder().setFormat(layoutParams.format).setBLASTLayer().setName(layoutParams.getTitle().toString()).setCallsite("WindowlessWindowManager.addToDisplay").setHidden(false).setParent(build).build();
-        State state = new State(this, build2, layoutParams, i2, iWindow, build, new Rect());
+        SurfaceControl surfaceControlBuild = new SurfaceControl.Builder().setName(layoutParams.getTitle().toString() + "Leash").setCallsite("WindowlessWindowManager.addToDisplay").setParent(getParentSurface(iWindow, layoutParams)).build();
+        SurfaceControl surfaceControlBuild2 = new SurfaceControl.Builder().setFormat(layoutParams.format).setBLASTLayer().setName(layoutParams.getTitle().toString()).setCallsite("WindowlessWindowManager.addToDisplay").setHidden(false).setParent(surfaceControlBuild).build();
+        State state = new State(this, surfaceControlBuild2, layoutParams, i2, iWindow, surfaceControlBuild, new Rect());
         synchronized (this) {
             State state2 = this.mStateForWindow.get(layoutParams.token);
             if (state2 != null) {
@@ -368,11 +368,11 @@ public class WindowlessWindowManager implements IWindowSession {
             try {
                 IWindowSession iWindowSession = this.mRealWm;
                 if (iWindowSession instanceof IWindowSession.Stub) {
-                    iWindowSession.grantInputChannel(i2, new SurfaceControl(build2, "WindowlessWindowManager.addToDisplay"), iWindow.asBinder(), this.mHostInputTransferToken, layoutParams.flags, layoutParams.privateFlags, layoutParams.inputFeatures, layoutParams.type, layoutParams.token, state.mInputTransferToken, layoutParams.getTitle().toString(), inputChannel);
+                    iWindowSession.grantInputChannel(i2, new SurfaceControl(surfaceControlBuild2, "WindowlessWindowManager.addToDisplay"), iWindow.asBinder(), this.mHostInputTransferToken, layoutParams.flags, layoutParams.privateFlags, layoutParams.inputFeatures, layoutParams.type, layoutParams.token, state.mInputTransferToken, layoutParams.getTitle().toString(), inputChannel);
                 } else if (CoreRune.MW_CAPTION_POPUP && this.mTaskToken != null) {
-                    this.mRealWm.grantInputChannelWithTaskToken(i2, build2, iWindow.asBinder(), this.mHostInputTransferToken, layoutParams.flags, layoutParams.privateFlags, layoutParams.inputFeatures, layoutParams.type, layoutParams.token, state.mInputTransferToken, layoutParams.getTitle().toString(), inputChannel, layoutParams.surfaceInsets.left, this.mTaskToken);
+                    this.mRealWm.grantInputChannelWithTaskToken(i2, surfaceControlBuild2, iWindow.asBinder(), this.mHostInputTransferToken, layoutParams.flags, layoutParams.privateFlags, layoutParams.inputFeatures, layoutParams.type, layoutParams.token, state.mInputTransferToken, layoutParams.getTitle().toString(), inputChannel, layoutParams.surfaceInsets.left, this.mTaskToken);
                 } else {
-                    this.mRealWm.grantInputChannel(i2, build2, iWindow.asBinder(), this.mHostInputTransferToken, layoutParams.flags, layoutParams.privateFlags, layoutParams.inputFeatures, layoutParams.type, layoutParams.token, state.mInputTransferToken, layoutParams.getTitle().toString(), inputChannel);
+                    this.mRealWm.grantInputChannel(i2, surfaceControlBuild2, iWindow.asBinder(), this.mHostInputTransferToken, layoutParams.flags, layoutParams.privateFlags, layoutParams.inputFeatures, layoutParams.type, layoutParams.token, state.mInputTransferToken, layoutParams.getTitle().toString(), inputChannel);
                 }
                 state.mInputChannelToken = inputChannel != null ? inputChannel.getToken() : null;
             } catch (RemoteException e) {
@@ -390,7 +390,7 @@ public class WindowlessWindowManager implements IWindowSession {
 
     @Override // android.view.IWindowSession
     public void remove(IBinder iBinder) throws RemoteException {
-        State remove;
+        State stateRemove;
         WindowContainerToken windowContainerToken;
         if (CoreRune.MW_CAPTION_POPUP && (windowContainerToken = this.mTaskToken) != null) {
             this.mRealWm.removeWithTaskToken(iBinder, windowContainerToken);
@@ -398,13 +398,13 @@ public class WindowlessWindowManager implements IWindowSession {
             this.mRealWm.remove(iBinder);
         }
         synchronized (this) {
-            remove = this.mStateForWindow.remove(iBinder);
+            stateRemove = this.mStateForWindow.remove(iBinder);
         }
-        if (remove == null) {
+        if (stateRemove == null) {
             throw new IllegalArgumentException("Invalid window token (never added or removed already)");
         }
-        removeSurface(remove.mSurfaceControl);
-        removeSurface(remove.mLeash);
+        removeSurface(stateRemove.mSurfaceControl);
+        removeSurface(stateRemove.mLeash);
     }
 
     protected void removeSurface(SurfaceControl surfaceControl) {
@@ -528,7 +528,7 @@ public class WindowlessWindowManager implements IWindowSession {
         SurfaceControl surfaceControl2 = state.mSurfaceControl;
         SurfaceControl surfaceControl3 = state.mLeash;
         SurfaceControl.Transaction transaction = new SurfaceControl.Transaction();
-        int copyFrom = layoutParams != null ? state.mParams.copyFrom(layoutParams) : 0;
+        int iCopyFrom = layoutParams != null ? state.mParams.copyFrom(layoutParams) : 0;
         WindowManager.LayoutParams layoutParams2 = state.mParams;
         ClientWindowFrames clientWindowFrames2 = new ClientWindowFrames();
         clientWindowFrames2.attachedFrame = state.mAttachedFrame;
@@ -558,7 +558,7 @@ public class WindowlessWindowManager implements IWindowSession {
             Configuration configuration = this.mConfiguration;
             mergedConfiguration.setConfiguration(configuration, configuration);
         }
-        if ((copyFrom & 65540) != 0 && state.mInputChannelToken != null) {
+        if ((iCopyFrom & 65540) != 0 && state.mInputChannelToken != null) {
             try {
                 IWindowSession iWindowSession = this.mRealWm;
                 if (iWindowSession instanceof IWindowSession.Stub) {
@@ -692,9 +692,9 @@ public class WindowlessWindowManager implements IWindowSession {
                 clientWindowFrames.frame.offset(maxBounds.left - clientWindowFrames.frame.left, 0);
                 return;
             }
-            int min = Math.min(bounds.left + ((bounds.width() - clientWindowFrames.parentFrame.width()) / 2), maxBounds.width() - clientWindowFrames.parentFrame.width());
-            if (clientWindowFrames.frame.right + min > maxBounds.right) {
-                clientWindowFrames.frame.offset(maxBounds.right - (min + clientWindowFrames.frame.right), 0);
+            int iMin = Math.min(bounds.left + ((bounds.width() - clientWindowFrames.parentFrame.width()) / 2), maxBounds.width() - clientWindowFrames.parentFrame.width());
+            if (clientWindowFrames.frame.right + iMin > maxBounds.right) {
+                clientWindowFrames.frame.offset(maxBounds.right - (iMin + clientWindowFrames.frame.right), 0);
                 return;
             }
             return;

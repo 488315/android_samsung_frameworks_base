@@ -16,7 +16,6 @@ import com.airbnb.lottie.value.LottieValueCallback;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class RectangleContent implements BaseKeyframeAnimation.AnimationListener, KeyPathElementContent, PathContent {
     public final FloatKeyframeAnimation cornerRadiusAnimation;
@@ -35,18 +34,18 @@ public class RectangleContent implements BaseKeyframeAnimation.AnimationListener
         this.name = rectangleShape.name;
         this.hidden = rectangleShape.hidden;
         this.lottieDrawable = lottieDrawable;
-        BaseKeyframeAnimation createAnimation = rectangleShape.position.createAnimation();
-        this.positionAnimation = createAnimation;
-        BaseKeyframeAnimation createAnimation2 = rectangleShape.size.createAnimation();
-        this.sizeAnimation = createAnimation2;
-        BaseKeyframeAnimation createAnimation3 = rectangleShape.cornerRadius.createAnimation();
-        this.cornerRadiusAnimation = (FloatKeyframeAnimation) createAnimation3;
-        baseLayer.addAnimation(createAnimation);
-        baseLayer.addAnimation(createAnimation2);
-        baseLayer.addAnimation(createAnimation3);
-        createAnimation.addUpdateListener(this);
-        createAnimation2.addUpdateListener(this);
-        createAnimation3.addUpdateListener(this);
+        BaseKeyframeAnimation baseKeyframeAnimationCreateAnimation = rectangleShape.position.createAnimation();
+        this.positionAnimation = baseKeyframeAnimationCreateAnimation;
+        BaseKeyframeAnimation baseKeyframeAnimationCreateAnimation2 = rectangleShape.size.createAnimation();
+        this.sizeAnimation = baseKeyframeAnimationCreateAnimation2;
+        BaseKeyframeAnimation baseKeyframeAnimationCreateAnimation3 = rectangleShape.cornerRadius.createAnimation();
+        this.cornerRadiusAnimation = (FloatKeyframeAnimation) baseKeyframeAnimationCreateAnimation3;
+        baseLayer.addAnimation(baseKeyframeAnimationCreateAnimation);
+        baseLayer.addAnimation(baseKeyframeAnimationCreateAnimation2);
+        baseLayer.addAnimation(baseKeyframeAnimationCreateAnimation3);
+        baseKeyframeAnimationCreateAnimation.addUpdateListener(this);
+        baseKeyframeAnimationCreateAnimation2.addUpdateListener(this);
+        baseKeyframeAnimationCreateAnimation3.addUpdateListener(this);
     }
 
     @Override // com.airbnb.lottie.model.KeyPathElement
@@ -84,9 +83,9 @@ public class RectangleContent implements BaseKeyframeAnimation.AnimationListener
         if (floatValue == 0.0f && (baseKeyframeAnimation = this.roundedCornersAnimation) != null) {
             floatValue = Math.min(((Float) baseKeyframeAnimation.getValue()).floatValue(), Math.min(f, f2));
         }
-        float min = Math.min(f, f2);
-        if (floatValue > min) {
-            floatValue = min;
+        float fMin = Math.min(f, f2);
+        if (floatValue > fMin) {
+            floatValue = fMin;
         }
         PointF pointF2 = (PointF) this.positionAnimation.getValue();
         this.path.moveTo(pointF2.x + f, (pointF2.y - f2) + floatValue);
@@ -143,7 +142,11 @@ public class RectangleContent implements BaseKeyframeAnimation.AnimationListener
         MiscUtils.resolveKeyPath(keyPath, i, list, keyPath2, this);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:10:0x002a  */
     @Override // com.airbnb.lottie.animation.content.Content
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void setContents(List list, List list2) {
         int i = 0;
         while (true) {
@@ -157,11 +160,9 @@ public class RectangleContent implements BaseKeyframeAnimation.AnimationListener
                 if (trimPathContent.type == ShapeTrimPath.Type.SIMULTANEOUSLY) {
                     ((ArrayList) this.trimPaths.contents).add(trimPathContent);
                     trimPathContent.addListener(this);
-                    i++;
+                } else if (content instanceof RoundedCornersContent) {
+                    this.roundedCornersAnimation = ((RoundedCornersContent) content).roundedCorners;
                 }
-            }
-            if (content instanceof RoundedCornersContent) {
-                this.roundedCornersAnimation = ((RoundedCornersContent) content).roundedCorners;
             }
             i++;
         }

@@ -49,9 +49,7 @@ public class KeyStoreOperation {
         handleExceptions(new CheckedRemoteRequest() { // from class: android.security.KeyStoreOperation$$ExternalSyntheticLambda0
             @Override // android.security.CheckedRemoteRequest
             public final Object execute() {
-                Integer lambda$updateAad$0;
-                lambda$updateAad$0 = KeyStoreOperation.this.lambda$updateAad$0(bArr);
-                return lambda$updateAad$0;
+                return this.f$0.lambda$updateAad$0(bArr);
             }
         });
     }
@@ -67,9 +65,7 @@ public class KeyStoreOperation {
         return (byte[]) handleExceptions(new CheckedRemoteRequest() { // from class: android.security.KeyStoreOperation$$ExternalSyntheticLambda2
             @Override // android.security.CheckedRemoteRequest
             public final Object execute() {
-                byte[] lambda$update$1;
-                lambda$update$1 = KeyStoreOperation.this.lambda$update$1(bArr);
-                return lambda$update$1;
+                return this.f$0.lambda$update$1(bArr);
             }
         });
     }
@@ -84,9 +80,7 @@ public class KeyStoreOperation {
         return (byte[]) handleExceptions(new CheckedRemoteRequest() { // from class: android.security.KeyStoreOperation$$ExternalSyntheticLambda1
             @Override // android.security.CheckedRemoteRequest
             public final Object execute() {
-                byte[] lambda$finish$2;
-                lambda$finish$2 = KeyStoreOperation.this.lambda$finish$2(bArr, bArr2);
-                return lambda$finish$2;
+                return this.f$0.lambda$finish$2(bArr, bArr2);
             }
         });
     }
@@ -101,9 +95,7 @@ public class KeyStoreOperation {
         handleExceptions(new CheckedRemoteRequest() { // from class: android.security.KeyStoreOperation$$ExternalSyntheticLambda3
             @Override // android.security.CheckedRemoteRequest
             public final Object execute() {
-                Integer lambda$abort$3;
-                lambda$abort$3 = KeyStoreOperation.this.lambda$abort$3();
-                return lambda$abort$3;
+                return this.f$0.lambda$abort$3();
             }
         });
     }

@@ -587,12 +587,12 @@ public final class UserProperties implements Parcelable {
         printWriter.println(str + "    mItemsRestrictedOnHomeScreen=" + areItemsRestrictedOnHomeScreen());
     }
 
-    public UserProperties(TypedXmlPullParser typedXmlPullParser, UserProperties userProperties) throws IOException, XmlPullParserException {
+    public UserProperties(TypedXmlPullParser typedXmlPullParser, UserProperties userProperties) throws XmlPullParserException, IOException {
         this(userProperties);
         updateFromXml(typedXmlPullParser);
     }
 
-    public void updateFromXml(TypedXmlPullParser typedXmlPullParser) throws IOException, XmlPullParserException {
+    public void updateFromXml(TypedXmlPullParser typedXmlPullParser) throws XmlPullParserException, IOException {
         String attributeName;
         int attributeCount = typedXmlPullParser.getAttributeCount();
         for (int i = 0; i < attributeCount; i++) {
@@ -663,7 +663,7 @@ public final class UserProperties implements Parcelable {
         }
     }
 
-    public void writeToXml(TypedXmlSerializer typedXmlSerializer) throws IOException, XmlPullParserException {
+    public void writeToXml(TypedXmlSerializer typedXmlSerializer) throws XmlPullParserException, IOException {
         if (isPresent(0L)) {
             typedXmlSerializer.attributeInt(null, ATTR_SHOW_IN_LAUNCHER, this.mShowInLauncher);
         }

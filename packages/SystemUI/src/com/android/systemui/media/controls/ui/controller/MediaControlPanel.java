@@ -97,7 +97,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class MediaControlPanel {
     public static final List SEMANTIC_ACTIONS_ALL;
@@ -170,12 +169,12 @@ public class MediaControlPanel {
     };
 
     static {
-        Integer valueOf = Integer.valueOf(R.id.actionPlayPause);
-        Integer valueOf2 = Integer.valueOf(R.id.actionPrev);
-        Integer valueOf3 = Integer.valueOf(R.id.actionNext);
-        SEMANTIC_ACTIONS_COMPACT = List.of(valueOf, valueOf2, valueOf3);
-        SEMANTIC_ACTIONS_HIDE_WHEN_SCRUBBING = List.of(valueOf2, valueOf3);
-        SEMANTIC_ACTIONS_ALL = List.of(valueOf, valueOf2, valueOf3, Integer.valueOf(R.id.action0), Integer.valueOf(R.id.action1));
+        Integer numValueOf = Integer.valueOf(R.id.actionPlayPause);
+        Integer numValueOf2 = Integer.valueOf(R.id.actionPrev);
+        Integer numValueOf3 = Integer.valueOf(R.id.actionNext);
+        SEMANTIC_ACTIONS_COMPACT = List.of(numValueOf, numValueOf2, numValueOf3);
+        SEMANTIC_ACTIONS_HIDE_WHEN_SCRUBBING = List.of(numValueOf2, numValueOf3);
+        SEMANTIC_ACTIONS_ALL = List.of(numValueOf, numValueOf2, numValueOf3, Integer.valueOf(R.id.action0), Integer.valueOf(R.id.action1));
     }
 
     /* JADX WARN: Type inference failed for: r1v3, types: [com.android.systemui.media.controls.ui.controller.MediaControlPanel$1] */
@@ -214,13 +213,13 @@ public class MediaControlPanel {
         int intrinsicHeight = drawable.getIntrinsicHeight();
         Pair pair = new Pair(Integer.valueOf(intrinsicWidth), Integer.valueOf(intrinsicHeight));
         Pair pair2 = new Pair(Integer.valueOf(i2), Integer.valueOf(i3));
-        float intValue = ((Integer) pair.first).intValue();
-        float intValue2 = ((Integer) pair.second).intValue();
-        float intValue3 = ((Integer) pair2.first).intValue();
-        float intValue4 = ((Integer) pair2.second).intValue();
+        float fIntValue = ((Integer) pair.first).intValue();
+        float fIntValue2 = ((Integer) pair.second).intValue();
+        float fIntValue3 = ((Integer) pair2.first).intValue();
+        float fIntValue4 = ((Integer) pair2.second).intValue();
         float f = 0.0f;
-        if (intValue != 0.0f && intValue2 != 0.0f && intValue3 != 0.0f && intValue4 != 0.0f) {
-            f = intValue / intValue2 > intValue3 / intValue4 ? intValue4 / intValue2 : intValue3 / intValue;
+        if (fIntValue != 0.0f && fIntValue2 != 0.0f && fIntValue3 != 0.0f && fIntValue4 != 0.0f) {
+            f = fIntValue / fIntValue2 > fIntValue3 / fIntValue4 ? fIntValue4 / fIntValue2 : fIntValue3 / fIntValue;
         }
         if (f == 0.0f) {
             return;
@@ -233,21 +232,21 @@ public class MediaControlPanel {
     }
 
     public LayerDrawable addGradientToPlayerAlbum(Icon icon, ColorScheme colorScheme, int i, int i2) {
-        Drawable loadDrawable;
+        Drawable drawableLoadDrawable;
         if (icon == null) {
-            loadDrawable = null;
+            drawableLoadDrawable = null;
         } else {
-            loadDrawable = icon.loadDrawable(this.mContext);
+            drawableLoadDrawable = icon.loadDrawable(this.mContext);
             Rect rect = new Rect(0, 0, i, i2);
             if (rect.width() > i || rect.height() > i2) {
                 rect.offset((int) (-((rect.width() - i) / 2.0f)), (int) (-((rect.height() - i2) / 2.0f)));
             }
-            loadDrawable.setBounds(rect);
+            drawableLoadDrawable.setBounds(rect);
         }
         GradientDrawable gradientDrawable = (GradientDrawable) this.mContext.getDrawable(R.drawable.qs_media_scrim).mutate();
         int onSurface = colorScheme.mMaterialScheme.getOnSurface();
         gradientDrawable.setColors(new int[]{ColorUtilKt.getColorWithAlpha(onSurface, 0.65f), ColorUtilKt.getColorWithAlpha(onSurface, 0.75f)});
-        return new LayerDrawable(new Drawable[]{loadDrawable, gradientDrawable});
+        return new LayerDrawable(new Drawable[]{drawableLoadDrawable, gradientDrawable});
     }
 
     public final void bindButtonCommon(final ImageButton imageButton, MediaAction mediaAction) {
@@ -271,7 +270,7 @@ public class MediaControlPanel {
             imageButton.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.media.controls.ui.controller.MediaControlPanel$$ExternalSyntheticLambda15
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
-                    MediaControlPanel mediaControlPanel = MediaControlPanel.this;
+                    MediaControlPanel mediaControlPanel = this.f$0;
                     ImageButton imageButton2 = imageButton;
                     Runnable runnable2 = runnable;
                     Object obj = drawable;
@@ -292,7 +291,7 @@ public class MediaControlPanel {
                         final Runnable runnable3 = new Runnable() { // from class: com.android.systemui.surfaceeffects.ripple.MultiRippleController$play$1
                             @Override // java.lang.Runnable
                             public final void run() {
-                                MultiRippleController.this.multipleRippleView.ripples.remove(rippleAnimation);
+                                multiRippleController.multipleRippleView.ripples.remove(rippleAnimation);
                             }
                         };
                         if (!rippleAnimation.animator.isRunning()) {
@@ -301,11 +300,11 @@ public class MediaControlPanel {
                                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                                 public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                                     long currentPlayTime = valueAnimator.getCurrentPlayTime();
-                                    float floatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
-                                    RippleAnimation.this.rippleShader.setRawProgress(floatValue);
-                                    RippleAnimation rippleAnimation2 = RippleAnimation.this;
-                                    rippleAnimation2.rippleShader.setDistortionStrength(rippleAnimation2.config.shouldDistort ? 1 - floatValue : 0.0f);
-                                    RippleAnimation.this.rippleShader.setFloatUniform("in_time", currentPlayTime);
+                                    float fFloatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
+                                    rippleAnimation.rippleShader.setRawProgress(fFloatValue);
+                                    RippleAnimation rippleAnimation2 = rippleAnimation;
+                                    rippleAnimation2.rippleShader.setDistortionStrength(rippleAnimation2.config.shouldDistort ? 1 - fFloatValue : 0.0f);
+                                    rippleAnimation.rippleShader.setFloatUniform("in_time", currentPlayTime);
                                 }
                             });
                             rippleAnimation.animator.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.surfaceeffects.ripple.RippleAnimation$play$2
@@ -372,10 +371,10 @@ public class MediaControlPanel {
         if (!z2 || (d = mediaData.resumeProgress) == null) {
             this.mBackgroundExecutor.execute(new MediaControlPanel$$ExternalSyntheticLambda7(this, this.mController, i3));
         } else {
-            double doubleValue = d.doubleValue();
+            double dDoubleValue = d.doubleValue();
             SeekBarViewModel seekBarViewModel = this.mSeekBarViewModel;
             seekBarViewModel.getClass();
-            seekBarViewModel.set_data(new SeekBarViewModel.Progress(true, false, false, false, Integer.valueOf((int) (doubleValue * 100)), 100, false));
+            seekBarViewModel.set_data(new SeekBarViewModel.Progress(true, false, false, false, Integer.valueOf((int) (dDoubleValue * 100)), 100, false));
         }
         ViewGroup viewGroup = this.mMediaViewHolder.seamless;
         viewGroup.setVisibility(0);
@@ -507,9 +506,9 @@ public class MediaControlPanel {
             }
             Iterator it2 = SEMANTIC_ACTIONS_ALL.iterator();
             while (it2.hasNext()) {
-                int intValue = ((Integer) it2.next()).intValue();
-                final ImageButton action = this.mMediaViewHolder.getAction(intValue);
-                final MediaAction actionById = mediaButton.getActionById(intValue);
+                int iIntValue = ((Integer) it2.next()).intValue();
+                final ImageButton action = this.mMediaViewHolder.getAction(iIntValue);
+                final MediaAction actionById = mediaButton.getActionById(iIntValue);
                 if (action.getTag() == null) {
                     animationBindHandler = new AnimationBindHandler();
                     action.setTag(animationBindHandler);
@@ -522,7 +521,7 @@ public class MediaControlPanel {
                     public final Object invoke() {
                         ImageButton imageButton2 = action;
                         Intent intent = MediaControlPanel.SETTINGS_INTENT;
-                        MediaControlPanel mediaControlPanel = MediaControlPanel.this;
+                        MediaControlPanel mediaControlPanel = this.f$0;
                         mediaControlPanel.getClass();
                         MediaAction mediaAction = actionById;
                         AnimationBindHandler animationBindHandler3 = animationBindHandler2;
@@ -557,9 +556,9 @@ public class MediaControlPanel {
         } else {
             Iterator it3 = SEMANTIC_ACTIONS_COMPACT.iterator();
             while (it3.hasNext()) {
-                int intValue2 = ((Integer) it3.next()).intValue();
-                setVisibleAndAlpha(constraintSet2, intValue2, false);
-                setVisibleAndAlpha(constraintSet, intValue2, false);
+                int iIntValue2 = ((Integer) it3.next()).intValue();
+                setVisibleAndAlpha(constraintSet2, iIntValue2, false);
+                setVisibleAndAlpha(constraintSet, iIntValue2, false);
             }
             List list = mediaData.actionsToShowInCompact;
             List notificationActions = MediaActionsKt.getNotificationActions(mediaData.actions, this.mActivityStarter);
@@ -569,14 +568,14 @@ public class MediaControlPanel {
                 if (i7 >= arrayList2.size() || i7 >= arrayList.size()) {
                     break;
                 }
-                boolean contains = list.contains(Integer.valueOf(i7));
+                boolean zContains = list.contains(Integer.valueOf(i7));
                 int i8 = i4;
                 ImageButton imageButton2 = (ImageButton) arrayList.get(i7);
                 MediaAction mediaAction = (MediaAction) arrayList2.get(i7);
                 bindButtonCommon(imageButton2, mediaAction);
                 boolean z6 = mediaAction != null ? i8 : i3;
                 setVisibleAndAlpha(constraintSet, imageButton2.getId(), z6);
-                setVisibleAndAlpha(constraintSet2, imageButton2.getId(), (z6 == 0 || !contains) ? 0 : i8);
+                setVisibleAndAlpha(constraintSet2, imageButton2.getId(), (z6 == 0 || !zContains) ? 0 : i8);
                 i7++;
                 i4 = i8;
                 i3 = 0;
@@ -604,7 +603,7 @@ public class MediaControlPanel {
                 TextView textView5 = textView3;
                 TextView textView6 = textView4;
                 Intent intent = MediaControlPanel.SETTINGS_INTENT;
-                MediaControlPanel mediaControlPanel = MediaControlPanel.this;
+                MediaControlPanel mediaControlPanel = this.f$0;
                 mediaControlPanel.getClass();
                 MediaData mediaData2 = mediaData;
                 textView5.setText(mediaData2.song);
@@ -629,9 +628,9 @@ public class MediaControlPanel {
             }
             z = true;
         }
-        final int hashCode = mediaData.hashCode();
+        final int iHashCode = mediaData.hashCode();
         final String str2 = "MediaControlPanel#bindArtworkAndColors<" + str + ">";
-        Trace.beginAsyncSection(str2, hashCode);
+        Trace.beginAsyncSection(str2, iHashCode);
         final int i9 = this.mArtworkNextBindRequestId;
         this.mArtworkNextBindRequestId = i9 + 1;
         if (z) {
@@ -645,13 +644,13 @@ public class MediaControlPanel {
                 Drawable colorDrawable;
                 final ColorScheme colorScheme2;
                 final boolean z7;
-                final MediaControlPanel mediaControlPanel = MediaControlPanel.this;
+                final MediaControlPanel mediaControlPanel = this.f$0;
                 final MediaData mediaData2 = mediaData;
                 final int i10 = measuredWidth;
                 final int i11 = measuredHeight;
                 final int i12 = i9;
                 final String str3 = str2;
-                final int i13 = hashCode;
+                final int i13 = iHashCode;
                 final boolean z8 = z;
                 Intent intent = MediaControlPanel.SETTINGS_INTENT;
                 mediaControlPanel.getClass();
@@ -674,9 +673,9 @@ public class MediaControlPanel {
                         public final void run() {
                             TurbulenceNoiseShader turbulenceNoiseShader;
                             boolean z10;
-                            int intValue3;
+                            int iIntValue3;
                             boolean z11;
-                            MediaControlPanel mediaControlPanel2 = MediaControlPanel.this;
+                            MediaControlPanel mediaControlPanel2 = mediaControlPanel;
                             int i14 = i12;
                             String str5 = str3;
                             int i15 = i13;
@@ -701,15 +700,15 @@ public class MediaControlPanel {
                                 AnimatingColorTransition animatingColorTransition = animatingColorTransitionArr[i18];
                                 if (colorScheme3 == null) {
                                     z10 = z12;
-                                    intValue3 = animatingColorTransition.defaultColor;
+                                    iIntValue3 = animatingColorTransition.defaultColor;
                                 } else {
                                     z10 = z12;
-                                    intValue3 = ((Number) animatingColorTransition.extractColor.mo779invoke(colorScheme3)).intValue();
+                                    iIntValue3 = ((Number) animatingColorTransition.extractColor.mo781invoke(colorScheme3)).intValue();
                                 }
                                 AnimatingColorTransition[] animatingColorTransitionArr2 = animatingColorTransitionArr;
-                                if (intValue3 != animatingColorTransition.targetColor) {
+                                if (iIntValue3 != animatingColorTransition.targetColor) {
                                     animatingColorTransition.sourceColor = animatingColorTransition.currentColor;
-                                    animatingColorTransition.targetColor = intValue3;
+                                    animatingColorTransition.targetColor = iIntValue3;
                                     animatingColorTransition.valueAnimator.cancel();
                                     animatingColorTransition.valueAnimator.start();
                                     z11 = true;
@@ -799,9 +798,9 @@ public class MediaControlPanel {
                     public final void run() {
                         TurbulenceNoiseShader turbulenceNoiseShader;
                         boolean z10;
-                        int intValue3;
+                        int iIntValue3;
                         boolean z11;
-                        MediaControlPanel mediaControlPanel2 = MediaControlPanel.this;
+                        MediaControlPanel mediaControlPanel2 = mediaControlPanel;
                         int i14 = i12;
                         String str5 = str3;
                         int i15 = i13;
@@ -826,15 +825,15 @@ public class MediaControlPanel {
                             AnimatingColorTransition animatingColorTransition = animatingColorTransitionArr[i18];
                             if (colorScheme3 == null) {
                                 z10 = z12;
-                                intValue3 = animatingColorTransition.defaultColor;
+                                iIntValue3 = animatingColorTransition.defaultColor;
                             } else {
                                 z10 = z12;
-                                intValue3 = ((Number) animatingColorTransition.extractColor.mo779invoke(colorScheme3)).intValue();
+                                iIntValue3 = ((Number) animatingColorTransition.extractColor.mo781invoke(colorScheme3)).intValue();
                             }
                             AnimatingColorTransition[] animatingColorTransitionArr2 = animatingColorTransitionArr;
-                            if (intValue3 != animatingColorTransition.targetColor) {
+                            if (iIntValue3 != animatingColorTransition.targetColor) {
                                 animatingColorTransition.sourceColor = animatingColorTransition.currentColor;
-                                animatingColorTransition.targetColor = intValue3;
+                                animatingColorTransition.targetColor = iIntValue3;
                                 animatingColorTransition.valueAnimator.cancel();
                                 animatingColorTransition.valueAnimator.start();
                                 z11 = true;
@@ -936,25 +935,25 @@ public class MediaControlPanel {
             LoadingEffect.AnimationState animationState2 = LoadingEffect.AnimationState.NOT_PLAYING;
             if (animationState == animationState2 && animationState == animationState2) {
                 loadingEffect2.setState(LoadingEffect.AnimationState.EASE_IN);
-                ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-                ofFloat.setDuration((long) loadingEffect2.config.easeInDuration);
+                ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+                valueAnimatorOfFloat.setDuration((long) loadingEffect2.config.easeInDuration);
                 TurbulenceNoiseShader turbulenceNoiseShader = loadingEffect2.turbulenceNoiseShader;
                 final float f = turbulenceNoiseShader.noiseOffsetX;
                 final float f2 = turbulenceNoiseShader.noiseOffsetY;
                 final float f3 = turbulenceNoiseShader.noiseOffsetZ;
-                ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.surfaceeffects.loadingeffect.LoadingEffect$playEaseIn$1
+                valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.surfaceeffects.loadingeffect.LoadingEffect$playEaseIn$1
                     @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                     public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                         float currentPlayTime = valueAnimator.getCurrentPlayTime() * 0.001f;
-                        float floatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
-                        LoadingEffect loadingEffect3 = LoadingEffect.this;
+                        float fFloatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
+                        LoadingEffect loadingEffect3 = loadingEffect2;
                         TurbulenceNoiseShader turbulenceNoiseShader2 = loadingEffect3.turbulenceNoiseShader;
                         float f4 = f;
                         TurbulenceNoiseAnimationConfig turbulenceNoiseAnimationConfig = loadingEffect3.config;
                         turbulenceNoiseShader2.setNoiseMove((turbulenceNoiseAnimationConfig.noiseMoveSpeedX * currentPlayTime) + f4, (turbulenceNoiseAnimationConfig.noiseMoveSpeedY * currentPlayTime) + f2, (currentPlayTime * turbulenceNoiseAnimationConfig.noiseMoveSpeedZ) + f3);
-                        LoadingEffect loadingEffect4 = LoadingEffect.this;
-                        loadingEffect4.turbulenceNoiseShader.setOpacity(floatValue * loadingEffect4.config.luminosityMultiplier);
-                        LoadingEffect loadingEffect5 = LoadingEffect.this;
+                        LoadingEffect loadingEffect4 = loadingEffect2;
+                        loadingEffect4.turbulenceNoiseShader.setOpacity(fFloatValue * loadingEffect4.config.luminosityMultiplier);
+                        LoadingEffect loadingEffect5 = loadingEffect2;
                         PaintDrawCallback paintDrawCallback = loadingEffect5.paintCallback;
                         if (paintDrawCallback != null) {
                             Paint paint = loadingEffect5.paint;
@@ -963,33 +962,33 @@ public class MediaControlPanel {
                         }
                     }
                 });
-                ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.surfaceeffects.loadingeffect.LoadingEffect$playEaseIn$2
+                valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.surfaceeffects.loadingeffect.LoadingEffect$playEaseIn$2
                     @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                     public final void onAnimationEnd(Animator animator) {
-                        final LoadingEffect loadingEffect3 = LoadingEffect.this;
+                        final LoadingEffect loadingEffect3 = loadingEffect2;
                         loadingEffect3.currentAnimator = null;
                         if (loadingEffect3.state != LoadingEffect.AnimationState.EASE_IN) {
                             return;
                         }
                         loadingEffect3.setState(LoadingEffect.AnimationState.MAIN);
-                        ValueAnimator ofFloat2 = ValueAnimator.ofFloat(0.0f, 1.0f);
+                        ValueAnimator valueAnimatorOfFloat2 = ValueAnimator.ofFloat(0.0f, 1.0f);
                         TurbulenceNoiseAnimationConfig turbulenceNoiseAnimationConfig = loadingEffect3.config;
-                        ofFloat2.setDuration((long) turbulenceNoiseAnimationConfig.maxDuration);
+                        valueAnimatorOfFloat2.setDuration((long) turbulenceNoiseAnimationConfig.maxDuration);
                         TurbulenceNoiseShader turbulenceNoiseShader2 = loadingEffect3.turbulenceNoiseShader;
                         final float f4 = turbulenceNoiseShader2.noiseOffsetX;
                         final float f5 = turbulenceNoiseShader2.noiseOffsetY;
                         final float f6 = turbulenceNoiseShader2.noiseOffsetZ;
                         turbulenceNoiseShader2.setOpacity(turbulenceNoiseAnimationConfig.luminosityMultiplier);
-                        ofFloat2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.surfaceeffects.loadingeffect.LoadingEffect$playMain$1
+                        valueAnimatorOfFloat2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.surfaceeffects.loadingeffect.LoadingEffect$playMain$1
                             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                                 float currentPlayTime = valueAnimator.getCurrentPlayTime() * 0.001f;
-                                LoadingEffect loadingEffect4 = LoadingEffect.this;
+                                LoadingEffect loadingEffect4 = loadingEffect3;
                                 TurbulenceNoiseShader turbulenceNoiseShader3 = loadingEffect4.turbulenceNoiseShader;
                                 float f7 = f4;
                                 TurbulenceNoiseAnimationConfig turbulenceNoiseAnimationConfig2 = loadingEffect4.config;
                                 turbulenceNoiseShader3.setNoiseMove((turbulenceNoiseAnimationConfig2.noiseMoveSpeedX * currentPlayTime) + f7, (turbulenceNoiseAnimationConfig2.noiseMoveSpeedY * currentPlayTime) + f5, (currentPlayTime * turbulenceNoiseAnimationConfig2.noiseMoveSpeedZ) + f6);
-                                LoadingEffect loadingEffect5 = LoadingEffect.this;
+                                LoadingEffect loadingEffect5 = loadingEffect3;
                                 PaintDrawCallback paintDrawCallback = loadingEffect5.paintCallback;
                                 if (paintDrawCallback != null) {
                                     Paint paint = loadingEffect5.paint;
@@ -998,20 +997,20 @@ public class MediaControlPanel {
                                 }
                             }
                         });
-                        ofFloat2.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.surfaceeffects.loadingeffect.LoadingEffect$playMain$2
+                        valueAnimatorOfFloat2.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.surfaceeffects.loadingeffect.LoadingEffect$playMain$2
                             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                             public final void onAnimationEnd(Animator animator2) {
-                                LoadingEffect loadingEffect4 = LoadingEffect.this;
+                                LoadingEffect loadingEffect4 = loadingEffect3;
                                 loadingEffect4.currentAnimator = null;
                                 loadingEffect4.playEaseOut();
                             }
                         });
-                        ofFloat2.start();
-                        loadingEffect3.currentAnimator = ofFloat2;
+                        valueAnimatorOfFloat2.start();
+                        loadingEffect3.currentAnimator = valueAnimatorOfFloat2;
                     }
                 });
-                ofFloat.start();
-                loadingEffect2.currentAnimator = ofFloat;
+                valueAnimatorOfFloat.start();
+                loadingEffect2.currentAnimator = valueAnimatorOfFloat;
             }
             LoadingEffect loadingEffect3 = this.mLoadingEffect;
             Objects.requireNonNull(loadingEffect3);
@@ -1099,9 +1098,9 @@ public class MediaControlPanel {
                 Log.d("MediaControlPanel", "Cannot load wallpaper color from a recycled bitmap");
                 return null;
             }
-            Drawable loadDrawable = icon.loadDrawable(this.mContext);
-            if (loadDrawable != null) {
-                return WallpaperColors.fromDrawable(loadDrawable);
+            Drawable drawableLoadDrawable = icon.loadDrawable(this.mContext);
+            if (drawableLoadDrawable != null) {
+                return WallpaperColors.fromDrawable(drawableLoadDrawable);
             }
         }
         return null;
@@ -1144,14 +1143,14 @@ public class MediaControlPanel {
         seekBarViewModel.bgExecutor.execute(new Runnable() { // from class: com.android.systemui.media.controls.ui.viewmodel.SeekBarViewModel$onDestroy$1
             @Override // java.lang.Runnable
             public final void run() {
-                SeekBarViewModel.this.setController(null);
-                SeekBarViewModel seekBarViewModel2 = SeekBarViewModel.this;
+                seekBarViewModel.setController(null);
+                SeekBarViewModel seekBarViewModel2 = seekBarViewModel;
                 seekBarViewModel2.playbackState = null;
-                SeekBarViewModel$checkIfPollingNeeded$1 seekBarViewModel$checkIfPollingNeeded$1 = seekBarViewModel2.cancel;
-                if (seekBarViewModel$checkIfPollingNeeded$1 != null) {
-                    seekBarViewModel$checkIfPollingNeeded$1.run();
+                SeekBarViewModel.AnonymousClass1 anonymousClass1 = seekBarViewModel2.cancel;
+                if (anonymousClass1 != null) {
+                    anonymousClass1.run();
                 }
-                SeekBarViewModel seekBarViewModel3 = SeekBarViewModel.this;
+                SeekBarViewModel seekBarViewModel3 = seekBarViewModel;
                 seekBarViewModel3.cancel = null;
                 seekBarViewModel3.scrubbingChangeListener = null;
                 seekBarViewModel3.enabledChangeListener = null;
@@ -1167,7 +1166,7 @@ public class MediaControlPanel {
         MediaViewController mediaViewController = this.mMediaViewController;
         ConstraintSet constraintSet = mediaViewController.collapsedLayout;
         ConstraintSet constraintSet2 = mediaViewController.expandedLayout;
-        boolean contains = SEMANTIC_ACTIONS_COMPACT.contains(Integer.valueOf(i));
+        boolean zContains = SEMANTIC_ACTIONS_COMPACT.contains(Integer.valueOf(i));
         List list = SEMANTIC_ACTIONS_HIDE_WHEN_SCRUBBING;
         boolean z = false;
         boolean z2 = (mediaButton != null && list.stream().allMatch(new MediaControlPanel$$ExternalSyntheticLambda14(mediaButton))) && list.contains(Integer.valueOf(i)) && this.mIsScrubbing;
@@ -1180,7 +1179,7 @@ public class MediaControlPanel {
             i2 = 4;
         }
         setVisibleAndAlpha(constraintSet2, i, z3, i2);
-        if (z3 && contains) {
+        if (z3 && zContains) {
             z = true;
         }
         setVisibleAndAlpha(constraintSet, i, z);

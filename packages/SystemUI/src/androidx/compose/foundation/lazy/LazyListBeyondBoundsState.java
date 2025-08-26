@@ -4,7 +4,6 @@ import androidx.compose.foundation.gestures.snapping.LazyListSnapLayoutInfoProvi
 import androidx.compose.foundation.lazy.layout.LazyLayoutBeyondBoundsState;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class LazyListBeyondBoundsState implements LazyLayoutBeyondBoundsState {
     public final int beyondBoundsItemCount;

@@ -11,7 +11,6 @@ import kotlin.collections.EmptyList;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class C2paManifest {
     private final List<C2paAssertion> assertions;
@@ -25,7 +24,6 @@ public final class C2paManifest {
     private final SignatureInfo signatureInfo;
     private final String title;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Builder {
         private String claimGenerator = Constant.CLAIM_GENERATOR;
         private List<C2paAssertion> assertions = new ArrayList();
@@ -154,70 +152,70 @@ public final class C2paManifest {
     }
 
     public final List<Action> getActions() {
-        String str;
-        String str2;
-        List<String> list;
-        List<C2paAssertion> list2 = this.assertions;
-        List list3 = null;
-        if (list2 != null) {
-            List arrayList = new ArrayList();
-            Iterator<T> it = list2.iterator();
+        String time;
+        String issuer;
+        List<String> arrayList;
+        List<C2paAssertion> list = this.assertions;
+        List list2 = null;
+        if (list != null) {
+            List arrayList2 = new ArrayList();
+            Iterator<T> it = list.iterator();
             while (it.hasNext()) {
                 Data data = ((C2paAssertion) it.next()).getData();
                 List<Action> actions = data != null ? data.getActions() : null;
                 if (actions != null) {
-                    arrayList.add(actions);
+                    arrayList2.add(actions);
                 }
             }
-            list3 = arrayList;
+            list2 = arrayList2;
         }
-        if (list3 == null) {
-            list3 = EmptyList.INSTANCE;
+        if (list2 == null) {
+            list2 = EmptyList.INSTANCE;
         }
-        List<Action> flatten = CollectionsKt__IterablesKt.flatten(list3);
-        if (!flatten.isEmpty()) {
-            ArrayList arrayList2 = (ArrayList) flatten;
-            int size = arrayList2.size();
+        List<Action> listFlatten = CollectionsKt__IterablesKt.flatten(list2);
+        if (!listFlatten.isEmpty()) {
+            ArrayList arrayList3 = (ArrayList) listFlatten;
+            int size = arrayList3.size();
             int i = 0;
             while (i < size) {
-                Object obj = arrayList2.get(i);
+                Object obj = arrayList3.get(i);
                 i++;
                 Action action = (Action) obj;
                 SignatureInfo signatureInfo = this.signatureInfo;
-                if (signatureInfo == null || (str = signatureInfo.getTime()) == null) {
-                    str = C2paManifestList.UNKNOWN_TIME;
+                if (signatureInfo == null || (time = signatureInfo.getTime()) == null) {
+                    time = C2paManifestList.UNKNOWN_TIME;
                 }
-                action.setActionTime(str);
+                action.setActionTime(time);
                 SignatureInfo signatureInfo2 = this.signatureInfo;
-                String str3 = C2paManifestList.UNKNOWN_VALUE;
-                if (signatureInfo2 == null || (str2 = signatureInfo2.getIssuer()) == null) {
-                    str2 = C2paManifestList.UNKNOWN_VALUE;
+                String str = C2paManifestList.UNKNOWN_VALUE;
+                if (signatureInfo2 == null || (issuer = signatureInfo2.getIssuer()) == null) {
+                    issuer = C2paManifestList.UNKNOWN_VALUE;
                 }
-                action.setIssuer(str2);
-                String str4 = this.claimGenerator;
-                if (str4 != null) {
-                    str3 = str4;
+                action.setIssuer(issuer);
+                String str2 = this.claimGenerator;
+                if (str2 != null) {
+                    str = str2;
                 }
-                action.setClaimGenerator(str3);
+                action.setClaimGenerator(str);
                 action.setInvalid(Boolean.valueOf(this.isInvalid));
                 action.setTitle(this.title);
-                List<Ingredients> list4 = this.ingredients;
-                if (list4 != null) {
-                    list = new ArrayList<>();
-                    Iterator<T> it2 = list4.iterator();
+                List<Ingredients> list3 = this.ingredients;
+                if (list3 != null) {
+                    arrayList = new ArrayList<>();
+                    Iterator<T> it2 = list3.iterator();
                     while (it2.hasNext()) {
                         String title = ((Ingredients) it2.next()).getTitle();
                         if (title != null) {
-                            list.add(title);
+                            arrayList.add(title);
                         }
                     }
                 } else {
-                    list = EmptyList.INSTANCE;
+                    arrayList = EmptyList.INSTANCE;
                 }
-                action.setIngredientsFile(list);
+                action.setIngredientsFile(arrayList);
             }
         }
-        return flatten;
+        return listFlatten;
     }
 
     public final List<C2paAssertion> getAssertions() {
@@ -259,27 +257,27 @@ public final class C2paManifest {
     /* JADX WARN: Multi-variable type inference failed */
     public int hashCode() {
         String str = this.claimGenerator;
-        int hashCode = (str == null ? 0 : str.hashCode()) * 31;
+        int iHashCode = (str == null ? 0 : str.hashCode()) * 31;
         String str2 = this.title;
-        int hashCode2 = (hashCode + (str2 == null ? 0 : str2.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (str2 == null ? 0 : str2.hashCode())) * 31;
         String str3 = this.format;
-        int hashCode3 = (hashCode2 + (str3 == null ? 0 : str3.hashCode())) * 31;
+        int iHashCode3 = (iHashCode2 + (str3 == null ? 0 : str3.hashCode())) * 31;
         String str4 = this.instanceId;
-        int hashCode4 = (hashCode3 + (str4 == null ? 0 : str4.hashCode())) * 31;
+        int iHashCode4 = (iHashCode3 + (str4 == null ? 0 : str4.hashCode())) * 31;
         List<Ingredients> list = this.ingredients;
-        int hashCode5 = (hashCode4 + (list == null ? 0 : list.hashCode())) * 31;
+        int iHashCode5 = (iHashCode4 + (list == null ? 0 : list.hashCode())) * 31;
         List<C2paAssertion> list2 = this.assertions;
-        int hashCode6 = (hashCode5 + (list2 == null ? 0 : list2.hashCode())) * 31;
+        int iHashCode6 = (iHashCode5 + (list2 == null ? 0 : list2.hashCode())) * 31;
         SignatureInfo signatureInfo = this.signatureInfo;
-        int hashCode7 = (hashCode6 + (signatureInfo == null ? 0 : signatureInfo.hashCode())) * 31;
+        int iHashCode7 = (iHashCode6 + (signatureInfo == null ? 0 : signatureInfo.hashCode())) * 31;
         String str5 = this.label;
-        int hashCode8 = (hashCode7 + (str5 == null ? 0 : str5.hashCode())) * 31;
+        int iHashCode8 = (iHashCode7 + (str5 == null ? 0 : str5.hashCode())) * 31;
         boolean z = this.isInvalid;
         int i = z;
         if (z != 0) {
             i = 1;
         }
-        int i2 = (hashCode8 + i) * 31;
+        int i2 = (iHashCode8 + i) * 31;
         JsonArray jsonArray = this.assertionsJsonArray;
         return i2 + (jsonArray != null ? jsonArray.hashCode() : 0);
     }

@@ -14,22 +14,22 @@ public class CachedFrameManager extends SimpleFrameManager {
 
     @Override // android.filterfw.core.SimpleFrameManager, android.filterfw.core.FrameManager
     public Frame newFrame(FrameFormat frameFormat) {
-        Frame findAvailableFrame = findAvailableFrame(frameFormat, 0, 0L);
-        if (findAvailableFrame == null) {
-            findAvailableFrame = super.newFrame(frameFormat);
+        Frame frameFindAvailableFrame = findAvailableFrame(frameFormat, 0, 0L);
+        if (frameFindAvailableFrame == null) {
+            frameFindAvailableFrame = super.newFrame(frameFormat);
         }
-        findAvailableFrame.setTimestamp(-2L);
-        return findAvailableFrame;
+        frameFindAvailableFrame.setTimestamp(-2L);
+        return frameFindAvailableFrame;
     }
 
     @Override // android.filterfw.core.SimpleFrameManager, android.filterfw.core.FrameManager
     public Frame newBoundFrame(FrameFormat frameFormat, int i, long j) {
-        Frame findAvailableFrame = findAvailableFrame(frameFormat, i, j);
-        if (findAvailableFrame == null) {
-            findAvailableFrame = super.newBoundFrame(frameFormat, i, j);
+        Frame frameFindAvailableFrame = findAvailableFrame(frameFormat, i, j);
+        if (frameFindAvailableFrame == null) {
+            frameFindAvailableFrame = super.newBoundFrame(frameFormat, i, j);
         }
-        findAvailableFrame.setTimestamp(-2L);
-        return findAvailableFrame;
+        frameFindAvailableFrame.setTimestamp(-2L);
+        return frameFindAvailableFrame;
     }
 
     @Override // android.filterfw.core.SimpleFrameManager, android.filterfw.core.FrameManager
@@ -40,9 +40,9 @@ public class CachedFrameManager extends SimpleFrameManager {
     @Override // android.filterfw.core.SimpleFrameManager, android.filterfw.core.FrameManager
     public Frame releaseFrame(Frame frame) {
         if (frame.isReusable()) {
-            int decRefCount = frame.decRefCount();
-            if (decRefCount != 0 || !frame.hasNativeAllocation()) {
-                if (decRefCount >= 0) {
+            int iDecRefCount = frame.decRefCount();
+            if (iDecRefCount != 0 || !frame.hasNativeAllocation()) {
+                if (iDecRefCount >= 0) {
                     return frame;
                 }
                 throw new RuntimeException("Frame reference count dropped below 0!");
@@ -94,12 +94,12 @@ public class CachedFrameManager extends SimpleFrameManager {
     }
 
     private void dropOldestFrame() {
-        Integer firstKey = this.mAvailableFrames.firstKey();
-        firstKey.intValue();
-        Frame frame = this.mAvailableFrames.get(firstKey);
+        Integer numFirstKey = this.mAvailableFrames.firstKey();
+        numFirstKey.intValue();
+        Frame frame = this.mAvailableFrames.get(numFirstKey);
         this.mStorageSize -= frame.getFormat().getSize();
         frame.releaseNativeAllocation();
-        this.mAvailableFrames.remove(firstKey);
+        this.mAvailableFrames.remove(numFirstKey);
     }
 
     private Frame findAvailableFrame(FrameFormat frameFormat, int i, long j) {

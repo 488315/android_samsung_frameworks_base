@@ -5,7 +5,6 @@ import com.android.systemui.util.SystemUIAnalytics;
 import kotlin.Unit;
 import kotlin.enums.EnumEntriesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SoundCraftSALogging {
     public static final SoundCraftSALogging INSTANCE = new SoundCraftSALogging();
@@ -14,7 +13,6 @@ public final class SoundCraftSALogging {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Event {
         public static final /* synthetic */ Event[] $VALUES;
         public static final Event ACTIVE_NOISE_CANCELING;
@@ -86,7 +84,6 @@ public final class SoundCraftSALogging {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ScreenId {
         public static final /* synthetic */ ScreenId[] $VALUES;
         public static final ScreenId EID_BUDS_DETAIL_SETTING;

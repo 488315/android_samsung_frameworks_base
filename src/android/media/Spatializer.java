@@ -175,9 +175,7 @@ public class Spatializer {
         this.mHeadTrackerListenerMgr.addListener(executor, onHeadTrackerAvailableListener, "addOnHeadTrackerAvailableListener", new Supplier() { // from class: android.media.Spatializer$$ExternalSyntheticLambda2
             @Override // java.util.function.Supplier
             public final Object get() {
-                CallbackUtil.DispatcherStub lambda$addOnHeadTrackerAvailableListener$0;
-                lambda$addOnHeadTrackerAvailableListener$0 = Spatializer.this.lambda$addOnHeadTrackerAvailableListener$0();
-                return lambda$addOnHeadTrackerAvailableListener$0;
+                return this.f$0.lambda$addOnHeadTrackerAvailableListener$0();
             }
         });
     }
@@ -249,9 +247,7 @@ public class Spatializer {
         this.mStateListenerMgr.addListener(executor, onSpatializerStateChangedListener, "addOnSpatializerStateChangedListener", new Supplier() { // from class: android.media.Spatializer$$ExternalSyntheticLambda0
             @Override // java.util.function.Supplier
             public final Object get() {
-                CallbackUtil.DispatcherStub lambda$addOnSpatializerStateChangedListener$1;
-                lambda$addOnSpatializerStateChangedListener$1 = Spatializer.this.lambda$addOnSpatializerStateChangedListener$1();
-                return lambda$addOnSpatializerStateChangedListener$1;
+                return this.f$0.lambda$addOnSpatializerStateChangedListener$1();
             }
         });
     }
@@ -318,7 +314,7 @@ public class Spatializer {
             Spatializer.this.mStateListenerMgr.callListeners(new CallbackUtil.CallbackMethod() { // from class: android.media.Spatializer$SpatializerInfoDispatcherStub$$ExternalSyntheticLambda0
                 @Override // android.media.CallbackUtil.CallbackMethod
                 public final void callbackMethod(Object obj) {
-                    Spatializer.SpatializerInfoDispatcherStub.this.lambda$dispatchSpatializerEnabledChanged$0(z, (Spatializer.OnSpatializerStateChangedListener) obj);
+                    this.f$0.lambda$dispatchSpatializerEnabledChanged$0(z, (Spatializer.OnSpatializerStateChangedListener) obj);
                 }
             });
         }
@@ -333,7 +329,7 @@ public class Spatializer {
             Spatializer.this.mStateListenerMgr.callListeners(new CallbackUtil.CallbackMethod() { // from class: android.media.Spatializer$SpatializerInfoDispatcherStub$$ExternalSyntheticLambda1
                 @Override // android.media.CallbackUtil.CallbackMethod
                 public final void callbackMethod(Object obj) {
-                    Spatializer.SpatializerInfoDispatcherStub.this.lambda$dispatchSpatializerAvailableChanged$1(z, (Spatializer.OnSpatializerStateChangedListener) obj);
+                    this.f$0.lambda$dispatchSpatializerAvailableChanged$1(z, (Spatializer.OnSpatializerStateChangedListener) obj);
                 }
             });
         }
@@ -402,9 +398,7 @@ public class Spatializer {
         this.mHeadTrackingListenerMgr.addListener(executor, onHeadTrackingModeChangedListener, "addOnHeadTrackingModeChangedListener", new Supplier() { // from class: android.media.Spatializer$$ExternalSyntheticLambda1
             @Override // java.util.function.Supplier
             public final Object get() {
-                CallbackUtil.DispatcherStub lambda$addOnHeadTrackingModeChangedListener$2;
-                lambda$addOnHeadTrackingModeChangedListener$2 = Spatializer.this.lambda$addOnHeadTrackingModeChangedListener$2();
-                return lambda$addOnHeadTrackingModeChangedListener$2;
+                return this.f$0.lambda$addOnHeadTrackingModeChangedListener$2();
             }
         });
     }
@@ -555,7 +549,7 @@ public class Spatializer {
             Spatializer.this.mHeadTrackingListenerMgr.callListeners(new CallbackUtil.CallbackMethod() { // from class: android.media.Spatializer$SpatializerHeadTrackingDispatcherStub$$ExternalSyntheticLambda1
                 @Override // android.media.CallbackUtil.CallbackMethod
                 public final void callbackMethod(Object obj) {
-                    Spatializer.SpatializerHeadTrackingDispatcherStub.this.lambda$dispatchSpatializerActualHeadTrackingModeChanged$0(i, (Spatializer.OnHeadTrackingModeChangedListener) obj);
+                    this.f$0.lambda$dispatchSpatializerActualHeadTrackingModeChanged$0(i, (Spatializer.OnHeadTrackingModeChangedListener) obj);
                 }
             });
         }
@@ -570,7 +564,7 @@ public class Spatializer {
             Spatializer.this.mHeadTrackingListenerMgr.callListeners(new CallbackUtil.CallbackMethod() { // from class: android.media.Spatializer$SpatializerHeadTrackingDispatcherStub$$ExternalSyntheticLambda0
                 @Override // android.media.CallbackUtil.CallbackMethod
                 public final void callbackMethod(Object obj) {
-                    Spatializer.SpatializerHeadTrackingDispatcherStub.this.lambda$dispatchSpatializerDesiredHeadTrackingModeChanged$1(i, (Spatializer.OnHeadTrackingModeChangedListener) obj);
+                    this.f$0.lambda$dispatchSpatializerDesiredHeadTrackingModeChanged$1(i, (Spatializer.OnHeadTrackingModeChangedListener) obj);
                 }
             });
         }
@@ -601,7 +595,7 @@ public class Spatializer {
             Spatializer.this.mHeadTrackerListenerMgr.callListeners(new CallbackUtil.CallbackMethod() { // from class: android.media.Spatializer$SpatializerHeadTrackerAvailableDispatcherStub$$ExternalSyntheticLambda0
                 @Override // android.media.CallbackUtil.CallbackMethod
                 public final void callbackMethod(Object obj) {
-                    Spatializer.SpatializerHeadTrackerAvailableDispatcherStub.this.lambda$dispatchSpatializerHeadTrackerAvailable$0(z, (Spatializer.OnHeadTrackerAvailableListener) obj);
+                    this.f$0.lambda$dispatchSpatializerHeadTrackerAvailable$0(z, (Spatializer.OnHeadTrackerAvailableListener) obj);
                 }
             });
         }
@@ -626,21 +620,21 @@ public class Spatializer {
             if (listenerInfo == null) {
                 return;
             }
-            SafeCloseable create = ClearCallingIdentityContext.create();
+            SafeCloseable safeCloseableCreate = ClearCallingIdentityContext.create();
             try {
                 listenerInfo.mExecutor.execute(new Runnable() { // from class: android.media.Spatializer$SpatializerPoseDispatcherStub$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        Spatializer.SpatializerPoseDispatcherStub.this.lambda$dispatchPoseChanged$0(listenerInfo, fArr);
+                        this.f$0.lambda$dispatchPoseChanged$0(listenerInfo, fArr);
                     }
                 });
-                if (create != null) {
-                    create.close();
+                if (safeCloseableCreate != null) {
+                    safeCloseableCreate.close();
                 }
             } catch (Throwable th) {
-                if (create != null) {
+                if (safeCloseableCreate != null) {
                     try {
-                        create.close();
+                        safeCloseableCreate.close();
                     } catch (Throwable th2) {
                         th.addSuppressed(th2);
                     }
@@ -669,21 +663,21 @@ public class Spatializer {
             if (listenerInfo == null) {
                 return;
             }
-            SafeCloseable create = ClearCallingIdentityContext.create();
+            SafeCloseable safeCloseableCreate = ClearCallingIdentityContext.create();
             try {
                 listenerInfo.mExecutor.execute(new Runnable() { // from class: android.media.Spatializer$SpatializerOutputDispatcherStub$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        Spatializer.SpatializerOutputDispatcherStub.this.lambda$dispatchSpatializerOutputChanged$0(listenerInfo, i);
+                        this.f$0.lambda$dispatchSpatializerOutputChanged$0(listenerInfo, i);
                     }
                 });
-                if (create != null) {
-                    create.close();
+                if (safeCloseableCreate != null) {
+                    safeCloseableCreate.close();
                 }
             } catch (Throwable th) {
-                if (create != null) {
+                if (safeCloseableCreate != null) {
                     try {
-                        create.close();
+                        safeCloseableCreate.close();
                     } catch (Throwable th2) {
                         th.addSuppressed(th2);
                     }

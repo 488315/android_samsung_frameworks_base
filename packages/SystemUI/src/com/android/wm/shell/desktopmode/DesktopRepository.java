@@ -17,7 +17,7 @@ import com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository;
 import com.android.wm.shell.protolog.ShellProtoLogGroup;
 import com.android.wm.shell.shared.desktopmode.DesktopConfig;
 import com.android.wm.shell.shared.desktopmode.DesktopConfigImpl;
-import com.android.wm.shell.shared.desktopmode.DesktopStateImpl;
+import com.samsung.android.core.CoreSaLogger;
 import com.samsung.android.rune.CoreRune;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import java.util.ArrayList;
@@ -34,6 +34,7 @@ import java.util.Set;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.collections.ArraysKt___ArraysKt;
 import kotlin.collections.CollectionsKt__CollectionsKt;
@@ -42,6 +43,10 @@ import kotlin.collections.CollectionsKt___CollectionsKt$asSequence$$inlined$Sequ
 import kotlin.collections.EmptyList;
 import kotlin.collections.EmptySet;
 import kotlin.comparisons.ComparisonsKt__ComparisonsKt;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
@@ -50,9 +55,9 @@ import kotlin.jvm.internal.Ref$ObjectRef;
 import kotlin.jvm.internal.SpreadBuilder;
 import kotlin.sequences.EmptySequence;
 import kotlin.sequences.FilteringSequence;
-import kotlin.sequences.FilteringSequence$iterator$1;
+import kotlin.sequences.FilteringSequence.AnonymousClass1;
 import kotlin.sequences.FlatteningSequence;
-import kotlin.sequences.FlatteningSequence$iterator$1;
+import kotlin.sequences.FlatteningSequence.AnonymousClass1;
 import kotlin.sequences.Sequence;
 import kotlin.sequences.SequencesKt__SequencesKt;
 import kotlin.sequences.SequencesKt___SequencesKt;
@@ -61,7 +66,6 @@ import kotlin.sequences.TransformingSequence;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DesktopRepository {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -77,15 +81,14 @@ public final class DesktopRepository {
     public final ArrayMap visibleTasksListeners = new ArrayMap();
     public final SparseArray desktopExclusionRegions = new SparseArray();
     public final SparseArray boundsBeforeMaximizeByTaskId = new SparseArray();
+    public final SparseArray displayLayoutBeforeMaximizeByTaskId = new SparseArray();
     public final SparseArray boundsBeforeMinimizeByTaskId = new SparseArray();
     public final SparseArray boundsBeforeFullImmersiveByTaskId = new SparseArray();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface ActiveTasksListener {
         void onActiveTasksChanged(int i);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -98,7 +101,6 @@ public final class DesktopRepository {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface DeskChangeListener {
         void onActiveDeskChanged(int i, int i2, int i3);
 
@@ -109,7 +111,6 @@ public final class DesktopRepository {
         void onDeskRemoved(int i, int i2);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface DesktopData {
         void addDesk(int i, Desk desk);
 
@@ -121,7 +122,7 @@ public final class DesktopRepository {
 
         void forAllDesks(int i, Function1 function1);
 
-        void forAllDesks(DesktopRepository$$ExternalSyntheticLambda4 desktopRepository$$ExternalSyntheticLambda4);
+        void forAllDesks(DesktopRepository$$ExternalSyntheticLambda5 desktopRepository$$ExternalSyntheticLambda5);
 
         void forAllDesks(Function2 function2);
 
@@ -134,6 +135,8 @@ public final class DesktopRepository {
         Desk getDesk(int i);
 
         Desk getDeskForCreateByHome();
+
+        Desk getDeskForDefaultDisplay(Integer num);
 
         Desk getDeskForNewDisplay();
 
@@ -152,7 +155,6 @@ public final class DesktopRepository {
         void setDeskInactive(int i);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SingleDesktopData implements DesktopData {
         public final DesktopRepository$SingleDesktopData$deskByDisplayId$1 deskByDisplayId = new DesktopRepository$SingleDesktopData$deskByDisplayId$1();
 
@@ -163,7 +165,7 @@ public final class DesktopRepository {
 
         @Override // com.android.wm.shell.desktopmode.DesktopRepository.DesktopData
         public final void forAllDesks(int i, Function1 function1) {
-            function1.mo779invoke(this.deskByDisplayId.getOrCreate(i));
+            function1.mo781invoke(this.deskByDisplayId.getOrCreate(i));
         }
 
         @Override // com.android.wm.shell.desktopmode.DesktopRepository.DesktopData
@@ -188,6 +190,11 @@ public final class DesktopRepository {
 
         @Override // com.android.wm.shell.desktopmode.DesktopRepository.DesktopData
         public final Desk getDeskForCreateByHome() {
+            return null;
+        }
+
+        @Override // com.android.wm.shell.desktopmode.DesktopRepository.DesktopData
+        public final Desk getDeskForDefaultDisplay(Integer num) {
             return null;
         }
 
@@ -230,18 +237,18 @@ public final class DesktopRepository {
 
         @Override // com.android.wm.shell.desktopmode.DesktopRepository.DesktopData
         public final Sequence desksSequence(int i) {
-            Sequence asSequence;
+            Sequence sequenceAsSequence;
             Desk desk = (Desk) this.deskByDisplayId.get(i);
-            return (desk == null || (asSequence = ArraysKt___ArraysKt.asSequence(new Desk[]{desk})) == null) ? EmptySequence.INSTANCE : asSequence;
+            return (desk == null || (sequenceAsSequence = ArraysKt___ArraysKt.asSequence(new Desk[]{desk})) == null) ? EmptySequence.INSTANCE : sequenceAsSequence;
         }
 
         @Override // com.android.wm.shell.desktopmode.DesktopRepository.DesktopData
-        public final void forAllDesks(DesktopRepository$$ExternalSyntheticLambda4 desktopRepository$$ExternalSyntheticLambda4) {
+        public final void forAllDesks(DesktopRepository$$ExternalSyntheticLambda5 desktopRepository$$ExternalSyntheticLambda5) {
             DesktopRepository$SingleDesktopData$deskByDisplayId$1 desktopRepository$SingleDesktopData$deskByDisplayId$1 = this.deskByDisplayId;
             int size = desktopRepository$SingleDesktopData$deskByDisplayId$1.size();
             for (int i = 0; i < size; i++) {
                 desktopRepository$SingleDesktopData$deskByDisplayId$1.keyAt(i);
-                desktopRepository$$ExternalSyntheticLambda4.mo779invoke((Desk) desktopRepository$SingleDesktopData$deskByDisplayId$1.valueAt(i));
+                desktopRepository$$ExternalSyntheticLambda5.mo781invoke((Desk) desktopRepository$SingleDesktopData$deskByDisplayId$1.valueAt(i));
             }
         }
 
@@ -250,8 +257,8 @@ public final class DesktopRepository {
             DesktopRepository$SingleDesktopData$deskByDisplayId$1 desktopRepository$SingleDesktopData$deskByDisplayId$1 = this.deskByDisplayId;
             int size = desktopRepository$SingleDesktopData$deskByDisplayId$1.size();
             for (int i = 0; i < size; i++) {
-                int keyAt = desktopRepository$SingleDesktopData$deskByDisplayId$1.keyAt(i);
-                function2.invoke(Integer.valueOf(keyAt), (Desk) desktopRepository$SingleDesktopData$deskByDisplayId$1.valueAt(i));
+                int iKeyAt = desktopRepository$SingleDesktopData$deskByDisplayId$1.keyAt(i);
+                function2.invoke(Integer.valueOf(iKeyAt), (Desk) desktopRepository$SingleDesktopData$deskByDisplayId$1.valueAt(i));
             }
         }
 
@@ -277,9 +284,128 @@ public final class DesktopRepository {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface VisibleTasksListener {
         void onTasksVisibilityChanged(int i, int i2);
+    }
+
+    /* renamed from: com.android.wm.shell.desktopmode.DesktopRepository$updatePersistentRepository$1, reason: invalid class name */
+    final class AnonymousClass1 extends SuspendLambda implements Function2 {
+        final /* synthetic */ List<Desk> $desks;
+        Object L$0;
+        Object L$1;
+        int label;
+        final /* synthetic */ DesktopRepository this$0;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public AnonymousClass1(List<Desk> list, DesktopRepository desktopRepository, Continuation continuation) {
+            super(2, continuation);
+            this.$desks = list;
+            this.this$0 = desktopRepository;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return new AnonymousClass1(this.$desks, this.this$0, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((AnonymousClass1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            DesktopRepository desktopRepository;
+            Iterator it;
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                List<Desk> list = this.$desks;
+                desktopRepository = this.this$0;
+                it = list.iterator();
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                it = (Iterator) this.L$1;
+                desktopRepository = (DesktopRepository) this.L$0;
+                ResultKt.throwOnFailure(obj);
+            }
+            while (it.hasNext()) {
+                Desk desk = (Desk) it.next();
+                if (desktopRepository.desktopData.getDesk(desk.deskId) != null) {
+                    this.L$0 = desktopRepository;
+                    this.L$1 = it;
+                    this.label = 1;
+                    if (DesktopRepository.access$updatePersistentRepositoryForDesk(desktopRepository, desk, this) == coroutineSingletons) {
+                        return coroutineSingletons;
+                    }
+                }
+            }
+            return Unit.INSTANCE;
+        }
+    }
+
+    /* renamed from: com.android.wm.shell.desktopmode.DesktopRepository$updatePersistentRepositoryForDesk$1, reason: invalid class name and case insensitive filesystem */
+    final class C12001 extends SuspendLambda implements Function2 {
+        final /* synthetic */ Desk $desk;
+        int label;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public C12001(Desk desk, Continuation continuation) {
+            super(2, continuation);
+            this.$desk = desk;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return DesktopRepository.this.new C12001(this.$desk, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((C12001) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                DesktopRepository desktopRepository = DesktopRepository.this;
+                Desk desk = this.$desk;
+                this.label = 1;
+                if (DesktopRepository.access$updatePersistentRepositoryForDesk(desktopRepository, desk, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            return Unit.INSTANCE;
+        }
+    }
+
+    /* renamed from: com.android.wm.shell.desktopmode.DesktopRepository$updatePersistentRepositoryForDesk$2, reason: invalid class name */
+    final class AnonymousClass2 extends ContinuationImpl {
+        Object L$0;
+        int label;
+        /* synthetic */ Object result;
+
+        public AnonymousClass2(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return DesktopRepository.access$updatePersistentRepositoryForDesk(DesktopRepository.this, null, this);
+        }
     }
 
     static {
@@ -304,114 +430,59 @@ public final class DesktopRepository {
         return region;
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(11:0|1|(2:3|(8:5|6|7|8|(1:(2:11|12)(2:18|19))(3:20|21|(1:23))|13|14|15))|27|6|7|8|(0)(0)|13|14|15) */
-    /* JADX WARN: Code restructure failed: missing block: B:24:0x0030, code lost:
-    
-        r0 = move-exception;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:26:0x005e, code lost:
-    
-        r13 = new java.lang.Object[]{r0.getStackTrace()};
-        r12.getClass();
-        logE("An exception occurred while updating the persistent repository \n%s", r13);
-     */
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0026  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x003b  */
+    /* JADX WARN: Removed duplicated region for block: B:8:0x0017  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static final java.lang.Object access$updatePersistentRepositoryForDesk(com.android.wm.shell.desktopmode.DesktopRepository r12, com.android.wm.shell.desktopmode.DesktopRepository.Desk r13, kotlin.coroutines.jvm.internal.ContinuationImpl r14) {
-        /*
-            r12.getClass()
-            boolean r0 = r14 instanceof com.android.wm.shell.desktopmode.DesktopRepository$updatePersistentRepositoryForDesk$2
-            if (r0 == 0) goto L17
-            r0 = r14
-            com.android.wm.shell.desktopmode.DesktopRepository$updatePersistentRepositoryForDesk$2 r0 = (com.android.wm.shell.desktopmode.DesktopRepository$updatePersistentRepositoryForDesk$2) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L17
-            int r1 = r1 - r2
-            r0.label = r1
-        L15:
-            r11 = r0
-            goto L1d
-        L17:
-            com.android.wm.shell.desktopmode.DesktopRepository$updatePersistentRepositoryForDesk$2 r0 = new com.android.wm.shell.desktopmode.DesktopRepository$updatePersistentRepositoryForDesk$2
-            r0.<init>(r12, r14)
-            goto L15
-        L1d:
-            java.lang.Object r14 = r11.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r0 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r1 = r11.label
-            r2 = 1
-            if (r1 == 0) goto L3b
-            if (r1 != r2) goto L33
-            java.lang.Object r12 = r11.L$0
-            com.android.wm.shell.desktopmode.DesktopRepository r12 = (com.android.wm.shell.desktopmode.DesktopRepository) r12
-            kotlin.ResultKt.throwOnFailure(r14)     // Catch: java.lang.Exception -> L30
-            goto L6e
-        L30:
-            r0 = move-exception
-            r13 = r0
-            goto L5e
-        L33:
-            java.lang.IllegalStateException r12 = new java.lang.IllegalStateException
-            java.lang.String r13 = "call to 'resume' before 'invoke' with coroutine"
-            r12.<init>(r13)
-            throw r12
-        L3b:
-            kotlin.ResultKt.throwOnFailure(r14)
-            com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepository r1 = r12.persistentRepository     // Catch: java.lang.Exception -> L30
-            r14 = r2
-            int r2 = r12.userId     // Catch: java.lang.Exception -> L30
-            int r3 = r13.deskId     // Catch: java.lang.Exception -> L30
-            android.util.ArraySet r4 = r13.visibleTasks     // Catch: java.lang.Exception -> L30
-            android.util.ArraySet r5 = r13.minimizedTasks     // Catch: java.lang.Exception -> L30
-            java.util.ArrayList r6 = r13.freeformTasksInZOrder     // Catch: java.lang.Exception -> L30
-            java.lang.Integer r7 = r13.leftTiledTaskId     // Catch: java.lang.Exception -> L30
-            java.lang.Integer r8 = r13.rightTiledTaskId     // Catch: java.lang.Exception -> L30
-            int r9 = r13.displayId     // Catch: java.lang.Exception -> L30
-            int r10 = r13.usedDesk     // Catch: java.lang.Exception -> L30
-            r11.L$0 = r12     // Catch: java.lang.Exception -> L30
-            r11.label = r14     // Catch: java.lang.Exception -> L30
-            java.lang.Object r12 = r1.addOrUpdateDesktop(r2, r3, r4, r5, r6, r7, r8, r9, r10, r11)     // Catch: java.lang.Exception -> L30
-            if (r12 != r0) goto L6e
-            return r0
-        L5e:
-            java.lang.StackTraceElement[] r13 = r13.getStackTrace()
-            java.lang.Object[] r13 = new java.lang.Object[]{r13}
-            r12.getClass()
-            java.lang.String r12 = "An exception occurred while updating the persistent repository \n%s"
-            logE(r12, r13)
-        L6e:
-            kotlin.Unit r12 = kotlin.Unit.INSTANCE
-            return r12
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.desktopmode.DesktopRepository.access$updatePersistentRepositoryForDesk(com.android.wm.shell.desktopmode.DesktopRepository, com.android.wm.shell.desktopmode.DesktopRepository$Desk, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
-    }
-
-    public static void logD(String str, Object... objArr) {
-        ShellProtoLogGroup shellProtoLogGroup = ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE;
-        String m = AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("%s: ", str);
-        SpreadBuilder m2 = DesktopDisplayEventHandler$$ExternalSyntheticOutline0.m(2, "DesktopRepository", objArr);
-        ProtoLog.d(shellProtoLogGroup, m, m2.list.toArray(new Object[m2.list.size()]));
-    }
-
-    public static void logE(String str, Object... objArr) {
-        ShellProtoLogGroup shellProtoLogGroup = ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE;
-        String m = AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("%s: ", str);
-        SpreadBuilder m2 = DesktopDisplayEventHandler$$ExternalSyntheticOutline0.m(2, "DesktopRepository", objArr);
-        ProtoLog.e(shellProtoLogGroup, m, m2.list.toArray(new Object[m2.list.size()]));
-    }
-
-    public static void logW(String str, Object... objArr) {
-        ShellProtoLogGroup shellProtoLogGroup = ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE;
-        String concat = "%s: ".concat(str);
-        SpreadBuilder m = DesktopDisplayEventHandler$$ExternalSyntheticOutline0.m(2, "DesktopRepository", objArr);
-        ProtoLog.w(shellProtoLogGroup, concat, m.list.toArray(new Object[m.list.size()]));
+    public static final Object access$updatePersistentRepositoryForDesk(DesktopRepository desktopRepository, Desk desk, ContinuationImpl continuationImpl) {
+        AnonymousClass2 anonymousClass2;
+        desktopRepository.getClass();
+        if (continuationImpl instanceof AnonymousClass2) {
+            anonymousClass2 = (AnonymousClass2) continuationImpl;
+            int i = anonymousClass2.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                anonymousClass2.label = i - Integer.MIN_VALUE;
+            } else {
+                anonymousClass2 = desktopRepository.new AnonymousClass2(continuationImpl);
+            }
+        }
+        AnonymousClass2 anonymousClass22 = anonymousClass2;
+        Object obj = anonymousClass22.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = anonymousClass22.label;
+        try {
+            if (i2 == 0) {
+                ResultKt.throwOnFailure(obj);
+                DesktopPersistentRepository desktopPersistentRepository = desktopRepository.persistentRepository;
+                int i3 = desktopRepository.userId;
+                int i4 = desk.deskId;
+                ArraySet arraySet = desk.visibleTasks;
+                ArraySet arraySet2 = desk.minimizedTasks;
+                ArrayList arrayList = desk.freeformTasksInZOrder;
+                Integer num = desk.leftTiledTaskId;
+                Integer num2 = desk.rightTiledTaskId;
+                int i5 = desk.displayId;
+                int i6 = desk.usedDesk;
+                anonymousClass22.L$0 = desktopRepository;
+                anonymousClass22.label = 1;
+                Object objAddOrUpdateDesktop = desktopPersistentRepository.addOrUpdateDesktop(i3, i4, arraySet, arraySet2, arrayList, num, num2, i5, i6, anonymousClass22);
+                desktopRepository = objAddOrUpdateDesktop;
+                if (objAddOrUpdateDesktop == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i2 != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                DesktopRepository desktopRepository2 = (DesktopRepository) anonymousClass22.L$0;
+                ResultKt.throwOnFailure(obj);
+                desktopRepository = desktopRepository2;
+            }
+        } catch (Exception e) {
+            desktopRepository.logE("An exception occurred while updating the persistent repository \n%s", e.getStackTrace());
+        }
+        return Unit.INSTANCE;
     }
 
     public final void addClosingTask(int i, Integer num, int i2) {
@@ -420,9 +491,9 @@ public final class DesktopRepository {
         if ((num == null || (activeDesk = desktopData.getDesk(num.intValue())) == null) && (activeDesk = desktopData.getActiveDesk(i)) == null) {
             throw new IllegalStateException(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Expected active desk in display: ").toString());
         }
-        boolean add = activeDesk.closingTasks.add(Integer.valueOf(i2));
+        boolean zAdd = activeDesk.closingTasks.add(Integer.valueOf(i2));
         int i3 = activeDesk.deskId;
-        if (add) {
+        if (zAdd) {
             logD("Added closing task=%d displayId=%d deskId=%d", Integer.valueOf(i2), Integer.valueOf(i), Integer.valueOf(i3));
         } else {
             logW("Task with taskId=%d displayId=%d deskId=%d is already closing", Integer.valueOf(i2), Integer.valueOf(i), Integer.valueOf(i3));
@@ -432,10 +503,10 @@ public final class DesktopRepository {
     public final void addDesk(final int i, final int i2, final int i3) {
         Desk desk;
         logD("addDesk for displayId=%d and deskId=%d", Integer.valueOf(i), Integer.valueOf(i2));
-        final boolean canCreateDesks = canCreateDesks();
+        final boolean zCanCreateDesks = canCreateDesks();
         DesktopData desktopData = this.desktopData;
         desktopData.createDesk(i, i2, i3);
-        final boolean canCreateDesks2 = canCreateDesks();
+        final boolean zCanCreateDesks2 = canCreateDesks();
         for (Map.Entry entry : this.deskChangeListeners.entrySet()) {
             final DeskChangeListener deskChangeListener = (DeskChangeListener) entry.getKey();
             ((Executor) entry.getValue()).execute(new Runnable() { // from class: com.android.wm.shell.desktopmode.DesktopRepository$addDesk$1$1
@@ -445,8 +516,8 @@ public final class DesktopRepository {
                         return;
                     }
                     deskChangeListener.onDeskAdded(i, i2);
-                    boolean z = canCreateDesks;
-                    boolean z2 = canCreateDesks2;
+                    boolean z = zCanCreateDesks;
+                    boolean z2 = zCanCreateDesks2;
                     if (z != z2) {
                         deskChangeListener.onCanCreateDesksChanged(z2);
                     }
@@ -459,7 +530,7 @@ public final class DesktopRepository {
         if (!CoreRune.DW_DESK_LABEL || i3 == -1 || (desk = desktopData.getDesk(i2)) == null) {
             return;
         }
-        desk.deskLabel = SequencesKt___SequencesKt.count(SequencesKt___SequencesKt.filter(desktopData.desksSequence(), new DesktopRepository$$ExternalSyntheticLambda2(0))) + 1;
+        desk.deskLabel = nextDeskLabel();
     }
 
     public final void addLeftTiledTask(int i, int i2) {
@@ -510,6 +581,7 @@ public final class DesktopRepository {
     }
 
     public final void addTaskToDesk(int i, int i2, final int i3, boolean z) {
+        Integer num;
         logD("addTaskToDesk for displayId=%d, deskId=%d, taskId=%d, isVisible=%b", Integer.valueOf(i), Integer.valueOf(i2), Integer.valueOf(i3), Boolean.valueOf(z));
         logD("addOrMoveTaskToTopOfDesk displayId=%d, deskId=%d, taskId=%d", Integer.valueOf(i), Integer.valueOf(i2), Integer.valueOf(i3));
         DesktopData desktopData = this.desktopData;
@@ -518,7 +590,7 @@ public final class DesktopRepository {
             throw new IllegalStateException(("Could not find desk: " + i2).toString());
         }
         logD("addOrMoveTaskToTopOfDesk: display=%d deskId=%d taskId=%d", Integer.valueOf(i), Integer.valueOf(i2), Integer.valueOf(i3));
-        desktopData.forAllDesks(new Function2() { // from class: com.android.wm.shell.desktopmode.DesktopRepository$$ExternalSyntheticLambda6
+        desktopData.forAllDesks(new Function2() { // from class: com.android.wm.shell.desktopmode.DesktopRepository$$ExternalSyntheticLambda7
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 ((Integer) obj).intValue();
@@ -529,7 +601,7 @@ public final class DesktopRepository {
         });
         desk.freeformTasksInZOrder.add(0, Integer.valueOf(i3));
         logD("UnminimizeTask: display=%d, task=%d", Integer.valueOf(i), Integer.valueOf(i3));
-        desktopData.forAllDesks(i, new DesktopRepository$$ExternalSyntheticLambda4(i3, 1, this));
+        desktopData.forAllDesks(i, new DesktopRepository$$ExternalSyntheticLambda5(i3, 1, this));
         if (DesktopModeFlags.ENABLE_DESKTOP_WINDOWING_PERSISTENCE.isTrue()) {
             updatePersistentRepository(i);
         }
@@ -539,15 +611,16 @@ public final class DesktopRepository {
             throw new IllegalStateException(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i2, "Did not find desk: ").toString());
         }
         removeActiveTask(i3, Integer.valueOf(i2));
+        for (Desk desk3 : desktopData.desksSequence()) {
+            if (desk3.deskId != i2 && (num = desk3.fullImmersiveTaskId) != null && num.intValue() == i3) {
+                logD("Remove fullImmersiveTaskId=%d", Integer.valueOf(i3));
+                desk3.fullImmersiveTaskId = null;
+            }
+        }
         if (desk2.activeTasks.add(Integer.valueOf(i3))) {
             logD("Adds active task=%d displayId=%d deskId=%d", Integer.valueOf(i3), Integer.valueOf(i), Integer.valueOf(i2));
-            if (i == 0 && desk2.usedDesk != 1) {
-                Desk activeDesk = desktopData.getActiveDesk(i);
-                if (activeDesk == null || activeDesk.deskId != i2) {
-                    desk2.usedDesk = 0;
-                } else {
-                    desk2.usedDesk = 2;
-                }
+            if (i == 0 && desk2.usedDesk == -1) {
+                desk2.usedDesk = 0;
                 updatePersistentRepositoryForDesk(i2);
             }
             updateActiveTasksListeners(i);
@@ -557,25 +630,25 @@ public final class DesktopRepository {
 
     public final void addVisibleTasksListener(final VisibleTasksListener visibleTasksListener, Executor executor) {
         this.visibleTasksListeners.put(visibleTasksListener, executor);
-        Sequence desksSequence = this.desktopData.desksSequence();
+        Sequence sequenceDesksSequence = this.desktopData.desksSequence();
         LinkedHashMap linkedHashMap = new LinkedHashMap();
-        for (Object obj : desksSequence) {
-            Integer valueOf = Integer.valueOf(((Desk) obj).displayId);
-            Object obj2 = linkedHashMap.get(valueOf);
-            if (obj2 == null) {
-                obj2 = new ArrayList();
-                linkedHashMap.put(valueOf, obj2);
+        for (Object obj : sequenceDesksSequence) {
+            Integer numValueOf = Integer.valueOf(((Desk) obj).displayId);
+            Object arrayList = linkedHashMap.get(numValueOf);
+            if (arrayList == null) {
+                arrayList = new ArrayList();
+                linkedHashMap.put(numValueOf, arrayList);
             }
-            ((List) obj2).add(obj);
+            ((List) arrayList).add(obj);
         }
         Iterator it = linkedHashMap.keySet().iterator();
         while (it.hasNext()) {
-            final int intValue = ((Number) it.next()).intValue();
-            final int visibleTaskCount = getVisibleTaskCount(intValue);
+            final int iIntValue = ((Number) it.next()).intValue();
+            final int visibleTaskCount = getVisibleTaskCount(iIntValue);
             executor.execute(new Runnable() { // from class: com.android.wm.shell.desktopmode.DesktopRepository$addVisibleTasksListener$2$1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    DesktopRepository.VisibleTasksListener.this.onTasksVisibilityChanged(intValue, visibleTaskCount);
+                    visibleTasksListener.onTasksVisibilityChanged(iIntValue, visibleTaskCount);
                 }
             });
         }
@@ -609,7 +682,7 @@ public final class DesktopRepository {
     }
 
     public final Set getAllDeskIds() {
-        return SequencesKt___SequencesKt.toSet(new TransformingSequence(this.desktopData.desksSequence(), new DesktopRepository$$ExternalSyntheticLambda2(5)));
+        return SequencesKt___SequencesKt.toSet(new TransformingSequence(this.desktopData.desksSequence(), new DesktopRepository$$ExternalSyntheticLambda0(1)));
     }
 
     public final Integer getDefaultDeskId(int i) {
@@ -621,19 +694,19 @@ public final class DesktopRepository {
     }
 
     public final Integer getDeskIdForTask(int i) {
-        Object obj;
+        Object next;
         Iterator it = this.desktopData.desksSequence().iterator();
         while (true) {
             if (!it.hasNext()) {
-                obj = null;
+                next = null;
                 break;
             }
-            obj = it.next();
-            if (((Desk) obj).activeTasks.contains(Integer.valueOf(i))) {
+            next = it.next();
+            if (((Desk) next).activeTasks.contains(Integer.valueOf(i))) {
                 break;
             }
         }
-        Desk desk = (Desk) obj;
+        Desk desk = (Desk) next;
         if (desk != null) {
             return Integer.valueOf(desk.deskId);
         }
@@ -643,7 +716,7 @@ public final class DesktopRepository {
     /* JADX WARN: Multi-variable type inference failed */
     public final Integer getDisplayIdForTask(final int i) {
         final Ref$ObjectRef ref$ObjectRef = new Ref$ObjectRef();
-        this.desktopData.forAllDesks(new Function2() { // from class: com.android.wm.shell.desktopmode.DesktopRepository$$ExternalSyntheticLambda1
+        this.desktopData.forAllDesks(new Function2() { // from class: com.android.wm.shell.desktopmode.DesktopRepository$$ExternalSyntheticLambda3
             /* JADX WARN: Type inference failed for: r2v1, types: [T, java.lang.Integer] */
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
@@ -710,6 +783,26 @@ public final class DesktopRepository {
         return new ArrayList<>(collection);
     }
 
+    public final Integer getLastUsedDeskIdInDefaultDisplay() {
+        Object next;
+        Iterator it = this.desktopData.desksSequence(0).iterator();
+        while (true) {
+            if (!it.hasNext()) {
+                next = null;
+                break;
+            }
+            next = it.next();
+            if (((Desk) next).usedDesk == 2) {
+                break;
+            }
+        }
+        Desk desk = (Desk) next;
+        if (desk != null) {
+            return Integer.valueOf(desk.deskId);
+        }
+        return null;
+    }
+
     public final ArraySet<Integer> getMinimizedTaskIdsInDesk(int i) {
         Desk desk = this.desktopData.getDesk(i);
         return new ArraySet<>(desk != null ? desk.minimizedTasks : null);
@@ -742,13 +835,13 @@ public final class DesktopRepository {
     }
 
     public final boolean isAnyDeskActive(int i) {
-        boolean isTrue = DesktopExperienceFlags.ENABLE_MULTIPLE_DESKTOPS_BACKEND.isTrue();
+        boolean zIsTrue = DesktopExperienceFlags.ENABLE_MULTIPLE_DESKTOPS_BACKEND.isTrue();
         DesktopData desktopData = this.desktopData;
-        if (isTrue) {
+        if (zIsTrue) {
             return desktopData.getActiveDesk(i) != null;
         }
         if (desktopData.getDefaultDesk(i) != null) {
-            return !r3.visibleTasks.isEmpty();
+            return !r0.visibleTasks.isEmpty();
         }
         logE(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Could not find default desk for display: "), new Object[0]);
         return false;
@@ -813,15 +906,15 @@ public final class DesktopRepository {
     public final boolean isOnlyVisibleNonClosingTaskInDesk(int i, int i2) {
         Desk desk = this.desktopData.getDesk(i2);
         if (desk != null) {
-            Set subtract = CollectionsKt___CollectionsKt.subtract(CollectionsKt___CollectionsKt.subtract(desk.visibleTasks, desk.closingTasks), desk.minimizedTasks);
+            Set setSubtract = CollectionsKt___CollectionsKt.subtract(CollectionsKt___CollectionsKt.subtract(desk.visibleTasks, desk.closingTasks), desk.minimizedTasks);
             Object obj = null;
-            if (subtract instanceof List) {
-                List list = (List) subtract;
+            if (setSubtract instanceof List) {
+                List list = (List) setSubtract;
                 if (list.size() == 1) {
                     obj = list.get(0);
                 }
             } else {
-                Iterator it = subtract.iterator();
+                Iterator it = setSubtract.iterator();
                 if (it.hasNext()) {
                     Object next = it.next();
                     if (!it.hasNext()) {
@@ -866,6 +959,36 @@ public final class DesktopRepository {
         return desk.visibleTasks.contains(Integer.valueOf(i));
     }
 
+    public final void logD(String str, Object... objArr) {
+        ShellProtoLogGroup shellProtoLogGroup = ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE;
+        String strM = AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("[u%d] %s: ", str);
+        SpreadBuilder spreadBuilder = new SpreadBuilder(3);
+        spreadBuilder.add(Integer.valueOf(this.userId));
+        spreadBuilder.add("DesktopRepository");
+        spreadBuilder.addSpread(objArr);
+        ProtoLog.d(shellProtoLogGroup, strM, spreadBuilder.list.toArray(new Object[spreadBuilder.list.size()]));
+    }
+
+    public final void logE(String str, Object... objArr) {
+        ShellProtoLogGroup shellProtoLogGroup = ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE;
+        String strM = AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("[u%d] %s: ", str);
+        SpreadBuilder spreadBuilder = new SpreadBuilder(3);
+        spreadBuilder.add(Integer.valueOf(this.userId));
+        spreadBuilder.add("DesktopRepository");
+        spreadBuilder.addSpread(objArr);
+        ProtoLog.e(shellProtoLogGroup, strM, spreadBuilder.list.toArray(new Object[spreadBuilder.list.size()]));
+    }
+
+    public final void logW(String str, Object... objArr) {
+        ShellProtoLogGroup shellProtoLogGroup = ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE;
+        String strConcat = "[u%d] %s: ".concat(str);
+        SpreadBuilder spreadBuilder = new SpreadBuilder(3);
+        spreadBuilder.add(Integer.valueOf(this.userId));
+        spreadBuilder.add("DesktopRepository");
+        spreadBuilder.addSpread(objArr);
+        ProtoLog.w(shellProtoLogGroup, strConcat, spreadBuilder.list.toArray(new Object[spreadBuilder.list.size()]));
+    }
+
     public final void minimizeTask(int i, int i2) {
         logD("minimizeTask displayId=%d, taskId=%d", Integer.valueOf(i), Integer.valueOf(i2));
         if (i == -1) {
@@ -879,27 +1002,42 @@ public final class DesktopRepository {
             }
         }
         Desk activeDesk = this.desktopData.getActiveDesk(i);
-        Integer valueOf = activeDesk != null ? Integer.valueOf(activeDesk.deskId) : null;
-        if (valueOf == null) {
+        Integer numValueOf = activeDesk != null ? Integer.valueOf(activeDesk.deskId) : null;
+        if (numValueOf == null) {
             logD("Minimize task: No active desk found for task: taskId=%d", Integer.valueOf(i2));
         } else {
-            minimizeTaskInDesk(i, valueOf.intValue(), i2);
+            minimizeTaskInDesk(i, numValueOf.intValue(), i2);
         }
     }
 
     public final void minimizeTaskInDesk(int i, int i2, int i3) {
         ArraySet arraySet;
+        ArraySet arraySet2;
         logD("MinimizeTaskInDesk: displayId=%d deskId=%d, task=%d", Integer.valueOf(i), Integer.valueOf(i2), Integer.valueOf(i3));
-        Desk desk = this.desktopData.getDesk(i2);
-        if (desk == null || (arraySet = desk.minimizedTasks) == null) {
+        DesktopData desktopData = this.desktopData;
+        Desk desk = desktopData.getDesk(i2);
+        if (desk == null || (arraySet2 = desk.minimizedTasks) == null) {
             logD("Minimize task: No active desk found for task: taskId=%d", Integer.valueOf(i3));
         } else {
-            arraySet.add(Integer.valueOf(i3));
+            arraySet2.add(Integer.valueOf(i3));
         }
+        int size = 0;
         updateTaskInDesk(i, i2, i3, false);
         if (DesktopModeFlags.ENABLE_DESKTOP_WINDOWING_PERSISTENCE.isTrue()) {
             updatePersistentRepositoryForDesk(i2);
         }
+        if (CoreRune.MW_SA_LOGGING) {
+            int size2 = getMinimizedTaskIdsInDesk(i2).size();
+            Desk desk2 = desktopData.getDesk(i2);
+            if (desk2 != null && (arraySet = desk2.visibleTasks) != null) {
+                size = arraySet.size();
+            }
+            CoreSaLogger.logForDexMW("3002", "[minimizedWindow] : " + size2 + " [visibleWindow] : " + size);
+        }
+    }
+
+    public final int nextDeskLabel() {
+        return SequencesKt___SequencesKt.count(SequencesKt___SequencesKt.filter(this.desktopData.desksSequence(), new DesktopRepository$$ExternalSyntheticLambda0(0))) + 1;
     }
 
     public final void notifyVisibleTaskListeners(final int i, final int i2) {
@@ -908,50 +1046,59 @@ public final class DesktopRepository {
             ((Executor) entry.getValue()).execute(new Runnable() { // from class: com.android.wm.shell.desktopmode.DesktopRepository$notifyVisibleTaskListeners$1$1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    DesktopRepository.VisibleTasksListener.this.onTasksVisibilityChanged(i, i2);
+                    visibleTasksListener.onTasksVisibilityChanged(i, i2);
                 }
             });
         }
     }
 
     public final void onDeskDisplayChanged(final int i, final int i2) {
-        boolean canCreateDesks = canCreateDesks();
+        boolean zCanCreateDesks = canCreateDesks();
         DesktopData desktopData = this.desktopData;
         Desk desk = desktopData.getDesk(i);
         if (desk == null) {
             throw new IllegalStateException(("Expected to find desk with id: " + i).toString());
         }
-        Desk deepCopy = desk.deepCopy();
-        deepCopy.displayId = i2;
+        Desk deskDeepCopy = desk.deepCopy();
+        deskDeepCopy.displayId = i2;
         if (CoreRune.DW_MULTIPLE_DESKS) {
             removeDesk(i, false);
         } else {
             removeDesk(i, true);
         }
-        desktopData.addDesk(i2, deepCopy);
-        boolean canCreateDesks2 = canCreateDesks();
+        desktopData.addDesk(i2, deskDeepCopy);
+        boolean zCanCreateDesks2 = canCreateDesks();
         for (Map.Entry entry : this.deskChangeListeners.entrySet()) {
             final DeskChangeListener deskChangeListener = (DeskChangeListener) entry.getKey();
             ((Executor) entry.getValue()).execute(new Runnable() { // from class: com.android.wm.shell.desktopmode.DesktopRepository$onDeskDisplayChanged$1$1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    DesktopRepository.DeskChangeListener.this.onDeskAdded(i2, i);
+                    deskChangeListener.onDeskAdded(i2, i);
                 }
             });
-            if (canCreateDesks != canCreateDesks2) {
-                deskChangeListener.onCanCreateDesksChanged(canCreateDesks2);
+            if (zCanCreateDesks != zCanCreateDesks2) {
+                deskChangeListener.onCanCreateDesksChanged(zCanCreateDesks2);
             }
         }
         logD("onDeskDisplayChanged deskId=%d newDisplayId=%d", Integer.valueOf(i), Integer.valueOf(i2));
         updatePersistentRepository(i2);
     }
 
-    public final void removeActiveTask(int i, Integer num) {
+    public final void removeActiveTask(int i, final Integer num) {
         logD("removeActiveTask for taskId=%d, excludedDeskId=%d", Integer.valueOf(i), num);
         LinkedHashSet linkedHashSet = new LinkedHashSet();
-        FilteringSequence$iterator$1 filteringSequence$iterator$1 = new FilteringSequence$iterator$1(SequencesKt___SequencesKt.filter(this.desktopData.desksSequence(), new DesktopRepository$$ExternalSyntheticLambda0(num, 0)));
-        while (filteringSequence$iterator$1.hasNext()) {
-            Desk desk = (Desk) filteringSequence$iterator$1.next();
+        FilteringSequence.AnonymousClass1 anonymousClass1 = SequencesKt___SequencesKt.filter(this.desktopData.desksSequence(), new Function1() { // from class: com.android.wm.shell.desktopmode.DesktopRepository$$ExternalSyntheticLambda2
+            @Override // kotlin.jvm.functions.Function1
+            /* renamed from: invoke */
+            public final Object mo781invoke(Object obj) {
+                int i2 = DesktopRepository.$r8$clinit;
+                int i3 = ((DesktopRepository.Desk) obj).deskId;
+                Integer num2 = num;
+                return Boolean.valueOf(num2 == null || i3 != num2.intValue());
+            }
+        }).new AnonymousClass1();
+        while (anonymousClass1.hasNext()) {
+            Desk desk = (Desk) anonymousClass1.next();
             if (removeActiveTaskFromDesk(desk.deskId, i, false)) {
                 logD("Removed active task=%d displayId=%d deskId=%d", Integer.valueOf(i), Integer.valueOf(desk.displayId), Integer.valueOf(desk.deskId));
                 linkedHashSet.add(Integer.valueOf(desk.displayId));
@@ -979,7 +1126,7 @@ public final class DesktopRepository {
 
     public final Set removeDesk(int i, final boolean z) {
         logD("removeDesk %d", Integer.valueOf(i));
-        final boolean canCreateDesks = canCreateDesks();
+        final boolean zCanCreateDesks = canCreateDesks();
         DesktopData desktopData = this.desktopData;
         final Desk desk = desktopData.getDesk(i);
         if (desk == null) {
@@ -993,22 +1140,16 @@ public final class DesktopRepository {
         final boolean z2 = activeDesk != null && activeDesk.deskId == i3;
         ArraySet arraySet = new ArraySet(desk.activeTasks);
         desktopData.remove(i3);
-        final boolean canCreateDesks2 = canCreateDesks();
-        if (desktopData.getNumberOfDesks(desk.displayId) == 0) {
-            DesktopStateImpl.Companion.getClass();
-            if (DesktopStateImpl.desktopExternalDisplayId == desk.displayId) {
-                DesktopStateImpl.desktopExternalDisplayId = -1;
-            }
-        }
+        final boolean zCanCreateDesks2 = canCreateDesks();
         if (CoreRune.DW_DESK_LABEL && z) {
-            Iterator it = new SequencesKt___SequencesKt$sortedWith$1(desktopData.desksSequence(), new Comparator() { // from class: com.android.wm.shell.desktopmode.DesktopRepository$reassignDeskLabel$$inlined$sortedBy$1
+            FilteringSequence.AnonymousClass1 anonymousClass1 = SequencesKt___SequencesKt.filter(new SequencesKt___SequencesKt$sortedWith$1(desktopData.desksSequence(), new Comparator() { // from class: com.android.wm.shell.desktopmode.DesktopRepository$reassignDeskLabel$$inlined$sortedBy$1
                 @Override // java.util.Comparator
                 public final int compare(Object obj, Object obj2) {
                     return ComparisonsKt__ComparisonsKt.compareValues(Integer.valueOf(((DesktopRepository.Desk) obj).deskLabel), Integer.valueOf(((DesktopRepository.Desk) obj2).deskLabel));
                 }
-            }).iterator();
-            while (it.hasNext()) {
-                Object next = it.next();
+            }), new DesktopRepository$$ExternalSyntheticLambda0(5)).new AnonymousClass1();
+            while (anonymousClass1.hasNext()) {
+                Object next = anonymousClass1.next();
                 int i4 = i2 + 1;
                 if (i2 < 0) {
                     CollectionsKt__CollectionsKt.throwIndexOverflow();
@@ -1034,8 +1175,8 @@ public final class DesktopRepository {
                     DesktopRepository.Desk desk3 = desk;
                     deskChangeListener3.onDeskRemoved(desk3.displayId, desk3.deskId);
                     if (!CoreRune.DW_MULTIPLE_DESKS || z) {
-                        boolean z3 = canCreateDesks;
-                        boolean z4 = canCreateDesks2;
+                        boolean z3 = zCanCreateDesks;
+                        boolean z4 = zCanCreateDesks2;
                         if (z3 != z4) {
                             deskChangeListener.onCanCreateDesksChanged(z4);
                         }
@@ -1054,32 +1195,30 @@ public final class DesktopRepository {
         DesktopData desktopData = this.desktopData;
         if (i != -1) {
             logD("Removes freeform task: taskId=%d, displayId=%d", Integer.valueOf(i2), Integer.valueOf(i));
-            desktopData.forAllDesks(i, new DesktopRepository$$ExternalSyntheticLambda4(i2, 0, this));
+            desktopData.forAllDesks(i, new DesktopRepository$$ExternalSyntheticLambda5(i2, 0, this));
             return;
         }
         Integer displayIdForTask = getDisplayIdForTask(i2);
         if (displayIdForTask != null) {
-            int intValue = displayIdForTask.intValue();
-            logD("Removes freeform task: taskId=%d, displayId=%d", Integer.valueOf(i2), Integer.valueOf(intValue));
-            desktopData.forAllDesks(intValue, new DesktopRepository$$ExternalSyntheticLambda4(i2, 0, this));
+            int iIntValue = displayIdForTask.intValue();
+            logD("Removes freeform task: taskId=%d, displayId=%d", Integer.valueOf(i2), Integer.valueOf(iIntValue));
+            desktopData.forAllDesks(iIntValue, new DesktopRepository$$ExternalSyntheticLambda5(i2, 0, this));
         }
     }
 
     public final void removeTaskFromDesk(int i, int i2) {
-        String joinToString$default;
         logD("removeTaskFromDesk: deskId=%d, taskId=%d", Integer.valueOf(i), Integer.valueOf(i2));
         this.boundsBeforeMaximizeByTaskId.remove(i2);
+        this.displayLayoutBeforeMaximizeByTaskId.remove(i2);
         this.boundsBeforeFullImmersiveByTaskId.remove(i2);
         Desk desk = this.desktopData.getDesk(i);
         if (desk == null) {
             return;
         }
-        boolean remove = desk.freeformTasksInZOrder.remove(Integer.valueOf(i2));
+        boolean zRemove = desk.freeformTasksInZOrder.remove(Integer.valueOf(i2));
         int i3 = desk.deskId;
-        if (remove) {
-            Integer valueOf = Integer.valueOf(i3);
-            joinToString$default = CollectionsKt___CollectionsKt.joinToString$default(desk.freeformTasksInZOrder, ", ", "[", "]", null, 56);
-            logD("Remaining freeform tasks in desk: %d, tasks: %s", valueOf, joinToString$default);
+        if (zRemove) {
+            logD("Remaining freeform tasks in desk: %d, tasks: %s", Integer.valueOf(i3), CollectionsKt___CollectionsKt.joinToString$default(desk.freeformTasksInZOrder, ", ", "[", "]", null, 56));
         }
         unminimizeTaskFromDesk(i, i2);
         setTaskInFullImmersiveStateInDesk(i, i2, false);
@@ -1098,7 +1237,7 @@ public final class DesktopRepository {
     }
 
     public final void setActiveDesk(final int i, final int i2) {
-        Object obj;
+        Object next;
         Desk desk;
         logD("setActiveDesk for displayId=%d and deskId=%d", Integer.valueOf(i), Integer.valueOf(i2));
         DesktopData desktopData = this.desktopData;
@@ -1121,16 +1260,16 @@ public final class DesktopRepository {
                 Iterator it = desktopData.desksSequence(i).iterator();
                 while (true) {
                     if (it.hasNext()) {
-                        obj = it.next();
-                        if (((Desk) obj).usedDesk == 2) {
+                        next = it.next();
+                        if (((Desk) next).usedDesk == 2) {
                             break;
                         }
                     } else {
-                        obj = null;
+                        next = null;
                         break;
                     }
                 }
-                Desk desk3 = (Desk) obj;
+                Desk desk3 = (Desk) next;
                 if (desk3 != null) {
                     desk3.usedDesk = 0;
                 }
@@ -1141,7 +1280,7 @@ public final class DesktopRepository {
             }
         }
         if (CoreRune.DW_DESK_LABEL && (desk = desktopData.getDesk(i2)) != null && desk.deskLabel == 0) {
-            desk.deskLabel = SequencesKt___SequencesKt.count(SequencesKt___SequencesKt.filter(desktopData.desksSequence(), new DesktopRepository$$ExternalSyntheticLambda2(0))) + 1;
+            desk.deskLabel = nextDeskLabel();
         }
         desktopData.setActiveDesk(i, i2);
         for (Map.Entry entry : this.deskChangeListeners.entrySet()) {
@@ -1149,7 +1288,7 @@ public final class DesktopRepository {
             ((Executor) entry.getValue()).execute(new Runnable() { // from class: com.android.wm.shell.desktopmode.DesktopRepository$setActiveDesk$4$1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    DesktopRepository.DeskChangeListener.this.onActiveDeskChanged(i, i2, i3);
+                    deskChangeListener.onActiveDeskChanged(i, i2, i3);
                 }
             });
         }
@@ -1169,7 +1308,7 @@ public final class DesktopRepository {
             ((Executor) entry.getValue()).execute(new Runnable() { // from class: com.android.wm.shell.desktopmode.DesktopRepository$setDeskInactive$1$1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    DesktopRepository.DeskChangeListener.this.onActiveDeskChanged(displayForDesk, -1, i);
+                    deskChangeListener.onActiveDeskChanged(displayForDesk, -1, i);
                 }
             });
         }
@@ -1215,13 +1354,13 @@ public final class DesktopRepository {
     }
 
     public final void updatePersistentRepository(int i) {
-        BuildersKt.launch$default(this.mainCoroutineScope, null, null, new DesktopRepository$updatePersistentRepository$1(SequencesKt___SequencesKt.toList(new TransformingSequence(this.desktopData.desksSequence(i), new DesktopRepository$$ExternalSyntheticLambda2(3))), this, null), 3);
+        BuildersKt.launch$default(this.mainCoroutineScope, null, null, new AnonymousClass1(SequencesKt___SequencesKt.toList(new TransformingSequence(this.desktopData.desksSequence(i), new DesktopRepository$$ExternalSyntheticLambda0(3))), this, null), 3);
     }
 
     public final void updatePersistentRepositoryForDesk(int i) {
         Desk desk = this.desktopData.getDesk(i);
         if (desk != null) {
-            BuildersKt.launch$default(this.mainCoroutineScope, null, null, new DesktopRepository$updatePersistentRepositoryForDesk$1(this, desk.deepCopy(), null), 3);
+            BuildersKt.launch$default(this.mainCoroutineScope, null, null, new C12001(desk.deepCopy(), null), 3);
         }
     }
 
@@ -1248,15 +1387,15 @@ public final class DesktopRepository {
         logD("updateTaskInDesk taskId=%d, deskId=%d, displayId=%d, isVisible=%b", Integer.valueOf(i3), Integer.valueOf(i2), Integer.valueOf(i), Boolean.valueOf(z));
         DesktopData desktopData = this.desktopData;
         if (z) {
-            final Integer valueOf = Integer.valueOf(i2);
-            desktopData.forAllDesks(new Function2() { // from class: com.android.wm.shell.desktopmode.DesktopRepository$$ExternalSyntheticLambda11
+            final Integer numValueOf = Integer.valueOf(i2);
+            desktopData.forAllDesks(new Function2() { // from class: com.android.wm.shell.desktopmode.DesktopRepository$$ExternalSyntheticLambda12
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj, Object obj2) {
                     ((Integer) obj).intValue();
                     DesktopRepository.Desk desk = (DesktopRepository.Desk) obj2;
                     int i4 = DesktopRepository.$r8$clinit;
                     int i5 = desk.deskId;
-                    Integer num = valueOf;
+                    Integer num = numValueOf;
                     if (num == null || i5 != num.intValue()) {
                         this.removeVisibleTaskFromDesk(desk.deskId, i3);
                     }
@@ -1269,23 +1408,23 @@ public final class DesktopRepository {
             throw new IllegalStateException(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i2, "Did not find desk: ").toString());
         }
         Desk desk2 = desktopData.getDesk(i2);
-        int i4 = 0;
-        int size = (desk2 == null || (arraySet2 = desk2.visibleTasks) == null) ? 0 : arraySet2.size();
+        int size = 0;
+        int size2 = (desk2 == null || (arraySet2 = desk2.visibleTasks) == null) ? 0 : arraySet2.size();
         if (z) {
             desk.visibleTasks.add(Integer.valueOf(i3));
             logD("UnminimizeTask: display=%d, task=%d", Integer.valueOf(i), Integer.valueOf(i3));
-            desktopData.forAllDesks(i, new DesktopRepository$$ExternalSyntheticLambda4(i3, 1, this));
+            desktopData.forAllDesks(i, new DesktopRepository$$ExternalSyntheticLambda5(i3, 1, this));
         } else {
             desk.visibleTasks.remove(Integer.valueOf(i3));
         }
         Desk desk3 = desktopData.getDesk(i2);
         if (desk3 != null && (arraySet = desk3.visibleTasks) != null) {
-            i4 = arraySet.size();
+            size = arraySet.size();
         }
-        if (size != i4) {
+        if (size2 != size) {
             logD("Update task visibility taskId=%d visible=%b deskId=%d displayId=%d", Integer.valueOf(i3), Boolean.valueOf(z), Integer.valueOf(i2), Integer.valueOf(i));
-            logD("VisibleTaskCount has changed from %d to %d", Integer.valueOf(size), Integer.valueOf(i4));
-            notifyVisibleTaskListeners(i, i4);
+            logD("VisibleTaskCount has changed from %d to %d", Integer.valueOf(size2), Integer.valueOf(size));
+            notifyVisibleTaskListeners(i, size);
             if (DesktopModeFlags.ENABLE_DESKTOP_WINDOWING_PERSISTENCE.isTrue()) {
                 updatePersistentRepository(i);
             }
@@ -1299,13 +1438,12 @@ public final class DesktopRepository {
         }
         Iterator it = CollectionsKt___CollectionsKt.reversed(list).iterator();
         while (it.hasNext()) {
-            int intValue = ((Number) it.next()).intValue();
-            desk.freeformTasksInZOrder.remove(Integer.valueOf(intValue));
-            desk.freeformTasksInZOrder.add(0, Integer.valueOf(intValue));
+            int iIntValue = ((Number) it.next()).intValue();
+            desk.freeformTasksInZOrder.remove(Integer.valueOf(iIntValue));
+            desk.freeformTasksInZOrder.add(0, Integer.valueOf(iIntValue));
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class MultiDesktopData implements DesktopData {
         public final SparseArray desktopDisplays = new SparseArray();
 
@@ -1356,18 +1494,18 @@ public final class DesktopRepository {
 
         @Override // com.android.wm.shell.desktopmode.DesktopRepository.DesktopData
         public final Sequence desksSequence() {
-            return SequencesKt___SequencesKt.flatMap(SequencesKt__SequencesKt.asSequence(new SparseArrayKt$valueIterator$1(this.desktopDisplays)), new DesktopRepository$$ExternalSyntheticLambda2(6));
+            return SequencesKt___SequencesKt.flatMap(SequencesKt__SequencesKt.asSequence(new SparseArrayKt$valueIterator$1(this.desktopDisplays)), new DesktopRepository$$ExternalSyntheticLambda0(7));
         }
 
         @Override // com.android.wm.shell.desktopmode.DesktopRepository.DesktopData
-        public final void forAllDesks(DesktopRepository$$ExternalSyntheticLambda4 desktopRepository$$ExternalSyntheticLambda4) {
+        public final void forAllDesks(DesktopRepository$$ExternalSyntheticLambda5 desktopRepository$$ExternalSyntheticLambda5) {
             SparseArray sparseArray = this.desktopDisplays;
             int size = sparseArray.size();
             for (int i = 0; i < size; i++) {
                 sparseArray.keyAt(i);
                 Iterator it = ((DesktopDisplay) sparseArray.valueAt(i)).orderedDesks.iterator();
                 while (it.hasNext()) {
-                    desktopRepository$$ExternalSyntheticLambda4.mo779invoke((Desk) it.next());
+                    desktopRepository$$ExternalSyntheticLambda5.mo781invoke((Desk) it.next());
                 }
             }
         }
@@ -1397,7 +1535,7 @@ public final class DesktopRepository {
 
         @Override // com.android.wm.shell.desktopmode.DesktopRepository.DesktopData
         public final Set getAllActiveDesks() {
-            return SequencesKt___SequencesKt.toSet(new TransformingSequence(SequencesKt___SequencesKt.filter(SequencesKt__SequencesKt.asSequence(new SparseArrayKt$valueIterator$1(this.desktopDisplays)), new DesktopRepository$$ExternalSyntheticLambda2(7)), new DesktopRepository$$ExternalSyntheticLambda2(8)));
+            return SequencesKt___SequencesKt.toSet(new TransformingSequence(SequencesKt___SequencesKt.filter(SequencesKt__SequencesKt.asSequence(new SparseArrayKt$valueIterator$1(this.desktopDisplays)), new DesktopRepository$$ExternalSyntheticLambda0(8)), new DesktopRepository$$ExternalSyntheticLambda0(9)));
         }
 
         @Override // com.android.wm.shell.desktopmode.DesktopRepository.DesktopData
@@ -1476,53 +1614,97 @@ public final class DesktopRepository {
         }
 
         @Override // com.android.wm.shell.desktopmode.DesktopRepository.DesktopData
-        public final Desk getDeskForNewDisplay() {
+        public final Desk getDeskForDefaultDisplay(Integer num) {
             Object obj;
+            int i = 0;
             DesktopDisplay desktopDisplay = (DesktopDisplay) this.desktopDisplays.get(0);
-            if (desktopDisplay != null) {
-                Iterator it = desktopDisplay.orderedDesks.iterator();
-                while (true) {
-                    if (!it.hasNext()) {
-                        obj = null;
-                        break;
-                    }
-                    obj = it.next();
-                    if (((Desk) obj).usedDesk == 1) {
-                        break;
-                    }
-                }
-                Desk desk = (Desk) obj;
-                if (desk != null) {
-                    return desk;
-                }
-                FilteringSequence filter = SequencesKt___SequencesKt.filter(desksSequence(0), new DesktopRepository$$ExternalSyntheticLambda0(desktopDisplay, 1));
-                if (desktopDisplay.activeDeskId != null || SequencesKt___SequencesKt.count(filter) > 1) {
-                    return (Desk) SequencesKt___SequencesKt.firstOrNull(new SequencesKt___SequencesKt$sortedWith$1(filter, new Comparator() { // from class: com.android.wm.shell.desktopmode.DesktopRepository$MultiDesktopData$getDeskForNewDisplay$$inlined$sortedBy$1
-                        @Override // java.util.Comparator
-                        public final int compare(Object obj2, Object obj3) {
-                            return ComparisonsKt__ComparisonsKt.compareValues(Integer.valueOf(((DesktopRepository.Desk) obj2).deskId), Integer.valueOf(((DesktopRepository.Desk) obj3).deskId));
-                        }
-                    }));
+            Object obj2 = null;
+            if (desktopDisplay == null) {
+                return null;
+            }
+            Set set = desktopDisplay.orderedDesks;
+            ArrayList arrayList = new ArrayList();
+            for (Object obj3 : set) {
+                int i2 = ((Desk) obj3).deskId;
+                if (num == null || i2 != num.intValue()) {
+                    arrayList.add(obj3);
                 }
             }
-            return null;
-        }
-
-        @Override // com.android.wm.shell.desktopmode.DesktopRepository.DesktopData
-        public final int getDisplayForDesk(int i) {
-            Object obj;
-            FlatteningSequence$iterator$1 flatteningSequence$iterator$1 = new FlatteningSequence$iterator$1((FlatteningSequence) desksSequence());
+            int size = arrayList.size();
+            int i3 = 0;
             while (true) {
-                if (!flatteningSequence$iterator$1.hasNext()) {
+                if (i3 >= size) {
                     obj = null;
                     break;
                 }
-                obj = flatteningSequence$iterator$1.next();
-                if (((Desk) obj).deskId == i) {
+                obj = arrayList.get(i3);
+                i3++;
+                if (((Desk) obj).usedDesk == 2) {
                     break;
                 }
             }
             Desk desk = (Desk) obj;
+            if (desk != null) {
+                return desk;
+            }
+            int size2 = arrayList.size();
+            while (true) {
+                if (i >= size2) {
+                    break;
+                }
+                Object obj4 = arrayList.get(i);
+                i++;
+                if (((Desk) obj4).usedDesk == 0) {
+                    obj2 = obj4;
+                    break;
+                }
+            }
+            Desk desk2 = (Desk) obj2;
+            return desk2 == null ? (Desk) CollectionsKt___CollectionsKt.firstOrNull((List) arrayList) : desk2;
+        }
+
+        @Override // com.android.wm.shell.desktopmode.DesktopRepository.DesktopData
+        public final Desk getDeskForNewDisplay() {
+            DesktopDisplay desktopDisplay = (DesktopDisplay) this.desktopDisplays.get(0);
+            Object obj = null;
+            if (desktopDisplay == null) {
+                return null;
+            }
+            Iterator it = desktopDisplay.orderedDesks.iterator();
+            while (true) {
+                if (!it.hasNext()) {
+                    break;
+                }
+                Object next = it.next();
+                if (((Desk) next).usedDesk == 1) {
+                    obj = next;
+                    break;
+                }
+            }
+            Desk desk = (Desk) obj;
+            return desk != null ? desk : (Desk) SequencesKt___SequencesKt.firstOrNull(new SequencesKt___SequencesKt$sortedWith$1(SequencesKt___SequencesKt.filter(desksSequence(0), new DesktopRepository$$ExternalSyntheticLambda0(11)), new Comparator() { // from class: com.android.wm.shell.desktopmode.DesktopRepository$MultiDesktopData$getDeskForNewDisplay$$inlined$sortedBy$1
+                @Override // java.util.Comparator
+                public final int compare(Object obj2, Object obj3) {
+                    return ComparisonsKt__ComparisonsKt.compareValues(Integer.valueOf(((DesktopRepository.Desk) obj2).deskId), Integer.valueOf(((DesktopRepository.Desk) obj3).deskId));
+                }
+            }));
+        }
+
+        @Override // com.android.wm.shell.desktopmode.DesktopRepository.DesktopData
+        public final int getDisplayForDesk(int i) {
+            Object next;
+            FlatteningSequence.AnonymousClass1 anonymousClass1 = ((FlatteningSequence) desksSequence()).new AnonymousClass1();
+            while (true) {
+                if (!anonymousClass1.hasNext()) {
+                    next = null;
+                    break;
+                }
+                next = anonymousClass1.next();
+                if (((Desk) next).deskId == i) {
+                    break;
+                }
+            }
+            Desk desk = (Desk) next;
             if (desk != null) {
                 return desk.displayId;
             }
@@ -1532,7 +1714,7 @@ public final class DesktopRepository {
         @Override // com.android.wm.shell.desktopmode.DesktopRepository.DesktopData
         public final int getNumberOfDesks() {
             Iterator it = SequencesKt__SequencesKt.asSequence(new SparseArrayKt$valueIterator$1(this.desktopDisplays)).iterator();
-            int i = 0;
+            int size = 0;
             while (it.hasNext()) {
                 Set set = ((DesktopDisplay) it.next()).orderedDesks;
                 ArrayList arrayList = new ArrayList();
@@ -1541,9 +1723,9 @@ public final class DesktopRepository {
                         arrayList.add(obj);
                     }
                 }
-                i += arrayList.size();
+                size += arrayList.size();
             }
-            return i;
+            return size;
         }
 
         @Override // com.android.wm.shell.desktopmode.DesktopRepository.DesktopData
@@ -1558,7 +1740,7 @@ public final class DesktopRepository {
                 set.removeIf(new Predicate() { // from class: com.android.wm.shell.desktopmode.DesktopRepositoryKt$sam$java_util_function_Predicate$0
                     @Override // java.util.function.Predicate
                     public final /* synthetic */ boolean test(Object obj) {
-                        return ((Boolean) Function1.this.mo779invoke(obj)).booleanValue();
+                        return ((Boolean) desktopRepository$MultiDesktopData$$ExternalSyntheticLambda1.mo781invoke(obj)).booleanValue();
                     }
                 });
             }
@@ -1642,14 +1824,13 @@ public final class DesktopRepository {
 
         @Override // com.android.wm.shell.desktopmode.DesktopRepository.DesktopData
         public final void forAllDesks(int i, Function1 function1) {
-            FlatteningSequence$iterator$1 flatteningSequence$iterator$1 = new FlatteningSequence$iterator$1(SequencesKt___SequencesKt.flatMap(SequencesKt___SequencesKt.filter(SequencesKt__SequencesKt.asSequence(new SparseArrayKt$valueIterator$1(this.desktopDisplays)), new DesktopRepository$MultiDesktopData$$ExternalSyntheticLambda1(i, 1)), new DesktopRepository$$ExternalSyntheticLambda2(9)));
-            while (flatteningSequence$iterator$1.hasNext()) {
-                function1.mo779invoke((Desk) flatteningSequence$iterator$1.next());
+            FlatteningSequence.AnonymousClass1 anonymousClass1 = SequencesKt___SequencesKt.flatMap(SequencesKt___SequencesKt.filter(SequencesKt__SequencesKt.asSequence(new SparseArrayKt$valueIterator$1(this.desktopDisplays)), new DesktopRepository$MultiDesktopData$$ExternalSyntheticLambda1(i, 1)), new DesktopRepository$$ExternalSyntheticLambda0(10)).new AnonymousClass1();
+            while (anonymousClass1.hasNext()) {
+                function1.mo781invoke((Desk) anonymousClass1.next());
             }
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DesktopDisplay {
         public Integer activeDeskId;
         public final int displayId;
@@ -1673,9 +1854,9 @@ public final class DesktopRepository {
         }
 
         public final int hashCode() {
-            int hashCode = (this.orderedDesks.hashCode() + (Integer.hashCode(this.displayId) * 31)) * 31;
+            int iHashCode = (this.orderedDesks.hashCode() + (Integer.hashCode(this.displayId) * 31)) * 31;
             Integer num = this.activeDeskId;
-            return hashCode + (num == null ? 0 : num.hashCode());
+            return iHashCode + (num == null ? 0 : num.hashCode());
         }
 
         public final String toString() {
@@ -1687,7 +1868,6 @@ public final class DesktopRepository {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Desk {
         public final ArraySet activeTasks;
         public final ArraySet closingTasks;
@@ -1735,15 +1915,15 @@ public final class DesktopRepository {
         }
 
         public final int hashCode() {
-            int hashCode = (this.freeformTasksInZOrder.hashCode() + ((this.closingTasks.hashCode() + ((this.minimizedTasks.hashCode() + ((this.visibleTasks.hashCode() + ((this.activeTasks.hashCode() + ReorderTile$$ExternalSyntheticOutline0.m(this.displayId, Integer.hashCode(this.deskId) * 31, 31)) * 31)) * 31)) * 31)) * 31)) * 31;
+            int iHashCode = (this.freeformTasksInZOrder.hashCode() + ((this.closingTasks.hashCode() + ((this.minimizedTasks.hashCode() + ((this.visibleTasks.hashCode() + ((this.activeTasks.hashCode() + ReorderTile$$ExternalSyntheticOutline0.m(this.displayId, Integer.hashCode(this.deskId) * 31, 31)) * 31)) * 31)) * 31)) * 31)) * 31;
             Integer num = this.fullImmersiveTaskId;
-            int hashCode2 = (hashCode + (num == null ? 0 : num.hashCode())) * 31;
+            int iHashCode2 = (iHashCode + (num == null ? 0 : num.hashCode())) * 31;
             Integer num2 = this.topTransparentFullscreenTaskId;
-            int hashCode3 = (hashCode2 + (num2 == null ? 0 : num2.hashCode())) * 31;
+            int iHashCode3 = (iHashCode2 + (num2 == null ? 0 : num2.hashCode())) * 31;
             Integer num3 = this.leftTiledTaskId;
-            int hashCode4 = (hashCode3 + (num3 == null ? 0 : num3.hashCode())) * 31;
+            int iHashCode4 = (iHashCode3 + (num3 == null ? 0 : num3.hashCode())) * 31;
             Integer num4 = this.rightTiledTaskId;
-            return Integer.hashCode(this.deskLabel) + ReorderTile$$ExternalSyntheticOutline0.m(this.usedDesk, (hashCode4 + (num4 != null ? num4.hashCode() : 0)) * 31, 31);
+            return Integer.hashCode(this.deskLabel) + ReorderTile$$ExternalSyntheticOutline0.m(this.usedDesk, (iHashCode4 + (num4 != null ? num4.hashCode() : 0)) * 31, 31);
         }
 
         public final String toString() {

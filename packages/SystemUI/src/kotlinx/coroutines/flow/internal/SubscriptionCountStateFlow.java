@@ -4,7 +4,6 @@ import kotlinx.coroutines.channels.BufferOverflow;
 import kotlinx.coroutines.flow.SharedFlowImpl;
 import kotlinx.coroutines.flow.StateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class SubscriptionCountStateFlow extends SharedFlowImpl implements StateFlow {
     public SubscriptionCountStateFlow(int i) {
@@ -14,11 +13,11 @@ public final class SubscriptionCountStateFlow extends SharedFlowImpl implements 
 
     @Override // kotlinx.coroutines.flow.StateFlow
     public final Object getValue() {
-        Integer valueOf;
+        Integer numValueOf;
         synchronized (this) {
-            valueOf = Integer.valueOf(((Number) getLastReplayedLocked()).intValue());
+            numValueOf = Integer.valueOf(((Number) getLastReplayedLocked()).intValue());
         }
-        return valueOf;
+        return numValueOf;
     }
 
     public final void increment(int i) {

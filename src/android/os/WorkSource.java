@@ -97,9 +97,9 @@ public class WorkSource implements Parcelable {
         this.mNum = parcel.readInt();
         this.mUids = (int[]) Objects.requireNonNullElse(parcel.createIntArray(), new int[0]);
         this.mNames = parcel.createStringArray();
-        int readInt = parcel.readInt();
-        if (readInt >= 0) {
-            ArrayList<WorkChain> arrayList = new ArrayList<>(readInt);
+        int i = parcel.readInt();
+        if (i >= 0) {
+            ArrayList<WorkChain> arrayList = new ArrayList<>(i);
             this.mChains = arrayList;
             parcel.readParcelableList(arrayList, WorkChain.class.getClassLoader(), WorkChain.class);
             return;
@@ -191,20 +191,20 @@ public class WorkSource implements Parcelable {
     }
 
     public int hashCode() {
-        int i = 0;
-        for (int i2 = 0; i2 < this.mNum; i2++) {
-            i = ((i >>> 28) | (i << 4)) ^ this.mUids[i2];
+        int iHashCode = 0;
+        for (int i = 0; i < this.mNum; i++) {
+            iHashCode = ((iHashCode >>> 28) | (iHashCode << 4)) ^ this.mUids[i];
         }
         if (this.mNames != null) {
-            for (int i3 = 0; i3 < this.mNum; i3++) {
-                i = this.mNames[i3].hashCode() ^ ((i << 4) | (i >>> 28));
+            for (int i2 = 0; i2 < this.mNum; i2++) {
+                iHashCode = this.mNames[i2].hashCode() ^ ((iHashCode << 4) | (iHashCode >>> 28));
             }
         }
         ArrayList<WorkChain> arrayList = this.mChains;
         if (arrayList == null) {
-            return i;
+            return iHashCode;
         }
-        return arrayList.hashCode() ^ ((i << 4) | (i >>> 28));
+        return arrayList.hashCode() ^ ((iHashCode << 4) | (iHashCode >>> 28));
     }
 
     public boolean diff(WorkSource workSource) {
@@ -227,6 +227,10 @@ public class WorkSource implements Parcelable {
         return false;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:16:0x0031  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public void set(WorkSource workSource) {
         if (workSource == null) {
             clear();
@@ -248,9 +252,10 @@ public class WorkSource implements Parcelable {
                 int i2 = this.mNum;
                 if (length >= i2) {
                     System.arraycopy(strArr, 0, strArr2, 0, i2);
+                } else {
+                    this.mNames = (String[]) strArr.clone();
                 }
             }
-            this.mNames = (String[]) strArr.clone();
         } else {
             this.mNames = null;
         }
@@ -316,7 +321,7 @@ public class WorkSource implements Parcelable {
         boolean z;
         boolean z2;
         synchronized (sTmpWorkSource) {
-            boolean updateLocked = updateLocked(workSource, false, false);
+            boolean zUpdateLocked = updateLocked(workSource, false, false);
             if (workSource.mChains != null) {
                 if (this.mChains == null) {
                     this.mChains = new ArrayList<>(workSource.mChains.size());
@@ -333,7 +338,7 @@ public class WorkSource implements Parcelable {
             } else {
                 z = false;
             }
-            z2 = updateLocked || z;
+            z2 = zUpdateLocked || z;
         }
         return z2;
     }
@@ -366,11 +371,11 @@ public class WorkSource implements Parcelable {
         if (this.mNames != null) {
             throw new IllegalArgumentException("Adding without name to named " + this);
         }
-        int binarySearch = Arrays.binarySearch(this.mUids, 0, i2, i);
-        if (binarySearch >= 0) {
+        int iBinarySearch = Arrays.binarySearch(this.mUids, 0, i2, i);
+        if (iBinarySearch >= 0) {
             return false;
         }
-        insert((-binarySearch) - 1, i);
+        insert((-iBinarySearch) - 1, i);
         return true;
     }
 
@@ -386,11 +391,11 @@ public class WorkSource implements Parcelable {
         int i3 = 0;
         while (i3 < this.mNum && (i2 = this.mUids[i3]) <= i) {
             if (i2 == i) {
-                int compareTo = this.mNames[i3].compareTo(str);
-                if (compareTo > 0) {
+                int iCompareTo = this.mNames[i3].compareTo(str);
+                if (iCompareTo > 0) {
                     break;
                 }
-                if (compareTo == 0) {
+                if (iCompareTo == 0) {
                     return false;
                 }
             }
@@ -401,14 +406,14 @@ public class WorkSource implements Parcelable {
     }
 
     public boolean remove(WorkSource workSource) {
-        boolean removeUidsAndNames;
+        boolean zRemoveUidsAndNames;
         ArrayList<WorkChain> arrayList;
         if (isEmpty() || workSource.isEmpty()) {
             return false;
         }
         String[] strArr = this.mNames;
         if (strArr == null && workSource.mNames == null) {
-            removeUidsAndNames = removeUids(workSource);
+            zRemoveUidsAndNames = removeUids(workSource);
         } else {
             if (strArr == null) {
                 throw new IllegalArgumentException("Other " + workSource + " has names, but target " + this + " does not");
@@ -416,10 +421,10 @@ public class WorkSource implements Parcelable {
             if (workSource.mNames == null) {
                 throw new IllegalArgumentException("Target " + this + " has names, but other " + workSource + " does not");
             }
-            removeUidsAndNames = removeUidsAndNames(workSource);
+            zRemoveUidsAndNames = removeUidsAndNames(workSource);
         }
         ArrayList<WorkChain> arrayList2 = workSource.mChains;
-        return removeUidsAndNames || ((arrayList2 == null || (arrayList = this.mChains) == null) ? false : arrayList.removeAll(arrayList2));
+        return zRemoveUidsAndNames || ((arrayList2 == null || (arrayList = this.mChains) == null) ? false : arrayList.removeAll(arrayList2));
     }
 
     @SystemApi
@@ -628,62 +633,62 @@ public class WorkSource implements Parcelable {
     }
 
     private boolean updateUidsAndNamesLocked(WorkSource workSource, boolean z, boolean z2) {
-        int i;
-        int i2 = workSource.mNum;
+        int iCompare;
+        int i = workSource.mNum;
         int[] iArr = workSource.mUids;
         String[] strArr = workSource.mNames;
+        int i2 = 0;
         int i3 = 0;
-        int i4 = 0;
         boolean z3 = false;
         while (true) {
-            int i5 = this.mNum;
-            if (i3 >= i5 && i4 >= i2) {
+            int i4 = this.mNum;
+            if (i2 >= i4 && i3 >= i) {
                 return z3;
             }
-            if (i3 < i5) {
-                if (i4 < i2) {
-                    i = compare(workSource, i3, i4);
-                    if (i > 0) {
+            if (i2 < i4) {
+                if (i3 < i) {
+                    iCompare = compare(workSource, i2, i3);
+                    if (iCompare > 0) {
                     }
                 } else {
-                    i = -1;
+                    iCompare = -1;
                 }
                 if (z) {
-                    int i6 = i3;
-                    while (i < 0) {
-                        sGoneWork = addWork(sGoneWork, this.mUids[i6], this.mNames[i6]);
-                        i6++;
-                        if (i6 >= this.mNum) {
+                    int i5 = i2;
+                    while (iCompare < 0) {
+                        sGoneWork = addWork(sGoneWork, this.mUids[i5], this.mNames[i5]);
+                        i5++;
+                        if (i5 >= this.mNum) {
                             break;
                         }
-                        i = i4 < i2 ? compare(workSource, i6, i4) : -1;
+                        iCompare = i3 < i ? compare(workSource, i5, i3) : -1;
                     }
-                    if (i3 < i6) {
+                    if (i2 < i5) {
                         int[] iArr2 = this.mUids;
-                        System.arraycopy(iArr2, i6, iArr2, i3, this.mNum - i6);
+                        System.arraycopy(iArr2, i5, iArr2, i2, this.mNum - i5);
                         String[] strArr2 = this.mNames;
-                        System.arraycopy(strArr2, i6, strArr2, i3, this.mNum - i6);
-                        this.mNum -= i6 - i3;
+                        System.arraycopy(strArr2, i5, strArr2, i2, this.mNum - i5);
+                        this.mNum -= i5 - i2;
                     } else {
-                        i3 = i6;
+                        i2 = i5;
                     }
-                    if (i3 < this.mNum && i == 0) {
+                    if (i2 < this.mNum && iCompare == 0) {
+                        i2++;
                         i3++;
-                        i4++;
                     }
                 } else {
-                    if (i4 < i2 && i == 0) {
-                        i4++;
+                    if (i3 < i && iCompare == 0) {
+                        i3++;
                     }
-                    i3++;
+                    i2++;
                 }
             }
-            insert(i3, iArr[i4], strArr[i4]);
+            insert(i2, iArr[i3], strArr[i3]);
             if (z2) {
-                sNewbWork = addWork(sNewbWork, iArr[i4], strArr[i4]);
+                sNewbWork = addWork(sNewbWork, iArr[i3], strArr[i3]);
             }
+            i2++;
             i3++;
-            i4++;
             z3 = true;
         }
     }
@@ -982,7 +987,7 @@ public class WorkSource implements Parcelable {
     public void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
         long j2;
         long j3;
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         int i = 0;
         while (true) {
             j2 = 1120986464257L;
@@ -990,38 +995,38 @@ public class WorkSource implements Parcelable {
             if (i >= this.mNum) {
                 break;
             }
-            long start2 = protoOutputStream.start(2246267895809L);
+            long jStart2 = protoOutputStream.start(2246267895809L);
             protoOutputStream.write(1120986464257L, this.mUids[i]);
             String[] strArr = this.mNames;
             if (strArr != null) {
                 protoOutputStream.write(1138166333442L, strArr[i]);
             }
-            protoOutputStream.end(start2);
+            protoOutputStream.end(jStart2);
             i++;
         }
         if (this.mChains != null) {
             int i2 = 0;
             while (i2 < this.mChains.size()) {
                 WorkChain workChain = this.mChains.get(i2);
-                long start3 = protoOutputStream.start(2246267895810L);
+                long jStart3 = protoOutputStream.start(2246267895810L);
                 String[] tags = workChain.getTags();
                 int[] uids = workChain.getUids();
                 int i3 = 0;
                 while (i3 < tags.length) {
-                    long start4 = protoOutputStream.start(j3);
+                    long jStart4 = protoOutputStream.start(j3);
                     protoOutputStream.write(j2, uids[i3]);
                     protoOutputStream.write(1138166333442L, tags[i3]);
-                    protoOutputStream.end(start4);
+                    protoOutputStream.end(jStart4);
                     i3++;
                     j2 = 1120986464257L;
                     j3 = 2246267895809L;
                 }
-                protoOutputStream.end(start3);
+                protoOutputStream.end(jStart3);
                 i2++;
                 j2 = 1120986464257L;
                 j3 = 2246267895809L;
             }
         }
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 }

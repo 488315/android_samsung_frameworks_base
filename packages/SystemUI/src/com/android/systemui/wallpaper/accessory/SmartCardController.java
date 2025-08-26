@@ -25,7 +25,6 @@ import kotlin.text.CharsKt__CharJVMKt;
 import kotlin.text.StringsKt__StringsJVMKt;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SmartCardController {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -36,7 +35,6 @@ public final class SmartCardController {
     private final SettingsHelper settingsHelper;
     public final KeyguardUpdateMonitor updateMonitor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -69,7 +67,7 @@ public final class SmartCardController {
                 if (Intrinsics.areEqual(uri, Settings.Secure.getUriFor(SettingsHelper.INDEX_USER_SETUP_COMPLETE))) {
                     j = 5000;
                 } else if (Intrinsics.areEqual(uri, Settings.System.getUriFor("dls_state"))) {
-                    SmartCardController smartCardController = SmartCardController.this;
+                    SmartCardController smartCardController = this.this$0;
                     int i = SmartCardController.$r8$clinit;
                     smartCardController.getClass();
                     if (LsRune.WALLPAPER_SUB_WATCHFACE) {
@@ -80,7 +78,7 @@ public final class SmartCardController {
                 } else {
                     j = 0;
                 }
-                SmartCardController smartCardController2 = SmartCardController.this;
+                SmartCardController smartCardController2 = this.this$0;
                 int i2 = SmartCardController.$r8$clinit;
                 smartCardController2.sendUpdateState(j, z2);
             }
@@ -89,9 +87,9 @@ public final class SmartCardController {
 
     public static byte[] decodeHex(String str) {
         try {
-            List<String> split$default = StringsKt__StringsKt.split$default(StringsKt__StringsJVMKt.replace$default(StringsKt__StringsJVMKt.replace$default(StringsKt__StringsJVMKt.replace$default(str, "[", ""), "]", ""), " ", ""), new String[]{","}, 0, 6);
-            ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(split$default, 10));
-            for (String str2 : split$default) {
+            List<String> listSplit$default = StringsKt__StringsKt.split$default(StringsKt__StringsJVMKt.replace$default(StringsKt__StringsJVMKt.replace$default(StringsKt__StringsJVMKt.replace$default(str, "[", ""), "]", ""), " ", ""), new String[]{","}, 0, 6);
+            ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(listSplit$default, 10));
+            for (String str2 : listSplit$default) {
                 CharsKt__CharJVMKt.checkRadix(10);
                 arrayList.add(Byte.valueOf((byte) Integer.parseInt(str2, 10)));
             }
@@ -150,14 +148,14 @@ public final class SmartCardController {
         try {
             Intent intent = new Intent(str);
             intent.setPackage("com.samsung.android.app.dressroom");
-            final Intent putExtra = intent.putExtra("URI", decodeHex(str2));
+            final Intent intentPutExtra = intent.putExtra("URI", decodeHex(str2));
             if (this.mainHandler == null) {
                 this.mainHandler = new SmartCardController$getMainHandler$1(this, Looper.getMainLooper());
             }
             this.mainHandler.post(new Runnable() { // from class: com.android.systemui.wallpaper.accessory.SmartCardController$smartCardServiceStart$2$1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SmartCardController.this.context.startForegroundServiceAsUser(putExtra, UserHandle.CURRENT);
+                    this.this$0.context.startForegroundServiceAsUser(intentPutExtra, UserHandle.CURRENT);
                 }
             });
         } catch (Exception e) {

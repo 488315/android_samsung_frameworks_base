@@ -38,9 +38,9 @@ public abstract class AutofillFieldClassificationService extends Service {
     /* JADX INFO: Access modifiers changed from: private */
     public void calculateScores(RemoteCallback remoteCallback, List<AutofillValue> list, String[] strArr, String[] strArr2, String str, Bundle bundle, Map map, Map map2) {
         Bundle bundle2 = new Bundle();
-        float[][] onCalculateScores = onCalculateScores(list, Arrays.asList(strArr), Arrays.asList(strArr2), str, bundle, map, map2);
-        if (onCalculateScores != null) {
-            bundle2.putParcelable(EXTRA_SCORES, new Scores(onCalculateScores));
+        float[][] fArrOnCalculateScores = onCalculateScores(list, Arrays.asList(strArr), Arrays.asList(strArr2), str, bundle, map, map2);
+        if (fArrOnCalculateScores != null) {
+            bundle2.putParcelable(EXTRA_SCORES, new Scores(fArrOnCalculateScores));
         }
         remoteCallback.sendResult(bundle2);
     }
@@ -111,12 +111,12 @@ public abstract class AutofillFieldClassificationService extends Service {
         }
 
         private Scores(Parcel parcel) {
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
-            this.scores = (float[][]) Array.newInstance((Class<?>) Float.TYPE, readInt, readInt2);
-            for (int i = 0; i < readInt; i++) {
-                for (int i2 = 0; i2 < readInt2; i2++) {
-                    this.scores[i][i2] = parcel.readFloat();
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
+            this.scores = (float[][]) Array.newInstance((Class<?>) Float.TYPE, i, i2);
+            for (int i3 = 0; i3 < i; i3++) {
+                for (int i4 = 0; i4 < i2; i4++) {
+                    this.scores[i3][i4] = parcel.readFloat();
                 }
             }
         }

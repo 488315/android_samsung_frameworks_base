@@ -6,13 +6,11 @@ import androidx.collection.SimpleArrayMap;
 import androidx.core.util.Pools$SimplePool;
 import androidx.recyclerview.widget.RecyclerView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ViewInfoStore {
     public final SimpleArrayMap mLayoutHolderMap = new SimpleArrayMap();
     public final LongSparseArray mOldChangedHolders = new LongSparseArray();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class InfoRecord {
         public static final Pools$SimplePool sPool = new Pools$SimplePool(20);
         public int flags;
@@ -30,21 +28,21 @@ public class ViewInfoStore {
 
     public final void addToPostLayout(RecyclerView.ViewHolder viewHolder, RecyclerView.ItemAnimator.ItemHolderInfo itemHolderInfo) {
         SimpleArrayMap simpleArrayMap = this.mLayoutHolderMap;
-        InfoRecord infoRecord = (InfoRecord) simpleArrayMap.get(viewHolder);
-        if (infoRecord == null) {
-            infoRecord = InfoRecord.obtain();
-            simpleArrayMap.put(viewHolder, infoRecord);
+        InfoRecord infoRecordObtain = (InfoRecord) simpleArrayMap.get(viewHolder);
+        if (infoRecordObtain == null) {
+            infoRecordObtain = InfoRecord.obtain();
+            simpleArrayMap.put(viewHolder, infoRecordObtain);
         }
-        infoRecord.postInfo = itemHolderInfo;
-        infoRecord.flags |= 8;
+        infoRecordObtain.postInfo = itemHolderInfo;
+        infoRecordObtain.flags |= 8;
     }
 
     public final RecyclerView.ItemAnimator.ItemHolderInfo popFromLayoutStep(RecyclerView.ViewHolder viewHolder, int i) {
         InfoRecord infoRecord;
         RecyclerView.ItemAnimator.ItemHolderInfo itemHolderInfo;
         SimpleArrayMap simpleArrayMap = this.mLayoutHolderMap;
-        int indexOfKey = simpleArrayMap.indexOfKey(viewHolder);
-        if (indexOfKey >= 0 && (infoRecord = (InfoRecord) simpleArrayMap.valueAt(indexOfKey)) != null) {
+        int iIndexOfKey = simpleArrayMap.indexOfKey(viewHolder);
+        if (iIndexOfKey >= 0 && (infoRecord = (InfoRecord) simpleArrayMap.valueAt(iIndexOfKey)) != null) {
             int i2 = infoRecord.flags;
             if ((i2 & i) != 0) {
                 int i3 = i2 & (~i);
@@ -58,7 +56,7 @@ public class ViewInfoStore {
                     itemHolderInfo = infoRecord.postInfo;
                 }
                 if ((i3 & 12) == 0) {
-                    simpleArrayMap.removeAt(indexOfKey);
+                    simpleArrayMap.removeAt(iIndexOfKey);
                     infoRecord.flags = 0;
                     infoRecord.preInfo = null;
                     infoRecord.postInfo = null;

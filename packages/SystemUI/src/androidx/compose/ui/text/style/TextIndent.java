@@ -4,7 +4,6 @@ import androidx.compose.ui.unit.TextUnit;
 import androidx.compose.ui.unit.TextUnitKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class TextIndent {
     public static final Companion Companion = new Companion(null);
@@ -12,7 +11,6 @@ public final class TextIndent {
     public final long firstLine;
     public final long restLine;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -34,7 +32,7 @@ public final class TextIndent {
             return false;
         }
         TextIndent textIndent = (TextIndent) obj;
-        return TextUnit.m866equalsimpl0(this.firstLine, textIndent.firstLine) && TextUnit.m866equalsimpl0(this.restLine, textIndent.restLine);
+        return TextUnit.m868equalsimpl0(this.firstLine, textIndent.firstLine) && TextUnit.m868equalsimpl0(this.restLine, textIndent.restLine);
     }
 
     public final int hashCode() {
@@ -43,7 +41,7 @@ public final class TextIndent {
     }
 
     public final String toString() {
-        return "TextIndent(firstLine=" + ((Object) TextUnit.m870toStringimpl(this.firstLine)) + ", restLine=" + ((Object) TextUnit.m870toStringimpl(this.restLine)) + ')';
+        return "TextIndent(firstLine=" + ((Object) TextUnit.m872toStringimpl(this.firstLine)) + ", restLine=" + ((Object) TextUnit.m872toStringimpl(this.restLine)) + ')';
     }
 
     private TextIndent(long j, long j2) {

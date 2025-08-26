@@ -30,19 +30,17 @@ public final class HttpResponseCache extends ResponseCache implements HasCacheHo
     }
 
     public static synchronized HttpResponseCache install(File file, long j) throws IOException {
-        synchronized (HttpResponseCache.class) {
-            ResponseCache responseCache = ResponseCache.getDefault();
-            if (responseCache instanceof HttpResponseCache) {
-                HttpResponseCache httpResponseCache = (HttpResponseCache) responseCache;
-                if (httpResponseCache.getCacheHolder().isEquivalent(file, j)) {
-                    return httpResponseCache;
-                }
-                httpResponseCache.close();
+        ResponseCache responseCache = ResponseCache.getDefault();
+        if (responseCache instanceof HttpResponseCache) {
+            HttpResponseCache httpResponseCache = (HttpResponseCache) responseCache;
+            if (httpResponseCache.getCacheHolder().isEquivalent(file, j)) {
+                return httpResponseCache;
             }
-            HttpResponseCache httpResponseCache2 = new HttpResponseCache(new AndroidResponseCacheAdapter(HasCacheHolder.CacheHolder.create(file, j)));
-            ResponseCache.setDefault(httpResponseCache2);
-            return httpResponseCache2;
+            httpResponseCache.close();
         }
+        HttpResponseCache httpResponseCache2 = new HttpResponseCache(new AndroidResponseCacheAdapter(HasCacheHolder.CacheHolder.create(file, j)));
+        ResponseCache.setDefault(httpResponseCache2);
+        return httpResponseCache2;
     }
 
     @Override // java.net.ResponseCache

@@ -149,133 +149,43 @@ public class SubtitleController {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:29:0x007e, code lost:
-    
-        r8 = 0;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:45:0x00a3, code lost:
-    
-        r4 = r6;
-        r5 = r8;
-     */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public android.media.SubtitleTrack getDefaultTrack() {
-        /*
-            r15 = this;
-            android.view.accessibility.CaptioningManager r0 = r15.mCaptioningManager
-            java.util.Locale r0 = r0.getLocale()
-            if (r0 != 0) goto Ld
-            java.util.Locale r1 = java.util.Locale.getDefault()
-            goto Le
-        Ld:
-            r1 = r0
-        Le:
-            android.view.accessibility.CaptioningManager r2 = r15.mCaptioningManager
-            boolean r2 = r2.isEnabled()
-            java.util.Vector<android.media.SubtitleTrack> r3 = r15.mTracks
-            monitor-enter(r3)
-            java.util.Vector<android.media.SubtitleTrack> r15 = r15.mTracks     // Catch: java.lang.Throwable -> La9
-            java.util.Iterator r15 = r15.iterator()     // Catch: java.lang.Throwable -> La9
-            r4 = 0
-            r5 = -1
-        L1f:
-            boolean r6 = r15.hasNext()     // Catch: java.lang.Throwable -> La9
-            if (r6 == 0) goto La7
-            java.lang.Object r6 = r15.next()     // Catch: java.lang.Throwable -> La9
-            android.media.SubtitleTrack r6 = (android.media.SubtitleTrack) r6     // Catch: java.lang.Throwable -> La9
-            android.media.MediaFormat r7 = r6.getFormat()     // Catch: java.lang.Throwable -> La9
-            java.lang.String r8 = "language"
-            java.lang.String r8 = r7.getString(r8)     // Catch: java.lang.Throwable -> La9
-            java.lang.String r9 = "is-forced-subtitle"
-            r10 = 0
-            int r9 = r7.getInteger(r9, r10)     // Catch: java.lang.Throwable -> La9
-            r11 = 1
-            if (r9 == 0) goto L41
-            r9 = r11
-            goto L42
-        L41:
-            r9 = r10
-        L42:
-            java.lang.String r12 = "is-autoselect"
-            int r12 = r7.getInteger(r12, r11)     // Catch: java.lang.Throwable -> La9
-            if (r12 == 0) goto L4c
-            r12 = r11
-            goto L4d
-        L4c:
-            r12 = r10
-        L4d:
-            java.lang.String r13 = "is-default"
-            int r7 = r7.getInteger(r13, r10)     // Catch: java.lang.Throwable -> La9
-            if (r7 == 0) goto L57
-            r7 = r11
-            goto L58
-        L57:
-            r7 = r10
-        L58:
-            if (r1 == 0) goto L7c
-            java.lang.String r13 = r1.getLanguage()     // Catch: java.lang.Throwable -> La9
-            java.lang.String r14 = ""
-            boolean r13 = r13.equals(r14)     // Catch: java.lang.Throwable -> La9
-            if (r13 != 0) goto L7c
-            java.lang.String r13 = r1.getISO3Language()     // Catch: java.lang.Throwable -> La9
-            boolean r13 = r13.equals(r8)     // Catch: java.lang.Throwable -> La9
-            if (r13 != 0) goto L7c
-            java.lang.String r13 = r1.getLanguage()     // Catch: java.lang.Throwable -> La9
-            boolean r8 = r13.equals(r8)     // Catch: java.lang.Throwable -> La9
-            if (r8 == 0) goto L7b
-            goto L7c
-        L7b:
-            r11 = r10
-        L7c:
-            if (r9 == 0) goto L80
-            r8 = r10
-            goto L82
-        L80:
-            r8 = 8
-        L82:
-            if (r0 != 0) goto L88
-            if (r7 == 0) goto L88
-            r13 = 4
-            goto L89
-        L88:
-            r13 = r10
-        L89:
-            int r8 = r8 + r13
-            if (r12 == 0) goto L8d
-            goto L8e
-        L8d:
-            r10 = 2
-        L8e:
-            int r8 = r8 + r10
-            int r8 = r8 + r11
-            if (r2 != 0) goto L95
-            if (r9 != 0) goto L95
-            goto L1f
-        L95:
-            if (r0 != 0) goto L99
-            if (r7 != 0) goto La1
-        L99:
-            if (r11 == 0) goto L1f
-            if (r12 != 0) goto La1
-            if (r9 != 0) goto La1
-            if (r0 == 0) goto L1f
-        La1:
-            if (r8 <= r5) goto L1f
-            r4 = r6
-            r5 = r8
-            goto L1f
-        La7:
-            monitor-exit(r3)     // Catch: java.lang.Throwable -> La9
-            return r4
-        La9:
-            r15 = move-exception
-            monitor-exit(r3)     // Catch: java.lang.Throwable -> La9
-            throw r15
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.media.SubtitleController.getDefaultTrack():android.media.SubtitleTrack");
+    public SubtitleTrack getDefaultTrack() {
+        SubtitleTrack subtitleTrack;
+        Locale locale = this.mCaptioningManager.getLocale();
+        Locale locale2 = locale == null ? Locale.getDefault() : locale;
+        boolean zIsEnabled = this.mCaptioningManager.isEnabled();
+        synchronized (this.mTracks) {
+            Iterator<SubtitleTrack> it = this.mTracks.iterator();
+            subtitleTrack = null;
+            int i = -1;
+            while (it.hasNext()) {
+                SubtitleTrack next = it.next();
+                MediaFormat format = next.getFormat();
+                String string = format.getString("language");
+                int i2 = 0;
+                int i3 = 1;
+                boolean z = format.getInteger(MediaFormat.KEY_IS_FORCED_SUBTITLE, 0) != 0;
+                boolean z2 = format.getInteger(MediaFormat.KEY_IS_AUTOSELECT, 1) != 0;
+                boolean z3 = format.getInteger(MediaFormat.KEY_IS_DEFAULT, 0) != 0;
+                if (locale2 != null && !locale2.getLanguage().equals("") && !locale2.getISO3Language().equals(string) && !locale2.getLanguage().equals(string)) {
+                    i3 = 0;
+                }
+                int i4 = (z ? 0 : 8) + ((locale == null && z3) ? 4 : 0);
+                if (!z2) {
+                    i2 = 2;
+                }
+                int i5 = i4 + i2 + i3;
+                if (zIsEnabled || z) {
+                    if ((locale == null && z3) || (i3 != 0 && (z2 || z || locale != null))) {
+                        if (i5 > i) {
+                            subtitleTrack = next;
+                            i = i5;
+                        }
+                    }
+                }
+            }
+        }
+        return subtitleTrack;
     }
 
     public void selectDefaultTrack() {
@@ -332,19 +242,19 @@ public class SubtitleController {
     }
 
     public SubtitleTrack addTrack(MediaFormat mediaFormat) {
-        SubtitleTrack createTrack;
+        SubtitleTrack subtitleTrackCreateTrack;
         synchronized (this.mRenderers) {
             Iterator<Renderer> it = this.mRenderers.iterator();
             while (it.hasNext()) {
                 Renderer next = it.next();
-                if (next.supports(mediaFormat) && (createTrack = next.createTrack(mediaFormat)) != null) {
+                if (next.supports(mediaFormat) && (subtitleTrackCreateTrack = next.createTrack(mediaFormat)) != null) {
                     synchronized (this.mTracks) {
                         if (this.mTracks.size() == 0) {
                             this.mCaptioningManager.addCaptioningChangeListener(this.mCaptioningChangeListener);
                         }
-                        this.mTracks.add(createTrack);
+                        this.mTracks.add(subtitleTrackCreateTrack);
                     }
-                    return createTrack;
+                    return subtitleTrackCreateTrack;
                 }
             }
             return null;

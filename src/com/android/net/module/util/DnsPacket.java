@@ -108,13 +108,13 @@ public class DnsPacket {
         }
 
         public byte[] getBytes() {
-            ByteBuffer allocate = ByteBuffer.allocate(12);
-            allocate.putShort((short) this.mId);
-            allocate.putShort((short) this.mFlags);
+            ByteBuffer byteBufferAllocate = ByteBuffer.allocate(12);
+            byteBufferAllocate.putShort((short) this.mId);
+            byteBufferAllocate.putShort((short) this.mFlags);
             for (int i = 0; i < 4; i++) {
-                allocate.putShort((short) this.mRecordCount[i]);
+                byteBufferAllocate.putShort((short) this.mRecordCount[i]);
             }
-            return allocate.array();
+            return byteBufferAllocate.array();
         }
     }
 
@@ -133,10 +133,10 @@ public class DnsPacket {
         protected DnsRecord(int i, ByteBuffer byteBuffer) throws BufferUnderflowException, ParseException {
             Objects.requireNonNull(byteBuffer);
             this.rType = i;
-            String parseName = DnsPacketUtils.DnsRecordParser.parseName(byteBuffer, 0, true);
-            this.dName = parseName;
-            if (parseName.length() > 255) {
-                throw new ParseException("Parse name fail, name size is too long: " + parseName.length());
+            String name = DnsPacketUtils.DnsRecordParser.parseName(byteBuffer, 0, true);
+            this.dName = name;
+            if (name.length() > 255) {
+                throw new ParseException("Parse name fail, name size is too long: " + name.length());
             }
             this.nsType = Short.toUnsignedInt(byteBuffer.getShort());
             this.nsClass = Short.toUnsignedInt(byteBuffer.getShort());
@@ -153,10 +153,10 @@ public class DnsPacket {
 
         public static DnsRecord parse(int i, ByteBuffer byteBuffer) throws BufferUnderflowException, ParseException {
             Objects.requireNonNull(byteBuffer);
-            int position = byteBuffer.position();
+            int iPosition = byteBuffer.position();
             DnsPacketUtils.DnsRecordParser.parseName(byteBuffer, 0, true);
             int unsignedInt = Short.toUnsignedInt(byteBuffer.getShort());
-            byteBuffer.position(position);
+            byteBuffer.position(iPosition);
             if (unsignedInt == 64) {
                 return new DnsSvcbRecord(i, byteBuffer);
             }
@@ -242,9 +242,9 @@ public class DnsPacket {
         }
 
         public int hashCode() {
-            int hash = Objects.hash(this.dName) * 31;
+            int iHash = Objects.hash(this.dName) * 31;
             long j = this.ttl;
-            return hash + (((int) j) * 37) + (((int) (j >> 32)) * 41) + (this.nsType * 43) + (this.nsClass * 47) + (this.rType * 53) + Arrays.hashCode(this.mRdata);
+            return iHash + (((int) j) * 37) + (((int) (j >> 32)) * 41) + (this.nsType * 43) + (this.nsClass * 47) + (this.rType * 53) + Arrays.hashCode(this.mRdata);
         }
 
         public String toString() {
@@ -261,15 +261,15 @@ public class DnsPacket {
             throw new ParseException("Parse header failed, null input data");
         }
         try {
-            ByteBuffer wrap = ByteBuffer.wrap(bArr);
-            this.mHeader = new DnsHeader(wrap);
+            ByteBuffer byteBufferWrap = ByteBuffer.wrap(bArr);
+            this.mHeader = new DnsHeader(byteBufferWrap);
             this.mRecords = new ArrayList[4];
             for (int i = 0; i < 4; i++) {
                 int recordCount = this.mHeader.getRecordCount(i);
                 this.mRecords[i] = new ArrayList(recordCount);
                 for (int i2 = 0; i2 < recordCount; i2++) {
                     try {
-                        this.mRecords[i].add(DnsRecord.parse(i, wrap));
+                        this.mRecords[i].add(DnsRecord.parse(i, byteBufferWrap));
                     } catch (BufferUnderflowException e) {
                         throw new ParseException("Parse record fail", e);
                     }
@@ -282,8 +282,8 @@ public class DnsPacket {
 
     public DnsPacket(DnsHeader dnsHeader, List<DnsRecord> list, List<DnsRecord> list2) {
         this.mHeader = (DnsHeader) Objects.requireNonNull(dnsHeader);
-        this.mRecords = new List[]{r4, Collections.unmodifiableList(new ArrayList(list2)), new ArrayList(), new ArrayList()};
-        List<DnsRecord> unmodifiableList = Collections.unmodifiableList(new ArrayList(list));
+        this.mRecords = new List[]{listUnmodifiableList, Collections.unmodifiableList(new ArrayList(list2)), new ArrayList(), new ArrayList()};
+        List<DnsRecord> listUnmodifiableList = Collections.unmodifiableList(new ArrayList(list));
         for (int i = 0; i < 4; i++) {
             if (this.mHeader.mRecordCount[i] != this.mRecords[i].size()) {
                 throw new IllegalArgumentException("Record count mismatch: expected " + this.mHeader.mRecordCount[i] + " but was " + this.mRecords[i]);

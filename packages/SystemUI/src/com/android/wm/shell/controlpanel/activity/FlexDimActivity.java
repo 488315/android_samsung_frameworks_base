@@ -12,7 +12,6 @@ import com.android.keyguard.KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutli
 import com.android.systemui.R;
 import com.android.systemui.pluginlock.PluginLockInstancePolicy;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class FlexDimActivity extends Activity implements View.OnTouchListener {
     public static FlexDimActivity sFlexDimActivity;
@@ -21,7 +20,7 @@ public class FlexDimActivity extends Activity implements View.OnTouchListener {
     public final FlexDimActivity$$ExternalSyntheticLambda0 mScreenOffRunnable = new Runnable() { // from class: com.android.wm.shell.controlpanel.activity.FlexDimActivity$$ExternalSyntheticLambda0
         @Override // java.lang.Runnable
         public final void run() {
-            FlexDimActivity flexDimActivity = FlexDimActivity.this;
+            FlexDimActivity flexDimActivity = this.f$0;
             FlexDimActivity flexDimActivity2 = FlexDimActivity.sFlexDimActivity;
             flexDimActivity.setContentView(R.layout.flex_screen_off_mode_layout);
             flexDimActivity.mIsScreenOffMode = true;

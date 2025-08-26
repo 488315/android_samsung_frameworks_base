@@ -8,13 +8,11 @@ import com.android.systemui.utils.windowmanager.WindowManagerProvider;
 import com.android.systemui.utils.windowmanager.WindowManagerProviderImpl;
 import com.android.systemui.utils.windowmanager.WindowManagerUtils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ModeSwitchesController implements MagnificationModeSwitch.ClickListener {
     public MagnificationImpl$$ExternalSyntheticLambda2 mClickListenerDelegate;
     public final DisplayIdIndexSupplier mSwitchSupplier;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SwitchSupplier extends DisplayIdIndexSupplier {
         public final MagnificationModeSwitch.ClickListener mClickListener;
         public final Context mContext;
@@ -29,9 +27,9 @@ public class ModeSwitchesController implements MagnificationModeSwitch.ClickList
 
         @Override // com.android.systemui.accessibility.DisplayIdIndexSupplier
         public final Object createInstance(Display display) {
-            Context createWindowContext = this.mContext.createWindowContext(display, 2039, null);
+            Context contextCreateWindowContext = this.mContext.createWindowContext(display, 2039, null);
             ((WindowManagerProviderImpl) this.mWindowManagerProvider).getClass();
-            return new MagnificationModeSwitch(createWindowContext, WindowManagerUtils.getWindowManager(createWindowContext), this.mClickListener);
+            return new MagnificationModeSwitch(contextCreateWindowContext, WindowManagerUtils.getWindowManager(contextCreateWindowContext), this.mClickListener);
         }
     }
 
@@ -39,7 +37,7 @@ public class ModeSwitchesController implements MagnificationModeSwitch.ClickList
         this.mSwitchSupplier = new SwitchSupplier(context, displayManager, new MagnificationModeSwitch.ClickListener() { // from class: com.android.systemui.accessibility.ModeSwitchesController$$ExternalSyntheticLambda0
             @Override // com.android.systemui.accessibility.MagnificationModeSwitch.ClickListener
             public final void onClick(int i) {
-                ModeSwitchesController.this.onClick(i);
+                this.f$0.onClick(i);
             }
         }, windowManagerProvider);
     }

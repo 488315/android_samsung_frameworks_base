@@ -122,10 +122,10 @@ public class SemVideoTranscodingService {
 
     public Client createClient(int i, String str, String str2, ProgressCallback progressCallback) {
         Log.d("SemVideoTranscodingService", "mode(" + i + ") in(" + str + ") out(" + str2 + NavigationBarInflaterView.KEY_CODE_END);
-        HashMap hashMap = new HashMap();
-        hashMap.put(KEY_INPUT_PATH, str);
-        hashMap.put(KEY_OUTPUT_PATH, str2);
-        return createClient(i, hashMap, progressCallback);
+        HashMap map = new HashMap();
+        map.put(KEY_INPUT_PATH, str);
+        map.put(KEY_OUTPUT_PATH, str2);
+        return createClient(i, map, progressCallback);
     }
 
     public Client createClient(int i, Map map, ProgressCallback progressCallback) {
@@ -136,12 +136,12 @@ public class SemVideoTranscodingService {
             return null;
         }
         try {
-            String register = iVideoTranscodingService.register(i, progressCallback);
-            if (register == null) {
+            String strRegister = iVideoTranscodingService.register(i, progressCallback);
+            if (strRegister == null) {
                 Log.w("SemVideoTranscodingService", "id is null");
                 return null;
             }
-            Client client = new Client(this.mService, register, i, map, progressCallback);
+            Client client = new Client(this.mService, strRegister, i, map, progressCallback);
             if (client.isValid()) {
                 return client;
             }

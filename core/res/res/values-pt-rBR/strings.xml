@@ -593,6 +593,7 @@ Se mesmo assim você optar por instalar, revise atentamente o Aviso de Privacida
     <string name="call_notification_screening_text">Filtrando uma ligação recebida</string>
     <string name="camera_restrict">A política de segurança evita a utilização da Câmera.</string>
     <string name="can_not_install_app">Não é possível instalar o aplicativo, pois ele não foi otimizado para ser usado com %s.</string>
+    <string name="can_not_open_searcle_on_the_external_display">Não é possível abrir a função Circule para pesquisar em uma tela conectada.</string>
     <string name="can_not_open_searcle_on_the_lockscreen">Não é possível abrir o Circule para pesquisar na Tela de bloqueio.</string>
     <string name="cannot_open_app_concentration_mode">Não é possível abrir o aplicativo</string>
     <string name="capability_desc_canCaptureFingerprintGestures">Pode captar gestos realizados no sensor de impressão digital do dispositivo.</string>
@@ -674,6 +675,7 @@ Se mesmo assim você optar por instalar, revise atentamente o Aviso de Privacida
     <string name="common_secure_boot_nwlock_notification_text">Este chip não é suportado.</string>
     <string name="common_secure_boot_nwlock_notification_title">Chip inválido inserido</string>
     <string name="compat_restart_education_text">Se este aplicativo for exibido incorretamente, tente fechá-lo e abri-lo novamente.</string>
+    <string name="compat_restart_menu_education_text">Se este aplicativo for exibido incorretamente, reinicie-o no menu Mais.</string>
     <string name="concurrent_display_notification_active_content">O app %1$s está usando as duas telas para mostrar conteúdo</string>
     <string name="concurrent_display_notification_active_title">A tela dupla está ativada</string>
     <string name="concurrent_display_notification_name">Tela dupla</string>
@@ -2914,7 +2916,7 @@ Ouvir em volume alto por longos períodos pode danificar sua audição."</string
     <string name="satellite_notification_manual_title">Usar mensagens via satélite?</string>
     <string name="satellite_notification_open_message">Abrir o app Mensagens</string>
     <string name="satellite_notification_summary">Você pode enviar e receber mensagens sem um dispositivo móvel ou uma rede Wi-Fi</string>
-    <string name="satellite_notification_summary_with_data">É possível enviar e receber mensagens e usar dados limitados via satélite</string>
+    <string name="satellite_notification_summary_with_data">Você pode trocar mensagens e usar alguns apps via satélite</string>
     <string name="satellite_notification_title">Conectado automaticamente ao satélite</string>
     <string name="satellite_sos_available_notification_summary">Você poderá enviar uma mensagem para serviços de emergência se não houver uma rede móvel ou Wi-Fi. O Google Mensagens precisa ser seu app de mensagens padrão.</string>
     <string name="satellite_sos_available_notification_title">O SOS via satélite já está disponível</string>

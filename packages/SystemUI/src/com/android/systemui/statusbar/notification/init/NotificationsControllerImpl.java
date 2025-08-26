@@ -64,7 +64,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class NotificationsControllerImpl implements NotificationsController {
     public final AnimatedImageNotificationManager animatedImageNotificationManager;
@@ -100,7 +99,7 @@ public final class NotificationsControllerImpl implements NotificationsControlle
         NotificationListener notificationListener = this.notificationListener;
         notificationListener.registerAsSystemService();
         Lazy lazy = this.notifPipeline;
-        ((NotifPipeline) lazy.get()).addCollectionListener(new NotifCollectionListener() { // from class: com.android.systemui.statusbar.notification.init.NotificationsControllerImpl$initialize$1
+        ((NotifPipeline) lazy.get()).addCollectionListener(new NotifCollectionListener() { // from class: com.android.systemui.statusbar.notification.init.NotificationsControllerImpl.initialize.1
             @Override // com.android.systemui.statusbar.notification.collection.notifcollection.NotifCollectionListener
             public final void onEntryRemoved(NotificationEntry notificationEntry, int i) {
                 NotificationStackScrollLayout notificationStackScrollLayout = NotificationStackScrollLayoutController.this.mView;
@@ -132,9 +131,9 @@ public final class NotificationsControllerImpl implements NotificationsControlle
         LogLevel logLevel = LogLevel.INFO;
         NotifBindPipelineLogger$$ExternalSyntheticLambda0 notifBindPipelineLogger$$ExternalSyntheticLambda0 = new NotifBindPipelineLogger$$ExternalSyntheticLambda0(5);
         LogBuffer logBuffer = notifBindPipelineLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("NotifBindPipeline", logLevel, notifBindPipelineLogger$$ExternalSyntheticLambda0, null);
-        ((LogMessageImpl) obtain).str1 = name;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("NotifBindPipeline", logLevel, notifBindPipelineLogger$$ExternalSyntheticLambda0, null);
+        ((LogMessageImpl) logMessageObtain).str1 = name;
+        logBuffer.commit(logMessageObtain);
         notifBindPipeline.mStage = rowContentBindStage;
         rowContentBindStage.mBindRequestListener = new NotifBindPipeline$$ExternalSyntheticLambda2(notifBindPipeline);
         final AnimatedImageNotificationManager animatedImageNotificationManager = this.animatedImageNotificationManager;
@@ -142,13 +141,13 @@ public final class NotificationsControllerImpl implements NotificationsControlle
         ((HeadsUpManagerImpl) animatedImageNotificationManager.headsUpManager).addListener(new OnHeadsUpChangedListener() { // from class: com.android.systemui.statusbar.notification.AnimatedImageNotificationManager$bind$1
             @Override // com.android.systemui.statusbar.notification.headsup.OnHeadsUpChangedListener
             public final void onHeadsUpStateChanged(NotificationEntry notificationEntry, boolean z) {
-                AnimatedImageNotificationManager.access$updateAnimatedImageDrawables(AnimatedImageNotificationManager.this, notificationEntry);
+                AnimatedImageNotificationManager.access$updateAnimatedImageDrawables(animatedImageNotificationManager, notificationEntry);
             }
         });
         animatedImageNotificationManager.statusBarStateController.addCallback(new StatusBarStateController.StateListener() { // from class: com.android.systemui.statusbar.notification.AnimatedImageNotificationManager$bind$2
             @Override // com.android.systemui.plugins.statusbar.StatusBarStateController.StateListener
             public final void onExpandedChanged(boolean z) {
-                AnimatedImageNotificationManager animatedImageNotificationManager2 = AnimatedImageNotificationManager.this;
+                AnimatedImageNotificationManager animatedImageNotificationManager2 = animatedImageNotificationManager;
                 animatedImageNotificationManager2.isStatusBarExpanded = z;
                 Iterator it = ((NotifPipeline) animatedImageNotificationManager2.notifCollection).getAllNotifs().iterator();
                 while (it.hasNext()) {
@@ -164,10 +163,10 @@ public final class NotificationsControllerImpl implements NotificationsControlle
         notifPipelineInitializer.mNotificationService = notificationListener;
         notifPipelineInitializer.mNotifInflater.mNotificationRowBinder = notificationRowBinderImpl;
         notifPipelineInitializer.mNotifPluggableCoordinators.attach(notifPipelineInitializer.mPipelineWrapper);
-        ShadeViewManager create = notifPipelineInitializer.mShadeViewManagerFactory.create(notificationListContainer);
-        notifPipelineInitializer.mShadeViewManager = create;
+        ShadeViewManager shadeViewManagerCreate = notifPipelineInitializer.mShadeViewManagerFactory.create(notificationListContainer);
+        notifPipelineInitializer.mShadeViewManager = shadeViewManagerCreate;
         RenderStageManager renderStageManager = notifPipelineInitializer.mRenderStageManager;
-        renderStageManager.viewRenderer = create.viewRenderer;
+        renderStageManager.viewRenderer = shadeViewManagerCreate.viewRenderer;
         RenderStageManager$attach$1 renderStageManager$attach$1 = new RenderStageManager$attach$1(renderStageManager);
         final ShadeListBuilder shadeListBuilder = notifPipelineInitializer.mListBuilder;
         shadeListBuilder.getClass();
@@ -187,7 +186,7 @@ public final class NotificationsControllerImpl implements NotificationsControlle
         ((NotifPipelineChoreographerImpl) shadeListBuilder.mChoreographer).listeners.addIfAbsent(new Runnable() { // from class: com.android.systemui.statusbar.notification.collection.ShadeListBuilder$$ExternalSyntheticLambda16
             @Override // java.lang.Runnable
             public final void run() {
-                ShadeListBuilder shadeListBuilder2 = ShadeListBuilder.this;
+                ShadeListBuilder shadeListBuilder2 = shadeListBuilder;
                 int i = ShadeListBuilder.MAX_CONSECUTIVE_REENTRANT_REBUILDS;
                 shadeListBuilder2.buildList();
             }
@@ -226,9 +225,9 @@ public final class NotificationsControllerImpl implements NotificationsControlle
         targetSdkResolver.getClass();
         ((NotifPipeline) commonNotifCollection).addCollectionListener(new NotifCollectionListener() { // from class: com.android.systemui.statusbar.notification.collection.TargetSdkResolver$initialize$1
             @Override // com.android.systemui.statusbar.notification.collection.notifcollection.NotifCollectionListener
-            public final void onEntryBind(NotificationEntry notificationEntry, StatusBarNotification statusBarNotification) {
+            public final void onEntryBind(NotificationEntry notificationEntry, StatusBarNotification statusBarNotification) throws PackageManager.NameNotFoundException {
                 ApplicationInfo applicationInfo;
-                TargetSdkResolver targetSdkResolver2 = TargetSdkResolver.this;
+                TargetSdkResolver targetSdkResolver2 = targetSdkResolver;
                 targetSdkResolver2.getClass();
                 ApplicationInfo applicationInfo2 = (ApplicationInfo) statusBarNotification.getNotification().extras.getParcelable("android.appInfo", ApplicationInfo.class);
                 if (applicationInfo2 == null) {
@@ -253,10 +252,10 @@ public final class NotificationsControllerImpl implements NotificationsControlle
         while (it.hasNext()) {
             ExpandableNotificationRow expandableNotificationRow = ((NotificationEntry) it.next()).row;
             if (expandableNotificationRow != null) {
-                boolean isExpanded = expandableNotificationRow.isExpanded(false);
+                boolean zIsExpanded = expandableNotificationRow.isExpanded(false);
                 expandableNotificationRow.mHasUserChangedExpansion = false;
                 expandableNotificationRow.mUserExpanded = false;
-                if (isExpanded != expandableNotificationRow.isExpanded(false)) {
+                if (zIsExpanded != expandableNotificationRow.isExpanded(false)) {
                     if (expandableNotificationRow.mIsSummaryWithChildren) {
                         NotificationChildrenContainer notificationChildrenContainer = expandableNotificationRow.mChildrenContainer;
                         if (notificationChildrenContainer.mIsMinimized) {

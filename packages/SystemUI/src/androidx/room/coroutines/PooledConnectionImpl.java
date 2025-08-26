@@ -1,19 +1,28 @@
 package androidx.room.coroutines;
 
+import android.database.SQLException;
 import androidx.room.TransactionScope;
 import androidx.room.Transactor;
 import androidx.room.concurrent.ThreadLocal_jvmAndroidKt;
+import androidx.room.coroutines.ConnectionPool;
 import androidx.sqlite.SQLite;
 import androidx.sqlite.SQLiteConnection;
 import androidx.sqlite.SQLiteStatement;
+import java.util.NoSuchElementException;
 import java.util.concurrent.atomic.AtomicBoolean;
+import kotlin.ExceptionsKt__ExceptionsKt;
+import kotlin.NoWhenBranchMatchedException;
+import kotlin.ResultKt;
+import kotlin.Unit;
 import kotlin.collections.ArrayDeque;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
+import kotlinx.coroutines.sync.Mutex;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class PooledConnectionImpl implements Transactor, RawConnectionAccessor {
     public final ConnectionWithLock delegate;
@@ -21,7 +30,6 @@ public final class PooledConnectionImpl implements Transactor, RawConnectionAcce
     public final ArrayDeque transactionStack = new ArrayDeque();
     public final AtomicBoolean _isRecycled = new AtomicBoolean(false);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class StatementWrapper implements SQLiteStatement {
         public final SQLiteStatement delegate;
         public final long threadId = ThreadLocal_jvmAndroidKt.currentThreadId();
@@ -73,7 +81,7 @@ public final class PooledConnectionImpl implements Transactor, RawConnectionAcce
         }
 
         @Override // java.lang.AutoCloseable
-        public final void close() {
+        public final void close() throws Exception {
             if (PooledConnectionImpl.this._isRecycled.get()) {
                 SQLite.throwSQLiteException(21, "Statement is recycled");
                 throw null;
@@ -179,7 +187,6 @@ public final class PooledConnectionImpl implements Transactor, RawConnectionAcce
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TransactionImpl implements TransactionScope, RawConnectionAccessor {
         public TransactionImpl() {
         }
@@ -195,7 +202,6 @@ public final class PooledConnectionImpl implements Transactor, RawConnectionAcce
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TransactionItem {
         public final int id;
         public final boolean shouldRollback;
@@ -206,7 +212,6 @@ public final class PooledConnectionImpl implements Transactor, RawConnectionAcce
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -228,255 +233,214 @@ public final class PooledConnectionImpl implements Transactor, RawConnectionAcce
         }
     }
 
+    /* renamed from: androidx.room.coroutines.PooledConnectionImpl$beginTransaction$1, reason: invalid class name */
+    final class AnonymousClass1 extends ContinuationImpl {
+        Object L$0;
+        Object L$1;
+        Object L$2;
+        int label;
+        /* synthetic */ Object result;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return PooledConnectionImpl.this.beginTransaction(null, this);
+        }
+    }
+
+    /* renamed from: androidx.room.coroutines.PooledConnectionImpl$endTransaction$1, reason: invalid class name and case insensitive filesystem */
+    final class C07651 extends ContinuationImpl {
+        Object L$0;
+        Object L$1;
+        boolean Z$0;
+        int label;
+        /* synthetic */ Object result;
+
+        public C07651(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return PooledConnectionImpl.this.endTransaction(false, this);
+        }
+    }
+
+    /* renamed from: androidx.room.coroutines.PooledConnectionImpl$usePrepared$1, reason: invalid class name and case insensitive filesystem */
+    final class C07661<R> extends ContinuationImpl {
+        Object L$0;
+        Object L$1;
+        Object L$2;
+        Object L$3;
+        int label;
+        /* synthetic */ Object result;
+
+        public C07661(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return PooledConnectionImpl.this.usePrepared(null, null, this);
+        }
+    }
+
     public PooledConnectionImpl(ConnectionWithLock connectionWithLock, boolean z) {
         this.delegate = connectionWithLock;
         this.isReadOnly = z;
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0062 A[Catch: all -> 0x0078, TRY_ENTER, TryCatch #0 {all -> 0x0078, blocks: (B:12:0x0056, B:15:0x0062, B:21:0x0072, B:22:0x00a0, B:26:0x007a, B:27:0x007f, B:28:0x0080, B:29:0x0086, B:30:0x008c), top: B:11:0x0056 }] */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x008c A[Catch: all -> 0x0078, TryCatch #0 {all -> 0x0078, blocks: (B:12:0x0056, B:15:0x0062, B:21:0x0072, B:22:0x00a0, B:26:0x007a, B:27:0x007f, B:28:0x0080, B:29:0x0086, B:30:0x008c), top: B:11:0x0056 }] */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x003f  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0023  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0015  */
     /* JADX WARN: Type inference failed for: r6v9, types: [kotlinx.coroutines.sync.Mutex] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object beginTransaction(androidx.room.Transactor.SQLiteTransactionType r7, kotlin.coroutines.jvm.internal.ContinuationImpl r8) {
-        /*
-            r6 = this;
-            java.lang.String r0 = "SAVEPOINT '"
-            boolean r1 = r8 instanceof androidx.room.coroutines.PooledConnectionImpl$beginTransaction$1
-            if (r1 == 0) goto L15
-            r1 = r8
-            androidx.room.coroutines.PooledConnectionImpl$beginTransaction$1 r1 = (androidx.room.coroutines.PooledConnectionImpl$beginTransaction$1) r1
-            int r2 = r1.label
-            r3 = -2147483648(0xffffffff80000000, float:-0.0)
-            r4 = r2 & r3
-            if (r4 == 0) goto L15
-            int r2 = r2 - r3
-            r1.label = r2
-            goto L1a
-        L15:
-            androidx.room.coroutines.PooledConnectionImpl$beginTransaction$1 r1 = new androidx.room.coroutines.PooledConnectionImpl$beginTransaction$1
-            r1.<init>(r6, r8)
-        L1a:
-            java.lang.Object r8 = r1.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r2 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r3 = r1.label
-            r4 = 1
-            if (r3 == 0) goto L3f
-            if (r3 != r4) goto L37
-            java.lang.Object r6 = r1.L$2
-            kotlinx.coroutines.sync.Mutex r6 = (kotlinx.coroutines.sync.Mutex) r6
-            java.lang.Object r7 = r1.L$1
-            androidx.room.Transactor$SQLiteTransactionType r7 = (androidx.room.Transactor.SQLiteTransactionType) r7
-            java.lang.Object r1 = r1.L$0
-            androidx.room.coroutines.PooledConnectionImpl r1 = (androidx.room.coroutines.PooledConnectionImpl) r1
-            kotlin.ResultKt.throwOnFailure(r8)
-            r8 = r6
-            r6 = r1
-            goto L55
-        L37:
-            java.lang.IllegalStateException r6 = new java.lang.IllegalStateException
-            java.lang.String r7 = "call to 'resume' before 'invoke' with coroutine"
-            r6.<init>(r7)
-            throw r6
-        L3f:
-            kotlin.ResultKt.throwOnFailure(r8)
-            r1.L$0 = r6
-            r1.L$1 = r7
-            androidx.room.coroutines.ConnectionWithLock r8 = r6.delegate
-            r1.L$2 = r8
-            r1.label = r4
-            kotlinx.coroutines.sync.Mutex r3 = r8.lock
-            java.lang.Object r1 = r3.lock(r1)
-            if (r1 != r2) goto L55
-            return r2
-        L55:
-            r1 = 0
-            kotlin.collections.ArrayDeque r2 = r6.transactionStack     // Catch: java.lang.Throwable -> L78
-            int r3 = r2.size     // Catch: java.lang.Throwable -> L78
-            boolean r5 = r2.isEmpty()     // Catch: java.lang.Throwable -> L78
-            androidx.room.coroutines.ConnectionWithLock r6 = r6.delegate
-            if (r5 == 0) goto L8c
-            int[] r0 = androidx.room.coroutines.PooledConnectionImpl.WhenMappings.$EnumSwitchMapping$0     // Catch: java.lang.Throwable -> L78
-            int r7 = r7.ordinal()     // Catch: java.lang.Throwable -> L78
-            r7 = r0[r7]     // Catch: java.lang.Throwable -> L78
-            if (r7 == r4) goto L86
-            r0 = 2
-            if (r7 == r0) goto L80
-            r0 = 3
-            if (r7 != r0) goto L7a
-            java.lang.String r7 = "BEGIN EXCLUSIVE TRANSACTION"
-            androidx.sqlite.SQLite.execSQL(r6, r7)     // Catch: java.lang.Throwable -> L78
-            goto La0
-        L78:
-            r6 = move-exception
-            goto Laf
-        L7a:
-            kotlin.NoWhenBranchMatchedException r6 = new kotlin.NoWhenBranchMatchedException     // Catch: java.lang.Throwable -> L78
-            r6.<init>()     // Catch: java.lang.Throwable -> L78
-            throw r6     // Catch: java.lang.Throwable -> L78
-        L80:
-            java.lang.String r7 = "BEGIN IMMEDIATE TRANSACTION"
-            androidx.sqlite.SQLite.execSQL(r6, r7)     // Catch: java.lang.Throwable -> L78
-            goto La0
-        L86:
-            java.lang.String r7 = "BEGIN DEFERRED TRANSACTION"
-            androidx.sqlite.SQLite.execSQL(r6, r7)     // Catch: java.lang.Throwable -> L78
-            goto La0
-        L8c:
-            java.lang.StringBuilder r7 = new java.lang.StringBuilder     // Catch: java.lang.Throwable -> L78
-            r7.<init>(r0)     // Catch: java.lang.Throwable -> L78
-            r7.append(r3)     // Catch: java.lang.Throwable -> L78
-            r0 = 39
-            r7.append(r0)     // Catch: java.lang.Throwable -> L78
-            java.lang.String r7 = r7.toString()     // Catch: java.lang.Throwable -> L78
-            androidx.sqlite.SQLite.execSQL(r6, r7)     // Catch: java.lang.Throwable -> L78
-        La0:
-            androidx.room.coroutines.PooledConnectionImpl$TransactionItem r6 = new androidx.room.coroutines.PooledConnectionImpl$TransactionItem     // Catch: java.lang.Throwable -> L78
-            r7 = 0
-            r6.<init>(r3, r7)     // Catch: java.lang.Throwable -> L78
-            r2.addLast(r6)     // Catch: java.lang.Throwable -> L78
-            kotlin.Unit r6 = kotlin.Unit.INSTANCE     // Catch: java.lang.Throwable -> L78
-            r8.unlock(r1)
-            return r6
-        Laf:
-            r8.unlock(r1)
-            throw r6
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.room.coroutines.PooledConnectionImpl.beginTransaction(androidx.room.Transactor$SQLiteTransactionType, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object beginTransaction(Transactor.SQLiteTransactionType sQLiteTransactionType, ContinuationImpl continuationImpl) {
+        AnonymousClass1 anonymousClass1;
+        ConnectionWithLock connectionWithLock;
+        if (continuationImpl instanceof AnonymousClass1) {
+            anonymousClass1 = (AnonymousClass1) continuationImpl;
+            int i = anonymousClass1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                anonymousClass1.label = i - Integer.MIN_VALUE;
+            } else {
+                anonymousClass1 = new AnonymousClass1(continuationImpl);
+            }
+        }
+        Object obj = anonymousClass1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = anonymousClass1.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(obj);
+            anonymousClass1.L$0 = this;
+            anonymousClass1.L$1 = sQLiteTransactionType;
+            connectionWithLock = this.delegate;
+            anonymousClass1.L$2 = connectionWithLock;
+            anonymousClass1.label = 1;
+            if (connectionWithLock.lock.lock(anonymousClass1) == coroutineSingletons) {
+                return coroutineSingletons;
+            }
+        } else {
+            if (i2 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ?? r6 = (Mutex) anonymousClass1.L$2;
+            sQLiteTransactionType = (Transactor.SQLiteTransactionType) anonymousClass1.L$1;
+            PooledConnectionImpl pooledConnectionImpl = (PooledConnectionImpl) anonymousClass1.L$0;
+            ResultKt.throwOnFailure(obj);
+            connectionWithLock = r6;
+            this = pooledConnectionImpl;
+        }
+        try {
+            ArrayDeque arrayDeque = this.transactionStack;
+            int i3 = arrayDeque.size;
+            boolean zIsEmpty = arrayDeque.isEmpty();
+            ConnectionWithLock connectionWithLock2 = this.delegate;
+            if (zIsEmpty) {
+                int i4 = WhenMappings.$EnumSwitchMapping$0[sQLiteTransactionType.ordinal()];
+                if (i4 == 1) {
+                    SQLite.execSQL(connectionWithLock2, "BEGIN DEFERRED TRANSACTION");
+                } else if (i4 == 2) {
+                    SQLite.execSQL(connectionWithLock2, "BEGIN IMMEDIATE TRANSACTION");
+                } else {
+                    if (i4 != 3) {
+                        throw new NoWhenBranchMatchedException();
+                    }
+                    SQLite.execSQL(connectionWithLock2, "BEGIN EXCLUSIVE TRANSACTION");
+                }
+            } else {
+                SQLite.execSQL(connectionWithLock2, "SAVEPOINT '" + i3 + '\'');
+            }
+            arrayDeque.addLast(new TransactionItem(i3, false));
+            Unit unit = Unit.INSTANCE;
+            connectionWithLock.unlock(null);
+            return unit;
+        } catch (Throwable th) {
+            connectionWithLock.unlock(null);
+            throw th;
+        }
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x005e A[Catch: all -> 0x0085, TryCatch #0 {all -> 0x0085, blocks: (B:12:0x0056, B:14:0x005e, B:16:0x0064, B:19:0x0075, B:21:0x0079, B:23:0x007f, B:24:0x00bc, B:28:0x0087, B:29:0x009c, B:31:0x00a2, B:32:0x00a8, B:33:0x00c2, B:34:0x00c9, B:35:0x00ca, B:36:0x00d1), top: B:11:0x0056 }] */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x00ca A[Catch: all -> 0x0085, TryCatch #0 {all -> 0x0085, blocks: (B:12:0x0056, B:14:0x005e, B:16:0x0064, B:19:0x0075, B:21:0x0079, B:23:0x007f, B:24:0x00bc, B:28:0x0087, B:29:0x009c, B:31:0x00a2, B:32:0x00a8, B:33:0x00c2, B:34:0x00c9, B:35:0x00ca, B:36:0x00d1), top: B:11:0x0056 }] */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x003f  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0025  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0017  */
     /* JADX WARN: Type inference failed for: r6v9, types: [kotlinx.coroutines.sync.Mutex] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object endTransaction(boolean r7, kotlin.coroutines.jvm.internal.ContinuationImpl r8) {
-        /*
-            r6 = this;
-            java.lang.String r0 = "ROLLBACK TRANSACTION TO SAVEPOINT '"
-            java.lang.String r1 = "RELEASE SAVEPOINT '"
-            boolean r2 = r8 instanceof androidx.room.coroutines.PooledConnectionImpl$endTransaction$1
-            if (r2 == 0) goto L17
-            r2 = r8
-            androidx.room.coroutines.PooledConnectionImpl$endTransaction$1 r2 = (androidx.room.coroutines.PooledConnectionImpl$endTransaction$1) r2
-            int r3 = r2.label
-            r4 = -2147483648(0xffffffff80000000, float:-0.0)
-            r5 = r3 & r4
-            if (r5 == 0) goto L17
-            int r3 = r3 - r4
-            r2.label = r3
-            goto L1c
-        L17:
-            androidx.room.coroutines.PooledConnectionImpl$endTransaction$1 r2 = new androidx.room.coroutines.PooledConnectionImpl$endTransaction$1
-            r2.<init>(r6, r8)
-        L1c:
-            java.lang.Object r8 = r2.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r3 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r4 = r2.label
-            r5 = 1
-            if (r4 == 0) goto L3f
-            if (r4 != r5) goto L37
-            boolean r7 = r2.Z$0
-            java.lang.Object r6 = r2.L$1
-            kotlinx.coroutines.sync.Mutex r6 = (kotlinx.coroutines.sync.Mutex) r6
-            java.lang.Object r2 = r2.L$0
-            androidx.room.coroutines.PooledConnectionImpl r2 = (androidx.room.coroutines.PooledConnectionImpl) r2
-            kotlin.ResultKt.throwOnFailure(r8)
-            r8 = r6
-            r6 = r2
-            goto L55
-        L37:
-            java.lang.IllegalStateException r6 = new java.lang.IllegalStateException
-            java.lang.String r7 = "call to 'resume' before 'invoke' with coroutine"
-            r6.<init>(r7)
-            throw r6
-        L3f:
-            kotlin.ResultKt.throwOnFailure(r8)
-            r2.L$0 = r6
-            androidx.room.coroutines.ConnectionWithLock r8 = r6.delegate
-            r2.L$1 = r8
-            r2.Z$0 = r7
-            r2.label = r5
-            kotlinx.coroutines.sync.Mutex r4 = r8.lock
-            java.lang.Object r2 = r4.lock(r2)
-            if (r2 != r3) goto L55
-            return r3
-        L55:
-            r2 = 0
-            kotlin.collections.ArrayDeque r3 = r6.transactionStack     // Catch: java.lang.Throwable -> L85
-            boolean r4 = r3.isEmpty()     // Catch: java.lang.Throwable -> L85
-            if (r4 != 0) goto Lca
-            boolean r4 = r3.isEmpty()     // Catch: java.lang.Throwable -> L85
-            if (r4 != 0) goto Lc2
-            int r4 = r3.size()     // Catch: java.lang.Throwable -> L85
-            int r4 = r4 - r5
-            java.lang.Object r4 = r3.remove(r4)     // Catch: java.lang.Throwable -> L85
-            androidx.room.coroutines.PooledConnectionImpl$TransactionItem r4 = (androidx.room.coroutines.PooledConnectionImpl.TransactionItem) r4     // Catch: java.lang.Throwable -> L85
-            r5 = 39
-            androidx.room.coroutines.ConnectionWithLock r6 = r6.delegate
-            if (r7 == 0) goto L9c
-            boolean r7 = r4.shouldRollback     // Catch: java.lang.Throwable -> L85
-            if (r7 != 0) goto L9c
-            boolean r7 = r3.isEmpty()     // Catch: java.lang.Throwable -> L85
-            if (r7 == 0) goto L87
-            java.lang.String r7 = "END TRANSACTION"
-            androidx.sqlite.SQLite.execSQL(r6, r7)     // Catch: java.lang.Throwable -> L85
-            goto Lbc
-        L85:
-            r6 = move-exception
-            goto Ld2
-        L87:
-            java.lang.StringBuilder r7 = new java.lang.StringBuilder     // Catch: java.lang.Throwable -> L85
-            r7.<init>(r1)     // Catch: java.lang.Throwable -> L85
-            int r0 = r4.id     // Catch: java.lang.Throwable -> L85
-            r7.append(r0)     // Catch: java.lang.Throwable -> L85
-            r7.append(r5)     // Catch: java.lang.Throwable -> L85
-            java.lang.String r7 = r7.toString()     // Catch: java.lang.Throwable -> L85
-            androidx.sqlite.SQLite.execSQL(r6, r7)     // Catch: java.lang.Throwable -> L85
-            goto Lbc
-        L9c:
-            boolean r7 = r3.isEmpty()     // Catch: java.lang.Throwable -> L85
-            if (r7 == 0) goto La8
-            java.lang.String r7 = "ROLLBACK TRANSACTION"
-            androidx.sqlite.SQLite.execSQL(r6, r7)     // Catch: java.lang.Throwable -> L85
-            goto Lbc
-        La8:
-            java.lang.StringBuilder r7 = new java.lang.StringBuilder     // Catch: java.lang.Throwable -> L85
-            r7.<init>(r0)     // Catch: java.lang.Throwable -> L85
-            int r0 = r4.id     // Catch: java.lang.Throwable -> L85
-            r7.append(r0)     // Catch: java.lang.Throwable -> L85
-            r7.append(r5)     // Catch: java.lang.Throwable -> L85
-            java.lang.String r7 = r7.toString()     // Catch: java.lang.Throwable -> L85
-            androidx.sqlite.SQLite.execSQL(r6, r7)     // Catch: java.lang.Throwable -> L85
-        Lbc:
-            kotlin.Unit r6 = kotlin.Unit.INSTANCE     // Catch: java.lang.Throwable -> L85
-            r8.unlock(r2)
-            return r6
-        Lc2:
-            java.util.NoSuchElementException r6 = new java.util.NoSuchElementException     // Catch: java.lang.Throwable -> L85
-            java.lang.String r7 = "List is empty."
-            r6.<init>(r7)     // Catch: java.lang.Throwable -> L85
-            throw r6     // Catch: java.lang.Throwable -> L85
-        Lca:
-            java.lang.IllegalStateException r6 = new java.lang.IllegalStateException     // Catch: java.lang.Throwable -> L85
-            java.lang.String r7 = "Not in a transaction"
-            r6.<init>(r7)     // Catch: java.lang.Throwable -> L85
-            throw r6     // Catch: java.lang.Throwable -> L85
-        Ld2:
-            r8.unlock(r2)
-            throw r6
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.room.coroutines.PooledConnectionImpl.endTransaction(boolean, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object endTransaction(boolean z, ContinuationImpl continuationImpl) {
+        C07651 c07651;
+        ConnectionWithLock connectionWithLock;
+        if (continuationImpl instanceof C07651) {
+            c07651 = (C07651) continuationImpl;
+            int i = c07651.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                c07651.label = i - Integer.MIN_VALUE;
+            } else {
+                c07651 = new C07651(continuationImpl);
+            }
+        }
+        Object obj = c07651.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = c07651.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(obj);
+            c07651.L$0 = this;
+            connectionWithLock = this.delegate;
+            c07651.L$1 = connectionWithLock;
+            c07651.Z$0 = z;
+            c07651.label = 1;
+            if (connectionWithLock.lock.lock(c07651) == coroutineSingletons) {
+                return coroutineSingletons;
+            }
+        } else {
+            if (i2 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            z = c07651.Z$0;
+            ?? r6 = (Mutex) c07651.L$1;
+            PooledConnectionImpl pooledConnectionImpl = (PooledConnectionImpl) c07651.L$0;
+            ResultKt.throwOnFailure(obj);
+            connectionWithLock = r6;
+            this = pooledConnectionImpl;
+        }
+        try {
+            ArrayDeque arrayDeque = this.transactionStack;
+            if (arrayDeque.isEmpty()) {
+                throw new IllegalStateException("Not in a transaction");
+            }
+            if (arrayDeque.isEmpty()) {
+                throw new NoSuchElementException("List is empty.");
+            }
+            TransactionItem transactionItem = (TransactionItem) arrayDeque.remove(arrayDeque.size() - 1);
+            ConnectionWithLock connectionWithLock2 = this.delegate;
+            if (!z || transactionItem.shouldRollback) {
+                if (arrayDeque.isEmpty()) {
+                    SQLite.execSQL(connectionWithLock2, "ROLLBACK TRANSACTION");
+                } else {
+                    SQLite.execSQL(connectionWithLock2, "ROLLBACK TRANSACTION TO SAVEPOINT '" + transactionItem.id + '\'');
+                }
+            } else if (arrayDeque.isEmpty()) {
+                SQLite.execSQL(connectionWithLock2, "END TRANSACTION");
+            } else {
+                SQLite.execSQL(connectionWithLock2, "RELEASE SAVEPOINT '" + transactionItem.id + '\'');
+            }
+            Unit unit = Unit.INSTANCE;
+            connectionWithLock.unlock(null);
+            return unit;
+        } catch (Throwable th) {
+            connectionWithLock.unlock(null);
+            throw th;
+        }
     }
 
     @Override // androidx.room.coroutines.RawConnectionAccessor
@@ -498,197 +462,238 @@ public final class PooledConnectionImpl implements Transactor, RawConnectionAcce
         throw null;
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(11:0|1|(2:3|(7:5|6|(1:(1:(1:(1:(1:(2:13|14)(4:16|17|18|19))(2:25|26))(2:27|28))(6:29|30|31|(1:33)|34|(1:37)(1:36)))(1:60))(3:68|(1:70)|71)|61|62|(4:64|(0)|34|(0))|37))|73|6|(0)(0)|61|62|(0)|37|(2:(1:56)|(0))) */
-    /* JADX WARN: Code restructure failed: missing block: B:43:0x00af, code lost:
+    /* JADX WARN: Can't wrap try/catch for region: R(10:0|2|(2:4|(1:6)(1:7))(0)|8|(1:(1:(1:(1:(1:(2:15|16)(4:17|74|18|70))(2:22|23))(2:24|25))(6:26|82|27|(1:43)|44|(1:64)(1:47)))(1:31))(5:32|(1:34)|35|(0)|64)|80|38|(4:41|(0)|44|(0))|64|(2:(1:77)|(0))) */
+    /* JADX WARN: Code restructure failed: missing block: B:48:0x00a7, code lost:
+    
+        r12 = move-exception;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:49:0x00a8, code lost:
+    
+        r12 = r11;
+        r11 = r12;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:52:0x00af, code lost:
     
         r11 = r11.getResult();
      */
-    /* JADX WARN: Code restructure failed: missing block: B:44:0x00b5, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:53:0x00b5, code lost:
     
         r0.L$0 = r11;
         r0.L$1 = null;
         r0.label = 4;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:45:0x00bf, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:54:0x00bf, code lost:
     
         if (r12.endTransaction(false, r0) == r1) goto L64;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:46:0x00c2, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:56:0x00c2, code lost:
     
         return r11;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:49:0x00c5, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:59:0x00c5, code lost:
     
         throw r11;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:51:0x00c6, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:60:0x00c6, code lost:
     
         r13 = move-exception;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:52:0x00c7, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:61:0x00c7, code lost:
     
         r9 = r11;
         r11 = r13;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:54:0x00c9, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:62:0x00c9, code lost:
     
         r0.L$0 = r9;
         r0.L$1 = r11;
         r0.label = 5;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:55:0x00d3, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:63:0x00d3, code lost:
     
         if (r12.endTransaction(false, r0) != r1) goto L70;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:57:0x00d8, code lost:
-    
-        r13 = e;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:58:0x00d6, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:65:0x00d6, code lost:
     
         r12 = r9;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:66:0x00a7, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:66:0x00d8, code lost:
     
-        r12 = move-exception;
+        r13 = e;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:67:0x00a8, code lost:
-    
-        r12 = r11;
-        r11 = r12;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:72:0x007f, code lost:
-    
-        if (beginTransaction(r12, r0) == r1) goto L64;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x00dc  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x00e0  */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x009a  */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x00a6 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x00d5 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x00af A[Catch: all -> 0x00c3, TRY_LEAVE, TryCatch #0 {all -> 0x00c3, blocks: (B:41:0x00ab, B:43:0x00af), top: B:40:0x00ab }] */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x00c5 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:64:0x0096  */
-    /* JADX WARN: Removed duplicated region for block: B:68:0x006e  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0027  */
+    /* JADX WARN: Removed duplicated region for block: B:43:0x009a  */
+    /* JADX WARN: Removed duplicated region for block: B:47:0x00a6 A[RETURN] */
+    /* JADX WARN: Removed duplicated region for block: B:52:0x00af A[Catch: all -> 0x00c3, TRY_LEAVE, TryCatch #0 {all -> 0x00c3, blocks: (B:50:0x00ab, B:52:0x00af), top: B:72:0x00ab }] */
+    /* JADX WARN: Removed duplicated region for block: B:64:0x00d5 A[RETURN] */
+    /* JADX WARN: Removed duplicated region for block: B:69:0x00dc  */
+    /* JADX WARN: Removed duplicated region for block: B:71:0x00e0  */
+    /* JADX WARN: Removed duplicated region for block: B:78:0x00c5 A[EXC_TOP_SPLITTER, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object transaction$1(androidx.room.Transactor.SQLiteTransactionType r12, kotlin.jvm.functions.Function2 r13, kotlin.coroutines.jvm.internal.ContinuationImpl r14) {
-        /*
-            Method dump skipped, instructions count: 225
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.room.coroutines.PooledConnectionImpl.transaction$1(androidx.room.Transactor$SQLiteTransactionType, kotlin.jvm.functions.Function2, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object transaction$1(Transactor.SQLiteTransactionType sQLiteTransactionType, Function2 function2, ContinuationImpl continuationImpl) throws Throwable {
+        PooledConnectionImpl$transaction$1 pooledConnectionImpl$transaction$1;
+        PooledConnectionImpl pooledConnectionImpl;
+        int i;
+        boolean z;
+        if (continuationImpl instanceof PooledConnectionImpl$transaction$1) {
+            pooledConnectionImpl$transaction$1 = (PooledConnectionImpl$transaction$1) continuationImpl;
+            int i2 = pooledConnectionImpl$transaction$1.label;
+            if ((i2 & Integer.MIN_VALUE) != 0) {
+                pooledConnectionImpl$transaction$1.label = i2 - Integer.MIN_VALUE;
+            } else {
+                pooledConnectionImpl$transaction$1 = new PooledConnectionImpl$transaction$1(this, continuationImpl);
+            }
+        }
+        Object objInvoke = pooledConnectionImpl$transaction$1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i3 = pooledConnectionImpl$transaction$1.label;
+        ConnectionPool.RollbackException rollbackException = null;
+        if (i3 == 0) {
+            ResultKt.throwOnFailure(objInvoke);
+            if (sQLiteTransactionType == null) {
+                sQLiteTransactionType = Transactor.SQLiteTransactionType.DEFERRED;
+            }
+            pooledConnectionImpl$transaction$1.L$0 = this;
+            pooledConnectionImpl$transaction$1.L$1 = function2;
+            pooledConnectionImpl$transaction$1.label = 1;
+            if (beginTransaction(sQLiteTransactionType, pooledConnectionImpl$transaction$1) != coroutineSingletons) {
+            }
+        }
+        if (i3 != 1) {
+            if (i3 == 2) {
+                i = pooledConnectionImpl$transaction$1.I$0;
+                pooledConnectionImpl = (PooledConnectionImpl) pooledConnectionImpl$transaction$1.L$0;
+                try {
+                    ResultKt.throwOnFailure(objInvoke);
+                    z = i != 0;
+                    pooledConnectionImpl$transaction$1.L$0 = objInvoke;
+                    pooledConnectionImpl$transaction$1.label = 3;
+                } catch (Throwable th) {
+                    ConnectionPool.RollbackException th2 = th;
+                    try {
+                        if (!(th2 instanceof ConnectionPool.RollbackException)) {
+                        }
+                    } catch (Throwable th3) {
+                        th = th3;
+                    }
+                }
+                return pooledConnectionImpl.endTransaction(z, pooledConnectionImpl$transaction$1) != coroutineSingletons ? coroutineSingletons : objInvoke;
+            }
+            if (i3 == 3) {
+                Object obj = pooledConnectionImpl$transaction$1.L$0;
+                ResultKt.throwOnFailure(objInvoke);
+                return obj;
+            }
+            if (i3 == 4) {
+                Object obj2 = pooledConnectionImpl$transaction$1.L$0;
+                ResultKt.throwOnFailure(objInvoke);
+                return obj2;
+            }
+            if (i3 != 5) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            th = (Throwable) pooledConnectionImpl$transaction$1.L$1;
+            Throwable th4 = (Throwable) pooledConnectionImpl$transaction$1.L$0;
+            try {
+                ResultKt.throwOnFailure(objInvoke);
+            } catch (SQLException e) {
+                e = e;
+                if (th4 != null) {
+                    throw e;
+                }
+                ExceptionsKt__ExceptionsKt.addSuppressed(th4, e);
+                throw th;
+            }
+            throw th;
+        }
+        function2 = (Function2) pooledConnectionImpl$transaction$1.L$1;
+        this = (PooledConnectionImpl) pooledConnectionImpl$transaction$1.L$0;
+        ResultKt.throwOnFailure(objInvoke);
+        TransactionImpl transactionImpl = this.new TransactionImpl();
+        pooledConnectionImpl$transaction$1.L$0 = this;
+        pooledConnectionImpl$transaction$1.L$1 = null;
+        pooledConnectionImpl$transaction$1.I$0 = 1;
+        pooledConnectionImpl$transaction$1.label = 2;
+        objInvoke = function2.invoke(transactionImpl, pooledConnectionImpl$transaction$1);
+        if (objInvoke != coroutineSingletons) {
+            pooledConnectionImpl = this;
+            i = 1;
+            if (i != 0) {
+            }
+            pooledConnectionImpl$transaction$1.L$0 = objInvoke;
+            pooledConnectionImpl$transaction$1.label = 3;
+            if (pooledConnectionImpl.endTransaction(z, pooledConnectionImpl$transaction$1) != coroutineSingletons) {
+            }
+        }
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x0043  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0022  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /* JADX WARN: Type inference failed for: r6v9, types: [kotlinx.coroutines.sync.Mutex] */
     @Override // androidx.room.PooledConnection
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object usePrepared(java.lang.String r7, kotlin.jvm.functions.Function1 r8, kotlin.coroutines.jvm.internal.ContinuationImpl r9) {
-        /*
-            r6 = this;
-            boolean r0 = r9 instanceof androidx.room.coroutines.PooledConnectionImpl$usePrepared$1
-            if (r0 == 0) goto L13
-            r0 = r9
-            androidx.room.coroutines.PooledConnectionImpl$usePrepared$1 r0 = (androidx.room.coroutines.PooledConnectionImpl$usePrepared$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            androidx.room.coroutines.PooledConnectionImpl$usePrepared$1 r0 = new androidx.room.coroutines.PooledConnectionImpl$usePrepared$1
-            r0.<init>(r6, r9)
-        L18:
-            java.lang.Object r9 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 0
-            r4 = 1
-            if (r2 == 0) goto L43
-            if (r2 != r4) goto L3b
-            java.lang.Object r6 = r0.L$3
-            kotlinx.coroutines.sync.Mutex r6 = (kotlinx.coroutines.sync.Mutex) r6
-            java.lang.Object r7 = r0.L$2
-            r8 = r7
-            kotlin.jvm.functions.Function1 r8 = (kotlin.jvm.functions.Function1) r8
-            java.lang.Object r7 = r0.L$1
-            java.lang.String r7 = (java.lang.String) r7
-            java.lang.Object r0 = r0.L$0
-            androidx.room.coroutines.PooledConnectionImpl r0 = (androidx.room.coroutines.PooledConnectionImpl) r0
-            kotlin.ResultKt.throwOnFailure(r9)
-            r9 = r6
-            r6 = r0
-            goto L77
-        L3b:
-            java.lang.IllegalStateException r6 = new java.lang.IllegalStateException
-            java.lang.String r7 = "call to 'resume' before 'invoke' with coroutine"
-            r6.<init>(r7)
-            throw r6
-        L43:
-            kotlin.ResultKt.throwOnFailure(r9)
-            java.util.concurrent.atomic.AtomicBoolean r9 = r6._isRecycled
-            boolean r9 = r9.get()
-            r2 = 21
-            if (r9 != 0) goto La1
-            kotlin.coroutines.CoroutineContext r9 = r0.getContext()
-            androidx.room.coroutines.ConnectionElement$Key r5 = androidx.room.coroutines.ConnectionElement.Key
-            kotlin.coroutines.CoroutineContext$Element r9 = r9.get(r5)
-            androidx.room.coroutines.ConnectionElement r9 = (androidx.room.coroutines.ConnectionElement) r9
-            if (r9 == 0) goto L9b
-            androidx.room.coroutines.PooledConnectionImpl r9 = r9.connectionWrapper
-            if (r9 != r6) goto L9b
-            r0.L$0 = r6
-            r0.L$1 = r7
-            r0.L$2 = r8
-            androidx.room.coroutines.ConnectionWithLock r9 = r6.delegate
-            r0.L$3 = r9
-            r0.label = r4
-            kotlinx.coroutines.sync.Mutex r2 = r9.lock
-            java.lang.Object r0 = r2.lock(r0)
-            if (r0 != r1) goto L77
-            return r1
-        L77:
-            androidx.room.coroutines.PooledConnectionImpl$StatementWrapper r0 = new androidx.room.coroutines.PooledConnectionImpl$StatementWrapper     // Catch: java.lang.Throwable -> L96
-            androidx.room.coroutines.ConnectionWithLock r1 = r6.delegate     // Catch: java.lang.Throwable -> L96
-            androidx.sqlite.SQLiteConnection r1 = r1.delegate     // Catch: java.lang.Throwable -> L96
-            androidx.sqlite.SQLiteStatement r7 = r1.prepare(r7)     // Catch: java.lang.Throwable -> L96
-            r0.<init>(r7)     // Catch: java.lang.Throwable -> L96
-            java.lang.Object r6 = r8.mo779invoke(r0)     // Catch: java.lang.Throwable -> L8f
-            r0.close()     // Catch: java.lang.Throwable -> L96
-            r9.unlock(r3)
-            return r6
-        L8f:
-            r6 = move-exception
-            throw r6     // Catch: java.lang.Throwable -> L91
-        L91:
-            r7 = move-exception
-            kotlin.jdk7.AutoCloseableKt.closeFinally(r0, r6)     // Catch: java.lang.Throwable -> L96
-            throw r7     // Catch: java.lang.Throwable -> L96
-        L96:
-            r6 = move-exception
-            r9.unlock(r3)
-            throw r6
-        L9b:
-            java.lang.String r6 = "Attempted to use connection on a different coroutine"
-            androidx.sqlite.SQLite.throwSQLiteException(r2, r6)
-            throw r3
-        La1:
-            java.lang.String r6 = "Connection is recycled"
-            androidx.sqlite.SQLite.throwSQLiteException(r2, r6)
-            throw r3
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.room.coroutines.PooledConnectionImpl.usePrepared(java.lang.String, kotlin.jvm.functions.Function1, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object usePrepared(String str, Function1 function1, ContinuationImpl continuationImpl) {
+        C07661 c07661;
+        ConnectionWithLock connectionWithLock;
+        if (continuationImpl instanceof C07661) {
+            c07661 = (C07661) continuationImpl;
+            int i = c07661.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                c07661.label = i - Integer.MIN_VALUE;
+            } else {
+                c07661 = new C07661(continuationImpl);
+            }
+        }
+        Object obj = c07661.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = c07661.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(obj);
+            if (this._isRecycled.get()) {
+                SQLite.throwSQLiteException(21, "Connection is recycled");
+                throw null;
+            }
+            ConnectionElement connectionElement = (ConnectionElement) c07661.getContext().get(ConnectionElement.Key);
+            if (connectionElement == null || connectionElement.connectionWrapper != this) {
+                SQLite.throwSQLiteException(21, "Attempted to use connection on a different coroutine");
+                throw null;
+            }
+            c07661.L$0 = this;
+            c07661.L$1 = str;
+            c07661.L$2 = function1;
+            connectionWithLock = this.delegate;
+            c07661.L$3 = connectionWithLock;
+            c07661.label = 1;
+            if (connectionWithLock.lock.lock(c07661) == coroutineSingletons) {
+                return coroutineSingletons;
+            }
+        } else {
+            if (i2 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ?? r6 = (Mutex) c07661.L$3;
+            function1 = (Function1) c07661.L$2;
+            str = (String) c07661.L$1;
+            PooledConnectionImpl pooledConnectionImpl = (PooledConnectionImpl) c07661.L$0;
+            ResultKt.throwOnFailure(obj);
+            connectionWithLock = r6;
+            this = pooledConnectionImpl;
+        }
+        try {
+            StatementWrapper statementWrapper = this.new StatementWrapper(this.delegate.delegate.prepare(str));
+            try {
+                Object objMo781invoke = function1.mo781invoke(statementWrapper);
+                statementWrapper.close();
+                return objMo781invoke;
+            } finally {
+            }
+        } finally {
+            connectionWithLock.unlock(null);
+        }
     }
 
     @Override // androidx.room.Transactor

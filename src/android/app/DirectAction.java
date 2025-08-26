@@ -59,8 +59,8 @@ public final class DirectAction implements Parcelable {
         this.mActivityId = parcel.readStrongBinder();
         this.mID = parcel.readString();
         this.mExtras = parcel.readBundle();
-        String readString = parcel.readString();
-        this.mLocusId = readString != null ? new LocusId(readString) : null;
+        String string = parcel.readString();
+        this.mLocusId = string != null ? new LocusId(string) : null;
     }
 
     public int getTaskId() {

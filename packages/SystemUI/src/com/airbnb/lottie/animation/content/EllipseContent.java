@@ -15,7 +15,6 @@ import com.airbnb.lottie.value.LottieValueCallback;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class EllipseContent implements PathContent, BaseKeyframeAnimation.AnimationListener, KeyPathElementContent {
     public final CircleShape circleShape;
@@ -30,15 +29,15 @@ public class EllipseContent implements PathContent, BaseKeyframeAnimation.Animat
     public EllipseContent(LottieDrawable lottieDrawable, BaseLayer baseLayer, CircleShape circleShape) {
         this.name = circleShape.name;
         this.lottieDrawable = lottieDrawable;
-        BaseKeyframeAnimation createAnimation = circleShape.size.createAnimation();
-        this.sizeAnimation = (PointKeyframeAnimation) createAnimation;
-        BaseKeyframeAnimation createAnimation2 = circleShape.position.createAnimation();
-        this.positionAnimation = createAnimation2;
+        BaseKeyframeAnimation baseKeyframeAnimationCreateAnimation = circleShape.size.createAnimation();
+        this.sizeAnimation = (PointKeyframeAnimation) baseKeyframeAnimationCreateAnimation;
+        BaseKeyframeAnimation baseKeyframeAnimationCreateAnimation2 = circleShape.position.createAnimation();
+        this.positionAnimation = baseKeyframeAnimationCreateAnimation2;
         this.circleShape = circleShape;
-        baseLayer.addAnimation(createAnimation);
-        baseLayer.addAnimation(createAnimation2);
-        createAnimation.addUpdateListener(this);
-        createAnimation2.addUpdateListener(this);
+        baseLayer.addAnimation(baseKeyframeAnimationCreateAnimation);
+        baseLayer.addAnimation(baseKeyframeAnimationCreateAnimation2);
+        baseKeyframeAnimationCreateAnimation.addUpdateListener(this);
+        baseKeyframeAnimationCreateAnimation2.addUpdateListener(this);
     }
 
     @Override // com.airbnb.lottie.model.KeyPathElement

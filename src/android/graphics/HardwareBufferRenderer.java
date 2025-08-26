@@ -41,19 +41,19 @@ public class HardwareBufferRenderer implements AutoCloseable {
     }
 
     public HardwareBufferRenderer(HardwareBuffer hardwareBuffer) {
-        RenderNode adopt = RenderNode.adopt(nCreateRootRenderNode());
-        adopt.setClipToBounds(false);
-        this.mProxy = nCreateHardwareBufferRenderer(hardwareBuffer, adopt.mNativeRenderNode);
+        RenderNode renderNodeAdopt = RenderNode.adopt(nCreateRootRenderNode());
+        renderNodeAdopt.setClipToBounds(false);
+        this.mProxy = nCreateHardwareBufferRenderer(hardwareBuffer, renderNodeAdopt.mNativeRenderNode);
         this.mCleaner = HardwareBufferRendererHolder.REGISTRY.registerNativeAllocation(this, this.mProxy);
         this.mRenderRequest = new RenderRequest();
-        this.mRootNode = adopt;
+        this.mRootNode = renderNodeAdopt;
         this.mHardwareBuffer = hardwareBuffer;
     }
 
     public void setContentRoot(RenderNode renderNode) {
-        RecordingCanvas beginRecording = this.mRootNode.beginRecording();
+        RecordingCanvas recordingCanvasBeginRecording = this.mRootNode.beginRecording();
         if (renderNode != null) {
-            beginRecording.drawRenderNode(renderNode);
+            recordingCanvasBeginRecording.drawRenderNode(renderNode);
         }
         this.mRootNode.endRecording();
     }
@@ -132,7 +132,7 @@ public class HardwareBufferRenderer implements AutoCloseable {
                     executor.execute(new Runnable() { // from class: android.graphics.HardwareBufferRenderer$RenderRequest$$ExternalSyntheticLambda1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            r1.accept(r2);
+                            consumer.accept(renderResult);
                         }
                     });
                 }

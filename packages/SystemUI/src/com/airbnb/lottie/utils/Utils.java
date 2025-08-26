@@ -6,8 +6,8 @@ import android.graphics.Matrix;
 import android.graphics.Path;
 import android.graphics.PathMeasure;
 import java.io.Closeable;
+import java.io.IOException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class Utils {
     public static final AnonymousClass1 threadLocalPathMeasure = new ThreadLocal() { // from class: com.airbnb.lottie.utils.Utils.1
@@ -49,41 +49,41 @@ public final class Utils {
             float f4 = f * length;
             float f5 = f2 * length;
             float f6 = f3 * length;
-            float min = Math.min(f4, f5) + f6;
-            float max = Math.max(f4, f5) + f6;
-            if (min >= length && max >= length) {
-                min = MiscUtils.floorMod(min, length);
-                max = MiscUtils.floorMod(max, length);
+            float fMin = Math.min(f4, f5) + f6;
+            float fMax = Math.max(f4, f5) + f6;
+            if (fMin >= length && fMax >= length) {
+                fMin = MiscUtils.floorMod(fMin, length);
+                fMax = MiscUtils.floorMod(fMax, length);
             }
-            if (min < 0.0f) {
-                min = MiscUtils.floorMod(min, length);
+            if (fMin < 0.0f) {
+                fMin = MiscUtils.floorMod(fMin, length);
             }
-            if (max < 0.0f) {
-                max = MiscUtils.floorMod(max, length);
+            if (fMax < 0.0f) {
+                fMax = MiscUtils.floorMod(fMax, length);
             }
-            if (min == max) {
+            if (fMin == fMax) {
                 path.reset();
                 return;
             }
-            if (min >= max) {
-                min -= length;
+            if (fMin >= fMax) {
+                fMin -= length;
             }
             path2.reset();
-            pathMeasure.getSegment(min, max, path2, true);
-            if (max > length) {
+            pathMeasure.getSegment(fMin, fMax, path2, true);
+            if (fMax > length) {
                 path3.reset();
-                pathMeasure.getSegment(0.0f, max % length, path3, true);
+                pathMeasure.getSegment(0.0f, fMax % length, path3, true);
                 path2.addPath(path3);
-            } else if (min < 0.0f) {
+            } else if (fMin < 0.0f) {
                 path3.reset();
-                pathMeasure.getSegment(min + length, length, path3, true);
+                pathMeasure.getSegment(fMin + length, length, path3, true);
                 path2.addPath(path3);
             }
             path.set(path2);
         }
     }
 
-    public static void closeQuietly(Closeable closeable) {
+    public static void closeQuietly(Closeable closeable) throws IOException {
         if (closeable != null) {
             try {
                 closeable.close();
@@ -113,8 +113,8 @@ public final class Utils {
         if (bitmap.getWidth() == i && bitmap.getHeight() == i2) {
             return bitmap;
         }
-        Bitmap createScaledBitmap = Bitmap.createScaledBitmap(bitmap, i, i2, true);
+        Bitmap bitmapCreateScaledBitmap = Bitmap.createScaledBitmap(bitmap, i, i2, true);
         bitmap.recycle();
-        return createScaledBitmap;
+        return bitmapCreateScaledBitmap;
     }
 }

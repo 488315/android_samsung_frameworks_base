@@ -5,7 +5,6 @@ import com.android.systemui.common.shared.model.Icon;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class FooterActionsSecurityButtonViewModel {
     public final Icon icon;
@@ -30,9 +29,9 @@ public final class FooterActionsSecurityButtonViewModel {
     }
 
     public final int hashCode() {
-        int m = PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.icon.hashCode() * 31, 31, this.text);
+        int iM = PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.icon.hashCode() * 31, 31, this.text);
         Function2 function2 = this.onClick;
-        return m + (function2 == null ? 0 : function2.hashCode());
+        return iM + (function2 == null ? 0 : function2.hashCode());
     }
 
     public final String toString() {

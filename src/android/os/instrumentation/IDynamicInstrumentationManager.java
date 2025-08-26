@@ -40,9 +40,9 @@ public interface IDynamicInstrumentationManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IDynamicInstrumentationManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IDynamicInstrumentationManager)) {
-                return (IDynamicInstrumentationManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IDynamicInstrumentationManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IDynamicInstrumentationManager)) {
+                return (IDynamicInstrumentationManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -59,9 +59,9 @@ public interface IDynamicInstrumentationManager extends IInterface {
             if (i == 1) {
                 TargetProcess targetProcess = (TargetProcess) parcel.readTypedObject(TargetProcess.CREATOR);
                 MethodDescriptor methodDescriptor = (MethodDescriptor) parcel.readTypedObject(MethodDescriptor.CREATOR);
-                IOffsetCallback asInterface = IOffsetCallback.Stub.asInterface(parcel.readStrongBinder());
+                IOffsetCallback iOffsetCallbackAsInterface = IOffsetCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                getExecutableMethodFileOffsets(targetProcess, methodDescriptor, asInterface);
+                getExecutableMethodFileOffsets(targetProcess, methodDescriptor, iOffsetCallbackAsInterface);
                 parcel2.writeNoException();
                 return true;
             }
@@ -86,18 +86,18 @@ public interface IDynamicInstrumentationManager extends IInterface {
 
             @Override // android.os.instrumentation.IDynamicInstrumentationManager
             public void getExecutableMethodFileOffsets(TargetProcess targetProcess, MethodDescriptor methodDescriptor, IOffsetCallback iOffsetCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDynamicInstrumentationManager.DESCRIPTOR);
-                    obtain.writeTypedObject(targetProcess, 0);
-                    obtain.writeTypedObject(methodDescriptor, 0);
-                    obtain.writeStrongInterface(iOffsetCallback);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IDynamicInstrumentationManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(targetProcess, 0);
+                    parcelObtain.writeTypedObject(methodDescriptor, 0);
+                    parcelObtain.writeStrongInterface(iOffsetCallback);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

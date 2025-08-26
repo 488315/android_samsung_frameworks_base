@@ -3,6 +3,7 @@ package android.telephony.satellite;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -36,7 +37,7 @@ public final class SatelliteAccessConfiguration implements Parcelable {
         this.mTagIdList = list2;
     }
 
-    public SatelliteAccessConfiguration(Parcel parcel) {
+    public SatelliteAccessConfiguration(Parcel parcel) throws ClassNotFoundException, IOException {
         this.mSatelliteInfoList = parcel.createTypedArrayList(SatelliteInfo.CREATOR);
         ArrayList arrayList = new ArrayList();
         this.mTagIdList = arrayList;

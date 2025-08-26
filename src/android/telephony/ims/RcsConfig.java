@@ -2,6 +2,7 @@ package android.telephony.ims;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Build;
 import android.provider.Telephony;
@@ -76,10 +77,10 @@ public final class RcsConfig {
                 return this;
             }
             Iterator<Characteristic> it = this.mSubs.iterator();
-            Characteristic characteristic = null;
-            while (it.hasNext() && (characteristic = it.next().getSubByType(str)) == null) {
+            Characteristic subByType = null;
+            while (it.hasNext() && (subByType = it.next().getSubByType(str)) == null) {
             }
-            return characteristic;
+            return subByType;
         }
 
         private boolean hasSubByType(String str) {
@@ -88,13 +89,13 @@ public final class RcsConfig {
 
         /* JADX INFO: Access modifiers changed from: private */
         public String getParmValue(String str) {
-            String str2 = this.mParms.get(str);
-            if (str2 == null) {
+            String parmValue = this.mParms.get(str);
+            if (parmValue == null) {
                 Iterator<Characteristic> it = this.mSubs.iterator();
-                while (it.hasNext() && (str2 = it.next().getParmValue(str)) == null) {
+                while (it.hasNext() && (parmValue = it.next().getParmValue(str)) == null) {
                 }
             }
-            return str2;
+            return parmValue;
         }
 
         boolean hasParm(String str) {
@@ -136,12 +137,13 @@ public final class RcsConfig {
         }
     }
 
-    public RcsConfig(byte[] bArr) throws IllegalArgumentException {
-        String str;
+    /* JADX WARN: Multi-variable type inference failed */
+    public RcsConfig(byte[] bArr) throws IOException, IllegalArgumentException {
+        String lowerCase;
         if (bArr == null || bArr.length == 0) {
             throw new IllegalArgumentException("Empty data");
         }
-        byte b = 0;
+        Object[] objArr = 0;
         Characteristic characteristic = new Characteristic(null, 0 == true ? 1 : 0);
         this.mRoot = characteristic;
         this.mCurrent = characteristic;
@@ -149,50 +151,55 @@ public final class RcsConfig {
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bArr);
         try {
             try {
-                XmlPullParserFactory newInstance = XmlPullParserFactory.newInstance();
-                newInstance.setNamespaceAware(true);
-                XmlPullParser newPullParser = newInstance.newPullParser();
-                newPullParser.setInput(byteArrayInputStream, null);
-                for (int eventType = newPullParser.getEventType(); eventType != 1 && characteristic != null; eventType = newPullParser.next()) {
+                XmlPullParserFactory xmlPullParserFactoryNewInstance = XmlPullParserFactory.newInstance();
+                xmlPullParserFactoryNewInstance.setNamespaceAware(true);
+                XmlPullParser xmlPullParserNewPullParser = xmlPullParserFactoryNewInstance.newPullParser();
+                xmlPullParserNewPullParser.setInput(byteArrayInputStream, null);
+                for (int eventType = xmlPullParserNewPullParser.getEventType(); eventType != 1 && characteristic != null; eventType = xmlPullParserNewPullParser.next()) {
                     if (eventType == 2) {
-                        String lowerCase = newPullParser.getName().trim().toLowerCase(Locale.ROOT);
+                        String lowerCase2 = xmlPullParserNewPullParser.getName().trim().toLowerCase(Locale.ROOT);
                         int i = 0;
-                        if (TAG_CHARACTERISTIC.equals(lowerCase)) {
-                            int attributeCount = newPullParser.getAttributeCount();
+                        if (TAG_CHARACTERISTIC.equals(lowerCase2)) {
+                            int attributeCount = xmlPullParserNewPullParser.getAttributeCount();
                             if (attributeCount > 0) {
                                 while (i < attributeCount) {
-                                    String lowerCase2 = newPullParser.getAttributeName(i).trim().toLowerCase(Locale.ROOT);
-                                    if ("type".equals(lowerCase2)) {
-                                        str = newPullParser.getAttributeValue(newPullParser.getAttributeNamespace(i), lowerCase2).trim().toLowerCase(Locale.ROOT);
+                                    String lowerCase3 = xmlPullParserNewPullParser.getAttributeName(i).trim().toLowerCase(Locale.ROOT);
+                                    if ("type".equals(lowerCase3)) {
+                                        lowerCase = xmlPullParserNewPullParser.getAttributeValue(xmlPullParserNewPullParser.getAttributeNamespace(i), lowerCase3).trim().toLowerCase(Locale.ROOT);
                                         break;
                                     }
                                     i++;
                                 }
+                                lowerCase = null;
+                                Characteristic characteristic2 = new Characteristic(lowerCase, characteristic);
+                                characteristic.getSubs().add(characteristic2);
+                                characteristic = characteristic2;
+                            } else {
+                                lowerCase = null;
+                                Characteristic characteristic22 = new Characteristic(lowerCase, characteristic);
+                                characteristic.getSubs().add(characteristic22);
+                                characteristic = characteristic22;
                             }
-                            str = null;
-                            Characteristic characteristic2 = new Characteristic(str, characteristic);
-                            characteristic.getSubs().add(characteristic2);
-                            characteristic = characteristic2;
-                        } else if (TAG_PARM.equals(lowerCase)) {
-                            int attributeCount2 = newPullParser.getAttributeCount();
-                            String str2 = null;
-                            String str3 = null;
+                        } else if (TAG_PARM.equals(lowerCase2)) {
+                            int attributeCount2 = xmlPullParserNewPullParser.getAttributeCount();
+                            String lowerCase4 = null;
+                            String strTrim = null;
                             if (attributeCount2 > 1) {
                                 while (i < attributeCount2) {
-                                    String lowerCase3 = newPullParser.getAttributeName(i).trim().toLowerCase(Locale.ROOT);
-                                    if ("name".equals(lowerCase3)) {
-                                        str2 = newPullParser.getAttributeValue(newPullParser.getAttributeNamespace(i), lowerCase3).trim().toLowerCase(Locale.ROOT);
-                                    } else if ("value".equals(lowerCase3)) {
-                                        str3 = newPullParser.getAttributeValue(newPullParser.getAttributeNamespace(i), lowerCase3).trim();
+                                    String lowerCase5 = xmlPullParserNewPullParser.getAttributeName(i).trim().toLowerCase(Locale.ROOT);
+                                    if ("name".equals(lowerCase5)) {
+                                        lowerCase4 = xmlPullParserNewPullParser.getAttributeValue(xmlPullParserNewPullParser.getAttributeNamespace(i), lowerCase5).trim().toLowerCase(Locale.ROOT);
+                                    } else if ("value".equals(lowerCase5)) {
+                                        strTrim = xmlPullParserNewPullParser.getAttributeValue(xmlPullParserNewPullParser.getAttributeNamespace(i), lowerCase5).trim();
                                     }
                                     i++;
                                 }
                             }
-                            if (str2 != null && str3 != null) {
-                                characteristic.getParms().put(str2, str3);
+                            if (lowerCase4 != null && strTrim != null) {
+                                characteristic.getParms().put(lowerCase4, strTrim);
                             }
                         }
-                    } else if (eventType == 3 && TAG_CHARACTERISTIC.equals(newPullParser.getName().trim().toLowerCase(Locale.ROOT))) {
+                    } else if (eventType == 3 && TAG_CHARACTERISTIC.equals(xmlPullParserNewPullParser.getName().trim().toLowerCase(Locale.ROOT))) {
                         characteristic = characteristic.getParent();
                     }
                 }
@@ -293,50 +300,50 @@ public final class RcsConfig {
         return Objects.hash(this.mRoot, this.mCurrent);
     }
 
-    public static byte[] compressGzip(byte[] bArr) {
+    public static byte[] compressGzip(byte[] bArr) throws IOException {
         if (bArr == null || bArr.length == 0) {
             return bArr;
         }
-        byte[] bArr2 = null;
+        byte[] byteArray = null;
         try {
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(bArr.length);
             GZIPOutputStream gZIPOutputStream = new GZIPOutputStream(byteArrayOutputStream);
             gZIPOutputStream.write(bArr);
             gZIPOutputStream.close();
-            bArr2 = byteArrayOutputStream.toByteArray();
+            byteArray = byteArrayOutputStream.toByteArray();
             byteArrayOutputStream.close();
-            return bArr2;
+            return byteArray;
         } catch (IOException e) {
             loge("Error to compressGzip due to " + e);
-            return bArr2;
+            return byteArray;
         }
     }
 
-    public static byte[] decompressGzip(byte[] bArr) {
+    public static byte[] decompressGzip(byte[] bArr) throws IOException {
         if (bArr == null || bArr.length == 0) {
             return bArr;
         }
-        byte[] bArr2 = null;
+        byte[] byteArray = null;
         try {
             ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bArr);
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             GZIPInputStream gZIPInputStream = new GZIPInputStream(byteArrayInputStream);
-            byte[] bArr3 = new byte[1024];
-            for (int read = gZIPInputStream.read(bArr3); read >= 0; read = gZIPInputStream.read(bArr3)) {
-                byteArrayOutputStream.write(bArr3, 0, read);
+            byte[] bArr2 = new byte[1024];
+            for (int i = gZIPInputStream.read(bArr2); i >= 0; i = gZIPInputStream.read(bArr2)) {
+                byteArrayOutputStream.write(bArr2, 0, i);
             }
             gZIPInputStream.close();
             byteArrayInputStream.close();
-            bArr2 = byteArrayOutputStream.toByteArray();
+            byteArray = byteArrayOutputStream.toByteArray();
             byteArrayOutputStream.close();
-            return bArr2;
+            return byteArray;
         } catch (IOException e) {
             loge("Error to decompressGzip due to " + e);
-            return bArr2;
+            return byteArray;
         }
     }
 
-    public static void updateConfigForSub(Context context, int i, byte[] bArr, boolean z) {
+    public static void updateConfigForSub(Context context, int i, byte[] bArr, boolean z) throws IOException {
         if (!z) {
             bArr = compressGzip(bArr);
         }
@@ -345,91 +352,33 @@ public final class RcsConfig {
         context.getContentResolver().update(Telephony.SimInfo.CONTENT_URI, contentValues, "_id=" + i, null);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:10:0x004f, code lost:
-    
-        r8.close();
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:18:0x004d, code lost:
-    
-        if (r8 == null) goto L19;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:4:0x0059, code lost:
-    
-        if (r8 != null) goto L13;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:5:0x005c, code lost:
-    
-        if (r10 == false) goto L21;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:7:0x0063, code lost:
-    
-        return decompressGzip(r2);
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:9:?, code lost:
-    
-        return r2;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:13:0x004f A[PHI: r2
+      0x004f: PHI (r2v4 byte[]) = (r2v1 byte[]), (r2v7 byte[]) binds: [B:12:0x004d, B:17:0x0059] A[DONT_GENERATE, DONT_INLINE]] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static byte[] loadRcsConfigForSub(android.content.Context r8, int r9, boolean r10) {
-        /*
-            java.lang.String r1 = "error to load rcs config for sub:"
-            android.content.ContentResolver r2 = r8.getContentResolver()
-            android.net.Uri r3 = android.provider.Telephony.SimInfo.CONTENT_URI
-            java.lang.StringBuilder r8 = new java.lang.StringBuilder
-            java.lang.String r0 = "_id="
-            r8.<init>(r0)
-            r8.append(r9)
-            java.lang.String r5 = r8.toString()
-            r6 = 0
-            r7 = 0
-            r4 = 0
-            android.database.Cursor r8 = r2.query(r3, r4, r5, r6, r7)
-            r2 = 0
-            if (r8 == 0) goto L59
-            boolean r0 = r8.moveToFirst()     // Catch: java.lang.Throwable -> L32 java.lang.Exception -> L35
-            if (r0 == 0) goto L59
-            java.lang.String r0 = "rcs_config"
-            int r0 = r8.getColumnIndexOrThrow(r0)     // Catch: java.lang.Throwable -> L32 java.lang.Exception -> L35
-            byte[] r2 = r8.getBlob(r0)     // Catch: java.lang.Throwable -> L32 java.lang.Exception -> L35
-            goto L59
-        L32:
-            r0 = move-exception
-            r9 = r0
-            goto L53
-        L35:
-            r0 = move-exception
-            java.lang.StringBuilder r3 = new java.lang.StringBuilder     // Catch: java.lang.Throwable -> L32
-            r3.<init>(r1)     // Catch: java.lang.Throwable -> L32
-            r3.append(r9)     // Catch: java.lang.Throwable -> L32
-            java.lang.String r9 = " due to "
-            r3.append(r9)     // Catch: java.lang.Throwable -> L32
-            r3.append(r0)     // Catch: java.lang.Throwable -> L32
-            java.lang.String r9 = r3.toString()     // Catch: java.lang.Throwable -> L32
-            loge(r9)     // Catch: java.lang.Throwable -> L32
-            if (r8 == 0) goto L5c
-        L4f:
-            r8.close()
-            goto L5c
-        L53:
-            if (r8 == 0) goto L58
-            r8.close()
-        L58:
-            throw r9
-        L59:
-            if (r8 == 0) goto L5c
-            goto L4f
-        L5c:
-            if (r10 == 0) goto L5f
-            goto L63
-        L5f:
-            byte[] r2 = decompressGzip(r2)
-        L63:
-            return r2
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.telephony.ims.RcsConfig.loadRcsConfigForSub(android.content.Context, int, boolean):byte[]");
+    public static byte[] loadRcsConfigForSub(Context context, int i, boolean z) {
+        Cursor cursorQuery = context.getContentResolver().query(Telephony.SimInfo.CONTENT_URI, null, "_id=" + i, null, null);
+        byte[] blob = null;
+        try {
+            if (cursorQuery != null) {
+                try {
+                    if (cursorQuery.moveToFirst()) {
+                        blob = cursorQuery.getBlob(cursorQuery.getColumnIndexOrThrow(Telephony.SimInfo.COLUMN_RCS_CONFIG));
+                    }
+                } catch (Exception e) {
+                    loge("error to load rcs config for sub:" + i + " due to " + e);
+                    if (cursorQuery != null) {
+                    }
+                }
+                if (cursorQuery != null) {
+                    cursorQuery.close();
+                }
+            } else if (cursorQuery != null) {
+            }
+            return z ? blob : decompressGzip(blob);
+        } finally {
+        }
     }
 
     private static void logd(String str) {

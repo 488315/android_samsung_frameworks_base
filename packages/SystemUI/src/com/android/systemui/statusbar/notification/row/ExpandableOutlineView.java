@@ -10,14 +10,15 @@ import android.util.AttributeSet;
 import android.util.IndentingPrintWriter;
 import android.view.View;
 import android.view.ViewOutlineProvider;
+import com.android.systemui.Dependency;
 import com.android.systemui.NotiRune;
 import com.android.systemui.R;
 import com.android.systemui.statusbar.notification.RoundableState;
 import com.android.systemui.statusbar.notification.stack.NotificationChildrenContainer;
 import com.android.systemui.util.DumpUtilsKt;
+import com.android.systemui.util.SecQsUiDisplayModeInteractor;
 import java.io.PrintWriter;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class ExpandableOutlineView extends ExpandableView {
     public static final Path EMPTY_PATH = new Path();
@@ -33,7 +34,7 @@ public abstract class ExpandableOutlineView extends ExpandableView {
 
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Type inference failed for: r1v7, types: [android.view.ViewOutlineProvider, com.android.systemui.statusbar.notification.row.ExpandableOutlineView$1] */
-    public ExpandableOutlineView(Context context, AttributeSet attributeSet) {
+    public ExpandableOutlineView(Context context, AttributeSet attributeSet) throws Resources.NotFoundException {
         super(context, attributeSet);
         this.mOutlineRect = new Rect();
         this.mOutlineAlpha = -1.0f;
@@ -41,25 +42,29 @@ public abstract class ExpandableOutlineView extends ExpandableView {
         this.mDismissUsingRowTranslationX = true;
         this.mTmpCornerRadii = new float[8];
         ?? r1 = new ViewOutlineProvider() { // from class: com.android.systemui.statusbar.notification.row.ExpandableOutlineView.1
+            /* JADX WARN: Removed duplicated region for block: B:13:0x003e  */
             @Override // android.view.ViewOutlineProvider
+            /*
+                Code decompiled incorrectly, please refer to instructions dump.
+            */
             public final void getOutline(View view, Outline outline) {
                 ExpandableOutlineView expandableOutlineView = ExpandableOutlineView.this;
-                if (!expandableOutlineView.mCustomOutline && !expandableOutlineView.hasRoundedCorner()) {
+                if (expandableOutlineView.mCustomOutline || expandableOutlineView.hasRoundedCorner()) {
+                    Path clipPath = ExpandableOutlineView.this.getClipPath(false);
+                    if (clipPath != null) {
+                        outline.setPath(clipPath);
+                    }
+                } else {
                     ExpandableOutlineView expandableOutlineView2 = ExpandableOutlineView.this;
                     if (!expandableOutlineView2.mAlwaysRoundBothCorners) {
                         int translation = !expandableOutlineView2.mDismissUsingRowTranslationX ? (int) expandableOutlineView2.getTranslation() : 0;
-                        int max = Math.max(translation, 0);
+                        int iMax = Math.max(translation, 0);
                         ExpandableOutlineView expandableOutlineView3 = ExpandableOutlineView.this;
                         int i = expandableOutlineView3.mClipTopAmount;
-                        int min = Math.min(translation, 0) + expandableOutlineView3.getWidth();
+                        int iMin = Math.min(translation, 0) + expandableOutlineView3.getWidth();
                         ExpandableOutlineView expandableOutlineView4 = ExpandableOutlineView.this;
-                        outline.setRect(max, i, min, Math.max(expandableOutlineView4.mActualHeight - expandableOutlineView4.mClipBottomAmount, i));
-                        outline.setAlpha(ExpandableOutlineView.this.mOutlineAlpha);
+                        outline.setRect(iMax, i, iMin, Math.max(expandableOutlineView4.mActualHeight - expandableOutlineView4.mClipBottomAmount, i));
                     }
-                }
-                Path clipPath = ExpandableOutlineView.this.getClipPath(false);
-                if (clipPath != null) {
-                    outline.setPath(clipPath);
                 }
                 outline.setAlpha(ExpandableOutlineView.this.mOutlineAlpha);
             }
@@ -80,130 +85,131 @@ public abstract class ExpandableOutlineView extends ExpandableView {
 
     @Override // android.view.ViewGroup
     public final boolean drawChild(Canvas canvas, View view, long j) {
-        Path path;
+        Path customClipPath;
         canvas.save();
-        Path path2 = null;
+        Path path = null;
         if (childNeedsClipping(view)) {
-            path = getCustomClipPath(view);
-            if (path == null) {
-                path = getClipPath(false);
+            customClipPath = getCustomClipPath(view);
+            if (customClipPath == null) {
+                customClipPath = getClipPath(false);
             }
             if (this.mDismissUsingRowTranslationX && (view instanceof NotificationChildrenContainer)) {
-                path2 = path;
-                path = null;
+                path = customClipPath;
+                customClipPath = null;
             }
         } else {
-            path = null;
+            customClipPath = null;
         }
         if (view instanceof NotificationChildrenContainer) {
             NotificationChildrenContainer notificationChildrenContainer = (NotificationChildrenContainer) view;
-            notificationChildrenContainer.mChildClipPath = path2;
+            notificationChildrenContainer.mChildClipPath = path;
             notificationChildrenContainer.invalidate();
         }
-        if (path != null) {
-            canvas.clipPath(path);
+        if (customClipPath != null) {
+            canvas.clipPath(customClipPath);
         }
-        boolean drawChild = super.drawChild(canvas, view, j);
+        boolean zDrawChild = super.drawChild(canvas, view, j);
         canvas.restore();
-        return drawChild;
+        return zDrawChild;
     }
 
     @Override // com.android.systemui.statusbar.notification.row.ExpandableView, com.android.systemui.Dumpable
     public void dump(PrintWriter printWriter, final String[] strArr) {
-        final IndentingPrintWriter asIndenting = DumpUtilsKt.asIndenting(printWriter);
-        super.dump(asIndenting, strArr);
-        DumpUtilsKt.withIncreasedIndent(asIndenting, new Runnable(asIndenting, strArr) { // from class: com.android.systemui.statusbar.notification.row.ExpandableOutlineView$$ExternalSyntheticLambda0
+        final IndentingPrintWriter indentingPrintWriterAsIndenting = DumpUtilsKt.asIndenting(printWriter);
+        super.dump(indentingPrintWriterAsIndenting, strArr);
+        DumpUtilsKt.withIncreasedIndent(indentingPrintWriterAsIndenting, new Runnable(indentingPrintWriterAsIndenting, strArr) { // from class: com.android.systemui.statusbar.notification.row.ExpandableOutlineView$$ExternalSyntheticLambda0
             public final /* synthetic */ IndentingPrintWriter f$1;
 
             @Override // java.lang.Runnable
             public final void run() {
-                this.f$1.println(ExpandableOutlineView.this.mRoundableState.debugString());
+                this.f$1.println(this.f$0.mRoundableState.debugString());
             }
         });
     }
 
     public final Path getClipPath(boolean z) {
         int i;
+        int iMin;
         int i2;
         int i3;
-        int i4;
         char c;
         char c2;
         char c3;
+        float fMin;
         float f = this.mAlwaysRoundBothCorners ? this.mRoundableState.maxRadius : getRoundableState().topRoundness * getRoundableState().maxRadius;
         if (this.mCustomOutline) {
             Rect rect = this.mOutlineRect;
-            int i5 = rect.left;
-            int i6 = rect.top;
-            int i7 = rect.right;
+            int i4 = rect.left;
+            int i5 = rect.top;
+            int i6 = rect.right;
             i = rect.bottom;
-            i2 = i7;
+            iMin = i6;
+            i2 = i4;
             i3 = i5;
-            i4 = i6;
         } else {
             int translation = (this.mDismissUsingRowTranslationX || z) ? 0 : (int) getTranslation();
-            int i8 = (int) (this.mExtraWidthForClipping / 2.0f);
-            int max = Math.max(translation, 0) - i8;
-            i2 = Math.min(translation, 0) + getWidth() + i8;
+            int i7 = (int) (this.mExtraWidthForClipping / 2.0f);
+            int iMax = Math.max(translation, 0) - i7;
+            iMin = Math.min(translation, 0) + getWidth() + i7;
             i = this.mActualHeight;
-            i3 = max;
-            i4 = 0;
+            i2 = iMax;
+            i3 = 0;
         }
-        if (i - i4 == 0) {
+        if (i - i3 == 0) {
             return EMPTY_PATH;
         }
         float f2 = this.mAlwaysRoundBothCorners ? this.mRoundableState.maxRadius : getRoundableState().bottomRoundness * getRoundableState().maxRadius;
         float translation2 = getTranslation();
-        if (NotiRune.NOTI_STYLE_POP_OVER_DISMISS_CLIP_VIEW && !this.mDismissUsingRowTranslationX) {
-            float f3 = 0.0f;
-            if (translation2 != 0.0f) {
+        if (NotiRune.NOTI_STYLE_POP_OVER_DISMISS_CLIP_VIEW) {
+            c = 0;
+            if (((SecQsUiDisplayModeInteractor) Dependency.sDependency.getDependencyInner(SecQsUiDisplayModeInteractor.class)).isTablet() && !this.mDismissUsingRowTranslationX && translation2 != 0.0f && canExpandableViewBeDismissed()) {
                 boolean z2 = translation2 > 0.0f;
                 if (translation2 == 0.0f) {
-                    c = 0;
+                    fMin = 0.0f;
                     c2 = 7;
                     c3 = 6;
                 } else {
-                    c = 0;
                     c2 = 7;
                     c3 = 6;
-                    f3 = (float) (1.0d - Math.min(Math.max(0.0f, Math.abs(translation2 / this.mRoundableState.maxRadius)), 0.9d));
+                    fMin = (float) (1.0d - Math.min(Math.max(0.0f, Math.abs(translation2 / this.mRoundableState.maxRadius)), 0.9d));
                 }
-                float f4 = f * f3;
-                float f5 = f3 * f2;
+                float f3 = f * fMin;
+                float f4 = fMin * f2;
                 Path path = this.mTmpPath;
                 path.reset();
                 float[] fArr = this.mTmpCornerRadii;
-                fArr[c] = z2 ? f : f4;
-                fArr[1] = z2 ? f : f4;
-                fArr[2] = z2 ? f4 : f;
+                fArr[0] = z2 ? f : f3;
+                fArr[1] = z2 ? f : f3;
+                fArr[2] = z2 ? f3 : f;
                 if (z2) {
-                    f = f4;
+                    f = f3;
                 }
                 fArr[3] = f;
-                fArr[4] = z2 ? f5 : f2;
-                fArr[5] = z2 ? f5 : f2;
-                fArr[c3] = z2 ? f2 : f5;
+                fArr[4] = z2 ? f4 : f2;
+                fArr[5] = z2 ? f4 : f2;
+                fArr[c3] = z2 ? f2 : f4;
                 if (!z2) {
-                    f2 = f5;
+                    f2 = f4;
                 }
                 fArr[c2] = f2;
-                path.addRoundRect(i3, i4, i2, i, fArr, Path.Direction.CW);
-                return this.mTmpPath;
+                path.addRoundRect(i2, i3, iMin, i, fArr, Path.Direction.CW);
             }
+            return this.mTmpPath;
         }
-        float f6 = this.mRoundableState.maxRadius;
+        c = 0;
+        float f5 = this.mRoundableState.maxRadius;
         Path path2 = this.mTmpPath;
         path2.reset();
         float[] fArr2 = this.mTmpCornerRadii;
-        fArr2[0] = f6;
-        fArr2[1] = f6;
-        fArr2[2] = f6;
-        fArr2[3] = f6;
-        fArr2[4] = f6;
-        fArr2[5] = f6;
-        fArr2[6] = f6;
-        fArr2[7] = f6;
-        path2.addRoundRect(i3, i4, i2, i, fArr2, Path.Direction.CW);
+        fArr2[c] = f5;
+        fArr2[1] = f5;
+        fArr2[2] = f5;
+        fArr2[3] = f5;
+        fArr2[4] = f5;
+        fArr2[5] = f5;
+        fArr2[6] = f5;
+        fArr2[7] = f5;
+        path2.addRoundRect(i2, i3, iMin, i, fArr2, Path.Direction.CW);
         return this.mTmpPath;
     }
 
@@ -232,7 +238,7 @@ public abstract class ExpandableOutlineView extends ExpandableView {
         return this.mRoundableState;
     }
 
-    public final void initDimens$3() {
+    public final void initDimens$3() throws Resources.NotFoundException {
         Resources resources = getResources();
         boolean z = resources.getBoolean(R.bool.config_clipNotificationsToOutline);
         this.mAlwaysRoundBothCorners = z;

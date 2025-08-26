@@ -37,19 +37,19 @@ public class SipMessageParsingUtils {
     private static final String VIA_SIP_HEADER_KEY_COMPACT = "v";
 
     public static boolean isSipRequest(String str) {
-        String[] splitStartLineAndVerify = splitStartLineAndVerify(str);
-        if (splitStartLineAndVerify == null) {
+        String[] strArrSplitStartLineAndVerify = splitStartLineAndVerify(str);
+        if (strArrSplitStartLineAndVerify == null) {
             return false;
         }
-        return verifySipRequest(splitStartLineAndVerify);
+        return verifySipRequest(strArrSplitStartLineAndVerify);
     }
 
     public static boolean isSipResponse(String str) {
-        String[] splitStartLineAndVerify = splitStartLineAndVerify(str);
-        if (splitStartLineAndVerify == null) {
+        String[] strArrSplitStartLineAndVerify = splitStartLineAndVerify(str);
+        if (strArrSplitStartLineAndVerify == null) {
             return false;
         }
-        return verifySipResponse(splitStartLineAndVerify);
+        return verifySipResponse(strArrSplitStartLineAndVerify);
     }
 
     public static String getTransactionId(String str) {
@@ -66,20 +66,20 @@ public class SipMessageParsingUtils {
     }
 
     private static String getParameterValue(String str, String str2) {
-        String[] split = str.split(";");
-        if (split.length < 2) {
+        String[] strArrSplit = str.split(";");
+        if (strArrSplit.length < 2) {
             return null;
         }
-        for (String str3 : split) {
-            String[] split2 = str3.split(PARAM_KEY_VALUE_SEPARATOR);
-            if (split2.length >= 2) {
-                if (split2.length > 2) {
-                    Log.w(TAG, "getParameterValue: unexpected parameter" + Arrays.toString(split2));
+        for (String str3 : strArrSplit) {
+            String[] strArrSplit2 = str3.split(PARAM_KEY_VALUE_SEPARATOR);
+            if (strArrSplit2.length >= 2) {
+                if (strArrSplit2.length > 2) {
+                    Log.w(TAG, "getParameterValue: unexpected parameter" + Arrays.toString(strArrSplit2));
                 }
-                split2[0] = split2[0].trim();
-                split2[1] = split2[1].trim();
-                if (str2.equalsIgnoreCase(split2[0])) {
-                    return split2[1];
+                strArrSplit2[0] = strArrSplit2[0].trim();
+                strArrSplit2[1] = strArrSplit2[1].trim();
+                if (str2.equalsIgnoreCase(strArrSplit2[0])) {
+                    return strArrSplit2[1];
                 }
             }
         }
@@ -87,48 +87,48 @@ public class SipMessageParsingUtils {
     }
 
     public static String getCallId(String str) {
-        List<Pair<String, String>> parseHeaders = parseHeaders(str, true, CALL_ID_SIP_HEADER_KEY, CALL_ID_SIP_HEADER_KEY_COMPACT);
-        if (parseHeaders.isEmpty()) {
+        List<Pair<String, String>> headers = parseHeaders(str, true, CALL_ID_SIP_HEADER_KEY, CALL_ID_SIP_HEADER_KEY_COMPACT);
+        if (headers.isEmpty()) {
             return null;
         }
-        return parseHeaders.get(0).second;
+        return headers.get(0).second;
     }
 
     public static String getFromTag(String str) {
-        List<Pair<String, String>> parseHeaders = parseHeaders(str, true, FROM_HEADER_KEY, "f");
-        if (parseHeaders.isEmpty()) {
+        List<Pair<String, String>> headers = parseHeaders(str, true, FROM_HEADER_KEY, "f");
+        if (headers.isEmpty()) {
             return null;
         }
-        return getParameterValue(parseHeaders.get(0).second, "tag");
+        return getParameterValue(headers.get(0).second, "tag");
     }
 
     public static String getToTag(String str) {
-        List<Pair<String, String>> parseHeaders = parseHeaders(str, true, TO_HEADER_KEY, "t");
-        if (parseHeaders.isEmpty()) {
+        List<Pair<String, String>> headers = parseHeaders(str, true, TO_HEADER_KEY, "t");
+        if (headers.isEmpty()) {
             return null;
         }
-        return getParameterValue(parseHeaders.get(0).second, "tag");
+        return getParameterValue(headers.get(0).second, "tag");
     }
 
     public static String[] splitStartLineAndVerify(String str) {
-        String[] split = str.split(" ", 3);
-        if (isStartLineMalformed(split)) {
+        String[] strArrSplit = str.split(" ", 3);
+        if (isStartLineMalformed(strArrSplit)) {
             return null;
         }
-        return split;
+        return strArrSplit;
     }
 
     public static Set<String> getAcceptContactFeatureTags(String str) {
-        List<Pair<String, String>> parseHeaders = parseHeaders(str, false, ACCEPT_CONTACT_HEADER_KEY, "a");
+        List<Pair<String, String>> headers = parseHeaders(str, false, ACCEPT_CONTACT_HEADER_KEY, "a");
         if (str.isEmpty()) {
             return Collections.EMPTY_SET;
         }
         ArraySet arraySet = new ArraySet();
-        Iterator<Pair<String, String>> it = parseHeaders.iterator();
+        Iterator<Pair<String, String>> it = headers.iterator();
         while (it.hasNext()) {
-            String[] split = it.next().second.split(";");
-            if (split.length >= 2) {
-                for (String str2 : (Set) Arrays.asList(split).subList(1, split.length).stream().map(new Function() { // from class: com.android.internal.telephony.SipMessageParsingUtils$$ExternalSyntheticLambda3
+            String[] strArrSplit = it.next().second.split(";");
+            if (strArrSplit.length >= 2) {
+                for (String str2 : (Set) Arrays.asList(strArrSplit).subList(1, strArrSplit.length).stream().map(new Function() { // from class: com.android.internal.telephony.SipMessageParsingUtils$$ExternalSyntheticLambda3
                     @Override // java.util.function.Function
                     public final Object apply(Object obj) {
                         return ((String) obj).trim();
@@ -136,17 +136,15 @@ public class SipMessageParsingUtils {
                 }).filter(new Predicate() { // from class: com.android.internal.telephony.SipMessageParsingUtils$$ExternalSyntheticLambda4
                     @Override // java.util.function.Predicate
                     public final boolean test(Object obj) {
-                        boolean startsWith;
-                        startsWith = ((String) obj).startsWith("+");
-                        return startsWith;
+                        return ((String) obj).startsWith("+");
                     }
                 }).collect(Collectors.toSet())) {
-                    String[] split2 = str2.split(PARAM_KEY_VALUE_SEPARATOR, 2);
-                    if (split2.length < 2) {
+                    String[] strArrSplit2 = str2.split(PARAM_KEY_VALUE_SEPARATOR, 2);
+                    if (strArrSplit2.length < 2) {
                         arraySet.add(str2);
                     } else {
-                        for (String str3 : splitParamValue(split2[1])) {
-                            arraySet.add(split2[0] + PARAM_KEY_VALUE_SEPARATOR + str3);
+                        for (String str3 : splitParamValue(strArrSplit2[1])) {
+                            arraySet.add(strArrSplit2[0] + PARAM_KEY_VALUE_SEPARATOR + str3);
                         }
                     }
                 }
@@ -159,11 +157,11 @@ public class SipMessageParsingUtils {
         if (!str.startsWith("\"") && !str.endsWith("\"")) {
             return new String[]{str};
         }
-        String[] split = str.substring(1, str.length() - 1).split(",");
-        for (int i = 0; i < split.length; i++) {
-            split[i] = "\"" + split[i] + "\"";
+        String[] strArrSplit = str.substring(1, str.length() - 1).split(",");
+        for (int i = 0; i < strArrSplit.length; i++) {
+            strArrSplit[i] = "\"" + strArrSplit[i] + "\"";
         }
-        return split;
+        return strArrSplit;
     }
 
     private static boolean isStartLineMalformed(String[] strArr) {
@@ -178,9 +176,7 @@ public class SipMessageParsingUtils {
             return Arrays.stream(SIP_REQUEST_METHODS).anyMatch(new Predicate() { // from class: com.android.internal.telephony.SipMessageParsingUtils$$ExternalSyntheticLambda0
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
-                    boolean contains;
-                    contains = strArr[0].contains((String) obj);
-                    return contains;
+                    return strArr[0].contains((String) obj);
                 }
             }) & (Uri.parse(strArr[1]).getScheme() != null);
         } catch (NumberFormatException unused) {
@@ -188,72 +184,68 @@ public class SipMessageParsingUtils {
         }
     }
 
-    private static boolean verifySipResponse(String[] strArr) {
-        int parseInt;
+    private static boolean verifySipResponse(String[] strArr) throws NumberFormatException {
+        int i;
         if (!strArr[0].contains(SIP_VERSION_2)) {
             return false;
         }
         try {
-            parseInt = Integer.parseInt(strArr[1]);
+            i = Integer.parseInt(strArr[1]);
         } catch (NumberFormatException unused) {
         }
-        return parseInt >= 100 && parseInt < 700;
+        return i >= 100 && i < 700;
     }
 
     public static List<Pair<String, String>> parseHeaders(String str, boolean z, String... strArr) {
-        String removeLeadingWhitespace = removeLeadingWhitespace(str);
+        String strRemoveLeadingWhitespace = removeLeadingWhitespace(str);
         ArrayList arrayList = new ArrayList();
-        String[] split = removeLeadingWhitespace.split("\\r?\\n");
-        if (split.length == 0) {
+        String[] strArrSplit = strRemoveLeadingWhitespace.split("\\r?\\n");
+        if (strArrSplit.length == 0) {
             return Collections.EMPTY_LIST;
         }
         StringBuilder sb = new StringBuilder();
-        int length = split.length;
+        int length = strArrSplit.length;
         int i = 0;
-        final String str2 = null;
+        final String strTrim = null;
         while (true) {
             if (i < length) {
-                String str3 = split[i];
-                if (str3.startsWith("\t") || str3.startsWith(" ")) {
-                    sb.append(removeLeadingWhitespace(str3));
+                String str2 = strArrSplit[i];
+                if (str2.startsWith("\t") || str2.startsWith(" ")) {
+                    sb.append(removeLeadingWhitespace(str2));
                 } else {
-                    if (str2 != null) {
+                    if (strTrim != null) {
                         if (strArr == null || strArr.length == 0 || Arrays.stream(strArr).anyMatch(new Predicate() { // from class: com.android.internal.telephony.SipMessageParsingUtils$$ExternalSyntheticLambda1
                             @Override // java.util.function.Predicate
                             public final boolean test(Object obj) {
-                                boolean equalsIgnoreCase;
-                                equalsIgnoreCase = ((String) obj).equalsIgnoreCase(str2);
-                                return equalsIgnoreCase;
+                                return ((String) obj).equalsIgnoreCase(strTrim);
                             }
                         })) {
-                            arrayList.add(new Pair(str2, sb.toString()));
+                            arrayList.add(new Pair(strTrim, sb.toString()));
                             if (z) {
                                 break;
                             }
                         }
                         sb = new StringBuilder();
-                        str2 = null;
+                        strTrim = null;
                     }
-                    String[] split2 = str3.split(":", 2);
-                    if (split2.length < 2) {
-                        Log.w(TAG, "parseHeaders - received malformed line: " + str3);
+                    String[] strArrSplit2 = str2.split(":", 2);
+                    if (strArrSplit2.length < 2) {
+                        Log.w(TAG, "parseHeaders - received malformed line: " + str2);
                     } else {
-                        str2 = split2[0].trim();
-                        for (int i2 = 1; i2 < split2.length; i2++) {
-                            sb.append(removeLeadingWhitespace(split2[i2]));
+                        strTrim = strArrSplit2[0].trim();
+                        for (int i2 = 1; i2 < strArrSplit2.length; i2++) {
+                            sb.append(removeLeadingWhitespace(strArrSplit2[i2]));
                         }
                     }
                 }
                 i++;
-            } else if (str2 != null && (strArr == null || strArr.length == 0 || Arrays.stream(strArr).anyMatch(new Predicate() { // from class: com.android.internal.telephony.SipMessageParsingUtils$$ExternalSyntheticLambda2
+            } else if (strTrim != null && (strArr == null || strArr.length == 0 || Arrays.stream(strArr).anyMatch(new Predicate() { // from class: com.android.internal.telephony.SipMessageParsingUtils$$ExternalSyntheticLambda2
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
-                    boolean equalsIgnoreCase;
-                    equalsIgnoreCase = ((String) obj).equalsIgnoreCase(str2);
-                    return equalsIgnoreCase;
+                    return ((String) obj).equalsIgnoreCase(strTrim);
                 }
             }))) {
-                arrayList.add(new Pair(str2, sb.toString()));
+                arrayList.add(new Pair(strTrim, sb.toString()));
             }
         }
         return arrayList;

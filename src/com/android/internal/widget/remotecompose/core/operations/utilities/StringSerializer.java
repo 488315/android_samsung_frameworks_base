@@ -8,9 +8,9 @@ public class StringSerializer {
     String mIndentBuffer = "                                                                      ";
 
     public void append(int i, String str) {
-        String substring = this.mIndentBuffer.substring(0, i);
-        this.mBuffer.append(substring);
-        this.mBuffer.append(substring);
+        String strSubstring = this.mIndentBuffer.substring(0, i);
+        this.mBuffer.append(strSubstring);
+        this.mBuffer.append(strSubstring);
         this.mBuffer.append(str);
         this.mBuffer.append(ShaderAssembler.NEWLINE);
     }

@@ -22,7 +22,6 @@ import kotlin.collections.MapsKt__MapsKt;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class SwitchKt {
     public static final EventsInit switchEvents(final State state) {
@@ -30,12 +29,12 @@ public abstract class SwitchKt {
         final EventsImpl eventsImpl = new EventsImpl() { // from class: com.android.systemui.kairos.SwitchKt$switchEvents$$inlined$mapImpl$1
             @Override // com.android.systemui.kairos.internal.EventsImpl
             public final ActivationResult activate(EvalScope evalScope, Schedulable schedulable) {
-                ActivationResult activate = ((StateImpl) state.getInit$frameworks__base__packages__SystemUI__utils__kairos__android_common__kairos().connect(evalScope)).changes.activate(evalScope, schedulable);
-                if (activate == null) {
+                ActivationResult activationResultActivate = ((StateImpl) state.getInit$frameworks__base__packages__SystemUI__utils__kairos__android_common__kairos().connect(evalScope)).changes.activate(evalScope, schedulable);
+                if (activationResultActivate == null) {
                     return null;
                 }
-                NodeConnection nodeConnection = activate.connection;
-                return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, Function3.this), nodeConnection.schedulerUpstream), activate.needsEval);
+                NodeConnection nodeConnection = activationResultActivate.connection;
+                return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, switchKt$$ExternalSyntheticLambda3), nodeConnection.schedulerUpstream), activationResultActivate.needsEval);
             }
         };
         final MuxDeferredKt$switchDeferredImplSingle$patches$1 muxDeferredKt$switchDeferredImplSingle$patches$1 = new Function3() { // from class: com.android.systemui.kairos.internal.MuxDeferredKt$switchDeferredImplSingle$patches$1
@@ -43,32 +42,32 @@ public abstract class SwitchKt {
             public final Object invoke(Object obj, Object obj2, Object obj3) {
                 ((Number) obj3).intValue();
                 Maybe.Companion.getClass();
-                return new Single(Maybe.Present.m2573boximpl((EventsImpl) obj2)).getEntries();
+                return new Single(Maybe.Present.m2590boximpl((EventsImpl) obj2)).getEntries();
             }
         };
         final EventsImpl eventsImpl2 = new EventsImpl() { // from class: com.android.systemui.kairos.SwitchKt$switchEvents$$inlined$switchDeferredImplSingle$default$1
             @Override // com.android.systemui.kairos.internal.EventsImpl
             public final ActivationResult activate(EvalScope evalScope, Schedulable schedulable) {
-                ActivationResult activate = eventsImpl.activate(evalScope, schedulable);
-                if (activate == null) {
+                ActivationResult activationResultActivate = eventsImpl.activate(evalScope, schedulable);
+                if (activationResultActivate == null) {
                     return null;
                 }
-                NodeConnection nodeConnection = activate.connection;
-                return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, Function3.this), nodeConnection.schedulerUpstream), activate.needsEval);
+                NodeConnection nodeConnection = activationResultActivate.connection;
+                return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, muxDeferredKt$switchDeferredImplSingle$patches$1), nodeConnection.schedulerUpstream), activationResultActivate.needsEval);
             }
         };
-        final MuxLifecycle switchDeferredImpl = MuxDeferredKt.switchDeferredImpl(new Function1() { // from class: com.android.systemui.kairos.SwitchKt$switchEvents$$inlined$switchDeferredImplSingle$default$2
+        final MuxLifecycle muxLifecycleSwitchDeferredImpl = MuxDeferredKt.switchDeferredImpl(new Function1() { // from class: com.android.systemui.kairos.SwitchKt$switchEvents$$inlined$switchDeferredImplSingle$default$2
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 EvalScope evalScope = (EvalScope) obj;
-                return new Single((EventsImpl) EventsKt.getInit((Events) ((StateImpl) State.this.getInit$frameworks__base__packages__SystemUI__utils__kairos__android_common__kairos().connect(evalScope)).store.getCurrentWithEpoch(evalScope).getFirst()).connect(evalScope)).getEntries();
+                return new Single((EventsImpl) EventsKt.getInit((Events) ((StateImpl) state.getInit$frameworks__base__packages__SystemUI__utils__kairos__android_common__kairos().connect(evalScope)).store.getCurrentWithEpoch(evalScope).getFirst()).connect(evalScope)).getEntries();
             }
         }, new Function1() { // from class: com.android.systemui.kairos.internal.MuxDeferredKt$switchDeferredImplSingle$switchDeferredImpl$2
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                return EventsImpl.this;
+            public final Object mo781invoke(Object obj) {
+                return eventsImpl2;
             }
         }, new SingletonMapK.Factory());
         final String str = null;
@@ -86,12 +85,12 @@ public abstract class SwitchKt {
         return new EventsInit(new Init(null, new InitKt$constInit$1(new EventsImpl() { // from class: com.android.systemui.kairos.internal.MuxDeferredKt$switchDeferredImplSingle$$inlined$mapImpl$1
             @Override // com.android.systemui.kairos.internal.EventsImpl
             public final ActivationResult activate(EvalScope evalScope, Schedulable schedulable) {
-                ActivationResult activate = switchDeferredImpl.activate(evalScope, schedulable);
-                if (activate == null) {
+                ActivationResult activationResultActivate = muxLifecycleSwitchDeferredImpl.activate(evalScope, schedulable);
+                if (activationResultActivate == null) {
                     return null;
                 }
-                NodeConnection nodeConnection = activate.connection;
-                return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, Function3.this), nodeConnection.schedulerUpstream), activate.needsEval);
+                NodeConnection nodeConnection = activationResultActivate.connection;
+                return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, function3), nodeConnection.schedulerUpstream), activationResultActivate.needsEval);
             }
         })));
     }

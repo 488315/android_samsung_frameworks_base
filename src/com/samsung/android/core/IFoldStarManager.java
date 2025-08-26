@@ -121,9 +121,9 @@ public interface IFoldStarManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IFoldStarManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IFoldStarManager)) {
-                return (IFoldStarManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IFoldStarManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IFoldStarManager)) {
+                return (IFoldStarManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -176,73 +176,73 @@ public interface IFoldStarManager extends IInterface {
                 return true;
             }
             if (i == 8) {
-                IFoldStarCallback asInterface = IFoldStarCallback.Stub.asInterface(parcel.readStrongBinder());
+                IFoldStarCallback iFoldStarCallbackAsInterface = IFoldStarCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                registerFoldStarCallback(asInterface);
+                registerFoldStarCallback(iFoldStarCallbackAsInterface);
                 parcel2.writeNoException();
             } else if (i == 9) {
-                IFoldStarCallback asInterface2 = IFoldStarCallback.Stub.asInterface(parcel.readStrongBinder());
+                IFoldStarCallback iFoldStarCallbackAsInterface2 = IFoldStarCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                unregisterFoldStarCallback(asInterface2);
+                unregisterFoldStarCallback(iFoldStarCallbackAsInterface2);
                 parcel2.writeNoException();
             } else if (i == 101) {
-                int readInt = parcel.readInt();
-                HashMap readHashMap = parcel.readHashMap(getClass().getClassLoader());
-                boolean readBoolean = parcel.readBoolean();
+                int i3 = parcel.readInt();
+                HashMap hashMap = parcel.readHashMap(getClass().getClassLoader());
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                setDisplayCompatPackages(readInt, readHashMap, readBoolean);
+                setDisplayCompatPackages(i3, hashMap, z);
                 parcel2.writeNoException();
             } else if (i == 102) {
-                int readInt2 = parcel.readInt();
-                int readInt3 = parcel.readInt();
-                HashMap readHashMap2 = parcel.readHashMap(getClass().getClassLoader());
+                int i4 = parcel.readInt();
+                int i5 = parcel.readInt();
+                HashMap hashMap2 = parcel.readHashMap(getClass().getClassLoader());
                 parcel.enforceNoDataAvail();
-                Map displayCompatPackages = getDisplayCompatPackages(readInt2, readInt3, readHashMap2);
+                Map displayCompatPackages = getDisplayCompatPackages(i4, i5, hashMap2);
                 parcel2.writeNoException();
                 parcel2.writeMap(displayCompatPackages);
             } else if (i == 201) {
-                int readInt4 = parcel.readInt();
-                HashMap readHashMap3 = parcel.readHashMap(getClass().getClassLoader());
-                boolean readBoolean2 = parcel.readBoolean();
+                int i6 = parcel.readInt();
+                HashMap hashMap3 = parcel.readHashMap(getClass().getClassLoader());
+                boolean z2 = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                setFixedAspectRatioPackages(readInt4, readHashMap3, readBoolean2);
+                setFixedAspectRatioPackages(i6, hashMap3, z2);
                 parcel2.writeNoException();
             } else if (i == 202) {
-                int readInt5 = parcel.readInt();
-                int readInt6 = parcel.readInt();
-                HashMap readHashMap4 = parcel.readHashMap(getClass().getClassLoader());
+                int i7 = parcel.readInt();
+                int i8 = parcel.readInt();
+                HashMap hashMap4 = parcel.readHashMap(getClass().getClassLoader());
                 parcel.enforceNoDataAvail();
-                Map fixedAspectRatioPackages = getFixedAspectRatioPackages(readInt5, readInt6, readHashMap4);
+                Map fixedAspectRatioPackages = getFixedAspectRatioPackages(i7, i8, hashMap4);
                 parcel2.writeNoException();
                 parcel2.writeMap(fixedAspectRatioPackages);
             } else {
                 switch (i) {
                     case 301:
-                        int readInt7 = parcel.readInt();
-                        boolean readBoolean3 = parcel.readBoolean();
+                        int i9 = parcel.readInt();
+                        boolean z3 = parcel.readBoolean();
                         parcel.enforceNoDataAvail();
-                        setAllAppContinuityMode(readInt7, readBoolean3);
+                        setAllAppContinuityMode(i9, z3);
                         parcel2.writeNoException();
                         break;
                     case 302:
-                        boolean readBoolean4 = parcel.readBoolean();
+                        boolean z4 = parcel.readBoolean();
                         parcel.enforceNoDataAvail();
-                        setFrontScreenOnWhenAppContinuityMode(readBoolean4);
+                        setFrontScreenOnWhenAppContinuityMode(z4);
                         parcel2.writeNoException();
                         break;
                     case 303:
-                        boolean readBoolean5 = parcel.readBoolean();
-                        boolean readBoolean6 = parcel.readBoolean();
+                        boolean z5 = parcel.readBoolean();
+                        boolean z6 = parcel.readBoolean();
                         parcel.enforceNoDataAvail();
-                        initAppContinuityValueWhenReset(readBoolean5, readBoolean6);
+                        initAppContinuityValueWhenReset(z5, z6);
                         parcel2.writeNoException();
                         break;
                     case 304:
-                        String readString = parcel.readString();
-                        int readInt8 = parcel.readInt();
-                        boolean readBoolean7 = parcel.readBoolean();
+                        String string = parcel.readString();
+                        int i10 = parcel.readInt();
+                        boolean z7 = parcel.readBoolean();
                         parcel.enforceNoDataAvail();
-                        setAppContinuityMode(readString, readInt8, readBoolean7);
+                        setAppContinuityMode(string, i10, z7);
                         parcel2.writeNoException();
                         break;
                     default:
@@ -270,165 +270,165 @@ public interface IFoldStarManager extends IInterface {
 
             @Override // com.samsung.android.core.IFoldStarManager
             public void registerFoldStarCallback(IFoldStarCallback iFoldStarCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IFoldStarManager.DESCRIPTOR);
-                    obtain.writeStrongInterface(iFoldStarCallback);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IFoldStarManager.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iFoldStarCallback);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.core.IFoldStarManager
             public void unregisterFoldStarCallback(IFoldStarCallback iFoldStarCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IFoldStarManager.DESCRIPTOR);
-                    obtain.writeStrongInterface(iFoldStarCallback);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IFoldStarManager.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iFoldStarCallback);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.core.IFoldStarManager
             public void setDisplayCompatPackages(int i, Map map, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IFoldStarManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeMap(map);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(101, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IFoldStarManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeMap(map);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(101, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.core.IFoldStarManager
             public Map getDisplayCompatPackages(int i, int i2, Map map) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IFoldStarManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeMap(map);
-                    this.mRemote.transact(102, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readHashMap(getClass().getClassLoader());
+                    parcelObtain.writeInterfaceToken(IFoldStarManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeMap(map);
+                    this.mRemote.transact(102, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readHashMap(getClass().getClassLoader());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.core.IFoldStarManager
             public void setFixedAspectRatioPackages(int i, Map map, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IFoldStarManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeMap(map);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(201, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IFoldStarManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeMap(map);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(201, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.core.IFoldStarManager
             public Map getFixedAspectRatioPackages(int i, int i2, Map map) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IFoldStarManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeMap(map);
-                    this.mRemote.transact(202, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readHashMap(getClass().getClassLoader());
+                    parcelObtain.writeInterfaceToken(IFoldStarManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeMap(map);
+                    this.mRemote.transact(202, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readHashMap(getClass().getClassLoader());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.core.IFoldStarManager
             public void setAllAppContinuityMode(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IFoldStarManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(301, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IFoldStarManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(301, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.core.IFoldStarManager
             public void setFrontScreenOnWhenAppContinuityMode(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IFoldStarManager.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(302, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IFoldStarManager.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(302, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.core.IFoldStarManager
             public void initAppContinuityValueWhenReset(boolean z, boolean z2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IFoldStarManager.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    this.mRemote.transact(303, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IFoldStarManager.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    this.mRemote.transact(303, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.core.IFoldStarManager
             public void setAppContinuityMode(String str, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IFoldStarManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(304, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IFoldStarManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(304, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

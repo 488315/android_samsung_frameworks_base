@@ -89,11 +89,11 @@ class DESBase {
     }
 
     protected void desFunc(int[] iArr, byte[] bArr, int i, byte[] bArr2, int i2) {
-        int bigEndianToInt = Pack.bigEndianToInt(bArr, i);
-        int bigEndianToInt2 = Pack.bigEndianToInt(bArr, i + 4);
-        int i3 = ((bigEndianToInt >>> 4) ^ bigEndianToInt2) & 252645135;
-        int i4 = bigEndianToInt2 ^ i3;
-        int i5 = bigEndianToInt ^ (i3 << 4);
+        int iBigEndianToInt = Pack.bigEndianToInt(bArr, i);
+        int iBigEndianToInt2 = Pack.bigEndianToInt(bArr, i + 4);
+        int i3 = ((iBigEndianToInt >>> 4) ^ iBigEndianToInt2) & 252645135;
+        int i4 = iBigEndianToInt2 ^ i3;
+        int i5 = iBigEndianToInt ^ (i3 << 4);
         int i6 = ((i5 >>> 16) ^ i4) & 65535;
         int i7 = i4 ^ i6;
         int i8 = i5 ^ (i6 << 16);

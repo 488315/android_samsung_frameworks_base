@@ -3,6 +3,7 @@ package android.text;
 import android.graphics.BaseCanvas;
 import android.graphics.Paint;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+import android.util.Log;
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.GrowingArrayUtils;
 import java.lang.reflect.Array;
@@ -64,11 +65,11 @@ public class SpannableStringBuilder implements CharSequence, GetChars, Spannable
         if (i3 < 0) {
             throw new StringIndexOutOfBoundsException();
         }
-        char[] newUnpaddedCharArray = ArrayUtils.newUnpaddedCharArray(GrowingArrayUtils.growSize(i3));
-        this.mText = newUnpaddedCharArray;
+        char[] cArrNewUnpaddedCharArray = ArrayUtils.newUnpaddedCharArray(GrowingArrayUtils.growSize(i3));
+        this.mText = cArrNewUnpaddedCharArray;
         this.mGapStart = i3;
-        this.mGapLength = newUnpaddedCharArray.length - i3;
-        TextUtils.getChars(charSequence, i, i2, newUnpaddedCharArray, 0);
+        this.mGapLength = cArrNewUnpaddedCharArray.length - i3;
+        TextUtils.getChars(charSequence, i, i2, cArrNewUnpaddedCharArray, 0);
         this.mSpanCount = 0;
         this.mSpanInsertCount = 0;
         this.mSpans = EmptyArray.OBJECT;
@@ -128,13 +129,13 @@ public class SpannableStringBuilder implements CharSequence, GetChars, Spannable
         if (i + 1 <= length) {
             return;
         }
-        char[] newUnpaddedCharArray = ArrayUtils.newUnpaddedCharArray(GrowingArrayUtils.growSize(i));
-        System.arraycopy(this.mText, 0, newUnpaddedCharArray, 0, this.mGapStart);
-        int length2 = newUnpaddedCharArray.length;
+        char[] cArrNewUnpaddedCharArray = ArrayUtils.newUnpaddedCharArray(GrowingArrayUtils.growSize(i));
+        System.arraycopy(this.mText, 0, cArrNewUnpaddedCharArray, 0, this.mGapStart);
+        int length2 = cArrNewUnpaddedCharArray.length;
         int i2 = length2 - length;
         int i3 = length - (this.mGapStart + this.mGapLength);
-        System.arraycopy(this.mText, length - i3, newUnpaddedCharArray, length2 - i3, i3);
-        this.mText = newUnpaddedCharArray;
+        System.arraycopy(this.mText, length - i3, cArrNewUnpaddedCharArray, length2 - i3, i3);
+        this.mText = cArrNewUnpaddedCharArray;
         int i4 = this.mGapLength + i2;
         this.mGapLength = i4;
         if (i4 < 1) {
@@ -158,112 +159,74 @@ public class SpannableStringBuilder implements CharSequence, GetChars, Spannable
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:23:0x005e  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x0063  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x0067  */
+    /* JADX WARN: Removed duplicated region for block: B:31:0x005e  */
+    /* JADX WARN: Removed duplicated region for block: B:33:0x0063  */
+    /* JADX WARN: Removed duplicated region for block: B:35:0x0067  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private void moveGapTo(int r11) {
-        /*
-            r10 = this;
-            int r0 = r10.mGapStart
-            if (r11 != r0) goto L5
-            return
-        L5:
-            int r0 = r10.length()
-            r1 = 0
-            if (r11 != r0) goto Le
-            r0 = 1
-            goto Lf
-        Le:
-            r0 = r1
-        Lf:
-            int r2 = r10.mGapStart
-            if (r11 >= r2) goto L1f
-            int r3 = r2 - r11
-            char[] r4 = r10.mText
-            int r5 = r10.mGapLength
-            int r2 = r2 + r5
-            int r2 = r2 - r3
-            java.lang.System.arraycopy(r4, r11, r4, r2, r3)
-            goto L2a
-        L1f:
-            int r3 = r11 - r2
-            char[] r4 = r10.mText
-            int r5 = r10.mGapLength
-            int r5 = r5 + r11
-            int r5 = r5 - r3
-            java.lang.System.arraycopy(r4, r5, r4, r2, r3)
-        L2a:
-            int r2 = r10.mSpanCount
-            if (r2 == 0) goto L86
-        L2e:
-            int r2 = r10.mSpanCount
-            if (r1 >= r2) goto L7f
-            int[] r2 = r10.mSpanStarts
-            r3 = r2[r1]
-            int[] r4 = r10.mSpanEnds
-            r5 = r4[r1]
-            int r6 = r10.mGapStart
-            if (r3 <= r6) goto L41
-            int r7 = r10.mGapLength
-            int r3 = r3 - r7
-        L41:
-            r7 = 3
-            r8 = 2
-            if (r3 <= r11) goto L49
-            int r9 = r10.mGapLength
-        L47:
-            int r3 = r3 + r9
-            goto L5c
-        L49:
-            if (r3 != r11) goto L5c
-            int[] r9 = r10.mSpanFlags
-            r9 = r9[r1]
-            r9 = r9 & 240(0xf0, float:3.36E-43)
-            int r9 = r9 >> 4
-            if (r9 == r8) goto L59
-            if (r0 == 0) goto L5c
-            if (r9 != r7) goto L5c
-        L59:
-            int r9 = r10.mGapLength
-            goto L47
-        L5c:
-            if (r5 <= r6) goto L61
-            int r6 = r10.mGapLength
-            int r5 = r5 - r6
-        L61:
-            if (r5 <= r11) goto L67
-            int r6 = r10.mGapLength
-        L65:
-            int r5 = r5 + r6
-            goto L78
-        L67:
-            if (r5 != r11) goto L78
-            int[] r6 = r10.mSpanFlags
-            r6 = r6[r1]
-            r6 = r6 & 15
-            if (r6 == r8) goto L75
-            if (r0 == 0) goto L78
-            if (r6 != r7) goto L78
-        L75:
-            int r6 = r10.mGapLength
-            goto L65
-        L78:
-            r2[r1] = r3
-            r4[r1] = r5
-            int r1 = r1 + 1
-            goto L2e
-        L7f:
-            int r0 = r10.treeRoot()
-            r10.calcMax(r0)
-        L86:
-            r10.mGapStart = r11
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.text.SpannableStringBuilder.moveGapTo(int):void");
+    private void moveGapTo(int i) {
+        int i2;
+        int i3;
+        int i4;
+        int i5;
+        if (i == this.mGapStart) {
+            return;
+        }
+        boolean z = i == length();
+        int i6 = this.mGapStart;
+        if (i < i6) {
+            int i7 = i6 - i;
+            char[] cArr = this.mText;
+            System.arraycopy(cArr, i, cArr, (i6 + this.mGapLength) - i7, i7);
+        } else {
+            int i8 = i - i6;
+            char[] cArr2 = this.mText;
+            System.arraycopy(cArr2, (this.mGapLength + i) - i8, cArr2, i6, i8);
+        }
+        if (this.mSpanCount != 0) {
+            for (int i9 = 0; i9 < this.mSpanCount; i9++) {
+                int[] iArr = this.mSpanStarts;
+                int i10 = iArr[i9];
+                int[] iArr2 = this.mSpanEnds;
+                int i11 = iArr2[i9];
+                int i12 = this.mGapStart;
+                if (i10 > i12) {
+                    i10 -= this.mGapLength;
+                }
+                if (i10 > i) {
+                    i3 = this.mGapLength;
+                } else {
+                    if (i10 == i && ((i2 = (this.mSpanFlags[i9] & 240) >> 4) == 2 || (z && i2 == 3))) {
+                        i3 = this.mGapLength;
+                    }
+                    if (i11 > i12) {
+                        i11 -= this.mGapLength;
+                    }
+                    if (i11 <= i) {
+                        i5 = this.mGapLength;
+                    } else if (i11 == i && ((i4 = this.mSpanFlags[i9] & 15) == 2 || (z && i4 == 3))) {
+                        i5 = this.mGapLength;
+                    } else {
+                        iArr[i9] = i10;
+                        iArr2[i9] = i11;
+                    }
+                    i11 += i5;
+                    iArr[i9] = i10;
+                    iArr2[i9] = i11;
+                }
+                i10 += i3;
+                if (i11 > i12) {
+                }
+                if (i11 <= i) {
+                }
+                i11 += i5;
+                iArr[i9] = i10;
+                iArr2[i9] = i11;
+            }
+            calcMax(treeRoot());
+        }
+        this.mGapStart = i;
     }
 
     @Override // android.text.Editable
@@ -278,11 +241,11 @@ public class SpannableStringBuilder implements CharSequence, GetChars, Spannable
 
     @Override // android.text.Editable
     public SpannableStringBuilder delete(int i, int i2) {
-        SpannableStringBuilder replace = replace(i, i2, "", 0, 0);
+        SpannableStringBuilder spannableStringBuilderReplace = replace(i, i2, "", 0, 0);
         if (this.mGapLength > length() * 2) {
             resizeFor(length());
         }
-        return replace;
+        return spannableStringBuilderReplace;
     }
 
     @Override // android.text.Editable
@@ -559,79 +522,79 @@ public class SpannableStringBuilder implements CharSequence, GetChars, Spannable
         int i5;
         CharSequence charSequence2;
         int i6;
-        int i7;
+        int selectionEnd;
         SpannableStringBuilder spannableStringBuilder;
         SpannableStringBuilder spannableStringBuilder2 = this;
-        int i8 = i;
-        int i9 = i2;
-        spannableStringBuilder2.checkRange("replace", i8, i9);
+        int i7 = i;
+        int i8 = i2;
+        spannableStringBuilder2.checkRange("replace", i7, i8);
         int length = spannableStringBuilder2.mFilters.length;
         boolean z = false;
         CharSequence charSequence3 = charSequence;
-        int i10 = i3;
-        int i11 = i4;
-        int i12 = 0;
-        while (i12 < length) {
-            int i13 = i10;
+        int i9 = i3;
+        int length2 = i4;
+        int i10 = 0;
+        while (i10 < length) {
+            int i11 = i9;
             SpannableStringBuilder spannableStringBuilder3 = spannableStringBuilder2;
-            int i14 = i9;
-            int i15 = i13;
-            int i16 = i11;
-            int i17 = i8;
+            int i12 = i8;
+            int i13 = i11;
+            int i14 = length2;
+            int i15 = i7;
             CharSequence charSequence4 = charSequence3;
-            CharSequence filter = spannableStringBuilder2.mFilters[i12].filter(charSequence4, i15, i16, spannableStringBuilder3, i17, i14);
-            i8 = i17;
-            if (filter != null) {
-                charSequence3 = filter;
-                i11 = filter.length();
-                i15 = 0;
+            CharSequence charSequenceFilter = spannableStringBuilder2.mFilters[i10].filter(charSequence4, i13, i14, spannableStringBuilder3, i15, i12);
+            i7 = i15;
+            if (charSequenceFilter != null) {
+                charSequence3 = charSequenceFilter;
+                length2 = charSequenceFilter.length();
+                i13 = 0;
             } else {
-                i11 = i16;
+                length2 = i14;
                 charSequence3 = charSequence4;
             }
-            i12++;
+            i10++;
             spannableStringBuilder2 = spannableStringBuilder3;
-            i10 = i15;
-            i9 = i2;
+            i9 = i13;
+            i8 = i2;
         }
-        int i18 = i11;
+        int i16 = length2;
         CharSequence charSequence5 = charSequence3;
-        int i19 = i10;
+        int i17 = i9;
         SpannableStringBuilder spannableStringBuilder4 = spannableStringBuilder2;
-        int i20 = i2 - i8;
-        int i21 = i18 - i19;
-        if (i20 == 0 && i21 == 0 && !hasNonExclusiveExclusiveSpanAt(charSequence5, i19)) {
+        int i18 = i2 - i7;
+        int i19 = i16 - i17;
+        if (i18 == 0 && i19 == 0 && !hasNonExclusiveExclusiveSpanAt(charSequence5, i17)) {
             return spannableStringBuilder4;
         }
-        TextWatcher[] textWatcherArr = (TextWatcher[]) spannableStringBuilder4.getSpans(i8, i8 + i20, TextWatcher.class);
-        spannableStringBuilder4.sendBeforeTextChanged(textWatcherArr, i8, i20, i21);
+        TextWatcher[] textWatcherArr = (TextWatcher[]) spannableStringBuilder4.getSpans(i7, i7 + i18, TextWatcher.class);
+        spannableStringBuilder4.sendBeforeTextChanged(textWatcherArr, i7, i18, i19);
         boolean z2 = true;
-        boolean z3 = (i20 == 0 || i21 == 0) ? false : true;
+        boolean z3 = (i18 == 0 || i19 == 0) ? false : true;
         if (z3) {
             int selectionStart = Selection.getSelectionStart(spannableStringBuilder4);
-            i5 = i18;
+            i5 = i16;
             charSequence2 = charSequence5;
-            i7 = Selection.getSelectionEnd(spannableStringBuilder4);
+            selectionEnd = Selection.getSelectionEnd(spannableStringBuilder4);
             i6 = selectionStart;
         } else {
-            i5 = i18;
+            i5 = i16;
             charSequence2 = charSequence5;
             i6 = 0;
-            i7 = 0;
+            selectionEnd = 0;
         }
-        spannableStringBuilder4.change(i8, i2, charSequence2, i19, i5);
-        int i22 = i8;
+        spannableStringBuilder4.change(i7, i2, charSequence2, i17, i5);
+        int i20 = i7;
         if (z3) {
-            if (i6 > i22 && i6 < i2) {
-                int intExact = i22 + Math.toIntExact(((i6 - i22) * i21) / i20);
+            if (i6 > i20 && i6 < i2) {
+                int intExact = i20 + Math.toIntExact(((i6 - i20) * i19) / i18);
                 setSpan(false, Selection.SELECTION_START, intExact, intExact, 34, true);
                 z = true;
             }
-            if (i7 <= i22 || i7 >= i2) {
+            if (selectionEnd <= i20 || selectionEnd >= i2) {
                 spannableStringBuilder = this;
                 z2 = z;
             } else {
-                int intExact2 = i22 + Math.toIntExact(((i7 - i22) * i21) / i20);
+                int intExact2 = i20 + Math.toIntExact(((selectionEnd - i20) * i19) / i18);
                 spannableStringBuilder = this;
                 spannableStringBuilder.setSpan(false, Selection.SELECTION_END, intExact2, intExact2, 34, true);
             }
@@ -641,9 +604,9 @@ public class SpannableStringBuilder implements CharSequence, GetChars, Spannable
         } else {
             spannableStringBuilder = this;
         }
-        spannableStringBuilder.sendTextChanged(textWatcherArr, i22, i20, i21);
+        spannableStringBuilder.sendTextChanged(textWatcherArr, i20, i18, i19);
         spannableStringBuilder.sendAfterTextChanged(textWatcherArr);
-        spannableStringBuilder.sendToSpanWatchers(i22, i2, i21 - i20);
+        spannableStringBuilder.sendToSpanWatchers(i20, i2, i19 - i18);
         return spannableStringBuilder;
     }
 
@@ -659,28 +622,111 @@ public class SpannableStringBuilder implements CharSequence, GetChars, Spannable
         return false;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:32:0x0059, code lost:
-    
-        if ((r2 & 16384) != 16384) goto L35;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:35:0x0061, code lost:
-    
-        if ((r2 & 32768) != 32768) goto L40;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x004b  */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x0068  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0071  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x0051  */
+    /* JADX WARN: Removed duplicated region for block: B:29:0x004b  */
+    /* JADX WARN: Removed duplicated region for block: B:31:0x0051  */
+    /* JADX WARN: Removed duplicated region for block: B:42:0x0068  */
+    /* JADX WARN: Removed duplicated region for block: B:43:0x0071  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private void sendToSpanWatchers(int r13, int r14, int r15) {
-        /*
-            Method dump skipped, instructions count: 176
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.text.SpannableStringBuilder.sendToSpanWatchers(int, int, int):void");
+    private void sendToSpanWatchers(int i, int i2, int i3) {
+        boolean z;
+        int i4;
+        int i5;
+        SpannableStringBuilder spannableStringBuilder;
+        int i6 = 0;
+        while (i6 < this.mSpanCount) {
+            int i7 = this.mSpanFlags[i6];
+            if ((i7 & 2048) != 0) {
+                spannableStringBuilder = this;
+            } else {
+                int i8 = this.mSpanStarts[i6];
+                int i9 = this.mSpanEnds[i6];
+                int i10 = this.mGapStart;
+                if (i8 > i10) {
+                    i8 -= this.mGapLength;
+                }
+                int i11 = i8;
+                if (i9 > i10) {
+                    i9 -= this.mGapLength;
+                }
+                int i12 = i9;
+                int i13 = i2 + i3;
+                boolean z2 = true;
+                if (i11 <= i13) {
+                    if (i11 >= i && ((i11 != i || (i7 & 4096) != 4096) && (i11 != i13 || (i7 & 8192) != 8192))) {
+                        z = true;
+                    }
+                    i4 = i11;
+                    if (i12 <= i13) {
+                    }
+                    z2 = z;
+                    i5 = i12;
+                    if (z2) {
+                    }
+                    int[] iArr = spannableStringBuilder.mSpanFlags;
+                    iArr[i6] = iArr[i6] & (-61441);
+                } else if (i3 != 0) {
+                    i4 = i11 - i3;
+                    z = true;
+                    if (i12 <= i13) {
+                        if (i12 < i || ((i12 == i && (i7 & 16384) == 16384) || (i12 == i13 && (i7 & 32768) == 32768))) {
+                        }
+                        i5 = i12;
+                        if (z2) {
+                        }
+                        int[] iArr2 = spannableStringBuilder.mSpanFlags;
+                        iArr2[i6] = iArr2[i6] & (-61441);
+                    } else if (i3 != 0) {
+                        i5 = i12 - i3;
+                        if (z2) {
+                            spannableStringBuilder = this;
+                            spannableStringBuilder.sendSpanChanged(this.mSpans[i6], i4, i5, i11, i12);
+                        } else {
+                            spannableStringBuilder = this;
+                        }
+                        int[] iArr22 = spannableStringBuilder.mSpanFlags;
+                        iArr22[i6] = iArr22[i6] & (-61441);
+                    }
+                    z2 = z;
+                    i5 = i12;
+                    if (z2) {
+                    }
+                    int[] iArr222 = spannableStringBuilder.mSpanFlags;
+                    iArr222[i6] = iArr222[i6] & (-61441);
+                }
+                z = false;
+                i4 = i11;
+                if (i12 <= i13) {
+                }
+                z2 = z;
+                i5 = i12;
+                if (z2) {
+                }
+                int[] iArr2222 = spannableStringBuilder.mSpanFlags;
+                iArr2222[i6] = iArr2222[i6] & (-61441);
+            }
+            i6++;
+            this = spannableStringBuilder;
+        }
+        SpannableStringBuilder spannableStringBuilder2 = this;
+        for (int i14 = 0; i14 < spannableStringBuilder2.mSpanCount; i14++) {
+            int[] iArr3 = spannableStringBuilder2.mSpanFlags;
+            int i15 = iArr3[i14];
+            if ((i15 & 2048) != 0) {
+                iArr3[i14] = i15 & (-2049);
+                int i16 = spannableStringBuilder2.mSpanStarts[i14];
+                int i17 = spannableStringBuilder2.mSpanEnds[i14];
+                int i18 = spannableStringBuilder2.mGapStart;
+                if (i16 > i18) {
+                    i16 -= spannableStringBuilder2.mGapLength;
+                }
+                if (i17 > i18) {
+                    i17 -= spannableStringBuilder2.mGapLength;
+                }
+                spannableStringBuilder2.sendSpanAdded(spannableStringBuilder2.mSpans[i14], i16, i17);
+            }
+        }
     }
 
     @Override // android.text.Spannable
@@ -688,22 +734,142 @@ public class SpannableStringBuilder implements CharSequence, GetChars, Spannable
         setSpan(true, obj, i, i2, i3, true);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:28:0x0097  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x00af  */
-    /* JADX WARN: Removed duplicated region for block: B:46:0x0136  */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x013c  */
-    /* JADX WARN: Removed duplicated region for block: B:50:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:51:0x009b  */
+    /* JADX WARN: Removed duplicated region for block: B:34:0x0097  */
+    /* JADX WARN: Removed duplicated region for block: B:36:0x009b  */
+    /* JADX WARN: Removed duplicated region for block: B:45:0x00af  */
+    /* JADX WARN: Removed duplicated region for block: B:58:0x0136  */
+    /* JADX WARN: Removed duplicated region for block: B:60:0x013c  */
+    /* JADX WARN: Removed duplicated region for block: B:64:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private void setSpan(boolean r10, java.lang.Object r11, int r12, int r13, int r14, boolean r15) {
-        /*
-            Method dump skipped, instructions count: 323
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.text.SpannableStringBuilder.setSpan(boolean, java.lang.Object, int, int, int, boolean):void");
+    private void setSpan(boolean z, Object obj, int i, int i2, int i3, boolean z2) {
+        int i4;
+        int i5;
+        int i6;
+        int i7;
+        int i8;
+        IdentityHashMap<Object, Integer> identityHashMap;
+        int iTreeRoot;
+        Integer num;
+        checkRange("setSpan", i, i2);
+        int i9 = (i3 & 240) >> 4;
+        if (isInvalidParagraph(i, i9)) {
+            if (z2) {
+                throw new RuntimeException("PARAGRAPH span must start at paragraph boundary (" + i + " follows " + charAt(i - 1) + NavigationBarInflaterView.KEY_CODE_END);
+            }
+            return;
+        }
+        int i10 = i3 & 15;
+        if (isInvalidParagraph(i2, i10)) {
+            if (z2) {
+                throw new RuntimeException("PARAGRAPH span must end at paragraph boundary (" + i2 + " follows " + charAt(i2 - 1) + NavigationBarInflaterView.KEY_CODE_END);
+            }
+            return;
+        }
+        if (i9 == 2 && i10 == 1 && i == i2) {
+            if (z) {
+                Log.e(TAG, "SPAN_EXCLUSIVE_EXCLUSIVE spans cannot have a zero length");
+                return;
+            }
+            return;
+        }
+        int i11 = this.mGapStart;
+        if (i > i11) {
+            i5 = this.mGapLength;
+        } else if (i == i11 && (i9 == 2 || (i9 == 3 && i == length()))) {
+            i5 = this.mGapLength;
+        } else {
+            i4 = i;
+            i6 = this.mGapStart;
+            if (i2 <= i6) {
+                i8 = this.mGapLength;
+            } else if (i2 == i6 && (i10 == 2 || (i10 == 3 && i2 == length()))) {
+                i8 = this.mGapLength;
+            } else {
+                i7 = i2;
+                identityHashMap = this.mIndexOfSpan;
+                if (identityHashMap == null && (num = identityHashMap.get(obj)) != null) {
+                    int iIntValue = num.intValue();
+                    int[] iArr = this.mSpanStarts;
+                    int i12 = iArr[iIntValue];
+                    int[] iArr2 = this.mSpanEnds;
+                    int i13 = iArr2[iIntValue];
+                    int i14 = this.mGapStart;
+                    if (i12 > i14) {
+                        i12 -= this.mGapLength;
+                    }
+                    if (i13 > i14) {
+                        i13 -= this.mGapLength;
+                    }
+                    iArr[iIntValue] = i4;
+                    iArr2[iIntValue] = i7;
+                    this.mSpanFlags[iIntValue] = i3;
+                    if (z) {
+                        restoreInvariants();
+                        sendSpanChanged(obj, i12, i13, i, i2);
+                        return;
+                    }
+                    return;
+                }
+                this.mSpans = GrowingArrayUtils.append(this.mSpans, this.mSpanCount, obj);
+                this.mSpanStarts = GrowingArrayUtils.append(this.mSpanStarts, this.mSpanCount, i4);
+                this.mSpanEnds = GrowingArrayUtils.append(this.mSpanEnds, this.mSpanCount, i7);
+                this.mSpanFlags = GrowingArrayUtils.append(this.mSpanFlags, this.mSpanCount, i3);
+                this.mSpanOrder = GrowingArrayUtils.append(this.mSpanOrder, this.mSpanCount, this.mSpanInsertCount);
+                invalidateIndex(this.mSpanCount);
+                this.mSpanCount++;
+                this.mSpanInsertCount++;
+                iTreeRoot = (treeRoot() * 2) + 1;
+                if (this.mSpanMax.length < iTreeRoot) {
+                    this.mSpanMax = new int[iTreeRoot];
+                }
+                if (z) {
+                    restoreInvariants();
+                    sendSpanAdded(obj, i, i2);
+                    return;
+                }
+                return;
+            }
+            i7 = i8 + i2;
+            identityHashMap = this.mIndexOfSpan;
+            if (identityHashMap == null) {
+            }
+            this.mSpans = GrowingArrayUtils.append(this.mSpans, this.mSpanCount, obj);
+            this.mSpanStarts = GrowingArrayUtils.append(this.mSpanStarts, this.mSpanCount, i4);
+            this.mSpanEnds = GrowingArrayUtils.append(this.mSpanEnds, this.mSpanCount, i7);
+            this.mSpanFlags = GrowingArrayUtils.append(this.mSpanFlags, this.mSpanCount, i3);
+            this.mSpanOrder = GrowingArrayUtils.append(this.mSpanOrder, this.mSpanCount, this.mSpanInsertCount);
+            invalidateIndex(this.mSpanCount);
+            this.mSpanCount++;
+            this.mSpanInsertCount++;
+            iTreeRoot = (treeRoot() * 2) + 1;
+            if (this.mSpanMax.length < iTreeRoot) {
+            }
+            if (z) {
+            }
+        }
+        i4 = i5 + i;
+        i6 = this.mGapStart;
+        if (i2 <= i6) {
+        }
+        i7 = i8 + i2;
+        identityHashMap = this.mIndexOfSpan;
+        if (identityHashMap == null) {
+        }
+        this.mSpans = GrowingArrayUtils.append(this.mSpans, this.mSpanCount, obj);
+        this.mSpanStarts = GrowingArrayUtils.append(this.mSpanStarts, this.mSpanCount, i4);
+        this.mSpanEnds = GrowingArrayUtils.append(this.mSpanEnds, this.mSpanCount, i7);
+        this.mSpanFlags = GrowingArrayUtils.append(this.mSpanFlags, this.mSpanCount, i3);
+        this.mSpanOrder = GrowingArrayUtils.append(this.mSpanOrder, this.mSpanCount, this.mSpanInsertCount);
+        invalidateIndex(this.mSpanCount);
+        this.mSpanCount++;
+        this.mSpanInsertCount++;
+        iTreeRoot = (treeRoot() * 2) + 1;
+        if (this.mSpanMax.length < iTreeRoot) {
+        }
+        if (z) {
+        }
     }
 
     private boolean isInvalidParagraph(int i, int i2) {
@@ -717,12 +883,12 @@ public class SpannableStringBuilder implements CharSequence, GetChars, Spannable
 
     @Override // android.text.Spannable
     public void removeSpan(Object obj, int i) {
-        Integer remove;
+        Integer numRemove;
         IdentityHashMap<Object, Integer> identityHashMap = this.mIndexOfSpan;
-        if (identityHashMap == null || (remove = identityHashMap.remove(obj)) == null) {
+        if (identityHashMap == null || (numRemove = identityHashMap.remove(obj)) == null) {
             return;
         }
-        removeSpan(remove.intValue(), i);
+        removeSpan(numRemove.intValue(), i);
     }
 
     private int resolveGap(int i) {
@@ -771,212 +937,121 @@ public class SpannableStringBuilder implements CharSequence, GetChars, Spannable
         if (this.mSpanCount == 0) {
             return (T[]) ArrayUtils.emptyArray(cls);
         }
-        int countSpans = countSpans(i, i2, cls, treeRoot());
-        if (countSpans == 0) {
+        int iCountSpans = countSpans(i, i2, cls, treeRoot());
+        if (iCountSpans == 0) {
             return (T[]) ArrayUtils.emptyArray(cls);
         }
-        T[] tArr = (T[]) ((Object[]) Array.newInstance((Class<?>) cls, countSpans));
-        int[] obtain = z ? obtain(countSpans) : EmptyArray.INT;
-        int[] obtain2 = z ? obtain(countSpans) : EmptyArray.INT;
-        getSpansRec(i, i2, cls, treeRoot(), tArr, obtain, obtain2, 0, z);
+        T[] tArr = (T[]) ((Object[]) Array.newInstance((Class<?>) cls, iCountSpans));
+        int[] iArrObtain = z ? obtain(iCountSpans) : EmptyArray.INT;
+        int[] iArrObtain2 = z ? obtain(iCountSpans) : EmptyArray.INT;
+        getSpansRec(i, i2, cls, treeRoot(), tArr, iArrObtain, iArrObtain2, 0, z);
         if (z) {
-            sort(tArr, obtain, obtain2);
-            recycle(obtain);
-            recycle(obtain2);
+            sort(tArr, iArrObtain, iArrObtain2);
+            recycle(iArrObtain);
+            recycle(iArrObtain2);
         }
         return tArr;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x001f  */
-    /* JADX WARN: Removed duplicated region for block: B:33:? A[RETURN, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:9:0x001a  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private int countSpans(int r6, int r7, java.lang.Class r8, int r9) {
-        /*
-            r5 = this;
-            r0 = r9 & 1
-            if (r0 == 0) goto L1a
-            int r1 = leftChild(r9)
-            int[] r2 = r5.mSpanMax
-            r2 = r2[r1]
-            int r3 = r5.mGapStart
-            if (r2 <= r3) goto L13
-            int r3 = r5.mGapLength
-            int r2 = r2 - r3
-        L13:
-            if (r2 < r6) goto L1a
-            int r1 = r5.countSpans(r6, r7, r8, r1)
-            goto L1b
-        L1a:
-            r1 = 0
-        L1b:
-            int r2 = r5.mSpanCount
-            if (r9 >= r2) goto L5a
-            int[] r2 = r5.mSpanStarts
-            r2 = r2[r9]
-            int r3 = r5.mGapStart
-            if (r2 <= r3) goto L2a
-            int r4 = r5.mGapLength
-            int r2 = r2 - r4
-        L2a:
-            if (r2 > r7) goto L5a
-            int[] r4 = r5.mSpanEnds
-            r4 = r4[r9]
-            if (r4 <= r3) goto L35
-            int r3 = r5.mGapLength
-            int r4 = r4 - r3
-        L35:
-            if (r4 < r6) goto L4f
-            if (r2 == r4) goto L3f
-            if (r6 == r7) goto L3f
-            if (r2 == r7) goto L4f
-            if (r4 == r6) goto L4f
-        L3f:
-            java.lang.Class<java.lang.Object> r2 = java.lang.Object.class
-            if (r2 == r8) goto L4d
-            java.lang.Object[] r2 = r5.mSpans
-            r2 = r2[r9]
-            boolean r2 = r8.isInstance(r2)
-            if (r2 == 0) goto L4f
-        L4d:
-            int r1 = r1 + 1
-        L4f:
-            if (r0 == 0) goto L5a
-            int r9 = rightChild(r9)
-            int r5 = r5.countSpans(r6, r7, r8, r9)
-            int r1 = r1 + r5
-        L5a:
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.text.SpannableStringBuilder.countSpans(int, int, java.lang.Class, int):int");
+    private int countSpans(int i, int i2, Class cls, int i3) {
+        int iCountSpans;
+        int i4 = i3 & 1;
+        if (i4 == 0) {
+            iCountSpans = 0;
+        } else {
+            int iLeftChild = leftChild(i3);
+            int i5 = this.mSpanMax[iLeftChild];
+            if (i5 > this.mGapStart) {
+                i5 -= this.mGapLength;
+            }
+            if (i5 >= i) {
+                iCountSpans = countSpans(i, i2, cls, iLeftChild);
+            }
+        }
+        if (i3 >= this.mSpanCount) {
+            return iCountSpans;
+        }
+        int i6 = this.mSpanStarts[i3];
+        int i7 = this.mGapStart;
+        if (i6 > i7) {
+            i6 -= this.mGapLength;
+        }
+        if (i6 > i2) {
+            return iCountSpans;
+        }
+        int i8 = this.mSpanEnds[i3];
+        if (i8 > i7) {
+            i8 -= this.mGapLength;
+        }
+        if (i8 >= i && ((i6 == i8 || i == i2 || (i6 != i2 && i8 != i)) && (Object.class == cls || cls.isInstance(this.mSpans[i3])))) {
+            iCountSpans++;
+        }
+        return i4 != 0 ? iCountSpans + countSpans(i, i2, cls, rightChild(i3)) : iCountSpans;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0034  */
+    /* JADX WARN: Removed duplicated region for block: B:9:0x002a  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private <T> int getSpansRec(int r13, int r14, java.lang.Class<T> r15, int r16, T[] r17, int[] r18, int[] r19, int r20, boolean r21) {
-        /*
-            r12 = this;
-            r0 = r16
-            r11 = r0 & 1
-            if (r11 == 0) goto L2a
-            int r5 = leftChild(r0)
-            int[] r1 = r12.mSpanMax
-            r1 = r1[r5]
-            int r2 = r12.mGapStart
-            if (r1 <= r2) goto L15
-            int r2 = r12.mGapLength
-            int r1 = r1 - r2
-        L15:
-            if (r1 < r13) goto L2a
-            r1 = r12
-            r2 = r13
-            r3 = r14
-            r4 = r15
-            r6 = r17
-            r7 = r18
-            r8 = r19
-            r9 = r20
-            r10 = r21
-            int r5 = r1.getSpansRec(r2, r3, r4, r5, r6, r7, r8, r9, r10)
-            goto L2e
-        L2a:
-            r6 = r17
-            r5 = r20
-        L2e:
-            int r7 = r12.mSpanCount
-            if (r0 < r7) goto L34
-            goto Lb3
-        L34:
-            int[] r7 = r12.mSpanStarts
-            r7 = r7[r0]
-            int r8 = r12.mGapStart
-            if (r7 <= r8) goto L3f
-            int r9 = r12.mGapLength
-            int r7 = r7 - r9
-        L3f:
-            if (r7 > r14) goto Lb3
-            int[] r9 = r12.mSpanEnds
-            r9 = r9[r0]
-            if (r9 <= r8) goto L4a
-            int r8 = r12.mGapLength
-            int r9 = r9 - r8
-        L4a:
-            if (r9 < r13) goto L97
-            if (r7 == r9) goto L54
-            if (r13 == r14) goto L54
-            if (r7 == r14) goto L97
-            if (r9 == r13) goto L97
-        L54:
-            java.lang.Class<java.lang.Object> r7 = java.lang.Object.class
-            if (r7 == r15) goto L62
-            java.lang.Object[] r7 = r12.mSpans
-            r7 = r7[r0]
-            boolean r7 = r15.isInstance(r7)
-            if (r7 == 0) goto L97
-        L62:
-            int[] r7 = r12.mSpanFlags
-            r7 = r7[r0]
-            r8 = 16711680(0xff0000, float:2.3418052E-38)
-            r7 = r7 & r8
-            if (r21 == 0) goto L74
-            r18[r5] = r7
-            int[] r7 = r12.mSpanOrder
-            r7 = r7[r0]
-            r19[r5] = r7
-            goto L8e
-        L74:
-            if (r7 == 0) goto L8e
-            r9 = 0
-        L77:
-            if (r9 >= r5) goto L86
-            r10 = r6[r9]
-            int r10 = r12.getSpanFlags(r10)
-            r10 = r10 & r8
-            if (r7 <= r10) goto L83
-            goto L86
-        L83:
-            int r9 = r9 + 1
-            goto L77
-        L86:
-            int r7 = r9 + 1
-            int r8 = r5 - r9
-            java.lang.System.arraycopy(r6, r9, r6, r7, r8)
-            goto L8f
-        L8e:
-            r9 = r5
-        L8f:
-            java.lang.Object[] r7 = r12.mSpans
-            r7 = r7[r0]
-            r6[r9] = r7
-            int r5 = r5 + 1
-        L97:
-            r8 = r5
-            int r5 = r6.length
-            if (r8 >= r5) goto Lb2
-            if (r11 == 0) goto Lb2
-            int r0 = rightChild(r0)
-            r1 = r13
-            r2 = r14
-            r3 = r15
-            r7 = r19
-            r9 = r21
-            r4 = r0
-            r5 = r6
-            r0 = r12
-            r6 = r18
-            int r12 = r0.getSpansRec(r1, r2, r3, r4, r5, r6, r7, r8, r9)
-            return r12
-        Lb2:
-            return r8
-        Lb3:
-            return r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.text.SpannableStringBuilder.getSpansRec(int, int, java.lang.Class, int, java.lang.Object[], int[], int[], int, boolean):int");
+    private <T> int getSpansRec(int i, int i2, Class<T> cls, int i3, T[] tArr, int[] iArr, int[] iArr2, int i4, boolean z) {
+        Object[] objArr;
+        int spansRec;
+        int i5;
+        int i6 = i3 & 1;
+        if (i6 == 0) {
+            objArr = tArr;
+            spansRec = i4;
+        } else {
+            int iLeftChild = leftChild(i3);
+            int i7 = this.mSpanMax[iLeftChild];
+            if (i7 > this.mGapStart) {
+                i7 -= this.mGapLength;
+            }
+            if (i7 >= i) {
+                objArr = tArr;
+                spansRec = getSpansRec(i, i2, cls, iLeftChild, objArr, iArr, iArr2, i4, z);
+            }
+        }
+        if (i3 < this.mSpanCount) {
+            int i8 = this.mSpanStarts[i3];
+            int i9 = this.mGapStart;
+            if (i8 > i9) {
+                i8 -= this.mGapLength;
+            }
+            if (i8 <= i2) {
+                int i10 = this.mSpanEnds[i3];
+                if (i10 > i9) {
+                    i10 -= this.mGapLength;
+                }
+                if (i10 >= i && ((i8 == i10 || i == i2 || (i8 != i2 && i10 != i)) && (Object.class == cls || cls.isInstance(this.mSpans[i3])))) {
+                    int i11 = this.mSpanFlags[i3] & Spanned.SPAN_PRIORITY;
+                    if (z) {
+                        iArr[spansRec] = i11;
+                        iArr2[spansRec] = this.mSpanOrder[i3];
+                    } else {
+                        if (i11 != 0) {
+                            i5 = 0;
+                            while (i5 < spansRec && i11 <= (getSpanFlags(objArr[i5]) & Spanned.SPAN_PRIORITY)) {
+                                i5++;
+                            }
+                            System.arraycopy(objArr, i5, objArr, i5 + 1, spansRec - i5);
+                        }
+                        objArr[i5] = this.mSpans[i3];
+                        spansRec++;
+                    }
+                    i5 = spansRec;
+                    objArr[i5] = this.mSpans[i3];
+                    spansRec++;
+                }
+                int i12 = spansRec;
+                return (i12 >= objArr.length || i6 == 0) ? i12 : getSpansRec(i, i2, cls, rightChild(i3), objArr, iArr, iArr2, i12, z);
+            }
+        }
+        return spansRec;
     }
 
     private static int[] obtain(int i) {
@@ -1112,23 +1187,23 @@ public class SpannableStringBuilder implements CharSequence, GetChars, Spannable
     private int nextSpanTransitionRec(int i, int i2, Class cls, int i3) {
         int i4 = i3 & 1;
         if (i4 != 0) {
-            int leftChild = leftChild(i3);
-            if (resolveGap(this.mSpanMax[leftChild]) > i) {
-                i2 = nextSpanTransitionRec(i, i2, cls, leftChild);
+            int iLeftChild = leftChild(i3);
+            if (resolveGap(this.mSpanMax[iLeftChild]) > i) {
+                i2 = nextSpanTransitionRec(i, i2, cls, iLeftChild);
             }
         }
         if (i3 >= this.mSpanCount) {
             return i2;
         }
-        int resolveGap = resolveGap(this.mSpanStarts[i3]);
-        int resolveGap2 = resolveGap(this.mSpanEnds[i3]);
-        if (resolveGap > i && resolveGap < i2 && cls.isInstance(this.mSpans[i3])) {
-            i2 = resolveGap;
+        int iResolveGap = resolveGap(this.mSpanStarts[i3]);
+        int iResolveGap2 = resolveGap(this.mSpanEnds[i3]);
+        if (iResolveGap > i && iResolveGap < i2 && cls.isInstance(this.mSpans[i3])) {
+            i2 = iResolveGap;
         }
-        if (resolveGap2 <= i || resolveGap2 >= i2 || !cls.isInstance(this.mSpans[i3])) {
-            resolveGap2 = i2;
+        if (iResolveGap2 <= i || iResolveGap2 >= i2 || !cls.isInstance(this.mSpans[i3])) {
+            iResolveGap2 = i2;
         }
-        return (resolveGap >= resolveGap2 || i4 == 0) ? resolveGap2 : nextSpanTransitionRec(i, resolveGap2, cls, rightChild(i3));
+        return (iResolveGap >= iResolveGap2 || i4 == 0) ? iResolveGap2 : nextSpanTransitionRec(i, iResolveGap2, cls, rightChild(i3));
     }
 
     @Override // java.lang.CharSequence
@@ -1244,10 +1319,10 @@ public class SpannableStringBuilder implements CharSequence, GetChars, Spannable
             return;
         }
         int i4 = i2 - i;
-        char[] obtain = TextUtils.obtain(i4);
-        getChars(i, i2, obtain, 0);
-        baseCanvas.drawText(obtain, 0, i4, f, f2, paint);
-        TextUtils.recycle(obtain);
+        char[] cArrObtain = TextUtils.obtain(i4);
+        getChars(i, i2, cArrObtain, 0);
+        baseCanvas.drawText(cArrObtain, 0, i4, f, f2, paint);
+        TextUtils.recycle(cArrObtain);
     }
 
     @Override // android.text.GraphicsOperations
@@ -1265,10 +1340,10 @@ public class SpannableStringBuilder implements CharSequence, GetChars, Spannable
             int i8 = this.mGapLength;
             baseCanvas.drawTextRun(cArr, i + i8, i6, i3 + i8, i5, f, f2, z, paint);
         } else {
-            char[] obtain = TextUtils.obtain(i5);
-            getChars(i3, i4, obtain, 0);
-            baseCanvas.drawTextRun(obtain, i - i3, i6, 0, i5, f, f2, z, paint);
-            TextUtils.recycle(obtain);
+            char[] cArrObtain = TextUtils.obtain(i5);
+            getChars(i3, i4, cArrObtain, 0);
+            baseCanvas.drawTextRun(cArrObtain, i - i3, i6, 0, i5, f, f2, z, paint);
+            TextUtils.recycle(cArrObtain);
         }
     }
 
@@ -1283,11 +1358,11 @@ public class SpannableStringBuilder implements CharSequence, GetChars, Spannable
             return paint.measureText(this.mText, this.mGapLength + i, i2 - i);
         }
         int i4 = i2 - i;
-        char[] obtain = TextUtils.obtain(i4);
-        getChars(i, i2, obtain, 0);
-        float measureText = paint.measureText(obtain, 0, i4);
-        TextUtils.recycle(obtain);
-        return measureText;
+        char[] cArrObtain = TextUtils.obtain(i4);
+        getChars(i, i2, cArrObtain, 0);
+        float fMeasureText = paint.measureText(cArrObtain, 0, i4);
+        TextUtils.recycle(cArrObtain);
+        return fMeasureText;
     }
 
     @Override // android.text.GraphicsOperations
@@ -1301,10 +1376,10 @@ public class SpannableStringBuilder implements CharSequence, GetChars, Spannable
             return paint.getTextWidths(this.mText, this.mGapLength + i, i2 - i, fArr);
         }
         int i4 = i2 - i;
-        char[] obtain = TextUtils.obtain(i4);
-        getChars(i, i2, obtain, 0);
-        int textWidths = paint.getTextWidths(obtain, 0, i4, fArr);
-        TextUtils.recycle(obtain);
+        char[] cArrObtain = TextUtils.obtain(i4);
+        getChars(i, i2, cArrObtain, 0);
+        int textWidths = paint.getTextWidths(cArrObtain, 0, i4, fArr);
+        TextUtils.recycle(cArrObtain);
         return textWidths;
     }
 
@@ -1321,10 +1396,10 @@ public class SpannableStringBuilder implements CharSequence, GetChars, Spannable
             int i9 = this.mGapLength;
             return paint.getTextRunAdvances(cArr, i + i9, i7, i3 + i9, i6, z, fArr, i5);
         }
-        char[] obtain = TextUtils.obtain(i6);
-        getChars(i3, i4, obtain, 0);
-        float textRunAdvances = paint.getTextRunAdvances(obtain, i - i3, i7, 0, i6, z, fArr, i5);
-        TextUtils.recycle(obtain);
+        char[] cArrObtain = TextUtils.obtain(i6);
+        getChars(i3, i4, cArrObtain, 0);
+        float textRunAdvances = paint.getTextRunAdvances(cArrObtain, i - i3, i7, 0, i6, z, fArr, i5);
+        TextUtils.recycle(cArrObtain);
         return textRunAdvances;
     }
 
@@ -1345,10 +1420,10 @@ public class SpannableStringBuilder implements CharSequence, GetChars, Spannable
             int i7 = this.mGapLength;
             return paint.getTextRunCursor(cArr, i + i7, i5, z, i3 + i7, i4) - this.mGapLength;
         }
-        char[] obtain = TextUtils.obtain(i5);
-        getChars(i, i2, obtain, 0);
-        int textRunCursor = paint.getTextRunCursor(obtain, 0, i5, z, i3 - i, i4) + i;
-        TextUtils.recycle(obtain);
+        char[] cArrObtain = TextUtils.obtain(i5);
+        getChars(i, i2, cArrObtain, 0);
+        int textRunCursor = paint.getTextRunCursor(cArrObtain, 0, i5, z, i3 - i, i4) + i;
+        TextUtils.recycle(cArrObtain);
         return textRunCursor;
     }
 
@@ -1389,15 +1464,15 @@ public class SpannableStringBuilder implements CharSequence, GetChars, Spannable
     }
 
     public int hashCode() {
-        int hashCode = (toString().hashCode() * 31) + this.mSpanCount;
+        int iHashCode = (toString().hashCode() * 31) + this.mSpanCount;
         for (int i = 0; i < this.mSpanCount; i++) {
             Object obj = this.mSpans[i];
             if (obj != this) {
-                hashCode = (hashCode * 31) + obj.hashCode();
+                iHashCode = (iHashCode * 31) + obj.hashCode();
             }
-            hashCode = (((((hashCode * 31) + getSpanStart(obj)) * 31) + getSpanEnd(obj)) * 31) + getSpanFlags(obj);
+            iHashCode = (((((iHashCode * 31) + getSpanStart(obj)) * 31) + getSpanEnd(obj)) * 31) + getSpanFlags(obj);
         }
-        return hashCode;
+        return iHashCode;
     }
 
     private int treeRoot() {
@@ -1406,15 +1481,15 @@ public class SpannableStringBuilder implements CharSequence, GetChars, Spannable
 
     private int calcMax(int i) {
         int i2 = i & 1;
-        int calcMax = i2 != 0 ? calcMax(leftChild(i)) : 0;
+        int iCalcMax = i2 != 0 ? calcMax(leftChild(i)) : 0;
         if (i < this.mSpanCount) {
-            calcMax = Math.max(calcMax, this.mSpanEnds[i]);
+            iCalcMax = Math.max(iCalcMax, this.mSpanEnds[i]);
             if (i2 != 0) {
-                calcMax = Math.max(calcMax, calcMax(rightChild(i)));
+                iCalcMax = Math.max(iCalcMax, calcMax(rightChild(i)));
             }
         }
-        this.mSpanMax[i] = calcMax;
-        return calcMax;
+        this.mSpanMax[i] = iCalcMax;
+        return iCalcMax;
     }
 
     private void restoreInvariants() {

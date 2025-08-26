@@ -216,30 +216,30 @@ public class RestrictionEntry implements Parcelable {
 
     public int hashCode() {
         int i;
-        int hashCode;
-        int hashCode2 = 527 + this.mKey.hashCode();
+        int iHashCode;
+        int iHashCode2 = 527 + this.mKey.hashCode();
         String str = this.mCurrentValue;
         if (str != null) {
-            i = hashCode2 * 31;
-            hashCode = str.hashCode();
+            i = iHashCode2 * 31;
+            iHashCode = str.hashCode();
         } else {
             String[] strArr = this.mCurrentValues;
             if (strArr != null) {
                 for (String str2 : strArr) {
                     if (str2 != null) {
-                        hashCode2 = (hashCode2 * 31) + str2.hashCode();
+                        iHashCode2 = (iHashCode2 * 31) + str2.hashCode();
                     }
                 }
-                return hashCode2;
+                return iHashCode2;
             }
             RestrictionEntry[] restrictionEntryArr = this.mRestrictions;
             if (restrictionEntryArr == null) {
-                return hashCode2;
+                return iHashCode2;
             }
-            i = hashCode2 * 31;
-            hashCode = Arrays.hashCode(restrictionEntryArr);
+            i = iHashCode2 * 31;
+            iHashCode = Arrays.hashCode(restrictionEntryArr);
         }
-        return i + hashCode;
+        return i + iHashCode;
     }
 
     public RestrictionEntry(Parcel parcel) {

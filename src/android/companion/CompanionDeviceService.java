@@ -1,7 +1,6 @@
 package android.companion;
 
 import android.app.Service;
-import android.companion.CompanionDeviceService;
 import android.companion.ICompanionDeviceService;
 import android.content.Intent;
 import android.os.Handler;
@@ -96,7 +95,7 @@ public abstract class CompanionDeviceService extends Service {
             this.mMainHandler.postAtFrontOfQueue(new Runnable() { // from class: android.companion.CompanionDeviceService$Stub$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    CompanionDeviceService.Stub.this.lambda$onDeviceAppeared$0(associationInfo);
+                    this.f$0.lambda$onDeviceAppeared$0(associationInfo);
                 }
             });
         }
@@ -111,7 +110,7 @@ public abstract class CompanionDeviceService extends Service {
             this.mMainHandler.postAtFrontOfQueue(new Runnable() { // from class: android.companion.CompanionDeviceService$Stub$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    CompanionDeviceService.Stub.this.lambda$onDeviceDisappeared$1(associationInfo);
+                    this.f$0.lambda$onDeviceDisappeared$1(associationInfo);
                 }
             });
         }
@@ -122,7 +121,7 @@ public abstract class CompanionDeviceService extends Service {
                 this.mMainHandler.postAtFrontOfQueue(new Runnable() { // from class: android.companion.CompanionDeviceService$Stub$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        CompanionDeviceService.Stub.this.lambda$onDevicePresenceEvent$2(devicePresenceEvent);
+                        this.f$0.lambda$onDevicePresenceEvent$2(devicePresenceEvent);
                     }
                 });
             }

@@ -61,6 +61,7 @@ import com.android.systemui.util.SystemUIAnalytics;
 import com.android.systemui.util.leak.LeakReporter;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -69,7 +70,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Supplier;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class QSTileImpl implements QSTile, LifecycleOwner, Dumpable, LockQSTile {
     public final ActivityStarter mActivityStarter;
@@ -101,7 +101,6 @@ public abstract class QSTileImpl implements QSTile, LifecycleOwner, Dumpable, Lo
     public final LifecycleRegistry mLifecycle = new LifecycleRegistry(this);
     public final AtomicBoolean mIsDestroyed = new AtomicBoolean(false);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AnimationIcon extends ResourceIcon {
         public final int mAnimatedResId;
 
@@ -121,7 +120,6 @@ public abstract class QSTileImpl implements QSTile, LifecycleOwner, Dumpable, Lo
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DrawableIconWithRes extends DrawableIcon {
         public final int mId;
 
@@ -141,7 +139,6 @@ public abstract class QSTileImpl implements QSTile, LifecycleOwner, Dumpable, Lo
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class H extends Handler {
         protected static final int STALE = 11;
 
@@ -186,10 +183,10 @@ public abstract class QSTileImpl implements QSTile, LifecycleOwner, Dumpable, Lo
                         LogLevel logLevel = LogLevel.DEBUG;
                         QSLogger$$ExternalSyntheticLambda0 qSLogger$$ExternalSyntheticLambda0 = new QSLogger$$ExternalSyntheticLambda0(2);
                         LogBuffer logBuffer = qSLogger.buffer;
-                        LogMessage obtain = logBuffer.obtain("QSLog", logLevel, qSLogger$$ExternalSyntheticLambda0, null);
-                        ((LogMessageImpl) obtain).str1 = str2;
-                        ((LogMessageImpl) obtain).int1 = i2;
-                        logBuffer.commit(obtain);
+                        LogMessage logMessageObtain = logBuffer.obtain("QSLog", logLevel, qSLogger$$ExternalSyntheticLambda0, null);
+                        ((LogMessageImpl) logMessageObtain).str1 = str2;
+                        ((LogMessageImpl) logMessageObtain).int1 = i2;
+                        logBuffer.commit(logMessageObtain);
                         qSTileImpl.handleClick((Expandable) message.obj);
                         return;
                     }
@@ -204,10 +201,10 @@ public abstract class QSTileImpl implements QSTile, LifecycleOwner, Dumpable, Lo
                         LogLevel logLevel2 = LogLevel.DEBUG;
                         QSLogger$$ExternalSyntheticLambda0 qSLogger$$ExternalSyntheticLambda02 = new QSLogger$$ExternalSyntheticLambda0(12);
                         LogBuffer logBuffer2 = qSLogger2.buffer;
-                        LogMessage obtain2 = logBuffer2.obtain("QSLog", logLevel2, qSLogger$$ExternalSyntheticLambda02, null);
-                        ((LogMessageImpl) obtain2).str1 = str3;
-                        ((LogMessageImpl) obtain2).int1 = i3;
-                        logBuffer2.commit(obtain2);
+                        LogMessage logMessageObtain2 = logBuffer2.obtain("QSLog", logLevel2, qSLogger$$ExternalSyntheticLambda02, null);
+                        ((LogMessageImpl) logMessageObtain2).str1 = str3;
+                        ((LogMessageImpl) logMessageObtain2).int1 = i3;
+                        logBuffer2.commit(logMessageObtain2);
                         qSTileImpl.handleSecondaryClick((Expandable) message.obj);
                         return;
                     }
@@ -222,10 +219,10 @@ public abstract class QSTileImpl implements QSTile, LifecycleOwner, Dumpable, Lo
                         LogLevel logLevel3 = LogLevel.DEBUG;
                         QSLogger$$ExternalSyntheticLambda0 qSLogger$$ExternalSyntheticLambda03 = new QSLogger$$ExternalSyntheticLambda0(13);
                         LogBuffer logBuffer3 = qSLogger3.buffer;
-                        LogMessage obtain3 = logBuffer3.obtain("QSLog", logLevel3, qSLogger$$ExternalSyntheticLambda03, null);
-                        ((LogMessageImpl) obtain3).str1 = str4;
-                        ((LogMessageImpl) obtain3).int1 = i4;
-                        logBuffer3.commit(obtain3);
+                        LogMessage logMessageObtain3 = logBuffer3.obtain("QSLog", logLevel3, qSLogger$$ExternalSyntheticLambda03, null);
+                        ((LogMessageImpl) logMessageObtain3).str1 = str4;
+                        ((LogMessageImpl) logMessageObtain3).int1 = i4;
+                        logBuffer3.commit(logMessageObtain3);
                         qSTileImpl.handleLongClick((Expandable) message.obj);
                         return;
                     }
@@ -246,7 +243,7 @@ public abstract class QSTileImpl implements QSTile, LifecycleOwner, Dumpable, Lo
                         if (message.arg1 == 0) {
                             z = false;
                         }
-                        QSTileImpl.m2899$$Nest$mhandleSetListeningInternal(qSTileImpl, obj, z);
+                        QSTileImpl.m2916$$Nest$mhandleSetListeningInternal(qSTileImpl, obj, z);
                         return;
                     }
                     if (i == 11) {
@@ -256,7 +253,7 @@ public abstract class QSTileImpl implements QSTile, LifecycleOwner, Dumpable, Lo
                     if (i == 12) {
                         qSTileImpl.handleInitialize();
                     } else if (i == 102) {
-                        QSTileImpl.m2898$$Nest$mhandleSaveTileIcon(qSTileImpl);
+                        QSTileImpl.m2915$$Nest$mhandleSaveTileIcon(qSTileImpl);
                     } else {
                         throw new IllegalArgumentException("Unknown msg: " + message.what);
                     }
@@ -271,7 +268,6 @@ public abstract class QSTileImpl implements QSTile, LifecycleOwner, Dumpable, Lo
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ResourceIcon extends QSTile.Icon {
         public static final SparseArray ICONS = new SparseArray();
         public final int mResId;
@@ -281,16 +277,14 @@ public abstract class QSTileImpl implements QSTile, LifecycleOwner, Dumpable, Lo
         }
 
         public static synchronized QSTile.Icon get(int i) {
-            QSTile.Icon icon;
-            synchronized (ResourceIcon.class) {
-                SparseArray sparseArray = ICONS;
-                icon = (QSTile.Icon) sparseArray.get(i);
-                if (icon == null) {
-                    icon = new ResourceIcon(i);
-                    sparseArray.put(i, icon);
-                }
+            QSTile.Icon resourceIcon;
+            SparseArray sparseArray = ICONS;
+            resourceIcon = (QSTile.Icon) sparseArray.get(i);
+            if (resourceIcon == null) {
+                resourceIcon = new ResourceIcon(i);
+                sparseArray.put(i, resourceIcon);
             }
-            return icon;
+            return resourceIcon;
         }
 
         public final boolean equals(Object obj) {
@@ -318,7 +312,7 @@ public abstract class QSTileImpl implements QSTile, LifecycleOwner, Dumpable, Lo
     }
 
     /* renamed from: -$$Nest$mhandleSaveTileIcon, reason: not valid java name */
-    public static void m2898$$Nest$mhandleSaveTileIcon(QSTileImpl qSTileImpl) {
+    public static void m2915$$Nest$mhandleSaveTileIcon(QSTileImpl qSTileImpl) throws IOException {
         Drawable tileIconDrawable = qSTileImpl.getTileIconDrawable();
         int tileIconSize = ((SecQSPanelResourcePicker) Dependency.sDependency.getDependencyInner(SecQSPanelResourcePicker.class)).getTileIconSize(qSTileImpl.mContext);
         if (qSTileImpl.mTileSpec == null || tileIconDrawable == null) {
@@ -326,20 +320,20 @@ public abstract class QSTileImpl implements QSTile, LifecycleOwner, Dumpable, Lo
         }
         CircleFramedTileIcon.mContext = qSTileImpl.mContext;
         CircleFramedTileIcon circleFramedTileIcon = new CircleFramedTileIcon(tileIconDrawable, tileIconSize);
-        Bitmap createBitmap = Bitmap.createBitmap(tileIconSize, tileIconSize, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(createBitmap);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(tileIconSize, tileIconSize, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmapCreateBitmap);
         circleFramedTileIcon.setBounds(0, 0, tileIconSize, tileIconSize);
         circleFramedTileIcon.draw(canvas);
         String str = qSTileImpl.mContext.getFilesDir() + "/tiles/";
-        StringBuilder m = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str);
-        m.append(qSTileImpl.getTileIconFileName(qSTileImpl.mTileSpec));
-        String sb = m.toString();
+        StringBuilder sbM = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str);
+        sbM.append(qSTileImpl.getTileIconFileName(qSTileImpl.mTileSpec));
+        String string = sbM.toString();
         File file = new File(str);
         if (file.exists() || file.mkdir()) {
             try {
-                FileOutputStream fileOutputStream = new FileOutputStream(sb);
+                FileOutputStream fileOutputStream = new FileOutputStream(string);
                 try {
-                    createBitmap.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream);
+                    bitmapCreateBitmap.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream);
                     fileOutputStream.flush();
                     fileOutputStream.close();
                 } finally {
@@ -351,7 +345,7 @@ public abstract class QSTileImpl implements QSTile, LifecycleOwner, Dumpable, Lo
     }
 
     /* renamed from: -$$Nest$mhandleSetListeningInternal, reason: not valid java name */
-    public static void m2899$$Nest$mhandleSetListeningInternal(QSTileImpl qSTileImpl, Object obj, boolean z) {
+    public static void m2916$$Nest$mhandleSetListeningInternal(QSTileImpl qSTileImpl, Object obj, boolean z) {
         Handler handler = qSTileImpl.mUiHandler;
         String str = qSTileImpl.TAG;
         boolean z2 = qSTileImpl.DEBUG;
@@ -396,12 +390,12 @@ public abstract class QSTileImpl implements QSTile, LifecycleOwner, Dumpable, Lo
         this.mActivityStarter = activityStarter;
         atomicInteger.set(qSHost.getUserId());
         this.mState = newTileState();
-        QSTile.State newTileState = newTileState();
-        this.mTmpState = newTileState;
+        QSTile.State stateNewTileState = newTileState();
+        this.mTmpState = stateNewTileState;
         QSTile.State state = this.mState;
         String str = this.mTileSpec;
         state.spec = str;
-        newTileState.spec = str;
+        stateNewTileState.spec = str;
         handler.post(new QSTileImpl$$ExternalSyntheticLambda0(this, 0));
         if (QpRune.QUICK_SUBSCREEN_PANEL) {
             this.mSubscreenContext = ((SubscreenQsPanelController) Dependency.sDependency.getDependencyInner(SubscreenQsPanelController.class)).mContext;
@@ -411,13 +405,13 @@ public abstract class QSTileImpl implements QSTile, LifecycleOwner, Dumpable, Lo
     public static Bitmap getTileIconBitmap(Drawable drawable, Context context) {
         if (drawable != null) {
             try {
-                Drawable newDrawable = drawable instanceof ScalingDrawableWrapper ? ((ScalingDrawableWrapper) drawable).mCloneDrawable : drawable.getConstantState().newDrawable();
+                Drawable drawableNewDrawable = drawable instanceof ScalingDrawableWrapper ? ((ScalingDrawableWrapper) drawable).mCloneDrawable : drawable.getConstantState().newDrawable();
                 int tileIconSize = ((SecQSPanelResourcePicker) Dependency.sDependency.getDependencyInner(SecQSPanelResourcePicker.class)).getTileIconSize(context);
-                Bitmap createBitmap = Bitmap.createBitmap(tileIconSize, tileIconSize, Bitmap.Config.ARGB_8888);
-                Canvas canvas = new Canvas(createBitmap);
-                newDrawable.setBounds(0, 0, tileIconSize, tileIconSize);
-                newDrawable.draw(canvas);
-                return createBitmap;
+                Bitmap bitmapCreateBitmap = Bitmap.createBitmap(tileIconSize, tileIconSize, Bitmap.Config.ARGB_8888);
+                Canvas canvas = new Canvas(bitmapCreateBitmap);
+                drawableNewDrawable.setBounds(0, 0, tileIconSize, tileIconSize);
+                drawableNewDrawable.draw(canvas);
+                return bitmapCreateBitmap;
             } catch (Exception unused) {
             }
         }
@@ -432,13 +426,13 @@ public abstract class QSTileImpl implements QSTile, LifecycleOwner, Dumpable, Lo
     public final void checkIfRestrictionEnforcedByAdminOnly(QSTile.State state, String str) {
         Context context = this.mContext;
         QSHost qSHost = this.mHost;
-        RestrictedLockUtils.EnforcedAdmin checkIfRestrictionEnforced = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(context, str, qSHost.getUserId());
-        if (checkIfRestrictionEnforced == null || RestrictedLockUtilsInternal.hasBaseUserRestriction(this.mContext, str, qSHost.getUserId())) {
+        RestrictedLockUtils.EnforcedAdmin enforcedAdminCheckIfRestrictionEnforced = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(context, str, qSHost.getUserId());
+        if (enforcedAdminCheckIfRestrictionEnforced == null || RestrictedLockUtilsInternal.hasBaseUserRestriction(this.mContext, str, qSHost.getUserId())) {
             state.disabledByPolicy = false;
             this.mEnforcedAdmin = null;
         } else {
             state.disabledByPolicy = true;
-            this.mEnforcedAdmin = checkIfRestrictionEnforced;
+            this.mEnforcedAdmin = enforcedAdminCheckIfRestrictionEnforced;
         }
     }
 
@@ -465,7 +459,7 @@ public abstract class QSTileImpl implements QSTile, LifecycleOwner, Dumpable, Lo
         return this.mCurrentTileUser.get();
     }
 
-    public final Uri getIconUri() {
+    public final Uri getIconUri() throws IOException {
         Uri uriForFile = FileProvider.getUriForFile(this.mContext, LeakReporter.FILEPROVIDER_AUTHORITY, new File(new File(this.mContext.getFilesDir(), "tiles"), getTileIconFileName(this.mTileSpec)));
         this.mContext.grantUriPermission("com.sec.android.app.launcher", uriForFile, 1);
         return uriForFile;
@@ -521,10 +515,10 @@ public abstract class QSTileImpl implements QSTile, LifecycleOwner, Dumpable, Lo
         }
         ArrayList arrayList = new ArrayList();
         String lowerCase = searchTitle.trim().toLowerCase();
-        String replaceAll = lowerCase.trim().toLowerCase().replaceAll("-", "");
+        String strReplaceAll = lowerCase.trim().toLowerCase().replaceAll("-", "");
         arrayList.add(lowerCase);
-        if (!lowerCase.equals(replaceAll)) {
-            arrayList.add(replaceAll);
+        if (!lowerCase.equals(strReplaceAll)) {
+            arrayList.add(strReplaceAll);
         }
         return arrayList;
     }
@@ -558,12 +552,12 @@ public abstract class QSTileImpl implements QSTile, LifecycleOwner, Dumpable, Lo
     }
 
     public final String getTileIconFileName(String str) {
-        int lastIndexOf;
+        int iLastIndexOf;
         if (!this.mTileSpec.startsWith("custom(")) {
             return AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, "_tile_icon.png");
         }
         ComponentName componentFromSpec = CustomTile.getComponentFromSpec(str);
-        return (componentFromSpec == null || (lastIndexOf = componentFromSpec.toString().lastIndexOf(46)) == -1) ? str.concat("_tile_icon.png") : AbstractResolvableFuture$$ExternalSyntheticOutline0.m(componentFromSpec.toString().substring(lastIndexOf + 1), "_tile_icon.png");
+        return (componentFromSpec == null || (iLastIndexOf = componentFromSpec.toString().lastIndexOf(46)) == -1) ? str.concat("_tile_icon.png") : AbstractResolvableFuture$$ExternalSyntheticOutline0.m(componentFromSpec.toString().substring(iLastIndexOf + 1), "_tile_icon.png");
     }
 
     @Override // com.android.systemui.plugins.qs.QSTile, com.android.systemui.plugins.qs.LockQSTile
@@ -591,11 +585,11 @@ public abstract class QSTileImpl implements QSTile, LifecycleOwner, Dumpable, Lo
         LogLevel logLevel = LogLevel.DEBUG;
         QSLogger$$ExternalSyntheticLambda0 qSLogger$$ExternalSyntheticLambda0 = new QSLogger$$ExternalSyntheticLambda0(4);
         LogBuffer logBuffer = qSLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("QSLog", logLevel, qSLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("QSLog", logLevel, qSLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = str;
         logMessageImpl.str2 = "Handle destroy";
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         if (this.mListeners.size() != 0) {
             handleSetListening(false);
             this.mListeners.clear();
@@ -620,12 +614,12 @@ public abstract class QSTileImpl implements QSTile, LifecycleOwner, Dumpable, Lo
         if (this.mHost.shouldUnavailableByKnox(this.mTileSpec)) {
             this.mTmpState.state = 0;
         }
-        boolean copyTo = this.mTmpState.copyTo(this.mState);
+        boolean zCopyTo = this.mTmpState.copyTo(this.mState);
         if (this.mReadyState == 1) {
             this.mReadyState = 2;
-            copyTo = true;
+            zCopyTo = true;
         }
-        if (copyTo) {
+        if (zCopyTo) {
             QSLogger qSLogger = this.mQSLogger;
             String str = this.mTileSpec;
             QSTile.State state = this.mState;
@@ -633,15 +627,15 @@ public abstract class QSTileImpl implements QSTile, LifecycleOwner, Dumpable, Lo
             LogLevel logLevel = LogLevel.VERBOSE;
             QSLogger$$ExternalSyntheticLambda0 qSLogger$$ExternalSyntheticLambda0 = new QSLogger$$ExternalSyntheticLambda0(1);
             LogBuffer logBuffer = qSLogger.buffer;
-            LogMessage obtain = logBuffer.obtain("QSLog", logLevel, qSLogger$$ExternalSyntheticLambda0, null);
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+            LogMessage logMessageObtain = logBuffer.obtain("QSLog", logLevel, qSLogger$$ExternalSyntheticLambda0, null);
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
             logMessageImpl.str1 = str;
             CharSequence charSequence = state.label;
             logMessageImpl.str2 = charSequence != null ? charSequence.toString() : null;
             QSTile.Icon icon = state.icon;
             logMessageImpl.str3 = icon != null ? icon.toString() : null;
             logMessageImpl.int1 = state.state;
-            logBuffer.commit(obtain);
+            logBuffer.commit(logMessageObtain);
             handleStateChanged();
             boolean z = this instanceof CustomTile;
             String str2 = this.mTileSpec;
@@ -655,7 +649,7 @@ public abstract class QSTileImpl implements QSTile, LifecycleOwner, Dumpable, Lo
                 this.mOldIconDrawable = getTileIconDrawable();
             }
         }
-        if (copyTo) {
+        if (zCopyTo) {
             sendTileStatusLog();
         }
         this.mHandler.removeMessages(11);
@@ -675,11 +669,11 @@ public abstract class QSTileImpl implements QSTile, LifecycleOwner, Dumpable, Lo
             LogLevel logLevel = LogLevel.VERBOSE;
             QSLogger$$ExternalSyntheticLambda0 qSLogger$$ExternalSyntheticLambda0 = new QSLogger$$ExternalSyntheticLambda0(3);
             LogBuffer logBuffer = qSLogger.buffer;
-            LogMessage obtain = logBuffer.obtain("QSLog", logLevel, qSLogger$$ExternalSyntheticLambda0, null);
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+            LogMessage logMessageObtain = logBuffer.obtain("QSLog", logLevel, qSLogger$$ExternalSyntheticLambda0, null);
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
             logMessageImpl.bool1 = z;
             logMessageImpl.str1 = str;
-            logBuffer.commit(obtain);
+            logBuffer.commit(logMessageObtain);
         }
     }
 
@@ -747,17 +741,14 @@ public abstract class QSTileImpl implements QSTile, LifecycleOwner, Dumpable, Lo
         LogLevel logLevel = LogLevel.DEBUG;
         QSLogger$$ExternalSyntheticLambda0 qSLogger$$ExternalSyntheticLambda0 = new QSLogger$$ExternalSyntheticLambda0(9);
         LogBuffer logBuffer = qSLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("QSLog", logLevel, qSLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("QSLog", logLevel, qSLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = str;
         logMessageImpl.int1 = i;
         logMessageImpl.str2 = StatusBarState.toString(state);
         logMessageImpl.str3 = QSLogger.toStateString(i2);
-        logBuffer.commit(obtain);
-        if (!QpRune.QUICK_SUBSCREEN_PANEL) {
-            sendEventCDLog("long press");
-            sendRunestoneEventCDLog(SystemUIAnalytics.EID_QUICKTILE_LONG_CLICK);
-        } else if (((DisplayLifecycle) Dependency.sDependency.getDependencyInner(DisplayLifecycle.class)).mIsFolderOpened) {
+        logBuffer.commit(logMessageObtain);
+        if (!QpRune.QUICK_SUBSCREEN_PANEL || ((DisplayLifecycle) Dependency.sDependency.getDependencyInner(DisplayLifecycle.class)).mIsFolderOpened) {
             sendEventCDLog("long press");
             sendRunestoneEventCDLog(SystemUIAnalytics.EID_QUICKTILE_LONG_CLICK);
         }
@@ -822,17 +813,14 @@ public abstract class QSTileImpl implements QSTile, LifecycleOwner, Dumpable, Lo
         LogLevel logLevel = LogLevel.DEBUG;
         QSLogger$$ExternalSyntheticLambda0 qSLogger$$ExternalSyntheticLambda0 = new QSLogger$$ExternalSyntheticLambda0(0);
         LogBuffer logBuffer = qSLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("QSLog", logLevel, qSLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("QSLog", logLevel, qSLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = str;
         logMessageImpl.int1 = i;
         logMessageImpl.str2 = StatusBarState.toString(state);
         logMessageImpl.str3 = QSLogger.toStateString(i2);
-        logBuffer.commit(obtain);
-        if (!QpRune.QUICK_SUBSCREEN_PANEL) {
-            sendEventCDLog("label tap");
-            sendRunestoneEventCDLog(SystemUIAnalytics.EID_QUICKTILE_LABEL_TAP);
-        } else if (((DisplayLifecycle) Dependency.sDependency.getDependencyInner(DisplayLifecycle.class)).mIsFolderOpened) {
+        logBuffer.commit(logMessageObtain);
+        if (!QpRune.QUICK_SUBSCREEN_PANEL || ((DisplayLifecycle) Dependency.sDependency.getDependencyInner(DisplayLifecycle.class)).mIsFolderOpened) {
             sendEventCDLog("label tap");
             sendRunestoneEventCDLog(SystemUIAnalytics.EID_QUICKTILE_LABEL_TAP);
         }
@@ -865,20 +853,20 @@ public abstract class QSTileImpl implements QSTile, LifecycleOwner, Dumpable, Lo
     }
 
     public void showItPolicyToast() {
-        String valueOf = String.valueOf(getTileLabel());
-        if (valueOf.contains("\n")) {
-            valueOf = valueOf.replace("\n", " ");
+        String strValueOf = String.valueOf(getTileLabel());
+        if (strValueOf.contains("\n")) {
+            strValueOf = strValueOf.replace("\n", " ");
         }
         Context context = this.mContext;
-        Toast.makeText(context, context.getString(R.string.quick_settings_it_policy_prevents, valueOf), 0).show();
+        Toast.makeText(context, context.getString(R.string.quick_settings_it_policy_prevents, strValueOf), 0).show();
     }
 
     public final void showItPolicyToastOnSubScreen(Context context) {
-        String valueOf = String.valueOf(getTileLabel());
-        if (valueOf.contains("\n")) {
-            valueOf = valueOf.replace("\n", " ");
+        String strValueOf = String.valueOf(getTileLabel());
+        if (strValueOf.contains("\n")) {
+            strValueOf = strValueOf.replace("\n", " ");
         }
-        Toast.makeText(context, this.mContext.getString(R.string.quick_settings_it_policy_prevents, valueOf), 0).show();
+        Toast.makeText(context, this.mContext.getString(R.string.quick_settings_it_policy_prevents, strValueOf), 0).show();
     }
 
     @Override // com.android.systemui.plugins.qs.QSTile
@@ -909,19 +897,14 @@ public abstract class QSTileImpl implements QSTile, LifecycleOwner, Dumpable, Lo
         LogLevel logLevel = LogLevel.DEBUG;
         QSLogger$$ExternalSyntheticLambda0 qSLogger$$ExternalSyntheticLambda0 = new QSLogger$$ExternalSyntheticLambda0(7);
         LogBuffer logBuffer = qSLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("QSLog", logLevel, qSLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("QSLog", logLevel, qSLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = str;
         logMessageImpl.int1 = i;
         logMessageImpl.str2 = StatusBarState.toString(state);
         logMessageImpl.str3 = QSLogger.toStateString(i2);
-        logBuffer.commit(obtain);
-        if (QpRune.QUICK_SUBSCREEN_PANEL) {
-            if (((DisplayLifecycle) Dependency.sDependency.getDependencyInner(DisplayLifecycle.class)).mIsFolderOpened) {
-                sendEventCDLog("icon tap");
-                sendRunestoneEventCDLog(SystemUIAnalytics.EID_QUICKTILE_ICON_TAP);
-            }
-        } else {
+        logBuffer.commit(logMessageObtain);
+        if (!QpRune.QUICK_SUBSCREEN_PANEL || ((DisplayLifecycle) Dependency.sDependency.getDependencyInner(DisplayLifecycle.class)).mIsFolderOpened) {
             sendEventCDLog("icon tap");
             sendRunestoneEventCDLog(SystemUIAnalytics.EID_QUICKTILE_ICON_TAP);
         }
@@ -931,7 +914,6 @@ public abstract class QSTileImpl implements QSTile, LifecycleOwner, Dumpable, Lo
         this.mHandler.obtainMessage(2, i, 0, expandable).sendToTarget();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DrawableIcon extends QSTile.Icon {
         public final Drawable mDrawable;
         public final Drawable mInvisibleDrawable;

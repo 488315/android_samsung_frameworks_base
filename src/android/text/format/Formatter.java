@@ -80,11 +80,11 @@ public final class Formatter {
     }
 
     private static String deleteFirstFromString(String str, String str2) {
-        int indexOf = str.indexOf(str2);
-        if (indexOf == -1) {
+        int iIndexOf = str.indexOf(str2);
+        if (iIndexOf == -1) {
             return str;
         }
-        return str.substring(0, indexOf) + str.substring(indexOf + str2.length(), str.length());
+        return str.substring(0, iIndexOf) + str.substring(iIndexOf + str2.length(), str.length());
     }
 
     private static String formatMeasureShort(Locale locale, NumberFormat numberFormat, float f, MeasureUnit measureUnit) {
@@ -92,12 +92,12 @@ public final class Formatter {
     }
 
     private static String formatRoundedBytesResult(Context context, RoundedBytesResult roundedBytesResult) {
-        Locale localeFromContext = localeFromContext(context);
-        NumberFormat numberFormatter = getNumberFormatter(localeFromContext, roundedBytesResult.fractionDigits);
+        Locale localeLocaleFromContext = localeFromContext(context);
+        NumberFormat numberFormatter = getNumberFormatter(localeLocaleFromContext, roundedBytesResult.fractionDigits);
         if (roundedBytesResult.units == MeasureUnit.BYTE) {
             return context.getString(R.string.fileSizeSuffix, numberFormatter.format(roundedBytesResult.value), getByteSuffixOverride(context.getResources()));
         }
-        return formatMeasureShort(localeFromContext, numberFormatter, roundedBytesResult.value, roundedBytesResult.units);
+        return formatMeasureShort(localeLocaleFromContext, numberFormatter, roundedBytesResult.value, roundedBytesResult.units);
     }
 
     public static class RoundedBytesResult {
@@ -113,150 +113,80 @@ public final class Formatter {
             this.roundedBytes = j;
         }
 
-        /* JADX WARN: Code restructure failed: missing block: B:45:0x007c, code lost:
-        
-            if ((r20 & 1) != 0) goto L43;
-         */
-        /* JADX WARN: Removed duplicated region for block: B:32:0x0081  */
-        /* JADX WARN: Removed duplicated region for block: B:35:0x0087  */
+        /* JADX WARN: Removed duplicated region for block: B:43:0x007e  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public static android.text.format.Formatter.RoundedBytesResult roundBytes(long r18, int r20) {
-            /*
-                r0 = r18
-                r2 = r20 & 8
-                if (r2 == 0) goto L9
-                r2 = 1024(0x400, float:1.435E-42)
-                goto Lb
-            L9:
-                r2 = 1000(0x3e8, float:1.401E-42)
-            Lb:
-                r3 = 0
-                int r5 = (r0 > r3 ? 1 : (r0 == r3 ? 0 : -1))
-                r6 = 0
-                r7 = 1
-                if (r5 >= 0) goto L15
-                r5 = r7
-                goto L16
-            L15:
-                r5 = r6
-            L16:
-                if (r5 == 0) goto L19
-                long r0 = -r0
-            L19:
-                float r0 = (float) r0
-                android.icu.util.MeasureUnit r1 = android.icu.util.MeasureUnit.BYTE
-                r8 = 1147207680(0x44610000, float:900.0)
-                int r9 = (r0 > r8 ? 1 : (r0 == r8 ? 0 : -1))
-                r10 = 1
-                if (r9 <= 0) goto L2a
-                android.icu.util.MeasureUnit r1 = android.icu.util.MeasureUnit.KILOBYTE
-                long r12 = (long) r2
-                float r9 = (float) r2
-                float r0 = r0 / r9
-                goto L2b
-            L2a:
-                r12 = r10
-            L2b:
-                int r9 = (r0 > r8 ? 1 : (r0 == r8 ? 0 : -1))
-                if (r9 <= 0) goto L35
-                android.icu.util.MeasureUnit r1 = android.icu.util.MeasureUnit.MEGABYTE
-                long r14 = (long) r2
-                long r12 = r12 * r14
-                float r9 = (float) r2
-                float r0 = r0 / r9
-            L35:
-                int r9 = (r0 > r8 ? 1 : (r0 == r8 ? 0 : -1))
-                if (r9 <= 0) goto L3f
-                android.icu.util.MeasureUnit r1 = android.icu.util.MeasureUnit.GIGABYTE
-                long r14 = (long) r2
-                long r12 = r12 * r14
-                float r9 = (float) r2
-                float r0 = r0 / r9
-            L3f:
-                int r9 = (r0 > r8 ? 1 : (r0 == r8 ? 0 : -1))
-                if (r9 <= 0) goto L49
-                android.icu.util.MeasureUnit r1 = android.icu.util.MeasureUnit.TERABYTE
-                long r14 = (long) r2
-                long r12 = r12 * r14
-                float r9 = (float) r2
-                float r0 = r0 / r9
-            L49:
-                int r8 = (r0 > r8 ? 1 : (r0 == r8 ? 0 : -1))
-                if (r8 <= 0) goto L53
-                android.icu.util.MeasureUnit r1 = android.icu.util.MeasureUnit.PETABYTE
-                long r8 = (long) r2
-                long r12 = r12 * r8
-                float r2 = (float) r2
-                float r0 = r0 / r2
-            L53:
-                r14 = r1
-                int r1 = (r12 > r10 ? 1 : (r12 == r10 ? 0 : -1))
-                r2 = 2
-                if (r1 == 0) goto L7e
-                r1 = 1120403456(0x42c80000, float:100.0)
-                int r1 = (r0 > r1 ? 1 : (r0 == r1 ? 0 : -1))
-                if (r1 < 0) goto L60
-                goto L7e
-            L60:
-                r1 = 1065353216(0x3f800000, float:1.0)
-                int r1 = (r0 > r1 ? 1 : (r0 == r1 ? 0 : -1))
-                r8 = 100
-                if (r1 >= 0) goto L6b
-            L68:
-                r15 = r2
-                r7 = r8
-                goto L7f
-            L6b:
-                r1 = 1092616192(0x41200000, float:10.0)
-                int r1 = (r0 > r1 ? 1 : (r0 == r1 ? 0 : -1))
-                if (r1 >= 0) goto L7a
-                r1 = r20 & 1
-                if (r1 == 0) goto L68
-                r1 = 10
-                r15 = r7
-                r7 = r1
-                goto L7f
-            L7a:
-                r1 = r20 & 1
-                if (r1 == 0) goto L68
-            L7e:
-                r15 = r6
-            L7f:
-                if (r5 == 0) goto L82
-                float r0 = -r0
-            L82:
-                r1 = r20 & 2
-                if (r1 != 0) goto L87
-                goto L92
-            L87:
-                float r1 = (float) r7
-                float r1 = r1 * r0
-                int r1 = java.lang.Math.round(r1)
-                long r1 = (long) r1
-                long r1 = r1 * r12
-                long r3 = (long) r7
-                long r3 = r1 / r3
-            L92:
-                r16 = r3
-                android.text.format.Formatter$RoundedBytesResult r12 = new android.text.format.Formatter$RoundedBytesResult
-                r13 = r0
-                r12.<init>(r13, r14, r15, r16)
-                return r12
-            */
-            throw new UnsupportedOperationException("Method not decompiled: android.text.format.Formatter.RoundedBytesResult.roundBytes(long, int):android.text.format.Formatter$RoundedBytesResult");
+        public static RoundedBytesResult roundBytes(long j, int i) {
+            long j2;
+            int i2;
+            long j3 = j;
+            int i3 = (i & 8) != 0 ? 1024 : 1000;
+            int i4 = 1;
+            boolean z = j3 < 0;
+            if (z) {
+                j3 = -j3;
+            }
+            float f = j3;
+            MeasureUnit measureUnit = MeasureUnit.BYTE;
+            if (f > 900.0f) {
+                measureUnit = MeasureUnit.KILOBYTE;
+                j2 = i3;
+                f /= i3;
+            } else {
+                j2 = 1;
+            }
+            if (f > 900.0f) {
+                measureUnit = MeasureUnit.MEGABYTE;
+                j2 *= i3;
+                f /= i3;
+            }
+            if (f > 900.0f) {
+                measureUnit = MeasureUnit.GIGABYTE;
+                j2 *= i3;
+                f /= i3;
+            }
+            if (f > 900.0f) {
+                measureUnit = MeasureUnit.TERABYTE;
+                j2 *= i3;
+                f /= i3;
+            }
+            if (f > 900.0f) {
+                measureUnit = MeasureUnit.PETABYTE;
+                j2 *= i3;
+                f /= i3;
+            }
+            MeasureUnit measureUnit2 = measureUnit;
+            if (j2 == 1 || f >= 100.0f) {
+                i2 = 0;
+            } else if (f >= 1.0f) {
+                if (f < 10.0f) {
+                    if ((i & 1) != 0) {
+                        i2 = 1;
+                        i4 = 10;
+                    }
+                } else if ((i & 1) != 0) {
+                }
+                i2 = 2;
+                i4 = 100;
+            } else {
+                i2 = 2;
+                i4 = 100;
+            }
+            if (z) {
+                f = -f;
+            }
+            return new RoundedBytesResult(f, measureUnit2, i2, (i & 2) != 0 ? (Math.round(i4 * f) * j2) / i4 : 0L);
         }
     }
 
     public static BytesResult formatBytes(Resources resources, long j, int i) {
-        RoundedBytesResult roundBytes = RoundedBytesResult.roundBytes(j, i);
+        RoundedBytesResult roundedBytesResultRoundBytes = RoundedBytesResult.roundBytes(j, i);
         Locale locale = resources.getConfiguration().getLocales().get(0);
-        NumberFormat numberFormatter = getNumberFormatter(locale, roundBytes.fractionDigits);
-        String format = numberFormatter.format(roundBytes.value);
-        String charSequence = SPACES_AND_CONTROLS.trim(deleteFirstFromString(formatMeasureShort(locale, numberFormatter, roundBytes.value, roundBytes.units), format)).toString();
-        return new BytesResult(format, roundBytes.units == MeasureUnit.BYTE ? getByteSuffixOverride(resources) : charSequence, charSequence, roundBytes.roundedBytes);
+        NumberFormat numberFormatter = getNumberFormatter(locale, roundedBytesResultRoundBytes.fractionDigits);
+        String str = numberFormatter.format(roundedBytesResultRoundBytes.value);
+        String string = SPACES_AND_CONTROLS.trim(deleteFirstFromString(formatMeasureShort(locale, numberFormatter, roundedBytesResultRoundBytes.value, roundedBytesResultRoundBytes.units), str)).toString();
+        return new BytesResult(str, roundedBytesResultRoundBytes.units == MeasureUnit.BYTE ? getByteSuffixOverride(resources) : string, string, roundedBytesResultRoundBytes.roundedBytes);
     }
 
     @Deprecated

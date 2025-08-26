@@ -18,7 +18,7 @@ public class BassBoost extends AudioEffect {
         void onParameterChange(BassBoost bassBoost, int i, int i2, short s);
     }
 
-    public BassBoost(int i, int i2) throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException, RuntimeException {
+    public BassBoost(int i, int i2) throws RuntimeException {
         super(EFFECT_TYPE_BASS_BOOST, EFFECT_TYPE_NULL, i, i2);
         this.mStrengthSupported = false;
         this.mParamListener = null;
@@ -36,11 +36,11 @@ public class BassBoost extends AudioEffect {
         return this.mStrengthSupported;
     }
 
-    public void setStrength(short s) throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public void setStrength(short s) throws IllegalStateException, UnsupportedOperationException, IllegalArgumentException {
         checkStatus(setParameter(1, s));
     }
 
-    public short getRoundedStrength() throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public short getRoundedStrength() throws IllegalStateException, UnsupportedOperationException, IllegalArgumentException {
         short[] sArr = new short[1];
         checkStatus(getParameter(1, sArr));
         return sArr[0];
@@ -57,12 +57,12 @@ public class BassBoost extends AudioEffect {
                 onParameterChangeListener = BassBoost.this.mParamListener != null ? BassBoost.this.mParamListener : null;
             }
             if (onParameterChangeListener != null) {
-                int byteArrayToInt = bArr.length == 4 ? AudioEffect.byteArrayToInt(bArr, 0) : -1;
-                short byteArrayToShort = bArr2.length == 2 ? AudioEffect.byteArrayToShort(bArr2, 0) : (short) -1;
-                if (byteArrayToInt == -1 || byteArrayToShort == -1) {
+                int iByteArrayToInt = bArr.length == 4 ? AudioEffect.byteArrayToInt(bArr, 0) : -1;
+                short sByteArrayToShort = bArr2.length == 2 ? AudioEffect.byteArrayToShort(bArr2, 0) : (short) -1;
+                if (iByteArrayToInt == -1 || sByteArrayToShort == -1) {
                     return;
                 }
-                onParameterChangeListener.onParameterChange(BassBoost.this, i, byteArrayToInt, byteArrayToShort);
+                onParameterChangeListener.onParameterChange(BassBoost.this, i, iByteArrayToInt, sByteArrayToShort);
             }
         }
     }
@@ -90,18 +90,18 @@ public class BassBoost extends AudioEffect {
             if (stringTokenizer.countTokens() != 3) {
                 throw new IllegalArgumentException("settings: " + str);
             }
-            String nextToken = stringTokenizer.nextToken();
-            if (!nextToken.equals(BassBoost.TAG)) {
-                throw new IllegalArgumentException("invalid settings for BassBoost: " + nextToken);
+            String strNextToken = stringTokenizer.nextToken();
+            if (!strNextToken.equals(BassBoost.TAG)) {
+                throw new IllegalArgumentException("invalid settings for BassBoost: " + strNextToken);
             }
             try {
-                String nextToken2 = stringTokenizer.nextToken();
-                if (!nextToken2.equals("strength")) {
-                    throw new IllegalArgumentException("invalid key name: " + nextToken2);
+                String strNextToken2 = stringTokenizer.nextToken();
+                if (!strNextToken2.equals("strength")) {
+                    throw new IllegalArgumentException("invalid key name: " + strNextToken2);
                 }
                 this.strength = Short.parseShort(stringTokenizer.nextToken());
             } catch (NumberFormatException unused) {
-                throw new IllegalArgumentException("invalid value for key: " + nextToken);
+                throw new IllegalArgumentException("invalid value for key: " + strNextToken);
             }
         }
 
@@ -110,7 +110,7 @@ public class BassBoost extends AudioEffect {
         }
     }
 
-    public Settings getProperties() throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public Settings getProperties() throws IllegalStateException, UnsupportedOperationException, IllegalArgumentException {
         Settings settings = new Settings();
         short[] sArr = new short[1];
         checkStatus(getParameter(1, sArr));
@@ -118,7 +118,7 @@ public class BassBoost extends AudioEffect {
         return settings;
     }
 
-    public void setProperties(Settings settings) throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public void setProperties(Settings settings) throws IllegalStateException, UnsupportedOperationException, IllegalArgumentException {
         checkStatus(setParameter(1, settings.strength));
     }
 }

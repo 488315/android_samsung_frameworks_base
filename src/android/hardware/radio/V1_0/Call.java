@@ -47,13 +47,13 @@ public final class Call {
 
     public static final ArrayList<Call> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<Call> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 88, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 88, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             Call call = new Call();
-            call.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 88);
+            call.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 88);
             arrayList.add(call);
         }
         return arrayList;
@@ -77,11 +77,11 @@ public final class Call {
         hwParcel.readEmbeddedBuffer(r4.getBytes().length + 1, hwBlob.handle(), j3, false);
         this.namePresentation = hwBlob.getInt32(j + 64);
         int int32 = hwBlob.getInt32(j + 80);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 24, hwBlob.handle(), j + 72, true);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 24, hwBlob.handle(), j + 72, true);
         this.uusInfo.clear();
         for (int i = 0; i < int32; i++) {
             UusInfo uusInfo = new UusInfo();
-            uusInfo.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 24);
+            uusInfo.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 24);
             this.uusInfo.add(uusInfo);
         }
     }

@@ -12,7 +12,6 @@ import com.android.systemui.R;
 import com.android.systemui.deviceentry.shared.FaceAuthUiEvent;
 import com.android.systemui.widget.SystemUITextView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardBiometricsCountDownTimer extends CountDownTimer {
     public SystemUITextView mBiometricMessageArea;
@@ -30,14 +29,14 @@ public class KeyguardBiometricsCountDownTimer extends CountDownTimer {
         this.mFailedAttempts = failedBiometricUnlockAttempts;
         int biometricType = keyguardUpdateMonitor.getBiometricType();
         this.mBiometricType = biometricType;
-        StringBuilder m = SnapshotStateObserver$$ExternalSyntheticOutline0.m("KeyguardBiometricsCountDownTimer( millisInFuture = ", j, " , countDownInterval = ");
-        m.append(j2);
-        m.append(" , mFailedAttempts = ");
-        m.append(failedBiometricUnlockAttempts);
-        m.append(" , mBiometricType = ");
-        m.append(biometricType);
-        m.append(" )");
-        Log.d("KeyguardBiometricsCountDownTimer", m.toString());
+        StringBuilder sbM = SnapshotStateObserver$$ExternalSyntheticOutline0.m("KeyguardBiometricsCountDownTimer( millisInFuture = ", j, " , countDownInterval = ");
+        sbM.append(j2);
+        sbM.append(" , mFailedAttempts = ");
+        sbM.append(failedBiometricUnlockAttempts);
+        sbM.append(" , mBiometricType = ");
+        sbM.append(biometricType);
+        sbM.append(" )");
+        Log.d("KeyguardBiometricsCountDownTimer", sbM.toString());
     }
 
     @Override // android.os.CountDownTimer
@@ -53,9 +52,9 @@ public class KeyguardBiometricsCountDownTimer extends CountDownTimer {
     }
 
     @Override // android.os.CountDownTimer
-    public final void onTick(long j) {
+    public final void onTick(long j) throws Resources.NotFoundException {
         String quantityString;
-        int round = (int) Math.round(j / 1000.0d);
+        int iRound = (int) Math.round(j / 1000.0d);
         int i = this.mBiometricType;
         if (i == 1) {
             Resources resources = this.mContext.getResources();
@@ -70,19 +69,19 @@ public class KeyguardBiometricsCountDownTimer extends CountDownTimer {
             int i4 = this.mFailedAttempts;
             quantityString = resources3.getQuantityString(R.plurals.kg_too_many_failed_attempts_by_face, i4, Integer.valueOf(i4));
         }
-        StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(quantityString, " ");
-        m.append(this.mContext.getResources().getQuantityString(R.plurals.kg_too_many_failed_countdown, round, Integer.valueOf(round)));
-        String sb = m.toString();
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(quantityString, " ");
+        sbM.append(this.mContext.getResources().getQuantityString(R.plurals.kg_too_many_failed_countdown, iRound, Integer.valueOf(iRound)));
+        String string = sbM.toString();
         SystemUITextView systemUITextView = this.mBiometricMessageArea;
         if (systemUITextView == null) {
             Log.d("KeyguardBiometricsCountDownTimer", "onTick ( mBiometricMessageArea is null )");
             return;
         }
-        systemUITextView.setText(sb);
+        systemUITextView.setText(string);
         if (this.mIsTalkbackUpdated) {
             return;
         }
-        this.mBiometricMessageArea.announceForAccessibility(sb);
+        this.mBiometricMessageArea.announceForAccessibility(string);
         this.mIsTalkbackUpdated = true;
     }
 

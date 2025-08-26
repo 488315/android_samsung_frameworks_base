@@ -18,7 +18,6 @@ import java.lang.ref.WeakReference;
 import java.util.LinkedHashMap;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class MultiDisplayStatusBarOrchestratorStore extends StatusBarPerDisplayStoreImpl {
     public final AutoHideControllerStore autoHideControllerStore;
@@ -49,7 +48,7 @@ public final class MultiDisplayStatusBarOrchestratorStore extends StatusBarPerDi
         StatusBarWindowController statusBarWindowController;
         AutoHideController autoHideController;
         CoroutineScope coroutineScope;
-        StatusBarWindowStatePerDisplayRepository create;
+        StatusBarWindowStatePerDisplayRepository statusBarWindowStatePerDisplayRepositoryCreate;
         StatusBarWindowStatePerDisplayRepository statusBarWindowStatePerDisplayRepository;
         StatusBarModePerDisplayRepository statusBarModePerDisplayRepository = (StatusBarModePerDisplayRepository) this.statusBarModeRepositoryStore.forDisplay(i);
         if (statusBarModePerDisplayRepository == null || (statusBarInitializer = (StatusBarInitializer) this.initializerStore.forDisplay(i)) == null || (statusBarWindowController = (StatusBarWindowController) this.statusBarWindowControllerStore.forDisplay(i)) == null || (autoHideController = (AutoHideController) this.autoHideControllerStore.forDisplay(i)) == null || (coroutineScope = (CoroutineScope) this.displayScopeRepository.get(i)) == null) {
@@ -60,15 +59,11 @@ public final class MultiDisplayStatusBarOrchestratorStore extends StatusBarPerDi
         synchronized (statusBarWindowStateRepositoryStoreImpl.repositoryCache) {
             try {
                 WeakReference weakReference = (WeakReference) ((LinkedHashMap) statusBarWindowStateRepositoryStoreImpl.repositoryCache).get(Integer.valueOf(i));
-                if (weakReference != null) {
-                    create = (StatusBarWindowStatePerDisplayRepository) weakReference.get();
-                    if (create == null) {
-                    }
-                    statusBarWindowStatePerDisplayRepository = create;
+                if (weakReference == null || (statusBarWindowStatePerDisplayRepositoryCreate = (StatusBarWindowStatePerDisplayRepository) weakReference.get()) == null) {
+                    statusBarWindowStatePerDisplayRepositoryCreate = statusBarWindowStateRepositoryStoreImpl.factory.create(i);
+                    statusBarWindowStateRepositoryStoreImpl.repositoryCache.put(Integer.valueOf(i), new WeakReference(statusBarWindowStatePerDisplayRepositoryCreate));
                 }
-                create = statusBarWindowStateRepositoryStoreImpl.factory.create(i);
-                statusBarWindowStateRepositoryStoreImpl.repositoryCache.put(Integer.valueOf(i), new WeakReference(create));
-                statusBarWindowStatePerDisplayRepository = create;
+                statusBarWindowStatePerDisplayRepository = statusBarWindowStatePerDisplayRepositoryCreate;
             } catch (Throwable th) {
                 throw th;
             }

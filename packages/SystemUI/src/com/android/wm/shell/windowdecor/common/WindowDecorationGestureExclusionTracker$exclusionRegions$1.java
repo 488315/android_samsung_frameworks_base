@@ -4,7 +4,6 @@ import android.graphics.Region;
 import android.window.DesktopExperienceFlags;
 import java.util.HashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class WindowDecorationGestureExclusionTracker$exclusionRegions$1 extends HashMap<Integer, Region> {
     final /* synthetic */ WindowDecorationGestureExclusionTracker this$0;
@@ -34,11 +33,11 @@ public final class WindowDecorationGestureExclusionTracker$exclusionRegions$1 ex
         if (!(obj instanceof Integer)) {
             return null;
         }
-        int intValue = ((Number) obj).intValue();
+        int iIntValue = ((Number) obj).intValue();
         if (!DesktopExperienceFlags.ENABLE_BUG_FIXES_FOR_SECONDARY_DISPLAY.isTrue()) {
             return this.this$0.exclusionRegion;
         }
-        Region region = (Region) super.get(Integer.valueOf(intValue));
+        Region region = (Region) super.get(Integer.valueOf(iIntValue));
         return region == null ? new Region() : region;
     }
 

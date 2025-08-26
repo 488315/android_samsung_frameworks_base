@@ -45,9 +45,9 @@ public interface IRcsUcePublishStateCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IRcsUcePublishStateCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IRcsUcePublishStateCallback)) {
-                return (IRcsUcePublishStateCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IRcsUcePublishStateCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IRcsUcePublishStateCallback)) {
+                return (IRcsUcePublishStateCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -100,13 +100,13 @@ public interface IRcsUcePublishStateCallback extends IInterface {
 
             @Override // android.telephony.ims.aidl.IRcsUcePublishStateCallback
             public void onPublishUpdated(PublishAttributes publishAttributes) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IRcsUcePublishStateCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(publishAttributes, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IRcsUcePublishStateCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(publishAttributes, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

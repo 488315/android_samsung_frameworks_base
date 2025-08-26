@@ -55,9 +55,9 @@ public interface IMmiInterface extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.cam.IMmiInterface");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IMmiInterface)) {
-                return (IMmiInterface) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.cam.IMmiInterface");
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IMmiInterface)) {
+                return (IMmiInterface) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -87,17 +87,17 @@ public interface IMmiInterface extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                IMmiStatusCallback asInterface = IMmiStatusCallback.Stub.asInterface(parcel.readStrongBinder());
+                int i3 = parcel.readInt();
+                IMmiStatusCallback iMmiStatusCallbackAsInterface = IMmiStatusCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                IMmiSession openSession = openSession(readInt, asInterface);
+                IMmiSession iMmiSessionOpenSession = openSession(i3, iMmiStatusCallbackAsInterface);
                 parcel2.writeNoException();
-                parcel2.writeStrongInterface(openSession);
+                parcel2.writeStrongInterface(iMmiSessionOpenSession);
             } else if (i == 2) {
-                int readInt2 = parcel.readInt();
-                IEnterMenuErrorCallback asInterface2 = IEnterMenuErrorCallback.Stub.asInterface(parcel.readStrongBinder());
+                int i4 = parcel.readInt();
+                IEnterMenuErrorCallback iEnterMenuErrorCallbackAsInterface = IEnterMenuErrorCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                appInfoEnterMenu(readInt2, asInterface2);
+                appInfoEnterMenu(i4, iEnterMenuErrorCallbackAsInterface);
                 parcel2.writeNoException();
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
@@ -123,34 +123,34 @@ public interface IMmiInterface extends IInterface {
 
             @Override // android.media.tv.extension.cam.IMmiInterface
             public IMmiSession openSession(int i, IMmiStatusCallback iMmiStatusCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.cam.IMmiInterface");
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iMmiStatusCallback);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IMmiSession.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.cam.IMmiInterface");
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iMmiStatusCallback);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IMmiSession.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.cam.IMmiInterface
             public void appInfoEnterMenu(int i, IEnterMenuErrorCallback iEnterMenuErrorCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.cam.IMmiInterface");
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iEnterMenuErrorCallback);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.cam.IMmiInterface");
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iEnterMenuErrorCallback);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -9,7 +9,6 @@ import android.graphics.ColorSpace;
 import android.graphics.Point;
 import android.hardware.OverlayProperties;
 import android.hardware.display.DisplayManager;
-import android.hardware.display.DisplayManagerGlobal;
 import android.hardware.display.IDisplayManager;
 import android.hardware.display.IDisplayManagerCallback;
 import android.hardware.display.IHbmBrightnessCallback;
@@ -134,8 +133,8 @@ public final class DisplayManagerGlobal {
     }
 
     public DisplayManagerGlobal(IDisplayManager iDisplayManager) {
-        PropertyInvalidatedCache.Args maxEntries = new PropertyInvalidatedCache.Args("system_server").maxEntries(8);
-        this.mDisplayCache = new PropertyInvalidatedCache<Integer, DisplayInfo>(maxEntries.api(CACHE_KEY_DISPLAY_INFO_API).isolateUids(false), CACHE_KEY_DISPLAY_INFO_API, null) { // from class: android.hardware.display.DisplayManagerGlobal.1
+        PropertyInvalidatedCache.Args argsMaxEntries = new PropertyInvalidatedCache.Args("system_server").maxEntries(8);
+        this.mDisplayCache = new PropertyInvalidatedCache<Integer, DisplayInfo>(argsMaxEntries.api(CACHE_KEY_DISPLAY_INFO_API).isolateUids(false), CACHE_KEY_DISPLAY_INFO_API, null) { // from class: android.hardware.display.DisplayManagerGlobal.1
             @Override // android.app.PropertyInvalidatedCache
             public DisplayInfo recompute(Integer num) {
                 try {
@@ -263,12 +262,12 @@ public final class DisplayManagerGlobal {
             Slog.i(TAG, "Registering Display Listener: " + Long.toBinaryString(j) + ", packageName: " + str);
         }
         synchronized (this.mLock) {
-            int findDisplayListenerLocked = findDisplayListenerLocked(displayListener);
-            if (findDisplayListenerLocked < 0) {
+            int iFindDisplayListenerLocked = findDisplayListenerLocked(displayListener);
+            if (iFindDisplayListenerLocked < 0) {
                 this.mDisplayListeners.add(new DisplayListenerDelegate(displayListener, executor, j, str, z));
                 registerCallbackIfNeededLocked();
             } else {
-                this.mDisplayListeners.get(findDisplayListenerLocked).setEventsMask(j);
+                this.mDisplayListeners.get(iFindDisplayListenerLocked).setEventsMask(j);
             }
             updateCallbackIfNeededLocked();
             maybeLogAllDisplayListeners();
@@ -295,10 +294,10 @@ public final class DisplayManagerGlobal {
             Slog.i(TAG, "Unregistering Display Listener: " + displayListener);
         }
         synchronized (this.mLock) {
-            int findDisplayListenerLocked = findDisplayListenerLocked(displayListener);
-            if (findDisplayListenerLocked >= 0) {
-                this.mDisplayListeners.get(findDisplayListenerLocked).clearEvents();
-                this.mDisplayListeners.remove(findDisplayListenerLocked);
+            int iFindDisplayListenerLocked = findDisplayListenerLocked(displayListener);
+            if (iFindDisplayListenerLocked >= 0) {
+                this.mDisplayListeners.get(iFindDisplayListenerLocked).clearEvents();
+                this.mDisplayListeners.remove(iFindDisplayListenerLocked);
                 updateCallbackIfNeededLocked();
             }
         }
@@ -386,14 +385,14 @@ public final class DisplayManagerGlobal {
     }
 
     private void updateCallbackIfNeededLocked() {
-        long calculateEventsMaskLocked = calculateEventsMaskLocked();
+        long jCalculateEventsMaskLocked = calculateEventsMaskLocked();
         if (DEBUG) {
-            Log.d(TAG, "Mask for listener: " + calculateEventsMaskLocked);
+            Log.d(TAG, "Mask for listener: " + jCalculateEventsMaskLocked);
         }
-        if (calculateEventsMaskLocked != this.mRegisteredInternalEventFlag) {
+        if (jCalculateEventsMaskLocked != this.mRegisteredInternalEventFlag) {
             try {
-                this.mDm.registerCallbackWithEventMask(this.mCallback, calculateEventsMaskLocked);
-                this.mRegisteredInternalEventFlag = calculateEventsMaskLocked;
+                this.mDm.registerCallbackWithEventMask(this.mCallback, jCalculateEventsMaskLocked);
+                this.mRegisteredInternalEventFlag = jCalculateEventsMaskLocked;
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
@@ -415,6 +414,14 @@ public final class DisplayManagerGlobal {
         Iterator<DisplayListenerDelegate> it = this.mDisplayListeners.iterator();
         while (it.hasNext()) {
             it.next().sendDisplayEvent(i, i2, displayInfoLocked, z);
+        }
+    }
+
+    public void setEnableConnectedDisplay(int i, boolean z) {
+        try {
+            this.mDm.setEnableConnectedDisplay(i, z);
+        } catch (RemoteException e) {
+            Log.e(TAG, "Error trying to enable external display", e);
         }
     }
 
@@ -594,14 +601,14 @@ public final class DisplayManagerGlobal {
             return null;
         }
         VirtualDisplayCallback virtualDisplayCallback = new VirtualDisplayCallback(null, null);
-        int createSpegVirtualDisplay = ((DisplayManagerInternal) LocalServices.getService(DisplayManagerInternal.class)).createSpegVirtualDisplay(str, i, virtualDisplayCallback);
-        if (createSpegVirtualDisplay < 0) {
+        int iCreateSpegVirtualDisplay = ((DisplayManagerInternal) LocalServices.getService(DisplayManagerInternal.class)).createSpegVirtualDisplay(str, i, virtualDisplayCallback);
+        if (iCreateSpegVirtualDisplay < 0) {
             Log.e(DisplayManager.TAG_SPEG, "Could not create speg display for " + str);
             return null;
         }
-        Display realDisplay = getRealDisplay(createSpegVirtualDisplay);
+        Display realDisplay = getRealDisplay(iCreateSpegVirtualDisplay);
         if (realDisplay == null) {
-            Log.wtf(DisplayManager.TAG_SPEG, "Could not obtain display info for created displayId: " + createSpegVirtualDisplay);
+            Log.wtf(DisplayManager.TAG_SPEG, "Could not obtain display info for created displayId: " + iCreateSpegVirtualDisplay);
             try {
                 this.mDm.releaseVirtualDisplay(virtualDisplayCallback);
                 return null;
@@ -983,9 +990,9 @@ public final class DisplayManagerGlobal {
                 Slog.i(TAG, "Unregistering display topology listener: " + consumer);
             }
             synchronized (this.mLock) {
-                DisplayTopologyListenerDelegate findTopologyListenerLocked = findTopologyListenerLocked(consumer);
-                if (findTopologyListenerLocked != null) {
-                    this.mTopologyListeners.remove(findTopologyListenerLocked);
+                DisplayTopologyListenerDelegate displayTopologyListenerDelegateFindTopologyListenerLocked = findTopologyListenerLocked(consumer);
+                if (displayTopologyListenerDelegateFindTopologyListenerLocked != null) {
+                    this.mTopologyListeners.remove(displayTopologyListenerDelegateFindTopologyListenerLocked);
                     updateCallbackIfNeededLocked();
                 }
             }
@@ -1158,11 +1165,11 @@ public final class DisplayManagerGlobal {
                 throw new IllegalArgumentException("listener must not be null");
             }
             synchronized (this.mLock) {
-                int findDisplayVolumeListnerLocked = findDisplayVolumeListnerLocked(semDisplayVolumeListener);
-                if (findDisplayVolumeListnerLocked >= 0) {
+                int iFindDisplayVolumeListnerLocked = findDisplayVolumeListnerLocked(semDisplayVolumeListener);
+                if (iFindDisplayVolumeListnerLocked >= 0) {
                     Log.d(TAG, "unregisterDisplayVolumeListener index >= 0");
-                    this.mDisplayVolumeListeners.get(findDisplayVolumeListnerLocked).clearEvents();
-                    this.mDisplayVolumeListeners.remove(findDisplayVolumeListnerLocked);
+                    this.mDisplayVolumeListeners.get(iFindDisplayVolumeListnerLocked).clearEvents();
+                    this.mDisplayVolumeListeners.remove(iFindDisplayVolumeListnerLocked);
                 }
             }
         }
@@ -1206,11 +1213,11 @@ public final class DisplayManagerGlobal {
                 throw new IllegalArgumentException("listener must not be null");
             }
             synchronized (this.mLock) {
-                int findDisplayVolumeKeyListnerLocked = findDisplayVolumeKeyListnerLocked(semDisplayVolumeKeyListener);
-                if (findDisplayVolumeKeyListnerLocked >= 0) {
+                int iFindDisplayVolumeKeyListnerLocked = findDisplayVolumeKeyListnerLocked(semDisplayVolumeKeyListener);
+                if (iFindDisplayVolumeKeyListnerLocked >= 0) {
                     Log.d(TAG, "unregisterDisplayVolumeKeyListener index >= 0");
-                    this.mDisplayVolumeKeyListeners.get(findDisplayVolumeKeyListnerLocked).clearEvents();
-                    this.mDisplayVolumeKeyListeners.remove(findDisplayVolumeKeyListnerLocked);
+                    this.mDisplayVolumeKeyListeners.get(iFindDisplayVolumeKeyListnerLocked).clearEvents();
+                    this.mDisplayVolumeKeyListeners.remove(iFindDisplayVolumeKeyListnerLocked);
                 }
             }
         }
@@ -1254,11 +1261,11 @@ public final class DisplayManagerGlobal {
                 throw new IllegalArgumentException("listener must not be null");
             }
             synchronized (this.mLock) {
-                int findWifiDisplayParameterListnerLocked = findWifiDisplayParameterListnerLocked(semWifiDisplayParameterListener);
-                if (findWifiDisplayParameterListnerLocked >= 0) {
+                int iFindWifiDisplayParameterListnerLocked = findWifiDisplayParameterListnerLocked(semWifiDisplayParameterListener);
+                if (iFindWifiDisplayParameterListnerLocked >= 0) {
                     Log.d(TAG, "unregisterWifiDisplayParameterListener index >= 0");
-                    this.mWifiDisplayParameterListeners.get(findWifiDisplayParameterListnerLocked).clearEvents();
-                    this.mWifiDisplayParameterListeners.remove(findWifiDisplayParameterListnerLocked);
+                    this.mWifiDisplayParameterListeners.get(iFindWifiDisplayParameterListnerLocked).clearEvents();
+                    this.mWifiDisplayParameterListeners.remove(iFindWifiDisplayParameterListnerLocked);
                 }
             }
         }
@@ -1383,10 +1390,10 @@ public final class DisplayManagerGlobal {
                 throw new IllegalArgumentException("listener must not be null");
             }
             synchronized (this.mLock) {
-                int findDeviceListnerLocked = findDeviceListnerLocked(semDeviceStatusListener);
-                if (findDeviceListnerLocked >= 0) {
-                    this.mDeviceListeners.get(findDeviceListnerLocked).clearEvents();
-                    this.mDeviceListeners.remove(findDeviceListnerLocked);
+                int iFindDeviceListnerLocked = findDeviceListnerLocked(semDeviceStatusListener);
+                if (iFindDeviceListnerLocked >= 0) {
+                    this.mDeviceListeners.get(iFindDeviceListnerLocked).clearEvents();
+                    this.mDeviceListeners.remove(iFindDeviceListnerLocked);
                 }
             }
         }
@@ -1534,7 +1541,7 @@ public final class DisplayManagerGlobal {
             this.mExecutor.execute(new Runnable() { // from class: android.hardware.display.DisplayManagerGlobal$DisplayListenerDelegate$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    DisplayManagerGlobal.DisplayListenerDelegate.this.lambda$sendDisplayEvent$0(j, i, i2, displayInfo, z);
+                    this.f$0.lambda$sendDisplayEvent$0(j, i, i2, displayInfo, z);
                 }
             });
         }
@@ -1667,7 +1674,7 @@ public final class DisplayManagerGlobal {
                 executor.execute(new Runnable() { // from class: android.hardware.display.DisplayManagerGlobal$VirtualDisplayCallback$$ExternalSyntheticLambda2
                     @Override // java.lang.Runnable
                     public final void run() {
-                        VirtualDisplay.Callback.this.onPaused();
+                        callback.onPaused();
                     }
                 });
             }
@@ -1682,7 +1689,7 @@ public final class DisplayManagerGlobal {
                 executor.execute(new Runnable() { // from class: android.hardware.display.DisplayManagerGlobal$VirtualDisplayCallback$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        VirtualDisplay.Callback.this.onResumed();
+                        callback.onResumed();
                     }
                 });
             }
@@ -1697,7 +1704,7 @@ public final class DisplayManagerGlobal {
                 executor.execute(new Runnable() { // from class: android.hardware.display.DisplayManagerGlobal$VirtualDisplayCallback$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        VirtualDisplay.Callback.this.onStopped();
+                        callback.onStopped();
                     }
                 });
             }
@@ -1727,7 +1734,7 @@ public final class DisplayManagerGlobal {
             this.mExecutor.execute(new Runnable() { // from class: android.hardware.display.DisplayManagerGlobal$DisplayTopologyListenerDelegate$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    DisplayManagerGlobal.DisplayTopologyListenerDelegate.this.lambda$onTopologyChanged$0(displayTopology);
+                    this.f$0.lambda$onTopologyChanged$0(displayTopology);
                 }
             });
         }
@@ -1865,9 +1872,9 @@ public final class DisplayManagerGlobal {
         }
 
         public void sendDisplayVolumeEvent(int i, Bundle bundle) {
-            Message obtain = Message.obtain(this, i);
-            obtain.setData(bundle);
-            sendMessage(obtain);
+            Message messageObtain = Message.obtain(this, i);
+            messageObtain.setData(bundle);
+            sendMessage(messageObtain);
         }
 
         public void clearEvents() {
@@ -1938,9 +1945,9 @@ public final class DisplayManagerGlobal {
         }
 
         public void sendWifiDisplayParameterEvent(int i, List<SemWifiDisplayParameter> list) {
-            Message obtain = Message.obtain(this, i);
-            obtain.obj = list;
-            sendMessage(obtain);
+            Message messageObtain = Message.obtain(this, i);
+            messageObtain.obj = list;
+            sendMessage(messageObtain);
         }
 
         public void clearEvents() {
@@ -1966,9 +1973,9 @@ public final class DisplayManagerGlobal {
         }
 
         public void sendDeviceEvent(Bundle bundle, int i) {
-            Message obtain = Message.obtain(this, i);
-            obtain.setData(bundle);
-            sendMessage(obtain);
+            Message messageObtain = Message.obtain(this, i);
+            messageObtain.setData(bundle);
+            sendMessage(messageObtain);
         }
 
         public void clearEvents() {

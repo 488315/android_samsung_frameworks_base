@@ -156,26 +156,26 @@ public class ViewGroupFader {
     }
 
     private void setViewPropertiesByPosition(View view, Rect rect, float f, float f2) {
-        float f3;
+        float fLerp;
         if (view.getHeight() < f && view.getHeight() > f2) {
-            f3 = lerp(this.mChainedLowerRegion, this.mChainedUpperRegion, (view.getHeight() - f2) / (f - f2));
+            fLerp = lerp(this.mChainedLowerRegion, this.mChainedUpperRegion, (view.getHeight() - f2) / (f - f2));
         } else if (view.getHeight() < f2) {
-            f3 = this.mChainedLowerRegion;
+            fLerp = this.mChainedLowerRegion;
         } else {
-            f3 = this.mChainedUpperRegion;
+            fLerp = this.mChainedUpperRegion;
         }
-        int height = (int) (this.mContainerBounds.height() * f3);
-        int i = this.mContainerBounds.top + height;
-        int i2 = this.mContainerBounds.bottom - height;
+        int iHeight = (int) (this.mContainerBounds.height() * fLerp);
+        int i = this.mContainerBounds.top + iHeight;
+        int i2 = this.mContainerBounds.bottom - iHeight;
         boolean z = view.getScaleX() == 1.0f;
         ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
         view.setPivotX(view.getWidth() * 0.5f);
         if (rect.top > i2 && this.mCallback.shouldFadeFromBottom(view)) {
             view.setPivotY(-marginLayoutParams.topMargin);
-            scaleAndFadeByRelativeOffsetFraction(view, this.mBottomInterpolator.getInterpolation((this.mContainerBounds.bottom - rect.top) / height));
+            scaleAndFadeByRelativeOffsetFraction(view, this.mBottomInterpolator.getInterpolation((this.mContainerBounds.bottom - rect.top) / iHeight));
         } else if (rect.bottom < i && this.mCallback.shouldFadeFromTop(view)) {
             view.setPivotY(view.getMeasuredHeight() + marginLayoutParams.bottomMargin);
-            scaleAndFadeByRelativeOffsetFraction(view, this.mTopInterpolator.getInterpolation((rect.bottom - this.mContainerBounds.top) / height));
+            scaleAndFadeByRelativeOffsetFraction(view, this.mTopInterpolator.getInterpolation((rect.bottom - this.mContainerBounds.top) / iHeight));
         } else {
             if (!z) {
                 this.mCallback.viewHasBecomeFullSize(view);
@@ -186,9 +186,9 @@ public class ViewGroupFader {
 
     private void scaleAndFadeByRelativeOffsetFraction(View view, float f) {
         view.setTransitionAlpha(lerp(this.mAlphaLowerBound, 1.0f, f));
-        float lerp = lerp(this.mScaleLowerBound, 1.0f, f);
-        view.setScaleX(lerp);
-        view.setScaleY(lerp);
+        float fLerp = lerp(this.mScaleLowerBound, 1.0f, f);
+        view.setScaleX(fLerp);
+        view.setScaleY(fLerp);
     }
 
     private void setDefaultSizeAndAlphaForView(View view) {

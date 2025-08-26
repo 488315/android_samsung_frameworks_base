@@ -7,7 +7,6 @@ import com.google.protobuf.nano.InternalNano;
 import com.google.protobuf.nano.MessageNano;
 import java.io.IOException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class QsTileState extends MessageNano {
     private static volatile QsTileState[] _emptyArray;
@@ -75,22 +74,22 @@ public final class QsTileState extends MessageNano {
 
     @Override // com.google.protobuf.nano.MessageNano
     public int computeSerializedSize() {
-        int computeStringSize = this.identifierCase_ == 1 ? CodedOutputByteBufferNano.computeStringSize(1, (String) this.identifier_) : 0;
+        int iComputeStringSize = this.identifierCase_ == 1 ? CodedOutputByteBufferNano.computeStringSize(1, (String) this.identifier_) : 0;
         if (this.identifierCase_ == 2) {
-            computeStringSize += CodedOutputByteBufferNano.computeMessageSize(2, (MessageNano) this.identifier_);
+            iComputeStringSize += CodedOutputByteBufferNano.computeMessageSize(2, (MessageNano) this.identifier_);
         }
         int i = this.state;
         if (i != 0) {
-            computeStringSize += CodedOutputByteBufferNano.computeInt32Size(3, i);
+            iComputeStringSize += CodedOutputByteBufferNano.computeInt32Size(3, i);
         }
         if (this.optionalBooleanStateCase_ == 4) {
             ((Boolean) this.optionalBooleanState_).getClass();
-            computeStringSize += CodedOutputByteBufferNano.computeTagSize(4) + 1;
+            iComputeStringSize += CodedOutputByteBufferNano.computeTagSize(4) + 1;
         }
         if (this.optionalLabelCase_ == 5) {
-            computeStringSize += CodedOutputByteBufferNano.computeStringSize(5, (String) this.optionalLabel_);
+            iComputeStringSize += CodedOutputByteBufferNano.computeStringSize(5, (String) this.optionalLabel_);
         }
-        return this.optionalSecondaryLabelCase_ == 6 ? CodedOutputByteBufferNano.computeStringSize(6, (String) this.optionalSecondaryLabel_) + computeStringSize : computeStringSize;
+        return this.optionalSecondaryLabelCase_ == 6 ? CodedOutputByteBufferNano.computeStringSize(6, (String) this.optionalSecondaryLabel_) + iComputeStringSize : iComputeStringSize;
     }
 
     public QsTileState setBooleanState(boolean z) {
@@ -137,9 +136,9 @@ public final class QsTileState extends MessageNano {
             codedOutputByteBufferNano.writeInt32(3, i);
         }
         if (this.optionalBooleanStateCase_ == 4) {
-            boolean booleanValue = ((Boolean) this.optionalBooleanState_).booleanValue();
+            boolean zBooleanValue = ((Boolean) this.optionalBooleanState_).booleanValue();
             codedOutputByteBufferNano.writeTag(4, 0);
-            codedOutputByteBufferNano.writeRawByte(booleanValue ? 1 : 0);
+            codedOutputByteBufferNano.writeRawByte(zBooleanValue ? 1 : 0);
         }
         if (this.optionalLabelCase_ == 5) {
             codedOutputByteBufferNano.writeString(5, (String) this.optionalLabel_);
@@ -152,34 +151,34 @@ public final class QsTileState extends MessageNano {
     @Override // com.google.protobuf.nano.MessageNano
     public QsTileState mergeFrom(CodedInputByteBufferNano codedInputByteBufferNano) throws IOException {
         while (true) {
-            int readTag = codedInputByteBufferNano.readTag();
-            if (readTag == 0) {
+            int tag = codedInputByteBufferNano.readTag();
+            if (tag == 0) {
                 break;
             }
-            if (readTag == 10) {
+            if (tag == 10) {
                 this.identifier_ = codedInputByteBufferNano.readString();
                 this.identifierCase_ = 1;
-            } else if (readTag == 18) {
+            } else if (tag == 18) {
                 if (this.identifierCase_ != 2) {
                     this.identifier_ = new ComponentNameProto();
                 }
                 codedInputByteBufferNano.readMessage((MessageNano) this.identifier_);
                 this.identifierCase_ = 2;
-            } else if (readTag == 24) {
-                int readRawVarint32 = codedInputByteBufferNano.readRawVarint32();
-                if (readRawVarint32 == 0 || readRawVarint32 == 1 || readRawVarint32 == 2) {
-                    this.state = readRawVarint32;
+            } else if (tag == 24) {
+                int rawVarint32 = codedInputByteBufferNano.readRawVarint32();
+                if (rawVarint32 == 0 || rawVarint32 == 1 || rawVarint32 == 2) {
+                    this.state = rawVarint32;
                 }
-            } else if (readTag == 32) {
+            } else if (tag == 32) {
                 this.optionalBooleanState_ = Boolean.valueOf(codedInputByteBufferNano.readRawVarint32() != 0);
                 this.optionalBooleanStateCase_ = 4;
-            } else if (readTag == 42) {
+            } else if (tag == 42) {
                 this.optionalLabel_ = codedInputByteBufferNano.readString();
                 this.optionalLabelCase_ = 5;
-            } else if (readTag == 50) {
+            } else if (tag == 50) {
                 this.optionalSecondaryLabel_ = codedInputByteBufferNano.readString();
                 this.optionalSecondaryLabelCase_ = 6;
-            } else if (!codedInputByteBufferNano.skipField(readTag)) {
+            } else if (!codedInputByteBufferNano.skipField(tag)) {
                 break;
             }
         }

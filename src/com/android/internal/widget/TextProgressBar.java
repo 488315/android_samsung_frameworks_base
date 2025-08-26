@@ -103,11 +103,11 @@ public class TextProgressBar extends RelativeLayout implements Chronometer.OnChr
         if (this.mProgressBar == null) {
             throw new RuntimeException("Expecting child ProgressBar with id 'android.R.id.progress'");
         }
-        long elapsedRealtime = SystemClock.elapsedRealtime();
-        if (elapsedRealtime >= this.mDurationBase) {
+        long jElapsedRealtime = SystemClock.elapsedRealtime();
+        if (jElapsedRealtime >= this.mDurationBase) {
             this.mChronometer.stop();
         }
-        this.mProgressBar.setProgress(this.mDuration - ((int) (this.mDurationBase - elapsedRealtime)));
+        this.mProgressBar.setProgress(this.mDuration - ((int) (this.mDurationBase - jElapsedRealtime)));
         if (this.mChronometerFollow) {
             RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) this.mProgressBar.getLayoutParams();
             int width = this.mProgressBar.getWidth() - (layoutParams.leftMargin + layoutParams.rightMargin);

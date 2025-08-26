@@ -1,14 +1,16 @@
 package com.samsung.android.sesl.visualeffect.surfaceeffects.ripple;
 
 import android.view.animation.Interpolator;
+import android.view.animation.PathInterpolator;
 import androidx.compose.animation.FlingCalculator$FlingInfo$$ExternalSyntheticOutline0;
 import androidx.compose.animation.TransitionData$$ExternalSyntheticOutline0;
+import com.samsung.android.knox.net.nap.NetworkAnalyticsConstants;
 import com.samsung.android.sesl.visualeffect.surfaceeffects.ripple.RippleShader;
 import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
+import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class RippleAnimationConfig {
     public final RippleShader.FadeParams baseRingFadeParams;
@@ -50,13 +52,13 @@ public final class RippleAnimationConfig {
 
     public final int hashCode() {
         Float f = this.requestedFrameRate;
-        int m = FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.sparkleStrength, ReorderTile$$ExternalSyntheticOutline0.m(this.opacity, ReorderTile$$ExternalSyntheticOutline0.m(this.sparkleColor, ReorderTile$$ExternalSyntheticOutline0.m(this.color, FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.pixelDensity, FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.maxHeight, FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.maxWidth, FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.scale, FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.moveSpeedY, FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.moveSpeedX, FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.centerY, FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.centerX, MoveResult$$ExternalSyntheticOutline0.m((f == null ? 0 : f.hashCode()) * 31, 31, this.duration), 31), 31), 31), 31), 31), 31), 31), 31), 31), 31), 31), 31);
+        int iM = FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.sparkleStrength, ReorderTile$$ExternalSyntheticOutline0.m(this.opacity, ReorderTile$$ExternalSyntheticOutline0.m(this.sparkleColor, ReorderTile$$ExternalSyntheticOutline0.m(this.color, FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.pixelDensity, FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.maxHeight, FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.maxWidth, FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.scale, FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.moveSpeedY, FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.moveSpeedX, FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.centerY, FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.centerX, MoveResult$$ExternalSyntheticOutline0.m((f == null ? 0 : f.hashCode()) * 31, 31, this.duration), 31), 31), 31), 31), 31), 31), 31), 31), 31), 31), 31), 31);
         RippleShader.FadeParams fadeParams = this.baseRingFadeParams;
-        int hashCode = (m + (fadeParams == null ? 0 : fadeParams.hashCode())) * 31;
+        int iHashCode = (iM + (fadeParams == null ? 0 : fadeParams.hashCode())) * 31;
         RippleShader.FadeParams fadeParams2 = this.sparkleRingFadeParams;
-        int hashCode2 = (hashCode + (fadeParams2 == null ? 0 : fadeParams2.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (fadeParams2 == null ? 0 : fadeParams2.hashCode())) * 31;
         RippleShader.FadeParams fadeParams3 = this.centerFillFadeParams;
-        return Boolean.hashCode(this.hintSparkleOnly) + ((this.interpolator.hashCode() + TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m((hashCode2 + (fadeParams3 != null ? fadeParams3.hashCode() : 0)) * 31, 31, this.shouldDistort), 31, this.isReverse)) * 31);
+        return Boolean.hashCode(this.hintSparkleOnly) + ((this.interpolator.hashCode() + TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m((iHashCode2 + (fadeParams3 != null ? fadeParams3.hashCode() : 0)) * 31, 31, this.shouldDistort), 31, this.isReverse)) * 31);
     }
 
     public final String toString() {
@@ -87,16 +89,41 @@ public final class RippleAnimationConfig {
         this.hintSparkleOnly = z3;
     }
 
-    /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public /* synthetic */ RippleAnimationConfig(java.lang.Float r24, long r25, float r27, float r28, float r29, float r30, float r31, float r32, float r33, float r34, int r35, int r36, int r37, float r38, com.samsung.android.sesl.visualeffect.surfaceeffects.ripple.RippleShader.FadeParams r39, com.samsung.android.sesl.visualeffect.surfaceeffects.ripple.RippleShader.FadeParams r40, com.samsung.android.sesl.visualeffect.surfaceeffects.ripple.RippleShader.FadeParams r41, boolean r42, boolean r43, android.view.animation.Interpolator r44, boolean r45, int r46, kotlin.jvm.internal.DefaultConstructorMarker r47) {
-        /*
-            Method dump skipped, instructions count: 267
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.sesl.visualeffect.surfaceeffects.ripple.RippleAnimationConfig.<init>(java.lang.Float, long, float, float, float, float, float, float, float, float, int, int, int, float, com.samsung.android.sesl.visualeffect.surfaceeffects.ripple.RippleShader$FadeParams, com.samsung.android.sesl.visualeffect.surfaceeffects.ripple.RippleShader$FadeParams, com.samsung.android.sesl.visualeffect.surfaceeffects.ripple.RippleShader$FadeParams, boolean, boolean, android.view.animation.Interpolator, boolean, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+    public /* synthetic */ RippleAnimationConfig(Float f, long j, float f2, float f3, float f4, float f5, float f6, float f7, float f8, float f9, int i, int i2, int i3, float f10, RippleShader.FadeParams fadeParams, RippleShader.FadeParams fadeParams2, RippleShader.FadeParams fadeParams3, boolean z, boolean z2, Interpolator interpolator, boolean z3, int i4, DefaultConstructorMarker defaultConstructorMarker) {
+        Float f11;
+        int i5;
+        long j2;
+        Interpolator pathInterpolator;
+        Float f12 = (i4 & 1) != 0 ? null : f;
+        long j3 = (i4 & 2) != 0 ? 0L : j;
+        float f13 = (i4 & 4) != 0 ? 0.0f : f2;
+        float f14 = (i4 & 8) != 0 ? 0.0f : f3;
+        float f15 = (i4 & 16) != 0 ? 0.0f : f4;
+        float f16 = (i4 & 32) != 0 ? 0.0f : f5;
+        float f17 = (i4 & 64) != 0 ? 1.0f : f6;
+        float f18 = (i4 & 128) != 0 ? 0.0f : f7;
+        float f19 = (i4 & 256) != 0 ? 0.0f : f8;
+        float f20 = (i4 & 512) != 0 ? 1.0f : f9;
+        int i6 = (i4 & 1024) != 0 ? -1 : i;
+        int i7 = (i4 & 2048) == 0 ? i2 : -1;
+        int i8 = (i4 & 4096) != 0 ? 115 : i3;
+        float f21 = (i4 & 8192) != 0 ? 0.3f : f10;
+        RippleShader.FadeParams fadeParams4 = (i4 & NetworkAnalyticsConstants.DataPoints.FLAG_SOURCE_PORT) != 0 ? null : fadeParams;
+        RippleShader.FadeParams fadeParams5 = (i4 & NetworkAnalyticsConstants.DataPoints.FLAG_UID) != 0 ? null : fadeParams2;
+        RippleShader.FadeParams fadeParams6 = (i4 & 65536) != 0 ? null : fadeParams3;
+        boolean z4 = (i4 & 131072) != 0 ? true : z;
+        boolean z5 = (i4 & 262144) != 0 ? false : z2;
+        if ((i4 & NetworkAnalyticsConstants.DataPoints.FLAG_INTERFACE_NAME) != 0) {
+            f11 = f12;
+            i5 = i8;
+            j2 = j3;
+            pathInterpolator = new PathInterpolator(0.2f, 0.0f, 0.0f, 1.0f);
+        } else {
+            f11 = f12;
+            i5 = i8;
+            j2 = j3;
+            pathInterpolator = interpolator;
+        }
+        this(f11, j2, f13, f14, f15, f16, f17, f18, f19, f20, i6, i7, i5, f21, fadeParams4, fadeParams5, fadeParams6, z4, z5, pathInterpolator, (i4 & 1048576) != 0 ? false : z3);
     }
 }

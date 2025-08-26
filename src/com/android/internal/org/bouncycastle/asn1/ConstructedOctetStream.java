@@ -25,9 +25,9 @@ class ConstructedOctetStream extends InputStream {
             this._currentStream = nextParser.getOctetStream();
         }
         while (true) {
-            int read = this._currentStream.read(bArr, i + i3, i2 - i3);
-            if (read >= 0) {
-                i3 += read;
+            int i4 = this._currentStream.read(bArr, i + i3, i2 - i3);
+            if (i4 >= 0) {
+                i3 += i4;
                 if (i3 == i2) {
                     return i3;
                 }
@@ -56,9 +56,9 @@ class ConstructedOctetStream extends InputStream {
             this._currentStream = nextParser.getOctetStream();
         }
         while (true) {
-            int read = this._currentStream.read();
-            if (read >= 0) {
-                return read;
+            int i = this._currentStream.read();
+            if (i >= 0) {
+                return i;
             }
             ASN1OctetStringParser nextParser2 = getNextParser();
             if (nextParser2 == null) {
@@ -70,13 +70,13 @@ class ConstructedOctetStream extends InputStream {
     }
 
     private ASN1OctetStringParser getNextParser() throws IOException {
-        ASN1Encodable readObject = this._parser.readObject();
-        if (readObject == null) {
+        ASN1Encodable object = this._parser.readObject();
+        if (object == null) {
             return null;
         }
-        if (readObject instanceof ASN1OctetStringParser) {
-            return (ASN1OctetStringParser) readObject;
+        if (object instanceof ASN1OctetStringParser) {
+            return (ASN1OctetStringParser) object;
         }
-        throw new IOException("unknown object encountered: " + readObject.getClass());
+        throw new IOException("unknown object encountered: " + object.getClass());
     }
 }

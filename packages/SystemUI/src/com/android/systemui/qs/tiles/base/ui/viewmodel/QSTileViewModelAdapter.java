@@ -16,7 +16,9 @@ import com.android.systemui.qs.tiles.base.shared.model.QSTileConfig;
 import com.android.systemui.qs.tiles.base.shared.model.QSTileState;
 import com.android.systemui.qs.tiles.base.shared.model.QSTileUIConfig;
 import com.android.systemui.qs.tiles.base.shared.model.QSTileUserAction;
+import com.android.systemui.qs.tiles.base.ui.viewmodel.QSTileViewModelAdapter;
 import java.io.PrintWriter;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 import kotlin.NoWhenBranchMatchedException;
@@ -24,6 +26,7 @@ import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
@@ -31,11 +34,14 @@ import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.StandaloneCoroutine;
+import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
+import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.FlowKt__LimitKt$takeWhile$$inlined$unsafeFlow$1;
+import kotlinx.coroutines.flow.FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1;
+import kotlinx.coroutines.flow.FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1;
 import kotlinx.coroutines.flow.StateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class QSTileViewModelAdapter implements QSTile, Dumpable {
     public static final Companion Companion = new Companion(null);
@@ -49,32 +55,30 @@ public final class QSTileViewModelAdapter implements QSTile, Dumpable {
     public final StandaloneCoroutine tileAdapterJob;
     public final CoroutineDispatcher uiBgDispatcher;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.qs.tiles.base.ui.viewmodel.QSTileViewModelAdapter$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         private /* synthetic */ Object L$0;
         int label;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.qs.tiles.base.ui.viewmodel.QSTileViewModelAdapter$1$1, reason: invalid class name and collision with other inner class name */
-        final class C02641 extends SuspendLambda implements Function2 {
+        final class C04201 extends SuspendLambda implements Function2 {
             int label;
             final /* synthetic */ QSTileViewModelAdapter this$0;
 
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-            public C02641(QSTileViewModelAdapter qSTileViewModelAdapter, Continuation continuation) {
+            public C04201(QSTileViewModelAdapter qSTileViewModelAdapter, Continuation continuation) {
                 super(2, continuation);
                 this.this$0 = qSTileViewModelAdapter;
             }
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
             public final Continuation create(Object obj, Continuation continuation) {
-                return new C02641(this.this$0, continuation);
+                return new C04201(this.this$0, continuation);
             }
 
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
-                return ((C02641) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                return ((C04201) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
             }
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
@@ -83,7 +87,7 @@ public final class QSTileViewModelAdapter implements QSTile, Dumpable {
                 int i = this.label;
                 if (i == 0) {
                     ResultKt.throwOnFailure(obj);
-                    StateFlow isAvailable = this.this$0.qsTileViewModel.isAvailable();
+                    StateFlow stateFlowIsAvailable = this.this$0.qsTileViewModel.isAvailable();
                     final QSTileViewModelAdapter qSTileViewModelAdapter = this.this$0;
                     FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.qs.tiles.base.ui.viewmodel.QSTileViewModelAdapter$1$1$invokeSuspend$$inlined$collectIndexed$1
                         public int index;
@@ -95,19 +99,19 @@ public final class QSTileViewModelAdapter implements QSTile, Dumpable {
                             if (i2 < 0) {
                                 throw new ArithmeticException("Index overflow has happened");
                             }
-                            boolean booleanValue = ((Boolean) obj2).booleanValue();
-                            QSTileViewModelAdapter qSTileViewModelAdapter2 = QSTileViewModelAdapter.this;
-                            if (!booleanValue && qSTileViewModelAdapter2.qsTileViewModel.getConfig().autoRemoveOnUnavailable) {
+                            boolean zBooleanValue = ((Boolean) obj2).booleanValue();
+                            QSTileViewModelAdapter qSTileViewModelAdapter2 = qSTileViewModelAdapter;
+                            if (!zBooleanValue && qSTileViewModelAdapter2.qsTileViewModel.getConfig().autoRemoveOnUnavailable) {
                                 qSTileViewModelAdapter2.qsHost.removeTile(qSTileViewModelAdapter2.getTileSpec());
                             }
-                            if (i2 <= 0 || !booleanValue) {
+                            if (i2 <= 0 || !zBooleanValue) {
                                 return Unit.INSTANCE;
                             }
                             throw new UnsupportedOperationException(AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("Turning on tile is not supported now. Tile spec: ", qSTileViewModelAdapter2.getTileSpec()));
                         }
                     };
                     this.label = 1;
-                    if (isAvailable.collect(flowCollector, this) == coroutineSingletons) {
+                    if (stateFlowIsAvailable.collect(flowCollector, this) == coroutineSingletons) {
                         return coroutineSingletons;
                     }
                 } else {
@@ -120,32 +124,30 @@ public final class QSTileViewModelAdapter implements QSTile, Dumpable {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.qs.tiles.base.ui.viewmodel.QSTileViewModelAdapter$1$2, reason: invalid class name */
         final class AnonymousClass2 extends SuspendLambda implements Function2 {
             int label;
             final /* synthetic */ QSTileViewModelAdapter this$0;
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.qs.tiles.base.ui.viewmodel.QSTileViewModelAdapter$1$2$1, reason: invalid class name and collision with other inner class name */
-            final class C02651 extends SuspendLambda implements Function2 {
+            final class C04211 extends SuspendLambda implements Function2 {
                 /* synthetic */ Object L$0;
                 int label;
 
-                public C02651(Continuation continuation) {
+                public C04211(Continuation continuation) {
                     super(2, continuation);
                 }
 
                 @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
                 public final Continuation create(Object obj, Continuation continuation) {
-                    C02651 c02651 = new C02651(continuation);
-                    c02651.L$0 = obj;
-                    return c02651;
+                    C04211 c04211 = new C04211(continuation);
+                    c04211.L$0 = obj;
+                    return c04211;
                 }
 
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj, Object obj2) {
-                    return ((C02651) create((QSTileState) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                    return ((C04211) create((QSTileState) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
                 }
 
                 @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
@@ -181,15 +183,15 @@ public final class QSTileViewModelAdapter implements QSTile, Dumpable {
                 int i = this.label;
                 if (i == 0) {
                     ResultKt.throwOnFailure(obj);
-                    FlowKt__LimitKt$takeWhile$$inlined$unsafeFlow$1 flowKt__LimitKt$takeWhile$$inlined$unsafeFlow$1 = new FlowKt__LimitKt$takeWhile$$inlined$unsafeFlow$1(this.this$0.qsTileViewModel.getState(), new C02651(null));
-                    C02662 c02662 = new FlowCollector() { // from class: com.android.systemui.qs.tiles.base.ui.viewmodel.QSTileViewModelAdapter.1.2.2
+                    FlowKt__LimitKt$takeWhile$$inlined$unsafeFlow$1 flowKt__LimitKt$takeWhile$$inlined$unsafeFlow$1 = new FlowKt__LimitKt$takeWhile$$inlined$unsafeFlow$1(this.this$0.qsTileViewModel.getState(), new C04211(null));
+                    C04222 c04222 = new FlowCollector() { // from class: com.android.systemui.qs.tiles.base.ui.viewmodel.QSTileViewModelAdapter.1.2.2
                         @Override // kotlinx.coroutines.flow.FlowCollector
                         public final Object emit(Object obj2, Continuation continuation) {
                             return Unit.INSTANCE;
                         }
                     };
                     this.label = 1;
-                    if (flowKt__LimitKt$takeWhile$$inlined$unsafeFlow$1.collect(c02662, this) == coroutineSingletons) {
+                    if (flowKt__LimitKt$takeWhile$$inlined$unsafeFlow$1.collect(c04222, this) == coroutineSingletons) {
                         return coroutineSingletons;
                     }
                 } else {
@@ -226,20 +228,19 @@ public final class QSTileViewModelAdapter implements QSTile, Dumpable {
             }
             ResultKt.throwOnFailure(obj);
             CoroutineScope coroutineScope = (CoroutineScope) this.L$0;
-            BuildersKt.launch$default(coroutineScope, null, null, new C02641(QSTileViewModelAdapter.this, null), 3);
+            BuildersKt.launch$default(coroutineScope, null, null, new C04201(QSTileViewModelAdapter.this, null), 3);
             BuildersKt.launch$default(coroutineScope, null, null, new AnonymousClass2(QSTileViewModelAdapter.this, null), 3);
             return Unit.INSTANCE;
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
         }
 
         public static QSTile.AdapterState mapState(Context context, QSTileState qSTileState, QSTileConfig qSTileConfig) {
-            QSTile.Icon icon;
+            QSTile.Icon drawableIcon;
             Drawable drawable;
             QSTile.AdapterState adapterState = new QSTile.AdapterState();
             adapterState.spec = qSTileConfig.tileSpec.getSpec();
@@ -250,20 +251,20 @@ public final class QSTileViewModelAdapter implements QSTile, Dumpable {
             adapterState.secondaryLabel = qSTileState.secondaryLabel;
             adapterState.handlesLongClick = qSTileState.supportedActions.contains(QSTileState.UserAction.LONG_CLICK);
             adapterState.handlesSecondaryClick = qSTileState.supportedActions.contains(QSTileState.UserAction.TOGGLE_CLICK);
-            Icon icon2 = qSTileState.icon;
-            if (icon2 instanceof Icon.Loaded) {
-                Icon.Loaded loaded = (Icon.Loaded) icon2;
+            Icon icon = qSTileState.icon;
+            if (icon instanceof Icon.Loaded) {
+                Icon.Loaded loaded = (Icon.Loaded) icon;
                 Integer num = loaded.res;
-                icon = num == null ? new QSTileImpl.DrawableIcon(loaded.drawable) : new QSTileImpl.DrawableIconWithRes(loaded.drawable, num.intValue());
-            } else if (icon2 instanceof Icon.Resource) {
-                icon = QSTileImpl.ResourceIcon.get(((Icon.Resource) icon2).res);
+                drawableIcon = num == null ? new QSTileImpl.DrawableIcon(loaded.drawable) : new QSTileImpl.DrawableIconWithRes(loaded.drawable, num.intValue());
+            } else if (icon instanceof Icon.Resource) {
+                drawableIcon = QSTileImpl.ResourceIcon.get(((Icon.Resource) icon).res);
             } else {
-                if (icon2 != null) {
+                if (icon != null) {
                     throw new NoWhenBranchMatchedException();
                 }
-                icon = null;
+                drawableIcon = null;
             }
-            adapterState.icon = icon;
+            adapterState.icon = drawableIcon;
             adapterState.state = activationState2.getLegacyState();
             adapterState.contentDescription = qSTileState.contentDescription;
             adapterState.stateDescription = qSTileState.stateDescription;
@@ -282,14 +283,14 @@ public final class QSTileViewModelAdapter implements QSTile, Dumpable {
                 adapterState.forceExpandIcon = false;
                 return adapterState;
             }
-            Icon icon3 = ((QSTileState.SideViewIcon.Custom) sideViewIcon).icon;
-            if (icon3 instanceof Icon.Loaded) {
-                drawable = ((Icon.Loaded) icon3).drawable;
+            Icon icon2 = ((QSTileState.SideViewIcon.Custom) sideViewIcon).icon;
+            if (icon2 instanceof Icon.Loaded) {
+                drawable = ((Icon.Loaded) icon2).drawable;
             } else {
-                if (!(icon3 instanceof Icon.Resource)) {
+                if (!(icon2 instanceof Icon.Resource)) {
                     throw new NoWhenBranchMatchedException();
                 }
-                drawable = context.getDrawable(((Icon.Resource) icon3).res);
+                drawable = context.getDrawable(((Icon.Resource) icon2).res);
             }
             adapterState.sideViewCustomDrawable = drawable;
             return adapterState;
@@ -299,9 +300,164 @@ public final class QSTileViewModelAdapter implements QSTile, Dumpable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         QSTileViewModelAdapter create(QSTileViewModel qSTileViewModel);
+    }
+
+    /* renamed from: com.android.systemui.qs.tiles.base.ui.viewmodel.QSTileViewModelAdapter$setListening$1, reason: invalid class name and case insensitive filesystem */
+    final class C10121 extends SuspendLambda implements Function2 {
+        final /* synthetic */ Object $client;
+        int label;
+
+        /* renamed from: com.android.systemui.qs.tiles.base.ui.viewmodel.QSTileViewModelAdapter$setListening$1$2, reason: invalid class name */
+        final class AnonymousClass2 extends SuspendLambda implements Function2 {
+            /* synthetic */ Object L$0;
+            int label;
+            final /* synthetic */ QSTileViewModelAdapter this$0;
+
+            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+            public AnonymousClass2(QSTileViewModelAdapter qSTileViewModelAdapter, Continuation continuation) {
+                super(2, continuation);
+                this.this$0 = qSTileViewModelAdapter;
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Continuation create(Object obj, Continuation continuation) {
+                AnonymousClass2 anonymousClass2 = new AnonymousClass2(this.this$0, continuation);
+                anonymousClass2.L$0 = obj;
+                return anonymousClass2;
+            }
+
+            @Override // kotlin.jvm.functions.Function2
+            public final Object invoke(Object obj, Object obj2) {
+                return ((AnonymousClass2) create((QSTile.AdapterState) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) {
+                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                if (this.label != 0) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+                QSTile.AdapterState adapterState = (QSTile.AdapterState) this.L$0;
+                if (adapterState.copyTo(this.this$0.cachedState)) {
+                    Iterator it = this.this$0.callbacks.iterator();
+                    while (it.hasNext()) {
+                        ((QSTile.Callback) it.next()).onStateChanged(adapterState);
+                    }
+                }
+                return Unit.INSTANCE;
+            }
+        }
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public C10121(Object obj, Continuation continuation) {
+            super(2, continuation);
+            this.$client = obj;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return QSTileViewModelAdapter.this.new C10121(this.$client, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((C10121) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            if (QSTileViewModelAdapter.this.listeningClients.add(this.$client) && QSTileViewModelAdapter.this.listeningClients.size() == 1) {
+                QSTileViewModelAdapter qSTileViewModelAdapter = QSTileViewModelAdapter.this;
+                final FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1 flowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1 = new FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1(qSTileViewModelAdapter.qsTileViewModel.getState());
+                final QSTileViewModelAdapter qSTileViewModelAdapter2 = QSTileViewModelAdapter.this;
+                qSTileViewModelAdapter.stateJob = FlowKt.launchIn(FlowKt.flowOn(new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(new Flow() { // from class: com.android.systemui.qs.tiles.base.ui.viewmodel.QSTileViewModelAdapter$setListening$1$invokeSuspend$$inlined$map$1
+
+                    /* renamed from: com.android.systemui.qs.tiles.base.ui.viewmodel.QSTileViewModelAdapter$setListening$1$invokeSuspend$$inlined$map$1$2, reason: invalid class name */
+                    public final class AnonymousClass2 implements FlowCollector {
+                        public final /* synthetic */ FlowCollector $this_unsafeFlow;
+                        public final /* synthetic */ QSTileViewModelAdapter this$0;
+
+                        /* renamed from: com.android.systemui.qs.tiles.base.ui.viewmodel.QSTileViewModelAdapter$setListening$1$invokeSuspend$$inlined$map$1$2$1, reason: invalid class name */
+                        public final class AnonymousClass1 extends ContinuationImpl {
+                            Object L$0;
+                            int label;
+                            /* synthetic */ Object result;
+
+                            public AnonymousClass1(Continuation continuation) {
+                                super(continuation);
+                            }
+
+                            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+                            public final Object invokeSuspend(Object obj) {
+                                this.result = obj;
+                                this.label |= Integer.MIN_VALUE;
+                                return AnonymousClass2.this.emit(null, this);
+                            }
+                        }
+
+                        public AnonymousClass2(FlowCollector flowCollector, QSTileViewModelAdapter qSTileViewModelAdapter) {
+                            this.$this_unsafeFlow = flowCollector;
+                            this.this$0 = qSTileViewModelAdapter;
+                        }
+
+                        /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
+                        @Override // kotlinx.coroutines.flow.FlowCollector
+                        /*
+                            Code decompiled incorrectly, please refer to instructions dump.
+                        */
+                        public final Object emit(Object obj, Continuation continuation) {
+                            AnonymousClass1 anonymousClass1;
+                            if (continuation instanceof AnonymousClass1) {
+                                anonymousClass1 = (AnonymousClass1) continuation;
+                                int i = anonymousClass1.label;
+                                if ((i & Integer.MIN_VALUE) != 0) {
+                                    anonymousClass1.label = i - Integer.MIN_VALUE;
+                                } else {
+                                    anonymousClass1 = new AnonymousClass1(continuation);
+                                }
+                            }
+                            Object obj2 = anonymousClass1.result;
+                            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                            int i2 = anonymousClass1.label;
+                            if (i2 == 0) {
+                                ResultKt.throwOnFailure(obj2);
+                                QSTileViewModelAdapter.Companion companion = QSTileViewModelAdapter.Companion;
+                                QSTileViewModelAdapter qSTileViewModelAdapter = this.this$0;
+                                Context context = qSTileViewModelAdapter.qsHost.getContext();
+                                QSTileConfig config = qSTileViewModelAdapter.qsTileViewModel.getConfig();
+                                companion.getClass();
+                                QSTile.AdapterState adapterStateMapState = QSTileViewModelAdapter.Companion.mapState(context, (QSTileState) obj, config);
+                                anonymousClass1.label = 1;
+                                if (this.$this_unsafeFlow.emit(adapterStateMapState, anonymousClass1) == coroutineSingletons) {
+                                    return coroutineSingletons;
+                                }
+                            } else {
+                                if (i2 != 1) {
+                                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                                }
+                                ResultKt.throwOnFailure(obj2);
+                            }
+                            return Unit.INSTANCE;
+                        }
+                    }
+
+                    @Override // kotlinx.coroutines.flow.Flow
+                    public final Object collect(FlowCollector flowCollector, Continuation continuation) {
+                        Object objCollect = flowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1.collect(new AnonymousClass2(flowCollector, qSTileViewModelAdapter2), continuation);
+                        return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
+                    }
+                }, new AnonymousClass2(QSTileViewModelAdapter.this, null)), QSTileViewModelAdapter.this.uiBgDispatcher), QSTileViewModelAdapter.this.applicationScope);
+            }
+            return Unit.INSTANCE;
+        }
     }
 
     public QSTileViewModelAdapter(CoroutineScope coroutineScope, QSHost qSHost, QSTileViewModel qSTileViewModel, CoroutineDispatcher coroutineDispatcher) {
@@ -460,7 +616,7 @@ public final class QSTileViewModelAdapter implements QSTile, Dumpable {
             return;
         }
         if (z) {
-            BuildersKt.launch$default(this.applicationScope, this.uiBgDispatcher, null, new QSTileViewModelAdapter$setListening$1(this, obj, null), 2);
+            BuildersKt.launch$default(this.applicationScope, this.uiBgDispatcher, null, new C10121(obj, null), 2);
             return;
         }
         this.listeningClients.remove(obj);

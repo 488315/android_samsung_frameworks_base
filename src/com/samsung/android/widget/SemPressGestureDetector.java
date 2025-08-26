@@ -41,6 +41,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -188,23 +189,23 @@ public class SemPressGestureDetector implements ISemTouchApi {
                 if (this.mTouchedRawPoints.size() == 2) {
                     PointF pointF = new PointF(this.mTouchedPoints.get(0).x, this.mTouchedPoints.get(0).y);
                     PointF pointF2 = new PointF(this.mTouchedPoints.get(1).x, this.mTouchedPoints.get(1).y);
-                    View semDispatchFindView = this.mView.semDispatchFindView(pointF, true, this);
-                    View semDispatchFindView2 = this.mView.semDispatchFindView(pointF2, true, this);
-                    Log.secD(TAG, "getTouchedViews: mTouchedPoints: " + this.mTouchedPoints.get(0) + " view0: " + semDispatchFindView + " TouchedPoint0: " + pointF + " TouchedPoint1: " + pointF2);
-                    if (semDispatchFindView != null) {
-                        arrayList.add(semDispatchFindView);
+                    View viewSemDispatchFindView = this.mView.semDispatchFindView(pointF, true, this);
+                    View viewSemDispatchFindView2 = this.mView.semDispatchFindView(pointF2, true, this);
+                    Log.secD(TAG, "getTouchedViews: mTouchedPoints: " + this.mTouchedPoints.get(0) + " view0: " + viewSemDispatchFindView + " TouchedPoint0: " + pointF + " TouchedPoint1: " + pointF2);
+                    if (viewSemDispatchFindView != null) {
+                        arrayList.add(viewSemDispatchFindView);
                     }
-                    if (semDispatchFindView2 != null) {
-                        arrayList.add(semDispatchFindView2);
+                    if (viewSemDispatchFindView2 != null) {
+                        arrayList.add(viewSemDispatchFindView2);
                         return arrayList;
                     }
                 }
             } else if (this.mTouchedRawPoints.size() == 1) {
                 PointF pointF3 = new PointF(this.mTouchedPoints.get(0).x, this.mTouchedPoints.get(0).y);
-                View semDispatchFindView3 = this.mView.semDispatchFindView(pointF3, true, this);
-                Log.secD(TAG, "getTouchedViews: TouchedPoint: " + pointF3 + " touchedView: " + semDispatchFindView3);
-                if (semDispatchFindView3 != null) {
-                    arrayList.add(semDispatchFindView3);
+                View viewSemDispatchFindView3 = this.mView.semDispatchFindView(pointF3, true, this);
+                Log.secD(TAG, "getTouchedViews: TouchedPoint: " + pointF3 + " touchedView: " + viewSemDispatchFindView3);
+                if (viewSemDispatchFindView3 != null) {
+                    arrayList.add(viewSemDispatchFindView3);
                     return arrayList;
                 }
             }
@@ -258,8 +259,8 @@ public class SemPressGestureDetector implements ISemTouchApi {
         return "";
     }
 
-    public static String getViewContentInternal(Context context, String str, View view, PointF pointF, Object obj) {
-        Object invoke;
+    public static String getViewContentInternal(Context context, String str, View view, PointF pointF, Object obj) throws IllegalAccessException, NoSuchFieldException, NoSuchMethodException, SecurityException, IllegalArgumentException {
+        Object objInvoke;
         Field declaredField;
         try {
         } catch (Exception e) {
@@ -287,11 +288,11 @@ public class SemPressGestureDetector implements ISemTouchApi {
         bundle.putString("caller_package", str);
         bundle.putString("caller_class", cls.getName());
         bundle.putLong("caller_version_code", touchedAppVersionCode);
-        Bundle call = context.getContentResolver().call(BIXBY_TOUCH_URI, CALL_REFLECT_METHOD, (String) null, bundle);
-        if (call != null) {
-            String string = call.getString("reflect_field_name");
-            String string2 = call.getString("reflect_method_name");
-            int i2 = call.getInt("reflect_field_level");
+        Bundle bundleCall = context.getContentResolver().call(BIXBY_TOUCH_URI, CALL_REFLECT_METHOD, (String) null, bundle);
+        if (bundleCall != null) {
+            String string = bundleCall.getString("reflect_field_name");
+            String string2 = bundleCall.getString("reflect_method_name");
+            int i2 = bundleCall.getInt("reflect_field_level");
             if (string != null) {
                 if (i2 == 0) {
                     declaredField = cls.getDeclaredField(string);
@@ -312,8 +313,8 @@ public class SemPressGestureDetector implements ISemTouchApi {
             } else {
                 Class[] clsArr = new Class[0];
                 Method method = cls.getMethod(string2, null);
-                if (method != null && (invoke = method.invoke(view, null)) != null) {
-                    return invoke.toString();
+                if (method != null && (objInvoke = method.invoke(view, null)) != null) {
+                    return objInvoke.toString();
                 }
             }
         }
@@ -334,11 +335,11 @@ public class SemPressGestureDetector implements ISemTouchApi {
     public void parseInfoFromView() {
         try {
             if (this.mView != null) {
-                Activity parseActivity = parseActivity();
-                if (parseActivity != null) {
-                    this.mActivityName = parseActivity.getComponentName().getClassName();
-                    this.mTaskId = parseActivity.getTaskId();
-                    Configuration currentConfigFromActivity = getCurrentConfigFromActivity(parseActivity);
+                Activity activity = parseActivity();
+                if (activity != null) {
+                    this.mActivityName = activity.getComponentName().getClassName();
+                    this.mTaskId = activity.getTaskId();
+                    Configuration currentConfigFromActivity = getCurrentConfigFromActivity(activity);
                     if (currentConfigFromActivity != null) {
                         this.mWindowConfig = currentConfigFromActivity.windowConfiguration.toString();
                         this.mWindowingMode = currentConfigFromActivity.windowConfiguration.getWindowingMode();
@@ -346,18 +347,18 @@ public class SemPressGestureDetector implements ISemTouchApi {
                         this.mWindowConfig = this.mView.getResources().getConfiguration().windowConfiguration.toString();
                         this.mWindowingMode = this.mView.getResources().getConfiguration().windowConfiguration.getWindowingMode();
                     }
-                    this.mAppBounds = parseActivity.getWindow().getWindowManager().getCurrentWindowMetrics().getBounds();
-                    this.mMaxBounds = parseActivity.getWindow().getWindowManager().getMaximumWindowMetrics().getBounds();
+                    this.mAppBounds = activity.getWindow().getWindowManager().getCurrentWindowMetrics().getBounds();
+                    this.mMaxBounds = activity.getWindow().getWindowManager().getMaximumWindowMetrics().getBounds();
                     this.mBounds = this.mAppBounds;
                     int[] iArr = new int[2];
-                    View decorView = parseActivity.getWindow().getDecorView();
+                    View decorView = activity.getWindow().getDecorView();
                     decorView.getLocationOnScreen(iArr);
                     int i = iArr[0];
                     this.mDecorViewBounds = new Rect(i, iArr[1], decorView.getWidth() + i, iArr[1] + decorView.getHeight());
                     Log.secD(TAG, "parseInfoFromView: mDecorViewBounds = " + this.mDecorViewBounds.toString());
                     try {
-                        this.mDisplayCutoutInsets = parseActivity.getWindow().getWindowManager().getCurrentWindowMetrics().getWindowInsets().getInsets(WindowInsets.Type.displayCutout());
-                        this.mNavigationBarsInsets = parseActivity.getWindow().getWindowManager().getCurrentWindowMetrics().getWindowInsets().getInsets(WindowInsets.Type.navigationBars());
+                        this.mDisplayCutoutInsets = activity.getWindow().getWindowManager().getCurrentWindowMetrics().getWindowInsets().getInsets(WindowInsets.Type.displayCutout());
+                        this.mNavigationBarsInsets = activity.getWindow().getWindowManager().getCurrentWindowMetrics().getWindowInsets().getInsets(WindowInsets.Type.navigationBars());
                         return;
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -373,21 +374,21 @@ public class SemPressGestureDetector implements ISemTouchApi {
         }
     }
 
-    private Activity parseActivity() {
+    /* JADX WARN: Removed duplicated region for block: B:10:0x0021 A[PHI: r0
+      0x0021: PHI (r0v1 android.content.Context) = (r0v0 android.content.Context), (r0v4 android.content.Context) binds: [B:6:0x000d, B:8:0x001b] A[DONT_GENERATE, DONT_INLINE]] */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    private Activity parseActivity() throws NoSuchFieldException {
         Activity activity;
-        Context context = this.mContext;
-        if (context instanceof Activity) {
-            activity = (Activity) context;
-        } else {
-            if (context instanceof DecorContext) {
-                context = getContextFromDecorContext(this.mView.getContext());
-                if (context instanceof Activity) {
-                    activity = (Activity) context;
-                }
-            }
-            activity = null;
+        Context contextFromDecorContext = this.mContext;
+        if (contextFromDecorContext instanceof Activity) {
+            activity = (Activity) contextFromDecorContext;
+        } else if (contextFromDecorContext instanceof DecorContext) {
+            contextFromDecorContext = getContextFromDecorContext(this.mView.getContext());
+            activity = contextFromDecorContext instanceof Activity ? (Activity) contextFromDecorContext : null;
         }
-        return activity == null ? getActivityFromContextWrapper(context) : activity;
+        return activity == null ? getActivityFromContextWrapper(contextFromDecorContext) : activity;
     }
 
     private Activity getActivityFromContextWrapper(Context context) {
@@ -401,7 +402,7 @@ public class SemPressGestureDetector implements ISemTouchApi {
         return getActivityFromContextWrapper(baseContext);
     }
 
-    private Context getContextFromDecorContext(Context context) {
+    private Context getContextFromDecorContext(Context context) throws NoSuchFieldException {
         try {
             Field declaredField = context.getClass().getDeclaredField("mContext");
             if (declaredField == null) {
@@ -424,7 +425,7 @@ public class SemPressGestureDetector implements ISemTouchApi {
         }
     }
 
-    public Configuration getCurrentConfig(Activity activity, Class cls) {
+    public Configuration getCurrentConfig(Activity activity, Class cls) throws NoSuchFieldException {
         Class superclass = cls.getSuperclass();
         try {
             Field declaredField = cls.getDeclaredField("mCurrentConfig");
@@ -445,7 +446,7 @@ public class SemPressGestureDetector implements ISemTouchApi {
 
     /* JADX INFO: Access modifiers changed from: private */
     public boolean isFingerPrintInDisplay() {
-        int i;
+        int iSemGetIconBottomMargin;
         boolean z;
         if (!sHasFingerPrintFeature) {
             return false;
@@ -454,14 +455,14 @@ public class SemPressGestureDetector implements ISemTouchApi {
             FingerprintManager fingerprintManager = (FingerprintManager) this.mContext.getSystemService(Context.FINGERPRINT_SERVICE);
             if (fingerprintManager != null) {
                 z = FingerprintManager.semGetSensorPosition() == 2;
-                i = fingerprintManager.semGetIconBottomMargin();
+                iSemGetIconBottomMargin = fingerprintManager.semGetIconBottomMargin();
             } else {
-                i = 0;
+                iSemGetIconBottomMargin = 0;
                 z = false;
             }
         } catch (Exception unused) {
         }
-        return z && i > 0;
+        return z && iSemGetIconBottomMargin > 0;
     }
 
     public void setBixbyTouchEnable(boolean z) {
@@ -502,9 +503,9 @@ public class SemPressGestureDetector implements ISemTouchApi {
         sHasFingerPrintFeature = hasFingerPrintFeature();
         WindowManager.LayoutParams layoutParams = (WindowManager.LayoutParams) this.mView.getLayoutParams();
         if (layoutParams != null) {
-            Integer valueOf = Integer.valueOf(layoutParams.type);
-            this.mWindowType = valueOf;
-            boolean z = valueOf.intValue() >= 2000;
+            Integer numValueOf = Integer.valueOf(layoutParams.type);
+            this.mWindowType = numValueOf;
+            boolean z = numValueOf.intValue() >= 2000;
             this.mFindViewRestricted = z;
             if (z) {
                 return;
@@ -609,20 +610,20 @@ public class SemPressGestureDetector implements ISemTouchApi {
                         }
                     }
                 }
-                Bundle call = this.mContext.getContentResolver().call(BIXBY_TOUCH_URI, CALL_METHOD, (String) null, bundle);
-                if (call != null) {
+                Bundle bundleCall = this.mContext.getContentResolver().call(BIXBY_TOUCH_URI, CALL_METHOD, (String) null, bundle);
+                if (bundleCall != null) {
                     if (i == 1) {
-                        long j = call.getLong(KEY_BIXBYTOUCH_VERSION, 0L);
+                        long j = bundleCall.getLong(KEY_BIXBYTOUCH_VERSION, 0L);
                         if (j != 0) {
                             this.mBixbyTouchVersion = j;
                         }
-                        sCurrentTouchMode = call.getInt(KEY_BIXBYTOUCH_FINGER_TOUCH_TRIGGER, sCurrentTouchMode);
-                        sLongPressTime = call.getInt(KEY_BIXBYTOUCH_LONG_PRESS_TIME, sLongPressTime);
-                        sLongLongPressTime = call.getInt(KEY_LONG_LONG_PRESS_TIME, sLongLongPressTime);
-                        sCheckTouchDownDelayTime = call.getInt(KEY_CHECK_FP_DELAY_TIME, sCheckTouchDownDelayTime);
-                        sFingerDownThreshold = call.getInt(KEY_BIXBYTOUCH_FINGER_DOWN_THRESHOLD, sFingerDownThreshold);
+                        sCurrentTouchMode = bundleCall.getInt(KEY_BIXBYTOUCH_FINGER_TOUCH_TRIGGER, sCurrentTouchMode);
+                        sLongPressTime = bundleCall.getInt(KEY_BIXBYTOUCH_LONG_PRESS_TIME, sLongPressTime);
+                        sLongLongPressTime = bundleCall.getInt(KEY_LONG_LONG_PRESS_TIME, sLongLongPressTime);
+                        sCheckTouchDownDelayTime = bundleCall.getInt(KEY_CHECK_FP_DELAY_TIME, sCheckTouchDownDelayTime);
+                        sFingerDownThreshold = bundleCall.getInt(KEY_BIXBYTOUCH_FINGER_DOWN_THRESHOLD, sFingerDownThreshold);
                     }
-                    return call.getBoolean("bixby_touch_response", false);
+                    return bundleCall.getBoolean("bixby_touch_response", false);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -704,14 +705,8 @@ public class SemPressGestureDetector implements ISemTouchApi {
 
     /* JADX INFO: Access modifiers changed from: private */
     public void checkBlockApp() {
-        boolean z;
         try {
-            if (!isLauncherApp() && !matchPackage(TAEGET_PKG_NAME)) {
-                z = false;
-                this.mFindViewRestricted = z;
-            }
-            z = true;
-            this.mFindViewRestricted = z;
+            this.mFindViewRestricted = isLauncherApp() || matchPackage(TAEGET_PKG_NAME);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -723,28 +718,28 @@ public class SemPressGestureDetector implements ISemTouchApi {
         }
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_HOME);
-        ResolveInfo resolveActivity = this.mContext.getPackageManager().resolveActivity(intent, 0);
-        if (resolveActivity.activityInfo == null) {
+        ResolveInfo resolveInfoResolveActivity = this.mContext.getPackageManager().resolveActivity(intent, 0);
+        if (resolveInfoResolveActivity.activityInfo == null) {
             return false;
         }
-        return this.mCallerPackage.equals(resolveActivity.activityInfo.packageName);
+        return this.mCallerPackage.equals(resolveInfoResolveActivity.activityInfo.packageName);
     }
 
     public boolean dispatchTouchEvent(MotionEvent motionEvent) {
-        boolean z;
-        boolean dispatchTouchEventOneFinger;
+        boolean zDispatchTouchEvent;
+        boolean zDispatchTouchEventOneFinger;
         if (motionEvent.getActionMasked() == 0) {
             Log.secD(TAG, "dispatchTouchEvent:" + this.mProcessName + ",sBixbyTouchEnable=" + sBixbyTouchEnable + ",mFindViewRestricted=" + this.mFindViewRestricted);
             sHasCallReflectCount = 0;
         }
         SemOneTouchApi semOneTouchApi = this.mSemOneTouchApi;
         if (semOneTouchApi != null) {
-            z = semOneTouchApi.dispatchTouchEvent(this.mContext, motionEvent, this.mView);
-            if (z) {
+            zDispatchTouchEvent = semOneTouchApi.dispatchTouchEvent(this.mContext, motionEvent, this.mView);
+            if (zDispatchTouchEvent) {
                 return true;
             }
         } else {
-            z = false;
+            zDispatchTouchEvent = false;
         }
         if (!sBixbyTouchEnable || this.mFindViewRestricted || this.mDetachedFromWindow) {
             return false;
@@ -753,11 +748,11 @@ public class SemPressGestureDetector implements ISemTouchApi {
             resetFlags(motionEvent);
         }
         if (sCurrentTouchMode == 2) {
-            dispatchTouchEventOneFinger = dispatchTouchEventDoubleFingers(motionEvent);
+            zDispatchTouchEventOneFinger = dispatchTouchEventDoubleFingers(motionEvent);
         } else {
-            dispatchTouchEventOneFinger = dispatchTouchEventOneFinger(motionEvent);
+            zDispatchTouchEventOneFinger = dispatchTouchEventOneFinger(motionEvent);
         }
-        return z || dispatchTouchEventOneFinger;
+        return zDispatchTouchEvent || zDispatchTouchEventOneFinger;
     }
 
     private void resetFlags(MotionEvent motionEvent) {
@@ -812,11 +807,11 @@ public class SemPressGestureDetector implements ISemTouchApi {
     }
 
     private void addTouchedPoint(MotionEvent motionEvent) {
-        int findPointerIndex = motionEvent.findPointerIndex(motionEvent.getPointerId(motionEvent.getActionIndex()));
-        float x = motionEvent.getX(findPointerIndex);
-        float y = motionEvent.getY(findPointerIndex);
-        float rawX = motionEvent.getRawX(findPointerIndex);
-        float rawY = motionEvent.getRawY(findPointerIndex);
+        int iFindPointerIndex = motionEvent.findPointerIndex(motionEvent.getPointerId(motionEvent.getActionIndex()));
+        float x = motionEvent.getX(iFindPointerIndex);
+        float y = motionEvent.getY(iFindPointerIndex);
+        float rawX = motionEvent.getRawX(iFindPointerIndex);
+        float rawY = motionEvent.getRawY(iFindPointerIndex);
         Point point = new Point(x, y);
         Point point2 = new Point(rawX, rawY);
         this.mTouchedPoints.add(point);
@@ -952,42 +947,42 @@ public class SemPressGestureDetector implements ISemTouchApi {
         }).start();
     }
 
-    private void registerWebSummaryBroadcast() {
+    private void registerWebSummaryBroadcast() throws NoSuchFieldException {
         if (this.mContext != null) {
             IntentFilter intentFilter = new IntentFilter();
-            Activity parseActivity = parseActivity();
-            if (parseActivity != null && this.mBroadcastReceiver == null) {
+            Activity activity = parseActivity();
+            if (activity != null && this.mBroadcastReceiver == null) {
                 String string = Settings.Global.getString(this.mContext.getContentResolver(), "web_summary_activity");
                 String string2 = Settings.Global.getString(this.mContext.getContentResolver(), "view_location_activity");
-                boolean isEmpty = TextUtils.isEmpty(string);
-                boolean isEmpty2 = TextUtils.isEmpty(string2);
-                if (isEmpty && isEmpty2) {
+                boolean zIsEmpty = TextUtils.isEmpty(string);
+                boolean zIsEmpty2 = TextUtils.isEmpty(string2);
+                if (zIsEmpty && zIsEmpty2) {
                     return;
                 }
-                int hashCode = parseActivity.getClass().getName().hashCode();
+                int iHashCode = activity.getClass().getName().hashCode();
                 boolean z = false;
-                String substring = Integer.toHexString(hashCode).substring(0, Math.min(10, Integer.toHexString(hashCode).length()));
-                boolean z2 = !isEmpty && string.contains(substring);
-                if (!isEmpty2 && string2.contains(substring)) {
+                String strSubstring = Integer.toHexString(iHashCode).substring(0, Math.min(10, Integer.toHexString(iHashCode).length()));
+                boolean z2 = !zIsEmpty && string.contains(strSubstring);
+                if (!zIsEmpty2 && string2.contains(strSubstring)) {
                     z = true;
                 }
                 if (z2 || z) {
                     this.mBroadcastReceiver = new BroadcastReceiver() { // from class: com.samsung.android.widget.SemPressGestureDetector.6
                         @Override // android.content.BroadcastReceiver
                         public void onReceive(Context context, Intent intent) {
-                            int lastIndexOf;
+                            int iLastIndexOf;
                             try {
                                 String action = intent.getAction();
-                                if (!TextUtils.isEmpty(action) && (lastIndexOf = action.lastIndexOf(46)) != -1) {
-                                    String substring2 = action.substring(lastIndexOf + 1);
-                                    Log.secD(SemPressGestureDetector.TAG, ">" + action.substring(0, lastIndexOf));
+                                if (!TextUtils.isEmpty(action) && (iLastIndexOf = action.lastIndexOf(46)) != -1) {
+                                    String strSubstring2 = action.substring(iLastIndexOf + 1);
+                                    Log.secD(SemPressGestureDetector.TAG, ">" + action.substring(0, iLastIndexOf));
                                     long maxCreateTimeForClass = SemPressGestureDetector.this.getMaxCreateTimeForClass();
                                     if (maxCreateTimeForClass != SemPressGestureDetector.this.mRegisterBroadcastTime || maxCreateTimeForClass == 0) {
                                         return;
                                     }
-                                    if (TextUtils.equals(substring2, "START_PARSE")) {
+                                    if (TextUtils.equals(strSubstring2, "START_PARSE")) {
                                         SemPressGestureDetector.this.startObtainWebViewData(intent);
-                                    } else if (TextUtils.equals(substring2, "START_FIND")) {
+                                    } else if (TextUtils.equals(strSubstring2, "START_FIND")) {
                                         SemPressGestureDetector.this.startObtainViewLocation(intent);
                                     }
                                 }
@@ -996,7 +991,7 @@ public class SemPressGestureDetector implements ISemTouchApi {
                             }
                         }
                     };
-                    String name = parseActivity.getClass().getName();
+                    String name = activity.getClass().getName();
                     addRegisterBroadcastActivity(name);
                     Log.secD(TAG, "<" + name);
                     if (z2) {
@@ -1030,15 +1025,15 @@ public class SemPressGestureDetector implements ISemTouchApi {
         if (list.isEmpty()) {
             return 0L;
         }
-        long longValue = list.get(0).longValue();
+        long jLongValue = list.get(0).longValue();
         Iterator<Long> it = list.iterator();
         while (it.hasNext()) {
-            long longValue2 = it.next().longValue();
-            if (longValue2 > longValue) {
-                longValue = longValue2;
+            long jLongValue2 = it.next().longValue();
+            if (jLongValue2 > jLongValue) {
+                jLongValue = jLongValue2;
             }
         }
-        return longValue;
+        return jLongValue;
     }
 
     public void removeRegisterBroadcastActivityTime() {
@@ -1061,38 +1056,38 @@ public class SemPressGestureDetector implements ISemTouchApi {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void startObtainWebViewData(Intent intent) {
+    public void startObtainWebViewData(Intent intent) throws IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException {
         parseWebView(intent);
     }
 
     private View findWebView(ViewGroup viewGroup, String str, boolean z) {
         int childCount = viewGroup.getChildCount();
-        View view = null;
+        View viewFindWebView = null;
         if (z) {
             for (int i = childCount - 1; i >= 0; i--) {
                 View childAt = viewGroup.getChildAt(i);
                 if ((childAt instanceof WebView) || childAt.getClass().getName().equals(str)) {
                     return childAt;
                 }
-                if ((childAt instanceof ViewGroup) && (view = findWebView((ViewGroup) childAt, str, true)) != null) {
-                    return view;
+                if ((childAt instanceof ViewGroup) && (viewFindWebView = findWebView((ViewGroup) childAt, str, true)) != null) {
+                    return viewFindWebView;
                 }
             }
-            return view;
+            return viewFindWebView;
         }
         for (int i2 = 0; i2 < childCount; i2++) {
             View childAt2 = viewGroup.getChildAt(i2);
             if ((childAt2 instanceof WebView) || childAt2.getClass().getName().equals(str)) {
                 return childAt2;
             }
-            if ((childAt2 instanceof ViewGroup) && (view = findWebView((ViewGroup) childAt2, str, false)) != null) {
-                return view;
+            if ((childAt2 instanceof ViewGroup) && (viewFindWebView = findWebView((ViewGroup) childAt2, str, false)) != null) {
+                return viewFindWebView;
             }
         }
-        return view;
+        return viewFindWebView;
     }
 
-    private void parseWebView(Intent intent) {
+    private void parseWebView(Intent intent) throws IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException {
         if (this.mView != null) {
             final String stringExtra = intent.getStringExtra("request_code");
             String stringExtra2 = intent.getStringExtra("webview_class_name");
@@ -1102,15 +1097,15 @@ public class SemPressGestureDetector implements ISemTouchApi {
                 stringExtra2 = WebView.class.getName();
             }
             View view = this.mView;
-            View findWebView = view instanceof ViewGroup ? findWebView((ViewGroup) view, stringExtra2, booleanExtra) : null;
-            if (findWebView == null) {
+            View viewFindWebView = view instanceof ViewGroup ? findWebView((ViewGroup) view, stringExtra2, booleanExtra) : null;
+            if (viewFindWebView == null) {
                 sendHtmlData("", stringExtra);
                 return;
             }
             if (intent.getBooleanExtra("invoke_method", false)) {
-                findWebView = invokeMethodGetView(findWebView, intent.getStringExtra("method_name"));
+                viewFindWebView = invokeMethodGetView(viewFindWebView, intent.getStringExtra("method_name"));
             }
-            if (findWebView == null) {
+            if (viewFindWebView == null) {
                 sendHtmlData("", stringExtra);
                 return;
             }
@@ -1120,20 +1115,20 @@ public class SemPressGestureDetector implements ISemTouchApi {
                     SemPressGestureDetector.this.sendHtmlData(str, stringExtra);
                 }
             };
-            if (findWebView instanceof WebView) {
-                evaluateHtmlData((WebView) findWebView, booleanExtra2, valueCallback);
+            if (viewFindWebView instanceof WebView) {
+                evaluateHtmlData((WebView) viewFindWebView, booleanExtra2, valueCallback);
             } else {
-                invokeHtmlData(findWebView, booleanExtra2, stringExtra, valueCallback);
+                invokeHtmlData(viewFindWebView, booleanExtra2, stringExtra, valueCallback);
             }
         }
     }
 
-    private View invokeMethodGetView(View view, String str) {
+    private View invokeMethodGetView(View view, String str) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         try {
             Class[] clsArr = new Class[0];
-            Object invoke = view.getClass().getMethod(str, null).invoke(view, null);
-            if (invoke instanceof View) {
-                return (View) invoke;
+            Object objInvoke = view.getClass().getMethod(str, null).invoke(view, null);
+            if (objInvoke instanceof View) {
+                return (View) objInvoke;
             }
         } catch (Exception e) {
             Log.secD(TAG, "invoke 2: " + e.getMessage(), e);
@@ -1145,7 +1140,7 @@ public class SemPressGestureDetector implements ISemTouchApi {
         webView.evaluateJavascript(getRule(z), valueCallback);
     }
 
-    private void invokeHtmlData(View view, boolean z, String str, ValueCallback valueCallback) {
+    private void invokeHtmlData(View view, boolean z, String str, ValueCallback valueCallback) throws IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException {
         try {
             Method method = view.getClass().getMethod("evaluateJavascript", String.class, ValueCallback.class);
             if (method != null) {
@@ -1184,16 +1179,16 @@ public class SemPressGestureDetector implements ISemTouchApi {
             return false;
         }
         try {
-            ParcelFileDescriptor openFile = this.mContext.getContentResolver().openFile(Uri.parse("content://com.samsung.android.bixbytouch/web_summary_html_data"), String.valueOf(805306368), new CancellationSignal());
+            ParcelFileDescriptor parcelFileDescriptorOpenFile = this.mContext.getContentResolver().openFile(Uri.parse("content://com.samsung.android.bixbytouch/web_summary_html_data"), String.valueOf(805306368), new CancellationSignal());
             try {
-                if (openFile == null) {
+                if (parcelFileDescriptorOpenFile == null) {
                     Log.secD(TAG, "open fail");
-                    if (openFile != null) {
-                        openFile.close();
+                    if (parcelFileDescriptorOpenFile != null) {
+                        parcelFileDescriptorOpenFile.close();
                     }
                     return false;
                 }
-                FileWriter fileWriter = new FileWriter(openFile.getFileDescriptor());
+                FileWriter fileWriter = new FileWriter(parcelFileDescriptorOpenFile.getFileDescriptor());
                 try {
                     BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
                     try {
@@ -1201,10 +1196,10 @@ public class SemPressGestureDetector implements ISemTouchApi {
                         bufferedWriter.flush();
                         bufferedWriter.close();
                         fileWriter.close();
-                        if (openFile == null) {
+                        if (parcelFileDescriptorOpenFile == null) {
                             return true;
                         }
-                        openFile.close();
+                        parcelFileDescriptorOpenFile.close();
                         return true;
                     } finally {
                     }
@@ -1230,56 +1225,56 @@ public class SemPressGestureDetector implements ISemTouchApi {
 
     /* JADX INFO: Access modifiers changed from: private */
     public void startObtainViewLocation(Intent intent) {
-        int[] parseView;
+        int[] view;
         Bundle extras = intent.getExtras();
         if (extras == null || extras.isEmpty()) {
             sendFindViewLocationResult(null, "empty data");
             return;
         }
-        HashMap hashMap = new HashMap();
-        hashMap.put(TextView.class.getName(), TextView.class);
-        hashMap.put(EditText.class.getName(), EditText.class);
-        hashMap.put(CheckBox.class.getName(), CheckBox.class);
-        hashMap.put(Button.class.getName(), Button.class);
-        hashMap.put(ImageView.class.getName(), ImageView.class);
+        HashMap map = new HashMap();
+        map.put(TextView.class.getName(), TextView.class);
+        map.put(EditText.class.getName(), EditText.class);
+        map.put(CheckBox.class.getName(), CheckBox.class);
+        map.put(Button.class.getName(), Button.class);
+        map.put(ImageView.class.getName(), ImageView.class);
         String string = extras.getString("class_name");
         String[] stringArray = extras.getStringArray("content_desc");
         String[] stringArray2 = extras.getStringArray("content_text");
         String string2 = extras.getString("id");
         String string3 = extras.getString(SemEmergencyConstants.EXTRA_EMERGENCY_START_SERVICE_FLAG);
-        View view = this.mView;
-        if (!(view instanceof ViewGroup)) {
+        View view2 = this.mView;
+        if (!(view2 instanceof ViewGroup)) {
             sendFindViewLocationResult(null, string3);
             return;
         }
-        View findTargetView = findTargetView(view, string2, string, stringArray, stringArray2, hashMap);
-        if (findTargetView != null && (parseView = parseView(findTargetView, extras, hashMap)) != null) {
-            sendFindViewLocationResult(parseView, string3);
+        View viewFindTargetView = findTargetView(view2, string2, string, stringArray, stringArray2, map);
+        if (viewFindTargetView != null && (view = parseView(viewFindTargetView, extras, map)) != null) {
+            sendFindViewLocationResult(view, string3);
         } else {
             sendFindViewLocationResult(null, string3);
         }
     }
 
     private int[] parseView(View view, Bundle bundle, Map<String, Class<?>> map) {
-        View findParentView = findParentView(view, bundle.getInt("find_parent", 0));
+        View viewFindParentView = findParentView(view, bundle.getInt("find_parent", 0));
         if (bundle.getBoolean("target_child", false)) {
-            findParentView = findTargetView(findParentView, bundle.getString("child_id"), bundle.getString("child_class_name"), bundle.getStringArray("child_content_desc"), bundle.getStringArray("child_content_text"), map);
+            viewFindParentView = findTargetView(viewFindParentView, bundle.getString("child_id"), bundle.getString("child_class_name"), bundle.getStringArray("child_content_desc"), bundle.getStringArray("child_content_text"), map);
         }
-        if (findParentView == null) {
+        if (viewFindParentView == null) {
             return null;
         }
         int[] iArr = new int[2];
-        findParentView.getLocationOnScreen(iArr);
-        iArr[0] = iArr[0] + (findParentView.getWidth() / 2);
-        iArr[1] = iArr[1] + (findParentView.getHeight() / 2);
-        Log.secD(TAG, "findView : " + findParentView);
+        viewFindParentView.getLocationOnScreen(iArr);
+        iArr[0] = iArr[0] + (viewFindParentView.getWidth() / 2);
+        iArr[1] = iArr[1] + (viewFindParentView.getHeight() / 2);
+        Log.secD(TAG, "findView : " + viewFindParentView);
         return iArr;
     }
 
     private View findTargetView(View view, String str, String str2, String[] strArr, String[] strArr2, Map<String, Class<?>> map) {
-        View findById = findById(view, str);
-        if (findById != null) {
-            return findById;
+        View viewFindById = findById(view, str);
+        if (viewFindById != null) {
+            return viewFindById;
         }
         if (view instanceof ViewGroup) {
             return findView((ViewGroup) view, str2, strArr, strArr2, !TextUtils.isEmpty(str2), strArr != null && strArr.length > 0, strArr2 != null && strArr2.length > 0, map);
@@ -1311,14 +1306,14 @@ public class SemPressGestureDetector implements ISemTouchApi {
     }
 
     private View findView(ViewGroup viewGroup, String str, String[] strArr, String[] strArr2, boolean z, boolean z2, boolean z3, Map<String, Class<?>> map) {
-        View findView;
+        View viewFindView;
         for (int childCount = viewGroup.getChildCount() - 1; childCount >= 0; childCount--) {
             View childAt = viewGroup.getChildAt(childCount);
             if (isTargetText(childAt, strArr, strArr2, z2, z3) || (z && isSameInstanceof(childAt, str, map))) {
                 return childAt;
             }
-            if ((childAt instanceof ViewGroup) && (findView = findView((ViewGroup) childAt, str, strArr, strArr2, z, z2, z3, map)) != null) {
-                return findView;
+            if ((childAt instanceof ViewGroup) && (viewFindView = findView((ViewGroup) childAt, str, strArr, strArr2, z, z2, z3, map)) != null) {
+                return viewFindView;
             }
         }
         return null;

@@ -36,16 +36,16 @@ public class ResourcesProvider implements AutoCloseable, Closeable {
         if (!Flags.selfTargetingAndroidResourceFrro()) {
             Preconditions.checkStringNotEmpty(overlayInfo.getTargetOverlayableName(), "Without overlayable name");
         }
-        String checkOverlayNameValid = OverlayManagerImpl.checkOverlayNameValid(overlayInfo.getOverlayName());
-        Path of = Path.of((String) Preconditions.checkStringNotEmpty(overlayInfo.getBaseCodePath(), "Invalid base path"), new String[0]);
-        if (!Files.isRegularFile(of, new LinkOption[0])) {
+        String strCheckOverlayNameValid = OverlayManagerImpl.checkOverlayNameValid(overlayInfo.getOverlayName());
+        Path pathOf = Path.of((String) Preconditions.checkStringNotEmpty(overlayInfo.getBaseCodePath(), "Invalid base path"), new String[0]);
+        if (!Files.isRegularFile(pathOf, new LinkOption[0])) {
             throw new FileNotFoundException("The frro file not found");
         }
-        Path resolve = of.getParent().resolve(checkOverlayNameValid + ".idmap");
-        if (!Files.isRegularFile(resolve, new LinkOption[0])) {
+        Path pathResolve = pathOf.getParent().resolve(strCheckOverlayNameValid + ".idmap");
+        if (!Files.isRegularFile(pathResolve, new LinkOption[0])) {
             throw new FileNotFoundException("The idmap file not found");
         }
-        return new ResourcesProvider(ApkAssets.loadOverlayFromPath(resolve.toString(), 0));
+        return new ResourcesProvider(ApkAssets.loadOverlayFromPath(pathResolve.toString(), 0));
     }
 
     public static ResourcesProvider loadFromApk(ParcelFileDescriptor parcelFileDescriptor) throws IOException {
@@ -70,11 +70,11 @@ public class ResourcesProvider implements AutoCloseable, Closeable {
 
     public static ResourcesProvider loadFromSplit(Context context, String str) throws IOException {
         ApplicationInfo applicationInfo = context.getApplicationInfo();
-        int indexOf = ArrayUtils.indexOf(applicationInfo.splitNames, str);
-        if (indexOf < 0) {
+        int iIndexOf = ArrayUtils.indexOf(applicationInfo.splitNames, str);
+        if (iIndexOf < 0) {
             throw new IllegalArgumentException("Split " + str + " not found");
         }
-        return new ResourcesProvider(ApkAssets.loadFromPath(applicationInfo.getSplitCodePaths()[indexOf], 4, null));
+        return new ResourcesProvider(ApkAssets.loadFromPath(applicationInfo.getSplitCodePaths()[iIndexOf], 4, null));
     }
 
     public static ResourcesProvider loadFromDirectory(String str, AssetsProvider assetsProvider) throws IOException {

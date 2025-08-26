@@ -11,7 +11,6 @@ import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.functions.Function1;
 import kotlin.sequences.SequencesKt___SequencesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class NotificationTargetsHelper {
     public static RoundableTargets findRoundableTargets(ExpandableNotificationRow expandableNotificationRow, NotificationStackScrollLayout notificationStackScrollLayout, NotificationSectionsManager notificationSectionsManager) {
@@ -23,15 +22,15 @@ public final class NotificationTargetsHelper {
         List list = SequencesKt___SequencesKt.toList(SequencesKt___SequencesKt.filter(SequencesKt___SequencesKt.filter(new ViewGroupKt$children$1(notificationStackScrollLayout), new Function1() { // from class: com.android.systemui.statusbar.notification.stack.NotificationTargetsHelper$findRoundableTargets$$inlined$filterIsInstance$1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 return Boolean.valueOf(obj instanceof ExpandableView);
             }
         }), new NotificationTargetsHelper$$ExternalSyntheticLambda0(1)));
         if (expandableNotificationRow2 == null || notificationChildrenContainer == null) {
-            int indexOf = list.indexOf(expandableNotificationRow);
-            ExpandableView expandableView3 = (ExpandableView) CollectionsKt___CollectionsKt.getOrNull(indexOf - 1, list);
+            int iIndexOf = list.indexOf(expandableNotificationRow);
+            ExpandableView expandableView3 = (ExpandableView) CollectionsKt___CollectionsKt.getOrNull(iIndexOf - 1, list);
             roundable = (expandableView3 == null || notificationSectionsManager.beginsSection(expandableNotificationRow, expandableView3)) ? null : expandableView3;
-            ExpandableView expandableView4 = (ExpandableView) CollectionsKt___CollectionsKt.getOrNull(indexOf + 1, list);
+            ExpandableView expandableView4 = (ExpandableView) CollectionsKt___CollectionsKt.getOrNull(iIndexOf + 1, list);
             if (expandableView4 != null && !notificationSectionsManager.beginsSection(expandableView4, expandableNotificationRow)) {
                 expandableView2 = expandableView4;
             }
@@ -51,12 +50,12 @@ public final class NotificationTargetsHelper {
                     arrayList.add(obj);
                 }
             }
-            int indexOf2 = arrayList.indexOf(expandableNotificationRow);
-            roundable = (ExpandableNotificationRow) CollectionsKt___CollectionsKt.getOrNull(indexOf2 - 1, arrayList);
+            int iIndexOf2 = arrayList.indexOf(expandableNotificationRow);
+            roundable = (ExpandableNotificationRow) CollectionsKt___CollectionsKt.getOrNull(iIndexOf2 - 1, arrayList);
             if (roundable == null) {
                 roundable = notificationChildrenContainer.mGroupHeaderWrapper;
             }
-            expandableView = (ExpandableNotificationRow) CollectionsKt___CollectionsKt.getOrNull(indexOf2 + 1, arrayList);
+            expandableView = (ExpandableNotificationRow) CollectionsKt___CollectionsKt.getOrNull(iIndexOf2 + 1, arrayList);
             if (expandableView == null) {
                 expandableView = (ExpandableView) CollectionsKt___CollectionsKt.getOrNull(list.indexOf(expandableNotificationRow2) + 1, list);
             }

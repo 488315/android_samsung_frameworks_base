@@ -147,9 +147,9 @@ public class LockscreenCredential implements Parcelable, AutoCloseable {
     }
 
     private static byte[] copyOfArrayNonMovable(byte[] bArr) {
-        byte[] newNonMovableByteArray = LockPatternUtils.newNonMovableByteArray(bArr.length);
-        System.arraycopy(bArr, 0, newNonMovableByteArray, 0, bArr.length);
-        return newNonMovableByteArray;
+        byte[] bArrNewNonMovableByteArray = LockPatternUtils.newNonMovableByteArray(bArr.length);
+        System.arraycopy(bArr, 0, bArrNewNonMovableByteArray, 0, bArr.length);
+        return bArrNewNonMovableByteArray;
     }
 
     public void validateBasicRequirements() {
@@ -178,7 +178,7 @@ public class LockscreenCredential implements Parcelable, AutoCloseable {
         return passwordToHistoryHash(this.mCredential, bArr, bArr2);
     }
 
-    public static String passwordToHistoryHash(byte[] bArr, byte[] bArr2, byte[] bArr3) {
+    public static String passwordToHistoryHash(byte[] bArr, byte[] bArr2, byte[] bArr3) throws NoSuchAlgorithmException {
         if (bArr == null || bArr.length == 0 || bArr3 == null || bArr2 == null) {
             return null;
         }
@@ -199,11 +199,11 @@ public class LockscreenCredential implements Parcelable, AutoCloseable {
             return null;
         }
         try {
-            byte[] concat = ArrayUtils.concat(bArr, bArr2);
-            byte[] digest = MessageDigest.getInstance("SHA-1").digest(concat);
-            byte[] digest2 = MessageDigest.getInstance(KeyProperties.DIGEST_MD5).digest(concat);
-            LockPatternUtils.zeroize(concat);
-            return HexEncoding.encodeToString(ArrayUtils.concat(digest, digest2));
+            byte[] bArrConcat = ArrayUtils.concat(bArr, bArr2);
+            byte[] bArrDigest = MessageDigest.getInstance("SHA-1").digest(bArrConcat);
+            byte[] bArrDigest2 = MessageDigest.getInstance(KeyProperties.DIGEST_MD5).digest(bArrConcat);
+            LockPatternUtils.zeroize(bArrConcat);
+            return HexEncoding.encodeToString(ArrayUtils.concat(bArrDigest, bArrDigest2));
         } catch (NoSuchAlgorithmException e) {
             throw new AssertionError("Missing digest algorithm: ", e);
         }
@@ -242,8 +242,8 @@ public class LockscreenCredential implements Parcelable, AutoCloseable {
 
     private static boolean hasInvalidChars(CharSequence charSequence) {
         for (int i = 0; i < charSequence.length(); i++) {
-            char charAt = charSequence.charAt(i);
-            if (charAt < ' ' || charAt > 127) {
+            char cCharAt = charSequence.charAt(i);
+            if (cCharAt < ' ' || cCharAt > 127) {
                 return true;
             }
         }
@@ -251,11 +251,11 @@ public class LockscreenCredential implements Parcelable, AutoCloseable {
     }
 
     private static byte[] charsToBytesTruncating(CharSequence charSequence) {
-        byte[] newNonMovableByteArray = LockPatternUtils.newNonMovableByteArray(charSequence.length());
+        byte[] bArrNewNonMovableByteArray = LockPatternUtils.newNonMovableByteArray(charSequence.length());
         for (int i = 0; i < charSequence.length(); i++) {
-            newNonMovableByteArray[i] = (byte) charSequence.charAt(i);
+            bArrNewNonMovableByteArray[i] = (byte) charSequence.charAt(i);
         }
-        return newNonMovableByteArray;
+        return bArrNewNonMovableByteArray;
     }
 
     private static byte[] charsToBytesForUnicode(CharSequence charSequence) {
@@ -263,18 +263,18 @@ public class LockscreenCredential implements Parcelable, AutoCloseable {
         int i = 0;
         int i2 = 0;
         while (i < charSequence.length()) {
-            char charAt = charSequence.charAt(i);
-            if (charAt > 255) {
-                bArr[i2] = (byte) (charAt >> '\b');
+            char cCharAt = charSequence.charAt(i);
+            if (cCharAt > 255) {
+                bArr[i2] = (byte) (cCharAt >> '\b');
                 i2++;
             }
-            bArr[i2] = (byte) charAt;
+            bArr[i2] = (byte) cCharAt;
             i++;
             i2++;
         }
-        byte[] copyOf = Arrays.copyOf(bArr, i2);
+        byte[] bArrCopyOf = Arrays.copyOf(bArr, i2);
         Arrays.fill(bArr, (byte) 0);
-        return copyOf;
+        return bArrCopyOf;
     }
 
     public static LockscreenCredential streamCredential(int i, byte[] bArr) {

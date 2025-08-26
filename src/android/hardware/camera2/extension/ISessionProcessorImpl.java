@@ -122,9 +122,9 @@ public interface ISessionProcessorImpl extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISessionProcessorImpl.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISessionProcessorImpl)) {
-                return (ISessionProcessorImpl) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISessionProcessorImpl.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISessionProcessorImpl)) {
+                return (ISessionProcessorImpl) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -172,35 +172,36 @@ public interface ISessionProcessorImpl extends IInterface {
             }
             switch (i) {
                 case 1:
-                    IBinder readStrongBinder = parcel.readStrongBinder();
-                    String readString = parcel.readString();
-                    int readInt = parcel.readInt();
-                    final HashMap hashMap = readInt < 0 ? null : new HashMap();
-                    IntStream.range(0, readInt).forEach(new IntConsumer() { // from class: android.hardware.camera2.extension.ISessionProcessorImpl$Stub$$ExternalSyntheticLambda0
+                    IBinder strongBinder = parcel.readStrongBinder();
+                    String string = parcel.readString();
+                    int i3 = parcel.readInt();
+                    final HashMap map = i3 < 0 ? null : new HashMap();
+                    IntStream.range(0, i3).forEach(new IntConsumer() { // from class: android.hardware.camera2.extension.ISessionProcessorImpl$Stub$$ExternalSyntheticLambda0
                         @Override // java.util.function.IntConsumer
-                        public final void accept(int i3) {
-                            hashMap.put(r0.readString(), (CameraMetadataNative) Parcel.this.readTypedObject(CameraMetadataNative.CREATOR));
+                        public final void accept(int i4) {
+                            Parcel parcel3 = parcel;
+                            map.put(parcel3.readString(), (CameraMetadataNative) parcel3.readTypedObject(CameraMetadataNative.CREATOR));
                         }
                     });
                     OutputSurface outputSurface = (OutputSurface) parcel.readTypedObject(OutputSurface.CREATOR);
                     OutputSurface outputSurface2 = (OutputSurface) parcel.readTypedObject(OutputSurface.CREATOR);
                     OutputSurface outputSurface3 = (OutputSurface) parcel.readTypedObject(OutputSurface.CREATOR);
                     parcel.enforceNoDataAvail();
-                    CameraSessionConfig initSession = initSession(readStrongBinder, readString, hashMap, outputSurface, outputSurface2, outputSurface3);
+                    CameraSessionConfig cameraSessionConfigInitSession = initSession(strongBinder, string, map, outputSurface, outputSurface2, outputSurface3);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(initSession, 1);
+                    parcel2.writeTypedObject(cameraSessionConfigInitSession, 1);
                     return true;
                 case 2:
-                    IBinder readStrongBinder2 = parcel.readStrongBinder();
+                    IBinder strongBinder2 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    deInitSession(readStrongBinder2);
+                    deInitSession(strongBinder2);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    IRequestProcessorImpl asInterface = IRequestProcessorImpl.Stub.asInterface(parcel.readStrongBinder());
-                    String readString2 = parcel.readString();
+                    IRequestProcessorImpl iRequestProcessorImplAsInterface = IRequestProcessorImpl.Stub.asInterface(parcel.readStrongBinder());
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    onCaptureSessionStart(asInterface, readString2);
+                    onCaptureSessionStart(iRequestProcessorImplAsInterface, string2);
                     parcel2.writeNoException();
                     return true;
                 case 4:
@@ -208,23 +209,23 @@ public interface ISessionProcessorImpl extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    ICaptureCallback asInterface2 = ICaptureCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ICaptureCallback iCaptureCallbackAsInterface = ICaptureCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int startRepeating = startRepeating(asInterface2);
+                    int iStartRepeating = startRepeating(iCaptureCallbackAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeInt(startRepeating);
+                    parcel2.writeInt(iStartRepeating);
                     return true;
                 case 6:
                     stopRepeating();
                     parcel2.writeNoException();
                     return true;
                 case 7:
-                    ICaptureCallback asInterface3 = ICaptureCallback.Stub.asInterface(parcel.readStrongBinder());
-                    boolean readBoolean = parcel.readBoolean();
+                    ICaptureCallback iCaptureCallbackAsInterface2 = ICaptureCallback.Stub.asInterface(parcel.readStrongBinder());
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    int startCapture = startCapture(asInterface3, readBoolean);
+                    int iStartCapture = startCapture(iCaptureCallbackAsInterface2, z);
                     parcel2.writeNoException();
-                    parcel2.writeInt(startCapture);
+                    parcel2.writeInt(iStartCapture);
                     return true;
                 case 8:
                     CaptureRequest captureRequest = (CaptureRequest) parcel.readTypedObject(CaptureRequest.CREATOR);
@@ -234,11 +235,11 @@ public interface ISessionProcessorImpl extends IInterface {
                     return true;
                 case 9:
                     CaptureRequest captureRequest2 = (CaptureRequest) parcel.readTypedObject(CaptureRequest.CREATOR);
-                    ICaptureCallback asInterface4 = ICaptureCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ICaptureCallback iCaptureCallbackAsInterface3 = ICaptureCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int startTrigger = startTrigger(captureRequest2, asInterface4);
+                    int iStartTrigger = startTrigger(captureRequest2, iCaptureCallbackAsInterface3);
                     parcel2.writeNoException();
-                    parcel2.writeInt(startTrigger);
+                    parcel2.writeInt(iStartTrigger);
                     return true;
                 case 10:
                     LatencyPair realtimeCaptureLatency = getRealtimeCaptureLatency();
@@ -269,32 +270,32 @@ public interface ISessionProcessorImpl extends IInterface {
 
             @Override // android.hardware.camera2.extension.ISessionProcessorImpl
             public CameraSessionConfig initSession(IBinder iBinder, String str, Map<String, CameraMetadataNative> map, OutputSurface outputSurface, OutputSurface outputSurface2, OutputSurface outputSurface3) throws RemoteException {
-                final Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                final Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISessionProcessorImpl.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeString(str);
+                    parcelObtain.writeInterfaceToken(ISessionProcessorImpl.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeString(str);
                     if (map == null) {
-                        obtain.writeInt(-1);
+                        parcelObtain.writeInt(-1);
                     } else {
-                        obtain.writeInt(map.size());
+                        parcelObtain.writeInt(map.size());
                         map.forEach(new BiConsumer() { // from class: android.hardware.camera2.extension.ISessionProcessorImpl$Stub$Proxy$$ExternalSyntheticLambda0
                             @Override // java.util.function.BiConsumer
                             public final void accept(Object obj, Object obj2) {
-                                ISessionProcessorImpl.Stub.Proxy.lambda$initSession$0(Parcel.this, (String) obj, (CameraMetadataNative) obj2);
+                                ISessionProcessorImpl.Stub.Proxy.lambda$initSession$0(parcelObtain, (String) obj, (CameraMetadataNative) obj2);
                             }
                         });
                     }
-                    obtain.writeTypedObject(outputSurface, 0);
-                    obtain.writeTypedObject(outputSurface2, 0);
-                    obtain.writeTypedObject(outputSurface3, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (CameraSessionConfig) obtain2.readTypedObject(CameraSessionConfig.CREATOR);
+                    parcelObtain.writeTypedObject(outputSurface, 0);
+                    parcelObtain.writeTypedObject(outputSurface2, 0);
+                    parcelObtain.writeTypedObject(outputSurface3, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (CameraSessionConfig) parcelObtain2.readTypedObject(CameraSessionConfig.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -305,140 +306,140 @@ public interface ISessionProcessorImpl extends IInterface {
 
             @Override // android.hardware.camera2.extension.ISessionProcessorImpl
             public void deInitSession(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISessionProcessorImpl.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISessionProcessorImpl.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.camera2.extension.ISessionProcessorImpl
             public void onCaptureSessionStart(IRequestProcessorImpl iRequestProcessorImpl, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISessionProcessorImpl.DESCRIPTOR);
-                    obtain.writeStrongInterface(iRequestProcessorImpl);
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISessionProcessorImpl.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iRequestProcessorImpl);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.camera2.extension.ISessionProcessorImpl
             public void onCaptureSessionEnd() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISessionProcessorImpl.DESCRIPTOR);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISessionProcessorImpl.DESCRIPTOR);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.camera2.extension.ISessionProcessorImpl
             public int startRepeating(ICaptureCallback iCaptureCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISessionProcessorImpl.DESCRIPTOR);
-                    obtain.writeStrongInterface(iCaptureCallback);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISessionProcessorImpl.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iCaptureCallback);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.camera2.extension.ISessionProcessorImpl
             public void stopRepeating() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISessionProcessorImpl.DESCRIPTOR);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISessionProcessorImpl.DESCRIPTOR);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.camera2.extension.ISessionProcessorImpl
             public int startCapture(ICaptureCallback iCaptureCallback, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISessionProcessorImpl.DESCRIPTOR);
-                    obtain.writeStrongInterface(iCaptureCallback);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISessionProcessorImpl.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iCaptureCallback);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.camera2.extension.ISessionProcessorImpl
             public void setParameters(CaptureRequest captureRequest) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISessionProcessorImpl.DESCRIPTOR);
-                    obtain.writeTypedObject(captureRequest, 0);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISessionProcessorImpl.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(captureRequest, 0);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.camera2.extension.ISessionProcessorImpl
             public int startTrigger(CaptureRequest captureRequest, ICaptureCallback iCaptureCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISessionProcessorImpl.DESCRIPTOR);
-                    obtain.writeTypedObject(captureRequest, 0);
-                    obtain.writeStrongInterface(iCaptureCallback);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISessionProcessorImpl.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(captureRequest, 0);
+                    parcelObtain.writeStrongInterface(iCaptureCallback);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.camera2.extension.ISessionProcessorImpl
             public LatencyPair getRealtimeCaptureLatency() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISessionProcessorImpl.DESCRIPTOR);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (LatencyPair) obtain2.readTypedObject(LatencyPair.CREATOR);
+                    parcelObtain.writeInterfaceToken(ISessionProcessorImpl.DESCRIPTOR);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (LatencyPair) parcelObtain2.readTypedObject(LatencyPair.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -2,10 +2,9 @@ package com.samsung.android.kmxservice.ai.privacy;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Binder;
+import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.util.Log;
 import java.io.IOException;
@@ -21,8 +20,11 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /* loaded from: classes6.dex */
 public class PermissionDataController {
+    private static final int DDR_4GB = 4;
+    public static final Uri PROVIDER_URI = Uri.parse("content://com.samsung.android.kmxservice.ai.privacy/permission");
     private static final String TAG = "AI::PermissionDataController";
     private final Context mContext;
+    private int mDDRSize;
     private final Executor mFlushExecutor;
     private Set<PermissionData> mPermissionDatas;
     private final HashMap<Integer, Boolean> mPermissionGroupMap = new HashMap<Integer, Boolean>() { // from class: com.samsung.android.kmxservice.ai.privacy.PermissionDataController.2
@@ -56,9 +58,6 @@ public class PermissionDataController {
     };
     private final Lock mReadLock;
     private final Lock mWriterLock;
-    private static Set<String> zeroLevelPackages = new HashSet();
-    private static final Integer UID_FILTER = 10000;
-    public static final Uri PROVIDER_URI = Uri.parse("content://com.samsung.android.kmxservice.ai.privacy/permission");
 
     public PermissionDataController(Context context) {
         ReentrantReadWriteLock reentrantReadWriteLock = new ReentrantReadWriteLock();
@@ -67,6 +66,7 @@ public class PermissionDataController {
         this.mContext = context;
         this.mFlushExecutor = Executors.newSingleThreadExecutor();
         this.mPermissionDatas = new HashSet();
+        this.mDDRSize = 0;
     }
 
     private void write(PermissionData permissionData) {
@@ -78,16 +78,22 @@ public class PermissionDataController {
         }
     }
 
+    private void getDDRSize() {
+        try {
+            this.mDDRSize = Integer.parseInt(SystemProperties.get("ro.boot.mDDRSize", "0"));
+        } catch (NumberFormatException e) {
+            Log.e(TAG, e.getMessage());
+        }
+    }
+
     public void write(int i, int i2, String str, int i3) {
-        if (i2 < UID_FILTER.intValue()) {
-            return;
+        if (this.mDDRSize == 0) {
+            getDDRSize();
         }
-        if (zeroLevelPackages.isEmpty()) {
-            initialPackages();
-        }
-        if (isPackageEnable(str) && isOpCodeEnable(i)) {
+        int i4 = this.mDDRSize;
+        if ((i4 <= 0 || i4 > 4) && isOpCodeEnable(i)) {
             write(new PermissionData(i, i2, str, i3));
-            if (this.mPermissionDatas.size() > 499) {
+            if (this.mPermissionDatas.size() > 999) {
                 flushAsync();
             }
         }
@@ -105,14 +111,14 @@ public class PermissionDataController {
         if (arrayList.size() > 0) {
             ContentValues[] contentValuesArr = new ContentValues[arrayList.size()];
             arrayList.toArray(contentValuesArr);
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 this.mContext.getContentResolver().bulkInsert(PROVIDER_URI, contentValuesArr);
                 Log.d(TAG, "bulkInsert success");
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -148,33 +154,6 @@ public class PermissionDataController {
         } finally {
             this.mWriterLock.unlock();
         }
-    }
-
-    private void initialPackages() {
-        String[] strArr = {"/system/priv-app", "/system/app", "/system/system_ext", "/product/app", "/product/overlay", "/apex", "/system/framework", "/product/priv-app", "/system_ext/priv-app"};
-        for (PackageInfo packageInfo : this.mContext.getPackageManager().getInstalledPackages(128)) {
-            try {
-                String str = this.mContext.getPackageManager().getPackageInfo(packageInfo.packageName, 4096).applicationInfo.sourceDir;
-                int i = 0;
-                while (true) {
-                    if (i >= 9) {
-                        break;
-                    }
-                    if (str.startsWith(strArr[i])) {
-                        zeroLevelPackages.add(packageInfo.packageName);
-                        break;
-                    }
-                    i++;
-                }
-            } catch (PackageManager.NameNotFoundException e) {
-                Log.e(TAG, "Can not found source directory of " + packageInfo.packageName + e);
-            }
-        }
-        Log.d(TAG, "Building initial packages list success");
-    }
-
-    private boolean isPackageEnable(String str) {
-        return !zeroLevelPackages.contains(str);
     }
 
     private boolean isOpCodeEnable(int i) {

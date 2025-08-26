@@ -11,7 +11,6 @@ import java.util.Optional;
 import javax.inject.Provider;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class AmbientLightModeMonitor implements Dumpable {
     public static final boolean DEBUG;
@@ -24,8 +23,8 @@ public final class AmbientLightModeMonitor implements Dumpable {
                 if (AmbientLightModeMonitor.DEBUG) {
                     Log.w("AmbientLightModeMonitor", "SensorEvent doesn't have any value");
                 }
-            } else if (AmbientLightModeMonitor.this.algorithm.isPresent()) {
-                if (AmbientLightModeMonitor.this.algorithm.get() != null) {
+            } else if (this.this$0.algorithm.isPresent()) {
+                if (this.this$0.algorithm.get() != null) {
                     throw new ClassCastException();
                 }
                 float f = sensorEvent.values[0];
@@ -39,7 +38,6 @@ public final class AmbientLightModeMonitor implements Dumpable {
     };
     public final AsyncSensorManager sensorManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();

@@ -71,9 +71,9 @@ public class SurfaceRenderFilter extends Filter implements SurfaceHolder.Callbac
 
     @Override // android.filterfw.core.Filter
     public void prepare(FilterContext filterContext) {
-        ShaderProgram createIdentity = ShaderProgram.createIdentity(filterContext);
-        this.mProgram = createIdentity;
-        createIdentity.setSourceRect(0.0f, 1.0f, 1.0f, -1.0f);
+        ShaderProgram shaderProgramCreateIdentity = ShaderProgram.createIdentity(filterContext);
+        this.mProgram = shaderProgramCreateIdentity;
+        shaderProgramCreateIdentity.setSourceRect(0.0f, 1.0f, 1.0f, -1.0f);
         this.mProgram.setClearsOutput(true);
         this.mProgram.setClearColor(0.0f, 0.0f, 0.0f);
         updateRenderMode();
@@ -100,8 +100,8 @@ public class SurfaceRenderFilter extends Filter implements SurfaceHolder.Callbac
         if (gLEnv != filterContext.getGLEnvironment()) {
             throw new RuntimeException("Surface created under different GLEnvironment!");
         }
-        Frame pullInput = pullInput("frame");
-        float width = pullInput.getFormat().getWidth() / pullInput.getFormat().getHeight();
+        Frame framePullInput = pullInput("frame");
+        float width = framePullInput.getFormat().getWidth() / framePullInput.getFormat().getHeight();
         if (width != this.mAspectRatio) {
             if (this.mLogVerbose) {
                 Log.v(TAG, "New aspect ratio: " + width + ", previously: " + this.mAspectRatio);
@@ -110,19 +110,19 @@ public class SurfaceRenderFilter extends Filter implements SurfaceHolder.Callbac
             updateTargetRect();
         }
         if (this.mLogVerbose) {
-            Log.v(TAG, "Got input format: " + pullInput.getFormat());
+            Log.v(TAG, "Got input format: " + framePullInput.getFormat());
         }
-        if (pullInput.getFormat().getTarget() != 3) {
-            pullInput = filterContext.getFrameManager().duplicateFrameToTarget(pullInput, 3);
+        if (framePullInput.getFormat().getTarget() != 3) {
+            framePullInput = filterContext.getFrameManager().duplicateFrameToTarget(framePullInput, 3);
             z = true;
         } else {
             z = false;
         }
         gLEnv.activateSurfaceWithId(this.mSurfaceView.getSurfaceId());
-        this.mProgram.process(pullInput, this.mScreen);
+        this.mProgram.process(framePullInput, this.mScreen);
         gLEnv.swapBuffers();
         if (z) {
-            pullInput.release();
+            framePullInput.release();
         }
     }
 

@@ -5,6 +5,7 @@ import android.os.FileUtils;
 import android.util.Log;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.Iterator;
 import java.util.List;
@@ -55,7 +56,7 @@ public class ThemePalette {
         return this.mMonetPaletteGG;
     }
 
-    public void writeLastPalette() {
+    public void writeLastPalette() throws IOException {
         File file = new File(WallpaperThemeConstants.RESID_TABLE_PATH);
         if (!file.exists()) {
             try {

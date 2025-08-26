@@ -7,6 +7,7 @@ import android.content.ClipDescription;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
@@ -32,7 +33,6 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Provider;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ClipboardListener implements CoreStartable, ClipboardManager.OnPrimaryClipChangedListener {
     static final String EXTRA_SUPPRESS_OVERLAY = "com.android.systemui.SUPPRESS_CLIPBOARD_OVERLAY";
@@ -60,7 +60,6 @@ public class ClipboardListener implements CoreStartable, ClipboardManager.OnPrim
     public final UiEventLogger mUiEventLogger;
     public final UserTracker mUserTracker;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.clipboardoverlay.ClipboardListener$2, reason: invalid class name */
     public class AnonymousClass2 extends Thread {
         public static final /* synthetic */ int $r8$clinit = 0;
@@ -82,8 +81,8 @@ public class ClipboardListener implements CoreStartable, ClipboardManager.OnPrim
                     if (!ClipboardListener.this.mKeyguardManagerForUser.isDeviceLocked() && Settings.Secure.getInt(ClipboardListener.this.mContext.getContentResolver(), SettingsHelper.INDEX_USER_SETUP_COMPLETE, 0) == 1 && primaryClipDescription != null) {
                         new Handler(Looper.getMainLooper()).post(new Runnable() { // from class: com.android.systemui.clipboardoverlay.ClipboardListener$2$$ExternalSyntheticLambda1
                             @Override // java.lang.Runnable
-                            public final void run() {
-                                ClipboardListener.AnonymousClass2 anonymousClass2 = ClipboardListener.AnonymousClass2.this;
+                            public final void run() throws PackageManager.NameNotFoundException {
+                                ClipboardListener.AnonymousClass2 anonymousClass2 = this.f$0;
                                 ClipDescription clipDescription = primaryClipDescription;
                                 String str = primaryClipSource;
                                 int i = ClipboardListener.AnonymousClass2.$r8$clinit;
@@ -106,8 +105,8 @@ public class ClipboardListener implements CoreStartable, ClipboardManager.OnPrim
                     if (z) {
                         new Handler(Looper.getMainLooper()).post(new Runnable() { // from class: com.android.systemui.clipboardoverlay.ClipboardListener$2$$ExternalSyntheticLambda0
                             @Override // java.lang.Runnable
-                            public final void run() {
-                                ClipboardListener.AnonymousClass2 anonymousClass2 = ClipboardListener.AnonymousClass2.this;
+                            public final void run() throws Resources.NotFoundException {
+                                ClipboardListener.AnonymousClass2 anonymousClass2 = this.f$0;
                                 String str = primaryClipSource;
                                 int i = ClipboardListener.AnonymousClass2.$r8$clinit;
                                 anonymousClass2.getClass();
@@ -118,9 +117,9 @@ public class ClipboardListener implements CoreStartable, ClipboardManager.OnPrim
                                     if (toast != null) {
                                         toast.cancel();
                                     }
-                                    Toast makeText = Toast.makeText(clipboardToast.mContext, R.string.clipboard_overlay_text_copied, 0);
-                                    clipboardToast.mCopiedToast = makeText;
-                                    makeText.addCallback(clipboardToast);
+                                    Toast toastMakeText = Toast.makeText(clipboardToast.mContext, R.string.clipboard_overlay_text_copied, 0);
+                                    clipboardToast.mCopiedToast = toastMakeText;
+                                    toastMakeText.addCallback(clipboardToast);
                                     clipboardToast.mCopiedToast.show();
                                 } catch (RuntimeException e) {
                                     Log.e("ClipboardListener", "showCopiedToast exception", e);
@@ -161,7 +160,7 @@ public class ClipboardListener implements CoreStartable, ClipboardManager.OnPrim
         new AnonymousClass2().start();
     }
 
-    public final void showCopyToast(ClipDescription clipDescription, String str) {
+    public final void showCopyToast(ClipDescription clipDescription, String str) throws Resources.NotFoundException, PackageManager.NameNotFoundException {
         String string;
         int i;
         Display display;
@@ -181,15 +180,15 @@ public class ClipboardListener implements CoreStartable, ClipboardManager.OnPrim
                     string = semClipboardToastController.mContext.getResources().getString(R.string.clipboard_copied_toast);
                 }
             } else {
-                String[] split = label.toString().split(";");
-                String str3 = split[0];
-                String replaceFirst = split.length > 1 ? split[1].replaceFirst("device_name=", "") : "";
+                String[] strArrSplit = label.toString().split(";");
+                String str3 = strArrSplit[0];
+                String strReplaceFirst = strArrSplit.length > 1 ? strArrSplit[1].replaceFirst("device_name=", "") : "";
                 semRemoteServiceStateManager.getClass();
-                if (!(("com.samsung.android.honeyboard".equals(str) && "mcf_continuity".equals(str3)) || (("com.sec.android.app.dexonpc".equals(str) && ("startDoPCopy".equals(str3) || "startDoPDrag".equals(str3))) || (("com.samsung.android.mdx".equals(str) && "com.samsung.android.mdx".equals(str3)) || (("com.samsung.android.galaxycontinuity".equals(str) && "com.samsung.android.galaxycontinuity".equals(str3)) || ("com.samsung.android.inputshare".equals(str) && "com.samsung.android.inputshare".equals(str3)))))) || replaceFirst.isBlank()) {
+                if (!(("com.samsung.android.honeyboard".equals(str) && "mcf_continuity".equals(str3)) || (("com.sec.android.app.dexonpc".equals(str) && ("startDoPCopy".equals(str3) || "startDoPDrag".equals(str3))) || (("com.samsung.android.mdx".equals(str) && "com.samsung.android.mdx".equals(str3)) || (("com.samsung.android.galaxycontinuity".equals(str) && "com.samsung.android.galaxycontinuity".equals(str3)) || ("com.samsung.android.inputshare".equals(str) && "com.samsung.android.inputshare".equals(str3)))))) || strReplaceFirst.isBlank()) {
                     KeyguardPluginControllerImpl$$ExternalSyntheticOutline0.m("ClipLabel is not empty but not for remote service. ", str, "SemClipboardToastController");
                     string = semClipboardToastController.mContext.getResources().getString(R.string.clipboard_copied_toast);
                 } else {
-                    string = semClipboardToastController.mContext.getResources().getString(R.string.clipboard_copied_from_remote_device, replaceFirst);
+                    string = semClipboardToastController.mContext.getResources().getString(R.string.clipboard_copied_from_remote_device, strReplaceFirst);
                 }
             }
             Display[] displays = semClipboardToastController.mDisplayManager.getDisplays();

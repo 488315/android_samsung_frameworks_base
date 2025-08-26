@@ -237,40 +237,40 @@ public final class DemuxFilterEvent implements Parcelable {
     }
 
     public void readFromParcel(Parcel parcel) {
-        int readInt = parcel.readInt();
-        switch (readInt) {
+        int i = parcel.readInt();
+        switch (i) {
             case 0:
-                _set(readInt, (DemuxFilterSectionEvent) parcel.readTypedObject(DemuxFilterSectionEvent.CREATOR));
+                _set(i, (DemuxFilterSectionEvent) parcel.readTypedObject(DemuxFilterSectionEvent.CREATOR));
                 return;
             case 1:
-                _set(readInt, (DemuxFilterMediaEvent) parcel.readTypedObject(DemuxFilterMediaEvent.CREATOR));
+                _set(i, (DemuxFilterMediaEvent) parcel.readTypedObject(DemuxFilterMediaEvent.CREATOR));
                 return;
             case 2:
-                _set(readInt, (DemuxFilterPesEvent) parcel.readTypedObject(DemuxFilterPesEvent.CREATOR));
+                _set(i, (DemuxFilterPesEvent) parcel.readTypedObject(DemuxFilterPesEvent.CREATOR));
                 return;
             case 3:
-                _set(readInt, (DemuxFilterTsRecordEvent) parcel.readTypedObject(DemuxFilterTsRecordEvent.CREATOR));
+                _set(i, (DemuxFilterTsRecordEvent) parcel.readTypedObject(DemuxFilterTsRecordEvent.CREATOR));
                 return;
             case 4:
-                _set(readInt, (DemuxFilterMmtpRecordEvent) parcel.readTypedObject(DemuxFilterMmtpRecordEvent.CREATOR));
+                _set(i, (DemuxFilterMmtpRecordEvent) parcel.readTypedObject(DemuxFilterMmtpRecordEvent.CREATOR));
                 return;
             case 5:
-                _set(readInt, (DemuxFilterDownloadEvent) parcel.readTypedObject(DemuxFilterDownloadEvent.CREATOR));
+                _set(i, (DemuxFilterDownloadEvent) parcel.readTypedObject(DemuxFilterDownloadEvent.CREATOR));
                 return;
             case 6:
-                _set(readInt, (DemuxFilterIpPayloadEvent) parcel.readTypedObject(DemuxFilterIpPayloadEvent.CREATOR));
+                _set(i, (DemuxFilterIpPayloadEvent) parcel.readTypedObject(DemuxFilterIpPayloadEvent.CREATOR));
                 return;
             case 7:
-                _set(readInt, (DemuxFilterTemiEvent) parcel.readTypedObject(DemuxFilterTemiEvent.CREATOR));
+                _set(i, (DemuxFilterTemiEvent) parcel.readTypedObject(DemuxFilterTemiEvent.CREATOR));
                 return;
             case 8:
-                _set(readInt, (DemuxFilterMonitorEvent) parcel.readTypedObject(DemuxFilterMonitorEvent.CREATOR));
+                _set(i, (DemuxFilterMonitorEvent) parcel.readTypedObject(DemuxFilterMonitorEvent.CREATOR));
                 return;
             case 9:
-                _set(readInt, Integer.valueOf(parcel.readInt()));
+                _set(i, Integer.valueOf(parcel.readInt()));
                 return;
             default:
-                throw new IllegalArgumentException("union: unknown tag: " + readInt);
+                throw new IllegalArgumentException("union: unknown tag: " + i);
         }
     }
 

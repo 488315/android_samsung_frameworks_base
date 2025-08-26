@@ -1,5 +1,6 @@
 package com.android.internal.org.bouncycastle.crypto.io;
 
+import com.android.internal.org.bouncycastle.crypto.DataLengthException;
 import com.android.internal.org.bouncycastle.crypto.Mac;
 import java.io.FilterInputStream;
 import java.io.IOException;
@@ -15,21 +16,21 @@ public class MacInputStream extends FilterInputStream {
     }
 
     @Override // java.io.FilterInputStream, java.io.InputStream
-    public int read() throws IOException {
-        int read = this.in.read();
-        if (read >= 0) {
-            this.mac.update((byte) read);
+    public int read() throws IllegalStateException, IOException {
+        int i = this.in.read();
+        if (i >= 0) {
+            this.mac.update((byte) i);
         }
-        return read;
+        return i;
     }
 
     @Override // java.io.FilterInputStream, java.io.InputStream
-    public int read(byte[] bArr, int i, int i2) throws IOException {
-        int read = this.in.read(bArr, i, i2);
-        if (read >= 0) {
-            this.mac.update(bArr, i, read);
+    public int read(byte[] bArr, int i, int i2) throws IllegalStateException, IOException, DataLengthException {
+        int i3 = this.in.read(bArr, i, i2);
+        if (i3 >= 0) {
+            this.mac.update(bArr, i, i3);
         }
-        return read;
+        return i3;
     }
 
     public Mac getMac() {

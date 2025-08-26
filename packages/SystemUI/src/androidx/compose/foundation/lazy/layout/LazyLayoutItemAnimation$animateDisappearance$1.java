@@ -14,7 +14,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class LazyLayoutItemAnimation$animateDisappearance$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ GraphicsLayer $layer;
@@ -41,72 +40,70 @@ final class LazyLayoutItemAnimation$animateDisappearance$1 extends SuspendLambda
     }
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
-    public final Object invokeSuspend(Object obj) {
+    public final Object invokeSuspend(Object obj) throws Throwable {
         LazyLayoutItemAnimation$animateDisappearance$1 lazyLayoutItemAnimation$animateDisappearance$1;
-        Float f;
-        FiniteAnimationSpec<Float> finiteAnimationSpec;
-        Function1 function1;
+        Animatable animatable;
         Throwable th;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             try {
-                Animatable animatable = this.this$0.visibilityAnimation;
+                animatable = this.this$0.visibilityAnimation;
                 try {
-                    try {
-                        f = new Float(0.0f);
-                        finiteAnimationSpec = this.$spec;
-                        final GraphicsLayer graphicsLayer = this.$layer;
-                        final LazyLayoutItemAnimation lazyLayoutItemAnimation = this.this$0;
-                        function1 = new Function1() { // from class: androidx.compose.foundation.lazy.layout.LazyLayoutItemAnimation$animateDisappearance$1.1
-                            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-                            {
-                                super(1);
-                            }
-
-                            @Override // kotlin.jvm.functions.Function1
-                            /* renamed from: invoke */
-                            public final Object mo779invoke(Object obj2) {
-                                GraphicsLayer.this.setAlpha(((Number) ((Animatable) obj2).internalState.getValue()).floatValue());
-                                lazyLayoutItemAnimation.onLayerPropertyChanged.invoke();
-                                return Unit.INSTANCE;
-                            }
-                        };
-                        this.label = 1;
-                        lazyLayoutItemAnimation$animateDisappearance$1 = this;
-                    } catch (Throwable th2) {
-                        th = th2;
-                        lazyLayoutItemAnimation$animateDisappearance$1 = this;
-                        th = th;
-                        LazyLayoutItemAnimation lazyLayoutItemAnimation2 = lazyLayoutItemAnimation$animateDisappearance$1.this$0;
-                        LazyLayoutItemAnimation.Companion companion = LazyLayoutItemAnimation.Companion;
-                        lazyLayoutItemAnimation2.setDisappearanceAnimationInProgress(false);
-                        throw th;
+                } catch (Throwable th2) {
+                    th = th2;
+                    lazyLayoutItemAnimation$animateDisappearance$1 = this;
+                }
+            } catch (Throwable th3) {
+                th = th3;
+                lazyLayoutItemAnimation$animateDisappearance$1 = this;
+                th = th;
+                LazyLayoutItemAnimation lazyLayoutItemAnimation = lazyLayoutItemAnimation$animateDisappearance$1.this$0;
+                LazyLayoutItemAnimation.Companion companion = LazyLayoutItemAnimation.Companion;
+                lazyLayoutItemAnimation.setDisappearanceAnimationInProgress(false);
+                throw th;
+            }
+            try {
+                Float f = new Float(0.0f);
+                FiniteAnimationSpec<Float> finiteAnimationSpec = this.$spec;
+                final GraphicsLayer graphicsLayer = this.$layer;
+                final LazyLayoutItemAnimation lazyLayoutItemAnimation2 = this.this$0;
+                Function1 function1 = new Function1() { // from class: androidx.compose.foundation.lazy.layout.LazyLayoutItemAnimation$animateDisappearance$1.1
+                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+                    {
+                        super(1);
                     }
-                    try {
-                        if (Animatable.animateTo$default(animatable, f, finiteAnimationSpec, null, function1, lazyLayoutItemAnimation$animateDisappearance$1, 4) == coroutineSingletons) {
-                            return coroutineSingletons;
-                        }
-                    } catch (Throwable th3) {
-                        th = th3;
-                        th = th;
-                        LazyLayoutItemAnimation lazyLayoutItemAnimation22 = lazyLayoutItemAnimation$animateDisappearance$1.this$0;
-                        LazyLayoutItemAnimation.Companion companion2 = LazyLayoutItemAnimation.Companion;
-                        lazyLayoutItemAnimation22.setDisappearanceAnimationInProgress(false);
-                        throw th;
+
+                    @Override // kotlin.jvm.functions.Function1
+                    /* renamed from: invoke */
+                    public final Object mo781invoke(Object obj2) {
+                        graphicsLayer.setAlpha(((Number) ((Animatable) obj2).internalState.getValue()).floatValue());
+                        lazyLayoutItemAnimation2.onLayerPropertyChanged.invoke();
+                        return Unit.INSTANCE;
+                    }
+                };
+                this.label = 1;
+                lazyLayoutItemAnimation$animateDisappearance$1 = this;
+                try {
+                    if (Animatable.animateTo$default(animatable, f, finiteAnimationSpec, null, function1, lazyLayoutItemAnimation$animateDisappearance$1, 4) == coroutineSingletons) {
+                        return coroutineSingletons;
                     }
                 } catch (Throwable th4) {
                     th = th4;
-                    lazyLayoutItemAnimation$animateDisappearance$1 = this;
+                    th = th;
+                    LazyLayoutItemAnimation lazyLayoutItemAnimation3 = lazyLayoutItemAnimation$animateDisappearance$1.this$0;
+                    LazyLayoutItemAnimation.Companion companion2 = LazyLayoutItemAnimation.Companion;
+                    lazyLayoutItemAnimation3.setDisappearanceAnimationInProgress(false);
+                    throw th;
                 }
             } catch (Throwable th5) {
                 th = th5;
                 lazyLayoutItemAnimation$animateDisappearance$1 = this;
                 th = th;
-                LazyLayoutItemAnimation lazyLayoutItemAnimation222 = lazyLayoutItemAnimation$animateDisappearance$1.this$0;
+                LazyLayoutItemAnimation lazyLayoutItemAnimation32 = lazyLayoutItemAnimation$animateDisappearance$1.this$0;
                 LazyLayoutItemAnimation.Companion companion22 = LazyLayoutItemAnimation.Companion;
-                lazyLayoutItemAnimation222.setDisappearanceAnimationInProgress(false);
+                lazyLayoutItemAnimation32.setDisappearanceAnimationInProgress(false);
                 throw th;
             }
         } else {
@@ -119,27 +116,27 @@ final class LazyLayoutItemAnimation$animateDisappearance$1 extends SuspendLambda
             } catch (Throwable th6) {
                 th = th6;
                 lazyLayoutItemAnimation$animateDisappearance$1 = this;
-                LazyLayoutItemAnimation lazyLayoutItemAnimation2222 = lazyLayoutItemAnimation$animateDisappearance$1.this$0;
+                LazyLayoutItemAnimation lazyLayoutItemAnimation322 = lazyLayoutItemAnimation$animateDisappearance$1.this$0;
                 LazyLayoutItemAnimation.Companion companion222 = LazyLayoutItemAnimation.Companion;
-                lazyLayoutItemAnimation2222.setDisappearanceAnimationInProgress(false);
+                lazyLayoutItemAnimation322.setDisappearanceAnimationInProgress(false);
                 throw th;
             }
         }
         try {
-        } catch (Throwable th7) {
-            th = th7;
-        }
-        try {
-            ((SnapshotMutableStateImpl) lazyLayoutItemAnimation$animateDisappearance$1.this$0.isDisappearanceAnimationFinished$delegate).setValue(Boolean.TRUE);
-            lazyLayoutItemAnimation$animateDisappearance$1.this$0.setDisappearanceAnimationInProgress(false);
-            return Unit.INSTANCE;
+            try {
+                ((SnapshotMutableStateImpl) lazyLayoutItemAnimation$animateDisappearance$1.this$0.isDisappearanceAnimationFinished$delegate).setValue(Boolean.TRUE);
+                lazyLayoutItemAnimation$animateDisappearance$1.this$0.setDisappearanceAnimationInProgress(false);
+                return Unit.INSTANCE;
+            } catch (Throwable th7) {
+                th = th7;
+                th = th;
+                LazyLayoutItemAnimation lazyLayoutItemAnimation3222 = lazyLayoutItemAnimation$animateDisappearance$1.this$0;
+                LazyLayoutItemAnimation.Companion companion2222 = LazyLayoutItemAnimation.Companion;
+                lazyLayoutItemAnimation3222.setDisappearanceAnimationInProgress(false);
+                throw th;
+            }
         } catch (Throwable th8) {
             th = th8;
-            th = th;
-            LazyLayoutItemAnimation lazyLayoutItemAnimation22222 = lazyLayoutItemAnimation$animateDisappearance$1.this$0;
-            LazyLayoutItemAnimation.Companion companion2222 = LazyLayoutItemAnimation.Companion;
-            lazyLayoutItemAnimation22222.setDisappearanceAnimationInProgress(false);
-            throw th;
         }
     }
 }

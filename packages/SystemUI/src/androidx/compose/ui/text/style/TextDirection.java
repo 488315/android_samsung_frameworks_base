@@ -2,7 +2,6 @@ package androidx.compose.ui.text.style;
 
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class TextDirection {
     public final int value;
@@ -14,7 +13,6 @@ public final class TextDirection {
     public static final int ContentOrRtl = 5;
     public static final int Unspecified = Integer.MIN_VALUE;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -29,12 +27,12 @@ public final class TextDirection {
     }
 
     /* renamed from: box-impl, reason: not valid java name */
-    public static final /* synthetic */ TextDirection m807boximpl(int i) {
+    public static final /* synthetic */ TextDirection m809boximpl(int i) {
         return new TextDirection(i);
     }
 
     /* renamed from: toString-impl, reason: not valid java name */
-    public static String m808toStringimpl(int i) {
+    public static String m810toStringimpl(int i) {
         return i == Ltr ? "Ltr" : i == Rtl ? "Rtl" : i == Content ? "Content" : i == ContentOrLtr ? "ContentOrLtr" : i == ContentOrRtl ? "ContentOrRtl" : i == Unspecified ? "Unspecified" : "Invalid";
     }
 
@@ -50,6 +48,6 @@ public final class TextDirection {
     }
 
     public final String toString() {
-        return m808toStringimpl(this.value);
+        return m810toStringimpl(this.value);
     }
 }

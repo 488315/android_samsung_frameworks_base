@@ -79,9 +79,9 @@ public interface IGnssCallback extends IBase {
         if (iHwBinder == null) {
             return null;
         }
-        IHwInterface queryLocalInterface = iHwBinder.queryLocalInterface(kInterfaceName);
-        if (queryLocalInterface != null && (queryLocalInterface instanceof IGnssCallback)) {
-            return (IGnssCallback) queryLocalInterface;
+        IHwInterface iHwInterfaceQueryLocalInterface = iHwBinder.queryLocalInterface(kInterfaceName);
+        if (iHwInterfaceQueryLocalInterface != null && (iHwInterfaceQueryLocalInterface instanceof IGnssCallback)) {
+            return (IGnssCallback) iHwInterfaceQueryLocalInterface;
         }
         Proxy proxy = new Proxy(iHwBinder);
         try {
@@ -346,13 +346,13 @@ public interface IGnssCallback extends IBase {
 
         public static final ArrayList<GnssSvInfo> readVectorFromParcel(HwParcel hwParcel) {
             ArrayList<GnssSvInfo> arrayList = new ArrayList<>();
-            HwBlob readBuffer = hwParcel.readBuffer(16L);
-            int int32 = readBuffer.getInt32(8L);
-            HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 24, readBuffer.handle(), 0L, true);
+            HwBlob buffer = hwParcel.readBuffer(16L);
+            int int32 = buffer.getInt32(8L);
+            HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 24, buffer.handle(), 0L, true);
             arrayList.clear();
             for (int i = 0; i < int32; i++) {
                 GnssSvInfo gnssSvInfo = new GnssSvInfo();
-                gnssSvInfo.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 24);
+                gnssSvInfo.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 24);
                 arrayList.add(gnssSvInfo);
             }
             return arrayList;
@@ -427,13 +427,13 @@ public interface IGnssCallback extends IBase {
 
         public static final ArrayList<GnssSvStatus> readVectorFromParcel(HwParcel hwParcel) {
             ArrayList<GnssSvStatus> arrayList = new ArrayList<>();
-            HwBlob readBuffer = hwParcel.readBuffer(16L);
-            int int32 = readBuffer.getInt32(8L);
-            HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * MetricsProto.MetricsEvent.FIELD_ACTIVITY_RECORD_LAUNCH_MODE, readBuffer.handle(), 0L, true);
+            HwBlob buffer = hwParcel.readBuffer(16L);
+            int int32 = buffer.getInt32(8L);
+            HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * MetricsProto.MetricsEvent.FIELD_ACTIVITY_RECORD_LAUNCH_MODE, buffer.handle(), 0L, true);
             arrayList.clear();
             for (int i = 0; i < int32; i++) {
                 GnssSvStatus gnssSvStatus = new GnssSvStatus();
-                gnssSvStatus.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * MetricsProto.MetricsEvent.FIELD_ACTIVITY_RECORD_LAUNCH_MODE);
+                gnssSvStatus.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * MetricsProto.MetricsEvent.FIELD_ACTIVITY_RECORD_LAUNCH_MODE);
                 arrayList.add(gnssSvStatus);
             }
             return arrayList;
@@ -502,13 +502,13 @@ public interface IGnssCallback extends IBase {
 
         public static final ArrayList<GnssSystemInfo> readVectorFromParcel(HwParcel hwParcel) {
             ArrayList<GnssSystemInfo> arrayList = new ArrayList<>();
-            HwBlob readBuffer = hwParcel.readBuffer(16L);
-            int int32 = readBuffer.getInt32(8L);
-            HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 2, readBuffer.handle(), 0L, true);
+            HwBlob buffer = hwParcel.readBuffer(16L);
+            int int32 = buffer.getInt32(8L);
+            HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 2, buffer.handle(), 0L, true);
             arrayList.clear();
             for (int i = 0; i < int32; i++) {
                 GnssSystemInfo gnssSystemInfo = new GnssSystemInfo();
-                gnssSystemInfo.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 2);
+                gnssSystemInfo.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 2);
                 arrayList.add(gnssSystemInfo);
             }
             return arrayList;
@@ -759,13 +759,13 @@ public interface IGnssCallback extends IBase {
                 hwParcel2.verifySuccess();
                 hwParcel.releaseTemporaryStorage();
                 ArrayList<byte[]> arrayList = new ArrayList<>();
-                HwBlob readBuffer = hwParcel2.readBuffer(16L);
-                int int32 = readBuffer.getInt32(8L);
-                HwBlob readEmbeddedBuffer = hwParcel2.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
+                HwBlob buffer = hwParcel2.readBuffer(16L);
+                int int32 = buffer.getInt32(8L);
+                HwBlob embeddedBuffer = hwParcel2.readEmbeddedBuffer(int32 * 32, buffer.handle(), 0L, true);
                 arrayList.clear();
                 for (int i = 0; i < int32; i++) {
                     byte[] bArr = new byte[32];
-                    readEmbeddedBuffer.copyToInt8Array(i * 32, bArr, 32);
+                    embeddedBuffer.copyToInt8Array(i * 32, bArr, 32);
                     arrayList.add(bArr);
                 }
                 return arrayList;
@@ -982,9 +982,9 @@ public interface IGnssCallback extends IBase {
                     switch (i) {
                         case 256067662:
                             hwParcel.enforceInterface(IBase.kInterfaceName);
-                            ArrayList<String> interfaceChain = interfaceChain();
+                            ArrayList<String> arrayListInterfaceChain = interfaceChain();
                             hwParcel2.writeStatus(0);
-                            hwParcel2.writeStringVector(interfaceChain);
+                            hwParcel2.writeStringVector(arrayListInterfaceChain);
                             hwParcel2.send();
                             return;
                         case 256131655:
@@ -995,9 +995,9 @@ public interface IGnssCallback extends IBase {
                             return;
                         case 256136003:
                             hwParcel.enforceInterface(IBase.kInterfaceName);
-                            String interfaceDescriptor = interfaceDescriptor();
+                            String strInterfaceDescriptor = interfaceDescriptor();
                             hwParcel2.writeStatus(0);
-                            hwParcel2.writeString(interfaceDescriptor);
+                            hwParcel2.writeString(strInterfaceDescriptor);
                             hwParcel2.send();
                             return;
                         case 256398152:

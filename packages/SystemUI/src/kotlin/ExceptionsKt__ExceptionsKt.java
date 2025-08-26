@@ -4,7 +4,6 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import kotlin.internal.PlatformImplementationsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ExceptionsKt__ExceptionsKt {
     public static void addSuppressed(Throwable th, Throwable th2) {

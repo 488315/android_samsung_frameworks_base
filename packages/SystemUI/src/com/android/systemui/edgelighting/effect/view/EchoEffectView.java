@@ -14,7 +14,6 @@ import android.widget.RelativeLayout;
 import com.android.keyguard.KeyguardSecPatternViewController$$ExternalSyntheticOutline0;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class EchoEffectView extends RelativeLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -84,26 +83,26 @@ public class EchoEffectView extends RelativeLayout {
             float[] fArr = new float[2];
             fArr[c] = 0.0f;
             fArr[1] = f;
-            ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view, "alpha", fArr);
+            ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view, "alpha", fArr);
             long j = i2 * 1400;
-            ofFloat.setStartDelay(j);
+            objectAnimatorOfFloat.setStartDelay(j);
             char c2 = c;
-            ofFloat.setDuration(this.ALPHA_IN_DURATION[i]);
-            KeyguardSecPatternViewController$$ExternalSyntheticOutline0.m(0.17f, 0.17f, 0.83f, 0.83f, ofFloat);
-            animatorArr[c2] = ofFloat;
+            objectAnimatorOfFloat.setDuration(this.ALPHA_IN_DURATION[i]);
+            KeyguardSecPatternViewController$$ExternalSyntheticOutline0.m(0.17f, 0.17f, 0.83f, 0.83f, objectAnimatorOfFloat);
+            animatorArr[c2] = objectAnimatorOfFloat;
             float[] fArr2 = new float[2];
             fArr2[c2] = this.ALPHA[i];
             fArr2[1] = 0.0f;
-            ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(view, "alpha", fArr2);
-            ofFloat2.setDuration(400L);
-            ofFloat2.setStartDelay(r12 + this.ALPHA_OUT_DELAY[i]);
-            KeyguardSecPatternViewController$$ExternalSyntheticOutline0.m(0.17f, 0.17f, 0.83f, 0.83f, ofFloat2);
-            animatorArr[1] = ofFloat2;
-            ObjectAnimator ofFloat3 = ObjectAnimator.ofFloat(view, "scaleY", 0.0f, 1.0f);
-            ofFloat3.setStartDelay(j);
-            ofFloat3.setDuration(500L);
-            KeyguardSecPatternViewController$$ExternalSyntheticOutline0.m(0.17f, 0.17f, 0.83f, 0.83f, ofFloat3);
-            animatorArr[2] = ofFloat3;
+            ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(view, "alpha", fArr2);
+            objectAnimatorOfFloat2.setDuration(400L);
+            objectAnimatorOfFloat2.setStartDelay(r12 + this.ALPHA_OUT_DELAY[i]);
+            KeyguardSecPatternViewController$$ExternalSyntheticOutline0.m(0.17f, 0.17f, 0.83f, 0.83f, objectAnimatorOfFloat2);
+            animatorArr[1] = objectAnimatorOfFloat2;
+            ObjectAnimator objectAnimatorOfFloat3 = ObjectAnimator.ofFloat(view, "scaleY", 0.0f, 1.0f);
+            objectAnimatorOfFloat3.setStartDelay(j);
+            objectAnimatorOfFloat3.setDuration(500L);
+            KeyguardSecPatternViewController$$ExternalSyntheticOutline0.m(0.17f, 0.17f, 0.83f, 0.83f, objectAnimatorOfFloat3);
+            animatorArr[2] = objectAnimatorOfFloat3;
             animatorSet.playTogether(animatorArr);
             i2++;
             c = c2;

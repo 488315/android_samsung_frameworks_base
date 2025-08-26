@@ -43,8 +43,8 @@ public final class PolicyState<V> implements Parcelable {
 
     private PolicyState(Parcel parcel) {
         this.mPoliciesSetByAdmins = new LinkedHashMap<>();
-        int readInt = parcel.readInt();
-        for (int i = 0; i < readInt; i++) {
+        int i = parcel.readInt();
+        for (int i2 = 0; i2 < i; i2++) {
             this.mPoliciesSetByAdmins.put((EnforcingAdmin) parcel.readParcelable(EnforcingAdmin.class.getClassLoader()), (PolicyValue) parcel.readParcelable(PolicyValue.class.getClassLoader()));
         }
         this.mCurrentResolvedPolicy = (PolicyValue) parcel.readParcelable(PolicyValue.class.getClassLoader());

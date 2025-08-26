@@ -8,7 +8,6 @@ import com.android.systemui.animation.DialogTransitionAnimator;
 import com.android.systemui.plugins.FalsingManager;
 import com.android.systemui.statusbar.phone.SystemUIDialog;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ExitGuestDialog extends SystemUIDialog {
     public final DialogTransitionAnimator dialogTransitionAnimator;
@@ -18,7 +17,6 @@ public final class ExitGuestDialog extends SystemUIDialog {
     public final OnExitGuestUserListener onExitGuestUserListener;
     public final int targetUserId;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface OnExitGuestUserListener {
     }
 
@@ -33,10 +31,10 @@ public final class ExitGuestDialog extends SystemUIDialog {
         DialogInterface.OnClickListener onClickListener = new DialogInterface.OnClickListener() { // from class: com.android.systemui.user.ui.dialog.ExitGuestDialog$onClickListener$1
             @Override // android.content.DialogInterface.OnClickListener
             public final void onClick(DialogInterface dialogInterface, int i3) {
-                if (ExitGuestDialog.this.falsingManager.isFalseTap(i3 == -2 ? 0 : 2)) {
+                if (this.this$0.falsingManager.isFalseTap(i3 == -2 ? 0 : 2)) {
                     return;
                 }
-                ExitGuestDialog exitGuestDialog = ExitGuestDialog.this;
+                ExitGuestDialog exitGuestDialog = this.this$0;
                 if (exitGuestDialog.isGuestEphemeral) {
                     if (i3 == -2) {
                         exitGuestDialog.cancel();
@@ -46,7 +44,7 @@ public final class ExitGuestDialog extends SystemUIDialog {
                         return;
                     }
                     exitGuestDialog.dialogTransitionAnimator.dismissStack(exitGuestDialog);
-                    ExitGuestDialog exitGuestDialog2 = ExitGuestDialog.this;
+                    ExitGuestDialog exitGuestDialog2 = this.this$0;
                     ((UserSwitcherDialogCoordinator$sam$com_android_systemui_user_ui_dialog_ExitGuestDialog_OnExitGuestUserListener$0) exitGuestDialog2.onExitGuestUserListener).function.invoke(Integer.valueOf(exitGuestDialog2.guestUserId), Integer.valueOf(exitGuestDialog2.targetUserId), Boolean.FALSE);
                     return;
                 }
@@ -56,7 +54,7 @@ public final class ExitGuestDialog extends SystemUIDialog {
                 }
                 if (i3 == -2) {
                     exitGuestDialog.dialogTransitionAnimator.dismissStack(exitGuestDialog);
-                    ExitGuestDialog exitGuestDialog3 = ExitGuestDialog.this;
+                    ExitGuestDialog exitGuestDialog3 = this.this$0;
                     ((UserSwitcherDialogCoordinator$sam$com_android_systemui_user_ui_dialog_ExitGuestDialog_OnExitGuestUserListener$0) exitGuestDialog3.onExitGuestUserListener).function.invoke(Integer.valueOf(exitGuestDialog3.guestUserId), Integer.valueOf(exitGuestDialog3.targetUserId), Boolean.TRUE);
                     return;
                 }
@@ -64,7 +62,7 @@ public final class ExitGuestDialog extends SystemUIDialog {
                     return;
                 }
                 exitGuestDialog.dialogTransitionAnimator.dismissStack(exitGuestDialog);
-                ExitGuestDialog exitGuestDialog4 = ExitGuestDialog.this;
+                ExitGuestDialog exitGuestDialog4 = this.this$0;
                 ((UserSwitcherDialogCoordinator$sam$com_android_systemui_user_ui_dialog_ExitGuestDialog_OnExitGuestUserListener$0) exitGuestDialog4.onExitGuestUserListener).function.invoke(Integer.valueOf(exitGuestDialog4.guestUserId), Integer.valueOf(exitGuestDialog4.targetUserId), Boolean.FALSE);
             }
         };

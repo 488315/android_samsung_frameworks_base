@@ -24,7 +24,6 @@ import java.util.zip.GZIPOutputStream;
 import javax.net.ssl.HttpsURLConnection;
 import org.json.JSONObject;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class DLSAPIClient implements AsyncTaskClient {
     public static final API REALTIME_API = API.SEND_LOG;
@@ -66,7 +65,7 @@ public class DLSAPIClient implements AsyncTaskClient {
         }
     }
 
-    public final void cleanUp$1(BufferedReader bufferedReader) {
+    public final void cleanUp$1(BufferedReader bufferedReader) throws IOException {
         if (bufferedReader != null) {
             try {
                 bufferedReader.close();
@@ -96,44 +95,46 @@ public class DLSAPIClient implements AsyncTaskClient {
     }
 
     @Override // com.sec.android.diagmonagent.common.util.executor.AsyncTaskClient
-    public final int onFinish() {
+    public final int onFinish() throws Throwable {
+        int responseCode;
+        BufferedReader bufferedReader;
         int i;
-        BufferedReader bufferedReader = null;
+        BufferedReader bufferedReader2 = null;
         try {
             try {
-                int responseCode = this.conn.getResponseCode();
-                BufferedReader bufferedReader2 = new BufferedReader(new InputStreamReader(this.conn.getInputStream()));
-                try {
-                    String string = new JSONObject(bufferedReader2.readLine()).getString("rc");
-                    if (responseCode == 200 && string.equalsIgnoreCase("1000")) {
-                        Debug.LogD("[DLS Sender] send result success : " + responseCode + " " + string);
-                        i = 1;
-                    } else {
-                        Debug.LogD("[DLS Sender] send result fail : " + responseCode + " " + string);
-                        i = -7;
-                    }
-                    callback(responseCode, string);
-                    cleanUp$1(bufferedReader2);
-                    return i;
-                } catch (Exception e) {
-                    e = e;
-                    bufferedReader = bufferedReader2;
-                    Debug.LogE("[DLS Client] Send fail.");
-                    Debug.LogENG("[DLS Client] " + e.getMessage());
-                    callback(0, "");
-                    cleanUp$1(bufferedReader);
-                    return -41;
-                } catch (Throwable th) {
-                    th = th;
-                    bufferedReader = bufferedReader2;
-                    cleanUp$1(bufferedReader);
-                    throw th;
-                }
-            } catch (Exception e2) {
-                e = e2;
+                responseCode = this.conn.getResponseCode();
+                bufferedReader = new BufferedReader(new InputStreamReader(this.conn.getInputStream()));
+            } catch (Throwable th) {
+                th = th;
             }
+        } catch (Exception e) {
+            e = e;
+        }
+        try {
+            String string = new JSONObject(bufferedReader.readLine()).getString("rc");
+            if (responseCode == 200 && string.equalsIgnoreCase("1000")) {
+                Debug.LogD("[DLS Sender] send result success : " + responseCode + " " + string);
+                i = 1;
+            } else {
+                Debug.LogD("[DLS Sender] send result fail : " + responseCode + " " + string);
+                i = -7;
+            }
+            callback(responseCode, string);
+            cleanUp$1(bufferedReader);
+            return i;
+        } catch (Exception e2) {
+            e = e2;
+            bufferedReader2 = bufferedReader;
+            Debug.LogE("[DLS Client] Send fail.");
+            Debug.LogENG("[DLS Client] " + e.getMessage());
+            callback(0, "");
+            cleanUp$1(bufferedReader2);
+            return -41;
         } catch (Throwable th2) {
             th = th2;
+            bufferedReader2 = bufferedReader;
+            cleanUp$1(bufferedReader2);
+            throw th;
         }
     }
 
@@ -142,10 +143,10 @@ public class DLSAPIClient implements AsyncTaskClient {
         String str = this.trid;
         try {
             API api = this.isBatch.booleanValue() ? RTB_API : REALTIME_API;
-            Uri.Builder buildUpon = Uri.parse(api.getUrl()).buildUpon();
-            String valueOf = String.valueOf(System.currentTimeMillis());
-            buildUpon.appendQueryParameter("ts", valueOf).appendQueryParameter("type", this.logType.getAbbrev()).appendQueryParameter("tid", str).appendQueryParameter("hc", AuthUtil.sha256(str + valueOf + ClientUtil.SALT));
-            URL url = new URL(buildUpon.build().toString());
+            Uri.Builder builderBuildUpon = Uri.parse(api.getUrl()).buildUpon();
+            String strValueOf = String.valueOf(System.currentTimeMillis());
+            builderBuildUpon.appendQueryParameter("ts", strValueOf).appendQueryParameter("type", this.logType.getAbbrev()).appendQueryParameter("tid", str).appendQueryParameter("hc", AuthUtil.sha256(str + strValueOf + ClientUtil.SALT));
+            URL url = new URL(builderBuildUpon.build().toString());
             String body = getBody();
             if (TextUtils.isEmpty(body)) {
                 Log.w("SamsungAnalytics605073", "[DLS Client] body is empty");
@@ -159,7 +160,7 @@ public class DLSAPIClient implements AsyncTaskClient {
         }
     }
 
-    public final void upload(URL url, String str, String str2) {
+    public final void upload(URL url, String str, String str2) throws IOException {
         HttpsURLConnection httpsURLConnection = (HttpsURLConnection) url.openConnection();
         this.conn = httpsURLConnection;
         httpsURLConnection.setSSLSocketFactory(CertificateManager.Singleton.instance.sslContext.getSocketFactory());

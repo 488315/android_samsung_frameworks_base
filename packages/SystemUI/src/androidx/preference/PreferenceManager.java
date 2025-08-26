@@ -2,9 +2,9 @@ package androidx.preference;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class PreferenceManager {
     public final Context mContext;
@@ -18,17 +18,14 @@ public class PreferenceManager {
     public long mNextId = 0;
     public SharedPreferences mSharedPreferences = null;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface OnDisplayPreferenceDialogListener {
         void onDisplayPreferenceDialog(DialogPreference dialogPreference);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface OnNavigateToScreenListener {
         void onNavigateToScreen(PreferenceScreen preferenceScreen);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface OnPreferenceTreeClickListener {
         boolean onPreferenceTreeClick(Preference preference);
     }
@@ -60,14 +57,14 @@ public class PreferenceManager {
         return this.mSharedPreferences;
     }
 
-    public final PreferenceScreen inflateFromResource(Context context, int i, PreferenceScreen preferenceScreen) {
+    public final PreferenceScreen inflateFromResource(Context context, int i, PreferenceScreen preferenceScreen) throws Resources.NotFoundException {
         this.mNoCommit = true;
         PreferenceInflater preferenceInflater = new PreferenceInflater(context, this);
         XmlResourceParser xml = preferenceInflater.mContext.getResources().getXml(i);
         try {
-            PreferenceGroup inflate = preferenceInflater.inflate(xml, preferenceScreen);
+            PreferenceGroup preferenceGroupInflate = preferenceInflater.inflate(xml, preferenceScreen);
             xml.close();
-            PreferenceScreen preferenceScreen2 = (PreferenceScreen) inflate;
+            PreferenceScreen preferenceScreen2 = (PreferenceScreen) preferenceGroupInflate;
             preferenceScreen2.onAttachedToHierarchy(this);
             SharedPreferences.Editor editor = this.mEditor;
             if (editor != null) {

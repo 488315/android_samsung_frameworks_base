@@ -14,7 +14,6 @@ import com.samsung.systemui.splugins.navigationbar.PluginNavigationBar;
 import java.util.Iterator;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class PluginBarInteractionManager {
     public final Context mainContext;
@@ -28,16 +27,16 @@ public final class PluginBarInteractionManager {
             PluginNavigationBar pluginNavigationBar2;
             PluginNavigationBar pluginNavigationBar3 = (PluginNavigationBar) sPlugin;
             Log.d("PluginBarInteractionManager", "Plugin connected");
-            PluginBarInteractionManager pluginBarInteractionManager = PluginBarInteractionManager.this;
+            PluginBarInteractionManager pluginBarInteractionManager = this.this$0;
             if (pluginNavigationBar3 != null) {
                 pluginBarInteractionManager.pluginNavigationBar = pluginNavigationBar3;
                 pluginNavigationBar3.connect();
             }
             Iterator it = pluginBarInteractionManager.navBarStore.navDependencies.keySet().iterator();
             while (true) {
-                boolean hasNext = it.hasNext();
+                boolean zHasNext = it.hasNext();
                 navBarStoreImpl = pluginBarInteractionManager.navBarStore;
-                if (!hasNext) {
+                if (!zHasNext) {
                     break;
                 }
                 Integer num = (Integer) it.next();
@@ -56,7 +55,7 @@ public final class PluginBarInteractionManager {
         @Override // com.samsung.systemui.splugins.SPluginListener
         public final void onPluginDisconnected(SPlugin sPlugin, int i) {
             Log.d("PluginBarInteractionManager", "Plugin disconnected");
-            PluginBarInteractionManager pluginBarInteractionManager = PluginBarInteractionManager.this;
+            PluginBarInteractionManager pluginBarInteractionManager = this.this$0;
             PluginNavigationBar pluginNavigationBar = pluginBarInteractionManager.pluginNavigationBar;
             if (pluginNavigationBar != null) {
                 pluginNavigationBar.disconnect();
@@ -67,13 +66,12 @@ public final class PluginBarInteractionManager {
         @Override // com.samsung.systemui.splugins.SPluginListener
         public final void onPluginLoadFailed(int i) {
             Log.d("PluginBarInteractionManager", "Plugin load failed");
-            Settings.Global.putString(PluginBarInteractionManager.this.mainContext.getContentResolver(), "policy_control", "null");
+            Settings.Global.putString(this.this$0.mainContext.getContentResolver(), "policy_control", "null");
         }
     };
     public final SPluginManager pluginManager;
     public PluginNavigationBar pluginNavigationBar;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();

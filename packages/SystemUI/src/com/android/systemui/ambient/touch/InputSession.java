@@ -9,7 +9,6 @@ import com.android.systemui.shared.system.InputChannelCompat$InputEventListener;
 import com.android.systemui.shared.system.InputChannelCompat$InputEventReceiver;
 import com.android.systemui.shared.system.InputMonitorCompat;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class InputSession {
     public final GestureDetector mGestureDetector;
@@ -23,7 +22,7 @@ public class InputSession {
         this.mInputEventReceiver = inputMonitorCompat.getInputReceiver(looper, choreographer, new InputChannelCompat$InputEventListener() { // from class: com.android.systemui.ambient.touch.InputSession$$ExternalSyntheticLambda0
             @Override // com.android.systemui.shared.system.InputChannelCompat$InputEventListener
             public final void onInputEvent(InputEvent inputEvent) {
-                InputSession inputSession = InputSession.this;
+                InputSession inputSession = this.f$0;
                 inputChannelCompat$InputEventListener.onInputEvent(inputEvent);
                 if ((inputEvent instanceof MotionEvent) && inputSession.mGestureDetector.onTouchEvent((MotionEvent) inputEvent) && z && !inputSession.mPilfering) {
                     inputSession.mPilfering = true;

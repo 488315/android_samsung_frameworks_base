@@ -4,6 +4,7 @@ import android.content.res.AssetFileDescriptor;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.system.ErrnoException;
 import android.util.AndroidRuntimeException;
 import android.util.Log;
 import java.io.FileDescriptor;
@@ -92,9 +93,9 @@ public class JetPlayer {
 
     private JetPlayer() {
         this.mInitializationLooper = null;
-        Looper myLooper = Looper.myLooper();
-        this.mInitializationLooper = myLooper;
-        if (myLooper == null) {
+        Looper looperMyLooper = Looper.myLooper();
+        this.mInitializationLooper = looperMyLooper;
+        if (looperMyLooper == null) {
             this.mInitializationLooper = Looper.getMainLooper();
         }
         int minBufferSize = AudioTrack.getMinBufferSize(JET_OUTPUT_RATE, 12, 2);
@@ -121,7 +122,7 @@ public class JetPlayer {
         return native_loadJetFromFile(str);
     }
 
-    public boolean loadJetFile(AssetFileDescriptor assetFileDescriptor) {
+    public boolean loadJetFile(AssetFileDescriptor assetFileDescriptor) throws ErrnoException {
         long length = assetFileDescriptor.getLength();
         if (length < 0) {
             throw new AndroidRuntimeException("no length for fd");

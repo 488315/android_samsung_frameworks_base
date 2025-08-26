@@ -1,6 +1,8 @@
 package com.android.wm.shell.windowdecor.tiling;
 
+import android.app.ActivityManager;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -10,22 +12,28 @@ import android.util.Size;
 import android.view.MotionEvent;
 import android.view.PointerIcon;
 import android.view.RoundedCorner;
+import android.view.SurfaceControl;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.widget.FrameLayout;
+import android.window.WindowContainerTransaction;
+import androidx.compose.runtime.ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0;
 import androidx.compose.ui.graphics.ColorKt;
 import com.android.systemui.R;
 import com.android.wm.shell.common.split.DividerHandleView;
 import com.android.wm.shell.common.split.DividerRoundedCorner;
+import com.android.wm.shell.desktopmode.DesktopModeEventLogger;
 import com.android.wm.shell.shared.animation.Interpolators;
 import com.android.wm.shell.shared.desktopmode.DesktopStateImpl;
 import com.android.wm.shell.windowdecor.DragDetector;
+import com.android.wm.shell.windowdecor.ResizeVeil;
 import com.android.wm.shell.windowdecor.common.DecorThemeUtil;
-import com.samsung.android.knox.EnterpriseContainerCallback;
+import com.android.wm.shell.windowdecor.tiling.DesktopTilingWindowDecoration;
+import com.samsung.android.rune.CoreRune;
 import kotlin.jvm.internal.DefaultConstructorMarker;
+import kotlin.jvm.internal.Intrinsics;
 import kotlin.ranges.IntRange;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class TilingDividerView extends FrameLayout implements View.OnTouchListener, DragDetector.MotionEventHandler {
     public final Rect backgroundRect;
@@ -47,7 +55,6 @@ public final class TilingDividerView extends FrameLayout implements View.OnTouch
     public int startPos;
     public int touchElevation;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -70,21 +77,136 @@ public final class TilingDividerView extends FrameLayout implements View.OnTouch
         this.dividerBounds = new Rect();
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:7:0x001b, code lost:
-    
-        if (r3 != 3) goto L83;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:24:0x0071  */
     @Override // com.android.wm.shell.windowdecor.DragDetector.MotionEventHandler
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean handleMotionEvent(android.view.View r19, android.view.MotionEvent r20) {
-        /*
-            Method dump skipped, instructions count: 597
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.windowdecor.tiling.TilingDividerView.handleMotionEvent(android.view.View, android.view.MotionEvent):boolean");
+    public final boolean handleMotionEvent(View view, MotionEvent motionEvent) {
+        DesktopTilingWindowDecoration.AppResizingHelper appResizingHelper;
+        DesktopTilingWindowDecoration.AppResizingHelper appResizingHelper2;
+        int rawX = (int) motionEvent.getRawX();
+        int y = (int) motionEvent.getY();
+        int actionMasked = motionEvent.getActionMasked();
+        if (actionMasked == 0) {
+            IntRange intRange = this.handleY;
+            int i = intRange.first;
+            if (y <= intRange.last && i <= y) {
+                DesktopTilingDividerWindowManager desktopTilingDividerWindowManager = this.callback;
+                if (desktopTilingDividerWindowManager == null) {
+                    desktopTilingDividerWindowManager = null;
+                }
+                desktopTilingDividerWindowManager.setSlippery(false);
+                DesktopTilingWindowDecoration desktopTilingWindowDecoration = desktopTilingDividerWindowManager.transitionHandler;
+                DesktopTilingWindowDecoration.AppResizingHelper appResizingHelper3 = desktopTilingWindowDecoration.leftTaskResizingHelper;
+                if (appResizingHelper3 != null && (appResizingHelper = desktopTilingWindowDecoration.rightTaskResizingHelper) != null) {
+                    DesktopModeEventLogger.Companion.getClass();
+                    DesktopModeEventLogger.Companion.InputMethod inputMethodFromMotionEvent = DesktopModeEventLogger.Companion.getInputMethodFromMotionEvent(motionEvent);
+                    DesktopModeEventLogger.Companion.ResizeTrigger resizeTrigger = DesktopModeEventLogger.Companion.ResizeTrigger.TILING_DIVIDER;
+                    desktopTilingWindowDecoration.desktopModeEventLogger.logTaskResizingStarted(resizeTrigger, inputMethodFromMotionEvent, appResizingHelper3.taskInfo, Integer.valueOf(appResizingHelper3.bounds.width()), Integer.valueOf(appResizingHelper3.bounds.height()), desktopTilingWindowDecoration.displayController, null);
+                    desktopTilingWindowDecoration.desktopModeEventLogger.logTaskResizingStarted(resizeTrigger, inputMethodFromMotionEvent, appResizingHelper.taskInfo, Integer.valueOf(appResizingHelper.bounds.width()), Integer.valueOf(appResizingHelper.bounds.height()), desktopTilingWindowDecoration.displayController, null);
+                }
+                DividerHandleView dividerHandleView = this.handle;
+                if (dividerHandleView == null) {
+                    dividerHandleView = null;
+                }
+                dividerHandleView.getClass();
+                DividerHandleView dividerHandleView2 = this.handle;
+                (dividerHandleView2 != null ? dividerHandleView2 : null).animate().setInterpolator(Interpolators.TOUCH_RESPONSE).setDuration(150L).translationZ(this.touchElevation).start();
+                this.canResize = true;
+            }
+        } else if (actionMasked == 1) {
+            if (this.canResize) {
+                if (this.moving && this.resized) {
+                    Rect rect = this.dividerBounds;
+                    int i2 = (rect.left + this.lastAcceptedPos) - this.startPos;
+                    rect.left = i2;
+                    DesktopTilingDividerWindowManager desktopTilingDividerWindowManager2 = this.callback;
+                    if (desktopTilingDividerWindowManager2 == null) {
+                        desktopTilingDividerWindowManager2 = null;
+                    }
+                    desktopTilingDividerWindowManager2.setSlippery(true);
+                    SurfaceControl.Transaction transaction = (SurfaceControl.Transaction) desktopTilingDividerWindowManager2.transactionSupplier.get();
+                    transaction.setPosition(desktopTilingDividerWindowManager2.leash, i2 - desktopTilingDividerWindowManager2.maxRoundedCornerRadius, desktopTilingDividerWindowManager2.dividerBounds.top);
+                    int iWidth = desktopTilingDividerWindowManager2.dividerBounds.width();
+                    Rect rect2 = desktopTilingDividerWindowManager2.dividerBounds;
+                    rect2.set(i2, rect2.top, iWidth + i2, rect2.bottom);
+                    DesktopTilingWindowDecoration desktopTilingWindowDecoration2 = desktopTilingDividerWindowManager2.transitionHandler;
+                    Rect rect3 = desktopTilingDividerWindowManager2.dividerBounds;
+                    DesktopTilingWindowDecoration.AppResizingHelper appResizingHelper4 = desktopTilingWindowDecoration2.leftTaskResizingHelper;
+                    if (appResizingHelper4 != null && (appResizingHelper2 = desktopTilingWindowDecoration2.rightTaskResizingHelper) != null) {
+                        DesktopModeEventLogger.Companion.getClass();
+                        DesktopModeEventLogger.Companion.InputMethod inputMethodFromMotionEvent2 = DesktopModeEventLogger.Companion.getInputMethodFromMotionEvent(motionEvent);
+                        DesktopModeEventLogger.Companion.ResizeTrigger resizeTrigger2 = DesktopModeEventLogger.Companion.ResizeTrigger.TILING_DIVIDER;
+                        desktopTilingWindowDecoration2.desktopModeEventLogger.logTaskResizingEnded(resizeTrigger2, inputMethodFromMotionEvent2, appResizingHelper4.taskInfo, Integer.valueOf(appResizingHelper4.newBounds.width()), Integer.valueOf(appResizingHelper4.newBounds.height()), desktopTilingWindowDecoration2.displayController, null);
+                        desktopTilingWindowDecoration2.desktopModeEventLogger.logTaskResizingEnded(resizeTrigger2, inputMethodFromMotionEvent2, appResizingHelper2.taskInfo, Integer.valueOf(appResizingHelper2.newBounds.width()), Integer.valueOf(appResizingHelper2.newBounds.height()), desktopTilingWindowDecoration2.displayController, null);
+                        if (Intrinsics.areEqual(appResizingHelper4.newBounds, appResizingHelper4.bounds)) {
+                            ResizeVeil resizeVeil = appResizingHelper4.resizeVeil;
+                            if (resizeVeil == null) {
+                                resizeVeil = null;
+                            }
+                            resizeVeil.hideVeil();
+                            ResizeVeil resizeVeil2 = appResizingHelper2.resizeVeil;
+                            if (resizeVeil2 == null) {
+                                resizeVeil2 = null;
+                            }
+                            resizeVeil2.hideVeil();
+                            desktopTilingWindowDecoration2.isResizing = false;
+                        } else {
+                            appResizingHelper4.bounds.set(appResizingHelper4.newBounds);
+                            appResizingHelper2.bounds.set(appResizingHelper2.newBounds);
+                            desktopTilingWindowDecoration2.onDividerHandleMoved(rect3, transaction);
+                            desktopTilingWindowDecoration2.isResizing = false;
+                            WindowContainerTransaction windowContainerTransaction = new WindowContainerTransaction();
+                            windowContainerTransaction.setBounds(appResizingHelper4.taskInfo.token, appResizingHelper4.bounds);
+                            windowContainerTransaction.setBounds(appResizingHelper2.taskInfo.token, appResizingHelper2.bounds);
+                            if (CoreRune.DW_SHELL_CHANGE_TRANSITION) {
+                                windowContainerTransaction.setChangeTransitStartBounds(appResizingHelper4.taskInfo.token, appResizingHelper4.bounds);
+                                ActivityManager.RunningTaskInfo runningTaskInfo = appResizingHelper4.taskInfo;
+                                windowContainerTransaction.setChangeTransitMode(runningTaskInfo.token, 1, ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(runningTaskInfo.taskId, "onDividerHandleDragEnd(", ")"));
+                                windowContainerTransaction.setChangeTransitStartBounds(appResizingHelper2.taskInfo.token, appResizingHelper2.bounds);
+                                ActivityManager.RunningTaskInfo runningTaskInfo2 = appResizingHelper2.taskInfo;
+                                windowContainerTransaction.setChangeTransitMode(runningTaskInfo2.token, 1, ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(runningTaskInfo2.taskId, "onDividerHandleDragEnd(", ")"));
+                            }
+                            desktopTilingWindowDecoration2.transitions.startTransition(6, windowContainerTransaction, desktopTilingWindowDecoration2);
+                        }
+                    }
+                }
+                this.moving = false;
+                this.canResize = false;
+                this.resized = false;
+                DividerHandleView dividerHandleView3 = this.handle;
+                if (dividerHandleView3 == null) {
+                    dividerHandleView3 = null;
+                }
+                dividerHandleView3.getClass();
+                DividerHandleView dividerHandleView4 = this.handle;
+                (dividerHandleView4 != null ? dividerHandleView4 : null).animate().setInterpolator(Interpolators.FAST_OUT_SLOW_IN).setDuration(200L).translationZ(0.0f).start();
+                return true;
+            }
+        } else if (actionMasked != 2) {
+            if (actionMasked == 3) {
+            }
+        } else if (this.canResize) {
+            if (!this.moving) {
+                this.startPos = rawX;
+                this.moving = true;
+            }
+            int i3 = (this.dividerBounds.left + rawX) - this.startPos;
+            DesktopTilingDividerWindowManager desktopTilingDividerWindowManager3 = this.callback;
+            DesktopTilingDividerWindowManager desktopTilingDividerWindowManager4 = desktopTilingDividerWindowManager3 != null ? desktopTilingDividerWindowManager3 : null;
+            SurfaceControl.Transaction transaction2 = (SurfaceControl.Transaction) desktopTilingDividerWindowManager4.transactionSupplier.get();
+            transaction2.setPosition(desktopTilingDividerWindowManager4.leash, i3 - desktopTilingDividerWindowManager4.maxRoundedCornerRadius, desktopTilingDividerWindowManager4.dividerBounds.top);
+            int iWidth2 = desktopTilingDividerWindowManager4.dividerBounds.width();
+            Rect rect4 = desktopTilingDividerWindowManager4.dividerBounds;
+            rect4.set(i3, rect4.top, iWidth2 + i3, rect4.bottom);
+            if (desktopTilingDividerWindowManager4.transitionHandler.onDividerHandleMoved(desktopTilingDividerWindowManager4.dividerBounds, transaction2)) {
+                this.lastAcceptedPos = rawX;
+                this.resized = true;
+                return true;
+            }
+        }
+        return true;
     }
 
     @Override // android.view.View
@@ -100,9 +222,9 @@ public final class TilingDividerView extends FrameLayout implements View.OnTouch
         this.corners = (DividerRoundedCorner) requireViewById(R.id.docked_divider_rounded_corner);
         this.touchElevation = getResources().getDimensionPixelSize(R.dimen.docked_stack_divider_lift_elevation);
         setOnTouchListener(this);
-        View findViewById = findViewById(R.id.docked_divider_background);
-        findViewById.getClass();
-        findViewById.setBackgroundColor(0);
+        View viewFindViewById = findViewById(R.id.docked_divider_background);
+        viewFindViewById.getClass();
+        viewFindViewById.setBackgroundColor(0);
     }
 
     @Override // android.view.View
@@ -122,7 +244,7 @@ public final class TilingDividerView extends FrameLayout implements View.OnTouch
     }
 
     @Override // android.widget.FrameLayout, android.view.ViewGroup, android.view.View
-    public final void onLayout(boolean z, int i, int i2, int i3, int i4) {
+    public final void onLayout(boolean z, int i, int i2, int i3, int i4) throws Resources.NotFoundException {
         super.onLayout(z, i, i2, i3, i4);
         if (z) {
             int dimensionPixelSize = getResources().getDimensionPixelSize(R.dimen.split_divider_bar_width);
@@ -134,7 +256,9 @@ public final class TilingDividerView extends FrameLayout implements View.OnTouch
 
     @Override // android.view.ViewGroup, android.view.View
     public final PointerIcon onResolvePointerIcon(MotionEvent motionEvent, int i) {
-        return PointerIcon.getSystemIcon(getContext(), EnterpriseContainerCallback.CONTAINER_VERIFY_PWD_SUCCESSFUL);
+        int y = (int) motionEvent.getY();
+        IntRange intRange = this.handleY;
+        return (y > intRange.last || intRange.first > y) ? super.onResolvePointerIcon(motionEvent, i) : PointerIcon.getSystemIcon(getContext(), 20006);
     }
 
     @Override // android.view.View.OnTouchListener
@@ -172,7 +296,7 @@ public final class TilingDividerView extends FrameLayout implements View.OnTouch
         this.isDarkMode = z;
         Paint paint = this.paint;
         DecorThemeUtil decorThemeUtil = this.decorThemeUtil;
-        paint.setColor(ColorKt.m467toArgb8_81llA((z ? decorThemeUtil.darkColors : decorThemeUtil.lightColors).outlineVariant));
+        paint.setColor(ColorKt.m469toArgb8_81llA((z ? decorThemeUtil.darkColors : decorThemeUtil.lightColors).outlineVariant));
         DividerHandleView dividerHandleView = this.handle;
         if (dividerHandleView == null) {
             dividerHandleView = null;
@@ -197,9 +321,9 @@ public final class TilingDividerView extends FrameLayout implements View.OnTouch
         if (roundedCorner != null) {
             roundedCorner.getRadius();
         }
-        int height = this.dividerBounds.height();
+        int iHeight = this.dividerBounds.height();
         int i = this.handleRegionHeight;
-        int i2 = (height - i) / 2;
+        int i2 = (iHeight - i) / 2;
         this.handleY = new IntRange(i2, i + i2);
         this.dragDetector = new DragDetector(this, 0L, ViewConfiguration.get(((FrameLayout) this).mContext).getScaledTouchSlop());
     }

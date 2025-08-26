@@ -15,7 +15,6 @@ import kotlin.reflect.KType;
 import kotlin.text.StringsKt__StringsKt;
 import kotlinx.serialization.SerializersKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class NavDestinationBuilder {
     public final Map actions;
@@ -35,10 +34,10 @@ public class NavDestinationBuilder {
     }
 
     public NavDestination build() {
-        NavDestination instantiateDestination = instantiateDestination();
-        instantiateDestination.getClass();
+        NavDestination navDestinationInstantiateDestination = instantiateDestination();
+        navDestinationInstantiateDestination.getClass();
         for (Map.Entry entry : ((LinkedHashMap) this.arguments).entrySet()) {
-            instantiateDestination._arguments.put((String) entry.getKey(), (NavArgument) entry.getValue());
+            navDestinationInstantiateDestination._arguments.put((String) entry.getKey(), (NavArgument) entry.getValue());
         }
         ArrayList arrayList = (ArrayList) this.deepLinks;
         int size = arrayList.size();
@@ -47,18 +46,18 @@ public class NavDestinationBuilder {
         while (i2 < size) {
             Object obj = arrayList.get(i2);
             i2++;
-            instantiateDestination.addDeepLink((NavDeepLink) obj);
+            navDestinationInstantiateDestination.addDeepLink((NavDeepLink) obj);
         }
         for (Map.Entry entry2 : ((LinkedHashMap) this.actions).entrySet()) {
-            int intValue = ((Number) entry2.getKey()).intValue();
+            int iIntValue = ((Number) entry2.getKey()).intValue();
             NavAction navAction = (NavAction) entry2.getValue();
-            if (instantiateDestination instanceof ActivityNavigator.Destination) {
-                throw new UnsupportedOperationException("Cannot add action " + intValue + " to " + instantiateDestination + " as it does not support actions, indicating that it is a terminal destination in your navigation graph and will never trigger actions.");
+            if (navDestinationInstantiateDestination instanceof ActivityNavigator.Destination) {
+                throw new UnsupportedOperationException("Cannot add action " + iIntValue + " to " + navDestinationInstantiateDestination + " as it does not support actions, indicating that it is a terminal destination in your navigation graph and will never trigger actions.");
             }
-            if (intValue == 0) {
+            if (iIntValue == 0) {
                 throw new IllegalArgumentException("Cannot have an action with actionId 0");
             }
-            instantiateDestination.actions.put(intValue, navAction);
+            navDestinationInstantiateDestination.actions.put(iIntValue, navAction);
         }
         String str = this.route;
         if (str != null) {
@@ -67,13 +66,13 @@ public class NavDestinationBuilder {
                 throw new IllegalArgumentException("Cannot have an empty route");
             }
             companion.getClass();
-            String concat = "android-app://androidx.navigation/".concat(str);
-            instantiateDestination.id = concat.hashCode();
+            String strConcat = "android-app://androidx.navigation/".concat(str);
+            navDestinationInstantiateDestination.id = strConcat.hashCode();
             NavDeepLink.Builder builder = new NavDeepLink.Builder();
-            builder.uriPattern = concat;
+            builder.uriPattern = strConcat;
             Object obj2 = null;
-            instantiateDestination.addDeepLink(new NavDeepLink(builder.uriPattern, null, null));
-            ArrayList arrayList2 = (ArrayList) instantiateDestination.deepLinks;
+            navDestinationInstantiateDestination.addDeepLink(new NavDeepLink(builder.uriPattern, null, null));
+            ArrayList arrayList2 = (ArrayList) navDestinationInstantiateDestination.deepLinks;
             int size2 = arrayList2.size();
             while (true) {
                 if (i >= size2) {
@@ -82,7 +81,7 @@ public class NavDestinationBuilder {
                 Object obj3 = arrayList2.get(i);
                 i++;
                 String str2 = ((NavDeepLink) obj3).uriPattern;
-                String str3 = instantiateDestination.route;
+                String str3 = navDestinationInstantiateDestination.route;
                 companion.getClass();
                 if (Intrinsics.areEqual(str2, str3 != null ? "android-app://androidx.navigation/".concat(str3) : "")) {
                     obj2 = obj3;
@@ -90,13 +89,13 @@ public class NavDestinationBuilder {
                 }
             }
             TypeIntrinsics.asMutableCollection(arrayList2).remove(obj2);
-            instantiateDestination.route = str;
+            navDestinationInstantiateDestination.route = str;
         }
         int i3 = this.id;
         if (i3 != -1) {
-            instantiateDestination.id = i3;
+            navDestinationInstantiateDestination.id = i3;
         }
-        return instantiateDestination;
+        return navDestinationInstantiateDestination;
     }
 
     public NavDestination instantiateDestination() {

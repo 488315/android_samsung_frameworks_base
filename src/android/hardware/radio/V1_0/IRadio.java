@@ -318,9 +318,9 @@ public interface IRadio extends IBase {
         if (iHwBinder == null) {
             return null;
         }
-        IHwInterface queryLocalInterface = iHwBinder.queryLocalInterface(kInterfaceName);
-        if (queryLocalInterface != null && (queryLocalInterface instanceof IRadio)) {
-            return (IRadio) queryLocalInterface;
+        IHwInterface iHwInterfaceQueryLocalInterface = iHwBinder.queryLocalInterface(kInterfaceName);
+        if (iHwInterfaceQueryLocalInterface != null && (iHwInterfaceQueryLocalInterface instanceof IRadio)) {
+            return (IRadio) iHwInterfaceQueryLocalInterface;
         }
         Proxy proxy = new Proxy(iHwBinder);
         try {
@@ -2383,13 +2383,13 @@ public interface IRadio extends IBase {
                 hwParcel2.verifySuccess();
                 hwParcel.releaseTemporaryStorage();
                 ArrayList<byte[]> arrayList = new ArrayList<>();
-                HwBlob readBuffer = hwParcel2.readBuffer(16L);
-                int int32 = readBuffer.getInt32(8L);
-                HwBlob readEmbeddedBuffer = hwParcel2.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
+                HwBlob buffer = hwParcel2.readBuffer(16L);
+                int int32 = buffer.getInt32(8L);
+                HwBlob embeddedBuffer = hwParcel2.readEmbeddedBuffer(int32 * 32, buffer.handle(), 0L, true);
                 arrayList.clear();
                 for (int i = 0; i < int32; i++) {
                     byte[] bArr = new byte[32];
-                    readEmbeddedBuffer.copyToInt8Array(i * 32, bArr, 32);
+                    embeddedBuffer.copyToInt8Array(i * 32, bArr, 32);
                     arrayList.add(bArr);
                 }
                 return arrayList;
@@ -2586,10 +2586,10 @@ public interface IRadio extends IBase {
                     return;
                 case 11:
                     hwParcel.enforceInterface(IRadio.kInterfaceName);
-                    int readInt32 = hwParcel.readInt32();
+                    int int32 = hwParcel.readInt32();
                     Dial dial = new Dial();
                     dial.readFromParcel(hwParcel);
-                    dial(readInt32, dial);
+                    dial(int32, dial);
                     return;
                 case 12:
                     hwParcel.enforceInterface(IRadio.kInterfaceName);
@@ -2649,32 +2649,32 @@ public interface IRadio extends IBase {
                     return;
                 case 26:
                     hwParcel.enforceInterface(IRadio.kInterfaceName);
-                    int readInt322 = hwParcel.readInt32();
+                    int int322 = hwParcel.readInt32();
                     GsmSmsMessage gsmSmsMessage = new GsmSmsMessage();
                     gsmSmsMessage.readFromParcel(hwParcel);
-                    sendSms(readInt322, gsmSmsMessage);
+                    sendSms(int322, gsmSmsMessage);
                     return;
                 case 27:
                     hwParcel.enforceInterface(IRadio.kInterfaceName);
-                    int readInt323 = hwParcel.readInt32();
+                    int int323 = hwParcel.readInt32();
                     GsmSmsMessage gsmSmsMessage2 = new GsmSmsMessage();
                     gsmSmsMessage2.readFromParcel(hwParcel);
-                    sendSMSExpectMore(readInt323, gsmSmsMessage2);
+                    sendSMSExpectMore(int323, gsmSmsMessage2);
                     return;
                 case 28:
                     hwParcel.enforceInterface(IRadio.kInterfaceName);
-                    int readInt324 = hwParcel.readInt32();
-                    int readInt325 = hwParcel.readInt32();
+                    int int324 = hwParcel.readInt32();
+                    int int325 = hwParcel.readInt32();
                     DataProfileInfo dataProfileInfo = new DataProfileInfo();
                     dataProfileInfo.readFromParcel(hwParcel);
-                    setupDataCall(readInt324, readInt325, dataProfileInfo, hwParcel.readBool(), hwParcel.readBool(), hwParcel.readBool());
+                    setupDataCall(int324, int325, dataProfileInfo, hwParcel.readBool(), hwParcel.readBool(), hwParcel.readBool());
                     return;
                 case 29:
                     hwParcel.enforceInterface(IRadio.kInterfaceName);
-                    int readInt326 = hwParcel.readInt32();
+                    int int326 = hwParcel.readInt32();
                     IccIo iccIo = new IccIo();
                     iccIo.readFromParcel(hwParcel);
-                    iccIOForApp(readInt326, iccIo);
+                    iccIOForApp(int326, iccIo);
                     return;
                 case 30:
                     hwParcel.enforceInterface(IRadio.kInterfaceName);
@@ -2694,17 +2694,17 @@ public interface IRadio extends IBase {
                     return;
                 case 34:
                     hwParcel.enforceInterface(IRadio.kInterfaceName);
-                    int readInt327 = hwParcel.readInt32();
+                    int int327 = hwParcel.readInt32();
                     CallForwardInfo callForwardInfo = new CallForwardInfo();
                     callForwardInfo.readFromParcel(hwParcel);
-                    getCallForwardStatus(readInt327, callForwardInfo);
+                    getCallForwardStatus(int327, callForwardInfo);
                     return;
                 case 35:
                     hwParcel.enforceInterface(IRadio.kInterfaceName);
-                    int readInt328 = hwParcel.readInt32();
+                    int int328 = hwParcel.readInt32();
                     CallForwardInfo callForwardInfo2 = new CallForwardInfo();
                     callForwardInfo2.readFromParcel(hwParcel);
-                    setCallForward(readInt328, callForwardInfo2);
+                    setCallForward(int328, callForwardInfo2);
                     return;
                 case 36:
                     hwParcel.enforceInterface(IRadio.kInterfaceName);
@@ -2792,10 +2792,10 @@ public interface IRadio extends IBase {
                     return;
                 case 57:
                     hwParcel.enforceInterface(IRadio.kInterfaceName);
-                    int readInt329 = hwParcel.readInt32();
+                    int int329 = hwParcel.readInt32();
                     SmsWriteArgs smsWriteArgs = new SmsWriteArgs();
                     smsWriteArgs.readFromParcel(hwParcel);
-                    writeSmsToSim(readInt329, smsWriteArgs);
+                    writeSmsToSim(int329, smsWriteArgs);
                     return;
                 case 58:
                     hwParcel.enforceInterface(IRadio.kInterfaceName);
@@ -2879,17 +2879,17 @@ public interface IRadio extends IBase {
                     return;
                 case 78:
                     hwParcel.enforceInterface(IRadio.kInterfaceName);
-                    int readInt3210 = hwParcel.readInt32();
+                    int int3210 = hwParcel.readInt32();
                     CdmaSmsMessage cdmaSmsMessage = new CdmaSmsMessage();
                     cdmaSmsMessage.readFromParcel(hwParcel);
-                    sendCdmaSms(readInt3210, cdmaSmsMessage);
+                    sendCdmaSms(int3210, cdmaSmsMessage);
                     return;
                 case 79:
                     hwParcel.enforceInterface(IRadio.kInterfaceName);
-                    int readInt3211 = hwParcel.readInt32();
+                    int int3211 = hwParcel.readInt32();
                     CdmaSmsAck cdmaSmsAck = new CdmaSmsAck();
                     cdmaSmsAck.readFromParcel(hwParcel);
-                    acknowledgeLastIncomingCdmaSms(readInt3211, cdmaSmsAck);
+                    acknowledgeLastIncomingCdmaSms(int3211, cdmaSmsAck);
                     return;
                 case 80:
                     hwParcel.enforceInterface(IRadio.kInterfaceName);
@@ -2921,10 +2921,10 @@ public interface IRadio extends IBase {
                     return;
                 case 87:
                     hwParcel.enforceInterface(IRadio.kInterfaceName);
-                    int readInt3212 = hwParcel.readInt32();
+                    int int3212 = hwParcel.readInt32();
                     CdmaSmsWriteArgs cdmaSmsWriteArgs = new CdmaSmsWriteArgs();
                     cdmaSmsWriteArgs.readFromParcel(hwParcel);
-                    writeSmsToRuim(readInt3212, cdmaSmsWriteArgs);
+                    writeSmsToRuim(int3212, cdmaSmsWriteArgs);
                     return;
                 case 88:
                     hwParcel.enforceInterface(IRadio.kInterfaceName);
@@ -2984,10 +2984,10 @@ public interface IRadio extends IBase {
                     return;
                 case 102:
                     hwParcel.enforceInterface(IRadio.kInterfaceName);
-                    int readInt3213 = hwParcel.readInt32();
+                    int int3213 = hwParcel.readInt32();
                     DataProfileInfo dataProfileInfo2 = new DataProfileInfo();
                     dataProfileInfo2.readFromParcel(hwParcel);
-                    setInitialAttachApn(readInt3213, dataProfileInfo2, hwParcel.readBool(), hwParcel.readBool());
+                    setInitialAttachApn(int3213, dataProfileInfo2, hwParcel.readBool(), hwParcel.readBool());
                     return;
                 case 103:
                     hwParcel.enforceInterface(IRadio.kInterfaceName);
@@ -2995,17 +2995,17 @@ public interface IRadio extends IBase {
                     return;
                 case 104:
                     hwParcel.enforceInterface(IRadio.kInterfaceName);
-                    int readInt3214 = hwParcel.readInt32();
+                    int int3214 = hwParcel.readInt32();
                     ImsSmsMessage imsSmsMessage = new ImsSmsMessage();
                     imsSmsMessage.readFromParcel(hwParcel);
-                    sendImsSms(readInt3214, imsSmsMessage);
+                    sendImsSms(int3214, imsSmsMessage);
                     return;
                 case 105:
                     hwParcel.enforceInterface(IRadio.kInterfaceName);
-                    int readInt3215 = hwParcel.readInt32();
+                    int int3215 = hwParcel.readInt32();
                     SimApdu simApdu = new SimApdu();
                     simApdu.readFromParcel(hwParcel);
-                    iccTransmitApduBasicChannel(readInt3215, simApdu);
+                    iccTransmitApduBasicChannel(int3215, simApdu);
                     return;
                 case 106:
                     hwParcel.enforceInterface(IRadio.kInterfaceName);
@@ -3017,10 +3017,10 @@ public interface IRadio extends IBase {
                     return;
                 case 108:
                     hwParcel.enforceInterface(IRadio.kInterfaceName);
-                    int readInt3216 = hwParcel.readInt32();
+                    int int3216 = hwParcel.readInt32();
                     SimApdu simApdu2 = new SimApdu();
                     simApdu2.readFromParcel(hwParcel);
-                    iccTransmitApduLogicalChannel(readInt3216, simApdu2);
+                    iccTransmitApduLogicalChannel(int3216, simApdu2);
                     return;
                 case 109:
                     hwParcel.enforceInterface(IRadio.kInterfaceName);
@@ -3028,10 +3028,10 @@ public interface IRadio extends IBase {
                     return;
                 case 110:
                     hwParcel.enforceInterface(IRadio.kInterfaceName);
-                    int readInt3217 = hwParcel.readInt32();
+                    int int3217 = hwParcel.readInt32();
                     NvWriteItem nvWriteItem = new NvWriteItem();
                     nvWriteItem.readFromParcel(hwParcel);
-                    nvWriteItem(readInt3217, nvWriteItem);
+                    nvWriteItem(int3217, nvWriteItem);
                     return;
                 case 111:
                     hwParcel.enforceInterface(IRadio.kInterfaceName);
@@ -3043,10 +3043,10 @@ public interface IRadio extends IBase {
                     return;
                 case 113:
                     hwParcel.enforceInterface(IRadio.kInterfaceName);
-                    int readInt3218 = hwParcel.readInt32();
+                    int int3218 = hwParcel.readInt32();
                     SelectUiccSub selectUiccSub = new SelectUiccSub();
                     selectUiccSub.readFromParcel(hwParcel);
-                    setUiccSubscription(readInt3218, selectUiccSub);
+                    setUiccSubscription(int3218, selectUiccSub);
                     return;
                 case 114:
                     hwParcel.enforceInterface(IRadio.kInterfaceName);
@@ -3074,10 +3074,10 @@ public interface IRadio extends IBase {
                     return;
                 case 120:
                     hwParcel.enforceInterface(IRadio.kInterfaceName);
-                    int readInt3219 = hwParcel.readInt32();
+                    int int3219 = hwParcel.readInt32();
                     RadioCapability radioCapability = new RadioCapability();
                     radioCapability.readFromParcel(hwParcel);
-                    setRadioCapability(readInt3219, radioCapability);
+                    setRadioCapability(int3219, radioCapability);
                     return;
                 case 121:
                     hwParcel.enforceInterface(IRadio.kInterfaceName);
@@ -3097,11 +3097,11 @@ public interface IRadio extends IBase {
                     return;
                 case 125:
                     hwParcel.enforceInterface(IRadio.kInterfaceName);
-                    int readInt3220 = hwParcel.readInt32();
-                    boolean readBool = hwParcel.readBool();
+                    int int3220 = hwParcel.readInt32();
+                    boolean bool = hwParcel.readBool();
                     CarrierRestrictions carrierRestrictions = new CarrierRestrictions();
                     carrierRestrictions.readFromParcel(hwParcel);
-                    setAllowedCarriers(readInt3220, readBool, carrierRestrictions);
+                    setAllowedCarriers(int3220, bool, carrierRestrictions);
                     return;
                 case 126:
                     hwParcel.enforceInterface(IRadio.kInterfaceName);
@@ -3127,9 +3127,9 @@ public interface IRadio extends IBase {
                     switch (i) {
                         case 256067662:
                             hwParcel.enforceInterface(IBase.kInterfaceName);
-                            ArrayList<String> interfaceChain = interfaceChain();
+                            ArrayList<String> arrayListInterfaceChain = interfaceChain();
                             hwParcel2.writeStatus(0);
-                            hwParcel2.writeStringVector(interfaceChain);
+                            hwParcel2.writeStringVector(arrayListInterfaceChain);
                             hwParcel2.send();
                             return;
                         case 256131655:
@@ -3140,9 +3140,9 @@ public interface IRadio extends IBase {
                             return;
                         case 256136003:
                             hwParcel.enforceInterface(IBase.kInterfaceName);
-                            String interfaceDescriptor = interfaceDescriptor();
+                            String strInterfaceDescriptor = interfaceDescriptor();
                             hwParcel2.writeStatus(0);
-                            hwParcel2.writeString(interfaceDescriptor);
+                            hwParcel2.writeString(strInterfaceDescriptor);
                             hwParcel2.send();
                             return;
                         case 256398152:

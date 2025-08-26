@@ -107,9 +107,9 @@ public class FragmentAudioItem extends Item {
             Log.e(this.TAG, "Content is null.");
             return;
         }
-        long calculateContentDuration = calculateContentDuration();
-        long j = this.duration - calculateContentDuration;
-        if (calculateContentDuration <= 0) {
+        long jCalculateContentDuration = calculateContentDuration();
+        long j = this.duration - jCalculateContentDuration;
+        if (jCalculateContentDuration <= 0) {
             Log.e(this.TAG, "contentDuration is 0 or negative");
             return;
         }
@@ -117,7 +117,7 @@ public class FragmentAudioItem extends Item {
             this.enableOutro = true;
             this.enableAnimation = j < 0;
         } else {
-            appendBodyCount(calculateContentDuration);
+            appendBodyCount(jCalculateContentDuration);
             this.enableOutro = false;
             this.enableAnimation = true;
         }
@@ -147,12 +147,12 @@ public class FragmentAudioItem extends Item {
         if (size == 0) {
             return introDuration;
         }
-        long abs = Math.abs(this.duration - introDuration);
+        long jAbs = Math.abs(this.duration - introDuration);
         int i = 0;
         this.bodyFragmentCount = 0;
-        while (Math.abs(this.duration - (bodyDurationList.get(i).longValue() + introDuration)) < abs) {
+        while (Math.abs(this.duration - (bodyDurationList.get(i).longValue() + introDuration)) < jAbs) {
             introDuration += bodyDurationList.get(i).longValue();
-            abs = Math.abs(this.duration - introDuration);
+            jAbs = Math.abs(this.duration - introDuration);
             i = (i + 1) % size;
             this.bodyFragmentCount++;
         }

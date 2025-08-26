@@ -187,24 +187,24 @@ public final class FillRequest implements Parcelable {
     }
 
     FillRequest(Parcel parcel) {
-        byte readByte = parcel.readByte();
-        int readInt = parcel.readInt();
+        byte b = parcel.readByte();
+        int i = parcel.readInt();
         ArrayList arrayList = new ArrayList();
         parcel.readParcelableList(arrayList, FillContext.class.getClassLoader());
         ArrayList arrayList2 = new ArrayList();
         parcel.readStringList(arrayList2);
-        Bundle readBundle = (readByte & 8) == 0 ? null : parcel.readBundle();
-        int readInt2 = parcel.readInt();
-        InlineSuggestionsRequest inlineSuggestionsRequest = (readByte & 32) == 0 ? null : (InlineSuggestionsRequest) parcel.readTypedObject(InlineSuggestionsRequest.CREATOR);
-        IntentSender intentSender = (readByte & 64) == 0 ? null : (IntentSender) parcel.readTypedObject(IntentSender.CREATOR);
-        this.mId = readInt;
+        Bundle bundle = (b & 8) == 0 ? null : parcel.readBundle();
+        int i2 = parcel.readInt();
+        InlineSuggestionsRequest inlineSuggestionsRequest = (b & 32) == 0 ? null : (InlineSuggestionsRequest) parcel.readTypedObject(InlineSuggestionsRequest.CREATOR);
+        IntentSender intentSender = (b & 64) == 0 ? null : (IntentSender) parcel.readTypedObject(IntentSender.CREATOR);
+        this.mId = i;
         this.mFillContexts = arrayList;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) arrayList);
         this.mHints = arrayList2;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) arrayList2);
-        this.mClientState = readBundle;
-        this.mFlags = readInt2;
-        Preconditions.checkFlagsArgument(readInt2, 4055);
+        this.mClientState = bundle;
+        this.mFlags = i2;
+        Preconditions.checkFlagsArgument(i2, 4055);
         this.mInlineSuggestionsRequest = inlineSuggestionsRequest;
         this.mDelayedFillIntentSender = intentSender;
         onConstructed();

@@ -5,13 +5,11 @@ import com.android.compose.animation.scene.ElementMatcher;
 import com.android.compose.animation.scene.transformation.Transformation;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SharedElementTransformation implements Transformation {
     public final ContentKey elevateInContent;
     public final boolean enabled;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Factory implements Transformation.Factory {
         public final ContentKey elevateInContent;
         public final boolean enabled;
@@ -46,9 +44,9 @@ public final class SharedElementTransformation implements Transformation {
     }
 
     public final int hashCode() {
-        int hashCode = Boolean.hashCode(this.enabled) * 31;
+        int iHashCode = Boolean.hashCode(this.enabled) * 31;
         ContentKey contentKey = this.elevateInContent;
-        return hashCode + (contentKey == null ? 0 : contentKey.identity.hashCode());
+        return iHashCode + (contentKey == null ? 0 : contentKey.identity.hashCode());
     }
 
     public final String toString() {

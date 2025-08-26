@@ -80,9 +80,9 @@ public interface IHintSession extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IHintSession.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IHintSession)) {
-                return (IHintSession) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IHintSession.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IHintSession)) {
+                return (IHintSession) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -124,29 +124,29 @@ public interface IHintSession extends IInterface {
             }
             switch (i) {
                 case 1:
-                    long readLong = parcel.readLong();
+                    long j = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    updateTargetWorkDuration(readLong);
+                    updateTargetWorkDuration(j);
                     return true;
                 case 2:
-                    long[] createLongArray = parcel.createLongArray();
-                    long[] createLongArray2 = parcel.createLongArray();
+                    long[] jArrCreateLongArray = parcel.createLongArray();
+                    long[] jArrCreateLongArray2 = parcel.createLongArray();
                     parcel.enforceNoDataAvail();
-                    reportActualWorkDuration(createLongArray, createLongArray2);
+                    reportActualWorkDuration(jArrCreateLongArray, jArrCreateLongArray2);
                     return true;
                 case 3:
                     close();
                     return true;
                 case 4:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    sendHint(readInt);
+                    sendHint(i3);
                     return true;
                 case 5:
-                    int readInt2 = parcel.readInt();
-                    boolean readBoolean = parcel.readBoolean();
+                    int i4 = parcel.readInt();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setMode(readInt2, readBoolean);
+                    setMode(i4, z);
                     return true;
                 case 6:
                     android.hardware.power.WorkDuration[] workDurationArr = (android.hardware.power.WorkDuration[]) parcel.createTypedArray(android.hardware.power.WorkDuration.CREATOR);
@@ -154,9 +154,9 @@ public interface IHintSession extends IInterface {
                     reportActualWorkDuration2(workDurationArr);
                     return true;
                 case 7:
-                    IBinder[] createBinderArray = parcel.createBinderArray();
+                    IBinder[] iBinderArrCreateBinderArray = parcel.createBinderArray();
                     parcel.enforceNoDataAvail();
-                    associateToLayers(createBinderArray);
+                    associateToLayers(iBinderArrCreateBinderArray);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -181,86 +181,86 @@ public interface IHintSession extends IInterface {
 
             @Override // android.os.IHintSession
             public void updateTargetWorkDuration(long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IHintSession.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IHintSession.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IHintSession
             public void reportActualWorkDuration(long[] jArr, long[] jArr2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IHintSession.DESCRIPTOR);
-                    obtain.writeLongArray(jArr);
-                    obtain.writeLongArray(jArr2);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IHintSession.DESCRIPTOR);
+                    parcelObtain.writeLongArray(jArr);
+                    parcelObtain.writeLongArray(jArr2);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IHintSession
             public void close() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IHintSession.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IHintSession.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IHintSession
             public void sendHint(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IHintSession.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IHintSession.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IHintSession
             public void setMode(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IHintSession.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IHintSession.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IHintSession
             public void reportActualWorkDuration2(android.hardware.power.WorkDuration[] workDurationArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IHintSession.DESCRIPTOR);
-                    obtain.writeTypedArray(workDurationArr, 0);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IHintSession.DESCRIPTOR);
+                    parcelObtain.writeTypedArray(workDurationArr, 0);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IHintSession
             public void associateToLayers(IBinder[] iBinderArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IHintSession.DESCRIPTOR);
-                    obtain.writeBinderArray(iBinderArr);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IHintSession.DESCRIPTOR);
+                    parcelObtain.writeBinderArray(iBinderArr);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

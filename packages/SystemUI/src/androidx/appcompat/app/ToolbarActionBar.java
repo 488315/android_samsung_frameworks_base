@@ -17,7 +17,6 @@ import com.android.systemui.R;
 import java.util.ArrayList;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ToolbarActionBar extends ActionBar {
     public final ToolbarWidgetWrapper mDecorToolbar;
@@ -28,65 +27,37 @@ public class ToolbarActionBar extends ActionBar {
     public final Window.Callback mWindowCallback;
     public final ArrayList mMenuVisibilityListeners = new ArrayList();
     public final AnonymousClass1 mMenuInvalidator = new Runnable() { // from class: androidx.appcompat.app.ToolbarActionBar.1
-        /* JADX WARN: Removed duplicated region for block: B:13:0x002d  */
-        /* JADX WARN: Removed duplicated region for block: B:16:? A[RETURN, SYNTHETIC] */
         @Override // java.lang.Runnable
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
         public final void run() {
-            /*
-                r5 = this;
-                androidx.appcompat.app.ToolbarActionBar r5 = androidx.appcompat.app.ToolbarActionBar.this
-                androidx.appcompat.view.menu.MenuBuilder r0 = r5.getMenu()
-                r1 = 0
-                if (r0 == 0) goto Lb
-                r2 = r0
-                goto Lc
-            Lb:
-                r2 = r1
-            Lc:
-                if (r2 == 0) goto L11
-                r2.stopDispatchingItemsChanged()
-            L11:
-                r0.clear()     // Catch: java.lang.Throwable -> L26
-                android.view.Window$Callback r3 = r5.mWindowCallback     // Catch: java.lang.Throwable -> L26
-                r4 = 0
-                boolean r3 = r3.onCreatePanelMenu(r4, r0)     // Catch: java.lang.Throwable -> L26
-                if (r3 == 0) goto L28
-                android.view.Window$Callback r5 = r5.mWindowCallback     // Catch: java.lang.Throwable -> L26
-                boolean r5 = r5.onPreparePanel(r4, r1, r0)     // Catch: java.lang.Throwable -> L26
-                if (r5 != 0) goto L2b
-                goto L28
-            L26:
-                r5 = move-exception
-                goto L31
-            L28:
-                r0.clear()     // Catch: java.lang.Throwable -> L26
-            L2b:
-                if (r2 == 0) goto L30
-                r2.startDispatchingItemsChanged()
-            L30:
-                return
-            L31:
-                if (r2 == 0) goto L36
-                r2.startDispatchingItemsChanged()
-            L36:
-                throw r5
-            */
-            throw new UnsupportedOperationException("Method not decompiled: androidx.appcompat.app.ToolbarActionBar.AnonymousClass1.run():void");
+            ToolbarActionBar toolbarActionBar = ToolbarActionBar.this;
+            MenuBuilder menu = toolbarActionBar.getMenu();
+            MenuBuilder menuBuilder = menu != null ? menu : null;
+            if (menuBuilder != null) {
+                menuBuilder.stopDispatchingItemsChanged();
+            }
+            try {
+                menu.clear();
+                if (!toolbarActionBar.mWindowCallback.onCreatePanelMenu(0, menu) || !toolbarActionBar.mWindowCallback.onPreparePanel(0, null, menu)) {
+                    menu.clear();
+                }
+                if (menuBuilder != null) {
+                    menuBuilder.startDispatchingItemsChanged();
+                }
+            } catch (Throwable th) {
+                if (menuBuilder != null) {
+                    menuBuilder.startDispatchingItemsChanged();
+                }
+                throw th;
+            }
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.appcompat.app.ToolbarActionBar$2, reason: invalid class name */
     public class AnonymousClass2 {
         public AnonymousClass2() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ActionMenuPresenterCallback implements MenuPresenter.Callback {
         public boolean mClosingActionMenu;
 
@@ -120,7 +91,6 @@ public class ToolbarActionBar extends ActionBar {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class MenuBuilderCallback implements MenuBuilder.Callback {
         public MenuBuilderCallback() {
         }
@@ -141,7 +111,6 @@ public class ToolbarActionBar extends ActionBar {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ToolbarMenuCallback {
         public ToolbarMenuCallback() {
         }

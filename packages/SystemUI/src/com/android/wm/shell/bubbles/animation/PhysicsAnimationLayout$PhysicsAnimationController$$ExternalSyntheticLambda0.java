@@ -3,7 +3,6 @@ package com.android.wm.shell.bubbles.animation;
 import androidx.dynamicanimation.animation.DynamicAnimation;
 import com.android.wm.shell.bubbles.animation.PhysicsAnimationLayout;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class PhysicsAnimationLayout$PhysicsAnimationController$$ExternalSyntheticLambda0 implements Runnable {
     public final /* synthetic */ PhysicsAnimationLayout.PhysicsAnimationController f$0;

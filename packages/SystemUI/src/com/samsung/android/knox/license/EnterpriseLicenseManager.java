@@ -13,7 +13,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class EnterpriseLicenseManager {
     public static final String ACTION_LICENSE_STATUS = "com.samsung.android.knox.intent.action.LICENSE_STATUS";
@@ -76,18 +75,14 @@ public class EnterpriseLicenseManager {
     }
 
     private static synchronized IEnterpriseLicense getService() {
-        IEnterpriseLicense iEnterpriseLicense;
-        synchronized (EnterpriseLicenseManager.class) {
-            try {
-                if (lService == null) {
-                    lService = IEnterpriseLicense.Stub.asInterface(ServiceManager.getService("enterprise_license_policy"));
-                }
-                iEnterpriseLicense = lService;
-            } catch (Throwable th) {
-                throw th;
+        try {
+            if (lService == null) {
+                lService = IEnterpriseLicense.Stub.asInterface(ServiceManager.getService("enterprise_license_policy"));
             }
+        } catch (Throwable th) {
+            throw th;
         }
-        return iEnterpriseLicense;
+        return lService;
     }
 
     public static void log(ContextInfo contextInfo, String str) {
@@ -186,7 +181,7 @@ public class EnterpriseLicenseManager {
         }
     }
 
-    public JSONArray getApiCallData(String str) {
+    public JSONArray getApiCallData(String str) throws JSONException {
         try {
             if (getService() != null) {
                 Bundle apiCallData = lService.getApiCallData(str);
@@ -221,7 +216,7 @@ public class EnterpriseLicenseManager {
         return null;
     }
 
-    public JSONArray getApiCallDataByAdmin(String str) {
+    public JSONArray getApiCallDataByAdmin(String str) throws JSONException {
         try {
             if (getService() != null) {
                 Bundle apiCallDataByAdmin = lService.getApiCallDataByAdmin(str);

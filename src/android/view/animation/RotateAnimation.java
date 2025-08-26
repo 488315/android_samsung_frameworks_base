@@ -23,16 +23,16 @@ public class RotateAnimation extends Animation {
         this.mPivotYType = 0;
         this.mPivotXValue = 0.0f;
         this.mPivotYValue = 0.0f;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.RotateAnimation);
-        this.mFromDegrees = obtainStyledAttributes.getFloat(0, 0.0f);
-        this.mToDegrees = obtainStyledAttributes.getFloat(1, 0.0f);
-        Animation.Description parseValue = Animation.Description.parseValue(obtainStyledAttributes.peekValue(2), context);
-        this.mPivotXType = parseValue.type;
-        this.mPivotXValue = parseValue.value;
-        Animation.Description parseValue2 = Animation.Description.parseValue(obtainStyledAttributes.peekValue(3), context);
-        this.mPivotYType = parseValue2.type;
-        this.mPivotYValue = parseValue2.value;
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.RotateAnimation);
+        this.mFromDegrees = typedArrayObtainStyledAttributes.getFloat(0, 0.0f);
+        this.mToDegrees = typedArrayObtainStyledAttributes.getFloat(1, 0.0f);
+        Animation.Description value = Animation.Description.parseValue(typedArrayObtainStyledAttributes.peekValue(2), context);
+        this.mPivotXType = value.type;
+        this.mPivotXValue = value.value;
+        Animation.Description value2 = Animation.Description.parseValue(typedArrayObtainStyledAttributes.peekValue(3), context);
+        this.mPivotYType = value2.type;
+        this.mPivotYValue = value2.value;
+        typedArrayObtainStyledAttributes.recycle();
         initializePivotPoint();
     }
 

@@ -21,8 +21,10 @@ import android.icu.util.MeasureUnit;
 import android.net.Uri;
 import android.os.SystemClock;
 import android.provider.Telephony;
+import android.text.format.DateUtils;
 import android.util.AttributeSet;
 import android.util.IntProperty;
+import android.util.Log;
 import android.util.MathUtils;
 import android.util.Pools;
 import android.view.RemotableViewMethod;
@@ -36,6 +38,7 @@ import android.widget.RemoteViews;
 import com.android.internal.R;
 import java.util.ArrayList;
 import java.util.Formatter;
+import java.util.IllegalFormatException;
 import java.util.Locale;
 
 @RemoteViews.RemoteView
@@ -177,18 +180,18 @@ public class Chronometer extends TextView {
                 }
             }
         };
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.Chronometer, i, i2);
-        saveAttributeDataForStyleable(context, R.styleable.Chronometer, attributeSet, obtainStyledAttributes, i, i2);
-        setFormat(obtainStyledAttributes.getString(0));
-        setCountDown(obtainStyledAttributes.getBoolean(1, false));
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.Chronometer, i, i2);
+        saveAttributeDataForStyleable(context, R.styleable.Chronometer, attributeSet, typedArrayObtainStyledAttributes, i, i2);
+        setFormat(typedArrayObtainStyledAttributes.getString(0));
+        setCountDown(typedArrayObtainStyledAttributes.getBoolean(1, false));
+        typedArrayObtainStyledAttributes.recycle();
         init();
     }
 
     private void init() {
-        long elapsedRealtime = SystemClock.elapsedRealtime();
-        this.mBase = elapsedRealtime;
-        updateText(elapsedRealtime);
+        long jElapsedRealtime = SystemClock.elapsedRealtime();
+        this.mBase = jElapsedRealtime;
+        updateText(jElapsedRealtime);
     }
 
     @RemotableViewMethod
@@ -210,25 +213,30 @@ public class Chronometer extends TextView {
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:19:0x003e  */
     @RemotableViewMethod
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public void setBase(long j) {
         int i = this.mMode;
         if (i == 1 || i == 4) {
-            long elapsedRealtime = j - SystemClock.elapsedRealtime();
-            this.mBaseTimerSeconds = elapsedRealtime;
+            long jElapsedRealtime = j - SystemClock.elapsedRealtime();
+            this.mBaseTimerSeconds = jElapsedRealtime;
             long j2 = this.mFirstTimerSeconds;
-            if (elapsedRealtime > j2) {
+            if (jElapsedRealtime > j2) {
                 this.mBaseTimerSeconds = j2;
             }
             if (j2 != 0 || this.mOriginalBase != 0) {
                 long j3 = this.mBaseTimerSeconds;
-                if (j2 != j3 && j2 != 0) {
+                if (j2 == j3 || j2 == 0) {
+                    setProgressInternal(this.mMaxProgress, false);
+                } else {
                     int i2 = (int) ((j3 / j2) * 10000.0f);
                     this.mProgress = i2;
                     setProgressInternal(i2, false);
                 }
             }
-            setProgressInternal(this.mMaxProgress, false);
         }
         this.mBase = j;
         dispatchChronometerTick();
@@ -275,7 +283,11 @@ public class Chronometer extends TextView {
         updateRunning();
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:18:0x003b  */
     @RemotableViewMethod
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public void setStarted(boolean z) {
         this.mProgressAnimationDuration = Math.max((int) this.mBaseTimerSeconds, 0);
         if (z) {
@@ -284,13 +296,14 @@ public class Chronometer extends TextView {
                 long j = this.mFirstTimerSeconds;
                 if (j != 0 || this.mOriginalBase != 0) {
                     long j2 = this.mBaseTimerSeconds;
-                    if (j != j2 && j != 0) {
+                    if (j == j2 || j == 0) {
+                        setProgressInternal(this.mMaxProgress, false);
+                    } else {
                         int i2 = (int) ((j2 / j) * 10000.0f);
                         this.mProgress = i2;
                         setProgressInternal(i2, false);
                     }
                 }
-                setProgressInternal(this.mMaxProgress, false);
             }
             setProgressInternal(0, true);
         }
@@ -326,21 +339,108 @@ public class Chronometer extends TextView {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x0082 A[Catch: all -> 0x010e, TryCatch #1 {, blocks: (B:4:0x0003, B:6:0x0009, B:7:0x0018, B:9:0x0020, B:10:0x0023, B:12:0x002d, B:15:0x0032, B:18:0x003b, B:20:0x0043, B:21:0x005c, B:23:0x0060, B:25:0x0068, B:26:0x007e, B:28:0x0082, B:30:0x008a, B:32:0x009d, B:34:0x00a6, B:36:0x00b4, B:38:0x00b8, B:39:0x0092, B:40:0x00cd, B:45:0x00d5, B:46:0x00de, B:53:0x00e5, B:55:0x00eb, B:60:0x00f8, B:62:0x00fb, B:67:0x0105, B:69:0x0109, B:71:0x00db, B:73:0x0053, B:74:0x000c, B:76:0x0010, B:77:0x0015), top: B:3:0x0003, inners: #0 }] */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x00e2  */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x00eb A[Catch: all -> 0x010e, TryCatch #1 {, blocks: (B:4:0x0003, B:6:0x0009, B:7:0x0018, B:9:0x0020, B:10:0x0023, B:12:0x002d, B:15:0x0032, B:18:0x003b, B:20:0x0043, B:21:0x005c, B:23:0x0060, B:25:0x0068, B:26:0x007e, B:28:0x0082, B:30:0x008a, B:32:0x009d, B:34:0x00a6, B:36:0x00b4, B:38:0x00b8, B:39:0x0092, B:40:0x00cd, B:45:0x00d5, B:46:0x00de, B:53:0x00e5, B:55:0x00eb, B:60:0x00f8, B:62:0x00fb, B:67:0x0105, B:69:0x0109, B:71:0x00db, B:73:0x0053, B:74:0x000c, B:76:0x0010, B:77:0x0015), top: B:3:0x0003, inners: #0 }] */
-    /* JADX WARN: Removed duplicated region for block: B:64:0x00ff  */
-    /* JADX WARN: Removed duplicated region for block: B:69:0x0109 A[Catch: all -> 0x010e, TRY_LEAVE, TryCatch #1 {, blocks: (B:4:0x0003, B:6:0x0009, B:7:0x0018, B:9:0x0020, B:10:0x0023, B:12:0x002d, B:15:0x0032, B:18:0x003b, B:20:0x0043, B:21:0x005c, B:23:0x0060, B:25:0x0068, B:26:0x007e, B:28:0x0082, B:30:0x008a, B:32:0x009d, B:34:0x00a6, B:36:0x00b4, B:38:0x00b8, B:39:0x0092, B:40:0x00cd, B:45:0x00d5, B:46:0x00de, B:53:0x00e5, B:55:0x00eb, B:60:0x00f8, B:62:0x00fb, B:67:0x0105, B:69:0x0109, B:71:0x00db, B:73:0x0053, B:74:0x000c, B:76:0x0010, B:77:0x0015), top: B:3:0x0003, inners: #0 }] */
+    /* JADX WARN: Removed duplicated region for block: B:51:0x00db A[Catch: all -> 0x010e, TryCatch #1 {, blocks: (B:4:0x0003, B:6:0x0009, B:11:0x0018, B:13:0x0020, B:14:0x0023, B:16:0x002d, B:19:0x0032, B:23:0x003b, B:25:0x0043, B:27:0x005c, B:29:0x0060, B:31:0x0068, B:32:0x007e, B:34:0x0082, B:36:0x008a, B:39:0x009d, B:40:0x00a6, B:42:0x00b4, B:44:0x00b8, B:38:0x0092, B:45:0x00cd, B:50:0x00d5, B:52:0x00de, B:56:0x00e5, B:58:0x00eb, B:64:0x00f8, B:65:0x00fb, B:70:0x0105, B:72:0x0109, B:51:0x00db, B:26:0x0053, B:7:0x000c, B:9:0x0010, B:10:0x0015), top: B:80:0x0003, inners: #0 }] */
+    /* JADX WARN: Removed duplicated region for block: B:58:0x00eb A[Catch: all -> 0x010e, TryCatch #1 {, blocks: (B:4:0x0003, B:6:0x0009, B:11:0x0018, B:13:0x0020, B:14:0x0023, B:16:0x002d, B:19:0x0032, B:23:0x003b, B:25:0x0043, B:27:0x005c, B:29:0x0060, B:31:0x0068, B:32:0x007e, B:34:0x0082, B:36:0x008a, B:39:0x009d, B:40:0x00a6, B:42:0x00b4, B:44:0x00b8, B:38:0x0092, B:45:0x00cd, B:50:0x00d5, B:52:0x00de, B:56:0x00e5, B:58:0x00eb, B:64:0x00f8, B:65:0x00fb, B:70:0x0105, B:72:0x0109, B:51:0x00db, B:26:0x0053, B:7:0x000c, B:9:0x0010, B:10:0x0015), top: B:80:0x0003, inners: #0 }] */
+    /* JADX WARN: Removed duplicated region for block: B:72:0x0109 A[Catch: all -> 0x010e, TRY_LEAVE, TryCatch #1 {, blocks: (B:4:0x0003, B:6:0x0009, B:11:0x0018, B:13:0x0020, B:14:0x0023, B:16:0x002d, B:19:0x0032, B:23:0x003b, B:25:0x0043, B:27:0x005c, B:29:0x0060, B:31:0x0068, B:32:0x007e, B:34:0x0082, B:36:0x008a, B:39:0x009d, B:40:0x00a6, B:42:0x00b4, B:44:0x00b8, B:38:0x0092, B:45:0x00cd, B:50:0x00d5, B:52:0x00de, B:56:0x00e5, B:58:0x00eb, B:64:0x00f8, B:65:0x00fb, B:70:0x0105, B:72:0x0109, B:51:0x00db, B:26:0x0053, B:7:0x000c, B:9:0x0010, B:10:0x0015), top: B:80:0x0003, inners: #0 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public synchronized void updateText(long r13) {
-        /*
-            Method dump skipped, instructions count: 273
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.Chronometer.updateText(long):void");
+    public synchronized void updateText(long j) {
+        long j2;
+        String strSemFormatElapsedTime;
+        boolean z;
+        int i;
+        int i2;
+        ChronometerProgressDrawable chronometerProgressDrawable;
+        int iLastIndexOf;
+        this.mNow = j;
+        if (this.mUseStoppedTimeText) {
+            j2 = this.mStoppedTime;
+        } else {
+            j2 = this.mCountDown ? this.mBase - j : j - this.mBase;
+        }
+        float f = this.mPlaySpeed;
+        if (f != 1.0f) {
+            j2 = (long) (j2 * f);
+        }
+        boolean z2 = this.mIsFixedHourFormat;
+        boolean z3 = true;
+        if (z2 || this.mMilliSecondCount > 0) {
+            strSemFormatElapsedTime = DateUtils.semFormatElapsedTime(this.mRecycle, j2, z2, this.mMilliSecondCount);
+            z = false;
+        } else {
+            j2 /= 1000;
+            if (j2 < 0) {
+                j2 = -j2;
+                z = true;
+            } else {
+                z = false;
+            }
+            strSemFormatElapsedTime = DateUtils.formatElapsedTime(this.mRecycle, j2);
+            if (z) {
+                strSemFormatElapsedTime = getResources().getString(R.string.negative_duration, strSemFormatElapsedTime);
+            }
+        }
+        if (!this.mIsShowingSeconds && (iLastIndexOf = strSemFormatElapsedTime.lastIndexOf(":")) > 0) {
+            strSemFormatElapsedTime = strSemFormatElapsedTime.substring(0, iLastIndexOf + 1) + "--";
+        }
+        if (this.mFormat != null) {
+            Locale locale = Locale.getDefault();
+            if (this.mFormatter == null || !locale.equals(this.mFormatterLocale)) {
+                this.mFormatterLocale = locale;
+                this.mFormatter = new Formatter(this.mFormatBuilder, locale);
+            }
+            this.mFormatBuilder.setLength(0);
+            Object[] objArr = this.mFormatterArgs;
+            objArr[0] = strSemFormatElapsedTime;
+            try {
+                this.mFormatter.format(this.mFormat, objArr);
+                strSemFormatElapsedTime = this.mFormatBuilder.toString();
+            } catch (IllegalFormatException unused) {
+                if (!this.mLogged) {
+                    Log.w(TAG, "Illegal format string: " + this.mFormat);
+                    this.mLogged = true;
+                }
+            }
+            i = this.mMode;
+            if (i != 0 || i == 2) {
+                lambda$setTextAsync$0(strSemFormatElapsedTime);
+            } else {
+                lambda$setTextAsync$0("");
+            }
+            i2 = this.mMode;
+            if (i2 != 1 || i2 == 4) {
+                chronometerProgressDrawable = getChronometerProgressDrawable();
+                if (chronometerProgressDrawable != null) {
+                    if (j2 >= this.mWaringTime / 1000 || j2 < 0) {
+                        z3 = false;
+                    }
+                    chronometerProgressDrawable.setWarningMode(z3);
+                }
+                if (this.mCountDown && (j2 == 0 || z)) {
+                    this.mRunning = false;
+                    if (chronometerProgressDrawable != null) {
+                        chronometerProgressDrawable.cancelAnimator();
+                    }
+                }
+            }
+        } else {
+            i = this.mMode;
+            if (i != 0) {
+                lambda$setTextAsync$0(strSemFormatElapsedTime);
+                i2 = this.mMode;
+                if (i2 != 1) {
+                }
+                chronometerProgressDrawable = getChronometerProgressDrawable();
+                if (chronometerProgressDrawable != null) {
+                }
+                if (this.mCountDown) {
+                    this.mRunning = false;
+                    if (chronometerProgressDrawable != null) {
+                    }
+                }
+            }
+        }
     }
 
     private ChronometerProgressDrawable getChronometerProgressDrawable() {
@@ -348,12 +448,12 @@ public class Chronometer extends TextView {
         if (!(drawable instanceof LayerDrawable)) {
             return null;
         }
-        Drawable findDrawableByLayerId = ((LayerDrawable) drawable).findDrawableByLayerId(16908301);
-        if (findDrawableByLayerId instanceof ChronometerProgressDrawable) {
-            return (ChronometerProgressDrawable) findDrawableByLayerId;
+        Drawable drawableFindDrawableByLayerId = ((LayerDrawable) drawable).findDrawableByLayerId(16908301);
+        if (drawableFindDrawableByLayerId instanceof ChronometerProgressDrawable) {
+            return (ChronometerProgressDrawable) drawableFindDrawableByLayerId;
         }
-        if (findDrawableByLayerId instanceof ClipDrawable) {
-            return (ChronometerProgressDrawable) ((ClipDrawable) findDrawableByLayerId).getDrawable();
+        if (drawableFindDrawableByLayerId instanceof ClipDrawable) {
+            return (ChronometerProgressDrawable) ((ClipDrawable) drawableFindDrawableByLayerId).getDrawable();
         }
         return null;
     }
@@ -363,12 +463,12 @@ public class Chronometer extends TextView {
         if (!(drawable instanceof LayerDrawable)) {
             return null;
         }
-        Drawable findDrawableByLayerId = ((LayerDrawable) drawable).findDrawableByLayerId(16908288);
-        if (findDrawableByLayerId instanceof ChronometerProgressDrawable) {
-            return (ChronometerProgressDrawable) findDrawableByLayerId;
+        Drawable drawableFindDrawableByLayerId = ((LayerDrawable) drawable).findDrawableByLayerId(16908288);
+        if (drawableFindDrawableByLayerId instanceof ChronometerProgressDrawable) {
+            return (ChronometerProgressDrawable) drawableFindDrawableByLayerId;
         }
-        if (findDrawableByLayerId instanceof ClipDrawable) {
-            return (ChronometerProgressDrawable) ((ClipDrawable) findDrawableByLayerId).getDrawable();
+        if (drawableFindDrawableByLayerId instanceof ClipDrawable) {
+            return (ChronometerProgressDrawable) ((ClipDrawable) drawableFindDrawableByLayerId).getDrawable();
         }
         return null;
     }
@@ -422,17 +522,17 @@ public class Chronometer extends TextView {
 
     /* JADX INFO: Access modifiers changed from: private */
     public void postTickOnNextSecond() {
-        long abs;
+        long jAbs;
         long j = this.mNow;
         if (this.mCountDown) {
-            abs = (this.mBase - j) % 1000;
-            if (abs <= 0) {
-                abs += 1000;
+            jAbs = (this.mBase - j) % 1000;
+            if (jAbs <= 0) {
+                jAbs += 1000;
             }
         } else {
-            abs = 1000 - (Math.abs(j - this.mBase) % 1000);
+            jAbs = 1000 - (Math.abs(j - this.mBase) % 1000);
         }
-        postDelayed(this.mTickRunnable, abs + 1);
+        postDelayed(this.mTickRunnable, jAbs + 1);
     }
 
     void dispatchChronometerTick() {
@@ -496,10 +596,10 @@ public class Chronometer extends TextView {
     void drawTrack(Canvas canvas) {
         Drawable drawable = this.mCurrentDrawable;
         if (drawable != 0) {
-            int save = canvas.save();
+            int iSave = canvas.save();
             canvas.translate(this.mPaddingLeft, this.mPaddingTop);
             drawable.draw(canvas);
-            canvas.restoreToCount(save);
+            canvas.restoreToCount(iSave);
             if (this.mShouldStartAnimationDrawable && (drawable instanceof Animatable)) {
                 ((Animatable) drawable).start();
                 this.mShouldStartAnimationDrawable = false;
@@ -508,16 +608,16 @@ public class Chronometer extends TextView {
     }
 
     private synchronized void setProgressInternal(int i, boolean z) {
-        int constrain = MathUtils.constrain(i, this.mMinProgress, this.mMaxProgress);
-        this.mProgress = constrain;
+        int iConstrain = MathUtils.constrain(i, this.mMinProgress, this.mMaxProgress);
+        this.mProgress = iConstrain;
         Drawable drawable = this.mProgressDrawable;
         if (drawable instanceof LayerDrawable) {
-            Drawable findDrawableByLayerId = ((LayerDrawable) drawable).findDrawableByLayerId(16908301);
-            if (findDrawableByLayerId instanceof ClipDrawable) {
-                findDrawableByLayerId = ((ClipDrawable) findDrawableByLayerId).getDrawable();
+            Drawable drawableFindDrawableByLayerId = ((LayerDrawable) drawable).findDrawableByLayerId(16908301);
+            if (drawableFindDrawableByLayerId instanceof ClipDrawable) {
+                drawableFindDrawableByLayerId = ((ClipDrawable) drawableFindDrawableByLayerId).getDrawable();
             }
-            if (findDrawableByLayerId instanceof ChronometerProgressDrawable) {
-                ((ChronometerProgressDrawable) findDrawableByLayerId).setProgress(constrain, z);
+            if (drawableFindDrawableByLayerId instanceof ChronometerProgressDrawable) {
+                ((ChronometerProgressDrawable) drawableFindDrawableByLayerId).setProgress(iConstrain, z);
             }
         }
         refreshProgress(16908301, this.mProgress, z);
@@ -537,7 +637,7 @@ public class Chronometer extends TextView {
     private void initializeHorizontalProgressMode() {
         HorizontalProgressDrawable horizontalProgressDrawable = new HorizontalProgressDrawable(false, colorToColorStateList(this.mProgressColor), colorToColorStateList(this.mProgressWarningColor));
         HorizontalProgressDrawable horizontalProgressDrawable2 = new HorizontalProgressDrawable(true, colorToColorStateList(this.mProgressBackgroundColor), null);
-        r2[0].setLevel(10000);
+        drawableArr[0].setLevel(10000);
         Drawable[] drawableArr = {new ClipDrawable(horizontalProgressDrawable2, 21, 1), new ClipDrawable(horizontalProgressDrawable, 21, 1)};
         drawableArr[1].setLevel(0);
         LayerDrawable layerDrawable = new LayerDrawable(drawableArr);
@@ -635,12 +735,12 @@ public class Chronometer extends TextView {
         if (drawable != null) {
             int i4 = (int) (10000.0f * f);
             if (drawable instanceof LayerDrawable) {
-                Drawable findDrawableByLayerId = ((LayerDrawable) drawable).findDrawableByLayerId(i);
-                if (findDrawableByLayerId != null && canResolveLayoutDirection()) {
-                    findDrawableByLayerId.setLayoutDirection(getLayoutDirection());
+                Drawable drawableFindDrawableByLayerId = ((LayerDrawable) drawable).findDrawableByLayerId(i);
+                if (drawableFindDrawableByLayerId != null && canResolveLayoutDirection()) {
+                    drawableFindDrawableByLayerId.setLayoutDirection(getLayoutDirection());
                 }
-                if (findDrawableByLayerId != null) {
-                    drawable = findDrawableByLayerId;
+                if (drawableFindDrawableByLayerId != null) {
+                    drawable = drawableFindDrawableByLayerId;
                 }
                 drawable.setLevel(i4);
             } else {
@@ -656,10 +756,10 @@ public class Chronometer extends TextView {
 
     void onProgressRefresh(float f, int i) {
         if (getStateDescription() == null) {
-            AccessibilityEvent obtain = AccessibilityEvent.obtain();
-            obtain.setEventType(2048);
-            obtain.setContentChangeTypes(64);
-            sendAccessibilityEventUnchecked(obtain);
+            AccessibilityEvent accessibilityEventObtain = AccessibilityEvent.obtain();
+            accessibilityEventObtain.setEventType(2048);
+            accessibilityEventObtain.setContentChangeTypes(64);
+            sendAccessibilityEventUnchecked(accessibilityEventObtain);
         }
     }
 
@@ -690,23 +790,24 @@ public class Chronometer extends TextView {
 
     @Override // android.widget.TextView, android.view.View
     protected synchronized void onMeasure(int i, int i2) {
-        int i3;
-        int i4;
-        int i5 = this.mMode;
-        if (i5 != 0 && i5 != 2) {
+        int iMax;
+        int iMax2;
+        int i3 = this.mMode;
+        if (i3 == 0 || i3 == 2) {
+            super.onMeasure(i, i2);
+        } else {
             Drawable drawable = this.mCurrentDrawable;
             if (drawable != null) {
-                i4 = Math.max(this.mMinWidth, Math.min(this.mMaxWidth, drawable.getIntrinsicWidth()));
-                i3 = Math.max(this.mMinHeight, Math.min(this.mMaxHeight, drawable.getIntrinsicHeight()));
+                iMax2 = Math.max(this.mMinWidth, Math.min(this.mMaxWidth, drawable.getIntrinsicWidth()));
+                iMax = Math.max(this.mMinHeight, Math.min(this.mMaxHeight, drawable.getIntrinsicHeight()));
             } else {
-                i3 = 0;
-                i4 = 0;
+                iMax = 0;
+                iMax2 = 0;
             }
             updateDrawableState();
-            setMeasuredDimension(resolveSizeAndState(i4 + this.mPaddingLeft + this.mPaddingRight, i, 0), resolveSizeAndState(i3 + this.mPaddingTop + this.mPaddingBottom, i2, 0));
+            setMeasuredDimension(resolveSizeAndState(iMax2 + this.mPaddingLeft + this.mPaddingRight, i, 0), resolveSizeAndState(iMax + this.mPaddingTop + this.mPaddingBottom, i2, 0));
             updateDrawableBounds(getMeasuredWidth(), getMeasuredHeight());
         }
-        super.onMeasure(i, i2);
     }
 
     private void initCirCleStrokeWidth() {
@@ -725,14 +826,14 @@ public class Chronometer extends TextView {
         }
 
         public static RefreshData obtain(int i, int i2, boolean z) {
-            RefreshData acquire = sPool.acquire();
-            if (acquire == null) {
-                acquire = new RefreshData();
+            RefreshData refreshDataAcquire = sPool.acquire();
+            if (refreshDataAcquire == null) {
+                refreshDataAcquire = new RefreshData();
             }
-            acquire.id = i;
-            acquire.progress = i2;
-            acquire.animate = z;
-            return acquire;
+            refreshDataAcquire.id = i;
+            refreshDataAcquire.progress = i2;
+            refreshDataAcquire.animate = z;
+            return refreshDataAcquire;
         }
 
         public void recycle() {
@@ -794,9 +895,9 @@ public class Chronometer extends TextView {
                         i = Chronometer.this.mMaxProgress;
                     }
                     chronometerProgressDrawable.mProgress = i;
-                    Drawable findDrawableByLayerId = ((LayerDrawable) Chronometer.this.mProgressDrawable).findDrawableByLayerId(16908301);
-                    if (findDrawableByLayerId instanceof ClipDrawable) {
-                        findDrawableByLayerId.setLevel(i);
+                    Drawable drawableFindDrawableByLayerId = ((LayerDrawable) Chronometer.this.mProgressDrawable).findDrawableByLayerId(16908301);
+                    if (drawableFindDrawableByLayerId instanceof ClipDrawable) {
+                        drawableFindDrawableByLayerId.setLevel(i);
                     }
                     ChronometerProgressDrawable.this.invalidateSelf();
                 }
@@ -851,9 +952,9 @@ public class Chronometer extends TextView {
 
         void setProgress(int i, boolean z) {
             if (z) {
-                ObjectAnimator ofInt = ObjectAnimator.ofInt(this, this.VISUAL_CIRCLE_PROGRESS, i);
-                this.mAnimator = ofInt;
-                ofInt.overrideDurationScale(1.0f);
+                ObjectAnimator objectAnimatorOfInt = ObjectAnimator.ofInt(this, this.VISUAL_CIRCLE_PROGRESS, i);
+                this.mAnimator = objectAnimatorOfInt;
+                objectAnimatorOfInt.overrideDurationScale(1.0f);
                 this.mAnimator.setAutoCancel(true);
                 this.mAnimator.setDuration(Chronometer.this.mProgressAnimationDuration);
                 this.mAnimator.setInterpolator(Chronometer.PROGRESS_ANIM_INTERPOLATOR);
@@ -865,9 +966,9 @@ public class Chronometer extends TextView {
                 this.mAnimator.setFloatValues(this.mProgress);
                 this.mAnimator.end();
                 this.mAnimator.cancel();
-                Drawable findDrawableByLayerId = ((LayerDrawable) Chronometer.this.mProgressDrawable).findDrawableByLayerId(16908301);
-                if (findDrawableByLayerId instanceof ClipDrawable) {
-                    findDrawableByLayerId.setLevel(i);
+                Drawable drawableFindDrawableByLayerId = ((LayerDrawable) Chronometer.this.mProgressDrawable).findDrawableByLayerId(16908301);
+                if (drawableFindDrawableByLayerId instanceof ClipDrawable) {
+                    drawableFindDrawableByLayerId.setLevel(i);
                 }
                 invalidateSelf();
             } else {
@@ -915,7 +1016,7 @@ public class Chronometer extends TextView {
         @Override // android.graphics.drawable.Drawable
         protected boolean onStateChange(int[] iArr) {
             int colorForState;
-            boolean onStateChange = super.onStateChange(iArr);
+            boolean zOnStateChange = super.onStateChange(iArr);
             if (this.mIsWarningMode) {
                 colorForState = this.mWarningColorStateList.getColorForState(iArr, this.mColor);
             } else {
@@ -926,7 +1027,7 @@ public class Chronometer extends TextView {
                 this.mPaint.setColor(colorForState);
                 invalidateSelf();
             }
-            return onStateChange;
+            return zOnStateChange;
         }
 
         @Override // android.graphics.drawable.Drawable

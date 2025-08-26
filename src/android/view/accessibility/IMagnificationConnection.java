@@ -123,9 +123,9 @@ public interface IMagnificationConnection extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IMagnificationConnection.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IMagnificationConnection)) {
-                return (IMagnificationConnection) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IMagnificationConnection.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IMagnificationConnection)) {
+                return (IMagnificationConnection) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -177,82 +177,82 @@ public interface IMagnificationConnection extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int readInt = parcel.readInt();
-                    float readFloat = parcel.readFloat();
-                    float readFloat2 = parcel.readFloat();
-                    float readFloat3 = parcel.readFloat();
-                    float readFloat4 = parcel.readFloat();
-                    float readFloat5 = parcel.readFloat();
-                    IRemoteMagnificationAnimationCallback asInterface = IRemoteMagnificationAnimationCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i3 = parcel.readInt();
+                    float f = parcel.readFloat();
+                    float f2 = parcel.readFloat();
+                    float f3 = parcel.readFloat();
+                    float f4 = parcel.readFloat();
+                    float f5 = parcel.readFloat();
+                    IRemoteMagnificationAnimationCallback iRemoteMagnificationAnimationCallbackAsInterface = IRemoteMagnificationAnimationCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    enableWindowMagnification(readInt, readFloat, readFloat2, readFloat3, readFloat4, readFloat5, asInterface);
+                    enableWindowMagnification(i3, f, f2, f3, f4, f5, iRemoteMagnificationAnimationCallbackAsInterface);
                     return true;
                 case 2:
-                    int readInt2 = parcel.readInt();
-                    float readFloat6 = parcel.readFloat();
+                    int i4 = parcel.readInt();
+                    float f6 = parcel.readFloat();
                     parcel.enforceNoDataAvail();
-                    setScaleForWindowMagnification(readInt2, readFloat6);
+                    setScaleForWindowMagnification(i4, f6);
                     return true;
                 case 3:
-                    int readInt3 = parcel.readInt();
-                    IRemoteMagnificationAnimationCallback asInterface2 = IRemoteMagnificationAnimationCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i5 = parcel.readInt();
+                    IRemoteMagnificationAnimationCallback iRemoteMagnificationAnimationCallbackAsInterface2 = IRemoteMagnificationAnimationCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    disableWindowMagnification(readInt3, asInterface2);
+                    disableWindowMagnification(i5, iRemoteMagnificationAnimationCallbackAsInterface2);
                     return true;
                 case 4:
-                    int readInt4 = parcel.readInt();
-                    float readFloat7 = parcel.readFloat();
-                    float readFloat8 = parcel.readFloat();
+                    int i6 = parcel.readInt();
+                    float f7 = parcel.readFloat();
+                    float f8 = parcel.readFloat();
                     parcel.enforceNoDataAvail();
-                    moveWindowMagnifier(readInt4, readFloat7, readFloat8);
+                    moveWindowMagnifier(i6, f7, f8);
                     return true;
                 case 5:
-                    int readInt5 = parcel.readInt();
-                    boolean readBoolean = parcel.readBoolean();
+                    int i7 = parcel.readInt();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    secSetCursorVisible(readInt5, readBoolean);
+                    secSetCursorVisible(i7, z);
                     return true;
                 case 6:
-                    int readInt6 = parcel.readInt();
-                    float readFloat9 = parcel.readFloat();
-                    float readFloat10 = parcel.readFloat();
-                    IRemoteMagnificationAnimationCallback asInterface3 = IRemoteMagnificationAnimationCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i8 = parcel.readInt();
+                    float f9 = parcel.readFloat();
+                    float f10 = parcel.readFloat();
+                    IRemoteMagnificationAnimationCallback iRemoteMagnificationAnimationCallbackAsInterface3 = IRemoteMagnificationAnimationCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    moveWindowMagnifierToPosition(readInt6, readFloat9, readFloat10, asInterface3);
+                    moveWindowMagnifierToPosition(i8, f9, f10, iRemoteMagnificationAnimationCallbackAsInterface3);
                     return true;
                 case 7:
-                    int readInt7 = parcel.readInt();
-                    int readInt8 = parcel.readInt();
+                    int i9 = parcel.readInt();
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    showMagnificationButton(readInt7, readInt8);
+                    showMagnificationButton(i9, i10);
                     return true;
                 case 8:
-                    int readInt9 = parcel.readInt();
+                    int i11 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    removeMagnificationButton(readInt9);
+                    removeMagnificationButton(i11);
                     return true;
                 case 9:
-                    int readInt10 = parcel.readInt();
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    removeMagnificationSettingsPanel(readInt10);
+                    removeMagnificationSettingsPanel(i12);
                     return true;
                 case 10:
-                    IMagnificationConnectionCallback asInterface4 = IMagnificationConnectionCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IMagnificationConnectionCallback iMagnificationConnectionCallbackAsInterface = IMagnificationConnectionCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    setConnectionCallback(asInterface4);
+                    setConnectionCallback(iMagnificationConnectionCallbackAsInterface);
                     return true;
                 case 11:
-                    int readInt11 = parcel.readInt();
-                    int readInt12 = parcel.readInt();
-                    float readFloat11 = parcel.readFloat();
+                    int i13 = parcel.readInt();
+                    int i14 = parcel.readInt();
+                    float f11 = parcel.readFloat();
                     parcel.enforceNoDataAvail();
-                    onUserMagnificationScaleChanged(readInt11, readInt12, readFloat11);
+                    onUserMagnificationScaleChanged(i13, i14, f11);
                     return true;
                 case 12:
-                    int readInt13 = parcel.readInt();
-                    boolean readBoolean2 = parcel.readBoolean();
+                    int i15 = parcel.readInt();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    onFullscreenMagnificationActivationChanged(readInt13, readBoolean2);
+                    onFullscreenMagnificationActivationChanged(i15, z2);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -277,163 +277,163 @@ public interface IMagnificationConnection extends IInterface {
 
             @Override // android.view.accessibility.IMagnificationConnection
             public void enableWindowMagnification(int i, float f, float f2, float f3, float f4, float f5, IRemoteMagnificationAnimationCallback iRemoteMagnificationAnimationCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMagnificationConnection.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeFloat(f);
-                    obtain.writeFloat(f2);
-                    obtain.writeFloat(f3);
-                    obtain.writeFloat(f4);
-                    obtain.writeFloat(f5);
-                    obtain.writeStrongInterface(iRemoteMagnificationAnimationCallback);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMagnificationConnection.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeFloat(f);
+                    parcelObtain.writeFloat(f2);
+                    parcelObtain.writeFloat(f3);
+                    parcelObtain.writeFloat(f4);
+                    parcelObtain.writeFloat(f5);
+                    parcelObtain.writeStrongInterface(iRemoteMagnificationAnimationCallback);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.accessibility.IMagnificationConnection
             public void setScaleForWindowMagnification(int i, float f) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMagnificationConnection.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeFloat(f);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMagnificationConnection.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeFloat(f);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.accessibility.IMagnificationConnection
             public void disableWindowMagnification(int i, IRemoteMagnificationAnimationCallback iRemoteMagnificationAnimationCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMagnificationConnection.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iRemoteMagnificationAnimationCallback);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMagnificationConnection.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iRemoteMagnificationAnimationCallback);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.accessibility.IMagnificationConnection
             public void moveWindowMagnifier(int i, float f, float f2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMagnificationConnection.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeFloat(f);
-                    obtain.writeFloat(f2);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMagnificationConnection.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeFloat(f);
+                    parcelObtain.writeFloat(f2);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.accessibility.IMagnificationConnection
             public void secSetCursorVisible(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMagnificationConnection.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMagnificationConnection.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.accessibility.IMagnificationConnection
             public void moveWindowMagnifierToPosition(int i, float f, float f2, IRemoteMagnificationAnimationCallback iRemoteMagnificationAnimationCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMagnificationConnection.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeFloat(f);
-                    obtain.writeFloat(f2);
-                    obtain.writeStrongInterface(iRemoteMagnificationAnimationCallback);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMagnificationConnection.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeFloat(f);
+                    parcelObtain.writeFloat(f2);
+                    parcelObtain.writeStrongInterface(iRemoteMagnificationAnimationCallback);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.accessibility.IMagnificationConnection
             public void showMagnificationButton(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMagnificationConnection.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMagnificationConnection.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.accessibility.IMagnificationConnection
             public void removeMagnificationButton(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMagnificationConnection.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMagnificationConnection.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.accessibility.IMagnificationConnection
             public void removeMagnificationSettingsPanel(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMagnificationConnection.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMagnificationConnection.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.accessibility.IMagnificationConnection
             public void setConnectionCallback(IMagnificationConnectionCallback iMagnificationConnectionCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMagnificationConnection.DESCRIPTOR);
-                    obtain.writeStrongInterface(iMagnificationConnectionCallback);
-                    this.mRemote.transact(10, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMagnificationConnection.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iMagnificationConnectionCallback);
+                    this.mRemote.transact(10, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.accessibility.IMagnificationConnection
             public void onUserMagnificationScaleChanged(int i, int i2, float f) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMagnificationConnection.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeFloat(f);
-                    this.mRemote.transact(11, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMagnificationConnection.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeFloat(f);
+                    this.mRemote.transact(11, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.accessibility.IMagnificationConnection
             public void onFullscreenMagnificationActivationChanged(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMagnificationConnection.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(12, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMagnificationConnection.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(12, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -6,7 +6,6 @@ import com.android.systemui.statusbar.phone.ui.StatusBarIconController;
 import com.android.systemui.statusbar.policy.LocationController;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class PhoneStatusBarPolicyExt {
     public final String SLOT_NAME_LOCATION;
@@ -17,12 +16,11 @@ public final class PhoneStatusBarPolicyExt {
     public final PhoneStatusBarPolicyExt$turnOffTimeToEnsureLocationIconDisplay$1 turnOffTimeToEnsureLocationIconDisplay = new Runnable() { // from class: com.android.systemui.statusbar.phone.PhoneStatusBarPolicyExt$turnOffTimeToEnsureLocationIconDisplay$1
         @Override // java.lang.Runnable
         public final void run() {
-            PhoneStatusBarPolicyExt.this.isTimeToEnsureLocationIconDisplay = false;
+            this.this$0.isTimeToEnsureLocationIconDisplay = false;
         }
     };
     public final PhoneStatusBarPolicyExt$removeLocationIconRunnable$1 removeLocationIconRunnable = new PhoneStatusBarPolicyExt$removeLocationIconRunnable$1(this);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -41,6 +39,6 @@ public final class PhoneStatusBarPolicyExt {
         this.handler = handler;
         this.locationController = locationController;
         this.iconController = statusBarIconController;
-        this.SLOT_NAME_LOCATION = resources.getString(17043280);
+        this.SLOT_NAME_LOCATION = resources.getString(17043284);
     }
 }

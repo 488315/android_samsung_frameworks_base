@@ -711,9 +711,9 @@ public abstract class CodedOutputStream extends ByteOutput {
                 write(byteBuffer.array(), byteBuffer.arrayOffset(), byteBuffer.capacity());
                 return;
             }
-            ByteBuffer duplicate = byteBuffer.duplicate();
-            duplicate.clear();
-            write(duplicate);
+            ByteBuffer byteBufferDuplicate = byteBuffer.duplicate();
+            byteBufferDuplicate.clear();
+            write(byteBufferDuplicate);
         }
 
         @Override // com.android.framework.protobuf.CodedOutputStream
@@ -901,12 +901,12 @@ public abstract class CodedOutputStream extends ByteOutput {
 
         @Override // com.android.framework.protobuf.CodedOutputStream, com.android.framework.protobuf.ByteOutput
         public final void write(ByteBuffer byteBuffer) throws IOException {
-            int remaining = byteBuffer.remaining();
+            int iRemaining = byteBuffer.remaining();
             try {
-                byteBuffer.get(this.buffer, this.position, remaining);
-                this.position += remaining;
+                byteBuffer.get(this.buffer, this.position, iRemaining);
+                this.position += iRemaining;
             } catch (IndexOutOfBoundsException e) {
-                throw new OutOfSpaceException(String.format("Pos: %d, limit: %d, len: %d", Integer.valueOf(this.position), Integer.valueOf(this.limit), Integer.valueOf(remaining)), e);
+                throw new OutOfSpaceException(String.format("Pos: %d, limit: %d, len: %d", Integer.valueOf(this.position), Integer.valueOf(this.limit), Integer.valueOf(iRemaining)), e);
             }
         }
 
@@ -919,15 +919,15 @@ public abstract class CodedOutputStream extends ByteOutput {
         public final void writeStringNoTag(String str) throws IOException {
             int i = this.position;
             try {
-                int computeUInt32SizeNoTag = computeUInt32SizeNoTag(str.length() * 3);
-                int computeUInt32SizeNoTag2 = computeUInt32SizeNoTag(str.length());
-                if (computeUInt32SizeNoTag2 == computeUInt32SizeNoTag) {
-                    int i2 = i + computeUInt32SizeNoTag2;
+                int iComputeUInt32SizeNoTag = computeUInt32SizeNoTag(str.length() * 3);
+                int iComputeUInt32SizeNoTag2 = computeUInt32SizeNoTag(str.length());
+                if (iComputeUInt32SizeNoTag2 == iComputeUInt32SizeNoTag) {
+                    int i2 = i + iComputeUInt32SizeNoTag2;
                     this.position = i2;
-                    int encode = Utf8.encode(str, this.buffer, i2, spaceLeft());
+                    int iEncode = Utf8.encode(str, this.buffer, i2, spaceLeft());
                     this.position = i;
-                    writeUInt32NoTag((encode - i) - computeUInt32SizeNoTag2);
-                    this.position = encode;
+                    writeUInt32NoTag((iEncode - i) - iComputeUInt32SizeNoTag2);
+                    this.position = iEncode;
                     return;
                 }
                 writeUInt32NoTag(Utf8.encodedLength(str));
@@ -1117,9 +1117,9 @@ public abstract class CodedOutputStream extends ByteOutput {
                 write(byteBuffer.array(), byteBuffer.arrayOffset(), byteBuffer.capacity());
                 return;
             }
-            ByteBuffer duplicate = byteBuffer.duplicate();
-            duplicate.clear();
-            write(duplicate);
+            ByteBuffer byteBufferDuplicate = byteBuffer.duplicate();
+            byteBufferDuplicate.clear();
+            write(byteBufferDuplicate);
         }
 
         @Override // com.android.framework.protobuf.CodedOutputStream
@@ -1207,24 +1207,24 @@ public abstract class CodedOutputStream extends ByteOutput {
 
         @Override // com.android.framework.protobuf.CodedOutputStream
         public void writeStringNoTag(String str) throws IOException {
-            int position = this.buffer.position();
+            int iPosition = this.buffer.position();
             try {
-                int computeUInt32SizeNoTag = computeUInt32SizeNoTag(str.length() * 3);
-                int computeUInt32SizeNoTag2 = computeUInt32SizeNoTag(str.length());
-                if (computeUInt32SizeNoTag2 == computeUInt32SizeNoTag) {
-                    int position2 = this.buffer.position() + computeUInt32SizeNoTag2;
-                    this.buffer.position(position2);
+                int iComputeUInt32SizeNoTag = computeUInt32SizeNoTag(str.length() * 3);
+                int iComputeUInt32SizeNoTag2 = computeUInt32SizeNoTag(str.length());
+                if (iComputeUInt32SizeNoTag2 == iComputeUInt32SizeNoTag) {
+                    int iPosition2 = this.buffer.position() + iComputeUInt32SizeNoTag2;
+                    this.buffer.position(iPosition2);
                     encode(str);
-                    int position3 = this.buffer.position();
-                    this.buffer.position(position);
-                    writeUInt32NoTag(position3 - position2);
-                    this.buffer.position(position3);
+                    int iPosition3 = this.buffer.position();
+                    this.buffer.position(iPosition);
+                    writeUInt32NoTag(iPosition3 - iPosition2);
+                    this.buffer.position(iPosition3);
                     return;
                 }
                 writeUInt32NoTag(Utf8.encodedLength(str));
                 encode(str);
             } catch (Utf8.UnpairedSurrogateException e) {
-                this.buffer.position(position);
+                this.buffer.position(iPosition);
                 inefficientWriteStringNoTag(str, e);
             } catch (IllegalArgumentException e2) {
                 throw new OutOfSpaceException(e2);
@@ -1268,14 +1268,14 @@ public abstract class CodedOutputStream extends ByteOutput {
             super();
             this.originalBuffer = byteBuffer;
             this.buffer = byteBuffer.duplicate().order(ByteOrder.LITTLE_ENDIAN);
-            long addressOffset = UnsafeUtil.addressOffset(byteBuffer);
-            this.address = addressOffset;
-            long position = byteBuffer.position() + addressOffset;
-            this.initialPosition = position;
-            long limit = addressOffset + byteBuffer.limit();
-            this.limit = limit;
-            this.oneVarintLimit = limit - 10;
-            this.position = position;
+            long jAddressOffset = UnsafeUtil.addressOffset(byteBuffer);
+            this.address = jAddressOffset;
+            long jPosition = byteBuffer.position() + jAddressOffset;
+            this.initialPosition = jPosition;
+            long jLimit = jAddressOffset + byteBuffer.limit();
+            this.limit = jLimit;
+            this.oneVarintLimit = jLimit - 10;
+            this.position = jPosition;
         }
 
         static boolean isSupported() {
@@ -1421,9 +1421,9 @@ public abstract class CodedOutputStream extends ByteOutput {
                 write(byteBuffer.array(), byteBuffer.arrayOffset(), byteBuffer.capacity());
                 return;
             }
-            ByteBuffer duplicate = byteBuffer.duplicate();
-            duplicate.clear();
-            write(duplicate);
+            ByteBuffer byteBufferDuplicate = byteBuffer.duplicate();
+            byteBufferDuplicate.clear();
+            write(byteBufferDuplicate);
         }
 
         @Override // com.android.framework.protobuf.CodedOutputStream
@@ -1535,10 +1535,10 @@ public abstract class CodedOutputStream extends ByteOutput {
         @Override // com.android.framework.protobuf.CodedOutputStream, com.android.framework.protobuf.ByteOutput
         public void write(ByteBuffer byteBuffer) throws IOException {
             try {
-                int remaining = byteBuffer.remaining();
+                int iRemaining = byteBuffer.remaining();
                 repositionBuffer(this.position);
                 this.buffer.put(byteBuffer);
-                this.position += remaining;
+                this.position += iRemaining;
             } catch (BufferOverflowException e) {
                 throw new OutOfSpaceException(e);
             }
@@ -1553,22 +1553,22 @@ public abstract class CodedOutputStream extends ByteOutput {
         public void writeStringNoTag(String str) throws IOException {
             long j = this.position;
             try {
-                int computeUInt32SizeNoTag = computeUInt32SizeNoTag(str.length() * 3);
-                int computeUInt32SizeNoTag2 = computeUInt32SizeNoTag(str.length());
-                if (computeUInt32SizeNoTag2 == computeUInt32SizeNoTag) {
-                    int bufferPos = bufferPos(this.position) + computeUInt32SizeNoTag2;
-                    this.buffer.position(bufferPos);
+                int iComputeUInt32SizeNoTag = computeUInt32SizeNoTag(str.length() * 3);
+                int iComputeUInt32SizeNoTag2 = computeUInt32SizeNoTag(str.length());
+                if (iComputeUInt32SizeNoTag2 == iComputeUInt32SizeNoTag) {
+                    int iBufferPos = bufferPos(this.position) + iComputeUInt32SizeNoTag2;
+                    this.buffer.position(iBufferPos);
                     Utf8.encodeUtf8(str, this.buffer);
-                    int position = this.buffer.position() - bufferPos;
-                    writeUInt32NoTag(position);
-                    this.position += position;
+                    int iPosition = this.buffer.position() - iBufferPos;
+                    writeUInt32NoTag(iPosition);
+                    this.position += iPosition;
                     return;
                 }
-                int encodedLength = Utf8.encodedLength(str);
-                writeUInt32NoTag(encodedLength);
+                int iEncodedLength = Utf8.encodedLength(str);
+                writeUInt32NoTag(iEncodedLength);
                 repositionBuffer(this.position);
                 Utf8.encodeUtf8(str, this.buffer);
-                this.position += encodedLength;
+                this.position += iEncodedLength;
             } catch (Utf8.UnpairedSurrogateException e) {
                 this.position = j;
                 repositionBuffer(j);
@@ -1867,9 +1867,9 @@ public abstract class CodedOutputStream extends ByteOutput {
                 write(byteBuffer.array(), byteBuffer.arrayOffset(), byteBuffer.capacity());
                 return;
             }
-            ByteBuffer duplicate = byteBuffer.duplicate();
-            duplicate.clear();
-            write(duplicate);
+            ByteBuffer byteBufferDuplicate = byteBuffer.duplicate();
+            byteBufferDuplicate.clear();
+            write(byteBufferDuplicate);
         }
 
         @Override // com.android.framework.protobuf.CodedOutputStream
@@ -1956,13 +1956,13 @@ public abstract class CodedOutputStream extends ByteOutput {
         @Override // com.android.framework.protobuf.CodedOutputStream
         public void writeStringNoTag(String str) throws IOException {
             int length = str.length() * 3;
-            int computeUInt32SizeNoTag = computeUInt32SizeNoTag(length);
-            int i = computeUInt32SizeNoTag + length;
+            int iComputeUInt32SizeNoTag = computeUInt32SizeNoTag(length);
+            int i = iComputeUInt32SizeNoTag + length;
             if (i > this.limit) {
                 byte[] bArr = new byte[length];
-                int encode = Utf8.encode(str, bArr, 0, length);
-                writeUInt32NoTag(encode);
-                writeLazy(bArr, 0, encode);
+                int iEncode = Utf8.encode(str, bArr, 0, length);
+                writeUInt32NoTag(iEncode);
+                writeLazy(bArr, 0, iEncode);
                 return;
             }
             if (i > this.limit - this.position) {
@@ -1970,21 +1970,21 @@ public abstract class CodedOutputStream extends ByteOutput {
             }
             int i2 = this.position;
             try {
-                int computeUInt32SizeNoTag2 = computeUInt32SizeNoTag(str.length());
-                if (computeUInt32SizeNoTag2 == computeUInt32SizeNoTag) {
-                    this.position = i2 + computeUInt32SizeNoTag2;
-                    int encode2 = Utf8.encode(str, this.buffer, this.position, this.limit - this.position);
+                int iComputeUInt32SizeNoTag2 = computeUInt32SizeNoTag(str.length());
+                if (iComputeUInt32SizeNoTag2 == iComputeUInt32SizeNoTag) {
+                    this.position = i2 + iComputeUInt32SizeNoTag2;
+                    int iEncode2 = Utf8.encode(str, this.buffer, this.position, this.limit - this.position);
                     this.position = i2;
-                    int i3 = (encode2 - i2) - computeUInt32SizeNoTag2;
+                    int i3 = (iEncode2 - i2) - iComputeUInt32SizeNoTag2;
                     bufferUInt32NoTag(i3);
-                    this.position = encode2;
+                    this.position = iEncode2;
                     this.totalBytesWritten += i3;
                     return;
                 }
-                int encodedLength = Utf8.encodedLength(str);
-                bufferUInt32NoTag(encodedLength);
-                this.position = Utf8.encode(str, this.buffer, this.position, encodedLength);
-                this.totalBytesWritten += encodedLength;
+                int iEncodedLength = Utf8.encodedLength(str);
+                bufferUInt32NoTag(iEncodedLength);
+                this.position = Utf8.encode(str, this.buffer, this.position, iEncodedLength);
+                this.totalBytesWritten += iEncodedLength;
             } catch (Utf8.UnpairedSurrogateException e) {
                 this.totalBytesWritten -= this.position - i2;
                 this.position = i2;
@@ -2018,17 +2018,17 @@ public abstract class CodedOutputStream extends ByteOutput {
         @Override // com.android.framework.protobuf.CodedOutputStream, com.android.framework.protobuf.ByteOutput
         public void write(ByteBuffer byteBuffer) throws IOException {
             flush();
-            int remaining = byteBuffer.remaining();
+            int iRemaining = byteBuffer.remaining();
             this.out.write(byteBuffer);
-            this.totalBytesWritten += remaining;
+            this.totalBytesWritten += iRemaining;
         }
 
         @Override // com.android.framework.protobuf.CodedOutputStream, com.android.framework.protobuf.ByteOutput
         public void writeLazy(ByteBuffer byteBuffer) throws IOException {
             flush();
-            int remaining = byteBuffer.remaining();
+            int iRemaining = byteBuffer.remaining();
             this.out.writeLazy(byteBuffer);
-            this.totalBytesWritten += remaining;
+            this.totalBytesWritten += iRemaining;
         }
 
         private void flushIfNotAvailable(int i) throws IOException {
@@ -2149,9 +2149,9 @@ public abstract class CodedOutputStream extends ByteOutput {
                 write(byteBuffer.array(), byteBuffer.arrayOffset(), byteBuffer.capacity());
                 return;
             }
-            ByteBuffer duplicate = byteBuffer.duplicate();
-            duplicate.clear();
-            write(duplicate);
+            ByteBuffer byteBufferDuplicate = byteBuffer.duplicate();
+            byteBufferDuplicate.clear();
+            write(byteBufferDuplicate);
         }
 
         @Override // com.android.framework.protobuf.CodedOutputStream
@@ -2237,45 +2237,45 @@ public abstract class CodedOutputStream extends ByteOutput {
 
         @Override // com.android.framework.protobuf.CodedOutputStream
         public void writeStringNoTag(String str) throws IOException {
-            int encodedLength;
+            int iEncodedLength;
             try {
                 int length = str.length() * 3;
-                int computeUInt32SizeNoTag = computeUInt32SizeNoTag(length);
-                int i = computeUInt32SizeNoTag + length;
+                int iComputeUInt32SizeNoTag = computeUInt32SizeNoTag(length);
+                int i = iComputeUInt32SizeNoTag + length;
                 if (i > this.limit) {
                     byte[] bArr = new byte[length];
-                    int encode = Utf8.encode(str, bArr, 0, length);
-                    writeUInt32NoTag(encode);
-                    writeLazy(bArr, 0, encode);
+                    int iEncode = Utf8.encode(str, bArr, 0, length);
+                    writeUInt32NoTag(iEncode);
+                    writeLazy(bArr, 0, iEncode);
                     return;
                 }
                 if (i > this.limit - this.position) {
                     doFlush();
                 }
-                int computeUInt32SizeNoTag2 = computeUInt32SizeNoTag(str.length());
+                int iComputeUInt32SizeNoTag2 = computeUInt32SizeNoTag(str.length());
                 int i2 = this.position;
                 try {
                     try {
-                        if (computeUInt32SizeNoTag2 == computeUInt32SizeNoTag) {
-                            this.position = i2 + computeUInt32SizeNoTag2;
-                            int encode2 = Utf8.encode(str, this.buffer, this.position, this.limit - this.position);
+                        if (iComputeUInt32SizeNoTag2 == iComputeUInt32SizeNoTag) {
+                            this.position = i2 + iComputeUInt32SizeNoTag2;
+                            int iEncode2 = Utf8.encode(str, this.buffer, this.position, this.limit - this.position);
                             this.position = i2;
-                            encodedLength = (encode2 - i2) - computeUInt32SizeNoTag2;
-                            bufferUInt32NoTag(encodedLength);
-                            this.position = encode2;
+                            iEncodedLength = (iEncode2 - i2) - iComputeUInt32SizeNoTag2;
+                            bufferUInt32NoTag(iEncodedLength);
+                            this.position = iEncode2;
                         } else {
-                            encodedLength = Utf8.encodedLength(str);
-                            bufferUInt32NoTag(encodedLength);
-                            this.position = Utf8.encode(str, this.buffer, this.position, encodedLength);
+                            iEncodedLength = Utf8.encodedLength(str);
+                            bufferUInt32NoTag(iEncodedLength);
+                            this.position = Utf8.encode(str, this.buffer, this.position, iEncodedLength);
                         }
-                        this.totalBytesWritten += encodedLength;
-                    } catch (Utf8.UnpairedSurrogateException e) {
-                        this.totalBytesWritten -= this.position - i2;
-                        this.position = i2;
-                        throw e;
+                        this.totalBytesWritten += iEncodedLength;
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        throw new OutOfSpaceException(e);
                     }
-                } catch (ArrayIndexOutOfBoundsException e2) {
-                    throw new OutOfSpaceException(e2);
+                } catch (Utf8.UnpairedSurrogateException e2) {
+                    this.totalBytesWritten -= this.position - i2;
+                    this.position = i2;
+                    throw e2;
                 }
             } catch (Utf8.UnpairedSurrogateException e3) {
                 inefficientWriteStringNoTag(str, e3);
@@ -2320,16 +2320,16 @@ public abstract class CodedOutputStream extends ByteOutput {
 
         @Override // com.android.framework.protobuf.CodedOutputStream, com.android.framework.protobuf.ByteOutput
         public void write(ByteBuffer byteBuffer) throws IOException {
-            int remaining = byteBuffer.remaining();
-            if (this.limit - this.position >= remaining) {
-                byteBuffer.get(this.buffer, this.position, remaining);
-                this.position += remaining;
-                this.totalBytesWritten += remaining;
+            int iRemaining = byteBuffer.remaining();
+            if (this.limit - this.position >= iRemaining) {
+                byteBuffer.get(this.buffer, this.position, iRemaining);
+                this.position += iRemaining;
+                this.totalBytesWritten += iRemaining;
                 return;
             }
             int i = this.limit - this.position;
             byteBuffer.get(this.buffer, this.position, i);
-            int i2 = remaining - i;
+            int i2 = iRemaining - i;
             this.position = this.limit;
             this.totalBytesWritten += i;
             doFlush();

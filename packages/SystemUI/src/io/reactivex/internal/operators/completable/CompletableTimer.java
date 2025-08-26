@@ -9,14 +9,12 @@ import io.reactivex.internal.observers.CallbackCompletableObserver;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class CompletableTimer extends Completable {
     public final long delay;
     public final Scheduler scheduler;
     public final TimeUnit unit;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class TimerDisposable extends AtomicReference<Disposable> implements Disposable, Runnable {
         private static final long serialVersionUID = 3167244060586201109L;
         final CompletableObserver downstream;
@@ -47,16 +45,16 @@ public final class CompletableTimer extends Completable {
         Disposable disposable;
         TimerDisposable timerDisposable = new TimerDisposable(callbackCompletableObserver);
         DisposableHelper.setOnce(callbackCompletableObserver, timerDisposable);
-        Disposable scheduleDirect = this.scheduler.scheduleDirect(timerDisposable, this.delay, this.unit);
+        Disposable disposableScheduleDirect = this.scheduler.scheduleDirect(timerDisposable, this.delay, this.unit);
         do {
             disposable = timerDisposable.get();
             if (disposable == DisposableHelper.DISPOSED) {
-                if (scheduleDirect != null) {
-                    scheduleDirect.dispose();
+                if (disposableScheduleDirect != null) {
+                    disposableScheduleDirect.dispose();
                     return;
                 }
                 return;
             }
-        } while (!timerDisposable.compareAndSet(disposable, scheduleDirect));
+        } while (!timerDisposable.compareAndSet(disposable, disposableScheduleDirect));
     }
 }

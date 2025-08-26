@@ -44,9 +44,9 @@ public interface IKeyGestureEventListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IKeyGestureEventListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IKeyGestureEventListener)) {
-                return (IKeyGestureEventListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IKeyGestureEventListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IKeyGestureEventListener)) {
+                return (IKeyGestureEventListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -99,13 +99,13 @@ public interface IKeyGestureEventListener extends IInterface {
 
             @Override // android.hardware.input.IKeyGestureEventListener
             public void onKeyGestureEvent(AidlKeyGestureEvent aidlKeyGestureEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IKeyGestureEventListener.DESCRIPTOR);
-                    obtain.writeTypedObject(aidlKeyGestureEvent, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IKeyGestureEventListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(aidlKeyGestureEvent, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

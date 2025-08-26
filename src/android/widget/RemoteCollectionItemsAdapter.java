@@ -1,6 +1,7 @@
 package android.widget;
 
 import android.appwidget.AppWidgetHostView;
+import android.content.res.Resources;
 import android.util.SparseIntArray;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +20,7 @@ class RemoteCollectionItemsAdapter extends BaseAdapter {
     private boolean mOnLightBackground;
     private final int mViewTypeCount;
 
-    RemoteCollectionItemsAdapter(RemoteViews.RemoteCollectionItems remoteCollectionItems, RemoteViews.InteractionHandler interactionHandler, RemoteViews.ColorResources colorResources, boolean z) {
+    RemoteCollectionItemsAdapter(RemoteViews.RemoteCollectionItems remoteCollectionItems, RemoteViews.InteractionHandler interactionHandler, RemoteViews.ColorResources colorResources, boolean z) throws Throwable {
         this.mViewTypeCount = remoteCollectionItems.getViewTypeCount();
         this.mItems = remoteCollectionItems;
         this.mInteractionHandler = interactionHandler;
@@ -28,7 +29,7 @@ class RemoteCollectionItemsAdapter extends BaseAdapter {
         initLayoutIdToViewType();
     }
 
-    void setData(RemoteViews.RemoteCollectionItems remoteCollectionItems, RemoteViews.InteractionHandler interactionHandler, RemoteViews.ColorResources colorResources, boolean z) {
+    void setData(RemoteViews.RemoteCollectionItems remoteCollectionItems, RemoteViews.InteractionHandler interactionHandler, RemoteViews.ColorResources colorResources, boolean z) throws Throwable {
         if (this.mViewTypeCount < remoteCollectionItems.getViewTypeCount()) {
             throw new IllegalArgumentException("RemoteCollectionItemsAdapter cannot increase view type count after creation");
         }
@@ -40,15 +41,13 @@ class RemoteCollectionItemsAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-    private void initLayoutIdToViewType() {
+    private void initLayoutIdToViewType() throws Throwable {
         SparseIntArray sparseIntArray = this.mLayoutIdToViewType;
         this.mLayoutIdToViewType = new SparseIntArray(this.mViewTypeCount);
         int[] array = IntStream.range(0, this.mItems.getItemCount()).map(new IntUnaryOperator() { // from class: android.widget.RemoteCollectionItemsAdapter$$ExternalSyntheticLambda0
             @Override // java.util.function.IntUnaryOperator
             public final int applyAsInt(int i) {
-                int lambda$initLayoutIdToViewType$0;
-                lambda$initLayoutIdToViewType$0 = RemoteCollectionItemsAdapter.this.lambda$initLayoutIdToViewType$0(i);
-                return lambda$initLayoutIdToViewType$0;
+                return this.f$0.lambda$initLayoutIdToViewType$0(i);
             }
         }).distinct().toArray();
         int length = array.length;
@@ -58,25 +57,25 @@ class RemoteCollectionItemsAdapter extends BaseAdapter {
         }
         boolean[] zArr = new boolean[array.length];
         final boolean[] zArr2 = new boolean[i];
-        int i2 = -1;
+        int iOrElseThrow = -1;
         if (sparseIntArray != null) {
-            for (int i3 = 0; i3 < array.length; i3++) {
-                int i4 = array[i3];
-                int i5 = sparseIntArray.get(i4, -1);
-                if (i5 >= 0) {
-                    this.mLayoutIdToViewType.put(i4, i5);
-                    zArr[i3] = true;
-                    zArr2[i5] = true;
+            for (int i2 = 0; i2 < array.length; i2++) {
+                int i3 = array[i2];
+                int i4 = sparseIntArray.get(i3, -1);
+                if (i4 >= 0) {
+                    this.mLayoutIdToViewType.put(i3, i4);
+                    zArr[i2] = true;
+                    zArr2[i4] = true;
                 }
             }
         }
-        for (int i6 = 0; i6 < array.length; i6++) {
-            if (!zArr[i6]) {
-                int i7 = array[i6];
-                i2 = IntStream.range(i2 + 1, array.length).filter(new IntPredicate() { // from class: android.widget.RemoteCollectionItemsAdapter$$ExternalSyntheticLambda1
+        for (int i5 = 0; i5 < array.length; i5++) {
+            if (!zArr[i5]) {
+                int i6 = array[i5];
+                iOrElseThrow = IntStream.range(iOrElseThrow + 1, array.length).filter(new IntPredicate() { // from class: android.widget.RemoteCollectionItemsAdapter$$ExternalSyntheticLambda1
                     @Override // java.util.function.IntPredicate
-                    public final boolean test(int i8) {
-                        return RemoteCollectionItemsAdapter.lambda$initLayoutIdToViewType$1(zArr2, i8);
+                    public final boolean test(int i7) {
+                        return RemoteCollectionItemsAdapter.lambda$initLayoutIdToViewType$1(zArr2, i7);
                     }
                 }).findFirst().orElseThrow(new Supplier() { // from class: android.widget.RemoteCollectionItemsAdapter$$ExternalSyntheticLambda2
                     @Override // java.util.function.Supplier
@@ -84,9 +83,9 @@ class RemoteCollectionItemsAdapter extends BaseAdapter {
                         return RemoteCollectionItemsAdapter.lambda$initLayoutIdToViewType$2();
                     }
                 });
-                this.mLayoutIdToViewType.put(i7, i2);
-                zArr[i6] = true;
-                zArr2[i2] = true;
+                this.mLayoutIdToViewType.put(i6, iOrElseThrow);
+                zArr[i5] = true;
+                zArr2[iOrElseThrow] = true;
             }
         }
     }
@@ -135,7 +134,7 @@ class RemoteCollectionItemsAdapter extends BaseAdapter {
     }
 
     @Override // android.widget.Adapter
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(int i, View view, ViewGroup viewGroup) throws Resources.NotFoundException {
         if (i >= getCount()) {
             return null;
         }

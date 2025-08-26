@@ -10,7 +10,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 
 /* JADX INFO: Access modifiers changed from: package-private */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class FlowTracing$traceAsCounter$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ String $counterName;
@@ -46,7 +45,7 @@ public final class FlowTracing$traceAsCounter$2 extends SuspendLambda implements
         ResultKt.throwOnFailure(obj);
         Number number = (Number) this.L$0;
         if (Trace.isEnabled()) {
-            Trace.traceCounter(4096L, this.$counterName, ((Number) this.$valueToInt.mo779invoke(number)).intValue());
+            Trace.traceCounter(4096L, this.$counterName, ((Number) this.$valueToInt.mo781invoke(number)).intValue());
         }
         return Unit.INSTANCE;
     }

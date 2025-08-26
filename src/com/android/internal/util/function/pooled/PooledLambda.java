@@ -34,27 +34,27 @@ public interface PooledLambda {
     }
 
     static <R> PooledSupplier<R> obtainSupplier(R r) {
-        PooledLambdaImpl acquireConstSupplier = PooledLambdaImpl.acquireConstSupplier(3);
-        acquireConstSupplier.mFunc = r;
-        return acquireConstSupplier;
+        PooledLambdaImpl pooledLambdaImplAcquireConstSupplier = PooledLambdaImpl.acquireConstSupplier(3);
+        pooledLambdaImplAcquireConstSupplier.mFunc = r;
+        return pooledLambdaImplAcquireConstSupplier;
     }
 
     static PooledSupplier.OfInt obtainSupplier(int i) {
-        PooledLambdaImpl acquireConstSupplier = PooledLambdaImpl.acquireConstSupplier(4);
-        acquireConstSupplier.mConstValue = i;
-        return acquireConstSupplier;
+        PooledLambdaImpl pooledLambdaImplAcquireConstSupplier = PooledLambdaImpl.acquireConstSupplier(4);
+        pooledLambdaImplAcquireConstSupplier.mConstValue = i;
+        return pooledLambdaImplAcquireConstSupplier;
     }
 
     static PooledSupplier.OfLong obtainSupplier(long j) {
-        PooledLambdaImpl acquireConstSupplier = PooledLambdaImpl.acquireConstSupplier(5);
-        acquireConstSupplier.mConstValue = j;
-        return acquireConstSupplier;
+        PooledLambdaImpl pooledLambdaImplAcquireConstSupplier = PooledLambdaImpl.acquireConstSupplier(5);
+        pooledLambdaImplAcquireConstSupplier.mConstValue = j;
+        return pooledLambdaImplAcquireConstSupplier;
     }
 
     static PooledSupplier.OfDouble obtainSupplier(double d) {
-        PooledLambdaImpl acquireConstSupplier = PooledLambdaImpl.acquireConstSupplier(6);
-        acquireConstSupplier.mConstValue = Double.doubleToRawLongBits(d);
-        return acquireConstSupplier;
+        PooledLambdaImpl pooledLambdaImplAcquireConstSupplier = PooledLambdaImpl.acquireConstSupplier(6);
+        pooledLambdaImplAcquireConstSupplier.mConstValue = Double.doubleToRawLongBits(d);
+        return pooledLambdaImplAcquireConstSupplier;
     }
 
     static <A> PooledRunnable obtainRunnable(Consumer<? super A> consumer, A a) {

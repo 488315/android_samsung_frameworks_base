@@ -17,8 +17,8 @@ public class DrmInfoEvent extends DrmEvent {
         checkTypeValidity(i2);
     }
 
-    public DrmInfoEvent(int i, int i2, String str, HashMap<String, Object> hashMap) {
-        super(i, i2, str, hashMap);
+    public DrmInfoEvent(int i, int i2, String str, HashMap<String, Object> map) {
+        super(i, i2, str, map);
         checkTypeValidity(i2);
     }
 

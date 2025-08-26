@@ -92,13 +92,13 @@ public final class DemuxFilterSectionSettingsCondition implements Parcelable {
     }
 
     public void readFromParcel(Parcel parcel) {
-        int readInt = parcel.readInt();
-        if (readInt == 0) {
-            _set(readInt, (DemuxFilterSectionBits) parcel.readTypedObject(DemuxFilterSectionBits.CREATOR));
-        } else if (readInt == 1) {
-            _set(readInt, (DemuxFilterSectionSettingsConditionTableInfo) parcel.readTypedObject(DemuxFilterSectionSettingsConditionTableInfo.CREATOR));
+        int i = parcel.readInt();
+        if (i == 0) {
+            _set(i, (DemuxFilterSectionBits) parcel.readTypedObject(DemuxFilterSectionBits.CREATOR));
+        } else if (i == 1) {
+            _set(i, (DemuxFilterSectionSettingsConditionTableInfo) parcel.readTypedObject(DemuxFilterSectionSettingsConditionTableInfo.CREATOR));
         } else {
-            throw new IllegalArgumentException("union: unknown tag: " + readInt);
+            throw new IllegalArgumentException("union: unknown tag: " + i);
         }
     }
 

@@ -21,15 +21,15 @@ public class ClipRectTBAnimation extends ClipRectAnimation {
 
     @Override // android.view.animation.Animation
     public boolean getTransformation(long j, Transformation transformation) {
-        float f;
+        float startTime;
         long startOffset = getStartOffset();
         long duration = getDuration();
         if (duration != 0) {
-            f = (j - (getStartTime() + startOffset)) / duration;
+            startTime = (j - (getStartTime() + startOffset)) / duration;
         } else {
-            f = j < getStartTime() ? 0.0f : 1.0f;
+            startTime = j < getStartTime() ? 0.0f : 1.0f;
         }
-        this.mNormalizedTime = f;
+        this.mNormalizedTime = startTime;
         return super.getTransformation(j, transformation);
     }
 

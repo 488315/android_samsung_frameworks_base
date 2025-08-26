@@ -3,6 +3,7 @@ package com.google.protobuf;
 import com.google.protobuf.GeneratedMessageLite;
 import com.google.protobuf.Internal;
 import com.google.protobuf.LazyField;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -10,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class FieldSet {
     public static final FieldSet DEFAULT_INSTANCE = new FieldSet(true);
@@ -18,7 +18,6 @@ public final class FieldSet {
     public boolean hasLazyField;
     public boolean isImmutable;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.google.protobuf.FieldSet$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$com$google$protobuf$WireFormat$FieldType;
@@ -145,16 +144,16 @@ public final class FieldSet {
     }
 
     public static int computeElementSize(WireFormat$FieldType wireFormat$FieldType, int i, Object obj) {
-        int computeTagSize = CodedOutputStream.computeTagSize(i);
+        int iComputeTagSize = CodedOutputStream.computeTagSize(i);
         if (wireFormat$FieldType == WireFormat$FieldType.GROUP) {
-            computeTagSize *= 2;
+            iComputeTagSize *= 2;
         }
-        return computeElementSizeNoTag(wireFormat$FieldType, obj) + computeTagSize;
+        return computeElementSizeNoTag(wireFormat$FieldType, obj) + iComputeTagSize;
     }
 
     public static int computeElementSizeNoTag(WireFormat$FieldType wireFormat$FieldType, Object obj) {
         int serializedSize;
-        int computeUInt32SizeNoTag;
+        int iComputeUInt32SizeNoTag;
         switch (AnonymousClass1.$SwitchMap$com$google$protobuf$WireFormat$FieldType[wireFormat$FieldType.ordinal()]) {
             case 1:
                 ((Double) obj).getClass();
@@ -189,7 +188,7 @@ public final class FieldSet {
                 if (!(obj instanceof LazyField)) {
                     Logger logger7 = CodedOutputStream.logger;
                     serializedSize = ((GeneratedMessageLite) ((MessageLite) obj)).getSerializedSize();
-                    computeUInt32SizeNoTag = CodedOutputStream.computeUInt32SizeNoTag(serializedSize);
+                    iComputeUInt32SizeNoTag = CodedOutputStream.computeUInt32SizeNoTag(serializedSize);
                     break;
                 } else {
                     return CodedOutputStream.computeLazyFieldSizeNoTag((LazyField) obj);
@@ -200,7 +199,7 @@ public final class FieldSet {
                 if (!(obj instanceof ByteString)) {
                     Logger logger8 = CodedOutputStream.logger;
                     serializedSize = ((byte[]) obj).length;
-                    computeUInt32SizeNoTag = CodedOutputStream.computeUInt32SizeNoTag(serializedSize);
+                    iComputeUInt32SizeNoTag = CodedOutputStream.computeUInt32SizeNoTag(serializedSize);
                     break;
                 } else {
                     return CodedOutputStream.computeBytesSizeNoTag((ByteString) obj);
@@ -216,17 +215,17 @@ public final class FieldSet {
                 Logger logger10 = CodedOutputStream.logger;
                 return 8;
             case 16:
-                int intValue = ((Integer) obj).intValue();
-                return CodedOutputStream.computeUInt32SizeNoTag((intValue >> 31) ^ (intValue << 1));
+                int iIntValue = ((Integer) obj).intValue();
+                return CodedOutputStream.computeUInt32SizeNoTag((iIntValue >> 31) ^ (iIntValue << 1));
             case 17:
-                long longValue = ((Long) obj).longValue();
-                return CodedOutputStream.computeUInt64SizeNoTag((longValue >> 63) ^ (longValue << 1));
+                long jLongValue = ((Long) obj).longValue();
+                return CodedOutputStream.computeUInt64SizeNoTag((jLongValue >> 63) ^ (jLongValue << 1));
             case 18:
                 return obj instanceof Internal.EnumLite ? CodedOutputStream.computeInt32SizeNoTag(((Internal.EnumLite) obj).getNumber()) : CodedOutputStream.computeInt32SizeNoTag(((Integer) obj).intValue());
             default:
                 throw new RuntimeException("There is no way to get here, but the compiler thinks otherwise.");
         }
-        return computeUInt32SizeNoTag + serializedSize;
+        return iComputeUInt32SizeNoTag + serializedSize;
     }
 
     public static int computeFieldSize(GeneratedMessageLite.ExtensionDescriptor extensionDescriptor, Object obj) {
@@ -235,19 +234,19 @@ public final class FieldSet {
         if (!extensionDescriptor.isRepeated) {
             return computeElementSize(wireFormat$FieldType, i, obj);
         }
-        int i2 = 0;
+        int iComputeElementSize = 0;
         if (!extensionDescriptor.isPacked) {
             Iterator it = ((List) obj).iterator();
             while (it.hasNext()) {
-                i2 += computeElementSize(wireFormat$FieldType, i, it.next());
+                iComputeElementSize += computeElementSize(wireFormat$FieldType, i, it.next());
             }
-            return i2;
+            return iComputeElementSize;
         }
         Iterator it2 = ((List) obj).iterator();
         while (it2.hasNext()) {
-            i2 += computeElementSizeNoTag(wireFormat$FieldType, it2.next());
+            iComputeElementSize += computeElementSizeNoTag(wireFormat$FieldType, it2.next());
         }
-        return CodedOutputStream.computeUInt32SizeNoTag(i2) + CodedOutputStream.computeTagSize(i) + i2;
+        return CodedOutputStream.computeUInt32SizeNoTag(iComputeElementSize) + CodedOutputStream.computeTagSize(i) + iComputeElementSize;
     }
 
     public static int getMessageSetSerializedSize(Map.Entry entry) {
@@ -261,108 +260,59 @@ public final class FieldSet {
             return CodedOutputStream.computeLazyFieldSizeNoTag((LazyField) value) + CodedOutputStream.computeTagSize(3) + CodedOutputStream.computeUInt32Size(2, i) + (CodedOutputStream.computeTagSize(1) * 2);
         }
         int i2 = ((GeneratedMessageLite.ExtensionDescriptor) entry.getKey()).number;
-        int computeUInt32Size = CodedOutputStream.computeUInt32Size(2, i2) + (CodedOutputStream.computeTagSize(1) * 2);
-        int computeTagSize = CodedOutputStream.computeTagSize(3);
+        int iComputeUInt32Size = CodedOutputStream.computeUInt32Size(2, i2) + (CodedOutputStream.computeTagSize(1) * 2);
+        int iComputeTagSize = CodedOutputStream.computeTagSize(3);
         int serializedSize = ((GeneratedMessageLite) ((MessageLite) value)).getSerializedSize();
-        return FieldSet$$ExternalSyntheticOutline0.m(serializedSize, serializedSize, computeTagSize, computeUInt32Size);
+        return FieldSet$$ExternalSyntheticOutline0.m(serializedSize, serializedSize, iComputeTagSize, iComputeUInt32Size);
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Code restructure failed: missing block: B:12:0x0020, code lost:
-    
-        if ((r4 instanceof com.google.protobuf.LazyField) == false) goto L4;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:16:0x0029, code lost:
-    
-        if ((r4 instanceof com.google.protobuf.Internal.EnumLite) == false) goto L4;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:20:0x0032, code lost:
-    
-        if ((r4 instanceof byte[]) == false) goto L4;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:4:0x0018  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void verifyType(com.google.protobuf.GeneratedMessageLite.ExtensionDescriptor r3, java.lang.Object r4) {
-        /*
-            com.google.protobuf.WireFormat$FieldType r0 = r3.type
-            java.nio.charset.Charset r1 = com.google.protobuf.Internal.UTF_8
-            r4.getClass()
-            int[] r1 = com.google.protobuf.FieldSet.AnonymousClass1.$SwitchMap$com$google$protobuf$WireFormat$JavaType
-            com.google.protobuf.WireFormat$JavaType r0 = r0.getJavaType()
-            int r0 = r0.ordinal()
-            r0 = r1[r0]
-            r1 = 1
-            r2 = 0
-            switch(r0) {
-                case 1: goto L44;
-                case 2: goto L41;
-                case 3: goto L3e;
-                case 4: goto L3b;
-                case 5: goto L38;
-                case 6: goto L35;
-                case 7: goto L2c;
-                case 8: goto L23;
-                case 9: goto L1a;
-                default: goto L18;
-            }
-        L18:
-            r1 = r2
-            goto L46
-        L1a:
-            boolean r0 = r4 instanceof com.google.protobuf.MessageLite
-            if (r0 != 0) goto L46
-            boolean r0 = r4 instanceof com.google.protobuf.LazyField
-            if (r0 == 0) goto L18
-            goto L46
-        L23:
-            boolean r0 = r4 instanceof java.lang.Integer
-            if (r0 != 0) goto L46
-            boolean r0 = r4 instanceof com.google.protobuf.Internal.EnumLite
-            if (r0 == 0) goto L18
-            goto L46
-        L2c:
-            boolean r0 = r4 instanceof com.google.protobuf.ByteString
-            if (r0 != 0) goto L46
-            boolean r0 = r4 instanceof byte[]
-            if (r0 == 0) goto L18
-            goto L46
-        L35:
-            boolean r1 = r4 instanceof java.lang.String
-            goto L46
-        L38:
-            boolean r1 = r4 instanceof java.lang.Boolean
-            goto L46
-        L3b:
-            boolean r1 = r4 instanceof java.lang.Double
-            goto L46
-        L3e:
-            boolean r1 = r4 instanceof java.lang.Float
-            goto L46
-        L41:
-            boolean r1 = r4 instanceof java.lang.Long
-            goto L46
-        L44:
-            boolean r1 = r4 instanceof java.lang.Integer
-        L46:
-            if (r1 == 0) goto L49
-            return
-        L49:
-            java.lang.IllegalArgumentException r0 = new java.lang.IllegalArgumentException
-            int r1 = r3.number
-            java.lang.Integer r1 = java.lang.Integer.valueOf(r1)
-            com.google.protobuf.WireFormat$FieldType r3 = r3.type
-            com.google.protobuf.WireFormat$JavaType r3 = r3.getJavaType()
-            java.lang.Class r4 = r4.getClass()
-            java.lang.String r4 = r4.getName()
-            java.lang.Object[] r3 = new java.lang.Object[]{r1, r3, r4}
-            java.lang.String r4 = "Wrong object type used with protocol message reflection.\nField number: %d, field java type: %s, value type: %s\n"
-            java.lang.String r3 = java.lang.String.format(r4, r3)
-            r0.<init>(r3)
-            throw r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.google.protobuf.FieldSet.verifyType(com.google.protobuf.GeneratedMessageLite$ExtensionDescriptor, java.lang.Object):void");
+    public static void verifyType(GeneratedMessageLite.ExtensionDescriptor extensionDescriptor, Object obj) {
+        WireFormat$FieldType wireFormat$FieldType = extensionDescriptor.type;
+        Charset charset = Internal.UTF_8;
+        obj.getClass();
+        boolean z = true;
+        switch (AnonymousClass1.$SwitchMap$com$google$protobuf$WireFormat$JavaType[wireFormat$FieldType.getJavaType().ordinal()]) {
+            case 1:
+                z = obj instanceof Integer;
+                break;
+            case 2:
+                z = obj instanceof Long;
+                break;
+            case 3:
+                z = obj instanceof Float;
+                break;
+            case 4:
+                z = obj instanceof Double;
+                break;
+            case 5:
+                z = obj instanceof Boolean;
+                break;
+            case 6:
+                z = obj instanceof String;
+                break;
+            case 7:
+                if (!(obj instanceof ByteString) && !(obj instanceof byte[])) {
+                    z = false;
+                    break;
+                }
+                break;
+            case 8:
+                if (!(obj instanceof Integer) && !(obj instanceof Internal.EnumLite)) {
+                }
+                break;
+            case 9:
+                if (!(obj instanceof MessageLite) && !(obj instanceof LazyField)) {
+                }
+                break;
+        }
+        if (!z) {
+            throw new IllegalArgumentException(String.format("Wrong object type used with protocol message reflection.\nField number: %d, field java type: %s, value type: %s\n", Integer.valueOf(extensionDescriptor.number), extensionDescriptor.type.getJavaType(), obj.getClass().getName()));
+        }
     }
 
     public static void writeElement(CodedOutputStream codedOutputStream, WireFormat$FieldType wireFormat$FieldType, int i, Object obj) {
@@ -430,12 +380,12 @@ public final class FieldSet {
                 codedOutputStream.writeFixed64NoTag(((Long) obj).longValue());
                 break;
             case 16:
-                int intValue = ((Integer) obj).intValue();
-                codedOutputStream.writeUInt32NoTag((intValue >> 31) ^ (intValue << 1));
+                int iIntValue = ((Integer) obj).intValue();
+                codedOutputStream.writeUInt32NoTag((iIntValue >> 31) ^ (iIntValue << 1));
                 break;
             case 17:
-                long longValue = ((Long) obj).longValue();
-                codedOutputStream.writeUInt64NoTag((longValue >> 63) ^ (longValue << 1));
+                long jLongValue = ((Long) obj).longValue();
+                codedOutputStream.writeUInt64NoTag((jLongValue >> 63) ^ (jLongValue << 1));
                 break;
             case 18:
                 if (!(obj instanceof Internal.EnumLite)) {
@@ -449,19 +399,19 @@ public final class FieldSet {
     }
 
     public final void addRepeatedField(GeneratedMessageLite.ExtensionDescriptor extensionDescriptor, Object obj) {
-        List list;
+        List arrayList;
         if (!extensionDescriptor.isRepeated) {
             throw new IllegalArgumentException("addRepeatedField() can only be called on repeated fields.");
         }
         verifyType(extensionDescriptor, obj);
         Object field = getField(extensionDescriptor);
         if (field == null) {
-            list = new ArrayList();
-            this.fields.put((Comparable) extensionDescriptor, (Object) list);
+            arrayList = new ArrayList();
+            this.fields.put((Comparable) extensionDescriptor, (Object) arrayList);
         } else {
-            list = (List) field;
+            arrayList = (List) field;
         }
-        list.add(obj);
+        arrayList.add(obj);
     }
 
     public final boolean equals(Object obj) {
@@ -644,7 +594,7 @@ public final class FieldSet {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public final FieldSet m3270clone() {
+    public final FieldSet m3288clone() {
         SmallSortedMap smallSortedMap;
         FieldSet fieldSet = new FieldSet();
         int i = 0;
@@ -665,39 +615,50 @@ public final class FieldSet {
     }
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    private FieldSet(boolean r2) {
-        /*
-            r1 = this;
-            int r2 = com.google.protobuf.SmallSortedMap.$r8$clinit
-            com.google.protobuf.SmallSortedMap$1 r2 = new com.google.protobuf.SmallSortedMap$1
-            r0 = 0
-            r2.<init>(r0)
-            r1.<init>(r2)
-            r1.makeImmutable()
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.google.protobuf.FieldSet.<init>(boolean):void");
+    private FieldSet(boolean z) {
+        int i = SmallSortedMap.$r8$clinit;
+        final int i2 = 0;
+        this(new SmallSortedMap(i2) { // from class: com.google.protobuf.SmallSortedMap.1
+            public AnonymousClass1(final int i22) {
+                super(i22);
+            }
+
+            @Override // com.google.protobuf.SmallSortedMap
+            public final void makeImmutable() {
+                if (!this.isImmutable) {
+                    for (int i3 = 0; i3 < this.entryList.size(); i3++) {
+                        Map.Entry arrayEntryAt = getArrayEntryAt(i3);
+                        if (((GeneratedMessageLite.ExtensionDescriptor) arrayEntryAt.getKey()).isRepeated) {
+                            arrayEntryAt.setValue(Collections.unmodifiableList((List) arrayEntryAt.getValue()));
+                        }
+                    }
+                    for (Map.Entry entry : getOverflowEntries()) {
+                        if (((GeneratedMessageLite.ExtensionDescriptor) entry.getKey()).isRepeated) {
+                            entry.setValue(Collections.unmodifiableList((List) entry.getValue()));
+                        }
+                    }
+                }
+                super.makeImmutable();
+            }
+        });
+        makeImmutable();
     }
 
     public static boolean isInitialized(Map.Entry entry) {
-        boolean z;
+        boolean zIsInitialized;
         GeneratedMessageLite.ExtensionDescriptor extensionDescriptor = (GeneratedMessageLite.ExtensionDescriptor) entry.getKey();
         if (extensionDescriptor.type.getJavaType() == WireFormat$JavaType.MESSAGE) {
             if (extensionDescriptor.isRepeated) {
                 for (Object obj : (List) entry.getValue()) {
                     if (obj instanceof MessageLiteOrBuilder) {
-                        z = ((MessageLiteOrBuilder) obj).isInitialized();
+                        zIsInitialized = ((MessageLiteOrBuilder) obj).isInitialized();
                     } else {
                         if (!(obj instanceof LazyField)) {
                             throw new IllegalArgumentException("Wrong object type used with protocol message reflection.");
                         }
-                        z = true;
+                        zIsInitialized = true;
                     }
-                    if (!z) {
+                    if (!zIsInitialized) {
                         return false;
                     }
                 }

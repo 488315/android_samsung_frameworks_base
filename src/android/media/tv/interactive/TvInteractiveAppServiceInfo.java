@@ -63,15 +63,15 @@ public final class TvInteractiveAppServiceInfo implements Parcelable {
         if (context == null) {
             throw new IllegalArgumentException("context cannot be null.");
         }
-        ResolveInfo resolveService = context.getPackageManager().resolveService(new Intent(TvInteractiveAppService.SERVICE_INTERFACE).setComponent(componentName), 132);
-        if (resolveService == null) {
+        ResolveInfo resolveInfoResolveService = context.getPackageManager().resolveService(new Intent(TvInteractiveAppService.SERVICE_INTERFACE).setComponent(componentName), 132);
+        if (resolveInfoResolveService == null) {
             throw new IllegalArgumentException("Invalid component. Can't find the service.");
         }
-        String generateInteractiveAppServiceId = generateInteractiveAppServiceId(new ComponentName(resolveService.serviceInfo.packageName, resolveService.serviceInfo.name));
+        String strGenerateInteractiveAppServiceId = generateInteractiveAppServiceId(new ComponentName(resolveInfoResolveService.serviceInfo.packageName, resolveInfoResolveService.serviceInfo.name));
         ArrayList arrayList = new ArrayList();
-        parseServiceMetadata(resolveService, context, arrayList);
-        this.mService = resolveService;
-        this.mId = generateInteractiveAppServiceId;
+        parseServiceMetadata(resolveInfoResolveService, context, arrayList);
+        this.mService = resolveInfoResolveService;
+        this.mId = strGenerateInteractiveAppServiceId;
         toTypesFlag(arrayList);
     }
 
@@ -131,45 +131,45 @@ public final class TvInteractiveAppServiceInfo implements Parcelable {
         PackageManager packageManager = context.getPackageManager();
         try {
             try {
-                XmlResourceParser loadXmlMetaData = serviceInfo.loadXmlMetaData(packageManager, TvInteractiveAppService.SERVICE_META_DATA);
+                XmlResourceParser xmlResourceParserLoadXmlMetaData = serviceInfo.loadXmlMetaData(packageManager, TvInteractiveAppService.SERVICE_META_DATA);
                 try {
-                    if (loadXmlMetaData == null) {
+                    if (xmlResourceParserLoadXmlMetaData == null) {
                         throw new IllegalStateException("No android.media.tv.interactive.app meta-data found for " + serviceInfo.name);
                     }
                     Resources resourcesForApplication = packageManager.getResourcesForApplication(serviceInfo.applicationInfo);
-                    AttributeSet asAttributeSet = Xml.asAttributeSet(loadXmlMetaData);
+                    AttributeSet attributeSetAsAttributeSet = Xml.asAttributeSet(xmlResourceParserLoadXmlMetaData);
                     do {
-                        next = loadXmlMetaData.next();
+                        next = xmlResourceParserLoadXmlMetaData.next();
                         if (next == 1) {
                             break;
                         }
                     } while (next != 2);
-                    if (!XML_START_TAG_NAME.equals(loadXmlMetaData.getName())) {
+                    if (!XML_START_TAG_NAME.equals(xmlResourceParserLoadXmlMetaData.getName())) {
                         throw new IllegalStateException("Meta-data does not start with tv-interactive-app tag for " + serviceInfo.name);
                     }
-                    TypedArray obtainAttributes = resourcesForApplication.obtainAttributes(asAttributeSet, R.styleable.TvInteractiveAppService);
-                    for (CharSequence charSequence : obtainAttributes.getTextArray(0)) {
+                    TypedArray typedArrayObtainAttributes = resourcesForApplication.obtainAttributes(attributeSetAsAttributeSet, R.styleable.TvInteractiveAppService);
+                    for (CharSequence charSequence : typedArrayObtainAttributes.getTextArray(0)) {
                         list.add(charSequence.toString().toLowerCase());
                     }
-                    obtainAttributes.recycle();
-                    if (loadXmlMetaData != null) {
-                        loadXmlMetaData.close();
+                    typedArrayObtainAttributes.recycle();
+                    if (xmlResourceParserLoadXmlMetaData != null) {
+                        xmlResourceParserLoadXmlMetaData.close();
                     }
                 } catch (Throwable th) {
-                    if (loadXmlMetaData != null) {
+                    if (xmlResourceParserLoadXmlMetaData != null) {
                         try {
-                            loadXmlMetaData.close();
+                            xmlResourceParserLoadXmlMetaData.close();
                         } catch (Throwable th2) {
                             th.addSuppressed(th2);
                         }
                     }
                     throw th;
                 }
-            } catch (IOException | XmlPullParserException e) {
-                throw new IllegalStateException("Failed reading meta-data for " + serviceInfo.packageName, e);
+            } catch (PackageManager.NameNotFoundException e) {
+                throw new IllegalStateException("No resources found for " + serviceInfo.packageName, e);
             }
-        } catch (PackageManager.NameNotFoundException e2) {
-            throw new IllegalStateException("No resources found for " + serviceInfo.packageName, e2);
+        } catch (IOException | XmlPullParserException e2) {
+            throw new IllegalStateException("Failed reading meta-data for " + serviceInfo.packageName, e2);
         }
     }
 

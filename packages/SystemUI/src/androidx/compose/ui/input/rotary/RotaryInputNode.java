@@ -3,7 +3,6 @@ package androidx.compose.ui.input.rotary;
 import androidx.compose.ui.Modifier;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class RotaryInputNode extends Modifier.Node implements RotaryInputModifierNode {
     public Function1 onEvent;
@@ -18,7 +17,7 @@ final class RotaryInputNode extends Modifier.Node implements RotaryInputModifier
     public final boolean onPreRotaryScrollEvent(RotaryScrollEvent rotaryScrollEvent) {
         Function1 function1 = this.onPreEvent;
         if (function1 != null) {
-            return ((Boolean) function1.mo779invoke(rotaryScrollEvent)).booleanValue();
+            return ((Boolean) function1.mo781invoke(rotaryScrollEvent)).booleanValue();
         }
         return false;
     }
@@ -27,7 +26,7 @@ final class RotaryInputNode extends Modifier.Node implements RotaryInputModifier
     public final boolean onRotaryScrollEvent(RotaryScrollEvent rotaryScrollEvent) {
         Function1 function1 = this.onEvent;
         if (function1 != null) {
-            return ((Boolean) function1.mo779invoke(rotaryScrollEvent)).booleanValue();
+            return ((Boolean) function1.mo781invoke(rotaryScrollEvent)).booleanValue();
         }
         return false;
     }

@@ -5,11 +5,9 @@ import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import java.time.LocalTime;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public interface NightDisplayChangeEvent {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class OnActivatedChanged implements NightDisplayChangeEvent {
         public final boolean isActivated;
 
@@ -33,7 +31,6 @@ public interface NightDisplayChangeEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class OnAutoModeChanged implements NightDisplayChangeEvent {
         public final int autoMode;
 
@@ -57,7 +54,6 @@ public interface NightDisplayChangeEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class OnCustomEndTimeChanged implements NightDisplayChangeEvent {
         public final LocalTime endTime;
 
@@ -85,7 +81,6 @@ public interface NightDisplayChangeEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class OnCustomStartTimeChanged implements NightDisplayChangeEvent {
         public final LocalTime startTime;
 
@@ -113,7 +108,6 @@ public interface NightDisplayChangeEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class OnForceAutoModeChanged implements NightDisplayChangeEvent {
         public final boolean shouldForceAutoMode;
 
@@ -137,7 +131,6 @@ public interface NightDisplayChangeEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class OnLocationEnabledChanged implements NightDisplayChangeEvent {
         public final boolean locationEnabled;
 

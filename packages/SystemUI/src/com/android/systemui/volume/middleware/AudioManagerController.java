@@ -24,7 +24,6 @@ import kotlin.collections.CollectionsKt__CollectionsKt;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class AudioManagerController implements VolumeMiddleware {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -34,7 +33,6 @@ public final class AudioManagerController implements VolumeMiddleware {
     public final Lazy log$delegate;
     public final Lazy store$delegate;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -44,7 +42,6 @@ public final class AudioManagerController implements VolumeMiddleware {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
         public static final /* synthetic */ int[] $EnumSwitchMapping$1;
@@ -156,7 +153,7 @@ public final class AudioManagerController implements VolumeMiddleware {
 
     @Override // com.samsung.systemui.splugins.volume.VolumeMiddleware
     public final Object apply(Object obj) {
-        boolean booleanValue;
+        boolean zBooleanValue;
         VolumePanelAction volumePanelAction = (VolumePanelAction) obj;
         int i = WhenMappings.$EnumSwitchMapping$0[volumePanelAction.getActionType().ordinal()];
         boolean z = false;
@@ -164,7 +161,7 @@ public final class AudioManagerController implements VolumeMiddleware {
             VolumePanelAction.Builder builder = new VolumePanelAction.Builder(volumePanelAction);
             builder.isSafeMediaDeviceOn(getStore().currentState.isSafeMediaDeviceOn()).isSafeMediaPinDeviceOn(getStore().currentState.isSafeMediaPinDeviceOn()).earProtectLevel(((getInfraMediator().getEarProtectLimit() - 1) * 100) + 9);
             Boolean bool = this.isHeadsetConnected;
-            if (bool != null && (((booleanValue = bool.booleanValue()) && !getStore().currentState.isSafeMediaDeviceOn() && !getStore().currentState.isSafeMediaPinDeviceOn()) || (!booleanValue && (getStore().currentState.isSafeMediaDeviceOn() || getStore().currentState.isSafeMediaPinDeviceOn())))) {
+            if (bool != null && (((zBooleanValue = bool.booleanValue()) && !getStore().currentState.isSafeMediaDeviceOn() && !getStore().currentState.isSafeMediaPinDeviceOn()) || (!zBooleanValue && (getStore().currentState.isSafeMediaDeviceOn() || getStore().currentState.isSafeMediaPinDeviceOn())))) {
                 builder.isSafeMediaDeviceOn(getInfraMediator().isSafeMediaVolumeDeviceOn()).isSafeMediaPinDeviceOn(getInfraMediator().isSafeMediaVolumePinDeviceOn());
             }
             checkVoiceCallAndScoStream(builder, volumePanelAction.getImportantStreamList(), volumePanelAction.getUnImportantStreamList());
@@ -197,29 +194,29 @@ public final class AudioManagerController implements VolumeMiddleware {
             builder2.isSafeMediaDeviceOn(getInfraMediator().isSafeMediaVolumeDeviceOn()).isSafeMediaPinDeviceOn(getInfraMediator().isSafeMediaVolumePinDeviceOn());
             List<Integer> importantStreamList = volumePanelAction.getImportantStreamList();
             List<Integer> unImportantStreamList = volumePanelAction.getUnImportantStreamList();
-            boolean checkVoiceCallAndScoStream = checkVoiceCallAndScoStream(builder2, importantStreamList, unImportantStreamList);
+            boolean zCheckVoiceCallAndScoStream = checkVoiceCallAndScoStream(builder2, importantStreamList, unImportantStreamList);
             int devicesForStreamMusic2 = getInfraMediator().getDevicesForStreamMusic();
             int pinDevice2 = getInfraMediator().getPinDevice();
-            if (devicesForStreamMusic2 == pinDevice2 || checkVoiceCallAndScoStream) {
+            if (devicesForStreamMusic2 == pinDevice2 || zCheckVoiceCallAndScoStream) {
                 pinDevice2 = 0;
             }
-            List mutableListOf = CollectionsKt__CollectionsKt.mutableListOf(21);
+            List listMutableListOf = CollectionsKt__CollectionsKt.mutableListOf(21);
             if (pinDevice2 != 0 && !getInfraMediator().isSmartView() && !getInfraMediator().isAudioMirroring() && !getInfraMediator().isLeBroadcasting() && !getInfraMediator().isUserInCall()) {
                 z = true;
             }
             LogWrapper logWrapper = (LogWrapper) this.log$delegate.getValue();
             String hexString = Integer.toHexString(devicesForStreamMusic2);
             String hexString2 = Integer.toHexString(pinDevice2);
-            boolean isSmartView = getInfraMediator().isSmartView();
-            boolean isAudioMirroring = getInfraMediator().isAudioMirroring();
-            boolean isLeBroadcasting = getInfraMediator().isLeBroadcasting();
-            StringBuilder m = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("device=", hexString, ", pinDevice=", hexString2, ", isSmartView=");
-            KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(m, isSmartView, ", isAudioMirroring=", isAudioMirroring, ", isLeBroadcasting=");
-            logWrapper.d("AudioManagerController", KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(m, isLeBroadcasting, ", isImportant=", z));
+            boolean zIsSmartView = getInfraMediator().isSmartView();
+            boolean zIsAudioMirroring = getInfraMediator().isAudioMirroring();
+            boolean zIsLeBroadcasting = getInfraMediator().isLeBroadcasting();
+            StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("device=", hexString, ", pinDevice=", hexString2, ", isSmartView=");
+            KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sbM, zIsSmartView, ", isAudioMirroring=", zIsAudioMirroring, ", isLeBroadcasting=");
+            logWrapper.d("AudioManagerController", KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sbM, zIsLeBroadcasting, ", isImportant=", z));
             if (z) {
-                importantStreamList.addAll(mutableListOf);
+                importantStreamList.addAll(listMutableListOf);
             } else {
-                unImportantStreamList.addAll(mutableListOf);
+                unImportantStreamList.addAll(listMutableListOf);
             }
             builder2.pinAppName(getInfraMediator().getPinAppName(pinDevice2)).pinDeviceName(getInfraMediator().getPinDeviceName(pinDevice2)).setImportantStreamList(importantStreamList).setUnImportantStreamList(unImportantStreamList).pinDevice(pinDevice2);
             return builder2.build();
@@ -248,10 +245,10 @@ public final class AudioManagerController implements VolumeMiddleware {
         }
         if (i == 3) {
             int stream = volumePanelState.getStream();
-            VolumePanelRow findRow = VolumePanelStateExt.INSTANCE.findRow(volumePanelState, stream);
-            int realLevel = findRow != null ? findRow.getRealLevel() : 0;
-            boolean isRemoteMic = volumePanelState.isRemoteMic();
-            if (VolumePanelValues.isBluetoothSco(stream) && !isRemoteMic) {
+            VolumePanelRow volumePanelRowFindRow = VolumePanelStateExt.INSTANCE.findRow(volumePanelState, stream);
+            int realLevel = volumePanelRowFindRow != null ? volumePanelRowFindRow.getRealLevel() : 0;
+            boolean zIsRemoteMic = volumePanelState.isRemoteMic();
+            if (VolumePanelValues.isBluetoothSco(stream) && !zIsRemoteMic) {
                 realLevel--;
             }
             setStreamVolume(volumePanelState, stream, realLevel);
@@ -264,8 +261,8 @@ public final class AudioManagerController implements VolumeMiddleware {
             getInfraMediator().disableSafeMediaVolume();
         } else {
             int stream2 = volumePanelState.getStream();
-            VolumePanelRow findRow2 = VolumePanelStateExt.INSTANCE.findRow(volumePanelState, stream2);
-            int level = findRow2 != null ? findRow2.getLevel() : 0;
+            VolumePanelRow volumePanelRowFindRow2 = VolumePanelStateExt.INSTANCE.findRow(volumePanelState, stream2);
+            int level = volumePanelRowFindRow2 != null ? volumePanelRowFindRow2.getLevel() : 0;
             getInfraMediator().setActiveStream(stream2);
             setStreamVolume(volumePanelState, stream2, level);
             getInfraMediator().setRingerMode(volumePanelState.getRingerModeInternal(), false);
@@ -274,25 +271,25 @@ public final class AudioManagerController implements VolumeMiddleware {
 
     public final boolean checkVoiceCallAndScoStream(VolumePanelAction.Builder builder, List list, List list2) {
         boolean z = false;
-        List mutableListOf = CollectionsKt__CollectionsKt.mutableListOf(0);
-        List mutableListOf2 = CollectionsKt__CollectionsKt.mutableListOf(6);
-        boolean isBluetoothScoOn = getInfraMediator().isBluetoothScoOn();
-        boolean isBluetoothScoOn2 = getInfraMediator().isBluetoothScoOn();
-        String str = null;
+        List listMutableListOf = CollectionsKt__CollectionsKt.mutableListOf(0);
+        List listMutableListOf2 = CollectionsKt__CollectionsKt.mutableListOf(6);
+        boolean zIsBluetoothScoOn = getInfraMediator().isBluetoothScoOn();
+        boolean zIsBluetoothScoOn2 = getInfraMediator().isBluetoothScoOn();
+        String btCallDeviceName = null;
         if (getInfraMediator().isUserInCall()) {
-            if (isBluetoothScoOn) {
-                str = getInfraMediator().getBtCallDeviceName();
+            if (zIsBluetoothScoOn) {
+                btCallDeviceName = getInfraMediator().getBtCallDeviceName();
                 z = true;
-            } else if (isBluetoothScoOn2) {
-                str = getInfraMediator().getBtCallDeviceName();
+            } else if (zIsBluetoothScoOn2) {
+                btCallDeviceName = getInfraMediator().getBtCallDeviceName();
             }
-            list.addAll(mutableListOf);
-            list2.addAll(mutableListOf2);
+            list.addAll(listMutableListOf);
+            list2.addAll(listMutableListOf2);
         } else {
-            list2.addAll(mutableListOf);
-            list2.addAll(mutableListOf2);
+            list2.addAll(listMutableListOf);
+            list2.addAll(listMutableListOf2);
         }
-        builder.isBtScoOn(isBluetoothScoOn).btCallDeviceName(str).setImportantStreamList(list).setUnImportantStreamList(list2);
+        builder.isBtScoOn(zIsBluetoothScoOn).btCallDeviceName(btCallDeviceName).setImportantStreamList(list).setUnImportantStreamList(list2);
         return z;
     }
 
@@ -305,7 +302,7 @@ public final class AudioManagerController implements VolumeMiddleware {
     }
 
     public final void setStreamVolume(VolumePanelState volumePanelState, int i, int i2) {
-        Object obj;
+        Object next;
         if ((!volumePanelState.isDualAudio() || i != StreamUtil.getMusicStream(volumePanelState.isMultiSoundBt())) && !VolumePanelValues.isDualAudio(i)) {
             getInfraMediator().setStreamVolume(i, i2);
             return;
@@ -313,16 +310,16 @@ public final class AudioManagerController implements VolumeMiddleware {
         Iterator<T> it = volumePanelState.getVolumeRowList().iterator();
         while (true) {
             if (!it.hasNext()) {
-                obj = null;
+                next = null;
                 break;
             } else {
-                obj = it.next();
-                if (((VolumePanelRow) obj).getStreamType() == i) {
+                next = it.next();
+                if (((VolumePanelRow) next).getStreamType() == i) {
                     break;
                 }
             }
         }
-        VolumePanelRow volumePanelRow = (VolumePanelRow) obj;
+        VolumePanelRow volumePanelRow = (VolumePanelRow) next;
         getInfraMediator().setStreamVolumeDualAudio(i, i2, volumePanelRow != null ? volumePanelRow.getDualBtDeviceAddress() : null);
     }
 }

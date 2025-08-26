@@ -40,9 +40,9 @@ public interface ISmartManagerService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISmartManagerService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISmartManagerService)) {
-                return (ISmartManagerService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISmartManagerService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISmartManagerService)) {
+                return (ISmartManagerService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }

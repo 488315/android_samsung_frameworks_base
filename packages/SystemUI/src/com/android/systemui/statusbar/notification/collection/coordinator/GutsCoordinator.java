@@ -1,6 +1,7 @@
 package com.android.systemui.statusbar.notification.collection.coordinator;
 
 import android.util.ArraySet;
+import android.util.IndentingPrintWriter;
 import com.android.systemui.Dumpable;
 import com.android.systemui.dump.DumpManager;
 import com.android.systemui.flags.RefactorFlagUtils;
@@ -16,8 +17,10 @@ import com.android.systemui.statusbar.notification.collection.render.NotifGutsVi
 import com.android.systemui.statusbar.notification.row.NotificationGuts;
 import com.android.systemui.statusbar.notification.row.NotificationGutsManager;
 import com.android.systemui.statusbar.notification.shared.NotificationBundleUi;
+import com.android.systemui.util.DumpUtilsKt;
+import java.io.PrintWriter;
+import java.util.Iterator;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @CoordinatorScope
 /* loaded from: classes3.dex */
 public final class GutsCoordinator implements Coordinator, Dumpable {
@@ -37,9 +40,7 @@ public final class GutsCoordinator implements Coordinator, Dumpable {
         this.mLifetimeExtender = new NotifLifetimeExtender() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.GutsCoordinator$mLifetimeExtender$1
             @Override // com.android.systemui.statusbar.notification.collection.notifcollection.NotifLifetimeExtender
             public void cancelLifetimeExtension(NotificationEntry notificationEntry) {
-                ArraySet arraySet;
-                arraySet = GutsCoordinator.this.notifsExtendingLifetime;
-                arraySet.remove(notificationEntry.mKey);
+                this.this$0.notifsExtendingLifetime.remove(notificationEntry.mKey);
             }
 
             @Override // com.android.systemui.statusbar.notification.collection.notifcollection.NotifLifetimeExtender
@@ -49,73 +50,58 @@ public final class GutsCoordinator implements Coordinator, Dumpable {
 
             @Override // com.android.systemui.statusbar.notification.collection.notifcollection.NotifLifetimeExtender
             public boolean maybeExtendLifetime(NotificationEntry notificationEntry, int i) {
-                boolean isCurrentlyShowingGuts;
-                ArraySet arraySet;
-                isCurrentlyShowingGuts = GutsCoordinator.this.isCurrentlyShowingGuts(notificationEntry);
-                if (isCurrentlyShowingGuts) {
-                    arraySet = GutsCoordinator.this.notifsExtendingLifetime;
-                    arraySet.add(notificationEntry.mKey);
+                boolean zIsCurrentlyShowingGuts = this.this$0.isCurrentlyShowingGuts(notificationEntry);
+                if (zIsCurrentlyShowingGuts) {
+                    this.this$0.notifsExtendingLifetime.add(notificationEntry.mKey);
                 }
-                return isCurrentlyShowingGuts;
+                return zIsCurrentlyShowingGuts;
             }
 
             @Override // com.android.systemui.statusbar.notification.collection.notifcollection.NotifLifetimeExtender
             public void setCallback(NotifLifetimeExtender.OnEndLifetimeExtensionCallback onEndLifetimeExtensionCallback) {
-                GutsCoordinator.this.onEndLifetimeExtensionCallback = onEndLifetimeExtensionCallback;
+                this.this$0.onEndLifetimeExtensionCallback = onEndLifetimeExtensionCallback;
             }
         };
         this.mGutsListener = new NotifGutsViewListener() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.GutsCoordinator$mGutsListener$1
             @Override // com.android.systemui.statusbar.notification.collection.render.NotifGutsViewListener
             public void onGutsClose(NotificationEntry notificationEntry) {
-                GutsCoordinatorLogger gutsCoordinatorLogger2;
                 RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
                 int i = NotificationBundleUi.$r8$clinit;
-                gutsCoordinatorLogger2 = GutsCoordinator.this.logger;
-                gutsCoordinatorLogger2.logGutsClosed(notificationEntry.mKey);
-                GutsCoordinator.this.closeGutsAndEndLifetimeExtension(notificationEntry);
+                this.this$0.logger.logGutsClosed(notificationEntry.mKey);
+                this.this$0.closeGutsAndEndLifetimeExtension(notificationEntry);
             }
 
             @Override // com.android.systemui.statusbar.notification.collection.render.NotifGutsViewListener
             public void onGutsOpen(NotificationEntry notificationEntry, NotificationGuts notificationGuts) {
-                GutsCoordinatorLogger gutsCoordinatorLogger2;
-                ArraySet arraySet;
                 RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
                 int i = NotificationBundleUi.$r8$clinit;
-                gutsCoordinatorLogger2 = GutsCoordinator.this.logger;
-                gutsCoordinatorLogger2.logGutsOpened(notificationEntry.mKey, notificationGuts);
+                this.this$0.logger.logGutsOpened(notificationEntry.mKey, notificationGuts);
                 if (notificationGuts.isLeavebehind()) {
-                    GutsCoordinator.this.closeGutsAndEndLifetimeExtension(notificationEntry);
+                    this.this$0.closeGutsAndEndLifetimeExtension(notificationEntry);
                 } else {
-                    arraySet = GutsCoordinator.this.notifsWithOpenGuts;
-                    arraySet.add(notificationEntry.mKey);
+                    this.this$0.notifsWithOpenGuts.add(notificationEntry.mKey);
                 }
             }
 
             public void onGutsClose(EntryAdapter entryAdapter) {
-                GutsCoordinatorLogger gutsCoordinatorLogger2;
                 RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
                 int i = NotificationBundleUi.$r8$clinit;
                 refactorFlagUtils.getClass();
                 RefactorFlagUtils.assertOnEngBuild("New code path expects com.android.systemui.notification_bundle_ui to be enabled.");
-                gutsCoordinatorLogger2 = GutsCoordinator.this.logger;
-                gutsCoordinatorLogger2.logGutsClosed(entryAdapter.getKey());
-                GutsCoordinator.this.closeGutsAndEndLifetimeExtension(entryAdapter);
+                this.this$0.logger.logGutsClosed(entryAdapter.getKey());
+                this.this$0.closeGutsAndEndLifetimeExtension(entryAdapter);
             }
 
             public void onGutsOpen(EntryAdapter entryAdapter, NotificationGuts notificationGuts) {
-                GutsCoordinatorLogger gutsCoordinatorLogger2;
-                ArraySet arraySet;
                 RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
                 int i = NotificationBundleUi.$r8$clinit;
                 refactorFlagUtils.getClass();
                 RefactorFlagUtils.assertOnEngBuild("New code path expects com.android.systemui.notification_bundle_ui to be enabled.");
-                gutsCoordinatorLogger2 = GutsCoordinator.this.logger;
-                gutsCoordinatorLogger2.logGutsOpened(entryAdapter.getKey(), notificationGuts);
+                this.this$0.logger.logGutsOpened(entryAdapter.getKey(), notificationGuts);
                 if (notificationGuts.isLeavebehind()) {
-                    GutsCoordinator.this.closeGutsAndEndLifetimeExtension(entryAdapter);
+                    this.this$0.closeGutsAndEndLifetimeExtension(entryAdapter);
                 } else {
-                    arraySet = GutsCoordinator.this.notifsWithOpenGuts;
-                    arraySet.add(entryAdapter.getKey());
+                    this.this$0.notifsWithOpenGuts.add(entryAdapter.getKey());
                 }
             }
         };
@@ -142,90 +128,49 @@ public final class GutsCoordinator implements Coordinator, Dumpable {
         notifPipeline.addNotificationLifetimeExtender(this.mLifetimeExtender);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:26:0x0031, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:22:0x006e, code lost:
     
         r3 = move-exception;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:28:0x0077, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:27:0x0077, code lost:
     
         throw r3;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:29:0x006e, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:29:0x007b, code lost:
+    
+        throw r3;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:9:0x0031, code lost:
     
         r3 = move-exception;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:31:0x007b, code lost:
-    
-        throw r3;
      */
     @Override // com.android.systemui.Dumpable
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void dump(java.io.PrintWriter r4, java.lang.String[] r5) {
-        /*
-            r3 = this;
-            java.lang.String r5 = ": "
-            android.util.IndentingPrintWriter r4 = com.android.systemui.util.DumpUtilsKt.asIndenting(r4)
-            r4.increaseIndent()
-            java.lang.String r0 = "notifsWithOpenGuts"
-            android.util.ArraySet<java.lang.String> r1 = r3.notifsWithOpenGuts     // Catch: java.lang.Throwable -> L6e
-            java.io.PrintWriter r0 = r4.append(r0)     // Catch: java.lang.Throwable -> L6e
-            java.io.PrintWriter r0 = r0.append(r5)     // Catch: java.lang.Throwable -> L6e
-            int r2 = r1.size()     // Catch: java.lang.Throwable -> L6e
-            r0.println(r2)     // Catch: java.lang.Throwable -> L6e
-            r4.increaseIndent()     // Catch: java.lang.Throwable -> L6e
-            java.util.Iterator r0 = r1.iterator()     // Catch: java.lang.Throwable -> L31
-        L23:
-            boolean r1 = r0.hasNext()     // Catch: java.lang.Throwable -> L31
-            if (r1 == 0) goto L33
-            java.lang.Object r1 = r0.next()     // Catch: java.lang.Throwable -> L31
-            r4.println(r1)     // Catch: java.lang.Throwable -> L31
-            goto L23
-        L31:
-            r3 = move-exception
-            goto L74
-        L33:
-            r4.decreaseIndent()     // Catch: java.lang.Throwable -> L6e
-            java.lang.String r0 = "notifsExtendingLifetime"
-            android.util.ArraySet<java.lang.String> r1 = r3.notifsExtendingLifetime     // Catch: java.lang.Throwable -> L6e
-            java.io.PrintWriter r0 = r4.append(r0)     // Catch: java.lang.Throwable -> L6e
-            java.io.PrintWriter r5 = r0.append(r5)     // Catch: java.lang.Throwable -> L6e
-            int r0 = r1.size()     // Catch: java.lang.Throwable -> L6e
-            r5.println(r0)     // Catch: java.lang.Throwable -> L6e
-            r4.increaseIndent()     // Catch: java.lang.Throwable -> L6e
-            java.util.Iterator r5 = r1.iterator()     // Catch: java.lang.Throwable -> L5e
-        L50:
-            boolean r0 = r5.hasNext()     // Catch: java.lang.Throwable -> L5e
-            if (r0 == 0) goto L60
-            java.lang.Object r0 = r5.next()     // Catch: java.lang.Throwable -> L5e
-            r4.println(r0)     // Catch: java.lang.Throwable -> L5e
-            goto L50
-        L5e:
-            r3 = move-exception
-            goto L70
-        L60:
-            r4.decreaseIndent()     // Catch: java.lang.Throwable -> L6e
-            java.lang.String r5 = "onEndLifetimeExtensionCallback"
-            com.android.systemui.statusbar.notification.collection.notifcollection.NotifLifetimeExtender$OnEndLifetimeExtensionCallback r3 = r3.onEndLifetimeExtensionCallback     // Catch: java.lang.Throwable -> L6e
-            com.android.systemui.util.DumpUtilsKt.println(r4, r5, r3)     // Catch: java.lang.Throwable -> L6e
-            r4.decreaseIndent()
-            return
-        L6e:
-            r3 = move-exception
-            goto L78
-        L70:
-            r4.decreaseIndent()     // Catch: java.lang.Throwable -> L6e
-            throw r3     // Catch: java.lang.Throwable -> L6e
-        L74:
-            r4.decreaseIndent()     // Catch: java.lang.Throwable -> L6e
-            throw r3     // Catch: java.lang.Throwable -> L6e
-        L78:
-            r4.decreaseIndent()
-            throw r3
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.notification.collection.coordinator.GutsCoordinator.dump(java.io.PrintWriter, java.lang.String[]):void");
+    public void dump(PrintWriter printWriter, String[] strArr) {
+        IndentingPrintWriter indentingPrintWriterAsIndenting = DumpUtilsKt.asIndenting(printWriter);
+        indentingPrintWriterAsIndenting.increaseIndent();
+        try {
+            ArraySet<String> arraySet = this.notifsWithOpenGuts;
+            indentingPrintWriterAsIndenting.append("notifsWithOpenGuts").append((CharSequence) ": ").println(arraySet.size());
+            indentingPrintWriterAsIndenting.increaseIndent();
+            Iterator<T> it = arraySet.iterator();
+            while (it.hasNext()) {
+                indentingPrintWriterAsIndenting.println(it.next());
+            }
+            indentingPrintWriterAsIndenting.decreaseIndent();
+            ArraySet<String> arraySet2 = this.notifsExtendingLifetime;
+            indentingPrintWriterAsIndenting.append("notifsExtendingLifetime").append((CharSequence) ": ").println(arraySet2.size());
+            indentingPrintWriterAsIndenting.increaseIndent();
+            Iterator<T> it2 = arraySet2.iterator();
+            while (it2.hasNext()) {
+                indentingPrintWriterAsIndenting.println(it2.next());
+            }
+            indentingPrintWriterAsIndenting.decreaseIndent();
+            DumpUtilsKt.println(indentingPrintWriterAsIndenting, "onEndLifetimeExtensionCallback", this.onEndLifetimeExtensionCallback);
+        } finally {
+        }
     }
 
     /* JADX INFO: Access modifiers changed from: private */

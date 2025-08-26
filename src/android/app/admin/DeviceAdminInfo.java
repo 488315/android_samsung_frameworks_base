@@ -142,95 +142,121 @@ public final class DeviceAdminInfo implements Parcelable {
         this(context, resolveInfo.activityInfo);
     }
 
-    public DeviceAdminInfo(Context context, ActivityInfo activityInfo) throws XmlPullParserException, IOException {
+    /* JADX WARN: Code restructure failed: missing block: B:130:?, code lost:
+    
+        return;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:62:0x012d, code lost:
+    
+        if (r2 == null) goto L130;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:63:0x012f, code lost:
+    
+        r2.close();
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:64:0x0132, code lost:
+    
+        return;
+     */
+    /* JADX WARN: Not initialized variable reg: 2, insn: 0x0154: MOVE (r1 I:??[OBJECT, ARRAY]) = (r2 I:??[OBJECT, ARRAY]), block:B:79:0x0154 */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public DeviceAdminInfo(Context context, ActivityInfo activityInfo) throws Throwable {
+        XmlResourceParser xmlResourceParser;
+        XmlResourceParser xmlResourceParserLoadXmlMetaData;
         int next;
         this.mHeadlessDeviceOwnerMode = 0;
         this.mActivityInfo = activityInfo;
         PackageManager packageManager = context.getPackageManager();
-        XmlResourceParser xmlResourceParser = null;
+        XmlResourceParser xmlResourceParser2 = null;
         try {
             try {
-                XmlResourceParser loadXmlMetaData = activityInfo.loadXmlMetaData(packageManager, DeviceAdminReceiver.DEVICE_ADMIN_META_DATA);
                 try {
-                    if (loadXmlMetaData == null) {
-                        throw new XmlPullParserException("No android.app.device_admin meta-data");
-                    }
-                    Resources resourcesForApplication = packageManager.getResourcesForApplication(activityInfo.applicationInfo);
-                    AttributeSet asAttributeSet = Xml.asAttributeSet(loadXmlMetaData);
-                    do {
-                        next = loadXmlMetaData.next();
-                        if (next == 1) {
-                            break;
-                        }
-                    } while (next != 2);
-                    if (!"device-admin".equals(loadXmlMetaData.getName())) {
-                        throw new XmlPullParserException("Meta-data does not start with device-admin tag");
-                    }
-                    TypedArray obtainAttributes = resourcesForApplication.obtainAttributes(asAttributeSet, R.styleable.DeviceAdmin);
-                    this.mVisible = obtainAttributes.getBoolean(0, true);
-                    obtainAttributes.recycle();
-                    int depth = loadXmlMetaData.getDepth();
-                    while (true) {
-                        int next2 = loadXmlMetaData.next();
-                        if (next2 == 1 || (next2 == 3 && loadXmlMetaData.getDepth() <= depth)) {
-                            break;
-                        }
-                        if (next2 != 3 && next2 != 4) {
-                            String name = loadXmlMetaData.getName();
-                            if (name.equals("uses-policies")) {
-                                int depth2 = loadXmlMetaData.getDepth();
-                                while (true) {
-                                    int next3 = loadXmlMetaData.next();
-                                    if (next3 != 1 && (next3 != 3 || loadXmlMetaData.getDepth() > depth2)) {
-                                        if (next3 != 3 && next3 != 4) {
-                                            String name2 = loadXmlMetaData.getName();
-                                            Integer num = sKnownPolicies.get(name2);
-                                            if (num != null) {
-                                                this.mUsesPolicies |= 1 << num.intValue();
-                                            } else {
-                                                Log.w(TAG, "Unknown tag under uses-policies of " + getComponent() + ": " + name2);
-                                            }
-                                        }
-                                    }
-                                }
-                            } else if (name.equals("support-transfer-ownership")) {
-                                if (loadXmlMetaData.next() != 3) {
-                                    throw new XmlPullParserException("support-transfer-ownership tag must be empty.");
-                                }
-                                this.mSupportsTransferOwnership = true;
-                            } else if (name.equals("headless-system-user")) {
-                                String attributeValue = loadXmlMetaData.getAttributeValue(null, "headless-device-owner-mode");
-                                attributeValue = attributeValue == null ? loadXmlMetaData.getAttributeValue(null, "device-owner-mode") : attributeValue;
-                                if ("unsupported".equalsIgnoreCase(attributeValue)) {
-                                    this.mHeadlessDeviceOwnerMode = 0;
-                                } else if ("affiliated".equalsIgnoreCase(attributeValue)) {
-                                    this.mHeadlessDeviceOwnerMode = 1;
-                                } else if ("single_user".equalsIgnoreCase(attributeValue)) {
-                                    this.mHeadlessDeviceOwnerMode = 2;
-                                } else {
-                                    Log.e(TAG, "Unknown headless-system-user mode: " + attributeValue);
-                                }
-                            }
-                        }
-                    }
-                    if (loadXmlMetaData != null) {
-                        loadXmlMetaData.close();
-                    }
-                } catch (PackageManager.NameNotFoundException unused) {
-                    xmlResourceParser = loadXmlMetaData;
-                    throw new XmlPullParserException("Unable to create context for: " + this.mActivityInfo.packageName);
+                    xmlResourceParserLoadXmlMetaData = activityInfo.loadXmlMetaData(packageManager, DeviceAdminReceiver.DEVICE_ADMIN_META_DATA);
                 } catch (Throwable th) {
                     th = th;
-                    xmlResourceParser = loadXmlMetaData;
-                    if (xmlResourceParser != null) {
-                        xmlResourceParser.close();
+                    xmlResourceParser2 = xmlResourceParser;
+                    if (xmlResourceParser2 != null) {
+                        xmlResourceParser2.close();
                     }
                     throw th;
                 }
-            } catch (Throwable th2) {
-                th = th2;
+            } catch (PackageManager.NameNotFoundException unused) {
+            } catch (OutOfMemoryError e) {
+                e = e;
             }
-        } catch (PackageManager.NameNotFoundException unused2) {
+            try {
+                if (xmlResourceParserLoadXmlMetaData == null) {
+                    throw new XmlPullParserException("No android.app.device_admin meta-data");
+                }
+                Resources resourcesForApplication = packageManager.getResourcesForApplication(activityInfo.applicationInfo);
+                AttributeSet attributeSetAsAttributeSet = Xml.asAttributeSet(xmlResourceParserLoadXmlMetaData);
+                do {
+                    next = xmlResourceParserLoadXmlMetaData.next();
+                    if (next == 1) {
+                        break;
+                    }
+                } while (next != 2);
+                if (!"device-admin".equals(xmlResourceParserLoadXmlMetaData.getName())) {
+                    throw new XmlPullParserException("Meta-data does not start with device-admin tag");
+                }
+                TypedArray typedArrayObtainAttributes = resourcesForApplication.obtainAttributes(attributeSetAsAttributeSet, R.styleable.DeviceAdmin);
+                this.mVisible = typedArrayObtainAttributes.getBoolean(0, true);
+                typedArrayObtainAttributes.recycle();
+                int depth = xmlResourceParserLoadXmlMetaData.getDepth();
+                while (true) {
+                    int next2 = xmlResourceParserLoadXmlMetaData.next();
+                    if (next2 == 1 || (next2 == 3 && xmlResourceParserLoadXmlMetaData.getDepth() <= depth)) {
+                        break;
+                    }
+                    if (next2 != 3 && next2 != 4) {
+                        String name = xmlResourceParserLoadXmlMetaData.getName();
+                        if (name.equals("uses-policies")) {
+                            int depth2 = xmlResourceParserLoadXmlMetaData.getDepth();
+                            while (true) {
+                                int next3 = xmlResourceParserLoadXmlMetaData.next();
+                                if (next3 == 1 || (next3 == 3 && xmlResourceParserLoadXmlMetaData.getDepth() <= depth2)) {
+                                    break;
+                                }
+                                if (next3 != 3 && next3 != 4) {
+                                    String name2 = xmlResourceParserLoadXmlMetaData.getName();
+                                    Integer num = sKnownPolicies.get(name2);
+                                    if (num != null) {
+                                        this.mUsesPolicies |= 1 << num.intValue();
+                                    } else {
+                                        Log.w(TAG, "Unknown tag under uses-policies of " + getComponent() + ": " + name2);
+                                    }
+                                }
+                            }
+                        } else if (name.equals("support-transfer-ownership")) {
+                            if (xmlResourceParserLoadXmlMetaData.next() != 3) {
+                                throw new XmlPullParserException("support-transfer-ownership tag must be empty.");
+                            }
+                            this.mSupportsTransferOwnership = true;
+                        } else if (name.equals("headless-system-user")) {
+                            String attributeValue = xmlResourceParserLoadXmlMetaData.getAttributeValue(null, "headless-device-owner-mode");
+                            attributeValue = attributeValue == null ? xmlResourceParserLoadXmlMetaData.getAttributeValue(null, "device-owner-mode") : attributeValue;
+                            if ("unsupported".equalsIgnoreCase(attributeValue)) {
+                                this.mHeadlessDeviceOwnerMode = 0;
+                            } else if ("affiliated".equalsIgnoreCase(attributeValue)) {
+                                this.mHeadlessDeviceOwnerMode = 1;
+                            } else if ("single_user".equalsIgnoreCase(attributeValue)) {
+                                this.mHeadlessDeviceOwnerMode = 2;
+                            } else {
+                                Log.e(TAG, "Unknown headless-system-user mode: " + attributeValue);
+                            }
+                        }
+                    }
+                }
+            } catch (PackageManager.NameNotFoundException unused2) {
+                throw new XmlPullParserException("Unable to create context for: " + this.mActivityInfo.packageName);
+            } catch (OutOfMemoryError e2) {
+                e = e2;
+                throw new XmlPullParserException("Out of memory when parsing", null, e);
+            }
+        } catch (Throwable th2) {
+            th = th2;
         }
     }
 
@@ -304,7 +330,7 @@ public final class DeviceAdminInfo implements Parcelable {
         return arrayList;
     }
 
-    public void writePoliciesToXml(TypedXmlSerializer typedXmlSerializer) throws IllegalArgumentException, IllegalStateException, IOException {
+    public void writePoliciesToXml(TypedXmlSerializer typedXmlSerializer) throws IllegalStateException, IOException, IllegalArgumentException {
         typedXmlSerializer.attributeInt(null, "flags", this.mUsesPolicies);
     }
 

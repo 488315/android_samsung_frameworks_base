@@ -4,5 +4,5 @@
   xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
     <ImageView android:id="@id/background" android:layout_width="fill_parent" android:layout_height="fill_parent" android:contentDescription="@string/biometric_dialog_empty_space_description" />
     <View android:id="@id/panel" android:layout_width="fill_parent" android:layout_height="fill_parent" android:elevation="@dimen/biometric_dialog_elevation" style="@style/AuthNonCredentialPanelStyle" />
-    <ScrollView android:layout_gravity="bottom|center" android:id="@id/biometric_scrollview" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_margin="@dimen/biometric_dialog_border_padding" android:elevation="@dimen/biometric_dialog_elevation" />
+    <ScrollView android:layout_gravity="center|bottom" android:id="@id/biometric_scrollview" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_margin="@dimen/biometric_dialog_border_padding" android:elevation="@dimen/biometric_dialog_elevation" />
 </FrameLayout>

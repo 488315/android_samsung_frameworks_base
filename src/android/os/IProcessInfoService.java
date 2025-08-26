@@ -45,9 +45,9 @@ public interface IProcessInfoService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IProcessInfoService)) {
-                return (IProcessInfoService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IProcessInfoService)) {
+                return (IProcessInfoService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -78,30 +78,30 @@ public interface IProcessInfoService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int[] createIntArray = parcel.createIntArray();
-                int readInt = parcel.readInt();
-                if (readInt > 1000000) {
-                    throw new BadParcelableException("Array too large: " + readInt);
+                int[] iArrCreateIntArray = parcel.createIntArray();
+                int i3 = parcel.readInt();
+                if (i3 > 1000000) {
+                    throw new BadParcelableException("Array too large: " + i3);
                 }
-                iArr = readInt >= 0 ? new int[readInt] : null;
+                iArr = i3 >= 0 ? new int[i3] : null;
                 parcel.enforceNoDataAvail();
-                getProcessStatesFromPids(createIntArray, iArr);
+                getProcessStatesFromPids(iArrCreateIntArray, iArr);
                 parcel2.writeNoException();
                 parcel2.writeIntArray(iArr);
             } else if (i == 2) {
-                int[] createIntArray2 = parcel.createIntArray();
-                int readInt2 = parcel.readInt();
-                if (readInt2 > 1000000) {
-                    throw new BadParcelableException("Array too large: " + readInt2);
+                int[] iArrCreateIntArray2 = parcel.createIntArray();
+                int i4 = parcel.readInt();
+                if (i4 > 1000000) {
+                    throw new BadParcelableException("Array too large: " + i4);
                 }
-                int[] iArr2 = readInt2 < 0 ? null : new int[readInt2];
-                int readInt3 = parcel.readInt();
-                if (readInt3 > 1000000) {
-                    throw new BadParcelableException("Array too large: " + readInt3);
+                int[] iArr2 = i4 < 0 ? null : new int[i4];
+                int i5 = parcel.readInt();
+                if (i5 > 1000000) {
+                    throw new BadParcelableException("Array too large: " + i5);
                 }
-                iArr = readInt3 >= 0 ? new int[readInt3] : null;
+                iArr = i5 >= 0 ? new int[i5] : null;
                 parcel.enforceNoDataAvail();
-                getProcessStatesAndOomScoresFromPids(createIntArray2, iArr2, iArr);
+                getProcessStatesAndOomScoresFromPids(iArrCreateIntArray2, iArr2, iArr);
                 parcel2.writeNoException();
                 parcel2.writeIntArray(iArr2);
                 parcel2.writeIntArray(iArr);
@@ -129,37 +129,37 @@ public interface IProcessInfoService extends IInterface {
 
             @Override // android.os.IProcessInfoService
             public void getProcessStatesFromPids(int[] iArr, int[] iArr2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeIntArray(iArr);
-                    obtain.writeInt(iArr2.length);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    obtain2.readIntArray(iArr2);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeIntArray(iArr);
+                    parcelObtain.writeInt(iArr2.length);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    parcelObtain2.readIntArray(iArr2);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IProcessInfoService
             public void getProcessStatesAndOomScoresFromPids(int[] iArr, int[] iArr2, int[] iArr3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeIntArray(iArr);
-                    obtain.writeInt(iArr2.length);
-                    obtain.writeInt(iArr3.length);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    obtain2.readIntArray(iArr2);
-                    obtain2.readIntArray(iArr3);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeIntArray(iArr);
+                    parcelObtain.writeInt(iArr2.length);
+                    parcelObtain.writeInt(iArr3.length);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    parcelObtain2.readIntArray(iArr2);
+                    parcelObtain2.readIntArray(iArr3);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

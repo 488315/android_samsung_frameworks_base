@@ -89,9 +89,9 @@ public interface ISehRadioDataIndication extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISehRadioDataIndication)) {
-                return (ISehRadioDataIndication) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISehRadioDataIndication)) {
+                return (ISehRadioDataIndication) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -117,34 +117,34 @@ public interface ISehRadioDataIndication extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 SehRrcStateInfo sehRrcStateInfo = (SehRrcStateInfo) parcel.readTypedObject(SehRrcStateInfo.CREATOR);
                 parcel.enforceNoDataAvail();
-                rrcStateChanged(readInt, sehRrcStateInfo);
+                rrcStateChanged(i3, sehRrcStateInfo);
             } else if (i == 2) {
-                int readInt2 = parcel.readInt();
-                int[] createIntArray = parcel.createIntArray();
+                int i4 = parcel.readInt();
+                int[] iArrCreateIntArray = parcel.createIntArray();
                 parcel.enforceNoDataAvail();
-                timerStatusChangedInd(readInt2, createIntArray);
+                timerStatusChangedInd(i4, iArrCreateIntArray);
             } else if (i == 3) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                SehApnProfile needApnProfileIndication = needApnProfileIndication(readString);
+                SehApnProfile sehApnProfileNeedApnProfileIndication = needApnProfileIndication(string);
                 parcel2.writeNoException();
-                parcel2.writeTypedObject(needApnProfileIndication, 1);
+                parcel2.writeTypedObject(sehApnProfileNeedApnProfileIndication, 1);
             } else if (i == 4) {
-                String readString2 = parcel.readString();
-                String readString3 = parcel.readString();
+                String string2 = parcel.readString();
+                String string3 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                int needSettingValueIndication = needSettingValueIndication(readString2, readString3);
+                int iNeedSettingValueIndication = needSettingValueIndication(string2, string3);
                 parcel2.writeNoException();
-                parcel2.writeInt(needSettingValueIndication);
+                parcel2.writeInt(iNeedSettingValueIndication);
             } else if (i == 5) {
-                String readString4 = parcel.readString();
+                String string4 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                SehPacketUsage needPacketUsage = needPacketUsage(readString4);
+                SehPacketUsage sehPacketUsageNeedPacketUsage = needPacketUsage(string4);
                 parcel2.writeNoException();
-                parcel2.writeTypedObject(needPacketUsage, 1);
+                parcel2.writeTypedObject(sehPacketUsageNeedPacketUsage, 1);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -171,104 +171,104 @@ public interface ISehRadioDataIndication extends IInterface {
 
             @Override // vendor.samsung.hardware.radio.data.ISehRadioDataIndication
             public void rrcStateChanged(int i, SehRrcStateInfo sehRrcStateInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(sehRrcStateInfo, 0);
-                    if (this.mRemote.transact(1, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(sehRrcStateInfo, 0);
+                    if (this.mRemote.transact(1, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method rrcStateChanged is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.data.ISehRadioDataIndication
             public void timerStatusChangedInd(int i, int[] iArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeIntArray(iArr);
-                    if (this.mRemote.transact(2, obtain, null, 1)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeIntArray(iArr);
+                    if (this.mRemote.transact(2, parcelObtain, null, 1)) {
                     } else {
                         throw new RemoteException("Method timerStatusChangedInd is unimplemented.");
                     }
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.data.ISehRadioDataIndication
             public SehApnProfile needApnProfileIndication(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeString(str);
-                    if (!this.mRemote.transact(3, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    if (!this.mRemote.transact(3, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method needApnProfileIndication is unimplemented.");
                     }
-                    obtain2.readException();
-                    return (SehApnProfile) obtain2.readTypedObject(SehApnProfile.CREATOR);
+                    parcelObtain2.readException();
+                    return (SehApnProfile) parcelObtain2.readTypedObject(SehApnProfile.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.data.ISehRadioDataIndication
             public int needSettingValueIndication(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    if (!this.mRemote.transact(4, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    if (!this.mRemote.transact(4, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method needSettingValueIndication is unimplemented.");
                     }
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.data.ISehRadioDataIndication
             public SehPacketUsage needPacketUsage(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeString(str);
-                    if (!this.mRemote.transact(5, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    if (!this.mRemote.transact(5, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method needPacketUsage is unimplemented.");
                     }
-                    obtain2.readException();
-                    return (SehPacketUsage) obtain2.readTypedObject(SehPacketUsage.CREATOR);
+                    parcelObtain2.readException();
+                    return (SehPacketUsage) parcelObtain2.readTypedObject(SehPacketUsage.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // vendor.samsung.hardware.radio.data.ISehRadioDataIndication
             public int getInterfaceVersion() throws RemoteException {
                 if (this.mCachedVersion == -1) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777215, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedVersion = obtain2.readInt();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777215, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedVersion = parcelObtain2.readInt();
                     } finally {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     }
                 }
                 return this.mCachedVersion;
@@ -277,18 +277,18 @@ public interface ISehRadioDataIndication extends IInterface {
             @Override // vendor.samsung.hardware.radio.data.ISehRadioDataIndication
             public synchronized String getInterfaceHash() throws RemoteException {
                 if ("-1".equals(this.mCachedHash)) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777214, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedHash = obtain2.readString();
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777214, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedHash = parcelObtain2.readString();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     } catch (Throwable th) {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                         throw th;
                     }
                 }

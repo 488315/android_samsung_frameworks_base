@@ -20,7 +20,7 @@ public abstract class PlatformVpnProfile {
     public @interface PlatformVpnType {
     }
 
-    public abstract VpnProfile toVpnProfile() throws IOException, GeneralSecurityException;
+    public abstract VpnProfile toVpnProfile() throws GeneralSecurityException, IOException;
 
     PlatformVpnProfile(int i, boolean z, boolean z2) {
         this.mType = i;
@@ -54,7 +54,7 @@ public abstract class PlatformVpnProfile {
         return "Unknown VPN profile type";
     }
 
-    public static PlatformVpnProfile fromVpnProfile(VpnProfile vpnProfile) throws IOException, GeneralSecurityException {
+    public static PlatformVpnProfile fromVpnProfile(VpnProfile vpnProfile) throws GeneralSecurityException, IOException {
         int i = vpnProfile.type;
         if (i == 6 || i == 7 || i == 8) {
             return Ikev2VpnProfile.fromVpnProfile(vpnProfile);

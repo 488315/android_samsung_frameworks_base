@@ -10,11 +10,10 @@ import androidx.compose.runtime.saveable.SaveableStateHolder;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class LazyLayoutItemContentFactoryKt {
     /* renamed from: access$SkippableItem-JVlU9Rs, reason: not valid java name */
-    public static final void m168access$SkippableItemJVlU9Rs(final LazyLayoutItemProvider lazyLayoutItemProvider, final Object obj, final int i, final Object obj2, Composer composer, final int i2) {
+    public static final void m169access$SkippableItemJVlU9Rs(final LazyLayoutItemProvider lazyLayoutItemProvider, final Object obj, final int i, final Object obj2, Composer composer, final int i2) {
         int i3;
         ComposerImpl composerImpl = (ComposerImpl) composer;
         composerImpl.startRestartGroup(1439843069);
@@ -45,13 +44,13 @@ public abstract class LazyLayoutItemContentFactoryKt {
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj3, Object obj4) {
                     Composer composer2 = (Composer) obj3;
-                    int intValue = ((Number) obj4).intValue();
+                    int iIntValue = ((Number) obj4).intValue();
                     ComposerImpl composerImpl2 = (ComposerImpl) composer2;
-                    if (composerImpl2.shouldExecute(intValue & 1, (intValue & 3) != 2)) {
+                    if (composerImpl2.shouldExecute(iIntValue & 1, (iIntValue & 3) != 2)) {
                         if (ComposerKt.isTraceInProgress()) {
                             ComposerKt.traceEventStart("androidx.compose.foundation.lazy.layout.SkippableItem.<anonymous> (LazyLayoutItemContentFactory.kt:129)");
                         }
-                        LazyLayoutItemProvider.this.Item(i, obj2, composerImpl2);
+                        lazyLayoutItemProvider.Item(i, obj2, composerImpl2);
                         if (ComposerKt.isTraceInProgress()) {
                             ComposerKt.traceEventEnd();
                         }
@@ -67,9 +66,9 @@ public abstract class LazyLayoutItemContentFactoryKt {
         } else {
             composerImpl.skipToGroupEnd();
         }
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
-            endRestartGroup.block = new Function2() { // from class: androidx.compose.foundation.lazy.layout.LazyLayoutItemContentFactoryKt$SkippableItem$2
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new Function2() { // from class: androidx.compose.foundation.lazy.layout.LazyLayoutItemContentFactoryKt$SkippableItem$2
                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
@@ -78,7 +77,7 @@ public abstract class LazyLayoutItemContentFactoryKt {
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj3, Object obj4) {
                     ((Number) obj4).intValue();
-                    LazyLayoutItemContentFactoryKt.m168access$SkippableItemJVlU9Rs(LazyLayoutItemProvider.this, obj, i, obj2, (Composer) obj3, RecomposeScopeImplKt.updateChangedFlags(i2 | 1));
+                    LazyLayoutItemContentFactoryKt.m169access$SkippableItemJVlU9Rs(lazyLayoutItemProvider, obj, i, obj2, (Composer) obj3, RecomposeScopeImplKt.updateChangedFlags(i2 | 1));
                     return Unit.INSTANCE;
                 }
             };

@@ -20,7 +20,6 @@ import kotlin.ranges.RangesKt___RangesKt;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 final class BasicSwitchKt$SeslBasicSwitch$4$2$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ State<Function1> $animateFraction$delegate;
@@ -90,24 +89,24 @@ final class BasicSwitchKt$SeslBasicSwitch$4$2$1 extends SuspendLambda implements
                             floatValue = intValue;
                         }
                         float f = floatValue < ((float) (snapshotMutableIntStateImpl.getIntValue() / 2)) ? 0.0f : 1.0f;
-                        ((Function1) state2.getValue()).mo779invoke(Boolean.valueOf(f > 0.5f));
+                        ((Function1) state2.getValue()).mo781invoke(Boolean.valueOf(f > 0.5f));
                         State state4 = state3;
-                        ((Function1) state4.getValue()).mo779invoke(Float.valueOf(f));
+                        ((Function1) state4.getValue()).mo781invoke(Float.valueOf(f));
                         Boolean bool = Boolean.TRUE;
                         MutableState mutableState2 = mutableState;
                         mutableState2.setValue(bool);
-                        BuildersKt.launch$default(CoroutineScope.this, null, null, new BasicSwitchKt$SeslBasicSwitch$4$2$1$2$1(z, mutableState2, state4, null), 3);
+                        BuildersKt.launch$default(coroutineScope, null, null, new BasicSwitchKt$SeslBasicSwitch$4$2$1$2$1(z, mutableState2, state4, null), 3);
                         return Unit.INSTANCE;
                     }
                 };
                 Function2 function2 = new Function2() { // from class: com.samsung.sesl.compose.foundation.BasicSwitchKt$SeslBasicSwitch$4$2$1$$ExternalSyntheticLambda2
                     @Override // kotlin.jvm.functions.Function2
                     public final Object invoke(Object obj2, Object obj3) {
-                        float floatValue = ((Float) obj3).floatValue();
-                        SnapshotMutableFloatStateImpl snapshotMutableFloatStateImpl = (SnapshotMutableFloatStateImpl) MutableFloatState.this;
-                        snapshotMutableFloatStateImpl.setFloatValue(snapshotMutableFloatStateImpl.getFloatValue() + floatValue);
+                        float fFloatValue = ((Float) obj3).floatValue();
+                        SnapshotMutableFloatStateImpl snapshotMutableFloatStateImpl = (SnapshotMutableFloatStateImpl) mutableFloatState;
+                        snapshotMutableFloatStateImpl.setFloatValue(snapshotMutableFloatStateImpl.getFloatValue() + fFloatValue);
                         if (((SnapshotMutableIntStateImpl) mutableIntState).getIntValue() > 0) {
-                            ((Function1) state3.getValue()).mo779invoke(Float.valueOf(RangesKt___RangesKt.coerceIn(snapshotMutableFloatStateImpl.getFloatValue(), 0.0f, r3.getIntValue()) / r3.getIntValue()));
+                            ((Function1) state3.getValue()).mo781invoke(Float.valueOf(RangesKt___RangesKt.coerceIn(snapshotMutableFloatStateImpl.getFloatValue(), 0.0f, r3.getIntValue()) / r3.getIntValue()));
                         }
                         return Unit.INSTANCE;
                     }

@@ -66,17 +66,17 @@ public final class SpellCheckerSubtype implements Parcelable {
 
     SpellCheckerSubtype(Parcel parcel) {
         this.mSubtypeNameResId = parcel.readInt();
-        String readString = parcel.readString();
-        readString = readString == null ? "" : readString;
-        this.mSubtypeLocale = readString;
-        String readString2 = parcel.readString();
-        this.mSubtypeLanguageTag = readString2 == null ? "" : readString2;
-        String readString3 = parcel.readString();
-        String str = readString3 != null ? readString3 : "";
+        String string = parcel.readString();
+        string = string == null ? "" : string;
+        this.mSubtypeLocale = string;
+        String string2 = parcel.readString();
+        this.mSubtypeLanguageTag = string2 == null ? "" : string2;
+        String string3 = parcel.readString();
+        String str = string3 != null ? string3 : "";
         this.mSubtypeExtraValue = str;
-        int readInt = parcel.readInt();
-        this.mSubtypeId = readInt;
-        this.mSubtypeHashCode = readInt == 0 ? hashCodeInternal(readString, str) : readInt;
+        int i = parcel.readInt();
+        this.mSubtypeId = i;
+        this.mSubtypeHashCode = i == 0 ? hashCodeInternal(string, str) : i;
     }
 
     public int getNameResId() {
@@ -100,14 +100,14 @@ public final class SpellCheckerSubtype implements Parcelable {
         if (this.mExtraValueHashMapCache == null) {
             this.mExtraValueHashMapCache = new HashMap<>();
             for (String str : this.mSubtypeExtraValue.split(",")) {
-                String[] split = str.split(EXTRA_VALUE_KEY_VALUE_SEPARATOR);
-                if (split.length == 1) {
-                    this.mExtraValueHashMapCache.put(split[0], null);
-                } else if (split.length > 1) {
-                    if (split.length > 2) {
+                String[] strArrSplit = str.split(EXTRA_VALUE_KEY_VALUE_SEPARATOR);
+                if (strArrSplit.length == 1) {
+                    this.mExtraValueHashMapCache.put(strArrSplit[0], null);
+                } else if (strArrSplit.length > 1) {
+                    if (strArrSplit.length > 2) {
                         Slog.w(TAG, "ExtraValue has two or more '='s");
                     }
-                    this.mExtraValueHashMapCache.put(split[0], split[1]);
+                    this.mExtraValueHashMapCache.put(strArrSplit[0], strArrSplit[1]);
                 }
             }
         }

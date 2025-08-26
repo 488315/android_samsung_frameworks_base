@@ -14,14 +14,12 @@ import com.samsung.android.oneconnect.mediaoutput.mediadeviceoperations.IMediaDe
 import com.samsung.android.oneconnect.mediaoutput.mediadeviceoperations.IMediaOutputSelectedCallback;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface IMediaOutputService extends IInterface {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class _Parcel {
         /* renamed from: -$$Nest$smwriteTypedList, reason: not valid java name */
-        public static void m3291$$Nest$smwriteTypedList(Parcel parcel, List list) {
+        public static void m3309$$Nest$smwriteTypedList(Parcel parcel, List list) {
             if (list == null) {
                 parcel.writeInt(-1);
                 return;
@@ -93,11 +91,9 @@ public interface IMediaOutputService extends IInterface {
 
     void updateVolume(int i, String str);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IMediaOutputService {
         public static final /* synthetic */ int $r8$clinit = 0;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class Proxy implements IMediaOutputService {
             public final IBinder mRemote;
 
@@ -107,46 +103,46 @@ public interface IMediaOutputService extends IInterface {
 
             @Override // com.samsung.android.oneconnect.mediaoutput.IMediaOutputService
             public final void addContentChangeCallback(IMediaContentChangeCallback iMediaContentChangeCallback) {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.samsung.android.oneconnect.mediaoutput.IMediaOutputService");
-                    obtain.writeStrongInterface(iMediaContentChangeCallback);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("com.samsung.android.oneconnect.mediaoutput.IMediaOutputService");
+                    parcelObtain.writeStrongInterface(iMediaContentChangeCallback);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.oneconnect.mediaoutput.IMediaOutputService
             public final void addDeviceStatusChangeCallback(IDeviceStatusChangeCallback iDeviceStatusChangeCallback) {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.samsung.android.oneconnect.mediaoutput.IMediaOutputService");
-                    obtain.writeStrongInterface(iDeviceStatusChangeCallback);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("com.samsung.android.oneconnect.mediaoutput.IMediaOutputService");
+                    parcelObtain.writeStrongInterface(iDeviceStatusChangeCallback);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.oneconnect.mediaoutput.IMediaOutputService
             public final void addMediaOutputSelectedCallback(IMediaOutputSelectedCallback iMediaOutputSelectedCallback) {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.samsung.android.oneconnect.mediaoutput.IMediaOutputService");
-                    obtain.writeStrongInterface(iMediaOutputSelectedCallback);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("com.samsung.android.oneconnect.mediaoutput.IMediaOutputService");
+                    parcelObtain.writeStrongInterface(iMediaOutputSelectedCallback);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -157,263 +153,263 @@ public interface IMediaOutputService extends IInterface {
 
             @Override // com.samsung.android.oneconnect.mediaoutput.IMediaOutputService
             public final MediaOutputDevice getCurrentMediaOutput(String str) {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.samsung.android.oneconnect.mediaoutput.IMediaOutputService");
-                    obtain.writeString(str);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt() != 0 ? MediaOutputDevice.CREATOR.createFromParcel(obtain2) : null;
+                    parcelObtain.writeInterfaceToken("com.samsung.android.oneconnect.mediaoutput.IMediaOutputService");
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt() != 0 ? MediaOutputDevice.CREATOR.createFromParcel(parcelObtain2) : null;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.oneconnect.mediaoutput.IMediaOutputService
             public final MediaOutputDeviceV2 getCurrentMediaOutputV2(String str) {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.samsung.android.oneconnect.mediaoutput.IMediaOutputService");
-                    obtain.writeString(str);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt() != 0 ? MediaOutputDeviceV2.CREATOR.createFromParcel(obtain2) : null;
+                    parcelObtain.writeInterfaceToken("com.samsung.android.oneconnect.mediaoutput.IMediaOutputService");
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt() != 0 ? MediaOutputDeviceV2.CREATOR.createFromParcel(parcelObtain2) : null;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.oneconnect.mediaoutput.IMediaOutputService
             public final List getDevices() {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.samsung.android.oneconnect.mediaoutput.IMediaOutputService");
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(Device.CREATOR);
+                    parcelObtain.writeInterfaceToken("com.samsung.android.oneconnect.mediaoutput.IMediaOutputService");
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(Device.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.oneconnect.mediaoutput.IMediaOutputService
             public final String getMediaContent(String str) {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.samsung.android.oneconnect.mediaoutput.IMediaOutputService");
-                    obtain.writeString(str);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken("com.samsung.android.oneconnect.mediaoutput.IMediaOutputService");
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.oneconnect.mediaoutput.IMediaOutputService
             public final List getMediaOutputDevices(String str) {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.samsung.android.oneconnect.mediaoutput.IMediaOutputService");
-                    obtain.writeString(str);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(MediaOutputDevice.CREATOR);
+                    parcelObtain.writeInterfaceToken("com.samsung.android.oneconnect.mediaoutput.IMediaOutputService");
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(MediaOutputDevice.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.oneconnect.mediaoutput.IMediaOutputService
             public final List getMediaOutputDevicesV2(String str) {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.samsung.android.oneconnect.mediaoutput.IMediaOutputService");
-                    obtain.writeString(str);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(MediaOutputDeviceV2.CREATOR);
+                    parcelObtain.writeInterfaceToken("com.samsung.android.oneconnect.mediaoutput.IMediaOutputService");
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(MediaOutputDeviceV2.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.oneconnect.mediaoutput.IMediaOutputService
             public final boolean isSupported(String str) {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.samsung.android.oneconnect.mediaoutput.IMediaOutputService");
-                    obtain.writeString(str);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt() != 0;
+                    parcelObtain.writeInterfaceToken("com.samsung.android.oneconnect.mediaoutput.IMediaOutputService");
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt() != 0;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.oneconnect.mediaoutput.IMediaOutputService
             public final void launchRemoteControlPlugIn(String str) {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.samsung.android.oneconnect.mediaoutput.IMediaOutputService");
-                    obtain.writeString(str);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("com.samsung.android.oneconnect.mediaoutput.IMediaOutputService");
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.oneconnect.mediaoutput.IMediaOutputService
             public final void removeContentChangeCallback(IMediaContentChangeCallback iMediaContentChangeCallback) {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.samsung.android.oneconnect.mediaoutput.IMediaOutputService");
-                    obtain.writeStrongInterface(iMediaContentChangeCallback);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("com.samsung.android.oneconnect.mediaoutput.IMediaOutputService");
+                    parcelObtain.writeStrongInterface(iMediaContentChangeCallback);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.oneconnect.mediaoutput.IMediaOutputService
             public final void removeDeviceStatusChangeCallback(IDeviceStatusChangeCallback iDeviceStatusChangeCallback) {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.samsung.android.oneconnect.mediaoutput.IMediaOutputService");
-                    obtain.writeStrongInterface(iDeviceStatusChangeCallback);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("com.samsung.android.oneconnect.mediaoutput.IMediaOutputService");
+                    parcelObtain.writeStrongInterface(iDeviceStatusChangeCallback);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.oneconnect.mediaoutput.IMediaOutputService
             public final void removeMediaOutputSelectedCallback(IMediaOutputSelectedCallback iMediaOutputSelectedCallback) {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.samsung.android.oneconnect.mediaoutput.IMediaOutputService");
-                    obtain.writeStrongInterface(iMediaOutputSelectedCallback);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("com.samsung.android.oneconnect.mediaoutput.IMediaOutputService");
+                    parcelObtain.writeStrongInterface(iMediaOutputSelectedCallback);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.oneconnect.mediaoutput.IMediaOutputService
             public final void selectMediaOutput(String str, String str2) {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.samsung.android.oneconnect.mediaoutput.IMediaOutputService");
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("com.samsung.android.oneconnect.mediaoutput.IMediaOutputService");
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.oneconnect.mediaoutput.IMediaOutputService
             public final void setMute(String str, boolean z) {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.samsung.android.oneconnect.mediaoutput.IMediaOutputService");
-                    obtain.writeString(str);
-                    obtain.writeInt(z ? 1 : 0);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("com.samsung.android.oneconnect.mediaoutput.IMediaOutputService");
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(z ? 1 : 0);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.oneconnect.mediaoutput.IMediaOutputService
             public final void setPlayback(String str) {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.samsung.android.oneconnect.mediaoutput.IMediaOutputService");
-                    obtain.writeString(str);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("com.samsung.android.oneconnect.mediaoutput.IMediaOutputService");
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.oneconnect.mediaoutput.IMediaOutputService
             public final void startCloudSync() {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.samsung.android.oneconnect.mediaoutput.IMediaOutputService");
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("com.samsung.android.oneconnect.mediaoutput.IMediaOutputService");
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.oneconnect.mediaoutput.IMediaOutputService
             public final void stopCloudSync() {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.samsung.android.oneconnect.mediaoutput.IMediaOutputService");
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("com.samsung.android.oneconnect.mediaoutput.IMediaOutputService");
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.oneconnect.mediaoutput.IMediaOutputService
             public final void updateVolume(int i, String str) {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.samsung.android.oneconnect.mediaoutput.IMediaOutputService");
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("com.samsung.android.oneconnect.mediaoutput.IMediaOutputService");
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -431,46 +427,46 @@ public interface IMediaOutputService extends IInterface {
                 parcel2.writeString("com.samsung.android.oneconnect.mediaoutput.IMediaOutputService");
                 return true;
             }
-            IDeviceStatusChangeCallback iDeviceStatusChangeCallback = null;
-            IMediaOutputSelectedCallback iMediaOutputSelectedCallback = null;
-            IMediaOutputSelectedCallback iMediaOutputSelectedCallback2 = null;
-            IMediaContentChangeCallback iMediaContentChangeCallback = null;
-            IMediaContentChangeCallback iMediaContentChangeCallback2 = null;
-            IDeviceStatusChangeCallback iDeviceStatusChangeCallback2 = null;
+            IDeviceStatusChangeCallback proxy = null;
+            IMediaOutputSelectedCallback proxy2 = null;
+            IMediaOutputSelectedCallback proxy3 = null;
+            IMediaContentChangeCallback proxy4 = null;
+            IMediaContentChangeCallback proxy5 = null;
+            IDeviceStatusChangeCallback proxy6 = null;
             switch (i) {
                 case 1:
                     List devices = getDevices();
                     parcel2.writeNoException();
-                    _Parcel.m3291$$Nest$smwriteTypedList(parcel2, devices);
+                    _Parcel.m3309$$Nest$smwriteTypedList(parcel2, devices);
                     return true;
                 case 2:
                     List mediaOutputDevices = getMediaOutputDevices(parcel.readString());
                     parcel2.writeNoException();
-                    _Parcel.m3291$$Nest$smwriteTypedList(parcel2, mediaOutputDevices);
+                    _Parcel.m3309$$Nest$smwriteTypedList(parcel2, mediaOutputDevices);
                     return true;
                 case 3:
-                    IBinder readStrongBinder = parcel.readStrongBinder();
-                    if (readStrongBinder != null) {
-                        IInterface queryLocalInterface = readStrongBinder.queryLocalInterface("com.samsung.android.oneconnect.mediaoutput.deviceoperations.IDeviceStatusChangeCallback");
-                        iDeviceStatusChangeCallback = (queryLocalInterface == null || !(queryLocalInterface instanceof IDeviceStatusChangeCallback)) ? new IDeviceStatusChangeCallback.Stub.Proxy(readStrongBinder) : (IDeviceStatusChangeCallback) queryLocalInterface;
+                    IBinder strongBinder = parcel.readStrongBinder();
+                    if (strongBinder != null) {
+                        IInterface iInterfaceQueryLocalInterface = strongBinder.queryLocalInterface("com.samsung.android.oneconnect.mediaoutput.deviceoperations.IDeviceStatusChangeCallback");
+                        proxy = (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IDeviceStatusChangeCallback)) ? new IDeviceStatusChangeCallback.Stub.Proxy(strongBinder) : (IDeviceStatusChangeCallback) iInterfaceQueryLocalInterface;
                     }
-                    addDeviceStatusChangeCallback(iDeviceStatusChangeCallback);
+                    addDeviceStatusChangeCallback(proxy);
                     parcel2.writeNoException();
                     return true;
                 case 4:
-                    IBinder readStrongBinder2 = parcel.readStrongBinder();
-                    if (readStrongBinder2 != null) {
-                        IInterface queryLocalInterface2 = readStrongBinder2.queryLocalInterface("com.samsung.android.oneconnect.mediaoutput.deviceoperations.IDeviceStatusChangeCallback");
-                        iDeviceStatusChangeCallback2 = (queryLocalInterface2 == null || !(queryLocalInterface2 instanceof IDeviceStatusChangeCallback)) ? new IDeviceStatusChangeCallback.Stub.Proxy(readStrongBinder2) : (IDeviceStatusChangeCallback) queryLocalInterface2;
+                    IBinder strongBinder2 = parcel.readStrongBinder();
+                    if (strongBinder2 != null) {
+                        IInterface iInterfaceQueryLocalInterface2 = strongBinder2.queryLocalInterface("com.samsung.android.oneconnect.mediaoutput.deviceoperations.IDeviceStatusChangeCallback");
+                        proxy6 = (iInterfaceQueryLocalInterface2 == null || !(iInterfaceQueryLocalInterface2 instanceof IDeviceStatusChangeCallback)) ? new IDeviceStatusChangeCallback.Stub.Proxy(strongBinder2) : (IDeviceStatusChangeCallback) iInterfaceQueryLocalInterface2;
                     }
-                    removeDeviceStatusChangeCallback(iDeviceStatusChangeCallback2);
+                    removeDeviceStatusChangeCallback(proxy6);
                     parcel2.writeNoException();
                     return true;
                 case 5:
                     parcel.readString();
-                    boolean isNearby = isNearby();
+                    boolean zIsNearby = isNearby();
                     parcel2.writeNoException();
-                    parcel2.writeInt(isNearby ? 1 : 0);
+                    parcel2.writeInt(zIsNearby ? 1 : 0);
                     return true;
                 case 6:
                     String mediaContent = getMediaContent(parcel.readString());
@@ -478,21 +474,21 @@ public interface IMediaOutputService extends IInterface {
                     parcel2.writeString(mediaContent);
                     return true;
                 case 7:
-                    IBinder readStrongBinder3 = parcel.readStrongBinder();
-                    if (readStrongBinder3 != null) {
-                        IInterface queryLocalInterface3 = readStrongBinder3.queryLocalInterface("com.samsung.android.oneconnect.mediaoutput.mediadeviceoperations.IMediaContentChangeCallback");
-                        iMediaContentChangeCallback2 = (queryLocalInterface3 == null || !(queryLocalInterface3 instanceof IMediaContentChangeCallback)) ? new IMediaContentChangeCallback.Stub.Proxy(readStrongBinder3) : (IMediaContentChangeCallback) queryLocalInterface3;
+                    IBinder strongBinder3 = parcel.readStrongBinder();
+                    if (strongBinder3 != null) {
+                        IInterface iInterfaceQueryLocalInterface3 = strongBinder3.queryLocalInterface("com.samsung.android.oneconnect.mediaoutput.mediadeviceoperations.IMediaContentChangeCallback");
+                        proxy5 = (iInterfaceQueryLocalInterface3 == null || !(iInterfaceQueryLocalInterface3 instanceof IMediaContentChangeCallback)) ? new IMediaContentChangeCallback.Stub.Proxy(strongBinder3) : (IMediaContentChangeCallback) iInterfaceQueryLocalInterface3;
                     }
-                    addContentChangeCallback(iMediaContentChangeCallback2);
+                    addContentChangeCallback(proxy5);
                     parcel2.writeNoException();
                     return true;
                 case 8:
-                    IBinder readStrongBinder4 = parcel.readStrongBinder();
-                    if (readStrongBinder4 != null) {
-                        IInterface queryLocalInterface4 = readStrongBinder4.queryLocalInterface("com.samsung.android.oneconnect.mediaoutput.mediadeviceoperations.IMediaContentChangeCallback");
-                        iMediaContentChangeCallback = (queryLocalInterface4 == null || !(queryLocalInterface4 instanceof IMediaContentChangeCallback)) ? new IMediaContentChangeCallback.Stub.Proxy(readStrongBinder4) : (IMediaContentChangeCallback) queryLocalInterface4;
+                    IBinder strongBinder4 = parcel.readStrongBinder();
+                    if (strongBinder4 != null) {
+                        IInterface iInterfaceQueryLocalInterface4 = strongBinder4.queryLocalInterface("com.samsung.android.oneconnect.mediaoutput.mediadeviceoperations.IMediaContentChangeCallback");
+                        proxy4 = (iInterfaceQueryLocalInterface4 == null || !(iInterfaceQueryLocalInterface4 instanceof IMediaContentChangeCallback)) ? new IMediaContentChangeCallback.Stub.Proxy(strongBinder4) : (IMediaContentChangeCallback) iInterfaceQueryLocalInterface4;
                     }
-                    removeContentChangeCallback(iMediaContentChangeCallback);
+                    removeContentChangeCallback(proxy4);
                     parcel2.writeNoException();
                     return true;
                 case 9:
@@ -505,21 +501,21 @@ public interface IMediaOutputService extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 11:
-                    IBinder readStrongBinder5 = parcel.readStrongBinder();
-                    if (readStrongBinder5 != null) {
-                        IInterface queryLocalInterface5 = readStrongBinder5.queryLocalInterface("com.samsung.android.oneconnect.mediaoutput.mediadeviceoperations.IMediaOutputSelectedCallback");
-                        iMediaOutputSelectedCallback2 = (queryLocalInterface5 == null || !(queryLocalInterface5 instanceof IMediaOutputSelectedCallback)) ? new IMediaOutputSelectedCallback.Stub.Proxy(readStrongBinder5) : (IMediaOutputSelectedCallback) queryLocalInterface5;
+                    IBinder strongBinder5 = parcel.readStrongBinder();
+                    if (strongBinder5 != null) {
+                        IInterface iInterfaceQueryLocalInterface5 = strongBinder5.queryLocalInterface("com.samsung.android.oneconnect.mediaoutput.mediadeviceoperations.IMediaOutputSelectedCallback");
+                        proxy3 = (iInterfaceQueryLocalInterface5 == null || !(iInterfaceQueryLocalInterface5 instanceof IMediaOutputSelectedCallback)) ? new IMediaOutputSelectedCallback.Stub.Proxy(strongBinder5) : (IMediaOutputSelectedCallback) iInterfaceQueryLocalInterface5;
                     }
-                    addMediaOutputSelectedCallback(iMediaOutputSelectedCallback2);
+                    addMediaOutputSelectedCallback(proxy3);
                     parcel2.writeNoException();
                     return true;
                 case 12:
-                    IBinder readStrongBinder6 = parcel.readStrongBinder();
-                    if (readStrongBinder6 != null) {
-                        IInterface queryLocalInterface6 = readStrongBinder6.queryLocalInterface("com.samsung.android.oneconnect.mediaoutput.mediadeviceoperations.IMediaOutputSelectedCallback");
-                        iMediaOutputSelectedCallback = (queryLocalInterface6 == null || !(queryLocalInterface6 instanceof IMediaOutputSelectedCallback)) ? new IMediaOutputSelectedCallback.Stub.Proxy(readStrongBinder6) : (IMediaOutputSelectedCallback) queryLocalInterface6;
+                    IBinder strongBinder6 = parcel.readStrongBinder();
+                    if (strongBinder6 != null) {
+                        IInterface iInterfaceQueryLocalInterface6 = strongBinder6.queryLocalInterface("com.samsung.android.oneconnect.mediaoutput.mediadeviceoperations.IMediaOutputSelectedCallback");
+                        proxy2 = (iInterfaceQueryLocalInterface6 == null || !(iInterfaceQueryLocalInterface6 instanceof IMediaOutputSelectedCallback)) ? new IMediaOutputSelectedCallback.Stub.Proxy(strongBinder6) : (IMediaOutputSelectedCallback) iInterfaceQueryLocalInterface6;
                     }
-                    removeMediaOutputSelectedCallback(iMediaOutputSelectedCallback);
+                    removeMediaOutputSelectedCallback(proxy2);
                     parcel2.writeNoException();
                     return true;
                 case 13:
@@ -532,27 +528,27 @@ public interface IMediaOutputService extends IInterface {
                     return true;
                 case 15:
                     parcel.readString();
-                    boolean isMuted = isMuted();
+                    boolean zIsMuted = isMuted();
                     parcel2.writeNoException();
-                    parcel2.writeInt(isMuted ? 1 : 0);
+                    parcel2.writeInt(zIsMuted ? 1 : 0);
                     return true;
                 case 16:
-                    IBinder readStrongBinder7 = parcel.readStrongBinder();
-                    if (readStrongBinder7 != null) {
-                        IInterface queryLocalInterface7 = readStrongBinder7.queryLocalInterface("com.samsung.android.oneconnect.mediaoutput.mediadeviceoperations.IMediaDeviceControlCallback");
-                        if (queryLocalInterface7 == null || !(queryLocalInterface7 instanceof IMediaDeviceControlCallback)) {
-                            new IMediaDeviceControlCallback.Stub.Proxy(readStrongBinder7);
+                    IBinder strongBinder7 = parcel.readStrongBinder();
+                    if (strongBinder7 != null) {
+                        IInterface iInterfaceQueryLocalInterface7 = strongBinder7.queryLocalInterface("com.samsung.android.oneconnect.mediaoutput.mediadeviceoperations.IMediaDeviceControlCallback");
+                        if (iInterfaceQueryLocalInterface7 == null || !(iInterfaceQueryLocalInterface7 instanceof IMediaDeviceControlCallback)) {
+                            new IMediaDeviceControlCallback.Stub.Proxy(strongBinder7);
                         }
                     }
                     addMediaDeviceControlCallback();
                     parcel2.writeNoException();
                     return true;
                 case 17:
-                    IBinder readStrongBinder8 = parcel.readStrongBinder();
-                    if (readStrongBinder8 != null) {
-                        IInterface queryLocalInterface8 = readStrongBinder8.queryLocalInterface("com.samsung.android.oneconnect.mediaoutput.mediadeviceoperations.IMediaDeviceControlCallback");
-                        if (queryLocalInterface8 == null || !(queryLocalInterface8 instanceof IMediaDeviceControlCallback)) {
-                            new IMediaDeviceControlCallback.Stub.Proxy(readStrongBinder8);
+                    IBinder strongBinder8 = parcel.readStrongBinder();
+                    if (strongBinder8 != null) {
+                        IInterface iInterfaceQueryLocalInterface8 = strongBinder8.queryLocalInterface("com.samsung.android.oneconnect.mediaoutput.mediadeviceoperations.IMediaDeviceControlCallback");
+                        if (iInterfaceQueryLocalInterface8 == null || !(iInterfaceQueryLocalInterface8 instanceof IMediaDeviceControlCallback)) {
+                            new IMediaDeviceControlCallback.Stub.Proxy(strongBinder8);
                         }
                     }
                     removeMediaDeviceControlCallback();
@@ -563,9 +559,9 @@ public interface IMediaOutputService extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 19:
-                    boolean isPpAgreed = isPpAgreed();
+                    boolean zIsPpAgreed = isPpAgreed();
                     parcel2.writeNoException();
-                    parcel2.writeInt(isPpAgreed ? 1 : 0);
+                    parcel2.writeInt(zIsPpAgreed ? 1 : 0);
                     return true;
                 case 20:
                     setPlayback(parcel.readString());
@@ -574,7 +570,7 @@ public interface IMediaOutputService extends IInterface {
                 case 21:
                     List mediaOutputDevicesV2 = getMediaOutputDevicesV2(parcel.readString());
                     parcel2.writeNoException();
-                    _Parcel.m3291$$Nest$smwriteTypedList(parcel2, mediaOutputDevicesV2);
+                    _Parcel.m3309$$Nest$smwriteTypedList(parcel2, mediaOutputDevicesV2);
                     return true;
                 case 22:
                     MediaOutputDeviceV2 currentMediaOutputV2 = getCurrentMediaOutputV2(parcel.readString());
@@ -582,9 +578,9 @@ public interface IMediaOutputService extends IInterface {
                     _Parcel.writeTypedObject(parcel2, currentMediaOutputV2);
                     return true;
                 case 23:
-                    boolean isSupported = isSupported(parcel.readString());
+                    boolean zIsSupported = isSupported(parcel.readString());
                     parcel2.writeNoException();
-                    parcel2.writeInt(isSupported ? 1 : 0);
+                    parcel2.writeInt(zIsSupported ? 1 : 0);
                     return true;
                 case 24:
                     startCloudSync();

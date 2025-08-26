@@ -111,13 +111,13 @@ public final class KeyboardLayoutSelectionResult implements Parcelable {
     }
 
     KeyboardLayoutSelectionResult(Parcel parcel) {
-        String readString = (parcel.readByte() & 1) == 0 ? null : parcel.readString();
-        int readInt = parcel.readInt();
-        this.mLayoutDescriptor = readString;
-        this.mSelectionCriteria = readInt;
-        if (readInt == 0 || readInt == 1 || readInt == 2 || readInt == 3 || readInt == 4) {
+        String string = (parcel.readByte() & 1) == 0 ? null : parcel.readString();
+        int i = parcel.readInt();
+        this.mLayoutDescriptor = string;
+        this.mSelectionCriteria = i;
+        if (i == 0 || i == 1 || i == 2 || i == 3 || i == 4) {
             return;
         }
-        throw new IllegalArgumentException("selectionCriteria was " + readInt + " but must be one of: LAYOUT_SELECTION_CRITERIA_UNSPECIFIED(0), LAYOUT_SELECTION_CRITERIA_USER(1), LAYOUT_SELECTION_CRITERIA_DEVICE(2), LAYOUT_SELECTION_CRITERIA_VIRTUAL_KEYBOARD(3), LAYOUT_SELECTION_CRITERIA_DEFAULT(4)");
+        throw new IllegalArgumentException("selectionCriteria was " + i + " but must be one of: LAYOUT_SELECTION_CRITERIA_UNSPECIFIED(0), LAYOUT_SELECTION_CRITERIA_USER(1), LAYOUT_SELECTION_CRITERIA_DEVICE(2), LAYOUT_SELECTION_CRITERIA_VIRTUAL_KEYBOARD(3), LAYOUT_SELECTION_CRITERIA_DEFAULT(4)");
     }
 }

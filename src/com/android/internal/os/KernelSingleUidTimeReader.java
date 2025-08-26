@@ -50,27 +50,27 @@ public class KernelSingleUidTimeReader {
                 return null;
             }
             if (this.mBpfTimesAvailable) {
-                long[] readBpfData = this.mInjector.readBpfData(i);
-                if (readBpfData.length == 0) {
+                long[] bpfData = this.mInjector.readBpfData(i);
+                if (bpfData.length == 0) {
                     this.mBpfTimesAvailable = false;
                 } else {
-                    if (!this.mCpuFreqsCountVerified && readBpfData.length != this.mCpuFreqsCount) {
+                    if (!this.mCpuFreqsCountVerified && bpfData.length != this.mCpuFreqsCount) {
                         this.mSingleUidCpuTimesAvailable = false;
                         return null;
                     }
                     this.mCpuFreqsCountVerified = true;
-                    return computeDelta(i, readBpfData);
+                    return computeDelta(i, bpfData);
                 }
             }
             String str = PROC_FILE_DIR + i + PROC_FILE_NAME;
             try {
-                byte[] readData = this.mInjector.readData(str);
+                byte[] data = this.mInjector.readData(str);
                 if (!this.mCpuFreqsCountVerified) {
-                    verifyCpuFreqsCount(readData.length, str);
+                    verifyCpuFreqsCount(data.length, str);
                 }
-                ByteBuffer wrap = ByteBuffer.wrap(readData);
-                wrap.order(ByteOrder.nativeOrder());
-                return computeDelta(i, readCpuTimesFromByteBuffer(wrap));
+                ByteBuffer byteBufferWrap = ByteBuffer.wrap(data);
+                byteBufferWrap.order(ByteOrder.nativeOrder());
+                return computeDelta(i, readCpuTimesFromByteBuffer(byteBufferWrap));
             } catch (Exception unused) {
                 int i2 = this.mReadErrorCounter + 1;
                 this.mReadErrorCounter = i2;
@@ -144,9 +144,9 @@ public class KernelSingleUidTimeReader {
         synchronized (this) {
             this.mLastUidCpuTimeMs.clear();
             for (int size = sparseArray.size() - 1; size >= 0; size--) {
-                long[] valueAt = sparseArray.valueAt(size);
-                if (valueAt != null) {
-                    this.mLastUidCpuTimeMs.put(sparseArray.keyAt(size), (long[]) valueAt.clone());
+                long[] jArrValueAt = sparseArray.valueAt(size);
+                if (jArrValueAt != null) {
+                    this.mLastUidCpuTimeMs.put(sparseArray.keyAt(size), (long[]) jArrValueAt.clone());
                 }
             }
         }
@@ -165,8 +165,8 @@ public class KernelSingleUidTimeReader {
         synchronized (this) {
             this.mLastUidCpuTimeMs.put(i, null);
             this.mLastUidCpuTimeMs.put(i2, null);
-            int indexOfKey = this.mLastUidCpuTimeMs.indexOfKey(i);
-            this.mLastUidCpuTimeMs.removeAtRange(indexOfKey, (this.mLastUidCpuTimeMs.indexOfKey(i2) - indexOfKey) + 1);
+            int iIndexOfKey = this.mLastUidCpuTimeMs.indexOfKey(i);
+            this.mLastUidCpuTimeMs.removeAtRange(iIndexOfKey, (this.mLastUidCpuTimeMs.indexOfKey(i2) - iIndexOfKey) + 1);
         }
     }
 

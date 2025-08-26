@@ -90,7 +90,7 @@ public class SemWakeupReasonInfo implements Cloneable, Parcelable {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public SemWakeupReasonInfo m3618clone() {
+    public SemWakeupReasonInfo m3625clone() {
         try {
             return (SemWakeupReasonInfo) super.clone();
         } catch (CloneNotSupportedException unused) {

@@ -17,7 +17,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class AudioRepositoryImpl$setVolume$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ int $audioStream;
@@ -58,12 +57,12 @@ final class AudioRepositoryImpl$setVolume$2 extends SuspendLambda implements Fun
         LogLevel logLevel = LogLevel.DEBUG;
         VolumeLogger$$ExternalSyntheticLambda0 volumeLogger$$ExternalSyntheticLambda0 = new VolumeLogger$$ExternalSyntheticLambda0(0);
         LogBuffer logBuffer = volumeLogger.logBuffer;
-        LogMessage obtain = logBuffer.obtain("SysUI_Volume", logLevel, volumeLogger$$ExternalSyntheticLambda0, null);
+        LogMessage logMessageObtain = logBuffer.obtain("SysUI_Volume", logLevel, volumeLogger$$ExternalSyntheticLambda0, null);
         AudioStream.Companion companion = AudioStream.Companion;
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = AudioSystem.streamToString(i);
         logMessageImpl.int1 = i2;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         this.this$0.audioManager.setStreamVolume(this.$audioStream, this.$volume, 0);
         return Unit.INSTANCE;
     }

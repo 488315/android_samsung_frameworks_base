@@ -19,7 +19,6 @@ import com.samsung.android.knox.EnterpriseContainerCallback;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class ImageExtKt {
     public static final void ImageExt(final Painter painter, final String str, final Modifier modifier, Composer composer, final int i) {
@@ -64,10 +63,10 @@ public abstract class ImageExtKt {
                     if (ComposerKt.isTraceInProgress()) {
                         ComposerKt.traceEventEnd();
                     }
-                    RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-                    if (endRestartGroup != null) {
+                    RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+                    if (recomposeScopeImplEndRestartGroup != null) {
                         final int i4 = 0;
-                        endRestartGroup.block = new Function2() { // from class: com.android.systemui.media.mediaoutput.compose.widget.ImageExtKt$$ExternalSyntheticLambda0
+                        recomposeScopeImplEndRestartGroup.block = new Function2() { // from class: com.android.systemui.media.mediaoutput.compose.widget.ImageExtKt$$ExternalSyntheticLambda0
                             @Override // kotlin.jvm.functions.Function2
                             public final Object invoke(Object obj, Object obj2) {
                                 int i5 = i4;
@@ -75,12 +74,12 @@ public abstract class ImageExtKt {
                                 ((Integer) obj2).getClass();
                                 switch (i5) {
                                     case 0:
-                                        int updateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i | 1);
-                                        ImageExtKt.ImageExt(painter, str, modifier, composer2, updateChangedFlags);
+                                        int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i | 1);
+                                        ImageExtKt.ImageExt(painter, str, modifier, composer2, iUpdateChangedFlags);
                                         break;
                                     default:
-                                        int updateChangedFlags2 = RecomposeScopeImplKt.updateChangedFlags(i | 1);
-                                        ImageExtKt.ImageExt(painter, str, modifier, composer2, updateChangedFlags2);
+                                        int iUpdateChangedFlags2 = RecomposeScopeImplKt.updateChangedFlags(i | 1);
+                                        ImageExtKt.ImageExt(painter, str, modifier, composer2, iUpdateChangedFlags2);
                                         break;
                                 }
                                 return Unit.INSTANCE;
@@ -114,13 +113,13 @@ public abstract class ImageExtKt {
                 ComposerKt.traceEventEnd();
             }
         }
-        RecomposeScopeImpl endRestartGroup2 = composerImpl.endRestartGroup();
-        if (endRestartGroup2 != null) {
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup2 = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup2 != null) {
             final String str3 = str2;
             final int i5 = 1;
             final int i6 = i3;
             final Modifier modifier3 = modifier2;
-            endRestartGroup2.block = new Function2() { // from class: com.android.systemui.media.mediaoutput.compose.widget.ImageExtKt$$ExternalSyntheticLambda0
+            recomposeScopeImplEndRestartGroup2.block = new Function2() { // from class: com.android.systemui.media.mediaoutput.compose.widget.ImageExtKt$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj, Object obj2) {
                     int i52 = i5;
@@ -128,12 +127,12 @@ public abstract class ImageExtKt {
                     ((Integer) obj2).getClass();
                     switch (i52) {
                         case 0:
-                            int updateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i6 | 1);
-                            ImageExtKt.ImageExt(painter, str3, modifier3, composer2, updateChangedFlags);
+                            int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i6 | 1);
+                            ImageExtKt.ImageExt(painter, str3, modifier3, composer2, iUpdateChangedFlags);
                             break;
                         default:
-                            int updateChangedFlags2 = RecomposeScopeImplKt.updateChangedFlags(i6 | 1);
-                            ImageExtKt.ImageExt(painter, str3, modifier3, composer2, updateChangedFlags2);
+                            int iUpdateChangedFlags2 = RecomposeScopeImplKt.updateChangedFlags(i6 | 1);
+                            ImageExtKt.ImageExt(painter, str3, modifier3, composer2, iUpdateChangedFlags2);
                             break;
                     }
                     return Unit.INSTANCE;

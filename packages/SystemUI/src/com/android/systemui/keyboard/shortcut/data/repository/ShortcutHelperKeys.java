@@ -9,7 +9,6 @@ import kotlin.Pair;
 import kotlin.collections.MapsKt__MapsKt;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ShortcutHelperKeys {
     public static final Map modifierLabels;
@@ -24,7 +23,7 @@ public final class ShortcutHelperKeys {
         Pair pair = new Pair(65536, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i) {
                     case 0:
@@ -124,7 +123,7 @@ public final class ShortcutHelperKeys {
         Pair pair2 = new Pair(4096, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i2) {
                     case 0:
@@ -224,7 +223,7 @@ public final class ShortcutHelperKeys {
         Pair pair3 = new Pair(2, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i3) {
                     case 0:
@@ -324,7 +323,7 @@ public final class ShortcutHelperKeys {
         Pair pair4 = new Pair(1, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i4) {
                     case 0:
@@ -425,7 +424,7 @@ public final class ShortcutHelperKeys {
         modifierLabels = MapsKt__MapsKt.mapOf(pair, pair2, pair3, pair4, new Pair(4, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda3
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i5) {
                     case 0:
@@ -523,7 +522,7 @@ public final class ShortcutHelperKeys {
         }), new Pair(8, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda3
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i6) {
                     case 0:
@@ -623,7 +622,7 @@ public final class ShortcutHelperKeys {
         Pair pair5 = new Pair(3, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda6
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i7) {
                     case 0:
@@ -720,7 +719,7 @@ public final class ShortcutHelperKeys {
         Pair pair6 = new Pair(4, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda6
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i8) {
                     case 0:
@@ -817,7 +816,7 @@ public final class ShortcutHelperKeys {
         Pair pair7 = new Pair(312, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda6
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i9) {
                     case 0:
@@ -914,7 +913,7 @@ public final class ShortcutHelperKeys {
         Pair pair8 = new Pair(19, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda6
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i10) {
                     case 0:
@@ -1011,7 +1010,7 @@ public final class ShortcutHelperKeys {
         Pair pair9 = new Pair(20, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i11) {
                     case 0:
@@ -1111,7 +1110,7 @@ public final class ShortcutHelperKeys {
         Pair pair10 = new Pair(21, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i12) {
                     case 0:
@@ -1211,7 +1210,7 @@ public final class ShortcutHelperKeys {
         Pair pair11 = new Pair(22, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda3
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i13) {
                     case 0:
@@ -1311,7 +1310,7 @@ public final class ShortcutHelperKeys {
         Pair pair12 = new Pair(23, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda3
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i14) {
                     case 0:
@@ -1411,7 +1410,7 @@ public final class ShortcutHelperKeys {
         Pair pair13 = new Pair(56, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda3
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i15) {
                     case 0:
@@ -1511,7 +1510,7 @@ public final class ShortcutHelperKeys {
         Pair pair14 = new Pair(61, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda6
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i16) {
                     case 0:
@@ -1608,7 +1607,7 @@ public final class ShortcutHelperKeys {
         Pair pair15 = new Pair(62, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda6
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i17) {
                     case 0:
@@ -1705,7 +1704,7 @@ public final class ShortcutHelperKeys {
         Pair pair16 = new Pair(66, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda6
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i18) {
                     case 0:
@@ -1802,7 +1801,7 @@ public final class ShortcutHelperKeys {
         Pair pair17 = new Pair(67, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda6
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i19) {
                     case 0:
@@ -1899,7 +1898,7 @@ public final class ShortcutHelperKeys {
         Pair pair18 = new Pair(85, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i20) {
                     case 0:
@@ -1999,7 +1998,7 @@ public final class ShortcutHelperKeys {
         Pair pair19 = new Pair(86, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i21) {
                     case 0:
@@ -2099,7 +2098,7 @@ public final class ShortcutHelperKeys {
         Pair pair20 = new Pair(87, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i22) {
                     case 0:
@@ -2199,7 +2198,7 @@ public final class ShortcutHelperKeys {
         Pair pair21 = new Pair(88, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i23) {
                     case 0:
@@ -2299,7 +2298,7 @@ public final class ShortcutHelperKeys {
         Pair pair22 = new Pair(89, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i24) {
                     case 0:
@@ -2399,7 +2398,7 @@ public final class ShortcutHelperKeys {
         Pair pair23 = new Pair(90, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i25) {
                     case 0:
@@ -2499,7 +2498,7 @@ public final class ShortcutHelperKeys {
         Pair pair24 = new Pair(92, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i26) {
                     case 0:
@@ -2599,7 +2598,7 @@ public final class ShortcutHelperKeys {
         Pair pair25 = new Pair(93, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i27) {
                     case 0:
@@ -2699,7 +2698,7 @@ public final class ShortcutHelperKeys {
         Pair pair26 = new Pair(96, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i28) {
                     case 0:
@@ -2799,7 +2798,7 @@ public final class ShortcutHelperKeys {
         Pair pair27 = new Pair(97, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i29) {
                     case 0:
@@ -2899,7 +2898,7 @@ public final class ShortcutHelperKeys {
         Pair pair28 = new Pair(98, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i30) {
                     case 0:
@@ -2999,7 +2998,7 @@ public final class ShortcutHelperKeys {
         Pair pair29 = new Pair(99, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i31) {
                     case 0:
@@ -3099,7 +3098,7 @@ public final class ShortcutHelperKeys {
         Pair pair30 = new Pair(100, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i32) {
                     case 0:
@@ -3199,7 +3198,7 @@ public final class ShortcutHelperKeys {
         Pair pair31 = new Pair(101, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i33) {
                     case 0:
@@ -3299,7 +3298,7 @@ public final class ShortcutHelperKeys {
         Pair pair32 = new Pair(102, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i34) {
                     case 0:
@@ -3399,7 +3398,7 @@ public final class ShortcutHelperKeys {
         Pair pair33 = new Pair(103, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i35) {
                     case 0:
@@ -3499,7 +3498,7 @@ public final class ShortcutHelperKeys {
         Pair pair34 = new Pair(104, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i36) {
                     case 0:
@@ -3599,7 +3598,7 @@ public final class ShortcutHelperKeys {
         Pair pair35 = new Pair(105, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i37) {
                     case 0:
@@ -3699,7 +3698,7 @@ public final class ShortcutHelperKeys {
         Pair pair36 = new Pair(108, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i38) {
                     case 0:
@@ -3799,7 +3798,7 @@ public final class ShortcutHelperKeys {
         Pair pair37 = new Pair(109, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i39) {
                     case 0:
@@ -3899,7 +3898,7 @@ public final class ShortcutHelperKeys {
         Pair pair38 = new Pair(110, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i40) {
                     case 0:
@@ -3999,7 +3998,7 @@ public final class ShortcutHelperKeys {
         Pair pair39 = new Pair(112, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i41) {
                     case 0:
@@ -4099,7 +4098,7 @@ public final class ShortcutHelperKeys {
         Pair pair40 = new Pair(111, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i42) {
                     case 0:
@@ -4199,7 +4198,7 @@ public final class ShortcutHelperKeys {
         Pair pair41 = new Pair(120, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i43) {
                     case 0:
@@ -4299,7 +4298,7 @@ public final class ShortcutHelperKeys {
         Pair pair42 = new Pair(121, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda3
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i44) {
                     case 0:
@@ -4399,7 +4398,7 @@ public final class ShortcutHelperKeys {
         Pair pair43 = new Pair(116, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda3
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i45) {
                     case 0:
@@ -4499,7 +4498,7 @@ public final class ShortcutHelperKeys {
         Pair pair44 = new Pair(122, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda3
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i46) {
                     case 0:
@@ -4599,7 +4598,7 @@ public final class ShortcutHelperKeys {
         Pair pair45 = new Pair(123, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda3
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i47) {
                     case 0:
@@ -4699,7 +4698,7 @@ public final class ShortcutHelperKeys {
         Pair pair46 = new Pair(124, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda3
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i48) {
                     case 0:
@@ -4799,7 +4798,7 @@ public final class ShortcutHelperKeys {
         Pair pair47 = new Pair(131, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda3
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i49) {
                     case 0:
@@ -4899,7 +4898,7 @@ public final class ShortcutHelperKeys {
         Pair pair48 = new Pair(132, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda3
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i50) {
                     case 0:
@@ -4999,7 +4998,7 @@ public final class ShortcutHelperKeys {
         Pair pair49 = new Pair(133, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda3
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i51) {
                     case 0:
@@ -5099,7 +5098,7 @@ public final class ShortcutHelperKeys {
         Pair pair50 = new Pair(134, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda3
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i52) {
                     case 0:
@@ -5199,7 +5198,7 @@ public final class ShortcutHelperKeys {
         Pair pair51 = new Pair(135, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda3
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i53) {
                     case 0:
@@ -5299,7 +5298,7 @@ public final class ShortcutHelperKeys {
         Pair pair52 = new Pair(136, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda3
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i54) {
                     case 0:
@@ -5399,7 +5398,7 @@ public final class ShortcutHelperKeys {
         Pair pair53 = new Pair(137, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda3
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i55) {
                     case 0:
@@ -5499,7 +5498,7 @@ public final class ShortcutHelperKeys {
         Pair pair54 = new Pair(138, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda3
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i56) {
                     case 0:
@@ -5599,7 +5598,7 @@ public final class ShortcutHelperKeys {
         Pair pair55 = new Pair(139, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda3
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i57) {
                     case 0:
@@ -5699,7 +5698,7 @@ public final class ShortcutHelperKeys {
         Pair pair56 = new Pair(140, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda3
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i58) {
                     case 0:
@@ -5799,7 +5798,7 @@ public final class ShortcutHelperKeys {
         Pair pair57 = new Pair(141, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda3
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i59) {
                     case 0:
@@ -5899,7 +5898,7 @@ public final class ShortcutHelperKeys {
         Pair pair58 = new Pair(142, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda3
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i60) {
                     case 0:
@@ -5999,7 +5998,7 @@ public final class ShortcutHelperKeys {
         Pair pair59 = new Pair(143, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda3
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i61) {
                     case 0:
@@ -6099,7 +6098,7 @@ public final class ShortcutHelperKeys {
         Pair pair60 = new Pair(69, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda3
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i62) {
                     case 0:
@@ -6199,7 +6198,7 @@ public final class ShortcutHelperKeys {
         Pair pair61 = new Pair(68, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda3
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i63) {
                     case 0:
@@ -6299,7 +6298,7 @@ public final class ShortcutHelperKeys {
         Pair pair62 = new Pair(70, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda3
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i64) {
                     case 0:
@@ -6399,7 +6398,7 @@ public final class ShortcutHelperKeys {
         Pair pair63 = new Pair(144, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda3
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i65) {
                     case 0:
@@ -6499,7 +6498,7 @@ public final class ShortcutHelperKeys {
         Pair pair64 = new Pair(145, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda3
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i66) {
                     case 0:
@@ -6599,7 +6598,7 @@ public final class ShortcutHelperKeys {
         Pair pair65 = new Pair(146, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda3
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i67) {
                     case 0:
@@ -6699,7 +6698,7 @@ public final class ShortcutHelperKeys {
         Pair pair66 = new Pair(147, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda3
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i68) {
                     case 0:
@@ -6799,7 +6798,7 @@ public final class ShortcutHelperKeys {
         Pair pair67 = new Pair(148, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda6
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i69) {
                     case 0:
@@ -6896,7 +6895,7 @@ public final class ShortcutHelperKeys {
         Pair pair68 = new Pair(149, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda6
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i70) {
                     case 0:
@@ -6993,7 +6992,7 @@ public final class ShortcutHelperKeys {
         Pair pair69 = new Pair(150, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda6
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i71) {
                     case 0:
@@ -7090,7 +7089,7 @@ public final class ShortcutHelperKeys {
         Pair pair70 = new Pair(151, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda6
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i72) {
                     case 0:
@@ -7187,7 +7186,7 @@ public final class ShortcutHelperKeys {
         Pair pair71 = new Pair(152, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda6
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i73) {
                     case 0:
@@ -7284,7 +7283,7 @@ public final class ShortcutHelperKeys {
         Pair pair72 = new Pair(153, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda6
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i74) {
                     case 0:
@@ -7381,7 +7380,7 @@ public final class ShortcutHelperKeys {
         Pair pair73 = new Pair(154, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda6
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i75) {
                     case 0:
@@ -7478,7 +7477,7 @@ public final class ShortcutHelperKeys {
         Pair pair74 = new Pair(155, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda6
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i76) {
                     case 0:
@@ -7575,7 +7574,7 @@ public final class ShortcutHelperKeys {
         Pair pair75 = new Pair(156, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda6
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i77) {
                     case 0:
@@ -7672,7 +7671,7 @@ public final class ShortcutHelperKeys {
         Pair pair76 = new Pair(157, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda6
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i78) {
                     case 0:
@@ -7769,7 +7768,7 @@ public final class ShortcutHelperKeys {
         Pair pair77 = new Pair(158, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda6
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i79) {
                     case 0:
@@ -7866,7 +7865,7 @@ public final class ShortcutHelperKeys {
         Pair pair78 = new Pair(159, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda6
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i80) {
                     case 0:
@@ -7963,7 +7962,7 @@ public final class ShortcutHelperKeys {
         Pair pair79 = new Pair(160, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda6
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i81) {
                     case 0:
@@ -8060,7 +8059,7 @@ public final class ShortcutHelperKeys {
         Pair pair80 = new Pair(161, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda6
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i82) {
                     case 0:
@@ -8157,7 +8156,7 @@ public final class ShortcutHelperKeys {
         Pair pair81 = new Pair(162, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda6
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i83) {
                     case 0:
@@ -8254,7 +8253,7 @@ public final class ShortcutHelperKeys {
         Pair pair82 = new Pair(163, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda6
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i84) {
                     case 0:
@@ -8351,7 +8350,7 @@ public final class ShortcutHelperKeys {
         Pair pair83 = new Pair(Integer.valueOf(IKnoxCustomManager.Stub.TRANSACTION_getWifiHotspotEnabledState), new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda6
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i85) {
                     case 0:
@@ -8448,7 +8447,7 @@ public final class ShortcutHelperKeys {
         Pair pair84 = new Pair(Integer.valueOf(IKnoxCustomManager.Stub.TRANSACTION_getWifiState), new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda6
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i86) {
                     case 0:
@@ -8545,7 +8544,7 @@ public final class ShortcutHelperKeys {
         Pair pair85 = new Pair(Integer.valueOf(IKnoxCustomManager.Stub.TRANSACTION_addAutoCallNumber), new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda6
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i87) {
                     case 0:
@@ -8642,7 +8641,7 @@ public final class ShortcutHelperKeys {
         Pair pair86 = new Pair(Integer.valueOf(IKnoxCustomManager.Stub.TRANSACTION_removeAutoCallNumber), new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda6
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i88) {
                     case 0:
@@ -8739,7 +8738,7 @@ public final class ShortcutHelperKeys {
         Pair pair87 = new Pair(Integer.valueOf(IKnoxCustomManager.Stub.TRANSACTION_getAutoCallNumberDelay), new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda6
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i89) {
                     case 0:
@@ -8836,7 +8835,7 @@ public final class ShortcutHelperKeys {
         Pair pair88 = new Pair(57, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i90) {
                     case 0:
@@ -8936,7 +8935,7 @@ public final class ShortcutHelperKeys {
         Pair pair89 = new Pair(58, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i91) {
                     case 0:
@@ -9036,7 +9035,7 @@ public final class ShortcutHelperKeys {
         Pair pair90 = new Pair(113, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i92) {
                     case 0:
@@ -9136,7 +9135,7 @@ public final class ShortcutHelperKeys {
         Pair pair91 = new Pair(114, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i93) {
                     case 0:
@@ -9236,7 +9235,7 @@ public final class ShortcutHelperKeys {
         Pair pair92 = new Pair(59, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i94) {
                     case 0:
@@ -9336,7 +9335,7 @@ public final class ShortcutHelperKeys {
         specialKeyLabels = MapsKt__MapsKt.mapOf(pair5, pair6, pair7, pair8, pair9, pair10, pair11, pair12, pair13, pair14, pair15, pair16, pair17, pair18, pair19, pair20, pair21, pair22, pair23, pair24, pair25, pair26, pair27, pair28, pair29, pair30, pair31, pair32, pair33, pair34, pair35, pair36, pair37, pair38, pair39, pair40, pair41, pair42, pair43, pair44, pair45, pair46, pair47, pair48, pair49, pair50, pair51, pair52, pair53, pair54, pair55, pair56, pair57, pair58, pair59, pair60, pair61, pair62, pair63, pair64, pair65, pair66, pair67, pair68, pair69, pair70, pair71, pair72, pair73, pair74, pair75, pair76, pair77, pair78, pair79, pair80, pair81, pair82, pair83, pair84, pair85, pair86, pair87, pair88, pair89, pair90, pair91, pair92, new Pair(60, new Function1() { // from class: com.android.systemui.keyboard.shortcut.data.repository.ShortcutHelperKeys$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Context context = (Context) obj;
                 switch (i95) {
                     case 0:

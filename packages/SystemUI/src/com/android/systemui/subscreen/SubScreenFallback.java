@@ -15,12 +15,10 @@ import com.android.systemui.LsRune;
 import com.android.systemui.R;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SubScreenFallback extends Activity {
     public final SubScreenManager subScreenManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -71,8 +69,8 @@ public final class SubScreenFallback extends Activity {
     public final void onResume() {
         super.onResume();
         Log.i("SubScreenFallBack", " onResume");
-        View inflate = getLayoutInflater().inflate(R.layout.subscreen_fallback_finishing_boot, (ViewGroup) null);
-        setContentView(inflate);
+        View viewInflate = getLayoutInflater().inflate(R.layout.subscreen_fallback_finishing_boot, (ViewGroup) null);
+        setContentView(viewInflate);
         setShowWhenLocked(true);
         WindowInsetsController insetsController = getWindow().getInsetsController();
         if (insetsController != null) {
@@ -91,8 +89,8 @@ public final class SubScreenFallback extends Activity {
         if (decorView != null) {
             decorView.setSystemUiVisibility(1024);
         }
-        inflate.setAlpha(0.0f);
-        inflate.animate().alpha(1.0f).setDuration(500L).setInterpolator(AnimationUtils.loadInterpolator(this, android.R.interpolator.fast_out_slow_in)).start();
+        viewInflate.setAlpha(0.0f);
+        viewInflate.animate().alpha(1.0f).setDuration(500L).setInterpolator(AnimationUtils.loadInterpolator(this, android.R.interpolator.fast_out_slow_in)).start();
         getWindow().addFlags(128);
     }
 }

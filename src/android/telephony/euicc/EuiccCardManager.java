@@ -6,7 +6,6 @@ import android.os.Binder;
 import android.os.RemoteException;
 import android.service.euicc.EuiccProfileInfo;
 import android.telephony.TelephonyFrameworkInitializer;
-import android.telephony.euicc.EuiccCardManager;
 import android.util.Log;
 import com.android.internal.telephony.euicc.IAuthenticateServerCallback;
 import com.android.internal.telephony.euicc.ICancelSessionCallback;
@@ -86,18 +85,18 @@ public class EuiccCardManager {
 
         @Override // com.android.internal.telephony.euicc.IGetAllProfilesCallback
         public void onComplete(final int i, final EuiccProfileInfo[] euiccProfileInfoArr) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final ResultCallback resultCallback = this.val$callback;
                 executor.execute(new Runnable() { // from class: android.telephony.euicc.EuiccCardManager$1$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        EuiccCardManager.ResultCallback.this.onComplete(i, euiccProfileInfoArr);
+                        resultCallback.onComplete(i, euiccProfileInfoArr);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -123,18 +122,18 @@ public class EuiccCardManager {
 
         @Override // com.android.internal.telephony.euicc.IGetProfileCallback
         public void onComplete(final int i, final EuiccProfileInfo euiccProfileInfo) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final ResultCallback resultCallback = this.val$callback;
                 executor.execute(new Runnable() { // from class: android.telephony.euicc.EuiccCardManager$2$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        EuiccCardManager.ResultCallback.this.onComplete(i, euiccProfileInfo);
+                        resultCallback.onComplete(i, euiccProfileInfo);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -169,18 +168,18 @@ public class EuiccCardManager {
 
         @Override // com.android.internal.telephony.euicc.IGetProfileCallback
         public void onComplete(final int i, final EuiccProfileInfo euiccProfileInfo) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final ResultCallback resultCallback = this.val$callback;
                 executor.execute(new Runnable() { // from class: android.telephony.euicc.EuiccCardManager$3$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        EuiccCardManager.ResultCallback.this.onComplete(i, euiccProfileInfo);
+                        resultCallback.onComplete(i, euiccProfileInfo);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -197,18 +196,18 @@ public class EuiccCardManager {
 
         @Override // com.android.internal.telephony.euicc.IDisableProfileCallback
         public void onComplete(final int i) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final ResultCallback resultCallback = this.val$callback;
                 executor.execute(new Runnable() { // from class: android.telephony.euicc.EuiccCardManager$4$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        EuiccCardManager.ResultCallback.this.onComplete(i, null);
+                        resultCallback.onComplete(i, null);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -244,18 +243,18 @@ public class EuiccCardManager {
 
         @Override // com.android.internal.telephony.euicc.ISwitchToProfileCallback
         public void onComplete(final int i, final EuiccProfileInfo euiccProfileInfo) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final ResultCallback resultCallback = this.val$callback;
                 executor.execute(new Runnable() { // from class: android.telephony.euicc.EuiccCardManager$5$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        EuiccCardManager.ResultCallback.this.onComplete(i, euiccProfileInfo);
+                        resultCallback.onComplete(i, euiccProfileInfo);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -272,18 +271,18 @@ public class EuiccCardManager {
 
         @Override // com.android.internal.telephony.euicc.ISwitchToProfileCallback
         public void onComplete(final int i, final EuiccProfileInfo euiccProfileInfo) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final ResultCallback resultCallback = this.val$callback;
                 executor.execute(new Runnable() { // from class: android.telephony.euicc.EuiccCardManager$6$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        EuiccCardManager.ResultCallback.this.onComplete(i, euiccProfileInfo);
+                        resultCallback.onComplete(i, euiccProfileInfo);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -309,18 +308,18 @@ public class EuiccCardManager {
 
         @Override // com.android.internal.telephony.euicc.ISetNicknameCallback
         public void onComplete(final int i) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final ResultCallback resultCallback = this.val$callback;
                 executor.execute(new Runnable() { // from class: android.telephony.euicc.EuiccCardManager$7$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        EuiccCardManager.ResultCallback.this.onComplete(i, null);
+                        resultCallback.onComplete(i, null);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -346,18 +345,18 @@ public class EuiccCardManager {
 
         @Override // com.android.internal.telephony.euicc.IDeleteProfileCallback
         public void onComplete(final int i) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final ResultCallback resultCallback = this.val$callback;
                 executor.execute(new Runnable() { // from class: android.telephony.euicc.EuiccCardManager$8$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        EuiccCardManager.ResultCallback.this.onComplete(i, null);
+                        resultCallback.onComplete(i, null);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -383,18 +382,18 @@ public class EuiccCardManager {
 
         @Override // com.android.internal.telephony.euicc.IResetMemoryCallback
         public void onComplete(final int i) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final ResultCallback resultCallback = this.val$callback;
                 executor.execute(new Runnable() { // from class: android.telephony.euicc.EuiccCardManager$9$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        EuiccCardManager.ResultCallback.this.onComplete(i, null);
+                        resultCallback.onComplete(i, null);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -420,18 +419,18 @@ public class EuiccCardManager {
 
         @Override // com.android.internal.telephony.euicc.IGetDefaultSmdpAddressCallback
         public void onComplete(final int i, final String str) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final ResultCallback resultCallback = this.val$callback;
                 executor.execute(new Runnable() { // from class: android.telephony.euicc.EuiccCardManager$10$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        EuiccCardManager.ResultCallback.this.onComplete(i, str);
+                        resultCallback.onComplete(i, str);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -457,18 +456,18 @@ public class EuiccCardManager {
 
         @Override // com.android.internal.telephony.euicc.IGetSmdsAddressCallback
         public void onComplete(final int i, final String str) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final ResultCallback resultCallback = this.val$callback;
                 executor.execute(new Runnable() { // from class: android.telephony.euicc.EuiccCardManager$11$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        EuiccCardManager.ResultCallback.this.onComplete(i, str);
+                        resultCallback.onComplete(i, str);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -503,18 +502,18 @@ public class EuiccCardManager {
 
         @Override // com.android.internal.telephony.euicc.ISetDefaultSmdpAddressCallback
         public void onComplete(final int i) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final ResultCallback resultCallback = this.val$callback;
                 executor.execute(new Runnable() { // from class: android.telephony.euicc.EuiccCardManager$12$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        EuiccCardManager.ResultCallback.this.onComplete(i, null);
+                        resultCallback.onComplete(i, null);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -531,18 +530,18 @@ public class EuiccCardManager {
 
         @Override // com.android.internal.telephony.euicc.IGetRulesAuthTableCallback
         public void onComplete(final int i, final EuiccRulesAuthTable euiccRulesAuthTable) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final ResultCallback resultCallback = this.val$callback;
                 executor.execute(new Runnable() { // from class: android.telephony.euicc.EuiccCardManager$13$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        EuiccCardManager.ResultCallback.this.onComplete(i, euiccRulesAuthTable);
+                        resultCallback.onComplete(i, euiccRulesAuthTable);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -568,18 +567,18 @@ public class EuiccCardManager {
 
         @Override // com.android.internal.telephony.euicc.IGetEuiccChallengeCallback
         public void onComplete(final int i, final byte[] bArr) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final ResultCallback resultCallback = this.val$callback;
                 executor.execute(new Runnable() { // from class: android.telephony.euicc.EuiccCardManager$14$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        EuiccCardManager.ResultCallback.this.onComplete(i, bArr);
+                        resultCallback.onComplete(i, bArr);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -605,18 +604,18 @@ public class EuiccCardManager {
 
         @Override // com.android.internal.telephony.euicc.IGetEuiccInfo1Callback
         public void onComplete(final int i, final byte[] bArr) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final ResultCallback resultCallback = this.val$callback;
                 executor.execute(new Runnable() { // from class: android.telephony.euicc.EuiccCardManager$15$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        EuiccCardManager.ResultCallback.this.onComplete(i, bArr);
+                        resultCallback.onComplete(i, bArr);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -642,18 +641,18 @@ public class EuiccCardManager {
 
         @Override // com.android.internal.telephony.euicc.IGetEuiccInfo2Callback
         public void onComplete(final int i, final byte[] bArr) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final ResultCallback resultCallback = this.val$callback;
                 executor.execute(new Runnable() { // from class: android.telephony.euicc.EuiccCardManager$16$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        EuiccCardManager.ResultCallback.this.onComplete(i, bArr);
+                        resultCallback.onComplete(i, bArr);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -688,18 +687,18 @@ public class EuiccCardManager {
 
         @Override // com.android.internal.telephony.euicc.IAuthenticateServerCallback
         public void onComplete(final int i, final byte[] bArr) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final ResultCallback resultCallback = this.val$callback;
                 executor.execute(new Runnable() { // from class: android.telephony.euicc.EuiccCardManager$17$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        EuiccCardManager.ResultCallback.this.onComplete(i, bArr);
+                        resultCallback.onComplete(i, bArr);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -725,18 +724,18 @@ public class EuiccCardManager {
 
         @Override // com.android.internal.telephony.euicc.IPrepareDownloadCallback
         public void onComplete(final int i, final byte[] bArr) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final ResultCallback resultCallback = this.val$callback;
                 executor.execute(new Runnable() { // from class: android.telephony.euicc.EuiccCardManager$18$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        EuiccCardManager.ResultCallback.this.onComplete(i, bArr);
+                        resultCallback.onComplete(i, bArr);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -762,18 +761,18 @@ public class EuiccCardManager {
 
         @Override // com.android.internal.telephony.euicc.ILoadBoundProfilePackageCallback
         public void onComplete(final int i, final byte[] bArr) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final ResultCallback resultCallback = this.val$callback;
                 executor.execute(new Runnable() { // from class: android.telephony.euicc.EuiccCardManager$19$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        EuiccCardManager.ResultCallback.this.onComplete(i, bArr);
+                        resultCallback.onComplete(i, bArr);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -799,18 +798,18 @@ public class EuiccCardManager {
 
         @Override // com.android.internal.telephony.euicc.ICancelSessionCallback
         public void onComplete(final int i, final byte[] bArr) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final ResultCallback resultCallback = this.val$callback;
                 executor.execute(new Runnable() { // from class: android.telephony.euicc.EuiccCardManager$20$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        EuiccCardManager.ResultCallback.this.onComplete(i, bArr);
+                        resultCallback.onComplete(i, bArr);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -827,18 +826,18 @@ public class EuiccCardManager {
 
         @Override // com.android.internal.telephony.euicc.IListNotificationsCallback
         public void onComplete(final int i, final EuiccNotification[] euiccNotificationArr) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final ResultCallback resultCallback = this.val$callback;
                 executor.execute(new Runnable() { // from class: android.telephony.euicc.EuiccCardManager$21$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        EuiccCardManager.ResultCallback.this.onComplete(i, euiccNotificationArr);
+                        resultCallback.onComplete(i, euiccNotificationArr);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -864,18 +863,18 @@ public class EuiccCardManager {
 
         @Override // com.android.internal.telephony.euicc.IRetrieveNotificationListCallback
         public void onComplete(final int i, final EuiccNotification[] euiccNotificationArr) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final ResultCallback resultCallback = this.val$callback;
                 executor.execute(new Runnable() { // from class: android.telephony.euicc.EuiccCardManager$22$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        EuiccCardManager.ResultCallback.this.onComplete(i, euiccNotificationArr);
+                        resultCallback.onComplete(i, euiccNotificationArr);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -901,18 +900,18 @@ public class EuiccCardManager {
 
         @Override // com.android.internal.telephony.euicc.IRetrieveNotificationCallback
         public void onComplete(final int i, final EuiccNotification euiccNotification) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final ResultCallback resultCallback = this.val$callback;
                 executor.execute(new Runnable() { // from class: android.telephony.euicc.EuiccCardManager$23$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        EuiccCardManager.ResultCallback.this.onComplete(i, euiccNotification);
+                        resultCallback.onComplete(i, euiccNotification);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -947,18 +946,18 @@ public class EuiccCardManager {
 
         @Override // com.android.internal.telephony.euicc.IRemoveNotificationFromListCallback
         public void onComplete(final int i) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final ResultCallback resultCallback = this.val$callback;
                 executor.execute(new Runnable() { // from class: android.telephony.euicc.EuiccCardManager$24$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        EuiccCardManager.ResultCallback.this.onComplete(i, null);
+                        resultCallback.onComplete(i, null);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }

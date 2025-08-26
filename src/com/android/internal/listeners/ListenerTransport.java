@@ -18,7 +18,7 @@ public interface ListenerTransport<TListener> {
         executor.execute(new Runnable() { // from class: com.android.internal.listeners.ListenerTransport$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                ListenerTransport.this.lambda$execute$0(consumer);
+                this.f$0.lambda$execute$0(consumer);
             }
         });
     }

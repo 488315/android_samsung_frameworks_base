@@ -95,12 +95,12 @@ public class ResolverListController {
             if (intent.getClass() != Intent.class) {
                 intent = new Intent(intent);
             }
-            List<ResolveInfo> queryIntentActivitiesAsUser = this.mpm.queryIntentActivitiesAsUser(intent, i3, userHandle);
-            if (queryIntentActivitiesAsUser != null) {
+            List<ResolveInfo> listQueryIntentActivitiesAsUser = this.mpm.queryIntentActivitiesAsUser(intent, i3, userHandle);
+            if (listQueryIntentActivitiesAsUser != null) {
                 if (arrayList == null) {
                     arrayList = new ArrayList();
                 }
-                addResolveListDedupe(arrayList, intent, queryIntentActivitiesAsUser);
+                addResolveListDedupe(arrayList, intent, listQueryIntentActivitiesAsUser);
             }
         }
         return arrayList;
@@ -228,9 +228,7 @@ public class ResolverListController {
             PriorityQueue priorityQueue = new PriorityQueue(i, new Comparator() { // from class: com.android.internal.app.ResolverListController$$ExternalSyntheticLambda0
                 @Override // java.util.Comparator
                 public final int compare(Object obj, Object obj2) {
-                    int lambda$topK$0;
-                    lambda$topK$0 = ResolverListController.this.lambda$topK$0((ResolverActivity.ResolvedComponentInfo) obj, (ResolverActivity.ResolvedComponentInfo) obj2);
-                    return lambda$topK$0;
+                    return this.f$0.lambda$topK$0((ResolverActivity.ResolvedComponentInfo) obj, (ResolverActivity.ResolvedComponentInfo) obj2);
                 }
             });
             int size = list.size();

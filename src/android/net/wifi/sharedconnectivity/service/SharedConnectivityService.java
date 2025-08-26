@@ -11,7 +11,6 @@ import android.net.wifi.sharedconnectivity.app.KnownNetwork;
 import android.net.wifi.sharedconnectivity.app.KnownNetworkConnectionStatus;
 import android.net.wifi.sharedconnectivity.app.SharedConnectivitySettingsState;
 import android.net.wifi.sharedconnectivity.service.ISharedConnectivityService;
-import android.net.wifi.sharedconnectivity.service.SharedConnectivityService;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -69,7 +68,7 @@ public abstract class SharedConnectivityService extends Service {
             SharedConnectivityService.this.mHandler.post(new Runnable() { // from class: android.net.wifi.sharedconnectivity.service.SharedConnectivityService$1$$ExternalSyntheticLambda4
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SharedConnectivityService.AnonymousClass1.this.lambda$registerCallback$0(iSharedConnectivityCallback);
+                    this.f$0.lambda$registerCallback$0(iSharedConnectivityCallback);
                 }
             });
         }
@@ -85,7 +84,7 @@ public abstract class SharedConnectivityService extends Service {
             SharedConnectivityService.this.mHandler.post(new Runnable() { // from class: android.net.wifi.sharedconnectivity.service.SharedConnectivityService$1$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SharedConnectivityService.AnonymousClass1.this.lambda$unregisterCallback$1(iSharedConnectivityCallback);
+                    this.f$0.lambda$unregisterCallback$1(iSharedConnectivityCallback);
                 }
             });
         }
@@ -101,7 +100,7 @@ public abstract class SharedConnectivityService extends Service {
             SharedConnectivityService.this.mHandler.post(new Runnable() { // from class: android.net.wifi.sharedconnectivity.service.SharedConnectivityService$1$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SharedConnectivityService.AnonymousClass1.this.lambda$connectHotspotNetwork$2(hotspotNetwork);
+                    this.f$0.lambda$connectHotspotNetwork$2(hotspotNetwork);
                 }
             });
         }
@@ -117,7 +116,7 @@ public abstract class SharedConnectivityService extends Service {
             SharedConnectivityService.this.mHandler.post(new Runnable() { // from class: android.net.wifi.sharedconnectivity.service.SharedConnectivityService$1$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SharedConnectivityService.AnonymousClass1.this.lambda$disconnectHotspotNetwork$3(hotspotNetwork);
+                    this.f$0.lambda$disconnectHotspotNetwork$3(hotspotNetwork);
                 }
             });
         }
@@ -133,7 +132,7 @@ public abstract class SharedConnectivityService extends Service {
             SharedConnectivityService.this.mHandler.post(new Runnable() { // from class: android.net.wifi.sharedconnectivity.service.SharedConnectivityService$1$$ExternalSyntheticLambda5
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SharedConnectivityService.AnonymousClass1.this.lambda$connectKnownNetwork$4(knownNetwork);
+                    this.f$0.lambda$connectKnownNetwork$4(knownNetwork);
                 }
             });
         }
@@ -149,7 +148,7 @@ public abstract class SharedConnectivityService extends Service {
             SharedConnectivityService.this.mHandler.post(new Runnable() { // from class: android.net.wifi.sharedconnectivity.service.SharedConnectivityService$1$$ExternalSyntheticLambda3
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SharedConnectivityService.AnonymousClass1.this.lambda$forgetKnownNetwork$5(knownNetwork);
+                    this.f$0.lambda$forgetKnownNetwork$5(knownNetwork);
                 }
             });
         }
@@ -228,10 +227,10 @@ public abstract class SharedConnectivityService extends Service {
 
     public final void setHotspotNetworks(List<HotspotNetwork> list) {
         this.mHotspotNetworks = list;
-        int beginBroadcast = this.mRemoteCallbackList.beginBroadcast();
-        for (int i = 0; i < beginBroadcast; i++) {
+        int iBeginBroadcast = this.mRemoteCallbackList.beginBroadcast();
+        for (int i = 0; i < iBeginBroadcast; i++) {
             try {
-                this.mRemoteCallbackList.getBroadcastItem(i).onHotspotNetworksUpdated(this.mHotspotNetworks);
+                ((ISharedConnectivityCallback) this.mRemoteCallbackList.getBroadcastItem(i)).onHotspotNetworksUpdated(this.mHotspotNetworks);
             } catch (RemoteException e) {
                 Log.w(TAG, "Exception in setHotspotNetworks", e);
             }
@@ -241,10 +240,10 @@ public abstract class SharedConnectivityService extends Service {
 
     public final void setKnownNetworks(List<KnownNetwork> list) {
         this.mKnownNetworks = list;
-        int beginBroadcast = this.mRemoteCallbackList.beginBroadcast();
-        for (int i = 0; i < beginBroadcast; i++) {
+        int iBeginBroadcast = this.mRemoteCallbackList.beginBroadcast();
+        for (int i = 0; i < iBeginBroadcast; i++) {
             try {
-                this.mRemoteCallbackList.getBroadcastItem(i).onKnownNetworksUpdated(this.mKnownNetworks);
+                ((ISharedConnectivityCallback) this.mRemoteCallbackList.getBroadcastItem(i)).onKnownNetworksUpdated(this.mKnownNetworks);
             } catch (RemoteException e) {
                 Log.w(TAG, "Exception in setKnownNetworks", e);
             }
@@ -254,10 +253,10 @@ public abstract class SharedConnectivityService extends Service {
 
     public final void setSettingsState(SharedConnectivitySettingsState sharedConnectivitySettingsState) {
         this.mSettingsState = sharedConnectivitySettingsState;
-        int beginBroadcast = this.mRemoteCallbackList.beginBroadcast();
-        for (int i = 0; i < beginBroadcast; i++) {
+        int iBeginBroadcast = this.mRemoteCallbackList.beginBroadcast();
+        for (int i = 0; i < iBeginBroadcast; i++) {
             try {
-                this.mRemoteCallbackList.getBroadcastItem(i).onSharedConnectivitySettingsChanged(this.mSettingsState);
+                ((ISharedConnectivityCallback) this.mRemoteCallbackList.getBroadcastItem(i)).onSharedConnectivitySettingsChanged(this.mSettingsState);
             } catch (RemoteException e) {
                 Log.w(TAG, "Exception in setSettingsState", e);
             }
@@ -267,10 +266,10 @@ public abstract class SharedConnectivityService extends Service {
 
     public final void updateHotspotNetworkConnectionStatus(HotspotNetworkConnectionStatus hotspotNetworkConnectionStatus) {
         this.mHotspotNetworkConnectionStatus = hotspotNetworkConnectionStatus;
-        int beginBroadcast = this.mRemoteCallbackList.beginBroadcast();
-        for (int i = 0; i < beginBroadcast; i++) {
+        int iBeginBroadcast = this.mRemoteCallbackList.beginBroadcast();
+        for (int i = 0; i < iBeginBroadcast; i++) {
             try {
-                this.mRemoteCallbackList.getBroadcastItem(i).onHotspotNetworkConnectionStatusChanged(this.mHotspotNetworkConnectionStatus);
+                ((ISharedConnectivityCallback) this.mRemoteCallbackList.getBroadcastItem(i)).onHotspotNetworkConnectionStatusChanged(this.mHotspotNetworkConnectionStatus);
             } catch (RemoteException e) {
                 Log.w(TAG, "Exception in updateHotspotNetworkConnectionStatus", e);
             }
@@ -280,10 +279,10 @@ public abstract class SharedConnectivityService extends Service {
 
     public final void updateKnownNetworkConnectionStatus(KnownNetworkConnectionStatus knownNetworkConnectionStatus) {
         this.mKnownNetworkConnectionStatus = knownNetworkConnectionStatus;
-        int beginBroadcast = this.mRemoteCallbackList.beginBroadcast();
-        for (int i = 0; i < beginBroadcast; i++) {
+        int iBeginBroadcast = this.mRemoteCallbackList.beginBroadcast();
+        for (int i = 0; i < iBeginBroadcast; i++) {
             try {
-                this.mRemoteCallbackList.getBroadcastItem(i).onKnownNetworkConnectionStatusChanged(this.mKnownNetworkConnectionStatus);
+                ((ISharedConnectivityCallback) this.mRemoteCallbackList.getBroadcastItem(i)).onKnownNetworkConnectionStatusChanged(this.mKnownNetworkConnectionStatus);
             } catch (RemoteException e) {
                 Log.w(TAG, "Exception in updateKnownNetworkConnectionStatus", e);
             }

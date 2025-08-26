@@ -2,18 +2,22 @@ package com.android.systemui.media.mediaoutput.compose;
 
 import androidx.compose.ui.platform.AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0;
 import androidx.navigation.NamedNavArgument;
+import androidx.navigation.NavArgument;
+import androidx.navigation.NavArgumentBuilder;
+import androidx.navigation.NavType;
+import androidx.navigation.NavType$Companion$StringType$1;
+import java.util.Collections;
 import java.util.List;
+import kotlin.Unit;
 import kotlin.collections.EmptyList;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class Screen {
     public static final Companion Companion = new Companion(null);
     public final List navArgument;
     public final String route;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class CastSetting extends Screen {
         public static final CastSetting INSTANCE = new CastSetting();
 
@@ -34,7 +38,6 @@ public abstract class Screen {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -44,7 +47,6 @@ public abstract class Screen {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class LabsHome extends Screen {
         public static final LabsHome INSTANCE = new LabsHome();
 
@@ -65,44 +67,19 @@ public abstract class Screen {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Phone extends Screen {
         public static final Phone INSTANCE = new Phone();
 
-        /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
         private Phone() {
-            /*
-                r8 = this;
-                androidx.navigation.NamedNavArgument r0 = new androidx.navigation.NamedNavArgument
-                androidx.navigation.NavArgumentBuilder r1 = new androidx.navigation.NavArgumentBuilder
-                r1.<init>()
-                androidx.navigation.NavType$Companion$StringType$1 r3 = androidx.navigation.NavType.StringType
-                androidx.navigation.NavArgument$Builder r1 = r1.builder
-                r1.type = r3
-                kotlin.Unit r2 = kotlin.Unit.INSTANCE
-                if (r3 != 0) goto L16
-                androidx.navigation.NavType$Companion r2 = androidx.navigation.NavType.Companion
-                r2.getClass()
-            L16:
-                androidx.navigation.NavArgument r2 = new androidx.navigation.NavArgument
-                boolean r4 = r1.isNullable
-                boolean r7 = r1.unknownDefaultValuePresent
-                r5 = 0
-                r6 = 0
-                r2.<init>(r3, r4, r5, r6, r7)
-                java.lang.String r1 = "packageName"
-                r0.<init>(r1, r2)
-                java.util.List r0 = java.util.Collections.singletonList(r0)
-                r1 = 0
-                java.lang.String r2 = "Phone/{packageName}"
-                r8.<init>(r2, r0, r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.media.mediaoutput.compose.Screen.Phone.<init>():void");
+            NavArgumentBuilder navArgumentBuilder = new NavArgumentBuilder();
+            NavType$Companion$StringType$1 navType$Companion$StringType$1 = NavType.StringType;
+            NavArgument.Builder builder = navArgumentBuilder.builder;
+            builder.type = navType$Companion$StringType$1;
+            Unit unit = Unit.INSTANCE;
+            if (navType$Companion$StringType$1 == null) {
+                NavType.Companion.getClass();
+            }
+            super("Phone/{packageName}", Collections.singletonList(new NamedNavArgument("packageName", new NavArgument(navType$Companion$StringType$1, builder.isNullable, null, false, builder.unknownDefaultValuePresent))), null);
         }
 
         @Override // com.android.systemui.media.mediaoutput.compose.Screen
@@ -123,7 +100,6 @@ public abstract class Screen {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Selector extends Screen {
         public static final Selector INSTANCE = new Selector();
 
@@ -144,7 +120,6 @@ public abstract class Screen {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SettingHome extends Screen {
         public static final SettingHome INSTANCE = new SettingHome();
 
@@ -165,7 +140,6 @@ public abstract class Screen {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SpotifyCastSetting extends Screen {
         public static final SpotifyCastSetting INSTANCE = new SpotifyCastSetting();
 
@@ -186,44 +160,19 @@ public abstract class Screen {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TV extends Screen {
         public static final TV INSTANCE = new TV();
 
-        /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
         private TV() {
-            /*
-                r8 = this;
-                androidx.navigation.NamedNavArgument r0 = new androidx.navigation.NamedNavArgument
-                androidx.navigation.NavArgumentBuilder r1 = new androidx.navigation.NavArgumentBuilder
-                r1.<init>()
-                androidx.navigation.NavType$Companion$StringType$1 r3 = androidx.navigation.NavType.StringType
-                androidx.navigation.NavArgument$Builder r1 = r1.builder
-                r1.type = r3
-                kotlin.Unit r2 = kotlin.Unit.INSTANCE
-                if (r3 != 0) goto L16
-                androidx.navigation.NavType$Companion r2 = androidx.navigation.NavType.Companion
-                r2.getClass()
-            L16:
-                androidx.navigation.NavArgument r2 = new androidx.navigation.NavArgument
-                boolean r4 = r1.isNullable
-                boolean r7 = r1.unknownDefaultValuePresent
-                r5 = 0
-                r6 = 0
-                r2.<init>(r3, r4, r5, r6, r7)
-                java.lang.String r1 = "deviceId"
-                r0.<init>(r1, r2)
-                java.util.List r0 = java.util.Collections.singletonList(r0)
-                r1 = 0
-                java.lang.String r2 = "TV/{deviceId}"
-                r8.<init>(r2, r0, r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.media.mediaoutput.compose.Screen.TV.<init>():void");
+            NavArgumentBuilder navArgumentBuilder = new NavArgumentBuilder();
+            NavType$Companion$StringType$1 navType$Companion$StringType$1 = NavType.StringType;
+            NavArgument.Builder builder = navArgumentBuilder.builder;
+            builder.type = navType$Companion$StringType$1;
+            Unit unit = Unit.INSTANCE;
+            if (navType$Companion$StringType$1 == null) {
+                NavType.Companion.getClass();
+            }
+            super("TV/{deviceId}", Collections.singletonList(new NamedNavArgument("deviceId", new NavArgument(navType$Companion$StringType$1, builder.isNullable, null, false, builder.unknownDefaultValuePresent))), null);
         }
 
         @Override // com.android.systemui.media.mediaoutput.compose.Screen

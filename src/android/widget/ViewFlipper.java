@@ -84,10 +84,10 @@ public class ViewFlipper extends ViewAnimator {
                 }
             }
         };
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.ViewFlipper);
-        this.mFlipInterval = obtainStyledAttributes.getInt(0, 3000);
-        this.mAutoStart = obtainStyledAttributes.getBoolean(1, false);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.ViewFlipper);
+        this.mFlipInterval = typedArrayObtainStyledAttributes.getInt(0, 3000);
+        this.mAutoStart = typedArrayObtainStyledAttributes.getBoolean(1, false);
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     @Override // android.view.ViewGroup, android.view.View

@@ -104,9 +104,9 @@ public interface ICameraDeviceCallbacks extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ICameraDeviceCallbacks)) {
-                return (ICameraDeviceCallbacks) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ICameraDeviceCallbacks)) {
+                return (ICameraDeviceCallbacks) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -150,19 +150,19 @@ public interface ICameraDeviceCallbacks extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     CaptureResultExtras captureResultExtras = (CaptureResultExtras) parcel.readTypedObject(CaptureResultExtras.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onDeviceError(readInt, captureResultExtras);
+                    onDeviceError(i3, captureResultExtras);
                     return true;
                 case 2:
                     onDeviceIdle();
                     return true;
                 case 3:
                     CaptureResultExtras captureResultExtras2 = (CaptureResultExtras) parcel.readTypedObject(CaptureResultExtras.CREATOR);
-                    long readLong = parcel.readLong();
+                    long j = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    onCaptureStarted(captureResultExtras2, readLong);
+                    onCaptureStarted(captureResultExtras2, j);
                     return true;
                 case 4:
                     CameraMetadataInfo cameraMetadataInfo = (CameraMetadataInfo) parcel.readTypedObject(CameraMetadataInfo.CREATOR);
@@ -172,23 +172,23 @@ public interface ICameraDeviceCallbacks extends IInterface {
                     onResultReceived(cameraMetadataInfo, captureResultExtras3, physicalCaptureResultInfoArr);
                     return true;
                 case 5:
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onPrepared(readInt2);
+                    onPrepared(i4);
                     return true;
                 case 6:
-                    long readLong2 = parcel.readLong();
-                    int readInt3 = parcel.readInt();
+                    long j2 = parcel.readLong();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onRepeatingRequestError(readLong2, readInt3);
+                    onRepeatingRequestError(j2, i5);
                     return true;
                 case 7:
                     onRequestQueueEmpty();
                     return true;
                 case 8:
-                    boolean readBoolean = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    onClientSharedAccessPriorityChanged(readBoolean);
+                    onClientSharedAccessPriorityChanged(z);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -213,100 +213,100 @@ public interface ICameraDeviceCallbacks extends IInterface {
 
             @Override // android.hardware.camera2.ICameraDeviceCallbacks
             public void onDeviceError(int i, CaptureResultExtras captureResultExtras) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(captureResultExtras, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(captureResultExtras, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.camera2.ICameraDeviceCallbacks
             public void onDeviceIdle() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.camera2.ICameraDeviceCallbacks
             public void onCaptureStarted(CaptureResultExtras captureResultExtras, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(captureResultExtras, 0);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(captureResultExtras, 0);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.camera2.ICameraDeviceCallbacks
             public void onResultReceived(CameraMetadataInfo cameraMetadataInfo, CaptureResultExtras captureResultExtras, PhysicalCaptureResultInfo[] physicalCaptureResultInfoArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(cameraMetadataInfo, 0);
-                    obtain.writeTypedObject(captureResultExtras, 0);
-                    obtain.writeTypedArray(physicalCaptureResultInfoArr, 0);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(cameraMetadataInfo, 0);
+                    parcelObtain.writeTypedObject(captureResultExtras, 0);
+                    parcelObtain.writeTypedArray(physicalCaptureResultInfoArr, 0);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.camera2.ICameraDeviceCallbacks
             public void onPrepared(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.camera2.ICameraDeviceCallbacks
             public void onRepeatingRequestError(long j, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.camera2.ICameraDeviceCallbacks
             public void onRequestQueueEmpty() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.camera2.ICameraDeviceCallbacks
             public void onClientSharedAccessPriorityChanged(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

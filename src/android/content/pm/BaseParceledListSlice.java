@@ -1,10 +1,12 @@
 package android.content.pm;
 
 import android.os.BadParcelableException;
+import android.os.Binder;
 import android.os.IBinder;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.RemoteException;
+import android.util.Log;
 import com.samsung.android.rune.PMRune;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,54 +39,54 @@ abstract class BaseParceledListSlice<T> implements Parcelable {
     }
 
     BaseParceledListSlice(Parcel parcel, ClassLoader classLoader) {
-        int readInt = parcel.readInt();
-        this.mList = new ArrayList(readInt);
-        if (readInt <= 0) {
+        int i = parcel.readInt();
+        this.mList = new ArrayList(i);
+        if (i <= 0) {
             return;
         }
-        Parcelable.Creator<?> readParcelableCreator = readParcelableCreator(parcel, classLoader);
-        Class<?> cls = null;
-        int i = 0;
-        while (i < readInt && parcel.readInt() != 0) {
-            cls = readVerifyAndAddElement(readParcelableCreator, parcel, classLoader, cls);
-            i++;
+        Parcelable.Creator<?> parcelableCreator = readParcelableCreator(parcel, classLoader);
+        Class<?> verifyAndAddElement = null;
+        int i2 = 0;
+        while (i2 < i && parcel.readInt() != 0) {
+            verifyAndAddElement = readVerifyAndAddElement(parcelableCreator, parcel, classLoader, verifyAndAddElement);
+            i2++;
         }
-        if (i >= readInt) {
+        if (i2 >= i) {
             return;
         }
-        IBinder readStrongBinder = parcel.readStrongBinder();
-        while (i < readInt) {
-            Parcel obtain = Parcel.obtain();
-            Parcel obtain2 = Parcel.obtain();
-            obtain.writeInt(i);
+        IBinder strongBinder = parcel.readStrongBinder();
+        while (i2 < i) {
+            Parcel parcelObtain = Parcel.obtain();
+            Parcel parcelObtain2 = Parcel.obtain();
+            parcelObtain.writeInt(i2);
             try {
                 try {
-                    readStrongBinder.transact(1, obtain, obtain2, 0);
+                    strongBinder.transact(1, parcelObtain, parcelObtain2, 0);
                     if (!PMRune.PM_WA_PARCELED_LIST) {
-                        obtain2.readException();
+                        parcelObtain2.readException();
                     }
-                    while (i < readInt && obtain2.readInt() != 0) {
-                        cls = readVerifyAndAddElement(readParcelableCreator, obtain2, classLoader, cls);
-                        i++;
+                    while (i2 < i && parcelObtain2.readInt() != 0) {
+                        verifyAndAddElement = readVerifyAndAddElement(parcelableCreator, parcelObtain2, classLoader, verifyAndAddElement);
+                        i2++;
                     }
                 } catch (RemoteException e) {
-                    throw new BadParcelableException("Failure retrieving array; only received " + i + " of " + readInt, e);
+                    throw new BadParcelableException("Failure retrieving array; only received " + i2 + " of " + i, e);
                 }
             } finally {
-                obtain2.recycle();
-                obtain.recycle();
+                parcelObtain2.recycle();
+                parcelObtain.recycle();
             }
         }
     }
 
     private Class<?> readVerifyAndAddElement(Parcelable.Creator<?> creator, Parcel parcel, ClassLoader classLoader, Class<?> cls) {
-        T readCreator = readCreator(creator, parcel, classLoader);
+        T creator2 = readCreator(creator, parcel, classLoader);
         if (cls == null) {
-            cls = readCreator.getClass();
+            cls = creator2.getClass();
         } else {
-            verifySameType(cls, readCreator.getClass());
+            verifySameType(cls, creator2.getClass());
         }
-        this.mList.add(readCreator);
+        this.mList.add(creator2);
         return cls;
     }
 
@@ -115,68 +117,76 @@ abstract class BaseParceledListSlice<T> implements Parcelable {
         this.mInlineCountLimit = i;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:14:0x004d, code lost:
-    
-        r8.writeInt(0);
-        r8.writeStrongBinder(new android.content.pm.BaseParceledListSlice.AnonymousClass1(r7));
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:15:0x0058, code lost:
-    
-        return;
-     */
     @Override // android.os.Parcelable
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public void writeToParcel(android.os.Parcel r8, final int r9) {
-        /*
-            r7 = this;
-            boolean r0 = r7.mHasBeenParceled
-            if (r0 != 0) goto L59
-            r0 = 1
-            r7.mHasBeenParceled = r0
-            java.util.List<T> r1 = r7.mList
-            int r1 = r1.size()
-            r8.writeInt(r1)
-            if (r1 <= 0) goto L58
-            java.util.List<T> r2 = r7.mList
-            r3 = 0
-            java.lang.Object r2 = r2.get(r3)
-            java.lang.Class r2 = r2.getClass()
-            java.util.List<T> r4 = r7.mList
-            java.lang.Object r4 = r4.get(r3)
-            r7.writeParcelableCreator(r4, r8)
-            r4 = r3
-        L27:
-            if (r4 >= r1) goto L4b
-            int r5 = r7.mInlineCountLimit
-            if (r4 >= r5) goto L4b
-            int r5 = r8.dataSize()
-            int r6 = android.content.pm.BaseParceledListSlice.MAX_IPC_SIZE
-            if (r5 >= r6) goto L4b
-            r8.writeInt(r0)
-            java.util.List<T> r5 = r7.mList
-            java.lang.Object r5 = r5.get(r4)
-            java.lang.Class r6 = r5.getClass()
-            verifySameType(r2, r6)
-            r7.writeElement(r5, r8, r9)
-            int r4 = r4 + 1
-            goto L27
-        L4b:
-            if (r4 >= r1) goto L58
-            r8.writeInt(r3)
-            android.content.pm.BaseParceledListSlice$1 r0 = new android.content.pm.BaseParceledListSlice$1
-            r0.<init>()
-            r8.writeStrongBinder(r0)
-        L58:
-            return
-        L59:
-            java.lang.IllegalStateException r7 = new java.lang.IllegalStateException
-            java.lang.String r8 = "Can't Parcel a ParceledListSlice more than once"
-            r7.<init>(r8)
-            throw r7
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.content.pm.BaseParceledListSlice.writeToParcel(android.os.Parcel, int):void");
+    public void writeToParcel(Parcel parcel, final int i) {
+        if (this.mHasBeenParceled) {
+            throw new IllegalStateException("Can't Parcel a ParceledListSlice more than once");
+        }
+        this.mHasBeenParceled = true;
+        final int size = this.mList.size();
+        parcel.writeInt(size);
+        if (size > 0) {
+            final Class<?> cls = this.mList.get(0).getClass();
+            writeParcelableCreator(this.mList.get(0), parcel);
+            int i2 = 0;
+            while (i2 < size && i2 < this.mInlineCountLimit && parcel.dataSize() < MAX_IPC_SIZE) {
+                parcel.writeInt(1);
+                T t = this.mList.get(i2);
+                verifySameType(cls, t.getClass());
+                writeElement(t, parcel, i);
+                i2++;
+            }
+            if (i2 < size) {
+                parcel.writeInt(0);
+                parcel.writeStrongBinder(new Binder() { // from class: android.content.pm.BaseParceledListSlice.1
+                    /* JADX WARN: Multi-variable type inference failed */
+                    @Override // android.os.Binder
+                    protected boolean onTransact(int i3, Parcel parcel2, Parcel parcel3, int i4) throws RemoteException {
+                        if (i3 != 1) {
+                            return super.onTransact(i3, parcel2, parcel3, i4);
+                        }
+                        if (BaseParceledListSlice.this.mList == null) {
+                            throw new IllegalArgumentException("Attempt to transfer null list, did transfer finish?");
+                        }
+                        int i5 = parcel2.readInt();
+                        try {
+                            if (PMRune.PM_WA_PARCELED_LIST) {
+                                if (BaseParceledListSlice.this.mStartIndexForWrite == i5) {
+                                    throw new RuntimeException("Requested twice for the same index");
+                                }
+                                BaseParceledListSlice.this.mStartIndexForWrite = i5;
+                            }
+                            if (!PMRune.PM_WA_PARCELED_LIST) {
+                                parcel3.writeNoException();
+                            }
+                            while (i5 < size && parcel3.dataSize() < 65536) {
+                                parcel3.writeInt(1);
+                                int iDataSize = parcel3.dataSize();
+                                Object obj = BaseParceledListSlice.this.mList.get(i5);
+                                BaseParceledListSlice.verifySameType(cls, obj.getClass());
+                                BaseParceledListSlice.this.writeElement(obj, parcel3, i);
+                                int iDataSize2 = parcel3.dataSize() - iDataSize;
+                                if (iDataSize2 >= BaseParceledListSlice.WARN_ELM_SIZE) {
+                                    Log.w(BaseParceledListSlice.TAG, "Element #" + i5 + " is " + iDataSize2 + " bytes.");
+                                }
+                                i5++;
+                            }
+                            if (i5 < size) {
+                                parcel3.writeInt(0);
+                            } else {
+                                BaseParceledListSlice.this.mList = null;
+                            }
+                            if (parcel3.dataSize() >= BaseParceledListSlice.WARN_ELM_SIZE + 65536) {
+                                Log.w(BaseParceledListSlice.TAG, "Overly large reply size: " + parcel3.dataSize());
+                            }
+                            return true;
+                        } catch (RuntimeException e) {
+                            BaseParceledListSlice.this.mList = null;
+                            throw e;
+                        }
+                    }
+                });
+            }
+        }
     }
 }

@@ -1,6 +1,5 @@
 package com.android.systemui.statusbar.policy;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class QSClockUtils {
     public static String getBasicClockFormat(String str) {
@@ -11,11 +10,11 @@ public class QSClockUtils {
                 i = -1;
                 break;
             }
-            char charAt = str.charAt(i);
-            if (charAt == '\'') {
+            char cCharAt = str.charAt(i);
+            if (cCharAt == '\'') {
                 z = !z;
             }
-            if (!z && charAt == 'a') {
+            if (!z && cCharAt == 'a') {
                 break;
             }
             i++;

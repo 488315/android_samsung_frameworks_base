@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.setupdesign.DividerItemDecoration;
 import com.google.android.setupdesign.R$styleable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class HeaderRecyclerView extends RecyclerView {
     public View header;
@@ -21,7 +20,6 @@ public class HeaderRecyclerView extends RecyclerView {
     public boolean shouldApplyAdditionalMargin;
     public boolean shouldHandleActionUp;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class HeaderAdapter extends RecyclerView.Adapter {
         public final RecyclerView.Adapter adapter;
         public View header;
@@ -136,7 +134,6 @@ public class HeaderRecyclerView extends RecyclerView {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class HeaderViewHolder extends RecyclerView.ViewHolder implements DividerItemDecoration.DividedViewHolder {
         public HeaderViewHolder(View view) {
             super(view);
@@ -161,7 +158,7 @@ public class HeaderRecyclerView extends RecyclerView {
 
     @Override // androidx.recyclerview.widget.RecyclerView, android.view.ViewGroup, android.view.View
     public final boolean dispatchKeyEvent(KeyEvent keyEvent) {
-        View findFocus;
+        View viewFindFocus;
         boolean z = false;
         if (this.shouldHandleActionUp && keyEvent.getAction() == 1) {
             this.shouldHandleActionUp = false;
@@ -169,12 +166,12 @@ public class HeaderRecyclerView extends RecyclerView {
         } else if (keyEvent.getAction() == 0) {
             int keyCode = keyEvent.getKeyCode();
             if (keyCode != 19) {
-                if (keyCode == 20 && (findFocus = findFocus()) != null) {
+                if (keyCode == 20 && (viewFindFocus = findFocus()) != null) {
                     int[] iArr = new int[2];
                     int[] iArr2 = new int[2];
-                    findFocus.getLocationInWindow(iArr);
+                    viewFindFocus.getLocationInWindow(iArr);
                     getLocationInWindow(iArr2);
-                    int measuredHeight = (findFocus.getMeasuredHeight() + iArr[1]) - (getMeasuredHeight() + iArr2[1]);
+                    int measuredHeight = (viewFindFocus.getMeasuredHeight() + iArr[1]) - (getMeasuredHeight() + iArr2[1]);
                     if (measuredHeight > 0) {
                         smoothScrollBy(0, Math.min((int) (getMeasuredHeight() * 0.7f), measuredHeight), false);
                         z = true;
@@ -182,11 +179,11 @@ public class HeaderRecyclerView extends RecyclerView {
                 }
                 this.shouldHandleActionUp = z;
             } else {
-                View findFocus2 = findFocus();
-                if (findFocus2 != null) {
+                View viewFindFocus2 = findFocus();
+                if (viewFindFocus2 != null) {
                     int[] iArr3 = new int[2];
                     int[] iArr4 = new int[2];
-                    findFocus2.getLocationInWindow(iArr3);
+                    viewFindFocus2.getLocationInWindow(iArr3);
                     getLocationInWindow(iArr4);
                     int i = iArr3[1] - iArr4[1];
                     if (i < 0) {
@@ -207,10 +204,10 @@ public class HeaderRecyclerView extends RecyclerView {
         if (isInEditMode()) {
             return;
         }
-        TypedArray obtainStyledAttributes = getContext().obtainStyledAttributes(attributeSet, R$styleable.SudHeaderRecyclerView, i, 0);
-        this.headerRes = obtainStyledAttributes.getResourceId(0, 0);
-        this.shouldApplyAdditionalMargin = obtainStyledAttributes.getBoolean(1, false);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = getContext().obtainStyledAttributes(attributeSet, R$styleable.SudHeaderRecyclerView, i, 0);
+        this.headerRes = typedArrayObtainStyledAttributes.getResourceId(0, 0);
+        this.shouldApplyAdditionalMargin = typedArrayObtainStyledAttributes.getBoolean(1, false);
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     @Override // android.view.View

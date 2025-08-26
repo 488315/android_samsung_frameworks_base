@@ -8,7 +8,6 @@ import java.util.ListIterator;
 import kotlin.collections.ArraysKt___ArraysJvmKt;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class PersistentVector<E> extends AbstractPersistentList<E> implements PersistentList<E> {
     public final Object[] root;
@@ -28,53 +27,53 @@ public final class PersistentVector<E> extends AbstractPersistentList<E> impleme
     }
 
     public static Object[] insertIntoRoot(Object[] objArr, int i, int i2, Object obj, ObjectRef objectRef) {
-        int indexSegment = UtilsKt.indexSegment(i2, i);
+        int iIndexSegment = UtilsKt.indexSegment(i2, i);
         if (i == 0) {
-            Object[] copyOf = indexSegment == 0 ? new Object[32] : Arrays.copyOf(objArr, 32);
-            ArraysKt___ArraysJvmKt.copyInto(objArr, copyOf, indexSegment + 1, indexSegment, 31);
+            Object[] objArrCopyOf = iIndexSegment == 0 ? new Object[32] : Arrays.copyOf(objArr, 32);
+            ArraysKt___ArraysJvmKt.copyInto(objArr, objArrCopyOf, iIndexSegment + 1, iIndexSegment, 31);
             objectRef.value = objArr[31];
-            copyOf[indexSegment] = obj;
-            return copyOf;
+            objArrCopyOf[iIndexSegment] = obj;
+            return objArrCopyOf;
         }
-        Object[] copyOf2 = Arrays.copyOf(objArr, 32);
+        Object[] objArrCopyOf2 = Arrays.copyOf(objArr, 32);
         int i3 = i - 5;
-        copyOf2[indexSegment] = insertIntoRoot((Object[]) objArr[indexSegment], i3, i2, obj, objectRef);
+        objArrCopyOf2[iIndexSegment] = insertIntoRoot((Object[]) objArr[iIndexSegment], i3, i2, obj, objectRef);
         while (true) {
-            indexSegment++;
-            if (indexSegment >= 32 || copyOf2[indexSegment] == null) {
+            iIndexSegment++;
+            if (iIndexSegment >= 32 || objArrCopyOf2[iIndexSegment] == null) {
                 break;
             }
-            copyOf2[indexSegment] = insertIntoRoot((Object[]) objArr[indexSegment], i3, 0, objectRef.value, objectRef);
+            objArrCopyOf2[iIndexSegment] = insertIntoRoot((Object[]) objArr[iIndexSegment], i3, 0, objectRef.value, objectRef);
         }
-        return copyOf2;
+        return objArrCopyOf2;
     }
 
     public static Object[] pullLastBuffer(Object[] objArr, int i, int i2, ObjectRef objectRef) {
-        Object[] pullLastBuffer;
-        int indexSegment = UtilsKt.indexSegment(i2, i);
+        Object[] objArrPullLastBuffer;
+        int iIndexSegment = UtilsKt.indexSegment(i2, i);
         if (i == 5) {
-            objectRef.value = objArr[indexSegment];
-            pullLastBuffer = null;
+            objectRef.value = objArr[iIndexSegment];
+            objArrPullLastBuffer = null;
         } else {
-            pullLastBuffer = pullLastBuffer((Object[]) objArr[indexSegment], i - 5, i2, objectRef);
+            objArrPullLastBuffer = pullLastBuffer((Object[]) objArr[iIndexSegment], i - 5, i2, objectRef);
         }
-        if (pullLastBuffer == null && indexSegment == 0) {
+        if (objArrPullLastBuffer == null && iIndexSegment == 0) {
             return null;
         }
-        Object[] copyOf = Arrays.copyOf(objArr, 32);
-        copyOf[indexSegment] = pullLastBuffer;
-        return copyOf;
+        Object[] objArrCopyOf = Arrays.copyOf(objArr, 32);
+        objArrCopyOf[iIndexSegment] = objArrPullLastBuffer;
+        return objArrCopyOf;
     }
 
     public static Object[] setInRoot(Object[] objArr, int i, int i2, Object obj) {
-        int indexSegment = UtilsKt.indexSegment(i2, i);
-        Object[] copyOf = Arrays.copyOf(objArr, 32);
+        int iIndexSegment = UtilsKt.indexSegment(i2, i);
+        Object[] objArrCopyOf = Arrays.copyOf(objArr, 32);
         if (i == 0) {
-            copyOf[indexSegment] = obj;
-            return copyOf;
+            objArrCopyOf[iIndexSegment] = obj;
+            return objArrCopyOf;
         }
-        copyOf[indexSegment] = setInRoot((Object[]) copyOf[indexSegment], i - 5, i2, obj);
-        return copyOf;
+        objArrCopyOf[iIndexSegment] = setInRoot((Object[]) objArrCopyOf[iIndexSegment], i - 5, i2, obj);
+        return objArrCopyOf;
     }
 
     @Override // java.util.List, androidx.compose.runtime.external.kotlinx.collections.immutable.PersistentList
@@ -83,9 +82,9 @@ public final class PersistentVector<E> extends AbstractPersistentList<E> impleme
         if (i == this.size) {
             return add(obj);
         }
-        int rootSize = rootSize();
-        if (i >= rootSize) {
-            return insertIntoTail(obj, this.root, i - rootSize);
+        int iRootSize = rootSize();
+        if (i >= iRootSize) {
+            return insertIntoTail(obj, this.root, i - iRootSize);
         }
         ObjectRef objectRef = new ObjectRef(null);
         return insertIntoTail(objectRef.value, insertIntoRoot(this.root, this.rootShift, i, obj, objectRef), 0);
@@ -119,20 +118,20 @@ public final class PersistentVector<E> extends AbstractPersistentList<E> impleme
     }
 
     public final PersistentVector insertIntoTail(Object obj, Object[] objArr, int i) {
-        int rootSize = this.size - rootSize();
-        Object[] copyOf = Arrays.copyOf(this.tail, 32);
-        if (rootSize < 32) {
-            ArraysKt___ArraysJvmKt.copyInto(this.tail, copyOf, i + 1, i, rootSize);
-            copyOf[i] = obj;
-            return new PersistentVector(objArr, copyOf, this.size + 1, this.rootShift);
+        int iRootSize = this.size - rootSize();
+        Object[] objArrCopyOf = Arrays.copyOf(this.tail, 32);
+        if (iRootSize < 32) {
+            ArraysKt___ArraysJvmKt.copyInto(this.tail, objArrCopyOf, i + 1, i, iRootSize);
+            objArrCopyOf[i] = obj;
+            return new PersistentVector(objArr, objArrCopyOf, this.size + 1, this.rootShift);
         }
         Object[] objArr2 = this.tail;
         Object obj2 = objArr2[31];
-        ArraysKt___ArraysJvmKt.copyInto(objArr2, copyOf, i + 1, i, rootSize - 1);
-        copyOf[i] = obj;
+        ArraysKt___ArraysJvmKt.copyInto(objArr2, objArrCopyOf, i + 1, i, iRootSize - 1);
+        objArrCopyOf[i] = obj;
         Object[] objArr3 = new Object[32];
         objArr3[0] = obj2;
-        return pushFilledTail(objArr, copyOf, objArr3);
+        return pushFilledTail(objArr, objArrCopyOf, objArr3);
     }
 
     @Override // kotlin.collections.AbstractList, java.util.List
@@ -154,69 +153,69 @@ public final class PersistentVector<E> extends AbstractPersistentList<E> impleme
     }
 
     public final Object[] pushTail(int i, Object[] objArr, Object[] objArr2) {
-        Object[] objArr3;
-        int indexSegment = UtilsKt.indexSegment(getSize() - 1, i);
-        if (objArr == null || (objArr3 = Arrays.copyOf(objArr, 32)) == null) {
-            objArr3 = new Object[32];
+        Object[] objArrCopyOf;
+        int iIndexSegment = UtilsKt.indexSegment(getSize() - 1, i);
+        if (objArr == null || (objArrCopyOf = Arrays.copyOf(objArr, 32)) == null) {
+            objArrCopyOf = new Object[32];
         }
         if (i == 5) {
-            objArr3[indexSegment] = objArr2;
-            return objArr3;
+            objArrCopyOf[iIndexSegment] = objArr2;
+            return objArrCopyOf;
         }
-        objArr3[indexSegment] = pushTail(i - 5, (Object[]) objArr3[indexSegment], objArr2);
-        return objArr3;
+        objArrCopyOf[iIndexSegment] = pushTail(i - 5, (Object[]) objArrCopyOf[iIndexSegment], objArr2);
+        return objArrCopyOf;
     }
 
     @Override // androidx.compose.runtime.external.kotlinx.collections.immutable.PersistentList
     public final PersistentList removeAll(Function1 function1) {
-        PersistentVectorBuilder builder = builder();
-        builder.removeAllWithPredicate(function1);
-        return builder.build();
+        PersistentVectorBuilder persistentVectorBuilderBuilder = builder();
+        persistentVectorBuilderBuilder.removeAllWithPredicate(function1);
+        return persistentVectorBuilderBuilder.build();
     }
 
     @Override // androidx.compose.runtime.external.kotlinx.collections.immutable.PersistentList
     public final PersistentList removeAt(int i) {
         ListImplementation.checkElementIndex$runtime_release(i, this.size);
-        int rootSize = rootSize();
-        return i >= rootSize ? removeFromTailAt(this.root, rootSize, this.rootShift, i - rootSize) : removeFromTailAt(removeFromRootAt(this.root, this.rootShift, i, new ObjectRef(this.tail[0])), rootSize, this.rootShift, 0);
+        int iRootSize = rootSize();
+        return i >= iRootSize ? removeFromTailAt(this.root, iRootSize, this.rootShift, i - iRootSize) : removeFromTailAt(removeFromRootAt(this.root, this.rootShift, i, new ObjectRef(this.tail[0])), iRootSize, this.rootShift, 0);
     }
 
     public final Object[] removeFromRootAt(Object[] objArr, int i, int i2, ObjectRef objectRef) {
-        int indexSegment = UtilsKt.indexSegment(i2, i);
+        int iIndexSegment = UtilsKt.indexSegment(i2, i);
         if (i == 0) {
-            Object[] copyOf = indexSegment == 0 ? new Object[32] : Arrays.copyOf(objArr, 32);
-            ArraysKt___ArraysJvmKt.copyInto(objArr, copyOf, indexSegment, indexSegment + 1, 32);
-            copyOf[31] = objectRef.value;
-            objectRef.value = objArr[indexSegment];
-            return copyOf;
+            Object[] objArrCopyOf = iIndexSegment == 0 ? new Object[32] : Arrays.copyOf(objArr, 32);
+            ArraysKt___ArraysJvmKt.copyInto(objArr, objArrCopyOf, iIndexSegment, iIndexSegment + 1, 32);
+            objArrCopyOf[31] = objectRef.value;
+            objectRef.value = objArr[iIndexSegment];
+            return objArrCopyOf;
         }
-        int indexSegment2 = objArr[31] == null ? UtilsKt.indexSegment(rootSize() - 1, i) : 31;
-        Object[] copyOf2 = Arrays.copyOf(objArr, 32);
+        int iIndexSegment2 = objArr[31] == null ? UtilsKt.indexSegment(rootSize() - 1, i) : 31;
+        Object[] objArrCopyOf2 = Arrays.copyOf(objArr, 32);
         int i3 = i - 5;
-        int i4 = indexSegment + 1;
-        if (i4 <= indexSegment2) {
+        int i4 = iIndexSegment + 1;
+        if (i4 <= iIndexSegment2) {
             while (true) {
-                copyOf2[indexSegment2] = removeFromRootAt((Object[]) copyOf2[indexSegment2], i3, 0, objectRef);
-                if (indexSegment2 == i4) {
+                objArrCopyOf2[iIndexSegment2] = removeFromRootAt((Object[]) objArrCopyOf2[iIndexSegment2], i3, 0, objectRef);
+                if (iIndexSegment2 == i4) {
                     break;
                 }
-                indexSegment2--;
+                iIndexSegment2--;
             }
         }
-        copyOf2[indexSegment] = removeFromRootAt((Object[]) copyOf2[indexSegment], i3, i2, objectRef);
-        return copyOf2;
+        objArrCopyOf2[iIndexSegment] = removeFromRootAt((Object[]) objArrCopyOf2[iIndexSegment], i3, i2, objectRef);
+        return objArrCopyOf2;
     }
 
     public final AbstractPersistentList removeFromTailAt(Object[] objArr, int i, int i2, int i3) {
         int i4 = this.size - i;
         if (i4 != 1) {
-            Object[] copyOf = Arrays.copyOf(this.tail, 32);
+            Object[] objArrCopyOf = Arrays.copyOf(this.tail, 32);
             int i5 = i4 - 1;
             if (i3 < i5) {
-                ArraysKt___ArraysJvmKt.copyInto(this.tail, copyOf, i3, i3 + 1, i4);
+                ArraysKt___ArraysJvmKt.copyInto(this.tail, objArrCopyOf, i3, i3 + 1, i4);
             }
-            copyOf[i5] = null;
-            return new PersistentVector(objArr, copyOf, (i + i4) - 1, i2);
+            objArrCopyOf[i5] = null;
+            return new PersistentVector(objArr, objArrCopyOf, (i + i4) - 1, i2);
         }
         if (i2 == 0) {
             if (objArr.length == 33) {
@@ -225,10 +224,10 @@ public final class PersistentVector<E> extends AbstractPersistentList<E> impleme
             return new SmallPersistentVector(objArr);
         }
         ObjectRef objectRef = new ObjectRef(null);
-        Object[] pullLastBuffer = pullLastBuffer(objArr, i2, i - 1, objectRef);
-        pullLastBuffer.getClass();
+        Object[] objArrPullLastBuffer = pullLastBuffer(objArr, i2, i - 1, objectRef);
+        objArrPullLastBuffer.getClass();
         Object[] objArr2 = (Object[]) objectRef.value;
-        return pullLastBuffer[1] == null ? new PersistentVector((Object[]) pullLastBuffer[0], objArr2, i, i2 - 5) : new PersistentVector(pullLastBuffer, objArr2, i, i2);
+        return objArrPullLastBuffer[1] == null ? new PersistentVector((Object[]) objArrPullLastBuffer[0], objArr2, i, i2 - 5) : new PersistentVector(objArrPullLastBuffer, objArr2, i, i2);
     }
 
     public final int rootSize() {
@@ -241,18 +240,18 @@ public final class PersistentVector<E> extends AbstractPersistentList<E> impleme
         if (rootSize() > i) {
             return new PersistentVector(setInRoot(this.root, this.rootShift, i, obj), this.tail, this.size, this.rootShift);
         }
-        Object[] copyOf = Arrays.copyOf(this.tail, 32);
-        copyOf[i & 31] = obj;
-        return new PersistentVector(this.root, copyOf, this.size, this.rootShift);
+        Object[] objArrCopyOf = Arrays.copyOf(this.tail, 32);
+        objArrCopyOf[i & 31] = obj;
+        return new PersistentVector(this.root, objArrCopyOf, this.size, this.rootShift);
     }
 
     @Override // java.util.Collection, java.util.List, androidx.compose.runtime.external.kotlinx.collections.immutable.PersistentList
     public final PersistentList add(Object obj) {
-        int rootSize = this.size - rootSize();
-        if (rootSize < 32) {
-            Object[] copyOf = Arrays.copyOf(this.tail, 32);
-            copyOf[rootSize] = obj;
-            return new PersistentVector(this.root, copyOf, this.size + 1, this.rootShift);
+        int iRootSize = this.size - rootSize();
+        if (iRootSize < 32) {
+            Object[] objArrCopyOf = Arrays.copyOf(this.tail, 32);
+            objArrCopyOf[iRootSize] = obj;
+            return new PersistentVector(this.root, objArrCopyOf, this.size + 1, this.rootShift);
         }
         Object[] objArr = new Object[32];
         objArr[0] = obj;

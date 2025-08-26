@@ -11,7 +11,6 @@ import kotlin.LazyKt__LazyJVMKt;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class AllowedOngoingActivityListManager {
     public List allowedList;
@@ -24,12 +23,12 @@ public final class AllowedOngoingActivityListManager {
         Lazy lazy = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.statusbar.notification.AllowedOngoingActivityListManager$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                final AllowedOngoingActivityListManager allowedOngoingActivityListManager = AllowedOngoingActivityListManager.this;
+                final AllowedOngoingActivityListManager allowedOngoingActivityListManager = this.f$0;
                 return new BroadcastReceiver() { // from class: com.android.systemui.statusbar.notification.AllowedOngoingActivityListManager$receiver$2$1
                     @Override // android.content.BroadcastReceiver
                     public final void onReceive(Context context2, Intent intent) {
                         if (Intrinsics.areEqual(intent != null ? intent.getAction() : null, "com.samsung.intent.action.ONGOING_ACTIVITY_LIST_CHANGED")) {
-                            AllowedOngoingActivityListManager allowedOngoingActivityListManager2 = AllowedOngoingActivityListManager.this;
+                            AllowedOngoingActivityListManager allowedOngoingActivityListManager2 = allowedOngoingActivityListManager;
                             allowedOngoingActivityListManager2.allowedList = allowedOngoingActivityListManager2.notificationManager.getAllowedOngoingActivityAppList();
                         }
                     }

@@ -13,7 +13,6 @@ import com.android.systemui.util.SettingsHelper;
 import java.util.Iterator;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @CoordinatorScope
 /* loaded from: classes3.dex */
 public final class SettingsChangedCoordinator implements Coordinator {
@@ -22,7 +21,7 @@ public final class SettingsChangedCoordinator implements Coordinator {
         @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
         public final void onChanged(Uri uri) {
             if (Intrinsics.areEqual(uri, Settings.Secure.getUriFor(SettingsHelper.INDEX_SNOOZE_SETTING))) {
-                SettingsChangedCoordinator.this.updateSnoozeButton();
+                this.this$0.updateSnoozeButton();
             }
         }
     };

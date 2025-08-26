@@ -15,6 +15,7 @@ import android.view.inspector.PropertyMapper;
 import android.view.inspector.PropertyReader;
 import android.widget.LinearLayout;
 import com.android.internal.R;
+import java.io.IOException;
 
 /* loaded from: classes5.dex */
 public class TableRow extends LinearLayout {
@@ -60,14 +61,14 @@ public class TableRow extends LinearLayout {
         public LayoutParams(Context context, AttributeSet attributeSet) {
             super(context, attributeSet);
             this.mOffset = new int[2];
-            TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.TableRow_Cell);
-            this.column = obtainStyledAttributes.getInt(0, -1);
-            int i = obtainStyledAttributes.getInt(1, 1);
+            TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.TableRow_Cell);
+            this.column = typedArrayObtainStyledAttributes.getInt(0, -1);
+            int i = typedArrayObtainStyledAttributes.getInt(1, 1);
             this.span = i;
             if (i <= 1) {
                 this.span = 1;
             }
-            obtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes.recycle();
         }
 
         public LayoutParams(int i, int i2) {
@@ -121,7 +122,7 @@ public class TableRow extends LinearLayout {
         }
 
         @Override // android.widget.LinearLayout.LayoutParams, android.view.ViewGroup.MarginLayoutParams, android.view.ViewGroup.LayoutParams
-        protected void encodeProperties(ViewHierarchyEncoder viewHierarchyEncoder) {
+        protected void encodeProperties(ViewHierarchyEncoder viewHierarchyEncoder) throws IOException {
             super.encodeProperties(viewHierarchyEncoder);
             viewHierarchyEncoder.addProperty("layout:column", this.column);
             viewHierarchyEncoder.addProperty("layout:span", this.span);
@@ -230,9 +231,9 @@ public class TableRow extends LinearLayout {
                 i7 += iArr[i + i8];
             }
             int i9 = layoutParams.gravity;
-            boolean isHorizontal = Gravity.isHorizontal(i9);
-            view.measure(View.MeasureSpec.makeMeasureSpec(Math.max(0, (i7 - layoutParams.leftMargin) - layoutParams.rightMargin), isHorizontal ? Integer.MIN_VALUE : 1073741824), getChildMeasureSpec(i4, this.mPaddingTop + this.mPaddingBottom + layoutParams.topMargin + layoutParams.bottomMargin + i5, layoutParams.height));
-            if (isHorizontal) {
+            boolean zIsHorizontal = Gravity.isHorizontal(i9);
+            view.measure(View.MeasureSpec.makeMeasureSpec(Math.max(0, (i7 - layoutParams.leftMargin) - layoutParams.rightMargin), zIsHorizontal ? Integer.MIN_VALUE : 1073741824), getChildMeasureSpec(i4, this.mPaddingTop + this.mPaddingBottom + layoutParams.topMargin + layoutParams.bottomMargin + i5, layoutParams.height));
+            if (zIsHorizontal) {
                 layoutParams.mOffset[1] = i7 - view.getMeasuredWidth();
                 int absoluteGravity = Gravity.getAbsoluteGravity(i9, getLayoutDirection()) & 7;
                 if (absoluteGravity != 1) {

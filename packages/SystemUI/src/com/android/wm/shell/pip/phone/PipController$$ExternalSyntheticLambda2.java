@@ -16,7 +16,6 @@ import com.android.wm.shell.pip.PipTaskOrganizer;
 import com.android.wm.shell.pip.PipTransitionState;
 import com.android.wm.shell.protolog.ShellProtoLogGroup;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class PipController$$ExternalSyntheticLambda2 implements DisplayChangeController.OnDisplayChangingListener {
     public final /* synthetic */ PipController f$0;
@@ -88,7 +87,8 @@ public final /* synthetic */ class PipController$$ExternalSyntheticLambda2 imple
                 rect.offsetTo(rect.left, rect5.bottom);
             }
             if (!pipController.mIsInFixedRotation) {
-                pipBoundsState.setImeVisibility(0, false);
+                pipBoundsState.mIsImeShowing = false;
+                pipBoundsState.mImeHeight = 0;
                 pipTouchHandler.mIsShelfShowing = false;
                 pipTouchHandler.mShelfHeight = 0;
                 pipTouchHandler.mIsImeShowing = false;

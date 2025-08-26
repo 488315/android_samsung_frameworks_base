@@ -5,7 +5,6 @@ import androidx.core.view.OnApplyWindowInsetsListener;
 import androidx.core.view.WindowInsetsCompat;
 import com.google.android.material.internal.ViewUtils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final /* synthetic */ class SearchView$$ExternalSyntheticLambda1 implements ViewUtils.OnApplyWindowInsetsListener, OnApplyWindowInsetsListener {
     public final /* synthetic */ SearchView f$0;
@@ -13,8 +12,8 @@ public final /* synthetic */ class SearchView$$ExternalSyntheticLambda1 implemen
     @Override // com.google.android.material.internal.ViewUtils.OnApplyWindowInsetsListener
     public WindowInsetsCompat onApplyWindowInsets(View view, WindowInsetsCompat windowInsetsCompat, ViewUtils.RelativePadding relativePadding) {
         SearchView searchView = this.f$0;
-        boolean isLayoutRtl = ViewUtils.isLayoutRtl(searchView.toolbar);
-        searchView.toolbar.setPadding(windowInsetsCompat.getSystemWindowInsetLeft() + (isLayoutRtl ? relativePadding.end : relativePadding.start), relativePadding.top, windowInsetsCompat.getSystemWindowInsetRight() + (isLayoutRtl ? relativePadding.start : relativePadding.end), relativePadding.bottom);
+        boolean zIsLayoutRtl = ViewUtils.isLayoutRtl(searchView.toolbar);
+        searchView.toolbar.setPadding(windowInsetsCompat.getSystemWindowInsetLeft() + (zIsLayoutRtl ? relativePadding.end : relativePadding.start), relativePadding.top, windowInsetsCompat.getSystemWindowInsetRight() + (zIsLayoutRtl ? relativePadding.start : relativePadding.end), relativePadding.bottom);
         return windowInsetsCompat;
     }
 

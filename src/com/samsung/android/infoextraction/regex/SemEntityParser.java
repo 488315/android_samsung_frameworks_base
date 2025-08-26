@@ -57,21 +57,21 @@ public class SemEntityParser {
     }
 
     private static void parsingDateMillisInfo() {
-        Pattern compile = Pattern.compile("((((19|20)(([02468][048])|([13579][26]))[\\-|\\/|\\.]0?2[\\-|\\/|\\.]29)|((((20[0-9][0-9])|(19[0-9][0-9]))[\\-|\\/|\\.])?(((0?[13578]|10|12)[\\-|\\/|\\.]31)|((0?[1,3-9]|1[0-2])[\\-|\\/|\\.](29|30))|((0?[1-9]|1[0-2])[\\-|\\/|\\.](1[0-9]|2[0-8]|0?[1-9])))[[:space:]])))");
-        Matcher matcher = compile.matcher(mWorkStrForMillis);
-        mWorkStrForMillis = compile.matcher(mWorkStrForMillis).replaceAll(DELIMITER);
+        Pattern patternCompile = Pattern.compile("((((19|20)(([02468][048])|([13579][26]))[\\-|\\/|\\.]0?2[\\-|\\/|\\.]29)|((((20[0-9][0-9])|(19[0-9][0-9]))[\\-|\\/|\\.])?(((0?[13578]|10|12)[\\-|\\/|\\.]31)|((0?[1,3-9]|1[0-2])[\\-|\\/|\\.](29|30))|((0?[1-9]|1[0-2])[\\-|\\/|\\.](1[0-9]|2[0-8]|0?[1-9])))[[:space:]])))");
+        Matcher matcher = patternCompile.matcher(mWorkStrForMillis);
+        mWorkStrForMillis = patternCompile.matcher(mWorkStrForMillis).replaceAll(DELIMITER);
         while (matcher.find()) {
-            String removeUnnecessary = removeUnnecessary(matcher.group(0));
-            mInfo.setInfo(convertDateToMillis(removeUnnecessary, 1), 2);
-            Log.d(TAG, "add date for millis(type1): " + removeUnnecessary);
+            String strRemoveUnnecessary = removeUnnecessary(matcher.group(0));
+            mInfo.setInfo(convertDateToMillis(strRemoveUnnecessary, 1), 2);
+            Log.d(TAG, "add date for millis(type1): " + strRemoveUnnecessary);
         }
-        Pattern compile2 = Pattern.compile("((((Jan|January|Mar|March|May|Jul|July|Aug|August|Oct|October|Dec|December)(\\.[[:space:]]?|[[:space:]])((([1-2][0-9]|3[01])(th)?)|0?1(st)?|0?2(nd)?|0?3(rd)?|0?[4-9](th)?)((\\,[[:space:]]?|\\.[[:space:]]?|[[:space:]]?)((20[0-9][0-9])|(19[0-9][0-9]))?)?[[:space:]])|((Apr|April|Jun|June|Sep|September|Nov|November)(\\.[[:space:]]?|[[:space:]])((([1-2][0-9]|3[01])(th)?)|0?1(st)?|0?2(nd)?|0?3(rd)?|0?[4-9](th)?)((\\,[[:space:]]?|\\.[[:space:]]?|[[:space:]]?)((20[0-9][0-9])|(19[0-9][0-9]))?)?[[:space:]])|((Feb|February)(\\.[[:space:]]?|[[:space:]])((([1-2][0-9]|3[01])(th)?)|0?1(st)?|0?2(nd)?|0?3(rd)?|0?[4-9](th)?)((\\,[[:space:]]?|\\.[[:space:]]?|[[:space:]]?)((20[0-9][0-9])|(19[0-9][0-9]))?)?[[:space:]])))");
-        Matcher matcher2 = compile2.matcher(mWorkStrForMillis);
-        mWorkStrForMillis = compile2.matcher(mWorkStrForMillis).replaceAll(DELIMITER);
+        Pattern patternCompile2 = Pattern.compile("((((Jan|January|Mar|March|May|Jul|July|Aug|August|Oct|October|Dec|December)(\\.[[:space:]]?|[[:space:]])((([1-2][0-9]|3[01])(th)?)|0?1(st)?|0?2(nd)?|0?3(rd)?|0?[4-9](th)?)((\\,[[:space:]]?|\\.[[:space:]]?|[[:space:]]?)((20[0-9][0-9])|(19[0-9][0-9]))?)?[[:space:]])|((Apr|April|Jun|June|Sep|September|Nov|November)(\\.[[:space:]]?|[[:space:]])((([1-2][0-9]|3[01])(th)?)|0?1(st)?|0?2(nd)?|0?3(rd)?|0?[4-9](th)?)((\\,[[:space:]]?|\\.[[:space:]]?|[[:space:]]?)((20[0-9][0-9])|(19[0-9][0-9]))?)?[[:space:]])|((Feb|February)(\\.[[:space:]]?|[[:space:]])((([1-2][0-9]|3[01])(th)?)|0?1(st)?|0?2(nd)?|0?3(rd)?|0?[4-9](th)?)((\\,[[:space:]]?|\\.[[:space:]]?|[[:space:]]?)((20[0-9][0-9])|(19[0-9][0-9]))?)?[[:space:]])))");
+        Matcher matcher2 = patternCompile2.matcher(mWorkStrForMillis);
+        mWorkStrForMillis = patternCompile2.matcher(mWorkStrForMillis).replaceAll(DELIMITER);
         while (matcher2.find()) {
-            String removeUnnecessary2 = removeUnnecessary(matcher2.group(0));
-            mInfo.setInfo(convertDateToMillis(removeUnnecessary2, 2), 2);
-            Log.d(TAG, "add date for millis(type2): " + removeUnnecessary2);
+            String strRemoveUnnecessary2 = removeUnnecessary(matcher2.group(0));
+            mInfo.setInfo(convertDateToMillis(strRemoveUnnecessary2, 2), 2);
+            Log.d(TAG, "add date for millis(type2): " + strRemoveUnnecessary2);
         }
         String countryDateString = SemEntityPatterns.getCountryDateString(mContext);
         if (countryDateString.length() <= 0 || countryDateString.charAt(0) != '|') {
@@ -79,73 +79,73 @@ public class SemEntityParser {
         }
         StringBuilder sb = new StringBuilder(countryDateString);
         sb.deleteCharAt(0);
-        Pattern compile3 = Pattern.compile(NavigationBarInflaterView.KEY_CODE_START + sb.toString() + NavigationBarInflaterView.KEY_CODE_END);
-        Matcher matcher3 = compile3.matcher(mWorkStrForMillis);
-        mWorkStrForMillis = compile3.matcher(mWorkStrForMillis).replaceAll(DELIMITER);
+        Pattern patternCompile3 = Pattern.compile(NavigationBarInflaterView.KEY_CODE_START + sb.toString() + NavigationBarInflaterView.KEY_CODE_END);
+        Matcher matcher3 = patternCompile3.matcher(mWorkStrForMillis);
+        mWorkStrForMillis = patternCompile3.matcher(mWorkStrForMillis).replaceAll(DELIMITER);
         while (matcher3.find()) {
-            String removeUnnecessary3 = removeUnnecessary(matcher3.group(0));
-            mInfo.setInfo(convertDateToMillis(removeUnnecessary3, 1), 2);
-            Log.d(TAG, "add date for millis(type3, country): " + removeUnnecessary3);
+            String strRemoveUnnecessary3 = removeUnnecessary(matcher3.group(0));
+            mInfo.setInfo(convertDateToMillis(strRemoveUnnecessary3, 1), 2);
+            Log.d(TAG, "add date for millis(type3, country): " + strRemoveUnnecessary3);
         }
     }
 
     private static void parsingTimeMillisInfo() {
-        Pattern compile = Pattern.compile("(((((0[1-9]|1[1-2])[[:space:]]?\\:[[:space:]]?[0-5][0-9][[:space:]]?(am|pm|AM|PM))|(([0-1][0-9]|2[0-3])[[:space:]]?\\:[[:space:]]?[0-5][0-9]))" + SemEntityPatterns.getCountryTimeString(mContext) + "))");
-        Matcher matcher = compile.matcher(mWorkStrForMillis);
-        mWorkStrForMillis = compile.matcher(mWorkStrForMillis).replaceAll(DELIMITER);
+        Pattern patternCompile = Pattern.compile("(((((0[1-9]|1[1-2])[[:space:]]?\\:[[:space:]]?[0-5][0-9][[:space:]]?(am|pm|AM|PM))|(([0-1][0-9]|2[0-3])[[:space:]]?\\:[[:space:]]?[0-5][0-9]))" + SemEntityPatterns.getCountryTimeString(mContext) + "))");
+        Matcher matcher = patternCompile.matcher(mWorkStrForMillis);
+        mWorkStrForMillis = patternCompile.matcher(mWorkStrForMillis).replaceAll(DELIMITER);
         while (matcher.find()) {
-            String removeUnnecessary = removeUnnecessary(matcher.group(0));
-            mInfo.setInfo(convertTimeToMillis(removeUnnecessary), 4);
-            Log.d(TAG, "add time for millis : " + removeUnnecessary);
+            String strRemoveUnnecessary = removeUnnecessary(matcher.group(0));
+            mInfo.setInfo(convertTimeToMillis(strRemoveUnnecessary), 4);
+            Log.d(TAG, "add time for millis : " + strRemoveUnnecessary);
         }
     }
 
     private static void parsingDateInfo() {
-        Pattern compile = Pattern.compile(SemEntityPatterns.DEFAULT_DATE_STRING_TYPE1);
-        Matcher matcher = compile.matcher(mWorkStr);
-        mWorkStr = compile.matcher(mWorkStr).replaceAll(DELIMITER);
+        Pattern patternCompile = Pattern.compile(SemEntityPatterns.DEFAULT_DATE_STRING_TYPE1);
+        Matcher matcher = patternCompile.matcher(mWorkStr);
+        mWorkStr = patternCompile.matcher(mWorkStr).replaceAll(DELIMITER);
         while (matcher.find()) {
-            String removeUnnecessary = removeUnnecessary(matcher.group(0));
-            mInfo.setInfo(removeUnnecessary, 1);
-            Log.d(TAG, "add date(pattern type1): " + removeUnnecessary);
+            String strRemoveUnnecessary = removeUnnecessary(matcher.group(0));
+            mInfo.setInfo(strRemoveUnnecessary, 1);
+            Log.d(TAG, "add date(pattern type1): " + strRemoveUnnecessary);
         }
-        Pattern compile2 = Pattern.compile(SemEntityPatterns.DEFAULT_DATE_STRING_TYPE2);
-        Matcher matcher2 = compile2.matcher(mWorkStr);
-        mWorkStr = compile2.matcher(mWorkStr).replaceAll(DELIMITER);
+        Pattern patternCompile2 = Pattern.compile(SemEntityPatterns.DEFAULT_DATE_STRING_TYPE2);
+        Matcher matcher2 = patternCompile2.matcher(mWorkStr);
+        mWorkStr = patternCompile2.matcher(mWorkStr).replaceAll(DELIMITER);
         while (matcher2.find()) {
-            String removeUnnecessary2 = removeUnnecessary(matcher2.group(0));
-            mInfo.setInfo(removeUnnecessary2, 1);
-            Log.d(TAG, "add date(pattern type2): " + removeUnnecessary2);
+            String strRemoveUnnecessary2 = removeUnnecessary(matcher2.group(0));
+            mInfo.setInfo(strRemoveUnnecessary2, 1);
+            Log.d(TAG, "add date(pattern type2): " + strRemoveUnnecessary2);
         }
         StringBuilder sb = new StringBuilder(SemEntityPatterns.getCountryDateString(mContext));
         if (sb.length() <= 0 || sb.charAt(0) != '|') {
             return;
         }
         sb.deleteCharAt(0);
-        Pattern compile3 = Pattern.compile(sb.toString());
-        Matcher matcher3 = compile3.matcher(mWorkStr);
-        mWorkStr = compile3.matcher(mWorkStr).replaceAll(DELIMITER);
+        Pattern patternCompile3 = Pattern.compile(sb.toString());
+        Matcher matcher3 = patternCompile3.matcher(mWorkStr);
+        mWorkStr = patternCompile3.matcher(mWorkStr).replaceAll(DELIMITER);
         while (matcher3.find()) {
-            String removeUnnecessary3 = removeUnnecessary(matcher3.group(0));
-            mInfo.setInfo(removeUnnecessary3, 1);
-            Log.d(TAG, "add date(pattern type3, country): " + removeUnnecessary3);
+            String strRemoveUnnecessary3 = removeUnnecessary(matcher3.group(0));
+            mInfo.setInfo(strRemoveUnnecessary3, 1);
+            Log.d(TAG, "add date(pattern type3, country): " + strRemoveUnnecessary3);
         }
     }
 
     private static void parsingTimeInfo() {
-        Pattern compile = Pattern.compile(SemEntityPatterns.DEFAULT_TIME_STRING + SemEntityPatterns.getCountryTimeString(mContext));
-        Matcher matcher = compile.matcher(mWorkStr);
-        mWorkStr = compile.matcher(mWorkStr).replaceAll(DELIMITER);
+        Pattern patternCompile = Pattern.compile(SemEntityPatterns.DEFAULT_TIME_STRING + SemEntityPatterns.getCountryTimeString(mContext));
+        Matcher matcher = patternCompile.matcher(mWorkStr);
+        mWorkStr = patternCompile.matcher(mWorkStr).replaceAll(DELIMITER);
         while (matcher.find()) {
-            String removeUnnecessary = removeUnnecessary(matcher.group(0));
-            mInfo.setInfo(removeUnnecessary, 3);
-            Log.d(TAG, "add time : " + removeUnnecessary);
+            String strRemoveUnnecessary = removeUnnecessary(matcher.group(0));
+            mInfo.setInfo(strRemoveUnnecessary, 3);
+            Log.d(TAG, "add time : " + strRemoveUnnecessary);
         }
     }
 
     private static void parsingPhoneNumInfo() {
         Pattern pattern;
-        String removeUnnecessary;
+        String strRemoveUnnecessary;
         if (mLevel >= 1) {
             pattern = SemEntityPatterns.PHONE_NUMBER;
         } else {
@@ -156,14 +156,14 @@ public class SemEntityParser {
         Pattern pattern2 = SemEntityPatterns.HYPHEN;
         while (matcher.find()) {
             if (mLevel >= 0) {
-                removeUnnecessary = removeUnnecessary(matcher.group(0), false);
+                strRemoveUnnecessary = removeUnnecessary(matcher.group(0), false);
             } else {
-                removeUnnecessary = removeUnnecessary(matcher.group(0));
+                strRemoveUnnecessary = removeUnnecessary(matcher.group(0));
             }
-            String replaceAll = pattern2.matcher(removeUnnecessary).replaceAll(NativeLibraryHelper.CLEAR_ABI_OVERRIDE);
-            if (replaceAll.length() >= 7) {
-                mInfo.setInfo(replaceAll, 5);
-                Log.d(TAG, "add tel number : " + replaceAll);
+            String strReplaceAll = pattern2.matcher(strRemoveUnnecessary).replaceAll(NativeLibraryHelper.CLEAR_ABI_OVERRIDE);
+            if (strReplaceAll.length() >= 7) {
+                mInfo.setInfo(strReplaceAll, 5);
+                Log.d(TAG, "add tel number : " + strReplaceAll);
             }
         }
         refactoringPhoneNumber();
@@ -171,7 +171,7 @@ public class SemEntityParser {
 
     private static void parsingEmailInfo() {
         Pattern pattern;
-        String removeUnnecessary;
+        String strRemoveUnnecessary;
         if (mLevel >= 1) {
             pattern = SemEntityPatterns.EMAIL_ADDRESS;
         } else {
@@ -184,13 +184,13 @@ public class SemEntityParser {
         Pattern pattern2 = SemEntityPatterns.HYPHEN;
         while (matcher.find()) {
             if (mLevel >= 0) {
-                removeUnnecessary = removeUnnecessary(matcher.group(0), false);
+                strRemoveUnnecessary = removeUnnecessary(matcher.group(0), false);
             } else {
-                removeUnnecessary = removeUnnecessary(matcher.group(0));
+                strRemoveUnnecessary = removeUnnecessary(matcher.group(0));
             }
-            String replaceAll = pattern2.matcher(removeUnnecessary).replaceAll(NativeLibraryHelper.CLEAR_ABI_OVERRIDE);
-            mInfo.setInfo(replaceAll, 6);
-            Log.d(TAG, "add email address : " + replaceAll);
+            String strReplaceAll = pattern2.matcher(strRemoveUnnecessary).replaceAll(NativeLibraryHelper.CLEAR_ABI_OVERRIDE);
+            mInfo.setInfo(strReplaceAll, 6);
+            Log.d(TAG, "add email address : " + strReplaceAll);
         }
     }
 
@@ -199,9 +199,9 @@ public class SemEntityParser {
         Matcher matcher = pattern.matcher(mWorkStr);
         mWorkStr = pattern.matcher(mWorkStr).replaceAll(DELIMITER);
         while (matcher.find()) {
-            String removeUnnecessary = removeUnnecessary(matcher.group(0));
-            mInfo.setInfo(removeUnnecessary, 7);
-            Log.d(TAG, "add URL : " + removeUnnecessary);
+            String strRemoveUnnecessary = removeUnnecessary(matcher.group(0));
+            mInfo.setInfo(strRemoveUnnecessary, 7);
+            Log.d(TAG, "add URL : " + strRemoveUnnecessary);
         }
     }
 
@@ -221,8 +221,8 @@ public class SemEntityParser {
         if (str.endsWith(ShaderAssembler.NEWLINE) || str.endsWith(" ")) {
             sb.deleteCharAt(sb.length() - 1);
         }
-        String sb2 = sb.toString();
-        return !z ? Pattern.compile("[:space:]").matcher(sb2).replaceAll("") : sb2;
+        String string = sb.toString();
+        return !z ? Pattern.compile("[:space:]").matcher(string).replaceAll("") : string;
     }
 
     private static void refactoringPhoneNumber() {
@@ -250,29 +250,29 @@ public class SemEntityParser {
         Time time = new Time(Time.TIMEZONE_UTC);
         try {
             if (i == 1) {
-                String[] split = str.split(SemEntityPatterns.SPILT_PATTERN_DATE_TYPE1);
-                if (split.length == 3) {
-                    time.year = Integer.parseInt(split[0]);
-                    time.month = Integer.parseInt(split[1]) - 1;
-                    time.monthDay = Integer.parseInt(split[2]);
-                } else if (split.length == 2) {
+                String[] strArrSplit = str.split(SemEntityPatterns.SPILT_PATTERN_DATE_TYPE1);
+                if (strArrSplit.length == 3) {
+                    time.year = Integer.parseInt(strArrSplit[0]);
+                    time.month = Integer.parseInt(strArrSplit[1]) - 1;
+                    time.monthDay = Integer.parseInt(strArrSplit[2]);
+                } else if (strArrSplit.length == 2) {
                     time.year = yearOfToday;
-                    time.month = Integer.parseInt(split[0]) - 1;
-                    time.monthDay = Integer.parseInt(split[1]);
+                    time.month = Integer.parseInt(strArrSplit[0]) - 1;
+                    time.monthDay = Integer.parseInt(strArrSplit[1]);
                 } else {
                     Log.d(TAG, "fail convertDateToMillis() by invalid length. (type:1)");
                     return "";
                 }
             } else if (i == 2) {
-                String[] split2 = str.split(SemEntityPatterns.SPILT_PATTERN_DATE_TYPE2);
-                if (split2.length == 3) {
-                    time.year = Integer.parseInt(split2[2]);
-                    time.month = SemEntityPatterns.globalDateMap.get(split2[0]).intValue() - 1;
-                    time.monthDay = Integer.parseInt(convertDayToInteger(split2[1]));
-                } else if (split2.length == 2) {
+                String[] strArrSplit2 = str.split(SemEntityPatterns.SPILT_PATTERN_DATE_TYPE2);
+                if (strArrSplit2.length == 3) {
+                    time.year = Integer.parseInt(strArrSplit2[2]);
+                    time.month = SemEntityPatterns.globalDateMap.get(strArrSplit2[0]).intValue() - 1;
+                    time.monthDay = Integer.parseInt(convertDayToInteger(strArrSplit2[1]));
+                } else if (strArrSplit2.length == 2) {
                     time.year = yearOfToday;
-                    time.month = SemEntityPatterns.globalDateMap.get(split2[0]).intValue() - 1;
-                    time.monthDay = Integer.parseInt(convertDayToInteger(split2[1]));
+                    time.month = SemEntityPatterns.globalDateMap.get(strArrSplit2[0]).intValue() - 1;
+                    time.monthDay = Integer.parseInt(convertDayToInteger(strArrSplit2[1]));
                 } else {
                     Log.d(TAG, "fail convertDateToMillis() by invalid length. (type:2)");
                     return "";
@@ -308,11 +308,11 @@ public class SemEntityParser {
     private static String convertTimeToMillis(String str) {
         Time time = new Time(Time.TIMEZONE_UTC);
         try {
-            Pattern compile = Pattern.compile(SemEntityPatterns.PREFIX_FOR_TIME_MILLIS);
-            compile.matcher(str);
-            String replaceAll = compile.matcher(str).replaceAll("");
+            Pattern patternCompile = Pattern.compile(SemEntityPatterns.PREFIX_FOR_TIME_MILLIS);
+            patternCompile.matcher(str);
+            String strReplaceAll = patternCompile.matcher(str).replaceAll("");
             String[] strArr = new String[2];
-            Matcher matcher = Pattern.compile("[0-9]+").matcher(replaceAll);
+            Matcher matcher = Pattern.compile("[0-9]+").matcher(strReplaceAll);
             int i = 0;
             while (matcher.find()) {
                 strArr[i] = matcher.group(0);
@@ -322,26 +322,16 @@ public class SemEntityParser {
             time.month = monthOfToday;
             time.monthDay = dayOfToday;
             time.hour = Integer.parseInt(strArr[0]);
-            if (!replaceAll.contains("pm") && !replaceAll.contains("PM") && !replaceAll.contains("오후")) {
-                if (!replaceAll.contains(XmlTags.TAG_ACCESS_MODE) && !replaceAll.contains("AM") && !replaceAll.contains("오전")) {
-                    time.hour = Integer.parseInt(strArr[0]);
-                    time.minute = Integer.parseInt(strArr[1]);
-                    time.second = 0;
-                    Log.d(TAG, "convertTimeToMillis() completed successfully");
-                    Log.d(TAG, "year:" + time.year + ", month:" + time.month + ", day:" + time.monthDay + ", hour:" + time.hour + ", minute:" + time.minute + ", second:" + time.second);
-                    return Long.toString(time.toMillis(true));
+            if (strReplaceAll.contains("pm") || strReplaceAll.contains("PM") || strReplaceAll.contains("오후")) {
+                if (time.hour != 12) {
+                    time.hour += 12;
                 }
+            } else if (strReplaceAll.contains(XmlTags.TAG_ACCESS_MODE) || strReplaceAll.contains("AM") || strReplaceAll.contains("오전")) {
                 if (time.hour == 12) {
                     time.hour = 0;
                 }
-                time.minute = Integer.parseInt(strArr[1]);
-                time.second = 0;
-                Log.d(TAG, "convertTimeToMillis() completed successfully");
-                Log.d(TAG, "year:" + time.year + ", month:" + time.month + ", day:" + time.monthDay + ", hour:" + time.hour + ", minute:" + time.minute + ", second:" + time.second);
-                return Long.toString(time.toMillis(true));
-            }
-            if (time.hour != 12) {
-                time.hour += 12;
+            } else {
+                time.hour = Integer.parseInt(strArr[0]);
             }
             time.minute = Integer.parseInt(strArr[1]);
             time.second = 0;

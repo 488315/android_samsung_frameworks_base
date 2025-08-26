@@ -19,7 +19,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class MobileConnectionRepositoryImpl$imsRegState$1 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -44,7 +43,11 @@ final class MobileConnectionRepositoryImpl$imsRegState$1 extends SuspendLambda i
         return ((MobileConnectionRepositoryImpl$imsRegState$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:15:0x0089  */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
@@ -61,47 +64,48 @@ final class MobileConnectionRepositoryImpl$imsRegState$1 extends SuspendLambda i
                 ((List) ((ArrayList) imsRegStateUtil.imsRegStateChangedCallbacks).get(i2)).add(mobileConnectionRepositoryImpl$imsRegState$1$mImsRegStateChangedCallback$1);
                 imsRegStateUtil.imsRegStates.put(Integer.valueOf(i2), ImsRegStateKt.DEFAULT_IMS_REG_STATE);
                 imsRegStateUtil._ePDGConnected.updateState(null, Boolean.valueOf(imsRegStateUtil.ePDGConnected()));
-                String currentProcessName = ActivityThread.currentProcessName();
-                if (currentProcessName != null) {
-                    if (currentProcessName.startsWith(imsRegStateUtil.context.getApplicationInfo().processName + ":")) {
+                String strCurrentProcessName = ActivityThread.currentProcessName();
+                if (strCurrentProcessName != null) {
+                    if (strCurrentProcessName.startsWith(imsRegStateUtil.context.getApplicationInfo().processName + ":")) {
                         Log.d("ImsRegStateUtil", "We don't need to connect to ims service in sub-process.");
-                    }
-                }
-                if (((LinkedHashMap) imsRegStateUtil.imsManagers).get(Integer.valueOf(i2)) == null) {
-                    imsRegStateUtil.imsManagers.put(Integer.valueOf(i2), new ImsManager(imsRegStateUtil.context, new ImsManager.ConnectionListener() { // from class: com.android.systemui.statusbar.pipeline.shared.data.repository.ImsRegStateUtil$getConnectionListener$1
-                        @Override // com.sec.ims.ImsManager.ConnectionListener
-                        public final void onConnected() {
-                            StringBuilder sb = new StringBuilder("ImsManager onConnected, slotId=");
-                            int i3 = i2;
-                            RecyclerView$$ExternalSyntheticOutline0.m(i3, "ImsRegStateUtil", sb);
-                            ImsRegStateUtil imsRegStateUtil2 = imsRegStateUtil;
-                            ImsManager imsManager = (ImsManager) ((LinkedHashMap) imsRegStateUtil2.imsManagers).get(Integer.valueOf(i3));
-                            if (imsManager != null) {
-                                imsManager.registerImsRegistrationListener(new ImsRegStateUtil$getRegistrationListener$1(i3, imsRegStateUtil2), i3);
-                            }
-                        }
+                    } else {
+                        if (((LinkedHashMap) imsRegStateUtil.imsManagers).get(Integer.valueOf(i2)) == null) {
+                            imsRegStateUtil.imsManagers.put(Integer.valueOf(i2), new ImsManager(imsRegStateUtil.context, new ImsManager.ConnectionListener() { // from class: com.android.systemui.statusbar.pipeline.shared.data.repository.ImsRegStateUtil$getConnectionListener$1
+                                @Override // com.sec.ims.ImsManager.ConnectionListener
+                                public final void onConnected() {
+                                    StringBuilder sb = new StringBuilder("ImsManager onConnected, slotId=");
+                                    int i3 = i2;
+                                    RecyclerView$$ExternalSyntheticOutline0.m(i3, "ImsRegStateUtil", sb);
+                                    ImsRegStateUtil imsRegStateUtil2 = imsRegStateUtil;
+                                    ImsManager imsManager = (ImsManager) ((LinkedHashMap) imsRegStateUtil2.imsManagers).get(Integer.valueOf(i3));
+                                    if (imsManager != null) {
+                                        imsManager.registerImsRegistrationListener(new ImsRegStateUtil$getRegistrationListener$1(i3, imsRegStateUtil2), i3);
+                                    }
+                                }
 
-                        @Override // com.sec.ims.ImsManager.ConnectionListener
-                        public final void onDisconnected() {
-                            StringBuilder sb = new StringBuilder("ImsManager onDisconnected, slotId=");
-                            int i3 = i2;
-                            RecyclerView$$ExternalSyntheticOutline0.m(i3, "ImsRegStateUtil", sb);
-                            ImsRegStateUtil imsRegStateUtil2 = imsRegStateUtil;
-                            ImsManager imsManager = (ImsManager) ((LinkedHashMap) imsRegStateUtil2.imsManagers).get(Integer.valueOf(i3));
+                                @Override // com.sec.ims.ImsManager.ConnectionListener
+                                public final void onDisconnected() {
+                                    StringBuilder sb = new StringBuilder("ImsManager onDisconnected, slotId=");
+                                    int i3 = i2;
+                                    RecyclerView$$ExternalSyntheticOutline0.m(i3, "ImsRegStateUtil", sb);
+                                    ImsRegStateUtil imsRegStateUtil2 = imsRegStateUtil;
+                                    ImsManager imsManager = (ImsManager) ((LinkedHashMap) imsRegStateUtil2.imsManagers).get(Integer.valueOf(i3));
+                                    if (imsManager != null) {
+                                        imsManager.unregisterImsRegistrationListener(new ImsRegStateUtil$getRegistrationListener$1(i3, imsRegStateUtil2), i3);
+                                    }
+                                    ImsRegState imsRegState = imsRegStateUtil2.imsRegState;
+                                    imsRegState.voWifiRegState = false;
+                                    imsRegState.voLTERegState = false;
+                                    imsRegState.ePDGRegState = false;
+                                    imsRegStateUtil2._ePDGConnected.updateState(null, Boolean.valueOf(imsRegStateUtil2.ePDGConnected()));
+                                }
+                            }, i2));
+                            Log.d("ImsRegStateUtil", "Connect ImsManager: slotId=" + i2 + " imsManager=" + ((LinkedHashMap) imsRegStateUtil.imsManagers).get(Integer.valueOf(i2)));
+                            ImsManager imsManager = (ImsManager) ((LinkedHashMap) imsRegStateUtil.imsManagers).get(Integer.valueOf(i2));
                             if (imsManager != null) {
-                                imsManager.unregisterImsRegistrationListener(new ImsRegStateUtil$getRegistrationListener$1(i3, imsRegStateUtil2), i3);
+                                imsManager.connectService();
                             }
-                            ImsRegState imsRegState = imsRegStateUtil2.imsRegState;
-                            imsRegState.voWifiRegState = false;
-                            imsRegState.voLTERegState = false;
-                            imsRegState.ePDGRegState = false;
-                            imsRegStateUtil2._ePDGConnected.updateState(null, Boolean.valueOf(imsRegStateUtil2.ePDGConnected()));
                         }
-                    }, i2));
-                    Log.d("ImsRegStateUtil", "Connect ImsManager: slotId=" + i2 + " imsManager=" + ((LinkedHashMap) imsRegStateUtil.imsManagers).get(Integer.valueOf(i2)));
-                    ImsManager imsManager = (ImsManager) ((LinkedHashMap) imsRegStateUtil.imsManagers).get(Integer.valueOf(i2));
-                    if (imsManager != null) {
-                        imsManager.connectService();
                     }
                 }
             }

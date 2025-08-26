@@ -11,7 +11,6 @@ import android.util.TypedValue;
 import androidx.appcompat.R$styleable;
 import androidx.core.content.res.ResourcesCompat;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class TextAppearance {
     public Typeface font;
@@ -29,27 +28,27 @@ public class TextAppearance {
     public final int textStyle;
     public final int typeface;
 
-    public TextAppearance(Context context, int i) {
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(i, R$styleable.TextAppearance);
-        this.textSize = obtainStyledAttributes.getDimension(0, 0.0f);
-        this.textColor = MaterialResources.getColorStateList(context, obtainStyledAttributes, 3);
-        MaterialResources.getColorStateList(context, obtainStyledAttributes, 4);
-        MaterialResources.getColorStateList(context, obtainStyledAttributes, 5);
-        this.textStyle = obtainStyledAttributes.getInt(2, 0);
-        this.typeface = obtainStyledAttributes.getInt(1, 1);
-        int i2 = obtainStyledAttributes.hasValue(12) ? 12 : 10;
-        this.fontFamilyResourceId = obtainStyledAttributes.getResourceId(i2, 0);
-        this.fontFamily = obtainStyledAttributes.getString(i2);
-        obtainStyledAttributes.getBoolean(14, false);
-        this.shadowColor = MaterialResources.getColorStateList(context, obtainStyledAttributes, 6);
-        this.shadowDx = obtainStyledAttributes.getFloat(7, 0.0f);
-        this.shadowDy = obtainStyledAttributes.getFloat(8, 0.0f);
-        this.shadowRadius = obtainStyledAttributes.getFloat(9, 0.0f);
-        obtainStyledAttributes.recycle();
-        TypedArray obtainStyledAttributes2 = context.obtainStyledAttributes(i, com.google.android.material.R$styleable.MaterialTextAppearance);
-        this.hasLetterSpacing = obtainStyledAttributes2.hasValue(0);
-        this.letterSpacing = obtainStyledAttributes2.getFloat(0, 0.0f);
-        obtainStyledAttributes2.recycle();
+    public TextAppearance(Context context, int i) throws Resources.NotFoundException {
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(i, R$styleable.TextAppearance);
+        this.textSize = typedArrayObtainStyledAttributes.getDimension(0, 0.0f);
+        this.textColor = MaterialResources.getColorStateList(context, typedArrayObtainStyledAttributes, 3);
+        MaterialResources.getColorStateList(context, typedArrayObtainStyledAttributes, 4);
+        MaterialResources.getColorStateList(context, typedArrayObtainStyledAttributes, 5);
+        this.textStyle = typedArrayObtainStyledAttributes.getInt(2, 0);
+        this.typeface = typedArrayObtainStyledAttributes.getInt(1, 1);
+        int i2 = typedArrayObtainStyledAttributes.hasValue(12) ? 12 : 10;
+        this.fontFamilyResourceId = typedArrayObtainStyledAttributes.getResourceId(i2, 0);
+        this.fontFamily = typedArrayObtainStyledAttributes.getString(i2);
+        typedArrayObtainStyledAttributes.getBoolean(14, false);
+        this.shadowColor = MaterialResources.getColorStateList(context, typedArrayObtainStyledAttributes, 6);
+        this.shadowDx = typedArrayObtainStyledAttributes.getFloat(7, 0.0f);
+        this.shadowDy = typedArrayObtainStyledAttributes.getFloat(8, 0.0f);
+        this.shadowRadius = typedArrayObtainStyledAttributes.getFloat(9, 0.0f);
+        typedArrayObtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes2 = context.obtainStyledAttributes(i, com.google.android.material.R$styleable.MaterialTextAppearance);
+        this.hasLetterSpacing = typedArrayObtainStyledAttributes2.hasValue(0);
+        this.letterSpacing = typedArrayObtainStyledAttributes2.getFloat(0, 0.0f);
+        typedArrayObtainStyledAttributes2.recycle();
     }
 
     public final void createFallbackFont() {
@@ -82,10 +81,10 @@ public class TextAppearance {
             try {
                 int i = this.fontFamilyResourceId;
                 ThreadLocal threadLocal = ResourcesCompat.sTempTypedValue;
-                Typeface loadFont = context.isRestricted() ? null : ResourcesCompat.loadFont(context, i, new TypedValue(), 0, null, false, false);
-                this.font = loadFont;
-                if (loadFont != null) {
-                    this.font = Typeface.create(loadFont, this.textStyle);
+                Typeface typefaceLoadFont = context.isRestricted() ? null : ResourcesCompat.loadFont(context, i, new TypedValue(), 0, null, false, false);
+                this.font = typefaceLoadFont;
+                if (typefaceLoadFont != null) {
+                    this.font = Typeface.create(typefaceLoadFont, this.textStyle);
                 }
             } catch (Resources.NotFoundException | UnsupportedOperationException unused) {
             } catch (Exception e) {
@@ -143,16 +142,16 @@ public class TextAppearance {
         }
     }
 
-    public final boolean shouldLoadFontSynchronously(Context context) {
-        Typeface typeface = null;
+    public final boolean shouldLoadFontSynchronously(Context context) throws Resources.NotFoundException {
+        Typeface typefaceLoadFont = null;
         int i = this.fontFamilyResourceId;
         if (i != 0) {
             ThreadLocal threadLocal = ResourcesCompat.sTempTypedValue;
             if (!context.isRestricted()) {
-                typeface = ResourcesCompat.loadFont(context, i, new TypedValue(), 0, null, false, true);
+                typefaceLoadFont = ResourcesCompat.loadFont(context, i, new TypedValue(), 0, null, false, true);
             }
         }
-        return typeface != null;
+        return typefaceLoadFont != null;
     }
 
     public final void updateDrawState(Context context, TextPaint textPaint, TextAppearanceFontCallback textAppearanceFontCallback) {
@@ -185,9 +184,9 @@ public class TextAppearance {
     }
 
     public final void updateTextPaintMeasureState(Context context, TextPaint textPaint, Typeface typeface) {
-        Typeface maybeCopyWithFontWeightAdjustment = TypefaceUtils.maybeCopyWithFontWeightAdjustment(context.getResources().getConfiguration(), typeface);
-        if (maybeCopyWithFontWeightAdjustment != null) {
-            typeface = maybeCopyWithFontWeightAdjustment;
+        Typeface typefaceMaybeCopyWithFontWeightAdjustment = TypefaceUtils.maybeCopyWithFontWeightAdjustment(context.getResources().getConfiguration(), typeface);
+        if (typefaceMaybeCopyWithFontWeightAdjustment != null) {
+            typeface = typefaceMaybeCopyWithFontWeightAdjustment;
         }
         textPaint.setTypeface(typeface);
         int i = (~typeface.getStyle()) & this.textStyle;

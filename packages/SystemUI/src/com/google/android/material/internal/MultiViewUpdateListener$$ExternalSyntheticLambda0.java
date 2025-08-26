@@ -4,7 +4,6 @@ import android.animation.ValueAnimator;
 import android.view.View;
 import com.google.android.material.internal.MultiViewUpdateListener;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final /* synthetic */ class MultiViewUpdateListener$$ExternalSyntheticLambda0 implements MultiViewUpdateListener.Listener {
     public final /* synthetic */ int $r8$classId;

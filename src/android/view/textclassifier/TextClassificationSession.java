@@ -44,9 +44,7 @@ final class TextClassificationSession implements TextClassifier {
         return (TextSelection) checkDestroyedAndRun(new Supplier() { // from class: android.view.textclassifier.TextClassificationSession$$ExternalSyntheticLambda5
             @Override // java.util.function.Supplier
             public final Object get() {
-                TextSelection lambda$suggestSelection$0;
-                lambda$suggestSelection$0 = TextClassificationSession.this.lambda$suggestSelection$0(request);
-                return lambda$suggestSelection$0;
+                return this.f$0.lambda$suggestSelection$0(request);
             }
         });
     }
@@ -68,9 +66,7 @@ final class TextClassificationSession implements TextClassifier {
         return (TextClassification) checkDestroyedAndRun(new Supplier() { // from class: android.view.textclassifier.TextClassificationSession$$ExternalSyntheticLambda2
             @Override // java.util.function.Supplier
             public final Object get() {
-                TextClassification lambda$classifyText$1;
-                lambda$classifyText$1 = TextClassificationSession.this.lambda$classifyText$1(request);
-                return lambda$classifyText$1;
+                return this.f$0.lambda$classifyText$1(request);
             }
         });
     }
@@ -85,9 +81,7 @@ final class TextClassificationSession implements TextClassifier {
         return (TextLinks) checkDestroyedAndRun(new Supplier() { // from class: android.view.textclassifier.TextClassificationSession$$ExternalSyntheticLambda4
             @Override // java.util.function.Supplier
             public final Object get() {
-                TextLinks lambda$generateLinks$2;
-                lambda$generateLinks$2 = TextClassificationSession.this.lambda$generateLinks$2(request);
-                return lambda$generateLinks$2;
+                return this.f$0.lambda$generateLinks$2(request);
             }
         });
     }
@@ -102,9 +96,7 @@ final class TextClassificationSession implements TextClassifier {
         return (ConversationActions) checkDestroyedAndRun(new Supplier() { // from class: android.view.textclassifier.TextClassificationSession$$ExternalSyntheticLambda6
             @Override // java.util.function.Supplier
             public final Object get() {
-                ConversationActions lambda$suggestConversationActions$3;
-                lambda$suggestConversationActions$3 = TextClassificationSession.this.lambda$suggestConversationActions$3(request);
-                return lambda$suggestConversationActions$3;
+                return this.f$0.lambda$suggestConversationActions$3(request);
             }
         });
     }
@@ -119,9 +111,7 @@ final class TextClassificationSession implements TextClassifier {
         return (TextLanguage) checkDestroyedAndRun(new Supplier() { // from class: android.view.textclassifier.TextClassificationSession$$ExternalSyntheticLambda0
             @Override // java.util.function.Supplier
             public final Object get() {
-                TextLanguage lambda$detectLanguage$4;
-                lambda$detectLanguage$4 = TextClassificationSession.this.lambda$detectLanguage$4(request);
-                return lambda$detectLanguage$4;
+                return this.f$0.lambda$detectLanguage$4(request);
             }
         });
     }
@@ -133,7 +123,7 @@ final class TextClassificationSession implements TextClassifier {
         return ((Integer) checkDestroyedAndRun(new Supplier() { // from class: android.view.textclassifier.TextClassificationSession$$ExternalSyntheticLambda7
             @Override // java.util.function.Supplier
             public final Object get() {
-                return Integer.valueOf(TextClassifier.this.getMaxGenerateLinksTextLength());
+                return Integer.valueOf(textClassifier.getMaxGenerateLinksTextLength());
             }
         })).intValue();
     }
@@ -143,9 +133,7 @@ final class TextClassificationSession implements TextClassifier {
         checkDestroyedAndRun(new Supplier() { // from class: android.view.textclassifier.TextClassificationSession$$ExternalSyntheticLambda3
             @Override // java.util.function.Supplier
             public final Object get() {
-                Object lambda$onSelectionEvent$5;
-                lambda$onSelectionEvent$5 = TextClassificationSession.this.lambda$onSelectionEvent$5(selectionEvent);
-                return lambda$onSelectionEvent$5;
+                return this.f$0.lambda$onSelectionEvent$5(selectionEvent);
             }
         });
     }
@@ -169,9 +157,7 @@ final class TextClassificationSession implements TextClassifier {
         checkDestroyedAndRun(new Supplier() { // from class: android.view.textclassifier.TextClassificationSession$$ExternalSyntheticLambda1
             @Override // java.util.function.Supplier
             public final Object get() {
-                Object lambda$onTextClassifierEvent$6;
-                lambda$onTextClassifierEvent$6 = TextClassificationSession.this.lambda$onTextClassifierEvent$6(textClassifierEvent);
-                return lambda$onTextClassifierEvent$6;
+                return this.f$0.lambda$onTextClassifierEvent$6(textClassifierEvent);
             }
         });
     }
@@ -240,7 +226,7 @@ final class TextClassificationSession implements TextClassifier {
                 Log.d(TextClassificationSession.LOG_TAG, "Selection session not yet started. Ignoring event");
                 return false;
             }
-            long currentTimeMillis = System.currentTimeMillis();
+            long jCurrentTimeMillis = System.currentTimeMillis();
             int eventType = selectionEvent.getEventType();
             if (eventType == 1) {
                 Preconditions.checkArgument(selectionEvent.getAbsoluteEnd() == selectionEvent.getAbsoluteStart() + 1);
@@ -256,10 +242,10 @@ final class TextClassificationSession implements TextClassifier {
             } else if ((eventType == 100 || eventType == 107) && (selectionEvent2 = this.mPrevEvent) != null) {
                 selectionEvent.setEntityType(selectionEvent2.getEntityType());
             }
-            selectionEvent.setEventTime(currentTimeMillis);
+            selectionEvent.setEventTime(jCurrentTimeMillis);
             SelectionEvent selectionEvent4 = this.mStartEvent;
             if (selectionEvent4 != null) {
-                selectionEvent.setSessionId(selectionEvent4.getSessionId()).setDurationSinceSessionStart(currentTimeMillis - this.mStartEvent.getEventTime()).setStart(selectionEvent.getAbsoluteStart() - this.mStartEvent.getAbsoluteStart()).setEnd(selectionEvent.getAbsoluteEnd() - this.mStartEvent.getAbsoluteStart());
+                selectionEvent.setSessionId(selectionEvent4.getSessionId()).setDurationSinceSessionStart(jCurrentTimeMillis - this.mStartEvent.getEventTime()).setStart(selectionEvent.getAbsoluteStart() - this.mStartEvent.getAbsoluteStart()).setEnd(selectionEvent.getAbsoluteEnd() - this.mStartEvent.getAbsoluteStart());
             }
             SelectionEvent selectionEvent5 = this.mSmartEvent;
             if (selectionEvent5 != null) {
@@ -267,7 +253,7 @@ final class TextClassificationSession implements TextClassifier {
             }
             SelectionEvent selectionEvent6 = this.mPrevEvent;
             if (selectionEvent6 != null) {
-                selectionEvent.setDurationSincePreviousEvent(currentTimeMillis - selectionEvent6.getEventTime()).setEventIndex(this.mPrevEvent.getEventIndex() + 1);
+                selectionEvent.setDurationSincePreviousEvent(jCurrentTimeMillis - selectionEvent6.getEventTime()).setEventIndex(this.mPrevEvent.getEventIndex() + 1);
             }
             this.mPrevEvent = selectionEvent;
             return true;

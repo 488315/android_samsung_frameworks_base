@@ -36,7 +36,6 @@ import com.android.systemui.user.domain.interactor.SelectedUserInteractor;
 import java.util.concurrent.Executor;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class CameraGestureHelper {
     public final ActivityIntentHelper activityIntentHelper;
@@ -55,7 +54,6 @@ public final class CameraGestureHelper {
     public final StatusBarKeyguardViewManager statusBarKeyguardViewManager;
     public final Executor uiExecutor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -101,15 +99,15 @@ public final class CameraGestureHelper {
         PackageManager packageManager = this.packageManager;
         SelectedUserInteractor selectedUserInteractor = this.selectedUserInteractor;
         selectedUserInteractor.getSelectedUserId();
-        ResolveInfo resolveActivityAsUser = packageManager.resolveActivityAsUser(getStartCameraIntent(), 65536, selectedUserInteractor.getSelectedUserId());
-        if (resolveActivityAsUser != null && (activityInfo = resolveActivityAsUser.activityInfo) != null) {
+        ResolveInfo resolveInfoResolveActivityAsUser = packageManager.resolveActivityAsUser(getStartCameraIntent(), 65536, selectedUserInteractor.getSelectedUserId());
+        if (resolveInfoResolveActivityAsUser != null && (activityInfo = resolveInfoResolveActivityAsUser.activityInfo) != null) {
             str = activityInfo.packageName;
         }
         if (str == null) {
             return false;
         }
         if (i == 0) {
-            return !((CentralSurfacesImpl) this.centralSurfaces).isForegroundComponentName(resolveActivityAsUser.activityInfo.getComponentName());
+            return !((CentralSurfacesImpl) this.centralSurfaces).isForegroundComponentName(resolveInfoResolveActivityAsUser.activityInfo.getComponentName());
         }
         return true;
     }
@@ -136,14 +134,14 @@ public final class CameraGestureHelper {
         selectedUserInteractor.getSelectedUserId();
         final Intent startCameraIntent = getStartCameraIntent();
         startCameraIntent.putExtra("com.android.systemui.camera_launch_source", i);
-        boolean wouldLaunchResolverActivity = this.activityIntentHelper.wouldLaunchResolverActivity(selectedUserInteractor.getSelectedUserId(), startCameraIntent);
+        boolean zWouldLaunchResolverActivity = this.activityIntentHelper.wouldLaunchResolverActivity(selectedUserInteractor.getSelectedUserId(), startCameraIntent);
         CameraLaunchType cameraLaunchType = CameraLaunchType.POWER_DOUBLE_TAP;
         this.keyguardInteractor.getClass();
         final boolean z = cameraLaunchType == KeyguardInteractor.cameraLaunchSourceIntToType(i);
         startCameraIntent.putExtra("isQuickLaunchMode", z);
         CameraIntents.Companion.getClass();
         KeyguardShortcutManager.Companion.getClass();
-        if (!startCameraIntent.equals(KeyguardShortcutManager.SECURE_CAMERA_INTENT) || wouldLaunchResolverActivity) {
+        if (!startCameraIntent.equals(KeyguardShortcutManager.SECURE_CAMERA_INTENT) || zWouldLaunchResolverActivity) {
             startCameraIntent.putExtra("isSecure", false);
             if (((CentralSurfacesImpl) this.centralSurfaces).isForegroundComponentName(startCameraIntent.getComponent())) {
                 startCameraIntent.setFlags(270532608);
@@ -153,19 +151,19 @@ public final class CameraGestureHelper {
                     startCameraIntent.addFlags(67141632);
                 }
             }
-            this.activityStarter.startCameraActivity(startCameraIntent, false, new ActivityStarter.Callback() { // from class: com.android.systemui.camera.CameraGestureHelper$launchCamera$2
+            this.activityStarter.startCameraActivity(startCameraIntent, false, new ActivityStarter.Callback() { // from class: com.android.systemui.camera.CameraGestureHelper.launchCamera.2
                 @Override // com.android.systemui.plugins.ActivityStarter.Callback
                 public final void onActivityStarted(int i2) {
                 }
             });
         } else {
-            this.uiExecutor.execute(new Runnable() { // from class: com.android.systemui.camera.CameraGestureHelper$launchCamera$1
+            this.uiExecutor.execute(new Runnable() { // from class: com.android.systemui.camera.CameraGestureHelper.launchCamera.1
                 @Override // java.lang.Runnable
                 public final void run() {
                     int displayId;
-                    ActivityOptions makeBasic = ActivityOptions.makeBasic();
-                    makeBasic.setDisallowEnterPictureInPictureWhileLaunching(true);
-                    makeBasic.setRotationAnimationHint(3);
+                    ActivityOptions activityOptionsMakeBasic = ActivityOptions.makeBasic();
+                    activityOptionsMakeBasic.setDisallowEnterPictureInPictureWhileLaunching(true);
+                    activityOptionsMakeBasic.setRotationAnimationHint(3);
                     startCameraIntent.collectExtraIntentKeys();
                     try {
                         startCameraIntent.putExtra("isSecure", true);
@@ -187,14 +185,14 @@ public final class CameraGestureHelper {
                             displayId = SubscreenUtil.getSubDisplay(context).getDisplayId();
                         }
                         this.activityTaskManager.resumeAppSwitches();
-                        makeBasic.setForceLaunchWindowingMode(1);
-                        makeBasic.setLaunchDisplayId(displayId);
+                        activityOptionsMakeBasic.setForceLaunchWindowingMode(1);
+                        activityOptionsMakeBasic.setLaunchDisplayId(displayId);
                         CameraGestureHelper cameraGestureHelper = this;
                         IActivityTaskManager iActivityTaskManager = cameraGestureHelper.activityTaskManager;
                         String basePackageName = cameraGestureHelper.context.getBasePackageName();
                         String attributionTag = this.context.getAttributionTag();
                         Intent intent = startCameraIntent;
-                        iActivityTaskManager.startActivityAsUser((IApplicationThread) null, basePackageName, attributionTag, intent, intent.resolveTypeIfNeeded(this.contentResolver), (IBinder) null, (String) null, 0, 268435456, (ProfilerInfo) null, makeBasic.toBundle(), this.selectedUserInteractor.getSelectedUserId());
+                        iActivityTaskManager.startActivityAsUser((IApplicationThread) null, basePackageName, attributionTag, intent, intent.resolveTypeIfNeeded(this.contentResolver), (IBinder) null, (String) null, 0, 268435456, (ProfilerInfo) null, activityOptionsMakeBasic.toBundle(), this.selectedUserInteractor.getSelectedUserId());
                     } catch (RemoteException e) {
                         Log.w("CameraGestureHelper", "Unable to start camera activity", e);
                     }

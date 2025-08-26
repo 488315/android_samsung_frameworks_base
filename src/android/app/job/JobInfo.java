@@ -334,46 +334,46 @@ public class JobInfo implements Parcelable {
     }
 
     public int hashCode() {
-        int i = this.jobId;
+        int iHashCode = this.jobId;
         PersistableBundle persistableBundle = this.extras;
         if (persistableBundle != null) {
-            i = (i * 31) + persistableBundle.hashCode();
+            iHashCode = (iHashCode * 31) + persistableBundle.hashCode();
         }
         Bundle bundle = this.transientExtras;
         if (bundle != null) {
-            i = (i * 31) + bundle.hashCode();
+            iHashCode = (iHashCode * 31) + bundle.hashCode();
         }
         ClipData clipData = this.clipData;
         if (clipData != null) {
-            i = (i * 31) + clipData.hashCode();
+            iHashCode = (iHashCode * 31) + clipData.hashCode();
         }
-        int i2 = (i * 31) + this.clipGrantFlags;
+        int iHashCode2 = (iHashCode * 31) + this.clipGrantFlags;
         ComponentName componentName = this.service;
         if (componentName != null) {
-            i2 = (i2 * 31) + componentName.hashCode();
+            iHashCode2 = (iHashCode2 * 31) + componentName.hashCode();
         }
-        int i3 = (i2 * 31) + this.constraintFlags;
+        int iHashCode3 = (iHashCode2 * 31) + this.constraintFlags;
         TriggerContentUri[] triggerContentUriArr = this.triggerContentUris;
         if (triggerContentUriArr != null) {
-            i3 = (i3 * 31) + Arrays.hashCode(triggerContentUriArr);
+            iHashCode3 = (iHashCode3 * 31) + Arrays.hashCode(triggerContentUriArr);
         }
-        int hashCode = (((((((i3 * 31) + Long.hashCode(this.triggerContentUpdateDelay)) * 31) + Long.hashCode(this.triggerContentMaxDelay)) * 31) + Boolean.hashCode(this.hasEarlyConstraint)) * 31) + Boolean.hashCode(this.hasLateConstraint);
+        int iHashCode4 = (((((((iHashCode3 * 31) + Long.hashCode(this.triggerContentUpdateDelay)) * 31) + Long.hashCode(this.triggerContentMaxDelay)) * 31) + Boolean.hashCode(this.hasEarlyConstraint)) * 31) + Boolean.hashCode(this.hasLateConstraint);
         NetworkRequest networkRequest = this.networkRequest;
         if (networkRequest != null) {
-            hashCode = (hashCode * 31) + networkRequest.hashCode();
+            iHashCode4 = (iHashCode4 * 31) + networkRequest.hashCode();
         }
-        int hashCode2 = (((((((((((((((((((((((((((hashCode * 31) + Long.hashCode(this.networkDownloadBytes)) * 31) + Long.hashCode(this.networkUploadBytes)) * 31) + Long.hashCode(this.minimumNetworkChunkBytes)) * 31) + Long.hashCode(this.minLatencyMillis)) * 31) + Long.hashCode(this.maxExecutionDelayMillis)) * 31) + Boolean.hashCode(this.isPeriodic)) * 31) + Boolean.hashCode(this.isPersisted)) * 31) + Long.hashCode(this.intervalMillis)) * 31) + Long.hashCode(this.flexMillis)) * 31) + Long.hashCode(this.initialBackoffMillis)) * 31) + this.backoffPolicy) * 31) + this.mBias) * 31) + this.mPriority) * 31) + this.flags;
+        int iHashCode5 = (((((((((((((((((((((((((((iHashCode4 * 31) + Long.hashCode(this.networkDownloadBytes)) * 31) + Long.hashCode(this.networkUploadBytes)) * 31) + Long.hashCode(this.minimumNetworkChunkBytes)) * 31) + Long.hashCode(this.minLatencyMillis)) * 31) + Long.hashCode(this.maxExecutionDelayMillis)) * 31) + Boolean.hashCode(this.isPeriodic)) * 31) + Boolean.hashCode(this.isPersisted)) * 31) + Long.hashCode(this.intervalMillis)) * 31) + Long.hashCode(this.flexMillis)) * 31) + Long.hashCode(this.initialBackoffMillis)) * 31) + this.backoffPolicy) * 31) + this.mBias) * 31) + this.mPriority) * 31) + this.flags;
         if (this.mDebugTags.size() > 0) {
-            hashCode2 = (hashCode2 * 31) + this.mDebugTags.hashCode();
+            iHashCode5 = (iHashCode5 * 31) + this.mDebugTags.hashCode();
         }
         String str = this.mTraceTag;
-        return str != null ? (hashCode2 * 31) + str.hashCode() : hashCode2;
+        return str != null ? (iHashCode5 * 31) + str.hashCode() : iHashCode5;
     }
 
     private JobInfo(Parcel parcel) {
         this.jobId = parcel.readInt();
-        PersistableBundle readPersistableBundle = parcel.readPersistableBundle();
-        this.extras = readPersistableBundle == null ? PersistableBundle.EMPTY : readPersistableBundle;
+        PersistableBundle persistableBundle = parcel.readPersistableBundle();
+        this.extras = persistableBundle == null ? PersistableBundle.EMPTY : persistableBundle;
         this.transientExtras = parcel.readBundle();
         if (parcel.readInt() != 0) {
             this.clipData = ClipData.CREATOR.createFromParcel(parcel);
@@ -408,17 +408,17 @@ public class JobInfo implements Parcelable {
         this.mBias = parcel.readInt();
         this.mPriority = parcel.readInt();
         this.flags = parcel.readInt();
-        int readInt = parcel.readInt();
+        int i = parcel.readInt();
         this.mDebugTags = new ArraySet<>();
-        for (int i = 0; i < readInt; i++) {
-            String readString = parcel.readString();
-            if (readString == null) {
+        for (int i2 = 0; i2 < i; i2++) {
+            String string = parcel.readString();
+            if (string == null) {
                 throw new IllegalStateException("malformed parcel");
             }
-            this.mDebugTags.add(readString.intern());
+            this.mDebugTags.add(string.intern());
         }
-        String readString2 = parcel.readString();
-        this.mTraceTag = readString2 != null ? readString2.intern() : null;
+        String string2 = parcel.readString();
+        this.mTraceTag = string2 != null ? string2.intern() : null;
     }
 
     private JobInfo(Builder builder) {
@@ -801,10 +801,10 @@ public class JobInfo implements Parcelable {
                 Log.w(JobInfo.TAG, "Requested interval " + TimeUtils.formatDuration(j) + " for job " + this.mJobId + " is too small; raising to " + TimeUtils.formatDuration(minPeriodMillis));
                 j = minPeriodMillis;
             }
-            long max = Math.max((5 * j) / 100, JobInfo.getMinFlexMillis());
-            if (j2 < max) {
-                Log.w(JobInfo.TAG, "Requested flex " + TimeUtils.formatDuration(j2) + " for job " + this.mJobId + " is too small; raising to " + TimeUtils.formatDuration(max));
-                j2 = max;
+            long jMax = Math.max((5 * j) / 100, JobInfo.getMinFlexMillis());
+            if (j2 < jMax) {
+                Log.w(JobInfo.TAG, "Requested flex " + TimeUtils.formatDuration(j2) + " for job " + this.mJobId + " is too small; raising to " + TimeUtils.formatDuration(jMax));
+                j2 = jMax;
             }
             this.mIsPeriodic = true;
             this.mIntervalMillis = j;
@@ -921,14 +921,14 @@ public class JobInfo implements Parcelable {
         }
 
         public String summarize() {
-            String str;
+            String strFlattenToShortString;
             ComponentName componentName = this.mJobService;
             if (componentName != null) {
-                str = componentName.flattenToShortString();
+                strFlattenToShortString = componentName.flattenToShortString();
             } else {
-                str = PerfettoProtoLogImpl.NULL_STRING;
+                strFlattenToShortString = PerfettoProtoLogImpl.NULL_STRING;
             }
-            return "JobInfo.Builder{job:" + this.mJobId + "/" + str + "}";
+            return "JobInfo.Builder{job:" + this.mJobId + "/" + strFlattenToShortString + "}";
         }
     }
 
@@ -1114,31 +1114,31 @@ public class JobInfo implements Parcelable {
         if (str == null) {
             throw new NullPointerException("debug tag cannot be null");
         }
-        String trim = str.trim();
-        if (trim.isEmpty()) {
+        String strTrim = str.trim();
+        if (strTrim.isEmpty()) {
             throw new IllegalArgumentException("debug tag cannot be empty");
         }
-        if (trim.length() > 127) {
+        if (strTrim.length() > 127) {
             throw new IllegalArgumentException("debug tag cannot be more than 127 characters");
         }
-        return trim.intern();
+        return strTrim.intern();
     }
 
     public static String validateTraceTag(String str) {
         if (str == null) {
             return null;
         }
-        String trim = str.trim();
-        if (trim.isEmpty()) {
+        String strTrim = str.trim();
+        if (strTrim.isEmpty()) {
             throw new IllegalArgumentException("trace tag cannot be empty");
         }
-        if (trim.length() > 127) {
+        if (strTrim.length() > 127) {
             throw new IllegalArgumentException("traceTag tag cannot be more than 127 characters");
         }
-        if (trim.contains(NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER) || trim.contains(ShaderAssembler.NEWLINE) || trim.contains("\u0000")) {
+        if (strTrim.contains(NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER) || strTrim.contains(ShaderAssembler.NEWLINE) || strTrim.contains("\u0000")) {
             throw new IllegalArgumentException("Trace tag cannot contain |, \\n, or \\0");
         }
-        return trim.intern();
+        return strTrim.intern();
     }
 
     public static String getBiasString(int i) {

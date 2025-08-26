@@ -37,19 +37,19 @@ public final class LauncherIcons {
     }
 
     private Bitmap getShadowBitmap(AdaptiveIconDrawable adaptiveIconDrawable) {
-        int max = Math.max(this.mIconSize, adaptiveIconDrawable.getIntrinsicHeight());
+        int iMax = Math.max(this.mIconSize, adaptiveIconDrawable.getIntrinsicHeight());
         synchronized (this.mShadowCache) {
-            Bitmap bitmap = this.mShadowCache.get(max);
+            Bitmap bitmap = this.mShadowCache.get(iMax);
             if (bitmap != null) {
                 return bitmap;
             }
-            adaptiveIconDrawable.setBounds(0, 0, max, max);
-            float f = max;
+            adaptiveIconDrawable.setBounds(0, 0, iMax, iMax);
+            float f = iMax;
             float f2 = ICON_SIZE_BLUR_FACTOR * f;
             float f3 = ICON_SIZE_KEY_SHADOW_DELTA_FACTOR * f;
             int i = (int) (f + (f2 * 2.0f) + f3);
-            Bitmap createBitmap = Bitmap.createBitmap(i, i, Bitmap.Config.ARGB_8888);
-            Canvas canvas = new Canvas(createBitmap);
+            Bitmap bitmapCreateBitmap = Bitmap.createBitmap(i, i, Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(bitmapCreateBitmap);
             canvas.translate((f3 / 2.0f) + f2, f2);
             Paint paint = new Paint(1);
             paint.setColor(0);
@@ -60,9 +60,9 @@ public final class LauncherIcons {
             canvas.drawPath(adaptiveIconDrawable.getIconMask(), paint);
             canvas.setBitmap(null);
             synchronized (this.mShadowCache) {
-                this.mShadowCache.put(max, createBitmap);
+                this.mShadowCache.put(iMax, bitmapCreateBitmap);
             }
-            return createBitmap;
+            return bitmapCreateBitmap;
         }
     }
 
@@ -70,16 +70,16 @@ public final class LauncherIcons {
         return getBadgedDrawable(null, drawable, i);
     }
 
-    public Drawable getBadgedDrawable(Drawable drawable, Drawable drawable2, int i) {
+    public Drawable getBadgedDrawable(Drawable drawable, Drawable drawable2, int i) throws Resources.NotFoundException {
         Drawable[] drawableArr;
         Resources resources = ActivityThread.currentActivityThread().getApplication().getResources();
         Drawable drawable3 = resources.getDrawable(R.drawable.ic_corp_icon_badge_shadow);
-        Drawable mutate = resources.getDrawable(R.drawable.ic_corp_icon_badge_color).getConstantState().newDrawable().mutate();
+        Drawable drawableMutate = resources.getDrawable(R.drawable.ic_corp_icon_badge_color).getConstantState().newDrawable().mutate();
         drawable2.setTint(i);
         if (drawable == null) {
-            drawableArr = new Drawable[]{drawable3, mutate, drawable2};
+            drawableArr = new Drawable[]{drawable3, drawableMutate, drawable2};
         } else {
-            drawableArr = new Drawable[]{drawable, drawable3, mutate, drawable2};
+            drawableArr = new Drawable[]{drawable, drawable3, drawableMutate, drawable2};
         }
         return new LayerDrawable(drawableArr);
     }

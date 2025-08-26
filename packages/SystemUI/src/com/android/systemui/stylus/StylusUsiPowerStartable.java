@@ -19,10 +19,10 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Reflection;
 import kotlin.sequences.EmptySequence;
-import kotlin.sequences.FilteringSequence$iterator$1;
+import kotlin.sequences.FilteringSequence;
+import kotlin.sequences.FilteringSequence.AnonymousClass1;
 import kotlin.sequences.SequencesKt___SequencesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class StylusUsiPowerStartable implements CoreStartable, StylusManager.StylusCallback {
     public final FeatureFlags featureFlags;
@@ -30,7 +30,6 @@ public final class StylusUsiPowerStartable implements CoreStartable, StylusManag
     public final StylusManager stylusManager;
     public final StylusUsiPowerUI stylusUsiPowerUi;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -73,14 +72,14 @@ public final class StylusUsiPowerStartable implements CoreStartable, StylusManag
         stylusUsiPowerUI.handler.post(new Runnable() { // from class: com.android.systemui.stylus.StylusUsiPowerUI$updateBatteryState$1
             @Override // java.lang.Runnable
             public final void run() {
-                StylusUsiPowerUI.this.inputDeviceId = Integer.valueOf(i);
-                if (batteryState.getCapacity() != StylusUsiPowerUI.this.batteryCapacity && batteryState.getCapacity() > 0.0f) {
-                    StylusUsiPowerUI.this.batteryCapacity = batteryState.getCapacity();
+                stylusUsiPowerUI.inputDeviceId = Integer.valueOf(i);
+                if (batteryState.getCapacity() != stylusUsiPowerUI.batteryCapacity && batteryState.getCapacity() > 0.0f) {
+                    stylusUsiPowerUI.batteryCapacity = batteryState.getCapacity();
                     DebugLogger debugLogger = DebugLogger.INSTANCE;
-                    StylusUsiPowerUI stylusUsiPowerUI2 = StylusUsiPowerUI.this;
+                    StylusUsiPowerUI stylusUsiPowerUI2 = stylusUsiPowerUI;
                     boolean z = Build.IS_DEBUGGABLE;
                     Reflection.getOrCreateKotlinClass(stylusUsiPowerUI2.getClass()).getSimpleName();
-                    StylusUsiPowerUI stylusUsiPowerUI3 = StylusUsiPowerUI.this;
+                    StylusUsiPowerUI stylusUsiPowerUI3 = stylusUsiPowerUI;
                     stylusUsiPowerUI3.getClass();
                     stylusUsiPowerUI3.handler.post(new StylusUsiPowerUI$refresh$1(stylusUsiPowerUI3));
                 }
@@ -92,15 +91,15 @@ public final class StylusUsiPowerStartable implements CoreStartable, StylusManag
     public final void start() {
         if (((FeatureFlagsClassicRelease) this.featureFlags).isEnabled(Flags.ENABLE_USI_BATTERY_NOTIFICATIONS)) {
             int[] inputDeviceIds = this.inputManager.getInputDeviceIds();
-            FilteringSequence$iterator$1 filteringSequence$iterator$1 = new FilteringSequence$iterator$1(SequencesKt___SequencesKt.mapNotNull(inputDeviceIds.length == 0 ? EmptySequence.INSTANCE : new ArraysKt___ArraysKt$asSequence$$inlined$Sequence$4(inputDeviceIds), new Function1() { // from class: com.android.systemui.stylus.StylusUsiPowerStartable$$ExternalSyntheticLambda0
+            FilteringSequence.AnonymousClass1 anonymousClass1 = SequencesKt___SequencesKt.mapNotNull(inputDeviceIds.length == 0 ? EmptySequence.INSTANCE : new ArraysKt___ArraysKt$asSequence$$inlined$Sequence$4(inputDeviceIds), new Function1() { // from class: com.android.systemui.stylus.StylusUsiPowerStartable$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
-                    return StylusUsiPowerStartable.this.inputManager.getInputDevice(((Integer) obj).intValue());
+                public final Object mo781invoke(Object obj) {
+                    return this.f$0.inputManager.getInputDevice(((Integer) obj).intValue());
                 }
-            }));
-            while (filteringSequence$iterator$1.hasNext()) {
-                InputDevice inputDevice = (InputDevice) filteringSequence$iterator$1.next();
+            }).new AnonymousClass1();
+            while (anonymousClass1.hasNext()) {
+                InputDevice inputDevice = (InputDevice) anonymousClass1.next();
                 if (inputDevice.supportsSource(16386) && !inputDevice.isExternal()) {
                     StylusUsiPowerUI stylusUsiPowerUI = this.stylusUsiPowerUi;
                     stylusUsiPowerUI.getClass();
@@ -111,33 +110,41 @@ public final class StylusUsiPowerStartable implements CoreStartable, StylusManag
                     final StylusManager stylusManager = this.stylusManager;
                     stylusManager.stylusCallbacks.add(this);
                     stylusManager.handler.post(new Runnable() { // from class: com.android.systemui.stylus.StylusManager$startListener$1
+                        /* JADX WARN: Removed duplicated region for block: B:21:0x006b  */
                         @Override // java.lang.Runnable
+                        /*
+                            Code decompiled incorrectly, please refer to instructions dump.
+                        */
                         public final void run() {
                             int i;
                             boolean z;
-                            if (StylusManager.this.hasStarted) {
+                            if (stylusManager.hasStarted) {
                                 return;
                             }
                             DebugLogger debugLogger = DebugLogger.INSTANCE;
                             boolean z2 = Build.IS_DEBUGGABLE;
                             Reflection.getOrCreateKotlinClass(StylusManager.class).getSimpleName();
-                            StylusManager stylusManager2 = StylusManager.this;
+                            StylusManager stylusManager2 = stylusManager;
                             stylusManager2.hasStarted = true;
                             InputManager inputManager = stylusManager2.inputManager;
                             int[] inputDeviceIds2 = inputManager.getInputDeviceIds();
-                            FilteringSequence$iterator$1 filteringSequence$iterator$12 = new FilteringSequence$iterator$1(SequencesKt___SequencesKt.mapNotNull(inputDeviceIds2.length == 0 ? EmptySequence.INSTANCE : new ArraysKt___ArraysKt$asSequence$$inlined$Sequence$4(inputDeviceIds2), new InputManagerKt$$ExternalSyntheticLambda0(inputManager)));
+                            FilteringSequence.AnonymousClass1 anonymousClass12 = SequencesKt___SequencesKt.mapNotNull(inputDeviceIds2.length == 0 ? EmptySequence.INSTANCE : new ArraysKt___ArraysKt$asSequence$$inlined$Sequence$4(inputDeviceIds2), new InputManagerKt$$ExternalSyntheticLambda0(inputManager)).new AnonymousClass1();
                             do {
-                                if (!filteringSequence$iterator$12.hasNext()) {
+                                if (!anonymousClass12.hasNext()) {
                                     break;
                                 }
-                                InputDevice inputDevice2 = (InputDevice) filteringSequence$iterator$12.next();
-                                if (inputDevice2.supportsSource(16386) && !inputDevice2.isExternal()) {
+                                InputDevice inputDevice2 = (InputDevice) anonymousClass12.next();
+                                if (!inputDevice2.supportsSource(16386) || inputDevice2.isExternal()) {
+                                    z = false;
+                                } else {
                                     BatteryState batteryState = inputDevice2.getBatteryState();
                                     String str = StylusManager.TAG;
-                                    z = batteryState.isPresent() && batteryState.getCapacity() > 0.0f;
+                                    if (batteryState.isPresent() && batteryState.getCapacity() > 0.0f) {
+                                        z = true;
+                                    }
                                 }
                             } while (!z);
-                            StylusManager stylusManager3 = StylusManager.this;
+                            StylusManager stylusManager3 = stylusManager;
                             for (int i2 : stylusManager3.inputManager.getInputDeviceIds()) {
                                 InputDevice inputDevice3 = stylusManager3.inputManager.getInputDevice(i2);
                                 if (inputDevice3 != null && inputDevice3.supportsSource(16386)) {
@@ -152,7 +159,7 @@ public final class StylusUsiPowerStartable implements CoreStartable, StylusManag
                                     }
                                 }
                             }
-                            StylusManager stylusManager4 = StylusManager.this;
+                            StylusManager stylusManager4 = stylusManager;
                             stylusManager4.inputManager.registerInputDeviceListener(stylusManager4, stylusManager4.handler);
                         }
                     });

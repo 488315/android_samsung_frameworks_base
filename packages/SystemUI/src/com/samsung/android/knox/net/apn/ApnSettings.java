@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ApnSettings implements Parcelable {
     public static final Parcelable.Creator<ApnSettings> CREATOR = new Parcelable.Creator<ApnSettings>() { // from class: com.samsung.android.knox.net.apn.ApnSettings.1
@@ -47,7 +46,6 @@ public class ApnSettings implements Parcelable {
     public String type;
     public String user;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Builder {
         public String mApnName;
         public int mAuthType;

@@ -15,7 +15,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.text.StringsKt__StringsKt;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class RememberLottieCompositionKt$loadFontsFromAssets$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ LottieComposition $composition;
@@ -61,22 +60,22 @@ final class RememberLottieCompositionKt$loadFontsFromAssets$2 extends SuspendLam
             sb.append((Object) str3);
             sb.append(str2);
             try {
-                Typeface createFromAsset = Typeface.createFromAsset(context.getAssets(), sb.toString());
+                Typeface typefaceCreateFromAsset = Typeface.createFromAsset(context.getAssets(), sb.toString());
                 try {
                     int i = 0;
-                    boolean contains = StringsKt__StringsKt.contains(str4, "Italic", false);
-                    boolean contains2 = StringsKt__StringsKt.contains(str4, "Bold", false);
-                    if (contains && contains2) {
+                    boolean zContains = StringsKt__StringsKt.contains(str4, "Italic", false);
+                    boolean zContains2 = StringsKt__StringsKt.contains(str4, "Bold", false);
+                    if (zContains && zContains2) {
                         i = 3;
-                    } else if (contains) {
+                    } else if (zContains) {
                         i = 2;
-                    } else if (contains2) {
+                    } else if (zContains2) {
                         i = 1;
                     }
-                    if (createFromAsset.getStyle() != i) {
-                        createFromAsset = Typeface.create(createFromAsset, i);
+                    if (typefaceCreateFromAsset.getStyle() != i) {
+                        typefaceCreateFromAsset = Typeface.create(typefaceCreateFromAsset, i);
                     }
-                    font.typeface = createFromAsset;
+                    font.typeface = typefaceCreateFromAsset;
                 } catch (Exception unused) {
                     Logger.INSTANCE.getClass();
                 }

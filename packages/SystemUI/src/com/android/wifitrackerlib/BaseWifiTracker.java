@@ -45,7 +45,6 @@ import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class BaseWifiTracker {
     public static boolean sVerboseLogging;
@@ -132,11 +131,11 @@ public class BaseWifiTracker {
                 HashSet hashSet = new HashSet(collection);
                 if (!hashSet.isEmpty()) {
                     ArrayList arrayList = new ArrayList();
-                    HashMap hashMap = new HashMap();
+                    HashMap map = new HashMap();
                     Iterator it = hashSet.iterator();
                     while (it.hasNext()) {
                         NetworkKey networkKey = (NetworkKey) it.next();
-                        hashMap.put(networkKey.wifiKey.bssid, networkKey);
+                        map.put(networkKey.wifiKey.bssid, networkKey);
                         arrayList.add(networkKey.wifiKey.bssid);
                     }
                     if (arrayList.size() != 0 && (qoSScores = wifiQoSScoredCache.mSemWifiManager.getQoSScores(arrayList)) != null && !qoSScores.isEmpty()) {
@@ -150,18 +149,18 @@ public class BaseWifiTracker {
                         Iterator it2 = qoSScores.entrySet().iterator();
                         while (it2.hasNext()) {
                             String str3 = (String) ((Map.Entry) it2.next()).getKey();
-                            if (hashSet.contains(hashMap.get(str3))) {
-                                Map map = (Map) qoSScores.get(str3);
-                                WifiScoredNetwork wifiScoredNetwork = new WifiScoredNetwork(str3, ((Integer) map.get("networkType")).intValue(), new int[]{((Integer) map.get("levelMax-2")).intValue(), ((Integer) map.get("levelMax-1")).intValue(), ((Integer) map.get("levelMax")).intValue()});
+                            if (hashSet.contains(map.get(str3))) {
+                                Map map2 = (Map) qoSScores.get(str3);
+                                WifiScoredNetwork wifiScoredNetwork = new WifiScoredNetwork(str3, ((Integer) map2.get("networkType")).intValue(), new int[]{((Integer) map2.get("levelMax-2")).intValue(), ((Integer) map2.get("levelMax-1")).intValue(), ((Integer) map2.get("levelMax")).intValue()});
                                 if (!TextUtils.isEmpty(str3) && wifiScoredNetwork.networkType != 3) {
                                     synchronized (wifiQoSScoredCache.mLock) {
                                         try {
                                             ((HashMap) wifiQoSScoredCache.mCache).put(str3, wifiScoredNetwork);
                                             if (Debug.semIsProductDev() ? true : Log.isLoggable("WifiTracker.WifiWifiQoSScoreCache", 3)) {
                                                 LogUtils logUtils = wifiQoSScoredCache.mLog;
-                                                String wifiScoredNetwork2 = wifiScoredNetwork.toString();
+                                                String string = wifiScoredNetwork.toString();
                                                 if (logUtils.isProductDev) {
-                                                    Log.d("WifiTracker.WifiWifiQoSScoreCache", logUtils.getPrintableLog(wifiScoredNetwork2));
+                                                    Log.d("WifiTracker.WifiWifiQoSScoreCache", logUtils.getPrintableLog(string));
                                                 }
                                             }
                                         } catch (Throwable th) {
@@ -170,7 +169,7 @@ public class BaseWifiTracker {
                                     }
                                     wifiQoSScoredCache.mUpdated = true;
                                 }
-                                hashSet.remove(hashMap.get(str3));
+                                hashSet.remove(map.get(str3));
                                 i++;
                             }
                         }
@@ -199,7 +198,7 @@ public class BaseWifiTracker {
     };
     public final WifiTrackerLifecycleObserver mLifecycleObserver = new WifiTrackerLifecycleObserver();
     public final NetworkRequest mNetworkRequest = new NetworkRequest.Builder().clearCapabilities().addCapability(15).addTransportType(1).build();
-    public final AnonymousClass2 mNetworkCallback = new ConnectivityManager.NetworkCallback(true ? 1 : 0) { // from class: com.android.wifitrackerlib.BaseWifiTracker.2
+    public final AnonymousClass2 mNetworkCallback = new ConnectivityManager.NetworkCallback(1 == true ? 1 : 0) { // from class: com.android.wifitrackerlib.BaseWifiTracker.2
         @Override // android.net.ConnectivityManager.NetworkCallback
         public final void onCapabilitiesChanged(Network network, NetworkCapabilities networkCapabilities) {
             Log.i(BaseWifiTracker.this.mTag, "NetworkCallback : onCapabilitiesChanged");
@@ -218,7 +217,7 @@ public class BaseWifiTracker {
             BaseWifiTracker.this.handleNetworkLost(network);
         }
     };
-    public final AnonymousClass3 mDefaultNetworkCallback = new ConnectivityManager.NetworkCallback(true ? 1 : 0) { // from class: com.android.wifitrackerlib.BaseWifiTracker.3
+    public final AnonymousClass3 mDefaultNetworkCallback = new ConnectivityManager.NetworkCallback(1 == true ? 1 : 0) { // from class: com.android.wifitrackerlib.BaseWifiTracker.3
         @Override // android.net.ConnectivityManager.NetworkCallback
         public final void onCapabilitiesChanged(Network network, NetworkCapabilities networkCapabilities) {
             Log.i(BaseWifiTracker.this.mTag, "DefaultNetworkCallback : onCapabilitiesChanged");
@@ -250,7 +249,6 @@ public class BaseWifiTracker {
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wifitrackerlib.BaseWifiTracker$8, reason: invalid class name */
     public class AnonymousClass8 implements WifiManager.WifiStateChangedListener {
         public AnonymousClass8() {
@@ -281,7 +279,6 @@ public class BaseWifiTracker {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Scanner extends Handler {
         public static final /* synthetic */ int $r8$clinit = 0;
         public boolean mIsStartedState;
@@ -292,9 +289,9 @@ public class BaseWifiTracker {
         }
 
         public final void scanLoop() {
-            boolean shouldScan = shouldScan();
+            boolean zShouldScan = shouldScan();
             BaseWifiTracker baseWifiTracker = BaseWifiTracker.this;
-            if (!shouldScan) {
+            if (!zShouldScan) {
                 Log.e(baseWifiTracker.mTag, "Scan loop called even though we shouldn't be scanning! mIsWifiEnabled=" + this.mIsWifiEnabled + " mIsStartedState=" + this.mIsStartedState + " PowerManager.isInteractive()=" + baseWifiTracker.mPowerManager.isInteractive());
                 return;
             }
@@ -336,7 +333,6 @@ public class BaseWifiTracker {
             new AnonymousClass1();
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.wifitrackerlib.BaseWifiTracker$Scanner$1, reason: invalid class name */
         public class AnonymousClass1 implements WifiScanner.ScanListener {
             public AnonymousClass1() {
@@ -346,7 +342,7 @@ public class BaseWifiTracker {
                 BaseWifiTracker.this.mWorkerHandler.post(new Runnable() { // from class: com.android.wifitrackerlib.BaseWifiTracker$Scanner$1$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        BaseWifiTracker.Scanner.AnonymousClass1 anonymousClass1 = BaseWifiTracker.Scanner.AnonymousClass1.this;
+                        BaseWifiTracker.Scanner.AnonymousClass1 anonymousClass1 = this.f$0;
                         int i2 = i;
                         BaseWifiTracker.Scanner scanner = BaseWifiTracker.Scanner.this;
                         if (scanner.mIsWifiEnabled) {
@@ -372,7 +368,6 @@ public class BaseWifiTracker {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class WifiTrackerLifecycleObserver implements LifecycleObserver {
         public WifiTrackerLifecycleObserver() {
         }
@@ -508,7 +503,6 @@ public class BaseWifiTracker {
         this.mWorkerHandler.post(new BaseWifiTracker$$ExternalSyntheticLambda1(this, 0));
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface BaseWifiTrackerCallback {
         void onWifiStateChanged();
 

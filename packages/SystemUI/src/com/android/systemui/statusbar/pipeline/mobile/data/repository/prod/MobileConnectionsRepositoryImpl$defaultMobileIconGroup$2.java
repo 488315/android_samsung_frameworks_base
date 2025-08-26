@@ -14,7 +14,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class MobileConnectionsRepositoryImpl$defaultMobileIconGroup$2 extends SuspendLambda implements Function2 {
     /* synthetic */ Object L$0;
@@ -52,9 +51,9 @@ final class MobileConnectionsRepositoryImpl$defaultMobileIconGroup$2 extends Sus
         LogLevel logLevel = LogLevel.INFO;
         MobileInputLogger$$ExternalSyntheticLambda0 mobileInputLogger$$ExternalSyntheticLambda0 = new MobileInputLogger$$ExternalSyntheticLambda0(4);
         LogBuffer logBuffer = mobileInputLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("MobileInputLog", logLevel, mobileInputLogger$$ExternalSyntheticLambda0, null);
-        ((LogMessageImpl) obtain).str1 = signalIcon$MobileIconGroup.name;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("MobileInputLog", logLevel, mobileInputLogger$$ExternalSyntheticLambda0, null);
+        ((LogMessageImpl) logMessageObtain).str1 = signalIcon$MobileIconGroup.name;
+        logBuffer.commit(logMessageObtain);
         return Unit.INSTANCE;
     }
 }

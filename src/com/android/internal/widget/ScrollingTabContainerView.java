@@ -47,9 +47,9 @@ public class ScrollingTabContainerView extends HorizontalScrollView implements A
         ActionBarPolicy actionBarPolicy = ActionBarPolicy.get(context);
         setContentHeight(actionBarPolicy.getTabContainerHeight());
         this.mStackedTabMaxWidth = actionBarPolicy.getStackedTabMaxWidth();
-        LinearLayout createTabLayout = createTabLayout();
-        this.mTabLayout = createTabLayout;
-        addView(createTabLayout, new ViewGroup.LayoutParams(-2, -1));
+        LinearLayout linearLayoutCreateTabLayout = createTabLayout();
+        this.mTabLayout = linearLayoutCreateTabLayout;
+        addView(linearLayoutCreateTabLayout, new ViewGroup.LayoutParams(-2, -1));
     }
 
     @Override // android.widget.HorizontalScrollView, android.widget.FrameLayout, android.view.View
@@ -68,9 +68,9 @@ public class ScrollingTabContainerView extends HorizontalScrollView implements A
         } else {
             this.mMaxTabWidth = -1;
         }
-        int makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(this.mContentHeight, 1073741824);
+        int iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(this.mContentHeight, 1073741824);
         if (!z && this.mAllowCollapse) {
-            this.mTabLayout.measure(0, makeMeasureSpec);
+            this.mTabLayout.measure(0, iMakeMeasureSpec);
             if (this.mTabLayout.getMeasuredWidth() > View.MeasureSpec.getSize(i)) {
                 performCollapse();
             } else {
@@ -80,7 +80,7 @@ public class ScrollingTabContainerView extends HorizontalScrollView implements A
             performExpand();
         }
         int measuredWidth = getMeasuredWidth();
-        super.onMeasure(i, makeMeasureSpec);
+        super.onMeasure(i, iMakeMeasureSpec);
         int measuredWidth2 = getMeasuredWidth();
         if (!z || measuredWidth == measuredWidth2) {
             return;
@@ -183,21 +183,21 @@ public class ScrollingTabContainerView extends HorizontalScrollView implements A
             animator.cancel();
         }
         if (i != 0) {
-            ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this, "alpha", 0.0f);
-            ofFloat.setDuration(200L);
-            ofFloat.setInterpolator(sAlphaInterpolator);
-            ofFloat.addListener(this.mVisAnimListener.withFinalVisibility(i));
-            ofFloat.start();
+            ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this, "alpha", 0.0f);
+            objectAnimatorOfFloat.setDuration(200L);
+            objectAnimatorOfFloat.setInterpolator(sAlphaInterpolator);
+            objectAnimatorOfFloat.addListener(this.mVisAnimListener.withFinalVisibility(i));
+            objectAnimatorOfFloat.start();
             return;
         }
         if (getVisibility() != 0) {
             setAlpha(0.0f);
         }
-        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(this, "alpha", 1.0f);
-        ofFloat2.setDuration(200L);
-        ofFloat2.setInterpolator(sAlphaInterpolator);
-        ofFloat2.addListener(this.mVisAnimListener.withFinalVisibility(i));
-        ofFloat2.start();
+        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(this, "alpha", 1.0f);
+        objectAnimatorOfFloat2.setDuration(200L);
+        objectAnimatorOfFloat2.setInterpolator(sAlphaInterpolator);
+        objectAnimatorOfFloat2.addListener(this.mVisAnimListener.withFinalVisibility(i));
+        objectAnimatorOfFloat2.start();
     }
 
     public void animateToTab(int i) {
@@ -252,14 +252,14 @@ public class ScrollingTabContainerView extends HorizontalScrollView implements A
     }
 
     public void addTab(ActionBar.Tab tab, boolean z) {
-        TabView createTabView = createTabView(this.mContext, tab, false);
-        this.mTabLayout.addView(createTabView, new LinearLayout.LayoutParams(0, -1, 1.0f));
+        TabView tabViewCreateTabView = createTabView(this.mContext, tab, false);
+        this.mTabLayout.addView(tabViewCreateTabView, new LinearLayout.LayoutParams(0, -1, 1.0f));
         Spinner spinner = this.mTabSpinner;
         if (spinner != null) {
             ((TabAdapter) spinner.getAdapter()).notifyDataSetChanged();
         }
         if (z) {
-            createTabView.setSelected(true);
+            tabViewCreateTabView.setSelected(true);
         }
         if (this.mAllowCollapse) {
             requestLayout();
@@ -267,14 +267,14 @@ public class ScrollingTabContainerView extends HorizontalScrollView implements A
     }
 
     public void addTab(ActionBar.Tab tab, int i, boolean z) {
-        TabView createTabView = createTabView(this.mContext, tab, false);
-        this.mTabLayout.addView(createTabView, i, new LinearLayout.LayoutParams(0, -1, 1.0f));
+        TabView tabViewCreateTabView = createTabView(this.mContext, tab, false);
+        this.mTabLayout.addView(tabViewCreateTabView, i, new LinearLayout.LayoutParams(0, -1, 1.0f));
         Spinner spinner = this.mTabSpinner;
         if (spinner != null) {
             ((TabAdapter) spinner.getAdapter()).notifyDataSetChanged();
         }
         if (z) {
-            createTabView.setSelected(true);
+            tabViewCreateTabView.setSelected(true);
         }
         if (this.mAllowCollapse) {
             requestLayout();
@@ -411,8 +411,8 @@ public class ScrollingTabContainerView extends HorizontalScrollView implements A
                     this.mIconView.lambda$setImageURIAsync$2(null);
                 }
             }
-            boolean isEmpty = TextUtils.isEmpty(text);
-            if (!isEmpty) {
+            boolean zIsEmpty = TextUtils.isEmpty(text);
+            if (!zIsEmpty) {
                 if (this.mTextView == null) {
                     TextView textView2 = new TextView(getContext(), null, 16843509);
                     textView2.setEllipsize(TextUtils.TruncateAt.END);
@@ -435,7 +435,7 @@ public class ScrollingTabContainerView extends HorizontalScrollView implements A
             if (imageView4 != null) {
                 imageView4.setContentDescription(tab.getContentDescription());
             }
-            setTooltipText(isEmpty ? tab.getContentDescription() : null);
+            setTooltipText(zIsEmpty ? tab.getContentDescription() : null);
         }
 
         public ActionBar.Tab getTab() {

@@ -139,6 +139,10 @@ public final class ResourceTimer {
         sLastUpdated = SystemClock.uptimeMillis();
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:10:0x006c  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     private static void publish() {
         char c;
         char c2 = 1;
@@ -154,11 +158,10 @@ public final class ResourceTimer {
                     if (i2 != 0) {
                         c = c2;
                         FrameworkStatsLog.write(517, i2, timer.count, timer.total, timer.percentile[0], timer.percentile[c2], timer.percentile[2], timer.percentile[3], timer.largest[0], timer.largest[c2], timer.largest[2], timer.largest[3], timer.largest[4]);
-                        i++;
-                        c2 = c;
+                    } else {
+                        c = c2;
                     }
                 }
-                c = c2;
                 i++;
                 c2 = c;
             } else {
@@ -188,9 +191,9 @@ public final class ResourceTimer {
                 fastPrintWriter.close();
                 return;
             }
-            boolean contains = Arrays.asList(strArr).contains("-refresh");
+            boolean zContains = Arrays.asList(strArr).contains("-refresh");
             synchronized (obj) {
-                update(contains);
+                update(zContains);
                 fastPrintWriter.format("  config runtime=%d proc=%s\n", Long.valueOf(sLastUpdated - sProcessStart), Process.myProcessName());
                 while (true) {
                     Timer[] timerArr = sTimers;

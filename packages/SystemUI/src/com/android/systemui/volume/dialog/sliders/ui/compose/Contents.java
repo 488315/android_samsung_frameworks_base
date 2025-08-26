@@ -1,13 +1,10 @@
 package com.android.systemui.volume.dialog.sliders.ui.compose;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public interface Contents {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Active extends Contents {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class TrackEndIcon implements Active {
             public static final TrackEndIcon INSTANCE = new TrackEndIcon();
 
@@ -37,7 +34,6 @@ public interface Contents {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class TrackStartIcon implements Active {
             public static final TrackStartIcon INSTANCE = new TrackStartIcon();
 
@@ -73,10 +69,8 @@ public interface Contents {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Inactive extends Contents {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class TrackEndIcon implements Inactive {
             public static final TrackEndIcon INSTANCE = new TrackEndIcon();
 
@@ -106,7 +100,6 @@ public interface Contents {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class TrackStartIcon implements Inactive {
             public static final TrackStartIcon INSTANCE = new TrackStartIcon();
 
@@ -143,7 +136,6 @@ public interface Contents {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Track implements Contents {
         public static final Track INSTANCE = new Track();
 

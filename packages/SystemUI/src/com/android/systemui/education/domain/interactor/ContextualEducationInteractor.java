@@ -1,25 +1,39 @@
 package com.android.systemui.education.domain.interactor;
 
+import android.content.Context;
+import androidx.datastore.core.handlers.ReplaceFileCorruptionHandler;
+import androidx.datastore.preferences.PreferenceDataStoreFile;
+import androidx.datastore.preferences.core.PreferenceDataStoreFactory;
+import androidx.datastore.preferences.core.Preferences;
 import com.android.app.tracing.coroutines.CoroutineTracingKt;
 import com.android.systemui.CoreStartable;
 import com.android.systemui.contextualeducation.GestureType;
+import com.android.systemui.education.data.model.GestureEduModel;
 import com.android.systemui.education.data.repository.ContextualEducationRepository;
 import com.android.systemui.education.data.repository.UserContextualEducationRepository;
+import com.android.systemui.education.data.repository.UserContextualEducationRepository$$ExternalSyntheticLambda0;
 import com.android.systemui.education.data.repository.UserContextualEducationRepository$readEduDeviceConnectionTime$$inlined$map$1;
 import com.android.systemui.user.domain.interactor.SelectedUserInteractor;
 import java.time.Clock;
+import java.util.Arrays;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
+import kotlin.jvm.functions.Function0;
+import kotlin.jvm.functions.Function2;
+import kotlin.jvm.internal.StringCompanionObject;
+import kotlin.reflect.KProperty;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
+import kotlinx.coroutines.CoroutineScopeKt;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ContextualEducationInteractor implements CoreStartable {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -34,6 +48,103 @@ public final class ContextualEducationInteractor implements CoreStartable {
     public final Flow homeGestureModelFlow = readEduModelsOnSignalCountChanged(GestureType.HOME);
     public final Flow overviewGestureModelFlow = readEduModelsOnSignalCountChanged(GestureType.OVERVIEW);
     public final Flow allAppsGestureModelFlow = readEduModelsOnSignalCountChanged(GestureType.ALL_APPS);
+
+    /* renamed from: com.android.systemui.education.domain.interactor.ContextualEducationInteractor$start$1, reason: invalid class name */
+    final class AnonymousClass1 extends SuspendLambda implements Function2 {
+        int label;
+
+        /* renamed from: com.android.systemui.education.domain.interactor.ContextualEducationInteractor$start$1$1, reason: invalid class name and collision with other inner class name */
+        final class C01981 extends SuspendLambda implements Function2 {
+            /* synthetic */ int I$0;
+            int label;
+            final /* synthetic */ ContextualEducationInteractor this$0;
+
+            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+            public C01981(ContextualEducationInteractor contextualEducationInteractor, Continuation continuation) {
+                super(2, continuation);
+                this.this$0 = contextualEducationInteractor;
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Continuation create(Object obj, Continuation continuation) {
+                C01981 c01981 = new C01981(this.this$0, continuation);
+                c01981.I$0 = ((Number) obj).intValue();
+                return c01981;
+            }
+
+            @Override // kotlin.jvm.functions.Function2
+            public final Object invoke(Object obj, Object obj2) {
+                return ((C01981) create(Integer.valueOf(((Number) obj).intValue()), (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) {
+                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                if (this.label != 0) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+                final int i = this.I$0;
+                final UserContextualEducationRepository userContextualEducationRepository = (UserContextualEducationRepository) this.this$0.repository;
+                CoroutineScope coroutineScope = userContextualEducationRepository.dataStoreScope;
+                if (coroutineScope != null) {
+                    CoroutineScopeKt.cancel(coroutineScope, null);
+                }
+                CoroutineScope coroutineScope2 = (CoroutineScope) userContextualEducationRepository.dataStoreScopeProvider.get();
+                KProperty kProperty = UserContextualEducationRepository.$$delegatedProperties[0];
+                userContextualEducationRepository.userId$delegate.value = Integer.valueOf(i);
+                PreferenceDataStoreFactory preferenceDataStoreFactory = PreferenceDataStoreFactory.INSTANCE;
+                ReplaceFileCorruptionHandler replaceFileCorruptionHandler = new ReplaceFileCorruptionHandler(new UserContextualEducationRepository$$ExternalSyntheticLambda0());
+                coroutineScope2.getClass();
+                userContextualEducationRepository.datastore.updateState(null, PreferenceDataStoreFactory.create$default(preferenceDataStoreFactory, replaceFileCorruptionHandler, coroutineScope2, new Function0() { // from class: com.android.systemui.education.data.repository.UserContextualEducationRepository$$ExternalSyntheticLambda1
+                    @Override // kotlin.jvm.functions.Function0
+                    public final Object invoke() {
+                        Context context = userContextualEducationRepository.applicationContext;
+                        int i2 = StringCompanionObject.$r8$clinit;
+                        return PreferenceDataStoreFile.preferencesDataStoreFile(context, String.format("education/USER%s_ContextualEducation", Arrays.copyOf(new Object[]{Integer.valueOf(i)}, 1)));
+                    }
+                }));
+                userContextualEducationRepository.dataStoreScope = coroutineScope2;
+                return Unit.INSTANCE;
+            }
+        }
+
+        public AnonymousClass1(Continuation continuation) {
+            super(2, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return ContextualEducationInteractor.this.new AnonymousClass1(continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((AnonymousClass1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                ContextualEducationInteractor contextualEducationInteractor = ContextualEducationInteractor.this;
+                Flow flow = contextualEducationInteractor.selectedUserInteractor.selectedUser;
+                C01981 c01981 = new C01981(contextualEducationInteractor, null);
+                this.label = 1;
+                if (FlowKt.collectLatest(flow, c01981, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            return Unit.INSTANCE;
+        }
+    }
 
     public ContextualEducationInteractor(CoroutineScope coroutineScope, CoroutineDispatcher coroutineDispatcher, Clock clock, SelectedUserInteractor selectedUserInteractor, ContextualEducationRepository contextualEducationRepository) {
         this.backgroundScope = coroutineScope;
@@ -51,7 +162,6 @@ public final class ContextualEducationInteractor implements CoreStartable {
         final ChannelFlowTransformLatest channelFlowTransformLatest = userContextualEducationRepository.prefData;
         return FlowKt.flowOn(FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.education.data.repository.UserContextualEducationRepository$readGestureEduModelFlow$$inlined$map$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.education.data.repository.UserContextualEducationRepository$readGestureEduModelFlow$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ GestureType $gestureType$inlined;
@@ -82,73 +192,52 @@ public final class ContextualEducationInteractor implements CoreStartable {
                     this.$gestureType$inlined = gestureType;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.education.data.repository.UserContextualEducationRepository$readGestureEduModelFlow$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.education.data.repository.UserContextualEducationRepository$readGestureEduModelFlow$$inlined$map$1$2$1 r0 = (com.android.systemui.education.data.repository.UserContextualEducationRepository$readGestureEduModelFlow$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.education.data.repository.UserContextualEducationRepository$readGestureEduModelFlow$$inlined$map$1$2$1 r0 = new com.android.systemui.education.data.repository.UserContextualEducationRepository$readGestureEduModelFlow$$inlined$map$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L47
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        androidx.datastore.preferences.core.Preferences r5 = (androidx.datastore.preferences.core.Preferences) r5
-                        com.android.systemui.education.data.repository.UserContextualEducationRepository r6 = r4.this$0
-                        com.android.systemui.contextualeducation.GestureType r2 = r4.$gestureType$inlined
-                        com.android.systemui.education.data.model.GestureEduModel r5 = com.android.systemui.education.data.repository.UserContextualEducationRepository.access$getGestureEduModel(r6, r2, r5)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L47
-                        return r1
-                    L47:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.education.data.repository.UserContextualEducationRepository$readGestureEduModelFlow$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        GestureEduModel gestureEduModelAccess$getGestureEduModel = UserContextualEducationRepository.access$getGestureEduModel(this.this$0, this.$gestureType$inlined, (Preferences) obj);
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(gestureEduModelAccess$getGestureEduModel, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, userContextualEducationRepository, gestureType), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = channelFlowTransformLatest.collect(new AnonymousClass2(flowCollector, userContextualEducationRepository, gestureType), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         }, new ContextualEducationInteractor$$ExternalSyntheticLambda0()), this.backgroundDispatcher);
     }
 
     @Override // com.android.systemui.CoreStartable
     public final void start() {
-        CoroutineTracingKt.launchTraced$default(this.backgroundScope, null, null, new ContextualEducationInteractor$start$1(this, null), 7);
+        CoroutineTracingKt.launchTraced$default(this.backgroundScope, null, null, new AnonymousClass1(null), 7);
     }
 }

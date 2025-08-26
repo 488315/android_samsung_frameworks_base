@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class IconNormalizer {
     public final Bitmap mBitmap;
@@ -18,9 +17,9 @@ public class IconNormalizer {
     public IconNormalizer(int i) {
         int i2 = i * 2;
         this.mMaxSize = i2;
-        Bitmap createBitmap = Bitmap.createBitmap(i2, i2, Bitmap.Config.ALPHA_8);
-        this.mBitmap = createBitmap;
-        this.mCanvas = new Canvas(createBitmap);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(i2, i2, Bitmap.Config.ALPHA_8);
+        this.mBitmap = bitmapCreateBitmap;
+        this.mCanvas = new Canvas(bitmapCreateBitmap);
         this.mPixels = new byte[i2 * i2];
         this.mLeftBorder = new float[i2];
         this.mRightBorder = new float[i2];

@@ -7,10 +7,15 @@ import com.android.systemui.R;
 import com.android.systemui.bouncer.domain.interactor.AlternateBouncerInteractor;
 import com.android.systemui.bouncer.domain.interactor.PrimaryBouncerInteractor;
 import com.android.systemui.communal.domain.interactor.CommunalSceneInteractor;
+import com.android.systemui.deviceentry.shared.model.FingerprintLockoutMessage;
+import com.android.systemui.deviceentry.shared.model.FingerprintMessage;
 import com.android.systemui.keyguard.data.repository.DeviceEntryFingerprintAuthRepository;
 import com.android.systemui.keyguard.data.repository.DeviceEntryFingerprintAuthRepositoryImpl;
 import com.android.systemui.keyguard.domain.interactor.KeyguardInteractor;
 import com.android.systemui.keyguard.domain.interactor.KeyguardTransitionInteractor;
+import com.android.systemui.keyguard.shared.model.ErrorFingerprintAuthenticationStatus;
+import com.android.systemui.keyguard.shared.model.FingerprintAuthenticationStatus;
+import com.android.systemui.keyguard.shared.model.SuccessFingerprintAuthenticationStatus;
 import com.android.systemui.plugins.ActivityStarter;
 import com.android.systemui.power.domain.interactor.PowerInteractor;
 import com.android.systemui.util.kotlin.FlowKt;
@@ -35,7 +40,6 @@ import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 import kotlinx.coroutines.flow.internal.ChannelLimitedFlowMerge;
 import kotlinx.coroutines.flow.internal.CombineKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class OccludingAppDeviceEntryInteractor {
     public final Context context;
@@ -44,14 +48,12 @@ public final class OccludingAppDeviceEntryInteractor {
     public final Flow keyguardOccludedByApp;
     public final ChannelFlowTransformLatest message;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.deviceentry.domain.interactor.OccludingAppDeviceEntryInteractor$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ KeyguardInteractor $keyguardInteractor;
         final /* synthetic */ PowerInteractor $powerInteractor;
         int label;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.deviceentry.domain.interactor.OccludingAppDeviceEntryInteractor$1$3, reason: invalid class name */
         final /* synthetic */ class AnonymousClass3 extends AdaptedFunctionReference implements Function3 {
             public static final AnonymousClass3 INSTANCE = new AnonymousClass3();
@@ -93,7 +95,7 @@ public final class OccludingAppDeviceEntryInteractor {
             int i = this.label;
             if (i == 0) {
                 ResultKt.throwOnFailure(obj);
-                Flow sample = FlowKt.sample(OccludingAppDeviceEntryInteractor.this.fingerprintUnlockSuccessEvents, new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(this.$powerInteractor.isInteractive, this.$keyguardInteractor.isDreaming, AnonymousClass3.INSTANCE));
+                Flow flowSample = FlowKt.sample(OccludingAppDeviceEntryInteractor.this.fingerprintUnlockSuccessEvents, new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(this.$powerInteractor.isInteractive, this.$keyguardInteractor.isDreaming, AnonymousClass3.INSTANCE));
                 FlowCollector flowCollector = new FlowCollector(OccludingAppDeviceEntryInteractor.this) { // from class: com.android.systemui.deviceentry.domain.interactor.OccludingAppDeviceEntryInteractor.1.4
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     public final Object emit(Object obj2, Continuation continuation) {
@@ -104,7 +106,7 @@ public final class OccludingAppDeviceEntryInteractor {
                     }
                 };
                 this.label = 1;
-                if (sample.collect(flowCollector, this) == coroutineSingletons) {
+                if (flowSample.collect(flowCollector, this) == coroutineSingletons) {
                     return coroutineSingletons;
                 }
             } else {
@@ -117,7 +119,6 @@ public final class OccludingAppDeviceEntryInteractor {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.deviceentry.domain.interactor.OccludingAppDeviceEntryInteractor$2, reason: invalid class name */
     final class AnonymousClass2 extends SuspendLambda implements Function2 {
         final /* synthetic */ ActivityStarter $activityStarter;
@@ -152,10 +153,10 @@ public final class OccludingAppDeviceEntryInteractor {
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     public final Object emit(Object obj2, Continuation continuation) {
                         final OccludingAppDeviceEntryInteractor occludingAppDeviceEntryInteractor2 = occludingAppDeviceEntryInteractor;
-                        ActivityStarter.this.dismissKeyguardThenExecute(new ActivityStarter.OnDismissAction() { // from class: com.android.systemui.deviceentry.domain.interactor.OccludingAppDeviceEntryInteractor.2.1.1
+                        activityStarter.dismissKeyguardThenExecute(new ActivityStarter.OnDismissAction() { // from class: com.android.systemui.deviceentry.domain.interactor.OccludingAppDeviceEntryInteractor.2.1.1
                             @Override // com.android.systemui.plugins.ActivityStarter.OnDismissAction
                             public final boolean onDismiss() {
-                                Context context = OccludingAppDeviceEntryInteractor.this.context;
+                                Context context = occludingAppDeviceEntryInteractor2.context;
                                 Intent intent = new Intent("android.intent.action.MAIN");
                                 intent.addCategory("android.intent.category.HOME");
                                 intent.setFlags(268435456);
@@ -189,9 +190,8 @@ public final class OccludingAppDeviceEntryInteractor {
     public OccludingAppDeviceEntryInteractor(BiometricMessageInteractor biometricMessageInteractor, DeviceEntryFingerprintAuthRepository deviceEntryFingerprintAuthRepository, KeyguardInteractor keyguardInteractor, PrimaryBouncerInteractor primaryBouncerInteractor, AlternateBouncerInteractor alternateBouncerInteractor, CoroutineScope coroutineScope, Context context, ActivityStarter activityStarter, PowerInteractor powerInteractor, KeyguardTransitionInteractor keyguardTransitionInteractor, CommunalSceneInteractor communalSceneInteractor) {
         this.context = context;
         final Flow[] flowArr = {keyguardInteractor.isKeyguardOccluded, keyguardInteractor.isKeyguardShowing, primaryBouncerInteractor.isShowing, alternateBouncerInteractor.isVisible, keyguardInteractor.isDozing, communalSceneInteractor.isIdleOnCommunal};
-        Flow distinctUntilChanged = kotlinx.coroutines.flow.FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.deviceentry.domain.interactor.OccludingAppDeviceEntryInteractor$special$$inlined$combine$1
+        Flow flowDistinctUntilChanged = kotlinx.coroutines.flow.FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.deviceentry.domain.interactor.OccludingAppDeviceEntryInteractor$special$$inlined$combine$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.deviceentry.domain.interactor.OccludingAppDeviceEntryInteractor$special$$inlined$combine$1$3, reason: invalid class name */
             public final class AnonymousClass3 extends SuspendLambda implements Function3 {
                 private /* synthetic */ Object L$0;
@@ -224,17 +224,17 @@ public final class OccludingAppDeviceEntryInteractor {
                         Object obj4 = objArr[2];
                         Object obj5 = objArr[3];
                         Object obj6 = objArr[4];
-                        boolean booleanValue = ((Boolean) objArr[5]).booleanValue();
-                        boolean booleanValue2 = ((Boolean) obj6).booleanValue();
-                        boolean booleanValue3 = ((Boolean) obj5).booleanValue();
-                        boolean booleanValue4 = ((Boolean) obj4).booleanValue();
-                        boolean booleanValue5 = ((Boolean) obj3).booleanValue();
-                        if (((Boolean) obj2).booleanValue() && booleanValue5 && !booleanValue4 && !booleanValue3 && !booleanValue2 && !booleanValue) {
+                        boolean zBooleanValue = ((Boolean) objArr[5]).booleanValue();
+                        boolean zBooleanValue2 = ((Boolean) obj6).booleanValue();
+                        boolean zBooleanValue3 = ((Boolean) obj5).booleanValue();
+                        boolean zBooleanValue4 = ((Boolean) obj4).booleanValue();
+                        boolean zBooleanValue5 = ((Boolean) obj3).booleanValue();
+                        if (((Boolean) obj2).booleanValue() && zBooleanValue5 && !zBooleanValue4 && !zBooleanValue3 && !zBooleanValue2 && !zBooleanValue) {
                             z = true;
                         }
-                        Boolean valueOf = Boolean.valueOf(z);
+                        Boolean boolValueOf = Boolean.valueOf(z);
                         this.label = 1;
-                        if (flowCollector.emit(valueOf, this) == coroutineSingletons) {
+                        if (flowCollector.emit(boolValueOf, this) == coroutineSingletons) {
                             return coroutineSingletons;
                         }
                     } else {
@@ -250,23 +250,22 @@ public final class OccludingAppDeviceEntryInteractor {
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
                 final Flow[] flowArr2 = flowArr;
-                Object combineInternal = CombineKt.combineInternal(flowArr2, new Function0() { // from class: com.android.systemui.deviceentry.domain.interactor.OccludingAppDeviceEntryInteractor$special$$inlined$combine$1.2
+                Object objCombineInternal = CombineKt.combineInternal(flowArr2, new Function0() { // from class: com.android.systemui.deviceentry.domain.interactor.OccludingAppDeviceEntryInteractor$special$$inlined$combine$1.2
                     @Override // kotlin.jvm.functions.Function0
                     public final Object invoke() {
                         return new Object[flowArr2.length];
                     }
                 }, new AnonymousClass3(null), flowCollector, continuation);
-                return combineInternal == CoroutineSingletons.COROUTINE_SUSPENDED ? combineInternal : Unit.INSTANCE;
+                return objCombineInternal == CoroutineSingletons.COROUTINE_SUSPENDED ? objCombineInternal : Unit.INSTANCE;
             }
         });
-        this.keyguardOccludedByApp = distinctUntilChanged;
+        this.keyguardOccludedByApp = flowDistinctUntilChanged;
         DeviceEntryFingerprintAuthRepositoryImpl deviceEntryFingerprintAuthRepositoryImpl = (DeviceEntryFingerprintAuthRepositoryImpl) deviceEntryFingerprintAuthRepository;
         Flow authenticationStatus = deviceEntryFingerprintAuthRepositoryImpl.getAuthenticationStatus();
         EmptyFlow emptyFlow = EmptyFlow.INSTANCE;
-        final ChannelFlowTransformLatest transformLatest = kotlinx.coroutines.flow.FlowKt.transformLatest(distinctUntilChanged, new OccludingAppDeviceEntryInteractor$ifKeyguardOccludedByApp$$inlined$flatMapLatest$1(null, authenticationStatus, emptyFlow));
+        final ChannelFlowTransformLatest channelFlowTransformLatestTransformLatest = kotlinx.coroutines.flow.FlowKt.transformLatest(flowDistinctUntilChanged, new OccludingAppDeviceEntryInteractor$ifKeyguardOccludedByApp$$inlined$flatMapLatest$1(null, authenticationStatus, emptyFlow));
         final Flow flow = new Flow() { // from class: com.android.systemui.deviceentry.domain.interactor.OccludingAppDeviceEntryInteractor$special$$inlined$filter$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.deviceentry.domain.interactor.OccludingAppDeviceEntryInteractor$special$$inlined$filter$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -294,72 +293,51 @@ public final class OccludingAppDeviceEntryInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.deviceentry.domain.interactor.OccludingAppDeviceEntryInteractor$special$$inlined$filter$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.deviceentry.domain.interactor.OccludingAppDeviceEntryInteractor$special$$inlined$filter$1$2$1 r0 = (com.android.systemui.deviceentry.domain.interactor.OccludingAppDeviceEntryInteractor$special$$inlined$filter$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.deviceentry.domain.interactor.OccludingAppDeviceEntryInteractor$special$$inlined$filter$1$2$1 r0 = new com.android.systemui.deviceentry.domain.interactor.OccludingAppDeviceEntryInteractor$special$$inlined$filter$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L44
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        r6 = r5
-                        com.android.systemui.keyguard.shared.model.FingerprintAuthenticationStatus r6 = (com.android.systemui.keyguard.shared.model.FingerprintAuthenticationStatus) r6
-                        boolean r6 = r6 instanceof com.android.systemui.keyguard.shared.model.SuccessFingerprintAuthenticationStatus
-                        if (r6 == 0) goto L44
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L44
-                        return r1
-                    L44:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.deviceentry.domain.interactor.OccludingAppDeviceEntryInteractor$special$$inlined$filter$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        if (((FingerprintAuthenticationStatus) obj) instanceof SuccessFingerprintAuthenticationStatus) {
+                            anonymousClass1.label = 1;
+                            if (this.$this_unsafeFlow.emit(obj, anonymousClass1) == coroutineSingletons) {
+                                return coroutineSingletons;
+                            }
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = channelFlowTransformLatestTransformLatest.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         };
         this.fingerprintUnlockSuccessEvents = new Flow() { // from class: com.android.systemui.deviceentry.domain.interactor.OccludingAppDeviceEntryInteractor$special$$inlined$map$2
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.deviceentry.domain.interactor.OccludingAppDeviceEntryInteractor$special$$inlined$map$2$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -386,71 +364,51 @@ public final class OccludingAppDeviceEntryInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.deviceentry.domain.interactor.OccludingAppDeviceEntryInteractor$special$$inlined$map$2.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.deviceentry.domain.interactor.OccludingAppDeviceEntryInteractor$special$$inlined$map$2$2$1 r0 = (com.android.systemui.deviceentry.domain.interactor.OccludingAppDeviceEntryInteractor$special$$inlined$map$2.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.deviceentry.domain.interactor.OccludingAppDeviceEntryInteractor$special$$inlined$map$2$2$1 r0 = new com.android.systemui.deviceentry.domain.interactor.OccludingAppDeviceEntryInteractor$special$$inlined$map$2$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L41
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        com.android.systemui.keyguard.shared.model.FingerprintAuthenticationStatus r5 = (com.android.systemui.keyguard.shared.model.FingerprintAuthenticationStatus) r5
-                        kotlin.Unit r5 = kotlin.Unit.INSTANCE
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L41
-                        return r1
-                    L41:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.deviceentry.domain.interactor.OccludingAppDeviceEntryInteractor$special$$inlined$map$2.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        Unit unit = Unit.INSTANCE;
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(unit, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flow.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         };
-        final ChannelFlowTransformLatest transformLatest2 = kotlinx.coroutines.flow.FlowKt.transformLatest(distinctUntilChanged, new OccludingAppDeviceEntryInteractor$ifKeyguardOccludedByApp$$inlined$flatMapLatest$1(null, deviceEntryFingerprintAuthRepositoryImpl.getAuthenticationStatus(), emptyFlow));
+        final ChannelFlowTransformLatest channelFlowTransformLatestTransformLatest2 = kotlinx.coroutines.flow.FlowKt.transformLatest(flowDistinctUntilChanged, new OccludingAppDeviceEntryInteractor$ifKeyguardOccludedByApp$$inlined$flatMapLatest$1(null, deviceEntryFingerprintAuthRepositoryImpl.getAuthenticationStatus(), emptyFlow));
         this.fingerprintLockoutEvents = new OccludingAppDeviceEntryInteractor$special$$inlined$map$3(new Flow() { // from class: com.android.systemui.deviceentry.domain.interactor.OccludingAppDeviceEntryInteractor$special$$inlined$filter$2
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.deviceentry.domain.interactor.OccludingAppDeviceEntryInteractor$special$$inlined$filter$2$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -478,80 +436,54 @@ public final class OccludingAppDeviceEntryInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.deviceentry.domain.interactor.OccludingAppDeviceEntryInteractor$special$$inlined$filter$2.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.deviceentry.domain.interactor.OccludingAppDeviceEntryInteractor$special$$inlined$filter$2$2$1 r0 = (com.android.systemui.deviceentry.domain.interactor.OccludingAppDeviceEntryInteractor$special$$inlined$filter$2.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.deviceentry.domain.interactor.OccludingAppDeviceEntryInteractor$special$$inlined$filter$2$2$1 r0 = new com.android.systemui.deviceentry.domain.interactor.OccludingAppDeviceEntryInteractor$special$$inlined$filter$2$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L4f
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        r6 = r5
-                        com.android.systemui.keyguard.shared.model.FingerprintAuthenticationStatus r6 = (com.android.systemui.keyguard.shared.model.FingerprintAuthenticationStatus) r6
-                        boolean r2 = r6 instanceof com.android.systemui.keyguard.shared.model.ErrorFingerprintAuthenticationStatus
-                        if (r2 == 0) goto L4f
-                        com.android.systemui.keyguard.shared.model.ErrorFingerprintAuthenticationStatus r6 = (com.android.systemui.keyguard.shared.model.ErrorFingerprintAuthenticationStatus) r6
-                        int r6 = r6.msgId
-                        r2 = 7
-                        if (r6 == r2) goto L44
-                        r2 = 9
-                        if (r6 != r2) goto L4f
-                    L44:
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L4f
-                        return r1
-                    L4f:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.deviceentry.domain.interactor.OccludingAppDeviceEntryInteractor$special$$inlined$filter$2.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    int i;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i2 = anonymousClass1.label;
+                        if ((i2 & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i2 - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i3 = anonymousClass1.label;
+                    if (i3 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        FingerprintAuthenticationStatus fingerprintAuthenticationStatus = (FingerprintAuthenticationStatus) obj;
+                        if ((fingerprintAuthenticationStatus instanceof ErrorFingerprintAuthenticationStatus) && ((i = ((ErrorFingerprintAuthenticationStatus) fingerprintAuthenticationStatus).msgId) == 7 || i == 9)) {
+                            anonymousClass1.label = 1;
+                            if (this.$this_unsafeFlow.emit(obj, anonymousClass1) == coroutineSingletons) {
+                                return coroutineSingletons;
+                            }
+                        }
+                    } else {
+                        if (i3 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = channelFlowTransformLatestTransformLatest2.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         });
         final ChannelLimitedFlowMerge channelLimitedFlowMerge = biometricMessageInteractor.fingerprintMessage;
-        this.message = kotlinx.coroutines.flow.FlowKt.transformLatest(distinctUntilChanged, new OccludingAppDeviceEntryInteractor$ifKeyguardOccludedByApp$$inlined$flatMapLatest$1(null, new Flow() { // from class: com.android.systemui.deviceentry.domain.interactor.OccludingAppDeviceEntryInteractor$special$$inlined$filterNot$1
+        this.message = kotlinx.coroutines.flow.FlowKt.transformLatest(flowDistinctUntilChanged, new OccludingAppDeviceEntryInteractor$ifKeyguardOccludedByApp$$inlined$flatMapLatest$1(null, new Flow() { // from class: com.android.systemui.deviceentry.domain.interactor.OccludingAppDeviceEntryInteractor$special$$inlined$filterNot$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.deviceentry.domain.interactor.OccludingAppDeviceEntryInteractor$special$$inlined$filterNot$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -579,67 +511,47 @@ public final class OccludingAppDeviceEntryInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.deviceentry.domain.interactor.OccludingAppDeviceEntryInteractor$special$$inlined$filterNot$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.deviceentry.domain.interactor.OccludingAppDeviceEntryInteractor$special$$inlined$filterNot$1$2$1 r0 = (com.android.systemui.deviceentry.domain.interactor.OccludingAppDeviceEntryInteractor$special$$inlined$filterNot$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.deviceentry.domain.interactor.OccludingAppDeviceEntryInteractor$special$$inlined$filterNot$1$2$1 r0 = new com.android.systemui.deviceentry.domain.interactor.OccludingAppDeviceEntryInteractor$special$$inlined$filterNot$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L44
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        r6 = r5
-                        com.android.systemui.deviceentry.shared.model.FingerprintMessage r6 = (com.android.systemui.deviceentry.shared.model.FingerprintMessage) r6
-                        boolean r6 = r6 instanceof com.android.systemui.deviceentry.shared.model.FingerprintLockoutMessage
-                        if (r6 != 0) goto L44
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L44
-                        return r1
-                    L44:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.deviceentry.domain.interactor.OccludingAppDeviceEntryInteractor$special$$inlined$filterNot$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        if (!(((FingerprintMessage) obj) instanceof FingerprintLockoutMessage)) {
+                            anonymousClass1.label = 1;
+                            if (this.$this_unsafeFlow.emit(obj, anonymousClass1) == coroutineSingletons) {
+                                return coroutineSingletons;
+                            }
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = channelLimitedFlowMerge.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         }, new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(null)));
         if (context.getResources().getBoolean(R.bool.config_goToHomeFromOccludedApps)) {

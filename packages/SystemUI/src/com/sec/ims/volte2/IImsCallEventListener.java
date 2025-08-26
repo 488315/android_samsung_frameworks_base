@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import com.sec.ims.volte2.data.ImsCallInfo;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface IImsCallEventListener extends IInterface {
     public static final String DESCRIPTOR = "com.sec.ims.volte2.IImsCallEventListener";
@@ -52,7 +51,6 @@ public interface IImsCallEventListener extends IInterface {
 
     void onVideoResumed(ImsCallInfo imsCallInfo) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IImsCallEventListener {
         static final int TRANSACTION_onAudioPathUpdated = 20;
         static final int TRANSACTION_onCallEnded = 10;
@@ -75,7 +73,6 @@ public interface IImsCallEventListener extends IInterface {
         static final int TRANSACTION_onVideoHeld = 16;
         static final int TRANSACTION_onVideoResumed = 17;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements IImsCallEventListener {
             private IBinder mRemote;
 
@@ -94,314 +91,314 @@ public interface IImsCallEventListener extends IInterface {
 
             @Override // com.sec.ims.volte2.IImsCallEventListener
             public void onAudioPathUpdated(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsCallEventListener.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsCallEventListener.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IImsCallEventListener
             public void onCallEnded(ImsCallInfo imsCallInfo, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsCallEventListener.DESCRIPTOR);
-                    obtain.writeTypedObject(imsCallInfo, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsCallEventListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(imsCallInfo, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IImsCallEventListener
             public void onCallEstablished(ImsCallInfo imsCallInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsCallEventListener.DESCRIPTOR);
-                    obtain.writeTypedObject(imsCallInfo, 0);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsCallEventListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(imsCallInfo, 0);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IImsCallEventListener
             public void onCallHeld(ImsCallInfo imsCallInfo, boolean z, boolean z2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsCallEventListener.DESCRIPTOR);
-                    obtain.writeTypedObject(imsCallInfo, 0);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsCallEventListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(imsCallInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IImsCallEventListener
             public void onCallModified(ImsCallInfo imsCallInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsCallEventListener.DESCRIPTOR);
-                    obtain.writeTypedObject(imsCallInfo, 0);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsCallEventListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(imsCallInfo, 0);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IImsCallEventListener
             public void onCallModifyRequested(ImsCallInfo imsCallInfo, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsCallEventListener.DESCRIPTOR);
-                    obtain.writeTypedObject(imsCallInfo, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsCallEventListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(imsCallInfo, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IImsCallEventListener
             public void onCallResumed(ImsCallInfo imsCallInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsCallEventListener.DESCRIPTOR);
-                    obtain.writeTypedObject(imsCallInfo, 0);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsCallEventListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(imsCallInfo, 0);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IImsCallEventListener
             public void onCallRinging(ImsCallInfo imsCallInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsCallEventListener.DESCRIPTOR);
-                    obtain.writeTypedObject(imsCallInfo, 0);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsCallEventListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(imsCallInfo, 0);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IImsCallEventListener
             public void onCallRingingBack(ImsCallInfo imsCallInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsCallEventListener.DESCRIPTOR);
-                    obtain.writeTypedObject(imsCallInfo, 0);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsCallEventListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(imsCallInfo, 0);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IImsCallEventListener
             public void onCallStarted(ImsCallInfo imsCallInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsCallEventListener.DESCRIPTOR);
-                    obtain.writeTypedObject(imsCallInfo, 0);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsCallEventListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(imsCallInfo, 0);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IImsCallEventListener
             public void onCallTrying(ImsCallInfo imsCallInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsCallEventListener.DESCRIPTOR);
-                    obtain.writeTypedObject(imsCallInfo, 0);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsCallEventListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(imsCallInfo, 0);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IImsCallEventListener
             public void onConferenceParticipantAdded(ImsCallInfo imsCallInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsCallEventListener.DESCRIPTOR);
-                    obtain.writeTypedObject(imsCallInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsCallEventListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(imsCallInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IImsCallEventListener
             public void onConferenceParticipantRemoved(ImsCallInfo imsCallInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsCallEventListener.DESCRIPTOR);
-                    obtain.writeTypedObject(imsCallInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsCallEventListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(imsCallInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IImsCallEventListener
             public void onDedicatedBearerEvent(ImsCallInfo imsCallInfo, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsCallEventListener.DESCRIPTOR);
-                    obtain.writeTypedObject(imsCallInfo, 0);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsCallEventListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(imsCallInfo, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IImsCallEventListener
             public void onIncomingCall(ImsCallInfo imsCallInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsCallEventListener.DESCRIPTOR);
-                    obtain.writeTypedObject(imsCallInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsCallEventListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(imsCallInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IImsCallEventListener
             public void onIncomingPreAlerting(ImsCallInfo imsCallInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsCallEventListener.DESCRIPTOR);
-                    obtain.writeTypedObject(imsCallInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsCallEventListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(imsCallInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IImsCallEventListener
             public void onRtpLossRateNoti(int i, float f, float f2, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsCallEventListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeFloat(f);
-                    obtain.writeFloat(f2);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsCallEventListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeFloat(f);
+                    parcelObtain.writeFloat(f2);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IImsCallEventListener
             public void onVideoAvailable(ImsCallInfo imsCallInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsCallEventListener.DESCRIPTOR);
-                    obtain.writeTypedObject(imsCallInfo, 0);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsCallEventListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(imsCallInfo, 0);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IImsCallEventListener
             public void onVideoHeld(ImsCallInfo imsCallInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsCallEventListener.DESCRIPTOR);
-                    obtain.writeTypedObject(imsCallInfo, 0);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsCallEventListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(imsCallInfo, 0);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.sec.ims.volte2.IImsCallEventListener
             public void onVideoResumed(ImsCallInfo imsCallInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImsCallEventListener.DESCRIPTOR);
-                    obtain.writeTypedObject(imsCallInfo, 0);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IImsCallEventListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(imsCallInfo, 0);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -414,8 +411,8 @@ public interface IImsCallEventListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IImsCallEventListener.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IImsCallEventListener)) ? new Proxy(iBinder) : (IImsCallEventListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IImsCallEventListener.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IImsCallEventListener)) ? new Proxy(iBinder) : (IImsCallEventListener) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder
@@ -430,16 +427,16 @@ public interface IImsCallEventListener extends IInterface {
             switch (i) {
                 case 1:
                     ImsCallInfo imsCallInfo = (ImsCallInfo) parcel.readTypedObject(ImsCallInfo.CREATOR);
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    onIncomingPreAlerting(imsCallInfo, readString);
+                    onIncomingPreAlerting(imsCallInfo, string);
                     parcel2.writeNoException();
                     return true;
                 case 2:
                     ImsCallInfo imsCallInfo2 = (ImsCallInfo) parcel.readTypedObject(ImsCallInfo.CREATOR);
-                    String readString2 = parcel.readString();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    onIncomingCall(imsCallInfo2, readString2);
+                    onIncomingCall(imsCallInfo2, string2);
                     parcel2.writeNoException();
                     return true;
                 case 3:
@@ -474,9 +471,9 @@ public interface IImsCallEventListener extends IInterface {
                     return true;
                 case 8:
                     ImsCallInfo imsCallInfo8 = (ImsCallInfo) parcel.readTypedObject(ImsCallInfo.CREATOR);
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onCallModifyRequested(imsCallInfo8, readInt);
+                    onCallModifyRequested(imsCallInfo8, i3);
                     parcel2.writeNoException();
                     return true;
                 case 9:
@@ -487,17 +484,17 @@ public interface IImsCallEventListener extends IInterface {
                     return true;
                 case 10:
                     ImsCallInfo imsCallInfo10 = (ImsCallInfo) parcel.readTypedObject(ImsCallInfo.CREATOR);
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onCallEnded(imsCallInfo10, readInt2);
+                    onCallEnded(imsCallInfo10, i4);
                     parcel2.writeNoException();
                     return true;
                 case 11:
                     ImsCallInfo imsCallInfo11 = (ImsCallInfo) parcel.readTypedObject(ImsCallInfo.CREATOR);
-                    boolean readBoolean = parcel.readBoolean();
-                    boolean readBoolean2 = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    onCallHeld(imsCallInfo11, readBoolean, readBoolean2);
+                    onCallHeld(imsCallInfo11, z, z2);
                     parcel2.writeNoException();
                     return true;
                 case 12:
@@ -508,16 +505,16 @@ public interface IImsCallEventListener extends IInterface {
                     return true;
                 case 13:
                     ImsCallInfo imsCallInfo13 = (ImsCallInfo) parcel.readTypedObject(ImsCallInfo.CREATOR);
-                    String readString3 = parcel.readString();
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    onConferenceParticipantAdded(imsCallInfo13, readString3);
+                    onConferenceParticipantAdded(imsCallInfo13, string3);
                     parcel2.writeNoException();
                     return true;
                 case 14:
                     ImsCallInfo imsCallInfo14 = (ImsCallInfo) parcel.readTypedObject(ImsCallInfo.CREATOR);
-                    String readString4 = parcel.readString();
+                    String string4 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    onConferenceParticipantRemoved(imsCallInfo14, readString4);
+                    onConferenceParticipantRemoved(imsCallInfo14, string4);
                     parcel2.writeNoException();
                     return true;
                 case 15:
@@ -540,25 +537,25 @@ public interface IImsCallEventListener extends IInterface {
                     return true;
                 case 18:
                     ImsCallInfo imsCallInfo18 = (ImsCallInfo) parcel.readTypedObject(ImsCallInfo.CREATOR);
-                    int readInt3 = parcel.readInt();
-                    int readInt4 = parcel.readInt();
+                    int i5 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onDedicatedBearerEvent(imsCallInfo18, readInt3, readInt4);
+                    onDedicatedBearerEvent(imsCallInfo18, i5, i6);
                     parcel2.writeNoException();
                     return true;
                 case 19:
-                    int readInt5 = parcel.readInt();
-                    float readFloat = parcel.readFloat();
-                    float readFloat2 = parcel.readFloat();
-                    int readInt6 = parcel.readInt();
+                    int i7 = parcel.readInt();
+                    float f = parcel.readFloat();
+                    float f2 = parcel.readFloat();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onRtpLossRateNoti(readInt5, readFloat, readFloat2, readInt6);
+                    onRtpLossRateNoti(i7, f, f2, i8);
                     parcel2.writeNoException();
                     return true;
                 case 20:
-                    String readString5 = parcel.readString();
+                    String string5 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    onAudioPathUpdated(readString5);
+                    onAudioPathUpdated(string5);
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -572,7 +569,6 @@ public interface IImsCallEventListener extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements IImsCallEventListener {
         @Override // android.os.IInterface
         public IBinder asBinder() {

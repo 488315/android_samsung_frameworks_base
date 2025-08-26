@@ -5,7 +5,6 @@ import androidx.compose.ui.node.GlobalPositionAwareModifierNode;
 import androidx.compose.ui.node.NodeCoordinator;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class OnGloballyPositionedNode extends Modifier.Node implements GlobalPositionAwareModifierNode {
     public Function1 callback;
@@ -16,6 +15,6 @@ final class OnGloballyPositionedNode extends Modifier.Node implements GlobalPosi
 
     @Override // androidx.compose.ui.node.GlobalPositionAwareModifierNode
     public final void onGloballyPositioned(NodeCoordinator nodeCoordinator) {
-        this.callback.mo779invoke(nodeCoordinator);
+        this.callback.mo781invoke(nodeCoordinator);
     }
 }

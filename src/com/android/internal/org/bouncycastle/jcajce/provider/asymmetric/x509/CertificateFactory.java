@@ -43,11 +43,11 @@ public class CertificateFactory extends CertificateFactorySpi {
     private int sCrlDataObjectCount = 0;
     private InputStream currentCrlStream = null;
 
-    private Certificate readDERCertificate(ASN1InputStream aSN1InputStream) throws IOException, CertificateParsingException {
+    private Certificate readDERCertificate(ASN1InputStream aSN1InputStream) throws CertificateParsingException, IOException {
         return getCertificate(ASN1Sequence.getInstance(aSN1InputStream.readObject()));
     }
 
-    private Certificate readPEMCertificate(InputStream inputStream, boolean z) throws IOException, CertificateParsingException {
+    private Certificate readPEMCertificate(InputStream inputStream, boolean z) throws CertificateParsingException, IOException {
         return getCertificate(PEM_CERT_PARSER.readPEMObject(inputStream, z));
     }
 
@@ -117,13 +117,9 @@ public class CertificateFactory extends CertificateFactorySpi {
         return doGenerateCertificate(inputStream, true);
     }
 
-    private Certificate doGenerateCertificate(InputStream inputStream, boolean z) throws CertificateException {
+    private Certificate doGenerateCertificate(InputStream inputStream, boolean z) throws IOException, CertificateException {
         InputStream inputStream2 = this.currentStream;
-        if (inputStream2 == null) {
-            this.currentStream = inputStream;
-            this.sData = null;
-            this.sDataObjectCount = 0;
-        } else if (inputStream2 != inputStream) {
+        if (inputStream2 == null || inputStream2 != inputStream) {
             this.currentStream = inputStream;
             this.sData = null;
             this.sDataObjectCount = 0;
@@ -142,16 +138,16 @@ public class CertificateFactory extends CertificateFactorySpi {
             if (inputStream.markSupported()) {
                 pushbackInputStream.mark(1);
             }
-            int read = pushbackInputStream.read();
-            if (read == -1) {
+            int i = pushbackInputStream.read();
+            if (i == -1) {
                 return null;
             }
             if (inputStream.markSupported()) {
                 pushbackInputStream.reset();
             } else {
-                ((PushbackInputStream) pushbackInputStream).unread(read);
+                ((PushbackInputStream) pushbackInputStream).unread(i);
             }
-            if (read != 48) {
+            if (i != 48) {
                 return readPEMCertificate(pushbackInputStream, z);
             }
             return readDERCertificate(new ASN1InputStream(pushbackInputStream));
@@ -161,14 +157,14 @@ public class CertificateFactory extends CertificateFactorySpi {
     }
 
     @Override // java.security.cert.CertificateFactorySpi
-    public Collection engineGenerateCertificates(InputStream inputStream) throws CertificateException {
+    public Collection engineGenerateCertificates(InputStream inputStream) throws IOException, CertificateException {
         ArrayList arrayList = new ArrayList();
         while (true) {
-            Certificate doGenerateCertificate = doGenerateCertificate(inputStream, arrayList.isEmpty());
-            if (doGenerateCertificate == null) {
+            Certificate certificateDoGenerateCertificate = doGenerateCertificate(inputStream, arrayList.isEmpty());
+            if (certificateDoGenerateCertificate == null) {
                 return arrayList;
             }
-            arrayList.add(doGenerateCertificate);
+            arrayList.add(certificateDoGenerateCertificate);
         }
     }
 
@@ -177,13 +173,9 @@ public class CertificateFactory extends CertificateFactorySpi {
         return doGenerateCRL(inputStream, true);
     }
 
-    private CRL doGenerateCRL(InputStream inputStream, boolean z) throws CRLException {
+    private CRL doGenerateCRL(InputStream inputStream, boolean z) throws IOException, CRLException {
         InputStream inputStream2 = this.currentCrlStream;
-        if (inputStream2 == null) {
-            this.currentCrlStream = inputStream;
-            this.sCrlData = null;
-            this.sCrlDataObjectCount = 0;
-        } else if (inputStream2 != inputStream) {
+        if (inputStream2 == null || inputStream2 != inputStream) {
             this.currentCrlStream = inputStream;
             this.sCrlData = null;
             this.sCrlDataObjectCount = 0;
@@ -202,12 +194,12 @@ public class CertificateFactory extends CertificateFactorySpi {
                 inputStream = new ByteArrayInputStream(Streams.readAll(inputStream));
             }
             inputStream.mark(1);
-            int read = inputStream.read();
-            if (read == -1) {
+            int i = inputStream.read();
+            if (i == -1) {
                 return null;
             }
             inputStream.reset();
-            if (read != 48) {
+            if (i != 48) {
                 return readPEMCRL(inputStream, z);
             }
             return readDERCRL(new ASN1InputStream(inputStream, true));
@@ -219,15 +211,15 @@ public class CertificateFactory extends CertificateFactorySpi {
     }
 
     @Override // java.security.cert.CertificateFactorySpi
-    public Collection engineGenerateCRLs(InputStream inputStream) throws CRLException {
+    public Collection engineGenerateCRLs(InputStream inputStream) throws IOException, CRLException {
         ArrayList arrayList = new ArrayList();
         BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
         while (true) {
-            CRL doGenerateCRL = doGenerateCRL(bufferedInputStream, arrayList.isEmpty());
-            if (doGenerateCRL == null) {
+            CRL crlDoGenerateCRL = doGenerateCRL(bufferedInputStream, arrayList.isEmpty());
+            if (crlDoGenerateCRL == null) {
                 return arrayList;
             }
-            arrayList.add(doGenerateCRL);
+            arrayList.add(crlDoGenerateCRL);
         }
     }
 

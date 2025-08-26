@@ -180,198 +180,198 @@ public class Application extends ContextWrapper implements ComponentCallbacks2 {
     }
 
     void dispatchActivityPreCreated(Activity activity, Bundle bundle) {
-        Object[] collectActivityLifecycleCallbacks = collectActivityLifecycleCallbacks();
-        if (collectActivityLifecycleCallbacks != null) {
-            for (Object obj : collectActivityLifecycleCallbacks) {
+        Object[] objArrCollectActivityLifecycleCallbacks = collectActivityLifecycleCallbacks();
+        if (objArrCollectActivityLifecycleCallbacks != null) {
+            for (Object obj : objArrCollectActivityLifecycleCallbacks) {
                 ((ActivityLifecycleCallbacks) obj).onActivityPreCreated(activity, bundle);
             }
         }
     }
 
     void dispatchActivityCreated(Activity activity, Bundle bundle) {
-        Object[] collectActivityLifecycleCallbacks = collectActivityLifecycleCallbacks();
-        if (collectActivityLifecycleCallbacks != null) {
-            for (Object obj : collectActivityLifecycleCallbacks) {
+        Object[] objArrCollectActivityLifecycleCallbacks = collectActivityLifecycleCallbacks();
+        if (objArrCollectActivityLifecycleCallbacks != null) {
+            for (Object obj : objArrCollectActivityLifecycleCallbacks) {
                 ((ActivityLifecycleCallbacks) obj).onActivityCreated(activity, bundle);
             }
         }
     }
 
     void dispatchActivityPostCreated(Activity activity, Bundle bundle) {
-        Object[] collectActivityLifecycleCallbacks = collectActivityLifecycleCallbacks();
-        if (collectActivityLifecycleCallbacks != null) {
-            for (Object obj : collectActivityLifecycleCallbacks) {
+        Object[] objArrCollectActivityLifecycleCallbacks = collectActivityLifecycleCallbacks();
+        if (objArrCollectActivityLifecycleCallbacks != null) {
+            for (Object obj : objArrCollectActivityLifecycleCallbacks) {
                 ((ActivityLifecycleCallbacks) obj).onActivityPostCreated(activity, bundle);
             }
         }
     }
 
     void dispatchActivityPreStarted(Activity activity) {
-        Object[] collectActivityLifecycleCallbacks = collectActivityLifecycleCallbacks();
-        if (collectActivityLifecycleCallbacks != null) {
-            for (Object obj : collectActivityLifecycleCallbacks) {
+        Object[] objArrCollectActivityLifecycleCallbacks = collectActivityLifecycleCallbacks();
+        if (objArrCollectActivityLifecycleCallbacks != null) {
+            for (Object obj : objArrCollectActivityLifecycleCallbacks) {
                 ((ActivityLifecycleCallbacks) obj).onActivityPreStarted(activity);
             }
         }
     }
 
     void dispatchActivityStarted(Activity activity) {
-        Object[] collectActivityLifecycleCallbacks = collectActivityLifecycleCallbacks();
-        if (collectActivityLifecycleCallbacks != null) {
-            for (Object obj : collectActivityLifecycleCallbacks) {
+        Object[] objArrCollectActivityLifecycleCallbacks = collectActivityLifecycleCallbacks();
+        if (objArrCollectActivityLifecycleCallbacks != null) {
+            for (Object obj : objArrCollectActivityLifecycleCallbacks) {
                 ((ActivityLifecycleCallbacks) obj).onActivityStarted(activity);
             }
         }
     }
 
     void dispatchActivityPostStarted(Activity activity) {
-        Object[] collectActivityLifecycleCallbacks = collectActivityLifecycleCallbacks();
-        if (collectActivityLifecycleCallbacks != null) {
-            for (Object obj : collectActivityLifecycleCallbacks) {
+        Object[] objArrCollectActivityLifecycleCallbacks = collectActivityLifecycleCallbacks();
+        if (objArrCollectActivityLifecycleCallbacks != null) {
+            for (Object obj : objArrCollectActivityLifecycleCallbacks) {
                 ((ActivityLifecycleCallbacks) obj).onActivityPostStarted(activity);
             }
         }
     }
 
     void dispatchActivityPreResumed(Activity activity) {
-        Object[] collectActivityLifecycleCallbacks = collectActivityLifecycleCallbacks();
-        if (collectActivityLifecycleCallbacks != null) {
-            for (Object obj : collectActivityLifecycleCallbacks) {
+        Object[] objArrCollectActivityLifecycleCallbacks = collectActivityLifecycleCallbacks();
+        if (objArrCollectActivityLifecycleCallbacks != null) {
+            for (Object obj : objArrCollectActivityLifecycleCallbacks) {
                 ((ActivityLifecycleCallbacks) obj).onActivityPreResumed(activity);
             }
         }
     }
 
     void dispatchActivityResumed(Activity activity) {
-        Object[] collectActivityLifecycleCallbacks = collectActivityLifecycleCallbacks();
-        if (collectActivityLifecycleCallbacks != null) {
-            for (Object obj : collectActivityLifecycleCallbacks) {
+        Object[] objArrCollectActivityLifecycleCallbacks = collectActivityLifecycleCallbacks();
+        if (objArrCollectActivityLifecycleCallbacks != null) {
+            for (Object obj : objArrCollectActivityLifecycleCallbacks) {
                 ((ActivityLifecycleCallbacks) obj).onActivityResumed(activity);
             }
         }
     }
 
     void dispatchActivityPostResumed(Activity activity) {
-        Object[] collectActivityLifecycleCallbacks = collectActivityLifecycleCallbacks();
-        if (collectActivityLifecycleCallbacks != null) {
-            for (Object obj : collectActivityLifecycleCallbacks) {
+        Object[] objArrCollectActivityLifecycleCallbacks = collectActivityLifecycleCallbacks();
+        if (objArrCollectActivityLifecycleCallbacks != null) {
+            for (Object obj : objArrCollectActivityLifecycleCallbacks) {
                 ((ActivityLifecycleCallbacks) obj).onActivityPostResumed(activity);
             }
         }
     }
 
     void dispatchActivityPrePaused(Activity activity) {
-        Object[] collectActivityLifecycleCallbacks = collectActivityLifecycleCallbacks();
-        if (collectActivityLifecycleCallbacks != null) {
-            for (Object obj : collectActivityLifecycleCallbacks) {
+        Object[] objArrCollectActivityLifecycleCallbacks = collectActivityLifecycleCallbacks();
+        if (objArrCollectActivityLifecycleCallbacks != null) {
+            for (Object obj : objArrCollectActivityLifecycleCallbacks) {
                 ((ActivityLifecycleCallbacks) obj).onActivityPrePaused(activity);
             }
         }
     }
 
     void dispatchActivityPaused(Activity activity) {
-        Object[] collectActivityLifecycleCallbacks = collectActivityLifecycleCallbacks();
-        if (collectActivityLifecycleCallbacks != null) {
-            for (Object obj : collectActivityLifecycleCallbacks) {
+        Object[] objArrCollectActivityLifecycleCallbacks = collectActivityLifecycleCallbacks();
+        if (objArrCollectActivityLifecycleCallbacks != null) {
+            for (Object obj : objArrCollectActivityLifecycleCallbacks) {
                 ((ActivityLifecycleCallbacks) obj).onActivityPaused(activity);
             }
         }
     }
 
     void dispatchActivityPostPaused(Activity activity) {
-        Object[] collectActivityLifecycleCallbacks = collectActivityLifecycleCallbacks();
-        if (collectActivityLifecycleCallbacks != null) {
-            for (Object obj : collectActivityLifecycleCallbacks) {
+        Object[] objArrCollectActivityLifecycleCallbacks = collectActivityLifecycleCallbacks();
+        if (objArrCollectActivityLifecycleCallbacks != null) {
+            for (Object obj : objArrCollectActivityLifecycleCallbacks) {
                 ((ActivityLifecycleCallbacks) obj).onActivityPostPaused(activity);
             }
         }
     }
 
     void dispatchActivityPreStopped(Activity activity) {
-        Object[] collectActivityLifecycleCallbacks = collectActivityLifecycleCallbacks();
-        if (collectActivityLifecycleCallbacks != null) {
-            for (Object obj : collectActivityLifecycleCallbacks) {
+        Object[] objArrCollectActivityLifecycleCallbacks = collectActivityLifecycleCallbacks();
+        if (objArrCollectActivityLifecycleCallbacks != null) {
+            for (Object obj : objArrCollectActivityLifecycleCallbacks) {
                 ((ActivityLifecycleCallbacks) obj).onActivityPreStopped(activity);
             }
         }
     }
 
     void dispatchActivityStopped(Activity activity) {
-        Object[] collectActivityLifecycleCallbacks = collectActivityLifecycleCallbacks();
-        if (collectActivityLifecycleCallbacks != null) {
-            for (Object obj : collectActivityLifecycleCallbacks) {
+        Object[] objArrCollectActivityLifecycleCallbacks = collectActivityLifecycleCallbacks();
+        if (objArrCollectActivityLifecycleCallbacks != null) {
+            for (Object obj : objArrCollectActivityLifecycleCallbacks) {
                 ((ActivityLifecycleCallbacks) obj).onActivityStopped(activity);
             }
         }
     }
 
     void dispatchActivityPostStopped(Activity activity) {
-        Object[] collectActivityLifecycleCallbacks = collectActivityLifecycleCallbacks();
-        if (collectActivityLifecycleCallbacks != null) {
-            for (Object obj : collectActivityLifecycleCallbacks) {
+        Object[] objArrCollectActivityLifecycleCallbacks = collectActivityLifecycleCallbacks();
+        if (objArrCollectActivityLifecycleCallbacks != null) {
+            for (Object obj : objArrCollectActivityLifecycleCallbacks) {
                 ((ActivityLifecycleCallbacks) obj).onActivityPostStopped(activity);
             }
         }
     }
 
     void dispatchActivityPreSaveInstanceState(Activity activity, Bundle bundle) {
-        Object[] collectActivityLifecycleCallbacks = collectActivityLifecycleCallbacks();
-        if (collectActivityLifecycleCallbacks != null) {
-            for (Object obj : collectActivityLifecycleCallbacks) {
+        Object[] objArrCollectActivityLifecycleCallbacks = collectActivityLifecycleCallbacks();
+        if (objArrCollectActivityLifecycleCallbacks != null) {
+            for (Object obj : objArrCollectActivityLifecycleCallbacks) {
                 ((ActivityLifecycleCallbacks) obj).onActivityPreSaveInstanceState(activity, bundle);
             }
         }
     }
 
     void dispatchActivitySaveInstanceState(Activity activity, Bundle bundle) {
-        Object[] collectActivityLifecycleCallbacks = collectActivityLifecycleCallbacks();
-        if (collectActivityLifecycleCallbacks != null) {
-            for (Object obj : collectActivityLifecycleCallbacks) {
+        Object[] objArrCollectActivityLifecycleCallbacks = collectActivityLifecycleCallbacks();
+        if (objArrCollectActivityLifecycleCallbacks != null) {
+            for (Object obj : objArrCollectActivityLifecycleCallbacks) {
                 ((ActivityLifecycleCallbacks) obj).onActivitySaveInstanceState(activity, bundle);
             }
         }
     }
 
     void dispatchActivityPostSaveInstanceState(Activity activity, Bundle bundle) {
-        Object[] collectActivityLifecycleCallbacks = collectActivityLifecycleCallbacks();
-        if (collectActivityLifecycleCallbacks != null) {
-            for (Object obj : collectActivityLifecycleCallbacks) {
+        Object[] objArrCollectActivityLifecycleCallbacks = collectActivityLifecycleCallbacks();
+        if (objArrCollectActivityLifecycleCallbacks != null) {
+            for (Object obj : objArrCollectActivityLifecycleCallbacks) {
                 ((ActivityLifecycleCallbacks) obj).onActivityPostSaveInstanceState(activity, bundle);
             }
         }
     }
 
     void dispatchActivityPreDestroyed(Activity activity) {
-        Object[] collectActivityLifecycleCallbacks = collectActivityLifecycleCallbacks();
-        if (collectActivityLifecycleCallbacks != null) {
-            for (Object obj : collectActivityLifecycleCallbacks) {
+        Object[] objArrCollectActivityLifecycleCallbacks = collectActivityLifecycleCallbacks();
+        if (objArrCollectActivityLifecycleCallbacks != null) {
+            for (Object obj : objArrCollectActivityLifecycleCallbacks) {
                 ((ActivityLifecycleCallbacks) obj).onActivityPreDestroyed(activity);
             }
         }
     }
 
     void dispatchActivityDestroyed(Activity activity) {
-        Object[] collectActivityLifecycleCallbacks = collectActivityLifecycleCallbacks();
-        if (collectActivityLifecycleCallbacks != null) {
-            for (Object obj : collectActivityLifecycleCallbacks) {
+        Object[] objArrCollectActivityLifecycleCallbacks = collectActivityLifecycleCallbacks();
+        if (objArrCollectActivityLifecycleCallbacks != null) {
+            for (Object obj : objArrCollectActivityLifecycleCallbacks) {
                 ((ActivityLifecycleCallbacks) obj).onActivityDestroyed(activity);
             }
         }
     }
 
     void dispatchActivityPostDestroyed(Activity activity) {
-        Object[] collectActivityLifecycleCallbacks = collectActivityLifecycleCallbacks();
-        if (collectActivityLifecycleCallbacks != null) {
-            for (Object obj : collectActivityLifecycleCallbacks) {
+        Object[] objArrCollectActivityLifecycleCallbacks = collectActivityLifecycleCallbacks();
+        if (objArrCollectActivityLifecycleCallbacks != null) {
+            for (Object obj : objArrCollectActivityLifecycleCallbacks) {
                 ((ActivityLifecycleCallbacks) obj).onActivityPostDestroyed(activity);
             }
         }
     }
 
     void dispatchActivityConfigurationChanged(Activity activity) {
-        Object[] collectActivityLifecycleCallbacks = collectActivityLifecycleCallbacks();
-        if (collectActivityLifecycleCallbacks != null) {
-            for (Object obj : collectActivityLifecycleCallbacks) {
+        Object[] objArrCollectActivityLifecycleCallbacks = collectActivityLifecycleCallbacks();
+        if (objArrCollectActivityLifecycleCallbacks != null) {
+            for (Object obj : objArrCollectActivityLifecycleCallbacks) {
                 ((ActivityLifecycleCallbacks) obj).onActivityConfigurationChanged(activity);
             }
         }
@@ -410,15 +410,15 @@ public class Application extends ContextWrapper implements ComponentCallbacks2 {
         if (Helper.sVerbose) {
             Log.v(TAG, "getAutofillClient(): null on super, trying to find activity thread");
         }
-        ActivityThread currentActivityThread = ActivityThread.currentActivityThread();
-        if (currentActivityThread == null) {
+        ActivityThread activityThreadCurrentActivityThread = ActivityThread.currentActivityThread();
+        if (activityThreadCurrentActivityThread == null) {
             return null;
         }
-        int size = currentActivityThread.mActivities.size();
+        int size = activityThreadCurrentActivityThread.mActivities.size();
         for (int i = 0; i < size; i++) {
-            ActivityThread.ActivityClientRecord valueAt = currentActivityThread.mActivities.valueAt(i);
-            if (valueAt != null && (activity = valueAt.activity) != null) {
-                if (valueAt.isTopResumedActivity) {
+            ActivityThread.ActivityClientRecord activityClientRecordValueAt = activityThreadCurrentActivityThread.mActivities.valueAt(i);
+            if (activityClientRecordValueAt != null && (activity = activityClientRecordValueAt.activity) != null) {
+                if (activityClientRecordValueAt.isTopResumedActivity) {
                     if (Helper.sVerbose) {
                         Log.v(TAG, "getAutofillClient(): found top resumed activity for " + this + ": " + activity);
                     }

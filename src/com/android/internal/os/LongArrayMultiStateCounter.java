@@ -104,11 +104,11 @@ public final class LongArrayMultiStateCounter implements Parcelable {
     }
 
     private LongArrayMultiStateCounter(Parcel parcel) {
-        long native_initFromParcel = native_initFromParcel(parcel);
-        this.mNativeObject = native_initFromParcel;
+        long jNative_initFromParcel = native_initFromParcel(parcel);
+        this.mNativeObject = jNative_initFromParcel;
         registerNativeAllocation();
-        this.mStateCount = native_getStateCount(native_initFromParcel);
-        this.mLength = native_getArrayLength(native_initFromParcel);
+        this.mStateCount = native_getStateCount(jNative_initFromParcel);
+        this.mLength = native_getArrayLength(jNative_initFromParcel);
     }
 
     public int getStateCount() {

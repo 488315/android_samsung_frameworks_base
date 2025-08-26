@@ -129,50 +129,50 @@ public class WatchListDecorLayout extends FrameLayout implements ViewTreeObserve
         int childCount = getChildCount();
         boolean z = (View.MeasureSpec.getMode(i) == 1073741824 && View.MeasureSpec.getMode(i2) == 1073741824) ? false : true;
         this.mMatchParentChildren.clear();
-        int i3 = 0;
-        int i4 = 0;
-        int i5 = 0;
-        for (int i6 = 0; i6 < childCount; i6++) {
-            View childAt = getChildAt(i6);
+        int iMax = 0;
+        int iMax2 = 0;
+        int iCombineMeasuredStates = 0;
+        for (int i3 = 0; i3 < childCount; i3++) {
+            View childAt = getChildAt(i3);
             if (getMeasureAllChildren() || childAt.getVisibility() != 8) {
                 measureChildWithMargins(childAt, i, 0, i2, 0);
                 FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) childAt.getLayoutParams();
-                i3 = Math.max(i3, childAt.getMeasuredWidth() + layoutParams.leftMargin + layoutParams.rightMargin);
-                i4 = Math.max(i4, childAt.getMeasuredHeight() + layoutParams.topMargin + layoutParams.bottomMargin);
-                i5 = combineMeasuredStates(i5, childAt.getMeasuredState());
+                iMax = Math.max(iMax, childAt.getMeasuredWidth() + layoutParams.leftMargin + layoutParams.rightMargin);
+                iMax2 = Math.max(iMax2, childAt.getMeasuredHeight() + layoutParams.topMargin + layoutParams.bottomMargin);
+                iCombineMeasuredStates = combineMeasuredStates(iCombineMeasuredStates, childAt.getMeasuredState());
                 if (z && (layoutParams.width == -1 || layoutParams.height == -1)) {
                     this.mMatchParentChildren.add(childAt);
                 }
             }
         }
-        int paddingLeftWithForeground = i3 + getPaddingLeftWithForeground() + getPaddingRightWithForeground();
-        int max = Math.max(i4 + getPaddingTopWithForeground() + getPaddingBottomWithForeground(), getSuggestedMinimumHeight());
-        int max2 = Math.max(paddingLeftWithForeground, getSuggestedMinimumWidth());
+        int paddingLeftWithForeground = iMax + getPaddingLeftWithForeground() + getPaddingRightWithForeground();
+        int iMax3 = Math.max(iMax2 + getPaddingTopWithForeground() + getPaddingBottomWithForeground(), getSuggestedMinimumHeight());
+        int iMax4 = Math.max(paddingLeftWithForeground, getSuggestedMinimumWidth());
         Drawable foreground = getForeground();
         if (foreground != null) {
-            max = Math.max(max, foreground.getMinimumHeight());
-            max2 = Math.max(max2, foreground.getMinimumWidth());
+            iMax3 = Math.max(iMax3, foreground.getMinimumHeight());
+            iMax4 = Math.max(iMax4, foreground.getMinimumWidth());
         }
-        setMeasuredDimension(resolveSizeAndState(max2, i, i5), resolveSizeAndState(max, i2, i5 << 16));
+        setMeasuredDimension(resolveSizeAndState(iMax4, i, iCombineMeasuredStates), resolveSizeAndState(iMax3, i2, iCombineMeasuredStates << 16));
         ListView listView = this.mListView;
         if (listView != null) {
-            int i7 = this.mPendingScroll;
-            if (i7 != 0) {
-                listView.scrollListBy(i7);
+            int i4 = this.mPendingScroll;
+            if (i4 != 0) {
+                listView.scrollListBy(i4);
                 this.mPendingScroll = 0;
             }
-            int max3 = Math.max(this.mListView.getPaddingTop(), measureAndGetHeight(this.mTopPanel, i, i2));
-            int max4 = Math.max(this.mListView.getPaddingBottom(), measureAndGetHeight(this.mBottomPanel, i, i2));
-            if (max3 != this.mListView.getPaddingTop() || max4 != this.mListView.getPaddingBottom()) {
-                this.mPendingScroll += this.mListView.getPaddingTop() - max3;
+            int iMax5 = Math.max(this.mListView.getPaddingTop(), measureAndGetHeight(this.mTopPanel, i, i2));
+            int iMax6 = Math.max(this.mListView.getPaddingBottom(), measureAndGetHeight(this.mBottomPanel, i, i2));
+            if (iMax5 != this.mListView.getPaddingTop() || iMax6 != this.mListView.getPaddingBottom()) {
+                this.mPendingScroll += this.mListView.getPaddingTop() - iMax5;
                 ListView listView2 = this.mListView;
-                listView2.setPadding(listView2.getPaddingLeft(), max3, this.mListView.getPaddingRight(), max4);
+                listView2.setPadding(listView2.getPaddingLeft(), iMax5, this.mListView.getPaddingRight(), iMax6);
             }
         }
         int size = this.mMatchParentChildren.size();
         if (size > 1) {
-            for (int i8 = 0; i8 < size; i8++) {
-                View view = this.mMatchParentChildren.get(i8);
+            for (int i5 = 0; i5 < size; i5++) {
+                View view = this.mMatchParentChildren.get(i5);
                 if (this.mListView == null || (view != this.mTopPanel && view != this.mBottomPanel)) {
                     applyMeasureToChild(view, i, i2);
                 }

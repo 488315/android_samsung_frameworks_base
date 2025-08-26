@@ -113,22 +113,16 @@ public class SemPhotoRemasterManager {
 
     /* JADX INFO: Access modifiers changed from: private */
     public static synchronized IDirector getEngineInstance() {
-        IDirector iDirector;
-        synchronized (SemPhotoRemasterManager.class) {
-            if (sEngineInstance == null) {
-                LogUtil.d(TAG, "New Instance is created in getEngineInstance");
-                sEngineInstance = new ClientRemasterDirector();
-            }
-            iDirector = sEngineInstance;
+        if (sEngineInstance == null) {
+            LogUtil.d(TAG, "New Instance is created in getEngineInstance");
+            sEngineInstance = new ClientRemasterDirector();
         }
-        return iDirector;
+        return sEngineInstance;
     }
 
     private static synchronized void releaseEngineInstance() {
-        synchronized (SemPhotoRemasterManager.class) {
-            LogUtil.i(TAG, new Throwable().getStackTrace()[0].getMethodName() + " is called!");
-            sEngineInstance = null;
-        }
+        LogUtil.i(TAG, new Throwable().getStackTrace()[0].getMethodName() + " is called!");
+        sEngineInstance = null;
     }
 
     public SemPhotoRemasterManager() {
@@ -143,12 +137,12 @@ public class SemPhotoRemasterManager {
     }
 
     public synchronized boolean tryInit(Context context) {
-        boolean tryInit;
+        boolean zTryInit;
         LogUtil.i(TAG, new Throwable().getStackTrace()[0].getMethodName() + " is called!");
         synchronized (sInitDeinitSyncLock) {
-            tryInit = getEngineInstance().tryInit(context);
+            zTryInit = getEngineInstance().tryInit(context);
         }
-        return tryInit;
+        return zTryInit;
     }
 
     public synchronized void deinit() {

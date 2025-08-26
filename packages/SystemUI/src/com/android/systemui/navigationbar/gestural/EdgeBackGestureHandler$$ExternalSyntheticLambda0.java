@@ -6,7 +6,6 @@ import com.android.wm.shell.pip.Pip;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class EdgeBackGestureHandler$$ExternalSyntheticLambda0 implements Consumer {
     public final /* synthetic */ int $r8$classId;
@@ -40,7 +39,7 @@ public final /* synthetic */ class EdgeBackGestureHandler$$ExternalSyntheticLamb
                 desktopTasksController.mainExecutor.execute(new Runnable() { // from class: com.android.wm.shell.desktopmode.DesktopTasksController$DesktopModeImpl$addDesktopGestureExclusionRegionListener$1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        DesktopTasksController desktopTasksController2 = DesktopTasksController.this;
+                        DesktopTasksController desktopTasksController2 = desktopTasksController;
                         Consumer consumer = edgeBackGestureHandler$$ExternalSyntheticLambda0;
                         Executor executor2 = executor;
                         final DesktopRepository desktopRepository = desktopTasksController2.taskRepository;
@@ -49,7 +48,7 @@ public final /* synthetic */ class EdgeBackGestureHandler$$ExternalSyntheticLamb
                         executor2.execute(new Runnable() { // from class: com.android.wm.shell.desktopmode.DesktopRepository$setExclusionRegionListener$1
                             @Override // java.lang.Runnable
                             public final void run() {
-                                DesktopRepository desktopRepository2 = DesktopRepository.this;
+                                DesktopRepository desktopRepository2 = desktopRepository;
                                 Consumer consumer2 = desktopRepository2.desktopGestureExclusionListener;
                                 if (consumer2 != null) {
                                     consumer2.accept(DesktopRepository.access$calculateDesktopExclusionRegion(desktopRepository2));

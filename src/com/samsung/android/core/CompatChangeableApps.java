@@ -14,6 +14,7 @@ import com.android.internal.compat.IPlatformCompat;
 import com.samsung.android.core.CompatChangeablePackageInfo;
 import com.samsung.android.core.ICompatChangeableManager;
 import com.samsung.android.graphics.imagefilter.ShaderAssembler;
+import com.samsung.android.rune.CoreRune;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -127,11 +128,11 @@ public class CompatChangeableApps extends ICompatChangeableManager.Stub {
     }
 
     public boolean containsCache(String str) {
-        boolean containsKey;
+        boolean zContainsKey;
         synchronized (this.mCache) {
-            containsKey = this.mCache.containsKey(str);
+            zContainsKey = this.mCache.containsKey(str);
         }
-        return containsKey;
+        return zContainsKey;
     }
 
     public void dump(PrintWriter printWriter, String str) {
@@ -181,10 +182,10 @@ public class CompatChangeableApps extends ICompatChangeableManager.Stub {
         StringBuilder sb = new StringBuilder();
         sb.append(str);
         sb.append("  ");
-        String sb2 = sb.toString();
+        String string = sb.toString();
         for (int i = 0; i < size; i++) {
             String str3 = list.get(i);
-            printWriter.print(((i == 0 || (i + 1) % 5 == 0) ? ShaderAssembler.NEWLINE + sb2 : ", ") + str3);
+            printWriter.print(((i == 0 || (i + 1) % 5 == 0) ? ShaderAssembler.NEWLINE + string : ", ") + str3);
         }
         printWriter.println();
     }
@@ -224,16 +225,18 @@ public class CompatChangeableApps extends ICompatChangeableManager.Stub {
 
     @Override // com.samsung.android.core.ICompatChangeableManager
     public boolean isOrientationOverrideDisallowed(String str) {
-        return isSamsungPackage(str) || getCachedInfo(str).mIsOrientationOverrideDisallowed || containsOverride(ActivityInfo.OVERRIDE_RESPECT_REQUESTED_ORIENTATION, str);
+        return isSamsungPackage(str) || getCachedInfo(str).mIsOrientationOverrideDisallowed || containsOverride(ActivityInfo.OVERRIDE_RESPECT_REQUESTED_ORIENTATION, str) || containsOverride(ActivityInfo.OVERRIDE_USE_DISPLAY_LANDSCAPE_NATURAL_ORIENTATION, str);
     }
 
     @Override // com.samsung.android.core.ICompatChangeableManager
     public boolean isMinAspectRatioOverrideDisallowed(String str) {
-        if (isSamsungPackage(str)) {
-            return true;
+        if (CoreRune.MT_APP_COMPAT_ASPECT_RATIO_SUPPORTED && !isSamsungPackage(str)) {
+            CompatChangeablePackageInfo cachedInfo = getCachedInfo(str);
+            if (!cachedInfo.mIsMinAspectRatioOverrideDisallowed && !cachedInfo.mIsActivityEmbeddingSplitsEnabled && !containsOverride(ActivityInfo.OVERRIDE_MIN_ASPECT_RATIO, str) && !containsOverride(ActivityInfo.OVERRIDE_MIN_ASPECT_RATIO_ONLY_FOR_CAMERA, str)) {
+                return false;
+            }
         }
-        CompatChangeablePackageInfo cachedInfo = getCachedInfo(str);
-        return cachedInfo.mIsMinAspectRatioOverrideDisallowed || cachedInfo.mIsActivityEmbeddingSplitsEnabled || containsOverride(ActivityInfo.OVERRIDE_MIN_ASPECT_RATIO, str) || containsOverride(ActivityInfo.OVERRIDE_MIN_ASPECT_RATIO_ONLY_FOR_CAMERA, str);
+        return true;
     }
 
     public static Boolean readComponentProperty(PackageManager packageManager, String str, String str2) {

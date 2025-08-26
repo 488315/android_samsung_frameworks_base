@@ -259,8 +259,8 @@ public abstract class MediaBufferGroup extends MediaBufferBase {
 
     @Override // com.samsung.android.sume.core.buffer.MediaBuffer
     public MediaBuffer asRef() {
-        int incrementAndGet = this.sharedCount.incrementAndGet();
-        Log.d(TAG, "use count: " + incrementAndGet + NavigationBarInflaterView.KEY_CODE_START + hashCode() + NavigationBarInflaterView.KEY_CODE_END);
+        int iIncrementAndGet = this.sharedCount.incrementAndGet();
+        Log.d(TAG, "use count: " + iIncrementAndGet + NavigationBarInflaterView.KEY_CODE_START + hashCode() + NavigationBarInflaterView.KEY_CODE_END);
         this.buffers.forEach(new Consumer() { // from class: com.samsung.android.sume.core.buffer.MediaBufferGroup$$ExternalSyntheticLambda1
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
@@ -288,13 +288,13 @@ public abstract class MediaBufferGroup extends MediaBufferBase {
         return (String) IntStream.range(0, this.buffers.size()).mapToObj(new IntFunction() { // from class: com.samsung.android.sume.core.buffer.MediaBufferGroup$$ExternalSyntheticLambda6
             @Override // java.util.function.IntFunction
             public final Object apply(int i) {
-                return MediaBufferGroup.this.m9515xde53324e(i);
+                return this.f$0.m9528xde53324e(i);
             }
         }).collect(Collectors.joining(ShaderAssembler.NEWLINE));
     }
 
     /* renamed from: lambda$dataToString$3$com-samsung-android-sume-core-buffer-MediaBufferGroup, reason: not valid java name */
-    /* synthetic */ String m9515xde53324e(int i) {
+    /* synthetic */ String m9528xde53324e(int i) {
         return NavigationBarInflaterView.KEY_CODE_START + i + "-th)" + this.buffers.get(i).contentToString();
     }
 

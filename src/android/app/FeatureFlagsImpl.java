@@ -13,6 +13,11 @@ public final class FeatureFlagsImpl implements FeatureFlags {
     }
 
     @Override // android.app.FeatureFlags
+    public boolean apiRichOngoingPermission() {
+        return false;
+    }
+
+    @Override // android.app.FeatureFlags
     public boolean apiTvextender() {
         return true;
     }

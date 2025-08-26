@@ -13,14 +13,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class OneHandedAnimationController {
     public final HashMap mAnimatorMap = new HashMap();
     public final OneHandedInterpolator mInterpolator = new OneHandedInterpolator(this);
     public final OneHandedSurfaceTransactionHelper mSurfaceTransactionHelper;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class OneHandedInterpolator extends BaseInterpolator {
         public OneHandedInterpolator(OneHandedAnimationController oneHandedAnimationController) {
         }
@@ -31,7 +29,6 @@ public class OneHandedAnimationController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class OneHandedTransitionAnimator extends ValueAnimator implements ValueAnimator.AnimatorUpdateListener, Animator.AnimatorListener {
         public static final /* synthetic */ int $r8$clinit = 0;
         public float mCurrentValue;
@@ -59,13 +56,13 @@ public class OneHandedAnimationController {
 
                 @Override // com.android.wm.shell.onehanded.OneHandedAnimationController.OneHandedTransitionAnimator
                 public final void applySurfaceControlTransaction(SurfaceControl surfaceControl2, SurfaceControl.Transaction transaction, float f3) {
-                    float m = DrawerArrowDrawable$$ExternalSyntheticOutline0.m(this.mEndValue, f3, (1.0f - f3) * this.mStartValue, 0.5f);
+                    float fM = DrawerArrowDrawable$$ExternalSyntheticOutline0.m(this.mEndValue, f3, (1.0f - f3) * this.mStartValue, 0.5f);
                     Rect rect2 = this.mTmpRect;
                     int i = rect2.left;
-                    int round = Math.round(m) + rect2.top;
+                    int iRound = Math.round(fM) + rect2.top;
                     Rect rect3 = this.mTmpRect;
-                    rect2.set(i, round, rect3.right, Math.round(m) + rect3.bottom);
-                    this.mCurrentValue = m;
+                    rect2.set(i, iRound, rect3.right, Math.round(fM) + rect3.bottom);
+                    this.mCurrentValue = fM;
                     OneHandedSurfaceTransactionHelper oneHandedSurfaceTransactionHelper = this.mSurfaceTransactionHelper;
                     Rect rect4 = this.mTmpRect;
                     oneHandedSurfaceTransactionHelper.getClass();
@@ -73,7 +70,7 @@ public class OneHandedAnimationController {
                     if (oneHandedSurfaceTransactionHelper.mEnableCornerRadius) {
                         transaction.setCornerRadius(surfaceControl2, oneHandedSurfaceTransactionHelper.mCornerRadius);
                     }
-                    transaction.setPosition(surfaceControl2, 0.0f, m);
+                    transaction.setPosition(surfaceControl2, 0.0f, fM);
                     transaction.apply();
                 }
             };

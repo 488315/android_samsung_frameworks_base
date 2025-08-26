@@ -8,7 +8,6 @@ import kotlin.coroutines.intrinsics.IntrinsicsKt__IntrinsicsJvmKt;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.internal.DispatchedContinuationKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class LazyDeferredCoroutine extends DeferredCoroutine {
     public final Continuation continuation;
@@ -19,11 +18,11 @@ public final class LazyDeferredCoroutine extends DeferredCoroutine {
     }
 
     @Override // kotlinx.coroutines.JobSupport
-    public final void onStart() {
+    public final void onStart() throws Throwable {
         try {
-            Continuation intercepted = IntrinsicsKt__IntrinsicsJvmKt.intercepted(this.continuation);
+            Continuation continuationIntercepted = IntrinsicsKt__IntrinsicsJvmKt.intercepted(this.continuation);
             int i = Result.$r8$clinit;
-            DispatchedContinuationKt.resumeCancellableWith(Unit.INSTANCE, intercepted);
+            DispatchedContinuationKt.resumeCancellableWith(Unit.INSTANCE, continuationIntercepted);
         } catch (Throwable th) {
             th = th;
             if (th instanceof DispatchException) {

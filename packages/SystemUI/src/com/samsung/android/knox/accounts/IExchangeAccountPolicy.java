@@ -7,7 +7,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import com.samsung.android.knox.ContextInfo;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface IExchangeAccountPolicy extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.knox.accounts.IExchangeAccountPolicy";
@@ -138,7 +137,6 @@ public interface IExchangeAccountPolicy extends IInterface {
 
     boolean setSyncSchedules(ContextInfo contextInfo, int i, int i2, int i3, long j) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IExchangeAccountPolicy {
         public static final int TRANSACTION_addNewAccount = 2;
         public static final int TRANSACTION_addNewAccount_ex = 3;
@@ -204,7 +202,6 @@ public interface IExchangeAccountPolicy extends IInterface {
         public static final int TRANSACTION_setSyncPeakTimings = 17;
         public static final int TRANSACTION_setSyncSchedules = 18;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements IExchangeAccountPolicy {
             public IBinder mRemote;
 
@@ -214,134 +211,134 @@ public interface IExchangeAccountPolicy extends IInterface {
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public long addNewAccount(ContextInfo contextInfo, String str, String str2, String str3, String str4, int i, int i2, boolean z, String str5, String str6, String str7, boolean z2, boolean z3, String str8, boolean z4, boolean z5, boolean z6, String str9, String str10) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeString(str4);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeBoolean(z);
-                    obtain.writeString(str5);
-                    obtain.writeString(str6);
-                    obtain.writeString(str7);
-                    obtain.writeBoolean(z2);
-                    obtain.writeBoolean(z3);
-                    obtain.writeString(str8);
-                    obtain.writeBoolean(z4);
-                    obtain.writeBoolean(z5);
-                    obtain.writeBoolean(z6);
-                    obtain.writeString(str9);
-                    obtain.writeString(str10);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeString(str4);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeString(str5);
+                    parcelObtain.writeString(str6);
+                    parcelObtain.writeString(str7);
+                    parcelObtain.writeBoolean(z2);
+                    parcelObtain.writeBoolean(z3);
+                    parcelObtain.writeString(str8);
+                    parcelObtain.writeBoolean(z4);
+                    parcelObtain.writeBoolean(z5);
+                    parcelObtain.writeBoolean(z6);
+                    parcelObtain.writeString(str9);
+                    parcelObtain.writeString(str10);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public long addNewAccount_ex(ContextInfo contextInfo, String str, String str2, String str3, String str4, int i, int i2, boolean z, String str5, String str6, String str7, boolean z2, boolean z3, String str8, boolean z4, boolean z5, boolean z6, String str9, String str10, int i3, int i4, int i5, int i6, int i7, int i8, int i9, boolean z7, int i10, int i11, byte[] bArr, String str11) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeString(str4);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeBoolean(z);
-                    obtain.writeString(str5);
-                    obtain.writeString(str6);
-                    obtain.writeString(str7);
-                    obtain.writeBoolean(z2);
-                    obtain.writeBoolean(z3);
-                    obtain.writeString(str8);
-                    obtain.writeBoolean(z4);
-                    obtain.writeBoolean(z5);
-                    obtain.writeBoolean(z6);
-                    obtain.writeString(str9);
-                    obtain.writeString(str10);
-                    obtain.writeInt(i3);
-                    obtain.writeInt(i4);
-                    obtain.writeInt(i5);
-                    obtain.writeInt(i6);
-                    obtain.writeInt(i7);
-                    obtain.writeInt(i8);
-                    obtain.writeInt(i9);
-                    obtain.writeBoolean(z7);
-                    obtain.writeInt(i10);
-                    obtain.writeInt(i11);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeString(str11);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeString(str4);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeString(str5);
+                    parcelObtain.writeString(str6);
+                    parcelObtain.writeString(str7);
+                    parcelObtain.writeBoolean(z2);
+                    parcelObtain.writeBoolean(z3);
+                    parcelObtain.writeString(str8);
+                    parcelObtain.writeBoolean(z4);
+                    parcelObtain.writeBoolean(z5);
+                    parcelObtain.writeBoolean(z6);
+                    parcelObtain.writeString(str9);
+                    parcelObtain.writeString(str10);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeInt(i4);
+                    parcelObtain.writeInt(i5);
+                    parcelObtain.writeInt(i6);
+                    parcelObtain.writeInt(i7);
+                    parcelObtain.writeInt(i8);
+                    parcelObtain.writeInt(i9);
+                    parcelObtain.writeBoolean(z7);
+                    parcelObtain.writeInt(i10);
+                    parcelObtain.writeInt(i11);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeString(str11);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public long addNewAccount_new(ContextInfo contextInfo, ExchangeAccount exchangeAccount) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeTypedObject(exchangeAccount, 0);
-                    this.mRemote.transact(52, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeTypedObject(exchangeAccount, 0);
+                    this.mRemote.transact(52, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public boolean allowEmailSettingsChange(ContextInfo contextInfo, long j, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeLong(j);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(36, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(36, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public boolean allowInComingAttachments(ContextInfo contextInfo, boolean z, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(30, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(30, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -352,209 +349,209 @@ public interface IExchangeAccountPolicy extends IInterface {
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public long createAccount(ContextInfo contextInfo, String str, String str2, String str3, String str4, String str5) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeString(str4);
-                    obtain.writeString(str5);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeString(str4);
+                    parcelObtain.writeString(str5);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public boolean deleteAccount(ContextInfo contextInfo, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public String getAccountCertificatePassword(ContextInfo contextInfo, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(54, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(54, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public Account getAccountDetails(ContextInfo contextInfo, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Account) obtain2.readTypedObject(Account.CREATOR);
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Account) parcelObtain2.readTypedObject(Account.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public String getAccountEmailPassword(ContextInfo contextInfo, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(53, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(53, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public long getAccountId(ContextInfo contextInfo, String str, String str2, String str3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public Account[] getAllEASAccounts(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Account[]) obtain2.createTypedArray(Account.CREATOR);
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Account[]) parcelObtain2.createTypedArray(Account.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public String getDeviceId(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public boolean getForceSMIMECertificate(ContextInfo contextInfo, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(28, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(28, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public boolean getForceSMIMECertificateForEncryption(ContextInfo contextInfo, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(50, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(50, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public boolean getForceSMIMECertificateForSigning(ContextInfo contextInfo, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(47, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(47, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public int getIncomingAttachmentsSize(ContextInfo contextInfo, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(33, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(33, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -564,827 +561,827 @@ public interface IExchangeAccountPolicy extends IInterface {
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public int getMaxCalendarAgeFilter(ContextInfo contextInfo, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(39, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(39, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public int getMaxEmailAgeFilter(ContextInfo contextInfo, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(41, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(41, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public int getMaxEmailBodyTruncationSize(ContextInfo contextInfo, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(43, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(43, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public int getMaxEmailHTMLBodyTruncationSize(ContextInfo contextInfo, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(45, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(45, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public boolean getRequireEncryptedSMIMEMessages(ContextInfo contextInfo, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(26, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(26, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public boolean getRequireSignedSMIMEMessages(ContextInfo contextInfo, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public String getSMIMECertificateAlias(ContextInfo contextInfo, long j, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(58, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(58, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public boolean isEmailNotificationsEnabled(ContextInfo contextInfo, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(35, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(35, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public boolean isEmailSettingsChangeAllowed(ContextInfo contextInfo, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(37, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(37, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public boolean isIncomingAttachmentsAllowed(ContextInfo contextInfo, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(31, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(31, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public void removePendingAccount(ContextInfo contextInfo, String str, String str2, String str3, String str4) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeString(str4);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeString(str4);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public void sendAccountsChangedBroadcast(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public boolean setAcceptAllCertificates(ContextInfo contextInfo, boolean z, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public long setAccountBaseParameters(ContextInfo contextInfo, String str, String str2, String str3, String str4, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeString(str4);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(59, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeString(str4);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(59, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public long setAccountCertificatePassword(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(56, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(56, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public long setAccountEmailPassword(ContextInfo contextInfo, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(55, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(55, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public boolean setAccountName(ContextInfo contextInfo, String str, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public boolean setAlwaysVibrateOnEmailNotification(ContextInfo contextInfo, boolean z, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public boolean setAsDefaultAccount(ContextInfo contextInfo, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public void setClientAuthCert(ContextInfo contextInfo, byte[] bArr, String str, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeString(str);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public boolean setDataSyncs(ContextInfo contextInfo, boolean z, boolean z2, boolean z3, boolean z4, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    obtain.writeBoolean(z3);
-                    obtain.writeBoolean(z4);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    parcelObtain.writeBoolean(z3);
+                    parcelObtain.writeBoolean(z4);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public boolean setEmailNotificationsState(ContextInfo contextInfo, long j, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeLong(j);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(34, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(34, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public int setForceSMIMECertificate(ContextInfo contextInfo, long j, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeLong(j);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(27, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(27, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public boolean setForceSMIMECertificateAlias(ContextInfo contextInfo, long j, String str, String str2, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeLong(j);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(57, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(57, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public int setForceSMIMECertificateForEncryption(ContextInfo contextInfo, long j, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeLong(j);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(49, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(49, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public int setForceSMIMECertificateForSigning(ContextInfo contextInfo, long j, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeLong(j);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(46, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(46, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public boolean setIncomingAttachmentsSize(ContextInfo contextInfo, int i, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeInt(i);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(32, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(32, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public boolean setMaxCalendarAgeFilter(ContextInfo contextInfo, int i, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeInt(i);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(38, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(38, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public boolean setMaxEmailAgeFilter(ContextInfo contextInfo, int i, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeInt(i);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(40, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(40, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public boolean setMaxEmailBodyTruncationSize(ContextInfo contextInfo, int i, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeInt(i);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(42, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(42, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public boolean setMaxEmailHTMLBodyTruncationSize(ContextInfo contextInfo, int i, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeInt(i);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(44, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(44, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public boolean setPassword(ContextInfo contextInfo, String str, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public boolean setPastDaysToSync(ContextInfo contextInfo, int i, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeInt(i);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public boolean setProtocolVersion(ContextInfo contextInfo, String str, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(60, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(60, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public boolean setReleaseSMIMECertificate(ContextInfo contextInfo, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(29, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(29, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public boolean setReleaseSMIMECertificateForEncryption(ContextInfo contextInfo, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(51, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(51, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public boolean setReleaseSMIMECertificateForSigning(ContextInfo contextInfo, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(48, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(48, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public boolean setRequireEncryptedSMIMEMessages(ContextInfo contextInfo, long j, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeLong(j);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public boolean setRequireSignedSMIMEMessages(ContextInfo contextInfo, long j, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeLong(j);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public boolean setSSL(ContextInfo contextInfo, boolean z, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public boolean setSenderName(ContextInfo contextInfo, String str, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(61, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(61, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public boolean setSignature(ContextInfo contextInfo, String str, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeString(str);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public boolean setSilentVibrateOnEmailNotification(ContextInfo contextInfo, boolean z, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(62, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(62, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public boolean setSyncInterval(ContextInfo contextInfo, int i, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeInt(i);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(63, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(63, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public boolean setSyncPeakTimings(ContextInfo contextInfo, int i, int i2, int i3, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
             public boolean setSyncSchedules(ContextInfo contextInfo, int i, int i2, int i3, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IExchangeAccountPolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -1397,8 +1394,8 @@ public interface IExchangeAccountPolicy extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IExchangeAccountPolicy.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IExchangeAccountPolicy)) ? new Proxy(iBinder) : (IExchangeAccountPolicy) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IExchangeAccountPolicy.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IExchangeAccountPolicy)) ? new Proxy(iBinder) : (IExchangeAccountPolicy) iInterfaceQueryLocalInterface;
         }
 
         public static String getDefaultTransactionName(int i) {
@@ -1554,183 +1551,183 @@ public interface IExchangeAccountPolicy extends IInterface {
             switch (i) {
                 case 1:
                     ContextInfo contextInfo = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString = parcel.readString();
-                    String readString2 = parcel.readString();
-                    String readString3 = parcel.readString();
-                    String readString4 = parcel.readString();
-                    String readString5 = parcel.readString();
+                    String string = parcel.readString();
+                    String string2 = parcel.readString();
+                    String string3 = parcel.readString();
+                    String string4 = parcel.readString();
+                    String string5 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    long createAccount = createAccount(contextInfo, readString, readString2, readString3, readString4, readString5);
+                    long jCreateAccount = createAccount(contextInfo, string, string2, string3, string4, string5);
                     parcel2.writeNoException();
-                    parcel2.writeLong(createAccount);
+                    parcel2.writeLong(jCreateAccount);
                     return true;
                 case 2:
                     ContextInfo contextInfo2 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString6 = parcel.readString();
-                    String readString7 = parcel.readString();
-                    String readString8 = parcel.readString();
-                    String readString9 = parcel.readString();
-                    int readInt = parcel.readInt();
-                    int readInt2 = parcel.readInt();
-                    boolean readBoolean = parcel.readBoolean();
-                    String readString10 = parcel.readString();
-                    String readString11 = parcel.readString();
-                    String readString12 = parcel.readString();
-                    boolean readBoolean2 = parcel.readBoolean();
-                    boolean readBoolean3 = parcel.readBoolean();
-                    String readString13 = parcel.readString();
-                    boolean readBoolean4 = parcel.readBoolean();
-                    boolean readBoolean5 = parcel.readBoolean();
-                    boolean readBoolean6 = parcel.readBoolean();
-                    String readString14 = parcel.readString();
-                    String readString15 = parcel.readString();
+                    String string6 = parcel.readString();
+                    String string7 = parcel.readString();
+                    String string8 = parcel.readString();
+                    String string9 = parcel.readString();
+                    int i3 = parcel.readInt();
+                    int i4 = parcel.readInt();
+                    boolean z = parcel.readBoolean();
+                    String string10 = parcel.readString();
+                    String string11 = parcel.readString();
+                    String string12 = parcel.readString();
+                    boolean z2 = parcel.readBoolean();
+                    boolean z3 = parcel.readBoolean();
+                    String string13 = parcel.readString();
+                    boolean z4 = parcel.readBoolean();
+                    boolean z5 = parcel.readBoolean();
+                    boolean z6 = parcel.readBoolean();
+                    String string14 = parcel.readString();
+                    String string15 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    long addNewAccount = addNewAccount(contextInfo2, readString6, readString7, readString8, readString9, readInt, readInt2, readBoolean, readString10, readString11, readString12, readBoolean2, readBoolean3, readString13, readBoolean4, readBoolean5, readBoolean6, readString14, readString15);
+                    long jAddNewAccount = addNewAccount(contextInfo2, string6, string7, string8, string9, i3, i4, z, string10, string11, string12, z2, z3, string13, z4, z5, z6, string14, string15);
                     parcel2.writeNoException();
-                    parcel2.writeLong(addNewAccount);
+                    parcel2.writeLong(jAddNewAccount);
                     return true;
                 case 3:
                     ContextInfo contextInfo3 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString16 = parcel.readString();
-                    String readString17 = parcel.readString();
-                    String readString18 = parcel.readString();
-                    String readString19 = parcel.readString();
-                    int readInt3 = parcel.readInt();
-                    int readInt4 = parcel.readInt();
-                    boolean readBoolean7 = parcel.readBoolean();
-                    String readString20 = parcel.readString();
-                    String readString21 = parcel.readString();
-                    String readString22 = parcel.readString();
-                    boolean readBoolean8 = parcel.readBoolean();
-                    boolean readBoolean9 = parcel.readBoolean();
-                    String readString23 = parcel.readString();
-                    boolean readBoolean10 = parcel.readBoolean();
-                    boolean readBoolean11 = parcel.readBoolean();
-                    boolean readBoolean12 = parcel.readBoolean();
-                    String readString24 = parcel.readString();
-                    String readString25 = parcel.readString();
-                    int readInt5 = parcel.readInt();
-                    int readInt6 = parcel.readInt();
-                    int readInt7 = parcel.readInt();
-                    int readInt8 = parcel.readInt();
-                    int readInt9 = parcel.readInt();
-                    int readInt10 = parcel.readInt();
-                    int readInt11 = parcel.readInt();
-                    boolean readBoolean13 = parcel.readBoolean();
-                    int readInt12 = parcel.readInt();
-                    int readInt13 = parcel.readInt();
-                    byte[] createByteArray = parcel.createByteArray();
-                    String readString26 = parcel.readString();
+                    String string16 = parcel.readString();
+                    String string17 = parcel.readString();
+                    String string18 = parcel.readString();
+                    String string19 = parcel.readString();
+                    int i5 = parcel.readInt();
+                    int i6 = parcel.readInt();
+                    boolean z7 = parcel.readBoolean();
+                    String string20 = parcel.readString();
+                    String string21 = parcel.readString();
+                    String string22 = parcel.readString();
+                    boolean z8 = parcel.readBoolean();
+                    boolean z9 = parcel.readBoolean();
+                    String string23 = parcel.readString();
+                    boolean z10 = parcel.readBoolean();
+                    boolean z11 = parcel.readBoolean();
+                    boolean z12 = parcel.readBoolean();
+                    String string24 = parcel.readString();
+                    String string25 = parcel.readString();
+                    int i7 = parcel.readInt();
+                    int i8 = parcel.readInt();
+                    int i9 = parcel.readInt();
+                    int i10 = parcel.readInt();
+                    int i11 = parcel.readInt();
+                    int i12 = parcel.readInt();
+                    int i13 = parcel.readInt();
+                    boolean z13 = parcel.readBoolean();
+                    int i14 = parcel.readInt();
+                    int i15 = parcel.readInt();
+                    byte[] bArrCreateByteArray = parcel.createByteArray();
+                    String string26 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    long addNewAccount_ex = addNewAccount_ex(contextInfo3, readString16, readString17, readString18, readString19, readInt3, readInt4, readBoolean7, readString20, readString21, readString22, readBoolean8, readBoolean9, readString23, readBoolean10, readBoolean11, readBoolean12, readString24, readString25, readInt5, readInt6, readInt7, readInt8, readInt9, readInt10, readInt11, readBoolean13, readInt12, readInt13, createByteArray, readString26);
+                    long jAddNewAccount_ex = addNewAccount_ex(contextInfo3, string16, string17, string18, string19, i5, i6, z7, string20, string21, string22, z8, z9, string23, z10, z11, z12, string24, string25, i7, i8, i9, i10, i11, i12, i13, z13, i14, i15, bArrCreateByteArray, string26);
                     parcel2.writeNoException();
-                    parcel2.writeLong(addNewAccount_ex);
+                    parcel2.writeLong(jAddNewAccount_ex);
                     return true;
                 case 4:
                     ContextInfo contextInfo4 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean14 = parcel.readBoolean();
-                    long readLong = parcel.readLong();
+                    boolean z14 = parcel.readBoolean();
+                    long j = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    boolean ssl = setSSL(contextInfo4, readBoolean14, readLong);
+                    boolean ssl = setSSL(contextInfo4, z14, j);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(ssl);
                     break;
                 case 5:
                     ContextInfo contextInfo5 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean15 = parcel.readBoolean();
-                    long readLong2 = parcel.readLong();
+                    boolean z15 = parcel.readBoolean();
+                    long j2 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    boolean acceptAllCertificates = setAcceptAllCertificates(contextInfo5, readBoolean15, readLong2);
+                    boolean acceptAllCertificates = setAcceptAllCertificates(contextInfo5, z15, j2);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(acceptAllCertificates);
                     break;
                 case 6:
                     ContextInfo contextInfo6 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean16 = parcel.readBoolean();
-                    long readLong3 = parcel.readLong();
+                    boolean z16 = parcel.readBoolean();
+                    long j3 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    boolean alwaysVibrateOnEmailNotification = setAlwaysVibrateOnEmailNotification(contextInfo6, readBoolean16, readLong3);
+                    boolean alwaysVibrateOnEmailNotification = setAlwaysVibrateOnEmailNotification(contextInfo6, z16, j3);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(alwaysVibrateOnEmailNotification);
                     break;
                 case 7:
                     ContextInfo contextInfo7 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString27 = parcel.readString();
-                    long readLong4 = parcel.readLong();
+                    String string27 = parcel.readString();
+                    long j4 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    boolean password = setPassword(contextInfo7, readString27, readLong4);
+                    boolean password = setPassword(contextInfo7, string27, j4);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(password);
                     break;
                 case 8:
                     ContextInfo contextInfo8 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString28 = parcel.readString();
-                    long readLong5 = parcel.readLong();
+                    String string28 = parcel.readString();
+                    long j5 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    boolean signature = setSignature(contextInfo8, readString28, readLong5);
+                    boolean signature = setSignature(contextInfo8, string28, j5);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(signature);
                     break;
                 case 9:
                     ContextInfo contextInfo9 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    byte[] createByteArray2 = parcel.createByteArray();
-                    String readString29 = parcel.readString();
-                    long readLong6 = parcel.readLong();
+                    byte[] bArrCreateByteArray2 = parcel.createByteArray();
+                    String string29 = parcel.readString();
+                    long j6 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    setClientAuthCert(contextInfo9, createByteArray2, readString29, readLong6);
+                    setClientAuthCert(contextInfo9, bArrCreateByteArray2, string29, j6);
                     parcel2.writeNoException();
                     break;
                 case 10:
                     ContextInfo contextInfo10 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    int readInt14 = parcel.readInt();
-                    long readLong7 = parcel.readLong();
+                    int i16 = parcel.readInt();
+                    long j7 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    boolean pastDaysToSync = setPastDaysToSync(contextInfo10, readInt14, readLong7);
+                    boolean pastDaysToSync = setPastDaysToSync(contextInfo10, i16, j7);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(pastDaysToSync);
                     break;
                 case 11:
                     ContextInfo contextInfo11 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    long readLong8 = parcel.readLong();
+                    long j8 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    boolean asDefaultAccount = setAsDefaultAccount(contextInfo11, readLong8);
+                    boolean asDefaultAccount = setAsDefaultAccount(contextInfo11, j8);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(asDefaultAccount);
                     break;
                 case 12:
                     ContextInfo contextInfo12 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString30 = parcel.readString();
-                    long readLong9 = parcel.readLong();
+                    String string30 = parcel.readString();
+                    long j9 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    boolean accountName = setAccountName(contextInfo12, readString30, readLong9);
+                    boolean accountName = setAccountName(contextInfo12, string30, j9);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(accountName);
                     break;
                 case 13:
                     ContextInfo contextInfo13 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString31 = parcel.readString();
-                    String readString32 = parcel.readString();
-                    String readString33 = parcel.readString();
+                    String string31 = parcel.readString();
+                    String string32 = parcel.readString();
+                    String string33 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    long accountId = getAccountId(contextInfo13, readString31, readString32, readString33);
+                    long accountId = getAccountId(contextInfo13, string31, string32, string33);
                     parcel2.writeNoException();
                     parcel2.writeLong(accountId);
                     break;
                 case 14:
                     ContextInfo contextInfo14 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    long readLong10 = parcel.readLong();
+                    long j10 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    Account accountDetails = getAccountDetails(contextInfo14, readLong10);
+                    Account accountDetails = getAccountDetails(contextInfo14, j10);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(accountDetails, 1);
                     break;
                 case 15:
                     ContextInfo contextInfo15 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    long readLong11 = parcel.readLong();
+                    long j11 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    boolean deleteAccount = deleteAccount(contextInfo15, readLong11);
+                    boolean zDeleteAccount = deleteAccount(contextInfo15, j11);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(deleteAccount);
+                    parcel2.writeBoolean(zDeleteAccount);
                     break;
                 case 16:
                     ContextInfo contextInfo16 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
@@ -1740,35 +1737,35 @@ public interface IExchangeAccountPolicy extends IInterface {
                     break;
                 case 17:
                     ContextInfo contextInfo17 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    int readInt15 = parcel.readInt();
-                    int readInt16 = parcel.readInt();
-                    int readInt17 = parcel.readInt();
-                    long readLong12 = parcel.readLong();
+                    int i17 = parcel.readInt();
+                    int i18 = parcel.readInt();
+                    int i19 = parcel.readInt();
+                    long j12 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    boolean syncPeakTimings = setSyncPeakTimings(contextInfo17, readInt15, readInt16, readInt17, readLong12);
+                    boolean syncPeakTimings = setSyncPeakTimings(contextInfo17, i17, i18, i19, j12);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(syncPeakTimings);
                     break;
                 case 18:
                     ContextInfo contextInfo18 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    int readInt18 = parcel.readInt();
-                    int readInt19 = parcel.readInt();
-                    int readInt20 = parcel.readInt();
-                    long readLong13 = parcel.readLong();
+                    int i20 = parcel.readInt();
+                    int i21 = parcel.readInt();
+                    int i22 = parcel.readInt();
+                    long j13 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    boolean syncSchedules = setSyncSchedules(contextInfo18, readInt18, readInt19, readInt20, readLong13);
+                    boolean syncSchedules = setSyncSchedules(contextInfo18, i20, i21, i22, j13);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(syncSchedules);
                     break;
                 case 19:
                     ContextInfo contextInfo19 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean17 = parcel.readBoolean();
-                    boolean readBoolean18 = parcel.readBoolean();
-                    boolean readBoolean19 = parcel.readBoolean();
-                    boolean readBoolean20 = parcel.readBoolean();
-                    long readLong14 = parcel.readLong();
+                    boolean z17 = parcel.readBoolean();
+                    boolean z18 = parcel.readBoolean();
+                    boolean z19 = parcel.readBoolean();
+                    boolean z20 = parcel.readBoolean();
+                    long j14 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    boolean dataSyncs = setDataSyncs(contextInfo19, readBoolean17, readBoolean18, readBoolean19, readBoolean20, readLong14);
+                    boolean dataSyncs = setDataSyncs(contextInfo19, z17, z18, z19, z20, j14);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(dataSyncs);
                     break;
@@ -1788,259 +1785,259 @@ public interface IExchangeAccountPolicy extends IInterface {
                     break;
                 case 22:
                     ContextInfo contextInfo22 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString34 = parcel.readString();
-                    String readString35 = parcel.readString();
-                    String readString36 = parcel.readString();
-                    String readString37 = parcel.readString();
+                    String string34 = parcel.readString();
+                    String string35 = parcel.readString();
+                    String string36 = parcel.readString();
+                    String string37 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    removePendingAccount(contextInfo22, readString34, readString35, readString36, readString37);
+                    removePendingAccount(contextInfo22, string34, string35, string36, string37);
                     parcel2.writeNoException();
                     break;
                 case 23:
                     ContextInfo contextInfo23 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    long readLong15 = parcel.readLong();
-                    boolean readBoolean21 = parcel.readBoolean();
+                    long j15 = parcel.readLong();
+                    boolean z21 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean requireSignedSMIMEMessages = setRequireSignedSMIMEMessages(contextInfo23, readLong15, readBoolean21);
+                    boolean requireSignedSMIMEMessages = setRequireSignedSMIMEMessages(contextInfo23, j15, z21);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(requireSignedSMIMEMessages);
                     break;
                 case 24:
                     ContextInfo contextInfo24 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    long readLong16 = parcel.readLong();
+                    long j16 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    boolean requireSignedSMIMEMessages2 = getRequireSignedSMIMEMessages(contextInfo24, readLong16);
+                    boolean requireSignedSMIMEMessages2 = getRequireSignedSMIMEMessages(contextInfo24, j16);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(requireSignedSMIMEMessages2);
                     break;
                 case 25:
                     ContextInfo contextInfo25 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    long readLong17 = parcel.readLong();
-                    boolean readBoolean22 = parcel.readBoolean();
+                    long j17 = parcel.readLong();
+                    boolean z22 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean requireEncryptedSMIMEMessages = setRequireEncryptedSMIMEMessages(contextInfo25, readLong17, readBoolean22);
+                    boolean requireEncryptedSMIMEMessages = setRequireEncryptedSMIMEMessages(contextInfo25, j17, z22);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(requireEncryptedSMIMEMessages);
                     break;
                 case 26:
                     ContextInfo contextInfo26 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    long readLong18 = parcel.readLong();
+                    long j18 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    boolean requireEncryptedSMIMEMessages2 = getRequireEncryptedSMIMEMessages(contextInfo26, readLong18);
+                    boolean requireEncryptedSMIMEMessages2 = getRequireEncryptedSMIMEMessages(contextInfo26, j18);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(requireEncryptedSMIMEMessages2);
                     break;
                 case 27:
                     ContextInfo contextInfo27 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    long readLong19 = parcel.readLong();
-                    String readString38 = parcel.readString();
-                    String readString39 = parcel.readString();
+                    long j19 = parcel.readLong();
+                    String string38 = parcel.readString();
+                    String string39 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int forceSMIMECertificate = setForceSMIMECertificate(contextInfo27, readLong19, readString38, readString39);
+                    int forceSMIMECertificate = setForceSMIMECertificate(contextInfo27, j19, string38, string39);
                     parcel2.writeNoException();
                     parcel2.writeInt(forceSMIMECertificate);
                     break;
                 case 28:
                     ContextInfo contextInfo28 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    long readLong20 = parcel.readLong();
+                    long j20 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    boolean forceSMIMECertificate2 = getForceSMIMECertificate(contextInfo28, readLong20);
+                    boolean forceSMIMECertificate2 = getForceSMIMECertificate(contextInfo28, j20);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(forceSMIMECertificate2);
                     break;
                 case 29:
                     ContextInfo contextInfo29 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    long readLong21 = parcel.readLong();
+                    long j21 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    boolean releaseSMIMECertificate = setReleaseSMIMECertificate(contextInfo29, readLong21);
+                    boolean releaseSMIMECertificate = setReleaseSMIMECertificate(contextInfo29, j21);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(releaseSMIMECertificate);
                     break;
                 case 30:
                     ContextInfo contextInfo30 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean23 = parcel.readBoolean();
-                    long readLong22 = parcel.readLong();
+                    boolean z23 = parcel.readBoolean();
+                    long j22 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    boolean allowInComingAttachments = allowInComingAttachments(contextInfo30, readBoolean23, readLong22);
+                    boolean zAllowInComingAttachments = allowInComingAttachments(contextInfo30, z23, j22);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(allowInComingAttachments);
+                    parcel2.writeBoolean(zAllowInComingAttachments);
                     break;
                 case 31:
                     ContextInfo contextInfo31 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    long readLong23 = parcel.readLong();
+                    long j23 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    boolean isIncomingAttachmentsAllowed = isIncomingAttachmentsAllowed(contextInfo31, readLong23);
+                    boolean zIsIncomingAttachmentsAllowed = isIncomingAttachmentsAllowed(contextInfo31, j23);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isIncomingAttachmentsAllowed);
+                    parcel2.writeBoolean(zIsIncomingAttachmentsAllowed);
                     break;
                 case 32:
                     ContextInfo contextInfo32 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    int readInt21 = parcel.readInt();
-                    long readLong24 = parcel.readLong();
+                    int i23 = parcel.readInt();
+                    long j24 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    boolean incomingAttachmentsSize = setIncomingAttachmentsSize(contextInfo32, readInt21, readLong24);
+                    boolean incomingAttachmentsSize = setIncomingAttachmentsSize(contextInfo32, i23, j24);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(incomingAttachmentsSize);
                     break;
                 case 33:
                     ContextInfo contextInfo33 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    long readLong25 = parcel.readLong();
+                    long j25 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    int incomingAttachmentsSize2 = getIncomingAttachmentsSize(contextInfo33, readLong25);
+                    int incomingAttachmentsSize2 = getIncomingAttachmentsSize(contextInfo33, j25);
                     parcel2.writeNoException();
                     parcel2.writeInt(incomingAttachmentsSize2);
                     break;
                 case 34:
                     ContextInfo contextInfo34 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    long readLong26 = parcel.readLong();
-                    boolean readBoolean24 = parcel.readBoolean();
+                    long j26 = parcel.readLong();
+                    boolean z24 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean emailNotificationsState = setEmailNotificationsState(contextInfo34, readLong26, readBoolean24);
+                    boolean emailNotificationsState = setEmailNotificationsState(contextInfo34, j26, z24);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(emailNotificationsState);
                     break;
                 case 35:
                     ContextInfo contextInfo35 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    long readLong27 = parcel.readLong();
+                    long j27 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    boolean isEmailNotificationsEnabled = isEmailNotificationsEnabled(contextInfo35, readLong27);
+                    boolean zIsEmailNotificationsEnabled = isEmailNotificationsEnabled(contextInfo35, j27);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isEmailNotificationsEnabled);
+                    parcel2.writeBoolean(zIsEmailNotificationsEnabled);
                     break;
                 case 36:
                     ContextInfo contextInfo36 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    long readLong28 = parcel.readLong();
-                    boolean readBoolean25 = parcel.readBoolean();
+                    long j28 = parcel.readLong();
+                    boolean z25 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean allowEmailSettingsChange = allowEmailSettingsChange(contextInfo36, readLong28, readBoolean25);
+                    boolean zAllowEmailSettingsChange = allowEmailSettingsChange(contextInfo36, j28, z25);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(allowEmailSettingsChange);
+                    parcel2.writeBoolean(zAllowEmailSettingsChange);
                     break;
                 case 37:
                     ContextInfo contextInfo37 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    long readLong29 = parcel.readLong();
+                    long j29 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    boolean isEmailSettingsChangeAllowed = isEmailSettingsChangeAllowed(contextInfo37, readLong29);
+                    boolean zIsEmailSettingsChangeAllowed = isEmailSettingsChangeAllowed(contextInfo37, j29);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isEmailSettingsChangeAllowed);
+                    parcel2.writeBoolean(zIsEmailSettingsChangeAllowed);
                     break;
                 case 38:
                     ContextInfo contextInfo38 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    int readInt22 = parcel.readInt();
-                    long readLong30 = parcel.readLong();
+                    int i24 = parcel.readInt();
+                    long j30 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    boolean maxCalendarAgeFilter = setMaxCalendarAgeFilter(contextInfo38, readInt22, readLong30);
+                    boolean maxCalendarAgeFilter = setMaxCalendarAgeFilter(contextInfo38, i24, j30);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(maxCalendarAgeFilter);
                     break;
                 case 39:
                     ContextInfo contextInfo39 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    long readLong31 = parcel.readLong();
+                    long j31 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    int maxCalendarAgeFilter2 = getMaxCalendarAgeFilter(contextInfo39, readLong31);
+                    int maxCalendarAgeFilter2 = getMaxCalendarAgeFilter(contextInfo39, j31);
                     parcel2.writeNoException();
                     parcel2.writeInt(maxCalendarAgeFilter2);
                     break;
                 case 40:
                     ContextInfo contextInfo40 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    int readInt23 = parcel.readInt();
-                    long readLong32 = parcel.readLong();
+                    int i25 = parcel.readInt();
+                    long j32 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    boolean maxEmailAgeFilter = setMaxEmailAgeFilter(contextInfo40, readInt23, readLong32);
+                    boolean maxEmailAgeFilter = setMaxEmailAgeFilter(contextInfo40, i25, j32);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(maxEmailAgeFilter);
                     break;
                 case 41:
                     ContextInfo contextInfo41 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    long readLong33 = parcel.readLong();
+                    long j33 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    int maxEmailAgeFilter2 = getMaxEmailAgeFilter(contextInfo41, readLong33);
+                    int maxEmailAgeFilter2 = getMaxEmailAgeFilter(contextInfo41, j33);
                     parcel2.writeNoException();
                     parcel2.writeInt(maxEmailAgeFilter2);
                     break;
                 case 42:
                     ContextInfo contextInfo42 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    int readInt24 = parcel.readInt();
-                    long readLong34 = parcel.readLong();
+                    int i26 = parcel.readInt();
+                    long j34 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    boolean maxEmailBodyTruncationSize = setMaxEmailBodyTruncationSize(contextInfo42, readInt24, readLong34);
+                    boolean maxEmailBodyTruncationSize = setMaxEmailBodyTruncationSize(contextInfo42, i26, j34);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(maxEmailBodyTruncationSize);
                     break;
                 case 43:
                     ContextInfo contextInfo43 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    long readLong35 = parcel.readLong();
+                    long j35 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    int maxEmailBodyTruncationSize2 = getMaxEmailBodyTruncationSize(contextInfo43, readLong35);
+                    int maxEmailBodyTruncationSize2 = getMaxEmailBodyTruncationSize(contextInfo43, j35);
                     parcel2.writeNoException();
                     parcel2.writeInt(maxEmailBodyTruncationSize2);
                     break;
                 case 44:
                     ContextInfo contextInfo44 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    int readInt25 = parcel.readInt();
-                    long readLong36 = parcel.readLong();
+                    int i27 = parcel.readInt();
+                    long j36 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    boolean maxEmailHTMLBodyTruncationSize = setMaxEmailHTMLBodyTruncationSize(contextInfo44, readInt25, readLong36);
+                    boolean maxEmailHTMLBodyTruncationSize = setMaxEmailHTMLBodyTruncationSize(contextInfo44, i27, j36);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(maxEmailHTMLBodyTruncationSize);
                     break;
                 case 45:
                     ContextInfo contextInfo45 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    long readLong37 = parcel.readLong();
+                    long j37 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    int maxEmailHTMLBodyTruncationSize2 = getMaxEmailHTMLBodyTruncationSize(contextInfo45, readLong37);
+                    int maxEmailHTMLBodyTruncationSize2 = getMaxEmailHTMLBodyTruncationSize(contextInfo45, j37);
                     parcel2.writeNoException();
                     parcel2.writeInt(maxEmailHTMLBodyTruncationSize2);
                     break;
                 case 46:
                     ContextInfo contextInfo46 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    long readLong38 = parcel.readLong();
-                    String readString40 = parcel.readString();
-                    String readString41 = parcel.readString();
+                    long j38 = parcel.readLong();
+                    String string40 = parcel.readString();
+                    String string41 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int forceSMIMECertificateForSigning = setForceSMIMECertificateForSigning(contextInfo46, readLong38, readString40, readString41);
+                    int forceSMIMECertificateForSigning = setForceSMIMECertificateForSigning(contextInfo46, j38, string40, string41);
                     parcel2.writeNoException();
                     parcel2.writeInt(forceSMIMECertificateForSigning);
                     break;
                 case 47:
                     ContextInfo contextInfo47 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    long readLong39 = parcel.readLong();
+                    long j39 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    boolean forceSMIMECertificateForSigning2 = getForceSMIMECertificateForSigning(contextInfo47, readLong39);
+                    boolean forceSMIMECertificateForSigning2 = getForceSMIMECertificateForSigning(contextInfo47, j39);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(forceSMIMECertificateForSigning2);
                     break;
                 case 48:
                     ContextInfo contextInfo48 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    long readLong40 = parcel.readLong();
+                    long j40 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    boolean releaseSMIMECertificateForSigning = setReleaseSMIMECertificateForSigning(contextInfo48, readLong40);
+                    boolean releaseSMIMECertificateForSigning = setReleaseSMIMECertificateForSigning(contextInfo48, j40);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(releaseSMIMECertificateForSigning);
                     break;
                 case 49:
                     ContextInfo contextInfo49 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    long readLong41 = parcel.readLong();
-                    String readString42 = parcel.readString();
-                    String readString43 = parcel.readString();
+                    long j41 = parcel.readLong();
+                    String string42 = parcel.readString();
+                    String string43 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int forceSMIMECertificateForEncryption = setForceSMIMECertificateForEncryption(contextInfo49, readLong41, readString42, readString43);
+                    int forceSMIMECertificateForEncryption = setForceSMIMECertificateForEncryption(contextInfo49, j41, string42, string43);
                     parcel2.writeNoException();
                     parcel2.writeInt(forceSMIMECertificateForEncryption);
                     break;
                 case 50:
                     ContextInfo contextInfo50 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    long readLong42 = parcel.readLong();
+                    long j42 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    boolean forceSMIMECertificateForEncryption2 = getForceSMIMECertificateForEncryption(contextInfo50, readLong42);
+                    boolean forceSMIMECertificateForEncryption2 = getForceSMIMECertificateForEncryption(contextInfo50, j42);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(forceSMIMECertificateForEncryption2);
                     break;
                 case 51:
                     ContextInfo contextInfo51 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    long readLong43 = parcel.readLong();
+                    long j43 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    boolean releaseSMIMECertificateForEncryption = setReleaseSMIMECertificateForEncryption(contextInfo51, readLong43);
+                    boolean releaseSMIMECertificateForEncryption = setReleaseSMIMECertificateForEncryption(contextInfo51, j43);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(releaseSMIMECertificateForEncryption);
                     break;
@@ -2048,107 +2045,107 @@ public interface IExchangeAccountPolicy extends IInterface {
                     ContextInfo contextInfo52 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     ExchangeAccount exchangeAccount = (ExchangeAccount) parcel.readTypedObject(ExchangeAccount.CREATOR);
                     parcel.enforceNoDataAvail();
-                    long addNewAccount_new = addNewAccount_new(contextInfo52, exchangeAccount);
+                    long jAddNewAccount_new = addNewAccount_new(contextInfo52, exchangeAccount);
                     parcel2.writeNoException();
-                    parcel2.writeLong(addNewAccount_new);
+                    parcel2.writeLong(jAddNewAccount_new);
                     break;
                 case 53:
                     ContextInfo contextInfo53 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    long readLong44 = parcel.readLong();
+                    long j44 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    String accountEmailPassword = getAccountEmailPassword(contextInfo53, readLong44);
+                    String accountEmailPassword = getAccountEmailPassword(contextInfo53, j44);
                     parcel2.writeNoException();
                     parcel2.writeString(accountEmailPassword);
                     break;
                 case 54:
                     ContextInfo contextInfo54 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    long readLong45 = parcel.readLong();
+                    long j45 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    String accountCertificatePassword = getAccountCertificatePassword(contextInfo54, readLong45);
+                    String accountCertificatePassword = getAccountCertificatePassword(contextInfo54, j45);
                     parcel2.writeNoException();
                     parcel2.writeString(accountCertificatePassword);
                     break;
                 case 55:
                     ContextInfo contextInfo55 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString44 = parcel.readString();
+                    String string44 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    long accountEmailPassword2 = setAccountEmailPassword(contextInfo55, readString44);
+                    long accountEmailPassword2 = setAccountEmailPassword(contextInfo55, string44);
                     parcel2.writeNoException();
                     parcel2.writeLong(accountEmailPassword2);
                     break;
                 case 56:
                     ContextInfo contextInfo56 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString45 = parcel.readString();
+                    String string45 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    long accountCertificatePassword2 = setAccountCertificatePassword(contextInfo56, readString45);
+                    long accountCertificatePassword2 = setAccountCertificatePassword(contextInfo56, string45);
                     parcel2.writeNoException();
                     parcel2.writeLong(accountCertificatePassword2);
                     break;
                 case 57:
                     ContextInfo contextInfo57 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    long readLong46 = parcel.readLong();
-                    String readString46 = parcel.readString();
-                    String readString47 = parcel.readString();
-                    int readInt26 = parcel.readInt();
+                    long j46 = parcel.readLong();
+                    String string46 = parcel.readString();
+                    String string47 = parcel.readString();
+                    int i28 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean forceSMIMECertificateAlias = setForceSMIMECertificateAlias(contextInfo57, readLong46, readString46, readString47, readInt26);
+                    boolean forceSMIMECertificateAlias = setForceSMIMECertificateAlias(contextInfo57, j46, string46, string47, i28);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(forceSMIMECertificateAlias);
                     break;
                 case 58:
                     ContextInfo contextInfo58 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    long readLong47 = parcel.readLong();
-                    int readInt27 = parcel.readInt();
+                    long j47 = parcel.readLong();
+                    int i29 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    String sMIMECertificateAlias = getSMIMECertificateAlias(contextInfo58, readLong47, readInt27);
+                    String sMIMECertificateAlias = getSMIMECertificateAlias(contextInfo58, j47, i29);
                     parcel2.writeNoException();
                     parcel2.writeString(sMIMECertificateAlias);
                     break;
                 case 59:
                     ContextInfo contextInfo59 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString48 = parcel.readString();
-                    String readString49 = parcel.readString();
-                    String readString50 = parcel.readString();
-                    String readString51 = parcel.readString();
-                    long readLong48 = parcel.readLong();
+                    String string48 = parcel.readString();
+                    String string49 = parcel.readString();
+                    String string50 = parcel.readString();
+                    String string51 = parcel.readString();
+                    long j48 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    long accountBaseParameters = setAccountBaseParameters(contextInfo59, readString48, readString49, readString50, readString51, readLong48);
+                    long accountBaseParameters = setAccountBaseParameters(contextInfo59, string48, string49, string50, string51, j48);
                     parcel2.writeNoException();
                     parcel2.writeLong(accountBaseParameters);
                     break;
                 case 60:
                     ContextInfo contextInfo60 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString52 = parcel.readString();
-                    long readLong49 = parcel.readLong();
+                    String string52 = parcel.readString();
+                    long j49 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    boolean protocolVersion = setProtocolVersion(contextInfo60, readString52, readLong49);
+                    boolean protocolVersion = setProtocolVersion(contextInfo60, string52, j49);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(protocolVersion);
                     break;
                 case 61:
                     ContextInfo contextInfo61 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    String readString53 = parcel.readString();
-                    long readLong50 = parcel.readLong();
+                    String string53 = parcel.readString();
+                    long j50 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    boolean senderName = setSenderName(contextInfo61, readString53, readLong50);
+                    boolean senderName = setSenderName(contextInfo61, string53, j50);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(senderName);
                     break;
                 case 62:
                     ContextInfo contextInfo62 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean26 = parcel.readBoolean();
-                    long readLong51 = parcel.readLong();
+                    boolean z26 = parcel.readBoolean();
+                    long j51 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    boolean silentVibrateOnEmailNotification = setSilentVibrateOnEmailNotification(contextInfo62, readBoolean26, readLong51);
+                    boolean silentVibrateOnEmailNotification = setSilentVibrateOnEmailNotification(contextInfo62, z26, j51);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(silentVibrateOnEmailNotification);
                     break;
                 case 63:
                     ContextInfo contextInfo63 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    int readInt28 = parcel.readInt();
-                    long readLong52 = parcel.readLong();
+                    int i30 = parcel.readInt();
+                    long j52 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    boolean syncInterval = setSyncInterval(contextInfo63, readInt28, readLong52);
+                    boolean syncInterval = setSyncInterval(contextInfo63, i30, j52);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(syncInterval);
                     break;
@@ -2164,7 +2161,6 @@ public interface IExchangeAccountPolicy extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements IExchangeAccountPolicy {
         @Override // com.samsung.android.knox.accounts.IExchangeAccountPolicy
         public long addNewAccount(ContextInfo contextInfo, String str, String str2, String str3, String str4, int i, int i2, boolean z, String str5, String str6, String str7, boolean z2, boolean z3, String str8, boolean z4, boolean z5, boolean z6, String str9, String str10) throws RemoteException {

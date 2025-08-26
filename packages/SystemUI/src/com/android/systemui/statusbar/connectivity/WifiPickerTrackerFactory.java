@@ -12,7 +12,6 @@ import com.android.wifitrackerlib.WifiPickerTracker;
 import java.time.ZoneOffset;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class WifiPickerTrackerFactory {
     public final WifiPickerTrackerFactory$clock$1 clock;
@@ -23,7 +22,6 @@ public final class WifiPickerTrackerFactory {
     public final ThreadFactory threadFactory;
     public final WifiManager wifiManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -48,7 +46,7 @@ public final class WifiPickerTrackerFactory {
         final ZoneOffset zoneOffset = ZoneOffset.UTC;
         this.clock = new SimpleClock(zoneOffset) { // from class: com.android.systemui.statusbar.connectivity.WifiPickerTrackerFactory$clock$1
             public final long millis() {
-                return WifiPickerTrackerFactory.this.systemClock.elapsedRealtime();
+                return this.this$0.systemClock.elapsedRealtime();
             }
         };
     }

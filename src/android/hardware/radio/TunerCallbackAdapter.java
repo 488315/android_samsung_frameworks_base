@@ -59,13 +59,13 @@ final class TunerCallbackAdapter extends ITunerCallback.Stub {
         programList.setOnCloseListener(new ProgramList.OnCloseListener() { // from class: android.hardware.radio.TunerCallbackAdapter$$ExternalSyntheticLambda4
             @Override // android.hardware.radio.ProgramList.OnCloseListener
             public final void onClose() {
-                TunerCallbackAdapter.this.lambda$setProgramListObserver$0(programList, onCloseListener);
+                this.f$0.lambda$setProgramListObserver$0(programList, onCloseListener);
             }
         });
         programList.addOnCompleteListener(new ProgramList.OnCompleteListener() { // from class: android.hardware.radio.TunerCallbackAdapter$$ExternalSyntheticLambda5
             @Override // android.hardware.radio.ProgramList.OnCompleteListener
             public final void onComplete() {
-                TunerCallbackAdapter.this.lambda$setProgramListObserver$1(programList);
+                this.f$0.lambda$setProgramListObserver$1(programList);
             }
         });
     }
@@ -136,7 +136,7 @@ final class TunerCallbackAdapter extends ITunerCallback.Stub {
         this.mHandler.post(new Runnable() { // from class: android.hardware.radio.TunerCallbackAdapter$$ExternalSyntheticLambda9
             @Override // java.lang.Runnable
             public final void run() {
-                TunerCallbackAdapter.this.lambda$onError$2(i);
+                this.f$0.lambda$onError$2(i);
             }
         });
     }
@@ -146,71 +146,40 @@ final class TunerCallbackAdapter extends ITunerCallback.Stub {
         this.mCallback.onTuneFailed(i, programSelector);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:22:0x0031, code lost:
-    
-        if (r3 != 7) goto L28;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:26:0x0036  */
+    /* JADX WARN: Removed duplicated region for block: B:27:0x0038  */
     @Override // android.hardware.radio.ITunerCallback
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void onTuneFailed(final int r3, final android.hardware.radio.ProgramSelector r4) {
-        /*
-            r2 = this;
-            android.os.Handler r0 = r2.mHandler
-            android.hardware.radio.TunerCallbackAdapter$$ExternalSyntheticLambda0 r1 = new android.hardware.radio.TunerCallbackAdapter$$ExternalSyntheticLambda0
-            r1.<init>()
-            r0.post(r1)
-            r4 = -2147483648(0xffffffff80000000, float:-0.0)
-            r0 = 3
-            if (r3 == r4) goto L38
-            r4 = -38
-            if (r3 == r4) goto L38
-            r4 = -32
-            r1 = 1
-            if (r3 == r4) goto L36
-            r4 = -22
-            if (r3 == r4) goto L38
-            r4 = -19
-            if (r3 == r4) goto L38
-            r4 = -1
-            if (r3 == r4) goto L36
-            if (r3 == r1) goto L38
-            r4 = 2
-            if (r3 == r4) goto L38
-            if (r3 == r0) goto L38
-            r1 = 4
-            if (r3 == r1) goto L38
-            r1 = 6
-            if (r3 == r1) goto L34
-            r4 = 7
-            if (r3 == r4) goto L38
-            goto L50
-        L34:
-            r0 = r4
-            goto L50
-        L36:
-            r0 = r1
-            goto L50
-        L38:
-            java.lang.StringBuilder r4 = new java.lang.StringBuilder
-            java.lang.String r1 = "Got an error with no mapping to the legacy API ("
-            r4.<init>(r1)
-            r4.append(r3)
-            java.lang.String r3 = "), doing a best-effort conversion to ERROR_SCAN_TIMEOUT"
-            r4.append(r3)
-            java.lang.String r3 = r4.toString()
-            java.lang.String r4 = "BroadcastRadio.TunerCallbackAdapter"
-            android.util.Log.i(r4, r3)
-        L50:
-            android.os.Handler r3 = r2.mHandler
-            android.hardware.radio.TunerCallbackAdapter$$ExternalSyntheticLambda1 r4 = new android.hardware.radio.TunerCallbackAdapter$$ExternalSyntheticLambda1
-            r4.<init>()
-            r3.post(r4)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.hardware.radio.TunerCallbackAdapter.onTuneFailed(int, android.hardware.radio.ProgramSelector):void");
+    public void onTuneFailed(final int i, final ProgramSelector programSelector) {
+        this.mHandler.post(new Runnable() { // from class: android.hardware.radio.TunerCallbackAdapter$$ExternalSyntheticLambda0
+            @Override // java.lang.Runnable
+            public final void run() {
+                this.f$0.lambda$onTuneFailed$3(i, programSelector);
+            }
+        });
+        final int i2 = 3;
+        if (i == Integer.MIN_VALUE || i == -38) {
+            Log.i(TAG, "Got an error with no mapping to the legacy API (" + i + "), doing a best-effort conversion to ERROR_SCAN_TIMEOUT");
+        } else if (i == -32) {
+            i2 = 1;
+        } else if (i != -22 && i != -19) {
+            if (i != -1) {
+                if (i != 1 && i != 2 && i != 3 && i != 4) {
+                    if (i == 6) {
+                        i2 = 2;
+                    } else if (i == 7) {
+                    }
+                }
+            }
+        }
+        this.mHandler.post(new Runnable() { // from class: android.hardware.radio.TunerCallbackAdapter$$ExternalSyntheticLambda1
+            @Override // java.lang.Runnable
+            public final void run() {
+                this.f$0.lambda$onTuneFailed$4(i2);
+            }
+        });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -228,7 +197,7 @@ final class TunerCallbackAdapter extends ITunerCallback.Stub {
         this.mHandler.post(new Runnable() { // from class: android.hardware.radio.TunerCallbackAdapter$$ExternalSyntheticLambda2
             @Override // java.lang.Runnable
             public final void run() {
-                TunerCallbackAdapter.this.lambda$onConfigurationChanged$5(bandConfig);
+                this.f$0.lambda$onConfigurationChanged$5(bandConfig);
             }
         });
     }
@@ -245,7 +214,7 @@ final class TunerCallbackAdapter extends ITunerCallback.Stub {
         this.mHandler.post(new Runnable() { // from class: android.hardware.radio.TunerCallbackAdapter$$ExternalSyntheticLambda12
             @Override // java.lang.Runnable
             public final void run() {
-                TunerCallbackAdapter.this.lambda$onCurrentProgramInfoChanged$6(programInfo);
+                this.f$0.lambda$onCurrentProgramInfoChanged$6(programInfo);
             }
         });
     }
@@ -269,7 +238,7 @@ final class TunerCallbackAdapter extends ITunerCallback.Stub {
         this.mHandler.post(new Runnable() { // from class: android.hardware.radio.TunerCallbackAdapter$$ExternalSyntheticLambda14
             @Override // java.lang.Runnable
             public final void run() {
-                TunerCallbackAdapter.this.lambda$onTrafficAnnouncement$7(z);
+                this.f$0.lambda$onTrafficAnnouncement$7(z);
             }
         });
     }
@@ -284,7 +253,7 @@ final class TunerCallbackAdapter extends ITunerCallback.Stub {
         this.mHandler.post(new Runnable() { // from class: android.hardware.radio.TunerCallbackAdapter$$ExternalSyntheticLambda15
             @Override // java.lang.Runnable
             public final void run() {
-                TunerCallbackAdapter.this.lambda$onEmergencyAnnouncement$8(z);
+                this.f$0.lambda$onEmergencyAnnouncement$8(z);
             }
         });
     }
@@ -297,7 +266,7 @@ final class TunerCallbackAdapter extends ITunerCallback.Stub {
         this.mHandler.post(new Runnable() { // from class: android.hardware.radio.TunerCallbackAdapter$$ExternalSyntheticLambda7
             @Override // java.lang.Runnable
             public final void run() {
-                TunerCallbackAdapter.this.lambda$onAntennaState$9(z);
+                this.f$0.lambda$onAntennaState$9(z);
             }
         });
     }
@@ -317,7 +286,7 @@ final class TunerCallbackAdapter extends ITunerCallback.Stub {
         this.mHandler.post(new Runnable() { // from class: android.hardware.radio.TunerCallbackAdapter$$ExternalSyntheticLambda8
             @Override // java.lang.Runnable
             public final void run() {
-                TunerCallbackAdapter.this.lambda$onBackgroundScanAvailabilityChange$10(z);
+                this.f$0.lambda$onBackgroundScanAvailabilityChange$10(z);
             }
         });
     }
@@ -327,7 +296,7 @@ final class TunerCallbackAdapter extends ITunerCallback.Stub {
         this.mHandler.post(new Runnable() { // from class: android.hardware.radio.TunerCallbackAdapter$$ExternalSyntheticLambda6
             @Override // java.lang.Runnable
             public final void run() {
-                TunerCallbackAdapter.this.lambda$sendBackgroundScanCompleteLocked$11();
+                this.f$0.lambda$sendBackgroundScanCompleteLocked$11();
             }
         });
     }
@@ -359,7 +328,7 @@ final class TunerCallbackAdapter extends ITunerCallback.Stub {
         this.mHandler.post(new Runnable() { // from class: android.hardware.radio.TunerCallbackAdapter$$ExternalSyntheticLambda13
             @Override // java.lang.Runnable
             public final void run() {
-                TunerCallbackAdapter.this.lambda$onProgramListChanged$12();
+                this.f$0.lambda$onProgramListChanged$12();
             }
         });
     }
@@ -369,7 +338,7 @@ final class TunerCallbackAdapter extends ITunerCallback.Stub {
         this.mHandler.post(new Runnable() { // from class: android.hardware.radio.TunerCallbackAdapter$$ExternalSyntheticLambda3
             @Override // java.lang.Runnable
             public final void run() {
-                TunerCallbackAdapter.this.lambda$onProgramListUpdated$13(chunk);
+                this.f$0.lambda$onProgramListUpdated$13(chunk);
             }
         });
     }
@@ -395,7 +364,7 @@ final class TunerCallbackAdapter extends ITunerCallback.Stub {
         this.mHandler.post(new Runnable() { // from class: android.hardware.radio.TunerCallbackAdapter$$ExternalSyntheticLambda10
             @Override // java.lang.Runnable
             public final void run() {
-                TunerCallbackAdapter.this.lambda$onConfigFlagUpdated$14(i, z);
+                this.f$0.lambda$onConfigFlagUpdated$14(i, z);
             }
         });
     }
@@ -410,7 +379,7 @@ final class TunerCallbackAdapter extends ITunerCallback.Stub {
         this.mHandler.post(new Runnable() { // from class: android.hardware.radio.TunerCallbackAdapter$$ExternalSyntheticLambda11
             @Override // java.lang.Runnable
             public final void run() {
-                TunerCallbackAdapter.this.lambda$onParametersUpdated$15(map);
+                this.f$0.lambda$onParametersUpdated$15(map);
             }
         });
     }

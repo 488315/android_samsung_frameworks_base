@@ -101,15 +101,15 @@ public final class AttributeCache {
 
     public void removePackage(String str) {
         synchronized (this) {
-            Package remove = this.mPackages.remove(str);
-            if (remove != null) {
-                for (int i = 0; i < remove.mMap.size(); i++) {
-                    ArrayMap arrayMap = (ArrayMap) remove.mMap.valueAt(i);
+            Package packageRemove = this.mPackages.remove(str);
+            if (packageRemove != null) {
+                for (int i = 0; i < packageRemove.mMap.size(); i++) {
+                    ArrayMap arrayMap = (ArrayMap) packageRemove.mMap.valueAt(i);
                     for (int i2 = 0; i2 < arrayMap.size(); i2++) {
                         ((Entry) arrayMap.valueAt(i2)).recycle();
                     }
                 }
-                remove.context.getResources().flushLayoutCache();
+                packageRemove.context.getResources().flushLayoutCache();
             }
         }
     }
@@ -138,11 +138,11 @@ public final class AttributeCache {
                 }
             } else {
                 try {
-                    Context createPackageContextAsUser = this.mContext.createPackageContextAsUser(str, 0, new UserHandle(i2));
-                    if (createPackageContextAsUser == null) {
+                    Context contextCreatePackageContextAsUser = this.mContext.createPackageContextAsUser(str, 0, new UserHandle(i2));
+                    if (contextCreatePackageContextAsUser == null) {
                         return null;
                     }
-                    r0 = new Package(createPackageContextAsUser);
+                    r0 = new Package(contextCreatePackageContextAsUser);
                     this.mPackages.put(str, r0);
                     arrayMap = null;
                 } catch (PackageManager.NameNotFoundException unused) {

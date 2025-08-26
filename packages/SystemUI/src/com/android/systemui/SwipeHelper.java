@@ -6,11 +6,14 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.app.Notification;
 import android.app.PendingIntent;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.graphics.Point;
 import android.graphics.RectF;
 import android.os.Handler;
 import android.os.Trace;
 import android.util.ArrayMap;
+import android.util.Log;
 import android.util.Property;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
@@ -23,20 +26,26 @@ import com.android.systemui.flags.FeatureFlags;
 import com.android.systemui.flags.FeatureFlagsClassicRelease;
 import com.android.systemui.flags.Flags;
 import com.android.systemui.plugins.FalsingManager;
+import com.android.systemui.plugins.statusbar.NotificationMenuRowPlugin;
+import com.android.systemui.power.shared.model.WakeSleepReason;
+import com.android.systemui.power.shared.model.WakefulnessModel;
+import com.android.systemui.shade.ShadeViewController;
 import com.android.systemui.statusbar.notification.headsup.HeadsUpManagerImpl;
 import com.android.systemui.statusbar.notification.row.ExpandableNotificationRow;
 import com.android.systemui.statusbar.notification.row.ExpandableView;
 import com.android.systemui.statusbar.notification.shared.NotificationBundleUi;
 import com.android.systemui.statusbar.notification.shared.NotificationContentAlphaOptimization;
+import com.android.systemui.statusbar.notification.stack.NotificationChildrenContainer;
 import com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout;
 import com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout$$ExternalSyntheticLambda5;
 import com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayoutController;
 import com.android.wm.shell.animation.FlingAnimationUtils;
 import com.android.wm.shell.shared.animation.PhysicsAnimator;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SwipeHelper implements Gefingerpoken, Dumpable {
     public boolean mAlreadyExecutedDragAndDrop;
@@ -70,7 +79,6 @@ public class SwipeHelper implements Gefingerpoken, Dumpable {
     public final VelocityTracker mVelocityTracker = VelocityTracker.obtain();
     public final float mTouchSlopMultiplier = ViewConfiguration.getAmbiguousGestureMultiplier();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.SwipeHelper$1, reason: invalid class name */
     public class AnonymousClass1 implements Runnable {
         public final int[] mViewOffset = new int[2];
@@ -105,7 +113,6 @@ public class SwipeHelper implements Gefingerpoken, Dumpable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Callback {
     }
 
@@ -131,11 +138,11 @@ public class SwipeHelper implements Gefingerpoken, Dumpable {
     }
 
     public Animator createTranslationAnimation(View view, float f, ValueAnimator.AnimatorUpdateListener animatorUpdateListener) {
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.TRANSLATION_X, f);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.TRANSLATION_X, f);
         if (animatorUpdateListener != null) {
-            ofFloat.addUpdateListener(animatorUpdateListener);
+            objectAnimatorOfFloat.addUpdateListener(animatorUpdateListener);
         }
-        return ofFloat;
+        return objectAnimatorOfFloat;
     }
 
     public void dismissChild(View view, float f, boolean z) {
@@ -146,9 +153,9 @@ public class SwipeHelper implements Gefingerpoken, Dumpable {
     public final void dump(final PrintWriter printWriter, String[] strArr) {
         printWriter.append("mTouchedView=").print(this.mTouchedView);
         if (this.mTouchedView instanceof ExpandableNotificationRow) {
-            PrintWriter append = printWriter.append(" key=");
+            PrintWriter printWriterAppend = printWriter.append(" key=");
             ExpandableNotificationRow expandableNotificationRow = (ExpandableNotificationRow) this.mTouchedView;
-            append.println(expandableNotificationRow == null ? "null" : expandableNotificationRow.mLoggingKey);
+            printWriterAppend.println(expandableNotificationRow == null ? "null" : expandableNotificationRow.mLoggingKey);
         } else {
             printWriter.println();
         }
@@ -209,13 +216,13 @@ public class SwipeHelper implements Gefingerpoken, Dumpable {
         }
         ExpandableNotificationRow expandableNotificationRow = (ExpandableNotificationRow) expandableView;
         int i = NotificationBundleUi.$r8$clinit;
-        boolean canBubble = expandableNotificationRow.getEntryLegacy().mRanking.canBubble();
+        boolean zCanBubble = expandableNotificationRow.getEntryLegacy().mRanking.canBubble();
         Notification notification2 = expandableNotificationRow.getEntryLegacy().mSbn.getNotification();
         PendingIntent pendingIntent = notification2.contentIntent;
         if (pendingIntent == null) {
             pendingIntent = notification2.fullScreenIntent;
         }
-        return (pendingIntent == null || !pendingIntent.isActivity() || canBubble) ? false : true;
+        return (pendingIntent == null || !pendingIntent.isActivity() || zCanBubble) ? false : true;
     }
 
     public final boolean isDismissGesture(MotionEvent motionEvent) {
@@ -224,26 +231,26 @@ public class SwipeHelper implements Gefingerpoken, Dumpable {
             return false;
         }
         if (swipedFastEnough() || swipedFarEnough()) {
-            return ((NotificationStackScrollLayoutController.AnonymousClass11) this.mCallback).canChildBeDismissed(this.mTouchedView);
+            return ((NotificationStackScrollLayoutController.AnonymousClass12) this.mCallback).canChildBeDismissed(this.mTouchedView);
         }
         return false;
     }
 
     public final boolean isFalseGesture() {
-        boolean onKeyguard = NotificationStackScrollLayoutController.this.mView.onKeyguard();
+        boolean zOnKeyguard = NotificationStackScrollLayoutController.this.mView.onKeyguard();
         FalsingManager falsingManager = this.mFalsingManager;
         if (falsingManager.isClassifierEnabled()) {
-            if (!onKeyguard || !falsingManager.isFalseTouch(1)) {
+            if (!zOnKeyguard || !falsingManager.isFalseTouch(1)) {
                 return false;
             }
-        } else if (!onKeyguard || this.mTouchAboveFalsingThreshold) {
+        } else if (!zOnKeyguard || this.mTouchAboveFalsingThreshold) {
             return false;
         }
         return true;
     }
 
     public void onChildSnappedBack(float f, View view) {
-        NotificationStackScrollLayoutController.AnonymousClass11 anonymousClass11 = (NotificationStackScrollLayoutController.AnonymousClass11) this.mCallback;
+        NotificationStackScrollLayoutController.AnonymousClass12 anonymousClass12 = (NotificationStackScrollLayoutController.AnonymousClass12) this.mCallback;
         NotificationStackScrollLayoutController notificationStackScrollLayoutController = NotificationStackScrollLayoutController.this;
         NotificationStackScrollLayout notificationStackScrollLayout = notificationStackScrollLayoutController.mView;
         notificationStackScrollLayout.updateFirstAndLastBackgroundViews();
@@ -253,54 +260,220 @@ public class SwipeHelper implements Gefingerpoken, Dumpable {
             ExpandableNotificationRow expandableNotificationRow = (ExpandableNotificationRow) view;
             int i = NotificationBundleUi.$r8$clinit;
             boolean z = expandableNotificationRow.getEntryLegacy().mSbn.getNotification().fullScreenIntent == null;
-            if (expandableNotificationRow.mPinnedStatus.isPinned() && !anonymousClass11.canChildBeDismissed(expandableNotificationRow) && z) {
+            if (expandableNotificationRow.mPinnedStatus.isPinned() && !anonymousClass12.canChildBeDismissed(expandableNotificationRow) && z) {
                 ((HeadsUpManagerImpl) notificationStackScrollLayoutController.mHeadsUpManager).removeNotification(expandableNotificationRow.getKey(), "onChildSnappedBack", true);
             }
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:12:0x0028, code lost:
-    
-        if (r0 != 3) goto L54;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:51:0x00cf, code lost:
-    
-        if (r11 != false) goto L62;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:36:0x00af  */
     @Override // com.android.systemui.Gefingerpoken
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public boolean onInterceptTouchEvent(android.view.MotionEvent r11) {
-        /*
-            Method dump skipped, instructions count: 335
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.SwipeHelper.onInterceptTouchEvent(android.view.MotionEvent):boolean");
+    public boolean onInterceptTouchEvent(MotionEvent motionEvent) {
+        NotificationMenuRowPlugin notificationMenuRowPlugin;
+        ExpandableView expandableView = this.mTouchedView;
+        if ((expandableView instanceof ExpandableNotificationRow) && (notificationMenuRowPlugin = ((ExpandableNotificationRow) expandableView).mMenuRow) != null) {
+            this.mMenuRowIntercepting = notificationMenuRowPlugin.onInterceptTouchEvent(expandableView, motionEvent);
+        }
+        int action = motionEvent.getAction();
+        Handler handler = this.mHandler;
+        AnonymousClass1 anonymousClass1 = this.mPerformLongPress;
+        Callback callback = this.mCallback;
+        if (action != 0) {
+            if (action == 1) {
+                boolean z = this.mIsSwiping || this.mLongPressSent || this.mMenuRowIntercepting;
+                this.mLongPressSent = false;
+                NotificationStackScrollLayoutController.this.mLongPressedView = null;
+                this.mMenuRowIntercepting = false;
+                resetSwipeStates(false);
+                cancelLongPress();
+                if (!z) {
+                }
+            } else if (action != 2) {
+                if (action != 3) {
+                }
+            } else if (this.mTouchedView != null && !this.mLongPressSent) {
+                this.mVelocityTracker.addMovement(motionEvent);
+                float x = motionEvent.getX();
+                float y = motionEvent.getY();
+                float f = x - this.mInitialTouchPos;
+                float f2 = y - this.mPerpendicularInitialTouchPos;
+                if (Math.abs(f) > (motionEvent.getClassification() == 1 ? this.mPagingTouchSlop * this.mSlopMultiplier : this.mPagingTouchSlop) && Math.abs(f) > Math.abs(f2)) {
+                    callback.getClass();
+                    this.mIsSwiping = true;
+                    ExpandableView expandableView2 = this.mTouchedView;
+                    NotificationStackScrollLayoutController.AnonymousClass12 anonymousClass12 = (NotificationStackScrollLayoutController.AnonymousClass12) callback;
+                    if (expandableView2 instanceof ExpandableNotificationRow) {
+                        NotificationStackScrollLayoutController notificationStackScrollLayoutController = NotificationStackScrollLayoutController.this;
+                        notificationStackScrollLayoutController.mMagneticNotificationRowManager.setMagneticAndRoundableTargets((ExpandableNotificationRow) expandableView2, notificationStackScrollLayoutController.mView, notificationStackScrollLayoutController.mSectionsManager);
+                    }
+                    anonymousClass12.onBeginDrag(this.mTouchedView);
+                    this.mInitialTouchPos = motionEvent.getX();
+                    this.mTranslation = getTranslation(this.mTouchedView);
+                    cancelLongPress();
+                } else if (motionEvent.getClassification() == 2 && handler.hasCallbacks(anonymousClass1)) {
+                    cancelLongPress();
+                    anonymousClass1.run();
+                }
+            }
+        }
+        this.mTouchAboveFalsingThreshold = false;
+        this.mIsSwiping = false;
+        this.mSnappingChild = false;
+        this.mLongPressSent = false;
+        this.mAlreadyExecutedDragAndDrop = false;
+        NotificationStackScrollLayoutController.AnonymousClass12 anonymousClass122 = (NotificationStackScrollLayoutController.AnonymousClass12) callback;
+        NotificationStackScrollLayoutController.this.mLongPressedView = null;
+        this.mVelocityTracker.clear();
+        cancelLongPress();
+        ExpandableView childAtPosition = anonymousClass122.getChildAtPosition(motionEvent);
+        this.mTouchedView = childAtPosition;
+        if (childAtPosition != null) {
+            if (childAtPosition instanceof ExpandableNotificationRow) {
+                ((ExpandableNotificationRow) childAtPosition).mSkipRemovalAnim = false;
+            }
+            onDownUpdate(childAtPosition);
+            this.mCanCurrViewBeDimissed = anonymousClass122.canChildBeDismissed(this.mTouchedView);
+            this.mVelocityTracker.addMovement(motionEvent);
+            this.mInitialTouchPos = motionEvent.getX();
+            this.mInitialTouchPosY = motionEvent.getY();
+            this.mPerpendicularInitialTouchPos = motionEvent.getY();
+            this.mTranslation = getTranslation(this.mTouchedView);
+            float rawX = motionEvent.getRawX();
+            float[] fArr = this.mDownLocation;
+            fArr[0] = rawX;
+            fArr[1] = motionEvent.getRawY();
+            handler.postDelayed(anonymousClass1, (long) (ViewConfiguration.getLongPressTimeout() * 1.5f));
+        }
+        return this.mIsSwiping || this.mLongPressSent || this.mMenuRowIntercepting;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:21:0x003c, code lost:
-    
-        if (r0 != 4) goto L99;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:46:0x00b6, code lost:
-    
-        if (r7 >= (r0 == 1 ? r2 * r11.mTouchSlopMultiplier : r2)) goto L50;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x008e  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x0094  */
-    /* JADX WARN: Removed duplicated region for block: B:80:0x015b  */
+    /* JADX WARN: Removed duplicated region for block: B:23:0x0040  */
+    /* JADX WARN: Removed duplicated region for block: B:32:0x0082  */
+    /* JADX WARN: Removed duplicated region for block: B:50:0x00b8  */
+    /* JADX WARN: Removed duplicated region for block: B:97:0x01c1  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean onTouchEvent(android.view.MotionEvent r12) {
-        /*
-            Method dump skipped, instructions count: 544
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.SwipeHelper.onTouchEvent(android.view.MotionEvent):boolean");
+    public final boolean onTouchEvent(MotionEvent motionEvent) throws Resources.NotFoundException, PackageManager.NameNotFoundException {
+        boolean z = this.mIsSwiping;
+        Callback callback = this.mCallback;
+        if (!z && !this.mMenuRowIntercepting && !this.mLongPressSent) {
+            NotificationStackScrollLayoutController.AnonymousClass12 anonymousClass12 = (NotificationStackScrollLayoutController.AnonymousClass12) callback;
+            if (anonymousClass12.getChildAtPosition(motionEvent) == null) {
+                cancelLongPress();
+                return false;
+            }
+            this.mTouchedView = anonymousClass12.getChildAtPosition(motionEvent);
+            onInterceptTouchEvent(motionEvent);
+            return true;
+        }
+        this.mVelocityTracker.addMovement(motionEvent);
+        int action = motionEvent.getAction();
+        ExpandableNotificationRow expandableNotificationRow = null;
+        if (action == 1) {
+            if (this.mTouchedView != null) {
+                this.mVelocityTracker.computeCurrentVelocity(1000, this.mDensityScale * 4000.0f);
+                float xVelocity = this.mVelocityTracker.getXVelocity();
+                ExpandableView expandableView = this.mTouchedView;
+                getTranslation(expandableView);
+                if (!handleUpEvent(motionEvent, expandableView, xVelocity)) {
+                    if (isDismissGesture(motionEvent)) {
+                        dismissChild(this.mTouchedView, xVelocity, !swipedFastEnough());
+                    } else {
+                        Log.d("com.android.systemui.SwipeHelper", this.mTouchedView + " is not isDismissGesture");
+                        NotificationStackScrollLayoutController.AnonymousClass12 anonymousClass122 = (NotificationStackScrollLayoutController.AnonymousClass12) callback;
+                        anonymousClass122.onMagneticInteractionEnd(xVelocity, this.mTouchedView);
+                        anonymousClass122.onDragCancelled(this.mTouchedView);
+                        snapChild(this.mTouchedView, 0.0f, xVelocity);
+                    }
+                    this.mTouchedView = null;
+                }
+                this.mIsSwiping = false;
+                return true;
+            }
+        } else if (action == 2) {
+            if (this.mTouchedView != null) {
+                float x = motionEvent.getX() - this.mInitialTouchPos;
+                float fAbs = Math.abs(motionEvent.getY() - this.mInitialTouchPosY);
+                float fAbs2 = Math.abs(x);
+                NotificationStackScrollLayoutController.AnonymousClass12 anonymousClass123 = (NotificationStackScrollLayoutController.AnonymousClass12) callback;
+                WakefulnessModel wakefulnessModel = (WakefulnessModel) NotificationStackScrollLayoutController.this.mPowerInteractor.detailedWakefulness.$$delegate_0.getValue();
+                ShadeViewController.Companion.getClass();
+                if (wakefulnessModel.isAwake()) {
+                    WakeSleepReason wakeSleepReason = WakeSleepReason.TAP;
+                    WakeSleepReason wakeSleepReason2 = wakefulnessModel.lastWakeReason;
+                    float f = (wakeSleepReason2 == wakeSleepReason || wakeSleepReason2 == WakeSleepReason.GESTURE) ? 1.5f : 1.0f;
+                    if (fAbs2 >= ((int) (this.mFalsingThreshold * f))) {
+                        this.mTouchAboveFalsingThreshold = true;
+                    }
+                    if (!this.mLongPressSent) {
+                        if (!anonymousClass123.canChildBeDismissed(this.mTouchedView)) {
+                            float measuredWidth = this.mTouchedView.getMeasuredWidth();
+                            float f2 = 0.3f * measuredWidth;
+                            if (fAbs2 >= measuredWidth) {
+                                x = x > 0.0f ? f2 : -f2;
+                            } else {
+                                NotificationMenuRowPlugin currentMenuRow = NotificationStackScrollLayoutController.this.mSwipeHelper.getCurrentMenuRow();
+                                float fAbs3 = currentMenuRow != null ? Math.abs(currentMenuRow.getMenuSnapTarget()) : 0;
+                                if (fAbs2 > fAbs3) {
+                                    x = (f2 * ((float) Math.sin(((x - r1) / measuredWidth) * 1.5707963267948966d))) + ((int) (Math.signum(x) * fAbs3));
+                                }
+                            }
+                        }
+                        setTranslation(this.mTranslation + x, this.mTouchedView);
+                        View view = this.mTouchedView;
+                        updateSwipeProgressFromOffset(view, getTranslation(view), this.mCanCurrViewBeDimissed);
+                        onMoveUpdate(x);
+                        return true;
+                    }
+                    int classification = motionEvent.getClassification();
+                    int i = this.mTouchSlop;
+                    if (fAbs2 < (classification == 1 ? i * this.mTouchSlopMultiplier : i)) {
+                        int classification2 = motionEvent.getClassification();
+                        int i2 = this.mTouchSlop;
+                        if (fAbs >= (classification2 == 1 ? i2 * this.mTouchSlopMultiplier : i2)) {
+                            if (this.mTouchedView instanceof ExpandableNotificationRow) {
+                                Log.d("com.android.systemui.SwipeHelper", "prepare drag and drop CallBack");
+                                if (((ExpandableNotificationRow) this.mTouchedView).isInsignificantSummary() && ((ExpandableNotificationRow) this.mTouchedView).isGroupExpanded$1() && ((ArrayList) ((ExpandableNotificationRow) this.mTouchedView).getAttachedChildren()).size() == 1) {
+                                    ExpandableNotificationRow expandableNotificationRow2 = (ExpandableNotificationRow) this.mTouchedView;
+                                    NotificationChildrenContainer notificationChildrenContainer = expandableNotificationRow2.mChildrenContainer;
+                                    if (notificationChildrenContainer != null && ((ArrayList) notificationChildrenContainer.mAttachedChildren).size() > 0) {
+                                        expandableNotificationRow = (ExpandableNotificationRow) ((ArrayList) expandableNotificationRow2.mChildrenContainer.mAttachedChildren).get(0);
+                                    }
+                                    if (isAvailableToDragAndDrop(expandableNotificationRow) && !this.mAlreadyExecutedDragAndDrop) {
+                                        float x2 = motionEvent.getX();
+                                        float y = motionEvent.getY();
+                                        if (expandableNotificationRow.mDragController != null) {
+                                            expandableNotificationRow.mTargetPoint = new Point((int) x2, (int) y);
+                                            expandableNotificationRow.mDragController.startDragAndDrop(expandableNotificationRow);
+                                        }
+                                        this.mAlreadyExecutedDragAndDrop = true;
+                                        return true;
+                                    }
+                                } else if (isAvailableToDragAndDrop(this.mTouchedView) && !this.mAlreadyExecutedDragAndDrop) {
+                                    ExpandableNotificationRow expandableNotificationRow3 = (ExpandableNotificationRow) this.mTouchedView;
+                                    float x3 = motionEvent.getX();
+                                    float y2 = motionEvent.getY();
+                                    if (expandableNotificationRow3.mDragController != null) {
+                                        expandableNotificationRow3.mTargetPoint = new Point((int) x3, (int) y2);
+                                        expandableNotificationRow3.mDragController.startDragAndDrop(expandableNotificationRow3);
+                                    }
+                                    this.mAlreadyExecutedDragAndDrop = true;
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } else if (action != 3) {
+            if (action == 4) {
+            }
+        }
+        return true;
     }
 
     public final void resetSwipeStates(boolean z) {
@@ -342,7 +515,7 @@ public class SwipeHelper implements Gefingerpoken, Dumpable {
     public void snapChild(final View view, final float f, float f2) {
         PhysicsAnimator companion;
         Animator animator;
-        final boolean canChildBeDismissed = ((NotificationStackScrollLayoutController.AnonymousClass11) this.mCallback).canChildBeDismissed(view);
+        final boolean zCanChildBeDismissed = ((NotificationStackScrollLayoutController.AnonymousClass12) this.mCallback).canChildBeDismissed(view);
         this.mSnapBackDirection = getTranslation(view) - f;
         boolean z = view instanceof ExpandableNotificationRow;
         if (z && (animator = ((ExpandableNotificationRow) view).mTranslateAnim) != null) {
@@ -366,9 +539,9 @@ public class SwipeHelper implements Gefingerpoken, Dumpable {
             @Override // com.android.wm.shell.shared.animation.PhysicsAnimator.UpdateListener
             public final void onAnimationUpdateForProperty(Object obj) {
                 View view2 = (View) obj;
-                SwipeHelper swipeHelper = SwipeHelper.this;
+                SwipeHelper swipeHelper = this.f$0;
                 float translation = swipeHelper.getTranslation(view2);
-                swipeHelper.updateSwipeProgressFromOffset(view2, translation, canChildBeDismissed);
+                swipeHelper.updateSwipeProgressFromOffset(view2, translation, zCanChildBeDismissed);
                 float f3 = swipeHelper.mSnapBackDirection;
                 float f4 = f;
                 if ((f3 <= 0.0f || translation >= f4) && (f3 >= 0.0f || translation <= f4)) {
@@ -382,11 +555,11 @@ public class SwipeHelper implements Gefingerpoken, Dumpable {
             @Override // com.android.wm.shell.shared.animation.PhysicsAnimator.EndListener
             public final void onAnimationEnd(Object obj, FloatPropertyCompat floatPropertyCompat, boolean z2, boolean z3, float f3, float f4) {
                 View view2 = view;
-                SwipeHelper swipeHelper = SwipeHelper.this;
+                SwipeHelper swipeHelper = this.f$0;
                 swipeHelper.mSnappingChild = false;
                 swipeHelper.mSnapBackDirection = 0.0f;
                 if (!z3) {
-                    swipeHelper.updateSwipeProgressFromOffset(view2, swipeHelper.getTranslation(view2), canChildBeDismissed);
+                    swipeHelper.updateSwipeProgressFromOffset(view2, swipeHelper.getTranslation(view2), zCanChildBeDismissed);
                     if ((swipeHelper.mIsSwiping ? swipeHelper.mTouchedView : null) == view2) {
                         swipeHelper.resetSwipeStates(false);
                     }
@@ -415,9 +588,9 @@ public class SwipeHelper implements Gefingerpoken, Dumpable {
             snapChild(view, f, 0.0f);
             return;
         }
-        boolean canChildBeDismissed = ((NotificationStackScrollLayoutController.AnonymousClass11) this.mCallback).canChildBeDismissed(view);
+        boolean zCanChildBeDismissed = ((NotificationStackScrollLayoutController.AnonymousClass12) this.mCallback).canChildBeDismissed(view);
         setTranslation(0.0f, view);
-        updateSwipeProgressFromOffset(view, getTranslation(view), canChildBeDismissed);
+        updateSwipeProgressFromOffset(view, getTranslation(view), zCanChildBeDismissed);
     }
 
     public boolean swipedFarEnough() {
@@ -440,15 +613,15 @@ public class SwipeHelper implements Gefingerpoken, Dumpable {
     }
 
     public final void updateSwipeProgressFromOffset(View view, float f, boolean z) {
-        float min = f == 0.0f ? 0.0f : Math.min(Math.max(0.0f, Math.abs(f / view.getMeasuredWidth())), 1.0f);
+        float fMin = f == 0.0f ? 0.0f : Math.min(Math.max(0.0f, Math.abs(f / view.getMeasuredWidth())), 1.0f);
         this.mCallback.getClass();
         if (z) {
-            if (min == 0.0f || min == 1.0f) {
+            if (fMin == 0.0f || fMin == 1.0f) {
                 view.setLayerType(0, null);
             } else {
                 view.setLayerType(2, null);
             }
-            updateSwipeProgressAlpha(getSwipeAlpha(min), view);
+            updateSwipeProgressAlpha(getSwipeAlpha(fMin), view);
         } else {
             int i = NotificationContentAlphaOptimization.$r8$clinit;
         }
@@ -464,30 +637,30 @@ public class SwipeHelper implements Gefingerpoken, Dumpable {
 
     public final void dismissChild(final View view, float f, final NotificationStackScrollLayout$$ExternalSyntheticLambda5 notificationStackScrollLayout$$ExternalSyntheticLambda5, long j, boolean z, long j2, boolean z2) {
         Animator animator;
-        NotificationStackScrollLayoutController.AnonymousClass11 anonymousClass11 = (NotificationStackScrollLayoutController.AnonymousClass11) this.mCallback;
-        final boolean canChildBeDismissed = anonymousClass11.canChildBeDismissed(view);
+        NotificationStackScrollLayoutController.AnonymousClass12 anonymousClass12 = (NotificationStackScrollLayoutController.AnonymousClass12) this.mCallback;
+        final boolean zCanChildBeDismissed = anonymousClass12.canChildBeDismissed(view);
         boolean z3 = false;
         boolean z4 = view.getLayoutDirection() == 1;
         if (f == 0.0f && ((getTranslation(view) == 0.0f || z2) && z4)) {
             z3 = true;
         }
         float totalTranslationLength = ((Math.abs(f) <= getEscapeVelocity() || f >= 0.0f) && (getTranslation(view) >= 0.0f || z2) && !z3) ? getTotalTranslationLength(view) : -getTotalTranslationLength(view);
-        long min = j2 == 0 ? f != 0.0f ? Math.min(400L, (int) ((Math.abs(totalTranslationLength - getTranslation(view)) * 1000.0f) / Math.abs(f))) : 200L : j2;
+        long jMin = j2 == 0 ? f != 0.0f ? Math.min(400L, (int) ((Math.abs(totalTranslationLength - getTranslation(view)) * 1000.0f) / Math.abs(f))) : 200L : j2;
         view.setLayerType(2, null);
         Animator viewTranslationAnimator = getViewTranslationAnimator(view, totalTranslationLength, new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.SwipeHelper.2
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                SwipeHelper.this.updateSwipeProgressFromOffset(view, ((Float) valueAnimator.getAnimatedValue()).floatValue(), canChildBeDismissed);
+                SwipeHelper.this.updateSwipeProgressFromOffset(view, ((Float) valueAnimator.getAnimatedValue()).floatValue(), zCanChildBeDismissed);
             }
         });
-        anonymousClass11.onMagneticInteractionEnd(f, view);
+        anonymousClass12.onMagneticInteractionEnd(f, view);
         if (viewTranslationAnimator == null) {
             onDismissChildWithAnimationFinished();
             return;
         }
         if (z) {
             viewTranslationAnimator.setInterpolator(Interpolators.FAST_OUT_LINEAR_IN);
-            viewTranslationAnimator.setDuration(min);
+            viewTranslationAnimator.setDuration(jMin);
             animator = viewTranslationAnimator;
         } else {
             animator = viewTranslationAnimator;
@@ -502,130 +675,62 @@ public class SwipeHelper implements Gefingerpoken, Dumpable {
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationCancel(Animator animator2) {
                 this.mCancelled = true;
-                ((NotificationStackScrollLayoutController.AnonymousClass11) SwipeHelper.this.mCallback).onDragCancelled(view);
+                ((NotificationStackScrollLayoutController.AnonymousClass12) SwipeHelper.this.mCallback).onDragCancelled(view);
             }
 
-            /* JADX WARN: Removed duplicated region for block: B:16:0x00ad  */
-            /* JADX WARN: Removed duplicated region for block: B:22:0x006f  */
-            /* JADX WARN: Removed duplicated region for block: B:24:0x0075  */
-            /* JADX WARN: Removed duplicated region for block: B:27:0x007e  */
-            /* JADX WARN: Removed duplicated region for block: B:37:0x0072  */
+            /* JADX WARN: Removed duplicated region for block: B:10:0x0042  */
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             /*
                 Code decompiled incorrectly, please refer to instructions dump.
-                To view partially-correct code enable 'Show inconsistent code' option in preferences
             */
-            public final void onAnimationEnd(android.animation.Animator r7) {
-                /*
-                    r6 = this;
-                    java.lang.StringBuilder r7 = new java.lang.StringBuilder
-                    java.lang.String r0 = "swiped dismiss anim end : "
-                    r7.<init>(r0)
-                    android.view.View r0 = r2
-                    r7.append(r0)
-                    java.lang.String r7 = r7.toString()
-                    java.lang.String r0 = "com.android.systemui.SwipeHelper"
-                    android.util.Log.d(r0, r7)
-                    com.android.systemui.SwipeHelper r7 = com.android.systemui.SwipeHelper.this
-                    android.view.View r1 = r2
-                    boolean r2 = r3
-                    float r3 = r7.getTranslation(r1)
-                    r7.updateSwipeProgressFromOffset(r1, r3, r2)
-                    com.android.systemui.SwipeHelper r7 = com.android.systemui.SwipeHelper.this
-                    android.util.ArrayMap r7 = r7.mDismissPendingMap
-                    android.view.View r1 = r2
-                    r7.remove(r1)
-                    android.view.View r7 = r2
-                    boolean r1 = r7 instanceof com.android.systemui.statusbar.notification.row.ExpandableNotificationRow
-                    r2 = 0
-                    if (r1 == 0) goto L42
-                    com.android.systemui.statusbar.notification.row.ExpandableNotificationRow r7 = (com.android.systemui.statusbar.notification.row.ExpandableNotificationRow) r7
-                    android.view.ViewGroup r1 = r7.mTransientContainer
-                    if (r1 != 0) goto L40
-                    android.view.ViewParent r7 = r7.getParent()
-                    if (r7 == 0) goto L40
-                    goto L42
-                L40:
-                    r7 = 1
-                    goto L43
-                L42:
-                    r7 = r2
-                L43:
-                    boolean r1 = r6.mCancelled
-                    r3 = 0
-                    if (r1 == 0) goto L5c
-                    if (r7 == 0) goto L4b
-                    goto L5c
-                L4b:
-                    android.view.View r7 = r2
-                    boolean r1 = r7 instanceof com.android.systemui.statusbar.notification.row.ExpandableNotificationRow
-                    if (r1 == 0) goto La9
-                    com.android.systemui.statusbar.notification.row.ExpandableNotificationRow r7 = (com.android.systemui.statusbar.notification.row.ExpandableNotificationRow) r7
-                    java.lang.String r1 = "onAnimationCancel removeFromTransientContainer"
-                    android.util.Log.d(r0, r1)
-                    r7.removeFromTransientContainer()
-                    goto La9
-                L5c:
-                    com.android.systemui.SwipeHelper r7 = com.android.systemui.SwipeHelper.this
-                    com.android.systemui.SwipeHelper$Callback r7 = r7.mCallback
-                    android.view.View r0 = r2
-                    com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayoutController$11 r7 = (com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayoutController.AnonymousClass11) r7
-                    r7.onChildDismissed(r0)
-                    com.android.systemui.SwipeHelper r7 = com.android.systemui.SwipeHelper.this
-                    android.view.View r0 = r2
-                    boolean r1 = r7.mIsSwiping
-                    if (r1 == 0) goto L72
-                    com.android.systemui.statusbar.notification.row.ExpandableView r1 = r7.mTouchedView
-                    goto L73
-                L72:
-                    r1 = r3
-                L73:
-                    if (r1 != r0) goto L78
-                    r7.resetSwipeStates(r2)
-                L78:
-                    android.view.View r7 = r2
-                    boolean r0 = r7 instanceof com.android.systemui.statusbar.notification.row.ExpandableNotificationRow
-                    if (r0 == 0) goto La9
-                    com.android.systemui.statusbar.notification.row.ExpandableNotificationRow r7 = (com.android.systemui.statusbar.notification.row.ExpandableNotificationRow) r7
-                    boolean r0 = r7.isInsignificantSummary()
-                    if (r0 == 0) goto La9
-                    com.android.systemui.statusbar.notification.stack.NotificationChildrenContainer r7 = r7.mChildrenContainer
-                    if (r7 == 0) goto La9
-                    int r0 = r7.getNotificationChildCount()
-                    if (r0 <= 0) goto La9
-                    r1 = r2
-                L91:
-                    if (r1 >= r0) goto La9
-                    java.util.List r4 = r7.mAttachedChildren
-                    java.util.ArrayList r4 = (java.util.ArrayList) r4
-                    java.lang.Object r4 = r4.get(r1)
-                    com.android.systemui.statusbar.notification.row.ExpandableNotificationRow r4 = (com.android.systemui.statusbar.notification.row.ExpandableNotificationRow) r4
-                    com.android.systemui.SwipeHelper r5 = com.android.systemui.SwipeHelper.this
-                    com.android.systemui.SwipeHelper$Callback r5 = r5.mCallback
-                    com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayoutController$11 r5 = (com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayoutController.AnonymousClass11) r5
-                    r5.onChildDismissed(r4)
-                    int r1 = r1 + 1
-                    goto L91
-                La9:
-                    java.util.function.Consumer r7 = r4
-                    if (r7 == 0) goto Lb6
-                    boolean r0 = r6.mCancelled
-                    java.lang.Boolean r0 = java.lang.Boolean.valueOf(r0)
-                    r7.accept(r0)
-                Lb6:
-                    android.view.View r7 = r2
-                    r7.setLayerType(r2, r3)
-                    com.android.systemui.SwipeHelper r6 = com.android.systemui.SwipeHelper.this
-                    r6.onDismissChildWithAnimationFinished()
-                    return
-                */
-                throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.SwipeHelper.AnonymousClass3.onAnimationEnd(android.animation.Animator):void");
+            public final void onAnimationEnd(Animator animator2) {
+                boolean z5;
+                NotificationChildrenContainer notificationChildrenContainer;
+                int notificationChildCount;
+                Log.d("com.android.systemui.SwipeHelper", "swiped dismiss anim end : " + view);
+                SwipeHelper swipeHelper = SwipeHelper.this;
+                View view2 = view;
+                swipeHelper.updateSwipeProgressFromOffset(view2, swipeHelper.getTranslation(view2), zCanChildBeDismissed);
+                SwipeHelper.this.mDismissPendingMap.remove(view);
+                View view3 = view;
+                if (view3 instanceof ExpandableNotificationRow) {
+                    ExpandableNotificationRow expandableNotificationRow = (ExpandableNotificationRow) view3;
+                    z5 = expandableNotificationRow.mTransientContainer != null || expandableNotificationRow.getParent() == null;
+                }
+                if (!this.mCancelled || z5) {
+                    ((NotificationStackScrollLayoutController.AnonymousClass12) SwipeHelper.this.mCallback).onChildDismissed(view);
+                    SwipeHelper swipeHelper2 = SwipeHelper.this;
+                    if ((swipeHelper2.mIsSwiping ? swipeHelper2.mTouchedView : null) == view) {
+                        swipeHelper2.resetSwipeStates(false);
+                    }
+                    View view4 = view;
+                    if (view4 instanceof ExpandableNotificationRow) {
+                        ExpandableNotificationRow expandableNotificationRow2 = (ExpandableNotificationRow) view4;
+                        if (expandableNotificationRow2.isInsignificantSummary() && (notificationChildrenContainer = expandableNotificationRow2.mChildrenContainer) != null && (notificationChildCount = notificationChildrenContainer.getNotificationChildCount()) > 0) {
+                            for (int i = 0; i < notificationChildCount; i++) {
+                                ((NotificationStackScrollLayoutController.AnonymousClass12) SwipeHelper.this.mCallback).onChildDismissed((ExpandableNotificationRow) ((ArrayList) notificationChildrenContainer.mAttachedChildren).get(i));
+                            }
+                        }
+                    }
+                } else {
+                    View view5 = view;
+                    if (view5 instanceof ExpandableNotificationRow) {
+                        Log.d("com.android.systemui.SwipeHelper", "onAnimationCancel removeFromTransientContainer");
+                        ((ExpandableNotificationRow) view5).removeFromTransientContainer();
+                    }
+                }
+                Consumer consumer = notificationStackScrollLayout$$ExternalSyntheticLambda5;
+                if (consumer != null) {
+                    consumer.accept(Boolean.valueOf(this.mCancelled));
+                }
+                view.setLayerType(0, null);
+                SwipeHelper.this.onDismissChildWithAnimationFinished();
             }
 
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationStart(Animator animator2) {
                 super.onAnimationStart(animator2);
-                ((NotificationStackScrollLayoutController.AnonymousClass11) SwipeHelper.this.mCallback).onBeginDrag(view);
+                ((NotificationStackScrollLayoutController.AnonymousClass12) SwipeHelper.this.mCallback).onBeginDrag(view);
             }
         });
         prepareDismissAnimation(view, animator);

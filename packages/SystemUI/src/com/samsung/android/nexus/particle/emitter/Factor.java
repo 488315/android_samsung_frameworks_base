@@ -6,7 +6,6 @@ import com.samsung.android.nexus.particle.emitter.FactorType;
 import java.util.Arrays;
 import java.util.Locale;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class Factor {
     public boolean mNeedValidate;
@@ -90,11 +89,11 @@ public class Factor {
         for (int i = 0; i < length; i++) {
             FactorType factorType2 = factorTypeArr[i];
             Locale locale = Locale.ENGLISH;
-            Integer valueOf = Integer.valueOf(i);
-            String name = factorType2.name();
+            Integer numValueOf = Integer.valueOf(i);
+            String strName = factorType2.name();
             int i2 = factorType2.valueIdx;
             float[] fArr = this.values;
-            sb.append(String.format(locale, "\n#%d: %s: val = %f / spd = %f / acc = %f", valueOf, name, Float.valueOf(fArr[i2]), Float.valueOf(fArr[factorType2.speedIdx]), Float.valueOf(fArr[factorType2.accelerationIdx])));
+            sb.append(String.format(locale, "\n#%d: %s: val = %f / spd = %f / acc = %f", numValueOf, strName, Float.valueOf(fArr[i2]), Float.valueOf(fArr[factorType2.speedIdx]), Float.valueOf(fArr[factorType2.accelerationIdx])));
             sb.append("}");
         }
         return sb.toString();

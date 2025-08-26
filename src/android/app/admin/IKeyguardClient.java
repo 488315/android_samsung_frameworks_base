@@ -45,9 +45,9 @@ public interface IKeyguardClient extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IKeyguardClient.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IKeyguardClient)) {
-                return (IKeyguardClient) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IKeyguardClient.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IKeyguardClient)) {
+                return (IKeyguardClient) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,10 +74,10 @@ public interface IKeyguardClient extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IBinder readStrongBinder = parcel.readStrongBinder();
-                IKeyguardCallback asInterface = IKeyguardCallback.Stub.asInterface(parcel.readStrongBinder());
+                IBinder strongBinder = parcel.readStrongBinder();
+                IKeyguardCallback iKeyguardCallbackAsInterface = IKeyguardCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                onCreateKeyguardSurface(readStrongBinder, asInterface);
+                onCreateKeyguardSurface(strongBinder, iKeyguardCallbackAsInterface);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -101,14 +101,14 @@ public interface IKeyguardClient extends IInterface {
 
             @Override // android.app.admin.IKeyguardClient
             public void onCreateKeyguardSurface(IBinder iBinder, IKeyguardCallback iKeyguardCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IKeyguardClient.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeStrongInterface(iKeyguardCallback);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IKeyguardClient.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeStrongInterface(iKeyguardCallback);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

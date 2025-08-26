@@ -12,7 +12,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class WallpaperRepositoryImpl$getWallpaper$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ SelectedUserModel $selectedUser;
@@ -50,9 +49,9 @@ final class WallpaperRepositoryImpl$getWallpaper$2 extends SuspendLambda impleme
         }
         int i = WallpaperUtils.sCurrentWhich;
         int i2 = i & 60;
-        boolean isSystemAndLockPaired = this.this$0.wallpaperManager.isSystemAndLockPaired(i2);
+        boolean zIsSystemAndLockPaired = this.this$0.wallpaperManager.isSystemAndLockPaired(i2);
         if (LsRune.SUBSCREEN_WATCHFACE) {
-            i = WhichChecker.isFlagEnabled(i, 16) ? 17 : isSystemAndLockPaired ? i2 | 1 : i2 | 2;
+            i = WhichChecker.isFlagEnabled(i, 16) ? 17 : zIsSystemAndLockPaired ? i2 | 1 : i2 | 2;
         }
         return this.this$0.wallpaperManager.getWallpaperInfoForUser(i);
     }

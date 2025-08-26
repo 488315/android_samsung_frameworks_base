@@ -2,6 +2,7 @@ package com.android.keyguard.biometrics;
 
 import android.animation.ObjectAnimator;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.hardware.biometrics.BiometricSourceType;
@@ -56,7 +57,6 @@ import com.samsung.systemui.splugins.lockstar.PluginLockStar;
 import dagger.Lazy;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardBiometricViewController extends ViewController implements SystemUIWidgetCallback {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -97,7 +97,6 @@ public class KeyguardBiometricViewController extends ViewController implements S
     public VibrationUtil vibration;
     public final VibrationUtil vibrationUtil;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -140,29 +139,29 @@ public class KeyguardBiometricViewController extends ViewController implements S
         this.lottieIconRunnable = new Runnable() { // from class: com.android.keyguard.biometrics.KeyguardBiometricViewController$lottieIconRunnable$1
             @Override // java.lang.Runnable
             public final void run() {
-                KeyguardBiometricViewController keyguardBiometricViewController = KeyguardBiometricViewController.this;
+                KeyguardBiometricViewController keyguardBiometricViewController = this.this$0;
                 int i = KeyguardBiometricViewController.$r8$clinit;
                 keyguardBiometricViewController.resetLockIconState();
-                KeyguardBiometricViewController keyguardBiometricViewController2 = KeyguardBiometricViewController.this;
+                KeyguardBiometricViewController keyguardBiometricViewController2 = this.this$0;
                 if (!keyguardBiometricViewController2.mShowingRetryButton) {
                     keyguardBiometricViewController2.acceptLockStarModifier();
                 }
-                KeyguardBiometricViewController keyguardBiometricViewController3 = KeyguardBiometricViewController.this;
+                KeyguardBiometricViewController keyguardBiometricViewController3 = this.this$0;
                 keyguardBiometricViewController3.lockIconView.updateScanningFaceAnimation(keyguardBiometricViewController3.lockIcon);
             }
         };
         this.lockIconRunnable = new Runnable() { // from class: com.android.keyguard.biometrics.KeyguardBiometricViewController$lockIconRunnable$1
             @Override // java.lang.Runnable
             public final void run() {
-                KeyguardBiometricViewController keyguardBiometricViewController = KeyguardBiometricViewController.this;
+                KeyguardBiometricViewController keyguardBiometricViewController = this.this$0;
                 keyguardBiometricViewController.lockIconView.updateScanningFaceAnimation(keyguardBiometricViewController.lockIcon);
             }
         };
         this.lockStarCallback = new PluginLockStarManager.LockStarCallback() { // from class: com.android.keyguard.biometrics.KeyguardBiometricViewController$lockStarCallback$1
             @Override // com.android.systemui.lockstar.PluginLockStarManager.LockStarCallback
-            public final void onChangedLockStarData(boolean z) {
+            public final void onChangedLockStarData(boolean z) throws Resources.NotFoundException {
                 boolean z2 = LsRune.SECURITY_SUB_DISPLAY_LOCK;
-                KeyguardBiometricViewController keyguardBiometricViewController = KeyguardBiometricViewController.this;
+                KeyguardBiometricViewController keyguardBiometricViewController = this.this$0;
                 if (z2) {
                     keyguardBiometricViewController.isLockStarEnabled = z;
                 }
@@ -172,9 +171,9 @@ public class KeyguardBiometricViewController extends ViewController implements S
         };
         this.settingsListener = new SettingsHelper.OnChangedCallback() { // from class: com.android.keyguard.biometrics.KeyguardBiometricViewController$settingsListener$1
             @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
-            public final void onChanged(Uri uri) {
+            public final void onChanged(Uri uri) throws Resources.NotFoundException {
                 int i = KeyguardBiometricViewController.$r8$clinit;
-                KeyguardBiometricViewController keyguardBiometricViewController = KeyguardBiometricViewController.this;
+                KeyguardBiometricViewController keyguardBiometricViewController = this.this$0;
                 keyguardBiometricViewController.getClass();
                 keyguardBiometricViewController.lockIconView.mIsOneHandModeEnabled = ((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).isOneHandModeRunning();
                 keyguardBiometricViewController.updateLockIcon();
@@ -183,16 +182,16 @@ public class KeyguardBiometricViewController extends ViewController implements S
         };
         this.configurationListener = new ConfigurationController.ConfigurationListener() { // from class: com.android.keyguard.biometrics.KeyguardBiometricViewController$configurationListener$1
             @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
-            public final void onConfigChanged(Configuration configuration) {
+            public final void onConfigChanged(Configuration configuration) throws Resources.NotFoundException {
                 int i = configuration.semDisplayDeviceType;
                 if (LsRune.SECURITY_SUB_DISPLAY_LOCK) {
-                    KeyguardBiometricViewController keyguardBiometricViewController = KeyguardBiometricViewController.this;
+                    KeyguardBiometricViewController keyguardBiometricViewController = this.this$0;
                     if (keyguardBiometricViewController.displayDeviceType != i) {
                         keyguardBiometricViewController.displayDeviceType = i;
                         PluginLockStar pluginLockStar = keyguardBiometricViewController.pluginLockStarManager.mPluginLockStar;
-                        boolean isLockStarEnabled = pluginLockStar != null ? pluginLockStar.isLockStarEnabled() : false;
-                        keyguardBiometricViewController.isLockStarEnabled = isLockStarEnabled;
-                        keyguardBiometricViewController.initLockStarLockIcon(isLockStarEnabled);
+                        boolean zIsLockStarEnabled = pluginLockStar != null ? pluginLockStar.isLockStarEnabled() : false;
+                        keyguardBiometricViewController.isLockStarEnabled = zIsLockStarEnabled;
+                        keyguardBiometricViewController.initLockStarLockIcon(zIsLockStarEnabled);
                         keyguardBiometricViewController.updateBiometricViewLayout();
                         keyguardBiometricViewController.updateLayout$3();
                         keyguardBiometricViewController.updateVisibility$3();
@@ -202,11 +201,9 @@ public class KeyguardBiometricViewController extends ViewController implements S
         };
         this.mDisplayLifeCycleObserver = new DisplayLifecycle.Observer() { // from class: com.android.keyguard.biometrics.KeyguardBiometricViewController$mDisplayLifeCycleObserver$1
             @Override // com.android.systemui.keyguard.DisplayLifecycle.Observer
-            public final void onDisplayChanged(int i) {
-                View view;
-                KeyguardBiometricViewController keyguardBiometricViewController = KeyguardBiometricViewController.this;
-                view = ((ViewController) keyguardBiometricViewController).mView;
-                int rotation = DeviceState.getRotation(DeviceState.getRotation(((KeyguardBiometricView) view).defaultDisplay.getRotation()));
+            public final void onDisplayChanged(int i) throws Resources.NotFoundException {
+                KeyguardBiometricViewController keyguardBiometricViewController = this.this$0;
+                int rotation = DeviceState.getRotation(DeviceState.getRotation(((KeyguardBiometricView) ((ViewController) keyguardBiometricViewController).mView).defaultDisplay.getRotation()));
                 if (keyguardBiometricViewController.mCurrentRotation != rotation) {
                     keyguardBiometricViewController.mCurrentRotation = rotation;
                     keyguardBiometricViewController.updateBiometricViewLayout();
@@ -223,17 +220,17 @@ public class KeyguardBiometricViewController extends ViewController implements S
         };
         this.keyguardUpdateMonitorCallback = new KeyguardUpdateMonitorCallback() { // from class: com.android.keyguard.biometrics.KeyguardBiometricViewController$keyguardUpdateMonitorCallback$1
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
-            public final void onBiometricAuthFailed(BiometricSourceType biometricSourceType) {
+            public final void onBiometricAuthFailed(BiometricSourceType biometricSourceType) throws Resources.NotFoundException {
                 if (biometricSourceType == BiometricSourceType.FACE) {
                     int i = KeyguardBiometricViewController.$r8$clinit;
-                    KeyguardBiometricViewController keyguardBiometricViewController = KeyguardBiometricViewController.this;
+                    KeyguardBiometricViewController keyguardBiometricViewController = this.this$0;
                     keyguardBiometricViewController.errorString = keyguardBiometricViewController.getContext().getString(R.string.kg_face_no_match);
                     KeyguardBiometricViewController.access$updateErrorText(keyguardBiometricViewController, keyguardBiometricViewController.errorString);
                 }
             }
 
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
-            public final void onBiometricError(int i, String str, BiometricSourceType biometricSourceType) {
+            public final void onBiometricError(int i, String str, BiometricSourceType biometricSourceType) throws Resources.NotFoundException {
                 boolean z;
                 if (biometricSourceType == BiometricSourceType.FACE) {
                     if (i == 10002 || i == 10003 || i == 10005) {
@@ -243,7 +240,7 @@ public class KeyguardBiometricViewController extends ViewController implements S
                     } else {
                         z = false;
                     }
-                    KeyguardBiometricViewController keyguardBiometricViewController = KeyguardBiometricViewController.this;
+                    KeyguardBiometricViewController keyguardBiometricViewController = this.this$0;
                     keyguardBiometricViewController.isHiddenRetry = z;
                     if (str != null) {
                         keyguardBiometricViewController.errorString = str;
@@ -263,7 +260,7 @@ public class KeyguardBiometricViewController extends ViewController implements S
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
             public final void onBiometricLockoutChanged(boolean z) {
                 Log.d("KeyguardBiometricView", "onBiometricsLockoutChanged( " + z + " )");
-                KeyguardBiometricViewController keyguardBiometricViewController = KeyguardBiometricViewController.this;
+                KeyguardBiometricViewController keyguardBiometricViewController = this.this$0;
                 long lockoutAttemptDeadline = keyguardBiometricViewController.keyguardUpdateMonitor.getLockoutAttemptDeadline();
                 KeyguardUpdateMonitor keyguardUpdateMonitor2 = keyguardBiometricViewController.keyguardUpdateMonitor;
                 if (keyguardUpdateMonitor2.mDeviceInteractive && z && lockoutAttemptDeadline == 0) {
@@ -277,9 +274,9 @@ public class KeyguardBiometricViewController extends ViewController implements S
             }
 
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
-            public final void onBiometricRunningStateChanged(boolean z, BiometricSourceType biometricSourceType) {
+            public final void onBiometricRunningStateChanged(boolean z, BiometricSourceType biometricSourceType) throws Resources.NotFoundException {
                 if (biometricSourceType == BiometricSourceType.FACE) {
-                    KeyguardBiometricViewController keyguardBiometricViewController = KeyguardBiometricViewController.this;
+                    KeyguardBiometricViewController keyguardBiometricViewController = this.this$0;
                     if (keyguardBiometricViewController.isRunning != z) {
                         keyguardBiometricViewController.isRunning = z;
                         if (z) {
@@ -295,13 +292,13 @@ public class KeyguardBiometricViewController extends ViewController implements S
 
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
             public final void onDualDarInnerLockScreenStateChanged(int i, boolean z) {
-                KeyguardBiometricViewController keyguardBiometricViewController = KeyguardBiometricViewController.this;
+                KeyguardBiometricViewController keyguardBiometricViewController = this.this$0;
                 keyguardBiometricViewController.lockIcon.setImageDrawable(keyguardBiometricViewController.getContext().getDrawable(z ? R.drawable.lock_ic_lock_ddar : R.drawable.lock_ic_lock_mtrl_00));
             }
 
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
-            public final void onKeyguardBouncerFullyShowingChanged(boolean z) {
-                KeyguardBiometricViewController keyguardBiometricViewController = KeyguardBiometricViewController.this;
+            public final void onKeyguardBouncerFullyShowingChanged(boolean z) throws Resources.NotFoundException {
+                KeyguardBiometricViewController keyguardBiometricViewController = this.this$0;
                 if (keyguardBiometricViewController.bouncerShowing != z) {
                     keyguardBiometricViewController.bouncerShowing = z;
                     keyguardBiometricViewController.errorString = "";
@@ -316,8 +313,8 @@ public class KeyguardBiometricViewController extends ViewController implements S
             }
 
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
-            public final void onLockModeChanged() {
-                final KeyguardBiometricViewController keyguardBiometricViewController = KeyguardBiometricViewController.this;
+            public final void onLockModeChanged() throws Resources.NotFoundException {
+                final KeyguardBiometricViewController keyguardBiometricViewController = this.this$0;
                 keyguardBiometricViewController.isLockOut = keyguardBiometricViewController.keyguardUpdateMonitor.isTimerRunning();
                 if (keyguardBiometricViewController.isRunning || keyguardBiometricViewController.isLockOut) {
                     keyguardBiometricViewController.clearView();
@@ -325,16 +322,16 @@ public class KeyguardBiometricViewController extends ViewController implements S
                     keyguardBiometricViewController.updateLockIconVisibility(keyguardBiometricViewController.bouncerShowing);
                     keyguardBiometricViewController.resetBiometricLockOutTimer();
                     long lockoutAttemptDeadline = keyguardBiometricViewController.keyguardUpdateMonitor.getLockoutAttemptDeadline();
-                    long elapsedRealtime = SystemClock.elapsedRealtime();
+                    long jElapsedRealtime = SystemClock.elapsedRealtime();
                     CountDownTimer countDownTimer = keyguardBiometricViewController.countDownTimer;
                     if (countDownTimer != null) {
                         countDownTimer.cancel();
                     }
                     keyguardBiometricViewController.countDownTimer = null;
-                    keyguardBiometricViewController.countDownTimer = new CountDownTimer(lockoutAttemptDeadline - elapsedRealtime) { // from class: com.android.keyguard.biometrics.KeyguardBiometricViewController$handleAttemptLockout$1
+                    keyguardBiometricViewController.countDownTimer = new CountDownTimer(lockoutAttemptDeadline - jElapsedRealtime) { // from class: com.android.keyguard.biometrics.KeyguardBiometricViewController$handleAttemptLockout$1
                         @Override // android.os.CountDownTimer
                         public final void onFinish() {
-                            KeyguardBiometricViewController.this.updateBiometricViewLayout();
+                            keyguardBiometricViewController.updateBiometricViewLayout();
                         }
 
                         @Override // android.os.CountDownTimer
@@ -347,23 +344,23 @@ public class KeyguardBiometricViewController extends ViewController implements S
 
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
             public final void onRemoteLockInfoChanged() {
-                KeyguardBiometricViewController keyguardBiometricViewController = KeyguardBiometricViewController.this;
+                KeyguardBiometricViewController keyguardBiometricViewController = this.this$0;
                 int i = keyguardBiometricViewController.keyguardUpdateMonitor.isRemoteLockEnabled() ? 8 : 0;
                 keyguardBiometricViewController.lockIconView.setVisibility(i);
                 keyguardBiometricViewController.biometricRetryIcon.setVisibility(i);
             }
 
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
-            public final void onSecurityViewChanged(KeyguardSecurityModel.SecurityMode securityMode) {
+            public final void onSecurityViewChanged(KeyguardSecurityModel.SecurityMode securityMode) throws Resources.NotFoundException {
                 int i = KeyguardBiometricViewController.$r8$clinit;
-                KeyguardBiometricViewController keyguardBiometricViewController = KeyguardBiometricViewController.this;
+                KeyguardBiometricViewController keyguardBiometricViewController = this.this$0;
                 keyguardBiometricViewController.clearView();
                 keyguardBiometricViewController.updateLayout$3();
             }
 
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
-            public final void onStrongAuthStateChanged(int i) {
-                KeyguardBiometricViewController keyguardBiometricViewController = KeyguardBiometricViewController.this;
+            public final void onStrongAuthStateChanged(int i) throws Resources.NotFoundException {
+                KeyguardBiometricViewController keyguardBiometricViewController = this.this$0;
                 int strongAuthForUser = keyguardBiometricViewController.keyguardUpdateMonitor.mStrongAuthTracker.getStrongAuthForUser(i);
                 if ((strongAuthForUser & 1) == 0 && (strongAuthForUser & 2) == 0 && (strongAuthForUser & 4) == 0 && (strongAuthForUser & 8) == 0 && (strongAuthForUser & 16) == 0 && (strongAuthForUser & 32) == 0) {
                     return;
@@ -374,12 +371,12 @@ public class KeyguardBiometricViewController extends ViewController implements S
 
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
             public final void onUserSwitchComplete(int i) {
-                KeyguardBiometricViewController.this.currentUserId = i;
+                this.this$0.currentUserId = i;
             }
         };
     }
 
-    public static final void access$onClickRetryButton(KeyguardBiometricViewController keyguardBiometricViewController) {
+    public static final void access$onClickRetryButton(KeyguardBiometricViewController keyguardBiometricViewController) throws Resources.NotFoundException {
         if (keyguardBiometricViewController.isHiddenRetry) {
             return;
         }
@@ -393,7 +390,7 @@ public class KeyguardBiometricViewController extends ViewController implements S
         }
     }
 
-    public static final void access$updateErrorText(final KeyguardBiometricViewController keyguardBiometricViewController, String str) {
+    public static final void access$updateErrorText(final KeyguardBiometricViewController keyguardBiometricViewController, String str) throws Resources.NotFoundException {
         if (keyguardBiometricViewController.bouncerShowing && !keyguardBiometricViewController.isLockOut) {
             keyguardBiometricViewController.clearView();
             keyguardBiometricViewController.biometricRetryContainer.setVisibility(0);
@@ -403,7 +400,7 @@ public class KeyguardBiometricViewController extends ViewController implements S
             OneShotPreDrawListener.add(systemUITextView, new Runnable() { // from class: com.android.keyguard.biometrics.KeyguardBiometricViewController$setErrorText$1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    KeyguardBiometricViewController keyguardBiometricViewController2 = KeyguardBiometricViewController.this;
+                    KeyguardBiometricViewController keyguardBiometricViewController2 = this.this$0;
                     SystemUITextView systemUITextView2 = keyguardBiometricViewController2.biometricErrorText;
                     if (systemUITextView2.getText().length() == 0) {
                         SystemUITextView systemUITextView3 = keyguardBiometricViewController2.biometricErrorText;
@@ -458,17 +455,17 @@ public class KeyguardBiometricViewController extends ViewController implements S
     }
 
     public final void acceptLockStarModifier() {
-        boolean isLockStarEnabled;
+        boolean zIsLockStarEnabled;
         PluginLockStar pluginLockStar;
         boolean z = LsRune.SECURITY_SUB_DISPLAY_LOCK;
         PluginLockStarManager pluginLockStarManager = this.pluginLockStarManager;
         if (z) {
-            isLockStarEnabled = this.isLockStarEnabled;
+            zIsLockStarEnabled = this.isLockStarEnabled;
         } else {
             PluginLockStar pluginLockStar2 = pluginLockStarManager.mPluginLockStar;
-            isLockStarEnabled = pluginLockStar2 != null ? pluginLockStar2.isLockStarEnabled() : false;
+            zIsLockStarEnabled = pluginLockStar2 != null ? pluginLockStar2.isLockStarEnabled() : false;
         }
-        if (isLockStarEnabled && (pluginLockStar = pluginLockStarManager.mPluginLockStar) != null) {
+        if (zIsLockStarEnabled && (pluginLockStar = pluginLockStarManager.mPluginLockStar) != null) {
             PluginLockStar.Modifier modifier = pluginLockStar.getModifier("lockIconVisibility");
             if (modifier != null) {
                 modifier.accept(this.lockIconView);
@@ -500,7 +497,7 @@ public class KeyguardBiometricViewController extends ViewController implements S
     }
 
     public final void handleBiometricAttemptLockout(long j) {
-        long elapsedRealtime = j - SystemClock.elapsedRealtime();
+        long jElapsedRealtime = j - SystemClock.elapsedRealtime();
         KeyguardBiometricsCountDownTimer keyguardBiometricsCountDownTimer = this.biometricCountDownTimer;
         if (keyguardBiometricsCountDownTimer != null) {
             keyguardBiometricsCountDownTimer.stop();
@@ -509,7 +506,7 @@ public class KeyguardBiometricViewController extends ViewController implements S
         SystemUITextView systemUITextView = this.biometricLockOutMessage;
         systemUITextView.setVisibility(8);
         Log.d("KeyguardBiometricView", "handleBiometricsAttemptLockout( elapsedRealtimeDeadline = " + j + " )");
-        this.biometricCountDownTimer = new KeyguardBiometricsCountDownTimer(getContext(), elapsedRealtime, 1000L, this.biometricLockOutMessage);
+        this.biometricCountDownTimer = new KeyguardBiometricsCountDownTimer(getContext(), jElapsedRealtime, 1000L, this.biometricLockOutMessage);
         systemUITextView.setVisibility(0);
         KeyguardBiometricsCountDownTimer keyguardBiometricsCountDownTimer2 = this.biometricCountDownTimer;
         if (keyguardBiometricsCountDownTimer2 != null) {
@@ -517,7 +514,7 @@ public class KeyguardBiometricViewController extends ViewController implements S
         }
     }
 
-    public final void initLockStarLockIcon(boolean z) {
+    public final void initLockStarLockIcon(boolean z) throws Resources.NotFoundException {
         SecLockIconView secLockIconView = this.lockIconView;
         secLockIconView.mIsLockStarEnabled = z;
         updateLockIconDrawable(false, true);
@@ -538,14 +535,14 @@ public class KeyguardBiometricViewController extends ViewController implements S
     }
 
     @Override // com.android.systemui.util.ViewController
-    public final void onViewAttached() {
+    public final void onViewAttached() throws Resources.NotFoundException {
         this.keyguardUpdateMonitor.registerCallback(this.keyguardUpdateMonitorCallback);
         this.displayLifecycle.addObserver(this.mDisplayLifeCycleObserver);
         this.biometricRetryContainer.setOnClickListener(new View.OnClickListener() { // from class: com.android.keyguard.biometrics.KeyguardBiometricViewController$inflateRetryView$1
             @Override // android.view.View.OnClickListener
-            public final void onClick(View view) {
+            public final void onClick(View view) throws Resources.NotFoundException {
                 view.getVisibility();
-                KeyguardBiometricViewController.access$onClickRetryButton(KeyguardBiometricViewController.this);
+                KeyguardBiometricViewController.access$onClickRetryButton(this.this$0);
             }
         });
         this.biometricRetryContainer.setVisibility(8);
@@ -567,9 +564,9 @@ public class KeyguardBiometricViewController extends ViewController implements S
         }
         PluginLockStarManager pluginLockStarManager = this.pluginLockStarManager;
         PluginLockStar pluginLockStar = pluginLockStarManager.mPluginLockStar;
-        boolean isLockStarEnabled = pluginLockStar != null ? pluginLockStar.isLockStarEnabled() : false;
-        this.isLockStarEnabled = isLockStarEnabled;
-        this.lockIconView.mIsLockStarEnabled = isLockStarEnabled;
+        boolean zIsLockStarEnabled = pluginLockStar != null ? pluginLockStar.isLockStarEnabled() : false;
+        this.isLockStarEnabled = zIsLockStarEnabled;
+        this.lockIconView.mIsLockStarEnabled = zIsLockStarEnabled;
         pluginLockStarManager.registerCallback("KeyguardBiometricView", this.lockStarCallback);
     }
 
@@ -606,7 +603,7 @@ public class KeyguardBiometricViewController extends ViewController implements S
     }
 
     public final void startLockIconAnimation(boolean z) {
-        ObjectAnimator ofFloat;
+        ObjectAnimator objectAnimatorOfFloat;
         ((KeyguardBiometricView) this.mView).setAlpha(0.0f);
         if (z) {
             SpringForce springForce = new SpringForce(1.0f);
@@ -622,15 +619,15 @@ public class KeyguardBiometricViewController extends ViewController implements S
             springAnimation2.mValue = 0.7f;
             springAnimation2.mStartValueIsSet = true;
             springAnimation2.start();
-            ofFloat = ObjectAnimator.ofFloat(this.mView, (Property<T, Float>) View.ALPHA, 0.0f, 1.0f);
-            KeyguardSecPatternViewController$$ExternalSyntheticOutline0.m(0.17f, 0.17f, 0.4f, 1.0f, ofFloat);
-            ofFloat.setDuration(300L);
+            objectAnimatorOfFloat = ObjectAnimator.ofFloat(this.mView, (Property<T, Float>) View.ALPHA, 0.0f, 1.0f);
+            KeyguardSecPatternViewController$$ExternalSyntheticOutline0.m(0.17f, 0.17f, 0.4f, 1.0f, objectAnimatorOfFloat);
+            objectAnimatorOfFloat.setDuration(300L);
         } else {
-            ofFloat = ObjectAnimator.ofFloat(this.mView, (Property<T, Float>) View.ALPHA, 1.0f, 0.0f);
-            KeyguardSecPatternViewController$$ExternalSyntheticOutline0.m(0.33f, 0.0f, 0.1f, 1.0f, ofFloat);
-            ofFloat.setDuration(200L);
+            objectAnimatorOfFloat = ObjectAnimator.ofFloat(this.mView, (Property<T, Float>) View.ALPHA, 1.0f, 0.0f);
+            KeyguardSecPatternViewController$$ExternalSyntheticOutline0.m(0.33f, 0.0f, 0.1f, 1.0f, objectAnimatorOfFloat);
+            objectAnimatorOfFloat.setDuration(200L);
         }
-        ofFloat.start();
+        objectAnimatorOfFloat.start();
     }
 
     public final void updateBiometricViewLayout() {
@@ -653,29 +650,29 @@ public class KeyguardBiometricViewController extends ViewController implements S
         ((KeyguardBiometricView) this.mView).setPadding(0, 0, 0, 0);
         int rotation = DeviceState.getRotation(DeviceState.getRotation(((KeyguardBiometricView) this.mView).defaultDisplay.getRotation()));
         if (rotation == 1 || rotation == 3) {
-            boolean isHiddenInputContainer = keyguardUpdateMonitor.isHiddenInputContainer();
-            if (DeviceType.isTablet() || !DeviceState.shouldEnableKeyguardScreenRotation(getContext()) || isHiddenInputContainer || (z2 && getContext().getResources().getConfiguration().semDisplayDeviceType == 0 && !DeviceState.isSmartViewFitToActiveDisplay())) {
+            boolean zIsHiddenInputContainer = keyguardUpdateMonitor.isHiddenInputContainer();
+            if (DeviceType.isTablet() || !DeviceState.shouldEnableKeyguardScreenRotation(getContext()) || zIsHiddenInputContainer || (z2 && getContext().getResources().getConfiguration().semDisplayDeviceType == 0 && !DeviceState.isSmartViewFitToActiveDisplay())) {
                 updateLockContainerMargin$1();
                 constraintSet.applyTo((ConstraintLayout) ((KeyguardBiometricView) this.mView).getParent());
                 return;
             }
             Rect bounds = getResources().getConfiguration().windowConfiguration.getBounds();
-            int width = DeviceState.shouldEnableKeyguardScreenRotation(getContext()) ? bounds.width() : Math.min(bounds.width(), bounds.height());
+            int iWidth = DeviceState.shouldEnableKeyguardScreenRotation(getContext()) ? bounds.width() : Math.min(bounds.width(), bounds.height());
             int dimensionPixelSize2 = getResources().getDimensionPixelSize(R.dimen.navigation_bar_frame_height);
             int inDisplayFingerprintHeight = DeviceState.getInDisplayFingerprintHeight();
-            boolean isInDisplayFingerprintMarginAccepted = keyguardUpdateMonitor.isInDisplayFingerprintMarginAccepted();
-            if (isInDisplayFingerprintMarginAccepted) {
+            boolean zIsInDisplayFingerprintMarginAccepted = keyguardUpdateMonitor.isInDisplayFingerprintMarginAccepted();
+            if (zIsInDisplayFingerprintMarginAccepted) {
                 Configuration configuration = getResources().getConfiguration();
                 int i = SecurityUtils.sPINContainerBottomMargin;
                 boolean z3 = configuration.getLayoutDirection() == 1;
                 dimensionPixelSize2 += ((z3 || rotation != 3) && !(z3 && rotation == 1)) ? 0 : inDisplayFingerprintHeight - dimensionPixelSize2;
             }
-            constraintSet.constrainWidth(((KeyguardBiometricView) this.mView).getId(), SecurityUtils.calculateLandscapeViewWidth(width, getContext()));
+            constraintSet.constrainWidth(((KeyguardBiometricView) this.mView).getId(), SecurityUtils.calculateLandscapeViewWidth(iWidth, getContext()));
             constraintSet.constrainHeight(((KeyguardBiometricView) this.mView).getId(), -2);
             constraintSet.connect(((KeyguardBiometricView) this.mView).getId(), 7, -1, 7);
             constraintSet.connect(((KeyguardBiometricView) this.mView).getId(), 6, 0, 6, dimensionPixelSize2);
             ((KeyguardBiometricView) this.mView).setPadding(0, 0, dimensionPixelSize, 0);
-            if (isInDisplayFingerprintMarginAccepted && z) {
+            if (zIsInDisplayFingerprintMarginAccepted && z) {
                 if (rotation == 1) {
                     ((KeyguardBiometricView) this.mView).setPadding(0, 0, dimensionPixelSize, 0);
                 } else {
@@ -691,7 +688,7 @@ public class KeyguardBiometricViewController extends ViewController implements S
         updateLockContainerMargin$1();
     }
 
-    public final void updateLayout$3() {
+    public final void updateLayout$3() throws Resources.NotFoundException {
         if (this.bouncerShowing) {
             updateLockIcon();
             updateBiometricViewLayout();
@@ -716,7 +713,7 @@ public class KeyguardBiometricViewController extends ViewController implements S
         secLockIconView.setLayoutParams(layoutParams);
     }
 
-    public final void updateLockIcon() {
+    public final void updateLockIcon() throws Resources.NotFoundException {
         KeyguardUpdateMonitor keyguardUpdateMonitor = this.keyguardUpdateMonitor;
         boolean z = (!keyguardUpdateMonitor.isFaceOptionEnabled() || !keyguardUpdateMonitor.isUnlockingWithBiometricAllowed(keyguardUpdateMonitor.getFaceStrongBiometric()) || this.isHiddenRetry || this.isRunning || this.isLockOut || keyguardUpdateMonitor.isFullscreenBouncer() || keyguardUpdateMonitor.getUserUnlockedWithBiometric(this.currentUserId) || keyguardUpdateMonitor.isKeyguardUnlocking()) ? false : true;
         if (keyguardUpdateMonitor.isForgotPasswordView()) {
@@ -737,7 +734,7 @@ public class KeyguardBiometricViewController extends ViewController implements S
         this.debugCount = 0;
     }
 
-    public final void updateLockIconDrawable(boolean z, boolean z2) {
+    public final void updateLockIconDrawable(boolean z, boolean z2) throws Resources.NotFoundException {
         int i = z ? R.drawable.ic_biometric_retry_button : R.drawable.lock_ic_lock_mtrl_00;
         int dimensionPixelSize = z ? getResources().getDimensionPixelSize(R.dimen.kg_biometric_view_retry_icon_size) : getResources().getDimensionPixelSize(R.dimen.kg_biometric_view_height);
         if (i != this.drawableResId || z2) {
@@ -756,21 +753,21 @@ public class KeyguardBiometricViewController extends ViewController implements S
         }
     }
 
-    public final void updateLockIconVisibility(boolean z) {
-        boolean z2 = false;
+    public final void updateLockIconVisibility(boolean z) throws Resources.NotFoundException {
+        boolean zIsLockStarEnabled = false;
         this.lockIconView.setVisibility((z && this.keyguardUpdateMonitor.isSecure()) ? 0 : 8);
         if (LsRune.SECURITY_SUB_DISPLAY_LOCK) {
-            z2 = this.isLockStarEnabled;
+            zIsLockStarEnabled = this.isLockStarEnabled;
         } else {
             PluginLockStar pluginLockStar = this.pluginLockStarManager.mPluginLockStar;
             if (pluginLockStar != null) {
-                z2 = pluginLockStar.isLockStarEnabled();
+                zIsLockStarEnabled = pluginLockStar.isLockStarEnabled();
             }
         }
-        initLockStarLockIcon(z2);
+        initLockStarLockIcon(zIsLockStarEnabled);
     }
 
-    public final void updateVisibility$3() {
+    public final void updateVisibility$3() throws Resources.NotFoundException {
         clearView();
         boolean z = this.bouncerShowing;
         updateLockIconVisibility(z);

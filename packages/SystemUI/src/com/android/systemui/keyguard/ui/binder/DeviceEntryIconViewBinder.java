@@ -16,7 +16,6 @@ import kotlin.coroutines.EmptyCoroutineContext;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class DeviceEntryIconViewBinder {
     static {
@@ -27,7 +26,7 @@ public final class DeviceEntryIconViewBinder {
     }
 
     /* renamed from: bind-7D8XEZs, reason: not valid java name */
-    public static final void m2602bind7D8XEZs(CoroutineScope coroutineScope, CoroutineDispatcher coroutineDispatcher, DeviceEntryIconView deviceEntryIconView, DeviceEntryIconViewModel deviceEntryIconViewModel, DeviceEntryForegroundViewModel deviceEntryForegroundViewModel, DeviceEntryBackgroundViewModel deviceEntryBackgroundViewModel, FalsingManager falsingManager, VibratorHelper vibratorHelper, MSDLPlayer mSDLPlayer, Color color) {
+    public static final void m2619bind7D8XEZs(CoroutineScope coroutineScope, CoroutineDispatcher coroutineDispatcher, DeviceEntryIconView deviceEntryIconView, DeviceEntryIconViewModel deviceEntryIconViewModel, DeviceEntryForegroundViewModel deviceEntryForegroundViewModel, DeviceEntryBackgroundViewModel deviceEntryBackgroundViewModel, FalsingManager falsingManager, VibratorHelper vibratorHelper, MSDLPlayer mSDLPlayer, Color color) {
         DisposableHandles disposableHandles = new DisposableHandles();
         TouchHandlingView touchHandlingView = deviceEntryIconView.touchHandlingView;
         ImageView imageView = deviceEntryIconView.iconView;

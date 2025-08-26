@@ -7,7 +7,6 @@ import kotlinx.coroutines.Job;
 import kotlinx.coroutines.channels.BufferOverflow;
 import kotlinx.coroutines.flow.internal.FusibleFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class ReadonlySharedFlow implements SharedFlow, CancellableFlow, FusibleFlow {
     public final /* synthetic */ SharedFlow $$delegate_0;

@@ -44,9 +44,9 @@ public interface ISelectedNbIotSatelliteSubscriptionCallback extends IInterface 
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISelectedNbIotSatelliteSubscriptionCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISelectedNbIotSatelliteSubscriptionCallback)) {
-                return (ISelectedNbIotSatelliteSubscriptionCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISelectedNbIotSatelliteSubscriptionCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISelectedNbIotSatelliteSubscriptionCallback)) {
+                return (ISelectedNbIotSatelliteSubscriptionCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,9 +73,9 @@ public interface ISelectedNbIotSatelliteSubscriptionCallback extends IInterface 
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onSelectedNbIotSatelliteSubscriptionChanged(readInt);
+                onSelectedNbIotSatelliteSubscriptionChanged(i3);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -99,13 +99,13 @@ public interface ISelectedNbIotSatelliteSubscriptionCallback extends IInterface 
 
             @Override // android.telephony.satellite.ISelectedNbIotSatelliteSubscriptionCallback
             public void onSelectedNbIotSatelliteSubscriptionChanged(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISelectedNbIotSatelliteSubscriptionCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISelectedNbIotSatelliteSubscriptionCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

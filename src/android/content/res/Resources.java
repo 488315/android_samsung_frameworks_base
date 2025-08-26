@@ -239,18 +239,18 @@ public class Resources {
     }
 
     public Typeface getFont(int i) throws NotFoundException {
-        TypedValue obtainTempTypedValue = obtainTempTypedValue();
+        TypedValue typedValueObtainTempTypedValue = obtainTempTypedValue();
         try {
             ResourcesImpl resourcesImpl = this.mResourcesImpl;
-            resourcesImpl.getValue(i, obtainTempTypedValue, true);
-            Typeface loadFont = resourcesImpl.loadFont(this, obtainTempTypedValue, i);
-            if (loadFont != null) {
-                return loadFont;
+            resourcesImpl.getValue(i, typedValueObtainTempTypedValue, true);
+            Typeface typefaceLoadFont = resourcesImpl.loadFont(this, typedValueObtainTempTypedValue, i);
+            if (typefaceLoadFont != null) {
+                return typefaceLoadFont;
             }
-            releaseTempTypedValue(obtainTempTypedValue);
+            releaseTempTypedValue(typedValueObtainTempTypedValue);
             throw new NotFoundException("Font resource ID #0x" + Integer.toHexString(i));
         } finally {
-            releaseTempTypedValue(obtainTempTypedValue);
+            releaseTempTypedValue(typedValueObtainTempTypedValue);
         }
     }
 
@@ -258,15 +258,15 @@ public class Resources {
         return this.mResourcesImpl.loadFont(this, typedValue, i);
     }
 
-    public void preloadFonts(int i) {
-        TypedArray obtainTypedArray = obtainTypedArray(i);
+    public void preloadFonts(int i) throws NotFoundException {
+        TypedArray typedArrayObtainTypedArray = obtainTypedArray(i);
         try {
-            int length = obtainTypedArray.length();
+            int length = typedArrayObtainTypedArray.length();
             for (int i2 = 0; i2 < length; i2++) {
-                obtainTypedArray.getFont(i2);
+                typedArrayObtainTypedArray.getFont(i2);
             }
         } finally {
-            obtainTypedArray.recycle();
+            typedArrayObtainTypedArray.recycle();
         }
     }
 
@@ -325,37 +325,37 @@ public class Resources {
         if (resourceArraySize < 0) {
             throw new NotFoundException("Array resource ID #0x" + Integer.toHexString(i));
         }
-        TypedArray obtain = TypedArray.obtain(this, resourceArraySize);
-        obtain.mLength = resourcesImpl.getAssets().getResourceArray(i, obtain.mData);
-        obtain.mIndices[0] = 0;
-        return obtain;
+        TypedArray typedArrayObtain = TypedArray.obtain(this, resourceArraySize);
+        typedArrayObtain.mLength = resourcesImpl.getAssets().getResourceArray(i, typedArrayObtain.mData);
+        typedArrayObtain.mIndices[0] = 0;
+        return typedArrayObtain;
     }
 
     public float getDimension(int i) throws NotFoundException {
-        TypedValue obtainTempTypedValue = obtainTempTypedValue();
+        TypedValue typedValueObtainTempTypedValue = obtainTempTypedValue();
         try {
             ResourcesImpl resourcesImpl = this.mResourcesImpl;
-            resourcesImpl.getValue(i, obtainTempTypedValue, true);
-            if (obtainTempTypedValue.type == 5) {
-                return TypedValue.complexToDimension(obtainTempTypedValue.data, resourcesImpl.getDisplayMetrics());
+            resourcesImpl.getValue(i, typedValueObtainTempTypedValue, true);
+            if (typedValueObtainTempTypedValue.type == 5) {
+                return TypedValue.complexToDimension(typedValueObtainTempTypedValue.data, resourcesImpl.getDisplayMetrics());
             }
-            throw new NotFoundException("Resource ID #0x" + Integer.toHexString(i) + " type #0x" + Integer.toHexString(obtainTempTypedValue.type) + " is not valid");
+            throw new NotFoundException("Resource ID #0x" + Integer.toHexString(i) + " type #0x" + Integer.toHexString(typedValueObtainTempTypedValue.type) + " is not valid");
         } finally {
-            releaseTempTypedValue(obtainTempTypedValue);
+            releaseTempTypedValue(typedValueObtainTempTypedValue);
         }
     }
 
     public int getDimensionPixelOffset(int i) throws NotFoundException {
-        TypedValue obtainTempTypedValue = obtainTempTypedValue();
+        TypedValue typedValueObtainTempTypedValue = obtainTempTypedValue();
         try {
             ResourcesImpl resourcesImpl = this.mResourcesImpl;
-            resourcesImpl.getValue(i, obtainTempTypedValue, true);
-            if (obtainTempTypedValue.type == 5) {
-                return TypedValue.complexToDimensionPixelOffset(obtainTempTypedValue.data, resourcesImpl.getDisplayMetrics());
+            resourcesImpl.getValue(i, typedValueObtainTempTypedValue, true);
+            if (typedValueObtainTempTypedValue.type == 5) {
+                return TypedValue.complexToDimensionPixelOffset(typedValueObtainTempTypedValue.data, resourcesImpl.getDisplayMetrics());
             }
-            throw new NotFoundException("Resource ID #0x" + Integer.toHexString(i) + " type #0x" + Integer.toHexString(obtainTempTypedValue.type) + " is not valid");
+            throw new NotFoundException("Resource ID #0x" + Integer.toHexString(i) + " type #0x" + Integer.toHexString(typedValueObtainTempTypedValue.type) + " is not valid");
         } finally {
-            releaseTempTypedValue(obtainTempTypedValue);
+            releaseTempTypedValue(typedValueObtainTempTypedValue);
         }
     }
 
@@ -364,32 +364,32 @@ public class Resources {
     }
 
     public int getDimensionPixelSize(int i, DisplayMetrics displayMetrics) throws NotFoundException {
-        TypedValue obtainTempTypedValue = obtainTempTypedValue();
+        TypedValue typedValueObtainTempTypedValue = obtainTempTypedValue();
         try {
             ResourcesImpl resourcesImpl = this.mResourcesImpl;
-            resourcesImpl.getValue(i, obtainTempTypedValue, true);
-            if (obtainTempTypedValue.type == 5) {
+            resourcesImpl.getValue(i, typedValueObtainTempTypedValue, true);
+            if (typedValueObtainTempTypedValue.type == 5) {
                 if (displayMetrics != null) {
-                    return TypedValue.complexToDimensionPixelSize(obtainTempTypedValue.data, displayMetrics);
+                    return TypedValue.complexToDimensionPixelSize(typedValueObtainTempTypedValue.data, displayMetrics);
                 }
-                return TypedValue.complexToDimensionPixelSize(obtainTempTypedValue.data, resourcesImpl.getDisplayMetrics());
+                return TypedValue.complexToDimensionPixelSize(typedValueObtainTempTypedValue.data, resourcesImpl.getDisplayMetrics());
             }
-            throw new NotFoundException("Resource ID #0x" + Integer.toHexString(i) + " type #0x" + Integer.toHexString(obtainTempTypedValue.type) + " is not valid");
+            throw new NotFoundException("Resource ID #0x" + Integer.toHexString(i) + " type #0x" + Integer.toHexString(typedValueObtainTempTypedValue.type) + " is not valid");
         } finally {
-            releaseTempTypedValue(obtainTempTypedValue);
+            releaseTempTypedValue(typedValueObtainTempTypedValue);
         }
     }
 
     public float getFraction(int i, int i2, int i3) {
-        TypedValue obtainTempTypedValue = obtainTempTypedValue();
+        TypedValue typedValueObtainTempTypedValue = obtainTempTypedValue();
         try {
-            this.mResourcesImpl.getValue(i, obtainTempTypedValue, true);
-            if (obtainTempTypedValue.type == 6) {
-                return TypedValue.complexToFraction(obtainTempTypedValue.data, i2, i3);
+            this.mResourcesImpl.getValue(i, typedValueObtainTempTypedValue, true);
+            if (typedValueObtainTempTypedValue.type == 6) {
+                return TypedValue.complexToFraction(typedValueObtainTempTypedValue.data, i2, i3);
             }
-            throw new NotFoundException("Resource ID #0x" + Integer.toHexString(i) + " type #0x" + Integer.toHexString(obtainTempTypedValue.type) + " is not valid");
+            throw new NotFoundException("Resource ID #0x" + Integer.toHexString(i) + " type #0x" + Integer.toHexString(typedValueObtainTempTypedValue.type) + " is not valid");
         } finally {
-            releaseTempTypedValue(obtainTempTypedValue);
+            releaseTempTypedValue(typedValueObtainTempTypedValue);
         }
     }
 
@@ -412,12 +412,12 @@ public class Resources {
     }
 
     public Drawable getDrawableForDensity(int i, int i2, Theme theme) {
-        TypedValue obtainTempTypedValue = obtainTempTypedValue();
+        TypedValue typedValueObtainTempTypedValue = obtainTempTypedValue();
         try {
-            this.mResourcesImpl.getValueForDensity(i, i2, obtainTempTypedValue, true);
-            return loadDrawable(obtainTempTypedValue, i, i2, theme);
+            this.mResourcesImpl.getValueForDensity(i, i2, typedValueObtainTempTypedValue, true);
+            return loadDrawable(typedValueObtainTempTypedValue, i, i2, theme);
         } finally {
-            releaseTempTypedValue(obtainTempTypedValue);
+            releaseTempTypedValue(typedValueObtainTempTypedValue);
         }
     }
 
@@ -426,14 +426,14 @@ public class Resources {
     }
 
     @Deprecated
-    public Movie getMovie(int i) throws NotFoundException {
-        InputStream openRawResource = openRawResource(i);
-        Movie decodeStream = Movie.decodeStream(openRawResource);
+    public Movie getMovie(int i) throws NotFoundException, IOException {
+        InputStream inputStreamOpenRawResource = openRawResource(i);
+        Movie movieDecodeStream = Movie.decodeStream(inputStreamOpenRawResource);
         try {
-            openRawResource.close();
+            inputStreamOpenRawResource.close();
         } catch (IOException unused) {
         }
-        return decodeStream;
+        return movieDecodeStream;
     }
 
     @Deprecated
@@ -442,19 +442,19 @@ public class Resources {
     }
 
     public int getColor(int i, Theme theme) throws NotFoundException {
-        TypedValue obtainTempTypedValue = obtainTempTypedValue();
+        TypedValue typedValueObtainTempTypedValue = obtainTempTypedValue();
         try {
             ResourcesImpl resourcesImpl = this.mResourcesImpl;
-            resourcesImpl.getValue(i, obtainTempTypedValue, true);
-            if (obtainTempTypedValue.type >= 16 && obtainTempTypedValue.type <= 31) {
-                return obtainTempTypedValue.data;
+            resourcesImpl.getValue(i, typedValueObtainTempTypedValue, true);
+            if (typedValueObtainTempTypedValue.type >= 16 && typedValueObtainTempTypedValue.type <= 31) {
+                return typedValueObtainTempTypedValue.data;
             }
-            if (obtainTempTypedValue.type != 3) {
-                throw new NotFoundException("Resource ID #0x" + Integer.toHexString(i) + " type #0x" + Integer.toHexString(obtainTempTypedValue.type) + " is not valid");
+            if (typedValueObtainTempTypedValue.type != 3) {
+                throw new NotFoundException("Resource ID #0x" + Integer.toHexString(i) + " type #0x" + Integer.toHexString(typedValueObtainTempTypedValue.type) + " is not valid");
             }
-            return resourcesImpl.loadColorStateList(this, obtainTempTypedValue, i, theme).getDefaultColor();
+            return resourcesImpl.loadColorStateList(this, typedValueObtainTempTypedValue, i, theme).getDefaultColor();
         } finally {
-            releaseTempTypedValue(obtainTempTypedValue);
+            releaseTempTypedValue(typedValueObtainTempTypedValue);
         }
     }
 
@@ -468,13 +468,13 @@ public class Resources {
     }
 
     public ColorStateList getColorStateList(int i, Theme theme) throws NotFoundException {
-        TypedValue obtainTempTypedValue = obtainTempTypedValue();
+        TypedValue typedValueObtainTempTypedValue = obtainTempTypedValue();
         try {
             ResourcesImpl resourcesImpl = this.mResourcesImpl;
-            resourcesImpl.getValue(i, obtainTempTypedValue, true);
-            return resourcesImpl.loadColorStateList(this, obtainTempTypedValue, i, theme);
+            resourcesImpl.getValue(i, typedValueObtainTempTypedValue, true);
+            return resourcesImpl.loadColorStateList(this, typedValueObtainTempTypedValue, i, theme);
         } finally {
-            releaseTempTypedValue(obtainTempTypedValue);
+            releaseTempTypedValue(typedValueObtainTempTypedValue);
         }
     }
 
@@ -487,41 +487,41 @@ public class Resources {
     }
 
     public boolean getBoolean(int i) throws NotFoundException {
-        TypedValue obtainTempTypedValue = obtainTempTypedValue();
+        TypedValue typedValueObtainTempTypedValue = obtainTempTypedValue();
         try {
-            this.mResourcesImpl.getValue(i, obtainTempTypedValue, true);
-            if (obtainTempTypedValue.type >= 16 && obtainTempTypedValue.type <= 31) {
-                return obtainTempTypedValue.data != 0;
+            this.mResourcesImpl.getValue(i, typedValueObtainTempTypedValue, true);
+            if (typedValueObtainTempTypedValue.type >= 16 && typedValueObtainTempTypedValue.type <= 31) {
+                return typedValueObtainTempTypedValue.data != 0;
             }
-            throw new NotFoundException("Resource ID #0x" + Integer.toHexString(i) + " type #0x" + Integer.toHexString(obtainTempTypedValue.type) + " is not valid");
+            throw new NotFoundException("Resource ID #0x" + Integer.toHexString(i) + " type #0x" + Integer.toHexString(typedValueObtainTempTypedValue.type) + " is not valid");
         } finally {
-            releaseTempTypedValue(obtainTempTypedValue);
+            releaseTempTypedValue(typedValueObtainTempTypedValue);
         }
     }
 
     public int getInteger(int i) throws NotFoundException {
-        TypedValue obtainTempTypedValue = obtainTempTypedValue();
+        TypedValue typedValueObtainTempTypedValue = obtainTempTypedValue();
         try {
-            this.mResourcesImpl.getValue(i, obtainTempTypedValue, true);
-            if (obtainTempTypedValue.type >= 16 && obtainTempTypedValue.type <= 31) {
-                return obtainTempTypedValue.data;
+            this.mResourcesImpl.getValue(i, typedValueObtainTempTypedValue, true);
+            if (typedValueObtainTempTypedValue.type >= 16 && typedValueObtainTempTypedValue.type <= 31) {
+                return typedValueObtainTempTypedValue.data;
             }
-            throw new NotFoundException("Resource ID #0x" + Integer.toHexString(i) + " type #0x" + Integer.toHexString(obtainTempTypedValue.type) + " is not valid");
+            throw new NotFoundException("Resource ID #0x" + Integer.toHexString(i) + " type #0x" + Integer.toHexString(typedValueObtainTempTypedValue.type) + " is not valid");
         } finally {
-            releaseTempTypedValue(obtainTempTypedValue);
+            releaseTempTypedValue(typedValueObtainTempTypedValue);
         }
     }
 
     public float getFloat(int i) {
-        TypedValue obtainTempTypedValue = obtainTempTypedValue();
+        TypedValue typedValueObtainTempTypedValue = obtainTempTypedValue();
         try {
-            this.mResourcesImpl.getValue(i, obtainTempTypedValue, true);
-            if (obtainTempTypedValue.type == 4) {
-                return obtainTempTypedValue.getFloat();
+            this.mResourcesImpl.getValue(i, typedValueObtainTempTypedValue, true);
+            if (typedValueObtainTempTypedValue.type == 4) {
+                return typedValueObtainTempTypedValue.getFloat();
             }
-            throw new NotFoundException("Resource ID #0x" + Integer.toHexString(i) + " type #0x" + Integer.toHexString(obtainTempTypedValue.type) + " is not valid");
+            throw new NotFoundException("Resource ID #0x" + Integer.toHexString(i) + " type #0x" + Integer.toHexString(typedValueObtainTempTypedValue.type) + " is not valid");
         } finally {
-            releaseTempTypedValue(obtainTempTypedValue);
+            releaseTempTypedValue(typedValueObtainTempTypedValue);
         }
     }
 
@@ -538,11 +538,11 @@ public class Resources {
     }
 
     public InputStream openRawResource(int i) throws NotFoundException {
-        TypedValue obtainTempTypedValue = obtainTempTypedValue();
+        TypedValue typedValueObtainTempTypedValue = obtainTempTypedValue();
         try {
-            return openRawResource(i, obtainTempTypedValue);
+            return openRawResource(i, typedValueObtainTempTypedValue);
         } finally {
-            releaseTempTypedValue(obtainTempTypedValue);
+            releaseTempTypedValue(typedValueObtainTempTypedValue);
         }
     }
 
@@ -572,11 +572,11 @@ public class Resources {
     }
 
     public AssetFileDescriptor openRawResourceFd(int i) throws NotFoundException {
-        TypedValue obtainTempTypedValue = obtainTempTypedValue();
+        TypedValue typedValueObtainTempTypedValue = obtainTempTypedValue();
         try {
-            return this.mResourcesImpl.openRawResourceFd(i, obtainTempTypedValue);
+            return this.mResourcesImpl.openRawResourceFd(i, typedValueObtainTempTypedValue);
         } finally {
-            releaseTempTypedValue(obtainTempTypedValue);
+            releaseTempTypedValue(typedValueObtainTempTypedValue);
         }
     }
 
@@ -626,43 +626,43 @@ public class Resources {
         }
 
         public TypedArray obtainStyledAttributes(int[] iArr) {
-            TypedArray obtainStyledAttributes;
+            TypedArray typedArrayObtainStyledAttributes;
             synchronized (this.mLock) {
-                obtainStyledAttributes = this.mThemeImpl.obtainStyledAttributes(this, null, iArr, 0, 0);
+                typedArrayObtainStyledAttributes = this.mThemeImpl.obtainStyledAttributes(this, null, iArr, 0, 0);
             }
-            return obtainStyledAttributes;
+            return typedArrayObtainStyledAttributes;
         }
 
         public TypedArray obtainStyledAttributes(int i, int[] iArr) throws NotFoundException {
-            TypedArray obtainStyledAttributes;
+            TypedArray typedArrayObtainStyledAttributes;
             synchronized (this.mLock) {
-                obtainStyledAttributes = this.mThemeImpl.obtainStyledAttributes(this, null, iArr, 0, i);
+                typedArrayObtainStyledAttributes = this.mThemeImpl.obtainStyledAttributes(this, null, iArr, 0, i);
             }
-            return obtainStyledAttributes;
+            return typedArrayObtainStyledAttributes;
         }
 
         public TypedArray obtainStyledAttributes(AttributeSet attributeSet, int[] iArr, int i, int i2) {
-            TypedArray obtainStyledAttributes;
+            TypedArray typedArrayObtainStyledAttributes;
             synchronized (this.mLock) {
-                obtainStyledAttributes = this.mThemeImpl.obtainStyledAttributes(this, attributeSet, iArr, i, i2);
+                typedArrayObtainStyledAttributes = this.mThemeImpl.obtainStyledAttributes(this, attributeSet, iArr, i, i2);
             }
-            return obtainStyledAttributes;
+            return typedArrayObtainStyledAttributes;
         }
 
         public TypedArray resolveAttributes(int[] iArr, int[] iArr2) {
-            TypedArray resolveAttributes;
+            TypedArray typedArrayResolveAttributes;
             synchronized (this.mLock) {
-                resolveAttributes = this.mThemeImpl.resolveAttributes(this, iArr, iArr2);
+                typedArrayResolveAttributes = this.mThemeImpl.resolveAttributes(this, iArr, iArr2);
             }
-            return resolveAttributes;
+            return typedArrayResolveAttributes;
         }
 
         public boolean resolveAttribute(int i, TypedValue typedValue, boolean z) {
-            boolean resolveAttribute;
+            boolean zResolveAttribute;
             synchronized (this.mLock) {
-                resolveAttribute = this.mThemeImpl.resolveAttribute(i, typedValue, z);
+                zResolveAttribute = this.mThemeImpl.resolveAttribute(i, typedValue, z);
             }
-            return resolveAttribute;
+            return zResolveAttribute;
         }
 
         public int[] getAllAttributes() {
@@ -740,7 +740,7 @@ public class Resources {
             return theme;
         }
 
-        public void encode(ViewHierarchyEncoder viewHierarchyEncoder) {
+        public void encode(ViewHierarchyEncoder viewHierarchyEncoder) throws IOException {
             viewHierarchyEncoder.beginObject(this);
             String[] theme = getTheme();
             for (int i = 0; i < theme.length; i += 2) {
@@ -761,7 +761,7 @@ public class Resources {
             }
         }
 
-        public int getExplicitStyle(AttributeSet attributeSet) {
+        public int getExplicitStyle(AttributeSet attributeSet) throws NotFoundException {
             int styleAttribute;
             if (attributeSet == null || (styleAttribute = attributeSet.getStyleAttribute()) == 0) {
                 return 0;
@@ -876,9 +876,9 @@ public class Resources {
             if (this.mForce == null) {
                 this.mForce = new boolean[4];
             }
-            int findValue = findValue(i, z);
-            if (findValue >= 0) {
-                moveToLast(findValue);
+            int iFindValue = findValue(i, z);
+            if (iFindValue >= 0) {
+                moveToLast(iFindValue);
                 return;
             }
             this.mResId = GrowingArrayUtils.append(this.mResId, this.mCount, i);
@@ -921,7 +921,7 @@ public class Resources {
         }
 
         /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-        public ThemeKey m1103clone() {
+        public ThemeKey m1107clone() {
             ThemeKey themeKey = new ThemeKey();
             themeKey.mResId = this.mResId;
             themeKey.mForce = this.mForce;
@@ -943,9 +943,7 @@ public class Resources {
             this.mThemeRefs.removeIf(new Predicate() { // from class: android.content.res.Resources$$ExternalSyntheticLambda0
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
-                    boolean refersTo;
-                    refersTo = ((WeakReference) obj).refersTo(null);
-                    return refersTo;
+                    return ((WeakReference) obj).refersTo(null);
                 }
             });
             this.mThemeRefsNextFlushSize = Math.min(Math.max(32, nextPowerOf2(this.mThemeRefs.size())), 512);
@@ -963,11 +961,11 @@ public class Resources {
     }
 
     public TypedArray obtainAttributes(AttributeSet attributeSet, int[] iArr) {
-        TypedArray obtain = TypedArray.obtain(this, iArr.length);
+        TypedArray typedArrayObtain = TypedArray.obtain(this, iArr.length);
         XmlBlock.Parser parser = (XmlBlock.Parser) attributeSet;
-        this.mResourcesImpl.getAssets().retrieveAttributes(parser, iArr, obtain.mData, obtain.mIndices);
-        obtain.mXml = parser;
-        return obtain;
+        this.mResourcesImpl.getAssets().retrieveAttributes(parser, iArr, typedArrayObtain.mData, typedArrayObtain.mIndices);
+        typedArrayObtain.mXml = parser;
+        return typedArrayObtain;
     }
 
     @Deprecated
@@ -1062,30 +1060,30 @@ public class Resources {
     }
 
     public void parseBundleExtra(String str, AttributeSet attributeSet, Bundle bundle) throws XmlPullParserException {
-        TypedArray obtainAttributes = obtainAttributes(attributeSet, R.styleable.Extra);
-        String string = obtainAttributes.getString(0);
+        TypedArray typedArrayObtainAttributes = obtainAttributes(attributeSet, R.styleable.Extra);
+        String string = typedArrayObtainAttributes.getString(0);
         if (string == null) {
-            obtainAttributes.recycle();
+            typedArrayObtainAttributes.recycle();
             throw new XmlPullParserException("<" + str + "> requires an android:name attribute at " + attributeSet.getPositionDescription());
         }
-        TypedValue peekValue = obtainAttributes.peekValue(1);
-        if (peekValue != null) {
-            if (peekValue.type == 3) {
-                bundle.putCharSequence(string, peekValue.coerceToString());
-            } else if (peekValue.type == 18) {
-                bundle.putBoolean(string, peekValue.data != 0);
-            } else if (peekValue.type >= 16 && peekValue.type <= 31) {
-                bundle.putInt(string, peekValue.data);
-            } else if (peekValue.type == 4) {
-                bundle.putFloat(string, peekValue.getFloat());
+        TypedValue typedValuePeekValue = typedArrayObtainAttributes.peekValue(1);
+        if (typedValuePeekValue != null) {
+            if (typedValuePeekValue.type == 3) {
+                bundle.putCharSequence(string, typedValuePeekValue.coerceToString());
+            } else if (typedValuePeekValue.type == 18) {
+                bundle.putBoolean(string, typedValuePeekValue.data != 0);
+            } else if (typedValuePeekValue.type >= 16 && typedValuePeekValue.type <= 31) {
+                bundle.putInt(string, typedValuePeekValue.data);
+            } else if (typedValuePeekValue.type == 4) {
+                bundle.putFloat(string, typedValuePeekValue.getFloat());
             } else {
-                obtainAttributes.recycle();
+                typedArrayObtainAttributes.recycle();
                 throw new XmlPullParserException("<" + str + "> only supports string, integer, float, color, and boolean at " + attributeSet.getPositionDescription());
             }
-            obtainAttributes.recycle();
+            typedArrayObtainAttributes.recycle();
             return;
         }
-        obtainAttributes.recycle();
+        typedArrayObtainAttributes.recycle();
         throw new XmlPullParserException("<" + str + "> requires an android:value or android:resource attribute at " + attributeSet.getPositionDescription());
     }
 
@@ -1113,28 +1111,28 @@ public class Resources {
     /* JADX WARN: Type inference failed for: r2v0 */
     /* JADX WARN: Type inference failed for: r2v1, types: [android.content.res.Resources] */
     /* JADX WARN: Type inference failed for: r2v3, types: [int] */
-    XmlResourceParser loadXmlResourceParser(int i, String str) throws NotFoundException {
+    XmlResourceParser loadXmlResourceParser(int i, String str) throws Throwable {
         ?? r2;
-        TypedValue obtainTempTypedValue = obtainTempTypedValue();
+        TypedValue typedValueObtainTempTypedValue = obtainTempTypedValue();
         try {
-            this.mResourcesImpl.getValue(i, obtainTempTypedValue, true);
-            r2 = obtainTempTypedValue.type;
-        } catch (Throwable th) {
-            th = th;
-            r2 = this;
-        }
-        try {
-            if (r2 == 3) {
-                XmlResourceParser loadXmlResourceParser = loadXmlResourceParser(obtainTempTypedValue.string.toString(), i, obtainTempTypedValue.assetCookie, str, obtainTempTypedValue.usesFeatureFlags);
-                releaseTempTypedValue(obtainTempTypedValue);
-                return loadXmlResourceParser;
+            this.mResourcesImpl.getValue(i, typedValueObtainTempTypedValue, true);
+            r2 = typedValueObtainTempTypedValue.type;
+            try {
+                if (r2 == 3) {
+                    XmlResourceParser xmlResourceParserLoadXmlResourceParser = loadXmlResourceParser(typedValueObtainTempTypedValue.string.toString(), i, typedValueObtainTempTypedValue.assetCookie, str, typedValueObtainTempTypedValue.usesFeatureFlags);
+                    releaseTempTypedValue(typedValueObtainTempTypedValue);
+                    return xmlResourceParserLoadXmlResourceParser;
+                }
+                throw new NotFoundException("Resource ID #0x" + Integer.toHexString(i) + " type #0x" + Integer.toHexString(typedValueObtainTempTypedValue.type) + " is not valid");
+            } catch (Throwable th) {
+                th = th;
+                Throwable th2 = th;
+                r2.releaseTempTypedValue(typedValueObtainTempTypedValue);
+                throw th2;
             }
-            throw new NotFoundException("Resource ID #0x" + Integer.toHexString(i) + " type #0x" + Integer.toHexString(obtainTempTypedValue.type) + " is not valid");
-        } catch (Throwable th2) {
-            th = th2;
-            Throwable th3 = th;
-            r2.releaseTempTypedValue(obtainTempTypedValue);
-            throw th3;
+        } catch (Throwable th3) {
+            th = th3;
+            r2 = this;
         }
     }
 
@@ -1229,16 +1227,16 @@ public class Resources {
             Resources system = getSystem();
             system.startPreloading();
             Log.i(TAG, "Preloading resources...");
-            long uptimeMillis = SystemClock.uptimeMillis();
-            TypedArray obtainTypedArray = system.obtainTypedArray(R.array.preloaded_drawables);
-            int preloadDrawables = preloadDrawables(system, obtainTypedArray);
-            obtainTypedArray.recycle();
-            Log.i(TAG, "...preloaded " + preloadDrawables + " resources in " + (SystemClock.uptimeMillis() - uptimeMillis) + "ms.");
-            long uptimeMillis2 = SystemClock.uptimeMillis();
-            TypedArray obtainTypedArray2 = system.obtainTypedArray(R.array.preloaded_color_state_lists);
-            int preloadColorStateLists = preloadColorStateLists(system, obtainTypedArray2);
-            obtainTypedArray2.recycle();
-            Log.i(TAG, "...preloaded " + preloadColorStateLists + " resources in " + (SystemClock.uptimeMillis() - uptimeMillis2) + "ms.");
+            long jUptimeMillis = SystemClock.uptimeMillis();
+            TypedArray typedArrayObtainTypedArray = system.obtainTypedArray(R.array.preloaded_drawables);
+            int iPreloadDrawables = preloadDrawables(system, typedArrayObtainTypedArray);
+            typedArrayObtainTypedArray.recycle();
+            Log.i(TAG, "...preloaded " + iPreloadDrawables + " resources in " + (SystemClock.uptimeMillis() - jUptimeMillis) + "ms.");
+            long jUptimeMillis2 = SystemClock.uptimeMillis();
+            TypedArray typedArrayObtainTypedArray2 = system.obtainTypedArray(R.array.preloaded_color_state_lists);
+            int iPreloadColorStateLists = preloadColorStateLists(system, typedArrayObtainTypedArray2);
+            typedArrayObtainTypedArray2.recycle();
+            Log.i(TAG, "...preloaded " + iPreloadColorStateLists + " resources in " + (SystemClock.uptimeMillis() - jUptimeMillis2) + "ms.");
             system.finishPreloading();
         } catch (RuntimeException e) {
             Log.w(TAG, "Failure preloading resources", e);
@@ -1293,7 +1291,7 @@ public class Resources {
             sResourcesHistory.forEach(new Consumer() { // from class: android.content.res.Resources$$ExternalSyntheticLambda1
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    Resources.lambda$dumpHistory$1(ArrayMap.this, (Resources) obj);
+                    Resources.lambda$dumpHistory$1(arrayMap, (Resources) obj);
                 }
             });
             int i = 0;

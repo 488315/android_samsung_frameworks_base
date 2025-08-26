@@ -3,6 +3,7 @@ package com.android.systemui.qs;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.AttributeSet;
@@ -35,7 +36,6 @@ import com.android.systemui.qs.tileimpl.HeightOverrideable;
 import com.android.systemui.qs.tileimpl.QSTileViewImpl;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class PagedTileLayout extends ViewPager implements SecQSPanel.QSTileLayout {
     public static final PagedTileLayout$$ExternalSyntheticLambda0 SCROLL_CUBIC = new PagedTileLayout$$ExternalSyntheticLambda0();
@@ -57,7 +57,6 @@ public class PagedTileLayout extends ViewPager implements SecQSPanel.QSTileLayou
     public final ArrayList mTiles;
     public final UiEventLogger mUiEventLogger;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.qs.PagedTileLayout$3, reason: invalid class name */
     public class AnonymousClass3 extends PagerAdapter {
         public AnonymousClass3() {
@@ -177,7 +176,7 @@ public class PagedTileLayout extends ViewPager implements SecQSPanel.QSTileLayou
     }
 
     @Override // androidx.viewpager.widget.ViewPager, android.view.View
-    public final void computeScroll() {
+    public final void computeScroll() throws Resources.NotFoundException {
         if (!this.mScroller.isFinished() && this.mScroller.computeScrollOffset()) {
             if (!this.mFakeDragging && !this.mIsBeingDragged) {
                 this.mFakeDragging = true;
@@ -190,11 +189,11 @@ public class PagedTileLayout extends ViewPager implements SecQSPanel.QSTileLayou
                 } else {
                     velocityTracker.clear();
                 }
-                long uptimeMillis = SystemClock.uptimeMillis();
-                MotionEvent obtain = MotionEvent.obtain(uptimeMillis, uptimeMillis, 0, 0.0f, 0.0f, 0);
-                this.mVelocityTracker.addMovement(obtain);
-                obtain.recycle();
-                this.mFakeDragBeginTime = uptimeMillis;
+                long jUptimeMillis = SystemClock.uptimeMillis();
+                MotionEvent motionEventObtain = MotionEvent.obtain(jUptimeMillis, jUptimeMillis, 0, 0.0f, 0.0f, 0);
+                this.mVelocityTracker.addMovement(motionEventObtain);
+                motionEventObtain.recycle();
+                this.mFakeDragBeginTime = jUptimeMillis;
             }
             try {
                 super.fakeDragBy(getScrollX() - this.mScroller.getCurrX());
@@ -209,8 +208,8 @@ public class PagedTileLayout extends ViewPager implements SecQSPanel.QSTileLayou
                 final int size = this.mPages.size() - 1;
                 post(new Runnable() { // from class: com.android.systemui.qs.PagedTileLayout$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
-                    public final void run() {
-                        PagedTileLayout pagedTileLayout = PagedTileLayout.this;
+                    public final void run() throws Resources.NotFoundException {
+                        PagedTileLayout pagedTileLayout = this.f$0;
                         int i = size;
                         PagedTileLayout$$ExternalSyntheticLambda0 pagedTileLayout$$ExternalSyntheticLambda0 = PagedTileLayout.SCROLL_CUBIC;
                         pagedTileLayout.setCurrentItem(i, true);
@@ -234,7 +233,7 @@ public class PagedTileLayout extends ViewPager implements SecQSPanel.QSTileLayou
         super.computeScroll();
     }
 
-    public final TileLayout createTileLayout() {
+    public final TileLayout createTileLayout() throws Resources.NotFoundException {
         int i = 0;
         TileLayout tileLayout = (TileLayout) LayoutInflater.from(getContext()).inflate(R.layout.qs_paged_page, (ViewGroup) this, false);
         int i2 = this.mMinRows;
@@ -317,17 +316,17 @@ public class PagedTileLayout extends ViewPager implements SecQSPanel.QSTileLayou
                 axisValue = motionEvent.getAxisValue(10);
             }
             if (axisValue != 0.0f || f != 0.0f) {
-                int i = 0;
+                int width = 0;
                 boolean z = !isLayoutRtl() ? !(axisValue > 0.0f || f > 0.0f) : !(axisValue < 0.0f || f < 0.0f);
                 if (this.mScroller.isFinished()) {
                     if (!z && this.mCurItem != 0) {
-                        i = -getWidth();
+                        width = -getWidth();
                     } else if (z && this.mCurItem != this.mPages.size() - 1) {
-                        i = getWidth();
+                        width = getWidth();
                     }
-                    int i2 = i;
-                    if (i2 != 0) {
-                        this.mScroller.startScroll(getScrollX(), getScrollY(), i2, 0, 300);
+                    int i = width;
+                    if (i != 0) {
+                        this.mScroller.startScroll(getScrollX(), getScrollY(), i, 0, 300);
                         postInvalidateOnAnimation();
                     }
                 }
@@ -345,18 +344,18 @@ public class PagedTileLayout extends ViewPager implements SecQSPanel.QSTileLayou
             return;
         }
         accessibilityEvent.setItemCount(this.mAdapter.getCount());
-        boolean isLayoutRtl = isLayoutRtl();
-        int i = this.mCurItem;
-        if (isLayoutRtl) {
-            i = (this.mPages.size() - 1) - i;
+        boolean zIsLayoutRtl = isLayoutRtl();
+        int size = this.mCurItem;
+        if (zIsLayoutRtl) {
+            size = (this.mPages.size() - 1) - size;
         }
-        accessibilityEvent.setFromIndex(i);
-        boolean isLayoutRtl2 = isLayoutRtl();
-        int i2 = this.mCurItem;
-        if (isLayoutRtl2) {
-            i2 = (this.mPages.size() - 1) - i2;
+        accessibilityEvent.setFromIndex(size);
+        boolean zIsLayoutRtl2 = isLayoutRtl();
+        int size2 = this.mCurItem;
+        if (zIsLayoutRtl2) {
+            size2 = (this.mPages.size() - 1) - size2;
         }
-        accessibilityEvent.setToIndex(i2);
+        accessibilityEvent.setToIndex(size2);
     }
 
     public final void onInitializeAccessibilityNodeInfoInternal(AccessibilityNodeInfo accessibilityNodeInfo) {
@@ -389,23 +388,23 @@ public class PagedTileLayout extends ViewPager implements SecQSPanel.QSTileLayou
                 this.mDistributeTiles = false;
                 int size3 = this.mTiles.size();
                 TileLayout tileLayout = (TileLayout) this.mPages.get(0);
-                int max = Math.max(size3 / Math.max(tileLayout.mColumns * tileLayout.mRows, 1), 1);
+                int iMax = Math.max(size3 / Math.max(tileLayout.mColumns * tileLayout.mRows, 1), 1);
                 TileLayout tileLayout2 = (TileLayout) this.mPages.get(0);
-                if (size3 > Math.max(tileLayout2.mColumns * tileLayout2.mRows, 1) * max) {
-                    max++;
+                if (size3 > Math.max(tileLayout2.mColumns * tileLayout2.mRows, 1) * iMax) {
+                    iMax++;
                 }
                 int size4 = this.mPages.size();
                 for (int i4 = 0; i4 < size4; i4++) {
                     ((TileLayout) this.mPages.get(i4)).removeAllViews();
                 }
-                if (size4 != max) {
-                    while (this.mPages.size() < max) {
+                if (size4 != iMax) {
+                    while (this.mPages.size() < iMax) {
                         ConstantStringsLoggerImpl constantStringsLoggerImpl = this.mLogger.$$delegate_0;
                         constantStringsLoggerImpl.getClass();
                         LogBuffer.log$default(constantStringsLoggerImpl.buffer, constantStringsLoggerImpl.tag, LogLevel.DEBUG, "Adding new page");
                         this.mPages.add(createTileLayout());
                     }
-                    while (this.mPages.size() > max) {
+                    while (this.mPages.size() > iMax) {
                         ConstantStringsLoggerImpl constantStringsLoggerImpl2 = this.mLogger.$$delegate_0;
                         constantStringsLoggerImpl2.getClass();
                         LogBuffer.log$default(constantStringsLoggerImpl2.buffer, constantStringsLoggerImpl2.tag, LogLevel.DEBUG, "Removing page");
@@ -421,22 +420,22 @@ public class PagedTileLayout extends ViewPager implements SecQSPanel.QSTileLayou
                     }
                 }
                 TileLayout tileLayout3 = (TileLayout) this.mPages.get(0);
-                int max2 = Math.max(tileLayout3.mColumns * tileLayout3.mRows, 1);
+                int iMax2 = Math.max(tileLayout3.mColumns * tileLayout3.mRows, 1);
                 int size5 = this.mTiles.size();
                 QSLogger qSLogger = this.mLogger;
                 qSLogger.getClass();
                 LogLevel logLevel = LogLevel.DEBUG;
                 QSLogger$$ExternalSyntheticLambda0 qSLogger$$ExternalSyntheticLambda0 = new QSLogger$$ExternalSyntheticLambda0(8);
                 LogBuffer logBuffer = qSLogger.buffer;
-                LogMessage obtain = logBuffer.obtain("QSLog", logLevel, qSLogger$$ExternalSyntheticLambda0, null);
-                LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
-                logMessageImpl.int1 = max2;
+                LogMessage logMessageObtain = logBuffer.obtain("QSLog", logLevel, qSLogger$$ExternalSyntheticLambda0, null);
+                LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
+                logMessageImpl.int1 = iMax2;
                 logMessageImpl.int2 = size5;
-                logBuffer.commit(obtain);
+                logBuffer.commit(logMessageObtain);
                 int i6 = 0;
                 for (int i7 = 0; i7 < size5; i7++) {
                     SecQSPanelControllerBase.TileRecord tileRecord = (SecQSPanelControllerBase.TileRecord) this.mTiles.get(i7);
-                    if (((TileLayout) this.mPages.get(i6)).mRecords.size() == max2) {
+                    if (((TileLayout) this.mPages.get(i6)).mRecords.size() == iMax2) {
                         i6++;
                     }
                     QSLogger qSLogger2 = this.mLogger;
@@ -445,11 +444,11 @@ public class PagedTileLayout extends ViewPager implements SecQSPanel.QSTileLayou
                     LogLevel logLevel2 = LogLevel.DEBUG;
                     QSLogger$$ExternalSyntheticLambda0 qSLogger$$ExternalSyntheticLambda02 = new QSLogger$$ExternalSyntheticLambda0(10);
                     LogBuffer logBuffer2 = qSLogger2.buffer;
-                    LogMessage obtain2 = logBuffer2.obtain("QSLog", logLevel2, qSLogger$$ExternalSyntheticLambda02, null);
-                    LogMessageImpl logMessageImpl2 = (LogMessageImpl) obtain2;
+                    LogMessage logMessageObtain2 = logBuffer2.obtain("QSLog", logLevel2, qSLogger$$ExternalSyntheticLambda02, null);
+                    LogMessageImpl logMessageImpl2 = (LogMessageImpl) logMessageObtain2;
                     logMessageImpl2.str1 = simpleName;
                     logMessageImpl2.int1 = i6;
-                    logBuffer2.commit(obtain2);
+                    logBuffer2.commit(logMessageObtain2);
                     ((TileLayout) this.mPages.get(i6)).addTile(tileRecord);
                 }
             }
@@ -480,62 +479,37 @@ public class PagedTileLayout extends ViewPager implements SecQSPanel.QSTileLayou
     @Override // android.view.View
     public final void onRtlPropertiesChanged(int i) {
         boolean z = this.mLayoutDirection == 1;
-        int i2 = this.mCurItem;
+        int size = this.mCurItem;
         if (z) {
-            i2 = (this.mPages.size() - 1) - i2;
+            size = (this.mPages.size() - 1) - size;
         }
         super.onRtlPropertiesChanged(i);
         if (this.mLayoutDirection != i) {
             this.mLayoutDirection = i;
             setAdapter(this.mAdapter);
-            setCurrentItem(i2, false);
+            setCurrentItem(size, false);
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:15:0x001e, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:9:0x001e, code lost:
     
         r5 = 4096;
      */
     @Override // android.view.View
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean performAccessibilityAction(int r5, android.os.Bundle r6) {
-        /*
-            r4 = this;
-            android.view.accessibility.AccessibilityNodeInfo$AccessibilityAction r0 = android.view.accessibility.AccessibilityNodeInfo.AccessibilityAction.ACTION_PAGE_LEFT
-            int r0 = r0.getId()
-            android.view.accessibility.AccessibilityNodeInfo$AccessibilityAction r1 = android.view.accessibility.AccessibilityNodeInfo.AccessibilityAction.ACTION_PAGE_RIGHT
-            int r1 = r1.getId()
-            r2 = 8192(0x2000, float:1.148E-41)
-            r3 = 4096(0x1000, float:5.74E-42)
-            if (r5 == r0) goto L14
-            if (r5 != r1) goto L23
-        L14:
-            boolean r1 = r4.isLayoutRtl()
-            if (r1 != 0) goto L20
-            if (r5 != r0) goto L1e
-        L1c:
-            r5 = r2
-            goto L23
-        L1e:
-            r5 = r3
-            goto L23
-        L20:
-            if (r5 != r0) goto L1c
-            goto L1e
-        L23:
-            boolean r6 = super.performAccessibilityAction(r5, r6)
-            if (r6 == 0) goto L30
-            if (r5 == r2) goto L2d
-            if (r5 != r3) goto L30
-        L2d:
-            r4.requestAccessibilityFocus()
-        L30:
-            return r6
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.PagedTileLayout.performAccessibilityAction(int, android.os.Bundle):boolean");
+    public final boolean performAccessibilityAction(int i, Bundle bundle) {
+        int id = AccessibilityNodeInfo.AccessibilityAction.ACTION_PAGE_LEFT.getId();
+        int id2 = AccessibilityNodeInfo.AccessibilityAction.ACTION_PAGE_RIGHT.getId();
+        if (i == id || i == id2) {
+            i = !isLayoutRtl() ? 8192 : 8192;
+        }
+        boolean zPerformAccessibilityAction = super.performAccessibilityAction(i, bundle);
+        if (zPerformAccessibilityAction && (i == 8192 || i == 4096)) {
+            requestAccessibilityFocus();
+        }
+        return zPerformAccessibilityAction;
     }
 
     @Override // com.android.systemui.qs.SecQSPanel.QSTileLayout
@@ -554,13 +528,13 @@ public class PagedTileLayout extends ViewPager implements SecQSPanel.QSTileLayou
 
     @Override // com.android.systemui.qs.SecQSPanel.QSTileLayout
     public final void saveInstanceState(Bundle bundle) {
-        int i = this.mPageToRestore;
-        if (i == -1) {
-            boolean isLayoutRtl = isLayoutRtl();
-            int i2 = this.mCurItem;
-            i = isLayoutRtl ? (this.mPages.size() - 1) - i2 : i2;
+        int size = this.mPageToRestore;
+        if (size == -1) {
+            boolean zIsLayoutRtl = isLayoutRtl();
+            int i = this.mCurItem;
+            size = zIsLayoutRtl ? (this.mPages.size() - 1) - i : i;
         }
-        bundle.putInt("current_page", i);
+        bundle.putInt("current_page", size);
     }
 
     @Override // androidx.viewpager.widget.ViewPager
@@ -599,19 +573,19 @@ public class PagedTileLayout extends ViewPager implements SecQSPanel.QSTileLayou
 
     @Override // com.android.systemui.qs.SecQSPanel.QSTileLayout
     public final boolean updateResources() {
-        boolean z = false;
+        boolean zUpdateResources = false;
         for (int i = 0; i < this.mPages.size(); i++) {
-            z |= ((TileLayout) this.mPages.get(i)).updateResources();
+            zUpdateResources |= ((TileLayout) this.mPages.get(i)).updateResources();
         }
-        if (z) {
+        if (zUpdateResources) {
             this.mLogger.d("resources in pages changed", "forcing tile redistribution across pages, reason");
             this.mDistributeTiles = true;
             requestLayout();
-            return z;
+            return zUpdateResources;
         }
         ConstantStringsLoggerImpl constantStringsLoggerImpl = this.mLogger.$$delegate_0;
         constantStringsLoggerImpl.getClass();
         LogBuffer.log$default(constantStringsLoggerImpl.buffer, constantStringsLoggerImpl.tag, LogLevel.DEBUG, "resource in pages didn't change, tiles might be not redistributed");
-        return z;
+        return zUpdateResources;
     }
 }

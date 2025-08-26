@@ -21,7 +21,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.Ref$BooleanRef;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class FullMobileConnectionRepositoryKairos implements MobileConnectionRepositoryKairos, KairosBuilder {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -58,7 +57,6 @@ public final class FullMobileConnectionRepositoryKairos implements MobileConnect
     public final int subId;
     public final TableLogBuffer tableLogBuffer;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -68,7 +66,6 @@ public final class FullMobileConnectionRepositoryKairos implements MobileConnect
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DumpCache {
         public final MobileConnectionRepositoryKairos activeRepo;
         public final boolean isCarrierMerged;
@@ -120,7 +117,7 @@ public final class FullMobileConnectionRepositoryKairos implements MobileConnect
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i2) {
                     case 0:
@@ -128,9 +125,9 @@ public final class FullMobileConnectionRepositoryKairos implements MobileConnect
                         TableLogBuffer tableLogBuffer2 = fullMobileConnectionRepositoryKairos.tableLogBuffer;
                         State state2 = fullMobileConnectionRepositoryKairos.isCarrierMerged;
                         DiffableKt.logBooleanDiffsForTable(buildScope, state2, tableLogBuffer2, "", "isCarrierMerged");
-                        StateInit combine = CombineKt.combine(state2, fullMobileConnectionRepositoryKairos.activeRepo, new FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda44());
+                        StateInit stateInitCombine = CombineKt.combine(state2, fullMobileConnectionRepositoryKairos.activeRepo, new FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda44());
                         final int i3 = 0;
-                        ((BuildScopeImpl) buildScope).observe(combine, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda45
+                        ((BuildScopeImpl) buildScope).observe(stateInitCombine, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda45
                             @Override // kotlin.jvm.functions.Function2
                             public final Object invoke(Object obj2, Object obj3) {
                                 switch (i3) {
@@ -139,15 +136,15 @@ public final class FullMobileConnectionRepositoryKairos implements MobileConnect
                                         return Unit.INSTANCE;
                                     default:
                                         BuildScope buildScope2 = (BuildScope) obj2;
-                                        boolean booleanValue = ((Boolean) obj3).booleanValue();
+                                        boolean zBooleanValue = ((Boolean) obj3).booleanValue();
                                         FullMobileConnectionRepositoryKairos fullMobileConnectionRepositoryKairos2 = fullMobileConnectionRepositoryKairos;
-                                        if (!booleanValue) {
+                                        if (!zBooleanValue) {
                                             return fullMobileConnectionRepositoryKairos2.mobileRepo;
                                         }
                                         Function1 function12 = fullMobileConnectionRepositoryKairos2.carrierMergedRepoSpec;
                                         BuildScopeImpl buildScopeImpl = (BuildScopeImpl) buildScope2;
                                         buildScopeImpl.getClass();
-                                        return (MobileConnectionRepositoryKairos) function12.mo779invoke(buildScopeImpl);
+                                        return (MobileConnectionRepositoryKairos) function12.mo781invoke(buildScopeImpl);
                                 }
                             }
                         });
@@ -164,15 +161,15 @@ public final class FullMobileConnectionRepositoryKairos implements MobileConnect
                                         return Unit.INSTANCE;
                                     default:
                                         BuildScope buildScope2 = (BuildScope) obj2;
-                                        boolean booleanValue = ((Boolean) obj3).booleanValue();
+                                        boolean zBooleanValue = ((Boolean) obj3).booleanValue();
                                         FullMobileConnectionRepositoryKairos fullMobileConnectionRepositoryKairos22 = fullMobileConnectionRepositoryKairos2;
-                                        if (!booleanValue) {
+                                        if (!zBooleanValue) {
                                             return fullMobileConnectionRepositoryKairos22.mobileRepo;
                                         }
                                         Function1 function12 = fullMobileConnectionRepositoryKairos22.carrierMergedRepoSpec;
                                         BuildScopeImpl buildScopeImpl = (BuildScopeImpl) buildScope2;
                                         buildScopeImpl.getClass();
-                                        return (MobileConnectionRepositoryKairos) function12.mo779invoke(buildScopeImpl);
+                                        return (MobileConnectionRepositoryKairos) function12.mo781invoke(buildScopeImpl);
                                 }
                             }
                         });
@@ -180,7 +177,7 @@ public final class FullMobileConnectionRepositoryKairos implements MobileConnect
             }
         });
         final int i3 = 1;
-        State buildState = kairosBuilderImpl.buildState(new Function1(this) { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda0
+        State stateBuildState = kairosBuilderImpl.buildState(new Function1(this) { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda0
             public final /* synthetic */ FullMobileConnectionRepositoryKairos f$0;
 
             {
@@ -189,7 +186,7 @@ public final class FullMobileConnectionRepositoryKairos implements MobileConnect
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i3) {
                     case 0:
@@ -197,9 +194,9 @@ public final class FullMobileConnectionRepositoryKairos implements MobileConnect
                         TableLogBuffer tableLogBuffer2 = fullMobileConnectionRepositoryKairos.tableLogBuffer;
                         State state2 = fullMobileConnectionRepositoryKairos.isCarrierMerged;
                         DiffableKt.logBooleanDiffsForTable(buildScope, state2, tableLogBuffer2, "", "isCarrierMerged");
-                        StateInit combine = CombineKt.combine(state2, fullMobileConnectionRepositoryKairos.activeRepo, new FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda44());
+                        StateInit stateInitCombine = CombineKt.combine(state2, fullMobileConnectionRepositoryKairos.activeRepo, new FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda44());
                         final int i32 = 0;
-                        ((BuildScopeImpl) buildScope).observe(combine, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda45
+                        ((BuildScopeImpl) buildScope).observe(stateInitCombine, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda45
                             @Override // kotlin.jvm.functions.Function2
                             public final Object invoke(Object obj2, Object obj3) {
                                 switch (i32) {
@@ -208,15 +205,15 @@ public final class FullMobileConnectionRepositoryKairos implements MobileConnect
                                         return Unit.INSTANCE;
                                     default:
                                         BuildScope buildScope2 = (BuildScope) obj2;
-                                        boolean booleanValue = ((Boolean) obj3).booleanValue();
+                                        boolean zBooleanValue = ((Boolean) obj3).booleanValue();
                                         FullMobileConnectionRepositoryKairos fullMobileConnectionRepositoryKairos22 = fullMobileConnectionRepositoryKairos;
-                                        if (!booleanValue) {
+                                        if (!zBooleanValue) {
                                             return fullMobileConnectionRepositoryKairos22.mobileRepo;
                                         }
                                         Function1 function12 = fullMobileConnectionRepositoryKairos22.carrierMergedRepoSpec;
                                         BuildScopeImpl buildScopeImpl = (BuildScopeImpl) buildScope2;
                                         buildScopeImpl.getClass();
-                                        return (MobileConnectionRepositoryKairos) function12.mo779invoke(buildScopeImpl);
+                                        return (MobileConnectionRepositoryKairos) function12.mo781invoke(buildScopeImpl);
                                 }
                             }
                         });
@@ -233,24 +230,24 @@ public final class FullMobileConnectionRepositoryKairos implements MobileConnect
                                         return Unit.INSTANCE;
                                     default:
                                         BuildScope buildScope2 = (BuildScope) obj2;
-                                        boolean booleanValue = ((Boolean) obj3).booleanValue();
+                                        boolean zBooleanValue = ((Boolean) obj3).booleanValue();
                                         FullMobileConnectionRepositoryKairos fullMobileConnectionRepositoryKairos22 = fullMobileConnectionRepositoryKairos2;
-                                        if (!booleanValue) {
+                                        if (!zBooleanValue) {
                                             return fullMobileConnectionRepositoryKairos22.mobileRepo;
                                         }
                                         Function1 function12 = fullMobileConnectionRepositoryKairos22.carrierMergedRepoSpec;
                                         BuildScopeImpl buildScopeImpl = (BuildScopeImpl) buildScope2;
                                         buildScopeImpl.getClass();
-                                        return (MobileConnectionRepositoryKairos) function12.mo779invoke(buildScopeImpl);
+                                        return (MobileConnectionRepositoryKairos) function12.mo781invoke(buildScopeImpl);
                                 }
                             }
                         });
                 }
             }
         });
-        this.activeRepo = buildState;
+        this.activeRepo = stateBuildState;
         final int i4 = 6;
-        this.carrierId = StateKt.flatMap(buildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
+        this.carrierId = StateKt.flatMap(stateBuildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 MobileConnectionRepositoryKairos mobileConnectionRepositoryKairos2 = (MobileConnectionRepositoryKairos) obj2;
@@ -331,7 +328,7 @@ public final class FullMobileConnectionRepositoryKairos implements MobileConnect
             }
         });
         final int i5 = 13;
-        this.cdmaRoaming = StateKt.flatMap(buildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
+        this.cdmaRoaming = StateKt.flatMap(stateBuildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 MobileConnectionRepositoryKairos mobileConnectionRepositoryKairos2 = (MobileConnectionRepositoryKairos) obj2;
@@ -412,7 +409,7 @@ public final class FullMobileConnectionRepositoryKairos implements MobileConnect
             }
         });
         final int i6 = 17;
-        final StateInit flatMap = StateKt.flatMap(buildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
+        final StateInit stateInitFlatMap = StateKt.flatMap(stateBuildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 MobileConnectionRepositoryKairos mobileConnectionRepositoryKairos2 = (MobileConnectionRepositoryKairos) obj2;
@@ -496,74 +493,74 @@ public final class FullMobileConnectionRepositoryKairos implements MobileConnect
         onActivated(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda2
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i7) {
                     case 0:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap, this.tableLogBuffer, "", "isInService");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap, this.tableLogBuffer, "", "isInService");
                         break;
                     case 1:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap, this.tableLogBuffer, "", "primaryLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap, this.tableLogBuffer, "", "primaryLevel");
                         break;
                     case 2:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap, this.tableLogBuffer, "", "satelliteLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap, this.tableLogBuffer, "", "satelliteLevel");
                         break;
                     case 3:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap, this.tableLogBuffer, "");
                         break;
                     case 4:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap, this.tableLogBuffer, "");
                         break;
                     case 5:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap, this.tableLogBuffer, "", "carrierNetworkChangeActive");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap, this.tableLogBuffer, "", "carrierNetworkChangeActive");
                         break;
                     case 6:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap, this.tableLogBuffer, "");
                         break;
                     case 7:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap, this.tableLogBuffer, "", IMSParameter.GENERAL.DATA_ENABLED);
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap, this.tableLogBuffer, "", IMSParameter.GENERAL.DATA_ENABLED);
                         break;
                     case 8:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap, this.tableLogBuffer, "", "inflate");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap, this.tableLogBuffer, "", "inflate");
                         break;
                     case 9:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap, this.tableLogBuffer, "", "allowSlice");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap, this.tableLogBuffer, "", "allowSlice");
                         break;
                     case 10:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap, this.tableLogBuffer, "intent");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap, this.tableLogBuffer, "intent");
                         break;
                     case 11:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap, this.tableLogBuffer, "sub");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap, this.tableLogBuffer, "sub");
                         break;
                     case 12:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap, this.tableLogBuffer, "", "emergencyOnly");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap, this.tableLogBuffer, "", "emergencyOnly");
                         break;
                     case 13:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap, this.tableLogBuffer, "", "roaming");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap, this.tableLogBuffer, "", "roaming");
                         break;
                     case 14:
                         FullMobileConnectionRepositoryKairos fullMobileConnectionRepositoryKairos = this;
-                        StateInit stateInit = flatMap;
+                        StateInit stateInit = stateInitFlatMap;
                         Ref$BooleanRef ref$BooleanRef = new Ref$BooleanRef();
                         ref$BooleanRef.element = true;
                         ((BuildScopeImpl) buildScope).observe(stateInit, new DiffableKt$$ExternalSyntheticLambda9(fullMobileConnectionRepositoryKairos.tableLogBuffer, ref$BooleanRef));
                         break;
                     case 15:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap, this.tableLogBuffer, "", "isNtn");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap, this.tableLogBuffer, "", "isNtn");
                         break;
                     case 16:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap, this.tableLogBuffer, "", "isGsm");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap, this.tableLogBuffer, "", "isGsm");
                         break;
                     default:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap, this.tableLogBuffer, "", "cdmaLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap, this.tableLogBuffer, "", "cdmaLevel");
                         break;
                 }
                 return Unit.INSTANCE;
             }
         });
-        this.isEmergencyOnly = flatMap;
+        this.isEmergencyOnly = stateInitFlatMap;
         final int i8 = 19;
-        final StateInit flatMap2 = StateKt.flatMap(buildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
+        final StateInit stateInitFlatMap2 = StateKt.flatMap(stateBuildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 MobileConnectionRepositoryKairos mobileConnectionRepositoryKairos2 = (MobileConnectionRepositoryKairos) obj2;
@@ -647,74 +644,74 @@ public final class FullMobileConnectionRepositoryKairos implements MobileConnect
         onActivated(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda2
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i9) {
                     case 0:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap2, this.tableLogBuffer, "", "isInService");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap2, this.tableLogBuffer, "", "isInService");
                         break;
                     case 1:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap2, this.tableLogBuffer, "", "primaryLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap2, this.tableLogBuffer, "", "primaryLevel");
                         break;
                     case 2:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap2, this.tableLogBuffer, "", "satelliteLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap2, this.tableLogBuffer, "", "satelliteLevel");
                         break;
                     case 3:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap2, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap2, this.tableLogBuffer, "");
                         break;
                     case 4:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap2, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap2, this.tableLogBuffer, "");
                         break;
                     case 5:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap2, this.tableLogBuffer, "", "carrierNetworkChangeActive");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap2, this.tableLogBuffer, "", "carrierNetworkChangeActive");
                         break;
                     case 6:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap2, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap2, this.tableLogBuffer, "");
                         break;
                     case 7:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap2, this.tableLogBuffer, "", IMSParameter.GENERAL.DATA_ENABLED);
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap2, this.tableLogBuffer, "", IMSParameter.GENERAL.DATA_ENABLED);
                         break;
                     case 8:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap2, this.tableLogBuffer, "", "inflate");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap2, this.tableLogBuffer, "", "inflate");
                         break;
                     case 9:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap2, this.tableLogBuffer, "", "allowSlice");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap2, this.tableLogBuffer, "", "allowSlice");
                         break;
                     case 10:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap2, this.tableLogBuffer, "intent");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap2, this.tableLogBuffer, "intent");
                         break;
                     case 11:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap2, this.tableLogBuffer, "sub");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap2, this.tableLogBuffer, "sub");
                         break;
                     case 12:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap2, this.tableLogBuffer, "", "emergencyOnly");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap2, this.tableLogBuffer, "", "emergencyOnly");
                         break;
                     case 13:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap2, this.tableLogBuffer, "", "roaming");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap2, this.tableLogBuffer, "", "roaming");
                         break;
                     case 14:
                         FullMobileConnectionRepositoryKairos fullMobileConnectionRepositoryKairos = this;
-                        StateInit stateInit = flatMap2;
+                        StateInit stateInit = stateInitFlatMap2;
                         Ref$BooleanRef ref$BooleanRef = new Ref$BooleanRef();
                         ref$BooleanRef.element = true;
                         ((BuildScopeImpl) buildScope).observe(stateInit, new DiffableKt$$ExternalSyntheticLambda9(fullMobileConnectionRepositoryKairos.tableLogBuffer, ref$BooleanRef));
                         break;
                     case 15:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap2, this.tableLogBuffer, "", "isNtn");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap2, this.tableLogBuffer, "", "isNtn");
                         break;
                     case 16:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap2, this.tableLogBuffer, "", "isGsm");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap2, this.tableLogBuffer, "", "isGsm");
                         break;
                     default:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap2, this.tableLogBuffer, "", "cdmaLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap2, this.tableLogBuffer, "", "cdmaLevel");
                         break;
                 }
                 return Unit.INSTANCE;
             }
         });
-        this.isRoaming = flatMap2;
+        this.isRoaming = stateInitFlatMap2;
         final int i10 = 20;
-        final StateInit flatMap3 = StateKt.flatMap(buildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
+        final StateInit stateInitFlatMap3 = StateKt.flatMap(stateBuildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 MobileConnectionRepositoryKairos mobileConnectionRepositoryKairos2 = (MobileConnectionRepositoryKairos) obj2;
@@ -798,74 +795,74 @@ public final class FullMobileConnectionRepositoryKairos implements MobileConnect
         onActivated(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda2
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i11) {
                     case 0:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap3, this.tableLogBuffer, "", "isInService");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap3, this.tableLogBuffer, "", "isInService");
                         break;
                     case 1:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap3, this.tableLogBuffer, "", "primaryLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap3, this.tableLogBuffer, "", "primaryLevel");
                         break;
                     case 2:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap3, this.tableLogBuffer, "", "satelliteLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap3, this.tableLogBuffer, "", "satelliteLevel");
                         break;
                     case 3:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap3, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap3, this.tableLogBuffer, "");
                         break;
                     case 4:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap3, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap3, this.tableLogBuffer, "");
                         break;
                     case 5:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap3, this.tableLogBuffer, "", "carrierNetworkChangeActive");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap3, this.tableLogBuffer, "", "carrierNetworkChangeActive");
                         break;
                     case 6:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap3, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap3, this.tableLogBuffer, "");
                         break;
                     case 7:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap3, this.tableLogBuffer, "", IMSParameter.GENERAL.DATA_ENABLED);
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap3, this.tableLogBuffer, "", IMSParameter.GENERAL.DATA_ENABLED);
                         break;
                     case 8:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap3, this.tableLogBuffer, "", "inflate");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap3, this.tableLogBuffer, "", "inflate");
                         break;
                     case 9:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap3, this.tableLogBuffer, "", "allowSlice");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap3, this.tableLogBuffer, "", "allowSlice");
                         break;
                     case 10:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap3, this.tableLogBuffer, "intent");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap3, this.tableLogBuffer, "intent");
                         break;
                     case 11:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap3, this.tableLogBuffer, "sub");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap3, this.tableLogBuffer, "sub");
                         break;
                     case 12:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap3, this.tableLogBuffer, "", "emergencyOnly");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap3, this.tableLogBuffer, "", "emergencyOnly");
                         break;
                     case 13:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap3, this.tableLogBuffer, "", "roaming");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap3, this.tableLogBuffer, "", "roaming");
                         break;
                     case 14:
                         FullMobileConnectionRepositoryKairos fullMobileConnectionRepositoryKairos = this;
-                        StateInit stateInit = flatMap3;
+                        StateInit stateInit = stateInitFlatMap3;
                         Ref$BooleanRef ref$BooleanRef = new Ref$BooleanRef();
                         ref$BooleanRef.element = true;
                         ((BuildScopeImpl) buildScope).observe(stateInit, new DiffableKt$$ExternalSyntheticLambda9(fullMobileConnectionRepositoryKairos.tableLogBuffer, ref$BooleanRef));
                         break;
                     case 15:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap3, this.tableLogBuffer, "", "isNtn");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap3, this.tableLogBuffer, "", "isNtn");
                         break;
                     case 16:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap3, this.tableLogBuffer, "", "isGsm");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap3, this.tableLogBuffer, "", "isGsm");
                         break;
                     default:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap3, this.tableLogBuffer, "", "cdmaLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap3, this.tableLogBuffer, "", "cdmaLevel");
                         break;
                 }
                 return Unit.INSTANCE;
             }
         });
-        this.operatorAlphaShort = flatMap3;
+        this.operatorAlphaShort = stateInitFlatMap3;
         final int i12 = 0;
-        final StateInit flatMap4 = StateKt.flatMap(buildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
+        final StateInit stateInitFlatMap4 = StateKt.flatMap(stateBuildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 MobileConnectionRepositoryKairos mobileConnectionRepositoryKairos2 = (MobileConnectionRepositoryKairos) obj2;
@@ -949,74 +946,74 @@ public final class FullMobileConnectionRepositoryKairos implements MobileConnect
         onActivated(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda2
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i13) {
                     case 0:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap4, this.tableLogBuffer, "", "isInService");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap4, this.tableLogBuffer, "", "isInService");
                         break;
                     case 1:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap4, this.tableLogBuffer, "", "primaryLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap4, this.tableLogBuffer, "", "primaryLevel");
                         break;
                     case 2:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap4, this.tableLogBuffer, "", "satelliteLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap4, this.tableLogBuffer, "", "satelliteLevel");
                         break;
                     case 3:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap4, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap4, this.tableLogBuffer, "");
                         break;
                     case 4:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap4, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap4, this.tableLogBuffer, "");
                         break;
                     case 5:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap4, this.tableLogBuffer, "", "carrierNetworkChangeActive");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap4, this.tableLogBuffer, "", "carrierNetworkChangeActive");
                         break;
                     case 6:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap4, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap4, this.tableLogBuffer, "");
                         break;
                     case 7:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap4, this.tableLogBuffer, "", IMSParameter.GENERAL.DATA_ENABLED);
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap4, this.tableLogBuffer, "", IMSParameter.GENERAL.DATA_ENABLED);
                         break;
                     case 8:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap4, this.tableLogBuffer, "", "inflate");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap4, this.tableLogBuffer, "", "inflate");
                         break;
                     case 9:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap4, this.tableLogBuffer, "", "allowSlice");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap4, this.tableLogBuffer, "", "allowSlice");
                         break;
                     case 10:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap4, this.tableLogBuffer, "intent");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap4, this.tableLogBuffer, "intent");
                         break;
                     case 11:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap4, this.tableLogBuffer, "sub");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap4, this.tableLogBuffer, "sub");
                         break;
                     case 12:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap4, this.tableLogBuffer, "", "emergencyOnly");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap4, this.tableLogBuffer, "", "emergencyOnly");
                         break;
                     case 13:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap4, this.tableLogBuffer, "", "roaming");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap4, this.tableLogBuffer, "", "roaming");
                         break;
                     case 14:
                         FullMobileConnectionRepositoryKairos fullMobileConnectionRepositoryKairos = this;
-                        StateInit stateInit = flatMap4;
+                        StateInit stateInit = stateInitFlatMap4;
                         Ref$BooleanRef ref$BooleanRef = new Ref$BooleanRef();
                         ref$BooleanRef.element = true;
                         ((BuildScopeImpl) buildScope).observe(stateInit, new DiffableKt$$ExternalSyntheticLambda9(fullMobileConnectionRepositoryKairos.tableLogBuffer, ref$BooleanRef));
                         break;
                     case 15:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap4, this.tableLogBuffer, "", "isNtn");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap4, this.tableLogBuffer, "", "isNtn");
                         break;
                     case 16:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap4, this.tableLogBuffer, "", "isGsm");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap4, this.tableLogBuffer, "", "isGsm");
                         break;
                     default:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap4, this.tableLogBuffer, "", "cdmaLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap4, this.tableLogBuffer, "", "cdmaLevel");
                         break;
                 }
                 return Unit.INSTANCE;
             }
         });
-        this.isInService = flatMap4;
+        this.isInService = stateInitFlatMap4;
         final int i14 = 18;
-        final StateInit flatMap5 = StateKt.flatMap(buildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
+        final StateInit stateInitFlatMap5 = StateKt.flatMap(stateBuildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 MobileConnectionRepositoryKairos mobileConnectionRepositoryKairos2 = (MobileConnectionRepositoryKairos) obj2;
@@ -1100,74 +1097,74 @@ public final class FullMobileConnectionRepositoryKairos implements MobileConnect
         onActivated(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda2
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i15) {
                     case 0:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap5, this.tableLogBuffer, "", "isInService");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap5, this.tableLogBuffer, "", "isInService");
                         break;
                     case 1:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap5, this.tableLogBuffer, "", "primaryLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap5, this.tableLogBuffer, "", "primaryLevel");
                         break;
                     case 2:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap5, this.tableLogBuffer, "", "satelliteLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap5, this.tableLogBuffer, "", "satelliteLevel");
                         break;
                     case 3:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap5, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap5, this.tableLogBuffer, "");
                         break;
                     case 4:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap5, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap5, this.tableLogBuffer, "");
                         break;
                     case 5:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap5, this.tableLogBuffer, "", "carrierNetworkChangeActive");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap5, this.tableLogBuffer, "", "carrierNetworkChangeActive");
                         break;
                     case 6:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap5, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap5, this.tableLogBuffer, "");
                         break;
                     case 7:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap5, this.tableLogBuffer, "", IMSParameter.GENERAL.DATA_ENABLED);
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap5, this.tableLogBuffer, "", IMSParameter.GENERAL.DATA_ENABLED);
                         break;
                     case 8:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap5, this.tableLogBuffer, "", "inflate");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap5, this.tableLogBuffer, "", "inflate");
                         break;
                     case 9:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap5, this.tableLogBuffer, "", "allowSlice");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap5, this.tableLogBuffer, "", "allowSlice");
                         break;
                     case 10:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap5, this.tableLogBuffer, "intent");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap5, this.tableLogBuffer, "intent");
                         break;
                     case 11:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap5, this.tableLogBuffer, "sub");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap5, this.tableLogBuffer, "sub");
                         break;
                     case 12:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap5, this.tableLogBuffer, "", "emergencyOnly");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap5, this.tableLogBuffer, "", "emergencyOnly");
                         break;
                     case 13:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap5, this.tableLogBuffer, "", "roaming");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap5, this.tableLogBuffer, "", "roaming");
                         break;
                     case 14:
                         FullMobileConnectionRepositoryKairos fullMobileConnectionRepositoryKairos = this;
-                        StateInit stateInit = flatMap5;
+                        StateInit stateInit = stateInitFlatMap5;
                         Ref$BooleanRef ref$BooleanRef = new Ref$BooleanRef();
                         ref$BooleanRef.element = true;
                         ((BuildScopeImpl) buildScope).observe(stateInit, new DiffableKt$$ExternalSyntheticLambda9(fullMobileConnectionRepositoryKairos.tableLogBuffer, ref$BooleanRef));
                         break;
                     case 15:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap5, this.tableLogBuffer, "", "isNtn");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap5, this.tableLogBuffer, "", "isNtn");
                         break;
                     case 16:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap5, this.tableLogBuffer, "", "isGsm");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap5, this.tableLogBuffer, "", "isGsm");
                         break;
                     default:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap5, this.tableLogBuffer, "", "cdmaLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap5, this.tableLogBuffer, "", "cdmaLevel");
                         break;
                 }
                 return Unit.INSTANCE;
             }
         });
-        this.isNonTerrestrial = flatMap5;
+        this.isNonTerrestrial = stateInitFlatMap5;
         final int i16 = 21;
-        final StateInit flatMap6 = StateKt.flatMap(buildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
+        final StateInit stateInitFlatMap6 = StateKt.flatMap(stateBuildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 MobileConnectionRepositoryKairos mobileConnectionRepositoryKairos2 = (MobileConnectionRepositoryKairos) obj2;
@@ -1251,74 +1248,74 @@ public final class FullMobileConnectionRepositoryKairos implements MobileConnect
         onActivated(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda2
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i17) {
                     case 0:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap6, this.tableLogBuffer, "", "isInService");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap6, this.tableLogBuffer, "", "isInService");
                         break;
                     case 1:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap6, this.tableLogBuffer, "", "primaryLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap6, this.tableLogBuffer, "", "primaryLevel");
                         break;
                     case 2:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap6, this.tableLogBuffer, "", "satelliteLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap6, this.tableLogBuffer, "", "satelliteLevel");
                         break;
                     case 3:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap6, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap6, this.tableLogBuffer, "");
                         break;
                     case 4:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap6, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap6, this.tableLogBuffer, "");
                         break;
                     case 5:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap6, this.tableLogBuffer, "", "carrierNetworkChangeActive");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap6, this.tableLogBuffer, "", "carrierNetworkChangeActive");
                         break;
                     case 6:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap6, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap6, this.tableLogBuffer, "");
                         break;
                     case 7:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap6, this.tableLogBuffer, "", IMSParameter.GENERAL.DATA_ENABLED);
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap6, this.tableLogBuffer, "", IMSParameter.GENERAL.DATA_ENABLED);
                         break;
                     case 8:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap6, this.tableLogBuffer, "", "inflate");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap6, this.tableLogBuffer, "", "inflate");
                         break;
                     case 9:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap6, this.tableLogBuffer, "", "allowSlice");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap6, this.tableLogBuffer, "", "allowSlice");
                         break;
                     case 10:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap6, this.tableLogBuffer, "intent");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap6, this.tableLogBuffer, "intent");
                         break;
                     case 11:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap6, this.tableLogBuffer, "sub");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap6, this.tableLogBuffer, "sub");
                         break;
                     case 12:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap6, this.tableLogBuffer, "", "emergencyOnly");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap6, this.tableLogBuffer, "", "emergencyOnly");
                         break;
                     case 13:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap6, this.tableLogBuffer, "", "roaming");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap6, this.tableLogBuffer, "", "roaming");
                         break;
                     case 14:
                         FullMobileConnectionRepositoryKairos fullMobileConnectionRepositoryKairos = this;
-                        StateInit stateInit = flatMap6;
+                        StateInit stateInit = stateInitFlatMap6;
                         Ref$BooleanRef ref$BooleanRef = new Ref$BooleanRef();
                         ref$BooleanRef.element = true;
                         ((BuildScopeImpl) buildScope).observe(stateInit, new DiffableKt$$ExternalSyntheticLambda9(fullMobileConnectionRepositoryKairos.tableLogBuffer, ref$BooleanRef));
                         break;
                     case 15:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap6, this.tableLogBuffer, "", "isNtn");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap6, this.tableLogBuffer, "", "isNtn");
                         break;
                     case 16:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap6, this.tableLogBuffer, "", "isGsm");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap6, this.tableLogBuffer, "", "isGsm");
                         break;
                     default:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap6, this.tableLogBuffer, "", "cdmaLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap6, this.tableLogBuffer, "", "cdmaLevel");
                         break;
                 }
                 return Unit.INSTANCE;
             }
         });
-        this.isGsm = flatMap6;
+        this.isGsm = stateInitFlatMap6;
         final int i18 = 22;
-        final StateInit flatMap7 = StateKt.flatMap(buildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
+        final StateInit stateInitFlatMap7 = StateKt.flatMap(stateBuildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 MobileConnectionRepositoryKairos mobileConnectionRepositoryKairos2 = (MobileConnectionRepositoryKairos) obj2;
@@ -1402,74 +1399,74 @@ public final class FullMobileConnectionRepositoryKairos implements MobileConnect
         onActivated(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda2
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i19) {
                     case 0:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap7, this.tableLogBuffer, "", "isInService");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap7, this.tableLogBuffer, "", "isInService");
                         break;
                     case 1:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap7, this.tableLogBuffer, "", "primaryLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap7, this.tableLogBuffer, "", "primaryLevel");
                         break;
                     case 2:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap7, this.tableLogBuffer, "", "satelliteLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap7, this.tableLogBuffer, "", "satelliteLevel");
                         break;
                     case 3:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap7, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap7, this.tableLogBuffer, "");
                         break;
                     case 4:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap7, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap7, this.tableLogBuffer, "");
                         break;
                     case 5:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap7, this.tableLogBuffer, "", "carrierNetworkChangeActive");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap7, this.tableLogBuffer, "", "carrierNetworkChangeActive");
                         break;
                     case 6:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap7, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap7, this.tableLogBuffer, "");
                         break;
                     case 7:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap7, this.tableLogBuffer, "", IMSParameter.GENERAL.DATA_ENABLED);
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap7, this.tableLogBuffer, "", IMSParameter.GENERAL.DATA_ENABLED);
                         break;
                     case 8:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap7, this.tableLogBuffer, "", "inflate");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap7, this.tableLogBuffer, "", "inflate");
                         break;
                     case 9:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap7, this.tableLogBuffer, "", "allowSlice");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap7, this.tableLogBuffer, "", "allowSlice");
                         break;
                     case 10:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap7, this.tableLogBuffer, "intent");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap7, this.tableLogBuffer, "intent");
                         break;
                     case 11:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap7, this.tableLogBuffer, "sub");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap7, this.tableLogBuffer, "sub");
                         break;
                     case 12:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap7, this.tableLogBuffer, "", "emergencyOnly");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap7, this.tableLogBuffer, "", "emergencyOnly");
                         break;
                     case 13:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap7, this.tableLogBuffer, "", "roaming");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap7, this.tableLogBuffer, "", "roaming");
                         break;
                     case 14:
                         FullMobileConnectionRepositoryKairos fullMobileConnectionRepositoryKairos = this;
-                        StateInit stateInit = flatMap7;
+                        StateInit stateInit = stateInitFlatMap7;
                         Ref$BooleanRef ref$BooleanRef = new Ref$BooleanRef();
                         ref$BooleanRef.element = true;
                         ((BuildScopeImpl) buildScope).observe(stateInit, new DiffableKt$$ExternalSyntheticLambda9(fullMobileConnectionRepositoryKairos.tableLogBuffer, ref$BooleanRef));
                         break;
                     case 15:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap7, this.tableLogBuffer, "", "isNtn");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap7, this.tableLogBuffer, "", "isNtn");
                         break;
                     case 16:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap7, this.tableLogBuffer, "", "isGsm");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap7, this.tableLogBuffer, "", "isGsm");
                         break;
                     default:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap7, this.tableLogBuffer, "", "cdmaLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap7, this.tableLogBuffer, "", "cdmaLevel");
                         break;
                 }
                 return Unit.INSTANCE;
             }
         });
-        this.cdmaLevel = flatMap7;
+        this.cdmaLevel = stateInitFlatMap7;
         final int i20 = 23;
-        final StateInit flatMap8 = StateKt.flatMap(buildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
+        final StateInit stateInitFlatMap8 = StateKt.flatMap(stateBuildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 MobileConnectionRepositoryKairos mobileConnectionRepositoryKairos2 = (MobileConnectionRepositoryKairos) obj2;
@@ -1553,74 +1550,74 @@ public final class FullMobileConnectionRepositoryKairos implements MobileConnect
         onActivated(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda2
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i21) {
                     case 0:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap8, this.tableLogBuffer, "", "isInService");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap8, this.tableLogBuffer, "", "isInService");
                         break;
                     case 1:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap8, this.tableLogBuffer, "", "primaryLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap8, this.tableLogBuffer, "", "primaryLevel");
                         break;
                     case 2:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap8, this.tableLogBuffer, "", "satelliteLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap8, this.tableLogBuffer, "", "satelliteLevel");
                         break;
                     case 3:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap8, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap8, this.tableLogBuffer, "");
                         break;
                     case 4:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap8, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap8, this.tableLogBuffer, "");
                         break;
                     case 5:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap8, this.tableLogBuffer, "", "carrierNetworkChangeActive");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap8, this.tableLogBuffer, "", "carrierNetworkChangeActive");
                         break;
                     case 6:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap8, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap8, this.tableLogBuffer, "");
                         break;
                     case 7:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap8, this.tableLogBuffer, "", IMSParameter.GENERAL.DATA_ENABLED);
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap8, this.tableLogBuffer, "", IMSParameter.GENERAL.DATA_ENABLED);
                         break;
                     case 8:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap8, this.tableLogBuffer, "", "inflate");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap8, this.tableLogBuffer, "", "inflate");
                         break;
                     case 9:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap8, this.tableLogBuffer, "", "allowSlice");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap8, this.tableLogBuffer, "", "allowSlice");
                         break;
                     case 10:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap8, this.tableLogBuffer, "intent");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap8, this.tableLogBuffer, "intent");
                         break;
                     case 11:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap8, this.tableLogBuffer, "sub");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap8, this.tableLogBuffer, "sub");
                         break;
                     case 12:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap8, this.tableLogBuffer, "", "emergencyOnly");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap8, this.tableLogBuffer, "", "emergencyOnly");
                         break;
                     case 13:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap8, this.tableLogBuffer, "", "roaming");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap8, this.tableLogBuffer, "", "roaming");
                         break;
                     case 14:
                         FullMobileConnectionRepositoryKairos fullMobileConnectionRepositoryKairos = this;
-                        StateInit stateInit = flatMap8;
+                        StateInit stateInit = stateInitFlatMap8;
                         Ref$BooleanRef ref$BooleanRef = new Ref$BooleanRef();
                         ref$BooleanRef.element = true;
                         ((BuildScopeImpl) buildScope).observe(stateInit, new DiffableKt$$ExternalSyntheticLambda9(fullMobileConnectionRepositoryKairos.tableLogBuffer, ref$BooleanRef));
                         break;
                     case 15:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap8, this.tableLogBuffer, "", "isNtn");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap8, this.tableLogBuffer, "", "isNtn");
                         break;
                     case 16:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap8, this.tableLogBuffer, "", "isGsm");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap8, this.tableLogBuffer, "", "isGsm");
                         break;
                     default:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap8, this.tableLogBuffer, "", "cdmaLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap8, this.tableLogBuffer, "", "cdmaLevel");
                         break;
                 }
                 return Unit.INSTANCE;
             }
         });
-        this.primaryLevel = flatMap8;
+        this.primaryLevel = stateInitFlatMap8;
         final int i22 = 1;
-        final StateInit flatMap9 = StateKt.flatMap(buildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
+        final StateInit stateInitFlatMap9 = StateKt.flatMap(stateBuildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 MobileConnectionRepositoryKairos mobileConnectionRepositoryKairos2 = (MobileConnectionRepositoryKairos) obj2;
@@ -1704,74 +1701,74 @@ public final class FullMobileConnectionRepositoryKairos implements MobileConnect
         onActivated(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda2
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i23) {
                     case 0:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap9, this.tableLogBuffer, "", "isInService");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap9, this.tableLogBuffer, "", "isInService");
                         break;
                     case 1:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap9, this.tableLogBuffer, "", "primaryLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap9, this.tableLogBuffer, "", "primaryLevel");
                         break;
                     case 2:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap9, this.tableLogBuffer, "", "satelliteLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap9, this.tableLogBuffer, "", "satelliteLevel");
                         break;
                     case 3:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap9, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap9, this.tableLogBuffer, "");
                         break;
                     case 4:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap9, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap9, this.tableLogBuffer, "");
                         break;
                     case 5:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap9, this.tableLogBuffer, "", "carrierNetworkChangeActive");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap9, this.tableLogBuffer, "", "carrierNetworkChangeActive");
                         break;
                     case 6:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap9, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap9, this.tableLogBuffer, "");
                         break;
                     case 7:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap9, this.tableLogBuffer, "", IMSParameter.GENERAL.DATA_ENABLED);
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap9, this.tableLogBuffer, "", IMSParameter.GENERAL.DATA_ENABLED);
                         break;
                     case 8:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap9, this.tableLogBuffer, "", "inflate");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap9, this.tableLogBuffer, "", "inflate");
                         break;
                     case 9:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap9, this.tableLogBuffer, "", "allowSlice");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap9, this.tableLogBuffer, "", "allowSlice");
                         break;
                     case 10:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap9, this.tableLogBuffer, "intent");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap9, this.tableLogBuffer, "intent");
                         break;
                     case 11:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap9, this.tableLogBuffer, "sub");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap9, this.tableLogBuffer, "sub");
                         break;
                     case 12:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap9, this.tableLogBuffer, "", "emergencyOnly");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap9, this.tableLogBuffer, "", "emergencyOnly");
                         break;
                     case 13:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap9, this.tableLogBuffer, "", "roaming");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap9, this.tableLogBuffer, "", "roaming");
                         break;
                     case 14:
                         FullMobileConnectionRepositoryKairos fullMobileConnectionRepositoryKairos = this;
-                        StateInit stateInit = flatMap9;
+                        StateInit stateInit = stateInitFlatMap9;
                         Ref$BooleanRef ref$BooleanRef = new Ref$BooleanRef();
                         ref$BooleanRef.element = true;
                         ((BuildScopeImpl) buildScope).observe(stateInit, new DiffableKt$$ExternalSyntheticLambda9(fullMobileConnectionRepositoryKairos.tableLogBuffer, ref$BooleanRef));
                         break;
                     case 15:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap9, this.tableLogBuffer, "", "isNtn");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap9, this.tableLogBuffer, "", "isNtn");
                         break;
                     case 16:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap9, this.tableLogBuffer, "", "isGsm");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap9, this.tableLogBuffer, "", "isGsm");
                         break;
                     default:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap9, this.tableLogBuffer, "", "cdmaLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap9, this.tableLogBuffer, "", "cdmaLevel");
                         break;
                 }
                 return Unit.INSTANCE;
             }
         });
-        this.satelliteLevel = flatMap9;
+        this.satelliteLevel = stateInitFlatMap9;
         final int i24 = 2;
-        final StateInit flatMap10 = StateKt.flatMap(buildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
+        final StateInit stateInitFlatMap10 = StateKt.flatMap(stateBuildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 MobileConnectionRepositoryKairos mobileConnectionRepositoryKairos2 = (MobileConnectionRepositoryKairos) obj2;
@@ -1855,74 +1852,74 @@ public final class FullMobileConnectionRepositoryKairos implements MobileConnect
         onActivated(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda2
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i25) {
                     case 0:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap10, this.tableLogBuffer, "", "isInService");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap10, this.tableLogBuffer, "", "isInService");
                         break;
                     case 1:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap10, this.tableLogBuffer, "", "primaryLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap10, this.tableLogBuffer, "", "primaryLevel");
                         break;
                     case 2:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap10, this.tableLogBuffer, "", "satelliteLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap10, this.tableLogBuffer, "", "satelliteLevel");
                         break;
                     case 3:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap10, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap10, this.tableLogBuffer, "");
                         break;
                     case 4:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap10, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap10, this.tableLogBuffer, "");
                         break;
                     case 5:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap10, this.tableLogBuffer, "", "carrierNetworkChangeActive");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap10, this.tableLogBuffer, "", "carrierNetworkChangeActive");
                         break;
                     case 6:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap10, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap10, this.tableLogBuffer, "");
                         break;
                     case 7:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap10, this.tableLogBuffer, "", IMSParameter.GENERAL.DATA_ENABLED);
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap10, this.tableLogBuffer, "", IMSParameter.GENERAL.DATA_ENABLED);
                         break;
                     case 8:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap10, this.tableLogBuffer, "", "inflate");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap10, this.tableLogBuffer, "", "inflate");
                         break;
                     case 9:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap10, this.tableLogBuffer, "", "allowSlice");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap10, this.tableLogBuffer, "", "allowSlice");
                         break;
                     case 10:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap10, this.tableLogBuffer, "intent");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap10, this.tableLogBuffer, "intent");
                         break;
                     case 11:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap10, this.tableLogBuffer, "sub");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap10, this.tableLogBuffer, "sub");
                         break;
                     case 12:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap10, this.tableLogBuffer, "", "emergencyOnly");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap10, this.tableLogBuffer, "", "emergencyOnly");
                         break;
                     case 13:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap10, this.tableLogBuffer, "", "roaming");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap10, this.tableLogBuffer, "", "roaming");
                         break;
                     case 14:
                         FullMobileConnectionRepositoryKairos fullMobileConnectionRepositoryKairos = this;
-                        StateInit stateInit = flatMap10;
+                        StateInit stateInit = stateInitFlatMap10;
                         Ref$BooleanRef ref$BooleanRef = new Ref$BooleanRef();
                         ref$BooleanRef.element = true;
                         ((BuildScopeImpl) buildScope).observe(stateInit, new DiffableKt$$ExternalSyntheticLambda9(fullMobileConnectionRepositoryKairos.tableLogBuffer, ref$BooleanRef));
                         break;
                     case 15:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap10, this.tableLogBuffer, "", "isNtn");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap10, this.tableLogBuffer, "", "isNtn");
                         break;
                     case 16:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap10, this.tableLogBuffer, "", "isGsm");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap10, this.tableLogBuffer, "", "isGsm");
                         break;
                     default:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap10, this.tableLogBuffer, "", "cdmaLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap10, this.tableLogBuffer, "", "cdmaLevel");
                         break;
                 }
                 return Unit.INSTANCE;
             }
         });
-        this.dataConnectionState = flatMap10;
+        this.dataConnectionState = stateInitFlatMap10;
         final int i26 = 3;
-        final StateInit flatMap11 = StateKt.flatMap(buildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
+        final StateInit stateInitFlatMap11 = StateKt.flatMap(stateBuildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 MobileConnectionRepositoryKairos mobileConnectionRepositoryKairos2 = (MobileConnectionRepositoryKairos) obj2;
@@ -2006,74 +2003,74 @@ public final class FullMobileConnectionRepositoryKairos implements MobileConnect
         onActivated(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda2
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i27) {
                     case 0:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap11, this.tableLogBuffer, "", "isInService");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap11, this.tableLogBuffer, "", "isInService");
                         break;
                     case 1:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap11, this.tableLogBuffer, "", "primaryLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap11, this.tableLogBuffer, "", "primaryLevel");
                         break;
                     case 2:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap11, this.tableLogBuffer, "", "satelliteLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap11, this.tableLogBuffer, "", "satelliteLevel");
                         break;
                     case 3:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap11, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap11, this.tableLogBuffer, "");
                         break;
                     case 4:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap11, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap11, this.tableLogBuffer, "");
                         break;
                     case 5:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap11, this.tableLogBuffer, "", "carrierNetworkChangeActive");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap11, this.tableLogBuffer, "", "carrierNetworkChangeActive");
                         break;
                     case 6:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap11, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap11, this.tableLogBuffer, "");
                         break;
                     case 7:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap11, this.tableLogBuffer, "", IMSParameter.GENERAL.DATA_ENABLED);
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap11, this.tableLogBuffer, "", IMSParameter.GENERAL.DATA_ENABLED);
                         break;
                     case 8:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap11, this.tableLogBuffer, "", "inflate");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap11, this.tableLogBuffer, "", "inflate");
                         break;
                     case 9:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap11, this.tableLogBuffer, "", "allowSlice");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap11, this.tableLogBuffer, "", "allowSlice");
                         break;
                     case 10:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap11, this.tableLogBuffer, "intent");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap11, this.tableLogBuffer, "intent");
                         break;
                     case 11:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap11, this.tableLogBuffer, "sub");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap11, this.tableLogBuffer, "sub");
                         break;
                     case 12:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap11, this.tableLogBuffer, "", "emergencyOnly");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap11, this.tableLogBuffer, "", "emergencyOnly");
                         break;
                     case 13:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap11, this.tableLogBuffer, "", "roaming");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap11, this.tableLogBuffer, "", "roaming");
                         break;
                     case 14:
                         FullMobileConnectionRepositoryKairos fullMobileConnectionRepositoryKairos = this;
-                        StateInit stateInit = flatMap11;
+                        StateInit stateInit = stateInitFlatMap11;
                         Ref$BooleanRef ref$BooleanRef = new Ref$BooleanRef();
                         ref$BooleanRef.element = true;
                         ((BuildScopeImpl) buildScope).observe(stateInit, new DiffableKt$$ExternalSyntheticLambda9(fullMobileConnectionRepositoryKairos.tableLogBuffer, ref$BooleanRef));
                         break;
                     case 15:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap11, this.tableLogBuffer, "", "isNtn");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap11, this.tableLogBuffer, "", "isNtn");
                         break;
                     case 16:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap11, this.tableLogBuffer, "", "isGsm");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap11, this.tableLogBuffer, "", "isGsm");
                         break;
                     default:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap11, this.tableLogBuffer, "", "cdmaLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap11, this.tableLogBuffer, "", "cdmaLevel");
                         break;
                 }
                 return Unit.INSTANCE;
             }
         });
-        this.dataActivityDirection = flatMap11;
+        this.dataActivityDirection = stateInitFlatMap11;
         final int i28 = 4;
-        final StateInit flatMap12 = StateKt.flatMap(buildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
+        final StateInit stateInitFlatMap12 = StateKt.flatMap(stateBuildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 MobileConnectionRepositoryKairos mobileConnectionRepositoryKairos2 = (MobileConnectionRepositoryKairos) obj2;
@@ -2157,74 +2154,74 @@ public final class FullMobileConnectionRepositoryKairos implements MobileConnect
         onActivated(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda2
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i29) {
                     case 0:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap12, this.tableLogBuffer, "", "isInService");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap12, this.tableLogBuffer, "", "isInService");
                         break;
                     case 1:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap12, this.tableLogBuffer, "", "primaryLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap12, this.tableLogBuffer, "", "primaryLevel");
                         break;
                     case 2:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap12, this.tableLogBuffer, "", "satelliteLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap12, this.tableLogBuffer, "", "satelliteLevel");
                         break;
                     case 3:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap12, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap12, this.tableLogBuffer, "");
                         break;
                     case 4:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap12, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap12, this.tableLogBuffer, "");
                         break;
                     case 5:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap12, this.tableLogBuffer, "", "carrierNetworkChangeActive");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap12, this.tableLogBuffer, "", "carrierNetworkChangeActive");
                         break;
                     case 6:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap12, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap12, this.tableLogBuffer, "");
                         break;
                     case 7:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap12, this.tableLogBuffer, "", IMSParameter.GENERAL.DATA_ENABLED);
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap12, this.tableLogBuffer, "", IMSParameter.GENERAL.DATA_ENABLED);
                         break;
                     case 8:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap12, this.tableLogBuffer, "", "inflate");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap12, this.tableLogBuffer, "", "inflate");
                         break;
                     case 9:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap12, this.tableLogBuffer, "", "allowSlice");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap12, this.tableLogBuffer, "", "allowSlice");
                         break;
                     case 10:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap12, this.tableLogBuffer, "intent");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap12, this.tableLogBuffer, "intent");
                         break;
                     case 11:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap12, this.tableLogBuffer, "sub");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap12, this.tableLogBuffer, "sub");
                         break;
                     case 12:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap12, this.tableLogBuffer, "", "emergencyOnly");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap12, this.tableLogBuffer, "", "emergencyOnly");
                         break;
                     case 13:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap12, this.tableLogBuffer, "", "roaming");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap12, this.tableLogBuffer, "", "roaming");
                         break;
                     case 14:
                         FullMobileConnectionRepositoryKairos fullMobileConnectionRepositoryKairos = this;
-                        StateInit stateInit = flatMap12;
+                        StateInit stateInit = stateInitFlatMap12;
                         Ref$BooleanRef ref$BooleanRef = new Ref$BooleanRef();
                         ref$BooleanRef.element = true;
                         ((BuildScopeImpl) buildScope).observe(stateInit, new DiffableKt$$ExternalSyntheticLambda9(fullMobileConnectionRepositoryKairos.tableLogBuffer, ref$BooleanRef));
                         break;
                     case 15:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap12, this.tableLogBuffer, "", "isNtn");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap12, this.tableLogBuffer, "", "isNtn");
                         break;
                     case 16:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap12, this.tableLogBuffer, "", "isGsm");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap12, this.tableLogBuffer, "", "isGsm");
                         break;
                     default:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap12, this.tableLogBuffer, "", "cdmaLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap12, this.tableLogBuffer, "", "cdmaLevel");
                         break;
                 }
                 return Unit.INSTANCE;
             }
         });
-        this.carrierNetworkChangeActive = flatMap12;
+        this.carrierNetworkChangeActive = stateInitFlatMap12;
         final int i30 = 5;
-        final StateInit flatMap13 = StateKt.flatMap(buildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
+        final StateInit stateInitFlatMap13 = StateKt.flatMap(stateBuildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 MobileConnectionRepositoryKairos mobileConnectionRepositoryKairos2 = (MobileConnectionRepositoryKairos) obj2;
@@ -2308,74 +2305,74 @@ public final class FullMobileConnectionRepositoryKairos implements MobileConnect
         onActivated(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda2
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i31) {
                     case 0:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap13, this.tableLogBuffer, "", "isInService");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap13, this.tableLogBuffer, "", "isInService");
                         break;
                     case 1:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap13, this.tableLogBuffer, "", "primaryLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap13, this.tableLogBuffer, "", "primaryLevel");
                         break;
                     case 2:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap13, this.tableLogBuffer, "", "satelliteLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap13, this.tableLogBuffer, "", "satelliteLevel");
                         break;
                     case 3:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap13, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap13, this.tableLogBuffer, "");
                         break;
                     case 4:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap13, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap13, this.tableLogBuffer, "");
                         break;
                     case 5:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap13, this.tableLogBuffer, "", "carrierNetworkChangeActive");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap13, this.tableLogBuffer, "", "carrierNetworkChangeActive");
                         break;
                     case 6:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap13, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap13, this.tableLogBuffer, "");
                         break;
                     case 7:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap13, this.tableLogBuffer, "", IMSParameter.GENERAL.DATA_ENABLED);
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap13, this.tableLogBuffer, "", IMSParameter.GENERAL.DATA_ENABLED);
                         break;
                     case 8:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap13, this.tableLogBuffer, "", "inflate");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap13, this.tableLogBuffer, "", "inflate");
                         break;
                     case 9:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap13, this.tableLogBuffer, "", "allowSlice");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap13, this.tableLogBuffer, "", "allowSlice");
                         break;
                     case 10:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap13, this.tableLogBuffer, "intent");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap13, this.tableLogBuffer, "intent");
                         break;
                     case 11:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap13, this.tableLogBuffer, "sub");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap13, this.tableLogBuffer, "sub");
                         break;
                     case 12:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap13, this.tableLogBuffer, "", "emergencyOnly");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap13, this.tableLogBuffer, "", "emergencyOnly");
                         break;
                     case 13:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap13, this.tableLogBuffer, "", "roaming");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap13, this.tableLogBuffer, "", "roaming");
                         break;
                     case 14:
                         FullMobileConnectionRepositoryKairos fullMobileConnectionRepositoryKairos = this;
-                        StateInit stateInit = flatMap13;
+                        StateInit stateInit = stateInitFlatMap13;
                         Ref$BooleanRef ref$BooleanRef = new Ref$BooleanRef();
                         ref$BooleanRef.element = true;
                         ((BuildScopeImpl) buildScope).observe(stateInit, new DiffableKt$$ExternalSyntheticLambda9(fullMobileConnectionRepositoryKairos.tableLogBuffer, ref$BooleanRef));
                         break;
                     case 15:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap13, this.tableLogBuffer, "", "isNtn");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap13, this.tableLogBuffer, "", "isNtn");
                         break;
                     case 16:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap13, this.tableLogBuffer, "", "isGsm");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap13, this.tableLogBuffer, "", "isGsm");
                         break;
                     default:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap13, this.tableLogBuffer, "", "cdmaLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap13, this.tableLogBuffer, "", "cdmaLevel");
                         break;
                 }
                 return Unit.INSTANCE;
             }
         });
-        this.resolvedNetworkType = flatMap13;
+        this.resolvedNetworkType = stateInitFlatMap13;
         final int i32 = 7;
-        final StateInit flatMap14 = StateKt.flatMap(buildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
+        final StateInit stateInitFlatMap14 = StateKt.flatMap(stateBuildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 MobileConnectionRepositoryKairos mobileConnectionRepositoryKairos2 = (MobileConnectionRepositoryKairos) obj2;
@@ -2459,74 +2456,74 @@ public final class FullMobileConnectionRepositoryKairos implements MobileConnect
         onActivated(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda2
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i33) {
                     case 0:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap14, this.tableLogBuffer, "", "isInService");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap14, this.tableLogBuffer, "", "isInService");
                         break;
                     case 1:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap14, this.tableLogBuffer, "", "primaryLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap14, this.tableLogBuffer, "", "primaryLevel");
                         break;
                     case 2:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap14, this.tableLogBuffer, "", "satelliteLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap14, this.tableLogBuffer, "", "satelliteLevel");
                         break;
                     case 3:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap14, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap14, this.tableLogBuffer, "");
                         break;
                     case 4:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap14, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap14, this.tableLogBuffer, "");
                         break;
                     case 5:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap14, this.tableLogBuffer, "", "carrierNetworkChangeActive");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap14, this.tableLogBuffer, "", "carrierNetworkChangeActive");
                         break;
                     case 6:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap14, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap14, this.tableLogBuffer, "");
                         break;
                     case 7:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap14, this.tableLogBuffer, "", IMSParameter.GENERAL.DATA_ENABLED);
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap14, this.tableLogBuffer, "", IMSParameter.GENERAL.DATA_ENABLED);
                         break;
                     case 8:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap14, this.tableLogBuffer, "", "inflate");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap14, this.tableLogBuffer, "", "inflate");
                         break;
                     case 9:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap14, this.tableLogBuffer, "", "allowSlice");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap14, this.tableLogBuffer, "", "allowSlice");
                         break;
                     case 10:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap14, this.tableLogBuffer, "intent");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap14, this.tableLogBuffer, "intent");
                         break;
                     case 11:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap14, this.tableLogBuffer, "sub");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap14, this.tableLogBuffer, "sub");
                         break;
                     case 12:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap14, this.tableLogBuffer, "", "emergencyOnly");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap14, this.tableLogBuffer, "", "emergencyOnly");
                         break;
                     case 13:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap14, this.tableLogBuffer, "", "roaming");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap14, this.tableLogBuffer, "", "roaming");
                         break;
                     case 14:
                         FullMobileConnectionRepositoryKairos fullMobileConnectionRepositoryKairos = this;
-                        StateInit stateInit = flatMap14;
+                        StateInit stateInit = stateInitFlatMap14;
                         Ref$BooleanRef ref$BooleanRef = new Ref$BooleanRef();
                         ref$BooleanRef.element = true;
                         ((BuildScopeImpl) buildScope).observe(stateInit, new DiffableKt$$ExternalSyntheticLambda9(fullMobileConnectionRepositoryKairos.tableLogBuffer, ref$BooleanRef));
                         break;
                     case 15:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap14, this.tableLogBuffer, "", "isNtn");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap14, this.tableLogBuffer, "", "isNtn");
                         break;
                     case 16:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap14, this.tableLogBuffer, "", "isGsm");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap14, this.tableLogBuffer, "", "isGsm");
                         break;
                     default:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap14, this.tableLogBuffer, "", "cdmaLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap14, this.tableLogBuffer, "", "cdmaLevel");
                         break;
                 }
                 return Unit.INSTANCE;
             }
         });
-        this.dataEnabled = flatMap14;
+        this.dataEnabled = stateInitFlatMap14;
         final int i34 = 8;
-        final StateInit flatMap15 = StateKt.flatMap(buildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
+        final StateInit stateInitFlatMap15 = StateKt.flatMap(stateBuildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 MobileConnectionRepositoryKairos mobileConnectionRepositoryKairos2 = (MobileConnectionRepositoryKairos) obj2;
@@ -2610,74 +2607,74 @@ public final class FullMobileConnectionRepositoryKairos implements MobileConnect
         onActivated(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda2
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i35) {
                     case 0:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap15, this.tableLogBuffer, "", "isInService");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap15, this.tableLogBuffer, "", "isInService");
                         break;
                     case 1:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap15, this.tableLogBuffer, "", "primaryLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap15, this.tableLogBuffer, "", "primaryLevel");
                         break;
                     case 2:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap15, this.tableLogBuffer, "", "satelliteLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap15, this.tableLogBuffer, "", "satelliteLevel");
                         break;
                     case 3:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap15, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap15, this.tableLogBuffer, "");
                         break;
                     case 4:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap15, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap15, this.tableLogBuffer, "");
                         break;
                     case 5:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap15, this.tableLogBuffer, "", "carrierNetworkChangeActive");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap15, this.tableLogBuffer, "", "carrierNetworkChangeActive");
                         break;
                     case 6:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap15, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap15, this.tableLogBuffer, "");
                         break;
                     case 7:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap15, this.tableLogBuffer, "", IMSParameter.GENERAL.DATA_ENABLED);
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap15, this.tableLogBuffer, "", IMSParameter.GENERAL.DATA_ENABLED);
                         break;
                     case 8:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap15, this.tableLogBuffer, "", "inflate");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap15, this.tableLogBuffer, "", "inflate");
                         break;
                     case 9:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap15, this.tableLogBuffer, "", "allowSlice");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap15, this.tableLogBuffer, "", "allowSlice");
                         break;
                     case 10:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap15, this.tableLogBuffer, "intent");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap15, this.tableLogBuffer, "intent");
                         break;
                     case 11:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap15, this.tableLogBuffer, "sub");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap15, this.tableLogBuffer, "sub");
                         break;
                     case 12:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap15, this.tableLogBuffer, "", "emergencyOnly");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap15, this.tableLogBuffer, "", "emergencyOnly");
                         break;
                     case 13:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap15, this.tableLogBuffer, "", "roaming");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap15, this.tableLogBuffer, "", "roaming");
                         break;
                     case 14:
                         FullMobileConnectionRepositoryKairos fullMobileConnectionRepositoryKairos = this;
-                        StateInit stateInit = flatMap15;
+                        StateInit stateInit = stateInitFlatMap15;
                         Ref$BooleanRef ref$BooleanRef = new Ref$BooleanRef();
                         ref$BooleanRef.element = true;
                         ((BuildScopeImpl) buildScope).observe(stateInit, new DiffableKt$$ExternalSyntheticLambda9(fullMobileConnectionRepositoryKairos.tableLogBuffer, ref$BooleanRef));
                         break;
                     case 15:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap15, this.tableLogBuffer, "", "isNtn");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap15, this.tableLogBuffer, "", "isNtn");
                         break;
                     case 16:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap15, this.tableLogBuffer, "", "isGsm");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap15, this.tableLogBuffer, "", "isGsm");
                         break;
                     default:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap15, this.tableLogBuffer, "", "cdmaLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap15, this.tableLogBuffer, "", "cdmaLevel");
                         break;
                 }
                 return Unit.INSTANCE;
             }
         });
-        this.inflateSignalStrength = flatMap15;
+        this.inflateSignalStrength = stateInitFlatMap15;
         final int i36 = 9;
-        final StateInit flatMap16 = StateKt.flatMap(buildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
+        final StateInit stateInitFlatMap16 = StateKt.flatMap(stateBuildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 MobileConnectionRepositoryKairos mobileConnectionRepositoryKairos2 = (MobileConnectionRepositoryKairos) obj2;
@@ -2761,74 +2758,74 @@ public final class FullMobileConnectionRepositoryKairos implements MobileConnect
         onActivated(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda2
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i37) {
                     case 0:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap16, this.tableLogBuffer, "", "isInService");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap16, this.tableLogBuffer, "", "isInService");
                         break;
                     case 1:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap16, this.tableLogBuffer, "", "primaryLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap16, this.tableLogBuffer, "", "primaryLevel");
                         break;
                     case 2:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap16, this.tableLogBuffer, "", "satelliteLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap16, this.tableLogBuffer, "", "satelliteLevel");
                         break;
                     case 3:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap16, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap16, this.tableLogBuffer, "");
                         break;
                     case 4:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap16, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap16, this.tableLogBuffer, "");
                         break;
                     case 5:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap16, this.tableLogBuffer, "", "carrierNetworkChangeActive");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap16, this.tableLogBuffer, "", "carrierNetworkChangeActive");
                         break;
                     case 6:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap16, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap16, this.tableLogBuffer, "");
                         break;
                     case 7:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap16, this.tableLogBuffer, "", IMSParameter.GENERAL.DATA_ENABLED);
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap16, this.tableLogBuffer, "", IMSParameter.GENERAL.DATA_ENABLED);
                         break;
                     case 8:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap16, this.tableLogBuffer, "", "inflate");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap16, this.tableLogBuffer, "", "inflate");
                         break;
                     case 9:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap16, this.tableLogBuffer, "", "allowSlice");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap16, this.tableLogBuffer, "", "allowSlice");
                         break;
                     case 10:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap16, this.tableLogBuffer, "intent");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap16, this.tableLogBuffer, "intent");
                         break;
                     case 11:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap16, this.tableLogBuffer, "sub");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap16, this.tableLogBuffer, "sub");
                         break;
                     case 12:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap16, this.tableLogBuffer, "", "emergencyOnly");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap16, this.tableLogBuffer, "", "emergencyOnly");
                         break;
                     case 13:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap16, this.tableLogBuffer, "", "roaming");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap16, this.tableLogBuffer, "", "roaming");
                         break;
                     case 14:
                         FullMobileConnectionRepositoryKairos fullMobileConnectionRepositoryKairos = this;
-                        StateInit stateInit = flatMap16;
+                        StateInit stateInit = stateInitFlatMap16;
                         Ref$BooleanRef ref$BooleanRef = new Ref$BooleanRef();
                         ref$BooleanRef.element = true;
                         ((BuildScopeImpl) buildScope).observe(stateInit, new DiffableKt$$ExternalSyntheticLambda9(fullMobileConnectionRepositoryKairos.tableLogBuffer, ref$BooleanRef));
                         break;
                     case 15:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap16, this.tableLogBuffer, "", "isNtn");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap16, this.tableLogBuffer, "", "isNtn");
                         break;
                     case 16:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap16, this.tableLogBuffer, "", "isGsm");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap16, this.tableLogBuffer, "", "isGsm");
                         break;
                     default:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap16, this.tableLogBuffer, "", "cdmaLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap16, this.tableLogBuffer, "", "cdmaLevel");
                         break;
                 }
                 return Unit.INSTANCE;
             }
         });
-        this.allowNetworkSliceIndicator = flatMap16;
+        this.allowNetworkSliceIndicator = stateInitFlatMap16;
         final int i38 = 10;
-        this.numberOfLevels = StateKt.flatMap(buildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
+        this.numberOfLevels = StateKt.flatMap(stateBuildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 MobileConnectionRepositoryKairos mobileConnectionRepositoryKairos2 = (MobileConnectionRepositoryKairos) obj2;
@@ -2909,7 +2906,7 @@ public final class FullMobileConnectionRepositoryKairos implements MobileConnect
             }
         });
         final int i39 = 11;
-        final StateInit flatMap17 = StateKt.flatMap(buildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
+        final StateInit stateInitFlatMap17 = StateKt.flatMap(stateBuildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 MobileConnectionRepositoryKairos mobileConnectionRepositoryKairos2 = (MobileConnectionRepositoryKairos) obj2;
@@ -2993,74 +2990,74 @@ public final class FullMobileConnectionRepositoryKairos implements MobileConnect
         onActivated(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda2
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i40) {
                     case 0:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap17, this.tableLogBuffer, "", "isInService");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap17, this.tableLogBuffer, "", "isInService");
                         break;
                     case 1:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap17, this.tableLogBuffer, "", "primaryLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap17, this.tableLogBuffer, "", "primaryLevel");
                         break;
                     case 2:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap17, this.tableLogBuffer, "", "satelliteLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap17, this.tableLogBuffer, "", "satelliteLevel");
                         break;
                     case 3:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap17, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap17, this.tableLogBuffer, "");
                         break;
                     case 4:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap17, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap17, this.tableLogBuffer, "");
                         break;
                     case 5:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap17, this.tableLogBuffer, "", "carrierNetworkChangeActive");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap17, this.tableLogBuffer, "", "carrierNetworkChangeActive");
                         break;
                     case 6:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap17, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap17, this.tableLogBuffer, "");
                         break;
                     case 7:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap17, this.tableLogBuffer, "", IMSParameter.GENERAL.DATA_ENABLED);
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap17, this.tableLogBuffer, "", IMSParameter.GENERAL.DATA_ENABLED);
                         break;
                     case 8:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap17, this.tableLogBuffer, "", "inflate");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap17, this.tableLogBuffer, "", "inflate");
                         break;
                     case 9:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap17, this.tableLogBuffer, "", "allowSlice");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap17, this.tableLogBuffer, "", "allowSlice");
                         break;
                     case 10:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap17, this.tableLogBuffer, "intent");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap17, this.tableLogBuffer, "intent");
                         break;
                     case 11:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap17, this.tableLogBuffer, "sub");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap17, this.tableLogBuffer, "sub");
                         break;
                     case 12:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap17, this.tableLogBuffer, "", "emergencyOnly");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap17, this.tableLogBuffer, "", "emergencyOnly");
                         break;
                     case 13:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap17, this.tableLogBuffer, "", "roaming");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap17, this.tableLogBuffer, "", "roaming");
                         break;
                     case 14:
                         FullMobileConnectionRepositoryKairos fullMobileConnectionRepositoryKairos = this;
-                        StateInit stateInit = flatMap17;
+                        StateInit stateInit = stateInitFlatMap17;
                         Ref$BooleanRef ref$BooleanRef = new Ref$BooleanRef();
                         ref$BooleanRef.element = true;
                         ((BuildScopeImpl) buildScope).observe(stateInit, new DiffableKt$$ExternalSyntheticLambda9(fullMobileConnectionRepositoryKairos.tableLogBuffer, ref$BooleanRef));
                         break;
                     case 15:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap17, this.tableLogBuffer, "", "isNtn");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap17, this.tableLogBuffer, "", "isNtn");
                         break;
                     case 16:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap17, this.tableLogBuffer, "", "isGsm");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap17, this.tableLogBuffer, "", "isGsm");
                         break;
                     default:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap17, this.tableLogBuffer, "", "cdmaLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap17, this.tableLogBuffer, "", "cdmaLevel");
                         break;
                 }
                 return Unit.INSTANCE;
             }
         });
-        this.networkName = flatMap17;
+        this.networkName = stateInitFlatMap17;
         final int i41 = 12;
-        final StateInit flatMap18 = StateKt.flatMap(buildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
+        final StateInit stateInitFlatMap18 = StateKt.flatMap(stateBuildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 MobileConnectionRepositoryKairos mobileConnectionRepositoryKairos2 = (MobileConnectionRepositoryKairos) obj2;
@@ -3144,74 +3141,74 @@ public final class FullMobileConnectionRepositoryKairos implements MobileConnect
         onActivated(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda2
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i42) {
                     case 0:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap18, this.tableLogBuffer, "", "isInService");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap18, this.tableLogBuffer, "", "isInService");
                         break;
                     case 1:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap18, this.tableLogBuffer, "", "primaryLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap18, this.tableLogBuffer, "", "primaryLevel");
                         break;
                     case 2:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap18, this.tableLogBuffer, "", "satelliteLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap18, this.tableLogBuffer, "", "satelliteLevel");
                         break;
                     case 3:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap18, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap18, this.tableLogBuffer, "");
                         break;
                     case 4:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap18, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap18, this.tableLogBuffer, "");
                         break;
                     case 5:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap18, this.tableLogBuffer, "", "carrierNetworkChangeActive");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap18, this.tableLogBuffer, "", "carrierNetworkChangeActive");
                         break;
                     case 6:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap18, this.tableLogBuffer, "");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap18, this.tableLogBuffer, "");
                         break;
                     case 7:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap18, this.tableLogBuffer, "", IMSParameter.GENERAL.DATA_ENABLED);
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap18, this.tableLogBuffer, "", IMSParameter.GENERAL.DATA_ENABLED);
                         break;
                     case 8:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap18, this.tableLogBuffer, "", "inflate");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap18, this.tableLogBuffer, "", "inflate");
                         break;
                     case 9:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap18, this.tableLogBuffer, "", "allowSlice");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap18, this.tableLogBuffer, "", "allowSlice");
                         break;
                     case 10:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap18, this.tableLogBuffer, "intent");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap18, this.tableLogBuffer, "intent");
                         break;
                     case 11:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap18, this.tableLogBuffer, "sub");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap18, this.tableLogBuffer, "sub");
                         break;
                     case 12:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap18, this.tableLogBuffer, "", "emergencyOnly");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap18, this.tableLogBuffer, "", "emergencyOnly");
                         break;
                     case 13:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap18, this.tableLogBuffer, "", "roaming");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap18, this.tableLogBuffer, "", "roaming");
                         break;
                     case 14:
                         FullMobileConnectionRepositoryKairos fullMobileConnectionRepositoryKairos = this;
-                        StateInit stateInit = flatMap18;
+                        StateInit stateInit = stateInitFlatMap18;
                         Ref$BooleanRef ref$BooleanRef = new Ref$BooleanRef();
                         ref$BooleanRef.element = true;
                         ((BuildScopeImpl) buildScope).observe(stateInit, new DiffableKt$$ExternalSyntheticLambda9(fullMobileConnectionRepositoryKairos.tableLogBuffer, ref$BooleanRef));
                         break;
                     case 15:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap18, this.tableLogBuffer, "", "isNtn");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap18, this.tableLogBuffer, "", "isNtn");
                         break;
                     case 16:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap18, this.tableLogBuffer, "", "isGsm");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap18, this.tableLogBuffer, "", "isGsm");
                         break;
                     default:
-                        DiffableKt.logIntDiffsForTable(buildScope, flatMap18, this.tableLogBuffer, "", "cdmaLevel");
+                        DiffableKt.logIntDiffsForTable(buildScope, stateInitFlatMap18, this.tableLogBuffer, "", "cdmaLevel");
                         break;
                 }
                 return Unit.INSTANCE;
             }
         });
-        this.carrierName = flatMap18;
+        this.carrierName = stateInitFlatMap18;
         final int i43 = 14;
-        this.isAllowedDuringAirplaneMode = StateKt.flatMap(buildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
+        this.isAllowedDuringAirplaneMode = StateKt.flatMap(stateBuildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 MobileConnectionRepositoryKairos mobileConnectionRepositoryKairos2 = (MobileConnectionRepositoryKairos) obj2;
@@ -3292,7 +3289,7 @@ public final class FullMobileConnectionRepositoryKairos implements MobileConnect
             }
         });
         final int i44 = 15;
-        this.hasPrioritizedNetworkCapabilities = StateKt.flatMap(buildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
+        this.hasPrioritizedNetworkCapabilities = StateKt.flatMap(stateBuildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 MobileConnectionRepositoryKairos mobileConnectionRepositoryKairos2 = (MobileConnectionRepositoryKairos) obj2;
@@ -3373,7 +3370,7 @@ public final class FullMobileConnectionRepositoryKairos implements MobileConnect
             }
         });
         final int i45 = 16;
-        this.isInEcmMode = StateKt.flatMap(buildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
+        this.isInEcmMode = StateKt.flatMap(stateBuildState, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.FullMobileConnectionRepositoryKairos$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 MobileConnectionRepositoryKairos mobileConnectionRepositoryKairos2 = (MobileConnectionRepositoryKairos) obj2;

@@ -89,18 +89,18 @@ public final class SignalingDataInfo implements Parcelable {
     }
 
     SignalingDataInfo(Parcel parcel) {
-        String readString = parcel.readString();
-        String readString2 = parcel.readString();
-        int readInt = parcel.readInt();
-        int readInt2 = parcel.readInt();
-        String readString3 = parcel.readString();
-        this.mTable = readString;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString);
-        this.mSignalingDataType = readString2;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString2);
-        this.mVersion = readInt;
-        this.mGroup = readInt2;
-        this.mEncoding = readString3;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString3);
+        String string = parcel.readString();
+        String string2 = parcel.readString();
+        int i = parcel.readInt();
+        int i2 = parcel.readInt();
+        String string3 = parcel.readString();
+        this.mTable = string;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string);
+        this.mSignalingDataType = string2;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string2);
+        this.mVersion = i;
+        this.mGroup = i2;
+        this.mEncoding = string3;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string3);
     }
 }

@@ -1,6 +1,6 @@
 package com.android.internal.protolog;
 
-/* loaded from: classes3.dex */
+/* loaded from: classes4.dex */
 public final class ProtoLogMessage {
     public static final long BOOLEAN_PARAMS = 5531917877254L;
     public static final long DOUBLE_PARAMS = 5501853106181L;

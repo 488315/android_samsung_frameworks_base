@@ -95,22 +95,22 @@ public final class CamUtils {
     }
 
     static float yFromInt(int i) {
-        float linearized = linearized(Color.red(i));
-        float linearized2 = linearized(Color.green(i));
-        float linearized3 = linearized(Color.blue(i));
+        float fLinearized = linearized(Color.red(i));
+        float fLinearized2 = linearized(Color.green(i));
+        float fLinearized3 = linearized(Color.blue(i));
         double[] dArr = SRGB_TO_XYZ[1];
-        return (float) ((linearized * dArr[0]) + (linearized2 * dArr[1]) + (linearized3 * dArr[2]));
+        return (float) ((fLinearized * dArr[0]) + (fLinearized2 * dArr[1]) + (fLinearized3 * dArr[2]));
     }
 
     static float[] xyzFromInt(int i) {
-        float linearized = linearized(Color.red(i));
-        float linearized2 = linearized(Color.green(i));
-        float linearized3 = linearized(Color.blue(i));
+        float fLinearized = linearized(Color.red(i));
+        float fLinearized2 = linearized(Color.green(i));
+        float fLinearized3 = linearized(Color.blue(i));
         double[][] dArr = SRGB_TO_XYZ;
-        double d = linearized;
+        double d = fLinearized;
         double[] dArr2 = dArr[0];
-        double d2 = linearized2;
-        double d3 = linearized3;
+        double d2 = fLinearized2;
+        double d3 = fLinearized3;
         double d4 = (dArr2[0] * d) + (dArr2[1] * d2) + (dArr2[2] * d3);
         double[] dArr3 = dArr[1];
         double d5 = (dArr3[0] * d) + (dArr3[1] * d2) + (dArr3[2] * d3);

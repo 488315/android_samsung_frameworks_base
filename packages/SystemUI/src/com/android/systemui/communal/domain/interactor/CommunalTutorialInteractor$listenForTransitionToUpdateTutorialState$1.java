@@ -13,13 +13,11 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.SafeFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class CommunalTutorialInteractor$listenForTransitionToUpdateTutorialState$1 extends SuspendLambda implements Function2 {
     int label;
     final /* synthetic */ CommunalTutorialInteractor this$0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.communal.domain.interactor.CommunalTutorialInteractor$listenForTransitionToUpdateTutorialState$1$2, reason: invalid class name */
     final class AnonymousClass2 extends SuspendLambda implements Function3 {
         /* synthetic */ int I$0;
@@ -32,10 +30,10 @@ final class CommunalTutorialInteractor$listenForTransitionToUpdateTutorialState$
 
         @Override // kotlin.jvm.functions.Function3
         public final Object invoke(Object obj, Object obj2, Object obj3) {
-            int intValue = ((Number) obj2).intValue();
+            int iIntValue = ((Number) obj2).intValue();
             AnonymousClass2 anonymousClass2 = new AnonymousClass2((Continuation) obj3);
             anonymousClass2.L$0 = (FlowCollector) obj;
-            anonymousClass2.I$0 = intValue;
+            anonymousClass2.I$0 = iIntValue;
             return anonymousClass2.invokeSuspend(Unit.INSTANCE);
         }
 
@@ -89,20 +87,20 @@ final class CommunalTutorialInteractor$listenForTransitionToUpdateTutorialState$
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             CommunalTutorialInteractor communalTutorialInteractor = this.this$0;
-            SafeFlow transformWhile = FlowKt.transformWhile(FlowKt.transformLatest(communalTutorialInteractor.communalSettingsInteractor.isCommunalEnabled, new CommunalTutorialInteractor$listenForTransitionToUpdateTutorialState$1$invokeSuspend$$inlined$flatMapLatest$1(null, communalTutorialInteractor)), new AnonymousClass2(null));
+            SafeFlow safeFlowTransformWhile = FlowKt.transformWhile(FlowKt.transformLatest(communalTutorialInteractor.communalSettingsInteractor.isCommunalEnabled, new CommunalTutorialInteractor$listenForTransitionToUpdateTutorialState$1$invokeSuspend$$inlined$flatMapLatest$1(null, communalTutorialInteractor)), new AnonymousClass2(null));
             final CommunalTutorialInteractor communalTutorialInteractor2 = this.this$0;
             FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.communal.domain.interactor.CommunalTutorialInteractor$listenForTransitionToUpdateTutorialState$1.3
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 public final Object emit(Object obj2, Continuation continuation) {
                     ((Number) obj2).intValue();
-                    ((CommunalTutorialDisabledRepositoryImpl) CommunalTutorialInteractor.this.communalTutorialRepository).getClass();
+                    ((CommunalTutorialDisabledRepositoryImpl) communalTutorialInteractor2.communalTutorialRepository).getClass();
                     Unit unit = Unit.INSTANCE;
                     CoroutineSingletons coroutineSingletons2 = CoroutineSingletons.COROUTINE_SUSPENDED;
                     return unit;
                 }
             };
             this.label = 1;
-            if (transformWhile.collect(flowCollector, this) == coroutineSingletons) {
+            if (safeFlowTransformWhile.collect(flowCollector, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

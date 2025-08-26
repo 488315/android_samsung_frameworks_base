@@ -25,8 +25,8 @@ public class BlacklistedFeature {
             if (str2.equals("*")) {
                 return true;
             }
-            String[] split = str2.split("\\*");
-            if ((str2.endsWith("*") && str.startsWith(split[0])) || str2.equals(str)) {
+            String[] strArrSplit = str2.split("\\*");
+            if ((str2.endsWith("*") && str.startsWith(strArrSplit[0])) || str2.equals(str)) {
                 return true;
             }
         }

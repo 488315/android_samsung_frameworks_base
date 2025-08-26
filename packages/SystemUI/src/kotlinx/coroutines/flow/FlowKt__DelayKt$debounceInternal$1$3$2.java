@@ -10,7 +10,6 @@ import kotlin.jvm.internal.Ref$ObjectRef;
 import kotlinx.coroutines.channels.ChannelResult;
 import kotlinx.coroutines.flow.internal.NullSurrogateKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 final class FlowKt__DelayKt$debounceInternal$1$3$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ FlowCollector $downstream;
@@ -35,13 +34,13 @@ final class FlowKt__DelayKt$debounceInternal$1$3$2 extends SuspendLambda impleme
 
     @Override // kotlin.jvm.functions.Function2
     public final Object invoke(Object obj, Object obj2) {
-        return ((FlowKt__DelayKt$debounceInternal$1$3$2) create(ChannelResult.m3457boximpl(((ChannelResult) obj).holder), (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        return ((FlowKt__DelayKt$debounceInternal$1$3$2) create(ChannelResult.m3477boximpl(((ChannelResult) obj).holder), (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
     /* JADX WARN: Type inference failed for: r6v4, types: [T, kotlinx.coroutines.internal.Symbol] */
     /* JADX WARN: Type inference failed for: r7v3, types: [T, java.lang.Object] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
-    public final Object invokeSuspend(Object obj) {
+    public final Object invokeSuspend(Object obj) throws Throwable {
         Ref$ObjectRef<Object> ref$ObjectRef;
         Ref$ObjectRef<Object> ref$ObjectRef2;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -56,9 +55,9 @@ final class FlowKt__DelayKt$debounceInternal$1$3$2 extends SuspendLambda impleme
             }
             FlowCollector flowCollector = this.$downstream;
             if (z) {
-                Throwable m3458exceptionOrNullimpl = ChannelResult.m3458exceptionOrNullimpl((ChannelResult.Failed) r7);
-                if (m3458exceptionOrNullimpl != null) {
-                    throw m3458exceptionOrNullimpl;
+                Throwable thM3478exceptionOrNullimpl = ChannelResult.m3478exceptionOrNullimpl((ChannelResult.Failed) r7);
+                if (thM3478exceptionOrNullimpl != null) {
+                    throw thM3478exceptionOrNullimpl;
                 }
                 Object obj2 = ref$ObjectRef.element;
                 if (obj2 != null) {

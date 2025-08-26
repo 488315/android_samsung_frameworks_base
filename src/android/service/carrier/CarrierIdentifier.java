@@ -65,12 +65,12 @@ public class CarrierIdentifier implements Parcelable {
         if (bArr.length != 3) {
             throw new IllegalArgumentException("MCC & MNC must be set by a 3-byte array: byte[" + bArr.length + NavigationBarInflaterView.SIZE_MOD_END);
         }
-        String bytesToHexString = IccUtils.bytesToHexString(bArr);
-        this.mMcc = new String(new char[]{bytesToHexString.charAt(1), bytesToHexString.charAt(0), bytesToHexString.charAt(3)});
-        if (bytesToHexString.charAt(2) == 'F') {
-            this.mMnc = new String(new char[]{bytesToHexString.charAt(5), bytesToHexString.charAt(4)});
+        String strBytesToHexString = IccUtils.bytesToHexString(bArr);
+        this.mMcc = new String(new char[]{strBytesToHexString.charAt(1), strBytesToHexString.charAt(0), strBytesToHexString.charAt(3)});
+        if (strBytesToHexString.charAt(2) == 'F') {
+            this.mMnc = new String(new char[]{strBytesToHexString.charAt(5), strBytesToHexString.charAt(4)});
         } else {
-            this.mMnc = new String(new char[]{bytesToHexString.charAt(5), bytesToHexString.charAt(4), bytesToHexString.charAt(2)});
+            this.mMnc = new String(new char[]{strBytesToHexString.charAt(5), strBytesToHexString.charAt(4), strBytesToHexString.charAt(2)});
         }
         this.mGid1 = str;
         this.mGid2 = str2;

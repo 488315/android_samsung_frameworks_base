@@ -41,8 +41,8 @@ public class SamsungGlobalActionsAnimatorFSM {
 
     public void handleAnimationEvent(Event event) {
         if (this.mViewStateController.getState() == ViewAnimationState.IDLE || (event == Event.CONFIGURATION_CHANGED && this.mState == State.MAIN)) {
-            int ordinal = this.mState.ordinal();
-            if (ordinal == 0) {
+            int iOrdinal = this.mState.ordinal();
+            if (iOrdinal == 0) {
                 if (event == Event.SHOW) {
                     if (this.mIsPortrait) {
                         this.mAnimator.showMainViewPort();
@@ -55,7 +55,7 @@ public class SamsungGlobalActionsAnimatorFSM {
                 }
                 return;
             }
-            if (ordinal == 1) {
+            if (iOrdinal == 1) {
                 if (event == Event.CONFIGURATION_CHANGED) {
                     if (this.mIsPortrait) {
                         this.mAnimator.showMainViewPort();
@@ -92,8 +92,8 @@ public class SamsungGlobalActionsAnimatorFSM {
                     return;
                 }
             }
-            if (ordinal != 2) {
-                if (ordinal != 3) {
+            if (iOrdinal != 2) {
+                if (iOrdinal != 3) {
                     return;
                 }
                 if (event == Event.CONFIGURATION_CHANGED) {

@@ -60,10 +60,10 @@ public class DeviceIDProvisionManager {
         }
 
         public synchronized int setProvisionedUntilReboot() {
-            int deleteCriticalKey = deleteCriticalKey();
-            if (deleteCriticalKey != 0) {
-                Log.i(DeviceIDProvisionManager.TAG, String.format("Phony set boot provisioned status requested, but failed to clear status in storage. [ret = %d]", Integer.valueOf(deleteCriticalKey)));
-                return deleteCriticalKey;
+            int iDeleteCriticalKey = deleteCriticalKey();
+            if (iDeleteCriticalKey != 0) {
+                Log.i(DeviceIDProvisionManager.TAG, String.format("Phony set boot provisioned status requested, but failed to clear status in storage. [ret = %d]", Integer.valueOf(iDeleteCriticalKey)));
+                return iDeleteCriticalKey;
             }
             this.mProvisioned = true;
             return 0;
@@ -74,16 +74,16 @@ public class DeviceIDProvisionManager {
                 Log.i(DeviceIDProvisionManager.TAG, "Set boot provisioned status requested, but is already set.");
                 return 0;
             }
-            int generateCriticalKey = generateCriticalKey();
-            if (generateCriticalKey != 0) {
-                Log.e(DeviceIDProvisionManager.TAG, String.format("Failed to set boot provisioned status. [ret = %d]", Integer.valueOf(generateCriticalKey)));
-                return generateCriticalKey;
+            int iGenerateCriticalKey = generateCriticalKey();
+            if (iGenerateCriticalKey != 0) {
+                Log.e(DeviceIDProvisionManager.TAG, String.format("Failed to set boot provisioned status. [ret = %d]", Integer.valueOf(iGenerateCriticalKey)));
+                return iGenerateCriticalKey;
             }
             this.mProvisioned = true;
             return 0;
         }
 
-        private static boolean isNotExistCriticalKey() {
+        private static boolean isNotExistCriticalKey() throws NoSuchAlgorithmException, IOException, KeyStoreException, CertificateException {
             try {
                 KeyStore keyStore = KeyStore.getInstance(AndroidKeyStoreSpi.NAME);
                 keyStore.load(null);
@@ -94,7 +94,7 @@ public class DeviceIDProvisionManager {
             }
         }
 
-        private static int generateCriticalKey() {
+        private static int generateCriticalKey() throws NoSuchAlgorithmException, IOException, KeyStoreException, CertificateException, NoSuchProviderException, InvalidAlgorithmParameterException {
             try {
                 KeyStore keyStore = KeyStore.getInstance(AndroidKeyStoreSpi.NAME);
                 keyStore.load(null);
@@ -114,7 +114,7 @@ public class DeviceIDProvisionManager {
             }
         }
 
-        private static int deleteCriticalKey() {
+        private static int deleteCriticalKey() throws NoSuchAlgorithmException, IOException, KeyStoreException, CertificateException {
             try {
                 KeyStore keyStore = KeyStore.getInstance(AndroidKeyStoreSpi.NAME);
                 keyStore.load(null);
@@ -131,12 +131,12 @@ public class DeviceIDProvisionManager {
     }
 
     public static boolean isAvailable() {
-        boolean equals = "factory".equals(SystemProperties.get("ro.factory.factory_binary"));
-        boolean equals2 = "0x1".equals(SystemProperties.get("ro.boot.em.status"));
-        boolean z = !equals2;
-        boolean z2 = (Integer.parseInt(SystemProperties.get("ro.product.first_api_level")) >= 33) && ((Integer.parseInt(SystemProperties.get("ro.vendor.build.version.sdk")) >= 33) || (SystemProperties.get("ro.build.flavor", "").contains("a14m") || SystemProperties.get("ro.build.flavor", "").contains("a14xm") || SystemProperties.get("ro.build.flavor", "").contains("a24") || SystemProperties.get("ro.build.flavor", "").contains("a34x")));
-        Log.i(TAG, String.format("Device ID provision attributes: [factory binary = %b, production device = %b, device ID attestation support = %b]", Boolean.valueOf(equals), Boolean.valueOf(z), Boolean.valueOf(z2)));
-        if (equals || !equals2 || !z2) {
+        boolean zEquals = "factory".equals(SystemProperties.get("ro.factory.factory_binary"));
+        boolean zEquals2 = "0x1".equals(SystemProperties.get("ro.boot.em.status"));
+        boolean z = !zEquals2;
+        boolean z2 = (Integer.parseInt(SystemProperties.get("ro.product.first_api_level")) >= 33) && ((Integer.parseInt(SystemProperties.get("ro.board.first_api_level")) >= 33) || (SystemProperties.get("ro.build.flavor", "").contains("a14m") || SystemProperties.get("ro.build.flavor", "").contains("a14xm") || SystemProperties.get("ro.build.flavor", "").contains("a24") || SystemProperties.get("ro.build.flavor", "").contains("a34x")));
+        Log.i(TAG, String.format("Device ID provision attributes: [factory binary = %b, production device = %b, device ID attestation support = %b]", Boolean.valueOf(zEquals), Boolean.valueOf(z), Boolean.valueOf(z2)));
+        if (zEquals || !zEquals2 || !z2) {
             return false;
         }
         boolean z3 = !BootProvisionStatusManager.getInstance().isProvisioned();
@@ -144,13 +144,13 @@ public class DeviceIDProvisionManager {
         return z3;
     }
 
-    public int provisionForATCommand(int i) {
+    public int provisionForATCommand(int i) throws InterruptedException {
         DeviceIDProvisionSynchronousWorker deviceIDProvisionSynchronousWorker = new DeviceIDProvisionSynchronousWorker();
         try {
             deviceIDProvisionSynchronousWorker.setupSynchronous(1000, 10);
-            int provisionDeviceID = deviceIDProvisionSynchronousWorker.provisionDeviceID(i);
-            if (provisionDeviceID != 0) {
-                return provisionDeviceID;
+            int iProvisionDeviceID = deviceIDProvisionSynchronousWorker.provisionDeviceID(i);
+            if (iProvisionDeviceID != 0) {
+                return iProvisionDeviceID;
             }
             Log.i(TAG, "Successfully provisioned device ID requested externally.");
             return 0;
@@ -187,9 +187,9 @@ public class DeviceIDProvisionManager {
         }
 
         @Override // java.lang.Thread, java.lang.Runnable
-        public void run() {
-            int provisionDeviceID;
-            int provisionDeviceID2;
+        public void run() throws InterruptedException {
+            int iProvisionDeviceID;
+            int iProvisionDeviceID2;
             try {
                 Thread.sleep(this.initialWaitTimeMs);
             } catch (InterruptedException e) {
@@ -202,10 +202,10 @@ public class DeviceIDProvisionManager {
             }
             try {
                 this.worker.setupSynchronous(this.retryWaitTimeMs, this.maxWaitCount);
-                if (DeviceIDProvisionWorker.isSupportGAKDeviceID() && (provisionDeviceID2 = this.worker.provisionDeviceID(8)) != 0) {
-                    Log.e(DeviceIDProvisionManager.TAG, "provisionDeviceID for SKeymint failed. ret : " + provisionDeviceID2);
-                } else if (DeviceIDProvisionWorker.isSupportStrongboxDeviceID() && (provisionDeviceID = this.worker.provisionDeviceID(9)) != 0) {
-                    Log.e(DeviceIDProvisionManager.TAG, "provisionDeviceID for StrongboxKeymint failed. ret : " + provisionDeviceID);
+                if (DeviceIDProvisionWorker.isSupportGAKDeviceID() && (iProvisionDeviceID2 = this.worker.provisionDeviceID(8)) != 0) {
+                    Log.e(DeviceIDProvisionManager.TAG, "provisionDeviceID for SKeymint failed. ret : " + iProvisionDeviceID2);
+                } else if (DeviceIDProvisionWorker.isSupportStrongboxDeviceID() && (iProvisionDeviceID = this.worker.provisionDeviceID(9)) != 0) {
+                    Log.e(DeviceIDProvisionManager.TAG, "provisionDeviceID for StrongboxKeymint failed. ret : " + iProvisionDeviceID);
                 } else {
                     int provisioned = BootProvisionStatusManager.getInstance().setProvisioned();
                     if (provisioned != 0) {
@@ -224,7 +224,7 @@ public class DeviceIDProvisionManager {
             super(deviceIDProvisionManager);
         }
 
-        public void setupSynchronous(int i, int i2) throws TimeoutException {
+        public void setupSynchronous(int i, int i2) throws InterruptedException, TimeoutException {
             if (i <= 0) {
                 throw new IllegalArgumentException(String.format("Illegal wait time provided. Expected positive number. [wait time = %d]", Integer.valueOf(i)));
             }
@@ -297,42 +297,42 @@ public class DeviceIDProvisionManager {
             this.mSerial = null;
         }
 
-        protected boolean setupProvisionContext() {
+        protected boolean setupProvisionContext() throws NumberFormatException {
             if (SystemProperties.get("ro.carrier").toUpperCase(Locale.US).contains("WIFI-ONLY")) {
                 Log.i(DeviceIDProvisionManager.TAG, "Skipping imei and meid fetch because this is wifi only model.");
             } else {
-                TelephonyManager tryGetTelephonyManager = tryGetTelephonyManager();
-                if (tryGetTelephonyManager == null) {
+                TelephonyManager telephonyManagerTryGetTelephonyManager = tryGetTelephonyManager();
+                if (telephonyManagerTryGetTelephonyManager == null) {
                     Log.w(DeviceIDProvisionManager.TAG, "Failed to connect to telephony service. Postponing to try again...");
                     return false;
                 }
-                int parseInt = Integer.parseInt(SystemProperties.get("ro.multisim.simslotcount"));
-                if (parseInt > 2) {
-                    Log.w(DeviceIDProvisionManager.TAG, String.format("Only 2 SIM slots are supported, but SIM slot count was bigger than 2. Extra slots will not be taken into account. [slot count = %d]", Integer.valueOf(parseInt)));
-                    parseInt = 2;
-                } else if (parseInt <= 0) {
-                    Log.w(DeviceIDProvisionManager.TAG, String.format("This is not wifi only model, but SIM slot count is strange. [slot count = %d]", Integer.valueOf(parseInt)));
+                int i = Integer.parseInt(SystemProperties.get("ro.multisim.simslotcount"));
+                if (i > 2) {
+                    Log.w(DeviceIDProvisionManager.TAG, String.format("Only 2 SIM slots are supported, but SIM slot count was bigger than 2. Extra slots will not be taken into account. [slot count = %d]", Integer.valueOf(i)));
+                    i = 2;
+                } else if (i <= 0) {
+                    Log.w(DeviceIDProvisionManager.TAG, String.format("This is not wifi only model, but SIM slot count is strange. [slot count = %d]", Integer.valueOf(i)));
                     return false;
                 }
-                for (int i = 0; i < parseInt; i++) {
-                    String tryGetImei = tryGetImei(tryGetTelephonyManager, i);
-                    if (tryGetImei == null) {
-                        Log.w(DeviceIDProvisionManager.TAG, String.format("Failed to fetch imei %d. Postponing to try later.", Integer.valueOf(i)));
+                for (int i2 = 0; i2 < i; i2++) {
+                    String strTryGetImei = tryGetImei(telephonyManagerTryGetTelephonyManager, i2);
+                    if (strTryGetImei == null) {
+                        Log.w(DeviceIDProvisionManager.TAG, String.format("Failed to fetch imei %d. Postponing to try later.", Integer.valueOf(i2)));
                         return false;
                     }
-                    if (i == 0) {
-                        this.mImei0 = tryGetImei;
+                    if (i2 == 0) {
+                        this.mImei0 = strTryGetImei;
                     } else {
-                        if (i != 1) {
-                            Log.w(DeviceIDProvisionManager.TAG, String.format("Unknown SIM slot number %d found. Please contact the administrator.", Integer.valueOf(i)));
+                        if (i2 != 1) {
+                            Log.w(DeviceIDProvisionManager.TAG, String.format("Unknown SIM slot number %d found. Please contact the administrator.", Integer.valueOf(i2)));
                             return false;
                         }
-                        this.mImei1 = tryGetImei;
+                        this.mImei1 = strTryGetImei;
                     }
                 }
-                String tryGetMeid = tryGetMeid(tryGetTelephonyManager, 0);
-                this.mMeid = tryGetMeid;
-                if (tryGetMeid == null) {
+                String strTryGetMeid = tryGetMeid(telephonyManagerTryGetTelephonyManager, 0);
+                this.mMeid = strTryGetMeid;
+                if (strTryGetMeid == null) {
                     Log.w(DeviceIDProvisionManager.TAG, "Failed to fetch meid. Skipping.");
                     this.mMeid = "";
                 }

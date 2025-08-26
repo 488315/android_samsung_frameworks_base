@@ -51,9 +51,9 @@ public interface IStoreUpgradedKeyCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IStoreUpgradedKeyCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IStoreUpgradedKeyCallback)) {
-                return (IStoreUpgradedKeyCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IStoreUpgradedKeyCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IStoreUpgradedKeyCallback)) {
+                return (IStoreUpgradedKeyCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -85,9 +85,9 @@ public interface IStoreUpgradedKeyCallback extends IInterface {
             if (i == 1) {
                 onSuccess();
             } else if (i == 2) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                onError(readString);
+                onError(string);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -112,24 +112,24 @@ public interface IStoreUpgradedKeyCallback extends IInterface {
 
             @Override // android.security.rkp.IStoreUpgradedKeyCallback
             public void onSuccess() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IStoreUpgradedKeyCallback.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IStoreUpgradedKeyCallback.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.rkp.IStoreUpgradedKeyCallback
             public void onError(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IStoreUpgradedKeyCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IStoreUpgradedKeyCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

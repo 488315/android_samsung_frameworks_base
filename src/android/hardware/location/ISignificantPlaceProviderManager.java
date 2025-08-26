@@ -44,9 +44,9 @@ public interface ISignificantPlaceProviderManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISignificantPlaceProviderManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISignificantPlaceProviderManager)) {
-                return (ISignificantPlaceProviderManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISignificantPlaceProviderManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISignificantPlaceProviderManager)) {
+                return (ISignificantPlaceProviderManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,9 +73,9 @@ public interface ISignificantPlaceProviderManager extends IInterface {
                 return true;
             }
             if (i == 1) {
-                boolean readBoolean = parcel.readBoolean();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                setInSignificantPlace(readBoolean);
+                setInSignificantPlace(z);
                 parcel2.writeNoException();
                 return true;
             }
@@ -100,16 +100,16 @@ public interface ISignificantPlaceProviderManager extends IInterface {
 
             @Override // android.hardware.location.ISignificantPlaceProviderManager
             public void setInSignificantPlace(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISignificantPlaceProviderManager.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISignificantPlaceProviderManager.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

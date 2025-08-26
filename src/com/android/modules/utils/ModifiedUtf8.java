@@ -57,8 +57,8 @@ public class ModifiedUtf8 {
         int length = str.length();
         long j = 0;
         for (int i = 0; i < length; i++) {
-            char charAt = str.charAt(i);
-            j += (charAt == 0 || charAt > 127) ? charAt <= 2047 ? 2L : 3L : 1L;
+            char cCharAt = str.charAt(i);
+            j += (cCharAt == 0 || cCharAt > 127) ? cCharAt <= 2047 ? 2L : 3L : 1L;
             if (z && j > 65535) {
                 throw new UTFDataFormatException("String more than 65535 UTF bytes long");
             }
@@ -69,21 +69,21 @@ public class ModifiedUtf8 {
     public static void encode(byte[] bArr, int i, String str) {
         int length = str.length();
         for (int i2 = 0; i2 < length; i2++) {
-            char charAt = str.charAt(i2);
-            if (charAt != 0 && charAt <= 127) {
-                bArr[i] = (byte) charAt;
+            char cCharAt = str.charAt(i2);
+            if (cCharAt != 0 && cCharAt <= 127) {
+                bArr[i] = (byte) cCharAt;
                 i++;
-            } else if (charAt <= 2047) {
+            } else if (cCharAt <= 2047) {
                 int i3 = i + 1;
-                bArr[i] = (byte) (((charAt >> 6) & 31) | 192);
+                bArr[i] = (byte) (((cCharAt >> 6) & 31) | 192);
                 i += 2;
-                bArr[i3] = (byte) ((charAt & '?') | 128);
+                bArr[i3] = (byte) ((cCharAt & '?') | 128);
             } else {
-                bArr[i] = (byte) (((charAt >> '\f') & 15) | 224);
+                bArr[i] = (byte) (((cCharAt >> '\f') & 15) | 224);
                 int i4 = i + 2;
-                bArr[i + 1] = (byte) (((charAt >> 6) & 63) | 128);
+                bArr[i + 1] = (byte) (((cCharAt >> 6) & 63) | 128);
                 i += 3;
-                bArr[i4] = (byte) ((charAt & '?') | 128);
+                bArr[i4] = (byte) ((cCharAt & '?') | 128);
             }
         }
     }

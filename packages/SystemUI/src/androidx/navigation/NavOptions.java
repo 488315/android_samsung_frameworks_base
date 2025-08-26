@@ -5,7 +5,6 @@ import kotlin.jvm.internal.Reflection;
 import kotlin.reflect.KClass;
 import kotlinx.serialization.SerializersKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class NavOptions {
     public final int enterAnim;
@@ -21,7 +20,6 @@ public final class NavOptions {
     public final boolean restoreState;
     public final boolean singleTop;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Builder {
         public boolean popUpToInclusive;
         public boolean popUpToSaveState;
@@ -64,11 +62,11 @@ public final class NavOptions {
     public final int hashCode() {
         int i = (((((this.singleTop ? 1 : 0) * 31) + (this.restoreState ? 1 : 0)) * 31) + this.popUpToId) * 31;
         String str = this.popUpToRoute;
-        int hashCode = (i + (str != null ? str.hashCode() : 0)) * 31;
+        int iHashCode = (i + (str != null ? str.hashCode() : 0)) * 31;
         KClass kClass = this.popUpToRouteClass;
-        int hashCode2 = (hashCode + (kClass != null ? kClass.hashCode() : 0)) * 31;
+        int iHashCode2 = (iHashCode + (kClass != null ? kClass.hashCode() : 0)) * 31;
         Object obj = this.popUpToRouteObject;
-        return ((((((((((((hashCode2 + (obj != null ? obj.hashCode() : 0)) * 31) + (this.popUpToInclusive ? 1 : 0)) * 31) + (this.popUpToSaveState ? 1 : 0)) * 31) + this.enterAnim) * 31) + this.exitAnim) * 31) + this.popEnterAnim) * 31) + this.popExitAnim;
+        return ((((((((((((iHashCode2 + (obj != null ? obj.hashCode() : 0)) * 31) + (this.popUpToInclusive ? 1 : 0)) * 31) + (this.popUpToSaveState ? 1 : 0)) * 31) + this.enterAnim) * 31) + this.exitAnim) * 31) + this.popEnterAnim) * 31) + this.popExitAnim;
     }
 
     public final String toString() {

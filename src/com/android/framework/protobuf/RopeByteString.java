@@ -131,11 +131,11 @@ final class RopeByteString extends ByteString {
                 if (byteIterator == null) {
                     throw new NoSuchElementException();
                 }
-                byte nextByte = byteIterator.nextByte();
+                byte bNextByte = byteIterator.nextByte();
                 if (!this.current.hasNext()) {
                     this.current = nextPiece();
                 }
-                return nextByte;
+                return bNextByte;
             }
         };
     }
@@ -152,11 +152,11 @@ final class RopeByteString extends ByteString {
 
     @Override // com.android.framework.protobuf.ByteString
     public ByteString substring(int i, int i2) {
-        int checkRange = checkRange(i, i2, this.totalLength);
-        if (checkRange == 0) {
+        int iCheckRange = checkRange(i, i2, this.totalLength);
+        if (iCheckRange == 0) {
             return ByteString.EMPTY;
         }
-        if (checkRange == this.totalLength) {
+        if (iCheckRange == this.totalLength) {
             return this;
         }
         int i3 = this.leftLength;
@@ -249,9 +249,9 @@ final class RopeByteString extends ByteString {
 
     @Override // com.android.framework.protobuf.ByteString
     public boolean isValidUtf8() {
-        int partialIsValidUtf8 = this.left.partialIsValidUtf8(0, 0, this.leftLength);
+        int iPartialIsValidUtf8 = this.left.partialIsValidUtf8(0, 0, this.leftLength);
         ByteString byteString = this.right;
-        return byteString.partialIsValidUtf8(partialIsValidUtf8, 0, byteString.size()) == 0;
+        return byteString.partialIsValidUtf8(iPartialIsValidUtf8, 0, byteString.size()) == 0;
     }
 
     @Override // com.android.framework.protobuf.ByteString
@@ -283,16 +283,16 @@ final class RopeByteString extends ByteString {
         if (this.totalLength == 0) {
             return true;
         }
-        int peekCachedHashCode = peekCachedHashCode();
-        int peekCachedHashCode2 = byteString.peekCachedHashCode();
-        if (peekCachedHashCode == 0 || peekCachedHashCode2 == 0 || peekCachedHashCode == peekCachedHashCode2) {
+        int iPeekCachedHashCode = peekCachedHashCode();
+        int iPeekCachedHashCode2 = byteString.peekCachedHashCode();
+        if (iPeekCachedHashCode == 0 || iPeekCachedHashCode2 == 0 || iPeekCachedHashCode == iPeekCachedHashCode2) {
             return equalsFragments(byteString);
         }
         return false;
     }
 
     private boolean equalsFragments(ByteString byteString) {
-        boolean equalsRange;
+        boolean zEqualsRange;
         PieceIterator pieceIterator = new PieceIterator(this);
         ByteString.LeafByteString next = pieceIterator.next();
         PieceIterator pieceIterator2 = new PieceIterator(byteString);
@@ -303,16 +303,16 @@ final class RopeByteString extends ByteString {
         while (true) {
             int size = next.size() - i;
             int size2 = next2.size() - i2;
-            int min = Math.min(size, size2);
+            int iMin = Math.min(size, size2);
             if (i == 0) {
-                equalsRange = next.equalsRange(next2, i2, min);
+                zEqualsRange = next.equalsRange(next2, i2, iMin);
             } else {
-                equalsRange = next2.equalsRange(next, i, min);
+                zEqualsRange = next2.equalsRange(next, i, iMin);
             }
-            if (!equalsRange) {
+            if (!zEqualsRange) {
                 return false;
             }
-            i3 += min;
+            i3 += iMin;
             int i4 = this.totalLength;
             if (i3 >= i4) {
                 if (i3 == i4) {
@@ -320,18 +320,18 @@ final class RopeByteString extends ByteString {
                 }
                 throw new IllegalStateException();
             }
-            if (min == size) {
+            if (iMin == size) {
                 i = 0;
                 next = pieceIterator.next();
             } else {
-                i += min;
+                i += iMin;
                 next = next;
             }
-            if (min == size2) {
+            if (iMin == size2) {
                 next2 = pieceIterator2.next();
                 i2 = 0;
             } else {
-                i2 += min;
+                i2 += iMin;
             }
         }
     }
@@ -371,11 +371,11 @@ final class RopeByteString extends ByteString {
         public ByteString balance(ByteString byteString, ByteString byteString2) {
             doBalance(byteString);
             doBalance(byteString2);
-            ByteString pop = this.prefixesStack.pop();
+            ByteString byteStringPop = this.prefixesStack.pop();
             while (!this.prefixesStack.isEmpty()) {
-                pop = new RopeByteString(this.prefixesStack.pop(), pop);
+                byteStringPop = new RopeByteString(this.prefixesStack.pop(), byteStringPop);
             }
-            return pop;
+            return byteStringPop;
         }
 
         private void doBalance(ByteString byteString) {
@@ -394,21 +394,21 @@ final class RopeByteString extends ByteString {
 
         private void insert(ByteString byteString) {
             int depthBinForLength = getDepthBinForLength(byteString.size());
-            int minLength = RopeByteString.minLength(depthBinForLength + 1);
-            if (this.prefixesStack.isEmpty() || this.prefixesStack.peek().size() >= minLength) {
+            int iMinLength = RopeByteString.minLength(depthBinForLength + 1);
+            if (this.prefixesStack.isEmpty() || this.prefixesStack.peek().size() >= iMinLength) {
                 this.prefixesStack.push(byteString);
                 return;
             }
-            int minLength2 = RopeByteString.minLength(depthBinForLength);
-            ByteString pop = this.prefixesStack.pop();
+            int iMinLength2 = RopeByteString.minLength(depthBinForLength);
+            ByteString byteStringPop = this.prefixesStack.pop();
             while (true) {
-                if (this.prefixesStack.isEmpty() || this.prefixesStack.peek().size() >= minLength2) {
+                if (this.prefixesStack.isEmpty() || this.prefixesStack.peek().size() >= iMinLength2) {
                     break;
                 } else {
-                    pop = new RopeByteString(this.prefixesStack.pop(), pop);
+                    byteStringPop = new RopeByteString(this.prefixesStack.pop(), byteStringPop);
                 }
             }
-            RopeByteString ropeByteString = new RopeByteString(pop, byteString);
+            RopeByteString ropeByteString = new RopeByteString(byteStringPop, byteString);
             while (!this.prefixesStack.isEmpty()) {
                 if (this.prefixesStack.peek().size() >= RopeByteString.minLength(getDepthBinForLength(ropeByteString.size()) + 1)) {
                     break;
@@ -420,8 +420,8 @@ final class RopeByteString extends ByteString {
         }
 
         private int getDepthBinForLength(int i) {
-            int binarySearch = Arrays.binarySearch(RopeByteString.minLengthByDepth, i);
-            return binarySearch < 0 ? (-(binarySearch + 1)) - 1 : binarySearch;
+            int iBinarySearch = Arrays.binarySearch(RopeByteString.minLengthByDepth, i);
+            return iBinarySearch < 0 ? (-(iBinarySearch + 1)) - 1 : iBinarySearch;
         }
     }
 
@@ -516,9 +516,9 @@ final class RopeByteString extends ByteString {
             if (i < 0 || i2 < 0 || i2 > bArr.length - i) {
                 throw new IndexOutOfBoundsException();
             }
-            int readSkipInternal = readSkipInternal(bArr, i, i2);
-            if (readSkipInternal != 0 || (i2 <= 0 && availableInternal() != 0)) {
-                return readSkipInternal;
+            int skipInternal = readSkipInternal(bArr, i, i2);
+            if (skipInternal != 0 || (i2 <= 0 && availableInternal() != 0)) {
+                return skipInternal;
             }
             return -1;
         }
@@ -541,13 +541,13 @@ final class RopeByteString extends ByteString {
                 if (this.currentPiece == null) {
                     break;
                 }
-                int min = Math.min(this.currentPieceSize - this.currentPieceIndex, i3);
+                int iMin = Math.min(this.currentPieceSize - this.currentPieceIndex, i3);
                 if (bArr != null) {
-                    this.currentPiece.copyTo(bArr, this.currentPieceIndex, i, min);
-                    i += min;
+                    this.currentPiece.copyTo(bArr, this.currentPieceIndex, i, iMin);
+                    i += iMin;
                 }
-                this.currentPieceIndex += min;
-                i3 -= min;
+                this.currentPieceIndex += iMin;
+                i3 -= iMin;
             }
             return i2 - i3;
         }

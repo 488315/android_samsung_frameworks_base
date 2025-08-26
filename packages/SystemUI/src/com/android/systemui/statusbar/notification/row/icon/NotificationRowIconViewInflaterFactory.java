@@ -10,7 +10,6 @@ import com.android.systemui.statusbar.notification.row.ExpandableNotificationRow
 import com.android.systemui.statusbar.notification.row.NotifRemoteViewsFactory;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class NotificationRowIconViewInflaterFactory implements NotifRemoteViewsFactory {
     public final AppIconProvider appIconProvider;
@@ -38,14 +37,14 @@ public final class NotificationRowIconViewInflaterFactory implements NotifRemote
             }
         } : new NotificationRowIconView.NotificationIconProvider() { // from class: com.android.systemui.statusbar.notification.row.icon.NotificationRowIconViewInflaterFactory$createIconProvider$2
             public final Drawable getAppIcon() {
-                boolean shouldShowWorkProfileBadge = NotificationRowIconViewInflaterFactory.this.iconStyleProvider.shouldShowWorkProfileBadge(context, statusBarNotification);
-                return NotificationRowIconViewInflaterFactory.this.appIconProvider.getOrFetchAppIcon(context, statusBarNotification.getPackageName(), shouldShowWorkProfileBadge);
+                boolean zShouldShowWorkProfileBadge = this.this$0.iconStyleProvider.shouldShowWorkProfileBadge(context, statusBarNotification);
+                return this.this$0.appIconProvider.getOrFetchAppIcon(context, statusBarNotification.getPackageName(), zShouldShowWorkProfileBadge);
             }
 
             public final boolean shouldShowAppIcon() {
-                boolean shouldShowAppIcon = NotificationRowIconViewInflaterFactory.this.iconStyleProvider.shouldShowAppIcon(context, statusBarNotification);
+                boolean zShouldShowAppIcon = this.this$0.iconStyleProvider.shouldShowAppIcon(context, statusBarNotification);
                 expandableNotificationRow.getClass();
-                return shouldShowAppIcon;
+                return zShouldShowAppIcon;
             }
         });
         return notificationRowIconView;

@@ -12,7 +12,6 @@ import android.util.AttributeSet;
 import android.widget.ImageView;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class BatteryStatusChipClearImageView extends ImageView {
     public final Paint clearPaint;
@@ -26,15 +25,15 @@ public final class BatteryStatusChipClearImageView extends ImageView {
     public final void draw(Canvas canvas, Paint paint) {
         canvas.save();
         Drawable drawable = getDrawable();
-        Bitmap createBitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas2 = new Canvas(createBitmap);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas2 = new Canvas(bitmapCreateBitmap);
         drawable.setBounds(0, 0, canvas2.getWidth(), canvas2.getHeight());
         drawable.draw(canvas2);
         float measuredWidth = getMeasuredWidth() / getDrawable().getIntrinsicWidth();
         float measuredHeight = getMeasuredHeight() / getDrawable().getIntrinsicHeight();
         Matrix matrix = new Matrix();
         matrix.setScale(measuredWidth, measuredHeight);
-        canvas.drawBitmap(createBitmap, matrix, paint);
+        canvas.drawBitmap(bitmapCreateBitmap, matrix, paint);
         canvas.restore();
     }
 

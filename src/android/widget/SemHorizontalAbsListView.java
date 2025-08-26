@@ -2,6 +2,7 @@ package android.widget;
 
 import android.app.KeyguardManager;
 import android.app.slice.Slice;
+import android.content.ClipDescription;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
@@ -32,6 +33,7 @@ import android.util.StateSet;
 import android.util.TypedValue;
 import android.view.ActionMode;
 import android.view.ContextMenu;
+import android.view.DragEvent;
 import android.view.HapticFeedbackConstants;
 import android.view.InputDevice;
 import android.view.KeyEvent;
@@ -564,9 +566,9 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
         initAbsListView();
         this.mOwnerThread = Thread.currentThread();
         setHorizontalScrollBarEnabled(true);
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(R.styleable.View);
-        initializeScrollbarsInternal(obtainStyledAttributes);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(R.styleable.View);
+        initializeScrollbarsInternal(typedArrayObtainStyledAttributes);
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     @Deprecated
@@ -697,21 +699,21 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
         this.mHoverScrollSpeed = 0;
         initAbsListView();
         this.mOwnerThread = Thread.currentThread();
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.AbsListView, i, i2);
-        Drawable drawable = obtainStyledAttributes.getDrawable(0);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.AbsListView, i, i2);
+        Drawable drawable = typedArrayObtainStyledAttributes.getDrawable(0);
         if (drawable != null) {
             setSelector(drawable);
         }
-        this.mDrawSelectorOnTop = obtainStyledAttributes.getBoolean(1, false);
-        setStackFromBottom(obtainStyledAttributes.getBoolean(2, false));
-        setScrollingCacheEnabled(obtainStyledAttributes.getBoolean(3, true));
-        setTextFilterEnabled(obtainStyledAttributes.getBoolean(4, false));
-        setTranscriptMode(obtainStyledAttributes.getInt(5, 0));
-        setFastScrollEnabled(obtainStyledAttributes.getBoolean(8, false));
-        setFastScrollStyle(obtainStyledAttributes.getResourceId(11, 0));
-        setSmoothScrollbarEnabled(obtainStyledAttributes.getBoolean(9, true));
-        setFastScrollAlwaysVisible(obtainStyledAttributes.getBoolean(10, false));
-        obtainStyledAttributes.recycle();
+        this.mDrawSelectorOnTop = typedArrayObtainStyledAttributes.getBoolean(1, false);
+        setStackFromBottom(typedArrayObtainStyledAttributes.getBoolean(2, false));
+        setScrollingCacheEnabled(typedArrayObtainStyledAttributes.getBoolean(3, true));
+        setTextFilterEnabled(typedArrayObtainStyledAttributes.getBoolean(4, false));
+        setTranscriptMode(typedArrayObtainStyledAttributes.getInt(5, 0));
+        setFastScrollEnabled(typedArrayObtainStyledAttributes.getBoolean(8, false));
+        setFastScrollStyle(typedArrayObtainStyledAttributes.getResourceId(11, 0));
+        setSmoothScrollbarEnabled(typedArrayObtainStyledAttributes.getBoolean(9, true));
+        setFastScrollAlwaysVisible(typedArrayObtainStyledAttributes.getBoolean(10, false));
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     private void initAbsListView() {
@@ -1363,10 +1365,10 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
             this.inActionMode = parcel.readByte() != 0;
             this.checkedItemCount = parcel.readInt();
             this.checkState = parcel.readSparseBooleanArray();
-            int readInt = parcel.readInt();
-            if (readInt > 0) {
+            int i = parcel.readInt();
+            if (i > 0) {
                 this.checkIdState = new LongSparseArray<>();
-                for (int i = 0; i < readInt; i++) {
+                for (int i2 = 0; i2 < i; i2++) {
                     this.checkIdState.put(parcel.readLong(), Integer.valueOf(parcel.readInt()));
                 }
             }
@@ -1447,7 +1449,7 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
         savedState.inActionMode = this.mChoiceMode == 3 && this.mChoiceActionMode != null;
         SparseBooleanArray sparseBooleanArray = this.mCheckStates;
         if (sparseBooleanArray != null) {
-            savedState.checkState = sparseBooleanArray.m5530clone();
+            savedState.checkState = sparseBooleanArray.m5537clone();
         }
         if (this.mCheckedIdStates != null) {
             LongSparseArray<Integer> longSparseArray = new LongSparseArray<>();
@@ -1664,8 +1666,8 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
     @Deprecated
     protected int computeHorizontalScrollRange() {
         if (this.mSmoothScrollbarEnabled) {
-            int max = Math.max(this.mItemCount * 100, 0);
-            return this.mScrollX != 0 ? max + Math.abs((int) ((this.mScrollX / getWidth()) * this.mItemCount * 100.0f)) : max;
+            int iMax = Math.max(this.mItemCount * 100, 0);
+            return this.mScrollX != 0 ? iMax + Math.abs((int) ((this.mScrollX / getWidth()) * this.mItemCount * 100.0f)) : iMax;
         }
         return this.mItemCount;
     }
@@ -2060,16 +2062,16 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
     @Override // android.view.ViewGroup, android.view.View
     @Deprecated
     protected void dispatchDraw(Canvas canvas) {
-        int i;
+        int iSave;
         boolean z = (this.mGroupFlags & 34) == 34;
         if (z) {
-            i = canvas.save();
-            int i2 = this.mScrollX;
-            int i3 = this.mScrollY;
-            canvas.clipRect(this.mPaddingLeft + i2, this.mPaddingTop + i3, ((i2 + this.mRight) - this.mLeft) - this.mPaddingRight, ((i3 + this.mBottom) - this.mTop) - this.mPaddingBottom);
+            iSave = canvas.save();
+            int i = this.mScrollX;
+            int i2 = this.mScrollY;
+            canvas.clipRect(this.mPaddingLeft + i, this.mPaddingTop + i2, ((i + this.mRight) - this.mLeft) - this.mPaddingRight, ((i2 + this.mBottom) - this.mTop) - this.mPaddingBottom);
             this.mGroupFlags &= -35;
         } else {
-            i = 0;
+            iSave = 0;
         }
         boolean z2 = this.mDrawSelectorOnTop;
         if (!z2) {
@@ -2080,7 +2082,7 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
             drawSelector(canvas);
         }
         if (z) {
-            canvas.restoreToCount(i);
+            canvas.restoreToCount(iSave);
             this.mGroupFlags |= 34;
         }
         if (this.mIsDragBlockEnabled) {
@@ -2089,21 +2091,21 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
             }
             int firstVisiblePosition = getFirstVisiblePosition();
             int lastVisiblePosition = getLastVisiblePosition();
-            int i4 = this.mSemTrackedChildPosition;
-            if (i4 >= firstVisiblePosition && i4 <= lastVisiblePosition) {
-                View childAt = getChildAt(i4 - getFirstVisiblePosition());
+            int i3 = this.mSemTrackedChildPosition;
+            if (i3 >= firstVisiblePosition && i3 <= lastVisiblePosition) {
+                View childAt = getChildAt(i3 - getFirstVisiblePosition());
                 this.mSemTrackedChild = childAt;
                 this.mSemDragStartX = (childAt != null ? childAt.getLeft() : 0) + this.mSemDistanceFromTrackedChildLeft;
             }
-            int i5 = this.mSemDragStartX;
-            int i6 = this.mSemDragEndX;
-            int i7 = i5 < i6 ? i5 : i6;
-            this.mSemDragBlockLeft = i7;
-            if (i6 > i5) {
-                i5 = i6;
+            int i4 = this.mSemDragStartX;
+            int i5 = this.mSemDragEndX;
+            int i6 = i4 < i5 ? i4 : i5;
+            this.mSemDragBlockLeft = i6;
+            if (i5 > i4) {
+                i4 = i5;
             }
-            this.mSemDragBlockRight = i5;
-            this.mSemDragBlockRect.set(i7, this.mSemDragBlockTop, i5, this.mSemDragBlockBottom);
+            this.mSemDragBlockRight = i4;
+            this.mSemDragBlockRect.set(i6, this.mSemDragBlockTop, i4, this.mSemDragBlockBottom);
             this.mSemDragBlockImage.setBounds(this.mSemDragBlockRect);
             this.mSemDragBlockImage.draw(canvas);
         }
@@ -2251,16 +2253,16 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
                         }
                     }
                     setPressed(true);
-                    boolean isLongClickable = isLongClickable();
+                    boolean zIsLongClickable = isLongClickable();
                     Drawable current = drawable.getCurrent();
                     if (current != null && (current instanceof TransitionDrawable)) {
-                        if (isLongClickable) {
+                        if (zIsLongClickable) {
                             ((TransitionDrawable) current).startTransition(ViewConfiguration.getLongPressTimeout());
                         } else {
                             ((TransitionDrawable) current).resetTransition();
                         }
                     }
-                    if (!isLongClickable || this.mDataChanged) {
+                    if (!zIsLongClickable || this.mDataChanged) {
                         return;
                     }
                     CheckForKeyLongPress checkForKeyLongPress = this.mPendingCheckForKeyLongPress;
@@ -2317,22 +2319,22 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
             return super.onCreateDrawableState(i);
         }
         int i2 = ENABLED_STATE_SET[0];
-        int[] onCreateDrawableState = super.onCreateDrawableState(i + 1);
-        int length = onCreateDrawableState.length - 1;
+        int[] iArrOnCreateDrawableState = super.onCreateDrawableState(i + 1);
+        int length = iArrOnCreateDrawableState.length - 1;
         while (true) {
             if (length < 0) {
                 length = -1;
                 break;
             }
-            if (onCreateDrawableState[length] == i2) {
+            if (iArrOnCreateDrawableState[length] == i2) {
                 break;
             }
             length--;
         }
         if (length >= 0) {
-            System.arraycopy(onCreateDrawableState, length + 1, onCreateDrawableState, length, (onCreateDrawableState.length - length) - 1);
+            System.arraycopy(iArrOnCreateDrawableState, length + 1, iArrOnCreateDrawableState, length, (iArrOnCreateDrawableState.length - length) - 1);
         }
-        return onCreateDrawableState;
+        return iArrOnCreateDrawableState;
     }
 
     @Override // android.view.View
@@ -2613,7 +2615,7 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
 
         @Override // java.lang.Runnable
         public void run() {
-            boolean z;
+            boolean zPerformLongPress;
             if (!SemHorizontalAbsListView.this.isPressed() || SemHorizontalAbsListView.this.mSelectedPosition < 0) {
                 return;
             }
@@ -2624,11 +2626,11 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
             if (!SemHorizontalAbsListView.this.mDataChanged) {
                 if (sameWindow()) {
                     SemHorizontalAbsListView semHorizontalAbsListView = SemHorizontalAbsListView.this;
-                    z = semHorizontalAbsListView.performLongPress(childAt, semHorizontalAbsListView.mSelectedPosition, SemHorizontalAbsListView.this.mSelectedRowId);
+                    zPerformLongPress = semHorizontalAbsListView.performLongPress(childAt, semHorizontalAbsListView.mSelectedPosition, SemHorizontalAbsListView.this.mSelectedRowId);
                 } else {
-                    z = false;
+                    zPerformLongPress = false;
                 }
-                if (z) {
+                if (zPerformLongPress) {
                     SemHorizontalAbsListView.this.setPressed(false);
                     childAt.setPressed(false);
                     return;
@@ -2645,12 +2647,12 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
         View view2;
         int i2;
         long j2;
-        boolean z;
+        boolean zShowContextMenuForChild;
         if (this.mChoiceMode == 3) {
             if (this.mChoiceActionMode == null) {
-                ActionMode startActionMode = startActionMode(this.mMultiChoiceModeCallback);
-                this.mChoiceActionMode = startActionMode;
-                if (startActionMode != null) {
+                ActionMode actionModeStartActionMode = startActionMode(this.mMultiChoiceModeCallback);
+                this.mChoiceActionMode = actionModeStartActionMode;
+                if (actionModeStartActionMode != null) {
                     if (this.mChoiceMode == 3) {
                         this.mIsDragBlockEnabled = true;
                     }
@@ -2665,27 +2667,27 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
             view2 = view;
             i2 = i;
             j2 = j;
-            z = this.mOnItemLongClickListener.onItemLongClick(semHorizontalAbsListView2, view2, i2, j2);
+            zShowContextMenuForChild = this.mOnItemLongClickListener.onItemLongClick(semHorizontalAbsListView2, view2, i2, j2);
             semHorizontalAbsListView = semHorizontalAbsListView2;
         } else {
             semHorizontalAbsListView = this;
             view2 = view;
             i2 = i;
             j2 = j;
-            z = false;
+            zShowContextMenuForChild = false;
         }
-        if (!z) {
+        if (!zShowContextMenuForChild) {
             semHorizontalAbsListView.mContextMenuInfo = semHorizontalAbsListView.createContextMenuInfo(view2, i2, j2);
-            z = super.showContextMenuForChild(semHorizontalAbsListView);
+            zShowContextMenuForChild = super.showContextMenuForChild(semHorizontalAbsListView);
         }
-        if (z) {
+        if (zShowContextMenuForChild) {
             if (semHorizontalAbsListView.semGetEnableVibrationAtLongPress()) {
                 semHorizontalAbsListView.performHapticFeedback(HapticFeedbackConstants.semGetVibrationIndex(1));
-                return z;
+                return zShowContextMenuForChild;
             }
             Log.d(TAG, " does not need vibration");
         }
-        return z;
+        return zShowContextMenuForChild;
     }
 
     @Override // android.view.View
@@ -2695,12 +2697,12 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
     }
 
     public boolean showContextMenu(float f, float f2, int i) {
-        int pointToPosition = pointToPosition((int) f, (int) f2);
-        if (pointToPosition != -1) {
-            long itemId = this.mAdapter.getItemId(pointToPosition);
-            View childAt = getChildAt(pointToPosition - this.mFirstPosition);
+        int iPointToPosition = pointToPosition((int) f, (int) f2);
+        if (iPointToPosition != -1) {
+            long itemId = this.mAdapter.getItemId(iPointToPosition);
+            View childAt = getChildAt(iPointToPosition - this.mFirstPosition);
             if (childAt != null) {
-                this.mContextMenuInfo = createContextMenuInfo(childAt, pointToPosition, itemId);
+                this.mContextMenuInfo = createContextMenuInfo(childAt, iPointToPosition, itemId);
                 return super.showContextMenuForChild(this);
             }
         } else {
@@ -2715,23 +2717,23 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
         SemHorizontalAbsListView semHorizontalAbsListView;
         View view2;
         int positionForView = getPositionForView(view);
-        boolean z = false;
+        boolean zOnItemLongClick = false;
         if (positionForView >= 0) {
             long itemId = this.mAdapter.getItemId(positionForView);
             if (this.mOnItemLongClickListener != null) {
                 semHorizontalAbsListView = this;
                 view2 = view;
-                z = this.mOnItemLongClickListener.onItemLongClick(semHorizontalAbsListView, view2, positionForView, itemId);
+                zOnItemLongClick = this.mOnItemLongClickListener.onItemLongClick(semHorizontalAbsListView, view2, positionForView, itemId);
             } else {
                 semHorizontalAbsListView = this;
                 view2 = view;
             }
-            if (!z) {
+            if (!zOnItemLongClick) {
                 semHorizontalAbsListView.mContextMenuInfo = semHorizontalAbsListView.createContextMenuInfo(semHorizontalAbsListView.getChildAt(positionForView - semHorizontalAbsListView.mFirstPosition), positionForView, itemId);
                 return super.showContextMenuForChild(view2);
             }
         }
-        return z;
+        return zOnItemLongClick;
     }
 
     @Override // android.view.View, android.view.KeyEvent.Callback
@@ -2856,9 +2858,9 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
 
     @Deprecated
     public long pointToRowId(int i, int i2) {
-        int pointToPosition = pointToPosition(i, i2);
-        if (pointToPosition >= 0) {
-            return this.mAdapter.getItemId(pointToPosition);
+        int iPointToPosition = pointToPosition(i, i2);
+        if (iPointToPosition >= 0) {
+            return this.mAdapter.getItemId(iPointToPosition);
         }
         return Long.MIN_VALUE;
     }
@@ -2891,11 +2893,11 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
                     semHorizontalAbsListView2.positionSelector(semHorizontalAbsListView2.mMotionPosition, childAt);
                     SemHorizontalAbsListView.this.refreshDrawableState();
                     int longPressTimeout = ViewConfiguration.getLongPressTimeout();
-                    boolean isLongClickable = SemHorizontalAbsListView.this.isLongClickable();
+                    boolean zIsLongClickable = SemHorizontalAbsListView.this.isLongClickable();
                     if (SemHorizontalAbsListView.this.mSelector != null) {
                         Drawable current = SemHorizontalAbsListView.this.mSelector.getCurrent();
                         if (current != null && (current instanceof TransitionDrawable)) {
-                            if (isLongClickable) {
+                            if (zIsLongClickable) {
                                 ((TransitionDrawable) current).startTransition(longPressTimeout);
                             } else {
                                 ((TransitionDrawable) current).resetTransition();
@@ -2903,7 +2905,7 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
                         }
                         SemHorizontalAbsListView.this.mSelector.setHotspot(this.x, this.y);
                     }
-                    if (isLongClickable) {
+                    if (zIsLongClickable) {
                         if (SemHorizontalAbsListView.this.mPendingCheckForLongPress == null) {
                             SemHorizontalAbsListView.this.mPendingCheckForLongPress = new CheckForLongPress();
                         }
@@ -2922,9 +2924,9 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
 
     private boolean startScrollIfNeeded(int i, int i2, MotionEvent motionEvent) {
         int i3 = i - this.mMotionX;
-        int abs = Math.abs(i3);
+        int iAbs = Math.abs(i3);
         boolean z = this.mScrollX != 0;
-        if ((!z && abs <= this.mTouchSlop) || (getNestedScrollAxes() & 1) != 0) {
+        if ((!z && iAbs <= this.mTouchSlop) || (getNestedScrollAxes() & 1) != 0) {
             return false;
         }
         createScrollingCache();
@@ -2956,6 +2958,10 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
         return true;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:104:0x01db  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     private void scrollIfNeeded(int i, int i2, MotionEvent motionEvent) {
         int i3;
         int i4;
@@ -3005,11 +3011,11 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
                 }
                 View childAt = getChildAt(childCount);
                 int left = childAt != null ? childAt.getLeft() : 0;
-                boolean trackMotionScroll = i15 != 0 ? trackMotionScroll(i13, i15) : false;
+                boolean zTrackMotionScroll = i15 != 0 ? trackMotionScroll(i13, i15) : false;
                 View childAt2 = getChildAt(childCount);
                 if (childAt2 != null) {
                     int left2 = childAt2.getLeft();
-                    if (trackMotionScroll) {
+                    if (zTrackMotionScroll) {
                         int i18 = (-i15) - (left2 - left);
                         if (dispatchNestedScroll(i18 - i15, 0, 0, i18, this.mScrollOffset)) {
                             int i19 = this.mScrollOffset[0];
@@ -3020,13 +3026,13 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
                             }
                             i10 = i20;
                         } else {
-                            boolean overScrollBy = overScrollBy(i18, 0, this.mScrollX, 0, 0, 0, this.mOverscrollDistance, 0, true);
-                            if (overScrollBy && (velocityTracker = this.mVelocityTracker) != null) {
+                            boolean zOverScrollBy = overScrollBy(i18, 0, this.mScrollX, 0, 0, 0, this.mOverscrollDistance, 0, true);
+                            if (zOverScrollBy && (velocityTracker = this.mVelocityTracker) != null) {
                                 velocityTracker.clear();
                             }
                             int overScrollMode = getOverScrollMode();
                             if (overScrollMode == 0 || (overScrollMode == 1 && !contentFits())) {
-                                if (!overScrollBy) {
+                                if (!zOverScrollBy) {
                                     this.mDirection = 0;
                                     this.mTouchMode = 5;
                                 }
@@ -3089,9 +3095,10 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
                     }
                     i7 = 0;
                     invalidate((getWidth() - getPaddingRight()) - this.mEdgeGlowRight.getMaxHeight(), 0, getWidth(), getHeight());
+                } else {
+                    i7 = 0;
                 }
             }
-            i7 = 0;
         } else {
             i6 = i23;
             i7 = 0;
@@ -3103,12 +3110,12 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
             }
             trackMotionScroll(i5, i5);
             this.mTouchMode = 3;
-            int findClosestMotionRow = findClosestMotionRow(i);
+            int iFindClosestMotionRow = findClosestMotionRow(i);
             this.mMotionCorrection = i7;
-            View childAt3 = getChildAt(findClosestMotionRow - this.mFirstPosition);
+            View childAt3 = getChildAt(iFindClosestMotionRow - this.mFirstPosition);
             this.mMotionViewOriginalLeft = childAt3 != null ? childAt3.getLeft() : i7;
             this.mMotionX = i;
-            this.mMotionPosition = findClosestMotionRow;
+            this.mMotionPosition = iFindClosestMotionRow;
         }
         this.mLastX = i + i4;
         this.mDirection = i6;
@@ -3179,26 +3186,113 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
     protected boolean dispatchHoverEvent(android.view.MotionEvent r19) {
         /*
             Method dump skipped, instructions count: 949
-            To view this dump change 'Code comments level' option to 'DEBUG'
+            To view this dump add '--comments-level debug' option
         */
         throw new UnsupportedOperationException("Method not decompiled: android.widget.SemHorizontalAbsListView.dispatchHoverEvent(android.view.MotionEvent):boolean");
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:77:0x00e1, code lost:
-    
-        if (r0 != 6) goto L103;
-     */
     @Override // android.view.ViewGroup, android.view.View
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public boolean dispatchDragEvent(android.view.DragEvent r13) {
-        /*
-            Method dump skipped, instructions count: 447
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.SemHorizontalAbsListView.dispatchDragEvent(android.view.DragEvent):boolean");
+    public boolean dispatchDragEvent(DragEvent dragEvent) {
+        int action = dragEvent.getAction();
+        ClipDescription clipDescription = dragEvent.getClipDescription();
+        if (clipDescription == null || !"cropUri".equals(clipDescription.getLabel())) {
+            return super.dispatchDragEvent(dragEvent);
+        }
+        if (action == 1) {
+            if (this.mDragScrollWorkingZonePx <= 0) {
+                this.mDragScrollWorkingZonePx = (int) (TypedValue.applyDimension(1, 25.0f, this.mContext.getResources().getDisplayMetrics()) + 0.5f);
+            }
+            super.dispatchDragEvent(dragEvent);
+            return true;
+        }
+        int x = (int) dragEvent.getX();
+        int y = (int) dragEvent.getY();
+        int childCount = getChildCount();
+        int childCount2 = getChildCount();
+        int width = childCount != 0 ? getWidth() : 0;
+        boolean z = this.mFirstPosition + childCount2 < this.mItemCount;
+        if (!z && childCount2 > 0) {
+            View childAt = getChildAt(childCount2 - 1);
+            z = childAt.getRight() > this.mRight - this.mListPadding.right || childAt.getRight() > getWidth() - this.mListPadding.right;
+        }
+        boolean z2 = this.mFirstPosition > 0;
+        if (!z2 && getChildCount() > 0) {
+            z2 = getChildAt(0).getLeft() < this.mListPadding.left;
+        }
+        int i = this.mDragScrollWorkingZonePx;
+        if ((x > i && x < width - i) || y <= 0 || y > getBottom() || (!z2 && !z)) {
+            HoverScrollHandler hoverScrollHandler = this.mHoverHandler;
+            if (hoverScrollHandler != null && hoverScrollHandler.hasMessages(1)) {
+                this.mHoverHandler.removeMessages(1);
+            }
+            if (this.mIsHoverOverscrolled || this.mHoverScrollStartTime != 0) {
+                this.mIsHoverOverscrolled = false;
+            }
+            this.mHoverRecognitionStartTime = 0L;
+            this.mHoverScrollStartTime = 0L;
+            this.mHoverAreaEnter = false;
+            if (action == 2 && this.mIsDragScrolled) {
+                this.mIsDragScrolled = false;
+            }
+            return super.dispatchDragEvent(dragEvent);
+        }
+        if (this.mHoverHandler == null) {
+            this.mHoverHandler = new HoverScrollHandler(this);
+        }
+        if (!this.mHoverAreaEnter) {
+            this.mHoverScrollStartTime = System.currentTimeMillis();
+        }
+        if (action == 2) {
+            if (!this.mHoverAreaEnter) {
+                this.mHoverAreaEnter = true;
+            }
+            if (x >= 0 && x <= this.mDragScrollWorkingZonePx) {
+                if (!this.mHoverHandler.hasMessages(1)) {
+                    this.mIsDragScrolled = true;
+                    this.mHoverRecognitionStartTime = System.currentTimeMillis();
+                    this.mHoverScrollDirection = 2;
+                    this.mHoverHandler.sendEmptyMessage(1);
+                }
+            } else if (x >= width - this.mDragScrollWorkingZonePx && x <= width && !this.mHoverHandler.hasMessages(1)) {
+                this.mIsDragScrolled = true;
+                this.mHoverRecognitionStartTime = System.currentTimeMillis();
+                this.mHoverScrollDirection = 1;
+                this.mHoverHandler.sendEmptyMessage(1);
+            }
+        } else {
+            if (action != 3) {
+                if (action != 4) {
+                    if (action == 5) {
+                        this.mHoverAreaEnter = true;
+                        if (x >= 0 && x <= this.mDragScrollWorkingZonePx) {
+                            if (!this.mHoverHandler.hasMessages(1)) {
+                                this.mIsDragScrolled = true;
+                                this.mHoverRecognitionStartTime = System.currentTimeMillis();
+                                this.mHoverScrollDirection = 2;
+                                this.mHoverHandler.sendEmptyMessage(1);
+                            }
+                        } else if (x >= width - this.mDragScrollWorkingZonePx && x <= width && !this.mHoverHandler.hasMessages(1)) {
+                            this.mIsDragScrolled = true;
+                            this.mHoverRecognitionStartTime = System.currentTimeMillis();
+                            this.mHoverScrollDirection = 1;
+                            this.mHoverHandler.sendEmptyMessage(1);
+                        }
+                    } else if (action == 6) {
+                    }
+                }
+            } else if (this.mIsDragScrolled) {
+                this.mIsDragScrolled = false;
+            }
+            if (this.mHoverHandler.hasMessages(1)) {
+                this.mHoverHandler.removeMessages(1);
+            }
+            this.mIsDragScrolled = false;
+            this.mHoverRecognitionStartTime = 0L;
+            this.mHoverScrollStartTime = 0L;
+            this.mIsHoverOverscrolled = false;
+            this.mHoverAreaEnter = false;
+        }
+        return super.dispatchDragEvent(dragEvent);
     }
 
     @Override // android.view.ViewGroup, android.view.View
@@ -3212,7 +3306,7 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
         int x = (int) motionEvent.getX();
         int y = (int) motionEvent.getY();
         int action = motionEvent.getAction();
-        boolean isNeedToScroll = MultiSelection.isNeedToScroll();
+        boolean zIsNeedToScroll = MultiSelection.isNeedToScroll();
         if (this.mSemDragSelectedItemArray == null) {
             this.mSemDragSelectedItemArray = new ArrayList<>();
         }
@@ -3315,9 +3409,9 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
                     this.mSemDragStartY = y;
                     super.semNotifyMultiSelectedStart(x, y);
                     this.mIsPenPressed = true;
-                    int pointToPosition = pointToPosition(x, y);
-                    this.mSemTrackedChildPosition = pointToPosition;
-                    if (pointToPosition == -1) {
+                    int iPointToPosition = pointToPosition(x, y);
+                    this.mSemTrackedChildPosition = iPointToPosition;
+                    if (iPointToPosition == -1) {
                         int i4 = childCount - 1;
                         int i5 = i4;
                         int i6 = 0;
@@ -3336,22 +3430,22 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
                                     this.mSemTrackedChildPosition = i5 + getFirstVisiblePosition();
                                     break;
                                 }
-                                int abs = Math.abs(i8 - left);
-                                int abs2 = Math.abs(this.mSemDragStartX - right);
+                                int iAbs = Math.abs(i8 - left);
+                                int iAbs2 = Math.abs(this.mSemDragStartX - right);
                                 if (i5 == i4) {
                                     this.mSemCloseChildPositionByLeft = getFirstVisiblePosition() + i4;
                                     this.mSemCloseChildPositionByRight = getFirstVisiblePosition() + i4;
-                                    i6 = abs;
+                                    i6 = iAbs;
                                 } else {
-                                    if (abs <= i6) {
+                                    if (iAbs <= i6) {
                                         this.mSemCloseChildPositionByLeft = getFirstVisiblePosition() + i5;
-                                        i6 = abs;
+                                        i6 = iAbs;
                                     }
-                                    if (abs2 <= i7) {
+                                    if (iAbs2 <= i7) {
                                         this.mSemCloseChildPositionByRight = getFirstVisiblePosition() + i5;
                                     }
                                 }
-                                i7 = abs2;
+                                i7 = iAbs2;
                             }
                             i5--;
                         }
@@ -3368,7 +3462,7 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
                             }
                         }
                     } else {
-                        this.mSemTrackedChild = getChildAt(pointToPosition - getFirstVisiblePosition());
+                        this.mSemTrackedChild = getChildAt(iPointToPosition - getFirstVisiblePosition());
                     }
                     View view = this.mSemTrackedChild;
                     if (view != null) {
@@ -3414,18 +3508,18 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
                         if (childAt4.getVisibility() == 0) {
                             int i14 = this.mSemDragBlockTop;
                             if ((i14 > top && this.mSemDragBlockLeft > left2 && this.mSemDragBlockBottom < bottom && this.mSemDragBlockRight < right2) || (((i14 > top && this.mSemDragBlockBottom < bottom) || ((i14 < top && this.mSemDragBlockBottom > top) || (i14 < bottom && this.mSemDragBlockBottom > bottom))) && (((i3 = this.mSemDragBlockLeft) >= left2 && this.mSemDragBlockRight <= right2) || ((i3 <= left2 && this.mSemDragBlockRight > left2) || (i3 < right2 && this.mSemDragBlockRight >= right2))))) {
-                                int pointToPosition2 = pointToPosition(left2 + 1, top + 1);
-                                this.mSemDragSelectedViewPosition = pointToPosition2;
-                                if (pointToPosition2 != -1 && this.mAdapter.isEnabled(pointToPosition2) && !this.mSemDragSelectedItemArray.contains(Integer.valueOf(this.mSemDragSelectedViewPosition))) {
+                                int iPointToPosition2 = pointToPosition(left2 + 1, top + 1);
+                                this.mSemDragSelectedViewPosition = iPointToPosition2;
+                                if (iPointToPosition2 != -1 && this.mAdapter.isEnabled(iPointToPosition2) && !this.mSemDragSelectedItemArray.contains(Integer.valueOf(this.mSemDragSelectedViewPosition))) {
                                     this.mSemDragSelectedItemArray.add(Integer.valueOf(this.mSemDragSelectedViewPosition));
                                     addToPressItemListArray(this.mSemDragSelectedViewPosition, -1);
                                     int i15 = this.mSemDragSelectedViewPosition;
                                     semNotifyMultiSelectState(childAt4, i15, getItemIdAtPosition(i15));
                                 }
                             } else {
-                                int pointToPosition3 = pointToPosition(left2 + 1, top + 1);
-                                this.mSemDragSelectedViewPosition = pointToPosition3;
-                                if (pointToPosition3 != -1 && this.mAdapter.isEnabled(pointToPosition3) && this.mSemDragSelectedItemArray.contains(Integer.valueOf(this.mSemDragSelectedViewPosition))) {
+                                int iPointToPosition3 = pointToPosition(left2 + 1, top + 1);
+                                this.mSemDragSelectedViewPosition = iPointToPosition3;
+                                if (iPointToPosition3 != -1 && this.mAdapter.isEnabled(iPointToPosition3) && this.mSemDragSelectedItemArray.contains(Integer.valueOf(this.mSemDragSelectedViewPosition))) {
                                     this.mSemDragSelectedItemArray.remove(Integer.valueOf(this.mSemDragSelectedViewPosition));
                                     addToPressItemListArray(this.mSemDragSelectedViewPosition, -1);
                                     int i16 = this.mSemDragSelectedViewPosition;
@@ -3435,9 +3529,9 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
                         }
                     }
                 }
-                isNeedToScroll = true;
+                zIsNeedToScroll = true;
             }
-            if (isNeedToScroll) {
+            if (zIsNeedToScroll) {
                 boolean z2 = x >= i && x <= i + this.mHoverLeftAreaWidth;
                 boolean z3 = x >= width - this.mHoverRightAreaWidth && x <= width;
                 if (z2 || z3) {
@@ -3472,7 +3566,7 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
             } else if (this.mPreviousTextViewScroll && this.mHoverHandler.hasMessages(1)) {
                 this.mHoverHandler.removeMessages(1);
             }
-            this.mPreviousTextViewScroll = isNeedToScroll;
+            this.mPreviousTextViewScroll = zIsNeedToScroll;
         }
         return super.dispatchTouchEvent(motionEvent);
     }
@@ -3496,18 +3590,18 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
             return true;
         }
         initVelocityTrackerIfNotExists();
-        MotionEvent obtain = MotionEvent.obtain(motionEvent);
+        MotionEvent motionEventObtain = MotionEvent.obtain(motionEvent);
         int actionMasked = motionEvent.getActionMasked();
         if (actionMasked == 0) {
             this.mNestedXOffset = 0;
         }
-        obtain.offsetLocation(this.mNestedXOffset, 0.0f);
+        motionEventObtain.offsetLocation(this.mNestedXOffset, 0.0f);
         if (actionMasked == 0) {
             onTouchDown(motionEvent);
         } else if (actionMasked == 1) {
             onTouchUp(motionEvent);
         } else if (actionMasked == 2) {
-            onTouchMove(motionEvent, obtain);
+            onTouchMove(motionEvent, motionEventObtain);
         } else if (actionMasked == 3) {
             onTouchCancel();
         } else if (actionMasked == 5) {
@@ -3519,21 +3613,21 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
             this.mActivePointerId = pointerId;
             this.mMotionX = x;
             this.mMotionY = y;
-            int pointToPosition = pointToPosition(x, y);
-            if (pointToPosition >= 0) {
-                this.mMotionViewOriginalLeft = getChildAt(pointToPosition - this.mFirstPosition).getLeft();
-                this.mMotionPosition = pointToPosition;
+            int iPointToPosition = pointToPosition(x, y);
+            if (iPointToPosition >= 0) {
+                this.mMotionViewOriginalLeft = getChildAt(iPointToPosition - this.mFirstPosition).getLeft();
+                this.mMotionPosition = iPointToPosition;
             }
             this.mLastX = x;
         } else if (actionMasked == 6) {
             onSecondaryPointerUp(motionEvent);
-            int pointToPosition2 = pointToPosition(this.mMotionX, this.mMotionY);
-            if (pointToPosition2 >= 0) {
-                View childAt = getChildAt(pointToPosition2 - this.mFirstPosition);
+            int iPointToPosition2 = pointToPosition(this.mMotionX, this.mMotionY);
+            if (iPointToPosition2 >= 0) {
+                View childAt = getChildAt(iPointToPosition2 - this.mFirstPosition);
                 this.mMotionViewOriginalLeft = childAt.getLeft();
-                this.mMotionPosition = pointToPosition2;
+                this.mMotionPosition = iPointToPosition2;
                 ListAdapter listAdapter = this.mAdapter;
-                if (listAdapter != null && listAdapter.isEnabled(pointToPosition2) && !childAt.hasFocusable()) {
+                if (listAdapter != null && listAdapter.isEnabled(iPointToPosition2) && !childAt.hasFocusable()) {
                     layoutChildren();
                 }
             } else {
@@ -3542,9 +3636,9 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
         }
         VelocityTracker velocityTracker = this.mVelocityTracker;
         if (velocityTracker != null) {
-            velocityTracker.addMovement(obtain);
+            velocityTracker.addMovement(motionEventObtain);
         }
-        obtain.recycle();
+        motionEventObtain.recycle();
         return true;
     }
 
@@ -3567,9 +3661,9 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
             this.mActivePointerId = motionEvent.getPointerId(0);
             int x2 = (int) motionEvent.getX();
             int y = (int) motionEvent.getY();
-            int pointToPosition = pointToPosition(x2, y);
+            int iPointToPosition = pointToPosition(x2, y);
             if (!this.mDataChanged) {
-                if (this.mTouchMode != 4 && pointToPosition >= 0 && getAdapter().isEnabled(pointToPosition)) {
+                if (this.mTouchMode != 4 && iPointToPosition >= 0 && getAdapter().isEnabled(iPointToPosition)) {
                     this.mTouchMode = 0;
                     if (this.mPendingCheckForTap == null) {
                         this.mPendingCheckForTap = new CheckForTap();
@@ -3579,16 +3673,16 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
                     createScrollingCache();
                     this.mTouchMode = 3;
                     this.mMotionCorrection = 0;
-                    pointToPosition = findMotionRow(x2);
+                    iPointToPosition = findMotionRow(x2);
                     this.mFlingRunnable.flywheelTouch();
                 }
             }
-            if (pointToPosition >= 0) {
-                this.mMotionViewOriginalLeft = getChildAt(pointToPosition - this.mFirstPosition).getLeft();
+            if (iPointToPosition >= 0) {
+                this.mMotionViewOriginalLeft = getChildAt(iPointToPosition - this.mFirstPosition).getLeft();
             }
             this.mMotionX = x2;
             this.mMotionY = y;
-            this.mMotionPosition = pointToPosition;
+            this.mMotionPosition = iPointToPosition;
             this.mLastX = Integer.MIN_VALUE;
         }
         if (performButtonActionOnTouchDown(motionEvent) && this.mTouchMode == 0) {
@@ -3597,27 +3691,27 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
     }
 
     private void onTouchMove(MotionEvent motionEvent, MotionEvent motionEvent2) {
-        int findPointerIndex = motionEvent.findPointerIndex(this.mActivePointerId);
-        if (findPointerIndex == -1) {
+        int iFindPointerIndex = motionEvent.findPointerIndex(this.mActivePointerId);
+        if (iFindPointerIndex == -1) {
             this.mActivePointerId = motionEvent.getPointerId(0);
-            findPointerIndex = 0;
+            iFindPointerIndex = 0;
         }
         if (this.mDataChanged) {
             layoutChildren();
         }
-        int x = (int) motionEvent.getX(findPointerIndex);
+        int x = (int) motionEvent.getX(iFindPointerIndex);
         int i = this.mTouchMode;
         if (i != 0 && i != 1 && i != 2) {
             if (i == 3 || i == 5) {
-                scrollIfNeeded(x, (int) motionEvent.getY(findPointerIndex), motionEvent2);
+                scrollIfNeeded(x, (int) motionEvent.getY(iFindPointerIndex), motionEvent2);
                 return;
             }
             return;
         }
-        if (startScrollIfNeeded(x, (int) motionEvent.getY(findPointerIndex), motionEvent2)) {
+        if (startScrollIfNeeded(x, (int) motionEvent.getY(iFindPointerIndex), motionEvent2)) {
             return;
         }
-        if (pointInView(x, motionEvent.getY(findPointerIndex), this.mTouchSlop)) {
+        if (pointInView(x, motionEvent.getY(iFindPointerIndex), this.mTouchSlop)) {
             return;
         }
         setPressed(false);
@@ -3926,19 +4020,19 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
     @Override // android.view.ViewGroup, android.view.ViewParent
     public void onNestedScroll(View view, int i, int i2, int i3, int i4) {
         View childAt = getChildAt(getChildCount() / 2);
-        int i5 = 0;
-        int left = childAt != null ? childAt.getLeft() : 0;
+        int left = 0;
+        int left2 = childAt != null ? childAt.getLeft() : 0;
         if (childAt != null) {
-            int i6 = -i3;
-            if (!trackMotionScroll(i6, i6)) {
+            int i5 = -i3;
+            if (!trackMotionScroll(i5, i5)) {
                 return;
             }
         }
         if (childAt != null) {
-            i5 = childAt.getLeft() - left;
-            i3 -= i5;
+            left = childAt.getLeft() - left2;
+            i3 -= left;
         }
-        dispatchNestedScroll(i5, 0, i3, 0, null);
+        dispatchNestedScroll(left, 0, i3, 0, null);
     }
 
     @Override // android.view.ViewGroup, android.view.ViewParent
@@ -3969,7 +4063,7 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
         if (this.mEdgeGlowLeft != null) {
             int i = this.mScrollX;
             if (!this.mEdgeGlowLeft.isFinished()) {
-                int save = canvas.save();
+                int iSave = canvas.save();
                 int height = getHeight();
                 canvas.translate(Math.min(0, this.mFirstPositionDistanceGuess + i), height);
                 canvas.rotate(270.0f);
@@ -3977,12 +4071,12 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
                 if (this.mEdgeGlowLeft.draw(canvas)) {
                     invalidate(0, 0, this.mEdgeGlowLeft.getMaxHeight() + getPaddingLeft(), getHeight());
                 }
-                canvas.restoreToCount(save);
+                canvas.restoreToCount(iSave);
             }
             if (this.mEdgeGlowRight.isFinished()) {
                 return;
             }
-            int save2 = canvas.save();
+            int iSave2 = canvas.save();
             int width = getWidth();
             int height2 = getHeight();
             canvas.translate(Math.max(width, i + this.mLastPositionDistanceGuess), 0.0f);
@@ -3991,7 +4085,7 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
             if (this.mEdgeGlowRight.draw(canvas)) {
                 invalidate((getWidth() - getPaddingRight()) - this.mEdgeGlowRight.getMaxHeight(), 0, getWidth(), getHeight());
             }
-            canvas.restoreToCount(save2);
+            canvas.restoreToCount(iSave2);
         }
     }
 
@@ -4033,8 +4127,12 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
         return true;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:34:0x0068  */
     @Override // android.view.ViewGroup
     @Deprecated
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public boolean onInterceptTouchEvent(MotionEvent motionEvent) {
         int actionMasked = motionEvent.getActionMasked();
         AbsPositionScroller absPositionScroller = this.mPositionScroller;
@@ -4057,12 +4155,12 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
             int x = (int) motionEvent.getX();
             int y = (int) motionEvent.getY();
             this.mActivePointerId = motionEvent.getPointerId(0);
-            int findMotionRow = findMotionRow(x);
-            if (i != 4 && findMotionRow >= 0) {
-                this.mMotionViewOriginalLeft = getChildAt(findMotionRow - this.mFirstPosition).getLeft();
+            int iFindMotionRow = findMotionRow(x);
+            if (i != 4 && iFindMotionRow >= 0) {
+                this.mMotionViewOriginalLeft = getChildAt(iFindMotionRow - this.mFirstPosition).getLeft();
                 this.mMotionX = x;
                 this.mMotionY = y;
-                this.mMotionPosition = findMotionRow;
+                this.mMotionPosition = iFindMotionRow;
                 this.mTouchMode = 0;
                 clearScrollingCache();
             }
@@ -4074,33 +4172,30 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
             if (i == 4) {
                 return true;
             }
-        } else {
-            if (actionMasked != 1) {
-                if (actionMasked != 2) {
-                    if (actionMasked != 3) {
-                        if (actionMasked == 6) {
-                            onSecondaryPointerUp(motionEvent);
-                        }
-                    }
-                } else if (this.mTouchMode == 0) {
-                    int findPointerIndex = motionEvent.findPointerIndex(this.mActivePointerId);
-                    if (findPointerIndex == -1) {
-                        this.mActivePointerId = motionEvent.getPointerId(0);
-                        findPointerIndex = 0;
-                    }
-                    int x2 = (int) motionEvent.getX(findPointerIndex);
-                    initVelocityTrackerIfNotExists();
-                    this.mVelocityTracker.addMovement(motionEvent);
-                    if (startScrollIfNeeded(x2, (int) motionEvent.getY(findPointerIndex), null)) {
-                        return true;
-                    }
-                }
-            }
+        } else if (actionMasked == 1) {
             this.mTouchMode = -1;
             this.mActivePointerId = -1;
             recycleVelocityTracker();
             reportScrollStateChange(0);
             stopNestedScroll();
+        } else if (actionMasked != 2) {
+            if (actionMasked != 3) {
+                if (actionMasked == 6) {
+                    onSecondaryPointerUp(motionEvent);
+                }
+            }
+        } else if (this.mTouchMode == 0) {
+            int iFindPointerIndex = motionEvent.findPointerIndex(this.mActivePointerId);
+            if (iFindPointerIndex == -1) {
+                this.mActivePointerId = motionEvent.getPointerId(0);
+                iFindPointerIndex = 0;
+            }
+            int x2 = (int) motionEvent.getX(iFindPointerIndex);
+            initVelocityTrackerIfNotExists();
+            this.mVelocityTracker.addMovement(motionEvent);
+            if (startScrollIfNeeded(x2, (int) motionEvent.getY(iFindPointerIndex), null)) {
+                return true;
+            }
         }
         return false;
     }
@@ -4265,7 +4360,7 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
 
         @Override // java.lang.Runnable
         public void run() {
-            int max;
+            int iMax;
             int i = SemHorizontalAbsListView.this.mTouchMode;
             boolean z = false;
             if (i != 3) {
@@ -4314,42 +4409,42 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
                 return;
             }
             OverScroller overScroller2 = this.mScroller;
-            boolean computeScrollOffset = overScroller2.computeScrollOffset();
+            boolean zComputeScrollOffset = overScroller2.computeScrollOffset();
             int currX2 = overScroller2.getCurrX();
             int i3 = this.mLastFlingX - currX2;
             if (i3 > 0) {
                 SemHorizontalAbsListView semHorizontalAbsListView2 = SemHorizontalAbsListView.this;
                 semHorizontalAbsListView2.mMotionPosition = semHorizontalAbsListView2.mFirstPosition;
                 SemHorizontalAbsListView.this.mMotionViewOriginalLeft = SemHorizontalAbsListView.this.getChildAt(0).getLeft();
-                max = Math.min(((SemHorizontalAbsListView.this.getWidth() - SemHorizontalAbsListView.this.mPaddingRight) - SemHorizontalAbsListView.this.mPaddingLeft) - 1, i3);
+                iMax = Math.min(((SemHorizontalAbsListView.this.getWidth() - SemHorizontalAbsListView.this.mPaddingRight) - SemHorizontalAbsListView.this.mPaddingLeft) - 1, i3);
             } else {
                 int childCount = SemHorizontalAbsListView.this.getChildCount() - 1;
                 SemHorizontalAbsListView semHorizontalAbsListView3 = SemHorizontalAbsListView.this;
                 semHorizontalAbsListView3.mMotionPosition = semHorizontalAbsListView3.mFirstPosition + childCount;
                 SemHorizontalAbsListView.this.mMotionViewOriginalLeft = SemHorizontalAbsListView.this.getChildAt(childCount).getLeft();
-                max = Math.max(-(((SemHorizontalAbsListView.this.getWidth() - SemHorizontalAbsListView.this.mPaddingRight) - SemHorizontalAbsListView.this.mPaddingLeft) - 1), i3);
+                iMax = Math.max(-(((SemHorizontalAbsListView.this.getWidth() - SemHorizontalAbsListView.this.mPaddingRight) - SemHorizontalAbsListView.this.mPaddingLeft) - 1), i3);
             }
             SemHorizontalAbsListView semHorizontalAbsListView4 = SemHorizontalAbsListView.this;
             View childAt = semHorizontalAbsListView4.getChildAt(semHorizontalAbsListView4.mMotionPosition - SemHorizontalAbsListView.this.mFirstPosition);
             int left = childAt != null ? childAt.getLeft() : 0;
-            boolean trackMotionScroll = SemHorizontalAbsListView.this.trackMotionScroll(max, max);
-            if (trackMotionScroll && max != 0) {
+            boolean zTrackMotionScroll = SemHorizontalAbsListView.this.trackMotionScroll(iMax, iMax);
+            if (zTrackMotionScroll && iMax != 0) {
                 z = true;
             }
             if (z) {
                 if (childAt != null) {
-                    int i4 = -(max - (childAt.getLeft() - left));
+                    int i4 = -(iMax - (childAt.getLeft() - left));
                     SemHorizontalAbsListView semHorizontalAbsListView5 = SemHorizontalAbsListView.this;
                     semHorizontalAbsListView5.overScrollBy(i4, 0, semHorizontalAbsListView5.mScrollX, 0, 0, 0, SemHorizontalAbsListView.this.mOverflingDistance, 0, false);
                 }
-                if (computeScrollOffset) {
-                    edgeReached(max);
+                if (zComputeScrollOffset) {
+                    edgeReached(iMax);
                     return;
                 }
                 return;
             }
-            if (computeScrollOffset && !z) {
-                if (trackMotionScroll) {
+            if (zComputeScrollOffset && !z) {
+                if (zTrackMotionScroll) {
                     SemHorizontalAbsListView.this.invalidate();
                 }
                 this.mLastFlingX = currX2;
@@ -4357,7 +4452,7 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
             } else {
                 endFling();
             }
-            if (SemHorizontalAbsListView.this.mJumpScrollToTopState == SemHorizontalAbsListView.JUMP_SCROLL_TO_TOP_FINISHING && SemHorizontalAbsListView.this.mFirstPosition == 0 && max == 0 && !computeScrollOffset) {
+            if (SemHorizontalAbsListView.this.mJumpScrollToTopState == SemHorizontalAbsListView.JUMP_SCROLL_TO_TOP_FINISHING && SemHorizontalAbsListView.this.mFirstPosition == 0 && iMax == 0 && !zComputeScrollOffset) {
                 SemHorizontalAbsListView.this.mJumpScrollToTopState = SemHorizontalAbsListView.JUMP_SCROLL_TO_TOP_IDLE;
                 SemHorizontalAbsListView.this.postOnJumpScrollToFinished();
             }
@@ -4473,7 +4568,7 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
             this.mSemSmoothScrollByMove = new SemSmoothScrollByMove();
             mSemScrollAmount = (int) (this.mDensityScale * 150.0f);
         }
-        boolean isEmpty = this.mSemScrollRemains.isEmpty();
+        boolean zIsEmpty = this.mSemScrollRemains.isEmpty();
         if (Math.abs(i) > mSemScrollAmount) {
             if (i <= 0) {
                 while (true) {
@@ -4496,7 +4591,7 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
             }
         }
         this.mSemScrollRemains.offer(Integer.valueOf(i));
-        if (isEmpty) {
+        if (zIsEmpty) {
             post(this.mSemSmoothScrollByMove);
         }
     }
@@ -4544,10 +4639,10 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
             return;
         }
         if (childAt.getGlobalVisibleRect(new Rect())) {
-            float width = (r2.width() * r2.height()) / (childAt.getWidth() * childAt.getHeight());
-            if (i < 0 && width < 0.75f) {
+            float fWidth = (r2.width() * r2.height()) / (childAt.getWidth() * childAt.getHeight());
+            if (i < 0 && fWidth < 0.75f) {
                 lastVisiblePosition++;
-            } else if (i > 0 && width < 0.75f) {
+            } else if (i > 0 && fWidth < 0.75f) {
                 lastVisiblePosition--;
             }
         }
@@ -4606,28 +4701,231 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
         return this.mIsRTL ? childCount + i2 < this.mItemCount : i2 > 0 || (this.mIsRTL ? getChildAt(childCount + (-1)).getLeft() : getChildAt(0).getLeft()) < rect.left;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:178:0x00e9, code lost:
-    
-        if (r2 <= 0) goto L47;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:37:0x00cb, code lost:
-    
-        if (r2 <= 0) goto L47;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:38:0x00cd, code lost:
-    
-        r6 = true;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:47:0x00cd A[PHI: r4
+      0x00cd: PHI (r4v14 boolean) = (r4v6 boolean), (r4v17 boolean) binds: [B:59:0x00e9, B:46:0x00cb] A[DONT_GENERATE, DONT_INLINE]] */
+    /* JADX WARN: Removed duplicated region for block: B:48:0x00cf A[PHI: r4
+      0x00cf: PHI (r4v9 boolean) = (r4v6 boolean), (r4v6 boolean), (r4v6 boolean), (r4v17 boolean), (r4v17 boolean), (r4v17 boolean) binds: [B:56:0x00de, B:58:0x00e7, B:59:0x00e9, B:43:0x00c0, B:45:0x00c9, B:46:0x00cb] A[DONT_GENERATE, DONT_INLINE]] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    boolean trackMotionScroll(int r19, int r20) {
-        /*
-            Method dump skipped, instructions count: 627
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.SemHorizontalAbsListView.trackMotionScroll(int, int):boolean");
+    boolean trackMotionScroll(int i, int i2) {
+        int i3;
+        int i4;
+        int i5;
+        int i6;
+        int iMin;
+        int iMin2;
+        boolean z;
+        boolean z2;
+        int i7;
+        int i8;
+        int i9;
+        int i10;
+        int childCount = getChildCount();
+        if (childCount == 0) {
+            return true;
+        }
+        int left = getChildAt(0).getLeft();
+        int i11 = childCount - 1;
+        int right = getChildAt(i11).getRight();
+        int right2 = getChildAt(0).getRight();
+        int left2 = getChildAt(i11).getLeft();
+        Rect rect = this.mListPadding;
+        if ((this.mGroupFlags & 34) == 34) {
+            i3 = rect.left;
+            i4 = rect.right;
+        } else {
+            i3 = 0;
+            i4 = 0;
+        }
+        int width = getWidth() - i4;
+        if (this.mIsRTL) {
+            i5 = right2 - width;
+            i6 = i3 - left2;
+        } else {
+            i5 = i3 - left;
+            i6 = right - width;
+        }
+        int width2 = (getWidth() - this.mPaddingRight) - this.mPaddingLeft;
+        if (i < 0) {
+            iMin = Math.max(-(width2 - 1), i);
+        } else {
+            iMin = Math.min(width2 - 1, i);
+        }
+        if (i2 < 0) {
+            iMin2 = Math.max(-(width2 - 1), i2);
+        } else {
+            iMin2 = Math.min(width2 - 1, i2);
+        }
+        int i12 = this.mFirstPosition;
+        if (i12 != 0) {
+            this.mFirstPositionDistanceGuess += iMin2;
+        } else if (this.mIsRTL) {
+            this.mFirstPositionDistanceGuess = rect.right + right2;
+        } else {
+            this.mFirstPositionDistanceGuess = left - rect.left;
+        }
+        int i13 = i12 + childCount;
+        if (i13 != this.mItemCount) {
+            this.mLastPositionDistanceGuess += iMin2;
+        } else if (this.mIsRTL) {
+            this.mFirstPositionDistanceGuess = rect.left + left2;
+        } else {
+            this.mLastPositionDistanceGuess = rect.right + right;
+        }
+        if (this.mIsRTL) {
+            z = i13 == this.mItemCount && left2 >= rect.left && iMin2 >= 0;
+            z2 = i12 == 0 && right2 <= getWidth() - rect.right && iMin2 <= 0;
+        } else {
+            z = i12 == 0 && left >= rect.left && iMin2 >= 0;
+            if (i13 != this.mItemCount || right > getWidth() - rect.right || iMin2 > 0) {
+            }
+        }
+        if (z || z2) {
+            return iMin2 != 0;
+        }
+        boolean z3 = iMin2 < 0;
+        boolean zIsInTouchMode = isInTouchMode();
+        if (zIsInTouchMode) {
+            hideSelector();
+        }
+        int headerViewsCount = getHeaderViewsCount();
+        int footerViewsCount = this.mItemCount - getFooterViewsCount();
+        if (!this.mIsRTL) {
+            i7 = iMin;
+            if (z3) {
+                int i14 = -iMin2;
+                if ((this.mGroupFlags & 34) == 34) {
+                    i14 += rect.left;
+                }
+                i8 = 0;
+                for (int i15 = 0; i15 < childCount; i15++) {
+                    View childAt = getChildAt(i15);
+                    if (childAt.getRight() >= i14) {
+                        break;
+                    }
+                    i8++;
+                    int i16 = i12 + i15;
+                    childAt.clearAccessibilityFocus();
+                    if (i16 >= headerViewsCount && i16 < footerViewsCount) {
+                        this.mRecycler.addScrapView(childAt, i16);
+                    }
+                }
+                i9 = 0;
+            } else {
+                int width3 = getWidth() - iMin2;
+                if ((this.mGroupFlags & 34) == 34) {
+                    width3 -= rect.right;
+                }
+                i8 = 0;
+                i9 = 0;
+                while (i11 >= 0) {
+                    View childAt2 = getChildAt(i11);
+                    if (childAt2.getLeft() <= width3) {
+                        break;
+                    }
+                    i8++;
+                    int i17 = i12 + i11;
+                    childAt2.clearAccessibilityFocus();
+                    if (i17 >= headerViewsCount && i17 < footerViewsCount) {
+                        this.mRecycler.addScrapView(childAt2, i17);
+                    }
+                    i9 = i11;
+                    i11--;
+                }
+            }
+        } else if (z3) {
+            int i18 = -iMin2;
+            if ((this.mGroupFlags & 34) == 34) {
+                i18 += rect.left;
+            }
+            i8 = 0;
+            i9 = 0;
+            while (i11 >= 0) {
+                View childAt3 = getChildAt(i11);
+                if (childAt3.getRight() >= i18) {
+                    break;
+                }
+                i8++;
+                int i19 = i12 + i11;
+                childAt3.clearAccessibilityFocus();
+                if (i19 >= headerViewsCount && i19 < footerViewsCount) {
+                    this.mRecycler.addScrapView(childAt3, i19);
+                }
+                i9 = i11;
+                i11--;
+            }
+            i7 = iMin;
+        } else {
+            int width4 = getWidth() - iMin2;
+            if ((this.mGroupFlags & 34) == 34) {
+                width4 -= rect.right;
+            }
+            i8 = 0;
+            int i20 = 0;
+            while (i20 < childCount) {
+                View childAt4 = getChildAt(i20);
+                if (childAt4.getLeft() <= width4) {
+                    break;
+                }
+                i8++;
+                int i21 = i12 + i20;
+                childAt4.clearAccessibilityFocus();
+                if (i21 < headerViewsCount || i21 >= footerViewsCount) {
+                    i10 = iMin;
+                } else {
+                    i10 = iMin;
+                    this.mRecycler.addScrapView(childAt4, i21);
+                }
+                i20++;
+                iMin = i10;
+            }
+            i7 = iMin;
+            i9 = 0;
+        }
+        this.mMotionViewNewLeft = this.mMotionViewOriginalLeft + i7;
+        this.mBlockLayoutRequests = true;
+        if (i8 > 0) {
+            detachViewsFromParent(i9, i8);
+            this.mRecycler.removeSkippedScrap();
+        }
+        if (!awakenScrollBars()) {
+            invalidate();
+        }
+        semOffsetChildrenLeftAndRight(iMin2);
+        boolean z4 = this.mIsRTL;
+        if (z4 && !z3) {
+            this.mFirstPosition += i8;
+        } else if (!z4 && z3) {
+            this.mFirstPosition += i8;
+        }
+        int iAbs = Math.abs(iMin2);
+        if (this.mIsRTL) {
+            if (i5 < iAbs || i6 < iAbs) {
+                fillGapRTL(z3);
+            }
+        } else if (i5 < iAbs || i6 < iAbs) {
+            fillGap(z3);
+        }
+        if (!zIsInTouchMode && this.mSelectedPosition != -1) {
+            int i22 = this.mSelectedPosition - this.mFirstPosition;
+            if (i22 >= 0 && i22 < getChildCount()) {
+                positionSelector(this.mSelectedPosition, getChildAt(i22));
+            }
+        } else {
+            int i23 = this.mSelectorPosition;
+            if (i23 != -1) {
+                int i24 = i23 - this.mFirstPosition;
+                if (i24 >= 0 && i24 < getChildCount()) {
+                    positionSelector(-1, getChildAt(i24));
+                }
+            } else {
+                this.mSelectorRect.setEmpty();
+            }
+        }
+        this.mBlockLayoutRequests = false;
+        invokeOnItemScrollListener();
+        return false;
     }
 
     void hideSelector() {
@@ -4656,8 +4954,8 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
         if (getChildCount() == 0) {
             return -1;
         }
-        int findMotionRow = findMotionRow(i);
-        return findMotionRow != -1 ? findMotionRow : (this.mFirstPosition + r0) - 1;
+        int iFindMotionRow = findMotionRow(i);
+        return iFindMotionRow != -1 ? iFindMotionRow : (this.mFirstPosition + r0) - 1;
     }
 
     @Deprecated
@@ -4676,21 +4974,149 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
         return true;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x00b6  */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x00c2  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x00e5 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x00e6 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x00c5  */
+    /* JADX WARN: Removed duplicated region for block: B:42:0x00b6  */
+    /* JADX WARN: Removed duplicated region for block: B:45:0x00c2  */
+    /* JADX WARN: Removed duplicated region for block: B:46:0x00c5  */
+    /* JADX WARN: Removed duplicated region for block: B:54:0x00e5 A[RETURN] */
+    /* JADX WARN: Removed duplicated region for block: B:55:0x00e6 A[RETURN] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     boolean resurrectSelection() {
-        /*
-            Method dump skipped, instructions count: 231
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.SemHorizontalAbsListView.resurrectSelection():boolean");
+        boolean z;
+        int left;
+        int right;
+        int i;
+        AbsPositionScroller absPositionScroller;
+        int iLookForSelectablePosition;
+        int childCount = getChildCount();
+        if (childCount <= 0) {
+            return false;
+        }
+        int horizontalFadingEdgeLength = this.mListPadding.left;
+        int horizontalFadingEdgeLength2 = (this.mRight - this.mLeft) - this.mListPadding.right;
+        int i2 = this.mFirstPosition;
+        int i3 = this.mResurrectToPosition;
+        if (i3 >= i2 && i3 < i2 + childCount) {
+            View childAt = getChildAt(i3 - this.mFirstPosition);
+            left = childAt.getLeft();
+            right = childAt.getRight();
+            if (left < horizontalFadingEdgeLength) {
+                left = horizontalFadingEdgeLength + getHorizontalFadingEdgeLength();
+            } else if (right > horizontalFadingEdgeLength2) {
+                left = (horizontalFadingEdgeLength2 - childAt.getMeasuredWidth()) - getHorizontalFadingEdgeLength();
+            }
+        } else {
+            if (i3 >= i2) {
+                int i4 = this.mItemCount;
+                int i5 = i2 + childCount;
+                int i6 = i5 - 1;
+                int i7 = childCount - 1;
+                int i8 = i7;
+                int i9 = 0;
+                int i10 = 0;
+                while (true) {
+                    if (i8 < 0) {
+                        z = false;
+                        i3 = i6;
+                        left = i9;
+                        right = i10;
+                        break;
+                    }
+                    View childAt2 = getChildAt(i8);
+                    int left2 = childAt2.getLeft();
+                    int right2 = childAt2.getRight();
+                    if (i8 == i7) {
+                        if (i5 < i4 || right2 > horizontalFadingEdgeLength2) {
+                            horizontalFadingEdgeLength2 -= getHorizontalFadingEdgeLength();
+                        }
+                        i10 = right2;
+                        i9 = left2;
+                    }
+                    if (right2 <= horizontalFadingEdgeLength2) {
+                        i3 = i2 + i8;
+                        z = false;
+                        right = right2;
+                        left = left2;
+                        break;
+                    }
+                    i8--;
+                }
+                i = -1;
+                this.mResurrectToPosition = -1;
+                removeCallbacks(this.mFlingRunnable);
+                absPositionScroller = this.mPositionScroller;
+                if (absPositionScroller != null) {
+                    absPositionScroller.stop();
+                }
+                this.mTouchMode = -1;
+                clearScrollingCache();
+                if (this.mIsRTL) {
+                    this.mSpecificTop = left;
+                } else {
+                    this.mSpecificTop = right;
+                }
+                iLookForSelectablePosition = lookForSelectablePosition(i3, z);
+                if (iLookForSelectablePosition >= i2 && iLookForSelectablePosition <= getLastVisiblePosition()) {
+                    this.mLayoutMode = 4;
+                    updateSelectorState();
+                    setSelectionInt(iLookForSelectablePosition);
+                    invokeOnItemScrollListener();
+                    i = iLookForSelectablePosition;
+                }
+                reportScrollStateChange(0);
+                return i < 0;
+            }
+            int i11 = 0;
+            int i12 = 0;
+            int i13 = 0;
+            while (true) {
+                if (i11 >= childCount) {
+                    right = i13;
+                    left = i12;
+                    i3 = i2;
+                    break;
+                }
+                View childAt3 = getChildAt(i11);
+                int left3 = childAt3.getLeft();
+                right = childAt3.getRight();
+                if (i11 == 0) {
+                    if (i2 > 0 || left3 < horizontalFadingEdgeLength) {
+                        horizontalFadingEdgeLength += getHorizontalFadingEdgeLength();
+                    }
+                    i13 = right;
+                    i12 = left3;
+                }
+                if (left3 >= horizontalFadingEdgeLength) {
+                    i3 = i11 + i2;
+                    left = left3;
+                    break;
+                }
+                i11++;
+            }
+        }
+        z = true;
+        i = -1;
+        this.mResurrectToPosition = -1;
+        removeCallbacks(this.mFlingRunnable);
+        absPositionScroller = this.mPositionScroller;
+        if (absPositionScroller != null) {
+        }
+        this.mTouchMode = -1;
+        clearScrollingCache();
+        if (this.mIsRTL) {
+        }
+        iLookForSelectablePosition = lookForSelectablePosition(i3, z);
+        if (iLookForSelectablePosition >= i2) {
+            this.mLayoutMode = 4;
+            updateSelectorState();
+            setSelectionInt(iLookForSelectablePosition);
+            invokeOnItemScrollListener();
+            i = iLookForSelectablePosition;
+        }
+        reportScrollStateChange(0);
+        if (i < 0) {
+        }
     }
 
     void confirmCheckedPositionsById() {
@@ -4700,32 +5126,32 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
         int i = 0;
         boolean z = false;
         while (i < this.mCheckedIdStates.size()) {
-            long keyAt = this.mCheckedIdStates.keyAt(i);
-            int intValue = this.mCheckedIdStates.valueAt(i).intValue();
-            if (keyAt != this.mAdapter.getItemId(intValue)) {
-                int max = Math.max(0, intValue - 20);
-                int min = Math.min(intValue + 20, this.mItemCount);
+            long jKeyAt = this.mCheckedIdStates.keyAt(i);
+            int iIntValue = this.mCheckedIdStates.valueAt(i).intValue();
+            if (jKeyAt != this.mAdapter.getItemId(iIntValue)) {
+                int iMax = Math.max(0, iIntValue - 20);
+                int iMin = Math.min(iIntValue + 20, this.mItemCount);
                 while (true) {
-                    if (max >= min) {
-                        this.mCheckedIdStates.delete(keyAt);
+                    if (iMax >= iMin) {
+                        this.mCheckedIdStates.delete(jKeyAt);
                         i--;
                         this.mCheckedItemCount--;
                         ActionMode actionMode2 = this.mChoiceActionMode;
                         if (actionMode2 != null && (multiChoiceModeWrapper = this.mMultiChoiceModeCallback) != null) {
-                            multiChoiceModeWrapper.onItemCheckedStateChanged(actionMode2, intValue, keyAt, false);
+                            multiChoiceModeWrapper.onItemCheckedStateChanged(actionMode2, iIntValue, jKeyAt, false);
                         }
                         z = true;
                     } else {
-                        if (keyAt == this.mAdapter.getItemId(max)) {
-                            this.mCheckStates.put(max, true);
-                            this.mCheckedIdStates.setValueAt(i, Integer.valueOf(max));
+                        if (jKeyAt == this.mAdapter.getItemId(iMax)) {
+                            this.mCheckStates.put(iMax, true);
+                            this.mCheckedIdStates.setValueAt(i, Integer.valueOf(iMax));
                             break;
                         }
-                        max++;
+                        iMax++;
                     }
                 }
             } else {
-                this.mCheckStates.put(intValue, true);
+                this.mCheckStates.put(iIntValue, true);
             }
             i++;
         }
@@ -4789,15 +5215,15 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
                         this.mSyncPosition = Math.min(Math.max(0, this.mSyncPosition), i - 1);
                         return;
                     }
-                    int findSyncPosition = findSyncPosition();
-                    if (findSyncPosition >= 0 && lookForSelectablePosition(findSyncPosition, true) == findSyncPosition) {
-                        this.mSyncPosition = findSyncPosition;
+                    int iFindSyncPosition = findSyncPosition();
+                    if (iFindSyncPosition >= 0 && lookForSelectablePosition(iFindSyncPosition, true) == iFindSyncPosition) {
+                        this.mSyncPosition = iFindSyncPosition;
                         if (this.mSyncHeight == getWidth()) {
                             this.mLayoutMode = 5;
                         } else {
                             this.mLayoutMode = 2;
                         }
-                        setNextSelectedPositionInt(findSyncPosition);
+                        setNextSelectedPositionInt(iFindSyncPosition);
                         return;
                     }
                 }
@@ -4810,14 +5236,14 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
                 if (selectedItemPosition < 0) {
                     selectedItemPosition = 0;
                 }
-                int lookForSelectablePosition = lookForSelectablePosition(selectedItemPosition, true);
-                if (lookForSelectablePosition >= 0) {
-                    setNextSelectedPositionInt(lookForSelectablePosition);
+                int iLookForSelectablePosition = lookForSelectablePosition(selectedItemPosition, true);
+                if (iLookForSelectablePosition >= 0) {
+                    setNextSelectedPositionInt(iLookForSelectablePosition);
                     return;
                 }
-                int lookForSelectablePosition2 = lookForSelectablePosition(selectedItemPosition, false);
-                if (lookForSelectablePosition2 >= 0) {
-                    setNextSelectedPositionInt(lookForSelectablePosition2);
+                int iLookForSelectablePosition2 = lookForSelectablePosition(selectedItemPosition, false);
+                if (iLookForSelectablePosition2 >= 0) {
+                    setNextSelectedPositionInt(iLookForSelectablePosition2);
                     return;
                 }
             } else if (this.mResurrectToPosition >= 0) {
@@ -4879,52 +5305,52 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
     }
 
     static int getDistance(Rect rect, Rect rect2, int i) {
-        int width;
-        int height;
-        int width2;
+        int iWidth;
+        int iHeight;
+        int iWidth2;
         int i2;
-        int height2;
+        int iHeight2;
         int i3;
         if (i == 1 || i == 2) {
-            width = rect.right + (rect.width() / 2);
-            height = (rect.height() / 2) + rect.top;
-            width2 = rect2.left + (rect2.width() / 2);
+            iWidth = rect.right + (rect.width() / 2);
+            iHeight = (rect.height() / 2) + rect.top;
+            iWidth2 = rect2.left + (rect2.width() / 2);
             i2 = rect2.top;
-            height2 = rect2.height() / 2;
+            iHeight2 = rect2.height() / 2;
         } else {
             if (i != 17) {
                 if (i == 33) {
-                    width = rect.left + (rect.width() / 2);
-                    height = rect.top;
-                    width2 = rect2.left + (rect2.width() / 2);
+                    iWidth = rect.left + (rect.width() / 2);
+                    iHeight = rect.top;
+                    iWidth2 = rect2.left + (rect2.width() / 2);
                     i3 = rect2.bottom;
                 } else if (i == 66) {
-                    width = rect.right;
-                    height = (rect.height() / 2) + rect.top;
-                    width2 = rect2.left;
+                    iWidth = rect.right;
+                    iHeight = (rect.height() / 2) + rect.top;
+                    iWidth2 = rect2.left;
                     i2 = rect2.top;
-                    height2 = rect2.height() / 2;
+                    iHeight2 = rect2.height() / 2;
                 } else if (i == 130) {
-                    width = rect.left + (rect.width() / 2);
-                    height = rect.bottom;
-                    width2 = rect2.left + (rect2.width() / 2);
+                    iWidth = rect.left + (rect.width() / 2);
+                    iHeight = rect.bottom;
+                    iWidth2 = rect2.left + (rect2.width() / 2);
                     i3 = rect2.top;
                 } else {
                     throw new IllegalArgumentException("direction must be one of {FOCUS_UP, FOCUS_DOWN, FOCUS_LEFT, FOCUS_RIGHT, FOCUS_FORWARD, FOCUS_BACKWARD}.");
                 }
-                int i4 = width2 - width;
-                int i5 = i3 - height;
+                int i4 = iWidth2 - iWidth;
+                int i5 = i3 - iHeight;
                 return (i5 * i5) + (i4 * i4);
             }
-            width = rect.left;
-            height = (rect.height() / 2) + rect.top;
-            width2 = rect2.right;
+            iWidth = rect.left;
+            iHeight = (rect.height() / 2) + rect.top;
+            iWidth2 = rect2.right;
             i2 = rect2.top;
-            height2 = rect2.height() / 2;
+            iHeight2 = rect2.height() / 2;
         }
-        i3 = height2 + i2;
-        int i42 = width2 - width;
-        int i52 = i3 - height;
+        i3 = iHeight2 + i2;
+        int i42 = iWidth2 - iWidth;
+        int i52 = i3 - iHeight;
         return (i52 * i52) + (i42 * i42);
     }
 
@@ -4934,6 +5360,10 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
         return this.mFiltered;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:15:0x001e  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     boolean sendToTextFilter(int i, int i2, KeyEvent keyEvent) {
         boolean z;
         boolean z2;
@@ -4942,25 +5372,11 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
         if (!acceptFilter()) {
             return false;
         }
-        if (i == 4) {
-            if (this.mFiltered && (popupWindow = this.mPopup) != null && popupWindow.isShowing()) {
-                if (keyEvent.getAction() == 0 && keyEvent.getRepeatCount() == 0) {
-                    KeyEvent.DispatcherState keyDispatcherState = getKeyDispatcherState();
-                    if (keyDispatcherState != null) {
-                        keyDispatcherState.startTracking(keyEvent, this);
-                    }
-                } else if (keyEvent.getAction() == 1 && keyEvent.isTracking() && !keyEvent.isCanceled()) {
-                    this.mTextFilter.lambda$setTextAsync$0("");
-                }
-                z = true;
-                z2 = z;
-                z3 = false;
-            }
-            z = false;
-            z2 = z;
-            z3 = false;
-        } else if (i != 62) {
-            if (i != 66 && i != 160) {
+        if (i != 4) {
+            if (i == 62) {
+                z3 = this.mFiltered;
+                z2 = false;
+            } else if (i != 66 && i != 160) {
                 switch (i) {
                     case 19:
                     case 20:
@@ -4973,44 +5389,63 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
                         z3 = true;
                         break;
                 }
+            } else {
+                z3 = false;
+                z2 = false;
             }
+        } else if (this.mFiltered && (popupWindow = this.mPopup) != null && popupWindow.isShowing()) {
+            if (keyEvent.getAction() == 0 && keyEvent.getRepeatCount() == 0) {
+                KeyEvent.DispatcherState keyDispatcherState = getKeyDispatcherState();
+                if (keyDispatcherState != null) {
+                    keyDispatcherState.startTracking(keyEvent, this);
+                }
+            } else {
+                if (keyEvent.getAction() == 1 && keyEvent.isTracking() && !keyEvent.isCanceled()) {
+                    this.mTextFilter.lambda$setTextAsync$0("");
+                }
+                z = false;
+                z2 = z;
+                z3 = false;
+            }
+            z = true;
+            z2 = z;
             z3 = false;
-            z2 = false;
         } else {
-            z3 = this.mFiltered;
-            z2 = false;
+            z = false;
+            z2 = z;
+            z3 = false;
         }
         if (z3) {
             createTextFilter(true);
-            KeyEvent changeTimeRepeat = keyEvent.getRepeatCount() > 0 ? KeyEvent.changeTimeRepeat(keyEvent, keyEvent.getEventTime(), 0) : keyEvent;
+            KeyEvent keyEventChangeTimeRepeat = keyEvent.getRepeatCount() > 0 ? KeyEvent.changeTimeRepeat(keyEvent, keyEvent.getEventTime(), 0) : keyEvent;
             int action = keyEvent.getAction();
             if (action == 0) {
-                boolean onKeyDown = this.mTextFilter.onKeyDown(i, changeTimeRepeat);
+                boolean zOnKeyDown = this.mTextFilter.onKeyDown(i, keyEventChangeTimeRepeat);
                 if (i == 59 || i == 60) {
                     this.mIsShiftkeyPressed = true;
-                    return onKeyDown;
+                    return zOnKeyDown;
                 }
                 if (i != 113 && i != 114) {
-                    return onKeyDown;
+                    return zOnKeyDown;
                 }
                 this.mIsCtrlkeyPressed = true;
-                return onKeyDown;
+                return zOnKeyDown;
             }
             if (action == 1) {
-                boolean onKeyUp = this.mTextFilter.onKeyUp(i, changeTimeRepeat);
+                boolean zOnKeyUp = this.mTextFilter.onKeyUp(i, keyEventChangeTimeRepeat);
                 if (i != 59 && i != 60) {
                     if (i != 113 && i != 114) {
-                        return onKeyUp;
+                        return zOnKeyUp;
                     }
                     this.mIsCtrlkeyPressed = false;
-                    return onKeyUp;
+                    return zOnKeyUp;
                 }
                 this.mIsShiftkeyPressed = false;
                 this.mOldKeyCode = 0;
                 this.mCurrentKeyCode = 0;
                 this.mFirstPressedPoint = -1;
                 this.mSecondPressedPoint = -1;
-                return onKeyUp;
+                return zOnKeyUp;
             }
             if (action == 2) {
                 return this.mTextFilter.onKeyMultiple(i, i2, keyEvent);
@@ -5277,11 +5712,11 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
         if (isTextFilterEnabled()) {
             createTextFilter(true);
             int length = charSequence.length();
-            boolean isShowing = this.mPopup.isShowing();
-            if (!isShowing && length > 0) {
+            boolean zIsShowing = this.mPopup.isShowing();
+            if (!zIsShowing && length > 0) {
                 showPopup();
                 this.mFiltered = true;
-            } else if (isShowing && length == 0) {
+            } else if (zIsShowing && length == 0) {
                 dismissPopup();
                 this.mFiltered = false;
             }
@@ -5688,7 +6123,7 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
         }
 
         View getTransientStateView(int i) {
-            int indexOfKey;
+            int iIndexOfKey;
             if (SemHorizontalAbsListView.this.mAdapter != null && SemHorizontalAbsListView.this.mAdapterHasStableIds && this.mTransientStateViewsById != null) {
                 long itemId = SemHorizontalAbsListView.this.mAdapter.getItemId(i);
                 View view = this.mTransientStateViewsById.get(itemId);
@@ -5696,12 +6131,12 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
                 return view;
             }
             SparseArray<View> sparseArray = this.mTransientStateViews;
-            if (sparseArray == null || (indexOfKey = sparseArray.indexOfKey(i)) < 0) {
+            if (sparseArray == null || (iIndexOfKey = sparseArray.indexOfKey(i)) < 0) {
                 return null;
             }
-            View valueAt = this.mTransientStateViews.valueAt(indexOfKey);
-            this.mTransientStateViews.removeAt(indexOfKey);
-            return valueAt;
+            View viewValueAt = this.mTransientStateViews.valueAt(iIndexOfKey);
+            this.mTransientStateViews.removeAt(iIndexOfKey);
+            return viewValueAt;
         }
 
         void clearTransientStateViews() {
@@ -5857,9 +6292,9 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
             if (sparseArray != null) {
                 int i6 = 0;
                 while (i6 < sparseArray.size()) {
-                    View valueAt = sparseArray.valueAt(i6);
-                    if (!valueAt.hasTransientState()) {
-                        removeDetachedView(valueAt, false);
+                    View viewValueAt = sparseArray.valueAt(i6);
+                    if (!viewValueAt.hasTransientState()) {
+                        removeDetachedView(viewValueAt, false);
                         sparseArray.removeAt(i6);
                         i6--;
                     }
@@ -5870,9 +6305,9 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
             if (longSparseArray != null) {
                 int i7 = 0;
                 while (i7 < longSparseArray.size()) {
-                    View valueAt2 = longSparseArray.valueAt(i7);
-                    if (!valueAt2.hasTransientState()) {
-                        removeDetachedView(valueAt2, false);
+                    View viewValueAt2 = longSparseArray.valueAt(i7);
+                    if (!viewValueAt2.hasTransientState()) {
+                        removeDetachedView(viewValueAt2, false);
                         longSparseArray.removeAt(i7);
                         i7--;
                     }
@@ -5929,14 +6364,14 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
                         return arrayList.remove(i2);
                     }
                 } else if (layoutParams.scrappedFromPosition == i) {
-                    View remove = arrayList.remove(i2);
-                    clearAccessibilityFromScrap(remove);
-                    return remove;
+                    View viewRemove = arrayList.remove(i2);
+                    clearAccessibilityFromScrap(viewRemove);
+                    return viewRemove;
                 }
             }
-            View remove2 = arrayList.remove(size - 1);
-            clearAccessibilityFromScrap(remove2);
-            return remove2;
+            View viewRemove2 = arrayList.remove(size - 1);
+            clearAccessibilityFromScrap(viewRemove2);
+            return viewRemove2;
         }
 
         private void clearScrap(ArrayList<View> arrayList) {
@@ -5966,10 +6401,10 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
         if (i2 >= 0 && i2 < childCount) {
             return getChildAt(i2).getWidth();
         }
-        View obtainView = obtainView(i, this.mIsScrap);
-        obtainView.measure(this.mHeightMeasureSpec, 0);
-        int measuredWidth = obtainView.getMeasuredWidth();
-        this.mRecycler.addScrapView(obtainView, i);
+        View viewObtainView = obtainView(i, this.mIsScrap);
+        viewObtainView.measure(this.mHeightMeasureSpec, 0);
+        int measuredWidth = viewObtainView.getMeasuredWidth();
+        this.mRecycler.addScrapView(viewObtainView, i);
         return measuredWidth;
     }
 
@@ -6057,18 +6492,18 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
             }
             int i3 = SemHorizontalAbsListView.this.mFirstPosition;
             int i4 = (childCount + i3) - 1;
-            int max = Math.max(0, Math.min(SemHorizontalAbsListView.this.getCount() - 1, i));
-            if (max < i3) {
-                i2 = (i3 - max) + 1;
+            int iMax = Math.max(0, Math.min(SemHorizontalAbsListView.this.getCount() - 1, i));
+            if (iMax < i3) {
+                i2 = (i3 - iMax) + 1;
                 this.mMode = 2;
-            } else if (max > i4) {
-                i2 = (max - i4) + 1;
+            } else if (iMax > i4) {
+                i2 = (iMax - i4) + 1;
                 this.mMode = 1;
             } else {
                 if (SemHorizontalAbsListView.this.mJumpScrollToTopState == SemHorizontalAbsListView.JUMP_SCROLL_TO_TOP_INITIATED) {
                     SemHorizontalAbsListView.this.mJumpScrollToTopState = SemHorizontalAbsListView.JUMP_SCROLL_TO_TOP_FINISHING;
                 }
-                scrollToVisible(max, -1, 200);
+                scrollToVisible(iMax, -1, 200);
                 return;
             }
             if (i2 > 0) {
@@ -6076,108 +6511,77 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
             } else {
                 this.mScrollDuration = 200;
             }
-            this.mTargetPos = max;
+            this.mTargetPos = iMax;
             this.mBoundPos = -1;
             this.mLastSeenPos = -1;
             SemHorizontalAbsListView.this.postOnAnimation(this);
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:21:0x0066  */
-        /* JADX WARN: Removed duplicated region for block: B:24:0x006a  */
         @Override // android.widget.SemHorizontalAbsListView.AbsPositionScroller
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public void start(final int r6, final int r7) {
-            /*
-                r5 = this;
-                r5.stop()
-                r0 = -1
-                if (r7 != r0) goto La
-                r5.start(r6)
-                return
-            La:
-                android.widget.SemHorizontalAbsListView r1 = android.widget.SemHorizontalAbsListView.this
-                boolean r1 = r1.mDataChanged
-                if (r1 == 0) goto L1a
-                android.widget.SemHorizontalAbsListView r0 = android.widget.SemHorizontalAbsListView.this
-                android.widget.SemHorizontalAbsListView$PositionScroller$2 r1 = new android.widget.SemHorizontalAbsListView$PositionScroller$2
-                r1.<init>()
-                r0.mPositionScrollAfterLayout = r1
-                return
-            L1a:
-                android.widget.SemHorizontalAbsListView r1 = android.widget.SemHorizontalAbsListView.this
-                int r1 = r1.getChildCount()
-                if (r1 != 0) goto L23
-                goto L56
-            L23:
-                android.widget.SemHorizontalAbsListView r2 = android.widget.SemHorizontalAbsListView.this
-                int r2 = r2.mFirstPosition
-                int r1 = r1 + r2
-                r3 = 1
-                int r1 = r1 - r3
-                android.widget.SemHorizontalAbsListView r4 = android.widget.SemHorizontalAbsListView.this
-                int r4 = r4.getCount()
-                int r4 = r4 - r3
-                int r6 = java.lang.Math.min(r4, r6)
-                r4 = 0
-                int r6 = java.lang.Math.max(r4, r6)
-                r4 = 200(0xc8, float:2.8E-43)
-                if (r6 >= r2) goto L50
-                int r1 = r1 - r7
-                if (r1 >= r3) goto L42
-                goto L56
-            L42:
-                int r2 = r2 - r6
-                int r2 = r2 + r3
-                int r1 = r1 - r3
-                if (r1 >= r2) goto L4c
-                r2 = 4
-                r5.mMode = r2
-            L4a:
-                r2 = r1
-                goto L64
-            L4c:
-                r1 = 2
-                r5.mMode = r1
-                goto L64
-            L50:
-                if (r6 <= r1) goto L78
-                int r2 = r7 - r2
-                if (r2 >= r3) goto L57
-            L56:
-                return
-            L57:
-                int r1 = r6 - r1
-                int r1 = r1 + r3
-                int r2 = r2 - r3
-                if (r2 >= r1) goto L61
-                r1 = 3
-                r5.mMode = r1
-                goto L64
-            L61:
-                r5.mMode = r3
-                goto L4a
-            L64:
-                if (r2 <= 0) goto L6a
-                int r4 = r4 / r2
-                r5.mScrollDuration = r4
-                goto L6c
-            L6a:
-                r5.mScrollDuration = r4
-            L6c:
-                r5.mTargetPos = r6
-                r5.mBoundPos = r7
-                r5.mLastSeenPos = r0
-                android.widget.SemHorizontalAbsListView r6 = android.widget.SemHorizontalAbsListView.this
-                r6.postOnAnimation(r5)
-                return
-            L78:
-                r5.scrollToVisible(r6, r7, r4)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: android.widget.SemHorizontalAbsListView.PositionScroller.start(int, int):void");
+        public void start(final int i, final int i2) {
+            int i3;
+            int i4;
+            stop();
+            if (i2 == -1) {
+                start(i);
+                return;
+            }
+            if (SemHorizontalAbsListView.this.mDataChanged) {
+                SemHorizontalAbsListView.this.mPositionScrollAfterLayout = new Runnable() { // from class: android.widget.SemHorizontalAbsListView.PositionScroller.2
+                    @Override // java.lang.Runnable
+                    public void run() {
+                        PositionScroller.this.start(i, i2);
+                    }
+                };
+                return;
+            }
+            int childCount = SemHorizontalAbsListView.this.getChildCount();
+            if (childCount == 0) {
+                return;
+            }
+            int i5 = SemHorizontalAbsListView.this.mFirstPosition;
+            int i6 = (childCount + i5) - 1;
+            int iMax = Math.max(0, Math.min(SemHorizontalAbsListView.this.getCount() - 1, i));
+            if (iMax < i5) {
+                int i7 = i6 - i2;
+                if (i7 < 1) {
+                    return;
+                }
+                i4 = (i5 - iMax) + 1;
+                i3 = i7 - 1;
+                if (i3 < i4) {
+                    this.mMode = 4;
+                    i4 = i3;
+                } else {
+                    this.mMode = 2;
+                }
+            } else {
+                if (iMax <= i6) {
+                    scrollToVisible(iMax, i2, 200);
+                    return;
+                }
+                int i8 = i2 - i5;
+                if (i8 < 1) {
+                    return;
+                }
+                i3 = (iMax - i6) + 1;
+                i4 = i8 - 1;
+                if (i4 < i3) {
+                    this.mMode = 3;
+                } else {
+                    this.mMode = 1;
+                    i4 = i3;
+                }
+            }
+            if (i4 > 0) {
+                this.mScrollDuration = 200 / i4;
+            } else {
+                this.mScrollDuration = 200;
+            }
+            this.mTargetPos = iMax;
+            this.mBoundPos = i2;
+            this.mLastSeenPos = -1;
+            SemHorizontalAbsListView.this.postOnAnimation(this);
         }
 
         @Override // android.widget.SemHorizontalAbsListView.AbsPositionScroller
@@ -6243,11 +6647,11 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
             View childAt = SemHorizontalAbsListView.this.getChildAt(i - i4);
             int left = childAt.getLeft();
             int right = childAt.getRight();
-            int i6 = right > width ? right - width : 0;
+            int iMin = right > width ? right - width : 0;
             if (left < i5) {
-                i6 = left - i5;
+                iMin = left - i5;
             }
-            if (i6 == 0) {
+            if (iMin == 0) {
                 if (SemHorizontalAbsListView.this.mJumpScrollToTopState == SemHorizontalAbsListView.JUMP_SCROLL_TO_TOP_FINISHING) {
                     SemHorizontalAbsListView.this.mJumpScrollToTopState = SemHorizontalAbsListView.JUMP_SCROLL_TO_TOP_IDLE;
                     SemHorizontalAbsListView.this.postOnJumpScrollToFinished();
@@ -6259,14 +6663,14 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
                 View childAt2 = SemHorizontalAbsListView.this.getChildAt(i2 - i4);
                 int left2 = childAt2.getLeft();
                 int right2 = childAt2.getRight();
-                int abs = Math.abs(i6);
-                if (i6 < 0 && right2 + abs > width) {
-                    i6 = Math.max(0, right2 - width);
-                } else if (i6 > 0 && left2 - abs < i5) {
-                    i6 = Math.min(0, left2 - i5);
+                int iAbs = Math.abs(iMin);
+                if (iMin < 0 && right2 + iAbs > width) {
+                    iMin = Math.max(0, right2 - width);
+                } else if (iMin > 0 && left2 - iAbs < i5) {
+                    iMin = Math.min(0, left2 - i5);
                 }
             }
-            SemHorizontalAbsListView.this.smoothScrollBy(i6, i3);
+            SemHorizontalAbsListView.this.smoothScrollBy(iMin, i3);
         }
 
         @Override // android.widget.SemHorizontalAbsListView.AbsPositionScroller
@@ -6334,15 +6738,15 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
                 View childAt3 = SemHorizontalAbsListView.this.getChildAt(1);
                 int width2 = childAt3.getWidth();
                 int left = childAt3.getLeft();
-                int max = Math.max(SemHorizontalAbsListView.this.mListPadding.right, this.mExtraScroll);
+                int iMax = Math.max(SemHorizontalAbsListView.this.mListPadding.right, this.mExtraScroll);
                 if (i5 < this.mBoundPos) {
-                    SemHorizontalAbsListView.this.smoothScrollBy(Math.max(0, (width2 + left) - max), this.mScrollDuration, true);
+                    SemHorizontalAbsListView.this.smoothScrollBy(Math.max(0, (width2 + left) - iMax), this.mScrollDuration, true);
                     this.mLastSeenPos = i5;
                     SemHorizontalAbsListView.this.postOnAnimation(this);
                     return;
                 } else {
-                    if (left > max) {
-                        SemHorizontalAbsListView.this.smoothScrollBy(left - max, this.mScrollDuration, true);
+                    if (left > iMax) {
+                        SemHorizontalAbsListView.this.smoothScrollBy(left - iMax, this.mScrollDuration, true);
                         return;
                     }
                     return;
@@ -6361,13 +6765,13 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
                 } else if (i6 > i7) {
                     i4 = i6 - i7;
                 }
-                float min = Math.min(Math.abs(i4 / childCount3), 1.0f);
+                float fMin = Math.min(Math.abs(i4 / childCount3), 1.0f);
                 if (i6 < i) {
-                    SemHorizontalAbsListView.this.smoothScrollBy((int) ((SemHorizontalAbsListView.this.mIsRTL ? SemHorizontalAbsListView.this.getWidth() : -SemHorizontalAbsListView.this.getWidth()) * min), (int) (this.mScrollDuration * min), true);
+                    SemHorizontalAbsListView.this.smoothScrollBy((int) ((SemHorizontalAbsListView.this.mIsRTL ? SemHorizontalAbsListView.this.getWidth() : -SemHorizontalAbsListView.this.getWidth()) * fMin), (int) (this.mScrollDuration * fMin), true);
                     SemHorizontalAbsListView.this.postOnAnimation(this);
                     return;
                 } else if (i6 > i7) {
-                    SemHorizontalAbsListView.this.smoothScrollBy((int) ((SemHorizontalAbsListView.this.mIsRTL ? -SemHorizontalAbsListView.this.getWidth() : SemHorizontalAbsListView.this.getWidth()) * min), (int) (this.mScrollDuration * min), true);
+                    SemHorizontalAbsListView.this.smoothScrollBy((int) ((SemHorizontalAbsListView.this.mIsRTL ? -SemHorizontalAbsListView.this.getWidth() : SemHorizontalAbsListView.this.getWidth()) * fMin), (int) (this.mScrollDuration * fMin), true);
                     SemHorizontalAbsListView.this.postOnAnimation(this);
                     return;
                 } else {
@@ -6388,14 +6792,14 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
             int width3 = childAt4.getWidth();
             int left2 = childAt4.getLeft();
             int i9 = width - left2;
-            int max2 = Math.max(SemHorizontalAbsListView.this.mListPadding.left, this.mExtraScroll);
+            int iMax2 = Math.max(SemHorizontalAbsListView.this.mListPadding.left, this.mExtraScroll);
             this.mLastSeenPos = i8;
             if (i8 > this.mBoundPos) {
-                SemHorizontalAbsListView.this.smoothScrollBy(-(i9 - max2), this.mScrollDuration, true);
+                SemHorizontalAbsListView.this.smoothScrollBy(-(i9 - iMax2), this.mScrollDuration, true);
                 SemHorizontalAbsListView.this.postOnAnimation(this);
                 return;
             }
-            int i10 = width - max2;
+            int i10 = width - iMax2;
             int i11 = left2 + width3;
             if (i10 > i11) {
                 SemHorizontalAbsListView.this.smoothScrollBy(-(i10 - i11), this.mScrollDuration, true);
@@ -6434,20 +6838,20 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
         if (message.what != 1) {
             return;
         }
-        long currentTimeMillis = System.currentTimeMillis();
-        this.mHoverRecognitionCurrentTime = currentTimeMillis;
-        this.mHoverRecognitionDurationTime = (currentTimeMillis - this.mHoverRecognitionStartTime) / 1000;
-        if (!this.mIsPenHovered || currentTimeMillis - this.mHoverScrollStartTime >= this.mHoverScrollTimeInterval) {
-            if (!this.mIsPenPressed || currentTimeMillis - this.mHoverScrollStartTime >= this.mPenDragScrollTimeInterval) {
-                int applyDimension = (int) (TypedValue.applyDimension(1, this.HOVERSCROLL_SPEED, this.mContext.getResources().getDisplayMetrics()) + 0.5f);
-                this.mHoverScrollSpeed = applyDimension;
+        long jCurrentTimeMillis = System.currentTimeMillis();
+        this.mHoverRecognitionCurrentTime = jCurrentTimeMillis;
+        this.mHoverRecognitionDurationTime = (jCurrentTimeMillis - this.mHoverRecognitionStartTime) / 1000;
+        if (!this.mIsPenHovered || jCurrentTimeMillis - this.mHoverScrollStartTime >= this.mHoverScrollTimeInterval) {
+            if (!this.mIsPenPressed || jCurrentTimeMillis - this.mHoverScrollStartTime >= this.mPenDragScrollTimeInterval) {
+                int iApplyDimension = (int) (TypedValue.applyDimension(1, this.HOVERSCROLL_SPEED, this.mContext.getResources().getDisplayMetrics()) + 0.5f);
+                this.mHoverScrollSpeed = iApplyDimension;
                 long j = this.mHoverRecognitionDurationTime;
                 if (j == 3) {
-                    this.mHoverScrollSpeed = applyDimension + ((int) (applyDimension * 0.1d));
+                    this.mHoverScrollSpeed = iApplyDimension + ((int) (iApplyDimension * 0.1d));
                 } else if (j == 4) {
-                    this.mHoverScrollSpeed = applyDimension + ((int) (applyDimension * 0.2d));
+                    this.mHoverScrollSpeed = iApplyDimension + ((int) (iApplyDimension * 0.2d));
                 } else if (j >= 5) {
-                    this.mHoverScrollSpeed = applyDimension + ((int) (applyDimension * 0.3d));
+                    this.mHoverScrollSpeed = iApplyDimension + ((int) (iApplyDimension * 0.3d));
                 }
                 int i = this.mHoverScrollDirection;
                 int i2 = this.mHoverScrollSpeed;

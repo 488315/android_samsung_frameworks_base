@@ -35,9 +35,9 @@ public class TracingContext<DataSourceInstanceType extends DataSourceInstance, T
         if (tlsstatetype != null) {
             return tlsstatetype;
         }
-        TlsStateType createTlsState = this.mDataSource.createTlsState(new CreateTlsStateArgs<>(this.mDataSource, this.mInstanceIndex));
-        nativeSetCustomTls(this.mDataSource.mNativeObj, createTlsState);
-        return createTlsState;
+        TlsStateType tlsstatetypeCreateTlsState = this.mDataSource.createTlsState(new CreateTlsStateArgs<>(this.mDataSource, this.mInstanceIndex));
+        nativeSetCustomTls(this.mDataSource.mNativeObj, tlsstatetypeCreateTlsState);
+        return tlsstatetypeCreateTlsState;
     }
 
     public IncrementalStateType getIncrementalState() {
@@ -45,9 +45,9 @@ public class TracingContext<DataSourceInstanceType extends DataSourceInstance, T
         if (incrementalstatetype != null) {
             return incrementalstatetype;
         }
-        IncrementalStateType createIncrementalState = this.mDataSource.createIncrementalState(new CreateIncrementalStateArgs<>(this.mDataSource, this.mInstanceIndex));
-        nativeSetIncrementalState(this.mDataSource.mNativeObj, createIncrementalState);
-        return createIncrementalState;
+        IncrementalStateType incrementalstatetypeCreateIncrementalState = this.mDataSource.createIncrementalState(new CreateIncrementalStateArgs<>(this.mDataSource, this.mInstanceIndex));
+        nativeSetIncrementalState(this.mDataSource.mNativeObj, incrementalstatetypeCreateIncrementalState);
+        return incrementalstatetypeCreateIncrementalState;
     }
 
     protected byte[][] getAndClearAllPendingTracePackets() {

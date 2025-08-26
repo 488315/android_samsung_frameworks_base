@@ -22,10 +22,11 @@ import com.android.systemui.wallpaper.theme.xmlparser.ViewParser;
 import com.android.systemui.wallpaper.utils.WhichChecker;
 import com.samsung.android.wallpaper.Rune;
 import com.samsung.systemui.splugins.pluginlock.PluginLock;
+import java.io.IOException;
 import java.util.HashMap;
 import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class AnimatedSource {
     public final String TAG;
@@ -39,14 +40,18 @@ public class AnimatedSource {
         int sourceWhich = WhichChecker.getSourceWhich(i);
         this.mWhich = sourceWhich;
         this.mRootView = frameLayout;
-        String m = ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(i, "ImageWallpaper_", "[AnimatedSource]");
-        this.TAG = m;
+        String strM = ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(i, "ImageWallpaper_", "[AnimatedSource]");
+        this.TAG = strM;
         String animatedPkgName = WallpaperManager.getInstance(context).getAnimatedPkgName(sourceWhich);
         this.mPackageName = animatedPkgName;
-        KeyguardPluginControllerImpl$$ExternalSyntheticOutline0.m("AnimatedSource packageName : ", animatedPkgName, m);
+        KeyguardPluginControllerImpl$$ExternalSyntheticOutline0.m("AnimatedSource packageName : ", animatedPkgName, strM);
     }
 
-    public final ComplexAnimationBuilder createComplexAnimation(int i, int i2) {
+    /* JADX WARN: Removed duplicated region for block: B:38:0x00ad  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public final ComplexAnimationBuilder createComplexAnimation(int i, int i2) throws XmlPullParserException, IOException {
         Resources resources;
         String str;
         String str2 = this.mPackageName;
@@ -80,31 +85,18 @@ public class AnimatedSource {
                 parserData.mIsStartTag = false;
             }
             String name = xmlPullParser.getName();
-            BaseParser baseParser = (BaseParser) themeParser.mParserMap.get(name);
-            if (baseParser == null) {
+            BaseParser screenParser = (BaseParser) themeParser.mParserMap.get(name);
+            if (screenParser == null) {
                 if (!TextUtils.isEmpty(name)) {
-                    if (name.equalsIgnoreCase(PluginLock.KEY_SCREEN)) {
-                        baseParser = new ScreenParser();
-                    } else if (name.equalsIgnoreCase("view")) {
-                        baseParser = new ViewParser();
-                    } else if (name.equalsIgnoreCase("scene")) {
-                        baseParser = new SceneParser();
-                    } else if (!TextUtils.isEmpty(ThemeParser.getAnimationTagName(name))) {
-                        baseParser = new AnimationParser(ThemeParser.getAnimationTagName(name));
-                    } else if (name.equalsIgnoreCase("frame")) {
-                        baseParser = new FrameParser();
-                    } else if (name.equalsIgnoreCase("item")) {
-                        baseParser = new ItemParser();
-                    }
+                    screenParser = name.equalsIgnoreCase(PluginLock.KEY_SCREEN) ? new ScreenParser() : name.equalsIgnoreCase("view") ? new ViewParser() : name.equalsIgnoreCase("scene") ? new SceneParser() : !TextUtils.isEmpty(ThemeParser.getAnimationTagName(name)) ? new AnimationParser(ThemeParser.getAnimationTagName(name)) : name.equalsIgnoreCase("frame") ? new FrameParser() : name.equalsIgnoreCase("item") ? new ItemParser() : null;
                 }
-                baseParser = null;
             }
-            if (baseParser != null) {
-                themeParser.mParserMap.put(name, baseParser);
+            if (screenParser != null) {
+                themeParser.mParserMap.put(name, screenParser);
             }
-            if (baseParser != null) {
+            if (screenParser != null) {
                 Log.d("ThemeParser", "tagName : " + name);
-                baseParser.parseAttribute(parserData);
+                screenParser.parseAttribute(parserData);
             }
         }
         return parserData.mComplexAnimationBuilder;
@@ -112,8 +104,8 @@ public class AnimatedSource {
 
     public final boolean isFixedOrientation() {
         boolean z = Rune.SUPPORT_SUB_DISPLAY_MODE && !Rune.SUPPORT_COVER_DISPLAY_WATCHFACE;
-        boolean isFlagEnabled = z ? WhichChecker.isFlagEnabled(this.mWhich, 16) : true;
-        Log.i(this.TAG, "isFixedOrientation: , isFold=" + z + ", isFixedOrientation=" + isFlagEnabled);
-        return isFlagEnabled;
+        boolean zIsFlagEnabled = z ? WhichChecker.isFlagEnabled(this.mWhich, 16) : true;
+        Log.i(this.TAG, "isFixedOrientation: , isFold=" + z + ", isFixedOrientation=" + zIsFlagEnabled);
+        return zIsFlagEnabled;
     }
 }

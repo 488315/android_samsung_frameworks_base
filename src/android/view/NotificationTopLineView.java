@@ -61,9 +61,9 @@ public class NotificationTopLineView extends ViewGroup {
         Resources resources = getResources();
         this.mChildMinWidth = resources.getDimensionPixelSize(R.dimen.notification_header_shrink_min_width);
         this.mChildHideWidth = resources.getDimensionPixelSize(R.dimen.notification_header_shrink_hide_width);
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, new int[]{16842927}, i, i2);
-        int i3 = obtainStyledAttributes.getInt(0, 0);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, new int[]{16842927}, i, i2);
+        int i3 = typedArrayObtainStyledAttributes.getInt(0, 0);
+        typedArrayObtainStyledAttributes.recycle();
         if ((i3 & 80) == 80) {
             this.mGravityY = 80;
         } else if ((i3 & 48) == 48) {
@@ -88,26 +88,26 @@ public class NotificationTopLineView extends ViewGroup {
 
     @Override // android.view.View
     protected void onMeasure(int i, int i2) {
-        int makeMeasureSpec;
+        int iMakeMeasureSpec;
         Trace.beginSection("NotificationTopLineView#onMeasure");
         int size = View.MeasureSpec.getSize(i);
         int size2 = View.MeasureSpec.getSize(i2);
         boolean z = View.MeasureSpec.getMode(i2) == Integer.MIN_VALUE;
-        int makeMeasureSpec2 = View.MeasureSpec.makeMeasureSpec(size, Integer.MIN_VALUE);
+        int iMakeMeasureSpec2 = View.MeasureSpec.makeMeasureSpec(size, Integer.MIN_VALUE);
         if (Flags.notificationsRedesignTemplates()) {
-            makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, 0);
+            iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, 0);
         } else {
-            makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(size2, Integer.MIN_VALUE);
+            iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(size2, Integer.MIN_VALUE);
         }
         int paddingStart = getPaddingStart();
         this.mMaxAscent = -1;
         this.mMaxDescent = -1;
-        int i3 = -1;
-        for (int i4 = 0; i4 < getChildCount(); i4++) {
-            View childAt = getChildAt(i4);
+        int iMax = -1;
+        for (int i3 = 0; i3 < getChildCount(); i3++) {
+            View childAt = getChildAt(i3);
             if (childAt.getVisibility() != 8) {
                 ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) childAt.getLayoutParams();
-                childAt.measure(getChildMeasureSpec(makeMeasureSpec2, marginLayoutParams.leftMargin + marginLayoutParams.rightMargin, marginLayoutParams.width), getChildMeasureSpec(makeMeasureSpec, marginLayoutParams.topMargin + marginLayoutParams.bottomMargin, marginLayoutParams.height));
+                childAt.measure(getChildMeasureSpec(iMakeMeasureSpec2, marginLayoutParams.leftMargin + marginLayoutParams.rightMargin, marginLayoutParams.width), getChildMeasureSpec(iMakeMeasureSpec, marginLayoutParams.topMargin + marginLayoutParams.bottomMargin, marginLayoutParams.height));
                 paddingStart += marginLayoutParams.leftMargin + marginLayoutParams.rightMargin + childAt.getMeasuredWidth();
                 int baseline = childAt.getBaseline();
                 int measuredHeight = childAt.getMeasuredHeight();
@@ -115,23 +115,28 @@ public class NotificationTopLineView extends ViewGroup {
                     this.mMaxAscent = Math.max(this.mMaxAscent, baseline);
                     this.mMaxDescent = Math.max(this.mMaxDescent, measuredHeight - baseline);
                 }
-                i3 = Math.max(i3, measuredHeight);
+                iMax = Math.max(iMax, measuredHeight);
             }
         }
         this.mViewsToDisappear.clear();
-        int max = Math.max(this.mHeaderTextMarginEnd, getPaddingEnd());
-        if (paddingStart > size - max) {
-            this.mOverflowAdjuster.resetForOverflow((paddingStart - size) + max, makeMeasureSpec).adjust(this.mAppName, null, this.mChildMinWidth).adjust(this.mHeaderText, this.mHeaderTextDivider, this.mChildMinWidth).adjust(this.mSecondaryHeaderText, this.mSecondaryHeaderTextDivider, 0).adjust(this.mTitle, null, this.mChildMinWidth).adjust(this.mTime, null, this.mChildMinWidth).adjust(this.mHeaderText, this.mHeaderTextDivider, 0).finish();
+        int iMax2 = Math.max(this.mHeaderTextMarginEnd, getPaddingEnd());
+        if (paddingStart > size - iMax2) {
+            this.mOverflowAdjuster.resetForOverflow((paddingStart - size) + iMax2, iMakeMeasureSpec).adjust(this.mAppName, null, this.mChildMinWidth).adjust(this.mHeaderText, this.mHeaderTextDivider, this.mChildMinWidth).adjust(this.mSecondaryHeaderText, this.mSecondaryHeaderTextDivider, 0).adjust(this.mTitle, null, this.mChildMinWidth).adjust(this.mTime, null, this.mChildMinWidth).adjust(this.mHeaderText, this.mHeaderTextDivider, 0).finish();
         }
         if (z) {
-            size2 = i3;
+            size2 = iMax;
         }
         setMeasuredDimension(size, size2);
         Trace.endSection();
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:24:0x007a A[PHI: r7
+      0x007a: PHI (r7v15 int) = (r7v14 int), (r7v19 int) binds: [B:22:0x0072, B:19:0x0063] A[DONT_GENERATE, DONT_INLINE]] */
     @Override // android.view.ViewGroup, android.view.View
-    protected void onLayout(boolean z, int i, int i2, int i3, int i4) {
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    protected void onLayout(boolean z, int i, int i2, int i3, int i4) throws Resources.NotFoundException {
         int i5;
         int i6;
         boolean z2 = getLayoutDirection() == 1;
@@ -156,13 +161,9 @@ public class NotificationTopLineView extends ViewGroup {
                         if (baseline != -1) {
                             i5 = i6 + (this.mMaxAscent - baseline);
                         }
-                        i5 = i6;
                     } else if (i13 == 80) {
                         i6 = ((i7 - this.mPaddingBottom) - measuredHeight) - marginLayoutParams.bottomMargin;
-                        if (baseline != -1) {
-                            i5 = i6 - (this.mMaxDescent - (measuredHeight - baseline));
-                        }
-                        i5 = i6;
+                        i5 = baseline != -1 ? i6 - (this.mMaxDescent - (measuredHeight - baseline)) : i6;
                     } else {
                         i5 = this.mPaddingTop;
                     }
@@ -240,18 +241,18 @@ public class NotificationTopLineView extends ViewGroup {
 
         private Rect getRectAroundView(View view) {
             float f = NotificationTopLineView.this.getResources().getDisplayMetrics().density * 48.0f;
-            float max = Math.max(f, view.getWidth());
-            float max2 = Math.max(f, view.getHeight());
+            float fMax = Math.max(f, view.getWidth());
+            float fMax2 = Math.max(f, view.getHeight());
             Rect rect = new Rect();
             if (view.getVisibility() == 8) {
                 view = NotificationTopLineView.this.getFirstChildNotGone();
-                rect.left = (int) (view.getLeft() - (max / 2.0f));
+                rect.left = (int) (view.getLeft() - (fMax / 2.0f));
             } else {
-                rect.left = (int) (((view.getLeft() + view.getRight()) / 2.0f) - (max / 2.0f));
+                rect.left = (int) (((view.getLeft() + view.getRight()) / 2.0f) - (fMax / 2.0f));
             }
-            rect.top = (int) (((view.getTop() + view.getBottom()) / 2.0f) - (max2 / 2.0f));
-            rect.bottom = (int) (rect.top + max2);
-            rect.right = (int) (rect.left + max);
+            rect.top = (int) (((view.getTop() + view.getBottom()) / 2.0f) - (fMax2 / 2.0f));
+            rect.bottom = (int) (rect.top + fMax2);
+            rect.right = (int) (rect.left + fMax);
             return rect;
         }
 
@@ -345,13 +346,13 @@ public class NotificationTopLineView extends ViewGroup {
             View view3;
             View view4;
             if (this.mOverflow > 0 && view != null && view.getVisibility() != 8 && (measuredWidth = view.getMeasuredWidth()) > i) {
-                int max = Math.max(i, measuredWidth - this.mOverflow);
-                if (i == 0 && max < NotificationTopLineView.this.mChildHideWidth && (view4 = this.mRegrowView) != null && view4 != view) {
-                    max = 0;
+                int iMax = Math.max(i, measuredWidth - this.mOverflow);
+                if (i == 0 && iMax < NotificationTopLineView.this.mChildHideWidth && (view4 = this.mRegrowView) != null && view4 != view) {
+                    iMax = 0;
                 }
-                view.measure(View.MeasureSpec.makeMeasureSpec(max, Integer.MIN_VALUE), this.mHeightSpec);
-                this.mOverflow -= measuredWidth - max;
-                if (max == 0) {
+                view.measure(View.MeasureSpec.makeMeasureSpec(iMax, Integer.MIN_VALUE), this.mHeightSpec);
+                this.mOverflow -= measuredWidth - iMax;
+                if (iMax == 0) {
                     NotificationTopLineView.this.mViewsToDisappear.add(view);
                     this.mOverflow -= getHorizontalMargins(view);
                     if (view2 != null && view2.getVisibility() != 8) {
@@ -366,7 +367,7 @@ public class NotificationTopLineView extends ViewGroup {
                     finish();
                     return this;
                 }
-                if (max != 0) {
+                if (iMax != 0) {
                     this.mRegrowView = view;
                 }
             }

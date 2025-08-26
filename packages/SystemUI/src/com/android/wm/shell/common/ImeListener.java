@@ -7,7 +7,6 @@ import com.android.wm.shell.common.DisplayInsetsController;
 import kotlin.Pair;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class ImeListener implements DisplayInsetsController.OnInsetsChangedListener {
     public final DisplayController displayController;
@@ -21,9 +20,9 @@ public abstract class ImeListener implements DisplayInsetsController.OnInsetsCha
     }
 
     public final Pair getImeVisibilityAndHeight(InsetsState insetsState) {
-        InsetsSource peekSource = insetsState.peekSource(InsetsSource.ID_IME);
-        Rect frame = (peekSource == null || !peekSource.isVisible()) ? null : peekSource.getFrame();
-        return new Pair(Boolean.valueOf(peekSource != null ? peekSource.isVisible() : false), Integer.valueOf(frame != null ? this.mTmpBounds.bottom - frame.top : 0));
+        InsetsSource insetsSourcePeekSource = insetsState.peekSource(InsetsSource.ID_IME);
+        Rect frame = (insetsSourcePeekSource == null || !insetsSourcePeekSource.isVisible()) ? null : insetsSourcePeekSource.getFrame();
+        return new Pair(Boolean.valueOf(insetsSourcePeekSource != null ? insetsSourcePeekSource.isVisible() : false), Integer.valueOf(frame != null ? this.mTmpBounds.bottom - frame.top : 0));
     }
 
     @Override // com.android.wm.shell.common.DisplayInsetsController.OnInsetsChangedListener
@@ -34,16 +33,16 @@ public abstract class ImeListener implements DisplayInsetsController.OnInsetsCha
         }
         displayLayout.getStableBounds(this.mTmpBounds, false);
         Pair imeVisibilityAndHeight = getImeVisibilityAndHeight(this.mInsetsState);
-        boolean booleanValue = ((Boolean) imeVisibilityAndHeight.component1()).booleanValue();
-        int intValue = ((Number) imeVisibilityAndHeight.component2()).intValue();
+        boolean zBooleanValue = ((Boolean) imeVisibilityAndHeight.component1()).booleanValue();
+        int iIntValue = ((Number) imeVisibilityAndHeight.component2()).intValue();
         Pair imeVisibilityAndHeight2 = getImeVisibilityAndHeight(insetsState);
-        boolean booleanValue2 = ((Boolean) imeVisibilityAndHeight2.component1()).booleanValue();
-        int intValue2 = ((Number) imeVisibilityAndHeight2.component2()).intValue();
+        boolean zBooleanValue2 = ((Boolean) imeVisibilityAndHeight2.component1()).booleanValue();
+        int iIntValue2 = ((Number) imeVisibilityAndHeight2.component2()).intValue();
         this.mInsetsState.set(insetsState, true);
-        if (booleanValue == booleanValue2 && intValue == intValue2) {
+        if (zBooleanValue == zBooleanValue2 && iIntValue == iIntValue2) {
             return;
         }
-        onImeVisibilityChanged(booleanValue2, intValue2);
+        onImeVisibilityChanged(zBooleanValue2, iIntValue2);
     }
 
     public abstract void onImeVisibilityChanged(boolean z, int i);

@@ -3,11 +3,9 @@ package androidx.compose.ui.graphics.colorspace;
 import androidx.compose.ui.graphics.ColorKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class Lab extends ColorSpace {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -35,12 +33,12 @@ public final class Lab extends ColorSpace {
         float f2 = f / fArr2[0];
         float f3 = fArr[1] / fArr2[1];
         float f4 = fArr[2] / fArr2[2];
-        float cbrt = f2 > 0.008856452f ? (float) Math.cbrt(f2) : (f2 * 7.787037f) + 0.13793103f;
-        float cbrt2 = f3 > 0.008856452f ? (float) Math.cbrt(f3) : (f3 * 7.787037f) + 0.13793103f;
-        float cbrt3 = f4 > 0.008856452f ? (float) Math.cbrt(f4) : (f4 * 7.787037f) + 0.13793103f;
-        float f5 = (116.0f * cbrt2) - 16.0f;
-        float f6 = (cbrt - cbrt2) * 500.0f;
-        float f7 = (cbrt2 - cbrt3) * 200.0f;
+        float fCbrt = f2 > 0.008856452f ? (float) Math.cbrt(f2) : (f2 * 7.787037f) + 0.13793103f;
+        float fCbrt2 = f3 > 0.008856452f ? (float) Math.cbrt(f3) : (f3 * 7.787037f) + 0.13793103f;
+        float fCbrt3 = f4 > 0.008856452f ? (float) Math.cbrt(f4) : (f4 * 7.787037f) + 0.13793103f;
+        float f5 = (116.0f * fCbrt2) - 16.0f;
+        float f6 = (fCbrt - fCbrt2) * 500.0f;
+        float f7 = (fCbrt2 - fCbrt3) * 200.0f;
         if (f5 < 0.0f) {
             f5 = 0.0f;
         }
@@ -155,7 +153,7 @@ public final class Lab extends ColorSpace {
 
     @Override // androidx.compose.ui.graphics.colorspace.ColorSpace
     /* renamed from: xyzaToColor-JlNiLsg$ui_graphics_release */
-    public final long mo510xyzaToColorJlNiLsg$ui_graphics_release(float f, float f2, float f3, float f4, ColorSpace colorSpace) {
+    public final long mo512xyzaToColorJlNiLsg$ui_graphics_release(float f, float f2, float f3, float f4, ColorSpace colorSpace) {
         Illuminant illuminant = Illuminant.INSTANCE;
         illuminant.getClass();
         float[] fArr = Illuminant.D50Xyz;
@@ -164,12 +162,12 @@ public final class Lab extends ColorSpace {
         float f6 = f2 / fArr[1];
         illuminant.getClass();
         float f7 = f3 / fArr[2];
-        float cbrt = f5 > 0.008856452f ? (float) Math.cbrt(f5) : (f5 * 7.787037f) + 0.13793103f;
-        float cbrt2 = f6 > 0.008856452f ? (float) Math.cbrt(f6) : (f6 * 7.787037f) + 0.13793103f;
-        float cbrt3 = f7 > 0.008856452f ? (float) Math.cbrt(f7) : (f7 * 7.787037f) + 0.13793103f;
-        float f8 = (116.0f * cbrt2) - 16.0f;
-        float f9 = (cbrt - cbrt2) * 500.0f;
-        float f10 = (cbrt2 - cbrt3) * 200.0f;
+        float fCbrt = f5 > 0.008856452f ? (float) Math.cbrt(f5) : (f5 * 7.787037f) + 0.13793103f;
+        float fCbrt2 = f6 > 0.008856452f ? (float) Math.cbrt(f6) : (f6 * 7.787037f) + 0.13793103f;
+        float fCbrt3 = f7 > 0.008856452f ? (float) Math.cbrt(f7) : (f7 * 7.787037f) + 0.13793103f;
+        float f8 = (116.0f * fCbrt2) - 16.0f;
+        float f9 = (fCbrt - fCbrt2) * 500.0f;
+        float f10 = (fCbrt2 - fCbrt3) * 200.0f;
         if (f8 < 0.0f) {
             f8 = 0.0f;
         }

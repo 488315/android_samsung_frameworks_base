@@ -40,10 +40,10 @@ public abstract class MidiDeviceService extends Service {
     public void onCreate() {
         MidiDeviceServer midiDeviceServer;
         MidiDeviceInfo serviceDeviceInfo;
-        IMidiManager asInterface = IMidiManager.Stub.asInterface(ServiceManager.getService("midi"));
-        this.mMidiManager = asInterface;
+        IMidiManager iMidiManagerAsInterface = IMidiManager.Stub.asInterface(ServiceManager.getService("midi"));
+        this.mMidiManager = iMidiManagerAsInterface;
         try {
-            serviceDeviceInfo = asInterface.getServiceDeviceInfo(getPackageName(), getClass().getName());
+            serviceDeviceInfo = iMidiManagerAsInterface.getServiceDeviceInfo(getPackageName(), getClass().getName());
         } catch (RemoteException unused) {
             Log.e(TAG, "RemoteException in IMidiManager.getServiceDeviceInfo");
             midiDeviceServer = null;
@@ -52,11 +52,11 @@ public abstract class MidiDeviceService extends Service {
             Log.e(TAG, "Could not find MidiDeviceInfo for MidiDeviceService " + this);
         } else {
             this.mDeviceInfo = serviceDeviceInfo;
-            MidiReceiver[] onGetInputPortReceivers = onGetInputPortReceivers();
-            if (onGetInputPortReceivers == null) {
-                onGetInputPortReceivers = new MidiReceiver[0];
+            MidiReceiver[] midiReceiverArrOnGetInputPortReceivers = onGetInputPortReceivers();
+            if (midiReceiverArrOnGetInputPortReceivers == null) {
+                midiReceiverArrOnGetInputPortReceivers = new MidiReceiver[0];
             }
-            midiDeviceServer = new MidiDeviceServer(this.mMidiManager, onGetInputPortReceivers, serviceDeviceInfo, this.mCallback);
+            midiDeviceServer = new MidiDeviceServer(this.mMidiManager, midiReceiverArrOnGetInputPortReceivers, serviceDeviceInfo, this.mCallback);
             this.mServer = midiDeviceServer;
         }
     }

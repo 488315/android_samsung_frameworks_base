@@ -151,9 +151,9 @@ public abstract class SprAnimatorBase extends ValueAnimator implements Cloneable
 
     public void fromSPR(SprInputStream sprInputStream) throws IOException {
         this.mInterpolatorType = sprInputStream.readByte();
-        int readInt = sprInputStream.readInt();
-        byte[] bArr = new byte[readInt];
-        sprInputStream.read(bArr, 0, readInt);
+        int i = sprInputStream.readInt();
+        byte[] bArr = new byte[i];
+        sprInputStream.read(bArr, 0, i);
         byte b = this.mInterpolatorType;
         if (b == 6) {
             float f = ByteBuffer.wrap(bArr).getFloat();
@@ -171,14 +171,14 @@ public abstract class SprAnimatorBase extends ValueAnimator implements Cloneable
         } else {
             setInterpolator(b);
         }
-        int readInt2 = sprInputStream.readInt();
-        int readInt3 = sprInputStream.readInt();
-        setStartDelay(readInt2);
-        setDuration(readInt3);
-        byte readByte = sprInputStream.readByte();
-        if (readByte == 1) {
+        int i2 = sprInputStream.readInt();
+        int i3 = sprInputStream.readInt();
+        setStartDelay(i2);
+        setDuration(i3);
+        byte b2 = sprInputStream.readByte();
+        if (b2 == 1) {
             setRepeatMode(2);
-        } else if (readByte == 2) {
+        } else if (b2 == 2) {
             setRepeatMode(1);
         } else {
             setRepeatMode(1);
@@ -206,9 +206,7 @@ public abstract class SprAnimatorBase extends ValueAnimator implements Cloneable
         dataOutputStream.writeInt((int) getStartDelay());
         dataOutputStream.writeInt((int) getDuration());
         int repeatMode = getRepeatMode();
-        if (repeatMode == 1) {
-            dataOutputStream.writeByte(2);
-        } else if (repeatMode == 2) {
+        if (repeatMode != 1 && repeatMode == 2) {
             dataOutputStream.writeByte(1);
         } else {
             dataOutputStream.writeByte(2);

@@ -16,7 +16,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class CommunalSettingsInteractor$workProfileUserInfoCallbackFlow$1 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -31,20 +30,20 @@ final class CommunalSettingsInteractor$workProfileUserInfoCallbackFlow$1 extends
 
     /* JADX WARN: Multi-variable type inference failed */
     public static final void invokeSuspend$send(ProducerScope producerScope, List list) {
-        Object obj;
+        Object next;
         Iterator it = list.iterator();
         while (true) {
             if (!it.hasNext()) {
-                obj = null;
+                next = null;
                 break;
             } else {
-                obj = it.next();
-                if (((UserInfo) obj).isManagedProfile()) {
+                next = it.next();
+                if (((UserInfo) next).isManagedProfile()) {
                     break;
                 }
             }
         }
-        ((ChannelCoroutine) producerScope).mo3456trySendJP2dKIU(obj);
+        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(next);
     }
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
@@ -71,7 +70,7 @@ final class CommunalSettingsInteractor$workProfileUserInfoCallbackFlow$1 extends
             final ?? r1 = new UserTracker.Callback() { // from class: com.android.systemui.communal.domain.interactor.CommunalSettingsInteractor$workProfileUserInfoCallbackFlow$1$callback$1
                 @Override // com.android.systemui.settings.UserTracker.Callback
                 public final void onProfilesChanged(List list) {
-                    CommunalSettingsInteractor$workProfileUserInfoCallbackFlow$1.invokeSuspend$send(ProducerScope.this, list);
+                    CommunalSettingsInteractor$workProfileUserInfoCallbackFlow$1.invokeSuspend$send(producerScope, list);
                 }
             };
             CommunalSettingsInteractor communalSettingsInteractor = this.this$0;
@@ -81,7 +80,7 @@ final class CommunalSettingsInteractor$workProfileUserInfoCallbackFlow$1 extends
             Function0 function0 = new Function0() { // from class: com.android.systemui.communal.domain.interactor.CommunalSettingsInteractor$workProfileUserInfoCallbackFlow$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    ((UserTrackerImpl) CommunalSettingsInteractor.this.userTracker).removeCallback(r1);
+                    ((UserTrackerImpl) communalSettingsInteractor2.userTracker).removeCallback(r1);
                     return Unit.INSTANCE;
                 }
             };

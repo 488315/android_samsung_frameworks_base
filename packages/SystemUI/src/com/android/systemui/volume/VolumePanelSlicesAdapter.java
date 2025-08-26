@@ -19,20 +19,18 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class VolumePanelSlicesAdapter extends RecyclerView.Adapter {
     public final LifecycleOwner mLifecycleOwner;
     public VolumePanelDialog$$ExternalSyntheticLambda5 mOnSliceActionListener;
     public final List mSliceLiveData;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SliceRowViewHolder extends RecyclerView.ViewHolder {
         public final SliceView mSliceView;
 
         public SliceRowViewHolder(View view) {
-            super(view);
             RowContent rowContent;
+            super(view);
             SliceView sliceView = (SliceView) view.findViewById(R.id.slice_view);
             this.mSliceView = sliceView;
             sliceView.setMode(2);

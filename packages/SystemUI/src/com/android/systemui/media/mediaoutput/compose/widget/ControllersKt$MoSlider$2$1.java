@@ -17,7 +17,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.SharedFlowImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class ControllersKt$MoSlider$2$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ MutableInteractionSource $interactionSource;

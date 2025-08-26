@@ -9,6 +9,7 @@ import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.IBinder;
 import android.os.UserHandle;
 import android.util.Log;
@@ -39,7 +40,7 @@ public class MaintenanceModeNotificationService extends Service {
         ((NotificationManager) context.getSystemService(NotificationManager.class)).createNotificationChannel(new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, 3));
     }
 
-    private static Notification buildNotification(Context context) {
+    private static Notification buildNotification(Context context) throws Resources.NotFoundException {
         String string;
         PendingIntent activity = PendingIntent.getActivity(context, 0, new Intent().setComponent(OUTRO_COMPONENT), 67108864);
         PendingIntent broadcast = PendingIntent.getBroadcast(context, 0, new Intent(context, (Class<?>) DismissalReceiver.class), 67108864);
@@ -61,9 +62,9 @@ public class MaintenanceModeNotificationService extends Service {
         @Override // android.content.BroadcastReceiver
         public void onReceive(Context context, Intent intent) {
             Log.i("MaintenanceMode", "Notification has been dismissed!");
-            Context createContextAsUser = context.createContextAsUser(UserHandle.of(77), 0);
-            MaintenanceModeNotificationService.createNotificationChannel(createContextAsUser);
-            MaintenanceModeNotificationService.registerNotification(createContextAsUser);
+            Context contextCreateContextAsUser = context.createContextAsUser(UserHandle.of(77), 0);
+            MaintenanceModeNotificationService.createNotificationChannel(contextCreateContextAsUser);
+            MaintenanceModeNotificationService.registerNotification(contextCreateContextAsUser);
         }
     }
 }

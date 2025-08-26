@@ -5,7 +5,6 @@ import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class ListGridLayout extends LinearLayout {
     public final int[][] mConfigs;
@@ -25,11 +24,11 @@ public class ListGridLayout extends LinearLayout {
         if (getRowCount() == 0 || i < 0) {
             return null;
         }
-        int floor = z2 ? (int) Math.floor(r3 / r0) : Math.min(i, this.mConfigs.length - 2) % getRowCount();
+        int iFloor = z2 ? (int) Math.floor(r3 / r0) : Math.min(i, this.mConfigs.length - 2) % getRowCount();
         if (z) {
-            floor = getChildCount() - (floor + 1);
+            iFloor = getChildCount() - (iFloor + 1);
         }
-        return getSublist(floor);
+        return getSublist(iFloor);
     }
 
     public final int getRowCount() {

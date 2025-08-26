@@ -4,7 +4,6 @@ import java.io.Serializable;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 final class SynchronizedLazyImpl<T> implements Lazy, Serializable {
     private volatile Object _value;
@@ -23,23 +22,23 @@ final class SynchronizedLazyImpl<T> implements Lazy, Serializable {
 
     @Override // kotlin.Lazy
     public final Object getValue() {
-        Object obj;
-        Object obj2 = this._value;
+        Object objInvoke;
+        Object obj = this._value;
         UNINITIALIZED_VALUE uninitialized_value = UNINITIALIZED_VALUE.INSTANCE;
-        if (obj2 != uninitialized_value) {
-            return obj2;
+        if (obj != uninitialized_value) {
+            return obj;
         }
         synchronized (this.lock) {
-            obj = this._value;
-            if (obj == uninitialized_value) {
+            objInvoke = this._value;
+            if (objInvoke == uninitialized_value) {
                 Function0 function0 = this.initializer;
                 function0.getClass();
-                obj = function0.invoke();
-                this._value = obj;
+                objInvoke = function0.invoke();
+                this._value = objInvoke;
                 this.initializer = null;
             }
         }
-        return obj;
+        return objInvoke;
     }
 
     @Override // kotlin.Lazy

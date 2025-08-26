@@ -65,11 +65,11 @@ final class FloatArrayList extends AbstractProtobufList<Float> implements Intern
 
     @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractList, java.util.Collection, java.util.List
     public int hashCode() {
-        int i = 1;
-        for (int i2 = 0; i2 < this.size; i2++) {
-            i = (i * 31) + Float.floatToIntBits(this.array[i2]);
+        int iFloatToIntBits = 1;
+        for (int i = 0; i < this.size; i++) {
+            iFloatToIntBits = (iFloatToIntBits * 31) + Float.floatToIntBits(this.array[i]);
         }
-        return i;
+        return iFloatToIntBits;
     }
 
     @Override // com.android.framework.protobuf.Internal.ProtobufList, com.android.framework.protobuf.Internal.BooleanList
@@ -97,10 +97,10 @@ final class FloatArrayList extends AbstractProtobufList<Float> implements Intern
         if (!(obj instanceof Float)) {
             return -1;
         }
-        float floatValue = ((Float) obj).floatValue();
+        float fFloatValue = ((Float) obj).floatValue();
         int size = size();
         for (int i = 0; i < size; i++) {
-            if (this.array[i] == floatValue) {
+            if (this.array[i] == fFloatValue) {
                 return i;
             }
         }

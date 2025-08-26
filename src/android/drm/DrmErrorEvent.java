@@ -56,8 +56,8 @@ public class DrmErrorEvent extends DrmEvent {
         checkTypeValidity(i2);
     }
 
-    public DrmErrorEvent(int i, int i2, String str, HashMap<String, Object> hashMap) {
-        super(i, i2, str, hashMap);
+    public DrmErrorEvent(int i, int i2, String str, HashMap<String, Object> map) {
+        super(i, i2, str, map);
         checkTypeValidity(i2);
     }
 

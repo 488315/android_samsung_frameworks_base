@@ -10,12 +10,10 @@ import android.widget.Checkable;
 import android.widget.CompoundButton;
 import androidx.core.content.res.TypedArrayUtils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class CheckBoxPreference extends TwoStatePreference {
     public final Listener mListener;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Listener implements CompoundButton.OnCheckedChangeListener {
         public Listener() {
         }
@@ -70,19 +68,19 @@ public class CheckBoxPreference extends TwoStatePreference {
     public CheckBoxPreference(Context context, AttributeSet attributeSet, int i, int i2) {
         super(context, attributeSet, i, i2);
         this.mListener = new Listener();
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.CheckBoxPreference, i, i2);
-        String string = obtainStyledAttributes.getString(5);
-        this.mSummaryOn = string == null ? obtainStyledAttributes.getString(0) : string;
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.CheckBoxPreference, i, i2);
+        String string = typedArrayObtainStyledAttributes.getString(5);
+        this.mSummaryOn = string == null ? typedArrayObtainStyledAttributes.getString(0) : string;
         if (this.mChecked) {
             notifyChanged();
         }
-        String string2 = obtainStyledAttributes.getString(4);
-        this.mSummaryOff = string2 == null ? obtainStyledAttributes.getString(1) : string2;
+        String string2 = typedArrayObtainStyledAttributes.getString(4);
+        this.mSummaryOff = string2 == null ? typedArrayObtainStyledAttributes.getString(1) : string2;
         if (!this.mChecked) {
             notifyChanged();
         }
-        this.mDisableDependentsState = obtainStyledAttributes.getBoolean(3, obtainStyledAttributes.getBoolean(2, false));
-        obtainStyledAttributes.recycle();
+        this.mDisableDependentsState = typedArrayObtainStyledAttributes.getBoolean(3, typedArrayObtainStyledAttributes.getBoolean(2, false));
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     public CheckBoxPreference(Context context, AttributeSet attributeSet) {

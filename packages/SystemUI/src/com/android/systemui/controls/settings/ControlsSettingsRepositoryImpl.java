@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.SharingStarted;
 import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ControlsSettingsRepositoryImpl implements ControlsSettingsRepository {
     public final CoroutineDispatcher backgroundDispatcher;
@@ -28,8 +27,8 @@ public final class ControlsSettingsRepositoryImpl implements ControlsSettingsRep
     }
 
     public final ReadonlyStateFlow makeFlowForSetting(String str) {
-        ChannelFlowTransformLatest transformLatest = FlowKt.transformLatest(FlowKt.distinctUntilChanged(((UserRepositoryImpl) this.userRepository).selectedUserInfo), new ControlsSettingsRepositoryImpl$makeFlowForSetting$$inlined$flatMapLatest$1(null, this, str));
+        ChannelFlowTransformLatest channelFlowTransformLatestTransformLatest = FlowKt.transformLatest(FlowKt.distinctUntilChanged(((UserRepositoryImpl) this.userRepository).selectedUserInfo), new ControlsSettingsRepositoryImpl$makeFlowForSetting$$inlined$flatMapLatest$1(null, this, str));
         SharingStarted.Companion.getClass();
-        return FlowKt.stateIn(transformLatest, this.scope, SharingStarted.Companion.Eagerly, Boolean.FALSE);
+        return FlowKt.stateIn(channelFlowTransformLatestTransformLatest, this.scope, SharingStarted.Companion.Eagerly, Boolean.FALSE);
     }
 }

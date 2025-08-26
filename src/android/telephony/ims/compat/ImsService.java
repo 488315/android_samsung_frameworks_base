@@ -77,32 +77,32 @@ public class ImsService extends Service {
 
     /* JADX INFO: Access modifiers changed from: private */
     public IImsMMTelFeature createEmergencyMMTelFeatureInternal(int i) {
-        MMTelFeature onCreateEmergencyMMTelImsFeature = onCreateEmergencyMMTelImsFeature(i);
-        if (onCreateEmergencyMMTelImsFeature == null) {
+        MMTelFeature mMTelFeatureOnCreateEmergencyMMTelImsFeature = onCreateEmergencyMMTelImsFeature(i);
+        if (mMTelFeatureOnCreateEmergencyMMTelImsFeature == null) {
             return null;
         }
-        setupFeature(onCreateEmergencyMMTelImsFeature, i, 0);
-        return onCreateEmergencyMMTelImsFeature.getBinder();
+        setupFeature(mMTelFeatureOnCreateEmergencyMMTelImsFeature, i, 0);
+        return mMTelFeatureOnCreateEmergencyMMTelImsFeature.getBinder();
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     public IImsMMTelFeature createMMTelFeatureInternal(int i) {
-        MMTelFeature onCreateMMTelImsFeature = onCreateMMTelImsFeature(i);
-        if (onCreateMMTelImsFeature == null) {
+        MMTelFeature mMTelFeatureOnCreateMMTelImsFeature = onCreateMMTelImsFeature(i);
+        if (mMTelFeatureOnCreateMMTelImsFeature == null) {
             return null;
         }
-        setupFeature(onCreateMMTelImsFeature, i, 1);
-        return onCreateMMTelImsFeature.getBinder();
+        setupFeature(mMTelFeatureOnCreateMMTelImsFeature, i, 1);
+        return mMTelFeatureOnCreateMMTelImsFeature.getBinder();
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     public IImsRcsFeature createRcsFeatureInternal(int i) {
-        RcsFeature onCreateRcsFeature = onCreateRcsFeature(i);
-        if (onCreateRcsFeature == null) {
+        RcsFeature rcsFeatureOnCreateRcsFeature = onCreateRcsFeature(i);
+        if (rcsFeatureOnCreateRcsFeature == null) {
             return null;
         }
-        setupFeature(onCreateRcsFeature, i, 2);
-        return onCreateRcsFeature.getBinder();
+        setupFeature(rcsFeatureOnCreateRcsFeature, i, 2);
+        return rcsFeatureOnCreateRcsFeature.getBinder();
     }
 
     private void setupFeature(ImsFeature imsFeature, int i, int i2) {

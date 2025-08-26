@@ -49,12 +49,12 @@ public class TimePickerDialog extends AlertDialog implements DialogInterface.OnC
         this.mInitialMinute = i3;
         this.mIs24HourView = z;
         Context context2 = getContext();
-        View inflate = LayoutInflater.from(context2).inflate(R.layout.time_picker_dialog, (ViewGroup) null);
-        setView(inflate);
+        View viewInflate = LayoutInflater.from(context2).inflate(R.layout.time_picker_dialog, (ViewGroup) null);
+        setView(viewInflate);
         setButton(-1, context2.getString(17039370), this);
         setButton(-2, context2.getString(17039360), this);
         setButtonPanelLayoutHint(1);
-        TimePicker timePicker = (TimePicker) inflate.findViewById(R.id.timePicker);
+        TimePicker timePicker = (TimePicker) viewInflate.findViewById(R.id.timePicker);
         this.mTimePicker = timePicker;
         timePicker.setIs24HourView(Boolean.valueOf(z));
         timePicker.setCurrentHour(Integer.valueOf(i2));
@@ -100,11 +100,11 @@ public class TimePickerDialog extends AlertDialog implements DialogInterface.OnC
 
     @Override // android.app.Dialog
     public Bundle onSaveInstanceState() {
-        Bundle onSaveInstanceState = super.onSaveInstanceState();
-        onSaveInstanceState.putInt("hour", this.mTimePicker.getCurrentHour().intValue());
-        onSaveInstanceState.putInt("minute", this.mTimePicker.getCurrentMinute().intValue());
-        onSaveInstanceState.putBoolean(IS_24_HOUR, this.mTimePicker.is24HourView());
-        return onSaveInstanceState;
+        Bundle bundleOnSaveInstanceState = super.onSaveInstanceState();
+        bundleOnSaveInstanceState.putInt("hour", this.mTimePicker.getCurrentHour().intValue());
+        bundleOnSaveInstanceState.putInt("minute", this.mTimePicker.getCurrentMinute().intValue());
+        bundleOnSaveInstanceState.putBoolean(IS_24_HOUR, this.mTimePicker.is24HourView());
+        return bundleOnSaveInstanceState;
     }
 
     @Override // android.app.Dialog

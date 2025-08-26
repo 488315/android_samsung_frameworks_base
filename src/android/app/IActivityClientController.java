@@ -301,6 +301,11 @@ public interface IActivityClientController extends IInterface {
         }
 
         @Override // android.app.IActivityClientController
+        public boolean shouldPreloadHardwareRenderer(int i) throws RemoteException {
+            return false;
+        }
+
+        @Override // android.app.IActivityClientController
         public boolean shouldUpRecreateTask(IBinder iBinder, String str) throws RemoteException {
             return false;
         }
@@ -470,6 +475,8 @@ public interface IActivityClientController extends IInterface {
 
     int setVrMode(IBinder iBinder, boolean z, ComponentName componentName) throws RemoteException;
 
+    boolean shouldPreloadHardwareRenderer(int i) throws RemoteException;
+
     boolean shouldUpRecreateTask(IBinder iBinder, String str) throws RemoteException;
 
     boolean showAssistFromActivity(IBinder iBinder, Bundle bundle) throws RemoteException;
@@ -502,11 +509,11 @@ public interface IActivityClientController extends IInterface {
         static final int TRANSACTION_activityResumed = 2;
         static final int TRANSACTION_activityStopped = 6;
         static final int TRANSACTION_activityTopResumedStateLost = 4;
-        static final int TRANSACTION_adjustPopOverOptions = 72;
+        static final int TRANSACTION_adjustPopOverOptions = 73;
         static final int TRANSACTION_checkActivityCallerContentUriPermission = 31;
         static final int TRANSACTION_clearOverrideActivityTransition = 57;
         static final int TRANSACTION_convertFromTranslucent = 34;
-        static final int TRANSACTION_convertFromTranslucentOp = 70;
+        static final int TRANSACTION_convertFromTranslucentOp = 71;
         static final int TRANSACTION_convertToTranslucent = 35;
         static final int TRANSACTION_dismissKeyguard = 62;
         static final int TRANSACTION_enableTaskLocaleOverride = 67;
@@ -534,7 +541,7 @@ public interface IActivityClientController extends IInterface {
         static final int TRANSACTION_navigateUpTo = 13;
         static final int TRANSACTION_onBackPressed = 65;
         static final int TRANSACTION_overrideActivityTransition = 56;
-        static final int TRANSACTION_overridePendingTaskTransition = 71;
+        static final int TRANSACTION_overridePendingTaskTransition = 72;
         static final int TRANSACTION_overridePendingTransition = 58;
         static final int TRANSACTION_registerRemoteAnimations = 63;
         static final int TRANSACTION_releaseActivityInstance = 14;
@@ -554,6 +561,7 @@ public interface IActivityClientController extends IInterface {
         static final int TRANSACTION_setTaskDescription = 46;
         static final int TRANSACTION_setTurnScreenOn = 53;
         static final int TRANSACTION_setVrMode = 59;
+        static final int TRANSACTION_shouldPreloadHardwareRenderer = 70;
         static final int TRANSACTION_shouldUpRecreateTask = 12;
         static final int TRANSACTION_showAssistFromActivity = 47;
         static final int TRANSACTION_showLockTaskEscapeMessage = 45;
@@ -573,7 +581,7 @@ public interface IActivityClientController extends IInterface {
 
         @Override // android.os.Binder
         public int getMaxTransactionId() {
-            return 71;
+            return 72;
         }
 
         public Stub() {
@@ -584,9 +592,9 @@ public interface IActivityClientController extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IActivityClientController.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IActivityClientController)) {
-                return (IActivityClientController) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IActivityClientController.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IActivityClientController)) {
+                return (IActivityClientController) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -732,10 +740,12 @@ public interface IActivityClientController extends IInterface {
                 case 69:
                     return "setActivityRecordInputSinkEnabled";
                 case 70:
-                    return "convertFromTranslucentOp";
+                    return "shouldPreloadHardwareRenderer";
                 case 71:
-                    return "overridePendingTaskTransition";
+                    return "convertFromTranslucentOp";
                 case 72:
+                    return "overridePendingTaskTransition";
+                case 73:
                     return "adjustPopOverOptions";
                 default:
                     return null;
@@ -758,508 +768,515 @@ public interface IActivityClientController extends IInterface {
             }
             switch (i) {
                 case 1:
-                    IBinder readStrongBinder = parcel.readStrongBinder();
+                    IBinder strongBinder = parcel.readStrongBinder();
                     Configuration configuration = (Configuration) parcel.readTypedObject(Configuration.CREATOR);
-                    boolean readBoolean = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    activityIdle(readStrongBinder, configuration, readBoolean);
+                    activityIdle(strongBinder, configuration, z);
                     return true;
                 case 2:
-                    IBinder readStrongBinder2 = parcel.readStrongBinder();
-                    boolean readBoolean2 = parcel.readBoolean();
+                    IBinder strongBinder2 = parcel.readStrongBinder();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    activityResumed(readStrongBinder2, readBoolean2);
+                    activityResumed(strongBinder2, z2);
                     return true;
                 case 3:
-                    IBinder readStrongBinder3 = parcel.readStrongBinder();
+                    IBinder strongBinder3 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    activityRefreshed(readStrongBinder3);
+                    activityRefreshed(strongBinder3);
                     return true;
                 case 4:
                     activityTopResumedStateLost();
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    IBinder readStrongBinder4 = parcel.readStrongBinder();
+                    IBinder strongBinder4 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    activityPaused(readStrongBinder4);
+                    activityPaused(strongBinder4);
                     parcel2.writeNoException();
                     return true;
                 case 6:
-                    IBinder readStrongBinder5 = parcel.readStrongBinder();
+                    IBinder strongBinder5 = parcel.readStrongBinder();
                     Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     PersistableBundle persistableBundle = (PersistableBundle) parcel.readTypedObject(PersistableBundle.CREATOR);
                     CharSequence charSequence = (CharSequence) parcel.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     parcel.enforceNoDataAvail();
-                    activityStopped(readStrongBinder5, bundle, persistableBundle, charSequence);
+                    activityStopped(strongBinder5, bundle, persistableBundle, charSequence);
                     return true;
                 case 7:
-                    IBinder readStrongBinder6 = parcel.readStrongBinder();
+                    IBinder strongBinder6 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    activityDestroyed(readStrongBinder6);
+                    activityDestroyed(strongBinder6);
                     return true;
                 case 8:
-                    IBinder readStrongBinder7 = parcel.readStrongBinder();
+                    IBinder strongBinder7 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    activityLocalRelaunch(readStrongBinder7);
+                    activityLocalRelaunch(strongBinder7);
                     return true;
                 case 9:
-                    IBinder readStrongBinder8 = parcel.readStrongBinder();
+                    IBinder strongBinder8 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    activityRelaunched(readStrongBinder8);
+                    activityRelaunched(strongBinder8);
                     return true;
                 case 10:
-                    IBinder readStrongBinder9 = parcel.readStrongBinder();
+                    IBinder strongBinder9 = parcel.readStrongBinder();
                     SizeConfigurationBuckets sizeConfigurationBuckets = (SizeConfigurationBuckets) parcel.readTypedObject(SizeConfigurationBuckets.CREATOR);
                     parcel.enforceNoDataAvail();
-                    reportSizeConfigurations(readStrongBinder9, sizeConfigurationBuckets);
+                    reportSizeConfigurations(strongBinder9, sizeConfigurationBuckets);
                     return true;
                 case 11:
-                    IBinder readStrongBinder10 = parcel.readStrongBinder();
-                    boolean readBoolean3 = parcel.readBoolean();
+                    IBinder strongBinder10 = parcel.readStrongBinder();
+                    boolean z3 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean moveActivityTaskToBack = moveActivityTaskToBack(readStrongBinder10, readBoolean3);
+                    boolean zMoveActivityTaskToBack = moveActivityTaskToBack(strongBinder10, z3);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(moveActivityTaskToBack);
+                    parcel2.writeBoolean(zMoveActivityTaskToBack);
                     return true;
                 case 12:
-                    IBinder readStrongBinder11 = parcel.readStrongBinder();
-                    String readString = parcel.readString();
+                    IBinder strongBinder11 = parcel.readStrongBinder();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean shouldUpRecreateTask = shouldUpRecreateTask(readStrongBinder11, readString);
+                    boolean zShouldUpRecreateTask = shouldUpRecreateTask(strongBinder11, string);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(shouldUpRecreateTask);
+                    parcel2.writeBoolean(zShouldUpRecreateTask);
                     return true;
                 case 13:
-                    IBinder readStrongBinder12 = parcel.readStrongBinder();
+                    IBinder strongBinder12 = parcel.readStrongBinder();
                     Intent intent = (Intent) parcel.readTypedObject(Intent.CREATOR);
-                    String readString2 = parcel.readString();
-                    int readInt = parcel.readInt();
+                    String string2 = parcel.readString();
+                    int i3 = parcel.readInt();
                     Intent intent2 = (Intent) parcel.readTypedObject(Intent.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean navigateUpTo = navigateUpTo(readStrongBinder12, intent, readString2, readInt, intent2);
+                    boolean zNavigateUpTo = navigateUpTo(strongBinder12, intent, string2, i3, intent2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(navigateUpTo);
+                    parcel2.writeBoolean(zNavigateUpTo);
                     return true;
                 case 14:
-                    IBinder readStrongBinder13 = parcel.readStrongBinder();
+                    IBinder strongBinder13 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    boolean releaseActivityInstance = releaseActivityInstance(readStrongBinder13);
+                    boolean zReleaseActivityInstance = releaseActivityInstance(strongBinder13);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(releaseActivityInstance);
+                    parcel2.writeBoolean(zReleaseActivityInstance);
                     return true;
                 case 15:
-                    IBinder readStrongBinder14 = parcel.readStrongBinder();
-                    int readInt2 = parcel.readInt();
+                    IBinder strongBinder14 = parcel.readStrongBinder();
+                    int i4 = parcel.readInt();
                     Intent intent3 = (Intent) parcel.readTypedObject(Intent.CREATOR);
-                    int readInt3 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean finishActivity = finishActivity(readStrongBinder14, readInt2, intent3, readInt3);
+                    boolean zFinishActivity = finishActivity(strongBinder14, i4, intent3, i5);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(finishActivity);
+                    parcel2.writeBoolean(zFinishActivity);
                     return true;
                 case 16:
-                    IBinder readStrongBinder15 = parcel.readStrongBinder();
+                    IBinder strongBinder15 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    boolean finishActivityAffinity = finishActivityAffinity(readStrongBinder15);
+                    boolean zFinishActivityAffinity = finishActivityAffinity(strongBinder15);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(finishActivityAffinity);
+                    parcel2.writeBoolean(zFinishActivityAffinity);
                     return true;
                 case 17:
-                    IBinder readStrongBinder16 = parcel.readStrongBinder();
-                    String readString3 = parcel.readString();
-                    int readInt4 = parcel.readInt();
+                    IBinder strongBinder16 = parcel.readStrongBinder();
+                    String string3 = parcel.readString();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    finishSubActivity(readStrongBinder16, readString3, readInt4);
+                    finishSubActivity(strongBinder16, string3, i6);
                     parcel2.writeNoException();
                     return true;
                 case 18:
-                    IBinder readStrongBinder17 = parcel.readStrongBinder();
+                    IBinder strongBinder17 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    setForceSendResultForMediaProjection(readStrongBinder17);
+                    setForceSendResultForMediaProjection(strongBinder17);
                     parcel2.writeNoException();
                     return true;
                 case 19:
-                    IBinder readStrongBinder18 = parcel.readStrongBinder();
+                    IBinder strongBinder18 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    boolean isTopOfTask = isTopOfTask(readStrongBinder18);
+                    boolean zIsTopOfTask = isTopOfTask(strongBinder18);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isTopOfTask);
+                    parcel2.writeBoolean(zIsTopOfTask);
                     return true;
                 case 20:
-                    IBinder readStrongBinder19 = parcel.readStrongBinder();
+                    IBinder strongBinder19 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    boolean willActivityBeVisible = willActivityBeVisible(readStrongBinder19);
+                    boolean zWillActivityBeVisible = willActivityBeVisible(strongBinder19);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(willActivityBeVisible);
+                    parcel2.writeBoolean(zWillActivityBeVisible);
                     return true;
                 case 21:
-                    IBinder readStrongBinder20 = parcel.readStrongBinder();
+                    IBinder strongBinder20 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    int displayId = getDisplayId(readStrongBinder20);
+                    int displayId = getDisplayId(strongBinder20);
                     parcel2.writeNoException();
                     parcel2.writeInt(displayId);
                     return true;
                 case 22:
-                    IBinder readStrongBinder21 = parcel.readStrongBinder();
-                    boolean readBoolean4 = parcel.readBoolean();
+                    IBinder strongBinder21 = parcel.readStrongBinder();
+                    boolean z4 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    int taskForActivity = getTaskForActivity(readStrongBinder21, readBoolean4);
+                    int taskForActivity = getTaskForActivity(strongBinder21, z4);
                     parcel2.writeNoException();
                     parcel2.writeInt(taskForActivity);
                     return true;
                 case 23:
-                    IBinder readStrongBinder22 = parcel.readStrongBinder();
+                    IBinder strongBinder22 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    Configuration taskConfiguration = getTaskConfiguration(readStrongBinder22);
+                    Configuration taskConfiguration = getTaskConfiguration(strongBinder22);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(taskConfiguration, 1);
                     return true;
                 case 24:
-                    IBinder readStrongBinder23 = parcel.readStrongBinder();
+                    IBinder strongBinder23 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    IBinder activityTokenBelow = getActivityTokenBelow(readStrongBinder23);
+                    IBinder activityTokenBelow = getActivityTokenBelow(strongBinder23);
                     parcel2.writeNoException();
                     parcel2.writeStrongBinder(activityTokenBelow);
                     return true;
                 case 25:
-                    IBinder readStrongBinder24 = parcel.readStrongBinder();
+                    IBinder strongBinder24 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    ComponentName callingActivity = getCallingActivity(readStrongBinder24);
+                    ComponentName callingActivity = getCallingActivity(strongBinder24);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(callingActivity, 1);
                     return true;
                 case 26:
-                    IBinder readStrongBinder25 = parcel.readStrongBinder();
+                    IBinder strongBinder25 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    String callingPackage = getCallingPackage(readStrongBinder25);
+                    String callingPackage = getCallingPackage(strongBinder25);
                     parcel2.writeNoException();
                     parcel2.writeString(callingPackage);
                     return true;
                 case 27:
-                    IBinder readStrongBinder26 = parcel.readStrongBinder();
+                    IBinder strongBinder26 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    int launchedFromUid = getLaunchedFromUid(readStrongBinder26);
+                    int launchedFromUid = getLaunchedFromUid(strongBinder26);
                     parcel2.writeNoException();
                     parcel2.writeInt(launchedFromUid);
                     return true;
                 case 28:
-                    IBinder readStrongBinder27 = parcel.readStrongBinder();
-                    IBinder readStrongBinder28 = parcel.readStrongBinder();
+                    IBinder strongBinder27 = parcel.readStrongBinder();
+                    IBinder strongBinder28 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    int activityCallerUid = getActivityCallerUid(readStrongBinder27, readStrongBinder28);
+                    int activityCallerUid = getActivityCallerUid(strongBinder27, strongBinder28);
                     parcel2.writeNoException();
                     parcel2.writeInt(activityCallerUid);
                     return true;
                 case 29:
-                    IBinder readStrongBinder29 = parcel.readStrongBinder();
+                    IBinder strongBinder29 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    String launchedFromPackage = getLaunchedFromPackage(readStrongBinder29);
+                    String launchedFromPackage = getLaunchedFromPackage(strongBinder29);
                     parcel2.writeNoException();
                     parcel2.writeString(launchedFromPackage);
                     return true;
                 case 30:
-                    IBinder readStrongBinder30 = parcel.readStrongBinder();
-                    IBinder readStrongBinder31 = parcel.readStrongBinder();
+                    IBinder strongBinder30 = parcel.readStrongBinder();
+                    IBinder strongBinder31 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    String activityCallerPackage = getActivityCallerPackage(readStrongBinder30, readStrongBinder31);
+                    String activityCallerPackage = getActivityCallerPackage(strongBinder30, strongBinder31);
                     parcel2.writeNoException();
                     parcel2.writeString(activityCallerPackage);
                     return true;
                 case 31:
-                    IBinder readStrongBinder32 = parcel.readStrongBinder();
-                    IBinder readStrongBinder33 = parcel.readStrongBinder();
+                    IBinder strongBinder32 = parcel.readStrongBinder();
+                    IBinder strongBinder33 = parcel.readStrongBinder();
                     Uri uri = (Uri) parcel.readTypedObject(Uri.CREATOR);
-                    int readInt5 = parcel.readInt();
-                    int readInt6 = parcel.readInt();
+                    int i7 = parcel.readInt();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int checkActivityCallerContentUriPermission = checkActivityCallerContentUriPermission(readStrongBinder32, readStrongBinder33, uri, readInt5, readInt6);
+                    int iCheckActivityCallerContentUriPermission = checkActivityCallerContentUriPermission(strongBinder32, strongBinder33, uri, i7, i8);
                     parcel2.writeNoException();
-                    parcel2.writeInt(checkActivityCallerContentUriPermission);
+                    parcel2.writeInt(iCheckActivityCallerContentUriPermission);
                     return true;
                 case 32:
-                    IBinder readStrongBinder34 = parcel.readStrongBinder();
-                    int readInt7 = parcel.readInt();
+                    IBinder strongBinder34 = parcel.readStrongBinder();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setRequestedOrientation(readStrongBinder34, readInt7);
+                    setRequestedOrientation(strongBinder34, i9);
                     parcel2.writeNoException();
                     return true;
                 case 33:
-                    IBinder readStrongBinder35 = parcel.readStrongBinder();
+                    IBinder strongBinder35 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    int requestedOrientation = getRequestedOrientation(readStrongBinder35);
+                    int requestedOrientation = getRequestedOrientation(strongBinder35);
                     parcel2.writeNoException();
                     parcel2.writeInt(requestedOrientation);
                     return true;
                 case 34:
-                    IBinder readStrongBinder36 = parcel.readStrongBinder();
+                    IBinder strongBinder36 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    boolean convertFromTranslucent = convertFromTranslucent(readStrongBinder36);
+                    boolean zConvertFromTranslucent = convertFromTranslucent(strongBinder36);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(convertFromTranslucent);
+                    parcel2.writeBoolean(zConvertFromTranslucent);
                     return true;
                 case 35:
-                    IBinder readStrongBinder37 = parcel.readStrongBinder();
+                    IBinder strongBinder37 = parcel.readStrongBinder();
                     Bundle bundle2 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean convertToTranslucent = convertToTranslucent(readStrongBinder37, bundle2);
+                    boolean zConvertToTranslucent = convertToTranslucent(strongBinder37, bundle2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(convertToTranslucent);
+                    parcel2.writeBoolean(zConvertToTranslucent);
                     return true;
                 case 36:
-                    IBinder readStrongBinder38 = parcel.readStrongBinder();
+                    IBinder strongBinder38 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    boolean isImmersive = isImmersive(readStrongBinder38);
+                    boolean zIsImmersive = isImmersive(strongBinder38);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isImmersive);
+                    parcel2.writeBoolean(zIsImmersive);
                     return true;
                 case 37:
-                    IBinder readStrongBinder39 = parcel.readStrongBinder();
-                    boolean readBoolean5 = parcel.readBoolean();
+                    IBinder strongBinder39 = parcel.readStrongBinder();
+                    boolean z5 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setImmersive(readStrongBinder39, readBoolean5);
+                    setImmersive(strongBinder39, z5);
                     parcel2.writeNoException();
                     return true;
                 case 38:
-                    IBinder readStrongBinder40 = parcel.readStrongBinder();
+                    IBinder strongBinder40 = parcel.readStrongBinder();
                     PictureInPictureParams pictureInPictureParams = (PictureInPictureParams) parcel.readTypedObject(PictureInPictureParams.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean enterPictureInPictureMode = enterPictureInPictureMode(readStrongBinder40, pictureInPictureParams);
+                    boolean zEnterPictureInPictureMode = enterPictureInPictureMode(strongBinder40, pictureInPictureParams);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(enterPictureInPictureMode);
+                    parcel2.writeBoolean(zEnterPictureInPictureMode);
                     return true;
                 case 39:
-                    IBinder readStrongBinder41 = parcel.readStrongBinder();
+                    IBinder strongBinder41 = parcel.readStrongBinder();
                     PictureInPictureParams pictureInPictureParams2 = (PictureInPictureParams) parcel.readTypedObject(PictureInPictureParams.CREATOR);
                     parcel.enforceNoDataAvail();
-                    setPictureInPictureParams(readStrongBinder41, pictureInPictureParams2);
+                    setPictureInPictureParams(strongBinder41, pictureInPictureParams2);
                     parcel2.writeNoException();
                     return true;
                 case 40:
-                    IBinder readStrongBinder42 = parcel.readStrongBinder();
-                    boolean readBoolean6 = parcel.readBoolean();
+                    IBinder strongBinder42 = parcel.readStrongBinder();
+                    boolean z6 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setShouldDockBigOverlays(readStrongBinder42, readBoolean6);
+                    setShouldDockBigOverlays(strongBinder42, z6);
                     return true;
                 case 41:
-                    IBinder readStrongBinder43 = parcel.readStrongBinder();
+                    IBinder strongBinder43 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    toggleFreeformWindowingMode(readStrongBinder43);
+                    toggleFreeformWindowingMode(strongBinder43);
                     parcel2.writeNoException();
                     return true;
                 case 42:
-                    IBinder readStrongBinder44 = parcel.readStrongBinder();
-                    int readInt8 = parcel.readInt();
-                    IRemoteCallback asInterface = IRemoteCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IBinder strongBinder44 = parcel.readStrongBinder();
+                    int i10 = parcel.readInt();
+                    IRemoteCallback iRemoteCallbackAsInterface = IRemoteCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    requestMultiwindowFullscreen(readStrongBinder44, readInt8, asInterface);
+                    requestMultiwindowFullscreen(strongBinder44, i10, iRemoteCallbackAsInterface);
                     return true;
                 case 43:
-                    IBinder readStrongBinder45 = parcel.readStrongBinder();
+                    IBinder strongBinder45 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    startLockTaskModeByToken(readStrongBinder45);
+                    startLockTaskModeByToken(strongBinder45);
                     parcel2.writeNoException();
                     return true;
                 case 44:
-                    IBinder readStrongBinder46 = parcel.readStrongBinder();
+                    IBinder strongBinder46 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    stopLockTaskModeByToken(readStrongBinder46);
+                    stopLockTaskModeByToken(strongBinder46);
                     parcel2.writeNoException();
                     return true;
                 case 45:
-                    IBinder readStrongBinder47 = parcel.readStrongBinder();
+                    IBinder strongBinder47 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    showLockTaskEscapeMessage(readStrongBinder47);
+                    showLockTaskEscapeMessage(strongBinder47);
                     return true;
                 case 46:
-                    IBinder readStrongBinder48 = parcel.readStrongBinder();
+                    IBinder strongBinder48 = parcel.readStrongBinder();
                     ActivityManager.TaskDescription taskDescription = (ActivityManager.TaskDescription) parcel.readTypedObject(ActivityManager.TaskDescription.CREATOR);
                     parcel.enforceNoDataAvail();
-                    setTaskDescription(readStrongBinder48, taskDescription);
+                    setTaskDescription(strongBinder48, taskDescription);
                     parcel2.writeNoException();
                     return true;
                 case 47:
-                    IBinder readStrongBinder49 = parcel.readStrongBinder();
+                    IBinder strongBinder49 = parcel.readStrongBinder();
                     Bundle bundle3 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean showAssistFromActivity = showAssistFromActivity(readStrongBinder49, bundle3);
+                    boolean zShowAssistFromActivity = showAssistFromActivity(strongBinder49, bundle3);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(showAssistFromActivity);
+                    parcel2.writeBoolean(zShowAssistFromActivity);
                     return true;
                 case 48:
-                    IBinder readStrongBinder50 = parcel.readStrongBinder();
+                    IBinder strongBinder50 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    boolean isRootVoiceInteraction = isRootVoiceInteraction(readStrongBinder50);
+                    boolean zIsRootVoiceInteraction = isRootVoiceInteraction(strongBinder50);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isRootVoiceInteraction);
+                    parcel2.writeBoolean(zIsRootVoiceInteraction);
                     return true;
                 case 49:
-                    IBinder readStrongBinder51 = parcel.readStrongBinder();
+                    IBinder strongBinder51 = parcel.readStrongBinder();
                     Bundle bundle4 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    startLocalVoiceInteraction(readStrongBinder51, bundle4);
+                    startLocalVoiceInteraction(strongBinder51, bundle4);
                     parcel2.writeNoException();
                     return true;
                 case 50:
-                    IBinder readStrongBinder52 = parcel.readStrongBinder();
+                    IBinder strongBinder52 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    stopLocalVoiceInteraction(readStrongBinder52);
+                    stopLocalVoiceInteraction(strongBinder52);
                     parcel2.writeNoException();
                     return true;
                 case 51:
-                    IBinder readStrongBinder53 = parcel.readStrongBinder();
-                    boolean readBoolean7 = parcel.readBoolean();
+                    IBinder strongBinder53 = parcel.readStrongBinder();
+                    boolean z7 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setShowWhenLocked(readStrongBinder53, readBoolean7);
+                    setShowWhenLocked(strongBinder53, z7);
                     return true;
                 case 52:
-                    IBinder readStrongBinder54 = parcel.readStrongBinder();
-                    boolean readBoolean8 = parcel.readBoolean();
+                    IBinder strongBinder54 = parcel.readStrongBinder();
+                    boolean z8 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setInheritShowWhenLocked(readStrongBinder54, readBoolean8);
+                    setInheritShowWhenLocked(strongBinder54, z8);
                     return true;
                 case 53:
-                    IBinder readStrongBinder55 = parcel.readStrongBinder();
-                    boolean readBoolean9 = parcel.readBoolean();
+                    IBinder strongBinder55 = parcel.readStrongBinder();
+                    boolean z9 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setTurnScreenOn(readStrongBinder55, readBoolean9);
+                    setTurnScreenOn(strongBinder55, z9);
                     parcel2.writeNoException();
                     return true;
                 case 54:
-                    IBinder readStrongBinder56 = parcel.readStrongBinder();
-                    boolean readBoolean10 = parcel.readBoolean();
+                    IBinder strongBinder56 = parcel.readStrongBinder();
+                    boolean z10 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setAllowCrossUidActivitySwitchFromBelow(readStrongBinder56, readBoolean10);
+                    setAllowCrossUidActivitySwitchFromBelow(strongBinder56, z10);
                     return true;
                 case 55:
-                    IBinder readStrongBinder57 = parcel.readStrongBinder();
-                    boolean readBoolean11 = parcel.readBoolean();
+                    IBinder strongBinder57 = parcel.readStrongBinder();
+                    boolean z11 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    reportActivityFullyDrawn(readStrongBinder57, readBoolean11);
+                    reportActivityFullyDrawn(strongBinder57, z11);
                     return true;
                 case 56:
-                    IBinder readStrongBinder58 = parcel.readStrongBinder();
-                    boolean readBoolean12 = parcel.readBoolean();
-                    int readInt9 = parcel.readInt();
-                    int readInt10 = parcel.readInt();
-                    int readInt11 = parcel.readInt();
+                    IBinder strongBinder58 = parcel.readStrongBinder();
+                    boolean z12 = parcel.readBoolean();
+                    int i11 = parcel.readInt();
+                    int i12 = parcel.readInt();
+                    int i13 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    overrideActivityTransition(readStrongBinder58, readBoolean12, readInt9, readInt10, readInt11);
+                    overrideActivityTransition(strongBinder58, z12, i11, i12, i13);
                     return true;
                 case 57:
-                    IBinder readStrongBinder59 = parcel.readStrongBinder();
-                    boolean readBoolean13 = parcel.readBoolean();
+                    IBinder strongBinder59 = parcel.readStrongBinder();
+                    boolean z13 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    clearOverrideActivityTransition(readStrongBinder59, readBoolean13);
+                    clearOverrideActivityTransition(strongBinder59, z13);
                     return true;
                 case 58:
-                    IBinder readStrongBinder60 = parcel.readStrongBinder();
-                    String readString4 = parcel.readString();
-                    int readInt12 = parcel.readInt();
-                    int readInt13 = parcel.readInt();
-                    int readInt14 = parcel.readInt();
+                    IBinder strongBinder60 = parcel.readStrongBinder();
+                    String string4 = parcel.readString();
+                    int i14 = parcel.readInt();
+                    int i15 = parcel.readInt();
+                    int i16 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    overridePendingTransition(readStrongBinder60, readString4, readInt12, readInt13, readInt14);
+                    overridePendingTransition(strongBinder60, string4, i14, i15, i16);
                     parcel2.writeNoException();
                     return true;
                 case 59:
-                    IBinder readStrongBinder61 = parcel.readStrongBinder();
-                    boolean readBoolean14 = parcel.readBoolean();
+                    IBinder strongBinder61 = parcel.readStrongBinder();
+                    boolean z14 = parcel.readBoolean();
                     ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
                     parcel.enforceNoDataAvail();
-                    int vrMode = setVrMode(readStrongBinder61, readBoolean14, componentName);
+                    int vrMode = setVrMode(strongBinder61, z14, componentName);
                     parcel2.writeNoException();
                     parcel2.writeInt(vrMode);
                     return true;
                 case 60:
-                    IBinder readStrongBinder62 = parcel.readStrongBinder();
-                    boolean readBoolean15 = parcel.readBoolean();
+                    IBinder strongBinder62 = parcel.readStrongBinder();
+                    boolean z15 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setRecentsScreenshotEnabled(readStrongBinder62, readBoolean15);
+                    setRecentsScreenshotEnabled(strongBinder62, z15);
                     return true;
                 case 61:
-                    IBinder readStrongBinder63 = parcel.readStrongBinder();
+                    IBinder strongBinder63 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    invalidateHomeTaskSnapshot(readStrongBinder63);
+                    invalidateHomeTaskSnapshot(strongBinder63);
                     parcel2.writeNoException();
                     return true;
                 case 62:
-                    IBinder readStrongBinder64 = parcel.readStrongBinder();
-                    IKeyguardDismissCallback asInterface2 = IKeyguardDismissCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IBinder strongBinder64 = parcel.readStrongBinder();
+                    IKeyguardDismissCallback iKeyguardDismissCallbackAsInterface = IKeyguardDismissCallback.Stub.asInterface(parcel.readStrongBinder());
                     CharSequence charSequence2 = (CharSequence) parcel.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     parcel.enforceNoDataAvail();
-                    dismissKeyguard(readStrongBinder64, asInterface2, charSequence2);
+                    dismissKeyguard(strongBinder64, iKeyguardDismissCallbackAsInterface, charSequence2);
                     parcel2.writeNoException();
                     return true;
                 case 63:
-                    IBinder readStrongBinder65 = parcel.readStrongBinder();
+                    IBinder strongBinder65 = parcel.readStrongBinder();
                     RemoteAnimationDefinition remoteAnimationDefinition = (RemoteAnimationDefinition) parcel.readTypedObject(RemoteAnimationDefinition.CREATOR);
                     parcel.enforceNoDataAvail();
-                    registerRemoteAnimations(readStrongBinder65, remoteAnimationDefinition);
+                    registerRemoteAnimations(strongBinder65, remoteAnimationDefinition);
                     parcel2.writeNoException();
                     return true;
                 case 64:
-                    IBinder readStrongBinder66 = parcel.readStrongBinder();
+                    IBinder strongBinder66 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    unregisterRemoteAnimations(readStrongBinder66);
+                    unregisterRemoteAnimations(strongBinder66);
                     parcel2.writeNoException();
                     return true;
                 case 65:
-                    IBinder readStrongBinder67 = parcel.readStrongBinder();
-                    IRequestFinishCallback asInterface3 = IRequestFinishCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IBinder strongBinder67 = parcel.readStrongBinder();
+                    IRequestFinishCallback iRequestFinishCallbackAsInterface = IRequestFinishCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    onBackPressed(readStrongBinder67, asInterface3);
+                    onBackPressed(strongBinder67, iRequestFinishCallbackAsInterface);
                     return true;
                 case 66:
-                    IBinder readStrongBinder68 = parcel.readStrongBinder();
+                    IBinder strongBinder68 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    splashScreenAttached(readStrongBinder68);
+                    splashScreenAttached(strongBinder68);
                     return true;
                 case 67:
-                    IBinder readStrongBinder69 = parcel.readStrongBinder();
+                    IBinder strongBinder69 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    enableTaskLocaleOverride(readStrongBinder69);
+                    enableTaskLocaleOverride(strongBinder69);
                     parcel2.writeNoException();
                     return true;
                 case 68:
-                    IBinder readStrongBinder70 = parcel.readStrongBinder();
-                    IBinder readStrongBinder71 = parcel.readStrongBinder();
+                    IBinder strongBinder70 = parcel.readStrongBinder();
+                    IBinder strongBinder71 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    boolean isRequestedToLaunchInTaskFragment = isRequestedToLaunchInTaskFragment(readStrongBinder70, readStrongBinder71);
+                    boolean zIsRequestedToLaunchInTaskFragment = isRequestedToLaunchInTaskFragment(strongBinder70, strongBinder71);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isRequestedToLaunchInTaskFragment);
+                    parcel2.writeBoolean(zIsRequestedToLaunchInTaskFragment);
                     return true;
                 case 69:
-                    IBinder readStrongBinder72 = parcel.readStrongBinder();
-                    boolean readBoolean16 = parcel.readBoolean();
+                    IBinder strongBinder72 = parcel.readStrongBinder();
+                    boolean z16 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setActivityRecordInputSinkEnabled(readStrongBinder72, readBoolean16);
+                    setActivityRecordInputSinkEnabled(strongBinder72, z16);
                     return true;
                 case 70:
-                    IBinder readStrongBinder73 = parcel.readStrongBinder();
-                    boolean readBoolean17 = parcel.readBoolean();
+                    int i17 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean convertFromTranslucentOp = convertFromTranslucentOp(readStrongBinder73, readBoolean17);
+                    boolean zShouldPreloadHardwareRenderer = shouldPreloadHardwareRenderer(i17);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(convertFromTranslucentOp);
+                    parcel2.writeBoolean(zShouldPreloadHardwareRenderer);
                     return true;
                 case 71:
-                    IBinder readStrongBinder74 = parcel.readStrongBinder();
-                    String readString5 = parcel.readString();
-                    int readInt15 = parcel.readInt();
-                    int readInt16 = parcel.readInt();
+                    IBinder strongBinder73 = parcel.readStrongBinder();
+                    boolean z17 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    overridePendingTaskTransition(readStrongBinder74, readString5, readInt15, readInt16);
+                    boolean zConvertFromTranslucentOp = convertFromTranslucentOp(strongBinder73, z17);
                     parcel2.writeNoException();
+                    parcel2.writeBoolean(zConvertFromTranslucentOp);
                     return true;
                 case 72:
-                    IBinder readStrongBinder75 = parcel.readStrongBinder();
-                    int[] createIntArray = parcel.createIntArray();
-                    int[] createIntArray2 = parcel.createIntArray();
-                    Point[] pointArr = (Point[]) parcel.createTypedArray(Point.CREATOR);
-                    int[] createIntArray3 = parcel.createIntArray();
+                    IBinder strongBinder74 = parcel.readStrongBinder();
+                    String string5 = parcel.readString();
+                    int i18 = parcel.readInt();
+                    int i19 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    adjustPopOverOptions(readStrongBinder75, createIntArray, createIntArray2, pointArr, createIntArray3);
+                    overridePendingTaskTransition(strongBinder74, string5, i18, i19);
+                    parcel2.writeNoException();
+                    return true;
+                case 73:
+                    IBinder strongBinder75 = parcel.readStrongBinder();
+                    int[] iArrCreateIntArray = parcel.createIntArray();
+                    int[] iArrCreateIntArray2 = parcel.createIntArray();
+                    Point[] pointArr = (Point[]) parcel.createTypedArray(Point.CREATOR);
+                    int[] iArrCreateIntArray3 = parcel.createIntArray();
+                    parcel.enforceNoDataAvail();
+                    adjustPopOverOptions(strongBinder75, iArrCreateIntArray, iArrCreateIntArray2, pointArr, iArrCreateIntArray3);
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -1285,1123 +1302,1139 @@ public interface IActivityClientController extends IInterface {
 
             @Override // android.app.IActivityClientController
             public void activityIdle(IBinder iBinder, Configuration configuration, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(configuration, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(configuration, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public void activityResumed(IBinder iBinder, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public void activityRefreshed(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public void activityTopResumedStateLost() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public void activityPaused(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public void activityStopped(IBinder iBinder, Bundle bundle, PersistableBundle persistableBundle, CharSequence charSequence) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeTypedObject(persistableBundle, 0);
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeTypedObject(persistableBundle, 0);
                     if (charSequence != null) {
-                        obtain.writeInt(1);
-                        TextUtils.writeToParcel(charSequence, obtain, 0);
+                        parcelObtain.writeInt(1);
+                        TextUtils.writeToParcel(charSequence, parcelObtain, 0);
                     } else {
-                        obtain.writeInt(0);
+                        parcelObtain.writeInt(0);
                     }
-                    this.mRemote.transact(6, obtain, null, 1);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public void activityDestroyed(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public void activityLocalRelaunch(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public void activityRelaunched(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public void reportSizeConfigurations(IBinder iBinder, SizeConfigurationBuckets sizeConfigurationBuckets) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(sizeConfigurationBuckets, 0);
-                    this.mRemote.transact(10, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(sizeConfigurationBuckets, 0);
+                    this.mRemote.transact(10, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public boolean moveActivityTaskToBack(IBinder iBinder, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public boolean shouldUpRecreateTask(IBinder iBinder, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeString(str);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public boolean navigateUpTo(IBinder iBinder, Intent intent, String str, int i, Intent intent2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(intent, 0);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(intent2, 0);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(intent, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(intent2, 0);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public boolean releaseActivityInstance(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public boolean finishActivity(IBinder iBinder, int i, Intent intent, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(intent, 0);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(intent, 0);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public boolean finishActivityAffinity(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public void finishSubActivity(IBinder iBinder, String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public void setForceSendResultForMediaProjection(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public boolean isTopOfTask(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public boolean willActivityBeVisible(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public int getDisplayId(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public int getTaskForActivity(IBinder iBinder, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public Configuration getTaskConfiguration(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Configuration) obtain2.readTypedObject(Configuration.CREATOR);
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Configuration) parcelObtain2.readTypedObject(Configuration.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public IBinder getActivityTokenBelow(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readStrongBinder();
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readStrongBinder();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public ComponentName getCallingActivity(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ComponentName) obtain2.readTypedObject(ComponentName.CREATOR);
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ComponentName) parcelObtain2.readTypedObject(ComponentName.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public String getCallingPackage(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(26, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(26, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public int getLaunchedFromUid(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(27, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(27, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public int getActivityCallerUid(IBinder iBinder, IBinder iBinder2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeStrongBinder(iBinder2);
-                    this.mRemote.transact(28, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeStrongBinder(iBinder2);
+                    this.mRemote.transact(28, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public String getLaunchedFromPackage(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(29, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(29, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public String getActivityCallerPackage(IBinder iBinder, IBinder iBinder2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeStrongBinder(iBinder2);
-                    this.mRemote.transact(30, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeStrongBinder(iBinder2);
+                    this.mRemote.transact(30, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public int checkActivityCallerContentUriPermission(IBinder iBinder, IBinder iBinder2, Uri uri, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeStrongBinder(iBinder2);
-                    obtain.writeTypedObject(uri, 0);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(31, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeStrongBinder(iBinder2);
+                    parcelObtain.writeTypedObject(uri, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(31, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public void setRequestedOrientation(IBinder iBinder, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(32, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(32, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public int getRequestedOrientation(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(33, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(33, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public boolean convertFromTranslucent(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(34, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(34, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public boolean convertToTranslucent(IBinder iBinder, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(35, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(35, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public boolean isImmersive(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(36, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(36, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public void setImmersive(IBinder iBinder, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(37, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(37, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public boolean enterPictureInPictureMode(IBinder iBinder, PictureInPictureParams pictureInPictureParams) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(pictureInPictureParams, 0);
-                    this.mRemote.transact(38, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(pictureInPictureParams, 0);
+                    this.mRemote.transact(38, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public void setPictureInPictureParams(IBinder iBinder, PictureInPictureParams pictureInPictureParams) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(pictureInPictureParams, 0);
-                    this.mRemote.transact(39, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(pictureInPictureParams, 0);
+                    this.mRemote.transact(39, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public void setShouldDockBigOverlays(IBinder iBinder, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(40, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(40, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public void toggleFreeformWindowingMode(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(41, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(41, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public void requestMultiwindowFullscreen(IBinder iBinder, int i, IRemoteCallback iRemoteCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iRemoteCallback);
-                    this.mRemote.transact(42, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iRemoteCallback);
+                    this.mRemote.transact(42, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public void startLockTaskModeByToken(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(43, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(43, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public void stopLockTaskModeByToken(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(44, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(44, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public void showLockTaskEscapeMessage(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(45, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(45, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public void setTaskDescription(IBinder iBinder, ActivityManager.TaskDescription taskDescription) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(taskDescription, 0);
-                    this.mRemote.transact(46, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(taskDescription, 0);
+                    this.mRemote.transact(46, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public boolean showAssistFromActivity(IBinder iBinder, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(47, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(47, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public boolean isRootVoiceInteraction(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(48, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(48, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public void startLocalVoiceInteraction(IBinder iBinder, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(49, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(49, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public void stopLocalVoiceInteraction(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(50, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(50, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public void setShowWhenLocked(IBinder iBinder, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(51, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(51, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public void setInheritShowWhenLocked(IBinder iBinder, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(52, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(52, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public void setTurnScreenOn(IBinder iBinder, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(53, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(53, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public void setAllowCrossUidActivitySwitchFromBelow(IBinder iBinder, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(54, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(54, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public void reportActivityFullyDrawn(IBinder iBinder, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(55, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(55, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public void overrideActivityTransition(IBinder iBinder, boolean z, int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(56, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(56, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public void clearOverrideActivityTransition(IBinder iBinder, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(57, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(57, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public void overridePendingTransition(IBinder iBinder, String str, int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(58, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(58, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public int setVrMode(IBinder iBinder, boolean z, ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeBoolean(z);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(59, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(59, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public void setRecentsScreenshotEnabled(IBinder iBinder, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(60, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(60, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public void invalidateHomeTaskSnapshot(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(61, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(61, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public void dismissKeyguard(IBinder iBinder, IKeyguardDismissCallback iKeyguardDismissCallback, CharSequence charSequence) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeStrongInterface(iKeyguardDismissCallback);
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeStrongInterface(iKeyguardDismissCallback);
                     if (charSequence != null) {
-                        obtain.writeInt(1);
-                        TextUtils.writeToParcel(charSequence, obtain, 0);
+                        parcelObtain.writeInt(1);
+                        TextUtils.writeToParcel(charSequence, parcelObtain, 0);
                     } else {
-                        obtain.writeInt(0);
+                        parcelObtain.writeInt(0);
                     }
-                    this.mRemote.transact(62, obtain, obtain2, 0);
-                    obtain2.readException();
+                    this.mRemote.transact(62, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public void registerRemoteAnimations(IBinder iBinder, RemoteAnimationDefinition remoteAnimationDefinition) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(remoteAnimationDefinition, 0);
-                    this.mRemote.transact(63, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(remoteAnimationDefinition, 0);
+                    this.mRemote.transact(63, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public void unregisterRemoteAnimations(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(64, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(64, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public void onBackPressed(IBinder iBinder, IRequestFinishCallback iRequestFinishCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeStrongInterface(iRequestFinishCallback);
-                    this.mRemote.transact(65, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeStrongInterface(iRequestFinishCallback);
+                    this.mRemote.transact(65, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public void splashScreenAttached(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(66, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(66, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public void enableTaskLocaleOverride(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(67, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(67, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public boolean isRequestedToLaunchInTaskFragment(IBinder iBinder, IBinder iBinder2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeStrongBinder(iBinder2);
-                    this.mRemote.transact(68, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeStrongBinder(iBinder2);
+                    this.mRemote.transact(68, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public void setActivityRecordInputSinkEnabled(IBinder iBinder, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(69, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(69, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
+                }
+            }
+
+            @Override // android.app.IActivityClientController
+            public boolean shouldPreloadHardwareRenderer(int i) throws RemoteException {
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
+                try {
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(70, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
+                } finally {
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public boolean convertFromTranslucentOp(IBinder iBinder, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(70, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(71, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public void overridePendingTaskTransition(IBinder iBinder, String str, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(71, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(72, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IActivityClientController
             public void adjustPopOverOptions(IBinder iBinder, int[] iArr, int[] iArr2, Point[] pointArr, int[] iArr3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeIntArray(iArr);
-                    obtain.writeIntArray(iArr2);
-                    obtain.writeTypedArray(pointArr, 0);
-                    obtain.writeIntArray(iArr3);
-                    this.mRemote.transact(72, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeIntArray(iArr);
+                    parcelObtain.writeIntArray(iArr2);
+                    parcelObtain.writeTypedArray(pointArr, 0);
+                    parcelObtain.writeIntArray(iArr3);
+                    this.mRemote.transact(73, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

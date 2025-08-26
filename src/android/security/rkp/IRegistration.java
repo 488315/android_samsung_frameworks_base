@@ -60,9 +60,9 @@ public interface IRegistration extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IRegistration.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IRegistration)) {
-                return (IRegistration) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IRegistration.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IRegistration)) {
+                return (IRegistration) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -95,20 +95,20 @@ public interface IRegistration extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                IGetKeyCallback asInterface = IGetKeyCallback.Stub.asInterface(parcel.readStrongBinder());
+                int i3 = parcel.readInt();
+                IGetKeyCallback iGetKeyCallbackAsInterface = IGetKeyCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                getKey(readInt, asInterface);
+                getKey(i3, iGetKeyCallbackAsInterface);
             } else if (i == 2) {
-                IGetKeyCallback asInterface2 = IGetKeyCallback.Stub.asInterface(parcel.readStrongBinder());
+                IGetKeyCallback iGetKeyCallbackAsInterface2 = IGetKeyCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                cancelGetKey(asInterface2);
+                cancelGetKey(iGetKeyCallbackAsInterface2);
             } else if (i == 3) {
-                byte[] createByteArray = parcel.createByteArray();
-                byte[] createByteArray2 = parcel.createByteArray();
-                IStoreUpgradedKeyCallback asInterface3 = IStoreUpgradedKeyCallback.Stub.asInterface(parcel.readStrongBinder());
+                byte[] bArrCreateByteArray = parcel.createByteArray();
+                byte[] bArrCreateByteArray2 = parcel.createByteArray();
+                IStoreUpgradedKeyCallback iStoreUpgradedKeyCallbackAsInterface = IStoreUpgradedKeyCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                storeUpgradedKeyAsync(createByteArray, createByteArray2, asInterface3);
+                storeUpgradedKeyAsync(bArrCreateByteArray, bArrCreateByteArray2, iStoreUpgradedKeyCallbackAsInterface);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -133,40 +133,40 @@ public interface IRegistration extends IInterface {
 
             @Override // android.security.rkp.IRegistration
             public void getKey(int i, IGetKeyCallback iGetKeyCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IRegistration.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iGetKeyCallback);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IRegistration.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iGetKeyCallback);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.rkp.IRegistration
             public void cancelGetKey(IGetKeyCallback iGetKeyCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IRegistration.DESCRIPTOR);
-                    obtain.writeStrongInterface(iGetKeyCallback);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IRegistration.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iGetKeyCallback);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.rkp.IRegistration
             public void storeUpgradedKeyAsync(byte[] bArr, byte[] bArr2, IStoreUpgradedKeyCallback iStoreUpgradedKeyCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IRegistration.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeByteArray(bArr2);
-                    obtain.writeStrongInterface(iStoreUpgradedKeyCallback);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IRegistration.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeByteArray(bArr2);
+                    parcelObtain.writeStrongInterface(iStoreUpgradedKeyCallback);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

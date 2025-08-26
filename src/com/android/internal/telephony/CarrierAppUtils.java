@@ -4,18 +4,23 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.CarrierAssociatedAppEntry;
 import android.os.SystemConfigManager;
 import android.os.UserHandle;
+import android.permission.LegacyPermissionManager;
+import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.util.ArrayMap;
 import android.util.Log;
 import com.android.internal.hidden_from_bootclasspath.com.android.internal.telephony.flags.Flags;
+import com.android.internal.telephony.util.TelephonyUtils;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Consumer;
 
 /* loaded from: classes4.dex */
 public final class CarrierAppUtils {
@@ -29,17 +34,13 @@ public final class CarrierAppUtils {
     }
 
     public static synchronized void disableCarrierAppsUntilPrivileged(String str, TelephonyManager telephonyManager, int i, Context context) {
-        synchronized (CarrierAppUtils.class) {
-            SystemConfigManager systemConfigManager = (SystemConfigManager) context.getSystemService(SystemConfigManager.class);
-            disableCarrierAppsUntilPrivileged(str, telephonyManager, getContentResolverForUser(context, i), i, systemConfigManager.getDisabledUntilUsedPreinstalledCarrierApps(), systemConfigManager.getDisabledUntilUsedPreinstalledCarrierAssociatedAppEntries(), context);
-        }
+        SystemConfigManager systemConfigManager = (SystemConfigManager) context.getSystemService(SystemConfigManager.class);
+        disableCarrierAppsUntilPrivileged(str, telephonyManager, getContentResolverForUser(context, i), i, systemConfigManager.getDisabledUntilUsedPreinstalledCarrierApps(), systemConfigManager.getDisabledUntilUsedPreinstalledCarrierAssociatedAppEntries(), context);
     }
 
     public static synchronized void disableCarrierAppsUntilPrivileged(String str, int i, Context context) {
-        synchronized (CarrierAppUtils.class) {
-            SystemConfigManager systemConfigManager = (SystemConfigManager) context.getSystemService(SystemConfigManager.class);
-            disableCarrierAppsUntilPrivileged(str, null, getContentResolverForUser(context, i), i, systemConfigManager.getDisabledUntilUsedPreinstalledCarrierApps(), systemConfigManager.getDisabledUntilUsedPreinstalledCarrierAssociatedAppEntries(), context);
-        }
+        SystemConfigManager systemConfigManager = (SystemConfigManager) context.getSystemService(SystemConfigManager.class);
+        disableCarrierAppsUntilPrivileged(str, null, getContentResolverForUser(context, i), i, systemConfigManager.getDisabledUntilUsedPreinstalledCarrierApps(), systemConfigManager.getDisabledUntilUsedPreinstalledCarrierAssociatedAppEntries(), context);
     }
 
     private static ContentResolver getContentResolverForUser(Context context, int i) {
@@ -50,21 +51,150 @@ public final class CarrierAppUtils {
         return (applicationInfo.flags & 128) != 0;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:22:0x007c A[Catch: NameNotFoundException -> 0x029f, TryCatch #0 {NameNotFoundException -> 0x029f, blocks: (B:12:0x004a, B:13:0x004e, B:15:0x0054, B:17:0x0062, B:20:0x0070, B:22:0x007c, B:23:0x0080, B:25:0x0086, B:27:0x009f, B:30:0x00be, B:34:0x00ca, B:36:0x0109, B:37:0x010d, B:39:0x0113, B:50:0x014a, B:54:0x0198, B:60:0x01a6, B:63:0x01ae, B:65:0x01b4, B:67:0x01df, B:68:0x01e3, B:70:0x01e9, B:73:0x01f3, B:75:0x01f8, B:77:0x01fc, B:81:0x0206, B:87:0x022c, B:102:0x0281, B:104:0x0287, B:109:0x0278), top: B:11:0x004a }] */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x00be A[Catch: NameNotFoundException -> 0x029f, TRY_ENTER, TRY_LEAVE, TryCatch #0 {NameNotFoundException -> 0x029f, blocks: (B:12:0x004a, B:13:0x004e, B:15:0x0054, B:17:0x0062, B:20:0x0070, B:22:0x007c, B:23:0x0080, B:25:0x0086, B:27:0x009f, B:30:0x00be, B:34:0x00ca, B:36:0x0109, B:37:0x010d, B:39:0x0113, B:50:0x014a, B:54:0x0198, B:60:0x01a6, B:63:0x01ae, B:65:0x01b4, B:67:0x01df, B:68:0x01e3, B:70:0x01e9, B:73:0x01f3, B:75:0x01f8, B:77:0x01fc, B:81:0x0206, B:87:0x022c, B:102:0x0281, B:104:0x0287, B:109:0x0278), top: B:11:0x004a }] */
+    /* JADX WARN: Removed duplicated region for block: B:27:0x007c A[Catch: NameNotFoundException -> 0x029f, TryCatch #0 {NameNotFoundException -> 0x029f, blocks: (B:15:0x004a, B:16:0x004e, B:18:0x0054, B:20:0x0062, B:25:0x0070, B:27:0x007c, B:28:0x0080, B:30:0x0086, B:31:0x009f, B:34:0x00be, B:38:0x00ca, B:41:0x0109, B:42:0x010d, B:44:0x0113, B:54:0x014a, B:56:0x0198, B:60:0x01a6, B:63:0x01ae, B:65:0x01b4, B:67:0x01df, B:68:0x01e3, B:70:0x01e9, B:73:0x01f3, B:75:0x01f8, B:77:0x01fc, B:82:0x0206, B:89:0x022c, B:97:0x0281, B:99:0x0287, B:96:0x0278), top: B:104:0x004a }] */
+    /* JADX WARN: Removed duplicated region for block: B:34:0x00be A[Catch: NameNotFoundException -> 0x029f, TRY_ENTER, TRY_LEAVE, TryCatch #0 {NameNotFoundException -> 0x029f, blocks: (B:15:0x004a, B:16:0x004e, B:18:0x0054, B:20:0x0062, B:25:0x0070, B:27:0x007c, B:28:0x0080, B:30:0x0086, B:31:0x009f, B:34:0x00be, B:38:0x00ca, B:41:0x0109, B:42:0x010d, B:44:0x0113, B:54:0x014a, B:56:0x0198, B:60:0x01a6, B:63:0x01ae, B:65:0x01b4, B:67:0x01df, B:68:0x01e3, B:70:0x01e9, B:73:0x01f3, B:75:0x01f8, B:77:0x01fc, B:82:0x0206, B:89:0x022c, B:97:0x0281, B:99:0x0287, B:96:0x0278), top: B:104:0x004a }] */
+    /* JADX WARN: Removed duplicated region for block: B:54:0x014a A[Catch: NameNotFoundException -> 0x029f, TryCatch #0 {NameNotFoundException -> 0x029f, blocks: (B:15:0x004a, B:16:0x004e, B:18:0x0054, B:20:0x0062, B:25:0x0070, B:27:0x007c, B:28:0x0080, B:30:0x0086, B:31:0x009f, B:34:0x00be, B:38:0x00ca, B:41:0x0109, B:42:0x010d, B:44:0x0113, B:54:0x014a, B:56:0x0198, B:60:0x01a6, B:63:0x01ae, B:65:0x01b4, B:67:0x01df, B:68:0x01e3, B:70:0x01e9, B:73:0x01f3, B:75:0x01f8, B:77:0x01fc, B:82:0x0206, B:89:0x022c, B:97:0x0281, B:99:0x0287, B:96:0x0278), top: B:104:0x004a }] */
     /* JADX WARN: Removed duplicated region for block: B:58:0x01a0  */
-    /* JADX WARN: Removed duplicated region for block: B:83:0x0223  */
-    /* JADX WARN: Removed duplicated region for block: B:92:0x0225  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void disableCarrierAppsUntilPrivileged(java.lang.String r23, android.telephony.TelephonyManager r24, android.content.ContentResolver r25, int r26, java.util.Set<java.lang.String> r27, java.util.Map<java.lang.String, java.util.List<android.os.CarrierAssociatedAppEntry>> r28, android.content.Context r29) {
-        /*
-            Method dump skipped, instructions count: 678
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.telephony.CarrierAppUtils.disableCarrierAppsUntilPrivileged(java.lang.String, android.telephony.TelephonyManager, android.content.ContentResolver, int, java.util.Set, java.util.Map, android.content.Context):void");
+    public static void disableCarrierAppsUntilPrivileged(String str, TelephonyManager telephonyManager, ContentResolver contentResolver, int i, Set<String> set, Map<String, List<CarrierAssociatedAppEntry>> map, Context context) {
+        boolean z;
+        List<AssociatedAppInfo> list;
+        boolean z2;
+        List<AssociatedAppInfo> list2;
+        String str2;
+        String str3 = str;
+        TelephonyManager telephonyManager2 = telephonyManager;
+        PackageManager packageManager = context.getPackageManager();
+        LegacyPermissionManager legacyPermissionManager = (LegacyPermissionManager) context.getSystemService(Context.LEGACY_PERMISSION_SERVICE);
+        List<ApplicationInfo> defaultCarrierAppCandidatesHelper = getDefaultCarrierAppCandidatesHelper(i, set, context);
+        if (defaultCarrierAppCandidatesHelper == null || defaultCarrierAppCandidatesHelper.isEmpty()) {
+            return;
+        }
+        Map<String, List<AssociatedAppInfo>> defaultCarrierAssociatedAppsHelper = getDefaultCarrierAssociatedAppsHelper(i, map, context);
+        ArrayList arrayList = new ArrayList();
+        int intForUser = Settings.Secure.getIntForUser(contentResolver, Settings.Secure.CARRIER_APPS_HANDLED, 0, contentResolver.getUserId());
+        boolean z3 = intForUser != 0;
+        boolean z4 = intForUser == Build.VERSION.SDK_INT;
+        try {
+            Iterator<ApplicationInfo> it = defaultCarrierAppCandidatesHelper.iterator();
+            while (it.hasNext()) {
+                ApplicationInfo next = it.next();
+                Iterator<ApplicationInfo> it2 = it;
+                String str4 = next.packageName;
+                if (telephonyManager2 != null) {
+                    z = z4;
+                    boolean z5 = telephonyManager2.checkCarrierPrivilegesForPackageAnyPhone(str4) == 1;
+                    packageManager.setSystemAppState(str4, 0);
+                    list = defaultCarrierAssociatedAppsHelper.get(str4);
+                    if (list != null) {
+                        Iterator<AssociatedAppInfo> it3 = list.iterator();
+                        while (it3.hasNext()) {
+                            packageManager.setSystemAppState(it3.next().appInfo.packageName, 0);
+                            defaultCarrierAssociatedAppsHelper = defaultCarrierAssociatedAppsHelper;
+                            z5 = z5;
+                        }
+                    }
+                    z2 = z5;
+                    Map<String, List<AssociatedAppInfo>> map2 = defaultCarrierAssociatedAppsHelper;
+                    int applicationEnabledSetting = context.createContextAsUser(UserHandle.of(i), 0).getPackageManager().getApplicationEnabledSetting(str4);
+                    PackageManager packageManager2 = packageManager;
+                    if (z2) {
+                        if (!z3 && !isUpdatedSystemApp(next) && applicationEnabledSetting == 0 && (next.flags & 8388608) != 0) {
+                            Log.i(TAG, "Update state (" + str4 + "): DISABLED_UNTIL_USED for user " + i);
+                            context.createContextAsUser(UserHandle.of(i), 0).getPackageManager().setSystemAppState(str4, 3);
+                        }
+                        if (list != null) {
+                            for (AssociatedAppInfo associatedAppInfo : list) {
+                                boolean z6 = !z3 || (!z && associatedAppInfo.addedInSdk != -1 && associatedAppInfo.addedInSdk > intForUser && associatedAppInfo.addedInSdk <= Build.VERSION.SDK_INT);
+                                int applicationEnabledSetting2 = context.createContextAsUser(UserHandle.of(i), 0).getPackageManager().getApplicationEnabledSetting(associatedAppInfo.appInfo.packageName);
+                                boolean z7 = (associatedAppInfo.appInfo.flags & 8388608) != 0;
+                                if (z6 && applicationEnabledSetting2 == 0 && z7) {
+                                    Log.i(TAG, "Update associated state (" + associatedAppInfo.appInfo.packageName + "): DISABLED_UNTIL_USED for user " + i);
+                                    context.createContextAsUser(UserHandle.of(i), 0).getPackageManager().setSystemAppState(associatedAppInfo.appInfo.packageName, 3);
+                                }
+                            }
+                        }
+                    } else {
+                        boolean zShouldUpdateEnabledState = shouldUpdateEnabledState(next, applicationEnabledSetting);
+                        String str5 = "): ENABLED for user ";
+                        if (zShouldUpdateEnabledState) {
+                            list2 = list;
+                            Log.i(TAG, "Update state (" + str4 + "): ENABLED for user " + i);
+                            context.createContextAsUser(UserHandle.of(i), 0).getPackageManager().setSystemAppState(str4, 2);
+                            context.createPackageContextAsUser(str3, 0, UserHandle.of(i)).getPackageManager().setApplicationEnabledSetting(str4, 1, 1);
+                        } else {
+                            list2 = list;
+                        }
+                        if (list2 != null) {
+                            Iterator<AssociatedAppInfo> it4 = list2.iterator();
+                            while (it4.hasNext()) {
+                                AssociatedAppInfo next2 = it4.next();
+                                Iterator<AssociatedAppInfo> it5 = it4;
+                                int applicationEnabledSetting3 = context.createContextAsUser(UserHandle.of(i), 0).getPackageManager().getApplicationEnabledSetting(next2.appInfo.packageName);
+                                boolean z8 = (next2.appInfo.flags & 8388608) != 0;
+                                if (applicationEnabledSetting3 != 0) {
+                                    boolean z9 = z8;
+                                    if (applicationEnabledSetting3 == 4 || !z9) {
+                                        Log.i(TAG, "Update associated state (" + next2.appInfo.packageName + str5 + i);
+                                        str2 = str5;
+                                        context.createContextAsUser(UserHandle.of(i), 0).getPackageManager().setSystemAppState(next2.appInfo.packageName, 2);
+                                        context.createPackageContextAsUser(str3, 0, UserHandle.of(i)).getPackageManager().setApplicationEnabledSetting(next2.appInfo.packageName, 1, 1);
+                                    } else {
+                                        str2 = str5;
+                                    }
+                                }
+                                it4 = it5;
+                                str5 = str2;
+                            }
+                        }
+                        arrayList.add(next.packageName);
+                    }
+                    str3 = str;
+                    telephonyManager2 = telephonyManager;
+                    it = it2;
+                    z4 = z;
+                    packageManager = packageManager2;
+                    defaultCarrierAssociatedAppsHelper = map2;
+                } else {
+                    z = z4;
+                }
+                packageManager.setSystemAppState(str4, 0);
+                list = defaultCarrierAssociatedAppsHelper.get(str4);
+                if (list != null) {
+                }
+                z2 = z5;
+                Map<String, List<AssociatedAppInfo>> map22 = defaultCarrierAssociatedAppsHelper;
+                int applicationEnabledSetting4 = context.createContextAsUser(UserHandle.of(i), 0).getPackageManager().getApplicationEnabledSetting(str4);
+                PackageManager packageManager22 = packageManager;
+                if (z2) {
+                }
+                str3 = str;
+                telephonyManager2 = telephonyManager;
+                it = it2;
+                z4 = z;
+                packageManager = packageManager22;
+                defaultCarrierAssociatedAppsHelper = map22;
+            }
+            boolean z10 = z4;
+            if (!z3 || !z10) {
+                Settings.Secure.putIntForUser(contentResolver, Settings.Secure.CARRIER_APPS_HANDLED, Build.VERSION.SDK_INT, contentResolver.getUserId());
+            }
+            if (arrayList.isEmpty()) {
+                return;
+            }
+            String[] strArr = new String[arrayList.size()];
+            arrayList.toArray(strArr);
+            legacyPermissionManager.grantDefaultPermissionsToEnabledCarrierApps(strArr, UserHandle.of(i), TelephonyUtils.DIRECT_EXECUTOR, new Consumer() { // from class: com.android.internal.telephony.CarrierAppUtils$$ExternalSyntheticLambda0
+                @Override // java.util.function.Consumer
+                public final void accept(Object obj) {
+                    CarrierAppUtils.lambda$disableCarrierAppsUntilPrivileged$0((Boolean) obj);
+                }
+            });
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.w(TAG, "Could not reach PackageManager", e);
+        }
     }
 
     private static boolean shouldUpdateEnabledState(ApplicationInfo applicationInfo, int i) {
@@ -112,12 +242,12 @@ public final class CarrierAppUtils {
                 CarrierAssociatedAppEntry carrierAssociatedAppEntry = value.get(i2);
                 ApplicationInfo applicationInfoIfSystemApp = getApplicationInfoIfSystemApp(i, carrierAssociatedAppEntry.packageName, context);
                 if (applicationInfoIfSystemApp != null && !isUpdatedSystemApp(applicationInfoIfSystemApp)) {
-                    List list = (List) arrayMap.get(key);
-                    if (list == null) {
-                        list = new ArrayList();
-                        arrayMap.put(key, list);
+                    List arrayList = (List) arrayMap.get(key);
+                    if (arrayList == null) {
+                        arrayList = new ArrayList();
+                        arrayMap.put(key, arrayList);
                     }
-                    list.add(new AssociatedAppInfo(applicationInfoIfSystemApp, carrierAssociatedAppEntry.addedInSdk));
+                    arrayList.add(new AssociatedAppInfo(applicationInfoIfSystemApp, carrierAssociatedAppEntry.addedInSdk));
                 }
             }
         }

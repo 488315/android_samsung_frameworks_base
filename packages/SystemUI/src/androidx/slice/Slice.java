@@ -11,7 +11,6 @@ import androidx.versionedparcelable.CustomVersionedParcelable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class Slice extends CustomVersionedParcelable {
     public static final String[] NO_HINTS = new String[0];
@@ -60,28 +59,27 @@ public final class Slice extends CustomVersionedParcelable {
     }
 
     public final String toString(String str) {
-        StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(str, "Slice ");
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(str, "Slice ");
         String[] strArr = this.mHints;
         if (strArr.length > 0) {
-            appendHints(m, strArr);
-            m.append(' ');
+            appendHints(sbM, strArr);
+            sbM.append(' ');
         }
-        m.append('[');
-        m.append(this.mUri);
-        m.append("] {\n");
+        sbM.append('[');
+        sbM.append(this.mUri);
+        sbM.append("] {\n");
         String str2 = str + "  ";
         int i = 0;
         while (true) {
             SliceItem[] sliceItemArr = this.mItems;
             if (i >= sliceItemArr.length) {
-                return OpaqueKey$$ExternalSyntheticOutline0.m(m, str, '}');
+                return OpaqueKey$$ExternalSyntheticOutline0.m(sbM, str, '}');
             }
-            m.append(sliceItemArr[i].toString(str2));
+            sbM.append(sliceItemArr[i].toString(str2));
             i++;
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Builder {
         public final int mChildId;
         public SliceSpec mSpec;
@@ -138,10 +136,10 @@ public final class Slice extends CustomVersionedParcelable {
         }
 
         public Builder(Builder builder) {
-            Uri.Builder appendPath = builder.mUri.buildUpon().appendPath("_gen");
+            Uri.Builder builderAppendPath = builder.mUri.buildUpon().appendPath("_gen");
             int i = builder.mChildId;
             builder.mChildId = i + 1;
-            this.mUri = appendPath.appendPath(String.valueOf(i)).build();
+            this.mUri = builderAppendPath.appendPath(String.valueOf(i)).build();
         }
     }
 

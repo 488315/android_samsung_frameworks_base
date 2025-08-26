@@ -1,13 +1,16 @@
 package com.samsung.android.lock;
 
+import android.system.ErrnoException;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.AtomicFile;
 import android.util.Log;
 import com.samsung.android.graphics.imagefilter.ShaderAssembler;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Objects;
@@ -48,7 +51,7 @@ public class LsLogSummary {
     private static LsLogVerify mLastSIFail = null;
 
     public static void prefetchData() {
-        long nanoTime = System.nanoTime();
+        long jNanoTime = System.nanoTime();
         Cache cache = mCache;
         synchronized (cache) {
             if (cache.isFetched(0)) {
@@ -56,7 +59,7 @@ public class LsLogSummary {
             }
             cache.setFetched(0);
             loadLoglist();
-            Log.w(TAG, "prefetchData summary files : " + TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - nanoTime) + " ms");
+            Log.w(TAG, "prefetchData summary files : " + TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - jNanoTime) + " ms");
         }
     }
 
@@ -80,12 +83,12 @@ public class LsLogSummary {
     public static void addEnrollResult(LsLogEnroll lsLogEnroll, boolean z) {
         synchronized (mEnrollResults) {
             if (mEnrollResults.size() >= 10) {
-                LsLogEnroll poll = mEnrollResults.poll();
-                if (poll.mProtectorId != 0 && poll.mProtectorId == PROTECTOR_ID) {
-                    mEnrollResults.add(poll);
-                    poll = mEnrollResults.poll();
+                LsLogEnroll lsLogEnrollPoll = mEnrollResults.poll();
+                if (lsLogEnrollPoll.mProtectorId != 0 && lsLogEnrollPoll.mProtectorId == PROTECTOR_ID) {
+                    mEnrollResults.add(lsLogEnrollPoll);
+                    lsLogEnrollPoll = mEnrollResults.poll();
                 }
-                deleteFile(getFileName(Long.valueOf(poll.mReqTime)));
+                deleteFile(getFileName(Long.valueOf(lsLogEnrollPoll.mReqTime)));
             }
             mEnrollResults.add(lsLogEnroll);
         }
@@ -95,10 +98,10 @@ public class LsLogSummary {
     }
 
     public static void addVerifySuccess(LsLogVerify lsLogVerify, boolean z) {
-        LsLogVerify poll;
+        LsLogVerify lsLogVerifyPoll;
         synchronized (mVerifySuccess) {
-            if (mVerifySuccess.size() >= 30 && (poll = mVerifySuccess.poll()) != null) {
-                deleteFile(getFileName(Long.valueOf(poll.mReqTime)));
+            if (mVerifySuccess.size() >= 30 && (lsLogVerifyPoll = mVerifySuccess.poll()) != null) {
+                deleteFile(getFileName(Long.valueOf(lsLogVerifyPoll.mReqTime)));
             }
             mVerifySuccess.add(lsLogVerify);
         }
@@ -108,10 +111,10 @@ public class LsLogSummary {
     }
 
     public static void addVerifyFailed(LsLogVerify lsLogVerify, boolean z) {
-        LsLogVerify poll;
+        LsLogVerify lsLogVerifyPoll;
         synchronized (mVerifyFailed) {
-            if (mVerifyFailed.size() >= 60 && (poll = mVerifyFailed.poll()) != null) {
-                deleteFile(getFileName(Long.valueOf(poll.mReqTime)));
+            if (mVerifyFailed.size() >= 60 && (lsLogVerifyPoll = mVerifyFailed.poll()) != null) {
+                deleteFile(getFileName(Long.valueOf(lsLogVerifyPoll.mReqTime)));
             }
             mVerifyFailed.add(lsLogVerify);
         }
@@ -120,7 +123,7 @@ public class LsLogSummary {
         }
     }
 
-    public static String getRootDir() {
+    public static String getRootDir() throws ErrnoException {
         String str = mLogPath;
         if (str != null) {
             return str;
@@ -142,90 +145,91 @@ public class LsLogSummary {
         return TextUtils.formatSimple("%016x.log", l);
     }
 
-    public static void loadLoglist() {
-        File[] listFiles = new File(getRootDir()).listFiles();
-        if (listFiles == null) {
+    public static void loadLoglist() throws Throwable {
+        File[] fileArrListFiles = new File(getRootDir()).listFiles();
+        if (fileArrListFiles == null) {
             Log.w(TAG, "No enroll/verify list");
             return;
         }
-        Arrays.sort(listFiles);
-        for (File file : listFiles) {
+        Arrays.sort(fileArrListFiles);
+        for (File file : fileArrListFiles) {
             Log.i(TAG, "load log file : " + file);
-            byte[] loadFile = loadFile(file, true);
-            if (loadFile == null || loadFile.length <= 4) {
+            byte[] bArrLoadFile = loadFile(file, true);
+            if (bArrLoadFile == null || bArrLoadFile.length <= 4) {
                 Log.i(TAG, "skip file : " + file);
             } else {
-                byte b = loadFile[0];
+                byte b = bArrLoadFile[0];
                 if (b == 1) {
-                    addEnrollResult(LsLogEnroll.fromBytes(loadFile), false);
+                    addEnrollResult(LsLogEnroll.fromBytes(bArrLoadFile), false);
                 } else if (b == 2) {
-                    addVerifySuccess(LsLogVerify.fromBytes(loadFile), false);
+                    addVerifySuccess(LsLogVerify.fromBytes(bArrLoadFile), false);
                 } else if (b != 3) {
-                    Log.w(TAG, "Data is UNKWON type " + ((int) loadFile[0]));
+                    Log.w(TAG, "Data is UNKWON type " + ((int) bArrLoadFile[0]));
                 } else {
-                    addVerifyFailed(LsLogVerify.fromBytes(loadFile), false);
+                    addVerifyFailed(LsLogVerify.fromBytes(bArrLoadFile), false);
                 }
             }
         }
     }
 
     public static void readySummary() {
-        File[] listFiles = new File(getRootDir()).listFiles();
-        if (listFiles == null) {
+        File[] fileArrListFiles = new File(getRootDir()).listFiles();
+        if (fileArrListFiles == null) {
             Log.w(TAG, "readySummary : No enroll/verify list!");
             return;
         }
-        Arrays.sort(listFiles);
-        for (File file : listFiles) {
+        Arrays.sort(fileArrListFiles);
+        for (File file : fileArrListFiles) {
             mFileList.add(file);
         }
         Log.w(TAG, "readySummary : Done!");
     }
 
-    public static String getSummaryString() {
+    public static String getSummaryString() throws Throwable {
         while (!mFileList.isEmpty()) {
             try {
-                File poll = mFileList.poll();
-                if (!poll.exists()) {
-                    Log.i(TAG, "NOT Found file : " + poll);
+                File filePoll = mFileList.poll();
+                if (!filePoll.exists()) {
+                    Log.i(TAG, "NOT Found file : " + filePoll);
                 } else {
                     if (DEBUG) {
-                        Log.i(TAG, "getSummary file : " + poll);
+                        Log.i(TAG, "getSummary file : " + filePoll);
                     }
-                    byte[] loadFile = loadFile(poll, true);
-                    if (loadFile != null && loadFile.length > 4) {
-                        byte b = loadFile[0];
+                    byte[] bArrLoadFile = loadFile(filePoll, true);
+                    if (bArrLoadFile == null || bArrLoadFile.length <= 4) {
+                        Log.i(TAG, "skip file : " + filePoll);
+                    } else {
+                        byte b = bArrLoadFile[0];
                         if (b == 1) {
-                            LsLogEnroll fromBytes = LsLogEnroll.fromBytes(loadFile);
-                            if (fromBytes.mResponse == 0 && fromBytes.mProtectorId != 0) {
-                                if (fromBytes.mProtectorId == PROTECTOR_ID) {
-                                    mLastEnroll = fromBytes;
-                                } else if (fromBytes.mProtectorId == SICHECKER_ID) {
-                                    mLastSIEnroll = fromBytes;
+                            LsLogEnroll lsLogEnrollFromBytes = LsLogEnroll.fromBytes(bArrLoadFile);
+                            if (lsLogEnrollFromBytes.mResponse == 0 && lsLogEnrollFromBytes.mProtectorId != 0) {
+                                if (lsLogEnrollFromBytes.mProtectorId == PROTECTOR_ID) {
+                                    mLastEnroll = lsLogEnrollFromBytes;
+                                } else if (lsLogEnrollFromBytes.mProtectorId == SICHECKER_ID) {
+                                    mLastSIEnroll = lsLogEnrollFromBytes;
                                 }
                             }
-                            return fromBytes.toSummary();
+                            return lsLogEnrollFromBytes.toSummary();
                         }
                         if (b != 2 && b != 3) {
-                            Log.w(TAG, "file info error, data[0] = " + ((int) loadFile[0]));
+                            Log.w(TAG, "file info error, data[0] = " + ((int) bArrLoadFile[0]));
                         }
-                        LsLogVerify fromBytes2 = LsLogVerify.fromBytes(loadFile);
-                        if (fromBytes2.mProtectorId != 0) {
-                            if (fromBytes2.mResponse == 0) {
-                                if (fromBytes2.mProtectorId == PROTECTOR_ID) {
-                                    mLastVSucc = fromBytes2;
-                                } else if (fromBytes2.mProtectorId == SICHECKER_ID) {
-                                    mLastSISucc = fromBytes2;
+                        LsLogVerify lsLogVerifyFromBytes = LsLogVerify.fromBytes(bArrLoadFile);
+                        if (lsLogVerifyFromBytes.mProtectorId != 0) {
+                            if (lsLogVerifyFromBytes.mResponse == 0) {
+                                if (lsLogVerifyFromBytes.mProtectorId == PROTECTOR_ID) {
+                                    mLastVSucc = lsLogVerifyFromBytes;
+                                } else if (lsLogVerifyFromBytes.mProtectorId == SICHECKER_ID) {
+                                    mLastSISucc = lsLogVerifyFromBytes;
                                 }
-                            } else if (fromBytes2.mProtectorId == PROTECTOR_ID) {
-                                mLastVFail = fromBytes2;
-                            } else if (fromBytes2.mProtectorId == SICHECKER_ID) {
-                                mLastSIFail = fromBytes2;
+                            } else if (lsLogVerifyFromBytes.mProtectorId == PROTECTOR_ID) {
+                                mLastVFail = lsLogVerifyFromBytes;
+                            } else if (lsLogVerifyFromBytes.mProtectorId == SICHECKER_ID) {
+                                mLastSIFail = lsLogVerifyFromBytes;
                             }
                         }
-                        return fromBytes2.toSummary();
+                        return lsLogVerifyFromBytes.toSummary();
                     }
-                    Log.i(TAG, "skip file : " + poll);
                 }
             } catch (Exception e) {
                 Log.e(TAG, "getSummaryString failed " + e);
@@ -298,91 +302,67 @@ public class LsLogSummary {
         return loadFile(new File(getRootDir() + str), z);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x006c  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x0072  */
+    /* JADX WARN: Removed duplicated region for block: B:35:0x006c  */
+    /* JADX WARN: Removed duplicated region for block: B:36:0x0072  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private static byte[] loadFile(java.io.File r7, boolean r8) {
-        /*
-            com.samsung.android.lock.LsLogSummary$Cache r0 = com.samsung.android.lock.LsLogSummary.mCache
-            monitor-enter(r0)
-            if (r8 == 0) goto L11
-            boolean r1 = r0.hasFile(r7)     // Catch: java.lang.Throwable -> L78
-            if (r1 == 0) goto L11
-            byte[] r7 = r0.peekFile(r7)     // Catch: java.lang.Throwable -> L78
-            monitor-exit(r0)     // Catch: java.lang.Throwable -> L78
-            return r7
-        L11:
-            int r1 = com.samsung.android.lock.LsLogSummary.Cache.m9282$$Nest$mgetVersion(r0)     // Catch: java.lang.Throwable -> L78
-            monitor-exit(r0)     // Catch: java.lang.Throwable -> L78
-            java.lang.String r0 = "LsLogSummary"
-            java.lang.StringBuilder r2 = new java.lang.StringBuilder
-            java.lang.String r3 = "loadfile : "
-            r2.<init>(r3)
-            r2.append(r7)
-            java.lang.String r2 = r2.toString()
-            android.util.Log.d(r0, r2)
-            r0 = 0
-            java.io.RandomAccessFile r2 = new java.io.RandomAccessFile     // Catch: java.io.IOException -> L53 java.io.FileNotFoundException -> L69
-            java.lang.String r3 = "r"
-            r2.<init>(r7, r3)     // Catch: java.io.IOException -> L53 java.io.FileNotFoundException -> L69
-            long r3 = r2.length()     // Catch: java.lang.Throwable -> L46
-            int r3 = (int) r3     // Catch: java.lang.Throwable -> L46
-            byte[] r4 = new byte[r3]     // Catch: java.lang.Throwable -> L46
-            r5 = 0
-            r2.readFully(r4, r5, r3)     // Catch: java.lang.Throwable -> L44
-            r2.close()     // Catch: java.lang.Throwable -> L44
-            r2.close()     // Catch: java.io.IOException -> L51 java.io.FileNotFoundException -> L6a
-            goto L6a
-        L44:
-            r3 = move-exception
-            goto L48
-        L46:
-            r3 = move-exception
-            r4 = r0
-        L48:
-            r2.close()     // Catch: java.lang.Throwable -> L4c
-            goto L50
-        L4c:
-            r2 = move-exception
-            r3.addSuppressed(r2)     // Catch: java.io.IOException -> L51 java.io.FileNotFoundException -> L6a
-        L50:
-            throw r3     // Catch: java.io.IOException -> L51 java.io.FileNotFoundException -> L6a
-        L51:
-            r2 = move-exception
-            goto L55
-        L53:
-            r2 = move-exception
-            r4 = r0
-        L55:
-            java.lang.String r3 = "LsLogSummary"
-            java.lang.StringBuilder r5 = new java.lang.StringBuilder
-            java.lang.String r6 = "Cannot road file "
-            r5.<init>(r6)
-            r5.append(r2)
-            java.lang.String r2 = r5.toString()
-            android.util.Log.e(r3, r2)
-            goto L6a
-        L69:
-            r4 = r0
-        L6a:
-            if (r8 == 0) goto L72
-            com.samsung.android.lock.LsLogSummary$Cache r8 = com.samsung.android.lock.LsLogSummary.mCache
-            r8.putFileIfUnchanged(r7, r4, r1)
-            goto L77
-        L72:
-            com.samsung.android.lock.LsLogSummary$Cache r8 = com.samsung.android.lock.LsLogSummary.mCache
-            r8.putFile(r7, r0)
-        L77:
-            return r4
-        L78:
-            r7 = move-exception
-            monitor-exit(r0)     // Catch: java.lang.Throwable -> L78
-            throw r7
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.lock.LsLogSummary.loadFile(java.io.File, boolean):byte[]");
+    private static byte[] loadFile(File file, boolean z) throws Throwable {
+        byte[] bArr;
+        Cache cache = mCache;
+        synchronized (cache) {
+            if (z) {
+                if (cache.hasFile(file)) {
+                    return cache.peekFile(file);
+                }
+            }
+            int version = cache.getVersion();
+            Log.d(TAG, "loadfile : " + file);
+            try {
+                try {
+                    RandomAccessFile randomAccessFile = new RandomAccessFile(file, "r");
+                    try {
+                        int length = (int) randomAccessFile.length();
+                        bArr = new byte[length];
+                        try {
+                            randomAccessFile.readFully(bArr, 0, length);
+                            randomAccessFile.close();
+                            randomAccessFile.close();
+                        } catch (Throwable th) {
+                            th = th;
+                            try {
+                                randomAccessFile.close();
+                            } catch (Throwable th2) {
+                                th.addSuppressed(th2);
+                            }
+                            throw th;
+                        }
+                    } catch (Throwable th3) {
+                        th = th3;
+                        bArr = null;
+                    }
+                } catch (FileNotFoundException unused) {
+                    bArr = null;
+                } catch (IOException e) {
+                    e = e;
+                    bArr = null;
+                    Log.e(TAG, "Cannot road file " + e);
+                }
+            } catch (FileNotFoundException unused2) {
+            } catch (IOException e2) {
+                e = e2;
+                Log.e(TAG, "Cannot road file " + e);
+                if (!z) {
+                }
+                return bArr;
+            }
+            if (!z) {
+                mCache.putFileIfUnchanged(file, bArr, version);
+            } else {
+                mCache.putFile(file, null);
+            }
+            return bArr;
+        }
     }
 
     public static void saveFile(String str, byte[] bArr) {
@@ -390,46 +370,46 @@ public class LsLogSummary {
     }
 
     private static void saveFile(File file, byte[] bArr) {
-        FileOutputStream fileOutputStream;
+        FileOutputStream fileOutputStreamStartWrite;
         IOException e;
         String path;
         synchronized (mFileWriteLock) {
             AtomicFile atomicFile = new AtomicFile(file);
-            FileOutputStream fileOutputStream2 = null;
+            FileOutputStream fileOutputStream = null;
             try {
                 try {
-                    fileOutputStream = atomicFile.startWrite();
-                } catch (IOException e2) {
-                    fileOutputStream = null;
-                    e = e2;
+                    fileOutputStreamStartWrite = atomicFile.startWrite();
+                    try {
+                        fileOutputStreamStartWrite.write(bArr);
+                        atomicFile.finishWrite(fileOutputStreamStartWrite);
+                        atomicFile.failWrite(null);
+                        path = file.getPath();
+                    } catch (IOException e2) {
+                        e = e2;
+                        Log.e(TAG, "Error writing file " + file, e);
+                        atomicFile.failWrite(fileOutputStreamStartWrite);
+                        path = file.getPath();
+                        LsLogFile.setPermission(path);
+                        mCache.putFile(file, bArr);
+                    }
                 } catch (Throwable th) {
                     th = th;
-                    atomicFile.failWrite(fileOutputStream2);
+                    fileOutputStream = fileOutputStreamStartWrite;
+                    atomicFile.failWrite(fileOutputStream);
                     LsLogFile.setPermission(file.getPath());
                     throw th;
                 }
-                try {
-                    fileOutputStream.write(bArr);
-                    atomicFile.finishWrite(fileOutputStream);
-                    atomicFile.failWrite(null);
-                    path = file.getPath();
-                } catch (IOException e3) {
-                    e = e3;
-                    Log.e(TAG, "Error writing file " + file, e);
-                    atomicFile.failWrite(fileOutputStream);
-                    path = file.getPath();
-                    LsLogFile.setPermission(path);
-                    mCache.putFile(file, bArr);
-                }
-                LsLogFile.setPermission(path);
-                mCache.putFile(file, bArr);
+            } catch (IOException e3) {
+                fileOutputStreamStartWrite = null;
+                e = e3;
             } catch (Throwable th2) {
                 th = th2;
-                fileOutputStream2 = fileOutputStream;
-                atomicFile.failWrite(fileOutputStream2);
+                atomicFile.failWrite(fileOutputStream);
                 LsLogFile.setPermission(file.getPath());
                 throw th;
             }
+            LsLogFile.setPermission(path);
+            mCache.putFile(file, bArr);
         }
     }
 
@@ -518,10 +498,10 @@ public class LsLogSummary {
         }
 
         synchronized void purgePath(File file) {
-            String file2 = file.toString();
+            String string = file.toString();
             for (int size = this.mCache.size() - 1; size >= 0; size--) {
-                CacheKey keyAt = this.mCache.keyAt(size);
-                if (keyAt.type == 1 && keyAt.key.startsWith(file2)) {
+                CacheKey cacheKeyKeyAt = this.mCache.keyAt(size);
+                if (cacheKeyKeyAt.type == 1 && cacheKeyKeyAt.key.startsWith(string)) {
                     this.mCache.removeAt(size);
                 }
             }

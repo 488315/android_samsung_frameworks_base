@@ -33,38 +33,38 @@ final class AccessibilityIterators {
 
         @Override // android.view.AccessibilityIterators.TextSegmentIterator
         public int[] following(int i) {
-            int i2;
+            int lineForOffset;
             if (this.mText.length() <= 0 || i >= this.mText.length()) {
                 return null;
             }
             if (i < 0) {
-                i2 = this.mLayout.getLineForOffset(0);
+                lineForOffset = this.mLayout.getLineForOffset(0);
             } else {
-                int lineForOffset = this.mLayout.getLineForOffset(i);
-                i2 = getLineEdgeIndex(lineForOffset, -1) == i ? lineForOffset : lineForOffset + 1;
+                int lineForOffset2 = this.mLayout.getLineForOffset(i);
+                lineForOffset = getLineEdgeIndex(lineForOffset2, -1) == i ? lineForOffset2 : lineForOffset2 + 1;
             }
-            if (i2 >= this.mLayout.getLineCount()) {
+            if (lineForOffset >= this.mLayout.getLineCount()) {
                 return null;
             }
-            return getRange(getLineEdgeIndex(i2, -1), getLineEdgeIndex(i2, 1) + 1);
+            return getRange(getLineEdgeIndex(lineForOffset, -1), getLineEdgeIndex(lineForOffset, 1) + 1);
         }
 
         @Override // android.view.AccessibilityIterators.TextSegmentIterator
         public int[] preceding(int i) {
-            int i2;
+            int lineForOffset;
             if (this.mText.length() <= 0 || i <= 0) {
                 return null;
             }
             if (i > this.mText.length()) {
-                i2 = this.mLayout.getLineForOffset(this.mText.length());
+                lineForOffset = this.mLayout.getLineForOffset(this.mText.length());
             } else {
-                int lineForOffset = this.mLayout.getLineForOffset(i);
-                i2 = getLineEdgeIndex(lineForOffset, 1) + 1 == i ? lineForOffset : lineForOffset - 1;
+                int lineForOffset2 = this.mLayout.getLineForOffset(i);
+                lineForOffset = getLineEdgeIndex(lineForOffset2, 1) + 1 == i ? lineForOffset2 : lineForOffset2 - 1;
             }
-            if (i2 < 0) {
+            if (lineForOffset < 0) {
                 return null;
             }
-            return getRange(getLineEdgeIndex(i2, -1), getLineEdgeIndex(i2, 1) + 1);
+            return getRange(getLineEdgeIndex(lineForOffset, -1), getLineEdgeIndex(lineForOffset, 1) + 1);
         }
 
         protected int getLineEdgeIndex(int i, int i2) {
@@ -100,9 +100,9 @@ final class AccessibilityIterators {
             if (this.mText.length() <= 0 || i >= this.mText.length() || !this.mView.getGlobalVisibleRect(this.mTempRect)) {
                 return null;
             }
-            int max = Math.max(0, i);
-            int lineTop = this.mLayout.getLineTop(this.mLayout.getLineForOffset(max)) + ((this.mTempRect.height() - this.mView.getTotalPaddingTop()) - this.mView.getTotalPaddingBottom());
-            return getRange(max, getLineEdgeIndex((lineTop < this.mLayout.getLineTop(this.mLayout.getLineCount() - 1) ? this.mLayout.getLineForVertical(lineTop) : this.mLayout.getLineCount()) - 1, 1) + 1);
+            int iMax = Math.max(0, i);
+            int lineTop = this.mLayout.getLineTop(this.mLayout.getLineForOffset(iMax)) + ((this.mTempRect.height() - this.mView.getTotalPaddingTop()) - this.mView.getTotalPaddingBottom());
+            return getRange(iMax, getLineEdgeIndex((lineTop < this.mLayout.getLineTop(this.mLayout.getLineCount() - 1) ? this.mLayout.getLineForVertical(lineTop) : this.mLayout.getLineCount()) - 1, 1) + 1);
         }
 
         @Override // android.widget.AccessibilityIterators.LineTextSegmentIterator, android.view.AccessibilityIterators.TextSegmentIterator
@@ -110,14 +110,14 @@ final class AccessibilityIterators {
             if (this.mText.length() <= 0 || i <= 0 || !this.mView.getGlobalVisibleRect(this.mTempRect)) {
                 return null;
             }
-            int min = Math.min(this.mText.length(), i);
-            int lineForOffset = this.mLayout.getLineForOffset(min);
+            int iMin = Math.min(this.mText.length(), i);
+            int lineForOffset = this.mLayout.getLineForOffset(iMin);
             int lineTop = this.mLayout.getLineTop(lineForOffset) - ((this.mTempRect.height() - this.mView.getTotalPaddingTop()) - this.mView.getTotalPaddingBottom());
             int lineForVertical = lineTop > 0 ? this.mLayout.getLineForVertical(lineTop) : 0;
-            if (min == this.mText.length() && lineForVertical < lineForOffset) {
+            if (iMin == this.mText.length() && lineForVertical < lineForOffset) {
                 lineForVertical++;
             }
-            return getRange(getLineEdgeIndex(lineForVertical, -1), min);
+            return getRange(getLineEdgeIndex(lineForVertical, -1), iMin);
         }
     }
 }

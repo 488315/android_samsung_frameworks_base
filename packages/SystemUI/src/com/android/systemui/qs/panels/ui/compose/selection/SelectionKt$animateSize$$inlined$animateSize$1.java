@@ -11,7 +11,6 @@ import androidx.compose.ui.geometry.Size;
 import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.Lambda;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SelectionKt$animateSize$$inlined$animateSize$1 extends Lambda implements Function3 {
     public static final SelectionKt$animateSize$$inlined$animateSize$1 INSTANCE = new SelectionKt$animateSize$$inlined$animateSize$1();
@@ -30,11 +29,11 @@ public final class SelectionKt$animateSize$$inlined$animateSize$1 extends Lambda
         }
         Size.Companion companion = Size.Companion;
         Rect rect = VisibilityThresholdsKt.RectVisibilityThreshold;
-        SpringSpec spring$default = AnimationSpecKt.spring$default(0.0f, 0.0f, Size.m413boximpl((Float.floatToRawIntBits(0.5f) & 4294967295L) | (Float.floatToRawIntBits(0.5f) << 32)), 3);
+        SpringSpec springSpecSpring$default = AnimationSpecKt.spring$default(0.0f, 0.0f, Size.m415boximpl((Float.floatToRawIntBits(0.5f) & 4294967295L) | (Float.floatToRawIntBits(0.5f) << 32)), 3);
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventEnd();
         }
         composerImpl.end(false);
-        return spring$default;
+        return springSpecSpring$default;
     }
 }

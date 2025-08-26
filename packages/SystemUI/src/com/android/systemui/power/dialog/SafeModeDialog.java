@@ -11,7 +11,6 @@ import com.android.systemui.R;
 import com.android.systemui.power.SecBatterySnapshot;
 import com.android.systemui.util.DeviceType;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SafeModeDialog extends PowerUiDialog {
     public SafeModeDialog(Context context) {
@@ -35,7 +34,7 @@ public class SafeModeDialog extends PowerUiDialog {
         DialogInterface.OnClickListener onClickListener = new DialogInterface.OnClickListener() { // from class: com.android.systemui.power.dialog.SafeModeDialog$$ExternalSyntheticLambda0
             @Override // android.content.DialogInterface.OnClickListener
             public final void onClick(DialogInterface dialogInterface, int i) {
-                SafeModeDialog safeModeDialog = SafeModeDialog.this;
+                SafeModeDialog safeModeDialog = this.f$0;
                 safeModeDialog.getClass();
                 try {
                     Intent intent = new Intent("android.intent.action.REBOOT");
@@ -50,9 +49,9 @@ public class SafeModeDialog extends PowerUiDialog {
         };
         alertParams.mPositiveButtonText = alertParams.mContext.getText(R.string.safe_mode_alert_positive_button);
         alertParams.mPositiveButtonListener = onClickListener;
-        AlertDialog create = builder.create();
-        create.getWindow().setType(2009);
-        return create;
+        AlertDialog alertDialogCreate = builder.create();
+        alertDialogCreate.getWindow().setType(2009);
+        return alertDialogCreate;
     }
 
     @Override // com.android.systemui.power.dialog.PowerUiDialog

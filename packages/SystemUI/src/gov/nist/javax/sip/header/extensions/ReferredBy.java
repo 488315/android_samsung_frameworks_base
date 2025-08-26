@@ -8,7 +8,6 @@ import gov.nist.javax.sip.header.AddressParametersHeader;
 import javax.sip.header.Header;
 import javax.sip.header.HeaderAddress;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class ReferredBy extends AddressParametersHeader implements Header, HeaderAddress {
     private static final long serialVersionUID = 3134344915465784267L;
@@ -23,17 +22,17 @@ public final class ReferredBy extends AddressParametersHeader implements Header,
         if (addressImpl == null) {
             return null;
         }
-        StringBuilder m = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(addressImpl.getAddressType() == 2 ? "<" : "");
-        m.append(this.address.encode());
-        String sb = m.toString();
+        StringBuilder sbM = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(addressImpl.getAddressType() == 2 ? "<" : "");
+        sbM.append(this.address.encode());
+        String string = sbM.toString();
         if (this.address.getAddressType() == 2) {
-            sb = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sb, ">");
+            string = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(string, ">");
         }
         if (this.parameters.isEmpty()) {
-            return sb;
+            return string;
         }
-        StringBuilder m2 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(sb, ";");
-        m2.append(this.parameters.encode());
-        return m2.toString();
+        StringBuilder sbM2 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(string, ";");
+        sbM2.append(this.parameters.encode());
+        return sbM2.toString();
     }
 }

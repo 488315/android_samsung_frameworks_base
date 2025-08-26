@@ -14,7 +14,6 @@ import android.os.ICancellationSignal;
 import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteCallback;
-import android.os.RemoteException;
 import java.util.ArrayList;
 
 /* loaded from: classes.dex */
@@ -39,58 +38,57 @@ public abstract class ContentProviderNative extends Binder implements IContentPr
     }
 
     @Override // android.os.Binder
-    public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2) throws RemoteException {
+    public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2) throws Throwable {
         String[] strArr;
         Throwable th;
-        BulkCursorDescriptor bulkCursorDescriptor;
         int i3 = 0;
         try {
             if (i == 1) {
                 parcel.enforceInterface(IContentProvider.descriptor);
-                AttributionSource createFromParcel = AttributionSource.CREATOR.createFromParcel(parcel);
-                Uri createFromParcel2 = Uri.CREATOR.createFromParcel(parcel);
-                int readInt = parcel.readInt();
+                AttributionSource attributionSourceCreateFromParcel = AttributionSource.CREATOR.createFromParcel(parcel);
+                Uri uriCreateFromParcel = Uri.CREATOR.createFromParcel(parcel);
+                int i4 = parcel.readInt();
                 CursorToBulkCursorAdaptor cursorToBulkCursorAdaptor = null;
-                if (readInt > 0) {
-                    String[] strArr2 = new String[readInt];
-                    for (int i4 = 0; i4 < readInt; i4++) {
-                        strArr2[i4] = parcel.readString();
+                if (i4 > 0) {
+                    String[] strArr2 = new String[i4];
+                    for (int i5 = 0; i5 < i4; i5++) {
+                        strArr2[i5] = parcel.readString();
                     }
                     strArr = strArr2;
                 } else {
                     strArr = null;
                 }
-                Bundle readBundle = parcel.readBundle();
-                IContentObserver asInterface = IContentObserver.Stub.asInterface(parcel.readStrongBinder());
-                Cursor query = query(createFromParcel, createFromParcel2, strArr, readBundle, ICancellationSignal.Stub.asInterface(parcel.readStrongBinder()));
-                if (query != null) {
+                Bundle bundle = parcel.readBundle();
+                IContentObserver iContentObserverAsInterface = IContentObserver.Stub.asInterface(parcel.readStrongBinder());
+                Cursor cursorQuery = query(attributionSourceCreateFromParcel, uriCreateFromParcel, strArr, bundle, ICancellationSignal.Stub.asInterface(parcel.readStrongBinder()));
+                if (cursorQuery != null) {
                     try {
-                        CursorToBulkCursorAdaptor cursorToBulkCursorAdaptor2 = new CursorToBulkCursorAdaptor(query, asInterface, getProviderName());
+                        CursorToBulkCursorAdaptor cursorToBulkCursorAdaptor2 = new CursorToBulkCursorAdaptor(cursorQuery, iContentObserverAsInterface, getProviderName());
                         try {
-                            bulkCursorDescriptor = cursorToBulkCursorAdaptor2.getBulkCursorDescriptor();
-                        } catch (Throwable th2) {
-                            th = th2;
-                            query = null;
+                            BulkCursorDescriptor bulkCursorDescriptor = cursorToBulkCursorAdaptor2.getBulkCursorDescriptor();
+                            try {
+                                parcel2.writeNoException();
+                                parcel2.writeInt(1);
+                                bulkCursorDescriptor.writeToParcel(parcel2, 1);
+                            } catch (Throwable th2) {
+                                th = th2;
+                                cursorQuery = null;
+                                if (cursorToBulkCursorAdaptor != null) {
+                                    cursorToBulkCursorAdaptor.close();
+                                }
+                                if (cursorQuery != null) {
+                                    cursorQuery.close();
+                                    throw th;
+                                }
+                                throw th;
+                            }
+                        } catch (Throwable th3) {
+                            th = th3;
+                            cursorQuery = null;
                             cursorToBulkCursorAdaptor = cursorToBulkCursorAdaptor2;
                         }
-                    } catch (Throwable th3) {
-                        th = th3;
-                    }
-                    try {
-                        parcel2.writeNoException();
-                        parcel2.writeInt(1);
-                        bulkCursorDescriptor.writeToParcel(parcel2, 1);
                     } catch (Throwable th4) {
                         th = th4;
-                        query = null;
-                        if (cursorToBulkCursorAdaptor != null) {
-                            cursorToBulkCursorAdaptor.close();
-                        }
-                        if (query != null) {
-                            query.close();
-                            throw th;
-                        }
-                        throw th;
                     }
                 } else {
                     parcel2.writeNoException();
@@ -107,44 +105,44 @@ public abstract class ContentProviderNative extends Binder implements IContentPr
             }
             if (i == 3) {
                 parcel.enforceInterface(IContentProvider.descriptor);
-                Uri insert = insert(AttributionSource.CREATOR.createFromParcel(parcel), Uri.CREATOR.createFromParcel(parcel), ContentValues.CREATOR.createFromParcel(parcel), parcel.readBundle());
+                Uri uriInsert = insert(AttributionSource.CREATOR.createFromParcel(parcel), Uri.CREATOR.createFromParcel(parcel), ContentValues.CREATOR.createFromParcel(parcel), parcel.readBundle());
                 parcel2.writeNoException();
-                Uri.writeToParcel(parcel2, insert);
+                Uri.writeToParcel(parcel2, uriInsert);
                 return true;
             }
             if (i == 4) {
                 parcel.enforceInterface(IContentProvider.descriptor);
-                int delete = delete(AttributionSource.CREATOR.createFromParcel(parcel), Uri.CREATOR.createFromParcel(parcel), parcel.readBundle());
+                int iDelete = delete(AttributionSource.CREATOR.createFromParcel(parcel), Uri.CREATOR.createFromParcel(parcel), parcel.readBundle());
                 parcel2.writeNoException();
-                parcel2.writeInt(delete);
+                parcel2.writeInt(iDelete);
                 return true;
             }
             if (i != 10) {
                 switch (i) {
                     case 13:
                         parcel.enforceInterface(IContentProvider.descriptor);
-                        int bulkInsert = bulkInsert(AttributionSource.CREATOR.createFromParcel(parcel), Uri.CREATOR.createFromParcel(parcel), (ContentValues[]) parcel.createTypedArray(ContentValues.CREATOR));
+                        int iBulkInsert = bulkInsert(AttributionSource.CREATOR.createFromParcel(parcel), Uri.CREATOR.createFromParcel(parcel), (ContentValues[]) parcel.createTypedArray(ContentValues.CREATOR));
                         parcel2.writeNoException();
-                        parcel2.writeInt(bulkInsert);
+                        parcel2.writeInt(iBulkInsert);
                         return true;
                     case 14:
                         parcel.enforceInterface(IContentProvider.descriptor);
-                        ParcelFileDescriptor openFile = openFile(AttributionSource.CREATOR.createFromParcel(parcel), Uri.CREATOR.createFromParcel(parcel), parcel.readString(), ICancellationSignal.Stub.asInterface(parcel.readStrongBinder()));
+                        ParcelFileDescriptor parcelFileDescriptorOpenFile = openFile(AttributionSource.CREATOR.createFromParcel(parcel), Uri.CREATOR.createFromParcel(parcel), parcel.readString(), ICancellationSignal.Stub.asInterface(parcel.readStrongBinder()));
                         parcel2.writeNoException();
-                        if (openFile != null) {
+                        if (parcelFileDescriptorOpenFile != null) {
                             parcel2.writeInt(1);
-                            openFile.writeToParcel(parcel2, 1);
+                            parcelFileDescriptorOpenFile.writeToParcel(parcel2, 1);
                         } else {
                             parcel2.writeInt(0);
                         }
                         return true;
                     case 15:
                         parcel.enforceInterface(IContentProvider.descriptor);
-                        AssetFileDescriptor openAssetFile = openAssetFile(AttributionSource.CREATOR.createFromParcel(parcel), Uri.CREATOR.createFromParcel(parcel), parcel.readString(), ICancellationSignal.Stub.asInterface(parcel.readStrongBinder()));
+                        AssetFileDescriptor assetFileDescriptorOpenAssetFile = openAssetFile(AttributionSource.CREATOR.createFromParcel(parcel), Uri.CREATOR.createFromParcel(parcel), parcel.readString(), ICancellationSignal.Stub.asInterface(parcel.readStrongBinder()));
                         parcel2.writeNoException();
-                        if (openAssetFile != null) {
+                        if (assetFileDescriptorOpenAssetFile != null) {
                             parcel2.writeInt(1);
-                            openAssetFile.writeToParcel(parcel2, 1);
+                            assetFileDescriptorOpenAssetFile.writeToParcel(parcel2, 1);
                         } else {
                             parcel2.writeInt(0);
                         }
@@ -153,22 +151,22 @@ public abstract class ContentProviderNative extends Binder implements IContentPr
                         switch (i) {
                             case 20:
                                 parcel.enforceInterface(IContentProvider.descriptor);
-                                AttributionSource createFromParcel3 = AttributionSource.CREATOR.createFromParcel(parcel);
-                                String readString = parcel.readString();
-                                int readInt2 = parcel.readInt();
-                                ArrayList<ContentProviderOperation> arrayList = new ArrayList<>(readInt2);
-                                for (int i5 = 0; i5 < readInt2; i5++) {
-                                    arrayList.add(i5, ContentProviderOperation.CREATOR.createFromParcel(parcel));
+                                AttributionSource attributionSourceCreateFromParcel2 = AttributionSource.CREATOR.createFromParcel(parcel);
+                                String string = parcel.readString();
+                                int i6 = parcel.readInt();
+                                ArrayList<ContentProviderOperation> arrayList = new ArrayList<>(i6);
+                                for (int i7 = 0; i7 < i6; i7++) {
+                                    arrayList.add(i7, ContentProviderOperation.CREATOR.createFromParcel(parcel));
                                 }
-                                ContentProviderResult[] applyBatch = applyBatch(createFromParcel3, readString, arrayList);
+                                ContentProviderResult[] contentProviderResultArrApplyBatch = applyBatch(attributionSourceCreateFromParcel2, string, arrayList);
                                 parcel2.writeNoException();
-                                parcel2.writeTypedArray(applyBatch, 0);
+                                parcel2.writeTypedArray(contentProviderResultArrApplyBatch, 0);
                                 return true;
                             case 21:
                                 parcel.enforceInterface(IContentProvider.descriptor);
-                                Bundle call = call(AttributionSource.CREATOR.createFromParcel(parcel), parcel.readString(), parcel.readString(), parcel.readString(), parcel.readBundle());
+                                Bundle bundleCall = call(AttributionSource.CREATOR.createFromParcel(parcel), parcel.readString(), parcel.readString(), parcel.readString(), parcel.readBundle());
                                 parcel2.writeNoException();
-                                parcel2.writeBundle(call);
+                                parcel2.writeBundle(bundleCall);
                                 return true;
                             case 22:
                                 parcel.enforceInterface(IContentProvider.descriptor);
@@ -178,47 +176,47 @@ public abstract class ContentProviderNative extends Binder implements IContentPr
                                 return true;
                             case 23:
                                 parcel.enforceInterface(IContentProvider.descriptor);
-                                AssetFileDescriptor openTypedAssetFile = openTypedAssetFile(AttributionSource.CREATOR.createFromParcel(parcel), Uri.CREATOR.createFromParcel(parcel), parcel.readString(), parcel.readBundle(), ICancellationSignal.Stub.asInterface(parcel.readStrongBinder()));
+                                AssetFileDescriptor assetFileDescriptorOpenTypedAssetFile = openTypedAssetFile(AttributionSource.CREATOR.createFromParcel(parcel), Uri.CREATOR.createFromParcel(parcel), parcel.readString(), parcel.readBundle(), ICancellationSignal.Stub.asInterface(parcel.readStrongBinder()));
                                 parcel2.writeNoException();
-                                if (openTypedAssetFile != null) {
+                                if (assetFileDescriptorOpenTypedAssetFile != null) {
                                     parcel2.writeInt(1);
-                                    openTypedAssetFile.writeToParcel(parcel2, 1);
+                                    assetFileDescriptorOpenTypedAssetFile.writeToParcel(parcel2, 1);
                                 } else {
                                     parcel2.writeInt(0);
                                 }
                                 return true;
                             case 24:
                                 parcel.enforceInterface(IContentProvider.descriptor);
-                                ICancellationSignal createCancellationSignal = createCancellationSignal();
+                                ICancellationSignal iCancellationSignalCreateCancellationSignal = createCancellationSignal();
                                 parcel2.writeNoException();
-                                parcel2.writeStrongBinder(createCancellationSignal.asBinder());
+                                parcel2.writeStrongBinder(iCancellationSignalCreateCancellationSignal.asBinder());
                                 return true;
                             case 25:
                                 parcel.enforceInterface(IContentProvider.descriptor);
-                                Uri canonicalize = canonicalize(AttributionSource.CREATOR.createFromParcel(parcel), Uri.CREATOR.createFromParcel(parcel));
+                                Uri uriCanonicalize = canonicalize(AttributionSource.CREATOR.createFromParcel(parcel), Uri.CREATOR.createFromParcel(parcel));
                                 parcel2.writeNoException();
-                                Uri.writeToParcel(parcel2, canonicalize);
+                                Uri.writeToParcel(parcel2, uriCanonicalize);
                                 return true;
                             case 26:
                                 parcel.enforceInterface(IContentProvider.descriptor);
-                                Uri uncanonicalize = uncanonicalize(AttributionSource.CREATOR.createFromParcel(parcel), Uri.CREATOR.createFromParcel(parcel));
+                                Uri uriUncanonicalize = uncanonicalize(AttributionSource.CREATOR.createFromParcel(parcel), Uri.CREATOR.createFromParcel(parcel));
                                 parcel2.writeNoException();
-                                Uri.writeToParcel(parcel2, uncanonicalize);
+                                Uri.writeToParcel(parcel2, uriUncanonicalize);
                                 return true;
                             case 27:
                                 parcel.enforceInterface(IContentProvider.descriptor);
-                                boolean refresh = refresh(AttributionSource.CREATOR.createFromParcel(parcel), Uri.CREATOR.createFromParcel(parcel), parcel.readBundle(), ICancellationSignal.Stub.asInterface(parcel.readStrongBinder()));
+                                boolean zRefresh = refresh(AttributionSource.CREATOR.createFromParcel(parcel), Uri.CREATOR.createFromParcel(parcel), parcel.readBundle(), ICancellationSignal.Stub.asInterface(parcel.readStrongBinder()));
                                 parcel2.writeNoException();
-                                if (!refresh) {
+                                if (!zRefresh) {
                                     i3 = -1;
                                 }
                                 parcel2.writeInt(i3);
                                 return true;
                             case 28:
                                 parcel.enforceInterface(IContentProvider.descriptor);
-                                int checkUriPermission = checkUriPermission(AttributionSource.CREATOR.createFromParcel(parcel), Uri.CREATOR.createFromParcel(parcel), parcel.readInt(), parcel.readInt());
+                                int iCheckUriPermission = checkUriPermission(AttributionSource.CREATOR.createFromParcel(parcel), Uri.CREATOR.createFromParcel(parcel), parcel.readInt(), parcel.readInt());
                                 parcel2.writeNoException();
-                                parcel2.writeInt(checkUriPermission);
+                                parcel2.writeInt(iCheckUriPermission);
                                 return true;
                             case 29:
                                 parcel.enforceInterface(IContentProvider.descriptor);
@@ -242,9 +240,9 @@ public abstract class ContentProviderNative extends Binder implements IContentPr
                 }
             }
             parcel.enforceInterface(IContentProvider.descriptor);
-            int update = update(AttributionSource.CREATOR.createFromParcel(parcel), Uri.CREATOR.createFromParcel(parcel), ContentValues.CREATOR.createFromParcel(parcel), parcel.readBundle());
+            int iUpdate = update(AttributionSource.CREATOR.createFromParcel(parcel), Uri.CREATOR.createFromParcel(parcel), ContentValues.CREATOR.createFromParcel(parcel), parcel.readBundle());
             parcel2.writeNoException();
-            parcel2.writeInt(update);
+            parcel2.writeInt(iUpdate);
             return true;
         } catch (Exception e) {
             DatabaseUtils.writeExceptionToParcel(parcel2, e);

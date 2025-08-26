@@ -53,9 +53,9 @@ public interface IWritableCredential extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IWritableCredential.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IWritableCredential)) {
-                return (IWritableCredential) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IWritableCredential.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IWritableCredential)) {
+                return (IWritableCredential) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -85,19 +85,19 @@ public interface IWritableCredential extends IInterface {
                 return true;
             }
             if (i == 1) {
-                byte[] createByteArray = parcel.createByteArray();
+                byte[] bArrCreateByteArray = parcel.createByteArray();
                 parcel.enforceNoDataAvail();
-                byte[] credentialKeyCertificateChain = getCredentialKeyCertificateChain(createByteArray);
+                byte[] credentialKeyCertificateChain = getCredentialKeyCertificateChain(bArrCreateByteArray);
                 parcel2.writeNoException();
                 parcel2.writeByteArray(credentialKeyCertificateChain);
             } else if (i == 2) {
                 AccessControlProfileParcel[] accessControlProfileParcelArr = (AccessControlProfileParcel[]) parcel.createTypedArray(AccessControlProfileParcel.CREATOR);
                 EntryNamespaceParcel[] entryNamespaceParcelArr = (EntryNamespaceParcel[]) parcel.createTypedArray(EntryNamespaceParcel.CREATOR);
-                long readLong = parcel.readLong();
+                long j = parcel.readLong();
                 parcel.enforceNoDataAvail();
-                byte[] personalize = personalize(accessControlProfileParcelArr, entryNamespaceParcelArr, readLong);
+                byte[] bArrPersonalize = personalize(accessControlProfileParcelArr, entryNamespaceParcelArr, j);
                 parcel2.writeNoException();
-                parcel2.writeByteArray(personalize);
+                parcel2.writeByteArray(bArrPersonalize);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -122,35 +122,35 @@ public interface IWritableCredential extends IInterface {
 
             @Override // android.security.identity.IWritableCredential
             public byte[] getCredentialKeyCertificateChain(byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IWritableCredential.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(IWritableCredential.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.identity.IWritableCredential
             public byte[] personalize(AccessControlProfileParcel[] accessControlProfileParcelArr, EntryNamespaceParcel[] entryNamespaceParcelArr, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IWritableCredential.DESCRIPTOR);
-                    obtain.writeTypedArray(accessControlProfileParcelArr, 0);
-                    obtain.writeTypedArray(entryNamespaceParcelArr, 0);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(IWritableCredential.DESCRIPTOR);
+                    parcelObtain.writeTypedArray(accessControlProfileParcelArr, 0);
+                    parcelObtain.writeTypedArray(entryNamespaceParcelArr, 0);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

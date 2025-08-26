@@ -5,7 +5,6 @@ import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import java.util.Set;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class RingerButtonViewModel {
     public final int contentDescriptionResId;
@@ -33,13 +32,13 @@ public final class RingerButtonViewModel {
     }
 
     public final int hashCode() {
-        int m = ReorderTile$$ExternalSyntheticOutline0.m(this.hintLabelResId, ReorderTile$$ExternalSyntheticOutline0.m(this.contentDescriptionResId, Integer.hashCode(this.imageResId) * 31, 31), 31);
+        int iM = ReorderTile$$ExternalSyntheticOutline0.m(this.hintLabelResId, ReorderTile$$ExternalSyntheticOutline0.m(this.contentDescriptionResId, Integer.hashCode(this.imageResId) * 31, 31), 31);
         Set set = RingerMode.supportedRingerModes;
-        return Integer.hashCode(this.ringerMode) + m;
+        return Integer.hashCode(this.ringerMode) + iM;
     }
 
     public final String toString() {
-        return "RingerButtonViewModel(imageResId=" + this.imageResId + ", contentDescriptionResId=" + this.contentDescriptionResId + ", hintLabelResId=" + this.hintLabelResId + ", ringerMode=" + RingerMode.m992toStringimpl(this.ringerMode) + ")";
+        return "RingerButtonViewModel(imageResId=" + this.imageResId + ", contentDescriptionResId=" + this.contentDescriptionResId + ", hintLabelResId=" + this.hintLabelResId + ", ringerMode=" + RingerMode.m994toStringimpl(this.ringerMode) + ")";
     }
 
     private RingerButtonViewModel(int i, int i2, int i3, int i4) {

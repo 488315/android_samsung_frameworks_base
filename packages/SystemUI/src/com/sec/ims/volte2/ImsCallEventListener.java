@@ -4,7 +4,6 @@ import android.os.RemoteException;
 import com.sec.ims.volte2.IImsCallEventListener;
 import com.sec.ims.volte2.data.ImsCallInfo;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class ImsCallEventListener extends IImsCallEventListener.Stub {
     @Override // com.sec.ims.volte2.IImsCallEventListener

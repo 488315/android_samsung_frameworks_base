@@ -50,13 +50,13 @@ public class SwitchPreference extends TwoStatePreference {
         if ((configuration.screenWidthDp <= 320 && configuration.fontScale >= 1.1f) || (configuration.screenWidthDp < 411 && configuration.fontScale >= 1.3f)) {
             setLayoutResource(R.layout.tw_preference_switch_large);
         }
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.SwitchPreference, i, i2);
-        setSummaryOn(obtainStyledAttributes.getString(0));
-        setSummaryOff(obtainStyledAttributes.getString(1));
-        setSwitchTextOn(obtainStyledAttributes.getString(3));
-        setSwitchTextOff(obtainStyledAttributes.getString(4));
-        setDisableDependentsState(obtainStyledAttributes.getBoolean(2, false));
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.SwitchPreference, i, i2);
+        setSummaryOn(typedArrayObtainStyledAttributes.getString(0));
+        setSummaryOff(typedArrayObtainStyledAttributes.getString(1));
+        setSwitchTextOn(typedArrayObtainStyledAttributes.getString(3));
+        setSwitchTextOff(typedArrayObtainStyledAttributes.getString(4));
+        setDisableDependentsState(typedArrayObtainStyledAttributes.getBoolean(2, false));
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     public SwitchPreference(Context context, AttributeSet attributeSet, int i) {
@@ -74,15 +74,15 @@ public class SwitchPreference extends TwoStatePreference {
     @Override // android.preference.Preference
     protected void onBindView(View view) {
         super.onBindView(view);
-        KeyEvent.Callback findViewById = view.findViewById(16908352);
-        if (findViewById != null && (findViewById instanceof Checkable)) {
-            boolean z = findViewById instanceof Switch;
+        KeyEvent.Callback callbackFindViewById = view.findViewById(16908352);
+        if (callbackFindViewById != null && (callbackFindViewById instanceof Checkable)) {
+            boolean z = callbackFindViewById instanceof Switch;
             if (z) {
-                ((Switch) findViewById).setOnCheckedChangeListener(null);
+                ((Switch) callbackFindViewById).setOnCheckedChangeListener(null);
             }
-            ((Checkable) findViewById).setChecked(this.mChecked);
+            ((Checkable) callbackFindViewById).setChecked(this.mChecked);
             if (z) {
-                Switch r0 = (Switch) findViewById;
+                Switch r0 = (Switch) callbackFindViewById;
                 r0.setTextOn(this.mSwitchOn);
                 r0.setTextOff(this.mSwitchOff);
                 r0.setOnCheckedChangeListener(this.mListener);

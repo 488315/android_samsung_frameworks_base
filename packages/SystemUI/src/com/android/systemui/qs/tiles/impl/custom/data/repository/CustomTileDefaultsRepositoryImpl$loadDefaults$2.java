@@ -15,7 +15,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class CustomTileDefaultsRepositoryImpl$loadDefaults$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ ComponentName $componentName;
@@ -42,24 +41,24 @@ final class CustomTileDefaultsRepositoryImpl$loadDefaults$2 extends SuspendLambd
     }
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
-    public final Object invokeSuspend(Object obj) {
+    public final Object invokeSuspend(Object obj) throws PackageManager.NameNotFoundException {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         if (this.label != 0) {
             throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
         }
         ResultKt.throwOnFailure(obj);
         try {
-            Context createContextAsUser = this.this$0.context.createContextAsUser(this.$user, 0);
+            Context contextCreateContextAsUser = this.this$0.context.createContextAsUser(this.$user, 0);
             CustomTileDefaultsRepositoryImpl customTileDefaultsRepositoryImpl = this.this$0;
             ComponentName componentName = this.$componentName;
-            PackageManager packageManager = createContextAsUser.getPackageManager();
+            PackageManager packageManager = contextCreateContextAsUser.getPackageManager();
             customTileDefaultsRepositoryImpl.getClass();
             ServiceInfo serviceInfo = packageManager.getServiceInfo(componentName, packageManager.getApplicationInfo(componentName.getPackageName(), 0).isSystemApp() ? 786944 : 786432);
             int i = serviceInfo.icon;
             if (i == 0) {
                 i = serviceInfo.applicationInfo.icon;
             }
-            return i == 0 ? CustomTileDefaults.Error.INSTANCE : new CustomTileDefaults.Result(Icon.createWithResource(this.$componentName.getPackageName(), i), serviceInfo.loadLabel(createContextAsUser.getPackageManager()));
+            return i == 0 ? CustomTileDefaults.Error.INSTANCE : new CustomTileDefaults.Result(Icon.createWithResource(this.$componentName.getPackageName(), i), serviceInfo.loadLabel(contextCreateContextAsUser.getPackageManager()));
         } catch (PackageManager.NameNotFoundException unused) {
             return CustomTileDefaults.Error.INSTANCE;
         }

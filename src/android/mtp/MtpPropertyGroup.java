@@ -1,6 +1,11 @@
 package android.mtp;
 
+import android.content.ContentProviderClient;
+import android.database.Cursor;
 import android.drm.DrmInfoRequest;
+import android.media.MediaMetrics;
+import android.mtp.MtpStorageManager;
+import android.os.RemoteException;
 import android.util.Log;
 import java.util.ArrayList;
 
@@ -118,29 +123,170 @@ class MtpPropertyGroup {
         return new Property(this, i, i2, -1);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0063  */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x0068  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x0074  */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x0080  */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x00a8  */
-    /* JADX WARN: Removed duplicated region for block: B:51:0x00bf  */
-    /* JADX WARN: Removed duplicated region for block: B:53:0x00e0  */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x00f5  */
-    /* JADX WARN: Removed duplicated region for block: B:60:0x0116  */
-    /* JADX WARN: Removed duplicated region for block: B:62:0x0127  */
-    /* JADX WARN: Removed duplicated region for block: B:64:0x0134  */
-    /* JADX WARN: Removed duplicated region for block: B:66:0x0145  */
-    /* JADX WARN: Removed duplicated region for block: B:68:0x0153  */
-    /* JADX WARN: Removed duplicated region for block: B:70:0x0163  */
+    /* JADX WARN: Removed duplicated region for block: B:22:0x0063  */
+    /* JADX WARN: Removed duplicated region for block: B:23:0x0068  */
+    /* JADX WARN: Removed duplicated region for block: B:24:0x0074  */
+    /* JADX WARN: Removed duplicated region for block: B:25:0x0080  */
+    /* JADX WARN: Removed duplicated region for block: B:30:0x00a8  */
+    /* JADX WARN: Removed duplicated region for block: B:35:0x00bf  */
+    /* JADX WARN: Removed duplicated region for block: B:36:0x00e0  */
+    /* JADX WARN: Removed duplicated region for block: B:37:0x00f5  */
+    /* JADX WARN: Removed duplicated region for block: B:42:0x0116  */
+    /* JADX WARN: Removed duplicated region for block: B:43:0x0127  */
+    /* JADX WARN: Removed duplicated region for block: B:44:0x0134  */
+    /* JADX WARN: Removed duplicated region for block: B:45:0x0145  */
+    /* JADX WARN: Removed duplicated region for block: B:46:0x0153  */
+    /* JADX WARN: Removed duplicated region for block: B:47:0x0163  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public int getPropertyList(android.content.ContentProviderClient r23, java.lang.String r24, android.mtp.MtpStorageManager.MtpObject r25, android.mtp.MtpPropertyList r26) {
-        /*
-            Method dump skipped, instructions count: 524
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.mtp.MtpPropertyGroup.getPropertyList(android.content.ContentProviderClient, java.lang.String, android.mtp.MtpStorageManager$MtpObject, android.mtp.MtpPropertyList):int");
+    public int getPropertyList(ContentProviderClient contentProviderClient, String str, MtpStorageManager.MtpObject mtpObject, MtpPropertyList mtpPropertyList) {
+        String string;
+        int id = mtpObject.getId();
+        String string2 = mtpObject.getPath().toString();
+        Property[] propertyArr = this.mProperties;
+        int length = propertyArr.length;
+        Cursor cursorQuery = null;
+        int i = 0;
+        while (i < length) {
+            Property property = propertyArr[i];
+            if (property.column != -1 && cursorQuery == null) {
+                try {
+                    try {
+                        try {
+                            cursorQuery = contentProviderClient.query(MtpDatabase.getObjectPropertiesUri(mtpObject.getFormat(), str), this.mColumns, PATH_WHERE, new String[]{string2}, null, null);
+                            if (cursorQuery != null && !cursorQuery.moveToNext()) {
+                                cursorQuery.close();
+                                cursorQuery = null;
+                            }
+                        } catch (RemoteException unused) {
+                            Log.e(TAG, "Mediaprovider lookup failed");
+                            Cursor cursor = cursorQuery;
+                            switch (property.code) {
+                                case MtpConstants.PROPERTY_STORAGE_ID /* 56321 */:
+                                    break;
+                                case MtpConstants.PROPERTY_OBJECT_FORMAT /* 56322 */:
+                                    break;
+                                case MtpConstants.PROPERTY_PROTECTION_STATUS /* 56323 */:
+                                    break;
+                                case MtpConstants.PROPERTY_OBJECT_SIZE /* 56324 */:
+                                    break;
+                                case MtpConstants.PROPERTY_OBJECT_FILE_NAME /* 56327 */:
+                                case MtpConstants.PROPERTY_NAME /* 56388 */:
+                                case MtpConstants.PROPERTY_DISPLAY_NAME /* 56544 */:
+                                    break;
+                                case MtpConstants.PROPERTY_DATE_MODIFIED /* 56329 */:
+                                case MtpConstants.PROPERTY_DATE_ADDED /* 56398 */:
+                                    break;
+                                case MtpConstants.PROPERTY_PARENT_OBJECT /* 56331 */:
+                                    break;
+                                case MtpConstants.PROPERTY_HIDDEN /* 56333 */:
+                                    break;
+                                case MtpConstants.PROPERTY_PERSISTENT_UID /* 56385 */:
+                                    break;
+                                case MtpConstants.PROPERTY_TRACK /* 56459 */:
+                                    break;
+                                case MtpConstants.PROPERTY_ORIGINAL_RELEASE_DATE /* 56473 */:
+                                    break;
+                                case MtpConstants.PROPERTY_BITRATE_TYPE /* 56978 */:
+                                case MtpConstants.PROPERTY_NUMBER_OF_CHANNELS /* 56980 */:
+                                    break;
+                                case MtpConstants.PROPERTY_SAMPLE_RATE /* 56979 */:
+                                case MtpConstants.PROPERTY_AUDIO_WAVE_CODEC /* 56985 */:
+                                case MtpConstants.PROPERTY_AUDIO_BITRATE /* 56986 */:
+                                    break;
+                            }
+                            i++;
+                            cursorQuery = cursor;
+                        }
+                    } catch (IllegalArgumentException unused2) {
+                        return MtpConstants.RESPONSE_INVALID_OBJECT_PROP_CODE;
+                    }
+                } catch (RemoteException unused3) {
+                }
+            }
+            Cursor cursor2 = cursorQuery;
+            switch (property.code) {
+                case MtpConstants.PROPERTY_STORAGE_ID /* 56321 */:
+                    mtpPropertyList.append(id, property.code, property.type, mtpObject.getStorageId());
+                    break;
+                case MtpConstants.PROPERTY_OBJECT_FORMAT /* 56322 */:
+                    mtpPropertyList.append(id, property.code, property.type, mtpObject.getFormat());
+                    break;
+                case MtpConstants.PROPERTY_PROTECTION_STATUS /* 56323 */:
+                    mtpPropertyList.append(id, property.code, property.type, 0L);
+                    break;
+                case MtpConstants.PROPERTY_OBJECT_SIZE /* 56324 */:
+                    mtpPropertyList.append(id, property.code, property.type, mtpObject.getSize());
+                    break;
+                case MtpConstants.PROPERTY_OBJECT_FILE_NAME /* 56327 */:
+                case MtpConstants.PROPERTY_NAME /* 56388 */:
+                case MtpConstants.PROPERTY_DISPLAY_NAME /* 56544 */:
+                    mtpPropertyList.append(id, property.code, mtpObject.getName());
+                    break;
+                case MtpConstants.PROPERTY_DATE_MODIFIED /* 56329 */:
+                case MtpConstants.PROPERTY_DATE_ADDED /* 56398 */:
+                    mtpPropertyList.append(id, property.code, format_date_time(mtpObject.getModifiedTime()));
+                    break;
+                case MtpConstants.PROPERTY_PARENT_OBJECT /* 56331 */:
+                    int i2 = property.code;
+                    long id2 = 0;
+                    int i3 = property.type;
+                    if (!mtpObject.getParent().isRoot()) {
+                        id2 = mtpObject.getParent().getId();
+                    }
+                    mtpPropertyList.append(id, i2, i3, id2);
+                    break;
+                case MtpConstants.PROPERTY_HIDDEN /* 56333 */:
+                    mtpPropertyList.append(id, property.code, 4, mtpObject.getName().startsWith(MediaMetrics.SEPARATOR) ? 1L : 0L);
+                    break;
+                case MtpConstants.PROPERTY_PERSISTENT_UID /* 56385 */:
+                    mtpPropertyList.append(id, property.code, property.type, (mtpObject.getPath().toString().hashCode() << 32) + mtpObject.getModifiedTime());
+                    break;
+                case MtpConstants.PROPERTY_TRACK /* 56459 */:
+                    mtpPropertyList.append(id, property.code, 4, (cursor2 != null ? cursor2.getInt(property.column) : 0) % 1000);
+                    break;
+                case MtpConstants.PROPERTY_ORIGINAL_RELEASE_DATE /* 56473 */:
+                    mtpPropertyList.append(id, property.code, Integer.toString(cursor2 != null ? cursor2.getInt(property.column) : 0) + "0101T000000");
+                    break;
+                case MtpConstants.PROPERTY_BITRATE_TYPE /* 56978 */:
+                case MtpConstants.PROPERTY_NUMBER_OF_CHANNELS /* 56980 */:
+                    mtpPropertyList.append(id, property.code, 4, 0L);
+                    break;
+                case MtpConstants.PROPERTY_SAMPLE_RATE /* 56979 */:
+                case MtpConstants.PROPERTY_AUDIO_WAVE_CODEC /* 56985 */:
+                case MtpConstants.PROPERTY_AUDIO_BITRATE /* 56986 */:
+                    mtpPropertyList.append(id, property.code, 6, 0L);
+                    break;
+                default:
+                    long j = 0;
+                    int i4 = property.type;
+                    if (i4 == 0) {
+                        mtpPropertyList.append(id, property.code, property.type, 0L);
+                        break;
+                    } else if (i4 == 65535) {
+                        if (cursor2 == null) {
+                            string = "";
+                        } else {
+                            string = cursor2.getString(property.column);
+                        }
+                        mtpPropertyList.append(id, property.code, string);
+                        break;
+                    } else {
+                        if (cursor2 != null) {
+                            j = cursor2.getLong(property.column);
+                        }
+                        mtpPropertyList.append(id, property.code, property.type, j);
+                        break;
+                    }
+            }
+            i++;
+            cursorQuery = cursor2;
+        }
+        if (cursorQuery == null) {
+            return 8193;
+        }
+        cursorQuery.close();
+        return 8193;
     }
 }

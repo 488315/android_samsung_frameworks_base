@@ -61,9 +61,9 @@ public final class AccessibilityButtonController {
             if (arrayMap == null) {
                 return;
             }
-            int indexOfKey = arrayMap.indexOfKey(accessibilityButtonCallback);
-            if (indexOfKey >= 0) {
-                this.mCallbacks.removeAt(indexOfKey);
+            int iIndexOfKey = arrayMap.indexOfKey(accessibilityButtonCallback);
+            if (iIndexOfKey >= 0) {
+                this.mCallbacks.removeAt(iIndexOfKey);
             }
         }
     }
@@ -79,7 +79,7 @@ public final class AccessibilityButtonController {
                     ((Handler) arrayMap2.valueAt(i)).post(new Runnable() { // from class: android.accessibilityservice.AccessibilityButtonController$$ExternalSyntheticLambda0
                         @Override // java.lang.Runnable
                         public final void run() {
-                            AccessibilityButtonController.this.lambda$dispatchAccessibilityButtonClicked$0(accessibilityButtonCallback);
+                            this.f$0.lambda$dispatchAccessibilityButtonClicked$0(accessibilityButtonCallback);
                         }
                     });
                 }
@@ -105,7 +105,7 @@ public final class AccessibilityButtonController {
                     ((Handler) arrayMap2.valueAt(i)).post(new Runnable() { // from class: android.accessibilityservice.AccessibilityButtonController$$ExternalSyntheticLambda1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            AccessibilityButtonController.this.lambda$dispatchAccessibilityButtonAvailabilityChanged$1(accessibilityButtonCallback, z);
+                            this.f$0.lambda$dispatchAccessibilityButtonAvailabilityChanged$1(accessibilityButtonCallback, z);
                         }
                     });
                 }

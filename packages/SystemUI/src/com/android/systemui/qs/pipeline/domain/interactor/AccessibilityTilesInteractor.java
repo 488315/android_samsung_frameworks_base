@@ -10,7 +10,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class AccessibilityTilesInteractor {
     public final AccessibilityQsShortcutsRepository a11yQsShortcutsRepository;
@@ -18,7 +17,6 @@ public final class AccessibilityTilesInteractor {
     public final AtomicBoolean initialized = new AtomicBoolean(false);
     public final CoroutineScope scope;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Data {
         public final List currentTileSpecs;
         public final Context userContext;

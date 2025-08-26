@@ -5,13 +5,11 @@ import androidx.fragment.app.FragmentManager;
 import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class FragmentLifecycleCallbacksDispatcher {
     public final FragmentManager fragmentManager;
     public final CopyOnWriteArrayList lifecycleCallbacks = new CopyOnWriteArrayList();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class FragmentLifecycleCallbacksHolder {
         public final FragmentManager.FragmentLifecycleCallbacks callback;
         public final boolean recursive;

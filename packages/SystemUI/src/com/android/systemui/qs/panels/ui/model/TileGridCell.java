@@ -11,7 +11,6 @@ import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class TileGridCell implements GridCell, SizedTile, CategoryAndName {
     public final int column;
@@ -55,7 +54,7 @@ public final class TileGridCell implements GridCell, SizedTile, CategoryAndName 
 
     @Override // com.android.systemui.qs.panels.ui.model.GridCell
     /* renamed from: getSpan-hRN5aJ8 */
-    public final long mo2891getSpanhRN5aJ8() {
+    public final long mo2908getSpanhRN5aJ8() {
         return this.span;
     }
 
@@ -74,7 +73,7 @@ public final class TileGridCell implements GridCell, SizedTile, CategoryAndName 
     }
 
     public final String toString() {
-        String m158toStringimpl = GridItemSpan.m158toStringimpl(this.span);
+        String strM159toStringimpl = GridItemSpan.m159toStringimpl(this.span);
         StringBuilder sb = new StringBuilder("TileGridCell(tile=");
         sb.append(this.tile);
         sb.append(", row=");
@@ -82,7 +81,7 @@ public final class TileGridCell implements GridCell, SizedTile, CategoryAndName 
         sb.append(", width=");
         sb.append(this.width);
         sb.append(", span=");
-        sb.append(m158toStringimpl);
+        sb.append(strM159toStringimpl);
         sb.append(", column=");
         return ReorderTile$$ExternalSyntheticOutline0.m(this.column, ")", sb);
     }

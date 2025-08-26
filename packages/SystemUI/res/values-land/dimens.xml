@@ -104,7 +104,7 @@
     <dimen name="mtrl_calendar_text_input_padding_top">32.0dip</dimen>
     <dimen name="mtrl_calendar_title_baseline_to_top">24.0dip</dimen>
     <dimen name="mtrl_calendar_title_baseline_to_top_fullscreen">32.0dip</dimen>
-    <item type="dimen" name="navigation_bar_size">@android:dimen/rounded_corner_radius_bottom_adjustment</item>
+    <item type="dimen" name="navigation_bar_size">@android:dimen/password_keyboard_horizontalGap</item>
     <dimen name="notification_blocker_channel_list_height">128.0dip</dimen>
     <dimen name="num_pad_row_margin_bottom">3.0dip</dimen>
     <item type="dimen" name="ongoing_activity_card_width">0.6</item>
@@ -165,8 +165,10 @@
     <dimen name="sec_qqs_media_player_top_margin">10.0dip</dimen>
     <dimen name="sec_qs_buttons_container_margin_bottom">7.0dip</dimen>
     <dimen name="sec_qs_buttons_container_margin_top">7.0dip</dimen>
+    <dimen name="sec_qs_detail_header_bottom_margin_tablet">10.0dip</dimen>
     <dimen name="sec_qs_detail_header_height">38.0dip</dimen>
     <dimen name="sec_qs_detail_header_marginVertical">9.0dip</dimen>
+    <dimen name="sec_qs_detail_header_top_margin_tablet">20.0dip</dimen>
     <dimen name="sec_qs_detail_items_side_top_margin">0.0dip</dimen>
     <dimen name="sec_qs_media_player_action_button_collapsed_margin_size">14.0dip</dimen>
     <dimen name="sec_qs_panel_buttons_height">40.0dip</dimen>

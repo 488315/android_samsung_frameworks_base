@@ -45,9 +45,9 @@ public interface IKeyEventListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IKeyEventListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IKeyEventListener)) {
-                return (IKeyEventListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IKeyEventListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IKeyEventListener)) {
+                return (IKeyEventListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -100,13 +100,13 @@ public interface IKeyEventListener extends IInterface {
 
             @Override // com.samsung.android.multiwindow.IKeyEventListener
             public void sendShortcutKey(KeyEvent keyEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IKeyEventListener.DESCRIPTOR);
-                    obtain.writeTypedObject(keyEvent, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IKeyEventListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(keyEvent, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

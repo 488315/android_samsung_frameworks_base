@@ -103,9 +103,9 @@ public class Extensions extends ASN1Object {
     @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         ASN1EncodableVector aSN1EncodableVector = new ASN1EncodableVector(this.ordering.size());
-        Enumeration elements = this.ordering.elements();
-        while (elements.hasMoreElements()) {
-            aSN1EncodableVector.add((Extension) this.extensions.get((ASN1ObjectIdentifier) elements.nextElement()));
+        Enumeration enumerationElements = this.ordering.elements();
+        while (enumerationElements.hasMoreElements()) {
+            aSN1EncodableVector.add((Extension) this.extensions.get((ASN1ObjectIdentifier) enumerationElements.nextElement()));
         }
         return new DERSequence(aSN1EncodableVector);
     }
@@ -114,10 +114,10 @@ public class Extensions extends ASN1Object {
         if (this.extensions.size() != extensions.extensions.size()) {
             return false;
         }
-        Enumeration keys = this.extensions.keys();
-        while (keys.hasMoreElements()) {
-            Object nextElement = keys.nextElement();
-            if (!this.extensions.get(nextElement).equals(extensions.extensions.get(nextElement))) {
+        Enumeration enumerationKeys = this.extensions.keys();
+        while (enumerationKeys.hasMoreElements()) {
+            Object objNextElement = enumerationKeys.nextElement();
+            if (!this.extensions.get(objNextElement).equals(extensions.extensions.get(objNextElement))) {
                 return false;
             }
         }
@@ -139,9 +139,9 @@ public class Extensions extends ASN1Object {
     private ASN1ObjectIdentifier[] getExtensionOIDs(boolean z) {
         Vector vector = new Vector();
         for (int i = 0; i != this.ordering.size(); i++) {
-            Object elementAt = this.ordering.elementAt(i);
-            if (((Extension) this.extensions.get(elementAt)).isCritical() == z) {
-                vector.addElement(elementAt);
+            Object objElementAt = this.ordering.elementAt(i);
+            if (((Extension) this.extensions.get(objElementAt)).isCritical() == z) {
+                vector.addElement(objElementAt);
             }
         }
         return toOidArray(vector);

@@ -51,9 +51,9 @@ public interface IGalaxyRegistryService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IGalaxyRegistryService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IGalaxyRegistryService)) {
-                return (IGalaxyRegistryService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IGalaxyRegistryService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IGalaxyRegistryService)) {
+                return (IGalaxyRegistryService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -83,15 +83,15 @@ public interface IGalaxyRegistryService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
-                IBinder readStrongBinder = parcel.readStrongBinder();
+                String string = parcel.readString();
+                IBinder strongBinder = parcel.readStrongBinder();
                 parcel.enforceNoDataAvail();
-                registerListener(readString, readStrongBinder);
+                registerListener(string, strongBinder);
             } else if (i == 2) {
-                String readString2 = parcel.readString();
-                IBinder readStrongBinder2 = parcel.readStrongBinder();
+                String string2 = parcel.readString();
+                IBinder strongBinder2 = parcel.readStrongBinder();
                 parcel.enforceNoDataAvail();
-                unRegisterListener(readString2, readStrongBinder2);
+                unRegisterListener(string2, strongBinder2);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -116,27 +116,27 @@ public interface IGalaxyRegistryService extends IInterface {
 
             @Override // com.samsung.android.sepunion.IGalaxyRegistryService
             public void registerListener(String str, IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IGalaxyRegistryService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IGalaxyRegistryService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.sepunion.IGalaxyRegistryService
             public void unRegisterListener(String str, IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IGalaxyRegistryService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IGalaxyRegistryService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

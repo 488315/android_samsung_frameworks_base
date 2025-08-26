@@ -131,9 +131,9 @@ public interface IRingtonePlayer extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IRingtonePlayer)) {
-                return (IRingtonePlayer) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IRingtonePlayer)) {
+                return (IRingtonePlayer) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -185,52 +185,52 @@ public interface IRingtonePlayer extends IInterface {
             }
             switch (i) {
                 case 1:
-                    IBinder readStrongBinder = parcel.readStrongBinder();
+                    IBinder strongBinder = parcel.readStrongBinder();
                     Uri uri = (Uri) parcel.readTypedObject(Uri.CREATOR);
                     AudioAttributes audioAttributes = (AudioAttributes) parcel.readTypedObject(AudioAttributes.CREATOR);
-                    float readFloat = parcel.readFloat();
-                    boolean readBoolean = parcel.readBoolean();
+                    float f = parcel.readFloat();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    play(readStrongBinder, uri, audioAttributes, readFloat, readBoolean);
+                    play(strongBinder, uri, audioAttributes, f, z);
                     return true;
                 case 2:
-                    IBinder readStrongBinder2 = parcel.readStrongBinder();
+                    IBinder strongBinder2 = parcel.readStrongBinder();
                     Uri uri2 = (Uri) parcel.readTypedObject(Uri.CREATOR);
                     AudioAttributes audioAttributes2 = (AudioAttributes) parcel.readTypedObject(AudioAttributes.CREATOR);
-                    float readFloat2 = parcel.readFloat();
-                    boolean readBoolean2 = parcel.readBoolean();
+                    float f2 = parcel.readFloat();
+                    boolean z2 = parcel.readBoolean();
                     VolumeShaper.Configuration configuration = (VolumeShaper.Configuration) parcel.readTypedObject(VolumeShaper.Configuration.CREATOR);
                     parcel.enforceNoDataAvail();
-                    playWithVolumeShaping(readStrongBinder2, uri2, audioAttributes2, readFloat2, readBoolean2, configuration);
+                    playWithVolumeShaping(strongBinder2, uri2, audioAttributes2, f2, z2, configuration);
                     return true;
                 case 3:
-                    IBinder readStrongBinder3 = parcel.readStrongBinder();
+                    IBinder strongBinder3 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    stop(readStrongBinder3);
+                    stop(strongBinder3);
                     return true;
                 case 4:
-                    IBinder readStrongBinder4 = parcel.readStrongBinder();
+                    IBinder strongBinder4 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    boolean isPlaying = isPlaying(readStrongBinder4);
+                    boolean zIsPlaying = isPlaying(strongBinder4);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isPlaying);
+                    parcel2.writeBoolean(zIsPlaying);
                     return true;
                 case 5:
-                    IBinder readStrongBinder5 = parcel.readStrongBinder();
-                    float readFloat3 = parcel.readFloat();
-                    boolean readBoolean3 = parcel.readBoolean();
-                    boolean readBoolean4 = parcel.readBoolean();
+                    IBinder strongBinder5 = parcel.readStrongBinder();
+                    float f3 = parcel.readFloat();
+                    boolean z3 = parcel.readBoolean();
+                    boolean z4 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setPlaybackProperties(readStrongBinder5, readFloat3, readBoolean3, readBoolean4);
+                    setPlaybackProperties(strongBinder5, f3, z3, z4);
                     return true;
                 case 6:
                     Uri uri3 = (Uri) parcel.readTypedObject(Uri.CREATOR);
                     UserHandle userHandle = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
-                    boolean readBoolean5 = parcel.readBoolean();
+                    boolean z5 = parcel.readBoolean();
                     AudioAttributes audioAttributes3 = (AudioAttributes) parcel.readTypedObject(AudioAttributes.CREATOR);
-                    float readFloat4 = parcel.readFloat();
+                    float f4 = parcel.readFloat();
                     parcel.enforceNoDataAvail();
-                    playAsync(uri3, userHandle, readBoolean5, audioAttributes3, readFloat4);
+                    playAsync(uri3, userHandle, z5, audioAttributes3, f4);
                     return true;
                 case 7:
                     stopAsync();
@@ -245,26 +245,26 @@ public interface IRingtonePlayer extends IInterface {
                 case 9:
                     Uri uri5 = (Uri) parcel.readTypedObject(Uri.CREATOR);
                     parcel.enforceNoDataAvail();
-                    ParcelFileDescriptor openRingtone = openRingtone(uri5);
+                    ParcelFileDescriptor parcelFileDescriptorOpenRingtone = openRingtone(uri5);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(openRingtone, 1);
+                    parcel2.writeTypedObject(parcelFileDescriptorOpenRingtone, 1);
                     return true;
                 case 10:
-                    IBinder readStrongBinder6 = parcel.readStrongBinder();
+                    IBinder strongBinder6 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    fadeinRingtone(readStrongBinder6);
+                    fadeinRingtone(strongBinder6);
                     return true;
                 case 11:
-                    IBinder readStrongBinder7 = parcel.readStrongBinder();
-                    int readInt = parcel.readInt();
-                    float readFloat5 = parcel.readFloat();
+                    IBinder strongBinder7 = parcel.readStrongBinder();
+                    int i3 = parcel.readInt();
+                    float f5 = parcel.readFloat();
                     parcel.enforceNoDataAvail();
-                    fadeoutRingtone(readStrongBinder7, readInt, readFloat5);
+                    fadeoutRingtone(strongBinder7, i3, f5);
                     return true;
                 case 12:
-                    INotificationPlayerOnCompletionListener asInterface = INotificationPlayerOnCompletionListener.Stub.asInterface(parcel.readStrongBinder());
+                    INotificationPlayerOnCompletionListener iNotificationPlayerOnCompletionListenerAsInterface = INotificationPlayerOnCompletionListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    IBinder onCompletionListener = setOnCompletionListener(asInterface);
+                    IBinder onCompletionListener = setOnCompletionListener(iNotificationPlayerOnCompletionListenerAsInterface);
                     parcel2.writeNoException();
                     parcel2.writeStrongBinder(onCompletionListener);
                     return true;
@@ -291,178 +291,178 @@ public interface IRingtonePlayer extends IInterface {
 
             @Override // android.media.IRingtonePlayer
             public void play(IBinder iBinder, Uri uri, AudioAttributes audioAttributes, float f, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(uri, 0);
-                    obtain.writeTypedObject(audioAttributes, 0);
-                    obtain.writeFloat(f);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(uri, 0);
+                    parcelObtain.writeTypedObject(audioAttributes, 0);
+                    parcelObtain.writeFloat(f);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IRingtonePlayer
             public void playWithVolumeShaping(IBinder iBinder, Uri uri, AudioAttributes audioAttributes, float f, boolean z, VolumeShaper.Configuration configuration) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(uri, 0);
-                    obtain.writeTypedObject(audioAttributes, 0);
-                    obtain.writeFloat(f);
-                    obtain.writeBoolean(z);
-                    obtain.writeTypedObject(configuration, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(uri, 0);
+                    parcelObtain.writeTypedObject(audioAttributes, 0);
+                    parcelObtain.writeFloat(f);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeTypedObject(configuration, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IRingtonePlayer
             public void stop(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IRingtonePlayer
             public boolean isPlaying(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IRingtonePlayer
             public void setPlaybackProperties(IBinder iBinder, float f, boolean z, boolean z2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeFloat(f);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeFloat(f);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IRingtonePlayer
             public void playAsync(Uri uri, UserHandle userHandle, boolean z, AudioAttributes audioAttributes, float f) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(uri, 0);
-                    obtain.writeTypedObject(userHandle, 0);
-                    obtain.writeBoolean(z);
-                    obtain.writeTypedObject(audioAttributes, 0);
-                    obtain.writeFloat(f);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(uri, 0);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeTypedObject(audioAttributes, 0);
+                    parcelObtain.writeFloat(f);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IRingtonePlayer
             public void stopAsync() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IRingtonePlayer
             public String getTitle(Uri uri) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(uri, 0);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(uri, 0);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IRingtonePlayer
             public ParcelFileDescriptor openRingtone(Uri uri) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(uri, 0);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ParcelFileDescriptor) obtain2.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(uri, 0);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ParcelFileDescriptor) parcelObtain2.readTypedObject(ParcelFileDescriptor.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IRingtonePlayer
             public void fadeinRingtone(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(10, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(10, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IRingtonePlayer
             public void fadeoutRingtone(IBinder iBinder, int i, float f) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    obtain.writeFloat(f);
-                    this.mRemote.transact(11, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeFloat(f);
+                    this.mRemote.transact(11, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IRingtonePlayer
             public IBinder setOnCompletionListener(INotificationPlayerOnCompletionListener iNotificationPlayerOnCompletionListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iNotificationPlayerOnCompletionListener);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readStrongBinder();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iNotificationPlayerOnCompletionListener);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readStrongBinder();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

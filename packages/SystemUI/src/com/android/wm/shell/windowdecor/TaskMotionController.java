@@ -1,6 +1,7 @@
 package com.android.wm.shell.windowdecor;
 
 import android.app.ActivityManager;
+import android.content.ComponentName;
 import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
 import android.graphics.PointF;
@@ -10,18 +11,24 @@ import android.util.ArrayMap;
 import android.util.Slog;
 import android.util.TypedValue;
 import android.view.SurfaceControl;
+import android.view.View;
 import android.window.WindowContainerTransaction;
+import com.android.systemui.util.SystemUIAnalytics;
 import com.android.wm.shell.ShellTaskOrganizer;
+import com.android.wm.shell.animation.FloatProperties;
 import com.android.wm.shell.common.DisplayController;
 import com.android.wm.shell.common.DisplayLayout;
 import com.android.wm.shell.common.ShellExecutor;
 import com.android.wm.shell.shared.animation.PhysicsAnimator;
+import com.android.wm.shell.shared.desktopmode.DesktopStateImpl;
 import com.android.wm.shell.windowdecor.TaskMotionAnimator;
+import com.android.wm.shell.windowdecor.TaskMotionController;
+import com.samsung.android.core.CoreSaLogger;
+import com.samsung.android.multiwindow.MultiWindowManager;
 import com.samsung.android.multiwindow.MultiWindowUtils;
 import com.samsung.android.rune.CoreRune;
 import com.samsung.android.view.SemWindowManager;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class TaskMotionController {
     public final ShellExecutor mAnimExecutor;
@@ -53,7 +60,6 @@ public class TaskMotionController {
     public final Rect mTargetBounds = new Rect();
     public boolean mCanceled = false;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class TaskMotionInfo {
         public final Rect mDisplayBounds;
         public final Rect mMaxBounds;
@@ -76,11 +82,11 @@ public class TaskMotionController {
             rect5.set(rect);
             rect4.set(rect2);
             Rect bounds = runningTaskInfo.configuration.windowConfiguration.getBounds();
-            int width = bounds.width();
-            int height = bounds.height();
+            int iWidth = bounds.width();
+            int iHeight = bounds.height();
             int i = rect4.left;
             int i2 = taskMotionController.mMinVisibleWidth;
-            rect3.set((i + i2) - width, rect4.top, (rect4.right - i2) + width, (rect4.bottom - i2) + height);
+            rect3.set((i + i2) - iWidth, rect4.top, (rect4.right - i2) + iWidth, (rect4.bottom - i2) + iHeight);
             rect6.set(rect4);
             int i3 = rect6.left;
             int i4 = taskMotionController.mScreenEdgeInset;
@@ -154,37 +160,296 @@ public class TaskMotionController {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:43:0x0049, code lost:
-    
-        if (r9 != 2) goto L40;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x0064 A[Catch: all -> 0x0066, DONT_GENERATE, TryCatch #0 {all -> 0x0066, blocks: (B:8:0x0004, B:11:0x000c, B:15:0x001f, B:17:0x0026, B:19:0x002a, B:24:0x0064, B:26:0x0033, B:28:0x003b, B:31:0x0042, B:35:0x004b, B:37:0x0052, B:41:0x0058, B:44:0x0069, B:46:0x007c, B:48:0x007e, B:50:0x0086, B:52:0x008c, B:54:0x0092, B:56:0x0094, B:58:0x009e, B:59:0x00a4, B:61:0x00bf, B:63:0x00cd, B:68:0x00c9, B:70:0x00cf, B:74:0x0016, B:77:0x00d1, B:4:0x00d3), top: B:7:0x0004 }] */
+    /* JADX WARN: Removed duplicated region for block: B:42:0x0064 A[Catch: all -> 0x0066, DONT_GENERATE, TryCatch #0 {all -> 0x0066, blocks: (B:5:0x0004, B:8:0x000c, B:15:0x001f, B:17:0x0026, B:19:0x002a, B:42:0x0064, B:22:0x0033, B:24:0x003b, B:27:0x0042, B:32:0x004b, B:34:0x0052, B:37:0x0058, B:46:0x0069, B:48:0x007c, B:50:0x007e, B:52:0x0086, B:54:0x008c, B:56:0x0092, B:58:0x0094, B:60:0x009e, B:62:0x00a4, B:64:0x00bf, B:72:0x00cd, B:70:0x00c9, B:74:0x00cf, B:11:0x0016, B:76:0x00d1, B:78:0x00d3), top: B:82:0x0004 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final int computeStashState(android.graphics.Rect r7, android.graphics.Rect r8, boolean r9) {
-        /*
-            Method dump skipped, instructions count: 215
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.windowdecor.TaskMotionController.computeStashState(android.graphics.Rect, android.graphics.Rect, boolean):int");
+    public final int computeStashState(Rect rect, Rect rect2, boolean z) {
+        int i;
+        int i2;
+        boolean z2;
+        synchronized (this) {
+            if (rect2 != null) {
+                try {
+                    if (!rect2.isEmpty()) {
+                        boolean z3 = true;
+                        if (rect2.left <= rect.left) {
+                            i = 1;
+                        } else {
+                            if (rect2.right < rect.right) {
+                                return 0;
+                            }
+                            i = 2;
+                        }
+                        if (z) {
+                            FreeformStashState freeformStashState = this.mFreeformStashState;
+                            if (freeformStashState.mAnimType == -1 || !freeformStashState.mAnimating || freeformStashState.mScale == 1.0f) {
+                                DesktopModeWindowDecoration desktopModeWindowDecoration = this.mWindowDecoration;
+                                if ((!desktopModeWindowDecoration.isDecorHandleState() || desktopModeWindowDecoration.getHandleRootView() != null) && i == (i2 = freeformStashState.mStashType) && (i2 == 1 || i2 == 2)) {
+                                    int i3 = this.mMinVisibleWidth + this.mStashMoveThreshold;
+                                    if ((i2 == 1 && rect2.right > i3) || (i2 == 2 && rect2.left < rect.right - i3)) {
+                                        z2 = true;
+                                    }
+                                    if (z2) {
+                                        return 0;
+                                    }
+                                }
+                            }
+                            z2 = false;
+                            if (z2) {
+                            }
+                        }
+                        Rect rect3 = this.mTmpRect;
+                        rect3.set(rect2);
+                        rect3.intersect(rect);
+                        if (rect3.width() <= rect2.width() / 2) {
+                            return i;
+                        }
+                        DesktopModeWindowDecoration desktopModeWindowDecoration2 = this.mWindowDecoration;
+                        if (desktopModeWindowDecoration2.getHandleRootView() == null && desktopModeWindowDecoration2.isDecorHandleState() && desktopModeWindowDecoration2.mTaskInfo.isVisible) {
+                            return 0;
+                        }
+                        DesktopModeWindowDecoration desktopModeWindowDecoration3 = this.mWindowDecoration;
+                        int i4 = DesktopModeWindowDecoration.asMultiTaskingAppHandle(desktopModeWindowDecoration3.mWindowDecorViewHolder) != null ? desktopModeWindowDecoration3.mResult.mCaptionWidth : 0;
+                        this.mTmpRect.set(rect2);
+                        this.mTmpRect.left = ((rect2.width() - i4) / 2) + rect2.left;
+                        Rect rect4 = this.mTmpRect;
+                        int i5 = rect4.left;
+                        int i6 = i4 + i5;
+                        rect4.right = i6;
+                        if (i != 1 || i5 < rect.left) {
+                            if (i != 2) {
+                                z3 = false;
+                            }
+                            if (!z3 || i6 > rect.right) {
+                                return i;
+                            }
+                        }
+                        return 0;
+                    }
+                } finally {
+                }
+            }
+            return 0;
+        }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:105:0x01b2  */
-    /* JADX WARN: Removed duplicated region for block: B:108:0x01bf  */
-    /* JADX WARN: Removed duplicated region for block: B:128:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:129:0x01b7  */
+    /* JADX WARN: Removed duplicated region for block: B:113:0x019c  */
+    /* JADX WARN: Removed duplicated region for block: B:26:0x006f  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void handleFreeformMotion(final android.graphics.Rect r18, android.graphics.Rect r19, android.graphics.PointF r20, android.graphics.Rect r21, float r22, float r23) {
-        /*
-            Method dump skipped, instructions count: 570
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.windowdecor.TaskMotionController.handleFreeformMotion(android.graphics.Rect, android.graphics.Rect, android.graphics.PointF, android.graphics.Rect, float, float):void");
+    public final void handleFreeformMotion(final Rect rect, Rect rect2, PointF pointF, Rect rect3, Boolean bool, float f, float f2, boolean z) {
+        Rect rect4;
+        boolean z2;
+        int iWidth;
+        int iWidth2;
+        TaskMotionInfo taskMotionInfo = this.mTaskMotionInfo;
+        ShellTaskOrganizer shellTaskOrganizer = this.mTaskOrganizer;
+        FreeformStashState freeformStashState = this.mFreeformStashState;
+        DesktopModeWindowDecoration desktopModeWindowDecoration = this.mWindowDecoration;
+        boolean z3 = true;
+        if (taskMotionInfo != null) {
+            int i = desktopModeWindowDecoration.mTaskInfo.displayId;
+            DesktopStateImpl.Companion.getClass();
+            if (!DesktopStateImpl.Companion.inDesktopWindowing(i)) {
+                float f3 = this.mFreeformCaptionTouchState.mVelocity.x;
+                boolean z4 = f3 < -12000.0f;
+                boolean z5 = f3 > 12000.0f;
+                boolean zIsStashed = freeformStashState.isStashed();
+                if (zIsStashed) {
+                    iWidth2 = this.mMinVisibleWidth + this.mStashMoveThreshold;
+                } else {
+                    int freeformCaptionType = shellTaskOrganizer.getFreeformCaptionType(desktopModeWindowDecoration.mTaskInfo);
+                    if (freeformCaptionType == 0) {
+                        View handleRootView = desktopModeWindowDecoration.getHandleRootView();
+                        iWidth2 = handleRootView != null ? (rect.width() - handleRootView.getWidth()) / 2 : 0;
+                    } else if (freeformCaptionType == 1) {
+                        iWidth2 = rect.width() / 2;
+                    }
+                }
+                boolean z6 = !zIsStashed ? rect.left >= this.mTaskMotionInfo.mDisplayBounds.left - iWidth2 : rect.right >= this.mTaskMotionInfo.mDisplayBounds.left + iWidth2;
+                boolean z7 = !zIsStashed ? rect.right <= this.mTaskMotionInfo.mDisplayBounds.right + iWidth2 : rect.left <= this.mTaskMotionInfo.mDisplayBounds.right - iWidth2;
+                int i2 = freeformStashState.mStashType;
+                boolean z8 = (z4 && i2 != 2) || (z5 && i2 != 1);
+                boolean z9 = z6 || z7;
+                if (z8 || z9) {
+                    this.mAllowTouches = false;
+                    freeformStashState.mLastFreeformBoundsBeforeStash.set(rect2);
+                    setStashDim(null, true);
+                    final int i3 = 0;
+                    moveToTarget(rect, new Runnable(this) { // from class: com.android.wm.shell.windowdecor.TaskMotionController$$ExternalSyntheticLambda4
+                        public final /* synthetic */ TaskMotionController f$0;
+
+                        {
+                            this.f$0 = this;
+                        }
+
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            switch (i3) {
+                                case 0:
+                                    TaskMotionController taskMotionController = this.f$0;
+                                    Rect rect5 = rect;
+                                    Rect rect6 = taskMotionController.mTmpRect2;
+                                    DesktopModeWindowDecoration desktopModeWindowDecoration2 = taskMotionController.mWindowDecoration;
+                                    DisplayLayout displayLayout = taskMotionController.mDisplayController.getDisplayLayout(desktopModeWindowDecoration2.mDisplay.getDisplayId());
+                                    if (displayLayout != null) {
+                                        displayLayout.getStableBounds(rect6, false);
+                                        taskMotionController.mFreeformStashState.mFreeformStashYFraction = rect5.top / rect6.height();
+                                    }
+                                    WindowContainerTransaction windowContainerTransaction = new WindowContainerTransaction();
+                                    windowContainerTransaction.setChangeFreeformStashMode(desktopModeWindowDecoration2.mTaskInfo.token, 2);
+                                    windowContainerTransaction.setChangeFreeformStashScale(desktopModeWindowDecoration2.mTaskInfo.token, taskMotionController.mScaledFreeformHeight / rect5.height());
+                                    windowContainerTransaction.setBounds(desktopModeWindowDecoration2.mTaskInfo.token, rect5);
+                                    taskMotionController.mTaskOrganizer.applyTransaction(windowContainerTransaction);
+                                    break;
+                                default:
+                                    TaskMotionController taskMotionController2 = this.f$0;
+                                    Rect rect7 = rect;
+                                    DesktopModeWindowDecoration desktopModeWindowDecoration3 = taskMotionController2.mWindowDecoration;
+                                    int i4 = desktopModeWindowDecoration3.mTaskInfo.displayId;
+                                    ShellTaskOrganizer shellTaskOrganizer2 = taskMotionController2.mTaskOrganizer;
+                                    boolean zIsTargetTaskImeShowing = shellTaskOrganizer2.isTargetTaskImeShowing(i4);
+                                    if (taskMotionController2.mFlingCanceled && !zIsTargetTaskImeShowing) {
+                                        taskMotionController2.mFlingCanceled = false;
+                                    }
+                                    if (!taskMotionController2.mFlingCanceled) {
+                                        WindowContainerTransaction windowContainerTransaction2 = new WindowContainerTransaction();
+                                        windowContainerTransaction2.setBounds(desktopModeWindowDecoration3.mTaskInfo.token, rect7);
+                                        shellTaskOrganizer2.applyTransaction(windowContainerTransaction2);
+                                    }
+                                    taskMotionController2.mFlingCanceled = false;
+                                    MultiWindowManager.getInstance().saveFreeformBounds(desktopModeWindowDecoration3.mTaskInfo.taskId);
+                                    break;
+                            }
+                        }
+                    }, true);
+                    return;
+                }
+            }
+        }
+        if (z) {
+            FreeformCaptionTouchState freeformCaptionTouchState = this.mFreeformCaptionTouchState;
+            if (this.mTaskMotionInfo != null) {
+                PointF pointF2 = new PointF(freeformCaptionTouchState.mVelocity);
+                float f4 = pointF2.x;
+                if (f4 != 0.0f || pointF2.y != 0.0f) {
+                    float fAbs = Math.abs(f4);
+                    float f5 = freeformCaptionTouchState.mMinimumFlingVelocity;
+                    if (fAbs > f5 || Math.abs(pointF2.y) > f5) {
+                        float f6 = pointF2.x;
+                        boolean z10 = f6 < 0.0f;
+                        if ((!z10 || rect2.left >= this.mTaskMotionInfo.mStableBounds.left) && ((z10 || rect2.right <= this.mTaskMotionInfo.mStableBounds.right) && ((Math.abs(f6) >= 700.0f || ((!z10 || rect.left >= this.mTaskMotionInfo.mStableBounds.left - 30) && (z10 || rect.right <= this.mTaskMotionInfo.mStableBounds.right + 30))) && (pointF2.y <= 0.0f || !shellTaskOrganizer.isTargetTaskImeShowing(desktopModeWindowDecoration.mTaskInfo.displayId))))) {
+                            this.mAllowTouches = false;
+                            setStashDim(null, false);
+                            final int i4 = 1;
+                            moveToTarget(rect, new Runnable(this) { // from class: com.android.wm.shell.windowdecor.TaskMotionController$$ExternalSyntheticLambda4
+                                public final /* synthetic */ TaskMotionController f$0;
+
+                                {
+                                    this.f$0 = this;
+                                }
+
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    switch (i4) {
+                                        case 0:
+                                            TaskMotionController taskMotionController = this.f$0;
+                                            Rect rect5 = rect;
+                                            Rect rect6 = taskMotionController.mTmpRect2;
+                                            DesktopModeWindowDecoration desktopModeWindowDecoration2 = taskMotionController.mWindowDecoration;
+                                            DisplayLayout displayLayout = taskMotionController.mDisplayController.getDisplayLayout(desktopModeWindowDecoration2.mDisplay.getDisplayId());
+                                            if (displayLayout != null) {
+                                                displayLayout.getStableBounds(rect6, false);
+                                                taskMotionController.mFreeformStashState.mFreeformStashYFraction = rect5.top / rect6.height();
+                                            }
+                                            WindowContainerTransaction windowContainerTransaction = new WindowContainerTransaction();
+                                            windowContainerTransaction.setChangeFreeformStashMode(desktopModeWindowDecoration2.mTaskInfo.token, 2);
+                                            windowContainerTransaction.setChangeFreeformStashScale(desktopModeWindowDecoration2.mTaskInfo.token, taskMotionController.mScaledFreeformHeight / rect5.height());
+                                            windowContainerTransaction.setBounds(desktopModeWindowDecoration2.mTaskInfo.token, rect5);
+                                            taskMotionController.mTaskOrganizer.applyTransaction(windowContainerTransaction);
+                                            break;
+                                        default:
+                                            TaskMotionController taskMotionController2 = this.f$0;
+                                            Rect rect7 = rect;
+                                            DesktopModeWindowDecoration desktopModeWindowDecoration3 = taskMotionController2.mWindowDecoration;
+                                            int i42 = desktopModeWindowDecoration3.mTaskInfo.displayId;
+                                            ShellTaskOrganizer shellTaskOrganizer2 = taskMotionController2.mTaskOrganizer;
+                                            boolean zIsTargetTaskImeShowing = shellTaskOrganizer2.isTargetTaskImeShowing(i42);
+                                            if (taskMotionController2.mFlingCanceled && !zIsTargetTaskImeShowing) {
+                                                taskMotionController2.mFlingCanceled = false;
+                                            }
+                                            if (!taskMotionController2.mFlingCanceled) {
+                                                WindowContainerTransaction windowContainerTransaction2 = new WindowContainerTransaction();
+                                                windowContainerTransaction2.setBounds(desktopModeWindowDecoration3.mTaskInfo.token, rect7);
+                                                shellTaskOrganizer2.applyTransaction(windowContainerTransaction2);
+                                            }
+                                            taskMotionController2.mFlingCanceled = false;
+                                            MultiWindowManager.getInstance().saveFreeformBounds(desktopModeWindowDecoration3.mTaskInfo.taskId);
+                                            break;
+                                    }
+                                }
+                            }, false);
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+        View handleRootView2 = desktopModeWindowDecoration.getHandleRootView();
+        if (this.mTaskMotionInfo == null || (desktopModeWindowDecoration.isDecorHandleState() && handleRootView2 == null)) {
+            rect4 = rect;
+        } else {
+            int iWidth3 = (rect.width() - (DesktopModeWindowDecoration.asMultiTaskingAppHandle(desktopModeWindowDecoration.mWindowDecorViewHolder) != null ? desktopModeWindowDecoration.mResult.mCaptionWidth : 0)) / 2;
+            int i5 = rect.left;
+            int i6 = i5 + iWidth3;
+            Rect rect5 = this.mTaskMotionInfo.mDisplayBounds;
+            int i7 = rect5.left;
+            if (i6 < i7 || rect.right - iWidth3 > rect5.right) {
+                if (i7 - i5 > iWidth3) {
+                    iWidth = i7 - iWidth3;
+                } else {
+                    int i8 = rect.right;
+                    int i9 = rect5.right;
+                    iWidth = i8 - i9 > iWidth3 ? (i9 - rect.width()) + iWidth3 : 0;
+                }
+                rect4 = new Rect(iWidth, rect.top, rect.width() + iWidth, rect.bottom);
+            }
+        }
+        if (rect4 != rect) {
+            scheduleAnimateRestore(rect, rect4, true);
+            z2 = true;
+        } else {
+            z2 = false;
+        }
+        WindowContainerTransaction windowContainerTransaction = new WindowContainerTransaction();
+        if (z2) {
+            return;
+        }
+        if (freeformStashState.isStashed()) {
+            synchronized (this) {
+                try {
+                    TaskMotionInfo taskMotionInfo2 = this.mTaskMotionInfo;
+                    if (taskMotionInfo2 == null || !taskMotionInfo2.isAnimating(2)) {
+                        z3 = false;
+                    }
+                } catch (Throwable th) {
+                    throw th;
+                }
+            }
+            if (!z3) {
+                SurfaceControl.Transaction transaction = new SurfaceControl.Transaction();
+                transaction.setMatrix(desktopModeWindowDecoration.mTaskSurface, 1.0f, 0.0f, 0.0f, 1.0f);
+                transaction.apply();
+                freeformStashState.setStashed(0);
+                setStashDim(windowContainerTransaction, false);
+                windowContainerTransaction.setChangeFreeformStashScale(desktopModeWindowDecoration.mTaskInfo.token, 1.0f);
+                windowContainerTransaction.setBounds(desktopModeWindowDecoration.mTaskInfo.token, rect);
+                shellTaskOrganizer.applyTransaction(windowContainerTransaction);
+            }
+        }
+        DragPositioningCallbackUtility.updateTaskBounds(rect3, bool, rect, rect2, desktopModeWindowDecoration.getOutlineCaptionHeight(), pointF, f, f2);
     }
 
     public final boolean isBoundsAnimating() {
@@ -192,30 +457,141 @@ public class TaskMotionController {
         return physicsAnimator != null && physicsAnimator.isRunning();
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:53:0x008b, code lost:
-    
-        if (r5 < (-7000.0f)) goto L39;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x004c A[Catch: all -> 0x000b, TryCatch #0 {all -> 0x000b, blocks: (B:4:0x0005, B:6:0x0009, B:9:0x000e, B:11:0x0033, B:13:0x003e, B:17:0x004c, B:19:0x0057, B:22:0x0063, B:26:0x006e, B:33:0x0084, B:34:0x00a3, B:36:0x00c5, B:37:0x00ca, B:39:0x00f3, B:41:0x0103, B:43:0x010e, B:44:0x0115, B:46:0x0124, B:47:0x013d, B:48:0x0142, B:51:0x00c8, B:60:0x0099), top: B:3:0x0005 }] */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x006a  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x007a  */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x00c5 A[Catch: all -> 0x000b, TryCatch #0 {all -> 0x000b, blocks: (B:4:0x0005, B:6:0x0009, B:9:0x000e, B:11:0x0033, B:13:0x003e, B:17:0x004c, B:19:0x0057, B:22:0x0063, B:26:0x006e, B:33:0x0084, B:34:0x00a3, B:36:0x00c5, B:37:0x00ca, B:39:0x00f3, B:41:0x0103, B:43:0x010e, B:44:0x0115, B:46:0x0124, B:47:0x013d, B:48:0x0142, B:51:0x00c8, B:60:0x0099), top: B:3:0x0005 }] */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x00f3 A[Catch: all -> 0x000b, TryCatch #0 {all -> 0x000b, blocks: (B:4:0x0005, B:6:0x0009, B:9:0x000e, B:11:0x0033, B:13:0x003e, B:17:0x004c, B:19:0x0057, B:22:0x0063, B:26:0x006e, B:33:0x0084, B:34:0x00a3, B:36:0x00c5, B:37:0x00ca, B:39:0x00f3, B:41:0x0103, B:43:0x010e, B:44:0x0115, B:46:0x0124, B:47:0x013d, B:48:0x0142, B:51:0x00c8, B:60:0x0099), top: B:3:0x0005 }] */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x010e A[Catch: all -> 0x000b, TryCatch #0 {all -> 0x000b, blocks: (B:4:0x0005, B:6:0x0009, B:9:0x000e, B:11:0x0033, B:13:0x003e, B:17:0x004c, B:19:0x0057, B:22:0x0063, B:26:0x006e, B:33:0x0084, B:34:0x00a3, B:36:0x00c5, B:37:0x00ca, B:39:0x00f3, B:41:0x0103, B:43:0x010e, B:44:0x0115, B:46:0x0124, B:47:0x013d, B:48:0x0142, B:51:0x00c8, B:60:0x0099), top: B:3:0x0005 }] */
-    /* JADX WARN: Removed duplicated region for block: B:46:0x0124 A[Catch: all -> 0x000b, TryCatch #0 {all -> 0x000b, blocks: (B:4:0x0005, B:6:0x0009, B:9:0x000e, B:11:0x0033, B:13:0x003e, B:17:0x004c, B:19:0x0057, B:22:0x0063, B:26:0x006e, B:33:0x0084, B:34:0x00a3, B:36:0x00c5, B:37:0x00ca, B:39:0x00f3, B:41:0x0103, B:43:0x010e, B:44:0x0115, B:46:0x0124, B:47:0x013d, B:48:0x0142, B:51:0x00c8, B:60:0x0099), top: B:3:0x0005 }] */
-    /* JADX WARN: Removed duplicated region for block: B:51:0x00c8 A[Catch: all -> 0x000b, TryCatch #0 {all -> 0x000b, blocks: (B:4:0x0005, B:6:0x0009, B:9:0x000e, B:11:0x0033, B:13:0x003e, B:17:0x004c, B:19:0x0057, B:22:0x0063, B:26:0x006e, B:33:0x0084, B:34:0x00a3, B:36:0x00c5, B:37:0x00ca, B:39:0x00f3, B:41:0x0103, B:43:0x010e, B:44:0x0115, B:46:0x0124, B:47:0x013d, B:48:0x0142, B:51:0x00c8, B:60:0x0099), top: B:3:0x0005 }] */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x008f  */
-    /* JADX WARN: Type inference failed for: r2v9, types: [com.android.wm.shell.windowdecor.TaskMotionController$$ExternalSyntheticLambda6] */
+    /* JADX WARN: Removed duplicated region for block: B:17:0x004b  */
+    /* JADX WARN: Removed duplicated region for block: B:24:0x0064  */
+    /* JADX WARN: Type inference failed for: r2v10, types: [com.android.wm.shell.windowdecor.TaskMotionController$$ExternalSyntheticLambda6] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void moveToTarget(final android.graphics.Rect r22, java.lang.Runnable r23, boolean r24) {
-        /*
-            Method dump skipped, instructions count: 326
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.windowdecor.TaskMotionController.moveToTarget(android.graphics.Rect, java.lang.Runnable, boolean):void");
+    public final void moveToTarget(final Rect rect, Runnable runnable, boolean z) {
+        boolean z2;
+        boolean z3;
+        float f;
+        boolean z4;
+        String str;
+        TaskMotionAnimator taskMotionAnimator;
+        synchronized (this) {
+            try {
+                if (this.mTaskMotionInfo == null) {
+                    return;
+                }
+                this.mCanceled = false;
+                this.mTargetBounds.set(rect);
+                rebuildFlingConfigs(rect);
+                int iWidth = rect.width();
+                int iHeight = rect.height();
+                PointF pointF = this.mFreeformCaptionTouchState.mVelocity;
+                float fEstimateFlingEndValue = PhysicsAnimator.estimateFlingEndValue(rect.left, pointF.x, this.mStashConfigX);
+                if (z) {
+                    Rect rect2 = this.mTaskMotionInfo.mDisplayBounds;
+                    z2 = fEstimateFlingEndValue < ((float) rect2.left) && ((float) iWidth) + fEstimateFlingEndValue < ((float) rect2.right);
+                }
+                if (z) {
+                    Rect rect3 = this.mTaskMotionInfo.mDisplayBounds;
+                    z3 = fEstimateFlingEndValue > ((float) rect3.left) && ((float) iWidth) + fEstimateFlingEndValue > ((float) rect3.right);
+                }
+                float f2 = pointF.x;
+                if (z2 && f2 == 0.0f) {
+                    Slog.w("TaskMotionController", "moveToTarget: make velocity as negative");
+                    f2 = -1.0f;
+                }
+                if (z2) {
+                    if (f2 > -1.0f || f2 <= -4000.0f) {
+                        f = -7000.0f;
+                        if (f2 < -7000.0f) {
+                            f2 = f;
+                        }
+                    } else {
+                        f2 -= 4000.0f;
+                    }
+                } else if (z3) {
+                    if (f2 < 0.0f || f2 >= 4000.0f) {
+                        f = 7000.0f;
+                        if (f2 > 7000.0f) {
+                            f2 = f;
+                        }
+                    } else {
+                        f2 += 4000.0f;
+                    }
+                }
+                float f3 = pointF.y;
+                PhysicsAnimator.Companion.getClass();
+                PhysicsAnimator companion = PhysicsAnimator.Companion.getInstance(rect);
+                this.mTemporaryBoundsPhysicsAnimator = companion;
+                companion.spring(FloatProperties.RECT_WIDTH, iWidth, 0.0f, this.mSpringConfig);
+                companion.spring(FloatProperties.RECT_HEIGHT, iHeight, 0.0f, this.mSpringConfig);
+                companion.flingThenSpring(FloatProperties.RECT_X, f2, z ? this.mStashConfigX : this.mFlingConfigX, this.mSpringConfig, z);
+                companion.flingThenSpring(FloatProperties.RECT_Y, f3, this.mFlingConfigY, this.mSpringConfig, false);
+                boolean zIsStashed = this.mFreeformStashState.isStashed();
+                final boolean zIsLeftStashed = (!this.mTaskMotionInfo.isAnimating(1) || (taskMotionAnimator = (TaskMotionAnimator) this.mTaskMotionInfo.mMotionAnimators.get(1)) == null) ? false : taskMotionAnimator.mFreeformStashState.isLeftStashed();
+                if (zIsStashed != z) {
+                    z4 = z2;
+                    scheduleChangedScaleAnimation(zIsStashed, rect, pointF, z4, z3, fEstimateFlingEndValue);
+                } else {
+                    z4 = z2;
+                }
+                this.mResizeFreeformUpdateListener = new PhysicsAnimator.UpdateListener() { // from class: com.android.wm.shell.windowdecor.TaskMotionController$$ExternalSyntheticLambda6
+                    /* JADX WARN: Removed duplicated region for block: B:16:0x002a  */
+                    @Override // com.android.wm.shell.shared.animation.PhysicsAnimator.UpdateListener
+                    /*
+                        Code decompiled incorrectly, please refer to instructions dump.
+                    */
+                    public final void onAnimationUpdateForProperty(Object obj) {
+                        float fWidth;
+                        boolean z5;
+                        Rect rect4 = rect;
+                        Rect rect5 = (Rect) obj;
+                        TaskMotionController taskMotionController = this.f$0;
+                        if (taskMotionController.mCanceled) {
+                            return;
+                        }
+                        taskMotionController.mTargetBounds.set(rect5);
+                        FreeformStashState freeformStashState = taskMotionController.mFreeformStashState;
+                        if (!freeformStashState.isLeftStashed()) {
+                            if (zIsLeftStashed) {
+                                synchronized (taskMotionController) {
+                                    try {
+                                        TaskMotionController.TaskMotionInfo taskMotionInfo = taskMotionController.mTaskMotionInfo;
+                                        if (taskMotionInfo != null) {
+                                            z5 = true;
+                                            if (!taskMotionInfo.isAnimating(1)) {
+                                                z5 = false;
+                                            }
+                                        }
+                                    } finally {
+                                    }
+                                }
+                                fWidth = z5 ? rect4.width() - (rect4.width() * freeformStashState.mScale) : 0.0f;
+                            }
+                        }
+                        SurfaceControl surfaceControl = taskMotionController.mTaskSurface;
+                        if (surfaceControl == null || !surfaceControl.isValid() || taskMotionController.mTaskMotionInfo == null) {
+                            return;
+                        }
+                        taskMotionController.mTransaction.setPosition(taskMotionController.mTaskSurface, rect4.left + fWidth, rect4.top);
+                        taskMotionController.mTransaction.apply();
+                    }
+                };
+                if (CoreRune.MW_SA_LOGGING && z) {
+                    String str2 = z4 ? SystemUIAnalytics.DT_BOUNCER_POSITION_LEFT : SystemUIAnalytics.DT_BOUNCER_POSITION_RIGHT;
+                    ComponentName componentName = this.mTaskMotionInfo.mTaskInfo.topActivity;
+                    if (componentName != null) {
+                        str = "[Detail] : " + str2 + " [Position]  " + componentName.getPackageName();
+                    } else {
+                        str = null;
+                    }
+                    CoreSaLogger.logForAdvanced("2010", str);
+                }
+                if (!this.mTemporaryBoundsPhysicsAnimator.isRunning()) {
+                    PhysicsAnimator physicsAnimator = this.mTemporaryBoundsPhysicsAnimator;
+                    physicsAnimator.updateListeners.add(this.mResizeFreeformUpdateListener);
+                    physicsAnimator.withEndActions(new TaskMotionController$$ExternalSyntheticLambda3(this, 1), runnable);
+                }
+                this.mTemporaryBoundsPhysicsAnimator.start();
+            } catch (Throwable th) {
+                throw th;
+            }
+        }
     }
 
     public final void postAnimationFinished(int i, ActivityManager.RunningTaskInfo runningTaskInfo, Rect rect, WindowContainerTransaction windowContainerTransaction) {
@@ -234,14 +610,14 @@ public class TaskMotionController {
     }
 
     public final void rebuildFlingConfigs(Rect rect) {
-        int width = rect.width();
-        int height = rect.height();
+        int iWidth = rect.width();
+        int iHeight = rect.height();
         Rect rect2 = this.mTaskMotionInfo.mSafeBounds;
-        this.mFlingConfigX = new PhysicsAnimator.FlingConfig(1.9f, rect2.left, rect2.right - width);
+        this.mFlingConfigX = new PhysicsAnimator.FlingConfig(1.9f, rect2.left, rect2.right - iWidth);
         Rect rect3 = this.mTaskMotionInfo.mSafeBounds;
-        this.mFlingConfigY = new PhysicsAnimator.FlingConfig(1.9f, rect3.top, rect3.bottom - height);
+        this.mFlingConfigY = new PhysicsAnimator.FlingConfig(1.9f, rect3.top, rect3.bottom - iHeight);
         Rect rect4 = this.mTaskMotionInfo.mMaxBounds;
-        this.mStashConfigX = new PhysicsAnimator.FlingConfig(1.9f, rect4.left, rect4.right - width);
+        this.mStashConfigX = new PhysicsAnimator.FlingConfig(1.9f, rect4.left, rect4.right - iWidth);
     }
 
     public final void removeMotionAnimator(int i) {
@@ -272,15 +648,15 @@ public class TaskMotionController {
         }
         if (rect2.isEmpty()) {
             ActivityInfo activityInfo = this.mTaskMotionInfo.mTaskInfo.topActivityInfo;
-            ActivityInfo.WindowLayout windowLayout = activityInfo != null ? activityInfo.windowLayout : null;
-            if (windowLayout != null) {
+            ActivityInfo.WindowLayout windowLayoutRecalculateWindowLayout = activityInfo != null ? activityInfo.windowLayout : null;
+            if (windowLayoutRecalculateWindowLayout != null) {
                 float f = runningTaskInfo.configuration.densityDpi;
                 float initialDensity = SemWindowManager.getInstance().getInitialDensity();
                 ActivityInfo activityInfo2 = runningTaskInfo.topActivityInfo;
-                windowLayout = MultiWindowUtils.recalculateWindowLayout(f, initialDensity, windowLayout, activityInfo2 != null ? activityInfo2.packageName : null);
+                windowLayoutRecalculateWindowLayout = MultiWindowUtils.recalculateWindowLayout(f, initialDensity, windowLayoutRecalculateWindowLayout, activityInfo2 != null ? activityInfo2.packageName : null);
             }
             TaskMotionInfo taskMotionInfo2 = this.mTaskMotionInfo;
-            MultiWindowUtils.getDefaultFreeformBounds(taskMotionInfo2.mDisplayBounds, taskMotionInfo2.mStableBounds, windowLayout, rect2);
+            MultiWindowUtils.getDefaultFreeformBounds(taskMotionInfo2.mDisplayBounds, taskMotionInfo2.mStableBounds, windowLayoutRecalculateWindowLayout, rect2);
             if (this.mTaskMotionInfo.mStableBounds.width() < rect2.width()) {
                 rect2.right = this.mTaskMotionInfo.mStableBounds.width();
             }
@@ -288,8 +664,8 @@ public class TaskMotionController {
                 rect2.bottom = this.mTaskMotionInfo.mStableBounds.height();
             }
         }
-        int computeStashState = computeStashState(this.mTaskMotionInfo.mStableBounds, rect2, z);
-        if (computeStashState != 0) {
+        int iComputeStashState = computeStashState(this.mTaskMotionInfo.mStableBounds, rect2, z);
+        if (iComputeStashState != 0) {
             Slog.d("TaskMotionController", "scheduleAnimateRestore adjust restore bounds: taskInfo=" + runningTaskInfo + " startBounds=" + rect + " endBounds=" + rect2);
             rect2.offsetTo((this.mTaskMotionInfo.mDisplayBounds.width() - rect2.width()) / 2, (this.mTaskMotionInfo.mDisplayBounds.height() - rect2.height()) / 2);
         }
@@ -298,18 +674,18 @@ public class TaskMotionController {
             rect2.right = bounds.width() + rect2.left;
             rect2.bottom = bounds.height() + rect2.top;
         }
-        if (computeStashState == 0) {
+        if (iComputeStashState == 0) {
             if (this.mTaskMotionInfo.mMaxBounds.top > rect2.top) {
-                int height = rect2.height();
+                int iHeight = rect2.height();
                 int i = this.mTaskMotionInfo.mMaxBounds.top;
                 rect2.top = i;
-                rect2.bottom = i + height;
+                rect2.bottom = i + iHeight;
             }
             if (this.mTaskMotionInfo.mMaxBounds.bottom < rect2.bottom) {
-                int height2 = rect2.height();
+                int iHeight2 = rect2.height();
                 int i2 = this.mTaskMotionInfo.mMaxBounds.bottom;
                 rect2.bottom = i2;
-                rect2.top = i2 - height2;
+                rect2.top = i2 - iHeight2;
             }
         }
         freeformStashState.mAnimType = 2;
@@ -320,7 +696,7 @@ public class TaskMotionController {
             @Override // com.android.wm.shell.windowdecor.TaskMotionAnimator.OnAnimationFinishedCallback
             public final void onAnimationFinished(Rect rect3) {
                 ActivityManager.RunningTaskInfo runningTaskInfo2 = runningTaskInfo;
-                TaskMotionController taskMotionController = TaskMotionController.this;
+                TaskMotionController taskMotionController = this.f$0;
                 FreeformStashState freeformStashState2 = taskMotionController.mFreeformStashState;
                 freeformStashState2.mAnimating = false;
                 freeformStashState2.setStashed(0);
@@ -336,134 +712,56 @@ public class TaskMotionController {
         this.mAnimExecutor.execute(new TaskMotionController$$ExternalSyntheticLambda3(taskMotionAnimator, 2));
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0023 A[DONT_GENERATE] */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0025 A[Catch: all -> 0x004e, TryCatch #0 {all -> 0x004e, blocks: (B:4:0x0004, B:6:0x000a, B:8:0x0010, B:17:0x0025, B:19:0x002d, B:20:0x004c, B:23:0x0052, B:26:0x005c, B:28:0x0062, B:29:0x0067, B:33:0x008a, B:34:0x00bb, B:36:0x0073, B:42:0x00bd), top: B:3:0x0004 }] */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public final boolean scheduleAnimateScale(final int r12, android.graphics.Rect r13) {
-        /*
-            r11 = this;
-            java.lang.String r0 = "scheduleAnimateScale: animType="
-            monitor-enter(r11)
-            android.view.SurfaceControl r1 = r11.mTaskSurface     // Catch: java.lang.Throwable -> L4e
-            r2 = 0
-            r3 = 1
-            if (r1 == 0) goto L16
-            boolean r1 = r1.isValid()     // Catch: java.lang.Throwable -> L4e
-            if (r1 == 0) goto L16
-            com.android.wm.shell.windowdecor.TaskMotionController$TaskMotionInfo r1 = r11.mTaskMotionInfo     // Catch: java.lang.Throwable -> L4e
-            if (r1 == 0) goto L16
-            r1 = r3
-            goto L17
-        L16:
-            r1 = r2
-        L17:
-            if (r1 == 0) goto Lbd
-            if (r12 != r3) goto L1c
-            goto L1e
-        L1c:
-            if (r12 != 0) goto L20
-        L1e:
-            r1 = r3
-            goto L21
-        L20:
-            r1 = r2
-        L21:
-            if (r1 != 0) goto L25
-            goto Lbd
-        L25:
-            com.android.wm.shell.windowdecor.TaskMotionController$TaskMotionInfo r1 = r11.mTaskMotionInfo     // Catch: java.lang.Throwable -> L4e
-            boolean r1 = r1.isAnimating(r12)     // Catch: java.lang.Throwable -> L4e
-            if (r1 == 0) goto L52
-            java.lang.String r13 = "TaskMotionController"
-            java.lang.StringBuilder r1 = new java.lang.StringBuilder     // Catch: java.lang.Throwable -> L4e
-            r1.<init>(r0)     // Catch: java.lang.Throwable -> L4e
-            r1.append(r12)     // Catch: java.lang.Throwable -> L4e
-            java.lang.String r12 = " failed, already animating, t #"
-            r1.append(r12)     // Catch: java.lang.Throwable -> L4e
-            com.android.wm.shell.windowdecor.DesktopModeWindowDecoration r12 = r11.mWindowDecoration     // Catch: java.lang.Throwable -> L4e
-            android.app.ActivityManager$RunningTaskInfo r12 = r12.mTaskInfo     // Catch: java.lang.Throwable -> L4e
-            int r12 = r12.taskId     // Catch: java.lang.Throwable -> L4e
-            r1.append(r12)     // Catch: java.lang.Throwable -> L4e
-            java.lang.String r12 = r1.toString()     // Catch: java.lang.Throwable -> L4e
-            android.util.Slog.d(r13, r12)     // Catch: java.lang.Throwable -> L4e
-            monitor-exit(r11)     // Catch: java.lang.Throwable -> L4e
-            return r2
-        L4e:
-            r0 = move-exception
-            r12 = r0
-            goto Lbf
-        L52:
-            com.android.wm.shell.windowdecor.TaskMotionController$TaskMotionInfo r0 = r11.mTaskMotionInfo     // Catch: java.lang.Throwable -> L4e
-            if (r12 != 0) goto L58
-            r2 = r3
-            goto L5c
-        L58:
-            if (r12 != r3) goto L5b
-            goto L5c
-        L5b:
-            r2 = -1
-        L5c:
-            boolean r0 = r0.isAnimating(r2)     // Catch: java.lang.Throwable -> L4e
-            if (r0 == 0) goto L67
-            com.android.wm.shell.windowdecor.TaskMotionController$TaskMotionInfo r0 = r11.mTaskMotionInfo     // Catch: java.lang.Throwable -> L4e
-            r0.clearAnimator()     // Catch: java.lang.Throwable -> L4e
-        L67:
-            com.android.wm.shell.windowdecor.FreeformStashState r0 = r11.mFreeformStashState     // Catch: java.lang.Throwable -> L4e
-            r0.mAnimType = r12     // Catch: java.lang.Throwable -> L4e
-            r0.mAnimating = r3     // Catch: java.lang.Throwable -> L4e
-            if (r12 != r3) goto L73
-            r0 = 1065353216(0x3f800000, float:1.0)
-        L71:
-            r10 = r0
-            goto L8a
-        L73:
-            com.android.wm.shell.windowdecor.DesktopModeWindowDecoration r0 = r11.mWindowDecoration     // Catch: java.lang.Throwable -> L4e
-            android.app.ActivityManager$RunningTaskInfo r0 = r0.mTaskInfo     // Catch: java.lang.Throwable -> L4e
-            android.content.res.Configuration r0 = r0.configuration     // Catch: java.lang.Throwable -> L4e
-            android.app.WindowConfiguration r0 = r0.windowConfiguration     // Catch: java.lang.Throwable -> L4e
-            android.graphics.Rect r0 = r0.getBounds()     // Catch: java.lang.Throwable -> L4e
-            int r1 = r11.mScaledFreeformHeight     // Catch: java.lang.Throwable -> L4e
-            float r1 = (float) r1     // Catch: java.lang.Throwable -> L4e
-            int r0 = r0.height()     // Catch: java.lang.Throwable -> L4e
-            float r0 = (float) r0     // Catch: java.lang.Throwable -> L4e
-            float r0 = r1 / r0
-            goto L71
-        L8a:
-            com.android.wm.shell.windowdecor.TaskMotionAnimValue r4 = new com.android.wm.shell.windowdecor.TaskMotionAnimValue     // Catch: java.lang.Throwable -> L4e
-            com.android.wm.shell.windowdecor.FreeformStashState r6 = r11.mFreeformStashState     // Catch: java.lang.Throwable -> L4e
-            android.view.SurfaceControl r7 = r11.mTaskSurface     // Catch: java.lang.Throwable -> L4e
-            r9 = 0
-            r5 = r12
-            r8 = r13
-            r4.<init>(r5, r6, r7, r8, r9, r10)     // Catch: java.lang.Throwable -> L4e
-            com.android.wm.shell.windowdecor.TaskMotionController$TaskMotionInfo r12 = r11.mTaskMotionInfo     // Catch: java.lang.Throwable -> L4e
-            com.android.wm.shell.windowdecor.TaskMotionController$$ExternalSyntheticLambda2 r13 = new com.android.wm.shell.windowdecor.TaskMotionController$$ExternalSyntheticLambda2     // Catch: java.lang.Throwable -> L4e
-            r13.<init>()     // Catch: java.lang.Throwable -> L4e
-            r12.getClass()     // Catch: java.lang.Throwable -> L4e
-            com.android.wm.shell.windowdecor.TaskMotionAnimator r0 = new com.android.wm.shell.windowdecor.TaskMotionAnimator     // Catch: java.lang.Throwable -> L4e
-            r0.<init>(r4, r13)     // Catch: java.lang.Throwable -> L4e
-            android.util.ArrayMap r12 = r12.mMotionAnimators     // Catch: java.lang.Throwable -> L4e
-            int r13 = r4.mAnimType     // Catch: java.lang.Throwable -> L4e
-            java.lang.Integer r13 = java.lang.Integer.valueOf(r13)     // Catch: java.lang.Throwable -> L4e
-            r12.put(r13, r0)     // Catch: java.lang.Throwable -> L4e
-            com.android.wm.shell.common.ShellExecutor r12 = r11.mAnimExecutor     // Catch: java.lang.Throwable -> L4e
-            com.android.wm.shell.windowdecor.TaskMotionController$$ExternalSyntheticLambda3 r13 = new com.android.wm.shell.windowdecor.TaskMotionController$$ExternalSyntheticLambda3     // Catch: java.lang.Throwable -> L4e
-            r1 = 2
-            r13.<init>(r0, r1)     // Catch: java.lang.Throwable -> L4e
-            r12.execute(r13)     // Catch: java.lang.Throwable -> L4e
-            monitor-exit(r11)     // Catch: java.lang.Throwable -> L4e
-            return r3
-        Lbd:
-            monitor-exit(r11)     // Catch: java.lang.Throwable -> L4e
-            return r2
-        Lbf:
-            monitor-exit(r11)     // Catch: java.lang.Throwable -> L4e
-            throw r12
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.windowdecor.TaskMotionController.scheduleAnimateScale(int, android.graphics.Rect):boolean");
+    public final boolean scheduleAnimateScale(final int i, Rect rect) {
+        synchronized (this) {
+            try {
+                SurfaceControl surfaceControl = this.mTaskSurface;
+                int i2 = 0;
+                if ((surfaceControl == null || !surfaceControl.isValid() || this.mTaskMotionInfo == null) ? false : true) {
+                    if (i == 1 || i == 0) {
+                        if (this.mTaskMotionInfo.isAnimating(i)) {
+                            Slog.d("TaskMotionController", "scheduleAnimateScale: animType=" + i + " failed, already animating, t #" + this.mWindowDecoration.mTaskInfo.taskId);
+                            return false;
+                        }
+                        TaskMotionInfo taskMotionInfo = this.mTaskMotionInfo;
+                        if (i == 0) {
+                            i2 = 1;
+                        } else if (i != 1) {
+                            i2 = -1;
+                        }
+                        if (taskMotionInfo.isAnimating(i2)) {
+                            this.mTaskMotionInfo.clearAnimator();
+                        }
+                        FreeformStashState freeformStashState = this.mFreeformStashState;
+                        freeformStashState.mAnimType = i;
+                        freeformStashState.mAnimating = true;
+                        TaskMotionAnimValue taskMotionAnimValue = new TaskMotionAnimValue(i, this.mFreeformStashState, this.mTaskSurface, rect, null, i == 1 ? 1.0f : this.mScaledFreeformHeight / this.mWindowDecoration.mTaskInfo.configuration.windowConfiguration.getBounds().height());
+                        TaskMotionInfo taskMotionInfo2 = this.mTaskMotionInfo;
+                        TaskMotionAnimator.OnAnimationFinishedCallback onAnimationFinishedCallback = new TaskMotionAnimator.OnAnimationFinishedCallback() { // from class: com.android.wm.shell.windowdecor.TaskMotionController$$ExternalSyntheticLambda2
+                            @Override // com.android.wm.shell.windowdecor.TaskMotionAnimator.OnAnimationFinishedCallback
+                            public final void onAnimationFinished(Rect rect2) {
+                                TaskMotionController taskMotionController = this.f$0;
+                                FreeformStashState freeformStashState2 = taskMotionController.mFreeformStashState;
+                                freeformStashState2.mAnimating = false;
+                                int i3 = i;
+                                taskMotionController.removeMotionAnimator(i3);
+                                if (i3 != 1 || freeformStashState2.isStashed()) {
+                                    return;
+                                }
+                                taskMotionController.postAnimationFinished(i3, taskMotionController.mWindowDecoration.mTaskInfo, rect2, new WindowContainerTransaction());
+                            }
+                        };
+                        taskMotionInfo2.getClass();
+                        TaskMotionAnimator taskMotionAnimator = new TaskMotionAnimator(taskMotionAnimValue, onAnimationFinishedCallback);
+                        taskMotionInfo2.mMotionAnimators.put(Integer.valueOf(taskMotionAnimValue.mAnimType), taskMotionAnimator);
+                        this.mAnimExecutor.execute(new TaskMotionController$$ExternalSyntheticLambda3(taskMotionAnimator, 2));
+                        return true;
+                    }
+                }
+                return false;
+            } finally {
+            }
+        }
     }
 
     public final void scheduleChangedScaleAnimation(boolean z, Rect rect, PointF pointF, boolean z2, boolean z3, float f) {
@@ -498,7 +796,7 @@ public class TaskMotionController {
                     if (desktopModeWindowDecoration.mDragResizeListener == null) {
                         desktopModeWindowDecoration.closeFreeformDimInputListener();
                     }
-                    desktopModeWindowDecoration.updateDragResizeListener(desktopModeWindowDecoration.mDecorationContainerSurface, new DesktopModeWindowDecoration$$ExternalSyntheticLambda7(desktopModeWindowDecoration, !desktopModeWindowDecoration.mTaskInfo.positionInParent.equals(desktopModeWindowDecoration.mPositionInParent), desktopModeWindowDecoration.mDesktopUserRepositories.getProfile(desktopModeWindowDecoration.mTaskInfo.userId).isTaskInFullImmersiveState(desktopModeWindowDecoration.mTaskInfo.taskId), 1));
+                    desktopModeWindowDecoration.updateDragResizeListener(desktopModeWindowDecoration.mDecorationContainerSurface, new DesktopModeWindowDecoration$$ExternalSyntheticLambda5(desktopModeWindowDecoration, !desktopModeWindowDecoration.mTaskInfo.positionInParent.equals(desktopModeWindowDecoration.mPositionInParent), desktopModeWindowDecoration.mDesktopUserRepositories.getProfile(desktopModeWindowDecoration.mTaskInfo.userId).isTaskInFullImmersiveState(desktopModeWindowDecoration.mTaskInfo.taskId), 1));
                 } else if (desktopModeWindowDecoration.mFreeformStashDimInputListener == null) {
                     DragResizeInputListener dragResizeInputListener = desktopModeWindowDecoration.mDragResizeListener;
                     if (dragResizeInputListener != null) {

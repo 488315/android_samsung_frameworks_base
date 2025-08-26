@@ -6,7 +6,6 @@ import com.android.systemui.statusbar.policy.ZenModeController;
 import java.util.ArrayList;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class LockStarShortcutController {
     public KeyguardSecBottomAreaViewController bottomAreaCallback;
@@ -14,7 +13,6 @@ public final class LockStarShortcutController {
     public final ArrayList taskList = new ArrayList();
     public final ZenModeController zenModeController;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();

@@ -21,7 +21,6 @@ import android.view.WindowInsets;
 import android.widget.TextView;
 import androidx.preference.DialogPreference;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class PreferenceDialogFragment extends DialogFragment implements DialogInterface.OnClickListener {
     public BitmapDrawable mDialogIcon;
@@ -33,7 +32,6 @@ public abstract class PreferenceDialogFragment extends DialogFragment implements
     public DialogPreference mPreference;
     public int mWhichButtonClicked;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Api30Impl {
         private Api30Impl() {
         }
@@ -56,19 +54,19 @@ public abstract class PreferenceDialogFragment extends DialogFragment implements
 
     public void onBindDialogView(View view) {
         int i;
-        View findViewById = view.findViewById(R.id.message);
-        if (findViewById != null) {
+        View viewFindViewById = view.findViewById(R.id.message);
+        if (viewFindViewById != null) {
             CharSequence charSequence = this.mDialogMessage;
             if (TextUtils.isEmpty(charSequence)) {
                 i = 8;
             } else {
-                if (findViewById instanceof TextView) {
-                    ((TextView) findViewById).setText(charSequence);
+                if (viewFindViewById instanceof TextView) {
+                    ((TextView) viewFindViewById).setText(charSequence);
                 }
                 i = 0;
             }
-            if (findViewById.getVisibility() != i) {
-                findViewById.setVisibility(i);
+            if (viewFindViewById.getVisibility() != i) {
+                viewFindViewById.setVisibility(i);
             }
         }
     }
@@ -112,11 +110,11 @@ public abstract class PreferenceDialogFragment extends DialogFragment implements
             this.mDialogIcon = (BitmapDrawable) drawable;
             return;
         }
-        Bitmap createBitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(createBitmap);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmapCreateBitmap);
         drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
         drawable.draw(canvas);
-        this.mDialogIcon = new BitmapDrawable(getResources(), createBitmap);
+        this.mDialogIcon = new BitmapDrawable(getResources(), bitmapCreateBitmap);
     }
 
     @Override // android.app.DialogFragment
@@ -125,19 +123,19 @@ public abstract class PreferenceDialogFragment extends DialogFragment implements
         this.mWhichButtonClicked = -2;
         AlertDialog.Builder negativeButton = new AlertDialog.Builder(activity).setTitle(this.mDialogTitle).setIcon(this.mDialogIcon).setPositiveButton(this.mPositiveButtonText, this).setNegativeButton(this.mNegativeButtonText, this);
         int i = this.mDialogLayoutRes;
-        View inflate = i != 0 ? LayoutInflater.from(activity).inflate(i, (ViewGroup) null) : null;
-        if (inflate != null) {
-            onBindDialogView(inflate);
-            negativeButton.setView(inflate);
+        View viewInflate = i != 0 ? LayoutInflater.from(activity).inflate(i, (ViewGroup) null) : null;
+        if (viewInflate != null) {
+            onBindDialogView(viewInflate);
+            negativeButton.setView(viewInflate);
         } else {
             negativeButton.setMessage(this.mDialogMessage);
         }
         onPrepareDialogBuilder(negativeButton);
-        AlertDialog create = negativeButton.create();
+        AlertDialog alertDialogCreate = negativeButton.create();
         if (this instanceof EditTextPreferenceDialogFragment) {
-            Api30Impl.showIme(create.getWindow());
+            Api30Impl.showIme(alertDialogCreate.getWindow());
         }
-        return create;
+        return alertDialogCreate;
     }
 
     public abstract void onDialogClosed(boolean z);

@@ -16,7 +16,6 @@ import com.android.systemui.shade.domain.interactor.ShadeDialogContextInteractor
 import com.android.systemui.statusbar.phone.SystemUIDialog;
 import com.samsung.android.knox.net.vpn.KnoxVpnPolicyConstants;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class BiometricNotificationDialogFactory {
     public final ShadeDialogContextInteractor mDialogContextInteractor;
@@ -25,7 +24,6 @@ public class BiometricNotificationDialogFactory {
     public final Resources mResources;
     public final SystemUIDialog.Factory mSystemUIDialogFactory;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface ActivityStarter {
         void startActivity(Intent intent);
     }
@@ -39,22 +37,22 @@ public class BiometricNotificationDialogFactory {
     }
 
     public final SystemUIDialog createReenrollDialog(final int i, final ActivityStarter activityStarter, final BiometricSourceType biometricSourceType, boolean z) {
-        SystemUIDialog create = this.mSystemUIDialogFactory.create(((ShadeDialogContextInteractorImpl) this.mDialogContextInteractor).getContext());
+        SystemUIDialog systemUIDialogCreate = this.mSystemUIDialogFactory.create(((ShadeDialogContextInteractorImpl) this.mDialogContextInteractor).getContext());
         if (biometricSourceType == BiometricSourceType.FACE) {
-            create.setTitle(this.mResources.getString(R.string.face_re_enroll_dialog_title));
-            create.setMessage(this.mResources.getString(R.string.face_re_enroll_dialog_content));
+            systemUIDialogCreate.setTitle(this.mResources.getString(R.string.face_re_enroll_dialog_title));
+            systemUIDialogCreate.setMessage(this.mResources.getString(R.string.face_re_enroll_dialog_content));
         } else if (biometricSourceType == BiometricSourceType.FINGERPRINT) {
-            create.setTitle(this.mResources.getString(R.string.fingerprint_re_enroll_dialog_title));
+            systemUIDialogCreate.setTitle(this.mResources.getString(R.string.fingerprint_re_enroll_dialog_title));
             if (this.mFingerprintManager.getEnrolledFingerprints().size() == 1) {
-                create.setMessage(this.mResources.getString(R.string.fingerprint_re_enroll_dialog_content_singular));
+                systemUIDialogCreate.setMessage(this.mResources.getString(R.string.fingerprint_re_enroll_dialog_content_singular));
             } else {
-                create.setMessage(this.mResources.getString(R.string.fingerprint_re_enroll_dialog_content));
+                systemUIDialogCreate.setMessage(this.mResources.getString(R.string.fingerprint_re_enroll_dialog_content));
             }
         }
-        create.setPositiveButton(R.string.biometric_re_enroll_dialog_confirm, new DialogInterface.OnClickListener() { // from class: com.android.systemui.biometrics.BiometricNotificationDialogFactory$$ExternalSyntheticLambda0
+        systemUIDialogCreate.setPositiveButton(R.string.biometric_re_enroll_dialog_confirm, new DialogInterface.OnClickListener() { // from class: com.android.systemui.biometrics.BiometricNotificationDialogFactory$$ExternalSyntheticLambda0
             @Override // android.content.DialogInterface.OnClickListener
             public final void onClick(DialogInterface dialogInterface, int i2) {
-                final BiometricNotificationDialogFactory biometricNotificationDialogFactory = BiometricNotificationDialogFactory.this;
+                final BiometricNotificationDialogFactory biometricNotificationDialogFactory = this.f$0;
                 int i3 = i;
                 BiometricSourceType biometricSourceType2 = biometricSourceType;
                 final BiometricNotificationDialogFactory.ActivityStarter activityStarter2 = activityStarter;
@@ -131,20 +129,20 @@ public class BiometricNotificationDialogFactory {
             }
         });
         if (!z) {
-            create.setNegativeButton(R.string.biometric_re_enroll_dialog_cancel, new BiometricNotificationDialogFactory$$ExternalSyntheticLambda1());
+            systemUIDialogCreate.setNegativeButton(R.string.biometric_re_enroll_dialog_cancel, new BiometricNotificationDialogFactory$$ExternalSyntheticLambda1());
         }
-        create.setCanceledOnTouchOutside(!z);
-        return create;
+        systemUIDialogCreate.setCanceledOnTouchOutside(!z);
+        return systemUIDialogCreate;
     }
 
     public final SystemUIDialog createReenrollFailureDialog(BiometricSourceType biometricSourceType) {
-        SystemUIDialog create = this.mSystemUIDialogFactory.create(((ShadeDialogContextInteractorImpl) this.mDialogContextInteractor).getContext());
+        SystemUIDialog systemUIDialogCreate = this.mSystemUIDialogFactory.create(((ShadeDialogContextInteractorImpl) this.mDialogContextInteractor).getContext());
         if (biometricSourceType == BiometricSourceType.FACE) {
-            create.setMessage(this.mResources.getString(R.string.face_reenroll_failure_dialog_content));
+            systemUIDialogCreate.setMessage(this.mResources.getString(R.string.face_reenroll_failure_dialog_content));
         } else if (biometricSourceType == BiometricSourceType.FINGERPRINT) {
-            create.setMessage(this.mResources.getString(R.string.fingerprint_reenroll_failure_dialog_content));
+            systemUIDialogCreate.setMessage(this.mResources.getString(R.string.fingerprint_reenroll_failure_dialog_content));
         }
-        create.setPositiveButton(R.string.ok, new BiometricNotificationDialogFactory$$ExternalSyntheticLambda1());
-        return create;
+        systemUIDialogCreate.setPositiveButton(R.string.ok, new BiometricNotificationDialogFactory$$ExternalSyntheticLambda1());
+        return systemUIDialogCreate;
     }
 }

@@ -45,9 +45,9 @@ public interface IUsbManagerInternal extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IUsbManagerInternal.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IUsbManagerInternal)) {
-                return (IUsbManagerInternal) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IUsbManagerInternal.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IUsbManagerInternal)) {
+                return (IUsbManagerInternal) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,12 +74,12 @@ public interface IUsbManagerInternal extends IInterface {
                 return true;
             }
             if (i == 1) {
-                boolean readBoolean = parcel.readBoolean();
-                int readInt = parcel.readInt();
+                boolean z = parcel.readBoolean();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                boolean enableUsbDataSignal = enableUsbDataSignal(readBoolean, readInt);
+                boolean zEnableUsbDataSignal = enableUsbDataSignal(z, i3);
                 parcel2.writeNoException();
-                parcel2.writeBoolean(enableUsbDataSignal);
+                parcel2.writeBoolean(zEnableUsbDataSignal);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -103,18 +103,18 @@ public interface IUsbManagerInternal extends IInterface {
 
             @Override // android.hardware.usb.IUsbManagerInternal
             public boolean enableUsbDataSignal(boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUsbManagerInternal.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IUsbManagerInternal.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -23,7 +23,6 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SubDisplayVolumeRowView extends LinearLayout implements VolumeObserver<VolumePanelState> {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -41,7 +40,6 @@ public class SubDisplayVolumeRowView extends LinearLayout implements VolumeObser
     public int mStream;
     public int mTargetProgressLevel;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.volume.view.subscreen.simple.SubDisplayVolumeRowView$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$com$samsung$systemui$splugins$volume$VolumePanelState$StateType;
@@ -80,7 +78,6 @@ public class SubDisplayVolumeRowView extends LinearLayout implements VolumeObser
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class VolumeSeekBarChangeListener implements SeekBar.OnSeekBarChangeListener {
         public /* synthetic */ VolumeSeekBarChangeListener(SubDisplayVolumeRowView subDisplayVolumeRowView, int i) {
             this();
@@ -115,7 +112,7 @@ public class SubDisplayVolumeRowView extends LinearLayout implements VolumeObser
         this.mRecheckCallback = new Runnable() { // from class: com.android.systemui.volume.view.subscreen.simple.SubDisplayVolumeRowView$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                SubDisplayVolumeRowView subDisplayVolumeRowView = SubDisplayVolumeRowView.this;
+                SubDisplayVolumeRowView subDisplayVolumeRowView = this.f$0;
                 subDisplayVolumeRowView.mStoreInteractor.sendAction(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_CHECK_IF_NEED_TO_SET_PROGRESS).stream(subDisplayVolumeRowView.mStream).progress(subDisplayVolumeRowView.mSeekBar.getProgress()).build(), false);
             }
         };
@@ -124,8 +121,8 @@ public class SubDisplayVolumeRowView extends LinearLayout implements VolumeObser
         this.mResources = getContext().getResources();
     }
 
-    public final String getStreamLabel$2(VolumePanelState volumePanelState, VolumePanelRow volumePanelRow) {
-        String str;
+    public final String getStreamLabel$2(VolumePanelState volumePanelState, VolumePanelRow volumePanelRow) throws Resources.NotFoundException {
+        String string;
         String smartViewLabel = volumePanelRow.getSmartViewLabel();
         if (!smartViewLabel.isEmpty()) {
             return smartViewLabel;
@@ -137,25 +134,25 @@ public class SubDisplayVolumeRowView extends LinearLayout implements VolumeObser
         try {
             String nameRes = volumePanelRow.getNameRes();
             Resources resources = this.mResources;
-            str = resources.getString(resources.getIdentifier(nameRes, null, null));
+            string = resources.getString(resources.getIdentifier(nameRes, null, null));
         } catch (Exception unused) {
-            str = "";
+            string = "";
         }
         if (volumePanelState.isRemoteMic()) {
             if (volumePanelRow.getStreamType() == 6) {
-                str = getContext().getResources().getString(R.string.volume_amplify_ambient_sound_title);
+                string = getContext().getResources().getString(R.string.volume_amplify_ambient_sound_title);
             } else if (volumePanelRow.getStreamType() == 3 && !volumePanelState.isBtScoOn()) {
-                str = getContext().getResources().getString(R.string.volume_amplify_ambient_sound_title);
+                string = getContext().getResources().getString(R.string.volume_amplify_ambient_sound_title);
             }
         }
         if (remoteLabel.isEmpty()) {
-            return str;
+            return string;
         }
         int streamType = volumePanelRow.getStreamType();
         if (streamType != 3 && streamType != 22 && streamType != 6 && streamType != 21) {
-            return str;
+            return string;
         }
-        return str + " (" + remoteLabel + ")";
+        return string + " (" + remoteLabel + ")";
     }
 
     @Override // com.samsung.systemui.splugins.volume.VolumeObserver
@@ -164,7 +161,7 @@ public class SubDisplayVolumeRowView extends LinearLayout implements VolumeObser
         switch (AnonymousClass1.$SwitchMap$com$samsung$systemui$splugins$volume$VolumePanelState$StateType[volumePanelState2.getStateType().ordinal()]) {
             case 1:
                 final int i = 3;
-                Stream<VolumePanelRow> filter = volumePanelState2.getVolumeRowList().stream().filter(new Predicate(this) { // from class: com.android.systemui.volume.view.subscreen.simple.SubDisplayVolumeRowView$$ExternalSyntheticLambda1
+                Stream<VolumePanelRow> streamFilter = volumePanelState2.getVolumeRowList().stream().filter(new Predicate(this) { // from class: com.android.systemui.volume.view.subscreen.simple.SubDisplayVolumeRowView$$ExternalSyntheticLambda1
                     public final /* synthetic */ SubDisplayVolumeRowView f$0;
 
                     {
@@ -210,7 +207,7 @@ public class SubDisplayVolumeRowView extends LinearLayout implements VolumeObser
                     }
                 });
                 final int i2 = 1;
-                filter.forEach(new Consumer(this) { // from class: com.android.systemui.volume.view.subscreen.simple.SubDisplayVolumeRowView$$ExternalSyntheticLambda6
+                streamFilter.forEach(new Consumer(this) { // from class: com.android.systemui.volume.view.subscreen.simple.SubDisplayVolumeRowView$$ExternalSyntheticLambda6
                     public final /* synthetic */ SubDisplayVolumeRowView f$0;
 
                     {
@@ -226,28 +223,28 @@ public class SubDisplayVolumeRowView extends LinearLayout implements VolumeObser
                             case 0:
                                 int i4 = SubDisplayVolumeRowView.$r8$clinit;
                                 subDisplayVolumeRowView.getClass();
-                                int viewRealLevel = ViewLevelConverter.viewRealLevel(volumePanelRow);
+                                int iViewRealLevel = ViewLevelConverter.viewRealLevel(volumePanelRow);
                                 if (!volumePanelRow.isVisible()) {
                                     ObjectAnimator objectAnimator = subDisplayVolumeRowView.mProgressBarAnimator;
                                     if (objectAnimator != null) {
                                         objectAnimator.cancel();
                                     }
-                                    subDisplayVolumeRowView.mSeekBar.setProgress(viewRealLevel);
+                                    subDisplayVolumeRowView.mSeekBar.setProgress(iViewRealLevel);
                                     break;
                                 } else {
                                     ObjectAnimator objectAnimator2 = subDisplayVolumeRowView.mProgressBarAnimator;
-                                    if (objectAnimator2 == null || !objectAnimator2.isRunning() || subDisplayVolumeRowView.mTargetProgressLevel != viewRealLevel) {
+                                    if (objectAnimator2 == null || !objectAnimator2.isRunning() || subDisplayVolumeRowView.mTargetProgressLevel != iViewRealLevel) {
                                         ObjectAnimator objectAnimator3 = subDisplayVolumeRowView.mProgressBarAnimator;
                                         if (objectAnimator3 == null) {
                                             SeekBar seekBar = subDisplayVolumeRowView.mSeekBar;
-                                            ObjectAnimator ofInt = ObjectAnimator.ofInt(seekBar, "progress", seekBar.getProgress(), viewRealLevel);
-                                            subDisplayVolumeRowView.mProgressBarAnimator = ofInt;
-                                            ofInt.setInterpolator(new DecelerateInterpolator());
+                                            ObjectAnimator objectAnimatorOfInt = ObjectAnimator.ofInt(seekBar, "progress", seekBar.getProgress(), iViewRealLevel);
+                                            subDisplayVolumeRowView.mProgressBarAnimator = objectAnimatorOfInt;
+                                            objectAnimatorOfInt.setInterpolator(new DecelerateInterpolator());
                                         } else {
                                             objectAnimator3.cancel();
-                                            subDisplayVolumeRowView.mProgressBarAnimator.setIntValues(subDisplayVolumeRowView.mSeekBar.getProgress(), viewRealLevel);
+                                            subDisplayVolumeRowView.mProgressBarAnimator.setIntValues(subDisplayVolumeRowView.mSeekBar.getProgress(), iViewRealLevel);
                                         }
-                                        subDisplayVolumeRowView.mTargetProgressLevel = viewRealLevel;
+                                        subDisplayVolumeRowView.mTargetProgressLevel = iViewRealLevel;
                                         subDisplayVolumeRowView.mProgressBarAnimator.setDuration(80L);
                                         subDisplayVolumeRowView.mProgressBarAnimator.start();
                                         break;
@@ -319,7 +316,7 @@ public class SubDisplayVolumeRowView extends LinearLayout implements VolumeObser
                     }
 
                     @Override // java.util.function.Consumer
-                    public final void accept(Object obj) {
+                    public final void accept(Object obj) throws Resources.NotFoundException {
                         switch (i3) {
                             case 0:
                                 SubDisplayVolumeRowView subDisplayVolumeRowView = this.f$0;
@@ -395,7 +392,7 @@ public class SubDisplayVolumeRowView extends LinearLayout implements VolumeObser
                     }
 
                     @Override // java.util.function.Consumer
-                    public final void accept(Object obj) {
+                    public final void accept(Object obj) throws Resources.NotFoundException {
                         switch (i4) {
                             case 0:
                                 SubDisplayVolumeRowView subDisplayVolumeRowView = this.f$0;
@@ -423,7 +420,7 @@ public class SubDisplayVolumeRowView extends LinearLayout implements VolumeObser
             case 2:
                 if (this.mStream == volumePanelState2.getStream()) {
                     final int i5 = 2;
-                    Stream<VolumePanelRow> filter2 = volumePanelState2.getVolumeRowList().stream().filter(new Predicate(this) { // from class: com.android.systemui.volume.view.subscreen.simple.SubDisplayVolumeRowView$$ExternalSyntheticLambda1
+                    Stream<VolumePanelRow> streamFilter2 = volumePanelState2.getVolumeRowList().stream().filter(new Predicate(this) { // from class: com.android.systemui.volume.view.subscreen.simple.SubDisplayVolumeRowView$$ExternalSyntheticLambda1
                         public final /* synthetic */ SubDisplayVolumeRowView f$0;
 
                         {
@@ -469,7 +466,7 @@ public class SubDisplayVolumeRowView extends LinearLayout implements VolumeObser
                         }
                     });
                     final int i6 = 0;
-                    filter2.forEach(new Consumer(this) { // from class: com.android.systemui.volume.view.subscreen.simple.SubDisplayVolumeRowView$$ExternalSyntheticLambda6
+                    streamFilter2.forEach(new Consumer(this) { // from class: com.android.systemui.volume.view.subscreen.simple.SubDisplayVolumeRowView$$ExternalSyntheticLambda6
                         public final /* synthetic */ SubDisplayVolumeRowView f$0;
 
                         {
@@ -485,28 +482,28 @@ public class SubDisplayVolumeRowView extends LinearLayout implements VolumeObser
                                 case 0:
                                     int i42 = SubDisplayVolumeRowView.$r8$clinit;
                                     subDisplayVolumeRowView.getClass();
-                                    int viewRealLevel = ViewLevelConverter.viewRealLevel(volumePanelRow);
+                                    int iViewRealLevel = ViewLevelConverter.viewRealLevel(volumePanelRow);
                                     if (!volumePanelRow.isVisible()) {
                                         ObjectAnimator objectAnimator = subDisplayVolumeRowView.mProgressBarAnimator;
                                         if (objectAnimator != null) {
                                             objectAnimator.cancel();
                                         }
-                                        subDisplayVolumeRowView.mSeekBar.setProgress(viewRealLevel);
+                                        subDisplayVolumeRowView.mSeekBar.setProgress(iViewRealLevel);
                                         break;
                                     } else {
                                         ObjectAnimator objectAnimator2 = subDisplayVolumeRowView.mProgressBarAnimator;
-                                        if (objectAnimator2 == null || !objectAnimator2.isRunning() || subDisplayVolumeRowView.mTargetProgressLevel != viewRealLevel) {
+                                        if (objectAnimator2 == null || !objectAnimator2.isRunning() || subDisplayVolumeRowView.mTargetProgressLevel != iViewRealLevel) {
                                             ObjectAnimator objectAnimator3 = subDisplayVolumeRowView.mProgressBarAnimator;
                                             if (objectAnimator3 == null) {
                                                 SeekBar seekBar = subDisplayVolumeRowView.mSeekBar;
-                                                ObjectAnimator ofInt = ObjectAnimator.ofInt(seekBar, "progress", seekBar.getProgress(), viewRealLevel);
-                                                subDisplayVolumeRowView.mProgressBarAnimator = ofInt;
-                                                ofInt.setInterpolator(new DecelerateInterpolator());
+                                                ObjectAnimator objectAnimatorOfInt = ObjectAnimator.ofInt(seekBar, "progress", seekBar.getProgress(), iViewRealLevel);
+                                                subDisplayVolumeRowView.mProgressBarAnimator = objectAnimatorOfInt;
+                                                objectAnimatorOfInt.setInterpolator(new DecelerateInterpolator());
                                             } else {
                                                 objectAnimator3.cancel();
-                                                subDisplayVolumeRowView.mProgressBarAnimator.setIntValues(subDisplayVolumeRowView.mSeekBar.getProgress(), viewRealLevel);
+                                                subDisplayVolumeRowView.mProgressBarAnimator.setIntValues(subDisplayVolumeRowView.mSeekBar.getProgress(), iViewRealLevel);
                                             }
-                                            subDisplayVolumeRowView.mTargetProgressLevel = viewRealLevel;
+                                            subDisplayVolumeRowView.mTargetProgressLevel = iViewRealLevel;
                                             subDisplayVolumeRowView.mProgressBarAnimator.setDuration(80L);
                                             subDisplayVolumeRowView.mProgressBarAnimator.start();
                                             break;

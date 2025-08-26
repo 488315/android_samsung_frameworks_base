@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.content.res.Resources;
 import android.hardware.biometrics.BiometricSourceType;
 import android.os.Handler;
 import android.os.Looper;
@@ -25,7 +26,6 @@ import com.android.systemui.widget.SystemUITextView;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class KeyguardFingerprintGuidePopup extends FrameLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -47,7 +47,6 @@ public final class KeyguardFingerprintGuidePopup extends FrameLayout {
     public final KeyguardFingerprintGuidePopup$keyguardUpdateMonitorCallback$1 keyguardUpdateMonitorCallback;
     public final TelephonyManager telephonyManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -61,6 +60,7 @@ public final class KeyguardFingerprintGuidePopup extends FrameLayout {
         new Companion(null);
     }
 
+    /* JADX WARN: Multi-variable type inference failed */
     public KeyguardFingerprintGuidePopup(Context context) {
         this(context, null, 2, 0 == true ? 1 : 0);
     }
@@ -92,20 +92,20 @@ public final class KeyguardFingerprintGuidePopup extends FrameLayout {
         SystemUITextView systemUITextView = this.guideText;
         if (systemUITextView != null) {
             systemUITextView.setVisibility(8);
-            ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this.keyguardGuidePopup, "alpha", 1.0f, 0.0f);
-            ofFloat.setDuration(100L);
+            ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this.keyguardGuidePopup, "alpha", 1.0f, 0.0f);
+            objectAnimatorOfFloat.setDuration(100L);
             AnimatorSet animatorSet = new AnimatorSet();
             this.animatorSet = animatorSet;
-            animatorSet.play(ofFloat);
+            animatorSet.play(objectAnimatorOfFloat);
             animatorSet.addListener(new Animator.AnimatorListener() { // from class: com.android.keyguard.biometrics.KeyguardFingerprintGuidePopup$dismissAnimation$1$1
                 @Override // android.animation.Animator.AnimatorListener
                 public final void onAnimationCancel(Animator animator) {
-                    KeyguardFingerprintGuidePopup.access$reset(KeyguardFingerprintGuidePopup.this);
+                    KeyguardFingerprintGuidePopup.access$reset(this.this$0);
                 }
 
                 @Override // android.animation.Animator.AnimatorListener
                 public final void onAnimationEnd(Animator animator) {
-                    KeyguardFingerprintGuidePopup.access$reset(KeyguardFingerprintGuidePopup.this);
+                    KeyguardFingerprintGuidePopup.access$reset(this.this$0);
                 }
 
                 @Override // android.animation.Animator.AnimatorListener
@@ -133,7 +133,7 @@ public final class KeyguardFingerprintGuidePopup extends FrameLayout {
     }
 
     @Override // android.view.View
-    public final void onFinishInflate() {
+    public final void onFinishInflate() throws Resources.NotFoundException {
         super.onFinishInflate();
         Log.d("KeyguardFingerprintGuidePopup", "onFinishInflate()");
         setVisibility(8);
@@ -156,15 +156,15 @@ public final class KeyguardFingerprintGuidePopup extends FrameLayout {
     public KeyguardFingerprintGuidePopup(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.keyguardUpdateMonitor = (KeyguardUpdateMonitor) Dependency.sDependency.getDependencyInner(KeyguardUpdateMonitor.class);
-        Looper myLooper = Looper.myLooper();
-        myLooper.getClass();
-        this.handler = new Handler(myLooper);
+        Looper looperMyLooper = Looper.myLooper();
+        looperMyLooper.getClass();
+        this.handler = new Handler(looperMyLooper);
         this.displayLifecycle = (DisplayLifecycle) Dependency.sDependency.getDependencyInner(DisplayLifecycle.class);
         this.display = ((DisplayLifecycle) Dependency.sDependency.getDependencyInner(DisplayLifecycle.class)).getDisplay(0);
         this.hidePopupRunnable = new Runnable() { // from class: com.android.keyguard.biometrics.KeyguardFingerprintGuidePopup$hidePopupRunnable$1
             @Override // java.lang.Runnable
             public final void run() {
-                KeyguardFingerprintGuidePopup keyguardFingerprintGuidePopup = KeyguardFingerprintGuidePopup.this;
+                KeyguardFingerprintGuidePopup keyguardFingerprintGuidePopup = this.this$0;
                 int i = KeyguardFingerprintGuidePopup.$r8$clinit;
                 keyguardFingerprintGuidePopup.clearGuidePopup();
             }
@@ -173,7 +173,7 @@ public final class KeyguardFingerprintGuidePopup extends FrameLayout {
         this.displayLifeCycleObserver = new DisplayLifecycle.Observer() { // from class: com.android.keyguard.biometrics.KeyguardFingerprintGuidePopup$displayLifeCycleObserver$1
             @Override // com.android.systemui.keyguard.DisplayLifecycle.Observer
             public final void onDisplayChanged(int i) {
-                KeyguardFingerprintGuidePopup keyguardFingerprintGuidePopup = KeyguardFingerprintGuidePopup.this;
+                KeyguardFingerprintGuidePopup keyguardFingerprintGuidePopup = this.this$0;
                 int rotation = DeviceState.getRotation(keyguardFingerprintGuidePopup.display.getRotation());
                 if (keyguardFingerprintGuidePopup.currentRotation != rotation) {
                     keyguardFingerprintGuidePopup.currentRotation = rotation;
@@ -185,15 +185,15 @@ public final class KeyguardFingerprintGuidePopup extends FrameLayout {
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
             public final void onBiometricAuthenticated(int i, BiometricSourceType biometricSourceType, boolean z) {
                 if (biometricSourceType == BiometricSourceType.FACE) {
-                    KeyguardFingerprintGuidePopup.access$updatePopupVisibility(KeyguardFingerprintGuidePopup.this);
+                    KeyguardFingerprintGuidePopup.access$updatePopupVisibility(this.this$0);
                 }
             }
 
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
-            public final void onBiometricHelp(int i, String str, BiometricSourceType biometricSourceType) {
+            public final void onBiometricHelp(int i, String str, BiometricSourceType biometricSourceType) throws Resources.NotFoundException {
                 if (biometricSourceType == BiometricSourceType.FINGERPRINT) {
                     int i2 = KeyguardFingerprintGuidePopup.$r8$clinit;
-                    final KeyguardFingerprintGuidePopup keyguardFingerprintGuidePopup = KeyguardFingerprintGuidePopup.this;
+                    final KeyguardFingerprintGuidePopup keyguardFingerprintGuidePopup = this.this$0;
                     if (DeviceState.getRotation(keyguardFingerprintGuidePopup.display.getRotation()) != 2 || keyguardFingerprintGuidePopup.isAnimating) {
                         return;
                     }
@@ -217,16 +217,16 @@ public final class KeyguardFingerprintGuidePopup extends FrameLayout {
                         keyguardFingerprintGuidePopup.handler.removeCallbacks(keyguardFingerprintGuidePopup.hidePopupRunnable);
                     }
                     if (!keyguardFingerprintGuidePopup.isAnimating || !Intrinsics.areEqual(keyguardFingerprintGuidePopup.helpText, "")) {
-                        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(keyguardFingerprintGuidePopup.keyguardGuidePopup, "alpha", 0.0f, 1.0f);
-                        ofFloat.setDuration(100L);
-                        ofFloat.setInterpolator(new LinearInterpolator());
+                        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(keyguardFingerprintGuidePopup.keyguardGuidePopup, "alpha", 0.0f, 1.0f);
+                        objectAnimatorOfFloat.setDuration(100L);
+                        objectAnimatorOfFloat.setInterpolator(new LinearInterpolator());
                         AnimatorSet animatorSet = new AnimatorSet();
                         keyguardFingerprintGuidePopup.animatorSet = animatorSet;
-                        animatorSet.play(ofFloat);
+                        animatorSet.play(objectAnimatorOfFloat);
                         animatorSet.addListener(new Animator.AnimatorListener() { // from class: com.android.keyguard.biometrics.KeyguardFingerprintGuidePopup$showMessage$1$1
                             @Override // android.animation.Animator.AnimatorListener
                             public final void onAnimationStart(Animator animator) {
-                                KeyguardFingerprintGuidePopup.this.isAnimating = true;
+                                keyguardFingerprintGuidePopup.isAnimating = true;
                             }
 
                             @Override // android.animation.Animator.AnimatorListener
@@ -251,7 +251,7 @@ public final class KeyguardFingerprintGuidePopup extends FrameLayout {
 
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
             public final void onBiometricLockoutChanged(boolean z) {
-                KeyguardFingerprintGuidePopup keyguardFingerprintGuidePopup = KeyguardFingerprintGuidePopup.this;
+                KeyguardFingerprintGuidePopup keyguardFingerprintGuidePopup = this.this$0;
                 if (z) {
                     if (keyguardFingerprintGuidePopup.getVisibility() == 0) {
                         keyguardFingerprintGuidePopup.clearGuidePopup();
@@ -264,7 +264,7 @@ public final class KeyguardFingerprintGuidePopup extends FrameLayout {
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
             public final void onBiometricRunningStateChanged(boolean z, BiometricSourceType biometricSourceType) {
                 if (biometricSourceType == BiometricSourceType.FINGERPRINT) {
-                    KeyguardFingerprintGuidePopup keyguardFingerprintGuidePopup = KeyguardFingerprintGuidePopup.this;
+                    KeyguardFingerprintGuidePopup keyguardFingerprintGuidePopup = this.this$0;
                     keyguardFingerprintGuidePopup.isRunningState = z;
                     KeyguardFingerprintGuidePopup.access$updatePopupVisibility(keyguardFingerprintGuidePopup);
                 }
@@ -272,7 +272,7 @@ public final class KeyguardFingerprintGuidePopup extends FrameLayout {
 
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
             public final void onKeyguardBouncerFullyShowingChanged(boolean z) {
-                KeyguardFingerprintGuidePopup keyguardFingerprintGuidePopup = KeyguardFingerprintGuidePopup.this;
+                KeyguardFingerprintGuidePopup keyguardFingerprintGuidePopup = this.this$0;
                 if (keyguardFingerprintGuidePopup.bouncerShowing != z) {
                     keyguardFingerprintGuidePopup.bouncerShowing = z;
                 }
@@ -288,7 +288,7 @@ public final class KeyguardFingerprintGuidePopup extends FrameLayout {
 
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
             public final void onKeyguardVisibilityChanged(boolean z) {
-                KeyguardFingerprintGuidePopup keyguardFingerprintGuidePopup = KeyguardFingerprintGuidePopup.this;
+                KeyguardFingerprintGuidePopup keyguardFingerprintGuidePopup = this.this$0;
                 if (keyguardFingerprintGuidePopup.keyguardShowing != z) {
                     keyguardFingerprintGuidePopup.keyguardShowing = z;
                     if (z) {
@@ -301,9 +301,9 @@ public final class KeyguardFingerprintGuidePopup extends FrameLayout {
 
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
             public final void onLockModeChanged() {
-                boolean isFingerprintOptionEnabled = ((KeyguardUpdateMonitor) Dependency.sDependency.getDependencyInner(KeyguardUpdateMonitor.class)).isFingerprintOptionEnabled();
-                KeyguardFingerprintGuidePopup keyguardFingerprintGuidePopup = KeyguardFingerprintGuidePopup.this;
-                if (!isFingerprintOptionEnabled) {
+                boolean zIsFingerprintOptionEnabled = ((KeyguardUpdateMonitor) Dependency.sDependency.getDependencyInner(KeyguardUpdateMonitor.class)).isFingerprintOptionEnabled();
+                KeyguardFingerprintGuidePopup keyguardFingerprintGuidePopup = this.this$0;
+                if (!zIsFingerprintOptionEnabled) {
                     keyguardFingerprintGuidePopup.displayLifecycle.removeObserver(keyguardFingerprintGuidePopup.displayLifeCycleObserver);
                 } else {
                     keyguardFingerprintGuidePopup.currentRotation = DeviceState.getRotation(keyguardFingerprintGuidePopup.display.getRotation());
@@ -313,7 +313,7 @@ public final class KeyguardFingerprintGuidePopup extends FrameLayout {
 
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
             public final void onPhoneStateChanged(int i) {
-                KeyguardFingerprintGuidePopup keyguardFingerprintGuidePopup = KeyguardFingerprintGuidePopup.this;
+                KeyguardFingerprintGuidePopup keyguardFingerprintGuidePopup = this.this$0;
                 if (keyguardFingerprintGuidePopup.telephonyManager.semIsVideoCall()) {
                     if (i == 0) {
                         KeyguardFingerprintGuidePopup.access$updatePopupVisibility(keyguardFingerprintGuidePopup);
@@ -326,7 +326,7 @@ public final class KeyguardFingerprintGuidePopup extends FrameLayout {
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
             public final void onSimStateChanged(int i, int i2, int i3) {
                 if (KeyguardUpdateMonitor.isSimPinSecure(i3)) {
-                    KeyguardFingerprintGuidePopup keyguardFingerprintGuidePopup = KeyguardFingerprintGuidePopup.this;
+                    KeyguardFingerprintGuidePopup keyguardFingerprintGuidePopup = this.this$0;
                     if (keyguardFingerprintGuidePopup.getVisibility() == 0) {
                         keyguardFingerprintGuidePopup.clearGuidePopup();
                     }
@@ -335,12 +335,12 @@ public final class KeyguardFingerprintGuidePopup extends FrameLayout {
 
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
             public final void onStartedWakingUp() {
-                KeyguardFingerprintGuidePopup.access$updatePopupVisibility(KeyguardFingerprintGuidePopup.this);
+                KeyguardFingerprintGuidePopup.access$updatePopupVisibility(this.this$0);
             }
 
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
             public final void onSystemDialogsShowing() {
-                KeyguardFingerprintGuidePopup keyguardFingerprintGuidePopup = KeyguardFingerprintGuidePopup.this;
+                KeyguardFingerprintGuidePopup keyguardFingerprintGuidePopup = this.this$0;
                 if (keyguardFingerprintGuidePopup.getVisibility() == 0) {
                     KeyguardFingerprintGuidePopup.access$updatePopupVisibility(keyguardFingerprintGuidePopup);
                 }
@@ -348,7 +348,7 @@ public final class KeyguardFingerprintGuidePopup extends FrameLayout {
 
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
             public final void onTrustChanged(int i) {
-                KeyguardFingerprintGuidePopup.access$updatePopupVisibility(KeyguardFingerprintGuidePopup.this);
+                KeyguardFingerprintGuidePopup.access$updatePopupVisibility(this.this$0);
             }
         };
     }

@@ -26,18 +26,18 @@ class ReadFileDataSource implements DataSource {
     }
 
     @Override // android.util.apk.DataSource
-    public void feedIntoDataDigester(DataDigester dataDigester, long j, int i) throws IOException, DigestException {
+    public void feedIntoDataDigester(DataDigester dataDigester, long j, int i) throws DigestException, IOException, ErrnoException {
         try {
             byte[] bArr = new byte[Math.min(i, 1048576)];
             long j2 = this.mFilePosition + j;
             long j3 = i + j2;
-            long min = Math.min(i, 1048576);
+            long jMin = Math.min(i, 1048576);
             long j4 = j2;
             while (j4 < j3) {
-                int pread = Os.pread(this.mFd, bArr, 0, (int) min, j4);
-                dataDigester.consume(ByteBuffer.wrap(bArr, 0, pread));
-                j4 += pread;
-                min = Math.min(j3 - j4, 1048576L);
+                int iPread = Os.pread(this.mFd, bArr, 0, (int) jMin, j4);
+                dataDigester.consume(ByteBuffer.wrap(bArr, 0, iPread));
+                j4 += iPread;
+                jMin = Math.min(j3 - j4, 1048576L);
             }
         } catch (ErrnoException e) {
             throw new IOException(e);

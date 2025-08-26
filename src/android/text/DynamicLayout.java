@@ -96,27 +96,27 @@ public class DynamicLayout extends Layout {
         }
 
         public static Builder obtain(CharSequence charSequence, TextPaint textPaint, int i) {
-            Builder acquire = sPool.acquire();
-            if (acquire == null) {
-                acquire = new Builder();
+            Builder builderAcquire = sPool.acquire();
+            if (builderAcquire == null) {
+                builderAcquire = new Builder();
             }
-            acquire.mBase = charSequence;
-            acquire.mDisplay = charSequence;
-            acquire.mPaint = textPaint;
-            acquire.mWidth = i;
-            acquire.mAlignment = Layout.Alignment.ALIGN_NORMAL;
-            acquire.mTextDir = TextDirectionHeuristics.FIRSTSTRONG_LTR;
-            acquire.mSpacingMult = 1.0f;
-            acquire.mSpacingAdd = 0.0f;
-            acquire.mIncludePad = true;
-            acquire.mFallbackLineSpacing = false;
-            acquire.mEllipsizedWidth = i;
-            acquire.mEllipsize = null;
-            acquire.mBreakStrategy = 0;
-            acquire.mHyphenationFrequency = 0;
-            acquire.mJustificationMode = 0;
-            acquire.mLineBreakConfig = LineBreakConfig.NONE;
-            return acquire;
+            builderAcquire.mBase = charSequence;
+            builderAcquire.mDisplay = charSequence;
+            builderAcquire.mPaint = textPaint;
+            builderAcquire.mWidth = i;
+            builderAcquire.mAlignment = Layout.Alignment.ALIGN_NORMAL;
+            builderAcquire.mTextDir = TextDirectionHeuristics.FIRSTSTRONG_LTR;
+            builderAcquire.mSpacingMult = 1.0f;
+            builderAcquire.mSpacingAdd = 0.0f;
+            builderAcquire.mIncludePad = true;
+            builderAcquire.mFallbackLineSpacing = false;
+            builderAcquire.mEllipsizedWidth = i;
+            builderAcquire.mEllipsize = null;
+            builderAcquire.mBreakStrategy = 0;
+            builderAcquire.mHyphenationFrequency = 0;
+            builderAcquire.mJustificationMode = 0;
+            builderAcquire.mLineBreakConfig = LineBreakConfig.NONE;
+            return builderAcquire;
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -319,9 +319,9 @@ public class DynamicLayout extends Layout {
 
     public void reflow(CharSequence charSequence, int i, int i2, int i3) {
         StaticLayout staticLayout;
-        StaticLayout.Builder builder;
-        int i4;
-        int i5;
+        StaticLayout.Builder builderObtain;
+        int topPadding;
+        int bottomPadding;
         int[] iArr;
         boolean z;
         if (charSequence != this.mBase) {
@@ -329,85 +329,85 @@ public class DynamicLayout extends Layout {
         }
         CharSequence charSequence2 = this.mDisplay;
         int length = charSequence2.length();
-        int lastIndexOf = TextUtils.lastIndexOf(charSequence2, '\n', i - 1);
-        int i6 = i - (lastIndexOf < 0 ? 0 : lastIndexOf + 1);
-        int i7 = i2 + i6;
-        int i8 = i3 + i6;
-        int i9 = i - i6;
-        int i10 = i9 + i8;
-        int indexOf = TextUtils.indexOf(charSequence2, '\n', i10);
-        int i11 = (indexOf < 0 ? length : indexOf + 1) - i10;
-        int i12 = i7 + i11;
-        int i13 = i8 + i11;
+        int iLastIndexOf = TextUtils.lastIndexOf(charSequence2, '\n', i - 1);
+        int i4 = i - (iLastIndexOf < 0 ? 0 : iLastIndexOf + 1);
+        int i5 = i2 + i4;
+        int i6 = i3 + i4;
+        int i7 = i - i4;
+        int i8 = i7 + i6;
+        int iIndexOf = TextUtils.indexOf(charSequence2, '\n', i8);
+        int i9 = (iIndexOf < 0 ? length : iIndexOf + 1) - i8;
+        int i10 = i5 + i9;
+        int i11 = i6 + i9;
         if (charSequence2 instanceof Spanned) {
             Spanned spanned = (Spanned) charSequence2;
             do {
-                Object[] spans = spanned.getSpans(i9, i9 + i13, WrapTogetherSpan.class);
+                Object[] spans = spanned.getSpans(i7, i7 + i11, WrapTogetherSpan.class);
                 z = false;
-                for (int i14 = 0; i14 < spans.length; i14++) {
-                    int spanStart = spanned.getSpanStart(spans[i14]);
-                    int spanEnd = spanned.getSpanEnd(spans[i14]);
-                    if (spanStart < i9) {
-                        int i15 = i9 - spanStart;
-                        i12 += i15;
-                        i13 += i15;
-                        i9 -= i15;
+                for (int i12 = 0; i12 < spans.length; i12++) {
+                    int spanStart = spanned.getSpanStart(spans[i12]);
+                    int spanEnd = spanned.getSpanEnd(spans[i12]);
+                    if (spanStart < i7) {
+                        int i13 = i7 - spanStart;
+                        i10 += i13;
+                        i11 += i13;
+                        i7 -= i13;
                         z = true;
                     }
-                    int i16 = i9 + i13;
-                    if (spanEnd > i16) {
-                        int i17 = spanEnd - i16;
-                        i12 += i17;
-                        i13 += i17;
+                    int i14 = i7 + i11;
+                    if (spanEnd > i14) {
+                        int i15 = spanEnd - i14;
+                        i10 += i15;
+                        i11 += i15;
                         z = true;
                     }
                 }
             } while (z);
         }
-        int lineForOffset = getLineForOffset(i9);
+        int lineForOffset = getLineForOffset(i7);
         int lineTop = getLineTop(lineForOffset);
-        int lineForOffset2 = getLineForOffset(i9 + i12);
-        int i18 = i9 + i13;
-        if (i18 == length) {
+        int lineForOffset2 = getLineForOffset(i7 + i10);
+        int i16 = i7 + i11;
+        if (i16 == length) {
             lineForOffset2 = getLineCount();
         }
         int lineTop2 = getLineTop(lineForOffset2);
         boolean z2 = lineForOffset2 == getLineCount();
         synchronized (sLock) {
             staticLayout = sStaticLayout;
-            builder = sBuilder;
+            builderObtain = sBuilder;
             sStaticLayout = null;
             sBuilder = null;
         }
-        if (builder == null) {
-            builder = StaticLayout.Builder.obtain(charSequence2, i9, i18, getPaint(), getWidth());
+        if (builderObtain == null) {
+            builderObtain = StaticLayout.Builder.obtain(charSequence2, i7, i16, getPaint(), getWidth());
         }
-        StaticLayout.Builder builder2 = builder;
-        builder2.setText(charSequence2, i9, i18).setPaint(getPaint()).setWidth(getWidth()).setTextDirection(getTextDirectionHeuristic()).setLineSpacing(getSpacingAdd(), getSpacingMultiplier()).setUseLineSpacingFromFallbacks(this.mFallbackLineSpacing).setEllipsizedWidth(this.mEllipsizedWidth).setEllipsize(this.mEllipsizeAt).setBreakStrategy(this.mBreakStrategy).setHyphenationFrequency(this.mHyphenationFrequency).setJustificationMode(this.mJustificationMode).setLineBreakConfig(this.mLineBreakConfig).setAddLastLineLineSpacing(!z2).setIncludePad(false).setUseBoundsForWidth(this.mUseBoundsForWidth).setShiftDrawingOffsetForStartOverhang(this.mShiftDrawingOffsetForStartOverhang).setMinimumFontMetrics(this.mMinimumFontMetrics).setCalculateBounds(true);
-        StaticLayout buildPartialStaticLayoutForDynamicLayout = builder2.buildPartialStaticLayoutForDynamicLayout(true, staticLayout);
-        int lineCount = buildPartialStaticLayoutForDynamicLayout.getLineCount();
-        if (i18 != length && buildPartialStaticLayoutForDynamicLayout.getLineStart(lineCount - 1) == i18) {
+        StaticLayout.Builder builder = builderObtain;
+        builder.setText(charSequence2, i7, i16).setPaint(getPaint()).setWidth(getWidth()).setTextDirection(getTextDirectionHeuristic()).setLineSpacing(getSpacingAdd(), getSpacingMultiplier()).setUseLineSpacingFromFallbacks(this.mFallbackLineSpacing).setEllipsizedWidth(this.mEllipsizedWidth).setEllipsize(this.mEllipsizeAt).setBreakStrategy(this.mBreakStrategy).setHyphenationFrequency(this.mHyphenationFrequency).setJustificationMode(this.mJustificationMode).setLineBreakConfig(this.mLineBreakConfig).setAddLastLineLineSpacing(!z2).setIncludePad(false).setUseBoundsForWidth(this.mUseBoundsForWidth).setShiftDrawingOffsetForStartOverhang(this.mShiftDrawingOffsetForStartOverhang).setMinimumFontMetrics(this.mMinimumFontMetrics).setCalculateBounds(true);
+        StaticLayout staticLayoutBuildPartialStaticLayoutForDynamicLayout = builder.buildPartialStaticLayoutForDynamicLayout(true, staticLayout);
+        int lineCount = staticLayoutBuildPartialStaticLayoutForDynamicLayout.getLineCount();
+        if (i16 != length && staticLayoutBuildPartialStaticLayoutForDynamicLayout.getLineStart(lineCount - 1) == i16) {
             lineCount--;
         }
-        int i19 = lineForOffset2 - lineForOffset;
-        this.mInts.deleteAt(lineForOffset, i19);
-        this.mObjects.deleteAt(lineForOffset, i19);
-        int lineTop3 = buildPartialStaticLayoutForDynamicLayout.getLineTop(lineCount);
+        int i17 = lineForOffset2 - lineForOffset;
+        this.mInts.deleteAt(lineForOffset, i17);
+        this.mObjects.deleteAt(lineForOffset, i17);
+        int lineTop3 = staticLayoutBuildPartialStaticLayoutForDynamicLayout.getLineTop(lineCount);
         if (this.mIncludePad && lineForOffset == 0) {
-            i4 = buildPartialStaticLayoutForDynamicLayout.getTopPadding();
-            this.mTopPadding = i4;
-            lineTop3 -= i4;
+            topPadding = staticLayoutBuildPartialStaticLayoutForDynamicLayout.getTopPadding();
+            this.mTopPadding = topPadding;
+            lineTop3 -= topPadding;
         } else {
-            i4 = 0;
+            topPadding = 0;
         }
         if (this.mIncludePad && z2) {
-            i5 = buildPartialStaticLayoutForDynamicLayout.getBottomPadding();
-            this.mBottomPadding = i5;
-            lineTop3 += i5;
+            bottomPadding = staticLayoutBuildPartialStaticLayoutForDynamicLayout.getBottomPadding();
+            this.mBottomPadding = bottomPadding;
+            lineTop3 += bottomPadding;
         } else {
-            i5 = 0;
+            bottomPadding = 0;
         }
-        this.mInts.adjustValuesBelow(lineForOffset, 0, i13 - i12);
+        this.mInts.adjustValuesBelow(lineForOffset, 0, i11 - i10);
         this.mInts.adjustValuesBelow(lineForOffset, 1, (lineTop - lineTop2) + lineTop3);
         char c = 5;
         if (this.mEllipsize) {
@@ -417,51 +417,51 @@ public class DynamicLayout extends Layout {
             iArr = new int[5];
         }
         Layout.Directions[] directionsArr = new Layout.Directions[1];
-        int i20 = 0;
-        while (i20 < lineCount) {
-            int lineStart = buildPartialStaticLayoutForDynamicLayout.getLineStart(i20);
+        int i18 = 0;
+        while (i18 < lineCount) {
+            int lineStart = staticLayoutBuildPartialStaticLayoutForDynamicLayout.getLineStart(i18);
             iArr[0] = lineStart;
-            int paragraphDirection = lineStart | (buildPartialStaticLayoutForDynamicLayout.getParagraphDirection(i20) << 30);
+            int paragraphDirection = lineStart | (staticLayoutBuildPartialStaticLayoutForDynamicLayout.getParagraphDirection(i18) << 30);
             iArr[0] = paragraphDirection;
-            iArr[0] = paragraphDirection | (buildPartialStaticLayoutForDynamicLayout.getLineContainsTab(i20) ? 536870912 : 0);
-            int lineTop4 = buildPartialStaticLayoutForDynamicLayout.getLineTop(i20) + lineTop;
-            if (i20 > 0) {
-                lineTop4 -= i4;
+            iArr[0] = paragraphDirection | (staticLayoutBuildPartialStaticLayoutForDynamicLayout.getLineContainsTab(i18) ? 536870912 : 0);
+            int lineTop4 = staticLayoutBuildPartialStaticLayoutForDynamicLayout.getLineTop(i18) + lineTop;
+            if (i18 > 0) {
+                lineTop4 -= topPadding;
             }
             iArr[1] = lineTop4;
-            int lineDescent = buildPartialStaticLayoutForDynamicLayout.getLineDescent(i20);
+            int lineDescent = staticLayoutBuildPartialStaticLayoutForDynamicLayout.getLineDescent(i18);
             char c2 = c;
-            int i21 = lineCount - 1;
-            if (i20 == i21) {
-                lineDescent += i5;
+            int i19 = lineCount - 1;
+            if (i18 == i19) {
+                lineDescent += bottomPadding;
             }
             iArr[2] = lineDescent;
-            iArr[3] = buildPartialStaticLayoutForDynamicLayout.getLineExtra(i20);
-            directionsArr[0] = buildPartialStaticLayoutForDynamicLayout.getLineDirections(i20);
-            int lineStart2 = i20 == i21 ? i18 : buildPartialStaticLayoutForDynamicLayout.getLineStart(i20 + 1);
-            StaticLayout.Builder builder3 = builder2;
-            int i22 = lineTop;
-            int packHyphenEdit = StaticLayout.packHyphenEdit(buildPartialStaticLayoutForDynamicLayout.getStartHyphenEdit(i20), buildPartialStaticLayoutForDynamicLayout.getEndHyphenEdit(i20));
-            iArr[4] = packHyphenEdit;
-            iArr[4] = packHyphenEdit | (contentMayProtrudeFromLineTopOrBottom(charSequence2, lineStart, lineStart2) ? 256 : 0);
+            iArr[3] = staticLayoutBuildPartialStaticLayoutForDynamicLayout.getLineExtra(i18);
+            directionsArr[0] = staticLayoutBuildPartialStaticLayoutForDynamicLayout.getLineDirections(i18);
+            int lineStart2 = i18 == i19 ? i16 : staticLayoutBuildPartialStaticLayoutForDynamicLayout.getLineStart(i18 + 1);
+            StaticLayout.Builder builder2 = builder;
+            int i20 = lineTop;
+            int iPackHyphenEdit = StaticLayout.packHyphenEdit(staticLayoutBuildPartialStaticLayoutForDynamicLayout.getStartHyphenEdit(i18), staticLayoutBuildPartialStaticLayoutForDynamicLayout.getEndHyphenEdit(i18));
+            iArr[4] = iPackHyphenEdit;
+            iArr[4] = iPackHyphenEdit | (contentMayProtrudeFromLineTopOrBottom(charSequence2, lineStart, lineStart2) ? 256 : 0);
             if (this.mEllipsize) {
-                iArr[c2] = buildPartialStaticLayoutForDynamicLayout.getEllipsisStart(i20);
-                iArr[6] = buildPartialStaticLayoutForDynamicLayout.getEllipsisCount(i20);
+                iArr[c2] = staticLayoutBuildPartialStaticLayoutForDynamicLayout.getEllipsisStart(i18);
+                iArr[6] = staticLayoutBuildPartialStaticLayoutForDynamicLayout.getEllipsisCount(i18);
             }
-            int i23 = lineForOffset + i20;
-            this.mInts.insertAt(i23, iArr);
-            this.mObjects.insertAt(i23, directionsArr);
-            i20++;
+            int i21 = lineForOffset + i18;
+            this.mInts.insertAt(i21, iArr);
+            this.mObjects.insertAt(i21, directionsArr);
+            i18++;
             c = c2;
-            lineTop = i22;
-            builder2 = builder3;
+            lineTop = i20;
+            builder = builder2;
         }
-        StaticLayout.Builder builder4 = builder2;
+        StaticLayout.Builder builder3 = builder;
         updateBlocks(lineForOffset, lineForOffset2 - 1, lineCount);
-        builder4.finish();
+        builder3.finish();
         synchronized (sLock) {
-            sStaticLayout = buildPartialStaticLayoutForDynamicLayout;
-            sBuilder = builder4;
+            sStaticLayout = staticLayoutBuildPartialStaticLayoutForDynamicLayout;
+            sBuilder = builder3;
         }
     }
 
@@ -484,12 +484,12 @@ public class DynamicLayout extends Layout {
         CharSequence charSequence = this.mDisplay;
         int i = 400;
         while (true) {
-            int indexOf = TextUtils.indexOf(charSequence, '\n', i);
-            if (indexOf < 0) {
+            int iIndexOf = TextUtils.indexOf(charSequence, '\n', i);
+            if (iIndexOf < 0) {
                 break;
             }
-            addBlockAtOffset(indexOf);
-            i = indexOf + 400;
+            addBlockAtOffset(iIndexOf);
+            i = iIndexOf + 400;
         }
         addBlockAtOffset(charSequence.length());
         this.mBlockIndices = new int[this.mBlockEndLines.length];
@@ -523,10 +523,10 @@ public class DynamicLayout extends Layout {
         int lineForOffset = getLineForOffset(i);
         int[] iArr = this.mBlockEndLines;
         if (iArr == null) {
-            int[] newUnpaddedIntArray = ArrayUtils.newUnpaddedIntArray(1);
-            this.mBlockEndLines = newUnpaddedIntArray;
+            int[] iArrNewUnpaddedIntArray = ArrayUtils.newUnpaddedIntArray(1);
+            this.mBlockEndLines = iArrNewUnpaddedIntArray;
             int i2 = this.mNumberOfBlocks;
-            newUnpaddedIntArray[i2] = lineForOffset;
+            iArrNewUnpaddedIntArray[i2] = lineForOffset;
             updateAlwaysNeedsToBeRedrawn(i2);
             this.mNumberOfBlocks++;
             return;
@@ -586,15 +586,15 @@ public class DynamicLayout extends Layout {
             return;
         }
         if (i11 > iArr.length) {
-            int[] newUnpaddedIntArray = ArrayUtils.newUnpaddedIntArray(Math.max(iArr.length * 2, i11));
-            int[] iArr2 = new int[newUnpaddedIntArray.length];
-            System.arraycopy(this.mBlockEndLines, 0, newUnpaddedIntArray, 0, i5);
+            int[] iArrNewUnpaddedIntArray = ArrayUtils.newUnpaddedIntArray(Math.max(iArr.length * 2, i11));
+            int[] iArr2 = new int[iArrNewUnpaddedIntArray.length];
+            System.arraycopy(this.mBlockEndLines, 0, iArrNewUnpaddedIntArray, 0, i5);
             System.arraycopy(this.mBlockIndices, 0, iArr2, 0, i5);
             int i12 = i6 + 1;
             int i13 = i5 + i9;
-            System.arraycopy(this.mBlockEndLines, i12, newUnpaddedIntArray, i13, (this.mNumberOfBlocks - i6) - 1);
+            System.arraycopy(this.mBlockEndLines, i12, iArrNewUnpaddedIntArray, i13, (this.mNumberOfBlocks - i6) - 1);
             System.arraycopy(this.mBlockIndices, i12, iArr2, i13, (this.mNumberOfBlocks - i6) - 1);
-            this.mBlockEndLines = newUnpaddedIntArray;
+            this.mBlockEndLines = iArrNewUnpaddedIntArray;
             this.mBlockIndices = iArr2;
         } else if (i9 + i10 != 0) {
             int i14 = i6 + 1;
@@ -607,12 +607,12 @@ public class DynamicLayout extends Layout {
             ArraySet<Integer> arraySet = new ArraySet<>();
             int i16 = i9 - i10;
             for (int i17 = 0; i17 < this.mBlocksAlwaysNeedToBeRedrawn.size(); i17++) {
-                Integer valueAt = this.mBlocksAlwaysNeedToBeRedrawn.valueAt(i17);
-                if (valueAt.intValue() < i5) {
-                    arraySet.add(valueAt);
+                Integer numValueAt = this.mBlocksAlwaysNeedToBeRedrawn.valueAt(i17);
+                if (numValueAt.intValue() < i5) {
+                    arraySet.add(numValueAt);
                 }
-                if (valueAt.intValue() > i6) {
-                    arraySet.add(Integer.valueOf(valueAt.intValue() + i16));
+                if (numValueAt.intValue() > i6) {
+                    arraySet.add(Integer.valueOf(numValueAt.intValue() + i16));
                 }
             }
             this.mBlocksAlwaysNeedToBeRedrawn = arraySet;

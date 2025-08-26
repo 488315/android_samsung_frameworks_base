@@ -13,7 +13,6 @@ import com.android.systemui.qs.pipeline.domain.interactor.PanelInteractorImpl;
 import com.android.systemui.statusbar.phone.SystemUIDialog;
 import com.android.systemui.util.SystemUIDialogUtils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class MobileDataTile$$ExternalSyntheticLambda13 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -119,20 +118,20 @@ public final /* synthetic */ class MobileDataTile$$ExternalSyntheticLambda13 imp
                 DialogInterface.OnClickListener onClickListener5 = this.f$6;
                 View view3 = this.f$7;
                 Intent intent2 = MobileDataTile.DATA_SETTINGS;
-                SystemUIDialog createSystemUIDialogUtils = SystemUIDialogUtils.createSystemUIDialogUtils(mobileDataTile2.getContext$2(), R.style.Theme_SystemUI_Dialog_Alert);
-                createSystemUIDialogUtils.setTitle(charSequence3);
-                createSystemUIDialogUtils.setMessage(charSequence4);
+                SystemUIDialog systemUIDialogCreateSystemUIDialogUtils = SystemUIDialogUtils.createSystemUIDialogUtils(mobileDataTile2.getContext$2(), R.style.Theme_SystemUI_Dialog_Alert);
+                systemUIDialogCreateSystemUIDialogUtils.setTitle(charSequence3);
+                systemUIDialogCreateSystemUIDialogUtils.setMessage(charSequence4);
                 if (view3 != null) {
                     Resources resources2 = mobileDataTile2.getContext$2().getResources();
-                    createSystemUIDialogUtils.setView(view3, resources2.getDimensionPixelSize(R.dimen.checkbox_popup_checkbox_margin), 0, resources2.getDimensionPixelSize(R.dimen.checkbox_popup_checkbox_margin), 0);
+                    systemUIDialogCreateSystemUIDialogUtils.setView(view3, resources2.getDimensionPixelSize(R.dimen.checkbox_popup_checkbox_margin), 0, resources2.getDimensionPixelSize(R.dimen.checkbox_popup_checkbox_margin), 0);
                 }
-                createSystemUIDialogUtils.setPositiveButton(i5, onClickListener4);
+                systemUIDialogCreateSystemUIDialogUtils.setPositiveButton(i5, onClickListener4);
                 if (i6 != 0 && onClickListener5 != null) {
-                    createSystemUIDialogUtils.setNegativeButton(i6, onClickListener5);
+                    systemUIDialogCreateSystemUIDialogUtils.setNegativeButton(i6, onClickListener5);
                 }
                 ((PanelInteractorImpl) mobileDataTile2.mPanelInteractor).collapsePanels();
                 final int i7 = 1;
-                createSystemUIDialogUtils.setOnDismissListener(new DialogInterface.OnDismissListener() { // from class: com.android.systemui.qs.tiles.MobileDataTile$$ExternalSyntheticLambda16
+                systemUIDialogCreateSystemUIDialogUtils.setOnDismissListener(new DialogInterface.OnDismissListener() { // from class: com.android.systemui.qs.tiles.MobileDataTile$$ExternalSyntheticLambda16
                     @Override // android.content.DialogInterface.OnDismissListener
                     public final void onDismiss(DialogInterface dialogInterface) {
                         int i52 = i7;
@@ -149,7 +148,7 @@ public final /* synthetic */ class MobileDataTile$$ExternalSyntheticLambda13 imp
                         }
                     }
                 });
-                createSystemUIDialogUtils.show();
+                systemUIDialogCreateSystemUIDialogUtils.show();
                 break;
         }
     }

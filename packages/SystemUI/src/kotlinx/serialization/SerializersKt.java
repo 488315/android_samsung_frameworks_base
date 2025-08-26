@@ -76,17 +76,17 @@ public abstract class SerializersKt {
     }
 
     public static final KSerializer serializer(SerialModuleImpl serialModuleImpl, KType kType) {
-        KSerializer serializerByKTypeImpl$SerializersKt__SerializersKt = SerializersKt__SerializersKt.serializerByKTypeImpl$SerializersKt__SerializersKt(serialModuleImpl, kType, true);
-        if (serializerByKTypeImpl$SerializersKt__SerializersKt != null) {
-            return serializerByKTypeImpl$SerializersKt__SerializersKt;
+        KSerializer kSerializerSerializerByKTypeImpl$SerializersKt__SerializersKt = SerializersKt__SerializersKt.serializerByKTypeImpl$SerializersKt__SerializersKt(serialModuleImpl, kType, true);
+        if (kSerializerSerializerByKTypeImpl$SerializersKt__SerializersKt != null) {
+            return kSerializerSerializerByKTypeImpl$SerializersKt__SerializersKt;
         }
         Platform_commonKt.serializerNotRegistered(Platform_commonKt.kclass(kType));
         throw null;
     }
 
     public static final KSerializer serializerOrNull(KClass kClass) {
-        KSerializer constructSerializerForGivenTypeArgs = PlatformKt.constructSerializerForGivenTypeArgs(kClass, new KSerializer[0]);
-        return constructSerializerForGivenTypeArgs == null ? (KSerializer) PrimitivesKt.BUILTIN_SERIALIZERS.get(kClass) : constructSerializerForGivenTypeArgs;
+        KSerializer kSerializerConstructSerializerForGivenTypeArgs = PlatformKt.constructSerializerForGivenTypeArgs(kClass, new KSerializer[0]);
+        return kSerializerConstructSerializerForGivenTypeArgs == null ? (KSerializer) PrimitivesKt.BUILTIN_SERIALIZERS.get(kClass) : kSerializerConstructSerializerForGivenTypeArgs;
     }
 
     public static final List serializersForParameters(SerialModuleImpl serialModuleImpl, List list, boolean z) {
@@ -103,19 +103,19 @@ public abstract class SerializersKt {
         ArrayList arrayList2 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(list3, 10));
         Iterator it2 = list3.iterator();
         while (it2.hasNext()) {
-            KSerializer serializerByKTypeImpl$SerializersKt__SerializersKt = SerializersKt__SerializersKt.serializerByKTypeImpl$SerializersKt__SerializersKt(serialModuleImpl, (KType) it2.next(), false);
-            if (serializerByKTypeImpl$SerializersKt__SerializersKt == null) {
+            KSerializer kSerializerSerializerByKTypeImpl$SerializersKt__SerializersKt = SerializersKt__SerializersKt.serializerByKTypeImpl$SerializersKt__SerializersKt(serialModuleImpl, (KType) it2.next(), false);
+            if (kSerializerSerializerByKTypeImpl$SerializersKt__SerializersKt == null) {
                 return null;
             }
-            arrayList2.add(serializerByKTypeImpl$SerializersKt__SerializersKt);
+            arrayList2.add(kSerializerSerializerByKTypeImpl$SerializersKt__SerializersKt);
         }
         return arrayList2;
     }
 
     public static final KSerializer serializer(KClass kClass) {
-        KSerializer serializerOrNull = serializerOrNull(kClass);
-        if (serializerOrNull != null) {
-            return serializerOrNull;
+        KSerializer kSerializerSerializerOrNull = serializerOrNull(kClass);
+        if (kSerializerSerializerOrNull != null) {
+            return kSerializerSerializerOrNull;
         }
         Platform_commonKt.serializerNotRegistered(kClass);
         throw null;

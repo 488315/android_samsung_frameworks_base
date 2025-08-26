@@ -38,13 +38,13 @@ public final class SehSendSmsResult {
 
     public static final ArrayList<SehSendSmsResult> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<SehSendSmsResult> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 32, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             SehSendSmsResult sehSendSmsResult = new SehSendSmsResult();
-            sehSendSmsResult.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 32);
+            sehSendSmsResult.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 32);
             arrayList.add(sehSendSmsResult);
         }
         return arrayList;

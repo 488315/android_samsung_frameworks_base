@@ -10,7 +10,6 @@ import com.samsung.android.feature.SemCscFeature;
 import com.samsung.android.feature.SemFloatingFeature;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class QpRune extends Rune {
     public static final boolean QUICK_BAR_BRIGHTNESS_EXTRA_BRIGHTNESS;
@@ -25,6 +24,7 @@ public class QpRune extends Rune {
     public static final boolean QUICK_PANEL_BLUR_DEFAULT;
     public static final boolean QUICK_PANEL_BLUR_MASSIVE;
     public static final boolean QUICK_PANEL_CODE_FOR_POP_OVER;
+    public static final boolean QUICK_PANEL_CODE_FOR_POP_OVER_NOT_SET_TOUCHABLE_AREA;
     public static final boolean QUICK_PANEL_GUIDE;
     public static final boolean QUICK_POP_OVER_CUSTOMIZER;
     public static final boolean QUICK_SUBSCREEN_FULLSCREEN_PANEL;
@@ -46,15 +46,17 @@ public class QpRune extends Rune {
         }
         QUICK_PANEL_BLUR_MASSIVE = !z && SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_GRAPHICS_SUPPORT_CAPTURED_BLUR");
         QUICK_PANEL_GUIDE = !FactoryTest.isFactoryBinary();
-        QUICK_TABLET = DeviceType.isTablet();
-        QUICK_PANEL_CODE_FOR_POP_OVER = z;
-        boolean equalsIgnoreCase = "IR".equalsIgnoreCase(SemSystemProperties.getCountryIso());
-        QUICK_CLOCK_BELL_TOWER_ALTERNATE_CALENDAR_PERSIAN = equalsIgnoreCase;
+        boolean zIsTablet = DeviceType.isTablet();
+        QUICK_TABLET = zIsTablet;
+        QUICK_PANEL_CODE_FOR_POP_OVER = zIsTablet;
+        QUICK_PANEL_CODE_FOR_POP_OVER_NOT_SET_TOUCHABLE_AREA = zIsTablet;
+        boolean zEqualsIgnoreCase = "IR".equalsIgnoreCase(SemSystemProperties.getCountryIso());
+        QUICK_CLOCK_BELL_TOWER_ALTERNATE_CALENDAR_PERSIAN = zEqualsIgnoreCase;
         boolean z2 = SemCscFeature.getInstance().getBoolean("CscFeature_Common_SupportHijriLunarCalendar", false);
         QUICK_CLOCK_BELL_TOWER_ALTERNATE_CALENDAR_HIJRI = z2;
-        boolean equals = "VI".equals(SemCscFeature.getInstance().getString("CscFeature_Calendar_EnableLocalHolidayDisplay", ""));
-        QUICK_CLOCK_BELL_TOWER_ALTERNATE_CALENDAR_LUNAR_IN_VIETNAM = equals;
-        QUICK_CLOCK_BELL_TOWER_ALTERNATE_CALENDAR = equalsIgnoreCase || z2 || equals;
+        boolean zEquals = "VI".equals(SemCscFeature.getInstance().getString("CscFeature_Calendar_EnableLocalHolidayDisplay", ""));
+        QUICK_CLOCK_BELL_TOWER_ALTERNATE_CALENDAR_LUNAR_IN_VIETNAM = zEquals;
+        QUICK_CLOCK_BELL_TOWER_ALTERNATE_CALENDAR = zEqualsIgnoreCase || z2 || zEquals;
         QUICK_MUM_TWO_PHONE = SemCscFeature.getInstance().getBoolean("CscFeature_Common_SupportTwoPhoneService");
         QUICK_BAR_BRIGHTNESS_PERSONAL_CONTROL = List.of("3", "4", "5").contains("5");
         QUICK_BAR_BRIGHTNESS_EXTRA_BRIGHTNESS = SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_LCD_SUPPORT_EXTRA_BRIGHTNESS");
@@ -64,7 +66,7 @@ public class QpRune extends Rune {
         QUICK_TILE_FLASHLIGHT_INTENSITY = SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_CAMERA_SUPPORT_TORCH_BRIGHTNESS_LEVEL");
         QUICK_TILE_HIDE_FROM_BAR = SemCscFeature.getInstance().getBoolean("CscFeature_Common_SupportZProjectFunctionInGlobal", false);
         QUICK_TILE_ROTATION_MANUAL = !SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_FRAMEWORK_CONFIG_NAVIGATION_BAR_THEME", "").isEmpty();
-        QUICK_POP_OVER_CUSTOMIZER = z;
+        QUICK_POP_OVER_CUSTOMIZER = zIsTablet;
         String string = ("user".equals(Build.TYPE) || (SystemProperties.getInt("persist.debug.subdisplay_test_mode", 0) & 1) == 0) ? SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_LOCKSCREEN_CONFIG_SUBDISPLAY_POLICY") : "";
         boolean z3 = NotiRune.NOTI_SUBSCREEN_NOTIFICATION_SECOND;
         QUICK_SUBSCREEN_SETTINGS = z3;

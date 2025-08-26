@@ -40,7 +40,7 @@ class CredstorePresentationSession extends PresentationSession {
         this.mFeatureVersion = i2;
     }
 
-    private void ensureEphemeralKeyPair() {
+    private void ensureEphemeralKeyPair() throws NoSuchAlgorithmException, IOException, KeyStoreException, CertificateException {
         if (this.mEphemeralKeyPair != null) {
             return;
         }
@@ -58,7 +58,7 @@ class CredstorePresentationSession extends PresentationSession {
     }
 
     @Override // android.security.identity.PresentationSession
-    public KeyPair getEphemeralKeyPair() {
+    public KeyPair getEphemeralKeyPair() throws NoSuchAlgorithmException, IOException, KeyStoreException, CertificateException {
         ensureEphemeralKeyPair();
         return this.mEphemeralKeyPair;
     }
@@ -87,7 +87,7 @@ class CredstorePresentationSession extends PresentationSession {
     }
 
     @Override // android.security.identity.PresentationSession
-    public CredentialDataResult getCredentialData(String str, CredentialDataRequest credentialDataRequest) throws NoAuthenticationKeyAvailableException, InvalidReaderSignatureException, InvalidRequestMessageException, EphemeralPublicKeyNotFoundException {
+    public CredentialDataResult getCredentialData(String str, CredentialDataRequest credentialDataRequest) throws InvalidReaderSignatureException, EphemeralPublicKeyNotFoundException, InvalidRequestMessageException, NoAuthenticationKeyAvailableException {
         CredstorePresentationSession credstorePresentationSession;
         try {
             CredstoreIdentityCredential credstoreIdentityCredential = this.mCredentialCache.get(str);

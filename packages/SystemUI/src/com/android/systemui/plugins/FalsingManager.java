@@ -6,7 +6,6 @@ import java.io.PrintWriter;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @ProvidesInterface(version = 6)
 /* loaded from: classes2.dex */
 public interface FalsingManager {
@@ -16,22 +15,18 @@ public interface FalsingManager {
     public static final int NO_PENALTY = 0;
     public static final int VERSION = 6;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface FalsingBeliefListener {
         void onFalse();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface FalsingTapListener {
         void onAdditionalTapRequired();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     @Retention(RetentionPolicy.SOURCE)
     public @interface Penalty {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface ProximityEvent {
         boolean getCovered();
 

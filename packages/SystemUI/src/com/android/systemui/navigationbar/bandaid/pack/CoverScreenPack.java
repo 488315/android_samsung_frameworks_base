@@ -31,7 +31,6 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import kotlin.Unit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class CoverScreenPack implements BandAidPack {
     public final List allBands;
@@ -52,9 +51,9 @@ public final class CoverScreenPack implements BandAidPack {
         builder.moduleDependencies = Collections.singletonList(NavigationBarView.class);
         builder.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.CoverScreenPack$1$1
             @Override // java.util.function.Function
-            public final Object apply(Object obj) {
+            public final Object apply(Object obj) throws Resources.NotFoundException {
                 Band.Kit kit = (Band.Kit) obj;
-                CoverScreenPack coverScreenPack = CoverScreenPack.this;
+                CoverScreenPack coverScreenPack = this.this$0;
                 if (!((NavBarStateManagerImpl) kit.manager).isLargeCoverScreenSyncEnabled()) {
                     EventTypeFactory.EventType.OnNavBarLargeCoverScreenVisibilityChanged onNavBarLargeCoverScreenVisibilityChanged = (EventTypeFactory.EventType.OnNavBarLargeCoverScreenVisibilityChanged) kit.event;
                     CoverScreenPack.access$updateLargeCoverNavBarVisibility(coverScreenPack, kit, (onNavBarLargeCoverScreenVisibilityChanged.imeShown || onNavBarLargeCoverScreenVisibilityChanged.coverTask) ? 0 : 8);
@@ -62,17 +61,17 @@ public final class CoverScreenPack implements BandAidPack {
                 return Unit.INSTANCE;
             }
         };
-        Band.Builder m = ColorPack$$ExternalSyntheticOutline0.m(builder, arrayList);
-        m.runeDependency = z;
-        m.bandAidDependency = BandAid.COVER_SCREEN_PACK_NAVBAR_ATTACHED_TO_WINDOW;
-        m.targetEvents = Collections.singletonList(EventTypeFactory.EventType.OnNavBarAttachedToWindow.class);
-        m.targetModules = Collections.singletonList(SamsungNavigationBarView.class);
-        m.moduleDependencies = Collections.singletonList(NavigationBarView.class);
-        m.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.CoverScreenPack$3$1
+        Band.Builder builderM = ColorPack$$ExternalSyntheticOutline0.m(builder, arrayList);
+        builderM.runeDependency = z;
+        builderM.bandAidDependency = BandAid.COVER_SCREEN_PACK_NAVBAR_ATTACHED_TO_WINDOW;
+        builderM.targetEvents = Collections.singletonList(EventTypeFactory.EventType.OnNavBarAttachedToWindow.class);
+        builderM.targetModules = Collections.singletonList(SamsungNavigationBarView.class);
+        builderM.moduleDependencies = Collections.singletonList(NavigationBarView.class);
+        builderM.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.CoverScreenPack$3$1
             @Override // java.util.function.Function
-            public final Object apply(Object obj) {
+            public final Object apply(Object obj) throws Resources.NotFoundException {
                 Band.Kit kit = (Band.Kit) obj;
-                CoverScreenPack coverScreenPack = CoverScreenPack.this;
+                CoverScreenPack coverScreenPack = this.this$0;
                 int i2 = kit.displayId;
                 if (i2 == 1) {
                     NavigationBar navigationBar = (NavigationBar) ((NavBarStoreImpl) coverScreenPack.store).getModule(NavigationBar.class, i2);
@@ -89,23 +88,23 @@ public final class CoverScreenPack implements BandAidPack {
                 return Unit.INSTANCE;
             }
         };
-        m.afterAction = new Consumer() { // from class: com.android.systemui.navigationbar.bandaid.pack.CoverScreenPack$3$2
+        builderM.afterAction = new Consumer() { // from class: com.android.systemui.navigationbar.bandaid.pack.CoverScreenPack$3$2
             @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                ((NavBarStoreImpl) CoverScreenPack.this.store).apply((Band.Kit) obj, new NavBarStoreAction.UpdateNavBarLayoutParams(null, 1, null));
+            public final void accept(Object obj) throws Resources.NotFoundException {
+                ((NavBarStoreImpl) this.this$0.store).apply((Band.Kit) obj, new NavBarStoreAction.UpdateNavBarLayoutParams(null, 1, null));
             }
         };
-        Band.Builder m2 = ColorPack$$ExternalSyntheticOutline0.m(m, arrayList);
-        m2.runeDependency = z;
-        m2.bandAidDependency = BandAid.COVER_SCREEN_PACK_NAVBAR_DETACHED_TO_WINDOW;
-        m2.targetEvents = Collections.singletonList(EventTypeFactory.EventType.OnNavBarDetachedFromWindow.class);
-        m2.targetModules = Collections.singletonList(SamsungNavigationBarView.class);
-        m2.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.CoverScreenPack$5$1
+        Band.Builder builderM2 = ColorPack$$ExternalSyntheticOutline0.m(builderM, arrayList);
+        builderM2.runeDependency = z;
+        builderM2.bandAidDependency = BandAid.COVER_SCREEN_PACK_NAVBAR_DETACHED_TO_WINDOW;
+        builderM2.targetEvents = Collections.singletonList(EventTypeFactory.EventType.OnNavBarDetachedFromWindow.class);
+        builderM2.targetModules = Collections.singletonList(SamsungNavigationBarView.class);
+        builderM2.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.CoverScreenPack$5$1
             @Override // java.util.function.Function
-            public final Object apply(Object obj) {
+            public final Object apply(Object obj) throws Resources.NotFoundException {
                 View rootView;
                 Band.Kit kit = (Band.Kit) obj;
-                CoverScreenPack coverScreenPack = CoverScreenPack.this;
+                CoverScreenPack coverScreenPack = this.this$0;
                 if (kit.displayId == 1) {
                     NavBarStoreAction.Action action = new NavBarStoreAction.Action(null, null, null, null, false, 0.0f, null, false, 0.0f, 0, false, false, 0, 0, null, null, false, false, null, 0.0f, 0.0f, 0, 0, 8388607, null);
                     NavigationBarView navigationBarView = (NavigationBarView) ((NavBarStoreImpl) coverScreenPack.store).getModule(NavigationBarView.class, 0);
@@ -121,17 +120,17 @@ public final class CoverScreenPack implements BandAidPack {
                 return Unit.INSTANCE;
             }
         };
-        Band.Builder m3 = ColorPack$$ExternalSyntheticOutline0.m(m2, arrayList);
-        m3.runeDependency = z;
-        m3.bandAidDependency = BandAid.COVER_SCREEN_PACK_GET_NAVBAR_PADDING;
-        m3.targetEvents = Collections.singletonList(EventTypeFactory.EventType.GetNavBarLargeCoverScreenPadding.class);
-        m3.targetModules = Collections.singletonList(SamsungNavigationBarView.class);
-        m3.moduleDependencies = Collections.singletonList(NavigationBarView.class);
-        m3.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.CoverScreenPack$7$1
+        Band.Builder builderM3 = ColorPack$$ExternalSyntheticOutline0.m(builderM2, arrayList);
+        builderM3.runeDependency = z;
+        builderM3.bandAidDependency = BandAid.COVER_SCREEN_PACK_GET_NAVBAR_PADDING;
+        builderM3.targetEvents = Collections.singletonList(EventTypeFactory.EventType.GetNavBarLargeCoverScreenPadding.class);
+        builderM3.targetModules = Collections.singletonList(SamsungNavigationBarView.class);
+        builderM3.moduleDependencies = Collections.singletonList(NavigationBarView.class);
+        builderM3.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.CoverScreenPack$7$1
             @Override // java.util.function.Function
-            public final Object apply(Object obj) {
+            public final Object apply(Object obj) throws Resources.NotFoundException {
                 Band.Kit kit = (Band.Kit) obj;
-                CoverScreenPack coverScreenPack = CoverScreenPack.this;
+                CoverScreenPack coverScreenPack = this.this$0;
                 NavBarStoreImpl navBarStoreImpl = (NavBarStoreImpl) coverScreenPack.store;
                 int i2 = kit.displayId;
                 Resources resources = ((Context) navBarStoreImpl.getModule(Context.class, i2)).getResources();
@@ -139,9 +138,9 @@ public final class CoverScreenPack implements BandAidPack {
                 int dimensionPixelSize = resources.getDimensionPixelSize(R.dimen.large_cover_navigation_bar_side_padding);
                 int dimensionPixelSize2 = resources.getDimensionPixelSize(R.dimen.large_cover_button_opposite_padding);
                 int dimensionPixelSize3 = resources.getDimensionPixelSize(R.dimen.large_cover_button_inset_height);
-                boolean isGestureMode = ((NavBarStateManagerImpl) kit.manager).isGestureMode();
+                boolean zIsGestureMode = ((NavBarStateManagerImpl) kit.manager).isGestureMode();
                 EventTypeFactory.EventType eventType = kit.event;
-                if (isGestureMode) {
+                if (zIsGestureMode) {
                     int i3 = ((EventTypeFactory.EventType.GetNavBarLargeCoverScreenPadding) eventType).rotation;
                     return i3 != 0 ? i3 != 1 ? i3 != 2 ? i3 != 3 ? new Rect(0, 0, dimensionPixelSize, 0) : new Rect(dimensionPixelSize3, 0, 0, 0) : new Rect(0, 0, 0, 0) : new Rect(0, 0, dimensionPixelSize3, 0) : new Rect(0, 0, dimensionPixelSize, 0);
                 }
@@ -149,30 +148,30 @@ public final class CoverScreenPack implements BandAidPack {
                 return i4 != 0 ? i4 != 1 ? i4 != 2 ? i4 != 3 ? new Rect(dimensionPixelSize2, 0, dimensionPixelSize, 0) : new Rect(0, dimensionPixelSize2, 0, dimensionPixelSize) : new Rect(dimensionPixelSize, 0, dimensionPixelSize2, 0) : new Rect(0, dimensionPixelSize, 0, dimensionPixelSize2) : new Rect(dimensionPixelSize2, 0, dimensionPixelSize, 0);
             }
         };
-        Band.Builder m4 = ColorPack$$ExternalSyntheticOutline0.m(m3, arrayList);
-        m4.runeDependency = z;
-        m4.bandAidDependency = BandAid.COVER_SCREEN_PACK_FOLD_STATE_CHANGED;
-        m4.targetEvents = Collections.singletonList(EventTypeFactory.EventType.OnFoldStateChanged.class);
-        m4.targetModules = Collections.singletonList(NavBarStoreImpl.class);
-        m4.moduleDependencies = Collections.singletonList(NavigationBarView.class);
-        m4.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.CoverScreenPack$9$1
+        Band.Builder builderM4 = ColorPack$$ExternalSyntheticOutline0.m(builderM3, arrayList);
+        builderM4.runeDependency = z;
+        builderM4.bandAidDependency = BandAid.COVER_SCREEN_PACK_FOLD_STATE_CHANGED;
+        builderM4.targetEvents = Collections.singletonList(EventTypeFactory.EventType.OnFoldStateChanged.class);
+        builderM4.targetModules = Collections.singletonList(NavBarStoreImpl.class);
+        builderM4.moduleDependencies = Collections.singletonList(NavigationBarView.class);
+        builderM4.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.CoverScreenPack$9$1
             @Override // java.util.function.Function
-            public final Object apply(Object obj) {
+            public final Object apply(Object obj) throws Resources.NotFoundException {
                 Band.Kit kit = (Band.Kit) obj;
-                CoverScreenPack coverScreenPack = CoverScreenPack.this;
+                CoverScreenPack coverScreenPack = this.this$0;
                 if (!((EventTypeFactory.EventType.OnFoldStateChanged) kit.event).folded) {
                     ((NavBarStoreImpl) coverScreenPack.store).apply(kit, new NavBarStoreAction.UpdateDefaultNavigationBarStatus(null, 1, null));
                 }
                 return Unit.INSTANCE;
             }
         };
-        Band.Builder m5 = ColorPack$$ExternalSyntheticOutline0.m(m4, arrayList);
-        m5.runeDependency = z;
-        m5.bandAidDependency = BandAid.COVER_SCREEN_PACK_GET_DEADZONE_SIZE;
-        m5.targetEvents = Collections.singletonList(EventTypeFactory.EventType.GetDeadZoneSize.class);
-        m5.targetModules = Collections.singletonList(DeadZone.class);
-        m5.priority = 2;
-        m5.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.CoverScreenPack$11$1
+        Band.Builder builderM5 = ColorPack$$ExternalSyntheticOutline0.m(builderM4, arrayList);
+        builderM5.runeDependency = z;
+        builderM5.bandAidDependency = BandAid.COVER_SCREEN_PACK_GET_DEADZONE_SIZE;
+        builderM5.targetEvents = Collections.singletonList(EventTypeFactory.EventType.GetDeadZoneSize.class);
+        builderM5.targetModules = Collections.singletonList(DeadZone.class);
+        builderM5.priority = 2;
+        builderM5.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.CoverScreenPack$11$1
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
                 Band.Kit kit = (Band.Kit) obj;
@@ -183,58 +182,58 @@ public final class CoverScreenPack implements BandAidPack {
                 return 0;
             }
         };
-        Band.Builder m6 = ColorPack$$ExternalSyntheticOutline0.m(m5, arrayList);
-        m6.runeDependency = z;
-        m6.bandAidDependency = BandAid.COVER_SCREEN_PACK_COVER_WINDOW_STATE;
-        m6.targetEvents = Arrays.asList(EventTypeFactory.EventType.OnNavBarWindowStateShowing.class, EventTypeFactory.EventType.OnNavBarWindowStateHidden.class);
-        m6.targetModules = Collections.singletonList(NavBarHelper.class);
-        m6.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.CoverScreenPack$13$1
+        Band.Builder builderM6 = ColorPack$$ExternalSyntheticOutline0.m(builderM5, arrayList);
+        builderM6.runeDependency = z;
+        builderM6.bandAidDependency = BandAid.COVER_SCREEN_PACK_COVER_WINDOW_STATE;
+        builderM6.targetEvents = Arrays.asList(EventTypeFactory.EventType.OnNavBarWindowStateShowing.class, EventTypeFactory.EventType.OnNavBarWindowStateHidden.class);
+        builderM6.targetModules = Collections.singletonList(NavBarHelper.class);
+        builderM6.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.CoverScreenPack$13$1
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
                 Band.Kit kit = (Band.Kit) obj;
-                CoverScreenPack coverScreenPack = CoverScreenPack.this;
+                CoverScreenPack coverScreenPack = this.this$0;
                 if (kit.displayId == 1) {
                     coverScreenPack.coverWindowState = kit.event instanceof EventTypeFactory.EventType.OnNavBarWindowStateShowing ? 0 : 2;
                 }
                 return Unit.INSTANCE;
             }
         };
-        m6.afterAction = new Consumer() { // from class: com.android.systemui.navigationbar.bandaid.pack.CoverScreenPack$13$2
+        builderM6.afterAction = new Consumer() { // from class: com.android.systemui.navigationbar.bandaid.pack.CoverScreenPack$13$2
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
                 final NavigationBar navigationBar;
                 Handler handler;
-                CoverScreenPack coverScreenPack = CoverScreenPack.this;
+                CoverScreenPack coverScreenPack = this.this$0;
                 if (((Band.Kit) obj).displayId != 0 || !((NavBarStateManagerImpl) ((NavBarStoreImpl) coverScreenPack.store).getNavStateManager(1)).isCoverDisplayNavBarEnabled() || (navigationBar = (NavigationBar) ((NavBarStoreImpl) coverScreenPack.store).getModule(NavigationBar.class, 1)) == null || (handler = navigationBar.mHandler) == null) {
                     return;
                 }
                 handler.postDelayed(new Runnable() { // from class: com.android.systemui.navigationbar.bandaid.pack.CoverScreenPack$13$2$1$1$1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        NavigationBar.this.updateSystemUiStateFlags();
+                        navigationBar.updateSystemUiStateFlags();
                     }
                 }, 250L);
             }
         };
-        Band.Builder m7 = ColorPack$$ExternalSyntheticOutline0.m(m6, arrayList);
-        m7.runeDependency = z;
-        m7.bandAidDependency = BandAid.COVER_SCREEN_PACK_ROTATION_CHANGED;
-        m7.targetEvents = Collections.singletonList(EventTypeFactory.EventType.OnCoverRotationChanged.class);
-        m7.targetModules = Collections.singletonList(NavBarStoreImpl.class);
-        m7.moduleDependencies = Collections.singletonList(NavigationBarView.class);
-        m7.afterAction = new Consumer() { // from class: com.android.systemui.navigationbar.bandaid.pack.CoverScreenPack$15$1
+        Band.Builder builderM7 = ColorPack$$ExternalSyntheticOutline0.m(builderM6, arrayList);
+        builderM7.runeDependency = z;
+        builderM7.bandAidDependency = BandAid.COVER_SCREEN_PACK_ROTATION_CHANGED;
+        builderM7.targetEvents = Collections.singletonList(EventTypeFactory.EventType.OnCoverRotationChanged.class);
+        builderM7.targetModules = Collections.singletonList(NavBarStoreImpl.class);
+        builderM7.moduleDependencies = Collections.singletonList(NavigationBarView.class);
+        builderM7.afterAction = new Consumer() { // from class: com.android.systemui.navigationbar.bandaid.pack.CoverScreenPack$15$1
             @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
+            public final void accept(Object obj) throws Resources.NotFoundException {
                 Band.Kit kit = (Band.Kit) obj;
-                NavBarStoreImpl navBarStoreImpl = (NavBarStoreImpl) CoverScreenPack.this.store;
+                NavBarStoreImpl navBarStoreImpl = (NavBarStoreImpl) this.this$0.store;
                 navBarStoreImpl.apply(kit, new NavBarStoreAction.ReinflateNavBar(null, 1, null));
                 navBarStoreImpl.apply(kit, new NavBarStoreAction.UpdateNavBarIconAndHints(null, 1, null));
             }
         };
-        arrayList.add(m7.build());
+        arrayList.add(builderM7.build());
     }
 
-    public static final void access$updateLargeCoverNavBarVisibility(CoverScreenPack coverScreenPack, Band.Kit kit, int i) {
+    public static final void access$updateLargeCoverNavBarVisibility(CoverScreenPack coverScreenPack, Band.Kit kit, int i) throws Resources.NotFoundException {
         coverScreenPack.getClass();
         NavBarStoreAction.SetNavBarVisibility setNavBarVisibility = new NavBarStoreAction.SetNavBarVisibility(new NavBarStoreAction.Action(null, null, null, null, false, 0.0f, null, false, 0.0f, 0, false, false, i, 0, null, null, false, false, null, 0.0f, 0.0f, 0, 0, 8384511, null));
         NavBarStoreImpl navBarStoreImpl = (NavBarStoreImpl) coverScreenPack.store;

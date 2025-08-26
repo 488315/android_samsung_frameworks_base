@@ -2,7 +2,6 @@ package okio;
 
 import java.io.RandomAccessFile;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class JvmFileHandle extends FileHandle {
     public final RandomAccessFile randomAccessFile;
@@ -30,9 +29,9 @@ public final class JvmFileHandle extends FileHandle {
             if (i3 >= i2) {
                 break;
             }
-            int read = this.randomAccessFile.read(bArr, i, i2 - i3);
-            if (read != -1) {
-                i3 += read;
+            int i4 = this.randomAccessFile.read(bArr, i, i2 - i3);
+            if (i4 != -1) {
+                i3 += i4;
             } else if (i3 == 0) {
                 return -1;
             }

@@ -11,7 +11,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class EditTileKt$$ExternalSyntheticLambda22 implements Function0 {
     public final /* synthetic */ int $r8$classId;
@@ -28,22 +27,22 @@ public final /* synthetic */ class EditTileKt$$ExternalSyntheticLambda22 impleme
 
     @Override // kotlin.jvm.functions.Function0
     public final Object invoke() {
-        float f;
+        float fProgress;
         switch (this.$r8$classId) {
             case 0:
                 AvailableTileGridCell availableTileGridCell = (AvailableTileGridCell) this.f$1;
-                ((Function1) this.f$0).mo779invoke(availableTileGridCell.tile.tileSpec);
+                ((Function1) this.f$0).mo781invoke(availableTileGridCell.tile.tileSpec);
                 ((MutableSelectionState) this.f$2).setSelection(availableTileGridCell.tile.tileSpec);
                 return Unit.INSTANCE;
             default:
                 if (((TileState) ((MutableState) this.f$2).getValue()) == TileState.Selected) {
                     ResizingState resizingState = (ResizingState) this.f$0;
                     resizingState.getClass();
-                    f = resizingState.anchoredDraggableState.progress(QSDragAnchor.Icon, QSDragAnchor.Large);
+                    fProgress = resizingState.anchoredDraggableState.progress(QSDragAnchor.Icon, QSDragAnchor.Large);
                 } else {
-                    f = ((TileGridCell) this.f$1).isIcon() ? 0.0f : 1.0f;
+                    fProgress = ((TileGridCell) this.f$1).isIcon() ? 0.0f : 1.0f;
                 }
-                return Float.valueOf(f);
+                return Float.valueOf(fProgress);
         }
     }
 }

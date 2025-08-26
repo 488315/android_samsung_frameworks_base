@@ -8,7 +8,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import com.samsung.android.knox.ucm.core.ICredentialManagerServiceSystemUICallback;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface IUcmService extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.knox.ucm.core.IUcmService";
@@ -121,7 +120,7 @@ public interface IUcmService extends IInterface {
 
     void removeEnforcedLockTypeNotification(int i) throws RemoteException;
 
-    int removeODESettings() throws RemoteException;
+    int removeWpcOdeSettings() throws RemoteException;
 
     void resetNonMdmCertificates() throws RemoteException;
 
@@ -159,7 +158,6 @@ public interface IUcmService extends IInterface {
 
     Bundle verifyPuk(String str, String str2, String str3) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements IUcmService {
         @Override // com.samsung.android.knox.ucm.core.IUcmService
         public Bundle APDUCommand(String str, byte[] bArr, Bundle bundle) throws RemoteException {
@@ -422,7 +420,7 @@ public interface IUcmService extends IInterface {
         }
 
         @Override // com.samsung.android.knox.ucm.core.IUcmService
-        public int removeODESettings() throws RemoteException {
+        public int removeWpcOdeSettings() throws RemoteException {
             return 0;
         }
 
@@ -526,7 +524,6 @@ public interface IUcmService extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IUcmService {
         public static final int TRANSACTION_APDUCommand = 28;
         public static final int TRANSACTION_changePin = 26;
@@ -582,7 +579,7 @@ public interface IUcmService extends IInterface {
         public static final int TRANSACTION_notifyVoldComplete = 55;
         public static final int TRANSACTION_registerSystemUICallback = 48;
         public static final int TRANSACTION_removeEnforcedLockTypeNotification = 47;
-        public static final int TRANSACTION_removeODESettings = 72;
+        public static final int TRANSACTION_removeWpcOdeSettings = 72;
         public static final int TRANSACTION_resetNonMdmCertificates = 42;
         public static final int TRANSACTION_resetUid = 35;
         public static final int TRANSACTION_resetUser = 34;
@@ -602,7 +599,6 @@ public interface IUcmService extends IInterface {
         public static final int TRANSACTION_verifyPin = 24;
         public static final int TRANSACTION_verifyPuk = 25;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements IUcmService {
             public IBinder mRemote;
 
@@ -612,19 +608,19 @@ public interface IUcmService extends IInterface {
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public Bundle APDUCommand(String str, byte[] bArr, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(28, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(28, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -635,436 +631,436 @@ public interface IUcmService extends IInterface {
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public Bundle changePin(String str, String str2, String str3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    this.mRemote.transact(26, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    this.mRemote.transact(26, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public boolean configureKeyguardSettings(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(31, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(31, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public int configureODESettings(String str, Bundle bundle, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(32, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(32, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public int configureWPCDARFlag(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(71, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(71, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public Bundle containsAlias(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(36, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(36, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public ucmRetParcelable decrypt(String str, byte[] bArr, String str2, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeString(str2);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ucmRetParcelable) obtain2.readTypedObject(ucmRetParcelable.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ucmRetParcelable) parcelObtain2.readTypedObject(ucmRetParcelable.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public Bundle delete(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public Bundle deleteCertificate(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public ucmRetParcelable encrypt(String str, byte[] bArr, String str2, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeString(str2);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(56, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ucmRetParcelable) obtain2.readTypedObject(ucmRetParcelable.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(56, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ucmRetParcelable) parcelObtain2.readTypedObject(ucmRetParcelable.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public ucmRetParcelable generateDek(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ucmRetParcelable) obtain2.readTypedObject(ucmRetParcelable.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ucmRetParcelable) parcelObtain2.readTypedObject(ucmRetParcelable.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public Bundle generateKey(String str, String str2, int i, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(66, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(66, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public Bundle generateKeyPair(String str, String str2, int i, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public Bundle generateKeyPairInternal(String str, String str2, int i, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public Bundle generateKeyguardPassword(int i, String str, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(30, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(30, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public Bundle generateSecureRandom(String str, int i, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public ucmRetParcelable generateWrappedDek(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ucmRetParcelable) obtain2.readTypedObject(ucmRetParcelable.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ucmRetParcelable) parcelObtain2.readTypedObject(ucmRetParcelable.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public Bundle getAdminConfigureBundleFromCs(int i, int i2, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public Bundle getAgentInfo(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public ucmRetParcelable getCertificateChain(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ucmRetParcelable) obtain2.readTypedObject(ucmRetParcelable.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ucmRetParcelable) parcelObtain2.readTypedObject(ucmRetParcelable.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public Bundle getCredentialStorageProperty(int i, String str, Bundle bundle, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public ucmRetParcelable getDek(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ucmRetParcelable) obtain2.readTypedObject(ucmRetParcelable.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ucmRetParcelable) parcelObtain2.readTypedObject(ucmRetParcelable.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public ucmRetParcelable getDekForVold(String str, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(51, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ucmRetParcelable) obtain2.readTypedObject(ucmRetParcelable.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(51, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ucmRetParcelable) parcelObtain2.readTypedObject(ucmRetParcelable.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public ucmRetParcelable getDekForVoldInternalKey(String str, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(52, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ucmRetParcelable) obtain2.readTypedObject(ucmRetParcelable.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(52, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ucmRetParcelable) parcelObtain2.readTypedObject(ucmRetParcelable.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public String getDetailErrorMessage(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(49, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(49, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public Bundle getInfo(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(29, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(29, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -1074,791 +1070,791 @@ public interface IUcmService extends IInterface {
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public Bundle getKeyType(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(68, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(68, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public Bundle getKeyguardPinCurrentRetryCount(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(62, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(62, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public Bundle getKeyguardPinMaximumLength(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(64, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(64, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public Bundle getKeyguardPinMaximumRetryCount(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(61, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(61, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public Bundle getKeyguardPinMinimumLength(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(63, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(63, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public String getKeyguardStorageForCurrentUser(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(45, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(45, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public ucmRetParcelable getODEConfigurationForVold(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(53, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ucmRetParcelable) obtain2.readTypedObject(ucmRetParcelable.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(53, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ucmRetParcelable) parcelObtain2.readTypedObject(ucmRetParcelable.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public Bundle getODESettingsConfiguration() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    this.mRemote.transact(33, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    this.mRemote.transact(33, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public ucmRetParcelable getOdeKey(String str, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(54, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ucmRetParcelable) obtain2.readTypedObject(ucmRetParcelable.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(54, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ucmRetParcelable) parcelObtain2.readTypedObject(ucmRetParcelable.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public Bundle getStatus(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(39, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(39, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public boolean grantKeyChainAccess(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(37, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(37, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public Bundle importKey(String str, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(67, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(67, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public Bundle importKeyPair(String str, byte[] bArr, byte[] bArr2, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeByteArray(bArr2);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeByteArray(bArr2);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public Bundle initKeyguardPin(String str, String str2, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(57, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(57, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public Bundle installCertificate(String str, byte[] bArr, byte[] bArr2, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeByteArray(bArr2);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeByteArray(bArr2);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public Bundle installCertificateIfSupported(String str, byte[] bArr, String str2, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeString(str2);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(69, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(69, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public boolean isKeyChainGranted(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(38, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(38, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public boolean isUserCertificatesExistInUCS() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    this.mRemote.transact(43, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    this.mRemote.transact(43, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public ucmRetParcelable keyAgreement(String str, String str2, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(73, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ucmRetParcelable) obtain2.readTypedObject(ucmRetParcelable.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(73, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ucmRetParcelable) parcelObtain2.readTypedObject(ucmRetParcelable.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public Bundle[] listAllProviders() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle[]) obtain2.createTypedArray(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle[]) parcelObtain2.createTypedArray(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public Bundle[] listProviders() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle[]) obtain2.createTypedArray(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle[]) parcelObtain2.createTypedArray(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public ucmRetParcelable mac(String str, byte[] bArr, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(70, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ucmRetParcelable) obtain2.readTypedObject(ucmRetParcelable.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(70, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ucmRetParcelable) parcelObtain2.readTypedObject(ucmRetParcelable.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public Bundle notifyChangeToPlugin(String str, int i, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(41, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(41, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public boolean notifyLicenseStatus(String str, String str2, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(40, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(40, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public void notifyPluginResult(Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(65, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(65, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public ucmRetParcelable notifyVoldComplete(String str, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(55, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ucmRetParcelable) obtain2.readTypedObject(ucmRetParcelable.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(55, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ucmRetParcelable) parcelObtain2.readTypedObject(ucmRetParcelable.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public void registerSystemUICallback(ICredentialManagerServiceSystemUICallback iCredentialManagerServiceSystemUICallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iCredentialManagerServiceSystemUICallback);
-                    this.mRemote.transact(48, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iCredentialManagerServiceSystemUICallback);
+                    this.mRemote.transact(48, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public void removeEnforcedLockTypeNotification(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(47, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(47, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
-            public int removeODESettings() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+            public int removeWpcOdeSettings() throws RemoteException {
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    this.mRemote.transact(72, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    this.mRemote.transact(72, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public void resetNonMdmCertificates() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    this.mRemote.transact(42, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    this.mRemote.transact(42, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public Bundle resetUid(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(35, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(35, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public Bundle resetUser(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(34, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(34, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public Bundle saw(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public Bundle sawInternal(String str, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(44, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(44, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public Bundle setAdminConfigureBundleForCs(int i, int i2, String str, Bundle bundle, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public Bundle setCertificateChain(String str, byte[] bArr, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public Bundle setCredentialStorageProperty(int i, String str, Bundle bundle, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public Bundle setKeyguardPinMaximumLength(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(60, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(60, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public Bundle setKeyguardPinMaximumRetryCount(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(58, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(58, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public Bundle setKeyguardPinMinimumLength(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(59, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(59, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public Bundle setState(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(27, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(27, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public void showEnforcedLockTypeNotification(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(46, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(46, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public ucmRetParcelable sign(String str, byte[] bArr, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ucmRetParcelable) obtain2.readTypedObject(ucmRetParcelable.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ucmRetParcelable) parcelObtain2.readTypedObject(ucmRetParcelable.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public ucmRetParcelable unwrapDek(String str, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ucmRetParcelable) obtain2.readTypedObject(ucmRetParcelable.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ucmRetParcelable) parcelObtain2.readTypedObject(ucmRetParcelable.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public void updateAgentList() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    this.mRemote.transact(50, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    this.mRemote.transact(50, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public Bundle verifyPin(int i, String str, String str2, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ucm.core.IUcmService
             public Bundle verifyPuk(String str, String str2, String str3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IUcmService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -1871,8 +1867,8 @@ public interface IUcmService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IUcmService.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IUcmService)) ? new Proxy(iBinder) : (IUcmService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IUcmService.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IUcmService)) ? new Proxy(iBinder) : (IUcmService) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder
@@ -1886,275 +1882,275 @@ public interface IUcmService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    String readString = parcel.readString();
-                    byte[] createByteArray = parcel.createByteArray();
-                    String readString2 = parcel.readString();
+                    String string = parcel.readString();
+                    byte[] bArrCreateByteArray = parcel.createByteArray();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    ucmRetParcelable sign = sign(readString, createByteArray, readString2);
+                    ucmRetParcelable ucmretparcelableSign = sign(string, bArrCreateByteArray, string2);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(sign, 1);
+                    parcel2.writeTypedObject(ucmretparcelableSign, 1);
                     return true;
                 case 2:
-                    String readString3 = parcel.readString();
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    ucmRetParcelable certificateChain = getCertificateChain(readString3);
+                    ucmRetParcelable certificateChain = getCertificateChain(string3);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(certificateChain, 1);
                     return true;
                 case 3:
-                    String readString4 = parcel.readString();
-                    byte[] createByteArray2 = parcel.createByteArray();
-                    String readString5 = parcel.readString();
+                    String string4 = parcel.readString();
+                    byte[] bArrCreateByteArray2 = parcel.createByteArray();
+                    String string5 = parcel.readString();
                     Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    ucmRetParcelable decrypt = decrypt(readString4, createByteArray2, readString5, bundle);
+                    ucmRetParcelable ucmretparcelableDecrypt = decrypt(string4, bArrCreateByteArray2, string5, bundle);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(decrypt, 1);
+                    parcel2.writeTypedObject(ucmretparcelableDecrypt, 1);
                     return true;
                 case 4:
-                    String readString6 = parcel.readString();
+                    String string6 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    ucmRetParcelable generateDek = generateDek(readString6);
+                    ucmRetParcelable ucmretparcelableGenerateDek = generateDek(string6);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(generateDek, 1);
+                    parcel2.writeTypedObject(ucmretparcelableGenerateDek, 1);
                     return true;
                 case 5:
-                    String readString7 = parcel.readString();
+                    String string7 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    ucmRetParcelable generateWrappedDek = generateWrappedDek(readString7);
+                    ucmRetParcelable ucmretparcelableGenerateWrappedDek = generateWrappedDek(string7);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(generateWrappedDek, 1);
+                    parcel2.writeTypedObject(ucmretparcelableGenerateWrappedDek, 1);
                     return true;
                 case 6:
-                    String readString8 = parcel.readString();
+                    String string8 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    ucmRetParcelable dek = getDek(readString8);
+                    ucmRetParcelable dek = getDek(string8);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(dek, 1);
                     return true;
                 case 7:
-                    String readString9 = parcel.readString();
-                    byte[] createByteArray3 = parcel.createByteArray();
+                    String string9 = parcel.readString();
+                    byte[] bArrCreateByteArray3 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    ucmRetParcelable unwrapDek = unwrapDek(readString9, createByteArray3);
+                    ucmRetParcelable ucmretparcelableUnwrapDek = unwrapDek(string9, bArrCreateByteArray3);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(unwrapDek, 1);
+                    parcel2.writeTypedObject(ucmretparcelableUnwrapDek, 1);
                     return true;
                 case 8:
-                    String readString10 = parcel.readString();
-                    int readInt = parcel.readInt();
+                    String string10 = parcel.readString();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    Bundle saw = saw(readString10, readInt);
+                    Bundle bundleSaw = saw(string10, i3);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(saw, 1);
+                    parcel2.writeTypedObject(bundleSaw, 1);
                     return true;
                 case 9:
-                    String readString11 = parcel.readString();
-                    byte[] createByteArray4 = parcel.createByteArray();
-                    byte[] createByteArray5 = parcel.createByteArray();
+                    String string11 = parcel.readString();
+                    byte[] bArrCreateByteArray4 = parcel.createByteArray();
+                    byte[] bArrCreateByteArray5 = parcel.createByteArray();
                     Bundle bundle2 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    Bundle importKeyPair = importKeyPair(readString11, createByteArray4, createByteArray5, bundle2);
+                    Bundle bundleImportKeyPair = importKeyPair(string11, bArrCreateByteArray4, bArrCreateByteArray5, bundle2);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(importKeyPair, 1);
+                    parcel2.writeTypedObject(bundleImportKeyPair, 1);
                     return true;
                 case 10:
-                    String readString12 = parcel.readString();
-                    byte[] createByteArray6 = parcel.createByteArray();
-                    byte[] createByteArray7 = parcel.createByteArray();
+                    String string12 = parcel.readString();
+                    byte[] bArrCreateByteArray6 = parcel.createByteArray();
+                    byte[] bArrCreateByteArray7 = parcel.createByteArray();
                     Bundle bundle3 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    Bundle installCertificate = installCertificate(readString12, createByteArray6, createByteArray7, bundle3);
+                    Bundle bundleInstallCertificate = installCertificate(string12, bArrCreateByteArray6, bArrCreateByteArray7, bundle3);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(installCertificate, 1);
+                    parcel2.writeTypedObject(bundleInstallCertificate, 1);
                     return true;
                 case 11:
-                    String readString13 = parcel.readString();
-                    byte[] createByteArray8 = parcel.createByteArray();
+                    String string13 = parcel.readString();
+                    byte[] bArrCreateByteArray8 = parcel.createByteArray();
                     Bundle bundle4 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    Bundle certificateChain2 = setCertificateChain(readString13, createByteArray8, bundle4);
+                    Bundle certificateChain2 = setCertificateChain(string13, bArrCreateByteArray8, bundle4);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(certificateChain2, 1);
                     return true;
                 case 12:
-                    String readString14 = parcel.readString();
+                    String string14 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    Bundle delete = delete(readString14);
+                    Bundle bundleDelete = delete(string14);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(delete, 1);
+                    parcel2.writeTypedObject(bundleDelete, 1);
                     return true;
                 case 13:
-                    String readString15 = parcel.readString();
-                    int readInt2 = parcel.readInt();
+                    String string15 = parcel.readString();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    Bundle deleteCertificate = deleteCertificate(readString15, readInt2);
+                    Bundle bundleDeleteCertificate = deleteCertificate(string15, i4);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(deleteCertificate, 1);
+                    parcel2.writeTypedObject(bundleDeleteCertificate, 1);
                     return true;
                 case 14:
-                    String readString16 = parcel.readString();
-                    String readString17 = parcel.readString();
-                    int readInt3 = parcel.readInt();
+                    String string16 = parcel.readString();
+                    String string17 = parcel.readString();
+                    int i5 = parcel.readInt();
                     Bundle bundle5 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    Bundle generateKeyPair = generateKeyPair(readString16, readString17, readInt3, bundle5);
+                    Bundle bundleGenerateKeyPair = generateKeyPair(string16, string17, i5, bundle5);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(generateKeyPair, 1);
+                    parcel2.writeTypedObject(bundleGenerateKeyPair, 1);
                     return true;
                 case 15:
-                    String readString18 = parcel.readString();
-                    String readString19 = parcel.readString();
-                    int readInt4 = parcel.readInt();
+                    String string18 = parcel.readString();
+                    String string19 = parcel.readString();
+                    int i6 = parcel.readInt();
                     Bundle bundle6 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    Bundle generateKeyPairInternal = generateKeyPairInternal(readString18, readString19, readInt4, bundle6);
+                    Bundle bundleGenerateKeyPairInternal = generateKeyPairInternal(string18, string19, i6, bundle6);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(generateKeyPairInternal, 1);
+                    parcel2.writeTypedObject(bundleGenerateKeyPairInternal, 1);
                     return true;
                 case 16:
-                    Bundle[] listProviders = listProviders();
+                    Bundle[] bundleArrListProviders = listProviders();
                     parcel2.writeNoException();
-                    parcel2.writeTypedArray(listProviders, 1);
+                    parcel2.writeTypedArray(bundleArrListProviders, 1);
                     return true;
                 case 17:
-                    Bundle[] listAllProviders = listAllProviders();
+                    Bundle[] bundleArrListAllProviders = listAllProviders();
                     parcel2.writeNoException();
-                    parcel2.writeTypedArray(listAllProviders, 1);
+                    parcel2.writeTypedArray(bundleArrListAllProviders, 1);
                     return true;
                 case 18:
-                    String readString20 = parcel.readString();
+                    String string20 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    Bundle agentInfo = getAgentInfo(readString20);
+                    Bundle agentInfo = getAgentInfo(string20);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(agentInfo, 1);
                     return true;
                 case 19:
-                    String readString21 = parcel.readString();
-                    int readInt5 = parcel.readInt();
-                    byte[] createByteArray9 = parcel.createByteArray();
+                    String string21 = parcel.readString();
+                    int i7 = parcel.readInt();
+                    byte[] bArrCreateByteArray9 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    Bundle generateSecureRandom = generateSecureRandom(readString21, readInt5, createByteArray9);
+                    Bundle bundleGenerateSecureRandom = generateSecureRandom(string21, i7, bArrCreateByteArray9);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(generateSecureRandom, 1);
+                    parcel2.writeTypedObject(bundleGenerateSecureRandom, 1);
                     return true;
                 case 20:
-                    int readInt6 = parcel.readInt();
-                    int readInt7 = parcel.readInt();
-                    String readString22 = parcel.readString();
+                    int i8 = parcel.readInt();
+                    int i9 = parcel.readInt();
+                    String string22 = parcel.readString();
                     Bundle bundle7 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                    int readInt8 = parcel.readInt();
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    Bundle adminConfigureBundleForCs = setAdminConfigureBundleForCs(readInt6, readInt7, readString22, bundle7, readInt8);
+                    Bundle adminConfigureBundleForCs = setAdminConfigureBundleForCs(i8, i9, string22, bundle7, i10);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(adminConfigureBundleForCs, 1);
                     return true;
                 case 21:
-                    int readInt9 = parcel.readInt();
-                    int readInt10 = parcel.readInt();
-                    String readString23 = parcel.readString();
+                    int i11 = parcel.readInt();
+                    int i12 = parcel.readInt();
+                    String string23 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    Bundle adminConfigureBundleFromCs = getAdminConfigureBundleFromCs(readInt9, readInt10, readString23);
+                    Bundle adminConfigureBundleFromCs = getAdminConfigureBundleFromCs(i11, i12, string23);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(adminConfigureBundleFromCs, 1);
                     return true;
                 case 22:
-                    int readInt11 = parcel.readInt();
-                    String readString24 = parcel.readString();
+                    int i13 = parcel.readInt();
+                    String string24 = parcel.readString();
                     Bundle bundle8 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                    int readInt12 = parcel.readInt();
+                    int i14 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    Bundle credentialStorageProperty = setCredentialStorageProperty(readInt11, readString24, bundle8, readInt12);
+                    Bundle credentialStorageProperty = setCredentialStorageProperty(i13, string24, bundle8, i14);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(credentialStorageProperty, 1);
                     return true;
                 case 23:
-                    int readInt13 = parcel.readInt();
-                    String readString25 = parcel.readString();
+                    int i15 = parcel.readInt();
+                    String string25 = parcel.readString();
                     Bundle bundle9 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                    int readInt14 = parcel.readInt();
+                    int i16 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    Bundle credentialStorageProperty2 = getCredentialStorageProperty(readInt13, readString25, bundle9, readInt14);
+                    Bundle credentialStorageProperty2 = getCredentialStorageProperty(i15, string25, bundle9, i16);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(credentialStorageProperty2, 1);
                     return true;
                 case 24:
-                    int readInt15 = parcel.readInt();
-                    String readString26 = parcel.readString();
-                    String readString27 = parcel.readString();
+                    int i17 = parcel.readInt();
+                    String string26 = parcel.readString();
+                    String string27 = parcel.readString();
                     Bundle bundle10 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    Bundle verifyPin = verifyPin(readInt15, readString26, readString27, bundle10);
+                    Bundle bundleVerifyPin = verifyPin(i17, string26, string27, bundle10);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(verifyPin, 1);
+                    parcel2.writeTypedObject(bundleVerifyPin, 1);
                     return true;
                 case 25:
-                    String readString28 = parcel.readString();
-                    String readString29 = parcel.readString();
-                    String readString30 = parcel.readString();
+                    String string28 = parcel.readString();
+                    String string29 = parcel.readString();
+                    String string30 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    Bundle verifyPuk = verifyPuk(readString28, readString29, readString30);
+                    Bundle bundleVerifyPuk = verifyPuk(string28, string29, string30);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(verifyPuk, 1);
+                    parcel2.writeTypedObject(bundleVerifyPuk, 1);
                     return true;
                 case 26:
-                    String readString31 = parcel.readString();
-                    String readString32 = parcel.readString();
-                    String readString33 = parcel.readString();
+                    String string31 = parcel.readString();
+                    String string32 = parcel.readString();
+                    String string33 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    Bundle changePin = changePin(readString31, readString32, readString33);
+                    Bundle bundleChangePin = changePin(string31, string32, string33);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(changePin, 1);
+                    parcel2.writeTypedObject(bundleChangePin, 1);
                     return true;
                 case 27:
-                    String readString34 = parcel.readString();
-                    int readInt16 = parcel.readInt();
+                    String string34 = parcel.readString();
+                    int i18 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    Bundle state = setState(readString34, readInt16);
+                    Bundle state = setState(string34, i18);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(state, 1);
                     return true;
                 case 28:
-                    String readString35 = parcel.readString();
-                    byte[] createByteArray10 = parcel.createByteArray();
+                    String string35 = parcel.readString();
+                    byte[] bArrCreateByteArray10 = parcel.createByteArray();
                     Bundle bundle11 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    Bundle APDUCommand = APDUCommand(readString35, createByteArray10, bundle11);
+                    Bundle bundleAPDUCommand = APDUCommand(string35, bArrCreateByteArray10, bundle11);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(APDUCommand, 1);
+                    parcel2.writeTypedObject(bundleAPDUCommand, 1);
                     return true;
                 case 29:
-                    String readString36 = parcel.readString();
+                    String string36 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    Bundle info = getInfo(readString36);
+                    Bundle info = getInfo(string36);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(info, 1);
                     return true;
                 case 30:
-                    int readInt17 = parcel.readInt();
-                    String readString37 = parcel.readString();
+                    int i19 = parcel.readInt();
+                    String string37 = parcel.readString();
                     Bundle bundle12 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    Bundle generateKeyguardPassword = generateKeyguardPassword(readInt17, readString37, bundle12);
+                    Bundle bundleGenerateKeyguardPassword = generateKeyguardPassword(i19, string37, bundle12);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(generateKeyguardPassword, 1);
+                    parcel2.writeTypedObject(bundleGenerateKeyguardPassword, 1);
                     return true;
                 case 31:
-                    int readInt18 = parcel.readInt();
-                    String readString38 = parcel.readString();
+                    int i20 = parcel.readInt();
+                    String string38 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean configureKeyguardSettings = configureKeyguardSettings(readInt18, readString38);
+                    boolean zConfigureKeyguardSettings = configureKeyguardSettings(i20, string38);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(configureKeyguardSettings);
+                    parcel2.writeBoolean(zConfigureKeyguardSettings);
                     return true;
                 case 32:
-                    String readString39 = parcel.readString();
+                    String string39 = parcel.readString();
                     Bundle bundle13 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                    String readString40 = parcel.readString();
+                    String string40 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int configureODESettings = configureODESettings(readString39, bundle13, readString40);
+                    int iConfigureODESettings = configureODESettings(string39, bundle13, string40);
                     parcel2.writeNoException();
-                    parcel2.writeInt(configureODESettings);
+                    parcel2.writeInt(iConfigureODESettings);
                     return true;
                 case 33:
                     Bundle oDESettingsConfiguration = getODESettingsConfiguration();
@@ -2162,119 +2158,119 @@ public interface IUcmService extends IInterface {
                     parcel2.writeTypedObject(oDESettingsConfiguration, 1);
                     return true;
                 case 34:
-                    String readString41 = parcel.readString();
-                    int readInt19 = parcel.readInt();
+                    String string41 = parcel.readString();
+                    int i21 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    Bundle resetUser = resetUser(readString41, readInt19);
+                    Bundle bundleResetUser = resetUser(string41, i21);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(resetUser, 1);
+                    parcel2.writeTypedObject(bundleResetUser, 1);
                     return true;
                 case 35:
-                    String readString42 = parcel.readString();
-                    int readInt20 = parcel.readInt();
+                    String string42 = parcel.readString();
+                    int i22 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    Bundle resetUid = resetUid(readString42, readInt20);
+                    Bundle bundleResetUid = resetUid(string42, i22);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(resetUid, 1);
+                    parcel2.writeTypedObject(bundleResetUid, 1);
                     return true;
                 case 36:
-                    String readString43 = parcel.readString();
-                    int readInt21 = parcel.readInt();
+                    String string43 = parcel.readString();
+                    int i23 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    Bundle containsAlias = containsAlias(readString43, readInt21);
+                    Bundle bundleContainsAlias = containsAlias(string43, i23);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(containsAlias, 1);
+                    parcel2.writeTypedObject(bundleContainsAlias, 1);
                     return true;
                 case 37:
-                    String readString44 = parcel.readString();
-                    int readInt22 = parcel.readInt();
+                    String string44 = parcel.readString();
+                    int i24 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean grantKeyChainAccess = grantKeyChainAccess(readString44, readInt22);
+                    boolean zGrantKeyChainAccess = grantKeyChainAccess(string44, i24);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(grantKeyChainAccess);
+                    parcel2.writeBoolean(zGrantKeyChainAccess);
                     return true;
                 case 38:
-                    String readString45 = parcel.readString();
-                    int readInt23 = parcel.readInt();
+                    String string45 = parcel.readString();
+                    int i25 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isKeyChainGranted = isKeyChainGranted(readString45, readInt23);
+                    boolean zIsKeyChainGranted = isKeyChainGranted(string45, i25);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isKeyChainGranted);
+                    parcel2.writeBoolean(zIsKeyChainGranted);
                     return true;
                 case 39:
-                    String readString46 = parcel.readString();
+                    String string46 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    Bundle status = getStatus(readString46);
+                    Bundle status = getStatus(string46);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(status, 1);
                     return true;
                 case 40:
-                    String readString47 = parcel.readString();
-                    String readString48 = parcel.readString();
-                    int readInt24 = parcel.readInt();
+                    String string47 = parcel.readString();
+                    String string48 = parcel.readString();
+                    int i26 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean notifyLicenseStatus = notifyLicenseStatus(readString47, readString48, readInt24);
+                    boolean zNotifyLicenseStatus = notifyLicenseStatus(string47, string48, i26);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(notifyLicenseStatus);
+                    parcel2.writeBoolean(zNotifyLicenseStatus);
                     return true;
                 case 41:
-                    String readString49 = parcel.readString();
-                    int readInt25 = parcel.readInt();
+                    String string49 = parcel.readString();
+                    int i27 = parcel.readInt();
                     Bundle bundle14 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    Bundle notifyChangeToPlugin = notifyChangeToPlugin(readString49, readInt25, bundle14);
+                    Bundle bundleNotifyChangeToPlugin = notifyChangeToPlugin(string49, i27, bundle14);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(notifyChangeToPlugin, 1);
+                    parcel2.writeTypedObject(bundleNotifyChangeToPlugin, 1);
                     return true;
                 case 42:
                     resetNonMdmCertificates();
                     parcel2.writeNoException();
                     return true;
                 case 43:
-                    boolean isUserCertificatesExistInUCS = isUserCertificatesExistInUCS();
+                    boolean zIsUserCertificatesExistInUCS = isUserCertificatesExistInUCS();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isUserCertificatesExistInUCS);
+                    parcel2.writeBoolean(zIsUserCertificatesExistInUCS);
                     return true;
                 case 44:
-                    String readString50 = parcel.readString();
-                    int readInt26 = parcel.readInt();
-                    int readInt27 = parcel.readInt();
+                    String string50 = parcel.readString();
+                    int i28 = parcel.readInt();
+                    int i29 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    Bundle sawInternal = sawInternal(readString50, readInt26, readInt27);
+                    Bundle bundleSawInternal = sawInternal(string50, i28, i29);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(sawInternal, 1);
+                    parcel2.writeTypedObject(bundleSawInternal, 1);
                     return true;
                 case 45:
-                    int readInt28 = parcel.readInt();
+                    int i30 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    String keyguardStorageForCurrentUser = getKeyguardStorageForCurrentUser(readInt28);
+                    String keyguardStorageForCurrentUser = getKeyguardStorageForCurrentUser(i30);
                     parcel2.writeNoException();
                     parcel2.writeString(keyguardStorageForCurrentUser);
                     return true;
                 case 46:
-                    int readInt29 = parcel.readInt();
-                    String readString51 = parcel.readString();
+                    int i31 = parcel.readInt();
+                    String string51 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    showEnforcedLockTypeNotification(readInt29, readString51);
+                    showEnforcedLockTypeNotification(i31, string51);
                     parcel2.writeNoException();
                     return true;
                 case 47:
-                    int readInt30 = parcel.readInt();
+                    int i32 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    removeEnforcedLockTypeNotification(readInt30);
+                    removeEnforcedLockTypeNotification(i32);
                     parcel2.writeNoException();
                     return true;
                 case 48:
-                    ICredentialManagerServiceSystemUICallback asInterface = ICredentialManagerServiceSystemUICallback.Stub.asInterface(parcel.readStrongBinder());
+                    ICredentialManagerServiceSystemUICallback iCredentialManagerServiceSystemUICallbackAsInterface = ICredentialManagerServiceSystemUICallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerSystemUICallback(asInterface);
+                    registerSystemUICallback(iCredentialManagerServiceSystemUICallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 49:
-                    String readString52 = parcel.readString();
-                    int readInt31 = parcel.readInt();
+                    String string52 = parcel.readString();
+                    int i33 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    String detailErrorMessage = getDetailErrorMessage(readString52, readInt31);
+                    String detailErrorMessage = getDetailErrorMessage(string52, i33);
                     parcel2.writeNoException();
                     parcel2.writeString(detailErrorMessage);
                     return true;
@@ -2283,112 +2279,112 @@ public interface IUcmService extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 51:
-                    String readString53 = parcel.readString();
-                    byte[] createByteArray11 = parcel.createByteArray();
+                    String string53 = parcel.readString();
+                    byte[] bArrCreateByteArray11 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    ucmRetParcelable dekForVold = getDekForVold(readString53, createByteArray11);
+                    ucmRetParcelable dekForVold = getDekForVold(string53, bArrCreateByteArray11);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(dekForVold, 1);
                     return true;
                 case 52:
-                    String readString54 = parcel.readString();
-                    byte[] createByteArray12 = parcel.createByteArray();
+                    String string54 = parcel.readString();
+                    byte[] bArrCreateByteArray12 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    ucmRetParcelable dekForVoldInternalKey = getDekForVoldInternalKey(readString54, createByteArray12);
+                    ucmRetParcelable dekForVoldInternalKey = getDekForVoldInternalKey(string54, bArrCreateByteArray12);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(dekForVoldInternalKey, 1);
                     return true;
                 case 53:
-                    String readString55 = parcel.readString();
+                    String string55 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    ucmRetParcelable oDEConfigurationForVold = getODEConfigurationForVold(readString55);
+                    ucmRetParcelable oDEConfigurationForVold = getODEConfigurationForVold(string55);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(oDEConfigurationForVold, 1);
                     return true;
                 case 54:
-                    String readString56 = parcel.readString();
-                    byte[] createByteArray13 = parcel.createByteArray();
+                    String string56 = parcel.readString();
+                    byte[] bArrCreateByteArray13 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    ucmRetParcelable odeKey = getOdeKey(readString56, createByteArray13);
+                    ucmRetParcelable odeKey = getOdeKey(string56, bArrCreateByteArray13);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(odeKey, 1);
                     return true;
                 case 55:
-                    String readString57 = parcel.readString();
-                    byte[] createByteArray14 = parcel.createByteArray();
+                    String string57 = parcel.readString();
+                    byte[] bArrCreateByteArray14 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    ucmRetParcelable notifyVoldComplete = notifyVoldComplete(readString57, createByteArray14);
+                    ucmRetParcelable ucmretparcelableNotifyVoldComplete = notifyVoldComplete(string57, bArrCreateByteArray14);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(notifyVoldComplete, 1);
+                    parcel2.writeTypedObject(ucmretparcelableNotifyVoldComplete, 1);
                     return true;
                 case 56:
-                    String readString58 = parcel.readString();
-                    byte[] createByteArray15 = parcel.createByteArray();
-                    String readString59 = parcel.readString();
+                    String string58 = parcel.readString();
+                    byte[] bArrCreateByteArray15 = parcel.createByteArray();
+                    String string59 = parcel.readString();
                     Bundle bundle15 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    ucmRetParcelable encrypt = encrypt(readString58, createByteArray15, readString59, bundle15);
+                    ucmRetParcelable ucmretparcelableEncrypt = encrypt(string58, bArrCreateByteArray15, string59, bundle15);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(encrypt, 1);
+                    parcel2.writeTypedObject(ucmretparcelableEncrypt, 1);
                     return true;
                 case 57:
-                    String readString60 = parcel.readString();
-                    String readString61 = parcel.readString();
+                    String string60 = parcel.readString();
+                    String string61 = parcel.readString();
                     Bundle bundle16 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    Bundle initKeyguardPin = initKeyguardPin(readString60, readString61, bundle16);
+                    Bundle bundleInitKeyguardPin = initKeyguardPin(string60, string61, bundle16);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(initKeyguardPin, 1);
+                    parcel2.writeTypedObject(bundleInitKeyguardPin, 1);
                     return true;
                 case 58:
-                    String readString62 = parcel.readString();
-                    int readInt32 = parcel.readInt();
+                    String string62 = parcel.readString();
+                    int i34 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    Bundle keyguardPinMaximumRetryCount = setKeyguardPinMaximumRetryCount(readString62, readInt32);
+                    Bundle keyguardPinMaximumRetryCount = setKeyguardPinMaximumRetryCount(string62, i34);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(keyguardPinMaximumRetryCount, 1);
                     return true;
                 case 59:
-                    String readString63 = parcel.readString();
-                    int readInt33 = parcel.readInt();
+                    String string63 = parcel.readString();
+                    int i35 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    Bundle keyguardPinMinimumLength = setKeyguardPinMinimumLength(readString63, readInt33);
+                    Bundle keyguardPinMinimumLength = setKeyguardPinMinimumLength(string63, i35);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(keyguardPinMinimumLength, 1);
                     return true;
                 case 60:
-                    String readString64 = parcel.readString();
-                    int readInt34 = parcel.readInt();
+                    String string64 = parcel.readString();
+                    int i36 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    Bundle keyguardPinMaximumLength = setKeyguardPinMaximumLength(readString64, readInt34);
+                    Bundle keyguardPinMaximumLength = setKeyguardPinMaximumLength(string64, i36);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(keyguardPinMaximumLength, 1);
                     return true;
                 case 61:
-                    String readString65 = parcel.readString();
+                    String string65 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    Bundle keyguardPinMaximumRetryCount2 = getKeyguardPinMaximumRetryCount(readString65);
+                    Bundle keyguardPinMaximumRetryCount2 = getKeyguardPinMaximumRetryCount(string65);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(keyguardPinMaximumRetryCount2, 1);
                     return true;
                 case 62:
-                    String readString66 = parcel.readString();
+                    String string66 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    Bundle keyguardPinCurrentRetryCount = getKeyguardPinCurrentRetryCount(readString66);
+                    Bundle keyguardPinCurrentRetryCount = getKeyguardPinCurrentRetryCount(string66);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(keyguardPinCurrentRetryCount, 1);
                     return true;
                 case 63:
-                    String readString67 = parcel.readString();
+                    String string67 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    Bundle keyguardPinMinimumLength2 = getKeyguardPinMinimumLength(readString67);
+                    Bundle keyguardPinMinimumLength2 = getKeyguardPinMinimumLength(string67);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(keyguardPinMinimumLength2, 1);
                     return true;
                 case 64:
-                    String readString68 = parcel.readString();
+                    String string68 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    Bundle keyguardPinMaximumLength2 = getKeyguardPinMaximumLength(readString68);
+                    Bundle keyguardPinMaximumLength2 = getKeyguardPinMaximumLength(string68);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(keyguardPinMaximumLength2, 1);
                     return true;
@@ -2399,70 +2395,70 @@ public interface IUcmService extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 66:
-                    String readString69 = parcel.readString();
-                    String readString70 = parcel.readString();
-                    int readInt35 = parcel.readInt();
+                    String string69 = parcel.readString();
+                    String string70 = parcel.readString();
+                    int i37 = parcel.readInt();
                     Bundle bundle18 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    Bundle generateKey = generateKey(readString69, readString70, readInt35, bundle18);
+                    Bundle bundleGenerateKey = generateKey(string69, string70, i37, bundle18);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(generateKey, 1);
+                    parcel2.writeTypedObject(bundleGenerateKey, 1);
                     return true;
                 case 67:
-                    String readString71 = parcel.readString();
+                    String string71 = parcel.readString();
                     Bundle bundle19 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    Bundle importKey = importKey(readString71, bundle19);
+                    Bundle bundleImportKey = importKey(string71, bundle19);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(importKey, 1);
+                    parcel2.writeTypedObject(bundleImportKey, 1);
                     return true;
                 case 68:
-                    String readString72 = parcel.readString();
+                    String string72 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    Bundle keyType = getKeyType(readString72);
+                    Bundle keyType = getKeyType(string72);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(keyType, 1);
                     return true;
                 case 69:
-                    String readString73 = parcel.readString();
-                    byte[] createByteArray16 = parcel.createByteArray();
-                    String readString74 = parcel.readString();
+                    String string73 = parcel.readString();
+                    byte[] bArrCreateByteArray16 = parcel.createByteArray();
+                    String string74 = parcel.readString();
                     Bundle bundle20 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    Bundle installCertificateIfSupported = installCertificateIfSupported(readString73, createByteArray16, readString74, bundle20);
+                    Bundle bundleInstallCertificateIfSupported = installCertificateIfSupported(string73, bArrCreateByteArray16, string74, bundle20);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(installCertificateIfSupported, 1);
+                    parcel2.writeTypedObject(bundleInstallCertificateIfSupported, 1);
                     return true;
                 case 70:
-                    String readString75 = parcel.readString();
-                    byte[] createByteArray17 = parcel.createByteArray();
-                    String readString76 = parcel.readString();
+                    String string75 = parcel.readString();
+                    byte[] bArrCreateByteArray17 = parcel.createByteArray();
+                    String string76 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    ucmRetParcelable mac = mac(readString75, createByteArray17, readString76);
+                    ucmRetParcelable ucmretparcelableMac = mac(string75, bArrCreateByteArray17, string76);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(mac, 1);
+                    parcel2.writeTypedObject(ucmretparcelableMac, 1);
                     return true;
                 case 71:
-                    String readString77 = parcel.readString();
-                    String readString78 = parcel.readString();
+                    String string77 = parcel.readString();
+                    String string78 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int configureWPCDARFlag = configureWPCDARFlag(readString77, readString78);
+                    int iConfigureWPCDARFlag = configureWPCDARFlag(string77, string78);
                     parcel2.writeNoException();
-                    parcel2.writeInt(configureWPCDARFlag);
+                    parcel2.writeInt(iConfigureWPCDARFlag);
                     return true;
                 case 72:
-                    int removeODESettings = removeODESettings();
+                    int iRemoveWpcOdeSettings = removeWpcOdeSettings();
                     parcel2.writeNoException();
-                    parcel2.writeInt(removeODESettings);
+                    parcel2.writeInt(iRemoveWpcOdeSettings);
                     return true;
                 case 73:
-                    String readString79 = parcel.readString();
-                    String readString80 = parcel.readString();
-                    byte[] createByteArray18 = parcel.createByteArray();
+                    String string79 = parcel.readString();
+                    String string80 = parcel.readString();
+                    byte[] bArrCreateByteArray18 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    ucmRetParcelable keyAgreement = keyAgreement(readString79, readString80, createByteArray18);
+                    ucmRetParcelable ucmretparcelableKeyAgreement = keyAgreement(string79, string80, bArrCreateByteArray18);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(keyAgreement, 1);
+                    parcel2.writeTypedObject(ucmretparcelableKeyAgreement, 1);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);

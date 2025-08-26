@@ -63,9 +63,9 @@ public interface ILcnConflict extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.scan.ILcnConflict");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ILcnConflict)) {
-                return (ILcnConflict) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.scan.ILcnConflict");
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ILcnConflict)) {
+                return (ILcnConflict) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -104,13 +104,13 @@ public interface ILcnConflict extends IInterface {
             } else if (i == 2) {
                 Bundle[] bundleArr = (Bundle[]) parcel.createTypedArray(Bundle.CREATOR);
                 parcel.enforceNoDataAvail();
-                int resolveLcnConflict = resolveLcnConflict(bundleArr);
+                int iResolveLcnConflict = resolveLcnConflict(bundleArr);
                 parcel2.writeNoException();
-                parcel2.writeInt(resolveLcnConflict);
+                parcel2.writeInt(iResolveLcnConflict);
             } else if (i == 3) {
-                ILcnConflictListener asInterface = ILcnConflictListener.Stub.asInterface(parcel.readStrongBinder());
+                ILcnConflictListener iLcnConflictListenerAsInterface = ILcnConflictListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                int listener = setListener(asInterface);
+                int listener = setListener(iLcnConflictListenerAsInterface);
                 parcel2.writeNoException();
                 parcel2.writeInt(listener);
             } else {
@@ -137,48 +137,48 @@ public interface ILcnConflict extends IInterface {
 
             @Override // android.media.tv.extension.scan.ILcnConflict
             public Bundle[] getLcnConflictGroups() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.scan.ILcnConflict");
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle[]) obtain2.createTypedArray(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.scan.ILcnConflict");
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle[]) parcelObtain2.createTypedArray(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.scan.ILcnConflict
             public int resolveLcnConflict(Bundle[] bundleArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.scan.ILcnConflict");
-                    obtain.writeTypedArray(bundleArr, 0);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.scan.ILcnConflict");
+                    parcelObtain.writeTypedArray(bundleArr, 0);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.scan.ILcnConflict
             public int setListener(ILcnConflictListener iLcnConflictListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.scan.ILcnConflict");
-                    obtain.writeStrongInterface(iLcnConflictListener);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.scan.ILcnConflict");
+                    parcelObtain.writeStrongInterface(iLcnConflictListener);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

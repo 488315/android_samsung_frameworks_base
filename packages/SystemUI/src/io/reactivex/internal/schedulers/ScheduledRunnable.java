@@ -6,7 +6,6 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicReferenceArray;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class ScheduledRunnable extends AtomicReferenceArray<Object> implements Runnable, Callable<Object>, Disposable {
     private static final long serialVersionUID = -6120223772001106981L;
@@ -63,7 +62,7 @@ public final class ScheduledRunnable extends AtomicReferenceArray<Object> implem
     @Override // java.lang.Runnable
     public final void run() {
         Object obj;
-        boolean compareAndSet;
+        boolean zCompareAndSet;
         Object obj2;
         Object obj3;
         Object obj4 = ASYNC_DISPOSED;
@@ -93,7 +92,7 @@ public final class ScheduledRunnable extends AtomicReferenceArray<Object> implem
                     if (obj == obj5 || obj == obj4) {
                         break;
                     }
-                } while (!compareAndSet);
+                } while (!zCompareAndSet);
             }
         }
         lazySet(2, null);

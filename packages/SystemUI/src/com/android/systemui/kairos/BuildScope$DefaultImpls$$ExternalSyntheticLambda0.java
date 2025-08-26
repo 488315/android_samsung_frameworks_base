@@ -8,7 +8,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class BuildScope$DefaultImpls$$ExternalSyntheticLambda0 implements Function2 {
     public final /* synthetic */ int $r8$classId;
@@ -25,7 +24,7 @@ public final /* synthetic */ class BuildScope$DefaultImpls$$ExternalSyntheticLam
             case 1:
                 Unit unit = Unit.INSTANCE;
                 Maybe.Companion.getClass();
-                Pair pair = new Pair(unit, Maybe.Present.m2573boximpl((Function1) obj2));
+                Pair pair = new Pair(unit, Maybe.Present.m2590boximpl((Function1) obj2));
                 return Collections.singletonMap(pair.getFirst(), pair.getSecond());
             case 2:
                 Map map = (Map) obj2;
@@ -35,7 +34,7 @@ public final /* synthetic */ class BuildScope$DefaultImpls$$ExternalSyntheticLam
                 }
                 throw new IllegalStateException(("applyLatest: expected result, but none present in: " + map).toString());
             default:
-                return ((Function1) obj2).mo779invoke(obj);
+                return ((Function1) obj2).mo781invoke(obj);
         }
     }
 }

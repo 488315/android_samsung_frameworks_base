@@ -32,7 +32,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class FreeformContainerViewController {
     public FreeformContainerView mContainerView;
@@ -143,7 +142,7 @@ public class FreeformContainerViewController {
             Runnable runnable = new Runnable() { // from class: com.android.wm.shell.freeform.FreeformContainerViewController$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    final FreeformContainerViewController freeformContainerViewController = FreeformContainerViewController.this;
+                    final FreeformContainerViewController freeformContainerViewController = this.f$0;
                     FreeformContainerItem freeformContainerItem2 = freeformContainerItem;
                     if (freeformContainerItem2 == null) {
                         freeformContainerViewController.mItemController.throwAwayAllItems();
@@ -163,7 +162,7 @@ public class FreeformContainerViewController {
                     arrayList.forEach(new Consumer() { // from class: com.android.wm.shell.freeform.FreeformContainerViewController$$ExternalSyntheticLambda2
                         @Override // java.util.function.Consumer
                         public final void accept(Object obj) {
-                            FreeformContainerViewController freeformContainerViewController2 = FreeformContainerViewController.this;
+                            FreeformContainerViewController freeformContainerViewController2 = freeformContainerViewController;
                             FreeformContainerItem freeformContainerItem3 = (FreeformContainerItem) obj;
                             freeformContainerViewController2.getClass();
                             Log.d("FreeformContainer", "[ViewController] throw away: " + freeformContainerItem3 + ", dismiss_btn");
@@ -201,10 +200,10 @@ public class FreeformContainerViewController {
                 public final void onAnimationStart(Animation animation) {
                 }
             };
-            float centerX = rect.centerX();
-            float centerY = rect.centerY();
+            float fCenterX = rect.centerX();
+            float fCenterY = rect.centerY();
             TranslateAnimation translateAnimation = new TranslateAnimation(0.0f, ((dismissView.getWidth() / 2.0f) + dismissView.mDismissArea.left) - rect.centerX(), 0.0f, ((dismissView2.getHeight() / 2.0f) + dismissView2.mDismissArea.top) - rect.centerY());
-            ScaleAnimation scaleAnimation = new ScaleAnimation(1.0f, 0.7f, 1.0f, 0.7f, centerX, centerY);
+            ScaleAnimation scaleAnimation = new ScaleAnimation(1.0f, 0.7f, 1.0f, 0.7f, fCenterX, fCenterY);
             AlphaAnimation alphaAnimation = new AlphaAnimation(1.0f, 0.0f);
             AnimationSet animationSet = new AnimationSet(true);
             animationSet.addAnimation(alphaAnimation);
@@ -349,7 +348,7 @@ public class FreeformContainerViewController {
                         public final void onAnimationEnd(Animation animation) {
                             FreeformContainerView.this.mPointerGroupView.setElevation(0.0f);
                             FreeformContainerView.this.mViewController.closeFullscreenMode("fullscreen_mode_request_folder");
-                            FreeformContainerView.m3252$$Nest$msettleDownPointerEffect(FreeformContainerView.this);
+                            FreeformContainerView.m3269$$Nest$msettleDownPointerEffect(FreeformContainerView.this);
                         }
 
                         @Override // android.view.animation.Animation.AnimationListener
@@ -365,8 +364,8 @@ public class FreeformContainerViewController {
                     freeformContainerView.mPointerSettleDownEffectRequested = true;
                     final FreeformContainerFolderView freeformContainerFolderView2 = this.mFolderView;
                     freeformContainerFolderView2.mTrayView.setVisibility(0);
-                    Animation loadAnimation = AnimationUtils.loadAnimation(freeformContainerFolderView2.mContext, R.anim.freeform_container_tray_view_fade_out);
-                    loadAnimation.setAnimationListener(new Animation.AnimationListener() { // from class: com.android.wm.shell.freeform.FreeformContainerFolderView.5
+                    Animation animationLoadAnimation = AnimationUtils.loadAnimation(freeformContainerFolderView2.mContext, R.anim.freeform_container_tray_view_fade_out);
+                    animationLoadAnimation.setAnimationListener(new Animation.AnimationListener() { // from class: com.android.wm.shell.freeform.FreeformContainerFolderView.5
                         @Override // android.view.animation.Animation.AnimationListener
                         public final void onAnimationEnd(Animation animation) {
                             FreeformContainerFolderView.this.mTrayView.setVisibility(8);
@@ -380,7 +379,7 @@ public class FreeformContainerViewController {
                         public final void onAnimationStart(Animation animation) {
                         }
                     });
-                    freeformContainerFolderView2.mTrayView.startAnimation(loadAnimation);
+                    freeformContainerFolderView2.mTrayView.startAnimation(animationLoadAnimation);
                 } else {
                     FreeformContainerView freeformContainerView2 = this.mContainerView;
                     freeformContainerView2.mH.post(new FreeformContainerView$$ExternalSyntheticLambda0(freeformContainerView2));
@@ -492,22 +491,22 @@ public class FreeformContainerViewController {
         if (!z || rect.isEmpty()) {
             return;
         }
-        float width = this.mDisplayFrame.width() / rect.width();
-        float height = this.mDisplayFrame.height() / rect.height();
+        float fWidth = this.mDisplayFrame.width() / rect.width();
+        float fHeight = this.mDisplayFrame.height() / rect.height();
         FreeformContainerView freeformContainerView = this.mContainerView;
         PointF pointF = freeformContainerView.mPointerPosition;
         float f = pointF.x;
         if (f >= 0.0f) {
             float f2 = pointF.y;
             if (f2 >= 0.0f) {
-                float f3 = (f * width) + 0.5f;
-                float f4 = (f2 * height) + 0.5f;
-                StringBuilder m = CubicBezierEasing$$ExternalSyntheticOutline0.m("[ContainerView] scalePointerPosition, new position=(", f3, ",", f4, ") scale=(");
-                m.append(width);
-                m.append(",");
-                m.append(height);
-                m.append(")");
-                Log.i("FreeformContainer", m.toString());
+                float f3 = (f * fWidth) + 0.5f;
+                float f4 = (f2 * fHeight) + 0.5f;
+                StringBuilder sbM = CubicBezierEasing$$ExternalSyntheticOutline0.m("[ContainerView] scalePointerPosition, new position=(", f3, ",", f4, ") scale=(");
+                sbM.append(fWidth);
+                sbM.append(",");
+                sbM.append(fHeight);
+                sbM.append(")");
+                Log.i("FreeformContainer", sbM.toString());
                 freeformContainerView.setPointerPosition(f3, f4, false);
             }
         }

@@ -84,7 +84,6 @@ import java.util.concurrent.Executor;
 import java.util.function.Supplier;
 import javax.inject.Provider;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class LauncherProxyService implements CallbackController, NavigationModeController.ModeChangedListener, Dumpable {
     static final String ACTION_QUICKSTEP = "android.intent.action.QUICKSTEP_SERVICE";
@@ -122,7 +121,6 @@ public class LauncherProxyService implements CallbackController, NavigationModeC
     public final AnonymousClass10 mScreenLifecycleObserver;
     public final ScreenshotHelper mScreenshotHelper;
     public final SearcleManager mSearcleManager;
-    public final Provider mShadeInteractor;
     public final Lazy mShadeViewControllerLazy;
     public final ShellInterface mShellInterface;
     public final NotificationShadeWindowController mStatusBarWinController;
@@ -145,11 +143,9 @@ public class LauncherProxyService implements CallbackController, NavigationModeC
     public final LauncherProxyService$$ExternalSyntheticLambda0 mDeferredConnectionCallback = new LauncherProxyService$$ExternalSyntheticLambda0(this, 1);
     public final LauncherProxyService$$ExternalSyntheticLambda0 mDeferredBindAfterTimedOutCleanup = new LauncherProxyService$$ExternalSyntheticLambda0(this, 2);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.recents.LauncherProxyService$1, reason: invalid class name */
     public class AnonymousClass1 extends ISystemUiProxy.Stub {
         public static final /* synthetic */ int $r8$clinit = 0;
-        public long mDownTime = 0;
         public final LauncherProxyService$1$$ExternalSyntheticLambda27 mOnNumberOfPackagesChangedListener = new FgsManagerController.OnNumberOfPackagesChangedListener() { // from class: com.android.systemui.recents.LauncherProxyService$1$$ExternalSyntheticLambda27
             @Override // com.android.systemui.qs.FgsManagerController.OnNumberOfPackagesChangedListener
             public final void onNumberOfPackagesChanged(int i) {
@@ -166,29 +162,29 @@ public class LauncherProxyService implements CallbackController, NavigationModeC
             }
         };
 
-        /* JADX WARN: Type inference failed for: r3v1, types: [com.android.systemui.recents.LauncherProxyService$1$$ExternalSyntheticLambda27] */
+        /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.recents.LauncherProxyService$1$$ExternalSyntheticLambda27] */
         public AnonymousClass1() {
         }
 
         public final void verifyCallerAndClearCallingIdentity(String str, Supplier supplier) {
             int identifier = Binder.getCallingUserHandle().getIdentifier();
             if (identifier == LauncherProxyService.this.mCurrentBoundedUserId) {
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     supplier.get();
                     return;
                 } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
             Log.w("LauncherProxyService", "Launcher called sysui with invalid user: " + identifier + ", reason: " + str);
         }
 
         public final void verifyCallerAndClearCallingIdentityPostMain(final Runnable runnable, String str) {
-            verifyCallerAndClearCallingIdentity(str, new Supplier() { // from class: com.android.systemui.recents.LauncherProxyService$1$$ExternalSyntheticLambda35
+            verifyCallerAndClearCallingIdentity(str, new Supplier() { // from class: com.android.systemui.recents.LauncherProxyService$1$$ExternalSyntheticLambda36
                 @Override // java.util.function.Supplier
                 public final Object get() {
-                    LauncherProxyService.AnonymousClass1 anonymousClass1 = LauncherProxyService.AnonymousClass1.this;
+                    LauncherProxyService.AnonymousClass1 anonymousClass1 = this.f$0;
                     return Boolean.valueOf(LauncherProxyService.this.mHandler.post(runnable));
                 }
             });
@@ -230,11 +226,11 @@ public class LauncherProxyService implements CallbackController, NavigationModeC
                 if (stringArrayExtra == null) {
                     return;
                 }
-                ResolveInfo resolveService = context2.getPackageManager().resolveService(new Intent(LauncherProxyService.ACTION_QUICKSTEP), 0);
-                if (resolveService == null) {
+                ResolveInfo resolveInfoResolveService = context2.getPackageManager().resolveService(new Intent(LauncherProxyService.ACTION_QUICKSTEP), 0);
+                if (resolveInfoResolveService == null) {
                     return;
                 }
-                String str = resolveService.serviceInfo.name;
+                String str = resolveInfoResolveService.serviceInfo.name;
                 for (String str2 : stringArrayExtra) {
                     if (str.equals(str2)) {
                         Log.i("LauncherProxyService", "Rebinding for component [" + str2 + "] change");
@@ -263,7 +259,7 @@ public class LauncherProxyService implements CallbackController, NavigationModeC
             }
 
             @Override // android.content.ServiceConnection
-            public final void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+            public final void onServiceConnected(ComponentName componentName, IBinder iBinder) throws RemoteException {
                 Region region;
                 Log.d("LauncherProxyService", "Launcher proxy service connected");
                 LauncherProxyService launcherProxyService = LauncherProxyService.this;
@@ -275,8 +271,8 @@ public class LauncherProxyService implements CallbackController, NavigationModeC
                     launcherProxyService2.mCurrentBoundedUserId = ((UserTrackerImpl) launcherProxyService2.mUserTracker).getUserId();
                     LauncherProxyService launcherProxyService3 = LauncherProxyService.this;
                     int i = ILauncherProxy.Stub.$r8$clinit;
-                    IInterface queryLocalInterface = iBinder.queryLocalInterface("com.android.systemui.shared.recents.ILauncherProxy");
-                    launcherProxyService3.mLauncherProxy = (queryLocalInterface == null || !(queryLocalInterface instanceof ILauncherProxy)) ? new ILauncherProxy.Stub.Proxy(iBinder) : (ILauncherProxy) queryLocalInterface;
+                    IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("com.android.systemui.shared.recents.ILauncherProxy");
+                    launcherProxyService3.mLauncherProxy = (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof ILauncherProxy)) ? new ILauncherProxy.Stub.Proxy(iBinder) : (ILauncherProxy) iInterfaceQueryLocalInterface;
                     Bundle bundle = new Bundle();
                     QuickStepContract.addInterface(LauncherProxyService.this.mSysUiProxy, bundle);
                     QuickStepContract.addInterface(LauncherProxyService.this.mSysuiUnlockAnimationController, bundle);
@@ -337,7 +333,7 @@ public class LauncherProxyService implements CallbackController, NavigationModeC
         StatusBarWindowCallback statusBarWindowCallback = new StatusBarWindowCallback() { // from class: com.android.systemui.recents.LauncherProxyService$$ExternalSyntheticLambda3
             @Override // com.android.systemui.statusbar.phone.StatusBarWindowCallback
             public final void onStateChanged(boolean z, boolean z2, boolean z3, boolean z4, boolean z5, boolean z6, boolean z7, boolean z8) {
-                LauncherProxyService launcherProxyService = LauncherProxyService.this;
+                LauncherProxyService launcherProxyService = this.f$0;
                 boolean z9 = false;
                 SysUiState flag = launcherProxyService.mDefaultDisplaySysUIState.setFlag(64L, z && !z2);
                 if (z && z2) {
@@ -352,7 +348,7 @@ public class LauncherProxyService implements CallbackController, NavigationModeC
         this.mLauncherServiceDeathRcpt = new IBinder.DeathRecipient() { // from class: com.android.systemui.recents.LauncherProxyService$$ExternalSyntheticLambda4
             @Override // android.os.IBinder.DeathRecipient
             public final void binderDied() {
-                LauncherProxyService launcherProxyService = LauncherProxyService.this;
+                LauncherProxyService launcherProxyService = this.f$0;
                 if (launcherProxyService.mInputFocusTransferStarted) {
                     launcherProxyService.mHandler.post(new LauncherProxyService$$ExternalSyntheticLambda0(launcherProxyService, 3));
                 }
@@ -429,15 +425,15 @@ public class LauncherProxyService implements CallbackController, NavigationModeC
         };
         this.mWakefulnessLifecycleObserver = r7;
         processWrapper.getClass();
-        boolean isSystemUser = ProcessWrapper.isSystemUser();
+        boolean zIsSystemUser = ProcessWrapper.isSystemUser();
         boolean z = userManager.isVisibleBackgroundUsersSupported() && !userManager.isUserForeground();
-        if (isSystemUser || !z) {
+        if (zIsSystemUser || !z) {
             iVoiceInteractionSessionListener = anonymousClass5;
         } else {
             iVoiceInteractionSessionListener = anonymousClass5;
             Log.d("LauncherProxyService", "Initialization for visibleBackgroundUser");
         }
-        boolean z2 = isSystemUser || z;
+        boolean z2 = zIsSystemUser || z;
         this.mIsSystemOrVisibleBgUser = z2;
         if (z2) {
             obj = r7;
@@ -452,12 +448,11 @@ public class LauncherProxyService implements CallbackController, NavigationModeC
         this.mHandler = new Handler();
         this.mNavBarControllerLazy = lazy;
         this.mStatusBarWinController = notificationShadeWindowController;
-        this.mShadeInteractor = provider2;
         this.mUserTracker = userTracker;
         this.mConnectionBackoffAttempts = 0;
-        ComponentName unflattenFromString = ComponentName.unflattenFromString(context.getString(R.string.face_acquired_roll_too_extreme));
-        this.mRecentsComponentName = unflattenFromString;
-        this.mQuickStepIntent = new Intent(ACTION_QUICKSTEP).setPackage(unflattenFromString.getPackageName());
+        ComponentName componentNameUnflattenFromString = ComponentName.unflattenFromString(context.getString(R.string.face_acquired_tilt_too_extreme));
+        this.mRecentsComponentName = componentNameUnflattenFromString;
+        this.mQuickStepIntent = new Intent(ACTION_QUICKSTEP).setPackage(componentNameUnflattenFromString.getPackageName());
         this.mPerDisplaySysUiStateRepository = perDisplayRepository;
         this.mDisplayRepository = displayRepository;
         SysUiState sysUiState = (SysUiState) perDisplayRepository.get(0);
@@ -488,7 +483,7 @@ public class LauncherProxyService implements CallbackController, NavigationModeC
         this.mNavBarMode = navigationModeController.addListener(this);
         IntentFilter intentFilter = new IntentFilter("android.intent.action.PACKAGE_ADDED");
         intentFilter.addDataScheme("package");
-        intentFilter.addDataSchemeSpecificPart(unflattenFromString.getPackageName(), 0);
+        intentFilter.addDataSchemeSpecificPart(componentNameUnflattenFromString.getPackageName(), 0);
         intentFilter.addAction("android.intent.action.PACKAGE_CHANGED");
         context.registerReceiver(r10, intentFilter);
         broadcastDispatcher.registerReceiver(r9, new IntentFilter("android.intent.action.USER_UNLOCKED"), null, UserHandle.ALL);
@@ -595,13 +590,13 @@ public class LauncherProxyService implements CallbackController, NavigationModeC
             handler.postDelayed(this.mDeferredBindAfterTimedOutCleanup, 1000L);
             return;
         }
-        UserHandle of = UserHandle.of(((UserTrackerImpl) this.mUserTracker).getUserId());
-        if (UserManager.isHeadlessSystemUserMode() && of.isSystem()) {
+        UserHandle userHandleOf = UserHandle.of(((UserTrackerImpl) this.mUserTracker).getUserId());
+        if (UserManager.isHeadlessSystemUserMode() && userHandleOf.isSystem()) {
             Log.w("LauncherProxyService", "Skipping connection to TouchInteractionService for the System user in HSUM mode.");
             return;
         }
         try {
-            this.mBound = this.mContext.bindServiceAsUser(this.mQuickStepIntent, this.mLauncherServiceConnection, 33554433, of);
+            this.mBound = this.mContext.bindServiceAsUser(this.mQuickStepIntent, this.mLauncherServiceConnection, 33554433, userHandleOf);
         } catch (SecurityException e) {
             Log.e("LauncherProxyService", "Unable to bind because of security error", e);
         }
@@ -622,10 +617,10 @@ public class LauncherProxyService implements CallbackController, NavigationModeC
     public void notifySysUiStateFlagsForAllDisplays() {
         Iterator it = ((Set) ((DisplayRepositoryImpl) this.mDisplayRepository).displayRepositoryFromLib.getDisplayIds().getValue()).iterator();
         while (it.hasNext()) {
-            int intValue = ((Integer) it.next()).intValue();
-            SysUiState sysUiState = (SysUiState) this.mPerDisplaySysUiStateRepository.get(intValue);
+            int iIntValue = ((Integer) it.next()).intValue();
+            SysUiState sysUiState = (SysUiState) this.mPerDisplaySysUiStateRepository.get(iIntValue);
             if (sysUiState != null) {
-                notifySystemUiStateFlags(intValue, sysUiState.getFlags());
+                notifySystemUiStateFlags(iIntValue, sysUiState.getFlags());
             }
         }
     }
@@ -689,10 +684,10 @@ public class LauncherProxyService implements CallbackController, NavigationModeC
         if (handler.hasCallbacks(launcherProxyService$$ExternalSyntheticLambda0)) {
             return;
         }
-        long min = (long) Math.min(Math.scalb(1000.0f, this.mConnectionBackoffAttempts), 600000.0f);
-        handler.postDelayed(launcherProxyService$$ExternalSyntheticLambda0, min);
+        long jMin = (long) Math.min(Math.scalb(1000.0f, this.mConnectionBackoffAttempts), 600000.0f);
+        handler.postDelayed(launcherProxyService$$ExternalSyntheticLambda0, jMin);
         this.mConnectionBackoffAttempts++;
-        Log.w("LauncherProxyService", "Failed to connect on attempt " + this.mConnectionBackoffAttempts + " will try again in " + min + "ms");
+        Log.w("LauncherProxyService", "Failed to connect on attempt " + this.mConnectionBackoffAttempts + " will try again in " + jMin + "ms");
     }
 
     public final boolean shouldShowSwipeUpUI() {
@@ -754,7 +749,6 @@ public class LauncherProxyService implements CallbackController, NavigationModeC
         this.mConnectionCallbacks.remove(launcherProxyListener);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.recents.LauncherProxyService$5, reason: invalid class name */
     public class AnonymousClass5 extends IVoiceInteractionSessionListener.Stub {
         public AnonymousClass5() {
@@ -774,7 +768,6 @@ public class LauncherProxyService implements CallbackController, NavigationModeC
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface LauncherProxyListener {
         default void onAssistantGestureCompletion(float f) {
         }
@@ -810,6 +803,9 @@ public class LauncherProxyService implements CallbackController, NavigationModeC
         }
 
         default void onToggleRecentApps() {
+        }
+
+        default void onTaskbarAutohideSuspendForDisplay(int i, boolean z) {
         }
 
         default void onTaskbarStatusUpdated$1(boolean z, boolean z2) {

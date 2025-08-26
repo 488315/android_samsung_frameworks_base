@@ -6,6 +6,7 @@ import android.animation.ObjectAnimator;
 import android.animation.TimeInterpolator;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.util.Property;
@@ -69,9 +70,9 @@ public abstract class AbsActionBarView extends ViewGroup {
     @Override // android.view.View
     protected void onConfigurationChanged(Configuration configuration) {
         super.onConfigurationChanged(configuration);
-        TypedArray obtainStyledAttributes = getContext().obtainStyledAttributes(null, R.styleable.ActionBar, 16843470, 0);
-        setContentHeight(obtainStyledAttributes.getLayoutDimension(4, 0));
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = getContext().obtainStyledAttributes(null, R.styleable.ActionBar, 16843470, 0);
+        setContentHeight(typedArrayObtainStyledAttributes.getLayoutDimension(4, 0));
+        typedArrayObtainStyledAttributes.recycle();
         if (this.mSplitWhenNarrow) {
             setSplitToolbar(getContext().getResources().getBoolean(R.bool.split_action_bar_is_narrow));
         }
@@ -88,8 +89,8 @@ public abstract class AbsActionBarView extends ViewGroup {
             this.mEatingTouch = false;
         }
         if (!this.mEatingTouch) {
-            boolean onTouchEvent = super.onTouchEvent(motionEvent);
-            if (actionMasked == 0 && !onTouchEvent) {
+            boolean zOnTouchEvent = super.onTouchEvent(motionEvent);
+            if (actionMasked == 0 && !zOnTouchEvent) {
                 this.mEatingTouch = true;
             }
         }
@@ -106,8 +107,8 @@ public abstract class AbsActionBarView extends ViewGroup {
             this.mEatingHover = false;
         }
         if (!this.mEatingHover) {
-            boolean onHoverEvent = super.onHoverEvent(motionEvent);
-            if (actionMasked == 9 && !onHoverEvent) {
+            boolean zOnHoverEvent = super.onHoverEvent(motionEvent);
+            if (actionMasked == 9 && !zOnHoverEvent) {
                 this.mEatingHover = true;
             }
         }
@@ -158,33 +159,33 @@ public abstract class AbsActionBarView extends ViewGroup {
                     actionMenuView.setAlpha(0.0f);
                 }
             }
-            ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this, (Property<AbsActionBarView, Float>) View.ALPHA, 1.0f);
-            ofFloat.setDuration(j);
-            ofFloat.setInterpolator(sAlphaInterpolator);
+            ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this, (Property<AbsActionBarView, Float>) View.ALPHA, 1.0f);
+            objectAnimatorOfFloat.setDuration(j);
+            objectAnimatorOfFloat.setInterpolator(sAlphaInterpolator);
             if (this.mSplitView != null && this.mMenuView != null) {
                 AnimatorSet animatorSet = new AnimatorSet();
-                ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(this.mMenuView, (Property<ActionMenuView, Float>) View.ALPHA, 1.0f);
-                ofFloat2.setDuration(j);
+                ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(this.mMenuView, (Property<ActionMenuView, Float>) View.ALPHA, 1.0f);
+                objectAnimatorOfFloat2.setDuration(j);
                 animatorSet.addListener(this.mVisAnimListener.withFinalVisibility(i));
-                animatorSet.play(ofFloat).with(ofFloat2);
+                animatorSet.play(objectAnimatorOfFloat).with(objectAnimatorOfFloat2);
                 return animatorSet;
             }
-            ofFloat.addListener(this.mVisAnimListener.withFinalVisibility(i));
-            return ofFloat;
+            objectAnimatorOfFloat.addListener(this.mVisAnimListener.withFinalVisibility(i));
+            return objectAnimatorOfFloat;
         }
-        ObjectAnimator ofFloat3 = ObjectAnimator.ofFloat(this, (Property<AbsActionBarView, Float>) View.ALPHA, 0.0f);
-        ofFloat3.setDuration(j);
-        ofFloat3.setInterpolator(sAlphaInterpolator);
+        ObjectAnimator objectAnimatorOfFloat3 = ObjectAnimator.ofFloat(this, (Property<AbsActionBarView, Float>) View.ALPHA, 0.0f);
+        objectAnimatorOfFloat3.setDuration(j);
+        objectAnimatorOfFloat3.setInterpolator(sAlphaInterpolator);
         if (this.mSplitView != null && this.mMenuView != null) {
             AnimatorSet animatorSet2 = new AnimatorSet();
-            ObjectAnimator ofFloat4 = ObjectAnimator.ofFloat(this.mMenuView, (Property<ActionMenuView, Float>) View.ALPHA, 0.0f);
-            ofFloat4.setDuration(j);
+            ObjectAnimator objectAnimatorOfFloat4 = ObjectAnimator.ofFloat(this.mMenuView, (Property<ActionMenuView, Float>) View.ALPHA, 0.0f);
+            objectAnimatorOfFloat4.setDuration(j);
             animatorSet2.addListener(this.mVisAnimListener.withFinalVisibility(i));
-            animatorSet2.play(ofFloat3).with(ofFloat4);
+            animatorSet2.play(objectAnimatorOfFloat3).with(objectAnimatorOfFloat4);
             return animatorSet2;
         }
-        ofFloat3.addListener(this.mVisAnimListener.withFinalVisibility(i));
-        return ofFloat3;
+        objectAnimatorOfFloat3.addListener(this.mVisAnimListener.withFinalVisibility(i));
+        return objectAnimatorOfFloat3;
     }
 
     public void animateToVisibility(int i) {
@@ -264,7 +265,7 @@ public abstract class AbsActionBarView extends ViewGroup {
         return Math.max(0, (i - view.getMeasuredWidth()) - i3);
     }
 
-    protected int positionChild(View view, int i, int i2, int i3, boolean z) {
+    protected int positionChild(View view, int i, int i2, int i3, boolean z) throws Resources.NotFoundException {
         int measuredWidth = view.getMeasuredWidth();
         int measuredHeight = view.getMeasuredHeight();
         int i4 = i2 + ((i3 - measuredHeight) / 2);

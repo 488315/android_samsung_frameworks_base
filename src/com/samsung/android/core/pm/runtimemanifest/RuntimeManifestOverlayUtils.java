@@ -59,13 +59,13 @@ public class RuntimeManifestOverlayUtils {
         try {
             XmlResourceParser runtimeManifestOverlayParser = getRuntimeManifestOverlayParser(parsingPackage, resources);
             if (runtimeManifestOverlayParser != null) {
-                RuntimeManifestPolicies parseRuntimeManifestPolicies = RuntimeManifestUtils.parseRuntimeManifestPolicies(runtimeManifestOverlayParser, resources);
-                applyPackageRuntimeManifest(parsingPackage, parseRuntimeManifestPolicies.getApplicationPolicies());
+                RuntimeManifestPolicies runtimeManifestPolicies = RuntimeManifestUtils.parseRuntimeManifestPolicies(runtimeManifestOverlayParser, resources);
+                applyPackageRuntimeManifest(parsingPackage, runtimeManifestPolicies.getApplicationPolicies());
                 String packageName = parsingPackage.getPackageName();
-                applyComponentRuntimeManifest(packageName, parsingPackage.getActivities(), parseRuntimeManifestPolicies.getActivityPolicies());
-                applyComponentRuntimeManifest(packageName, parsingPackage.getServices(), parseRuntimeManifestPolicies.getServicePolicies());
-                applyComponentRuntimeManifest(packageName, parsingPackage.getProviders(), parseRuntimeManifestPolicies.getProviderPolicies());
-                applyComponentRuntimeManifest(packageName, parsingPackage.getReceivers(), parseRuntimeManifestPolicies.getReceiverPolicies());
+                applyComponentRuntimeManifest(packageName, parsingPackage.getActivities(), runtimeManifestPolicies.getActivityPolicies());
+                applyComponentRuntimeManifest(packageName, parsingPackage.getServices(), runtimeManifestPolicies.getServicePolicies());
+                applyComponentRuntimeManifest(packageName, parsingPackage.getProviders(), runtimeManifestPolicies.getProviderPolicies());
+                applyComponentRuntimeManifest(packageName, parsingPackage.getReceivers(), runtimeManifestPolicies.getReceiverPolicies());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -89,10 +89,10 @@ public class RuntimeManifestOverlayUtils {
             String key = entry.getKey();
             List<RuntimeManifestPolicies.PolicyInfo> value = entry.getValue();
             if (key != null && value != null) {
-                String buildClassName = RuntimeManifestUtils.buildClassName(str, key);
-                ParsedMainComponent matchingComponent = getMatchingComponent(buildClassName, list);
+                String strBuildClassName = RuntimeManifestUtils.buildClassName(str, key);
+                ParsedMainComponent matchingComponent = getMatchingComponent(strBuildClassName, list);
                 if (matchingComponent == null) {
-                    Slog.d(TAG, "Target " + buildClassName + " not found in manifest");
+                    Slog.d(TAG, "Target " + strBuildClassName + " not found in manifest");
                 } else {
                     RuntimeManifestPolicies.PolicyInfo matchingPolicy = RuntimeManifestUtils.getMatchingPolicy(value);
                     if (matchingPolicy != null) {

@@ -5,7 +5,6 @@ import androidx.constraintlayout.motion.widget.MotionLayout$$ExternalSyntheticOu
 import kotlin.ULong;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class SeslBasicRadioButtonColors {
     public final long checkedColor;
@@ -25,7 +24,7 @@ public final class SeslBasicRadioButtonColors {
         SeslBasicRadioButtonColors seslBasicRadioButtonColors = (SeslBasicRadioButtonColors) obj;
         long j = seslBasicRadioButtonColors.checkedColor;
         Color.Companion companion = Color.Companion;
-        return ULong.m3427equalsimpl0(this.checkedColor, j) && ULong.m3427equalsimpl0(this.uncheckedColor, seslBasicRadioButtonColors.uncheckedColor);
+        return ULong.m3447equalsimpl0(this.checkedColor, j) && ULong.m3447equalsimpl0(this.uncheckedColor, seslBasicRadioButtonColors.uncheckedColor);
     }
 
     public final int hashCode() {
@@ -35,7 +34,7 @@ public final class SeslBasicRadioButtonColors {
     }
 
     public final String toString() {
-        return MotionLayout$$ExternalSyntheticOutline0.m("SeslBasicRadioButtonColors(checkedColor=", Color.m462toStringimpl(this.checkedColor), ", uncheckedColor=", Color.m462toStringimpl(this.uncheckedColor), ")");
+        return MotionLayout$$ExternalSyntheticOutline0.m("SeslBasicRadioButtonColors(checkedColor=", Color.m464toStringimpl(this.checkedColor), ", uncheckedColor=", Color.m464toStringimpl(this.uncheckedColor), ")");
     }
 
     private SeslBasicRadioButtonColors(long j, long j2) {

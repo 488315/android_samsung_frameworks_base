@@ -12,33 +12,33 @@ public class LeakyTypefaceStorage {
     private static final ArrayMap<Typeface, Integer> sTypefaceMap = new ArrayMap<>();
 
     public static void writeTypefaceToParcel(Typeface typeface, Parcel parcel) {
-        int i;
+        int iIntValue;
         parcel.writeInt(Process.myPid());
         synchronized (sLock) {
             ArrayMap<Typeface, Integer> arrayMap = sTypefaceMap;
             Integer num = arrayMap.get(typeface);
             if (num != null) {
-                i = num.intValue();
+                iIntValue = num.intValue();
             } else {
                 ArrayList<Typeface> arrayList = sStorage;
                 int size = arrayList.size();
                 arrayList.add(typeface);
                 arrayMap.put(typeface, Integer.valueOf(size));
-                i = size;
+                iIntValue = size;
             }
-            parcel.writeInt(i);
+            parcel.writeInt(iIntValue);
         }
     }
 
     public static Typeface readTypefaceFromParcel(Parcel parcel) {
         Typeface typeface;
-        int readInt = parcel.readInt();
-        int readInt2 = parcel.readInt();
-        if (readInt != Process.myPid()) {
+        int i = parcel.readInt();
+        int i2 = parcel.readInt();
+        if (i != Process.myPid()) {
             return null;
         }
         synchronized (sLock) {
-            typeface = sStorage.get(readInt2);
+            typeface = sStorage.get(i2);
         }
         return typeface;
     }

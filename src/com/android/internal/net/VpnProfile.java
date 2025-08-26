@@ -16,6 +16,7 @@ import android.util.Base64;
 import android.util.Log;
 import com.android.internal.util.HexDump;
 import com.android.net.module.util.ProxyUtils;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.InetAddress;
 import java.net.URLDecoder;
@@ -27,8 +28,11 @@ import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.KeyStore;
+import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
 import java.security.Security;
+import java.security.cert.CertificateException;
 import java.security.spec.InvalidParameterSpecException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -187,7 +191,7 @@ public final class VpnProfile implements Cloneable, Parcelable {
         this.automaticIpVersionSelectionEnabled = z5;
     }
 
-    public VpnProfile(Parcel parcel) {
+    public VpnProfile(Parcel parcel) throws ClassNotFoundException, IOException {
         this.name = "";
         this.type = 0;
         this.server = "";
@@ -322,131 +326,112 @@ public final class VpnProfile implements Cloneable, Parcelable {
         parcel.writeInt(this.ikeRekeyTime);
     }
 
-    public static VpnProfile decode(String str, byte[] bArr) {
+    public static VpnProfile decode(String str, byte[] bArr) throws NumberFormatException {
         VpnProfile vpnProfile;
-        IkeTunnelConnectionParams ikeTunnelConnectionParams;
+        IkeTunnelConnectionParams ikeTunnelConnectionParamsFromPersistableBundle;
         boolean z;
         boolean z2;
         char c;
-        boolean z3;
         if (str == null) {
             return null;
         }
         try {
-            String[] split = new String(bArr, StandardCharsets.UTF_8).split(VALUE_DELIMITER, -1);
-            if (split.length >= 18 && ((split.length <= 23 || split.length >= 28) && ((split.length <= 32 || split.length >= 34) && ((split.length <= 38 || split.length >= 42) && split.length <= 42)))) {
-                boolean parseBoolean = split.length >= 29 ? Boolean.parseBoolean(split[28]) : false;
-                boolean parseBoolean2 = split.length >= 30 ? Boolean.parseBoolean(split[29]) : false;
-                boolean parseBoolean3 = split.length >= 31 ? Boolean.parseBoolean(split[30]) : false;
-                if (split.length < 32 || split[31].length() == 0) {
-                    ikeTunnelConnectionParams = null;
+            String[] strArrSplit = new String(bArr, StandardCharsets.UTF_8).split(VALUE_DELIMITER, -1);
+            if (strArrSplit.length >= 18 && ((strArrSplit.length <= 23 || strArrSplit.length >= 28) && ((strArrSplit.length <= 32 || strArrSplit.length >= 34) && ((strArrSplit.length <= 38 || strArrSplit.length >= 42) && strArrSplit.length <= 42)))) {
+                boolean z3 = strArrSplit.length >= 29 ? Boolean.parseBoolean(strArrSplit[28]) : false;
+                boolean z4 = strArrSplit.length >= 30 ? Boolean.parseBoolean(strArrSplit[29]) : false;
+                boolean z5 = strArrSplit.length >= 31 ? Boolean.parseBoolean(strArrSplit[30]) : false;
+                if (strArrSplit.length < 32 || strArrSplit[31].length() == 0) {
+                    ikeTunnelConnectionParamsFromPersistableBundle = null;
                 } else {
-                    Parcel obtain = Parcel.obtain();
-                    byte[] hexStringToByteArray = HexDump.hexStringToByteArray(split[31]);
-                    obtain.unmarshall(hexStringToByteArray, 0, hexStringToByteArray.length);
-                    obtain.setDataPosition(0);
-                    ikeTunnelConnectionParams = TunnelConnectionParamsUtils.fromPersistableBundle((PersistableBundle) obtain.readValue(PersistableBundle.class.getClassLoader()));
+                    Parcel parcelObtain = Parcel.obtain();
+                    byte[] bArrHexStringToByteArray = HexDump.hexStringToByteArray(strArrSplit[31]);
+                    parcelObtain.unmarshall(bArrHexStringToByteArray, 0, bArrHexStringToByteArray.length);
+                    parcelObtain.setDataPosition(0);
+                    ikeTunnelConnectionParamsFromPersistableBundle = TunnelConnectionParamsUtils.fromPersistableBundle((PersistableBundle) parcelObtain.readValue(PersistableBundle.class.getClassLoader()));
                 }
-                if (split.length >= 34) {
-                    z = Boolean.parseBoolean(split[32]);
-                    z2 = Boolean.parseBoolean(split[33]);
+                if (strArrSplit.length >= 34) {
+                    z = Boolean.parseBoolean(strArrSplit[32]);
+                    z2 = Boolean.parseBoolean(strArrSplit[33]);
                 } else {
                     z = false;
                     z2 = false;
                 }
-                VpnProfile vpnProfile2 = new VpnProfile(str, parseBoolean, parseBoolean2, parseBoolean3, ikeTunnelConnectionParams, z, z2);
-                vpnProfile2.name = split[0];
-                int parseInt = Integer.parseInt(split[1]);
-                vpnProfile2.type = parseInt;
-                if (parseInt >= 0 && parseInt <= 10) {
-                    vpnProfile2.server = split[2];
-                    vpnProfile2.username = split[3];
-                    vpnProfile2.password = split[4];
-                    vpnProfile2.dnsServers = split[5];
-                    vpnProfile2.searchDomains = split[6];
+                VpnProfile vpnProfile2 = new VpnProfile(str, z3, z4, z5, ikeTunnelConnectionParamsFromPersistableBundle, z, z2);
+                vpnProfile2.name = strArrSplit[0];
+                int i = Integer.parseInt(strArrSplit[1]);
+                vpnProfile2.type = i;
+                if (i >= 0 && i <= 10) {
+                    vpnProfile2.server = strArrSplit[2];
+                    vpnProfile2.username = strArrSplit[3];
+                    vpnProfile2.password = strArrSplit[4];
+                    vpnProfile2.dnsServers = strArrSplit[5];
+                    vpnProfile2.searchDomains = strArrSplit[6];
                     vpnProfile = null;
                     try {
-                        vpnProfile2.routes = split[7];
-                        vpnProfile2.mppe = Boolean.parseBoolean(split[8]);
-                        vpnProfile2.l2tpSecret = split[9];
-                        vpnProfile2.ipsecIdentifier = split[10];
-                        vpnProfile2.ipsecSecret = split[11];
-                        vpnProfile2.ipsecUserCert = split[12];
-                        vpnProfile2.ipsecCaCert = split[13];
-                        vpnProfile2.ipsecServerCert = split.length > 14 ? split[14] : "";
-                        vpnProfile2.ocspServerUrl = split.length > 15 ? split[15] : "";
-                        vpnProfile2.isPFS = split.length > 16 ? Boolean.valueOf(split[16]).booleanValue() : false;
-                        vpnProfile2.isPasswordIvParams = split.length > 17 ? split[17] : "";
-                        vpnProfile2.isIpsecSecretIvParams = split.length > 18 ? split[18] : "";
-                        if (split.length > 19) {
-                            String str2 = split.length > 19 ? split[19] : "";
-                            String str3 = split.length > 20 ? split[20] : "";
+                        vpnProfile2.routes = strArrSplit[7];
+                        vpnProfile2.mppe = Boolean.parseBoolean(strArrSplit[8]);
+                        vpnProfile2.l2tpSecret = strArrSplit[9];
+                        vpnProfile2.ipsecIdentifier = strArrSplit[10];
+                        vpnProfile2.ipsecSecret = strArrSplit[11];
+                        vpnProfile2.ipsecUserCert = strArrSplit[12];
+                        vpnProfile2.ipsecCaCert = strArrSplit[13];
+                        vpnProfile2.ipsecServerCert = strArrSplit.length > 14 ? strArrSplit[14] : "";
+                        vpnProfile2.ocspServerUrl = strArrSplit.length > 15 ? strArrSplit[15] : "";
+                        vpnProfile2.isPFS = strArrSplit.length > 16 ? Boolean.valueOf(strArrSplit[16]).booleanValue() : false;
+                        vpnProfile2.isPasswordIvParams = strArrSplit.length > 17 ? strArrSplit[17] : "";
+                        vpnProfile2.isIpsecSecretIvParams = strArrSplit.length > 18 ? strArrSplit[18] : "";
+                        if (strArrSplit.length > 19) {
+                            String str2 = strArrSplit.length > 19 ? strArrSplit[19] : "";
+                            String str3 = strArrSplit.length > 20 ? strArrSplit[20] : "";
                             c = 23;
-                            String str4 = split.length > 21 ? split[21] : "";
-                            String str5 = split.length > 22 ? split[22] : "";
-                            if (str2.isEmpty() && str3.isEmpty() && str4.isEmpty()) {
-                                if (!str5.isEmpty()) {
-                                    vpnProfile2.proxy = ProxyInfo.buildPacProxy(Uri.parse(str5));
-                                }
+                            String str4 = strArrSplit.length > 21 ? strArrSplit[21] : "";
+                            String str5 = strArrSplit.length > 22 ? strArrSplit[22] : "";
+                            if (!str2.isEmpty() || !str3.isEmpty() || !str4.isEmpty()) {
+                                vpnProfile2.proxy = ProxyInfo.buildDirectProxy(str2, str3.isEmpty() ? 0 : Integer.parseInt(str3), ProxyUtils.exclusionStringAsList(str4));
+                            } else if (!str5.isEmpty()) {
+                                vpnProfile2.proxy = ProxyInfo.buildPacProxy(Uri.parse(str5));
                             }
-                            vpnProfile2.proxy = ProxyInfo.buildDirectProxy(str2, str3.isEmpty() ? 0 : Integer.parseInt(str3), ProxyUtils.exclusionStringAsList(str4));
                         } else {
                             c = 23;
                         }
-                        if (split.length >= 28) {
+                        if (strArrSplit.length >= 28) {
                             vpnProfile2.mAllowedAlgorithms = new ArrayList();
-                            Iterator it = Arrays.asList(split[c].split(",")).iterator();
+                            Iterator it = Arrays.asList(strArrSplit[c].split(",")).iterator();
                             while (it.hasNext()) {
                                 vpnProfile2.mAllowedAlgorithms.add(URLDecoder.decode((String) it.next(), DEFAULT_ENCODING));
                             }
-                            vpnProfile2.isBypassable = Boolean.parseBoolean(split[24]);
-                            vpnProfile2.isMetered = Boolean.parseBoolean(split[25]);
-                            vpnProfile2.maxMtu = Integer.parseInt(split[26]);
-                            vpnProfile2.areAuthParamsInline = Boolean.parseBoolean(split[27]);
-                            vpnProfile2.ipsecRemoteIdentifier = split.length > 34 ? split[34] : "";
-                            vpnProfile2.ipsecCacertValue = split.length > 35 ? split[35] : "";
-                            vpnProfile2.ipsecServerCertValue = split.length > 36 ? split[36] : "";
-                            vpnProfile2.allCert = split.length > 37 ? split[37] : "";
-                            vpnProfile2.ikeCipherSuites = split.length > 38 ? split[38] : "";
-                            vpnProfile2.ipsecCipherSuites = split.length > 39 ? split[39] : "";
-                            vpnProfile2.ipsecRekeyTime = split.length > 40 ? Integer.parseInt(split[40]) : 0;
-                            vpnProfile2.ikeRekeyTime = split.length > 41 ? Integer.parseInt(split[41]) : 0;
+                            vpnProfile2.isBypassable = Boolean.parseBoolean(strArrSplit[24]);
+                            vpnProfile2.isMetered = Boolean.parseBoolean(strArrSplit[25]);
+                            vpnProfile2.maxMtu = Integer.parseInt(strArrSplit[26]);
+                            vpnProfile2.areAuthParamsInline = Boolean.parseBoolean(strArrSplit[27]);
+                            vpnProfile2.ipsecRemoteIdentifier = strArrSplit.length > 34 ? strArrSplit[34] : "";
+                            vpnProfile2.ipsecCacertValue = strArrSplit.length > 35 ? strArrSplit[35] : "";
+                            vpnProfile2.ipsecServerCertValue = strArrSplit.length > 36 ? strArrSplit[36] : "";
+                            vpnProfile2.allCert = strArrSplit.length > 37 ? strArrSplit[37] : "";
+                            vpnProfile2.ikeCipherSuites = strArrSplit.length > 38 ? strArrSplit[38] : "";
+                            vpnProfile2.ipsecCipherSuites = strArrSplit.length > 39 ? strArrSplit[39] : "";
+                            vpnProfile2.ipsecRekeyTime = strArrSplit.length > 40 ? Integer.parseInt(strArrSplit[40]) : 0;
+                            vpnProfile2.ikeRekeyTime = strArrSplit.length > 41 ? Integer.parseInt(strArrSplit[41]) : 0;
                         }
-                        if (vpnProfile2.username.isEmpty() && vpnProfile2.password.isEmpty()) {
-                            z3 = false;
-                            vpnProfile2.saveLogin = z3;
-                            if (vpnProfile2.type != 3 && vpnProfile2.ipsecUserCert.isEmpty() && !vpnProfile2.ipsecCaCert.isEmpty()) {
-                                vpnProfile2.type = 5;
-                                return vpnProfile2;
-                            }
-                            if (vpnProfile2.type != 4 && !vpnProfile2.ipsecSecret.isEmpty()) {
-                                vpnProfile2.type = 3;
-                                return vpnProfile2;
-                            }
-                            if (vpnProfile2.type != 5 && !vpnProfile2.ipsecUserCert.isEmpty()) {
-                                vpnProfile2.type = 4;
-                                return vpnProfile2;
-                            }
-                            if (vpnProfile2.type != 6 && !vpnProfile2.ipsecSecret.isEmpty()) {
-                                vpnProfile2.type = 7;
-                                return vpnProfile2;
-                            }
-                            if (vpnProfile2.type == 7 && !vpnProfile2.ipsecUserCert.isEmpty()) {
-                                vpnProfile2.type = 8;
-                            }
+                        vpnProfile2.saveLogin = (vpnProfile2.username.isEmpty() && vpnProfile2.password.isEmpty()) ? false : true;
+                        if (vpnProfile2.type == 3 && vpnProfile2.ipsecUserCert.isEmpty() && !vpnProfile2.ipsecCaCert.isEmpty()) {
+                            vpnProfile2.type = 5;
                             return vpnProfile2;
                         }
-                        z3 = true;
-                        vpnProfile2.saveLogin = z3;
-                        if (vpnProfile2.type != 3) {
+                        if (vpnProfile2.type == 4 && !vpnProfile2.ipsecSecret.isEmpty()) {
+                            vpnProfile2.type = 3;
+                            return vpnProfile2;
                         }
-                        if (vpnProfile2.type != 4) {
+                        if (vpnProfile2.type == 5 && !vpnProfile2.ipsecUserCert.isEmpty()) {
+                            vpnProfile2.type = 4;
+                            return vpnProfile2;
                         }
-                        if (vpnProfile2.type != 5) {
+                        if (vpnProfile2.type == 6 && !vpnProfile2.ipsecSecret.isEmpty()) {
+                            vpnProfile2.type = 7;
+                            return vpnProfile2;
                         }
-                        if (vpnProfile2.type != 6) {
-                        }
-                        if (vpnProfile2.type == 7) {
+                        if (vpnProfile2.type == 7 && !vpnProfile2.ipsecUserCert.isEmpty()) {
                             vpnProfile2.type = 8;
                         }
                         return vpnProfile2;
@@ -473,7 +458,7 @@ public final class VpnProfile implements Cloneable, Parcelable {
         return encode();
     }
 
-    public byte[] encode() {
+    public byte[] encode() throws IOException {
         StringBuilder sb = new StringBuilder(this.name);
         sb.append(VALUE_DELIMITER);
         sb.append(this.type);
@@ -548,11 +533,11 @@ public final class VpnProfile implements Cloneable, Parcelable {
             IkeTunnelConnectionParams ikeTunnelConnectionParams = this.ikeTunConnParams;
             if (ikeTunnelConnectionParams != null) {
                 PersistableBundle persistableBundle = TunnelConnectionParamsUtils.toPersistableBundle(ikeTunnelConnectionParams);
-                Parcel obtain = Parcel.obtain();
-                obtain.writeValue(persistableBundle);
-                byte[] marshall = obtain.marshall();
+                Parcel parcelObtain = Parcel.obtain();
+                parcelObtain.writeValue(persistableBundle);
+                byte[] bArrMarshall = parcelObtain.marshall();
                 sb.append(VALUE_DELIMITER);
-                sb.append(HexDump.toHexString(marshall));
+                sb.append(HexDump.toHexString(bArrMarshall));
             } else {
                 sb.append(VALUE_DELIMITER);
             }
@@ -638,7 +623,7 @@ public final class VpnProfile implements Cloneable, Parcelable {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public VpnProfile m8082clone() {
+    public VpnProfile m8093clone() {
         try {
             return (VpnProfile) super.clone();
         } catch (CloneNotSupportedException e) {
@@ -669,7 +654,7 @@ public final class VpnProfile implements Cloneable, Parcelable {
         return bArr;
     }
 
-    private static String[] doEncrypt(Key key, String str) {
+    private static String[] doEncrypt(Key key, String str) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException {
         try {
             Cipher cipher = Cipher.getInstance("AES/CBC/PKCS7Padding");
             cipher.init(1, key);
@@ -681,13 +666,13 @@ public final class VpnProfile implements Cloneable, Parcelable {
         }
     }
 
-    private static String doDecrypt(Key key, String str, String str2) {
+    private static String doDecrypt(Key key, String str, String str2) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, InvalidAlgorithmParameterException {
         try {
-            byte[] decode = Base64.decode(str, 2);
+            byte[] bArrDecode = Base64.decode(str, 2);
             IvParameterSpec ivParameterSpec = new IvParameterSpec(hex2Bytes(new String(Base64.decode(str2, 2), StandardCharsets.UTF_8)));
             Cipher cipher = Cipher.getInstance("AES/CBC/PKCS7Padding");
             cipher.init(2, key, ivParameterSpec);
-            return new String(Base64.decode(cipher.doFinal(decode), 2), StandardCharsets.UTF_8).intern();
+            return new String(Base64.decode(cipher.doFinal(bArrDecode), 2), StandardCharsets.UTF_8).intern();
         } catch (IllegalArgumentException | NullPointerException | InvalidAlgorithmParameterException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException e) {
             Log.e(TAG, "Failed to decrypt: " + e.toString());
             e.printStackTrace();
@@ -695,7 +680,7 @@ public final class VpnProfile implements Cloneable, Parcelable {
         }
     }
 
-    private static Key getSecretKey(boolean z) {
+    private static Key getSecretKey(boolean z) throws NoSuchAlgorithmException, IOException, KeyStoreException, CertificateException, NoSuchProviderException, InvalidAlgorithmParameterException {
         try {
             KeyStore keyStore = KeyStore.getInstance("AndroidKeyStore");
             keyStore.load(null);
@@ -719,25 +704,25 @@ public final class VpnProfile implements Cloneable, Parcelable {
 
     private static void encrypt(VpnProfile vpnProfile) {
         Key secretKey;
-        String[] doEncrypt;
-        String[] doEncrypt2;
+        String[] strArrDoEncrypt;
+        String[] strArrDoEncrypt2;
         if ((vpnProfile.ipsecSecret.isEmpty() && vpnProfile.password.isEmpty()) || (secretKey = getSecretKey(true)) == null) {
             return;
         }
-        if (!vpnProfile.ipsecSecret.isEmpty() && (doEncrypt2 = doEncrypt(secretKey, vpnProfile.ipsecSecret)) != null) {
-            vpnProfile.ipsecSecret = doEncrypt2[0];
-            vpnProfile.isIpsecSecretIvParams = doEncrypt2[1];
+        if (!vpnProfile.ipsecSecret.isEmpty() && (strArrDoEncrypt2 = doEncrypt(secretKey, vpnProfile.ipsecSecret)) != null) {
+            vpnProfile.ipsecSecret = strArrDoEncrypt2[0];
+            vpnProfile.isIpsecSecretIvParams = strArrDoEncrypt2[1];
         }
-        if (vpnProfile.password.isEmpty() || (doEncrypt = doEncrypt(secretKey, vpnProfile.password)) == null) {
+        if (vpnProfile.password.isEmpty() || (strArrDoEncrypt = doEncrypt(secretKey, vpnProfile.password)) == null) {
             return;
         }
-        vpnProfile.password = doEncrypt[0];
-        vpnProfile.isPasswordIvParams = doEncrypt[1];
+        vpnProfile.password = strArrDoEncrypt[0];
+        vpnProfile.isPasswordIvParams = strArrDoEncrypt[1];
     }
 
     public static void decrypt(VpnProfile vpnProfile) {
-        String doDecrypt;
-        String doDecrypt2;
+        String strDoDecrypt;
+        String strDoDecrypt2;
         if (!vpnProfile.isIpsecSecretIvParams.isEmpty() || !vpnProfile.isPasswordIvParams.isEmpty()) {
             boolean z = false;
             try {
@@ -747,11 +732,11 @@ public final class VpnProfile implements Cloneable, Parcelable {
                         AndroidKeyStoreProvider.install();
                         z = true;
                     }
-                    if (!vpnProfile.ipsecSecret.isEmpty() && (doDecrypt2 = doDecrypt(secretKey, vpnProfile.ipsecSecret, vpnProfile.isIpsecSecretIvParams)) != null) {
-                        vpnProfile.ipsecSecret = doDecrypt2;
+                    if (!vpnProfile.ipsecSecret.isEmpty() && (strDoDecrypt2 = doDecrypt(secretKey, vpnProfile.ipsecSecret, vpnProfile.isIpsecSecretIvParams)) != null) {
+                        vpnProfile.ipsecSecret = strDoDecrypt2;
                     }
-                    if (!vpnProfile.password.isEmpty() && (doDecrypt = doDecrypt(secretKey, vpnProfile.password, vpnProfile.isPasswordIvParams)) != null) {
-                        vpnProfile.password = doDecrypt;
+                    if (!vpnProfile.password.isEmpty() && (strDoDecrypt = doDecrypt(secretKey, vpnProfile.password, vpnProfile.isPasswordIvParams)) != null) {
+                        vpnProfile.password = strDoDecrypt;
                     }
                     if (z) {
                         Security.removeProvider(ANDROID_BC_PROVIDER);
@@ -769,10 +754,10 @@ public final class VpnProfile implements Cloneable, Parcelable {
     }
 
     private static byte[] intToByteArray(int i) {
-        ByteBuffer allocate = ByteBuffer.allocate(4);
-        allocate.putInt(i);
-        allocate.order(ByteOrder.BIG_ENDIAN);
-        return allocate.array();
+        ByteBuffer byteBufferAllocate = ByteBuffer.allocate(4);
+        byteBufferAllocate.putInt(i);
+        byteBufferAllocate.order(ByteOrder.BIG_ENDIAN);
+        return byteBufferAllocate.array();
     }
 
     private static int byteArrayToInt(byte[] bArr) {

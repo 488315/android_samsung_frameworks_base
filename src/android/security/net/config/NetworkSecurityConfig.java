@@ -96,9 +96,9 @@ public final class NetworkSecurityConfig {
     public TrustAnchor findTrustAnchorBySubjectAndPublicKey(X509Certificate x509Certificate) {
         Iterator<CertificatesEntryRef> it = this.mCertificatesEntryRefs.iterator();
         while (it.hasNext()) {
-            TrustAnchor findBySubjectAndPublicKey = it.next().findBySubjectAndPublicKey(x509Certificate);
-            if (findBySubjectAndPublicKey != null) {
-                return findBySubjectAndPublicKey;
+            TrustAnchor trustAnchorFindBySubjectAndPublicKey = it.next().findBySubjectAndPublicKey(x509Certificate);
+            if (trustAnchorFindBySubjectAndPublicKey != null) {
+                return trustAnchorFindBySubjectAndPublicKey;
             }
         }
         return null;
@@ -107,9 +107,9 @@ public final class NetworkSecurityConfig {
     public TrustAnchor findTrustAnchorByIssuerAndSignature(X509Certificate x509Certificate) {
         Iterator<CertificatesEntryRef> it = this.mCertificatesEntryRefs.iterator();
         while (it.hasNext()) {
-            TrustAnchor findByIssuerAndSignature = it.next().findByIssuerAndSignature(x509Certificate);
-            if (findByIssuerAndSignature != null) {
-                return findByIssuerAndSignature;
+            TrustAnchor trustAnchorFindByIssuerAndSignature = it.next().findByIssuerAndSignature(x509Certificate);
+            if (trustAnchorFindByIssuerAndSignature != null) {
+                return trustAnchorFindByIssuerAndSignature;
             }
         }
         return null;
@@ -136,12 +136,12 @@ public final class NetworkSecurityConfig {
     }
 
     public static Builder getDefaultBuilder(ApplicationInfo applicationInfo) {
-        Builder addCertificatesEntryRef = new Builder().setHstsEnforced(false).addCertificatesEntryRef(new CertificatesEntryRef(SystemCertificateSource.getInstance(), false, false));
-        addCertificatesEntryRef.setCleartextTrafficPermitted(applicationInfo.targetSdkVersion < 28 && !applicationInfo.isInstantApp());
+        Builder builderAddCertificatesEntryRef = new Builder().setHstsEnforced(false).addCertificatesEntryRef(new CertificatesEntryRef(SystemCertificateSource.getInstance(), false, false));
+        builderAddCertificatesEntryRef.setCleartextTrafficPermitted(applicationInfo.targetSdkVersion < 28 && !applicationInfo.isInstantApp());
         if (applicationInfo.targetSdkVersion <= 23 && !applicationInfo.isPrivilegedApp()) {
-            addCertificatesEntryRef.addCertificatesEntryRef(new CertificatesEntryRef(UserCertificateSource.getInstance(), false, true));
+            builderAddCertificatesEntryRef.addCertificatesEntryRef(new CertificatesEntryRef(UserCertificateSource.getInstance(), false, true));
         }
-        return addCertificatesEntryRef;
+        return builderAddCertificatesEntryRef;
     }
 
     public static final class Builder {
@@ -156,8 +156,8 @@ public final class NetworkSecurityConfig {
         private boolean mCertificateTransparencyVerificationRequiredSet = false;
 
         public Builder setParent(Builder builder) {
-            for (Builder builder2 = builder; builder2 != null; builder2 = builder2.getParent()) {
-                if (builder2 == this) {
+            for (Builder parent = builder; parent != null; parent = parent.getParent()) {
+                if (parent == this) {
                     throw new IllegalArgumentException("Loops are not allowed in Builder parents");
                 }
             }

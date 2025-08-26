@@ -25,7 +25,6 @@ import kotlinx.coroutines.flow.SharingStarted;
 import kotlinx.coroutines.flow.StartedEagerly;
 import kotlinx.coroutines.flow.StateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class MobileConnectionsRepositoryKairosAdapter implements MobileConnectionsRepository, KairosBuilder {
     public final /* synthetic */ KairosBuilderImpl $$delegate_0 = new KairosBuilderImpl();
@@ -44,7 +43,6 @@ public final class MobileConnectionsRepositoryKairosAdapter implements MobileCon
     public final ReadonlyStateFlow mobileIsDefault;
     public final ReadonlyStateFlow subscriptions;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Module {
         public static final Module INSTANCE = new Module();
 
@@ -180,8 +178,8 @@ public final class MobileConnectionsRepositoryKairosAdapter implements MobileCon
         return this.kairosNetwork.transact(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.MobileConnectionsRepositoryKairosAdapter$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                Boolean bool = (Boolean) ((TransactionScope) obj).sample(MobileConnectionsRepositoryKairosAdapter.this.kairosRepo.isInEcmMode());
+            public final Object mo781invoke(Object obj) {
+                Boolean bool = (Boolean) ((TransactionScope) obj).sample(this.f$0.kairosRepo.isInEcmMode());
                 bool.getClass();
                 return bool;
             }

@@ -5,7 +5,6 @@ import android.provider.Settings;
 import com.android.systemui.navigationbar.store.NavBarStoreImpl$initInteractor$12;
 import com.android.systemui.util.SettingsHelper;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class UseThemeDefaultInteractor {
     private SettingsHelper.OnChangedCallback callback;
@@ -20,7 +19,7 @@ public final class UseThemeDefaultInteractor {
         if (onChangedCallback != null) {
             this.settingsHelper.unregisterCallback(onChangedCallback);
         }
-        SettingsHelper.OnChangedCallback onChangedCallback2 = new SettingsHelper.OnChangedCallback() { // from class: com.android.systemui.navigationbar.interactor.UseThemeDefaultInteractor$addCallback$2
+        SettingsHelper.OnChangedCallback onChangedCallback2 = new SettingsHelper.OnChangedCallback() { // from class: com.android.systemui.navigationbar.interactor.UseThemeDefaultInteractor.addCallback.2
             @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
             public final void onChanged(Uri uri) {
                 Runnable runnable = navBarStoreImpl$initInteractor$12;

@@ -17,7 +17,6 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class MotionToolManager {
     public static final Companion Companion = new Companion(null);
@@ -27,7 +26,6 @@ public final class MotionToolManager {
     public final SimpleViewCapture viewCapture;
     public final WindowManagerGlobal windowManagerGlobal;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -41,7 +39,7 @@ public final class MotionToolManager {
         this(windowManagerGlobal);
     }
 
-    public final MotionWindowData getDataFromViewCapture(TraceMetadata traceMetadata) {
+    public final MotionWindowData getDataFromViewCapture(TraceMetadata traceMetadata) throws WindowNotFoundException {
         MotionWindowData motionWindowData;
         WindowManagerGlobal windowManagerGlobal = this.windowManagerGlobal;
         String str = traceMetadata.windowId;
@@ -59,7 +57,7 @@ public final class MotionToolManager {
                 LooperExecutor looperExecutor = ViewCapture.MAIN_EXECUTOR;
                 return ((ViewCapture.WindowListener) obj).mRoot.equals(view);
             }
-        }).thenApply((Function) new ViewCapture$$ExternalSyntheticLambda4(arrayList, 0)).get();
+        }).thenApply((Function) new ViewCapture$$ExternalSyntheticLambda4(0, arrayList)).get();
         if (optional == null || (motionWindowData = (MotionWindowData) optional.orElse(null)) == null) {
             return (MotionWindowData) MotionWindowData.newBuilder().build();
         }

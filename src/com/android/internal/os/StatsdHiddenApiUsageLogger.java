@@ -1,6 +1,10 @@
 package com.android.internal.os;
 
+import android.metrics.LogMaker;
+import android.os.Process;
 import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.nano.MetricsProto;
+import com.android.internal.util.FrameworkStatsLog;
 import dalvik.system.VMRuntime;
 
 /* loaded from: classes5.dex */
@@ -32,81 +36,52 @@ class StatsdHiddenApiUsageLogger implements VMRuntime.HiddenApiUsageLogger {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:7:0x000a, code lost:
-    
-        if (r6 != 3) goto L12;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:10:0x000d A[PHI: r2
+      0x000d: PHI (r2v2 int) = (r2v1 int), (r2v3 int) binds: [B:6:0x0007, B:8:0x000a] A[DONT_GENERATE, DONT_INLINE]] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private void logUsage(java.lang.String r4, java.lang.String r5, int r6, boolean r7) {
-        /*
-            r3 = this;
-            r0 = 1
-            r1 = 0
-            if (r6 == 0) goto L10
-            if (r6 == r0) goto Lf
-            r2 = 2
-            if (r6 == r2) goto Ld
-            r2 = 3
-            if (r6 == r2) goto Ld
-            goto L10
-        Ld:
-            r1 = r2
-            goto L10
-        Lf:
-            r1 = r0
-        L10:
-            android.metrics.LogMaker r6 = new android.metrics.LogMaker
-            r2 = 1391(0x56f, float:1.949E-42)
-            r6.<init>(r2)
-            android.metrics.LogMaker r4 = r6.setPackageName(r4)
-            r6 = 1394(0x572, float:1.953E-42)
-            android.metrics.LogMaker r4 = r4.addTaggedData(r6, r5)
-            r5 = 1392(0x570, float:1.95E-42)
-            java.lang.Integer r6 = java.lang.Integer.valueOf(r1)
-            android.metrics.LogMaker r4 = r4.addTaggedData(r5, r6)
-            if (r7 == 0) goto L36
-            r5 = 1393(0x571, float:1.952E-42)
-            java.lang.Integer r6 = java.lang.Integer.valueOf(r0)
-            r4.addTaggedData(r5, r6)
-        L36:
-            com.android.internal.logging.MetricsLogger r3 = r3.mMetricsLogger
-            r3.write(r4)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.os.StatsdHiddenApiUsageLogger.logUsage(java.lang.String, java.lang.String, int, boolean):void");
+    private void logUsage(String str, String str2, int i, boolean z) {
+        int i2 = 0;
+        if (i != 0) {
+            if (i != 1) {
+                int i3 = 2;
+                if (i != 2) {
+                    i3 = 3;
+                    if (i == 3) {
+                        i2 = i3;
+                    }
+                }
+            } else {
+                i2 = 1;
+            }
+        }
+        LogMaker logMakerAddTaggedData = new LogMaker(MetricsProto.MetricsEvent.ACTION_HIDDEN_API_ACCESSED).setPackageName(str).addTaggedData(MetricsProto.MetricsEvent.FIELD_HIDDEN_API_SIGNATURE, str2).addTaggedData(MetricsProto.MetricsEvent.FIELD_HIDDEN_API_ACCESS_METHOD, Integer.valueOf(i2));
+        if (z) {
+            logMakerAddTaggedData.addTaggedData(MetricsProto.MetricsEvent.FIELD_HIDDEN_API_ACCESS_DENIED, 1);
+        }
+        this.mMetricsLogger.write(logMakerAddTaggedData);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:8:0x000a, code lost:
-    
-        if (r3 != 3) goto L12;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:11:0x000d A[PHI: r0
+      0x000d: PHI (r0v2 int) = (r0v1 int), (r0v3 int), (r0v4 int) binds: [B:5:0x0004, B:7:0x0007, B:9:0x000a] A[DONT_GENERATE, DONT_INLINE]] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private void newLogUsage(java.lang.String r2, int r3, boolean r4) {
-        /*
-            r1 = this;
-            r1 = 0
-            if (r3 == 0) goto Le
-            r0 = 1
-            if (r3 == r0) goto Ld
-            r0 = 2
-            if (r3 == r0) goto Ld
-            r0 = 3
-            if (r3 == r0) goto Ld
-            goto Le
-        Ld:
-            r1 = r0
-        Le:
-            int r3 = android.os.Process.myUid()
-            r0 = 178(0xb2, float:2.5E-43)
-            com.android.internal.util.FrameworkStatsLog.write(r0, r3, r2, r1, r4)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.os.StatsdHiddenApiUsageLogger.newLogUsage(java.lang.String, int, boolean):void");
+    private void newLogUsage(String str, int i, boolean z) {
+        int i2 = 0;
+        if (i != 0) {
+            int i3 = 1;
+            if (i != 1) {
+                i3 = 2;
+                if (i != 2) {
+                    i3 = 3;
+                    if (i == 3) {
+                        i2 = i3;
+                    }
+                }
+            }
+        }
+        FrameworkStatsLog.write(178, Process.myUid(), str, i2, z);
     }
 }

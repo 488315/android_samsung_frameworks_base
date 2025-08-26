@@ -13,11 +13,10 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class LayoutKt {
     public static final ComposableLambdaImpl combineAsVirtualLayouts(final List list) {
-        return new ComposableLambdaImpl(-1953651383, true, new Function2() { // from class: androidx.compose.ui.layout.LayoutKt$combineAsVirtualLayouts$1
+        return new ComposableLambdaImpl(-1953651383, true, new Function2() { // from class: androidx.compose.ui.layout.LayoutKt.combineAsVirtualLayouts.1
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             /* JADX WARN: Multi-variable type inference failed */
             {
@@ -27,9 +26,9 @@ public abstract class LayoutKt {
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 Composer composer = (Composer) obj;
-                int intValue = ((Number) obj2).intValue();
+                int iIntValue = ((Number) obj2).intValue();
                 ComposerImpl composerImpl = (ComposerImpl) composer;
-                if (composerImpl.shouldExecute(intValue & 1, (intValue & 3) != 2)) {
+                if (composerImpl.shouldExecute(iIntValue & 1, (iIntValue & 3) != 2)) {
                     if (ComposerKt.isTraceInProgress()) {
                         ComposerKt.traceEventStart("androidx.compose.ui.layout.combineAsVirtualLayouts.<anonymous> (Layout.kt:176)");
                     }

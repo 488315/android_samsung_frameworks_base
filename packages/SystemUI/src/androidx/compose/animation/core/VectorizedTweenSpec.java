@@ -3,7 +3,6 @@ package androidx.compose.animation.core;
 import androidx.compose.animation.core.AnimationVector;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class VectorizedTweenSpec<V extends AnimationVector> implements VectorizedDurationBasedAnimationSpec<V> {
     public final VectorizedFloatAnimationSpec anim;

@@ -32,7 +32,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class TileAdapter extends RecyclerView.Adapter {
     public final TileAdapterDelegate mAccessibilityDelegate;
@@ -59,7 +58,6 @@ public class TileAdapter extends RecyclerView.Adapter {
     public final List mTiles = new ArrayList();
     public int mAccessibilityAction = 0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Holder extends RecyclerView.ViewHolder {
         public final QSTileViewImpl mTileView;
 
@@ -79,7 +77,6 @@ public class TileAdapter extends RecyclerView.Adapter {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class MarginTileDecoration extends RecyclerView.ItemDecoration {
         public int mHalfMargin;
 
@@ -128,7 +125,6 @@ public class TileAdapter extends RecyclerView.Adapter {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class TileItemDecoration extends RecyclerView.ItemDecoration {
         public final Drawable mDrawable;
 
@@ -162,7 +158,7 @@ public class TileAdapter extends RecyclerView.Adapter {
     }
 
     /* renamed from: -$$Nest$mselectPosition, reason: not valid java name */
-    public static void m2884$$Nest$mselectPosition(TileAdapter tileAdapter, int i) {
+    public static void m2901$$Nest$mselectPosition(TileAdapter tileAdapter, int i) {
         if (tileAdapter.mAccessibilityAction == 1) {
             List list = tileAdapter.mTiles;
             int i2 = tileAdapter.mEditIndex;
@@ -193,50 +189,28 @@ public class TileAdapter extends RecyclerView.Adapter {
         };
         this.mSizeLookup = r1;
         ?? r2 = new ItemTouchHelper.Callback() { // from class: com.android.systemui.qs.customize.TileAdapter.5
-            /* JADX WARN: Removed duplicated region for block: B:12:0x002f A[RETURN] */
+            /* JADX WARN: Removed duplicated region for block: B:18:0x002f A[RETURN] */
             @Override // androidx.recyclerview.widget.ItemTouchHelper.Callback
             /*
                 Code decompiled incorrectly, please refer to instructions dump.
-                To view partially-correct code enable 'Show inconsistent code' option in preferences
             */
-            public final boolean canDropOver(androidx.recyclerview.widget.RecyclerView.ViewHolder r5, androidx.recyclerview.widget.RecyclerView.ViewHolder r6) {
-                /*
-                    r4 = this;
-                    int r6 = r6.getBindingAdapterPosition()
-                    r0 = 0
-                    if (r6 == 0) goto L30
-                    r1 = -1
-                    if (r6 != r1) goto Lb
-                    goto L30
-                Lb:
-                    com.android.systemui.qs.customize.TileAdapter r4 = com.android.systemui.qs.customize.TileAdapter.this
-                    java.util.List r1 = r4.mCurrentSpecs
-                    java.util.ArrayList r1 = (java.util.ArrayList) r1
-                    int r1 = r1.size()
-                    int r2 = r4.mMinNumTiles
-                    r3 = 1
-                    if (r1 <= r2) goto L1c
-                    r1 = r3
-                    goto L1d
-                L1c:
-                    r1 = r0
-                L1d:
-                    if (r1 != 0) goto L2a
-                    int r5 = r5.getBindingAdapterPosition()
-                    int r1 = r4.mEditIndex
-                    if (r5 >= r1) goto L2a
-                    if (r6 >= r1) goto L30
-                    goto L2f
-                L2a:
-                    int r4 = r4.mEditIndex
-                    int r4 = r4 + r3
-                    if (r6 > r4) goto L30
-                L2f:
-                    return r3
-                L30:
-                    return r0
-                */
-                throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.customize.TileAdapter.AnonymousClass5.canDropOver(androidx.recyclerview.widget.RecyclerView$ViewHolder, androidx.recyclerview.widget.RecyclerView$ViewHolder):boolean");
+            public final boolean canDropOver(RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder viewHolder2) {
+                int bindingAdapterPosition = viewHolder2.getBindingAdapterPosition();
+                if (bindingAdapterPosition != 0 && bindingAdapterPosition != -1) {
+                    TileAdapter tileAdapter = TileAdapter.this;
+                    if (!(((ArrayList) tileAdapter.mCurrentSpecs).size() > tileAdapter.mMinNumTiles)) {
+                        int bindingAdapterPosition2 = viewHolder.getBindingAdapterPosition();
+                        int i2 = tileAdapter.mEditIndex;
+                        if (bindingAdapterPosition2 < i2) {
+                            if (bindingAdapterPosition < i2) {
+                                return true;
+                            }
+                        }
+                    }
+                    if (bindingAdapterPosition <= tileAdapter.mEditIndex + 1) {
+                    }
+                }
+                return false;
             }
 
             @Override // androidx.recyclerview.widget.ItemTouchHelper.Callback
@@ -415,7 +389,7 @@ public class TileAdapter extends RecyclerView.Adapter {
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public final void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int i) {
+    public final void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int i) throws Resources.NotFoundException {
         int i2;
         String string;
         boolean z;
@@ -465,7 +439,7 @@ public class TileAdapter extends RecyclerView.Adapter {
             qSTileViewImpl2.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qs.customize.TileAdapter.1
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view3) {
-                    TileAdapter.m2884$$Nest$mselectPosition(TileAdapter.this, holder.getLayoutPosition());
+                    TileAdapter.m2901$$Nest$mselectPosition(TileAdapter.this, holder.getLayoutPosition());
                 }
             });
             if (this.mNeedsFocus) {
@@ -538,7 +512,7 @@ public class TileAdapter extends RecyclerView.Adapter {
                         }
                         TileAdapter tileAdapter = TileAdapter.this;
                         if (tileAdapter.mAccessibilityAction != 0) {
-                            TileAdapter.m2884$$Nest$mselectPosition(tileAdapter, layoutPosition);
+                            TileAdapter.m2901$$Nest$mselectPosition(tileAdapter, layoutPosition);
                         }
                     }
                 });
@@ -559,34 +533,34 @@ public class TileAdapter extends RecyclerView.Adapter {
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public final RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public final RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) throws Resources.NotFoundException {
         Context context = viewGroup.getContext();
-        LayoutInflater from = LayoutInflater.from(context);
-        int i2 = 0;
+        LayoutInflater layoutInflaterFrom = LayoutInflater.from(context);
+        int dimensionPixelSize = 0;
         if (i != 3) {
             if (i == 4) {
-                return new Holder(from.inflate(R.layout.qs_customize_tile_divider, viewGroup, false));
+                return new Holder(layoutInflaterFrom.inflate(R.layout.qs_customize_tile_divider, viewGroup, false));
             }
             if (i == 1) {
-                return new Holder(from.inflate(R.layout.qs_customize_divider, viewGroup, false));
+                return new Holder(layoutInflaterFrom.inflate(R.layout.qs_customize_divider, viewGroup, false));
             }
-            FrameLayout frameLayout = (FrameLayout) from.inflate(R.layout.qs_customize_tile_frame, viewGroup, false);
+            FrameLayout frameLayout = (FrameLayout) layoutInflaterFrom.inflate(R.layout.qs_customize_tile_frame, viewGroup, false);
             frameLayout.setClipChildren(false);
             frameLayout.addView(new CustomizeTileView(context));
             return new Holder(frameLayout);
         }
-        View inflate = from.inflate(R.layout.qs_customize_header, viewGroup, false);
+        View viewInflate = layoutInflaterFrom.inflate(R.layout.qs_customize_header, viewGroup, false);
         Resources resources = context.getResources();
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(R.style.QSCustomizeToolbar, com.android.internal.R.styleable.Toolbar);
-        int resourceId = obtainStyledAttributes.getResourceId(27, 0);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(R.style.QSCustomizeToolbar, com.android.internal.R.styleable.Toolbar);
+        int resourceId = typedArrayObtainStyledAttributes.getResourceId(27, 0);
+        typedArrayObtainStyledAttributes.recycle();
         if (resourceId != 0) {
-            TypedArray obtainStyledAttributes2 = context.obtainStyledAttributes(resourceId, android.R.styleable.View);
-            i2 = obtainStyledAttributes2.getDimensionPixelSize(36, 0);
-            obtainStyledAttributes2.recycle();
+            TypedArray typedArrayObtainStyledAttributes2 = context.obtainStyledAttributes(resourceId, android.R.styleable.View);
+            dimensionPixelSize = typedArrayObtainStyledAttributes2.getDimensionPixelSize(36, 0);
+            typedArrayObtainStyledAttributes2.recycle();
         }
-        inflate.setMinimumHeight(((resources.getDimensionPixelSize(R.dimen.qs_brightness_margin_bottom) + (resources.getDimensionPixelSize(R.dimen.qs_brightness_margin_top) + (resources.getDimensionPixelSize(R.dimen.brightness_mirror_height) + resources.getDimensionPixelSize(R.dimen.qs_panel_padding_top)))) - i2) - resources.getDimensionPixelSize(R.dimen.qs_tile_margin_top_bottom));
-        return new Holder(inflate);
+        viewInflate.setMinimumHeight(((resources.getDimensionPixelSize(R.dimen.qs_brightness_margin_bottom) + (resources.getDimensionPixelSize(R.dimen.qs_brightness_margin_top) + (resources.getDimensionPixelSize(R.dimen.brightness_mirror_height) + resources.getDimensionPixelSize(R.dimen.qs_panel_padding_top)))) - dimensionPixelSize) - resources.getDimensionPixelSize(R.dimen.qs_tile_margin_top_bottom));
+        return new Holder(viewInflate);
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter

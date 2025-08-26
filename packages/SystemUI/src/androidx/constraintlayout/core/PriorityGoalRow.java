@@ -6,7 +6,6 @@ import androidx.compose.ui.autofill.PopulateViewStructure_androidKt$$ExternalSyn
 import java.util.Arrays;
 import java.util.Comparator;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class PriorityGoalRow extends ArrayRow {
     public final GoalVariableAccessor mAccessor;
@@ -14,7 +13,6 @@ public class PriorityGoalRow extends ArrayRow {
     public int mNumGoals;
     public SolverVariable[] mSortArray;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class GoalVariableAccessor {
         public SolverVariable mVariable;
 
@@ -22,15 +20,15 @@ public class PriorityGoalRow extends ArrayRow {
         }
 
         public final String toString() {
-            String str = "[ ";
+            String strM = "[ ";
             if (this.mVariable != null) {
                 for (int i = 0; i < 9; i++) {
-                    str = DpCornerSize$$ExternalSyntheticOutline0.m(this.mVariable.mGoalStrengthVector[i], " ", PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str));
+                    strM = DpCornerSize$$ExternalSyntheticOutline0.m(this.mVariable.mGoalStrengthVector[i], " ", PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(strM));
                 }
             }
-            StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(str, "] ");
-            m.append(this.mVariable);
-            return m.toString();
+            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(strM, "] ");
+            sbM.append(this.mVariable);
+            return sbM.toString();
         }
     }
 
@@ -109,7 +107,7 @@ public class PriorityGoalRow extends ArrayRow {
                             float f3 = goalVariableAccessor.mVariable.mGoalStrengthVector[i3];
                             if (f3 == f2) {
                                 i3--;
-                            } else if (f3 >= f2) {
+                            } else if (f3 < f2) {
                             }
                         }
                     }
@@ -152,14 +150,14 @@ public class PriorityGoalRow extends ArrayRow {
 
     @Override // androidx.constraintlayout.core.ArrayRow
     public final String toString() {
-        String m = DpCornerSize$$ExternalSyntheticOutline0.m(this.mConstantValue, ") : ", new StringBuilder(" goal -> ("));
+        String strM = DpCornerSize$$ExternalSyntheticOutline0.m(this.mConstantValue, ") : ", new StringBuilder(" goal -> ("));
         for (int i = 0; i < this.mNumGoals; i++) {
             SolverVariable solverVariable = this.mArrayGoals[i];
             GoalVariableAccessor goalVariableAccessor = this.mAccessor;
             goalVariableAccessor.mVariable = solverVariable;
-            m = m + goalVariableAccessor + " ";
+            strM = strM + goalVariableAccessor + " ";
         }
-        return m;
+        return strM;
     }
 
     @Override // androidx.constraintlayout.core.ArrayRow

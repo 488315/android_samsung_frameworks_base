@@ -40,17 +40,17 @@ public abstract class UtteranceProgressListener {
 
             @Override // android.speech.tts.UtteranceProgressListener
             public synchronized void onDone(String str) {
-                TextToSpeech.OnUtteranceCompletedListener.this.onUtteranceCompleted(str);
+                onUtteranceCompletedListener.onUtteranceCompleted(str);
             }
 
             @Override // android.speech.tts.UtteranceProgressListener
             public void onError(String str) {
-                TextToSpeech.OnUtteranceCompletedListener.this.onUtteranceCompleted(str);
+                onUtteranceCompletedListener.onUtteranceCompleted(str);
             }
 
             @Override // android.speech.tts.UtteranceProgressListener
             public void onStop(String str, boolean z) {
-                TextToSpeech.OnUtteranceCompletedListener.this.onUtteranceCompleted(str);
+                onUtteranceCompletedListener.onUtteranceCompleted(str);
             }
         };
     }

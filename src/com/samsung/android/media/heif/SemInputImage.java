@@ -31,9 +31,9 @@ public class SemInputImage {
 
     public SemInputImage(byte[] bArr, int i, int i2, int i3, int i4, int i5) {
         this(i3, i4, i5);
-        ByteBuffer allocateDirect = ByteBuffer.allocateDirect(i2);
-        this.mBuffer = allocateDirect;
-        allocateDirect.put(bArr, i, i2);
+        ByteBuffer byteBufferAllocateDirect = ByteBuffer.allocateDirect(i2);
+        this.mBuffer = byteBufferAllocateDirect;
+        byteBufferAllocateDirect.put(bArr, i, i2);
         this.mBuffer.flip();
     }
 

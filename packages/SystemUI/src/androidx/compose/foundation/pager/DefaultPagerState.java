@@ -13,7 +13,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.ranges.RangesKt___RangesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class DefaultPagerState extends PagerState {
     public static final Companion Companion = new Companion(null);
@@ -26,7 +25,7 @@ final class DefaultPagerState extends PagerState {
     }, new Function1() { // from class: androidx.compose.foundation.pager.DefaultPagerState$Companion$Saver$2
         @Override // kotlin.jvm.functions.Function1
         /* renamed from: invoke */
-        public final Object mo779invoke(Object obj) {
+        public final Object mo781invoke(Object obj) {
             final List list = (List) obj;
             return new DefaultPagerState(((Integer) list.get(0)).intValue(), ((Float) list.get(1)).floatValue(), new Function0() { // from class: androidx.compose.foundation.pager.DefaultPagerState$Companion$Saver$2.1
                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
@@ -43,7 +42,6 @@ final class DefaultPagerState extends PagerState {
     });
     public final MutableState pageCountState;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();

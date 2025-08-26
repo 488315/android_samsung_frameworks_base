@@ -6,53 +6,23 @@ import android.graphics.Rect;
 import android.view.WindowManager;
 import com.android.systemui.utils.windowmanager.WindowManagerUtils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class Utilities {
     public static boolean isLargeScreen(Context context) {
         return isLargeScreen(WindowManagerUtils.getWindowManager(context), context.getResources());
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:7:0x0009, code lost:
-    
-        if (r3 != 3) goto L13;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:10:0x000c  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static int updateNavbarFlagsFromIme(int r2, int r3, boolean r4, boolean r5) {
-        /*
-            r0 = 2
-            if (r3 == 0) goto Lf
-            r1 = 1
-            if (r3 == r1) goto Lf
-            if (r3 == r0) goto Lf
-            r1 = 3
-            if (r3 == r1) goto Lc
-            goto L13
-        Lc:
-            r2 = r2 & (-2)
-            goto L13
-        Lf:
-            if (r4 == 0) goto Lc
-            r2 = r2 | 1
-        L13:
-            if (r4 == 0) goto L17
-            r2 = r2 | r0
-            goto L19
-        L17:
-            r2 = r2 & (-3)
-        L19:
-            if (r5 == 0) goto L20
-            if (r4 == 0) goto L20
-            r2 = r2 | 4
-            return r2
-        L20:
-            r2 = r2 & (-5)
-            return r2
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.shared.recents.utilities.Utilities.updateNavbarFlagsFromIme(int, int, boolean, boolean):int");
+    public static int updateNavbarFlagsFromIme(int i, int i2, boolean z, boolean z2) {
+        if (i2 == 0 || i2 == 1 || i2 == 2) {
+            i = z ? i | 1 : i & (-2);
+        } else if (i2 == 3) {
+        }
+        int i3 = z ? i | 2 : i & (-3);
+        return (z2 && z) ? i3 | 4 : i3 & (-5);
     }
 
     public static boolean isLargeScreen(WindowManager windowManager, Resources resources) {

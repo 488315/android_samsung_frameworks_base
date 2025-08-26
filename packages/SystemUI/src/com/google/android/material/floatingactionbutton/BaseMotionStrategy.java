@@ -12,7 +12,6 @@ import com.google.android.material.animation.AnimatorSetCompat;
 import com.google.android.material.animation.MotionSpec;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class BaseMotionStrategy implements MotionStrategy {
     public final Context context;
@@ -63,9 +62,9 @@ public abstract class BaseMotionStrategy implements MotionStrategy {
 
     public final AnimatorSet createAnimator(MotionSpec motionSpec) {
         ArrayList arrayList = new ArrayList();
-        boolean hasPropertyValues = motionSpec.hasPropertyValues("opacity");
+        boolean zHasPropertyValues = motionSpec.hasPropertyValues("opacity");
         ExtendedFloatingActionButton extendedFloatingActionButton = this.fab;
-        if (hasPropertyValues) {
+        if (zHasPropertyValues) {
             arrayList.add(motionSpec.getAnimator("opacity", extendedFloatingActionButton, View.ALPHA));
         }
         if (motionSpec.hasPropertyValues("scale")) {
@@ -97,11 +96,11 @@ public abstract class BaseMotionStrategy implements MotionStrategy {
                     ExtendedFloatingActionButton extendedFloatingActionButton2 = (ExtendedFloatingActionButton) obj;
                     Float f = (Float) obj2;
                     int colorForState = extendedFloatingActionButton2.originalTextCsl.getColorForState(extendedFloatingActionButton2.getDrawableState(), BaseMotionStrategy.this.fab.originalTextCsl.getDefaultColor());
-                    ColorStateList valueOf = ColorStateList.valueOf(Color.argb((int) (AnimationUtils.lerp(0.0f, Color.alpha(colorForState) / 255.0f, f.floatValue()) * 255.0f), Color.red(colorForState), Color.green(colorForState), Color.blue(colorForState)));
+                    ColorStateList colorStateListValueOf = ColorStateList.valueOf(Color.argb((int) (AnimationUtils.lerp(0.0f, Color.alpha(colorForState) / 255.0f, f.floatValue()) * 255.0f), Color.red(colorForState), Color.green(colorForState), Color.blue(colorForState)));
                     if (f.floatValue() == 1.0f) {
                         extendedFloatingActionButton2.silentlyUpdateTextColor(extendedFloatingActionButton2.originalTextCsl);
                     } else {
-                        extendedFloatingActionButton2.silentlyUpdateTextColor(valueOf);
+                        extendedFloatingActionButton2.silentlyUpdateTextColor(colorStateListValueOf);
                     }
                 }
             }));

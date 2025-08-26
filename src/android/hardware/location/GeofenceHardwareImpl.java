@@ -105,13 +105,13 @@ public final class GeofenceHardwareImpl {
                             iGeofenceHardwareCallback3.onGeofenceRemove(i3, message.arg2);
                         } catch (RemoteException unused2) {
                         }
-                        IBinder asBinder = iGeofenceHardwareCallback3.asBinder();
+                        IBinder iBinderAsBinder = iGeofenceHardwareCallback3.asBinder();
                         synchronized (GeofenceHardwareImpl.this.mGeofences) {
                             GeofenceHardwareImpl.this.mGeofences.remove(i3);
                             int i4 = 0;
                             while (true) {
                                 if (i4 < GeofenceHardwareImpl.this.mGeofences.size()) {
-                                    if (((IGeofenceHardwareCallback) GeofenceHardwareImpl.this.mGeofences.valueAt(i4)).asBinder() == asBinder) {
+                                    if (((IGeofenceHardwareCallback) GeofenceHardwareImpl.this.mGeofences.valueAt(i4)).asBinder() == iBinderAsBinder) {
                                         i = 1;
                                     } else {
                                         i4++;
@@ -123,11 +123,11 @@ public final class GeofenceHardwareImpl {
                             Iterator it = GeofenceHardwareImpl.this.mReapers.iterator();
                             while (it.hasNext()) {
                                 Reaper reaper = (Reaper) it.next();
-                                if (reaper.mCallback != null && reaper.mCallback.asBinder() == asBinder) {
+                                if (reaper.mCallback != null && reaper.mCallback.asBinder() == iBinderAsBinder) {
                                     it.remove();
                                     reaper.unlinkToDeath();
                                     if (GeofenceHardwareImpl.DEBUG) {
-                                        Log.d(GeofenceHardwareImpl.TAG, String.format("Removed reaper %s because binder %s is no longer needed.", reaper, asBinder));
+                                        Log.d(GeofenceHardwareImpl.TAG, String.format("Removed reaper %s because binder %s is no longer needed.", reaper, iBinderAsBinder));
                                     }
                                 }
                             }
@@ -170,10 +170,10 @@ public final class GeofenceHardwareImpl {
                     synchronized (GeofenceHardwareImpl.this.mGeofences) {
                         while (i < GeofenceHardwareImpl.this.mGeofences.size()) {
                             if (((IGeofenceHardwareCallback) GeofenceHardwareImpl.this.mGeofences.valueAt(i)).equals(iGeofenceHardwareCallback6)) {
-                                int keyAt = GeofenceHardwareImpl.this.mGeofences.keyAt(i);
+                                int iKeyAt = GeofenceHardwareImpl.this.mGeofences.keyAt(i);
                                 GeofenceHardwareImpl geofenceHardwareImpl = GeofenceHardwareImpl.this;
                                 geofenceHardwareImpl.removeGeofence(geofenceHardwareImpl.mGeofences.keyAt(i), i7);
-                                GeofenceHardwareImpl.this.mGeofences.remove(keyAt);
+                                GeofenceHardwareImpl.this.mGeofences.remove(iKeyAt);
                             }
                             i++;
                         }
@@ -284,14 +284,10 @@ public final class GeofenceHardwareImpl {
     }
 
     public static synchronized GeofenceHardwareImpl getInstance(Context context) {
-        GeofenceHardwareImpl geofenceHardwareImpl;
-        synchronized (GeofenceHardwareImpl.class) {
-            if (sInstance == null) {
-                sInstance = new GeofenceHardwareImpl(context);
-            }
-            geofenceHardwareImpl = sInstance;
+        if (sInstance == null) {
+            sInstance = new GeofenceHardwareImpl(context);
         }
-        return geofenceHardwareImpl;
+        return sInstance;
     }
 
     private GeofenceHardwareImpl(Context context) {
@@ -315,57 +311,30 @@ public final class GeofenceHardwareImpl {
     }
 
     private void updateGpsHardwareAvailability() {
-        boolean z;
+        boolean zIsHardwareGeofenceSupported;
         try {
-            z = this.mGpsService.isHardwareGeofenceSupported();
+            zIsHardwareGeofenceSupported = this.mGpsService.isHardwareGeofenceSupported();
         } catch (RemoteException unused) {
             Log.e(TAG, "Remote Exception calling LocationManagerService");
-            z = false;
+            zIsHardwareGeofenceSupported = false;
         }
-        if (z) {
+        if (zIsHardwareGeofenceSupported) {
             setMonitorAvailability(0, 0);
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0014 A[Catch: RemoteException -> 0x0020, TRY_LEAVE, TryCatch #0 {RemoteException -> 0x0020, blocks: (B:2:0x0000, B:4:0x0007, B:8:0x0010, B:10:0x0014), top: B:1:0x0000 }] */
-    /* JADX WARN: Removed duplicated region for block: B:19:? A[RETURN, SYNTHETIC] */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
     private void updateFusedHardwareAvailability() {
-        /*
-            r4 = this;
-            int r0 = r4.mVersion     // Catch: android.os.RemoteException -> L20
-            r1 = 2
-            r2 = 0
-            r3 = 1
-            if (r0 < r1) goto Lf
-            int r0 = r4.mCapabilities     // Catch: android.os.RemoteException -> L20
-            r0 = r0 & r3
-            if (r0 == 0) goto Ld
-            goto Lf
-        Ld:
-            r0 = r2
-            goto L10
-        Lf:
-            r0 = r3
-        L10:
-            android.location.IFusedGeofenceHardware r1 = r4.mFusedService     // Catch: android.os.RemoteException -> L20
-            if (r1 == 0) goto L27
-            boolean r1 = r1.isSupported()     // Catch: android.os.RemoteException -> L20
-            if (r1 == 0) goto L27
-            if (r0 == 0) goto L27
-            r4.setMonitorAvailability(r3, r2)
-            return
-        L20:
-            java.lang.String r4 = "GeofenceHardwareImpl"
-            java.lang.String r0 = "RemoteException calling LocationManagerService"
-            android.util.Log.e(r4, r0)
-        L27:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.hardware.location.GeofenceHardwareImpl.updateFusedHardwareAvailability():void");
+        try {
+            boolean z = this.mVersion < 2 || (this.mCapabilities & 1) != 0;
+            IFusedGeofenceHardware iFusedGeofenceHardware = this.mFusedService;
+            if (iFusedGeofenceHardware != null) {
+                if (iFusedGeofenceHardware.isSupported() && z) {
+                    setMonitorAvailability(1, 0);
+                }
+            }
+        } catch (RemoteException unused) {
+            Log.e(TAG, "RemoteException calling LocationManagerService");
+        }
     }
 
     public void setGpsHardwareGeofence(IGpsGeofenceHardware iGpsGeofenceHardware) {
@@ -457,14 +426,14 @@ public final class GeofenceHardwareImpl {
         synchronized (this.mGeofences) {
             this.mGeofences.put(id, iGeofenceHardwareCallback);
         }
-        boolean z = false;
+        boolean zAddCircularHardwareGeofence = false;
         if (i == 0) {
             IGpsGeofenceHardware iGpsGeofenceHardware = this.mGpsService;
             if (iGpsGeofenceHardware == null) {
                 return false;
             }
             try {
-                z = iGpsGeofenceHardware.addCircularHardwareGeofence(geofenceHardwareRequestParcelable.getId(), geofenceHardwareRequestParcelable.getLatitude(), geofenceHardwareRequestParcelable.getLongitude(), geofenceHardwareRequestParcelable.getRadius(), geofenceHardwareRequestParcelable.getLastTransition(), geofenceHardwareRequestParcelable.getMonitorTransitions(), geofenceHardwareRequestParcelable.getNotificationResponsiveness(), geofenceHardwareRequestParcelable.getUnknownTimer());
+                zAddCircularHardwareGeofence = iGpsGeofenceHardware.addCircularHardwareGeofence(geofenceHardwareRequestParcelable.getId(), geofenceHardwareRequestParcelable.getLatitude(), geofenceHardwareRequestParcelable.getLongitude(), geofenceHardwareRequestParcelable.getRadius(), geofenceHardwareRequestParcelable.getLastTransition(), geofenceHardwareRequestParcelable.getMonitorTransitions(), geofenceHardwareRequestParcelable.getNotificationResponsiveness(), geofenceHardwareRequestParcelable.getUnknownTimer());
             } catch (RemoteException unused) {
                 Log.e(TAG, "AddGeofence: Remote Exception calling LocationManagerService");
             }
@@ -475,24 +444,24 @@ public final class GeofenceHardwareImpl {
             }
             try {
                 iFusedGeofenceHardware.addGeofences(new GeofenceHardwareRequestParcelable[]{geofenceHardwareRequestParcelable});
-                z = true;
+                zAddCircularHardwareGeofence = true;
             } catch (RemoteException unused2) {
                 Log.e(TAG, "AddGeofence: RemoteException calling LocationManagerService");
             }
         }
-        if (z) {
-            Message obtainMessage = this.mReaperHandler.obtainMessage(1, iGeofenceHardwareCallback);
-            obtainMessage.arg1 = i;
-            this.mReaperHandler.sendMessage(obtainMessage);
+        if (zAddCircularHardwareGeofence) {
+            Message messageObtainMessage = this.mReaperHandler.obtainMessage(1, iGeofenceHardwareCallback);
+            messageObtainMessage.arg1 = i;
+            this.mReaperHandler.sendMessage(messageObtainMessage);
         } else {
             synchronized (this.mGeofences) {
                 this.mGeofences.remove(id);
             }
         }
         if (DEBUG) {
-            Log.d(TAG, "addCircularFence: Result is: " + z);
+            Log.d(TAG, "addCircularFence: Result is: " + zAddCircularHardwareGeofence);
         }
-        return z;
+        return zAddCircularHardwareGeofence;
     }
 
     public boolean removeGeofence(int i, int i2) {
@@ -504,14 +473,14 @@ public final class GeofenceHardwareImpl {
                 throw new IllegalArgumentException("Geofence " + i + " not registered.");
             }
         }
-        boolean z = false;
+        boolean zRemoveHardwareGeofence = false;
         if (i2 == 0) {
             IGpsGeofenceHardware iGpsGeofenceHardware = this.mGpsService;
             if (iGpsGeofenceHardware == null) {
                 return false;
             }
             try {
-                z = iGpsGeofenceHardware.removeHardwareGeofence(i);
+                zRemoveHardwareGeofence = iGpsGeofenceHardware.removeHardwareGeofence(i);
             } catch (RemoteException unused) {
                 Log.e(TAG, "RemoveGeofence: Remote Exception calling LocationManagerService");
             }
@@ -522,15 +491,15 @@ public final class GeofenceHardwareImpl {
             }
             try {
                 iFusedGeofenceHardware.removeGeofences(new int[]{i});
-                z = true;
+                zRemoveHardwareGeofence = true;
             } catch (RemoteException unused2) {
                 Log.e(TAG, "RemoveGeofence: RemoteException calling LocationManagerService");
             }
         }
         if (DEBUG) {
-            Log.d(TAG, "removeGeofence: Result is: " + z);
+            Log.d(TAG, "removeGeofence: Result is: " + zRemoveHardwareGeofence);
         }
-        return z;
+        return zRemoveHardwareGeofence;
     }
 
     public boolean pauseGeofence(int i, int i2) {
@@ -542,14 +511,14 @@ public final class GeofenceHardwareImpl {
                 throw new IllegalArgumentException("Geofence " + i + " not registered.");
             }
         }
-        boolean z = false;
+        boolean zPauseHardwareGeofence = false;
         if (i2 == 0) {
             IGpsGeofenceHardware iGpsGeofenceHardware = this.mGpsService;
             if (iGpsGeofenceHardware == null) {
                 return false;
             }
             try {
-                z = iGpsGeofenceHardware.pauseHardwareGeofence(i);
+                zPauseHardwareGeofence = iGpsGeofenceHardware.pauseHardwareGeofence(i);
             } catch (RemoteException unused) {
                 Log.e(TAG, "PauseGeofence: Remote Exception calling LocationManagerService");
             }
@@ -560,15 +529,15 @@ public final class GeofenceHardwareImpl {
             }
             try {
                 iFusedGeofenceHardware.pauseMonitoringGeofence(i);
-                z = true;
+                zPauseHardwareGeofence = true;
             } catch (RemoteException unused2) {
                 Log.e(TAG, "PauseGeofence: RemoteException calling LocationManagerService");
             }
         }
         if (DEBUG) {
-            Log.d(TAG, "pauseGeofence: Result is: " + z);
+            Log.d(TAG, "pauseGeofence: Result is: " + zPauseHardwareGeofence);
         }
-        return z;
+        return zPauseHardwareGeofence;
     }
 
     public boolean resumeGeofence(int i, int i2, int i3) {
@@ -580,14 +549,14 @@ public final class GeofenceHardwareImpl {
                 throw new IllegalArgumentException("Geofence " + i + " not registered.");
             }
         }
-        boolean z = false;
+        boolean zResumeHardwareGeofence = false;
         if (i2 == 0) {
             IGpsGeofenceHardware iGpsGeofenceHardware = this.mGpsService;
             if (iGpsGeofenceHardware == null) {
                 return false;
             }
             try {
-                z = iGpsGeofenceHardware.resumeHardwareGeofence(i, i3);
+                zResumeHardwareGeofence = iGpsGeofenceHardware.resumeHardwareGeofence(i, i3);
             } catch (RemoteException unused) {
                 Log.e(TAG, "ResumeGeofence: Remote Exception calling LocationManagerService");
             }
@@ -598,31 +567,31 @@ public final class GeofenceHardwareImpl {
             }
             try {
                 iFusedGeofenceHardware.resumeMonitoringGeofence(i, i3);
-                z = true;
+                zResumeHardwareGeofence = true;
             } catch (RemoteException unused2) {
                 Log.e(TAG, "ResumeGeofence: RemoteException calling LocationManagerService");
             }
         }
         if (DEBUG) {
-            Log.d(TAG, "resumeGeofence: Result is: " + z);
+            Log.d(TAG, "resumeGeofence: Result is: " + zResumeHardwareGeofence);
         }
-        return z;
+        return zResumeHardwareGeofence;
     }
 
     public boolean registerForMonitorStateChangeCallback(int i, IGeofenceHardwareMonitorCallback iGeofenceHardwareMonitorCallback) {
-        Message obtainMessage = this.mReaperHandler.obtainMessage(2, iGeofenceHardwareMonitorCallback);
-        obtainMessage.arg1 = i;
-        this.mReaperHandler.sendMessage(obtainMessage);
-        Message obtainMessage2 = this.mCallbacksHandler.obtainMessage(2, iGeofenceHardwareMonitorCallback);
-        obtainMessage2.arg1 = i;
-        this.mCallbacksHandler.sendMessage(obtainMessage2);
+        Message messageObtainMessage = this.mReaperHandler.obtainMessage(2, iGeofenceHardwareMonitorCallback);
+        messageObtainMessage.arg1 = i;
+        this.mReaperHandler.sendMessage(messageObtainMessage);
+        Message messageObtainMessage2 = this.mCallbacksHandler.obtainMessage(2, iGeofenceHardwareMonitorCallback);
+        messageObtainMessage2.arg1 = i;
+        this.mCallbacksHandler.sendMessage(messageObtainMessage2);
         return true;
     }
 
     public boolean unregisterForMonitorStateChangeCallback(int i, IGeofenceHardwareMonitorCallback iGeofenceHardwareMonitorCallback) {
-        Message obtainMessage = this.mCallbacksHandler.obtainMessage(3, iGeofenceHardwareMonitorCallback);
-        obtainMessage.arg1 = i;
-        this.mCallbacksHandler.sendMessage(obtainMessage);
+        Message messageObtainMessage = this.mCallbacksHandler.obtainMessage(3, iGeofenceHardwareMonitorCallback);
+        messageObtainMessage.arg1 = i;
+        this.mCallbacksHandler.sendMessage(messageObtainMessage);
         return true;
     }
 
@@ -661,10 +630,10 @@ public final class GeofenceHardwareImpl {
 
     private void reportGeofenceOperationStatus(int i, int i2, int i3) {
         acquireWakeLock();
-        Message obtainMessage = this.mGeofenceHandler.obtainMessage(i);
-        obtainMessage.arg1 = i2;
-        obtainMessage.arg2 = i3;
-        obtainMessage.sendToTarget();
+        Message messageObtainMessage = this.mGeofenceHandler.obtainMessage(i);
+        messageObtainMessage.arg1 = i2;
+        messageObtainMessage.arg2 = i3;
+        messageObtainMessage.sendToTarget();
     }
 
     public void reportGeofenceAddStatus(int i, int i2) {
@@ -737,22 +706,22 @@ public final class GeofenceHardwareImpl {
         @Override // android.os.IBinder.DeathRecipient
         public void binderDied() {
             if (this.mCallback != null) {
-                Message obtainMessage = GeofenceHardwareImpl.this.mGeofenceHandler.obtainMessage(6, this.mCallback);
-                obtainMessage.arg1 = this.mMonitoringType;
-                GeofenceHardwareImpl.this.mGeofenceHandler.sendMessage(obtainMessage);
+                Message messageObtainMessage = GeofenceHardwareImpl.this.mGeofenceHandler.obtainMessage(6, this.mCallback);
+                messageObtainMessage.arg1 = this.mMonitoringType;
+                GeofenceHardwareImpl.this.mGeofenceHandler.sendMessage(messageObtainMessage);
             } else if (this.mMonitorCallback != null) {
-                Message obtainMessage2 = GeofenceHardwareImpl.this.mCallbacksHandler.obtainMessage(4, this.mMonitorCallback);
-                obtainMessage2.arg1 = this.mMonitoringType;
-                GeofenceHardwareImpl.this.mCallbacksHandler.sendMessage(obtainMessage2);
+                Message messageObtainMessage2 = GeofenceHardwareImpl.this.mCallbacksHandler.obtainMessage(4, this.mMonitorCallback);
+                messageObtainMessage2.arg1 = this.mMonitoringType;
+                GeofenceHardwareImpl.this.mCallbacksHandler.sendMessage(messageObtainMessage2);
             }
             GeofenceHardwareImpl.this.mReaperHandler.sendMessage(GeofenceHardwareImpl.this.mReaperHandler.obtainMessage(3, this));
         }
 
         public int hashCode() {
             IGeofenceHardwareCallback iGeofenceHardwareCallback = this.mCallback;
-            int hashCode = (527 + (iGeofenceHardwareCallback != null ? iGeofenceHardwareCallback.asBinder().hashCode() : 0)) * 31;
+            int iHashCode = (527 + (iGeofenceHardwareCallback != null ? iGeofenceHardwareCallback.asBinder().hashCode() : 0)) * 31;
             IGeofenceHardwareMonitorCallback iGeofenceHardwareMonitorCallback = this.mMonitorCallback;
-            return ((hashCode + (iGeofenceHardwareMonitorCallback != null ? iGeofenceHardwareMonitorCallback.asBinder().hashCode() : 0)) * 31) + this.mMonitoringType;
+            return ((iHashCode + (iGeofenceHardwareMonitorCallback != null ? iGeofenceHardwareMonitorCallback.asBinder().hashCode() : 0)) * 31) + this.mMonitoringType;
         }
 
         public boolean equals(Object obj) {

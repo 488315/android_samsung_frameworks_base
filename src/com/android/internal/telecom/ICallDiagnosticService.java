@@ -106,9 +106,9 @@ public interface ICallDiagnosticService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ICallDiagnosticService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ICallDiagnosticService)) {
-                return (ICallDiagnosticService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ICallDiagnosticService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ICallDiagnosticService)) {
+                return (ICallDiagnosticService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -154,9 +154,9 @@ public interface ICallDiagnosticService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    ICallDiagnosticServiceAdapter asInterface = ICallDiagnosticServiceAdapter.Stub.asInterface(parcel.readStrongBinder());
+                    ICallDiagnosticServiceAdapter iCallDiagnosticServiceAdapterAsInterface = ICallDiagnosticServiceAdapter.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    setAdapter(asInterface);
+                    setAdapter(iCallDiagnosticServiceAdapterAsInterface);
                     return true;
                 case 2:
                     ParcelableCall parcelableCall = (ParcelableCall) parcel.readTypedObject(ParcelableCall.CREATOR);
@@ -174,22 +174,22 @@ public interface ICallDiagnosticService extends IInterface {
                     updateCallAudioState(callAudioState);
                     return true;
                 case 5:
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    removeDiagnosticCall(readString);
+                    removeDiagnosticCall(string);
                     return true;
                 case 6:
-                    String readString2 = parcel.readString();
-                    int readInt = parcel.readInt();
-                    int readInt2 = parcel.readInt();
+                    String string2 = parcel.readString();
+                    int i3 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    receiveDeviceToDeviceMessage(readString2, readInt, readInt2);
+                    receiveDeviceToDeviceMessage(string2, i3, i4);
                     return true;
                 case 7:
-                    String readString3 = parcel.readString();
+                    String string3 = parcel.readString();
                     CallQuality callQuality = (CallQuality) parcel.readTypedObject(CallQuality.CREATOR);
                     parcel.enforceNoDataAvail();
-                    callQualityChanged(readString3, callQuality);
+                    callQualityChanged(string3, callQuality);
                     return true;
                 case 8:
                     BluetoothCallQualityReport bluetoothCallQualityReport = (BluetoothCallQualityReport) parcel.readTypedObject(BluetoothCallQualityReport.CREATOR);
@@ -197,10 +197,10 @@ public interface ICallDiagnosticService extends IInterface {
                     receiveBluetoothCallQualityReport(bluetoothCallQualityReport);
                     return true;
                 case 9:
-                    String readString4 = parcel.readString();
+                    String string4 = parcel.readString();
                     DisconnectCause disconnectCause = (DisconnectCause) parcel.readTypedObject(DisconnectCause.CREATOR);
                     parcel.enforceNoDataAvail();
-                    notifyCallDisconnected(readString4, disconnectCause);
+                    notifyCallDisconnected(string4, disconnectCause);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -225,113 +225,113 @@ public interface ICallDiagnosticService extends IInterface {
 
             @Override // com.android.internal.telecom.ICallDiagnosticService
             public void setAdapter(ICallDiagnosticServiceAdapter iCallDiagnosticServiceAdapter) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICallDiagnosticService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iCallDiagnosticServiceAdapter);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICallDiagnosticService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iCallDiagnosticServiceAdapter);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.ICallDiagnosticService
             public void initializeDiagnosticCall(ParcelableCall parcelableCall) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICallDiagnosticService.DESCRIPTOR);
-                    obtain.writeTypedObject(parcelableCall, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICallDiagnosticService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(parcelableCall, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.ICallDiagnosticService
             public void updateCall(ParcelableCall parcelableCall) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICallDiagnosticService.DESCRIPTOR);
-                    obtain.writeTypedObject(parcelableCall, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICallDiagnosticService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(parcelableCall, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.ICallDiagnosticService
             public void updateCallAudioState(CallAudioState callAudioState) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICallDiagnosticService.DESCRIPTOR);
-                    obtain.writeTypedObject(callAudioState, 0);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICallDiagnosticService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(callAudioState, 0);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.ICallDiagnosticService
             public void removeDiagnosticCall(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICallDiagnosticService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICallDiagnosticService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.ICallDiagnosticService
             public void receiveDeviceToDeviceMessage(String str, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICallDiagnosticService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICallDiagnosticService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.ICallDiagnosticService
             public void callQualityChanged(String str, CallQuality callQuality) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICallDiagnosticService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(callQuality, 0);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICallDiagnosticService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(callQuality, 0);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.ICallDiagnosticService
             public void receiveBluetoothCallQualityReport(BluetoothCallQualityReport bluetoothCallQualityReport) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICallDiagnosticService.DESCRIPTOR);
-                    obtain.writeTypedObject(bluetoothCallQualityReport, 0);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICallDiagnosticService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(bluetoothCallQualityReport, 0);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.ICallDiagnosticService
             public void notifyCallDisconnected(String str, DisconnectCause disconnectCause) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICallDiagnosticService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(disconnectCause, 0);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICallDiagnosticService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(disconnectCause, 0);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

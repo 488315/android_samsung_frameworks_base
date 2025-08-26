@@ -1,5 +1,6 @@
 package com.android.systemui.qs;
 
+import android.content.res.Resources;
 import android.widget.ScrollView;
 import com.android.systemui.R;
 import com.android.systemui.plugins.qs.DetailAdapter;
@@ -10,7 +11,6 @@ import com.android.systemui.qs.pipeline.domain.interactor.CurrentTilesInteractor
 import java.util.function.Function;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class SecQSPanelControllerBase$$ExternalSyntheticLambda1 implements Function {
     public final /* synthetic */ SecQSDetailController f$0;
@@ -26,12 +26,12 @@ public final /* synthetic */ class SecQSPanelControllerBase$$ExternalSyntheticLa
         secQSDetailController.getClass();
         return new SQSTile.SCallback() { // from class: com.android.systemui.qs.SecQSDetailController$createTileCallback$1
             public final boolean needToSkip() {
-                return !Intrinsics.areEqual(secQSDetailController.currentRecord, SecQSPanelControllerBase.TileRecord.this);
+                return !Intrinsics.areEqual(secQSDetailController.currentRecord, tileRecord);
             }
 
             @Override // com.android.systemui.plugins.qs.SQSTile.SCallback
             public final void onScanStateChanged(final boolean z) {
-                SecQSPanelControllerBase.TileRecord.this.getClass();
+                tileRecord.getClass();
                 if (needToSkip()) {
                     return;
                 }
@@ -39,7 +39,7 @@ public final /* synthetic */ class SecQSPanelControllerBase$$ExternalSyntheticLa
                 secQSDetailController2.view.post(new Runnable() { // from class: com.android.systemui.qs.SecQSDetailController$createTileCallback$1$onScanStateChanged$1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SecQSDetailController secQSDetailController3 = SecQSDetailController.this;
+                        SecQSDetailController secQSDetailController3 = secQSDetailController2;
                         boolean z2 = z;
                         int i = SecQSDetailController.$r8$clinit;
                         if (secQSDetailController3.scanState == z2) {
@@ -60,7 +60,7 @@ public final /* synthetic */ class SecQSPanelControllerBase$$ExternalSyntheticLa
                 secQSDetailController2.view.post(new Runnable() { // from class: com.android.systemui.qs.SecQSDetailController$createTileCallback$1$onScrollToDetail$1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        ScrollView scrollView = (ScrollView) SecQSDetailController.this.view.findViewById(R.id.qs_detail_scroll);
+                        ScrollView scrollView = (ScrollView) secQSDetailController2.view.findViewById(R.id.qs_detail_scroll);
                         if (scrollView != null) {
                             scrollView.scrollTo(i, i2);
                         }
@@ -72,21 +72,21 @@ public final /* synthetic */ class SecQSPanelControllerBase$$ExternalSyntheticLa
             public final void onShowDetail(final boolean z) {
                 final SecQSDetailController secQSDetailController2 = secQSDetailController;
                 CurrentTilesInteractor currentTilesInteractor = secQSDetailController2.interactor;
-                final SecQSPanelControllerBase.TileRecord tileRecord2 = SecQSPanelControllerBase.TileRecord.this;
+                final SecQSPanelControllerBase.TileRecord tileRecord2 = tileRecord;
                 if (currentTilesInteractor.isLargeBarTile(tileRecord2.tile.getTileSpec()) && tileRecord2.tileView.getClass().getSimpleName().equals("NoLabelTileView")) {
                     return;
                 }
                 secQSDetailController2.view.post(new Runnable() { // from class: com.android.systemui.qs.SecQSDetailController$createTileCallback$1$onShowDetail$1
                     @Override // java.lang.Runnable
-                    public final void run() {
-                        SecQSDetailController.this.showDetail(z, tileRecord2);
+                    public final void run() throws Resources.NotFoundException {
+                        secQSDetailController2.showDetail(z, tileRecord2);
                     }
                 });
             }
 
             @Override // com.android.systemui.plugins.qs.QSTile.Callback
             public final void onStateChanged(QSTile.State state) {
-                SecQSPanelControllerBase.TileRecord.this.tileView.onStateChanged(state);
+                tileRecord.tileView.onStateChanged(state);
             }
 
             @Override // com.android.systemui.plugins.qs.SQSTile.SCallback
@@ -97,8 +97,8 @@ public final /* synthetic */ class SecQSPanelControllerBase$$ExternalSyntheticLa
                 final SecQSDetailController secQSDetailController2 = secQSDetailController;
                 secQSDetailController2.view.post(new Runnable() { // from class: com.android.systemui.qs.SecQSDetailController$createTileCallback$1$onToggleStateChanged$1
                     @Override // java.lang.Runnable
-                    public final void run() {
-                        SecQSDetailController secQSDetailController3 = SecQSDetailController.this;
+                    public final void run() throws Resources.NotFoundException {
+                        SecQSDetailController secQSDetailController3 = secQSDetailController2;
                         boolean z2 = z;
                         DetailAdapter detailAdapter = secQSDetailController3.detailAdapter;
                         boolean z3 = false;
@@ -117,11 +117,11 @@ public final /* synthetic */ class SecQSPanelControllerBase$$ExternalSyntheticLa
                 }
                 final SecQSDetailController secQSDetailController2 = secQSDetailController;
                 SecQSDetail secQSDetail = secQSDetailController2.view;
-                final SecQSPanelControllerBase.TileRecord tileRecord2 = SecQSPanelControllerBase.TileRecord.this;
+                final SecQSPanelControllerBase.TileRecord tileRecord2 = tileRecord;
                 secQSDetail.post(new Runnable() { // from class: com.android.systemui.qs.SecQSDetailController$createTileCallback$1$onUpdateDetail$1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SecQSDetailController.access$handleUpdatingDetail(SecQSDetailController.this, tileRecord2.mDetailAdapter);
+                        SecQSDetailController.access$handleUpdatingDetail(secQSDetailController2, tileRecord2.mDetailAdapter);
                     }
                 });
             }

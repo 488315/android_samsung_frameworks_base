@@ -9,12 +9,10 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class OverlayListView extends ListView {
     public final List mOverlayObjects;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class OverlayObject {
         public final BitmapDrawable mBitmap;
         public float mCurrentAlpha = 1.0f;

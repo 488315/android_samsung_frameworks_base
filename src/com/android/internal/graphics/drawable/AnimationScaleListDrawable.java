@@ -35,9 +35,9 @@ public class AnimationScaleListDrawable extends DrawableContainer implements Ani
 
     @Override // android.graphics.drawable.Drawable
     public void inflate(Resources resources, XmlPullParser xmlPullParser, AttributeSet attributeSet, Resources.Theme theme) throws XmlPullParserException, IOException {
-        TypedArray obtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.AnimationScaleListDrawable);
+        TypedArray typedArrayObtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.AnimationScaleListDrawable);
         updateDensity(resources);
-        obtainAttributes.recycle();
+        typedArrayObtainAttributes.recycle();
         inflateChildElements(resources, xmlPullParser, attributeSet, theme);
         onStateChange(getState());
     }
@@ -56,9 +56,9 @@ public class AnimationScaleListDrawable extends DrawableContainer implements Ani
                 return;
             }
             if (next2 == 2 && depth2 <= depth && xmlPullParser.getName().equals(ImsConfig.EXTRA_CHANGED_ITEM)) {
-                TypedArray obtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.AnimationScaleListDrawableItem);
-                Drawable drawable = obtainAttributes.getDrawable(0);
-                obtainAttributes.recycle();
+                TypedArray typedArrayObtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.AnimationScaleListDrawableItem);
+                Drawable drawable = typedArrayObtainAttributes.getDrawable(0);
+                typedArrayObtainAttributes.recycle();
                 if (drawable == null) {
                     do {
                         next = xmlPullParser.next();
@@ -138,15 +138,16 @@ public class AnimationScaleListDrawable extends DrawableContainer implements Ani
         }
 
         int addDrawable(Drawable drawable) {
-            int addChild = addChild(drawable);
+            int iAddChild = addChild(drawable);
             if (drawable instanceof Animatable) {
-                this.mAnimatableDrawableIndex = addChild;
-                return addChild;
+                this.mAnimatableDrawableIndex = iAddChild;
+                return iAddChild;
             }
-            this.mStaticDrawableIndex = addChild;
-            return addChild;
+            this.mStaticDrawableIndex = iAddChild;
+            return iAddChild;
         }
 
+        /* JADX WARN: Multi-variable type inference failed */
         @Override // android.graphics.drawable.Drawable.ConstantState
         public Drawable newDrawable() {
             return new AnimationScaleListDrawable(this, null);

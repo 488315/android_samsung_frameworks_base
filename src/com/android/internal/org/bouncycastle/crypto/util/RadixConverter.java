@@ -14,11 +14,11 @@ public class RadixConverter {
 
     public RadixConverter(int i, int i2) {
         this.radix = i;
-        int floor = (int) Math.floor(LOG_LONG_MAX_VALUE / Math.log(i));
-        this.digitsGroupLength = floor;
-        BigInteger pow = BigInteger.valueOf(i).pow(floor);
-        this.digitsGroupSpaceSize = pow;
-        this.digitsGroupSpacePowers = precomputeDigitsGroupPowers(i2, pow);
+        int iFloor = (int) Math.floor(LOG_LONG_MAX_VALUE / Math.log(i));
+        this.digitsGroupLength = iFloor;
+        BigInteger bigIntegerPow = BigInteger.valueOf(i).pow(iFloor);
+        this.digitsGroupSpaceSize = bigIntegerPow;
+        this.digitsGroupSpacePowers = precomputeDigitsGroupPowers(i2, bigIntegerPow);
     }
 
     public RadixConverter(int i) {
@@ -33,18 +33,18 @@ public class RadixConverter {
         if (bigInteger.signum() < 0) {
             throw new IllegalArgumentException();
         }
-        int i2 = i - 1;
+        int encoding = i - 1;
         do {
             if (bigInteger.equals(BigInteger.ZERO)) {
-                sArr[i2] = 0;
-                i2--;
+                sArr[encoding] = 0;
+                encoding--;
             } else {
-                BigInteger[] divideAndRemainder = bigInteger.divideAndRemainder(this.digitsGroupSpaceSize);
-                BigInteger bigInteger2 = divideAndRemainder[0];
-                i2 = toEncoding(divideAndRemainder[1].longValue(), i2, sArr);
+                BigInteger[] bigIntegerArrDivideAndRemainder = bigInteger.divideAndRemainder(this.digitsGroupSpaceSize);
+                BigInteger bigInteger2 = bigIntegerArrDivideAndRemainder[0];
+                encoding = toEncoding(bigIntegerArrDivideAndRemainder[1].longValue(), encoding, sArr);
                 bigInteger = bigInteger2;
             }
-        } while (i2 >= 0);
+        } while (encoding >= 0);
         if (bigInteger.signum() != 0) {
             throw new IllegalArgumentException();
         }
@@ -71,31 +71,31 @@ public class RadixConverter {
     }
 
     public BigInteger fromEncoding(short[] sArr) {
-        BigInteger bigInteger = BigIntegers.ONE;
+        BigInteger bigIntegerMultiply = BigIntegers.ONE;
         int length = sArr.length;
         int i = length - this.digitsGroupLength;
-        BigInteger bigInteger2 = null;
+        BigInteger bigIntegerAdd = null;
         int i2 = 0;
         while (true) {
             int i3 = this.digitsGroupLength;
             if (i <= (-i3)) {
-                return bigInteger2;
+                return bigIntegerAdd;
             }
             if (i < 0) {
                 i3 += i;
                 i = 0;
             }
-            BigInteger valueOf = BigInteger.valueOf(fromEncoding(i, Math.min(i3 + i, length), sArr));
+            BigInteger bigIntegerValueOf = BigInteger.valueOf(fromEncoding(i, Math.min(i3 + i, length), sArr));
             if (i2 == 0) {
-                bigInteger2 = valueOf;
+                bigIntegerAdd = bigIntegerValueOf;
             } else {
                 BigInteger[] bigIntegerArr = this.digitsGroupSpacePowers;
                 if (i2 <= bigIntegerArr.length) {
-                    bigInteger = bigIntegerArr[i2 - 1];
+                    bigIntegerMultiply = bigIntegerArr[i2 - 1];
                 } else {
-                    bigInteger = bigInteger.multiply(this.digitsGroupSpaceSize);
+                    bigIntegerMultiply = bigIntegerMultiply.multiply(this.digitsGroupSpaceSize);
                 }
-                bigInteger2 = bigInteger2.add(valueOf.multiply(bigInteger));
+                bigIntegerAdd = bigIntegerAdd.add(bigIntegerValueOf.multiply(bigIntegerMultiply));
             }
             i2++;
             i -= this.digitsGroupLength;
@@ -117,10 +117,10 @@ public class RadixConverter {
 
     private BigInteger[] precomputeDigitsGroupPowers(int i, BigInteger bigInteger) {
         BigInteger[] bigIntegerArr = new BigInteger[i];
-        BigInteger bigInteger2 = bigInteger;
+        BigInteger bigIntegerMultiply = bigInteger;
         for (int i2 = 0; i2 < i; i2++) {
-            bigIntegerArr[i2] = bigInteger2;
-            bigInteger2 = bigInteger2.multiply(bigInteger);
+            bigIntegerArr[i2] = bigIntegerMultiply;
+            bigIntegerMultiply = bigIntegerMultiply.multiply(bigInteger);
         }
         return bigIntegerArr;
     }

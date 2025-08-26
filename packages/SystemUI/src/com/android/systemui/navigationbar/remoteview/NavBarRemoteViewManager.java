@@ -23,7 +23,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlin.text.StringsKt__StringsJVMKt;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class NavBarRemoteViewManager {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -40,7 +39,6 @@ public final class NavBarRemoteViewManager {
     public boolean showInGestureMode;
     public boolean useAltBack;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -134,96 +132,71 @@ public final class NavBarRemoteViewManager {
         return false;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0047 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:19:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x0048 A[ORIG_RETURN, RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0026  */
+    /* JADX WARN: Removed duplicated region for block: B:10:0x0023  */
+    /* JADX WARN: Removed duplicated region for block: B:19:0x0043  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final boolean isSetMultimodalButton() {
-        /*
-            r4 = this;
-            java.util.PriorityQueue r0 = r4.leftViewList
-            java.lang.Object r0 = r0.peek()
-            com.android.systemui.navigationbar.remoteview.NavBarRemoteView r0 = (com.android.systemui.navigationbar.remoteview.NavBarRemoteView) r0
-            java.lang.String r1 = "honeyboard"
-            r2 = 0
-            r3 = 0
-            if (r0 == 0) goto L23
-            java.lang.String r0 = r0.requestClass
-            if (r0 == 0) goto L1b
-            boolean r0 = kotlin.text.StringsKt__StringsKt.contains(r0, r1, r3)
-            java.lang.Boolean r0 = java.lang.Boolean.valueOf(r0)
-            goto L1c
-        L1b:
-            r0 = r2
-        L1c:
-            if (r0 == 0) goto L23
-            boolean r0 = r0.booleanValue()
-            goto L24
-        L23:
-            r0 = r3
-        L24:
-            if (r0 != 0) goto L48
-            java.util.PriorityQueue r4 = r4.rightViewList
-            java.lang.Object r4 = r4.peek()
-            com.android.systemui.navigationbar.remoteview.NavBarRemoteView r4 = (com.android.systemui.navigationbar.remoteview.NavBarRemoteView) r4
-            if (r4 == 0) goto L43
-            java.lang.String r4 = r4.requestClass
-            if (r4 == 0) goto L3c
-            boolean r4 = kotlin.text.StringsKt__StringsKt.contains(r4, r1, r3)
-            java.lang.Boolean r2 = java.lang.Boolean.valueOf(r4)
-        L3c:
-            if (r2 == 0) goto L43
-            boolean r4 = r2.booleanValue()
-            goto L44
-        L43:
-            r4 = r3
-        L44:
-            if (r4 == 0) goto L47
-            goto L48
-        L47:
-            return r3
-        L48:
-            r4 = 1
-            return r4
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.remoteview.NavBarRemoteViewManager.isSetMultimodalButton():boolean");
+        boolean zBooleanValue;
+        boolean zBooleanValue2;
+        NavBarRemoteView navBarRemoteView = (NavBarRemoteView) this.leftViewList.peek();
+        if (navBarRemoteView == null) {
+            zBooleanValue = false;
+        } else {
+            String str = navBarRemoteView.requestClass;
+            Boolean boolValueOf = str != null ? Boolean.valueOf(StringsKt__StringsKt.contains(str, "honeyboard", false)) : null;
+            if (boolValueOf != null) {
+                zBooleanValue = boolValueOf.booleanValue();
+            }
+        }
+        if (zBooleanValue) {
+            return true;
+        }
+        NavBarRemoteView navBarRemoteView2 = (NavBarRemoteView) this.rightViewList.peek();
+        if (navBarRemoteView2 == null) {
+            zBooleanValue2 = false;
+        } else {
+            String str2 = navBarRemoteView2.requestClass;
+            Boolean boolValueOf2 = str2 != null ? Boolean.valueOf(StringsKt__StringsKt.contains(str2, "honeyboard", false)) : null;
+            if (boolValueOf2 != null) {
+                zBooleanValue2 = boolValueOf2.booleanValue();
+            }
+        }
+        return zBooleanValue2;
     }
 
     public final void removeRemoteView(int i, String str) {
-        Object obj;
-        Object obj2 = null;
+        Object next;
+        Object obj = null;
         if (str != null && StringsKt__StringsKt.contains(str, "honeyboard", false)) {
             PriorityQueue priorityQueue = this.leftViewList;
             Iterator it = priorityQueue.iterator();
             while (true) {
                 if (!it.hasNext()) {
-                    obj = null;
+                    next = null;
                     break;
                 } else {
-                    obj = it.next();
-                    if (str.equals(((NavBarRemoteView) obj).requestClass)) {
+                    next = it.next();
+                    if (str.equals(((NavBarRemoteView) next).requestClass)) {
                         break;
                     }
                 }
             }
-            priorityQueue.remove(obj);
+            priorityQueue.remove(next);
             PriorityQueue priorityQueue2 = this.rightViewList;
             Iterator it2 = priorityQueue2.iterator();
             while (true) {
                 if (!it2.hasNext()) {
                     break;
                 }
-                Object next = it2.next();
-                if (str.equals(((NavBarRemoteView) next).requestClass)) {
-                    obj2 = next;
+                Object next2 = it2.next();
+                if (str.equals(((NavBarRemoteView) next2).requestClass)) {
+                    obj = next2;
                     break;
                 }
             }
-            priorityQueue2.remove(obj2);
+            priorityQueue2.remove(obj);
             this.showInGestureMode = false;
             return;
         }
@@ -234,13 +207,13 @@ public final class NavBarRemoteViewManager {
                 if (!it3.hasNext()) {
                     break;
                 }
-                Object next2 = it3.next();
-                if (Intrinsics.areEqual(str, ((NavBarRemoteView) next2).requestClass)) {
-                    obj2 = next2;
+                Object next3 = it3.next();
+                if (Intrinsics.areEqual(str, ((NavBarRemoteView) next3).requestClass)) {
+                    obj = next3;
                     break;
                 }
             }
-            priorityQueue3.remove(obj2);
+            priorityQueue3.remove(obj);
             return;
         }
         if (i == 1) {
@@ -250,16 +223,20 @@ public final class NavBarRemoteViewManager {
                 if (!it4.hasNext()) {
                     break;
                 }
-                Object next3 = it4.next();
-                if (Intrinsics.areEqual(str, ((NavBarRemoteView) next3).requestClass)) {
-                    obj2 = next3;
+                Object next4 = it4.next();
+                if (Intrinsics.areEqual(str, ((NavBarRemoteView) next4).requestClass)) {
+                    obj = next4;
                     break;
                 }
             }
-            priorityQueue4.remove(obj2);
+            priorityQueue4.remove(obj);
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:26:0x0057  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void setRemoteView(NavBarStoreAction.RemoteViewShortcut remoteViewShortcut, int i) {
         RemoteViews remoteViews = remoteViewShortcut.remoteViews;
         int i2 = remoteViewShortcut.position;
@@ -280,11 +257,8 @@ public final class NavBarRemoteViewManager {
             if (BasicRune.NAVBAR_MULTI_MODAL_ICON_LARGE_COVER && i == 1) {
                 if (!this.settingsHelper.isNavBarButtonOrderDefault()) {
                     NavBarStateManagerImpl navBarStateManagerImpl = (NavBarStateManagerImpl) navStateManager;
-                    if ((navBarStateManagerImpl.states.rotation == 0 && !NavBarStateManager.isSideAndBottomGestureMode$default(navStateManager)) || (navBarStateManagerImpl.states.rotation != 0 && !navBarStateManagerImpl.isGestureMode())) {
-                        i2 = 1;
-                    }
+                    i2 = ((navBarStateManagerImpl.states.rotation != 0 || NavBarStateManager.isSideAndBottomGestureMode$default(navStateManager)) && (navBarStateManagerImpl.states.rotation == 0 || navBarStateManagerImpl.isGestureMode())) ? 0 : 1;
                 }
-                i2 = 0;
             }
             this.showInGestureMode = true;
             this.adaptivePosition = i2;

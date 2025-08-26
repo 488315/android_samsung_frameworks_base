@@ -9,7 +9,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function3;
 import kotlin.jvm.functions.Function4;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public interface LazyListScope {
     static void item$default(LazyListScope lazyListScope, final Function3 function3) {
@@ -24,7 +23,7 @@ public interface LazyListScope {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj2) {
+            public final Object mo781invoke(Object obj2) {
                 ((Number) obj2).intValue();
                 return obj;
             }
@@ -38,16 +37,16 @@ public interface LazyListScope {
                 LazyItemScope lazyItemScope = (LazyItemScope) obj2;
                 ((Number) obj3).intValue();
                 Composer composer = (Composer) obj4;
-                int intValue = ((Number) obj5).intValue();
-                if ((intValue & 6) == 0) {
-                    intValue |= ((ComposerImpl) composer).changed(lazyItemScope) ? 4 : 2;
+                int iIntValue = ((Number) obj5).intValue();
+                if ((iIntValue & 6) == 0) {
+                    iIntValue |= ((ComposerImpl) composer).changed(lazyItemScope) ? 4 : 2;
                 }
                 ComposerImpl composerImpl = (ComposerImpl) composer;
-                if (composerImpl.shouldExecute(intValue & 1, (intValue & 131) != 130)) {
+                if (composerImpl.shouldExecute(iIntValue & 1, (iIntValue & 131) != 130)) {
                     if (ComposerKt.isTraceInProgress()) {
                         ComposerKt.traceEventStart("androidx.compose.foundation.lazy.LazyListIntervalContent.item.<anonymous> (LazyListIntervalContent.kt:59)");
                     }
-                    Function3.this.invoke(lazyItemScope, composerImpl, Integer.valueOf(intValue & 14));
+                    function3.invoke(lazyItemScope, composerImpl, Integer.valueOf(iIntValue & 14));
                     if (ComposerKt.isTraceInProgress()) {
                         ComposerKt.traceEventEnd();
                     }

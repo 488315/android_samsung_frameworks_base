@@ -171,14 +171,14 @@ public class PowerProfile {
     }
 
     private static void readPowerValuesFromXml(XmlPullParser xmlPullParser, Resources resources) {
-        double d;
+        double dDoubleValue;
         ArrayList arrayList = new ArrayList();
         try {
             try {
                 try {
                     XmlUtils.beginDocument(xmlPullParser, "device");
                     boolean z = false;
-                    String str = null;
+                    String attributeValue = null;
                     while (true) {
                         XmlUtils.nextElement(xmlPullParser);
                         String name = xmlPullParser.getName();
@@ -186,44 +186,41 @@ public class PowerProfile {
                             break;
                         }
                         if (z && !name.equals("value")) {
-                            sPowerArrayMap.put(str, (Double[]) arrayList.toArray(new Double[arrayList.size()]));
+                            sPowerArrayMap.put(attributeValue, (Double[]) arrayList.toArray(new Double[arrayList.size()]));
                             z = false;
                         }
                         if (name.equals(TAG_ARRAY)) {
                             arrayList.clear();
-                            str = xmlPullParser.getAttributeValue(null, "name");
+                            attributeValue = xmlPullParser.getAttributeValue(null, "name");
                             z = true;
-                        } else {
-                            if (!name.equals("item") && !name.equals("value")) {
-                                if (name.equals("modem")) {
-                                    sModemPowerProfile.parseFromXml(xmlPullParser);
-                                }
-                            }
-                            String attributeValue = !z ? xmlPullParser.getAttributeValue(null, "name") : null;
+                        } else if (name.equals("item") || name.equals("value")) {
+                            String attributeValue2 = !z ? xmlPullParser.getAttributeValue(null, "name") : null;
                             if (xmlPullParser.next() == 4) {
                                 try {
-                                    d = Double.valueOf(xmlPullParser.getText()).doubleValue();
+                                    dDoubleValue = Double.valueOf(xmlPullParser.getText()).doubleValue();
                                 } catch (NumberFormatException unused) {
-                                    d = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
+                                    dDoubleValue = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
                                 }
                                 if (name.equals("item")) {
-                                    sPowerItemMap.put(attributeValue, Double.valueOf(d));
+                                    sPowerItemMap.put(attributeValue2, Double.valueOf(dDoubleValue));
                                 } else if (z) {
-                                    arrayList.add(Double.valueOf(d));
+                                    arrayList.add(Double.valueOf(dDoubleValue));
                                 }
                             }
+                        } else if (name.equals("modem")) {
+                            sModemPowerProfile.parseFromXml(xmlPullParser);
                         }
                     }
                     if (z) {
-                        sPowerArrayMap.put(str, (Double[]) arrayList.toArray(new Double[arrayList.size()]));
+                        sPowerArrayMap.put(attributeValue, (Double[]) arrayList.toArray(new Double[arrayList.size()]));
                     }
                     if (resources != null) {
                         getDefaultValuesFromConfig(resources);
                     }
-                } catch (IOException e) {
+                } catch (XmlPullParserException e) {
                     throw new RuntimeException(e);
                 }
-            } catch (XmlPullParserException e2) {
+            } catch (IOException e2) {
                 throw new RuntimeException(e2);
             }
         } finally {
@@ -239,88 +236,88 @@ public class PowerProfile {
         String[] strArr = {POWER_BLUETOOTH_CONTROLLER_IDLE, POWER_BLUETOOTH_CONTROLLER_RX, POWER_BLUETOOTH_CONTROLLER_TX, POWER_BLUETOOTH_CONTROLLER_OPERATING_VOLTAGE};
         for (int i = 0; i < 4; i++) {
             String str = strArr[i];
-            HashMap<String, Double> hashMap = sPowerItemMap;
-            if ((!hashMap.containsKey(str) || hashMap.get(str).doubleValue() <= SContextConstants.ENVIRONMENT_VALUE_UNKNOWN) && (integer = resources.getInteger(iArr[i])) > 0) {
-                hashMap.put(str, Double.valueOf(integer));
+            HashMap<String, Double> map = sPowerItemMap;
+            if ((!map.containsKey(str) || map.get(str).doubleValue() <= SContextConstants.ENVIRONMENT_VALUE_UNKNOWN) && (integer = resources.getInteger(iArr[i])) > 0) {
+                map.put(str, Double.valueOf(integer));
             }
         }
     }
 
     private void initCpuClusters() {
-        HashMap<String, Double[]> hashMap = sPowerArrayMap;
-        if (hashMap.containsKey(CPU_PER_CLUSTER_CORE_COUNT)) {
-            Double[] dArr = hashMap.get(CPU_PER_CLUSTER_CORE_COUNT);
+        HashMap<String, Double[]> map = sPowerArrayMap;
+        if (map.containsKey(CPU_PER_CLUSTER_CORE_COUNT)) {
+            Double[] dArr = map.get(CPU_PER_CLUSTER_CORE_COUNT);
             this.mCpuClusters = new CpuClusterKey[dArr.length];
             for (int i = 0; i < dArr.length; i++) {
-                int round = (int) Math.round(dArr[i].doubleValue());
-                this.mCpuClusters[i] = new CpuClusterKey(CPU_CORE_SPEED_PREFIX + i, CPU_CLUSTER_POWER_COUNT + i, CPU_CORE_POWER_PREFIX + i, round);
+                int iRound = (int) Math.round(dArr[i].doubleValue());
+                this.mCpuClusters[i] = new CpuClusterKey(CPU_CORE_SPEED_PREFIX + i, CPU_CLUSTER_POWER_COUNT + i, CPU_CORE_POWER_PREFIX + i, iRound);
             }
             return;
         }
         this.mCpuClusters = new CpuClusterKey[1];
-        HashMap<String, Double> hashMap2 = sPowerItemMap;
-        this.mCpuClusters[0] = new CpuClusterKey("cpu.core_speeds.cluster0", "cpu.cluster_power.cluster0", "cpu.core_power.cluster0", hashMap2.containsKey(CPU_PER_CLUSTER_CORE_COUNT) ? (int) Math.round(hashMap2.get(CPU_PER_CLUSTER_CORE_COUNT).doubleValue()) : 1);
+        HashMap<String, Double> map2 = sPowerItemMap;
+        this.mCpuClusters[0] = new CpuClusterKey("cpu.core_speeds.cluster0", "cpu.cluster_power.cluster0", "cpu.core_power.cluster0", map2.containsKey(CPU_PER_CLUSTER_CORE_COUNT) ? (int) Math.round(map2.get(CPU_PER_CLUSTER_CORE_COUNT).doubleValue()) : 1);
     }
 
     private void initCpuScalingPolicies() {
         double[] dArr;
         double[] dArr2;
-        int i = 0;
+        int iMax = 0;
         for (String str : sPowerItemMap.keySet()) {
             if (str.startsWith(CPU_SCALING_POLICY_POWER_POLICY)) {
-                i = Math.max(i, Integer.parseInt(str.substring(31)) + 1);
+                iMax = Math.max(iMax, Integer.parseInt(str.substring(31)) + 1);
             }
         }
         for (String str2 : sPowerArrayMap.keySet()) {
             if (str2.startsWith(CPU_SCALING_STEP_POWER_POLICY)) {
-                i = Math.max(i, Integer.parseInt(str2.substring(29)) + 1);
+                iMax = Math.max(iMax, Integer.parseInt(str2.substring(29)) + 1);
             }
         }
-        if (i > 0) {
-            this.mCpuScalingPolicies = new SparseArray<>(i);
-            for (int i2 = 0; i2 < i; i2++) {
-                Double d = sPowerItemMap.get(CPU_SCALING_POLICY_POWER_POLICY + i2);
-                Double[] dArr3 = sPowerArrayMap.get(CPU_SCALING_STEP_POWER_POLICY + i2);
+        if (iMax > 0) {
+            this.mCpuScalingPolicies = new SparseArray<>(iMax);
+            for (int i = 0; i < iMax; i++) {
+                Double d = sPowerItemMap.get(CPU_SCALING_POLICY_POWER_POLICY + i);
+                Double[] dArr3 = sPowerArrayMap.get(CPU_SCALING_STEP_POWER_POLICY + i);
                 if (d != null || dArr3 != null) {
                     if (dArr3 != null) {
                         dArr2 = new double[dArr3.length];
-                        for (int i3 = 0; i3 < dArr3.length; i3++) {
-                            dArr2[i3] = dArr3[i3].doubleValue();
+                        for (int i2 = 0; i2 < dArr3.length; i2++) {
+                            dArr2[i2] = dArr3[i2].doubleValue();
                         }
                     } else {
                         dArr2 = new double[0];
                     }
-                    this.mCpuScalingPolicies.put(i2, new CpuScalingPolicyPower(d != null ? d.doubleValue() : 0.0d, dArr2));
+                    this.mCpuScalingPolicies.put(i, new CpuScalingPolicyPower(d != null ? d.doubleValue() : 0.0d, dArr2));
                 }
             }
             return;
         }
         CpuClusterKey[] cpuClusterKeyArr = this.mCpuClusters;
         int length = cpuClusterKeyArr.length;
+        int i3 = 0;
         int i4 = 0;
-        int i5 = 0;
-        while (i4 < length) {
-            int i6 = i5 + 1;
-            i5 += cpuClusterKeyArr[i4].numCpus;
-            i4++;
-            i = i6;
+        while (i3 < length) {
+            int i5 = i4 + 1;
+            i4 += cpuClusterKeyArr[i3].numCpus;
+            i3++;
+            iMax = i5;
         }
-        if (i > 0) {
-            this.mCpuScalingPolicies = new SparseArray<>(i);
-            int i7 = 0;
+        if (iMax > 0) {
+            this.mCpuScalingPolicies = new SparseArray<>(iMax);
+            int i6 = 0;
             for (CpuClusterKey cpuClusterKey : this.mCpuClusters) {
                 double averagePower = getAveragePower(cpuClusterKey.clusterPowerKey);
                 int numElements = getNumElements(cpuClusterKey.corePowerKey);
                 if (numElements != 0) {
                     dArr = new double[numElements];
-                    for (int i8 = 0; i8 < numElements; i8++) {
-                        dArr[i8] = getAveragePower(cpuClusterKey.corePowerKey, i8);
+                    for (int i7 = 0; i7 < numElements; i7++) {
+                        dArr[i7] = getAveragePower(cpuClusterKey.corePowerKey, i7);
                     }
                 } else {
                     dArr = new double[1];
                 }
-                this.mCpuScalingPolicies.put(i7, new CpuScalingPolicyPower(averagePower, dArr));
-                i7 += cpuClusterKey.numCpus;
+                this.mCpuScalingPolicies.put(i6, new CpuScalingPolicyPower(averagePower, dArr));
+                i6 += cpuClusterKey.numCpus;
             }
             return;
         }
@@ -333,10 +330,10 @@ public class PowerProfile {
         boolean z = true;
         boolean z2 = false;
         for (int size = this.mCpuScalingPolicies.size() - 1; size >= 0; size--) {
-            int keyAt = this.mCpuScalingPolicies.keyAt(size);
-            CpuScalingPolicyPower valueAt = this.mCpuScalingPolicies.valueAt(size);
-            valueAt.powerBrackets = new int[valueAt.stepPower.length];
-            if (sPowerArrayMap.get(CPU_POWER_BRACKETS_PREFIX + keyAt) != null) {
+            int iKeyAt = this.mCpuScalingPolicies.keyAt(size);
+            CpuScalingPolicyPower cpuScalingPolicyPowerValueAt = this.mCpuScalingPolicies.valueAt(size);
+            cpuScalingPolicyPowerValueAt.powerBrackets = new int[cpuScalingPolicyPowerValueAt.stepPower.length];
+            if (sPowerArrayMap.get(CPU_POWER_BRACKETS_PREFIX + iKeyAt) != null) {
                 z2 = true;
             } else {
                 z = false;
@@ -351,17 +348,17 @@ public class PowerProfile {
         }
         this.mCpuPowerBracketCount = 0;
         for (int size2 = this.mCpuScalingPolicies.size() - 1; size2 >= 0; size2--) {
-            int keyAt2 = this.mCpuScalingPolicies.keyAt(size2);
-            CpuScalingPolicyPower valueAt2 = this.mCpuScalingPolicies.valueAt(size2);
-            Double[] dArr = sPowerArrayMap.get(CPU_POWER_BRACKETS_PREFIX + keyAt2);
-            if (dArr.length != valueAt2.powerBrackets.length) {
-                throw new RuntimeException("Wrong number of items in cpu.power_brackets.policy" + keyAt2 + ", expected: " + valueAt2.powerBrackets.length);
+            int iKeyAt2 = this.mCpuScalingPolicies.keyAt(size2);
+            CpuScalingPolicyPower cpuScalingPolicyPowerValueAt2 = this.mCpuScalingPolicies.valueAt(size2);
+            Double[] dArr = sPowerArrayMap.get(CPU_POWER_BRACKETS_PREFIX + iKeyAt2);
+            if (dArr.length != cpuScalingPolicyPowerValueAt2.powerBrackets.length) {
+                throw new RuntimeException("Wrong number of items in cpu.power_brackets.policy" + iKeyAt2 + ", expected: " + cpuScalingPolicyPowerValueAt2.powerBrackets.length);
             }
             for (int i = 0; i < dArr.length; i++) {
-                int round = (int) Math.round(dArr[i].doubleValue());
-                valueAt2.powerBrackets[i] = round;
-                if (round > this.mCpuPowerBracketCount) {
-                    this.mCpuPowerBracketCount = round;
+                int iRound = (int) Math.round(dArr[i].doubleValue());
+                cpuScalingPolicyPowerValueAt2.powerBrackets[i] = iRound;
+                if (iRound > this.mCpuPowerBracketCount) {
+                    this.mCpuPowerBracketCount = iRound;
                 }
             }
         }
@@ -429,9 +426,9 @@ public class PowerProfile {
         if (i >= cpuClusterKeyArr.length) {
             return 0;
         }
-        HashMap<String, Double[]> hashMap = sPowerArrayMap;
-        if (hashMap.containsKey(cpuClusterKeyArr[i].freqKey)) {
-            return hashMap.get(this.mCpuClusters[i].freqKey).length;
+        HashMap<String, Double[]> map = sPowerArrayMap;
+        if (map.containsKey(cpuClusterKeyArr[i].freqKey)) {
+            return map.get(this.mCpuClusters[i].freqKey).length;
         }
         return 1;
     }
@@ -476,28 +473,28 @@ public class PowerProfile {
                 this.mNumDisplays++;
             }
         }
-        HashMap<String, Double> hashMap = sPowerItemMap;
-        Double d = hashMap.get(POWER_AMBIENT_DISPLAY);
+        HashMap<String, Double> map = sPowerItemMap;
+        Double d = map.get(POWER_AMBIENT_DISPLAY);
         if (d == null || this.mNumDisplays != 0) {
             z = false;
         } else {
             String ordinalPowerType = getOrdinalPowerType(POWER_GROUP_DISPLAY_AMBIENT, 0);
             Slog.w(TAG, "ambient.on is deprecated! Use " + ordinalPowerType + " instead.");
-            hashMap.put(ordinalPowerType, d);
+            map.put(ordinalPowerType, d);
             z = true;
         }
-        Double d2 = hashMap.get(POWER_SCREEN_ON);
+        Double d2 = map.get(POWER_SCREEN_ON);
         if (d2 != null && this.mNumDisplays == 0) {
             String ordinalPowerType2 = getOrdinalPowerType(POWER_GROUP_DISPLAY_SCREEN_ON, 0);
             Slog.w(TAG, "screen.on is deprecated! Use " + ordinalPowerType2 + " instead.");
-            hashMap.put(ordinalPowerType2, d2);
+            map.put(ordinalPowerType2, d2);
             z = true;
         }
-        Double d3 = hashMap.get(POWER_SCREEN_FULL);
+        Double d3 = map.get(POWER_SCREEN_FULL);
         if (d3 != null && this.mNumDisplays == 0) {
             String ordinalPowerType3 = getOrdinalPowerType(POWER_GROUP_DISPLAY_SCREEN_FULL, 0);
             Slog.w(TAG, "screen.full is deprecated! Use " + ordinalPowerType3 + " instead.");
-            hashMap.put(ordinalPowerType3, d3);
+            map.put(ordinalPowerType3, d3);
             z = true;
         }
         if (z) {
@@ -531,20 +528,20 @@ public class PowerProfile {
         if (sPowerItemMap.containsKey(str)) {
             return 1;
         }
-        HashMap<String, Double[]> hashMap = sPowerArrayMap;
-        if (hashMap.containsKey(str)) {
-            return hashMap.get(str).length;
+        HashMap<String, Double[]> map = sPowerArrayMap;
+        if (map.containsKey(str)) {
+            return map.get(str).length;
         }
         return 0;
     }
 
     public double getAveragePowerOrDefault(String str, double d) {
-        HashMap<String, Double> hashMap = sPowerItemMap;
-        if (hashMap.containsKey(str)) {
-            return hashMap.get(str).doubleValue();
+        HashMap<String, Double> map = sPowerItemMap;
+        if (map.containsKey(str)) {
+            return map.get(str).doubleValue();
         }
-        HashMap<String, Double[]> hashMap2 = sPowerArrayMap;
-        return hashMap2.containsKey(str) ? hashMap2.get(str)[0].doubleValue() : d;
+        HashMap<String, Double[]> map2 = sPowerArrayMap;
+        return map2.containsKey(str) ? map2.get(str)[0].doubleValue() : d;
     }
 
     private boolean isIgnoreType(String str) {
@@ -568,13 +565,13 @@ public class PowerProfile {
         if (isIgnoreType(str)) {
             return SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
         }
-        HashMap<String, Double> hashMap = sPowerItemMap;
-        if (hashMap.containsKey(str)) {
-            return hashMap.get(str).doubleValue();
+        HashMap<String, Double> map = sPowerItemMap;
+        if (map.containsKey(str)) {
+            return map.get(str).doubleValue();
         }
-        HashMap<String, Double[]> hashMap2 = sPowerArrayMap;
-        if (hashMap2.containsKey(str)) {
-            Double[] dArr = hashMap2.get(str);
+        HashMap<String, Double[]> map2 = sPowerArrayMap;
+        if (map2.containsKey(str)) {
+            Double[] dArr = map2.get(str);
             if (dArr.length > i && i >= 0) {
                 return dArr[i].doubleValue();
             }
@@ -606,7 +603,7 @@ public class PowerProfile {
         writePowerConstantToProto(protoOutputStream, POWER_CPU_IDLE, 1103806595074L);
         writePowerConstantToProto(protoOutputStream, POWER_CPU_ACTIVE, 1103806595075L);
         for (int i = 0; i < this.mCpuClusters.length; i++) {
-            long start = protoOutputStream.start(2246267895848L);
+            long jStart = protoOutputStream.start(2246267895848L);
             protoOutputStream.write(1120986464257L, i);
             protoOutputStream.write(1103806595074L, sPowerItemMap.get(this.mCpuClusters[i].clusterPowerKey).doubleValue());
             protoOutputStream.write(1120986464259L, this.mCpuClusters[i].numCpus);
@@ -616,7 +613,7 @@ public class PowerProfile {
             for (Double d2 : sPowerArrayMap.get(this.mCpuClusters[i].corePowerKey)) {
                 protoOutputStream.write(PowerProfileProto.CpuCluster.CORE_POWER, d2.doubleValue());
             }
-            protoOutputStream.end(start);
+            protoOutputStream.end(jStart);
         }
         writePowerConstantToProto(protoOutputStream, POWER_WIFI_SCAN, 1103806595076L);
         writePowerConstantToProto(protoOutputStream, POWER_WIFI_ON, 1103806595077L);
@@ -661,13 +658,13 @@ public class PowerProfile {
         sPowerItemMap.forEach(new BiConsumer() { // from class: com.android.internal.os.PowerProfile$$ExternalSyntheticLambda0
             @Override // java.util.function.BiConsumer
             public final void accept(Object obj, Object obj2) {
-                PowerProfile.lambda$dump$0(IndentingPrintWriter.this, (String) obj, (Double) obj2);
+                PowerProfile.lambda$dump$0(indentingPrintWriter, (String) obj, (Double) obj2);
             }
         });
         sPowerArrayMap.forEach(new BiConsumer() { // from class: com.android.internal.os.PowerProfile$$ExternalSyntheticLambda1
             @Override // java.util.function.BiConsumer
             public final void accept(Object obj, Object obj2) {
-                PowerProfile.lambda$dump$1(IndentingPrintWriter.this, (String) obj, (Double[]) obj2);
+                PowerProfile.lambda$dump$1(indentingPrintWriter, (String) obj, (Double[]) obj2);
             }
         });
         indentingPrintWriter.println("Modem values:");
@@ -687,16 +684,16 @@ public class PowerProfile {
     }
 
     private void writePowerConstantToProto(ProtoOutputStream protoOutputStream, String str, long j) {
-        HashMap<String, Double> hashMap = sPowerItemMap;
-        if (hashMap.containsKey(str)) {
-            protoOutputStream.write(j, hashMap.get(str).doubleValue());
+        HashMap<String, Double> map = sPowerItemMap;
+        if (map.containsKey(str)) {
+            protoOutputStream.write(j, map.get(str).doubleValue());
         }
     }
 
     private void writePowerConstantArrayToProto(ProtoOutputStream protoOutputStream, String str, long j) {
-        HashMap<String, Double[]> hashMap = sPowerArrayMap;
-        if (hashMap.containsKey(str)) {
-            for (Double d : hashMap.get(str)) {
+        HashMap<String, Double[]> map = sPowerArrayMap;
+        if (map.containsKey(str)) {
+            for (Double d : map.get(str)) {
                 protoOutputStream.write(j, d.doubleValue());
             }
         }
@@ -707,10 +704,10 @@ public class PowerProfile {
     }
 
     public int getAllFrequencies() {
-        int i = 0;
+        int length = 0;
         for (int size = this.mCpuScalingPolicies.size() - 1; size >= 0; size--) {
-            i += this.mCpuScalingPolicies.valueAt(size).stepPower.length;
+            length += this.mCpuScalingPolicies.valueAt(size).stepPower.length;
         }
-        return i;
+        return length;
     }
 }

@@ -174,17 +174,17 @@ public class PKCS1Encoding implements AsymmetricBlockCipher {
             this.random.nextBytes(bArr2);
         }
         int outputBlockSize = this.engine.getOutputBlockSize();
-        byte[] processBlock = this.engine.processBlock(bArr, i, i2);
-        byte[] bArr3 = (processBlock.length == outputBlockSize || (!this.useStrictLength && processBlock.length >= outputBlockSize)) ? processBlock : this.blockBuffer;
-        int checkPkcs1Encoding2 = checkPkcs1Encoding2(bArr3, i3);
+        byte[] bArrProcessBlock = this.engine.processBlock(bArr, i, i2);
+        byte[] bArr3 = (bArrProcessBlock.length == outputBlockSize || (!this.useStrictLength && bArrProcessBlock.length >= outputBlockSize)) ? bArrProcessBlock : this.blockBuffer;
+        int iCheckPkcs1Encoding2 = checkPkcs1Encoding2(bArr3, i3);
         int length = bArr3.length - i3;
         byte[] bArr4 = new byte[i3];
         for (int i4 = 0; i4 < i3; i4++) {
-            bArr4[i4] = (byte) ((bArr3[length + i4] & (~checkPkcs1Encoding2)) | (bArr2[i4] & checkPkcs1Encoding2));
+            bArr4[i4] = (byte) ((bArr3[length + i4] & (~iCheckPkcs1Encoding2)) | (bArr2[i4] & iCheckPkcs1Encoding2));
         }
-        Arrays.fill(processBlock, (byte) 0);
+        Arrays.fill(bArrProcessBlock, (byte) 0);
         byte[] bArr5 = this.blockBuffer;
-        Arrays.fill(bArr5, 0, Math.max(0, bArr5.length - processBlock.length), (byte) 0);
+        Arrays.fill(bArr5, 0, Math.max(0, bArr5.length - bArrProcessBlock.length), (byte) 0);
         return bArr4;
     }
 
@@ -193,24 +193,24 @@ public class PKCS1Encoding implements AsymmetricBlockCipher {
             return decodeBlockOrRandom(bArr, i, i2);
         }
         int outputBlockSize = this.engine.getOutputBlockSize();
-        byte[] processBlock = this.engine.processBlock(bArr, i, i2);
-        boolean z = this.useStrictLength & (processBlock.length != outputBlockSize);
-        byte[] bArr2 = processBlock.length < outputBlockSize ? this.blockBuffer : processBlock;
-        int checkPkcs1Encoding2 = this.forPrivateKey ? checkPkcs1Encoding2(bArr2) : checkPkcs1Encoding1(bArr2);
+        byte[] bArrProcessBlock = this.engine.processBlock(bArr, i, i2);
+        boolean z = this.useStrictLength & (bArrProcessBlock.length != outputBlockSize);
+        byte[] bArr2 = bArrProcessBlock.length < outputBlockSize ? this.blockBuffer : bArrProcessBlock;
+        int iCheckPkcs1Encoding2 = this.forPrivateKey ? checkPkcs1Encoding2(bArr2) : checkPkcs1Encoding1(bArr2);
         try {
-            if (checkPkcs1Encoding2 < 0) {
+            if (iCheckPkcs1Encoding2 < 0) {
                 throw new InvalidCipherTextException("block incorrect");
             }
             if (z) {
                 throw new InvalidCipherTextException("block incorrect size");
             }
-            byte[] bArr3 = new byte[checkPkcs1Encoding2];
-            System.arraycopy(bArr2, bArr2.length - checkPkcs1Encoding2, bArr3, 0, checkPkcs1Encoding2);
+            byte[] bArr3 = new byte[iCheckPkcs1Encoding2];
+            System.arraycopy(bArr2, bArr2.length - iCheckPkcs1Encoding2, bArr3, 0, iCheckPkcs1Encoding2);
             return bArr3;
         } finally {
-            Arrays.fill(processBlock, (byte) 0);
+            Arrays.fill(bArrProcessBlock, (byte) 0);
             byte[] bArr4 = this.blockBuffer;
-            Arrays.fill(bArr4, 0, Math.max(0, bArr4.length - processBlock.length), (byte) 0);
+            Arrays.fill(bArr4, 0, Math.max(0, bArr4.length - bArrProcessBlock.length), (byte) 0);
         }
     }
 }

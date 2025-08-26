@@ -15,7 +15,6 @@ import androidx.slice.core.SliceQuery;
 import com.android.systemui.volume.VolumePanelDialog$$ExternalSyntheticLambda5;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class MessageView extends SliceChildView {
     public TextView mDetails;
@@ -35,18 +34,18 @@ public class MessageView extends SliceChildView {
     @Override // androidx.slice.widget.SliceChildView
     public final void setSliceItem(SliceContent sliceContent, boolean z, int i, int i2, VolumePanelDialog$$ExternalSyntheticLambda5 volumePanelDialog$$ExternalSyntheticLambda5) {
         IconCompat iconCompat;
-        Drawable loadDrawable;
+        Drawable drawableLoadDrawable;
         SliceItem sliceItem = sliceContent.mSliceItem;
         this.mObserver = volumePanelDialog$$ExternalSyntheticLambda5;
-        SliceItem findSubtype = SliceQuery.findSubtype(sliceItem, "image", "source");
+        SliceItem sliceItemFindSubtype = SliceQuery.findSubtype(sliceItem, "image", "source");
         int i3 = 0;
-        if (findSubtype != null && (iconCompat = (IconCompat) findSubtype.mObj) != null && (loadDrawable = iconCompat.loadDrawable(getContext())) != null) {
-            int applyDimension = (int) TypedValue.applyDimension(1, 24.0f, getContext().getResources().getDisplayMetrics());
-            Bitmap createBitmap = Bitmap.createBitmap(applyDimension, applyDimension, Bitmap.Config.ARGB_8888);
-            Canvas canvas = new Canvas(createBitmap);
-            loadDrawable.setBounds(0, 0, applyDimension, applyDimension);
-            loadDrawable.draw(canvas);
-            this.mIcon.setImageBitmap(SliceViewUtil.getCircularBitmap(createBitmap));
+        if (sliceItemFindSubtype != null && (iconCompat = (IconCompat) sliceItemFindSubtype.mObj) != null && (drawableLoadDrawable = iconCompat.loadDrawable(getContext())) != null) {
+            int iApplyDimension = (int) TypedValue.applyDimension(1, 24.0f, getContext().getResources().getDisplayMetrics());
+            Bitmap bitmapCreateBitmap = Bitmap.createBitmap(iApplyDimension, iApplyDimension, Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(bitmapCreateBitmap);
+            drawableLoadDrawable.setBounds(0, 0, iApplyDimension, iApplyDimension);
+            drawableLoadDrawable.draw(canvas);
+            this.mIcon.setImageBitmap(SliceViewUtil.getCircularBitmap(bitmapCreateBitmap));
         }
         SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder();
         ArrayList arrayList = (ArrayList) SliceQuery.findAll(sliceItem, "text", null, null);

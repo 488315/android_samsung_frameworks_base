@@ -53,9 +53,9 @@ public interface ISemWifiApClientListUpdateCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISemWifiApClientListUpdateCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISemWifiApClientListUpdateCallback)) {
-                return (ISemWifiApClientListUpdateCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISemWifiApClientListUpdateCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISemWifiApClientListUpdateCallback)) {
+                return (ISemWifiApClientListUpdateCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -85,14 +85,14 @@ public interface ISemWifiApClientListUpdateCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                ArrayList createTypedArrayList = parcel.createTypedArrayList(SemWifiApClientDetails.CREATOR);
-                long readLong = parcel.readLong();
+                ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(SemWifiApClientDetails.CREATOR);
+                long j = parcel.readLong();
                 parcel.enforceNoDataAvail();
-                onClientListUpdated(createTypedArrayList, readLong);
+                onClientListUpdated(arrayListCreateTypedArrayList, j);
             } else if (i == 2) {
-                long readLong2 = parcel.readLong();
+                long j2 = parcel.readLong();
                 parcel.enforceNoDataAvail();
-                onOverallDataLimitChanged(readLong2);
+                onOverallDataLimitChanged(j2);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -117,26 +117,26 @@ public interface ISemWifiApClientListUpdateCallback extends IInterface {
 
             @Override // com.samsung.android.wifi.ISemWifiApClientListUpdateCallback
             public void onClientListUpdated(List<SemWifiApClientDetails> list, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISemWifiApClientListUpdateCallback.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISemWifiApClientListUpdateCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.ISemWifiApClientListUpdateCallback
             public void onOverallDataLimitChanged(long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISemWifiApClientListUpdateCallback.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISemWifiApClientListUpdateCallback.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

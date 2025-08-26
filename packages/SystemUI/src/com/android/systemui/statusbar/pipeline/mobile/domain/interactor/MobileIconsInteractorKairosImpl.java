@@ -59,7 +59,6 @@ import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class MobileIconsInteractorKairosImpl implements MobileIconsInteractorKairos, KairosBuilder {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -82,7 +81,6 @@ public final class MobileIconsInteractorKairosImpl implements MobileIconsInterac
     public final StateInit subscriptionsBasedFilteredSubs;
     public final TableLogBuffer tableLogger;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -92,11 +90,9 @@ public final class MobileIconsInteractorKairosImpl implements MobileIconsInterac
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Module {
         public static final Companion Companion = Companion.$$INSTANCE;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public static final /* synthetic */ Companion $$INSTANCE = new Companion();
 
@@ -118,15 +114,15 @@ public final class MobileIconsInteractorKairosImpl implements MobileIconsInterac
         this.context = context;
         this.featureFlagsClassic = featureFlagsClassic;
         final int i = 0;
-        final StateInit combine = CombineKt.combine(mobileConnectionsRepositoryKairos.getMobileIsDefault(), mobileConnectionsRepositoryKairos.getHasCarrierMergedConnection(), new Function3() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconsInteractorKairosImpl$$ExternalSyntheticLambda0
+        final StateInit stateInitCombine = CombineKt.combine(mobileConnectionsRepositoryKairos.getMobileIsDefault(), mobileConnectionsRepositoryKairos.getHasCarrierMergedConnection(), new Function3() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconsInteractorKairosImpl$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function3
             public final Object invoke(Object obj, Object obj2, Object obj3) {
                 switch (i) {
                     case 0:
-                        boolean booleanValue = ((Boolean) obj2).booleanValue();
-                        boolean booleanValue2 = ((Boolean) obj3).booleanValue();
+                        boolean zBooleanValue = ((Boolean) obj2).booleanValue();
+                        boolean zBooleanValue2 = ((Boolean) obj3).booleanValue();
                         int i2 = MobileIconsInteractorKairosImpl.$r8$clinit;
-                        return Boolean.valueOf(booleanValue || booleanValue2);
+                        return Boolean.valueOf(zBooleanValue || zBooleanValue2);
                     default:
                         Integer num = (Integer) obj2;
                         Map map = (Map) obj3;
@@ -142,28 +138,28 @@ public final class MobileIconsInteractorKairosImpl implements MobileIconsInterac
         onActivated(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconsInteractorKairosImpl$$ExternalSyntheticLambda3
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i2) {
                     case 0:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, combine, this.tableLogger, "Intr", "isSingleCarrier");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitCombine, this.tableLogger, "Intr", "isSingleCarrier");
                         break;
                     case 1:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, combine, this.tableLogger, "Intr", "isDefaultConnectionFailed");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitCombine, this.tableLogger, "Intr", "isDefaultConnectionFailed");
                         break;
                     default:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, combine, this.tableLogger, "Intr", "mobileIsDefault");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitCombine, this.tableLogger, "Intr", "mobileIsDefault");
                         break;
                 }
                 return Unit.INSTANCE;
             }
         });
-        this.mobileIsDefault = combine;
+        this.mobileIsDefault = stateInitCombine;
         this.activeDataConnectionHasDataEnabled = StateKt.flatMap(mobileConnectionsRepositoryKairos.getActiveMobileDataRepository(), new MobileIconsInteractorKairosImpl$$ExternalSyntheticLambda1(6));
         this.subscriptionsBasedFilteredSubs = StateKt.map(mobileConnectionsRepositoryKairos.getSubscriptions(), new MobileIconsInteractorKairosImpl$$ExternalSyntheticLambda10(this, 0));
         this.filteredSubscriptions = kairosBuilderImpl.buildState(new MobileIconsInteractorKairosImpl$$ExternalSyntheticLambda11(this, connectivityRepository, 0));
         final int i3 = 0;
-        Incremental buildIncremental = kairosBuilderImpl.buildIncremental(new Function1(this) { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconsInteractorKairosImpl$$ExternalSyntheticLambda12
+        Incremental incrementalBuildIncremental = kairosBuilderImpl.buildIncremental(new Function1(this) { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconsInteractorKairosImpl$$ExternalSyntheticLambda12
             public final /* synthetic */ MobileIconsInteractorKairosImpl f$0;
 
             {
@@ -172,7 +168,7 @@ public final class MobileIconsInteractorKairosImpl implements MobileIconsInterac
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i3) {
                     case 0:
@@ -182,37 +178,37 @@ public final class MobileIconsInteractorKairosImpl implements MobileIconsInterac
                         MobileIconsInteractorKairosImpl$$ExternalSyntheticLambda10 mobileIconsInteractorKairosImpl$$ExternalSyntheticLambda10 = new MobileIconsInteractorKairosImpl$$ExternalSyntheticLambda10(map, 2);
                         StateScopeImpl stateScopeImpl = ((BuildScopeImpl) buildScope).stateScope;
                         stateScopeImpl.getClass();
-                        IncrementalInit mapValues = IncrementalKt.mapValues(mobileConnectionsBySubId, new StateScope$DefaultImpls$$ExternalSyntheticLambda0(new StateScope$DefaultImpls$$ExternalSyntheticLambda0(mobileIconsInteractorKairosImpl$$ExternalSyntheticLambda10, 2), 4));
+                        IncrementalInit incrementalInitMapValues = IncrementalKt.mapValues(mobileConnectionsBySubId, new StateScope$DefaultImpls$$ExternalSyntheticLambda0(new StateScope$DefaultImpls$$ExternalSyntheticLambda0(mobileIconsInteractorKairosImpl$$ExternalSyntheticLambda10, 2), 4));
                         stateScopeImpl.getClass();
-                        final IncrementalInit mapValues2 = IncrementalKt.mapValues(mapValues, new StateScope$DefaultImpls$$ExternalSyntheticLambda5(1));
+                        final IncrementalInit incrementalInitMapValues2 = IncrementalKt.mapValues(incrementalInitMapValues, new StateScope$DefaultImpls$$ExternalSyntheticLambda5(1));
                         final MergeKt$$ExternalSyntheticLambda1 mergeKt$$ExternalSyntheticLambda1 = new MergeKt$$ExternalSyntheticLambda1();
                         final EventsImpl eventsImpl = new EventsImpl() { // from class: com.android.systemui.kairos.MergeKt$mergeEventsIncrementallyPromptly$$inlined$mapImpl$1
                             @Override // com.android.systemui.kairos.internal.EventsImpl
                             public final ActivationResult activate(EvalScope evalScope, Schedulable schedulable) {
-                                ActivationResult activate = ((IncrementalImpl) mapValues2.getInit$frameworks__base__packages__SystemUI__utils__kairos__android_common__kairos().connect(evalScope)).patches.activate(evalScope, schedulable);
-                                if (activate == null) {
+                                ActivationResult activationResultActivate = ((IncrementalImpl) incrementalInitMapValues2.getInit$frameworks__base__packages__SystemUI__utils__kairos__android_common__kairos().connect(evalScope)).patches.activate(evalScope, schedulable);
+                                if (activationResultActivate == null) {
                                     return null;
                                 }
-                                NodeConnection nodeConnection = activate.connection;
-                                return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, Function3.this), nodeConnection.schedulerUpstream), activate.needsEval);
+                                NodeConnection nodeConnection = activationResultActivate.connection;
+                                return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, mergeKt$$ExternalSyntheticLambda1), nodeConnection.schedulerUpstream), activationResultActivate.needsEval);
                             }
                         };
                         final int i4 = 0;
                         Function1 function1 = new Function1() { // from class: com.android.systemui.kairos.MergeKt$$ExternalSyntheticLambda2
                             @Override // kotlin.jvm.functions.Function1
                             /* renamed from: invoke */
-                            public final Object mo779invoke(Object obj2) {
+                            public final Object mo781invoke(Object obj2) {
                                 EvalScope evalScope = (EvalScope) obj2;
                                 switch (i4) {
                                     case 0:
-                                        Map map2 = (Map) ((IncrementalImpl) ((IncrementalInit) mapValues2).init.connect(evalScope)).store.getCurrentWithEpoch(evalScope).getFirst();
+                                        Map map2 = (Map) ((IncrementalImpl) ((IncrementalInit) incrementalInitMapValues2).init.connect(evalScope)).store.getCurrentWithEpoch(evalScope).getFirst();
                                         LinkedHashMap linkedHashMap = new LinkedHashMap(MapsKt__MapsJVMKt.mapCapacity(map2.size()));
                                         for (Map.Entry entry : map2.entrySet()) {
                                             linkedHashMap.put(entry.getKey(), (EventsImpl) EventsKt.getInit((Events) entry.getValue()).connect(evalScope));
                                         }
                                         return linkedHashMap.entrySet();
                                     default:
-                                        return (MergeKt$mergeEventsIncrementallyPromptly$$inlined$mapImpl$1) mapValues2;
+                                        return (MergeKt$mergeEventsIncrementallyPromptly$$inlined$mapImpl$1) incrementalInitMapValues2;
                                 }
                             }
                         };
@@ -220,7 +216,7 @@ public final class MobileIconsInteractorKairosImpl implements MobileIconsInterac
                         final MuxLifecycle muxLifecycle = new MuxLifecycle(new MuxLifecycleState.Inactive(new MuxPromptActivator("mergeEventsIncrementallyPromptly", function1, new ConcurrentHashMapK.Factory(), new Function1() { // from class: com.android.systemui.kairos.MergeKt$$ExternalSyntheticLambda2
                             @Override // kotlin.jvm.functions.Function1
                             /* renamed from: invoke */
-                            public final Object mo779invoke(Object obj2) {
+                            public final Object mo781invoke(Object obj2) {
                                 EvalScope evalScope = (EvalScope) obj2;
                                 switch (i5) {
                                     case 0:
@@ -239,23 +235,23 @@ public final class MobileIconsInteractorKairosImpl implements MobileIconsInterac
                         return BuildScope.DefaultImpls.applyLatestSpecForKey$default(buildScope, IncrementalKt.mapValues(stateScopeImpl.foldStateMapIncrementally(new EventsInit(new Init("mergeEventsIncrementallyPromptly", new InitKt$constInit$1(new EventsImpl() { // from class: com.android.systemui.kairos.internal.MuxKt$awaitValues$$inlined$mapImpl$1
                             @Override // com.android.systemui.kairos.internal.EventsImpl
                             public final ActivationResult activate(EvalScope evalScope, Schedulable schedulable) {
-                                ActivationResult activate = muxLifecycle.activate(evalScope, schedulable);
-                                if (activate == null) {
+                                ActivationResult activationResultActivate = muxLifecycle.activate(evalScope, schedulable);
+                                if (activationResultActivate == null) {
                                     return null;
                                 }
-                                NodeConnection nodeConnection = activate.connection;
-                                return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, Function3.this), nodeConnection.schedulerUpstream), activate.needsEval);
+                                NodeConnection nodeConnection = activationResultActivate.connection;
+                                return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, muxKt$$ExternalSyntheticLambda0), nodeConnection.schedulerUpstream), activationResultActivate.needsEval);
                             }
-                        }))), new DeferredValue(stateScopeImpl.evalScope.deferAsync(new StateScopeImpl$$ExternalSyntheticLambda3(new StateScope$DefaultImpls$$ExternalSyntheticLambda3(mapValues, 1), stateScopeImpl, 1)))), new MobileIconsInteractorKairosImpl$$ExternalSyntheticLambda10(mobileIconsInteractorKairosImpl, 1)));
+                        }))), new DeferredValue(stateScopeImpl.evalScope.deferAsync(new StateScopeImpl$$ExternalSyntheticLambda3(new StateScope$DefaultImpls$$ExternalSyntheticLambda3(incrementalInitMapValues, 1), stateScopeImpl, 1)))), new MobileIconsInteractorKairosImpl$$ExternalSyntheticLambda10(mobileIconsInteractorKairosImpl, 1)));
                     default:
                         MobileIconsInteractorKairosImpl mobileIconsInteractorKairosImpl2 = this.f$0;
                         MobileConnectionsRepositoryKairos mobileConnectionsRepositoryKairos2 = mobileIconsInteractorKairosImpl2.mobileConnectionsRepo;
                         Events activeSubChangedInGroupEvent = mobileConnectionsRepositoryKairos2.getActiveSubChangedInGroupEvent();
                         final State defaultConnectionIsValidated = mobileConnectionsRepositoryKairos2.getDefaultConnectionIsValidated();
-                        EventsInit filter = FilterKt.filter(activeSubChangedInGroupEvent, new Function2() { // from class: com.android.systemui.kairos.FilterKt$$ExternalSyntheticLambda1
+                        EventsInit eventsInitFilter = FilterKt.filter(activeSubChangedInGroupEvent, new Function2() { // from class: com.android.systemui.kairos.FilterKt$$ExternalSyntheticLambda1
                             @Override // kotlin.jvm.functions.Function2
                             public final Object invoke(Object obj2, Object obj3) {
-                                Boolean bool = (Boolean) ((TransactionScope) obj2).sample(State.this);
+                                Boolean bool = (Boolean) ((TransactionScope) obj2).sample(defaultConnectionIsValidated);
                                 bool.booleanValue();
                                 return bool;
                             }
@@ -263,24 +259,24 @@ public final class MobileIconsInteractorKairosImpl implements MobileIconsInterac
                         MobileIconsInteractorKairosImpl$$ExternalSyntheticLambda1 mobileIconsInteractorKairosImpl$$ExternalSyntheticLambda1 = new MobileIconsInteractorKairosImpl$$ExternalSyntheticLambda1(1);
                         BuildScopeImpl buildScopeImpl = (BuildScopeImpl) buildScope;
                         buildScopeImpl.getClass();
-                        StateInit flatMap = StateKt.flatMap(buildScopeImpl.stateScope.holdState((Events) buildScopeImpl.applyLatestSpec(EventsKt.mapCheap(filter, new BuildScope$DefaultImpls$$ExternalSyntheticLambda7(2, mobileIconsInteractorKairosImpl$$ExternalSyntheticLambda1)), new BuildScope$DefaultImpls$$ExternalSyntheticLambda10()).getFirst(), StateKt.stateOf(Boolean.FALSE)), new StateKt$$ExternalSyntheticLambda7());
-                        DiffableKt.logBooleanDiffsForTable(buildScopeImpl, flatMap, mobileIconsInteractorKairosImpl2.tableLogger, "Intr", "forcingValidation");
-                        return flatMap;
+                        StateInit stateInitFlatMap = StateKt.flatMap(buildScopeImpl.stateScope.holdState((Events) buildScopeImpl.applyLatestSpec(EventsKt.mapCheap(eventsInitFilter, new BuildScope$DefaultImpls$$ExternalSyntheticLambda7(2, mobileIconsInteractorKairosImpl$$ExternalSyntheticLambda1)), new BuildScope$DefaultImpls$$ExternalSyntheticLambda10()).getFirst(), StateKt.stateOf(Boolean.FALSE)), new StateKt$$ExternalSyntheticLambda7());
+                        DiffableKt.logBooleanDiffsForTable(buildScopeImpl, stateInitFlatMap, mobileIconsInteractorKairosImpl2.tableLogger, "Intr", "forcingValidation");
+                        return stateInitFlatMap;
                 }
             }
         });
-        this.icons = buildIncremental;
+        this.icons = incrementalBuildIncremental;
         this.isStackable = StateKt.stateOf(Boolean.FALSE);
         final int i4 = 1;
-        this.activeDataIconInteractor = CombineKt.combine(mobileConnectionsRepositoryKairos.getActiveMobileDataSubscriptionId(), buildIncremental, new Function3() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconsInteractorKairosImpl$$ExternalSyntheticLambda0
+        this.activeDataIconInteractor = CombineKt.combine(mobileConnectionsRepositoryKairos.getActiveMobileDataSubscriptionId(), incrementalBuildIncremental, new Function3() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconsInteractorKairosImpl$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function3
             public final Object invoke(Object obj, Object obj2, Object obj3) {
                 switch (i4) {
                     case 0:
-                        boolean booleanValue = ((Boolean) obj2).booleanValue();
-                        boolean booleanValue2 = ((Boolean) obj3).booleanValue();
+                        boolean zBooleanValue = ((Boolean) obj2).booleanValue();
+                        boolean zBooleanValue2 = ((Boolean) obj3).booleanValue();
                         int i22 = MobileIconsInteractorKairosImpl.$r8$clinit;
-                        return Boolean.valueOf(booleanValue || booleanValue2);
+                        return Boolean.valueOf(zBooleanValue || zBooleanValue2);
                     default:
                         Integer num = (Integer) obj2;
                         Map map = (Map) obj3;
@@ -293,7 +289,7 @@ public final class MobileIconsInteractorKairosImpl implements MobileIconsInterac
             }
         });
         final int i5 = 1;
-        State buildState = kairosBuilderImpl.buildState(new Function1(this) { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconsInteractorKairosImpl$$ExternalSyntheticLambda12
+        State stateBuildState = kairosBuilderImpl.buildState(new Function1(this) { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconsInteractorKairosImpl$$ExternalSyntheticLambda12
             public final /* synthetic */ MobileIconsInteractorKairosImpl f$0;
 
             {
@@ -302,7 +298,7 @@ public final class MobileIconsInteractorKairosImpl implements MobileIconsInterac
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i5) {
                     case 0:
@@ -312,37 +308,37 @@ public final class MobileIconsInteractorKairosImpl implements MobileIconsInterac
                         MobileIconsInteractorKairosImpl$$ExternalSyntheticLambda10 mobileIconsInteractorKairosImpl$$ExternalSyntheticLambda10 = new MobileIconsInteractorKairosImpl$$ExternalSyntheticLambda10(map, 2);
                         StateScopeImpl stateScopeImpl = ((BuildScopeImpl) buildScope).stateScope;
                         stateScopeImpl.getClass();
-                        IncrementalInit mapValues = IncrementalKt.mapValues(mobileConnectionsBySubId, new StateScope$DefaultImpls$$ExternalSyntheticLambda0(new StateScope$DefaultImpls$$ExternalSyntheticLambda0(mobileIconsInteractorKairosImpl$$ExternalSyntheticLambda10, 2), 4));
+                        IncrementalInit incrementalInitMapValues = IncrementalKt.mapValues(mobileConnectionsBySubId, new StateScope$DefaultImpls$$ExternalSyntheticLambda0(new StateScope$DefaultImpls$$ExternalSyntheticLambda0(mobileIconsInteractorKairosImpl$$ExternalSyntheticLambda10, 2), 4));
                         stateScopeImpl.getClass();
-                        final Object mapValues2 = IncrementalKt.mapValues(mapValues, new StateScope$DefaultImpls$$ExternalSyntheticLambda5(1));
+                        final Object incrementalInitMapValues2 = IncrementalKt.mapValues(incrementalInitMapValues, new StateScope$DefaultImpls$$ExternalSyntheticLambda5(1));
                         final Function3 mergeKt$$ExternalSyntheticLambda1 = new MergeKt$$ExternalSyntheticLambda1();
                         final Object eventsImpl = new EventsImpl() { // from class: com.android.systemui.kairos.MergeKt$mergeEventsIncrementallyPromptly$$inlined$mapImpl$1
                             @Override // com.android.systemui.kairos.internal.EventsImpl
                             public final ActivationResult activate(EvalScope evalScope, Schedulable schedulable) {
-                                ActivationResult activate = ((IncrementalImpl) mapValues2.getInit$frameworks__base__packages__SystemUI__utils__kairos__android_common__kairos().connect(evalScope)).patches.activate(evalScope, schedulable);
-                                if (activate == null) {
+                                ActivationResult activationResultActivate = ((IncrementalImpl) incrementalInitMapValues2.getInit$frameworks__base__packages__SystemUI__utils__kairos__android_common__kairos().connect(evalScope)).patches.activate(evalScope, schedulable);
+                                if (activationResultActivate == null) {
                                     return null;
                                 }
-                                NodeConnection nodeConnection = activate.connection;
-                                return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, Function3.this), nodeConnection.schedulerUpstream), activate.needsEval);
+                                NodeConnection nodeConnection = activationResultActivate.connection;
+                                return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, mergeKt$$ExternalSyntheticLambda1), nodeConnection.schedulerUpstream), activationResultActivate.needsEval);
                             }
                         };
                         final int i42 = 0;
                         Function1 function1 = new Function1() { // from class: com.android.systemui.kairos.MergeKt$$ExternalSyntheticLambda2
                             @Override // kotlin.jvm.functions.Function1
                             /* renamed from: invoke */
-                            public final Object mo779invoke(Object obj2) {
+                            public final Object mo781invoke(Object obj2) {
                                 EvalScope evalScope = (EvalScope) obj2;
                                 switch (i42) {
                                     case 0:
-                                        Map map2 = (Map) ((IncrementalImpl) ((IncrementalInit) mapValues2).init.connect(evalScope)).store.getCurrentWithEpoch(evalScope).getFirst();
+                                        Map map2 = (Map) ((IncrementalImpl) ((IncrementalInit) incrementalInitMapValues2).init.connect(evalScope)).store.getCurrentWithEpoch(evalScope).getFirst();
                                         LinkedHashMap linkedHashMap = new LinkedHashMap(MapsKt__MapsJVMKt.mapCapacity(map2.size()));
                                         for (Map.Entry entry : map2.entrySet()) {
                                             linkedHashMap.put(entry.getKey(), (EventsImpl) EventsKt.getInit((Events) entry.getValue()).connect(evalScope));
                                         }
                                         return linkedHashMap.entrySet();
                                     default:
-                                        return (MergeKt$mergeEventsIncrementallyPromptly$$inlined$mapImpl$1) mapValues2;
+                                        return (MergeKt$mergeEventsIncrementallyPromptly$$inlined$mapImpl$1) incrementalInitMapValues2;
                                 }
                             }
                         };
@@ -350,7 +346,7 @@ public final class MobileIconsInteractorKairosImpl implements MobileIconsInterac
                         final EventsImpl muxLifecycle = new MuxLifecycle(new MuxLifecycleState.Inactive(new MuxPromptActivator("mergeEventsIncrementallyPromptly", function1, new ConcurrentHashMapK.Factory(), new Function1() { // from class: com.android.systemui.kairos.MergeKt$$ExternalSyntheticLambda2
                             @Override // kotlin.jvm.functions.Function1
                             /* renamed from: invoke */
-                            public final Object mo779invoke(Object obj2) {
+                            public final Object mo781invoke(Object obj2) {
                                 EvalScope evalScope = (EvalScope) obj2;
                                 switch (i52) {
                                     case 0:
@@ -369,23 +365,23 @@ public final class MobileIconsInteractorKairosImpl implements MobileIconsInterac
                         return BuildScope.DefaultImpls.applyLatestSpecForKey$default(buildScope, IncrementalKt.mapValues(stateScopeImpl.foldStateMapIncrementally(new EventsInit(new Init("mergeEventsIncrementallyPromptly", new InitKt$constInit$1(new EventsImpl() { // from class: com.android.systemui.kairos.internal.MuxKt$awaitValues$$inlined$mapImpl$1
                             @Override // com.android.systemui.kairos.internal.EventsImpl
                             public final ActivationResult activate(EvalScope evalScope, Schedulable schedulable) {
-                                ActivationResult activate = muxLifecycle.activate(evalScope, schedulable);
-                                if (activate == null) {
+                                ActivationResult activationResultActivate = muxLifecycle.activate(evalScope, schedulable);
+                                if (activationResultActivate == null) {
                                     return null;
                                 }
-                                NodeConnection nodeConnection = activate.connection;
-                                return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, Function3.this), nodeConnection.schedulerUpstream), activate.needsEval);
+                                NodeConnection nodeConnection = activationResultActivate.connection;
+                                return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, muxKt$$ExternalSyntheticLambda0), nodeConnection.schedulerUpstream), activationResultActivate.needsEval);
                             }
-                        }))), new DeferredValue(stateScopeImpl.evalScope.deferAsync(new StateScopeImpl$$ExternalSyntheticLambda3(new StateScope$DefaultImpls$$ExternalSyntheticLambda3(mapValues, 1), stateScopeImpl, 1)))), new MobileIconsInteractorKairosImpl$$ExternalSyntheticLambda10(mobileIconsInteractorKairosImpl, 1)));
+                        }))), new DeferredValue(stateScopeImpl.evalScope.deferAsync(new StateScopeImpl$$ExternalSyntheticLambda3(new StateScope$DefaultImpls$$ExternalSyntheticLambda3(incrementalInitMapValues, 1), stateScopeImpl, 1)))), new MobileIconsInteractorKairosImpl$$ExternalSyntheticLambda10(mobileIconsInteractorKairosImpl, 1)));
                     default:
                         MobileIconsInteractorKairosImpl mobileIconsInteractorKairosImpl2 = this.f$0;
                         MobileConnectionsRepositoryKairos mobileConnectionsRepositoryKairos2 = mobileIconsInteractorKairosImpl2.mobileConnectionsRepo;
                         Events activeSubChangedInGroupEvent = mobileConnectionsRepositoryKairos2.getActiveSubChangedInGroupEvent();
                         final State defaultConnectionIsValidated = mobileConnectionsRepositoryKairos2.getDefaultConnectionIsValidated();
-                        EventsInit filter = FilterKt.filter(activeSubChangedInGroupEvent, new Function2() { // from class: com.android.systemui.kairos.FilterKt$$ExternalSyntheticLambda1
+                        EventsInit eventsInitFilter = FilterKt.filter(activeSubChangedInGroupEvent, new Function2() { // from class: com.android.systemui.kairos.FilterKt$$ExternalSyntheticLambda1
                             @Override // kotlin.jvm.functions.Function2
                             public final Object invoke(Object obj2, Object obj3) {
-                                Boolean bool = (Boolean) ((TransactionScope) obj2).sample(State.this);
+                                Boolean bool = (Boolean) ((TransactionScope) obj2).sample(defaultConnectionIsValidated);
                                 bool.booleanValue();
                                 return bool;
                             }
@@ -393,9 +389,9 @@ public final class MobileIconsInteractorKairosImpl implements MobileIconsInterac
                         MobileIconsInteractorKairosImpl$$ExternalSyntheticLambda1 mobileIconsInteractorKairosImpl$$ExternalSyntheticLambda1 = new MobileIconsInteractorKairosImpl$$ExternalSyntheticLambda1(1);
                         BuildScopeImpl buildScopeImpl = (BuildScopeImpl) buildScope;
                         buildScopeImpl.getClass();
-                        StateInit flatMap = StateKt.flatMap(buildScopeImpl.stateScope.holdState((Events) buildScopeImpl.applyLatestSpec(EventsKt.mapCheap(filter, new BuildScope$DefaultImpls$$ExternalSyntheticLambda7(2, mobileIconsInteractorKairosImpl$$ExternalSyntheticLambda1)), new BuildScope$DefaultImpls$$ExternalSyntheticLambda10()).getFirst(), StateKt.stateOf(Boolean.FALSE)), new StateKt$$ExternalSyntheticLambda7());
-                        DiffableKt.logBooleanDiffsForTable(buildScopeImpl, flatMap, mobileIconsInteractorKairosImpl2.tableLogger, "Intr", "forcingValidation");
-                        return flatMap;
+                        StateInit stateInitFlatMap = StateKt.flatMap(buildScopeImpl.stateScope.holdState((Events) buildScopeImpl.applyLatestSpec(EventsKt.mapCheap(eventsInitFilter, new BuildScope$DefaultImpls$$ExternalSyntheticLambda7(2, mobileIconsInteractorKairosImpl$$ExternalSyntheticLambda1)), new BuildScope$DefaultImpls$$ExternalSyntheticLambda10()).getFirst(), StateKt.stateOf(Boolean.FALSE)), new StateKt$$ExternalSyntheticLambda7());
+                        DiffableKt.logBooleanDiffsForTable(buildScopeImpl, stateInitFlatMap, mobileIconsInteractorKairosImpl2.tableLogger, "Intr", "forcingValidation");
+                        return stateInitFlatMap;
                 }
             }
         });
@@ -406,7 +402,7 @@ public final class MobileIconsInteractorKairosImpl implements MobileIconsInterac
         onActivated(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconsInteractorKairosImpl$$ExternalSyntheticLambda3
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i6) {
                     case 0:
@@ -423,33 +419,33 @@ public final class MobileIconsInteractorKairosImpl implements MobileIconsInterac
             }
         });
         this.isSingleCarrier = map;
-        final StateInit combine2 = CombineKt.combine(combine, mobileConnectionsRepositoryKairos.getDefaultConnectionIsValidated(), buildState, new MobileIconsInteractorKairosImpl$$ExternalSyntheticLambda4());
+        final StateInit stateInitCombine2 = CombineKt.combine(stateInitCombine, mobileConnectionsRepositoryKairos.getDefaultConnectionIsValidated(), stateBuildState, new MobileIconsInteractorKairosImpl$$ExternalSyntheticLambda4());
         final int i7 = 1;
         onActivated(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconsInteractorKairosImpl$$ExternalSyntheticLambda3
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i7) {
                     case 0:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, combine2, this.tableLogger, "Intr", "isSingleCarrier");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitCombine2, this.tableLogger, "Intr", "isSingleCarrier");
                         break;
                     case 1:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, combine2, this.tableLogger, "Intr", "isDefaultConnectionFailed");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitCombine2, this.tableLogger, "Intr", "isDefaultConnectionFailed");
                         break;
                     default:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, combine2, this.tableLogger, "Intr", "mobileIsDefault");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitCombine2, this.tableLogger, "Intr", "mobileIsDefault");
                         break;
                 }
                 return Unit.INSTANCE;
             }
         });
-        this.isDefaultConnectionFailed = combine2;
+        this.isDefaultConnectionFailed = stateInitCombine2;
         final int i8 = 0;
         this.$$delegate_0.buildState(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconsInteractorKairosImpl$$ExternalSyntheticLambda6
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Object obj2 = userSetupRepository;
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i8) {
@@ -472,7 +468,7 @@ public final class MobileIconsInteractorKairosImpl implements MobileIconsInterac
         this.isForceHidden = kairosBuilderImpl.buildState(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconsInteractorKairosImpl$$ExternalSyntheticLambda6
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Object obj2 = connectivityRepository;
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i9) {

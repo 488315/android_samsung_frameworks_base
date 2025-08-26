@@ -48,7 +48,6 @@ import com.samsung.android.knox.EnterpriseContainerCallback;
 import com.sec.ims.volte2.data.VolteConstants;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SecFlashlightControllerImpl {
     public static final int[] FLASHLIGHT_VALUE = {1001, 1002, VolteConstants.ErrorCode.CLIENT_ERROR_NOT_ALLOWED_URI, 1006, EnterpriseContainerCallback.CONTAINER_PACKAGE_UNINSTALL_FAILURE};
@@ -84,7 +83,6 @@ public class SecFlashlightControllerImpl {
     public final UserTracker.Callback mUserChangedCallback;
     public final UserTracker mUserTracker;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.policy.SecFlashlightControllerImpl$2, reason: invalid class name */
     public class AnonymousClass2 implements TaskStackChangeListener {
         public AnonymousClass2() {
@@ -106,9 +104,9 @@ public class SecFlashlightControllerImpl {
             ComponentName componentName = runningTaskInfo.topActivity;
             String className = componentName != null ? componentName.getClassName() : "";
             Log.d("SecFlashlightController", "onTaskMovedToFront: " + "com.android.cellbroadcastreceiver.CellBroadcastAlertDialog".equals(className) + ", " + runningTaskInfo.taskId);
-            boolean equals = "com.android.cellbroadcastreceiver.CellBroadcastAlertDialog".equals(className);
+            boolean zEquals = "com.android.cellbroadcastreceiver.CellBroadcastAlertDialog".equals(className);
             SecFlashlightControllerImpl secFlashlightControllerImpl = SecFlashlightControllerImpl.this;
-            if (equals) {
+            if (zEquals) {
                 secFlashlightControllerImpl.mFlashlightTaskId = runningTaskInfo.taskId;
                 secFlashlightControllerImpl.mIsFlashlightTaskInStack.set(true);
             } else if (secFlashlightControllerImpl.mIsFlashlightTaskInStack.get()) {
@@ -299,9 +297,9 @@ public class SecFlashlightControllerImpl {
     public final void setFlashlightLevel(int i, boolean z) {
         if (isTorchStrengthControllable()) {
             try {
-                String ensureCameraID = this.mFlashlightController.ensureCameraID();
-                if (ensureCameraID != null) {
-                    this.mCameraManager.turnOnTorchWithStrengthLevel(ensureCameraID, i);
+                String strEnsureCameraID = this.mFlashlightController.ensureCameraID();
+                if (strEnsureCameraID != null) {
+                    this.mCameraManager.turnOnTorchWithStrengthLevel(strEnsureCameraID, i);
                 }
             } catch (CameraAccessException e) {
                 Log.d("SecFlashlightController", "Couldn't set flashlight level", e);
@@ -330,16 +328,16 @@ public class SecFlashlightControllerImpl {
             return;
         }
         Context context2 = this.mContext;
-        ?? r2 = this.mClientName;
+        ?? applicationLabel = this.mClientName;
         try {
-            applicationInfo = this.mPackageManager.getApplicationInfo(r2, 0);
+            applicationInfo = this.mPackageManager.getApplicationInfo(applicationLabel, 0);
         } catch (PackageManager.NameNotFoundException unused) {
             applicationInfo = null;
         }
         if (applicationInfo != null) {
-            r2 = this.mPackageManager.getApplicationLabel(applicationInfo);
+            applicationLabel = this.mPackageManager.getApplicationLabel(applicationInfo);
         }
-        showWarningMessage(context2.getString(R.string.unable_to_turn_on_being_used_by_app, (String) r2));
+        showWarningMessage(context2.getString(R.string.unable_to_turn_on_being_used_by_app, (String) applicationLabel));
     }
 
     public final void showWarningMessage(CharSequence charSequence) {
@@ -367,7 +365,7 @@ public class SecFlashlightControllerImpl {
         PendingIntent broadcast = PendingIntent.getBroadcast(this.mContext, 0, intent, 201326592);
         String string = this.mContext.getResources().getString(R.string.flash_light_notification_title);
         Notification.Builder builder = new Notification.Builder(this.mContext, NotificationChannels.FLASHLIGHT_ONGOING);
-        builder.setSmallIcon(R.drawable.stat_notify_assistivelight).setVisibility(1).setContentTitle(string).setWhen(0L).setOngoing(true).addAction(0, this.mContext.getResources().getString(R.string.flash_light_notification_button), broadcast);
+        builder.setSmallIcon(R.drawable.stat_notify_flash_light).setVisibility(1).setContentTitle(string).setWhen(0L).setOngoing(true).addAction(0, this.mContext.getResources().getString(R.string.flash_light_notification_button), broadcast);
         this.mNotiManager.notifyAsUser(PluginLockShortcutTask.FLASH_LIGHT_TASK, 4660, builder.getNotification(), UserHandle.ALL);
     }
 }

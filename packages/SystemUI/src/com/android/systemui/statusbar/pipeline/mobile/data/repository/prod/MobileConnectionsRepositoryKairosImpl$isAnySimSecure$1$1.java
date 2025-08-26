@@ -14,7 +14,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class MobileConnectionsRepositoryKairosImpl$isAnySimSecure$1$1 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -50,11 +49,11 @@ final class MobileConnectionsRepositoryKairosImpl$isAnySimSecure$1$1 extends Sus
             KeyguardUpdateMonitorCallback keyguardUpdateMonitorCallback = new KeyguardUpdateMonitorCallback() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryKairosImpl$isAnySimSecure$1$1$callback$1
                 @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
                 public final void onSimStateChanged(int i2, int i3, int i4) {
-                    MobileConnectionsRepositoryKairosImpl mobileConnectionsRepositoryKairosImpl2 = MobileConnectionsRepositoryKairosImpl.this;
+                    MobileConnectionsRepositoryKairosImpl mobileConnectionsRepositoryKairosImpl2 = mobileConnectionsRepositoryKairosImpl;
                     MobileInputLogger mobileInputLogger = mobileConnectionsRepositoryKairosImpl2.logger;
                     mobileInputLogger.getClass();
                     LogBuffer.log$default(mobileInputLogger.buffer, "MobileInputLog", LogLevel.INFO, "onSimStateChanged");
-                    ((ChannelCoroutine) producerScope).mo3456trySendJP2dKIU(Boolean.valueOf(mobileConnectionsRepositoryKairosImpl2.keyguardUpdateMonitor.isSimPinSecure()));
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(mobileConnectionsRepositoryKairosImpl2.keyguardUpdateMonitor.isSimPinSecure()));
                 }
             };
             this.this$0.keyguardUpdateMonitor.registerCallback(keyguardUpdateMonitorCallback);

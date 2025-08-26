@@ -14,7 +14,6 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.InsetDrawable;
 import com.android.systemui.shared.shadow.DoubleShadowTextHelper;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DoubleShadowIconDrawable extends Drawable {
     public final int mCanvasSize;
@@ -31,13 +30,13 @@ public final class DoubleShadowIconDrawable extends Drawable {
         RenderNode renderNode = new RenderNode("DoubleShadowNode");
         renderNode.setPosition(0, 0, i3, i3);
         float f = shadowInfo2.blur;
-        int argb = Color.argb(shadowInfo2.alpha, 0.0f, 0.0f, 0.0f);
+        int iArgb = Color.argb(shadowInfo2.alpha, 0.0f, 0.0f, 0.0f);
         PorterDuff.Mode mode = PorterDuff.Mode.MULTIPLY;
-        PorterDuffColorFilter porterDuffColorFilter = new PorterDuffColorFilter(argb, mode);
+        PorterDuffColorFilter porterDuffColorFilter = new PorterDuffColorFilter(iArgb, mode);
         Shader.TileMode tileMode = Shader.TileMode.CLAMP;
-        RenderEffect createColorFilterEffect = RenderEffect.createColorFilterEffect(porterDuffColorFilter, RenderEffect.createOffsetEffect(shadowInfo2.offsetX, shadowInfo2.offsetY, RenderEffect.createBlurEffect(f, f, tileMode)));
+        RenderEffect renderEffectCreateColorFilterEffect = RenderEffect.createColorFilterEffect(porterDuffColorFilter, RenderEffect.createOffsetEffect(shadowInfo2.offsetX, shadowInfo2.offsetY, RenderEffect.createBlurEffect(f, f, tileMode)));
         float f2 = shadowInfo.blur;
-        renderNode.setRenderEffect(RenderEffect.createBlendModeEffect(createColorFilterEffect, RenderEffect.createColorFilterEffect(new PorterDuffColorFilter(Color.argb(shadowInfo.alpha, 0.0f, 0.0f, 0.0f), mode), RenderEffect.createOffsetEffect(shadowInfo.offsetX, shadowInfo.offsetY, RenderEffect.createBlurEffect(f2, f2, tileMode))), BlendMode.DST_ATOP));
+        renderNode.setRenderEffect(RenderEffect.createBlendModeEffect(renderEffectCreateColorFilterEffect, RenderEffect.createColorFilterEffect(new PorterDuffColorFilter(Color.argb(shadowInfo.alpha, 0.0f, 0.0f, 0.0f), mode), RenderEffect.createOffsetEffect(shadowInfo.offsetX, shadowInfo.offsetY, RenderEffect.createBlurEffect(f2, f2, tileMode))), BlendMode.DST_ATOP));
         this.mDoubleShadowNode = renderNode;
     }
 

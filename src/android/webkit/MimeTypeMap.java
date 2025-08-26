@@ -13,22 +13,22 @@ public class MimeTypeMap {
     }
 
     public static String getFileExtensionFromUrl(String str) {
-        int lastIndexOf;
+        int iLastIndexOf;
         if (!TextUtils.isEmpty(str)) {
-            int lastIndexOf2 = str.lastIndexOf(35);
-            if (lastIndexOf2 > 0) {
-                str = str.substring(0, lastIndexOf2);
+            int iLastIndexOf2 = str.lastIndexOf(35);
+            if (iLastIndexOf2 > 0) {
+                str = str.substring(0, iLastIndexOf2);
             }
-            int lastIndexOf3 = str.lastIndexOf(63);
-            if (lastIndexOf3 > 0) {
-                str = str.substring(0, lastIndexOf3);
+            int iLastIndexOf3 = str.lastIndexOf(63);
+            if (iLastIndexOf3 > 0) {
+                str = str.substring(0, iLastIndexOf3);
             }
-            int lastIndexOf4 = str.lastIndexOf(47);
-            if (lastIndexOf4 >= 0) {
-                str = str.substring(lastIndexOf4 + 1);
+            int iLastIndexOf4 = str.lastIndexOf(47);
+            if (iLastIndexOf4 >= 0) {
+                str = str.substring(iLastIndexOf4 + 1);
             }
-            if (!str.isEmpty() && Pattern.matches("[a-zA-Z_0-9\\.\\-\\(\\)\\%]+", str) && (lastIndexOf = str.lastIndexOf(46)) >= 0) {
-                return str.substring(lastIndexOf + 1);
+            if (!str.isEmpty() && Pattern.matches("[a-zA-Z_0-9\\.\\-\\(\\)\\%]+", str) && (iLastIndexOf = str.lastIndexOf(46)) >= 0) {
+                return str.substring(iLastIndexOf + 1);
             }
             return "";
         }
@@ -57,9 +57,9 @@ public class MimeTypeMap {
 
     String remapGenericMimeType(String str, String str2, String str3) {
         if ("text/plain".equals(str) || "application/octet-stream".equals(str)) {
-            String parseContentDisposition = str3 != null ? URLUtil.parseContentDisposition(str3) : null;
-            if (parseContentDisposition != null) {
-                str2 = parseContentDisposition;
+            String contentDisposition = str3 != null ? URLUtil.parseContentDisposition(str3) : null;
+            if (contentDisposition != null) {
+                str2 = contentDisposition;
             }
             String mimeTypeFromExtension = getMimeTypeFromExtension(getFileExtensionFromUrl(str2));
             if (mimeTypeFromExtension != null) {

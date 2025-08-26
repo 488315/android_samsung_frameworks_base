@@ -2,6 +2,7 @@ package android.widget;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.database.DataSetObserver;
 import android.graphics.Canvas;
@@ -79,7 +80,7 @@ class CalendarViewLegacyDelegate extends CalendarView.AbstractCalendarViewDelega
     private int mWeekSeparatorLineColor;
     private final int mWeekSeparatorLineWidth;
 
-    CalendarViewLegacyDelegate(CalendarView calendarView, Context context, AttributeSet attributeSet, int i, int i2) {
+    CalendarViewLegacyDelegate(CalendarView calendarView, Context context, AttributeSet attributeSet, int i, int i2) throws Resources.NotFoundException {
         super(calendarView, context);
         this.mListScrollTopOffset = 2;
         this.mWeekMinVisibleHeight = 12;
@@ -92,40 +93,40 @@ class CalendarViewLegacyDelegate extends CalendarView.AbstractCalendarViewDelega
         this.mPreviousScrollState = 0;
         this.mCurrentScrollState = 0;
         this.mScrollStateChangedRunnable = new ScrollStateRunnable();
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.CalendarView, i, i2);
-        this.mShowWeekNumber = obtainStyledAttributes.getBoolean(1, true);
-        this.mFirstDayOfWeek = obtainStyledAttributes.getInt(0, Calendar.getInstance().getFirstDayOfWeek());
-        if (!CalendarView.parseDate(obtainStyledAttributes.getString(2), this.mMinDate)) {
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.CalendarView, i, i2);
+        this.mShowWeekNumber = typedArrayObtainStyledAttributes.getBoolean(1, true);
+        this.mFirstDayOfWeek = typedArrayObtainStyledAttributes.getInt(0, Calendar.getInstance().getFirstDayOfWeek());
+        if (!CalendarView.parseDate(typedArrayObtainStyledAttributes.getString(2), this.mMinDate)) {
             CalendarView.parseDate("01/01/1900", this.mMinDate);
         }
-        if (!CalendarView.parseDate(obtainStyledAttributes.getString(3), this.mMaxDate)) {
+        if (!CalendarView.parseDate(typedArrayObtainStyledAttributes.getString(3), this.mMaxDate)) {
             CalendarView.parseDate("01/01/2100", this.mMaxDate);
         }
         if (this.mMaxDate.before(this.mMinDate)) {
             throw new IllegalArgumentException("Max date cannot be before min date.");
         }
-        this.mShownWeekCount = obtainStyledAttributes.getInt(4, 6);
-        this.mSelectedWeekBackgroundColor = obtainStyledAttributes.getColor(5, 0);
-        this.mFocusedMonthDateColor = obtainStyledAttributes.getColor(6, 0);
-        this.mUnfocusedMonthDateColor = obtainStyledAttributes.getColor(7, 0);
-        this.mWeekSeparatorLineColor = obtainStyledAttributes.getColor(9, 0);
-        this.mWeekNumberColor = obtainStyledAttributes.getColor(8, 0);
-        this.mSelectedDateVerticalBar = obtainStyledAttributes.getDrawable(10);
-        this.mDateTextAppearanceResId = obtainStyledAttributes.getResourceId(12, 16973894);
+        this.mShownWeekCount = typedArrayObtainStyledAttributes.getInt(4, 6);
+        this.mSelectedWeekBackgroundColor = typedArrayObtainStyledAttributes.getColor(5, 0);
+        this.mFocusedMonthDateColor = typedArrayObtainStyledAttributes.getColor(6, 0);
+        this.mUnfocusedMonthDateColor = typedArrayObtainStyledAttributes.getColor(7, 0);
+        this.mWeekSeparatorLineColor = typedArrayObtainStyledAttributes.getColor(9, 0);
+        this.mWeekNumberColor = typedArrayObtainStyledAttributes.getColor(8, 0);
+        this.mSelectedDateVerticalBar = typedArrayObtainStyledAttributes.getDrawable(10);
+        this.mDateTextAppearanceResId = typedArrayObtainStyledAttributes.getResourceId(12, 16973894);
         updateDateTextSize();
-        this.mWeekDayTextAppearanceResId = obtainStyledAttributes.getResourceId(11, -1);
-        obtainStyledAttributes.recycle();
+        this.mWeekDayTextAppearanceResId = typedArrayObtainStyledAttributes.getResourceId(11, -1);
+        typedArrayObtainStyledAttributes.recycle();
         DisplayMetrics displayMetrics = this.mDelegator.getResources().getDisplayMetrics();
         this.mWeekMinVisibleHeight = (int) TypedValue.applyDimension(1, 12.0f, displayMetrics);
         this.mListScrollTopOffset = (int) TypedValue.applyDimension(1, 2.0f, displayMetrics);
         this.mBottomBuffer = (int) TypedValue.applyDimension(1, 20.0f, displayMetrics);
         this.mSelectedDateVerticalBarWidth = (int) TypedValue.applyDimension(1, 6.0f, displayMetrics);
         this.mWeekSeparatorLineWidth = (int) TypedValue.applyDimension(1, 1.0f, displayMetrics);
-        View inflate = ((LayoutInflater) this.mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.calendar_view, (ViewGroup) null, false);
-        this.mDelegator.addView(inflate);
+        View viewInflate = ((LayoutInflater) this.mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.calendar_view, (ViewGroup) null, false);
+        this.mDelegator.addView(viewInflate);
         this.mListView = (ListView) this.mDelegator.findViewById(16908298);
-        this.mDayNamesHeader = (ViewGroup) inflate.findViewById(R.id.day_names);
-        this.mMonthName = (TextView) inflate.findViewById(R.id.month_name);
+        this.mDayNamesHeader = (ViewGroup) viewInflate.findViewById(R.id.day_names);
+        this.mMonthName = (TextView) viewInflate.findViewById(R.id.month_name);
         setUpHeader();
         setUpListView();
         setUpAdapter();
@@ -263,7 +264,7 @@ class CalendarViewLegacyDelegate extends CalendarView.AbstractCalendarViewDelega
     }
 
     @Override // android.widget.CalendarView.CalendarViewDelegate
-    public void setWeekDayTextAppearance(int i) {
+    public void setWeekDayTextAppearance(int i) throws Resources.NotFoundException {
         if (this.mWeekDayTextAppearanceResId != i) {
             this.mWeekDayTextAppearanceResId = i;
             setUpHeader();
@@ -276,7 +277,7 @@ class CalendarViewLegacyDelegate extends CalendarView.AbstractCalendarViewDelega
     }
 
     @Override // android.widget.CalendarView.CalendarViewDelegate
-    public void setDateTextAppearance(int i) {
+    public void setDateTextAppearance(int i) throws Resources.NotFoundException {
         if (this.mDateTextAppearanceResId != i) {
             this.mDateTextAppearanceResId = i;
             updateDateTextSize();
@@ -335,7 +336,7 @@ class CalendarViewLegacyDelegate extends CalendarView.AbstractCalendarViewDelega
     }
 
     @Override // android.widget.CalendarView.AbstractCalendarViewDelegate, android.widget.CalendarView.CalendarViewDelegate
-    public void setShowWeekNumber(boolean z) {
+    public void setShowWeekNumber(boolean z) throws Resources.NotFoundException {
         if (this.mShowWeekNumber == z) {
             return;
         }
@@ -350,7 +351,7 @@ class CalendarViewLegacyDelegate extends CalendarView.AbstractCalendarViewDelega
     }
 
     @Override // android.widget.CalendarView.CalendarViewDelegate
-    public void setFirstDayOfWeek(int i) {
+    public void setFirstDayOfWeek(int i) throws Resources.NotFoundException {
         if (this.mFirstDayOfWeek == i) {
             return;
         }
@@ -424,10 +425,10 @@ class CalendarViewLegacyDelegate extends CalendarView.AbstractCalendarViewDelega
         this.mMaxDate = getCalendarForLocale(this.mMaxDate, locale);
     }
 
-    private void updateDateTextSize() {
-        TypedArray obtainStyledAttributes = this.mDelegator.getContext().obtainStyledAttributes(this.mDateTextAppearanceResId, R.styleable.TextAppearance);
-        this.mDateTextSize = obtainStyledAttributes.getDimensionPixelSize(0, 14);
-        obtainStyledAttributes.recycle();
+    private void updateDateTextSize() throws Resources.NotFoundException {
+        TypedArray typedArrayObtainStyledAttributes = this.mDelegator.getContext().obtainStyledAttributes(this.mDateTextAppearanceResId, R.styleable.TextAppearance);
+        this.mDateTextSize = typedArrayObtainStyledAttributes.getDimensionPixelSize(0, 14);
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     private void invalidateAllWeekViews() {
@@ -469,7 +470,7 @@ class CalendarViewLegacyDelegate extends CalendarView.AbstractCalendarViewDelega
         this.mAdapter.notifyDataSetChanged();
     }
 
-    private void setUpHeader() {
+    private void setUpHeader() throws Resources.NotFoundException {
         int i = this.mDaysPerWeek;
         this.mDayNamesShort = new String[i];
         this.mDayNamesLong = new String[i];
@@ -646,7 +647,7 @@ class CalendarViewLegacyDelegate extends CalendarView.AbstractCalendarViewDelega
         }
 
         @Override // java.lang.Runnable
-        public void run() {
+        public void run() throws Resources.NotFoundException {
             CalendarViewLegacyDelegate.this.mCurrentScrollState = this.mNewState;
             if (this.mNewState == 0 && CalendarViewLegacyDelegate.this.mPreviousScrollState != 0) {
                 View childAt = this.mView.getChildAt(0);
@@ -874,8 +875,8 @@ class CalendarViewLegacyDelegate extends CalendarView.AbstractCalendarViewDelega
             int i;
             int i2;
             int i3;
-            boolean isLayoutRtl = isLayoutRtl();
-            if (isLayoutRtl) {
+            boolean zIsLayoutRtl = isLayoutRtl();
+            if (zIsLayoutRtl) {
                 if (CalendarViewLegacyDelegate.this.mShowWeekNumber) {
                     int i4 = this.mWidth;
                     i3 = i4 - (i4 / this.mNumCells);
@@ -894,7 +895,7 @@ class CalendarViewLegacyDelegate extends CalendarView.AbstractCalendarViewDelega
                 return false;
             }
             int i5 = (int) (((f - f2) * CalendarViewLegacyDelegate.this.mDaysPerWeek) / (i2 - i));
-            if (isLayoutRtl) {
+            if (zIsLayoutRtl) {
                 i5 = (CalendarViewLegacyDelegate.this.mDaysPerWeek - 1) - i5;
             }
             calendar.setTimeInMillis(this.mFirstDay.getTimeInMillis());
@@ -942,8 +943,8 @@ class CalendarViewLegacyDelegate extends CalendarView.AbstractCalendarViewDelega
                 this.mDrawPaint.setColor(CalendarViewLegacyDelegate.this.mSelectedWeekBackgroundColor);
                 this.mTempRect.top = CalendarViewLegacyDelegate.this.mWeekSeparatorLineWidth;
                 this.mTempRect.bottom = this.mHeight;
-                boolean isLayoutRtl = isLayoutRtl();
-                if (isLayoutRtl) {
+                boolean zIsLayoutRtl = isLayoutRtl();
+                if (zIsLayoutRtl) {
                     this.mTempRect.left = 0;
                     this.mTempRect.right = this.mSelectedLeft - 2;
                 } else {
@@ -951,7 +952,7 @@ class CalendarViewLegacyDelegate extends CalendarView.AbstractCalendarViewDelega
                     this.mTempRect.right = this.mSelectedLeft - 2;
                 }
                 canvas.drawRect(this.mTempRect, this.mDrawPaint);
-                if (isLayoutRtl) {
+                if (zIsLayoutRtl) {
                     this.mTempRect.left = this.mSelectedRight + 3;
                     Rect rect = this.mTempRect;
                     if (CalendarViewLegacyDelegate.this.mShowWeekNumber) {
@@ -1026,10 +1027,10 @@ class CalendarViewLegacyDelegate extends CalendarView.AbstractCalendarViewDelega
                     i = this.mWidth;
                 }
             } else {
-                r1 = CalendarViewLegacyDelegate.this.mShowWeekNumber ? this.mWidth / this.mNumCells : 0.0f;
+                f = CalendarViewLegacyDelegate.this.mShowWeekNumber ? this.mWidth / this.mNumCells : 0.0f;
                 i = this.mWidth;
             }
-            canvas.drawLine(r1, 0.0f, i, 0.0f, this.mDrawPaint);
+            canvas.drawLine(f, 0.0f, i, 0.0f, this.mDrawPaint);
         }
 
         private void drawSelectedDateVerticalBars(Canvas canvas) {
@@ -1049,15 +1050,15 @@ class CalendarViewLegacyDelegate extends CalendarView.AbstractCalendarViewDelega
 
         private void updateSelectionPositions() {
             if (this.mHasSelectedDay) {
-                boolean isLayoutRtl = isLayoutRtl();
+                boolean zIsLayoutRtl = isLayoutRtl();
                 int i = this.mSelectedDay - CalendarViewLegacyDelegate.this.mFirstDayOfWeek;
                 if (i < 0) {
                     i += 7;
                 }
-                if (CalendarViewLegacyDelegate.this.mShowWeekNumber && !isLayoutRtl) {
+                if (CalendarViewLegacyDelegate.this.mShowWeekNumber && !zIsLayoutRtl) {
                     i++;
                 }
-                if (isLayoutRtl) {
+                if (zIsLayoutRtl) {
                     this.mSelectedLeft = (((CalendarViewLegacyDelegate.this.mDaysPerWeek - 1) - i) * this.mWidth) / this.mNumCells;
                 } else {
                     this.mSelectedLeft = (i * this.mWidth) / this.mNumCells;

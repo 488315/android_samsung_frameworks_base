@@ -74,9 +74,9 @@ public class FindActionModeCallback implements ActionMode.Callback, TextWatcher,
     }
 
     public FindActionModeCallback(Context context) {
-        View inflate = LayoutInflater.from(context).inflate(R.layout.webview_find, (ViewGroup) null);
-        this.mCustomView = inflate;
-        EditText editText = (EditText) inflate.findViewById(16908291);
+        View viewInflate = LayoutInflater.from(context).inflate(R.layout.webview_find, (ViewGroup) null);
+        this.mCustomView = viewInflate;
+        EditText editText = (EditText) viewInflate.findViewById(16908291);
         this.mEditText = editText;
         editText.setCustomSelectionActionModeCallback(new NoAction());
         this.mEditText.setOnClickListener(this);
@@ -169,10 +169,10 @@ public class FindActionModeCallback implements ActionMode.Callback, TextWatcher,
         if (this.mNumberOfMatches == 0) {
             this.mMatches.setText(R.string.no_matches);
         } else {
-            HashMap hashMap = new HashMap();
-            hashMap.put(Contract.Events.Projection.COUNT_ONLY, Integer.valueOf(this.mActiveMatchIndex + 1));
-            hashMap.put("total", Integer.valueOf(this.mNumberOfMatches));
-            this.mMatches.lambda$setTextAsync$0(PluralsMessageFormatter.format(this.mResources, hashMap, R.string.matches_found));
+            HashMap map = new HashMap();
+            map.put(Contract.Events.Projection.COUNT_ONLY, Integer.valueOf(this.mActiveMatchIndex + 1));
+            map.put("total", Integer.valueOf(this.mNumberOfMatches));
+            this.mMatches.lambda$setTextAsync$0(PluralsMessageFormatter.format(this.mResources, map, R.string.matches_found));
         }
         this.mMatches.setVisibility(0);
     }

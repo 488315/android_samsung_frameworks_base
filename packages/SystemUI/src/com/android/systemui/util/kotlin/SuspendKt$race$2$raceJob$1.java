@@ -12,7 +12,6 @@ import kotlinx.coroutines.CompletableDeferred;
 import kotlinx.coroutines.CompletableDeferredImpl;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class SuspendKt$race$2$raceJob$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ Function1[] $blocks;
@@ -20,7 +19,6 @@ final class SuspendKt$race$2$raceJob$1 extends SuspendLambda implements Function
     private /* synthetic */ Object L$0;
     int label;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.util.kotlin.SuspendKt$race$2$raceJob$1$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ Function1 $block;
@@ -51,11 +49,11 @@ final class SuspendKt$race$2$raceJob$1 extends SuspendLambda implements Function
                 Function1 function1 = this.$block;
                 this.L$0 = completableDeferred2;
                 this.label = 1;
-                Object mo779invoke = function1.mo779invoke(this);
-                if (mo779invoke == coroutineSingletons) {
+                Object objMo781invoke = function1.mo781invoke(this);
+                if (objMo781invoke == coroutineSingletons) {
                     return coroutineSingletons;
                 }
-                obj = mo779invoke;
+                obj = objMo781invoke;
                 completableDeferred = completableDeferred2;
             } else {
                 if (i != 1) {

@@ -64,13 +64,13 @@ public class SurfaceTexture {
         this(i, false);
     }
 
-    public SurfaceTexture(int i, boolean z) {
+    public SurfaceTexture(int i, boolean z) throws Surface.OutOfResourcesException {
         this.mCreatorLooper = Looper.myLooper();
         this.mIsSingleBuffered = z;
         nativeInit(false, i, z, new WeakReference<>(this));
     }
 
-    public SurfaceTexture(boolean z) {
+    public SurfaceTexture(boolean z) throws Surface.OutOfResourcesException {
         this.mCreatorLooper = Looper.myLooper();
         this.mIsSingleBuffered = z;
         nativeInit(true, 0, z, new WeakReference<>(this));
@@ -81,17 +81,17 @@ public class SurfaceTexture {
     }
 
     public void setOnFrameAvailableListener(final OnFrameAvailableListener onFrameAvailableListener, Handler handler) {
-        Looper looper;
+        Looper mainLooper;
         if (onFrameAvailableListener != null) {
             if (handler != null) {
-                looper = handler.getLooper();
+                mainLooper = handler.getLooper();
             } else {
-                looper = this.mCreatorLooper;
-                if (looper == null) {
-                    looper = Looper.getMainLooper();
+                mainLooper = this.mCreatorLooper;
+                if (mainLooper == null) {
+                    mainLooper = Looper.getMainLooper();
                 }
             }
-            this.mOnFrameAvailableHandler = new Handler(looper, null, true) { // from class: android.graphics.SurfaceTexture.1
+            this.mOnFrameAvailableHandler = new Handler(mainLooper, null, true) { // from class: android.graphics.SurfaceTexture.1
                 @Override // android.os.Handler
                 public void handleMessage(Message message) {
                     onFrameAvailableListener.onFrameAvailable(SurfaceTexture.this);
@@ -115,17 +115,17 @@ public class SurfaceTexture {
     }
 
     public void setOnSetFrameRateListener(final OnSetFrameRateListener onSetFrameRateListener, Handler handler) {
-        Looper looper;
+        Looper mainLooper;
         if (onSetFrameRateListener != null) {
             if (handler != null) {
-                looper = handler.getLooper();
+                mainLooper = handler.getLooper();
             } else {
-                looper = this.mCreatorLooper;
-                if (looper == null) {
-                    looper = Looper.getMainLooper();
+                mainLooper = this.mCreatorLooper;
+                if (mainLooper == null) {
+                    mainLooper = Looper.getMainLooper();
                 }
             }
-            this.mOnSetFrameRateHandler = new Handler(looper, null, true) { // from class: android.graphics.SurfaceTexture.2
+            this.mOnSetFrameRateHandler = new Handler(mainLooper, null, true) { // from class: android.graphics.SurfaceTexture.2
                 @Override // android.os.Handler
                 public void handleMessage(Message message) {
                     Trace.traceBegin(8L, "onSetFrameRateHandler");

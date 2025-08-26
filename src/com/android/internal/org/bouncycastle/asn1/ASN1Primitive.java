@@ -34,24 +34,24 @@ public abstract class ASN1Primitive extends ASN1Object {
 
     @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object
     public void encodeTo(OutputStream outputStream) throws IOException {
-        ASN1OutputStream create = ASN1OutputStream.create(outputStream);
-        create.writePrimitive(this, true);
-        create.flushInternal();
+        ASN1OutputStream aSN1OutputStreamCreate = ASN1OutputStream.create(outputStream);
+        aSN1OutputStreamCreate.writePrimitive(this, true);
+        aSN1OutputStreamCreate.flushInternal();
     }
 
     @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object
     public void encodeTo(OutputStream outputStream, String str) throws IOException {
-        ASN1OutputStream create = ASN1OutputStream.create(outputStream, str);
-        create.writePrimitive(this, true);
-        create.flushInternal();
+        ASN1OutputStream aSN1OutputStreamCreate = ASN1OutputStream.create(outputStream, str);
+        aSN1OutputStreamCreate.writePrimitive(this, true);
+        aSN1OutputStreamCreate.flushInternal();
     }
 
     public static ASN1Primitive fromByteArray(byte[] bArr) throws IOException {
         ASN1InputStream aSN1InputStream = new ASN1InputStream(bArr);
         try {
-            ASN1Primitive readObject = aSN1InputStream.readObject();
+            ASN1Primitive object = aSN1InputStream.readObject();
             if (aSN1InputStream.available() == 0) {
-                return readObject;
+                return object;
             }
             throw new IOException("Extra data detected in stream");
         } catch (ClassCastException unused) {

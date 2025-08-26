@@ -71,15 +71,15 @@ class LocalSocketImpl {
 
         @Override // java.io.InputStream
         public int read() throws IOException {
-            int read_native;
+            int i;
             synchronized (LocalSocketImpl.this.readMonitor) {
                 FileDescriptor fileDescriptor = LocalSocketImpl.this.fd;
                 if (fileDescriptor == null) {
                     throw new IOException("socket closed");
                 }
-                read_native = LocalSocketImpl.this.read_native(fileDescriptor);
+                i = LocalSocketImpl.this.read_native(fileDescriptor);
             }
-            return read_native;
+            return i;
         }
 
         @Override // java.io.InputStream
@@ -89,7 +89,7 @@ class LocalSocketImpl {
 
         @Override // java.io.InputStream
         public int read(byte[] bArr, int i, int i2) throws IOException {
-            int readba_native;
+            int i3;
             synchronized (LocalSocketImpl.this.readMonitor) {
                 FileDescriptor fileDescriptor = LocalSocketImpl.this.fd;
                 if (fileDescriptor == null) {
@@ -98,9 +98,9 @@ class LocalSocketImpl {
                 if (i < 0 || i2 < 0 || i + i2 > bArr.length) {
                     throw new ArrayIndexOutOfBoundsException();
                 }
-                readba_native = LocalSocketImpl.this.readba_native(bArr, i, i2, fileDescriptor);
+                i3 = LocalSocketImpl.this.readba_native(bArr, i, i2, fileDescriptor);
             }
-            return readba_native;
+            return i3;
         }
     }
 
@@ -209,7 +209,7 @@ class LocalSocketImpl {
         bindLocal(fileDescriptor, localSocketAddress.getName(), localSocketAddress.getNamespace().getId());
     }
 
-    protected void listen(int i) throws IOException {
+    protected void listen(int i) throws IOException, ErrnoException {
         FileDescriptor fileDescriptor = this.fd;
         if (fileDescriptor == null) {
             throw new IOException("socket not created");
@@ -266,7 +266,7 @@ class LocalSocketImpl {
         return getInputStream().available();
     }
 
-    protected void shutdownInput() throws IOException {
+    protected void shutdownInput() throws IOException, ErrnoException {
         FileDescriptor fileDescriptor = this.fd;
         if (fileDescriptor == null) {
             throw new IOException("socket not created");
@@ -278,7 +278,7 @@ class LocalSocketImpl {
         }
     }
 
-    protected void shutdownOutput() throws IOException {
+    protected void shutdownOutput() throws IOException, ErrnoException {
         FileDescriptor fileDescriptor = this.fd;
         if (fileDescriptor == null) {
             throw new IOException("socket not created");
@@ -332,19 +332,19 @@ class LocalSocketImpl {
     /* JADX WARN: Type inference failed for: r1v10 */
     /* JADX WARN: Type inference failed for: r1v4, types: [int] */
     /* JADX WARN: Type inference failed for: r1v9 */
-    public void setOption(int i, Object obj) throws IOException {
-        int i2;
+    public void setOption(int i, Object obj) throws IOException, ErrnoException {
+        int iIntValue;
         ?? r1;
         if (this.fd == null) {
             throw new IOException("socket not created");
         }
         if (obj instanceof Integer) {
-            i2 = ((Integer) obj).intValue();
+            iIntValue = ((Integer) obj).intValue();
             r1 = -1;
         } else if (obj instanceof Boolean) {
-            boolean booleanValue = ((Boolean) obj).booleanValue();
-            i2 = 0;
-            r1 = booleanValue;
+            boolean zBooleanValue = ((Boolean) obj).booleanValue();
+            iIntValue = 0;
+            r1 = zBooleanValue;
         } else {
             throw new IOException("bad value: " + obj);
         }
@@ -352,21 +352,21 @@ class LocalSocketImpl {
             if (i != 1) {
                 if (i != 4) {
                     if (i == 128) {
-                        Os.setsockoptLinger(this.fd, OsConstants.SOL_SOCKET, OsConstants.SO_LINGER, new StructLinger((int) r1, i2));
+                        Os.setsockoptLinger(this.fd, OsConstants.SOL_SOCKET, OsConstants.SO_LINGER, new StructLinger((int) r1, iIntValue));
                         return;
                     } else if (i == 4102) {
-                        StructTimeval fromMillis = StructTimeval.fromMillis(i2);
-                        Os.setsockoptTimeval(this.fd, OsConstants.SOL_SOCKET, OsConstants.SO_RCVTIMEO, fromMillis);
-                        Os.setsockoptTimeval(this.fd, OsConstants.SOL_SOCKET, OsConstants.SO_SNDTIMEO, fromMillis);
+                        StructTimeval structTimevalFromMillis = StructTimeval.fromMillis(iIntValue);
+                        Os.setsockoptTimeval(this.fd, OsConstants.SOL_SOCKET, OsConstants.SO_RCVTIMEO, structTimevalFromMillis);
+                        Os.setsockoptTimeval(this.fd, OsConstants.SOL_SOCKET, OsConstants.SO_SNDTIMEO, structTimevalFromMillis);
                         return;
                     } else if (i != 4097 && i != 4098) {
                         throw new IOException("Unknown option: " + i);
                     }
                 }
-                Os.setsockoptInt(this.fd, OsConstants.SOL_SOCKET, javaSoToOsOpt(i), i2);
+                Os.setsockoptInt(this.fd, OsConstants.SOL_SOCKET, javaSoToOsOpt(i), iIntValue);
                 return;
             }
-            Os.setsockoptInt(this.fd, OsConstants.IPPROTO_TCP, OsConstants.TCP_NODELAY, i2);
+            Os.setsockoptInt(this.fd, OsConstants.IPPROTO_TCP, OsConstants.TCP_NODELAY, iIntValue);
         } catch (ErrnoException e) {
             throw e.rethrowAsIOException();
         }

@@ -24,9 +24,9 @@ public class SinWaveFilter extends Filter {
 
     @Override // android.filterfw.core.Filter
     public void setupPorts() {
-        MutableFrameFormat fromClass = ObjectFormat.fromClass(Float.class, 1);
-        this.mOutputFormat = fromClass;
-        addOutputPort("value", fromClass);
+        MutableFrameFormat mutableFrameFormatFromClass = ObjectFormat.fromClass(Float.class, 1);
+        this.mOutputFormat = mutableFrameFormatFromClass;
+        addOutputPort("value", mutableFrameFormatFromClass);
     }
 
     @Override // android.filterfw.core.Filter
@@ -36,10 +36,10 @@ public class SinWaveFilter extends Filter {
 
     @Override // android.filterfw.core.Filter
     public void process(FilterContext filterContext) {
-        Frame newFrame = filterContext.getFrameManager().newFrame(this.mOutputFormat);
-        newFrame.setObjectValue(Float.valueOf((((float) Math.sin(this.mValue)) + 1.0f) / 2.0f));
-        pushOutput("value", newFrame);
+        Frame frameNewFrame = filterContext.getFrameManager().newFrame(this.mOutputFormat);
+        frameNewFrame.setObjectValue(Float.valueOf((((float) Math.sin(this.mValue)) + 1.0f) / 2.0f));
+        pushOutput("value", frameNewFrame);
         this.mValue += this.mStepSize;
-        newFrame.release();
+        frameNewFrame.release();
     }
 }

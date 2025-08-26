@@ -15,7 +15,6 @@ import kotlin.jdk7.AutoCloseableKt;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class PromptCredentialInteractor$checkCredential$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ List<LockPatternView.Cell> $pattern;
@@ -48,8 +47,8 @@ final class PromptCredentialInteractor$checkCredential$2 extends SuspendLambda i
     /* JADX WARN: Type inference failed for: r6v12, types: [java.lang.CharSequence] */
     /* JADX WARN: Type inference failed for: r6v7, types: [java.lang.CharSequence] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
-    public final Object invokeSuspend(Object obj) {
-        AutoCloseable createPattern;
+    public final Object invokeSuspend(Object obj) throws Exception {
+        AutoCloseable autoCloseableCreatePattern;
         Throwable th;
         AutoCloseable autoCloseable;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -59,10 +58,10 @@ final class PromptCredentialInteractor$checkCredential$2 extends SuspendLambda i
             BiometricPromptRequest.Credential credential = this.$request;
             if (credential instanceof BiometricPromptRequest.Credential.Pin) {
                 ?? r6 = this.$text;
-                createPattern = LockscreenCredential.createPinOrNone(r6 != 0 ? r6 : "");
+                autoCloseableCreatePattern = LockscreenCredential.createPinOrNone(r6 != 0 ? r6 : "");
             } else if (credential instanceof BiometricPromptRequest.Credential.Password) {
                 ?? r62 = this.$text;
-                createPattern = LockscreenCredential.createPasswordOrNone(r62 != 0 ? r62 : "");
+                autoCloseableCreatePattern = LockscreenCredential.createPasswordOrNone(r62 != 0 ? r62 : "");
             } else {
                 if (!(credential instanceof BiometricPromptRequest.Credential.Pattern)) {
                     throw new NoWhenBranchMatchedException();
@@ -71,22 +70,22 @@ final class PromptCredentialInteractor$checkCredential$2 extends SuspendLambda i
                 if (list == null) {
                     list = EmptyList.INSTANCE;
                 }
-                createPattern = LockscreenCredential.createPattern(list);
+                autoCloseableCreatePattern = LockscreenCredential.createPattern(list);
             }
             PromptCredentialInteractor promptCredentialInteractor = this.this$0;
             BiometricPromptRequest.Credential credential2 = this.$request;
             try {
-                this.L$0 = createPattern;
+                this.L$0 = autoCloseableCreatePattern;
                 this.label = 1;
-                Object access$verifyCredential = PromptCredentialInteractor.access$verifyCredential(promptCredentialInteractor, credential2, createPattern, this);
-                if (access$verifyCredential == coroutineSingletons) {
+                Object objAccess$verifyCredential = PromptCredentialInteractor.access$verifyCredential(promptCredentialInteractor, credential2, autoCloseableCreatePattern, this);
+                if (objAccess$verifyCredential == coroutineSingletons) {
                     return coroutineSingletons;
                 }
-                AutoCloseable autoCloseable2 = createPattern;
-                obj = access$verifyCredential;
+                AutoCloseable autoCloseable2 = autoCloseableCreatePattern;
+                obj = objAccess$verifyCredential;
                 autoCloseable = autoCloseable2;
             } catch (Throwable th2) {
-                AutoCloseable autoCloseable3 = createPattern;
+                AutoCloseable autoCloseable3 = autoCloseableCreatePattern;
                 th = th2;
                 autoCloseable = autoCloseable3;
                 throw th;

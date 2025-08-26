@@ -9,7 +9,6 @@ import android.os.Message;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class LocalBroadcastManager {
     public static LocalBroadcastManager mInstance;
@@ -20,7 +19,6 @@ public final class LocalBroadcastManager {
     public final HashMap mActions = new HashMap();
     public final ArrayList mPendingBroadcasts = new ArrayList();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class BroadcastRecord {
         public final Intent intent;
         public final ArrayList receivers;
@@ -31,7 +29,6 @@ public final class LocalBroadcastManager {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ReceiverRecord {
         public boolean broadcasting;
         public final IntentFilter filter;

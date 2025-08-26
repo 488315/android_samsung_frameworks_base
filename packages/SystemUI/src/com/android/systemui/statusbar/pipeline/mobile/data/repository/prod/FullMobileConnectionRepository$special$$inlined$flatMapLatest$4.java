@@ -11,7 +11,6 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.StateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class FullMobileConnectionRepository$special$$inlined$flatMapLatest$4 extends SuspendLambda implements Function3 {
     private /* synthetic */ Object L$0;
@@ -37,9 +36,9 @@ public final class FullMobileConnectionRepository$special$$inlined$flatMapLatest
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             FlowCollector flowCollector = (FlowCollector) this.L$0;
-            StateFlow isEmergencyOnly = ((MobileConnectionRepository) this.L$1).isEmergencyOnly();
+            StateFlow stateFlowIsEmergencyOnly = ((MobileConnectionRepository) this.L$1).isEmergencyOnly();
             this.label = 1;
-            if (FlowKt.emitAll(flowCollector, isEmergencyOnly, this) == coroutineSingletons) {
+            if (FlowKt.emitAll(flowCollector, stateFlowIsEmergencyOnly, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

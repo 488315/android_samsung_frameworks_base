@@ -10,6 +10,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.Button;
 import com.android.systemui.Dependency;
+import com.android.systemui.R;
 import com.android.systemui.pluginlock.PluginLockManager;
 import com.android.systemui.pluginlock.listener.PluginLockListener;
 import com.android.systemui.res.R$styleable;
@@ -19,7 +20,6 @@ import com.android.systemui.wallpaper.WallpaperUtils;
 import com.android.systemui.widget.SystemUIButton;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SystemUIButton extends Button implements SystemUIWidgetCallback {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -38,7 +38,6 @@ public class SystemUIButton extends Button implements SystemUIWidgetCallback {
     public final ResData mResData;
     public long mUpdateFlag;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class BlurSettingsListener implements SettingsHelper.OnChangedCallback {
         public BlurSettingsListener() {
             ((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).registerCallback(this, Settings.System.getUriFor(SettingsHelper.INDEX_ACCESSIBILITY_REDUCE_TRANSPARENCY));
@@ -50,7 +49,7 @@ public class SystemUIButton extends Button implements SystemUIWidgetCallback {
             SystemUIButton.this.mMainExecutor.execute(new Runnable() { // from class: com.android.systemui.widget.SystemUIButton$BlurSettingsListener$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SystemUIButton.BlurSettingsListener blurSettingsListener = SystemUIButton.BlurSettingsListener.this;
+                    SystemUIButton.BlurSettingsListener blurSettingsListener = this.f$0;
                     blurSettingsListener.getClass();
                     int i = SystemUIButton.$r8$clinit;
                     SystemUIButton.this.updateButtonColor();
@@ -59,7 +58,6 @@ public class SystemUIButton extends Button implements SystemUIWidgetCallback {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ResData {
         public String mGroup;
         public boolean mMovable;
@@ -247,33 +245,79 @@ public class SystemUIButton extends Button implements SystemUIWidgetCallback {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:23:0x0070, code lost:
-    
-        if (r8 > 0) goto L28;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:24:0x0072, code lost:
-    
-        r7 = r8;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:32:0x0087, code lost:
-    
-        if (r8 > 0) goto L28;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:28:0x0072 A[PHI: r5 r6 r8
+      0x0072: PHI (r5v14 int) = (r5v12 int), (r5v15 int) binds: [B:36:0x0087, B:27:0x0070] A[DONT_GENERATE, DONT_INLINE]
+      0x0072: PHI (r6v7 int) = (r6v5 int), (r6v8 int) binds: [B:36:0x0087, B:27:0x0070] A[DONT_GENERATE, DONT_INLINE]
+      0x0072: PHI (r8v17 int) = (r8v16 int), (r8v20 int) binds: [B:36:0x0087, B:27:0x0070] A[DONT_GENERATE, DONT_INLINE]] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final void updateButtonColor() {
-        /*
-            Method dump skipped, instructions count: 241
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.widget.SystemUIButton.updateButtonColor():void");
+        int i;
+        semClearAllTextEffect();
+        boolean zIsWhiteKeyguardWallpaper = WallpaperUtils.isWhiteKeyguardWallpaper(this.mResData.mWallpaperArea);
+        int paddingTop = getPaddingTop();
+        int paddingBottom = getPaddingBottom();
+        int paddingLeft = getPaddingLeft();
+        int paddingRight = getPaddingRight();
+        ResData resData = this.mResData;
+        int i2 = zIsWhiteKeyguardWallpaper ? resData.mWhiteBgColorId : resData.mOriginColorId;
+        ResData resData2 = this.mResData;
+        int i3 = zIsWhiteKeyguardWallpaper ? resData2.mWhiteBgShadowColorId : resData2.mOriginShadowColorId;
+        ResData resData3 = this.mResData;
+        int i4 = zIsWhiteKeyguardWallpaper ? resData3.mWhiteBgBackgroundId : resData3.mOriginBackgroundId;
+        if ((this.mUpdateFlag & 1) != 0 && WallpaperUtils.isOpenThemeLook()) {
+            if (SystemUIWidgetUtil.needsBlackComponent(((Button) this).mContext, SystemUIWidgetUtil.convertFlag(this.mResData.mWallpaperArea), this.mResData.mThemePolicyIgnorable)) {
+                Log.d("SystemUIButton", "apply style: theme : white");
+                ResData resData4 = this.mResData;
+                int i5 = resData4.mThemeBlackColorId;
+                if (i5 > 0) {
+                    i2 = i5;
+                }
+                int i6 = resData4.mThemeBlackShadowColorId;
+                if (i6 > 0) {
+                    i3 = i6;
+                }
+                i = resData4.mThemeBlackBackgroundId;
+                if (i > 0) {
+                    i4 = i;
+                }
+            } else {
+                Log.d("SystemUIButton", "apply style: theme : black");
+                ResData resData5 = this.mResData;
+                int i7 = resData5.mThemeColorId;
+                if (i7 > 0) {
+                    i2 = i7;
+                }
+                int i8 = resData5.mThemeShadowColorId;
+                if (i8 > 0) {
+                    i3 = i8;
+                }
+                i = resData5.mThemeBackgroundId;
+                if (i > 0) {
+                }
+            }
+        }
+        this.mBlurSettings.getClass();
+        if (((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).isReduceTransparencyEnabled()) {
+            i2 = zIsWhiteKeyguardWallpaper ? R.color.reduce_transparency_color_white : R.color.reduce_transparency_color_black;
+            i4 = zIsWhiteKeyguardWallpaper ? R.drawable.reduce_transparency_drawable_light : R.drawable.reduce_transparency_drawable_dark;
+        }
+        if (i2 > 0) {
+            setTextColor(((Button) this).mContext.getResources().getColor(i2, null));
+        }
+        if (i3 > 0) {
+            setShadowLayer(getShadowRadius(), getShadowDx(), getShadowDy(), ((Button) this).mContext.getResources().getColor(i3, null));
+        }
+        if (i4 > 0) {
+            setBackground(((Button) this).mContext.getResources().getDrawable(i4, null));
+        }
+        setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom);
     }
 
     public final void updateFontSizeInKeyguardBoundary(Configuration configuration) {
         boolean z;
-        float max = Math.max(1.0f, Math.min(1.2f, configuration.fontScale));
+        float fMax = Math.max(1.0f, Math.min(1.2f, configuration.fontScale));
         int i = configuration.densityDpi;
         boolean z2 = true;
         if (i != this.mDensityDpi) {
@@ -282,8 +326,8 @@ public class SystemUIButton extends Button implements SystemUIWidgetCallback {
         } else {
             z = false;
         }
-        if (Float.compare(this.mFontScale, max) != 0) {
-            this.mFontScale = max;
+        if (Float.compare(this.mFontScale, fMax) != 0) {
+            this.mFontScale = fMax;
         } else {
             z2 = z;
         }
@@ -343,52 +387,52 @@ public class SystemUIButton extends Button implements SystemUIWidgetCallback {
             }
         };
         this.mBlurSettings = new BlurSettingsListener();
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.SysuiWidgetRes, i, i2);
-        if (obtainStyledAttributes != null) {
-            this.mAttrCount = obtainStyledAttributes.getIndexCount();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.SysuiWidgetRes, i, i2);
+        if (typedArrayObtainStyledAttributes != null) {
+            this.mAttrCount = typedArrayObtainStyledAttributes.getIndexCount();
             for (int i3 = 0; i3 < this.mAttrCount; i3++) {
-                int index = obtainStyledAttributes.getIndex(i3);
+                int index = typedArrayObtainStyledAttributes.getIndex(i3);
                 if (index == 23) {
-                    this.mResData.mWallpaperArea = obtainStyledAttributes.getString(index);
+                    this.mResData.mWallpaperArea = typedArrayObtainStyledAttributes.getString(index);
                 } else if (index == 0) {
                     ResData resData = this.mResData;
-                    obtainStyledAttributes.getString(index);
+                    typedArrayObtainStyledAttributes.getString(index);
                     resData.getClass();
                 } else if (index == 9) {
-                    this.mResData.mOriginColor = obtainStyledAttributes.getString(index);
+                    this.mResData.mOriginColor = typedArrayObtainStyledAttributes.getString(index);
                 } else if (index == 26) {
-                    this.mResData.mWhiteBgColor = obtainStyledAttributes.getString(index);
+                    this.mResData.mWhiteBgColor = typedArrayObtainStyledAttributes.getString(index);
                 } else if (index == 18) {
-                    this.mResData.mThemeColor = obtainStyledAttributes.getString(index);
+                    this.mResData.mThemeColor = typedArrayObtainStyledAttributes.getString(index);
                 } else if (index == 15) {
-                    this.mResData.mThemeBlackColor = obtainStyledAttributes.getString(index);
+                    this.mResData.mThemeBlackColor = typedArrayObtainStyledAttributes.getString(index);
                 } else if (index == 11) {
-                    this.mResData.mOriginShadowColor = obtainStyledAttributes.getString(index);
+                    this.mResData.mOriginShadowColor = typedArrayObtainStyledAttributes.getString(index);
                 } else if (index == 28) {
-                    this.mResData.mWhiteBgShadowColor = obtainStyledAttributes.getString(index);
+                    this.mResData.mWhiteBgShadowColor = typedArrayObtainStyledAttributes.getString(index);
                 } else if (index == 21) {
-                    this.mResData.mThemeShadowColor = obtainStyledAttributes.getString(index);
+                    this.mResData.mThemeShadowColor = typedArrayObtainStyledAttributes.getString(index);
                 } else if (index == 17) {
-                    this.mResData.mThemeBlackShadowColor = obtainStyledAttributes.getString(index);
+                    this.mResData.mThemeBlackShadowColor = typedArrayObtainStyledAttributes.getString(index);
                 } else if (index == 8) {
-                    this.mResData.mOriginBackground = obtainStyledAttributes.getString(index);
+                    this.mResData.mOriginBackground = typedArrayObtainStyledAttributes.getString(index);
                 } else if (index == 25) {
-                    this.mResData.mWhiteBgBackground = obtainStyledAttributes.getString(index);
+                    this.mResData.mWhiteBgBackground = typedArrayObtainStyledAttributes.getString(index);
                 } else if (index == 13) {
-                    this.mResData.mThemeBackground = obtainStyledAttributes.getString(index);
+                    this.mResData.mThemeBackground = typedArrayObtainStyledAttributes.getString(index);
                 } else if (index == 14) {
-                    this.mResData.mThemeBlackBackground = obtainStyledAttributes.getString(index);
+                    this.mResData.mThemeBlackBackground = typedArrayObtainStyledAttributes.getString(index);
                 } else if (index == 7) {
-                    this.mResData.mMovable = obtainStyledAttributes.getBoolean(index, false);
+                    this.mResData.mMovable = typedArrayObtainStyledAttributes.getBoolean(index, false);
                 } else if (index == 5) {
-                    this.mResData.mGroup = obtainStyledAttributes.getString(index);
+                    this.mResData.mGroup = typedArrayObtainStyledAttributes.getString(index);
                 } else if (index == 20) {
-                    this.mResData.mThemePolicyIgnorable = obtainStyledAttributes.getBoolean(index, false);
+                    this.mResData.mThemePolicyIgnorable = typedArrayObtainStyledAttributes.getBoolean(index, false);
                 }
             }
             refreshResIds();
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
         this.mMainExecutor = context.getMainExecutor();
     }
 }

@@ -142,9 +142,9 @@ public abstract class CameraExtensionService extends Service {
 
         @Override // android.hardware.camera2.extension.ICameraExtensionsProxyService
         public IAdvancedExtenderImpl initializeAdvancedExtension(int i) throws RemoteException {
-            AdvancedExtender onInitializeAdvancedExtension = CameraExtensionService.this.onInitializeAdvancedExtension(i);
-            onInitializeAdvancedExtension.setCameraUsageTracker(CameraExtensionService.this.mCameraUsageTracker);
-            return onInitializeAdvancedExtension.getAdvancedExtenderBinder();
+            AdvancedExtender advancedExtenderOnInitializeAdvancedExtension = CameraExtensionService.this.onInitializeAdvancedExtension(i);
+            advancedExtenderOnInitializeAdvancedExtension.setCameraUsageTracker(CameraExtensionService.this.mCameraUsageTracker);
+            return advancedExtenderOnInitializeAdvancedExtension.getAdvancedExtenderBinder();
         }
     }
 }

@@ -4,7 +4,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import kotlin.collections.AbstractMutableSet;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class AbstractMapBuilderEntries<E extends Map.Entry<? extends K, ? extends V>, K, V> extends AbstractMutableSet {
     @Override // java.util.AbstractCollection, java.util.Collection, java.util.Set

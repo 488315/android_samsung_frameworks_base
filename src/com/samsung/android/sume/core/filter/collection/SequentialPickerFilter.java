@@ -33,13 +33,13 @@ public class SequentialPickerFilter extends SequentialFilter {
         IntStream.range(0, this.filters.size()).forEach(new IntConsumer() { // from class: com.samsung.android.sume.core.filter.collection.SequentialPickerFilter$$ExternalSyntheticLambda1
             @Override // java.util.function.IntConsumer
             public final void accept(int i) {
-                SequentialPickerFilter.this.m9559x33bd5385(i);
+                this.f$0.m9572x33bd5385(i);
             }
         });
     }
 
     /* renamed from: lambda$prepare$0$com-samsung-android-sume-core-filter-collection-SequentialPickerFilter, reason: not valid java name */
-    /* synthetic */ void m9559x33bd5385(int i) {
+    /* synthetic */ void m9572x33bd5385(int i) {
         MediaFilter mediaFilter = this.filters.get(i);
         mediaFilter.prepare();
         this.evaluateFilters.add(new Pair<>(this.descriptor.getEvaluators().get(i), mediaFilter));
@@ -56,7 +56,7 @@ public class SequentialPickerFilter extends SequentialFilter {
                     List list = (List) stream.map(new Function() { // from class: com.samsung.android.sume.core.filter.collection.SequentialPickerFilter$$ExternalSyntheticLambda0
                         @Override // java.util.function.Function
                         public final Object apply(Object obj) {
-                            return MediaFilter.this.run((MediaBuffer) obj);
+                            return mediaFilter.run((MediaBuffer) obj);
                         }
                     }).collect(Collectors.toList());
                     if (list.size() == 1) {

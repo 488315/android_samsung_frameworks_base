@@ -9,7 +9,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function4;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class PromptViewModel$isIndicatorMessageVisible$1 extends SuspendLambda implements Function4 {
     /* synthetic */ Object L$0;
@@ -28,7 +27,11 @@ final class PromptViewModel$isIndicatorMessageVisible$1 extends SuspendLambda im
         return promptViewModel$isIndicatorMessageVisible$1.invokeSuspend(Unit.INSTANCE);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:16:0x0036  */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final Object invokeSuspend(Object obj) {
         boolean z;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -40,12 +43,8 @@ final class PromptViewModel$isIndicatorMessageVisible$1 extends SuspendLambda im
         PromptMessage promptMessage = (PromptMessage) this.L$1;
         if (PromptSizeKt.isMedium(promptSize)) {
             promptMessage.getClass();
-            if (!StringsKt__StringsKt.isBlank(promptMessage instanceof PromptMessage.Error ? ((PromptMessage.Error) promptMessage).errorMessage : promptMessage instanceof PromptMessage.Help ? ((PromptMessage.Help) promptMessage).helpMessage : "")) {
-                z = true;
-                return Boolean.valueOf(z);
-            }
+            z = !StringsKt__StringsKt.isBlank(promptMessage instanceof PromptMessage.Error ? ((PromptMessage.Error) promptMessage).errorMessage : promptMessage instanceof PromptMessage.Help ? ((PromptMessage.Help) promptMessage).helpMessage : "");
         }
-        z = false;
         return Boolean.valueOf(z);
     }
 }

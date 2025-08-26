@@ -119,11 +119,11 @@ final class StandardMenuPopup extends MenuPopup implements PopupWindow.OnDismiss
                 this.mContext = new ContextThemeWrapper(context, typedValue.data);
             }
         }
-        LayoutInflater from = LayoutInflater.from(this.mContext);
+        LayoutInflater layoutInflaterFrom = LayoutInflater.from(this.mContext);
         if (this.mIsParentThemeDeviceDefault) {
-            this.mAdapter = new MenuAdapter(menuBuilder, from, z, 17367451);
+            this.mAdapter = new MenuAdapter(menuBuilder, layoutInflaterFrom, z, 17367451);
         } else {
-            this.mAdapter = new MenuAdapter(menuBuilder, from, z, 17367326);
+            this.mAdapter = new MenuAdapter(menuBuilder, layoutInflaterFrom, z, 17367326);
         }
         this.mPopupStyleAttr = i;
         this.mPopupStyleRes = i2;

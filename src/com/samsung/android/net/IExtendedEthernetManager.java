@@ -46,9 +46,9 @@ public interface IExtendedEthernetManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IExtendedEthernetManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IExtendedEthernetManager)) {
-                return (IExtendedEthernetManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IExtendedEthernetManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IExtendedEthernetManager)) {
+                return (IExtendedEthernetManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -75,9 +75,9 @@ public interface IExtendedEthernetManager extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                IpConfiguration configuration = getConfiguration(readString);
+                IpConfiguration configuration = getConfiguration(string);
                 parcel2.writeNoException();
                 parcel2.writeTypedObject(configuration, 1);
                 return true;
@@ -103,17 +103,17 @@ public interface IExtendedEthernetManager extends IInterface {
 
             @Override // com.samsung.android.net.IExtendedEthernetManager
             public IpConfiguration getConfiguration(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IExtendedEthernetManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (IpConfiguration) obtain2.readTypedObject(IpConfiguration.CREATOR);
+                    parcelObtain.writeInterfaceToken(IExtendedEthernetManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (IpConfiguration) parcelObtain2.readTypedObject(IpConfiguration.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

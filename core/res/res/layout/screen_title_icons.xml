@@ -11,5 +11,5 @@
             <ImageView android:layout_gravity="center_vertical" android:id="@id/right_icon" android:visibility="gone" android:layout_width="16.0dip" android:layout_height="16.0dip" android:scaleType="fitCenter" android:layout_weight="0.0" />
         </LinearLayout>
     </RelativeLayout>
-    <FrameLayout android:id="@id/content" android:layout_width="fill_parent" android:layout_height="0.0dip" android:foreground="?windowContentOverlay" android:layout_weight="1.0" android:foregroundGravity="fill_horizontal|center|top" />
+    <FrameLayout android:id="@id/content" android:layout_width="fill_parent" android:layout_height="0.0dip" android:foreground="?windowContentOverlay" android:layout_weight="1.0" android:foregroundGravity="fill_horizontal|top" />
 </LinearLayout>

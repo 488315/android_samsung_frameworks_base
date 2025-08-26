@@ -380,9 +380,9 @@ public final class CalendarContract {
 
             @Override // android.content.CursorEntityIterator
             public Entity getEntityAndIncrementCursor(Cursor cursor) throws RemoteException {
-                Cursor query;
-                Cursor query2;
-                Cursor query3;
+                Cursor cursorQuery;
+                Cursor cursorQuery2;
+                Cursor cursorQuery3;
                 long j = cursor.getLong(cursor.getColumnIndexOrThrow("_id"));
                 ContentValues contentValues = new ContentValues();
                 contentValues.put("_id", Long.valueOf(j));
@@ -450,48 +450,48 @@ public final class CalendarContract {
                 Entity entity = new Entity(contentValues);
                 ContentResolver contentResolver = this.mResolver;
                 if (contentResolver != null) {
-                    query = contentResolver.query(Reminders.CONTENT_URI, REMINDERS_PROJECTION, WHERE_EVENT_ID, new String[]{Long.toString(j)}, null);
+                    cursorQuery = contentResolver.query(Reminders.CONTENT_URI, REMINDERS_PROJECTION, WHERE_EVENT_ID, new String[]{Long.toString(j)}, null);
                 } else {
-                    query = this.mProvider.query(Reminders.CONTENT_URI, REMINDERS_PROJECTION, WHERE_EVENT_ID, new String[]{Long.toString(j)}, null);
+                    cursorQuery = this.mProvider.query(Reminders.CONTENT_URI, REMINDERS_PROJECTION, WHERE_EVENT_ID, new String[]{Long.toString(j)}, null);
                 }
-                while (query.moveToNext()) {
+                while (cursorQuery.moveToNext()) {
                     try {
                         ContentValues contentValues2 = new ContentValues();
-                        contentValues2.put("minutes", Integer.valueOf(query.getInt(0)));
-                        contentValues2.put("method", Integer.valueOf(query.getInt(1)));
+                        contentValues2.put("minutes", Integer.valueOf(cursorQuery.getInt(0)));
+                        contentValues2.put("method", Integer.valueOf(cursorQuery.getInt(1)));
                         entity.addSubValue(Reminders.CONTENT_URI, contentValues2);
                     } finally {
                     }
                 }
-                query.close();
+                cursorQuery.close();
                 ContentResolver contentResolver2 = this.mResolver;
                 if (contentResolver2 != null) {
-                    query2 = contentResolver2.query(Attendees.CONTENT_URI, ATTENDEES_PROJECTION, WHERE_EVENT_ID, new String[]{Long.toString(j)}, null);
+                    cursorQuery2 = contentResolver2.query(Attendees.CONTENT_URI, ATTENDEES_PROJECTION, WHERE_EVENT_ID, new String[]{Long.toString(j)}, null);
                 } else {
-                    query2 = this.mProvider.query(Attendees.CONTENT_URI, ATTENDEES_PROJECTION, WHERE_EVENT_ID, new String[]{Long.toString(j)}, null);
+                    cursorQuery2 = this.mProvider.query(Attendees.CONTENT_URI, ATTENDEES_PROJECTION, WHERE_EVENT_ID, new String[]{Long.toString(j)}, null);
                 }
-                while (query.moveToNext()) {
+                while (cursorQuery.moveToNext()) {
                     try {
                         ContentValues contentValues3 = new ContentValues();
-                        contentValues3.put(AttendeesColumns.ATTENDEE_NAME, query.getString(0));
-                        contentValues3.put(AttendeesColumns.ATTENDEE_EMAIL, query.getString(1));
-                        contentValues3.put(AttendeesColumns.ATTENDEE_RELATIONSHIP, Integer.valueOf(query.getInt(2)));
-                        contentValues3.put(AttendeesColumns.ATTENDEE_TYPE, Integer.valueOf(query.getInt(3)));
-                        contentValues3.put(AttendeesColumns.ATTENDEE_STATUS, Integer.valueOf(query.getInt(4)));
-                        contentValues3.put(AttendeesColumns.ATTENDEE_IDENTITY, query.getString(5));
-                        contentValues3.put(AttendeesColumns.ATTENDEE_ID_NAMESPACE, query.getString(6));
+                        contentValues3.put(AttendeesColumns.ATTENDEE_NAME, cursorQuery.getString(0));
+                        contentValues3.put(AttendeesColumns.ATTENDEE_EMAIL, cursorQuery.getString(1));
+                        contentValues3.put(AttendeesColumns.ATTENDEE_RELATIONSHIP, Integer.valueOf(cursorQuery.getInt(2)));
+                        contentValues3.put(AttendeesColumns.ATTENDEE_TYPE, Integer.valueOf(cursorQuery.getInt(3)));
+                        contentValues3.put(AttendeesColumns.ATTENDEE_STATUS, Integer.valueOf(cursorQuery.getInt(4)));
+                        contentValues3.put(AttendeesColumns.ATTENDEE_IDENTITY, cursorQuery.getString(5));
+                        contentValues3.put(AttendeesColumns.ATTENDEE_ID_NAMESPACE, cursorQuery.getString(6));
                         entity.addSubValue(Attendees.CONTENT_URI, contentValues3);
                     } finally {
                     }
                 }
-                query.close();
+                cursorQuery.close();
                 ContentResolver contentResolver3 = this.mResolver;
                 if (contentResolver3 != null) {
-                    query3 = contentResolver3.query(ExtendedProperties.CONTENT_URI, EXTENDED_PROJECTION, WHERE_EVENT_ID, new String[]{Long.toString(j)}, null);
+                    cursorQuery3 = contentResolver3.query(ExtendedProperties.CONTENT_URI, EXTENDED_PROJECTION, WHERE_EVENT_ID, new String[]{Long.toString(j)}, null);
                 } else {
-                    query3 = this.mProvider.query(ExtendedProperties.CONTENT_URI, EXTENDED_PROJECTION, WHERE_EVENT_ID, new String[]{Long.toString(j)}, null);
+                    cursorQuery3 = this.mProvider.query(ExtendedProperties.CONTENT_URI, EXTENDED_PROJECTION, WHERE_EVENT_ID, new String[]{Long.toString(j)}, null);
                 }
-                Cursor cursor2 = query3;
+                Cursor cursor2 = cursorQuery3;
                 while (cursor2.moveToNext()) {
                     try {
                         ContentValues contentValues4 = new ContentValues();
@@ -547,17 +547,17 @@ public final class CalendarContract {
         }
 
         public static final Cursor query(ContentResolver contentResolver, String[] strArr, long j, long j2) {
-            Uri.Builder buildUpon = CONTENT_URI.buildUpon();
-            ContentUris.appendId(buildUpon, j);
-            ContentUris.appendId(buildUpon, j2);
-            return contentResolver.query(buildUpon.build(), strArr, WHERE_CALENDARS_SELECTED, WHERE_CALENDARS_ARGS, DEFAULT_SORT_ORDER);
+            Uri.Builder builderBuildUpon = CONTENT_URI.buildUpon();
+            ContentUris.appendId(builderBuildUpon, j);
+            ContentUris.appendId(builderBuildUpon, j2);
+            return contentResolver.query(builderBuildUpon.build(), strArr, WHERE_CALENDARS_SELECTED, WHERE_CALENDARS_ARGS, DEFAULT_SORT_ORDER);
         }
 
         public static final Cursor query(ContentResolver contentResolver, String[] strArr, long j, long j2, String str) {
-            Uri.Builder buildUpon = CONTENT_SEARCH_URI.buildUpon();
-            ContentUris.appendId(buildUpon, j);
-            ContentUris.appendId(buildUpon, j2);
-            return contentResolver.query(buildUpon.appendPath(str).build(), strArr, WHERE_CALENDARS_SELECTED, WHERE_CALENDARS_ARGS, DEFAULT_SORT_ORDER);
+            Uri.Builder builderBuildUpon = CONTENT_SEARCH_URI.buildUpon();
+            ContentUris.appendId(builderBuildUpon, j);
+            ContentUris.appendId(builderBuildUpon, j2);
+            return contentResolver.query(builderBuildUpon.appendPath(str).build(), strArr, WHERE_CALENDARS_SELECTED, WHERE_CALENDARS_ARGS, DEFAULT_SORT_ORDER);
         }
     }
 
@@ -589,10 +589,10 @@ public final class CalendarContract {
             if (i2 < 1) {
                 return null;
             }
-            Uri.Builder buildUpon = CONTENT_URI.buildUpon();
-            ContentUris.appendId(buildUpon, i);
-            ContentUris.appendId(buildUpon, (i2 + i) - 1);
-            return contentResolver.query(buildUpon.build(), strArr, SELECTION, null, "startDay");
+            Uri.Builder builderBuildUpon = CONTENT_URI.buildUpon();
+            ContentUris.appendId(builderBuildUpon, i);
+            ContentUris.appendId(builderBuildUpon, (i2 + i) - 1);
+            return contentResolver.query(builderBuildUpon.build(), strArr, SELECTION, null, "startDay");
         }
     }
 
@@ -635,62 +635,41 @@ public final class CalendarContract {
             return contentResolver.insert(CONTENT_URI, contentValues);
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:5:0x0033  */
+        /* JADX WARN: Removed duplicated region for block: B:13:0x002f  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public static final long findNextAlarmTime(android.content.ContentResolver r7, long r8) {
-            /*
-                java.lang.String r0 = "alarmTime"
-                java.lang.String[] r3 = new java.lang.String[]{r0}
-                android.net.Uri r2 = android.provider.CalendarContract.CalendarAlerts.CONTENT_URI
-                java.lang.String r8 = java.lang.Long.toString(r8)
-                java.lang.String[] r5 = new java.lang.String[]{r8}
-                java.lang.String r6 = "alarmTime ASC"
-                java.lang.String r4 = "alarmTime>=?"
-                r1 = r7
-                android.database.Cursor r7 = r1.query(r2, r3, r4, r5, r6)
-                if (r7 == 0) goto L2f
-                boolean r8 = r7.moveToFirst()     // Catch: java.lang.Throwable -> L27
-                if (r8 == 0) goto L2f
-                r8 = 0
-                long r8 = r7.getLong(r8)     // Catch: java.lang.Throwable -> L27
-                goto L31
-            L27:
-                r0 = move-exception
-                r8 = r0
-                if (r7 == 0) goto L2e
-                r7.close()
-            L2e:
-                throw r8
-            L2f:
-                r8 = -1
-            L31:
-                if (r7 == 0) goto L36
-                r7.close()
-            L36:
-                return r8
-            */
-            throw new UnsupportedOperationException("Method not decompiled: android.provider.CalendarContract.CalendarAlerts.findNextAlarmTime(android.content.ContentResolver, long):long");
+        public static final long findNextAlarmTime(ContentResolver contentResolver, long j) {
+            long j2;
+            Cursor cursorQuery = contentResolver.query(CONTENT_URI, new String[]{CalendarAlertsColumns.ALARM_TIME}, WHERE_FINDNEXTALARMTIME, new String[]{Long.toString(j)}, SORT_ORDER_ALARMTIME_ASC);
+            if (cursorQuery != null) {
+                try {
+                    j2 = cursorQuery.moveToFirst() ? cursorQuery.getLong(0) : -1L;
+                } finally {
+                }
+            }
+            if (cursorQuery != null) {
+                cursorQuery.close();
+            }
+            return j2;
         }
 
         public static final void rescheduleMissedAlarms(ContentResolver contentResolver, Context context, AlarmManager alarmManager) {
-            long currentTimeMillis = System.currentTimeMillis();
-            Cursor query = contentResolver.query(CONTENT_URI, new String[]{CalendarAlertsColumns.ALARM_TIME}, WHERE_RESCHEDULE_MISSED_ALARMS, new String[]{Long.toString(currentTimeMillis), Long.toString(currentTimeMillis - 86400000), Long.toString(currentTimeMillis)}, SORT_ORDER_ALARMTIME_ASC);
-            if (query == null) {
+            long jCurrentTimeMillis = System.currentTimeMillis();
+            Cursor cursorQuery = contentResolver.query(CONTENT_URI, new String[]{CalendarAlertsColumns.ALARM_TIME}, WHERE_RESCHEDULE_MISSED_ALARMS, new String[]{Long.toString(jCurrentTimeMillis), Long.toString(jCurrentTimeMillis - 86400000), Long.toString(jCurrentTimeMillis)}, SORT_ORDER_ALARMTIME_ASC);
+            if (cursorQuery == null) {
                 return;
             }
             long j = -1;
-            while (query.moveToNext()) {
+            while (cursorQuery.moveToNext()) {
                 try {
-                    long j2 = query.getLong(0);
+                    long j2 = cursorQuery.getLong(0);
                     if (j != j2) {
                         scheduleAlarm(context, alarmManager, j2);
                         j = j2;
                     }
                 } finally {
-                    query.close();
+                    cursorQuery.close();
                 }
             }
         }
@@ -703,52 +682,29 @@ public final class CalendarContract {
             intent.setData(ContentUris.withAppendedId(CalendarContract.CONTENT_URI, j));
             intent.putExtra(CalendarAlertsColumns.ALARM_TIME, j);
             intent.setFlags(16777216);
-            StrictMode.VmPolicy allowVmViolations = StrictMode.allowVmViolations();
+            StrictMode.VmPolicy vmPolicyAllowVmViolations = StrictMode.allowVmViolations();
             PendingIntent broadcast = PendingIntent.getBroadcast(context, 0, intent, 67108864);
-            StrictMode.setVmPolicy(allowVmViolations);
+            StrictMode.setVmPolicy(vmPolicyAllowVmViolations);
             alarmManager.setExactAndAllowWhileIdle(0, j, broadcast);
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:5:0x0036  */
+        /* JADX WARN: Removed duplicated region for block: B:12:0x0033  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public static final boolean alarmExists(android.content.ContentResolver r3, long r4, long r6, long r8) {
-            /*
-                java.lang.String r0 = "alarmTime"
-                java.lang.String[] r0 = new java.lang.String[]{r0}
-                r1 = r4
-                android.net.Uri r4 = android.provider.CalendarContract.CalendarAlerts.CONTENT_URI
-                java.lang.String r5 = java.lang.Long.toString(r1)
-                java.lang.String r6 = java.lang.Long.toString(r6)
-                java.lang.String r7 = java.lang.Long.toString(r8)
-                java.lang.String[] r7 = new java.lang.String[]{r5, r6, r7}
-                r8 = 0
-                java.lang.String r6 = "event_id=? AND begin=? AND alarmTime=?"
-                r5 = r0
-                android.database.Cursor r3 = r3.query(r4, r5, r6, r7, r8)
-                if (r3 == 0) goto L33
-                int r4 = r3.getCount()     // Catch: java.lang.Throwable -> L2b
-                if (r4 <= 0) goto L33
-                r4 = 1
-                goto L34
-            L2b:
-                r0 = move-exception
-                r4 = r0
-                if (r3 == 0) goto L32
-                r3.close()
-            L32:
-                throw r4
-            L33:
-                r4 = 0
-            L34:
-                if (r3 == 0) goto L39
-                r3.close()
-            L39:
-                return r4
-            */
-            throw new UnsupportedOperationException("Method not decompiled: android.provider.CalendarContract.CalendarAlerts.alarmExists(android.content.ContentResolver, long, long, long):boolean");
+        public static final boolean alarmExists(ContentResolver contentResolver, long j, long j2, long j3) {
+            boolean z;
+            Cursor cursorQuery = contentResolver.query(CONTENT_URI, new String[]{CalendarAlertsColumns.ALARM_TIME}, WHERE_ALARM_EXISTS, new String[]{Long.toString(j), Long.toString(j2), Long.toString(j3)}, null);
+            if (cursorQuery != null) {
+                try {
+                    z = cursorQuery.getCount() > 0;
+                } finally {
+                }
+            }
+            if (cursorQuery != null) {
+                cursorQuery.close();
+            }
+            return z;
         }
     }
 

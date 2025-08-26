@@ -53,9 +53,9 @@ public interface IRecognitionServiceManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IRecognitionServiceManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IRecognitionServiceManager)) {
-                return (IRecognitionServiceManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IRecognitionServiceManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IRecognitionServiceManager)) {
+                return (IRecognitionServiceManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -86,11 +86,11 @@ public interface IRecognitionServiceManager extends IInterface {
             }
             if (i == 1) {
                 ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                IBinder readStrongBinder = parcel.readStrongBinder();
-                boolean readBoolean = parcel.readBoolean();
-                IRecognitionServiceManagerCallback asInterface = IRecognitionServiceManagerCallback.Stub.asInterface(parcel.readStrongBinder());
+                IBinder strongBinder = parcel.readStrongBinder();
+                boolean z = parcel.readBoolean();
+                IRecognitionServiceManagerCallback iRecognitionServiceManagerCallbackAsInterface = IRecognitionServiceManagerCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                createSession(componentName, readStrongBinder, readBoolean, asInterface);
+                createSession(componentName, strongBinder, z, iRecognitionServiceManagerCallbackAsInterface);
             } else if (i == 2) {
                 ComponentName componentName2 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
                 parcel.enforceNoDataAvail();
@@ -119,28 +119,28 @@ public interface IRecognitionServiceManager extends IInterface {
 
             @Override // android.speech.IRecognitionServiceManager
             public void createSession(ComponentName componentName, IBinder iBinder, boolean z, IRecognitionServiceManagerCallback iRecognitionServiceManagerCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IRecognitionServiceManager.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeBoolean(z);
-                    obtain.writeStrongInterface(iRecognitionServiceManagerCallback);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IRecognitionServiceManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeStrongInterface(iRecognitionServiceManagerCallback);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.speech.IRecognitionServiceManager
             public void setTemporaryComponent(ComponentName componentName) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IRecognitionServiceManager.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IRecognitionServiceManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

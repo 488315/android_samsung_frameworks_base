@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class AuthenticationConfig implements Parcelable {
     public static String AUTHENTICATION_STATUS = "auth_status";
@@ -53,7 +52,6 @@ public class AuthenticationConfig implements Parcelable {
     public boolean hideEnterpriseIdentityLock;
     public boolean isConfiguredByMDM;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AuthenticationRequestKeys {
         public static final String ADMIN_SERVER = "REALMS_ADMIN_SERVER";
         public static final String CANONICALIZE = "LIBDEFAULTS_CANONICALIZE";

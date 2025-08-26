@@ -100,15 +100,15 @@ public final class GeofenceHardware {
     }
 
     public boolean unregisterForMonitorStateChangeCallback(int i, GeofenceHardwareMonitorCallback geofenceHardwareMonitorCallback) {
-        boolean z = false;
+        boolean zUnregisterForMonitorStateChangeCallback = false;
         try {
-            z = this.mService.unregisterForMonitorStateChangeCallback(i, getMonitorCallbackWrapper(geofenceHardwareMonitorCallback));
-            if (z) {
+            zUnregisterForMonitorStateChangeCallback = this.mService.unregisterForMonitorStateChangeCallback(i, getMonitorCallbackWrapper(geofenceHardwareMonitorCallback));
+            if (zUnregisterForMonitorStateChangeCallback) {
                 removeMonitorCallback(geofenceHardwareMonitorCallback);
             }
         } catch (RemoteException unused) {
         }
-        return z;
+        return zUnregisterForMonitorStateChangeCallback;
     }
 
     /* JADX INFO: Access modifiers changed from: private */

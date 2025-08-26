@@ -1,6 +1,7 @@
 package com.android.systemui.volume.dialog.sliders.ui.viewmodel;
 
 import android.content.Context;
+import android.content.res.Resources;
 import com.android.systemui.common.shared.model.Icon;
 import com.android.systemui.volume.dialog.shared.model.VolumeDialogStreamModel;
 import kotlin.ResultKt;
@@ -11,7 +12,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function4;
 import kotlin.ranges.ClosedFloatRange;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class VolumeDialogSliderViewModel$state$2 extends SuspendLambda implements Function4 {
     /* synthetic */ Object L$0;
@@ -28,16 +28,16 @@ final class VolumeDialogSliderViewModel$state$2 extends SuspendLambda implements
 
     @Override // kotlin.jvm.functions.Function4
     public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4) {
-        boolean booleanValue = ((Boolean) obj).booleanValue();
+        boolean zBooleanValue = ((Boolean) obj).booleanValue();
         VolumeDialogSliderViewModel$state$2 volumeDialogSliderViewModel$state$2 = new VolumeDialogSliderViewModel$state$2(this.this$0, (Continuation) obj4);
-        volumeDialogSliderViewModel$state$2.Z$0 = booleanValue;
+        volumeDialogSliderViewModel$state$2.Z$0 = zBooleanValue;
         volumeDialogSliderViewModel$state$2.L$0 = (VolumeDialogStreamModel) obj2;
         volumeDialogSliderViewModel$state$2.L$1 = (Icon.Loaded) obj3;
         return volumeDialogSliderViewModel$state$2.invokeSuspend(Unit.INSTANCE);
     }
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
-    public final Object invokeSuspend(Object obj) {
+    public final Object invokeSuspend(Object obj) throws Resources.NotFoundException {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         if (this.label != 0) {
             throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
@@ -49,10 +49,10 @@ final class VolumeDialogSliderViewModel$state$2 extends SuspendLambda implements
         Context context = this.this$0.context;
         float f = volumeDialogStreamModel.level;
         ClosedFloatRange closedFloatRange = new ClosedFloatRange(volumeDialogStreamModel.levelMin, volumeDialogStreamModel.levelMax);
-        String str = volumeDialogStreamModel.remoteLabel;
-        if (str == null) {
-            str = context.getResources().getString(volumeDialogStreamModel.name);
+        String string = volumeDialogStreamModel.remoteLabel;
+        if (string == null) {
+            string = context.getResources().getString(volumeDialogStreamModel.name);
         }
-        return new VolumeDialogSliderStateModel(f, z, closedFloatRange, loaded, str);
+        return new VolumeDialogSliderStateModel(f, z, closedFloatRange, loaded, string);
     }
 }

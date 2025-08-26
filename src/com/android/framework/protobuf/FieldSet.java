@@ -75,7 +75,7 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
             return;
         }
         for (int i = 0; i < this.fields.getNumArrayEntries(); i++) {
-            Map.Entry<T, Object> arrayEntryAt = this.fields.getArrayEntryAt(i);
+            Map.Entry<K, Object> arrayEntryAt = this.fields.getArrayEntryAt(i);
             if (arrayEntryAt.getValue() instanceof GeneratedMessageLite) {
                 ((GeneratedMessageLite) arrayEntryAt.getValue()).makeImmutable();
             }
@@ -103,17 +103,19 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public FieldSet<T> m7749clone() {
-        FieldSet<T> newFieldSet = newFieldSet();
+    public FieldSet<T> m7760clone() {
+        FieldSet<T> fieldSetNewFieldSet = newFieldSet();
         for (int i = 0; i < this.fields.getNumArrayEntries(); i++) {
-            Map.Entry<T, Object> arrayEntryAt = this.fields.getArrayEntryAt(i);
-            newFieldSet.setField(arrayEntryAt.getKey(), arrayEntryAt.getValue());
+            Map.Entry<K, Object> arrayEntryAt = this.fields.getArrayEntryAt(i);
+            fieldSetNewFieldSet.setField((FieldDescriptorLite) arrayEntryAt.getKey(), arrayEntryAt.getValue());
         }
-        for (Map.Entry<T, Object> entry : this.fields.getOverflowEntries()) {
-            newFieldSet.setField(entry.getKey(), entry.getValue());
+        Iterator it = this.fields.getOverflowEntries().iterator();
+        while (it.hasNext()) {
+            Map.Entry entry = (Map.Entry) it.next();
+            fieldSetNewFieldSet.setField((FieldDescriptorLite) entry.getKey(), entry.getValue());
         }
-        newFieldSet.hasLazyField = this.hasLazyField;
-        return newFieldSet;
+        fieldSetNewFieldSet.hasLazyField = this.hasLazyField;
+        return fieldSetNewFieldSet;
     }
 
     public void clear() {
@@ -123,28 +125,28 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
 
     public Map<T, Object> getAllFields() {
         if (this.hasLazyField) {
-            SmallSortedMap cloneAllFieldsMap = cloneAllFieldsMap(this.fields, false);
+            SmallSortedMap smallSortedMapCloneAllFieldsMap = cloneAllFieldsMap(this.fields, false);
             if (this.fields.isImmutable()) {
-                cloneAllFieldsMap.makeImmutable();
+                smallSortedMapCloneAllFieldsMap.makeImmutable();
             }
-            return cloneAllFieldsMap;
+            return smallSortedMapCloneAllFieldsMap;
         }
-        boolean isImmutable = this.fields.isImmutable();
+        boolean zIsImmutable = this.fields.isImmutable();
         SmallSortedMap<T, Object> smallSortedMap = this.fields;
-        return isImmutable ? smallSortedMap : Collections.unmodifiableMap(smallSortedMap);
+        return zIsImmutable ? smallSortedMap : Collections.unmodifiableMap(smallSortedMap);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     public static <T extends FieldDescriptorLite<T>> SmallSortedMap<T, Object> cloneAllFieldsMap(SmallSortedMap<T, Object> smallSortedMap, boolean z) {
-        SmallSortedMap<T, Object> newFieldMap = SmallSortedMap.newFieldMap(16);
+        SmallSortedMap<T, Object> smallSortedMapNewFieldMap = SmallSortedMap.newFieldMap(16);
         for (int i = 0; i < smallSortedMap.getNumArrayEntries(); i++) {
-            cloneFieldEntry(newFieldMap, smallSortedMap.getArrayEntryAt(i), z);
+            cloneFieldEntry(smallSortedMapNewFieldMap, smallSortedMap.getArrayEntryAt(i), z);
         }
-        Iterator<Map.Entry<T, Object>> it = smallSortedMap.getOverflowEntries().iterator();
+        Iterator it = smallSortedMap.getOverflowEntries().iterator();
         while (it.hasNext()) {
-            cloneFieldEntry(newFieldMap, it.next(), z);
+            cloneFieldEntry(smallSortedMapNewFieldMap, (Map.Entry) it.next(), z);
         }
-        return newFieldMap;
+        return smallSortedMapNewFieldMap;
     }
 
     private static <T extends FieldDescriptorLite<T>> void cloneFieldEntry(Map<T, Object> map, Map.Entry<T, Object> entry, boolean z) {
@@ -248,19 +250,19 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
     }
 
     public void addRepeatedField(T t, Object obj) {
-        List list;
+        List arrayList;
         if (!t.isRepeated()) {
             throw new IllegalArgumentException("addRepeatedField() can only be called on repeated fields.");
         }
         verifyType(t, obj);
         Object field = getField(t);
         if (field == null) {
-            list = new ArrayList();
-            this.fields.put((SmallSortedMap<T, Object>) t, (T) list);
+            arrayList = new ArrayList();
+            this.fields.put((SmallSortedMap<T, Object>) t, (T) arrayList);
         } else {
-            list = (List) field;
+            arrayList = (List) field;
         }
-        list.add(obj);
+        arrayList.add(obj);
     }
 
     private void verifyType(T t, Object obj) {
@@ -295,9 +297,9 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
                 return false;
             }
         }
-        Iterator<Map.Entry<T, Object>> it = this.fields.getOverflowEntries().iterator();
+        Iterator it = this.fields.getOverflowEntries().iterator();
         while (it.hasNext()) {
-            if (!isInitialized(it.next())) {
+            if (!isInitialized((Map.Entry) it.next())) {
                 return false;
             }
         }
@@ -343,9 +345,9 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
         for (int i = 0; i < fieldSet.fields.getNumArrayEntries(); i++) {
             mergeFromField(fieldSet.fields.getArrayEntryAt(i));
         }
-        Iterator<Map.Entry<T, Object>> it = fieldSet.fields.getOverflowEntries().iterator();
+        Iterator it = fieldSet.fields.getOverflowEntries().iterator();
         while (it.hasNext()) {
-            mergeFromField(it.next());
+            mergeFromField((Map.Entry) it.next());
         }
     }
 
@@ -400,11 +402,13 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
 
     public void writeTo(CodedOutputStream codedOutputStream) throws IOException {
         for (int i = 0; i < this.fields.getNumArrayEntries(); i++) {
-            Map.Entry<T, Object> arrayEntryAt = this.fields.getArrayEntryAt(i);
-            writeField(arrayEntryAt.getKey(), arrayEntryAt.getValue(), codedOutputStream);
+            Map.Entry<K, Object> arrayEntryAt = this.fields.getArrayEntryAt(i);
+            writeField((FieldDescriptorLite) arrayEntryAt.getKey(), arrayEntryAt.getValue(), codedOutputStream);
         }
-        for (Map.Entry<T, Object> entry : this.fields.getOverflowEntries()) {
-            writeField(entry.getKey(), entry.getValue(), codedOutputStream);
+        Iterator it = this.fields.getOverflowEntries().iterator();
+        while (it.hasNext()) {
+            Map.Entry entry = (Map.Entry) it.next();
+            writeField((FieldDescriptorLite) entry.getKey(), entry.getValue(), codedOutputStream);
         }
     }
 
@@ -412,9 +416,9 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
         for (int i = 0; i < this.fields.getNumArrayEntries(); i++) {
             writeMessageSetTo(this.fields.getArrayEntryAt(i), codedOutputStream);
         }
-        Iterator<Map.Entry<T, Object>> it = this.fields.getOverflowEntries().iterator();
+        Iterator it = this.fields.getOverflowEntries().iterator();
         while (it.hasNext()) {
-            writeMessageSetTo(it.next(), codedOutputStream);
+            writeMessageSetTo((Map.Entry) it.next(), codedOutputStream);
         }
     }
 
@@ -643,11 +647,11 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
             if (fieldDescriptorLite.isPacked()) {
                 codedOutputStream.writeTag(number, 2);
                 Iterator it = list.iterator();
-                int i = 0;
+                int iComputeElementSizeNoTag = 0;
                 while (it.hasNext()) {
-                    i += computeElementSizeNoTag(liteType, it.next());
+                    iComputeElementSizeNoTag += computeElementSizeNoTag(liteType, it.next());
                 }
-                codedOutputStream.writeUInt32NoTag(i);
+                codedOutputStream.writeUInt32NoTag(iComputeElementSizeNoTag);
                 Iterator it2 = list.iterator();
                 while (it2.hasNext()) {
                     writeElementNoTag(codedOutputStream, liteType, it2.next());
@@ -668,27 +672,29 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
     }
 
     public int getSerializedSize() {
-        int i = 0;
-        for (int i2 = 0; i2 < this.fields.getNumArrayEntries(); i2++) {
-            Map.Entry<T, Object> arrayEntryAt = this.fields.getArrayEntryAt(i2);
-            i += computeFieldSize(arrayEntryAt.getKey(), arrayEntryAt.getValue());
+        int iComputeFieldSize = 0;
+        for (int i = 0; i < this.fields.getNumArrayEntries(); i++) {
+            Map.Entry<K, Object> arrayEntryAt = this.fields.getArrayEntryAt(i);
+            iComputeFieldSize += computeFieldSize((FieldDescriptorLite) arrayEntryAt.getKey(), arrayEntryAt.getValue());
         }
-        for (Map.Entry<T, Object> entry : this.fields.getOverflowEntries()) {
-            i += computeFieldSize(entry.getKey(), entry.getValue());
+        Iterator it = this.fields.getOverflowEntries().iterator();
+        while (it.hasNext()) {
+            Map.Entry entry = (Map.Entry) it.next();
+            iComputeFieldSize += computeFieldSize((FieldDescriptorLite) entry.getKey(), entry.getValue());
         }
-        return i;
+        return iComputeFieldSize;
     }
 
     public int getMessageSetSerializedSize() {
-        int i = 0;
-        for (int i2 = 0; i2 < this.fields.getNumArrayEntries(); i2++) {
-            i += getMessageSetSerializedSize(this.fields.getArrayEntryAt(i2));
+        int messageSetSerializedSize = 0;
+        for (int i = 0; i < this.fields.getNumArrayEntries(); i++) {
+            messageSetSerializedSize += getMessageSetSerializedSize(this.fields.getArrayEntryAt(i));
         }
-        Iterator<Map.Entry<T, Object>> it = this.fields.getOverflowEntries().iterator();
+        Iterator it = this.fields.getOverflowEntries().iterator();
         while (it.hasNext()) {
-            i += getMessageSetSerializedSize(it.next());
+            messageSetSerializedSize += getMessageSetSerializedSize((Map.Entry) it.next());
         }
-        return i;
+        return messageSetSerializedSize;
     }
 
     private int getMessageSetSerializedSize(Map.Entry<T, Object> entry) {
@@ -704,11 +710,11 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
     }
 
     static int computeElementSize(WireFormat.FieldType fieldType, int i, Object obj) {
-        int computeTagSize = CodedOutputStream.computeTagSize(i);
+        int iComputeTagSize = CodedOutputStream.computeTagSize(i);
         if (fieldType == WireFormat.FieldType.GROUP) {
-            computeTagSize *= 2;
+            iComputeTagSize *= 2;
         }
-        return computeTagSize + computeElementSizeNoTag(fieldType, obj);
+        return iComputeTagSize + computeElementSizeNoTag(fieldType, obj);
     }
 
     static int computeElementSizeNoTag(WireFormat.FieldType fieldType, Object obj) {
@@ -770,19 +776,19 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
         WireFormat.FieldType liteType = fieldDescriptorLite.getLiteType();
         int number = fieldDescriptorLite.getNumber();
         if (fieldDescriptorLite.isRepeated()) {
-            int i = 0;
+            int iComputeElementSize = 0;
             if (fieldDescriptorLite.isPacked()) {
                 Iterator it = ((List) obj).iterator();
                 while (it.hasNext()) {
-                    i += computeElementSizeNoTag(liteType, it.next());
+                    iComputeElementSize += computeElementSizeNoTag(liteType, it.next());
                 }
-                return CodedOutputStream.computeTagSize(number) + i + CodedOutputStream.computeUInt32SizeNoTag(i);
+                return CodedOutputStream.computeTagSize(number) + iComputeElementSize + CodedOutputStream.computeUInt32SizeNoTag(iComputeElementSize);
             }
             Iterator it2 = ((List) obj).iterator();
             while (it2.hasNext()) {
-                i += computeElementSize(liteType, number, it2.next());
+                iComputeElementSize += computeElementSize(liteType, number, it2.next());
             }
-            return i;
+            return iComputeElementSize;
         }
         return computeElementSize(liteType, number, obj);
     }
@@ -819,12 +825,12 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
                 return FieldSet.emptySet();
             }
             this.isMutable = false;
-            SmallSortedMap<T, Object> smallSortedMap = this.fields;
+            SmallSortedMap<T, Object> smallSortedMapCloneAllFieldsMap = this.fields;
             if (this.hasNestedBuilders) {
-                smallSortedMap = FieldSet.cloneAllFieldsMap(smallSortedMap, false);
-                replaceBuilders(smallSortedMap, z);
+                smallSortedMapCloneAllFieldsMap = FieldSet.cloneAllFieldsMap(smallSortedMapCloneAllFieldsMap, false);
+                replaceBuilders(smallSortedMapCloneAllFieldsMap, z);
             }
-            FieldSet<T> fieldSet = new FieldSet<>(smallSortedMap, null);
+            FieldSet<T> fieldSet = new FieldSet<>(smallSortedMapCloneAllFieldsMap, null);
             ((FieldSet) fieldSet).hasLazyField = this.hasLazyField;
             return fieldSet;
         }
@@ -833,9 +839,9 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
             for (int i = 0; i < smallSortedMap.getNumArrayEntries(); i++) {
                 replaceBuilders(smallSortedMap.getArrayEntryAt(i), z);
             }
-            Iterator<Map.Entry<T, Object>> it = smallSortedMap.getOverflowEntries().iterator();
+            Iterator it = smallSortedMap.getOverflowEntries().iterator();
             while (it.hasNext()) {
-                replaceBuilders(it.next(), z);
+                replaceBuilders((Map.Entry) it.next(), z);
             }
         }
 
@@ -851,18 +857,18 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
                 if (!(obj instanceof List)) {
                     throw new IllegalStateException("Repeated field should contains a List but actually contains type: " + obj.getClass());
                 }
-                List list = (List) obj;
-                for (int i = 0; i < list.size(); i++) {
-                    Object obj2 = list.get(i);
-                    Object replaceBuilder = replaceBuilder(obj2, z);
-                    if (replaceBuilder != obj2) {
-                        if (list == obj) {
-                            list = new ArrayList(list);
+                List arrayList = (List) obj;
+                for (int i = 0; i < arrayList.size(); i++) {
+                    Object obj2 = arrayList.get(i);
+                    Object objReplaceBuilder = replaceBuilder(obj2, z);
+                    if (objReplaceBuilder != obj2) {
+                        if (arrayList == obj) {
+                            arrayList = new ArrayList(arrayList);
                         }
-                        list.set(i, replaceBuilder);
+                        arrayList.set(i, objReplaceBuilder);
                     }
                 }
-                return list;
+                return arrayList;
             }
             return replaceBuilder(obj, z);
         }
@@ -886,17 +892,17 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
 
         public Map<T, Object> getAllFields() {
             if (this.hasLazyField) {
-                SmallSortedMap cloneAllFieldsMap = FieldSet.cloneAllFieldsMap(this.fields, false);
+                SmallSortedMap smallSortedMapCloneAllFieldsMap = FieldSet.cloneAllFieldsMap(this.fields, false);
                 if (this.fields.isImmutable()) {
-                    cloneAllFieldsMap.makeImmutable();
-                    return cloneAllFieldsMap;
+                    smallSortedMapCloneAllFieldsMap.makeImmutable();
+                    return smallSortedMapCloneAllFieldsMap;
                 }
-                replaceBuilders(cloneAllFieldsMap, true);
-                return cloneAllFieldsMap;
+                replaceBuilders(smallSortedMapCloneAllFieldsMap, true);
+                return smallSortedMapCloneAllFieldsMap;
             }
-            boolean isImmutable = this.fields.isImmutable();
+            boolean zIsImmutable = this.fields.isImmutable();
             SmallSortedMap<T, Object> smallSortedMap = this.fields;
-            return isImmutable ? smallSortedMap : Collections.unmodifiableMap(smallSortedMap);
+            return zIsImmutable ? smallSortedMap : Collections.unmodifiableMap(smallSortedMap);
         }
 
         public boolean hasField(T t) {
@@ -997,7 +1003,7 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
         }
 
         public void addRepeatedField(T t, Object obj) {
-            List list;
+            List arrayList;
             ensureIsMutable();
             if (!t.isRepeated()) {
                 throw new IllegalArgumentException("addRepeatedField() can only be called on repeated fields.");
@@ -1006,12 +1012,12 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
             verifyType(t, obj);
             Object fieldAllowBuilders = getFieldAllowBuilders(t);
             if (fieldAllowBuilders == null) {
-                list = new ArrayList();
-                this.fields.put((SmallSortedMap<T, Object>) t, (T) list);
+                arrayList = new ArrayList();
+                this.fields.put((SmallSortedMap<T, Object>) t, (T) arrayList);
             } else {
-                list = (List) fieldAllowBuilders;
+                arrayList = (List) fieldAllowBuilders;
             }
-            list.add(obj);
+            arrayList.add(obj);
         }
 
         private void verifyType(T t, Object obj) {
@@ -1029,9 +1035,9 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
                     return false;
                 }
             }
-            Iterator<Map.Entry<T, Object>> it = this.fields.getOverflowEntries().iterator();
+            Iterator it = this.fields.getOverflowEntries().iterator();
             while (it.hasNext()) {
-                if (!FieldSet.isInitialized(it.next())) {
+                if (!FieldSet.isInitialized((Map.Entry) it.next())) {
                     return false;
                 }
             }
@@ -1056,14 +1062,14 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
                 value = ((LazyField) value).getValue();
             }
             if (key.isRepeated()) {
-                List list = (List) getFieldAllowBuilders(key);
-                if (list == null) {
-                    list = new ArrayList();
-                    this.fields.put((SmallSortedMap<T, Object>) key, (T) list);
+                List arrayList = (List) getFieldAllowBuilders(key);
+                if (arrayList == null) {
+                    arrayList = new ArrayList();
+                    this.fields.put((SmallSortedMap<T, Object>) key, (T) arrayList);
                 }
                 Iterator it = ((List) value).iterator();
                 while (it.hasNext()) {
-                    list.add(FieldSet.cloneIfMutable(it.next()));
+                    arrayList.add(FieldSet.cloneIfMutable(it.next()));
                 }
                 return;
             }

@@ -15,7 +15,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicReference;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SetupCompatServiceProvider {
     public static volatile SetupCompatServiceProvider instance;
@@ -47,8 +46,8 @@ public class SetupCompatServiceProvider {
             if (iBinder == null) {
                 proxy = null;
             } else {
-                IInterface queryLocalInterface = iBinder.queryLocalInterface("com.google.android.setupcompat.ISetupCompatService");
-                proxy = (queryLocalInterface == null || !(queryLocalInterface instanceof ISetupCompatService)) ? new ISetupCompatService.Stub.Proxy(iBinder) : (ISetupCompatService) queryLocalInterface;
+                IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("com.google.android.setupcompat.ISetupCompatService");
+                proxy = (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof ISetupCompatService)) ? new ISetupCompatService.Stub.Proxy(iBinder) : (ISetupCompatService) iInterfaceQueryLocalInterface;
             }
             setupCompatServiceProvider.swapServiceContextAndNotify(new ServiceContext(state, proxy, 0));
         }
@@ -61,7 +60,6 @@ public class SetupCompatServiceProvider {
     public volatile ServiceContext serviceContext = new ServiceContext(State.NOT_STARTED);
     public final AtomicReference connectedConditionRef = new AtomicReference();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.google.android.setupcompat.internal.SetupCompatServiceProvider$2, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass2 {
         public static final /* synthetic */ int[] $SwitchMap$com$google$android$setupcompat$internal$SetupCompatServiceProvider$State;
@@ -100,7 +98,6 @@ public class SetupCompatServiceProvider {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class ServiceContext {
         public final ISetupCompatService compatService;
         public final State state;
@@ -122,7 +119,6 @@ public class SetupCompatServiceProvider {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     enum State {
         NOT_STARTED,
         BIND_FAILED,
@@ -171,7 +167,7 @@ public class SetupCompatServiceProvider {
         return this.serviceContext.state;
     }
 
-    public ISetupCompatService getService(long j, TimeUnit timeUnit) throws TimeoutException, InterruptedException {
+    public ISetupCompatService getService(long j, TimeUnit timeUnit) throws InterruptedException, TimeoutException {
         ServiceContext serviceContext;
         if (!disableLooperCheckForTesting && Looper.getMainLooper() == Looper.myLooper()) {
             throw new IllegalStateException("getService blocks and should not be called from the main thread.");
@@ -200,7 +196,7 @@ public class SetupCompatServiceProvider {
     }
 
     public final synchronized void requestServiceBind() {
-        boolean z;
+        boolean zBindService;
         synchronized (this) {
         }
         State state = this.serviceContext.state;
@@ -213,12 +209,12 @@ public class SetupCompatServiceProvider {
             this.context.unbindService(this.serviceConnection);
         }
         try {
-            z = this.context.bindService(COMPAT_SERVICE_INTENT, this.serviceConnection, 1);
+            zBindService = this.context.bindService(COMPAT_SERVICE_INTENT, this.serviceConnection, 1);
         } catch (SecurityException e) {
             LOG.e("Unable to bind to compat service. " + e);
-            z = false;
+            zBindService = false;
         }
-        if (!z) {
+        if (!zBindService) {
             swapServiceContextAndNotify(new ServiceContext(State.BIND_FAILED));
             LOG.e("Context#bindService did not succeed.");
         } else if (getCurrentState() != State.CONNECTED) {
@@ -236,9 +232,9 @@ public class SetupCompatServiceProvider {
         }
     }
 
-    public final ISetupCompatService waitForConnection(long j, TimeUnit timeUnit) {
+    public final ISetupCompatService waitForConnection(long j, TimeUnit timeUnit) throws TimeoutException {
         ServiceContext serviceContext;
-        CountDownLatch countDownLatch;
+        CountDownLatch countDownLatchCreateCountDownLatch;
         ServiceContext serviceContext2;
         synchronized (this) {
             serviceContext = this.serviceContext;
@@ -247,15 +243,15 @@ public class SetupCompatServiceProvider {
             return serviceContext.compatService;
         }
         do {
-            countDownLatch = (CountDownLatch) this.connectedConditionRef.get();
-            if (countDownLatch != null) {
+            countDownLatchCreateCountDownLatch = (CountDownLatch) this.connectedConditionRef.get();
+            if (countDownLatchCreateCountDownLatch != null) {
                 break;
             }
-            countDownLatch = createCountDownLatch();
-        } while (!this.connectedConditionRef.compareAndSet(null, countDownLatch));
+            countDownLatchCreateCountDownLatch = createCountDownLatch();
+        } while (!this.connectedConditionRef.compareAndSet(null, countDownLatchCreateCountDownLatch));
         Logger logger = LOG;
         logger.atInfo("Waiting for service to get connected");
-        if (countDownLatch.await(j, timeUnit)) {
+        if (countDownLatchCreateCountDownLatch.await(j, timeUnit)) {
             synchronized (this) {
                 serviceContext2 = this.serviceContext;
             }

@@ -9,11 +9,9 @@ import androidx.compose.ui.graphics.AndroidPath_androidKt;
 import kotlin.NoWhenBranchMatchedException;
 import kotlin.enums.EnumEntriesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public interface Path {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public static final /* synthetic */ int $r8$clinit = 0;
 
@@ -27,7 +25,6 @@ public interface Path {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Direction {
         public static final /* synthetic */ Direction[] $VALUES;
         public static final Direction Clockwise;
@@ -60,7 +57,7 @@ public interface Path {
     }
 
     /* renamed from: addPath-Uv8p0NA$default, reason: not valid java name */
-    static void m491addPathUv8p0NA$default(Path path, Path path2) {
+    static void m493addPathUv8p0NA$default(Path path, Path path2) {
         Offset.Companion.getClass();
         android.graphics.Path path3 = ((AndroidPath) path).internalPath;
         if (!(path2 instanceof AndroidPath)) {
@@ -73,11 +70,11 @@ public interface Path {
         Path.Direction direction;
         Direction direction2 = Direction.CounterClockwise;
         AndroidPath androidPath = (AndroidPath) path;
-        boolean isNaN = Float.isNaN(rect.left);
+        boolean zIsNaN = Float.isNaN(rect.left);
         float f = rect.bottom;
         float f2 = rect.right;
         float f3 = rect.top;
-        if (isNaN || Float.isNaN(f3) || Float.isNaN(f2) || Float.isNaN(f)) {
+        if (zIsNaN || Float.isNaN(f3) || Float.isNaN(f2) || Float.isNaN(f)) {
             AndroidPath_androidKt.throwIllegalStateException("Invalid rectangle, make sure no value is NaN");
         }
         if (androidPath.rectF == null) {

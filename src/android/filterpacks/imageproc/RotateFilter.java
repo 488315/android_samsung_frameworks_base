@@ -42,10 +42,10 @@ public class RotateFilter extends Filter {
 
     public void initProgram(FilterContext filterContext, int i) {
         if (i == 3) {
-            ShaderProgram createIdentity = ShaderProgram.createIdentity(filterContext);
-            createIdentity.setMaximumTileSize(this.mTileSize);
-            createIdentity.setClearsOutput(true);
-            this.mProgram = createIdentity;
+            ShaderProgram shaderProgramCreateIdentity = ShaderProgram.createIdentity(filterContext);
+            shaderProgramCreateIdentity.setMaximumTileSize(this.mTileSize);
+            shaderProgramCreateIdentity.setClearsOutput(true);
+            this.mProgram = shaderProgramCreateIdentity;
             this.mTarget = i;
             return;
         }
@@ -61,8 +61,8 @@ public class RotateFilter extends Filter {
 
     @Override // android.filterfw.core.Filter
     public void process(FilterContext filterContext) {
-        Frame pullInput = pullInput("image");
-        FrameFormat format = pullInput.getFormat();
+        Frame framePullInput = pullInput("image");
+        FrameFormat format = framePullInput.getFormat();
         if (this.mProgram == null || format.getTarget() != this.mTarget) {
             initProgram(filterContext, format.getTarget());
         }
@@ -74,10 +74,10 @@ public class RotateFilter extends Filter {
             this.mOutputHeight = height;
             updateParameters();
         }
-        Frame newFrame = filterContext.getFrameManager().newFrame(ImageFormat.create(this.mOutputWidth, this.mOutputHeight, 3, 3));
-        this.mProgram.process(pullInput, newFrame);
-        pushOutput("image", newFrame);
-        newFrame.release();
+        Frame frameNewFrame = filterContext.getFrameManager().newFrame(ImageFormat.create(this.mOutputWidth, this.mOutputHeight, 3, 3));
+        this.mProgram.process(framePullInput, frameNewFrame);
+        pushOutput("image", frameNewFrame);
+        frameNewFrame.release();
     }
 
     private void updateParameters() {

@@ -51,11 +51,11 @@ public class VideoCallImpl extends InCallService.VideoCall {
             if (VideoCallImpl.this.mHandler == null) {
                 return;
             }
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = Integer.valueOf(i);
-            obtain.arg2 = videoProfile;
-            obtain.arg3 = videoProfile2;
-            VideoCallImpl.this.mHandler.obtainMessage(2, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = Integer.valueOf(i);
+            someArgsObtain.arg2 = videoProfile;
+            someArgsObtain.arg3 = videoProfile2;
+            VideoCallImpl.this.mHandler.obtainMessage(2, someArgsObtain).sendToTarget();
         }
 
         @Override // com.android.internal.telecom.IVideoCallback
@@ -71,10 +71,10 @@ public class VideoCallImpl extends InCallService.VideoCall {
             if (VideoCallImpl.this.mHandler == null) {
                 return;
             }
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = Integer.valueOf(i);
-            obtain.arg2 = Integer.valueOf(i2);
-            VideoCallImpl.this.mHandler.obtainMessage(4, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = Integer.valueOf(i);
+            someArgsObtain.arg2 = Integer.valueOf(i2);
+            VideoCallImpl.this.mHandler.obtainMessage(4, someArgsObtain).sendToTarget();
         }
 
         @Override // com.android.internal.telecom.IVideoCallback

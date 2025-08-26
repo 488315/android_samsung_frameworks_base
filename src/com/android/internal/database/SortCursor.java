@@ -62,14 +62,14 @@ public class SortCursor extends AbstractCursor {
     @Override // android.database.AbstractCursor, android.database.Cursor
     public int getCount() {
         int length = this.mCursors.length;
-        int i = 0;
-        for (int i2 = 0; i2 < length; i2++) {
-            Cursor cursor = this.mCursors[i2];
+        int count = 0;
+        for (int i = 0; i < length; i++) {
+            Cursor cursor = this.mCursors[i];
             if (cursor != null) {
-                i += cursor.getCount();
+                count += cursor.getCount();
             }
         }
-        return i;
+        return count;
     }
 
     @Override // android.database.AbstractCursor, android.database.CrossProcessCursor

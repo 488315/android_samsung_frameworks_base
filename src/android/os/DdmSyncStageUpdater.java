@@ -15,9 +15,9 @@ public class DdmSyncStageUpdater {
     public synchronized void next(DdmSyncState.Stage stage) {
         try {
             DdmSyncState.next(stage);
-            ByteBuffer allocate = ByteBuffer.allocate(4);
-            allocate.putInt(stage.toInt());
-            DdmServer.sendChunk(new Chunk(CHUNK_STAGE, allocate));
+            ByteBuffer byteBufferAllocate = ByteBuffer.allocate(4);
+            byteBufferAllocate.putInt(stage.toInt());
+            DdmServer.sendChunk(new Chunk(CHUNK_STAGE, byteBufferAllocate));
         } catch (Exception e) {
             Slog.w(TAG, "Unable to go to next stage" + stage, e);
         }

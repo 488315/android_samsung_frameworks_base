@@ -6,7 +6,6 @@ import java.util.NoSuchElementException;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.TypeIntrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class PersistentHashMapBuilderBaseIterator<K, V, T> extends PersistentHashMapBaseIterator<K, V, T> implements Iterator<T> {
     public final PersistentHashMapBuilder builder;
@@ -59,16 +58,16 @@ public class PersistentHashMapBuilderBaseIterator<K, V, T> extends PersistentHas
     public final void resetPath(int i, TrieNode trieNode, Object obj, int i2) {
         int i3 = i2 * 5;
         if (i3 <= 30) {
-            int indexSegment = 1 << TrieNodeKt.indexSegment(i, i3);
-            if (trieNode.hasEntryAt$runtime_release(indexSegment)) {
-                this.path[i2].reset(Integer.bitCount(trieNode.dataMap) * 2, trieNode.entryKeyIndex$runtime_release(indexSegment), trieNode.buffer);
+            int iIndexSegment = 1 << TrieNodeKt.indexSegment(i, i3);
+            if (trieNode.hasEntryAt$runtime_release(iIndexSegment)) {
+                this.path[i2].reset(Integer.bitCount(trieNode.dataMap) * 2, trieNode.entryKeyIndex$runtime_release(iIndexSegment), trieNode.buffer);
                 this.pathLastIndex = i2;
                 return;
             }
-            int nodeIndex$runtime_release = trieNode.nodeIndex$runtime_release(indexSegment);
-            TrieNode nodeAtIndex$runtime_release = trieNode.nodeAtIndex$runtime_release(nodeIndex$runtime_release);
-            this.path[i2].reset(Integer.bitCount(trieNode.dataMap) * 2, nodeIndex$runtime_release, trieNode.buffer);
-            resetPath(i, nodeAtIndex$runtime_release, obj, i2 + 1);
+            int iNodeIndex$runtime_release = trieNode.nodeIndex$runtime_release(iIndexSegment);
+            TrieNode trieNodeNodeAtIndex$runtime_release = trieNode.nodeAtIndex$runtime_release(iNodeIndex$runtime_release);
+            this.path[i2].reset(Integer.bitCount(trieNode.dataMap) * 2, iNodeIndex$runtime_release, trieNode.buffer);
+            resetPath(i, trieNodeNodeAtIndex$runtime_release, obj, i2 + 1);
             return;
         }
         TrieNodeBaseIterator trieNodeBaseIterator = this.path[i2];

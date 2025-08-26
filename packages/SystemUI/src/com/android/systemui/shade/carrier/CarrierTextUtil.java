@@ -2,6 +2,7 @@ package com.android.systemui.shade.carrier;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.util.Log;
 import com.android.systemui.Dumpable;
 import com.android.systemui.R;
@@ -9,7 +10,6 @@ import com.android.systemui.broadcast.ActionReceiver$$ExternalSyntheticOutline0;
 import com.android.systemui.statusbar.pipeline.carrier.CarrierInfraMediator;
 import java.io.PrintWriter;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class CarrierTextUtil implements Dumpable {
     public final Context context;
@@ -24,7 +24,7 @@ public final class CarrierTextUtil implements Dumpable {
         ActionReceiver$$ExternalSyntheticOutline0.m(printWriter, "Last carrier label=", this.lastCarrierLabel);
     }
 
-    public final String updateNetworkName(Intent intent) {
+    public final String updateNetworkName(Intent intent) throws Resources.NotFoundException {
         boolean booleanExtra = intent.getBooleanExtra("android.telephony.extra.SHOW_SPN", false);
         String stringExtra = intent.getStringExtra("android.telephony.extra.SPN");
         String stringExtra2 = intent.getStringExtra("android.telephony.extra.DATA_SPN");
@@ -42,8 +42,8 @@ public final class CarrierTextUtil implements Dumpable {
             }
             sb.append(stringExtra);
         }
-        String sb2 = sb.toString();
-        this.lastCarrierLabel = sb2;
-        return sb2;
+        String string2 = sb.toString();
+        this.lastCarrierLabel = string2;
+        return string2;
     }
 }

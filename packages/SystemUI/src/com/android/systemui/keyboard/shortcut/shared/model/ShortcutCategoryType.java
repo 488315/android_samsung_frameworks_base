@@ -3,11 +3,9 @@ package com.android.systemui.keyboard.shortcut.shared.model;
 import androidx.compose.animation.core.TransitionKt$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public interface ShortcutCategoryType {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Accessibility implements ShortcutCategoryType {
         public static final Accessibility INSTANCE = new Accessibility();
         public static final boolean includeInCustomization = true;
@@ -38,7 +36,6 @@ public interface ShortcutCategoryType {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AppCategories implements ShortcutCategoryType {
         public static final AppCategories INSTANCE = new AppCategories();
         public static final boolean isTrusted = true;
@@ -70,7 +67,6 @@ public interface ShortcutCategoryType {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class CurrentApp implements ShortcutCategoryType {
         public final String packageName;
 
@@ -104,7 +100,6 @@ public interface ShortcutCategoryType {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class InputMethodEditor implements ShortcutCategoryType {
         public static final InputMethodEditor INSTANCE = new InputMethodEditor();
 
@@ -134,7 +129,6 @@ public interface ShortcutCategoryType {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class MultiTasking implements ShortcutCategoryType {
         public static final MultiTasking INSTANCE = new MultiTasking();
         public static final boolean isTrusted = true;
@@ -166,7 +160,6 @@ public interface ShortcutCategoryType {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class System implements ShortcutCategoryType {
         public static final System INSTANCE = new System();
         public static final boolean isTrusted = true;

@@ -26,7 +26,6 @@ import kotlinx.coroutines.SupervisorJobImpl;
 import kotlinx.coroutines.SupervisorKt;
 import kotlinx.coroutines.internal.ContextScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class QSTileViewModelFactory$Static {
     public final CoroutineDispatcher backgroundDispatcher;
@@ -105,12 +104,12 @@ public final class QSTileViewModelFactory$Static {
         };
         QSTileCoroutineScopeFactory qSTileCoroutineScopeFactory = this.coroutineScopeFactory;
         qSTileCoroutineScopeFactory.getClass();
-        SupervisorJobImpl SupervisorJob$default = SupervisorKt.SupervisorJob$default();
+        SupervisorJobImpl supervisorJobImplSupervisorJob$default = SupervisorKt.SupervisorJob$default();
         CoroutineDispatcher coroutineDispatcher = qSTileCoroutineScopeFactory.bgDispatcher;
         coroutineDispatcher.getClass();
-        CoroutineContext plus = CoroutineContext.DefaultImpls.plus(coroutineDispatcher, SupervisorJob$default);
+        CoroutineContext coroutineContextPlus = CoroutineContext.DefaultImpls.plus(coroutineDispatcher, supervisorJobImplSupervisorJob$default);
         TraceDataThreadLocal traceDataThreadLocal = TraceContextElementKt.traceThreadLocal;
-        ContextScope CoroutineScope = CoroutineScopeKt.CoroutineScope(plus.plus(EmptyCoroutineContext.INSTANCE));
-        return new QSTileViewModelImpl(config, function0, function02, function03, this.disabledByPolicyInteractor, this.userRepository, this.falsingManager, this.qsTileAnalytics, this.qsTileLogger, this.systemClock, this.backgroundDispatcher, this.uiBackgroundDispatcher, CoroutineScope, internetDetailsViewModel);
+        ContextScope contextScopeCoroutineScope = CoroutineScopeKt.CoroutineScope(coroutineContextPlus.plus(EmptyCoroutineContext.INSTANCE));
+        return new QSTileViewModelImpl(config, function0, function02, function03, this.disabledByPolicyInteractor, this.userRepository, this.falsingManager, this.qsTileAnalytics, this.qsTileLogger, this.systemClock, this.backgroundDispatcher, this.uiBackgroundDispatcher, contextScopeCoroutineScope, internetDetailsViewModel);
     }
 }

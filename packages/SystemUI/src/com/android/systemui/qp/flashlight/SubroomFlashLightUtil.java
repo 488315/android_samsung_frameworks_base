@@ -22,7 +22,6 @@ import com.android.systemui.qp.util.SubscreenToolTipWindow;
 import com.android.systemui.qp.util.SubscreenUtil;
 import com.sec.ims.volte2.data.VolteConstants;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SubroomFlashLightUtil {
     public final AnonymousClass1 mAccessibilityDelegate;
@@ -34,7 +33,7 @@ public class SubroomFlashLightUtil {
 
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Type inference failed for: r2v0, types: [android.view.View$AccessibilityDelegate, com.android.systemui.qp.flashlight.SubroomFlashLightUtil$1] */
-    public SubroomFlashLightUtil(Activity activity) {
+    public SubroomFlashLightUtil(Activity activity) throws Resources.NotFoundException {
         ?? r2 = new View.AccessibilityDelegate(this) { // from class: com.android.systemui.qp.flashlight.SubroomFlashLightUtil.1
             @Override // android.view.View.AccessibilityDelegate
             public final void onInitializeAccessibilityNodeInfo(View view, AccessibilityNodeInfo accessibilityNodeInfo) {
@@ -119,8 +118,8 @@ public class SubroomFlashLightUtil {
             final SubscreenToolTipWindow subscreenToolTipWindow = new SubscreenToolTipWindow(activity, R.string.subscreen_close_button);
             this.mBackButton.setOnLongClickListener(new View.OnLongClickListener() { // from class: com.android.systemui.qp.flashlight.SubroomFlashLightUtil$$ExternalSyntheticLambda0
                 @Override // android.view.View.OnLongClickListener
-                public final boolean onLongClick(View view) {
-                    SubscreenToolTipWindow subscreenToolTipWindow2 = SubscreenToolTipWindow.this;
+                public final boolean onLongClick(View view) throws Resources.NotFoundException {
+                    SubscreenToolTipWindow subscreenToolTipWindow2 = subscreenToolTipWindow;
                     PopupWindow popupWindow = subscreenToolTipWindow2.mTipWindow;
                     if (popupWindow != null && popupWindow.isShowing()) {
                         return true;

@@ -19,7 +19,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlin.sequences.SequencesKt___SequencesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class EditTileKt$$ExternalSyntheticLambda13 implements Function1 {
     public final /* synthetic */ int $r8$classId;
@@ -34,22 +33,22 @@ public final /* synthetic */ class EditTileKt$$ExternalSyntheticLambda13 impleme
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
         switch (this.$r8$classId) {
             case 0:
                 ResizingState.ResizeOperation resizeOperation = (ResizingState.ResizeOperation) obj;
                 if (resizeOperation instanceof ResizingState.ResizeOperation.TemporaryResizeOperation) {
                     EditTileListState editTileListState = (EditTileListState) ((MutableState) this.f$1).getValue();
-                    int indexOf = editTileListState.indexOf(resizeOperation.spec);
-                    if (indexOf != -1) {
+                    int iIndexOf = editTileListState.indexOf(resizeOperation.spec);
+                    if (iIndexOf != -1) {
                         SnapshotStateList snapshotStateList = editTileListState._tiles;
-                        TileGridCell tileGridCell = (TileGridCell) snapshotStateList.get(indexOf);
-                        boolean isIcon = tileGridCell.isIcon();
+                        TileGridCell tileGridCell = (TileGridCell) snapshotStateList.get(iIndexOf);
+                        boolean zIsIcon = tileGridCell.isIcon();
                         boolean z = resizeOperation.toIcon;
-                        if (isIcon != z) {
-                            snapshotStateList.remove(indexOf);
-                            snapshotStateList.add(indexOf, new TileGridCell(tileGridCell.tile, tileGridCell.row, z ? 1 : editTileListState.largeTilesSpan, tileGridCell.span, tileGridCell.column, null));
-                            int row = ((GridCell) snapshotStateList.get(indexOf)).getRow();
+                        if (zIsIcon != z) {
+                            snapshotStateList.remove(iIndexOf);
+                            snapshotStateList.add(iIndexOf, new TileGridCell(tileGridCell.tile, tileGridCell.row, z ? 1 : editTileListState.largeTilesSpan, tileGridCell.span, tileGridCell.column, null));
+                            int row = ((GridCell) snapshotStateList.get(iIndexOf)).getRow();
                             ArrayList arrayList = new ArrayList();
                             ArrayList arrayList2 = new ArrayList();
                             ListIterator listIterator = snapshotStateList.listIterator();

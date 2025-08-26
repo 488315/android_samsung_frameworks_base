@@ -6,7 +6,6 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface IScreenshotService extends IInterface {
     boolean canScrollCapture();
@@ -25,11 +24,9 @@ public interface IScreenshotService extends IInterface {
 
     boolean startCapture();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IScreenshotService {
         public static final /* synthetic */ int $r8$clinit = 0;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class Proxy implements IScreenshotService {
             public final IBinder mRemote;
 
@@ -44,39 +41,39 @@ public interface IScreenshotService extends IInterface {
 
             @Override // com.samsung.android.app.smartcapture.screenshot.lib.IScreenshotService
             public final boolean onGlobalScreenshotFinished(long j, String str, Bundle bundle) {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.samsung.android.app.smartcapture.screenshot.lib.IScreenshotService");
-                    obtain.writeLong(j);
-                    obtain.writeString(str);
-                    obtain.writeInt(1);
-                    bundle.writeToParcel(obtain, 0);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt() != 0;
+                    parcelObtain.writeInterfaceToken("com.samsung.android.app.smartcapture.screenshot.lib.IScreenshotService");
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(1);
+                    bundle.writeToParcel(parcelObtain, 0);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt() != 0;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.app.smartcapture.screenshot.lib.IScreenshotService
             public final boolean onGlobalScreenshotStarted(long j, String str, Bundle bundle) {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.samsung.android.app.smartcapture.screenshot.lib.IScreenshotService");
-                    obtain.writeLong(j);
-                    obtain.writeString(str);
-                    obtain.writeInt(1);
-                    bundle.writeToParcel(obtain, 0);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt() != 0;
+                    parcelObtain.writeInterfaceToken("com.samsung.android.app.smartcapture.screenshot.lib.IScreenshotService");
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(1);
+                    bundle.writeToParcel(parcelObtain, 0);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt() != 0;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -97,30 +94,30 @@ public interface IScreenshotService extends IInterface {
             switch (i) {
                 case 1:
                     parcel.readStrongBinder();
-                    boolean canScrollCapture = canScrollCapture();
+                    boolean zCanScrollCapture = canScrollCapture();
                     parcel2.writeNoException();
-                    parcel2.writeInt(canScrollCapture ? 1 : 0);
+                    parcel2.writeInt(zCanScrollCapture ? 1 : 0);
                     return true;
                 case 2:
-                    boolean isUiActivated = isUiActivated();
+                    boolean zIsUiActivated = isUiActivated();
                     parcel2.writeNoException();
-                    parcel2.writeInt(isUiActivated ? 1 : 0);
+                    parcel2.writeInt(zIsUiActivated ? 1 : 0);
                     return true;
                 case 3:
                     parcel.readString();
-                    boolean startCapture = startCapture();
+                    boolean zStartCapture = startCapture();
                     parcel2.writeNoException();
-                    parcel2.writeInt(startCapture ? 1 : 0);
+                    parcel2.writeInt(zStartCapture ? 1 : 0);
                     return true;
                 case 4:
-                    boolean onGlobalScreenshotStarted = onGlobalScreenshotStarted(parcel.readLong(), parcel.readString(), (Bundle) (parcel.readInt() != 0 ? Bundle.CREATOR.createFromParcel(parcel) : null));
+                    boolean zOnGlobalScreenshotStarted = onGlobalScreenshotStarted(parcel.readLong(), parcel.readString(), (Bundle) (parcel.readInt() != 0 ? Bundle.CREATOR.createFromParcel(parcel) : null));
                     parcel2.writeNoException();
-                    parcel2.writeInt(onGlobalScreenshotStarted ? 1 : 0);
+                    parcel2.writeInt(zOnGlobalScreenshotStarted ? 1 : 0);
                     return true;
                 case 5:
-                    boolean onGlobalScreenshotFinished = onGlobalScreenshotFinished(parcel.readLong(), parcel.readString(), (Bundle) (parcel.readInt() != 0 ? Bundle.CREATOR.createFromParcel(parcel) : null));
+                    boolean zOnGlobalScreenshotFinished = onGlobalScreenshotFinished(parcel.readLong(), parcel.readString(), (Bundle) (parcel.readInt() != 0 ? Bundle.CREATOR.createFromParcel(parcel) : null));
                     parcel2.writeNoException();
-                    parcel2.writeInt(onGlobalScreenshotFinished ? 1 : 0);
+                    parcel2.writeInt(zOnGlobalScreenshotFinished ? 1 : 0);
                     return true;
                 case 6:
                     parcel.readString();
@@ -130,15 +127,15 @@ public interface IScreenshotService extends IInterface {
                     return true;
                 case 7:
                     parcel.readInt();
-                    boolean registerNotification = registerNotification();
+                    boolean zRegisterNotification = registerNotification();
                     parcel2.writeNoException();
-                    parcel2.writeInt(registerNotification ? 1 : 0);
+                    parcel2.writeInt(zRegisterNotification ? 1 : 0);
                     return true;
                 case 8:
                     parcel.readInt();
-                    boolean cancelNotification = cancelNotification();
+                    boolean zCancelNotification = cancelNotification();
                     parcel2.writeNoException();
-                    parcel2.writeInt(cancelNotification ? 1 : 0);
+                    parcel2.writeInt(zCancelNotification ? 1 : 0);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);

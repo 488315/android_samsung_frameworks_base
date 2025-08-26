@@ -52,9 +52,9 @@ public interface IRemoteLockMonitorCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IRemoteLockMonitorCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IRemoteLockMonitorCallback)) {
-                return (IRemoteLockMonitorCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IRemoteLockMonitorCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IRemoteLockMonitorCallback)) {
+                return (IRemoteLockMonitorCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -88,11 +88,11 @@ public interface IRemoteLockMonitorCallback extends IInterface {
                 parcel.enforceNoDataAvail();
                 changeRemoteLockState(remoteLockInfo);
             } else if (i == 2) {
-                byte[] createByteArray = parcel.createByteArray();
+                byte[] bArrCreateByteArray = parcel.createByteArray();
                 parcel.enforceNoDataAvail();
-                int checkRemoteLockPassword = checkRemoteLockPassword(createByteArray);
+                int iCheckRemoteLockPassword = checkRemoteLockPassword(bArrCreateByteArray);
                 parcel2.writeNoException();
-                parcel2.writeInt(checkRemoteLockPassword);
+                parcel2.writeInt(iCheckRemoteLockPassword);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -117,29 +117,29 @@ public interface IRemoteLockMonitorCallback extends IInterface {
 
             @Override // com.android.internal.widget.IRemoteLockMonitorCallback
             public void changeRemoteLockState(RemoteLockInfo remoteLockInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IRemoteLockMonitorCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(remoteLockInfo, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IRemoteLockMonitorCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(remoteLockInfo, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.widget.IRemoteLockMonitorCallback
             public int checkRemoteLockPassword(byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRemoteLockMonitorCallback.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IRemoteLockMonitorCallback.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

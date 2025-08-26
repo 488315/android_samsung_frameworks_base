@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import com.samsung.android.rune.CoreRune;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SplitBounds implements Parcelable {
     public static final Parcelable.Creator<SplitBounds> CREATOR = new Parcelable.Creator() { // from class: com.android.wm.shell.shared.split.SplitBounds.1
@@ -92,14 +91,11 @@ public class SplitBounds implements Parcelable {
 
     public SplitBounds(Rect rect, Rect rect2, Rect rect3, int i, int i2, int i3, int i4, int i5, int i6, boolean z) {
         float f;
-        float width;
+        float fWidth;
+        float fHeight;
         float f2;
-        int i7;
-        int i8;
-        float width2;
-        float f3;
-        int i9;
-        int i10;
+        float fWidth2;
+        float fHeight2;
         this.leftTopBounds = rect;
         this.rightBottomBounds = rect2;
         this.leftTopTaskId = i;
@@ -122,12 +118,12 @@ public class SplitBounds implements Parcelable {
                 this.visualDividerBounds = new Rect(rect.right, rect.top, rect2.left, rect.bottom);
                 this.appsStackedVertically = false;
             }
-            float f4 = rect2.right - rect.left;
-            float f5 = rect2.bottom - rect.top;
-            this.leftTaskPercent = rect.width() / f4;
-            this.topTaskPercent = rect.height() / f5;
-            this.dividerWidthPercent = this.visualDividerBounds.width() / f4;
-            this.dividerHeightPercent = this.visualDividerBounds.height() / f5;
+            float f3 = rect2.right - rect.left;
+            float f4 = rect2.bottom - rect.top;
+            this.leftTaskPercent = rect.width() / f3;
+            this.topTaskPercent = rect.height() / f4;
+            this.dividerWidthPercent = this.visualDividerBounds.width() / f3;
+            this.dividerHeightPercent = this.visualDividerBounds.height() / f4;
             return;
         }
         Rect rect4 = new Rect(rect3);
@@ -136,7 +132,7 @@ public class SplitBounds implements Parcelable {
                 this.appsStackedVertically = false;
                 if ((i5 & 8) != 0) {
                     rect4.union(rect);
-                    width = rect2.right - rect4.left;
+                    fWidth = rect2.right - rect4.left;
                     this.visualDividerBounds = new Rect(rect4.right, rect4.top, rect2.left, rect2.bottom);
                     if ((i5 & 16) != 0) {
                         this.cellDividerBounds = new Rect(rect3.left, rect3.bottom, rect.right, rect.top);
@@ -145,7 +141,7 @@ public class SplitBounds implements Parcelable {
                     }
                 } else {
                     rect4.union(rect2);
-                    width = rect4.right - rect.left;
+                    fWidth = rect4.right - rect.left;
                     this.visualDividerBounds = new Rect(rect.right, rect.top, rect4.left, rect4.bottom);
                     if ((i5 & 16) != 0) {
                         this.cellDividerBounds = new Rect(rect3.left, rect3.bottom, rect2.right, rect2.top);
@@ -157,7 +153,7 @@ public class SplitBounds implements Parcelable {
                 this.cellTopTaskPercent = rect3.height() / rect4.height();
                 this.topTaskPercent = 1.0f;
                 this.cellLeftTaskPercent = 1.0f;
-                f2 = rect4.height();
+                fHeight = rect4.height();
             } else {
                 this.appsStackedVertically = true;
                 if ((i5 & 16) != 0) {
@@ -183,12 +179,12 @@ public class SplitBounds implements Parcelable {
                 this.cellLeftTaskPercent = rect3.width() / rect4.right;
                 this.leftTaskPercent = 1.0f;
                 this.cellTopTaskPercent = 1.0f;
-                float f6 = f;
-                width = rect4.width();
-                f2 = f6;
+                float f5 = f;
+                fWidth = rect4.width();
+                fHeight = f5;
             }
-            this.dividerWidthPercent = this.visualDividerBounds.width() / width;
-            this.dividerHeightPercent = this.visualDividerBounds.height() / f2;
+            this.dividerWidthPercent = this.visualDividerBounds.width() / fWidth;
+            this.dividerHeightPercent = this.visualDividerBounds.height() / fHeight;
             this.cellDividerWidthPercent = this.cellDividerBounds.width() / rect4.width();
             this.cellDividerHeightPercent = this.cellDividerBounds.height() / rect4.height();
             return;
@@ -196,63 +192,66 @@ public class SplitBounds implements Parcelable {
         if (i6 == 0) {
             this.appsStackedVertically = false;
             if ((i5 & 8) != 0) {
+                rect4.union(rect);
                 this.visualDividerBounds = new Rect(rect.right, rect.top, rect2.left, rect2.bottom);
                 if ((i5 & 16) != 0) {
                     this.cellDividerBounds = new Rect(rect3.right, rect3.top, rect.left, rect.bottom);
                 } else {
                     this.cellDividerBounds = new Rect(rect.right, rect.top, rect3.left, rect3.bottom);
                 }
-                i9 = rect2.right;
-                i10 = rect3.left;
+                fWidth2 = rect2.right - rect3.left;
+                this.leftTaskPercent = rect4.width() / fWidth2;
+                this.cellLeftTaskPercent = rect3.width() / rect4.width();
             } else {
+                rect4.union(rect2);
                 this.visualDividerBounds = new Rect(rect.right, rect.top, rect2.left, rect2.bottom);
                 if ((i5 & 16) != 0) {
                     this.cellDividerBounds = new Rect(rect3.right, rect3.top, rect2.left, rect2.bottom);
                 } else {
                     this.cellDividerBounds = new Rect(rect2.right, rect2.top, rect3.left, rect3.bottom);
                 }
-                i9 = rect3.right;
-                i10 = rect.left;
+                fWidth2 = rect3.right - rect.left;
+                this.leftTaskPercent = rect.width() / fWidth2;
+                this.cellLeftTaskPercent = rect3.width() / rect4.width();
             }
-            width2 = i9 - i10;
-            this.leftTaskPercent = rect.width() / width2;
-            this.cellLeftTaskPercent = rect3.width() / width2;
             this.cellTopTaskPercent = 1.0f;
             this.topTaskPercent = 1.0f;
-            f3 = rect.height();
+            fHeight2 = rect.height();
         } else {
             this.appsStackedVertically = true;
             if ((i5 & 16) != 0) {
+                rect4.union(rect);
                 this.visualDividerBounds = new Rect(rect.left, rect.bottom, rect2.right, rect2.top);
                 if ((i5 & 8) != 0) {
                     this.cellDividerBounds = new Rect(rect3.left, rect3.bottom, rect.right, rect.top);
                 } else {
                     this.cellDividerBounds = new Rect(rect.left, rect.bottom, rect3.right, rect3.top);
                 }
-                i7 = rect2.bottom;
-                i8 = rect3.top;
+                f2 = rect2.bottom - rect3.top;
+                this.topTaskPercent = rect4.height() / f2;
+                this.cellTopTaskPercent = rect3.height() / rect4.height();
             } else {
+                rect4.union(rect2);
                 this.visualDividerBounds = new Rect(rect.left, rect.bottom, rect2.right, rect2.top);
                 if ((i5 & 8) != 0) {
                     this.cellDividerBounds = new Rect(rect3.left, rect3.bottom, rect2.right, rect2.top);
                 } else {
                     this.cellDividerBounds = new Rect(rect2.left, rect2.bottom, rect3.right, rect3.top);
                 }
-                i7 = rect3.bottom;
-                i8 = rect.top;
+                f2 = rect3.bottom - rect.top;
+                this.topTaskPercent = rect.height() / f2;
+                this.cellTopTaskPercent = rect3.height() / rect4.height();
             }
-            float f7 = i7 - i8;
-            this.topTaskPercent = rect.height() / f7;
-            this.cellTopTaskPercent = rect3.height() / f7;
             this.cellLeftTaskPercent = 1.0f;
             this.leftTaskPercent = 1.0f;
-            width2 = rect.width();
-            f3 = f7;
+            float f6 = f2;
+            fWidth2 = rect.width();
+            fHeight2 = f6;
         }
-        this.dividerWidthPercent = this.visualDividerBounds.width() / width2;
-        this.dividerHeightPercent = this.visualDividerBounds.height() / f3;
-        this.cellDividerWidthPercent = this.cellDividerBounds.width() / width2;
-        this.cellDividerHeightPercent = this.cellDividerBounds.height() / f3;
+        this.dividerWidthPercent = this.visualDividerBounds.width() / fWidth2;
+        this.dividerHeightPercent = this.visualDividerBounds.height() / fHeight2;
+        this.cellDividerWidthPercent = this.cellDividerBounds.width() / fWidth2;
+        this.cellDividerHeightPercent = this.cellDividerBounds.height() / fHeight2;
     }
 
     public SplitBounds(Parcel parcel) {

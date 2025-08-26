@@ -14,13 +14,11 @@ import kotlinx.coroutines.DelayKt;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class FromAlternateBouncerTransitionInteractor$listenForAlternateBouncerToLockscreenHubAodOrDozing$1 extends SuspendLambda implements Function2 {
     int label;
     final /* synthetic */ FromAlternateBouncerTransitionInteractor this$0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.keyguard.domain.interactor.FromAlternateBouncerTransitionInteractor$listenForAlternateBouncerToLockscreenHubAodOrDozing$1$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         int label;
@@ -93,18 +91,18 @@ final class FromAlternateBouncerTransitionInteractor$listenForAlternateBouncerTo
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 public final Object emit(Object obj2, Continuation continuation) {
                     Septuple septuple = (Septuple) obj2;
-                    boolean booleanValue = ((Boolean) septuple.component3()).booleanValue();
-                    boolean booleanValue2 = ((Boolean) septuple.component4()).booleanValue();
-                    boolean booleanValue3 = ((Boolean) septuple.component5()).booleanValue();
-                    boolean booleanValue4 = ((Boolean) septuple.component6()).booleanValue();
-                    boolean booleanValue5 = ((Boolean) septuple.component7()).booleanValue();
-                    FromAlternateBouncerTransitionInteractor fromAlternateBouncerTransitionInteractor4 = FromAlternateBouncerTransitionInteractor.this;
+                    boolean zBooleanValue = ((Boolean) septuple.component3()).booleanValue();
+                    boolean zBooleanValue2 = ((Boolean) septuple.component4()).booleanValue();
+                    boolean zBooleanValue3 = ((Boolean) septuple.component5()).booleanValue();
+                    boolean zBooleanValue4 = ((Boolean) septuple.component6()).booleanValue();
+                    boolean zBooleanValue5 = ((Boolean) septuple.component7()).booleanValue();
+                    FromAlternateBouncerTransitionInteractor fromAlternateBouncerTransitionInteractor4 = fromAlternateBouncerTransitionInteractor3;
                     if (((Boolean) fromAlternateBouncerTransitionInteractor4.communalInteractor.editModeOpen.$$delegate_0.getValue()).booleanValue()) {
                         return Unit.INSTANCE;
                     }
                     fromAlternateBouncerTransitionInteractor4.communalSettingsInteractor.isV2FlagEnabled();
-                    Object startTransitionTo$default = TransitionInteractor.startTransitionTo$default(FromAlternateBouncerTransitionInteractor.this, !booleanValue ? booleanValue2 ? KeyguardState.AOD : KeyguardState.DOZING : booleanValue3 ? KeyguardState.GLANCEABLE_HUB : (!booleanValue5 || booleanValue4) ? booleanValue4 ? KeyguardState.DREAMING : KeyguardState.LOCKSCREEN : KeyguardState.OCCLUDED, null, null, null, continuation, 14);
-                    return startTransitionTo$default == CoroutineSingletons.COROUTINE_SUSPENDED ? startTransitionTo$default : Unit.INSTANCE;
+                    Object objStartTransitionTo$default = TransitionInteractor.startTransitionTo$default(fromAlternateBouncerTransitionInteractor3, !zBooleanValue ? zBooleanValue2 ? KeyguardState.AOD : KeyguardState.DOZING : zBooleanValue3 ? KeyguardState.GLANCEABLE_HUB : (!zBooleanValue5 || zBooleanValue4) ? zBooleanValue4 ? KeyguardState.DREAMING : KeyguardState.LOCKSCREEN : KeyguardState.OCCLUDED, null, null, null, continuation, 14);
+                    return objStartTransitionTo$default == CoroutineSingletons.COROUTINE_SUSPENDED ? objStartTransitionTo$default : Unit.INSTANCE;
                 }
             };
             this.label = 1;

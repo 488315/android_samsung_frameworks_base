@@ -87,9 +87,9 @@ public interface IQuickAccessWalletService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IQuickAccessWalletService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IQuickAccessWalletService)) {
-                return (IQuickAccessWalletService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IQuickAccessWalletService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IQuickAccessWalletService)) {
+                return (IQuickAccessWalletService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -132,9 +132,9 @@ public interface IQuickAccessWalletService extends IInterface {
             switch (i) {
                 case 1:
                     GetWalletCardsRequest getWalletCardsRequest = (GetWalletCardsRequest) parcel.readTypedObject(GetWalletCardsRequest.CREATOR);
-                    IQuickAccessWalletServiceCallbacks asInterface = IQuickAccessWalletServiceCallbacks.Stub.asInterface(parcel.readStrongBinder());
+                    IQuickAccessWalletServiceCallbacks iQuickAccessWalletServiceCallbacksAsInterface = IQuickAccessWalletServiceCallbacks.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    onWalletCardsRequested(getWalletCardsRequest, asInterface);
+                    onWalletCardsRequested(getWalletCardsRequest, iQuickAccessWalletServiceCallbacksAsInterface);
                     return true;
                 case 2:
                     SelectWalletCardRequest selectWalletCardRequest = (SelectWalletCardRequest) parcel.readTypedObject(SelectWalletCardRequest.CREATOR);
@@ -146,9 +146,9 @@ public interface IQuickAccessWalletService extends IInterface {
                     return true;
                 case 4:
                     WalletServiceEventListenerRequest walletServiceEventListenerRequest = (WalletServiceEventListenerRequest) parcel.readTypedObject(WalletServiceEventListenerRequest.CREATOR);
-                    IQuickAccessWalletServiceCallbacks asInterface2 = IQuickAccessWalletServiceCallbacks.Stub.asInterface(parcel.readStrongBinder());
+                    IQuickAccessWalletServiceCallbacks iQuickAccessWalletServiceCallbacksAsInterface2 = IQuickAccessWalletServiceCallbacks.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerWalletServiceEventListener(walletServiceEventListenerRequest, asInterface2);
+                    registerWalletServiceEventListener(walletServiceEventListenerRequest, iQuickAccessWalletServiceCallbacksAsInterface2);
                     return true;
                 case 5:
                     WalletServiceEventListenerRequest walletServiceEventListenerRequest2 = (WalletServiceEventListenerRequest) parcel.readTypedObject(WalletServiceEventListenerRequest.CREATOR);
@@ -156,14 +156,14 @@ public interface IQuickAccessWalletService extends IInterface {
                     unregisterWalletServiceEventListener(walletServiceEventListenerRequest2);
                     return true;
                 case 6:
-                    IQuickAccessWalletServiceCallbacks asInterface3 = IQuickAccessWalletServiceCallbacks.Stub.asInterface(parcel.readStrongBinder());
+                    IQuickAccessWalletServiceCallbacks iQuickAccessWalletServiceCallbacksAsInterface3 = IQuickAccessWalletServiceCallbacks.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    onTargetActivityIntentRequested(asInterface3);
+                    onTargetActivityIntentRequested(iQuickAccessWalletServiceCallbacksAsInterface3);
                     return true;
                 case 7:
-                    IQuickAccessWalletServiceCallbacks asInterface4 = IQuickAccessWalletServiceCallbacks.Stub.asInterface(parcel.readStrongBinder());
+                    IQuickAccessWalletServiceCallbacks iQuickAccessWalletServiceCallbacksAsInterface4 = IQuickAccessWalletServiceCallbacks.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    onGestureTargetActivityIntentRequested(asInterface4);
+                    onGestureTargetActivityIntentRequested(iQuickAccessWalletServiceCallbacksAsInterface4);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -188,86 +188,86 @@ public interface IQuickAccessWalletService extends IInterface {
 
             @Override // android.service.quickaccesswallet.IQuickAccessWalletService
             public void onWalletCardsRequested(GetWalletCardsRequest getWalletCardsRequest, IQuickAccessWalletServiceCallbacks iQuickAccessWalletServiceCallbacks) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IQuickAccessWalletService.DESCRIPTOR);
-                    obtain.writeTypedObject(getWalletCardsRequest, 0);
-                    obtain.writeStrongInterface(iQuickAccessWalletServiceCallbacks);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IQuickAccessWalletService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(getWalletCardsRequest, 0);
+                    parcelObtain.writeStrongInterface(iQuickAccessWalletServiceCallbacks);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.quickaccesswallet.IQuickAccessWalletService
             public void onWalletCardSelected(SelectWalletCardRequest selectWalletCardRequest) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IQuickAccessWalletService.DESCRIPTOR);
-                    obtain.writeTypedObject(selectWalletCardRequest, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IQuickAccessWalletService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(selectWalletCardRequest, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.quickaccesswallet.IQuickAccessWalletService
             public void onWalletDismissed() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IQuickAccessWalletService.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IQuickAccessWalletService.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.quickaccesswallet.IQuickAccessWalletService
             public void registerWalletServiceEventListener(WalletServiceEventListenerRequest walletServiceEventListenerRequest, IQuickAccessWalletServiceCallbacks iQuickAccessWalletServiceCallbacks) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IQuickAccessWalletService.DESCRIPTOR);
-                    obtain.writeTypedObject(walletServiceEventListenerRequest, 0);
-                    obtain.writeStrongInterface(iQuickAccessWalletServiceCallbacks);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IQuickAccessWalletService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(walletServiceEventListenerRequest, 0);
+                    parcelObtain.writeStrongInterface(iQuickAccessWalletServiceCallbacks);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.quickaccesswallet.IQuickAccessWalletService
             public void unregisterWalletServiceEventListener(WalletServiceEventListenerRequest walletServiceEventListenerRequest) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IQuickAccessWalletService.DESCRIPTOR);
-                    obtain.writeTypedObject(walletServiceEventListenerRequest, 0);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IQuickAccessWalletService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(walletServiceEventListenerRequest, 0);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.quickaccesswallet.IQuickAccessWalletService
             public void onTargetActivityIntentRequested(IQuickAccessWalletServiceCallbacks iQuickAccessWalletServiceCallbacks) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IQuickAccessWalletService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iQuickAccessWalletServiceCallbacks);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IQuickAccessWalletService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iQuickAccessWalletServiceCallbacks);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.quickaccesswallet.IQuickAccessWalletService
             public void onGestureTargetActivityIntentRequested(IQuickAccessWalletServiceCallbacks iQuickAccessWalletServiceCallbacks) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IQuickAccessWalletService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iQuickAccessWalletServiceCallbacks);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IQuickAccessWalletService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iQuickAccessWalletServiceCallbacks);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

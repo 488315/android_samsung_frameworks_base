@@ -36,11 +36,11 @@ public interface JcaJceHelper {
 
     CertPathValidator createCertPathValidator(String str) throws NoSuchAlgorithmException, NoSuchProviderException;
 
-    CertStore createCertStore(String str, CertStoreParameters certStoreParameters) throws NoSuchAlgorithmException, InvalidAlgorithmParameterException, NoSuchProviderException;
+    CertStore createCertStore(String str, CertStoreParameters certStoreParameters) throws NoSuchAlgorithmException, NoSuchProviderException, InvalidAlgorithmParameterException;
 
-    CertificateFactory createCertificateFactory(String str) throws NoSuchProviderException, CertificateException;
+    CertificateFactory createCertificateFactory(String str) throws CertificateException, NoSuchProviderException;
 
-    Cipher createCipher(String str) throws NoSuchAlgorithmException, NoSuchPaddingException, NoSuchProviderException;
+    Cipher createCipher(String str) throws NoSuchPaddingException, NoSuchAlgorithmException, NoSuchProviderException;
 
     MessageDigest createDigest(String str) throws NoSuchAlgorithmException, NoSuchProviderException;
 

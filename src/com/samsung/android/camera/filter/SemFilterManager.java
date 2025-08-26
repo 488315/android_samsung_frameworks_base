@@ -136,6 +136,7 @@ public class SemFilterManager {
         registerObserver();
     }
 
+    /* JADX WARN: Multi-variable type inference failed */
     public void close() {
         Handler handler = this.mObserverHandler;
         if (handler != null) {
@@ -226,171 +227,95 @@ public class SemFilterManager {
         return Collections.unmodifiableList(arrayList);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:39:0x0097, code lost:
-    
-        if (r3 != null) goto L33;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:41:0x00ab, code lost:
-    
-        return java.util.Collections.unmodifiableList(r1);
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:42:0x00a4, code lost:
-    
-        r3.close();
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:46:0x00a2, code lost:
-    
-        if (0 == 0) goto L34;
-     */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public java.util.List<com.samsung.android.camera.filter.SemFilter> getAvailableMyFilters() {
-        /*
-            r12 = this;
-            java.lang.String r0 = "Unnamed filter"
-            java.lang.String r1 = "[SemFilterManager] getAvailableMyFilters()"
-            java.lang.String r2 = "SemFilterManager"
-            android.util.Log.i(r2, r1)
-            java.util.ArrayList r1 = new java.util.ArrayList
-            r1.<init>()
-            r3 = 0
-            android.content.Context r12 = r12.mContext     // Catch: java.lang.Throwable -> L9a java.lang.Exception -> L9d
-            android.content.ContentResolver r4 = r12.getContentResolver()     // Catch: java.lang.Throwable -> L9a java.lang.Exception -> L9d
-            android.net.Uri r5 = com.samsung.android.camera.filter.SemFilterManager.MYFILTER_URI     // Catch: java.lang.Throwable -> L9a java.lang.Exception -> L9d
-            java.lang.String r9 = "filter_order"
-            r6 = 0
-            r7 = 0
-            r8 = 0
-            android.database.Cursor r3 = r4.query(r5, r6, r7, r8, r9)     // Catch: java.lang.Throwable -> L9a java.lang.Exception -> L9d
-            if (r3 != 0) goto L31
-            java.lang.String r12 = "[SemFilterManager] getAvailableMyFilters() cursor is null"
-            android.util.Log.e(r2, r12)     // Catch: java.lang.Throwable -> L9a java.lang.Exception -> L9d
-            java.util.List r12 = java.util.Collections.unmodifiableList(r1)     // Catch: java.lang.Throwable -> L9a java.lang.Exception -> L9d
-            if (r3 == 0) goto L30
-            r3.close()
-        L30:
-            return r12
-        L31:
-            int r12 = r3.getCount()     // Catch: java.lang.Throwable -> L9a java.lang.Exception -> L9d
-            if (r12 <= 0) goto L97
-        L37:
-            boolean r12 = r3.moveToNext()     // Catch: java.lang.Throwable -> L9a java.lang.Exception -> L9d
-            if (r12 == 0) goto L97
-            r12 = 1
-            java.lang.String r6 = r3.getString(r12)     // Catch: java.lang.Throwable -> L9a java.lang.Exception -> L9d
-            if (r6 == 0) goto L37
-            boolean r12 = r6.equals(r0)     // Catch: java.lang.Throwable -> L9a java.lang.Exception -> L9d
-            if (r12 == 0) goto L4b
-            goto L37
-        L4b:
-            r12 = 2
-            java.lang.String r12 = r3.getString(r12)     // Catch: java.lang.Throwable -> L9a java.lang.Exception -> L9d
-            if (r12 == 0) goto L37
-            boolean r4 = r12.equals(r0)     // Catch: java.lang.Throwable -> L9a java.lang.Exception -> L9d
-            if (r4 == 0) goto L59
-            goto L37
-        L59:
-            java.lang.StringBuilder r4 = new java.lang.StringBuilder     // Catch: java.lang.Throwable -> L9a java.lang.Exception -> L9d
-            r4.<init>()     // Catch: java.lang.Throwable -> L9a java.lang.Exception -> L9d
-            java.lang.String r5 = "myFilterName : "
-            r4.append(r5)     // Catch: java.lang.Throwable -> L9a java.lang.Exception -> L9d
-            r4.append(r6)     // Catch: java.lang.Throwable -> L9a java.lang.Exception -> L9d
-            java.lang.String r5 = ", myFilterFileName : "
-            r4.append(r5)     // Catch: java.lang.Throwable -> L9a java.lang.Exception -> L9d
-            r4.append(r12)     // Catch: java.lang.Throwable -> L9a java.lang.Exception -> L9d
-            java.lang.String r4 = r4.toString()     // Catch: java.lang.Throwable -> L9a java.lang.Exception -> L9d
-            android.util.Log.i(r2, r4)     // Catch: java.lang.Throwable -> L9a java.lang.Exception -> L9d
-            com.samsung.android.camera.filter.SemFilterManager$SemFilterImpl r4 = new com.samsung.android.camera.filter.SemFilterManager$SemFilterImpl     // Catch: java.lang.Throwable -> L9a java.lang.Exception -> L9d
-            java.lang.String r5 = ""
-            java.lang.StringBuilder r7 = new java.lang.StringBuilder     // Catch: java.lang.Throwable -> L9a java.lang.Exception -> L9d
-            r7.<init>()     // Catch: java.lang.Throwable -> L9a java.lang.Exception -> L9d
-            java.lang.String r8 = "[MYFILTER]"
-            r7.append(r8)     // Catch: java.lang.Throwable -> L9a java.lang.Exception -> L9d
-            r7.append(r12)     // Catch: java.lang.Throwable -> L9a java.lang.Exception -> L9d
-            java.lang.String r7 = r7.toString()     // Catch: java.lang.Throwable -> L9a java.lang.Exception -> L9d
-            java.lang.String r9 = ""
-            r10 = 0
-            r11 = 0
-            r8 = r6
-            r4.<init>(r5, r6, r7, r8, r9, r10, r11)     // Catch: java.lang.Throwable -> L9a java.lang.Exception -> L9d
-            r1.add(r4)     // Catch: java.lang.Throwable -> L9a java.lang.Exception -> L9d
-            goto L37
-        L97:
-            if (r3 == 0) goto La7
-            goto La4
-        L9a:
-            r0 = move-exception
-            r12 = r0
-            goto Lac
-        L9d:
-            r0 = move-exception
-            r12 = r0
-            r12.printStackTrace()     // Catch: java.lang.Throwable -> L9a
-            if (r3 == 0) goto La7
-        La4:
-            r3.close()
-        La7:
-            java.util.List r12 = java.util.Collections.unmodifiableList(r1)
-            return r12
-        Lac:
-            if (r3 == 0) goto Lb1
-            r3.close()
-        Lb1:
-            throw r12
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.camera.filter.SemFilterManager.getAvailableMyFilters():java.util.List");
+    public List<SemFilter> getAvailableMyFilters() {
+        String string;
+        Log.i(TAG, "[SemFilterManager] getAvailableMyFilters()");
+        ArrayList arrayList = new ArrayList();
+        Cursor cursorQuery = null;
+        try {
+            try {
+                cursorQuery = this.mContext.getContentResolver().query(MYFILTER_URI, null, null, null, "filter_order");
+            } catch (Exception e) {
+                e.printStackTrace();
+                if (0 != 0) {
+                }
+            }
+            if (cursorQuery == null) {
+                Log.e(TAG, "[SemFilterManager] getAvailableMyFilters() cursor is null");
+                List<SemFilter> listUnmodifiableList = Collections.unmodifiableList(arrayList);
+                if (cursorQuery != null) {
+                    cursorQuery.close();
+                }
+                return listUnmodifiableList;
+            }
+            if (cursorQuery.getCount() > 0) {
+                while (cursorQuery.moveToNext()) {
+                    String string2 = cursorQuery.getString(1);
+                    if (string2 != null && !string2.equals("Unnamed filter") && (string = cursorQuery.getString(2)) != null && !string.equals("Unnamed filter")) {
+                        Log.i(TAG, "myFilterName : " + string2 + ", myFilterFileName : " + string);
+                        StringBuilder sb = new StringBuilder();
+                        sb.append(MYFILTER_SEPERATOR);
+                        sb.append(string);
+                        arrayList.add(new SemFilterImpl("", string2, sb.toString(), string2, "", 0, 0));
+                    }
+                }
+            }
+            if (cursorQuery != null) {
+                cursorQuery.close();
+            }
+            return Collections.unmodifiableList(arrayList);
+        } finally {
+        }
     }
 
     public List<SemFilter> getAvailableFilters() {
         return Collections.unmodifiableList(loadFilter());
     }
 
-    private List<SemFilter> loadFilter() {
+    private List<SemFilter> loadFilter() throws Resources.NotFoundException {
         String string;
         String string2;
-        String str;
         String string3;
+        String string4;
         Log.i(TAG, "[SemFilterManager] loadFilter()");
         ArrayList arrayList = new ArrayList();
-        Cursor query = this.mContext.getContentResolver().query(FILTER_URI, FILTER_PROJECTION, null, null, null);
+        Cursor cursorQuery = this.mContext.getContentResolver().query(FILTER_URI, FILTER_PROJECTION, null, null, null);
         try {
-            if (query == null) {
+            if (cursorQuery == null) {
                 Log.i(TAG, "[SemFilterManager] loadFilter() cursor is null");
-                if (query != null) {
-                    query.close();
+                if (cursorQuery != null) {
+                    cursorQuery.close();
                     return arrayList;
                 }
             } else {
-                HashMap hashMap = new HashMap();
-                while (query.moveToNext()) {
-                    String string4 = query.getString(0);
-                    if (string4 != null && !string4.isEmpty() && (string = query.getString(1)) != null && !string.isEmpty() && (string2 = query.getString(2)) != null && !string2.isEmpty()) {
+                HashMap map = new HashMap();
+                while (cursorQuery.moveToNext()) {
+                    String string5 = cursorQuery.getString(0);
+                    if (string5 != null && !string5.isEmpty() && (string = cursorQuery.getString(1)) != null && !string.isEmpty() && (string2 = cursorQuery.getString(2)) != null && !string2.isEmpty()) {
                         try {
-                            Resources resources = (Resources) hashMap.get(string2);
-                            if (resources == null) {
-                                resources = this.mContext.getPackageManager().getResourcesForApplication(string2);
-                                hashMap.put(string2, resources);
+                            Resources resourcesForApplication = (Resources) map.get(string2);
+                            if (resourcesForApplication == null) {
+                                resourcesForApplication = this.mContext.getPackageManager().getResourcesForApplication(string2);
+                                map.put(string2, resourcesForApplication);
                             }
-                            str = resources.getString(query.getInt(6));
+                            string3 = resourcesForApplication.getString(cursorQuery.getInt(6));
                         } catch (Exception e) {
                             Log.e(TAG, "getResourcesForApplication or getString encounter exception");
                             e.printStackTrace();
-                            str = string4;
+                            string3 = string5;
                         }
-                        String str2 = string2 + "," + string.substring(string2.length() + 1);
+                        String str = string2 + "," + string.substring(string2.length() + 1);
                         Log.i(TAG, "packageName : " + string2);
                         Log.i(TAG, "filterFullName : " + string);
-                        Log.i(TAG, "filterIdentifier : " + str2);
-                        Log.i(TAG, "filterName : " + string4);
-                        if (str2 != null && !str2.isEmpty() && (string3 = query.getString(3)) != null && !string3.isEmpty()) {
-                            arrayList.add(new SemFilterImpl(string2, string4, str2, str, string3, query.getInt(4), query.getInt(5)));
+                        Log.i(TAG, "filterIdentifier : " + str);
+                        Log.i(TAG, "filterName : " + string5);
+                        if (str != null && !str.isEmpty() && (string4 = cursorQuery.getString(3)) != null && !string4.isEmpty()) {
+                            arrayList.add(new SemFilterImpl(string2, string5, str, string3, string4, cursorQuery.getInt(4), cursorQuery.getInt(5)));
                         }
                     }
                 }
-                if (query != null) {
-                    query.close();
+                if (cursorQuery != null) {
+                    cursorQuery.close();
                 }
             }
             return arrayList;

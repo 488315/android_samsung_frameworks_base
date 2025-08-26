@@ -19,7 +19,6 @@ import com.samsung.android.sdk.SsdkUnsupportedException;
 import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ScoverManager {
     public static boolean sIsClearCoverSystemFeatureEnabled = false;
@@ -37,7 +36,7 @@ public class ScoverManager {
     public ICoverManager mService;
 
     public ScoverManager(Context context) {
-        int intValue;
+        int iIntValue;
         new CopyOnWriteArrayList();
         this.mCoverStateListenerDelegates = new CopyOnWriteArrayList();
         new CopyOnWriteArrayList();
@@ -62,16 +61,15 @@ public class ScoverManager {
         if (isSupportCover()) {
             try {
                 Class[] clsArr = new Class[0];
-                intValue = ((Integer) ICoverManager.class.getMethod("getVersion", null).invoke(getService(), null)).intValue();
+                iIntValue = ((Integer) ICoverManager.class.getMethod("getVersion", null).invoke(getService(), null)).intValue();
             } catch (Exception e) {
                 Log.w("ScoverManager", "getVersion failed : " + e);
             }
-            ListPopupWindow$$ExternalSyntheticOutline0.m(intValue, "serviceVersion : ", "ScoverManager");
-            sServiceVersion = intValue;
+        } else {
+            iIntValue = 16777216;
         }
-        intValue = 16777216;
-        ListPopupWindow$$ExternalSyntheticOutline0.m(intValue, "serviceVersion : ", "ScoverManager");
-        sServiceVersion = intValue;
+        ListPopupWindow$$ExternalSyntheticOutline0.m(iIntValue, "serviceVersion : ", "ScoverManager");
+        sServiceVersion = iIntValue;
     }
 
     public static boolean isSupportCover() {
@@ -112,9 +110,9 @@ public class ScoverManager {
     public final synchronized ICoverManager getService() {
         try {
             if (this.mService == null) {
-                ICoverManager asInterface = ICoverManager.Stub.asInterface(ServiceManager.getService("cover"));
-                this.mService = asInterface;
-                if (asInterface == null) {
+                ICoverManager iCoverManagerAsInterface = ICoverManager.Stub.asInterface(ServiceManager.getService("cover"));
+                this.mService = iCoverManagerAsInterface;
+                if (iCoverManagerAsInterface == null) {
                     Slog.w("ScoverManager", "warning: no COVER_MANAGER_SERVICE");
                 }
             }
@@ -124,9 +122,9 @@ public class ScoverManager {
         return this.mService;
     }
 
-    public final void registerListener(EdgeLightingCoverManager.AnonymousClass1 anonymousClass1) {
+    public final void registerListener(EdgeLightingCoverManager.AnonymousClass1 anonymousClass1) throws SsdkUnsupportedException {
         boolean z;
-        ICoverStateListenerCallback.Stub stub;
+        ICoverStateListenerCallback.Stub coverStateListenerDelegate;
         Log.d("ScoverManager", "registerListener");
         if (!isSupportCover()) {
             Log.w("ScoverManager", "registerListener : This device is not supported cover");
@@ -144,28 +142,28 @@ public class ScoverManager {
         while (true) {
             if (!it.hasNext()) {
                 z = false;
-                stub = null;
+                coverStateListenerDelegate = null;
                 break;
             } else {
-                CoverStateListenerDelegate coverStateListenerDelegate = (CoverStateListenerDelegate) it.next();
-                if (coverStateListenerDelegate.mListener.equals(anonymousClass1)) {
+                CoverStateListenerDelegate coverStateListenerDelegate2 = (CoverStateListenerDelegate) it.next();
+                if (coverStateListenerDelegate2.mListener.equals(anonymousClass1)) {
                     z = true;
-                    stub = coverStateListenerDelegate;
+                    coverStateListenerDelegate = coverStateListenerDelegate2;
                     break;
                 }
             }
         }
-        if (stub == null) {
-            stub = new CoverStateListenerDelegate(anonymousClass1, null, this.mContext);
+        if (coverStateListenerDelegate == null) {
+            coverStateListenerDelegate = new CoverStateListenerDelegate(anonymousClass1, null, this.mContext);
         }
         try {
             ICoverManager service = getService();
             if (service != null) {
-                service.registerListenerCallback(stub, new ComponentName(this.mContext.getPackageName(), getClass().getCanonicalName()), 2);
+                service.registerListenerCallback(coverStateListenerDelegate, new ComponentName(this.mContext.getPackageName(), getClass().getCanonicalName()), 2);
                 if (z) {
                     return;
                 }
-                this.mCoverStateListenerDelegates.add(stub);
+                this.mCoverStateListenerDelegates.add(coverStateListenerDelegate);
             }
         } catch (RemoteException e) {
             Log.e("ScoverManager", "RemoteException in registerListener: ", e);
@@ -177,7 +175,7 @@ public class ScoverManager {
     /* JADX WARN: Type inference failed for: r2v2, types: [android.os.IBinder, java.lang.Object] */
     /* JADX WARN: Type inference failed for: r2v4, types: [com.samsung.android.sdk.cover.CoverStateListenerDelegate] */
     /* JADX WARN: Type inference failed for: r4v3, types: [java.util.concurrent.CopyOnWriteArrayList] */
-    public final void unregisterListener(EdgeLightingCoverManager.AnonymousClass1 anonymousClass1) {
+    public final void unregisterListener(EdgeLightingCoverManager.AnonymousClass1 anonymousClass1) throws SsdkUnsupportedException {
         ?? r2;
         Log.d("ScoverManager", "unregisterListener");
         if (!isSupportCover()) {
@@ -222,7 +220,6 @@ public class ScoverManager {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CoverStateListener {
         public void onCoverAttachStateChanged(boolean z) {
         }

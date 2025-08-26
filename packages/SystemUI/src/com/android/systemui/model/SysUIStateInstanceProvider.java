@@ -4,7 +4,6 @@ import com.android.app.displaylib.PerDisplayInstanceProviderWithTeardown;
 import com.android.systemui.model.SysUIStateOverride;
 import com.android.systemui.model.SysUiStateImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SysUIStateInstanceProvider implements PerDisplayInstanceProviderWithTeardown {
     public final SysUiStateImpl.Factory factory;
@@ -17,9 +16,9 @@ public final class SysUIStateInstanceProvider implements PerDisplayInstanceProvi
 
     @Override // com.android.app.displaylib.PerDisplayInstanceProvider
     public final Object createInstance(int i) {
-        SysUiStateImpl create = i == 0 ? this.factory.create(i) : this.overrideFactory.create(i);
-        create.start();
-        return create;
+        SysUiStateImpl sysUiStateImplCreate = i == 0 ? this.factory.create(i) : this.overrideFactory.create(i);
+        sysUiStateImplCreate.start();
+        return sysUiStateImplCreate;
     }
 
     @Override // com.android.app.displaylib.PerDisplayInstanceProviderWithTeardown

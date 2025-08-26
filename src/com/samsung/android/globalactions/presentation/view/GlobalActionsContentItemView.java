@@ -1,6 +1,7 @@
 package com.samsung.android.globalactions.presentation.view;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,59 +43,57 @@ public class GlobalActionsContentItemView {
         this.mViewStateController = viewStateController;
     }
 
-    public View createView(boolean z) {
-        View inflateView = inflateView();
-        setViewAttrs(inflateView, z);
-        return inflateView;
+    public View createView(boolean z) throws Resources.NotFoundException {
+        View viewInflateView = inflateView();
+        setViewAttrs(viewInflateView, z);
+        return viewInflateView;
     }
 
-    public View inflateView() {
+    public View inflateView() throws Resources.NotFoundException {
         if (this.mViewModel.getActionInfo().getViewType() == ViewType.TOP_VIEW) {
             return LayoutInflater.from(this.mContext).inflate(this.mResourceFactory.get(ResourceType.LAYOUT_TOP_VIEW), this.mParent, false);
         }
         if (this.mViewModel.getActionInfo().getViewType() == ViewType.BOTTOM_BTN_LIST_VIEW) {
-            View inflate = LayoutInflater.from(this.mContext).inflate(this.mResourceFactory.get(ResourceType.LAYOUT_BUGREPORT_VIEW), this.mParent, false);
-            inflate.setOnClickListener(new View.OnClickListener() { // from class: com.samsung.android.globalactions.presentation.view.GlobalActionsContentItemView$$ExternalSyntheticLambda0
+            View viewInflate = LayoutInflater.from(this.mContext).inflate(this.mResourceFactory.get(ResourceType.LAYOUT_BUGREPORT_VIEW), this.mParent, false);
+            viewInflate.setOnClickListener(new View.OnClickListener() { // from class: com.samsung.android.globalactions.presentation.view.GlobalActionsContentItemView$$ExternalSyntheticLambda0
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
-                    GlobalActionsContentItemView.this.lambda$inflateView$0(view);
+                    this.f$0.lambda$inflateView$0(view);
                 }
             });
-            inflate.setOnLongClickListener(new View.OnLongClickListener() { // from class: com.samsung.android.globalactions.presentation.view.GlobalActionsContentItemView$$ExternalSyntheticLambda1
+            viewInflate.setOnLongClickListener(new View.OnLongClickListener() { // from class: com.samsung.android.globalactions.presentation.view.GlobalActionsContentItemView$$ExternalSyntheticLambda1
                 @Override // android.view.View.OnLongClickListener
                 public final boolean onLongClick(View view) {
-                    boolean lambda$inflateView$1;
-                    lambda$inflateView$1 = GlobalActionsContentItemView.this.lambda$inflateView$1(view);
-                    return lambda$inflateView$1;
+                    return this.f$0.lambda$inflateView$1(view);
                 }
             });
             if (this.mWhiteTheme) {
-                inflate.setBackground(this.mContext.getDrawable(this.mResourceFactory.get(ResourceType.DRAWABLE_BG_RAISED_BTN_LIGHT)));
-                inflate.setForeground(this.mContext.getDrawable(this.mResourceFactory.get(ResourceType.DRAWABLE_SIDEKEY_SETTINGS_RIPPLE_LIGHT)));
+                viewInflate.setBackground(this.mContext.getDrawable(this.mResourceFactory.get(ResourceType.DRAWABLE_BG_RAISED_BTN_LIGHT)));
+                viewInflate.setForeground(this.mContext.getDrawable(this.mResourceFactory.get(ResourceType.DRAWABLE_SIDEKEY_SETTINGS_RIPPLE_LIGHT)));
             } else {
-                inflate.setBackground(this.mContext.getDrawable(this.mResourceFactory.get(ResourceType.DRAWABLE_BG_RAISED_BTN_DARK)));
-                inflate.setForeground(this.mContext.getDrawable(this.mResourceFactory.get(ResourceType.DRAWABLE_SIDEKEY_SETTINGS_RIPPLE_DARK)));
+                viewInflate.setBackground(this.mContext.getDrawable(this.mResourceFactory.get(ResourceType.DRAWABLE_BG_RAISED_BTN_DARK)));
+                viewInflate.setForeground(this.mContext.getDrawable(this.mResourceFactory.get(ResourceType.DRAWABLE_SIDEKEY_SETTINGS_RIPPLE_DARK)));
             }
-            inflate.setFocusable(true);
-            return inflate;
+            viewInflate.setFocusable(true);
+            return viewInflate;
         }
         if (this.mViewModel.getActionInfo().getViewType() == ViewType.KEY_SETTINGS_VIEW) {
-            View inflate2 = LayoutInflater.from(this.mContext).inflate(this.mResourceFactory.get(ResourceType.LAYOUT_SIDEKEY_SETTINGS_VIEW), this.mParent, false);
-            inflate2.setOnClickListener(new View.OnClickListener() { // from class: com.samsung.android.globalactions.presentation.view.GlobalActionsContentItemView$$ExternalSyntheticLambda2
+            View viewInflate2 = LayoutInflater.from(this.mContext).inflate(this.mResourceFactory.get(ResourceType.LAYOUT_SIDEKEY_SETTINGS_VIEW), this.mParent, false);
+            viewInflate2.setOnClickListener(new View.OnClickListener() { // from class: com.samsung.android.globalactions.presentation.view.GlobalActionsContentItemView$$ExternalSyntheticLambda2
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
-                    GlobalActionsContentItemView.this.lambda$inflateView$2(view);
+                    this.f$0.lambda$inflateView$2(view);
                 }
             });
-            inflate2.setFocusable(true);
+            viewInflate2.setFocusable(true);
             if (this.mWhiteTheme) {
-                inflate2.setBackground(this.mContext.getDrawable(this.mResourceFactory.get(ResourceType.DRAWABLE_BG_RAISED_BTN_LIGHT)));
-                inflate2.setForeground(this.mContext.getDrawable(this.mResourceFactory.get(ResourceType.DRAWABLE_SIDEKEY_SETTINGS_RIPPLE_LIGHT)));
-                return inflate2;
+                viewInflate2.setBackground(this.mContext.getDrawable(this.mResourceFactory.get(ResourceType.DRAWABLE_BG_RAISED_BTN_LIGHT)));
+                viewInflate2.setForeground(this.mContext.getDrawable(this.mResourceFactory.get(ResourceType.DRAWABLE_SIDEKEY_SETTINGS_RIPPLE_LIGHT)));
+                return viewInflate2;
             }
-            inflate2.setBackground(this.mContext.getDrawable(this.mResourceFactory.get(ResourceType.DRAWABLE_BG_RAISED_BTN_DARK)));
-            inflate2.setForeground(this.mContext.getDrawable(this.mResourceFactory.get(ResourceType.DRAWABLE_SIDEKEY_SETTINGS_RIPPLE_DARK)));
-            return inflate2;
+            viewInflate2.setBackground(this.mContext.getDrawable(this.mResourceFactory.get(ResourceType.DRAWABLE_BG_RAISED_BTN_DARK)));
+            viewInflate2.setForeground(this.mContext.getDrawable(this.mResourceFactory.get(ResourceType.DRAWABLE_SIDEKEY_SETTINGS_RIPPLE_DARK)));
+            return viewInflate2;
         }
         if (this.mViewModel.getActionInfo().getViewType() == ViewType.BOTTOM_FORCE_RESTART_MSG_VIEW) {
             return LayoutInflater.from(this.mContext).inflate(this.mResourceFactory.get(ResourceType.LAYOUT_FORCE_RESTART_TEXT_VIEW), this.mParent, false);
@@ -131,7 +130,7 @@ public class GlobalActionsContentItemView {
         ImageView imageView = (ImageView) view.findViewById(this.mResourceFactory.get(ResourceType.ID_ICON));
         if (imageView != null) {
             if (this.mViewModel.getActionInfo().getName() == DefaultActionNames.ACTION_KNOX_CUSTOM) {
-                imageView.lambda$setImageURIAsync$0(this.mViewModel.getIcon());
+                imageView.lambda$setImageURIAsync$2(this.mViewModel.getIcon());
                 imageView.setContentDescription(this.mViewModel.getText());
                 imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
                 imageView.setLayerType(1, null);
@@ -143,15 +142,13 @@ public class GlobalActionsContentItemView {
             imageView.setOnClickListener(new View.OnClickListener() { // from class: com.samsung.android.globalactions.presentation.view.GlobalActionsContentItemView$$ExternalSyntheticLambda3
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view2) {
-                    GlobalActionsContentItemView.this.lambda$setViewAttrs$3(view2);
+                    this.f$0.lambda$setViewAttrs$3(view2);
                 }
             });
             imageView.setOnLongClickListener(new View.OnLongClickListener() { // from class: com.samsung.android.globalactions.presentation.view.GlobalActionsContentItemView$$ExternalSyntheticLambda4
                 @Override // android.view.View.OnLongClickListener
                 public final boolean onLongClick(View view2) {
-                    boolean lambda$setViewAttrs$4;
-                    lambda$setViewAttrs$4 = GlobalActionsContentItemView.this.lambda$setViewAttrs$4(view2);
-                    return lambda$setViewAttrs$4;
+                    return this.f$0.lambda$setViewAttrs$4(view2);
                 }
             });
             if (this.mVoiceAssistantMode) {

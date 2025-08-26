@@ -71,9 +71,9 @@ public interface IContentSuggestionsService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IContentSuggestionsService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IContentSuggestionsService)) {
-                return (IContentSuggestionsService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IContentSuggestionsService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IContentSuggestionsService)) {
+                return (IContentSuggestionsService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -109,26 +109,26 @@ public interface IContentSuggestionsService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 TaskSnapshot taskSnapshot = (TaskSnapshot) parcel.readTypedObject(TaskSnapshot.CREATOR);
                 Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                 parcel.enforceNoDataAvail();
-                provideContextImage(readInt, taskSnapshot, bundle);
+                provideContextImage(i3, taskSnapshot, bundle);
             } else if (i == 2) {
                 SelectionsRequest selectionsRequest = (SelectionsRequest) parcel.readTypedObject(SelectionsRequest.CREATOR);
-                ISelectionsCallback asInterface = ISelectionsCallback.Stub.asInterface(parcel.readStrongBinder());
+                ISelectionsCallback iSelectionsCallbackAsInterface = ISelectionsCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                suggestContentSelections(selectionsRequest, asInterface);
+                suggestContentSelections(selectionsRequest, iSelectionsCallbackAsInterface);
             } else if (i == 3) {
                 ClassificationsRequest classificationsRequest = (ClassificationsRequest) parcel.readTypedObject(ClassificationsRequest.CREATOR);
-                IClassificationsCallback asInterface2 = IClassificationsCallback.Stub.asInterface(parcel.readStrongBinder());
+                IClassificationsCallback iClassificationsCallbackAsInterface = IClassificationsCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                classifyContentSelections(classificationsRequest, asInterface2);
+                classifyContentSelections(classificationsRequest, iClassificationsCallbackAsInterface);
             } else if (i == 4) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 Bundle bundle2 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                 parcel.enforceNoDataAvail();
-                notifyInteraction(readString, bundle2);
+                notifyInteraction(string, bundle2);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -153,54 +153,54 @@ public interface IContentSuggestionsService extends IInterface {
 
             @Override // android.service.contentsuggestions.IContentSuggestionsService
             public void provideContextImage(int i, TaskSnapshot taskSnapshot, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IContentSuggestionsService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(taskSnapshot, 0);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IContentSuggestionsService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(taskSnapshot, 0);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.contentsuggestions.IContentSuggestionsService
             public void suggestContentSelections(SelectionsRequest selectionsRequest, ISelectionsCallback iSelectionsCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IContentSuggestionsService.DESCRIPTOR);
-                    obtain.writeTypedObject(selectionsRequest, 0);
-                    obtain.writeStrongInterface(iSelectionsCallback);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IContentSuggestionsService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(selectionsRequest, 0);
+                    parcelObtain.writeStrongInterface(iSelectionsCallback);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.contentsuggestions.IContentSuggestionsService
             public void classifyContentSelections(ClassificationsRequest classificationsRequest, IClassificationsCallback iClassificationsCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IContentSuggestionsService.DESCRIPTOR);
-                    obtain.writeTypedObject(classificationsRequest, 0);
-                    obtain.writeStrongInterface(iClassificationsCallback);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IContentSuggestionsService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(classificationsRequest, 0);
+                    parcelObtain.writeStrongInterface(iClassificationsCallback);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.contentsuggestions.IContentSuggestionsService
             public void notifyInteraction(String str, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IContentSuggestionsService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IContentSuggestionsService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

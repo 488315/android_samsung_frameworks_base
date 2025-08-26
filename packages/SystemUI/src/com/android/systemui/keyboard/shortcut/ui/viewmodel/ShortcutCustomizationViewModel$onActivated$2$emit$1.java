@@ -1,22 +1,22 @@
 package com.android.systemui.keyboard.shortcut.ui.viewmodel;
 
+import com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutCustomizationViewModel;
 import java.util.List;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class ShortcutCustomizationViewModel$onActivated$2$emit$1 extends ContinuationImpl {
     Object L$0;
     Object L$1;
     int label;
     /* synthetic */ Object result;
-    final /* synthetic */ ShortcutCustomizationViewModel$onActivated$2 this$0;
+    final /* synthetic */ ShortcutCustomizationViewModel.AnonymousClass2 this$0;
 
     /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-    public ShortcutCustomizationViewModel$onActivated$2$emit$1(ShortcutCustomizationViewModel$onActivated$2 shortcutCustomizationViewModel$onActivated$2, Continuation continuation) {
+    public ShortcutCustomizationViewModel$onActivated$2$emit$1(ShortcutCustomizationViewModel.AnonymousClass2 anonymousClass2, Continuation continuation) {
         super(continuation);
-        this.this$0 = shortcutCustomizationViewModel$onActivated$2;
+        this.this$0 = anonymousClass2;
     }
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl

@@ -67,7 +67,7 @@ public class NetscapeCertRequest extends ASN1Object {
         }
     }
 
-    public NetscapeCertRequest(String str, AlgorithmIdentifier algorithmIdentifier, PublicKey publicKey) throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchProviderException {
+    public NetscapeCertRequest(String str, AlgorithmIdentifier algorithmIdentifier, PublicKey publicKey) throws InvalidKeySpecException, NoSuchAlgorithmException, NoSuchProviderException {
         this.challenge = str;
         this.sigAlg = algorithmIdentifier;
         this.pubkey = publicKey;
@@ -113,7 +113,7 @@ public class NetscapeCertRequest extends ASN1Object {
         this.pubkey = publicKey;
     }
 
-    public boolean verify(String str) throws NoSuchAlgorithmException, InvalidKeyException, SignatureException, NoSuchProviderException {
+    public boolean verify(String str) throws NoSuchAlgorithmException, SignatureException, InvalidKeyException, NoSuchProviderException {
         if (!str.equals(this.challenge)) {
             return false;
         }
@@ -123,11 +123,11 @@ public class NetscapeCertRequest extends ASN1Object {
         return signature.verify(this.sigBits);
     }
 
-    public void sign(PrivateKey privateKey) throws NoSuchAlgorithmException, InvalidKeyException, SignatureException, NoSuchProviderException, InvalidKeySpecException {
+    public void sign(PrivateKey privateKey) throws InvalidKeySpecException, NoSuchAlgorithmException, SignatureException, InvalidKeyException, NoSuchProviderException {
         sign(privateKey, null);
     }
 
-    public void sign(PrivateKey privateKey, SecureRandom secureRandom) throws NoSuchAlgorithmException, InvalidKeyException, SignatureException, NoSuchProviderException, InvalidKeySpecException {
+    public void sign(PrivateKey privateKey, SecureRandom secureRandom) throws InvalidKeySpecException, NoSuchAlgorithmException, SignatureException, InvalidKeyException, NoSuchProviderException {
         Signature signature = Signature.getInstance(this.sigAlg.getAlgorithm().getId());
         if (secureRandom != null) {
             signature.initSign(privateKey, secureRandom);
@@ -145,7 +145,7 @@ public class NetscapeCertRequest extends ASN1Object {
         }
     }
 
-    private ASN1Primitive getKeySpec() throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchProviderException {
+    private ASN1Primitive getKeySpec() throws InvalidKeySpecException, NoSuchAlgorithmException, IOException, NoSuchProviderException {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         try {
             byteArrayOutputStream.write(this.pubkey.getEncoded());

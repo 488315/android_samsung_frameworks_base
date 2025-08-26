@@ -16,7 +16,6 @@ import com.android.systemui.statusbar.policy.KeyguardStateController;
 import com.android.systemui.statusbar.policy.KeyguardStateControllerImpl;
 import java.util.function.Supplier;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardSecurityModel {
     public final boolean mIsPukScreenAvailable;
@@ -24,7 +23,6 @@ public class KeyguardSecurityModel {
     public final KeyguardUpdateMonitor mKeyguardUpdateMonitor;
     public final LockPatternUtils mLockPatternUtils;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum SecurityMode {
         Invalid,
         None,
@@ -103,28 +101,28 @@ public class KeyguardSecurityModel {
         if (LsRune.SECURITY_SWIPE_BOUNCER && ((KeyguardStateControllerImpl) this.mKeyguardStateController).isShownSwipeBouncer()) {
             return SecurityMode.Swipe;
         }
-        int intValue = ((Integer) DejankUtils.whitelistIpcs(new Supplier() { // from class: com.android.keyguard.KeyguardSecurityModel$$ExternalSyntheticLambda0
+        int iIntValue = ((Integer) DejankUtils.whitelistIpcs(new Supplier() { // from class: com.android.keyguard.KeyguardSecurityModel$$ExternalSyntheticLambda0
             @Override // java.util.function.Supplier
             public final Object get() {
-                KeyguardSecurityModel keyguardSecurityModel = KeyguardSecurityModel.this;
+                KeyguardSecurityModel keyguardSecurityModel = this.f$0;
                 return Integer.valueOf(keyguardSecurityModel.mLockPatternUtils.getActivePasswordQuality(i));
             }
         })).intValue();
-        if (intValue == 0) {
+        if (iIntValue == 0) {
             return SecurityMode.None;
         }
-        if (intValue == 65536) {
+        if (iIntValue == 65536) {
             return SecurityMode.Pattern;
         }
-        if (intValue == 131072 || intValue == 196608) {
+        if (iIntValue == 131072 || iIntValue == 196608) {
             return SecurityMode.PIN;
         }
-        if (intValue != 262144 && intValue != 327680 && intValue != 393216) {
-            if (intValue == 458752) {
+        if (iIntValue != 262144 && iIntValue != 327680 && iIntValue != 393216) {
+            if (iIntValue == 458752) {
                 return SecurityMode.SmartcardPIN;
             }
-            if (intValue != 524288) {
-                throw new IllegalStateException(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(intValue, "Unknown security quality:"));
+            if (iIntValue != 524288) {
+                throw new IllegalStateException(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(iIntValue, "Unknown security quality:"));
             }
         }
         return SecurityMode.Password;

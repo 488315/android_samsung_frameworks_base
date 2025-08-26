@@ -5,7 +5,6 @@ import androidx.compose.animation.TransitionData$$ExternalSyntheticOutline0;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class MobileDataIndicators {
     public final boolean activityIn;
@@ -49,33 +48,33 @@ public final class MobileDataIndicators {
 
     public final int hashCode() {
         IconState iconState = this.statusIcon;
-        int hashCode = (iconState == null ? 0 : iconState.hashCode()) * 31;
+        int iHashCode = (iconState == null ? 0 : iconState.hashCode()) * 31;
         IconState iconState2 = this.qsIcon;
-        int m = TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.qsType, ReorderTile$$ExternalSyntheticOutline0.m(this.statusType, (hashCode + (iconState2 == null ? 0 : iconState2.hashCode())) * 31, 31), 31), 31, this.activityIn), 31, this.activityOut);
+        int iM = TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.qsType, ReorderTile$$ExternalSyntheticOutline0.m(this.statusType, (iHashCode + (iconState2 == null ? 0 : iconState2.hashCode())) * 31, 31), 31), 31, this.activityIn), 31, this.activityOut);
         CharSequence charSequence = this.typeContentDescription;
-        int hashCode2 = (m + (charSequence == null ? 0 : charSequence.hashCode())) * 31;
+        int iHashCode2 = (iM + (charSequence == null ? 0 : charSequence.hashCode())) * 31;
         CharSequence charSequence2 = this.typeContentDescriptionHtml;
-        int hashCode3 = (hashCode2 + (charSequence2 == null ? 0 : charSequence2.hashCode())) * 31;
+        int iHashCode3 = (iHashCode2 + (charSequence2 == null ? 0 : charSequence2.hashCode())) * 31;
         CharSequence charSequence3 = this.qsDescription;
-        return Boolean.hashCode(this.showTriangle) + TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.subId, (hashCode3 + (charSequence3 != null ? charSequence3.hashCode() : 0)) * 31, 31), 31, this.roaming);
+        return Boolean.hashCode(this.showTriangle) + TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.subId, (iHashCode3 + (charSequence3 != null ? charSequence3.hashCode() : 0)) * 31, 31), 31, this.roaming);
     }
 
     public final String toString() {
-        String str;
-        String iconState;
+        String string;
+        String string2;
         StringBuilder sb = new StringBuilder("MobileDataIndicators[statusIcon=");
-        String str2 = "";
-        IconState iconState2 = this.statusIcon;
-        if (iconState2 == null || (str = iconState2.toString()) == null) {
-            str = "";
+        String str = "";
+        IconState iconState = this.statusIcon;
+        if (iconState == null || (string = iconState.toString()) == null) {
+            string = "";
+        }
+        sb.append(string);
+        sb.append(",qsIcon=");
+        IconState iconState2 = this.qsIcon;
+        if (iconState2 != null && (string2 = iconState2.toString()) != null) {
+            str = string2;
         }
         sb.append(str);
-        sb.append(",qsIcon=");
-        IconState iconState3 = this.qsIcon;
-        if (iconState3 != null && (iconState = iconState3.toString()) != null) {
-            str2 = iconState;
-        }
-        sb.append(str2);
         sb.append(",statusType=");
         sb.append(this.statusType);
         sb.append(",qsType=");

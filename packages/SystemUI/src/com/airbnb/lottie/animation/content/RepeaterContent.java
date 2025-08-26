@@ -20,7 +20,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class RepeaterContent implements DrawingContent, PathContent, GreedyContent, BaseKeyframeAnimation.AnimationListener, KeyPathElementContent {
     public ContentGroup contentGroup;
@@ -39,14 +38,14 @@ public class RepeaterContent implements DrawingContent, PathContent, GreedyConte
         this.layer = baseLayer;
         this.name = repeater.name;
         this.hidden = repeater.hidden;
-        BaseKeyframeAnimation createAnimation = repeater.copies.createAnimation();
-        this.copies = (FloatKeyframeAnimation) createAnimation;
-        baseLayer.addAnimation(createAnimation);
-        createAnimation.addUpdateListener(this);
-        BaseKeyframeAnimation createAnimation2 = repeater.offset.createAnimation();
-        this.offset = (FloatKeyframeAnimation) createAnimation2;
-        baseLayer.addAnimation(createAnimation2);
-        createAnimation2.addUpdateListener(this);
+        BaseKeyframeAnimation baseKeyframeAnimationCreateAnimation = repeater.copies.createAnimation();
+        this.copies = (FloatKeyframeAnimation) baseKeyframeAnimationCreateAnimation;
+        baseLayer.addAnimation(baseKeyframeAnimationCreateAnimation);
+        baseKeyframeAnimationCreateAnimation.addUpdateListener(this);
+        BaseKeyframeAnimation baseKeyframeAnimationCreateAnimation2 = repeater.offset.createAnimation();
+        this.offset = (FloatKeyframeAnimation) baseKeyframeAnimationCreateAnimation2;
+        baseLayer.addAnimation(baseKeyframeAnimationCreateAnimation2);
+        baseKeyframeAnimationCreateAnimation2.addUpdateListener(this);
         AnimatableTransform animatableTransform = repeater.transform;
         animatableTransform.getClass();
         TransformKeyframeAnimation transformKeyframeAnimation = new TransformKeyframeAnimation(animatableTransform);
@@ -85,16 +84,16 @@ public class RepeaterContent implements DrawingContent, PathContent, GreedyConte
 
     @Override // com.airbnb.lottie.animation.content.DrawingContent
     public final void draw(Canvas canvas, Matrix matrix, int i) {
-        float floatValue = ((Float) this.copies.getValue()).floatValue();
-        float floatValue2 = ((Float) this.offset.getValue()).floatValue();
+        float fFloatValue = ((Float) this.copies.getValue()).floatValue();
+        float fFloatValue2 = ((Float) this.offset.getValue()).floatValue();
         TransformKeyframeAnimation transformKeyframeAnimation = this.transform;
-        float floatValue3 = ((Float) transformKeyframeAnimation.startOpacity.getValue()).floatValue() / 100.0f;
-        float floatValue4 = ((Float) transformKeyframeAnimation.endOpacity.getValue()).floatValue() / 100.0f;
-        for (int i2 = ((int) floatValue) - 1; i2 >= 0; i2--) {
+        float fFloatValue3 = ((Float) transformKeyframeAnimation.startOpacity.getValue()).floatValue() / 100.0f;
+        float fFloatValue4 = ((Float) transformKeyframeAnimation.endOpacity.getValue()).floatValue() / 100.0f;
+        for (int i2 = ((int) fFloatValue) - 1; i2 >= 0; i2--) {
             this.matrix.set(matrix);
             float f = i2;
-            this.matrix.preConcat(transformKeyframeAnimation.getMatrixForRepeater(f + floatValue2));
-            this.contentGroup.draw(canvas, this.matrix, (int) (MiscUtils.lerp(floatValue3, floatValue4, f / floatValue) * i));
+            this.matrix.preConcat(transformKeyframeAnimation.getMatrixForRepeater(f + fFloatValue2));
+            this.contentGroup.draw(canvas, this.matrix, (int) (MiscUtils.lerp(fFloatValue3, fFloatValue4, f / fFloatValue) * i));
         }
     }
 
@@ -112,10 +111,10 @@ public class RepeaterContent implements DrawingContent, PathContent, GreedyConte
     public final Path getPath() {
         Path path = this.contentGroup.getPath();
         this.path.reset();
-        float floatValue = ((Float) this.copies.getValue()).floatValue();
-        float floatValue2 = ((Float) this.offset.getValue()).floatValue();
-        for (int i = ((int) floatValue) - 1; i >= 0; i--) {
-            this.matrix.set(this.transform.getMatrixForRepeater(i + floatValue2));
+        float fFloatValue = ((Float) this.copies.getValue()).floatValue();
+        float fFloatValue2 = ((Float) this.offset.getValue()).floatValue();
+        for (int i = ((int) fFloatValue) - 1; i >= 0; i--) {
+            this.matrix.set(this.transform.getMatrixForRepeater(i + fFloatValue2));
             this.path.addPath(path, this.matrix);
         }
         return this.path;

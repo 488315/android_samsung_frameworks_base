@@ -9,7 +9,6 @@ import com.android.systemui.log.core.LogLevel;
 import com.android.systemui.log.core.LogMessage;
 import com.android.systemui.shared.condition.Monitor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class AssistantAttentionCallback implements Monitor.Callback {
     public final DreamOverlayStateController mStateController;
@@ -26,9 +25,9 @@ public class AssistantAttentionCallback implements Monitor.Callback {
         DreamOverlayStateController dreamOverlayStateController = this.mStateController;
         DreamLogger dreamLogger = dreamOverlayStateController.mLogger;
         dreamLogger.getClass();
-        LogMessage obtain = dreamLogger.getBuffer().obtain(dreamLogger.getTag(), LogLevel.DEBUG, new DreamLogger$$ExternalSyntheticLambda0(7), null);
-        obtain.setBool1(z);
-        dreamLogger.getBuffer().commit(obtain);
+        LogMessage logMessageObtain = dreamLogger.getBuffer().obtain(dreamLogger.getTag(), LogLevel.DEBUG, new DreamLogger$$ExternalSyntheticLambda0(7), null);
+        logMessageObtain.setBool1(z);
+        dreamLogger.getBuffer().commit(logMessageObtain);
         dreamOverlayStateController.modifyState(z ? 2 : 1, 16);
     }
 }

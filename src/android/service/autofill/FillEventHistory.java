@@ -11,6 +11,7 @@ import android.view.autofill.AutofillId;
 import android.view.autofill.Helper;
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.Preconditions;
+import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -29,19 +30,19 @@ public final class FillEventHistory implements Parcelable {
             ArrayList arrayList;
             int i = 0;
             FillEventHistory fillEventHistory = new FillEventHistory(0, parcel.readBundle());
-            int readInt = parcel.readInt();
-            int i2 = 0;
-            while (i2 < readInt) {
-                int readInt2 = parcel.readInt();
-                String readString = parcel.readString();
-                Bundle readBundle = parcel.readBundle();
-                ArrayList<String> createStringArrayList = parcel.createStringArrayList();
-                ArraySet<? extends Object> readArraySet = parcel.readArraySet(null);
-                ArrayList createTypedArrayList = parcel.createTypedArrayList(AutofillId.CREATOR);
-                ArrayList<String> createStringArrayList2 = parcel.createStringArrayList();
-                ArrayList createTypedArrayList2 = parcel.createTypedArrayList(AutofillId.CREATOR);
-                if (createTypedArrayList2 != null) {
-                    int size = createTypedArrayList2.size();
+            int i2 = parcel.readInt();
+            int i3 = 0;
+            while (i3 < i2) {
+                int i4 = parcel.readInt();
+                String string = parcel.readString();
+                Bundle bundle = parcel.readBundle();
+                ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
+                ArraySet<? extends Object> arraySet = parcel.readArraySet(null);
+                ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(AutofillId.CREATOR);
+                ArrayList<String> arrayListCreateStringArrayList2 = parcel.createStringArrayList();
+                ArrayList arrayListCreateTypedArrayList2 = parcel.createTypedArrayList(AutofillId.CREATOR);
+                if (arrayListCreateTypedArrayList2 != null) {
+                    int size = arrayListCreateTypedArrayList2.size();
                     ArrayList arrayList2 = new ArrayList(size);
                     while (i < size) {
                         arrayList2.add(parcel.createStringArrayList());
@@ -53,14 +54,14 @@ public final class FillEventHistory implements Parcelable {
                 }
                 AutofillId autofillId = null;
                 AutofillId[] autofillIdArr = (AutofillId[]) parcel.readParcelableArray(null, AutofillId.class);
-                FieldClassification[] readArrayFromParcel = autofillIdArr != null ? FieldClassification.readArrayFromParcel(parcel) : null;
-                int readInt3 = parcel.readInt();
-                int readInt4 = parcel.readInt();
+                FieldClassification[] arrayFromParcel = autofillIdArr != null ? FieldClassification.readArrayFromParcel(parcel) : null;
+                int i5 = parcel.readInt();
+                int i6 = parcel.readInt();
                 if (Flags.addLastFocusedIdToFillEventHistory()) {
                     autofillId = (AutofillId) parcel.readParcelable(null, AutofillId.class);
                 }
-                fillEventHistory.addEvent(new Event(readInt2, readString, readBundle, createStringArrayList, readArraySet, createTypedArrayList, createStringArrayList2, createTypedArrayList2, arrayList, autofillIdArr, readArrayFromParcel, readInt3, readInt4, autofillId));
-                i2++;
+                fillEventHistory.addEvent(new Event(i4, string, bundle, arrayListCreateStringArrayList, arraySet, arrayListCreateTypedArrayList, arrayListCreateStringArrayList2, arrayListCreateTypedArrayList2, arrayList, autofillIdArr, arrayFromParcel, i5, i6, autofillId));
+                i3++;
                 i = 0;
             }
             return fillEventHistory;
@@ -113,7 +114,7 @@ public final class FillEventHistory implements Parcelable {
     }
 
     @Override // android.os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
         parcel.writeBundle(this.mClientState);
         List<Event> list = this.mEvents;
         if (list == null) {

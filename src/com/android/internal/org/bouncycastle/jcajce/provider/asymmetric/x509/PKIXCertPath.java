@@ -110,15 +110,15 @@ public class PKIXCertPath extends CertPath {
         this.helper = bCJcaJceHelper;
         try {
             if (str.equalsIgnoreCase("PkiPath")) {
-                ASN1Primitive readObject = new ASN1InputStream(inputStream).readObject();
-                if (!(readObject instanceof ASN1Sequence)) {
+                ASN1Primitive object = new ASN1InputStream(inputStream).readObject();
+                if (!(object instanceof ASN1Sequence)) {
                     throw new CertificateException("input stream does not contain a ASN1 SEQUENCE while reading PkiPath encoded data to load CertPath");
                 }
-                Enumeration objects = ((ASN1Sequence) readObject).getObjects();
+                Enumeration objects = ((ASN1Sequence) object).getObjects();
                 this.certificates = new ArrayList();
-                java.security.cert.CertificateFactory createCertificateFactory = bCJcaJceHelper.createCertificateFactory("X.509");
+                java.security.cert.CertificateFactory certificateFactoryCreateCertificateFactory = bCJcaJceHelper.createCertificateFactory("X.509");
                 while (objects.hasMoreElements()) {
-                    this.certificates.add(0, createCertificateFactory.generateCertificate(new ByteArrayInputStream(((ASN1Encodable) objects.nextElement()).toASN1Primitive().getEncoded(ASN1Encoding.DER))));
+                    this.certificates.add(0, certificateFactoryCreateCertificateFactory.generateCertificate(new ByteArrayInputStream(((ASN1Encodable) objects.nextElement()).toASN1Primitive().getEncoded(ASN1Encoding.DER))));
                 }
             } else {
                 if (!str.equalsIgnoreCase("PKCS7") && !str.equalsIgnoreCase("PEM")) {
@@ -126,13 +126,13 @@ public class PKIXCertPath extends CertPath {
                 }
                 BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
                 this.certificates = new ArrayList();
-                java.security.cert.CertificateFactory createCertificateFactory2 = bCJcaJceHelper.createCertificateFactory("X.509");
+                java.security.cert.CertificateFactory certificateFactoryCreateCertificateFactory2 = bCJcaJceHelper.createCertificateFactory("X.509");
                 while (true) {
-                    Certificate generateCertificate = createCertificateFactory2.generateCertificate(bufferedInputStream);
-                    if (generateCertificate == null) {
+                    Certificate certificateGenerateCertificate = certificateFactoryCreateCertificateFactory2.generateCertificate(bufferedInputStream);
+                    if (certificateGenerateCertificate == null) {
                         break;
                     } else {
-                        this.certificates.add(generateCertificate);
+                        this.certificates.add(certificateGenerateCertificate);
                     }
                 }
             }

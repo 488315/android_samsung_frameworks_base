@@ -6,7 +6,6 @@ import java.util.Map;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class StateScope$DefaultImpls$$ExternalSyntheticLambda0 implements Function2 {
     public final /* synthetic */ int $r8$classId;
@@ -25,7 +24,7 @@ public final /* synthetic */ class StateScope$DefaultImpls$$ExternalSyntheticLam
                 return TransactionalKt.transactionally(new Function1() { // from class: com.android.systemui.kairos.StateScope$DefaultImpls$$ExternalSyntheticLambda2
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj3) {
+                    public final Object mo781invoke(Object obj3) {
                         return function2.invoke((TransactionScope) obj3, obj2);
                     }
                 });
@@ -43,7 +42,7 @@ public final /* synthetic */ class StateScope$DefaultImpls$$ExternalSyntheticLam
                 Maybe.Companion companion = Maybe.Companion;
                 Object value = entry2.getValue();
                 companion.getClass();
-                return Maybe.Present.m2573boximpl(value);
+                return Maybe.Present.m2590boximpl(value);
             default:
                 return (State) ((StateScope$DefaultImpls$$ExternalSyntheticLambda0) this.f$0).invoke((KairosScope) obj, (Map.Entry) obj2);
         }

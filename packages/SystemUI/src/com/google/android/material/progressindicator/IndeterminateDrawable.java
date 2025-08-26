@@ -10,7 +10,6 @@ import com.android.systemui.util.SettingsHelper;
 import com.google.android.material.progressindicator.DrawingDelegate;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class IndeterminateDrawable extends DrawableWithAnimatedVisibilityChange {
     public final IndeterminateAnimatorDelegate animatorDelegate;
@@ -40,10 +39,10 @@ public final class IndeterminateDrawable extends DrawableWithAnimatedVisibilityC
             DrawingDelegate drawingDelegate = this.drawingDelegate;
             Rect bounds = getBounds();
             float growFraction = getGrowFraction();
-            boolean isShowing = isShowing();
-            boolean isHiding = isHiding();
+            boolean zIsShowing = isShowing();
+            boolean zIsHiding = isHiding();
             drawingDelegate.spec.validateSpec();
-            drawingDelegate.adjustCanvas(canvas, bounds, growFraction, isShowing, isHiding);
+            drawingDelegate.adjustCanvas(canvas, bounds, growFraction, zIsShowing, zIsHiding);
             BaseProgressIndicatorSpec baseProgressIndicatorSpec = this.baseSpec;
             int i2 = baseProgressIndicatorSpec.indicatorTrackGapSize;
             int i3 = this.totalAlpha;
@@ -52,7 +51,7 @@ public final class IndeterminateDrawable extends DrawableWithAnimatedVisibilityC
                 i = i2;
             } else {
                 DrawingDelegate.ActiveIndicator activeIndicator = (DrawingDelegate.ActiveIndicator) ((ArrayList) this.animatorDelegate.activeIndicators).get(0);
-                DrawingDelegate.ActiveIndicator activeIndicator2 = (DrawingDelegate.ActiveIndicator) AlertController$$ExternalSyntheticOutline0.m((ArrayList) this.animatorDelegate.activeIndicators, 1);
+                DrawingDelegate.ActiveIndicator activeIndicator2 = (DrawingDelegate.ActiveIndicator) AlertController$$ExternalSyntheticOutline0.m(1, (ArrayList) this.animatorDelegate.activeIndicators);
                 DrawingDelegate drawingDelegate2 = this.drawingDelegate;
                 if (drawingDelegate2 instanceof LinearDrawingDelegate) {
                     i = i2;

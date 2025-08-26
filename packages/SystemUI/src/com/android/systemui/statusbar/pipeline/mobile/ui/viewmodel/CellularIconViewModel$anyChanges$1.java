@@ -9,7 +9,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function5;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class CellularIconViewModel$anyChanges$1 extends SuspendLambda implements Function5 {
     /* synthetic */ Object L$0;
@@ -27,11 +26,11 @@ final class CellularIconViewModel$anyChanges$1 extends SuspendLambda implements 
 
     @Override // kotlin.jvm.functions.Function5
     public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4, Object obj5) {
-        boolean booleanValue = ((Boolean) obj).booleanValue();
-        boolean booleanValue2 = ((Boolean) obj2).booleanValue();
+        boolean zBooleanValue = ((Boolean) obj).booleanValue();
+        boolean zBooleanValue2 = ((Boolean) obj2).booleanValue();
         CellularIconViewModel$anyChanges$1 cellularIconViewModel$anyChanges$1 = new CellularIconViewModel$anyChanges$1(this.this$0, (Continuation) obj5);
-        cellularIconViewModel$anyChanges$1.Z$0 = booleanValue;
-        cellularIconViewModel$anyChanges$1.Z$1 = booleanValue2;
+        cellularIconViewModel$anyChanges$1.Z$0 = zBooleanValue;
+        cellularIconViewModel$anyChanges$1.Z$1 = zBooleanValue2;
         cellularIconViewModel$anyChanges$1.L$0 = (NetworkTypeIconModel) obj3;
         cellularIconViewModel$anyChanges$1.L$1 = (MobileServiceState) obj4;
         return cellularIconViewModel$anyChanges$1.invokeSuspend(Unit.INSTANCE);

@@ -8,7 +8,6 @@ import com.samsung.android.lib.galaxyfinder.search.util.SearchLog;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class SearchResultItem {
     public final List actions = new ArrayList();
@@ -18,7 +17,6 @@ public abstract class SearchResultItem {
     public final String text;
     public final String text2;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class LabeledPayload {
         public final String label;
         public final ResultItemPayload payload;

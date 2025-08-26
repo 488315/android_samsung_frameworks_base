@@ -9,7 +9,6 @@ import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class FaceUserSettingsRepositoryImpl implements FaceUserSettingsRepository {
     public final StateFlowImpl _alwaysRequireConfirmationInApps;
@@ -18,7 +17,6 @@ public final class FaceUserSettingsRepositoryImpl implements FaceUserSettingsRep
     public final SecureSettings secureSettings;
     public final int userId;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Empty implements FaceUserSettingsRepository {
         public static final Empty INSTANCE = new Empty();
         public static final FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 alwaysRequireConfirmationInApps = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(Boolean.FALSE);
@@ -36,9 +34,9 @@ public final class FaceUserSettingsRepositoryImpl implements FaceUserSettingsRep
         this.userId = i;
         this.mainHandler = handler;
         this.secureSettings = secureSettings;
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(Boolean.FALSE);
-        this._alwaysRequireConfirmationInApps = MutableStateFlow;
-        this.alwaysRequireConfirmationInApps = FlowKt.asStateFlow(MutableStateFlow);
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(Boolean.FALSE);
+        this._alwaysRequireConfirmationInApps = stateFlowImplMutableStateFlow;
+        this.alwaysRequireConfirmationInApps = FlowKt.asStateFlow(stateFlowImplMutableStateFlow);
     }
 
     @Override // com.android.systemui.biometrics.data.repository.FaceUserSettingsRepository

@@ -11,7 +11,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.DelayKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class LooperSlowLogControllerImpl$enable$1$3 extends SuspendLambda implements Function2 {
     final /* synthetic */ long $durMs;
@@ -55,10 +54,10 @@ final class LooperSlowLogControllerImpl$enable$1$3 extends SuspendLambda impleme
             ResultKt.throwOnFailure(obj);
         }
         LooperSlowLogControllerImpl looperSlowLogControllerImpl = this.this$0;
-        String m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(this.$type, "expired type=");
+        String strM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(this.$type, "expired type=");
         int i2 = LooperSlowLogControllerImpl.$r8$clinit;
         if (looperSlowLogControllerImpl.debug) {
-            Log.d("LooperSlow", m);
+            Log.d("LooperSlow", strM);
         }
         this.this$0.disable(this.$type);
         return Unit.INSTANCE;

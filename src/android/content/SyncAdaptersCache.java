@@ -34,17 +34,17 @@ public class SyncAdaptersCache extends RegisteredServicesCache<SyncAdapterType> 
     /* JADX WARN: Can't rename method to resolve collision */
     @Override // android.content.pm.RegisteredServicesCache
     public SyncAdapterType parseServiceAttributes(Resources resources, String str, AttributeSet attributeSet) {
-        TypedArray obtainAttributes = resources.obtainAttributes(attributeSet, R.styleable.SyncAdapter);
+        TypedArray typedArrayObtainAttributes = resources.obtainAttributes(attributeSet, R.styleable.SyncAdapter);
         try {
-            String string = obtainAttributes.getString(2);
-            String string2 = obtainAttributes.getString(1);
+            String string = typedArrayObtainAttributes.getString(2);
+            String string2 = typedArrayObtainAttributes.getString(1);
             if (!TextUtils.isEmpty(string) && !TextUtils.isEmpty(string2)) {
-                return new SyncAdapterType(string, string2, obtainAttributes.getBoolean(3, true), obtainAttributes.getBoolean(4, true), obtainAttributes.getBoolean(6, false), obtainAttributes.getBoolean(5, false), obtainAttributes.getString(0), str);
+                return new SyncAdapterType(string, string2, typedArrayObtainAttributes.getBoolean(3, true), typedArrayObtainAttributes.getBoolean(4, true), typedArrayObtainAttributes.getBoolean(6, false), typedArrayObtainAttributes.getBoolean(5, false), typedArrayObtainAttributes.getString(0), str);
             }
-            obtainAttributes.recycle();
+            typedArrayObtainAttributes.recycle();
             return null;
         } finally {
-            obtainAttributes.recycle();
+            typedArrayObtainAttributes.recycle();
         }
     }
 
@@ -103,7 +103,7 @@ public class SyncAdaptersCache extends RegisteredServicesCache<SyncAdapterType> 
 
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.content.pm.XmlSerializerAndParser
-        public SyncAdapterType createFromXml(TypedXmlPullParser typedXmlPullParser) throws IOException, XmlPullParserException {
+        public SyncAdapterType createFromXml(TypedXmlPullParser typedXmlPullParser) throws XmlPullParserException, IOException {
             return SyncAdapterType.newKey(typedXmlPullParser.getAttributeValue(null, ContactsContract.Directory.DIRECTORY_AUTHORITY), typedXmlPullParser.getAttributeValue(null, "accountType"));
         }
     }

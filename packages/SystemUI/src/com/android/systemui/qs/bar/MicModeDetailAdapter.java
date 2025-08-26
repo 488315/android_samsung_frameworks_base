@@ -22,7 +22,6 @@ import com.sec.ims.presence.ServiceTuple;
 import com.sec.ims.volte2.data.VolteConstants;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MicModeDetailAdapter implements DetailAdapter, MicModeDetailItems.Callback {
     public final AudioManager mAudioManager;
@@ -39,10 +38,10 @@ public final class MicModeDetailAdapter implements DetailAdapter, MicModeDetailI
 
     @Override // com.android.systemui.plugins.qs.DetailAdapter
     public final View createDetailView(Context context, View view, ViewGroup viewGroup) {
-        LayoutInflater from = LayoutInflater.from(this.mContext);
-        View inflate = from.inflate(R.layout.sec_qs_detail_mic_mode, viewGroup, false);
-        ViewGroup viewGroup2 = (ViewGroup) inflate.findViewById(R.id.mic_mode_menu_layout);
-        this.mMicModeActivationItems = (MicModeDetailItems) from.inflate(R.layout.sec_qs_detail_mic_mode_items, viewGroup2, false);
+        LayoutInflater layoutInflaterFrom = LayoutInflater.from(this.mContext);
+        View viewInflate = layoutInflaterFrom.inflate(R.layout.sec_qs_detail_mic_mode, viewGroup, false);
+        ViewGroup viewGroup2 = (ViewGroup) viewInflate.findViewById(R.id.mic_mode_menu_layout);
+        this.mMicModeActivationItems = (MicModeDetailItems) layoutInflaterFrom.inflate(R.layout.sec_qs_detail_mic_mode_items, viewGroup2, false);
         int micModeEffect = ((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).getMicModeEffect();
         boolean z = this.mAudioManager.getModeInternal() == 3 && !((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).isMicModeWifiCalling();
         if (this.mMicModeActivationItems != null) {
@@ -68,7 +67,7 @@ public final class MicModeDetailAdapter implements DetailAdapter, MicModeDetailI
         micModeDetailItems2.handler.removeMessages(2);
         micModeDetailItems2.handler.obtainMessage(2, this).sendToTarget();
         viewGroup2.addView(this.mMicModeActivationItems);
-        return inflate;
+        return viewInflate;
     }
 
     @Override // com.android.systemui.plugins.qs.DetailAdapter
@@ -96,10 +95,10 @@ public final class MicModeDetailAdapter implements DetailAdapter, MicModeDetailI
         return null;
     }
 
-    public final void updateDetailItem(MicModeDetailItems.Item item, boolean z) {
+    public final void updateDetailItem(MicModeDetailItems.Item item, boolean z) throws Resources.NotFoundException {
         Resources resources = this.mContext.getResources();
-        Typeface create = Typeface.create(Typeface.create("sec-600", 1), VolteConstants.ErrorCode.BUSY_EVERYWHERE, false);
-        Typeface create2 = Typeface.create(Typeface.create("sec-400", 0), 400, false);
+        Typeface typefaceCreate = Typeface.create(Typeface.create("sec-600", 1), VolteConstants.ErrorCode.BUSY_EVERYWHERE, false);
+        Typeface typefaceCreate2 = Typeface.create(Typeface.create("sec-400", 0), 400, false);
         int color = resources.getColor(R.color.mic_mode_detail_selected_text_color, null);
         int color2 = resources.getColor(R.color.mic_mode_detail_unselected_text_color, null);
         CheckedTextView checkedTextView = item.ctv;
@@ -118,9 +117,9 @@ public final class MicModeDetailAdapter implements DetailAdapter, MicModeDetailI
             }
             checkedTextView.setCompoundDrawables(drawable2, null, drawable, null);
             if (!z) {
-                create = create2;
+                typefaceCreate = typefaceCreate2;
             }
-            checkedTextView.setTypeface(create);
+            checkedTextView.setTypeface(typefaceCreate);
         }
     }
 

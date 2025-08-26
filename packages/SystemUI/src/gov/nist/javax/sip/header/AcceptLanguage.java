@@ -4,7 +4,6 @@ import gov.nist.core.NameValue;
 import javax.sip.InvalidArgumentException;
 import javax.sip.header.Header;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class AcceptLanguage extends ParametersHeader implements Header {
     private static final long serialVersionUID = -4473982069737324919L;
@@ -32,7 +31,7 @@ public final class AcceptLanguage extends ParametersHeader implements Header {
         this.languageRange = str.trim();
     }
 
-    public final void setQValue(float f) {
+    public final void setQValue(float f) throws InvalidArgumentException {
         double d = f;
         if (d < 0.0d || d > 1.0d) {
             throw new InvalidArgumentException("qvalue out of range!");

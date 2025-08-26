@@ -12,7 +12,6 @@ import com.android.keyguard.EmergencyButtonController$$ExternalSyntheticOutline0
 import com.android.systemui.settings.UserTracker;
 import com.android.systemui.settings.UserTrackerImpl;
 import com.android.systemui.util.DumpUtilsKt;
-import com.android.systemui.util.service.ObservableServiceConnection;
 import java.io.PrintWriter;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -24,7 +23,6 @@ import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ObservableServiceConnection<T> implements ServiceConnection {
     public static final int DISCONNECT_REASON_BINDING_DIED = 3;
@@ -44,19 +42,16 @@ public class ObservableServiceConnection<T> implements ServiceConnection {
     private final ArrayList<WeakReference<Callback<T>>> mCallbacks = new ArrayList<>();
     private Optional<Integer> mLastDisconnectReason = Optional.empty();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Callback<T> {
         void onConnected(ObservableServiceConnection<T> observableServiceConnection, T t);
 
         void onDisconnected(ObservableServiceConnection<T> observableServiceConnection, int i);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     @Retention(RetentionPolicy.SOURCE)
     public @interface DisconnectReason {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface ServiceTransformer<T> {
         T convert(IBinder iBinder);
     }
@@ -83,16 +78,16 @@ public class ObservableServiceConnection<T> implements ServiceConnection {
 
     /* JADX INFO: Access modifiers changed from: private */
     public void bindInternal() {
-        boolean z = false;
+        boolean zBindServiceAsUser = false;
         try {
-            z = this.mContext.bindServiceAsUser(this.mServiceIntent, this, this.mFlags, ((UserTrackerImpl) this.mUserTracker).getUserHandle());
+            zBindServiceAsUser = this.mContext.bindServiceAsUser(this.mServiceIntent, this, this.mFlags, ((UserTrackerImpl) this.mUserTracker).getUserHandle());
             this.mBoundCalled = true;
         } catch (SecurityException e) {
             Log.d(TAG, "Could not bind to service", e);
             this.mContext.unbindService(this);
         }
         if (DEBUG) {
-            EmergencyButtonController$$ExternalSyntheticOutline0.m("bind. bound:", TAG, z);
+            EmergencyButtonController$$ExternalSyntheticOutline0.m("bind. bound:", TAG, zBindServiceAsUser);
         }
     }
 
@@ -181,9 +176,7 @@ public class ObservableServiceConnection<T> implements ServiceConnection {
         this.mCallbacks.removeIf(new Predicate() { // from class: com.android.systemui.util.service.ObservableServiceConnection$$ExternalSyntheticLambda7
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                boolean lambda$removeCallback$2;
-                lambda$removeCallback$2 = ObservableServiceConnection.lambda$removeCallback$2(ObservableServiceConnection.Callback.this, (WeakReference) obj);
-                return lambda$removeCallback$2;
+                return ObservableServiceConnection.lambda$removeCallback$2(callback, (WeakReference) obj);
             }
         });
     }
@@ -218,9 +211,9 @@ public class ObservableServiceConnection<T> implements ServiceConnection {
     }
 
     public void dump(PrintWriter printWriter) {
-        IndentingPrintWriter asIndenting = DumpUtilsKt.asIndenting(printWriter);
-        asIndenting.println("ObservableServiceConnection state:");
-        DumpUtilsKt.withIncreasedIndent(asIndenting, new ObservableServiceConnection$$ExternalSyntheticLambda0(this, asIndenting, 1));
+        IndentingPrintWriter indentingPrintWriterAsIndenting = DumpUtilsKt.asIndenting(printWriter);
+        indentingPrintWriterAsIndenting.println("ObservableServiceConnection state:");
+        DumpUtilsKt.withIncreasedIndent(indentingPrintWriterAsIndenting, new ObservableServiceConnection$$ExternalSyntheticLambda0(this, indentingPrintWriterAsIndenting, 1));
     }
 
     @Override // android.content.ServiceConnection

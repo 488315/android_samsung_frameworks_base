@@ -9,16 +9,13 @@ import com.android.systemui.volume.util.ContextUtils;
 import java.util.Arrays;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class CardStackViewUtils {
     public static final CardStackViewUtils INSTANCE = new CardStackViewUtils();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Alpha {
         public static final Alpha INSTANCE = new Alpha();
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public abstract class CommonAlpha {
             public abstract List getBaseColors();
 
@@ -32,7 +29,6 @@ public final class CardStackViewUtils {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class MonochromeAlpha extends CommonAlpha {
             public static final MonochromeAlpha INSTANCE = new MonochromeAlpha();
 
@@ -41,15 +37,15 @@ public final class CardStackViewUtils {
 
             @Override // com.android.systemui.statusbar.phone.ongoingactivity.CardStackview.CardStackViewUtils.Alpha.CommonAlpha
             public final List getBaseColors() {
-                Float valueOf = Float.valueOf(1.0f);
-                Float valueOf2 = Float.valueOf(0.0f);
-                return Arrays.asList(valueOf, valueOf2, valueOf2);
+                Float fValueOf = Float.valueOf(1.0f);
+                Float fValueOf2 = Float.valueOf(0.0f);
+                return Arrays.asList(fValueOf, fValueOf2, fValueOf2);
             }
 
             @Override // com.android.systemui.statusbar.phone.ongoingactivity.CardStackview.CardStackViewUtils.Alpha.CommonAlpha
             public final List getKeyColors() {
-                Float valueOf = Float.valueOf(0.0f);
-                return Arrays.asList(valueOf, valueOf, valueOf);
+                Float fValueOf = Float.valueOf(0.0f);
+                return Arrays.asList(fValueOf, fValueOf, fValueOf);
             }
         }
 
@@ -64,14 +60,14 @@ public final class CardStackViewUtils {
         float dimenInt = ContextUtils.getDimenInt(R.dimen.oa_expanded_gradient_offset, context);
         float dimensionPixelSize = context.getResources().getDimensionPixelSize(R.dimen.oa_expanded_gradient_radius);
         float dimensionPixelSize2 = context.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_card_bg_radius);
-        Drawable mutate = drawable != null ? drawable.mutate() : null;
-        if (mutate instanceof GradientDrawable) {
-            int argb = Color.argb(76, Color.red(i3), Color.green(i3), Color.blue(i3));
-            GradientDrawable gradientDrawable = (GradientDrawable) mutate;
+        Drawable drawableMutate = drawable != null ? drawable.mutate() : null;
+        if (drawableMutate instanceof GradientDrawable) {
+            int iArgb = Color.argb(76, Color.red(i3), Color.green(i3), Color.blue(i3));
+            GradientDrawable gradientDrawable = (GradientDrawable) drawableMutate;
             if (!z2) {
-                argb = 0;
+                iArgb = 0;
             }
-            gradientDrawable.setColors(new int[]{argb, 0});
+            gradientDrawable.setColors(new int[]{iArgb, 0});
             gradientDrawable.setShape(0);
             if (z) {
                 gradientDrawable.setCornerRadius(dimensionPixelSize2);

@@ -257,9 +257,9 @@ public interface IIncrementalService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IIncrementalService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IIncrementalService)) {
-                return (IIncrementalService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IIncrementalService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IIncrementalService)) {
+                return (IIncrementalService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -337,209 +337,209 @@ public interface IIncrementalService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int openStorage = openStorage(readString);
+                    int iOpenStorage = openStorage(string);
                     parcel2.writeNoException();
-                    parcel2.writeInt(openStorage);
+                    parcel2.writeInt(iOpenStorage);
                     return true;
                 case 2:
-                    String readString2 = parcel.readString();
+                    String string2 = parcel.readString();
                     DataLoaderParamsParcel dataLoaderParamsParcel = (DataLoaderParamsParcel) parcel.readTypedObject(DataLoaderParamsParcel.CREATOR);
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int createStorage = createStorage(readString2, dataLoaderParamsParcel, readInt);
+                    int iCreateStorage = createStorage(string2, dataLoaderParamsParcel, i3);
                     parcel2.writeNoException();
-                    parcel2.writeInt(createStorage);
+                    parcel2.writeInt(iCreateStorage);
                     return true;
                 case 3:
-                    String readString3 = parcel.readString();
-                    int readInt2 = parcel.readInt();
-                    int readInt3 = parcel.readInt();
+                    String string3 = parcel.readString();
+                    int i4 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int createLinkedStorage = createLinkedStorage(readString3, readInt2, readInt3);
+                    int iCreateLinkedStorage = createLinkedStorage(string3, i4, i5);
                     parcel2.writeNoException();
-                    parcel2.writeInt(createLinkedStorage);
+                    parcel2.writeInt(iCreateLinkedStorage);
                     return true;
                 case 4:
-                    int readInt4 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     DataLoaderParamsParcel dataLoaderParamsParcel2 = (DataLoaderParamsParcel) parcel.readTypedObject(DataLoaderParamsParcel.CREATOR);
-                    IDataLoaderStatusListener asInterface = IDataLoaderStatusListener.Stub.asInterface(parcel.readStrongBinder());
+                    IDataLoaderStatusListener iDataLoaderStatusListenerAsInterface = IDataLoaderStatusListener.Stub.asInterface(parcel.readStrongBinder());
                     StorageHealthCheckParams storageHealthCheckParams = (StorageHealthCheckParams) parcel.readTypedObject(StorageHealthCheckParams.CREATOR);
-                    IStorageHealthListener asInterface2 = IStorageHealthListener.Stub.asInterface(parcel.readStrongBinder());
+                    IStorageHealthListener iStorageHealthListenerAsInterface = IStorageHealthListener.Stub.asInterface(parcel.readStrongBinder());
                     PerUidReadTimeouts[] perUidReadTimeoutsArr = (PerUidReadTimeouts[]) parcel.createTypedArray(PerUidReadTimeouts.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean startLoading = startLoading(readInt4, dataLoaderParamsParcel2, asInterface, storageHealthCheckParams, asInterface2, perUidReadTimeoutsArr);
+                    boolean zStartLoading = startLoading(i6, dataLoaderParamsParcel2, iDataLoaderStatusListenerAsInterface, storageHealthCheckParams, iStorageHealthListenerAsInterface, perUidReadTimeoutsArr);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(startLoading);
+                    parcel2.writeBoolean(zStartLoading);
                     return true;
                 case 5:
-                    int readInt5 = parcel.readInt();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onInstallationComplete(readInt5);
+                    onInstallationComplete(i7);
                     parcel2.writeNoException();
                     return true;
                 case 6:
-                    int readInt6 = parcel.readInt();
-                    String readString4 = parcel.readString();
-                    String readString5 = parcel.readString();
-                    int readInt7 = parcel.readInt();
+                    int i8 = parcel.readInt();
+                    String string4 = parcel.readString();
+                    String string5 = parcel.readString();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int makeBindMount = makeBindMount(readInt6, readString4, readString5, readInt7);
+                    int iMakeBindMount = makeBindMount(i8, string4, string5, i9);
                     parcel2.writeNoException();
-                    parcel2.writeInt(makeBindMount);
+                    parcel2.writeInt(iMakeBindMount);
                     return true;
                 case 7:
-                    int readInt8 = parcel.readInt();
-                    String readString6 = parcel.readString();
+                    int i10 = parcel.readInt();
+                    String string6 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int deleteBindMount = deleteBindMount(readInt8, readString6);
+                    int iDeleteBindMount = deleteBindMount(i10, string6);
                     parcel2.writeNoException();
-                    parcel2.writeInt(deleteBindMount);
+                    parcel2.writeInt(iDeleteBindMount);
                     return true;
                 case 8:
-                    int readInt9 = parcel.readInt();
-                    String readString7 = parcel.readString();
+                    int i11 = parcel.readInt();
+                    String string7 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int makeDirectory = makeDirectory(readInt9, readString7);
+                    int iMakeDirectory = makeDirectory(i11, string7);
                     parcel2.writeNoException();
-                    parcel2.writeInt(makeDirectory);
+                    parcel2.writeInt(iMakeDirectory);
                     return true;
                 case 9:
-                    int readInt10 = parcel.readInt();
-                    String readString8 = parcel.readString();
+                    int i12 = parcel.readInt();
+                    String string8 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int makeDirectories = makeDirectories(readInt10, readString8);
+                    int iMakeDirectories = makeDirectories(i12, string8);
                     parcel2.writeNoException();
-                    parcel2.writeInt(makeDirectories);
+                    parcel2.writeInt(iMakeDirectories);
                     return true;
                 case 10:
-                    int readInt11 = parcel.readInt();
-                    String readString9 = parcel.readString();
-                    int readInt12 = parcel.readInt();
+                    int i13 = parcel.readInt();
+                    String string9 = parcel.readString();
+                    int i14 = parcel.readInt();
                     IncrementalNewFileParams incrementalNewFileParams = (IncrementalNewFileParams) parcel.readTypedObject(IncrementalNewFileParams.CREATOR);
-                    byte[] createByteArray = parcel.createByteArray();
+                    byte[] bArrCreateByteArray = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    int makeFile = makeFile(readInt11, readString9, readInt12, incrementalNewFileParams, createByteArray);
+                    int iMakeFile = makeFile(i13, string9, i14, incrementalNewFileParams, bArrCreateByteArray);
                     parcel2.writeNoException();
-                    parcel2.writeInt(makeFile);
+                    parcel2.writeInt(iMakeFile);
                     return true;
                 case 11:
-                    int readInt13 = parcel.readInt();
-                    String readString10 = parcel.readString();
-                    String readString11 = parcel.readString();
-                    long readLong = parcel.readLong();
-                    long readLong2 = parcel.readLong();
+                    int i15 = parcel.readInt();
+                    String string10 = parcel.readString();
+                    String string11 = parcel.readString();
+                    long j = parcel.readLong();
+                    long j2 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    int makeFileFromRange = makeFileFromRange(readInt13, readString10, readString11, readLong, readLong2);
+                    int iMakeFileFromRange = makeFileFromRange(i15, string10, string11, j, j2);
                     parcel2.writeNoException();
-                    parcel2.writeInt(makeFileFromRange);
+                    parcel2.writeInt(iMakeFileFromRange);
                     return true;
                 case 12:
-                    int readInt14 = parcel.readInt();
-                    String readString12 = parcel.readString();
-                    int readInt15 = parcel.readInt();
-                    String readString13 = parcel.readString();
+                    int i16 = parcel.readInt();
+                    String string12 = parcel.readString();
+                    int i17 = parcel.readInt();
+                    String string13 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int makeLink = makeLink(readInt14, readString12, readInt15, readString13);
+                    int iMakeLink = makeLink(i16, string12, i17, string13);
                     parcel2.writeNoException();
-                    parcel2.writeInt(makeLink);
+                    parcel2.writeInt(iMakeLink);
                     return true;
                 case 13:
-                    int readInt16 = parcel.readInt();
-                    String readString14 = parcel.readString();
+                    int i18 = parcel.readInt();
+                    String string14 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int unlink = unlink(readInt16, readString14);
+                    int iUnlink = unlink(i18, string14);
                     parcel2.writeNoException();
-                    parcel2.writeInt(unlink);
+                    parcel2.writeInt(iUnlink);
                     return true;
                 case 14:
-                    int readInt17 = parcel.readInt();
-                    String readString15 = parcel.readString();
+                    int i19 = parcel.readInt();
+                    String string15 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int isFileFullyLoaded = isFileFullyLoaded(readInt17, readString15);
+                    int iIsFileFullyLoaded = isFileFullyLoaded(i19, string15);
                     parcel2.writeNoException();
-                    parcel2.writeInt(isFileFullyLoaded);
+                    parcel2.writeInt(iIsFileFullyLoaded);
                     return true;
                 case 15:
-                    int readInt18 = parcel.readInt();
+                    int i20 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int isFullyLoaded = isFullyLoaded(readInt18);
+                    int iIsFullyLoaded = isFullyLoaded(i20);
                     parcel2.writeNoException();
-                    parcel2.writeInt(isFullyLoaded);
+                    parcel2.writeInt(iIsFullyLoaded);
                     return true;
                 case 16:
-                    int readInt19 = parcel.readInt();
+                    int i21 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    float loadingProgress = getLoadingProgress(readInt19);
+                    float loadingProgress = getLoadingProgress(i21);
                     parcel2.writeNoException();
                     parcel2.writeFloat(loadingProgress);
                     return true;
                 case 17:
-                    int readInt20 = parcel.readInt();
-                    String readString16 = parcel.readString();
+                    int i22 = parcel.readInt();
+                    String string16 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    byte[] metadataByPath = getMetadataByPath(readInt20, readString16);
+                    byte[] metadataByPath = getMetadataByPath(i22, string16);
                     parcel2.writeNoException();
                     parcel2.writeByteArray(metadataByPath);
                     return true;
                 case 18:
-                    int readInt21 = parcel.readInt();
-                    byte[] createByteArray2 = parcel.createByteArray();
+                    int i23 = parcel.readInt();
+                    byte[] bArrCreateByteArray2 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    byte[] metadataById = getMetadataById(readInt21, createByteArray2);
+                    byte[] metadataById = getMetadataById(i23, bArrCreateByteArray2);
                     parcel2.writeNoException();
                     parcel2.writeByteArray(metadataById);
                     return true;
                 case 19:
-                    int readInt22 = parcel.readInt();
+                    int i24 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    deleteStorage(readInt22);
+                    deleteStorage(i24);
                     parcel2.writeNoException();
                     return true;
                 case 20:
-                    int readInt23 = parcel.readInt();
+                    int i25 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    disallowReadLogs(readInt23);
+                    disallowReadLogs(i25);
                     parcel2.writeNoException();
                     return true;
                 case 21:
-                    int readInt24 = parcel.readInt();
-                    String readString17 = parcel.readString();
-                    String readString18 = parcel.readString();
-                    String readString19 = parcel.readString();
-                    boolean readBoolean = parcel.readBoolean();
+                    int i26 = parcel.readInt();
+                    String string17 = parcel.readString();
+                    String string18 = parcel.readString();
+                    String string19 = parcel.readString();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean configureNativeBinaries = configureNativeBinaries(readInt24, readString17, readString18, readString19, readBoolean);
+                    boolean zConfigureNativeBinaries = configureNativeBinaries(i26, string17, string18, string19, z);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(configureNativeBinaries);
+                    parcel2.writeBoolean(zConfigureNativeBinaries);
                     return true;
                 case 22:
-                    int readInt25 = parcel.readInt();
+                    int i27 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean waitForNativeBinariesExtraction = waitForNativeBinariesExtraction(readInt25);
+                    boolean zWaitForNativeBinariesExtraction = waitForNativeBinariesExtraction(i27);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(waitForNativeBinariesExtraction);
+                    parcel2.writeBoolean(zWaitForNativeBinariesExtraction);
                     return true;
                 case 23:
-                    int readInt26 = parcel.readInt();
-                    IStorageLoadingProgressListener asInterface3 = IStorageLoadingProgressListener.Stub.asInterface(parcel.readStrongBinder());
+                    int i28 = parcel.readInt();
+                    IStorageLoadingProgressListener iStorageLoadingProgressListenerAsInterface = IStorageLoadingProgressListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    boolean registerLoadingProgressListener = registerLoadingProgressListener(readInt26, asInterface3);
+                    boolean zRegisterLoadingProgressListener = registerLoadingProgressListener(i28, iStorageLoadingProgressListenerAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(registerLoadingProgressListener);
+                    parcel2.writeBoolean(zRegisterLoadingProgressListener);
                     return true;
                 case 24:
-                    int readInt27 = parcel.readInt();
+                    int i29 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean unregisterLoadingProgressListener = unregisterLoadingProgressListener(readInt27);
+                    boolean zUnregisterLoadingProgressListener = unregisterLoadingProgressListener(i29);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(unregisterLoadingProgressListener);
+                    parcel2.writeBoolean(zUnregisterLoadingProgressListener);
                     return true;
                 case 25:
-                    int readInt28 = parcel.readInt();
+                    int i30 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    PersistableBundle metrics = getMetrics(readInt28);
+                    PersistableBundle metrics = getMetrics(i30);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(metrics, 1);
                     return true;
@@ -566,433 +566,433 @@ public interface IIncrementalService extends IInterface {
 
             @Override // android.os.incremental.IIncrementalService
             public int openStorage(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIncrementalService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IIncrementalService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.incremental.IIncrementalService
             public int createStorage(String str, DataLoaderParamsParcel dataLoaderParamsParcel, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIncrementalService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(dataLoaderParamsParcel, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IIncrementalService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(dataLoaderParamsParcel, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.incremental.IIncrementalService
             public int createLinkedStorage(String str, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIncrementalService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IIncrementalService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.incremental.IIncrementalService
             public boolean startLoading(int i, DataLoaderParamsParcel dataLoaderParamsParcel, IDataLoaderStatusListener iDataLoaderStatusListener, StorageHealthCheckParams storageHealthCheckParams, IStorageHealthListener iStorageHealthListener, PerUidReadTimeouts[] perUidReadTimeoutsArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIncrementalService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(dataLoaderParamsParcel, 0);
-                    obtain.writeStrongInterface(iDataLoaderStatusListener);
-                    obtain.writeTypedObject(storageHealthCheckParams, 0);
-                    obtain.writeStrongInterface(iStorageHealthListener);
-                    obtain.writeTypedArray(perUidReadTimeoutsArr, 0);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IIncrementalService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(dataLoaderParamsParcel, 0);
+                    parcelObtain.writeStrongInterface(iDataLoaderStatusListener);
+                    parcelObtain.writeTypedObject(storageHealthCheckParams, 0);
+                    parcelObtain.writeStrongInterface(iStorageHealthListener);
+                    parcelObtain.writeTypedArray(perUidReadTimeoutsArr, 0);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.incremental.IIncrementalService
             public void onInstallationComplete(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIncrementalService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IIncrementalService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.incremental.IIncrementalService
             public int makeBindMount(int i, String str, String str2, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIncrementalService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IIncrementalService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.incremental.IIncrementalService
             public int deleteBindMount(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIncrementalService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IIncrementalService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.incremental.IIncrementalService
             public int makeDirectory(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIncrementalService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IIncrementalService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.incremental.IIncrementalService
             public int makeDirectories(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIncrementalService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IIncrementalService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.incremental.IIncrementalService
             public int makeFile(int i, String str, int i2, IncrementalNewFileParams incrementalNewFileParams, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIncrementalService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(incrementalNewFileParams, 0);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IIncrementalService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(incrementalNewFileParams, 0);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.incremental.IIncrementalService
             public int makeFileFromRange(int i, String str, String str2, long j, long j2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIncrementalService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeLong(j);
-                    obtain.writeLong(j2);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IIncrementalService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeLong(j2);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.incremental.IIncrementalService
             public int makeLink(int i, String str, int i2, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIncrementalService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IIncrementalService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.incremental.IIncrementalService
             public int unlink(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIncrementalService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IIncrementalService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.incremental.IIncrementalService
             public int isFileFullyLoaded(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIncrementalService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IIncrementalService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.incremental.IIncrementalService
             public int isFullyLoaded(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIncrementalService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IIncrementalService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.incremental.IIncrementalService
             public float getLoadingProgress(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIncrementalService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readFloat();
+                    parcelObtain.writeInterfaceToken(IIncrementalService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readFloat();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.incremental.IIncrementalService
             public byte[] getMetadataByPath(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIncrementalService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(IIncrementalService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.incremental.IIncrementalService
             public byte[] getMetadataById(int i, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIncrementalService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(IIncrementalService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.incremental.IIncrementalService
             public void deleteStorage(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIncrementalService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IIncrementalService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.incremental.IIncrementalService
             public void disallowReadLogs(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIncrementalService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IIncrementalService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.incremental.IIncrementalService
             public boolean configureNativeBinaries(int i, String str, String str2, String str3, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIncrementalService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IIncrementalService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.incremental.IIncrementalService
             public boolean waitForNativeBinariesExtraction(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIncrementalService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IIncrementalService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.incremental.IIncrementalService
             public boolean registerLoadingProgressListener(int i, IStorageLoadingProgressListener iStorageLoadingProgressListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIncrementalService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iStorageLoadingProgressListener);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IIncrementalService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iStorageLoadingProgressListener);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.incremental.IIncrementalService
             public boolean unregisterLoadingProgressListener(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIncrementalService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IIncrementalService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.incremental.IIncrementalService
             public PersistableBundle getMetrics(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IIncrementalService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (PersistableBundle) obtain2.readTypedObject(PersistableBundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IIncrementalService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (PersistableBundle) parcelObtain2.readTypedObject(PersistableBundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

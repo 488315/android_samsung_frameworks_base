@@ -2,16 +2,45 @@ package com.android.systemui.qs.panels.domain.interactor;
 
 import com.android.systemui.lifecycle.ExclusiveActivatable;
 import com.android.systemui.qs.pipeline.domain.interactor.CurrentTilesInteractor;
+import com.android.systemui.qs.pipeline.domain.model.TileModel;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import kotlin.KotlinNothingValueException;
+import kotlin.ResultKt;
+import kotlin.Unit;
+import kotlin.collections.CollectionsKt__IterablesKt;
+import kotlin.collections.CollectionsKt___CollectionsKt;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlinx.coroutines.flow.FlowCollector;
+import kotlinx.coroutines.flow.StateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class DynamicIconTilesInteractor extends ExclusiveActivatable {
     public final CurrentTilesInteractor currentTilesInteractor;
     public final IconTilesInteractor iconTilesInteractor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         DynamicIconTilesInteractor create();
+    }
+
+    /* renamed from: com.android.systemui.qs.panels.domain.interactor.DynamicIconTilesInteractor$onActivated$1, reason: invalid class name */
+    final class AnonymousClass1 extends ContinuationImpl {
+        int label;
+        /* synthetic */ Object result;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return DynamicIconTilesInteractor.this.onActivated(this);
+        }
     }
 
     public DynamicIconTilesInteractor(IconTilesInteractor iconTilesInteractor, CurrentTilesInteractor currentTilesInteractor) {
@@ -19,59 +48,53 @@ public final class DynamicIconTilesInteractor extends ExclusiveActivatable {
         this.currentTilesInteractor = currentTilesInteractor;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     @Override // com.android.systemui.lifecycle.ExclusiveActivatable
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object onActivated(kotlin.coroutines.Continuation r5) {
-        /*
-            r4 = this;
-            boolean r0 = r5 instanceof com.android.systemui.qs.panels.domain.interactor.DynamicIconTilesInteractor$onActivated$1
-            if (r0 == 0) goto L13
-            r0 = r5
-            com.android.systemui.qs.panels.domain.interactor.DynamicIconTilesInteractor$onActivated$1 r0 = (com.android.systemui.qs.panels.domain.interactor.DynamicIconTilesInteractor$onActivated$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.systemui.qs.panels.domain.interactor.DynamicIconTilesInteractor$onActivated$1 r0 = new com.android.systemui.qs.panels.domain.interactor.DynamicIconTilesInteractor$onActivated$1
-            r0.<init>(r4, r5)
-        L18:
-            java.lang.Object r5 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L2f
-            if (r2 == r3) goto L2b
-            java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-            java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-            r4.<init>(r5)
-            throw r4
-        L2b:
-            kotlin.ResultKt.throwOnFailure(r5)
-            goto L46
-        L2f:
-            kotlin.ResultKt.throwOnFailure(r5)
-            com.android.systemui.qs.pipeline.domain.interactor.CurrentTilesInteractor r5 = r4.currentTilesInteractor
-            kotlinx.coroutines.flow.StateFlow r5 = r5.getCurrentTiles()
-            com.android.systemui.qs.panels.domain.interactor.DynamicIconTilesInteractor$onActivated$2 r2 = new com.android.systemui.qs.panels.domain.interactor.DynamicIconTilesInteractor$onActivated$2
-            r2.<init>()
-            r0.label = r3
-            java.lang.Object r4 = r5.collect(r2, r0)
-            if (r4 != r1) goto L46
-            return r1
-        L46:
-            kotlin.KotlinNothingValueException r4 = new kotlin.KotlinNothingValueException
-            r4.<init>()
-            throw r4
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.panels.domain.interactor.DynamicIconTilesInteractor.onActivated(kotlin.coroutines.Continuation):java.lang.Object");
+    public final Object onActivated(Continuation continuation) {
+        AnonymousClass1 anonymousClass1;
+        if (continuation instanceof AnonymousClass1) {
+            anonymousClass1 = (AnonymousClass1) continuation;
+            int i = anonymousClass1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                anonymousClass1.label = i - Integer.MIN_VALUE;
+            } else {
+                anonymousClass1 = new AnonymousClass1(continuation);
+            }
+        }
+        Object obj = anonymousClass1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = anonymousClass1.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(obj);
+            StateFlow currentTiles = this.currentTilesInteractor.getCurrentTiles();
+            FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.qs.panels.domain.interactor.DynamicIconTilesInteractor.onActivated.2
+                @Override // kotlinx.coroutines.flow.FlowCollector
+                public final Object emit(Object obj2, Continuation continuation2) {
+                    DynamicIconTilesInteractor dynamicIconTilesInteractor = DynamicIconTilesInteractor.this;
+                    Iterable iterable = (Iterable) dynamicIconTilesInteractor.iconTilesInteractor.largeTilesSpecs.$$delegate_0.getValue();
+                    List list = (List) obj2;
+                    ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(list, 10));
+                    Iterator it = list.iterator();
+                    while (it.hasNext()) {
+                        arrayList.add(((TileModel) it.next()).spec);
+                    }
+                    dynamicIconTilesInteractor.iconTilesInteractor.preferencesInteractor.setLargeTilesSpecs(CollectionsKt___CollectionsKt.intersect(iterable, CollectionsKt___CollectionsKt.toSet(arrayList)));
+                    return Unit.INSTANCE;
+                }
+            };
+            anonymousClass1.label = 1;
+            if (currentTiles.collect(flowCollector, anonymousClass1) == coroutineSingletons) {
+                return coroutineSingletons;
+            }
+        } else {
+            if (i2 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+        }
+        throw new KotlinNothingValueException();
     }
 }

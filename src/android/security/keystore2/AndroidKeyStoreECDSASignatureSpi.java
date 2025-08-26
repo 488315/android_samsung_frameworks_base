@@ -150,7 +150,7 @@ abstract class AndroidKeyStoreECDSASignatureSpi extends AndroidKeyStoreSignature
 
     @Override // android.security.keystore2.AndroidKeyStoreSignatureSpiBase
     protected final void initKey(AndroidKeyStoreKey androidKeyStoreKey) throws InvalidKeyException {
-        long j;
+        long unsignedInt;
         Set<String> set = ACCEPTED_SIGNING_SCHEMES;
         if (!set.contains(androidKeyStoreKey.getAlgorithm().toLowerCase())) {
             throw new InvalidKeyException("Unsupported key algorithm: " + androidKeyStoreKey.getAlgorithm() + ". Only " + Arrays.toString(set.stream().toArray()) + " supported");
@@ -160,28 +160,28 @@ abstract class AndroidKeyStoreECDSASignatureSpi extends AndroidKeyStoreSignature
         int i = 0;
         while (true) {
             if (i >= length) {
-                j = -1;
+                unsignedInt = -1;
                 break;
             }
             Authorization authorization = authorizations[i];
             if (authorization.keyParameter.tag == 805306371) {
-                j = KeyStore2ParameterUtils.getUnsignedInt(authorization);
+                unsignedInt = KeyStore2ParameterUtils.getUnsignedInt(authorization);
                 break;
             } else {
                 if (authorization.keyParameter.tag == 268435466) {
-                    j = KeyProperties.EcCurve.fromKeymasterCurve(authorization.keyParameter.value.getEcCurve());
+                    unsignedInt = KeyProperties.EcCurve.fromKeymasterCurve(authorization.keyParameter.value.getEcCurve());
                     break;
                 }
                 i++;
             }
         }
-        if (j == -1) {
+        if (unsignedInt == -1) {
             throw new InvalidKeyException("Size of key not known");
         }
-        if (j > 2147483647L) {
-            throw new InvalidKeyException("Key too large: " + j + " bits");
+        if (unsignedInt > 2147483647L) {
+            throw new InvalidKeyException("Key too large: " + unsignedInt + " bits");
         }
-        this.mGroupSizeBits = (int) j;
+        this.mGroupSizeBits = (int) unsignedInt;
         super.initKey(androidKeyStoreKey);
     }
 

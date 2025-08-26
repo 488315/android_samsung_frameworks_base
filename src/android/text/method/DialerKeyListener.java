@@ -35,9 +35,9 @@ public class DialerKeyListener extends NumberKeyListener {
         int metaState = getMetaState(spannable, keyEvent);
         char number = keyEvent.getNumber();
         if ((metaState & 3) != 0 || number == 0) {
-            int lookup = super.lookup(keyEvent, spannable);
-            if (lookup != 0) {
-                return lookup;
+            int iLookup = super.lookup(keyEvent, spannable);
+            if (iLookup != 0) {
+                return iLookup;
             }
             if (metaState != 0) {
                 KeyCharacterMap.KeyData keyData = new KeyCharacterMap.KeyData();

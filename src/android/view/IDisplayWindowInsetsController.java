@@ -81,9 +81,9 @@ public interface IDisplayWindowInsetsController extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IDisplayWindowInsetsController.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IDisplayWindowInsetsController)) {
-                return (IDisplayWindowInsetsController) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IDisplayWindowInsetsController.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IDisplayWindowInsetsController)) {
+                return (IDisplayWindowInsetsController) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -124,9 +124,9 @@ public interface IDisplayWindowInsetsController extends IInterface {
             switch (i) {
                 case 1:
                     ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    topFocusedWindowChanged(componentName, readInt);
+                    topFocusedWindowChanged(componentName, i3);
                     return true;
                 case 2:
                     InsetsState insetsState = (InsetsState) parcel.readTypedObject(InsetsState.CREATOR);
@@ -140,24 +140,24 @@ public interface IDisplayWindowInsetsController extends IInterface {
                     insetsControlChanged(insetsState2, insetsSourceControlArr);
                     return true;
                 case 4:
-                    int readInt2 = parcel.readInt();
-                    boolean readBoolean = parcel.readBoolean();
+                    int i4 = parcel.readInt();
+                    boolean z = parcel.readBoolean();
                     ImeTracker.Token token = (ImeTracker.Token) parcel.readTypedObject(ImeTracker.Token.CREATOR);
                     parcel.enforceNoDataAvail();
-                    showInsets(readInt2, readBoolean, token);
+                    showInsets(i4, z, token);
                     return true;
                 case 5:
-                    int readInt3 = parcel.readInt();
-                    boolean readBoolean2 = parcel.readBoolean();
+                    int i5 = parcel.readInt();
+                    boolean z2 = parcel.readBoolean();
                     ImeTracker.Token token2 = (ImeTracker.Token) parcel.readTypedObject(ImeTracker.Token.CREATOR);
                     parcel.enforceNoDataAvail();
-                    hideInsets(readInt3, readBoolean2, token2);
+                    hideInsets(i5, z2, token2);
                     return true;
                 case 6:
-                    boolean readBoolean3 = parcel.readBoolean();
+                    boolean z3 = parcel.readBoolean();
                     ImeTracker.Token token3 = (ImeTracker.Token) parcel.readTypedObject(ImeTracker.Token.CREATOR);
                     parcel.enforceNoDataAvail();
-                    setImeInputTargetRequestedVisibility(readBoolean3, token3);
+                    setImeInputTargetRequestedVisibility(z3, token3);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -182,80 +182,80 @@ public interface IDisplayWindowInsetsController extends IInterface {
 
             @Override // android.view.IDisplayWindowInsetsController
             public void topFocusedWindowChanged(ComponentName componentName, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDisplayWindowInsetsController.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDisplayWindowInsetsController.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.IDisplayWindowInsetsController
             public void insetsChanged(InsetsState insetsState) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDisplayWindowInsetsController.DESCRIPTOR);
-                    obtain.writeTypedObject(insetsState, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDisplayWindowInsetsController.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(insetsState, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.IDisplayWindowInsetsController
             public void insetsControlChanged(InsetsState insetsState, InsetsSourceControl[] insetsSourceControlArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDisplayWindowInsetsController.DESCRIPTOR);
-                    obtain.writeTypedObject(insetsState, 0);
-                    obtain.writeTypedArray(insetsSourceControlArr, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDisplayWindowInsetsController.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(insetsState, 0);
+                    parcelObtain.writeTypedArray(insetsSourceControlArr, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.IDisplayWindowInsetsController
             public void showInsets(int i, boolean z, ImeTracker.Token token) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDisplayWindowInsetsController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    obtain.writeTypedObject(token, 0);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDisplayWindowInsetsController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeTypedObject(token, 0);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.IDisplayWindowInsetsController
             public void hideInsets(int i, boolean z, ImeTracker.Token token) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDisplayWindowInsetsController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    obtain.writeTypedObject(token, 0);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDisplayWindowInsetsController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeTypedObject(token, 0);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.IDisplayWindowInsetsController
             public void setImeInputTargetRequestedVisibility(boolean z, ImeTracker.Token token) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDisplayWindowInsetsController.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeTypedObject(token, 0);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDisplayWindowInsetsController.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeTypedObject(token, 0);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

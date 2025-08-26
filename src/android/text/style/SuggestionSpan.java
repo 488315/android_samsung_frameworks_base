@@ -101,11 +101,11 @@ public class SuggestionSpan extends CharacterStyle implements ParcelableSpan {
                 locale = null;
             }
         }
-        String locale2 = locale == null ? "" : locale.toString();
-        this.mLocaleStringForCompatibility = locale2;
+        String string = locale == null ? "" : locale.toString();
+        this.mLocaleStringForCompatibility = string;
         String languageTag = locale != null ? locale.toLanguageTag() : "";
         this.mLanguageTag = languageTag;
-        this.mHashCode = hashCodeInternal(strArr2, languageTag, locale2);
+        this.mHashCode = hashCodeInternal(strArr2, languageTag, string);
         initStyle(context);
     }
 
@@ -121,22 +121,22 @@ public class SuggestionSpan extends CharacterStyle implements ParcelableSpan {
             this.mAutoCorrectionUnderlineColor = -16777216;
             return;
         }
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(null, R.styleable.SuggestionSpan, R.attr.textAppearanceMisspelledSuggestion, 0);
-        this.mMisspelledUnderlineThickness = obtainStyledAttributes.getDimension(1, 0.0f);
-        this.mMisspelledUnderlineColor = obtainStyledAttributes.getColor(0, -16777216);
-        obtainStyledAttributes.recycle();
-        TypedArray obtainStyledAttributes2 = context.obtainStyledAttributes(null, R.styleable.SuggestionSpan, R.attr.textAppearanceGrammarErrorSuggestion, 0);
-        this.mGrammarErrorUnderlineThickness = obtainStyledAttributes2.getDimension(1, 0.0f);
-        this.mGrammarErrorUnderlineColor = obtainStyledAttributes2.getColor(0, -16777216);
-        obtainStyledAttributes2.recycle();
-        TypedArray obtainStyledAttributes3 = context.obtainStyledAttributes(null, R.styleable.SuggestionSpan, R.attr.textAppearanceEasyCorrectSuggestion, 0);
-        this.mEasyCorrectUnderlineThickness = obtainStyledAttributes3.getDimension(1, 0.0f);
-        this.mEasyCorrectUnderlineColor = obtainStyledAttributes3.getColor(0, -16777216);
-        obtainStyledAttributes3.recycle();
-        TypedArray obtainStyledAttributes4 = context.obtainStyledAttributes(null, R.styleable.SuggestionSpan, R.attr.textAppearanceAutoCorrectionSuggestion, 0);
-        this.mAutoCorrectionUnderlineThickness = obtainStyledAttributes4.getDimension(1, 0.0f);
-        this.mAutoCorrectionUnderlineColor = obtainStyledAttributes4.getColor(0, -16777216);
-        obtainStyledAttributes4.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(null, R.styleable.SuggestionSpan, R.attr.textAppearanceMisspelledSuggestion, 0);
+        this.mMisspelledUnderlineThickness = typedArrayObtainStyledAttributes.getDimension(1, 0.0f);
+        this.mMisspelledUnderlineColor = typedArrayObtainStyledAttributes.getColor(0, -16777216);
+        typedArrayObtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes2 = context.obtainStyledAttributes(null, R.styleable.SuggestionSpan, R.attr.textAppearanceGrammarErrorSuggestion, 0);
+        this.mGrammarErrorUnderlineThickness = typedArrayObtainStyledAttributes2.getDimension(1, 0.0f);
+        this.mGrammarErrorUnderlineColor = typedArrayObtainStyledAttributes2.getColor(0, -16777216);
+        typedArrayObtainStyledAttributes2.recycle();
+        TypedArray typedArrayObtainStyledAttributes3 = context.obtainStyledAttributes(null, R.styleable.SuggestionSpan, R.attr.textAppearanceEasyCorrectSuggestion, 0);
+        this.mEasyCorrectUnderlineThickness = typedArrayObtainStyledAttributes3.getDimension(1, 0.0f);
+        this.mEasyCorrectUnderlineColor = typedArrayObtainStyledAttributes3.getColor(0, -16777216);
+        typedArrayObtainStyledAttributes3.recycle();
+        TypedArray typedArrayObtainStyledAttributes4 = context.obtainStyledAttributes(null, R.styleable.SuggestionSpan, R.attr.textAppearanceAutoCorrectionSuggestion, 0);
+        this.mAutoCorrectionUnderlineThickness = typedArrayObtainStyledAttributes4.getDimension(1, 0.0f);
+        this.mAutoCorrectionUnderlineColor = typedArrayObtainStyledAttributes4.getColor(0, -16777216);
+        typedArrayObtainStyledAttributes4.recycle();
         this.mGrammarSuggestionUnderlineColor = -16777216;
         this.mTypoSuggestionUnderlineColor = -16777216;
         float f = this.mMisspelledUnderlineThickness;

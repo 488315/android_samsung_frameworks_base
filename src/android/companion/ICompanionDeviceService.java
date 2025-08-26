@@ -58,9 +58,9 @@ public interface ICompanionDeviceService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ICompanionDeviceService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ICompanionDeviceService)) {
-                return (ICompanionDeviceService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ICompanionDeviceService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ICompanionDeviceService)) {
+                return (ICompanionDeviceService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -128,37 +128,37 @@ public interface ICompanionDeviceService extends IInterface {
 
             @Override // android.companion.ICompanionDeviceService
             public void onDeviceAppeared(AssociationInfo associationInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICompanionDeviceService.DESCRIPTOR);
-                    obtain.writeTypedObject(associationInfo, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICompanionDeviceService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(associationInfo, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.ICompanionDeviceService
             public void onDeviceDisappeared(AssociationInfo associationInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICompanionDeviceService.DESCRIPTOR);
-                    obtain.writeTypedObject(associationInfo, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICompanionDeviceService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(associationInfo, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.ICompanionDeviceService
             public void onDevicePresenceEvent(DevicePresenceEvent devicePresenceEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICompanionDeviceService.DESCRIPTOR);
-                    obtain.writeTypedObject(devicePresenceEvent, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICompanionDeviceService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(devicePresenceEvent, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -30,7 +30,7 @@ public class AutoText {
     private char[] mTrie;
     private char mTrieUsed;
 
-    private AutoText(Resources resources) {
+    private AutoText(Resources resources) throws Resources.NotFoundException {
         this.mLocale = resources.getConfiguration().locale;
         init(resources);
     }
@@ -65,19 +65,19 @@ public class AutoText {
         char c;
         char c2 = this.mTrie[0];
         while (i < i2) {
-            char charAt = charSequence.charAt(i);
+            char cCharAt = charSequence.charAt(i);
             while (true) {
                 if (c2 == 65535) {
                     break;
                 }
                 char[] cArr = this.mTrie;
-                if (charAt != cArr[c2]) {
+                if (cCharAt != cArr[c2]) {
                     c2 = cArr[c2 + 3];
                 } else {
                     if (i == i2 - 1 && (c = cArr[c2 + 1]) != 65535) {
-                        char charAt2 = this.mText.charAt(c);
+                        char cCharAt2 = this.mText.charAt(c);
                         int i3 = c + 1;
-                        return this.mText.substring(i3, charAt2 + i3);
+                        return this.mText.substring(i3, cCharAt2 + i3);
                     }
                     c2 = cArr[c2 + 2];
                 }
@@ -90,7 +90,7 @@ public class AutoText {
         return null;
     }
 
-    private void init(Resources resources) {
+    private void init(Resources resources) throws Resources.NotFoundException {
         char length;
         XmlResourceParser xml = resources.getXml(R.xml.autotext);
         StringBuilder sb = new StringBuilder(9300);
@@ -124,10 +124,10 @@ public class AutoText {
                     resources.flushLayoutCache();
                     xml.close();
                     this.mText = sb.toString();
-                } catch (IOException e) {
+                } catch (XmlPullParserException e) {
                     throw new RuntimeException(e);
                 }
-            } catch (XmlPullParserException e2) {
+            } catch (IOException e2) {
                 throw new RuntimeException(e2);
             }
         } catch (Throwable th) {
@@ -136,11 +136,11 @@ public class AutoText {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:13:0x0030, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:16:0x0030, code lost:
     
         if (r6 != false) goto L28;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:14:0x0032, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:17:0x0032, code lost:
     
         r6 = newTrieNode();
         r7 = r9.mTrie;
@@ -150,96 +150,54 @@ public class AutoText {
         r7[r7[r4] + 3] = android.text.AutoText.TRIE_NULL;
         r7[r7[r4] + 2] = android.text.AutoText.TRIE_NULL;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:15:0x004f, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:18:0x004f, code lost:
     
         if (r3 != (r0 - 1)) goto L21;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:16:0x0057, code lost:
-    
-        r4 = r7[r4] + 2;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:18:0x005b, code lost:
-    
-        r3 = r3 + 1;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:20:0x0051, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:19:0x0051, code lost:
     
         r7[r7[r4] + 1] = r11;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:21:0x0056, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:20:0x0056, code lost:
     
         return;
      */
+    /* JADX WARN: Code restructure failed: missing block: B:21:0x0057, code lost:
+    
+        r4 = r7[r4] + 2;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:22:0x005b, code lost:
+    
+        r3 = r3 + 1;
+     */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private void add(java.lang.String r10, char r11) {
-        /*
-            r9 = this;
-            int r0 = r10.length()
-            int r1 = r9.mSize
-            r2 = 1
-            int r1 = r1 + r2
-            r9.mSize = r1
-            r1 = 0
-            r3 = r1
-            r4 = r3
-        Ld:
-            if (r3 >= r0) goto L5e
-            char r5 = r10.charAt(r3)
-        L13:
-            char[] r6 = r9.mTrie
-            char r7 = r6[r4]
-            r8 = 65535(0xffff, float:9.1834E-41)
-            if (r7 == r8) goto L2f
-            char r4 = r6[r7]
-            if (r5 != r4) goto L2c
-            int r4 = r0 + (-1)
-            if (r3 != r4) goto L28
-            int r7 = r7 + r2
-            r6[r7] = r11
-            return
-        L28:
-            int r4 = r7 + 2
-            r6 = r2
-            goto L30
-        L2c:
-            int r4 = r7 + 3
-            goto L13
-        L2f:
-            r6 = r1
-        L30:
-            if (r6 != 0) goto L5b
-            char r6 = r9.newTrieNode()
-            char[] r7 = r9.mTrie
-            r7[r4] = r6
-            r7[r6] = r5
-            char r5 = r7[r4]
-            int r5 = r5 + r2
-            r7[r5] = r8
-            char r5 = r7[r4]
-            int r5 = r5 + 3
-            r7[r5] = r8
-            char r5 = r7[r4]
-            int r5 = r5 + 2
-            r7[r5] = r8
-            int r5 = r0 + (-1)
-            if (r3 != r5) goto L57
-            char r9 = r7[r4]
-            int r9 = r9 + r2
-            r7[r9] = r11
-            return
-        L57:
-            char r4 = r7[r4]
-            int r4 = r4 + 2
-        L5b:
-            int r3 = r3 + 1
-            goto Ld
-        L5e:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.text.AutoText.add(java.lang.String, char):void");
+    private void add(String str, char c) {
+        boolean z;
+        int length = str.length();
+        this.mSize++;
+        int i = 0;
+        int i2 = 0;
+        while (i < length) {
+            char cCharAt = str.charAt(i);
+            while (true) {
+                char[] cArr = this.mTrie;
+                char c2 = cArr[i2];
+                if (c2 == 65535) {
+                    z = false;
+                    break;
+                } else if (cCharAt != cArr[c2]) {
+                    i2 = c2 + 3;
+                } else if (i == length - 1) {
+                    cArr[c2 + 1] = c;
+                    return;
+                } else {
+                    i2 = c2 + 2;
+                    z = true;
+                }
+            }
+        }
     }
 
     private char newTrieNode() {

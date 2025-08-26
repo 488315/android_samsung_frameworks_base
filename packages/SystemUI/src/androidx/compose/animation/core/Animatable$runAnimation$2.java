@@ -11,7 +11,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.Ref$BooleanRef;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class Animatable$runAnimation$2 extends SuspendLambda implements Function1 {
     final /* synthetic */ Animation<Object, AnimationVector> $animation;
@@ -40,7 +39,7 @@ final class Animatable$runAnimation$2 extends SuspendLambda implements Function1
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
         return ((Animatable$runAnimation$2) create((Continuation) obj)).invokeSuspend(Unit.INSTANCE);
     }
 
@@ -54,7 +53,7 @@ final class Animatable$runAnimation$2 extends SuspendLambda implements Function1
             if (i == 0) {
                 ResultKt.throwOnFailure(obj);
                 Animatable<Object, AnimationVector> animatable = this.this$0;
-                animatable.internalState.velocityVector = (AnimationVector) ((TwoWayConverterImpl) animatable.typeConverter).convertToVector.mo779invoke(this.$initialVelocity);
+                animatable.internalState.velocityVector = (AnimationVector) ((TwoWayConverterImpl) animatable.typeConverter).convertToVector.mo781invoke(this.$initialVelocity);
                 ((SnapshotMutableStateImpl) this.this$0.targetValue$delegate).setValue(this.$animation.getTargetValue());
                 ((SnapshotMutableStateImpl) this.this$0.isRunning$delegate).setValue(Boolean.TRUE);
                 AnimationState animationState2 = this.this$0.internalState;
@@ -72,23 +71,23 @@ final class Animatable$runAnimation$2 extends SuspendLambda implements Function1
 
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj2) {
+                    public final Object mo781invoke(Object obj2) {
                         AnimationScope animationScope = (AnimationScope) obj2;
                         SuspendAnimationKt.updateState(animationScope, animatable2.internalState);
                         Animatable<Object, AnimationVector> animatable3 = animatable2;
                         SnapshotMutableStateImpl snapshotMutableStateImpl = (SnapshotMutableStateImpl) animationScope.value$delegate;
-                        Object clampToBounds = animatable3.clampToBounds(snapshotMutableStateImpl.getValue());
-                        if (Intrinsics.areEqual(clampToBounds, snapshotMutableStateImpl.getValue())) {
+                        Object objClampToBounds = animatable3.clampToBounds(snapshotMutableStateImpl.getValue());
+                        if (Intrinsics.areEqual(objClampToBounds, snapshotMutableStateImpl.getValue())) {
                             Function1 function13 = function1;
                             if (function13 != null) {
-                                function13.mo779invoke(animatable2);
+                                function13.mo781invoke(animatable2);
                             }
                         } else {
-                            ((SnapshotMutableStateImpl) animatable2.internalState.value$delegate).setValue(clampToBounds);
-                            ((SnapshotMutableStateImpl) animationState3.value$delegate).setValue(clampToBounds);
+                            ((SnapshotMutableStateImpl) animatable2.internalState.value$delegate).setValue(objClampToBounds);
+                            ((SnapshotMutableStateImpl) animationState3.value$delegate).setValue(objClampToBounds);
                             Function1 function14 = function1;
                             if (function14 != null) {
-                                function14.mo779invoke(animatable2);
+                                function14.mo781invoke(animatable2);
                             }
                             animationScope.cancelAnimation();
                             ref$BooleanRef2.element = true;

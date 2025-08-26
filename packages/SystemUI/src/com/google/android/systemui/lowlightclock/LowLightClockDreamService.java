@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.content.res.Resources;
 import android.service.dreams.DreamService;
 import android.util.Property;
 import android.view.LayoutInflater;
@@ -20,7 +21,6 @@ import com.android.systemui.statusbar.CrossFadeHelper;
 import java.util.Optional;
 import javax.inject.Provider;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class LowLightClockDreamService extends DreamService {
     public Animator mAnimationIn;
@@ -41,7 +41,7 @@ public class LowLightClockDreamService extends DreamService {
     }
 
     @Override // android.service.dreams.DreamService, android.view.Window.Callback
-    public final void onAttachedToWindow() {
+    public final void onAttachedToWindow() throws Resources.NotFoundException {
         super.onAttachedToWindow();
         setInteractive(false);
         setFullscreen(true);
@@ -79,14 +79,14 @@ public class LowLightClockDreamService extends DreamService {
             View view = viewArr[i];
             if (view != null) {
                 CrossFadeHelper.fadeOut(view, 0.0f, false);
-                ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.ALPHA, 1.0f);
-                ofFloat.setStartDelay(lowLightClockAnimationProvider.mAlphaAnimationInStartDelayMillis);
-                ofFloat.setDuration(lowLightClockAnimationProvider.mAlphaAnimationDurationMillis);
-                ofFloat.setInterpolator(Interpolators.LINEAR);
-                ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.TRANSLATION_Y, lowLightClockAnimationProvider.mYTranslationAnimationInStartOffset, 0.0f);
-                ofFloat2.setDuration(lowLightClockAnimationProvider.mYTranslationAnimationInDurationMillis);
-                ofFloat2.setInterpolator(Interpolators.EMPHASIZED);
-                animatorSet.playTogether(ofFloat2, ofFloat);
+                ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.ALPHA, 1.0f);
+                objectAnimatorOfFloat.setStartDelay(lowLightClockAnimationProvider.mAlphaAnimationInStartDelayMillis);
+                objectAnimatorOfFloat.setDuration(lowLightClockAnimationProvider.mAlphaAnimationDurationMillis);
+                objectAnimatorOfFloat.setInterpolator(Interpolators.LINEAR);
+                ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.TRANSLATION_Y, lowLightClockAnimationProvider.mYTranslationAnimationInStartOffset, 0.0f);
+                objectAnimatorOfFloat2.setDuration(lowLightClockAnimationProvider.mYTranslationAnimationInDurationMillis);
+                objectAnimatorOfFloat2.setInterpolator(Interpolators.EMPHASIZED);
+                animatorSet.playTogether(objectAnimatorOfFloat2, objectAnimatorOfFloat);
             }
         }
         this.mAnimationIn = animatorSet;
@@ -99,9 +99,9 @@ public class LowLightClockDreamService extends DreamService {
         if (animator != null) {
             animator.cancel();
         }
-        Animator provideAnimationOut = this.mAnimationProvider.provideAnimationOut(this.mTextClock, this.mChargingStatusTextView);
-        this.mAnimationOut = provideAnimationOut;
-        provideAnimationOut.addListener(new AnimatorListenerAdapter() { // from class: com.google.android.systemui.lowlightclock.LowLightClockDreamService.1
+        Animator animatorProvideAnimationOut = this.mAnimationProvider.provideAnimationOut(this.mTextClock, this.mChargingStatusTextView);
+        this.mAnimationOut = animatorProvideAnimationOut;
+        animatorProvideAnimationOut.addListener(new AnimatorListenerAdapter() { // from class: com.google.android.systemui.lowlightclock.LowLightClockDreamService.1
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator2) {
                 LowLightClockDreamService.super.onWakeUp();

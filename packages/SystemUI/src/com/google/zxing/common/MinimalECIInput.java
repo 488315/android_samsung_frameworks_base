@@ -7,13 +7,11 @@ import java.lang.reflect.Array;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class MinimalECIInput implements ECIInput {
     public final int[] bytes;
     public final int fnc1;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class InputEdge {
         public final char c;
         public final int cachedTotalSize;
@@ -48,12 +46,12 @@ public class MinimalECIInput implements ECIInput {
         if (eCIEncoderSet.encoders.length == 1) {
             this.bytes = new int[str.length()];
             while (i3 < this.bytes.length) {
-                char charAt = str.charAt(i3);
+                char cCharAt = str.charAt(i3);
                 int[] iArr = this.bytes;
-                if (charAt == i) {
-                    charAt = 1000;
+                if (cCharAt == i) {
+                    cCharAt = 1000;
                 }
-                iArr[i3] = charAt;
+                iArr[i3] = cCharAt;
                 i3++;
             }
             return;
@@ -111,33 +109,37 @@ public class MinimalECIInput implements ECIInput {
         this.bytes = iArr2;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:20:0x0040  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public static void addEdges(String str, ECIEncoderSet eCIEncoderSet, InputEdge[][] inputEdgeArr, int i, InputEdge inputEdge, int i2) {
         ECIEncoderSet eCIEncoderSet2;
         InputEdge inputEdge2;
         int i3;
-        char charAt = str.charAt(i);
+        char cCharAt = str.charAt(i);
         int length = eCIEncoderSet.encoders.length;
         int i4 = eCIEncoderSet.priorityEncoderIndex;
-        if (i4 < 0 || !(charAt == i2 || eCIEncoderSet.canEncode(charAt, i4))) {
+        if (i4 < 0 || !(cCharAt == i2 || eCIEncoderSet.canEncode(cCharAt, i4))) {
             i4 = 0;
         } else {
             length = i4 + 1;
         }
         int i5 = i4;
         while (i5 < length) {
-            if (charAt == i2 || eCIEncoderSet.canEncode(charAt, i5)) {
+            if (cCharAt == i2 || eCIEncoderSet.canEncode(cCharAt, i5)) {
                 eCIEncoderSet2 = eCIEncoderSet;
                 inputEdge2 = inputEdge;
                 i3 = i2;
-                InputEdge inputEdge3 = new InputEdge(charAt, eCIEncoderSet2, i5, inputEdge2, i3, 0);
+                InputEdge inputEdge3 = new InputEdge(cCharAt, eCIEncoderSet2, i5, inputEdge2, i3, 0);
                 InputEdge[] inputEdgeArr2 = inputEdgeArr[i + 1];
                 int i6 = inputEdge3.encoderIndex;
                 InputEdge inputEdge4 = inputEdgeArr2[i6];
                 if (inputEdge4 != null) {
-                    if (inputEdge4.cachedTotalSize <= inputEdge3.cachedTotalSize) {
+                    if (inputEdge4.cachedTotalSize > inputEdge3.cachedTotalSize) {
+                        inputEdgeArr2[i6] = inputEdge3;
                     }
                 }
-                inputEdgeArr2[i6] = inputEdge3;
             } else {
                 eCIEncoderSet2 = eCIEncoderSet;
                 inputEdge2 = inputEdge;

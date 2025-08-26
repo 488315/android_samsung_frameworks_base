@@ -38,8 +38,8 @@ public class SemTelephonyUtils {
         if (TextUtils.isEmpty(str) || str.length() != 15 || i > 3) {
             return "---";
         }
-        String[] split = str.split(NativeLibraryHelper.CLEAR_ABI_OVERRIDE);
-        return split.length != 4 ? "---" : split[i];
+        String[] strArrSplit = str.split(NativeLibraryHelper.CLEAR_ABI_OVERRIDE);
+        return strArrSplit.length != 4 ? "---" : strArrSplit[i];
     }
 
     public static String getMainOperator(String str) {
@@ -119,19 +119,19 @@ public class SemTelephonyUtils {
     }
 
     private static String maskPiiFromNumber(Object obj) {
-        String obj2 = obj.toString();
-        if (TextUtils.isEmpty(obj2)) {
-            return obj2;
+        String string = obj.toString();
+        if (TextUtils.isEmpty(string)) {
+            return string;
         }
-        int length = obj2.length();
+        int length = string.length();
         int i = length > 5 ? 3 : length / 2;
         int i2 = i / 2;
         StringBuilder sb = new StringBuilder();
-        sb.append((CharSequence) obj2, 0, i2);
+        sb.append((CharSequence) string, 0, i2);
         for (int i3 = 0; i3 < length - i; i3++) {
             sb.append("*");
         }
-        sb.append((CharSequence) obj2, length - (i - i2), length);
+        sb.append((CharSequence) string, length - (i - i2), length);
         return sb.toString();
     }
 
@@ -231,146 +231,75 @@ public class SemTelephonyUtils {
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Code restructure failed: missing block: B:42:0x006d, code lost:
-    
-        if (r6.equals("CU") == false) goto L15;
-     */
-    /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue
-    java.lang.NullPointerException: Cannot invoke "java.util.List.iterator()" because the return value of "jadx.core.dex.visitors.regions.SwitchOverStringVisitor$SwitchData.getNewCases()" is null
-    	at jadx.core.dex.visitors.regions.SwitchOverStringVisitor.restoreSwitchOverString(SwitchOverStringVisitor.java:109)
-    	at jadx.core.dex.visitors.regions.SwitchOverStringVisitor.visitRegion(SwitchOverStringVisitor.java:66)
-    	at jadx.core.dex.visitors.regions.DepthRegionTraversal.traverseIterativeStepInternal(DepthRegionTraversal.java:77)
-    	at jadx.core.dex.visitors.regions.DepthRegionTraversal.traverseIterativeStepInternal(DepthRegionTraversal.java:82)
-     */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x003b  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0074  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x007b  */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x0084  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x008d  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x003d  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x0048  */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x0051  */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x005c  */
-    /* JADX WARN: Removed duplicated region for block: B:41:0x0067  */
+    /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
+    /* JADX WARN: Removed duplicated region for block: B:12:0x0029  */
+    /* JADX WARN: Removed duplicated region for block: B:15:0x003b  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static java.lang.String getStaticOperatorNameChinese(java.lang.String r6, boolean r7) {
-        /*
-            boolean r0 = android.text.TextUtils.isEmpty(r6)
-            r1 = 0
-            if (r0 == 0) goto L8
-            return r1
-        L8:
-            r0 = 0
-            r2 = 1
-            if (r7 == 0) goto L29
-            java.lang.String r7 = "persist.sys.locale"
-            java.lang.String r3 = ""
-            java.lang.String r7 = android.os.SystemProperties.get(r7, r3)
-            java.lang.String r3 = "zh-Hans-CN"
-            boolean r3 = r3.equals(r7)
-            if (r3 != 0) goto L29
-            java.lang.String r3 = "zh-CN"
-            boolean r7 = r3.equals(r7)
-            if (r7 != 0) goto L29
-            r7 = r0
-            goto L2a
-        L29:
-            r7 = r2
-        L2a:
-            java.lang.String r6 = r6.toUpperCase()
-            r6.hashCode()
-            int r3 = r6.hashCode()
-            java.lang.String r4 = "CMCC"
-            r5 = -1
-            switch(r3) {
-                case 2162: goto L67;
-                case 66511: goto L5c;
-                case 67058: goto L51;
-                case 2072138: goto L48;
-                case 64445426: goto L3d;
-                default: goto L3b;
-            }
-        L3b:
-            r0 = r5
-            goto L70
-        L3d:
-            java.lang.String r0 = "CTCTT"
-            boolean r6 = r6.equals(r0)
-            if (r6 != 0) goto L46
-            goto L3b
-        L46:
-            r0 = 4
-            goto L70
-        L48:
-            boolean r6 = r6.equals(r4)
-            if (r6 != 0) goto L4f
-            goto L3b
-        L4f:
-            r0 = 3
-            goto L70
-        L51:
-            java.lang.String r0 = "CTC"
-            boolean r6 = r6.equals(r0)
-            if (r6 != 0) goto L5a
-            goto L3b
-        L5a:
-            r0 = 2
-            goto L70
-        L5c:
-            java.lang.String r0 = "CBN"
-            boolean r6 = r6.equals(r0)
-            if (r6 != 0) goto L65
-            goto L3b
-        L65:
-            r0 = r2
-            goto L70
-        L67:
-            java.lang.String r2 = "CU"
-            boolean r6 = r6.equals(r2)
-            if (r6 != 0) goto L70
-            goto L3b
-        L70:
-            switch(r0) {
-                case 0: goto L8d;
-                case 1: goto L84;
-                case 2: goto L7b;
-                case 3: goto L74;
-                case 4: goto L7b;
-                default: goto L73;
-            }
-        L73:
-            return r1
-        L74:
-            if (r7 == 0) goto L7a
-            java.lang.String r6 = "中国移动"
-            return r6
-        L7a:
-            return r4
-        L7b:
-            if (r7 == 0) goto L81
-            java.lang.String r6 = "中国电信"
-            return r6
-        L81:
-            java.lang.String r6 = "China Telecom"
-            return r6
-        L84:
-            if (r7 == 0) goto L8a
-            java.lang.String r6 = "中国广电"
-            return r6
-        L8a:
-            java.lang.String r6 = "CHINA BROADNET"
-            return r6
-        L8d:
-            if (r7 == 0) goto L93
-            java.lang.String r6 = "中国联通"
-            return r6
-        L93:
-            java.lang.String r6 = "China Unicom"
-            return r6
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.telephony.SemTelephonyUtils.getStaticOperatorNameChinese(java.lang.String, boolean):java.lang.String");
+    public static String getStaticOperatorNameChinese(String str, boolean z) {
+        boolean z2;
+        if (TextUtils.isEmpty(str)) {
+            return null;
+        }
+        char c = 0;
+        if (z) {
+            String str2 = SystemProperties.get("persist.sys.locale", "");
+            z2 = "zh-Hans-CN".equals(str2) || "zh-CN".equals(str2);
+        }
+        String upperCase = str.toUpperCase();
+        upperCase.hashCode();
+        switch (upperCase.hashCode()) {
+            case 2162:
+                if (!upperCase.equals("CU")) {
+                    c = 65535;
+                    break;
+                }
+                break;
+            case 66511:
+                if (upperCase.equals("CBN")) {
+                    c = 1;
+                    break;
+                }
+                break;
+            case 67058:
+                if (upperCase.equals("CTC")) {
+                    c = 2;
+                    break;
+                }
+                break;
+            case 2072138:
+                if (upperCase.equals("CMCC")) {
+                    c = 3;
+                    break;
+                }
+                break;
+            case 64445426:
+                if (upperCase.equals("CTCTT")) {
+                    c = 4;
+                    break;
+                }
+                break;
+        }
+        switch (c) {
+            case 0:
+                if (z2) {
+                }
+                break;
+            case 1:
+                if (z2) {
+                }
+                break;
+            case 2:
+            case 4:
+                if (z2) {
+                }
+                break;
+            case 3:
+                if (z2) {
+                }
+                break;
+        }
+        return null;
     }
 }

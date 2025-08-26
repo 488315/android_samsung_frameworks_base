@@ -12,7 +12,6 @@ import com.android.systemui.log.core.LogMessage;
 import com.android.systemui.mediaprojection.data.repository.MediaProjectionManagerRepository;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MediaProjectionManagerRepository$callbackEventsFlow$1$callback$1 extends MediaProjectionManager.Callback {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -26,17 +25,17 @@ public final class MediaProjectionManagerRepository$callbackEventsFlow$1$callbac
 
     public final void onMediaProjectionEvent(MediaProjectionEvent mediaProjectionEvent, MediaProjectionInfo mediaProjectionInfo, ContentRecordingSession contentRecordingSession) {
         LogBuffer logBuffer = this.this$0.logger;
-        LogMessage obtain = logBuffer.obtain("MediaProjectionMngrRepo", LogLevel.DEBUG, new MediaProjectionManagerRepository$stopProjecting$2$$ExternalSyntheticLambda0(3), null);
-        ((LogMessageImpl) obtain).str1 = mediaProjectionEvent.toString();
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("MediaProjectionMngrRepo", LogLevel.DEBUG, new MediaProjectionManagerRepository$stopProjecting$2$$ExternalSyntheticLambda0(3), null);
+        ((LogMessageImpl) logMessageObtain).str1 = mediaProjectionEvent.toString();
+        logBuffer.commit(logMessageObtain);
         ChannelExt.trySendWithFailureLogging$default(ChannelExt.INSTANCE, this.$$this$conflatedCallbackFlow, new MediaProjectionManagerRepository.CallbackEvent.OnMediaProjectionEvent(mediaProjectionEvent), "MediaProjectionMngrRepo");
     }
 
     public final void onRecordingSessionSet(MediaProjectionInfo mediaProjectionInfo, ContentRecordingSession contentRecordingSession) {
         LogBuffer logBuffer = this.this$0.logger;
-        LogMessage obtain = logBuffer.obtain("MediaProjectionMngrRepo", LogLevel.DEBUG, new MediaProjectionManagerRepository$stopProjecting$2$$ExternalSyntheticLambda0(4), null);
-        ((LogMessageImpl) obtain).str1 = String.valueOf(contentRecordingSession);
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("MediaProjectionMngrRepo", LogLevel.DEBUG, new MediaProjectionManagerRepository$stopProjecting$2$$ExternalSyntheticLambda0(4), null);
+        ((LogMessageImpl) logMessageObtain).str1 = String.valueOf(contentRecordingSession);
+        logBuffer.commit(logMessageObtain);
         ChannelExt.trySendWithFailureLogging$default(ChannelExt.INSTANCE, this.$$this$conflatedCallbackFlow, new MediaProjectionManagerRepository.CallbackEvent.OnRecordingSessionSet(mediaProjectionInfo, contentRecordingSession), "MediaProjectionMngrRepo");
     }
 

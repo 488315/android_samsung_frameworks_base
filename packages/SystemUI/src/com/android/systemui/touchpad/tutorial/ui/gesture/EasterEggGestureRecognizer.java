@@ -10,7 +10,6 @@ import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class EasterEggGestureRecognizer implements GestureRecognizer {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -21,7 +20,6 @@ public final class EasterEggGestureRecognizer implements GestureRecognizer {
     public Point last = new Point(0.0f, 0.0f);
     public final List points = new ArrayList();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -31,7 +29,6 @@ public final class EasterEggGestureRecognizer implements GestureRecognizer {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Point {
         public final float x;
         public final float y;
@@ -73,22 +70,22 @@ public final class EasterEggGestureRecognizer implements GestureRecognizer {
                 ((ArrayList) this.points).add(point);
                 if (distanceBetween(this.last, point) > 10.0d) {
                     Point point2 = this.last;
-                    float atan2 = (float) Math.atan2(point.y - point2.y, point.x - point2.x);
+                    float fAtan2 = (float) Math.atan2(point.y - point2.y, point.x - point2.x);
                     Float f = this.lastAngle;
                     if (f == null) {
-                        this.lastAngle = Float.valueOf(atan2);
+                        this.lastAngle = Float.valueOf(fAtan2);
                         return;
                     }
-                    float floatValue = atan2 - f.floatValue();
+                    float fFloatValue = fAtan2 - f.floatValue();
                     float f2 = this.cumulativeAngle;
-                    double d = floatValue;
+                    double d = fFloatValue;
                     if (d > 3.141592653589793d) {
-                        floatValue -= 6.2831855f;
+                        fFloatValue -= 6.2831855f;
                     } else if (d < -3.141592653589793d) {
-                        floatValue += 6.2831855f;
+                        fFloatValue += 6.2831855f;
                     }
-                    this.cumulativeAngle = f2 + floatValue;
-                    this.lastAngle = Float.valueOf(atan2);
+                    this.cumulativeAngle = f2 + fFloatValue;
+                    this.lastAngle = Float.valueOf(fAtan2);
                     this.last = point;
                     if (this.cumulativeAngle >= 6.283185307179586d) {
                         this.cumulativeAngle = 0.0f;
@@ -111,7 +108,7 @@ public final class EasterEggGestureRecognizer implements GestureRecognizer {
                     i2++;
                     arrayList.add(Float.valueOf(((Point) obj2).x));
                 }
-                float averageOfFloat = (float) CollectionsKt___CollectionsKt.averageOfFloat(arrayList);
+                float fAverageOfFloat = (float) CollectionsKt___CollectionsKt.averageOfFloat(arrayList);
                 ArrayList arrayList3 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(arrayList2, 10));
                 int size2 = arrayList2.size();
                 int i3 = 0;
@@ -120,7 +117,7 @@ public final class EasterEggGestureRecognizer implements GestureRecognizer {
                     i3++;
                     arrayList3.add(Float.valueOf(((Point) obj3).y));
                 }
-                Point point3 = new Point(averageOfFloat, (float) CollectionsKt___CollectionsKt.averageOfFloat(arrayList3));
+                Point point3 = new Point(fAverageOfFloat, (float) CollectionsKt___CollectionsKt.averageOfFloat(arrayList3));
                 ArrayList arrayList4 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(arrayList2, 10));
                 int size3 = arrayList2.size();
                 int i4 = 0;
@@ -129,16 +126,16 @@ public final class EasterEggGestureRecognizer implements GestureRecognizer {
                     i4++;
                     arrayList4.add(Double.valueOf(distanceBetween((Point) obj4, point3)));
                 }
-                float averageOfDouble = (float) CollectionsKt___CollectionsKt.averageOfDouble(arrayList4);
+                float fAverageOfDouble = (float) CollectionsKt___CollectionsKt.averageOfDouble(arrayList4);
                 int size4 = arrayList2.size();
                 while (true) {
                     if (i >= size4) {
-                        this.gestureStateChangedCallback.mo779invoke(GestureState.Finished.INSTANCE);
+                        this.gestureStateChangedCallback.mo781invoke(GestureState.Finished.INSTANCE);
                         break;
                     }
                     Object obj5 = arrayList2.get(i);
                     i++;
-                    if (Math.abs(distanceBetween((Point) obj5, point3) - averageOfDouble) > 0.7f * averageOfDouble) {
+                    if (Math.abs(distanceBetween((Point) obj5, point3) - fAverageOfDouble) > 0.7f * fAverageOfDouble) {
                         break;
                     }
                 }

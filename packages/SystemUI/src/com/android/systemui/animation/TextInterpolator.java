@@ -18,6 +18,7 @@ import com.android.systemui.animation.TextAnimator;
 import com.android.systemui.animation.TextInterpolator;
 import com.android.systemui.shared.clocks.AnimatableClockView$$ExternalSyntheticLambda3;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -30,7 +31,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class TextInterpolator {
     public final TextPaint basePaint;
@@ -49,7 +49,6 @@ public final class TextInterpolator {
     public float[] tmpPositionArray;
     public final TypefaceVariantCache typefaceCache;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class FontRun {
         public Font baseFont;
         public final int end;
@@ -83,7 +82,6 @@ public final class TextInterpolator {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Line {
         public final List runs;
 
@@ -92,7 +90,6 @@ public final class TextInterpolator {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class MutablePositionedGlyph extends TextAnimator.PositionedGlyph {
         public int glyphIndex;
 
@@ -106,7 +103,6 @@ public final class TextInterpolator {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Run {
         public final float[] baseX;
         public final float[] baseY;
@@ -170,10 +166,10 @@ public final class TextInterpolator {
         paint3.setStrokeWidth(MathUtils.lerp(paint.getStrokeWidth(), paint2.getStrokeWidth(), f));
     }
 
-    public final void drawFontRun(Canvas canvas, Run run, FontRun fontRun, int i, Paint paint) {
+    public final void drawFontRun(Canvas canvas, Run run, FontRun fontRun, int i, Paint paint) throws IOException {
         int i2;
         int i3;
-        Font lerp = this.fontInterpolator.lerp(fontRun.baseFont, fontRun.targetFont, this.progress, this.linearProgress);
+        Font fontLerp = this.fontInterpolator.lerp(fontRun.baseFont, fontRun.targetFont, this.progress, this.linearProgress);
         AnimatableClockView$$ExternalSyntheticLambda3 animatableClockView$$ExternalSyntheticLambda3 = this.glyphFilter;
         float[] fArr = run.targetY;
         float[] fArr2 = run.baseY;
@@ -192,7 +188,7 @@ public final class TextInterpolator {
             }
             float[] fArr5 = this.tmpPositionArray;
             int i8 = fontRun.start;
-            canvas.drawGlyphs(run.glyphIds, i8, fArr5, 0, i6 - i8, lerp, paint);
+            canvas.drawGlyphs(run.glyphIds, i8, fArr5, 0, i6 - i8, fontLerp, paint);
             return;
         }
         getTmpGlyph().getClass();
@@ -224,7 +220,7 @@ public final class TextInterpolator {
                 ((TextPaint) lazy2.getValue()).setColor(getTmpGlyph().color);
                 i2 = i6;
                 i3 = i5;
-                canvas.drawGlyphs(run.glyphIds, i9, this.tmpPositionArray, 0, i5 - i9, lerp, (TextPaint) lazy2.getValue());
+                canvas.drawGlyphs(run.glyphIds, i9, this.tmpPositionArray, 0, i5 - i9, fontLerp, (TextPaint) lazy2.getValue());
                 i9 = i3;
                 i10 = 0;
             }
@@ -238,7 +234,7 @@ public final class TextInterpolator {
             fArr = fArr6;
             lazy = lazy2;
         }
-        canvas.drawGlyphs(run.glyphIds, i9, this.tmpPositionArray, 0, i6 - i9, lerp, (TextPaint) lazy.getValue());
+        canvas.drawGlyphs(run.glyphIds, i9, this.tmpPositionArray, 0, i6 - i9, fontLerp, (TextPaint) lazy.getValue());
     }
 
     public final MutablePositionedGlyph getTmpGlyph() {
@@ -280,9 +276,9 @@ public final class TextInterpolator {
                     fArr2[i] = MathUtils.lerp(fArr2[i], run.targetY[i], this.progress);
                 }
                 for (FontRun fontRun : run.fontRuns) {
-                    Font lerp = this.fontInterpolator.lerp(fontRun.baseFont, fontRun.targetFont, this.progress, this.linearProgress);
-                    fontRun.baseFont = lerp;
-                    this.basePaint.setTypeface(this.typefaceCache.getTypefaceForVariant(FontVariationAxis.toFontVariationSettings(lerp.getAxes())));
+                    Font fontLerp = this.fontInterpolator.lerp(fontRun.baseFont, fontRun.targetFont, this.progress, this.linearProgress);
+                    fontRun.baseFont = fontLerp;
+                    this.basePaint.setTypeface(this.typefaceCache.getTypefaceForVariant(FontVariationAxis.toFontVariationSettings(fontLerp.getAxes())));
                 }
             }
         }
@@ -301,18 +297,18 @@ public final class TextInterpolator {
         Iterator it4;
         float[] fArr2;
         PositionedGlyphs positionedGlyphs;
-        List shapeText = shapeText(layout, this.basePaint);
-        List shapeText2 = shapeText(layout, this.targetPaint);
-        ArrayList arrayList = (ArrayList) shapeText;
-        ArrayList arrayList2 = (ArrayList) shapeText2;
+        List listShapeText = shapeText(layout, this.basePaint);
+        List listShapeText2 = shapeText(layout, this.targetPaint);
+        ArrayList arrayList = (ArrayList) listShapeText;
+        ArrayList arrayList2 = (ArrayList) listShapeText2;
         if (arrayList.size() != arrayList2.size()) {
             throw new IllegalArgumentException("The new layout result has different line count.");
         }
         Iterator it5 = arrayList.iterator();
         Iterator it6 = arrayList2.iterator();
         int i = 10;
-        ArrayList arrayList3 = new ArrayList(Math.min(CollectionsKt__IterablesKt.collectionSizeOrDefault(shapeText, 10), CollectionsKt__IterablesKt.collectionSizeOrDefault(shapeText2, 10)));
-        int i2 = 0;
+        ArrayList arrayList3 = new ArrayList(Math.min(CollectionsKt__IterablesKt.collectionSizeOrDefault(listShapeText, 10), CollectionsKt__IterablesKt.collectionSizeOrDefault(listShapeText2, 10)));
+        int iMax = 0;
         while (it5.hasNext() && it6.hasNext()) {
             Object next = it5.next();
             List list = (List) it6.next();
@@ -328,35 +324,35 @@ public final class TextInterpolator {
                 if (positionedGlyphs3.glyphCount() != positionedGlyphs2.glyphCount()) {
                     throw new IllegalArgumentException(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(this.lines.size(), "Inconsistent glyph count at line ").toString());
                 }
-                int glyphCount = positionedGlyphs3.glyphCount();
-                int[] iArr = new int[glyphCount];
-                for (int i3 = 0; i3 < glyphCount; i3++) {
-                    int glyphId = positionedGlyphs3.getGlyphId(i3);
-                    if (glyphId != positionedGlyphs2.getGlyphId(i3)) {
-                        throw new IllegalArgumentException(ListImplementation$$ExternalSyntheticOutline0.m(i3, this.lines.size(), "Inconsistent glyph ID at ", " in line ").toString());
+                int iGlyphCount = positionedGlyphs3.glyphCount();
+                int[] iArr = new int[iGlyphCount];
+                for (int i2 = 0; i2 < iGlyphCount; i2++) {
+                    int glyphId = positionedGlyphs3.getGlyphId(i2);
+                    if (glyphId != positionedGlyphs2.getGlyphId(i2)) {
+                        throw new IllegalArgumentException(ListImplementation$$ExternalSyntheticOutline0.m(i2, this.lines.size(), "Inconsistent glyph ID at ", " in line ").toString());
                     }
                     Unit unit = Unit.INSTANCE;
-                    iArr[i3] = glyphId;
+                    iArr[i2] = glyphId;
                 }
-                float[] fArr3 = new float[glyphCount];
-                for (int i4 = 0; i4 < glyphCount; i4++) {
-                    fArr3[i4] = positionedGlyphs3.getGlyphX(i4);
+                float[] fArr3 = new float[iGlyphCount];
+                for (int i3 = 0; i3 < iGlyphCount; i3++) {
+                    fArr3[i3] = positionedGlyphs3.getGlyphX(i3);
                 }
-                float[] fArr4 = new float[glyphCount];
-                for (int i5 = 0; i5 < glyphCount; i5++) {
-                    fArr4[i5] = positionedGlyphs3.getGlyphY(i5);
+                float[] fArr4 = new float[iGlyphCount];
+                for (int i4 = 0; i4 < iGlyphCount; i4++) {
+                    fArr4[i4] = positionedGlyphs3.getGlyphY(i4);
                 }
-                float[] fArr5 = new float[glyphCount];
-                for (int i6 = 0; i6 < glyphCount; i6++) {
-                    fArr5[i6] = positionedGlyphs2.getGlyphX(i6);
+                float[] fArr5 = new float[iGlyphCount];
+                for (int i5 = 0; i5 < iGlyphCount; i5++) {
+                    fArr5[i5] = positionedGlyphs2.getGlyphX(i5);
                 }
-                float[] fArr6 = new float[glyphCount];
-                for (int i7 = 0; i7 < glyphCount; i7++) {
-                    fArr6[i7] = positionedGlyphs2.getGlyphY(i7);
+                float[] fArr6 = new float[iGlyphCount];
+                for (int i6 = 0; i6 < iGlyphCount; i6++) {
+                    fArr6[i6] = positionedGlyphs2.getGlyphY(i6);
                 }
                 ArrayList arrayList5 = new ArrayList();
-                int i8 = i2;
-                if (glyphCount != 0) {
+                int i7 = iMax;
+                if (iGlyphCount != 0) {
                     Font font = positionedGlyphs3.getFont(0);
                     it = it5;
                     Font font2 = positionedGlyphs2.getFont(0);
@@ -368,44 +364,44 @@ public final class TextInterpolator {
                     fArr = fArr4;
                     it3 = it7;
                     it4 = it8;
-                    int i9 = 1;
-                    int i10 = 0;
+                    int i8 = 1;
+                    int i9 = 0;
                     Font font3 = font2;
-                    int i11 = i8;
-                    while (i9 < glyphCount) {
+                    int i10 = i7;
+                    while (i8 < iGlyphCount) {
                         float[] fArr7 = fArr5;
-                        Font font4 = positionedGlyphs3.getFont(i9);
+                        Font font4 = positionedGlyphs3.getFont(i8);
                         PositionedGlyphs positionedGlyphs4 = positionedGlyphs3;
-                        Font font5 = positionedGlyphs2.getFont(i9);
+                        Font font5 = positionedGlyphs2.getFont(i8);
                         if (font == font4) {
                             positionedGlyphs = positionedGlyphs2;
                             if (font3 != font5) {
-                                throw new IllegalArgumentException(ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(i9, "Base font is unchanged at ", " but target font has changed.").toString());
+                                throw new IllegalArgumentException(ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(i8, "Base font is unchanged at ", " but target font has changed.").toString());
                             }
                         } else {
                             if (font3 == font5) {
-                                throw new IllegalArgumentException(ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(i9, "Base font has changed at ", " but target font is unchanged.").toString());
+                                throw new IllegalArgumentException(ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(i8, "Base font has changed at ", " but target font is unchanged.").toString());
                             }
                             positionedGlyphs = positionedGlyphs2;
-                            arrayList5.add(new FontRun(i10, i9, font, font3));
-                            int max = Math.max(i11, i9 - i10);
+                            arrayList5.add(new FontRun(i9, i8, font, font3));
+                            int iMax2 = Math.max(i10, i8 - i9);
                             FontInterpolator.Companion.getClass();
                             if (!FontInterpolator.Companion.canInterpolate(font4, font5)) {
-                                throw new IllegalArgumentException(("Cannot interpolate font at " + i9 + " (" + font4 + " vs " + font5 + ")").toString());
+                                throw new IllegalArgumentException(("Cannot interpolate font at " + i8 + " (" + font4 + " vs " + font5 + ")").toString());
                             }
-                            i11 = max;
+                            i10 = iMax2;
                             font3 = font5;
-                            i10 = i9;
+                            i9 = i8;
                             font = font4;
                         }
-                        i9++;
+                        i8++;
                         fArr5 = fArr7;
                         positionedGlyphs3 = positionedGlyphs4;
                         positionedGlyphs2 = positionedGlyphs;
                     }
                     fArr2 = fArr5;
-                    arrayList5.add(new FontRun(i10, glyphCount, font, font3));
-                    i2 = Math.max(i11, glyphCount - i10);
+                    arrayList5.add(new FontRun(i9, iGlyphCount, font, font3));
+                    iMax = Math.max(i10, iGlyphCount - i9);
                 } else {
                     it = it5;
                     it2 = it6;
@@ -421,15 +417,15 @@ public final class TextInterpolator {
                 it8 = it4;
             }
             arrayList3.add(new Line(arrayList4));
-            i2 = i2;
+            iMax = iMax;
             it5 = it5;
             it6 = it6;
             i = 10;
         }
         this.lines = arrayList3;
-        int i12 = i2 * 2;
-        if (this.tmpPositionArray.length < i12) {
-            this.tmpPositionArray = new float[i12];
+        int i11 = iMax * 2;
+        if (this.tmpPositionArray.length < i11) {
+            this.tmpPositionArray = new float[i11];
         }
     }
 
@@ -521,7 +517,7 @@ public final class TextInterpolator {
             }
             final ArrayList arrayList2 = new ArrayList();
             TextPaint textPaint2 = textPaint;
-            TextShaper.shapeText(layout.getText(), lineStart, i2, layout.getTextDirectionHeuristic(), textPaint2, new TextShaper.GlyphsConsumer() { // from class: com.android.systemui.animation.TextInterpolator$shapeText$3
+            TextShaper.shapeText(layout.getText(), lineStart, i2, layout.getTextDirectionHeuristic(), textPaint2, new TextShaper.GlyphsConsumer() { // from class: com.android.systemui.animation.TextInterpolator.shapeText.3
                 @Override // android.text.TextShaper.GlyphsConsumer
                 public final void accept(int i4, int i5, PositionedGlyphs positionedGlyphs, TextPaint textPaint3) {
                     arrayList2.add(positionedGlyphs);

@@ -3,7 +3,6 @@ package com.android.systemui.statusbar.phone;
 import android.content.Context;
 import android.view.DisplayCutout;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class IndicatorGardenAlgorithmSidelingCenterCutout extends IndicatorGardenAlgorithm {
     public int cutoutLeft;
@@ -19,7 +18,7 @@ public final class IndicatorGardenAlgorithmSidelingCenterCutout extends Indicato
 
     @Override // com.android.systemui.statusbar.phone.IndicatorGardenAlgorithm
     public final int calculateCameraBottomMargin() {
-        if (hasCameraBottomMargin()) {
+        if (getHasCutoutForIndicator()) {
             return this.inputProperties.cutoutBottomMarginGb;
         }
         return 0;
@@ -27,7 +26,7 @@ public final class IndicatorGardenAlgorithmSidelingCenterCutout extends Indicato
 
     @Override // com.android.systemui.statusbar.phone.IndicatorGardenAlgorithm
     public final int calculateCameraTopMargin() {
-        return (super.inputProperties.rotation == 0 && getHasCutoutForIndicator()) ? this.inputProperties.cutoutTopMarginB : super.calculateCameraTopMargin();
+        return getHasCutoutForIndicator() ? this.inputProperties.cutoutTopMarginB : super.calculateCameraTopMargin();
     }
 
     @Override // com.android.systemui.statusbar.phone.IndicatorGardenAlgorithm
@@ -45,19 +44,19 @@ public final class IndicatorGardenAlgorithmSidelingCenterCutout extends Indicato
         if (indicatorGardenInputProperties.isRTL()) {
             int i = indicatorGardenInputProperties.statusBarWidth;
             IndicatorGardenContainer centerContainer = indicatorGarden.getCenterContainer();
-            int calculateRightPadding = (i / 2) - calculateRightPadding();
-            int gardenWidth = (centerContainer == null || !centerContainer.isGardenVisible() || centerContainer.getGardenWidth() <= 0) ? calculateRightPadding : calculateRightPadding - (centerContainer.getGardenWidth() / 2);
+            int iCalculateRightPadding = (i / 2) - calculateRightPadding();
+            int gardenWidth = (centerContainer == null || !centerContainer.isGardenVisible() || centerContainer.getGardenWidth() <= 0) ? iCalculateRightPadding : iCalculateRightPadding - (centerContainer.getGardenWidth() / 2);
             int i2 = i - this.cutoutRight;
-            return (i2 <= 0 || i2 <= calculateRightPadding()) ? Math.min(gardenWidth, calculateRightPadding) : Math.min(gardenWidth, i2 - calculateRightPadding());
+            return (i2 <= 0 || i2 <= calculateRightPadding()) ? Math.min(gardenWidth, iCalculateRightPadding) : Math.min(gardenWidth, i2 - calculateRightPadding());
         }
         if (!getHasCutoutForIndicator()) {
-            return getLeftContainerMaxWidth(indicatorGarden);
+            return getLeftContainerMaxWidth(indicatorGarden, calculateLeftPadding(), calculateRightPadding());
         }
-        int calculateLeftPadding = this.cutoutLeft - calculateLeftPadding();
-        int calculateRightPadding2 = (indicatorGardenInputProperties.statusBarWidth - calculateRightPadding()) - calculateLeftPadding();
+        int iCalculateLeftPadding = this.cutoutLeft - calculateLeftPadding();
+        int iCalculateRightPadding2 = (indicatorGardenInputProperties.statusBarWidth - calculateRightPadding()) - calculateLeftPadding();
         IndicatorGardenContainer rightContainer = indicatorGarden.getRightContainer();
         rightContainer.getClass();
-        return Math.min(calculateLeftPadding, calculateRightPadding2 - rightContainer.getGardenWidth());
+        return Math.min(iCalculateLeftPadding, iCalculateRightPadding2 - rightContainer.getGardenWidth());
     }
 
     @Override // com.android.systemui.statusbar.phone.IndicatorGardenAlgorithm
@@ -66,23 +65,24 @@ public final class IndicatorGardenAlgorithmSidelingCenterCutout extends Indicato
             return getDefaultSidePadding();
         }
         DisplayCutout displayCutout = this.inputProperties.displayCutout;
-        return getDefaultSidePadding() + (displayCutout != null ? displayCutout.getSafeInsetLeft() : 0);
+        int safeInsetLeft = displayCutout != null ? displayCutout.getSafeInsetLeft() : 0;
+        return safeInsetLeft > 0 ? (getDefaultSidePadding() / 3) + safeInsetLeft : getDefaultSidePadding();
     }
 
     @Override // com.android.systemui.statusbar.phone.IndicatorGardenAlgorithm
     public final int calculateRightContainerMaxWidth(IndicatorGarden indicatorGarden) {
         IndicatorGardenInputProperties indicatorGardenInputProperties = this.inputProperties;
         if (!indicatorGardenInputProperties.isRTL()) {
-            return getRightContainerMaxWidth(indicatorGarden);
+            return getRightContainerMaxWidth(indicatorGarden, calculateLeftPadding(), calculateRightPadding());
         }
         IndicatorGardenContainer centerContainer = indicatorGarden.getCenterContainer();
-        int calculateLeftPadding = (indicatorGardenInputProperties.statusBarWidth / 2) - (getHasCutoutForIndicator() ? calculateLeftPadding() : 0);
-        int gardenWidth = (centerContainer == null || !centerContainer.isGardenVisible() || centerContainer.getGardenWidth() <= 0) ? calculateLeftPadding : calculateLeftPadding - (centerContainer.getGardenWidth() / 2);
-        int calculateRightPadding = (indicatorGardenInputProperties.statusBarWidth - calculateRightPadding()) - calculateLeftPadding();
+        int iCalculateLeftPadding = (indicatorGardenInputProperties.statusBarWidth / 2) - (getHasCutoutForIndicator() ? calculateLeftPadding() : 0);
+        int gardenWidth = (centerContainer == null || !centerContainer.isGardenVisible() || centerContainer.getGardenWidth() <= 0) ? iCalculateLeftPadding : iCalculateLeftPadding - (centerContainer.getGardenWidth() / 2);
+        int iCalculateRightPadding = (indicatorGardenInputProperties.statusBarWidth - calculateRightPadding()) - calculateLeftPadding();
         IndicatorGardenContainer rightContainer = indicatorGarden.getRightContainer();
         rightContainer.getClass();
-        int gardenWidth2 = calculateRightPadding - rightContainer.getGardenWidth();
-        return gardenWidth2 > 0 ? Math.min(gardenWidth, gardenWidth2) : Math.min(gardenWidth, calculateLeftPadding);
+        int gardenWidth2 = iCalculateRightPadding - rightContainer.getGardenWidth();
+        return gardenWidth2 > 0 ? Math.min(gardenWidth, gardenWidth2) : Math.min(gardenWidth, iCalculateLeftPadding);
     }
 
     @Override // com.android.systemui.statusbar.phone.IndicatorGardenAlgorithm
@@ -91,12 +91,13 @@ public final class IndicatorGardenAlgorithmSidelingCenterCutout extends Indicato
             return getDefaultSidePadding();
         }
         DisplayCutout displayCutout = this.inputProperties.displayCutout;
-        return getDefaultSidePadding() + (displayCutout != null ? displayCutout.getSafeInsetRight() : 0);
+        int safeInsetRight = displayCutout != null ? displayCutout.getSafeInsetRight() : 0;
+        return safeInsetRight > 0 ? (getDefaultSidePadding() / 3) + safeInsetRight : getDefaultSidePadding();
     }
 
     @Override // com.android.systemui.statusbar.phone.IndicatorGardenAlgorithm
     public final boolean hasCameraBottomMargin() {
-        return super.inputProperties.rotation == 0 && getHasCutoutForIndicator();
+        return getHasCutoutForIndicator();
     }
 
     @Override // com.android.systemui.statusbar.phone.IndicatorGardenAlgorithm

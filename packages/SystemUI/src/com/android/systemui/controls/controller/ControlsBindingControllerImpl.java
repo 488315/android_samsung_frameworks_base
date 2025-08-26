@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.os.IBinder;
 import android.os.UserHandle;
 import android.service.controls.Control;
@@ -42,14 +43,13 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class ControlsBindingControllerImpl implements ControlsBindingController, SecControlsBindingController {
     public static final ControlsBindingControllerImpl$Companion$emptyCallback$1 emptyCallback;
     public final ControlsBindingControllerImpl$actionCallbackService$1 actionCallbackService = new IControlsActionCallback.Stub() { // from class: com.android.systemui.controls.controller.ControlsBindingControllerImpl$actionCallbackService$1
         public final void accept(IBinder iBinder, String str, int i) {
             SecNotificationBlockManager$$ExternalSyntheticOutline0.m(i, "actionCallback: ", str, ", ", "ControlsBindingControllerImpl");
-            ControlsBindingControllerImpl controlsBindingControllerImpl = ControlsBindingControllerImpl.this;
+            ControlsBindingControllerImpl controlsBindingControllerImpl = this.this$0;
             controlsBindingControllerImpl.backgroundExecutor.execute(controlsBindingControllerImpl.new OnActionResponseRunnable(iBinder, str, i));
         }
     };
@@ -63,7 +63,6 @@ public class ControlsBindingControllerImpl implements ControlsBindingController,
     public final PackageUpdateMonitor.Factory packageUpdateMonitorFactory;
     public StatefulControlSubscriber statefulControlSubscriber;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class CallbackRunnable implements Runnable {
         public final ControlsProviderLifecycleManager provider;
         public final IBinder token;
@@ -94,7 +93,6 @@ public class ControlsBindingControllerImpl implements ControlsBindingController,
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -104,7 +102,6 @@ public class ControlsBindingControllerImpl implements ControlsBindingController,
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class LoadSubscriber extends IControlsSubscriber.Stub {
         public static final /* synthetic */ int $r8$clinit = 0;
         public Function0 _loadCancelInternal;
@@ -136,7 +133,7 @@ public class ControlsBindingControllerImpl implements ControlsBindingController,
             ControlsBindingControllerImpl.this.backgroundExecutor.execute(new Runnable() { // from class: com.android.systemui.controls.controller.ControlsBindingControllerImpl$LoadSubscriber$maybeTerminateAndRun$2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ControlsBindingControllerImpl.LoadSubscriber.this.isTerminated.compareAndSet(false, true);
+                    this.this$0.isTerminated.compareAndSet(false, true);
                     callbackRunnable.run();
                 }
             });
@@ -155,12 +152,12 @@ public class ControlsBindingControllerImpl implements ControlsBindingController,
             controlsBindingControllerImpl.backgroundExecutor.execute(new Runnable() { // from class: com.android.systemui.controls.controller.ControlsBindingControllerImpl$LoadSubscriber$onNext$1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    if (ControlsBindingControllerImpl.LoadSubscriber.this.isTerminated.get()) {
+                    if (this.this$0.isTerminated.get()) {
                         return;
                     }
-                    ControlsBindingControllerImpl.LoadSubscriber.this.loadedControls.add(control);
-                    long size = ControlsBindingControllerImpl.LoadSubscriber.this.loadedControls.size();
-                    ControlsBindingControllerImpl.LoadSubscriber loadSubscriber = ControlsBindingControllerImpl.LoadSubscriber.this;
+                    this.this$0.loadedControls.add(control);
+                    long size = this.this$0.loadedControls.size();
+                    ControlsBindingControllerImpl.LoadSubscriber loadSubscriber = this.this$0;
                     if (size >= loadSubscriber.requestLimit) {
                         ControlsBindingControllerImpl controlsBindingControllerImpl2 = controlsBindingControllerImpl;
                         IBinder iBinder2 = iBinder;
@@ -182,7 +179,7 @@ public class ControlsBindingControllerImpl implements ControlsBindingController,
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
                     int i = ControlsBindingControllerImpl.LoadSubscriber.$r8$clinit;
-                    ControlsProviderLifecycleManager controlsProviderLifecycleManager = ControlsBindingControllerImpl.this.currentProvider;
+                    ControlsProviderLifecycleManager controlsProviderLifecycleManager = controlsBindingControllerImpl.currentProvider;
                     if (controlsProviderLifecycleManager != null) {
                         IControlsSubscription iControlsSubscription2 = this.subscription;
                         if (iControlsSubscription2 == null) {
@@ -197,7 +194,6 @@ public class ControlsBindingControllerImpl implements ControlsBindingController,
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class OnActionResponseRunnable extends CallbackRunnable {
         public final String controlId;
         public final int response;
@@ -221,13 +217,13 @@ public class ControlsBindingControllerImpl implements ControlsBindingController,
                     secControlsUiControllerImpl.uiExecutor.execute(new Runnable() { // from class: com.android.systemui.controls.ui.SecControlsUiControllerImpl$onActionResponse$1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            StatefulControlAdapter statefulControlAdapter = SecControlsUiControllerImpl.this.controlAdapter;
+                            StatefulControlAdapter statefulControlAdapter = secControlsUiControllerImpl.controlAdapter;
                             if (statefulControlAdapter != null) {
                                 final String str2 = str;
                                 final int i2 = i;
                                 statefulControlAdapter.uiExecutor.execute(new Runnable() { // from class: com.android.systemui.controls.management.adapter.StatefulControlAdapter$actionResponse$1
                                     @Override // java.lang.Runnable
-                                    public final void run() {
+                                    public final void run() throws Resources.NotFoundException {
                                         LinkedHashMap linkedHashMap = (LinkedHashMap) StatefulControlAdapter.controlViewHolders;
                                         Object obj = linkedHashMap.get(str2);
                                         String str3 = str2;
@@ -242,7 +238,7 @@ public class ControlsBindingControllerImpl implements ControlsBindingController,
                                         if (controlViewHolder != null) {
                                             int i4 = i2;
                                             ControlWithState controlWithState = controlViewHolder.cws;
-                                            final AlertDialog alertDialog = null;
+                                            final AlertDialog alertDialogCreate = null;
                                             if (controlWithState == null) {
                                                 controlWithState = null;
                                             }
@@ -266,10 +262,10 @@ public class ControlsBindingControllerImpl implements ControlsBindingController,
                                             if (i4 != 3) {
                                                 if (i4 == 4) {
                                                     ChallengeDialogs.INSTANCE.getClass();
-                                                    ChallengeDialogs$createSecPinDialog$1 createPinDialog = ChallengeDialogs.createPinDialog(controlViewHolder, false, z, controlViewHolder$$ExternalSyntheticLambda0);
-                                                    controlViewHolder.lastChallengeDialog = createPinDialog;
-                                                    if (createPinDialog != null) {
-                                                        createPinDialog.show();
+                                                    ChallengeDialogs$createSecPinDialog$1 challengeDialogs$createSecPinDialog$1CreatePinDialog = ChallengeDialogs.createPinDialog(controlViewHolder, false, z, controlViewHolder$$ExternalSyntheticLambda0);
+                                                    controlViewHolder.lastChallengeDialog = challengeDialogs$createSecPinDialog$1CreatePinDialog;
+                                                    if (challengeDialogs$createSecPinDialog$1CreatePinDialog != null) {
+                                                        challengeDialogs$createSecPinDialog$1CreatePinDialog.show();
                                                         return;
                                                     }
                                                     return;
@@ -278,10 +274,10 @@ public class ControlsBindingControllerImpl implements ControlsBindingController,
                                                     return;
                                                 }
                                                 ChallengeDialogs.INSTANCE.getClass();
-                                                ChallengeDialogs$createSecPinDialog$1 createPinDialog2 = ChallengeDialogs.createPinDialog(controlViewHolder, true, z, controlViewHolder$$ExternalSyntheticLambda0);
-                                                controlViewHolder.lastChallengeDialog = createPinDialog2;
-                                                if (createPinDialog2 != null) {
-                                                    createPinDialog2.show();
+                                                ChallengeDialogs$createSecPinDialog$1 challengeDialogs$createSecPinDialog$1CreatePinDialog2 = ChallengeDialogs.createPinDialog(controlViewHolder, true, z, controlViewHolder$$ExternalSyntheticLambda0);
+                                                controlViewHolder.lastChallengeDialog = challengeDialogs$createSecPinDialog$1CreatePinDialog2;
+                                                if (challengeDialogs$createSecPinDialog$1CreatePinDialog2 != null) {
+                                                    challengeDialogs$createSecPinDialog$1CreatePinDialog2.show();
                                                     return;
                                                 }
                                                 return;
@@ -296,35 +292,35 @@ public class ControlsBindingControllerImpl implements ControlsBindingController,
                                                 builder.setPositiveButton(R.string.sec_controls_dialog_ok, new DialogInterface.OnClickListener() { // from class: com.android.systemui.controls.ui.ChallengeDialogs$createSecConfirmationDialog$builder$1$1
                                                     @Override // android.content.DialogInterface.OnClickListener
                                                     public final void onClick(DialogInterface dialogInterface, int i5) {
-                                                        ControlViewHolder.this.action(ChallengeDialogs.access$addChallengeValue(ChallengeDialogs.INSTANCE, controlAction, "true"));
+                                                        controlViewHolder.action(ChallengeDialogs.access$addChallengeValue(ChallengeDialogs.INSTANCE, controlAction, "true"));
                                                         dialogInterface.dismiss();
                                                     }
                                                 });
                                                 builder.setNegativeButton(R.string.controls_dialog_cancel, new DialogInterface.OnClickListener() { // from class: com.android.systemui.controls.ui.ChallengeDialogs$createSecConfirmationDialog$builder$1$2
                                                     @Override // android.content.DialogInterface.OnClickListener
                                                     public final void onClick(DialogInterface dialogInterface, int i5) {
-                                                        Function0.this.invoke();
+                                                        controlViewHolder$$ExternalSyntheticLambda0.invoke();
                                                         dialogInterface.cancel();
                                                     }
                                                 });
-                                                alertDialog = builder.create();
-                                                Window window = alertDialog.getWindow();
+                                                alertDialogCreate = builder.create();
+                                                Window window = alertDialogCreate.getWindow();
                                                 if (window != null) {
                                                     window.setType(2020);
                                                 }
-                                                alertDialog.setOnShowListener(new DialogInterface.OnShowListener() { // from class: com.android.systemui.controls.ui.ChallengeDialogs$createSecConfirmationDialog$1$1
+                                                alertDialogCreate.setOnShowListener(new DialogInterface.OnShowListener() { // from class: com.android.systemui.controls.ui.ChallengeDialogs$createSecConfirmationDialog$1$1
                                                     @Override // android.content.DialogInterface.OnShowListener
-                                                    public final void onShow(DialogInterface dialogInterface) {
-                                                        int color = alertDialog.getContext().getResources().getColor(R.color.basic_interaction_dialog_button, alertDialog.getContext().getTheme());
-                                                        AlertDialog alertDialog2 = alertDialog;
-                                                        alertDialog2.getButton(-1).setTextColor(color);
-                                                        alertDialog2.getButton(-2).setTextColor(color);
+                                                    public final void onShow(DialogInterface dialogInterface) throws Resources.NotFoundException {
+                                                        int color = alertDialogCreate.getContext().getResources().getColor(R.color.basic_interaction_dialog_button, alertDialogCreate.getContext().getTheme());
+                                                        AlertDialog alertDialog = alertDialogCreate;
+                                                        alertDialog.getButton(-1).setTextColor(color);
+                                                        alertDialog.getButton(-2).setTextColor(color);
                                                     }
                                                 });
                                             }
-                                            controlViewHolder.lastChallengeDialog = alertDialog;
-                                            if (alertDialog != null) {
-                                                alertDialog.show();
+                                            controlViewHolder.lastChallengeDialog = alertDialogCreate;
+                                            if (alertDialogCreate != null) {
+                                                alertDialogCreate.show();
                                             }
                                         }
                                     }
@@ -337,7 +333,6 @@ public class ControlsBindingControllerImpl implements ControlsBindingController,
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class OnCancelAndLoadRunnable extends CallbackRunnable {
         public final ControlsBindingController.LoadCallback callback;
         public final List list;
@@ -361,7 +356,6 @@ public class ControlsBindingControllerImpl implements ControlsBindingController,
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class OnLoadErrorRunnable extends CallbackRunnable {
         public final ControlsBindingController.LoadCallback callback;
         public final String error;
@@ -382,7 +376,6 @@ public class ControlsBindingControllerImpl implements ControlsBindingController,
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class OnLoadRunnable extends CallbackRunnable {
         public final ControlsBindingController.LoadCallback callback;
         public final List list;
@@ -400,7 +393,6 @@ public class ControlsBindingControllerImpl implements ControlsBindingController,
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class OnSubscribeRunnable extends CallbackRunnable {
         public final long requestLimit;
         public final IControlsSubscription subscription;
@@ -472,12 +464,12 @@ public class ControlsBindingControllerImpl implements ControlsBindingController,
                 unbind();
             }
         }
-        ControlsProviderLifecycleManager controlsProviderLifecycleManager3 = this.currentProvider;
-        if (controlsProviderLifecycleManager3 == null) {
-            controlsProviderLifecycleManager3 = createProviderManager$frameworks__base__packages__SystemUI__android_common__SystemUI_core(componentName);
+        ControlsProviderLifecycleManager controlsProviderLifecycleManagerCreateProviderManager$frameworks__base__packages__SystemUI__android_common__SystemUI_core = this.currentProvider;
+        if (controlsProviderLifecycleManagerCreateProviderManager$frameworks__base__packages__SystemUI__android_common__SystemUI_core == null) {
+            controlsProviderLifecycleManagerCreateProviderManager$frameworks__base__packages__SystemUI__android_common__SystemUI_core = createProviderManager$frameworks__base__packages__SystemUI__android_common__SystemUI_core(componentName);
         }
-        this.currentProvider = controlsProviderLifecycleManager3;
-        return controlsProviderLifecycleManager3;
+        this.currentProvider = controlsProviderLifecycleManagerCreateProviderManager$frameworks__base__packages__SystemUI__android_common__SystemUI_core;
+        return controlsProviderLifecycleManagerCreateProviderManager$frameworks__base__packages__SystemUI__android_common__SystemUI_core;
     }
 
     public final String toString() {
@@ -509,16 +501,16 @@ public class ControlsBindingControllerImpl implements ControlsBindingController,
             statefulControlSubscriber.bgExecutor.execute(new Runnable() { // from class: com.android.systemui.controls.controller.StatefulControlSubscriber$cancel$1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    StatefulControlSubscriber statefulControlSubscriber2 = StatefulControlSubscriber.this;
+                    StatefulControlSubscriber statefulControlSubscriber2 = statefulControlSubscriber;
                     Log.d("StatefulControlSubscriber", "cancel subscriptionOpen = " + statefulControlSubscriber2.subscriptionOpen + ", subscription = " + statefulControlSubscriber2.subscription);
-                    StatefulControlSubscriber statefulControlSubscriber3 = StatefulControlSubscriber.this;
+                    StatefulControlSubscriber statefulControlSubscriber3 = statefulControlSubscriber;
                     if (statefulControlSubscriber3.subscriptionOpen) {
                         statefulControlSubscriber3.subscriptionOpen = false;
                         IControlsSubscription iControlsSubscription = statefulControlSubscriber3.subscription;
                         if (iControlsSubscription != null) {
                             statefulControlSubscriber3.provider.cancelSubscription(iControlsSubscription);
                         }
-                        StatefulControlSubscriber.this.subscription = null;
+                        statefulControlSubscriber.subscription = null;
                     }
                 }
             });

@@ -105,9 +105,9 @@ public abstract class ExploreByTouchHelper extends View.AccessibilityDelegate {
         if (i == Integer.MIN_VALUE || !this.mManager.isEnabled() || (parent = this.mView.getParent()) == null) {
             return;
         }
-        AccessibilityEvent createEvent = createEvent(i, 2048);
-        createEvent.setContentChangeTypes(i2);
-        parent.requestSendAccessibilityEvent(this.mView, createEvent);
+        AccessibilityEvent accessibilityEventCreateEvent = createEvent(i, 2048);
+        accessibilityEventCreateEvent.setContentChangeTypes(i2);
+        parent.requestSendAccessibilityEvent(this.mView, accessibilityEventCreateEvent);
     }
 
     public int getFocusedVirtualView() {
@@ -132,23 +132,23 @@ public abstract class ExploreByTouchHelper extends View.AccessibilityDelegate {
     }
 
     private AccessibilityEvent createEventForHost(int i) {
-        AccessibilityEvent obtain = AccessibilityEvent.obtain(i);
-        this.mView.onInitializeAccessibilityEvent(obtain);
-        onPopulateEventForHost(obtain);
-        return obtain;
+        AccessibilityEvent accessibilityEventObtain = AccessibilityEvent.obtain(i);
+        this.mView.onInitializeAccessibilityEvent(accessibilityEventObtain);
+        onPopulateEventForHost(accessibilityEventObtain);
+        return accessibilityEventObtain;
     }
 
     private AccessibilityEvent createEventForChild(int i, int i2) {
-        AccessibilityEvent obtain = AccessibilityEvent.obtain(i2);
-        obtain.setEnabled(true);
-        obtain.setClassName(DEFAULT_CLASS_NAME);
-        onPopulateEventForVirtualView(i, obtain);
-        if (obtain.getText().isEmpty() && obtain.getContentDescription() == null) {
+        AccessibilityEvent accessibilityEventObtain = AccessibilityEvent.obtain(i2);
+        accessibilityEventObtain.setEnabled(true);
+        accessibilityEventObtain.setClassName(DEFAULT_CLASS_NAME);
+        onPopulateEventForVirtualView(i, accessibilityEventObtain);
+        if (accessibilityEventObtain.getText().isEmpty() && accessibilityEventObtain.getContentDescription() == null) {
             throw new RuntimeException("Callbacks must add text or a content description in populateEventForVirtualViewId()");
         }
-        obtain.setPackageName(this.mView.getContext().getPackageName());
-        obtain.setSource(this.mView, i);
-        return obtain;
+        accessibilityEventObtain.setPackageName(this.mView.getContext().getPackageName());
+        accessibilityEventObtain.setSource(this.mView, i);
+        return accessibilityEventObtain;
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -160,10 +160,10 @@ public abstract class ExploreByTouchHelper extends View.AccessibilityDelegate {
     }
 
     private AccessibilityNodeInfo createNodeForHost() {
-        AccessibilityNodeInfo obtain = AccessibilityNodeInfo.obtain(this.mView);
-        this.mView.onInitializeAccessibilityNodeInfo(obtain);
-        int childCount = obtain.getChildCount();
-        onPopulateNodeForHost(obtain);
+        AccessibilityNodeInfo accessibilityNodeInfoObtain = AccessibilityNodeInfo.obtain(this.mView);
+        this.mView.onInitializeAccessibilityNodeInfo(accessibilityNodeInfoObtain);
+        int childCount = accessibilityNodeInfoObtain.getChildCount();
+        onPopulateNodeForHost(accessibilityNodeInfoObtain);
         IntArray intArray = this.mTempArray;
         if (intArray == null) {
             this.mTempArray = new IntArray();
@@ -177,9 +177,9 @@ public abstract class ExploreByTouchHelper extends View.AccessibilityDelegate {
         }
         int size = intArray2.size();
         for (int i = 0; i < size; i++) {
-            obtain.addChild(this.mView, intArray2.get(i));
+            accessibilityNodeInfoObtain.addChild(this.mView, intArray2.get(i));
         }
-        return obtain;
+        return accessibilityNodeInfoObtain;
     }
 
     private AccessibilityNodeInfo createNodeForChild(int i) {
@@ -187,47 +187,47 @@ public abstract class ExploreByTouchHelper extends View.AccessibilityDelegate {
         Rect rect = this.mTempParentRect;
         int[] iArr = this.mTempGlobalRect;
         Rect rect2 = this.mTempScreenRect;
-        AccessibilityNodeInfo obtain = AccessibilityNodeInfo.obtain();
-        obtain.setEnabled(true);
-        obtain.setClassName(DEFAULT_CLASS_NAME);
+        AccessibilityNodeInfo accessibilityNodeInfoObtain = AccessibilityNodeInfo.obtain();
+        accessibilityNodeInfoObtain.setEnabled(true);
+        accessibilityNodeInfoObtain.setClassName(DEFAULT_CLASS_NAME);
         Rect rect3 = INVALID_PARENT_BOUNDS;
-        obtain.setBoundsInParent(rect3);
-        onPopulateNodeForVirtualView(i, obtain);
-        if (obtain.getText() == null && obtain.getContentDescription() == null) {
+        accessibilityNodeInfoObtain.setBoundsInParent(rect3);
+        onPopulateNodeForVirtualView(i, accessibilityNodeInfoObtain);
+        if (accessibilityNodeInfoObtain.getText() == null && accessibilityNodeInfoObtain.getContentDescription() == null) {
             throw new RuntimeException("Callbacks must add text or a content description in populateNodeForVirtualViewId()");
         }
-        obtain.getBoundsInParent(rect);
+        accessibilityNodeInfoObtain.getBoundsInParent(rect);
         if (rect.equals(rect3)) {
             throw new RuntimeException("Callbacks must set parent bounds in populateNodeForVirtualViewId()");
         }
-        int actions = obtain.getActions();
+        int actions = accessibilityNodeInfoObtain.getActions();
         if ((actions & 64) != 0) {
             throw new RuntimeException("Callbacks must not add ACTION_ACCESSIBILITY_FOCUS in populateNodeForVirtualViewId()");
         }
         if ((actions & 128) != 0) {
             throw new RuntimeException("Callbacks must not add ACTION_CLEAR_ACCESSIBILITY_FOCUS in populateNodeForVirtualViewId()");
         }
-        obtain.setPackageName(this.mView.getContext().getPackageName());
-        obtain.setSource(this.mView, i);
-        obtain.setParent(this.mView);
+        accessibilityNodeInfoObtain.setPackageName(this.mView.getContext().getPackageName());
+        accessibilityNodeInfoObtain.setSource(this.mView, i);
+        accessibilityNodeInfoObtain.setParent(this.mView);
         if (this.mFocusedVirtualViewId == i) {
-            obtain.setAccessibilityFocused(true);
-            obtain.addAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_CLEAR_ACCESSIBILITY_FOCUS);
+            accessibilityNodeInfoObtain.setAccessibilityFocused(true);
+            accessibilityNodeInfoObtain.addAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_CLEAR_ACCESSIBILITY_FOCUS);
         } else {
-            obtain.setAccessibilityFocused(false);
-            obtain.addAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_ACCESSIBILITY_FOCUS);
+            accessibilityNodeInfoObtain.setAccessibilityFocused(false);
+            accessibilityNodeInfoObtain.addAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_ACCESSIBILITY_FOCUS);
         }
         if (intersectVisibleToUser(rect)) {
-            obtain.setVisibleToUser(true);
-            obtain.setBoundsInParent(rect);
+            accessibilityNodeInfoObtain.setVisibleToUser(true);
+            accessibilityNodeInfoObtain.setBoundsInParent(rect);
         }
         this.mView.getLocationOnScreen(iArr);
         int i2 = iArr[0];
         int i3 = iArr[1];
         rect2.set(rect);
         rect2.offset(i2, i3);
-        obtain.setBoundsInScreen(rect2);
-        return obtain;
+        accessibilityNodeInfoObtain.setBoundsInScreen(rect2);
+        return accessibilityNodeInfoObtain;
     }
 
     private void ensureTempRects() {

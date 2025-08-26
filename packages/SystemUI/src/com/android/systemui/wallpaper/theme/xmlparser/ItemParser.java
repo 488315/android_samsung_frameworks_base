@@ -5,7 +5,6 @@ import com.android.systemui.aibrief.ui.BriefViewController;
 import com.android.systemui.wallpaper.theme.builder.AnimationBuilder;
 import org.xmlpull.v1.XmlPullParser;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ItemParser extends BaseParser {
     @Override // com.android.systemui.wallpaper.theme.xmlparser.BaseParser
@@ -23,9 +22,9 @@ public class ItemParser extends BaseParser {
                 if (attributeName.equalsIgnoreCase("frameSize")) {
                     animationBuilder.frameSize.add(Integer.valueOf(Integer.parseInt(attributeValue)));
                 } else {
-                    boolean equalsIgnoreCase = attributeName.equalsIgnoreCase("image");
+                    boolean zEqualsIgnoreCase = attributeName.equalsIgnoreCase("image");
                     String str = parserData.mPkgName;
-                    if (equalsIgnoreCase) {
+                    if (zEqualsIgnoreCase) {
                         animationBuilder.imageViewSetId.add(Integer.valueOf(parserData.mApkResources.getIdentifier(attributeValue, "drawable", str)));
                     } else if (attributeName.equalsIgnoreCase(BriefViewController.SUGGESTION_BACKGROUND_KEY)) {
                         animationBuilder.backgroundId = parserData.mApkResources.getIdentifier(attributeValue, "drawable", str);

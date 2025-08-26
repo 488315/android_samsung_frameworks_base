@@ -58,8 +58,8 @@ public class FreezePeriod {
     }
 
     boolean contains(LocalDate localDate) {
-        int dayOfYearDisregardLeapYear = dayOfYearDisregardLeapYear(localDate);
-        return !isWrapped() ? this.mStartDay <= dayOfYearDisregardLeapYear && dayOfYearDisregardLeapYear <= this.mEndDay : this.mStartDay <= dayOfYearDisregardLeapYear || dayOfYearDisregardLeapYear <= this.mEndDay;
+        int iDayOfYearDisregardLeapYear = dayOfYearDisregardLeapYear(localDate);
+        return !isWrapped() ? this.mStartDay <= iDayOfYearDisregardLeapYear && iDayOfYearDisregardLeapYear <= this.mEndDay : this.mStartDay <= iDayOfYearDisregardLeapYear || iDayOfYearDisregardLeapYear <= this.mEndDay;
     }
 
     boolean after(LocalDate localDate) {
@@ -73,33 +73,33 @@ public class FreezePeriod {
     /* JADX WARN: Type inference failed for: r0v7 */
     /* JADX WARN: Type inference failed for: r0v8 */
     Pair<LocalDate, LocalDate> toCurrentOrFutureRealDates(LocalDate localDate) {
-        ?? r0;
-        int dayOfYearDisregardLeapYear = dayOfYearDisregardLeapYear(localDate);
+        ?? IsWrapped;
+        int iDayOfYearDisregardLeapYear = dayOfYearDisregardLeapYear(localDate);
         int i = 0;
         if (contains(localDate)) {
-            if (this.mStartDay <= dayOfYearDisregardLeapYear) {
-                r0 = isWrapped();
+            if (this.mStartDay <= iDayOfYearDisregardLeapYear) {
+                IsWrapped = isWrapped();
             } else {
                 i = -1;
-                r0 = 0;
+                IsWrapped = 0;
             }
-        } else if (this.mStartDay > dayOfYearDisregardLeapYear) {
-            r0 = isWrapped();
+        } else if (this.mStartDay > iDayOfYearDisregardLeapYear) {
+            IsWrapped = isWrapped();
         } else {
             i = 1;
-            r0 = 1;
+            IsWrapped = 1;
         }
-        return new Pair<>(LocalDate.ofYearDay(2001, this.mStartDay).withYear(localDate.getYear() + i), LocalDate.ofYearDay(2001, this.mEndDay).withYear(localDate.getYear() + r0));
+        return new Pair<>(LocalDate.ofYearDay(2001, this.mStartDay).withYear(localDate.getYear() + i), LocalDate.ofYearDay(2001, this.mEndDay).withYear(localDate.getYear() + IsWrapped));
     }
 
     public String toString() {
-        DateTimeFormatter ofPattern = DateTimeFormatter.ofPattern("MMM dd");
-        return LocalDate.ofYearDay(2001, this.mStartDay).format(ofPattern) + " - " + LocalDate.ofYearDay(2001, this.mEndDay).format(ofPattern);
+        DateTimeFormatter dateTimeFormatterOfPattern = DateTimeFormatter.ofPattern("MMM dd");
+        return LocalDate.ofYearDay(2001, this.mStartDay).format(dateTimeFormatterOfPattern) + " - " + LocalDate.ofYearDay(2001, this.mEndDay).format(dateTimeFormatterOfPattern);
     }
 
     private static MonthDay dayOfYearToMonthDay(int i) {
-        LocalDate ofYearDay = LocalDate.ofYearDay(2001, i);
-        return MonthDay.of(ofYearDay.getMonth(), ofYearDay.getDayOfMonth());
+        LocalDate localDateOfYearDay = LocalDate.ofYearDay(2001, i);
+        return MonthDay.of(localDateOfYearDay.getMonth(), localDateOfYearDay.getDayOfMonth());
     }
 
     private static int dayOfYearDisregardLeapYear(LocalDate localDate) {
@@ -141,19 +141,19 @@ public class FreezePeriod {
     static void validatePeriods(List<FreezePeriod> list) {
         FreezePeriod freezePeriod;
         int i;
-        List<FreezePeriod> canonicalizePeriods = canonicalizePeriods(list);
-        if (canonicalizePeriods.size() != list.size()) {
+        List<FreezePeriod> listCanonicalizePeriods = canonicalizePeriods(list);
+        if (listCanonicalizePeriods.size() != list.size()) {
             throw SystemUpdatePolicy.ValidationFailedException.duplicateOrOverlapPeriods();
         }
-        for (int i2 = 0; i2 < canonicalizePeriods.size(); i2++) {
-            FreezePeriod freezePeriod2 = canonicalizePeriods.get(i2);
+        for (int i2 = 0; i2 < listCanonicalizePeriods.size(); i2++) {
+            FreezePeriod freezePeriod2 = listCanonicalizePeriods.get(i2);
             if (freezePeriod2.getLength() > 90) {
                 throw SystemUpdatePolicy.ValidationFailedException.freezePeriodTooLong("Freeze period " + freezePeriod2 + " is too long: " + freezePeriod2.getLength() + " days");
             }
             if (i2 > 0) {
-                freezePeriod = canonicalizePeriods.get(i2 - 1);
+                freezePeriod = listCanonicalizePeriods.get(i2 - 1);
             } else {
-                freezePeriod = canonicalizePeriods.get(canonicalizePeriods.size() - 1);
+                freezePeriod = listCanonicalizePeriods.get(listCanonicalizePeriods.size() - 1);
             }
             if (freezePeriod != freezePeriod2) {
                 if (i2 == 0 && !freezePeriod.isWrapped()) {
@@ -176,9 +176,9 @@ public class FreezePeriod {
         if (localDate.isAfter(localDate3) || localDate2.isAfter(localDate3)) {
             Log.w(TAG, "Previous period (" + localDate + "," + localDate2 + ") is after current date " + localDate3);
         }
-        List<FreezePeriod> canonicalizePeriods = canonicalizePeriods(list);
-        FreezePeriod freezePeriod = canonicalizePeriods.get(0);
-        for (FreezePeriod freezePeriod2 : canonicalizePeriods) {
+        List<FreezePeriod> listCanonicalizePeriods = canonicalizePeriods(list);
+        FreezePeriod freezePeriod = listCanonicalizePeriods.get(0);
+        for (FreezePeriod freezePeriod2 : listCanonicalizePeriods) {
             if (freezePeriod2.contains(localDate3) || freezePeriod2.mStartDay > dayOfYearDisregardLeapYear(localDate3)) {
                 freezePeriod = freezePeriod2;
                 break;
@@ -192,17 +192,17 @@ public class FreezePeriod {
             throw new IllegalStateException("Current freeze dates inverted: " + currentOrFutureRealDates.first + NativeLibraryHelper.CLEAR_ABI_OVERRIDE + currentOrFutureRealDates.second);
         }
         String str = "Prev: " + localDate + "," + localDate2 + "; cur: " + currentOrFutureRealDates.first + "," + currentOrFutureRealDates.second;
-        long distanceWithoutLeapYear = distanceWithoutLeapYear(currentOrFutureRealDates.first, localDate2) - 1;
-        if (distanceWithoutLeapYear > 0) {
-            if (distanceWithoutLeapYear >= 60) {
+        long jDistanceWithoutLeapYear = distanceWithoutLeapYear(currentOrFutureRealDates.first, localDate2) - 1;
+        if (jDistanceWithoutLeapYear > 0) {
+            if (jDistanceWithoutLeapYear >= 60) {
                 return;
             }
-            throw SystemUpdatePolicy.ValidationFailedException.combinedPeriodTooClose("Previous freeze period too close to new period: " + distanceWithoutLeapYear + ", " + str);
+            throw SystemUpdatePolicy.ValidationFailedException.combinedPeriodTooClose("Previous freeze period too close to new period: " + jDistanceWithoutLeapYear + ", " + str);
         }
-        long distanceWithoutLeapYear2 = distanceWithoutLeapYear(currentOrFutureRealDates.second, localDate) + 1;
-        if (distanceWithoutLeapYear2 <= 90) {
+        long jDistanceWithoutLeapYear2 = distanceWithoutLeapYear(currentOrFutureRealDates.second, localDate) + 1;
+        if (jDistanceWithoutLeapYear2 <= 90) {
             return;
         }
-        throw SystemUpdatePolicy.ValidationFailedException.combinedPeriodTooLong("Combined freeze period exceeds maximum days: " + distanceWithoutLeapYear2 + ", " + str);
+        throw SystemUpdatePolicy.ValidationFailedException.combinedPeriodTooLong("Combined freeze period exceeds maximum days: " + jDistanceWithoutLeapYear2 + ", " + str);
     }
 }

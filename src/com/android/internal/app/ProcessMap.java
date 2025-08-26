@@ -34,11 +34,11 @@ public class ProcessMap<E> {
         if (sparseArray == null) {
             return null;
         }
-        E removeReturnOld = sparseArray.removeReturnOld(i);
+        E eRemoveReturnOld = sparseArray.removeReturnOld(i);
         if (sparseArray.size() == 0) {
             this.mMap.remove(str);
         }
-        return removeReturnOld;
+        return eRemoveReturnOld;
     }
 
     public ArrayMap<String, SparseArray<E>> getMap() {

@@ -33,7 +33,7 @@ public class DesktopModeStrategy implements InitializationStrategy, DisposingStr
         this.mDesktopModeManager.registerModeChangedListener(new Runnable() { // from class: com.samsung.android.globalactions.features.DesktopModeStrategy$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                DesktopModeStrategy.this.lambda$onInitialize$0();
+                this.f$0.lambda$onInitialize$0();
             }
         });
     }

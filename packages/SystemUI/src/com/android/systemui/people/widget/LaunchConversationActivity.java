@@ -32,7 +32,6 @@ import com.android.wm.shell.bubbles.BubbleEntry;
 import java.util.Optional;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class LaunchConversationActivity extends Activity {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -66,9 +65,9 @@ public class LaunchConversationActivity extends Activity {
                         BubbleController.this.mMainExecutor.execute(new BubbleController$$ExternalSyntheticLambda14(2, bubblesImpl, bubble));
                     } else if (launchConversationActivity.mEntryToBubble != null) {
                         BubblesManager bubblesManager2 = (BubblesManager) launchConversationActivity.mBubblesManagerOptional.get();
-                        BubbleEntry notifToBubbleEntry = bubblesManager2.notifToBubbleEntry(launchConversationActivity.mEntryToBubble);
+                        BubbleEntry bubbleEntryNotifToBubbleEntry = bubblesManager2.notifToBubbleEntry(launchConversationActivity.mEntryToBubble);
                         BubbleController.BubblesImpl bubblesImpl2 = (BubbleController.BubblesImpl) bubblesManager2.mBubbles;
-                        BubbleController.this.mMainExecutor.execute(new BubbleController$BubblesImpl$$ExternalSyntheticLambda4(bubblesImpl2, notifToBubbleEntry, 1));
+                        BubbleController.this.mMainExecutor.execute(new BubbleController$BubblesImpl$$ExternalSyntheticLambda4(bubblesImpl2, bubbleEntryNotifToBubbleEntry, 1));
                     }
                 }
                 launchConversationActivity.mCommandQueue.removeCallback((CommandQueue.Callbacks) this);
@@ -83,16 +82,16 @@ public class LaunchConversationActivity extends Activity {
         if (TextUtils.isEmpty(str) || this.mIStatusBarService == null || (commonNotifCollection = this.mCommonNotifCollection) == null || (entry = ((NotifPipeline) commonNotifCollection).mNotifCollection.getEntry(str)) == null || entry.mRanking == null) {
             return;
         }
-        final NotificationVisibility obtain = ((NotificationVisibilityProviderImpl) this.mVisibilityProvider).obtain(entry);
-        int i = obtain.rank;
+        final NotificationVisibility notificationVisibilityObtain = ((NotificationVisibilityProviderImpl) this.mVisibilityProvider).obtain(entry);
+        int i = notificationVisibilityObtain.rank;
         this.mBgExecutor.execute(new Runnable() { // from class: com.android.systemui.people.widget.LaunchConversationActivity$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                LaunchConversationActivity launchConversationActivity = LaunchConversationActivity.this;
+                LaunchConversationActivity launchConversationActivity = this.f$0;
                 String str3 = str2;
                 UserHandle userHandle2 = userHandle;
                 String str4 = str;
-                NotificationVisibility notificationVisibility = obtain;
+                NotificationVisibility notificationVisibility = notificationVisibilityObtain;
                 int i2 = LaunchConversationActivity.$r8$clinit;
                 launchConversationActivity.getClass();
                 try {

@@ -32,11 +32,11 @@ public final class ImsConfigurationTracker {
         if (this.mInitialized) {
             boolean z = Flags.handleAllConfigChanges() && (this.mHandledConfigChanges & 134217728) != 0;
             Configuration configuration2 = this.mLastKnownConfig;
-            int diffPublicOnly = configuration2 != null ? configuration2.diffPublicOnly(configuration) : -1;
-            if (((~this.mHandledConfigChanges) & diffPublicOnly) != 0 && !z) {
+            int iDiffPublicOnly = configuration2 != null ? configuration2.diffPublicOnly(configuration) : -1;
+            if (((~this.mHandledConfigChanges) & iDiffPublicOnly) != 0 && !z) {
                 runnable.run();
             }
-            if (diffPublicOnly != 0) {
+            if (iDiffPublicOnly != 0) {
                 this.mLastKnownConfig = new Configuration(configuration);
             }
         }

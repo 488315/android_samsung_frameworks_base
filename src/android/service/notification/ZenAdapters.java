@@ -54,10 +54,10 @@ public class ZenAdapters {
     }
 
     public static ZenPolicy notificationPolicyToZenPolicy(NotificationManager.Policy policy) {
-        ZenPolicy.Builder allowPriorityChannels = new ZenPolicy.Builder().allowAlarms(policy.allowAlarms()).allowCalls(policy.allowCalls() ? prioritySendersToPeopleType(policy.allowCallsFrom()) : 4).allowConversations(policy.allowConversations() ? notificationPolicyConversationSendersToZenPolicy(policy.allowConversationsFrom()) : 3).allowEvents(policy.allowEvents()).allowMedia(policy.allowMedia()).allowMessages(policy.allowMessages() ? prioritySendersToPeopleType(policy.allowMessagesFrom()) : 4).allowReminders(policy.allowReminders()).allowRepeatCallers(policy.allowRepeatCallers()).allowSystem(policy.allowSystem()).allowPriorityChannels(policy.allowPriorityChannels());
+        ZenPolicy.Builder builderAllowPriorityChannels = new ZenPolicy.Builder().allowAlarms(policy.allowAlarms()).allowCalls(policy.allowCalls() ? prioritySendersToPeopleType(policy.allowCallsFrom()) : 4).allowConversations(policy.allowConversations() ? notificationPolicyConversationSendersToZenPolicy(policy.allowConversationsFrom()) : 3).allowEvents(policy.allowEvents()).allowMedia(policy.allowMedia()).allowMessages(policy.allowMessages() ? prioritySendersToPeopleType(policy.allowMessagesFrom()) : 4).allowReminders(policy.allowReminders()).allowRepeatCallers(policy.allowRepeatCallers()).allowSystem(policy.allowSystem()).allowPriorityChannels(policy.allowPriorityChannels());
         if (policy.suppressedVisualEffects != -1) {
-            allowPriorityChannels.showBadges(policy.showBadges()).showFullScreenIntent(policy.showFullScreenIntents()).showInAmbientDisplay(policy.showAmbient()).showInNotificationList(policy.showInNotificationList()).showLights(policy.showLights()).showPeeking(policy.showPeeking()).showStatusBarIcons(policy.showStatusBarIcons());
+            builderAllowPriorityChannels.showBadges(policy.showBadges()).showFullScreenIntent(policy.showFullScreenIntents()).showInAmbientDisplay(policy.showAmbient()).showInNotificationList(policy.showInNotificationList()).showLights(policy.showLights()).showPeeking(policy.showPeeking()).showStatusBarIcons(policy.showStatusBarIcons());
         }
-        return allowPriorityChannels.build();
+        return builderAllowPriorityChannels.build();
     }
 }

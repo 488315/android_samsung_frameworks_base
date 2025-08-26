@@ -42,9 +42,9 @@ public final class SystemFeaturesCache {
         this.mSdkFeatureVersions = iArr;
         Arrays.fill(iArr, Integer.MIN_VALUE);
         for (FeatureInfo featureInfo : collection) {
-            int maybeGetSdkFeatureIndex = PackageManager.maybeGetSdkFeatureIndex(featureInfo.name);
-            if (maybeGetSdkFeatureIndex >= 0) {
-                this.mSdkFeatureVersions[maybeGetSdkFeatureIndex] = featureInfo.version;
+            int iMaybeGetSdkFeatureIndex = PackageManager.maybeGetSdkFeatureIndex(featureInfo.name);
+            if (iMaybeGetSdkFeatureIndex >= 0) {
+                this.mSdkFeatureVersions[iMaybeGetSdkFeatureIndex] = featureInfo.version;
             }
         }
     }
@@ -61,13 +61,13 @@ public final class SystemFeaturesCache {
     }
 
     public Boolean maybeHasFeature(String str, int i) {
-        int maybeGetSdkFeatureIndex = PackageManager.maybeGetSdkFeatureIndex(str);
-        if (maybeGetSdkFeatureIndex < 0) {
+        int iMaybeGetSdkFeatureIndex = PackageManager.maybeGetSdkFeatureIndex(str);
+        if (iMaybeGetSdkFeatureIndex < 0) {
             return null;
         }
-        if (i == Integer.MIN_VALUE && this.mSdkFeatureVersions[maybeGetSdkFeatureIndex] == Integer.MIN_VALUE) {
+        if (i == Integer.MIN_VALUE && this.mSdkFeatureVersions[iMaybeGetSdkFeatureIndex] == Integer.MIN_VALUE) {
             return null;
         }
-        return Boolean.valueOf(this.mSdkFeatureVersions[maybeGetSdkFeatureIndex] >= i);
+        return Boolean.valueOf(this.mSdkFeatureVersions[iMaybeGetSdkFeatureIndex] >= i);
     }
 }

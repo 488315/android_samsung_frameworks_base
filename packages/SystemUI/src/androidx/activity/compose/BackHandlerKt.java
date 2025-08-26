@@ -20,7 +20,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class BackHandlerKt {
     public static final void BackHandler(final boolean z, final Function0 function0, Composer composer, final int i, final int i2) {
@@ -49,24 +48,24 @@ public abstract class BackHandlerKt {
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventStart("androidx.activity.compose.BackHandler (BackHandler.kt:81)");
             }
-            final MutableState rememberUpdatedState = SnapshotStateKt.rememberUpdatedState(function0, composerImpl);
-            Object rememberedValue = composerImpl.rememberedValue();
+            final MutableState mutableStateRememberUpdatedState = SnapshotStateKt.rememberUpdatedState(function0, composerImpl);
+            Object objRememberedValue = composerImpl.rememberedValue();
             Composer.Companion.getClass();
             Composer$Companion$Empty$1 composer$Companion$Empty$1 = Composer.Companion.Empty;
-            if (rememberedValue == composer$Companion$Empty$1) {
-                rememberedValue = new OnBackPressedCallback(z) { // from class: androidx.activity.compose.BackHandlerKt$BackHandler$backCallback$1$1
+            if (objRememberedValue == composer$Companion$Empty$1) {
+                objRememberedValue = new OnBackPressedCallback(z) { // from class: androidx.activity.compose.BackHandlerKt$BackHandler$backCallback$1$1
                     @Override // androidx.activity.OnBackPressedCallback
                     public final void handleOnBackPressed() {
-                        ((Function0) rememberUpdatedState.getValue()).invoke();
+                        ((Function0) mutableStateRememberUpdatedState.getValue()).invoke();
                     }
                 };
-                composerImpl.updateRememberedValue(rememberedValue);
+                composerImpl.updateRememberedValue(objRememberedValue);
             }
-            final BackHandlerKt$BackHandler$backCallback$1$1 backHandlerKt$BackHandler$backCallback$1$1 = (BackHandlerKt$BackHandler$backCallback$1$1) rememberedValue;
+            final BackHandlerKt$BackHandler$backCallback$1$1 backHandlerKt$BackHandler$backCallback$1$1 = (BackHandlerKt$BackHandler$backCallback$1$1) objRememberedValue;
             boolean z2 = (i3 & 14) == 4;
-            Object rememberedValue2 = composerImpl.rememberedValue();
-            if (z2 || rememberedValue2 == composer$Companion$Empty$1) {
-                rememberedValue2 = new Function0() { // from class: androidx.activity.compose.BackHandlerKt$BackHandler$1$1
+            Object objRememberedValue2 = composerImpl.rememberedValue();
+            if (z2 || objRememberedValue2 == composer$Companion$Empty$1) {
+                objRememberedValue2 = new Function0() { // from class: androidx.activity.compose.BackHandlerKt$BackHandler$1$1
                     /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(0);
@@ -75,7 +74,7 @@ public abstract class BackHandlerKt {
                     /* JADX WARN: Type inference failed for: r1v2, types: [kotlin.jvm.functions.Function0, kotlin.jvm.internal.FunctionReferenceImpl] */
                     @Override // kotlin.jvm.functions.Function0
                     public final Object invoke() {
-                        BackHandlerKt$BackHandler$backCallback$1$1 backHandlerKt$BackHandler$backCallback$1$12 = BackHandlerKt$BackHandler$backCallback$1$1.this;
+                        BackHandlerKt$BackHandler$backCallback$1$1 backHandlerKt$BackHandler$backCallback$1$12 = backHandlerKt$BackHandler$backCallback$1$1;
                         backHandlerKt$BackHandler$backCallback$1$12.isEnabled = z;
                         ?? r1 = backHandlerKt$BackHandler$backCallback$1$12.enabledChangedCallback;
                         if (r1 != 0) {
@@ -84,9 +83,9 @@ public abstract class BackHandlerKt {
                         return Unit.INSTANCE;
                     }
                 };
-                composerImpl.updateRememberedValue(rememberedValue2);
+                composerImpl.updateRememberedValue(objRememberedValue2);
             }
-            EffectsKt.SideEffect((Function0) rememberedValue2, composerImpl);
+            EffectsKt.SideEffect((Function0) objRememberedValue2, composerImpl);
             LocalOnBackPressedDispatcherOwner.INSTANCE.getClass();
             OnBackPressedDispatcherOwner current = LocalOnBackPressedDispatcherOwner.getCurrent(composerImpl);
             if (current == null) {
@@ -94,10 +93,10 @@ public abstract class BackHandlerKt {
             }
             final OnBackPressedDispatcher onBackPressedDispatcher = current.getOnBackPressedDispatcher();
             final LifecycleOwner lifecycleOwner = (LifecycleOwner) composerImpl.consume(AndroidCompositionLocals_androidKt.getLocalLifecycleOwner());
-            boolean changedInstance = composerImpl.changedInstance(onBackPressedDispatcher) | composerImpl.changedInstance(lifecycleOwner);
-            Object rememberedValue3 = composerImpl.rememberedValue();
-            if (changedInstance || rememberedValue3 == composer$Companion$Empty$1) {
-                rememberedValue3 = new Function1() { // from class: androidx.activity.compose.BackHandlerKt$BackHandler$2$1
+            boolean zChangedInstance = composerImpl.changedInstance(onBackPressedDispatcher) | composerImpl.changedInstance(lifecycleOwner);
+            Object objRememberedValue3 = composerImpl.rememberedValue();
+            if (zChangedInstance || objRememberedValue3 == composer$Companion$Empty$1) {
+                objRememberedValue3 = new Function1() { // from class: androidx.activity.compose.BackHandlerKt$BackHandler$2$1
                     /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(1);
@@ -105,8 +104,8 @@ public abstract class BackHandlerKt {
 
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
-                        OnBackPressedDispatcher.this.addCallback(lifecycleOwner, backHandlerKt$BackHandler$backCallback$1$1);
+                    public final Object mo781invoke(Object obj) {
+                        onBackPressedDispatcher.addCallback(lifecycleOwner, backHandlerKt$BackHandler$backCallback$1$1);
                         final BackHandlerKt$BackHandler$backCallback$1$1 backHandlerKt$BackHandler$backCallback$1$12 = backHandlerKt$BackHandler$backCallback$1$1;
                         return new DisposableEffectResult() { // from class: androidx.activity.compose.BackHandlerKt$BackHandler$2$1$invoke$$inlined$onDispose$1
                             @Override // androidx.compose.runtime.DisposableEffectResult
@@ -116,16 +115,16 @@ public abstract class BackHandlerKt {
                         };
                     }
                 };
-                composerImpl.updateRememberedValue(rememberedValue3);
+                composerImpl.updateRememberedValue(objRememberedValue3);
             }
-            EffectsKt.DisposableEffect(lifecycleOwner, onBackPressedDispatcher, (Function1) rememberedValue3, composerImpl);
+            EffectsKt.DisposableEffect(lifecycleOwner, onBackPressedDispatcher, (Function1) objRememberedValue3, composerImpl);
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventEnd();
             }
         }
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
-            endRestartGroup.block = new Function2() { // from class: androidx.activity.compose.BackHandlerKt$BackHandler$3
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new Function2() { // from class: androidx.activity.compose.BackHandlerKt.BackHandler.3
                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);

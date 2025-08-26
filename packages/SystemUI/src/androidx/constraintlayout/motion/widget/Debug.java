@@ -1,10 +1,10 @@
 package androidx.constraintlayout.motion.widget;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
 import android.view.View;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class Debug {
     public static String getLoc() {
@@ -27,7 +27,7 @@ public class Debug {
 
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Type inference failed for: r1v3, types: [java.lang.String] */
-    public static String getName(int i, Context context) {
+    public static String getName(int i, Context context) throws Resources.NotFoundException {
         if (i != -1) {
             try {
                 i = context.getResources().getResourceEntryName(i);

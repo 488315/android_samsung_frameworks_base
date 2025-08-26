@@ -4,11 +4,11 @@ import kotlin.enums.EnumEntriesKt;
 
 /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
 /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class SeslAlertDialogColorSchemeKeyTokens implements SeslColorSchemeKeyTokens {
     public static final /* synthetic */ SeslAlertDialogColorSchemeKeyTokens[] $VALUES;
     public static final SeslAlertDialogColorSchemeKeyTokens ButtonTextColor;
+    public static final SeslAlertDialogColorSchemeKeyTokens ListTextColor;
     public static final SeslAlertDialogColorSchemeKeyTokens MessageTextColor;
     public static final SeslAlertDialogColorSchemeKeyTokens TitleTextColor;
 
@@ -19,7 +19,9 @@ public final class SeslAlertDialogColorSchemeKeyTokens implements SeslColorSchem
         MessageTextColor = seslAlertDialogColorSchemeKeyTokens2;
         SeslAlertDialogColorSchemeKeyTokens seslAlertDialogColorSchemeKeyTokens3 = new SeslAlertDialogColorSchemeKeyTokens("ButtonTextColor", 2);
         ButtonTextColor = seslAlertDialogColorSchemeKeyTokens3;
-        SeslAlertDialogColorSchemeKeyTokens[] seslAlertDialogColorSchemeKeyTokensArr = {seslAlertDialogColorSchemeKeyTokens, seslAlertDialogColorSchemeKeyTokens2, seslAlertDialogColorSchemeKeyTokens3};
+        SeslAlertDialogColorSchemeKeyTokens seslAlertDialogColorSchemeKeyTokens4 = new SeslAlertDialogColorSchemeKeyTokens("ListTextColor", 3);
+        ListTextColor = seslAlertDialogColorSchemeKeyTokens4;
+        SeslAlertDialogColorSchemeKeyTokens[] seslAlertDialogColorSchemeKeyTokensArr = {seslAlertDialogColorSchemeKeyTokens, seslAlertDialogColorSchemeKeyTokens2, seslAlertDialogColorSchemeKeyTokens3, seslAlertDialogColorSchemeKeyTokens4};
         $VALUES = seslAlertDialogColorSchemeKeyTokensArr;
         EnumEntriesKt.enumEntries(seslAlertDialogColorSchemeKeyTokensArr);
     }

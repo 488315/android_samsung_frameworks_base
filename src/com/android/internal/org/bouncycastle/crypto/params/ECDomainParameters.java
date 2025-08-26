@@ -105,12 +105,12 @@ public class ECDomainParameters implements ECConstants {
         if (eCPoint == null) {
             throw new NullPointerException("Point cannot be null");
         }
-        ECPoint normalize = ECAlgorithms.importPoint(eCCurve, eCPoint).normalize();
-        if (normalize.isInfinity()) {
+        ECPoint eCPointNormalize = ECAlgorithms.importPoint(eCCurve, eCPoint).normalize();
+        if (eCPointNormalize.isInfinity()) {
             throw new IllegalArgumentException("Point at infinity");
         }
-        if (normalize.isValid()) {
-            return normalize;
+        if (eCPointNormalize.isValid()) {
+            return eCPointNormalize;
         }
         throw new IllegalArgumentException("Point not on curve");
     }

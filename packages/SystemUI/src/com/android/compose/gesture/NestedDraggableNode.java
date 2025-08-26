@@ -28,15 +28,20 @@ import com.android.compose.gesture.NestedDraggable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import kotlin.NoWhenBranchMatchedException;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
+import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.BuildersKt;
+import kotlinx.coroutines.CompletableDeferred;
+import kotlinx.coroutines.CompletableDeferredImpl;
+import kotlinx.coroutines.CompletableDeferredKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class NestedDraggableNode extends DelegatingNode implements PointerInputModifierNode, NestedScrollConnection, CompositionLocalConsumerModifierNode {
     public final SuspendingPointerInputModifierNode detectDragsDelegate;
@@ -53,7 +58,6 @@ public final class NestedDraggableNode extends DelegatingNode implements Pointer
     public final SuspendingPointerInputModifierNode trackDownPositionDelegate;
     public final SuspendingPointerInputModifierNode trackWheelScroll;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class NestedScrollController {
         public final NestedDraggable.Controller controller;
         public final OverscrollEffect overscrollEffect;
@@ -67,94 +71,65 @@ public final class NestedDraggableNode extends DelegatingNode implements Pointer
             BuildersKt.launch$default(NestedDraggableNode.this.nestedScrollDispatcher.getCoroutineScope(), null, null, new NestedDraggableNode$NestedScrollController$ensureOnDragStoppedIsCalled$1(this, null), 3);
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:24:0x0038  */
-        /* JADX WARN: Removed duplicated region for block: B:9:0x0023  */
+        /* JADX WARN: Removed duplicated region for block: B:8:0x0014  */
         /* renamed from: flingWithOverscroll-QWom1Mo, reason: not valid java name */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final java.lang.Object m935flingWithOverscrollQWom1Mo(long r9, kotlin.coroutines.jvm.internal.ContinuationImpl r11) {
-            /*
-                r8 = this;
-                boolean r0 = r11 instanceof com.android.compose.gesture.NestedDraggableNode$NestedScrollController$flingWithOverscroll$1
-                if (r0 == 0) goto L14
-                r0 = r11
-                com.android.compose.gesture.NestedDraggableNode$NestedScrollController$flingWithOverscroll$1 r0 = (com.android.compose.gesture.NestedDraggableNode$NestedScrollController$flingWithOverscroll$1) r0
-                int r1 = r0.label
-                r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                r3 = r1 & r2
-                if (r3 == 0) goto L14
-                int r1 = r1 - r2
-                r0.label = r1
-            L12:
-                r6 = r0
-                goto L1a
-            L14:
-                com.android.compose.gesture.NestedDraggableNode$NestedScrollController$flingWithOverscroll$1 r0 = new com.android.compose.gesture.NestedDraggableNode$NestedScrollController$flingWithOverscroll$1
-                r0.<init>(r8, r11)
-                goto L12
-            L1a:
-                java.lang.Object r11 = r6.result
-                kotlin.coroutines.intrinsics.CoroutineSingletons r0 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                int r1 = r6.label
-                r2 = 1
-                if (r1 == 0) goto L38
-                if (r1 != r2) goto L30
-                java.lang.Object r8 = r6.L$0
-                kotlinx.coroutines.CompletableDeferred r8 = (kotlinx.coroutines.CompletableDeferred) r8
-                kotlin.ResultKt.throwOnFailure(r11)     // Catch: java.lang.Throwable -> L2d
-                goto L59
-            L2d:
-                r0 = move-exception
-                r9 = r0
-                goto L6e
-            L30:
-                java.lang.IllegalStateException r8 = new java.lang.IllegalStateException
-                java.lang.String r9 = "call to 'resume' before 'invoke' with coroutine"
-                r8.<init>(r9)
-                throw r8
-            L38:
-                kotlin.ResultKt.throwOnFailure(r11)
-                kotlinx.coroutines.CompletableDeferredImpl r11 = kotlinx.coroutines.CompletableDeferredKt.CompletableDeferred$default()
-                com.android.compose.gesture.NestedDraggableNode r1 = com.android.compose.gesture.NestedDraggableNode.this     // Catch: java.lang.Throwable -> L6b
-                r3 = r2
-                androidx.compose.foundation.OverscrollEffect r2 = r8.overscrollEffect     // Catch: java.lang.Throwable -> L6b
-                com.android.compose.gesture.NestedDraggableNode$NestedScrollController$flingWithOverscroll$2 r5 = new com.android.compose.gesture.NestedDraggableNode$NestedScrollController$flingWithOverscroll$2     // Catch: java.lang.Throwable -> L6b
-                r4 = 0
-                r5.<init>(r1, r8, r11, r4)     // Catch: java.lang.Throwable -> L6b
-                r6.L$0 = r11     // Catch: java.lang.Throwable -> L6b
-                r6.label = r3     // Catch: java.lang.Throwable -> L6b
-                r3 = r9
-                java.lang.Object r8 = r1.m929flingWithOverscrollxgHb9do(r2, r3, r5, r6)     // Catch: java.lang.Throwable -> L6b
-                if (r8 != r0) goto L56
-                return r0
-            L56:
-                r7 = r11
-                r11 = r8
-                r8 = r7
-            L59:
-                androidx.compose.ui.unit.Velocity r11 = (androidx.compose.ui.unit.Velocity) r11     // Catch: java.lang.Throwable -> L2d
-                long r9 = r11.packedValue     // Catch: java.lang.Throwable -> L2d
-                kotlin.Unit r11 = kotlin.Unit.INSTANCE
-                kotlinx.coroutines.CompletableDeferredImpl r8 = (kotlinx.coroutines.CompletableDeferredImpl) r8
-                r8.makeCompleting$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host(r11)
-                androidx.compose.ui.unit.Velocity r8 = androidx.compose.ui.unit.Velocity.m876boximpl(r9)
-                return r8
-            L69:
-                r8 = r11
-                goto L6e
-            L6b:
-                r0 = move-exception
-                r9 = r0
-                goto L69
-            L6e:
-                kotlin.Unit r10 = kotlin.Unit.INSTANCE
-                kotlinx.coroutines.CompletableDeferredImpl r8 = (kotlinx.coroutines.CompletableDeferredImpl) r8
-                r8.makeCompleting$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host(r10)
-                throw r9
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.compose.gesture.NestedDraggableNode.NestedScrollController.m935flingWithOverscrollQWom1Mo(long, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+        public final Object m937flingWithOverscrollQWom1Mo(long j, ContinuationImpl continuationImpl) {
+            NestedDraggableNode$NestedScrollController$flingWithOverscroll$1 nestedDraggableNode$NestedScrollController$flingWithOverscroll$1;
+            Throwable th;
+            CompletableDeferred completableDeferred;
+            if (continuationImpl instanceof NestedDraggableNode$NestedScrollController$flingWithOverscroll$1) {
+                nestedDraggableNode$NestedScrollController$flingWithOverscroll$1 = (NestedDraggableNode$NestedScrollController$flingWithOverscroll$1) continuationImpl;
+                int i = nestedDraggableNode$NestedScrollController$flingWithOverscroll$1.label;
+                if ((i & Integer.MIN_VALUE) != 0) {
+                    nestedDraggableNode$NestedScrollController$flingWithOverscroll$1.label = i - Integer.MIN_VALUE;
+                } else {
+                    nestedDraggableNode$NestedScrollController$flingWithOverscroll$1 = new NestedDraggableNode$NestedScrollController$flingWithOverscroll$1(this, continuationImpl);
+                }
+            }
+            NestedDraggableNode$NestedScrollController$flingWithOverscroll$1 nestedDraggableNode$NestedScrollController$flingWithOverscroll$12 = nestedDraggableNode$NestedScrollController$flingWithOverscroll$1;
+            Object obj = nestedDraggableNode$NestedScrollController$flingWithOverscroll$12.result;
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i2 = nestedDraggableNode$NestedScrollController$flingWithOverscroll$12.label;
+            if (i2 == 0) {
+                ResultKt.throwOnFailure(obj);
+                CompletableDeferredImpl completableDeferredImplCompletableDeferred$default = CompletableDeferredKt.CompletableDeferred$default();
+                try {
+                    NestedDraggableNode nestedDraggableNode = NestedDraggableNode.this;
+                    OverscrollEffect overscrollEffect = this.overscrollEffect;
+                    NestedDraggableNode$NestedScrollController$flingWithOverscroll$2 nestedDraggableNode$NestedScrollController$flingWithOverscroll$2 = new NestedDraggableNode$NestedScrollController$flingWithOverscroll$2(nestedDraggableNode, this, completableDeferredImplCompletableDeferred$default, null);
+                    nestedDraggableNode$NestedScrollController$flingWithOverscroll$12.L$0 = completableDeferredImplCompletableDeferred$default;
+                    nestedDraggableNode$NestedScrollController$flingWithOverscroll$12.label = 1;
+                    Object objM931flingWithOverscrollxgHb9do = nestedDraggableNode.m931flingWithOverscrollxgHb9do(overscrollEffect, j, nestedDraggableNode$NestedScrollController$flingWithOverscroll$2, nestedDraggableNode$NestedScrollController$flingWithOverscroll$12);
+                    if (objM931flingWithOverscrollxgHb9do == coroutineSingletons) {
+                        return coroutineSingletons;
+                    }
+                    obj = objM931flingWithOverscrollxgHb9do;
+                    completableDeferred = completableDeferredImplCompletableDeferred$default;
+                } catch (Throwable th2) {
+                    th = th2;
+                    completableDeferred = completableDeferredImplCompletableDeferred$default;
+                    ((CompletableDeferredImpl) completableDeferred).makeCompleting$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host(Unit.INSTANCE);
+                    throw th;
+                }
+            } else {
+                if (i2 != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                completableDeferred = (CompletableDeferred) nestedDraggableNode$NestedScrollController$flingWithOverscroll$12.L$0;
+                try {
+                    ResultKt.throwOnFailure(obj);
+                } catch (Throwable th3) {
+                    th = th3;
+                    ((CompletableDeferredImpl) completableDeferred).makeCompleting$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host(Unit.INSTANCE);
+                    throw th;
+                }
+            }
+            long j2 = ((Velocity) obj).packedValue;
+            ((CompletableDeferredImpl) completableDeferred).makeCompleting$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host(Unit.INSTANCE);
+            return Velocity.m878boximpl(j2);
         }
     }
 
@@ -165,255 +140,201 @@ public final class NestedDraggableNode extends DelegatingNode implements Pointer
         this.nestedDragsEnabled = z;
         NestedScrollDispatcher nestedScrollDispatcher = new NestedScrollDispatcher();
         this.nestedScrollDispatcher = nestedScrollDispatcher;
-        SuspendingPointerInputModifierNodeImpl SuspendingPointerInputModifierNode = SuspendingPointerInputFilterKt.SuspendingPointerInputModifierNode(new PointerInputEventHandler() { // from class: com.android.compose.gesture.NestedDraggableNode$trackWheelScroll$1
+        SuspendingPointerInputModifierNodeImpl suspendingPointerInputModifierNodeImplSuspendingPointerInputModifierNode = SuspendingPointerInputFilterKt.SuspendingPointerInputModifierNode(new PointerInputEventHandler() { // from class: com.android.compose.gesture.NestedDraggableNode$trackWheelScroll$1
             @Override // androidx.compose.ui.input.pointer.PointerInputEventHandler
             public final Object invoke(PointerInputScope pointerInputScope, Continuation continuation) {
-                NestedDraggableNode nestedDraggableNode = NestedDraggableNode.this;
+                NestedDraggableNode nestedDraggableNode = this.this$0;
                 nestedDraggableNode.getClass();
-                Object awaitEachGesture = ForEachGestureKt.awaitEachGesture(pointerInputScope, new NestedDraggableNode$trackWheelScroll$3(nestedDraggableNode, null), continuation);
+                Object objAwaitEachGesture = ForEachGestureKt.awaitEachGesture(pointerInputScope, new NestedDraggableNode$trackWheelScroll$3(nestedDraggableNode, null), continuation);
                 CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
-                if (awaitEachGesture != coroutineSingletons) {
-                    awaitEachGesture = Unit.INSTANCE;
+                if (objAwaitEachGesture != coroutineSingletons) {
+                    objAwaitEachGesture = Unit.INSTANCE;
                 }
-                return awaitEachGesture == coroutineSingletons ? awaitEachGesture : Unit.INSTANCE;
+                return objAwaitEachGesture == coroutineSingletons ? objAwaitEachGesture : Unit.INSTANCE;
             }
         });
-        delegate(SuspendingPointerInputModifierNode);
-        this.trackWheelScroll = SuspendingPointerInputModifierNode;
-        SuspendingPointerInputModifierNodeImpl SuspendingPointerInputModifierNode2 = SuspendingPointerInputFilterKt.SuspendingPointerInputModifierNode(new PointerInputEventHandler() { // from class: com.android.compose.gesture.NestedDraggableNode$trackDownPositionDelegate$1
+        delegate(suspendingPointerInputModifierNodeImplSuspendingPointerInputModifierNode);
+        this.trackWheelScroll = suspendingPointerInputModifierNodeImplSuspendingPointerInputModifierNode;
+        SuspendingPointerInputModifierNodeImpl suspendingPointerInputModifierNodeImplSuspendingPointerInputModifierNode2 = SuspendingPointerInputFilterKt.SuspendingPointerInputModifierNode(new PointerInputEventHandler() { // from class: com.android.compose.gesture.NestedDraggableNode$trackDownPositionDelegate$1
             @Override // androidx.compose.ui.input.pointer.PointerInputEventHandler
             public final Object invoke(PointerInputScope pointerInputScope, Continuation continuation) {
-                NestedDraggableNode nestedDraggableNode = NestedDraggableNode.this;
+                NestedDraggableNode nestedDraggableNode = this.this$0;
                 nestedDraggableNode.getClass();
-                Object awaitEachGesture = ForEachGestureKt.awaitEachGesture(pointerInputScope, new NestedDraggableNode$trackDownPosition$2(nestedDraggableNode, null), continuation);
+                Object objAwaitEachGesture = ForEachGestureKt.awaitEachGesture(pointerInputScope, new NestedDraggableNode$trackDownPosition$2(nestedDraggableNode, null), continuation);
                 CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
-                if (awaitEachGesture != coroutineSingletons) {
-                    awaitEachGesture = Unit.INSTANCE;
+                if (objAwaitEachGesture != coroutineSingletons) {
+                    objAwaitEachGesture = Unit.INSTANCE;
                 }
-                return awaitEachGesture == coroutineSingletons ? awaitEachGesture : Unit.INSTANCE;
+                return objAwaitEachGesture == coroutineSingletons ? objAwaitEachGesture : Unit.INSTANCE;
             }
         });
-        delegate(SuspendingPointerInputModifierNode2);
-        this.trackDownPositionDelegate = SuspendingPointerInputModifierNode2;
-        SuspendingPointerInputModifierNodeImpl SuspendingPointerInputModifierNode3 = SuspendingPointerInputFilterKt.SuspendingPointerInputModifierNode(new PointerInputEventHandler() { // from class: com.android.compose.gesture.NestedDraggableNode$detectDragsDelegate$1
+        delegate(suspendingPointerInputModifierNodeImplSuspendingPointerInputModifierNode2);
+        this.trackDownPositionDelegate = suspendingPointerInputModifierNodeImplSuspendingPointerInputModifierNode2;
+        SuspendingPointerInputModifierNodeImpl suspendingPointerInputModifierNodeImplSuspendingPointerInputModifierNode3 = SuspendingPointerInputFilterKt.SuspendingPointerInputModifierNode(new PointerInputEventHandler() { // from class: com.android.compose.gesture.NestedDraggableNode$detectDragsDelegate$1
             @Override // androidx.compose.ui.input.pointer.PointerInputEventHandler
             public final Object invoke(PointerInputScope pointerInputScope, Continuation continuation) {
-                NestedDraggableNode nestedDraggableNode = NestedDraggableNode.this;
+                NestedDraggableNode nestedDraggableNode = this.this$0;
                 nestedDraggableNode.getClass();
-                Object awaitEachGesture = ForEachGestureKt.awaitEachGesture(pointerInputScope, new NestedDraggableNode$detectDrags$2(new VelocityTracker(), nestedDraggableNode, null), continuation);
+                Object objAwaitEachGesture = ForEachGestureKt.awaitEachGesture(pointerInputScope, new NestedDraggableNode$detectDrags$2(new VelocityTracker(), nestedDraggableNode, null), continuation);
                 CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
-                if (awaitEachGesture != coroutineSingletons) {
-                    awaitEachGesture = Unit.INSTANCE;
+                if (objAwaitEachGesture != coroutineSingletons) {
+                    objAwaitEachGesture = Unit.INSTANCE;
                 }
-                return awaitEachGesture == coroutineSingletons ? awaitEachGesture : Unit.INSTANCE;
+                return objAwaitEachGesture == coroutineSingletons ? objAwaitEachGesture : Unit.INSTANCE;
             }
         });
-        delegate(SuspendingPointerInputModifierNode3);
-        this.detectDragsDelegate = SuspendingPointerInputModifierNode3;
+        delegate(suspendingPointerInputModifierNodeImplSuspendingPointerInputModifierNode3);
+        this.detectDragsDelegate = suspendingPointerInputModifierNodeImplSuspendingPointerInputModifierNode3;
         this.pointersDown = new LinkedHashMap();
         delegate(new NestedScrollNode(this, nestedScrollDispatcher));
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:28:0x006c, code lost:
-    
-        if (r13 == r0) goto L28;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x00aa  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x008c  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x005b  */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0029  */
+    /* JADX WARN: Removed duplicated region for block: B:29:0x00aa  */
+    /* JADX WARN: Removed duplicated region for block: B:8:0x0017  */
     /* renamed from: access$flingWithNestedScroll-TK7Wm2c, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static final java.lang.Object m927access$flingWithNestedScrollTK7Wm2c(com.android.compose.gesture.NestedDraggableNode r9, long r10, kotlin.jvm.functions.Function2 r12, kotlin.coroutines.jvm.internal.ContinuationImpl r13) {
-        /*
-            r9.getClass()
-            boolean r0 = r13 instanceof com.android.compose.gesture.NestedDraggableNode$flingWithNestedScroll$1
-            if (r0 == 0) goto L17
-            r0 = r13
-            com.android.compose.gesture.NestedDraggableNode$flingWithNestedScroll$1 r0 = (com.android.compose.gesture.NestedDraggableNode$flingWithNestedScroll$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L17
-            int r1 = r1 - r2
-            r0.label = r1
-        L15:
-            r6 = r0
-            goto L1d
-        L17:
-            com.android.compose.gesture.NestedDraggableNode$flingWithNestedScroll$1 r0 = new com.android.compose.gesture.NestedDraggableNode$flingWithNestedScroll$1
-            r0.<init>(r9, r13)
-            goto L15
-        L1d:
-            java.lang.Object r13 = r6.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r0 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r1 = r6.label
-            r2 = 0
-            r3 = 3
-            r4 = 2
-            r5 = 1
-            if (r1 == 0) goto L5b
-            if (r1 == r5) goto L4c
-            if (r1 == r4) goto L40
-            if (r1 != r3) goto L38
-            long r9 = r6.J$1
-            long r11 = r6.J$0
-            kotlin.ResultKt.throwOnFailure(r13)
-            goto Lab
-        L38:
-            java.lang.IllegalStateException r9 = new java.lang.IllegalStateException
-            java.lang.String r10 = "call to 'resume' before 'invoke' with coroutine"
-            r9.<init>(r10)
-            throw r9
-        L40:
-            long r9 = r6.J$1
-            long r11 = r6.J$0
-            java.lang.Object r1 = r6.L$0
-            com.android.compose.gesture.NestedDraggableNode r1 = (com.android.compose.gesture.NestedDraggableNode) r1
-            kotlin.ResultKt.throwOnFailure(r13)
-            goto L8f
-        L4c:
-            long r10 = r6.J$0
-            java.lang.Object r9 = r6.L$1
-            r12 = r9
-            kotlin.jvm.functions.Function2 r12 = (kotlin.jvm.functions.Function2) r12
-            java.lang.Object r9 = r6.L$0
-            com.android.compose.gesture.NestedDraggableNode r9 = (com.android.compose.gesture.NestedDraggableNode) r9
-            kotlin.ResultKt.throwOnFailure(r13)
-            goto L6f
-        L5b:
-            kotlin.ResultKt.throwOnFailure(r13)
-            r6.L$0 = r9
-            r6.L$1 = r12
-            r6.J$0 = r10
-            r6.label = r5
-            androidx.compose.ui.input.nestedscroll.NestedScrollDispatcher r13 = r9.nestedScrollDispatcher
-            java.lang.Object r13 = r13.m582dispatchPreFlingQWom1Mo(r10, r6)
-            if (r13 != r0) goto L6f
-            goto La9
-        L6f:
-            androidx.compose.ui.unit.Velocity r13 = (androidx.compose.ui.unit.Velocity) r13
-            long r7 = r13.packedValue
-            long r10 = androidx.compose.ui.unit.Velocity.m880minusAH228Gc(r10, r7)
-            androidx.compose.ui.unit.Velocity r13 = androidx.compose.ui.unit.Velocity.m876boximpl(r10)
-            r6.L$0 = r9
-            r6.L$1 = r2
-            r6.J$0 = r7
-            r6.J$1 = r10
-            r6.label = r4
-            java.lang.Object r13 = r12.invoke(r13, r6)
-            if (r13 != r0) goto L8c
-            goto La9
-        L8c:
-            r1 = r9
-            r9 = r10
-            r11 = r7
-        L8f:
-            androidx.compose.ui.unit.Velocity r13 = (androidx.compose.ui.unit.Velocity) r13
-            long r4 = r13.packedValue
-            long r9 = androidx.compose.ui.unit.Velocity.m880minusAH228Gc(r9, r4)
-            androidx.compose.ui.input.nestedscroll.NestedScrollDispatcher r1 = r1.nestedScrollDispatcher
-            r6.L$0 = r2
-            r6.J$0 = r11
-            r6.J$1 = r4
-            r6.label = r3
-            r2 = r4
-            r4 = r9
-            java.lang.Object r13 = r1.m580dispatchPostFlingRZ2iAVY(r2, r4, r6)
-            if (r13 != r0) goto Laa
-        La9:
-            return r0
-        Laa:
-            r9 = r2
-        Lab:
-            androidx.compose.ui.unit.Velocity r13 = (androidx.compose.ui.unit.Velocity) r13
-            long r0 = r13.packedValue
-            long r9 = androidx.compose.ui.unit.Velocity.m881plusAH228Gc(r11, r9)
-            long r9 = androidx.compose.ui.unit.Velocity.m881plusAH228Gc(r9, r0)
-            androidx.compose.ui.unit.Velocity r9 = androidx.compose.ui.unit.Velocity.m876boximpl(r9)
-            return r9
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.compose.gesture.NestedDraggableNode.m927access$flingWithNestedScrollTK7Wm2c(com.android.compose.gesture.NestedDraggableNode, long, kotlin.jvm.functions.Function2, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public static final Object m929access$flingWithNestedScrollTK7Wm2c(NestedDraggableNode nestedDraggableNode, long j, Function2 function2, ContinuationImpl continuationImpl) {
+        NestedDraggableNode$flingWithNestedScroll$1 nestedDraggableNode$flingWithNestedScroll$1;
+        NestedDraggableNode nestedDraggableNode2;
+        long j2;
+        long j3;
+        long j4;
+        nestedDraggableNode.getClass();
+        if (continuationImpl instanceof NestedDraggableNode$flingWithNestedScroll$1) {
+            nestedDraggableNode$flingWithNestedScroll$1 = (NestedDraggableNode$flingWithNestedScroll$1) continuationImpl;
+            int i = nestedDraggableNode$flingWithNestedScroll$1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                nestedDraggableNode$flingWithNestedScroll$1.label = i - Integer.MIN_VALUE;
+            } else {
+                nestedDraggableNode$flingWithNestedScroll$1 = new NestedDraggableNode$flingWithNestedScroll$1(nestedDraggableNode, continuationImpl);
+            }
+        }
+        NestedDraggableNode$flingWithNestedScroll$1 nestedDraggableNode$flingWithNestedScroll$12 = nestedDraggableNode$flingWithNestedScroll$1;
+        Object objM584dispatchPreFlingQWom1Mo = nestedDraggableNode$flingWithNestedScroll$12.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = nestedDraggableNode$flingWithNestedScroll$12.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(objM584dispatchPreFlingQWom1Mo);
+            nestedDraggableNode$flingWithNestedScroll$12.L$0 = nestedDraggableNode;
+            nestedDraggableNode$flingWithNestedScroll$12.L$1 = function2;
+            nestedDraggableNode$flingWithNestedScroll$12.J$0 = j;
+            nestedDraggableNode$flingWithNestedScroll$12.label = 1;
+            objM584dispatchPreFlingQWom1Mo = nestedDraggableNode.nestedScrollDispatcher.m584dispatchPreFlingQWom1Mo(j, nestedDraggableNode$flingWithNestedScroll$12);
+            if (objM584dispatchPreFlingQWom1Mo != coroutineSingletons) {
+            }
+            return coroutineSingletons;
+        }
+        if (i2 != 1) {
+            if (i2 != 2) {
+                if (i2 != 3) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                j4 = nestedDraggableNode$flingWithNestedScroll$12.J$1;
+                j3 = nestedDraggableNode$flingWithNestedScroll$12.J$0;
+                ResultKt.throwOnFailure(objM584dispatchPreFlingQWom1Mo);
+                return Velocity.m878boximpl(Velocity.m883plusAH228Gc(Velocity.m883plusAH228Gc(j3, j4), ((Velocity) objM584dispatchPreFlingQWom1Mo).packedValue));
+            }
+            j2 = nestedDraggableNode$flingWithNestedScroll$12.J$1;
+            j3 = nestedDraggableNode$flingWithNestedScroll$12.J$0;
+            nestedDraggableNode2 = (NestedDraggableNode) nestedDraggableNode$flingWithNestedScroll$12.L$0;
+            ResultKt.throwOnFailure(objM584dispatchPreFlingQWom1Mo);
+            long j5 = ((Velocity) objM584dispatchPreFlingQWom1Mo).packedValue;
+            long jM882minusAH228Gc = Velocity.m882minusAH228Gc(j2, j5);
+            NestedScrollDispatcher nestedScrollDispatcher = nestedDraggableNode2.nestedScrollDispatcher;
+            nestedDraggableNode$flingWithNestedScroll$12.L$0 = null;
+            nestedDraggableNode$flingWithNestedScroll$12.J$0 = j3;
+            nestedDraggableNode$flingWithNestedScroll$12.J$1 = j5;
+            nestedDraggableNode$flingWithNestedScroll$12.label = 3;
+            objM584dispatchPreFlingQWom1Mo = nestedScrollDispatcher.m582dispatchPostFlingRZ2iAVY(j5, jM882minusAH228Gc, nestedDraggableNode$flingWithNestedScroll$12);
+            if (objM584dispatchPreFlingQWom1Mo != coroutineSingletons) {
+                j4 = j5;
+                return Velocity.m878boximpl(Velocity.m883plusAH228Gc(Velocity.m883plusAH228Gc(j3, j4), ((Velocity) objM584dispatchPreFlingQWom1Mo).packedValue));
+            }
+            return coroutineSingletons;
+        }
+        j = nestedDraggableNode$flingWithNestedScroll$12.J$0;
+        function2 = (Function2) nestedDraggableNode$flingWithNestedScroll$12.L$1;
+        nestedDraggableNode = (NestedDraggableNode) nestedDraggableNode$flingWithNestedScroll$12.L$0;
+        ResultKt.throwOnFailure(objM584dispatchPreFlingQWom1Mo);
+        long j6 = ((Velocity) objM584dispatchPreFlingQWom1Mo).packedValue;
+        long jM882minusAH228Gc2 = Velocity.m882minusAH228Gc(j, j6);
+        Velocity velocityM878boximpl = Velocity.m878boximpl(jM882minusAH228Gc2);
+        nestedDraggableNode$flingWithNestedScroll$12.L$0 = nestedDraggableNode;
+        nestedDraggableNode$flingWithNestedScroll$12.L$1 = null;
+        nestedDraggableNode$flingWithNestedScroll$12.J$0 = j6;
+        nestedDraggableNode$flingWithNestedScroll$12.J$1 = jM882minusAH228Gc2;
+        nestedDraggableNode$flingWithNestedScroll$12.label = 2;
+        objM584dispatchPreFlingQWom1Mo = function2.invoke(velocityM878boximpl, nestedDraggableNode$flingWithNestedScroll$12);
+        if (objM584dispatchPreFlingQWom1Mo != coroutineSingletons) {
+            nestedDraggableNode2 = nestedDraggableNode;
+            j2 = jM882minusAH228Gc2;
+            j3 = j6;
+            long j52 = ((Velocity) objM584dispatchPreFlingQWom1Mo).packedValue;
+            long jM882minusAH228Gc3 = Velocity.m882minusAH228Gc(j2, j52);
+            NestedScrollDispatcher nestedScrollDispatcher2 = nestedDraggableNode2.nestedScrollDispatcher;
+            nestedDraggableNode$flingWithNestedScroll$12.L$0 = null;
+            nestedDraggableNode$flingWithNestedScroll$12.J$0 = j3;
+            nestedDraggableNode$flingWithNestedScroll$12.J$1 = j52;
+            nestedDraggableNode$flingWithNestedScroll$12.label = 3;
+            objM584dispatchPreFlingQWom1Mo = nestedScrollDispatcher2.m582dispatchPostFlingRZ2iAVY(j52, jM882minusAH228Gc3, nestedDraggableNode$flingWithNestedScroll$12);
+            if (objM584dispatchPreFlingQWom1Mo != coroutineSingletons) {
+            }
+        }
+        return coroutineSingletons;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:21:0x0053, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:20:0x0053, code lost:
     
         if (r8.mo19applyToFlingBMRW4eQ(r5, r7, r0) == r1) goto L26;
      */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0038  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0022  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /* renamed from: flingWithOverscroll-xgHb9do, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object m929flingWithOverscrollxgHb9do(androidx.compose.foundation.OverscrollEffect r8, long r9, kotlin.jvm.functions.Function2 r11, kotlin.coroutines.jvm.internal.ContinuationImpl r12) {
-        /*
-            r7 = this;
-            boolean r0 = r12 instanceof com.android.compose.gesture.NestedDraggableNode$flingWithOverscroll$2
-            if (r0 == 0) goto L13
-            r0 = r12
-            com.android.compose.gesture.NestedDraggableNode$flingWithOverscroll$2 r0 = (com.android.compose.gesture.NestedDraggableNode$flingWithOverscroll$2) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.compose.gesture.NestedDraggableNode$flingWithOverscroll$2 r0 = new com.android.compose.gesture.NestedDraggableNode$flingWithOverscroll$2
-            r0.<init>(r7, r12)
-        L18:
-            java.lang.Object r12 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 2
-            r4 = 1
-            if (r2 == 0) goto L38
-            if (r2 == r4) goto L32
-            if (r2 != r3) goto L2a
-            kotlin.ResultKt.throwOnFailure(r12)
-            return r12
-        L2a:
-            java.lang.IllegalStateException r7 = new java.lang.IllegalStateException
-            java.lang.String r8 = "call to 'resume' before 'invoke' with coroutine"
-            r7.<init>(r8)
-            throw r7
-        L32:
-            long r9 = r0.J$0
-            kotlin.ResultKt.throwOnFailure(r12)
-            goto L56
-        L38:
-            kotlin.ResultKt.throwOnFailure(r12)
-            float r12 = r7.m931toFloatTH1AsA0$1(r9)
-            long r5 = r7.m934toVelocityadjELrA$1(r12)
-            if (r8 == 0) goto L5b
-            com.android.compose.gesture.NestedDraggableNode$flingWithOverscroll$3 r7 = new com.android.compose.gesture.NestedDraggableNode$flingWithOverscroll$3
-            r12 = 0
-            r7.<init>(r11, r12)
-            r0.J$0 = r9
-            r0.label = r4
-            java.lang.Object r7 = r8.mo19applyToFlingBMRW4eQ(r5, r7, r0)
-            if (r7 != r1) goto L56
-            goto L67
-        L56:
-            androidx.compose.ui.unit.Velocity r7 = androidx.compose.ui.unit.Velocity.m876boximpl(r9)
-            return r7
-        L5b:
-            androidx.compose.ui.unit.Velocity r7 = androidx.compose.ui.unit.Velocity.m876boximpl(r5)
-            r0.label = r3
-            java.lang.Object r7 = r11.invoke(r7, r0)
-            if (r7 != r1) goto L68
-        L67:
-            return r1
-        L68:
-            return r7
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.compose.gesture.NestedDraggableNode.m929flingWithOverscrollxgHb9do(androidx.compose.foundation.OverscrollEffect, long, kotlin.jvm.functions.Function2, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object m931flingWithOverscrollxgHb9do(OverscrollEffect overscrollEffect, long j, Function2 function2, ContinuationImpl continuationImpl) {
+        NestedDraggableNode$flingWithOverscroll$2 nestedDraggableNode$flingWithOverscroll$2;
+        if (continuationImpl instanceof NestedDraggableNode$flingWithOverscroll$2) {
+            nestedDraggableNode$flingWithOverscroll$2 = (NestedDraggableNode$flingWithOverscroll$2) continuationImpl;
+            int i = nestedDraggableNode$flingWithOverscroll$2.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                nestedDraggableNode$flingWithOverscroll$2.label = i - Integer.MIN_VALUE;
+            } else {
+                nestedDraggableNode$flingWithOverscroll$2 = new NestedDraggableNode$flingWithOverscroll$2(this, continuationImpl);
+            }
+        }
+        Object obj = nestedDraggableNode$flingWithOverscroll$2.result;
+        Object obj2 = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = nestedDraggableNode$flingWithOverscroll$2.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(obj);
+            long jM936toVelocityadjELrA$1 = m936toVelocityadjELrA$1(m933toFloatTH1AsA0$1(j));
+            if (overscrollEffect != null) {
+                Function2 nestedDraggableNode$flingWithOverscroll$3 = new NestedDraggableNode$flingWithOverscroll$3(function2, null);
+                nestedDraggableNode$flingWithOverscroll$2.J$0 = j;
+                nestedDraggableNode$flingWithOverscroll$2.label = 1;
+            } else {
+                Object objM878boximpl = Velocity.m878boximpl(jM936toVelocityadjELrA$1);
+                nestedDraggableNode$flingWithOverscroll$2.label = 2;
+                Object objInvoke = function2.invoke(objM878boximpl, nestedDraggableNode$flingWithOverscroll$2);
+                if (objInvoke != obj2) {
+                    return objInvoke;
+                }
+            }
+            return obj2;
+        }
+        if (i2 != 1) {
+            if (i2 != 2) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            return obj;
+        }
+        j = nestedDraggableNode$flingWithOverscroll$2.J$0;
+        ResultKt.throwOnFailure(obj);
+        return Velocity.m878boximpl(j);
     }
 
     public final void maybeCreateNewController(float f, Function0 function0) {
@@ -426,7 +347,7 @@ public final class NestedDraggableNode extends DelegatingNode implements Pointer
             if (offset == null) {
                 throw new IllegalStateException("Required value was null.");
             }
-            this.nestedScrollController = new NestedScrollController(this.overscrollEffect, ((DraggableHandler) this.draggable).m918onDragStartedw4f02Oo(offset.packedValue, f, i, pointerType));
+            this.nestedScrollController = new NestedScrollController(this.overscrollEffect, ((DraggableHandler) this.draggable).m920onDragStartedw4f02Oo(offset.packedValue, f, i, pointerType));
         }
     }
 
@@ -456,7 +377,7 @@ public final class NestedDraggableNode extends DelegatingNode implements Pointer
 
     @Override // androidx.compose.ui.input.nestedscroll.NestedScrollConnection
     /* renamed from: onPostScroll-DzOQY0M */
-    public final long mo78onPostScrollDzOQY0M(int i, long j, long j2) {
+    public final long mo79onPostScrollDzOQY0M(int i, long j, long j2) {
         NestedScrollSource.Companion.getClass();
         if (i == NestedScrollSource.SideEffect) {
             if (this.nestedScrollController != null) {
@@ -465,16 +386,16 @@ public final class NestedDraggableNode extends DelegatingNode implements Pointer
             Offset.Companion.getClass();
             return 0L;
         }
-        float m932toFloatk4lQ0M$1 = m932toFloatk4lQ0M$1(j2);
-        if (m932toFloatk4lQ0M$1 == 0.0f) {
+        float fM934toFloatk4lQ0M$1 = m934toFloatk4lQ0M$1(j2);
+        if (fM934toFloatk4lQ0M$1 == 0.0f) {
             Offset.Companion.getClass();
             return 0L;
         }
-        final float signum = Math.signum(m932toFloatk4lQ0M$1);
-        maybeCreateNewController(signum, new Function0(signum) { // from class: com.android.compose.gesture.NestedDraggableNode$$ExternalSyntheticLambda1
+        final float fSignum = Math.signum(fM934toFloatk4lQ0M$1);
+        maybeCreateNewController(fSignum, new Function0(fSignum) { // from class: com.android.compose.gesture.NestedDraggableNode$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                DraggableHandler draggableHandler = (DraggableHandler) NestedDraggableNode.this.draggable;
+                DraggableHandler draggableHandler = (DraggableHandler) this.f$0.draggable;
                 return Boolean.valueOf(SwipeToSceneKt.enabled(draggableHandler, draggableHandler.layoutImpl.contentForUserActions$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout()));
             }
         });
@@ -488,7 +409,7 @@ public final class NestedDraggableNode extends DelegatingNode implements Pointer
             return j2;
         }
         if (!this.ignoreNextDrag) {
-            return m930scrollWithOverscroll8S9VItk(j2, new NestedDraggableNode$$ExternalSyntheticLambda3(this, nestedScrollController, 0));
+            return m932scrollWithOverscroll8S9VItk(j2, new NestedDraggableNode$$ExternalSyntheticLambda3(this, nestedScrollController, 0));
         }
         this.ignoreNextDrag = false;
         return j2;
@@ -496,23 +417,23 @@ public final class NestedDraggableNode extends DelegatingNode implements Pointer
 
     @Override // androidx.compose.ui.input.nestedscroll.NestedScrollConnection
     /* renamed from: onPreFling-QWom1Mo */
-    public final Object mo288onPreFlingQWom1Mo(long j, Continuation continuation) {
+    public final Object mo289onPreFlingQWom1Mo(long j, Continuation continuation) {
         NestedScrollController nestedScrollController = this.nestedScrollController;
         if (nestedScrollController == null) {
             Velocity.Companion.getClass();
-            return Velocity.m876boximpl(0L);
+            return Velocity.m878boximpl(0L);
         }
         this.nestedScrollController = null;
-        Object awaitInternal = BuildersKt.async$default(this.nestedScrollDispatcher.getCoroutineScope(), null, new NestedDraggableNode$onPreFling$2(nestedScrollController, j, null), 3).awaitInternal(continuation);
+        Object objAwaitInternal = BuildersKt.async$default(this.nestedScrollDispatcher.getCoroutineScope(), null, new NestedDraggableNode$onPreFling$2(nestedScrollController, j, null), 3).awaitInternal(continuation);
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
-        return awaitInternal;
+        return objAwaitInternal;
     }
 
     @Override // androidx.compose.ui.input.nestedscroll.NestedScrollConnection
     /* renamed from: onPreScroll-OzD1aCk */
-    public final long mo175onPreScrollOzD1aCk(final int i, long j) {
-        final float signum = Math.signum(m932toFloatk4lQ0M$1(j));
-        maybeCreateNewController(signum, new Function0(i, this, signum) { // from class: com.android.compose.gesture.NestedDraggableNode$$ExternalSyntheticLambda2
+    public final long mo176onPreScrollOzD1aCk(final int i, long j) {
+        final float fSignum = Math.signum(m934toFloatk4lQ0M$1(j));
+        maybeCreateNewController(fSignum, new Function0(i, this, fSignum) { // from class: com.android.compose.gesture.NestedDraggableNode$$ExternalSyntheticLambda2
             public final /* synthetic */ int f$0;
             public final /* synthetic */ NestedDraggableNode f$1;
 
@@ -535,42 +456,42 @@ public final class NestedDraggableNode extends DelegatingNode implements Pointer
             return j;
         }
         if (!this.ignoreNextDrag) {
-            return m930scrollWithOverscroll8S9VItk(j, new NestedDraggableNode$$ExternalSyntheticLambda3(this, nestedScrollController, 0));
+            return m932scrollWithOverscroll8S9VItk(j, new NestedDraggableNode$$ExternalSyntheticLambda3(this, nestedScrollController, 0));
         }
         this.ignoreNextDrag = false;
         return j;
     }
 
     /* renamed from: scrollWithOverscroll-8S9VItk, reason: not valid java name */
-    public final long m930scrollWithOverscroll8S9VItk(long j, final Function1 function1) {
+    public final long m932scrollWithOverscroll8S9VItk(long j, final Function1 function1) {
         OverscrollEffect overscrollEffect = this.overscrollEffect;
         if (overscrollEffect == null) {
-            return ((Offset) function1.mo779invoke(Offset.m393boximpl(j))).packedValue;
+            return ((Offset) function1.mo781invoke(Offset.m395boximpl(j))).packedValue;
         }
         NestedScrollSource.Companion.getClass();
         return overscrollEffect.mo20applyToScrollRhakbz0(NestedScrollSource.UserInput, j, new Function1() { // from class: com.android.compose.gesture.NestedDraggableNode$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                return (Offset) Function1.this.mo779invoke((Offset) obj);
+            public final Object mo781invoke(Object obj) {
+                return (Offset) function1.mo781invoke((Offset) obj);
             }
         });
     }
 
     /* renamed from: toFloat-TH1AsA0$1, reason: not valid java name */
-    public float m931toFloatTH1AsA0$1(long j) {
+    public float m933toFloatTH1AsA0$1(long j) {
         int i = OrientationAware$WhenMappings.$EnumSwitchMapping$0[this.orientation.ordinal()];
         if (i == 1) {
-            return Velocity.m878getXimpl(j);
+            return Velocity.m880getXimpl(j);
         }
         if (i == 2) {
-            return Velocity.m879getYimpl(j);
+            return Velocity.m881getYimpl(j);
         }
         throw new NoWhenBranchMatchedException();
     }
 
     /* renamed from: toFloat-k-4lQ0M$1, reason: not valid java name */
-    public float m932toFloatk4lQ0M$1(long j) {
+    public float m934toFloatk4lQ0M$1(long j) {
         int i = OrientationAware$WhenMappings.$EnumSwitchMapping$0[this.orientation.ordinal()];
         if (i == 1) {
             return Float.intBitsToFloat((int) (j >> 32));
@@ -582,23 +503,23 @@ public final class NestedDraggableNode extends DelegatingNode implements Pointer
     }
 
     /* renamed from: toOffset-tuRUvjQ$1, reason: not valid java name */
-    public long m933toOffsettuRUvjQ$1(float f) {
+    public long m935toOffsettuRUvjQ$1(float f) {
         int i = OrientationAware$WhenMappings.$EnumSwitchMapping$0[this.orientation.ordinal()];
         if (i == 1) {
-            long floatToRawIntBits = (Float.floatToRawIntBits(f) << 32) | (Float.floatToRawIntBits(0.0f) & 4294967295L);
+            long jFloatToRawIntBits = (Float.floatToRawIntBits(f) << 32) | (Float.floatToRawIntBits(0.0f) & 4294967295L);
             Offset.Companion companion = Offset.Companion;
-            return floatToRawIntBits;
+            return jFloatToRawIntBits;
         }
         if (i != 2) {
             throw new NoWhenBranchMatchedException();
         }
-        long floatToRawIntBits2 = (Float.floatToRawIntBits(f) & 4294967295L) | (Float.floatToRawIntBits(0.0f) << 32);
+        long jFloatToRawIntBits2 = (Float.floatToRawIntBits(f) & 4294967295L) | (Float.floatToRawIntBits(0.0f) << 32);
         Offset.Companion companion2 = Offset.Companion;
-        return floatToRawIntBits2;
+        return jFloatToRawIntBits2;
     }
 
     /* renamed from: toVelocity-adjELrA$1, reason: not valid java name */
-    public long m934toVelocityadjELrA$1(float f) {
+    public long m936toVelocityadjELrA$1(float f) {
         int i = OrientationAware$WhenMappings.$EnumSwitchMapping$0[this.orientation.ordinal()];
         if (i == 1) {
             return VelocityKt.Velocity(f, 0.0f);

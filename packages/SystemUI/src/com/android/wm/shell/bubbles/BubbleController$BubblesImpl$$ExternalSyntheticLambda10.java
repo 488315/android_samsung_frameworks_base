@@ -1,11 +1,11 @@
 package com.android.wm.shell.bubbles;
 
+import android.content.res.Resources;
 import com.android.internal.protolog.ProtoLogImpl_1771455215;
 import com.android.wm.shell.bubbles.BubbleController;
 import com.android.wm.shell.protolog.ShellProtoLogGroup;
 import com.android.wm.shell.shared.bubbles.BubbleBarLocation;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class BubbleController$BubblesImpl$$ExternalSyntheticLambda10 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -19,7 +19,7 @@ public final /* synthetic */ class BubbleController$BubblesImpl$$ExternalSynthet
     }
 
     @Override // java.lang.Runnable
-    public final void run() {
+    public final void run() throws Resources.NotFoundException {
         switch (this.$r8$classId) {
             case 0:
                 BubbleController.BubblesImpl bubblesImpl = (BubbleController.BubblesImpl) this.f$0;

@@ -6,7 +6,6 @@ import com.samsung.android.smartthingsmediasdk.mediasdk.service.MediaSdkSupportS
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class DeviceControlOperationImpl extends AbstractMediaSdkManager {
     public DeviceControlOperationImpl(MediaSdkSupportServiceClient mediaSdkSupportServiceClient) {
@@ -19,7 +18,7 @@ public final class DeviceControlOperationImpl extends AbstractMediaSdkManager {
     }
 
     public final void launchRemoteControlPlugIn(final String str) {
-        useSafeMediaSdkSupportService("", new Function1() { // from class: com.samsung.android.smartthingsmediasdk.mediasdk.manager.mediasdkoperations.devicecontrol.DeviceControlOperationImpl$launchRemoteControlPlugIn$1
+        useSafeMediaSdkSupportService("", new Function1() { // from class: com.samsung.android.smartthingsmediasdk.mediasdk.manager.mediasdkoperations.devicecontrol.DeviceControlOperationImpl.launchRemoteControlPlugIn.1
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
@@ -27,7 +26,7 @@ public final class DeviceControlOperationImpl extends AbstractMediaSdkManager {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 ((IMediaOutputService.Stub.Proxy) ((IMediaOutputService) obj)).launchRemoteControlPlugIn(str);
                 return Unit.INSTANCE;
             }
@@ -36,7 +35,7 @@ public final class DeviceControlOperationImpl extends AbstractMediaSdkManager {
 
     public final void setMute(final String str) {
         final boolean z = true;
-        useSafeMediaSdkSupportService(Unit.INSTANCE, new Function1() { // from class: com.samsung.android.smartthingsmediasdk.mediasdk.manager.mediasdkoperations.devicecontrol.DeviceControlOperationImpl$setMute$1
+        useSafeMediaSdkSupportService(Unit.INSTANCE, new Function1() { // from class: com.samsung.android.smartthingsmediasdk.mediasdk.manager.mediasdkoperations.devicecontrol.DeviceControlOperationImpl.setMute.1
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
@@ -44,7 +43,7 @@ public final class DeviceControlOperationImpl extends AbstractMediaSdkManager {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 ((IMediaOutputService.Stub.Proxy) ((IMediaOutputService) obj)).setMute(str, z);
                 return Unit.INSTANCE;
             }
@@ -52,7 +51,7 @@ public final class DeviceControlOperationImpl extends AbstractMediaSdkManager {
     }
 
     public final void togglePlayback(final String str) {
-        useSafeMediaSdkSupportService("", new Function1() { // from class: com.samsung.android.smartthingsmediasdk.mediasdk.manager.mediasdkoperations.devicecontrol.DeviceControlOperationImpl$togglePlayback$1
+        useSafeMediaSdkSupportService("", new Function1() { // from class: com.samsung.android.smartthingsmediasdk.mediasdk.manager.mediasdkoperations.devicecontrol.DeviceControlOperationImpl.togglePlayback.1
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
@@ -60,7 +59,7 @@ public final class DeviceControlOperationImpl extends AbstractMediaSdkManager {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 ((IMediaOutputService.Stub.Proxy) ((IMediaOutputService) obj)).setPlayback(str);
                 return Unit.INSTANCE;
             }
@@ -68,7 +67,7 @@ public final class DeviceControlOperationImpl extends AbstractMediaSdkManager {
     }
 
     public final void updateVolume(final int i, final String str) {
-        useSafeMediaSdkSupportService(Unit.INSTANCE, new Function1() { // from class: com.samsung.android.smartthingsmediasdk.mediasdk.manager.mediasdkoperations.devicecontrol.DeviceControlOperationImpl$updateVolume$1
+        useSafeMediaSdkSupportService(Unit.INSTANCE, new Function1() { // from class: com.samsung.android.smartthingsmediasdk.mediasdk.manager.mediasdkoperations.devicecontrol.DeviceControlOperationImpl.updateVolume.1
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
@@ -76,7 +75,7 @@ public final class DeviceControlOperationImpl extends AbstractMediaSdkManager {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 IMediaOutputService.Stub.Proxy proxy = (IMediaOutputService.Stub.Proxy) ((IMediaOutputService) obj);
                 proxy.updateVolume(i, str);
                 return Unit.INSTANCE;

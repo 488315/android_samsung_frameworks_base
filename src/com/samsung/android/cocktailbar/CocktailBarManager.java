@@ -570,7 +570,7 @@ public class CocktailBarManager extends SemCocktailBarManager {
         if (getService() == null) {
             return;
         }
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
                 this.mService.notifyCocktailVisibiltyChanged(i, i2);
@@ -578,7 +578,7 @@ public class CocktailBarManager extends SemCocktailBarManager {
                 throw new RuntimeException("CocktailBarService dead?", e);
             }
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -791,7 +791,7 @@ public class CocktailBarManager extends SemCocktailBarManager {
 
     @Deprecated
     public void unregisterListener(CocktailBarStateListener cocktailBarStateListener) {
-        CocktailBarStateListenerDelegate cocktailBarStateListenerDelegate;
+        CocktailBarStateListenerDelegate next;
         if (getService() == null) {
             return;
         }
@@ -803,23 +803,23 @@ public class CocktailBarManager extends SemCocktailBarManager {
             Iterator<CocktailBarStateListenerDelegate> it = this.mCocktailBarStateListenerDelegates.iterator();
             while (true) {
                 if (!it.hasNext()) {
-                    cocktailBarStateListenerDelegate = null;
+                    next = null;
                     break;
                 }
-                cocktailBarStateListenerDelegate = it.next();
-                if (cocktailBarStateListenerDelegate != null && cocktailBarStateListenerDelegate.getListener().equals(cocktailBarStateListener)) {
+                next = it.next();
+                if (next != null && next.getListener().equals(cocktailBarStateListener)) {
                     break;
                 }
             }
-            if (cocktailBarStateListenerDelegate == null) {
+            if (next == null) {
                 SemLog.w(TAG, "unregisterListener : cannot find the listener");
                 return;
             }
             try {
                 SemLog.i(TAG, "unregisterListener : unregisterCocktailBarStateListenerCallback " + this.mContext.getPackageName());
-                this.mService.unregisterCocktailBarStateListenerCallback(cocktailBarStateListenerDelegate);
-                this.mCocktailBarStateListenerDelegates.remove(cocktailBarStateListenerDelegate);
-                cocktailBarStateListenerDelegate.onDestroy();
+                this.mService.unregisterCocktailBarStateListenerCallback(next);
+                this.mCocktailBarStateListenerDelegates.remove(next);
+                next.onDestroy();
             } catch (RemoteException e) {
                 SemLog.e(TAG, "unregisterListener : RemoteException : ", e);
             }
@@ -864,7 +864,7 @@ public class CocktailBarManager extends SemCocktailBarManager {
 
     @Override // com.samsung.android.cocktailbar.SemCocktailBarManager
     public void unregisterStateListener(SemCocktailBarManager.CocktailBarStateChangedListener cocktailBarStateChangedListener) {
-        CocktailBarStateListenerDelegate cocktailBarStateListenerDelegate;
+        CocktailBarStateListenerDelegate next;
         if (getService() == null) {
             return;
         }
@@ -876,23 +876,23 @@ public class CocktailBarManager extends SemCocktailBarManager {
             Iterator<CocktailBarStateListenerDelegate> it = this.mCocktailBarStateListenerDelegates.iterator();
             while (true) {
                 if (!it.hasNext()) {
-                    cocktailBarStateListenerDelegate = null;
+                    next = null;
                     break;
                 }
-                cocktailBarStateListenerDelegate = it.next();
-                if (cocktailBarStateListenerDelegate != null && (cocktailBarStateListenerDelegate.getStateChangedListener() instanceof SemManagerStateChangedListenerWrapper) && cocktailBarStateChangedListener.equals(((SemManagerStateChangedListenerWrapper) cocktailBarStateListenerDelegate.getStateChangedListener()).mSemlistener)) {
+                next = it.next();
+                if (next != null && (next.getStateChangedListener() instanceof SemManagerStateChangedListenerWrapper) && cocktailBarStateChangedListener.equals(((SemManagerStateChangedListenerWrapper) next.getStateChangedListener()).mSemlistener)) {
                     break;
                 }
             }
-            if (cocktailBarStateListenerDelegate == null) {
+            if (next == null) {
                 SemLog.w(TAG, "unregisterListener : cannot find the listener");
                 return;
             }
             try {
                 SemLog.i(TAG, "unregisterListener : unregisterCocktailBarStateListenerCallback " + this.mContext.getPackageName());
-                this.mService.unregisterCocktailBarStateListenerCallback(cocktailBarStateListenerDelegate);
-                this.mCocktailBarStateListenerDelegates.remove(cocktailBarStateListenerDelegate);
-                cocktailBarStateListenerDelegate.onDestroy();
+                this.mService.unregisterCocktailBarStateListenerCallback(next);
+                this.mCocktailBarStateListenerDelegates.remove(next);
+                next.onDestroy();
             } catch (RemoteException e) {
                 SemLog.e(TAG, "unregisterListener : RemoteException : ", e);
             }
@@ -935,7 +935,7 @@ public class CocktailBarManager extends SemCocktailBarManager {
     }
 
     public void unregisterStateListener(CocktailBarStateChangedListener cocktailBarStateChangedListener) {
-        CocktailBarStateListenerDelegate cocktailBarStateListenerDelegate;
+        CocktailBarStateListenerDelegate next;
         if (getService() == null) {
             return;
         }
@@ -947,23 +947,23 @@ public class CocktailBarManager extends SemCocktailBarManager {
             Iterator<CocktailBarStateListenerDelegate> it = this.mCocktailBarStateListenerDelegates.iterator();
             while (true) {
                 if (!it.hasNext()) {
-                    cocktailBarStateListenerDelegate = null;
+                    next = null;
                     break;
                 }
-                cocktailBarStateListenerDelegate = it.next();
-                if (cocktailBarStateListenerDelegate != null && cocktailBarStateListenerDelegate.getStateChangedListener().equals(cocktailBarStateChangedListener)) {
+                next = it.next();
+                if (next != null && next.getStateChangedListener().equals(cocktailBarStateChangedListener)) {
                     break;
                 }
             }
-            if (cocktailBarStateListenerDelegate == null) {
+            if (next == null) {
                 SemLog.w(TAG, "unregisterListener : cannot find the listener");
                 return;
             }
             try {
                 SemLog.i(TAG, "unregisterListener : unregisterCocktailBarStateListenerCallback " + this.mContext.getPackageName());
-                this.mService.unregisterCocktailBarStateListenerCallback(cocktailBarStateListenerDelegate);
-                this.mCocktailBarStateListenerDelegates.remove(cocktailBarStateListenerDelegate);
-                cocktailBarStateListenerDelegate.onDestroy();
+                this.mService.unregisterCocktailBarStateListenerCallback(next);
+                this.mCocktailBarStateListenerDelegates.remove(next);
+                next.onDestroy();
             } catch (RemoteException e) {
                 SemLog.e(TAG, "unregisterListener : RemoteException : ", e);
             }
@@ -1107,7 +1107,7 @@ public class CocktailBarManager extends SemCocktailBarManager {
     }
 
     public void unregisterSystemUiVisibilityListener(SystemUiVisibilityListener systemUiVisibilityListener) {
-        SystemUiVisibilityListenerDelegate systemUiVisibilityListenerDelegate;
+        SystemUiVisibilityListenerDelegate next;
         if (getService() == null) {
             return;
         }
@@ -1119,23 +1119,23 @@ public class CocktailBarManager extends SemCocktailBarManager {
             Iterator<SystemUiVisibilityListenerDelegate> it = this.mSystemUiVisibilityListenerDelegates.iterator();
             while (true) {
                 if (!it.hasNext()) {
-                    systemUiVisibilityListenerDelegate = null;
+                    next = null;
                     break;
                 }
-                systemUiVisibilityListenerDelegate = it.next();
-                if (systemUiVisibilityListenerDelegate != null && systemUiVisibilityListenerDelegate.getListener().equals(systemUiVisibilityListener)) {
+                next = it.next();
+                if (next != null && next.getListener().equals(systemUiVisibilityListener)) {
                     break;
                 }
             }
-            if (systemUiVisibilityListenerDelegate == null) {
+            if (next == null) {
                 SemLog.w(TAG, "unregisterListener : cannot find the listener");
                 return;
             }
             try {
                 SemLog.i(TAG, "unregisterListener : unregisterSystemUiVisibilityListenerCallback " + this.mContext.getPackageName());
-                this.mService.unregisterSystemUiVisibilityListenerCallback(systemUiVisibilityListenerDelegate);
-                this.mSystemUiVisibilityListenerDelegates.remove(systemUiVisibilityListenerDelegate);
-                systemUiVisibilityListenerDelegate.onDestroy();
+                this.mService.unregisterSystemUiVisibilityListenerCallback(next);
+                this.mSystemUiVisibilityListenerDelegates.remove(next);
+                next.onDestroy();
             } catch (RemoteException e) {
                 SemLog.e(TAG, "unregisterListener : RemoteException : ", e);
             }

@@ -3,7 +3,6 @@ package com.samsung.android.knox.container;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class CreationParams implements Parcelable {
     public static final Parcelable.Creator<CreationParams> CREATOR = new Parcelable.Creator<CreationParams>() { // from class: com.samsung.android.knox.container.CreationParams.1
@@ -85,19 +84,19 @@ public class CreationParams implements Parcelable {
         this.mConfigName = null;
         this.mAdminPkgName = null;
         this.mPwdResetToken = null;
-        String readString = parcel.readString();
-        this.mConfigName = readString;
-        if (readString != null && readString.isEmpty()) {
+        String string = parcel.readString();
+        this.mConfigName = string;
+        if (string != null && string.isEmpty()) {
             this.mConfigName = null;
         }
-        String readString2 = parcel.readString();
-        this.mAdminPkgName = readString2;
-        if (readString2 != null && readString2.isEmpty()) {
+        String string2 = parcel.readString();
+        this.mAdminPkgName = string2;
+        if (string2 != null && string2.isEmpty()) {
             this.mAdminPkgName = null;
         }
-        String readString3 = parcel.readString();
-        this.mPwdResetToken = readString3;
-        if (readString3 == null || !readString3.isEmpty()) {
+        String string3 = parcel.readString();
+        this.mPwdResetToken = string3;
+        if (string3 == null || !string3.isEmpty()) {
             return;
         }
         this.mPwdResetToken = null;

@@ -22,7 +22,7 @@ public class InternalStreamingSessionCallback extends IMbmsStreamingSessionCallb
         if (this.mIsStopped) {
             return;
         }
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.mbms.InternalStreamingSessionCallback.1
                 @Override // java.lang.Runnable
@@ -31,7 +31,7 @@ public class InternalStreamingSessionCallback extends IMbmsStreamingSessionCallb
                 }
             });
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -40,7 +40,7 @@ public class InternalStreamingSessionCallback extends IMbmsStreamingSessionCallb
         if (this.mIsStopped) {
             return;
         }
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.mbms.InternalStreamingSessionCallback.2
                 @Override // java.lang.Runnable
@@ -49,7 +49,7 @@ public class InternalStreamingSessionCallback extends IMbmsStreamingSessionCallb
                 }
             });
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
@@ -58,7 +58,7 @@ public class InternalStreamingSessionCallback extends IMbmsStreamingSessionCallb
         if (this.mIsStopped) {
             return;
         }
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             this.mExecutor.execute(new Runnable() { // from class: android.telephony.mbms.InternalStreamingSessionCallback.3
                 @Override // java.lang.Runnable
@@ -67,7 +67,7 @@ public class InternalStreamingSessionCallback extends IMbmsStreamingSessionCallb
                 }
             });
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 

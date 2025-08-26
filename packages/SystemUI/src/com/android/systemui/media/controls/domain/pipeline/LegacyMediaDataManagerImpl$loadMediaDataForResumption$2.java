@@ -4,6 +4,8 @@ import android.app.PendingIntent;
 import android.graphics.drawable.Icon;
 import android.media.MediaDescription;
 import android.media.session.MediaSession;
+import android.util.Log;
+import com.android.app.tracing.coroutines.CoroutineTracingKt;
 import com.android.internal.logging.InstanceId;
 import com.android.systemui.media.controls.domain.pipeline.MediaDataLoader;
 import com.android.systemui.media.controls.shared.model.MediaButton;
@@ -15,9 +17,10 @@ import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
+import kotlin.text.StringsKt__StringsKt;
+import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class LegacyMediaDataManagerImpl$loadMediaDataForResumption$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ PendingIntent $appIntent;
@@ -33,7 +36,6 @@ final class LegacyMediaDataManagerImpl$loadMediaDataForResumption$2 extends Susp
     int label;
     final /* synthetic */ LegacyMediaDataManagerImpl this$0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.media.controls.domain.pipeline.LegacyMediaDataManagerImpl$loadMediaDataForResumption$2$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ long $createdTimestampMillis;
@@ -116,20 +118,77 @@ final class LegacyMediaDataManagerImpl$loadMediaDataForResumption$2 extends Susp
         return ((LegacyMediaDataManagerImpl$loadMediaDataForResumption$2) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:24:0x00d5, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:33:0x00d5, code lost:
     
         if (kotlinx.coroutines.BuildersKt.withContext(r2, r5, r20) == r1) goto L34;
      */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object invokeSuspend(java.lang.Object r21) {
-        /*
-            Method dump skipped, instructions count: 238
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.media.controls.domain.pipeline.LegacyMediaDataManagerImpl$loadMediaDataForResumption$2.invokeSuspend(java.lang.Object):java.lang.Object");
+    public final Object invokeSuspend(Object obj) {
+        long jElapsedRealtime;
+        Object objAwaitInternal;
+        MediaData mediaData;
+        long j;
+        CharSequence title;
+        InstanceId instanceIdNewInstanceId;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i = this.label;
+        if (i == 0) {
+            ResultKt.throwOnFailure(obj);
+            jElapsedRealtime = this.this$0.systemClock.elapsedRealtime();
+            MediaData mediaData2 = (MediaData) this.this$0.mediaEntries.get(this.$packageName);
+            long j2 = mediaData2 != null ? mediaData2.createdTimestampMillis : 0L;
+            MediaDataLoader mediaDataLoader = (MediaDataLoader) this.this$0.mediaDataLoader.get();
+            int i2 = this.$userId;
+            MediaDescription mediaDescription = this.$desc;
+            Runnable runnable = this.$resumeAction;
+            MediaSession.Token token = this.$token;
+            String str = this.$appName;
+            PendingIntent pendingIntent = this.$appIntent;
+            String str2 = this.$packageName;
+            this.L$0 = mediaData2;
+            this.J$0 = jElapsedRealtime;
+            this.J$1 = j2;
+            this.label = 1;
+            mediaDataLoader.getClass();
+            long j3 = j2;
+            objAwaitInternal = CoroutineTracingKt.asyncTraced$default(mediaDataLoader.backgroundScope, null, null, new MediaDataLoader$loadMediaDataForResumption$mediaData$1(mediaDataLoader, i2, mediaDescription, runnable, mediaData2, token, str, pendingIntent, str2, null), 7).awaitInternal(this);
+            if (objAwaitInternal != coroutineSingletons) {
+                mediaData = mediaData2;
+                j = j3;
+            }
+            return coroutineSingletons;
+        }
+        if (i != 1) {
+            if (i != 2) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            return Unit.INSTANCE;
+        }
+        long j4 = this.J$1;
+        jElapsedRealtime = this.J$0;
+        mediaData = (MediaData) this.L$0;
+        ResultKt.throwOnFailure(obj);
+        objAwaitInternal = obj;
+        j = j4;
+        long j5 = jElapsedRealtime;
+        MediaDataLoader.MediaDataLoaderResult mediaDataLoaderResult = (MediaDataLoader.MediaDataLoaderResult) objAwaitInternal;
+        if (mediaDataLoaderResult == null || (title = this.$desc.getTitle()) == null || StringsKt__StringsKt.isBlank(title)) {
+            Log.d("MediaDataManager", "No MediaData result for resumption");
+            this.this$0.mediaEntries.remove(this.$packageName);
+            return Unit.INSTANCE;
+        }
+        if (mediaData == null || (instanceIdNewInstanceId = mediaData.instanceId) == null) {
+            instanceIdNewInstanceId = this.this$0.logger.instanceIdSequence.newInstanceId();
+        }
+        InstanceId instanceId = instanceIdNewInstanceId;
+        LegacyMediaDataManagerImpl legacyMediaDataManagerImpl = this.this$0;
+        CoroutineDispatcher coroutineDispatcher = legacyMediaDataManagerImpl.mainDispatcher;
+        AnonymousClass1 anonymousClass1 = new AnonymousClass1(legacyMediaDataManagerImpl, this.$packageName, this.$userId, mediaDataLoaderResult, this.$resumeAction, j5, j, instanceId, null);
+        this.L$0 = null;
+        this.label = 2;
     }
 }

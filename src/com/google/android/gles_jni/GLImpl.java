@@ -1,5 +1,10 @@
 package com.google.android.gles_jni;
 
+import android.app.AppGlobals;
+import android.content.pm.ApplicationInfo;
+import android.os.RemoteException;
+import android.os.UserHandle;
+import android.util.Log;
 import java.nio.Buffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
@@ -775,38 +780,15 @@ public class GLImpl implements GL10, GL10Ext, GL11, GL11Ext, GL11ExtensionPack {
         throw new UnsupportedOperationException("glGetPointerv");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x002b A[ORIG_RETURN, RETURN] */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    private static boolean allowIndirectBuffers(java.lang.String r5) {
-        /*
-            android.content.pm.IPackageManager r0 = android.app.AppGlobals.getPackageManager()
-            r1 = 0
-            int r2 = android.os.UserHandle.myUserId()     // Catch: android.os.RemoteException -> L14
-            r3 = 0
-            android.content.pm.ApplicationInfo r0 = r0.getApplicationInfo(r5, r3, r2)     // Catch: android.os.RemoteException -> L14
-            if (r0 == 0) goto L14
-            int r0 = r0.targetSdkVersion     // Catch: android.os.RemoteException -> L14
-            goto L15
-        L14:
-            r0 = r1
-        L15:
-            java.lang.Integer r2 = java.lang.Integer.valueOf(r0)
-            java.lang.Object[] r5 = new java.lang.Object[]{r5, r2}
-            java.lang.String r2 = "Application %s (SDK target %d) called a GL11 Pointer method with an indirect Buffer."
-            java.lang.String r5 = java.lang.String.format(r2, r5)
-            java.lang.String r2 = "OpenGLES"
-            android.util.Log.e(r2, r5)
-            r5 = 3
-            if (r0 > r5) goto L2c
-            r1 = 1
-        L2c:
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.google.android.gles_jni.GLImpl.allowIndirectBuffers(java.lang.String):boolean");
+    private static boolean allowIndirectBuffers(String str) {
+        ApplicationInfo applicationInfo;
+        try {
+            applicationInfo = AppGlobals.getPackageManager().getApplicationInfo(str, 0L, UserHandle.myUserId());
+        } catch (RemoteException unused) {
+        }
+        int i = applicationInfo != null ? applicationInfo.targetSdkVersion : 0;
+        Log.e("OpenGLES", String.format("Application %s (SDK target %d) called a GL11 Pointer method with an indirect Buffer.", str, Integer.valueOf(i)));
+        return i <= 3;
     }
 
     @Override // javax.microedition.khronos.opengles.GL10

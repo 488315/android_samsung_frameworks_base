@@ -2,6 +2,7 @@ package com.android.wm.shell.desktopmode;
 
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.Region;
@@ -24,8 +25,10 @@ import com.android.wm.shell.common.DisplayController;
 import com.android.wm.shell.common.DisplayLayout;
 import com.android.wm.shell.common.ShellExecutor;
 import com.android.wm.shell.common.SyncTransactionQueue;
+import com.android.wm.shell.common.split.SplitScreenUtils;
 import com.android.wm.shell.desktopmode.DesktopModeVisualIndicator;
 import com.android.wm.shell.desktopmode.VisualIndicatorViewContainer;
+import com.android.wm.shell.recents.RecentTasksController;
 import com.android.wm.shell.shared.bubbles.BubbleDropTargetBoundsProvider;
 import com.android.wm.shell.shared.desktopmode.DesktopStateImpl;
 import com.android.wm.shell.windowdecor.WindowDecoration;
@@ -36,7 +39,6 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class DesktopModeVisualIndicator {
     public int fullscreenTransitionHeight;
@@ -50,7 +52,6 @@ public class DesktopModeVisualIndicator {
     public final boolean mUseSmallTabletRegions;
     public final VisualIndicatorViewContainer mVisualIndicatorViewContainer;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum DragStartState {
         FROM_FREEFORM,
         FROM_SPLIT,
@@ -71,7 +72,6 @@ public class DesktopModeVisualIndicator {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum IndicatorType {
         NO_INDICATOR,
         TO_DESKTOP_INDICATOR,
@@ -86,7 +86,7 @@ public class DesktopModeVisualIndicator {
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Type inference failed for: r1v5, types: [java.util.List] */
     /* JADX WARN: Type inference failed for: r1v8, types: [java.util.List] */
-    public DesktopModeVisualIndicator(ShellExecutor shellExecutor, ShellExecutor shellExecutor2, SyncTransactionQueue syncTransactionQueue, final ActivityManager.RunningTaskInfo runningTaskInfo, DisplayController displayController, final Context context, final SurfaceControl surfaceControl, RootTaskDisplayAreaOrganizer rootTaskDisplayAreaOrganizer, DragStartState dragStartState, BubbleDropTargetBoundsProvider bubbleDropTargetBoundsProvider, SnapEventHandler snapEventHandler, boolean z, boolean z2) {
+    public DesktopModeVisualIndicator(ShellExecutor shellExecutor, ShellExecutor shellExecutor2, SyncTransactionQueue syncTransactionQueue, final ActivityManager.RunningTaskInfo runningTaskInfo, DisplayController displayController, final Context context, final SurfaceControl surfaceControl, RootTaskDisplayAreaOrganizer rootTaskDisplayAreaOrganizer, DragStartState dragStartState, BubbleDropTargetBoundsProvider bubbleDropTargetBoundsProvider, SnapEventHandler snapEventHandler, boolean z, boolean z2, final RecentTasksController recentTasksController) throws Resources.NotFoundException {
         ShellExecutor shellExecutor3;
         ShellExecutor shellExecutor4;
         ArrayList arrayList;
@@ -121,39 +121,92 @@ public class DesktopModeVisualIndicator {
                     DisplayLayout displayLayout2 = displayLayout;
                     int i = displayLayout2.mWidth;
                     int i2 = displayLayout2.mHeight;
-                    VisualIndicatorViewContainer visualIndicatorViewContainer2 = visualIndicatorViewContainer;
-                    DesktopStateImpl.Companion companion = DesktopStateImpl.Companion;
-                    int i3 = runningTaskInfo.displayId;
-                    companion.getClass();
-                    visualIndicatorViewContainer2.indicatorView = DesktopStateImpl.Companion.inDesktopWindowing(i3) ? LayoutInflater.from(context).inflate(R.layout.desktop_drop_view, (ViewGroup) null) : new View(context);
-                    final SurfaceControl build = visualIndicatorViewContainer.indicatorBuilder.setName("Desktop Mode Visual Indicator").setContainerLayer().setCallsite("DesktopModeVisualIndicator.createView").build();
+                    final SurfaceControl surfaceControl2 = null;
+                    visualIndicatorViewContainer.indicatorView = LayoutInflater.from(context).inflate(R.layout.desktop_drop_view, (ViewGroup) null);
+                    final SurfaceControl surfaceControlBuild = visualIndicatorViewContainer.indicatorBuilder.setName("Desktop Mode Visual Indicator").setContainerLayer().setCallsite("DesktopModeVisualIndicator.createView").build();
                     WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams(i, i2, 2, 8, -2);
                     layoutParams.setTitle("Desktop Mode Visual Indicator");
                     layoutParams.setTrustedOverlay();
                     layoutParams.inputFeatures |= 1;
-                    WindowlessWindowManager windowlessWindowManager = new WindowlessWindowManager(runningTaskInfo.configuration, build, (InputTransferToken) null);
-                    VisualIndicatorViewContainer visualIndicatorViewContainer3 = visualIndicatorViewContainer;
-                    WindowDecoration.SurfaceControlViewHostFactory surfaceControlViewHostFactory = visualIndicatorViewContainer3.surfaceControlViewHostFactory;
+                    WindowlessWindowManager windowlessWindowManager = new WindowlessWindowManager(runningTaskInfo.configuration, surfaceControlBuild, (InputTransferToken) null);
+                    VisualIndicatorViewContainer visualIndicatorViewContainer2 = visualIndicatorViewContainer;
+                    WindowDecoration.SurfaceControlViewHostFactory surfaceControlViewHostFactory = visualIndicatorViewContainer2.surfaceControlViewHostFactory;
                     Context context2 = context;
                     Display display2 = display;
                     surfaceControlViewHostFactory.getClass();
-                    visualIndicatorViewContainer3.indicatorViewHost = new SurfaceControlViewHost(context2, display2, windowlessWindowManager, "VisualIndicatorViewContainer");
-                    VisualIndicatorViewContainer visualIndicatorViewContainer4 = visualIndicatorViewContainer;
-                    View view = visualIndicatorViewContainer4.indicatorView;
-                    if (view != null && (surfaceControlViewHost = visualIndicatorViewContainer4.indicatorViewHost) != null) {
+                    visualIndicatorViewContainer2.indicatorViewHost = new SurfaceControlViewHost(context2, display2, windowlessWindowManager, "VisualIndicatorViewContainer");
+                    VisualIndicatorViewContainer visualIndicatorViewContainer3 = visualIndicatorViewContainer;
+                    View view = visualIndicatorViewContainer3.indicatorView;
+                    if (view != null && (surfaceControlViewHost = visualIndicatorViewContainer3.indicatorViewHost) != null) {
                         surfaceControlViewHost.setView(view, layoutParams);
                     }
-                    final VisualIndicatorViewContainer visualIndicatorViewContainer5 = visualIndicatorViewContainer;
-                    final SurfaceControl surfaceControl2 = surfaceControl;
-                    visualIndicatorViewContainer5.getClass();
-                    visualIndicatorViewContainer5.mainExecutor.execute(new Runnable() { // from class: com.android.wm.shell.desktopmode.VisualIndicatorViewContainer$showIndicator$1
+                    if (!CoreRune.DW_TASK_SNAPSHOT_BLUR) {
+                        final VisualIndicatorViewContainer visualIndicatorViewContainer4 = visualIndicatorViewContainer;
+                        final SurfaceControl surfaceControl3 = surfaceControl;
+                        visualIndicatorViewContainer4.getClass();
+                        visualIndicatorViewContainer4.mainExecutor.execute(new Runnable() { // from class: com.android.wm.shell.desktopmode.VisualIndicatorViewContainer$showIndicator$2
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                SurfaceControl surfaceControl4;
+                                visualIndicatorViewContainer4.indicatorLeash = surfaceControlBuild;
+                                final SurfaceControl.Transaction transaction = new SurfaceControl.Transaction();
+                                transaction.show(visualIndicatorViewContainer4.indicatorLeash);
+                                transaction.setRelativeLayer(visualIndicatorViewContainer4.indicatorLeash, surfaceControl3, -1);
+                                if (CoreRune.DW_TASK_SNAPSHOT_BLUR && (surfaceControl4 = surfaceControl2) != null) {
+                                    VisualIndicatorViewContainer visualIndicatorViewContainer5 = visualIndicatorViewContainer4;
+                                    visualIndicatorViewContainer5.taskSnapshotLeash = surfaceControl4;
+                                    transaction.show(surfaceControl4);
+                                    transaction.setRelativeLayer(visualIndicatorViewContainer5.taskSnapshotLeash, visualIndicatorViewContainer5.indicatorLeash, -1);
+                                }
+                                visualIndicatorViewContainer4.syncQueue.runInSync(new SyncTransactionQueue.TransactionRunnable() { // from class: com.android.wm.shell.desktopmode.VisualIndicatorViewContainer$showIndicator$2.2
+                                    @Override // com.android.wm.shell.common.SyncTransactionQueue.TransactionRunnable
+                                    public final void runWithTransaction(SurfaceControl.Transaction transaction2) {
+                                        transaction2.merge(transaction);
+                                        transaction.close();
+                                    }
+                                });
+                            }
+                        });
+                        return;
+                    }
+                    visualIndicatorViewContainer.taskSnapshotView = LayoutInflater.from(context).inflate(R.layout.desktop_drop_view, (ViewGroup) null);
+                    VisualIndicatorViewContainer visualIndicatorViewContainer5 = visualIndicatorViewContainer;
+                    visualIndicatorViewContainer5.recentsTasksController = recentTasksController;
+                    final SurfaceControl surfaceControlBuild2 = visualIndicatorViewContainer5.indicatorBuilder.setName("Desktop Mode Tasks Snapshot").setContainerLayer().setCallsite("DesktopModeVisualIndicator.createView").build();
+                    VisualIndicatorViewContainer visualIndicatorViewContainer6 = visualIndicatorViewContainer;
+                    WindowDecoration.SurfaceControlViewHostFactory surfaceControlViewHostFactory2 = visualIndicatorViewContainer6.surfaceControlViewHostFactory;
+                    Context context3 = context;
+                    Display display3 = display;
+                    WindowlessWindowManager windowlessWindowManager2 = new WindowlessWindowManager(runningTaskInfo.configuration, surfaceControlBuild2, (InputTransferToken) null);
+                    surfaceControlViewHostFactory2.getClass();
+                    visualIndicatorViewContainer6.taskSnapshotViewHost = new SurfaceControlViewHost(context3, display3, windowlessWindowManager2, "VisualIndicatorViewContainer");
+                    VisualIndicatorViewContainer visualIndicatorViewContainer7 = visualIndicatorViewContainer;
+                    View view2 = visualIndicatorViewContainer7.taskSnapshotView;
+                    if (view2 != null) {
+                        view2.setTranslationX(displayLayout.mWidth);
+                        SurfaceControlViewHost surfaceControlViewHost2 = visualIndicatorViewContainer7.taskSnapshotViewHost;
+                        if (surfaceControlViewHost2 != null) {
+                            surfaceControlViewHost2.setView(view2, layoutParams);
+                        }
+                    }
+                    final VisualIndicatorViewContainer visualIndicatorViewContainer8 = visualIndicatorViewContainer;
+                    final SurfaceControl surfaceControl4 = surfaceControl;
+                    visualIndicatorViewContainer8.getClass();
+                    visualIndicatorViewContainer8.mainExecutor.execute(new Runnable() { // from class: com.android.wm.shell.desktopmode.VisualIndicatorViewContainer$showIndicator$2
                         @Override // java.lang.Runnable
                         public final void run() {
-                            VisualIndicatorViewContainer.this.indicatorLeash = build;
+                            SurfaceControl surfaceControl42;
+                            visualIndicatorViewContainer8.indicatorLeash = surfaceControlBuild;
                             final SurfaceControl.Transaction transaction = new SurfaceControl.Transaction();
-                            transaction.show(VisualIndicatorViewContainer.this.indicatorLeash);
-                            transaction.setRelativeLayer(VisualIndicatorViewContainer.this.indicatorLeash, surfaceControl2, -1);
-                            VisualIndicatorViewContainer.this.syncQueue.runInSync(new SyncTransactionQueue.TransactionRunnable() { // from class: com.android.wm.shell.desktopmode.VisualIndicatorViewContainer$showIndicator$1.1
+                            transaction.show(visualIndicatorViewContainer8.indicatorLeash);
+                            transaction.setRelativeLayer(visualIndicatorViewContainer8.indicatorLeash, surfaceControl4, -1);
+                            if (CoreRune.DW_TASK_SNAPSHOT_BLUR && (surfaceControl42 = surfaceControlBuild2) != null) {
+                                VisualIndicatorViewContainer visualIndicatorViewContainer52 = visualIndicatorViewContainer8;
+                                visualIndicatorViewContainer52.taskSnapshotLeash = surfaceControl42;
+                                transaction.show(surfaceControl42);
+                                transaction.setRelativeLayer(visualIndicatorViewContainer52.taskSnapshotLeash, visualIndicatorViewContainer52.indicatorLeash, -1);
+                            }
+                            visualIndicatorViewContainer8.syncQueue.runInSync(new SyncTransactionQueue.TransactionRunnable() { // from class: com.android.wm.shell.desktopmode.VisualIndicatorViewContainer$showIndicator$2.2
                                 @Override // com.android.wm.shell.common.SyncTransactionQueue.TransactionRunnable
                                 public final void runWithTransaction(SurfaceControl.Transaction transaction2) {
                                     transaction2.merge(transaction);
@@ -170,9 +223,9 @@ public class DesktopModeVisualIndicator {
             this.mSortedRegions = Collections.EMPTY_LIST;
             return;
         }
-        int ordinal = dragStartState.ordinal();
-        if (ordinal != 1) {
-            if (ordinal != 2) {
+        int iOrdinal = dragStartState.ordinal();
+        if (iOrdinal != 1) {
+            if (iOrdinal != 2) {
                 arrayList = Collections.EMPTY_LIST;
             } else {
                 ArrayList arrayList2 = new ArrayList();
@@ -197,21 +250,21 @@ public class DesktopModeVisualIndicator {
         this.mSortedRegions = arrayList;
     }
 
-    public Rect calculateBubbleLeftRegion(DisplayLayout displayLayout) {
+    public Rect calculateBubbleLeftRegion(DisplayLayout displayLayout) throws Resources.NotFoundException {
         int dimensionPixelSize = this.mContext.getResources().getDimensionPixelSize(this.mUseSmallTabletRegions ? R.dimen.drag_zone_bubble_fold : R.dimen.drag_zone_bubble_tablet);
         int i = displayLayout.mHeight;
         return new Rect(0, i - dimensionPixelSize, dimensionPixelSize, i);
     }
 
-    public Rect calculateBubbleRightRegion(DisplayLayout displayLayout) {
+    public Rect calculateBubbleRightRegion(DisplayLayout displayLayout) throws Resources.NotFoundException {
         int dimensionPixelSize = this.mContext.getResources().getDimensionPixelSize(this.mUseSmallTabletRegions ? R.dimen.drag_zone_bubble_fold : R.dimen.drag_zone_bubble_tablet);
         int i = displayLayout.mWidth;
         int i2 = displayLayout.mHeight;
         return new Rect(i - dimensionPixelSize, i2 - dimensionPixelSize, i, i2);
     }
 
-    public Region calculateFullscreenRegion(DisplayLayout displayLayout, int i) {
-        return calculateFullscreenRegion(displayLayout, i, null, 0);
+    public Region calculateFullscreenRegion(DisplayLayout displayLayout) {
+        return calculateFullscreenRegion(displayLayout, null, 0);
     }
 
     public Rect calculateSplitLeftRegion(DisplayLayout displayLayout, int i, int i2) {
@@ -239,11 +292,15 @@ public class DesktopModeVisualIndicator {
         return this.mVisualIndicatorViewContainer.getIndicatorBounds();
     }
 
-    public final IndicatorType updateIndicatorType(PointF pointF, ActivityManager.RunningTaskInfo runningTaskInfo, boolean z, boolean z2, boolean z3) {
+    /* JADX WARN: Removed duplicated region for block: B:52:0x00d7  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public final IndicatorType updateIndicatorType(PointF pointF, ActivityManager.RunningTaskInfo runningTaskInfo, boolean z, boolean z2, boolean z3, boolean z4) {
         IndicatorType indicatorType;
-        boolean z4 = this.mUseSmallTabletRegions;
+        boolean z5 = this.mUseSmallTabletRegions;
         DragStartState dragStartState = this.mDragStartState;
-        if (z4) {
+        if (z5) {
             Iterator it = this.mSortedRegions.iterator();
             while (true) {
                 if (!it.hasNext()) {
@@ -262,7 +319,9 @@ public class DesktopModeVisualIndicator {
             }
         } else {
             DisplayLayout displayLayout = this.mDisplayController.getDisplayLayout(this.mTaskInfo.displayId);
-            if (runningTaskInfo.isFreeform() && !z3) {
+            if (displayLayout == null) {
+                indicatorType = IndicatorType.NO_INDICATOR;
+            } else if (runningTaskInfo.isFreeform() && !z3) {
                 indicatorType = IndicatorType.NO_INDICATOR;
             } else if (CoreRune.MW_CAPTION_KEYGUARD && z) {
                 indicatorType = IndicatorType.NO_INDICATOR;
@@ -278,48 +337,46 @@ public class DesktopModeVisualIndicator {
                     IndicatorType indicatorType2 = dragStartState == DragStartState.FROM_FREEFORM ? IndicatorType.NO_INDICATOR : IndicatorType.TO_DESKTOP_INDICATOR;
                     int dimensionPixelSize = this.mContext.getResources().getDimensionPixelSize(R.dimen.desktop_mode_transition_region_thickness);
                     int desktopViewAppHeaderHeightPx = SystemBarUtils.getDesktopViewAppHeaderHeightPx(this.mContext);
-                    Region calculateFullscreenRegion = calculateFullscreenRegion(displayLayout, desktopViewAppHeaderHeightPx, new Region(), dimensionPixelSize);
+                    Region regionCalculateFullscreenRegion = calculateFullscreenRegion(displayLayout, new Region(), dimensionPixelSize);
                     if (CoreRune.MW_CAPTION_DESKTOP) {
                         int i = runningTaskInfo.displayId;
                         DesktopStateImpl.Companion.getClass();
-                        if (!DesktopStateImpl.Companion.inDesktopWindowing(i)) {
-                            if (runningTaskInfo.getWindowingMode() == 1 && calculateFullscreenRegion.contains((int) pointF.x, (int) pointF.y)) {
-                                indicatorType = IndicatorType.TO_FULLSCREEN_INDICATOR;
+                        if (DesktopStateImpl.Companion.inDesktopWindowing(i)) {
+                            Rect rectCalculateSplitLeftRegion = calculateSplitLeftRegion(displayLayout, dimensionPixelSize, desktopViewAppHeaderHeightPx);
+                            Rect rectCalculateSplitRightRegion = calculateSplitRightRegion(displayLayout, dimensionPixelSize, desktopViewAppHeaderHeightPx);
+                            int i2 = (int) pointF.x;
+                            int i3 = (int) pointF.y;
+                            if (regionCalculateFullscreenRegion.contains(i2, i3) && runningTaskInfo.getDisplayId() == 0) {
+                                indicatorType2 = IndicatorType.TO_FULLSCREEN_INDICATOR;
                             }
-                            indicatorType = indicatorType2;
+                            if (rectCalculateSplitLeftRegion.contains(i2, i3)) {
+                                indicatorType2 = IndicatorType.TO_SPLIT_LEFT_INDICATOR;
+                            }
+                            if (rectCalculateSplitRightRegion.contains(i2, i3)) {
+                                indicatorType2 = IndicatorType.TO_SPLIT_RIGHT_INDICATOR;
+                            }
+                        } else if (runningTaskInfo.getWindowingMode() == 1 && regionCalculateFullscreenRegion.contains((int) pointF.x, (int) pointF.y)) {
+                            indicatorType = IndicatorType.TO_FULLSCREEN_INDICATOR;
                         }
+                        indicatorType = indicatorType2;
                     }
-                    Rect calculateSplitLeftRegion = calculateSplitLeftRegion(displayLayout, dimensionPixelSize, desktopViewAppHeaderHeightPx);
-                    Rect calculateSplitRightRegion = calculateSplitRightRegion(displayLayout, dimensionPixelSize, desktopViewAppHeaderHeightPx);
-                    int i2 = (int) pointF.x;
-                    int i3 = (int) pointF.y;
-                    if (calculateFullscreenRegion.contains(i2, i3) && runningTaskInfo.getDisplayId() == 0) {
-                        indicatorType2 = IndicatorType.TO_FULLSCREEN_INDICATOR;
-                    }
-                    if (calculateSplitLeftRegion.contains(i2, i3)) {
-                        indicatorType2 = IndicatorType.TO_SPLIT_LEFT_INDICATOR;
-                    }
-                    if (calculateSplitRightRegion.contains(i2, i3)) {
-                        indicatorType2 = IndicatorType.TO_SPLIT_RIGHT_INDICATOR;
-                    }
-                    indicatorType = indicatorType2;
                 }
             }
         }
         final IndicatorType indicatorType3 = indicatorType;
-        if (dragStartState != DragStartState.DRAGGED_INTENT) {
+        if (z4 && dragStartState != DragStartState.DRAGGED_INTENT) {
             final ActivityManager.RunningTaskInfo runningTaskInfo2 = this.mTaskInfo;
             final IndicatorType indicatorType4 = this.mCurrentType;
             final VisualIndicatorViewContainer visualIndicatorViewContainer = this.mVisualIndicatorViewContainer;
             if (indicatorType4 == indicatorType3) {
                 visualIndicatorViewContainer.getClass();
-            } else if (!visualIndicatorViewContainer.isReleased) {
+            } else if (!visualIndicatorViewContainer.isReleased && (!CoreRune.DW_TASK_SNAPSHOT_BLUR || indicatorType4 != IndicatorType.NO_INDICATOR || indicatorType3 != IndicatorType.TO_DESKTOP_INDICATOR)) {
                 final DisplayController displayController = this.mDisplayController;
                 visualIndicatorViewContainer.desktopExecutor.execute(new Runnable() { // from class: com.android.wm.shell.desktopmode.VisualIndicatorViewContainer$transitionIndicator$1
                     @Override // java.lang.Runnable
                     public final void run() {
                         DesktopModeVisualIndicator.IndicatorType indicatorType5;
-                        DisplayLayout displayLayout2 = DisplayController.this.getDisplayLayout(runningTaskInfo2.displayId);
+                        DisplayLayout displayLayout2 = displayController.getDisplayLayout(runningTaskInfo2.displayId);
                         if (displayLayout2 == null) {
                             throw new IllegalStateException(("Expected to find DisplayLayout for taskId" + runningTaskInfo2.taskId + ".").toString());
                         }
@@ -341,7 +398,7 @@ public class DesktopModeVisualIndicator {
                             visualIndicatorViewContainer3.desktopExecutor.execute(new VisualIndicatorViewContainer$fadeOutIndicator$1(visualIndicatorViewContainer3, indicatorType6, displayLayout2, i4, snapEventHandler, null));
                             return;
                         }
-                        DesktopModeVisualIndicator.IndicatorType valueOf = DesktopModeVisualIndicator.IndicatorType.valueOf(indicatorType6.name());
+                        DesktopModeVisualIndicator.IndicatorType indicatorTypeValueOf = DesktopModeVisualIndicator.IndicatorType.valueOf(indicatorType6.name());
                         VisualIndicatorViewContainer visualIndicatorViewContainer4 = visualIndicatorViewContainer;
                         View view = visualIndicatorViewContainer4.indicatorView;
                         if (view == null) {
@@ -353,7 +410,7 @@ public class DesktopModeVisualIndicator {
                         companion.getClass();
                         BubbleDropTargetBoundsProvider bubbleDropTargetBoundsProvider = visualIndicatorViewContainer4.bubbleBoundsProvider;
                         SnapEventHandler snapEventHandler2 = visualIndicatorViewContainer4.snapEventHandler;
-                        VisualIndicatorViewContainer.VisualIndicatorAnimator visualIndicatorAnimator = new VisualIndicatorViewContainer.VisualIndicatorAnimator(view, VisualIndicatorViewContainer.VisualIndicatorAnimator.Companion.getIndicatorBounds(displayLayout2, valueOf, bubbleDropTargetBoundsProvider, i5, snapEventHandler2), VisualIndicatorViewContainer.VisualIndicatorAnimator.Companion.getIndicatorBounds(displayLayout2, indicatorType9, bubbleDropTargetBoundsProvider, i5, snapEventHandler2), displayLayout2, i5);
+                        VisualIndicatorViewContainer.VisualIndicatorAnimator visualIndicatorAnimator = new VisualIndicatorViewContainer.VisualIndicatorAnimator(view, VisualIndicatorViewContainer.VisualIndicatorAnimator.Companion.getIndicatorBounds(displayLayout2, indicatorTypeValueOf, bubbleDropTargetBoundsProvider, i5, snapEventHandler2), VisualIndicatorViewContainer.VisualIndicatorAnimator.Companion.getIndicatorBounds(displayLayout2, indicatorType9, bubbleDropTargetBoundsProvider, i5, snapEventHandler2), displayLayout2, i5);
                         visualIndicatorAnimator.setInterpolator(new DecelerateInterpolator());
                         VisualIndicatorViewContainer.VisualIndicatorAnimator.Companion.setupIndicatorAnimation(visualIndicatorAnimator, VisualIndicatorViewContainer.VisualIndicatorAnimator.AlphaAnimType.ALPHA_NO_CHANGE_ANIM, indicatorType9);
                         visualIndicatorAnimator.start();
@@ -365,20 +422,20 @@ public class DesktopModeVisualIndicator {
         return indicatorType3;
     }
 
-    public Region calculateFullscreenRegion(DisplayLayout displayLayout, int i, Region region, int i2) {
+    public Region calculateFullscreenRegion(DisplayLayout displayLayout, Region region, int i) {
         Region region2 = new Region();
         DragStartState dragStartState = DragStartState.FROM_FREEFORM;
         DragStartState dragStartState2 = this.mDragStartState;
-        int statusBarHeight = (dragStartState2 == dragStartState || dragStartState2 == DragStartState.DRAGGED_INTENT) ? SystemBarUtils.getStatusBarHeight(this.mContext) : displayLayout.mStableInsets.top * 2;
+        int statusBarHeight = (dragStartState2 == dragStartState || dragStartState2 == DragStartState.DRAGGED_INTENT) ? SystemBarUtils.getStatusBarHeight(this.mContext) + 1 : displayLayout.mStableInsets.top * 2;
         this.fullscreenTransitionHeight = statusBarHeight;
         if (dragStartState2 == dragStartState) {
             this.mContext.getResources().getFloat(R.dimen.desktop_mode_fullscreen_region_scale);
             float dimensionPixelSize = this.mContext.getResources().getDimensionPixelSize(R.dimen.drag_hint_to_fullscreen_width);
-            int i3 = displayLayout.mWidth;
+            int i2 = displayLayout.mWidth;
             float f = dimensionPixelSize / 2.0f;
-            region2.union(new Rect((int) ((i3 / 2.0f) - f), -32768, (int) ((i3 / 2.0f) + f), statusBarHeight));
+            region2.union(new Rect((int) ((i2 / 2.0f) - f), -32768, (int) ((i2 / 2.0f) + f), statusBarHeight));
             if (region != null) {
-                region.op(new Region(new Rect(i2, -32768, displayLayout.mWidth - i2, statusBarHeight)), region2, Region.Op.DIFFERENCE);
+                region.op(new Region(new Rect(i, -32768, displayLayout.mWidth - i, statusBarHeight)), region2, Region.Op.DIFFERENCE);
             }
         }
         if (dragStartState2 != DragStartState.FROM_FULLSCREEN && dragStartState2 != DragStartState.FROM_SPLIT && dragStartState2 != DragStartState.DRAGGED_INTENT) {
@@ -388,47 +445,94 @@ public class DesktopModeVisualIndicator {
         return region2;
     }
 
+    public DesktopModeVisualIndicator(ShellExecutor shellExecutor, ShellExecutor shellExecutor2, SyncTransactionQueue syncTransactionQueue, int i, DisplayController displayController, RootTaskDisplayAreaOrganizer rootTaskDisplayAreaOrganizer, Context context, BubbleDropTargetBoundsProvider bubbleDropTargetBoundsProvider, SnapEventHandler snapEventHandler, final RecentTasksController recentTasksController) {
+        ShellExecutor shellExecutor3;
+        ShellExecutor shellExecutor4;
+        this.fullscreenTransitionHeight = 0;
+        SurfaceControl.Builder builder = new SurfaceControl.Builder();
+        rootTaskDisplayAreaOrganizer.attachToDisplayArea(i, builder);
+        if (DesktopModeFlags.ENABLE_DESKTOP_INDICATOR_IN_SEPARATE_THREAD_BUGFIX.isTrue()) {
+            shellExecutor3 = shellExecutor;
+            shellExecutor4 = shellExecutor2;
+        } else {
+            shellExecutor3 = shellExecutor2;
+            shellExecutor4 = shellExecutor3;
+        }
+        final VisualIndicatorViewContainer visualIndicatorViewContainer = new VisualIndicatorViewContainer(shellExecutor3, shellExecutor4, builder, syncTransactionQueue, bubbleDropTargetBoundsProvider, snapEventHandler);
+        this.mVisualIndicatorViewContainer = visualIndicatorViewContainer;
+        this.mDisplayController = displayController;
+        this.mCurrentType = IndicatorType.NO_INDICATOR;
+        this.mSnapEventHandler = snapEventHandler;
+        Context displayContext = displayController.getDisplayContext(i);
+        final Context context2 = displayContext != null ? displayContext : context;
+        this.mContext = context2;
+        final Display display = displayController.mDisplayManager.getDisplay(i);
+        final DisplayLayout displayLayout = displayController.getDisplayLayout(i);
+        if (!visualIndicatorViewContainer.isReleased) {
+            visualIndicatorViewContainer.desktopExecutor.execute(new Runnable() { // from class: com.android.wm.shell.desktopmode.VisualIndicatorViewContainer$createViewForDeskLabel$1
+                @Override // java.lang.Runnable
+                public final void run() {
+                    SurfaceControlViewHost surfaceControlViewHost;
+                    context2.getResources().getDisplayMetrics();
+                    DisplayLayout displayLayout2 = displayLayout;
+                    int i2 = displayLayout2.mWidth;
+                    int i3 = displayLayout2.mHeight;
+                    visualIndicatorViewContainer.indicatorView = LayoutInflater.from(context2).inflate(R.layout.desktop_drop_view, (ViewGroup) null);
+                    final SurfaceControl surfaceControlBuild = visualIndicatorViewContainer.indicatorBuilder.setName("Desktop Label Indicator").setContainerLayer().setCallsite("DesktopModeVisualIndicator.createViewForDeskLabel").build();
+                    WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams(i2, i3, 2, 8, -2);
+                    layoutParams.setTitle("Desktop Label Indicator");
+                    layoutParams.setTrustedOverlay();
+                    layoutParams.inputFeatures |= 4;
+                    WindowlessWindowManager windowlessWindowManager = new WindowlessWindowManager(context2.getResources().getConfiguration(), surfaceControlBuild, (InputTransferToken) null);
+                    VisualIndicatorViewContainer visualIndicatorViewContainer2 = visualIndicatorViewContainer;
+                    WindowDecoration.SurfaceControlViewHostFactory surfaceControlViewHostFactory = visualIndicatorViewContainer2.surfaceControlViewHostFactory;
+                    Context context3 = context2;
+                    Display display2 = display;
+                    surfaceControlViewHostFactory.getClass();
+                    visualIndicatorViewContainer2.indicatorViewHost = new SurfaceControlViewHost(context3, display2, windowlessWindowManager, "VisualIndicatorViewContainer");
+                    VisualIndicatorViewContainer visualIndicatorViewContainer3 = visualIndicatorViewContainer;
+                    View view = visualIndicatorViewContainer3.indicatorView;
+                    if (view != null && (surfaceControlViewHost = visualIndicatorViewContainer3.indicatorViewHost) != null) {
+                        surfaceControlViewHost.setView(view, layoutParams);
+                    }
+                    final VisualIndicatorViewContainer visualIndicatorViewContainer4 = visualIndicatorViewContainer;
+                    visualIndicatorViewContainer4.recentsTasksController = recentTasksController;
+                    visualIndicatorViewContainer4.getClass();
+                    visualIndicatorViewContainer4.mainExecutor.execute(new Runnable() { // from class: com.android.wm.shell.desktopmode.VisualIndicatorViewContainer$showIndicator$1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            SurfaceControl surfaceControl = surfaceControlBuild;
+                            if (!surfaceControl.isValid()) {
+                                surfaceControl = null;
+                            }
+                            if (surfaceControl != null) {
+                                VisualIndicatorViewContainer visualIndicatorViewContainer5 = visualIndicatorViewContainer4;
+                                visualIndicatorViewContainer5.indicatorLeash = surfaceControl;
+                                final SurfaceControl.Transaction transaction = new SurfaceControl.Transaction();
+                                transaction.setLayer(surfaceControl, Integer.MAX_VALUE);
+                                transaction.show(visualIndicatorViewContainer5.indicatorLeash);
+                                visualIndicatorViewContainer5.syncQueue.runInSync(new SyncTransactionQueue.TransactionRunnable() { // from class: com.android.wm.shell.desktopmode.VisualIndicatorViewContainer$showIndicator$1$2$1
+                                    @Override // com.android.wm.shell.common.SyncTransactionQueue.TransactionRunnable
+                                    public final void runWithTransaction(SurfaceControl.Transaction transaction2) {
+                                        transaction2.merge(transaction);
+                                        transaction.close();
+                                    }
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+        }
+        this.mTaskInfo = null;
+        this.mDragStartState = null;
+        this.mUseSmallTabletRegions = false;
+        this.mSortedRegions = null;
+    }
+
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public DesktopModeVisualIndicator(com.android.wm.shell.common.ShellExecutor r15, com.android.wm.shell.common.ShellExecutor r16, com.android.wm.shell.common.SyncTransactionQueue r17, android.app.ActivityManager.RunningTaskInfo r18, com.android.wm.shell.common.DisplayController r19, android.content.Context r20, android.view.SurfaceControl r21, com.android.wm.shell.RootTaskDisplayAreaOrganizer r22, com.android.wm.shell.desktopmode.DesktopModeVisualIndicator.DragStartState r23, com.android.wm.shell.shared.bubbles.BubbleDropTargetBoundsProvider r24, com.android.wm.shell.windowdecor.tiling.SnapEventHandler r25) {
-        /*
-            r14 = this;
-            r4 = r18
-            int r0 = r4.displayId
-            r5 = r19
-            com.android.wm.shell.common.DisplayLayout r0 = r5.getDisplayLayout(r0)
-            r1 = 0
-            r2 = 1
-            if (r0 == 0) goto L16
-            boolean r0 = r0.isLandscape()
-            if (r0 == 0) goto L16
-            r0 = r2
-            goto L17
-        L16:
-            r0 = r1
-        L17:
-            android.content.res.Resources r3 = r20.getResources()
-            r6 = 17891811(0x11101e3, float:2.6633648E-38)
-            boolean r3 = r3.getBoolean(r6)
-            r6 = -1
-            boolean r13 = com.android.wm.shell.common.split.SplitScreenUtils.isLeftRightSplit(r3, r2, r0, r1, r6)
-            r12 = 0
-            r0 = r14
-            r1 = r15
-            r2 = r16
-            r3 = r17
-            r6 = r20
-            r7 = r21
-            r8 = r22
-            r9 = r23
-            r10 = r24
-            r11 = r25
-            r0.<init>(r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.desktopmode.DesktopModeVisualIndicator.<init>(com.android.wm.shell.common.ShellExecutor, com.android.wm.shell.common.ShellExecutor, com.android.wm.shell.common.SyncTransactionQueue, android.app.ActivityManager$RunningTaskInfo, com.android.wm.shell.common.DisplayController, android.content.Context, android.view.SurfaceControl, com.android.wm.shell.RootTaskDisplayAreaOrganizer, com.android.wm.shell.desktopmode.DesktopModeVisualIndicator$DragStartState, com.android.wm.shell.shared.bubbles.BubbleDropTargetBoundsProvider, com.android.wm.shell.windowdecor.tiling.SnapEventHandler):void");
+    public DesktopModeVisualIndicator(ShellExecutor shellExecutor, ShellExecutor shellExecutor2, SyncTransactionQueue syncTransactionQueue, ActivityManager.RunningTaskInfo runningTaskInfo, DisplayController displayController, Context context, SurfaceControl surfaceControl, RootTaskDisplayAreaOrganizer rootTaskDisplayAreaOrganizer, DragStartState dragStartState, BubbleDropTargetBoundsProvider bubbleDropTargetBoundsProvider, SnapEventHandler snapEventHandler, RecentTasksController recentTasksController) {
+        DisplayLayout displayLayout = displayController.getDisplayLayout(runningTaskInfo.displayId);
+        this(shellExecutor, shellExecutor2, syncTransactionQueue, runningTaskInfo, displayController, context, surfaceControl, rootTaskDisplayAreaOrganizer, dragStartState, bubbleDropTargetBoundsProvider, snapEventHandler, false, SplitScreenUtils.isLeftRightSplit(context.getResources().getBoolean(android.R.bool.config_notificationReviewPermissions), true, displayLayout != null && displayLayout.isLandscape(), false, -1), recentTasksController);
     }
 }

@@ -8,7 +8,6 @@ import android.telephony.ims.ImsRegistrationAttributes;
 import android.telephony.ims.SipDetails;
 import android.telephony.ims.aidl.IImsRegistration;
 import android.telephony.ims.aidl.IImsRegistrationCallback;
-import android.telephony.ims.stub.ImsRegistrationImplBase;
 import android.util.Log;
 import com.android.internal.telephony.util.RemoteCallbackListExt;
 import com.android.internal.telephony.util.TelephonyUtils;
@@ -136,9 +135,7 @@ public class ImsRegistrationImplBase {
             return ((Integer) executeMethodAsyncForResult(new Supplier() { // from class: android.telephony.ims.stub.ImsRegistrationImplBase$1$$ExternalSyntheticLambda5
                 @Override // java.util.function.Supplier
                 public final Object get() {
-                    Integer lambda$getRegistrationTechnology$0;
-                    lambda$getRegistrationTechnology$0 = ImsRegistrationImplBase.AnonymousClass1.this.lambda$getRegistrationTechnology$0();
-                    return lambda$getRegistrationTechnology$0;
+                    return this.f$0.lambda$getRegistrationTechnology$0();
                 }
             }, "getRegistrationTechnology")).intValue();
         }
@@ -149,7 +146,7 @@ public class ImsRegistrationImplBase {
             executeMethodAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsRegistrationImplBase$1$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ImsRegistrationImplBase.AnonymousClass1.this.lambda$addRegistrationCallback$1(iImsRegistrationCallback, atomicReference);
+                    this.f$0.lambda$addRegistrationCallback$1(iImsRegistrationCallback, atomicReference);
                 }
             }, "addRegistrationCallback");
             if (atomicReference.get() != null) {
@@ -172,7 +169,7 @@ public class ImsRegistrationImplBase {
             executeMethodAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsRegistrationImplBase$1$$ExternalSyntheticLambda9
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ImsRegistrationImplBase.AnonymousClass1.this.lambda$addEmergencyRegistrationCallback$2(iImsRegistrationCallback, atomicReference);
+                    this.f$0.lambda$addEmergencyRegistrationCallback$2(iImsRegistrationCallback, atomicReference);
                 }
             }, "addEmergencyRegistrationCallback");
             if (atomicReference.get() != null) {
@@ -194,7 +191,7 @@ public class ImsRegistrationImplBase {
             executeMethodAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsRegistrationImplBase$1$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ImsRegistrationImplBase.AnonymousClass1.this.lambda$removeEmergencyRegistrationCallback$3(iImsRegistrationCallback);
+                    this.f$0.lambda$removeEmergencyRegistrationCallback$3(iImsRegistrationCallback);
                 }
             }, "removeEmergencyRegistrationCallback");
         }
@@ -214,7 +211,7 @@ public class ImsRegistrationImplBase {
             executeMethodAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsRegistrationImplBase$1$$ExternalSyntheticLambda10
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ImsRegistrationImplBase.AnonymousClass1.this.lambda$removeRegistrationCallback$4(iImsRegistrationCallback);
+                    this.f$0.lambda$removeRegistrationCallback$4(iImsRegistrationCallback);
                 }
             }, "removeRegistrationCallback");
         }
@@ -229,7 +226,7 @@ public class ImsRegistrationImplBase {
             executeMethodAsyncNoException(new Runnable() { // from class: android.telephony.ims.stub.ImsRegistrationImplBase$1$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ImsRegistrationImplBase.AnonymousClass1.this.lambda$triggerFullNetworkRegistration$5(i, str);
+                    this.f$0.lambda$triggerFullNetworkRegistration$5(i, str);
                 }
             }, "triggerFullNetworkRegistration");
         }
@@ -244,7 +241,7 @@ public class ImsRegistrationImplBase {
             executeMethodAsyncNoException(new Runnable() { // from class: android.telephony.ims.stub.ImsRegistrationImplBase$1$$ExternalSyntheticLambda11
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ImsRegistrationImplBase.AnonymousClass1.this.lambda$triggerUpdateSipDelegateRegistration$6();
+                    this.f$0.lambda$triggerUpdateSipDelegateRegistration$6();
                 }
             }, "triggerUpdateSipDelegateRegistration");
         }
@@ -259,7 +256,7 @@ public class ImsRegistrationImplBase {
             executeMethodAsyncNoException(new Runnable() { // from class: android.telephony.ims.stub.ImsRegistrationImplBase$1$$ExternalSyntheticLambda7
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ImsRegistrationImplBase.AnonymousClass1.this.lambda$triggerSipDelegateDeregistration$7();
+                    this.f$0.lambda$triggerSipDelegateDeregistration$7();
                 }
             }, "triggerSipDelegateDeregistration");
         }
@@ -274,7 +271,7 @@ public class ImsRegistrationImplBase {
             executeMethodAsyncNoException(new Runnable() { // from class: android.telephony.ims.stub.ImsRegistrationImplBase$1$$ExternalSyntheticLambda8
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ImsRegistrationImplBase.AnonymousClass1.this.lambda$triggerDeregistration$8(i);
+                    this.f$0.lambda$triggerDeregistration$8(i);
                 }
             }, "triggerDeregistration");
         }
@@ -311,9 +308,7 @@ public class ImsRegistrationImplBase {
                 return (T) CompletableFuture.supplyAsync(new Supplier() { // from class: android.telephony.ims.stub.ImsRegistrationImplBase$1$$ExternalSyntheticLambda3
                     @Override // java.util.function.Supplier
                     public final Object get() {
-                        Object runWithCleanCallingIdentity;
-                        runWithCleanCallingIdentity = TelephonyUtils.runWithCleanCallingIdentity((Supplier<Object>) supplier);
-                        return runWithCleanCallingIdentity;
+                        return TelephonyUtils.runWithCleanCallingIdentity(supplier);
                     }
                 }, ImsRegistrationImplBase.this.mExecutor).get();
             } catch (InterruptedException | ExecutionException e) {
@@ -356,8 +351,8 @@ public class ImsRegistrationImplBase {
 
     @SystemApi
     public final void onRegistered(final ImsRegistrationAttributes imsRegistrationAttributes) {
-        boolean isEmergency = isEmergency(imsRegistrationAttributes);
-        if (isEmergency) {
+        boolean zIsEmergency = isEmergency(imsRegistrationAttributes);
+        if (zIsEmergency) {
             updateToEmergencyState(imsRegistrationAttributes, 2);
         } else {
             updateToState(imsRegistrationAttributes, 2);
@@ -365,9 +360,9 @@ public class ImsRegistrationImplBase {
         broadcastToCallbacksLocked(new Consumer() { // from class: android.telephony.ims.stub.ImsRegistrationImplBase$$ExternalSyntheticLambda2
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                ImsRegistrationImplBase.lambda$onRegistered$0(ImsRegistrationAttributes.this, (IImsRegistrationCallback) obj);
+                ImsRegistrationImplBase.lambda$onRegistered$0(imsRegistrationAttributes, (IImsRegistrationCallback) obj);
             }
-        }, isEmergency);
+        }, zIsEmergency);
     }
 
     static /* synthetic */ void lambda$onRegistered$0(ImsRegistrationAttributes imsRegistrationAttributes, IImsRegistrationCallback iImsRegistrationCallback) {
@@ -385,8 +380,8 @@ public class ImsRegistrationImplBase {
 
     @SystemApi
     public final void onRegistering(final ImsRegistrationAttributes imsRegistrationAttributes) {
-        boolean isEmergency = isEmergency(imsRegistrationAttributes);
-        if (isEmergency) {
+        boolean zIsEmergency = isEmergency(imsRegistrationAttributes);
+        if (zIsEmergency) {
             updateToEmergencyState(imsRegistrationAttributes, 1);
         } else {
             updateToState(imsRegistrationAttributes, 1);
@@ -394,9 +389,9 @@ public class ImsRegistrationImplBase {
         broadcastToCallbacksLocked(new Consumer() { // from class: android.telephony.ims.stub.ImsRegistrationImplBase$$ExternalSyntheticLambda1
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                ImsRegistrationImplBase.lambda$onRegistering$1(ImsRegistrationAttributes.this, (IImsRegistrationCallback) obj);
+                ImsRegistrationImplBase.lambda$onRegistering$1(imsRegistrationAttributes, (IImsRegistrationCallback) obj);
             }
-        }, isEmergency);
+        }, zIsEmergency);
     }
 
     static /* synthetic */ void lambda$onRegistering$1(ImsRegistrationAttributes imsRegistrationAttributes, IImsRegistrationCallback iImsRegistrationCallback) {
@@ -414,20 +409,20 @@ public class ImsRegistrationImplBase {
 
     @SystemApi
     public final void onDeregistered(ImsReasonInfo imsReasonInfo, int i, int i2) {
-        ImsRegistrationAttributes build;
+        ImsRegistrationAttributes imsRegistrationAttributesBuild;
         if (this.mRegistrationAttributes != null) {
-            build = new ImsRegistrationAttributes(i2, this.mRegistrationAttributes.getTransportType(), this.mRegistrationAttributes.getAttributeFlags(), this.mRegistrationAttributes.getFeatureTags());
+            imsRegistrationAttributesBuild = new ImsRegistrationAttributes(i2, this.mRegistrationAttributes.getTransportType(), this.mRegistrationAttributes.getAttributeFlags(), this.mRegistrationAttributes.getFeatureTags());
         } else {
-            build = new ImsRegistrationAttributes.Builder(i2).build();
+            imsRegistrationAttributesBuild = new ImsRegistrationAttributes.Builder(i2).build();
         }
-        onDeregistered(imsReasonInfo, i, build);
+        onDeregistered(imsReasonInfo, i, imsRegistrationAttributesBuild);
     }
 
     @SystemApi
     public final void onDeregistered(final ImsReasonInfo imsReasonInfo, final int i, ImsRegistrationAttributes imsRegistrationAttributes) {
-        boolean isEmergency = isEmergency(imsRegistrationAttributes);
+        boolean zIsEmergency = isEmergency(imsRegistrationAttributes);
         final int registrationTechnology = imsRegistrationAttributes.getRegistrationTechnology();
-        if (isEmergency) {
+        if (zIsEmergency) {
             updateToDisconnectedEmergencyState(imsReasonInfo, i, registrationTechnology);
         } else {
             updateToDisconnectedState(imsReasonInfo, i, registrationTechnology);
@@ -438,9 +433,9 @@ public class ImsRegistrationImplBase {
         broadcastToCallbacksLocked(new Consumer() { // from class: android.telephony.ims.stub.ImsRegistrationImplBase$$ExternalSyntheticLambda5
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                ImsRegistrationImplBase.lambda$onDeregistered$2(ImsReasonInfo.this, i, registrationTechnology, (IImsRegistrationCallback) obj);
+                ImsRegistrationImplBase.lambda$onDeregistered$2(imsReasonInfo, i, registrationTechnology, (IImsRegistrationCallback) obj);
             }
-        }, isEmergency);
+        }, zIsEmergency);
     }
 
     static /* synthetic */ void lambda$onDeregistered$2(ImsReasonInfo imsReasonInfo, int i, int i2, IImsRegistrationCallback iImsRegistrationCallback) {
@@ -465,7 +460,7 @@ public class ImsRegistrationImplBase {
         broadcastToCallbacksLocked(new Consumer() { // from class: android.telephony.ims.stub.ImsRegistrationImplBase$$ExternalSyntheticLambda3
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                ImsRegistrationImplBase.lambda$onDeregistered$3(ImsReasonInfo.this, i, i2, sipDetails, (IImsRegistrationCallback) obj);
+                ImsRegistrationImplBase.lambda$onDeregistered$3(imsReasonInfo, i, i2, sipDetails, (IImsRegistrationCallback) obj);
             }
         }, false);
     }
@@ -480,18 +475,18 @@ public class ImsRegistrationImplBase {
 
     @SystemApi
     public final void onTechnologyChangeFailed(int i, ImsReasonInfo imsReasonInfo) {
-        ImsRegistrationAttributes build;
+        ImsRegistrationAttributes imsRegistrationAttributesBuild;
         if (this.mRegistrationAttributes != null) {
-            build = new ImsRegistrationAttributes(i, this.mRegistrationAttributes.getTransportType(), this.mRegistrationAttributes.getAttributeFlags(), this.mRegistrationAttributes.getFeatureTags());
+            imsRegistrationAttributesBuild = new ImsRegistrationAttributes(i, this.mRegistrationAttributes.getTransportType(), this.mRegistrationAttributes.getAttributeFlags(), this.mRegistrationAttributes.getFeatureTags());
         } else {
-            build = new ImsRegistrationAttributes.Builder(i).build();
+            imsRegistrationAttributesBuild = new ImsRegistrationAttributes.Builder(i).build();
         }
-        onTechnologyChangeFailed(imsReasonInfo, build);
+        onTechnologyChangeFailed(imsReasonInfo, imsRegistrationAttributesBuild);
     }
 
     @SystemApi
     public final void onTechnologyChangeFailed(final ImsReasonInfo imsReasonInfo, ImsRegistrationAttributes imsRegistrationAttributes) {
-        boolean isEmergency = isEmergency(imsRegistrationAttributes);
+        boolean zIsEmergency = isEmergency(imsRegistrationAttributes);
         final int registrationTechnology = imsRegistrationAttributes.getRegistrationTechnology();
         if (imsReasonInfo == null) {
             imsReasonInfo = new ImsReasonInfo();
@@ -501,7 +496,7 @@ public class ImsRegistrationImplBase {
             public final void accept(Object obj) {
                 ImsRegistrationImplBase.lambda$onTechnologyChangeFailed$4(registrationTechnology, imsReasonInfo, (IImsRegistrationCallback) obj);
             }
-        }, isEmergency);
+        }, zIsEmergency);
     }
 
     static /* synthetic */ void lambda$onTechnologyChangeFailed$4(int i, ImsReasonInfo imsReasonInfo, IImsRegistrationCallback iImsRegistrationCallback) {
@@ -521,7 +516,7 @@ public class ImsRegistrationImplBase {
         broadcastToCallbacksLocked(new Consumer() { // from class: android.telephony.ims.stub.ImsRegistrationImplBase$$ExternalSyntheticLambda4
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                ImsRegistrationImplBase.this.lambda$onSubscriberAssociatedUriChanged$5(uriArr, (IImsRegistrationCallback) obj);
+                this.f$0.lambda$onSubscriberAssociatedUriChanged$5(uriArr, (IImsRegistrationCallback) obj);
             }
         }, false);
     }

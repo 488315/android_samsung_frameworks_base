@@ -14,7 +14,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class ForegroundServicesRepositoryImpl$foregroundServicesCount$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ FgsManagerController $fgsManagerController;
@@ -50,7 +49,7 @@ final class ForegroundServicesRepositoryImpl$foregroundServicesCount$1 extends S
             final ?? r1 = new FgsManagerController.OnNumberOfPackagesChangedListener() { // from class: com.android.systemui.qs.footer.data.repository.ForegroundServicesRepositoryImpl$foregroundServicesCount$1$listener$1
                 @Override // com.android.systemui.qs.FgsManagerController.OnNumberOfPackagesChangedListener
                 public final void onNumberOfPackagesChanged(int i2) {
-                    ChannelExt.trySendWithFailureLogging$default(ChannelExt.INSTANCE, ProducerScope.this, Integer.valueOf(i2), "ForegroundServicesRepositoryImpl");
+                    ChannelExt.trySendWithFailureLogging$default(ChannelExt.INSTANCE, producerScope, Integer.valueOf(i2), "ForegroundServicesRepositoryImpl");
                 }
             };
             FgsManagerControllerImpl fgsManagerControllerImpl = (FgsManagerControllerImpl) this.$fgsManagerController;
@@ -65,7 +64,7 @@ final class ForegroundServicesRepositoryImpl$foregroundServicesCount$1 extends S
             Function0 function0 = new Function0() { // from class: com.android.systemui.qs.footer.data.repository.ForegroundServicesRepositoryImpl$foregroundServicesCount$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    FgsManagerControllerImpl fgsManagerControllerImpl2 = (FgsManagerControllerImpl) FgsManagerController.this;
+                    FgsManagerControllerImpl fgsManagerControllerImpl2 = (FgsManagerControllerImpl) fgsManagerController;
                     ForegroundServicesRepositoryImpl$foregroundServicesCount$1$listener$1 foregroundServicesRepositoryImpl$foregroundServicesCount$1$listener$1 = r1;
                     if (fgsManagerControllerImpl2.secFgsManagerController != null) {
                         SecFgsManagerController.log("removeOnNumberOfPackagesChangedListener");

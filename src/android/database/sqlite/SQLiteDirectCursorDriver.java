@@ -33,17 +33,17 @@ public final class SQLiteDirectCursorDriver implements SQLiteCursorDriver {
 
     @Override // android.database.sqlite.SQLiteCursorDriver
     public Cursor query(SQLiteDatabase.CursorFactory cursorFactory, String[] strArr) {
-        Cursor newCursor;
+        Cursor cursorNewCursor;
         SQLiteQuery sQLiteQuery = new SQLiteQuery(this.mDatabase, this.mSql, this.mCancellationSignal);
         try {
             sQLiteQuery.bindAllArgsAsStrings(strArr);
             if (cursorFactory == null) {
-                newCursor = new SQLiteCursor(this, this.mEditTable, sQLiteQuery);
+                cursorNewCursor = new SQLiteCursor(this, this.mEditTable, sQLiteQuery);
             } else {
-                newCursor = cursorFactory.newCursor(this.mDatabase, this, this.mEditTable, sQLiteQuery);
+                cursorNewCursor = cursorFactory.newCursor(this.mDatabase, this, this.mEditTable, sQLiteQuery);
             }
             this.mQuery = sQLiteQuery;
-            return newCursor;
+            return cursorNewCursor;
         } catch (RuntimeException e) {
             sQLiteQuery.close();
             throw e;

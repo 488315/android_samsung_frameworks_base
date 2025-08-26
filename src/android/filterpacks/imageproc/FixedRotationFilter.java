@@ -40,46 +40,46 @@ public class FixedRotationFilter extends Filter {
     public void process(FilterContext filterContext) {
         Quad quad;
         Quad quad2;
-        Frame pullInput = pullInput("image");
+        Frame framePullInput = pullInput("image");
         if (this.mRotation == 0) {
-            pushOutput("image", pullInput);
+            pushOutput("image", framePullInput);
             return;
         }
-        FrameFormat format = pullInput.getFormat();
+        FrameFormat format = framePullInput.getFormat();
         if (this.mProgram == null) {
             this.mProgram = ShaderProgram.createIdentity(filterContext);
         }
-        MutableFrameFormat mutableCopy = format.mutableCopy();
+        MutableFrameFormat mutableFrameFormatMutableCopy = format.mutableCopy();
         int width = format.getWidth();
         int height = format.getHeight();
         Point point = new Point(0.0f, 0.0f);
         Point point2 = new Point(1.0f, 0.0f);
         Point point3 = new Point(0.0f, 1.0f);
         Point point4 = new Point(1.0f, 1.0f);
-        int round = Math.round(this.mRotation / 90.0f) % 4;
-        if (round == 1) {
+        int iRound = Math.round(this.mRotation / 90.0f) % 4;
+        if (iRound == 1) {
             quad = new Quad(point3, point, point4, point2);
-            mutableCopy.setDimensions(height, width);
+            mutableFrameFormatMutableCopy.setDimensions(height, width);
         } else {
-            if (round == 2) {
+            if (iRound == 2) {
                 quad2 = new Quad(point4, point3, point2, point);
-            } else if (round == 3) {
+            } else if (iRound == 3) {
                 quad = new Quad(point2, point4, point, point3);
-                mutableCopy.setDimensions(height, width);
+                mutableFrameFormatMutableCopy.setDimensions(height, width);
             } else {
                 quad2 = new Quad(point, point2, point3, point4);
             }
-            Frame newFrame = filterContext.getFrameManager().newFrame(mutableCopy);
+            Frame frameNewFrame = filterContext.getFrameManager().newFrame(mutableFrameFormatMutableCopy);
             this.mProgram.setSourceRegion(quad2);
-            this.mProgram.process(pullInput, newFrame);
-            pushOutput("image", newFrame);
-            newFrame.release();
+            this.mProgram.process(framePullInput, frameNewFrame);
+            pushOutput("image", frameNewFrame);
+            frameNewFrame.release();
         }
         quad2 = quad;
-        Frame newFrame2 = filterContext.getFrameManager().newFrame(mutableCopy);
+        Frame frameNewFrame2 = filterContext.getFrameManager().newFrame(mutableFrameFormatMutableCopy);
         this.mProgram.setSourceRegion(quad2);
-        this.mProgram.process(pullInput, newFrame2);
-        pushOutput("image", newFrame2);
-        newFrame2.release();
+        this.mProgram.process(framePullInput, frameNewFrame2);
+        pushOutput("image", frameNewFrame2);
+        frameNewFrame2.release();
     }
 }

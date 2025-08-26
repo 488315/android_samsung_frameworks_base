@@ -4,7 +4,6 @@ import android.annotation.SystemApi;
 import android.os.RemoteException;
 import android.security.intrusiondetection.IIntrusionDetectionServiceCommandCallback;
 import android.security.intrusiondetection.IIntrusionDetectionServiceStateCallback;
-import android.security.intrusiondetection.IntrusionDetectionManager;
 import android.util.Log;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -136,7 +135,7 @@ public class IntrusionDetectionManager {
             executor.execute(new Runnable() { // from class: android.security.intrusiondetection.IntrusionDetectionManager$2$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    IntrusionDetectionManager.CommandCallback.this.onFailure(i);
+                    commandCallback.onFailure(i);
                 }
             });
         }
@@ -177,7 +176,7 @@ public class IntrusionDetectionManager {
             executor.execute(new Runnable() { // from class: android.security.intrusiondetection.IntrusionDetectionManager$3$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    IntrusionDetectionManager.CommandCallback.this.onFailure(i);
+                    commandCallback.onFailure(i);
                 }
             });
         }

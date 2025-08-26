@@ -12,24 +12,20 @@ import androidx.slice.SliceSpec;
 import androidx.slice.SliceSpecs;
 import androidx.slice.SliceViewManager;
 import androidx.slice.SliceViewManagerWrapper;
-import androidx.slice.widget.SliceLiveData;
 import com.android.systemui.volume.VolumePanelDialog;
 import com.android.systemui.volume.VolumePanelDialog$$ExternalSyntheticLambda2;
 import java.util.Arrays;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SliceLiveData {
     public static final ArraySet SUPPORTED_SPECS = new ArraySet(Arrays.asList(SliceSpecs.BASIC, SliceSpecs.LIST, SliceSpecs.LIST_V2, new SliceSpec("androidx.app.slice.BASIC", 1), new SliceSpec("androidx.app.slice.LIST", 1)));
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface OnErrorListener {
     }
 
     private SliceLiveData() {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SliceLiveDataImpl extends LiveData {
         public final Intent mIntent;
         public final OnErrorListener mListener;
@@ -47,14 +43,14 @@ public final class SliceLiveData {
                         SliceLiveDataImpl sliceLiveDataImpl = SliceLiveDataImpl.this;
                         Uri uri2 = sliceLiveDataImpl.mUri;
                         SliceViewManagerWrapper sliceViewManagerWrapper = sliceLiveDataImpl.mSliceViewManager;
-                        Slice bindSlice = uri2 != null ? sliceViewManagerWrapper.bindSlice(uri2) : sliceViewManagerWrapper.bindSlice(sliceLiveDataImpl.mIntent);
+                        Slice sliceBindSlice = uri2 != null ? sliceViewManagerWrapper.bindSlice(uri2) : sliceViewManagerWrapper.bindSlice(sliceLiveDataImpl.mIntent);
                         SliceLiveDataImpl sliceLiveDataImpl2 = SliceLiveDataImpl.this;
-                        if (sliceLiveDataImpl2.mUri == null && bindSlice != null) {
-                            sliceLiveDataImpl2.mUri = Uri.parse(bindSlice.mUri);
+                        if (sliceLiveDataImpl2.mUri == null && sliceBindSlice != null) {
+                            sliceLiveDataImpl2.mUri = Uri.parse(sliceBindSlice.mUri);
                             SliceLiveDataImpl sliceLiveDataImpl3 = SliceLiveDataImpl.this;
                             sliceLiveDataImpl3.mSliceViewManager.registerSliceCallback(sliceLiveDataImpl3.mUri, sliceLiveDataImpl3.mSliceCallback);
                         }
-                        SliceLiveDataImpl.this.postValue(bindSlice);
+                        SliceLiveDataImpl.this.postValue(sliceBindSlice);
                     } catch (IllegalArgumentException e) {
                         SliceLiveDataImpl.this.onSliceError(e);
                         SliceLiveDataImpl.this.postValue(null);
@@ -67,7 +63,7 @@ public final class SliceLiveData {
             this.mSliceCallback = new SliceViewManager.SliceCallback() { // from class: androidx.slice.widget.SliceLiveData$SliceLiveDataImpl$$ExternalSyntheticLambda0
                 @Override // androidx.slice.SliceViewManager.SliceCallback
                 public final void onSliceUpdated(Slice slice) {
-                    SliceLiveData.SliceLiveDataImpl.this.postValue(slice);
+                    this.f$0.postValue(slice);
                 }
             };
             this.mSliceViewManager = new SliceViewManagerWrapper(context);
@@ -118,14 +114,14 @@ public final class SliceLiveData {
                         SliceLiveDataImpl sliceLiveDataImpl = SliceLiveDataImpl.this;
                         Uri uri2 = sliceLiveDataImpl.mUri;
                         SliceViewManagerWrapper sliceViewManagerWrapper = sliceLiveDataImpl.mSliceViewManager;
-                        Slice bindSlice = uri2 != null ? sliceViewManagerWrapper.bindSlice(uri2) : sliceViewManagerWrapper.bindSlice(sliceLiveDataImpl.mIntent);
+                        Slice sliceBindSlice = uri2 != null ? sliceViewManagerWrapper.bindSlice(uri2) : sliceViewManagerWrapper.bindSlice(sliceLiveDataImpl.mIntent);
                         SliceLiveDataImpl sliceLiveDataImpl2 = SliceLiveDataImpl.this;
-                        if (sliceLiveDataImpl2.mUri == null && bindSlice != null) {
-                            sliceLiveDataImpl2.mUri = Uri.parse(bindSlice.mUri);
+                        if (sliceLiveDataImpl2.mUri == null && sliceBindSlice != null) {
+                            sliceLiveDataImpl2.mUri = Uri.parse(sliceBindSlice.mUri);
                             SliceLiveDataImpl sliceLiveDataImpl3 = SliceLiveDataImpl.this;
                             sliceLiveDataImpl3.mSliceViewManager.registerSliceCallback(sliceLiveDataImpl3.mUri, sliceLiveDataImpl3.mSliceCallback);
                         }
-                        SliceLiveDataImpl.this.postValue(bindSlice);
+                        SliceLiveDataImpl.this.postValue(sliceBindSlice);
                     } catch (IllegalArgumentException e) {
                         SliceLiveDataImpl.this.onSliceError(e);
                         SliceLiveDataImpl.this.postValue(null);
@@ -138,7 +134,7 @@ public final class SliceLiveData {
             this.mSliceCallback = new SliceViewManager.SliceCallback() { // from class: androidx.slice.widget.SliceLiveData$SliceLiveDataImpl$$ExternalSyntheticLambda0
                 @Override // androidx.slice.SliceViewManager.SliceCallback
                 public final void onSliceUpdated(Slice slice) {
-                    SliceLiveData.SliceLiveDataImpl.this.postValue(slice);
+                    this.f$0.postValue(slice);
                 }
             };
             this.mSliceViewManager = new SliceViewManagerWrapper(context);

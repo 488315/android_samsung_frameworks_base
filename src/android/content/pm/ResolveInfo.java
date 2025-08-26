@@ -95,8 +95,8 @@ public class ResolveInfo implements Parcelable {
         if (this.labelRes != 0 && (text = packageManager.getText(componentInfo.packageName, this.labelRes, applicationInfo)) != null) {
             return text.toString().trim();
         }
-        CharSequence loadLabel = componentInfo.loadLabel(packageManager);
-        return loadLabel != null ? loadLabel.toString().trim() : loadLabel;
+        CharSequence charSequenceLoadLabel = componentInfo.loadLabel(packageManager);
+        return charSequenceLoadLabel != null ? charSequenceLoadLabel.toString().trim() : charSequenceLoadLabel;
     }
 
     public int resolveLabelResId() {
@@ -307,12 +307,12 @@ public class ResolveInfo implements Parcelable {
         this.activityInfo = null;
         this.serviceInfo = null;
         this.providerInfo = null;
-        int readInt = parcel.readInt();
-        if (readInt == 1) {
+        int i = parcel.readInt();
+        if (i == 1) {
             this.activityInfo = ActivityInfo.CREATOR.createFromParcel(parcel);
-        } else if (readInt == 2) {
+        } else if (i == 2) {
             this.serviceInfo = ServiceInfo.CREATOR.createFromParcel(parcel);
-        } else if (readInt == 3) {
+        } else if (i == 3) {
             this.providerInfo = ProviderInfo.CREATOR.createFromParcel(parcel);
         } else {
             Slog.w(TAG, "Missing ComponentInfo!");
@@ -335,9 +335,9 @@ public class ResolveInfo implements Parcelable {
         this.handleAllWebDataURI = parcel.readInt() != 0;
         this.mAutoResolutionAllowed = parcel.readInt() != 0;
         this.isInstantAppAvailable = parcel.readInt() != 0;
-        int readInt2 = parcel.readInt();
-        if (readInt2 != -2) {
-            this.userHandle = UserHandle.of(readInt2);
+        int i2 = parcel.readInt();
+        if (i2 != -2) {
+            this.userHandle = UserHandle.of(i2);
         }
     }
 
@@ -360,15 +360,15 @@ public class ResolveInfo implements Parcelable {
             if (resolveInfo2.targetUserId != -2) {
                 return -1;
             }
-            CharSequence loadLabel = resolveInfo.loadLabel(this.mPM);
-            if (loadLabel == null) {
-                loadLabel = resolveInfo.activityInfo.name;
+            CharSequence charSequenceLoadLabel = resolveInfo.loadLabel(this.mPM);
+            if (charSequenceLoadLabel == null) {
+                charSequenceLoadLabel = resolveInfo.activityInfo.name;
             }
-            CharSequence loadLabel2 = resolveInfo2.loadLabel(this.mPM);
-            if (loadLabel2 == null) {
-                loadLabel2 = resolveInfo2.activityInfo.name;
+            CharSequence charSequenceLoadLabel2 = resolveInfo2.loadLabel(this.mPM);
+            if (charSequenceLoadLabel2 == null) {
+                charSequenceLoadLabel2 = resolveInfo2.activityInfo.name;
             }
-            return this.mCollator.compare(loadLabel.toString(), loadLabel2.toString());
+            return this.mCollator.compare(charSequenceLoadLabel.toString(), charSequenceLoadLabel2.toString());
         }
     }
 }

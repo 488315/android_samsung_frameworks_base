@@ -47,7 +47,7 @@ public class PeopleHelper {
             cachingIconView.animate().withEndAction(new Runnable() { // from class: com.android.internal.widget.PeopleHelper$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    CachingIconView.this.setForceHidden(z);
+                    cachingIconView.setForceHidden(z);
                 }
             });
         }
@@ -58,18 +58,18 @@ public class PeopleHelper {
         float f;
         float f2;
         if (str == null || str.isEmpty() || TextUtils.isDigitsOnly(str) || SPECIAL_CHAR_PATTERN.matcher(str).find()) {
-            Icon createWithResource = Icon.createWithResource(this.mContext, R.drawable.messaging_user);
-            createWithResource.setTint(findColor(charSequence, i));
-            return createWithResource;
+            Icon iconCreateWithResource = Icon.createWithResource(this.mContext, R.drawable.messaging_user);
+            iconCreateWithResource.setTint(findColor(charSequence, i));
+            return iconCreateWithResource;
         }
         int i2 = this.mAvatarSize;
-        Bitmap createBitmap = Bitmap.createBitmap(i2, i2, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(createBitmap);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(i2, i2, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmapCreateBitmap);
         float f3 = this.mAvatarSize / 2.0f;
-        int findColor = findColor(charSequence, i);
-        this.mPaint.setColor(findColor);
+        int iFindColor = findColor(charSequence, i);
+        this.mPaint.setColor(iFindColor);
         canvas.drawCircle(f3, f3, f3, this.mPaint);
-        this.mTextPaint.setColor((ColorUtils.calculateLuminance(findColor) > 0.5d ? 1 : (ColorUtils.calculateLuminance(findColor) == 0.5d ? 0 : -1)) > 0 ? -16777216 : -1);
+        this.mTextPaint.setColor((ColorUtils.calculateLuminance(iFindColor) > 0.5d ? 1 : (ColorUtils.calculateLuminance(iFindColor) == 0.5d ? 0 : -1)) > 0 ? -16777216 : -1);
         Paint paint = this.mTextPaint;
         if (str.length() == 1) {
             f = this.mAvatarSize;
@@ -80,7 +80,7 @@ public class PeopleHelper {
         }
         paint.setTextSize(f * f2);
         canvas.drawText(str, f3, (int) (f3 - ((this.mTextPaint.descent() + this.mTextPaint.ascent()) / 2.0f)), this.mTextPaint);
-        return Icon.createWithBitmap(createBitmap);
+        return Icon.createWithBitmap(bitmapCreateBitmap);
     }
 
     private int findColor(CharSequence charSequence, int i) {
@@ -103,35 +103,35 @@ public class PeopleHelper {
     }
 
     public String findNameSplit(CharSequence charSequence) {
-        String[] split = (charSequence instanceof String ? (String) charSequence : charSequence.toString()).trim().split("[ ]+");
-        if (split.length > 1) {
-            String findNamePrefix = findNamePrefix(split[0], null);
-            String findNamePrefix2 = findNamePrefix(split[1], null);
-            if (findNamePrefix != null && findNamePrefix2 != null) {
-                return findNamePrefix + findNamePrefix2;
+        String[] strArrSplit = (charSequence instanceof String ? (String) charSequence : charSequence.toString()).trim().split("[ ]+");
+        if (strArrSplit.length > 1) {
+            String strFindNamePrefix = findNamePrefix(strArrSplit[0], null);
+            String strFindNamePrefix2 = findNamePrefix(strArrSplit[1], null);
+            if (strFindNamePrefix != null && strFindNamePrefix2 != null) {
+                return strFindNamePrefix + strFindNamePrefix2;
             }
         }
         return findNamePrefix(charSequence, "");
     }
 
     public Map<CharSequence, String> mapUniqueNamesToPrefix(List<MessagingGroup> list) {
-        String findNamePrefix;
+        String strFindNamePrefix;
         ArrayMap arrayMap = new ArrayMap();
         ArrayMap arrayMap2 = new ArrayMap();
         for (int i = 0; i < list.size(); i++) {
             MessagingGroup messagingGroup = list.get(i);
             CharSequence senderName = messagingGroup.getSenderName();
-            if (messagingGroup.needsGeneratedAvatar() && !TextUtils.isEmpty(senderName) && !arrayMap.containsKey(senderName) && (findNamePrefix = findNamePrefix(senderName, null)) != null) {
-                if (arrayMap2.containsKey(findNamePrefix)) {
-                    CharSequence charSequence = (CharSequence) arrayMap2.get(findNamePrefix);
+            if (messagingGroup.needsGeneratedAvatar() && !TextUtils.isEmpty(senderName) && !arrayMap.containsKey(senderName) && (strFindNamePrefix = findNamePrefix(senderName, null)) != null) {
+                if (arrayMap2.containsKey(strFindNamePrefix)) {
+                    CharSequence charSequence = (CharSequence) arrayMap2.get(strFindNamePrefix);
                     if (charSequence != null) {
                         arrayMap.put(charSequence, findNameSplit(charSequence));
-                        arrayMap2.put(findNamePrefix, null);
+                        arrayMap2.put(strFindNamePrefix, null);
                     }
                     arrayMap.put(senderName, findNameSplit(senderName));
                 } else {
-                    arrayMap.put(senderName, findNamePrefix);
-                    arrayMap2.put(findNamePrefix, senderName);
+                    arrayMap.put(senderName, strFindNamePrefix);
+                    arrayMap2.put(strFindNamePrefix, senderName);
                 }
             }
         }
@@ -152,7 +152,7 @@ public class PeopleHelper {
 
     public NameToPrefixMap mapUniqueNamesToPrefixWithGroupList(List<List<Notification.MessagingStyle.Message>> list) {
         Person senderPerson;
-        String findNamePrefix;
+        String strFindNamePrefix;
         ArrayMap arrayMap = new ArrayMap();
         ArrayMap arrayMap2 = new ArrayMap();
         for (int i = 0; i < list.size(); i++) {
@@ -160,18 +160,18 @@ public class PeopleHelper {
             if (!list2.isEmpty() && (senderPerson = list2.get(0).getSenderPerson()) != null) {
                 CharSequence name = senderPerson.getName();
                 if (senderPerson.getIcon() == null && !TextUtils.isEmpty(name)) {
-                    String charSequence = name.toString();
-                    if (!arrayMap.containsKey(charSequence) && (findNamePrefix = findNamePrefix(name, null)) != null) {
-                        if (arrayMap2.containsKey(findNamePrefix)) {
-                            CharSequence charSequence2 = (CharSequence) arrayMap2.get(findNamePrefix);
-                            if (charSequence2 != null) {
-                                arrayMap.put(charSequence2.toString(), findNameSplit(charSequence2));
-                                arrayMap2.put(findNamePrefix, null);
+                    String string = name.toString();
+                    if (!arrayMap.containsKey(string) && (strFindNamePrefix = findNamePrefix(name, null)) != null) {
+                        if (arrayMap2.containsKey(strFindNamePrefix)) {
+                            CharSequence charSequence = (CharSequence) arrayMap2.get(strFindNamePrefix);
+                            if (charSequence != null) {
+                                arrayMap.put(charSequence.toString(), findNameSplit(charSequence));
+                                arrayMap2.put(strFindNamePrefix, null);
                             }
-                            arrayMap.put(charSequence, findNameSplit(name));
+                            arrayMap.put(string, findNameSplit(name));
                         } else {
-                            arrayMap.put(charSequence, findNamePrefix);
-                            arrayMap2.put(findNamePrefix, name);
+                            arrayMap.put(string, strFindNamePrefix);
+                            arrayMap2.put(strFindNamePrefix, name);
                         }
                     }
                 }

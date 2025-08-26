@@ -44,9 +44,9 @@ public interface ISemAbTestConfigurationUpdateObserver extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISemAbTestConfigurationUpdateObserver.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISemAbTestConfigurationUpdateObserver)) {
-                return (ISemAbTestConfigurationUpdateObserver) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISemAbTestConfigurationUpdateObserver.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISemAbTestConfigurationUpdateObserver)) {
+                return (ISemAbTestConfigurationUpdateObserver) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -99,13 +99,13 @@ public interface ISemAbTestConfigurationUpdateObserver extends IInterface {
 
             @Override // com.samsung.android.wifi.ISemAbTestConfigurationUpdateObserver
             public void notifyAbTestConfigUpdate(SemAbTestConfiguration semAbTestConfiguration) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISemAbTestConfigurationUpdateObserver.DESCRIPTOR);
-                    obtain.writeTypedObject(semAbTestConfiguration, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISemAbTestConfigurationUpdateObserver.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(semAbTestConfiguration, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

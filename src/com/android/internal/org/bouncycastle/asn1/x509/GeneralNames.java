@@ -62,12 +62,12 @@ public class GeneralNames extends ASN1Object {
 
     public String toString() {
         StringBuffer stringBuffer = new StringBuffer("GeneralNames:");
-        String lineSeparator = Strings.lineSeparator();
-        stringBuffer.append(lineSeparator);
+        String strLineSeparator = Strings.lineSeparator();
+        stringBuffer.append(strLineSeparator);
         for (int i = 0; i != this.names.length; i++) {
             stringBuffer.append("    ");
             stringBuffer.append(this.names[i]);
-            stringBuffer.append(lineSeparator);
+            stringBuffer.append(strLineSeparator);
         }
         return stringBuffer.toString();
     }

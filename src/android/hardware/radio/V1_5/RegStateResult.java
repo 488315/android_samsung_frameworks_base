@@ -58,13 +58,13 @@ public final class RegStateResult {
 
             public static final ArrayList<Cdma2000RegistrationInfo> readVectorFromParcel(HwParcel hwParcel) {
                 ArrayList<Cdma2000RegistrationInfo> arrayList = new ArrayList<>();
-                HwBlob readBuffer = hwParcel.readBuffer(16L);
-                int int32 = readBuffer.getInt32(8L);
-                HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 16, readBuffer.handle(), 0L, true);
+                HwBlob buffer = hwParcel.readBuffer(16L);
+                int int32 = buffer.getInt32(8L);
+                HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 16, buffer.handle(), 0L, true);
                 arrayList.clear();
                 for (int i = 0; i < int32; i++) {
                     Cdma2000RegistrationInfo cdma2000RegistrationInfo = new Cdma2000RegistrationInfo();
-                    cdma2000RegistrationInfo.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 16);
+                    cdma2000RegistrationInfo.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 16);
                     arrayList.add(cdma2000RegistrationInfo);
                 }
                 return arrayList;
@@ -133,13 +133,13 @@ public final class RegStateResult {
 
             public static final ArrayList<EutranRegistrationInfo> readVectorFromParcel(HwParcel hwParcel) {
                 ArrayList<EutranRegistrationInfo> arrayList = new ArrayList<>();
-                HwBlob readBuffer = hwParcel.readBuffer(16L);
-                int int32 = readBuffer.getInt32(8L);
-                HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 5, readBuffer.handle(), 0L, true);
+                HwBlob buffer = hwParcel.readBuffer(16L);
+                int int32 = buffer.getInt32(8L);
+                HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 5, buffer.handle(), 0L, true);
                 arrayList.clear();
                 for (int i = 0; i < int32; i++) {
                     EutranRegistrationInfo eutranRegistrationInfo = new EutranRegistrationInfo();
-                    eutranRegistrationInfo.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 5);
+                    eutranRegistrationInfo.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 5);
                     arrayList.add(eutranRegistrationInfo);
                 }
                 return arrayList;
@@ -297,13 +297,13 @@ public final class RegStateResult {
 
         public static final ArrayList<AccessTechnologySpecificInfo> readVectorFromParcel(HwParcel hwParcel) {
             ArrayList<AccessTechnologySpecificInfo> arrayList = new ArrayList<>();
-            HwBlob readBuffer = hwParcel.readBuffer(16L);
-            int int32 = readBuffer.getInt32(8L);
-            HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 20, readBuffer.handle(), 0L, true);
+            HwBlob buffer = hwParcel.readBuffer(16L);
+            int int32 = buffer.getInt32(8L);
+            HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 20, buffer.handle(), 0L, true);
             arrayList.clear();
             for (int i = 0; i < int32; i++) {
                 AccessTechnologySpecificInfo accessTechnologySpecificInfo = new AccessTechnologySpecificInfo();
-                accessTechnologySpecificInfo.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 20);
+                accessTechnologySpecificInfo.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 20);
                 arrayList.add(accessTechnologySpecificInfo);
             }
             return arrayList;
@@ -392,13 +392,13 @@ public final class RegStateResult {
 
     public static final ArrayList<RegStateResult> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<RegStateResult> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 224, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 224, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             RegStateResult regStateResult = new RegStateResult();
-            regStateResult.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 224);
+            regStateResult.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 224);
             arrayList.add(regStateResult);
         }
         return arrayList;

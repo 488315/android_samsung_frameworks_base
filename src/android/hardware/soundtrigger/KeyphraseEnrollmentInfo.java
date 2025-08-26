@@ -49,10 +49,10 @@ public class KeyphraseEnrollmentInfo {
     public @interface ManageActions {
     }
 
-    public KeyphraseEnrollmentInfo(PackageManager packageManager) {
+    public KeyphraseEnrollmentInfo(PackageManager packageManager) throws Throwable {
         Objects.requireNonNull(packageManager);
-        List<ResolveInfo> queryIntentServices = packageManager.queryIntentServices(new Intent(ACTION_MANAGE_VOICE_KEYPHRASES), 65536);
-        if (queryIntentServices == null || queryIntentServices.isEmpty()) {
+        List<ResolveInfo> listQueryIntentServices = packageManager.queryIntentServices(new Intent(ACTION_MANAGE_VOICE_KEYPHRASES), 65536);
+        if (listQueryIntentServices == null || listQueryIntentServices.isEmpty()) {
             this.mParseError = "No enrollment applications found";
             this.mKeyphrasePackageMap = Collections.EMPTY_MAP;
             this.mKeyphrases = null;
@@ -60,7 +60,7 @@ public class KeyphraseEnrollmentInfo {
         }
         ArrayList arrayList = new ArrayList();
         this.mKeyphrasePackageMap = new HashMap();
-        for (ResolveInfo resolveInfo : queryIntentServices) {
+        for (ResolveInfo resolveInfo : listQueryIntentServices) {
             try {
                 ApplicationInfo applicationInfo = packageManager.getApplicationInfo(resolveInfo.serviceInfo.packageName, 128);
                 if ((applicationInfo.privateFlags & 8) == 0) {
@@ -92,76 +92,75 @@ public class KeyphraseEnrollmentInfo {
         this.mParseError = TextUtils.join(ShaderAssembler.NEWLINE, arrayList);
     }
 
-    private KeyphraseMetadata getKeyphraseMetadataFromApplicationInfo(PackageManager packageManager, ApplicationInfo applicationInfo, List<String> list) {
+    private KeyphraseMetadata getKeyphraseMetadataFromApplicationInfo(PackageManager packageManager, ApplicationInfo applicationInfo, List<String> list) throws Throwable {
         KeyphraseMetadata keyphraseMetadata;
-        XmlResourceParser loadXmlMetaData;
         int next;
         String str = applicationInfo.packageName;
         XmlResourceParser xmlResourceParser = null;
         try {
             try {
-                loadXmlMetaData = applicationInfo.loadXmlMetaData(packageManager, VOICE_KEYPHRASE_META_DATA);
-            } catch (Throwable th) {
-                th = th;
-            }
-        } catch (PackageManager.NameNotFoundException | IOException | XmlPullParserException e) {
-            e = e;
-            keyphraseMetadata = null;
-        }
-        try {
-            try {
-                if (loadXmlMetaData == null) {
-                    String str2 = "No android.voice_enrollment meta-data for " + str;
-                    list.add(str2);
-                    Slog.w(TAG, str2);
-                    if (loadXmlMetaData != null) {
-                        loadXmlMetaData.close();
+                XmlResourceParser xmlResourceParserLoadXmlMetaData = applicationInfo.loadXmlMetaData(packageManager, VOICE_KEYPHRASE_META_DATA);
+                try {
+                    try {
+                        if (xmlResourceParserLoadXmlMetaData == null) {
+                            String str2 = "No android.voice_enrollment meta-data for " + str;
+                            list.add(str2);
+                            Slog.w(TAG, str2);
+                            if (xmlResourceParserLoadXmlMetaData != null) {
+                                xmlResourceParserLoadXmlMetaData.close();
+                            }
+                            return null;
+                        }
+                        Resources resourcesForApplication = packageManager.getResourcesForApplication(applicationInfo);
+                        AttributeSet attributeSetAsAttributeSet = Xml.asAttributeSet(xmlResourceParserLoadXmlMetaData);
+                        do {
+                            next = xmlResourceParserLoadXmlMetaData.next();
+                            if (next == 1) {
+                                break;
+                            }
+                        } while (next != 2);
+                        if ("voice-enrollment-application".equals(xmlResourceParserLoadXmlMetaData.getName())) {
+                            TypedArray typedArrayObtainAttributes = resourcesForApplication.obtainAttributes(attributeSetAsAttributeSet, R.styleable.VoiceEnrollmentApplication);
+                            KeyphraseMetadata keyphraseFromTypedArray = getKeyphraseFromTypedArray(typedArrayObtainAttributes, str, list);
+                            typedArrayObtainAttributes.recycle();
+                            if (xmlResourceParserLoadXmlMetaData != null) {
+                                xmlResourceParserLoadXmlMetaData.close();
+                            }
+                            return keyphraseFromTypedArray;
+                        }
+                        String str3 = "Meta-data does not start with voice-enrollment-application tag for " + str;
+                        list.add(str3);
+                        Slog.w(TAG, str3);
+                        if (xmlResourceParserLoadXmlMetaData != null) {
+                            xmlResourceParserLoadXmlMetaData.close();
+                        }
+                        return null;
+                    } catch (PackageManager.NameNotFoundException | IOException | XmlPullParserException e) {
+                        e = e;
+                        keyphraseMetadata = null;
+                        xmlResourceParser = xmlResourceParserLoadXmlMetaData;
+                        String str4 = "Error parsing keyphrase enrollment meta-data for " + str;
+                        list.add(str4 + ": " + e);
+                        Slog.w(TAG, str4, e);
+                        if (xmlResourceParser != null) {
+                            xmlResourceParser.close();
+                        }
+                        return keyphraseMetadata;
                     }
-                    return null;
-                }
-                Resources resourcesForApplication = packageManager.getResourcesForApplication(applicationInfo);
-                AttributeSet asAttributeSet = Xml.asAttributeSet(loadXmlMetaData);
-                do {
-                    next = loadXmlMetaData.next();
-                    if (next == 1) {
-                        break;
+                } catch (Throwable th) {
+                    th = th;
+                    xmlResourceParser = xmlResourceParserLoadXmlMetaData;
+                    if (xmlResourceParser != null) {
+                        xmlResourceParser.close();
                     }
-                } while (next != 2);
-                if ("voice-enrollment-application".equals(loadXmlMetaData.getName())) {
-                    TypedArray obtainAttributes = resourcesForApplication.obtainAttributes(asAttributeSet, R.styleable.VoiceEnrollmentApplication);
-                    KeyphraseMetadata keyphraseFromTypedArray = getKeyphraseFromTypedArray(obtainAttributes, str, list);
-                    obtainAttributes.recycle();
-                    if (loadXmlMetaData != null) {
-                        loadXmlMetaData.close();
-                    }
-                    return keyphraseFromTypedArray;
+                    throw th;
                 }
-                String str3 = "Meta-data does not start with voice-enrollment-application tag for " + str;
-                list.add(str3);
-                Slog.w(TAG, str3);
-                if (loadXmlMetaData != null) {
-                    loadXmlMetaData.close();
-                }
-                return null;
-            } catch (Throwable th2) {
-                th = th2;
-                xmlResourceParser = loadXmlMetaData;
-                if (xmlResourceParser != null) {
-                    xmlResourceParser.close();
-                }
-                throw th;
+            } catch (PackageManager.NameNotFoundException | IOException | XmlPullParserException e2) {
+                e = e2;
+                keyphraseMetadata = null;
             }
-        } catch (PackageManager.NameNotFoundException | IOException | XmlPullParserException e2) {
-            e = e2;
-            keyphraseMetadata = null;
-            xmlResourceParser = loadXmlMetaData;
-            String str4 = "Error parsing keyphrase enrollment meta-data for " + str;
-            list.add(str4 + ": " + e);
-            Slog.w(TAG, str4, e);
-            if (xmlResourceParser != null) {
-                xmlResourceParser.close();
-            }
-            return keyphraseMetadata;
+        } catch (Throwable th2) {
+            th = th2;
         }
     }
 

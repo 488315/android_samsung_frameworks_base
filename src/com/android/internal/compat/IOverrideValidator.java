@@ -45,9 +45,9 @@ public interface IOverrideValidator extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IOverrideValidator.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IOverrideValidator)) {
-                return (IOverrideValidator) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IOverrideValidator.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IOverrideValidator)) {
+                return (IOverrideValidator) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,10 +74,10 @@ public interface IOverrideValidator extends IInterface {
                 return true;
             }
             if (i == 1) {
-                long readLong = parcel.readLong();
-                String readString = parcel.readString();
+                long j = parcel.readLong();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                OverrideAllowedState overrideAllowedState = getOverrideAllowedState(readLong, readString);
+                OverrideAllowedState overrideAllowedState = getOverrideAllowedState(j, string);
                 parcel2.writeNoException();
                 parcel2.writeTypedObject(overrideAllowedState, 1);
                 return true;
@@ -103,18 +103,18 @@ public interface IOverrideValidator extends IInterface {
 
             @Override // com.android.internal.compat.IOverrideValidator
             public OverrideAllowedState getOverrideAllowedState(long j, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IOverrideValidator.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (OverrideAllowedState) obtain2.readTypedObject(OverrideAllowedState.CREATOR);
+                    parcelObtain.writeInterfaceToken(IOverrideValidator.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (OverrideAllowedState) parcelObtain2.readTypedObject(OverrideAllowedState.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

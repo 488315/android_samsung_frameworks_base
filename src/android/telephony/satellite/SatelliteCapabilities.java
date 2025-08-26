@@ -133,17 +133,17 @@ public final class SatelliteCapabilities implements Parcelable {
 
     private void readFromParcel(Parcel parcel) {
         this.mSupportedRadioTechnologies = new HashSet();
-        int readInt = parcel.readInt();
-        if (readInt > 0) {
-            for (int i = 0; i < readInt; i++) {
+        int i = parcel.readInt();
+        if (i > 0) {
+            for (int i2 = 0; i2 < i; i2++) {
                 this.mSupportedRadioTechnologies.add(Integer.valueOf(parcel.readInt()));
             }
         }
         this.mIsPointingRequired = parcel.readBoolean();
         this.mMaxBytesPerOutgoingDatagram = parcel.readInt();
         this.mAntennaPositionMap = new HashMap();
-        int readInt2 = parcel.readInt();
-        for (int i2 = 0; i2 < readInt2; i2++) {
+        int i3 = parcel.readInt();
+        for (int i4 = 0; i4 < i3; i4++) {
             this.mAntennaPositionMap.put(Integer.valueOf(parcel.readInt()), (AntennaPosition) parcel.readParcelable(AntennaPosition.class.getClassLoader(), AntennaPosition.class));
         }
     }

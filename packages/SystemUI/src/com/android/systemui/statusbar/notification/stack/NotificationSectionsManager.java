@@ -2,6 +2,8 @@ package com.android.systemui.statusbar.notification.stack;
 
 import android.util.SparseArray;
 import android.view.View;
+import android.view.ViewGroup;
+import com.android.systemui.R;
 import com.android.systemui.media.controls.ui.controller.KeyguardMediaController;
 import com.android.systemui.statusbar.notification.SourceType;
 import com.android.systemui.statusbar.notification.SourceType$Companion$from$1;
@@ -20,11 +22,9 @@ import java.util.stream.Stream;
 import kotlin.NoWhenBranchMatchedException;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.collections.CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1;
-import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class NotificationSectionsManager implements StackScrollAlgorithm.SectionProvider {
     public static final SourceType$Companion$from$1 SECTION;
@@ -33,7 +33,7 @@ public final class NotificationSectionsManager implements StackScrollAlgorithm.S
     public final NotificationSectionsManager$configurationListener$1 configurationListener = new ConfigurationController.ConfigurationListener() { // from class: com.android.systemui.statusbar.notification.stack.NotificationSectionsManager$configurationListener$1
         @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
         public final void onLocaleListChanged() {
-            NotificationSectionsManager.this.reinflateViews();
+            this.this$0.reinflateViews();
         }
     };
     public final SectionHeaderController favoriteHeaderController;
@@ -52,7 +52,6 @@ public final class NotificationSectionsManager implements StackScrollAlgorithm.S
     public final SectionHeaderController silentHeaderController;
     public final SectionHeaderController socialHeaderController;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -62,10 +61,8 @@ public final class NotificationSectionsManager implements StackScrollAlgorithm.S
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class SectionBounds {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Many extends SectionBounds {
             public final ExpandableView first;
             public final ExpandableView last;
@@ -96,7 +93,6 @@ public final class NotificationSectionsManager implements StackScrollAlgorithm.S
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class None extends SectionBounds {
             public static final None INSTANCE = new None();
 
@@ -105,7 +101,6 @@ public final class NotificationSectionsManager implements StackScrollAlgorithm.S
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class One extends SectionBounds {
             public final ExpandableView lone;
 
@@ -210,124 +205,80 @@ public final class NotificationSectionsManager implements StackScrollAlgorithm.S
         return 11;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:23:0x005d  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x006b  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x0077  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x0083  */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x008f  */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x009b  */
-    /* JADX WARN: Removed duplicated region for block: B:41:0x00a8  */
+    /* JADX WARN: Removed duplicated region for block: B:22:0x004e  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final void reinflateViews() {
-        /*
-            r8 = this;
-            com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout r0 = r8.parent
-            r1 = 0
-            if (r0 != 0) goto L6
-            r0 = r1
-        L6:
-            com.android.systemui.statusbar.notification.collection.render.SectionHeaderController r2 = r8.silentHeaderController
-            com.android.systemui.statusbar.notification.collection.render.SectionHeaderNodeControllerImpl r2 = (com.android.systemui.statusbar.notification.collection.render.SectionHeaderNodeControllerImpl) r2
-            r2.reinflateView(r0)
-            com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout r0 = r8.parent
-            if (r0 != 0) goto L12
-            r0 = r1
-        L12:
-            com.android.systemui.statusbar.notification.collection.render.SectionHeaderController r2 = r8.alertingHeaderController
-            com.android.systemui.statusbar.notification.collection.render.SectionHeaderNodeControllerImpl r2 = (com.android.systemui.statusbar.notification.collection.render.SectionHeaderNodeControllerImpl) r2
-            r2.reinflateView(r0)
-            com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout r0 = r8.parent
-            if (r0 != 0) goto L1e
-            r0 = r1
-        L1e:
-            com.android.systemui.statusbar.notification.collection.render.SectionHeaderController r2 = r8.peopleHeaderController
-            com.android.systemui.statusbar.notification.collection.render.SectionHeaderNodeControllerImpl r2 = (com.android.systemui.statusbar.notification.collection.render.SectionHeaderNodeControllerImpl) r2
-            r2.reinflateView(r0)
-            com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout r0 = r8.parent
-            if (r0 != 0) goto L2a
-            r0 = r1
-        L2a:
-            com.android.systemui.statusbar.notification.collection.render.SectionHeaderController r2 = r8.incomingHeaderController
-            com.android.systemui.statusbar.notification.collection.render.SectionHeaderNodeControllerImpl r2 = (com.android.systemui.statusbar.notification.collection.render.SectionHeaderNodeControllerImpl) r2
-            r2.reinflateView(r0)
-            com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout r0 = r8.parent
-            if (r0 != 0) goto L36
-            r0 = r1
-        L36:
-            com.android.systemui.statusbar.notification.collection.render.MediaContainerController r2 = r8.mediaContainerController
-            com.android.systemui.statusbar.notification.stack.MediaContainerView r3 = r2.mediaContainerView
-            r4 = -1
-            if (r3 == 0) goto L4e
-            r3.removeFromTransientContainer()
-            android.view.ViewParent r5 = r3.getParent()
-            if (r5 != r0) goto L4e
-            int r5 = r0.indexOfChild(r3)
-            r0.removeView(r3)
-            goto L4f
-        L4e:
-            r5 = r4
-        L4f:
-            android.view.LayoutInflater r3 = r2.layoutInflater
-            r6 = 2131558789(0x7f0d0185, float:1.8742904E38)
-            r7 = 0
-            android.view.View r3 = r3.inflate(r6, r0, r7)
-            com.android.systemui.statusbar.notification.stack.MediaContainerView r3 = (com.android.systemui.statusbar.notification.stack.MediaContainerView) r3
-            if (r5 == r4) goto L60
-            r0.addView(r3, r5)
-        L60:
-            r2.mediaContainerView = r3
-            com.android.systemui.media.controls.ui.controller.KeyguardMediaController r0 = r8.keyguardMediaController
-            r0.attachSinglePaneContainer(r3)
-            com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout r0 = r8.parent
-            if (r0 != 0) goto L6c
-            r0 = r1
-        L6c:
-            com.android.systemui.statusbar.notification.collection.render.SectionHeaderController r2 = r8.newsHeaderController
-            com.android.systemui.statusbar.notification.collection.render.SectionHeaderNodeControllerImpl r2 = (com.android.systemui.statusbar.notification.collection.render.SectionHeaderNodeControllerImpl) r2
-            r2.reinflateView(r0)
-            com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout r0 = r8.parent
-            if (r0 != 0) goto L78
-            r0 = r1
-        L78:
-            com.android.systemui.statusbar.notification.collection.render.SectionHeaderController r2 = r8.socialHeaderController
-            com.android.systemui.statusbar.notification.collection.render.SectionHeaderNodeControllerImpl r2 = (com.android.systemui.statusbar.notification.collection.render.SectionHeaderNodeControllerImpl) r2
-            r2.reinflateView(r0)
-            com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout r0 = r8.parent
-            if (r0 != 0) goto L84
-            r0 = r1
-        L84:
-            com.android.systemui.statusbar.notification.collection.render.SectionHeaderController r2 = r8.recsHeaderController
-            com.android.systemui.statusbar.notification.collection.render.SectionHeaderNodeControllerImpl r2 = (com.android.systemui.statusbar.notification.collection.render.SectionHeaderNodeControllerImpl) r2
-            r2.reinflateView(r0)
-            com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout r0 = r8.parent
-            if (r0 != 0) goto L90
-            r0 = r1
-        L90:
-            com.android.systemui.statusbar.notification.collection.render.SectionHeaderController r2 = r8.promoHeaderController
-            com.android.systemui.statusbar.notification.collection.render.SectionHeaderNodeControllerImpl r2 = (com.android.systemui.statusbar.notification.collection.render.SectionHeaderNodeControllerImpl) r2
-            r2.reinflateView(r0)
-            com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout r0 = r8.parent
-            if (r0 != 0) goto L9c
-            r0 = r1
-        L9c:
-            com.android.systemui.statusbar.notification.collection.render.SectionHeaderController r2 = r8.favoriteHeaderController
-            com.android.systemui.statusbar.notification.collection.render.SectionHeaderNodeControllerImpl r2 = (com.android.systemui.statusbar.notification.collection.render.SectionHeaderNodeControllerImpl) r2
-            r2.reinflateView(r0)
-            com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout r0 = r8.parent
-            if (r0 != 0) goto La8
-            goto La9
-        La8:
-            r1 = r0
-        La9:
-            com.android.systemui.statusbar.notification.collection.render.SectionHeaderController r8 = r8.ongoingActivityHeaderController
-            com.android.systemui.statusbar.notification.collection.render.SectionHeaderNodeControllerImpl r8 = (com.android.systemui.statusbar.notification.collection.render.SectionHeaderNodeControllerImpl) r8
-            r8.reinflateView(r1)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.notification.stack.NotificationSectionsManager.reinflateViews():void");
+        int iIndexOfChild;
+        NotificationStackScrollLayout notificationStackScrollLayout = this.parent;
+        if (notificationStackScrollLayout == null) {
+            notificationStackScrollLayout = null;
+        }
+        ((SectionHeaderNodeControllerImpl) this.silentHeaderController).reinflateView(notificationStackScrollLayout);
+        NotificationStackScrollLayout notificationStackScrollLayout2 = this.parent;
+        if (notificationStackScrollLayout2 == null) {
+            notificationStackScrollLayout2 = null;
+        }
+        ((SectionHeaderNodeControllerImpl) this.alertingHeaderController).reinflateView(notificationStackScrollLayout2);
+        NotificationStackScrollLayout notificationStackScrollLayout3 = this.parent;
+        if (notificationStackScrollLayout3 == null) {
+            notificationStackScrollLayout3 = null;
+        }
+        ((SectionHeaderNodeControllerImpl) this.peopleHeaderController).reinflateView(notificationStackScrollLayout3);
+        NotificationStackScrollLayout notificationStackScrollLayout4 = this.parent;
+        if (notificationStackScrollLayout4 == null) {
+            notificationStackScrollLayout4 = null;
+        }
+        ((SectionHeaderNodeControllerImpl) this.incomingHeaderController).reinflateView(notificationStackScrollLayout4);
+        NotificationStackScrollLayout notificationStackScrollLayout5 = this.parent;
+        if (notificationStackScrollLayout5 == null) {
+            notificationStackScrollLayout5 = null;
+        }
+        MediaContainerController mediaContainerController = this.mediaContainerController;
+        MediaContainerView mediaContainerView = mediaContainerController.mediaContainerView;
+        if (mediaContainerView != null) {
+            mediaContainerView.removeFromTransientContainer();
+            if (mediaContainerView.getParent() == notificationStackScrollLayout5) {
+                iIndexOfChild = notificationStackScrollLayout5.indexOfChild(mediaContainerView);
+                notificationStackScrollLayout5.removeView(mediaContainerView);
+            } else {
+                iIndexOfChild = -1;
+            }
+        }
+        MediaContainerView mediaContainerView2 = (MediaContainerView) mediaContainerController.layoutInflater.inflate(R.layout.keyguard_media_container, (ViewGroup) notificationStackScrollLayout5, false);
+        if (iIndexOfChild != -1) {
+            notificationStackScrollLayout5.addView(mediaContainerView2, iIndexOfChild);
+        }
+        mediaContainerController.mediaContainerView = mediaContainerView2;
+        this.keyguardMediaController.attachSinglePaneContainer(mediaContainerView2);
+        NotificationStackScrollLayout notificationStackScrollLayout6 = this.parent;
+        if (notificationStackScrollLayout6 == null) {
+            notificationStackScrollLayout6 = null;
+        }
+        ((SectionHeaderNodeControllerImpl) this.newsHeaderController).reinflateView(notificationStackScrollLayout6);
+        NotificationStackScrollLayout notificationStackScrollLayout7 = this.parent;
+        if (notificationStackScrollLayout7 == null) {
+            notificationStackScrollLayout7 = null;
+        }
+        ((SectionHeaderNodeControllerImpl) this.socialHeaderController).reinflateView(notificationStackScrollLayout7);
+        NotificationStackScrollLayout notificationStackScrollLayout8 = this.parent;
+        if (notificationStackScrollLayout8 == null) {
+            notificationStackScrollLayout8 = null;
+        }
+        ((SectionHeaderNodeControllerImpl) this.recsHeaderController).reinflateView(notificationStackScrollLayout8);
+        NotificationStackScrollLayout notificationStackScrollLayout9 = this.parent;
+        if (notificationStackScrollLayout9 == null) {
+            notificationStackScrollLayout9 = null;
+        }
+        ((SectionHeaderNodeControllerImpl) this.promoHeaderController).reinflateView(notificationStackScrollLayout9);
+        NotificationStackScrollLayout notificationStackScrollLayout10 = this.parent;
+        if (notificationStackScrollLayout10 == null) {
+            notificationStackScrollLayout10 = null;
+        }
+        ((SectionHeaderNodeControllerImpl) this.favoriteHeaderController).reinflateView(notificationStackScrollLayout10);
+        NotificationStackScrollLayout notificationStackScrollLayout11 = this.parent;
+        ((SectionHeaderNodeControllerImpl) this.ongoingActivityHeaderController).reinflateView(notificationStackScrollLayout11 != null ? notificationStackScrollLayout11 : null);
     }
 
     public final void setHeaderForegroundColors(int i, int i2) {
@@ -361,6 +312,11 @@ public final class NotificationSectionsManager implements StackScrollAlgorithm.S
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:107:0x0197  */
+    /* JADX WARN: Removed duplicated region for block: B:146:0x0202  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void updateFirstAndLastViewsForAllSections(NotificationSection[] notificationSectionArr, List list) {
         NotificationRoundnessManager notificationRoundnessManager;
         float f;
@@ -368,22 +324,22 @@ public final class NotificationSectionsManager implements StackScrollAlgorithm.S
         float f2;
         boolean firstAndLastVisibleChildren;
         Object many;
-        Object obj;
+        Object one;
         NotificationSectionsManager$updateFirstAndLastViewsForAllSections$$inlined$groupingBy$1 notificationSectionsManager$updateFirstAndLastViewsForAllSections$$inlined$groupingBy$1 = new NotificationSectionsManager$updateFirstAndLastViewsForAllSections$$inlined$groupingBy$1(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(list), this);
         SectionBounds.None none = SectionBounds.None.INSTANCE;
         int length = notificationSectionArr.length;
         SparseArray sparseArray = length < 0 ? new SparseArray() : new SparseArray(length);
-        for (Object obj2 : notificationSectionsManager$updateFirstAndLastViewsForAllSections$$inlined$groupingBy$1.$this_groupingBy) {
-            int intValue = ((Number) notificationSectionsManager$updateFirstAndLastViewsForAllSections$$inlined$groupingBy$1.keyOf(obj2)).intValue();
-            Object obj3 = sparseArray.get(intValue);
-            if (obj3 == null) {
-                obj3 = none;
+        for (Object obj : notificationSectionsManager$updateFirstAndLastViewsForAllSections$$inlined$groupingBy$1.$this_groupingBy) {
+            int iIntValue = ((Number) notificationSectionsManager$updateFirstAndLastViewsForAllSections$$inlined$groupingBy$1.keyOf(obj)).intValue();
+            Object obj2 = sparseArray.get(iIntValue);
+            if (obj2 == null) {
+                obj2 = none;
             }
-            ExpandableView expandableView = (ExpandableView) obj2;
-            SectionBounds sectionBounds = (SectionBounds) obj3;
+            ExpandableView expandableView = (ExpandableView) obj;
+            SectionBounds sectionBounds = (SectionBounds) obj2;
             sectionBounds.getClass();
             if (sectionBounds instanceof SectionBounds.None) {
-                obj = new SectionBounds.One(expandableView);
+                one = new SectionBounds.One(expandableView);
             } else {
                 if (sectionBounds instanceof SectionBounds.One) {
                     many = new SectionBounds.Many(((SectionBounds.One) sectionBounds).lone, expandableView);
@@ -393,9 +349,9 @@ public final class NotificationSectionsManager implements StackScrollAlgorithm.S
                     }
                     many = new SectionBounds.Many(((SectionBounds.Many) sectionBounds).first, expandableView);
                 }
-                obj = many;
+                one = many;
             }
-            sparseArray.put(intValue, obj);
+            sparseArray.put(iIntValue, one);
         }
         ArrayList arrayList = new ArrayList();
         for (NotificationSection notificationSection : notificationSectionArr) {
@@ -442,11 +398,11 @@ public final class NotificationSectionsManager implements StackScrollAlgorithm.S
                     if (i2 >= size) {
                         break;
                     }
-                    Object obj4 = arrayList3.get(i2);
+                    Object obj3 = arrayList3.get(i2);
                     i2++;
-                    ExpandableView expandableView6 = (ExpandableView) obj4;
-                    boolean remove = mutableSet.remove(expandableView6);
-                    if (!remove) {
+                    ExpandableView expandableView6 = (ExpandableView) obj3;
+                    boolean zRemove = mutableSet.remove(expandableView6);
+                    if (!zRemove) {
                         expandableView6.requestTopRoundness(1.0f, sourceType$Companion$from$1, expandableView6.isShown() && !notificationRoundnessManager.mAnimatedChildren.contains(expandableView6));
                     }
                     NotificationStackScrollLayoutController notificationStackScrollLayoutController2 = this.sectionStateProvider;
@@ -467,8 +423,7 @@ public final class NotificationSectionsManager implements StackScrollAlgorithm.S
                                     expandableView6.requestTopRoundness(0.0f, sourceType$Companion$from$1, false);
                                 }
                             }
-                        }
-                        if (remove) {
+                        } else if (zRemove) {
                             expandableView6.requestTopRoundness(1.0f, sourceType$Companion$from$1, false);
                         }
                     }
@@ -477,37 +432,35 @@ public final class NotificationSectionsManager implements StackScrollAlgorithm.S
                 int size2 = arrayList4.size();
                 int i3 = 0;
                 while (i3 < size2) {
-                    Object obj5 = arrayList4.get(i3);
+                    Object obj4 = arrayList4.get(i3);
                     i3++;
-                    ExpandableView expandableView7 = (ExpandableView) obj5;
-                    boolean remove2 = mutableSet2.remove(expandableView7);
-                    if (!remove2) {
+                    ExpandableView expandableView7 = (ExpandableView) obj4;
+                    boolean zRemove2 = mutableSet2.remove(expandableView7);
+                    if (!zRemove2) {
                         expandableView7.requestBottomRoundness(f, sourceType$Companion$from$1, expandableView7.isShown() && !notificationRoundnessManager.mAnimatedChildren.contains(expandableView7));
                     }
                     NotificationStackScrollLayoutController notificationStackScrollLayoutController4 = this.sectionStateProvider;
-                    if ((notificationStackScrollLayoutController4 != null ? notificationStackScrollLayoutController4 : null) != null) {
-                        if ((notificationStackScrollLayoutController4 != null ? notificationStackScrollLayoutController4 : null).mBarState == 1) {
-                            if (notificationStackScrollLayoutController4 == null) {
-                                notificationStackScrollLayoutController4 = null;
-                            }
-                            if (notificationStackScrollLayoutController4.mView.getLastVisibleSection() != null) {
-                                NotificationStackScrollLayoutController notificationStackScrollLayoutController5 = this.sectionStateProvider;
-                                if (notificationStackScrollLayoutController5 == null) {
-                                    notificationStackScrollLayoutController5 = null;
-                                }
-                                if (notificationStackScrollLayoutController5.mView.getLastVisibleSection().mLastVisibleChild != expandableView7) {
-                                    expandableView7.requestBottomRoundness(0.0f, sourceType$Companion$from$1, false);
-                                    f2 = 1.0f;
-                                }
-                            }
-                        }
-                        if (remove2) {
-                            f2 = 1.0f;
-                            expandableView7.requestBottomRoundness(1.0f, sourceType$Companion$from$1, false);
-                        }
-                        f2 = 1.0f;
-                    } else {
+                    if ((notificationStackScrollLayoutController4 != null ? notificationStackScrollLayoutController4 : null) == null) {
                         f2 = f;
+                    } else if ((notificationStackScrollLayoutController4 != null ? notificationStackScrollLayoutController4 : null).mBarState == 1) {
+                        if (notificationStackScrollLayoutController4 == null) {
+                            notificationStackScrollLayoutController4 = null;
+                        }
+                        if (notificationStackScrollLayoutController4.mView.getLastVisibleSection() != null) {
+                            NotificationStackScrollLayoutController notificationStackScrollLayoutController5 = this.sectionStateProvider;
+                            if (notificationStackScrollLayoutController5 == null) {
+                                notificationStackScrollLayoutController5 = null;
+                            }
+                            if (notificationStackScrollLayoutController5.mView.getLastVisibleSection().mLastVisibleChild != expandableView7) {
+                                expandableView7.requestBottomRoundness(0.0f, sourceType$Companion$from$1, false);
+                            }
+                            f2 = 1.0f;
+                        }
+                    } else if (zRemove2) {
+                        f2 = 1.0f;
+                        expandableView7.requestBottomRoundness(1.0f, sourceType$Companion$from$1, false);
+                    } else {
+                        f2 = 1.0f;
                     }
                     f = f2;
                 }
@@ -521,28 +474,28 @@ public final class NotificationSectionsManager implements StackScrollAlgorithm.S
                 final NotificationSectionsManager$$ExternalSyntheticLambda0 notificationSectionsManager$$ExternalSyntheticLambda0 = new NotificationSectionsManager$$ExternalSyntheticLambda0();
                 stream.forEach(new Consumer() { // from class: com.android.systemui.statusbar.notification.stack.NotificationSectionsManager$sam$java_util_function_Consumer$0
                     @Override // java.util.function.Consumer
-                    public final /* synthetic */ void accept(Object obj6) {
-                        Function1.this.mo779invoke(obj6);
+                    public final /* synthetic */ void accept(Object obj5) {
+                        notificationSectionsManager$$ExternalSyntheticLambda0.mo781invoke(obj5);
                     }
                 });
                 return;
             }
             NotificationSection notificationSection5 = notificationSectionArr[i];
-            Object obj6 = (SectionBounds) sparseArray.get(notificationSection5.mBucket);
-            if (obj6 == null) {
-                obj6 = SectionBounds.None.INSTANCE;
+            Object obj5 = (SectionBounds) sparseArray.get(notificationSection5.mBucket);
+            if (obj5 == null) {
+                obj5 = SectionBounds.None.INSTANCE;
             }
-            obj6.getClass();
-            if (obj6 instanceof SectionBounds.None) {
+            obj5.getClass();
+            if (obj5 instanceof SectionBounds.None) {
                 firstAndLastVisibleChildren = SectionBounds.setFirstAndLastVisibleChildren(notificationSection5, null, null);
-            } else if (obj6 instanceof SectionBounds.One) {
-                ExpandableView expandableView10 = ((SectionBounds.One) obj6).lone;
+            } else if (obj5 instanceof SectionBounds.One) {
+                ExpandableView expandableView10 = ((SectionBounds.One) obj5).lone;
                 firstAndLastVisibleChildren = SectionBounds.setFirstAndLastVisibleChildren(notificationSection5, expandableView10, expandableView10);
             } else {
-                if (!(obj6 instanceof SectionBounds.Many)) {
+                if (!(obj5 instanceof SectionBounds.Many)) {
                     throw new NoWhenBranchMatchedException();
                 }
-                SectionBounds.Many many2 = (SectionBounds.Many) obj6;
+                SectionBounds.Many many2 = (SectionBounds.Many) obj5;
                 firstAndLastVisibleChildren = SectionBounds.setFirstAndLastVisibleChildren(notificationSection5, many2.first, many2.last);
             }
             z = firstAndLastVisibleChildren || z;

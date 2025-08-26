@@ -65,9 +65,9 @@ public interface ImsConfigListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ImsConfigListener)) {
-                return (ImsConfigListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ImsConfigListener)) {
+                return (ImsConfigListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -103,28 +103,28 @@ public interface ImsConfigListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                int readInt2 = parcel.readInt();
-                int readInt3 = parcel.readInt();
-                int readInt4 = parcel.readInt();
+                int i3 = parcel.readInt();
+                int i4 = parcel.readInt();
+                int i5 = parcel.readInt();
+                int i6 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onGetFeatureResponse(readInt, readInt2, readInt3, readInt4);
+                onGetFeatureResponse(i3, i4, i5, i6);
             } else if (i == 2) {
-                int readInt5 = parcel.readInt();
-                int readInt6 = parcel.readInt();
-                int readInt7 = parcel.readInt();
-                int readInt8 = parcel.readInt();
+                int i7 = parcel.readInt();
+                int i8 = parcel.readInt();
+                int i9 = parcel.readInt();
+                int i10 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onSetFeatureResponse(readInt5, readInt6, readInt7, readInt8);
+                onSetFeatureResponse(i7, i8, i9, i10);
             } else if (i == 3) {
-                int readInt9 = parcel.readInt();
-                int readInt10 = parcel.readInt();
+                int i11 = parcel.readInt();
+                int i12 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onGetVideoQuality(readInt9, readInt10);
+                onGetVideoQuality(i11, i12);
             } else if (i == 4) {
-                int readInt11 = parcel.readInt();
+                int i13 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onSetVideoQuality(readInt11);
+                onSetVideoQuality(i13);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -149,56 +149,56 @@ public interface ImsConfigListener extends IInterface {
 
             @Override // com.android.ims.ImsConfigListener
             public void onGetFeatureResponse(int i, int i2, int i3, int i4) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeInt(i4);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeInt(i4);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.ImsConfigListener
             public void onSetFeatureResponse(int i, int i2, int i3, int i4) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeInt(i4);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeInt(i4);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.ImsConfigListener
             public void onGetVideoQuality(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.ImsConfigListener
             public void onSetVideoQuality(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

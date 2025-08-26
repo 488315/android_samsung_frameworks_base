@@ -6,7 +6,6 @@ import kotlin.coroutines.Continuation;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function4;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class ShortcutHelperViewModel$shortcutsUiState$1 extends SuspendLambda implements Function4 {
     /* synthetic */ Object L$0;
@@ -24,11 +23,11 @@ final class ShortcutHelperViewModel$shortcutsUiState$1 extends SuspendLambda imp
 
     @Override // kotlin.jvm.functions.Function4
     public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4) {
-        boolean booleanValue = ((Boolean) obj3).booleanValue();
+        boolean zBooleanValue = ((Boolean) obj3).booleanValue();
         ShortcutHelperViewModel$shortcutsUiState$1 shortcutHelperViewModel$shortcutsUiState$1 = new ShortcutHelperViewModel$shortcutsUiState$1(this.this$0, (Continuation) obj4);
         shortcutHelperViewModel$shortcutsUiState$1.L$0 = (String) obj;
         shortcutHelperViewModel$shortcutsUiState$1.L$1 = (List) obj2;
-        shortcutHelperViewModel$shortcutsUiState$1.Z$0 = booleanValue;
+        shortcutHelperViewModel$shortcutsUiState$1.Z$0 = zBooleanValue;
         return shortcutHelperViewModel$shortcutsUiState$1.invokeSuspend(Unit.INSTANCE);
     }
 
@@ -39,7 +38,7 @@ final class ShortcutHelperViewModel$shortcutsUiState$1 extends SuspendLambda imp
     public final java.lang.Object invokeSuspend(java.lang.Object r53) {
         /*
             Method dump skipped, instructions count: 2671
-            To view this dump change 'Code comments level' option to 'DEBUG'
+            To view this dump add '--comments-level debug' option
         */
         throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyboard.shortcut.ui.viewmodel.ShortcutHelperViewModel$shortcutsUiState$1.invokeSuspend(java.lang.Object):java.lang.Object");
     }

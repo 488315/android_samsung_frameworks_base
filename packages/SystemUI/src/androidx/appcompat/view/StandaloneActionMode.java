@@ -11,7 +11,6 @@ import androidx.appcompat.widget.ActionMenuPresenter;
 import androidx.core.view.ViewCompat;
 import java.lang.ref.WeakReference;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class StandaloneActionMode extends ActionMode implements MenuBuilder.Callback {
     public final ActionMode.Callback mCallback;

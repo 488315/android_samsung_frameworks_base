@@ -49,11 +49,11 @@ class StreamUtil {
             } catch (IOException unused) {
             }
         }
-        long maxMemory = Runtime.getRuntime().maxMemory();
-        if (maxMemory > 2147483647L) {
+        long jMaxMemory = Runtime.getRuntime().maxMemory();
+        if (jMaxMemory > 2147483647L) {
             return Integer.MAX_VALUE;
         }
-        return (int) maxMemory;
+        return (int) jMaxMemory;
     }
 
     static int calculateTagLength(int i) throws IOException {

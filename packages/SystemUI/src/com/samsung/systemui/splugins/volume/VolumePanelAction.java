@@ -12,7 +12,6 @@ import kotlin.enums.EnumEntries;
 import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class VolumePanelAction {
     public static final int $stable = 8;
@@ -30,7 +29,6 @@ public final class VolumePanelAction {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ActionType {
         private static final /* synthetic */ EnumEntries $ENTRIES;
         private static final /* synthetic */ ActionType[] $VALUES;
@@ -108,9 +106,9 @@ public final class VolumePanelAction {
         }
 
         static {
-            ActionType[] $values = $values();
-            $VALUES = $values;
-            $ENTRIES = EnumEntriesKt.enumEntries($values);
+            ActionType[] actionTypeArr$values = $values();
+            $VALUES = actionTypeArr$values;
+            $ENTRIES = EnumEntriesKt.enumEntries(actionTypeArr$values);
         }
 
         private ActionType(String str, int i) {
@@ -131,7 +129,6 @@ public final class VolumePanelAction {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class BooleanStateKey {
         private static final /* synthetic */ EnumEntries $ENTRIES;
         private static final /* synthetic */ BooleanStateKey[] $VALUES;
@@ -177,9 +174,9 @@ public final class VolumePanelAction {
         }
 
         static {
-            BooleanStateKey[] $values = $values();
-            $VALUES = $values;
-            $ENTRIES = EnumEntriesKt.enumEntries($values);
+            BooleanStateKey[] booleanStateKeyArr$values = $values();
+            $VALUES = booleanStateKeyArr$values;
+            $ENTRIES = EnumEntriesKt.enumEntries(booleanStateKeyArr$values);
         }
 
         private BooleanStateKey(String str, int i, String str2) {
@@ -205,7 +202,6 @@ public final class VolumePanelAction {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class IntegerStateKey {
         private static final /* synthetic */ EnumEntries $ENTRIES;
         private static final /* synthetic */ IntegerStateKey[] $VALUES;
@@ -230,9 +226,9 @@ public final class VolumePanelAction {
         }
 
         static {
-            IntegerStateKey[] $values = $values();
-            $VALUES = $values;
-            $ENTRIES = EnumEntriesKt.enumEntries($values);
+            IntegerStateKey[] integerStateKeyArr$values = $values();
+            $VALUES = integerStateKeyArr$values;
+            $ENTRIES = EnumEntriesKt.enumEntries(integerStateKeyArr$values);
         }
 
         private IntegerStateKey(String str, int i, String str2) {
@@ -258,7 +254,6 @@ public final class VolumePanelAction {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class LongStateKey {
         private static final /* synthetic */ EnumEntries $ENTRIES;
         private static final /* synthetic */ LongStateKey[] $VALUES;
@@ -270,9 +265,9 @@ public final class VolumePanelAction {
         }
 
         static {
-            LongStateKey[] $values = $values();
-            $VALUES = $values;
-            $ENTRIES = EnumEntriesKt.enumEntries($values);
+            LongStateKey[] longStateKeyArr$values = $values();
+            $VALUES = longStateKeyArr$values;
+            $ENTRIES = EnumEntriesKt.enumEntries(longStateKeyArr$values);
         }
 
         private LongStateKey(String str, int i, String str2) {
@@ -298,7 +293,6 @@ public final class VolumePanelAction {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class StringStateKey {
         private static final /* synthetic */ EnumEntries $ENTRIES;
         private static final /* synthetic */ StringStateKey[] $VALUES;
@@ -315,9 +309,9 @@ public final class VolumePanelAction {
         }
 
         static {
-            StringStateKey[] $values = $values();
-            $VALUES = $values;
-            $ENTRIES = EnumEntriesKt.enumEntries($values);
+            StringStateKey[] stringStateKeyArr$values = $values();
+            $VALUES = stringStateKeyArr$values;
+            $ENTRIES = EnumEntriesKt.enumEntries(stringStateKeyArr$values);
         }
 
         private StringStateKey(String str, int i, String str2) {
@@ -608,9 +602,9 @@ public final class VolumePanelAction {
 
     public String toString() {
         List[] listArr = new List[4];
-        HashMap<BooleanStateKey, Boolean> hashMap = this.boolMap;
+        HashMap<BooleanStateKey, Boolean> map = this.boolMap;
         LinkedHashMap linkedHashMap = new LinkedHashMap();
-        for (Map.Entry<BooleanStateKey, Boolean> entry : hashMap.entrySet()) {
+        for (Map.Entry<BooleanStateKey, Boolean> entry : map.entrySet()) {
             if (entry.getValue().booleanValue()) {
                 linkedHashMap.put(entry.getKey(), entry.getValue());
             }
@@ -620,21 +614,21 @@ public final class VolumePanelAction {
             arrayList.add(((BooleanStateKey) entry2.getKey()).getFieldName() + " : " + entry2.getValue());
         }
         listArr[0] = arrayList;
-        HashMap<IntegerStateKey, Integer> hashMap2 = this.intMap;
-        ArrayList arrayList2 = new ArrayList(hashMap2.size());
-        for (Map.Entry<IntegerStateKey, Integer> entry3 : hashMap2.entrySet()) {
+        HashMap<IntegerStateKey, Integer> map2 = this.intMap;
+        ArrayList arrayList2 = new ArrayList(map2.size());
+        for (Map.Entry<IntegerStateKey, Integer> entry3 : map2.entrySet()) {
             arrayList2.add(entry3.getKey().getFieldName() + " : " + entry3.getValue());
         }
         listArr[1] = arrayList2;
-        HashMap<LongStateKey, Long> hashMap3 = this.longMap;
-        ArrayList arrayList3 = new ArrayList(hashMap3.size());
-        for (Map.Entry<LongStateKey, Long> entry4 : hashMap3.entrySet()) {
+        HashMap<LongStateKey, Long> map3 = this.longMap;
+        ArrayList arrayList3 = new ArrayList(map3.size());
+        for (Map.Entry<LongStateKey, Long> entry4 : map3.entrySet()) {
             arrayList3.add(entry4.getKey().getFieldName() + " : " + entry4.getValue());
         }
         listArr[2] = arrayList3;
-        HashMap<StringStateKey, String> hashMap4 = this.stringMap;
+        HashMap<StringStateKey, String> map4 = this.stringMap;
         LinkedHashMap linkedHashMap2 = new LinkedHashMap();
-        for (Map.Entry<StringStateKey, String> entry5 : hashMap4.entrySet()) {
+        for (Map.Entry<StringStateKey, String> entry5 : map4.entrySet()) {
             String value = entry5.getValue();
             if (value != null && value.length() != 0) {
                 linkedHashMap2.put(entry5.getKey(), entry5.getValue());
@@ -660,7 +654,6 @@ public final class VolumePanelAction {
         this.disabledStreamList = new ArrayList();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Builder {
         public static final int $stable = 8;
         private VolumePanelAction action;

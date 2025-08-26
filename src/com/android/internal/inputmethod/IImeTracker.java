@@ -117,9 +117,9 @@ public interface IImeTracker extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IImeTracker.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IImeTracker)) {
-                return (IImeTracker) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IImeTracker.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IImeTracker)) {
+                return (IImeTracker) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -165,34 +165,34 @@ public interface IImeTracker extends IInterface {
             }
             switch (i) {
                 case 1:
-                    String readString = parcel.readString();
-                    int readInt = parcel.readInt();
-                    int readInt2 = parcel.readInt();
-                    int readInt3 = parcel.readInt();
-                    int readInt4 = parcel.readInt();
-                    boolean readBoolean = parcel.readBoolean();
+                    String string = parcel.readString();
+                    int i3 = parcel.readInt();
+                    int i4 = parcel.readInt();
+                    int i5 = parcel.readInt();
+                    int i6 = parcel.readInt();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    ImeTracker.Token onStart = onStart(readString, readInt, readInt2, readInt3, readInt4, readBoolean);
+                    ImeTracker.Token tokenOnStart = onStart(string, i3, i4, i5, i6, z);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(onStart, 1);
+                    parcel2.writeTypedObject(tokenOnStart, 1);
                     return true;
                 case 2:
-                    IBinder readStrongBinder = parcel.readStrongBinder();
-                    int readInt5 = parcel.readInt();
+                    IBinder strongBinder = parcel.readStrongBinder();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onProgress(readStrongBinder, readInt5);
+                    onProgress(strongBinder, i7);
                     return true;
                 case 3:
                     ImeTracker.Token token = (ImeTracker.Token) parcel.readTypedObject(ImeTracker.Token.CREATOR);
-                    int readInt6 = parcel.readInt();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onFailed(token, readInt6);
+                    onFailed(token, i8);
                     return true;
                 case 4:
                     ImeTracker.Token token2 = (ImeTracker.Token) parcel.readTypedObject(ImeTracker.Token.CREATOR);
-                    int readInt7 = parcel.readInt();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onCancelled(token2, readInt7);
+                    onCancelled(token2, i9);
                     return true;
                 case 5:
                     ImeTracker.Token token3 = (ImeTracker.Token) parcel.readTypedObject(ImeTracker.Token.CREATOR);
@@ -210,9 +210,9 @@ public interface IImeTracker extends IInterface {
                     onDispatched(token5);
                     return true;
                 case 8:
-                    boolean hasPendingImeVisibilityRequests = hasPendingImeVisibilityRequests();
+                    boolean zHasPendingImeVisibilityRequests = hasPendingImeVisibilityRequests();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(hasPendingImeVisibilityRequests);
+                    parcel2.writeBoolean(zHasPendingImeVisibilityRequests);
                     return true;
                 case 9:
                     AndroidFuture androidFuture = (AndroidFuture) parcel.readTypedObject(AndroidFuture.CREATOR);
@@ -242,124 +242,124 @@ public interface IImeTracker extends IInterface {
 
             @Override // com.android.internal.inputmethod.IImeTracker
             public ImeTracker.Token onStart(String str, int i, int i2, int i3, int i4, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImeTracker.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeInt(i4);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ImeTracker.Token) obtain2.readTypedObject(ImeTracker.Token.CREATOR);
+                    parcelObtain.writeInterfaceToken(IImeTracker.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeInt(i4);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ImeTracker.Token) parcelObtain2.readTypedObject(ImeTracker.Token.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IImeTracker
             public void onProgress(IBinder iBinder, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImeTracker.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImeTracker.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IImeTracker
             public void onFailed(ImeTracker.Token token, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImeTracker.DESCRIPTOR);
-                    obtain.writeTypedObject(token, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImeTracker.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(token, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IImeTracker
             public void onCancelled(ImeTracker.Token token, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImeTracker.DESCRIPTOR);
-                    obtain.writeTypedObject(token, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImeTracker.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(token, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IImeTracker
             public void onShown(ImeTracker.Token token) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImeTracker.DESCRIPTOR);
-                    obtain.writeTypedObject(token, 0);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImeTracker.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(token, 0);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IImeTracker
             public void onHidden(ImeTracker.Token token) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImeTracker.DESCRIPTOR);
-                    obtain.writeTypedObject(token, 0);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImeTracker.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(token, 0);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IImeTracker
             public void onDispatched(ImeTracker.Token token) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImeTracker.DESCRIPTOR);
-                    obtain.writeTypedObject(token, 0);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImeTracker.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(token, 0);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IImeTracker
             public boolean hasPendingImeVisibilityRequests() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IImeTracker.DESCRIPTOR);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IImeTracker.DESCRIPTOR);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IImeTracker
             public void finishTrackingPendingImeVisibilityRequests(AndroidFuture androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IImeTracker.DESCRIPTOR);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IImeTracker.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

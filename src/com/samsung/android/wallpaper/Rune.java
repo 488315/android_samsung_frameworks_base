@@ -43,11 +43,11 @@ public class Rune {
     private static String mDeviceType;
 
     static {
-        boolean contains = SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_LOCKSCREEN_CONFIG_WALLPAPER_STYLE").contains("LID");
-        SUPPORT_SUB_DISPLAY_MODE = contains;
+        boolean zContains = SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_LOCKSCREEN_CONFIG_WALLPAPER_STYLE").contains("LID");
+        SUPPORT_SUB_DISPLAY_MODE = zContains;
         SUPPORT_COVER_DISPLAY = SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_LOCKSCREEN_CONFIG_SUBDISPLAY_POLICY").contains("COVER");
-        boolean contains2 = SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_LOCKSCREEN_CONFIG_SUBDISPLAY_POLICY").contains("WATCHFACE");
-        SUPPORT_COVER_DISPLAY_WATCHFACE = contains2;
+        boolean zContains2 = SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_LOCKSCREEN_CONFIG_SUBDISPLAY_POLICY").contains("WATCHFACE");
+        SUPPORT_COVER_DISPLAY_WATCHFACE = zContains2;
         SUPPORT_VIDEO_WALLPAPER = SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_LOCKSCREEN_CONFIG_WALLPAPER_STYLE").contains("VIDEO");
         VIRTUAL_DISPLAY_WALLPAPER = SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_LOCKSCREEN_CONFIG_SUBDISPLAY_POLICY").contains("VIRTUAL_DISPLAY");
         WPAPER_SUPPORT_INCONSISTENCY_WALLPAPER = !SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_LOCKSCREEN_CONFIG_WALLPAPER_STYLE").contains("ROTATABLE");
@@ -58,7 +58,7 @@ public class Rune {
         int i = SemFloatingFeature.getInstance().getInt("SEC_FLOATING_FEATURE_LCD_CONFIG_AOD_FULLSCREEN", -1);
         FEATURE_AOD_FULLSCREEN = i;
         SUPPORT_AOD_FULLSCREEN_MAIN_DISPLAY = i == 1 || i == 2;
-        SUPPORT_AOD_FULLSCREEN_SUB_DISPLAY = contains && (i == 1 || i == 3);
+        SUPPORT_AOD_FULLSCREEN_SUB_DISPLAY = zContains && (i == 1 || i == 3);
         SUPPORT_DESKTOP_MODE = SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_COMMON_SUPPORT_DESKTOP_WINDOWING");
         SUPPORT_CSC_REPLACE_WALLPAPER_CMF = SemCscFeature.getInstance().getString("CscFeature_LockScreen_ConfigRelpaceWallpaperCMF", "");
         SUPPORT_WCG = Build.VERSION.SEM_PLATFORM_INT > 120000;
@@ -67,7 +67,7 @@ public class Rune {
         SUPPORT_LAYERED_WALLPAPER_SNAPSHOT = Build.VERSION.SEM_PLATFORM_INT >= 150100;
         boolean z = Build.VERSION.SEM_PLATFORM_INT >= 150500;
         SUPPORT_DLS_SNAPSHOT = z;
-        SUPPORT_PAIRED_DLS_SNAPSHOT = z && contains && !contains2;
+        SUPPORT_PAIRED_DLS_SNAPSHOT = z && zContains && !zContains2;
         mDeviceType = null;
         IS_WINNER = SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_LOCKSCREEN_CONFIG_SUBDISPLAY_POLICY").equals("LOCKSCREEN");
     }
@@ -92,5 +92,9 @@ public class Rune {
 
     public static boolean isShipBuild() {
         return "true".equals(SystemProperties.get("ro.product_ship", "false"));
+    }
+
+    public static boolean isMultiFoldable() {
+        return SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_FRAMEWORK_SUPPORT_MULTI_FOLD");
     }
 }

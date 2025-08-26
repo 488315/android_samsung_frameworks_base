@@ -18,7 +18,6 @@ import com.android.systemui.util.settings.GlobalSettings;
 import java.util.Iterator;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class TunerActivity extends Activity implements PreferenceFragment.OnPreferenceStartFragmentCallback, PreferenceFragment.OnPreferenceStartScreenCallback {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -26,7 +25,6 @@ public class TunerActivity extends Activity implements PreferenceFragment.OnPref
     public final GlobalSettings mGlobalSettings;
     public final TunerService mTunerService;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SubSettingsFragment extends PreferenceFragment {
         public PreferenceScreen mParentScreen;
 

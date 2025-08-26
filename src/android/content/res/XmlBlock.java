@@ -157,7 +157,7 @@ public final class XmlBlock implements AutoCloseable {
         }
     }
 
-    public XmlResourceParser newParser(int i, Validator validator) {
+    public XmlResourceParser newParser(int i, Validator validator) throws Throwable {
         synchronized (this) {
             try {
                 try {
@@ -306,18 +306,18 @@ public final class XmlBlock implements AutoCloseable {
 
         @Override // org.xmlpull.v1.XmlPullParser
         public String getText() {
-            int nativeGetText = XmlBlock.nativeGetText(this.mParseState);
-            if (nativeGetText >= 0) {
-                return getSequenceString(XmlBlock.this.mStrings.getSequence(nativeGetText));
+            int iNativeGetText = XmlBlock.nativeGetText(this.mParseState);
+            if (iNativeGetText >= 0) {
+                return getSequenceString(XmlBlock.this.mStrings.getSequence(iNativeGetText));
             }
             return null;
         }
 
         @Override // org.xmlpull.v1.XmlPullParser
         public int getLineNumber() {
-            int nativeGetLineNumber = XmlBlock.nativeGetLineNumber(this.mParseState);
-            if (nativeGetLineNumber != -2147483640) {
-                return nativeGetLineNumber;
+            int iNativeGetLineNumber = XmlBlock.nativeGetLineNumber(this.mParseState);
+            if (iNativeGetLineNumber != -2147483640) {
+                return iNativeGetLineNumber;
             }
             throw new NullPointerException("Null document");
         }
@@ -347,29 +347,29 @@ public final class XmlBlock implements AutoCloseable {
 
         @Override // org.xmlpull.v1.XmlPullParser
         public String getNamespace() {
-            int nativeGetNamespace = XmlBlock.nativeGetNamespace(this.mParseState);
-            return nativeGetNamespace >= 0 ? getSequenceString(XmlBlock.this.mStrings.getSequence(nativeGetNamespace)) : "";
+            int iNativeGetNamespace = XmlBlock.nativeGetNamespace(this.mParseState);
+            return iNativeGetNamespace >= 0 ? getSequenceString(XmlBlock.this.mStrings.getSequence(iNativeGetNamespace)) : "";
         }
 
         @Override // org.xmlpull.v1.XmlPullParser
         public String getName() {
-            int nativeGetName = XmlBlock.nativeGetName(this.mParseState);
-            if (nativeGetName >= 0) {
-                return getSequenceString(XmlBlock.this.mStrings.getSequence(nativeGetName));
+            int iNativeGetName = XmlBlock.nativeGetName(this.mParseState);
+            if (iNativeGetName >= 0) {
+                return getSequenceString(XmlBlock.this.mStrings.getSequence(iNativeGetName));
             }
             return null;
         }
 
         @Override // android.content.res.XmlResourceParser, org.xmlpull.v1.XmlPullParser, android.util.AttributeSet
         public String getAttributeNamespace(int i) {
-            int nativeGetAttributeNamespace = XmlBlock.nativeGetAttributeNamespace(this.mParseState, i);
-            if (nativeGetAttributeNamespace == -2147483640) {
+            int iNativeGetAttributeNamespace = XmlBlock.nativeGetAttributeNamespace(this.mParseState, i);
+            if (iNativeGetAttributeNamespace == -2147483640) {
                 throw new NullPointerException("Null document");
             }
-            if (nativeGetAttributeNamespace >= 0) {
-                return getSequenceString(XmlBlock.this.mStrings.getSequence(nativeGetAttributeNamespace));
+            if (iNativeGetAttributeNamespace >= 0) {
+                return getSequenceString(XmlBlock.this.mStrings.getSequence(iNativeGetAttributeNamespace));
             }
-            if (nativeGetAttributeNamespace == -1) {
+            if (iNativeGetAttributeNamespace == -1) {
                 return "";
             }
             throw new IndexOutOfBoundsException(String.valueOf(i));
@@ -377,12 +377,12 @@ public final class XmlBlock implements AutoCloseable {
 
         @Override // org.xmlpull.v1.XmlPullParser, android.util.AttributeSet
         public String getAttributeName(int i) {
-            int nativeGetAttributeName = XmlBlock.nativeGetAttributeName(this.mParseState, i);
-            if (nativeGetAttributeName == -2147483640) {
+            int iNativeGetAttributeName = XmlBlock.nativeGetAttributeName(this.mParseState, i);
+            if (iNativeGetAttributeName == -2147483640) {
                 throw new NullPointerException("Null document");
             }
-            if (nativeGetAttributeName >= 0) {
-                return getSequenceString(XmlBlock.this.mStrings.getSequence(nativeGetAttributeName));
+            if (iNativeGetAttributeName >= 0) {
+                return getSequenceString(XmlBlock.this.mStrings.getSequence(iNativeGetAttributeName));
             }
             throw new IndexOutOfBoundsException(String.valueOf(i));
         }
@@ -397,34 +397,34 @@ public final class XmlBlock implements AutoCloseable {
             if (this.mEventType != 2) {
                 return -1;
             }
-            int nativeGetAttributeCount = XmlBlock.nativeGetAttributeCount(this.mParseState);
-            if (nativeGetAttributeCount != -2147483640) {
-                return nativeGetAttributeCount;
+            int iNativeGetAttributeCount = XmlBlock.nativeGetAttributeCount(this.mParseState);
+            if (iNativeGetAttributeCount != -2147483640) {
+                return iNativeGetAttributeCount;
             }
             throw new NullPointerException("Null document");
         }
 
         @Override // org.xmlpull.v1.XmlPullParser, android.util.AttributeSet
         public String getAttributeValue(int i) {
-            int nativeGetAttributeStringValue = XmlBlock.nativeGetAttributeStringValue(this.mParseState, i);
-            if (nativeGetAttributeStringValue == -2147483640) {
+            int iNativeGetAttributeStringValue = XmlBlock.nativeGetAttributeStringValue(this.mParseState, i);
+            if (iNativeGetAttributeStringValue == -2147483640) {
                 throw new NullPointerException("Null document");
             }
-            if (nativeGetAttributeStringValue >= 0) {
-                return getSequenceString(XmlBlock.this.mStrings.getSequence(nativeGetAttributeStringValue));
+            if (iNativeGetAttributeStringValue >= 0) {
+                return getSequenceString(XmlBlock.this.mStrings.getSequence(iNativeGetAttributeStringValue));
             }
-            int nativeGetAttributeDataType = XmlBlock.nativeGetAttributeDataType(this.mParseState, i);
-            if (nativeGetAttributeDataType == -2147483640) {
+            int iNativeGetAttributeDataType = XmlBlock.nativeGetAttributeDataType(this.mParseState, i);
+            if (iNativeGetAttributeDataType == -2147483640) {
                 throw new NullPointerException("Null document");
             }
-            if (nativeGetAttributeDataType == 0) {
+            if (iNativeGetAttributeDataType == 0) {
                 throw new IndexOutOfBoundsException(String.valueOf(i));
             }
-            int nativeGetAttributeData = XmlBlock.nativeGetAttributeData(this.mParseState, i);
-            if (nativeGetAttributeData == -2147483640) {
+            int iNativeGetAttributeData = XmlBlock.nativeGetAttributeData(this.mParseState, i);
+            if (iNativeGetAttributeData == -2147483640) {
                 throw new NullPointerException("Null document");
             }
-            return TypedValue.coerceToString(nativeGetAttributeDataType, nativeGetAttributeData);
+            return TypedValue.coerceToString(iNativeGetAttributeDataType, iNativeGetAttributeData);
         }
 
         @Override // org.xmlpull.v1.XmlPullParser
@@ -439,11 +439,11 @@ public final class XmlBlock implements AutoCloseable {
 
         @Override // org.xmlpull.v1.XmlPullParser, android.util.AttributeSet
         public String getAttributeValue(String str, String str2) {
-            int nativeGetAttributeIndex = XmlBlock.nativeGetAttributeIndex(this.mParseState, str, str2);
-            if (nativeGetAttributeIndex < 0) {
+            int iNativeGetAttributeIndex = XmlBlock.nativeGetAttributeIndex(this.mParseState, str, str2);
+            if (iNativeGetAttributeIndex < 0) {
                 return null;
             }
-            String attributeValue = getAttributeValue(nativeGetAttributeIndex);
+            String attributeValue = getAttributeValue(iNativeGetAttributeIndex);
             Validator validator = this.mValidator;
             if (validator != null) {
                 validator.validateStrAttr(this, str2, attributeValue);
@@ -462,19 +462,19 @@ public final class XmlBlock implements AutoCloseable {
             if (j == 0) {
                 return 1;
             }
-            int nativeNext = XmlBlock.nativeNext(j);
-            if (nativeNext == XmlBlock.ERROR_BAD_DOCUMENT) {
+            int iNativeNext = XmlBlock.nativeNext(j);
+            if (iNativeNext == XmlBlock.ERROR_BAD_DOCUMENT) {
                 throw new XmlPullParserException("Corrupt XML binary file");
             }
-            if (useLayoutReadwrite() && XmlBlock.this.mUsesFeatureFlags && nativeNext == 2 && ParsingPackageUtils.getAconfigFlags().skipCurrentElement(null, this)) {
+            if (useLayoutReadwrite() && XmlBlock.this.mUsesFeatureFlags && iNativeNext == 2 && ParsingPackageUtils.getAconfigFlags().skipCurrentElement(null, this)) {
                 while (i > 0) {
-                    int nativeNext2 = XmlBlock.nativeNext(this.mParseState);
-                    if (nativeNext2 == XmlBlock.ERROR_BAD_DOCUMENT) {
+                    int iNativeNext2 = XmlBlock.nativeNext(this.mParseState);
+                    if (iNativeNext2 == XmlBlock.ERROR_BAD_DOCUMENT) {
                         throw new XmlPullParserException("Corrupt XML binary file");
                     }
-                    if (nativeNext2 == 2) {
+                    if (iNativeNext2 == 2) {
                         i++;
-                    } else if (nativeNext2 == 3) {
+                    } else if (iNativeNext2 == 3) {
                         i--;
                     }
                 }
@@ -484,20 +484,20 @@ public final class XmlBlock implements AutoCloseable {
                 this.mDepth--;
                 this.mDecNextDepth = false;
             }
-            if (nativeNext == 2) {
+            if (iNativeNext == 2) {
                 this.mDepth++;
-            } else if (nativeNext == 3) {
+            } else if (iNativeNext == 3) {
                 this.mDecNextDepth = true;
             }
-            this.mEventType = nativeNext;
+            this.mEventType = iNativeNext;
             Validator validator = this.mValidator;
             if (validator != null) {
                 validator.validate(this);
             }
-            if (nativeNext == 1) {
+            if (iNativeNext == 1) {
                 close();
             }
-            return nativeNext;
+            return iNativeNext;
         }
 
         private static boolean useLayoutReadwrite() {
@@ -545,162 +545,162 @@ public final class XmlBlock implements AutoCloseable {
 
         @Override // android.util.AttributeSet
         public int getAttributeNameResource(int i) {
-            int nativeGetAttributeResource = XmlBlock.nativeGetAttributeResource(this.mParseState, i);
-            if (nativeGetAttributeResource != -2147483640) {
-                return nativeGetAttributeResource;
+            int iNativeGetAttributeResource = XmlBlock.nativeGetAttributeResource(this.mParseState, i);
+            if (iNativeGetAttributeResource != -2147483640) {
+                return iNativeGetAttributeResource;
             }
             throw new NullPointerException("Null document");
         }
 
         @Override // android.util.AttributeSet
         public int getAttributeListValue(String str, String str2, String[] strArr, int i) {
-            int nativeGetAttributeIndex = XmlBlock.nativeGetAttributeIndex(this.mParseState, str, str2);
-            return nativeGetAttributeIndex >= 0 ? getAttributeListValue(nativeGetAttributeIndex, strArr, i) : i;
+            int iNativeGetAttributeIndex = XmlBlock.nativeGetAttributeIndex(this.mParseState, str, str2);
+            return iNativeGetAttributeIndex >= 0 ? getAttributeListValue(iNativeGetAttributeIndex, strArr, i) : i;
         }
 
         @Override // android.util.AttributeSet
         public boolean getAttributeBooleanValue(String str, String str2, boolean z) {
-            int nativeGetAttributeIndex = XmlBlock.nativeGetAttributeIndex(this.mParseState, str, str2);
-            return nativeGetAttributeIndex >= 0 ? getAttributeBooleanValue(nativeGetAttributeIndex, z) : z;
+            int iNativeGetAttributeIndex = XmlBlock.nativeGetAttributeIndex(this.mParseState, str, str2);
+            return iNativeGetAttributeIndex >= 0 ? getAttributeBooleanValue(iNativeGetAttributeIndex, z) : z;
         }
 
         @Override // android.util.AttributeSet
         public int getAttributeResourceValue(String str, String str2, int i) {
-            int nativeGetAttributeIndex = XmlBlock.nativeGetAttributeIndex(this.mParseState, str, str2);
-            return nativeGetAttributeIndex >= 0 ? getAttributeResourceValue(nativeGetAttributeIndex, i) : i;
+            int iNativeGetAttributeIndex = XmlBlock.nativeGetAttributeIndex(this.mParseState, str, str2);
+            return iNativeGetAttributeIndex >= 0 ? getAttributeResourceValue(iNativeGetAttributeIndex, i) : i;
         }
 
         @Override // android.util.AttributeSet
         public int getAttributeIntValue(String str, String str2, int i) {
-            int nativeGetAttributeIndex = XmlBlock.nativeGetAttributeIndex(this.mParseState, str, str2);
-            return nativeGetAttributeIndex >= 0 ? getAttributeIntValue(nativeGetAttributeIndex, i) : i;
+            int iNativeGetAttributeIndex = XmlBlock.nativeGetAttributeIndex(this.mParseState, str, str2);
+            return iNativeGetAttributeIndex >= 0 ? getAttributeIntValue(iNativeGetAttributeIndex, i) : i;
         }
 
         @Override // android.util.AttributeSet
         public int getAttributeUnsignedIntValue(String str, String str2, int i) {
-            int nativeGetAttributeIndex = XmlBlock.nativeGetAttributeIndex(this.mParseState, str, str2);
-            return nativeGetAttributeIndex >= 0 ? getAttributeUnsignedIntValue(nativeGetAttributeIndex, i) : i;
+            int iNativeGetAttributeIndex = XmlBlock.nativeGetAttributeIndex(this.mParseState, str, str2);
+            return iNativeGetAttributeIndex >= 0 ? getAttributeUnsignedIntValue(iNativeGetAttributeIndex, i) : i;
         }
 
         @Override // android.util.AttributeSet
         public float getAttributeFloatValue(String str, String str2, float f) {
-            int nativeGetAttributeIndex = XmlBlock.nativeGetAttributeIndex(this.mParseState, str, str2);
-            return nativeGetAttributeIndex >= 0 ? getAttributeFloatValue(nativeGetAttributeIndex, f) : f;
+            int iNativeGetAttributeIndex = XmlBlock.nativeGetAttributeIndex(this.mParseState, str, str2);
+            return iNativeGetAttributeIndex >= 0 ? getAttributeFloatValue(iNativeGetAttributeIndex, f) : f;
         }
 
         @Override // android.util.AttributeSet
         public int getAttributeListValue(int i, String[] strArr, int i2) {
-            int nativeGetAttributeDataType = XmlBlock.nativeGetAttributeDataType(this.mParseState, i);
-            if (nativeGetAttributeDataType == -2147483640) {
+            int iNativeGetAttributeDataType = XmlBlock.nativeGetAttributeDataType(this.mParseState, i);
+            if (iNativeGetAttributeDataType == -2147483640) {
                 throw new NullPointerException("Null document");
             }
-            int nativeGetAttributeData = XmlBlock.nativeGetAttributeData(this.mParseState, i);
-            if (nativeGetAttributeData != -2147483640) {
-                return nativeGetAttributeDataType == 3 ? XmlUtils.convertValueToList(XmlBlock.this.mStrings.getSequence(nativeGetAttributeData), strArr, i2) : nativeGetAttributeData;
+            int iNativeGetAttributeData = XmlBlock.nativeGetAttributeData(this.mParseState, i);
+            if (iNativeGetAttributeData != -2147483640) {
+                return iNativeGetAttributeDataType == 3 ? XmlUtils.convertValueToList(XmlBlock.this.mStrings.getSequence(iNativeGetAttributeData), strArr, i2) : iNativeGetAttributeData;
             }
             throw new NullPointerException("Null document");
         }
 
         @Override // android.util.AttributeSet
         public boolean getAttributeBooleanValue(int i, boolean z) {
-            int nativeGetAttributeDataType = XmlBlock.nativeGetAttributeDataType(this.mParseState, i);
-            if (nativeGetAttributeDataType == -2147483640) {
+            int iNativeGetAttributeDataType = XmlBlock.nativeGetAttributeDataType(this.mParseState, i);
+            if (iNativeGetAttributeDataType == -2147483640) {
                 throw new NullPointerException("Null document");
             }
-            if (nativeGetAttributeDataType < 16 || nativeGetAttributeDataType > 31) {
+            if (iNativeGetAttributeDataType < 16 || iNativeGetAttributeDataType > 31) {
                 return z;
             }
-            int nativeGetAttributeData = XmlBlock.nativeGetAttributeData(this.mParseState, i);
-            if (nativeGetAttributeData != -2147483640) {
-                return nativeGetAttributeData != 0;
+            int iNativeGetAttributeData = XmlBlock.nativeGetAttributeData(this.mParseState, i);
+            if (iNativeGetAttributeData != -2147483640) {
+                return iNativeGetAttributeData != 0;
             }
             throw new NullPointerException("Null document");
         }
 
         @Override // android.util.AttributeSet
         public int getAttributeResourceValue(int i, int i2) {
-            int nativeGetAttributeDataType = XmlBlock.nativeGetAttributeDataType(this.mParseState, i);
-            if (nativeGetAttributeDataType == -2147483640) {
+            int iNativeGetAttributeDataType = XmlBlock.nativeGetAttributeDataType(this.mParseState, i);
+            if (iNativeGetAttributeDataType == -2147483640) {
                 throw new NullPointerException("Null document");
             }
-            if (nativeGetAttributeDataType != 1) {
+            if (iNativeGetAttributeDataType != 1) {
                 return i2;
             }
-            int nativeGetAttributeData = XmlBlock.nativeGetAttributeData(this.mParseState, i);
-            if (nativeGetAttributeData != -2147483640) {
-                return nativeGetAttributeData;
+            int iNativeGetAttributeData = XmlBlock.nativeGetAttributeData(this.mParseState, i);
+            if (iNativeGetAttributeData != -2147483640) {
+                return iNativeGetAttributeData;
             }
             throw new NullPointerException("Null document");
         }
 
         @Override // android.util.AttributeSet
         public int getAttributeIntValue(int i, int i2) {
-            int nativeGetAttributeDataType = XmlBlock.nativeGetAttributeDataType(this.mParseState, i);
-            if (nativeGetAttributeDataType == -2147483640) {
+            int iNativeGetAttributeDataType = XmlBlock.nativeGetAttributeDataType(this.mParseState, i);
+            if (iNativeGetAttributeDataType == -2147483640) {
                 throw new NullPointerException("Null document");
             }
-            if (nativeGetAttributeDataType < 16 || nativeGetAttributeDataType > 31) {
+            if (iNativeGetAttributeDataType < 16 || iNativeGetAttributeDataType > 31) {
                 return i2;
             }
-            int nativeGetAttributeData = XmlBlock.nativeGetAttributeData(this.mParseState, i);
-            if (nativeGetAttributeData != -2147483640) {
-                return nativeGetAttributeData;
+            int iNativeGetAttributeData = XmlBlock.nativeGetAttributeData(this.mParseState, i);
+            if (iNativeGetAttributeData != -2147483640) {
+                return iNativeGetAttributeData;
             }
             throw new NullPointerException("Null document");
         }
 
         @Override // android.util.AttributeSet
         public int getAttributeUnsignedIntValue(int i, int i2) {
-            int nativeGetAttributeDataType = XmlBlock.nativeGetAttributeDataType(this.mParseState, i);
-            if (nativeGetAttributeDataType == -2147483640) {
+            int iNativeGetAttributeDataType = XmlBlock.nativeGetAttributeDataType(this.mParseState, i);
+            if (iNativeGetAttributeDataType == -2147483640) {
                 throw new NullPointerException("Null document");
             }
-            if (nativeGetAttributeDataType < 16 || nativeGetAttributeDataType > 31) {
+            if (iNativeGetAttributeDataType < 16 || iNativeGetAttributeDataType > 31) {
                 return i2;
             }
-            int nativeGetAttributeData = XmlBlock.nativeGetAttributeData(this.mParseState, i);
-            if (nativeGetAttributeData != -2147483640) {
-                return nativeGetAttributeData;
+            int iNativeGetAttributeData = XmlBlock.nativeGetAttributeData(this.mParseState, i);
+            if (iNativeGetAttributeData != -2147483640) {
+                return iNativeGetAttributeData;
             }
             throw new NullPointerException("Null document");
         }
 
         @Override // android.util.AttributeSet
         public float getAttributeFloatValue(int i, float f) {
-            int nativeGetAttributeDataType = XmlBlock.nativeGetAttributeDataType(this.mParseState, i);
-            if (nativeGetAttributeDataType == -2147483640) {
+            int iNativeGetAttributeDataType = XmlBlock.nativeGetAttributeDataType(this.mParseState, i);
+            if (iNativeGetAttributeDataType == -2147483640) {
                 throw new NullPointerException("Null document");
             }
-            if (nativeGetAttributeDataType == 4) {
-                int nativeGetAttributeData = XmlBlock.nativeGetAttributeData(this.mParseState, i);
-                if (nativeGetAttributeData == -2147483640) {
+            if (iNativeGetAttributeDataType == 4) {
+                int iNativeGetAttributeData = XmlBlock.nativeGetAttributeData(this.mParseState, i);
+                if (iNativeGetAttributeData == -2147483640) {
                     throw new NullPointerException("Null document");
                 }
-                return Float.intBitsToFloat(nativeGetAttributeData);
+                return Float.intBitsToFloat(iNativeGetAttributeData);
             }
             throw new RuntimeException("not a float!");
         }
 
         @Override // android.util.AttributeSet
         public String getIdAttribute() {
-            int nativeGetIdAttribute = XmlBlock.nativeGetIdAttribute(this.mParseState);
-            if (nativeGetIdAttribute == -2147483640) {
+            int iNativeGetIdAttribute = XmlBlock.nativeGetIdAttribute(this.mParseState);
+            if (iNativeGetIdAttribute == -2147483640) {
                 throw new NullPointerException("Null document");
             }
-            if (nativeGetIdAttribute >= 0) {
-                return getSequenceString(XmlBlock.this.mStrings.getSequence(nativeGetIdAttribute));
+            if (iNativeGetIdAttribute >= 0) {
+                return getSequenceString(XmlBlock.this.mStrings.getSequence(iNativeGetIdAttribute));
             }
             return null;
         }
 
         @Override // android.util.AttributeSet
         public String getClassAttribute() {
-            int nativeGetClassAttribute = XmlBlock.nativeGetClassAttribute(this.mParseState);
-            if (nativeGetClassAttribute == -2147483640) {
+            int iNativeGetClassAttribute = XmlBlock.nativeGetClassAttribute(this.mParseState);
+            if (iNativeGetClassAttribute == -2147483640) {
                 throw new NullPointerException("Null document");
             }
-            if (nativeGetClassAttribute >= 0) {
-                return getSequenceString(XmlBlock.this.mStrings.getSequence(nativeGetClassAttribute));
+            if (iNativeGetClassAttribute >= 0) {
+                return getSequenceString(XmlBlock.this.mStrings.getSequence(iNativeGetClassAttribute));
             }
             return null;
         }
@@ -712,9 +712,9 @@ public final class XmlBlock implements AutoCloseable {
 
         @Override // android.util.AttributeSet
         public int getStyleAttribute() {
-            int nativeGetStyleAttribute = XmlBlock.nativeGetStyleAttribute(this.mParseState);
-            if (nativeGetStyleAttribute != -2147483640) {
-                return nativeGetStyleAttribute;
+            int iNativeGetStyleAttribute = XmlBlock.nativeGetStyleAttribute(this.mParseState);
+            if (iNativeGetStyleAttribute != -2147483640) {
+                return iNativeGetStyleAttribute;
             }
             throw new NullPointerException("Null document");
         }

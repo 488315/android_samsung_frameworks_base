@@ -7,7 +7,6 @@ import android.os.SystemClock;
 import android.util.EventLog;
 import android.util.SparseIntArray;
 import com.android.internal.os.BinderCallsStats;
-import com.android.internal.os.BinderInternal;
 import com.android.internal.util.Preconditions;
 import dalvik.system.VMRuntime;
 import java.lang.ref.WeakReference;
@@ -152,7 +151,7 @@ public class BinderInternal {
                     this.mHandler.post(new Runnable() { // from class: com.android.internal.os.BinderInternal$BinderProxyCountEventListenerDelegate$$ExternalSyntheticLambda0
                         @Override // java.lang.Runnable
                         public final void run() {
-                            BinderInternal.BinderProxyCountEventListenerDelegate.this.lambda$notifyLimitReached$0(i);
+                            this.f$0.lambda$notifyLimitReached$0(i);
                         }
                     });
                 }
@@ -170,7 +169,7 @@ public class BinderInternal {
                     this.mHandler.post(new Runnable() { // from class: com.android.internal.os.BinderInternal$BinderProxyCountEventListenerDelegate$$ExternalSyntheticLambda1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            BinderInternal.BinderProxyCountEventListenerDelegate.this.lambda$notifyWarningReached$1(i);
+                            this.f$0.lambda$notifyWarningReached$1(i);
                         }
                     });
                 }

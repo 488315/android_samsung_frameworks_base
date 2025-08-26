@@ -1,13 +1,25 @@
 package androidx.compose.foundation;
 
+import android.view.ViewGroup;
+import android.view.ViewParent;
+import androidx.compose.foundation.AbstractClickableNode;
+import androidx.compose.foundation.gestures.ScrollableContainerNode;
 import androidx.compose.foundation.interaction.MutableInteractionSource;
+import androidx.compose.foundation.interaction.PressInteraction$Press;
+import androidx.compose.ui.node.DelegatableNode_androidKt;
+import androidx.compose.ui.node.TraversableNode;
+import androidx.compose.ui.node.TraversableNodeKt;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
+import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
+import kotlin.jvm.internal.Ref$BooleanRef;
 import kotlinx.coroutines.CoroutineScope;
+import kotlinx.coroutines.DelayKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class AbstractClickableNode$handlePressInteraction$2$1$delayJob$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ MutableInteractionSource $interactionSource;
@@ -34,90 +46,67 @@ final class AbstractClickableNode$handlePressInteraction$2$1$delayJob$1 extends 
         return ((AbstractClickableNode$handlePressInteraction$2$1$delayJob$1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:29:0x0063, code lost:
-    
-        if (kotlinx.coroutines.DelayKt.delay(r4, r6) == r0) goto L25;
-     */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public final java.lang.Object invokeSuspend(java.lang.Object r7) {
-        /*
-            r6 = this;
-            kotlin.coroutines.intrinsics.CoroutineSingletons r0 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r1 = r6.label
-            r2 = 2
-            r3 = 1
-            if (r1 == 0) goto L20
-            if (r1 == r3) goto L1c
-            if (r1 != r2) goto L14
-            java.lang.Object r0 = r6.L$0
-            androidx.compose.foundation.interaction.PressInteraction$Press r0 = (androidx.compose.foundation.interaction.PressInteraction$Press) r0
-            kotlin.ResultKt.throwOnFailure(r7)
-            goto L7c
-        L14:
-            java.lang.IllegalStateException r6 = new java.lang.IllegalStateException
-            java.lang.String r7 = "call to 'resume' before 'invoke' with coroutine"
-            r6.<init>(r7)
-            throw r6
-        L1c:
-            kotlin.ResultKt.throwOnFailure(r7)
-            goto L66
-        L20:
-            kotlin.ResultKt.throwOnFailure(r7)
-            androidx.compose.foundation.AbstractClickableNode r7 = r6.this$0
-            androidx.compose.foundation.AbstractClickableNode$TraverseKey r1 = androidx.compose.foundation.AbstractClickableNode.TraverseKey
-            r7.getClass()
-            kotlin.jvm.internal.Ref$BooleanRef r1 = new kotlin.jvm.internal.Ref$BooleanRef
-            r1.<init>()
-            androidx.compose.foundation.gestures.ScrollableContainerNode$TraverseKey r4 = androidx.compose.foundation.gestures.ScrollableContainerNode.TraverseKey
-            androidx.compose.foundation.ClickableKt$hasScrollableContainer$1 r5 = new androidx.compose.foundation.ClickableKt$hasScrollableContainer$1
-            r5.<init>()
-            androidx.compose.ui.node.TraversableNodeKt.traverseAncestors(r7, r4, r5)
-            boolean r1 = r1.element
-            if (r1 != 0) goto L5b
-            int r1 = androidx.compose.foundation.Clickable_androidKt.$r8$clinit
-            android.view.View r7 = androidx.compose.ui.node.DelegatableNode_androidKt.requireView(r7)
-            android.view.ViewParent r7 = r7.getParent()
-        L47:
-            if (r7 == 0) goto L66
-            boolean r1 = r7 instanceof android.view.ViewGroup
-            if (r1 == 0) goto L66
-            android.view.ViewGroup r7 = (android.view.ViewGroup) r7
-            boolean r1 = r7.shouldDelayChildPressedState()
-            if (r1 == 0) goto L56
-            goto L5b
-        L56:
-            android.view.ViewParent r7 = r7.getParent()
-            goto L47
-        L5b:
-            long r4 = androidx.compose.foundation.Clickable_androidKt.TapIndicationDelay
-            r6.label = r3
-            java.lang.Object r7 = kotlinx.coroutines.DelayKt.delay(r4, r6)
-            if (r7 != r0) goto L66
-            goto L7a
-        L66:
-            androidx.compose.foundation.interaction.PressInteraction$Press r7 = new androidx.compose.foundation.interaction.PressInteraction$Press
-            long r3 = r6.$offset
-            r1 = 0
-            r7.<init>(r3, r1)
-            androidx.compose.foundation.interaction.MutableInteractionSource r1 = r6.$interactionSource
-            r6.L$0 = r7
-            r6.label = r2
-            java.lang.Object r1 = r1.emit(r7, r6)
-            if (r1 != r0) goto L7b
-        L7a:
-            return r0
-        L7b:
-            r0 = r7
-        L7c:
-            androidx.compose.foundation.AbstractClickableNode r6 = r6.this$0
-            r6.pressInteraction = r0
-            kotlin.Unit r6 = kotlin.Unit.INSTANCE
-            return r6
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.foundation.AbstractClickableNode$handlePressInteraction$2$1$delayJob$1.invokeSuspend(java.lang.Object):java.lang.Object");
+    public final Object invokeSuspend(Object obj) {
+        PressInteraction$Press pressInteraction$Press;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i = this.label;
+        if (i == 0) {
+            ResultKt.throwOnFailure(obj);
+            AbstractClickableNode abstractClickableNode = this.this$0;
+            AbstractClickableNode.TraverseKey traverseKey = AbstractClickableNode.TraverseKey;
+            abstractClickableNode.getClass();
+            final Ref$BooleanRef ref$BooleanRef = new Ref$BooleanRef();
+            TraversableNodeKt.traverseAncestors(abstractClickableNode, ScrollableContainerNode.TraverseKey, new Function1() { // from class: androidx.compose.foundation.ClickableKt$hasScrollableContainer$1
+                {
+                    super(1);
+                }
+
+                @Override // kotlin.jvm.functions.Function1
+                /* renamed from: invoke */
+                public final Object mo781invoke(Object obj2) {
+                    TraversableNode traversableNode = (TraversableNode) obj2;
+                    Ref$BooleanRef ref$BooleanRef2 = ref$BooleanRef;
+                    boolean z = ref$BooleanRef2.element || ((ScrollableContainerNode) traversableNode).enabled;
+                    ref$BooleanRef2.element = z;
+                    return Boolean.valueOf(!z);
+                }
+            });
+            if (!ref$BooleanRef.element) {
+                int i2 = Clickable_androidKt.$r8$clinit;
+                ViewParent parent = DelegatableNode_androidKt.requireView(abstractClickableNode).getParent();
+                while (parent != null && (parent instanceof ViewGroup)) {
+                    ViewGroup viewGroup = (ViewGroup) parent;
+                    if (!viewGroup.shouldDelayChildPressedState()) {
+                        parent = viewGroup.getParent();
+                    }
+                }
+            }
+            long j = Clickable_androidKt.TapIndicationDelay;
+            this.label = 1;
+            if (DelayKt.delay(j, this) != coroutineSingletons) {
+            }
+            return coroutineSingletons;
+        }
+        if (i != 1) {
+            if (i != 2) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            pressInteraction$Press = (PressInteraction$Press) this.L$0;
+            ResultKt.throwOnFailure(obj);
+            this.this$0.pressInteraction = pressInteraction$Press;
+            return Unit.INSTANCE;
+        }
+        ResultKt.throwOnFailure(obj);
+        PressInteraction$Press pressInteraction$Press2 = new PressInteraction$Press(this.$offset, null);
+        MutableInteractionSource mutableInteractionSource = this.$interactionSource;
+        this.L$0 = pressInteraction$Press2;
+        this.label = 2;
+        if (mutableInteractionSource.emit(pressInteraction$Press2, this) != coroutineSingletons) {
+            pressInteraction$Press = pressInteraction$Press2;
+            this.this$0.pressInteraction = pressInteraction$Press;
+            return Unit.INSTANCE;
+        }
+        return coroutineSingletons;
     }
 }

@@ -59,9 +59,9 @@ public interface IPinnerService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IPinnerService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IPinnerService)) {
-                return (IPinnerService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IPinnerService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IPinnerService)) {
+                return (IPinnerService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -114,16 +114,16 @@ public interface IPinnerService extends IInterface {
 
             @Override // android.app.pinner.IPinnerService
             public List<PinnedFileStat> getPinnerStats() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPinnerService.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(PinnedFileStat.CREATOR);
+                    parcelObtain.writeInterfaceToken(IPinnerService.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(PinnedFileStat.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

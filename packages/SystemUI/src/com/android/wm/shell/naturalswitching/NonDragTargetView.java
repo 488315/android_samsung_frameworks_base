@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.PointF;
 import android.graphics.Rect;
@@ -27,7 +28,6 @@ import com.samsung.android.rune.CoreRune;
 import com.samsung.android.util.InterpolatorUtils;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class NonDragTargetView extends FrameLayout {
     public ShellExecutor mBackgroundExecutor;
@@ -46,7 +46,7 @@ public class NonDragTargetView extends FrameLayout {
     public ViewGroup mMainView;
     public int mNaturalSwitchingMode;
     public final SparseArray mNonTargets;
-    public NaturalSwitchingLayout$$ExternalSyntheticLambda4 mOnDrawCallback;
+    public NaturalSwitchingLayout$$ExternalSyntheticLambda5 mOnDrawCallback;
     public final NonDragTargetView$$ExternalSyntheticLambda0 mOnDrawListener;
     public int mPushRegion;
     public final SparseArray mPushRegions;
@@ -87,10 +87,10 @@ public class NonDragTargetView extends FrameLayout {
         this.mOnDrawListener = new ViewTreeObserver.OnDrawListener() { // from class: com.android.wm.shell.naturalswitching.NonDragTargetView$$ExternalSyntheticLambda0
             @Override // android.view.ViewTreeObserver.OnDrawListener
             public final void onDraw() {
-                NonDragTargetView nonDragTargetView = NonDragTargetView.this;
-                NaturalSwitchingLayout$$ExternalSyntheticLambda4 naturalSwitchingLayout$$ExternalSyntheticLambda4 = nonDragTargetView.mOnDrawCallback;
-                if (naturalSwitchingLayout$$ExternalSyntheticLambda4 != null) {
-                    naturalSwitchingLayout$$ExternalSyntheticLambda4.run();
+                NonDragTargetView nonDragTargetView = this.f$0;
+                NaturalSwitchingLayout$$ExternalSyntheticLambda5 naturalSwitchingLayout$$ExternalSyntheticLambda5 = nonDragTargetView.mOnDrawCallback;
+                if (naturalSwitchingLayout$$ExternalSyntheticLambda5 != null) {
+                    naturalSwitchingLayout$$ExternalSyntheticLambda5.run();
                     nonDragTargetView.mOnDrawCallback = null;
                 }
             }
@@ -105,17 +105,17 @@ public class NonDragTargetView extends FrameLayout {
         return nonDragTarget;
     }
 
-    public final Rect getCenterFreeformBounds() {
+    public final Rect getCenterFreeformBounds() throws Resources.NotFoundException {
         int dimensionPixelSize = ((FrameLayout) this).mContext.getResources().getDimensionPixelSize(R.dimen.ns_drop_freeform_width);
         int dimensionPixelSize2 = ((FrameLayout) this).mContext.getResources().getDimensionPixelSize(R.dimen.ns_drop_freeform_height);
         Rect rect = new Rect();
-        int width = ((this.mDisplayBounds.width() - dimensionPixelSize) / 2) + rect.left;
-        int height = (this.mDisplayBounds.height() - dimensionPixelSize2) / 2;
-        rect.set(width, height, dimensionPixelSize + width, dimensionPixelSize2 + height);
+        int iWidth = ((this.mDisplayBounds.width() - dimensionPixelSize) / 2) + rect.left;
+        int iHeight = (this.mDisplayBounds.height() - dimensionPixelSize2) / 2;
+        rect.set(iWidth, iHeight, dimensionPixelSize + iWidth, dimensionPixelSize2 + iHeight);
         return rect;
     }
 
-    public final ArrayList getPolygonTouchRegion(int i, Rect rect) {
+    public final ArrayList getPolygonTouchRegion(int i, Rect rect) throws Resources.NotFoundException {
         if (!CoreRune.MW_NATURAL_SWITCHING_PIP || this.mDragTargetWindowingMode != 2) {
             Rect centerFreeformBounds = getCenterFreeformBounds();
             ArrayList arrayList = new ArrayList();
@@ -194,8 +194,8 @@ public class NonDragTargetView extends FrameLayout {
     }
 
     public final Rect getShrinkBounds(NonDragTarget nonDragTarget) {
-        int width;
-        int height;
+        int iWidth;
+        int iHeight;
         int i;
         int i2;
         Rect rect = new Rect();
@@ -204,42 +204,42 @@ public class NonDragTargetView extends FrameLayout {
         } else {
             nonDragTarget.getCurrentLayoutBounds(rect);
         }
-        boolean z = true;
+        boolean zIsQuarter = true;
         if (!this.mIsFloatingDragTarget && !this.mDragTargetBounds.isEmpty()) {
             if (this.mTaskVisibility.isMultiSplit()) {
-                z = true ^ isQuarter(this.mDragTargetWindowingMode);
+                zIsQuarter = true ^ isQuarter(this.mDragTargetWindowingMode);
             } else if (this.mTaskVisibility.isTwoUp() && (this.mSplitScreenController.isVerticalDivision() ? !((i = this.mDropSide) == 4 || i == 16) : !((i2 = this.mDropSide) != 4 && i2 != 16))) {
-                z = false;
+                zIsQuarter = false;
             }
         }
-        if (z) {
-            int width2 = this.mContainingBounds.width();
+        if (zIsQuarter) {
+            int iWidth2 = this.mContainingBounds.width();
             int i3 = this.mDividerSize;
-            width = AbsActionBarView$$ExternalSyntheticOutline0.m(width2, i3, 2, i3);
-            int height2 = this.mContainingBounds.height();
+            iWidth = AbsActionBarView$$ExternalSyntheticOutline0.m(iWidth2, i3, 2, i3);
+            int iHeight2 = this.mContainingBounds.height();
             int i4 = this.mDividerSize;
-            height = AbsActionBarView$$ExternalSyntheticOutline0.m(height2, i4, 2, i4);
+            iHeight = AbsActionBarView$$ExternalSyntheticOutline0.m(iHeight2, i4, 2, i4);
         } else {
-            width = this.mDragTargetBounds.width() + this.mDividerSize;
-            height = this.mDragTargetBounds.height() + this.mDividerSize;
+            iWidth = this.mDragTargetBounds.width() + this.mDividerSize;
+            iHeight = this.mDragTargetBounds.height() + this.mDividerSize;
         }
         int i5 = this.mDropSide;
         if (i5 == 2) {
-            rect.left = this.mContainingBounds.left + width;
+            rect.left = this.mContainingBounds.left + iWidth;
             return rect;
         }
         if (i5 == 4) {
-            rect.top = this.mContainingBounds.top + height;
+            rect.top = this.mContainingBounds.top + iHeight;
             return rect;
         }
         if (i5 == 8) {
-            rect.right = this.mContainingBounds.right - width;
+            rect.right = this.mContainingBounds.right - iWidth;
             return rect;
         }
         if (i5 != 16) {
             return rect;
         }
-        rect.bottom = this.mContainingBounds.bottom - height;
+        rect.bottom = this.mContainingBounds.bottom - iHeight;
         return rect;
     }
 
@@ -293,7 +293,7 @@ public class NonDragTargetView extends FrameLayout {
         return null;
     }
 
-    public final void init(int i, TaskVisibility taskVisibility, int i2, SplitScreenController splitScreenController, ShellExecutor shellExecutor) {
+    public final void init(int i, TaskVisibility taskVisibility, int i2, SplitScreenController splitScreenController, ShellExecutor shellExecutor) throws Resources.NotFoundException {
         int dimensionPixelSize;
         int dimensionPixelSize2;
         this.mMainView = (ViewGroup) findViewById(R.id.main);
@@ -315,7 +315,7 @@ public class NonDragTargetView extends FrameLayout {
         View view = new View(((FrameLayout) this).mContext);
         this.mDimView = view;
         this.mMainView.addView(view);
-        int color = ((FrameLayout) this).mContext.getResources().getColor(17171594, null);
+        int color = ((FrameLayout) this).mContext.getResources().getColor(17171593, null);
         this.mDimView.setBackgroundColor(Color.argb(Math.round(Color.alpha(color) * 0.9f), Color.red(color), Color.green(color), Color.blue(color)));
         this.mDimView.setVisibility(4);
         if (this.mTaskVisibility.isMultiSplit()) {
@@ -336,29 +336,29 @@ public class NonDragTargetView extends FrameLayout {
             }
         }
         if (CoreRune.MW_MULTI_SPLIT_DIVIDER) {
-            dimensionPixelSize = getResources().getDimensionPixelSize(android.R.dimen.secondary_rounded_corner_radius_bottom);
-            dimensionPixelSize2 = CoreRune.MW_MULTI_SPLIT_DIVIDER_SIZE_FOLD ? getResources().getDimensionPixelSize(android.R.dimen.secondary_rounded_corner_radius_adjustment) : getResources().getDimensionPixelSize(android.R.dimen.secondary_rounded_corner_radius);
+            dimensionPixelSize = getResources().getDimensionPixelSize(android.R.dimen.secondary_rounded_corner_radius_bottom_adjustment);
+            dimensionPixelSize2 = CoreRune.MW_MULTI_SPLIT_DIVIDER_SIZE_FOLD ? getResources().getDimensionPixelSize(android.R.dimen.secondary_rounded_corner_radius_bottom) : getResources().getDimensionPixelSize(android.R.dimen.secondary_rounded_corner_radius_adjustment);
         } else {
-            dimensionPixelSize = getResources().getDimensionPixelSize(android.R.dimen.indeterminate_progress_alpha_24);
-            dimensionPixelSize2 = getResources().getDimensionPixelSize(android.R.dimen.indeterminate_progress_alpha_23);
+            dimensionPixelSize = getResources().getDimensionPixelSize(android.R.dimen.indeterminate_progress_alpha_25);
+            dimensionPixelSize2 = getResources().getDimensionPixelSize(android.R.dimen.indeterminate_progress_alpha_24);
         }
         this.mDividerSize = dimensionPixelSize - (dimensionPixelSize2 * 2);
         this.mScaleDeltaSize = getResources().getDimensionPixelSize(R.dimen.natural_switching_scale_delta);
-        this.mCornerRadius = getResources().getDimensionPixelOffset(17105924);
+        this.mCornerRadius = getResources().getDimensionPixelOffset(17105925);
         if (!this.mTaskVisibility.isTaskVisible(13) && (!CoreRune.MW_NATURAL_SWITCHING_FULLSCREEN || this.mDragTargetWindowingMode != 1)) {
             SparseArray sparseArray = this.mTaskVisibility.mRunningTaskInfo;
             for (int size = sparseArray.size() - 1; size >= 0; size--) {
                 ActivityManager.RunningTaskInfo runningTaskInfo = (ActivityManager.RunningTaskInfo) sparseArray.valueAt(size);
-                int keyAt = sparseArray.keyAt(size);
-                if (runningTaskInfo.isVisible() && keyAt != this.mDragTargetWindowingMode && !NaturalSwitchingLayout.isFloating(keyAt)) {
-                    NonDragTarget createNonDragTarget = createNonDragTarget();
-                    createNonDragTarget.init(this, runningTaskInfo.taskId, keyAt, runningTaskInfo.configuration.windowConfiguration.getBounds(), runningTaskInfo.configuration.windowConfiguration.getStagePosition());
+                int iKeyAt = sparseArray.keyAt(size);
+                if (runningTaskInfo.isVisible() && iKeyAt != this.mDragTargetWindowingMode && !NaturalSwitchingLayout.isFloating(iKeyAt)) {
+                    NonDragTarget nonDragTargetCreateNonDragTarget = createNonDragTarget();
+                    nonDragTargetCreateNonDragTarget.init(this, runningTaskInfo.taskId, iKeyAt, runningTaskInfo.configuration.windowConfiguration.getBounds(), runningTaskInfo.configuration.windowConfiguration.getStagePosition());
                     if (this.mNaturalSwitchingMode == 1) {
-                        createNonDragTarget.setThumbnail();
+                        nonDragTargetCreateNonDragTarget.setThumbnail();
                     } else {
-                        createNonDragTarget.setDropTargetView();
+                        nonDragTargetCreateNonDragTarget.setDropTargetView();
                     }
-                    this.mNonTargets.put(keyAt, createNonDragTarget);
+                    this.mNonTargets.put(iKeyAt, nonDragTargetCreateNonDragTarget);
                 }
             }
             this.mDragTargetBounds.set(this.mTaskVisibility.getTaskBounds(this.mDragTargetWindowingMode));
@@ -366,8 +366,8 @@ public class NonDragTargetView extends FrameLayout {
                 this.mToSwapTargetBounds.set(this.mDragTargetBounds);
             }
         } else if (!z || MultiWindowUtils.isInSubDisplay(((FrameLayout) this).mContext)) {
-            NonDragTarget createNonDragTarget2 = createNonDragTarget();
-            NonDragTarget createNonDragTarget3 = createNonDragTarget();
+            NonDragTarget nonDragTargetCreateNonDragTarget2 = createNonDragTarget();
+            NonDragTarget nonDragTargetCreateNonDragTarget3 = createNonDragTarget();
             Rect rect = new Rect();
             Rect rect2 = new Rect();
             this.mSplitScreenController.getStageBounds(rect, rect2);
@@ -386,52 +386,52 @@ public class NonDragTargetView extends FrameLayout {
                 rect.top = rect4.top;
                 rect2.bottom = rect4.bottom;
             }
-            createNonDragTarget2.init(this, 0, 13, rect, 0);
-            createNonDragTarget2.setDropTargetView();
-            this.mNonTargets.put(3, createNonDragTarget2);
-            createNonDragTarget3.init(this, 0, 13, rect2, 1);
-            createNonDragTarget3.setDropTargetView();
-            this.mNonTargets.put(4, createNonDragTarget3);
+            nonDragTargetCreateNonDragTarget2.init(this, 0, 13, rect, 0);
+            nonDragTargetCreateNonDragTarget2.setDropTargetView();
+            this.mNonTargets.put(3, nonDragTargetCreateNonDragTarget2);
+            nonDragTargetCreateNonDragTarget3.init(this, 0, 13, rect2, 1);
+            nonDragTargetCreateNonDragTarget3.setDropTargetView();
+            this.mNonTargets.put(4, nonDragTargetCreateNonDragTarget3);
             this.mDragTargetBounds.set(this.mTaskVisibility.getTaskBounds(this.mDragTargetWindowingMode));
         } else {
-            NonDragTarget createNonDragTarget4 = createNonDragTarget();
-            NonDragTarget createNonDragTarget5 = createNonDragTarget();
-            NonDragTarget createNonDragTarget6 = createNonDragTarget();
-            NonDragTarget createNonDragTarget7 = createNonDragTarget();
-            int width = this.mDisplayBounds.width();
-            int height = this.mDisplayBounds.height();
-            Rect stableInsets = this.mTaskVisibility.mDisplayLayout.stableInsets(true);
-            int i6 = width - stableInsets.right;
-            int i7 = stableInsets.left;
-            int m = AbsActionBarView$$ExternalSyntheticOutline0.m(i6, i7, 2, i7);
+            NonDragTarget nonDragTargetCreateNonDragTarget4 = createNonDragTarget();
+            NonDragTarget nonDragTargetCreateNonDragTarget5 = createNonDragTarget();
+            NonDragTarget nonDragTargetCreateNonDragTarget6 = createNonDragTarget();
+            NonDragTarget nonDragTargetCreateNonDragTarget7 = createNonDragTarget();
+            int iWidth = this.mDisplayBounds.width();
+            int iHeight = this.mDisplayBounds.height();
+            Rect rectStableInsets = this.mTaskVisibility.mDisplayLayout.stableInsets(true);
+            int i6 = iWidth - rectStableInsets.right;
+            int i7 = rectStableInsets.left;
+            int iM = AbsActionBarView$$ExternalSyntheticOutline0.m(i6, i7, 2, i7);
             if (this.mSplitScreenController.isSplitScreenFeasible(true)) {
-                int i8 = height / 2;
-                Rect rect5 = new Rect(stableInsets.left, 0, width - stableInsets.right, i8);
+                int i8 = iHeight / 2;
+                Rect rect5 = new Rect(rectStableInsets.left, 0, iWidth - rectStableInsets.right, i8);
                 ArrayList polygonTouchRegion = getPolygonTouchRegion(16, rect5);
-                createNonDragTarget4.init(this, 0, 13, rect5, 16);
-                createNonDragTarget4.mPolygon.addAll(polygonTouchRegion);
-                createNonDragTarget4.setDropTargetView();
-                this.mNonTargets.put(6, createNonDragTarget4);
-                Rect rect6 = new Rect(stableInsets.left, i8, width - stableInsets.right, height);
+                nonDragTargetCreateNonDragTarget4.init(this, 0, 13, rect5, 16);
+                nonDragTargetCreateNonDragTarget4.mPolygon.addAll(polygonTouchRegion);
+                nonDragTargetCreateNonDragTarget4.setDropTargetView();
+                this.mNonTargets.put(6, nonDragTargetCreateNonDragTarget4);
+                Rect rect6 = new Rect(rectStableInsets.left, i8, iWidth - rectStableInsets.right, iHeight);
                 ArrayList polygonTouchRegion2 = getPolygonTouchRegion(64, rect6);
-                createNonDragTarget5.init(this, 0, 13, rect6, 64);
-                createNonDragTarget5.mPolygon.addAll(polygonTouchRegion2);
-                createNonDragTarget5.setDropTargetView();
-                this.mNonTargets.put(7, createNonDragTarget5);
+                nonDragTargetCreateNonDragTarget5.init(this, 0, 13, rect6, 64);
+                nonDragTargetCreateNonDragTarget5.mPolygon.addAll(polygonTouchRegion2);
+                nonDragTargetCreateNonDragTarget5.setDropTargetView();
+                this.mNonTargets.put(7, nonDragTargetCreateNonDragTarget5);
             }
             if (this.mSplitScreenController.isSplitScreenFeasible(false)) {
-                Rect rect7 = new Rect(stableInsets.left, 0, m, height);
+                Rect rect7 = new Rect(rectStableInsets.left, 0, iM, iHeight);
                 ArrayList polygonTouchRegion3 = getPolygonTouchRegion(8, rect7);
-                createNonDragTarget6.init(this, 0, 13, rect7, 8);
-                createNonDragTarget6.mPolygon.addAll(polygonTouchRegion3);
-                createNonDragTarget6.setDropTargetView();
-                this.mNonTargets.put(8, createNonDragTarget6);
-                Rect rect8 = new Rect(m, 0, width - stableInsets.right, height);
+                nonDragTargetCreateNonDragTarget6.init(this, 0, 13, rect7, 8);
+                nonDragTargetCreateNonDragTarget6.mPolygon.addAll(polygonTouchRegion3);
+                nonDragTargetCreateNonDragTarget6.setDropTargetView();
+                this.mNonTargets.put(8, nonDragTargetCreateNonDragTarget6);
+                Rect rect8 = new Rect(iM, 0, iWidth - rectStableInsets.right, iHeight);
                 ArrayList polygonTouchRegion4 = getPolygonTouchRegion(32, rect8);
-                createNonDragTarget7.init(this, 0, 13, rect8, 32);
-                createNonDragTarget7.mPolygon.addAll(polygonTouchRegion4);
-                createNonDragTarget7.setDropTargetView();
-                this.mNonTargets.put(9, createNonDragTarget7);
+                nonDragTargetCreateNonDragTarget7.init(this, 0, 13, rect8, 32);
+                nonDragTargetCreateNonDragTarget7.mPolygon.addAll(polygonTouchRegion4);
+                nonDragTargetCreateNonDragTarget7.setDropTargetView();
+                this.mNonTargets.put(9, nonDragTargetCreateNonDragTarget7);
             }
         }
         WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams(2016, 1049368, -2);
@@ -453,21 +453,21 @@ public class NonDragTargetView extends FrameLayout {
             if (this.mDragTargetBounds.width() < rect.width()) {
                 rect = this.mDragTargetBounds;
             }
-            int width = rect.width() / 2;
+            int iWidth = rect.width() / 2;
             int i2 = dividerBounds.top - i;
             int i3 = dividerBounds.bottom + i;
-            this.mPushRegions.put(1, new Rect(this.mDisplayBounds.left, i2, this.mStableRect.left + width, i3));
-            this.mPushRegions.put(3, new Rect(this.mStableRect.right - width, i2, this.mDisplayBounds.right, i3));
+            this.mPushRegions.put(1, new Rect(this.mDisplayBounds.left, i2, this.mStableRect.left + iWidth, i3));
+            this.mPushRegions.put(3, new Rect(this.mStableRect.right - iWidth, i2, this.mDisplayBounds.right, i3));
             return;
         }
         if (this.mDragTargetBounds.height() < rect.height()) {
             rect = this.mDragTargetBounds;
         }
-        int height = rect.height();
+        int iHeight = rect.height();
         int i4 = dividerBounds.left - i;
         int i5 = dividerBounds.right + i;
         this.mPushRegions.put(2, new Rect(i4, this.mDisplayBounds.top, i5, this.mStableRect.top + 120));
-        this.mPushRegions.put(4, new Rect(i4, this.mStableRect.bottom - height, i5, this.mDisplayBounds.bottom));
+        this.mPushRegions.put(4, new Rect(i4, this.mStableRect.bottom - iHeight, i5, this.mDisplayBounds.bottom));
     }
 
     public final boolean isNonTargetsHorizontal() {
@@ -529,23 +529,23 @@ public class NonDragTargetView extends FrameLayout {
                     public final /* synthetic */ float val$toScaleY;
 
                     public AnonymousClass8(final float scaleX2, final float f22, final float scaleY2, final float f32) {
-                        r2 = scaleX2;
-                        r3 = f22;
-                        r4 = scaleY2;
-                        r5 = f32;
+                        f = scaleX2;
+                        f = f22;
+                        f = scaleY2;
+                        f = f32;
                     }
 
                     @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                     public final void onAnimationUpdate(ValueAnimator valueAnimator2) {
-                        float floatValue = ((Float) valueAnimator2.getAnimatedValue()).floatValue();
-                        float f4 = r2;
-                        float m$1 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(r3, f4, floatValue, f4);
-                        float f5 = r4;
-                        float m$12 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(r5, f5, floatValue, f5);
-                        NonDragTarget.this.mView.setScaleX(m$1);
-                        NonDragTarget.this.mView.setScaleY(m$12);
-                        NonDragTarget.this.mBlurView.setScaleX(m$1);
-                        NonDragTarget.this.mBlurView.setScaleY(m$12);
+                        float fFloatValue = ((Float) valueAnimator2.getAnimatedValue()).floatValue();
+                        float f4 = f;
+                        float fM$1 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(f, f4, fFloatValue, f4);
+                        float f5 = f;
+                        float fM$12 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(f, f5, fFloatValue, f5);
+                        NonDragTarget.this.mView.setScaleX(fM$1);
+                        NonDragTarget.this.mView.setScaleY(fM$12);
+                        NonDragTarget.this.mBlurView.setScaleX(fM$1);
+                        NonDragTarget.this.mBlurView.setScaleY(fM$12);
                         NonDragTarget.this.mView.invalidateOutline();
                         NonDragTarget.this.mBlurView.invalidateOutline();
                     }

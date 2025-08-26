@@ -44,9 +44,9 @@ public interface INtnSignalStrengthCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(INtnSignalStrengthCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof INtnSignalStrengthCallback)) {
-                return (INtnSignalStrengthCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(INtnSignalStrengthCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof INtnSignalStrengthCallback)) {
+                return (INtnSignalStrengthCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -99,13 +99,13 @@ public interface INtnSignalStrengthCallback extends IInterface {
 
             @Override // android.telephony.satellite.INtnSignalStrengthCallback
             public void onNtnSignalStrengthChanged(NtnSignalStrength ntnSignalStrength) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(INtnSignalStrengthCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(ntnSignalStrength, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(INtnSignalStrengthCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(ntnSignalStrength, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

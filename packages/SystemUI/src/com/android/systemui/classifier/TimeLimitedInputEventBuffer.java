@@ -7,13 +7,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class TimeLimitedInputEventBuffer implements List {
     public final List mInputEvents = new ArrayList();
     public final long mMaxAgeMs;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Iter implements ListIterator {
         public final ListIterator mIterator;
 
@@ -78,9 +76,9 @@ public class TimeLimitedInputEventBuffer implements List {
 
     @Override // java.util.List, java.util.Collection
     public final boolean addAll(Collection collection) {
-        boolean addAll = ((ArrayList) this.mInputEvents).addAll(collection);
+        boolean zAddAll = ((ArrayList) this.mInputEvents).addAll(collection);
         ejectOldEvents();
-        return addAll;
+        return zAddAll;
     }
 
     @Override // java.util.List, java.util.Collection
@@ -209,9 +207,9 @@ public class TimeLimitedInputEventBuffer implements List {
 
     @Override // java.util.List, java.util.Collection
     public final boolean add(Object obj) {
-        boolean add = ((ArrayList) this.mInputEvents).add((InputEvent) obj);
+        boolean zAdd = ((ArrayList) this.mInputEvents).add((InputEvent) obj);
         ejectOldEvents();
-        return add;
+        return zAdd;
     }
 
     @Override // java.util.List

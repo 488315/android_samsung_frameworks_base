@@ -13,7 +13,6 @@ import com.android.systemui.R;
 import com.android.wm.shell.common.DisplayLayout;
 import java.io.PrintWriter;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PipDisplayLayoutState {
     public final Context mContext;
@@ -21,15 +20,15 @@ public class PipDisplayLayoutState {
     public Point mScreenEdgeInsets = null;
     public final DisplayLayout mDisplayLayout = new DisplayLayout();
 
-    public PipDisplayLayoutState(Context context) {
+    public PipDisplayLayoutState(Context context) throws Resources.NotFoundException {
         this.mContext = context;
         reloadResources();
     }
 
     public final void dump(PrintWriter printWriter) {
-        StringBuilder m = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "  PipDisplayLayoutState", "    mDisplayId="), this.mDisplayId, printWriter, "    getDisplayBounds=");
-        m.append(getDisplayBounds());
-        printWriter.println(m.toString());
+        StringBuilder sbM = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "  PipDisplayLayoutState", "    mDisplayId="), this.mDisplayId, printWriter, "    getDisplayBounds=");
+        sbM.append(getDisplayBounds());
+        printWriter.println(sbM.toString());
         printWriter.println("    mScreenEdgeInsets=" + this.mScreenEdgeInsets);
     }
 
@@ -51,23 +50,23 @@ public class PipDisplayLayoutState {
         return rect;
     }
 
-    public final void reloadResources() {
+    public final void reloadResources() throws Resources.NotFoundException {
         Point point;
         Resources resources = this.mContext.getResources();
         String string = resources.getString(R.string.config_defaultPictureInPictureScreenEdgeInsets);
-        Size parseSize = !string.isEmpty() ? Size.parseSize(string) : null;
-        if (parseSize == null) {
+        Size size = !string.isEmpty() ? Size.parseSize(string) : null;
+        if (size == null) {
             point = new Point();
         } else {
-            float width = parseSize.getWidth();
+            float width = size.getWidth();
             DisplayMetrics displayMetrics = resources.getDisplayMetrics();
             PipUtils pipUtils = PipUtils.INSTANCE;
-            point = new Point((int) TypedValue.applyDimension(1, width, displayMetrics), (int) TypedValue.applyDimension(1, parseSize.getHeight(), resources.getDisplayMetrics()));
+            point = new Point((int) TypedValue.applyDimension(1, width, displayMetrics), (int) TypedValue.applyDimension(1, size.getHeight(), resources.getDisplayMetrics()));
         }
         this.mScreenEdgeInsets = point;
     }
 
-    public final void rotateTo(int i) {
+    public final void rotateTo(int i) throws Resources.NotFoundException {
         this.mDisplayLayout.rotateTo(this.mContext.getResources(), i);
     }
 }

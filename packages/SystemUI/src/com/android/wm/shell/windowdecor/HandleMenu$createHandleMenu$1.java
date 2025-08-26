@@ -13,7 +13,6 @@ import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.CoroutineScopeKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class HandleMenu$createHandleMenu$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ HandleMenu.HandleMenuView $handleMenuView;
@@ -21,7 +20,6 @@ final class HandleMenu$createHandleMenu$1 extends SuspendLambda implements Funct
     int label;
     final /* synthetic */ HandleMenu this$0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.windowdecor.HandleMenu$createHandleMenu$1$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ HandleMenu.HandleMenuView $handleMenuView;

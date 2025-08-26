@@ -7,7 +7,6 @@ import java.util.Map;
 import kotlin.Pair;
 import kotlin.jvm.internal.Reflection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class DerivedZipped extends StateDerived {
     public final MutableMapK.Factory storeFactory;
@@ -23,16 +22,16 @@ public final class DerivedZipped extends StateDerived {
 
     @Override // com.android.systemui.kairos.internal.StateDerived
     public final Pair recalc(EvalScope evalScope) {
-        MutableMapK create = this.storeFactory.create(Integer.valueOf(this.upstreamSize));
-        long j = 0;
+        MutableMapK mutableMapKCreate = this.storeFactory.create(Integer.valueOf(this.upstreamSize));
+        long jMax = 0;
         for (Map.Entry entry : (Iterable) this.upstream.connect(evalScope)) {
             Object key = entry.getKey();
             Pair currentWithEpoch = ((StateImpl) entry.getValue()).store.getCurrentWithEpoch(evalScope);
-            Object component1 = currentWithEpoch.component1();
-            j = Math.max(j, ((Number) currentWithEpoch.component2()).longValue());
-            create.put(key, component1);
+            Object objComponent1 = currentWithEpoch.component1();
+            jMax = Math.max(jMax, ((Number) currentWithEpoch.component2()).longValue());
+            mutableMapKCreate.put(key, objComponent1);
         }
-        return new Pair(create, Long.valueOf(j));
+        return new Pair(mutableMapKCreate, Long.valueOf(jMax));
     }
 
     public final String toString() {

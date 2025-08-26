@@ -10,7 +10,6 @@ import com.airbnb.lottie.utils.MiscUtils;
 import com.airbnb.lottie.utils.Utils;
 import com.airbnb.lottie.value.Keyframe;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyframeParser {
     public static final Interpolator LINEAR_INTERPOLATOR = new LinearInterpolator();
@@ -21,24 +20,28 @@ public class KeyframeParser {
         pointF.x = MiscUtils.clamp(pointF.x, -1.0f, 1.0f);
         pointF.y = MiscUtils.clamp(pointF.y, -100.0f, 100.0f);
         pointF2.x = MiscUtils.clamp(pointF2.x, -1.0f, 1.0f);
-        float clamp = MiscUtils.clamp(pointF2.y, -100.0f, 100.0f);
-        pointF2.y = clamp;
+        float fClamp = MiscUtils.clamp(pointF2.y, -100.0f, 100.0f);
+        pointF2.y = fClamp;
         Utils.AnonymousClass1 anonymousClass1 = Utils.threadLocalPathMeasure;
         try {
-            return new PathInterpolator(pointF.x, pointF.y, pointF2.x, clamp);
+            return new PathInterpolator(pointF.x, pointF.y, pointF2.x, fClamp);
         } catch (IllegalArgumentException e) {
             return "The Path cannot loop back on itself.".equals(e.getMessage()) ? new PathInterpolator(Math.min(pointF.x, 1.0f), pointF.y, Math.max(pointF2.x, 0.0f), pointF2.y) : new LinearInterpolator();
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:98:0x0219  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public static Keyframe parse(JsonReader jsonReader, LottieComposition lottieComposition, float f, ValueParser valueParser, boolean z, boolean z2) {
-        Interpolator interpolatorFor;
+        Interpolator interpolatorInterpolatorFor;
         Object obj;
-        Interpolator interpolator;
-        Interpolator interpolatorFor2;
-        Interpolator interpolatorFor3;
+        Interpolator interpolatorInterpolatorFor2;
+        Interpolator interpolatorInterpolatorFor3;
+        Interpolator interpolatorInterpolatorFor4;
         Object obj2;
-        Interpolator interpolator2;
+        Interpolator interpolator;
         JsonReader.Options options;
         JsonReader.Options options2;
         PointF pointF;
@@ -51,11 +54,11 @@ public class KeyframeParser {
                 return new Keyframe(valueParser.parse(jsonReader, f));
             }
             jsonReader.beginObject();
-            PointF pointF2 = null;
-            PointF pointF3 = null;
-            PointF pointF4 = null;
-            float f3 = 0.0f;
-            PointF pointF5 = null;
+            PointF pointFJsonToPoint = null;
+            PointF pointFJsonToPoint2 = null;
+            PointF pointFJsonToPoint3 = null;
+            float fNextDouble = 0.0f;
+            PointF pointFJsonToPoint4 = null;
             boolean z3 = false;
             Object obj3 = null;
             Object obj4 = null;
@@ -63,7 +66,7 @@ public class KeyframeParser {
                 JsonReader.Options options5 = options4;
                 switch (jsonReader.selectName(options5)) {
                     case 0:
-                        f3 = (float) jsonReader.nextDouble();
+                        fNextDouble = (float) jsonReader.nextDouble();
                         break;
                     case 1:
                         obj3 = valueParser.parse(jsonReader, f);
@@ -72,10 +75,10 @@ public class KeyframeParser {
                         obj4 = valueParser.parse(jsonReader, f);
                         break;
                     case 3:
-                        pointF5 = JsonUtils.jsonToPoint(jsonReader, 1.0f);
+                        pointFJsonToPoint4 = JsonUtils.jsonToPoint(jsonReader, 1.0f);
                         break;
                     case 4:
-                        pointF2 = JsonUtils.jsonToPoint(jsonReader, 1.0f);
+                        pointFJsonToPoint = JsonUtils.jsonToPoint(jsonReader, 1.0f);
                         break;
                     case 5:
                         if (jsonReader.nextInt() != 1) {
@@ -86,10 +89,10 @@ public class KeyframeParser {
                             break;
                         }
                     case 6:
-                        pointF3 = JsonUtils.jsonToPoint(jsonReader, f);
+                        pointFJsonToPoint2 = JsonUtils.jsonToPoint(jsonReader, f);
                         break;
                     case 7:
-                        pointF4 = JsonUtils.jsonToPoint(jsonReader, f);
+                        pointFJsonToPoint3 = JsonUtils.jsonToPoint(jsonReader, f);
                         break;
                     default:
                         jsonReader.skipValue();
@@ -99,37 +102,37 @@ public class KeyframeParser {
             }
             jsonReader.endObject();
             if (z3) {
-                interpolatorFor = LINEAR_INTERPOLATOR;
+                interpolatorInterpolatorFor = LINEAR_INTERPOLATOR;
                 obj = obj3;
             } else {
-                interpolatorFor = (pointF5 == null || pointF2 == null) ? LINEAR_INTERPOLATOR : interpolatorFor(pointF5, pointF2);
+                interpolatorInterpolatorFor = (pointFJsonToPoint4 == null || pointFJsonToPoint == null) ? LINEAR_INTERPOLATOR : interpolatorFor(pointFJsonToPoint4, pointFJsonToPoint);
                 obj = obj4;
             }
-            Keyframe keyframe = new Keyframe(lottieComposition, obj3, obj, interpolatorFor, f3, null);
-            keyframe.pathCp1 = pointF3;
-            keyframe.pathCp2 = pointF4;
+            Keyframe keyframe = new Keyframe(lottieComposition, obj3, obj, interpolatorInterpolatorFor, fNextDouble, null);
+            keyframe.pathCp1 = pointFJsonToPoint2;
+            keyframe.pathCp2 = pointFJsonToPoint3;
             return keyframe;
         }
         jsonReader.beginObject();
-        PointF pointF6 = null;
-        PointF pointF7 = null;
+        PointF pointFJsonToPoint5 = null;
+        PointF pointFJsonToPoint6 = null;
         int i2 = 0;
-        PointF pointF8 = null;
-        PointF pointF9 = null;
-        PointF pointF10 = null;
+        PointF pointFJsonToPoint7 = null;
+        PointF pointFJsonToPoint8 = null;
+        PointF pointF2 = null;
         Object obj5 = null;
-        PointF pointF11 = null;
-        PointF pointF12 = null;
-        PointF pointF13 = null;
-        float f4 = 0.0f;
+        PointF pointF3 = null;
+        PointF pointF4 = null;
+        PointF pointF5 = null;
+        float fNextDouble2 = 0.0f;
         Object obj6 = null;
         while (jsonReader.hasNext()) {
-            int selectName = jsonReader.selectName(options3);
+            int iSelectName = jsonReader.selectName(options3);
             JsonReader.Options options6 = INTERPOLATOR_NAMES;
-            switch (selectName) {
+            switch (iSelectName) {
                 case 0:
                     options = options3;
-                    f4 = (float) jsonReader.nextDouble();
+                    fNextDouble2 = (float) jsonReader.nextDouble();
                     options3 = options;
                     i = 1;
                     break;
@@ -143,142 +146,142 @@ public class KeyframeParser {
                     break;
                 case 3:
                     JsonReader.Options options7 = options3;
-                    PointF pointF14 = pointF6;
+                    PointF pointF6 = pointFJsonToPoint5;
                     int i3 = i2;
                     Object obj7 = obj5;
                     if (jsonReader.peek() == JsonReader.Token.BEGIN_OBJECT) {
                         jsonReader.beginObject();
-                        float f5 = 0.0f;
-                        float f6 = 0.0f;
-                        float f7 = 0.0f;
-                        float f8 = 0.0f;
+                        float fNextDouble3 = 0.0f;
+                        float fNextDouble4 = 0.0f;
+                        float fNextDouble5 = 0.0f;
+                        float fNextDouble6 = 0.0f;
                         while (jsonReader.hasNext()) {
-                            int selectName2 = jsonReader.selectName(options6);
-                            if (selectName2 == 0) {
-                                JsonReader.Token peek = jsonReader.peek();
+                            int iSelectName2 = jsonReader.selectName(options6);
+                            if (iSelectName2 == 0) {
+                                JsonReader.Token tokenPeek = jsonReader.peek();
                                 JsonReader.Token token = JsonReader.Token.NUMBER;
-                                if (peek == token) {
-                                    f7 = (float) jsonReader.nextDouble();
-                                    f5 = f7;
+                                if (tokenPeek == token) {
+                                    fNextDouble5 = (float) jsonReader.nextDouble();
+                                    fNextDouble3 = fNextDouble5;
                                 } else {
                                     jsonReader.beginArray();
-                                    f5 = (float) jsonReader.nextDouble();
-                                    f7 = jsonReader.peek() == token ? (float) jsonReader.nextDouble() : f5;
+                                    fNextDouble3 = (float) jsonReader.nextDouble();
+                                    fNextDouble5 = jsonReader.peek() == token ? (float) jsonReader.nextDouble() : fNextDouble3;
                                     jsonReader.endArray();
                                 }
-                            } else if (selectName2 != 1) {
+                            } else if (iSelectName2 != 1) {
                                 jsonReader.skipValue();
                             } else {
-                                JsonReader.Token peek2 = jsonReader.peek();
+                                JsonReader.Token tokenPeek2 = jsonReader.peek();
                                 JsonReader.Token token2 = JsonReader.Token.NUMBER;
-                                if (peek2 == token2) {
-                                    f8 = (float) jsonReader.nextDouble();
-                                    f6 = f8;
+                                if (tokenPeek2 == token2) {
+                                    fNextDouble6 = (float) jsonReader.nextDouble();
+                                    fNextDouble4 = fNextDouble6;
                                 } else {
                                     jsonReader.beginArray();
-                                    f6 = (float) jsonReader.nextDouble();
-                                    f8 = jsonReader.peek() == token2 ? (float) jsonReader.nextDouble() : f6;
+                                    fNextDouble4 = (float) jsonReader.nextDouble();
+                                    fNextDouble6 = jsonReader.peek() == token2 ? (float) jsonReader.nextDouble() : fNextDouble4;
                                     jsonReader.endArray();
                                 }
                             }
                         }
-                        pointF10 = new PointF(f5, f6);
-                        pointF11 = new PointF(f7, f8);
+                        pointF2 = new PointF(fNextDouble3, fNextDouble4);
+                        pointF3 = new PointF(fNextDouble5, fNextDouble6);
                         jsonReader.endObject();
                     } else {
-                        pointF8 = JsonUtils.jsonToPoint(jsonReader, f);
+                        pointFJsonToPoint7 = JsonUtils.jsonToPoint(jsonReader, f);
                     }
                     i2 = i3;
                     obj5 = obj7;
                     options3 = options7;
-                    pointF6 = pointF14;
+                    pointFJsonToPoint5 = pointF6;
                     i = 1;
                     break;
                 case 4:
                     int i4 = i2;
                     if (jsonReader.peek() == JsonReader.Token.BEGIN_OBJECT) {
                         jsonReader.beginObject();
-                        float f9 = 0.0f;
-                        float f10 = 0.0f;
-                        float f11 = 0.0f;
-                        float f12 = 0.0f;
+                        float f3 = 0.0f;
+                        float f4 = 0.0f;
+                        float fNextDouble7 = 0.0f;
+                        float fNextDouble8 = 0.0f;
                         while (jsonReader.hasNext()) {
                             Object obj8 = obj5;
-                            int selectName3 = jsonReader.selectName(options6);
-                            if (selectName3 != 0) {
+                            int iSelectName3 = jsonReader.selectName(options6);
+                            if (iSelectName3 != 0) {
                                 options2 = options3;
-                                if (selectName3 != 1) {
+                                if (iSelectName3 != 1) {
                                     jsonReader.skipValue();
                                     obj5 = obj8;
                                     options3 = options2;
                                 } else {
-                                    JsonReader.Token peek3 = jsonReader.peek();
+                                    JsonReader.Token tokenPeek3 = jsonReader.peek();
                                     JsonReader.Token token3 = JsonReader.Token.NUMBER;
-                                    if (peek3 == token3) {
-                                        pointF = pointF6;
-                                        f12 = (float) jsonReader.nextDouble();
+                                    if (tokenPeek3 == token3) {
+                                        pointF = pointFJsonToPoint5;
+                                        fNextDouble8 = (float) jsonReader.nextDouble();
                                         obj5 = obj8;
-                                        pointF7 = pointF7;
-                                        f10 = f12;
+                                        pointFJsonToPoint6 = pointFJsonToPoint6;
+                                        f4 = fNextDouble8;
                                     } else {
-                                        pointF = pointF6;
-                                        PointF pointF15 = pointF7;
+                                        pointF = pointFJsonToPoint5;
+                                        PointF pointF7 = pointFJsonToPoint6;
                                         jsonReader.beginArray();
-                                        float nextDouble = (float) jsonReader.nextDouble();
+                                        float fNextDouble9 = (float) jsonReader.nextDouble();
                                         if (jsonReader.peek() == token3) {
-                                            f10 = nextDouble;
-                                            f12 = (float) jsonReader.nextDouble();
+                                            f4 = fNextDouble9;
+                                            fNextDouble8 = (float) jsonReader.nextDouble();
                                         } else {
-                                            f10 = nextDouble;
-                                            f12 = f10;
+                                            f4 = fNextDouble9;
+                                            fNextDouble8 = f4;
                                         }
                                         jsonReader.endArray();
                                         obj5 = obj8;
-                                        pointF7 = pointF15;
+                                        pointFJsonToPoint6 = pointF7;
                                     }
                                 }
                             } else {
                                 options2 = options3;
-                                pointF = pointF6;
-                                PointF pointF16 = pointF7;
-                                JsonReader.Token peek4 = jsonReader.peek();
+                                pointF = pointFJsonToPoint5;
+                                PointF pointF8 = pointFJsonToPoint6;
+                                JsonReader.Token tokenPeek4 = jsonReader.peek();
                                 JsonReader.Token token4 = JsonReader.Token.NUMBER;
-                                if (peek4 == token4) {
-                                    f11 = (float) jsonReader.nextDouble();
+                                if (tokenPeek4 == token4) {
+                                    fNextDouble7 = (float) jsonReader.nextDouble();
                                     obj5 = obj8;
-                                    pointF7 = pointF16;
-                                    f9 = f11;
+                                    pointFJsonToPoint6 = pointF8;
+                                    f3 = fNextDouble7;
                                 } else {
                                     jsonReader.beginArray();
-                                    pointF7 = pointF16;
-                                    float nextDouble2 = (float) jsonReader.nextDouble();
+                                    pointFJsonToPoint6 = pointF8;
+                                    float fNextDouble10 = (float) jsonReader.nextDouble();
                                     if (jsonReader.peek() == token4) {
-                                        f2 = nextDouble2;
-                                        f11 = (float) jsonReader.nextDouble();
+                                        f2 = fNextDouble10;
+                                        fNextDouble7 = (float) jsonReader.nextDouble();
                                     } else {
-                                        f2 = nextDouble2;
-                                        f11 = f2;
+                                        f2 = fNextDouble10;
+                                        fNextDouble7 = f2;
                                     }
                                     jsonReader.endArray();
                                     obj5 = obj8;
-                                    f9 = f2;
+                                    f3 = f2;
                                 }
                             }
                             options3 = options2;
-                            pointF6 = pointF;
+                            pointFJsonToPoint5 = pointF;
                         }
                         options = options3;
-                        PointF pointF17 = new PointF(f9, f10);
-                        PointF pointF18 = new PointF(f11, f12);
+                        PointF pointF9 = new PointF(f3, f4);
+                        PointF pointF10 = new PointF(fNextDouble7, fNextDouble8);
                         jsonReader.endObject();
                         i2 = i4;
-                        pointF12 = pointF17;
-                        pointF13 = pointF18;
+                        pointF4 = pointF9;
+                        pointF5 = pointF10;
                         options3 = options;
                         i = 1;
                         break;
                     } else {
-                        pointF9 = JsonUtils.jsonToPoint(jsonReader, f);
+                        pointFJsonToPoint8 = JsonUtils.jsonToPoint(jsonReader, f);
                         i2 = i4;
                         i = 1;
                     }
@@ -291,48 +294,48 @@ public class KeyframeParser {
                         break;
                     }
                 case 6:
-                    pointF6 = JsonUtils.jsonToPoint(jsonReader, f);
+                    pointFJsonToPoint5 = JsonUtils.jsonToPoint(jsonReader, f);
                     break;
                 case 7:
-                    pointF7 = JsonUtils.jsonToPoint(jsonReader, f);
+                    pointFJsonToPoint6 = JsonUtils.jsonToPoint(jsonReader, f);
                     break;
                 default:
                     jsonReader.skipValue();
                     break;
             }
         }
-        PointF pointF19 = pointF6;
+        PointF pointF11 = pointFJsonToPoint5;
         int i5 = i2;
         Object obj9 = obj5;
         jsonReader.endObject();
         if (i5 != 0) {
             obj2 = obj9;
-            interpolator2 = LINEAR_INTERPOLATOR;
+            interpolator = LINEAR_INTERPOLATOR;
         } else {
-            if (pointF8 != null && pointF9 != null) {
-                interpolator = interpolatorFor(pointF8, pointF9);
+            if (pointFJsonToPoint7 != null && pointFJsonToPoint8 != null) {
+                interpolatorInterpolatorFor2 = interpolatorFor(pointFJsonToPoint7, pointFJsonToPoint8);
             } else {
-                if (pointF10 != null && pointF11 != null && pointF12 != null && pointF13 != null) {
-                    interpolatorFor2 = interpolatorFor(pointF10, pointF12);
-                    interpolatorFor3 = interpolatorFor(pointF11, pointF13);
+                if (pointF2 != null && pointF3 != null && pointF4 != null && pointF5 != null) {
+                    interpolatorInterpolatorFor3 = interpolatorFor(pointF2, pointF4);
+                    interpolatorInterpolatorFor4 = interpolatorFor(pointF3, pointF5);
                     obj2 = obj6;
-                    interpolator2 = null;
-                    Keyframe keyframe2 = (interpolatorFor2 != null || interpolatorFor3 == null) ? new Keyframe(lottieComposition, obj9, obj2, interpolator2, f4, null) : new Keyframe(lottieComposition, obj9, obj2, interpolatorFor2, interpolatorFor3, f4, null);
-                    keyframe2.pathCp1 = pointF19;
-                    keyframe2.pathCp2 = pointF7;
+                    interpolator = null;
+                    Keyframe keyframe2 = (interpolatorInterpolatorFor3 != null || interpolatorInterpolatorFor4 == null) ? new Keyframe(lottieComposition, obj9, obj2, interpolator, fNextDouble2, null) : new Keyframe(lottieComposition, obj9, obj2, interpolatorInterpolatorFor3, interpolatorInterpolatorFor4, fNextDouble2, null);
+                    keyframe2.pathCp1 = pointF11;
+                    keyframe2.pathCp2 = pointFJsonToPoint6;
                     return keyframe2;
                 }
-                interpolator = LINEAR_INTERPOLATOR;
+                interpolatorInterpolatorFor2 = LINEAR_INTERPOLATOR;
             }
-            interpolator2 = interpolator;
+            interpolator = interpolatorInterpolatorFor2;
             obj2 = obj6;
         }
-        interpolatorFor2 = null;
-        interpolatorFor3 = null;
-        if (interpolatorFor2 != null) {
+        interpolatorInterpolatorFor3 = null;
+        interpolatorInterpolatorFor4 = null;
+        if (interpolatorInterpolatorFor3 != null) {
         }
-        keyframe2.pathCp1 = pointF19;
-        keyframe2.pathCp2 = pointF7;
+        keyframe2.pathCp1 = pointF11;
+        keyframe2.pathCp2 = pointFJsonToPoint6;
         return keyframe2;
     }
 }

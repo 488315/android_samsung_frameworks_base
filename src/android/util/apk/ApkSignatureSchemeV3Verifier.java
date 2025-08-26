@@ -67,12 +67,12 @@ public class ApkSignatureSchemeV3Verifier {
         return verify(str, false);
     }
 
-    private static VerifiedSigner verify(String str, boolean z) throws SignatureNotFoundException, SecurityException, IOException {
+    private static VerifiedSigner verify(String str, boolean z) throws SignatureNotFoundException, IOException, SecurityException {
         RandomAccessFile randomAccessFile = new RandomAccessFile(str, "r");
         try {
-            VerifiedSigner verify = verify(randomAccessFile, z);
+            VerifiedSigner verifiedSignerVerify = verify(randomAccessFile, z);
             randomAccessFile.close();
-            return verify;
+            return verifiedSignerVerify;
         } catch (Throwable th) {
             try {
                 randomAccessFile.close();
@@ -96,11 +96,11 @@ public class ApkSignatureSchemeV3Verifier {
         }
     }
 
-    public static SignatureInfo findSignature(RandomAccessFile randomAccessFile) throws IOException, SignatureNotFoundException {
+    public static SignatureInfo findSignature(RandomAccessFile randomAccessFile) throws SignatureNotFoundException, IOException {
         return findSignature(randomAccessFile, APK_SIGNATURE_SCHEME_V3_BLOCK_ID);
     }
 
-    private static SignatureInfo findSignature(RandomAccessFile randomAccessFile, int i) throws IOException, SignatureNotFoundException {
+    private static SignatureInfo findSignature(RandomAccessFile randomAccessFile, int i) throws SignatureNotFoundException, IOException {
         return ApkSigningBlockUtils.findSignature(randomAccessFile, i);
     }
 
@@ -109,7 +109,7 @@ public class ApkSignatureSchemeV3Verifier {
         this.mVerifyIntegrity = z;
     }
 
-    private VerifiedSigner verify(SignatureInfo signatureInfo, int i) throws SecurityException, IOException, PlatformNotSupportedException {
+    private VerifiedSigner verify(SignatureInfo signatureInfo, int i) throws SecurityException, IOException, CertificateException, PlatformNotSupportedException {
         this.mBlockId = i;
         ArrayMap arrayMap = new ArrayMap();
         try {
@@ -117,17 +117,17 @@ public class ApkSignatureSchemeV3Verifier {
             try {
                 ByteBuffer lengthPrefixedSlice = ApkSigningBlockUtils.getLengthPrefixedSlice(signatureInfo.signatureBlock);
                 int i2 = 0;
-                Pair<X509Certificate[], ApkSigningBlockUtils.VerifiedProofOfRotation> pair = null;
+                Pair<X509Certificate[], ApkSigningBlockUtils.VerifiedProofOfRotation> pairVerifySigner = null;
                 while (lengthPrefixedSlice.hasRemaining()) {
                     try {
-                        pair = verifySigner(ApkSigningBlockUtils.getLengthPrefixedSlice(lengthPrefixedSlice), arrayMap, certificateFactory);
+                        pairVerifySigner = verifySigner(ApkSigningBlockUtils.getLengthPrefixedSlice(lengthPrefixedSlice), arrayMap, certificateFactory);
                         i2++;
                     } catch (PlatformNotSupportedException unused) {
                     } catch (IOException | SecurityException | BufferUnderflowException e) {
                         throw new SecurityException("Failed to parse/verify signer #" + i2 + " block", e);
                     }
                 }
-                if (i2 < 1 || pair == null) {
+                if (i2 < 1 || pairVerifySigner == null) {
                     if (i == APK_SIGNATURE_SCHEME_V3_BLOCK_ID) {
                         throw new SecurityException("No signers found");
                     }
@@ -142,7 +142,7 @@ public class ApkSignatureSchemeV3Verifier {
                 if (this.mVerifyIntegrity) {
                     ApkSigningBlockUtils.verifyIntegrity(arrayMap, this.mApk, signatureInfo);
                 }
-                return new VerifiedSigner(pair.first, pair.second, arrayMap.containsKey(3) ? ApkSigningBlockUtils.parseVerityDigestAndVerifySourceLength(arrayMap.get(3), this.mApk.getChannel().size(), signatureInfo) : null, arrayMap, i);
+                return new VerifiedSigner(pairVerifySigner.first, pairVerifySigner.second, arrayMap.containsKey(3) ? ApkSigningBlockUtils.parseVerityDigestAndVerifySourceLength(arrayMap.get(3), this.mApk.getChannel().size(), signatureInfo) : null, arrayMap, i);
             } catch (IOException e2) {
                 throw new SecurityException("Failed to read list of signers", e2);
             }
@@ -151,7 +151,7 @@ public class ApkSignatureSchemeV3Verifier {
         }
     }
 
-    private Pair<X509Certificate[], ApkSigningBlockUtils.VerifiedProofOfRotation> verifySigner(ByteBuffer byteBuffer, Map<Integer, byte[]> map, CertificateFactory certificateFactory) throws SecurityException, IOException, PlatformNotSupportedException {
+    private Pair<X509Certificate[], ApkSigningBlockUtils.VerifiedProofOfRotation> verifySigner(ByteBuffer byteBuffer, Map<Integer, byte[]> map, CertificateFactory certificateFactory) throws InvalidKeySpecException, NoSuchAlgorithmException, SignatureException, IOException, InvalidKeyException, SecurityException, PlatformNotSupportedException, InvalidAlgorithmParameterException {
         ByteBuffer lengthPrefixedSlice = ApkSigningBlockUtils.getLengthPrefixedSlice(byteBuffer);
         int i = byteBuffer.getInt();
         int i2 = byteBuffer.getInt();
@@ -162,11 +162,11 @@ public class ApkSignatureSchemeV3Verifier {
             throw new PlatformNotSupportedException("Signer not supported by this platform version. This platform: " + Build.VERSION.SDK_INT + ", signer minSdkVersion: " + i + ", maxSdkVersion: " + i2);
         }
         ByteBuffer lengthPrefixedSlice2 = ApkSigningBlockUtils.getLengthPrefixedSlice(byteBuffer);
-        byte[] readLengthPrefixedByteArray = ApkSigningBlockUtils.readLengthPrefixedByteArray(byteBuffer);
+        byte[] lengthPrefixedByteArray = ApkSigningBlockUtils.readLengthPrefixedByteArray(byteBuffer);
         ArrayList arrayList = new ArrayList();
         int i3 = -1;
         int i4 = 0;
-        byte[] bArr = null;
+        byte[] lengthPrefixedByteArray2 = null;
         while (true) {
             int i5 = 8;
             if (!lengthPrefixedSlice2.hasRemaining()) {
@@ -181,21 +181,21 @@ public class ApkSignatureSchemeV3Verifier {
                 String str = signatureAlgorithmJcaSignatureAlgorithm.first;
                 AlgorithmParameterSpec algorithmParameterSpec = (AlgorithmParameterSpec) signatureAlgorithmJcaSignatureAlgorithm.second;
                 try {
-                    PublicKey generatePublic = KeyFactory.getInstance(signatureAlgorithmJcaKeyAlgorithm).generatePublic(new X509EncodedKeySpec(readLengthPrefixedByteArray));
+                    PublicKey publicKeyGeneratePublic = KeyFactory.getInstance(signatureAlgorithmJcaKeyAlgorithm).generatePublic(new X509EncodedKeySpec(lengthPrefixedByteArray));
                     Signature signature = Signature.getInstance(str);
-                    signature.initVerify(generatePublic);
+                    signature.initVerify(publicKeyGeneratePublic);
                     if (algorithmParameterSpec != null) {
                         signature.setParameter(algorithmParameterSpec);
                     }
                     signature.update(lengthPrefixedSlice);
-                    if (!signature.verify(bArr)) {
+                    if (!signature.verify(lengthPrefixedByteArray2)) {
                         throw new SecurityException(str + " signature did not verify");
                     }
                     lengthPrefixedSlice.clear();
                     ByteBuffer lengthPrefixedSlice3 = ApkSigningBlockUtils.getLengthPrefixedSlice(lengthPrefixedSlice);
                     ArrayList arrayList2 = new ArrayList();
                     int i6 = 0;
-                    byte[] bArr2 = null;
+                    byte[] lengthPrefixedByteArray3 = null;
                     while (lengthPrefixedSlice3.hasRemaining()) {
                         i6++;
                         try {
@@ -206,7 +206,7 @@ public class ApkSignatureSchemeV3Verifier {
                             int i7 = lengthPrefixedSlice4.getInt();
                             arrayList2.add(Integer.valueOf(i7));
                             if (i7 == i3) {
-                                bArr2 = ApkSigningBlockUtils.readLengthPrefixedByteArray(lengthPrefixedSlice4);
+                                lengthPrefixedByteArray3 = ApkSigningBlockUtils.readLengthPrefixedByteArray(lengthPrefixedSlice4);
                             }
                             i5 = 8;
                         } catch (IOException | BufferUnderflowException e) {
@@ -217,8 +217,8 @@ public class ApkSignatureSchemeV3Verifier {
                         throw new SecurityException("Signature algorithms don't match between digests and signatures records");
                     }
                     int signatureAlgorithmContentDigestAlgorithm = ApkSigningBlockUtils.getSignatureAlgorithmContentDigestAlgorithm(i3);
-                    byte[] put = map.put(Integer.valueOf(signatureAlgorithmContentDigestAlgorithm), bArr2);
-                    if (put != null && !MessageDigest.isEqual(put, bArr2)) {
+                    byte[] bArrPut = map.put(Integer.valueOf(signatureAlgorithmContentDigestAlgorithm), lengthPrefixedByteArray3);
+                    if (bArrPut != null && !MessageDigest.isEqual(bArrPut, lengthPrefixedByteArray3)) {
                         throw new SecurityException(ApkSigningBlockUtils.getContentDigestAlgorithmJcaDigestAlgorithm(signatureAlgorithmContentDigestAlgorithm) + " contents digest does not match the digest specified by a preceding signer");
                     }
                     ByteBuffer lengthPrefixedSlice5 = ApkSigningBlockUtils.getLengthPrefixedSlice(lengthPrefixedSlice);
@@ -226,9 +226,9 @@ public class ApkSignatureSchemeV3Verifier {
                     int i8 = 0;
                     while (lengthPrefixedSlice5.hasRemaining()) {
                         i8++;
-                        byte[] readLengthPrefixedByteArray2 = ApkSigningBlockUtils.readLengthPrefixedByteArray(lengthPrefixedSlice5);
+                        byte[] lengthPrefixedByteArray4 = ApkSigningBlockUtils.readLengthPrefixedByteArray(lengthPrefixedSlice5);
                         try {
-                            arrayList3.add(new VerbatimX509Certificate((X509Certificate) certificateFactory.generateCertificate(new ByteArrayInputStream(readLengthPrefixedByteArray2)), readLengthPrefixedByteArray2));
+                            arrayList3.add(new VerbatimX509Certificate((X509Certificate) certificateFactory.generateCertificate(new ByteArrayInputStream(lengthPrefixedByteArray4)), lengthPrefixedByteArray4));
                         } catch (CertificateException e2) {
                             throw new SecurityException("Failed to decode certificate #" + i8, e2);
                         }
@@ -236,7 +236,7 @@ public class ApkSignatureSchemeV3Verifier {
                     if (arrayList3.isEmpty()) {
                         throw new SecurityException("No certificates listed");
                     }
-                    if (!Arrays.equals(readLengthPrefixedByteArray, arrayList3.get(0).getPublicKey().getEncoded())) {
+                    if (!Arrays.equals(lengthPrefixedByteArray, arrayList3.get(0).getPublicKey().getEncoded())) {
                         throw new SecurityException("Public key mismatch between certificate and signature record");
                     }
                     int i9 = lengthPrefixedSlice.getInt();
@@ -261,7 +261,7 @@ public class ApkSignatureSchemeV3Verifier {
                 int i10 = lengthPrefixedSlice6.getInt();
                 arrayList.add(Integer.valueOf(i10));
                 if (ApkSigningBlockUtils.isSupportedSignatureAlgorithm(i10) && (i3 == -1 || ApkSigningBlockUtils.compareSignatureAlgorithm(i10, i3) > 0)) {
-                    bArr = ApkSigningBlockUtils.readLengthPrefixedByteArray(lengthPrefixedSlice6);
+                    lengthPrefixedByteArray2 = ApkSigningBlockUtils.readLengthPrefixedByteArray(lengthPrefixedSlice6);
                     i3 = i10;
                 }
             } catch (IOException | BufferUnderflowException e4) {
@@ -270,9 +270,9 @@ public class ApkSignatureSchemeV3Verifier {
         }
     }
 
-    private Pair<X509Certificate[], ApkSigningBlockUtils.VerifiedProofOfRotation> verifyAdditionalAttributes(ByteBuffer byteBuffer, List<X509Certificate> list, CertificateFactory certificateFactory) throws IOException, PlatformNotSupportedException {
+    private Pair<X509Certificate[], ApkSigningBlockUtils.VerifiedProofOfRotation> verifyAdditionalAttributes(ByteBuffer byteBuffer, List<X509Certificate> list, CertificateFactory certificateFactory) throws NoSuchAlgorithmException, SignatureException, IOException, InvalidKeyException, SecurityException, PlatformNotSupportedException, InvalidAlgorithmParameterException {
         X509Certificate[] x509CertificateArr = (X509Certificate[]) list.toArray(new X509Certificate[list.size()]);
-        ApkSigningBlockUtils.VerifiedProofOfRotation verifiedProofOfRotation = null;
+        ApkSigningBlockUtils.VerifiedProofOfRotation verifiedProofOfRotationVerifyProofOfRotationStruct = null;
         while (byteBuffer.hasRemaining()) {
             ByteBuffer lengthPrefixedSlice = ApkSigningBlockUtils.getLengthPrefixedSlice(byteBuffer);
             if (lengthPrefixedSlice.remaining() < 4) {
@@ -297,12 +297,12 @@ public class ApkSignatureSchemeV3Verifier {
                         }
                     }
                 } else {
-                    if (verifiedProofOfRotation != null) {
+                    if (verifiedProofOfRotationVerifyProofOfRotationStruct != null) {
                         throw new SecurityException("Encountered multiple Proof-of-rotation records when verifying APK Signature Scheme v3 signature");
                     }
-                    verifiedProofOfRotation = ApkSigningBlockUtils.verifyProofOfRotationStruct(lengthPrefixedSlice, certificateFactory);
+                    verifiedProofOfRotationVerifyProofOfRotationStruct = ApkSigningBlockUtils.verifyProofOfRotationStruct(lengthPrefixedSlice, certificateFactory);
                     try {
-                        if (verifiedProofOfRotation.certs.size() > 0 && !Arrays.equals(verifiedProofOfRotation.certs.get(verifiedProofOfRotation.certs.size() - 1).getEncoded(), x509CertificateArr[0].getEncoded())) {
+                        if (verifiedProofOfRotationVerifyProofOfRotationStruct.certs.size() > 0 && !Arrays.equals(verifiedProofOfRotationVerifyProofOfRotationStruct.certs.get(verifiedProofOfRotationVerifyProofOfRotationStruct.certs.size() - 1).getEncoded(), x509CertificateArr[0].getEncoded())) {
                             throw new SecurityException("Terminal certificate in Proof-of-rotation record does not match APK signing certificate");
                         }
                     } catch (CertificateEncodingException e) {
@@ -314,10 +314,10 @@ public class ApkSignatureSchemeV3Verifier {
                 throw new PlatformNotSupportedException("The device is running a release version of " + this.mSignerMinSdkVersion + ", but the signer is targeting a dev release");
             }
         }
-        return Pair.create(x509CertificateArr, verifiedProofOfRotation);
+        return Pair.create(x509CertificateArr, verifiedProofOfRotationVerifyProofOfRotationStruct);
     }
 
-    static byte[] getVerityRootHash(String str) throws IOException, SignatureNotFoundException, SecurityException {
+    static byte[] getVerityRootHash(String str) throws SignatureNotFoundException, IOException, SecurityException {
         RandomAccessFile randomAccessFile = new RandomAccessFile(str, "r");
         try {
             findSignature(randomAccessFile);
@@ -334,12 +334,12 @@ public class ApkSignatureSchemeV3Verifier {
         }
     }
 
-    static byte[] generateApkVerity(String str, ByteBufferFactory byteBufferFactory) throws IOException, SignatureNotFoundException, SecurityException, DigestException, NoSuchAlgorithmException {
+    static byte[] generateApkVerity(String str, ByteBufferFactory byteBufferFactory) throws SignatureNotFoundException, NoSuchAlgorithmException, DigestException, IOException, SecurityException {
         RandomAccessFile randomAccessFile = new RandomAccessFile(str, "r");
         try {
-            byte[] generateApkVerity = VerityBuilder.generateApkVerity(str, byteBufferFactory, findSignature(randomAccessFile));
+            byte[] bArrGenerateApkVerity = VerityBuilder.generateApkVerity(str, byteBufferFactory, findSignature(randomAccessFile));
             randomAccessFile.close();
-            return generateApkVerity;
+            return bArrGenerateApkVerity;
         } catch (Throwable th) {
             try {
                 randomAccessFile.close();

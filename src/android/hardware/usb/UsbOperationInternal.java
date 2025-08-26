@@ -79,7 +79,7 @@ public final class UsbOperationInternal extends IUsbOperationInternal.Stub {
                 this.mExecutor.execute(new Runnable() { // from class: android.hardware.usb.UsbOperationInternal$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        UsbOperationInternal.this.lambda$onOperationComplete$0();
+                        this.f$0.lambda$onOperationComplete$0();
                     }
                 });
             } else {
@@ -98,13 +98,13 @@ public final class UsbOperationInternal extends IUsbOperationInternal.Stub {
     public void waitForOperationComplete() {
         this.mLock.lock();
         try {
-            long currentTimeMillis = System.currentTimeMillis() + 5000;
+            long jCurrentTimeMillis = System.currentTimeMillis() + 5000;
             do {
-                this.mOperationWait.await(currentTimeMillis - System.currentTimeMillis(), TimeUnit.MILLISECONDS);
+                this.mOperationWait.await(jCurrentTimeMillis - System.currentTimeMillis(), TimeUnit.MILLISECONDS);
                 if (this.mOperationComplete) {
                     break;
                 }
-            } while (System.currentTimeMillis() < currentTimeMillis);
+            } while (System.currentTimeMillis() < jCurrentTimeMillis);
             if (!this.mOperationComplete) {
                 Log.e(TAG, "Port:" + this.mId + " opID:" + this.mOperationID + " operationComplete not received in 5000msecs");
             }

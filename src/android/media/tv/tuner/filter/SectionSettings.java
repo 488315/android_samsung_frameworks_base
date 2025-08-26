@@ -50,22 +50,22 @@ public abstract class SectionSettings extends Settings {
 
         public T setCrcEnabled(boolean z) {
             this.mCrcEnabled = z;
-            return self();
+            return (T) self();
         }
 
         public T setRepeat(boolean z) {
             this.mIsRepeat = z;
-            return self();
+            return (T) self();
         }
 
         public T setRaw(boolean z) {
             this.mIsRaw = z;
-            return self();
+            return (T) self();
         }
 
         public T setBitWidthOfLengthField(int i) {
             this.mBitWidthOfLengthField = i;
-            return self();
+            return (T) self();
         }
     }
 }

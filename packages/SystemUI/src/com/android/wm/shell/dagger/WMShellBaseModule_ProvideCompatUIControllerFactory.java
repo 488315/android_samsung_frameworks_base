@@ -21,7 +21,6 @@ import dagger.internal.DoubleCheck;
 import dagger.internal.Provider;
 import java.util.Optional;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class WMShellBaseModule_ProvideCompatUIControllerFactory implements Provider {
     public final Provider accessibilityManagerProvider;
@@ -69,9 +68,9 @@ public final class WMShellBaseModule_ProvideCompatUIControllerFactory implements
     }
 
     public static Optional provideCompatUIController(Context context, ShellInit shellInit, ShellController shellController, DisplayController displayController, DisplayInsetsController displayInsetsController, DisplayImeController displayImeController, SyncTransactionQueue syncTransactionQueue, ShellExecutor shellExecutor, Lazy lazy, Lazy lazy2, Lazy lazy3, Lazy lazy4, Lazy lazy5, Optional optional, CompatUIStatusManager compatUIStatusManager, DesktopState desktopState) {
-        Optional empty = !context.getResources().getBoolean(R.bool.config_enableCompatUIController) ? Optional.empty() : Optional.of(new CompatUIController(context, shellInit, shellController, displayController, displayInsetsController, displayImeController, syncTransactionQueue, shellExecutor, lazy, (DockStateReader) lazy2.get(), (CompatUIConfiguration) lazy3.get(), (CompatUIShellCommandHandler) lazy4.get(), (AccessibilityManager) lazy5.get(), compatUIStatusManager, optional, desktopState));
-        empty.getClass();
-        return empty;
+        Optional optionalEmpty = !context.getResources().getBoolean(R.bool.config_enableCompatUIController) ? Optional.empty() : Optional.of(new CompatUIController(context, shellInit, shellController, displayController, displayInsetsController, displayImeController, syncTransactionQueue, shellExecutor, lazy, (DockStateReader) lazy2.get(), (CompatUIConfiguration) lazy3.get(), (CompatUIShellCommandHandler) lazy4.get(), (AccessibilityManager) lazy5.get(), compatUIStatusManager, optional, desktopState));
+        optionalEmpty.getClass();
+        return optionalEmpty;
     }
 
     @Override // javax.inject.Provider

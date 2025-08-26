@@ -41,8 +41,8 @@ public final class ContextualSearchState implements Parcelable {
     private ContextualSearchState(Parcel parcel) {
         this.mStructure = (AssistStructure) parcel.readTypedObject(AssistStructure.CREATOR);
         this.mContent = (AssistContent) parcel.readTypedObject(AssistContent.CREATOR);
-        Bundle readBundle = parcel.readBundle(getClass().getClassLoader());
-        this.mExtras = readBundle == null ? Bundle.EMPTY : readBundle;
+        Bundle bundle = parcel.readBundle(getClass().getClassLoader());
+        this.mExtras = bundle == null ? Bundle.EMPTY : bundle;
     }
 
     @Override // android.os.Parcelable

@@ -9,7 +9,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.BuildersKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class KeyguardQuickAffordanceLegacySettingSyncer$startSyncing$6 extends SuspendLambda implements Function2 {
     final /* synthetic */ KeyguardQuickAffordanceLegacySettingSyncer.Binding $binding;
@@ -39,7 +38,7 @@ final class KeyguardQuickAffordanceLegacySettingSyncer$startSyncing$6 extends Su
     }
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
-    public final Object invokeSuspend(Object obj) {
+    public final Object invokeSuspend(Object obj) throws Throwable {
         Object obj2 = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i == 0) {
@@ -50,11 +49,11 @@ final class KeyguardQuickAffordanceLegacySettingSyncer$startSyncing$6 extends Su
                 String str = this.$binding.settingsKey;
                 this.label = 1;
                 keyguardQuickAffordanceLegacySettingSyncer.getClass();
-                Object withContext = BuildersKt.withContext(keyguardQuickAffordanceLegacySettingSyncer.backgroundDispatcher, new KeyguardQuickAffordanceLegacySettingSyncer$set$2(keyguardQuickAffordanceLegacySettingSyncer, str, z, null), this);
-                if (withContext != obj2) {
-                    withContext = Unit.INSTANCE;
+                Object objWithContext = BuildersKt.withContext(keyguardQuickAffordanceLegacySettingSyncer.backgroundDispatcher, new KeyguardQuickAffordanceLegacySettingSyncer$set$2(keyguardQuickAffordanceLegacySettingSyncer, str, z, null), this);
+                if (objWithContext != obj2) {
+                    objWithContext = Unit.INSTANCE;
                 }
-                if (withContext == obj2) {
+                if (objWithContext == obj2) {
                     return obj2;
                 }
             }

@@ -21,7 +21,7 @@ public final class TzDataSetVersion {
         return com.android.i18n.timezone.TzDataSetVersion.isCompatibleWithThisDevice(tzDataSetVersion.mDelegate);
     }
 
-    public static TzDataSetVersion read() throws IOException, TzDataSetException {
+    public static TzDataSetVersion read() throws TzDataSetException, IOException {
         try {
             return new TzDataSetVersion(TimeZoneDataFiles.readTimeZoneModuleVersion());
         } catch (TzDataSetVersion.TzDataSetException e) {

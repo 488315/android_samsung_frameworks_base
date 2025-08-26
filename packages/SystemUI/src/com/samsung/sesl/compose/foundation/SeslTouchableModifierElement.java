@@ -4,18 +4,18 @@ import androidx.compose.foundation.interaction.MutableInteractionSource;
 import androidx.compose.ui.Modifier;
 import androidx.compose.ui.node.ModifierNodeElement;
 import kotlin.jvm.functions.Function1;
-import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class SeslTouchableModifierElement extends ModifierNodeElement<SeslTouchableNode> {
     public final boolean enabled;
     public final MutableInteractionSource interactionSource;
     public final Function1 onTouchDown;
 
-    public /* synthetic */ SeslTouchableModifierElement(boolean z, MutableInteractionSource mutableInteractionSource, Function1 function1, int i, DefaultConstructorMarker defaultConstructorMarker) {
-        this(z, mutableInteractionSource, (i & 4) != 0 ? null : function1);
+    public SeslTouchableModifierElement(boolean z, MutableInteractionSource mutableInteractionSource, Function1 function1) {
+        this.enabled = z;
+        this.interactionSource = mutableInteractionSource;
+        this.onTouchDown = function1;
     }
 
     @Override // androidx.compose.ui.node.ModifierNodeElement
@@ -35,9 +35,7 @@ public final class SeslTouchableModifierElement extends ModifierNodeElement<Sesl
     }
 
     public final int hashCode() {
-        int hashCode = (this.interactionSource.hashCode() + (Boolean.hashCode(this.enabled) * 31)) * 31;
-        Function1 function1 = this.onTouchDown;
-        return hashCode + (function1 == null ? 0 : function1.hashCode());
+        return this.onTouchDown.hashCode() + ((this.interactionSource.hashCode() + (Boolean.hashCode(this.enabled) * 31)) * 31);
     }
 
     public final String toString() {
@@ -50,11 +48,5 @@ public final class SeslTouchableModifierElement extends ModifierNodeElement<Sesl
         seslTouchableNode.enabled = this.enabled;
         seslTouchableNode.interactionSource = this.interactionSource;
         seslTouchableNode.onTouchDown = this.onTouchDown;
-    }
-
-    public SeslTouchableModifierElement(boolean z, MutableInteractionSource mutableInteractionSource, Function1 function1) {
-        this.enabled = z;
-        this.interactionSource = mutableInteractionSource;
-        this.onTouchDown = function1;
     }
 }

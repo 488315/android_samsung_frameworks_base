@@ -2,7 +2,6 @@ package gov.nist.core;
 
 import java.net.InetAddress;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class Host extends GenericObject {
     private static final long serialVersionUID = -7233564517978323344L;
@@ -41,7 +40,7 @@ public class Host extends GenericObject {
     }
 
     public final void setHost(int i, String str) {
-        int indexOf;
+        int iIndexOf;
         this.inetAddress = null;
         if (str == null || str.indexOf(58) == -1) {
             this.addressType = i;
@@ -49,13 +48,13 @@ public class Host extends GenericObject {
             this.addressType = 3;
         }
         if (str != null) {
-            String trim = str.trim();
-            this.hostname = trim;
+            String strTrim = str.trim();
+            this.hostname = strTrim;
             if (this.addressType == 1) {
-                this.hostname = trim.toLowerCase();
+                this.hostname = strTrim.toLowerCase();
             }
-            if (this.addressType == 3 && this.stripAddressScopeZones && (indexOf = this.hostname.indexOf(37)) != -1) {
-                this.hostname = this.hostname.substring(0, indexOf);
+            if (this.addressType == 3 && this.stripAddressScopeZones && (iIndexOf = this.hostname.indexOf(37)) != -1) {
+                this.hostname = this.hostname.substring(0, iIndexOf);
             }
         }
     }

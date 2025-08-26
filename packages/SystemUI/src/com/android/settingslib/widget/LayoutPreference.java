@@ -12,7 +12,6 @@ import androidx.preference.PreferenceViewHolder;
 import androidx.preference.R$styleable;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class LayoutPreference extends Preference {
     public boolean mAllowDividerAbove;
@@ -26,7 +25,7 @@ public class LayoutPreference extends Preference {
         this.mClickListener = new View.OnClickListener() { // from class: com.android.settingslib.widget.LayoutPreference$$ExternalSyntheticLambda0
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                LayoutPreference.this.performClick();
+                this.f$0.performClick();
             }
         };
         this.mIsRelativeLinkView = false;
@@ -35,16 +34,16 @@ public class LayoutPreference extends Preference {
 
     public final void init$1(Context context, AttributeSet attributeSet, int i) {
         int[] iArr = R$styleable.Preference;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, iArr);
-        this.mAllowDividerAbove = obtainStyledAttributes.getBoolean(16, obtainStyledAttributes.getBoolean(16, false));
-        this.mAllowDividerBelow = obtainStyledAttributes.getBoolean(17, obtainStyledAttributes.getBoolean(17, false));
-        obtainStyledAttributes.recycle();
-        TypedArray obtainStyledAttributes2 = context.obtainStyledAttributes(attributeSet, iArr, i, 0);
-        int resourceId = obtainStyledAttributes2.getResourceId(3, 0);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, iArr);
+        this.mAllowDividerAbove = typedArrayObtainStyledAttributes.getBoolean(16, typedArrayObtainStyledAttributes.getBoolean(16, false));
+        this.mAllowDividerBelow = typedArrayObtainStyledAttributes.getBoolean(17, typedArrayObtainStyledAttributes.getBoolean(17, false));
+        typedArrayObtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes2 = context.obtainStyledAttributes(attributeSet, iArr, i, 0);
+        int resourceId = typedArrayObtainStyledAttributes2.getResourceId(3, 0);
         if (resourceId == 0) {
             throw new IllegalArgumentException("LayoutPreference requires a layout to be defined");
         }
-        obtainStyledAttributes2.recycle();
+        typedArrayObtainStyledAttributes2.recycle();
         setView$1(LayoutInflater.from(this.mContext).inflate(resourceId, (ViewGroup) null, false));
     }
 
@@ -85,7 +84,7 @@ public class LayoutPreference extends Preference {
         this.mClickListener = new View.OnClickListener() { // from class: com.android.settingslib.widget.LayoutPreference$$ExternalSyntheticLambda0
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                LayoutPreference.this.performClick();
+                this.f$0.performClick();
             }
         };
         this.mIsRelativeLinkView = false;
@@ -101,7 +100,7 @@ public class LayoutPreference extends Preference {
         this.mClickListener = new View.OnClickListener() { // from class: com.android.settingslib.widget.LayoutPreference$$ExternalSyntheticLambda0
             @Override // android.view.View.OnClickListener
             public final void onClick(View view2) {
-                LayoutPreference.this.performClick();
+                this.f$0.performClick();
             }
         };
         this.mIsRelativeLinkView = false;
@@ -113,7 +112,7 @@ public class LayoutPreference extends Preference {
         this.mClickListener = new View.OnClickListener() { // from class: com.android.settingslib.widget.LayoutPreference$$ExternalSyntheticLambda0
             @Override // android.view.View.OnClickListener
             public final void onClick(View view2) {
-                LayoutPreference.this.performClick();
+                this.f$0.performClick();
             }
         };
         this.mIsRelativeLinkView = false;
@@ -126,7 +125,7 @@ public class LayoutPreference extends Preference {
         this.mClickListener = new View.OnClickListener() { // from class: com.android.settingslib.widget.LayoutPreference$$ExternalSyntheticLambda0
             @Override // android.view.View.OnClickListener
             public final void onClick(View view2) {
-                LayoutPreference.this.performClick();
+                this.f$0.performClick();
             }
         };
         this.mIsRelativeLinkView = false;

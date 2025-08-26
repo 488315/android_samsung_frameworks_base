@@ -10,14 +10,12 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class ScrollableNode$onKeyEvent$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ long $scrollAmount;
     int label;
     final /* synthetic */ ScrollableNode this$0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.compose.foundation.gestures.ScrollableNode$onKeyEvent$1$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ long $scrollAmount;
@@ -54,7 +52,7 @@ final class ScrollableNode$onKeyEvent$1 extends SuspendLambda implements Functio
             NestedScrollSource.Companion.getClass();
             int i = NestedScrollSource.UserInput;
             ScrollingLogic scrollingLogic = ((ScrollingLogic$nestedScrollScope$1) nestedScrollScope).this$0;
-            ScrollingLogic.m80access$performScroll3eAAhYA(scrollingLogic, scrollingLogic.outerStateScope, j, i);
+            ScrollingLogic.m81access$performScroll3eAAhYA(scrollingLogic, scrollingLogic.outerStateScope, j, i);
             return Unit.INSTANCE;
         }
     }

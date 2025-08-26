@@ -1,6 +1,5 @@
 package com.android.systemui.blur.ui.viewbinder;
 
-import android.util.Log;
 import android.util.MathUtils;
 import android.view.SemBlurInfo;
 import android.view.View;
@@ -11,19 +10,19 @@ import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LifecycleOwnerKt;
 import androidx.lifecycle.RepeatOnLifecycleKt;
+import com.android.keyguard.EmergencyButtonController$$ExternalSyntheticOutline0;
 import com.android.systemui.R;
-import com.android.systemui.blur.QSColorCurve;
 import com.android.systemui.blur.SecQSBlurShadowView;
 import com.android.systemui.blur.SecQSNewBlurView;
 import com.android.systemui.blur.data.repository.SecPanelWindowBlurRepository;
 import com.android.systemui.blur.di.SecPanelBlurBinding;
 import com.android.systemui.blur.domain.interactor.SecBlurCustomColorInteractor;
-import com.android.systemui.blur.domain.interactor.SecPanelBackgroundDisplayInteractor;
 import com.android.systemui.blur.domain.interactor.SecPanelWindowBlurInteractor;
 import com.android.systemui.lifecycle.RepeatWhenAttachedKt;
 import com.android.systemui.logging.PanelScreenShotLogger;
 import com.android.systemui.shade.NotificationShadeWindowView;
 import com.android.systemui.shade.SecPanelSplitHelper;
+import com.android.systemui.shade.domain.interactor.SecNotificationShadeWindowStateInteractor;
 import com.android.systemui.util.SecQsUiDisplayModeInteractor;
 import java.util.ArrayList;
 import kotlin.Pair;
@@ -40,44 +39,39 @@ import kotlin.jvm.internal.Reflection;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1;
-import kotlinx.coroutines.flow.ReadonlyStateFlow;
-import kotlinx.coroutines.flow.SharedFlowImpl;
-import kotlinx.coroutines.flow.StateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SecPanelWindowBlurBinder implements SecPanelBlurBinding, PanelScreenShotLogger.LogProvider {
     public static final String TAG;
+    public boolean blockBlur;
+    public final SecNotificationShadeWindowStateInteractor notificationShadeWindowStateInteractor;
     public final SecPanelWindowBlurInteractor secPanelWindowBlurInteractor;
     public final SecQsUiDisplayModeInteractor secQsUiDisplayModeInteractor;
     public final NotificationShadeWindowView view;
     public final PathInterpolator windowBlurInterpolator;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.blur.ui.viewbinder.SecPanelWindowBlurBinder$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function3 {
         private /* synthetic */ Object L$0;
         /* synthetic */ Object L$1;
         int label;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.blur.ui.viewbinder.SecPanelWindowBlurBinder$1$1, reason: invalid class name and collision with other inner class name */
-        final class C00621 extends SuspendLambda implements Function2 {
+        final class C01151 extends SuspendLambda implements Function2 {
             final /* synthetic */ LifecycleOwner $$this$repeatWhenAttached;
             final /* synthetic */ View $it;
             int label;
             final /* synthetic */ SecPanelWindowBlurBinder this$0;
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.blur.ui.viewbinder.SecPanelWindowBlurBinder$1$1$1, reason: invalid class name and collision with other inner class name */
-            final class C00631 extends SuspendLambda implements Function2 {
+            final class C01161 extends SuspendLambda implements Function2 {
                 final /* synthetic */ View $it;
                 /* synthetic */ Object L$0;
                 int label;
                 final /* synthetic */ SecPanelWindowBlurBinder this$0;
 
                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-                public C00631(SecPanelWindowBlurBinder secPanelWindowBlurBinder, View view, Continuation continuation) {
+                public C01161(SecPanelWindowBlurBinder secPanelWindowBlurBinder, View view, Continuation continuation) {
                     super(2, continuation);
                     this.this$0 = secPanelWindowBlurBinder;
                     this.$it = view;
@@ -85,14 +79,14 @@ public final class SecPanelWindowBlurBinder implements SecPanelBlurBinding, Pane
 
                 @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
                 public final Continuation create(Object obj, Continuation continuation) {
-                    C00631 c00631 = new C00631(this.this$0, this.$it, continuation);
-                    c00631.L$0 = obj;
-                    return c00631;
+                    C01161 c01161 = new C01161(this.this$0, this.$it, continuation);
+                    c01161.L$0 = obj;
+                    return c01161;
                 }
 
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj, Object obj2) {
-                    return ((C00631) create((Pair) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                    return ((C01161) create((Pair) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
                 }
 
                 @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
@@ -110,12 +104,11 @@ public final class SecPanelWindowBlurBinder implements SecPanelBlurBinding, Pane
                     SecQSBlurShadowView secQSBlurShadowView2 = (SecQSBlurShadowView) this.this$0.view.requireViewById(R.id.qs_small_shadow_view);
                     if (this.this$0.secQsUiDisplayModeInteractor.isTablet()) {
                         this.$it.semSetBlurInfo(null);
+                        secQSNewBlurView.isBlurBlocked = this.this$0.blockBlur;
                         secQSNewBlurView.setVisibility(0);
                         secQSBlurShadowView.setVisibility(0);
                         secQSBlurShadowView2.setVisibility(0);
-                        secQSNewBlurView.semSetBlurInfo(builder.build());
                     } else {
-                        builder.setBackgroundCornerRadius(0.0f);
                         this.$it.semSetBlurInfo(builder.build());
                         secQSNewBlurView.setVisibility(8);
                         secQSBlurShadowView.setVisibility(8);
@@ -126,7 +119,6 @@ public final class SecPanelWindowBlurBinder implements SecPanelBlurBinding, Pane
                 }
             }
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.blur.ui.viewbinder.SecPanelWindowBlurBinder$1$1$2, reason: invalid class name */
             final class AnonymousClass2 extends SuspendLambda implements Function2 {
                 /* synthetic */ boolean Z$0;
@@ -160,17 +152,20 @@ public final class SecPanelWindowBlurBinder implements SecPanelBlurBinding, Pane
                         throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
                     }
                     ResultKt.throwOnFailure(obj);
-                    if (!this.Z$0) {
-                        if ((r3.context.getResources().getInteger(R.integer.theme_designer_quick_star_blur_level) / 100.0f) * this.this$0.secPanelWindowBlurInteractor.secPanelWindowBlurRepository.qsColorCurve.radius > 0.0f) {
+                    boolean z = this.Z$0;
+                    if (!z) {
+                        if ((r0.context.getResources().getInteger(R.integer.theme_designer_quick_star_blur_level) / 100.0f) * this.this$0.secPanelWindowBlurInteractor.secPanelWindowBlurRepository.qsColorCurve.radius > 0.0f) {
+                            EmergencyButtonController$$ExternalSyntheticOutline0.m("shouldBlockWindowBlur ", SecPanelWindowBlurBinder.TAG, z);
                             this.this$0.doBlur(SecPanelBlurBinding.BlurType.QUICK_PANEL);
                         }
                     }
+                    this.this$0.blockBlur = z;
                     return Unit.INSTANCE;
                 }
             }
 
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-            public C00621(SecPanelWindowBlurBinder secPanelWindowBlurBinder, LifecycleOwner lifecycleOwner, View view, Continuation continuation) {
+            public C01151(SecPanelWindowBlurBinder secPanelWindowBlurBinder, LifecycleOwner lifecycleOwner, View view, Continuation continuation) {
                 super(2, continuation);
                 this.this$0 = secPanelWindowBlurBinder;
                 this.$$this$repeatWhenAttached = lifecycleOwner;
@@ -179,12 +174,12 @@ public final class SecPanelWindowBlurBinder implements SecPanelBlurBinding, Pane
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
             public final Continuation create(Object obj, Continuation continuation) {
-                return new C00621(this.this$0, this.$$this$repeatWhenAttached, this.$it, continuation);
+                return new C01151(this.this$0, this.$$this$repeatWhenAttached, this.$it, continuation);
             }
 
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
-                return ((C00621) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                return ((C01151) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
             }
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
@@ -195,7 +190,7 @@ public final class SecPanelWindowBlurBinder implements SecPanelBlurBinding, Pane
                 }
                 ResultKt.throwOnFailure(obj);
                 SecPanelWindowBlurBinder secPanelWindowBlurBinder = this.this$0;
-                FlowKt.launchIn(new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(secPanelWindowBlurBinder.secPanelWindowBlurInteractor.blurInfoData, new C00631(secPanelWindowBlurBinder, this.$it, null)), LifecycleOwnerKt.getLifecycleScope(this.$$this$repeatWhenAttached));
+                FlowKt.launchIn(new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(secPanelWindowBlurBinder.secPanelWindowBlurInteractor.blurInfoData, new C01161(secPanelWindowBlurBinder, this.$it, null)), LifecycleOwnerKt.getLifecycleScope(this.$$this$repeatWhenAttached));
                 SecPanelWindowBlurBinder secPanelWindowBlurBinder2 = this.this$0;
                 FlowKt.launchIn(new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(secPanelWindowBlurBinder2.secPanelWindowBlurInteractor.shouldBlockWindowBlur, new AnonymousClass2(secPanelWindowBlurBinder2, null)), LifecycleOwnerKt.getLifecycleScope(this.$$this$repeatWhenAttached));
                 return Unit.INSTANCE;
@@ -223,10 +218,10 @@ public final class SecPanelWindowBlurBinder implements SecPanelBlurBinding, Pane
                 LifecycleOwner lifecycleOwner = (LifecycleOwner) this.L$0;
                 View view = (View) this.L$1;
                 Lifecycle.State state = Lifecycle.State.CREATED;
-                C00621 c00621 = new C00621(SecPanelWindowBlurBinder.this, lifecycleOwner, view, null);
+                C01151 c01151 = new C01151(SecPanelWindowBlurBinder.this, lifecycleOwner, view, null);
                 this.L$0 = null;
                 this.label = 1;
-                if (RepeatOnLifecycleKt.repeatOnLifecycle(lifecycleOwner, state, c00621, this) == coroutineSingletons) {
+                if (RepeatOnLifecycleKt.repeatOnLifecycle(lifecycleOwner, state, c01151, this) == coroutineSingletons) {
                     return coroutineSingletons;
                 }
             } else {
@@ -239,7 +234,6 @@ public final class SecPanelWindowBlurBinder implements SecPanelBlurBinding, Pane
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -256,10 +250,11 @@ public final class SecPanelWindowBlurBinder implements SecPanelBlurBinding, Pane
         TAG = simpleName;
     }
 
-    public SecPanelWindowBlurBinder(NotificationShadeWindowView notificationShadeWindowView, SecPanelWindowBlurInteractor secPanelWindowBlurInteractor, SecQsUiDisplayModeInteractor secQsUiDisplayModeInteractor, SecBlurCustomColorInteractor secBlurCustomColorInteractor, SecPanelBackgroundDisplayInteractor secPanelBackgroundDisplayInteractor) {
+    public SecPanelWindowBlurBinder(NotificationShadeWindowView notificationShadeWindowView, SecPanelWindowBlurInteractor secPanelWindowBlurInteractor, SecQsUiDisplayModeInteractor secQsUiDisplayModeInteractor, SecBlurCustomColorInteractor secBlurCustomColorInteractor, SecNotificationShadeWindowStateInteractor secNotificationShadeWindowStateInteractor) {
         this.view = notificationShadeWindowView;
         this.secPanelWindowBlurInteractor = secPanelWindowBlurInteractor;
         this.secQsUiDisplayModeInteractor = secQsUiDisplayModeInteractor;
+        this.notificationShadeWindowStateInteractor = secNotificationShadeWindowStateInteractor;
         secBlurCustomColorInteractor.getClass();
         this.windowBlurInterpolator = new PathInterpolator(0.42f, 0.22f, 0.18f, 1.0f);
         RepeatWhenAttachedKt.repeatWhenAttached(notificationShadeWindowView, EmptyCoroutineContext.INSTANCE, new AnonymousClass1(null));
@@ -269,23 +264,9 @@ public final class SecPanelWindowBlurBinder implements SecPanelBlurBinding, Pane
     @Override // com.android.systemui.blur.di.SecPanelBlurBinding
     public final void doBlur(SecPanelBlurBinding.BlurType blurType) {
         SecPanelWindowBlurInteractor secPanelWindowBlurInteractor = this.secPanelWindowBlurInteractor;
-        int integer = (int) ((r13.context.getResources().getInteger(R.integer.theme_designer_quick_star_blur_level) / 100.0f) * secPanelWindowBlurInteractor.secPanelWindowBlurRepository.qsColorCurve.radius);
-        SecPanelWindowBlurRepository secPanelWindowBlurRepository = secPanelWindowBlurInteractor.secPanelWindowBlurRepository;
-        if (secPanelWindowBlurRepository.windowBlurRadius != integer || ((Boolean) secPanelWindowBlurInteractor.shouldShow.$$delegate_0.getValue()).booleanValue()) {
-            SharedFlowImpl sharedFlowImpl = secPanelWindowBlurInteractor.blurInfoData;
-            SemBlurInfo.Builder builder = new SemBlurInfo.Builder(0);
-            StateFlow stateFlow = secPanelWindowBlurInteractor.backgroundVisible;
-            if (!((Boolean) stateFlow.getValue()).booleanValue()) {
-                QSColorCurve qSColorCurve = secPanelWindowBlurRepository.qsColorCurve;
-                builder.setColorCurve(qSColorCurve.saturation, qSColorCurve.curve, qSColorCurve.minX, qSColorCurve.maxX, qSColorCurve.minY, qSColorCurve.maxY);
-            }
-            builder.setBackgroundCornerRadius(secPanelWindowBlurRepository.context.getResources().getDimensionPixelSize(R.dimen.qs_pop_over_corner_radius));
-            ReadonlyStateFlow readonlyStateFlow = secPanelWindowBlurInteractor.shouldBlockWindowBlur;
-            builder.setRadius(((Boolean) readonlyStateFlow.$$delegate_0.getValue()).booleanValue() ? 0 : integer);
-            StateFlow stateFlow2 = readonlyStateFlow.$$delegate_0;
-            secPanelWindowBlurRepository.windowBlurRadius = ((Boolean) stateFlow2.getValue()).booleanValue() ? 0 : integer;
-            Log.d(SecPanelWindowBlurInteractor.TAG, "Window Blur:  " + integer + "  shouldBlockBlur: " + stateFlow2.getValue() + " isBlurReduced: " + secPanelWindowBlurInteractor.secBlurSettingsInteractor.blurReduced.$$delegate_0.getValue() + "  isBackgroundVisible: " + stateFlow.getValue());
-            sharedFlowImpl.tryEmit(new Pair(builder, Integer.valueOf(integer)));
+        int integer = (int) ((r3.context.getResources().getInteger(R.integer.theme_designer_quick_star_blur_level) / 100.0f) * secPanelWindowBlurInteractor.secPanelWindowBlurRepository.qsColorCurve.radius);
+        if (secPanelWindowBlurInteractor.secPanelWindowBlurRepository.windowBlurRadius != integer || ((Boolean) secPanelWindowBlurInteractor.shouldShow.$$delegate_0.getValue()).booleanValue()) {
+            secPanelWindowBlurInteractor.blurInfoData.tryEmit(new Pair(secPanelWindowBlurInteractor.getSemBlurInfoBuilder(integer), Integer.valueOf(integer)));
         }
     }
 
@@ -298,9 +279,9 @@ public final class SecPanelWindowBlurBinder implements SecPanelBlurBinding, Pane
         float integer = (((float) secPanelWindowBlurRepository.context.getResources().getInteger(R.integer.theme_designer_quick_star_blur_level)) / 100.0f) * secPanelWindowBlurRepository.qsColorCurve.radius;
         float integer2 = r6.context.getResources().getInteger(R.integer.theme_designer_quick_star_blur_level) / 100.0f;
         int i = secPanelWindowBlurInteractor.secPanelWindowBlurRepository.windowBlurRadius;
-        StringBuilder m = CubicBezierEasing$$ExternalSyntheticOutline0.m("  radius =  ", integer, "  custom_blur_level =  ", integer2, "  windowBlurRadius =  ");
-        m.append(i);
-        arrayList.add(m.toString());
+        StringBuilder sbM = CubicBezierEasing$$ExternalSyntheticOutline0.m("  radius =  ", integer, "  custom_blur_level =  ", integer2, "  windowBlurRadius =  ");
+        sbM.append(i);
+        arrayList.add(sbM.toString());
         arrayList.add("======================================================================================================= ");
         return arrayList;
     }
@@ -310,33 +291,46 @@ public final class SecPanelWindowBlurBinder implements SecPanelBlurBinding, Pane
         return this.secQsUiDisplayModeInteractor.isTablet() ? f : this.windowBlurInterpolator.getInterpolation(f);
     }
 
+    public final float getStartDelay$1() {
+        SecPanelSplitHelper.Companion.getClass();
+        if (SecPanelSplitHelper.isEnabled) {
+            return (this.secQsUiDisplayModeInteractor.isTablet() && ((Number) this.notificationShadeWindowStateInteractor.statusBarState.$$delegate_0.getValue()).intValue() == 1) ? 0.6f : 0.5f;
+        }
+        return 0.1f;
+    }
+
     @Override // com.android.systemui.blur.di.SecPanelBlurBinding
-    public final void setFraction(float f) {
-        boolean isTablet = this.secQsUiDisplayModeInteractor.isTablet();
+    public final void setFraction(float f, SecPanelBlurBinding.BlurType blurType) {
+        boolean zIsTablet = this.secQsUiDisplayModeInteractor.isTablet();
         SecPanelWindowBlurInteractor secPanelWindowBlurInteractor = this.secPanelWindowBlurInteractor;
-        if (!isTablet) {
+        if (!zIsTablet) {
             secPanelWindowBlurInteractor.secPanelWindowBlurRepository.qsColorCurve.setFraction(f);
             return;
         }
-        SecPanelSplitHelper.Companion companion = SecPanelSplitHelper.Companion;
-        companion.getClass();
-        float f2 = f - (SecPanelSplitHelper.isEnabled ? 0.5f : 0.0f);
-        float f3 = 1;
-        companion.getClass();
-        float constrain = MathUtils.constrain(f2 / (f3 - (!SecPanelSplitHelper.isEnabled ? 0.0f : 0.5f)), 0.0f, 1.0f);
+        float startDelay$1 = f - getStartDelay$1();
+        float startDelay$12 = 1 - getStartDelay$1();
+        SecPanelSplitHelper.Companion.getClass();
+        float fConstrain = MathUtils.constrain(startDelay$1 / (startDelay$12 - (SecPanelSplitHelper.isEnabled ? 0.0f : 0.7f)), 0.0f, 1.0f);
         NotificationShadeWindowView notificationShadeWindowView = this.view;
         SecQSNewBlurView secQSNewBlurView = (SecQSNewBlurView) notificationShadeWindowView.findViewById(R.id.qs_new_blur);
         if (secQSNewBlurView != null) {
-            secQSNewBlurView.setAlpha(constrain);
+            secQSNewBlurView.setAlpha(fConstrain);
         }
         SecQSBlurShadowView secQSBlurShadowView = (SecQSBlurShadowView) notificationShadeWindowView.findViewById(R.id.qs_large_shadow_view);
         if (secQSBlurShadowView != null) {
-            secQSBlurShadowView.setAlpha(constrain);
+            secQSBlurShadowView.setAlpha(fConstrain);
         }
         SecQSBlurShadowView secQSBlurShadowView2 = (SecQSBlurShadowView) notificationShadeWindowView.findViewById(R.id.qs_small_shadow_view);
         if (secQSBlurShadowView2 != null) {
-            secQSBlurShadowView2.setAlpha(constrain);
+            secQSBlurShadowView2.setAlpha(fConstrain);
         }
-        secPanelWindowBlurInteractor.secPanelWindowBlurRepository.qsColorCurve.setFraction(constrain);
+        secPanelWindowBlurInteractor.secPanelWindowBlurRepository.qsColorCurve.setFraction(fConstrain);
+    }
+
+    @Override // com.android.systemui.blur.di.SecPanelBlurBinding
+    public final void updateConfigurationChanged() {
+        SecPanelWindowBlurInteractor secPanelWindowBlurInteractor = this.secPanelWindowBlurInteractor;
+        int integer = (int) ((r0.context.getResources().getInteger(R.integer.theme_designer_quick_star_blur_level) / 100.0f) * secPanelWindowBlurInteractor.secPanelWindowBlurRepository.qsColorCurve.radius);
+        secPanelWindowBlurInteractor.blurInfoData.tryEmit(new Pair(secPanelWindowBlurInteractor.getSemBlurInfoBuilder(integer), Integer.valueOf(integer)));
     }
 }

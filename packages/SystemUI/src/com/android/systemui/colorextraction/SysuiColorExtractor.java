@@ -16,7 +16,6 @@ import dagger.Lazy;
 import java.io.PrintWriter;
 import java.util.Arrays;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SysuiColorExtractor extends ColorExtractor implements Dumpable, ConfigurationController.ConfigurationListener {
     public final ColorExtractor.GradientColors mNeutralColorsLock;
@@ -35,9 +34,9 @@ public class SysuiColorExtractor extends ColorExtractor implements Dumpable, Con
         printWriter.println("    lock: " + ((ColorExtractor) this).mLockColors);
         ColorExtractor.GradientColors[] gradientColorsArr = (ColorExtractor.GradientColors[]) ((ColorExtractor) this).mGradientColors.get(1);
         ColorExtractor.GradientColors[] gradientColorsArr2 = (ColorExtractor.GradientColors[]) ((ColorExtractor) this).mGradientColors.get(2);
-        StringBuilder m = CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "  Gradients:", "    system: ");
-        m.append(Arrays.toString(gradientColorsArr));
-        printWriter.println(m.toString());
+        StringBuilder sbM = CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "  Gradients:", "    system: ");
+        sbM.append(Arrays.toString(gradientColorsArr));
+        printWriter.println(sbM.toString());
         printWriter.println("    lock: " + Arrays.toString(gradientColorsArr2));
         printWriter.println("  Neutral colors: " + this.mNeutralColorsLock);
     }

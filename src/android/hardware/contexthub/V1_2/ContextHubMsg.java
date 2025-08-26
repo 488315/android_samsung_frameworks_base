@@ -36,13 +36,13 @@ public final class ContextHubMsg {
 
     public static final ArrayList<ContextHubMsg> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<ContextHubMsg> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 48, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 48, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             ContextHubMsg contextHubMsg = new ContextHubMsg();
-            contextHubMsg.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 48);
+            contextHubMsg.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 48);
             arrayList.add(contextHubMsg);
         }
         return arrayList;
@@ -52,13 +52,13 @@ public final class ContextHubMsg {
         this.msg_1_0.readEmbeddedFromParcel(hwParcel, hwBlob, j);
         long j2 = j + 32;
         int int32 = hwBlob.getInt32(j + 40);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 16, hwBlob.handle(), j2, true);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 16, hwBlob.handle(), j2, true);
         this.permissions.clear();
         for (int i = 0; i < int32; i++) {
             new String();
             int i2 = i * 16;
-            String string = readEmbeddedBuffer.getString(i2);
-            hwParcel.readEmbeddedBuffer(string.getBytes().length + 1, readEmbeddedBuffer.handle(), i2, false);
+            String string = embeddedBuffer.getString(i2);
+            hwParcel.readEmbeddedBuffer(string.getBytes().length + 1, embeddedBuffer.handle(), i2, false);
             this.permissions.add(string);
         }
     }

@@ -79,20 +79,20 @@ public final class TextAppearanceInfo implements Parcelable {
     }
 
     public static TextAppearanceInfo createFromTextView(TextView textView) {
-        String str;
-        int i;
-        int i2;
+        String systemFontFamilyName;
+        int weight;
+        int style;
         int selectionStart = textView.getSelectionStart();
         CharSequence text = textView.getText();
         TextPaint textPaint = new TextPaint();
         textPaint.set(textView.getPaint());
         if ((text instanceof Spanned) && text.length() > 0 && selectionStart > 0) {
             Spanned spanned = (Spanned) text;
-            int i3 = selectionStart - 1;
-            CharacterStyle[] characterStyleArr = (CharacterStyle[]) spanned.getSpans(i3, i3, CharacterStyle.class);
+            int i = selectionStart - 1;
+            CharacterStyle[] characterStyleArr = (CharacterStyle[]) spanned.getSpans(i, i, CharacterStyle.class);
             if (characterStyleArr != null) {
                 for (CharacterStyle characterStyle : characterStyleArr) {
-                    if (spanned.getSpanStart(characterStyle) <= i3 && i3 < spanned.getSpanEnd(characterStyle)) {
+                    if (spanned.getSpanStart(characterStyle) <= i && i < spanned.getSpanEnd(characterStyle)) {
                         characterStyle.updateDrawState(textPaint);
                     }
                 }
@@ -100,16 +100,16 @@ public final class TextAppearanceInfo implements Parcelable {
         }
         Typeface typeface = textPaint.getTypeface();
         if (typeface != null) {
-            str = typeface.getSystemFontFamilyName();
-            i = typeface.getWeight();
-            i2 = typeface.getStyle();
+            systemFontFamilyName = typeface.getSystemFontFamilyName();
+            weight = typeface.getWeight();
+            style = typeface.getStyle();
         } else {
-            str = null;
-            i = -1;
-            i2 = 0;
+            systemFontFamilyName = null;
+            weight = -1;
+            style = 0;
         }
         Builder builder = new Builder();
-        builder.setTextSize(textPaint.getTextSize()).setTextLocales(textPaint.getTextLocales()).setSystemFontFamilyName(str).setTextFontWeight(i).setTextStyle(i2).setShadowDx(textPaint.getShadowLayerDx()).setShadowDy(textPaint.getShadowLayerDy()).setShadowRadius(textPaint.getShadowLayerRadius()).setShadowColor(textPaint.getShadowLayerColor()).setElegantTextHeight(textPaint.isElegantTextHeight()).setLetterSpacing(textPaint.getLetterSpacing()).setFontFeatureSettings(textPaint.getFontFeatureSettings()).setFontVariationSettings(textPaint.getFontVariationSettings()).setTextScaleX(textPaint.getTextScaleX()).setTextColor(text.length() == 0 ? textView.getCurrentTextColor() : textPaint.getColor()).setLinkTextColor(textPaint.linkColor).setAllCaps(textView.isAllCaps()).setFallbackLineSpacing(textView.isFallbackLineSpacing()).setLineBreakStyle(textView.getLineBreakStyle()).setLineBreakWordStyle(textView.getLineBreakWordStyle()).setHighlightTextColor(textView.getHighlightColor()).setHintTextColor(textView.getCurrentHintTextColor());
+        builder.setTextSize(textPaint.getTextSize()).setTextLocales(textPaint.getTextLocales()).setSystemFontFamilyName(systemFontFamilyName).setTextFontWeight(weight).setTextStyle(style).setShadowDx(textPaint.getShadowLayerDx()).setShadowDy(textPaint.getShadowLayerDy()).setShadowRadius(textPaint.getShadowLayerRadius()).setShadowColor(textPaint.getShadowLayerColor()).setElegantTextHeight(textPaint.isElegantTextHeight()).setLetterSpacing(textPaint.getLetterSpacing()).setFontFeatureSettings(textPaint.getFontFeatureSettings()).setFontVariationSettings(textPaint.getFontVariationSettings()).setTextScaleX(textPaint.getTextScaleX()).setTextColor(text.length() == 0 ? textView.getCurrentTextColor() : textPaint.getColor()).setLinkTextColor(textPaint.linkColor).setAllCaps(textView.isAllCaps()).setFallbackLineSpacing(textView.isFallbackLineSpacing()).setLineBreakStyle(textView.getLineBreakStyle()).setLineBreakWordStyle(textView.getLineBreakWordStyle()).setHighlightTextColor(textView.getHighlightColor()).setHintTextColor(textView.getCurrentHintTextColor());
         return builder.build();
     }
 

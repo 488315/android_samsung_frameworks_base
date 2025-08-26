@@ -5,7 +5,6 @@ import dagger.internal.Providers;
 import kotlin.coroutines.CoroutineContext;
 import kotlinx.coroutines.CoroutineDispatcher;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SysUICoroutinesModule_UiBgCoroutineContextFactory implements Provider {
     private final SysUICoroutinesModule module;
@@ -21,9 +20,9 @@ public final class SysUICoroutinesModule_UiBgCoroutineContextFactory implements 
     }
 
     public static CoroutineContext uiBgCoroutineContext(SysUICoroutinesModule sysUICoroutinesModule, CoroutineDispatcher coroutineDispatcher) {
-        CoroutineContext uiBgCoroutineContext = sysUICoroutinesModule.uiBgCoroutineContext(coroutineDispatcher);
-        uiBgCoroutineContext.getClass();
-        return uiBgCoroutineContext;
+        CoroutineContext coroutineContextUiBgCoroutineContext = sysUICoroutinesModule.uiBgCoroutineContext(coroutineDispatcher);
+        coroutineContextUiBgCoroutineContext.getClass();
+        return coroutineContextUiBgCoroutineContext;
     }
 
     public static SysUICoroutinesModule_UiBgCoroutineContextFactory create(SysUICoroutinesModule sysUICoroutinesModule, Provider provider) {

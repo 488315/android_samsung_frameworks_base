@@ -16,7 +16,6 @@ import androidx.concurrent.futures.CallbackToFutureAdapter;
 import java.util.Objects;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class ScrollCaptureClient {
     static final int MATCH_ANY_TASK = -1;
@@ -24,7 +23,6 @@ public class ScrollCaptureClient {
     public IBinder mHostWindowToken;
     public final IWindowManager mWindowManagerService;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CaptureResult {
         public final Rect captured;
         public final Image image;
@@ -41,11 +39,9 @@ public class ScrollCaptureClient {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Session {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SessionWrapper extends IScrollCaptureCallbacks.Stub implements Session, IBinder.DeathRecipient, ImageReader.OnImageAvailableListener {
         public static final /* synthetic */ int $r8$clinit = 0;
         public final Executor mBgExecutor;
@@ -109,11 +105,11 @@ public class ScrollCaptureClient {
                     if (image != null) {
                         image.close();
                     }
-                    Image acquireLatestImage = this.mReader.acquireLatestImage();
-                    this.mCapturedImage = acquireLatestImage;
+                    Image imageAcquireLatestImage = this.mReader.acquireLatestImage();
+                    this.mCapturedImage = imageAcquireLatestImage;
                     Rect rect = this.mCapturedArea;
                     if (rect != null) {
-                        CaptureResult captureResult = new CaptureResult(acquireLatestImage, this.mRequestRect, rect);
+                        CaptureResult captureResult = new CaptureResult(imageAcquireLatestImage, this.mRequestRect, rect);
                         this.mCapturedImage = null;
                         this.mRequestRect = null;
                         this.mCapturedArea = null;
@@ -129,17 +125,13 @@ public class ScrollCaptureClient {
             synchronized (this.mLock) {
                 try {
                     this.mCapturedArea = rect;
-                    if (this.mCapturedImage == null) {
-                        if (rect != null) {
-                            if (rect.isEmpty()) {
-                            }
-                        }
+                    if (this.mCapturedImage != null || rect == null || rect.isEmpty()) {
+                        CaptureResult captureResult = new CaptureResult(this.mCapturedImage, this.mRequestRect, this.mCapturedArea);
+                        this.mCapturedImage = null;
+                        this.mRequestRect = null;
+                        this.mCapturedArea = null;
+                        this.mTileRequestCompleter.set(captureResult);
                     }
-                    CaptureResult captureResult = new CaptureResult(this.mCapturedImage, this.mRequestRect, this.mCapturedArea);
-                    this.mCapturedImage = null;
-                    this.mRequestRect = null;
-                    this.mCapturedArea = null;
-                    this.mTileRequestCompleter.set(captureResult);
                 } catch (Throwable th) {
                     throw th;
                 }
@@ -155,9 +147,9 @@ public class ScrollCaptureClient {
             Objects.requireNonNull(rect);
             Objects.requireNonNull(rect2);
             this.mBoundsInWindow = rect2;
-            int min = Math.min(4194304, (rect2.height() * rect2.width()) / 2);
+            int iMin = Math.min(4194304, (rect2.height() * rect2.width()) / 2);
             this.mTileWidth = rect2.width();
-            this.mTileHeight = min / rect2.width();
+            this.mTileHeight = iMin / rect2.width();
             this.mTargetHeight = (int) (rect2.height() * f);
             this.mBgExecutor = executor;
         }

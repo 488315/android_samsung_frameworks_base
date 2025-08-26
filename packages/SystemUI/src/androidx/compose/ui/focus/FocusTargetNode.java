@@ -32,7 +32,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.Ref$ObjectRef;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class FocusTargetNode extends Modifier.Node implements CompositionLocalConsumerModifierNode, FocusTargetModifierNode, ObserverModifierNode, ModifierLocalModifierNode {
     public FocusStateImpl committedFocusState;
@@ -42,7 +41,6 @@ public final class FocusTargetNode extends Modifier.Node implements CompositionL
     public final Function1 onDispatchEventsCompleted;
     public final Function2 onFocusChange;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class FocusTargetElement extends ModifierNodeElement<FocusTargetNode> {
         public static final FocusTargetElement INSTANCE = new FocusTargetElement();
 
@@ -67,7 +65,6 @@ public final class FocusTargetNode extends Modifier.Node implements CompositionL
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
         public static final /* synthetic */ int[] $EnumSwitchMapping$1;
@@ -116,6 +113,13 @@ public final class FocusTargetNode extends Modifier.Node implements CompositionL
         this(i, function2, function1);
     }
 
+    /* JADX WARN: Code restructure failed: missing block: B:35:0x006f, code lost:
+    
+        return true;
+     */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public static final boolean initializeFocusState$hasActiveChild(FocusTargetNode focusTargetNode) {
         if (!focusTargetNode.node.isAttached) {
             InlineClassHelperKt.throwIllegalStateException("visitSubtreeIf called on an unattached node");
@@ -137,11 +141,11 @@ public final class FocusTargetNode extends Modifier.Node implements CompositionL
             if ((node3.aggregateChildKindSet & 1024) != 0) {
                 for (Modifier.Node node4 = node3; node4 != null; node4 = node4.child) {
                     if ((node4.kindSet & 1024) != 0) {
-                        Modifier.Node node5 = node4;
+                        Modifier.Node nodeAccess$pop = node4;
                         MutableVector mutableVector2 = null;
-                        while (node5 != null) {
-                            if (node5 instanceof FocusTargetNode) {
-                                FocusTargetNode focusTargetNode2 = (FocusTargetNode) node5;
+                        while (nodeAccess$pop != null) {
+                            if (nodeAccess$pop instanceof FocusTargetNode) {
+                                FocusTargetNode focusTargetNode2 = (FocusTargetNode) nodeAccess$pop;
                                 if (focusTargetNode2.isInitialized$ui_release()) {
                                     int i2 = WhenMappings.$EnumSwitchMapping$1[focusTargetNode2.getFocusState().ordinal()];
                                     if (i2 == 1 || i2 == 2 || i2 == 3) {
@@ -151,29 +155,29 @@ public final class FocusTargetNode extends Modifier.Node implements CompositionL
                                         throw new NoWhenBranchMatchedException();
                                     }
                                 }
-                            } else if ((node5.kindSet & 1024) != 0 && (node5 instanceof DelegatingNode)) {
+                            } else if ((nodeAccess$pop.kindSet & 1024) != 0 && (nodeAccess$pop instanceof DelegatingNode)) {
                                 int i3 = 0;
-                                for (Modifier.Node node6 = ((DelegatingNode) node5).delegate; node6 != null; node6 = node6.child) {
-                                    if ((node6.kindSet & 1024) != 0) {
+                                for (Modifier.Node node5 = ((DelegatingNode) nodeAccess$pop).delegate; node5 != null; node5 = node5.child) {
+                                    if ((node5.kindSet & 1024) != 0) {
                                         i3++;
                                         if (i3 == 1) {
-                                            node5 = node6;
+                                            nodeAccess$pop = node5;
                                         } else {
                                             if (mutableVector2 == null) {
                                                 mutableVector2 = new MutableVector(new Modifier.Node[16], 0);
                                             }
-                                            if (node5 != null) {
-                                                mutableVector2.add(node5);
-                                                node5 = null;
+                                            if (nodeAccess$pop != null) {
+                                                mutableVector2.add(nodeAccess$pop);
+                                                nodeAccess$pop = null;
                                             }
-                                            mutableVector2.add(node6);
+                                            mutableVector2.add(node5);
                                         }
                                     }
                                 }
                                 if (i3 == 1) {
                                 }
                             }
-                            node5 = DelegatableNodeKt.access$pop(mutableVector2);
+                            nodeAccess$pop = DelegatableNodeKt.access$pop(mutableVector2);
                         }
                     }
                 }
@@ -188,19 +192,19 @@ public final class FocusTargetNode extends Modifier.Node implements CompositionL
             InlineClassHelperKt.throwIllegalStateException("visitAncestors called on an unattached node");
         }
         Modifier.Node node = focusTargetNode.node.parent;
-        LayoutNode requireLayoutNode = DelegatableNodeKt.requireLayoutNode(focusTargetNode);
+        LayoutNode layoutNodeRequireLayoutNode = DelegatableNodeKt.requireLayoutNode(focusTargetNode);
         while (true) {
-            if (requireLayoutNode == null) {
+            if (layoutNodeRequireLayoutNode == null) {
                 break;
             }
-            if ((requireLayoutNode.nodes.head.aggregateChildKindSet & 1024) != 0) {
+            if ((layoutNodeRequireLayoutNode.nodes.head.aggregateChildKindSet & 1024) != 0) {
                 while (node != null) {
                     if ((node.kindSet & 1024) != 0) {
-                        Modifier.Node node2 = node;
+                        Modifier.Node nodeAccess$pop = node;
                         MutableVector mutableVector = null;
-                        while (node2 != null) {
-                            if (node2 instanceof FocusTargetNode) {
-                                FocusTargetNode focusTargetNode2 = (FocusTargetNode) node2;
+                        while (nodeAccess$pop != null) {
+                            if (nodeAccess$pop instanceof FocusTargetNode) {
+                                FocusTargetNode focusTargetNode2 = (FocusTargetNode) nodeAccess$pop;
                                 if (focusTargetNode2.isInitialized$ui_release()) {
                                     int i = WhenMappings.$EnumSwitchMapping$1[focusTargetNode2.getFocusState().ordinal()];
                                     if (i != 1 && i != 2) {
@@ -212,36 +216,36 @@ public final class FocusTargetNode extends Modifier.Node implements CompositionL
                                         }
                                     }
                                 }
-                            } else if ((node2.kindSet & 1024) != 0 && (node2 instanceof DelegatingNode)) {
+                            } else if ((nodeAccess$pop.kindSet & 1024) != 0 && (nodeAccess$pop instanceof DelegatingNode)) {
                                 int i2 = 0;
-                                for (Modifier.Node node3 = ((DelegatingNode) node2).delegate; node3 != null; node3 = node3.child) {
-                                    if ((node3.kindSet & 1024) != 0) {
+                                for (Modifier.Node node2 = ((DelegatingNode) nodeAccess$pop).delegate; node2 != null; node2 = node2.child) {
+                                    if ((node2.kindSet & 1024) != 0) {
                                         i2++;
                                         if (i2 == 1) {
-                                            node2 = node3;
+                                            nodeAccess$pop = node2;
                                         } else {
                                             if (mutableVector == null) {
                                                 mutableVector = new MutableVector(new Modifier.Node[16], 0);
                                             }
-                                            if (node2 != null) {
-                                                mutableVector.add(node2);
-                                                node2 = null;
+                                            if (nodeAccess$pop != null) {
+                                                mutableVector.add(nodeAccess$pop);
+                                                nodeAccess$pop = null;
                                             }
-                                            mutableVector.add(node3);
+                                            mutableVector.add(node2);
                                         }
                                     }
                                 }
                                 if (i2 == 1) {
                                 }
                             }
-                            node2 = DelegatableNodeKt.access$pop(mutableVector);
+                            nodeAccess$pop = DelegatableNodeKt.access$pop(mutableVector);
                         }
                     }
                     node = node.parent;
                 }
             }
-            requireLayoutNode = requireLayoutNode.getParent$ui_release();
-            node = (requireLayoutNode == null || (nodeChain = requireLayoutNode.nodes) == null) ? null : nodeChain.tail;
+            layoutNodeRequireLayoutNode = layoutNodeRequireLayoutNode.getParent$ui_release();
+            node = (layoutNodeRequireLayoutNode == null || (nodeChain = layoutNodeRequireLayoutNode.nodes) == null) ? null : nodeChain.tail;
         }
         return false;
     }
@@ -285,9 +289,9 @@ public final class FocusTargetNode extends Modifier.Node implements CompositionL
             InlineClassHelperKt.throwIllegalStateException("visitAncestors called on an unattached node");
         }
         Modifier.Node node2 = this.node;
-        LayoutNode requireLayoutNode = DelegatableNodeKt.requireLayoutNode(this);
-        loop0: while (requireLayoutNode != null) {
-            if ((requireLayoutNode.nodes.head.aggregateChildKindSet & 5120) != 0) {
+        LayoutNode layoutNodeRequireLayoutNode = DelegatableNodeKt.requireLayoutNode(this);
+        loop0: while (layoutNodeRequireLayoutNode != null) {
+            if ((layoutNodeRequireLayoutNode.nodes.head.aggregateChildKindSet & 5120) != 0) {
                 while (node2 != null) {
                     int i = node2.kindSet;
                     if ((i & 5120) != 0) {
@@ -295,54 +299,54 @@ public final class FocusTargetNode extends Modifier.Node implements CompositionL
                             break loop0;
                         }
                         if ((i & 4096) != 0) {
-                            DelegatingNode delegatingNode = node2;
-                            ?? r5 = 0;
-                            while (delegatingNode != 0) {
-                                if (delegatingNode instanceof FocusEventModifierNode) {
-                                    FocusEventModifierNode focusEventModifierNode = (FocusEventModifierNode) delegatingNode;
+                            DelegatingNode delegatingNodeAccess$pop = node2;
+                            ?? mutableVector = 0;
+                            while (delegatingNodeAccess$pop != 0) {
+                                if (delegatingNodeAccess$pop instanceof FocusEventModifierNode) {
+                                    FocusEventModifierNode focusEventModifierNode = (FocusEventModifierNode) delegatingNodeAccess$pop;
                                     focusEventModifierNode.onFocusEvent(FocusEventModifierNodeKt.getFocusState(focusEventModifierNode));
-                                } else if ((delegatingNode.kindSet & 4096) != 0 && (delegatingNode instanceof DelegatingNode)) {
-                                    Modifier.Node node3 = delegatingNode.delegate;
+                                } else if ((delegatingNodeAccess$pop.kindSet & 4096) != 0 && (delegatingNodeAccess$pop instanceof DelegatingNode)) {
+                                    Modifier.Node node3 = delegatingNodeAccess$pop.delegate;
                                     int i2 = 0;
-                                    delegatingNode = delegatingNode;
-                                    r5 = r5;
+                                    delegatingNodeAccess$pop = delegatingNodeAccess$pop;
+                                    mutableVector = mutableVector;
                                     while (node3 != null) {
                                         if ((node3.kindSet & 4096) != 0) {
                                             i2++;
-                                            r5 = r5;
+                                            mutableVector = mutableVector;
                                             if (i2 == 1) {
-                                                delegatingNode = node3;
+                                                delegatingNodeAccess$pop = node3;
                                             } else {
-                                                if (r5 == 0) {
-                                                    r5 = new MutableVector(new Modifier.Node[16], 0);
+                                                if (mutableVector == 0) {
+                                                    mutableVector = new MutableVector(new Modifier.Node[16], 0);
                                                 }
-                                                if (delegatingNode != 0) {
-                                                    r5.add(delegatingNode);
-                                                    delegatingNode = 0;
+                                                if (delegatingNodeAccess$pop != 0) {
+                                                    mutableVector.add(delegatingNodeAccess$pop);
+                                                    delegatingNodeAccess$pop = 0;
                                                 }
-                                                r5.add(node3);
+                                                mutableVector.add(node3);
                                             }
                                         }
                                         node3 = node3.child;
-                                        delegatingNode = delegatingNode;
-                                        r5 = r5;
+                                        delegatingNodeAccess$pop = delegatingNodeAccess$pop;
+                                        mutableVector = mutableVector;
                                     }
                                     if (i2 == 1) {
                                     }
                                 }
-                                delegatingNode = DelegatableNodeKt.access$pop(r5);
+                                delegatingNodeAccess$pop = DelegatableNodeKt.access$pop(mutableVector);
                             }
                         }
                     }
                     node2 = node2.parent;
                 }
             }
-            requireLayoutNode = requireLayoutNode.getParent$ui_release();
-            node2 = (requireLayoutNode == null || (nodeChain = requireLayoutNode.nodes) == null) ? null : nodeChain.tail;
+            layoutNodeRequireLayoutNode = layoutNodeRequireLayoutNode.getParent$ui_release();
+            node2 = (layoutNodeRequireLayoutNode == null || (nodeChain = layoutNodeRequireLayoutNode.nodes) == null) ? null : nodeChain.tail;
         }
         Function1 function1 = this.onDispatchEventsCompleted;
         if (function1 != null) {
-            function1.mo779invoke(this);
+            function1.mo781invoke(this);
         }
     }
 
@@ -393,9 +397,9 @@ public final class FocusTargetNode extends Modifier.Node implements CompositionL
             InlineClassHelperKt.throwIllegalStateException("visitAncestors called on an unattached node");
         }
         Modifier.Node node2 = this.node;
-        LayoutNode requireLayoutNode = DelegatableNodeKt.requireLayoutNode(this);
-        loop0: while (requireLayoutNode != null) {
-            if ((requireLayoutNode.nodes.head.aggregateChildKindSet & 3072) != 0) {
+        LayoutNode layoutNodeRequireLayoutNode = DelegatableNodeKt.requireLayoutNode(this);
+        loop0: while (layoutNodeRequireLayoutNode != null) {
+            if ((layoutNodeRequireLayoutNode.nodes.head.aggregateChildKindSet & 3072) != 0) {
                 while (node2 != null) {
                     int i4 = node2.kindSet;
                     if ((i4 & 3072) != 0) {
@@ -403,49 +407,49 @@ public final class FocusTargetNode extends Modifier.Node implements CompositionL
                             break loop0;
                         }
                         if ((i4 & 2048) != 0) {
-                            DelegatingNode delegatingNode = node2;
-                            ?? r7 = 0;
-                            while (delegatingNode != 0) {
-                                if (delegatingNode instanceof FocusPropertiesModifierNode) {
-                                    ((FocusPropertiesModifierNode) delegatingNode).applyFocusProperties(focusPropertiesImpl);
-                                } else if ((delegatingNode.kindSet & 2048) != 0 && (delegatingNode instanceof DelegatingNode)) {
-                                    Modifier.Node node3 = delegatingNode.delegate;
+                            DelegatingNode delegatingNodeAccess$pop = node2;
+                            ?? mutableVector = 0;
+                            while (delegatingNodeAccess$pop != 0) {
+                                if (delegatingNodeAccess$pop instanceof FocusPropertiesModifierNode) {
+                                    ((FocusPropertiesModifierNode) delegatingNodeAccess$pop).applyFocusProperties(focusPropertiesImpl);
+                                } else if ((delegatingNodeAccess$pop.kindSet & 2048) != 0 && (delegatingNodeAccess$pop instanceof DelegatingNode)) {
+                                    Modifier.Node node3 = delegatingNodeAccess$pop.delegate;
                                     int i5 = 0;
-                                    delegatingNode = delegatingNode;
-                                    r7 = r7;
+                                    delegatingNodeAccess$pop = delegatingNodeAccess$pop;
+                                    mutableVector = mutableVector;
                                     while (node3 != null) {
                                         if ((node3.kindSet & 2048) != 0) {
                                             i5++;
-                                            r7 = r7;
+                                            mutableVector = mutableVector;
                                             if (i5 == 1) {
-                                                delegatingNode = node3;
+                                                delegatingNodeAccess$pop = node3;
                                             } else {
-                                                if (r7 == 0) {
-                                                    r7 = new MutableVector(new Modifier.Node[16], 0);
+                                                if (mutableVector == 0) {
+                                                    mutableVector = new MutableVector(new Modifier.Node[16], 0);
                                                 }
-                                                if (delegatingNode != 0) {
-                                                    r7.add(delegatingNode);
-                                                    delegatingNode = 0;
+                                                if (delegatingNodeAccess$pop != 0) {
+                                                    mutableVector.add(delegatingNodeAccess$pop);
+                                                    delegatingNodeAccess$pop = 0;
                                                 }
-                                                r7.add(node3);
+                                                mutableVector.add(node3);
                                             }
                                         }
                                         node3 = node3.child;
-                                        delegatingNode = delegatingNode;
-                                        r7 = r7;
+                                        delegatingNodeAccess$pop = delegatingNodeAccess$pop;
+                                        mutableVector = mutableVector;
                                     }
                                     if (i5 == 1) {
                                     }
                                 }
-                                delegatingNode = DelegatableNodeKt.access$pop(r7);
+                                delegatingNodeAccess$pop = DelegatableNodeKt.access$pop(mutableVector);
                             }
                         }
                     }
                     node2 = node2.parent;
                 }
             }
-            requireLayoutNode = requireLayoutNode.getParent$ui_release();
-            node2 = (requireLayoutNode == null || (nodeChain = requireLayoutNode.nodes) == null) ? null : nodeChain.tail;
+            layoutNodeRequireLayoutNode = layoutNodeRequireLayoutNode.getParent$ui_release();
+            node2 = (layoutNodeRequireLayoutNode == null || (nodeChain = layoutNodeRequireLayoutNode.nodes) == null) ? null : nodeChain.tail;
         }
         return focusPropertiesImpl;
     }
@@ -483,48 +487,48 @@ public final class FocusTargetNode extends Modifier.Node implements CompositionL
                 InlineClassHelperKt.throwIllegalStateException("visitAncestors called on an unattached node");
             }
             Modifier.Node node = focusTargetNode.node.parent;
-            LayoutNode requireLayoutNode = DelegatableNodeKt.requireLayoutNode(focusTargetNode);
-            while (requireLayoutNode != null) {
-                if ((requireLayoutNode.nodes.head.aggregateChildKindSet & 1024) != 0) {
+            LayoutNode layoutNodeRequireLayoutNode = DelegatableNodeKt.requireLayoutNode(focusTargetNode);
+            while (layoutNodeRequireLayoutNode != null) {
+                if ((layoutNodeRequireLayoutNode.nodes.head.aggregateChildKindSet & 1024) != 0) {
                     while (node != null) {
                         if ((node.kindSet & 1024) != 0) {
-                            Modifier.Node node2 = node;
+                            Modifier.Node nodeAccess$pop = node;
                             MutableVector mutableVector = null;
-                            while (node2 != null) {
-                                if (node2 instanceof FocusTargetNode) {
-                                    if (this == ((FocusTargetNode) node2)) {
+                            while (nodeAccess$pop != null) {
+                                if (nodeAccess$pop instanceof FocusTargetNode) {
+                                    if (this == ((FocusTargetNode) nodeAccess$pop)) {
                                         return FocusStateImpl.ActiveParent;
                                     }
-                                } else if ((node2.kindSet & 1024) != 0 && (node2 instanceof DelegatingNode)) {
+                                } else if ((nodeAccess$pop.kindSet & 1024) != 0 && (nodeAccess$pop instanceof DelegatingNode)) {
                                     int i = 0;
-                                    for (Modifier.Node node3 = ((DelegatingNode) node2).delegate; node3 != null; node3 = node3.child) {
-                                        if ((node3.kindSet & 1024) != 0) {
+                                    for (Modifier.Node node2 = ((DelegatingNode) nodeAccess$pop).delegate; node2 != null; node2 = node2.child) {
+                                        if ((node2.kindSet & 1024) != 0) {
                                             i++;
                                             if (i == 1) {
-                                                node2 = node3;
+                                                nodeAccess$pop = node2;
                                             } else {
                                                 if (mutableVector == null) {
                                                     mutableVector = new MutableVector(new Modifier.Node[16], 0);
                                                 }
-                                                if (node2 != null) {
-                                                    mutableVector.add(node2);
-                                                    node2 = null;
+                                                if (nodeAccess$pop != null) {
+                                                    mutableVector.add(nodeAccess$pop);
+                                                    nodeAccess$pop = null;
                                                 }
-                                                mutableVector.add(node3);
+                                                mutableVector.add(node2);
                                             }
                                         }
                                     }
                                     if (i == 1) {
                                     }
                                 }
-                                node2 = DelegatableNodeKt.access$pop(mutableVector);
+                                nodeAccess$pop = DelegatableNodeKt.access$pop(mutableVector);
                             }
                         }
                         node = node.parent;
                     }
                 }
-                requireLayoutNode = requireLayoutNode.getParent$ui_release();
-                node = (requireLayoutNode == null || (nodeChain = requireLayoutNode.nodes) == null) ? null : nodeChain.tail;
+                layoutNodeRequireLayoutNode = layoutNodeRequireLayoutNode.getParent$ui_release();
+                node = (layoutNodeRequireLayoutNode == null || (nodeChain = layoutNodeRequireLayoutNode.nodes) == null) ? null : nodeChain.tail;
             }
         }
         return FocusStateImpl.Inactive;
@@ -542,20 +546,20 @@ public final class FocusTargetNode extends Modifier.Node implements CompositionL
         if (ComposeUiFlags.isTrackFocusEnabled) {
             return;
         }
-        FocusTransactionManager requireTransactionManager = FocusTargetNodeKt.requireTransactionManager(this);
+        FocusTransactionManager focusTransactionManagerRequireTransactionManager = FocusTargetNodeKt.requireTransactionManager(this);
         try {
-            if (requireTransactionManager.ongoingTransaction) {
-                FocusTransactionManager.access$cancelTransaction(requireTransactionManager);
+            if (focusTransactionManagerRequireTransactionManager.ongoingTransaction) {
+                FocusTransactionManager.access$cancelTransaction(focusTransactionManagerRequireTransactionManager);
             }
-            requireTransactionManager.ongoingTransaction = true;
+            focusTransactionManagerRequireTransactionManager.ongoingTransaction = true;
             if (focusStateImpl == null) {
                 focusStateImpl = (initializeFocusState$isInActiveSubTree(this) && initializeFocusState$hasActiveChild(this)) ? FocusStateImpl.ActiveParent : FocusStateImpl.Inactive;
             }
             setFocusState(focusStateImpl);
             Unit unit = Unit.INSTANCE;
-            FocusTransactionManager.access$commitTransaction(requireTransactionManager);
+            FocusTransactionManager.access$commitTransaction(focusTransactionManagerRequireTransactionManager);
         } catch (Throwable th) {
-            FocusTransactionManager.access$commitTransaction(requireTransactionManager);
+            FocusTransactionManager.access$commitTransaction(focusTransactionManagerRequireTransactionManager);
             throw th;
         }
     }
@@ -587,7 +591,7 @@ public final class FocusTargetNode extends Modifier.Node implements CompositionL
             FocusOwnerImpl focusOwnerImpl = ((AndroidComposeView) DelegatableNodeKt.requireOwner(this)).focusOwner;
             focusOwnerImpl.getClass();
             FocusDirection.Companion.getClass();
-            focusOwnerImpl.m370clearFocusI7lrPNg(FocusDirection.Exit, true, true);
+            focusOwnerImpl.m372clearFocusI7lrPNg(FocusDirection.Exit, true, true);
         }
     }
 
@@ -609,28 +613,28 @@ public final class FocusTargetNode extends Modifier.Node implements CompositionL
         if (i == 1 || i == 2) {
             FocusOwnerImpl focusOwnerImpl = ((AndroidComposeView) DelegatableNodeKt.requireOwner(this)).focusOwner;
             FocusDirection.Companion.getClass();
-            focusOwnerImpl.m370clearFocusI7lrPNg(FocusDirection.Exit, true, false);
+            focusOwnerImpl.m372clearFocusI7lrPNg(FocusDirection.Exit, true, false);
             if (ComposeUiFlags.isTrackFocusEnabled) {
                 FocusInvalidationManager focusInvalidationManager = focusOwnerImpl.focusInvalidationManager;
                 if (!focusInvalidationManager.isInvalidationScheduled) {
-                    focusInvalidationManager.onRequestApplyChangesListener.mo779invoke(new FocusInvalidationManager$setUpOnRequestApplyChangesListener$1(focusInvalidationManager));
+                    focusInvalidationManager.onRequestApplyChangesListener.mo781invoke(new FocusInvalidationManager$setUpOnRequestApplyChangesListener$1(focusInvalidationManager));
                     focusInvalidationManager.isInvalidationScheduled = true;
                 }
             } else {
                 FocusTargetNodeKt.invalidateFocusTarget(this);
             }
         } else if (i == 3 && !ComposeUiFlags.isTrackFocusEnabled) {
-            FocusTransactionManager requireTransactionManager = FocusTargetNodeKt.requireTransactionManager(this);
+            FocusTransactionManager focusTransactionManagerRequireTransactionManager = FocusTargetNodeKt.requireTransactionManager(this);
             try {
-                if (requireTransactionManager.ongoingTransaction) {
-                    FocusTransactionManager.access$cancelTransaction(requireTransactionManager);
+                if (focusTransactionManagerRequireTransactionManager.ongoingTransaction) {
+                    FocusTransactionManager.access$cancelTransaction(focusTransactionManagerRequireTransactionManager);
                 }
-                requireTransactionManager.ongoingTransaction = true;
+                focusTransactionManagerRequireTransactionManager.ongoingTransaction = true;
                 setFocusState(FocusStateImpl.Inactive);
                 Unit unit = Unit.INSTANCE;
-                FocusTransactionManager.access$commitTransaction(requireTransactionManager);
+                FocusTransactionManager.access$commitTransaction(focusTransactionManagerRequireTransactionManager);
             } catch (Throwable th) {
-                FocusTransactionManager.access$commitTransaction(requireTransactionManager);
+                FocusTransactionManager.access$commitTransaction(focusTransactionManagerRequireTransactionManager);
                 throw th;
             }
         }
@@ -651,24 +655,24 @@ public final class FocusTargetNode extends Modifier.Node implements CompositionL
     }
 
     /* renamed from: requestFocus-3ESFkO8, reason: not valid java name */
-    public final boolean m378requestFocus3ESFkO8(int i) {
+    public final boolean m380requestFocus3ESFkO8(int i) {
         Trace.beginSection("FocusTransactions:requestFocus");
         try {
-            boolean z = false;
+            boolean zPerformRequestFocus = false;
             if (!fetchFocusProperties$ui_release().canFocus) {
                 return false;
             }
             if (ComposeUiFlags.isTrackFocusEnabled) {
-                int i2 = WhenMappings.$EnumSwitchMapping$0[FocusTransactionsKt.m381performCustomRequestFocusMxy_nc0(this, i).ordinal()];
+                int i2 = WhenMappings.$EnumSwitchMapping$0[FocusTransactionsKt.m383performCustomRequestFocusMxy_nc0(this, i).ordinal()];
                 if (i2 == 1) {
-                    z = FocusTransactionsKt.performRequestFocus(this);
+                    zPerformRequestFocus = FocusTransactionsKt.performRequestFocus(this);
                 } else if (i2 == 2) {
-                    z = true;
+                    zPerformRequestFocus = true;
                 } else if (i2 != 3 && i2 != 4) {
                     throw new NoWhenBranchMatchedException();
                 }
             } else {
-                FocusTransactionManager requireTransactionManager = FocusTargetNodeKt.requireTransactionManager(this);
+                FocusTransactionManager focusTransactionManagerRequireTransactionManager = FocusTargetNodeKt.requireTransactionManager(this);
                 Function0 function0 = new Function0() { // from class: androidx.compose.ui.focus.FocusTargetNode$requestFocus$1$1
                     {
                         super(0);
@@ -676,7 +680,7 @@ public final class FocusTargetNode extends Modifier.Node implements CompositionL
 
                     @Override // kotlin.jvm.functions.Function0
                     public final Object invoke() {
-                        FocusTargetNode focusTargetNode = FocusTargetNode.this;
+                        FocusTargetNode focusTargetNode = this.this$0;
                         if (focusTargetNode.node.isAttached) {
                             focusTargetNode.dispatchFocusCallbacks$ui_release();
                         }
@@ -684,24 +688,24 @@ public final class FocusTargetNode extends Modifier.Node implements CompositionL
                     }
                 };
                 try {
-                    if (requireTransactionManager.ongoingTransaction) {
-                        FocusTransactionManager.access$cancelTransaction(requireTransactionManager);
+                    if (focusTransactionManagerRequireTransactionManager.ongoingTransaction) {
+                        FocusTransactionManager.access$cancelTransaction(focusTransactionManagerRequireTransactionManager);
                     }
-                    requireTransactionManager.ongoingTransaction = true;
-                    requireTransactionManager.cancellationListener.add(function0);
-                    int i3 = WhenMappings.$EnumSwitchMapping$0[FocusTransactionsKt.m381performCustomRequestFocusMxy_nc0(this, i).ordinal()];
+                    focusTransactionManagerRequireTransactionManager.ongoingTransaction = true;
+                    focusTransactionManagerRequireTransactionManager.cancellationListener.add(function0);
+                    int i3 = WhenMappings.$EnumSwitchMapping$0[FocusTransactionsKt.m383performCustomRequestFocusMxy_nc0(this, i).ordinal()];
                     if (i3 == 1) {
-                        z = FocusTransactionsKt.performRequestFocus(this);
+                        zPerformRequestFocus = FocusTransactionsKt.performRequestFocus(this);
                     } else if (i3 == 2) {
-                        z = true;
+                        zPerformRequestFocus = true;
                     } else if (i3 != 3 && i3 != 4) {
                         throw new NoWhenBranchMatchedException();
                     }
                 } finally {
-                    FocusTransactionManager.access$commitTransaction(requireTransactionManager);
+                    FocusTransactionManager.access$commitTransaction(focusTransactionManagerRequireTransactionManager);
                 }
             }
-            return z;
+            return zPerformRequestFocus;
         } finally {
             Trace.endSection();
         }
@@ -712,18 +716,18 @@ public final class FocusTargetNode extends Modifier.Node implements CompositionL
         if (z) {
             return;
         }
-        FocusTransactionManager requireTransactionManager = FocusTargetNodeKt.requireTransactionManager(this);
-        requireTransactionManager.getClass();
+        FocusTransactionManager focusTransactionManagerRequireTransactionManager = FocusTargetNodeKt.requireTransactionManager(this);
+        focusTransactionManagerRequireTransactionManager.getClass();
         if (z) {
             return;
         }
-        MutableScatterMap mutableScatterMap = requireTransactionManager.states;
+        MutableScatterMap mutableScatterMap = focusTransactionManagerRequireTransactionManager.states;
         FocusStateImpl focusStateImpl2 = (FocusStateImpl) mutableScatterMap.get(this);
         if (focusStateImpl2 == null) {
             focusStateImpl2 = FocusStateImpl.Inactive;
         }
         if (focusStateImpl2 != focusStateImpl) {
-            requireTransactionManager.generation++;
+            focusTransactionManagerRequireTransactionManager.generation++;
         }
         if (focusStateImpl == null) {
             throw AndroidAutofill$$ExternalSyntheticOutline0.m("requires a non-null focus state");
@@ -732,32 +736,12 @@ public final class FocusTargetNode extends Modifier.Node implements CompositionL
     }
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public FocusTargetNode(int r2, kotlin.jvm.functions.Function2 r3, kotlin.jvm.functions.Function1 r4, int r5, kotlin.jvm.internal.DefaultConstructorMarker r6) {
-        /*
-            r1 = this;
-            r6 = r5 & 1
-            if (r6 == 0) goto Lb
-            androidx.compose.ui.focus.Focusability$Companion r2 = androidx.compose.ui.focus.Focusability.Companion
-            r2.getClass()
-            int r2 = androidx.compose.ui.focus.Focusability.Always
-        Lb:
-            r6 = r5 & 2
-            r0 = 0
-            if (r6 == 0) goto L11
-            r3 = r0
-        L11:
-            r5 = r5 & 4
-            if (r5 == 0) goto L16
-            r4 = r0
-        L16:
-            r1.<init>(r2, r3, r4, r0)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.focus.FocusTargetNode.<init>(int, kotlin.jvm.functions.Function2, kotlin.jvm.functions.Function1, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+    public FocusTargetNode(int i, Function2 function2, Function1 function1, int i2, DefaultConstructorMarker defaultConstructorMarker) {
+        if ((i2 & 1) != 0) {
+            Focusability.Companion.getClass();
+            i = Focusability.Always;
+        }
+        this(i, (i2 & 2) != 0 ? null : function2, (i2 & 4) != 0 ? null : function1, null);
     }
 
     private FocusTargetNode(int i, Function2 function2, Function1 function1) {
@@ -802,9 +786,9 @@ public final class FocusTargetNode extends Modifier.Node implements CompositionL
             InlineClassHelperKt.throwIllegalStateException("visitAncestors called on an unattached node");
         }
         Modifier.Node node2 = this.node;
-        LayoutNode requireLayoutNode = DelegatableNodeKt.requireLayoutNode(this);
-        loop0: while (requireLayoutNode != null) {
-            if ((requireLayoutNode.nodes.head.aggregateChildKindSet & 5120) != 0) {
+        LayoutNode layoutNodeRequireLayoutNode = DelegatableNodeKt.requireLayoutNode(this);
+        loop0: while (layoutNodeRequireLayoutNode != null) {
+            if ((layoutNodeRequireLayoutNode.nodes.head.aggregateChildKindSet & 5120) != 0) {
                 while (node2 != null) {
                     int i = node2.kindSet;
                     if ((i & 5120) != 0) {
@@ -812,56 +796,56 @@ public final class FocusTargetNode extends Modifier.Node implements CompositionL
                             break loop0;
                         }
                         if ((i & 4096) != 0) {
-                            DelegatingNode delegatingNode = node2;
-                            ?? r6 = 0;
-                            while (delegatingNode != 0) {
-                                if (delegatingNode instanceof FocusEventModifierNode) {
-                                    FocusEventModifierNode focusEventModifierNode = (FocusEventModifierNode) delegatingNode;
+                            DelegatingNode delegatingNodeAccess$pop = node2;
+                            ?? mutableVector = 0;
+                            while (delegatingNodeAccess$pop != 0) {
+                                if (delegatingNodeAccess$pop instanceof FocusEventModifierNode) {
+                                    FocusEventModifierNode focusEventModifierNode = (FocusEventModifierNode) delegatingNodeAccess$pop;
                                     if (focusTargetNode == focusOwnerImpl.activeFocusTargetNode) {
                                         focusEventModifierNode.onFocusEvent(focusStateImpl2);
                                     }
-                                } else if ((delegatingNode.kindSet & 4096) != 0 && (delegatingNode instanceof DelegatingNode)) {
-                                    Modifier.Node node3 = delegatingNode.delegate;
+                                } else if ((delegatingNodeAccess$pop.kindSet & 4096) != 0 && (delegatingNodeAccess$pop instanceof DelegatingNode)) {
+                                    Modifier.Node node3 = delegatingNodeAccess$pop.delegate;
                                     int i2 = 0;
-                                    delegatingNode = delegatingNode;
-                                    r6 = r6;
+                                    delegatingNodeAccess$pop = delegatingNodeAccess$pop;
+                                    mutableVector = mutableVector;
                                     while (node3 != null) {
                                         if ((node3.kindSet & 4096) != 0) {
                                             i2++;
-                                            r6 = r6;
+                                            mutableVector = mutableVector;
                                             if (i2 == 1) {
-                                                delegatingNode = node3;
+                                                delegatingNodeAccess$pop = node3;
                                             } else {
-                                                if (r6 == 0) {
-                                                    r6 = new MutableVector(new Modifier.Node[16], 0);
+                                                if (mutableVector == 0) {
+                                                    mutableVector = new MutableVector(new Modifier.Node[16], 0);
                                                 }
-                                                if (delegatingNode != 0) {
-                                                    r6.add(delegatingNode);
-                                                    delegatingNode = 0;
+                                                if (delegatingNodeAccess$pop != 0) {
+                                                    mutableVector.add(delegatingNodeAccess$pop);
+                                                    delegatingNodeAccess$pop = 0;
                                                 }
-                                                r6.add(node3);
+                                                mutableVector.add(node3);
                                             }
                                         }
                                         node3 = node3.child;
-                                        delegatingNode = delegatingNode;
-                                        r6 = r6;
+                                        delegatingNodeAccess$pop = delegatingNodeAccess$pop;
+                                        mutableVector = mutableVector;
                                     }
                                     if (i2 == 1) {
                                     }
                                 }
-                                delegatingNode = DelegatableNodeKt.access$pop(r6);
+                                delegatingNodeAccess$pop = DelegatableNodeKt.access$pop(mutableVector);
                             }
                         }
                     }
                     node2 = node2.parent;
                 }
             }
-            requireLayoutNode = requireLayoutNode.getParent$ui_release();
-            node2 = (requireLayoutNode == null || (nodeChain = requireLayoutNode.nodes) == null) ? null : nodeChain.tail;
+            layoutNodeRequireLayoutNode = layoutNodeRequireLayoutNode.getParent$ui_release();
+            node2 = (layoutNodeRequireLayoutNode == null || (nodeChain = layoutNodeRequireLayoutNode.nodes) == null) ? null : nodeChain.tail;
         }
         Function1 function1 = this.onDispatchEventsCompleted;
         if (function1 != null) {
-            function1.mo779invoke(this);
+            function1.mo781invoke(this);
         }
     }
 }

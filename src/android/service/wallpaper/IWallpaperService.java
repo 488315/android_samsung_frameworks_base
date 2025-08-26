@@ -70,9 +70,9 @@ public interface IWallpaperService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IWallpaperService)) {
-                return (IWallpaperService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IWallpaperService)) {
+                return (IWallpaperService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -108,42 +108,42 @@ public interface IWallpaperService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IWallpaperConnection asInterface = IWallpaperConnection.Stub.asInterface(parcel.readStrongBinder());
-                IBinder readStrongBinder = parcel.readStrongBinder();
-                int readInt = parcel.readInt();
-                boolean readBoolean = parcel.readBoolean();
-                int readInt2 = parcel.readInt();
-                int readInt3 = parcel.readInt();
+                IWallpaperConnection iWallpaperConnectionAsInterface = IWallpaperConnection.Stub.asInterface(parcel.readStrongBinder());
+                IBinder strongBinder = parcel.readStrongBinder();
+                int i3 = parcel.readInt();
+                boolean z = parcel.readBoolean();
+                int i4 = parcel.readInt();
+                int i5 = parcel.readInt();
                 Rect rect = (Rect) parcel.readTypedObject(Rect.CREATOR);
-                int readInt4 = parcel.readInt();
-                int readInt5 = parcel.readInt();
+                int i6 = parcel.readInt();
+                int i7 = parcel.readInt();
                 WallpaperInfo wallpaperInfo = (WallpaperInfo) parcel.readTypedObject(WallpaperInfo.CREATOR);
                 WallpaperDescription wallpaperDescription = (WallpaperDescription) parcel.readTypedObject(WallpaperDescription.CREATOR);
                 parcel.enforceNoDataAvail();
-                attach(asInterface, readStrongBinder, readInt, readBoolean, readInt2, readInt3, rect, readInt4, readInt5, wallpaperInfo, wallpaperDescription);
+                attach(iWallpaperConnectionAsInterface, strongBinder, i3, z, i4, i5, rect, i6, i7, wallpaperInfo, wallpaperDescription);
             } else if (i == 2) {
-                IBinder readStrongBinder2 = parcel.readStrongBinder();
+                IBinder strongBinder2 = parcel.readStrongBinder();
                 parcel.enforceNoDataAvail();
-                detach(readStrongBinder2);
+                detach(strongBinder2);
             } else if (i == 3) {
-                IWallpaperConnection asInterface2 = IWallpaperConnection.Stub.asInterface(parcel.readStrongBinder());
-                IBinder readStrongBinder3 = parcel.readStrongBinder();
-                int readInt6 = parcel.readInt();
-                boolean readBoolean2 = parcel.readBoolean();
-                int readInt7 = parcel.readInt();
-                int readInt8 = parcel.readInt();
+                IWallpaperConnection iWallpaperConnectionAsInterface2 = IWallpaperConnection.Stub.asInterface(parcel.readStrongBinder());
+                IBinder strongBinder3 = parcel.readStrongBinder();
+                int i8 = parcel.readInt();
+                boolean z2 = parcel.readBoolean();
+                int i9 = parcel.readInt();
+                int i10 = parcel.readInt();
                 Rect rect2 = (Rect) parcel.readTypedObject(Rect.CREATOR);
-                int readInt9 = parcel.readInt();
-                int readInt10 = parcel.readInt();
+                int i11 = parcel.readInt();
+                int i12 = parcel.readInt();
                 WallpaperInfo wallpaperInfo2 = (WallpaperInfo) parcel.readTypedObject(WallpaperInfo.CREATOR);
                 WallpaperDescription wallpaperDescription2 = (WallpaperDescription) parcel.readTypedObject(WallpaperDescription.CREATOR);
                 Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                 parcel.enforceNoDataAvail();
-                attachWithExtras(asInterface2, readStrongBinder3, readInt6, readBoolean2, readInt7, readInt8, rect2, readInt9, readInt10, wallpaperInfo2, wallpaperDescription2, bundle);
+                attachWithExtras(iWallpaperConnectionAsInterface2, strongBinder3, i8, z2, i9, i10, rect2, i11, i12, wallpaperInfo2, wallpaperDescription2, bundle);
             } else if (i == 4) {
-                int readInt11 = parcel.readInt();
+                int i13 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                setCurrentUserId(readInt11);
+                setCurrentUserId(i13);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -168,70 +168,70 @@ public interface IWallpaperService extends IInterface {
 
             @Override // android.service.wallpaper.IWallpaperService
             public void attach(IWallpaperConnection iWallpaperConnection, IBinder iBinder, int i, boolean z, int i2, int i3, Rect rect, int i4, int i5, WallpaperInfo wallpaperInfo, WallpaperDescription wallpaperDescription) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iWallpaperConnection);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeTypedObject(rect, 0);
-                    obtain.writeInt(i4);
-                    obtain.writeInt(i5);
-                    obtain.writeTypedObject(wallpaperInfo, 0);
-                    obtain.writeTypedObject(wallpaperDescription, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iWallpaperConnection);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeTypedObject(rect, 0);
+                    parcelObtain.writeInt(i4);
+                    parcelObtain.writeInt(i5);
+                    parcelObtain.writeTypedObject(wallpaperInfo, 0);
+                    parcelObtain.writeTypedObject(wallpaperDescription, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.wallpaper.IWallpaperService
             public void detach(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.wallpaper.IWallpaperService
             public void attachWithExtras(IWallpaperConnection iWallpaperConnection, IBinder iBinder, int i, boolean z, int i2, int i3, Rect rect, int i4, int i5, WallpaperInfo wallpaperInfo, WallpaperDescription wallpaperDescription, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iWallpaperConnection);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeTypedObject(rect, 0);
-                    obtain.writeInt(i4);
-                    obtain.writeInt(i5);
-                    obtain.writeTypedObject(wallpaperInfo, 0);
-                    obtain.writeTypedObject(wallpaperDescription, 0);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iWallpaperConnection);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeTypedObject(rect, 0);
+                    parcelObtain.writeInt(i4);
+                    parcelObtain.writeInt(i5);
+                    parcelObtain.writeTypedObject(wallpaperInfo, 0);
+                    parcelObtain.writeTypedObject(wallpaperDescription, 0);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.wallpaper.IWallpaperService
             public void setCurrentUserId(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

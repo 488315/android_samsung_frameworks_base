@@ -21,7 +21,6 @@ import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.StateFlow;
 import kotlinx.coroutines.flow.StateFlowImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class CurrentTilesInteractorImpl$tilesUpdatedFlow$1 extends SuspendLambda implements Function2 {
     /* synthetic */ Object L$0;
@@ -69,16 +68,16 @@ final class CurrentTilesInteractorImpl$tilesUpdatedFlow$1 extends SuspendLambda 
         String string = ((Context) stateFlow.getValue()).getString(R.string.sec_brightness_volume_bar_tiles_default);
         String smartViewBarTileList = secQSPanelResourcePickHelper.getTargetPicker().getSmartViewBarTileList(i, (Context) stateFlow.getValue());
         int i2 = 0;
-        List split$default = StringsKt__StringsKt.split$default(topBarTileList, new String[]{","}, 0, 6);
+        List listSplit$default = StringsKt__StringsKt.split$default(topBarTileList, new String[]{","}, 0, 6);
         Resources resources = ((Context) stateFlowImpl.getValue()).getResources();
         CurrentTilesInteractorImpl.Companion companion = CurrentTilesInteractorImpl.Companion;
-        List access$toTileList = CurrentTilesInteractorImpl.Companion.access$toTileList(companion, split$default, resources);
-        List access$toTileList2 = CurrentTilesInteractorImpl.Companion.access$toTileList(companion, StringsKt__StringsKt.split$default(bottomBarTileList, new String[]{","}, 0, 6), ((Context) stateFlowImpl.getValue()).getResources());
-        List access$toTileList3 = CurrentTilesInteractorImpl.Companion.access$toTileList(companion, StringsKt__StringsKt.split$default(string, new String[]{","}, 0, 6), ((Context) stateFlowImpl.getValue()).getResources());
-        List access$toTileList4 = CurrentTilesInteractorImpl.Companion.access$toTileList(companion, StringsKt__StringsKt.split$default(smartViewBarTileList, new String[]{","}, 0, 6), ((Context) stateFlowImpl.getValue()).getResources());
+        List listAccess$toTileList = CurrentTilesInteractorImpl.Companion.access$toTileList(companion, listSplit$default, resources);
+        List listAccess$toTileList2 = CurrentTilesInteractorImpl.Companion.access$toTileList(companion, StringsKt__StringsKt.split$default(bottomBarTileList, new String[]{","}, 0, 6), ((Context) stateFlowImpl.getValue()).getResources());
+        List listAccess$toTileList3 = CurrentTilesInteractorImpl.Companion.access$toTileList(companion, StringsKt__StringsKt.split$default(string, new String[]{","}, 0, 6), ((Context) stateFlowImpl.getValue()).getResources());
+        List listAccess$toTileList4 = CurrentTilesInteractorImpl.Companion.access$toTileList(companion, StringsKt__StringsKt.split$default(smartViewBarTileList, new String[]{","}, 0, 6), ((Context) stateFlowImpl.getValue()).getResources());
         ArrayList arrayList = currentTilesInteractorImpl.hiddenTilesByKnoxInTopBottomBar;
         ArrayList arrayList2 = new ArrayList();
-        ArrayList arrayList3 = (ArrayList) access$toTileList;
+        ArrayList arrayList3 = (ArrayList) listAccess$toTileList;
         int size = arrayList3.size();
         int i3 = 0;
         while (i3 < size) {
@@ -91,7 +90,7 @@ final class CurrentTilesInteractorImpl$tilesUpdatedFlow$1 extends SuspendLambda 
         arrayList.addAll(arrayList2);
         ArrayList arrayList4 = currentTilesInteractorImpl.hiddenTilesByKnoxInTopBottomBar;
         ArrayList arrayList5 = new ArrayList();
-        ArrayList arrayList6 = (ArrayList) access$toTileList2;
+        ArrayList arrayList6 = (ArrayList) listAccess$toTileList2;
         int size2 = arrayList6.size();
         int i4 = 0;
         while (i4 < size2) {
@@ -104,7 +103,7 @@ final class CurrentTilesInteractorImpl$tilesUpdatedFlow$1 extends SuspendLambda 
         arrayList4.addAll(arrayList5);
         ArrayList arrayList7 = currentTilesInteractorImpl.hiddenTilesByKnoxInTopBottomBar;
         ArrayList arrayList8 = new ArrayList();
-        ArrayList arrayList9 = (ArrayList) access$toTileList3;
+        ArrayList arrayList9 = (ArrayList) listAccess$toTileList3;
         int size3 = arrayList9.size();
         int i5 = 0;
         while (i5 < size3) {
@@ -117,7 +116,7 @@ final class CurrentTilesInteractorImpl$tilesUpdatedFlow$1 extends SuspendLambda 
         arrayList7.addAll(arrayList8);
         ArrayList arrayList10 = currentTilesInteractorImpl.hiddenTilesByKnoxInTopBottomBar;
         ArrayList arrayList11 = new ArrayList();
-        ArrayList arrayList12 = (ArrayList) access$toTileList4;
+        ArrayList arrayList12 = (ArrayList) listAccess$toTileList4;
         int size4 = arrayList12.size();
         while (i2 < size4) {
             Object obj5 = arrayList12.get(i2);

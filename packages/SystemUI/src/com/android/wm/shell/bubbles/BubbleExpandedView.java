@@ -26,6 +26,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewOutlineProvider;
+import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import androidx.appcompat.widget.MenuPopupWindow$MenuDropDownListView$$ExternalSyntheticOutline0;
@@ -43,7 +44,6 @@ import com.android.wm.shell.taskview.TaskView;
 import com.android.wm.shell.taskview.TaskViewTaskController;
 import com.samsung.android.knox.net.nap.NetworkAnalyticsConstants;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class BubbleExpandedView extends LinearLayout {
     public int mBackgroundColorFloating;
@@ -141,7 +141,6 @@ public class BubbleExpandedView extends LinearLayout {
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.bubbles.BubbleExpandedView$5, reason: invalid class name */
     public class AnonymousClass5 implements TaskView.Listener {
         public boolean mInitialized = false;
@@ -169,14 +168,13 @@ public class BubbleExpandedView extends LinearLayout {
             boolean z = this.mDestroyed;
             BubbleExpandedView bubbleExpandedView = BubbleExpandedView.this;
             if (!z && !this.mInitialized) {
-                final ActivityOptions makeCustomAnimation = ActivityOptions.makeCustomAnimation(bubbleExpandedView.getContext(), 0, 0);
+                final ActivityOptions activityOptionsMakeCustomAnimation = ActivityOptions.makeCustomAnimation(bubbleExpandedView.getContext(), 0, 0);
                 bubbleExpandedView.post(new Runnable() { // from class: com.android.wm.shell.bubbles.BubbleExpandedView$5$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
                         boolean z2;
-                        Context context;
-                        BubbleExpandedView.AnonymousClass5 anonymousClass5 = BubbleExpandedView.AnonymousClass5.this;
-                        ActivityOptions activityOptions = makeCustomAnimation;
+                        BubbleExpandedView.AnonymousClass5 anonymousClass5 = this.f$0;
+                        ActivityOptions activityOptions = activityOptionsMakeCustomAnimation;
                         anonymousClass5.getClass();
                         boolean z3 = ProtoLogImpl_1771455215.Cache.WM_SHELL_BUBBLES_enabled[0];
                         BubbleExpandedView bubbleExpandedView2 = BubbleExpandedView.this;
@@ -222,8 +220,7 @@ public class BubbleExpandedView extends LinearLayout {
                                 taskView.mTaskViewController.startShortcutActivity(taskView.mTaskViewTaskController, bubbleExpandedView2.mBubble.mShortcutInfo, activityOptions, rect);
                                 return;
                             }
-                            context = ((LinearLayout) bubbleExpandedView2).mContext;
-                            bubbleExpandedView2.mTaskView.startActivity(PendingIntent.getActivity(context.createContextAsUser(bubbleExpandedView2.mBubble.mUser, 4), 0, bubbleExpandedView2.mBubble.mIntent, 167772160, null), new Intent(), activityOptions, rect);
+                            bubbleExpandedView2.mTaskView.startActivity(PendingIntent.getActivity(((LinearLayout) bubbleExpandedView2).mContext.createContextAsUser(bubbleExpandedView2.mBubble.mUser, 4), 0, bubbleExpandedView2.mBubble.mIntent, 167772160, null), new Intent(), activityOptions, rect);
                         } catch (RuntimeException e) {
                             Log.w("Bubbles", "Exception while displaying bubble: " + bubbleExpandedView2.getBubbleKey() + ", " + e.getMessage() + "; removing bubble");
                             ((BubbleExpandedViewManager$Companion$fromBubbleController$1) bubbleExpandedView2.mManager).$controller.removeBubble(10, bubbleExpandedView2.getBubbleKey());
@@ -343,13 +340,13 @@ public class BubbleExpandedView extends LinearLayout {
     }
 
     public final void applyThemeAttrs() {
-        TypedArray obtainStyledAttributes = ((LinearLayout) this).mContext.obtainStyledAttributes(new int[]{R.attr.dialogCornerRadius});
+        TypedArray typedArrayObtainStyledAttributes = ((LinearLayout) this).mContext.obtainStyledAttributes(new int[]{R.attr.dialogCornerRadius});
         this.mCornerRadius = ScreenDecorationsUtils.supportsRoundedCornersOnWindows(((LinearLayout) this).mContext.getResources()) ? getContext().getResources().getDimensionPixelSize(com.android.systemui.R.dimen.sec_noti_bubble_expand_view_radius) : 0.0f;
         int color = ((LinearLayout) this).mContext.getColor(R.color.side_fps_toast_background);
         this.mBackgroundColorFloating = color;
         this.mExpandedViewContainer.setBackgroundColor(color);
         int color2 = ((LinearLayout) this).mContext.getColor(R.color.sliding_tab_text_color_shadow);
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
         AlphaOptimizedButton alphaOptimizedButton = this.mManageButton;
         if (alphaOptimizedButton != null) {
             alphaOptimizedButton.getBackground().setColorFilter(color2, PorterDuff.Mode.SRC_IN);
@@ -422,9 +419,9 @@ public class BubbleExpandedView extends LinearLayout {
         AnonymousClass5 anonymousClass5 = this.mTaskViewListener;
         this.mCurrentTaskViewListener = anonymousClass5;
         bubbleTaskView.delegateListener = anonymousClass5;
-        boolean isStackOnLeft = this.mPositioner.isStackOnLeft(this.mStackView.mStackAnimationController.mStackPosition);
+        boolean zIsStackOnLeft = this.mPositioner.isStackOnLeft(this.mStackView.mStackAnimationController.mStackPosition);
         BubblePositioner bubblePositioner2 = this.mPositioner;
-        int[] expandedViewContainerPadding = bubblePositioner2.getExpandedViewContainerPadding(isStackOnLeft, false);
+        int[] expandedViewContainerPadding = bubblePositioner2.getExpandedViewContainerPadding(zIsStackOnLeft, false);
         FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(((bubblePositioner2.mScreenRect.width() - expandedViewContainerPadding[0]) - expandedViewContainerPadding[2]) - (bubblePositioner2.showBubblesVertically() ? bubblePositioner2.mPointerHeight - bubblePositioner2.mPointerOverlap : 0), -1);
         if (this.mTaskView.getParent() != null) {
             ((ViewGroup) this.mTaskView.getParent()).removeView(this.mTaskView);
@@ -480,10 +477,10 @@ public class BubbleExpandedView extends LinearLayout {
         super.onFinishInflate();
         this.mManageButton = (AlphaOptimizedButton) LayoutInflater.from(getContext()).inflate(com.android.systemui.R.layout.bubble_manage_button, (ViewGroup) this, false);
         updateDimensions();
-        View findViewById = findViewById(com.android.systemui.R.id.pointer_view);
-        this.mPointerView = findViewById;
+        View viewFindViewById = findViewById(com.android.systemui.R.id.pointer_view);
+        this.mPointerView = viewFindViewById;
         this.mCurrentPointer = this.mTopPointer;
-        findViewById.setVisibility(4);
+        viewFindViewById.setVisibility(4);
         setContentVisibility(false);
         this.mExpandedViewContainer.setOutlineProvider(new ViewOutlineProvider() { // from class: com.android.wm.shell.bubbles.BubbleExpandedView.6
             @Override // android.view.ViewOutlineProvider
@@ -510,7 +507,7 @@ public class BubbleExpandedView extends LinearLayout {
         setOnTouchListener(new View.OnTouchListener() { // from class: com.android.wm.shell.bubbles.BubbleExpandedView$$ExternalSyntheticLambda0
             @Override // android.view.View.OnTouchListener
             public final boolean onTouch(View view, MotionEvent motionEvent) {
-                BubbleExpandedView bubbleExpandedView = BubbleExpandedView.this;
+                BubbleExpandedView bubbleExpandedView = this.f$0;
                 if (bubbleExpandedView.mTaskView == null) {
                     return false;
                 }
@@ -556,8 +553,8 @@ public class BubbleExpandedView extends LinearLayout {
 
     public final void setPointerPosition(final float f, final boolean z, final boolean z2) {
         final boolean z3 = MenuPopupWindow$MenuDropDownListView$$ExternalSyntheticOutline0.m(((LinearLayout) this).mContext) == 1;
-        final boolean showBubblesVertically = this.mPositioner.showBubblesVertically();
-        setPadding(showBubblesVertically ? this.mPointerMargin + this.mPointerHeight : 0, (int) (showBubblesVertically ? 0.0f : this.mPointerHeight - this.mPointerOverlap), showBubblesVertically ? this.mPointerMargin + this.mPointerHeight : 0, 0);
+        final boolean zShowBubblesVertically = this.mPositioner.showBubblesVertically();
+        setPadding(zShowBubblesVertically ? this.mPointerMargin + this.mPointerHeight : 0, (int) (zShowBubblesVertically ? 0.0f : this.mPointerHeight - this.mPointerOverlap), zShowBubblesVertically ? this.mPointerMargin + this.mPointerHeight : 0, 0);
         float pointerPosition = this.mPositioner.getPointerPosition(f);
         if (this.mPositioner.showBubblesVertically()) {
             pointerPosition -= this.mPositioner.getExpandedViewY(this.mBubble, f);
@@ -566,7 +563,7 @@ public class BubbleExpandedView extends LinearLayout {
         post(new Runnable() { // from class: com.android.wm.shell.bubbles.BubbleExpandedView$$ExternalSyntheticLambda2
             @Override // java.lang.Runnable
             public final void run() {
-                BubbleExpandedView.$r8$lambda$ccTaI9r7P2VOoMubLXq7uktr0E8(BubbleExpandedView.this, showBubblesVertically, z, f2, z3, f, z2);
+                BubbleExpandedView.$r8$lambda$ccTaI9r7P2VOoMubLXq7uktr0E8(this.f$0, zShowBubblesVertically, z, f2, z3, f, z2);
             }
         });
     }
@@ -579,123 +576,51 @@ public class BubbleExpandedView extends LinearLayout {
         taskView.setZOrderedOnTop(z, true);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:23:0x004a  */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x00af  */
+    /* JADX WARN: Removed duplicated region for block: B:19:0x0031  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void update(com.android.wm.shell.bubbles.Bubble r10) {
-        /*
-            r9 = this;
-            com.android.wm.shell.bubbles.BubbleStackView r0 = r9.mStackView
-            java.lang.String r1 = "Bubbles"
-            if (r0 != 0) goto L18
-            java.lang.StringBuilder r9 = new java.lang.StringBuilder
-            java.lang.String r0 = "Stack is null for bubble: "
-            r9.<init>(r0)
-            r9.append(r10)
-            java.lang.String r9 = r9.toString()
-            android.util.Log.w(r1, r9)
-            return
-        L18:
-            r0 = 1
-            r2 = 0
-            com.android.wm.shell.bubbles.Bubble r3 = r9.mBubble
-            if (r3 == 0) goto L31
-            android.app.PendingIntent r3 = r9.mPendingIntent
-            if (r3 == 0) goto L24
-            r3 = r0
-            goto L25
-        L24:
-            r3 = r2
-        L25:
-            android.app.PendingIntent r4 = r10.mPendingIntent
-            if (r4 == 0) goto L2b
-            r4 = r0
-            goto L2c
-        L2b:
-            r4 = r2
-        L2c:
-            if (r3 == r4) goto L2f
-            goto L31
-        L2f:
-            r3 = r2
-            goto L32
-        L31:
-            r3 = r0
-        L32:
-            if (r10 == 0) goto L43
-            com.android.wm.shell.bubbles.Bubble r4 = r9.mBubble
-            if (r4 == 0) goto L43
-            java.lang.String r5 = r10.mKey
-            java.lang.String r4 = r4.mKey
-            boolean r4 = r5.equals(r4)
-            if (r4 == 0) goto L43
-            goto L44
-        L43:
-            r0 = r2
-        L44:
-            boolean[] r4 = com.android.internal.protolog.ProtoLogImpl_1771455215.Cache.WM_SHELL_BUBBLES_enabled
-            boolean r4 = r4[r2]
-            if (r4 == 0) goto L68
-            java.lang.String r4 = r10.mKey
-            java.lang.String r4 = java.lang.String.valueOf(r4)
-            com.android.wm.shell.protolog.ShellProtoLogGroup r5 = com.android.wm.shell.protolog.ShellProtoLogGroup.WM_SHELL_BUBBLES
-            java.lang.Boolean r6 = java.lang.Boolean.valueOf(r3)
-            java.lang.Boolean r7 = java.lang.Boolean.valueOf(r0)
-            java.lang.Object[] r4 = new java.lang.Object[]{r4, r6, r7}
-            r6 = 7607960991883866700(0x6994e836a244324c, double:4.0008344980493066E200)
-            r8 = 60
-            com.android.internal.protolog.ProtoLogImpl_1771455215.d(r5, r6, r8, r4)
-        L68:
-            if (r3 != 0) goto L8b
-            if (r0 == 0) goto L6d
-            goto L8b
-        L6d:
-            java.lang.StringBuilder r9 = new java.lang.StringBuilder
-            java.lang.String r0 = "Trying to update entry with different key, new bubble: "
-            r9.<init>(r0)
-            java.lang.String r0 = r10.mKey
-            r9.append(r0)
-            java.lang.String r0 = " old bubble: "
-            r9.append(r0)
-            java.lang.String r10 = r10.mKey
-            r9.append(r10)
-            java.lang.String r9 = r9.toString()
-            android.util.Log.w(r1, r9)
-            return
-        L8b:
-            r9.mBubble = r10
-            com.android.wm.shell.common.AlphaOptimizedButton r0 = r9.mManageButton
-            android.content.res.Resources r1 = r9.getResources()
-            java.lang.String r10 = r10.mAppName
-            java.lang.Object[] r10 = new java.lang.Object[]{r10}
-            r4 = 2131952495(0x7f13036f, float:1.9541434E38)
-            java.lang.String r10 = r1.getString(r4, r10)
-            r0.setContentDescription(r10)
-            com.android.wm.shell.common.AlphaOptimizedButton r10 = r9.mManageButton
-            com.android.wm.shell.bubbles.BubbleExpandedView$8 r0 = new com.android.wm.shell.bubbles.BubbleExpandedView$8
-            r0.<init>()
-            r10.setAccessibilityDelegate(r0)
-            if (r3 == 0) goto Lc9
-            com.android.wm.shell.bubbles.Bubble r10 = r9.mBubble
-            android.app.PendingIntent r0 = r10.mPendingIntent
-            r9.mPendingIntent = r0
-            if (r0 != 0) goto Lbd
-            boolean r10 = r10.hasMetadataShortcutId()
-            if (r10 == 0) goto Lc9
-        Lbd:
-            com.android.wm.shell.taskview.TaskView r10 = r9.mTaskView
-            if (r10 == 0) goto Lc9
-            r9.setContentVisibility(r2)
-            com.android.wm.shell.taskview.TaskView r10 = r9.mTaskView
-            r10.setVisibility(r2)
-        Lc9:
-            r9.applyThemeAttrs()
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.bubbles.BubbleExpandedView.update(com.android.wm.shell.bubbles.Bubble):void");
+    public final void update(Bubble bubble) {
+        boolean z;
+        Bubble bubble2;
+        if (this.mStackView == null) {
+            Log.w("Bubbles", "Stack is null for bubble: " + bubble);
+            return;
+        }
+        if (this.mBubble == null) {
+            z = true;
+        } else {
+            if ((this.mPendingIntent != null) == (bubble.mPendingIntent != null)) {
+                z = false;
+            }
+        }
+        boolean z2 = (bubble == null || (bubble2 = this.mBubble) == null || !bubble.mKey.equals(bubble2.mKey)) ? false : true;
+        if (ProtoLogImpl_1771455215.Cache.WM_SHELL_BUBBLES_enabled[0]) {
+            ProtoLogImpl_1771455215.d(ShellProtoLogGroup.WM_SHELL_BUBBLES, 7607960991883866700L, 60, String.valueOf(bubble.mKey), Boolean.valueOf(z), Boolean.valueOf(z2));
+        }
+        if (!z && !z2) {
+            Log.w("Bubbles", "Trying to update entry with different key, new bubble: " + bubble.mKey + " old bubble: " + bubble.mKey);
+            return;
+        }
+        this.mBubble = bubble;
+        this.mManageButton.setContentDescription(getResources().getString(com.android.systemui.R.string.bubbles_settings_button_description, bubble.mAppName));
+        this.mManageButton.setAccessibilityDelegate(new View.AccessibilityDelegate() { // from class: com.android.wm.shell.bubbles.BubbleExpandedView.8
+            @Override // android.view.View.AccessibilityDelegate
+            public final void onInitializeAccessibilityNodeInfo(View view, AccessibilityNodeInfo accessibilityNodeInfo) {
+                super.onInitializeAccessibilityNodeInfo(view, accessibilityNodeInfo);
+                BubbleExpandedView.this.mStackView.setupLocalMenu(accessibilityNodeInfo);
+            }
+        });
+        if (z) {
+            Bubble bubble3 = this.mBubble;
+            PendingIntent pendingIntent = bubble3.mPendingIntent;
+            this.mPendingIntent = pendingIntent;
+            if ((pendingIntent != null || bubble3.hasMetadataShortcutId()) && this.mTaskView != null) {
+                setContentVisibility(false);
+                this.mTaskView.setVisibility(0);
+            }
+        }
+        applyThemeAttrs();
     }
 
     public final void updateDimensions() {
@@ -744,14 +669,21 @@ public class BubbleExpandedView extends LinearLayout {
         }
         float expandedViewHeight = this.mPositioner.getExpandedViewHeight(bubble);
         int maxExpandedViewHeight = this.mPositioner.getMaxExpandedViewHeight(this.mIsOverflow);
-        float min = expandedViewHeight == -1.0f ? maxExpandedViewHeight : Math.min(expandedViewHeight, maxExpandedViewHeight);
-        this.mUsingMaxHeight = min == ((float) maxExpandedViewHeight);
+        float fMin = expandedViewHeight == -1.0f ? maxExpandedViewHeight : Math.min(expandedViewHeight, maxExpandedViewHeight);
+        this.mUsingMaxHeight = fMin == ((float) maxExpandedViewHeight);
         FrameLayout.LayoutParams layoutParams = this.mIsOverflow ? (FrameLayout.LayoutParams) this.mOverflowView.getLayoutParams() : (FrameLayout.LayoutParams) this.mTaskView.getLayoutParams();
-        this.mNeedsNewHeight = ((float) layoutParams.height) != min;
+        this.mNeedsNewHeight = ((float) layoutParams.height) != fMin;
         if (this.mImeVisible) {
+            layoutParams.height = (int) fMin;
+            if (this.mIsOverflow) {
+                this.mOverflowView.setLayoutParams(layoutParams);
+            } else {
+                this.mTaskView.setLayoutParams(layoutParams);
+            }
+            this.mNeedsNewHeight = false;
             return;
         }
-        layoutParams.height = (int) min;
+        layoutParams.height = (int) fMin;
         if (this.mIsOverflow) {
             this.mOverflowView.setLayoutParams(layoutParams);
         } else {

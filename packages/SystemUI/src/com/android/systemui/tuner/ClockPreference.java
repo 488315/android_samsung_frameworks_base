@@ -9,7 +9,6 @@ import com.android.systemui.Dependency;
 import com.android.systemui.statusbar.phone.ui.StatusBarIconController;
 import com.android.systemui.tuner.TunerService;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ClockPreference extends DropDownPreference implements TunerService.Tunable {
     public final String mClock;
@@ -22,7 +21,7 @@ public class ClockPreference extends DropDownPreference implements TunerService.
 
     public ClockPreference(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
-        this.mClock = context.getString(17043267);
+        this.mClock = context.getString(17043271);
         this.mEntryValues = new CharSequence[]{"seconds", "default", "disabled"};
     }
 

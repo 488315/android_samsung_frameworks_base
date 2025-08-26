@@ -6,7 +6,9 @@ import com.android.systemui.Dumpable;
 import com.android.systemui.dump.DumpManager;
 import com.android.systemui.flags.RefactorFlagUtils;
 import com.android.systemui.statusbar.notification.collection.EntryAdapter;
+import com.android.systemui.statusbar.notification.collection.GroupEntry;
 import com.android.systemui.statusbar.notification.collection.NotificationEntry;
+import com.android.systemui.statusbar.notification.collection.PipelineEntry;
 import com.android.systemui.statusbar.notification.collection.listbuilder.OnBeforeRenderListListener;
 import com.android.systemui.statusbar.notification.row.ExpandableNotificationRow;
 import com.android.systemui.statusbar.notification.shared.NotificationBundleUi;
@@ -18,9 +20,9 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class GroupExpansionManagerImpl implements GroupExpansionManager, Dumpable {
     public final DumpManager mDumpManager;
@@ -29,85 +31,50 @@ public class GroupExpansionManagerImpl implements GroupExpansionManager, Dumpabl
     public final Set mExpandedGroups = new HashSet();
     public final Set mExpandedCollections = new HashSet();
     public final GroupExpansionManagerImpl$$ExternalSyntheticLambda0 mNotifTracker = new OnBeforeRenderListListener() { // from class: com.android.systemui.statusbar.notification.collection.render.GroupExpansionManagerImpl$$ExternalSyntheticLambda0
-        /* JADX WARN: Removed duplicated region for block: B:24:0x007d A[LOOP:1: B:22:0x0077->B:24:0x007d, LOOP_END] */
+        /* JADX WARN: Removed duplicated region for block: B:26:0x006e  */
         @Override // com.android.systemui.statusbar.notification.collection.listbuilder.OnBeforeRenderListListener
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final void onBeforeRenderList(java.util.List r5) {
-            /*
-                r4 = this;
-                com.android.systemui.statusbar.notification.collection.render.GroupExpansionManagerImpl r4 = com.android.systemui.statusbar.notification.collection.render.GroupExpansionManagerImpl.this
-                int r0 = com.android.systemui.statusbar.notification.shared.NotificationBundleUi.$r8$clinit
-                java.util.Set r0 = r4.mExpandedGroups
-                java.util.HashSet r0 = (java.util.HashSet) r0
-                boolean r0 = r0.isEmpty()
-                if (r0 == 0) goto L10
-                goto L88
-            L10:
-                java.util.HashSet r0 = new java.util.HashSet
-                r0.<init>()
-                java.util.Iterator r5 = r5.iterator()
-            L19:
-                boolean r1 = r5.hasNext()
-                if (r1 == 0) goto L31
-                java.lang.Object r1 = r5.next()
-                com.android.systemui.statusbar.notification.collection.PipelineEntry r1 = (com.android.systemui.statusbar.notification.collection.PipelineEntry) r1
-                boolean r2 = r1 instanceof com.android.systemui.statusbar.notification.collection.GroupEntry
-                if (r2 == 0) goto L19
-                com.android.systemui.statusbar.notification.collection.GroupEntry r1 = (com.android.systemui.statusbar.notification.collection.GroupEntry) r1
-                com.android.systemui.statusbar.notification.collection.NotificationEntry r1 = r1.mSummary
-                r0.add(r1)
-                goto L19
-            L31:
-                int r5 = com.android.systemui.statusbar.notification.shared.NotificationBundleUi.$r8$clinit
-                java.util.Set r5 = r4.mExpandedGroups
-                if (r5 == 0) goto L6e
-                r1 = r5
-                java.util.HashSet r1 = (java.util.HashSet) r1
-                boolean r2 = r1.isEmpty()
-                if (r2 == 0) goto L41
-                goto L6e
-            L41:
-                boolean r2 = r0.isEmpty()
-                if (r2 == 0) goto L4d
-                java.util.HashSet r0 = new java.util.HashSet
-                r0.<init>(r5)
-                goto L73
-            L4d:
-                java.util.HashSet r5 = new java.util.HashSet
-                r5.<init>()
-                java.util.Iterator r1 = r1.iterator()
-            L56:
-                boolean r2 = r1.hasNext()
-                if (r2 == 0) goto L6c
-                java.lang.Object r2 = r1.next()
-                com.android.systemui.statusbar.notification.collection.NotificationEntry r2 = (com.android.systemui.statusbar.notification.collection.NotificationEntry) r2
-                boolean r3 = r0.contains(r2)
-                if (r3 != 0) goto L56
-                r5.add(r2)
-                goto L56
-            L6c:
-                r0 = r5
-                goto L73
-            L6e:
-                java.util.HashSet r0 = new java.util.HashSet
-                r0.<init>()
-            L73:
-                java.util.Iterator r5 = r0.iterator()
-            L77:
-                boolean r0 = r5.hasNext()
-                if (r0 == 0) goto L88
-                java.lang.Object r0 = r5.next()
-                com.android.systemui.statusbar.notification.collection.NotificationEntry r0 = (com.android.systemui.statusbar.notification.collection.NotificationEntry) r0
-                r1 = 0
-                r4.setGroupExpanded(r0, r1)
-                goto L77
-            L88:
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.notification.collection.render.GroupExpansionManagerImpl$$ExternalSyntheticLambda0.onBeforeRenderList(java.util.List):void");
+        public final void onBeforeRenderList(List list) {
+            HashSet hashSet;
+            GroupExpansionManagerImpl groupExpansionManagerImpl = this.f$0;
+            int i = NotificationBundleUi.$r8$clinit;
+            if (((HashSet) groupExpansionManagerImpl.mExpandedGroups).isEmpty()) {
+                return;
+            }
+            HashSet hashSet2 = new HashSet();
+            Iterator it = list.iterator();
+            while (it.hasNext()) {
+                PipelineEntry pipelineEntry = (PipelineEntry) it.next();
+                if (pipelineEntry instanceof GroupEntry) {
+                    hashSet2.add(((GroupEntry) pipelineEntry).mSummary);
+                }
+            }
+            int i2 = NotificationBundleUi.$r8$clinit;
+            Set set = groupExpansionManagerImpl.mExpandedGroups;
+            if (set != null) {
+                HashSet hashSet3 = (HashSet) set;
+                if (hashSet3.isEmpty()) {
+                    hashSet = new HashSet();
+                } else if (hashSet2.isEmpty()) {
+                    hashSet = new HashSet(set);
+                } else {
+                    HashSet hashSet4 = new HashSet();
+                    Iterator it2 = hashSet3.iterator();
+                    while (it2.hasNext()) {
+                        NotificationEntry notificationEntry = (NotificationEntry) it2.next();
+                        if (!hashSet2.contains(notificationEntry)) {
+                            hashSet4.add(notificationEntry);
+                        }
+                    }
+                    hashSet = hashSet4;
+                }
+            }
+            Iterator it3 = hashSet.iterator();
+            while (it3.hasNext()) {
+                groupExpansionManagerImpl.setGroupExpanded((NotificationEntry) it3.next(), false);
+            }
         }
     };
 
@@ -131,9 +98,9 @@ public class GroupExpansionManagerImpl implements GroupExpansionManager, Dumpabl
 
     @Override // com.android.systemui.Dumpable
     public final void dump(PrintWriter printWriter, String[] strArr) {
-        StringBuilder m = CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "NotificationEntryExpansion state:", "  mExpandedGroups: ");
-        m.append(((HashSet) this.mExpandedGroups).size());
-        printWriter.println(m.toString());
+        StringBuilder sbM = CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "NotificationEntryExpansion state:", "  mExpandedGroups: ");
+        sbM.append(((HashSet) this.mExpandedGroups).size());
+        printWriter.println(sbM.toString());
         Iterator it = ((HashSet) this.mExpandedGroups).iterator();
         while (it.hasNext()) {
             NotificationEntry notificationEntry = (NotificationEntry) it.next();
@@ -155,7 +122,7 @@ public class GroupExpansionManagerImpl implements GroupExpansionManager, Dumpabl
     }
 
     public final void setGroupExpanded(NotificationEntry notificationEntry, boolean z) {
-        boolean remove;
+        boolean zRemove;
         ExpandableNotificationRow expandableNotificationRow;
         NotificationChildrenContainer notificationChildrenContainer;
         int i = NotificationBundleUi.$r8$clinit;
@@ -172,16 +139,16 @@ public class GroupExpansionManagerImpl implements GroupExpansionManager, Dumpabl
             }
         }
         if (z) {
-            remove = ((HashSet) this.mExpandedGroups).add(groupSummary);
+            zRemove = ((HashSet) this.mExpandedGroups).add(groupSummary);
         } else {
-            remove = ((HashSet) this.mExpandedGroups).remove(groupSummary);
+            zRemove = ((HashSet) this.mExpandedGroups).remove(groupSummary);
             ((HashSet) this.mExpandedGroups).remove(notificationEntry);
         }
         if (notificationEntry.rowIsChildInGroup() && groupSummary != null && (expandableNotificationRow = groupSummary.row) != null && (notificationChildrenContainer = expandableNotificationRow.mChildrenContainer) != null) {
             notificationChildrenContainer.setChildrenExpanded(z);
             notificationChildrenContainer.updateHeaderForExpansion(z);
         }
-        if (remove) {
+        if (zRemove) {
             Iterator it = ((HashSet) this.mOnGroupChangeListeners).iterator();
             while (it.hasNext()) {
                 NotificationStackScrollLayoutController$$ExternalSyntheticLambda3 notificationStackScrollLayoutController$$ExternalSyntheticLambda3 = (NotificationStackScrollLayoutController$$ExternalSyntheticLambda3) it.next();

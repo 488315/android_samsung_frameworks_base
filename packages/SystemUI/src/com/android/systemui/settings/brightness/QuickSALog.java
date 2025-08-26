@@ -6,23 +6,22 @@ import android.provider.Settings;
 import com.android.systemui.util.DeviceType;
 import com.android.systemui.util.SystemUIAnalytics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class QuickSALog {
     public final SharedPreferences.Editor brightnessBarPrefEditor;
 
     public QuickSALog(Context context) {
         boolean z = false;
-        SharedPreferences.Editor edit = context.getSharedPreferences(SystemUIAnalytics.QUICK_PREF_NAME, 0).edit();
-        if (edit != null) {
+        SharedPreferences.Editor editorEdit = context.getSharedPreferences(SystemUIAnalytics.QUICK_PREF_NAME, 0).edit();
+        if (editorEdit != null) {
             if (!DeviceType.isLightSensorSupported(context) ? Settings.System.getIntForUser(context.getContentResolver(), "display_outdoor_mode", 0, -2) != 0 : Settings.System.getIntForUser(context.getContentResolver(), "screen_brightness_mode", 0, -2) != 0) {
                 z = true;
             }
-            edit.putBoolean(SystemUIAnalytics.STATUS_BRIGHTNESS_DETAIL_ADAPTIVE_BRIGHTNESS, z);
-            edit.commit();
+            editorEdit.putBoolean(SystemUIAnalytics.STATUS_BRIGHTNESS_DETAIL_ADAPTIVE_BRIGHTNESS, z);
+            editorEdit.commit();
         } else {
-            edit = null;
+            editorEdit = null;
         }
-        this.brightnessBarPrefEditor = edit;
+        this.brightnessBarPrefEditor = editorEdit;
     }
 }

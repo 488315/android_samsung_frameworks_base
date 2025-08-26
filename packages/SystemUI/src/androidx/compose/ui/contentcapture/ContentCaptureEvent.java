@@ -4,7 +4,6 @@ import androidx.compose.ui.platform.coreshims.ViewStructureCompat;
 import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class ContentCaptureEvent {
     public final int id;
@@ -31,9 +30,9 @@ final class ContentCaptureEvent {
     }
 
     public final int hashCode() {
-        int hashCode = (this.type.hashCode() + MoveResult$$ExternalSyntheticOutline0.m(Integer.hashCode(this.id) * 31, 31, this.timestamp)) * 31;
+        int iHashCode = (this.type.hashCode() + MoveResult$$ExternalSyntheticOutline0.m(Integer.hashCode(this.id) * 31, 31, this.timestamp)) * 31;
         ViewStructureCompat viewStructureCompat = this.structureCompat;
-        return hashCode + (viewStructureCompat == null ? 0 : viewStructureCompat.hashCode());
+        return iHashCode + (viewStructureCompat == null ? 0 : viewStructureCompat.hashCode());
     }
 
     public final String toString() {

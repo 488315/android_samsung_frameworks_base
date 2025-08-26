@@ -19,6 +19,7 @@ class FeatureUtil {
     private static final String LAST_MATCHED_CODE = "persist.sys.matched_code";
     private static final String LAST_SYSTEM_FEATURE_PATH = "persist.sys.nw_path";
     private static final String LOG_TAG = "FeatureUtil";
+    private static final String OMC_VERSION = "mdc.omc.update_version";
     private static final String PERSIST_SIMSLOT_PARENT_CANONICAL_ID = "persist.sys.sec_pcid";
     private static final String SALES_CODE = "ro.csc.sales_code";
     static final int UNKNOWN_CARRIER_ID = -1;
@@ -42,12 +43,12 @@ class FeatureUtil {
                 Log.w(LOG_TAG, "files does not exist from " + str);
                 return null;
             }
-            String decode = TextDecoder.decode(file, SemCarrierFeature.TEST);
-            if (TextUtils.isEmpty(decode)) {
+            String strDecode = TextDecoder.decode(file, SemCarrierFeature.TEST);
+            if (TextUtils.isEmpty(strDecode)) {
                 Log.w(LOG_TAG, "fail to decode feature from " + str);
                 return null;
             }
-            return new SecCarrier(decode, str2, i);
+            return new SecCarrier(strDecode, str2, i);
         } catch (Exception e) {
             Log.e(LOG_TAG, "fail to read feature from " + str + " with exception: " + e.toString());
             return null;
@@ -65,9 +66,9 @@ class FeatureUtil {
             }
             int mappedCidVersion = secCarrierFeature.getMappedCidVersion() / 10000;
             int mappedCidVersion2 = secCarrierFeature2.getMappedCidVersion() / 10000;
-            boolean isCarrierGroupValid = secCarrierFeature2.isCarrierGroupValid();
-            if (!isCarrierGroupValid || mappedCidVersion > mappedCidVersion2 || secCarrierFeature.getVersion() > secCarrierFeature2.getVersion()) {
-                Log.d(LOG_TAG, "delete updateFeature : " + isCarrierGroupValid);
+            boolean zIsCarrierGroupValid = secCarrierFeature2.isCarrierGroupValid();
+            if (!zIsCarrierGroupValid || mappedCidVersion > mappedCidVersion2 || secCarrierFeature.getVersion() > secCarrierFeature2.getVersion()) {
+                Log.d(LOG_TAG, "delete updateFeature : " + zIsCarrierGroupValid);
                 deleteUpdateFeature(i, z);
             } else if (secCarrierFeature.getVersion() != secCarrierFeature2.getVersion()) {
                 return secCarrierFeature2;
@@ -78,9 +79,9 @@ class FeatureUtil {
 
     private static boolean deleteDir(File file) {
         try {
-            File[] listFiles = file.listFiles();
-            if (file.isDirectory() && listFiles != null) {
-                for (File file2 : listFiles) {
+            File[] fileArrListFiles = file.listFiles();
+            if (file.isDirectory() && fileArrListFiles != null) {
+                for (File file2 : fileArrListFiles) {
                     deleteDir(file2);
                 }
             }
@@ -136,15 +137,19 @@ class FeatureUtil {
         if (TextUtils.isEmpty(str)) {
             return -1;
         }
-        String[] split = str.split(Session.SESSION_SEPARATION_CHAR_CHILD);
-        if (!TextUtils.isEmpty(split[0]) && !TextUtils.isEmpty(split[1])) {
+        String[] strArrSplit = str.split(Session.SESSION_SEPARATION_CHAR_CHILD);
+        if (!TextUtils.isEmpty(strArrSplit[0]) && !TextUtils.isEmpty(strArrSplit[1])) {
             try {
-                return Integer.valueOf(split[1]).intValue();
+                return Integer.valueOf(strArrSplit[1]).intValue();
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             }
         }
         return -1;
+    }
+
+    static String getOmcVersion() {
+        return SystemProperties.get(OMC_VERSION, "-1");
     }
 
     private static String getReadablePhoneIDName(int i) {

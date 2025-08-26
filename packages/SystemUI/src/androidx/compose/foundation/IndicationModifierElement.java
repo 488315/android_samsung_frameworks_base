@@ -6,7 +6,6 @@ import androidx.compose.ui.node.DelegatableNode;
 import androidx.compose.ui.node.ModifierNodeElement;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class IndicationModifierElement extends ModifierNodeElement<IndicationModifierNode> {
     public final IndicationNodeFactory indication;
@@ -40,9 +39,9 @@ final class IndicationModifierElement extends ModifierNodeElement<IndicationModi
     @Override // androidx.compose.ui.node.ModifierNodeElement
     public final void update(Modifier.Node node) {
         IndicationModifierNode indicationModifierNode = (IndicationModifierNode) node;
-        DelegatableNode create = this.indication.create(this.interactionSource);
+        DelegatableNode delegatableNodeCreate = this.indication.create(this.interactionSource);
         indicationModifierNode.undelegate(indicationModifierNode.indicationNode);
-        indicationModifierNode.indicationNode = create;
-        indicationModifierNode.delegate(create);
+        indicationModifierNode.indicationNode = delegatableNodeCreate;
+        indicationModifierNode.delegate(delegatableNodeCreate);
     }
 }

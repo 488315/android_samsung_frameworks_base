@@ -108,29 +108,29 @@ public final class ShortcutQueryWrapper extends LauncherApps.ShortcutQuery imple
     ShortcutQueryWrapper(Parcel parcel) {
         ArrayList arrayList;
         ArrayList arrayList2;
-        byte readByte = parcel.readByte();
-        long readLong = parcel.readLong();
-        String readString = (readByte & 2) == 0 ? null : parcel.readString();
-        if ((readByte & 4) != 0) {
+        byte b = parcel.readByte();
+        long j = parcel.readLong();
+        String string = (b & 2) == 0 ? null : parcel.readString();
+        if ((b & 4) != 0) {
             arrayList = new ArrayList();
             parcel.readStringList(arrayList);
         } else {
             arrayList = null;
         }
-        if ((readByte & 8) != 0) {
+        if ((b & 8) != 0) {
             arrayList2 = new ArrayList();
             parcel.readParcelableList(arrayList2, LocusId.class.getClassLoader(), LocusId.class);
         } else {
             arrayList2 = null;
         }
-        ComponentName componentName = (readByte & 16) == 0 ? null : (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-        int readInt = parcel.readInt();
-        this.mChangedSince = readLong;
-        this.mPackage = readString;
+        ComponentName componentName = (b & 16) == 0 ? null : (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
+        int i = parcel.readInt();
+        this.mChangedSince = j;
+        this.mPackage = string;
         this.mShortcutIds = arrayList;
         this.mLocusIds = arrayList2;
         this.mActivity = componentName;
-        this.mQueryFlags = readInt;
+        this.mQueryFlags = i;
         AnnotationValidations.validate((Class<? extends Annotation>) LauncherApps.ShortcutQuery.QueryFlags.class, (Annotation) null, this.mQueryFlags);
     }
 }

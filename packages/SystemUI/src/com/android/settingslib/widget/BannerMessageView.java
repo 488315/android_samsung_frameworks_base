@@ -1,6 +1,7 @@
 package com.android.settingslib.widget;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.TouchDelegate;
@@ -8,7 +9,6 @@ import android.view.View;
 import android.widget.LinearLayout;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class BannerMessageView extends LinearLayout {
     public Rect mTouchTargetForDismissButton;
@@ -18,25 +18,25 @@ public class BannerMessageView extends LinearLayout {
     }
 
     @Override // android.widget.LinearLayout, android.view.ViewGroup, android.view.View
-    public final void onLayout(boolean z, int i, int i2, int i3, int i4) {
+    public final void onLayout(boolean z, int i, int i2, int i3, int i4) throws Resources.NotFoundException {
         super.onLayout(z, i, i2, i3, i4);
         if (this.mTouchTargetForDismissButton != null) {
             return;
         }
-        View findViewById = findViewById(R.id.top_row);
-        View findViewById2 = findViewById(R.id.banner_dismiss_btn);
-        if (findViewById == null || findViewById2 == null || findViewById2.getVisibility() != 0) {
+        View viewFindViewById = findViewById(R.id.top_row);
+        View viewFindViewById2 = findViewById(R.id.banner_dismiss_btn);
+        if (viewFindViewById == null || viewFindViewById2 == null || viewFindViewById2.getVisibility() != 0) {
             return;
         }
         int dimensionPixelSize = getResources().getDimensionPixelSize(R.dimen.settingslib_preferred_minimum_touch_target);
-        int width = findViewById2.getWidth();
-        int height = findViewById2.getHeight();
+        int width = viewFindViewById2.getWidth();
+        int height = viewFindViewById2.getHeight();
         int i5 = width < dimensionPixelSize ? dimensionPixelSize - width : 0;
         int i6 = height < dimensionPixelSize ? dimensionPixelSize - height : 0;
         Rect rect = new Rect();
-        findViewById2.getHitRect(rect);
+        viewFindViewById2.getHitRect(rect);
         Rect rect2 = new Rect();
-        findViewById.getHitRect(rect2);
+        viewFindViewById.getHitRect(rect2);
         Rect rect3 = new Rect();
         this.mTouchTargetForDismissButton = rect3;
         int i7 = rect2.left + rect.left;
@@ -51,7 +51,7 @@ public class BannerMessageView extends LinearLayout {
         rect3.top = i9 - (i6 % 2 == 1 ? (i6 / 2) + 1 : i6 / 2);
         rect3.right = (i5 / 2) + i8;
         rect3.bottom = (i6 / 2) + i10;
-        setTouchDelegate(new TouchDelegate(this.mTouchTargetForDismissButton, findViewById2));
+        setTouchDelegate(new TouchDelegate(this.mTouchTargetForDismissButton, viewFindViewById2));
     }
 
     public BannerMessageView(Context context, AttributeSet attributeSet) {

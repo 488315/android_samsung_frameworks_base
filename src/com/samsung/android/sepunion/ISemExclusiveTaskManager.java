@@ -46,9 +46,9 @@ public interface ISemExclusiveTaskManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISemExclusiveTaskManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISemExclusiveTaskManager)) {
-                return (ISemExclusiveTaskManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISemExclusiveTaskManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISemExclusiveTaskManager)) {
+                return (ISemExclusiveTaskManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -75,9 +75,9 @@ public interface ISemExclusiveTaskManager extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                List<String> exclusiveTaskList = getExclusiveTaskList(readString);
+                List<String> exclusiveTaskList = getExclusiveTaskList(string);
                 parcel2.writeNoException();
                 parcel2.writeStringList(exclusiveTaskList);
                 return true;
@@ -103,17 +103,17 @@ public interface ISemExclusiveTaskManager extends IInterface {
 
             @Override // com.samsung.android.sepunion.ISemExclusiveTaskManager
             public List<String> getExclusiveTaskList(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISemExclusiveTaskManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(ISemExclusiveTaskManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -2,6 +2,7 @@ package android.app;
 
 import android.app.AlertDialog;
 import android.app.Notification;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -63,13 +64,13 @@ public final class RecoverableSecurityException extends SecurityException implem
         localDialog.setArguments(bundle);
         String str = "RecoverableSecurityException_" + this.mUserAction.getActionIntent().getCreatorUid();
         FragmentManager fragmentManager = activity.getFragmentManager();
-        FragmentTransaction beginTransaction = fragmentManager.beginTransaction();
-        Fragment findFragmentByTag = fragmentManager.findFragmentByTag(str);
-        if (findFragmentByTag != null) {
-            beginTransaction.remove(findFragmentByTag);
+        FragmentTransaction fragmentTransactionBeginTransaction = fragmentManager.beginTransaction();
+        Fragment fragmentFindFragmentByTag = fragmentManager.findFragmentByTag(str);
+        if (fragmentFindFragmentByTag != null) {
+            fragmentTransactionBeginTransaction.remove(fragmentFindFragmentByTag);
         }
-        beginTransaction.add(localDialog, str);
-        beginTransaction.commitAllowingStateLoss();
+        fragmentTransactionBeginTransaction.add(localDialog, str);
+        fragmentTransactionBeginTransaction.commitAllowingStateLoss();
     }
 
     public static class LocalDialog extends DialogFragment {
@@ -78,8 +79,8 @@ public final class RecoverableSecurityException extends SecurityException implem
             final RecoverableSecurityException recoverableSecurityException = (RecoverableSecurityException) getArguments().getParcelable(RecoverableSecurityException.TAG, RecoverableSecurityException.class);
             return new AlertDialog.Builder(getActivity()).setMessage(recoverableSecurityException.mUserMessage).setPositiveButton(recoverableSecurityException.mUserAction.getTitle(), new DialogInterface.OnClickListener() { // from class: android.app.RecoverableSecurityException$LocalDialog$$ExternalSyntheticLambda0
                 @Override // android.content.DialogInterface.OnClickListener
-                public final void onClick(DialogInterface dialogInterface, int i) {
-                    RecoverableSecurityException.this.mUserAction.getActionIntent().send();
+                public final void onClick(DialogInterface dialogInterface, int i) throws PendingIntent.CanceledException {
+                    recoverableSecurityException.mUserAction.getActionIntent().send();
                 }
             }).setNegativeButton(17039360, (DialogInterface.OnClickListener) null).create();
         }

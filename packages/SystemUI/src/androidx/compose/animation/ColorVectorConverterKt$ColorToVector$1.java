@@ -9,7 +9,6 @@ import androidx.compose.ui.graphics.colorspace.ColorSpaces;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Lambda;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class ColorVectorConverterKt$ColorToVector$1 extends Lambda implements Function1 {
     public static final ColorVectorConverterKt$ColorToVector$1 INSTANCE = new ColorVectorConverterKt$ColorToVector$1();
@@ -20,16 +19,16 @@ final class ColorVectorConverterKt$ColorToVector$1 extends Lambda implements Fun
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
         final ColorSpace colorSpace = (ColorSpace) obj;
         return VectorConvertersKt.TwoWayConverter(new Function1() { // from class: androidx.compose.animation.ColorVectorConverterKt$ColorToVector$1.1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj2) {
+            public final Object mo781invoke(Object obj2) {
                 long j = ((Color) obj2).value;
                 ColorSpaces.INSTANCE.getClass();
-                long m455convertvNxB06k = Color.m455convertvNxB06k(j, ColorSpaces.Oklab);
-                return new AnimationVector4D(Color.m457getAlphaimpl(m455convertvNxB06k), Color.m461getRedimpl(m455convertvNxB06k), Color.m460getGreenimpl(m455convertvNxB06k), Color.m458getBlueimpl(m455convertvNxB06k));
+                long jM457convertvNxB06k = Color.m457convertvNxB06k(j, ColorSpaces.Oklab);
+                return new AnimationVector4D(Color.m459getAlphaimpl(jM457convertvNxB06k), Color.m463getRedimpl(jM457convertvNxB06k), Color.m462getGreenimpl(jM457convertvNxB06k), Color.m460getBlueimpl(jM457convertvNxB06k));
             }
         }, new Function1() { // from class: androidx.compose.animation.ColorVectorConverterKt$ColorToVector$1.2
             {
@@ -38,7 +37,7 @@ final class ColorVectorConverterKt$ColorToVector$1 extends Lambda implements Fun
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj2) {
+            public final Object mo781invoke(Object obj2) {
                 AnimationVector4D animationVector4D = (AnimationVector4D) obj2;
                 float f = animationVector4D.v2;
                 if (f < 0.0f) {
@@ -61,7 +60,7 @@ final class ColorVectorConverterKt$ColorToVector$1 extends Lambda implements Fun
                 float f7 = f6 >= 0.0f ? f6 : 0.0f;
                 float f8 = f7 <= 1.0f ? f7 : 1.0f;
                 ColorSpaces.INSTANCE.getClass();
-                return Color.m454boximpl(Color.m455convertvNxB06k(ColorKt.Color(f, f2, f5, f8, ColorSpaces.Oklab), ColorSpace.this));
+                return Color.m456boximpl(Color.m457convertvNxB06k(ColorKt.Color(f, f2, f5, f8, ColorSpaces.Oklab), colorSpace));
             }
         });
     }

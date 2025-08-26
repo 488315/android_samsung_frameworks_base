@@ -3,11 +3,10 @@ package androidx.compose.ui.unit;
 import androidx.compose.ui.geometry.Rect;
 import androidx.compose.ui.unit.IntOffset;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class IntRectKt {
     /* renamed from: IntRect-VbeCjmY, reason: not valid java name */
-    public static final IntRect m858IntRectVbeCjmY(long j, long j2) {
+    public static final IntRect m860IntRectVbeCjmY(long j, long j2) {
         IntOffset.Companion companion = IntOffset.Companion;
         int i = (int) (j >> 32);
         int i2 = (int) (j & 4294967295L);

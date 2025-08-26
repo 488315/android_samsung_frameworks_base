@@ -181,12 +181,12 @@ public class Fragment implements ComponentCallbacks2, View.OnCreateContextMenuLi
         }
 
         SavedState(Parcel parcel, ClassLoader classLoader) {
-            Bundle readBundle = parcel.readBundle();
-            this.mState = readBundle;
-            if (classLoader == null || readBundle == null) {
+            Bundle bundle = parcel.readBundle();
+            this.mState = bundle;
+            if (classLoader == null || bundle == null) {
                 return;
             }
-            readBundle.setClassLoader(classLoader);
+            bundle.setClassLoader(classLoader);
         }
 
         @Override // android.os.Parcelable
@@ -206,19 +206,19 @@ public class Fragment implements ComponentCallbacks2, View.OnCreateContextMenuLi
         return instantiate(context, str, null);
     }
 
-    public static Fragment instantiate(Context context, String str, Bundle bundle) {
+    public static Fragment instantiate(Context context, String str, Bundle bundle) throws ClassNotFoundException {
         try {
             ArrayMap<String, Class<?>> arrayMap = sClassMap;
-            Class<?> cls = arrayMap.get(str);
-            if (cls == null) {
-                cls = context.getClassLoader().loadClass(str);
-                if (!Fragment.class.isAssignableFrom(cls)) {
+            Class<?> clsLoadClass = arrayMap.get(str);
+            if (clsLoadClass == null) {
+                clsLoadClass = context.getClassLoader().loadClass(str);
+                if (!Fragment.class.isAssignableFrom(clsLoadClass)) {
                     throw new InstantiationException("Trying to instantiate a class " + str + " that is not a Fragment", new ClassCastException());
                 }
-                arrayMap.put(str, cls);
+                arrayMap.put(str, clsLoadClass);
             }
             Class[] clsArr = new Class[0];
-            Fragment fragment = (Fragment) cls.getConstructor(null).newInstance(null);
+            Fragment fragment = (Fragment) clsLoadClass.getConstructor(null).newInstance(null);
             if (bundle != null) {
                 bundle.setClassLoader(fragment.getClass().getClassLoader());
                 fragment.setArguments(bundle);
@@ -331,8 +331,8 @@ public class Fragment implements ComponentCallbacks2, View.OnCreateContextMenuLi
         if (fragmentManager != null && fragmentManager2 != null && fragmentManager != fragmentManager2) {
             throw new IllegalArgumentException("Fragment " + fragment + " must share the same FragmentManager to be set as a target fragment");
         }
-        for (Fragment fragment2 = fragment; fragment2 != null; fragment2 = fragment2.getTargetFragment()) {
-            if (fragment2 == this) {
+        for (Fragment targetFragment = fragment; targetFragment != null; targetFragment = targetFragment.getTargetFragment()) {
+            if (targetFragment == this) {
                 throw new IllegalArgumentException("Setting " + fragment + " as the target of " + this + " would create a target cycle");
             }
         }
@@ -396,7 +396,7 @@ public class Fragment implements ComponentCallbacks2, View.OnCreateContextMenuLi
         return this.mFragmentManager;
     }
 
-    public final FragmentManager getChildFragmentManager() {
+    public final FragmentManager getChildFragmentManager() throws Resources.NotFoundException {
         if (this.mChildFragmentManager == null) {
             instantiateChildFragmentManager();
             int i = this.mState;
@@ -473,7 +473,7 @@ public class Fragment implements ComponentCallbacks2, View.OnCreateContextMenuLi
         }
     }
 
-    public void setUserVisibleHint(boolean z) {
+    public void setUserVisibleHint(boolean z) throws Resources.NotFoundException {
         Context context = getContext();
         FragmentManagerImpl fragmentManagerImpl = this.mFragmentManager;
         if (fragmentManagerImpl != null && fragmentManagerImpl.mHost != null) {
@@ -566,17 +566,17 @@ public class Fragment implements ComponentCallbacks2, View.OnCreateContextMenuLi
         return false;
     }
 
-    public LayoutInflater onGetLayoutInflater(Bundle bundle) {
+    public LayoutInflater onGetLayoutInflater(Bundle bundle) throws Resources.NotFoundException {
         FragmentHostCallback fragmentHostCallback = this.mHost;
         if (fragmentHostCallback == null) {
             throw new IllegalStateException("onGetLayoutInflater() cannot be executed until the Fragment is attached to the FragmentManager.");
         }
-        LayoutInflater onGetLayoutInflater = fragmentHostCallback.onGetLayoutInflater();
+        LayoutInflater layoutInflaterOnGetLayoutInflater = fragmentHostCallback.onGetLayoutInflater();
         if (this.mHost.onUseFragmentManagerInflaterFactory()) {
             getChildFragmentManager();
-            onGetLayoutInflater.setPrivateFactory(this.mChildFragmentManager.getLayoutInflaterFactory());
+            layoutInflaterOnGetLayoutInflater.setPrivateFactory(this.mChildFragmentManager.getLayoutInflaterFactory());
         }
-        return onGetLayoutInflater;
+        return layoutInflaterOnGetLayoutInflater;
     }
 
     public final LayoutInflater getLayoutInflater() {
@@ -584,10 +584,10 @@ public class Fragment implements ComponentCallbacks2, View.OnCreateContextMenuLi
         return layoutInflater == null ? performGetLayoutInflater(null) : layoutInflater;
     }
 
-    LayoutInflater performGetLayoutInflater(Bundle bundle) {
-        LayoutInflater onGetLayoutInflater = onGetLayoutInflater(bundle);
-        this.mLayoutInflater = onGetLayoutInflater;
-        return onGetLayoutInflater;
+    LayoutInflater performGetLayoutInflater(Bundle bundle) throws Resources.NotFoundException {
+        LayoutInflater layoutInflaterOnGetLayoutInflater = onGetLayoutInflater(bundle);
+        this.mLayoutInflater = layoutInflaterOnGetLayoutInflater;
+        return layoutInflaterOnGetLayoutInflater;
     }
 
     @Deprecated
@@ -600,15 +600,15 @@ public class Fragment implements ComponentCallbacks2, View.OnCreateContextMenuLi
         boolean z2;
         onInflate(attributeSet, bundle);
         this.mCalled = true;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.Fragment);
-        setEnterTransition(loadTransition(context, obtainStyledAttributes, getEnterTransition(), null, 4));
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.Fragment);
+        setEnterTransition(loadTransition(context, typedArrayObtainStyledAttributes, getEnterTransition(), null, 4));
         Transition returnTransition = getReturnTransition();
         Transition transition = USE_DEFAULT_TRANSITION;
-        setReturnTransition(loadTransition(context, obtainStyledAttributes, returnTransition, transition, 6));
-        setExitTransition(loadTransition(context, obtainStyledAttributes, getExitTransition(), null, 3));
-        setReenterTransition(loadTransition(context, obtainStyledAttributes, getReenterTransition(), transition, 8));
-        setSharedElementEnterTransition(loadTransition(context, obtainStyledAttributes, getSharedElementEnterTransition(), null, 5));
-        setSharedElementReturnTransition(loadTransition(context, obtainStyledAttributes, getSharedElementReturnTransition(), transition, 7));
+        setReturnTransition(loadTransition(context, typedArrayObtainStyledAttributes, returnTransition, transition, 6));
+        setExitTransition(loadTransition(context, typedArrayObtainStyledAttributes, getExitTransition(), null, 3));
+        setReenterTransition(loadTransition(context, typedArrayObtainStyledAttributes, getReenterTransition(), transition, 8));
+        setSharedElementEnterTransition(loadTransition(context, typedArrayObtainStyledAttributes, getSharedElementEnterTransition(), null, 5));
+        setSharedElementReturnTransition(loadTransition(context, typedArrayObtainStyledAttributes, getSharedElementReturnTransition(), transition, 7));
         AnimationInfo animationInfo = this.mAnimationInfo;
         if (animationInfo == null) {
             z = false;
@@ -618,12 +618,12 @@ public class Fragment implements ComponentCallbacks2, View.OnCreateContextMenuLi
             z2 = this.mAnimationInfo.mAllowReturnTransitionOverlap != null;
         }
         if (!z) {
-            setAllowEnterTransitionOverlap(obtainStyledAttributes.getBoolean(9, true));
+            setAllowEnterTransitionOverlap(typedArrayObtainStyledAttributes.getBoolean(9, true));
         }
         if (!z2) {
-            setAllowReturnTransitionOverlap(obtainStyledAttributes.getBoolean(10, true));
+            setAllowReturnTransitionOverlap(typedArrayObtainStyledAttributes.getBoolean(10, true));
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
         FragmentHostCallback fragmentHostCallback = this.mHost;
         Activity activity = fragmentHostCallback != null ? fragmentHostCallback.getActivity() : null;
         if (activity != null) {
@@ -652,7 +652,7 @@ public class Fragment implements ComponentCallbacks2, View.OnCreateContextMenuLi
         this.mCalled = true;
     }
 
-    public void onCreate(Bundle bundle) {
+    public void onCreate(Bundle bundle) throws Resources.NotFoundException {
         this.mCalled = true;
         Context context = getContext();
         if ((context != null ? context.getApplicationInfo().targetSdkVersion : 0) >= 24) {
@@ -790,11 +790,11 @@ public class Fragment implements ComponentCallbacks2, View.OnCreateContextMenuLi
         getActivity().onCreateContextMenu(contextMenu, view, contextMenuInfo);
     }
 
-    public void registerForContextMenu(View view) {
+    public void registerForContextMenu(View view) throws Resources.NotFoundException {
         view.setOnCreateContextMenuListener(this);
     }
 
-    public void unregisterForContextMenu(View view) {
+    public void unregisterForContextMenu(View view) throws Resources.NotFoundException {
         view.setOnCreateContextMenuListener(null);
     }
 
@@ -943,7 +943,7 @@ public class Fragment implements ComponentCallbacks2, View.OnCreateContextMenuLi
             this.mFragmentManager.mHost.getHandler().postAtFrontOfQueue(new Runnable() { // from class: android.app.Fragment$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    Fragment.this.callStartTransitionListener();
+                    this.f$0.callStartTransitionListener();
                 }
             });
         } else {
@@ -1330,13 +1330,13 @@ public class Fragment implements ComponentCallbacks2, View.OnCreateContextMenuLi
     }
 
     void performSaveInstanceState(Bundle bundle) {
-        Parcelable saveAllState;
+        Parcelable parcelableSaveAllState;
         onSaveInstanceState(bundle);
         FragmentManagerImpl fragmentManagerImpl = this.mChildFragmentManager;
-        if (fragmentManagerImpl == null || (saveAllState = fragmentManagerImpl.saveAllState()) == null) {
+        if (fragmentManagerImpl == null || (parcelableSaveAllState = fragmentManagerImpl.saveAllState()) == null) {
             return;
         }
-        bundle.putParcelable("android:fragments", saveAllState);
+        bundle.putParcelable("android:fragments", parcelableSaveAllState);
     }
 
     void performPause() {
@@ -1446,7 +1446,7 @@ public class Fragment implements ComponentCallbacks2, View.OnCreateContextMenuLi
         }
     }
 
-    private static Transition loadTransition(Context context, TypedArray typedArray, Transition transition, Transition transition2, int i) {
+    private static Transition loadTransition(Context context, TypedArray typedArray, Transition transition, Transition transition2, int i) throws Resources.NotFoundException {
         if (transition != transition2) {
             return transition;
         }
@@ -1454,11 +1454,11 @@ public class Fragment implements ComponentCallbacks2, View.OnCreateContextMenuLi
         if (resourceId == 0 || resourceId == 17760256) {
             return transition2;
         }
-        Transition inflateTransition = TransitionInflater.from(context).inflateTransition(resourceId);
-        if ((inflateTransition instanceof TransitionSet) && ((TransitionSet) inflateTransition).getTransitionCount() == 0) {
+        Transition transitionInflateTransition = TransitionInflater.from(context).inflateTransition(resourceId);
+        if ((transitionInflateTransition instanceof TransitionSet) && ((TransitionSet) transitionInflateTransition).getTransitionCount() == 0) {
             return null;
         }
-        return inflateTransition;
+        return transitionInflateTransition;
     }
 
     private AnimationInfo ensureAnimationInfo() {

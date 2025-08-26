@@ -74,7 +74,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class LockscreenSmartspaceController implements Dumpable {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -120,7 +119,6 @@ public final class LockscreenSmartspaceController implements Dumpable {
     public final LockscreenSmartspaceController$userTrackerCallback$1 userTrackerCallback;
     public final BcSmartspaceDataPlugin weatherPlugin;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -130,7 +128,6 @@ public final class LockscreenSmartspaceController implements Dumpable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SmartspaceTimeChangedDelegate implements BcSmartspaceDataPlugin.TimeChangedDelegate {
         public final KeyguardUpdateMonitor keyguardUpdateMonitor;
         public LockscreenSmartspaceController$SmartspaceTimeChangedDelegate$register$1 keyguardUpdateMonitorCallback;
@@ -194,12 +191,12 @@ public final class LockscreenSmartspaceController implements Dumpable {
         this.uiExecutor = executor;
         this.bgExecutor = executor2;
         this.bgHandler = handler2;
-        BcSmartspaceDataPlugin orElse = optional.orElse(null);
-        this.datePlugin = orElse;
-        BcSmartspaceDataPlugin orElse2 = optional2.orElse(null);
-        this.weatherPlugin = orElse2;
-        BcSmartspaceDataPlugin orElse3 = optional3.orElse(null);
-        this.plugin = orElse3;
+        BcSmartspaceDataPlugin bcSmartspaceDataPluginOrElse = optional.orElse(null);
+        this.datePlugin = bcSmartspaceDataPluginOrElse;
+        BcSmartspaceDataPlugin bcSmartspaceDataPluginOrElse2 = optional2.orElse(null);
+        this.weatherPlugin = bcSmartspaceDataPluginOrElse2;
+        BcSmartspaceDataPlugin bcSmartspaceDataPluginOrElse3 = optional3.orElse(null);
+        this.plugin = bcSmartspaceDataPluginOrElse3;
         this.configPlugin = optional4.orElse(null);
         this.recentSmartspaceData = new LinkedList();
         this.smartspaceViews = new LinkedHashSet();
@@ -211,24 +208,24 @@ public final class LockscreenSmartspaceController implements Dumpable {
             @Override // android.view.View.OnAttachStateChangeListener
             public final void onViewAttachedToWindow(View view) {
                 BcSmartspaceDataPlugin.SmartspaceView smartspaceView = (BcSmartspaceDataPlugin.SmartspaceView) view;
-                LockscreenSmartspaceController lockscreenSmartspaceController = LockscreenSmartspaceController.this;
+                LockscreenSmartspaceController lockscreenSmartspaceController = this.this$0;
                 int i = LockscreenSmartspaceController.$r8$clinit;
                 lockscreenSmartspaceController.getClass();
                 smartspaceView.setSplitShadeEnabled(false);
-                LockscreenSmartspaceController.this.smartspaceViews.add(smartspaceView);
-                LockscreenSmartspaceController.this.connectSession();
-                LockscreenSmartspaceController.access$updateTextColorFromWallpaper(LockscreenSmartspaceController.this);
-                LockscreenSmartspaceController lockscreenSmartspaceController2 = LockscreenSmartspaceController.this;
+                this.this$0.smartspaceViews.add(smartspaceView);
+                this.this$0.connectSession();
+                LockscreenSmartspaceController.access$updateTextColorFromWallpaper(this.this$0);
+                LockscreenSmartspaceController lockscreenSmartspaceController2 = this.this$0;
                 lockscreenSmartspaceController2.statusBarStateListener.onDozeAmountChanged(0.0f, lockscreenSmartspaceController2.statusBarStateController.getDozeAmount());
-                LockscreenSmartspaceController.this.getClass();
+                this.this$0.getClass();
             }
 
             /* JADX WARN: Multi-variable type inference failed */
             @Override // android.view.View.OnAttachStateChangeListener
             public final void onViewDetachedFromWindow(View view) {
                 BcSmartspaceDataPlugin.SmartspaceView smartspaceView = (BcSmartspaceDataPlugin.SmartspaceView) view;
-                LockscreenSmartspaceController.this.smartspaceViews.remove(smartspaceView);
-                RegionSampler regionSampler = (RegionSampler) ((LinkedHashMap) LockscreenSmartspaceController.this.regionSamplers).get(view);
+                this.this$0.smartspaceViews.remove(smartspaceView);
+                RegionSampler regionSampler = (RegionSampler) ((LinkedHashMap) this.this$0.regionSamplers).get(view);
                 if (regionSampler != null) {
                     WallpaperManager wallpaperManager = regionSampler.wallpaperManager;
                     if (wallpaperManager != null) {
@@ -236,50 +233,50 @@ public final class LockscreenSmartspaceController implements Dumpable {
                     }
                     regionSampler.sampledView.removeOnLayoutChangeListener(regionSampler.layoutChangedListener);
                 }
-                LockscreenSmartspaceController.this.regionSamplers.remove(smartspaceView);
-                if (LockscreenSmartspaceController.this.smartspaceViews.isEmpty()) {
-                    LockscreenSmartspaceController.this.disconnect();
+                this.this$0.regionSamplers.remove(smartspaceView);
+                if (this.this$0.smartspaceViews.isEmpty()) {
+                    this.this$0.disconnect();
                 }
             }
         };
         this.sessionListener = new SmartspaceSession.OnTargetsAvailableListener() { // from class: com.android.systemui.statusbar.lockscreen.LockscreenSmartspaceController$sessionListener$1
             public final void onTargetsAvailable(List list) {
-                WeatherData weatherData;
-                Object obj;
+                WeatherData weatherDataFromBundle;
+                Object next;
                 Bundle extras;
-                LockscreenSmartspaceController.this.execution.assertIsMainThread();
-                BcSmartspaceDataPlugin bcSmartspaceDataPlugin = LockscreenSmartspaceController.this.weatherPlugin;
+                this.this$0.execution.assertIsMainThread();
+                BcSmartspaceDataPlugin bcSmartspaceDataPlugin = this.this$0.weatherPlugin;
                 if (bcSmartspaceDataPlugin != null) {
                     bcSmartspaceDataPlugin.onTargetsAvailable(list);
                 }
-                Instant ofEpochMilli = Instant.ofEpochMilli(LockscreenSmartspaceController.this.systemClock.currentTimeMillis());
+                Instant instantOfEpochMilli = Instant.ofEpochMilli(this.this$0.systemClock.currentTimeMillis());
                 List list2 = list;
                 Iterator it = list2.iterator();
                 while (true) {
-                    weatherData = null;
+                    weatherDataFromBundle = null;
                     if (!it.hasNext()) {
-                        obj = null;
+                        next = null;
                         break;
                     }
-                    obj = it.next();
-                    SmartspaceTarget smartspaceTarget = (SmartspaceTarget) obj;
-                    if (smartspaceTarget.getFeatureType() == 1 && ofEpochMilli.isAfter(Instant.ofEpochMilli(smartspaceTarget.getCreationTimeMillis())) && ofEpochMilli.isBefore(Instant.ofEpochMilli(smartspaceTarget.getExpiryTimeMillis()))) {
+                    next = it.next();
+                    SmartspaceTarget smartspaceTarget = (SmartspaceTarget) next;
+                    if (smartspaceTarget.getFeatureType() == 1 && instantOfEpochMilli.isAfter(Instant.ofEpochMilli(smartspaceTarget.getCreationTimeMillis())) && instantOfEpochMilli.isBefore(Instant.ofEpochMilli(smartspaceTarget.getExpiryTimeMillis()))) {
                         break;
                     }
                 }
-                SmartspaceTarget smartspaceTarget2 = (SmartspaceTarget) obj;
+                SmartspaceTarget smartspaceTarget2 = (SmartspaceTarget) next;
                 if (smartspaceTarget2 != null) {
                     SmartspaceAction headerAction = smartspaceTarget2.getHeaderAction();
                     final Intent intent = headerAction != null ? headerAction.getIntent() : null;
                     SmartspaceAction baseAction = smartspaceTarget2.getBaseAction();
                     if (baseAction != null && (extras = baseAction.getExtras()) != null) {
-                        final LockscreenSmartspaceController lockscreenSmartspaceController = LockscreenSmartspaceController.this;
-                        weatherData = WeatherData.Companion.fromBundle(extras, new Function1() { // from class: com.android.systemui.statusbar.lockscreen.LockscreenSmartspaceController$sessionListener$1$$ExternalSyntheticLambda0
+                        final LockscreenSmartspaceController lockscreenSmartspaceController = this.this$0;
+                        weatherDataFromBundle = WeatherData.Companion.fromBundle(extras, new Function1() { // from class: com.android.systemui.statusbar.lockscreen.LockscreenSmartspaceController$sessionListener$1$$ExternalSyntheticLambda0
                             @Override // kotlin.jvm.functions.Function1
                             /* renamed from: invoke */
-                            public final Object mo779invoke(Object obj2) {
+                            public final Object mo781invoke(Object obj) {
                                 Intent intent2 = intent;
-                                LockscreenSmartspaceController lockscreenSmartspaceController2 = LockscreenSmartspaceController.this;
+                                LockscreenSmartspaceController lockscreenSmartspaceController2 = lockscreenSmartspaceController;
                                 if (!lockscreenSmartspaceController2.falsingManager.isFalseTap(1)) {
                                     lockscreenSmartspaceController2.activityStarter.startActivity(intent2, true, (ActivityTransitionAnimator.Controller) null, false);
                                 }
@@ -287,36 +284,32 @@ public final class LockscreenSmartspaceController implements Dumpable {
                             }
                         });
                     }
-                    if (weatherData != null) {
-                        KeyguardUpdateMonitor keyguardUpdateMonitor2 = LockscreenSmartspaceController.this.keyguardUpdateMonitor;
-                        keyguardUpdateMonitor2.mHandler.post(new KeyguardUpdateMonitor$$ExternalSyntheticLambda24(keyguardUpdateMonitor2, weatherData, 1));
+                    if (weatherDataFromBundle != null) {
+                        KeyguardUpdateMonitor keyguardUpdateMonitor2 = this.this$0.keyguardUpdateMonitor;
+                        keyguardUpdateMonitor2.mHandler.post(new KeyguardUpdateMonitor$$ExternalSyntheticLambda24(keyguardUpdateMonitor2, weatherDataFromBundle, 1));
                     }
                 }
-                LockscreenSmartspaceController lockscreenSmartspaceController2 = LockscreenSmartspaceController.this;
+                LockscreenSmartspaceController lockscreenSmartspaceController2 = this.this$0;
                 ArrayList arrayList = new ArrayList();
-                for (Object obj2 : list2) {
-                    SmartspaceTarget smartspaceTarget3 = (SmartspaceTarget) obj2;
+                for (Object obj : list2) {
+                    SmartspaceTarget smartspaceTarget3 = (SmartspaceTarget) obj;
                     if (!lockscreenSmartspaceController2.isDateWeatherDecoupled || smartspaceTarget3.getFeatureType() != 1) {
                         if (lockscreenSmartspaceController2.showNotifications) {
                             UserHandle userHandle = smartspaceTarget3.getUserHandle();
                             UserTrackerImpl userTrackerImpl = (UserTrackerImpl) lockscreenSmartspaceController2.userTracker;
                             if (Intrinsics.areEqual(userHandle, userTrackerImpl.getUserHandle())) {
-                                if (smartspaceTarget3.isSensitive() && !lockscreenSmartspaceController2.showSensitiveContentForCurrentUser) {
+                                if (!smartspaceTarget3.isSensitive() || lockscreenSmartspaceController2.showSensitiveContentForCurrentUser) {
+                                    arrayList.add(obj);
                                 }
-                                arrayList.add(obj2);
-                            } else if (Intrinsics.areEqual(userHandle, lockscreenSmartspaceController2.managedUserHandle)) {
-                                if (userTrackerImpl.getUserHandle().getIdentifier() == 0) {
-                                    if (smartspaceTarget3.isSensitive() && !lockscreenSmartspaceController2.showSensitiveContentForManagedUser) {
-                                    }
-                                    arrayList.add(obj2);
-                                }
+                            } else if (Intrinsics.areEqual(userHandle, lockscreenSmartspaceController2.managedUserHandle) && userTrackerImpl.getUserHandle().getIdentifier() == 0 && (!smartspaceTarget3.isSensitive() || lockscreenSmartspaceController2.showSensitiveContentForManagedUser)) {
+                                arrayList.add(obj);
                             }
                         } else if (smartspaceTarget3.getFeatureType() == 1) {
-                            arrayList.add(obj2);
+                            arrayList.add(obj);
                         }
                     }
                 }
-                LockscreenSmartspaceController lockscreenSmartspaceController3 = LockscreenSmartspaceController.this;
+                LockscreenSmartspaceController lockscreenSmartspaceController3 = this.this$0;
                 synchronized (lockscreenSmartspaceController3.recentSmartspaceData) {
                     ((LinkedList) lockscreenSmartspaceController3.recentSmartspaceData).offerLast(arrayList);
                     if (((LinkedList) lockscreenSmartspaceController3.recentSmartspaceData).size() > 5) {
@@ -324,7 +317,7 @@ public final class LockscreenSmartspaceController implements Dumpable {
                     }
                     Unit unit = Unit.INSTANCE;
                 }
-                BcSmartspaceDataPlugin bcSmartspaceDataPlugin2 = LockscreenSmartspaceController.this.plugin;
+                BcSmartspaceDataPlugin bcSmartspaceDataPlugin2 = this.this$0.plugin;
                 if (bcSmartspaceDataPlugin2 != null) {
                     bcSmartspaceDataPlugin2.onTargetsAvailable(arrayList);
                 }
@@ -333,7 +326,7 @@ public final class LockscreenSmartspaceController implements Dumpable {
         this.userTrackerCallback = new UserTracker.Callback() { // from class: com.android.systemui.statusbar.lockscreen.LockscreenSmartspaceController$userTrackerCallback$1
             @Override // com.android.systemui.settings.UserTracker.Callback
             public final void onUserChanged(int i, Context context2) {
-                LockscreenSmartspaceController lockscreenSmartspaceController = LockscreenSmartspaceController.this;
+                LockscreenSmartspaceController lockscreenSmartspaceController = this.this$0;
                 lockscreenSmartspaceController.execution.assertIsMainThread();
                 lockscreenSmartspaceController.reloadSmartspace();
             }
@@ -341,14 +334,14 @@ public final class LockscreenSmartspaceController implements Dumpable {
         this.settingsObserver = new ContentObserver(handler) { // from class: com.android.systemui.statusbar.lockscreen.LockscreenSmartspaceController$settingsObserver$1
             @Override // android.database.ContentObserver
             public final void onChange(boolean z, Uri uri) {
-                LockscreenSmartspaceController.this.execution.assertIsMainThread();
-                LockscreenSmartspaceController.this.reloadSmartspace();
+                this.this$0.execution.assertIsMainThread();
+                this.this$0.reloadSmartspace();
             }
         };
         this.configChangeListener = new ConfigurationController.ConfigurationListener() { // from class: com.android.systemui.statusbar.lockscreen.LockscreenSmartspaceController$configChangeListener$1
             @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
             public final void onThemeChanged() {
-                LockscreenSmartspaceController lockscreenSmartspaceController = LockscreenSmartspaceController.this;
+                LockscreenSmartspaceController lockscreenSmartspaceController = this.this$0;
                 lockscreenSmartspaceController.execution.assertIsMainThread();
                 LockscreenSmartspaceController.access$updateTextColorFromWallpaper(lockscreenSmartspaceController);
             }
@@ -358,13 +351,13 @@ public final class LockscreenSmartspaceController implements Dumpable {
             @Override // com.android.systemui.statusbar.policy.DeviceProvisionedController.DeviceProvisionedListener
             public final void onDeviceProvisionedChanged() {
                 int i = LockscreenSmartspaceController.$r8$clinit;
-                LockscreenSmartspaceController.this.connectSession();
+                this.this$0.connectSession();
             }
 
             @Override // com.android.systemui.statusbar.policy.DeviceProvisionedController.DeviceProvisionedListener
             public final void onUserSetupChanged() {
                 int i = LockscreenSmartspaceController.$r8$clinit;
-                LockscreenSmartspaceController.this.connectSession();
+                this.this$0.connectSession();
             }
         };
         this.deviceProvisionedListener = r1;
@@ -372,7 +365,7 @@ public final class LockscreenSmartspaceController implements Dumpable {
             @Override // com.android.systemui.statusbar.phone.KeyguardBypassController.OnBypassStateChangedListener
             public final void onBypassStateChanged(boolean z) {
                 int i = LockscreenSmartspaceController.$r8$clinit;
-                LockscreenSmartspaceController lockscreenSmartspaceController = LockscreenSmartspaceController.this;
+                LockscreenSmartspaceController lockscreenSmartspaceController = this.this$0;
                 boolean bypassEnabled = lockscreenSmartspaceController.bypassController.getBypassEnabled();
                 Iterator it = lockscreenSmartspaceController.smartspaceViews.iterator();
                 while (it.hasNext()) {
@@ -383,7 +376,7 @@ public final class LockscreenSmartspaceController implements Dumpable {
         new WakefulnessLifecycle.Observer() { // from class: com.android.systemui.statusbar.lockscreen.LockscreenSmartspaceController$wakefulnessLifecycleObserver$1
             @Override // com.android.systemui.keyguard.WakefulnessLifecycle.Observer
             public final void onFinishedGoingToSleep() {
-                Iterator it = LockscreenSmartspaceController.this.smartspaceViews.iterator();
+                Iterator it = this.this$0.smartspaceViews.iterator();
                 while (it.hasNext()) {
                     ((BcSmartspaceDataPlugin.SmartspaceView) it.next()).setScreenOn(false);
                 }
@@ -391,7 +384,7 @@ public final class LockscreenSmartspaceController implements Dumpable {
 
             @Override // com.android.systemui.keyguard.WakefulnessLifecycle.Observer
             public final void onStartedWakingUp() {
-                Iterator it = LockscreenSmartspaceController.this.smartspaceViews.iterator();
+                Iterator it = this.this$0.smartspaceViews.iterator();
                 while (it.hasNext()) {
                     ((BcSmartspaceDataPlugin.SmartspaceView) it.next()).setScreenOn(true);
                 }
@@ -400,8 +393,8 @@ public final class LockscreenSmartspaceController implements Dumpable {
         ((DeviceProvisionedControllerImpl) deviceProvisionedController).addCallback(r1);
         dumpManager.registerDumpable(this);
         boolean z = false;
-        this.isEnabled = orElse3 != null;
-        if (orElse != null && orElse2 != null) {
+        this.isEnabled = bcSmartspaceDataPluginOrElse3 != null;
+        if (bcSmartspaceDataPluginOrElse != null && bcSmartspaceDataPluginOrElse2 != null) {
             z = true;
         }
         this.isDateWeatherDecoupled = z;
@@ -424,9 +417,9 @@ public final class LockscreenSmartspaceController implements Dumpable {
         if (!this.isDateWeatherDecoupled) {
             throw new RuntimeException("Cannot build date view when not decoupled");
         }
-        View buildView = buildView("date_view", viewGroup, this.datePlugin, null);
+        View viewBuildView = buildView("date_view", viewGroup, this.datePlugin, null);
         connectSession();
-        return buildView;
+        return viewBuildView;
     }
 
     /* JADX WARN: Multi-variable type inference failed */
@@ -442,7 +435,7 @@ public final class LockscreenSmartspaceController implements Dumpable {
         view.setUiSurface(BcSmartspaceDataPlugin.UI_SURFACE_LOCK_SCREEN_AOD);
         view.setTimeChangedDelegate(new SmartspaceTimeChangedDelegate(this.keyguardUpdateMonitor));
         view.registerDataProvider(bcSmartspaceDataPlugin);
-        view.setIntentStarter(new BcSmartspaceDataPlugin.IntentStarter() { // from class: com.android.systemui.statusbar.lockscreen.LockscreenSmartspaceController$buildView$2
+        view.setIntentStarter(new BcSmartspaceDataPlugin.IntentStarter() { // from class: com.android.systemui.statusbar.lockscreen.LockscreenSmartspaceController.buildView.2
             @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin.IntentStarter
             public final void startIntent(View view2, Intent intent, boolean z) {
                 LockscreenSmartspaceController lockscreenSmartspaceController = LockscreenSmartspaceController.this;
@@ -454,7 +447,7 @@ public final class LockscreenSmartspaceController implements Dumpable {
             }
 
             @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin.IntentStarter
-            public final void startPendingIntent(View view2, PendingIntent pendingIntent, boolean z) {
+            public final void startPendingIntent(View view2, PendingIntent pendingIntent, boolean z) throws PendingIntent.CanceledException {
                 if (z) {
                     pendingIntent.send(ActivityOptions.makeBasic().setPendingIntentBackgroundActivityStartMode(1).toBundle());
                 } else {
@@ -467,9 +460,9 @@ public final class LockscreenSmartspaceController implements Dumpable {
         View view2 = (View) view;
         view2.setTag(R.id.tag_smartspace_view, new Object());
         view2.addOnAttachStateChangeListener(this.stateChangeListener);
-        SmartspaceViewModel create = this.smartspaceViewModelFactory.create(str);
+        SmartspaceViewModel smartspaceViewModelCreate = this.smartspaceViewModelFactory.create(str);
         SmartspaceViewBinder.INSTANCE.getClass();
-        SmartspaceViewBinder.bind(view, create);
+        SmartspaceViewBinder.bind(view, smartspaceViewModelCreate);
         return view2;
     }
 
@@ -491,12 +484,12 @@ public final class LockscreenSmartspaceController implements Dumpable {
         DeviceProvisionedControllerImpl deviceProvisionedControllerImpl = (DeviceProvisionedControllerImpl) this.deviceProvisionedController;
         if (deviceProvisionedControllerImpl.deviceProvisioned.get() && deviceProvisionedControllerImpl.isCurrentUserSetup()) {
             SmartspaceManager smartspaceManager2 = this.userSmartspaceManager;
-            SmartspaceSession createSmartspaceSession = smartspaceManager2 != null ? smartspaceManager2.createSmartspaceSession(new SmartspaceConfig.Builder(((UserTrackerImpl) userTracker).getUserContext(), BcSmartspaceDataPlugin.UI_SURFACE_LOCK_SCREEN_AOD).build()) : null;
+            SmartspaceSession smartspaceSessionCreateSmartspaceSession = smartspaceManager2 != null ? smartspaceManager2.createSmartspaceSession(new SmartspaceConfig.Builder(((UserTrackerImpl) userTracker).getUserContext(), BcSmartspaceDataPlugin.UI_SURFACE_LOCK_SCREEN_AOD).build()) : null;
             Log.d("LockscreenSmartspaceController", "Starting smartspace session for lockscreen");
-            if (createSmartspaceSession != null) {
-                createSmartspaceSession.addOnTargetsAvailableListener(this.uiExecutor, this.sessionListener);
+            if (smartspaceSessionCreateSmartspaceSession != null) {
+                smartspaceSessionCreateSmartspaceSession.addOnTargetsAvailableListener(this.uiExecutor, this.sessionListener);
             }
-            this.session = createSmartspaceSession;
+            this.session = smartspaceSessionCreateSmartspaceSession;
             deviceProvisionedControllerImpl.removeCallback(this.deviceProvisionedListener);
             ((UserTrackerImpl) userTracker).addCallback(this.userTrackerCallback, this.uiExecutor);
             ContentResolver contentResolver = this.contentResolver;
@@ -511,7 +504,7 @@ public final class LockscreenSmartspaceController implements Dumpable {
             KeyguardBypassController keyguardBypassController = this.bypassController;
             keyguardBypassController.registerOnBypassStateChangedListener(lockscreenSmartspaceController$bypassStateChangedListener$1);
             if (bcSmartspaceDataPlugin3 != null) {
-                bcSmartspaceDataPlugin3.registerSmartspaceEventNotifier(new BcSmartspaceDataPlugin.SmartspaceEventNotifier() { // from class: com.android.systemui.statusbar.lockscreen.LockscreenSmartspaceController$connectSession$1
+                bcSmartspaceDataPlugin3.registerSmartspaceEventNotifier(new BcSmartspaceDataPlugin.SmartspaceEventNotifier() { // from class: com.android.systemui.statusbar.lockscreen.LockscreenSmartspaceController.connectSession.1
                     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin.SmartspaceEventNotifier
                     public final void notifySmartspaceEvent(SmartspaceTargetEvent smartspaceTargetEvent) {
                         SmartspaceSession smartspaceSession = LockscreenSmartspaceController.this.session;
@@ -522,7 +515,7 @@ public final class LockscreenSmartspaceController implements Dumpable {
                 });
             }
             if (bcSmartspaceDataPlugin2 != null) {
-                bcSmartspaceDataPlugin2.registerSmartspaceEventNotifier(new BcSmartspaceDataPlugin.SmartspaceEventNotifier() { // from class: com.android.systemui.statusbar.lockscreen.LockscreenSmartspaceController$connectSession$2
+                bcSmartspaceDataPlugin2.registerSmartspaceEventNotifier(new BcSmartspaceDataPlugin.SmartspaceEventNotifier() { // from class: com.android.systemui.statusbar.lockscreen.LockscreenSmartspaceController.connectSession.2
                     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin.SmartspaceEventNotifier
                     public final void notifySmartspaceEvent(SmartspaceTargetEvent smartspaceTargetEvent) {
                         SmartspaceSession smartspaceSession = LockscreenSmartspaceController.this.session;
@@ -533,7 +526,7 @@ public final class LockscreenSmartspaceController implements Dumpable {
                 });
             }
             if (bcSmartspaceDataPlugin != null) {
-                bcSmartspaceDataPlugin.registerSmartspaceEventNotifier(new BcSmartspaceDataPlugin.SmartspaceEventNotifier() { // from class: com.android.systemui.statusbar.lockscreen.LockscreenSmartspaceController$connectSession$3
+                bcSmartspaceDataPlugin.registerSmartspaceEventNotifier(new BcSmartspaceDataPlugin.SmartspaceEventNotifier() { // from class: com.android.systemui.statusbar.lockscreen.LockscreenSmartspaceController.connectSession.3
                     @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin.SmartspaceEventNotifier
                     public final void notifySmartspaceEvent(SmartspaceTargetEvent smartspaceTargetEvent) {
                         SmartspaceSession smartspaceSession = LockscreenSmartspaceController.this.session;
@@ -591,27 +584,27 @@ public final class LockscreenSmartspaceController implements Dumpable {
 
     @Override // com.android.systemui.Dumpable
     public final void dump(final PrintWriter printWriter, String[] strArr) {
-        PrintWriter asIndenting = DumpUtilsKt.asIndenting(printWriter);
-        Collection values = ((LinkedHashMap) this.regionSamplers).values();
-        asIndenting.append("Region Samplers").append((CharSequence) ": ").println(values.size());
-        asIndenting.increaseIndent();
+        PrintWriter printWriterAsIndenting = DumpUtilsKt.asIndenting(printWriter);
+        Collection collectionValues = ((LinkedHashMap) this.regionSamplers).values();
+        printWriterAsIndenting.append("Region Samplers").append((CharSequence) ": ").println(collectionValues.size());
+        printWriterAsIndenting.increaseIndent();
         try {
-            Iterator it = values.iterator();
+            Iterator it = collectionValues.iterator();
             while (it.hasNext()) {
-                ((RegionSampler) it.next()).dump(asIndenting);
+                ((RegionSampler) it.next()).dump(printWriterAsIndenting);
             }
-            asIndenting.decreaseIndent();
+            printWriterAsIndenting.decreaseIndent();
             printWriter.println("Recent BC Smartspace Targets (most recent first)");
             synchronized (this.recentSmartspaceData) {
                 if (((LinkedList) this.recentSmartspaceData).size() == 0) {
                     printWriter.println("   No data\n");
                     return;
                 }
-                Iterator descendingIterator = ((LinkedList) this.recentSmartspaceData).descendingIterator();
+                Iterator itDescendingIterator = ((LinkedList) this.recentSmartspaceData).descendingIterator();
                 final Function1 function1 = new Function1() { // from class: com.android.systemui.statusbar.lockscreen.LockscreenSmartspaceController$$ExternalSyntheticLambda0
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
+                    public final Object mo781invoke(Object obj) {
                         PrintWriter printWriter2 = printWriter;
                         List list = (List) obj;
                         int i = LockscreenSmartspaceController.$r8$clinit;
@@ -624,16 +617,16 @@ public final class LockscreenSmartspaceController implements Dumpable {
                         return Unit.INSTANCE;
                     }
                 };
-                descendingIterator.forEachRemaining(new Consumer() { // from class: com.android.systemui.statusbar.lockscreen.LockscreenSmartspaceController$sam$java_util_function_Consumer$0
+                itDescendingIterator.forEachRemaining(new Consumer() { // from class: com.android.systemui.statusbar.lockscreen.LockscreenSmartspaceController$sam$java_util_function_Consumer$0
                     @Override // java.util.function.Consumer
                     public final /* synthetic */ void accept(Object obj) {
-                        Function1.this.mo779invoke(obj);
+                        function1.mo781invoke(obj);
                     }
                 });
                 Unit unit = Unit.INSTANCE;
             }
         } catch (Throwable th) {
-            asIndenting.decreaseIndent();
+            printWriterAsIndenting.decreaseIndent();
             throw th;
         }
     }
@@ -658,9 +651,9 @@ public final class LockscreenSmartspaceController implements Dumpable {
             }
         }
         this.managedUserHandle = userHandle;
-        Integer valueOf = userHandle != null ? Integer.valueOf(userHandle.getIdentifier()) : null;
-        if (valueOf != null) {
-            this.showSensitiveContentForManagedUser = secureSettings.getIntForUser("lock_screen_allow_private_notifications", 0, valueOf.intValue()) == 1;
+        Integer numValueOf = userHandle != null ? Integer.valueOf(userHandle.getIdentifier()) : null;
+        if (numValueOf != null) {
+            this.showSensitiveContentForManagedUser = secureSettings.getIntForUser("lock_screen_allow_private_notifications", 0, numValueOf.intValue()) == 1;
         }
         SmartspaceSession smartspaceSession = this.session;
         if (smartspaceSession != null) {

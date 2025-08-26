@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.text.TextUtils;
 import com.android.internal.midi.MidiConstants;
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
+import com.samsung.android.transcode.constants.EncodeConstants;
 import com.samsung.android.transcode.core.EncodeBase;
 import com.samsung.android.transcode.info.ExportMediaInfo;
 import com.samsung.android.transcode.info.MediaInfo;
@@ -267,31 +268,118 @@ public class EncodeVideo extends EncodeBase {
         LogS.d("TranscodeLib", "Audio Transcode section: Current position: " + this.mAudioExtractor.getSampleTime() + " mTrimAudioStartUs: " + this.mTrimAudioStartUs);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:21:0x00a3  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x00ad  */
-    /* JADX WARN: Removed duplicated region for block: B:74:0x0221  */
-    /* JADX WARN: Removed duplicated region for block: B:76:? A[RETURN, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:20:0x008b  */
     @Override // com.samsung.android.transcode.core.Encode
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void startRewriting() throws java.io.IOException {
-        /*
-            Method dump skipped, instructions count: 559
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.transcode.core.EncodeVideo.startRewriting():void");
+    public void startRewriting() throws IOException {
+        NalUnitParser nalUnitParser;
+        ByteBuffer byteBuffer;
+        if (this.mUserStop) {
+            LogS.d("TranscodeLib", "Not starting encoding because it is stopped by user.");
+            return;
+        }
+        LogS.d("TranscodeLib", "startRewriting");
+        this.mVideoEncoderDone = false;
+        this.mAudioEncoderDone = !this.mCopyAudio;
+        this.mPendingAudioDecoderOutputBufferIndex = -1;
+        int andSelectVideoTrackIndex = CodecsHelper.getAndSelectVideoTrackIndex(this.mVideoExtractor);
+        if (andSelectVideoTrackIndex != -1) {
+            MediaFormat trackFormat = this.mVideoExtractor.getTrackFormat(andSelectVideoTrackIndex);
+            if (!isHDR10() || this.mTrimVideoStartUs == 0) {
+                nalUnitParser = null;
+            } else {
+                ByteBuffer byteBufferAllocate = ByteBuffer.allocate(getVideoSampleSize(trackFormat));
+                if (this.mVideoExtractor.readSampleData(byteBufferAllocate, 0) > 0) {
+                    nalUnitParser = new NalUnitParser(byteBufferAllocate);
+                    if (nalUnitParser.findHDRStaticMeta() && nalUnitParser.getHdrStaticMeta() != null) {
+                        LogS.i("TranscodeLib", "has hdr static meta : " + this.mVideoExtractor.getSampleTime());
+                    } else {
+                        LogS.i("TranscodeLib", "fail to find hdr static meta " + this.mVideoExtractor.getSampleTime());
+                        nalUnitParser = null;
+                    }
+                }
+            }
+            checkTrimVideoStartPointChanged();
+            checkAudioTranscodeSection();
+            LogS.d("TranscodeLib", "Rewriting starts");
+            this.mAudioProgressTime = 0L;
+            this.mVidioProgressTime = 0L;
+            int andSelectAudioTrackIndex = CodecsHelper.getAndSelectAudioTrackIndex(this.mAudioExtractor);
+            MediaFormat trackFormat2 = andSelectAudioTrackIndex != -1 ? this.mAudioExtractor.getTrackFormat(andSelectAudioTrackIndex) : null;
+            if (!this.mMuxerStarted) {
+                String vEEditFilePath = this.mUseUri ? FileHelper.getVEEditFilePath(this.mContext, this.mInputUri) : this.mInputFilePath;
+                LogS.d("TranscodeLib", "filepath :" + vEEditFilePath);
+                if (updateCreationTime(vEEditFilePath, false)) {
+                    trackFormat.setInteger("param-meta-author", 8);
+                    trackFormat.setInteger("param-meta-transcoding", 1);
+                }
+                if (!TextUtils.isEmpty(mInputFileinfo.Writer)) {
+                    trackFormat.setString("param-meta-brand-model-name", mInputFileinfo.Writer);
+                }
+                if (this.mExportRecordingMode != -1) {
+                    trackFormat.setInteger("param-meta-recording-mode", this.mExportRecordingMode);
+                    LogS.d("TranscodeLib", "set recording mode for NDE : " + this.mExportRecordingMode);
+                } else if (this.mRecordingMode == 10 || this.mRecordingMode == 25) {
+                    trackFormat.setInteger("param-meta-recording-mode", this.mRecordingMode);
+                    LogS.d("TranscodeLib", "set recording mode for HDR 10 PLUS : " + this.mRecordingMode);
+                } else if (this.mRecordingMode == 26 || this.mRecordingMode == 27) {
+                    trackFormat.setInteger("param-meta-recording-mode", this.mRecordingMode);
+                    LogS.e("TranscodeLib", "set recording mode for Log video : " + this.mRecordingMode);
+                } else if (this.mRecordingMode == 29) {
+                    trackFormat.setInteger("param-meta-recording-mode", this.mRecordingMode);
+                    LogS.e("TranscodeLib", "set recording mode for MV_HEVC : " + this.mRecordingMode);
+                    if ("video/hevc".equals(trackFormat.getString("mime"))) {
+                        trackFormat.setString("mime", EncodeConstants.CodecsMime.VIDEO_CODEC_MVHEVC);
+                    }
+                    if (trackFormat.containsKey("csd-mvhevc-ext") && (byteBuffer = trackFormat.getByteBuffer("csd-mvhevc-ext")) != null) {
+                        int iRemaining = byteBuffer.remaining();
+                        byte[] bArr = new byte[iRemaining];
+                        byteBuffer.get(bArr, 0, iRemaining);
+                        ByteBuffer byteBufferAllocate2 = ByteBuffer.allocate(iRemaining);
+                        byteBufferAllocate2.put(bArr, 0, iRemaining);
+                        byteBufferAllocate2.flip();
+                        trackFormat.setByteBuffer("csd-1", byteBufferAllocate2);
+                        trackFormat.removeKey("csd-mvhevc-ext");
+                    }
+                }
+                this.mVideoTrackIndex = this.mMuxer.addTrack(trackFormat);
+                if (trackFormat2 == null || UNKNOWN_AUDIO.equals(trackFormat2.getString("mime"))) {
+                    andSelectAudioTrackIndex = -1;
+                } else {
+                    this.mAudioTrackIndex = this.mMuxer.addTrack(trackFormat2);
+                }
+                this.mMuxer.setOrientationHint(this.mInputOrientationDegrees);
+                if (mInputFileinfo.IsLocationAvailable) {
+                    this.mMuxer.setLocation(mInputFileinfo.latitude, mInputFileinfo.longitude);
+                }
+                this.mMuxer.start();
+                this.mMuxerStarted = true;
+            }
+            rewriteVideo(this.mTrimVideoEndUs, nalUnitParser, getVideoSampleSize(trackFormat));
+            if (andSelectAudioTrackIndex == -1 || this.mOutputAudioMute) {
+                this.mCopyAudio = false;
+            } else {
+                rewriteAudio(this.mTrimVideoEndUs);
+            }
+            if (this.mUserStop) {
+                return;
+            }
+            LogS.d("TranscodeLib", "Rewriting finished");
+            return;
+        }
+        throw new IOException("Absent valid video track");
     }
 
     private void rewriteAudio(long j) {
-        ByteBuffer allocate = ByteBuffer.allocate(131072);
+        ByteBuffer byteBufferAllocate = ByteBuffer.allocate(131072);
         MediaCodec.BufferInfo bufferInfo = new MediaCodec.BufferInfo();
-        bufferInfo.size = this.mAudioExtractor.readSampleData(allocate, 0);
+        bufferInfo.size = this.mAudioExtractor.readSampleData(byteBufferAllocate, 0);
         boolean z = false;
         while (!this.mUserStop && !z) {
             bufferInfo.offset = 0;
-            bufferInfo.size = this.mAudioExtractor.readSampleData(allocate, 0);
+            bufferInfo.size = this.mAudioExtractor.readSampleData(byteBufferAllocate, 0);
             if (bufferInfo.size < 0) {
                 LogS.d("TranscodeLib", "saw input EOS: Audio");
                 bufferInfo.size = 0;
@@ -302,7 +390,7 @@ public class EncodeVideo extends EncodeBase {
                 } else {
                     bufferInfo.flags = this.mAudioExtractor.getSampleFlags();
                     try {
-                        this.mMuxer.writeSampleData(this.mAudioTrackIndex, allocate, bufferInfo);
+                        this.mMuxer.writeSampleData(this.mAudioTrackIndex, byteBufferAllocate, bufferInfo);
                     } catch (IllegalArgumentException | IllegalStateException e) {
                         LogS.e("TranscodeLib", "fail to writeSampleData " + e);
                     }
@@ -314,20 +402,24 @@ public class EncodeVideo extends EncodeBase {
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:32:0x00d8 A[Catch: IllegalArgumentException | IllegalStateException -> 0x00e0, TRY_LEAVE, TryCatch #0 {IllegalArgumentException | IllegalStateException -> 0x00e0, blocks: (B:25:0x00a1, B:27:0x00a6, B:29:0x00b1, B:30:0x00ca, B:32:0x00d8), top: B:40:0x00a1 }] */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     private void rewriteVideo(long j, NalUnitParser nalUnitParser, int i) {
         long j2;
-        long max;
+        long jMax;
         int i2;
-        ByteBuffer allocate = ByteBuffer.allocate(i);
+        ByteBuffer byteBufferAllocate = ByteBuffer.allocate(i);
         MediaCodec.BufferInfo bufferInfo = new MediaCodec.BufferInfo();
         int i3 = 0;
-        bufferInfo.size = this.mVideoExtractor.readSampleData(allocate, 0);
+        bufferInfo.size = this.mVideoExtractor.readSampleData(byteBufferAllocate, 0);
         long sampleTime = this.mVideoExtractor.getSampleTime();
         NalUnitParser nalUnitParser2 = nalUnitParser;
         boolean z = false;
         while (!this.mUserStop && !z) {
             bufferInfo.offset = i3;
-            bufferInfo.size = this.mVideoExtractor.readSampleData(allocate, i3);
+            bufferInfo.size = this.mVideoExtractor.readSampleData(byteBufferAllocate, i3);
             if (bufferInfo.size < 0) {
                 LogS.d("TranscodeLib", "saw input EOS: Video");
                 bufferInfo.size = i3;
@@ -339,41 +431,40 @@ public class EncodeVideo extends EncodeBase {
                 long sampleTime2 = this.mVideoExtractor.getSampleTime();
                 if (sampleTime2 != -1) {
                     j2 = sampleTime;
-                    max = Math.max(sampleTime2 - bufferInfo.presentationTimeUs, 0L);
+                    jMax = Math.max(sampleTime2 - bufferInfo.presentationTimeUs, 0L);
                 } else {
                     j2 = sampleTime;
-                    max = Math.max(((this.mSEFVideo ? mInputFileinfo.EditedDuration : mInputFileinfo.Duration) * 1000) - bufferInfo.presentationTimeUs, 0L);
+                    jMax = Math.max(((this.mSEFVideo ? mInputFileinfo.EditedDuration : mInputFileinfo.Duration) * 1000) - bufferInfo.presentationTimeUs, 0L);
                 }
-                if (j != -1 && bufferInfo.presentationTimeUs + max >= j) {
-                    LogS.d("TranscodeLib", "sawEOS: true: V");
-                    z = true;
-                } else if (bufferInfo.presentationTimeUs >= j2) {
-                    if (nalUnitParser2 != null) {
-                        try {
-                        } catch (IllegalArgumentException | IllegalStateException e) {
-                            LogS.e("TranscodeLib", "fail to writeSampleData " + e);
-                        }
-                        if ((bufferInfo.flags & 1) != 0) {
-                            if (!new NalUnitParser(allocate).findHDRStaticMeta()) {
-                                ByteBuffer insertHDRStaticMeta = nalUnitParser2.insertHDRStaticMeta(allocate, bufferInfo.size, CodecsHelper.isHevcFormat(mInputVideoinfo));
-                                LogS.i("TranscodeLib", "add HDR static info");
-                                this.mMuxer.writeSampleData(this.mVideoTrackIndex, insertHDRStaticMeta, bufferInfo);
-                            } else {
-                                LogS.i("TranscodeLib", "has already static info");
-                                this.mMuxer.writeSampleData(this.mVideoTrackIndex, allocate, bufferInfo);
+                if (j == -1 || bufferInfo.presentationTimeUs + jMax < j) {
+                    if (bufferInfo.presentationTimeUs >= j2) {
+                        if (nalUnitParser2 != null) {
+                            try {
+                                if ((bufferInfo.flags & 1) != 0) {
+                                    if (!new NalUnitParser(byteBufferAllocate).findHDRStaticMeta()) {
+                                        ByteBuffer byteBufferInsertHDRStaticMeta = nalUnitParser2.insertHDRStaticMeta(byteBufferAllocate, bufferInfo.size, CodecsHelper.isHevcFormat(mInputVideoinfo));
+                                        LogS.i("TranscodeLib", "add HDR static info");
+                                        this.mMuxer.writeSampleData(this.mVideoTrackIndex, byteBufferInsertHDRStaticMeta, bufferInfo);
+                                    } else {
+                                        LogS.i("TranscodeLib", "has already static info");
+                                        this.mMuxer.writeSampleData(this.mVideoTrackIndex, byteBufferAllocate, bufferInfo);
+                                    }
+                                    nalUnitParser2 = null;
+                                } else {
+                                    this.mMuxer.writeSampleData(this.mVideoTrackIndex, byteBufferAllocate, bufferInfo);
+                                }
+                            } catch (IllegalArgumentException | IllegalStateException e) {
+                                LogS.e("TranscodeLib", "fail to writeSampleData " + e);
                             }
-                            nalUnitParser2 = null;
                             i2 = 0;
                             updateProgress(bufferInfo.presentationTimeUs, false);
-                            i3 = i2;
-                            sampleTime = j2;
                         }
                     }
-                    this.mMuxer.writeSampleData(this.mVideoTrackIndex, allocate, bufferInfo);
-                    i2 = 0;
-                    updateProgress(bufferInfo.presentationTimeUs, false);
                     i3 = i2;
                     sampleTime = j2;
+                } else {
+                    LogS.d("TranscodeLib", "sawEOS: true: V");
+                    z = true;
                 }
                 i2 = 0;
                 i3 = i2;
@@ -489,18 +580,18 @@ public class EncodeVideo extends EncodeBase {
         }
         mediaFormat.setInteger("level", this.mOutputWidth == 1280 ? 512 : 4096);
         if (mediaFormat.containsKey("csd-0") && (byteBuffer = mediaFormat.getByteBuffer("csd-0")) != null) {
-            int remaining = byteBuffer.remaining();
-            byte[] bArr = new byte[remaining];
-            byteBuffer.get(bArr, 0, remaining);
+            int iRemaining = byteBuffer.remaining();
+            byte[] bArr = new byte[iRemaining];
+            byteBuffer.get(bArr, 0, iRemaining);
             if (this.mOutputWidth == 1280) {
                 bArr[7] = SprAnimatorBase.INTERPOLATOR_TYPE_QUARTEASEIN;
             } else {
                 bArr[7] = 41;
             }
-            ByteBuffer allocate = ByteBuffer.allocate(remaining);
-            allocate.put(bArr, 0, remaining);
-            allocate.flip();
-            mediaFormat.setByteBuffer("csd-0", allocate);
+            ByteBuffer byteBufferAllocate = ByteBuffer.allocate(iRemaining);
+            byteBufferAllocate.put(bArr, 0, iRemaining);
+            byteBufferAllocate.flip();
+            mediaFormat.setByteBuffer("csd-0", byteBufferAllocate);
         }
         return mediaFormat;
     }
@@ -543,15 +634,15 @@ public class EncodeVideo extends EncodeBase {
                 } else {
                     if (isSlowV2() && trackFormat2.containsKey("csd-0")) {
                         ByteBuffer byteBuffer = trackFormat2.getByteBuffer("csd-0");
-                        int remaining = byteBuffer.remaining();
-                        byte[] bArr = new byte[remaining];
-                        byteBuffer.get(bArr, 0, remaining);
+                        int iRemaining = byteBuffer.remaining();
+                        byte[] bArr = new byte[iRemaining];
+                        byteBuffer.get(bArr, 0, iRemaining);
                         bArr[0] = 17;
                         bArr[1] = MidiConstants.STATUS_NOTE_ON;
-                        ByteBuffer allocate = ByteBuffer.allocate(remaining);
-                        allocate.put(bArr, 0, remaining);
-                        allocate.flip();
-                        trackFormat2.setByteBuffer("csd-0", allocate);
+                        ByteBuffer byteBufferAllocate = ByteBuffer.allocate(iRemaining);
+                        byteBufferAllocate.put(bArr, 0, iRemaining);
+                        byteBufferAllocate.flip();
+                        trackFormat2.setByteBuffer("csd-0", byteBufferAllocate);
                     }
                     LogS.d("TranscodeLib", "audio format " + trackFormat2);
                     this.mAudioTrackIndex = this.mMuxer.addTrack(trackFormat2);
@@ -570,15 +661,15 @@ public class EncodeVideo extends EncodeBase {
                     startAudioEncoding();
                 }
             }
-            ByteBuffer allocate2 = ByteBuffer.allocate(getVideoSampleSize(trackFormat));
+            ByteBuffer byteBufferAllocate2 = ByteBuffer.allocate(getVideoSampleSize(trackFormat));
             MediaCodec.BufferInfo bufferInfo = new MediaCodec.BufferInfo();
-            bufferInfo.size = this.mVideoExtractor.readSampleData(allocate2, 0);
-            boolean isHevcFormat = CodecsHelper.isHevcFormat(trackFormat);
+            bufferInfo.size = this.mVideoExtractor.readSampleData(byteBufferAllocate2, 0);
+            boolean zIsHevcFormat = CodecsHelper.isHevcFormat(trackFormat);
             boolean z2 = false;
             long j5 = 0;
             while (!this.mUserStop && !z2) {
                 bufferInfo.offset = i2;
-                bufferInfo.size = this.mVideoExtractor.readSampleData(allocate2, i2);
+                bufferInfo.size = this.mVideoExtractor.readSampleData(byteBufferAllocate2, i2);
                 if (bufferInfo.size < 0) {
                     LogS.d("TranscodeLib", "saw input EOS: Video");
                     bufferInfo.size = i2;
@@ -590,14 +681,14 @@ public class EncodeVideo extends EncodeBase {
                     LogS.d("TranscodeLib", "mModifiedVideotime = presentationTime = " + this.mModifiedVideotime);
                     if (this.mSEFVideo) {
                         byte[] bArr2 = new byte[4];
-                        allocate2.position(4);
-                        allocate2.get(bArr2, i2, 4);
-                        allocate2.position(i2);
+                        byteBufferAllocate2.position(4);
+                        byteBufferAllocate2.get(bArr2, i2, 4);
+                        byteBufferAllocate2.position(i2);
                         this.mIsDrop = calculateIsDrop(bArr2, sampleTime);
                     }
                     bufferInfo.presentationTimeUs = this.mVideoExtractor.getSampleTime();
                     long j7 = j5 != j6 ? this.mModifiedVideotime - j5 : j6;
-                    boolean z3 = isHevcFormat;
+                    boolean z3 = zIsHevcFormat;
                     if (j3 != -1 && bufferInfo.presentationTimeUs + j7 > this.mTrimVideoEndUs) {
                         LogS.d("TranscodeLib", "sawEOS: true: V");
                         j2 = j3;
@@ -614,31 +705,31 @@ public class EncodeVideo extends EncodeBase {
                             j2 = j3;
                             c = 65535;
                         } else {
-                            int remaining2 = allocate2.remaining();
-                            byte[] bArr3 = new byte[remaining2];
-                            allocate2.get(bArr3, i2, remaining2);
+                            int iRemaining2 = byteBufferAllocate2.remaining();
+                            byte[] bArr3 = new byte[iRemaining2];
+                            byteBufferAllocate2.get(bArr3, i2, iRemaining2);
                             StringBuilder sb = new StringBuilder("writeSampleData time:");
                             j2 = j3;
                             sb.append(bufferInfo.presentationTimeUs);
                             sb.append(" length=");
-                            sb.append(remaining2);
+                            sb.append(iRemaining2);
                             LogS.d("TranscodeLib", sb.toString());
                             int i3 = 0;
                             if (!z3) {
                                 while (true) {
-                                    int findNalStartCode = findNalStartCode(bArr3, NAL_START_CODE.length + i3);
-                                    LogS.d("TranscodeLib", "findNalStartCode. i: " + findNalStartCode + ", index: " + i3);
-                                    if (findNalStartCode == -1) {
+                                    int iFindNalStartCode = findNalStartCode(bArr3, NAL_START_CODE.length + i3);
+                                    LogS.d("TranscodeLib", "findNalStartCode. i: " + iFindNalStartCode + ", index: " + i3);
+                                    if (iFindNalStartCode == -1) {
                                         break;
                                     } else {
-                                        i3 = findNalStartCode;
+                                        i3 = iFindNalStartCode;
                                     }
                                 }
                             }
-                            allocate2.position(i3);
+                            byteBufferAllocate2.position(i3);
                             bufferInfo.offset = i3;
                             try {
-                                this.mMuxer.writeSampleData(this.mVideoTrackIndex, allocate2, bufferInfo);
+                                this.mMuxer.writeSampleData(this.mVideoTrackIndex, byteBufferAllocate2, bufferInfo);
                             } catch (IllegalArgumentException | IllegalStateException e) {
                                 LogS.e("TranscodeLib", "fail to writeSampleData " + e);
                             }
@@ -651,7 +742,7 @@ public class EncodeVideo extends EncodeBase {
                         }
                         this.mVideoExtractor.advance();
                     }
-                    isHevcFormat = z3;
+                    zIsHevcFormat = z3;
                     i2 = i;
                     j3 = j2;
                     j5 = j;
@@ -783,7 +874,11 @@ public class EncodeVideo extends EncodeBase {
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:36:0x0044 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     @Override // com.samsung.android.transcode.core.Encode
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     protected synchronized void release() {
         try {
             LogS.e("TranscodeLib", "releasing encoder objects");
@@ -802,11 +897,11 @@ public class EncodeVideo extends EncodeBase {
             if (this.mDecAudio != null) {
                 this.mDecAudio.clear();
                 this.mDecAudio = null;
-            }
-            synchronized (this.mStopLock) {
-                this.mEncoding = false;
-                this.mPrepared = false;
-                this.mStopLock.notifyAll();
+                synchronized (this.mStopLock) {
+                    this.mEncoding = false;
+                    this.mPrepared = false;
+                    this.mStopLock.notifyAll();
+                }
             }
         } catch (Throwable th) {
             synchronized (this.mStopLock) {
@@ -818,100 +913,40 @@ public class EncodeVideo extends EncodeBase {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:15:0x004d, code lost:
-    
-        if (r7.mEncoding != false) goto L14;
-     */
     @Override // com.samsung.android.transcode.core.Encode
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
     public void stop() {
-        /*
-            r7 = this;
-            java.lang.String r0 = "Stop method finally  mEncoding :"
-            java.lang.String r1 = "Stop method finally  mEncoding :"
-            java.lang.String r2 = "Stop method finally  mEncoding :"
-            java.lang.String r3 = "TranscodeLib"
-            java.lang.String r4 = "Stop method called "
-            com.samsung.android.transcode.util.LogS.d(r3, r4)
-            java.lang.Object r3 = r7.mStopLock
-            monitor-enter(r3)
-            com.samsung.android.transcode.surfaces.OutputSurface r4 = r7.mOutputSurface     // Catch: java.lang.Throwable -> L95
-            if (r4 == 0) goto L19
-            com.samsung.android.transcode.surfaces.OutputSurface r4 = r7.mOutputSurface     // Catch: java.lang.Throwable -> L95
-            r4.notifyFrameSyncObject()     // Catch: java.lang.Throwable -> L95
-        L19:
-            r4 = 1
-            r7.mUserStop = r4     // Catch: java.lang.Throwable -> L95
-            java.lang.String r4 = "TranscodeLib"
-            java.lang.String r5 = "mUserStop - true"
-            com.samsung.android.transcode.util.LogS.d(r4, r5)     // Catch: java.lang.Throwable -> L95
-            boolean r4 = r7.mEncoding     // Catch: java.lang.Throwable -> L95
-            if (r4 != 0) goto L2a
-            monitor-exit(r3)     // Catch: java.lang.Throwable -> L95
-            return
-        L2a:
-            java.lang.String r4 = "TranscodeLib"
-            java.lang.String r5 = "Calling wait on stop lock."
-            com.samsung.android.transcode.util.LogS.d(r4, r5)     // Catch: java.lang.Throwable -> L53 java.lang.InterruptedException -> L55
-            java.lang.Object r4 = r7.mStopLock     // Catch: java.lang.Throwable -> L53 java.lang.InterruptedException -> L55
-            r5 = 5000(0x1388, double:2.4703E-320)
-            r4.wait(r5)     // Catch: java.lang.Throwable -> L53 java.lang.InterruptedException -> L55
-            java.lang.String r0 = "TranscodeLib"
-            java.lang.StringBuilder r2 = new java.lang.StringBuilder     // Catch: java.lang.Throwable -> L95
-            r2.<init>(r1)     // Catch: java.lang.Throwable -> L95
-            boolean r1 = r7.mEncoding     // Catch: java.lang.Throwable -> L95
-            r2.append(r1)     // Catch: java.lang.Throwable -> L95
-            java.lang.String r1 = r2.toString()     // Catch: java.lang.Throwable -> L95
-            com.samsung.android.transcode.util.LogS.d(r0, r1)     // Catch: java.lang.Throwable -> L95
-            boolean r0 = r7.mEncoding     // Catch: java.lang.Throwable -> L95
-            if (r0 == 0) goto L78
-        L4f:
-            r7.release()     // Catch: java.lang.Throwable -> L95
-            goto L78
-        L53:
-            r0 = move-exception
-            goto L7a
-        L55:
-            r1 = move-exception
-            java.lang.String r4 = "TranscodeLib"
-            java.lang.String r5 = "Stop lock interrupted."
-            com.samsung.android.transcode.util.LogS.d(r4, r5)     // Catch: java.lang.Throwable -> L53
-            r1.printStackTrace()     // Catch: java.lang.Throwable -> L53
-            java.lang.String r1 = "TranscodeLib"
-            java.lang.StringBuilder r2 = new java.lang.StringBuilder     // Catch: java.lang.Throwable -> L95
-            r2.<init>(r0)     // Catch: java.lang.Throwable -> L95
-            boolean r0 = r7.mEncoding     // Catch: java.lang.Throwable -> L95
-            r2.append(r0)     // Catch: java.lang.Throwable -> L95
-            java.lang.String r0 = r2.toString()     // Catch: java.lang.Throwable -> L95
-            com.samsung.android.transcode.util.LogS.d(r1, r0)     // Catch: java.lang.Throwable -> L95
-            boolean r0 = r7.mEncoding     // Catch: java.lang.Throwable -> L95
-            if (r0 == 0) goto L78
-            goto L4f
-        L78:
-            monitor-exit(r3)     // Catch: java.lang.Throwable -> L95
-            return
-        L7a:
-            java.lang.String r1 = "TranscodeLib"
-            java.lang.StringBuilder r4 = new java.lang.StringBuilder     // Catch: java.lang.Throwable -> L95
-            r4.<init>(r2)     // Catch: java.lang.Throwable -> L95
-            boolean r2 = r7.mEncoding     // Catch: java.lang.Throwable -> L95
-            r4.append(r2)     // Catch: java.lang.Throwable -> L95
-            java.lang.String r2 = r4.toString()     // Catch: java.lang.Throwable -> L95
-            com.samsung.android.transcode.util.LogS.d(r1, r2)     // Catch: java.lang.Throwable -> L95
-            boolean r1 = r7.mEncoding     // Catch: java.lang.Throwable -> L95
-            if (r1 == 0) goto L94
-            r7.release()     // Catch: java.lang.Throwable -> L95
-        L94:
-            throw r0     // Catch: java.lang.Throwable -> L95
-        L95:
-            r7 = move-exception
-            monitor-exit(r3)     // Catch: java.lang.Throwable -> L95
-            throw r7
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.transcode.core.EncodeVideo.stop():void");
+        LogS.d("TranscodeLib", "Stop method called ");
+        synchronized (this.mStopLock) {
+            if (this.mOutputSurface != null) {
+                this.mOutputSurface.notifyFrameSyncObject();
+            }
+            this.mUserStop = true;
+            LogS.d("TranscodeLib", "mUserStop - true");
+            if (this.mEncoding) {
+                try {
+                    try {
+                        LogS.d("TranscodeLib", "Calling wait on stop lock.");
+                        this.mStopLock.wait(5000L);
+                        LogS.d("TranscodeLib", "Stop method finally  mEncoding :" + this.mEncoding);
+                    } catch (InterruptedException e) {
+                        LogS.d("TranscodeLib", "Stop lock interrupted.");
+                        e.printStackTrace();
+                        LogS.d("TranscodeLib", "Stop method finally  mEncoding :" + this.mEncoding);
+                        if (this.mEncoding) {
+                        }
+                    }
+                    if (this.mEncoding) {
+                        release();
+                    }
+                } catch (Throwable th) {
+                    LogS.d("TranscodeLib", "Stop method finally  mEncoding :" + this.mEncoding);
+                    if (this.mEncoding) {
+                        release();
+                    }
+                    throw th;
+                }
+            }
+        }
     }
 
     public static int getMaxEncodingDuration(int i, int i2, int i3, int i4) {
@@ -921,16 +956,16 @@ public class EncodeVideo extends EncodeBase {
     }
 
     public int getOutputFileSize() {
-        MediaExtractor createExtractor;
-        int suggestBitrate;
+        MediaExtractor mediaExtractorCreateExtractor;
+        int iSuggestBitrate;
         long j;
         try {
             if (this.mUseUri) {
-                createExtractor = CodecsHelper.createExtractor(this.mContext, this.mInputUri);
+                mediaExtractorCreateExtractor = CodecsHelper.createExtractor(this.mContext, this.mInputUri);
             } else {
-                createExtractor = CodecsHelper.createExtractor(this.mInputFilePath);
+                mediaExtractorCreateExtractor = CodecsHelper.createExtractor(this.mInputFilePath);
             }
-            MediaFormat trackFormat = createExtractor.getTrackFormat(CodecsHelper.getAndSelectVideoTrackIndex(createExtractor));
+            MediaFormat trackFormat = mediaExtractorCreateExtractor.getTrackFormat(CodecsHelper.getAndSelectVideoTrackIndex(mediaExtractorCreateExtractor));
             long j2 = this.mTrimVideoEndUs;
             if (j2 == 0) {
                 if (this.mSEFVideo) {
@@ -941,16 +976,16 @@ public class EncodeVideo extends EncodeBase {
                 j2 = j;
                 LogS.d("TranscodeLib", "getOutputFileSize  trimEndTime was 0 but updated trimEndTime : " + j2);
             }
-            createExtractor.release();
+            mediaExtractorCreateExtractor.release();
             if (this.mOutputMaxSizeKB >= 0) {
                 if ("video/avc".equals(this.mOutputVideoMimeType)) {
                     this.mSizeFraction = 0.9f;
                 }
-                suggestBitrate = CodecsHelper.getVideoEncodingBitRate(this.mSizeFraction, this.mOutputMaxSizeKB, (j2 - this.mTrimVideoStartUs) / 1000, this.mOutputAudioBitRate / 1000, this.mOutputWidth, this.mOutputHeight) * 1000;
+                iSuggestBitrate = CodecsHelper.getVideoEncodingBitRate(this.mSizeFraction, this.mOutputMaxSizeKB, (j2 - this.mTrimVideoStartUs) / 1000, this.mOutputAudioBitRate / 1000, this.mOutputWidth, this.mOutputHeight) * 1000;
             } else {
-                suggestBitrate = CodecsHelper.suggestBitrate(new ExportMediaInfo(this.mOutputWidth, this.mOutputHeight, this.mOutputVideoFrameRate, this.mOutputVideoMimeType, isHDR10Plus()), mInputFileinfo);
+                iSuggestBitrate = CodecsHelper.suggestBitrate(new ExportMediaInfo(this.mOutputWidth, this.mOutputHeight, this.mOutputVideoFrameRate, this.mOutputVideoMimeType, isHDR10Plus()), mInputFileinfo);
             }
-            int i = (int) (((j2 - this.mTrimVideoStartUs) / 8000000.0d) * ((suggestBitrate + this.mOutputAudioBitRate) / 1000.0d));
+            int i = (int) (((j2 - this.mTrimVideoStartUs) / 8000000.0d) * ((iSuggestBitrate + this.mOutputAudioBitRate) / 1000.0d));
             return this.mOutputMaxSizeKB == 0 ? (int) (i * 0.9d) : i;
         } catch (IOException e) {
             e.printStackTrace();
@@ -1008,62 +1043,62 @@ public class EncodeVideo extends EncodeBase {
         long j = 0;
         while (true) {
             if (j >= length) {
-                byte b = z2 ? 1 : 0;
+                Object[] objArr = z2 ? 1 : 0;
                 break;
             }
             try {
                 try {
                     LogS.d("TranscodeLib", "filePointer: " + j);
                     randomAccessFile.seek(j);
-                } catch (IOException e) {
-                    e.printStackTrace();
+                } finally {
                 }
-                if (randomAccessFile.read(bArr, z2 ? 1 : 0, i) < 0) {
-                    LogS.d("TranscodeLib", "file read is reached to end of the file");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (randomAccessFile.read(bArr, z2 ? 1 : 0, i) < 0) {
+                LogS.d("TranscodeLib", "file read is reached to end of the file");
+            }
+            long jUnsignedIntToLong = unsignedIntToLong(bArr);
+            LogS.d("TranscodeLib", "Atom Size: " + jUnsignedIntToLong);
+            if (randomAccessFile.read(bArr2, 0, i) < 0) {
+                LogS.d("TranscodeLib", "file read is reached to end of the file");
+            }
+            String str3 = new String(bArr2, StandardCharsets.UTF_8);
+            LogS.d("TranscodeLib", "Atom Box: " + str3);
+            int iBinarySearch = Arrays.binarySearch(strArr, str3);
+            if (iBinarySearch >= 0) {
+                LogS.d("TranscodeLib", "Found parent: " + str3 + " move to : " + iBinarySearch);
+                j += 8;
+                z = false;
+            } else {
+                if (str3.equals(str2)) {
+                    LogS.d("TranscodeLib", "Found: " + str2);
+                    z2 = true;
+                    break;
                 }
-                long unsignedIntToLong = unsignedIntToLong(bArr);
-                LogS.d("TranscodeLib", "Atom Size: " + unsignedIntToLong);
-                if (randomAccessFile.read(bArr2, 0, i) < 0) {
-                    LogS.d("TranscodeLib", "file read is reached to end of the file");
-                }
-                String str3 = new String(bArr2, StandardCharsets.UTF_8);
-                LogS.d("TranscodeLib", "Atom Box: " + str3);
-                int binarySearch = Arrays.binarySearch(strArr, str3);
-                if (binarySearch >= 0) {
-                    LogS.d("TranscodeLib", "Found parent: " + str3 + " move to : " + binarySearch);
-                    j += 8;
+                if (jUnsignedIntToLong == 1) {
+                    randomAccessFile.seek(j + 8);
+                    byte[] bArr3 = new byte[8];
                     z = false;
+                    if (randomAccessFile.read(bArr3, 0, 8) < 0) {
+                        LogS.d("TranscodeLib", "file read is reached to end of the file");
+                    }
+                    long jLongValue = new BigInteger(bArr3).longValue();
+                    j += jLongValue;
+                    LogS.d("TranscodeLib", "64bit: " + jLongValue);
                 } else {
-                    if (str3.equals(str2)) {
-                        LogS.d("TranscodeLib", "Found: " + str2);
-                        z2 = true;
+                    z = false;
+                    if (jUnsignedIntToLong == 0) {
+                        LogS.d("TranscodeLib", "filePointer does not go forward. Exit.");
+                        z2 = false;
                         break;
                     }
-                    if (unsignedIntToLong == 1) {
-                        randomAccessFile.seek(j + 8);
-                        byte[] bArr3 = new byte[8];
-                        z = false;
-                        if (randomAccessFile.read(bArr3, 0, 8) < 0) {
-                            LogS.d("TranscodeLib", "file read is reached to end of the file");
-                        }
-                        long longValue = new BigInteger(bArr3).longValue();
-                        j += longValue;
-                        LogS.d("TranscodeLib", "64bit: " + longValue);
-                    } else {
-                        z = false;
-                        if (unsignedIntToLong == 0) {
-                            LogS.d("TranscodeLib", "filePointer does not go forward. Exit.");
-                            z2 = false;
-                            break;
-                        }
-                        j += unsignedIntToLong;
-                        LogS.d("TranscodeLib", "move: " + j + " atomsize " + unsignedIntToLong);
-                    }
+                    j += jUnsignedIntToLong;
+                    LogS.d("TranscodeLib", "move: " + j + " atomsize " + jUnsignedIntToLong);
                 }
-                z2 = z;
-                i = 4;
-            } finally {
             }
+            z2 = z;
+            i = 4;
         }
         randomAccessFile.close();
         return z2;
@@ -1077,7 +1112,7 @@ public class EncodeVideo extends EncodeBase {
         return CodecsHelper.isSupportedFormat(context, uri);
     }
 
-    public static void insertUuidFor360Video(String str, String str2) {
+    public static void insertUuidFor360Video(String str, String str2) throws IOException {
         String str3;
         String str4;
         byte[] bArr;
@@ -1109,7 +1144,7 @@ public class EncodeVideo extends EncodeBase {
                         }
                         File file3 = file2;
                         long j3 = length;
-                        long unsignedIntToLong = unsignedIntToLong(bArr2);
+                        long jUnsignedIntToLong = unsignedIntToLong(bArr2);
                         if (randomAccessFile.read(bArr3, 0, 4) < 0) {
                             LogS.d("TranscodeLib", "inputfile read is reached to end of the file");
                         }
@@ -1134,7 +1169,7 @@ public class EncodeVideo extends EncodeBase {
                                     if (randomAccessFile2.read(bArr5, 0, i2) < 0) {
                                         LogS.d("TranscodeLib", "outputFile read is reached to end of the file");
                                     }
-                                    long unsignedIntToLong2 = unsignedIntToLong(bArr5);
+                                    long jUnsignedIntToLong2 = unsignedIntToLong(bArr5);
                                     byte[] bArr7 = bArr5;
                                     if (randomAccessFile2.read(bArr6, 0, 4) < 0) {
                                         LogS.d("TranscodeLib", "outputFile read is reached to end of the file");
@@ -1143,7 +1178,7 @@ public class EncodeVideo extends EncodeBase {
                                     if (Arrays.binarySearch(strArr3, str14) >= 0) {
                                         int i4 = 3;
                                         if (str14.equals(str10)) {
-                                            long j5 = unsignedIntToLong2 + unsignedIntToLong;
+                                            long j5 = jUnsignedIntToLong2 + jUnsignedIntToLong;
                                             byte[] bArr8 = new byte[4];
                                             while (i4 >= 0) {
                                                 int i5 = i4;
@@ -1158,7 +1193,7 @@ public class EncodeVideo extends EncodeBase {
                                             randomAccessFile2.seek(j4);
                                             j4 += 8;
                                             str5 = str10;
-                                            j = unsignedIntToLong;
+                                            j = jUnsignedIntToLong;
                                             str6 = str13;
                                             str7 = str12;
                                             str13 = str6;
@@ -1166,13 +1201,13 @@ public class EncodeVideo extends EncodeBase {
                                             str10 = str5;
                                             str9 = str4;
                                             bArr5 = bArr7;
-                                            unsignedIntToLong = j;
+                                            jUnsignedIntToLong = j;
                                             bArr3 = bArr;
                                             i2 = 4;
                                             i3 = 8;
                                         } else {
                                             bArr = bArr3;
-                                            long j6 = unsignedIntToLong2 + unsignedIntToLong;
+                                            long j6 = jUnsignedIntToLong2 + jUnsignedIntToLong;
                                             byte[] bArr9 = new byte[4];
                                             while (i4 >= 0) {
                                                 bArr9[i4] = (byte) (r22 & 255);
@@ -1181,7 +1216,7 @@ public class EncodeVideo extends EncodeBase {
                                             }
                                             randomAccessFile2.seek(j4);
                                             randomAccessFile2.write(bArr9, 0, 4);
-                                            long j7 = j4 + unsignedIntToLong2;
+                                            long j7 = j4 + jUnsignedIntToLong2;
                                             randomAccessFile2.seek(j7);
                                             str5 = str10;
                                             int i6 = (int) (length2 - j7);
@@ -1191,7 +1226,7 @@ public class EncodeVideo extends EncodeBase {
                                                 LogS.d("TranscodeLib", "outputfile read is reached to end of the file");
                                             }
                                             randomAccessFile2.seek(j7);
-                                            int i7 = (int) unsignedIntToLong;
+                                            int i7 = (int) jUnsignedIntToLong;
                                             byte[] bArr11 = new byte[i7];
                                             randomAccessFile.seek(j2);
                                             if (randomAccessFile.read(bArr11, 0, i7) < 0) {
@@ -1204,28 +1239,28 @@ public class EncodeVideo extends EncodeBase {
                                         bArr = bArr3;
                                         str6 = str13;
                                         str5 = str10;
-                                        if (unsignedIntToLong2 == 1) {
-                                            j = unsignedIntToLong;
+                                        if (jUnsignedIntToLong2 == 1) {
+                                            j = jUnsignedIntToLong;
                                             randomAccessFile2.seek(j4 + 8);
                                             int i8 = i3;
                                             byte[] bArr12 = new byte[i8];
                                             if (randomAccessFile2.read(bArr12, 0, i8) < 0) {
                                                 LogS.d("TranscodeLib", "outputfile read is reached to end of the file");
                                             }
-                                            long longValue = new BigInteger(bArr12).longValue();
-                                            j4 += longValue;
+                                            long jLongValue = new BigInteger(bArr12).longValue();
+                                            j4 += jLongValue;
                                             StringBuilder sb = new StringBuilder();
                                             str7 = str12;
                                             sb.append(str7);
-                                            sb.append(longValue);
+                                            sb.append(jLongValue);
                                             LogS.d("TranscodeLib", sb.toString());
                                         } else {
-                                            j = unsignedIntToLong;
+                                            j = jUnsignedIntToLong;
                                             str7 = str12;
-                                            if (unsignedIntToLong2 == 0) {
+                                            if (jUnsignedIntToLong2 == 0) {
                                                 break;
                                             } else {
-                                                j4 += unsignedIntToLong2;
+                                                j4 += jUnsignedIntToLong2;
                                             }
                                         }
                                         str13 = str6;
@@ -1233,7 +1268,7 @@ public class EncodeVideo extends EncodeBase {
                                         str10 = str5;
                                         str9 = str4;
                                         bArr5 = bArr7;
-                                        unsignedIntToLong = j;
+                                        jUnsignedIntToLong = j;
                                         bArr3 = bArr;
                                         i2 = 4;
                                         i3 = 8;
@@ -1251,19 +1286,19 @@ public class EncodeVideo extends EncodeBase {
                             str4 = str9;
                             bArr = bArr3;
                             str5 = str10;
-                            if (unsignedIntToLong == 1) {
+                            if (jUnsignedIntToLong == 1) {
                                 randomAccessFile.seek(j2 + 8);
                                 byte[] bArr13 = new byte[8];
                                 if (randomAccessFile.read(bArr13, 0, 8) < 0) {
                                     LogS.d("TranscodeLib", "inputfile read is reached to end of the file");
                                 }
-                                long longValue2 = new BigInteger(bArr13).longValue();
-                                j2 += longValue2;
-                                LogS.d("TranscodeLib", "64bit: " + longValue2);
-                            } else if (unsignedIntToLong == 0) {
+                                long jLongValue2 = new BigInteger(bArr13).longValue();
+                                j2 += jLongValue2;
+                                LogS.d("TranscodeLib", "64bit: " + jLongValue2);
+                            } else if (jUnsignedIntToLong == 0) {
                                 break;
                             } else {
-                                j2 += unsignedIntToLong;
+                                j2 += jUnsignedIntToLong;
                             }
                         }
                         str10 = str5;

@@ -14,13 +14,13 @@ public final class RcsClientConfiguration implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public RcsClientConfiguration createFromParcel(Parcel parcel) {
-            String readString = parcel.readString();
-            String readString2 = parcel.readString();
-            String readString3 = parcel.readString();
-            String readString4 = parcel.readString();
-            boolean readBoolean = parcel.readBoolean();
-            Boolean.valueOf(readBoolean).getClass();
-            return new RcsClientConfiguration(readString, readString2, readString3, readString4, readBoolean);
+            String string = parcel.readString();
+            String string2 = parcel.readString();
+            String string3 = parcel.readString();
+            String string4 = parcel.readString();
+            boolean z = parcel.readBoolean();
+            Boolean.valueOf(z).getClass();
+            return new RcsClientConfiguration(string, string2, string3, string4, z);
         }
 
         /* JADX WARN: Can't rename method to resolve collision */

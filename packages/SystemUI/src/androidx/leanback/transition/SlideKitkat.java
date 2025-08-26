@@ -18,7 +18,6 @@ import android.view.animation.DecelerateInterpolator;
 import androidx.leanback.R$styleable;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 class SlideKitkat extends Visibility {
     public CalculateSlide mSlideCalculator;
@@ -61,7 +60,6 @@ class SlideKitkat extends Visibility {
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface CalculateSlide {
         float getGone(View view);
 
@@ -70,7 +68,6 @@ class SlideKitkat extends Visibility {
         Property getProperty();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class CalculateSlideHorizontal implements CalculateSlide {
         @Override // androidx.leanback.transition.SlideKitkat.CalculateSlide
         public final float getHere(View view) {
@@ -83,7 +80,6 @@ class SlideKitkat extends Visibility {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class CalculateSlideVertical implements CalculateSlide {
         @Override // androidx.leanback.transition.SlideKitkat.CalculateSlide
         public final float getHere(View view) {
@@ -96,7 +92,6 @@ class SlideKitkat extends Visibility {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SlideAnimatorListener extends AnimatorListenerAdapter {
         public boolean mCanceled = false;
         public final float mEndValue;
@@ -154,12 +149,12 @@ class SlideKitkat extends Visibility {
             f = View.TRANSLATION_Y == property ? fArr[1] : fArr[0];
             view.setTag(R.id.lb_slide_transition_value, null);
         }
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) property, f, f2);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) property, f, f2);
         SlideAnimatorListener slideAnimatorListener = new SlideAnimatorListener(view, property, f3, f2, i);
-        ofFloat.addListener(slideAnimatorListener);
-        ofFloat.addPauseListener(slideAnimatorListener);
-        ofFloat.setInterpolator(timeInterpolator);
-        return ofFloat;
+        objectAnimatorOfFloat.addListener(slideAnimatorListener);
+        objectAnimatorOfFloat.addPauseListener(slideAnimatorListener);
+        objectAnimatorOfFloat.setInterpolator(timeInterpolator);
+        return objectAnimatorOfFloat;
     }
 
     @Override // android.transition.Visibility
@@ -208,20 +203,20 @@ class SlideKitkat extends Visibility {
     }
 
     public SlideKitkat(Context context, AttributeSet attributeSet) {
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.lbSlide);
-        setSlideEdge(obtainStyledAttributes.getInt(3, 80));
-        long j = obtainStyledAttributes.getInt(1, -1);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.lbSlide);
+        setSlideEdge(typedArrayObtainStyledAttributes.getInt(3, 80));
+        long j = typedArrayObtainStyledAttributes.getInt(1, -1);
         if (j >= 0) {
             setDuration(j);
         }
-        long j2 = obtainStyledAttributes.getInt(2, -1);
+        long j2 = typedArrayObtainStyledAttributes.getInt(2, -1);
         if (j2 > 0) {
             setStartDelay(j2);
         }
-        int resourceId = obtainStyledAttributes.getResourceId(0, 0);
+        int resourceId = typedArrayObtainStyledAttributes.getResourceId(0, 0);
         if (resourceId > 0) {
             setInterpolator(AnimationUtils.loadInterpolator(context, resourceId));
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
     }
 }

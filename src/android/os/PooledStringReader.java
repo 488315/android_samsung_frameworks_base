@@ -15,12 +15,12 @@ public class PooledStringReader {
     }
 
     public String readString() {
-        int readInt = this.mIn.readInt();
-        if (readInt >= 0) {
-            return this.mPool[readInt];
+        int i = this.mIn.readInt();
+        if (i >= 0) {
+            return this.mPool[i];
         }
-        String readString = this.mIn.readString();
-        this.mPool[(-readInt) - 1] = readString;
-        return readString;
+        String string = this.mIn.readString();
+        this.mPool[(-i) - 1] = string;
+        return string;
     }
 }

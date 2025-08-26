@@ -44,9 +44,9 @@ public interface IApplicationStartInfoCompleteListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IApplicationStartInfoCompleteListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IApplicationStartInfoCompleteListener)) {
-                return (IApplicationStartInfoCompleteListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IApplicationStartInfoCompleteListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IApplicationStartInfoCompleteListener)) {
+                return (IApplicationStartInfoCompleteListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -99,13 +99,13 @@ public interface IApplicationStartInfoCompleteListener extends IInterface {
 
             @Override // android.app.IApplicationStartInfoCompleteListener
             public void onApplicationStartInfoComplete(ApplicationStartInfo applicationStartInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IApplicationStartInfoCompleteListener.DESCRIPTOR);
-                    obtain.writeTypedObject(applicationStartInfo, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IApplicationStartInfoCompleteListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(applicationStartInfo, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

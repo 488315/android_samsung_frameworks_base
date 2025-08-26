@@ -13,12 +13,10 @@ import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @Navigator.Name("dialog")
 /* loaded from: classes.dex */
 public final class DialogNavigator extends Navigator {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -49,7 +47,7 @@ public final class DialogNavigator extends Navigator {
     @Override // androidx.navigation.Navigator
     public final void popBackStack(NavBackStackEntry navBackStackEntry, boolean z) {
         getState().popWithTransition(navBackStackEntry, z);
-        int indexOf = CollectionsKt___CollectionsKt.indexOf((Iterable) getState().transitionsInProgress.$$delegate_0.getValue(), navBackStackEntry);
+        int iIndexOf = CollectionsKt___CollectionsKt.indexOf((Iterable) getState().transitionsInProgress.$$delegate_0.getValue(), navBackStackEntry);
         int i = 0;
         for (Object obj : (Iterable) getState().transitionsInProgress.$$delegate_0.getValue()) {
             int i2 = i + 1;
@@ -58,14 +56,13 @@ public final class DialogNavigator extends Navigator {
                 throw null;
             }
             NavBackStackEntry navBackStackEntry2 = (NavBackStackEntry) obj;
-            if (i > indexOf) {
+            if (i > iIndexOf) {
                 getState().markTransitionComplete(navBackStackEntry2);
             }
             i = i2;
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Destination extends NavDestination implements FloatingWindow {
         public final Function3 content;
         public final DialogProperties dialogProperties;

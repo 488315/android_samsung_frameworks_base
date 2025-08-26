@@ -46,11 +46,11 @@ public class CocktailHostView extends FrameLayout {
 
     /* JADX WARN: Multi-variable type inference failed */
     public void viewDataChanged(int i) {
-        View findViewById = findViewById(i);
-        if (findViewById == null || !(findViewById instanceof AdapterView)) {
+        View viewFindViewById = findViewById(i);
+        if (viewFindViewById == null || !(viewFindViewById instanceof AdapterView)) {
             return;
         }
-        AdapterView adapterView = (AdapterView) findViewById;
+        AdapterView adapterView = (AdapterView) viewFindViewById;
         Adapter adapter = adapterView.getAdapter();
         if (adapter instanceof BaseAdapter) {
             ((BaseAdapter) adapter).notifyDataSetChanged();

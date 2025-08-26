@@ -6,14 +6,13 @@ import android.util.SparseArray;
 import android.view.View;
 import androidx.compose.runtime.CompositionContext;
 import androidx.compose.runtime.saveable.SaveableStateRegistry;
-import androidx.compose.runtime.saveable.SaveableStateRegistryImpl$registerProvider$3;
+import androidx.compose.runtime.saveable.SaveableStateRegistryImpl;
 import androidx.compose.ui.input.nestedscroll.NestedScrollDispatcher;
 import androidx.compose.ui.node.Owner;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ViewFactoryHolder<T extends View> extends AndroidViewHolder {
     public Function1 releaseBlock;
@@ -30,14 +29,14 @@ public final class ViewFactoryHolder<T extends View> extends AndroidViewHolder {
         super(context, compositionContext, i, nestedScrollDispatcher, t, owner);
         this.typedView = t;
         setClipChildren(false);
-        String valueOf = String.valueOf(i);
-        Object consumeRestored = saveableStateRegistry != null ? saveableStateRegistry.consumeRestored(valueOf) : null;
-        SparseArray<Parcelable> sparseArray = consumeRestored instanceof SparseArray ? (SparseArray) consumeRestored : null;
+        String strValueOf = String.valueOf(i);
+        Object objConsumeRestored = saveableStateRegistry != null ? saveableStateRegistry.consumeRestored(strValueOf) : null;
+        SparseArray<Parcelable> sparseArray = objConsumeRestored instanceof SparseArray ? (SparseArray) objConsumeRestored : null;
         if (sparseArray != null) {
             t.restoreHierarchyState(sparseArray);
         }
         if (saveableStateRegistry != null) {
-            SaveableStateRegistry.Entry registerProvider = saveableStateRegistry.registerProvider(valueOf, new Function0(this) { // from class: androidx.compose.ui.viewinterop.ViewFactoryHolder$registerSaveStateProvider$1
+            SaveableStateRegistry.Entry entryRegisterProvider = saveableStateRegistry.registerProvider(strValueOf, new Function0(this) { // from class: androidx.compose.ui.viewinterop.ViewFactoryHolder$registerSaveStateProvider$1
                 final /* synthetic */ ViewFactoryHolder<View> this$0;
 
                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
@@ -55,9 +54,9 @@ public final class ViewFactoryHolder<T extends View> extends AndroidViewHolder {
             });
             SaveableStateRegistry.Entry entry = this.savableRegistryEntry;
             if (entry != null) {
-                ((SaveableStateRegistryImpl$registerProvider$3) entry).unregister();
+                ((SaveableStateRegistryImpl.AnonymousClass3) entry).unregister();
             }
-            this.savableRegistryEntry = registerProvider;
+            this.savableRegistryEntry = entryRegisterProvider;
         }
         Function1 function1 = AndroidView_androidKt.NoOpUpdate;
         this.updateBlock = function1;
@@ -70,6 +69,6 @@ public final class ViewFactoryHolder<T extends View> extends AndroidViewHolder {
     }
 
     public ViewFactoryHolder(Context context, Function1 function1, CompositionContext compositionContext, SaveableStateRegistry saveableStateRegistry, int i, Owner owner) {
-        this(context, compositionContext, (View) function1.mo779invoke(context), null, saveableStateRegistry, i, owner, 8, null);
+        this(context, compositionContext, (View) function1.mo781invoke(context), null, saveableStateRegistry, i, owner, 8, null);
     }
 }

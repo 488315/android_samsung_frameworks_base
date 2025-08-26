@@ -6,22 +6,34 @@ import androidx.compose.runtime.ParcelableSnapshotMutableState$Companion$CREATOR
 import com.android.settingslib.SignalIcon$MobileIconGroup;
 import com.android.settingslib.mobile.MobileIconCarrierIdOverrides;
 import com.android.settingslib.mobile.MobileIconCarrierIdOverridesImpl;
+import com.android.settingslib.mobile.MobileMappings;
+import com.android.systemui.BasicRune;
+import com.android.systemui.common.shared.model.Icon;
 import com.android.systemui.log.table.DiffableKt;
 import com.android.systemui.log.table.TableLogBuffer;
 import com.android.systemui.statusbar.pipeline.carrier.CarrierInfraMediator;
+import com.android.systemui.statusbar.pipeline.mobile.data.model.DataConnectionState;
 import com.android.systemui.statusbar.pipeline.mobile.data.model.MobileServiceState;
 import com.android.systemui.statusbar.pipeline.mobile.data.model.NetworkNameModel;
+import com.android.systemui.statusbar.pipeline.mobile.data.model.ResolvedNetworkType;
+import com.android.systemui.statusbar.pipeline.mobile.data.model.SimCardModel;
+import com.android.systemui.statusbar.pipeline.mobile.data.model.SimType;
 import com.android.systemui.statusbar.pipeline.mobile.data.repository.MobileConnectionRepository;
 import com.android.systemui.statusbar.pipeline.mobile.domain.model.NetworkTypeIconModel;
 import com.android.systemui.statusbar.pipeline.mobile.domain.model.SignalIconModel;
 import com.android.systemui.statusbar.pipeline.mobile.ui.model.DisabledDataIconModel;
 import com.android.systemui.statusbar.pipeline.mobile.ui.model.DisabledDataIconModelKt;
 import com.android.systemui.statusbar.pipeline.mobile.ui.util.MobileSignalIconResource;
+import com.android.systemui.statusbar.pipeline.mobile.ui.util.SamsungMobileIcons;
 import com.android.systemui.statusbar.pipeline.mobile.util.MobileMappingsProxy;
+import com.android.systemui.statusbar.pipeline.mobile.util.MobileMappingsProxyImpl;
+import com.android.systemui.statusbar.pipeline.satellite.ui.model.SatelliteIconModel;
+import com.android.systemui.statusbar.pipeline.shared.data.model.ImsRegState;
 import com.android.systemui.statusbar.pipeline.wifi.data.repository.WifiRepository;
 import com.android.systemui.statusbar.policy.data.repository.UserSetupRepository;
 import com.android.systemui.statusbar.policy.data.repository.UserSetupRepositoryImpl;
 import com.android.systemui.utils.coroutines.flow.FlowConflatedKt;
+import java.util.Map;
 import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
@@ -30,7 +42,9 @@ import kotlin.coroutines.jvm.internal.ContinuationImpl;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function3;
+import kotlin.jvm.functions.Function6;
 import kotlin.jvm.internal.DefaultConstructorMarker;
+import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
@@ -43,7 +57,6 @@ import kotlinx.coroutines.flow.StartedWhileSubscribed;
 import kotlinx.coroutines.flow.StateFlow;
 import kotlinx.coroutines.flow.internal.CombineKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class MobileIconInteractorImpl implements MobileIconInteractor {
     public final StateFlow activeDataSubId;
@@ -105,6 +118,129 @@ public final class MobileIconInteractorImpl implements MobileIconInteractor {
     public final ReadonlyStateFlow voiceNoServiceIcon;
     public final FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 wifiConnected;
 
+    /* renamed from: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$isNonTerrestrial$1, reason: invalid class name */
+    final class AnonymousClass1 extends SuspendLambda implements Function3 {
+        /* synthetic */ boolean Z$0;
+        /* synthetic */ boolean Z$1;
+        int label;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(3, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function3
+        public final Object invoke(Object obj, Object obj2, Object obj3) {
+            boolean zBooleanValue = ((Boolean) obj).booleanValue();
+            boolean zBooleanValue2 = ((Boolean) obj2).booleanValue();
+            AnonymousClass1 anonymousClass1 = MobileIconInteractorImpl.this.new AnonymousClass1((Continuation) obj3);
+            anonymousClass1.Z$0 = zBooleanValue;
+            anonymousClass1.Z$1 = zBooleanValue2;
+            return anonymousClass1.invokeSuspend(Unit.INSTANCE);
+        }
+
+        /* JADX WARN: Removed duplicated region for block: B:9:0x0022  */
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        /*
+            Code decompiled incorrectly, please refer to instructions dump.
+        */
+        public final Object invokeSuspend(Object obj) {
+            boolean z;
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            boolean z2 = this.Z$0;
+            boolean z3 = this.Z$1;
+            if (!z2) {
+                MobileIconInteractorImpl mobileIconInteractorImpl = MobileIconInteractorImpl.this;
+                z = false;
+                if (mobileIconInteractorImpl.carrierInfraMediator.isEnabled(CarrierInfraMediator.Conditions.IS_CHINA_DEVICE, mobileIconInteractorImpl.slotId, new Object[0]) && z3) {
+                    z = true;
+                }
+            }
+            return Boolean.valueOf(z);
+        }
+    }
+
+    /* renamed from: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$isRoaming$1, reason: invalid class name and case insensitive filesystem */
+    final class C11041 extends SuspendLambda implements Function6 {
+        /* synthetic */ boolean Z$0;
+        /* synthetic */ boolean Z$1;
+        /* synthetic */ boolean Z$2;
+        /* synthetic */ boolean Z$3;
+        /* synthetic */ boolean Z$4;
+        int label;
+
+        public C11041(Continuation continuation) {
+            super(6, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function6
+        public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4, Object obj5, Object obj6) {
+            boolean zBooleanValue = ((Boolean) obj).booleanValue();
+            boolean zBooleanValue2 = ((Boolean) obj2).booleanValue();
+            boolean zBooleanValue3 = ((Boolean) obj3).booleanValue();
+            boolean zBooleanValue4 = ((Boolean) obj4).booleanValue();
+            boolean zBooleanValue5 = ((Boolean) obj5).booleanValue();
+            C11041 c11041 = new C11041((Continuation) obj6);
+            c11041.Z$0 = zBooleanValue;
+            c11041.Z$1 = zBooleanValue2;
+            c11041.Z$2 = zBooleanValue3;
+            c11041.Z$3 = zBooleanValue4;
+            c11041.Z$4 = zBooleanValue5;
+            return c11041.invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            boolean z = this.Z$0;
+            boolean z2 = this.Z$1;
+            boolean z3 = this.Z$2;
+            boolean z4 = this.Z$3;
+            boolean z5 = this.Z$4;
+            boolean z6 = false;
+            if (!z && (z5 || (!z2 ? z4 : z3))) {
+                z6 = true;
+            }
+            return Boolean.valueOf(z6);
+        }
+    }
+
+    /* renamed from: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$isVoWifiConnected$1, reason: invalid class name and case insensitive filesystem */
+    final class C11051 extends SuspendLambda implements Function3 {
+        /* synthetic */ Object L$0;
+        /* synthetic */ Object L$1;
+        int label;
+
+        public C11051(Continuation continuation) {
+            super(3, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function3
+        public final Object invoke(Object obj, Object obj2, Object obj3) {
+            C11051 c11051 = new C11051((Continuation) obj3);
+            c11051.L$0 = (ImsRegState) obj;
+            c11051.L$1 = (MobileServiceState) obj2;
+            return c11051.invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            return Boolean.valueOf(((ImsRegState) this.L$0).voWifiRegState && ((MobileServiceState) this.L$1).telephonyDisplayInfo.getNetworkType() == 18);
+        }
+    }
+
     /* JADX WARN: Type inference failed for: r10v38, types: [com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$combine$4] */
     public MobileIconInteractorImpl(CoroutineScope coroutineScope, StateFlow stateFlow, StateFlow stateFlow2, StateFlow stateFlow3, StateFlow stateFlow4, StateFlow stateFlow5, StateFlow stateFlow6, Flow flow, StateFlow stateFlow7, StateFlow stateFlow8, StateFlow stateFlow9, Flow flow2, MobileConnectionRepository mobileConnectionRepository, Context context, UserSetupRepository userSetupRepository, WifiRepository wifiRepository, MobileDataIconResource mobileDataIconResource, MobileSignalIconResource mobileSignalIconResource, MobileRoamingIconResource mobileRoamingIconResource, MobileDisabledDataIconResource mobileDisabledDataIconResource, CarrierInfraMediator carrierInfraMediator, MobileMappingsProxy mobileMappingsProxy, StateFlow stateFlow10, boolean z, Handler handler, MobileIconCarrierIdOverrides mobileIconCarrierIdOverrides) {
         Flow flowKt__ZipKt$combine$$inlined$unsafeFlow$1;
@@ -130,12 +266,12 @@ public final class MobileIconInteractorImpl implements MobileIconInteractor {
         this.isDataEnabled = fakeMobileConnectionRepository.dataEnabled;
         StateFlow stateFlow11 = fakeMobileConnectionRepository.carrierNetworkChangeActive;
         this.carrierNetworkChangeActive = stateFlow11;
-        Flow distinctUntilChanged = FlowKt.distinctUntilChanged(FlowKt.combine(fakeMobileConnectionRepository.carrierId, fakeMobileConnectionRepository.resolvedNetworkType, fakeMobileConnectionRepository.mobileServiceState, flow, new MobileIconInteractorImpl$carrierIdIconOverrideExists$1(this, null)));
+        Flow flowDistinctUntilChanged = FlowKt.distinctUntilChanged(FlowKt.combine(fakeMobileConnectionRepository.carrierId, fakeMobileConnectionRepository.resolvedNetworkType, fakeMobileConnectionRepository.mobileServiceState, flow, new MobileIconInteractorImpl$carrierIdIconOverrideExists$1(this, null)));
         SharingStarted.Companion companion = SharingStarted.Companion;
-        StartedWhileSubscribed WhileSubscribed$default = SharingStarted.Companion.WhileSubscribed$default(companion, 3);
+        StartedWhileSubscribed startedWhileSubscribedWhileSubscribed$default = SharingStarted.Companion.WhileSubscribed$default(companion, 3);
         Boolean bool = Boolean.FALSE;
-        ReadonlyStateFlow stateIn = FlowKt.stateIn(distinctUntilChanged, coroutineScope, WhileSubscribed$default, bool);
-        this.carrierIdIconOverrideExists = stateIn;
+        ReadonlyStateFlow readonlyStateFlowStateIn = FlowKt.stateIn(flowDistinctUntilChanged, coroutineScope, startedWhileSubscribedWhileSubscribed$default, bool);
+        this.carrierIdIconOverrideExists = readonlyStateFlowStateIn;
         MobileIconInteractorImpl$networkName$1 mobileIconInteractorImpl$networkName$1 = new MobileIconInteractorImpl$networkName$1(null);
         StateFlow stateFlow12 = fakeMobileConnectionRepository.operatorAlphaShort;
         StateFlow stateFlow13 = fakeMobileConnectionRepository.networkName;
@@ -144,8 +280,8 @@ public final class MobileIconInteractorImpl implements MobileIconInteractor {
         StateFlow stateFlow14 = fakeMobileConnectionRepository.carrierName;
         this.carrierName = FlowKt.stateIn(new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(stateFlow12, stateFlow14, mobileIconInteractorImpl$carrierName$1), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), ((NetworkNameModel) stateFlow14.getValue()).getName());
         this.mobileSignalTransition = new MobileSignalTransitionManager();
-        ReadonlyStateFlow stateIn2 = FlowKt.stateIn(FlowKt.combine(fakeMobileConnectionRepository.carrierNetworkChangeActive, fakeMobileConnectionRepository.isGsm, fakeMobileConnectionRepository.isRoaming, fakeMobileConnectionRepository.cdmaRoaming, fakeMobileConnectionRepository.swRoaming, new MobileIconInteractorImpl$isRoaming$1(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), bool);
-        this.isRoaming = stateIn2;
+        ReadonlyStateFlow readonlyStateFlowStateIn2 = FlowKt.stateIn(FlowKt.combine(fakeMobileConnectionRepository.carrierNetworkChangeActive, fakeMobileConnectionRepository.isGsm, fakeMobileConnectionRepository.isRoaming, fakeMobileConnectionRepository.cdmaRoaming, fakeMobileConnectionRepository.swRoaming, new C11041(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), bool);
+        this.isRoaming = readonlyStateFlowStateIn2;
         final StateFlow stateFlow15 = fakeMobileConnectionRepository.mobileServiceState;
         this.mobileServiceState = stateFlow15;
         StateFlow stateFlow16 = fakeMobileConnectionRepository.imsRegState;
@@ -154,10 +290,9 @@ public final class MobileIconInteractorImpl implements MobileIconInteractor {
         final StateFlow stateFlow17 = fakeMobileConnectionRepository.simCardInfo;
         FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1 flowKt__TransformKt$onEach$$inlined$unsafeTransform$1 = new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(flow, stateFlow17, mobileIconInteractorImpl$updatedMobileIconMapping$1), new MobileIconInteractorImpl$updatedMobileIconMapping$2(this, null));
         this.updatedMobileIconMapping = flowKt__TransformKt$onEach$$inlined$unsafeTransform$1;
-        final Flow[] flowArr = {fakeMobileConnectionRepository.resolvedNetworkType, flowKt__TransformKt$onEach$$inlined$unsafeTransform$1, stateFlow8, fakeMobileConnectionRepository.simCardInfo, fakeMobileConnectionRepository.onTheCall, stateIn2, stateFlow15};
-        ReadonlyStateFlow stateIn3 = FlowKt.stateIn(new Flow() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$combine$1
+        final Flow[] flowArr = {fakeMobileConnectionRepository.resolvedNetworkType, flowKt__TransformKt$onEach$$inlined$unsafeTransform$1, stateFlow8, fakeMobileConnectionRepository.simCardInfo, fakeMobileConnectionRepository.onTheCall, readonlyStateFlowStateIn2, stateFlow15};
+        ReadonlyStateFlow readonlyStateFlowStateIn3 = FlowKt.stateIn(new Flow() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$combine$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$combine$1$3, reason: invalid class name */
             public final class AnonymousClass3 extends SuspendLambda implements Function3 {
                 private /* synthetic */ Object L$0;
@@ -179,50 +314,179 @@ public final class MobileIconInteractorImpl implements MobileIconInteractor {
                     return anonymousClass3.invokeSuspend(Unit.INSTANCE);
                 }
 
-                /* JADX WARN: Code restructure failed: missing block: B:29:0x00c8, code lost:
-                
-                    if (r5 == false) goto L29;
-                 */
+                /* JADX WARN: Removed duplicated region for block: B:101:0x022d  */
+                /* JADX WARN: Removed duplicated region for block: B:110:0x0257  */
+                /* JADX WARN: Removed duplicated region for block: B:29:0x00ca  */
                 @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object invokeSuspend(java.lang.Object r21) {
-                    /*
-                        Method dump skipped, instructions count: 680
-                        To view this dump change 'Code comments level' option to 'DEBUG'
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$combine$1.AnonymousClass3.invokeSuspend(java.lang.Object):java.lang.Object");
+                public final Object invokeSuspend(Object obj) {
+                    int i;
+                    String lookupKey;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = this.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj);
+                        FlowCollector flowCollector = (FlowCollector) this.L$0;
+                        Object[] objArr = (Object[]) this.L$1;
+                        boolean zEquals = false;
+                        ResolvedNetworkType resolvedNetworkType = (ResolvedNetworkType) objArr[0];
+                        Map map = (Map) objArr[1];
+                        SignalIcon$MobileIconGroup signalIcon$MobileIconGroup = (SignalIcon$MobileIconGroup) objArr[2];
+                        SimCardModel simCardModel = (SimCardModel) objArr[3];
+                        boolean zBooleanValue = ((Boolean) objArr[4]).booleanValue();
+                        boolean zBooleanValue2 = ((Boolean) objArr[5]).booleanValue();
+                        MobileServiceState mobileServiceState = (MobileServiceState) objArr[6];
+                        if (resolvedNetworkType instanceof ResolvedNetworkType.CarrierMergedNetworkType) {
+                            ((ResolvedNetworkType.CarrierMergedNetworkType) resolvedNetworkType).getClass();
+                            signalIcon$MobileIconGroup = ResolvedNetworkType.CarrierMergedNetworkType.iconGroupOverride;
+                            i = 1;
+                        } else {
+                            if (map != null) {
+                                MobileIconInteractorImpl mobileIconInteractorImpl = this.this$0;
+                                MobileDataIconResource mobileDataIconResource = mobileIconInteractorImpl.dataIconResource;
+                                SimType simType = simCardModel.simType;
+                                mobileDataIconResource.getClass();
+                                CarrierInfraMediator carrierInfraMediator = mobileDataIconResource.carrierInfraMediator;
+                                int i3 = mobileIconInteractorImpl.slotId;
+                                boolean zIsEnabled = carrierInfraMediator.isEnabled(CarrierInfraMediator.Conditions.IS_USA_VZW, i3, new Object[0]);
+                                MobileMappingsProxy mobileMappingsProxy = mobileDataIconResource.mobileMappingsProxy;
+                                if (zIsEnabled) {
+                                    if (!zBooleanValue || mobileDataIconResource.mTelephonyManager.hasCall("volte")) {
+                                        lookupKey = resolvedNetworkType.getLookupKey();
+                                    } else {
+                                        int i4 = mobileServiceState.voiceNetworkType;
+                                        ((MobileMappingsProxyImpl) mobileMappingsProxy).getClass();
+                                        lookupKey = Integer.toString(i4);
+                                    }
+                                    ((MobileMappingsProxyImpl) mobileMappingsProxy).getClass();
+                                    if (Intrinsics.areEqual(lookupKey, MobileMappings.toDisplayIconKey(5))) {
+                                        if (zBooleanValue2) {
+                                            lookupKey = Integer.toString(20);
+                                        } else {
+                                            if (BasicRune.STATUS_NETWORK_MULTI_SIM) {
+                                                zEquals = "VZW".equals((String) carrierInfraMediator.get(CarrierInfraMediator.Values.ICON_BRANDING_FROM_CARRIER_FEATURE, i3, new Object[0]));
+                                            } else if (simType == SimType.VZW) {
+                                                zEquals = true;
+                                            }
+                                            if (!zEquals) {
+                                            }
+                                        }
+                                    }
+                                } else if (carrierInfraMediator.isEnabled(CarrierInfraMediator.Conditions.IS_USA_TMOBILE_FAMILY, i3, new Object[0])) {
+                                    lookupKey = resolvedNetworkType.getLookupKey();
+                                    if (zBooleanValue2) {
+                                        ((MobileMappingsProxyImpl) mobileMappingsProxy).getClass();
+                                        if (Intrinsics.areEqual(lookupKey, Integer.toString(3)) || Intrinsics.areEqual(lookupKey, Integer.toString(17)) || Intrinsics.areEqual(lookupKey, Integer.toString(8)) || Intrinsics.areEqual(lookupKey, Integer.toString(9))) {
+                                            lookupKey = Integer.toString(5);
+                                        } else if (Intrinsics.areEqual(lookupKey, MobileMappings.toDisplayIconKey(5))) {
+                                            lookupKey = Integer.toString(20);
+                                        }
+                                    }
+                                } else {
+                                    CarrierInfraMediator.Values values = CarrierInfraMediator.Values.ICON_BRANDING;
+                                    if (Intrinsics.areEqual(carrierInfraMediator.get(values, i3, new Object[0]), "TMB_OPEN") || Intrinsics.areEqual(carrierInfraMediator.get(values, i3, new Object[0]), "TMK_OPEN")) {
+                                        lookupKey = resolvedNetworkType.getLookupKey();
+                                        if (zBooleanValue2) {
+                                            ((MobileMappingsProxyImpl) mobileMappingsProxy).getClass();
+                                            if (Intrinsics.areEqual(lookupKey, MobileMappings.toDisplayIconKey(5))) {
+                                                lookupKey = Integer.toString(20);
+                                            }
+                                        }
+                                    } else if (Intrinsics.areEqual(carrierInfraMediator.get(values, i3, new Object[0]), "INU_4G")) {
+                                        if ((mobileServiceState.optionalRadioTech == 1) && simType == SimType.AIRTEL) {
+                                            zEquals = true;
+                                        }
+                                        lookupKey = resolvedNetworkType.getLookupKey();
+                                        if (zEquals) {
+                                            ((MobileMappingsProxyImpl) mobileMappingsProxy).getClass();
+                                            if (Intrinsics.areEqual(lookupKey, Integer.toString(3)) || Intrinsics.areEqual(lookupKey, Integer.toString(10)) || Intrinsics.areEqual(lookupKey, Integer.toString(15))) {
+                                                lookupKey = Integer.toString(13);
+                                            }
+                                        }
+                                    } else if (carrierInfraMediator.isEnabled(CarrierInfraMediator.Conditions.IS_LATIN_AMX_FAMILY, i3, new Object[0])) {
+                                        int i5 = mobileServiceState.optionalRadioTech;
+                                        boolean z = i5 == 4;
+                                        boolean z2 = i5 == 3;
+                                        String lookupKey2 = resolvedNetworkType.getLookupKey();
+                                        ((MobileMappingsProxyImpl) mobileMappingsProxy).getClass();
+                                        if (!Intrinsics.areEqual(lookupKey2, Integer.toString(13))) {
+                                            lookupKey = lookupKey2;
+                                        } else if (Intrinsics.areEqual(carrierInfraMediator.get(values, i3, new Object[0]), "CDR") || Intrinsics.areEqual(carrierInfraMediator.get(values, i3, new Object[0]), "AMX") || Intrinsics.areEqual(carrierInfraMediator.get(values, i3, new Object[0]), "PCT")) {
+                                            if (z) {
+                                                lookupKey = MobileMappings.toDisplayIconKey(2);
+                                            } else if (z2) {
+                                                lookupKey = MobileMappings.toDisplayIconKey(1);
+                                            }
+                                        } else if ((Intrinsics.areEqual(carrierInfraMediator.get(values, i3, new Object[0]), "TCE") || Intrinsics.areEqual(carrierInfraMediator.get(values, i3, new Object[0]), "CHL")) && (z || z2)) {
+                                            lookupKey = MobileMappings.toDisplayIconKey(1);
+                                        }
+                                    } else if (!carrierInfraMediator.isEnabled(CarrierInfraMediator.Conditions.IS_LATIN_DISABLED_ICON, i3, new Object[0])) {
+                                        lookupKey = resolvedNetworkType.getLookupKey();
+                                    } else if (mobileServiceState.dataRegState == 0) {
+                                        String lookupKey3 = resolvedNetworkType.getLookupKey();
+                                        ((MobileMappingsProxyImpl) mobileMappingsProxy).getClass();
+                                        if (Intrinsics.areEqual(lookupKey3, Integer.toString(0))) {
+                                            int i6 = mobileServiceState.voiceNetworkType;
+                                            if (i6 == 16) {
+                                                ((MobileMappingsProxyImpl) mobileMappingsProxy).getClass();
+                                                lookupKey = Integer.toString(1);
+                                            } else {
+                                                ((MobileMappingsProxyImpl) mobileMappingsProxy).getClass();
+                                                lookupKey = Integer.toString(i6);
+                                            }
+                                        } else {
+                                            lookupKey = resolvedNetworkType.getLookupKey();
+                                        }
+                                    }
+                                }
+                                SignalIcon$MobileIconGroup signalIcon$MobileIconGroup2 = (SignalIcon$MobileIconGroup) map.get(lookupKey);
+                                if (signalIcon$MobileIconGroup2 != null) {
+                                    signalIcon$MobileIconGroup = signalIcon$MobileIconGroup2;
+                                }
+                            }
+                            i = 1;
+                        }
+                        this.label = i;
+                        if (flowCollector.emit(signalIcon$MobileIconGroup, this) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
                 final Flow[] flowArr2 = flowArr;
-                Object combineInternal = CombineKt.combineInternal(flowArr2, new Function0() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$combine$1.2
+                Object objCombineInternal = CombineKt.combineInternal(flowArr2, new Function0() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$combine$1.2
                     @Override // kotlin.jvm.functions.Function0
                     public final Object invoke() {
                         return new Object[flowArr2.length];
                     }
                 }, new AnonymousClass3(null, this), flowCollector, continuation);
-                return combineInternal == CoroutineSingletons.COROUTINE_SUSPENDED ? combineInternal : Unit.INSTANCE;
+                return objCombineInternal == CoroutineSingletons.COROUTINE_SUSPENDED ? objCombineInternal : Unit.INSTANCE;
             }
         }, coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), stateFlow8.getValue());
-        this.defaultNetworkType = stateIn3;
-        ReadonlyStateFlow stateIn4 = FlowKt.stateIn(DiffableKt.logDiffsForTable(FlowKt.distinctUntilChanged(new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(stateIn3, stateIn, new MobileIconInteractorImpl$networkTypeIconGroup$1(this, null))), tableLogBuffer, "", new NetworkTypeIconModel.DefaultIcon((SignalIcon$MobileIconGroup) stateFlow8.getValue())), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), new NetworkTypeIconModel.DefaultIcon((SignalIcon$MobileIconGroup) stateFlow8.getValue()));
-        this.networkTypeIconGroup = stateIn4;
+        this.defaultNetworkType = readonlyStateFlowStateIn3;
+        ReadonlyStateFlow readonlyStateFlowStateIn4 = FlowKt.stateIn(DiffableKt.logDiffsForTable(FlowKt.distinctUntilChanged(new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(readonlyStateFlowStateIn3, readonlyStateFlowStateIn, new MobileIconInteractorImpl$networkTypeIconGroup$1(this, null))), tableLogBuffer, "", new NetworkTypeIconModel.DefaultIcon((SignalIcon$MobileIconGroup) stateFlow8.getValue())), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), new NetworkTypeIconModel.DefaultIcon((SignalIcon$MobileIconGroup) stateFlow8.getValue()));
+        this.networkTypeIconGroup = readonlyStateFlowStateIn4;
         this.showSliceAttribution = FlowKt.stateIn(new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(fakeMobileConnectionRepository.allowNetworkSliceIndicator, fakeMobileConnectionRepository.hasPrioritizedNetworkCapabilities, new MobileIconInteractorImpl$showSliceAttribution$1(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), bool);
-        ReadonlyStateFlow stateIn5 = FlowKt.stateIn(DiffableKt.logDiffsForTable((Flow) new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(fakeMobileConnectionRepository.isNonTerrestrial, fakeMobileConnectionRepository.semSatelliteEnabled, new MobileIconInteractorImpl$isNonTerrestrial$1(this, null)), tableLogBuffer, "Intr", ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(i, "(", ")isNonTerrestrial"), false), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), bool);
-        this.isNonTerrestrial = stateIn5;
-        ReadonlyStateFlow stateIn6 = FlowKt.stateIn(FlowKt.combine(fakeMobileConnectionRepository.isGsm, fakeMobileConnectionRepository.primaryLevel, fakeMobileConnectionRepository.cdmaLevel, stateFlow3, new MobileIconInteractorImpl$level$1(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), 0);
-        this.level = stateIn6;
+        ReadonlyStateFlow readonlyStateFlowStateIn5 = FlowKt.stateIn(DiffableKt.logDiffsForTable((Flow) new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(fakeMobileConnectionRepository.isNonTerrestrial, fakeMobileConnectionRepository.semSatelliteEnabled, new AnonymousClass1(null)), tableLogBuffer, "Intr", ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(i, "(", ")isNonTerrestrial"), false), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), bool);
+        this.isNonTerrestrial = readonlyStateFlowStateIn5;
+        ReadonlyStateFlow readonlyStateFlowStateIn6 = FlowKt.stateIn(FlowKt.combine(fakeMobileConnectionRepository.isGsm, fakeMobileConnectionRepository.primaryLevel, fakeMobileConnectionRepository.cdmaLevel, stateFlow3, new MobileIconInteractorImpl$level$1(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), 0);
+        this.level = readonlyStateFlowStateIn6;
         StateFlow stateFlow18 = fakeMobileConnectionRepository.numberOfLevels;
         this.numberOfLevels = stateFlow18;
         final StateFlow stateFlow19 = fakeMobileConnectionRepository.dataConnectionState;
-        ReadonlyStateFlow stateIn7 = FlowKt.stateIn(new Flow() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$map$1
+        ReadonlyStateFlow readonlyStateFlowStateIn7 = FlowKt.stateIn(new Flow() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$map$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -249,75 +513,49 @@ public final class MobileIconInteractorImpl implements MobileIconInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$map$1$2$1 r0 = (com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$map$1$2$1 r0 = new com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$map$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L4a
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        com.android.systemui.statusbar.pipeline.mobile.data.model.DataConnectionState r5 = (com.android.systemui.statusbar.pipeline.mobile.data.model.DataConnectionState) r5
-                        com.android.systemui.statusbar.pipeline.mobile.data.model.DataConnectionState r6 = com.android.systemui.statusbar.pipeline.mobile.data.model.DataConnectionState.Connected
-                        if (r5 != r6) goto L3a
-                        r5 = r3
-                        goto L3b
-                    L3a:
-                        r5 = 0
-                    L3b:
-                        java.lang.Boolean r5 = java.lang.Boolean.valueOf(r5)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L4a
-                        return r1
-                    L4a:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        Boolean boolValueOf = Boolean.valueOf(((DataConnectionState) obj) == DataConnectionState.Connected);
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(boolValueOf, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = stateFlow19.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         }, coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), bool);
-        this.isDataConnected = stateIn7;
+        this.isDataConnected = readonlyStateFlowStateIn7;
         StateFlow stateFlow20 = fakeMobileConnectionRepository.isInService;
         this.isInService = stateFlow20;
         StateFlow stateFlow21 = fakeMobileConnectionRepository.isEmergencyOnly;
@@ -325,7 +563,6 @@ public final class MobileIconInteractorImpl implements MobileIconInteractor {
         this.isAllowedDuringAirplaneMode = fakeMobileConnectionRepository.isAllowedDuringAirplaneMode;
         this.isSimOn = FlowKt.stateIn(DiffableKt.logDiffsForTable(new Flow() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$map$2
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$map$2$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -352,96 +589,68 @@ public final class MobileIconInteractorImpl implements MobileIconInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$map$2.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$map$2$2$1 r0 = (com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$map$2.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$map$2$2$1 r0 = new com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$map$2$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L4c
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        com.android.systemui.statusbar.pipeline.mobile.data.model.SimCardModel r5 = (com.android.systemui.statusbar.pipeline.mobile.data.model.SimCardModel) r5
-                        com.android.systemui.statusbar.pipeline.mobile.data.model.SimType r5 = r5.simType
-                        com.android.systemui.statusbar.pipeline.mobile.data.model.SimType r6 = com.android.systemui.statusbar.pipeline.mobile.data.model.SimType.OFF
-                        if (r5 == r6) goto L3c
-                        r5 = r3
-                        goto L3d
-                    L3c:
-                        r5 = 0
-                    L3d:
-                        java.lang.Boolean r5 = java.lang.Boolean.valueOf(r5)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L4c
-                        return r1
-                    L4c:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$map$2.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        Boolean boolValueOf = Boolean.valueOf(((SimCardModel) obj).simType != SimType.OFF);
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(boolValueOf, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = stateFlow17.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         }, tableLogBuffer, "Intr", ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(i, "(", ")isSimOn"), false), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), bool);
         this.isSim1On = FlowKt.stateIn(DiffableKt.logDiffsForTable((Flow) fakeMobileConnectionRepository.sim1On, tableLogBuffer, "Intr", "isSim1On", false), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), bool);
         this.isDummySubId = fakeMobileConnectionRepository.subId == Integer.MAX_VALUE;
-        this.roamingId = FlowKt.stateIn(DiffableKt.logDiffsForTable(FlowKt.combine(stateFlow20, stateIn2, stateFlow15, fakeMobileConnectionRepository.swRoaming, fakeMobileConnectionRepository.semOMCChangedEvent, new MobileIconInteractorImpl$roamingId$1(this, null)), tableLogBuffer, "Intr", "roamingId", 0), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), 0);
-        ReadonlyStateFlow stateIn8 = FlowKt.stateIn(FlowKt.combine(stateFlow, stateFlow9, stateFlow20, new MobileIconInteractorImpl$showExclamationMark$1(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), Boolean.TRUE);
-        this.showExclamationMark = stateIn8;
-        ReadonlyStateFlow stateIn9 = FlowKt.stateIn(FlowKt.combine(stateFlow20, stateIn6, stateFlow18, new MobileIconInteractorImpl$updateSignalTransition$1(this, null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), Unit.INSTANCE);
-        this.updateSignalTransition = stateIn9;
-        ReadonlyStateFlow stateIn10 = FlowKt.stateIn(FlowConflatedKt.conflatedCallbackFlow(new MobileIconInteractorImpl$signalLevelUpdate$1(this, null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), 0);
-        this.signalLevelUpdate = stateIn10;
-        ReadonlyStateFlow stateIn11 = FlowKt.stateIn(FlowKt.combine(stateIn6, stateFlow20, fakeMobileConnectionRepository.inflateSignalStrength, stateFlow21, new MobileIconInteractorImpl$cellularShownLevel$1(this, null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), 0);
-        this.cellularShownLevel = stateIn11;
+        this.roamingId = FlowKt.stateIn(DiffableKt.logDiffsForTable(FlowKt.combine(stateFlow20, readonlyStateFlowStateIn2, stateFlow15, fakeMobileConnectionRepository.swRoaming, fakeMobileConnectionRepository.semOMCChangedEvent, new MobileIconInteractorImpl$roamingId$1(this, null)), tableLogBuffer, "Intr", "roamingId", 0), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), 0);
+        ReadonlyStateFlow readonlyStateFlowStateIn8 = FlowKt.stateIn(FlowKt.combine(stateFlow, stateFlow9, stateFlow20, new MobileIconInteractorImpl$showExclamationMark$1(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), Boolean.TRUE);
+        this.showExclamationMark = readonlyStateFlowStateIn8;
+        ReadonlyStateFlow readonlyStateFlowStateIn9 = FlowKt.stateIn(FlowKt.combine(stateFlow20, readonlyStateFlowStateIn6, stateFlow18, new MobileIconInteractorImpl$updateSignalTransition$1(this, null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), Unit.INSTANCE);
+        this.updateSignalTransition = readonlyStateFlowStateIn9;
+        ReadonlyStateFlow readonlyStateFlowStateIn10 = FlowKt.stateIn(FlowConflatedKt.conflatedCallbackFlow(new MobileIconInteractorImpl$signalLevelUpdate$1(this, null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), 0);
+        this.signalLevelUpdate = readonlyStateFlowStateIn10;
+        ReadonlyStateFlow readonlyStateFlowStateIn11 = FlowKt.stateIn(FlowKt.combine(readonlyStateFlowStateIn6, stateFlow20, fakeMobileConnectionRepository.inflateSignalStrength, stateFlow21, new MobileIconInteractorImpl$cellularShownLevel$1(this, null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), 0);
+        this.cellularShownLevel = readonlyStateFlowStateIn11;
         ReadonlyStateFlow readonlyStateFlow = ((UserSetupRepositoryImpl) userSetupRepository).isUserSetUp;
         this.isUserSetup = readonlyStateFlow;
         FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 flowKt__ZipKt$combine$$inlined$unsafeFlow$12 = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(wifiRepository.getWifiNetwork(), wifiRepository.isWifiDefault(), new MobileIconInteractorImpl$wifiConnected$1(null));
         this.wifiConnected = flowKt__ZipKt$combine$$inlined$unsafeFlow$12;
-        ReadonlyStateFlow stateIn12 = FlowKt.stateIn(new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(stateFlow16, stateFlow15, new MobileIconInteractorImpl$isVoWifiConnected$1(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), bool);
-        this.isVoWifiConnected = stateIn12;
-        final Flow[] flowArr2 = {stateIn7, stateFlow5, stateFlow20, stateFlow21, readonlyStateFlow, flowKt__ZipKt$combine$$inlined$unsafeFlow$12, stateFlow6, stateIn12};
-        ReadonlyStateFlow stateIn13 = FlowKt.stateIn(DiffableKt.logDiffsForTable(FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$combine$2
+        ReadonlyStateFlow readonlyStateFlowStateIn12 = FlowKt.stateIn(new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(stateFlow16, stateFlow15, new C11051(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), bool);
+        this.isVoWifiConnected = readonlyStateFlowStateIn12;
+        final Flow[] flowArr2 = {readonlyStateFlowStateIn7, stateFlow5, stateFlow20, stateFlow21, readonlyStateFlow, flowKt__ZipKt$combine$$inlined$unsafeFlow$12, stateFlow6, readonlyStateFlowStateIn12};
+        ReadonlyStateFlow readonlyStateFlowStateIn13 = FlowKt.stateIn(DiffableKt.logDiffsForTable(FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$combine$2
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$combine$2$3, reason: invalid class name */
             public final class AnonymousClass3 extends SuspendLambda implements Function3 {
                 private /* synthetic */ Object L$0;
@@ -463,55 +672,86 @@ public final class MobileIconInteractorImpl implements MobileIconInteractor {
                     return anonymousClass3.invokeSuspend(Unit.INSTANCE);
                 }
 
-                /* JADX WARN: Code restructure failed: missing block: B:28:0x00bd, code lost:
-                
-                    if (r11 == false) goto L30;
-                 */
-                /* JADX WARN: Code restructure failed: missing block: B:29:0x00bf, code lost:
-                
-                    r5 = true;
-                 */
-                /* JADX WARN: Code restructure failed: missing block: B:35:0x00df, code lost:
-                
-                    if (r12.intValue() == r16.this$0.connectionRepository.subId) goto L30;
-                 */
-                /* JADX WARN: Code restructure failed: missing block: B:36:0x00e2, code lost:
-                
-                    if (r9 == false) goto L30;
-                 */
+                /* JADX WARN: Removed duplicated region for block: B:30:0x00bf  */
+                /* JADX WARN: Removed duplicated region for block: B:38:0x00e2  */
                 @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object invokeSuspend(java.lang.Object r17) {
-                    /*
-                        Method dump skipped, instructions count: 246
-                        To view this dump change 'Code comments level' option to 'DEBUG'
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$combine$2.AnonymousClass3.invokeSuspend(java.lang.Object):java.lang.Object");
+                public final Object invokeSuspend(Object obj) {
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i = this.label;
+                    if (i == 0) {
+                        ResultKt.throwOnFailure(obj);
+                        FlowCollector flowCollector = (FlowCollector) this.L$0;
+                        Object[] objArr = (Object[]) this.L$1;
+                        boolean z = false;
+                        boolean zBooleanValue = ((Boolean) objArr[0]).booleanValue();
+                        boolean zBooleanValue2 = ((Boolean) objArr[1]).booleanValue();
+                        boolean zBooleanValue3 = ((Boolean) objArr[2]).booleanValue();
+                        boolean zBooleanValue4 = ((Boolean) objArr[3]).booleanValue();
+                        boolean zBooleanValue5 = ((Boolean) objArr[4]).booleanValue();
+                        boolean zBooleanValue6 = ((Boolean) objArr[5]).booleanValue();
+                        Integer num = (Integer) objArr[6];
+                        boolean zBooleanValue7 = ((Boolean) objArr[7]).booleanValue();
+                        MobileIconInteractorImpl mobileIconInteractorImpl = this.this$0;
+                        if (mobileIconInteractorImpl.carrierInfraMediator.isEnabled(CarrierInfraMediator.Conditions.USE_DISABLED_DATA_ICON, mobileIconInteractorImpl.slotId, new Object[0])) {
+                            MobileIconInteractorImpl mobileIconInteractorImpl2 = this.this$0;
+                            if (!mobileIconInteractorImpl2.bootstrapProfile) {
+                                boolean z2 = zBooleanValue && zBooleanValue2;
+                                if (zBooleanValue5 && zBooleanValue3 && (!z2 || zBooleanValue7)) {
+                                    if (!mobileIconInteractorImpl2.carrierInfraMediator.isEnabled(CarrierInfraMediator.Conditions.IS_CHINA_DISABLED_ICON, mobileIconInteractorImpl2.slotId, new Object[0])) {
+                                        MobileIconInteractorImpl mobileIconInteractorImpl3 = this.this$0;
+                                        if (!mobileIconInteractorImpl3.carrierInfraMediator.isEnabled(CarrierInfraMediator.Conditions.IS_LATIN_DISABLED_ICON, mobileIconInteractorImpl3.slotId, new Object[0])) {
+                                            MobileIconInteractorImpl mobileIconInteractorImpl4 = this.this$0;
+                                            if (!mobileIconInteractorImpl4.carrierInfraMediator.isEnabled(CarrierInfraMediator.Conditions.IS_HKTW_DISABLED_ICON, mobileIconInteractorImpl4.slotId, new Object[0])) {
+                                                MobileIconInteractorImpl mobileIconInteractorImpl5 = this.this$0;
+                                                if (mobileIconInteractorImpl5.carrierInfraMediator.isEnabled(CarrierInfraMediator.Conditions.IS_USA_VZW, mobileIconInteractorImpl5.slotId, new Object[0]) && !zBooleanValue6 && num != null) {
+                                                    if (num.intValue() == this.this$0.connectionRepository.subId) {
+                                                    }
+                                                }
+                                            } else if (!zBooleanValue4 && !zBooleanValue6) {
+                                            }
+                                        } else if (!zBooleanValue4) {
+                                            z = true;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        Boolean boolValueOf = Boolean.valueOf(z);
+                        this.label = 1;
+                        if (flowCollector.emit(boolValueOf, this) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
                 final Flow[] flowArr3 = flowArr2;
-                Object combineInternal = CombineKt.combineInternal(flowArr3, new Function0() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$combine$2.2
+                Object objCombineInternal = CombineKt.combineInternal(flowArr3, new Function0() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$combine$2.2
                     @Override // kotlin.jvm.functions.Function0
                     public final Object invoke() {
                         return new Object[flowArr3.length];
                     }
                 }, new AnonymousClass3(null, this), flowCollector, continuation);
-                return combineInternal == CoroutineSingletons.COROUTINE_SUSPENDED ? combineInternal : Unit.INSTANCE;
+                return objCombineInternal == CoroutineSingletons.COROUTINE_SUSPENDED ? objCombineInternal : Unit.INSTANCE;
             }
         }), tableLogBuffer, "Intr", "showDisabledData", false), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), bool);
-        this.shouldShowDisabledDataIcon = stateIn13;
-        ReadonlyStateFlow stateIn14 = FlowKt.stateIn(new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(fakeMobileConnectionRepository.onTheCall, stateFlow10, new MobileIconInteractorImpl$otherSlotInCallState$1(this, null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), bool);
-        this.otherSlotInCallState = stateIn14;
-        final Flow[] flowArr3 = {stateIn13, stateIn4, stateFlow20, stateIn2, stateIn14, stateFlow15};
-        Flow distinctUntilChanged2 = FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$combine$3
+        this.shouldShowDisabledDataIcon = readonlyStateFlowStateIn13;
+        ReadonlyStateFlow readonlyStateFlowStateIn14 = FlowKt.stateIn(new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(fakeMobileConnectionRepository.onTheCall, stateFlow10, new MobileIconInteractorImpl$otherSlotInCallState$1(this, null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), bool);
+        this.otherSlotInCallState = readonlyStateFlowStateIn14;
+        final Flow[] flowArr3 = {readonlyStateFlowStateIn13, readonlyStateFlowStateIn4, stateFlow20, readonlyStateFlowStateIn2, readonlyStateFlowStateIn14, stateFlow15};
+        Flow flowDistinctUntilChanged2 = FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$combine$3
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$combine$3$3, reason: invalid class name */
             public final class AnonymousClass3 extends SuspendLambda implements Function3 {
                 private /* synthetic */ Object L$0;
@@ -535,28 +775,28 @@ public final class MobileIconInteractorImpl implements MobileIconInteractor {
 
                 @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
                 public final Object invokeSuspend(Object obj) {
-                    DisabledDataIconModel disabledDataIconModel;
+                    DisabledDataIconModel typeIcon;
                     CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
                     int i = this.label;
                     if (i == 0) {
                         ResultKt.throwOnFailure(obj);
                         FlowCollector flowCollector = (FlowCollector) this.L$0;
                         Object[] objArr = (Object[]) this.L$1;
-                        boolean booleanValue = ((Boolean) objArr[0]).booleanValue();
+                        boolean zBooleanValue = ((Boolean) objArr[0]).booleanValue();
                         NetworkTypeIconModel networkTypeIconModel = (NetworkTypeIconModel) objArr[1];
-                        boolean booleanValue2 = ((Boolean) objArr[2]).booleanValue();
-                        boolean booleanValue3 = ((Boolean) objArr[3]).booleanValue();
-                        boolean booleanValue4 = ((Boolean) objArr[4]).booleanValue();
+                        boolean zBooleanValue2 = ((Boolean) objArr[2]).booleanValue();
+                        boolean zBooleanValue3 = ((Boolean) objArr[3]).booleanValue();
+                        boolean zBooleanValue4 = ((Boolean) objArr[4]).booleanValue();
                         MobileServiceState mobileServiceState = (MobileServiceState) objArr[5];
-                        if (booleanValue) {
+                        if (zBooleanValue) {
                             MobileIconInteractorImpl mobileIconInteractorImpl = this.this$0;
-                            disabledDataIconModel = mobileIconInteractorImpl.disabledDataIconResource.getTypeIcon(mobileIconInteractorImpl.slotId, networkTypeIconModel, booleanValue2, booleanValue3, booleanValue4, mobileServiceState.mSimSubmode == 1);
+                            typeIcon = mobileIconInteractorImpl.disabledDataIconResource.getTypeIcon(mobileIconInteractorImpl.slotId, networkTypeIconModel, zBooleanValue2, zBooleanValue3, zBooleanValue4, mobileServiceState.mSimSubmode == 1);
                         } else {
                             MobileIconInteractorImpl mobileIconInteractorImpl2 = this.this$0;
-                            disabledDataIconModel = mobileIconInteractorImpl2.carrierInfraMediator.isEnabled(CarrierInfraMediator.Conditions.IS_CHINA_DISABLED_ICON, mobileIconInteractorImpl2.slotId, new Object[0]) ? DisabledDataIconModelKt.EMPTY_DISABLED_DATA_ROAMING_ICON : DisabledDataIconModelKt.EMPTY_DISABLED_DATA_ICON;
+                            typeIcon = mobileIconInteractorImpl2.carrierInfraMediator.isEnabled(CarrierInfraMediator.Conditions.IS_CHINA_DISABLED_ICON, mobileIconInteractorImpl2.slotId, new Object[0]) ? DisabledDataIconModelKt.EMPTY_DISABLED_DATA_ROAMING_ICON : DisabledDataIconModelKt.EMPTY_DISABLED_DATA_ICON;
                         }
                         this.label = 1;
-                        if (flowCollector.emit(disabledDataIconModel, this) == coroutineSingletons) {
+                        if (flowCollector.emit(typeIcon, this) == coroutineSingletons) {
                             return coroutineSingletons;
                         }
                     } else {
@@ -572,26 +812,25 @@ public final class MobileIconInteractorImpl implements MobileIconInteractor {
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
                 final Flow[] flowArr4 = flowArr3;
-                Object combineInternal = CombineKt.combineInternal(flowArr4, new Function0() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$combine$3.2
+                Object objCombineInternal = CombineKt.combineInternal(flowArr4, new Function0() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$combine$3.2
                     @Override // kotlin.jvm.functions.Function0
                     public final Object invoke() {
                         return new Object[flowArr4.length];
                     }
                 }, new AnonymousClass3(null, this), flowCollector, continuation);
-                return combineInternal == CoroutineSingletons.COROUTINE_SUSPENDED ? combineInternal : Unit.INSTANCE;
+                return objCombineInternal == CoroutineSingletons.COROUTINE_SUSPENDED ? objCombineInternal : Unit.INSTANCE;
             }
         });
         DisabledDataIconModel disabledDataIconModel = DisabledDataIconModelKt.EMPTY_DISABLED_DATA_ICON;
-        this.disabledDataIcon = FlowKt.stateIn(DiffableKt.logDiffsForTable(distinctUntilChanged2, tableLogBuffer, "Intr", disabledDataIconModel), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), disabledDataIconModel);
+        this.disabledDataIcon = FlowKt.stateIn(DiffableKt.logDiffsForTable(flowDistinctUntilChanged2, tableLogBuffer, "Intr", disabledDataIconModel), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), disabledDataIconModel);
         StateFlow stateFlow22 = fakeMobileConnectionRepository.mobileDataEnabledChanged;
         this.mobileDataEnabledChanged = stateFlow22;
-        this.disabledActivityIcon = FlowKt.stateIn(DiffableKt.logDiffsForTable(new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(stateIn13, stateFlow22, new MobileIconInteractorImpl$disabledActivityIcon$1(this, null)), tableLogBuffer, "Intr", "disabledActivityIcon", 0), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), 0);
-        ReadonlyStateFlow stateIn15 = FlowKt.stateIn(DiffableKt.logDiffsForTable(fakeMobileConnectionRepository.satelliteLevel, tableLogBuffer, "Intr", "satelliteShownLevel", 0), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), 0);
-        this.satelliteShownLevel = stateIn15;
-        final Flow[] flowArr4 = {stateIn11, stateFlow18, stateIn8, stateFlow11, stateFlow20, stateFlow21, stateIn13, stateFlow15, fakeMobileConnectionRepository.imsRegState, stateIn9, stateIn10};
+        this.disabledActivityIcon = FlowKt.stateIn(DiffableKt.logDiffsForTable(new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(readonlyStateFlowStateIn13, stateFlow22, new MobileIconInteractorImpl$disabledActivityIcon$1(this, null)), tableLogBuffer, "Intr", "disabledActivityIcon", 0), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), 0);
+        ReadonlyStateFlow readonlyStateFlowStateIn15 = FlowKt.stateIn(DiffableKt.logDiffsForTable(fakeMobileConnectionRepository.satelliteLevel, tableLogBuffer, "Intr", "satelliteShownLevel", 0), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), 0);
+        this.satelliteShownLevel = readonlyStateFlowStateIn15;
+        final Flow[] flowArr4 = {readonlyStateFlowStateIn11, stateFlow18, readonlyStateFlowStateIn8, stateFlow11, stateFlow20, stateFlow21, readonlyStateFlowStateIn13, stateFlow15, fakeMobileConnectionRepository.imsRegState, readonlyStateFlowStateIn9, readonlyStateFlowStateIn10};
         this.cellularIcon = new Flow() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$combine$4
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$combine$4$3, reason: invalid class name */
             public final class AnonymousClass3 extends SuspendLambda implements Function3 {
                 private /* synthetic */ Object L$0;
@@ -620,7 +859,7 @@ public final class MobileIconInteractorImpl implements MobileIconInteractor {
                 public final java.lang.Object invokeSuspend(java.lang.Object r22) {
                     /*
                         Method dump skipped, instructions count: 473
-                        To view this dump change 'Code comments level' option to 'DEBUG'
+                        To view this dump add '--comments-level debug' option
                     */
                     throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$combine$4.AnonymousClass3.invokeSuspend(java.lang.Object):java.lang.Object");
                 }
@@ -629,13 +868,13 @@ public final class MobileIconInteractorImpl implements MobileIconInteractor {
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
                 final Flow[] flowArr5 = flowArr4;
-                Object combineInternal = CombineKt.combineInternal(flowArr5, new Function0() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$combine$4.2
+                Object objCombineInternal = CombineKt.combineInternal(flowArr5, new Function0() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$combine$4.2
                     @Override // kotlin.jvm.functions.Function0
                     public final Object invoke() {
                         return new Object[flowArr5.length];
                     }
                 }, new AnonymousClass3(null, this), flowCollector, continuation);
-                return combineInternal == CoroutineSingletons.COROUTINE_SUSPENDED ? combineInternal : Unit.INSTANCE;
+                return objCombineInternal == CoroutineSingletons.COROUTINE_SUSPENDED ? objCombineInternal : Unit.INSTANCE;
             }
         };
         this.carrierIdOfVzwMVNO = new Integer[]{1839, 2032, 2126, 2146, 2556, 10008, 2022, 1847, 1848};
@@ -643,7 +882,6 @@ public final class MobileIconInteractorImpl implements MobileIconInteractor {
             final StateFlow stateFlow23 = fakeMobileConnectionRepository.semSatelliteSignalStrength;
             flowKt__ZipKt$combine$$inlined$unsafeFlow$1 = new Flow() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$map$3
 
-                /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
                 /* renamed from: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$map$3$2, reason: invalid class name */
                 public final class AnonymousClass2 implements FlowCollector {
                     public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -670,86 +908,63 @@ public final class MobileIconInteractorImpl implements MobileIconInteractor {
                         this.$this_unsafeFlow = flowCollector;
                     }
 
-                    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.
-                        To view partially-correct code enable 'Show inconsistent code' option in preferences
                     */
-                    public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                        /*
-                            r4 = this;
-                            boolean r0 = r6 instanceof com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$map$3.AnonymousClass2.AnonymousClass1
-                            if (r0 == 0) goto L13
-                            r0 = r6
-                            com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$map$3$2$1 r0 = (com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$map$3.AnonymousClass2.AnonymousClass1) r0
-                            int r1 = r0.label
-                            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                            r3 = r1 & r2
-                            if (r3 == 0) goto L13
-                            int r1 = r1 - r2
-                            r0.label = r1
-                            goto L18
-                        L13:
-                            com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$map$3$2$1 r0 = new com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$map$3$2$1
-                            r0.<init>(r6)
-                        L18:
-                            java.lang.Object r6 = r0.result
-                            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                            int r2 = r0.label
-                            r3 = 1
-                            if (r2 == 0) goto L2f
-                            if (r2 != r3) goto L27
-                            kotlin.ResultKt.throwOnFailure(r6)
-                            goto L5b
-                        L27:
-                            java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                            java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                            r4.<init>(r5)
-                            throw r4
-                        L2f:
-                            kotlin.ResultKt.throwOnFailure(r6)
-                            java.lang.Number r5 = (java.lang.Number) r5
-                            int r5 = r5.intValue()
-                            com.android.systemui.statusbar.pipeline.mobile.domain.model.SignalIconModel$Satellite r6 = new com.android.systemui.statusbar.pipeline.mobile.domain.model.SignalIconModel$Satellite
-                            com.android.systemui.statusbar.pipeline.satellite.ui.model.SatelliteIconModel r2 = com.android.systemui.statusbar.pipeline.satellite.ui.model.SatelliteIconModel.INSTANCE
-                            r2.getClass()
-                            com.android.systemui.common.shared.model.Icon$Resource r2 = com.android.systemui.statusbar.pipeline.satellite.ui.model.SatelliteIconModel.fromSignalStrengthCN(r5)
-                            if (r2 != 0) goto L4d
-                            r2 = 0
-                            com.android.systemui.common.shared.model.Icon$Resource r2 = com.android.systemui.statusbar.pipeline.satellite.ui.model.SatelliteIconModel.fromSignalStrengthCN(r2)
-                            r2.getClass()
-                        L4d:
-                            r6.<init>(r5, r2)
-                            r0.label = r3
-                            kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                            java.lang.Object r4 = r4.emit(r6, r0)
-                            if (r4 != r1) goto L5b
-                            return r1
-                        L5b:
-                            kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                            return r4
-                        */
-                        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$map$3.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                    public final Object emit(Object obj, Continuation continuation) {
+                        AnonymousClass1 anonymousClass1;
+                        if (continuation instanceof AnonymousClass1) {
+                            anonymousClass1 = (AnonymousClass1) continuation;
+                            int i = anonymousClass1.label;
+                            if ((i & Integer.MIN_VALUE) != 0) {
+                                anonymousClass1.label = i - Integer.MIN_VALUE;
+                            } else {
+                                anonymousClass1 = new AnonymousClass1(continuation);
+                            }
+                        }
+                        Object obj2 = anonymousClass1.result;
+                        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                        int i2 = anonymousClass1.label;
+                        if (i2 == 0) {
+                            ResultKt.throwOnFailure(obj2);
+                            int iIntValue = ((Number) obj).intValue();
+                            SatelliteIconModel.INSTANCE.getClass();
+                            Icon.Resource resourceFromSignalStrengthCN = SatelliteIconModel.fromSignalStrengthCN(iIntValue);
+                            if (resourceFromSignalStrengthCN == null) {
+                                resourceFromSignalStrengthCN = SatelliteIconModel.fromSignalStrengthCN(0);
+                                resourceFromSignalStrengthCN.getClass();
+                            }
+                            SignalIconModel.Satellite satellite = new SignalIconModel.Satellite(iIntValue, resourceFromSignalStrengthCN);
+                            anonymousClass1.label = 1;
+                            if (this.$this_unsafeFlow.emit(satellite, anonymousClass1) == coroutineSingletons) {
+                                return coroutineSingletons;
+                            }
+                        } else {
+                            if (i2 != 1) {
+                                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                            }
+                            ResultKt.throwOnFailure(obj2);
+                        }
+                        return Unit.INSTANCE;
                     }
                 }
 
                 @Override // kotlinx.coroutines.flow.Flow
                 public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                    Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                    return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                    Object objCollect = stateFlow23.collect(new AnonymousClass2(flowCollector), continuation);
+                    return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
                 }
             };
         } else {
-            flowKt__ZipKt$combine$$inlined$unsafeFlow$1 = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(stateIn15, fakeMobileConnectionRepository.isUsingNonTerrestrialNetwork, new MobileIconInteractorImpl$satelliteIcon$2(this, null));
+            flowKt__ZipKt$combine$$inlined$unsafeFlow$1 = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(readonlyStateFlowStateIn15, fakeMobileConnectionRepository.isUsingNonTerrestrialNetwork, new MobileIconInteractorImpl$satelliteIcon$2(this, null));
         }
         this.satelliteIcon = flowKt__ZipKt$combine$$inlined$unsafeFlow$1;
-        SignalIconModel.Cellular cellular = new SignalIconModel.Cellular(((Number) stateIn11.$$delegate_0.getValue()).intValue(), ((Number) stateFlow18.getValue()).intValue(), ((Boolean) stateIn8.$$delegate_0.getValue()).booleanValue(), ((Boolean) stateFlow11.getValue()).booleanValue(), 0, 16, null);
-        this.signalLevelIcon = FlowKt.stateIn(DiffableKt.logDiffsForTable(FlowKt.distinctUntilChanged(FlowKt.transformLatest(stateIn5, new MobileIconInteractorImpl$signalLevelIcon$lambda$8$$inlined$flatMapLatest$1(null, this))), tableLogBuffer, "icon", cellular), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), cellular);
+        SignalIconModel.Cellular cellular = new SignalIconModel.Cellular(((Number) readonlyStateFlowStateIn11.$$delegate_0.getValue()).intValue(), ((Number) stateFlow18.getValue()).intValue(), ((Boolean) readonlyStateFlowStateIn8.$$delegate_0.getValue()).booleanValue(), ((Boolean) stateFlow11.getValue()).booleanValue(), 0, 16, null);
+        this.signalLevelIcon = FlowKt.stateIn(DiffableKt.logDiffsForTable(FlowKt.distinctUntilChanged(FlowKt.transformLatest(readonlyStateFlowStateIn5, new MobileIconInteractorImpl$signalLevelIcon$lambda$8$$inlined$flatMapLatest$1(null, this))), tableLogBuffer, "icon", cellular), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), cellular);
         this.voiceNoServiceIcon = FlowKt.stateIn(new Flow() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$map$4
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$map$4$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -778,86 +993,53 @@ public final class MobileIconInteractorImpl implements MobileIconInteractor {
                     this.this$0 = mobileIconInteractorImpl;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r8, kotlin.coroutines.Continuation r9) {
-                    /*
-                        r7 = this;
-                        boolean r0 = r9 instanceof com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$map$4.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r9
-                        com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$map$4$2$1 r0 = (com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$map$4.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$map$4$2$1 r0 = new com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$map$4$2$1
-                        r0.<init>(r9)
-                    L18:
-                        java.lang.Object r9 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r9)
-                        goto L6e
-                    L27:
-                        java.lang.IllegalStateException r7 = new java.lang.IllegalStateException
-                        java.lang.String r8 = "call to 'resume' before 'invoke' with coroutine"
-                        r7.<init>(r8)
-                        throw r7
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r9)
-                        com.android.systemui.statusbar.pipeline.mobile.data.model.MobileServiceState r8 = (com.android.systemui.statusbar.pipeline.mobile.data.model.MobileServiceState) r8
-                        com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl r9 = r7.this$0
-                        com.android.systemui.statusbar.pipeline.carrier.CarrierInfraMediator r2 = r9.carrierInfraMediator
-                        com.android.systemui.statusbar.pipeline.carrier.CarrierInfraMediator$Conditions r4 = com.android.systemui.statusbar.pipeline.carrier.CarrierInfraMediator.Conditions.USE_VOICE_NO_SERVICE_ICON
-                        r5 = 0
-                        java.lang.Object[] r6 = new java.lang.Object[r5]
-                        boolean r2 = r2.isEnabled(r4, r5, r6)
-                        if (r2 == 0) goto L5e
-                        boolean r2 = r8.vioceCallAvailable
-                        if (r2 != 0) goto L5e
-                        int r8 = r8.dataRegState
-                        if (r8 != 0) goto L5e
-                        com.android.systemui.statusbar.pipeline.carrier.CarrierInfraMediator r8 = r9.carrierInfraMediator
-                        com.android.systemui.statusbar.pipeline.carrier.CarrierInfraMediator$Conditions r9 = com.android.systemui.statusbar.pipeline.carrier.CarrierInfraMediator.Conditions.IS_VOICE_CAPABLE
-                        java.lang.Object[] r2 = new java.lang.Object[r5]
-                        boolean r8 = r8.isEnabled(r9, r5, r2)
-                        if (r8 == 0) goto L5e
-                        com.android.systemui.statusbar.pipeline.mobile.ui.util.SamsungMobileIcons$Companion r8 = com.android.systemui.statusbar.pipeline.mobile.ui.util.SamsungMobileIcons.Companion
-                        r8.getClass()
-                        int r5 = com.android.systemui.statusbar.pipeline.mobile.ui.util.SamsungMobileIcons.VOICE_NO_SERVICE
-                    L5e:
-                        java.lang.Integer r8 = new java.lang.Integer
-                        r8.<init>(r5)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r7 = r7.$this_unsafeFlow
-                        java.lang.Object r7 = r7.emit(r8, r0)
-                        if (r7 != r1) goto L6e
-                        return r1
-                    L6e:
-                        kotlin.Unit r7 = kotlin.Unit.INSTANCE
-                        return r7
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorImpl$special$$inlined$map$4.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        MobileServiceState mobileServiceState = (MobileServiceState) obj;
+                        MobileIconInteractorImpl mobileIconInteractorImpl = this.this$0;
+                        int i3 = 0;
+                        if (mobileIconInteractorImpl.carrierInfraMediator.isEnabled(CarrierInfraMediator.Conditions.USE_VOICE_NO_SERVICE_ICON, 0, new Object[0]) && !mobileServiceState.vioceCallAvailable && mobileServiceState.dataRegState == 0 && mobileIconInteractorImpl.carrierInfraMediator.isEnabled(CarrierInfraMediator.Conditions.IS_VOICE_CAPABLE, 0, new Object[0])) {
+                            SamsungMobileIcons.Companion.getClass();
+                            i3 = SamsungMobileIcons.VOICE_NO_SERVICE;
+                        }
+                        Integer num = new Integer(i3);
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(num, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, this), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = stateFlow15.collect(new AnonymousClass2(flowCollector, this), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         }, coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), 0);
     }

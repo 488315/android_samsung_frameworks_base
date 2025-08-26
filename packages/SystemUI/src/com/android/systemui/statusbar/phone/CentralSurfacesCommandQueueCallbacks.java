@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Binder;
 import android.os.Bundle;
@@ -96,7 +97,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Optional;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class CentralSurfacesCommandQueueCallbacks implements CommandQueue.Callbacks {
     public final ActivityStarter mActivityStarter;
@@ -136,7 +136,6 @@ public class CentralSurfacesCommandQueueCallbacks implements CommandQueue.Callba
     public final WakefulnessLifecycle mWakefulnessLifecycle;
     public final QuickAccessWalletController mWalletController;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     enum PowerButtonLaunchGestureTarget {
         LAUNCH_CAMERA_ON_GESTURE,
         LAUNCH_WALLET_ON_GESTURE
@@ -146,7 +145,7 @@ public class CentralSurfacesCommandQueueCallbacks implements CommandQueue.Callba
         VibrationAttributes.createForUsage(50);
     }
 
-    public CentralSurfacesCommandQueueCallbacks(CentralSurfaces centralSurfaces, QuickSettingsController quickSettingsController, Context context, Resources resources, ScreenPinningRequest screenPinningRequest, ShadeController shadeController, CommandQueue commandQueue, PanelExpansionInteractor panelExpansionInteractor, Lazy lazy, ShadeHeaderController shadeHeaderController, RemoteInputQuickSettingsDisabler remoteInputQuickSettingsDisabler, MetricsLogger metricsLogger, KeyguardUpdateMonitor keyguardUpdateMonitor, KeyguardStateController keyguardStateController, HeadsUpManager headsUpManager, WakefulnessLifecycle wakefulnessLifecycle, DeviceProvisionedController deviceProvisionedController, StatusBarKeyguardViewManager statusBarKeyguardViewManager, AssistManager assistManager, DozeServiceHost dozeServiceHost, NotificationStackScrollLayoutController notificationStackScrollLayoutController, StatusBarHideIconsForBouncerManager statusBarHideIconsForBouncerManager, PowerManager powerManager, Optional<Vibrator> optional, int i, Lazy lazy2, UserTracker userTracker, QSHost qSHost, ActivityStarter activityStarter, KeyguardInteractor keyguardInteractor, EmergencyGestureModule.EmergencyGestureIntentFactory emergencyGestureIntentFactory, QuickAccessWalletController quickAccessWalletController, SearcleManager searcleManager, CoverHost coverHost, Lazy lazy3) {
+    public CentralSurfacesCommandQueueCallbacks(CentralSurfaces centralSurfaces, QuickSettingsController quickSettingsController, Context context, Resources resources, ScreenPinningRequest screenPinningRequest, ShadeController shadeController, CommandQueue commandQueue, PanelExpansionInteractor panelExpansionInteractor, Lazy lazy, ShadeHeaderController shadeHeaderController, RemoteInputQuickSettingsDisabler remoteInputQuickSettingsDisabler, MetricsLogger metricsLogger, KeyguardUpdateMonitor keyguardUpdateMonitor, KeyguardStateController keyguardStateController, HeadsUpManager headsUpManager, WakefulnessLifecycle wakefulnessLifecycle, DeviceProvisionedController deviceProvisionedController, StatusBarKeyguardViewManager statusBarKeyguardViewManager, AssistManager assistManager, DozeServiceHost dozeServiceHost, NotificationStackScrollLayoutController notificationStackScrollLayoutController, StatusBarHideIconsForBouncerManager statusBarHideIconsForBouncerManager, PowerManager powerManager, Optional<Vibrator> optional, int i, Lazy lazy2, UserTracker userTracker, QSHost qSHost, ActivityStarter activityStarter, KeyguardInteractor keyguardInteractor, EmergencyGestureModule.EmergencyGestureIntentFactory emergencyGestureIntentFactory, QuickAccessWalletController quickAccessWalletController, SearcleManager searcleManager, CoverHost coverHost, Lazy lazy3) throws Resources.NotFoundException {
         this.mCentralSurfaces = centralSurfaces;
         this.mQsController = quickSettingsController;
         this.mContext = context;
@@ -314,9 +313,9 @@ public class CentralSurfacesCommandQueueCallbacks implements CommandQueue.Callba
     }
 
     @Override // com.android.systemui.statusbar.CommandQueue.Callbacks
-    public final void onEmergencyActionLaunchGestureDetected() {
-        Intent invoke = ((EmergencyGestureModule$emergencyGestureIntentFactory$1) this.mEmergencyGestureIntentFactory).invoke();
-        if (invoke == null) {
+    public final void onEmergencyActionLaunchGestureDetected() throws Resources.NotFoundException {
+        Intent intentInvoke = ((EmergencyGestureModule$emergencyGestureIntentFactory$1) this.mEmergencyGestureIntentFactory).invoke();
+        if (intentInvoke == null) {
             Log.wtf("CentralSurfaces", "Couldn't find an app to process the emergency intent.");
             return;
         }
@@ -334,7 +333,7 @@ public class CentralSurfacesCommandQueueCallbacks implements CommandQueue.Callba
         boolean z = ((KeyguardStateControllerImpl) this.mKeyguardStateController).mShowing;
         UserTracker userTracker = this.mUserTracker;
         if (!z) {
-            this.mActivityStarter.startActivityDismissingKeyguard(invoke, false, true, true, null, 0, null, ((UserTrackerImpl) userTracker).getUserHandle());
+            this.mActivityStarter.startActivityDismissingKeyguard(intentInvoke, false, true, true, null, 0, null, ((UserTrackerImpl) userTracker).getUserHandle());
             return;
         }
         if (!centralSurfacesImpl.mDeviceInteractive) {
@@ -349,7 +348,7 @@ public class CentralSurfacesCommandQueueCallbacks implements CommandQueue.Callba
         if (statusBarKeyguardViewManager.isBouncerShowing()) {
             statusBarKeyguardViewManager.reset(true);
         }
-        this.mContext.startActivityAsUser(invoke, ((UserTrackerImpl) userTracker).getUserHandle());
+        this.mContext.startActivityAsUser(intentInvoke, ((UserTrackerImpl) userTracker).getUserHandle());
     }
 
     @Override // com.android.systemui.statusbar.CommandQueue.Callbacks
@@ -402,13 +401,13 @@ public class CentralSurfacesCommandQueueCallbacks implements CommandQueue.Callba
         }
         CentralSurfacesImpl centralSurfacesImpl = (CentralSurfacesImpl) centralSurfaces;
         if (centralSurfacesImpl.isGoingToSleep()) {
-            int ordinal = powerButtonLaunchGestureTarget.ordinal();
-            if (ordinal == 0) {
+            int iOrdinal = powerButtonLaunchGestureTarget.ordinal();
+            if (iOrdinal == 0) {
                 Slog.d("CentralSurfaces", "setLaunchCameraOnFinishedGoingToSleep");
                 centralSurfacesImpl.mLaunchCameraOnFinishedGoingToSleep = true;
                 return;
             } else {
-                if (ordinal != 1) {
+                if (iOrdinal != 1) {
                     return;
                 }
                 Slog.d("CentralSurfaces", "setLaunchWalletOnFinishedGoingToSleep");
@@ -484,13 +483,13 @@ public class CentralSurfacesCommandQueueCallbacks implements CommandQueue.Callba
             QuickAccessWalletController quickAccessWalletController = this.mWalletController;
             ActivityStarter activityStarter = this.mActivityStarter;
             if (!z) {
-                int ordinal2 = powerButtonLaunchGestureTarget.ordinal();
-                if (ordinal2 == 0) {
+                int iOrdinal2 = powerButtonLaunchGestureTarget.ordinal();
+                if (iOrdinal2 == 0) {
                     KeyguardShortcutManager.Companion.getClass();
                     this.mActivityStarter.startActivityDismissingKeyguard(KeyguardShortcutManager.INSECURE_CAMERA_INTENT, false, true, true, null, 0, null, ((UserTrackerImpl) this.mUserTracker).getUserHandle(), i);
                     return;
                 } else {
-                    if (ordinal2 != 1) {
+                    if (iOrdinal2 != 1) {
                         return;
                     }
                     quickAccessWalletController.mQuickAccessWalletClient.getGestureTargetActivityPendingIntent(quickAccessWalletController.mExecutor, new QuickAccessWalletController$$ExternalSyntheticLambda2(quickAccessWalletController, activityStarter));
@@ -502,12 +501,12 @@ public class CentralSurfacesCommandQueueCallbacks implements CommandQueue.Callba
             }
             int i2 = this.mWakefulnessLifecycle.mWakefulness;
             if (i2 != 2 && i2 != 1) {
-                int ordinal3 = powerButtonLaunchGestureTarget.ordinal();
-                if (ordinal3 == 0) {
+                int iOrdinal3 = powerButtonLaunchGestureTarget.ordinal();
+                if (iOrdinal3 == 0) {
                     centralSurfacesImpl.mLaunchCameraWhenFinishedWaking = true;
                     return;
                 } else {
-                    if (ordinal3 != 1) {
+                    if (iOrdinal3 != 1) {
                         return;
                     }
                     centralSurfacesImpl.mLaunchWalletWhenFinishedWaking = true;
@@ -519,10 +518,10 @@ public class CentralSurfacesCommandQueueCallbacks implements CommandQueue.Callba
                 statusBarKeyguardViewManager.reset(true);
             }
             centralSurfacesImpl.mMessageRouter.sendMessageDelayed(1003, 5000L);
-            int ordinal4 = powerButtonLaunchGestureTarget.ordinal();
-            if (ordinal4 == 0) {
+            int iOrdinal4 = powerButtonLaunchGestureTarget.ordinal();
+            if (iOrdinal4 == 0) {
                 ((CameraLauncher) lazy.get()).launchCamera(i, panelExpansionInteractor.isFullyCollapsed());
-            } else if (ordinal4 == 1) {
+            } else if (iOrdinal4 == 1) {
                 quickAccessWalletController.mQuickAccessWalletClient.getGestureTargetActivityPendingIntent(quickAccessWalletController.mExecutor, new QuickAccessWalletController$$ExternalSyntheticLambda2(quickAccessWalletController, activityStarter));
             }
             centralSurfaces.updateScrimController();
@@ -611,7 +610,7 @@ public class CentralSurfacesCommandQueueCallbacks implements CommandQueue.Callba
     }
 
     @Override // com.android.systemui.statusbar.CommandQueue.Callbacks
-    public final void startAssist(Bundle bundle) {
+    public final void startAssist(Bundle bundle) throws PackageManager.NameNotFoundException {
         this.mAssistManager.startAssist(bundle);
     }
 
@@ -648,9 +647,9 @@ public class CentralSurfacesCommandQueueCallbacks implements CommandQueue.Callba
 
     @Override // com.android.systemui.statusbar.CommandQueue.Callbacks
     public final void toggleNotificationsPanel() {
-        boolean booleanValue = ((Boolean) ((ShadeInteractorImpl) ((ShadeInteractor) this.mShadeInteractorLazy.get())).baseShadeInteractor.isAnyExpanded().getValue()).booleanValue();
+        boolean zBooleanValue = ((Boolean) ((ShadeInteractorImpl) ((ShadeInteractor) this.mShadeInteractorLazy.get())).isShadeAnyExpanded.$$delegate_0.getValue()).booleanValue();
         ShadeController shadeController = this.mShadeController;
-        if (booleanValue) {
+        if (zBooleanValue) {
             shadeController.animateCollapseShade(0);
         } else {
             ((BaseShadeControllerImpl) shadeController).animateExpandShade();
@@ -659,9 +658,9 @@ public class CentralSurfacesCommandQueueCallbacks implements CommandQueue.Callba
 
     @Override // com.android.systemui.statusbar.CommandQueue.Callbacks
     public final void toggleQuickSettingsPanel() {
-        boolean booleanValue = ((Boolean) ((ShadeInteractorImpl) ((ShadeInteractor) this.mShadeInteractorLazy.get())).baseShadeInteractor.isQsExpanded().getValue()).booleanValue();
+        boolean zBooleanValue = ((Boolean) ((ShadeInteractorImpl) ((ShadeInteractor) this.mShadeInteractorLazy.get())).baseShadeInteractor.isQsExpanded().getValue()).booleanValue();
         ShadeController shadeController = this.mShadeController;
-        if (booleanValue) {
+        if (zBooleanValue) {
             shadeController.animateCollapseShade(0);
         } else {
             ((BaseShadeControllerImpl) shadeController).animateExpandQs();

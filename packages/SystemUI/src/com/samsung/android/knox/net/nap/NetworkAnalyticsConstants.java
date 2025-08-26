@@ -1,6 +1,5 @@
 package com.samsung.android.knox.net.nap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class NetworkAnalyticsConstants {
     public static final String ALL_REGISTERED_PROFILES = "ALL_REGISTERED_PROFILES_FOR_CLIENT";
@@ -11,7 +10,6 @@ public class NetworkAnalyticsConstants {
     public static final String NETWORK_ANALYTICS_PERMISSION_NPA = "com.samsung.android.knox.permission.KNOX_NPA";
     public static final String VENDOR_BIND_ACTION = "_namonitoraction";
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ActivationState {
         public static final int PROFILE_ACTIVATED = 1;
         public static final String PROFILE_INTERVAL_VALUE = "interval_value";
@@ -22,7 +20,6 @@ public class NetworkAnalyticsConstants {
         public static final int RECORD_TYPE_STOP = 2;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class BroadcastActions {
         public static final String ACTION_NPA_STATUS = "com.samsung.android.knox.intent.action.NPA_STATUS";
         public static final String EXTRA_PROFILE_NAME = "com.samsung.android.knox.intent.extra.PROFILE_NAME";
@@ -31,7 +28,6 @@ public class NetworkAnalyticsConstants {
         public static final int PROFILE_UNREGISTERED = 1;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DBConstants {
         public static final String ACTIVATION_STATE = "activeState";
         public static final String ADMIN_UID = "adminUid";
@@ -48,7 +44,6 @@ public class NetworkAnalyticsConstants {
         public static final String PROFILE_NAME = "profileName";
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DataPoints {
         public static final String BYTES_RECEIVED = "brecv";
         public static final String BYTES_SENT = "bsent";
@@ -93,7 +88,6 @@ public class NetworkAnalyticsConstants {
         public static final String UID = "uid";
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ErrorValues {
         public static final int ERROR_BIND_TO_CLIENT_FAILED = -11;
         public static final int ERROR_CALLER_ALREADY_BOUND_AND_ACTIVATED = -16;
@@ -118,14 +112,12 @@ public class NetworkAnalyticsConstants {
         public static final int SUCCESS = 0;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class IntentActions {
         public static final String CONTAINER_REMOVAL_INTENT = "enterprise.container.uninstalled";
         public static final String INTENT_CONTAINER_ADMIN_CHANGED_ACTION = "enterprise.container.admin.changed";
         public static final String ULTRA_POWER_SAVING_MODE_PERMISSION = "com.sec.android.emergencymode.permission.LAUNCH_EMERGENCYMODE_SERVICE";
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class JSONConstants {
         public static final String DNS_PORT_NUMBER = "53";
         public static final String FLAGS = "flags";

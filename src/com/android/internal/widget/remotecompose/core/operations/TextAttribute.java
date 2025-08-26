@@ -60,11 +60,11 @@ public class TextAttribute extends PaintOperation implements Serializable {
     }
 
     public static void read(WireBuffer wireBuffer, List<Operation> list) {
-        int readInt = wireBuffer.readInt();
-        int readInt2 = wireBuffer.readInt();
-        short readShort = (short) wireBuffer.readShort();
+        int i = wireBuffer.readInt();
+        int i2 = wireBuffer.readInt();
+        short s = (short) wireBuffer.readShort();
         wireBuffer.readShort();
-        list.add(new TextAttribute(readInt, readInt2, readShort));
+        list.add(new TextAttribute(i, i2, s));
     }
 
     public static void documentation(DocumentationBuilder documentationBuilder) {

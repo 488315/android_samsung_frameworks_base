@@ -14,12 +14,10 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ForceLowLightCondition extends Condition {
     public static final boolean DEBUG;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -43,7 +41,7 @@ public final class ForceLowLightCondition extends Condition {
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
                 boolean z = ForceLowLightCondition.DEBUG;
-                final ForceLowLightCondition forceLowLightCondition = ForceLowLightCondition.this;
+                final ForceLowLightCondition forceLowLightCondition = this.f$0;
                 return new Command() { // from class: com.android.systemui.lowlightclock.ForceLowLightCondition$1$1
                     @Override // com.android.systemui.statusbar.commandline.Command
                     public final void execute(PrintWriter printWriter, List list) {
@@ -53,9 +51,9 @@ public final class ForceLowLightCondition extends Condition {
                             return;
                         }
                         String str = (String) list.get(0);
-                        boolean equals = TextUtils.equals(str, "enable");
-                        ForceLowLightCondition forceLowLightCondition2 = ForceLowLightCondition.this;
-                        if (equals) {
+                        boolean zEquals = TextUtils.equals(str, "enable");
+                        ForceLowLightCondition forceLowLightCondition2 = forceLowLightCondition;
+                        if (zEquals) {
                             printWriter.println("forcing low light");
                             if (ForceLowLightCondition.DEBUG) {
                                 Log.d("ForceLowLightCondition", "forcing low light");

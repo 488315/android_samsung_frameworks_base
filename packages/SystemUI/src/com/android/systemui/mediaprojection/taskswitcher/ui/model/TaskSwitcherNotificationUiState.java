@@ -3,11 +3,9 @@ package com.android.systemui.mediaprojection.taskswitcher.ui.model;
 import android.app.ActivityManager;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public interface TaskSwitcherNotificationUiState {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class NotShowing implements TaskSwitcherNotificationUiState {
         public static final NotShowing INSTANCE = new NotShowing();
 
@@ -15,7 +13,6 @@ public interface TaskSwitcherNotificationUiState {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Showing implements TaskSwitcherNotificationUiState {
         public final ActivityManager.RunningTaskInfo foregroundTask;
         public final ActivityManager.RunningTaskInfo projectedTask;

@@ -61,15 +61,15 @@ public class FitBoxLayout extends LayoutManager {
         boolean z3 = false;
         while (it.hasNext()) {
             Component next = it.next();
-            float f5 = 0.0f;
+            float min = 0.0f;
             if (next instanceof LayoutComponent) {
                 LayoutComponent layoutComponent = (LayoutComponent) next;
-                float min = (layoutComponent.getWidthModifier() == null || (widthIn = layoutComponent.getWidthModifier().getWidthIn()) == null) ? 0.0f : widthIn.getMin();
+                float min2 = (layoutComponent.getWidthModifier() == null || (widthIn = layoutComponent.getWidthModifier().getWidthIn()) == null) ? 0.0f : widthIn.getMin();
                 if (layoutComponent.getHeightModifier() != null && (heightIn = layoutComponent.getHeightModifier().getHeightIn()) != null) {
-                    f5 = heightIn.getMin();
+                    min = heightIn.getMin();
                 }
-                f4 = f5;
-                f3 = min;
+                f4 = min;
+                f3 = min2;
             } else {
                 f3 = 0.0f;
                 f4 = 0.0f;
@@ -109,18 +109,18 @@ public class FitBoxLayout extends LayoutManager {
         boolean z = false;
         while (it.hasNext()) {
             Component next = it.next();
-            float f11 = 0.0f;
+            float min = 0.0f;
             if (next instanceof LayoutComponent) {
                 LayoutComponent layoutComponent = (LayoutComponent) next;
-                float min = (layoutComponent.getWidthModifier() == null || (widthIn = layoutComponent.getWidthModifier().getWidthIn()) == null) ? 0.0f : widthIn.getMin();
+                float min2 = (layoutComponent.getWidthModifier() == null || (widthIn = layoutComponent.getWidthModifier().getWidthIn()) == null) ? 0.0f : widthIn.getMin();
                 if (layoutComponent.getHeightModifier() != null && (heightIn = layoutComponent.getHeightModifier().getHeightIn()) != null) {
-                    f11 = heightIn.getMin();
+                    min = heightIn.getMin();
                 }
-                float f12 = f11;
+                float f11 = min;
                 paintContext2 = paintContext;
-                f10 = min;
+                f10 = min2;
                 f5 = f;
-                f9 = f12;
+                f9 = f11;
                 f6 = f2;
                 f7 = f3;
                 f8 = f4;
@@ -164,7 +164,7 @@ public class FitBoxLayout extends LayoutManager {
         while (it.hasNext()) {
             ComponentMeasure componentMeasure2 = measurePass.get(it.next());
             int i = this.mVerticalPositioning;
-            float f = 0.0f;
+            float w2 = 0.0f;
             if (i == 2) {
                 h = (h2 - componentMeasure2.getH()) / 2.0f;
             } else {
@@ -173,12 +173,12 @@ public class FitBoxLayout extends LayoutManager {
             int i2 = this.mHorizontalPositioning;
             if (i2 != 1) {
                 if (i2 == 2) {
-                    f = (w - componentMeasure2.getW()) / 2.0f;
+                    w2 = (w - componentMeasure2.getW()) / 2.0f;
                 } else if (i2 == 3) {
-                    f = w - componentMeasure2.getW();
+                    w2 = w - componentMeasure2.getW();
                 }
             }
-            componentMeasure2.setX(f);
+            componentMeasure2.setX(w2);
             componentMeasure2.setY(h);
         }
     }

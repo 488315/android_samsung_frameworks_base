@@ -75,14 +75,14 @@ public class MultiAutoCompleteTextView extends AutoCompleteTextView {
         Editable text = getText();
         int length = getText().length();
         while (length > 0) {
-            int findTokenStart = this.mTokenizer.findTokenStart(text, length);
-            CharSequence subSequence = text.subSequence(findTokenStart, this.mTokenizer.findTokenEnd(text, findTokenStart));
-            if (TextUtils.isEmpty(subSequence)) {
-                text.replace(findTokenStart, length, "");
-            } else if (!validator.isValid(subSequence)) {
-                text.replace(findTokenStart, length, this.mTokenizer.terminateToken(validator.fixText(subSequence)));
+            int iFindTokenStart = this.mTokenizer.findTokenStart(text, length);
+            CharSequence charSequenceSubSequence = text.subSequence(iFindTokenStart, this.mTokenizer.findTokenEnd(text, iFindTokenStart));
+            if (TextUtils.isEmpty(charSequenceSubSequence)) {
+                text.replace(iFindTokenStart, length, "");
+            } else if (!validator.isValid(charSequenceSubSequence)) {
+                text.replace(iFindTokenStart, length, this.mTokenizer.terminateToken(validator.fixText(charSequenceSubSequence)));
             }
-            length = findTokenStart;
+            length = iFindTokenStart;
         }
     }
 
@@ -94,10 +94,10 @@ public class MultiAutoCompleteTextView extends AutoCompleteTextView {
     protected void replaceText(CharSequence charSequence) {
         clearComposingText();
         int selectionEnd = getSelectionEnd();
-        int findTokenStart = this.mTokenizer.findTokenStart(getText(), selectionEnd);
+        int iFindTokenStart = this.mTokenizer.findTokenStart(getText(), selectionEnd);
         Editable text = getText();
-        QwertyKeyListener.markAsReplaced(text, findTokenStart, selectionEnd, TextUtils.substring(text, findTokenStart, selectionEnd));
-        text.replace(findTokenStart, selectionEnd, this.mTokenizer.terminateToken(charSequence));
+        QwertyKeyListener.markAsReplaced(text, iFindTokenStart, selectionEnd, TextUtils.substring(text, iFindTokenStart, selectionEnd));
+        text.replace(iFindTokenStart, selectionEnd, this.mTokenizer.terminateToken(charSequence));
     }
 
     @Override // android.widget.AutoCompleteTextView, android.widget.EditText, android.widget.TextView, android.view.View

@@ -1,132 +1,128 @@
 package androidx.datastore.core;
 
+import kotlin.ResultKt;
+import kotlin.Unit;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
 import kotlinx.coroutines.CompletableDeferredImpl;
 import kotlinx.coroutines.CompletableDeferredKt;
+import kotlinx.coroutines.sync.Mutex;
 import kotlinx.coroutines.sync.MutexImpl;
 import kotlinx.coroutines.sync.MutexKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class RunOnce {
     public final MutexImpl runMutex = MutexKt.Mutex$default();
     public final CompletableDeferredImpl didRun = CompletableDeferredKt.CompletableDeferred$default();
 
+    /* renamed from: androidx.datastore.core.RunOnce$runIfNeeded$1, reason: invalid class name */
+    final class AnonymousClass1 extends ContinuationImpl {
+        Object L$0;
+        Object L$1;
+        int label;
+        /* synthetic */ Object result;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return RunOnce.this.runIfNeeded(this);
+        }
+    }
+
     public abstract Object doRun(ContinuationImpl continuationImpl);
 
-    /* JADX WARN: Code restructure failed: missing block: B:41:0x0065, code lost:
-    
-        if (r8.lock(r0) == r1) goto L36;
-     */
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x0070 A[Catch: all -> 0x0076, TRY_LEAVE, TryCatch #1 {all -> 0x0076, blocks: (B:25:0x0068, B:27:0x0070, B:30:0x007b), top: B:24:0x0068 }] */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x007b A[Catch: all -> 0x0076, TRY_ENTER, TRY_LEAVE, TryCatch #1 {all -> 0x0076, blocks: (B:25:0x0068, B:27:0x0070, B:30:0x007b), top: B:24:0x0068 }] */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x004b  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0023  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /* JADX WARN: Type inference failed for: r7v11, types: [kotlinx.coroutines.sync.Mutex] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object runIfNeeded(kotlin.coroutines.jvm.internal.ContinuationImpl r8) {
-        /*
-            r7 = this;
-            boolean r0 = r8 instanceof androidx.datastore.core.RunOnce$runIfNeeded$1
-            if (r0 == 0) goto L13
-            r0 = r8
-            androidx.datastore.core.RunOnce$runIfNeeded$1 r0 = (androidx.datastore.core.RunOnce$runIfNeeded$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            androidx.datastore.core.RunOnce$runIfNeeded$1 r0 = new androidx.datastore.core.RunOnce$runIfNeeded$1
-            r0.<init>(r7, r8)
-        L18:
-            java.lang.Object r8 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 2
-            r4 = 1
-            r5 = 0
-            if (r2 == 0) goto L4b
-            if (r2 == r4) goto L3d
-            if (r2 != r3) goto L35
-            java.lang.Object r7 = r0.L$1
-            kotlinx.coroutines.sync.Mutex r7 = (kotlinx.coroutines.sync.Mutex) r7
-            java.lang.Object r0 = r0.L$0
-            androidx.datastore.core.RunOnce r0 = (androidx.datastore.core.RunOnce) r0
-            kotlin.ResultKt.throwOnFailure(r8)     // Catch: java.lang.Throwable -> L33
-            goto L8a
-        L33:
-            r8 = move-exception
-            goto L95
-        L35:
-            java.lang.IllegalStateException r7 = new java.lang.IllegalStateException
-            java.lang.String r8 = "call to 'resume' before 'invoke' with coroutine"
-            r7.<init>(r8)
-            throw r7
-        L3d:
-            java.lang.Object r7 = r0.L$1
-            kotlinx.coroutines.sync.Mutex r7 = (kotlinx.coroutines.sync.Mutex) r7
-            java.lang.Object r2 = r0.L$0
-            androidx.datastore.core.RunOnce r2 = (androidx.datastore.core.RunOnce) r2
-            kotlin.ResultKt.throwOnFailure(r8)
-            r8 = r7
-            r7 = r2
-            goto L68
-        L4b:
-            kotlin.ResultKt.throwOnFailure(r8)
-            kotlinx.coroutines.CompletableDeferredImpl r8 = r7.didRun
-            boolean r8 = r8.isCompleted()
-            if (r8 == 0) goto L59
-            kotlin.Unit r7 = kotlin.Unit.INSTANCE
-            return r7
-        L59:
-            kotlinx.coroutines.sync.MutexImpl r8 = r7.runMutex
-            r0.L$0 = r7
-            r0.L$1 = r8
-            r0.label = r4
-            java.lang.Object r2 = r8.lock(r0)
-            if (r2 != r1) goto L68
-            goto L87
-        L68:
-            kotlinx.coroutines.CompletableDeferredImpl r2 = r7.didRun     // Catch: java.lang.Throwable -> L76
-            boolean r2 = r2.isCompleted()     // Catch: java.lang.Throwable -> L76
-            if (r2 == 0) goto L7b
-            kotlin.Unit r7 = kotlin.Unit.INSTANCE     // Catch: java.lang.Throwable -> L76
-            r8.unlock(r5)
-            return r7
-        L76:
-            r7 = move-exception
-            r6 = r8
-            r8 = r7
-            r7 = r6
-            goto L95
-        L7b:
-            r0.L$0 = r7     // Catch: java.lang.Throwable -> L76
-            r0.L$1 = r8     // Catch: java.lang.Throwable -> L76
-            r0.label = r3     // Catch: java.lang.Throwable -> L76
-            java.lang.Object r0 = r7.doRun(r0)     // Catch: java.lang.Throwable -> L76
-            if (r0 != r1) goto L88
-        L87:
-            return r1
-        L88:
-            r0 = r7
-            r7 = r8
-        L8a:
-            kotlinx.coroutines.CompletableDeferredImpl r8 = r0.didRun     // Catch: java.lang.Throwable -> L33
-            kotlin.Unit r0 = kotlin.Unit.INSTANCE     // Catch: java.lang.Throwable -> L33
-            r8.makeCompleting$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host(r0)     // Catch: java.lang.Throwable -> L33
-            r7.unlock(r5)
-            return r0
-        L95:
-            r7.unlock(r5)
-            throw r8
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.datastore.core.RunOnce.runIfNeeded(kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object runIfNeeded(ContinuationImpl continuationImpl) throws Throwable {
+        AnonymousClass1 anonymousClass1;
+        MutexImpl mutexImpl;
+        Throwable th;
+        Mutex mutex;
+        RunOnce runOnce;
+        if (continuationImpl instanceof AnonymousClass1) {
+            anonymousClass1 = (AnonymousClass1) continuationImpl;
+            int i = anonymousClass1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                anonymousClass1.label = i - Integer.MIN_VALUE;
+            } else {
+                anonymousClass1 = new AnonymousClass1(continuationImpl);
+            }
+        }
+        Object obj = anonymousClass1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = anonymousClass1.label;
+        try {
+            if (i2 == 0) {
+                ResultKt.throwOnFailure(obj);
+                if (this.didRun.isCompleted()) {
+                    return Unit.INSTANCE;
+                }
+                mutexImpl = this.runMutex;
+                anonymousClass1.L$0 = this;
+                anonymousClass1.L$1 = mutexImpl;
+                anonymousClass1.label = 1;
+                if (mutexImpl.lock(anonymousClass1) != coroutineSingletons) {
+                }
+                return coroutineSingletons;
+            }
+            if (i2 != 1) {
+                if (i2 != 2) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                mutex = (Mutex) anonymousClass1.L$1;
+                runOnce = (RunOnce) anonymousClass1.L$0;
+                try {
+                    ResultKt.throwOnFailure(obj);
+                    CompletableDeferredImpl completableDeferredImpl = runOnce.didRun;
+                    Unit unit = Unit.INSTANCE;
+                    completableDeferredImpl.makeCompleting$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host(unit);
+                    mutex.unlock(null);
+                    return unit;
+                } catch (Throwable th2) {
+                    th = th2;
+                    mutex.unlock(null);
+                    throw th;
+                }
+            }
+            ?? r7 = (Mutex) anonymousClass1.L$1;
+            RunOnce runOnce2 = (RunOnce) anonymousClass1.L$0;
+            ResultKt.throwOnFailure(obj);
+            mutexImpl = r7;
+            this = runOnce2;
+            if (this.didRun.isCompleted()) {
+                Unit unit2 = Unit.INSTANCE;
+                mutexImpl.unlock(null);
+                return unit2;
+            }
+            anonymousClass1.L$0 = this;
+            anonymousClass1.L$1 = mutexImpl;
+            anonymousClass1.label = 2;
+            if (this.doRun(anonymousClass1) != coroutineSingletons) {
+                runOnce = this;
+                mutex = mutexImpl;
+                CompletableDeferredImpl completableDeferredImpl2 = runOnce.didRun;
+                Unit unit3 = Unit.INSTANCE;
+                completableDeferredImpl2.makeCompleting$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host(unit3);
+                mutex.unlock(null);
+                return unit3;
+            }
+            return coroutineSingletons;
+        } catch (Throwable th3) {
+            MutexImpl mutexImpl2 = mutexImpl;
+            th = th3;
+            mutex = mutexImpl2;
+            mutex.unlock(null);
+            throw th;
+        }
     }
 }

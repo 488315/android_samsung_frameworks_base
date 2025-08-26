@@ -12,7 +12,6 @@ import androidx.constraintlayout.core.widgets.ConstraintWidget;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import com.samsung.android.knox.custom.IKnoxCustomManager;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class Placeholder extends View {
     private View mContent;
@@ -31,17 +30,17 @@ public class Placeholder extends View {
         super.setVisibility(this.mEmptyVisibility);
         this.mContentId = -1;
         if (attributeSet != null) {
-            TypedArray obtainStyledAttributes = getContext().obtainStyledAttributes(attributeSet, R.styleable.ConstraintLayout_placeholder);
-            int indexCount = obtainStyledAttributes.getIndexCount();
+            TypedArray typedArrayObtainStyledAttributes = getContext().obtainStyledAttributes(attributeSet, R.styleable.ConstraintLayout_placeholder);
+            int indexCount = typedArrayObtainStyledAttributes.getIndexCount();
             for (int i = 0; i < indexCount; i++) {
-                int index = obtainStyledAttributes.getIndex(i);
+                int index = typedArrayObtainStyledAttributes.getIndex(i);
                 if (index == R.styleable.ConstraintLayout_placeholder_content) {
-                    this.mContentId = obtainStyledAttributes.getResourceId(index, this.mContentId);
+                    this.mContentId = typedArrayObtainStyledAttributes.getResourceId(index, this.mContentId);
                 } else if (index == R.styleable.ConstraintLayout_placeholder_placeholder_emptyVisibility) {
-                    this.mEmptyVisibility = obtainStyledAttributes.getInt(index, this.mEmptyVisibility);
+                    this.mEmptyVisibility = typedArrayObtainStyledAttributes.getInt(index, this.mEmptyVisibility);
                 }
             }
-            obtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes.recycle();
         }
     }
 
@@ -64,16 +63,16 @@ public class Placeholder extends View {
             Rect rect = new Rect();
             canvas.getClipBounds(rect);
             paint.setTextSize(rect.height());
-            int height = rect.height();
-            int width = rect.width();
+            int iHeight = rect.height();
+            int iWidth = rect.width();
             paint.setTextAlign(Paint.Align.LEFT);
             paint.getTextBounds("?", 0, 1, rect);
-            canvas.drawText("?", ((width / 2.0f) - (rect.width() / 2.0f)) - rect.left, ((rect.height() / 2.0f) + (height / 2.0f)) - rect.bottom, paint);
+            canvas.drawText("?", ((iWidth / 2.0f) - (rect.width() / 2.0f)) - rect.left, ((rect.height() / 2.0f) + (iHeight / 2.0f)) - rect.bottom, paint);
         }
     }
 
     public void setContentId(int i) {
-        View findViewById;
+        View viewFindViewById;
         if (this.mContentId == i) {
             return;
         }
@@ -84,10 +83,10 @@ public class Placeholder extends View {
             this.mContent = null;
         }
         this.mContentId = i;
-        if (i == -1 || (findViewById = ((View) getParent()).findViewById(i)) == null) {
+        if (i == -1 || (viewFindViewById = ((View) getParent()).findViewById(i)) == null) {
             return;
         }
-        findViewById.setVisibility(8);
+        viewFindViewById.setVisibility(8);
     }
 
     public void setEmptyVisibility(int i) {
@@ -119,10 +118,10 @@ public class Placeholder extends View {
         if (this.mContentId == -1 && !isInEditMode()) {
             setVisibility(this.mEmptyVisibility);
         }
-        View findViewById = constraintLayout.findViewById(this.mContentId);
-        this.mContent = findViewById;
-        if (findViewById != null) {
-            ((ConstraintLayout.LayoutParams) findViewById.getLayoutParams()).mIsInPlaceholder = true;
+        View viewFindViewById = constraintLayout.findViewById(this.mContentId);
+        this.mContent = viewFindViewById;
+        if (viewFindViewById != null) {
+            ((ConstraintLayout.LayoutParams) viewFindViewById.getLayoutParams()).mIsInPlaceholder = true;
             this.mContent.setVisibility(0);
             setVisibility(0);
         }

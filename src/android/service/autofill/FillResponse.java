@@ -70,9 +70,9 @@ public final class FillResponse implements Parcelable {
                 builder.setUserData(userData);
             }
             builder.setIgnoredIds((AutofillId[]) parcel.readParcelableArray(null, AutofillId.class));
-            long readLong = parcel.readLong();
-            if (readLong > 0) {
-                builder.disableAutofill(readLong);
+            long j = parcel.readLong();
+            if (j > 0) {
+                builder.disableAutofill(j);
             }
             AutofillId[] autofillIdArr3 = (AutofillId[]) parcel.readParcelableArray(null, AutofillId.class);
             if (autofillIdArr3 != null) {
@@ -88,9 +88,9 @@ public final class FillResponse implements Parcelable {
             builder.setShowSaveDialogIcon(parcel.readBoolean());
             builder.setFlags(parcel.readInt());
             builder.setPresentationCancelIds(parcel.createIntArray());
-            FillResponse build = builder.build();
-            build.setRequestId(parcel.readInt());
-            return build;
+            FillResponse fillResponseBuild = builder.build();
+            fillResponseBuild.setRequestId(parcel.readInt());
+            return fillResponseBuild;
         }
 
         /* JADX WARN: Can't rename method to resolve collision */

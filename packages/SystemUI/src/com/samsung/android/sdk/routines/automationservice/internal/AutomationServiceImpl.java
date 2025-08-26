@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import com.samsung.android.sdk.routines.automationservice.data.ParameterValues;
 import com.samsung.android.sdk.routines.automationservice.interfaces.AutomationService;
 import com.samsung.android.sdk.routines.automationservice.interfaces.ContentHandler;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -24,14 +25,12 @@ import kotlin.text.StringsKt___StringsKt;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class AutomationServiceImpl implements AutomationService {
     public static final Companion Companion = new Companion(null);
     public static final Map allowedPackageNamesByType = MapsKt__MapsKt.mapOf(new Pair(AutomationService.SystemRoutineType.SOUND_CRAFT_FOR_PHONE, ArraysKt___ArraysKt.toSet(new String[]{"com.sec.android.app.soundalive", "com.android.systemui", "com.samsung.android.app.routines"})), new Pair(AutomationService.SystemRoutineType.SOUND_CRAFT_FOR_BUDS, ArraysKt___ArraysKt.toSet(new String[]{"com.sec.android.app.soundalive", "com.android.systemui", "com.samsung.android.app.routines"})), new Pair(AutomationService.SystemRoutineType.GAME_CRAFT, ArraysKt___ArraysKt.toSet(new String[]{"com.samsung.android.game.gos", "com.samsung.android.app.routines"})));
     public final ContentHandler contentHandler;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -66,17 +65,16 @@ public final class AutomationServiceImpl implements AutomationService {
     }
 
     public static String createContentValue(ParameterValues parameterValues) {
-        String str;
+        String string;
         String jsonString;
-        if (parameterValues == null || (str = parameterValues.getString("v2IntentParam", "")) == null) {
-            str = "";
+        if (parameterValues == null || (string = parameterValues.getString("v2IntentParam", "")) == null) {
+            string = "";
         }
-        return str.length() > 0 ? str : (parameterValues == null || (jsonString = parameterValues.toJsonString()) == null) ? "" : jsonString;
+        return string.length() > 0 ? string : (parameterValues == null || (jsonString = parameterValues.toJsonString()) == null) ? "" : jsonString;
     }
 
-    public static ParameterValues getParameterValues(Cursor cursor) {
+    public static ParameterValues getParameterValues(Cursor cursor) throws JSONException {
         ParameterValues parameterValues;
-        ParameterValues.ParameterValue.ValueType valueType;
         String string = cursor.getString(cursor.getColumnIndex("intent_param"));
         if (string == null) {
             Log.INSTANCE.getClass();
@@ -85,15 +83,15 @@ public final class AutomationServiceImpl implements AutomationService {
             return new ParameterValues();
         }
         ParameterValues.Companion.getClass();
-        HashMap hashMap = new HashMap();
+        HashMap map = new HashMap();
         if (string.length() == 0) {
-            parameterValues = new ParameterValues(hashMap, null);
+            parameterValues = new ParameterValues(map, null);
         } else {
             try {
                 JSONObject jSONObject = new JSONObject(string);
-                Iterator<String> keys = jSONObject.keys();
-                while (keys.hasNext()) {
-                    String next = keys.next();
+                Iterator<String> itKeys = jSONObject.keys();
+                while (itKeys.hasNext()) {
+                    String next = itKeys.next();
                     next.getClass();
                     ParameterValues.ParameterValue.Companion companion = ParameterValues.ParameterValue.Companion;
                     String string2 = jSONObject.getString(next);
@@ -103,23 +101,23 @@ public final class AutomationServiceImpl implements AutomationService {
                         try {
                             JSONObject jSONObject2 = new JSONObject(string2);
                             parameterValue.mValueType = ParameterValues.ParameterValue.Companion.parseType(jSONObject2);
-                            valueType = parameterValue.mValueType;
+                            ParameterValues.ParameterValue.ValueType valueType = parameterValue.mValueType;
                             if (valueType == null) {
                                 valueType = null;
                             }
                             parameterValue.value = ParameterValues.ParameterValue.Companion.parseValue(jSONObject2, valueType);
-                        } catch (NumberFormatException e) {
+                        } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                    } catch (JSONException e2) {
+                    } catch (NumberFormatException e2) {
                         e2.printStackTrace();
                     }
-                    hashMap.put(next, parameterValue);
+                    map.put(next, parameterValue);
                 }
             } catch (JSONException e3) {
                 e3.printStackTrace();
             }
-            parameterValues = new ParameterValues(hashMap, null);
+            parameterValues = new ParameterValues(map, null);
         }
         if (((HashMap) parameterValues.parameterValueMap).isEmpty()) {
             ((HashMap) parameterValues.parameterValueMap).put("v2IsNegative", new ParameterValues.ParameterValue(cursor.getInt(cursor.getColumnIndex("is_negative"))));
@@ -128,24 +126,24 @@ public final class AutomationServiceImpl implements AutomationService {
         return parameterValues;
     }
 
-    public final List filterSupportedTags(Context context, List list) {
+    public final List filterSupportedTags(Context context, List list) throws IOException {
         ArrayList arrayList = new ArrayList();
         try {
             ((ContentHandlerImpl) this.contentHandler).getClass();
             ContentResolver contentResolver = context.getContentResolver();
-            Uri.Builder buildUpon = Uri.parse("content://com.samsung.android.app.routines.routineinfoprovider/core_service/tag_supported").buildUpon();
-            buildUpon.appendQueryParameter("tag", new Gson().toJson(list));
-            Cursor query = contentResolver.query(buildUpon.build(), null, null, null, null, null);
-            if (query != null) {
+            Uri.Builder builderBuildUpon = Uri.parse("content://com.samsung.android.app.routines.routineinfoprovider/core_service/tag_supported").buildUpon();
+            builderBuildUpon.appendQueryParameter("tag", new Gson().toJson(list));
+            Cursor cursorQuery = contentResolver.query(builderBuildUpon.build(), null, null, null, null, null);
+            if (cursorQuery != null) {
                 try {
-                    if (query.getCount() > 0 && query.moveToFirst()) {
-                        int columnIndex = query.getColumnIndex("tag");
+                    if (cursorQuery.getCount() > 0 && cursorQuery.moveToFirst()) {
+                        int columnIndex = cursorQuery.getColumnIndex("tag");
                         do {
-                            arrayList.add(query.getString(columnIndex));
-                        } while (query.moveToNext());
+                            arrayList.add(cursorQuery.getString(columnIndex));
+                        } while (cursorQuery.moveToNext());
                     }
                     Unit unit = Unit.INSTANCE;
-                    query.close();
+                    cursorQuery.close();
                     return arrayList;
                 } finally {
                 }

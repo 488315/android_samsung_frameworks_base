@@ -178,7 +178,7 @@ public class TvView extends ViewGroup {
         this(context, attributeSet, 0);
     }
 
-    public TvView(Context context, AttributeSet attributeSet, int i) {
+    public TvView(Context context, AttributeSet attributeSet, int i) throws Throwable {
         super(context, attributeSet, i);
         this.mHandler = new Handler();
         this.mPendingAppPrivateCommands = new ArrayDeque();
@@ -261,7 +261,7 @@ public class TvView extends ViewGroup {
         }
     }
 
-    public void setZOrderMediaOverlay(boolean z) {
+    public void setZOrderMediaOverlay(boolean z) throws Throwable {
         if (z) {
             this.mWindowZOrder = 1;
             removeSessionOverlayView();
@@ -276,7 +276,7 @@ public class TvView extends ViewGroup {
         }
     }
 
-    public void setZOrderOnTop(boolean z) {
+    public void setZOrderOnTop(boolean z) throws Throwable {
         if (z) {
             this.mWindowZOrder = 2;
             removeSessionOverlayView();
@@ -306,11 +306,11 @@ public class TvView extends ViewGroup {
         }
     }
 
-    public void tune(String str, Uri uri) {
+    public void tune(String str, Uri uri) throws Throwable {
         tune(str, uri, null);
     }
 
-    public void tune(String str, Uri uri, Bundle bundle) {
+    public void tune(String str, Uri uri, Bundle bundle) throws Throwable {
         if (TextUtils.isEmpty(str)) {
             throw new IllegalArgumentException("inputId cannot be null or an empty string");
         }
@@ -340,7 +340,7 @@ public class TvView extends ViewGroup {
         }
     }
 
-    public void reset() {
+    public void reset() throws Throwable {
         synchronized (sMainTvViewLock) {
             if (this == sMainTvView.get()) {
                 sMainTvView = NULL_TV_VIEW;
@@ -349,7 +349,7 @@ public class TvView extends ViewGroup {
         resetInternal();
     }
 
-    private void resetInternal() {
+    private void resetInternal() throws Throwable {
         this.mSessionCallback = null;
         synchronized (this.mPendingAppPrivateCommands) {
             this.mPendingAppPrivateCommands.clear();
@@ -429,7 +429,7 @@ public class TvView extends ViewGroup {
         }
     }
 
-    public void timeShiftPlay(String str, Uri uri) {
+    public void timeShiftPlay(String str, Uri uri) throws Throwable {
         if (TextUtils.isEmpty(str)) {
             throw new IllegalArgumentException("inputId cannot be null or an empty string");
         }
@@ -577,8 +577,8 @@ public class TvView extends ViewGroup {
         if (this.mSession == null) {
             return false;
         }
-        KeyEvent copy = keyEvent.copy();
-        return this.mSession.dispatchInputEvent(copy, copy, this.mFinishedInputEventCallback, this.mHandler) != 0;
+        KeyEvent keyEventCopy = keyEvent.copy();
+        return this.mSession.dispatchInputEvent(keyEventCopy, keyEventCopy, this.mFinishedInputEventCallback, this.mHandler) != 0;
     }
 
     @Override // android.view.ViewGroup, android.view.View
@@ -589,8 +589,8 @@ public class TvView extends ViewGroup {
         if (this.mSession == null) {
             return false;
         }
-        MotionEvent copy = motionEvent.copy();
-        return this.mSession.dispatchInputEvent(copy, copy, this.mFinishedInputEventCallback, this.mHandler) != 0;
+        MotionEvent motionEventCopy = motionEvent.copy();
+        return this.mSession.dispatchInputEvent(motionEventCopy, motionEventCopy, this.mFinishedInputEventCallback, this.mHandler) != 0;
     }
 
     @Override // android.view.ViewGroup, android.view.View
@@ -601,8 +601,8 @@ public class TvView extends ViewGroup {
         if (this.mSession == null) {
             return false;
         }
-        MotionEvent copy = motionEvent.copy();
-        return this.mSession.dispatchInputEvent(copy, copy, this.mFinishedInputEventCallback, this.mHandler) != 0;
+        MotionEvent motionEventCopy = motionEvent.copy();
+        return this.mSession.dispatchInputEvent(motionEventCopy, motionEventCopy, this.mFinishedInputEventCallback, this.mHandler) != 0;
     }
 
     @Override // android.view.View
@@ -613,8 +613,8 @@ public class TvView extends ViewGroup {
         if (this.mSession == null) {
             return false;
         }
-        MotionEvent copy = motionEvent.copy();
-        return this.mSession.dispatchInputEvent(copy, copy, this.mFinishedInputEventCallback, this.mHandler) != 0;
+        MotionEvent motionEventCopy = motionEvent.copy();
+        return this.mSession.dispatchInputEvent(motionEventCopy, motionEventCopy, this.mFinishedInputEventCallback, this.mHandler) != 0;
     }
 
     @Override // android.view.ViewGroup, android.view.View
@@ -659,10 +659,16 @@ public class TvView extends ViewGroup {
         setMeasuredDimension(resolveSizeAndState(measuredWidth, i, measuredState), resolveSizeAndState(measuredHeight, i2, measuredState << 16));
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:9:0x0029  */
     @Override // android.view.ViewGroup, android.view.View
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public boolean gatherTransparentRegion(Region region) {
         Region region2;
-        if (this.mWindowZOrder != 2 && region != null) {
+        if (this.mWindowZOrder == 2 || region == null) {
+            region2 = region;
+        } else {
             int width = getWidth();
             int height = getHeight();
             if (width > 0 && height > 0) {
@@ -672,10 +678,8 @@ public class TvView extends ViewGroup {
                 int i2 = iArr[1];
                 region2 = region;
                 region2.op(i, i2, i + width, i2 + height, Region.Op.UNION);
-                return super.gatherTransparentRegion(region2);
             }
         }
-        region2 = region;
         return super.gatherTransparentRegion(region2);
     }
 
@@ -696,7 +700,7 @@ public class TvView extends ViewGroup {
     }
 
     @Override // android.view.View
-    protected void onVisibilityChanged(View view, int i) {
+    protected void onVisibilityChanged(View view, int i) throws Throwable {
         super.onVisibilityChanged(view, i);
         this.mSurfaceView.setVisibility(i);
         if (i == 0) {
@@ -706,7 +710,7 @@ public class TvView extends ViewGroup {
         }
     }
 
-    private void resetSurfaceView() {
+    private void resetSurfaceView() throws Throwable {
         SurfaceView surfaceView = this.mSurfaceView;
         if (surfaceView != null) {
             surfaceView.getHolder().removeCallback(this.mSurfaceHolderCallback);
@@ -715,7 +719,7 @@ public class TvView extends ViewGroup {
         this.mSurface = null;
         SurfaceView surfaceView2 = new SurfaceView(getContext(), this.mAttrs, this.mDefStyleAttr) { // from class: android.media.tv.TvView.3
             @Override // android.view.SurfaceView
-            protected void updateSurface() {
+            protected void updateSurface() throws Throwable {
                 super.updateSurface();
                 TvView.this.relayoutSessionOverlayView();
             }

@@ -4,8 +4,10 @@ import android.bluetooth.BluetoothA2dp;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.ContentResolver;
+import android.graphics.drawable.Drawable;
 import android.media.AudioDeviceInfo;
 import android.media.AudioManager;
+import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
 import android.util.Log;
 import com.android.settingslib.bluetooth.A2dpProfile;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -15,35 +17,52 @@ import com.android.systemui.media.mediaoutput.analytics.MoSaLogging;
 import com.android.systemui.media.mediaoutput.analytics.SaEvent;
 import com.android.systemui.media.mediaoutput.common.DeviceUtils;
 import com.android.systemui.media.mediaoutput.common.MediaOutputConst;
+import com.android.systemui.media.mediaoutput.compose.ext.TintDrawablePainter;
 import com.android.systemui.media.mediaoutput.entity.AudioDevice;
+import com.android.systemui.media.mediaoutput.entity.AudioDeviceExt;
+import com.android.systemui.media.mediaoutput.entity.BluetoothDevice;
 import com.android.systemui.media.mediaoutput.entity.MusicShareDevice;
+import com.android.systemui.media.mediaoutput.entity.State;
+import com.android.systemui.media.mediaoutput.ext.AudioDeviceInfoExt;
 import com.android.systemui.media.mediaoutput.ext.AudioManagerExtKt;
+import com.android.systemui.media.mediaoutput.ext.CachedBluetoothDeviceExtKt;
+import com.android.systemui.media.mediaoutput.ext.MultiSequenceString;
 import com.samsung.android.bluetooth.SemBluetoothAudioCast;
 import com.samsung.android.bluetooth.SemBluetoothCastDevice;
 import com.samsung.android.settingslib.bluetooth.bluetoothcast.AudioCastProfile;
 import com.samsung.android.settingslib.bluetooth.bluetoothcast.LocalBluetoothCastProfileManager;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import kotlin.Lazy;
 import kotlin.LazyKt__LazyJVMKt;
 import kotlin.ResultKt;
 import kotlin.Unit;
+import kotlin.collections.ArraysKt___ArraysKt;
+import kotlin.collections.CollectionsKt__IterablesKt;
+import kotlin.collections.CollectionsKt___CollectionsKt;
+import kotlin.collections.EmptySet;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function0;
+import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
+import kotlin.jvm.internal.Ref$BooleanRef;
+import kotlin.text.StringsKt__StringsKt;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.StandaloneCoroutine;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
+import kotlinx.coroutines.flow.SharedFlowImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class BluetoothDeviceController extends DeviceController {
     public static final Companion Companion = new Companion(null);
@@ -55,7 +74,6 @@ public final class BluetoothDeviceController extends DeviceController {
     public boolean musicShareEventLogged;
     public StandaloneCoroutine updateJob;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.media.mediaoutput.controller.device.BluetoothDeviceController$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         int label;
@@ -83,22 +101,22 @@ public final class BluetoothDeviceController extends DeviceController {
                 LocalBluetoothManager localBluetoothManager = BluetoothDeviceController.this.localBluetoothManager;
                 if (localBluetoothManager != null) {
                     BluetoothDeviceController.Companion.getClass();
-                    Flow buffer$default = FlowKt.buffer$default(FlowKt.callbackFlow(new BluetoothDeviceController$Companion$connectedDeviceChanges$1(localBluetoothManager, null)), -1, 2);
-                    if (buffer$default != null) {
+                    Flow flowBuffer$default = FlowKt.buffer$default(FlowKt.callbackFlow(new BluetoothDeviceController$Companion$connectedDeviceChanges$1(localBluetoothManager, null)), -1, 2);
+                    if (flowBuffer$default != null) {
                         MediaOutputConst.INSTANCE.getClass();
-                        Flow m3462debounceHG0u8IE = FlowKt.m3462debounceHG0u8IE(buffer$default, MediaOutputConst.AUDIO_PATH_DEBOUNCE_TIMEOUT);
-                        if (m3462debounceHG0u8IE != null) {
+                        Flow flowM3482debounceHG0u8IE = FlowKt.m3482debounceHG0u8IE(flowBuffer$default, MediaOutputConst.AUDIO_PATH_DEBOUNCE_TIMEOUT);
+                        if (flowM3482debounceHG0u8IE != null) {
                             final BluetoothDeviceController bluetoothDeviceController = BluetoothDeviceController.this;
                             FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.media.mediaoutput.controller.device.BluetoothDeviceController.1.1
                                 @Override // kotlinx.coroutines.flow.FlowCollector
-                                public final Object emit(Object obj2, Continuation continuation) {
+                                public final Object emit(Object obj2, Continuation continuation) throws Throwable {
                                     Companion companion = BluetoothDeviceController.Companion;
-                                    Object updateDevices = BluetoothDeviceController.this.updateDevices((List) obj2, false, continuation);
-                                    return updateDevices == CoroutineSingletons.COROUTINE_SUSPENDED ? updateDevices : Unit.INSTANCE;
+                                    Object objUpdateDevices = bluetoothDeviceController.updateDevices((List) obj2, false, continuation);
+                                    return objUpdateDevices == CoroutineSingletons.COROUTINE_SUSPENDED ? objUpdateDevices : Unit.INSTANCE;
                                 }
                             };
                             this.label = 1;
-                            if (m3462debounceHG0u8IE.collect(flowCollector, this) == coroutineSingletons) {
+                            if (flowM3482debounceHG0u8IE.collect(flowCollector, this) == coroutineSingletons) {
                                 return coroutineSingletons;
                             }
                         }
@@ -114,13 +132,53 @@ public final class BluetoothDeviceController extends DeviceController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
         }
 
         private Companion() {
+        }
+    }
+
+    /* renamed from: com.android.systemui.media.mediaoutput.controller.device.BluetoothDeviceController$deselect$1, reason: invalid class name and case insensitive filesystem */
+    final class C09381 extends ContinuationImpl {
+        Object L$0;
+        Object L$1;
+        int label;
+        /* synthetic */ Object result;
+
+        public C09381(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return BluetoothDeviceController.this.deselect(null, this);
+        }
+    }
+
+    /* renamed from: com.android.systemui.media.mediaoutput.controller.device.BluetoothDeviceController$updateDevices$1, reason: invalid class name and case insensitive filesystem */
+    final class C09391 extends ContinuationImpl {
+        Object L$0;
+        Object L$1;
+        Object L$2;
+        int label;
+        /* synthetic */ Object result;
+
+        public C09391(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            BluetoothDeviceController bluetoothDeviceController = BluetoothDeviceController.this;
+            Companion companion = BluetoothDeviceController.Companion;
+            return bluetoothDeviceController.updateDevices(null, false, this);
         }
     }
 
@@ -131,13 +189,13 @@ public final class BluetoothDeviceController extends DeviceController {
         this.cr = contentResolver;
         this.audioManager = audioManager;
         this.localBluetoothManager = localBluetoothManager;
-        boolean z = false;
+        boolean zSemIsDualPlaySupported = false;
         if (localBluetoothManager != null && (localBluetoothProfileManager = localBluetoothManager.mProfileManager) != null && (a2dpProfile = localBluetoothProfileManager.mA2dpProfile) != null && (bluetoothAdapter = a2dpProfile.mBluetoothAdapter) != null) {
-            z = bluetoothAdapter.semIsDualPlaySupported();
+            zSemIsDualPlaySupported = bluetoothAdapter.semIsDualPlaySupported();
         }
-        this.isDualAudioSupported = z;
+        this.isDualAudioSupported = zSemIsDualPlaySupported;
         this.bluetoothAdapter$delegate = LazyKt__LazyJVMKt.lazy(new BluetoothDeviceController$$ExternalSyntheticLambda0());
-        Log.d("BluetoothDeviceController", "init() - isDualAudioSupported = " + z);
+        Log.d("BluetoothDeviceController", "init() - isDualAudioSupported = " + zSemIsDualPlaySupported);
         BuildersKt.launch$default(getControllerScope(), null, null, new AnonymousClass1(null), 3);
     }
 
@@ -171,7 +229,7 @@ public final class BluetoothDeviceController extends DeviceController {
             Function0 function0 = new Function0() { // from class: com.android.systemui.media.mediaoutput.controller.device.BluetoothDeviceController$$ExternalSyntheticLambda1
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    BluetoothDeviceController bluetoothDeviceController = BluetoothDeviceController.this;
+                    BluetoothDeviceController bluetoothDeviceController = this.f$0;
                     LocalBluetoothManager localBluetoothManager = bluetoothDeviceController.localBluetoothManager;
                     if (localBluetoothManager != null) {
                         StandaloneCoroutine standaloneCoroutine = bluetoothDeviceController.updateJob;
@@ -227,120 +285,73 @@ public final class BluetoothDeviceController extends DeviceController {
         Log.d("BluetoothDeviceController", "close()");
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x00a4  */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x0038  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0022  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     @Override // com.android.systemui.media.mediaoutput.controller.device.DeviceController
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object deselect(com.android.systemui.media.mediaoutput.entity.AudioDevice r10, kotlin.coroutines.jvm.internal.ContinuationImpl r11) {
-        /*
-            r9 = this;
-            boolean r0 = r11 instanceof com.android.systemui.media.mediaoutput.controller.device.BluetoothDeviceController$deselect$1
-            if (r0 == 0) goto L13
-            r0 = r11
-            com.android.systemui.media.mediaoutput.controller.device.BluetoothDeviceController$deselect$1 r0 = (com.android.systemui.media.mediaoutput.controller.device.BluetoothDeviceController$deselect$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.systemui.media.mediaoutput.controller.device.BluetoothDeviceController$deselect$1 r0 = new com.android.systemui.media.mediaoutput.controller.device.BluetoothDeviceController$deselect$1
-            r0.<init>(r9, r11)
-        L18:
-            java.lang.Object r11 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 0
-            r4 = 1
-            if (r2 == 0) goto L38
-            if (r2 != r4) goto L30
-            java.lang.Object r9 = r0.L$1
-            com.android.systemui.media.mediaoutput.entity.BluetoothDevice r9 = (com.android.systemui.media.mediaoutput.entity.BluetoothDevice) r9
-            java.lang.Object r9 = r0.L$0
-            com.android.systemui.media.mediaoutput.controller.device.BluetoothDeviceController r9 = (com.android.systemui.media.mediaoutput.controller.device.BluetoothDeviceController) r9
-            kotlin.ResultKt.throwOnFailure(r11)
-            goto La0
-        L30:
-            java.lang.IllegalStateException r9 = new java.lang.IllegalStateException
-            java.lang.String r10 = "call to 'resume' before 'invoke' with coroutine"
-            r9.<init>(r10)
-            throw r9
-        L38:
-            kotlin.ResultKt.throwOnFailure(r11)
-            java.lang.StringBuilder r11 = new java.lang.StringBuilder
-            java.lang.String r2 = "deselect() - "
-            r11.<init>(r2)
-            r11.append(r10)
-            java.lang.String r11 = r11.toString()
-            java.lang.String r2 = "BluetoothDeviceController"
-            android.util.Log.d(r2, r11)
-            boolean r11 = r10 instanceof com.android.systemui.media.mediaoutput.entity.BluetoothDevice
-            if (r11 == 0) goto Lc0
-            r11 = r10
-            com.android.systemui.media.mediaoutput.entity.BluetoothDevice r11 = (com.android.systemui.media.mediaoutput.entity.BluetoothDevice) r11
-            java.util.List r5 = r11.activeDevices
-            if (r5 == 0) goto La0
-            java.util.Iterator r5 = r5.iterator()
-        L5d:
-            boolean r6 = r5.hasNext()
-            if (r6 == 0) goto L75
-            java.lang.Object r6 = r5.next()
-            r7 = r6
-            com.android.systemui.media.mediaoutput.entity.BluetoothDevice r7 = (com.android.systemui.media.mediaoutput.entity.BluetoothDevice) r7
-            java.lang.String r7 = r7.id
-            java.lang.String r8 = r11.id
-            boolean r7 = kotlin.jvm.internal.Intrinsics.areEqual(r7, r8)
-            if (r7 != 0) goto L5d
-            goto L76
-        L75:
-            r6 = r3
-        L76:
-            com.android.systemui.media.mediaoutput.entity.BluetoothDevice r6 = (com.android.systemui.media.mediaoutput.entity.BluetoothDevice) r6
-            if (r6 == 0) goto La0
-            java.lang.StringBuilder r11 = new java.lang.StringBuilder
-            java.lang.String r5 = "deselect("
-            r11.<init>(r5)
-            r11.append(r10)
-            java.lang.String r10 = ") - "
-            r11.append(r10)
-            r11.append(r6)
-            java.lang.String r10 = r11.toString()
-            android.util.Log.i(r2, r10)
-            r0.L$0 = r9
-            r0.L$1 = r6
-            r0.label = r4
-            java.lang.Object r10 = r9.transfer(r6, r0)
-            if (r10 != r1) goto La0
-            return r1
-        La0:
-            com.android.settingslib.bluetooth.LocalBluetoothManager r10 = r9.localBluetoothManager
-            if (r10 == 0) goto Lc0
-            com.android.settingslib.bluetooth.LocalBluetoothProfileManager r11 = r10.mProfileManager
-            com.android.settingslib.bluetooth.A2dpProfile r11 = r11.mA2dpProfile
-            if (r11 == 0) goto Lb3
-            android.bluetooth.BluetoothA2dp r11 = r11.mService
-            if (r11 != 0) goto Laf
-            goto Lb3
-        Laf:
-            r0 = 0
-            r11.setDualPlayMode(r0)
-        Lb3:
-            kotlinx.coroutines.CoroutineScope r11 = r9.getControllerScope()
-            com.android.systemui.media.mediaoutput.controller.device.BluetoothDeviceController$deselect$4$1 r0 = new com.android.systemui.media.mediaoutput.controller.device.BluetoothDeviceController$deselect$4$1
-            r0.<init>(r9, r10, r3)
-            r9 = 3
-            kotlinx.coroutines.BuildersKt.launch$default(r11, r3, r3, r0, r9)
-        Lc0:
-            kotlin.Unit r9 = kotlin.Unit.INSTANCE
-            return r9
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.media.mediaoutput.controller.device.BluetoothDeviceController.deselect(com.android.systemui.media.mediaoutput.entity.AudioDevice, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object deselect(AudioDevice audioDevice, ContinuationImpl continuationImpl) {
+        C09381 c09381;
+        Object next;
+        BluetoothA2dp bluetoothA2dp;
+        if (continuationImpl instanceof C09381) {
+            c09381 = (C09381) continuationImpl;
+            int i = c09381.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                c09381.label = i - Integer.MIN_VALUE;
+            } else {
+                c09381 = new C09381(continuationImpl);
+            }
+        }
+        Object obj = c09381.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = c09381.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(obj);
+            Log.d("BluetoothDeviceController", "deselect() - " + audioDevice);
+            if (audioDevice instanceof com.android.systemui.media.mediaoutput.entity.BluetoothDevice) {
+                com.android.systemui.media.mediaoutput.entity.BluetoothDevice bluetoothDevice = (com.android.systemui.media.mediaoutput.entity.BluetoothDevice) audioDevice;
+                List list = bluetoothDevice.activeDevices;
+                if (list != null) {
+                    Iterator it = list.iterator();
+                    while (true) {
+                        if (!it.hasNext()) {
+                            next = null;
+                            break;
+                        }
+                        next = it.next();
+                        if (!Intrinsics.areEqual(((com.android.systemui.media.mediaoutput.entity.BluetoothDevice) next).id, bluetoothDevice.id)) {
+                            break;
+                        }
+                    }
+                    com.android.systemui.media.mediaoutput.entity.BluetoothDevice bluetoothDevice2 = (com.android.systemui.media.mediaoutput.entity.BluetoothDevice) next;
+                    if (bluetoothDevice2 != null) {
+                        Log.i("BluetoothDeviceController", "deselect(" + audioDevice + ") - " + bluetoothDevice2);
+                        c09381.L$0 = this;
+                        c09381.L$1 = bluetoothDevice2;
+                        c09381.label = 1;
+                        if (transfer(bluetoothDevice2, c09381) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    }
+                }
+            }
+            return Unit.INSTANCE;
+        }
+        if (i2 != 1) {
+            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+        }
+        this = (BluetoothDeviceController) c09381.L$0;
+        ResultKt.throwOnFailure(obj);
+        LocalBluetoothManager localBluetoothManager = this.localBluetoothManager;
+        if (localBluetoothManager != null) {
+            A2dpProfile a2dpProfile = localBluetoothManager.mProfileManager.mA2dpProfile;
+            if (a2dpProfile != null && (bluetoothA2dp = a2dpProfile.mService) != null) {
+                bluetoothA2dp.setDualPlayMode(false);
+            }
+            BuildersKt.launch$default(this.getControllerScope(), null, null, new BluetoothDeviceController$deselect$4$1(this, localBluetoothManager, null), 3);
+        }
+        return Unit.INSTANCE;
     }
 
     @Override // com.android.systemui.media.mediaoutput.controller.device.DeviceController
@@ -358,7 +369,11 @@ public final class BluetoothDeviceController extends DeviceController {
         return Unit.INSTANCE;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:21:0x005e  */
     @Override // com.android.systemui.media.mediaoutput.controller.device.DeviceController
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final Object transfer(AudioDevice audioDevice, Continuation continuation) {
         Object obj;
         AudioMirroringDeviceController$$ExternalSyntheticOutline0.m("transfer() - ", audioDevice, "BluetoothDeviceController");
@@ -392,11 +407,12 @@ public final class BluetoothDeviceController extends DeviceController {
                 Object obj3 = (AudioDeviceInfo) obj;
                 if (obj3 != null) {
                     obj2 = obj3;
+                } else {
+                    Object obj4 = bluetoothDevice.cachedBluetoothDevice;
+                    if (obj4 != null) {
+                        obj2 = obj4;
+                    }
                 }
-            }
-            Object obj4 = bluetoothDevice.cachedBluetoothDevice;
-            if (obj4 != null) {
-                obj2 = obj4;
             }
         } else if (audioDevice instanceof MusicShareDevice) {
             obj2 = ((MusicShareDevice) audioDevice).audioDeviceInfo;
@@ -411,20 +427,16 @@ public final class BluetoothDeviceController extends DeviceController {
         return Unit.INSTANCE;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:85:0x010d, code lost:
-    
-        if (r10 != null) goto L49;
-     */
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0489  */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x048c  */
-    /* JADX WARN: Removed duplicated region for block: B:150:0x024f  */
-    /* JADX WARN: Removed duplicated region for block: B:173:0x031e  */
-    /* JADX WARN: Removed duplicated region for block: B:228:0x03f9  */
-    /* JADX WARN: Removed duplicated region for block: B:254:0x045a A[LOOP:15: B:253:0x0458->B:254:0x045a, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:258:0x0483 A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x0042  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0025  */
+    /* JADX WARN: Removed duplicated region for block: B:48:0x0110  */
+    /* JADX WARN: Removed duplicated region for block: B:52:0x0125  */
+    /* JADX WARN: Removed duplicated region for block: B:58:0x0141 A[LOOP:7: B:56:0x013b->B:58:0x0141, LOOP_END] */
+    /* JADX WARN: Removed duplicated region for block: B:61:0x01aa  */
+    /* JADX WARN: Removed duplicated region for block: B:72:0x01f0  */
+    /* JADX WARN: Removed duplicated region for block: B:78:0x020c  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0018  */
+    /* JADX WARN: Removed duplicated region for block: B:80:0x020f  */
+    /* JADX WARN: Removed duplicated region for block: B:95:0x023c  */
     /* JADX WARN: Type inference failed for: r0v5, types: [java.util.List] */
     /* JADX WARN: Type inference failed for: r11v25, types: [com.android.systemui.media.mediaoutput.entity.BluetoothDevice] */
     /* JADX WARN: Type inference failed for: r11v27, types: [java.lang.Object] */
@@ -432,13 +444,360 @@ public final class BluetoothDeviceController extends DeviceController {
     /* JADX WARN: Type inference failed for: r5v27, types: [com.android.systemui.media.mediaoutput.entity.BluetoothDevice] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object updateDevices(java.util.List r35, boolean r36, kotlin.coroutines.Continuation r37) {
-        /*
-            Method dump skipped, instructions count: 1230
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.media.mediaoutput.controller.device.BluetoothDeviceController.updateDevices(java.util.List, boolean, kotlin.coroutines.Continuation):java.lang.Object");
+    public final Object updateDevices(List list, boolean z, Continuation continuation) throws Throwable {
+        C09391 c09391;
+        Set set;
+        int size;
+        int i;
+        int i2;
+        int size2;
+        int i3;
+        ArrayList arrayList;
+        int size3;
+        int i4;
+        ArrayList arrayList2;
+        boolean z2;
+        MusicShareDevice musicShareDevice;
+        int iSemGetFineVolume;
+        ?? bluetoothDevice;
+        LocalBluetoothProfileManager localBluetoothProfileManager;
+        A2dpProfile a2dpProfile;
+        BluetoothA2dp bluetoothA2dp;
+        LocalBluetoothCastProfileManager localBluetoothCastProfileManager;
+        AudioCastProfile audioCastProfile;
+        List connectedDevices;
+        BluetoothDeviceController bluetoothDeviceController = this;
+        int i5 = 1;
+        if (continuation instanceof C09391) {
+            c09391 = (C09391) continuation;
+            int i6 = c09391.label;
+            if ((i6 & Integer.MIN_VALUE) != 0) {
+                c09391.label = i6 - Integer.MIN_VALUE;
+            } else {
+                c09391 = bluetoothDeviceController.new C09391(continuation);
+            }
+        }
+        Object obj = c09391.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i7 = c09391.label;
+        if (i7 == 0) {
+            ResultKt.throwOnFailure(obj);
+            int i8 = 2;
+            AudioDeviceInfo[] devices = bluetoothDeviceController.audioManager.getDevices(2);
+            ArrayList arrayList3 = new ArrayList();
+            for (AudioDeviceInfo audioDeviceInfo : devices) {
+                AudioDeviceInfoExt audioDeviceInfoExt = AudioDeviceInfoExt.INSTANCE;
+                audioDeviceInfo.getClass();
+                boolean zIsWiredHeadsetOn = bluetoothDeviceController.audioManager.isWiredHeadsetOn();
+                audioDeviceInfoExt.getClass();
+                if (AudioDeviceInfoExt.isValidDeviceTypeForMedia(audioDeviceInfo, zIsWiredHeadsetOn)) {
+                    arrayList3.add(audioDeviceInfo);
+                }
+            }
+            ArrayList arrayList4 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(arrayList3, 10));
+            int size4 = arrayList3.size();
+            int i9 = 0;
+            while (i9 < size4) {
+                Object obj2 = arrayList3.get(i9);
+                i9++;
+                arrayList4.add(((AudioDeviceInfo) obj2).getAddress());
+            }
+            ArrayList arrayList5 = new ArrayList();
+            int size5 = arrayList4.size();
+            int i10 = 0;
+            while (i10 < size5) {
+                Object obj3 = arrayList4.get(i10);
+                i10++;
+                String str = (String) obj3;
+                str.getClass();
+                if (!StringsKt__StringsKt.isBlank(str)) {
+                    arrayList5.add(obj3);
+                }
+            }
+            Set set2 = CollectionsKt___CollectionsKt.toSet(arrayList5);
+            LocalBluetoothManager localBluetoothManager = bluetoothDeviceController.localBluetoothManager;
+            if (localBluetoothManager == null || (localBluetoothCastProfileManager = localBluetoothManager.mLocalCastProfileManager) == null || (audioCastProfile = localBluetoothCastProfileManager.mAudioCastProfile) == null || (connectedDevices = audioCastProfile.getConnectedDevices()) == null) {
+                set = EmptySet.INSTANCE;
+                ArrayList arrayList6 = new ArrayList();
+                for (Object obj4 : list) {
+                    if (CachedBluetoothDeviceExtKt.isConnectedWithMembers((CachedBluetoothDevice) obj4)) {
+                        arrayList6.add(obj4);
+                    }
+                }
+                size = arrayList6.size();
+                i = 0;
+                while (i < size) {
+                    Object obj5 = arrayList6.get(i);
+                    i += i5;
+                    final CachedBluetoothDevice cachedBluetoothDevice = (CachedBluetoothDevice) obj5;
+                    int i11 = i8;
+                    Log.d("BluetoothDeviceController", "\t" + cachedBluetoothDevice);
+                    MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("\t", CollectionsKt___CollectionsKt.joinToString$default(Arrays.asList(Integer.valueOf(i5), Integer.valueOf(i11), 21, 22), null, null, null, new Function1() { // from class: com.android.systemui.media.mediaoutput.ext.CachedBluetoothDeviceExtKt$$ExternalSyntheticLambda0
+                        @Override // kotlin.jvm.functions.Function1
+                        /* renamed from: invoke */
+                        public final Object mo781invoke(Object obj6) {
+                            int iIntValue = ((Integer) obj6).intValue();
+                            return iIntValue + " = " + cachedBluetoothDevice.isActiveDevice(iIntValue);
+                        }
+                    }, 31), "BluetoothDeviceController");
+                    i8 = i11;
+                    i5 = i5;
+                }
+                i2 = i5;
+                int i12 = i8;
+                ArrayList arrayList7 = new ArrayList();
+                size2 = arrayList6.size();
+                i3 = 0;
+                while (i3 < size2) {
+                    Object obj6 = arrayList6.get(i3);
+                    i3++;
+                    CachedBluetoothDevice cachedBluetoothDevice2 = (CachedBluetoothDevice) obj6;
+                    if (!CollectionsKt___CollectionsKt.intersect(CachedBluetoothDeviceExtKt.getAllAddresses(cachedBluetoothDevice2), set2).isEmpty() || cachedBluetoothDevice2.isConnectedA2dpDevice() || cachedBluetoothDevice2.isConnectedLeAudioDevice() || cachedBluetoothDevice2.isConnectedHearingAidDevice()) {
+                        arrayList7.add(obj6);
+                    }
+                }
+                ArrayList arrayList8 = new ArrayList(arrayList7);
+                Ref$BooleanRef ref$BooleanRef = new Ref$BooleanRef();
+                arrayList = new ArrayList();
+                size3 = arrayList8.size();
+                i4 = 0;
+                while (i4 < size3) {
+                    Object obj7 = arrayList8.get(i4);
+                    i4++;
+                    if (((CachedBluetoothDevice) obj7).isConnectedA2dpDevice()) {
+                        arrayList.add(obj7);
+                    }
+                }
+                if (arrayList.size() <= i2) {
+                    arrayList = null;
+                }
+                if (arrayList == null) {
+                    AudioManager audioManager = bluetoothDeviceController.audioManager;
+                    Lazy lazy = AudioManagerExtKt.mediaStrategy$delegate;
+                    if (audioManager.semGetCurrentDeviceType() != 8) {
+                        arrayList = null;
+                    }
+                    if (arrayList != null) {
+                        ref$BooleanRef.element = bluetoothDeviceController.isDualAudioSupported;
+                        Companion.getClass();
+                        boolean zSemIsDualPlayMode = (localBluetoothManager == null || (localBluetoothProfileManager = localBluetoothManager.mProfileManager) == null || (a2dpProfile = localBluetoothProfileManager.mA2dpProfile) == null || (bluetoothA2dp = a2dpProfile.mService) == null) ? false : bluetoothA2dp.semIsDualPlayMode();
+                        ArrayList arrayList9 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(arrayList8, 10));
+                        int size6 = arrayList8.size();
+                        int i13 = 0;
+                        while (i13 < size6) {
+                            Object obj8 = arrayList8.get(i13);
+                            i13++;
+                            CachedBluetoothDevice cachedBluetoothDevice3 = (CachedBluetoothDevice) obj8;
+                            if ((set.contains(cachedBluetoothDevice3.mDevice.getAddress()) ? cachedBluetoothDevice3 : null) != null) {
+                                MusicShareDevice.Companion companion = MusicShareDevice.Companion;
+                                AudioManager audioManager2 = bluetoothDeviceController.audioManager;
+                                Lazy lazy2 = AudioManagerExtKt.mediaStrategy$delegate;
+                                int iSemGetCurrentDeviceType = audioManager2.semGetCurrentDeviceType();
+                                companion.getClass();
+                                String address = cachedBluetoothDevice3.mDevice.getAddress();
+                                String name = cachedBluetoothDevice3.getName();
+                                String connectionSummary = cachedBluetoothDevice3.getConnectionSummary();
+                                TintDrawablePainter.Companion companion2 = TintDrawablePainter.Companion;
+                                Drawable iconDrawable = cachedBluetoothDevice3.getIconDrawable(false);
+                                companion2.getClass();
+                                bluetoothDevice = new MusicShareDevice(address, name, connectionSummary, TintDrawablePainter.Companion.toConverter(iconDrawable), null, 0, 0, CachedBluetoothDeviceExtKt.isActiveDeviceWithMembers(cachedBluetoothDevice3, iSemGetCurrentDeviceType) ? State.SELECTED : State.CONNECTED, false, false, false, 1904, null);
+                                bluetoothDevice.controllerType = ControllerType.Bluetooth;
+                                bluetoothDevice.cachedBluetoothDevice = cachedBluetoothDevice3;
+                            } else {
+                                BluetoothDevice.Companion companion3 = com.android.systemui.media.mediaoutput.entity.BluetoothDevice.Companion;
+                                AudioManager audioManager3 = bluetoothDeviceController.audioManager;
+                                Lazy lazy3 = AudioManagerExtKt.mediaStrategy$delegate;
+                                int iSemGetCurrentDeviceType2 = audioManager3.semGetCurrentDeviceType();
+                                companion3.getClass();
+                                String address2 = cachedBluetoothDevice3.mDevice.getAddress();
+                                String name2 = cachedBluetoothDevice3.getName();
+                                TintDrawablePainter.Companion companion4 = TintDrawablePainter.Companion;
+                                Drawable iconDrawable2 = cachedBluetoothDevice3.getIconDrawable(false);
+                                companion4.getClass();
+                                bluetoothDevice = new com.android.systemui.media.mediaoutput.entity.BluetoothDevice(address2, name2, null, TintDrawablePainter.Companion.toConverter(iconDrawable2), null, 0, 0, CachedBluetoothDeviceExtKt.isActiveDeviceWithMembers(cachedBluetoothDevice3, iSemGetCurrentDeviceType2) ? State.SELECTED : State.CONNECTED, false, false, z, 884, null);
+                                bluetoothDevice.cachedBluetoothDevice = cachedBluetoothDevice3;
+                            }
+                            arrayList9.add(bluetoothDevice);
+                        }
+                        arrayList2 = new ArrayList();
+                        int size7 = arrayList9.size();
+                        int i14 = 0;
+                        while (i14 < size7) {
+                            Object obj9 = arrayList9.get(i14);
+                            i14++;
+                            AudioDevice audioDevice = (AudioDevice) obj9;
+                            if (audioDevice instanceof com.android.systemui.media.mediaoutput.entity.BluetoothDevice) {
+                                com.android.systemui.media.mediaoutput.entity.BluetoothDevice bluetoothDevice2 = (com.android.systemui.media.mediaoutput.entity.BluetoothDevice) audioDevice;
+                                CachedBluetoothDevice cachedBluetoothDevice4 = bluetoothDevice2.cachedBluetoothDevice;
+                                if (cachedBluetoothDevice4 == null) {
+                                    cachedBluetoothDevice4 = null;
+                                }
+                                boolean zIsConnectedA2dpDevice = cachedBluetoothDevice4.isConnectedA2dpDevice();
+                                if (zIsConnectedA2dpDevice) {
+                                    AudioManager audioManager4 = bluetoothDeviceController.audioManager;
+                                    CachedBluetoothDevice cachedBluetoothDevice5 = bluetoothDevice2.cachedBluetoothDevice;
+                                    if (cachedBluetoothDevice5 == null) {
+                                        cachedBluetoothDevice5 = null;
+                                    }
+                                    z2 = zSemIsDualPlayMode;
+                                    iSemGetFineVolume = audioManager4.semGetFineVolume(cachedBluetoothDevice5.mDevice, 3);
+                                } else {
+                                    z2 = zSemIsDualPlayMode;
+                                    iSemGetFineVolume = bluetoothDeviceController.audioManager.semGetFineVolume(3);
+                                }
+                                int i15 = iSemGetFineVolume;
+                                CachedBluetoothDevice cachedBluetoothDevice6 = bluetoothDevice2.cachedBluetoothDevice;
+                                if (cachedBluetoothDevice6 == null) {
+                                    cachedBluetoothDevice6 = null;
+                                }
+                                ?? Copy$default = com.android.systemui.media.mediaoutput.entity.BluetoothDevice.copy$default(bluetoothDevice2, CachedBluetoothDeviceExtKt.getBatteryDescription(cachedBluetoothDevice6), null, i15, (z2 && zIsConnectedA2dpDevice) ? State.SELECTED : bluetoothDevice2.state, ref$BooleanRef.element && zIsConnectedA2dpDevice, 1627);
+                                Copy$default.deepCopy((com.android.systemui.media.mediaoutput.entity.BluetoothDevice) audioDevice);
+                                musicShareDevice = Copy$default;
+                            } else {
+                                z2 = zSemIsDualPlayMode;
+                                if (audioDevice instanceof MusicShareDevice) {
+                                    CharSequence[] charSequenceArr = new CharSequence[i12];
+                                    MusicShareDevice musicShareDevice2 = (MusicShareDevice) audioDevice;
+                                    CachedBluetoothDevice cachedBluetoothDevice7 = musicShareDevice2.cachedBluetoothDevice;
+                                    charSequenceArr[0] = cachedBluetoothDevice7 != null ? CachedBluetoothDeviceExtKt.getBatteryDescription(cachedBluetoothDevice7) : null;
+                                    charSequenceArr[1] = musicShareDevice2.description;
+                                    MultiSequenceString multiSequenceString = new MultiSequenceString(ArraysKt___ArraysKt.filterNotNull(charSequenceArr), "\n");
+                                    AudioManager audioManager5 = bluetoothDeviceController.audioManager;
+                                    CachedBluetoothDevice cachedBluetoothDevice8 = musicShareDevice2.cachedBluetoothDevice;
+                                    MusicShareDevice musicShareDeviceCopy$default = MusicShareDevice.copy$default(musicShareDevice2, multiSequenceString, audioManager5.semGetFineVolume(cachedBluetoothDevice8 != null ? cachedBluetoothDevice8.mDevice : null, 3), z2 ? State.SELECTED : musicShareDevice2.state, false, 1883);
+                                    musicShareDeviceCopy$default.deepCopy((MusicShareDevice) audioDevice);
+                                    musicShareDevice = musicShareDeviceCopy$default;
+                                } else {
+                                    musicShareDevice = null;
+                                }
+                            }
+                            if (musicShareDevice != null) {
+                                arrayList2.add(musicShareDevice);
+                            }
+                            zSemIsDualPlayMode = z2;
+                            i12 = 2;
+                        }
+                        if (zSemIsDualPlayMode) {
+                            ArrayList arrayList10 = new ArrayList();
+                            int size8 = arrayList2.size();
+                            int i16 = 0;
+                            while (i16 < size8) {
+                                Object obj10 = arrayList2.get(i16);
+                                i16++;
+                                if (obj10 instanceof com.android.systemui.media.mediaoutput.entity.BluetoothDevice) {
+                                    arrayList10.add(obj10);
+                                }
+                            }
+                            ArrayList arrayList11 = new ArrayList();
+                            int size9 = arrayList10.size();
+                            int i17 = 0;
+                            while (i17 < size9) {
+                                Object obj11 = arrayList10.get(i17);
+                                i17++;
+                                AudioDeviceExt.INSTANCE.getClass();
+                                if (AudioDeviceExt.isActive((com.android.systemui.media.mediaoutput.entity.BluetoothDevice) obj11)) {
+                                    arrayList11.add(obj11);
+                                }
+                            }
+                            int size10 = arrayList11.size();
+                            int i18 = 0;
+                            while (i18 < size10) {
+                                Object obj12 = arrayList11.get(i18);
+                                i18++;
+                                ((com.android.systemui.media.mediaoutput.entity.BluetoothDevice) obj12).activeDevices = arrayList11;
+                            }
+                        }
+                        int size11 = arrayList2.size();
+                        int i19 = 0;
+                        while (i19 < size11) {
+                            Object obj13 = arrayList2.get(i19);
+                            i19++;
+                            Log.d("BluetoothDeviceController", "\t" + obj13);
+                        }
+                        SharedFlowImpl sharedFlowImpl = bluetoothDeviceController.devicesFlow;
+                        c09391.L$0 = bluetoothDeviceController;
+                        c09391.L$1 = arrayList2;
+                        c09391.L$2 = arrayList2;
+                        c09391.label = 1;
+                        if (sharedFlowImpl.emit(arrayList2, c09391) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    }
+                }
+            } else {
+                ArrayList arrayList12 = new ArrayList();
+                for (Object obj14 : connectedDevices) {
+                    if (((SemBluetoothCastDevice) obj14).getLocalDeviceRole() == 2) {
+                        arrayList12.add(obj14);
+                    }
+                }
+                ArrayList arrayList13 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(arrayList12, 10));
+                int size12 = arrayList12.size();
+                int i20 = 0;
+                while (i20 < size12) {
+                    Object obj15 = arrayList12.get(i20);
+                    i20++;
+                    arrayList13.add(((SemBluetoothCastDevice) obj15).getAddress());
+                }
+                set = CollectionsKt___CollectionsKt.toSet(arrayList13);
+                if (set == null) {
+                }
+                ArrayList arrayList62 = new ArrayList();
+                while (r11.hasNext()) {
+                }
+                size = arrayList62.size();
+                i = 0;
+                while (i < size) {
+                }
+                i2 = i5;
+                int i122 = i8;
+                ArrayList arrayList72 = new ArrayList();
+                size2 = arrayList62.size();
+                i3 = 0;
+                while (i3 < size2) {
+                }
+                ArrayList arrayList82 = new ArrayList(arrayList72);
+                Ref$BooleanRef ref$BooleanRef2 = new Ref$BooleanRef();
+                arrayList = new ArrayList();
+                size3 = arrayList82.size();
+                i4 = 0;
+                while (i4 < size3) {
+                }
+                if (arrayList.size() <= i2) {
+                }
+                if (arrayList == null) {
+                }
+            }
+        } else {
+            if (i7 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ?? r0 = (List) c09391.L$2;
+            BluetoothDeviceController bluetoothDeviceController2 = (BluetoothDeviceController) c09391.L$0;
+            ResultKt.throwOnFailure(obj);
+            arrayList2 = r0;
+            bluetoothDeviceController = bluetoothDeviceController2;
+        }
+        if (bluetoothDeviceController.musicShareEventLogged) {
+            arrayList2 = null;
+        }
+        if (arrayList2 != null) {
+            ArrayList arrayList14 = new ArrayList();
+            for (Object obj16 : arrayList2) {
+                if (obj16 instanceof MusicShareDevice) {
+                    arrayList14.add(obj16);
+                }
+            }
+            MusicShareDevice musicShareDevice3 = (MusicShareDevice) CollectionsKt___CollectionsKt.firstOrNull((List) arrayList14);
+            if (musicShareDevice3 != null) {
+                AudioDeviceExt.INSTANCE.getClass();
+                if ((AudioDeviceExt.isConnected(musicShareDevice3) ? musicShareDevice3 : null) != null) {
+                    MoSaLogging.send$default(MoSaLogging.INSTANCE, SaEvent.MusicShareOnMyDevice.INSTANCE);
+                    bluetoothDeviceController.musicShareEventLogged = true;
+                }
+            }
+        }
+        return Unit.INSTANCE;
     }
 }

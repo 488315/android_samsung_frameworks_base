@@ -16,13 +16,13 @@ public final class FeatureFlagsImpl implements FeatureFlags {
 
     private void init() {
         try {
-            AconfigPackage load = AconfigPackage.load("com.android.sdksandbox.flags");
-            sandboxActivitySdkBasedContext = load.getBooleanFlagValue("sandbox_activity_sdk_based_context", false);
-            sandboxClientImportanceListener = load.getBooleanFlagValue("sandbox_client_importance_listener", false);
-            sdkSandboxInstrumentationInfo = load.getBooleanFlagValue("sdk_sandbox_instrumentation_info", false);
+            AconfigPackage aconfigPackageLoad = AconfigPackage.load("com.android.sdksandbox.flags");
+            sandboxActivitySdkBasedContext = aconfigPackageLoad.getBooleanFlagValue("sandbox_activity_sdk_based_context", false);
+            sandboxClientImportanceListener = aconfigPackageLoad.getBooleanFlagValue("sandbox_client_importance_listener", false);
+            sdkSandboxInstrumentationInfo = aconfigPackageLoad.getBooleanFlagValue("sdk_sandbox_instrumentation_info", false);
             sdkSandboxUidToAppUidApi = true;
-            selinuxInputSelector = load.getBooleanFlagValue("selinux_input_selector", false);
-            selinuxSdkSandboxAudit = load.getBooleanFlagValue("selinux_sdk_sandbox_audit", false);
+            selinuxInputSelector = aconfigPackageLoad.getBooleanFlagValue("selinux_input_selector", false);
+            selinuxSdkSandboxAudit = aconfigPackageLoad.getBooleanFlagValue("selinux_sdk_sandbox_audit", false);
         } catch (Exception e) {
             Log.e(TAG, e.toString());
         } catch (LinkageError e2) {

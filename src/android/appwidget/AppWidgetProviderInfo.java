@@ -138,9 +138,9 @@ public class AppWidgetProviderInfo implements Parcelable {
     }
 
     public final String loadLabel(PackageManager packageManager) {
-        CharSequence loadLabel = this.providerInfo.loadLabel(packageManager);
-        if (loadLabel != null) {
-            return loadLabel.toString().trim();
+        CharSequence charSequenceLoadLabel = this.providerInfo.loadLabel(packageManager);
+        if (charSequenceLoadLabel != null) {
+            return charSequenceLoadLabel.toString().trim();
         }
         return null;
     }
@@ -206,10 +206,10 @@ public class AppWidgetProviderInfo implements Parcelable {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public AppWidgetProviderInfo m865clone() {
+    public AppWidgetProviderInfo m869clone() {
         AppWidgetProviderInfo appWidgetProviderInfo = new AppWidgetProviderInfo();
         ComponentName componentName = this.provider;
-        appWidgetProviderInfo.provider = componentName == null ? null : componentName.m926clone();
+        appWidgetProviderInfo.provider = componentName == null ? null : componentName.m930clone();
         appWidgetProviderInfo.minWidth = this.minWidth;
         appWidgetProviderInfo.minHeight = this.minHeight;
         appWidgetProviderInfo.minResizeWidth = this.minResizeWidth;
@@ -222,9 +222,9 @@ public class AppWidgetProviderInfo implements Parcelable {
         appWidgetProviderInfo.initialLayout = this.initialLayout;
         appWidgetProviderInfo.initialKeyguardLayout = this.initialKeyguardLayout;
         ComponentName componentName2 = this.configure;
-        appWidgetProviderInfo.configure = componentName2 == null ? null : componentName2.m926clone();
+        appWidgetProviderInfo.configure = componentName2 == null ? null : componentName2.m930clone();
         ComponentName componentName3 = this.semConfigure;
-        appWidgetProviderInfo.semConfigure = componentName3 != null ? componentName3.m926clone() : null;
+        appWidgetProviderInfo.semConfigure = componentName3 != null ? componentName3.m930clone() : null;
         appWidgetProviderInfo.label = this.label;
         appWidgetProviderInfo.icon = this.icon;
         appWidgetProviderInfo.previewImage = this.previewImage;

@@ -40,9 +40,9 @@ public interface IWindowContainerToken extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IWindowContainerToken.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IWindowContainerToken)) {
-                return (IWindowContainerToken) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IWindowContainerToken.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IWindowContainerToken)) {
+                return (IWindowContainerToken) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }

@@ -16,7 +16,6 @@ import com.android.systemui.knox.KnoxStateMonitorImpl;
 import com.android.systemui.qp.flashlight.SubscreenFlashLightController;
 import com.android.systemui.util.SystemUIAnalytics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class ViewPagerAdapter extends PagerAdapter {
     public final Context context;
@@ -40,17 +39,17 @@ public class ViewPagerAdapter extends PagerAdapter {
 
     @Override // androidx.viewpager.widget.PagerAdapter
     public final Object instantiateItem(ViewPager viewPager, int i) {
-        LayoutInflater from = LayoutInflater.from(this.context);
+        LayoutInflater layoutInflaterFrom = LayoutInflater.from(this.context);
         if (i == 0) {
-            View inflate = from.inflate(R.layout.page_one_layout, (ViewGroup) null);
-            ((RTLViewPager) viewPager).addView(inflate, 0);
-            return inflate;
+            View viewInflate = layoutInflaterFrom.inflate(R.layout.page_one_layout, (ViewGroup) null);
+            ((RTLViewPager) viewPager).addView(viewInflate, 0);
+            return viewInflate;
         }
         if (i != 1) {
             return null;
         }
-        View inflate2 = from.inflate(R.layout.page_two_layout, (ViewGroup) null);
-        ImageView imageView = (ImageView) inflate2.findViewById(R.id.brightness_image_view);
+        View viewInflate2 = layoutInflaterFrom.inflate(R.layout.page_two_layout, (ViewGroup) null);
+        ImageView imageView = (ImageView) viewInflate2.findViewById(R.id.brightness_image_view);
         this.mBrightnessButton = imageView;
         final int i2 = 1;
         imageView.setOnClickListener(new View.OnClickListener(this) { // from class: com.android.systemui.qp.ViewPagerAdapter$$ExternalSyntheticLambda0
@@ -93,7 +92,7 @@ public class ViewPagerAdapter extends PagerAdapter {
                             subroomQuickSettingsBaseView2.mBackButton.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qp.SubroomQuickSettingsBaseView$$ExternalSyntheticLambda0
                                 @Override // android.view.View.OnClickListener
                                 public final void onClick(View view2) {
-                                    SubroomQuickSettingsBaseView subroomQuickSettingsBaseView3 = SubroomQuickSettingsBaseView.this;
+                                    SubroomQuickSettingsBaseView subroomQuickSettingsBaseView3 = subroomQuickSettingsBaseView2;
                                     int i4 = SubroomQuickSettingsBaseView.$r8$clinit;
                                     subroomQuickSettingsBaseView3.setSubscreenSettings(0);
                                 }
@@ -119,7 +118,7 @@ public class ViewPagerAdapter extends PagerAdapter {
                 return true;
             }
         });
-        ImageView imageView2 = (ImageView) inflate2.findViewById(R.id.flashlight_image_view);
+        ImageView imageView2 = (ImageView) viewInflate2.findViewById(R.id.flashlight_image_view);
         this.mFlashLightButton = imageView2;
         final int i4 = 0;
         imageView2.setOnClickListener(new View.OnClickListener(this) { // from class: com.android.systemui.qp.ViewPagerAdapter$$ExternalSyntheticLambda0
@@ -162,7 +161,7 @@ public class ViewPagerAdapter extends PagerAdapter {
                             subroomQuickSettingsBaseView2.mBackButton.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qp.SubroomQuickSettingsBaseView$$ExternalSyntheticLambda0
                                 @Override // android.view.View.OnClickListener
                                 public final void onClick(View view2) {
-                                    SubroomQuickSettingsBaseView subroomQuickSettingsBaseView3 = SubroomQuickSettingsBaseView.this;
+                                    SubroomQuickSettingsBaseView subroomQuickSettingsBaseView3 = subroomQuickSettingsBaseView2;
                                     int i42 = SubroomQuickSettingsBaseView.$r8$clinit;
                                     subroomQuickSettingsBaseView3.setSubscreenSettings(0);
                                 }
@@ -188,8 +187,8 @@ public class ViewPagerAdapter extends PagerAdapter {
                 return true;
             }
         });
-        ((RTLViewPager) viewPager).addView(inflate2, 0);
-        return inflate2;
+        ((RTLViewPager) viewPager).addView(viewInflate2, 0);
+        return viewInflate2;
     }
 
     @Override // androidx.viewpager.widget.PagerAdapter

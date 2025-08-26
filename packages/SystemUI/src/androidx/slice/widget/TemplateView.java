@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class TemplateView extends SliceChildView {
     public SliceAdapter mAdapter;
@@ -188,15 +187,15 @@ public class TemplateView extends SliceChildView {
             sliceStyle.getClass();
             ArrayList arrayList = listContent2.mRowItems;
             int size = arrayList.size();
-            ArrayList arrayList2 = arrayList;
+            ArrayList arrayListSubList = arrayList;
             if (size > 0) {
-                boolean shouldSkipFirstListItem = sliceStyle.shouldSkipFirstListItem(arrayList);
-                arrayList2 = arrayList;
-                if (shouldSkipFirstListItem) {
-                    arrayList2 = arrayList.subList(1, arrayList.size());
+                boolean zShouldSkipFirstListItem = sliceStyle.shouldSkipFirstListItem(arrayList);
+                arrayListSubList = arrayList;
+                if (zShouldSkipFirstListItem) {
+                    arrayListSubList = arrayList.subList(1, arrayList.size());
                 }
             }
-            displayedListItems = new DisplayedListItems(arrayList2, 0);
+            displayedListItems = new DisplayedListItems(arrayListSubList, 0);
         } else {
             displayedListItems = sliceStyle.getListItemsForNonScrollingList(listContent2, i, sliceViewPolicy);
         }

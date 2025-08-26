@@ -12,7 +12,6 @@ import android.os.RemoteCallback;
 import android.os.RemoteException;
 import android.os.storage.StorageManager;
 import android.os.storage.StorageVolume;
-import android.service.storage.ExternalStorageService;
 import android.service.storage.IExternalStorageService;
 import com.android.internal.os.BackgroundThread;
 import java.io.File;
@@ -66,7 +65,7 @@ public abstract class ExternalStorageService extends Service {
             ExternalStorageService.this.mHandler.post(new Runnable() { // from class: android.service.storage.ExternalStorageService$ExternalStorageServiceWrapper$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ExternalStorageService.ExternalStorageServiceWrapper.this.lambda$startSession$0(str, i, parcelFileDescriptor, str2, str3, remoteCallback);
+                    this.f$0.lambda$startSession$0(str, i, parcelFileDescriptor, str2, str3, remoteCallback);
                 }
             });
         }
@@ -76,16 +75,16 @@ public abstract class ExternalStorageService extends Service {
             String str4;
             try {
                 str4 = str;
-            } catch (Throwable th) {
-                th = th;
-                str4 = str;
-            }
-            try {
-                ExternalStorageService.this.onStartSession(str4, i, parcelFileDescriptor, new File(str2), new File(str3));
-                sendResult(str4, null, remoteCallback);
+                try {
+                    ExternalStorageService.this.onStartSession(str4, i, parcelFileDescriptor, new File(str2), new File(str3));
+                    sendResult(str4, null, remoteCallback);
+                } catch (Throwable th) {
+                    th = th;
+                    sendResult(str4, th, remoteCallback);
+                }
             } catch (Throwable th2) {
                 th = th2;
-                sendResult(str4, th, remoteCallback);
+                str4 = str;
             }
         }
 
@@ -94,7 +93,7 @@ public abstract class ExternalStorageService extends Service {
             ExternalStorageService.this.mHandler.post(new Runnable() { // from class: android.service.storage.ExternalStorageService$ExternalStorageServiceWrapper$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ExternalStorageService.ExternalStorageServiceWrapper.this.lambda$notifyVolumeStateChanged$1(storageVolume, str, remoteCallback);
+                    this.f$0.lambda$notifyVolumeStateChanged$1(storageVolume, str, remoteCallback);
                 }
             });
         }
@@ -114,7 +113,7 @@ public abstract class ExternalStorageService extends Service {
             ExternalStorageService.this.mHandler.post(new Runnable() { // from class: android.service.storage.ExternalStorageService$ExternalStorageServiceWrapper$$ExternalSyntheticLambda3
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ExternalStorageService.ExternalStorageServiceWrapper.this.lambda$freeCache$2(str2, j, str, remoteCallback);
+                    this.f$0.lambda$freeCache$2(str2, j, str, remoteCallback);
                 }
             });
         }
@@ -134,7 +133,7 @@ public abstract class ExternalStorageService extends Service {
             ExternalStorageService.this.mHandler.post(new Runnable() { // from class: android.service.storage.ExternalStorageService$ExternalStorageServiceWrapper$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ExternalStorageService.ExternalStorageServiceWrapper.this.lambda$endSession$3(str, remoteCallback);
+                    this.f$0.lambda$endSession$3(str, remoteCallback);
                 }
             });
         }
@@ -154,7 +153,7 @@ public abstract class ExternalStorageService extends Service {
             ExternalStorageService.this.mHandler.post(new Runnable() { // from class: android.service.storage.ExternalStorageService$ExternalStorageServiceWrapper$$ExternalSyntheticLambda4
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ExternalStorageService.ExternalStorageServiceWrapper.this.lambda$notifyAnrDelayStarted$4(str, i, i2, i3);
+                    this.f$0.lambda$notifyAnrDelayStarted$4(str, i, i2, i3);
                 }
             });
         }

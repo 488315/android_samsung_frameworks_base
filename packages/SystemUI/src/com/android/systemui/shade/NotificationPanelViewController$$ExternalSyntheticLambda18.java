@@ -10,7 +10,6 @@ import com.android.systemui.scene.shared.flag.SceneContainerFlag;
 import com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayoutController;
 import com.android.systemui.statusbar.phone.StatusBarKeyguardViewManager;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class NotificationPanelViewController$$ExternalSyntheticLambda18 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -30,6 +29,15 @@ public final /* synthetic */ class NotificationPanelViewController$$ExternalSynt
                 ((NotificationPanelViewController) obj).notifyExpandingFinished();
                 break;
             case 1:
+                ((NotificationPanelViewController) obj).closeQsIfPossible();
+                break;
+            case 2:
+                ((NotificationPanelViewController) obj).instantCollapse();
+                break;
+            case 3:
+                ((NotificationPanelViewController) obj).updateResources$1();
+                break;
+            case 4:
                 NotificationPanelViewController notificationPanelViewController = (NotificationPanelViewController) obj;
                 ValueAnimator valueAnimator = notificationPanelViewController.mQsController.mExpansionAnimator;
                 if (valueAnimator != null) {
@@ -37,14 +45,14 @@ public final /* synthetic */ class NotificationPanelViewController$$ExternalSynt
                 }
                 notificationPanelViewController.collapse(1.0f, false);
                 break;
-            case 2:
+            case 5:
                 NotificationPanelViewController notificationPanelViewController2 = (NotificationPanelViewController) obj;
                 notificationPanelViewController2.fling(0.0f, notificationPanelViewController2.mNextCollapseSpeedUpFactor, false);
                 break;
-            case 3:
+            case 6:
                 ((NotificationPanelViewController) obj).mKeyguardSecBottomArea.setVisibility(8);
                 break;
-            case 4:
+            case 7:
                 NotificationPanelViewController notificationPanelViewController3 = (NotificationPanelViewController) obj;
                 Rect rect = NotificationPanelViewController.M_DUMMY_DIRTY_RECT;
                 notificationPanelViewController3.mHeadsUpAnimatingAway = false;
@@ -56,7 +64,7 @@ public final /* synthetic */ class NotificationPanelViewController$$ExternalSynt
                 notificationPanelViewController3.updateVisibility();
                 notificationPanelViewController3.updateExpansionAndVisibility();
                 break;
-            case 5:
+            case 8:
                 NotificationPanelViewController notificationPanelViewController4 = (NotificationPanelViewController) obj;
                 if (notificationPanelViewController4.mExpandedFraction != 0.0f) {
                     Log.d("KeyguardVisible", "makeExpandedInvisible is not called. fraction=" + notificationPanelViewController4.mExpandedFraction);
@@ -66,25 +74,25 @@ public final /* synthetic */ class NotificationPanelViewController$$ExternalSynt
                     notificationPanelViewController4.mView.post(notificationPanelViewController4.mHideExpandedRunnable);
                     break;
                 }
-            case 6:
+            case 9:
                 Rect rect2 = NotificationPanelViewController.M_DUMMY_DIRTY_RECT;
                 ((NotificationPanelViewController) obj).setListening$1(false);
                 break;
-            case 7:
+            case 10:
                 NotificationPanelView notificationPanelView = ((NotificationPanelViewController) obj).mView;
                 notificationPanelView.getParent().invalidateChild(notificationPanelView, NotificationPanelViewController.M_DUMMY_DIRTY_RECT);
                 break;
-            case 8:
-                ((NotificationPanelViewController) obj).mLatencyTracker.onActionEnd(0);
-                break;
-            case 9:
+            case 11:
                 ((NotificationPanelViewController) obj).mIsBrightnessMirrorShowing.updateState(null, Boolean.FALSE);
                 break;
-            case 10:
+            case 12:
+                ((NotificationPanelViewController) obj).mLatencyTracker.onActionEnd(0);
+                break;
+            case 13:
                 Rect rect3 = NotificationPanelViewController.M_DUMMY_DIRTY_RECT;
                 ((NotificationPanelViewController) obj).updateVisibility();
                 break;
-            case 11:
+            case 14:
                 NotificationShadeWindowControllerImpl notificationShadeWindowControllerImpl = (NotificationShadeWindowControllerImpl) ((NotificationPanelViewController) obj).mNotificationShadeWindowController;
                 NotificationShadeWindowState notificationShadeWindowState = notificationShadeWindowControllerImpl.mCurrentState;
                 notificationShadeWindowState.forceWindowCollapsed = false;

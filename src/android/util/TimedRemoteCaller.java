@@ -39,19 +39,19 @@ public abstract class TimedRemoteCaller<T> {
     }
 
     protected final T getResultTimed(int i) throws TimeoutException {
-        long uptimeMillis = SystemClock.uptimeMillis();
+        long jUptimeMillis = SystemClock.uptimeMillis();
         while (true) {
             try {
                 synchronized (this.mLock) {
                     if (this.mReceivedCalls.indexOfKey(i) >= 0) {
                         return this.mReceivedCalls.removeReturnOld(i);
                     }
-                    long uptimeMillis2 = this.mCallTimeoutMillis - (SystemClock.uptimeMillis() - uptimeMillis);
-                    if (uptimeMillis2 <= 0) {
+                    long jUptimeMillis2 = this.mCallTimeoutMillis - (SystemClock.uptimeMillis() - jUptimeMillis);
+                    if (jUptimeMillis2 <= 0) {
                         this.mAwaitedCalls.delete(i);
                         throw new TimeoutException("No response for sequence: " + i);
                     }
-                    this.mLock.wait(uptimeMillis2);
+                    this.mLock.wait(jUptimeMillis2);
                 }
             } catch (InterruptedException unused) {
             }

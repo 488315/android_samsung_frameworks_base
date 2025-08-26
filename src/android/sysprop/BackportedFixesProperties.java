@@ -165,9 +165,7 @@ public final class BackportedFixesProperties {
         return tryParseList(new Function() { // from class: android.sysprop.BackportedFixesProperties$$ExternalSyntheticLambda0
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                Long tryParseLong;
-                tryParseLong = BackportedFixesProperties.tryParseLong((String) obj);
-                return tryParseLong;
+                return BackportedFixesProperties.tryParseLong((String) obj);
             }
         }, SystemProperties.get("ro.build.backported_fixes.alias_bitset.long_list"));
     }

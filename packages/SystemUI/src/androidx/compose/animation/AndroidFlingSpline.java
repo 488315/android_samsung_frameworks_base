@@ -3,13 +3,11 @@ package androidx.compose.animation;
 import androidx.appcompat.graphics.drawable.DrawerArrowDrawable$$ExternalSyntheticOutline0;
 import kotlin.ranges.RangesKt___RangesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AndroidFlingSpline {
     public static final AndroidFlingSpline INSTANCE = new AndroidFlingSpline();
     public static final float[] SplinePositions;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class FlingResult {
         public final float distanceCoefficient;
         public final float velocityCoefficient;
@@ -115,9 +113,9 @@ public final class AndroidFlingSpline {
     public static FlingResult flingPosition(float f) {
         float f2 = 0.0f;
         float f3 = 1.0f;
-        float coerceIn = RangesKt___RangesKt.coerceIn(f, 0.0f, 1.0f);
+        float fCoerceIn = RangesKt___RangesKt.coerceIn(f, 0.0f, 1.0f);
         float f4 = 100;
-        int i = (int) (f4 * coerceIn);
+        int i = (int) (f4 * fCoerceIn);
         if (i < 100) {
             float f5 = i / f4;
             int i2 = i + 1;
@@ -125,9 +123,9 @@ public final class AndroidFlingSpline {
             float[] fArr = SplinePositions;
             float f7 = fArr[i];
             float f8 = (fArr[i2] - f7) / (f6 - f5);
-            float m$1 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(coerceIn, f5, f8, f7);
+            float fM$1 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(fCoerceIn, f5, f8, f7);
             f2 = f8;
-            f3 = m$1;
+            f3 = fM$1;
         }
         return new FlingResult(f3, f2);
     }

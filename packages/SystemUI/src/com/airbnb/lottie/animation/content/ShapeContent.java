@@ -10,7 +10,6 @@ import com.airbnb.lottie.model.layer.BaseLayer;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ShapeContent implements PathContent, BaseKeyframeAnimation.AnimationListener {
     public final boolean hidden;
@@ -57,7 +56,11 @@ public class ShapeContent implements PathContent, BaseKeyframeAnimation.Animatio
         this.lottieDrawable.invalidateSelf();
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:10:0x002b  */
     @Override // com.airbnb.lottie.animation.content.Content
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void setContents(List list, List list2) {
         ArrayList arrayList = null;
         int i = 0;
@@ -73,14 +76,12 @@ public class ShapeContent implements PathContent, BaseKeyframeAnimation.Animatio
                 if (trimPathContent.type == ShapeTrimPath.Type.SIMULTANEOUSLY) {
                     ((ArrayList) this.trimPaths.contents).add(trimPathContent);
                     trimPathContent.addListener(this);
-                    i++;
+                } else if (content instanceof RoundedCornersContent) {
+                    if (arrayList == null) {
+                        arrayList = new ArrayList();
+                    }
+                    arrayList.add((RoundedCornersContent) content);
                 }
-            }
-            if (content instanceof RoundedCornersContent) {
-                if (arrayList == null) {
-                    arrayList = new ArrayList();
-                }
-                arrayList.add((RoundedCornersContent) content);
             }
             i++;
         }

@@ -22,9 +22,7 @@ public class MediaMuxerDescriptor extends MFDescriptorBase {
         this.mediaTypesToNotifyEvent.addAll((Collection) Arrays.stream(mediaTypeArr).map(new Function() { // from class: com.samsung.android.sume.core.descriptor.MediaMuxerDescriptor$$ExternalSyntheticLambda0
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                Integer valueOf;
-                valueOf = Integer.valueOf(((MediaType) obj).rank().getValue());
-                return valueOf;
+                return Integer.valueOf(((MediaType) obj).rank().getValue());
             }
         }).collect(Collectors.toList()));
     }

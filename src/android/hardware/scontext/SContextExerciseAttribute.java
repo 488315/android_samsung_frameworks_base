@@ -23,7 +23,18 @@ public class SContextExerciseAttribute extends SContextAttribute {
         setAttribute();
     }
 
+    /* JADX WARN: Code restructure failed: missing block: B:18:0x0037, code lost:
+    
+        android.util.Log.e(android.hardware.scontext.SContextExerciseAttribute.TAG, "The required data type is wrong.");
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:19:0x003c, code lost:
+    
+        return false;
+     */
     @Override // android.hardware.scontext.SContextAttribute, com.samsung.android.hardware.context.SemContextAttribute
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public boolean checkAttribute() {
         ArrayList arrayList = new ArrayList();
         int i = 0;
@@ -45,8 +56,6 @@ public class SContextExerciseAttribute extends SContextAttribute {
             }
             i++;
         }
-        Log.e(TAG, "The required data type is wrong.");
-        return false;
     }
 
     private void setAttribute() {

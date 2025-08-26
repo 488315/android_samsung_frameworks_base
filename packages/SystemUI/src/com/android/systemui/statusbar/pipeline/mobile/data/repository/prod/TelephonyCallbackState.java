@@ -8,7 +8,6 @@ import kotlin.collections.SetsKt___SetsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class TelephonyCallbackState {
     public final Set addedCallbackModes;
@@ -79,9 +78,9 @@ public final class TelephonyCallbackState {
         }
         if (callbackEvent instanceof CallbackEvent.OnCallBackModeStopped) {
             CallbackEvent.OnCallBackModeStopped onCallBackModeStopped = (CallbackEvent.OnCallBackModeStopped) callbackEvent;
-            boolean contains = this.removedCallbackModes.contains(Integer.valueOf(onCallBackModeStopped.type));
+            boolean zContains = this.removedCallbackModes.contains(Integer.valueOf(onCallBackModeStopped.type));
             int i = onCallBackModeStopped.type;
-            return copy$default(this, null, null, null, null, null, null, null, null, null, !contains ? SetsKt___SetsKt.minus(this.addedCallbackModes, Integer.valueOf(i)) : this.addedCallbackModes, !this.addedCallbackModes.contains(Integer.valueOf(i)) ? SetsKt___SetsKt.plus(this.removedCallbackModes, Integer.valueOf(i)) : this.removedCallbackModes, null, null, null, 14847);
+            return copy$default(this, null, null, null, null, null, null, null, null, null, !zContains ? SetsKt___SetsKt.minus(this.addedCallbackModes, Integer.valueOf(i)) : this.addedCallbackModes, !this.addedCallbackModes.contains(Integer.valueOf(i)) ? SetsKt___SetsKt.plus(this.removedCallbackModes, Integer.valueOf(i)) : this.removedCallbackModes, null, null, null, 14847);
         }
         if (callbackEvent instanceof CallbackEvent.OnCallStateChanged) {
             return copy$default(this, null, null, null, null, null, null, null, null, null, null, null, (CallbackEvent.OnCallStateChanged) callbackEvent, null, null, 14335);
@@ -108,29 +107,29 @@ public final class TelephonyCallbackState {
 
     public final int hashCode() {
         CallbackEvent.OnDataActivity onDataActivity = this.onDataActivity;
-        int hashCode = (onDataActivity == null ? 0 : Integer.hashCode(onDataActivity.direction)) * 31;
+        int iHashCode = (onDataActivity == null ? 0 : Integer.hashCode(onDataActivity.direction)) * 31;
         CallbackEvent.OnCarrierNetworkChange onCarrierNetworkChange = this.onCarrierNetworkChange;
-        int hashCode2 = (hashCode + (onCarrierNetworkChange == null ? 0 : Boolean.hashCode(onCarrierNetworkChange.active))) * 31;
+        int iHashCode2 = (iHashCode + (onCarrierNetworkChange == null ? 0 : Boolean.hashCode(onCarrierNetworkChange.active))) * 31;
         CallbackEvent.OnCarrierRoamingNtnModeChanged onCarrierRoamingNtnModeChanged = this.onCarrierRoamingNtnModeChanged;
-        int hashCode3 = (hashCode2 + (onCarrierRoamingNtnModeChanged == null ? 0 : Boolean.hashCode(onCarrierRoamingNtnModeChanged.active))) * 31;
+        int iHashCode3 = (iHashCode2 + (onCarrierRoamingNtnModeChanged == null ? 0 : Boolean.hashCode(onCarrierRoamingNtnModeChanged.active))) * 31;
         CallbackEvent.OnDataConnectionStateChanged onDataConnectionStateChanged = this.onDataConnectionStateChanged;
-        int hashCode4 = (hashCode3 + (onDataConnectionStateChanged == null ? 0 : Integer.hashCode(onDataConnectionStateChanged.dataState))) * 31;
+        int iHashCode4 = (iHashCode3 + (onDataConnectionStateChanged == null ? 0 : Integer.hashCode(onDataConnectionStateChanged.dataState))) * 31;
         CallbackEvent.OnDataEnabledChanged onDataEnabledChanged = this.onDataEnabledChanged;
-        int hashCode5 = (hashCode4 + (onDataEnabledChanged == null ? 0 : Boolean.hashCode(onDataEnabledChanged.enabled))) * 31;
+        int iHashCode5 = (iHashCode4 + (onDataEnabledChanged == null ? 0 : Boolean.hashCode(onDataEnabledChanged.enabled))) * 31;
         CallbackEvent.OnDisplayInfoChanged onDisplayInfoChanged = this.onDisplayInfoChanged;
-        int hashCode6 = (hashCode5 + (onDisplayInfoChanged == null ? 0 : onDisplayInfoChanged.telephonyDisplayInfo.hashCode())) * 31;
+        int iHashCode6 = (iHashCode5 + (onDisplayInfoChanged == null ? 0 : onDisplayInfoChanged.telephonyDisplayInfo.hashCode())) * 31;
         CallbackEvent.OnServiceStateChanged onServiceStateChanged = this.onServiceStateChanged;
-        int hashCode7 = (hashCode6 + (onServiceStateChanged == null ? 0 : onServiceStateChanged.serviceState.hashCode())) * 31;
+        int iHashCode7 = (iHashCode6 + (onServiceStateChanged == null ? 0 : onServiceStateChanged.serviceState.hashCode())) * 31;
         CallbackEvent.OnSignalStrengthChanged onSignalStrengthChanged = this.onSignalStrengthChanged;
-        int hashCode8 = (hashCode7 + (onSignalStrengthChanged == null ? 0 : onSignalStrengthChanged.signalStrength.hashCode())) * 31;
+        int iHashCode8 = (iHashCode7 + (onSignalStrengthChanged == null ? 0 : onSignalStrengthChanged.signalStrength.hashCode())) * 31;
         CallbackEvent.OnCarrierRoamingNtnSignalStrengthChanged onCarrierRoamingNtnSignalStrengthChanged = this.onCarrierRoamingNtnSignalStrengthChanged;
-        int hashCode9 = (this.removedCallbackModes.hashCode() + ((this.addedCallbackModes.hashCode() + ((hashCode8 + (onCarrierRoamingNtnSignalStrengthChanged == null ? 0 : onCarrierRoamingNtnSignalStrengthChanged.signalStrength.hashCode())) * 31)) * 31)) * 31;
+        int iHashCode9 = (this.removedCallbackModes.hashCode() + ((this.addedCallbackModes.hashCode() + ((iHashCode8 + (onCarrierRoamingNtnSignalStrengthChanged == null ? 0 : onCarrierRoamingNtnSignalStrengthChanged.signalStrength.hashCode())) * 31)) * 31)) * 31;
         CallbackEvent.OnCallStateChanged onCallStateChanged = this.onCallStateChanged;
-        int hashCode10 = (hashCode9 + (onCallStateChanged == null ? 0 : Integer.hashCode(onCallStateChanged.callState))) * 31;
+        int iHashCode10 = (iHashCode9 + (onCallStateChanged == null ? 0 : Integer.hashCode(onCallStateChanged.callState))) * 31;
         CallbackEvent.onSemSatelliteServiceStateChanged onsemsatelliteservicestatechanged = this.onSemSatelliteServiceStateChanged;
-        int hashCode11 = (hashCode10 + (onsemsatelliteservicestatechanged == null ? 0 : onsemsatelliteservicestatechanged.serviceState.hashCode())) * 31;
+        int iHashCode11 = (iHashCode10 + (onsemsatelliteservicestatechanged == null ? 0 : onsemsatelliteservicestatechanged.serviceState.hashCode())) * 31;
         CallbackEvent.onSemSatelliteSignalStrengthChanged onsemsatellitesignalstrengthchanged = this.onSemSatelliteSignalStrengthChanged;
-        return hashCode11 + (onsemsatellitesignalstrengthchanged != null ? onsemsatellitesignalstrengthchanged.signalStrength.hashCode() : 0);
+        return iHashCode11 + (onsemsatellitesignalstrengthchanged != null ? onsemsatellitesignalstrengthchanged.signalStrength.hashCode() : 0);
     }
 
     public final String toString() {

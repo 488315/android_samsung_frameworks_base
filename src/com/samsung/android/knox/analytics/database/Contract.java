@@ -179,10 +179,10 @@ public final class Contract {
         }
 
         static {
-            Uri withAppendedPath = Uri.withAppendedPath(Contract.CONTENT_URI, PATH);
-            CONTENT_URI = withAppendedPath;
-            DUMP_CACHE_URI = Uri.withAppendedPath(withAppendedPath, Extra.COMMAND_DUMP_CACHE);
-            SAVE_CACHE_URI = Uri.withAppendedPath(withAppendedPath, Extra.COMMAND_SAVE_CACHE);
+            Uri uriWithAppendedPath = Uri.withAppendedPath(Contract.CONTENT_URI, PATH);
+            CONTENT_URI = uriWithAppendedPath;
+            DUMP_CACHE_URI = Uri.withAppendedPath(uriWithAppendedPath, Extra.COMMAND_DUMP_CACHE);
+            SAVE_CACHE_URI = Uri.withAppendedPath(uriWithAppendedPath, Extra.COMMAND_SAVE_CACHE);
         }
     }
 }

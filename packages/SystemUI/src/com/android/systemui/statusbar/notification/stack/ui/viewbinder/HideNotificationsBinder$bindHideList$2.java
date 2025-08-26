@@ -12,7 +12,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.SharedFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class HideNotificationsBinder$bindHideList$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ SharedFlow $hideListFlow;
@@ -47,7 +46,7 @@ final class HideNotificationsBinder$bindHideList$2 extends SuspendLambda impleme
             FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.statusbar.notification.stack.ui.viewbinder.HideNotificationsBinder$bindHideList$2.1
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 public final Object emit(Object obj2, Continuation continuation) {
-                    HideNotificationsBinder.access$bindHideState(HideNotificationsBinder.INSTANCE, NotificationStackScrollLayoutController.this, ((Boolean) obj2).booleanValue());
+                    HideNotificationsBinder.access$bindHideState(HideNotificationsBinder.INSTANCE, notificationStackScrollLayoutController, ((Boolean) obj2).booleanValue());
                     return Unit.INSTANCE;
                 }
             };

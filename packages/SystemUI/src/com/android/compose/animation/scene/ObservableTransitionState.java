@@ -7,11 +7,9 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlin.text.StringsKt__IndentKt;
 import kotlinx.coroutines.flow.Flow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public interface ObservableTransitionState {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Idle implements ObservableTransitionState {
         public final Set currentOverlays;
         public final SceneKey currentScene;
@@ -49,7 +47,6 @@ public interface ObservableTransitionState {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Transition implements ObservableTransitionState {
         public final ContentKey fromContent;
         public final Flow isInPreviewStage;
@@ -58,7 +55,6 @@ public interface ObservableTransitionState {
         public final Flow progress;
         public final ContentKey toContent;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class ChangeScene extends Transition {
             public final Set currentOverlays;
             public final Flow currentScene;
@@ -74,7 +70,6 @@ public interface ObservableTransitionState {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -84,7 +79,6 @@ public interface ObservableTransitionState {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public abstract class OverlayTransition extends Transition {
             public final Flow currentOverlays;
             public final SceneKey currentScene;
@@ -100,7 +94,6 @@ public interface ObservableTransitionState {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class ReplaceOverlay extends OverlayTransition {
             public final OverlayKey fromOverlay;
             public final OverlayKey toOverlay;
@@ -112,7 +105,6 @@ public interface ObservableTransitionState {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class ShowOrHideOverlay extends OverlayTransition {
             public ShowOrHideOverlay(OverlayKey overlayKey, ContentKey contentKey, ContentKey contentKey2, SceneKey sceneKey, Flow flow, Flow flow2, boolean z, Flow flow3, Flow flow4, Flow flow5) {
                 super(contentKey, contentKey2, sceneKey, flow, flow2, z, flow3, flow4, flow5, null);

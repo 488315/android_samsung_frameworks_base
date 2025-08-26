@@ -1,23 +1,33 @@
 package com.android.wm.shell.transition;
 
+import android.app.ActivityManager;
 import android.app.PendingIntent;
 import android.os.IBinder;
 import android.util.Log;
+import android.util.Pair;
 import android.view.SurfaceControl;
+import android.window.DesktopModeFlags;
+import android.window.RemoteTransition;
 import android.window.TransitionInfo;
+import android.window.TransitionRequestInfo;
 import android.window.WindowContainerToken;
 import android.window.WindowContainerTransaction;
 import com.android.internal.protolog.ProtoLogImpl_1771455215;
 import com.android.systemui.animation.RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0;
 import com.android.wm.shell.activityembedding.ActivityEmbeddingController;
 import com.android.wm.shell.common.ComponentUtils;
+import com.android.wm.shell.common.pip.PipUtils;
+import com.android.wm.shell.desktopmode.DesktopRepository;
 import com.android.wm.shell.desktopmode.DesktopTasksController;
 import com.android.wm.shell.keyguard.KeyguardTransitionHandler;
 import com.android.wm.shell.pip.PipTransitionController;
 import com.android.wm.shell.protolog.ShellProtoLogGroup;
 import com.android.wm.shell.recents.RecentsTransitionHandler;
+import com.android.wm.shell.shared.TransitionUtil;
 import com.android.wm.shell.splitscreen.SplitScreenController;
 import com.android.wm.shell.splitscreen.StageCoordinator;
+import com.android.wm.shell.splitscreen.StageCoordinator$$ExternalSyntheticLambda17;
+import com.android.wm.shell.splitscreen.StageTaskListener;
 import com.android.wm.shell.sysui.ShellInit;
 import com.android.wm.shell.taskview.TaskViewTransitions;
 import com.android.wm.shell.transition.Transitions;
@@ -26,7 +36,6 @@ import com.samsung.android.rune.CoreRune;
 import java.util.ArrayList;
 import java.util.Optional;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class DefaultMixedHandler implements MixedTransitionHandler, Transitions.TransitionHandler {
     public final ArrayList mActiveTransitions = new ArrayList();
@@ -40,7 +49,6 @@ public class DefaultMixedHandler implements MixedTransitionHandler, Transitions.
     public TaskViewTransitions mTaskViewTransitions;
     public UnfoldTransitionHandler mUnfoldHandler;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class MixedTransition {
         public boolean mClosingSplitScreenWithEnterPip;
         public boolean mHasRequestToRemote;
@@ -107,7 +115,7 @@ public class DefaultMixedHandler implements MixedTransitionHandler, Transitions.
             shellInit.addInitCallback(new Runnable() { // from class: com.android.wm.shell.transition.DefaultMixedHandler$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    DefaultMixedHandler defaultMixedHandler = DefaultMixedHandler.this;
+                    DefaultMixedHandler defaultMixedHandler = this.f$0;
                     PipTransitionController pipTransitionController2 = pipTransitionController;
                     Optional optional6 = optional;
                     Optional optional7 = optional2;
@@ -141,8 +149,8 @@ public class DefaultMixedHandler implements MixedTransitionHandler, Transitions.
     }
 
     public static void excludeForceHidingChanges(TransitionInfo transitionInfo) {
-        for (int m = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, 1); m >= 0; m--) {
-            TransitionInfo.Change change = (TransitionInfo.Change) transitionInfo.getChanges().get(m);
+        for (int iM = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, 1); iM >= 0; iM--) {
+            TransitionInfo.Change change = (TransitionInfo.Change) transitionInfo.getChanges().get(iM);
             if (change.isForceHidingEnter()) {
                 Log.d("DefaultMixedHandler", "excludeForceHidingChanges: " + change + ", reason=animateKeyguard");
                 transitionInfo.getChanges().remove(change);
@@ -166,21 +174,21 @@ public class DefaultMixedHandler implements MixedTransitionHandler, Transitions.
     }
 
     public final boolean animatePendingEnterPipFromSplit(IBinder iBinder, TransitionInfo transitionInfo, SurfaceControl.Transaction transaction, SurfaceControl.Transaction transaction2, Transitions.TransitionFinishCallback transitionFinishCallback, boolean z, boolean z2) {
-        DefaultMixedTransition createDefaultMixedTransition = createDefaultMixedTransition(iBinder, z ? 10 : 1);
-        this.mActiveTransitions.add(createDefaultMixedTransition);
-        DefaultMixedHandler$$ExternalSyntheticLambda4 defaultMixedHandler$$ExternalSyntheticLambda4 = new DefaultMixedHandler$$ExternalSyntheticLambda4(this, createDefaultMixedTransition, transitionFinishCallback, 3);
+        DefaultMixedTransition defaultMixedTransitionCreateDefaultMixedTransition = createDefaultMixedTransition(iBinder, z ? 10 : 1);
+        this.mActiveTransitions.add(defaultMixedTransitionCreateDefaultMixedTransition);
+        DefaultMixedHandler$$ExternalSyntheticLambda4 defaultMixedHandler$$ExternalSyntheticLambda4 = new DefaultMixedHandler$$ExternalSyntheticLambda4(this, defaultMixedTransitionCreateDefaultMixedTransition, transitionFinishCallback, 3);
         if (CoreRune.MW_PIP_SHELL_TRANSITION && z2 && !z) {
-            createDefaultMixedTransition.mClosingSplitScreenWithEnterPip = true;
+            defaultMixedTransitionCreateDefaultMixedTransition.mClosingSplitScreenWithEnterPip = true;
         }
-        return createDefaultMixedTransition.startAnimation(iBinder, transitionInfo, transaction, transaction2, defaultMixedHandler$$ExternalSyntheticLambda4);
+        return defaultMixedTransitionCreateDefaultMixedTransition.startAnimation(iBinder, transitionInfo, transaction, transaction2, defaultMixedHandler$$ExternalSyntheticLambda4);
     }
 
     public final boolean animatePendingSplitWithDisplayChange(IBinder iBinder, TransitionInfo transitionInfo, SurfaceControl.Transaction transaction, SurfaceControl.Transaction transaction2, Transitions.TransitionFinishCallback transitionFinishCallback) {
         boolean z;
-        TransitionInfo subCopy = subCopy(transitionInfo, transitionInfo.getType(), true);
-        TransitionInfo subCopy2 = subCopy(transitionInfo, 6, false);
-        for (int m = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, 1); m >= 0; m--) {
-            TransitionInfo.Change change = (TransitionInfo.Change) transitionInfo.getChanges().get(m);
+        TransitionInfo transitionInfoSubCopy = subCopy(transitionInfo, transitionInfo.getType(), true);
+        TransitionInfo transitionInfoSubCopy2 = subCopy(transitionInfo, 6, false);
+        for (int iM = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, 1); iM >= 0; iM--) {
+            TransitionInfo.Change change = (TransitionInfo.Change) transitionInfo.getChanges().get(iM);
             TransitionInfo.Change change2 = change;
             while (change2 != null) {
                 if (change2.getTaskInfo() == null) {
@@ -190,58 +198,60 @@ public class DefaultMixedHandler implements MixedTransitionHandler, Transitions.
                     change2 = transitionInfo.getChange(change2.getParent());
                 }
             }
-            subCopy2.addChange(change);
-            subCopy.getChanges().remove(m);
+            transitionInfoSubCopy2.addChange(change);
+            transitionInfoSubCopy.getChanges().remove(iM);
         }
-        if (subCopy2.getChanges().isEmpty()) {
+        if (transitionInfoSubCopy2.getChanges().isEmpty()) {
             return false;
         }
-        for (int i = 0; i < subCopy.getChanges().size(); i++) {
-            TransitionInfo.Change change3 = (TransitionInfo.Change) subCopy.getChanges().get(i);
-            if (change3.getParent() != null && subCopy.getChange(change3.getParent()) == null) {
-                ((TransitionInfo.Change) subCopy.getChanges().get(i)).setParent((WindowContainerToken) null);
+        for (int i = 0; i < transitionInfoSubCopy.getChanges().size(); i++) {
+            TransitionInfo.Change change3 = (TransitionInfo.Change) transitionInfoSubCopy.getChanges().get(i);
+            if (change3.getParent() != null && transitionInfoSubCopy.getChange(change3.getParent()) == null) {
+                ((TransitionInfo.Change) transitionInfoSubCopy.getChanges().get(i)).setParent((WindowContainerToken) null);
             }
         }
         if (CoreRune.MW_SHELL_DISPLAY_CHANGE_TRANSITION) {
-            if (subCopy2.hasCustomDisplayChangeTransition()) {
-                subCopy.setSeparatedFromCustomDisplayChange(true);
+            if (transitionInfoSubCopy2.hasCustomDisplayChangeTransition()) {
+                transitionInfoSubCopy.setSeparatedFromCustomDisplayChange(true);
             }
-            subCopy2.setAnimatePendingSplitWithDisplayChange(true);
+            transitionInfoSubCopy2.setAnimatePendingSplitWithDisplayChange(true);
         }
-        DefaultMixedTransition createDefaultMixedTransition = createDefaultMixedTransition(iBinder, 2);
-        this.mActiveTransitions.add(createDefaultMixedTransition);
+        DefaultMixedTransition defaultMixedTransitionCreateDefaultMixedTransition = createDefaultMixedTransition(iBinder, 2);
+        this.mActiveTransitions.add(defaultMixedTransitionCreateDefaultMixedTransition);
         if (ProtoLogImpl_1771455215.Cache.WM_SHELL_TRANSITIONS_enabled[1]) {
             ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_TRANSITIONS, -3728697233680287407L, 0, null);
         }
-        createDefaultMixedTransition.mInFlightSubAnimations = 2;
+        defaultMixedTransitionCreateDefaultMixedTransition.mInFlightSubAnimations = 2;
         if (CoreRune.MW_PIP_SHELL_TRANSITION) {
-            for (int m2 = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, 1); m2 >= 0; m2--) {
-                if (this.mPipHandler.isEnteringPip$1((TransitionInfo.Change) transitionInfo.getChanges().get(m2), transitionInfo.getType())) {
-                    createDefaultMixedTransition.mInFlightSubAnimations++;
+            for (int iM2 = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, 1); iM2 >= 0; iM2--) {
+                if (this.mPipHandler.isEnteringPip$1((TransitionInfo.Change) transitionInfo.getChanges().get(iM2), transitionInfo.getType())) {
+                    defaultMixedTransitionCreateDefaultMixedTransition.mInFlightSubAnimations++;
                     z = true;
                     break;
                 }
             }
+            z = false;
+        } else {
+            z = false;
         }
-        z = false;
         if (this.mSplitHandler.mSplitTransitions.isPendingDismiss(iBinder)) {
-            for (int m3 = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(subCopy, 1); m3 >= 0; m3--) {
-                TransitionInfo.Change change4 = (TransitionInfo.Change) transitionInfo.getChanges().get(m3);
+            for (int iM3 = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfoSubCopy, 1); iM3 >= 0; iM3--) {
+                TransitionInfo.Change change4 = (TransitionInfo.Change) transitionInfo.getChanges().get(iM3);
                 SurfaceControl leash = change4.getLeash();
                 if (leash != null && change4.getMode() == 4) {
                     transaction.hide(leash);
                 }
             }
         }
-        DefaultMixedHandler$$ExternalSyntheticLambda4 defaultMixedHandler$$ExternalSyntheticLambda4 = new DefaultMixedHandler$$ExternalSyntheticLambda4(this, createDefaultMixedTransition, transitionFinishCallback, 1);
-        createDefaultMixedTransition.mLeftoversHandler = this.mPlayer.dispatchTransition(createDefaultMixedTransition.mTransition, subCopy2, transaction, transaction2, defaultMixedHandler$$ExternalSyntheticLambda4, this.mSplitHandler, this.mPipHandler);
+        DefaultMixedHandler$$ExternalSyntheticLambda4 defaultMixedHandler$$ExternalSyntheticLambda4 = new DefaultMixedHandler$$ExternalSyntheticLambda4(this, defaultMixedTransitionCreateDefaultMixedTransition, transitionFinishCallback, 1);
+        defaultMixedTransitionCreateDefaultMixedTransition.mLeftoversHandler = this.mPlayer.dispatchTransition(defaultMixedTransitionCreateDefaultMixedTransition.mTransition, transitionInfoSubCopy2, transaction, transaction2, defaultMixedHandler$$ExternalSyntheticLambda4, this.mSplitHandler, this.mPipHandler);
         if (!CoreRune.MW_SHELL_TRANSITION_BUG_FIX) {
-            this.mSplitHandler.startPendingAnimation(iBinder, subCopy, transaction, transaction2, defaultMixedHandler$$ExternalSyntheticLambda4);
-        } else if (!this.mSplitHandler.startPendingAnimation(iBinder, subCopy, transaction, transaction2, defaultMixedHandler$$ExternalSyntheticLambda4)) {
+            this.mSplitHandler.startPendingAnimation(iBinder, transitionInfoSubCopy, transaction, transaction2, defaultMixedHandler$$ExternalSyntheticLambda4);
+        } else if (!this.mSplitHandler.startPendingAnimation(iBinder, transitionInfoSubCopy, transaction, transaction2, defaultMixedHandler$$ExternalSyntheticLambda4)) {
             defaultMixedHandler$$ExternalSyntheticLambda4.onTransitionFinished(null);
         }
         if (CoreRune.MW_PIP_SHELL_TRANSITION && z) {
-            this.mPipHandler.startAnimation(iBinder, subCopy, transaction, transaction2, defaultMixedHandler$$ExternalSyntheticLambda4);
+            this.mPipHandler.startAnimation(iBinder, transitionInfoSubCopy, transaction, transaction2, defaultMixedHandler$$ExternalSyntheticLambda4);
         }
         return true;
     }
@@ -254,26 +264,230 @@ public class DefaultMixedHandler implements MixedTransitionHandler, Transitions.
         return new RecentsMixedTransition(i, iBinder, this.mPlayer, this, this.mPipHandler, this.mSplitHandler, this.mKeyguardHandler, this.mRecentsHandler, this.mDesktopTasksController);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:105:0x0069, code lost:
-    
-        if (r19.getTriggerTask().taskId == r12.getTopVisibleChildTaskId()) goto L34;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:114:0x0086, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:33:0x0086, code lost:
     
         if (r12.getChildCount() == 0) goto L34;
      */
-    /* JADX WARN: Removed duplicated region for block: B:182:0x035b  */
+    /* JADX WARN: Removed duplicated region for block: B:114:0x01cb  */
+    /* JADX WARN: Removed duplicated region for block: B:184:0x030f  */
+    /* JADX WARN: Removed duplicated region for block: B:208:0x035b  */
+    /* JADX WARN: Removed duplicated region for block: B:216:0x0396  */
     @Override // com.android.wm.shell.transition.Transitions.TransitionHandler
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final android.window.WindowContainerTransaction handleRequest(android.os.IBinder r18, android.window.TransitionRequestInfo r19) {
-        /*
-            Method dump skipped, instructions count: 996
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.transition.DefaultMixedHandler.handleRequest(android.os.IBinder, android.window.TransitionRequestInfo):android.window.WindowContainerTransaction");
+    public final WindowContainerTransaction handleRequest(IBinder iBinder, TransitionRequestInfo transitionRequestInfo) {
+        boolean z;
+        ActivityManager.RunningTaskInfo triggerTask;
+        boolean zShouldFullscreenTaskLaunchSwitchToDesktop;
+        int i;
+        int i2;
+        boolean z2;
+        StageCoordinator stageCoordinator = this.mSplitHandler;
+        StageTaskListener stageTaskListener = stageCoordinator.mMainStage;
+        if (stageTaskListener.mIsActive) {
+            stageCoordinator.mMixedHandler.mPipHandler.getClass();
+            if (transitionRequestInfo.getType() == 10) {
+                int i3 = -1;
+                if ((transitionRequestInfo.getTriggerTask() == null || stageCoordinator.getSplitPosition(transitionRequestInfo.getTriggerTask().taskId) == -1) && (!PipUtils.isPip2ExperimentEnabled() || transitionRequestInfo.getPipChange() == null || stageCoordinator.getSplitPosition(transitionRequestInfo.getPipChange().getTaskInfo().taskId) == -1)) {
+                    boolean z3 = CoreRune.MW_MULTI_SPLIT_TASK_ORGANIZER;
+                    StageTaskListener stageTaskListener2 = stageCoordinator.mCellStage;
+                    if (z3) {
+                        if (transitionRequestInfo.getTriggerTask() == null || transitionRequestInfo.getTriggerTask().taskId != stageTaskListener2.getTopVisibleChildTaskId()) {
+                        }
+                    }
+                    if (stageTaskListener.getChildCount() != 0) {
+                        if (stageCoordinator.mSideStage.getChildCount() != 0) {
+                            if (z3) {
+                                if (stageCoordinator.isMultiSplitActive()) {
+                                }
+                            }
+                        }
+                    }
+                }
+                if (ProtoLogImpl_1771455215.Cache.WM_SHELL_TRANSITIONS_enabled[1]) {
+                    ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_TRANSITIONS, -2686821093972033600L, 0, null);
+                }
+                if (transitionRequestInfo.getRemoteTransition() != null) {
+                    throw new IllegalStateException("Unexpected remote transition inpip-enter-from-split request");
+                }
+                this.mActiveTransitions.add(createDefaultMixedTransition(iBinder, 1));
+                WindowContainerTransaction windowContainerTransaction = new WindowContainerTransaction();
+                this.mPipHandler.augmentRequest(iBinder, transitionRequestInfo, windowContainerTransaction);
+                StageCoordinator stageCoordinator2 = this.mSplitHandler;
+                stageCoordinator2.getClass();
+                if (ProtoLogImpl_1771455215.Cache.WM_SHELL_SPLIT_SCREEN_enabled[0]) {
+                    ProtoLogImpl_1771455215.d(ShellProtoLogGroup.WM_SHELL_SPLIT_SCREEN, 2903785196408028946L, 1, Long.valueOf(transitionRequestInfo.getDebugId()));
+                }
+                ActivityManager.RunningTaskInfo triggerTask2 = transitionRequestInfo.getTriggerTask();
+                int i4 = stageCoordinator2.mDisplayId;
+                if (triggerTask2 == null || triggerTask2.displayId == i4) {
+                    int type = transitionRequestInfo.getType();
+                    int stageOfTask = triggerTask2 != null ? stageCoordinator2.getStageOfTask(triggerTask2.taskId) : -1;
+                    StageTaskListener stageTaskListener3 = stageCoordinator2.mMainStage;
+                    if (stageTaskListener3.mIsActive && !TransitionUtil.isOpeningType(type)) {
+                        int childCount = stageTaskListener3.getChildCount();
+                        StageTaskListener stageTaskListener4 = stageCoordinator2.mCellStage;
+                        StageTaskListener stageTaskListener5 = stageCoordinator2.mSideStage;
+                        if (childCount == 0 || stageTaskListener5.getChildCount() == 0 || (CoreRune.MW_MULTI_SPLIT_TASK_ORGANIZER && stageCoordinator2.isMultiSplitActive() && stageTaskListener4.getChildCount() == 0)) {
+                            if (ProtoLogImpl_1771455215.Cache.WM_SHELL_TRANSITIONS_enabled[1]) {
+                                ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_TRANSITIONS, 5247503639166465764L, 5, Long.valueOf(stageTaskListener3.getChildCount()), Long.valueOf(stageTaskListener5.getChildCount()));
+                            }
+                            if (triggerTask2 != null) {
+                                stageCoordinator2.mRecentTasks.ifPresent(new StageCoordinator$$ExternalSyntheticLambda17(triggerTask2, 1));
+                                stageCoordinator2.logExit(9);
+                            }
+                            if (CoreRune.MW_MULTI_SPLIT_TASK_ORGANIZER && stageCoordinator2.isMultiSplitScreenVisible()) {
+                                if (stageOfTask == -1) {
+                                    if (stageTaskListener3.getChildCount() == 0) {
+                                        stageOfTask = 0;
+                                    } else if (stageTaskListener5.getChildCount() == 0) {
+                                        stageOfTask = 1;
+                                    } else if (stageTaskListener4.getChildCount() == 0) {
+                                        stageOfTask = 5;
+                                    }
+                                }
+                                StageTaskListener stageTaskListener6 = stageTaskListener4.mHost;
+                                if (stageTaskListener6 == stageTaskListener3) {
+                                    stageTaskListener3 = stageTaskListener5;
+                                }
+                                if (stageOfTask == 5) {
+                                    stageCoordinator2.prepareExitMultiSplitScreen(windowContainerTransaction, false);
+                                } else if (stageOfTask == stageCoordinator2.getCellHostStageType()) {
+                                    stageCoordinator2.reparentCellToMainOrSide(windowContainerTransaction, stageTaskListener6, true);
+                                } else {
+                                    int cellHostStageType = stageCoordinator2.getCellHostStageType();
+                                    if (stageOfTask == (cellHostStageType == 0 ? 1 : cellHostStageType == 1 ? 0 : -1)) {
+                                        stageCoordinator2.reparentCellToMainOrSide(windowContainerTransaction, stageTaskListener3, true);
+                                    }
+                                }
+                                windowContainerTransaction.setDisplayIdForChangeTransition(i4, "enter_pip_with_multi_split");
+                                return windowContainerTransaction;
+                            }
+                            if (stageCoordinator2.isSplitScreenVisible()) {
+                                if (stageTaskListener3.getChildCount() != 0 && stageTaskListener5.getChildCount() == 0) {
+                                    i2 = 0;
+                                    z2 = true;
+                                    i3 = 0;
+                                } else if (stageTaskListener5.getChildCount() != 0 && stageTaskListener3.getChildCount() == 0) {
+                                    i2 = 0;
+                                    z2 = true;
+                                    i3 = 1;
+                                }
+                                stageCoordinator2.prepareExitSplitScreen(i3, i2, windowContainerTransaction, z2);
+                            } else {
+                                i2 = 0;
+                                z2 = true;
+                                stageCoordinator2.prepareExitSplitScreen(i3, i2, windowContainerTransaction, z2);
+                            }
+                        }
+                    }
+                }
+                return windowContainerTransaction;
+            }
+        }
+        if (transitionRequestInfo.getType() == 10 && (transitionRequestInfo.getFlags() & 512) != 0 && this.mActivityEmbeddingController != null) {
+            if (ProtoLogImpl_1771455215.Cache.WM_SHELL_TRANSITIONS_enabled[1]) {
+                ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_TRANSITIONS, 8328820818454394116L, 0, null);
+            }
+            this.mActiveTransitions.add(createDefaultMixedTransition(iBinder, 9));
+            WindowContainerTransaction windowContainerTransaction2 = new WindowContainerTransaction();
+            this.mPipHandler.augmentRequest(iBinder, transitionRequestInfo, windowContainerTransaction2);
+            return windowContainerTransaction2;
+        }
+        RemoteTransition remoteTransition = transitionRequestInfo.getRemoteTransition();
+        Transitions transitions = this.mPlayer;
+        if (remoteTransition != null && TransitionUtil.isOpeningType(transitionRequestInfo.getType()) && (transitionRequestInfo.getTriggerTask() == null || (transitionRequestInfo.getTriggerTask().topActivityType != 2 && transitionRequestInfo.getTriggerTask().topActivityType != 3))) {
+            Pair pairDispatchRequest = transitions.dispatchRequest(iBinder, transitionRequestInfo, this);
+            if (pairDispatchRequest != null) {
+                DefaultMixedTransition defaultMixedTransitionCreateDefaultMixedTransition = createDefaultMixedTransition(iBinder, 3);
+                defaultMixedTransitionCreateDefaultMixedTransition.mLeftoversHandler = (Transitions.TransitionHandler) pairDispatchRequest.first;
+                this.mActiveTransitions.add(defaultMixedTransitionCreateDefaultMixedTransition);
+                Transitions.TransitionHandler transitionHandler = defaultMixedTransitionCreateDefaultMixedTransition.mLeftoversHandler;
+                RemoteTransitionHandler remoteTransitionHandler = transitions.mRemoteTransitionHandler;
+                if (transitionHandler != remoteTransitionHandler) {
+                    defaultMixedTransitionCreateDefaultMixedTransition.mHasRequestToRemote = true;
+                    remoteTransitionHandler.handleRequest(iBinder, transitionRequestInfo);
+                }
+                return (WindowContainerTransaction) pairDispatchRequest.second;
+            }
+        } else {
+            if (this.mSplitHandler.isSplitScreenVisible() && TransitionUtil.isOpeningType(transitionRequestInfo.getType()) && transitionRequestInfo.getTriggerTask() != null && transitionRequestInfo.getTriggerTask().getWindowingMode() == 1 && (transitionRequestInfo.getTriggerTask().getActivityType() == 2 || transitionRequestInfo.getTriggerTask().getActivityType() == 3)) {
+                if (ProtoLogImpl_1771455215.Cache.WM_SHELL_TRANSITIONS_enabled[1]) {
+                    i = 0;
+                    ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_TRANSITIONS, 533703778315874542L, 0, null);
+                } else {
+                    i = 0;
+                }
+                Pair pairDispatchRequest2 = transitions.dispatchRequest(iBinder, transitionRequestInfo, this);
+                if (pairDispatchRequest2 == null) {
+                    if (ProtoLogImpl_1771455215.Cache.WM_SHELL_TRANSITIONS_enabled[1]) {
+                        ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_TRANSITIONS, -1432596578455044936L, i, null);
+                    }
+                    pairDispatchRequest2 = new Pair(transitions.mRemoteTransitionHandler, new WindowContainerTransaction());
+                }
+                RecentsMixedTransition recentsMixedTransitionCreateRecentsMixedTransition = createRecentsMixedTransition(iBinder, 4);
+                recentsMixedTransitionCreateRecentsMixedTransition.mLeftoversHandler = (Transitions.TransitionHandler) pairDispatchRequest2.first;
+                this.mActiveTransitions.add(recentsMixedTransitionCreateRecentsMixedTransition);
+                return (WindowContainerTransaction) pairDispatchRequest2.second;
+            }
+            if (this.mUnfoldHandler != null && UnfoldTransitionHandler.shouldPlayUnfoldAnimation(transitionRequestInfo)) {
+                WindowContainerTransaction windowContainerTransactionHandleRequest = this.mUnfoldHandler.handleRequest(iBinder, transitionRequestInfo);
+                if (windowContainerTransactionHandleRequest != null) {
+                    this.mActiveTransitions.add(createDefaultMixedTransition(iBinder, 8));
+                }
+                return windowContainerTransactionHandleRequest;
+            }
+            DesktopTasksController desktopTasksController = this.mDesktopTasksController;
+            if (desktopTasksController == null) {
+                if (CoreRune.MW_SPLIT_CONTINUITY_MODE && this.mSplitHandler.shouldkeyguardUnlockWithUpdateSplit(transitionRequestInfo.getFlags())) {
+                    Log.d("DefaultMixedHandler", "keyguard going away with update split");
+                    WindowContainerTransaction windowContainerTransaction3 = new WindowContainerTransaction();
+                    StageCoordinator stageCoordinator3 = this.mSplitHandler;
+                    if (stageCoordinator3.updateCoverDisplaySplitLayoutIfNeeded()) {
+                        z = true;
+                        stageCoordinator3.mUpdateCoverDisplaySplitLayout = true;
+                        stageCoordinator3.mSplitLayout.update(null, true);
+                        stageCoordinator3.mUpdateCoverDisplaySplitLayout = false;
+                        stageCoordinator3.updateStagePositionIfNeeded(windowContainerTransaction3);
+                        stageCoordinator3.updateWindowBounds(stageCoordinator3.mSplitLayout, windowContainerTransaction3, false);
+                    } else {
+                        z = false;
+                    }
+                    if (z) {
+                        this.mActiveTransitions.add(createDefaultMixedTransition(iBinder, 102));
+                        this.mKeyguardHandler.handleRequest(iBinder, transitionRequestInfo);
+                        return windowContainerTransaction3;
+                    }
+                }
+            } else if (DesktopModeFlags.ENABLE_FULLY_IMMERSIVE_IN_DESKTOP.isTrue() && (triggerTask = transitionRequestInfo.getTriggerTask()) != null && desktopTasksController.isDesktopModeShowing(triggerTask.displayId) && TransitionUtil.isOpeningType(transitionRequestInfo.getType())) {
+                DesktopRepository.Desk activeDesk = desktopTasksController.taskRepository.desktopData.getActiveDesk(triggerTask.displayId);
+                if ((activeDesk != null ? activeDesk.fullImmersiveTaskId : null) == null) {
+                    zShouldFullscreenTaskLaunchSwitchToDesktop = false;
+                    if (!zShouldFullscreenTaskLaunchSwitchToDesktop) {
+                        Pair pairDispatchRequest3 = transitions.dispatchRequest(iBinder, transitionRequestInfo, this);
+                        if (pairDispatchRequest3 != null) {
+                            if (ProtoLogImpl_1771455215.Cache.WM_SHELL_TRANSITIONS_enabled[1]) {
+                                ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_TRANSITIONS, 7723280085640558664L, 0, String.valueOf(pairDispatchRequest3.first));
+                            }
+                            DefaultMixedTransition defaultMixedTransitionCreateDefaultMixedTransition2 = createDefaultMixedTransition(iBinder, 12);
+                            defaultMixedTransitionCreateDefaultMixedTransition2.mLeftoversHandler = (Transitions.TransitionHandler) pairDispatchRequest3.first;
+                            this.mActiveTransitions.add(defaultMixedTransitionCreateDefaultMixedTransition2);
+                            return (WindowContainerTransaction) pairDispatchRequest3.second;
+                        }
+                    }
+                } else {
+                    if (triggerTask.getWindowingMode() == 1) {
+                        zShouldFullscreenTaskLaunchSwitchToDesktop = desktopTasksController.shouldFullscreenTaskLaunchSwitchToDesktop(triggerTask);
+                    } else if (triggerTask.isFreeform() && desktopTasksController.isDesktopModeShowing(triggerTask.displayId)) {
+                        zShouldFullscreenTaskLaunchSwitchToDesktop = true;
+                    }
+                    if (!zShouldFullscreenTaskLaunchSwitchToDesktop) {
+                    }
+                }
+            }
+        }
+        return null;
     }
 
     public final boolean isIntentInPip(PendingIntent pendingIntent) {
@@ -370,18 +584,18 @@ public class DefaultMixedHandler implements MixedTransitionHandler, Transitions.
                     pipTransitionController.syncPipSurfaceState(transitionInfo, transaction, transaction2);
                 }
             } else {
-                DefaultMixedTransition createDefaultMixedTransition = createDefaultMixedTransition(iBinder, 5);
-                this.mActiveTransitions.add(createDefaultMixedTransition);
-                DefaultMixedHandler$$ExternalSyntheticLambda4 defaultMixedHandler$$ExternalSyntheticLambda4 = new DefaultMixedHandler$$ExternalSyntheticLambda4(this, createDefaultMixedTransition, transitionFinishCallback, 6);
+                DefaultMixedTransition defaultMixedTransitionCreateDefaultMixedTransition = createDefaultMixedTransition(iBinder, 5);
+                this.mActiveTransitions.add(defaultMixedTransitionCreateDefaultMixedTransition);
+                DefaultMixedHandler$$ExternalSyntheticLambda4 defaultMixedHandler$$ExternalSyntheticLambda4 = new DefaultMixedHandler$$ExternalSyntheticLambda4(this, defaultMixedTransitionCreateDefaultMixedTransition, transitionFinishCallback, 6);
                 if (CoreRune.MW_SPLIT_CONTINUITY_MODE && i == 102 && this.mSplitHandler.shouldkeyguardUnlockWithUpdateSplit(transitionInfo.getFlags())) {
                     Log.d("DefaultMixedHandler", "update split surface before going away");
                     StageCoordinator stageCoordinator = this.mSplitHandler;
                     stageCoordinator.updateSurfaceBounds(stageCoordinator.mSplitLayout, transaction, false);
                 }
                 PipTransitionController pipTransitionController2 = this.mPipHandler;
-                if (createDefaultMixedTransition.mFinishT == null) {
-                    createDefaultMixedTransition.mFinishT = transaction2;
-                    createDefaultMixedTransition.mFinishCB = defaultMixedHandler$$ExternalSyntheticLambda4;
+                if (defaultMixedTransitionCreateDefaultMixedTransition.mFinishT == null) {
+                    defaultMixedTransitionCreateDefaultMixedTransition.mFinishT = transaction2;
+                    defaultMixedTransitionCreateDefaultMixedTransition.mFinishCB = defaultMixedHandler$$ExternalSyntheticLambda4;
                 }
                 if (pipTransitionController2 != null) {
                     pipTransitionController2.syncPipSurfaceState(transitionInfo, transaction, transaction2);
@@ -389,7 +603,7 @@ public class DefaultMixedHandler implements MixedTransitionHandler, Transitions.
                 if (CoreRune.MW_FREEFORM_FORCE_HIDING_TRANSITION) {
                     excludeForceHidingChanges(transitionInfo);
                 }
-                if (createDefaultMixedTransition.startSubAnimation(this.mKeyguardHandler, transitionInfo, transaction, transaction2)) {
+                if (defaultMixedTransitionCreateDefaultMixedTransition.startSubAnimation(this.mKeyguardHandler, transitionInfo, transaction, transaction2)) {
                     if (ProtoLogImpl_1771455215.Cache.WM_SHELL_TRANSITIONS_enabled[3]) {
                         ProtoLogImpl_1771455215.w(ShellProtoLogGroup.WM_SHELL_TRANSITIONS, 2769322071729320114L, 0, null);
                     }
@@ -402,7 +616,7 @@ public class DefaultMixedHandler implements MixedTransitionHandler, Transitions.
                     }
                     return true;
                 }
-                this.mActiveTransitions.remove(createDefaultMixedTransition);
+                this.mActiveTransitions.remove(defaultMixedTransitionCreateDefaultMixedTransition);
             }
             if (CoreRune.MW_FREEFORM_FORCE_HIDING_TRANSITION) {
                 excludeForceHidingChanges(transitionInfo);
@@ -410,17 +624,17 @@ public class DefaultMixedHandler implements MixedTransitionHandler, Transitions.
         }
         if (mixedTransition != null) {
             MixedTransition mixedTransition2 = mixedTransition;
-            boolean startAnimation = mixedTransition2.startAnimation(iBinder, transitionInfo, transaction, transaction2, new DefaultMixedHandler$$ExternalSyntheticLambda4(this, mixedTransition, transitionFinishCallback, 7));
-            if (!startAnimation) {
+            boolean zStartAnimation = mixedTransition2.startAnimation(iBinder, transitionInfo, transaction, transaction2, new DefaultMixedHandler$$ExternalSyntheticLambda4(this, mixedTransition, transitionFinishCallback, 7));
+            if (!zStartAnimation) {
                 this.mActiveTransitions.remove(mixedTransition2);
             }
-            return startAnimation;
+            return zStartAnimation;
         }
         if (CoreRune.MW_PIP_SHELL_TRANSITION && CoreRune.MW_FREEFORM_MINIMIZE_SHELL_TRANSITION) {
             boolean z = false;
             boolean z2 = false;
-            for (int m = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, 1); m >= 0; m--) {
-                TransitionInfo.Change change2 = (TransitionInfo.Change) transitionInfo.getChanges().get(m);
+            for (int iM = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, 1); iM >= 0; iM--) {
+                TransitionInfo.Change change2 = (TransitionInfo.Change) transitionInfo.getChanges().get(iM);
                 if (change2.isEnteringPinnedMode() && change2.getTaskInfo() != null && change2.getTaskInfo().getWindowingMode() == 2) {
                     z2 = true;
                 }
@@ -429,40 +643,40 @@ public class DefaultMixedHandler implements MixedTransitionHandler, Transitions.
                 }
             }
             if (z && z2) {
-                int m2 = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, 1);
+                int iM2 = RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, 1);
                 while (true) {
-                    if (m2 < 0) {
+                    if (iM2 < 0) {
                         break;
                     }
-                    TransitionInfo.Change change3 = (TransitionInfo.Change) transitionInfo.getChanges().get(m2);
+                    TransitionInfo.Change change3 = (TransitionInfo.Change) transitionInfo.getChanges().get(iM2);
                     if (change3.isEnteringPinnedMode() && change3.getTaskInfo() != null && change3.getTaskInfo().getWindowingMode() == 2) {
                         change = change3;
                         break;
                     }
-                    m2--;
+                    iM2--;
                 }
                 if (change == null) {
                     Log.w("DefaultMixedHandler", "animateEnterPipWithDefaultTransition: failed, cannot find pipChange");
                     return false;
                 }
-                TransitionInfo subCopy = subCopy(transitionInfo, transitionInfo.getType(), true);
-                TransitionInfo subCopy2 = subCopy(transitionInfo, transitionInfo.getType(), false);
-                subCopy.getChanges().remove(change);
-                subCopy2.addChange(change);
-                if (subCopy.getChanges().isEmpty()) {
+                TransitionInfo transitionInfoSubCopy = subCopy(transitionInfo, transitionInfo.getType(), true);
+                TransitionInfo transitionInfoSubCopy2 = subCopy(transitionInfo, transitionInfo.getType(), false);
+                transitionInfoSubCopy.getChanges().remove(change);
+                transitionInfoSubCopy2.addChange(change);
+                if (transitionInfoSubCopy.getChanges().isEmpty()) {
                     Log.w("DefaultMixedHandler", "animateEnterPipWithDefaultTransition: failed, default part is empty");
                     return false;
                 }
-                if (CoreRune.MW_SHELL_DISPLAY_CHANGE_TRANSITION && subCopy.hasCustomDisplayChangeTransition()) {
-                    subCopy.setSeparatedFromCustomDisplayChange(true);
+                if (CoreRune.MW_SHELL_DISPLAY_CHANGE_TRANSITION && transitionInfoSubCopy.hasCustomDisplayChangeTransition()) {
+                    transitionInfoSubCopy.setSeparatedFromCustomDisplayChange(true);
                 }
-                DefaultMixedTransition createDefaultMixedTransition2 = createDefaultMixedTransition(iBinder, 100);
-                this.mActiveTransitions.add(createDefaultMixedTransition2);
-                createDefaultMixedTransition2.mInFlightSubAnimations = 2;
-                Log.d("DefaultMixedHandler", "animateEnterPipWithDefaultTransition: enterPipPart=" + subCopy2 + ", defaultPart=" + subCopy);
-                DefaultMixedHandler$$ExternalSyntheticLambda4 defaultMixedHandler$$ExternalSyntheticLambda42 = new DefaultMixedHandler$$ExternalSyntheticLambda4(this, createDefaultMixedTransition2, transitionFinishCallback, 2);
-                createDefaultMixedTransition2.mLeftoversHandler = this.mPlayer.dispatchTransition(createDefaultMixedTransition2.mTransition, subCopy, transaction, transaction2, defaultMixedHandler$$ExternalSyntheticLambda42, this.mPipHandler, this);
-                this.mPipHandler.startAnimation(iBinder, subCopy2, transaction, transaction2, defaultMixedHandler$$ExternalSyntheticLambda42);
+                DefaultMixedTransition defaultMixedTransitionCreateDefaultMixedTransition2 = createDefaultMixedTransition(iBinder, 100);
+                this.mActiveTransitions.add(defaultMixedTransitionCreateDefaultMixedTransition2);
+                defaultMixedTransitionCreateDefaultMixedTransition2.mInFlightSubAnimations = 2;
+                Log.d("DefaultMixedHandler", "animateEnterPipWithDefaultTransition: enterPipPart=" + transitionInfoSubCopy2 + ", defaultPart=" + transitionInfoSubCopy);
+                DefaultMixedHandler$$ExternalSyntheticLambda4 defaultMixedHandler$$ExternalSyntheticLambda42 = new DefaultMixedHandler$$ExternalSyntheticLambda4(this, defaultMixedTransitionCreateDefaultMixedTransition2, transitionFinishCallback, 2);
+                defaultMixedTransitionCreateDefaultMixedTransition2.mLeftoversHandler = this.mPlayer.dispatchTransition(defaultMixedTransitionCreateDefaultMixedTransition2.mTransition, transitionInfoSubCopy, transaction, transaction2, defaultMixedHandler$$ExternalSyntheticLambda42, this.mPipHandler, this);
+                this.mPipHandler.startAnimation(iBinder, transitionInfoSubCopy2, transaction, transaction2, defaultMixedHandler$$ExternalSyntheticLambda42);
                 return true;
             }
         }

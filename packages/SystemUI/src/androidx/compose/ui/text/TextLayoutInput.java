@@ -16,7 +16,6 @@ import java.util.List;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class TextLayoutInput {
     public final long constraints;
@@ -47,19 +46,19 @@ public final class TextLayoutInput {
         }
         int i = textLayoutInput.overflow;
         TextOverflow.Companion companion = TextOverflow.Companion;
-        return this.overflow == i && Intrinsics.areEqual(this.density, textLayoutInput.density) && this.layoutDirection == textLayoutInput.layoutDirection && Intrinsics.areEqual(this.fontFamilyResolver, textLayoutInput.fontFamilyResolver) && Constraints.m815equalsimpl0(this.constraints, textLayoutInput.constraints);
+        return this.overflow == i && Intrinsics.areEqual(this.density, textLayoutInput.density) && this.layoutDirection == textLayoutInput.layoutDirection && Intrinsics.areEqual(this.fontFamilyResolver, textLayoutInput.fontFamilyResolver) && Constraints.m817equalsimpl0(this.constraints, textLayoutInput.constraints);
     }
 
     public final int hashCode() {
-        int m = TransitionData$$ExternalSyntheticOutline0.m((PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.placeholders, SelectableTextAnnotatedStringElement$$ExternalSyntheticOutline0.m(this.text.hashCode() * 31, 31, this.style), 31) + this.maxLines) * 31, 31, this.softWrap);
+        int iM = TransitionData$$ExternalSyntheticOutline0.m((PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.placeholders, SelectableTextAnnotatedStringElement$$ExternalSyntheticOutline0.m(this.text.hashCode() * 31, 31, this.style), 31) + this.maxLines) * 31, 31, this.softWrap);
         TextOverflow.Companion companion = TextOverflow.Companion;
-        int hashCode = (this.fontFamilyResolver.hashCode() + ((this.layoutDirection.hashCode() + ((this.density.hashCode() + ReorderTile$$ExternalSyntheticOutline0.m(this.overflow, m, 31)) * 31)) * 31)) * 31;
+        int iHashCode = (this.fontFamilyResolver.hashCode() + ((this.layoutDirection.hashCode() + ((this.density.hashCode() + ReorderTile$$ExternalSyntheticOutline0.m(this.overflow, iM, 31)) * 31)) * 31)) * 31;
         Constraints.Companion companion2 = Constraints.Companion;
-        return Long.hashCode(this.constraints) + hashCode;
+        return Long.hashCode(this.constraints) + iHashCode;
     }
 
     public final String toString() {
-        return "TextLayoutInput(text=" + ((Object) this.text) + ", style=" + this.style + ", placeholders=" + this.placeholders + ", maxLines=" + this.maxLines + ", softWrap=" + this.softWrap + ", overflow=" + ((Object) TextOverflow.m812toStringimpl(this.overflow)) + ", density=" + this.density + ", layoutDirection=" + this.layoutDirection + ", fontFamilyResolver=" + this.fontFamilyResolver + ", constraints=" + ((Object) Constraints.m824toStringimpl(this.constraints)) + ')';
+        return "TextLayoutInput(text=" + ((Object) this.text) + ", style=" + this.style + ", placeholders=" + this.placeholders + ", maxLines=" + this.maxLines + ", softWrap=" + this.softWrap + ", overflow=" + ((Object) TextOverflow.m814toStringimpl(this.overflow)) + ", density=" + this.density + ", layoutDirection=" + this.layoutDirection + ", fontFamilyResolver=" + this.fontFamilyResolver + ", constraints=" + ((Object) Constraints.m826toStringimpl(this.constraints)) + ')';
     }
 
     public /* synthetic */ TextLayoutInput(AnnotatedString annotatedString, TextStyle textStyle, List list, int i, boolean z, int i2, Density density, LayoutDirection layoutDirection, FontFamily.Resolver resolver, long j, DefaultConstructorMarker defaultConstructorMarker) {

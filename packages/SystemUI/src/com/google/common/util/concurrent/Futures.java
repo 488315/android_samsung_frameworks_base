@@ -9,11 +9,9 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Future;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class Futures extends GwtFuturesCatchingSpecialization {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class CallbackListener implements Runnable {
         public final FutureCallback callback;
         public final Future future;
@@ -25,10 +23,10 @@ public final class Futures extends GwtFuturesCatchingSpecialization {
 
         @Override // java.lang.Runnable
         public final void run() {
-            Throwable tryInternalFastPathGetFailure;
+            Throwable thTryInternalFastPathGetFailure;
             Object obj = this.future;
-            if ((obj instanceof InternalFutureFailureAccess) && (tryInternalFastPathGetFailure = ((InternalFutureFailureAccess) obj).tryInternalFastPathGetFailure()) != null) {
-                this.callback.onFailure(tryInternalFastPathGetFailure);
+            if ((obj instanceof InternalFutureFailureAccess) && (thTryInternalFastPathGetFailure = ((InternalFutureFailureAccess) obj).tryInternalFastPathGetFailure()) != null) {
+                this.callback.onFailure(thTryInternalFastPathGetFailure);
                 return;
             }
             try {

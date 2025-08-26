@@ -4,7 +4,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.Lambda;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class FocusOwnerImpl$focusSearch$1 extends Lambda implements Function1 {
     final /* synthetic */ Function1 $onFound;
@@ -21,17 +20,17 @@ final class FocusOwnerImpl$focusSearch$1 extends Lambda implements Function1 {
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
-        boolean booleanValue;
+    public final Object mo781invoke(Object obj) {
+        boolean zBooleanValue;
         FocusTargetNode focusTargetNode = (FocusTargetNode) obj;
         if (Intrinsics.areEqual(focusTargetNode, this.$source)) {
-            booleanValue = false;
+            zBooleanValue = false;
         } else {
             if (Intrinsics.areEqual(focusTargetNode, this.this$0.rootFocusNode)) {
                 throw new IllegalStateException("Focus search landed at the root.");
             }
-            booleanValue = ((Boolean) this.$onFound.mo779invoke(focusTargetNode)).booleanValue();
+            zBooleanValue = ((Boolean) this.$onFound.mo781invoke(focusTargetNode)).booleanValue();
         }
-        return Boolean.valueOf(booleanValue);
+        return Boolean.valueOf(zBooleanValue);
     }
 }

@@ -9,7 +9,6 @@ import androidx.appcompat.widget.TooltipPopup$$ExternalSyntheticOutline0;
 import com.android.systemui.broadcast.BroadcastDispatcher;
 import com.android.systemui.util.concurrency.DelayableExecutor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class WifiStateWorker extends BroadcastReceiver {
     public final DelayableExecutor mBackgroundExecutor;
@@ -23,7 +22,7 @@ public class WifiStateWorker extends BroadcastReceiver {
         delayableExecutor.execute(new Runnable() { // from class: com.android.systemui.qs.tiles.dialog.WifiStateWorker$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                WifiStateWorker wifiStateWorker = WifiStateWorker.this;
+                WifiStateWorker wifiStateWorker = this.f$0;
                 WifiManager wifiManager2 = wifiStateWorker.mWifiManager;
                 if (wifiManager2 == null) {
                     return;

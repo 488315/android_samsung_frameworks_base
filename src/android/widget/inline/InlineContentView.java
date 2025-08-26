@@ -63,7 +63,7 @@ public class InlineContentView extends ViewGroup {
         this.mSurfaceView.setClipBounds(rect);
     }
 
-    public InlineContentView(Context context, AttributeSet attributeSet, int i, int i2) {
+    public InlineContentView(Context context, AttributeSet attributeSet, int i, int i2) throws Throwable {
         super(context, attributeSet, i, i2);
         this.mSurfaceCallback = new SurfaceHolder.Callback() { // from class: android.widget.inline.InlineContentView.1
             @Override // android.view.SurfaceHolder.Callback
@@ -97,7 +97,7 @@ public class InlineContentView extends ViewGroup {
         };
         this.mOnDrawListener = new ViewTreeObserver.OnDrawListener() { // from class: android.widget.inline.InlineContentView.3
             @Override // android.view.ViewTreeObserver.OnDrawListener
-            public void onDraw() {
+            public void onDraw() throws Throwable {
                 InlineContentView.this.computeParentPositionAndScale();
                 InlineContentView.this.mSurfaceView.setVisibility(InlineContentView.this.isShown() ? 0 : 8);
             }
@@ -124,14 +124,14 @@ public class InlineContentView extends ViewGroup {
     }
 
     @Override // android.view.ViewGroup, android.view.View
-    protected void onAttachedToWindow() {
+    protected void onAttachedToWindow() throws Throwable {
         super.onAttachedToWindow();
         SurfacePackageUpdater surfacePackageUpdater = this.mSurfacePackageUpdater;
         if (surfacePackageUpdater != null) {
             surfacePackageUpdater.getSurfacePackage(new Consumer() { // from class: android.widget.inline.InlineContentView$$ExternalSyntheticLambda0
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    InlineContentView.this.lambda$onAttachedToWindow$0((SurfaceControlViewHost.SurfacePackage) obj);
+                    this.f$0.lambda$onAttachedToWindow$0((SurfaceControlViewHost.SurfacePackage) obj);
                 }
             });
         }
@@ -147,7 +147,7 @@ public class InlineContentView extends ViewGroup {
     }
 
     @Override // android.view.ViewGroup, android.view.View
-    protected void onDetachedFromWindow() {
+    protected void onDetachedFromWindow() throws Throwable {
         super.onDetachedFromWindow();
         SurfacePackageUpdater surfacePackageUpdater = this.mSurfacePackageUpdater;
         if (surfacePackageUpdater != null) {
@@ -181,121 +181,54 @@ public class InlineContentView extends ViewGroup {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    /* JADX WARN: Code restructure failed: missing block: B:28:0x0093, code lost:
-    
-        if (java.lang.Float.compare(r4, r9.mParentScale.y) != 0) goto L42;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:40:0x009f A[PHI: r3
+      0x009f: PHI (r3v1 boolean) = (r3v0 boolean), (r3v4 boolean), (r3v4 boolean) binds: [B:38:0x009c, B:31:0x0089, B:33:0x0093] A[DONT_GENERATE, DONT_INLINE]] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public void computeParentPositionAndScale() {
-        /*
-            r9 = this;
-            java.lang.ref.WeakReference<android.view.SurfaceView> r0 = r9.mParentSurfaceOwnerView
-            r1 = 0
-            if (r0 == 0) goto Lc
-            java.lang.Object r0 = r0.get()
-            android.view.SurfaceView r0 = (android.view.SurfaceView) r0
-            goto Ld
-        Lc:
-            r0 = r1
-        Ld:
-            r2 = 1
-            r3 = 0
-            if (r0 == 0) goto L96
-            int[] r1 = r9.mParentPosition
-            if (r1 != 0) goto L1a
-            r1 = 2
-            int[] r1 = new int[r1]
-            r9.mParentPosition = r1
-        L1a:
-            int[] r1 = r9.mParentPosition
-            r4 = r1[r3]
-            r5 = r1[r2]
-            r0.getLocationInSurface(r1)
-            int[] r1 = r9.mParentPosition
-            r6 = r1[r3]
-            if (r4 != r6) goto L2d
-            r1 = r1[r2]
-            if (r5 == r1) goto L2e
-        L2d:
-            r3 = r2
-        L2e:
-            android.graphics.PointF r1 = r9.mParentScale
-            if (r1 != 0) goto L39
-            android.graphics.PointF r1 = new android.graphics.PointF
-            r1.<init>()
-            r9.mParentScale = r1
-        L39:
-            android.graphics.Rect r1 = r0.getSurfaceRenderPosition()
-            int r1 = r1.width()
-            float r1 = (float) r1
-            android.graphics.PointF r4 = r9.mParentScale
-            float r4 = r4.x
-            r5 = 0
-            int r6 = (r1 > r5 ? 1 : (r1 == r5 ? 0 : -1))
-            r7 = 1065353216(0x3f800000, float:1.0)
-            if (r6 <= 0) goto L58
-            android.graphics.PointF r6 = r9.mParentScale
-            int r8 = r0.getWidth()
-            float r8 = (float) r8
-            float r1 = r1 / r8
-            r6.x = r1
-            goto L5c
-        L58:
-            android.graphics.PointF r1 = r9.mParentScale
-            r1.x = r7
-        L5c:
-            if (r3 != 0) goto L69
-            android.graphics.PointF r1 = r9.mParentScale
-            float r1 = r1.x
-            int r1 = java.lang.Float.compare(r4, r1)
-            if (r1 == 0) goto L69
-            r3 = r2
-        L69:
-            android.graphics.Rect r1 = r0.getSurfaceRenderPosition()
-            int r1 = r1.height()
-            float r1 = (float) r1
-            android.graphics.PointF r4 = r9.mParentScale
-            float r4 = r4.y
-            int r5 = (r1 > r5 ? 1 : (r1 == r5 ? 0 : -1))
-            if (r5 <= 0) goto L85
-            android.graphics.PointF r5 = r9.mParentScale
-            int r0 = r0.getHeight()
-            float r0 = (float) r0
-            float r1 = r1 / r0
-            r5.y = r1
-            goto L89
-        L85:
-            android.graphics.PointF r0 = r9.mParentScale
-            r0.y = r7
-        L89:
-            if (r3 != 0) goto L9f
-            android.graphics.PointF r0 = r9.mParentScale
-            float r0 = r0.y
-            int r0 = java.lang.Float.compare(r4, r0)
-            if (r0 == 0) goto L9f
-            goto La5
-        L96:
-            int[] r0 = r9.mParentPosition
-            if (r0 != 0) goto La1
-            android.graphics.PointF r0 = r9.mParentScale
-            if (r0 == 0) goto L9f
-            goto La1
-        L9f:
-            r2 = r3
-            goto La5
-        La1:
-            r9.mParentPosition = r1
-            r9.mParentScale = r1
-        La5:
-            if (r2 == 0) goto Lac
-            android.view.SurfaceView r9 = r9.mSurfaceView
-            r9.requestUpdateSurfacePositionAndScale()
-        Lac:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.inline.InlineContentView.computeParentPositionAndScale():void");
+        WeakReference<SurfaceView> weakReference = this.mParentSurfaceOwnerView;
+        SurfaceView surfaceView = weakReference != null ? weakReference.get() : null;
+        boolean z = true;
+        if (surfaceView != null) {
+            if (this.mParentPosition == null) {
+                this.mParentPosition = new int[2];
+            }
+            int[] iArr = this.mParentPosition;
+            int i = iArr[0];
+            int i2 = iArr[1];
+            surfaceView.getLocationInSurface(iArr);
+            int[] iArr2 = this.mParentPosition;
+            z = (i == iArr2[0] && i2 == iArr2[1]) ? false : true;
+            if (this.mParentScale == null) {
+                this.mParentScale = new PointF();
+            }
+            float fWidth = surfaceView.getSurfaceRenderPosition().width();
+            float f = this.mParentScale.x;
+            if (fWidth > 0.0f) {
+                this.mParentScale.x = fWidth / surfaceView.getWidth();
+            } else {
+                this.mParentScale.x = 1.0f;
+            }
+            if (!z && Float.compare(f, this.mParentScale.x) != 0) {
+                z = true;
+            }
+            float fHeight = surfaceView.getSurfaceRenderPosition().height();
+            float f2 = this.mParentScale.y;
+            if (fHeight > 0.0f) {
+                this.mParentScale.y = fHeight / surfaceView.getHeight();
+            } else {
+                this.mParentScale.y = 1.0f;
+            }
+            if (z || Float.compare(f2, this.mParentScale.y) == 0) {
+                z = z;
+            }
+        } else if (this.mParentPosition != null || this.mParentScale != null) {
+            this.mParentPosition = null;
+            this.mParentScale = null;
+        }
+        if (z) {
+            this.mSurfaceView.requestUpdateSurfacePositionAndScale();
+        }
     }
 }

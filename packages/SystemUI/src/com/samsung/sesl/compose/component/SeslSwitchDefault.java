@@ -12,7 +12,6 @@ import com.samsung.sesl.compose.theme.ThemeKt;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class SeslSwitchDefault {
     public static final SeslSwitchDefault INSTANCE = new SeslSwitchDefault();
@@ -54,10 +53,10 @@ public final class SeslSwitchDefault {
         } else {
             Modifier.Companion companion3 = Modifier.Companion;
             if (ComposerKt.isTraceInProgress()) {
-                ComposerKt.traceEventStart("com.samsung.sesl.compose.component.SeslSwitchDefault.Thumb (Switch.kt:161)");
+                ComposerKt.traceEventStart("com.samsung.sesl.compose.component.SeslSwitchDefault.Thumb (Switch.kt:160)");
             }
             if (((Boolean) composerImpl.consume(ThemeKt.LocalOneUiOpenTheme)).booleanValue()) {
-                composerImpl.startReplaceGroup(465744600);
+                composerImpl.startReplaceGroup(465716824);
                 seslSwitchColors2 = seslSwitchColors;
                 interactionSource2 = interactionSource;
                 z2 = z;
@@ -68,7 +67,7 @@ public final class SeslSwitchDefault {
                 seslSwitchColors2 = seslSwitchColors;
                 interactionSource2 = interactionSource;
                 z2 = z;
-                composerImpl.startReplaceGroup(466019322);
+                composerImpl.startReplaceGroup(465991546);
                 SwitchKt.SeslDefaultSwitchThumb(f, seslSwitchColors2, interactionSource2, companion3, z2, composerImpl, i3 & 65534);
                 f2 = f;
                 composerImpl.end(false);
@@ -78,19 +77,19 @@ public final class SeslSwitchDefault {
             }
             companion2 = companion3;
         }
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
             final SeslSwitchColors seslSwitchColors3 = seslSwitchColors2;
             final InteractionSource interactionSource3 = interactionSource2;
             final boolean z3 = z2;
-            endRestartGroup.block = new Function2() { // from class: com.samsung.sesl.compose.component.SeslSwitchDefault$$ExternalSyntheticLambda0
+            recomposeScopeImplEndRestartGroup.block = new Function2() { // from class: com.samsung.sesl.compose.component.SeslSwitchDefault$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj, Object obj2) {
                     Composer composer2 = (Composer) obj;
                     ((Integer) obj2).getClass();
                     SeslSwitchDefault seslSwitchDefault = SeslSwitchDefault.INSTANCE;
-                    int updateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i | 1);
-                    SeslSwitchDefault.this.Thumb(f2, seslSwitchColors3, interactionSource3, companion2, z3, composer2, updateChangedFlags);
+                    int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i | 1);
+                    this.f$0.Thumb(f2, seslSwitchColors3, interactionSource3, companion2, z3, composer2, iUpdateChangedFlags);
                     return Unit.INSTANCE;
                 }
             };
@@ -126,10 +125,10 @@ public final class SeslSwitchDefault {
         } else {
             Modifier.Companion companion3 = Modifier.Companion;
             if (ComposerKt.isTraceInProgress()) {
-                ComposerKt.traceEventStart("com.samsung.sesl.compose.component.SeslSwitchDefault.Track (Switch.kt:187)");
+                ComposerKt.traceEventStart("com.samsung.sesl.compose.component.SeslSwitchDefault.Track (Switch.kt:186)");
             }
             if (((Boolean) composerImpl.consume(ThemeKt.LocalOneUiOpenTheme)).booleanValue()) {
-                composerImpl.startReplaceGroup(170065786);
+                composerImpl.startReplaceGroup(170038010);
                 f2 = f;
                 seslSwitchColors2 = seslSwitchColors;
                 z2 = z;
@@ -139,7 +138,7 @@ public final class SeslSwitchDefault {
                 f2 = f;
                 seslSwitchColors2 = seslSwitchColors;
                 z2 = z;
-                composerImpl.startReplaceGroup(170285948);
+                composerImpl.startReplaceGroup(170258172);
                 SwitchKt.SeslDefaultSwitchTrack(f2, seslSwitchColors2, companion3, z2, composerImpl, i3 & 8190);
                 composerImpl.end(false);
             }
@@ -148,19 +147,19 @@ public final class SeslSwitchDefault {
             }
             companion2 = companion3;
         }
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
             final float f3 = f2;
             final SeslSwitchColors seslSwitchColors3 = seslSwitchColors2;
             final boolean z3 = z2;
-            endRestartGroup.block = new Function2() { // from class: com.samsung.sesl.compose.component.SeslSwitchDefault$$ExternalSyntheticLambda1
+            recomposeScopeImplEndRestartGroup.block = new Function2() { // from class: com.samsung.sesl.compose.component.SeslSwitchDefault$$ExternalSyntheticLambda1
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj, Object obj2) {
                     Composer composer2 = (Composer) obj;
                     ((Integer) obj2).getClass();
                     SeslSwitchDefault seslSwitchDefault = SeslSwitchDefault.INSTANCE;
-                    int updateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i | 1);
-                    SeslSwitchDefault.this.Track(f3, seslSwitchColors3, companion2, z3, composer2, updateChangedFlags);
+                    int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i | 1);
+                    this.f$0.Track(f3, seslSwitchColors3, companion2, z3, composer2, iUpdateChangedFlags);
                     return Unit.INSTANCE;
                 }
             };

@@ -109,9 +109,9 @@ public interface IIncidentManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IIncidentManager)) {
-                return (IIncidentManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IIncidentManager)) {
+                return (IIncidentManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -165,61 +165,61 @@ public interface IIncidentManager extends IInterface {
                     return true;
                 case 2:
                     IncidentReportArgs incidentReportArgs2 = (IncidentReportArgs) parcel.readTypedObject(IncidentReportArgs.CREATOR);
-                    IIncidentReportStatusListener asInterface = IIncidentReportStatusListener.Stub.asInterface(parcel.readStrongBinder());
-                    FileDescriptor readRawFileDescriptor = parcel.readRawFileDescriptor();
+                    IIncidentReportStatusListener iIncidentReportStatusListenerAsInterface = IIncidentReportStatusListener.Stub.asInterface(parcel.readStrongBinder());
+                    FileDescriptor rawFileDescriptor = parcel.readRawFileDescriptor();
                     parcel.enforceNoDataAvail();
-                    reportIncidentToStream(incidentReportArgs2, asInterface, readRawFileDescriptor);
+                    reportIncidentToStream(incidentReportArgs2, iIncidentReportStatusListenerAsInterface, rawFileDescriptor);
                     return true;
                 case 3:
-                    FileDescriptor readRawFileDescriptor2 = parcel.readRawFileDescriptor();
-                    IIncidentReportStatusListener asInterface2 = IIncidentReportStatusListener.Stub.asInterface(parcel.readStrongBinder());
+                    FileDescriptor rawFileDescriptor2 = parcel.readRawFileDescriptor();
+                    IIncidentReportStatusListener iIncidentReportStatusListenerAsInterface2 = IIncidentReportStatusListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    reportIncidentToDumpstate(readRawFileDescriptor2, asInterface2);
+                    reportIncidentToDumpstate(rawFileDescriptor2, iIncidentReportStatusListenerAsInterface2);
                     return true;
                 case 4:
-                    int readInt = parcel.readInt();
-                    String readString = parcel.readString();
-                    IIncidentDumpCallback asInterface3 = IIncidentDumpCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i3 = parcel.readInt();
+                    String string = parcel.readString();
+                    IIncidentDumpCallback iIncidentDumpCallbackAsInterface = IIncidentDumpCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerSection(readInt, readString, asInterface3);
+                    registerSection(i3, string, iIncidentDumpCallbackAsInterface);
                     return true;
                 case 5:
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    unregisterSection(readInt2);
+                    unregisterSection(i4);
                     return true;
                 case 6:
                     systemRunning();
                     return true;
                 case 7:
-                    String readString2 = parcel.readString();
-                    String readString3 = parcel.readString();
+                    String string2 = parcel.readString();
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    List<String> incidentReportList = getIncidentReportList(readString2, readString3);
+                    List<String> incidentReportList = getIncidentReportList(string2, string3);
                     parcel2.writeNoException();
                     parcel2.writeStringList(incidentReportList);
                     return true;
                 case 8:
-                    String readString4 = parcel.readString();
-                    String readString5 = parcel.readString();
-                    String readString6 = parcel.readString();
+                    String string4 = parcel.readString();
+                    String string5 = parcel.readString();
+                    String string6 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    IncidentManager.IncidentReport incidentReport = getIncidentReport(readString4, readString5, readString6);
+                    IncidentManager.IncidentReport incidentReport = getIncidentReport(string4, string5, string6);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(incidentReport, 1);
                     return true;
                 case 9:
-                    String readString7 = parcel.readString();
-                    String readString8 = parcel.readString();
-                    String readString9 = parcel.readString();
+                    String string7 = parcel.readString();
+                    String string8 = parcel.readString();
+                    String string9 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    deleteIncidentReports(readString7, readString8, readString9);
+                    deleteIncidentReports(string7, string8, string9);
                     parcel2.writeNoException();
                     return true;
                 case 10:
-                    String readString10 = parcel.readString();
+                    String string10 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    deleteAllIncidentReports(readString10);
+                    deleteAllIncidentReports(string10);
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -245,144 +245,144 @@ public interface IIncidentManager extends IInterface {
 
             @Override // android.os.IIncidentManager
             public void reportIncident(IncidentReportArgs incidentReportArgs) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(incidentReportArgs, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(incidentReportArgs, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IIncidentManager
             public void reportIncidentToStream(IncidentReportArgs incidentReportArgs, IIncidentReportStatusListener iIncidentReportStatusListener, FileDescriptor fileDescriptor) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(incidentReportArgs, 0);
-                    obtain.writeStrongInterface(iIncidentReportStatusListener);
-                    obtain.writeRawFileDescriptor(fileDescriptor);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(incidentReportArgs, 0);
+                    parcelObtain.writeStrongInterface(iIncidentReportStatusListener);
+                    parcelObtain.writeRawFileDescriptor(fileDescriptor);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IIncidentManager
             public void reportIncidentToDumpstate(FileDescriptor fileDescriptor, IIncidentReportStatusListener iIncidentReportStatusListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeRawFileDescriptor(fileDescriptor);
-                    obtain.writeStrongInterface(iIncidentReportStatusListener);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeRawFileDescriptor(fileDescriptor);
+                    parcelObtain.writeStrongInterface(iIncidentReportStatusListener);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IIncidentManager
             public void registerSection(int i, String str, IIncidentDumpCallback iIncidentDumpCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iIncidentDumpCallback);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iIncidentDumpCallback);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IIncidentManager
             public void unregisterSection(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IIncidentManager
             public void systemRunning() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IIncidentManager
             public List<String> getIncidentReportList(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IIncidentManager
             public IncidentManager.IncidentReport getIncidentReport(String str, String str2, String str3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (IncidentManager.IncidentReport) obtain2.readTypedObject(IncidentManager.IncidentReport.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (IncidentManager.IncidentReport) parcelObtain2.readTypedObject(IncidentManager.IncidentReport.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IIncidentManager
             public void deleteIncidentReports(String str, String str2, String str3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IIncidentManager
             public void deleteAllIncidentReports(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

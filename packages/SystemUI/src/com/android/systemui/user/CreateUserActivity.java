@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.IActivityManager;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.UserManager;
 import android.window.OnBackInvokedCallback;
@@ -13,7 +14,6 @@ import com.android.settingslib.users.CreateUserDialogController;
 import com.android.systemui.R;
 import com.android.systemui.plugins.ActivityStarter;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class CreateUserActivity extends Activity {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -22,7 +22,7 @@ public class CreateUserActivity extends Activity {
     public final CreateUserActivity$$ExternalSyntheticLambda3 mBackCallback = new OnBackInvokedCallback() { // from class: com.android.systemui.user.CreateUserActivity$$ExternalSyntheticLambda3
         @Override // android.window.OnBackInvokedCallback
         public final void onBackInvoked() {
-            CreateUserActivity createUserActivity = CreateUserActivity.this;
+            CreateUserActivity createUserActivity = this.f$0;
             int i = CreateUserActivity.$r8$clinit;
             Dialog dialog = createUserActivity.mSetupUserDialog;
             if (dialog != null) {
@@ -59,7 +59,7 @@ public class CreateUserActivity extends Activity {
     }
 
     @Override // android.app.Activity
-    public final void onCreate(Bundle bundle) {
+    public final void onCreate(Bundle bundle) throws Resources.NotFoundException {
         super.onCreate(bundle);
         setShowWhenLocked(true);
         setContentView(R.layout.activity_create_new_user);
@@ -72,10 +72,10 @@ public class CreateUserActivity extends Activity {
         CreateUserActivity$$ExternalSyntheticLambda0 createUserActivity$$ExternalSyntheticLambda0 = new CreateUserActivity$$ExternalSyntheticLambda0(this);
         UserCreator userCreator = this.mUserCreator;
         userCreator.getClass();
-        Dialog createDialog = this.mCreateUserDialogController.createDialog(this, createUserActivity$$ExternalSyntheticLambda0, UserManager.isMultipleAdminEnabled() && !userCreator.userManager.hasUserRestriction("no_grant_admin") && userCreator.userManager.isAdminUser() && !booleanExtra, new CreateUserActivity$$ExternalSyntheticLambda0(this), new CreateUserActivity$$ExternalSyntheticLambda2(this, 0));
-        this.mSetupUserDialog = createDialog;
-        if (createDialog instanceof AlertDialog) {
-            ((AlertDialog) createDialog).semSetBackgroundBlurEnabled(true);
+        Dialog dialogCreateDialog = this.mCreateUserDialogController.createDialog(this, createUserActivity$$ExternalSyntheticLambda0, UserManager.isMultipleAdminEnabled() && !userCreator.userManager.hasUserRestriction("no_grant_admin") && userCreator.userManager.isAdminUser() && !booleanExtra, new CreateUserActivity$$ExternalSyntheticLambda0(this), new CreateUserActivity$$ExternalSyntheticLambda2(this, 0));
+        this.mSetupUserDialog = dialogCreateDialog;
+        if (dialogCreateDialog instanceof AlertDialog) {
+            ((AlertDialog) dialogCreateDialog).semSetBackgroundBlurEnabled(true);
         }
         this.mSetupUserDialog.show();
         getOnBackInvokedDispatcher().registerOnBackInvokedCallback(0, this.mBackCallback);

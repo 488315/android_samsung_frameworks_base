@@ -124,9 +124,9 @@ public class FabricatedOverlay {
     /* JADX INFO: Access modifiers changed from: private */
     public static String ensureValidResourceName(String str) {
         Objects.requireNonNull(str);
-        int indexOf = str.indexOf(47);
-        int indexOf2 = str.indexOf(58);
-        Preconditions.checkArgument(indexOf >= 0 && indexOf2 != 0 && indexOf - indexOf2 > 2, "\"%s\" is invalid resource name", str);
+        int iIndexOf = str.indexOf(47);
+        int iIndexOf2 = str.indexOf(58);
+        Preconditions.checkArgument(iIndexOf >= 0 && iIndexOf2 != 0 && iIndexOf - iIndexOf2 > 2, "\"%s\" is invalid resource name", str);
         return str;
     }
 

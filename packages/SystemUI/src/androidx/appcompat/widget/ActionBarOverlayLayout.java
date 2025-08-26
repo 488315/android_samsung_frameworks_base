@@ -30,7 +30,6 @@ import androidx.core.view.WindowInsetsCompat;
 import com.android.systemui.R;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ActionBarOverlayLayout extends ViewGroup implements DecorContentParent, NestedScrollingParent2, NestedScrollingParent3 {
     public static final WindowInsetsCompat NON_EMPTY_SYSTEM_WINDOW_INSETS;
@@ -68,7 +67,6 @@ public class ActionBarOverlayLayout extends ViewGroup implements DecorContentPar
     public static final Rect EMPTY_RECT = new Rect();
     public static final int[] ATTRS = {R.attr.actionBarSize, android.R.attr.windowContentOverlay};
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.appcompat.widget.ActionBarOverlayLayout$2, reason: invalid class name */
     public class AnonymousClass2 implements Runnable {
         public AnonymousClass2() {
@@ -82,7 +80,6 @@ public class ActionBarOverlayLayout extends ViewGroup implements DecorContentPar
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.appcompat.widget.ActionBarOverlayLayout$3, reason: invalid class name */
     public class AnonymousClass3 implements Runnable {
         public AnonymousClass3() {
@@ -96,7 +93,6 @@ public class ActionBarOverlayLayout extends ViewGroup implements DecorContentPar
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class LayoutParams extends ViewGroup.MarginLayoutParams {
         public LayoutParams(Context context, AttributeSet attributeSet) {
             super(context, attributeSet);
@@ -115,7 +111,6 @@ public class ActionBarOverlayLayout extends ViewGroup implements DecorContentPar
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class NoSystemUiLayoutFlagView extends View {
         public NoSystemUiLayoutFlagView(Context context) {
             super(context);
@@ -130,9 +125,9 @@ public class ActionBarOverlayLayout extends ViewGroup implements DecorContentPar
 
     static {
         WindowInsetsCompat.Builder builder = new WindowInsetsCompat.Builder();
-        Insets of = Insets.of(0, 1, 0, 1);
+        Insets insetsOf = Insets.of(0, 1, 0, 1);
         WindowInsetsCompat.BuilderImpl30 builderImpl30 = builder.mImpl;
-        builderImpl30.setSystemWindowInsets(of);
+        builderImpl30.setSystemWindowInsets(insetsOf);
         NON_EMPTY_SYSTEM_WINDOW_INSETS = builderImpl30.build();
         ZERO_INSETS = new Rect();
     }
@@ -190,15 +185,15 @@ public class ActionBarOverlayLayout extends ViewGroup implements DecorContentPar
 
     @Override // android.view.View
     public final void draw(Canvas canvas) {
-        int i;
+        int translationY;
         super.draw(canvas);
         if (this.mWindowContentOverlay != null) {
             if (this.mActionBarTop.getVisibility() == 0) {
-                i = (int) (this.mActionBarTop.getTranslationY() + this.mActionBarTop.getBottom() + 0.5f);
+                translationY = (int) (this.mActionBarTop.getTranslationY() + this.mActionBarTop.getBottom() + 0.5f);
             } else {
-                i = 0;
+                translationY = 0;
             }
-            this.mWindowContentOverlay.setBounds(0, i, getWidth(), this.mWindowContentOverlay.getIntrinsicHeight() + i);
+            this.mWindowContentOverlay.setBounds(0, translationY, getWidth(), this.mWindowContentOverlay.getIntrinsicHeight() + translationY);
             this.mWindowContentOverlay.draw(canvas);
         }
     }
@@ -234,12 +229,12 @@ public class ActionBarOverlayLayout extends ViewGroup implements DecorContentPar
     }
 
     public final void init(Context context) {
-        TypedArray obtainStyledAttributes = getContext().getTheme().obtainStyledAttributes(ATTRS);
-        this.mActionBarHeight = obtainStyledAttributes.getDimensionPixelSize(0, 0);
-        Drawable drawable = obtainStyledAttributes.getDrawable(1);
+        TypedArray typedArrayObtainStyledAttributes = getContext().getTheme().obtainStyledAttributes(ATTRS);
+        this.mActionBarHeight = typedArrayObtainStyledAttributes.getDimensionPixelSize(0, 0);
+        Drawable drawable = typedArrayObtainStyledAttributes.getDrawable(1);
         this.mWindowContentOverlay = drawable;
         setWillNotDraw(drawable == null);
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
         this.mFlingEstimator = new OverScroller(context);
     }
 
@@ -271,9 +266,9 @@ public class ActionBarOverlayLayout extends ViewGroup implements DecorContentPar
         Rect rect = this.mTmpRect;
         WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
         ViewCompat.Api21Impl.computeSystemWindowInsets(noSystemUiLayoutFlagView, windowInsetsCompat, rect);
-        boolean equals = this.mTmpRect.equals(ZERO_INSETS);
-        this.mDecorFitsSystemWindows = !equals;
-        boolean z4 = equals || (z2 && z3);
+        boolean zEquals = this.mTmpRect.equals(ZERO_INSETS);
+        this.mDecorFitsSystemWindows = !zEquals;
+        boolean z4 = zEquals || (z2 && z3);
         this.mActionBarExtendsIntoSystemInsets = z4;
         WindowDecorActionBar windowDecorActionBar = this.mActionBarVisibilityCallback;
         if (windowDecorActionBar != null) {
@@ -291,9 +286,9 @@ public class ActionBarOverlayLayout extends ViewGroup implements DecorContentPar
         int i3 = rect3.right;
         int i4 = rect3.bottom;
         WindowInsetsCompat.Impl impl = windowInsetsCompat2.mImpl;
-        WindowInsetsCompat inset = impl.inset(i, i2, i3, i4);
-        this.mBaseInnerInsets = inset;
-        if (!this.mLastBaseInnerInsets.equals(inset)) {
+        WindowInsetsCompat windowInsetsCompatInset = impl.inset(i, i2, i3, i4);
+        this.mBaseInnerInsets = windowInsetsCompatInset;
+        if (!this.mLastBaseInnerInsets.equals(windowInsetsCompatInset)) {
             this.mLastBaseInnerInsets = this.mBaseInnerInsets;
             padding = true;
         }
@@ -346,9 +341,9 @@ public class ActionBarOverlayLayout extends ViewGroup implements DecorContentPar
         pullChildren();
         measureChildWithMargins(this.mActionBarTop, i, 0, i2, 0);
         LayoutParams layoutParams = (LayoutParams) this.mActionBarTop.getLayoutParams();
-        int max = Math.max(0, this.mActionBarTop.getMeasuredWidth() + ((ViewGroup.MarginLayoutParams) layoutParams).leftMargin + ((ViewGroup.MarginLayoutParams) layoutParams).rightMargin);
-        int max2 = Math.max(0, this.mActionBarTop.getMeasuredHeight() + ((ViewGroup.MarginLayoutParams) layoutParams).topMargin + ((ViewGroup.MarginLayoutParams) layoutParams).bottomMargin);
-        int combineMeasuredStates = View.combineMeasuredStates(0, this.mActionBarTop.getMeasuredState());
+        int iMax = Math.max(0, this.mActionBarTop.getMeasuredWidth() + ((ViewGroup.MarginLayoutParams) layoutParams).leftMargin + ((ViewGroup.MarginLayoutParams) layoutParams).rightMargin);
+        int iMax2 = Math.max(0, this.mActionBarTop.getMeasuredHeight() + ((ViewGroup.MarginLayoutParams) layoutParams).topMargin + ((ViewGroup.MarginLayoutParams) layoutParams).bottomMargin);
+        int iCombineMeasuredStates = View.combineMeasuredStates(0, this.mActionBarTop.getMeasuredState());
         WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
         boolean z = (getWindowSystemUiVisibility() & 256) != 0;
         if (z) {
@@ -363,9 +358,9 @@ public class ActionBarOverlayLayout extends ViewGroup implements DecorContentPar
         WindowInsetsCompat windowInsetsCompat = this.mBaseInnerInsets;
         this.mInnerInsets = windowInsetsCompat;
         if (this.mOverlayMode || z || !this.mDecorFitsSystemWindows) {
-            Insets of = this.mActionBarExtendsIntoSystemInsets ? Insets.of(windowInsetsCompat.getSystemWindowInsetLeft(), Math.max(this.mInnerInsets.getSystemWindowInsetTop(), measuredHeight), this.mInnerInsets.getSystemWindowInsetRight(), Math.max(this.mInnerInsets.getSystemWindowInsetBottom(), 0)) : Insets.of(windowInsetsCompat.getSystemWindowInsetLeft(), this.mInnerInsets.getSystemWindowInsetTop() + measuredHeight, this.mInnerInsets.getSystemWindowInsetRight(), this.mInnerInsets.getSystemWindowInsetBottom());
+            Insets insetsOf = this.mActionBarExtendsIntoSystemInsets ? Insets.of(windowInsetsCompat.getSystemWindowInsetLeft(), Math.max(this.mInnerInsets.getSystemWindowInsetTop(), measuredHeight), this.mInnerInsets.getSystemWindowInsetRight(), Math.max(this.mInnerInsets.getSystemWindowInsetBottom(), 0)) : Insets.of(windowInsetsCompat.getSystemWindowInsetLeft(), this.mInnerInsets.getSystemWindowInsetTop() + measuredHeight, this.mInnerInsets.getSystemWindowInsetRight(), this.mInnerInsets.getSystemWindowInsetBottom());
             WindowInsetsCompat.BuilderImpl30 builderImpl30 = new WindowInsetsCompat.Builder(this.mInnerInsets).mImpl;
-            builderImpl30.setSystemWindowInsets(of);
+            builderImpl30.setSystemWindowInsets(insetsOf);
             this.mInnerInsets = builderImpl30.build();
         } else {
             if (this.mActionBarExtendsIntoSystemInsets) {
@@ -388,10 +383,10 @@ public class ActionBarOverlayLayout extends ViewGroup implements DecorContentPar
         }
         measureChildWithMargins(this.mContent, i, 0, i2, 0);
         LayoutParams layoutParams2 = (LayoutParams) this.mContent.getLayoutParams();
-        int max3 = Math.max(max, this.mContent.getMeasuredWidth() + ((ViewGroup.MarginLayoutParams) layoutParams2).leftMargin + ((ViewGroup.MarginLayoutParams) layoutParams2).rightMargin);
-        int max4 = Math.max(max2, this.mContent.getMeasuredHeight() + ((ViewGroup.MarginLayoutParams) layoutParams2).topMargin + ((ViewGroup.MarginLayoutParams) layoutParams2).bottomMargin);
-        int combineMeasuredStates2 = View.combineMeasuredStates(combineMeasuredStates, this.mContent.getMeasuredState());
-        setMeasuredDimension(View.resolveSizeAndState(Math.max(getPaddingRight() + getPaddingLeft() + max3, getSuggestedMinimumWidth()), i, combineMeasuredStates2), View.resolveSizeAndState(Math.max(getPaddingBottom() + getPaddingTop() + max4, getSuggestedMinimumHeight()), i2, combineMeasuredStates2 << 16));
+        int iMax3 = Math.max(iMax, this.mContent.getMeasuredWidth() + ((ViewGroup.MarginLayoutParams) layoutParams2).leftMargin + ((ViewGroup.MarginLayoutParams) layoutParams2).rightMargin);
+        int iMax4 = Math.max(iMax2, this.mContent.getMeasuredHeight() + ((ViewGroup.MarginLayoutParams) layoutParams2).topMargin + ((ViewGroup.MarginLayoutParams) layoutParams2).bottomMargin);
+        int iCombineMeasuredStates2 = View.combineMeasuredStates(iCombineMeasuredStates, this.mContent.getMeasuredState());
+        setMeasuredDimension(View.resolveSizeAndState(Math.max(getPaddingRight() + getPaddingLeft() + iMax3, getSuggestedMinimumWidth()), i, iCombineMeasuredStates2), View.resolveSizeAndState(Math.max(getPaddingBottom() + getPaddingTop() + iMax4, getSuggestedMinimumHeight()), i2, iCombineMeasuredStates2 << 16));
     }
 
     @Override // android.view.ViewGroup, android.view.ViewParent
@@ -486,11 +481,11 @@ public class ActionBarOverlayLayout extends ViewGroup implements DecorContentPar
         if (this.mContent == null) {
             this.mContent = (ContentFrameLayout) findViewById(R.id.action_bar_activity_content);
             this.mActionBarTop = (ActionBarContainer) findViewById(R.id.action_bar_container);
-            View findViewById = findViewById(R.id.action_bar);
-            if (!(findViewById instanceof Toolbar)) {
-                throw new IllegalStateException("Can't make a decor toolbar out of ".concat(findViewById.getClass().getSimpleName()));
+            View viewFindViewById = findViewById(R.id.action_bar);
+            if (!(viewFindViewById instanceof Toolbar)) {
+                throw new IllegalStateException("Can't make a decor toolbar out of ".concat(viewFindViewById.getClass().getSimpleName()));
             }
-            Toolbar toolbar = (Toolbar) findViewById;
+            Toolbar toolbar = (Toolbar) viewFindViewById;
             if (toolbar.mWrapper == null) {
                 toolbar.mWrapper = new ToolbarWidgetWrapper(toolbar, true);
             }

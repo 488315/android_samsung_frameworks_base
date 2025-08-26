@@ -7,7 +7,9 @@ import java.io.IOException;
 import java.net.Socket;
 import java.security.GeneralSecurityException;
 import java.security.KeyStore;
+import java.security.KeyStoreException;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.Iterator;
@@ -23,7 +25,7 @@ public class NetworkSecurityTrustManager extends X509ExtendedTrustManager {
     private final Object mIssuersLock = new Object();
     private final NetworkSecurityConfig mNetworkSecurityConfig;
 
-    public NetworkSecurityTrustManager(NetworkSecurityConfig networkSecurityConfig) {
+    public NetworkSecurityTrustManager(NetworkSecurityConfig networkSecurityConfig) throws NoSuchAlgorithmException, IOException, KeyStoreException, CertificateException {
         if (networkSecurityConfig == null) {
             throw new NullPointerException("config must not be null");
         }
@@ -68,19 +70,19 @@ public class NetworkSecurityTrustManager extends X509ExtendedTrustManager {
         checkPins(this.mDelegate.getTrustedChainForServer(x509CertificateArr, str, sSLEngine));
     }
 
-    public List<X509Certificate> checkServerTrusted(X509Certificate[] x509CertificateArr, String str, String str2) throws CertificateException {
-        List<X509Certificate> checkServerTrusted = this.mDelegate.checkServerTrusted(x509CertificateArr, str, str2);
-        checkPins(checkServerTrusted);
-        return checkServerTrusted;
+    public List<X509Certificate> checkServerTrusted(X509Certificate[] x509CertificateArr, String str, String str2) throws NoSuchAlgorithmException, CertificateException {
+        List<X509Certificate> listCheckServerTrusted = this.mDelegate.checkServerTrusted(x509CertificateArr, str, str2);
+        checkPins(listCheckServerTrusted);
+        return listCheckServerTrusted;
     }
 
-    public List<X509Certificate> checkServerTrusted(X509Certificate[] x509CertificateArr, byte[] bArr, byte[] bArr2, String str, String str2) throws CertificateException {
-        List<X509Certificate> checkServerTrusted = this.mDelegate.checkServerTrusted(x509CertificateArr, bArr, bArr2, str, str2);
-        checkPins(checkServerTrusted);
-        return checkServerTrusted;
+    public List<X509Certificate> checkServerTrusted(X509Certificate[] x509CertificateArr, byte[] bArr, byte[] bArr2, String str, String str2) throws NoSuchAlgorithmException, CertificateException {
+        List<X509Certificate> listCheckServerTrusted = this.mDelegate.checkServerTrusted(x509CertificateArr, bArr, bArr2, str, str2);
+        checkPins(listCheckServerTrusted);
+        return listCheckServerTrusted;
     }
 
-    private void checkPins(List<X509Certificate> list) throws CertificateException {
+    private void checkPins(List<X509Certificate> list) throws NoSuchAlgorithmException, CertificateException {
         PinSet pins = this.mNetworkSecurityConfig.getPins();
         if (pins.pins.isEmpty() || System.currentTimeMillis() > pins.expirationTime || !isPinningEnforced(list)) {
             return;

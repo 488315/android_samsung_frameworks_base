@@ -2,6 +2,7 @@ package com.android.systemui.qs.bar;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.provider.Settings;
 import android.util.Log;
@@ -23,7 +24,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class VoIPTranslator implements VideoCallMicModeBar.VideoCallMicModeBarBase {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -41,11 +41,9 @@ public final class VoIPTranslator implements VideoCallMicModeBar.VideoCallMicMod
     private final SettingsHelper.OnChangedCallback settingsListener = new SettingsHelper.OnChangedCallback() { // from class: com.android.systemui.qs.bar.VoIPTranslator$settingsListener$1
         @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
         public final void onChanged(Uri uri) {
-            SettingsHelper settingsHelper;
             if (uri != null && uri.equals(Settings.System.getUriFor(SettingsHelper.INDEX_VOIP_TRANSLATOR_ENABLE))) {
-                VoIPTranslator voIPTranslator = VoIPTranslator.this;
-                settingsHelper = voIPTranslator.settingsHelper;
-                boolean voIPTranslatorEnable = settingsHelper.getVoIPTranslatorEnable();
+                VoIPTranslator voIPTranslator = this.this$0;
+                boolean voIPTranslatorEnable = voIPTranslator.settingsHelper.getVoIPTranslatorEnable();
                 EmergencyButtonController$$ExternalSyntheticOutline0.m("onChanged() - voip_translator_enable : ", "VoIPTranslator", voIPTranslatorEnable);
                 voIPTranslator.isVoIPEnabled = voIPTranslatorEnable;
                 voIPTranslator.isPrerequisiteMet = VoIPTranslator.updatePrerequisite();
@@ -54,7 +52,6 @@ public final class VoIPTranslator implements VideoCallMicModeBar.VideoCallMicMod
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -94,14 +91,14 @@ public final class VoIPTranslator implements VideoCallMicModeBar.VideoCallMicMod
 
     @Override // com.android.systemui.qs.bar.VideoCallMicModeBar.VideoCallMicModeBarBase
     public final void inflate(View view) {
-        View inflate = this.util.inflate(R.layout.sec_voip_translator_button, (ViewGroup) view, true);
-        if (inflate != null) {
-            this.voIPTranslatorContainer = (LinearLayout) inflate.findViewById(R.id.voip_translator_container);
-            this.voIpTranslatorText = (TextView) inflate.findViewById(R.id.voip_translator_text);
+        View viewInflate = this.util.inflate(R.layout.sec_voip_translator_button, (ViewGroup) view, true);
+        if (viewInflate != null) {
+            this.voIPTranslatorContainer = (LinearLayout) viewInflate.findViewById(R.id.voip_translator_container);
+            this.voIpTranslatorText = (TextView) viewInflate.findViewById(R.id.voip_translator_text);
         } else {
-            inflate = null;
+            viewInflate = null;
         }
-        this.voIPTranslatorButton = inflate;
+        this.voIPTranslatorButton = viewInflate;
     }
 
     @Override // com.android.systemui.qs.bar.VideoCallMicModeBar.VideoCallMicModeBarBase
@@ -124,7 +121,7 @@ public final class VoIPTranslator implements VideoCallMicModeBar.VideoCallMicMod
     public final void setClickListener(final Function1 function1) {
         View view = this.voIPTranslatorButton;
         if (view != null) {
-            view.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qs.bar.VoIPTranslator$setClickListener$1
+            view.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qs.bar.VoIPTranslator.setClickListener.1
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view2) {
                     Log.d("VoIPTranslator", "onClicked");
@@ -135,14 +132,14 @@ public final class VoIPTranslator implements VideoCallMicModeBar.VideoCallMicMod
                     intent.setPackage("com.samsung.android.callassistant");
                     ((PanelInteractorImpl) voIPTranslator.panelInteractor).collapsePanels();
                     voIPTranslator.context.sendBroadcast(intent);
-                    function1.mo779invoke(SystemUIAnalytics.EID_LIVE_TRANSLATE);
+                    function1.mo781invoke(SystemUIAnalytics.EID_LIVE_TRANSLATE);
                 }
             });
         }
     }
 
     @Override // com.android.systemui.qs.bar.VideoCallMicModeBar.VideoCallMicModeBarBase
-    public final void updateFontScale() {
+    public final void updateFontScale() throws Resources.NotFoundException {
         TextView textView = this.voIpTranslatorText;
         this.util.getClass();
         FontSizeUtils.updateFontSize(textView, R.dimen.sec_style_qs_tile_text_size, 0.8f, 1.3f);

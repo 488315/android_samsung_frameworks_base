@@ -33,11 +33,11 @@ public class ClipDrawable extends DrawableWrapper {
 
     @Override // android.graphics.drawable.DrawableWrapper, android.graphics.drawable.Drawable
     public void inflate(Resources resources, XmlPullParser xmlPullParser, AttributeSet attributeSet, Resources.Theme theme) throws XmlPullParserException, IOException {
-        TypedArray obtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.ClipDrawable);
+        TypedArray typedArrayObtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.ClipDrawable);
         super.inflate(resources, xmlPullParser, attributeSet, theme);
-        updateStateFromTypedArray(obtainAttributes);
-        verifyRequiredAttributes(obtainAttributes);
-        obtainAttributes.recycle();
+        updateStateFromTypedArray(typedArrayObtainAttributes);
+        verifyRequiredAttributes(typedArrayObtainAttributes);
+        typedArrayObtainAttributes.recycle();
     }
 
     @Override // android.graphics.drawable.DrawableWrapper, android.graphics.drawable.Drawable
@@ -47,14 +47,14 @@ public class ClipDrawable extends DrawableWrapper {
         if (clipState == null || clipState.mThemeAttrs == null) {
             return;
         }
-        TypedArray resolveAttributes = theme.resolveAttributes(clipState.mThemeAttrs, R.styleable.ClipDrawable);
+        TypedArray typedArrayResolveAttributes = theme.resolveAttributes(clipState.mThemeAttrs, R.styleable.ClipDrawable);
         try {
-            updateStateFromTypedArray(resolveAttributes);
-            verifyRequiredAttributes(resolveAttributes);
+            updateStateFromTypedArray(typedArrayResolveAttributes);
+            verifyRequiredAttributes(typedArrayResolveAttributes);
         } catch (XmlPullParserException e) {
             rethrowAsRuntimeException(e);
         } finally {
-            resolveAttributes.recycle();
+            typedArrayResolveAttributes.recycle();
         }
     }
 
@@ -105,16 +105,16 @@ public class ClipDrawable extends DrawableWrapper {
         Rect rect = this.mTmpRect;
         Rect bounds = getBounds();
         int level = getLevel();
-        int width = bounds.width();
+        int iWidth = bounds.width();
         if ((this.mState.mOrientation & 1) != 0) {
-            width -= ((10000 - level) * width) / 10000;
+            iWidth -= ((10000 - level) * iWidth) / 10000;
         }
-        int i = width;
-        int height = bounds.height();
+        int i = iWidth;
+        int iHeight = bounds.height();
         if ((this.mState.mOrientation & 2) != 0) {
-            height -= ((10000 - level) * height) / 10000;
+            iHeight -= ((10000 - level) * iHeight) / 10000;
         }
-        int i2 = height;
+        int i2 = iHeight;
         Gravity.apply(this.mState.mGravity, i, i2, bounds, rect, getLayoutDirection());
         if (i <= 0 || i2 <= 0) {
             return;

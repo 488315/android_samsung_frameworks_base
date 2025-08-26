@@ -2,11 +2,13 @@ package com.android.systemui.statusbar.phone;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.WindowInsets;
+import android.widget.LinearLayout;
 import com.android.keyguard.AlphaOptimizedLinearLayout;
 import com.android.systemui.BasicRune;
 import com.android.systemui.R;
@@ -17,12 +19,10 @@ import com.android.systemui.statusbar.notification.stack.ViewState;
 import com.android.systemui.util.DeviceState;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class StatusIconContainer extends AlphaOptimizedLinearLayout {
     public static final AnonymousClass1 ADD_ICON_PROPERTIES;
     public static final AnonymousClass3 ANIMATE_ALL_PROPERTIES;
-    public static final AnonymousClass2 X_ANIMATION_PROPERTIES;
     public final Configuration mConfiguration;
     public int mCutoutRightSideAvailableWidth;
     public int mCutoutRightSideIconsWidth;
@@ -37,9 +37,7 @@ public class StatusIconContainer extends AlphaOptimizedLinearLayout {
     public boolean mShouldRestrictIcons;
     public SidelingCutoutContainerInfo mSidelingCutoutContainerInfo;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class StatusIconState extends ViewState {
-        public float distanceToViewEnd;
         public boolean justAdded;
         public boolean qsExpansionTransitioning;
         public int visibleState;
@@ -49,14 +47,15 @@ public class StatusIconContainer extends AlphaOptimizedLinearLayout {
             this.visibleState = 0;
             this.justAdded = true;
             this.qsExpansionTransitioning = false;
-            this.distanceToViewEnd = -1.0f;
         }
 
         /* JADX WARN: Multi-variable type inference failed */
         @Override // com.android.systemui.statusbar.notification.stack.ViewState
         public final void applyToView(View view) {
             AnimationProperties animationProperties;
-            float width = (view.getParent() instanceof View ? ((View) view.getParent()).getWidth() : 0.0f) - this.mXTranslation;
+            if (view.getParent() instanceof View) {
+                ((View) view.getParent()).getWidth();
+            }
             if (view instanceof StatusIconDisplayable) {
                 StatusIconDisplayable statusIconDisplayable = (StatusIconDisplayable) view;
                 boolean z = true;
@@ -66,17 +65,13 @@ public class StatusIconContainer extends AlphaOptimizedLinearLayout {
                     statusIconDisplayable.setVisibleState(2);
                     animationProperties = StatusIconContainer.ADD_ICON_PROPERTIES;
                 } else {
-                    int visibleState = statusIconDisplayable.getVisibleState();
-                    int i = this.visibleState;
                     animationProperties = null;
-                    if (visibleState != i) {
+                    if (statusIconDisplayable.getVisibleState() != this.visibleState) {
                         if (statusIconDisplayable.getVisibleState() == 0 && this.visibleState == 2) {
                             z = false;
                         } else {
                             animationProperties = StatusIconContainer.ANIMATE_ALL_PROPERTIES;
                         }
-                    } else if (i != 2 && this.distanceToViewEnd != width) {
-                        animationProperties = StatusIconContainer.X_ANIMATION_PROPERTIES;
                     }
                 }
                 statusIconDisplayable.setVisibleState(this.visibleState, z);
@@ -87,13 +82,11 @@ public class StatusIconContainer extends AlphaOptimizedLinearLayout {
                 }
                 this.qsExpansionTransitioning = false;
                 this.justAdded = false;
-                this.distanceToViewEnd = width;
             }
         }
     }
 
     /* JADX WARN: Type inference failed for: r0v0, types: [com.android.systemui.statusbar.notification.stack.AnimationProperties, com.android.systemui.statusbar.phone.StatusIconContainer$1] */
-    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.systemui.statusbar.notification.stack.AnimationProperties, com.android.systemui.statusbar.phone.StatusIconContainer$2] */
     /* JADX WARN: Type inference failed for: r0v2, types: [com.android.systemui.statusbar.notification.stack.AnimationProperties, com.android.systemui.statusbar.phone.StatusIconContainer$3] */
     static {
         ?? r0 = new AnimationProperties() { // from class: com.android.systemui.statusbar.phone.StatusIconContainer.1
@@ -113,7 +106,7 @@ public class StatusIconContainer extends AlphaOptimizedLinearLayout {
         r0.duration = 200L;
         r0.delay = 50L;
         ADD_ICON_PROPERTIES = r0;
-        ?? r02 = new AnimationProperties() { // from class: com.android.systemui.statusbar.phone.StatusIconContainer.2
+        new AnimationProperties() { // from class: com.android.systemui.statusbar.phone.StatusIconContainer.2
             public final AnimationFilter mAnimationFilter;
 
             {
@@ -126,10 +119,8 @@ public class StatusIconContainer extends AlphaOptimizedLinearLayout {
             public final AnimationFilter getAnimationFilter() {
                 return this.mAnimationFilter;
             }
-        };
-        r02.duration = 200L;
-        X_ANIMATION_PROPERTIES = r02;
-        ?? r03 = new AnimationProperties() { // from class: com.android.systemui.statusbar.phone.StatusIconContainer.3
+        }.duration = 200L;
+        ?? r02 = new AnimationProperties() { // from class: com.android.systemui.statusbar.phone.StatusIconContainer.3
             public final AnimationFilter mAnimationFilter;
 
             {
@@ -147,8 +138,8 @@ public class StatusIconContainer extends AlphaOptimizedLinearLayout {
                 return this.mAnimationFilter;
             }
         };
-        r03.duration = 200L;
-        ANIMATE_ALL_PROPERTIES = r03;
+        r02.duration = 200L;
+        ANIMATE_ALL_PROPERTIES = r02;
     }
 
     public StatusIconContainer(Context context) {
@@ -169,11 +160,11 @@ public class StatusIconContainer extends AlphaOptimizedLinearLayout {
 
     @Override // android.view.View
     public final WindowInsets onApplyWindowInsets(WindowInsets windowInsets) {
-        if (BasicRune.STATUS_POP_OVER_PANEL_BAR && windowInsets.getDisplayCutout() != null && this.mIndicatorCutoutUtil != null && DeviceState.isShowingPopOverStatusBar() && isShown()) {
+        if (BasicRune.STATUS_POP_OVER_PANEL_BAR && windowInsets.getDisplayCutout() != null && this.mIndicatorCutoutUtil != null && DeviceState.isShowingPopOverStatusBar(getContext()) && isShown()) {
             post(new Runnable() { // from class: com.android.systemui.statusbar.phone.StatusIconContainer$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    StatusIconContainer statusIconContainer = StatusIconContainer.this;
+                    StatusIconContainer statusIconContainer = this.f$0;
                     Rect displayCutoutAreaToExclude = statusIconContainer.mIndicatorCutoutUtil.getDisplayCutoutAreaToExclude();
                     if (displayCutoutAreaToExclude != null) {
                         SidelingCutoutContainerInfo sidelingCutoutContainerInfo = statusIconContainer.mSidelingCutoutContainerInfo;
@@ -190,11 +181,11 @@ public class StatusIconContainer extends AlphaOptimizedLinearLayout {
     }
 
     @Override // android.view.View
-    public final void onConfigurationChanged(Configuration configuration) {
+    public final void onConfigurationChanged(Configuration configuration) throws Resources.NotFoundException {
         super.onConfigurationChanged(configuration);
-        int diff = configuration.diff(this.mConfiguration);
+        int iDiff = configuration.diff(this.mConfiguration);
         this.mConfiguration.setTo(configuration);
-        if ((1073745920 & diff) != 0) {
+        if ((1073745920 & iDiff) != 0) {
             reloadDimens$2();
         }
     }
@@ -275,37 +266,126 @@ public class StatusIconContainer extends AlphaOptimizedLinearLayout {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:33:0x0089, code lost:
-    
-        if (r10 <= r14) goto L33;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:34:0x008b, code lost:
-    
-        r3 = r10;
-        r5 = r3;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:37:0x008e, code lost:
-    
-        r5 = r10;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:47:0x009d, code lost:
-    
-        if (r10 <= r14) goto L33;
-     */
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:92:0x0147  */
-    /* JADX WARN: Removed duplicated region for block: B:96:0x014c  */
+    /* JADX WARN: Removed duplicated region for block: B:33:0x008b A[PHI: r10
+      0x008b: PHI (r10v9 int) = (r10v7 int), (r10v12 int) binds: [B:40:0x009d, B:32:0x0089] A[DONT_GENERATE, DONT_INLINE]] */
+    /* JADX WARN: Removed duplicated region for block: B:34:0x008e A[PHI: r10
+      0x008e: PHI (r10v8 int) = (r10v7 int), (r10v12 int) binds: [B:40:0x009d, B:32:0x0089] A[DONT_GENERATE, DONT_INLINE]] */
+    /* JADX WARN: Removed duplicated region for block: B:88:0x0147  */
+    /* JADX WARN: Removed duplicated region for block: B:89:0x014c  */
     @Override // android.widget.LinearLayout, android.view.View
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void onMeasure(int r14, int r15) {
-        /*
-            Method dump skipped, instructions count: 370
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.phone.StatusIconContainer.onMeasure(int, int):void");
+    public final void onMeasure(int i, int i2) {
+        int paddingTop;
+        IndicatorCutoutUtil indicatorCutoutUtil;
+        Rect displayCutoutAreaToExclude;
+        int dimensionPixelSize;
+        int viewTotalMeasuredWidth;
+        this.mMeasureViews.clear();
+        int mode = View.MeasureSpec.getMode(i);
+        int size = View.MeasureSpec.getSize(i);
+        int childCount = getChildCount();
+        int iMax = 0;
+        for (int i3 = 0; i3 < childCount; i3++) {
+            StatusIconDisplayable statusIconDisplayable = (StatusIconDisplayable) getChildAt(i3);
+            if (statusIconDisplayable.isIconVisible() && !statusIconDisplayable.isIconBlocked() && !this.mIgnoredSlots.contains(statusIconDisplayable.getSlot())) {
+                this.mMeasureViews.add((View) statusIconDisplayable);
+            }
+        }
+        int size2 = this.mMeasureViews.size();
+        int i4 = size2 <= 20 ? 20 : 19;
+        int i5 = ((LinearLayout) this).mPaddingLeft + ((LinearLayout) this).mPaddingRight;
+        int iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(size, 0);
+        this.mNeedsUnderflow = this.mShouldRestrictIcons && size2 > 20;
+        int i6 = 0;
+        int i7 = i5;
+        boolean z = true;
+        while (i6 < size2) {
+            View view = (View) this.mMeasureViews.get((size2 - i6) - 1);
+            measureChild(view, iMakeMeasureSpec, i2);
+            int i8 = i6 == size2 + (-1) ? 0 : this.mIconSpacing;
+            if (!this.mShouldRestrictIcons) {
+                viewTotalMeasuredWidth = getViewTotalMeasuredWidth(view) + i8 + i5;
+                if (viewTotalMeasuredWidth <= size) {
+                }
+            } else if (i6 < i4 && z) {
+                viewTotalMeasuredWidth = getViewTotalMeasuredWidth(view) + i8 + i5;
+                if (viewTotalMeasuredWidth <= size) {
+                    i7 = viewTotalMeasuredWidth;
+                    i5 = i7;
+                } else {
+                    i5 = viewTotalMeasuredWidth;
+                }
+            } else if (z) {
+                z = false;
+                if (i5 <= size) {
+                    i7 = i5;
+                }
+            }
+            i6++;
+        }
+        if (BasicRune.STATUS_LAYOUT_SIDELING_CUTOUT && (indicatorCutoutUtil = this.mIndicatorCutoutUtil) != null && this.mSidelingCutoutContainerInfo != null && (displayCutoutAreaToExclude = indicatorCutoutUtil.getDisplayCutoutAreaToExclude()) != null) {
+            this.mCutoutRightSideIconsWidth = 0;
+            SidelingCutoutContainerInfo sidelingCutoutContainerInfo = this.mSidelingCutoutContainerInfo;
+            this.mCutoutRightSideAvailableWidth = sidelingCutoutContainerInfo != null ? sidelingCutoutContainerInfo.getRightSideAvailableWidth(displayCutoutAreaToExclude) : 0;
+            int i9 = 0;
+            while (true) {
+                if (i9 >= size2) {
+                    dimensionPixelSize = 0;
+                    break;
+                }
+                View view2 = (View) this.mMeasureViews.get((size2 - i9) - 1);
+                int i10 = i9 == size2 + (-1) ? 0 : this.mIconSpacing;
+                if (this.mShouldRestrictIcons) {
+                    int viewTotalMeasuredWidth2 = getViewTotalMeasuredWidth(view2) + i10 + this.mCutoutRightSideIconsWidth;
+                    this.mCutoutRightSideIconsWidth = viewTotalMeasuredWidth2;
+                    if (viewTotalMeasuredWidth2 - this.mCutoutRightSideAvailableWidth > 0) {
+                        dimensionPixelSize = (getResources().getDimensionPixelSize(R.dimen.indicator_marquee_max_shift) * 2) + displayCutoutAreaToExclude.width() + (getViewTotalMeasuredWidth(view2) - (this.mCutoutRightSideIconsWidth - this.mCutoutRightSideAvailableWidth));
+                        break;
+                    }
+                }
+                i9++;
+            }
+            float f = dimensionPixelSize;
+            this.mDeltaWidth = f;
+            i7 = (int) (i7 + f);
+            size = (int) (size + f);
+            i5 = (int) (i5 + f);
+        }
+        if (i7 <= ((LinearLayout) this).mPaddingLeft + ((LinearLayout) this).mPaddingRight) {
+            size = 0;
+        } else if (i7 >= 0 && i7 < size) {
+            size = i7;
+        }
+        if (mode != 1073741824) {
+            if (mode == Integer.MIN_VALUE && i5 > size) {
+                this.mNeedsUnderflow = true;
+            }
+            ArrayList arrayList = this.mMeasureViews;
+            if (View.MeasureSpec.getMode(i2) != 1073741824) {
+                paddingTop = View.MeasureSpec.getSize(i2);
+            } else {
+                int size3 = arrayList.size();
+                int i11 = 0;
+                while (i11 < size3) {
+                    Object obj = arrayList.get(i11);
+                    i11++;
+                    iMax = Math.max(((View) obj).getMeasuredHeight(), iMax);
+                }
+                paddingTop = getPaddingTop() + iMax + getPaddingBottom();
+            }
+            setMeasuredDimension(i5, paddingTop);
+        }
+        if (!this.mNeedsUnderflow && i5 > size) {
+            this.mNeedsUnderflow = true;
+        }
+        i5 = size;
+        ArrayList arrayList2 = this.mMeasureViews;
+        if (View.MeasureSpec.getMode(i2) != 1073741824) {
+        }
+        setMeasuredDimension(i5, paddingTop);
     }
 
     @Override // android.view.ViewGroup
@@ -322,8 +402,8 @@ public class StatusIconContainer extends AlphaOptimizedLinearLayout {
         view.setTag(R.id.status_bar_view_state_tag, null);
     }
 
-    public final void reloadDimens$2() {
-        getResources().getDimensionPixelSize(17106383);
+    public final void reloadDimens$2() throws Resources.NotFoundException {
+        getResources().getDimensionPixelSize(17106384);
         getResources().getDimensionPixelSize(R.dimen.overflow_icon_dot_padding);
         this.mIconSpacing = getResources().getDimensionPixelSize(R.dimen.status_bar_system_icon_spacing);
         getResources().getDimensionPixelSize(R.dimen.overflow_dot_radius);
@@ -335,7 +415,7 @@ public class StatusIconContainer extends AlphaOptimizedLinearLayout {
         }
     }
 
-    public StatusIconContainer(Context context, AttributeSet attributeSet) {
+    public StatusIconContainer(Context context, AttributeSet attributeSet) throws Resources.NotFoundException {
         super(context, attributeSet);
         this.mShouldRestrictIcons = true;
         this.mLayoutStates = new ArrayList();

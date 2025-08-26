@@ -24,42 +24,42 @@ public class StatsBootstrapAtomValue implements Parcelable {
 
     @Override // android.os.Parcelable
     public final void writeToParcel(Parcel parcel, int i) {
-        int dataPosition = parcel.dataPosition();
+        int iDataPosition = parcel.dataPosition();
         parcel.writeInt(0);
         parcel.writeTypedObject(this.value, i);
         parcel.writeTypedArray(this.annotations, i);
-        int dataPosition2 = parcel.dataPosition();
-        parcel.setDataPosition(dataPosition);
-        parcel.writeInt(dataPosition2 - dataPosition);
-        parcel.setDataPosition(dataPosition2);
+        int iDataPosition2 = parcel.dataPosition();
+        parcel.setDataPosition(iDataPosition);
+        parcel.writeInt(iDataPosition2 - iDataPosition);
+        parcel.setDataPosition(iDataPosition2);
     }
 
     public final void readFromParcel(Parcel parcel) {
-        int dataPosition = parcel.dataPosition();
-        int readInt = parcel.readInt();
+        int iDataPosition = parcel.dataPosition();
+        int i = parcel.readInt();
         try {
-            if (readInt < 4) {
+            if (i < 4) {
                 throw new BadParcelableException("Parcelable too small");
             }
-            if (parcel.dataPosition() - dataPosition < readInt) {
+            if (parcel.dataPosition() - iDataPosition < i) {
                 this.value = (Primitive) parcel.readTypedObject(Primitive.CREATOR);
-                if (parcel.dataPosition() - dataPosition < readInt) {
+                if (parcel.dataPosition() - iDataPosition < i) {
                     this.annotations = (Annotation[]) parcel.createTypedArray(Annotation.CREATOR);
-                    if (dataPosition > Integer.MAX_VALUE - readInt) {
+                    if (iDataPosition > Integer.MAX_VALUE - i) {
                         throw new BadParcelableException("Overflow in the size of parcelable");
                     }
-                } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                } else if (iDataPosition > Integer.MAX_VALUE - i) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
-            } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+            } else if (iDataPosition > Integer.MAX_VALUE - i) {
                 throw new BadParcelableException("Overflow in the size of parcelable");
             }
-            parcel.setDataPosition(dataPosition + readInt);
+            parcel.setDataPosition(iDataPosition + i);
         } catch (Throwable th) {
-            if (dataPosition > Integer.MAX_VALUE - readInt) {
+            if (iDataPosition > Integer.MAX_VALUE - i) {
                 throw new BadParcelableException("Overflow in the size of parcelable");
             }
-            parcel.setDataPosition(dataPosition + readInt);
+            parcel.setDataPosition(iDataPosition + i);
             throw th;
         }
     }
@@ -74,11 +74,11 @@ public class StatsBootstrapAtomValue implements Parcelable {
             return 0;
         }
         if (obj instanceof Object[]) {
-            int i = 0;
+            int iDescribeContents = 0;
             for (Object obj2 : (Object[]) obj) {
-                i |= describeContents(obj2);
+                iDescribeContents |= describeContents(obj2);
             }
-            return i;
+            return iDescribeContents;
         }
         if (obj instanceof Parcelable) {
             return ((Parcelable) obj).describeContents();
@@ -258,31 +258,31 @@ public class StatsBootstrapAtomValue implements Parcelable {
         }
 
         public void readFromParcel(Parcel parcel) {
-            int readInt = parcel.readInt();
-            switch (readInt) {
+            int i = parcel.readInt();
+            switch (i) {
                 case 0:
-                    _set(readInt, Boolean.valueOf(parcel.readBoolean()));
+                    _set(i, Boolean.valueOf(parcel.readBoolean()));
                     return;
                 case 1:
-                    _set(readInt, Integer.valueOf(parcel.readInt()));
+                    _set(i, Integer.valueOf(parcel.readInt()));
                     return;
                 case 2:
-                    _set(readInt, Long.valueOf(parcel.readLong()));
+                    _set(i, Long.valueOf(parcel.readLong()));
                     return;
                 case 3:
-                    _set(readInt, Float.valueOf(parcel.readFloat()));
+                    _set(i, Float.valueOf(parcel.readFloat()));
                     return;
                 case 4:
-                    _set(readInt, parcel.readString());
+                    _set(i, parcel.readString());
                     return;
                 case 5:
-                    _set(readInt, parcel.createByteArray());
+                    _set(i, parcel.createByteArray());
                     return;
                 case 6:
-                    _set(readInt, parcel.createStringArray());
+                    _set(i, parcel.createStringArray());
                     return;
                 default:
-                    throw new IllegalArgumentException("union: unknown tag: " + readInt);
+                    throw new IllegalArgumentException("union: unknown tag: " + i);
             }
         }
 
@@ -352,42 +352,42 @@ public class StatsBootstrapAtomValue implements Parcelable {
 
         @Override // android.os.Parcelable
         public final void writeToParcel(Parcel parcel, int i) {
-            int dataPosition = parcel.dataPosition();
+            int iDataPosition = parcel.dataPosition();
             parcel.writeInt(0);
             parcel.writeByte(this.id);
             parcel.writeTypedObject(this.value, i);
-            int dataPosition2 = parcel.dataPosition();
-            parcel.setDataPosition(dataPosition);
-            parcel.writeInt(dataPosition2 - dataPosition);
-            parcel.setDataPosition(dataPosition2);
+            int iDataPosition2 = parcel.dataPosition();
+            parcel.setDataPosition(iDataPosition);
+            parcel.writeInt(iDataPosition2 - iDataPosition);
+            parcel.setDataPosition(iDataPosition2);
         }
 
         public final void readFromParcel(Parcel parcel) {
-            int dataPosition = parcel.dataPosition();
-            int readInt = parcel.readInt();
+            int iDataPosition = parcel.dataPosition();
+            int i = parcel.readInt();
             try {
-                if (readInt < 4) {
+                if (i < 4) {
                     throw new BadParcelableException("Parcelable too small");
                 }
-                if (parcel.dataPosition() - dataPosition < readInt) {
+                if (parcel.dataPosition() - iDataPosition < i) {
                     this.id = parcel.readByte();
-                    if (parcel.dataPosition() - dataPosition < readInt) {
+                    if (parcel.dataPosition() - iDataPosition < i) {
                         this.value = (Primitive) parcel.readTypedObject(Primitive.CREATOR);
-                        if (dataPosition > Integer.MAX_VALUE - readInt) {
+                        if (iDataPosition > Integer.MAX_VALUE - i) {
                             throw new BadParcelableException("Overflow in the size of parcelable");
                         }
-                    } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                    } else if (iDataPosition > Integer.MAX_VALUE - i) {
                         throw new BadParcelableException("Overflow in the size of parcelable");
                     }
-                } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                } else if (iDataPosition > Integer.MAX_VALUE - i) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
-                parcel.setDataPosition(dataPosition + readInt);
+                parcel.setDataPosition(iDataPosition + i);
             } catch (Throwable th) {
-                if (dataPosition > Integer.MAX_VALUE - readInt) {
+                if (iDataPosition > Integer.MAX_VALUE - i) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
-                parcel.setDataPosition(dataPosition + readInt);
+                parcel.setDataPosition(iDataPosition + i);
                 throw th;
             }
         }
@@ -487,13 +487,13 @@ public class StatsBootstrapAtomValue implements Parcelable {
             }
 
             public void readFromParcel(Parcel parcel) {
-                int readInt = parcel.readInt();
-                if (readInt == 0) {
-                    _set(readInt, Boolean.valueOf(parcel.readBoolean()));
-                } else if (readInt == 1) {
-                    _set(readInt, Integer.valueOf(parcel.readInt()));
+                int i = parcel.readInt();
+                if (i == 0) {
+                    _set(i, Boolean.valueOf(parcel.readBoolean()));
+                } else if (i == 1) {
+                    _set(i, Integer.valueOf(parcel.readInt()));
                 } else {
-                    throw new IllegalArgumentException("union: unknown tag: " + readInt);
+                    throw new IllegalArgumentException("union: unknown tag: " + i);
                 }
             }
 

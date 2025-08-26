@@ -12,7 +12,6 @@ import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class TextureLayer extends BaseObjectLayer {
     public static final float[] DEFAULT_COORD = {0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f};
@@ -98,12 +97,12 @@ public class TextureLayer extends BaseObjectLayer {
                     floatBuffer.clear();
                 }
                 int length2 = fArr.length / this.mTotalElementSize;
-                ByteBuffer allocateDirect = ByteBuffer.allocateDirect(fArr.length << 2);
-                allocateDirect.order(ByteOrder.nativeOrder());
-                FloatBuffer asFloatBuffer = allocateDirect.asFloatBuffer();
-                asFloatBuffer.put(fArr);
-                asFloatBuffer.position(0);
-                this.mVertexBuffer = asFloatBuffer;
+                ByteBuffer byteBufferAllocateDirect = ByteBuffer.allocateDirect(fArr.length << 2);
+                byteBufferAllocateDirect.order(ByteOrder.nativeOrder());
+                FloatBuffer floatBufferAsFloatBuffer = byteBufferAllocateDirect.asFloatBuffer();
+                floatBufferAsFloatBuffer.put(fArr);
+                floatBufferAsFloatBuffer.position(0);
+                this.mVertexBuffer = floatBufferAsFloatBuffer;
             }
             float[] fArr2 = this.mCoordinates;
             if (fArr2 != null && fArr2.length != 0) {
@@ -111,12 +110,12 @@ public class TextureLayer extends BaseObjectLayer {
                 if (floatBuffer2 != null) {
                     floatBuffer2.clear();
                 }
-                ByteBuffer allocateDirect2 = ByteBuffer.allocateDirect(fArr2.length << 2);
-                allocateDirect2.order(ByteOrder.nativeOrder());
-                FloatBuffer asFloatBuffer2 = allocateDirect2.asFloatBuffer();
-                asFloatBuffer2.put(fArr2);
-                asFloatBuffer2.position(0);
-                this.coordBuffer = asFloatBuffer2;
+                ByteBuffer byteBufferAllocateDirect2 = ByteBuffer.allocateDirect(fArr2.length << 2);
+                byteBufferAllocateDirect2.order(ByteOrder.nativeOrder());
+                FloatBuffer floatBufferAsFloatBuffer2 = byteBufferAllocateDirect2.asFloatBuffer();
+                floatBufferAsFloatBuffer2.put(fArr2);
+                floatBufferAsFloatBuffer2.position(0);
+                this.coordBuffer = floatBufferAsFloatBuffer2;
             }
             short[] sArr = this.mIndices;
             if (sArr != null) {
@@ -124,12 +123,12 @@ public class TextureLayer extends BaseObjectLayer {
                 if (shortBuffer != null) {
                     shortBuffer.clear();
                 }
-                ByteBuffer allocateDirect3 = ByteBuffer.allocateDirect(sArr.length << 1);
-                allocateDirect3.order(ByteOrder.nativeOrder());
-                ShortBuffer asShortBuffer = allocateDirect3.asShortBuffer();
-                asShortBuffer.put(sArr);
-                asShortBuffer.position(0);
-                this.mIndexBuffer = asShortBuffer;
+                ByteBuffer byteBufferAllocateDirect3 = ByteBuffer.allocateDirect(sArr.length << 1);
+                byteBufferAllocateDirect3.order(ByteOrder.nativeOrder());
+                ShortBuffer shortBufferAsShortBuffer = byteBufferAllocateDirect3.asShortBuffer();
+                shortBufferAsShortBuffer.put(sArr);
+                shortBufferAsShortBuffer.position(0);
+                this.mIndexBuffer = shortBufferAsShortBuffer;
                 this.mIndexCnt = sArr.length;
             }
         }

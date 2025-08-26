@@ -5,21 +5,25 @@ import android.hardware.display.DisplayManager;
 import android.os.Debug;
 import android.os.IBinder;
 import android.os.SystemClock;
+import android.os.Trace;
 import android.util.Slog;
 import android.util.SparseArray;
 import android.view.Choreographer;
+import android.view.Display;
 import android.view.SurfaceControl;
 import android.view.SurfaceControlViewHost;
 import android.view.View;
 import android.view.ViewRootImpl;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.WindowManagerGlobal;
 import android.window.SplashScreenView;
 import android.window.StartingWindowRemovalInfo;
 import com.android.internal.logging.UiEventLogger;
 import com.android.internal.protolog.ProtoLogImpl_1771455215;
 import com.android.systemui.statusbar.phone.CentralSurfacesImpl;
-import com.android.systemui.statusbar.phone.CentralSurfacesImpl$$ExternalSyntheticLambda23;
-import com.android.systemui.statusbar.phone.CentralSurfacesImpl$$ExternalSyntheticLambda36;
+import com.android.systemui.statusbar.phone.CentralSurfacesImpl$$ExternalSyntheticLambda24;
+import com.android.systemui.statusbar.phone.CentralSurfacesImpl$$ExternalSyntheticLambda37;
 import com.android.wm.shell.common.ShellExecutor;
 import com.android.wm.shell.protolog.ShellProtoLogGroup;
 import com.android.wm.shell.startingsurface.SplashscreenWindowCreator;
@@ -27,14 +31,12 @@ import com.android.wm.shell.startingsurface.StartingSurfaceDrawer;
 import java.util.ArrayList;
 import java.util.function.Supplier;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SplashscreenWindowCreator extends AbsSplashWindowCreator {
     public final SparseArray mAnimatedSplashScreenSurfaceHosts;
     public Choreographer mChoreographer;
     public final WindowManagerGlobal mWindowManagerGlobal;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SplashScreenViewSupplier implements Supplier {
         public boolean mIsViewSet;
         public Runnable mUiThreadInitTask;
@@ -68,7 +70,6 @@ public class SplashscreenWindowCreator extends AbsSplashWindowCreator {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SplashWindowRecord extends StartingSurfaceDrawer.StartingWindowRecord {
         public final IBinder mAppToken;
         public final long mCreateTime = SystemClock.uptimeMillis();
@@ -93,21 +94,21 @@ public class SplashscreenWindowCreator extends AbsSplashWindowCreator {
             SplashscreenWindowCreator splashscreenWindowCreator = SplashscreenWindowCreator.this;
             if (splashScreenView != null) {
                 if (z || this.mSuggestType == 4) {
-                    SplashscreenWindowCreator.m3263$$Nest$mremoveWindowInner(splashscreenWindowCreator, view, startingWindowRemovalInfo, false);
+                    SplashscreenWindowCreator.m3281$$Nest$mremoveWindowInner(splashscreenWindowCreator, view, startingWindowRemovalInfo, false);
                     return true;
                 }
                 if (startingWindowRemovalInfo.playRevealAnimation) {
                     splashscreenWindowCreator.mSplashscreenContentDrawer.applyExitAnimation(splashScreenView, startingWindowRemovalInfo.windowAnimationLeash, startingWindowRemovalInfo.mainFrame, new Runnable() { // from class: com.android.wm.shell.startingsurface.SplashscreenWindowCreator$SplashWindowRecord$$ExternalSyntheticLambda0
                         @Override // java.lang.Runnable
                         public final void run() {
-                            SplashscreenWindowCreator.SplashWindowRecord splashWindowRecord = SplashscreenWindowCreator.SplashWindowRecord.this;
+                            SplashscreenWindowCreator.SplashWindowRecord splashWindowRecord = this.f$0;
                             StartingWindowRemovalInfo startingWindowRemovalInfo2 = startingWindowRemovalInfo;
-                            SplashscreenWindowCreator.m3263$$Nest$mremoveWindowInner(SplashscreenWindowCreator.this, splashWindowRecord.mRootView, startingWindowRemovalInfo2, true);
+                            SplashscreenWindowCreator.m3281$$Nest$mremoveWindowInner(SplashscreenWindowCreator.this, splashWindowRecord.mRootView, startingWindowRemovalInfo2, true);
                         }
                     }, this.mCreateTime, startingWindowRemovalInfo.roundedCornerRadius);
                     return true;
                 }
-                SplashscreenWindowCreator.m3263$$Nest$mremoveWindowInner(splashscreenWindowCreator, view, startingWindowRemovalInfo, true);
+                SplashscreenWindowCreator.m3281$$Nest$mremoveWindowInner(splashscreenWindowCreator, view, startingWindowRemovalInfo, true);
                 return true;
             }
             if (!view.isAttachedToWindow()) {
@@ -123,20 +124,20 @@ public class SplashscreenWindowCreator extends AbsSplashWindowCreator {
                 }
             }
             Slog.e("ShellStartingWindow", "Found empty splash screen, remove!");
-            SplashscreenWindowCreator.m3263$$Nest$mremoveWindowInner(splashscreenWindowCreator, this.mRootView, startingWindowRemovalInfo, false);
+            SplashscreenWindowCreator.m3281$$Nest$mremoveWindowInner(splashscreenWindowCreator, this.mRootView, startingWindowRemovalInfo, false);
             return true;
         }
     }
 
     /* renamed from: -$$Nest$mremoveWindowInner, reason: not valid java name */
-    public static void m3263$$Nest$mremoveWindowInner(SplashscreenWindowCreator splashscreenWindowCreator, View view, StartingWindowRemovalInfo startingWindowRemovalInfo, boolean z) {
-        CentralSurfacesImpl$$ExternalSyntheticLambda23 centralSurfacesImpl$$ExternalSyntheticLambda23 = splashscreenWindowCreator.mSysuiProxy;
+    public static void m3281$$Nest$mremoveWindowInner(SplashscreenWindowCreator splashscreenWindowCreator, View view, StartingWindowRemovalInfo startingWindowRemovalInfo, boolean z) {
+        CentralSurfacesImpl$$ExternalSyntheticLambda24 centralSurfacesImpl$$ExternalSyntheticLambda24 = splashscreenWindowCreator.mSysuiProxy;
         boolean z2 = false;
-        if (centralSurfacesImpl$$ExternalSyntheticLambda23 != null) {
+        if (centralSurfacesImpl$$ExternalSyntheticLambda24 != null) {
             UiEventLogger uiEventLogger = CentralSurfacesImpl.sUiEventLogger;
-            CentralSurfacesImpl centralSurfacesImpl = (CentralSurfacesImpl) centralSurfacesImpl$$ExternalSyntheticLambda23.f$0;
+            CentralSurfacesImpl centralSurfacesImpl = (CentralSurfacesImpl) centralSurfacesImpl$$ExternalSyntheticLambda24.f$0;
             centralSurfacesImpl.getClass();
-            centralSurfacesImpl.mMainExecutor.execute(new CentralSurfacesImpl$$ExternalSyntheticLambda36(centralSurfacesImpl, z2));
+            centralSurfacesImpl.mMainExecutor.execute(new CentralSurfacesImpl$$ExternalSyntheticLambda37(centralSurfacesImpl, z2));
         }
         SurfaceControl surfaceControl = startingWindowRemovalInfo.windowAnimationLeash;
         if (surfaceControl != null && surfaceControl.isValid()) {
@@ -158,7 +159,7 @@ public class SplashscreenWindowCreator extends AbsSplashWindowCreator {
         this.mSplashScreenExecutor.execute(new Runnable() { // from class: com.android.wm.shell.startingsurface.SplashscreenWindowCreator$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                SplashscreenWindowCreator splashscreenWindowCreator = SplashscreenWindowCreator.this;
+                SplashscreenWindowCreator splashscreenWindowCreator = this.f$0;
                 splashscreenWindowCreator.getClass();
                 splashscreenWindowCreator.mChoreographer = Choreographer.getInstance();
             }
@@ -166,98 +167,68 @@ public class SplashscreenWindowCreator extends AbsSplashWindowCreator {
         this.mWindowManagerGlobal = WindowManagerGlobal.getInstance();
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:19:0x0069, code lost:
-    
-        if (r5.getParent() != null) goto L22;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:11:0x006e  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x008b  */
+    /* JADX WARN: Removed duplicated region for block: B:23:0x006e  */
+    /* JADX WARN: Removed duplicated region for block: B:27:0x008b  */
+    /* JADX WARN: Removed duplicated region for block: B:8:0x0031 A[PHI: r5
+      0x0031: PHI (r5v6 android.view.View) = (r5v4 android.view.View), (r5v7 android.view.View) binds: [B:20:0x0069, B:7:0x002f] A[DONT_GENERATE, DONT_INLINE]] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean addWindow(int r17, android.os.IBinder r18, android.view.View r19, android.view.Display r20, android.view.WindowManager.LayoutParams r21, int r22) {
-        /*
-            r16 = this;
-            r1 = r16
-            r2 = r17
-            r3 = r18
-            java.lang.String r10 = "view not successfully added to wm, removing view"
-            java.lang.String r11 = "ShellStartingWindow"
-            android.content.Context r0 = r19.getContext()
-            r12 = 1
-            r13 = 0
-            r14 = 32
-            java.lang.String r4 = "addRootView"
-            android.os.Trace.traceBegin(r14, r4)     // Catch: java.lang.Throwable -> L40 android.view.WindowManager.BadTokenException -> L44
-            android.view.WindowManagerGlobal r4 = r1.mWindowManagerGlobal     // Catch: java.lang.Throwable -> L40 android.view.WindowManager.BadTokenException -> L44
-            int r9 = r0.getUserId()     // Catch: java.lang.Throwable -> L40 android.view.WindowManager.BadTokenException -> L44
-            r8 = 0
-            r5 = r19
-            r7 = r20
-            r6 = r21
-            r4.addView(r5, r6, r7, r8, r9)     // Catch: java.lang.Throwable -> L3c android.view.WindowManager.BadTokenException -> L3e
-            android.os.Trace.traceEnd(r14)
-            android.view.ViewParent r0 = r5.getParent()
-            if (r0 != 0) goto L3a
-        L31:
-            android.util.Slog.w(r11, r10)
-            android.view.WindowManagerGlobal r0 = r1.mWindowManagerGlobal
-            r0.removeView(r5, r12)
-            goto L6c
-        L3a:
-            r13 = r12
-            goto L6c
-        L3c:
-            r0 = move-exception
-            goto L82
-        L3e:
-            r0 = move-exception
-            goto L47
-        L40:
-            r0 = move-exception
-            r5 = r19
-            goto L82
-        L44:
-            r0 = move-exception
-            r5 = r19
-        L47:
-            java.lang.StringBuilder r4 = new java.lang.StringBuilder     // Catch: java.lang.Throwable -> L3c
-            r4.<init>()     // Catch: java.lang.Throwable -> L3c
-            r4.append(r3)     // Catch: java.lang.Throwable -> L3c
-            java.lang.String r6 = " already running, starting window not displayed. "
-            r4.append(r6)     // Catch: java.lang.Throwable -> L3c
-            java.lang.String r0 = r0.getMessage()     // Catch: java.lang.Throwable -> L3c
-            r4.append(r0)     // Catch: java.lang.Throwable -> L3c
-            java.lang.String r0 = r4.toString()     // Catch: java.lang.Throwable -> L3c
-            android.util.Slog.w(r11, r0)     // Catch: java.lang.Throwable -> L3c
-            android.os.Trace.traceEnd(r14)
-            android.view.ViewParent r0 = r5.getParent()
-            if (r0 != 0) goto L6c
-            goto L31
-        L6c:
-            if (r13 == 0) goto L81
-            com.android.wm.shell.startingsurface.StartingSurfaceDrawer$StartingWindowRecordManager r0 = r1.mStartingWindowRecordManager
-            android.window.StartingWindowRemovalInfo r4 = r0.mTmpRemovalInfo
-            r4.taskId = r2
-            r0.removeWindow(r4, r12)
-            com.android.wm.shell.startingsurface.SplashscreenWindowCreator$SplashWindowRecord r4 = new com.android.wm.shell.startingsurface.SplashscreenWindowCreator$SplashWindowRecord
-            r6 = r22
-            r4.<init>(r3, r5, r6)
-            r0.addRecord(r2, r4)
-        L81:
-            return r13
-        L82:
-            android.os.Trace.traceEnd(r14)
-            android.view.ViewParent r2 = r5.getParent()
-            if (r2 != 0) goto L93
-            android.util.Slog.w(r11, r10)
-            android.view.WindowManagerGlobal r1 = r1.mWindowManagerGlobal
-            r1.removeView(r5, r12)
-        L93:
-            throw r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.startingsurface.SplashscreenWindowCreator.addWindow(int, android.os.IBinder, android.view.View, android.view.Display, android.view.WindowManager$LayoutParams, int):boolean");
+    public final boolean addWindow(int i, IBinder iBinder, View view, Display display, WindowManager.LayoutParams layoutParams, int i2) throws Throwable {
+        View view2;
+        Context context = view.getContext();
+        boolean z = false;
+        try {
+            try {
+                Trace.traceBegin(32L, "addRootView");
+                view2 = view;
+                try {
+                    this.mWindowManagerGlobal.addView(view2, layoutParams, display, (Window) null, context.getUserId());
+                    Trace.traceEnd(32L);
+                } catch (WindowManager.BadTokenException e) {
+                    e = e;
+                    Slog.w("ShellStartingWindow", iBinder + " already running, starting window not displayed. " + e.getMessage());
+                    Trace.traceEnd(32L);
+                    if (view2.getParent() == null) {
+                    }
+                    if (z) {
+                    }
+                    return z;
+                }
+            } catch (Throwable th) {
+                th = th;
+                Trace.traceEnd(32L);
+                if (view2.getParent() == null) {
+                    Slog.w("ShellStartingWindow", "view not successfully added to wm, removing view");
+                    this.mWindowManagerGlobal.removeView(view2, true);
+                }
+                throw th;
+            }
+        } catch (WindowManager.BadTokenException e2) {
+            e = e2;
+            view2 = view;
+        } catch (Throwable th2) {
+            th = th2;
+            view2 = view;
+            Trace.traceEnd(32L);
+            if (view2.getParent() == null) {
+            }
+            throw th;
+        }
+        if (view2.getParent() == null) {
+            Slog.w("ShellStartingWindow", "view not successfully added to wm, removing view");
+            this.mWindowManagerGlobal.removeView(view2, true);
+        } else {
+            z = true;
+        }
+        if (z) {
+            StartingSurfaceDrawer.StartingWindowRecordManager startingWindowRecordManager = this.mStartingWindowRecordManager;
+            StartingWindowRemovalInfo startingWindowRemovalInfo = startingWindowRecordManager.mTmpRemovalInfo;
+            startingWindowRemovalInfo.taskId = i;
+            startingWindowRecordManager.removeWindow(startingWindowRemovalInfo, true);
+            startingWindowRecordManager.addRecord(i, new SplashWindowRecord(iBinder, view2, i2));
+        }
+        return z;
     }
 
     public final void onAppSplashScreenViewRemoved(int i, boolean z) {

@@ -5,7 +5,6 @@ import gov.nist.core.NameValueList;
 import javax.sip.InvalidArgumentException;
 import javax.sip.header.Header;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class AcceptEncoding extends ParametersHeader implements Header {
     private static final long serialVersionUID = -1476807565552873525L;
@@ -29,17 +28,17 @@ public final class AcceptEncoding extends ParametersHeader implements Header {
         this.contentCoding = str;
     }
 
-    public final void setQValue(float f) {
+    public final void setQValue(float f) throws InvalidArgumentException {
         double d = f;
         if (d < 0.0d || d > 1.0d) {
             throw new InvalidArgumentException("qvalue out of range!");
         }
-        Float valueOf = Float.valueOf(f);
+        Float fValueOf = Float.valueOf(f);
         NameValue nameValue = this.parameters.getNameValue("q");
         if (nameValue != null) {
-            nameValue.setValueAsObject(valueOf);
+            nameValue.setValueAsObject(fValueOf);
         } else {
-            this.parameters.set(new NameValue("q", valueOf));
+            this.parameters.set(new NameValue("q", fValueOf));
         }
     }
 

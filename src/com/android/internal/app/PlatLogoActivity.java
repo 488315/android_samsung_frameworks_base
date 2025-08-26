@@ -33,6 +33,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import com.android.internal.R;
 import java.util.Random;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /* loaded from: classes5.dex */
@@ -68,8 +69,8 @@ public class PlatLogoActivity extends Activity {
     };
     private final Runnable mLaunchNextStage = new Runnable() { // from class: com.android.internal.app.PlatLogoActivity$$ExternalSyntheticLambda0
         @Override // java.lang.Runnable
-        public final void run() {
-            PlatLogoActivity.this.lambda$new$0();
+        public final void run() throws JSONException {
+            this.f$0.lambda$new$0();
         }
     };
     private final TimeAnimator.TimeListener mTimeListener = new TimeAnimator.TimeListener() { // from class: com.android.internal.app.PlatLogoActivity.2
@@ -91,7 +92,7 @@ public class PlatLogoActivity extends Activity {
     double mPressureMax = -1.0d;
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$new$0() {
+    public /* synthetic */ void lambda$new$0() throws JSONException {
         stopWarp();
         launchNextStage(false);
     }
@@ -140,11 +141,11 @@ public class PlatLogoActivity extends Activity {
         /* JADX INFO: Access modifiers changed from: private */
         public void rumble(float f) {
             if (this.mVibeThread.isAlive()) {
-                Message obtain = Message.obtain();
-                obtain.what = MSG;
-                obtain.arg1 = (int) (f * 100.0f);
+                Message messageObtain = Message.obtain();
+                messageObtain.what = MSG;
+                messageObtain.arg1 = (int) (f * 100.0f);
                 this.mVibeHandler.removeMessages(MSG);
-                this.mVibeHandler.sendMessage(obtain);
+                this.mVibeHandler.sendMessage(messageObtain);
             }
         }
     }
@@ -181,8 +182,8 @@ public class PlatLogoActivity extends Activity {
         starfield.setVelocity((this.mRandom.nextFloat() - 0.5f) * 200.0f, (this.mRandom.nextFloat() - 0.5f) * 200.0f);
         this.mLayout.setBackground(this.mStarfield);
         float f = getResources().getDisplayMetrics().density;
-        int min = (int) (Math.min(r5.widthPixels, r5.heightPixels) * 0.75d);
-        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(min, min);
+        int iMin = (int) (Math.min(r5.widthPixels, r5.heightPixels) * 0.75d);
+        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(iMin, iMin);
         layoutParams.gravity = 17;
         ImageView imageView = new ImageView(this);
         this.mLogo = imageView;
@@ -265,7 +266,7 @@ public class PlatLogoActivity extends Activity {
         return getPackageName().equals("android");
     }
 
-    private void launchNextStage(boolean z) {
+    private void launchNextStage(boolean z) throws JSONException {
         ContentResolver contentResolver = getContentResolver();
         try {
             if (shouldWriteSettings()) {
@@ -277,9 +278,9 @@ public class PlatLogoActivity extends Activity {
             Log.e(TAG, "Can't write settings", e);
         }
         try {
-            Intent addCategory = new Intent(Intent.ACTION_MAIN).setFlags(268468224).addCategory("com.android.internal.category.PLATLOGO");
-            Log.v(TAG, "launching: " + addCategory);
-            startActivity(addCategory);
+            Intent intentAddCategory = new Intent(Intent.ACTION_MAIN).setFlags(268468224).addCategory("com.android.internal.category.PLATLOGO");
+            Log.v(TAG, "launching: " + intentAddCategory);
+            startActivity(intentAddCategory);
         } catch (ActivityNotFoundException unused) {
             Log.e("com.android.internal.app.PlatLogoActivity", "No more eggs.");
         }
@@ -310,7 +311,7 @@ public class PlatLogoActivity extends Activity {
         }
     }
 
-    private void syncTouchPressure() {
+    private void syncTouchPressure() throws JSONException {
         try {
             String string = Settings.System.getString(getContentResolver(), TOUCH_STATS);
             if (string == null) {
@@ -336,13 +337,13 @@ public class PlatLogoActivity extends Activity {
     }
 
     @Override // android.app.Activity
-    public void onStart() {
+    public void onStart() throws JSONException {
         super.onStart();
         syncTouchPressure();
     }
 
     @Override // android.app.Activity
-    public void onStop() {
+    public void onStop() throws JSONException {
         syncTouchPressure();
         super.onStop();
     }
@@ -400,14 +401,14 @@ public class PlatLogoActivity extends Activity {
             for (int i = 0; i < 128; i++) {
                 float[] fArr = this.mStars;
                 int i2 = i * 4;
-                float nextFloat = this.mRng.nextFloat() * 2.0f;
+                float fNextFloat = this.mRng.nextFloat() * 2.0f;
                 float f = this.mRadius;
-                fArr[i2] = (nextFloat * f) - f;
+                fArr[i2] = (fNextFloat * f) - f;
                 float[] fArr2 = this.mStars;
                 int i3 = i2 + 1;
-                float nextFloat2 = this.mRng.nextFloat() * 2.0f;
+                float fNextFloat2 = this.mRng.nextFloat() * 2.0f;
                 float f2 = this.mRadius;
-                fArr2[i3] = (nextFloat2 * f2) - f2;
+                fArr2[i3] = (fNextFloat2 * f2) - f2;
                 float[] fArr3 = this.mStars;
                 fArr3[i2 + 2] = fArr3[i2];
                 fArr3[i2 + 3] = fArr3[i3];

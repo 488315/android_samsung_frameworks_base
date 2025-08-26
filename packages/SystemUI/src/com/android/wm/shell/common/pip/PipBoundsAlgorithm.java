@@ -15,7 +15,6 @@ import com.android.wm.shell.common.pip.PipBoundsState;
 import com.android.wm.shell.protolog.ShellProtoLogGroup;
 import java.io.PrintWriter;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PipBoundsAlgorithm {
     public float mDefaultAspectRatio;
@@ -70,7 +69,7 @@ public class PipBoundsAlgorithm {
 
     public final Rect adjustNormalBoundsToFitMenu(Rect rect, Size size) {
         int height;
-        int round;
+        int iRound;
         if (size == null) {
             return rect;
         }
@@ -83,32 +82,32 @@ public class PipBoundsAlgorithm {
         PipBoundsState pipBoundsState = this.mPipBoundsState;
         if (z && z2) {
             if (size.getWidth() / rect.width() > size.getHeight() / rect.height()) {
-                round = size.getWidth();
-                height = Math.round(round / pipBoundsState.mAspectRatio);
+                iRound = size.getWidth();
+                height = Math.round(iRound / pipBoundsState.mAspectRatio);
             } else {
                 height = size.getHeight();
-                round = Math.round(height * pipBoundsState.mAspectRatio);
+                iRound = Math.round(height * pipBoundsState.mAspectRatio);
             }
         } else if (z) {
-            round = size.getWidth();
-            height = Math.round(round / pipBoundsState.mAspectRatio);
+            iRound = size.getWidth();
+            height = Math.round(iRound / pipBoundsState.mAspectRatio);
         } else {
             height = size.getHeight();
-            round = Math.round(height * pipBoundsState.mAspectRatio);
+            iRound = Math.round(height * pipBoundsState.mAspectRatio);
         }
-        rect2.set(0, 0, round, height);
+        rect2.set(0, 0, iRound, height);
         transformBoundsToAspectRatio(pipBoundsState.mAspectRatio, rect2, true, true);
         return rect2;
     }
 
     public final void dump(PrintWriter printWriter, String str) {
-        String m = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, "  ");
+        String strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, "  ");
         printWriter.println(str + "PipBoundsAlgorithm");
-        printWriter.println(m + "mDefaultAspectRatio=" + this.mDefaultAspectRatio);
-        printWriter.println(m + "mMinAspectRatio=" + this.mMinAspectRatio);
-        printWriter.println(m + "mMaxAspectRatio=" + this.mMaxAspectRatio);
-        printWriter.println(m + "mDefaultStackGravity=" + this.mDefaultStackGravity);
-        printWriter.println(m + "mSnapAlgorithm" + this.mSnapAlgorithm);
+        printWriter.println(strM + "mDefaultAspectRatio=" + this.mDefaultAspectRatio);
+        printWriter.println(strM + "mMinAspectRatio=" + this.mMinAspectRatio);
+        printWriter.println(strM + "mMaxAspectRatio=" + this.mMaxAspectRatio);
+        printWriter.println(strM + "mDefaultStackGravity=" + this.mDefaultStackGravity);
+        printWriter.println(strM + "mSnapAlgorithm" + this.mSnapAlgorithm);
     }
 
     public final Rect getDefaultBounds() {
@@ -149,19 +148,18 @@ public class PipBoundsAlgorithm {
         return new Size(Math.max(i, sizeSpecSource.getOverrideMinEdgeSize()), Math.max(windowLayout.minHeight, sizeSpecSource.getOverrideMinEdgeSize()));
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final Rect getMovementBounds(Rect rect, boolean z) {
         int i;
         Rect rect2 = new Rect();
         getInsetBounds(rect2);
         if (z) {
             PipBoundsState pipBoundsState = this.mPipBoundsState;
-            if (pipBoundsState.mIsImeShowing) {
-                i = pipBoundsState.mImeHeight;
-                getMovementBounds(rect, rect2, rect2, i);
-                return rect2;
-            }
+            i = pipBoundsState.mIsImeShowing ? pipBoundsState.mImeHeight : 0;
         }
-        i = 0;
         getMovementBounds(rect, rect2, rect2, i);
         return rect2;
     }
@@ -191,9 +189,9 @@ public class PipBoundsAlgorithm {
         } else {
             sizeForAspectRatio = ((PhoneSizeSpecSource) sizeSpecSource).getDefaultSize(f);
         }
-        int centerX = (int) (rect.centerX() - (sizeForAspectRatio.getWidth() / 2.0f));
-        int centerY = (int) (rect.centerY() - (sizeForAspectRatio.getHeight() / 2.0f));
-        rect.set(centerX, centerY, sizeForAspectRatio.getWidth() + centerX, sizeForAspectRatio.getHeight() + centerY);
+        int iCenterX = (int) (rect.centerX() - (sizeForAspectRatio.getWidth() / 2.0f));
+        int iCenterY = (int) (rect.centerY() - (sizeForAspectRatio.getHeight() / 2.0f));
+        rect.set(iCenterX, iCenterY, sizeForAspectRatio.getWidth() + iCenterX, sizeForAspectRatio.getHeight() + iCenterY);
         PipSnapAlgorithm.applySnapFraction(rect, getMovementBounds(rect, true), snapFraction);
     }
 

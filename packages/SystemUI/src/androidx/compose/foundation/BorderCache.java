@@ -7,7 +7,6 @@ import androidx.compose.ui.graphics.drawscope.CanvasDrawScope;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class BorderCache {
     public Path borderPath;
@@ -32,13 +31,13 @@ final class BorderCache {
 
     public final int hashCode() {
         ImageBitmap imageBitmap = this.imageBitmap;
-        int hashCode = (imageBitmap == null ? 0 : imageBitmap.hashCode()) * 31;
+        int iHashCode = (imageBitmap == null ? 0 : imageBitmap.hashCode()) * 31;
         Canvas canvas = this.canvas;
-        int hashCode2 = (hashCode + (canvas == null ? 0 : canvas.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (canvas == null ? 0 : canvas.hashCode())) * 31;
         CanvasDrawScope canvasDrawScope = this.canvasDrawScope;
-        int hashCode3 = (hashCode2 + (canvasDrawScope == null ? 0 : canvasDrawScope.hashCode())) * 31;
+        int iHashCode3 = (iHashCode2 + (canvasDrawScope == null ? 0 : canvasDrawScope.hashCode())) * 31;
         Path path = this.borderPath;
-        return hashCode3 + (path != null ? path.hashCode() : 0);
+        return iHashCode3 + (path != null ? path.hashCode() : 0);
     }
 
     public final String toString() {

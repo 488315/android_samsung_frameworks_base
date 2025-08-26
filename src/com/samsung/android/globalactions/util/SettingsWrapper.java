@@ -92,14 +92,14 @@ public class SettingsWrapper {
     }
 
     public boolean isPasswordChangeEnforced() {
-        Cursor query = this.mResolver.query(Uri.parse("content://com.sec.knox.provider/PasswordPolicy2"), null, SecContentProviderURI.PASSWORDPOLICY_CHANGEREQUESTED_METHOD, null, null);
+        Cursor cursorQuery = this.mResolver.query(Uri.parse("content://com.sec.knox.provider/PasswordPolicy2"), null, SecContentProviderURI.PASSWORDPOLICY_CHANGEREQUESTED_METHOD, null, null);
         try {
-            query.moveToFirst();
-            int i = query.getInt(query.getColumnIndex(SecContentProviderURI.PASSWORDPOLICY_CHANGEREQUESTED_METHOD));
-            query.close();
+            cursorQuery.moveToFirst();
+            int i = cursorQuery.getInt(cursorQuery.getColumnIndex(SecContentProviderURI.PASSWORDPOLICY_CHANGEREQUESTED_METHOD));
+            cursorQuery.close();
             return i >= 1;
         } catch (Exception unused) {
-            query.close();
+            cursorQuery.close();
             return false;
         }
     }

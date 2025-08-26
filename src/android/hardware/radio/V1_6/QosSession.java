@@ -37,13 +37,13 @@ public final class QosSession {
 
     public static final ArrayList<QosSession> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<QosSession> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 48, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 48, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             QosSession qosSession = new QosSession();
-            qosSession.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 48);
+            qosSession.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 48);
             arrayList.add(qosSession);
         }
         return arrayList;
@@ -54,11 +54,11 @@ public final class QosSession {
         this.qos.readEmbeddedFromParcel(hwParcel, hwBlob, 4 + j);
         long j2 = j + 32;
         int int32 = hwBlob.getInt32(j + 40);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 88, hwBlob.handle(), j2, true);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 88, hwBlob.handle(), j2, true);
         this.qosFilters.clear();
         for (int i = 0; i < int32; i++) {
             QosFilter qosFilter = new QosFilter();
-            qosFilter.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 88);
+            qosFilter.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 88);
             this.qosFilters.add(qosFilter);
         }
     }

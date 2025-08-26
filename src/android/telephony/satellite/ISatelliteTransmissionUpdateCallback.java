@@ -65,9 +65,9 @@ public interface ISatelliteTransmissionUpdateCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISatelliteTransmissionUpdateCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISatelliteTransmissionUpdateCallback)) {
-                return (ISatelliteTransmissionUpdateCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISatelliteTransmissionUpdateCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISatelliteTransmissionUpdateCallback)) {
+                return (ISatelliteTransmissionUpdateCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -103,26 +103,26 @@ public interface ISatelliteTransmissionUpdateCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                int readInt2 = parcel.readInt();
-                int readInt3 = parcel.readInt();
-                int readInt4 = parcel.readInt();
+                int i3 = parcel.readInt();
+                int i4 = parcel.readInt();
+                int i5 = parcel.readInt();
+                int i6 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onSendDatagramStateChanged(readInt, readInt2, readInt3, readInt4);
+                onSendDatagramStateChanged(i3, i4, i5, i6);
             } else if (i == 2) {
-                int readInt5 = parcel.readInt();
-                int readInt6 = parcel.readInt();
-                int readInt7 = parcel.readInt();
+                int i7 = parcel.readInt();
+                int i8 = parcel.readInt();
+                int i9 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onReceiveDatagramStateChanged(readInt5, readInt6, readInt7);
+                onReceiveDatagramStateChanged(i7, i8, i9);
             } else if (i == 3) {
                 PointingInfo pointingInfo = (PointingInfo) parcel.readTypedObject(PointingInfo.CREATOR);
                 parcel.enforceNoDataAvail();
                 onSatellitePositionChanged(pointingInfo);
             } else if (i == 4) {
-                int readInt8 = parcel.readInt();
+                int i10 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onSendDatagramRequested(readInt8);
+                onSendDatagramRequested(i10);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -147,54 +147,54 @@ public interface ISatelliteTransmissionUpdateCallback extends IInterface {
 
             @Override // android.telephony.satellite.ISatelliteTransmissionUpdateCallback
             public void onSendDatagramStateChanged(int i, int i2, int i3, int i4) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISatelliteTransmissionUpdateCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeInt(i4);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISatelliteTransmissionUpdateCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeInt(i4);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.satellite.ISatelliteTransmissionUpdateCallback
             public void onReceiveDatagramStateChanged(int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISatelliteTransmissionUpdateCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISatelliteTransmissionUpdateCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.satellite.ISatelliteTransmissionUpdateCallback
             public void onSatellitePositionChanged(PointingInfo pointingInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISatelliteTransmissionUpdateCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(pointingInfo, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISatelliteTransmissionUpdateCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(pointingInfo, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.satellite.ISatelliteTransmissionUpdateCallback
             public void onSendDatagramRequested(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISatelliteTransmissionUpdateCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISatelliteTransmissionUpdateCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

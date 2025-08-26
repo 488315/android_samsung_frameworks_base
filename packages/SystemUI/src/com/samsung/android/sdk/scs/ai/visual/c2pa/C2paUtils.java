@@ -5,7 +5,6 @@ import android.util.Log;
 import java.io.File;
 import java.io.IOException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class C2paUtils {
     private static final String TAG = "C2paUtils";
@@ -17,9 +16,9 @@ public class C2paUtils {
             return null;
         }
         String name = file.getName();
-        int lastIndexOf = name.lastIndexOf(46);
-        if (lastIndexOf >= 0 && lastIndexOf < name.length() - 1) {
-            return name.substring(lastIndexOf + 1);
+        int iLastIndexOf = name.lastIndexOf(46);
+        if (iLastIndexOf >= 0 && iLastIndexOf < name.length() - 1) {
+            return name.substring(iLastIndexOf + 1);
         }
         Log.e(TAG, "getFileExtension: Unable to find extension".concat(name));
         return null;

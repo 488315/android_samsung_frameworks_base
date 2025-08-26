@@ -2,7 +2,6 @@ package com.android.systemui.pluginlock.model;
 
 import com.google.gson.annotations.SerializedName;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class ServiceBoxData {
 
@@ -30,7 +29,6 @@ public class ServiceBoxData {
     @SerializedName("visibility_land")
     private Integer mVisibilityLand = 0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ClockInfo {
 
         @SerializedName("clock_type")
@@ -176,7 +174,7 @@ public class ServiceBoxData {
         }
 
         /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-        public ClockInfo m2665clone() throws CloneNotSupportedException {
+        public ClockInfo m2683clone() throws CloneNotSupportedException {
             return (ClockInfo) super.clone();
         }
     }
@@ -249,7 +247,7 @@ public class ServiceBoxData {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public ServiceBoxData m2664clone() throws CloneNotSupportedException {
+    public ServiceBoxData m2682clone() throws CloneNotSupportedException {
         return (ServiceBoxData) super.clone();
     }
 }

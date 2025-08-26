@@ -17,8 +17,11 @@ import com.android.systemui.kairos.internal.StateImplKt$$ExternalSyntheticLambda
 import com.android.systemui.kairos.internal.StateImplKt$$ExternalSyntheticLambda6;
 import com.android.systemui.log.table.DiffableKt;
 import com.android.systemui.statusbar.pipeline.airplane.domain.interactor.AirplaneModeInteractor;
+import com.android.systemui.statusbar.pipeline.mobile.data.model.NetworkNameModel;
 import com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorKairos;
 import com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorKairosImpl;
+import com.android.systemui.statusbar.pipeline.mobile.domain.model.SignalIconModel;
+import com.android.systemui.statusbar.pipeline.mobile.ui.model.MobileContentDescription$Cellular;
 import com.android.systemui.statusbar.pipeline.shared.ConnectivityConstants;
 import com.android.systemui.statusbar.pipeline.shared.ConnectivityConstantsImpl;
 import com.android.systemui.statusbar.pipeline.shared.data.model.DataActivityModel;
@@ -29,7 +32,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function3;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class CellularIconViewModelKairos implements MobileIconViewModelKairosCommon, KairosBuilder {
     public final /* synthetic */ KairosBuilderImpl $$delegate_0;
@@ -45,17 +47,17 @@ public final class CellularIconViewModelKairos implements MobileIconViewModelKai
     public final StateInit showNetworkTypeIcon;
 
     public CellularIconViewModelKairos(int i, MobileIconInteractorKairos mobileIconInteractorKairos, final AirplaneModeInteractor airplaneModeInteractor, ConnectivityConstants connectivityConstants, FeatureFlagsClassic featureFlagsClassic) {
-        State buildState;
+        State stateBuildState;
         KairosBuilderImpl kairosBuilderImpl = new KairosBuilderImpl();
         this.$$delegate_0 = kairosBuilderImpl;
         this.iconInteractor = mobileIconInteractorKairos;
         ConnectivityConstantsImpl connectivityConstantsImpl = (ConnectivityConstantsImpl) connectivityConstants;
         if (connectivityConstantsImpl.hasDataCapabilities) {
             final int i2 = 2;
-            buildState = kairosBuilderImpl.buildState(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.CellularIconViewModelKairos$$ExternalSyntheticLambda3
+            stateBuildState = kairosBuilderImpl.buildState(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.CellularIconViewModelKairos$$ExternalSyntheticLambda3
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
+                public final Object mo781invoke(Object obj) {
                     BuildScope buildScope = (BuildScope) obj;
                     switch (i2) {
                         case 0:
@@ -70,82 +72,54 @@ public final class CellularIconViewModelKairos implements MobileIconViewModelKai
                             buildScopeImpl.getClass();
                             StateInit state = BuildScope.DefaultImpls.toState(buildScopeImpl, readonlyStateFlow);
                             MobileIconInteractorKairos mobileIconInteractorKairos2 = this.iconInteractor;
-                            State isAllowedDuringAirplaneMode = ((MobileIconInteractorKairosImpl) mobileIconInteractorKairos2).connectionRepository.isAllowedDuringAirplaneMode();
+                            State stateIsAllowedDuringAirplaneMode = ((MobileIconInteractorKairosImpl) mobileIconInteractorKairos2).connectionRepository.isAllowedDuringAirplaneMode();
                             MobileIconInteractorKairosImpl mobileIconInteractorKairosImpl = (MobileIconInteractorKairosImpl) mobileIconInteractorKairos2;
-                            StateInit combine = CombineKt.combine(state, isAllowedDuringAirplaneMode, mobileIconInteractorKairosImpl.isForceHidden, new CellularIconViewModelKairos$$ExternalSyntheticLambda10());
-                            DiffableKt.logBooleanDiffsForTable(buildScope, combine, mobileIconInteractorKairosImpl.connectionRepository.getTableLogBuffer(), "", "visible");
-                            return combine;
+                            StateInit stateInitCombine = CombineKt.combine(state, stateIsAllowedDuringAirplaneMode, mobileIconInteractorKairosImpl.isForceHidden, new CellularIconViewModelKairos$$ExternalSyntheticLambda10());
+                            DiffableKt.logBooleanDiffsForTable(buildScope, stateInitCombine, mobileIconInteractorKairosImpl.connectionRepository.getTableLogBuffer(), "", "visible");
+                            return stateInitCombine;
                     }
                 }
             });
         } else {
-            buildState = StateKt.stateOf(Boolean.FALSE);
+            stateBuildState = StateKt.stateOf(Boolean.FALSE);
         }
-        this.isVisible = buildState;
+        this.isVisible = stateBuildState;
         MobileIconInteractorKairosImpl mobileIconInteractorKairosImpl = (MobileIconInteractorKairosImpl) mobileIconInteractorKairos;
         this.contentDescription = CombineKt.combine(mobileIconInteractorKairosImpl.signalLevelIcon, mobileIconInteractorKairosImpl.networkName, new Function3() { // from class: com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.CellularIconViewModelKairos$$ExternalSyntheticLambda1
-            /* JADX WARN: Code restructure failed: missing block: B:15:0x002f, code lost:
-            
-                if (r6 != 6) goto L24;
-             */
+            /* JADX WARN: Removed duplicated region for block: B:18:0x0031  */
             @Override // kotlin.jvm.functions.Function3
             /*
                 Code decompiled incorrectly, please refer to instructions dump.
-                To view partially-correct code enable 'Show inconsistent code' option in preferences
             */
-            public final java.lang.Object invoke(java.lang.Object r5, java.lang.Object r6, java.lang.Object r7) {
-                /*
-                    r4 = this;
-                    com.android.systemui.kairos.KairosScope r5 = (com.android.systemui.kairos.KairosScope) r5
-                    com.android.systemui.statusbar.pipeline.mobile.domain.model.SignalIconModel r6 = (com.android.systemui.statusbar.pipeline.mobile.domain.model.SignalIconModel) r6
-                    com.android.systemui.statusbar.pipeline.mobile.data.model.NetworkNameModel r7 = (com.android.systemui.statusbar.pipeline.mobile.data.model.NetworkNameModel) r7
-                    boolean r4 = r6 instanceof com.android.systemui.statusbar.pipeline.mobile.domain.model.SignalIconModel.Cellular
-                    if (r4 == 0) goto L48
-                    com.android.systemui.statusbar.pipeline.mobile.ui.model.MobileContentDescription$Cellular r4 = new com.android.systemui.statusbar.pipeline.mobile.ui.model.MobileContentDescription$Cellular
-                    java.lang.String r5 = r7.getName()
-                    com.android.systemui.statusbar.pipeline.mobile.domain.model.SignalIconModel$Cellular r6 = (com.android.systemui.statusbar.pipeline.mobile.domain.model.SignalIconModel.Cellular) r6
-                    int r7 = r6.level
-                    r0 = 2131951874(0x7f130102, float:1.9540175E38)
-                    if (r7 == 0) goto L44
-                    r1 = 1
-                    if (r7 == r1) goto L41
-                    r1 = 2
-                    if (r7 == r1) goto L3d
-                    r1 = 3
-                    if (r7 == r1) goto L39
-                    r1 = 4
-                    r2 = 2131951946(0x7f13014a, float:1.954032E38)
-                    r3 = 6
-                    int r6 = r6.numberOfLevels
-                    if (r7 == r1) goto L33
-                    r1 = 5
-                    if (r7 == r1) goto L2f
-                    goto L44
-                L2f:
-                    if (r6 != r3) goto L44
-                L31:
-                    r0 = r2
-                    goto L44
-                L33:
-                    if (r6 != r3) goto L31
-                    r0 = 2131951814(0x7f1300c6, float:1.9540053E38)
-                    goto L44
-                L39:
-                    r0 = 2131951970(0x7f130162, float:1.954037E38)
-                    goto L44
-                L3d:
-                    r0 = 2131951973(0x7f130165, float:1.9540376E38)
-                    goto L44
-                L41:
-                    r0 = 2131951879(0x7f130107, float:1.9540185E38)
-                L44:
-                    r4.<init>(r5, r0)
-                    return r4
-                L48:
-                    r4 = 0
-                    return r4
-                */
-                throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.CellularIconViewModelKairos$$ExternalSyntheticLambda1.invoke(java.lang.Object, java.lang.Object, java.lang.Object):java.lang.Object");
+            public final Object invoke(Object obj, Object obj2, Object obj3) {
+                SignalIconModel signalIconModel = (SignalIconModel) obj2;
+                NetworkNameModel networkNameModel = (NetworkNameModel) obj3;
+                if (!(signalIconModel instanceof SignalIconModel.Cellular)) {
+                    return null;
+                }
+                String name = networkNameModel.getName();
+                SignalIconModel.Cellular cellular = (SignalIconModel.Cellular) signalIconModel;
+                int i3 = cellular.level;
+                int i4 = R.string.accessibility_no_signal;
+                if (i3 != 0) {
+                    if (i3 == 1) {
+                        i4 = R.string.accessibility_one_bar;
+                    } else if (i3 == 2) {
+                        i4 = R.string.accessibility_two_bars;
+                    } else if (i3 != 3) {
+                        int i5 = cellular.numberOfLevels;
+                        if (i3 != 4) {
+                            if (i3 == 5 && i5 == 6) {
+                                i4 = R.string.accessibility_signal_full;
+                            }
+                        } else if (i5 == 6) {
+                            i4 = R.string.accessibility_four_bars;
+                        }
+                    } else {
+                        i4 = R.string.accessibility_three_bars;
+                    }
+                }
+                return new MobileContentDescription$Cellular(name, i4);
             }
         });
         final StateInit stateInit = mobileIconInteractorKairosImpl.isDataConnected;
@@ -157,8 +131,8 @@ public final class CellularIconViewModelKairos implements MobileIconViewModelKai
         final StateInit stateInit2 = new StateInit(new Init("combine", new Function1() { // from class: com.android.systemui.kairos.CombineKt$$ExternalSyntheticLambda6
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                final Init init = StateInit.this.init;
+            public final Object mo781invoke(Object obj) {
+                final Init init = stateInit.init;
                 final Init init$frameworks__base__packages__SystemUI__utils__kairos__android_common__kairos = state.getInit$frameworks__base__packages__SystemUI__utils__kairos__android_common__kairos();
                 final Init init$frameworks__base__packages__SystemUI__utils__kairos__android_common__kairos2 = state2.getInit$frameworks__base__packages__SystemUI__utils__kairos__android_common__kairos();
                 final Init init$frameworks__base__packages__SystemUI__utils__kairos__android_common__kairos3 = state3.getInit$frameworks__base__packages__SystemUI__utils__kairos__android_common__kairos();
@@ -167,9 +141,9 @@ public final class CellularIconViewModelKairos implements MobileIconViewModelKai
                     /* JADX WARN: Multi-variable type inference failed */
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj2) {
+                    public final Object mo781invoke(Object obj2) {
                         NetworkScope networkScope = (NetworkScope) obj2;
-                        return Arrays.asList(Init.this.connect(networkScope), init$frameworks__base__packages__SystemUI__utils__kairos__android_common__kairos.connect(networkScope), init$frameworks__base__packages__SystemUI__utils__kairos__android_common__kairos2.connect(networkScope), init$frameworks__base__packages__SystemUI__utils__kairos__android_common__kairos3.connect(networkScope), init$frameworks__base__packages__SystemUI__utils__kairos__android_common__kairos4.connect(networkScope));
+                        return Arrays.asList(init.connect(networkScope), init$frameworks__base__packages__SystemUI__utils__kairos__android_common__kairos.connect(networkScope), init$frameworks__base__packages__SystemUI__utils__kairos__android_common__kairos2.connect(networkScope), init$frameworks__base__packages__SystemUI__utils__kairos__android_common__kairos3.connect(networkScope), init$frameworks__base__packages__SystemUI__utils__kairos__android_common__kairos4.connect(networkScope));
                     }
                 })), 2), "combine", "combine", new StateImplKt$$ExternalSyntheticLambda5(new CombineKt$$ExternalSyntheticLambda9(cellularIconViewModelKairos$$ExternalSyntheticLambda2), 2));
             }
@@ -178,7 +152,7 @@ public final class CellularIconViewModelKairos implements MobileIconViewModelKai
         onActivated(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.CellularIconViewModelKairos$$ExternalSyntheticLambda3
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i3) {
                     case 0:
@@ -193,11 +167,11 @@ public final class CellularIconViewModelKairos implements MobileIconViewModelKai
                         buildScopeImpl.getClass();
                         StateInit state4 = BuildScope.DefaultImpls.toState(buildScopeImpl, readonlyStateFlow);
                         MobileIconInteractorKairos mobileIconInteractorKairos2 = this.iconInteractor;
-                        State isAllowedDuringAirplaneMode = ((MobileIconInteractorKairosImpl) mobileIconInteractorKairos2).connectionRepository.isAllowedDuringAirplaneMode();
+                        State stateIsAllowedDuringAirplaneMode = ((MobileIconInteractorKairosImpl) mobileIconInteractorKairos2).connectionRepository.isAllowedDuringAirplaneMode();
                         MobileIconInteractorKairosImpl mobileIconInteractorKairosImpl2 = (MobileIconInteractorKairosImpl) mobileIconInteractorKairos2;
-                        StateInit combine = CombineKt.combine(state4, isAllowedDuringAirplaneMode, mobileIconInteractorKairosImpl2.isForceHidden, new CellularIconViewModelKairos$$ExternalSyntheticLambda10());
-                        DiffableKt.logBooleanDiffsForTable(buildScope, combine, mobileIconInteractorKairosImpl2.connectionRepository.getTableLogBuffer(), "", "visible");
-                        return combine;
+                        StateInit stateInitCombine = CombineKt.combine(state4, stateIsAllowedDuringAirplaneMode, mobileIconInteractorKairosImpl2.isForceHidden, new CellularIconViewModelKairos$$ExternalSyntheticLambda10());
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitCombine, mobileIconInteractorKairosImpl2.connectionRepository.getTableLogBuffer(), "", "visible");
+                        return stateInitCombine;
                 }
             }
         });
@@ -230,7 +204,7 @@ public final class CellularIconViewModelKairos implements MobileIconViewModelKai
         onActivated(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.CellularIconViewModelKairos$$ExternalSyntheticLambda3
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i5) {
                     case 0:
@@ -245,18 +219,18 @@ public final class CellularIconViewModelKairos implements MobileIconViewModelKai
                         buildScopeImpl.getClass();
                         StateInit state4 = BuildScope.DefaultImpls.toState(buildScopeImpl, readonlyStateFlow);
                         MobileIconInteractorKairos mobileIconInteractorKairos2 = this.iconInteractor;
-                        State isAllowedDuringAirplaneMode = ((MobileIconInteractorKairosImpl) mobileIconInteractorKairos2).connectionRepository.isAllowedDuringAirplaneMode();
+                        State stateIsAllowedDuringAirplaneMode = ((MobileIconInteractorKairosImpl) mobileIconInteractorKairos2).connectionRepository.isAllowedDuringAirplaneMode();
                         MobileIconInteractorKairosImpl mobileIconInteractorKairosImpl2 = (MobileIconInteractorKairosImpl) mobileIconInteractorKairos2;
-                        StateInit combine = CombineKt.combine(state4, isAllowedDuringAirplaneMode, mobileIconInteractorKairosImpl2.isForceHidden, new CellularIconViewModelKairos$$ExternalSyntheticLambda10());
-                        DiffableKt.logBooleanDiffsForTable(buildScope, combine, mobileIconInteractorKairosImpl2.connectionRepository.getTableLogBuffer(), "", "visible");
-                        return combine;
+                        StateInit stateInitCombine = CombineKt.combine(state4, stateIsAllowedDuringAirplaneMode, mobileIconInteractorKairosImpl2.isForceHidden, new CellularIconViewModelKairos$$ExternalSyntheticLambda10());
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitCombine, mobileIconInteractorKairosImpl2.connectionRepository.getTableLogBuffer(), "", "visible");
+                        return stateInitCombine;
                 }
             }
         });
         this.roaming = stateInit3;
-        State stateOf = !connectivityConstantsImpl.shouldShowActivityConfig ? StateKt.stateOf(null) : mobileIconInteractorKairosImpl.connectionRepository.getDataActivityDirection();
+        State stateStateOf = !connectivityConstantsImpl.shouldShowActivityConfig ? StateKt.stateOf(null) : mobileIconInteractorKairosImpl.connectionRepository.getDataActivityDirection();
         final int i6 = 1;
-        this.activityInVisible = StateKt.map(stateOf, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.CellularIconViewModelKairos$$ExternalSyntheticLambda5
+        this.activityInVisible = StateKt.map(stateStateOf, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.CellularIconViewModelKairos$$ExternalSyntheticLambda5
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 switch (i6) {
@@ -278,7 +252,7 @@ public final class CellularIconViewModelKairos implements MobileIconViewModelKai
             }
         });
         final int i7 = 2;
-        this.activityOutVisible = StateKt.map(stateOf, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.CellularIconViewModelKairos$$ExternalSyntheticLambda5
+        this.activityOutVisible = StateKt.map(stateStateOf, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.CellularIconViewModelKairos$$ExternalSyntheticLambda5
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 switch (i7) {
@@ -300,7 +274,7 @@ public final class CellularIconViewModelKairos implements MobileIconViewModelKai
             }
         });
         final int i8 = 3;
-        this.activityContainerVisible = StateKt.map(stateOf, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.CellularIconViewModelKairos$$ExternalSyntheticLambda5
+        this.activityContainerVisible = StateKt.map(stateStateOf, new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.CellularIconViewModelKairos$$ExternalSyntheticLambda5
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 switch (i8) {

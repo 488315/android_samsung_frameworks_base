@@ -1,10 +1,10 @@
 package com.android.systemui.statusbar.phone;
 
+import android.content.res.Resources;
 import com.android.systemui.statusbar.policy.ConfigurationController;
 import com.android.systemui.util.ViewController;
 import com.android.systemui.util.concurrency.DelayableExecutor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class TapAgainViewController extends ViewController {
     public final ConfigurationController mConfigurationController;
@@ -14,7 +14,7 @@ public class TapAgainViewController extends ViewController {
     public Runnable mHideCanceler;
 
     /* renamed from: $r8$lambda$RI85HBul7dnFWQwIiM-PGhllBiQ, reason: not valid java name */
-    public static void m3079$r8$lambda$RI85HBul7dnFWQwIiMPGhllBiQ(TapAgainViewController tapAgainViewController) {
+    public static void m3096$r8$lambda$RI85HBul7dnFWQwIiMPGhllBiQ(TapAgainViewController tapAgainViewController) throws Resources.NotFoundException {
         tapAgainViewController.mHideCanceler = null;
         ((TapAgainView) tapAgainViewController.mView).animateOut();
     }
@@ -47,7 +47,7 @@ public class TapAgainViewController extends ViewController {
         ((ConfigurationControllerImpl) this.mConfigurationController).removeCallback(this.mConfigurationListener);
     }
 
-    public final void show() {
+    public final void show() throws Resources.NotFoundException {
         Runnable runnable = this.mHideCanceler;
         if (runnable != null) {
             runnable.run();
@@ -55,8 +55,8 @@ public class TapAgainViewController extends ViewController {
         ((TapAgainView) this.mView).animateIn();
         this.mHideCanceler = this.mDelayableExecutor.executeDelayed(new Runnable() { // from class: com.android.systemui.statusbar.phone.TapAgainViewController$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
-            public final void run() {
-                TapAgainViewController.m3079$r8$lambda$RI85HBul7dnFWQwIiMPGhllBiQ(TapAgainViewController.this);
+            public final void run() throws Resources.NotFoundException {
+                TapAgainViewController.m3096$r8$lambda$RI85HBul7dnFWQwIiMPGhllBiQ(this.f$0);
             }
         }, this.mDoubleTapTimeMs);
     }

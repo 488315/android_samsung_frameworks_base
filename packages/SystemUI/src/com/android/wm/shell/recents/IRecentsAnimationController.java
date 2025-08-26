@@ -1,6 +1,7 @@
 package com.android.wm.shell.recents;
 
 import android.app.ActivityTaskManager;
+import android.content.res.Resources;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -18,11 +19,9 @@ import com.android.wm.shell.protolog.ShellProtoLogGroup;
 import com.android.wm.shell.recents.RecentsTransitionHandler;
 import com.android.wm.shell.transition.Transitions;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public interface IRecentsAnimationController extends IInterface {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IRecentsAnimationController {
         public Stub() {
             attachInterface(this, "com.android.wm.shell.recents.IRecentsAnimationController");
@@ -39,66 +38,66 @@ public interface IRecentsAnimationController extends IInterface {
             }
             switch (i) {
                 case 1:
-                    final int readInt = parcel.readInt();
+                    final int i3 = parcel.readInt();
                     final PictureInPictureSurfaceTransaction pictureInPictureSurfaceTransaction = (PictureInPictureSurfaceTransaction) parcel.readTypedObject(PictureInPictureSurfaceTransaction.CREATOR);
                     parcel.enforceNoDataAvail();
                     final RecentsTransitionHandler.RecentsController recentsController = (RecentsTransitionHandler.RecentsController) this;
                     RecentsTransitionHandler.this.mExecutor.execute(new Runnable() { // from class: com.android.wm.shell.recents.RecentsTransitionHandler$RecentsController$$ExternalSyntheticLambda8
                         @Override // java.lang.Runnable
                         public final void run() {
-                            RecentsTransitionHandler.RecentsController recentsController2 = RecentsTransitionHandler.RecentsController.this;
-                            int i3 = readInt;
+                            RecentsTransitionHandler.RecentsController recentsController2 = recentsController;
+                            int i4 = i3;
                             PictureInPictureSurfaceTransaction pictureInPictureSurfaceTransaction2 = pictureInPictureSurfaceTransaction;
-                            int i4 = RecentsTransitionHandler.RecentsController.$r8$clinit;
+                            int i5 = RecentsTransitionHandler.RecentsController.$r8$clinit;
                             recentsController2.getClass();
                             if (ProtoLogImpl_1771455215.Cache.WM_SHELL_RECENTS_TRANSITION_enabled[1]) {
-                                ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_RECENTS_TRANSITION, 518525023057359864L, 53, Long.valueOf(recentsController2.mInstanceId), Long.valueOf(i3), Boolean.valueOf(recentsController2.mFinishCB != null));
+                                ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_RECENTS_TRANSITION, 518525023057359864L, 53, Long.valueOf(recentsController2.mInstanceId), Long.valueOf(i4), Boolean.valueOf(recentsController2.mFinishCB != null));
                             }
                             if (recentsController2.mFinishCB == null) {
                                 return;
                             }
                             recentsController2.mPipTransaction = pictureInPictureSurfaceTransaction2;
-                            recentsController2.mPipTaskId = i3;
+                            recentsController2.mPipTaskId = i4;
                         }
                     });
                     parcel2.writeNoException();
                     return true;
                 case 2:
-                    final boolean readBoolean = parcel.readBoolean();
-                    final boolean readBoolean2 = parcel.readBoolean();
-                    final IResultReceiver asInterface = IResultReceiver.Stub.asInterface(parcel.readStrongBinder());
+                    final boolean z = parcel.readBoolean();
+                    final boolean z2 = parcel.readBoolean();
+                    final IResultReceiver iResultReceiverAsInterface = IResultReceiver.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
                     final RecentsTransitionHandler.RecentsController recentsController2 = (RecentsTransitionHandler.RecentsController) this;
                     RecentsTransitionHandler.this.mExecutor.execute(new Runnable() { // from class: com.android.wm.shell.recents.RecentsTransitionHandler$RecentsController$$ExternalSyntheticLambda6
                         @Override // java.lang.Runnable
-                        public final void run() {
-                            RecentsTransitionHandler.RecentsController recentsController3 = RecentsTransitionHandler.RecentsController.this;
-                            boolean z = readBoolean;
-                            boolean z2 = readBoolean2;
-                            IResultReceiver iResultReceiver = asInterface;
-                            int i3 = RecentsTransitionHandler.RecentsController.$r8$clinit;
-                            recentsController3.finishInner(z, z2, iResultReceiver, "requested");
+                        public final void run() throws Resources.NotFoundException {
+                            RecentsTransitionHandler.RecentsController recentsController3 = recentsController2;
+                            boolean z3 = z;
+                            boolean z4 = z2;
+                            IResultReceiver iResultReceiver = iResultReceiverAsInterface;
+                            int i4 = RecentsTransitionHandler.RecentsController.$r8$clinit;
+                            recentsController3.finishInner(z3, z4, iResultReceiver, "requested");
                         }
                     });
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    final boolean readBoolean3 = parcel.readBoolean();
+                    final boolean z3 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
                     final RecentsTransitionHandler.RecentsController recentsController3 = (RecentsTransitionHandler.RecentsController) this;
-                    final int i3 = 1;
+                    final int i4 = 1;
                     RecentsTransitionHandler.this.mExecutor.execute(new Runnable() { // from class: com.android.wm.shell.recents.RecentsTransitionHandler$RecentsController$$ExternalSyntheticLambda1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            switch (i3) {
+                            switch (i4) {
                                 case 0:
-                                    recentsController3.mWillForceFinishToHome = readBoolean3;
+                                    recentsController3.mWillForceFinishToHome = z3;
                                     break;
                                 case 1:
                                     RecentsTransitionHandler.RecentsController recentsController4 = recentsController3;
-                                    boolean z = readBoolean3;
+                                    boolean z4 = z3;
                                     Transitions.TransitionFinishCallback transitionFinishCallback = recentsController4.mFinishCB;
-                                    if (transitionFinishCallback != null && z) {
+                                    if (transitionFinishCallback != null && z4) {
                                         int displayId = recentsController4.mInfo.getRootCount() > 0 ? recentsController4.mInfo.getRoot(0).getDisplayId() : 0;
                                         try {
                                             if (ProtoLogImpl_1771455215.Cache.WM_SHELL_RECENTS_TRANSITION_enabled[1]) {
@@ -111,12 +110,12 @@ public interface IRecentsAnimationController extends IInterface {
                                             return;
                                         }
                                     } else if (ProtoLogImpl_1771455215.Cache.WM_SHELL_RECENTS_TRANSITION_enabled[1]) {
-                                        ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_RECENTS_TRANSITION, -7556875887646265289L, 15, Boolean.valueOf(transitionFinishCallback != null), Boolean.valueOf(z));
+                                        ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_RECENTS_TRANSITION, -7556875887646265289L, 15, Boolean.valueOf(transitionFinishCallback != null), Boolean.valueOf(z4));
                                         break;
                                     }
                                     break;
                                 default:
-                                    recentsController3.mWillFinishToHome = readBoolean3;
+                                    recentsController3.mWillFinishToHome = z3;
                                     break;
                             }
                         }
@@ -124,22 +123,22 @@ public interface IRecentsAnimationController extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 4:
-                    final boolean readBoolean4 = parcel.readBoolean();
+                    final boolean z4 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
                     final RecentsTransitionHandler.RecentsController recentsController4 = (RecentsTransitionHandler.RecentsController) this;
-                    final int i4 = 2;
+                    final int i5 = 2;
                     RecentsTransitionHandler.this.mExecutor.execute(new Runnable() { // from class: com.android.wm.shell.recents.RecentsTransitionHandler$RecentsController$$ExternalSyntheticLambda1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            switch (i4) {
+                            switch (i5) {
                                 case 0:
-                                    recentsController4.mWillForceFinishToHome = readBoolean4;
+                                    recentsController4.mWillForceFinishToHome = z4;
                                     break;
                                 case 1:
                                     RecentsTransitionHandler.RecentsController recentsController42 = recentsController4;
-                                    boolean z = readBoolean4;
+                                    boolean z42 = z4;
                                     Transitions.TransitionFinishCallback transitionFinishCallback = recentsController42.mFinishCB;
-                                    if (transitionFinishCallback != null && z) {
+                                    if (transitionFinishCallback != null && z42) {
                                         int displayId = recentsController42.mInfo.getRootCount() > 0 ? recentsController42.mInfo.getRoot(0).getDisplayId() : 0;
                                         try {
                                             if (ProtoLogImpl_1771455215.Cache.WM_SHELL_RECENTS_TRANSITION_enabled[1]) {
@@ -152,12 +151,12 @@ public interface IRecentsAnimationController extends IInterface {
                                             return;
                                         }
                                     } else if (ProtoLogImpl_1771455215.Cache.WM_SHELL_RECENTS_TRANSITION_enabled[1]) {
-                                        ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_RECENTS_TRANSITION, -7556875887646265289L, 15, Boolean.valueOf(transitionFinishCallback != null), Boolean.valueOf(z));
+                                        ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_RECENTS_TRANSITION, -7556875887646265289L, 15, Boolean.valueOf(transitionFinishCallback != null), Boolean.valueOf(z42));
                                         break;
                                     }
                                     break;
                                 default:
-                                    recentsController4.mWillFinishToHome = readBoolean4;
+                                    recentsController4.mWillFinishToHome = z4;
                                     break;
                             }
                         }
@@ -165,22 +164,22 @@ public interface IRecentsAnimationController extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    final boolean readBoolean5 = parcel.readBoolean();
+                    final boolean z5 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
                     final RecentsTransitionHandler.RecentsController recentsController5 = (RecentsTransitionHandler.RecentsController) this;
-                    final int i5 = 0;
+                    final int i6 = 0;
                     RecentsTransitionHandler.this.mExecutor.execute(new Runnable() { // from class: com.android.wm.shell.recents.RecentsTransitionHandler$RecentsController$$ExternalSyntheticLambda1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            switch (i5) {
+                            switch (i6) {
                                 case 0:
-                                    recentsController5.mWillForceFinishToHome = readBoolean5;
+                                    recentsController5.mWillForceFinishToHome = z5;
                                     break;
                                 case 1:
                                     RecentsTransitionHandler.RecentsController recentsController42 = recentsController5;
-                                    boolean z = readBoolean5;
+                                    boolean z42 = z5;
                                     Transitions.TransitionFinishCallback transitionFinishCallback = recentsController42.mFinishCB;
-                                    if (transitionFinishCallback != null && z) {
+                                    if (transitionFinishCallback != null && z42) {
                                         int displayId = recentsController42.mInfo.getRootCount() > 0 ? recentsController42.mInfo.getRoot(0).getDisplayId() : 0;
                                         try {
                                             if (ProtoLogImpl_1771455215.Cache.WM_SHELL_RECENTS_TRANSITION_enabled[1]) {
@@ -193,12 +192,12 @@ public interface IRecentsAnimationController extends IInterface {
                                             return;
                                         }
                                     } else if (ProtoLogImpl_1771455215.Cache.WM_SHELL_RECENTS_TRANSITION_enabled[1]) {
-                                        ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_RECENTS_TRANSITION, -7556875887646265289L, 15, Boolean.valueOf(transitionFinishCallback != null), Boolean.valueOf(z));
+                                        ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_RECENTS_TRANSITION, -7556875887646265289L, 15, Boolean.valueOf(transitionFinishCallback != null), Boolean.valueOf(z42));
                                         break;
                                     }
                                     break;
                                 default:
-                                    recentsController5.mWillFinishToHome = readBoolean5;
+                                    recentsController5.mWillFinishToHome = z5;
                                     break;
                             }
                         }
@@ -223,10 +222,10 @@ public interface IRecentsAnimationController extends IInterface {
                     RecentsTransitionHandler.this.mExecutor.execute(new Runnable() { // from class: com.android.wm.shell.recents.RecentsTransitionHandler$RecentsController$$ExternalSyntheticLambda4
                         @Override // java.lang.Runnable
                         public final void run() {
-                            final RecentsTransitionHandler.RecentsController recentsController8 = RecentsTransitionHandler.RecentsController.this;
+                            final RecentsTransitionHandler.RecentsController recentsController8 = recentsController7;
                             RemoteAnimationTarget[] remoteAnimationTargetArr2 = remoteAnimationTargetArr;
                             WindowAnimationState[] windowAnimationStateArr2 = windowAnimationStateArr;
-                            int i6 = RecentsTransitionHandler.RecentsController.$r8$clinit;
+                            int i7 = RecentsTransitionHandler.RecentsController.$r8$clinit;
                             if (ProtoLogImpl_1771455215.Cache.WM_SHELL_RECENTS_TRANSITION_enabled[1]) {
                                 ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_RECENTS_TRANSITION, 7080950910277792428L, 1, Long.valueOf(recentsController8.mInstanceId));
                             }
@@ -243,8 +242,8 @@ public interface IRecentsAnimationController extends IInterface {
                             }
                             int size = recentsController8.mInfo.getChanges().size();
                             WindowAnimationState[] windowAnimationStateArr3 = new WindowAnimationState[size];
-                            for (int i7 = 0; i7 < remoteAnimationTargetArr2.length; i7++) {
-                                windowAnimationStateArr3[size - remoteAnimationTargetArr2[i7].prefixOrderIndex] = windowAnimationStateArr2[i7];
+                            for (int i8 = 0; i8 < remoteAnimationTargetArr2.length; i8++) {
+                                windowAnimationStateArr3[size - remoteAnimationTargetArr2[i8].prefixOrderIndex] = windowAnimationStateArr2[i8];
                             }
                             final Transitions.TransitionFinishCallback transitionFinishCallback = recentsController8.mFinishCB;
                             recentsController8.mFinishCB = null;
@@ -253,9 +252,9 @@ public interface IRecentsAnimationController extends IInterface {
                             }
                             recentsController8.mTakeoverHandler.takeOverAnimation(recentsController8.mTransition, recentsController8.mInfo, new SurfaceControl.Transaction(), new Transitions.TransitionFinishCallback() { // from class: com.android.wm.shell.recents.RecentsTransitionHandler$RecentsController$$ExternalSyntheticLambda9
                                 @Override // com.android.wm.shell.transition.Transitions.TransitionFinishCallback
-                                public final void onTransitionFinished(WindowContainerTransaction windowContainerTransaction) {
-                                    int i8 = RecentsTransitionHandler.RecentsController.$r8$clinit;
-                                    RecentsTransitionHandler.RecentsController recentsController9 = RecentsTransitionHandler.RecentsController.this;
+                                public final void onTransitionFinished(WindowContainerTransaction windowContainerTransaction) throws Resources.NotFoundException {
+                                    int i9 = RecentsTransitionHandler.RecentsController.$r8$clinit;
+                                    RecentsTransitionHandler.RecentsController recentsController9 = recentsController8;
                                     recentsController9.getClass();
                                     if (ProtoLogImpl_1771455215.Cache.WM_SHELL_RECENTS_TRANSITION_enabled[1]) {
                                         ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_RECENTS_TRANSITION, 6127017363858667288L, 1, Long.valueOf(recentsController9.mInstanceId));

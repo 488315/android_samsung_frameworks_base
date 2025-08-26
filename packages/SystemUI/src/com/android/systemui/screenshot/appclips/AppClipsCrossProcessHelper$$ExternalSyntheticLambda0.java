@@ -5,7 +5,6 @@ import android.os.IInterface;
 import com.android.systemui.screenshot.appclips.IAppClipsScreenshotHelperService;
 import java.util.function.Function;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class AppClipsCrossProcessHelper$$ExternalSyntheticLambda0 implements Function {
     @Override // java.util.function.Function
@@ -15,7 +14,7 @@ public final /* synthetic */ class AppClipsCrossProcessHelper$$ExternalSynthetic
         if (iBinder == null) {
             return null;
         }
-        IInterface queryLocalInterface = iBinder.queryLocalInterface("com.android.systemui.screenshot.appclips.IAppClipsScreenshotHelperService");
-        return (queryLocalInterface == null || !(queryLocalInterface instanceof IAppClipsScreenshotHelperService)) ? new IAppClipsScreenshotHelperService.Stub.Proxy(iBinder) : (IAppClipsScreenshotHelperService) queryLocalInterface;
+        IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("com.android.systemui.screenshot.appclips.IAppClipsScreenshotHelperService");
+        return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IAppClipsScreenshotHelperService)) ? new IAppClipsScreenshotHelperService.Stub.Proxy(iBinder) : (IAppClipsScreenshotHelperService) iInterfaceQueryLocalInterface;
     }
 }

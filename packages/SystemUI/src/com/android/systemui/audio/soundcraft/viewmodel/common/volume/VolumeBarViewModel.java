@@ -19,7 +19,6 @@ import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class VolumeBarViewModel extends BaseViewModel {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -36,7 +35,6 @@ public final class VolumeBarViewModel extends BaseViewModel {
     public final MutableLiveData smartViewEnabled = new MutableLiveData();
     public final Lazy mainThreadHandler$delegate = LazyKt__LazyJVMKt.lazy(new VolumeBarViewModel$$ExternalSyntheticLambda0());
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -73,11 +71,11 @@ public final class VolumeBarViewModel extends BaseViewModel {
         this.recheckCallback = new Runnable() { // from class: com.android.systemui.audio.soundcraft.viewmodel.common.volume.VolumeBarViewModel$recheckCallback$1
             @Override // java.lang.Runnable
             public final void run() {
-                VolumeBarViewModel volumeBarViewModel = VolumeBarViewModel.this;
+                VolumeBarViewModel volumeBarViewModel = this.this$0;
                 VolumeManager volumeManager2 = volumeBarViewModel.volumeManager;
                 volumeManager2.isTracking = false;
                 volumeBarViewModel.modelProvider.volumeModel = volumeManager2.getVolumeModel();
-                VolumeBarViewModel.this.notifyChange();
+                this.this$0.notifyChange();
             }
         };
     }
@@ -153,8 +151,8 @@ public final class VolumeBarViewModel extends BaseViewModel {
     }
 
     public final boolean isVolumeShocked(int i) {
-        int semGetEarProtectLimit;
-        return getIconType() != 1 && !Intrinsics.areEqual(this.seekBarEnabled.getValue(), Boolean.FALSE) && (semGetEarProtectLimit = (AudioManager.semGetEarProtectLimit() - 1) * 10) > 0 && semGetEarProtectLimit < i;
+        int iSemGetEarProtectLimit;
+        return getIconType() != 1 && !Intrinsics.areEqual(this.seekBarEnabled.getValue(), Boolean.FALSE) && (iSemGetEarProtectLimit = (AudioManager.semGetEarProtectLimit() - 1) * 10) > 0 && iSemGetEarProtectLimit < i;
     }
 
     @Override // com.android.systemui.audio.soundcraft.viewmodel.common.base.BaseViewModel

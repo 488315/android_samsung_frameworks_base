@@ -14,7 +14,6 @@ import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SliceBroadcastRelayHandler implements CoreStartable {
     public final Executor mBackgroundExecutor;
@@ -28,7 +27,6 @@ public class SliceBroadcastRelayHandler implements CoreStartable {
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class BroadcastRelay extends BroadcastReceiver {
         public final CopyOnWriteArraySet mReceivers = new CopyOnWriteArraySet();
         public final Uri mUri;

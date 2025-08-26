@@ -9,12 +9,10 @@ import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function0;
-import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class TelephonyRepositoryImpl$callState$1 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -51,7 +49,7 @@ final class TelephonyRepositoryImpl$callState$1 extends SuspendLambda implements
             final ?? r3 = new TelephonyCallback.CallStateListener() { // from class: com.android.systemui.telephony.data.repository.TelephonyRepositoryImpl$sam$android_telephony_TelephonyCallback_CallStateListener$0
                 @Override // android.telephony.TelephonyCallback.CallStateListener
                 public final /* synthetic */ void onCallStateChanged(int i2) {
-                    Function1.this.mo779invoke(Integer.valueOf(i2));
+                    telephonyRepositoryImpl$callState$1$listener$1.mo781invoke(Integer.valueOf(i2));
                 }
             };
             TelephonyListenerManager telephonyListenerManager = this.this$0.manager;
@@ -62,7 +60,7 @@ final class TelephonyRepositoryImpl$callState$1 extends SuspendLambda implements
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
                     TelephonyRepositoryImpl$sam$android_telephony_TelephonyCallback_CallStateListener$0 telephonyRepositoryImpl$sam$android_telephony_TelephonyCallback_CallStateListener$0 = r3;
-                    TelephonyListenerManager telephonyListenerManager2 = TelephonyRepositoryImpl.this.manager;
+                    TelephonyListenerManager telephonyListenerManager2 = telephonyRepositoryImpl.manager;
                     ((ArrayList) telephonyListenerManager2.mTelephonyCallback.mCallStateListeners).remove(telephonyRepositoryImpl$sam$android_telephony_TelephonyCallback_CallStateListener$0);
                     telephonyListenerManager2.updateListening();
                     return Unit.INSTANCE;

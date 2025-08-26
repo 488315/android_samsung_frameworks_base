@@ -12,14 +12,12 @@ import com.samsung.android.knox.net.nap.NetworkAnalyticsConstants;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AccessibilityNodeInfoCompat {
     public final AccessibilityNodeInfo mInfo;
     public int mParentVirtualDescendantId = -1;
     public int mVirtualDescendantId = -1;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AccessibilityActionCompat {
         public static final AccessibilityActionCompat ACTION_ACCESSIBILITY_FOCUS;
         public static final AccessibilityActionCompat ACTION_CLEAR_ACCESSIBILITY_FOCUS;
@@ -148,7 +146,6 @@ public class AccessibilityNodeInfoCompat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CollectionInfoCompat {
         public final Object mInfo;
 
@@ -161,7 +158,6 @@ public class AccessibilityNodeInfoCompat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CollectionItemInfoCompat {
         public final Object mInfo;
 
@@ -340,13 +336,13 @@ public class AccessibilityNodeInfoCompat {
         if (extrasIntList("androidx.view.accessibility.AccessibilityNodeInfoCompat.SPANS_START_KEY").isEmpty()) {
             return this.mInfo.getText();
         }
-        List extrasIntList = extrasIntList("androidx.view.accessibility.AccessibilityNodeInfoCompat.SPANS_START_KEY");
-        List extrasIntList2 = extrasIntList("androidx.view.accessibility.AccessibilityNodeInfoCompat.SPANS_END_KEY");
-        List extrasIntList3 = extrasIntList("androidx.view.accessibility.AccessibilityNodeInfoCompat.SPANS_FLAGS_KEY");
-        List extrasIntList4 = extrasIntList("androidx.view.accessibility.AccessibilityNodeInfoCompat.SPANS_ID_KEY");
+        List listExtrasIntList = extrasIntList("androidx.view.accessibility.AccessibilityNodeInfoCompat.SPANS_START_KEY");
+        List listExtrasIntList2 = extrasIntList("androidx.view.accessibility.AccessibilityNodeInfoCompat.SPANS_END_KEY");
+        List listExtrasIntList3 = extrasIntList("androidx.view.accessibility.AccessibilityNodeInfoCompat.SPANS_FLAGS_KEY");
+        List listExtrasIntList4 = extrasIntList("androidx.view.accessibility.AccessibilityNodeInfoCompat.SPANS_ID_KEY");
         SpannableString spannableString = new SpannableString(TextUtils.substring(this.mInfo.getText(), 0, this.mInfo.getText().length()));
-        for (int i = 0; i < extrasIntList.size(); i++) {
-            spannableString.setSpan(new AccessibilityClickableSpanCompat(((Integer) extrasIntList4.get(i)).intValue(), this, this.mInfo.getExtras().getInt("androidx.view.accessibility.AccessibilityNodeInfoCompat.SPANS_ACTION_ID_KEY")), ((Integer) extrasIntList.get(i)).intValue(), ((Integer) extrasIntList2.get(i)).intValue(), ((Integer) extrasIntList3.get(i)).intValue());
+        for (int i = 0; i < listExtrasIntList.size(); i++) {
+            spannableString.setSpan(new AccessibilityClickableSpanCompat(((Integer) listExtrasIntList4.get(i)).intValue(), this, this.mInfo.getExtras().getInt("androidx.view.accessibility.AccessibilityNodeInfoCompat.SPANS_ACTION_ID_KEY")), ((Integer) listExtrasIntList.get(i)).intValue(), ((Integer) listExtrasIntList2.get(i)).intValue(), ((Integer) listExtrasIntList3.get(i)).intValue());
         }
         return spannableString;
     }
@@ -393,6 +389,10 @@ public class AccessibilityNodeInfoCompat {
 
     public final void setContentDescription(CharSequence charSequence) {
         this.mInfo.setContentDescription(charSequence);
+    }
+
+    public final void setRoleDescription(CharSequence charSequence) {
+        this.mInfo.getExtras().putCharSequence("AccessibilityNodeInfo.roleDescription", charSequence);
     }
 
     public final void setScrollable(boolean z) {
@@ -492,7 +492,6 @@ public class AccessibilityNodeInfoCompat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class RangeInfoCompat {
         public final Object mInfo;
 

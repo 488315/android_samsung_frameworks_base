@@ -18,7 +18,6 @@ import com.sec.ims.volte2.data.VolteConstants;
 import dagger.Lazy;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ActivityStarterImpl implements ActivityStarter {
     public final ActivityStarterInternal activityStarterInternal;
@@ -37,6 +36,10 @@ public final class ActivityStarterImpl implements ActivityStarter {
         this.activityStarterInternal = (ActivityStarterInternal) obj;
     }
 
+    public static void postOnUiThread$default(ActivityStarterImpl activityStarterImpl, Runnable runnable) {
+        activityStarterImpl.mainExecutor.executeDelayed(runnable, 0);
+    }
+
     @Override // com.android.systemui.plugins.ActivityStarter
     public final void dismissKeyguardThenExecute(ActivityStarter.OnDismissAction onDismissAction, Runnable runnable, boolean z) {
         this.activityStarterInternal.dismissKeyguardThenExecute(onDismissAction, runnable, z);
@@ -49,7 +52,7 @@ public final class ActivityStarterImpl implements ActivityStarter {
 
     @Override // com.android.systemui.plugins.ActivityStarter
     public final void postQSCustomizerRunnableDismissingKeyguard(final Runnable runnable) {
-        this.mainExecutor.executeDelayed(new Runnable() { // from class: com.android.systemui.statusbar.phone.ActivityStarterImpl$postQSCustomizerRunnableDismissingKeyguard$1
+        this.mainExecutor.executeDelayed(new Runnable() { // from class: com.android.systemui.statusbar.phone.ActivityStarterImpl.postQSCustomizerRunnableDismissingKeyguard.1
             @Override // java.lang.Runnable
             public final void run() {
                 ActivityStarterImpl activityStarterImpl = ActivityStarterImpl.this;
@@ -62,12 +65,12 @@ public final class ActivityStarterImpl implements ActivityStarter {
                 final ActivityStarterImpl activityStarterImpl2 = ActivityStarterImpl.this;
                 ActivityStarterInternal activityStarterInternal = activityStarterImpl2.activityStarterInternal;
                 final Runnable runnable2 = runnable;
-                ActivityStarterInternal.executeRunnableDismissingKeyguard$default(activityStarterInternal, new Runnable() { // from class: com.android.systemui.statusbar.phone.ActivityStarterImpl$postQSCustomizerRunnableDismissingKeyguard$1.1
+                ActivityStarterInternal.executeRunnableDismissingKeyguard$default(activityStarterInternal, new Runnable() { // from class: com.android.systemui.statusbar.phone.ActivityStarterImpl.postQSCustomizerRunnableDismissingKeyguard.1.1
                     @Override // java.lang.Runnable
                     public final void run() {
                         Runnable runnable3 = runnable2;
                         if (runnable3 != null) {
-                            activityStarterImpl2.mainExecutor.executeDelayed(runnable3, 0);
+                            ActivityStarterImpl.postOnUiThread$default(activityStarterImpl2, runnable3);
                         }
                     }
                 }, null, false, false, false, false, null, 126);
@@ -82,10 +85,10 @@ public final class ActivityStarterImpl implements ActivityStarter {
 
     @Override // com.android.systemui.plugins.ActivityStarter
     public final void postStartActivityDismissingKeyguard(final PendingIntent pendingIntent) {
-        this.mainExecutor.executeDelayed(new Runnable() { // from class: com.android.systemui.statusbar.phone.ActivityStarterImpl$postStartActivityDismissingKeyguard$1
+        this.mainExecutor.executeDelayed(new Runnable() { // from class: com.android.systemui.statusbar.phone.ActivityStarterImpl.postStartActivityDismissingKeyguard.1
             @Override // java.lang.Runnable
             public final void run() {
-                ActivityStarterImpl.this.activityStarterInternal.startPendingIntentDismissingKeyguard(pendingIntent, true, (r23 & 4) != 0 ? null : null, (r23 & 8) != 0 ? null : null, (r23 & 16) != 0 ? null : null, (r23 & 32) == 0, (r23 & 64) == 0, (r23 & 128) != 0 ? null : null, (r23 & 256) != 0 ? null : null, (r23 & 512) != 0 ? null : null);
+                ActivityStarterImpl.this.activityStarterInternal.startPendingIntentDismissingKeyguard(pendingIntent, true, (1020 & 4) != 0 ? null : null, (1020 & 8) != 0 ? null : null, (1020 & 16) != 0 ? null : null, (1020 & 32) == 0, (1020 & 64) == 0, (1020 & 128) != 0 ? null : null, (1020 & 256) != 0 ? null : null, (1020 & 512) != 0 ? null : null);
             }
         }, 0);
     }
@@ -118,17 +121,17 @@ public final class ActivityStarterImpl implements ActivityStarter {
 
     @Override // com.android.systemui.plugins.ActivityStarter
     public final void startPendingIntentDismissingKeyguard(PendingIntent pendingIntent) {
-        this.activityStarterInternal.startPendingIntentDismissingKeyguard(pendingIntent, true, (r23 & 4) != 0 ? null : null, (r23 & 8) != 0 ? null : null, (r23 & 16) != 0 ? null : null, (r23 & 32) == 0, (r23 & 64) == 0, (r23 & 128) != 0 ? null : null, (r23 & 256) != 0 ? null : null, (r23 & 512) != 0 ? null : null);
+        this.activityStarterInternal.startPendingIntentDismissingKeyguard(pendingIntent, true, (1020 & 4) != 0 ? null : null, (1020 & 8) != 0 ? null : null, (1020 & 16) != 0 ? null : null, (1020 & 32) == 0, (1020 & 64) == 0, (1020 & 128) != 0 ? null : null, (1020 & 256) != 0 ? null : null, (1020 & 512) != 0 ? null : null);
     }
 
     @Override // com.android.systemui.plugins.ActivityStarter
     public final void startPendingIntentMaybeDismissingKeyguard(PendingIntent pendingIntent, Runnable runnable, ActivityTransitionAnimator.Controller controller) {
-        this.activityStarterInternal.startPendingIntentDismissingKeyguard(pendingIntent, true, (r23 & 4) != 0 ? null : runnable, (r23 & 8) != 0 ? null : null, (r23 & 16) != 0 ? null : controller, (r23 & 32) == 0, (r23 & 64) == 0, (r23 & 128) != 0 ? null : null, (r23 & 256) != 0 ? null : null, (r23 & 512) != 0 ? null : null);
+        this.activityStarterInternal.startPendingIntentDismissingKeyguard(pendingIntent, true, (1020 & 4) != 0 ? null : runnable, (1020 & 8) != 0 ? null : null, (1020 & 16) != 0 ? null : controller, (1020 & 32) == 0, (1020 & 64) == 0, (1020 & 128) != 0 ? null : null, (1020 & 256) != 0 ? null : null, (1020 & 512) != 0 ? null : null);
     }
 
     @Override // com.android.systemui.plugins.ActivityStarter
     public final void startPendingIntentWithoutDismissing(PendingIntent pendingIntent, boolean z, Runnable runnable, ActivityTransitionAnimator.Controller controller, Intent intent, Bundle bundle) {
-        this.activityStarterInternal.startPendingIntentDismissingKeyguard(pendingIntent, z, (r23 & 4) != 0 ? null : runnable, (r23 & 8) != 0 ? null : null, (r23 & 16) != 0 ? null : controller, (r23 & 32) == 0, (r23 & 64) == 0, (r23 & 128) != 0 ? null : intent, (r23 & 256) != 0 ? null : bundle, (r23 & 512) != 0 ? null : null);
+        this.activityStarterInternal.startPendingIntentDismissingKeyguard(pendingIntent, z, (1020 & 4) != 0 ? null : runnable, (1020 & 8) != 0 ? null : null, (1020 & 16) != 0 ? null : controller, (1020 & 32) == 0, (1020 & 64) == 0, (1020 & 128) != 0 ? null : intent, (1020 & 256) != 0 ? null : bundle, (1020 & 512) != 0 ? null : null);
     }
 
     @Override // com.android.systemui.plugins.ActivityStarter
@@ -154,20 +157,20 @@ public final class ActivityStarterImpl implements ActivityStarter {
 
     @Override // com.android.systemui.plugins.ActivityStarter
     public final void startPendingIntentDismissingKeyguard(PendingIntent pendingIntent, Runnable runnable) {
-        this.activityStarterInternal.startPendingIntentDismissingKeyguard(pendingIntent, true, (r23 & 4) != 0 ? null : runnable, (r23 & 8) != 0 ? null : null, (r23 & 16) != 0 ? null : null, (r23 & 32) == 0, (r23 & 64) == 0, (r23 & 128) != 0 ? null : null, (r23 & 256) != 0 ? null : null, (r23 & 512) != 0 ? null : null);
+        this.activityStarterInternal.startPendingIntentDismissingKeyguard(pendingIntent, true, (1020 & 4) != 0 ? null : runnable, (1020 & 8) != 0 ? null : null, (1020 & 16) != 0 ? null : null, (1020 & 32) == 0, (1020 & 64) == 0, (1020 & 128) != 0 ? null : null, (1020 & 256) != 0 ? null : null, (1020 & 512) != 0 ? null : null);
     }
 
     @Override // com.android.systemui.plugins.ActivityStarter
     public final void startPendingIntentMaybeDismissingKeyguard(PendingIntent pendingIntent, boolean z, Runnable runnable, ActivityTransitionAnimator.Controller controller, Intent intent, Bundle bundle, String str) {
-        this.activityStarterInternal.startPendingIntentDismissingKeyguard(pendingIntent, z, (r23 & 4) != 0 ? null : runnable, (r23 & 8) != 0 ? null : null, (r23 & 16) != 0 ? null : controller, (r23 & 32) == 0, (r23 & 64) == 0, (r23 & 128) != 0 ? null : intent, (r23 & 256) != 0 ? null : bundle, (r23 & 512) != 0 ? null : str);
+        this.activityStarterInternal.startPendingIntentDismissingKeyguard(pendingIntent, z, (1020 & 4) != 0 ? null : runnable, (1020 & 8) != 0 ? null : null, (1020 & 16) != 0 ? null : controller, (1020 & 32) == 0, (1020 & 64) == 0, (1020 & 128) != 0 ? null : intent, (1020 & 256) != 0 ? null : bundle, (1020 & 512) != 0 ? null : str);
     }
 
     @Override // com.android.systemui.plugins.ActivityStarter
     public final void postStartActivityDismissingKeyguard(final PendingIntent pendingIntent, final ActivityTransitionAnimator.Controller controller) {
-        this.mainExecutor.executeDelayed(new Runnable() { // from class: com.android.systemui.statusbar.phone.ActivityStarterImpl$postStartActivityDismissingKeyguard$2
+        this.mainExecutor.executeDelayed(new Runnable() { // from class: com.android.systemui.statusbar.phone.ActivityStarterImpl.postStartActivityDismissingKeyguard.2
             @Override // java.lang.Runnable
             public final void run() {
-                ActivityStarterImpl.this.activityStarterInternal.startPendingIntentDismissingKeyguard(pendingIntent, true, (r23 & 4) != 0 ? null : null, (r23 & 8) != 0 ? null : null, (r23 & 16) != 0 ? null : controller, (r23 & 32) == 0, (r23 & 64) == 0, (r23 & 128) != 0 ? null : null, (r23 & 256) != 0 ? null : null, (r23 & 512) != 0 ? null : null);
+                ActivityStarterImpl.this.activityStarterInternal.startPendingIntentDismissingKeyguard(pendingIntent, true, (1020 & 4) != 0 ? null : null, (1020 & 8) != 0 ? null : null, (1020 & 16) != 0 ? null : controller, (1020 & 32) == 0, (1020 & 64) == 0, (1020 & 128) != 0 ? null : null, (1020 & 256) != 0 ? null : null, (1020 & 512) != 0 ? null : null);
             }
         }, 0);
     }
@@ -184,7 +187,7 @@ public final class ActivityStarterImpl implements ActivityStarter {
 
     @Override // com.android.systemui.plugins.ActivityStarter
     public final void startPendingIntentDismissingKeyguard(PendingIntent pendingIntent, Runnable runnable, View view) {
-        this.activityStarterInternal.startPendingIntentDismissingKeyguard(pendingIntent, true, (r23 & 4) != 0 ? null : runnable, (r23 & 8) != 0 ? null : view, (r23 & 16) != 0 ? null : null, (r23 & 32) == 0, (r23 & 64) == 0, (r23 & 128) != 0 ? null : null, (r23 & 256) != 0 ? null : null, (r23 & 512) != 0 ? null : null);
+        this.activityStarterInternal.startPendingIntentDismissingKeyguard(pendingIntent, true, (1020 & 4) != 0 ? null : runnable, (1020 & 8) != 0 ? null : view, (1020 & 16) != 0 ? null : null, (1020 & 32) == 0, (1020 & 64) == 0, (1020 & 128) != 0 ? null : null, (1020 & 256) != 0 ? null : null, (1020 & 512) != 0 ? null : null);
     }
 
     @Override // com.android.systemui.plugins.ActivityStarter
@@ -194,24 +197,24 @@ public final class ActivityStarterImpl implements ActivityStarter {
 
     @Override // com.android.systemui.plugins.ActivityStarter
     public final void startPendingIntentDismissingKeyguard(PendingIntent pendingIntent, Runnable runnable, ActivityTransitionAnimator.Controller controller) {
-        this.activityStarterInternal.startPendingIntentDismissingKeyguard(pendingIntent, true, (r23 & 4) != 0 ? null : runnable, (r23 & 8) != 0 ? null : null, (r23 & 16) != 0 ? null : controller, (r23 & 32) == 0, (r23 & 64) == 0, (r23 & 128) != 0 ? null : null, (r23 & 256) != 0 ? null : null, (r23 & 512) != 0 ? null : null);
+        this.activityStarterInternal.startPendingIntentDismissingKeyguard(pendingIntent, true, (1020 & 4) != 0 ? null : runnable, (1020 & 8) != 0 ? null : null, (1020 & 16) != 0 ? null : controller, (1020 & 32) == 0, (1020 & 64) == 0, (1020 & 128) != 0 ? null : null, (1020 & 256) != 0 ? null : null, (1020 & 512) != 0 ? null : null);
     }
 
     @Override // com.android.systemui.plugins.ActivityStarter
     public final void postQSRunnableDismissingKeyguard(final Runnable runnable, final boolean z) {
-        this.mainExecutor.executeDelayed(new Runnable() { // from class: com.android.systemui.statusbar.phone.ActivityStarterImpl$postQSRunnableDismissingKeyguard$1
+        this.mainExecutor.executeDelayed(new Runnable() { // from class: com.android.systemui.statusbar.phone.ActivityStarterImpl.postQSRunnableDismissingKeyguard.1
             @Override // java.lang.Runnable
             public final void run() {
                 ((StatusBarStateControllerImpl) ActivityStarterImpl.this.statusBarStateController).setLeaveOpenOnKeyguardHide(z);
                 final ActivityStarterImpl activityStarterImpl = ActivityStarterImpl.this;
                 ActivityStarterInternal activityStarterInternal = activityStarterImpl.activityStarterInternal;
                 final Runnable runnable2 = runnable;
-                ActivityStarterInternal.executeRunnableDismissingKeyguard$default(activityStarterInternal, new Runnable() { // from class: com.android.systemui.statusbar.phone.ActivityStarterImpl$postQSRunnableDismissingKeyguard$1.1
+                ActivityStarterInternal.executeRunnableDismissingKeyguard$default(activityStarterInternal, new Runnable() { // from class: com.android.systemui.statusbar.phone.ActivityStarterImpl.postQSRunnableDismissingKeyguard.1.1
                     @Override // java.lang.Runnable
                     public final void run() {
                         Runnable runnable3 = runnable2;
                         if (runnable3 != null) {
-                            activityStarterImpl.mainExecutor.executeDelayed(runnable3, 0);
+                            ActivityStarterImpl.postOnUiThread$default(activityStarterImpl, runnable3);
                         }
                     }
                 }, null, false, true, false, false, null, 112);
@@ -221,7 +224,7 @@ public final class ActivityStarterImpl implements ActivityStarter {
 
     @Override // com.android.systemui.plugins.ActivityStarter
     public final void postStartActivityDismissingKeyguard(final Intent intent, int i) {
-        this.mainExecutor.executeDelayed(new Runnable() { // from class: com.android.systemui.statusbar.phone.ActivityStarterImpl$postStartActivityDismissingKeyguard$3
+        this.mainExecutor.executeDelayed(new Runnable() { // from class: com.android.systemui.statusbar.phone.ActivityStarterImpl.postStartActivityDismissingKeyguard.3
             @Override // java.lang.Runnable
             public final void run() {
                 ActivityStarterInternal.startActivityDismissingKeyguard$default(ActivityStarterImpl.this.activityStarterInternal, intent, true, true, null, 0, null, null, false, null, 504);
@@ -241,7 +244,7 @@ public final class ActivityStarterImpl implements ActivityStarter {
 
     @Override // com.android.systemui.plugins.ActivityStarter
     public final void postStartActivityDismissingKeyguard(final Intent intent, int i, final ActivityTransitionAnimator.Controller controller) {
-        this.mainExecutor.executeDelayed(new Runnable() { // from class: com.android.systemui.statusbar.phone.ActivityStarterImpl$postStartActivityDismissingKeyguard$4
+        this.mainExecutor.executeDelayed(new Runnable() { // from class: com.android.systemui.statusbar.phone.ActivityStarterImpl.postStartActivityDismissingKeyguard.4
             @Override // java.lang.Runnable
             public final void run() {
                 ActivityStarterInternal.startActivityDismissingKeyguard$default(ActivityStarterImpl.this.activityStarterInternal, intent, true, true, null, 0, controller, null, false, null, 472);
@@ -251,7 +254,7 @@ public final class ActivityStarterImpl implements ActivityStarter {
 
     @Override // com.android.systemui.plugins.ActivityStarter
     public final void postStartActivityDismissingKeyguard(final Intent intent, int i, final ActivityTransitionAnimator.Controller controller, final String str) {
-        this.mainExecutor.executeDelayed(new Runnable() { // from class: com.android.systemui.statusbar.phone.ActivityStarterImpl$postStartActivityDismissingKeyguard$5
+        this.mainExecutor.executeDelayed(new Runnable() { // from class: com.android.systemui.statusbar.phone.ActivityStarterImpl.postStartActivityDismissingKeyguard.5
             @Override // java.lang.Runnable
             public final void run() {
                 ActivityStarterInternal.startActivityDismissingKeyguard$default(ActivityStarterImpl.this.activityStarterInternal, intent, true, true, null, 0, controller, str, false, null, VolteConstants.ErrorCode.REQUEST_TIMEOUT);
@@ -261,7 +264,7 @@ public final class ActivityStarterImpl implements ActivityStarter {
 
     @Override // com.android.systemui.plugins.ActivityStarter
     public final void postStartActivityDismissingKeyguard(final Intent intent, int i, final ActivityTransitionAnimator.Controller controller, final String str, final UserHandle userHandle) {
-        this.mainExecutor.executeDelayed(new Runnable() { // from class: com.android.systemui.statusbar.phone.ActivityStarterImpl$postStartActivityDismissingKeyguard$6
+        this.mainExecutor.executeDelayed(new Runnable() { // from class: com.android.systemui.statusbar.phone.ActivityStarterImpl.postStartActivityDismissingKeyguard.6
             @Override // java.lang.Runnable
             public final void run() {
                 ActivityStarterInternal.startActivityDismissingKeyguard$default(ActivityStarterImpl.this.activityStarterInternal, intent, true, true, null, 0, controller, str, false, userHandle, 152);
@@ -271,13 +274,13 @@ public final class ActivityStarterImpl implements ActivityStarter {
 
     @Override // com.android.systemui.plugins.ActivityStarter
     public final void postStartActivityDismissingKeyguard(final PendingIntent pendingIntent, final boolean z) {
-        this.mainExecutor.executeDelayed(new Runnable() { // from class: com.android.systemui.statusbar.phone.ActivityStarterImpl$postStartActivityDismissingKeyguard$7
+        this.mainExecutor.executeDelayed(new Runnable() { // from class: com.android.systemui.statusbar.phone.ActivityStarterImpl.postStartActivityDismissingKeyguard.7
             @Override // java.lang.Runnable
             public final void run() {
                 if (z && this.statusBarStateController.getState() == 2 && !this.keyguardUpdateMonitor.isSecure()) {
                     this.statusBarStateController.setState(1);
                 }
-                this.activityStarterInternal.startPendingIntentDismissingKeyguard(pendingIntent, true, (r23 & 4) != 0 ? null : null, (r23 & 8) != 0 ? null : null, (r23 & 16) != 0 ? null : null, (r23 & 32) == 0, (r23 & 64) == 0, (r23 & 128) != 0 ? null : null, (r23 & 256) != 0 ? null : null, (r23 & 512) != 0 ? null : null);
+                this.activityStarterInternal.startPendingIntentDismissingKeyguard(pendingIntent, true, (1020 & 4) != 0 ? null : null, (1020 & 8) != 0 ? null : null, (1020 & 16) != 0 ? null : null, (1020 & 32) == 0, (1020 & 64) == 0, (1020 & 128) != 0 ? null : null, (1020 & 256) != 0 ? null : null, (1020 & 512) != 0 ? null : null);
             }
         }, 0);
     }

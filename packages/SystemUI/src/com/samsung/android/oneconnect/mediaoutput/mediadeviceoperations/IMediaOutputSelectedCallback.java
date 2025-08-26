@@ -6,14 +6,11 @@ import android.os.IInterface;
 import android.os.Parcel;
 import com.android.systemui.media.mediaoutput.viewmodel.DeviceAudioPathViewModel$Companion$mediaoutputChanged$1$mediaOutputSelectedCallback$1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface IMediaOutputSelectedCallback extends IInterface {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IMediaOutputSelectedCallback {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class Proxy implements IMediaOutputSelectedCallback {
             public final IBinder mRemote;
 
@@ -43,10 +40,10 @@ public interface IMediaOutputSelectedCallback extends IInterface {
             if (i != 1) {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
-            String readString = parcel.readString();
+            String string = parcel.readString();
             parcel.readString();
             parcel.readInt();
-            ((DeviceAudioPathViewModel$Companion$mediaoutputChanged$1$mediaOutputSelectedCallback$1) this).onMediaOutputSelected(readString);
+            ((DeviceAudioPathViewModel$Companion$mediaoutputChanged$1$mediaOutputSelectedCallback$1) this).onMediaOutputSelected(string);
             parcel2.writeNoException();
             return true;
         }

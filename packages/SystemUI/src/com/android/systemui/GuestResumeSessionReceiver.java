@@ -20,7 +20,6 @@ import com.android.systemui.util.NotificationChannels;
 import com.android.systemui.util.settings.SecureSettings;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class GuestResumeSessionReceiver {
     public static final String SETTING_GUEST_HAS_LOGGED_IN = "systemui.guest_has_logged_in";
@@ -70,16 +69,15 @@ public class GuestResumeSessionReceiver {
                     guestSessionNotification.mNotificationManager.notifyAsUser(null, 70, contentIntent.build(), UserHandle.of(userInfo.id));
                 }
                 if (intForUser > 1) {
-                    SystemUIDialog create = guestResumeSessionReceiver.mResetSessionDialogFactory.create(i);
-                    guestResumeSessionReceiver.mNewSessionDialog = create;
-                    create.show();
+                    SystemUIDialog systemUIDialogCreate = guestResumeSessionReceiver.mResetSessionDialogFactory.create(i);
+                    guestResumeSessionReceiver.mNewSessionDialog = systemUIDialogCreate;
+                    systemUIDialogCreate.show();
                 }
             }
         }
     };
     public final UserTracker mUserTracker;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ResetSessionDialog extends SystemUIDialog implements DialogInterface.OnClickListener {
         public static final int BUTTON_DONTWIPE = -1;
         public static final int BUTTON_WIPE = -2;

@@ -83,9 +83,9 @@ public final class DisplayHashParams implements Parcelable {
     }
 
     DisplayHashParams(Parcel parcel) {
-        byte readByte = parcel.readByte();
-        boolean z = (readByte & 2) != 0;
-        this.mBufferSize = (readByte & 1) == 0 ? null : parcel.readSize();
+        byte b = parcel.readByte();
+        boolean z = (b & 2) != 0;
+        this.mBufferSize = (b & 1) == 0 ? null : parcel.readSize();
         this.mGrayscaleBuffer = z;
     }
 }

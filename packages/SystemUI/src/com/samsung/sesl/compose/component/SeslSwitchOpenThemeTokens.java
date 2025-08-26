@@ -1,9 +1,9 @@
 package com.samsung.sesl.compose.component;
 
 import androidx.compose.ui.graphics.painter.Painter;
+import com.android.systemui.media.mediaoutput.entity.AudioMirroringDevice$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class SeslSwitchOpenThemeTokens {
     public final Painter thumb;
@@ -40,7 +40,7 @@ public final class SeslSwitchOpenThemeTokens {
     }
 
     public final int hashCode() {
-        return this.thumb.hashCode() + ((this.thumbDisabledOff.hashCode() + ((this.thumbOff.hashCode() + ((this.thumbDisabledOn.hashCode() + ((this.thumbOn.hashCode() + ((this.trackDisabledOff.hashCode() + ((this.trackOff.hashCode() + ((this.trackDisabledOn.hashCode() + (this.trackOn.hashCode() * 31)) * 31)) * 31)) * 31)) * 31)) * 31)) * 31)) * 31);
+        return this.thumb.hashCode() + AudioMirroringDevice$$ExternalSyntheticOutline0.m(this.thumbDisabledOff, AudioMirroringDevice$$ExternalSyntheticOutline0.m(this.thumbOff, AudioMirroringDevice$$ExternalSyntheticOutline0.m(this.thumbDisabledOn, AudioMirroringDevice$$ExternalSyntheticOutline0.m(this.thumbOn, AudioMirroringDevice$$ExternalSyntheticOutline0.m(this.trackDisabledOff, AudioMirroringDevice$$ExternalSyntheticOutline0.m(this.trackOff, AudioMirroringDevice$$ExternalSyntheticOutline0.m(this.trackDisabledOn, this.trackOn.hashCode() * 31, 31), 31), 31), 31), 31), 31), 31);
     }
 
     public final String toString() {

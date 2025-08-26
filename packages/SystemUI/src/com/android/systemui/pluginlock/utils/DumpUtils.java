@@ -15,9 +15,9 @@ import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Scanner;
 import java.util.TimeZone;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class DumpUtils {
     private static final String DUMP_DIR = "/data/user_de/0/com.android.systemui/files/pluginlock/";
@@ -33,12 +33,11 @@ public class DumpUtils {
     private final Runnable mWriteRunnable = new Runnable() { // from class: com.android.systemui.pluginlock.utils.DumpUtils$$ExternalSyntheticLambda0
         @Override // java.lang.Runnable
         public final void run() {
-            DumpUtils.this.writeDump();
+            this.f$0.writeDump();
         }
     };
     private String mDumpString = "";
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class HandlerExecutor {
         private final Handler mHandler;
 
@@ -83,13 +82,13 @@ public class DumpUtils {
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream));
                 while (true) {
                     try {
-                        String readLine = bufferedReader.readLine();
-                        if (readLine == null) {
+                        String line = bufferedReader.readLine();
+                        if (line == null) {
                             bufferedReader.close();
                             fileInputStream.close();
                             return sb.toString();
                         }
-                        sb.append(readLine);
+                        sb.append(line);
                         sb.append(SEPARATOR);
                     } finally {
                     }
@@ -115,64 +114,40 @@ public class DumpUtils {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0035 A[Catch: all -> 0x001c, TryCatch #0 {all -> 0x001c, blocks: (B:3:0x0005, B:5:0x0010, B:7:0x0019, B:8:0x001f, B:9:0x0025, B:12:0x002d, B:14:0x0035, B:19:0x0041), top: B:2:0x0005 }] */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x003f A[SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:10:0x001e  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public java.lang.String getDump() {
-        /*
-            r7 = this;
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder
-            r0.<init>()
-            java.lang.String r7 = r7.getDumpFromFile()     // Catch: java.lang.Throwable -> L1c
-            java.lang.String r1 = com.android.systemui.pluginlock.utils.DumpUtils.SEPARATOR     // Catch: java.lang.Throwable -> L1c
-            r2 = 200(0xc8, float:2.8E-43)
-            r3 = 0
-            if (r1 == 0) goto L1e
-            java.lang.String[] r1 = r7.split(r1)     // Catch: java.lang.Throwable -> L1c
-            int r1 = r1.length     // Catch: java.lang.Throwable -> L1c
-            int r4 = r1 + (-1)
-            if (r4 <= r2) goto L1e
-            int r1 = r1 + (-201)
-            goto L1f
-        L1c:
-            r7 = move-exception
-            goto L49
-        L1e:
-            r1 = r3
-        L1f:
-            java.util.Scanner r4 = new java.util.Scanner     // Catch: java.lang.Throwable -> L1c
-            r4.<init>(r7)     // Catch: java.lang.Throwable -> L1c
-            r7 = r3
-        L25:
-            boolean r5 = r4.hasNextLine()     // Catch: java.lang.Throwable -> L1c
-            if (r5 == 0) goto L41
-            if (r3 >= r2) goto L41
-            java.lang.String r5 = r4.nextLine()     // Catch: java.lang.Throwable -> L1c
-            int r6 = r7 + 1
-            if (r7 < r1) goto L3f
-            r0.append(r5)     // Catch: java.lang.Throwable -> L1c
-            java.lang.String r7 = com.android.systemui.pluginlock.utils.DumpUtils.SEPARATOR     // Catch: java.lang.Throwable -> L1c
-            r0.append(r7)     // Catch: java.lang.Throwable -> L1c
-            int r3 = r3 + 1
-        L3f:
-            r7 = r6
-            goto L25
-        L41:
-            r4.close()     // Catch: java.lang.Throwable -> L1c
-            java.lang.String r7 = r0.toString()     // Catch: java.lang.Throwable -> L1c
-            return r7
-        L49:
-            java.lang.String r1 = com.android.systemui.pluginlock.utils.DumpUtils.SEPARATOR
-            r0.append(r1)
-            java.lang.String r7 = r7.toString()
-            r0.append(r7)
-            java.lang.String r7 = r0.toString()
-            return r7
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.pluginlock.utils.DumpUtils.getDump():java.lang.String");
+    public String getDump() {
+        int i;
+        StringBuilder sb = new StringBuilder();
+        try {
+            String dumpFromFile = getDumpFromFile();
+            String str = SEPARATOR;
+            int i2 = 0;
+            if (str != null) {
+                int length = dumpFromFile.split(str).length;
+                i = length + (-1) > 200 ? length - 201 : 0;
+            }
+            Scanner scanner = new Scanner(dumpFromFile);
+            int i3 = 0;
+            while (scanner.hasNextLine() && i2 < 200) {
+                String strNextLine = scanner.nextLine();
+                int i4 = i3 + 1;
+                if (i3 >= i) {
+                    sb.append(strNextLine);
+                    sb.append(SEPARATOR);
+                    i2++;
+                }
+                i3 = i4;
+            }
+            scanner.close();
+            return sb.toString();
+        } catch (Throwable th) {
+            sb.append(SEPARATOR);
+            sb.append(th.toString());
+            return sb.toString();
+        }
     }
 
     public String getDumpLegacy() {

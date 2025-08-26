@@ -26,14 +26,12 @@ import kotlinx.coroutines.flow.FlowKt__TransformKt$onEach$$inlined$unsafeTransfo
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.StateFlowImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class VolumeDialogStateInteractor {
     public final VolumeDialogController volumeDialogController;
     public final ReadonlyStateFlow volumeDialogState;
     public final VolumeDialogStateRepository volumeDialogStateRepository;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.volume.dialog.domain.interactor.VolumeDialogStateInteractor$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         /* synthetic */ Object L$0;
@@ -72,18 +70,18 @@ public final class VolumeDialogStateInteractor {
                 Function1 function1 = new Function1() { // from class: com.android.systemui.volume.dialog.domain.interactor.VolumeDialogStateInteractor$1$$ExternalSyntheticLambda0
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj2) {
+                    public final Object mo781invoke(Object obj2) {
                         VolumeDialogStateModel volumeDialogStateModel = (VolumeDialogStateModel) obj2;
                         VolumeDialogController.State state = ((VolumeDialogEventModel.StateChanged) volumeDialogEventModel).state;
-                        VolumeDialogStateInteractor.this.getClass();
+                        volumeDialogStateInteractor.getClass();
                         SparseArray<VolumeDialogController.StreamState> sparseArray = state.states;
                         LinkedHashMap linkedHashMap = new LinkedHashMap();
                         SparseArrayKt$keyIterator$1 sparseArrayKt$keyIterator$1 = new SparseArrayKt$keyIterator$1(sparseArray);
                         while (sparseArrayKt$keyIterator$1.hasNext()) {
-                            int nextInt = sparseArrayKt$keyIterator$1.nextInt();
-                            VolumeDialogController.StreamState streamState = sparseArray.get(nextInt);
+                            int iNextInt = sparseArrayKt$keyIterator$1.nextInt();
+                            VolumeDialogController.StreamState streamState = sparseArray.get(iNextInt);
                             streamState.getClass();
-                            linkedHashMap.put(Integer.valueOf(nextInt), new VolumeDialogStreamModel(nextInt, nextInt == state.activeStream, streamState));
+                            linkedHashMap.put(Integer.valueOf(iNextInt), new VolumeDialogStreamModel(iNextInt, iNextInt == state.activeStream, streamState));
                         }
                         return VolumeDialogStateModel.copy$default(volumeDialogStateModel, false, null, null, false, linkedHashMap, state.ringerModeInternal, state.ringerModeExternal, state.zenMode, state.effectsSuppressor, state.effectsSuppressorName, state.activeStream, state.disallowAlarms, state.disallowMedia, state.disallowSystem, state.disallowRinger, 15);
                     }
@@ -91,7 +89,7 @@ public final class VolumeDialogStateInteractor {
                 do {
                     stateFlowImpl = volumeDialogStateRepository.mutableState;
                     value2 = stateFlowImpl.getValue();
-                } while (!stateFlowImpl.compareAndSet(value2, function1.mo779invoke(value2)));
+                } while (!stateFlowImpl.compareAndSet(value2, function1.mo781invoke(value2)));
             } else if (volumeDialogEventModel instanceof VolumeDialogEventModel.AccessibilityModeChanged) {
                 StateFlowImpl stateFlowImpl2 = VolumeDialogStateInteractor.this.volumeDialogStateRepository.mutableState;
                 do {

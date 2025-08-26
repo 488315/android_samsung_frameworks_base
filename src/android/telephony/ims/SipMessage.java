@@ -117,8 +117,8 @@ public final class SipMessage implements Parcelable {
         if (!SipMessageParsingUtils.isSipRequest(str)) {
             return str;
         }
-        String[] split = str.split(" ");
-        return split[0] + " <Request-URI> " + split[2];
+        String[] strArrSplit = str.split(" ");
+        return strArrSplit[0] + " <Request-URI> " + strArrSplit[2];
     }
 
     public boolean equals(Object obj) {

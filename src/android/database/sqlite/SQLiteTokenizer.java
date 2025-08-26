@@ -62,71 +62,71 @@ public class SQLiteTokenizer {
             return;
         }
         int length = str.length();
-        int i2 = 0;
-        while (i2 < length) {
-            char peek = peek(str, i2);
-            if (isAlpha(peek)) {
-                int i3 = i2 + 1;
-                while (isAlNum(peek(str, i3))) {
-                    i3++;
+        int iIndexOf = 0;
+        while (iIndexOf < length) {
+            char cPeek = peek(str, iIndexOf);
+            if (isAlpha(cPeek)) {
+                int i2 = iIndexOf + 1;
+                while (isAlNum(peek(str, i2))) {
+                    i2++;
                 }
-                consumer.accept(str.substring(i2, i3));
-                i2 = i3;
-            } else if (isAnyOf(peek, "'\"`")) {
-                int i4 = i2 + 1;
-                int i5 = i4;
+                consumer.accept(str.substring(iIndexOf, i2));
+                iIndexOf = i2;
+            } else if (isAnyOf(cPeek, "'\"`")) {
+                int i3 = iIndexOf + 1;
+                int i4 = i3;
                 while (true) {
-                    int indexOf = str.indexOf(peek, i5);
-                    if (indexOf < 0) {
+                    int iIndexOf2 = str.indexOf(cPeek, i4);
+                    if (iIndexOf2 < 0) {
                         throw genException("Unterminated quote", str);
                     }
-                    int i6 = indexOf + 1;
-                    if (peek(str, i6) != peek) {
-                        if (peek != '\'') {
-                            String substring = str.substring(i4, indexOf);
-                            if (substring.indexOf(peek) >= 0) {
-                                substring = substring.replaceAll(String.valueOf(peek) + peek, String.valueOf(peek));
+                    int i5 = iIndexOf2 + 1;
+                    if (peek(str, i5) != cPeek) {
+                        if (cPeek != '\'') {
+                            String strSubstring = str.substring(i3, iIndexOf2);
+                            if (strSubstring.indexOf(cPeek) >= 0) {
+                                strSubstring = strSubstring.replaceAll(String.valueOf(cPeek) + cPeek, String.valueOf(cPeek));
                             }
-                            consumer.accept(substring);
+                            consumer.accept(strSubstring);
                         } else {
                             i &= 1;
                             if (i != 0) {
                                 throw genException("Non-token detected", str);
                             }
                         }
-                        i2 = i6;
+                        iIndexOf = i5;
                     } else {
-                        i5 = indexOf + 2;
+                        i4 = iIndexOf2 + 2;
                     }
                 }
-            } else if (peek == '[') {
-                int i7 = i2 + 1;
-                int indexOf2 = str.indexOf(93, i7);
-                if (indexOf2 < 0) {
+            } else if (cPeek == '[') {
+                int i6 = iIndexOf + 1;
+                int iIndexOf3 = str.indexOf(93, i6);
+                if (iIndexOf3 < 0) {
                     throw genException("Unterminated quote", str);
                 }
-                consumer.accept(str.substring(i7, indexOf2));
-                i2 = indexOf2 + 1;
+                consumer.accept(str.substring(i6, iIndexOf3));
+                iIndexOf = iIndexOf3 + 1;
             } else {
                 i &= 1;
                 if (i != 0) {
                     throw genException("Non-token detected", str);
                 }
-                if (peek == '-' && peek(str, i2 + 1) == '-') {
-                    i2 = str.indexOf(10, i2 + 2);
-                    if (i2 < 0) {
+                if (cPeek == '-' && peek(str, iIndexOf + 1) == '-') {
+                    iIndexOf = str.indexOf(10, iIndexOf + 2);
+                    if (iIndexOf < 0) {
                         throw genException("Unterminated comment", str);
                     }
-                } else if (peek == '/' && peek(str, i2 + 1) == '*') {
-                    int indexOf3 = str.indexOf("*/", i2 + 2);
-                    if (indexOf3 < 0) {
+                } else if (cPeek == '/' && peek(str, iIndexOf + 1) == '*') {
+                    int iIndexOf4 = str.indexOf("*/", iIndexOf + 2);
+                    if (iIndexOf4 < 0) {
                         throw genException("Unterminated comment", str);
                     }
-                    i2 = indexOf3 + 2;
-                } else if (peek == ';') {
+                    iIndexOf = iIndexOf4 + 2;
+                } else if (cPeek == ';') {
                     throw genException("Semicolon is not allowed", str);
                 }
-                i2++;
+                iIndexOf++;
             }
         }
     }

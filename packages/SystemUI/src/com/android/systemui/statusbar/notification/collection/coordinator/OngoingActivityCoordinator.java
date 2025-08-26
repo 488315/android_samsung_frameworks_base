@@ -18,7 +18,6 @@ import com.android.systemui.util.SettingsHelper;
 import java.util.ArrayList;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @CoordinatorScope
 /* loaded from: classes3.dex */
 public final class OngoingActivityCoordinator implements Coordinator {
@@ -49,18 +48,18 @@ public final class OngoingActivityCoordinator implements Coordinator {
 
         @Override // com.android.systemui.statusbar.notification.collection.listbuilder.pluggable.NotifSectioner
         public NotifComparator getComparator() {
-            return OngoingActivityCoordinator.this.getTimeSortCoordnator().getTimeComparator();
+            return this.this$0.getTimeSortCoordnator().getTimeComparator();
         }
 
         @Override // com.android.systemui.statusbar.notification.collection.listbuilder.pluggable.NotifSectioner
         public NodeController getHeaderNodeController() {
-            return OngoingActivityCoordinator.this.getOngoingActivityHeaderController();
+            return this.this$0.getOngoingActivityHeaderController();
         }
 
         @Override // com.android.systemui.statusbar.notification.collection.listbuilder.pluggable.NotifSectioner
         public boolean isInSection(PipelineEntry pipelineEntry) {
             NotificationEntry representativeEntry;
-            if (OngoingActivityCoordinator.this.getSettingsHelper().getNotificationSortOrderValue() == 1) {
+            if (this.this$0.getSettingsHelper().getNotificationSortOrderValue() == 1) {
                 sortChildren(pipelineEntry, getComparator());
             }
             NotificationEntry representativeEntry2 = pipelineEntry.getRepresentativeEntry();
@@ -90,7 +89,7 @@ public final class OngoingActivityCoordinator implements Coordinator {
     @Override // com.android.systemui.statusbar.notification.collection.coordinator.Coordinator
     public void attach(NotifPipeline notifPipeline) {
         notifPipeline.addFinalizeFilter(this.ongoingSummary);
-        ((ArrayList) notifPipeline.mRenderStageManager.onAfterRenderEntryListeners).add(new OnAfterRenderEntryListener() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.OngoingActivityCoordinator$attach$1
+        ((ArrayList) notifPipeline.mRenderStageManager.onAfterRenderEntryListeners).add(new OnAfterRenderEntryListener() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.OngoingActivityCoordinator.attach.1
             @Override // com.android.systemui.statusbar.notification.collection.listbuilder.OnAfterRenderEntryListener
             public final void onAfterRenderEntry(NotificationEntry notificationEntry, NotifRowController notifRowController) {
                 OngoingActivityCoordinator.this.onAfterRenderEntry(notificationEntry, notifRowController);

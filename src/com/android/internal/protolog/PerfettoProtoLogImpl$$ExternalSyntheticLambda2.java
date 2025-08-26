@@ -3,7 +3,7 @@ package com.android.internal.protolog;
 import com.android.internal.protolog.ProtoLogDataSource;
 
 /* compiled from: D8$$SyntheticClass */
-/* loaded from: classes3.dex */
+/* loaded from: classes4.dex */
 public final /* synthetic */ class PerfettoProtoLogImpl$$ExternalSyntheticLambda2 implements ProtoLogDataSource.Instance.TracingInstanceStartCallback {
     public final /* synthetic */ PerfettoProtoLogImpl f$0;
 

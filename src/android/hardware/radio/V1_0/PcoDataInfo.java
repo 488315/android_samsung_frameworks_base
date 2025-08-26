@@ -38,13 +38,13 @@ public final class PcoDataInfo {
 
     public static final ArrayList<PcoDataInfo> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<PcoDataInfo> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 48, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 48, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             PcoDataInfo pcoDataInfo = new PcoDataInfo();
-            pcoDataInfo.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 48);
+            pcoDataInfo.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 48);
             arrayList.add(pcoDataInfo);
         }
         return arrayList;
@@ -57,10 +57,10 @@ public final class PcoDataInfo {
         hwParcel.readEmbeddedBuffer(r2.getBytes().length + 1, hwBlob.handle(), j2, false);
         this.pcoId = hwBlob.getInt32(j + 24);
         int int32 = hwBlob.getInt32(j + 40);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32, hwBlob.handle(), j + 32, true);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32, hwBlob.handle(), j + 32, true);
         this.contents.clear();
         for (int i = 0; i < int32; i++) {
-            this.contents.add(Byte.valueOf(readEmbeddedBuffer.getInt8(i)));
+            this.contents.add(Byte.valueOf(embeddedBuffer.getInt8(i)));
         }
     }
 

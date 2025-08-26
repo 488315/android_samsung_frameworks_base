@@ -16,7 +16,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class ExercisingActivityWrapperV1 extends ActivityWrapper {
     private final Float calorie;
@@ -33,7 +32,6 @@ public final class ExercisingActivityWrapperV1 extends ActivityWrapper {
     public static final Companion Companion = new Companion(null);
     public static final Parcelable.Creator<ExercisingActivityWrapperV1> CREATOR = new Creator();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -43,18 +41,17 @@ public final class ExercisingActivityWrapperV1 extends ActivityWrapper {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Creator implements Parcelable.Creator {
         @Override // android.os.Parcelable.Creator
         public final Object createFromParcel(Parcel parcel) {
-            String readString = parcel.readString();
-            int readInt = parcel.readInt();
-            ArrayList arrayList = new ArrayList(readInt);
-            int i = 0;
-            while (i != readInt) {
-                i = Engram$Creator$$ExternalSyntheticOutline0.m(ExercisingActivityWrapperV1.class, parcel, arrayList, i, 1);
+            String string = parcel.readString();
+            int i = parcel.readInt();
+            ArrayList arrayList = new ArrayList(i);
+            int iM = 0;
+            while (iM != i) {
+                iM = Engram$Creator$$ExternalSyntheticOutline0.m(ExercisingActivityWrapperV1.class, parcel, arrayList, iM, 1);
             }
-            return new ExercisingActivityWrapperV1(readString, arrayList, parcel.readString(), parcel.readInt() == 0 ? null : Place.CREATOR.createFromParcel(parcel), parcel.readInt() == 0 ? null : Float.valueOf(parcel.readFloat()), parcel.readInt() == 0 ? null : Float.valueOf(parcel.readFloat()), parcel.readInt() == 0 ? null : Float.valueOf(parcel.readFloat()), parcel.readInt() == 0 ? null : Float.valueOf(parcel.readFloat()), parcel.readLong(), parcel.readInt() != 0 ? Long.valueOf(parcel.readLong()) : null, parcel.readString());
+            return new ExercisingActivityWrapperV1(string, arrayList, parcel.readString(), parcel.readInt() == 0 ? null : Place.CREATOR.createFromParcel(parcel), parcel.readInt() == 0 ? null : Float.valueOf(parcel.readFloat()), parcel.readInt() == 0 ? null : Float.valueOf(parcel.readFloat()), parcel.readInt() == 0 ? null : Float.valueOf(parcel.readFloat()), parcel.readInt() == 0 ? null : Float.valueOf(parcel.readFloat()), parcel.readLong(), parcel.readInt() != 0 ? Long.valueOf(parcel.readLong()) : null, parcel.readString());
         }
 
         @Override // android.os.Parcelable.Creator
@@ -130,9 +127,9 @@ public final class ExercisingActivityWrapperV1 extends ActivityWrapper {
     @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(this.id);
-        Iterator m = KnoxConfigurationType$$ExternalSyntheticOutline0.m(parcel, this.contents);
-        while (m.hasNext()) {
-            parcel.writeParcelable((Parcelable) m.next(), i);
+        Iterator itM = KnoxConfigurationType$$ExternalSyntheticOutline0.m(parcel, this.contents);
+        while (itM.hasNext()) {
+            parcel.writeParcelable((Parcelable) itM.next(), i);
         }
         parcel.writeString(this.name);
         Place place = this.location;

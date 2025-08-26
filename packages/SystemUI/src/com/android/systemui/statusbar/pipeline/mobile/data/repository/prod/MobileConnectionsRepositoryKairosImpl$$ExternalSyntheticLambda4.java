@@ -12,7 +12,6 @@ import java.util.Map;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class MobileConnectionsRepositoryKairosImpl$$ExternalSyntheticLambda4 implements Function2 {
     public final /* synthetic */ int $r8$classId;
@@ -45,7 +44,7 @@ public final /* synthetic */ class MobileConnectionsRepositoryKairosImpl$$Extern
             case 2:
                 Map.Entry entry = (Map.Entry) obj2;
                 int i2 = MobileConnectionsRepositoryKairosImpl.$r8$clinit;
-                final int intValue = ((Number) entry.getKey()).intValue();
+                final int iIntValue = ((Number) entry.getKey()).intValue();
                 final MobileConnectionRepositoryKairosFactoryImpl mobileConnectionRepositoryKairosFactoryImpl = (MobileConnectionRepositoryKairosFactoryImpl) ((MobileConnectionsRepositoryKairosImpl.ConnectionRepoFactory) mobileConnectionsRepositoryKairosImpl.mobileRepoFactory.get());
                 mobileConnectionRepositoryKairosFactoryImpl.getClass();
                 break;
@@ -59,9 +58,9 @@ public final /* synthetic */ class MobileConnectionsRepositoryKairosImpl$$Extern
                 LogLevel logLevel2 = LogLevel.INFO;
                 MobileInputLogger$$ExternalSyntheticLambda0 mobileInputLogger$$ExternalSyntheticLambda02 = new MobileInputLogger$$ExternalSyntheticLambda0(4);
                 LogBuffer logBuffer2 = mobileInputLogger2.buffer;
-                LogMessage obtain = logBuffer2.obtain("MobileInputLog", logLevel2, mobileInputLogger$$ExternalSyntheticLambda02, null);
-                ((LogMessageImpl) obtain).str1 = ((SignalIcon$MobileIconGroup) obj2).name;
-                logBuffer2.commit(obtain);
+                LogMessage logMessageObtain = logBuffer2.obtain("MobileInputLog", logLevel2, mobileInputLogger$$ExternalSyntheticLambda02, null);
+                ((LogMessageImpl) logMessageObtain).str1 = ((SignalIcon$MobileIconGroup) obj2).name;
+                logBuffer2.commit(logMessageObtain);
                 break;
         }
         return Unit.INSTANCE;

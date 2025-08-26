@@ -9,7 +9,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class MediaDataLoader$loadMediaData$loadMediaJob$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ boolean $isConvertingToActive;
@@ -54,7 +53,7 @@ final class MediaDataLoader$loadMediaData$loadMediaJob$1 extends SuspendLambda i
         StatusBarNotification statusBarNotification = this.$sbn;
         boolean z = this.$isConvertingToActive;
         this.label = 1;
-        Object access$loadMediaDataInBackground = MediaDataLoader.access$loadMediaDataInBackground(mediaDataLoader, str, statusBarNotification, z, this);
-        return access$loadMediaDataInBackground == coroutineSingletons ? coroutineSingletons : access$loadMediaDataInBackground;
+        Object objAccess$loadMediaDataInBackground = MediaDataLoader.access$loadMediaDataInBackground(mediaDataLoader, str, statusBarNotification, z, this);
+        return objAccess$loadMediaDataInBackground == coroutineSingletons ? coroutineSingletons : objAccess$loadMediaDataInBackground;
     }
 }

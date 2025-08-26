@@ -229,9 +229,9 @@ public interface IPlatformCompat extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IPlatformCompat.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IPlatformCompat)) {
-                return (IPlatformCompat) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IPlatformCompat.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IPlatformCompat)) {
+                return (IPlatformCompat) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -305,65 +305,65 @@ public interface IPlatformCompat extends IInterface {
             }
             switch (i) {
                 case 1:
-                    long readLong = parcel.readLong();
+                    long j = parcel.readLong();
                     ApplicationInfo applicationInfo = (ApplicationInfo) parcel.readTypedObject(ApplicationInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    reportChange(readLong, applicationInfo);
+                    reportChange(j, applicationInfo);
                     parcel2.writeNoException();
                     return true;
                 case 2:
-                    long readLong2 = parcel.readLong();
-                    String readString = parcel.readString();
-                    int readInt = parcel.readInt();
+                    long j2 = parcel.readLong();
+                    String string = parcel.readString();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    reportChangeByPackageName(readLong2, readString, readInt);
+                    reportChangeByPackageName(j2, string, i3);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    long readLong3 = parcel.readLong();
-                    int readInt2 = parcel.readInt();
+                    long j3 = parcel.readLong();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    reportChangeByUid(readLong3, readInt2);
+                    reportChangeByUid(j3, i4);
                     parcel2.writeNoException();
                     return true;
                 case 4:
-                    long readLong4 = parcel.readLong();
+                    long j4 = parcel.readLong();
                     ApplicationInfo applicationInfo2 = (ApplicationInfo) parcel.readTypedObject(ApplicationInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isChangeEnabled = isChangeEnabled(readLong4, applicationInfo2);
+                    boolean zIsChangeEnabled = isChangeEnabled(j4, applicationInfo2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isChangeEnabled);
+                    parcel2.writeBoolean(zIsChangeEnabled);
                     return true;
                 case 5:
-                    long readLong5 = parcel.readLong();
-                    String readString2 = parcel.readString();
-                    int readInt3 = parcel.readInt();
+                    long j5 = parcel.readLong();
+                    String string2 = parcel.readString();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isChangeEnabledByPackageName = isChangeEnabledByPackageName(readLong5, readString2, readInt3);
+                    boolean zIsChangeEnabledByPackageName = isChangeEnabledByPackageName(j5, string2, i5);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isChangeEnabledByPackageName);
+                    parcel2.writeBoolean(zIsChangeEnabledByPackageName);
                     return true;
                 case 6:
-                    long readLong6 = parcel.readLong();
-                    int readInt4 = parcel.readInt();
+                    long j6 = parcel.readLong();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isChangeEnabledByUid = isChangeEnabledByUid(readLong6, readInt4);
+                    boolean zIsChangeEnabledByUid = isChangeEnabledByUid(j6, i6);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isChangeEnabledByUid);
+                    parcel2.writeBoolean(zIsChangeEnabledByUid);
                     return true;
                 case 7:
-                    long readLong7 = parcel.readLong();
-                    String readString3 = parcel.readString();
+                    long j7 = parcel.readLong();
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean containsOverride = containsOverride(readLong7, readString3);
+                    boolean zContainsOverride = containsOverride(j7, string3);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(containsOverride);
+                    parcel2.writeBoolean(zContainsOverride);
                     return true;
                 case 8:
                     CompatibilityChangeConfig compatibilityChangeConfig = (CompatibilityChangeConfig) parcel.readTypedObject(CompatibilityChangeConfig.CREATOR);
-                    String readString4 = parcel.readString();
+                    String string4 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    setOverrides(compatibilityChangeConfig, readString4);
+                    setOverrides(compatibilityChangeConfig, string4);
                     parcel2.writeNoException();
                     return true;
                 case 9:
@@ -374,33 +374,33 @@ public interface IPlatformCompat extends IInterface {
                     return true;
                 case 10:
                     CompatibilityOverrideConfig compatibilityOverrideConfig = (CompatibilityOverrideConfig) parcel.readTypedObject(CompatibilityOverrideConfig.CREATOR);
-                    String readString5 = parcel.readString();
+                    String string5 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    putOverridesOnReleaseBuilds(compatibilityOverrideConfig, readString5);
+                    putOverridesOnReleaseBuilds(compatibilityOverrideConfig, string5);
                     parcel2.writeNoException();
                     return true;
                 case 11:
                     CompatibilityChangeConfig compatibilityChangeConfig2 = (CompatibilityChangeConfig) parcel.readTypedObject(CompatibilityChangeConfig.CREATOR);
-                    String readString6 = parcel.readString();
+                    String string6 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    setOverridesForTest(compatibilityChangeConfig2, readString6);
+                    setOverridesForTest(compatibilityChangeConfig2, string6);
                     parcel2.writeNoException();
                     return true;
                 case 12:
-                    long readLong8 = parcel.readLong();
-                    String readString7 = parcel.readString();
+                    long j8 = parcel.readLong();
+                    String string7 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean clearOverride = clearOverride(readLong8, readString7);
+                    boolean zClearOverride = clearOverride(j8, string7);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(clearOverride);
+                    parcel2.writeBoolean(zClearOverride);
                     return true;
                 case 13:
-                    long readLong9 = parcel.readLong();
-                    String readString8 = parcel.readString();
+                    long j9 = parcel.readLong();
+                    String string8 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean clearOverrideForTest = clearOverrideForTest(readLong9, readString8);
+                    boolean zClearOverrideForTest = clearOverrideForTest(j9, string8);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(clearOverrideForTest);
+                    parcel2.writeBoolean(zClearOverrideForTest);
                     return true;
                 case 14:
                     CompatibilityOverridesToRemoveByPackageConfig compatibilityOverridesToRemoveByPackageConfig = (CompatibilityOverridesToRemoveByPackageConfig) parcel.readTypedObject(CompatibilityOverridesToRemoveByPackageConfig.CREATOR);
@@ -410,37 +410,37 @@ public interface IPlatformCompat extends IInterface {
                     return true;
                 case 15:
                     CompatibilityOverridesToRemoveConfig compatibilityOverridesToRemoveConfig = (CompatibilityOverridesToRemoveConfig) parcel.readTypedObject(CompatibilityOverridesToRemoveConfig.CREATOR);
-                    String readString9 = parcel.readString();
+                    String string9 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    removeOverridesOnReleaseBuilds(compatibilityOverridesToRemoveConfig, readString9);
+                    removeOverridesOnReleaseBuilds(compatibilityOverridesToRemoveConfig, string9);
                     parcel2.writeNoException();
                     return true;
                 case 16:
-                    String readString10 = parcel.readString();
-                    int readInt5 = parcel.readInt();
+                    String string10 = parcel.readString();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int enableTargetSdkChanges = enableTargetSdkChanges(readString10, readInt5);
+                    int iEnableTargetSdkChanges = enableTargetSdkChanges(string10, i7);
                     parcel2.writeNoException();
-                    parcel2.writeInt(enableTargetSdkChanges);
+                    parcel2.writeInt(iEnableTargetSdkChanges);
                     return true;
                 case 17:
-                    String readString11 = parcel.readString();
-                    int readInt6 = parcel.readInt();
+                    String string11 = parcel.readString();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int disableTargetSdkChanges = disableTargetSdkChanges(readString11, readInt6);
+                    int iDisableTargetSdkChanges = disableTargetSdkChanges(string11, i8);
                     parcel2.writeNoException();
-                    parcel2.writeInt(disableTargetSdkChanges);
+                    parcel2.writeInt(iDisableTargetSdkChanges);
                     return true;
                 case 18:
-                    String readString12 = parcel.readString();
+                    String string12 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    clearOverrides(readString12);
+                    clearOverrides(string12);
                     parcel2.writeNoException();
                     return true;
                 case 19:
-                    String readString13 = parcel.readString();
+                    String string13 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    clearOverridesForTest(readString13);
+                    clearOverridesForTest(string13);
                     parcel2.writeNoException();
                     return true;
                 case 20:
@@ -451,14 +451,14 @@ public interface IPlatformCompat extends IInterface {
                     parcel2.writeTypedObject(appConfig, 1);
                     return true;
                 case 21:
-                    CompatibilityChangeInfo[] listAllChanges = listAllChanges();
+                    CompatibilityChangeInfo[] compatibilityChangeInfoArrListAllChanges = listAllChanges();
                     parcel2.writeNoException();
-                    parcel2.writeTypedArray(listAllChanges, 1);
+                    parcel2.writeTypedArray(compatibilityChangeInfoArrListAllChanges, 1);
                     return true;
                 case 22:
-                    CompatibilityChangeInfo[] listUIChanges = listUIChanges();
+                    CompatibilityChangeInfo[] compatibilityChangeInfoArrListUIChanges = listUIChanges();
                     parcel2.writeNoException();
-                    parcel2.writeTypedArray(listUIChanges, 1);
+                    parcel2.writeTypedArray(compatibilityChangeInfoArrListUIChanges, 1);
                     return true;
                 case 23:
                     IOverrideValidator overrideValidator = getOverrideValidator();
@@ -488,372 +488,372 @@ public interface IPlatformCompat extends IInterface {
 
             @Override // com.android.internal.compat.IPlatformCompat
             public void reportChange(long j, ApplicationInfo applicationInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPlatformCompat.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeTypedObject(applicationInfo, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IPlatformCompat.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeTypedObject(applicationInfo, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.compat.IPlatformCompat
             public void reportChangeByPackageName(long j, String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPlatformCompat.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IPlatformCompat.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.compat.IPlatformCompat
             public void reportChangeByUid(long j, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPlatformCompat.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IPlatformCompat.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.compat.IPlatformCompat
             public boolean isChangeEnabled(long j, ApplicationInfo applicationInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPlatformCompat.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeTypedObject(applicationInfo, 0);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IPlatformCompat.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeTypedObject(applicationInfo, 0);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.compat.IPlatformCompat
             public boolean isChangeEnabledByPackageName(long j, String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPlatformCompat.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IPlatformCompat.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.compat.IPlatformCompat
             public boolean isChangeEnabledByUid(long j, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPlatformCompat.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IPlatformCompat.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.compat.IPlatformCompat
             public boolean containsOverride(long j, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPlatformCompat.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeString(str);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IPlatformCompat.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.compat.IPlatformCompat
             public void setOverrides(CompatibilityChangeConfig compatibilityChangeConfig, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPlatformCompat.DESCRIPTOR);
-                    obtain.writeTypedObject(compatibilityChangeConfig, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IPlatformCompat.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(compatibilityChangeConfig, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.compat.IPlatformCompat
             public void putAllOverridesOnReleaseBuilds(CompatibilityOverridesByPackageConfig compatibilityOverridesByPackageConfig) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPlatformCompat.DESCRIPTOR);
-                    obtain.writeTypedObject(compatibilityOverridesByPackageConfig, 0);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IPlatformCompat.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(compatibilityOverridesByPackageConfig, 0);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.compat.IPlatformCompat
             public void putOverridesOnReleaseBuilds(CompatibilityOverrideConfig compatibilityOverrideConfig, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPlatformCompat.DESCRIPTOR);
-                    obtain.writeTypedObject(compatibilityOverrideConfig, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IPlatformCompat.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(compatibilityOverrideConfig, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.compat.IPlatformCompat
             public void setOverridesForTest(CompatibilityChangeConfig compatibilityChangeConfig, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPlatformCompat.DESCRIPTOR);
-                    obtain.writeTypedObject(compatibilityChangeConfig, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IPlatformCompat.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(compatibilityChangeConfig, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.compat.IPlatformCompat
             public boolean clearOverride(long j, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPlatformCompat.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeString(str);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IPlatformCompat.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.compat.IPlatformCompat
             public boolean clearOverrideForTest(long j, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPlatformCompat.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeString(str);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IPlatformCompat.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.compat.IPlatformCompat
             public void removeAllOverridesOnReleaseBuilds(CompatibilityOverridesToRemoveByPackageConfig compatibilityOverridesToRemoveByPackageConfig) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPlatformCompat.DESCRIPTOR);
-                    obtain.writeTypedObject(compatibilityOverridesToRemoveByPackageConfig, 0);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IPlatformCompat.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(compatibilityOverridesToRemoveByPackageConfig, 0);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.compat.IPlatformCompat
             public void removeOverridesOnReleaseBuilds(CompatibilityOverridesToRemoveConfig compatibilityOverridesToRemoveConfig, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPlatformCompat.DESCRIPTOR);
-                    obtain.writeTypedObject(compatibilityOverridesToRemoveConfig, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IPlatformCompat.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(compatibilityOverridesToRemoveConfig, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.compat.IPlatformCompat
             public int enableTargetSdkChanges(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPlatformCompat.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IPlatformCompat.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.compat.IPlatformCompat
             public int disableTargetSdkChanges(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPlatformCompat.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IPlatformCompat.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.compat.IPlatformCompat
             public void clearOverrides(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPlatformCompat.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IPlatformCompat.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.compat.IPlatformCompat
             public void clearOverridesForTest(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPlatformCompat.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IPlatformCompat.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.compat.IPlatformCompat
             public CompatibilityChangeConfig getAppConfig(ApplicationInfo applicationInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPlatformCompat.DESCRIPTOR);
-                    obtain.writeTypedObject(applicationInfo, 0);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (CompatibilityChangeConfig) obtain2.readTypedObject(CompatibilityChangeConfig.CREATOR);
+                    parcelObtain.writeInterfaceToken(IPlatformCompat.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(applicationInfo, 0);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (CompatibilityChangeConfig) parcelObtain2.readTypedObject(CompatibilityChangeConfig.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.compat.IPlatformCompat
             public CompatibilityChangeInfo[] listAllChanges() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPlatformCompat.DESCRIPTOR);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (CompatibilityChangeInfo[]) obtain2.createTypedArray(CompatibilityChangeInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(IPlatformCompat.DESCRIPTOR);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (CompatibilityChangeInfo[]) parcelObtain2.createTypedArray(CompatibilityChangeInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.compat.IPlatformCompat
             public CompatibilityChangeInfo[] listUIChanges() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPlatformCompat.DESCRIPTOR);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (CompatibilityChangeInfo[]) obtain2.createTypedArray(CompatibilityChangeInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(IPlatformCompat.DESCRIPTOR);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (CompatibilityChangeInfo[]) parcelObtain2.createTypedArray(CompatibilityChangeInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.compat.IPlatformCompat
             public IOverrideValidator getOverrideValidator() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPlatformCompat.DESCRIPTOR);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IOverrideValidator.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(IPlatformCompat.DESCRIPTOR);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IOverrideValidator.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

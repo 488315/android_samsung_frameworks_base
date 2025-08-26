@@ -2,6 +2,7 @@ package com.android.wm.shell.shared.bubbles;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.GradientDrawable;
@@ -16,7 +17,6 @@ import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Reflection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DismissView extends FrameLayout {
     public static final String TAG;
@@ -32,7 +32,6 @@ public final class DismissView extends FrameLayout {
     public final PhysicsAnimator.SpringConfig spring;
     public final WindowManager wm;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -42,7 +41,6 @@ public final class DismissView extends FrameLayout {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Config {
         public final int backgroundResId;
         public final int bottomMarginResId;
@@ -142,9 +140,9 @@ public final class DismissView extends FrameLayout {
                 return;
             }
             this.isShowing = false;
-            ObjectAnimator ofInt = ObjectAnimator.ofInt(gradientDrawable, this.GRADIENT_ALPHA, gradientDrawable.getAlpha(), 0);
-            ofInt.setDuration(this.DISMISS_SCRIM_FADE_MS);
-            ofInt.start();
+            ObjectAnimator objectAnimatorOfInt = ObjectAnimator.ofInt(gradientDrawable, this.GRADIENT_ALPHA, gradientDrawable.getAlpha(), 0);
+            objectAnimatorOfInt.setDuration(this.DISMISS_SCRIM_FADE_MS);
+            objectAnimatorOfInt.start();
             this.isBeingEntered = false;
             PhysicsAnimator physicsAnimator = this.animator;
             physicsAnimator.spring(DynamicAnimation.TRANSLATION_Y, getHeight(), 0.0f, this.spring);
@@ -153,7 +151,7 @@ public final class DismissView extends FrameLayout {
         }
     }
 
-    public final void setup(Config config) {
+    public final void setup(Config config) throws Resources.NotFoundException {
         this.config = config;
         setLayoutParams(new FrameLayout.LayoutParams(-1, getResources().getDimensionPixelSize(config.floatingGradientHeightResId), 80));
         Config config2 = this.config;
@@ -189,9 +187,9 @@ public final class DismissView extends FrameLayout {
         }
         this.isShowing = true;
         setVisibility(0);
-        ObjectAnimator ofInt = ObjectAnimator.ofInt(gradientDrawable, this.GRADIENT_ALPHA, gradientDrawable.getAlpha(), 255);
-        ofInt.setDuration(this.DISMISS_SCRIM_FADE_MS);
-        ofInt.start();
+        ObjectAnimator objectAnimatorOfInt = ObjectAnimator.ofInt(gradientDrawable, this.GRADIENT_ALPHA, gradientDrawable.getAlpha(), 255);
+        objectAnimatorOfInt.setDuration(this.DISMISS_SCRIM_FADE_MS);
+        objectAnimatorOfInt.start();
         this.animator.cancel();
         PhysicsAnimator physicsAnimator = this.animator;
         physicsAnimator.withEndActions(new DismissView$$ExternalSyntheticLambda0(this, 1));

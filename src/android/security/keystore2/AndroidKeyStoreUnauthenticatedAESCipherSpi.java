@@ -252,27 +252,29 @@ abstract class AndroidKeyStoreUnauthenticatedAESCipherSpi extends AndroidKeyStor
 
     @Override // android.security.keystore2.AndroidKeyStoreCipherSpiBase
     protected final void loadAlgorithmSpecificParametersFromBeginResult(KeyParameter[] keyParameterArr) {
-        byte[] bArr;
+        byte[] blob;
         this.mIvHasBeenUsed = true;
         if (keyParameterArr != null) {
             for (KeyParameter keyParameter : keyParameterArr) {
                 if (keyParameter.tag == -1879047191) {
-                    bArr = keyParameter.value.getBlob();
+                    blob = keyParameter.value.getBlob();
                     break;
                 }
             }
+            blob = null;
+        } else {
+            blob = null;
         }
-        bArr = null;
         if (!this.mIvRequired) {
-            if (bArr != null) {
+            if (blob != null) {
                 throw new ProviderException("IV in use despite IV not being used by this transformation");
             }
             return;
         }
-        byte[] bArr2 = this.mIv;
-        if (bArr2 == null) {
-            this.mIv = bArr;
-        } else if (bArr != null && !Arrays.equals(bArr, bArr2)) {
+        byte[] bArr = this.mIv;
+        if (bArr == null) {
+            this.mIv = blob;
+        } else if (blob != null && !Arrays.equals(blob, bArr)) {
             throw new ProviderException("IV in use differs from provided IV");
         }
     }
@@ -283,7 +285,7 @@ abstract class AndroidKeyStoreUnauthenticatedAESCipherSpi extends AndroidKeyStor
     }
 
     @Override // android.security.keystore2.AndroidKeyStoreCipherSpiBase, javax.crypto.CipherSpi
-    protected final AlgorithmParameters engineGetParameters() {
+    protected final AlgorithmParameters engineGetParameters() throws NoSuchAlgorithmException, InvalidParameterSpecException {
         byte[] bArr;
         if (!this.mIvRequired || (bArr = this.mIv) == null || bArr.length <= 0) {
             return null;

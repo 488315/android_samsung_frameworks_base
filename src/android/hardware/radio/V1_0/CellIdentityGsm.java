@@ -40,13 +40,13 @@ public final class CellIdentityGsm {
 
     public static final ArrayList<CellIdentityGsm> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<CellIdentityGsm> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 48, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 48, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             CellIdentityGsm cellIdentityGsm = new CellIdentityGsm();
-            cellIdentityGsm.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 48);
+            cellIdentityGsm.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 48);
             arrayList.add(cellIdentityGsm);
         }
         return arrayList;

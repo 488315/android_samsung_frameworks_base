@@ -9,12 +9,10 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class WindowInsetsAnimationCompat {
     public final Impl30 mImpl;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Impl {
         public final Interpolator mInterpolator;
 
@@ -31,11 +29,9 @@ public final class WindowInsetsAnimationCompat {
         return new WindowInsetsAnimationCompat(windowInsetsAnimation);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Impl30 extends Impl {
         public final WindowInsetsAnimation mWrapped;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class ProxyCallback extends WindowInsetsAnimation.Callback {
             public final HashMap mAnimations;
             public final Callback mCompat;
@@ -90,9 +86,9 @@ public final class WindowInsetsAnimationCompat {
 
             @Override // android.view.WindowInsetsAnimation.Callback
             public final WindowInsetsAnimation.Bounds onStart(WindowInsetsAnimation windowInsetsAnimation, WindowInsetsAnimation.Bounds bounds) {
-                BoundsCompat onStart = this.mCompat.onStart(getWindowInsetsAnimationCompat(windowInsetsAnimation), BoundsCompat.toBoundsCompat(bounds));
-                onStart.getClass();
-                return new WindowInsetsAnimation.Bounds(onStart.mLowerBound.toPlatformInsets(), onStart.mUpperBound.toPlatformInsets());
+                BoundsCompat boundsCompatOnStart = this.mCompat.onStart(getWindowInsetsAnimationCompat(windowInsetsAnimation), BoundsCompat.toBoundsCompat(bounds));
+                boundsCompatOnStart.getClass();
+                return new WindowInsetsAnimation.Bounds(boundsCompatOnStart.mLowerBound.toPlatformInsets(), boundsCompatOnStart.mUpperBound.toPlatformInsets());
             }
         }
 
@@ -106,7 +102,6 @@ public final class WindowInsetsAnimationCompat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class BoundsCompat {
         public final Insets mLowerBound;
         public final Insets mUpperBound;
@@ -135,7 +130,6 @@ public final class WindowInsetsAnimationCompat {
         this.mImpl = new Impl30(windowInsetsAnimation);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Callback {
         public final int mDispatchMode;
 

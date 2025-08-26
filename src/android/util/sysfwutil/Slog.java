@@ -7,11 +7,15 @@ import android.os.Process;
 import android.os.SystemProperties;
 import com.samsung.android.graphics.imagefilter.ShaderAssembler;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.zip.GZIPOutputStream;
 
 /* loaded from: classes4.dex */
 public final class Slog {
@@ -45,11 +49,11 @@ public final class Slog {
         return mSlogInstance;
     }
 
-    private Slog() {
+    private Slog() throws IOException {
         initParam();
     }
 
-    private void initParam() {
+    private void initParam() throws IOException {
         localLogV("initParam++");
         int i = SystemProperties.getInt("persist.sys.sfslog.maxfilesize", 262144);
         this.mMaxLogFileSize = i;
@@ -81,7 +85,7 @@ public final class Slog {
         this.mLogList.add("============== Booting up ============== \n");
     }
 
-    private void updatePermissions() {
+    private void updatePermissions() throws IOException {
         try {
             this.mLogFile.createNewFile();
             FileUtils.setPermissions(this.mLogFile.getAbsolutePath(), 416, 1000, 1007);
@@ -92,10 +96,10 @@ public final class Slog {
 
     private synchronized void addMsgToList(String str, boolean z) {
         if (this.mSfSlogEnable) {
-            String num = Integer.toString(Process.myTid());
-            String format = new SimpleDateFormat("yy-MM-dd (z) HH:mm:ss.SSS", Locale.getDefault()).format(new Date());
-            this.mLogList.add(format + " " + num + " " + str + ShaderAssembler.NEWLINE);
-            localLogV("addMsgToList mLogList.size() " + this.mLogList.size() + " mLinesToDump " + this.mLinesToDump + " strNow[" + format + NavigationBarInflaterView.SIZE_MOD_END);
+            String string = Integer.toString(Process.myTid());
+            String str2 = new SimpleDateFormat("yy-MM-dd (z) HH:mm:ss.SSS", Locale.getDefault()).format(new Date());
+            this.mLogList.add(str2 + " " + string + " " + str + ShaderAssembler.NEWLINE);
+            localLogV("addMsgToList mLogList.size() " + this.mLogList.size() + " mLinesToDump " + this.mLinesToDump + " strNow[" + str2 + NavigationBarInflaterView.SIZE_MOD_END);
             if (this.mLogList.size() >= this.mLinesToDump || z) {
                 dumpLogsToTheFile();
             }
@@ -103,10 +107,8 @@ public final class Slog {
     }
 
     public static synchronized void shutdown() {
-        synchronized (Slog.class) {
-            if (getInstance() != null) {
-                getInstance().onShutdown();
-            }
+        if (getInstance() != null) {
+            getInstance().onShutdown();
         }
     }
 
@@ -115,17 +117,94 @@ public final class Slog {
         dumpLogsToTheFile();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:20:0x009e  */
+    /* JADX WARN: Removed duplicated region for block: B:35:0x009e  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private void dumpLogsToTheFile() {
-        /*
-            Method dump skipped, instructions count: 272
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.util.sysfwutil.Slog.dumpLogsToTheFile():void");
+    private void dumpLogsToTheFile() throws Throwable {
+        FileOutputStream fileOutputStream;
+        localLogV("dumpLogsToTheFile++");
+        if (this.mLogFile == null) {
+            return;
+        }
+        Iterator<String> it = this.mLogList.iterator();
+        GZIPOutputStream gZIPOutputStream = null;
+        try {
+            try {
+                fileOutputStream = new FileOutputStream(this.mLogFile, true);
+                try {
+                    try {
+                        CountingOutputStream countingOutputStream = new CountingOutputStream(fileOutputStream);
+                        GZIPOutputStream gZIPOutputStream2 = new GZIPOutputStream(countingOutputStream);
+                        while (it.hasNext()) {
+                            try {
+                                gZIPOutputStream2.write(it.next().getBytes("UTF-8"));
+                            } catch (IOException e) {
+                                e = e;
+                                gZIPOutputStream = gZIPOutputStream2;
+                                localLogE("Can't write: " + e);
+                                if (gZIPOutputStream != null) {
+                                    gZIPOutputStream.close();
+                                }
+                                if (fileOutputStream != null) {
+                                    fileOutputStream.close();
+                                }
+                                this.mLogList.clear();
+                                localLogV("dumpLogsToTheFile: mCurentFileSize " + this.mCurentFileSize);
+                                if (this.mCurentFileSize > this.mMaxLogFileSize) {
+                                }
+                                localLogV("dumpLogsToTheFile--");
+                            } catch (Throwable th) {
+                                th = th;
+                                gZIPOutputStream = gZIPOutputStream2;
+                                if (gZIPOutputStream != null) {
+                                    try {
+                                        gZIPOutputStream.close();
+                                    } catch (IOException e2) {
+                                        e2.printStackTrace();
+                                        throw th;
+                                    }
+                                }
+                                if (fileOutputStream != null) {
+                                    fileOutputStream.close();
+                                }
+                                throw th;
+                            }
+                        }
+                        this.mCurentFileSize += countingOutputStream.getCount();
+                        gZIPOutputStream2.close();
+                        fileOutputStream.close();
+                    } catch (IOException e3) {
+                        e = e3;
+                    }
+                } catch (Throwable th2) {
+                    th = th2;
+                }
+            } catch (IOException e4) {
+                e4.printStackTrace();
+            }
+        } catch (IOException e5) {
+            e = e5;
+            fileOutputStream = null;
+        } catch (Throwable th3) {
+            th = th3;
+            fileOutputStream = null;
+        }
+        this.mLogList.clear();
+        localLogV("dumpLogsToTheFile: mCurentFileSize " + this.mCurentFileSize);
+        if (this.mCurentFileSize > this.mMaxLogFileSize) {
+            localLogV("dumpLogsToTheFile: swap file, current " + this.mLogFile.getAbsolutePath());
+            if (this.mLogFile.getAbsolutePath().equals(LOG0_PATH)) {
+                this.mLogFile = new File(LOG1_PATH);
+            } else {
+                this.mLogFile = new File(LOG0_PATH);
+            }
+            localLogV("dumpLogsToTheFile: swap file, new " + this.mLogFile.getAbsolutePath());
+            this.mLogFile.delete();
+            this.mCurentFileSize = 0L;
+            updatePermissions();
+        }
+        localLogV("dumpLogsToTheFile--");
     }
 
     private static void localLogE(String str) {
@@ -259,13 +338,13 @@ public final class Slog {
 
     public static int who(String str, String str2, Exception exc) {
         StackTraceElement[] stackTrace = exc.getStackTrace();
-        int i = 4;
+        int length = 4;
         if (stackTrace.length > 0 && stackTrace.length < 4) {
-            i = stackTrace.length;
+            length = stackTrace.length;
         } else if (stackTrace.length <= 4) {
-            i = 0;
+            length = 0;
         }
-        localLogV("stackTraceLength=" + i);
+        localLogV("stackTraceLength=" + length);
         if ("!@".equals(kernelLogPrefix)) {
             String str3 = kernelLogPrefix + NavigationBarInflaterView.SIZE_MOD_START + str + NavigationBarInflaterView.SIZE_MOD_END + exc.toString();
             if (getInstance() != null) {
@@ -274,9 +353,9 @@ public final class Slog {
             }
             localLogV("Print exTitle 1");
             android.util.Slog.d(str, str3);
-            if (i > 0) {
-                for (int i2 = 0; i2 < i; i2++) {
-                    String str4 = kernelLogPrefix + NavigationBarInflaterView.SIZE_MOD_START + str + "] > " + stackTrace[i2].toString();
+            if (length > 0) {
+                for (int i = 0; i < length; i++) {
+                    String str4 = kernelLogPrefix + NavigationBarInflaterView.SIZE_MOD_START + str + "] > " + stackTrace[i].toString();
                     if (getInstance() != null) {
                         getInstance().addMsgToList("D " + str + ": " + str4, false);
                     }
@@ -296,9 +375,9 @@ public final class Slog {
         }
         localLogV("Print exTitle 2");
         android.util.Slog.d(str, str6);
-        if (i > 0) {
-            for (int i3 = 0; i3 < i; i3++) {
-                String str7 = kernelLogPrefix + " > " + stackTrace[i3].toString();
+        if (length > 0) {
+            for (int i2 = 0; i2 < length; i2++) {
+                String str7 = kernelLogPrefix + " > " + stackTrace[i2].toString();
                 if (getInstance() != null) {
                     getInstance().addMsgToList("D " + str + ": " + str7, false);
                 }

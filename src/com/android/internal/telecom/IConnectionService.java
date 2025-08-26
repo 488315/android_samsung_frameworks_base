@@ -374,9 +374,9 @@ public interface IConnectionService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IConnectionService)) {
-                return (IConnectionService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IConnectionService)) {
+                return (IConnectionService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -496,281 +496,281 @@ public interface IConnectionService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    IConnectionServiceAdapter asInterface = IConnectionServiceAdapter.Stub.asInterface(parcel.readStrongBinder());
+                    IConnectionServiceAdapter iConnectionServiceAdapterAsInterface = IConnectionServiceAdapter.Stub.asInterface(parcel.readStrongBinder());
                     Session.Info info = (Session.Info) parcel.readTypedObject(Session.Info.CREATOR);
                     parcel.enforceNoDataAvail();
-                    addConnectionServiceAdapter(asInterface, info);
+                    addConnectionServiceAdapter(iConnectionServiceAdapterAsInterface, info);
                     return true;
                 case 2:
-                    IConnectionServiceAdapter asInterface2 = IConnectionServiceAdapter.Stub.asInterface(parcel.readStrongBinder());
+                    IConnectionServiceAdapter iConnectionServiceAdapterAsInterface2 = IConnectionServiceAdapter.Stub.asInterface(parcel.readStrongBinder());
                     Session.Info info2 = (Session.Info) parcel.readTypedObject(Session.Info.CREATOR);
                     parcel.enforceNoDataAvail();
-                    removeConnectionServiceAdapter(asInterface2, info2);
+                    removeConnectionServiceAdapter(iConnectionServiceAdapterAsInterface2, info2);
                     return true;
                 case 3:
                     PhoneAccountHandle phoneAccountHandle = (PhoneAccountHandle) parcel.readTypedObject(PhoneAccountHandle.CREATOR);
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     ConnectionRequest connectionRequest = (ConnectionRequest) parcel.readTypedObject(ConnectionRequest.CREATOR);
-                    boolean readBoolean = parcel.readBoolean();
-                    boolean readBoolean2 = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
+                    boolean z2 = parcel.readBoolean();
                     Session.Info info3 = (Session.Info) parcel.readTypedObject(Session.Info.CREATOR);
                     parcel.enforceNoDataAvail();
-                    createConnection(phoneAccountHandle, readString, connectionRequest, readBoolean, readBoolean2, info3);
+                    createConnection(phoneAccountHandle, string, connectionRequest, z, z2, info3);
                     return true;
                 case 4:
-                    String readString2 = parcel.readString();
+                    String string2 = parcel.readString();
                     Session.Info info4 = (Session.Info) parcel.readTypedObject(Session.Info.CREATOR);
                     parcel.enforceNoDataAvail();
-                    createConnectionComplete(readString2, info4);
+                    createConnectionComplete(string2, info4);
                     return true;
                 case 5:
                     PhoneAccountHandle phoneAccountHandle2 = (PhoneAccountHandle) parcel.readTypedObject(PhoneAccountHandle.CREATOR);
-                    String readString3 = parcel.readString();
+                    String string3 = parcel.readString();
                     ConnectionRequest connectionRequest2 = (ConnectionRequest) parcel.readTypedObject(ConnectionRequest.CREATOR);
-                    boolean readBoolean3 = parcel.readBoolean();
+                    boolean z3 = parcel.readBoolean();
                     Session.Info info5 = (Session.Info) parcel.readTypedObject(Session.Info.CREATOR);
                     parcel.enforceNoDataAvail();
-                    createConnectionFailed(phoneAccountHandle2, readString3, connectionRequest2, readBoolean3, info5);
+                    createConnectionFailed(phoneAccountHandle2, string3, connectionRequest2, z3, info5);
                     return true;
                 case 6:
                     PhoneAccountHandle phoneAccountHandle3 = (PhoneAccountHandle) parcel.readTypedObject(PhoneAccountHandle.CREATOR);
-                    String readString4 = parcel.readString();
+                    String string4 = parcel.readString();
                     ConnectionRequest connectionRequest3 = (ConnectionRequest) parcel.readTypedObject(ConnectionRequest.CREATOR);
-                    boolean readBoolean4 = parcel.readBoolean();
-                    boolean readBoolean5 = parcel.readBoolean();
+                    boolean z4 = parcel.readBoolean();
+                    boolean z5 = parcel.readBoolean();
                     Session.Info info6 = (Session.Info) parcel.readTypedObject(Session.Info.CREATOR);
                     parcel.enforceNoDataAvail();
-                    createConference(phoneAccountHandle3, readString4, connectionRequest3, readBoolean4, readBoolean5, info6);
+                    createConference(phoneAccountHandle3, string4, connectionRequest3, z4, z5, info6);
                     return true;
                 case 7:
-                    String readString5 = parcel.readString();
+                    String string5 = parcel.readString();
                     Session.Info info7 = (Session.Info) parcel.readTypedObject(Session.Info.CREATOR);
                     parcel.enforceNoDataAvail();
-                    createConferenceComplete(readString5, info7);
+                    createConferenceComplete(string5, info7);
                     return true;
                 case 8:
                     PhoneAccountHandle phoneAccountHandle4 = (PhoneAccountHandle) parcel.readTypedObject(PhoneAccountHandle.CREATOR);
-                    String readString6 = parcel.readString();
+                    String string6 = parcel.readString();
                     ConnectionRequest connectionRequest4 = (ConnectionRequest) parcel.readTypedObject(ConnectionRequest.CREATOR);
-                    boolean readBoolean6 = parcel.readBoolean();
+                    boolean z6 = parcel.readBoolean();
                     Session.Info info8 = (Session.Info) parcel.readTypedObject(Session.Info.CREATOR);
                     parcel.enforceNoDataAvail();
-                    createConferenceFailed(phoneAccountHandle4, readString6, connectionRequest4, readBoolean6, info8);
+                    createConferenceFailed(phoneAccountHandle4, string6, connectionRequest4, z6, info8);
                     return true;
                 case 9:
-                    String readString7 = parcel.readString();
+                    String string7 = parcel.readString();
                     Session.Info info9 = (Session.Info) parcel.readTypedObject(Session.Info.CREATOR);
                     parcel.enforceNoDataAvail();
-                    abort(readString7, info9);
+                    abort(string7, info9);
                     return true;
                 case 10:
-                    String readString8 = parcel.readString();
-                    int readInt = parcel.readInt();
+                    String string8 = parcel.readString();
+                    int i3 = parcel.readInt();
                     Session.Info info10 = (Session.Info) parcel.readTypedObject(Session.Info.CREATOR);
                     parcel.enforceNoDataAvail();
-                    answerVideo(readString8, readInt, info10);
+                    answerVideo(string8, i3, info10);
                     return true;
                 case 11:
-                    String readString9 = parcel.readString();
+                    String string9 = parcel.readString();
                     Session.Info info11 = (Session.Info) parcel.readTypedObject(Session.Info.CREATOR);
                     parcel.enforceNoDataAvail();
-                    answer(readString9, info11);
+                    answer(string9, info11);
                     return true;
                 case 12:
-                    String readString10 = parcel.readString();
+                    String string10 = parcel.readString();
                     Uri uri = (Uri) parcel.readTypedObject(Uri.CREATOR);
                     Session.Info info12 = (Session.Info) parcel.readTypedObject(Session.Info.CREATOR);
                     parcel.enforceNoDataAvail();
-                    deflect(readString10, uri, info12);
+                    deflect(string10, uri, info12);
                     return true;
                 case 13:
-                    String readString11 = parcel.readString();
+                    String string11 = parcel.readString();
                     Session.Info info13 = (Session.Info) parcel.readTypedObject(Session.Info.CREATOR);
                     parcel.enforceNoDataAvail();
-                    reject(readString11, info13);
+                    reject(string11, info13);
                     return true;
                 case 14:
-                    String readString12 = parcel.readString();
-                    int readInt2 = parcel.readInt();
+                    String string12 = parcel.readString();
+                    int i4 = parcel.readInt();
                     Session.Info info14 = (Session.Info) parcel.readTypedObject(Session.Info.CREATOR);
                     parcel.enforceNoDataAvail();
-                    rejectWithReason(readString12, readInt2, info14);
+                    rejectWithReason(string12, i4, info14);
                     return true;
                 case 15:
-                    String readString13 = parcel.readString();
-                    String readString14 = parcel.readString();
+                    String string13 = parcel.readString();
+                    String string14 = parcel.readString();
                     Session.Info info15 = (Session.Info) parcel.readTypedObject(Session.Info.CREATOR);
                     parcel.enforceNoDataAvail();
-                    rejectWithMessage(readString13, readString14, info15);
+                    rejectWithMessage(string13, string14, info15);
                     return true;
                 case 16:
-                    String readString15 = parcel.readString();
+                    String string15 = parcel.readString();
                     Uri uri2 = (Uri) parcel.readTypedObject(Uri.CREATOR);
-                    boolean readBoolean7 = parcel.readBoolean();
+                    boolean z7 = parcel.readBoolean();
                     Session.Info info16 = (Session.Info) parcel.readTypedObject(Session.Info.CREATOR);
                     parcel.enforceNoDataAvail();
-                    transfer(readString15, uri2, readBoolean7, info16);
+                    transfer(string15, uri2, z7, info16);
                     return true;
                 case 17:
-                    String readString16 = parcel.readString();
-                    String readString17 = parcel.readString();
+                    String string16 = parcel.readString();
+                    String string17 = parcel.readString();
                     Session.Info info17 = (Session.Info) parcel.readTypedObject(Session.Info.CREATOR);
                     parcel.enforceNoDataAvail();
-                    consultativeTransfer(readString16, readString17, info17);
+                    consultativeTransfer(string16, string17, info17);
                     return true;
                 case 18:
-                    String readString18 = parcel.readString();
+                    String string18 = parcel.readString();
                     Session.Info info18 = (Session.Info) parcel.readTypedObject(Session.Info.CREATOR);
                     parcel.enforceNoDataAvail();
-                    disconnect(readString18, info18);
+                    disconnect(string18, info18);
                     return true;
                 case 19:
-                    String readString19 = parcel.readString();
+                    String string19 = parcel.readString();
                     Session.Info info19 = (Session.Info) parcel.readTypedObject(Session.Info.CREATOR);
                     parcel.enforceNoDataAvail();
-                    silence(readString19, info19);
+                    silence(string19, info19);
                     return true;
                 case 20:
-                    String readString20 = parcel.readString();
+                    String string20 = parcel.readString();
                     Session.Info info20 = (Session.Info) parcel.readTypedObject(Session.Info.CREATOR);
                     parcel.enforceNoDataAvail();
-                    hold(readString20, info20);
+                    hold(string20, info20);
                     return true;
                 case 21:
-                    String readString21 = parcel.readString();
+                    String string21 = parcel.readString();
                     Session.Info info21 = (Session.Info) parcel.readTypedObject(Session.Info.CREATOR);
                     parcel.enforceNoDataAvail();
-                    unhold(readString21, info21);
+                    unhold(string21, info21);
                     return true;
                 case 22:
-                    String readString22 = parcel.readString();
+                    String string22 = parcel.readString();
                     CallAudioState callAudioState = (CallAudioState) parcel.readTypedObject(CallAudioState.CREATOR);
                     Session.Info info22 = (Session.Info) parcel.readTypedObject(Session.Info.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onCallAudioStateChanged(readString22, callAudioState, info22);
+                    onCallAudioStateChanged(string22, callAudioState, info22);
                     return true;
                 case 23:
-                    String readString23 = parcel.readString();
+                    String string23 = parcel.readString();
                     CallEndpoint callEndpoint = (CallEndpoint) parcel.readTypedObject(CallEndpoint.CREATOR);
                     Session.Info info23 = (Session.Info) parcel.readTypedObject(Session.Info.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onCallEndpointChanged(readString23, callEndpoint, info23);
+                    onCallEndpointChanged(string23, callEndpoint, info23);
                     return true;
                 case 24:
-                    String readString24 = parcel.readString();
-                    ArrayList createTypedArrayList = parcel.createTypedArrayList(CallEndpoint.CREATOR);
+                    String string24 = parcel.readString();
+                    ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(CallEndpoint.CREATOR);
                     Session.Info info24 = (Session.Info) parcel.readTypedObject(Session.Info.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onAvailableCallEndpointsChanged(readString24, createTypedArrayList, info24);
+                    onAvailableCallEndpointsChanged(string24, arrayListCreateTypedArrayList, info24);
                     return true;
                 case 25:
-                    String readString25 = parcel.readString();
-                    boolean readBoolean8 = parcel.readBoolean();
+                    String string25 = parcel.readString();
+                    boolean z8 = parcel.readBoolean();
                     Session.Info info25 = (Session.Info) parcel.readTypedObject(Session.Info.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onMuteStateChanged(readString25, readBoolean8, info25);
+                    onMuteStateChanged(string25, z8, info25);
                     return true;
                 case 26:
-                    String readString26 = parcel.readString();
-                    char readInt3 = (char) parcel.readInt();
+                    String string26 = parcel.readString();
+                    char c = (char) parcel.readInt();
                     Session.Info info26 = (Session.Info) parcel.readTypedObject(Session.Info.CREATOR);
                     parcel.enforceNoDataAvail();
-                    playDtmfTone(readString26, readInt3, info26);
+                    playDtmfTone(string26, c, info26);
                     return true;
                 case 27:
-                    String readString27 = parcel.readString();
+                    String string27 = parcel.readString();
                     Session.Info info27 = (Session.Info) parcel.readTypedObject(Session.Info.CREATOR);
                     parcel.enforceNoDataAvail();
-                    stopDtmfTone(readString27, info27);
+                    stopDtmfTone(string27, info27);
                     return true;
                 case 28:
-                    String readString28 = parcel.readString();
-                    String readString29 = parcel.readString();
+                    String string28 = parcel.readString();
+                    String string29 = parcel.readString();
                     Session.Info info28 = (Session.Info) parcel.readTypedObject(Session.Info.CREATOR);
                     parcel.enforceNoDataAvail();
-                    conference(readString28, readString29, info28);
+                    conference(string28, string29, info28);
                     return true;
                 case 29:
-                    String readString30 = parcel.readString();
+                    String string30 = parcel.readString();
                     Session.Info info29 = (Session.Info) parcel.readTypedObject(Session.Info.CREATOR);
                     parcel.enforceNoDataAvail();
-                    splitFromConference(readString30, info29);
+                    splitFromConference(string30, info29);
                     return true;
                 case 30:
-                    String readString31 = parcel.readString();
+                    String string31 = parcel.readString();
                     Session.Info info30 = (Session.Info) parcel.readTypedObject(Session.Info.CREATOR);
                     parcel.enforceNoDataAvail();
-                    mergeConference(readString31, info30);
+                    mergeConference(string31, info30);
                     return true;
                 case 31:
-                    String readString32 = parcel.readString();
+                    String string32 = parcel.readString();
                     Session.Info info31 = (Session.Info) parcel.readTypedObject(Session.Info.CREATOR);
                     parcel.enforceNoDataAvail();
-                    swapConference(readString32, info31);
+                    swapConference(string32, info31);
                     return true;
                 case 32:
-                    String readString33 = parcel.readString();
-                    ArrayList createTypedArrayList2 = parcel.createTypedArrayList(Uri.CREATOR);
+                    String string33 = parcel.readString();
+                    ArrayList arrayListCreateTypedArrayList2 = parcel.createTypedArrayList(Uri.CREATOR);
                     Session.Info info32 = (Session.Info) parcel.readTypedObject(Session.Info.CREATOR);
                     parcel.enforceNoDataAvail();
-                    addConferenceParticipants(readString33, createTypedArrayList2, info32);
+                    addConferenceParticipants(string33, arrayListCreateTypedArrayList2, info32);
                     return true;
                 case 33:
-                    String readString34 = parcel.readString();
-                    boolean readBoolean9 = parcel.readBoolean();
+                    String string34 = parcel.readString();
+                    boolean z9 = parcel.readBoolean();
                     Session.Info info33 = (Session.Info) parcel.readTypedObject(Session.Info.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onPostDialContinue(readString34, readBoolean9, info33);
+                    onPostDialContinue(string34, z9, info33);
                     return true;
                 case 34:
-                    String readString35 = parcel.readString();
+                    String string35 = parcel.readString();
                     Session.Info info34 = (Session.Info) parcel.readTypedObject(Session.Info.CREATOR);
                     parcel.enforceNoDataAvail();
-                    pullExternalCall(readString35, info34);
+                    pullExternalCall(string35, info34);
                     return true;
                 case 35:
-                    String readString36 = parcel.readString();
-                    String readString37 = parcel.readString();
+                    String string36 = parcel.readString();
+                    String string37 = parcel.readString();
                     Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     Session.Info info35 = (Session.Info) parcel.readTypedObject(Session.Info.CREATOR);
                     parcel.enforceNoDataAvail();
-                    sendCallEvent(readString36, readString37, bundle, info35);
+                    sendCallEvent(string36, string37, bundle, info35);
                     return true;
                 case 36:
-                    String readString38 = parcel.readString();
+                    String string38 = parcel.readString();
                     Connection.CallFilteringCompletionInfo callFilteringCompletionInfo = (Connection.CallFilteringCompletionInfo) parcel.readTypedObject(Connection.CallFilteringCompletionInfo.CREATOR);
                     Session.Info info36 = (Session.Info) parcel.readTypedObject(Session.Info.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onCallFilteringCompleted(readString38, callFilteringCompletionInfo, info36);
+                    onCallFilteringCompleted(string38, callFilteringCompletionInfo, info36);
                     return true;
                 case 37:
-                    String readString39 = parcel.readString();
+                    String string39 = parcel.readString();
                     Bundle bundle2 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     Session.Info info37 = (Session.Info) parcel.readTypedObject(Session.Info.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onExtrasChanged(readString39, bundle2, info37);
+                    onExtrasChanged(string39, bundle2, info37);
                     return true;
                 case 38:
-                    String readString40 = parcel.readString();
+                    String string40 = parcel.readString();
                     ParcelFileDescriptor parcelFileDescriptor = (ParcelFileDescriptor) parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
                     ParcelFileDescriptor parcelFileDescriptor2 = (ParcelFileDescriptor) parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
                     Session.Info info38 = (Session.Info) parcel.readTypedObject(Session.Info.CREATOR);
                     parcel.enforceNoDataAvail();
-                    startRtt(readString40, parcelFileDescriptor, parcelFileDescriptor2, info38);
+                    startRtt(string40, parcelFileDescriptor, parcelFileDescriptor2, info38);
                     return true;
                 case 39:
-                    String readString41 = parcel.readString();
+                    String string41 = parcel.readString();
                     Session.Info info39 = (Session.Info) parcel.readTypedObject(Session.Info.CREATOR);
                     parcel.enforceNoDataAvail();
-                    stopRtt(readString41, info39);
+                    stopRtt(string41, info39);
                     return true;
                 case 40:
-                    String readString42 = parcel.readString();
+                    String string42 = parcel.readString();
                     ParcelFileDescriptor parcelFileDescriptor3 = (ParcelFileDescriptor) parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
                     ParcelFileDescriptor parcelFileDescriptor4 = (ParcelFileDescriptor) parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
                     Session.Info info40 = (Session.Info) parcel.readTypedObject(Session.Info.CREATOR);
                     parcel.enforceNoDataAvail();
-                    respondToRttUpgradeRequest(readString42, parcelFileDescriptor3, parcelFileDescriptor4, info40);
+                    respondToRttUpgradeRequest(string42, parcelFileDescriptor3, parcelFileDescriptor4, info40);
                     return true;
                 case 41:
                     Session.Info info41 = (Session.Info) parcel.readTypedObject(Session.Info.CREATOR);
@@ -783,32 +783,32 @@ public interface IConnectionService extends IInterface {
                     connectionServiceFocusGained(info42);
                     return true;
                 case 43:
-                    String readString43 = parcel.readString();
+                    String string43 = parcel.readString();
                     ConnectionRequest connectionRequest5 = (ConnectionRequest) parcel.readTypedObject(ConnectionRequest.CREATOR);
-                    int readInt4 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     Session.Info info43 = (Session.Info) parcel.readTypedObject(Session.Info.CREATOR);
                     parcel.enforceNoDataAvail();
-                    handoverFailed(readString43, connectionRequest5, readInt4, info43);
+                    handoverFailed(string43, connectionRequest5, i5, info43);
                     return true;
                 case 44:
-                    String readString44 = parcel.readString();
+                    String string44 = parcel.readString();
                     Session.Info info44 = (Session.Info) parcel.readTypedObject(Session.Info.CREATOR);
                     parcel.enforceNoDataAvail();
-                    handoverComplete(readString44, info44);
+                    handoverComplete(string44, info44);
                     return true;
                 case 45:
-                    String readString45 = parcel.readString();
-                    boolean readBoolean10 = parcel.readBoolean();
+                    String string45 = parcel.readString();
+                    boolean z10 = parcel.readBoolean();
                     Session.Info info45 = (Session.Info) parcel.readTypedObject(Session.Info.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onUsingAlternativeUi(readString45, readBoolean10, info45);
+                    onUsingAlternativeUi(string45, z10, info45);
                     return true;
                 case 46:
-                    String readString46 = parcel.readString();
-                    boolean readBoolean11 = parcel.readBoolean();
+                    String string46 = parcel.readString();
+                    boolean z11 = parcel.readBoolean();
                     Session.Info info46 = (Session.Info) parcel.readTypedObject(Session.Info.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onTrackedByNonUiService(readString46, readBoolean11, info46);
+                    onTrackedByNonUiService(string46, z11, info46);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -833,638 +833,638 @@ public interface IConnectionService extends IInterface {
 
             @Override // com.android.internal.telecom.IConnectionService
             public void addConnectionServiceAdapter(IConnectionServiceAdapter iConnectionServiceAdapter, Session.Info info) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iConnectionServiceAdapter);
-                    obtain.writeTypedObject(info, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iConnectionServiceAdapter);
+                    parcelObtain.writeTypedObject(info, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.IConnectionService
             public void removeConnectionServiceAdapter(IConnectionServiceAdapter iConnectionServiceAdapter, Session.Info info) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iConnectionServiceAdapter);
-                    obtain.writeTypedObject(info, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iConnectionServiceAdapter);
+                    parcelObtain.writeTypedObject(info, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.IConnectionService
             public void createConnection(PhoneAccountHandle phoneAccountHandle, String str, ConnectionRequest connectionRequest, boolean z, boolean z2, Session.Info info) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(phoneAccountHandle, 0);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(connectionRequest, 0);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    obtain.writeTypedObject(info, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(phoneAccountHandle, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(connectionRequest, 0);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    parcelObtain.writeTypedObject(info, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.IConnectionService
             public void createConnectionComplete(String str, Session.Info info) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(info, 0);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(info, 0);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.IConnectionService
             public void createConnectionFailed(PhoneAccountHandle phoneAccountHandle, String str, ConnectionRequest connectionRequest, boolean z, Session.Info info) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(phoneAccountHandle, 0);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(connectionRequest, 0);
-                    obtain.writeBoolean(z);
-                    obtain.writeTypedObject(info, 0);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(phoneAccountHandle, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(connectionRequest, 0);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeTypedObject(info, 0);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.IConnectionService
             public void createConference(PhoneAccountHandle phoneAccountHandle, String str, ConnectionRequest connectionRequest, boolean z, boolean z2, Session.Info info) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(phoneAccountHandle, 0);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(connectionRequest, 0);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    obtain.writeTypedObject(info, 0);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(phoneAccountHandle, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(connectionRequest, 0);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    parcelObtain.writeTypedObject(info, 0);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.IConnectionService
             public void createConferenceComplete(String str, Session.Info info) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(info, 0);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(info, 0);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.IConnectionService
             public void createConferenceFailed(PhoneAccountHandle phoneAccountHandle, String str, ConnectionRequest connectionRequest, boolean z, Session.Info info) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(phoneAccountHandle, 0);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(connectionRequest, 0);
-                    obtain.writeBoolean(z);
-                    obtain.writeTypedObject(info, 0);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(phoneAccountHandle, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(connectionRequest, 0);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeTypedObject(info, 0);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.IConnectionService
             public void abort(String str, Session.Info info) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(info, 0);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(info, 0);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.IConnectionService
             public void answerVideo(String str, int i, Session.Info info) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(info, 0);
-                    this.mRemote.transact(10, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(info, 0);
+                    this.mRemote.transact(10, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.IConnectionService
             public void answer(String str, Session.Info info) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(info, 0);
-                    this.mRemote.transact(11, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(info, 0);
+                    this.mRemote.transact(11, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.IConnectionService
             public void deflect(String str, Uri uri, Session.Info info) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(uri, 0);
-                    obtain.writeTypedObject(info, 0);
-                    this.mRemote.transact(12, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(uri, 0);
+                    parcelObtain.writeTypedObject(info, 0);
+                    this.mRemote.transact(12, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.IConnectionService
             public void reject(String str, Session.Info info) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(info, 0);
-                    this.mRemote.transact(13, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(info, 0);
+                    this.mRemote.transact(13, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.IConnectionService
             public void rejectWithReason(String str, int i, Session.Info info) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(info, 0);
-                    this.mRemote.transact(14, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(info, 0);
+                    this.mRemote.transact(14, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.IConnectionService
             public void rejectWithMessage(String str, String str2, Session.Info info) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeTypedObject(info, 0);
-                    this.mRemote.transact(15, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeTypedObject(info, 0);
+                    this.mRemote.transact(15, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.IConnectionService
             public void transfer(String str, Uri uri, boolean z, Session.Info info) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(uri, 0);
-                    obtain.writeBoolean(z);
-                    obtain.writeTypedObject(info, 0);
-                    this.mRemote.transact(16, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(uri, 0);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeTypedObject(info, 0);
+                    this.mRemote.transact(16, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.IConnectionService
             public void consultativeTransfer(String str, String str2, Session.Info info) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeTypedObject(info, 0);
-                    this.mRemote.transact(17, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeTypedObject(info, 0);
+                    this.mRemote.transact(17, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.IConnectionService
             public void disconnect(String str, Session.Info info) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(info, 0);
-                    this.mRemote.transact(18, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(info, 0);
+                    this.mRemote.transact(18, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.IConnectionService
             public void silence(String str, Session.Info info) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(info, 0);
-                    this.mRemote.transact(19, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(info, 0);
+                    this.mRemote.transact(19, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.IConnectionService
             public void hold(String str, Session.Info info) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(info, 0);
-                    this.mRemote.transact(20, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(info, 0);
+                    this.mRemote.transact(20, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.IConnectionService
             public void unhold(String str, Session.Info info) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(info, 0);
-                    this.mRemote.transact(21, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(info, 0);
+                    this.mRemote.transact(21, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.IConnectionService
             public void onCallAudioStateChanged(String str, CallAudioState callAudioState, Session.Info info) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(callAudioState, 0);
-                    obtain.writeTypedObject(info, 0);
-                    this.mRemote.transact(22, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(callAudioState, 0);
+                    parcelObtain.writeTypedObject(info, 0);
+                    this.mRemote.transact(22, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.IConnectionService
             public void onCallEndpointChanged(String str, CallEndpoint callEndpoint, Session.Info info) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(callEndpoint, 0);
-                    obtain.writeTypedObject(info, 0);
-                    this.mRemote.transact(23, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(callEndpoint, 0);
+                    parcelObtain.writeTypedObject(info, 0);
+                    this.mRemote.transact(23, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.IConnectionService
             public void onAvailableCallEndpointsChanged(String str, List<CallEndpoint> list, Session.Info info) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedList(list, 0);
-                    obtain.writeTypedObject(info, 0);
-                    this.mRemote.transact(24, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedList(list, 0);
+                    parcelObtain.writeTypedObject(info, 0);
+                    this.mRemote.transact(24, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.IConnectionService
             public void onMuteStateChanged(String str, boolean z, Session.Info info) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    obtain.writeTypedObject(info, 0);
-                    this.mRemote.transact(25, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeTypedObject(info, 0);
+                    this.mRemote.transact(25, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.IConnectionService
             public void playDtmfTone(String str, char c, Session.Info info) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(c);
-                    obtain.writeTypedObject(info, 0);
-                    this.mRemote.transact(26, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(c);
+                    parcelObtain.writeTypedObject(info, 0);
+                    this.mRemote.transact(26, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.IConnectionService
             public void stopDtmfTone(String str, Session.Info info) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(info, 0);
-                    this.mRemote.transact(27, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(info, 0);
+                    this.mRemote.transact(27, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.IConnectionService
             public void conference(String str, String str2, Session.Info info) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeTypedObject(info, 0);
-                    this.mRemote.transact(28, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeTypedObject(info, 0);
+                    this.mRemote.transact(28, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.IConnectionService
             public void splitFromConference(String str, Session.Info info) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(info, 0);
-                    this.mRemote.transact(29, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(info, 0);
+                    this.mRemote.transact(29, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.IConnectionService
             public void mergeConference(String str, Session.Info info) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(info, 0);
-                    this.mRemote.transact(30, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(info, 0);
+                    this.mRemote.transact(30, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.IConnectionService
             public void swapConference(String str, Session.Info info) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(info, 0);
-                    this.mRemote.transact(31, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(info, 0);
+                    this.mRemote.transact(31, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.IConnectionService
             public void addConferenceParticipants(String str, List<Uri> list, Session.Info info) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedList(list, 0);
-                    obtain.writeTypedObject(info, 0);
-                    this.mRemote.transact(32, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedList(list, 0);
+                    parcelObtain.writeTypedObject(info, 0);
+                    this.mRemote.transact(32, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.IConnectionService
             public void onPostDialContinue(String str, boolean z, Session.Info info) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    obtain.writeTypedObject(info, 0);
-                    this.mRemote.transact(33, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeTypedObject(info, 0);
+                    this.mRemote.transact(33, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.IConnectionService
             public void pullExternalCall(String str, Session.Info info) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(info, 0);
-                    this.mRemote.transact(34, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(info, 0);
+                    this.mRemote.transact(34, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.IConnectionService
             public void sendCallEvent(String str, String str2, Bundle bundle, Session.Info info) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeTypedObject(info, 0);
-                    this.mRemote.transact(35, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeTypedObject(info, 0);
+                    this.mRemote.transact(35, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.IConnectionService
             public void onCallFilteringCompleted(String str, Connection.CallFilteringCompletionInfo callFilteringCompletionInfo, Session.Info info) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(callFilteringCompletionInfo, 0);
-                    obtain.writeTypedObject(info, 0);
-                    this.mRemote.transact(36, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(callFilteringCompletionInfo, 0);
+                    parcelObtain.writeTypedObject(info, 0);
+                    this.mRemote.transact(36, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.IConnectionService
             public void onExtrasChanged(String str, Bundle bundle, Session.Info info) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeTypedObject(info, 0);
-                    this.mRemote.transact(37, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeTypedObject(info, 0);
+                    this.mRemote.transact(37, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.IConnectionService
             public void startRtt(String str, ParcelFileDescriptor parcelFileDescriptor, ParcelFileDescriptor parcelFileDescriptor2, Session.Info info) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(parcelFileDescriptor, 0);
-                    obtain.writeTypedObject(parcelFileDescriptor2, 0);
-                    obtain.writeTypedObject(info, 0);
-                    this.mRemote.transact(38, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor, 0);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor2, 0);
+                    parcelObtain.writeTypedObject(info, 0);
+                    this.mRemote.transact(38, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.IConnectionService
             public void stopRtt(String str, Session.Info info) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(info, 0);
-                    this.mRemote.transact(39, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(info, 0);
+                    this.mRemote.transact(39, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.IConnectionService
             public void respondToRttUpgradeRequest(String str, ParcelFileDescriptor parcelFileDescriptor, ParcelFileDescriptor parcelFileDescriptor2, Session.Info info) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(parcelFileDescriptor, 0);
-                    obtain.writeTypedObject(parcelFileDescriptor2, 0);
-                    obtain.writeTypedObject(info, 0);
-                    this.mRemote.transact(40, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor, 0);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor2, 0);
+                    parcelObtain.writeTypedObject(info, 0);
+                    this.mRemote.transact(40, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.IConnectionService
             public void connectionServiceFocusLost(Session.Info info) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(info, 0);
-                    this.mRemote.transact(41, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(info, 0);
+                    this.mRemote.transact(41, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.IConnectionService
             public void connectionServiceFocusGained(Session.Info info) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(info, 0);
-                    this.mRemote.transact(42, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(info, 0);
+                    this.mRemote.transact(42, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.IConnectionService
             public void handoverFailed(String str, ConnectionRequest connectionRequest, int i, Session.Info info) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(connectionRequest, 0);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(info, 0);
-                    this.mRemote.transact(43, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(connectionRequest, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(info, 0);
+                    this.mRemote.transact(43, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.IConnectionService
             public void handoverComplete(String str, Session.Info info) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(info, 0);
-                    this.mRemote.transact(44, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(info, 0);
+                    this.mRemote.transact(44, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.IConnectionService
             public void onUsingAlternativeUi(String str, boolean z, Session.Info info) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    obtain.writeTypedObject(info, 0);
-                    this.mRemote.transact(45, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeTypedObject(info, 0);
+                    this.mRemote.transact(45, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.IConnectionService
             public void onTrackedByNonUiService(String str, boolean z, Session.Info info) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    obtain.writeTypedObject(info, 0);
-                    this.mRemote.transact(46, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeTypedObject(info, 0);
+                    this.mRemote.transact(46, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

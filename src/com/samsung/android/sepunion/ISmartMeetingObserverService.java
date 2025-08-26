@@ -40,9 +40,9 @@ public interface ISmartMeetingObserverService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISmartMeetingObserverService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISmartMeetingObserverService)) {
-                return (ISmartMeetingObserverService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISmartMeetingObserverService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISmartMeetingObserverService)) {
+                return (ISmartMeetingObserverService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }

@@ -30,32 +30,32 @@ public class WebAddress {
         this.mAuthInfo = "";
         Matcher matcher = sAddressPattern.matcher(str);
         if (matcher.matches()) {
-            String group = matcher.group(1);
-            if (group != null) {
-                this.mScheme = group.toLowerCase(Locale.ROOT);
+            String strGroup = matcher.group(1);
+            if (strGroup != null) {
+                this.mScheme = strGroup.toLowerCase(Locale.ROOT);
             }
-            String group2 = matcher.group(2);
-            if (group2 != null) {
-                this.mAuthInfo = group2;
+            String strGroup2 = matcher.group(2);
+            if (strGroup2 != null) {
+                this.mAuthInfo = strGroup2;
             }
-            String group3 = matcher.group(3);
-            if (group3 != null) {
-                this.mHost = group3;
+            String strGroup3 = matcher.group(3);
+            if (strGroup3 != null) {
+                this.mHost = strGroup3;
             }
-            String group4 = matcher.group(4);
-            if (group4 != null && group4.length() > 0) {
+            String strGroup4 = matcher.group(4);
+            if (strGroup4 != null && strGroup4.length() > 0) {
                 try {
-                    this.mPort = Integer.parseInt(group4);
+                    this.mPort = Integer.parseInt(strGroup4);
                 } catch (NumberFormatException unused) {
                     throw new ParseException("Bad port");
                 }
             }
-            String group5 = matcher.group(5);
-            if (group5 != null && group5.length() > 0) {
-                if (group5.charAt(0) == '/') {
-                    this.mPath = group5;
+            String strGroup5 = matcher.group(5);
+            if (strGroup5 != null && strGroup5.length() > 0) {
+                if (strGroup5.charAt(0) == '/') {
+                    this.mPath = strGroup5;
                 } else {
-                    this.mPath = "/" + group5;
+                    this.mPath = "/" + strGroup5;
                 }
             }
             if (this.mPort == 443 && this.mScheme.equals("")) {

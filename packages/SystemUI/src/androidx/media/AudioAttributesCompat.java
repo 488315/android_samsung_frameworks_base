@@ -4,7 +4,6 @@ import android.util.SparseIntArray;
 import androidx.media.AudioAttributesImplApi26;
 import androidx.versionedparcelable.VersionedParcelable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AudioAttributesCompat implements VersionedParcelable {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -44,7 +43,6 @@ public class AudioAttributesCompat implements VersionedParcelable {
         this.mImpl = audioAttributesImpl;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Builder {
         public final AudioAttributesImplApi26.Builder mBuilderImpl;
 

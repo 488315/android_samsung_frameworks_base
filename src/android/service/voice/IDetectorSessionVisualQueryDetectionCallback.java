@@ -79,9 +79,9 @@ public interface IDetectorSessionVisualQueryDetectionCallback extends IInterface
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IDetectorSessionVisualQueryDetectionCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IDetectorSessionVisualQueryDetectionCallback)) {
-                return (IDetectorSessionVisualQueryDetectionCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IDetectorSessionVisualQueryDetectionCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IDetectorSessionVisualQueryDetectionCallback)) {
+                return (IDetectorSessionVisualQueryDetectionCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -126,14 +126,14 @@ public interface IDetectorSessionVisualQueryDetectionCallback extends IInterface
                     onAttentionGained(visualQueryAttentionResult);
                     return true;
                 case 2:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onAttentionLost(readInt);
+                    onAttentionLost(i3);
                     return true;
                 case 3:
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    onQueryDetected(readString);
+                    onQueryDetected(string);
                     return true;
                 case 4:
                     VisualQueryDetectedResult visualQueryDetectedResult = (VisualQueryDetectedResult) parcel.readTypedObject(VisualQueryDetectedResult.CREATOR);
@@ -169,71 +169,71 @@ public interface IDetectorSessionVisualQueryDetectionCallback extends IInterface
 
             @Override // android.service.voice.IDetectorSessionVisualQueryDetectionCallback
             public void onAttentionGained(VisualQueryAttentionResult visualQueryAttentionResult) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDetectorSessionVisualQueryDetectionCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(visualQueryAttentionResult, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDetectorSessionVisualQueryDetectionCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(visualQueryAttentionResult, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.voice.IDetectorSessionVisualQueryDetectionCallback
             public void onAttentionLost(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDetectorSessionVisualQueryDetectionCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDetectorSessionVisualQueryDetectionCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.voice.IDetectorSessionVisualQueryDetectionCallback
             public void onQueryDetected(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDetectorSessionVisualQueryDetectionCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDetectorSessionVisualQueryDetectionCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.voice.IDetectorSessionVisualQueryDetectionCallback
             public void onResultDetected(VisualQueryDetectedResult visualQueryDetectedResult) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDetectorSessionVisualQueryDetectionCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(visualQueryDetectedResult, 0);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDetectorSessionVisualQueryDetectionCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(visualQueryDetectedResult, 0);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.voice.IDetectorSessionVisualQueryDetectionCallback
             public void onQueryFinished() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDetectorSessionVisualQueryDetectionCallback.DESCRIPTOR);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDetectorSessionVisualQueryDetectionCallback.DESCRIPTOR);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.voice.IDetectorSessionVisualQueryDetectionCallback
             public void onQueryRejected() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDetectorSessionVisualQueryDetectionCallback.DESCRIPTOR);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDetectorSessionVisualQueryDetectionCallback.DESCRIPTOR);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

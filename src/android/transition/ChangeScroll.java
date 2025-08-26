@@ -42,26 +42,26 @@ public class ChangeScroll extends Transition {
 
     @Override // android.transition.Transition
     public Animator createAnimator(ViewGroup viewGroup, TransitionValues transitionValues, TransitionValues transitionValues2) {
-        ObjectAnimator objectAnimator;
-        ObjectAnimator objectAnimator2 = null;
+        ObjectAnimator objectAnimatorOfInt;
+        ObjectAnimator objectAnimatorOfInt2 = null;
         if (transitionValues == null || transitionValues2 == null) {
             return null;
         }
         View view = transitionValues2.view;
-        int intValue = ((Integer) transitionValues.values.get(PROPNAME_SCROLL_X)).intValue();
-        int intValue2 = ((Integer) transitionValues2.values.get(PROPNAME_SCROLL_X)).intValue();
-        int intValue3 = ((Integer) transitionValues.values.get(PROPNAME_SCROLL_Y)).intValue();
-        int intValue4 = ((Integer) transitionValues2.values.get(PROPNAME_SCROLL_Y)).intValue();
-        if (intValue != intValue2) {
-            view.setScrollX(intValue);
-            objectAnimator = ObjectAnimator.ofInt(view, "scrollX", intValue, intValue2);
+        int iIntValue = ((Integer) transitionValues.values.get(PROPNAME_SCROLL_X)).intValue();
+        int iIntValue2 = ((Integer) transitionValues2.values.get(PROPNAME_SCROLL_X)).intValue();
+        int iIntValue3 = ((Integer) transitionValues.values.get(PROPNAME_SCROLL_Y)).intValue();
+        int iIntValue4 = ((Integer) transitionValues2.values.get(PROPNAME_SCROLL_Y)).intValue();
+        if (iIntValue != iIntValue2) {
+            view.setScrollX(iIntValue);
+            objectAnimatorOfInt = ObjectAnimator.ofInt(view, "scrollX", iIntValue, iIntValue2);
         } else {
-            objectAnimator = null;
+            objectAnimatorOfInt = null;
         }
-        if (intValue3 != intValue4) {
-            view.setScrollY(intValue3);
-            objectAnimator2 = ObjectAnimator.ofInt(view, "scrollY", intValue3, intValue4);
+        if (iIntValue3 != iIntValue4) {
+            view.setScrollY(iIntValue3);
+            objectAnimatorOfInt2 = ObjectAnimator.ofInt(view, "scrollY", iIntValue3, iIntValue4);
         }
-        return TransitionUtils.mergeAnimators(objectAnimator, objectAnimator2);
+        return TransitionUtils.mergeAnimators(objectAnimatorOfInt, objectAnimatorOfInt2);
     }
 }

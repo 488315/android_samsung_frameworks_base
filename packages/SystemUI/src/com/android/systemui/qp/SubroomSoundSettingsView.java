@@ -22,7 +22,6 @@ import com.android.systemui.statusbar.phone.SecStatusBarAudioManagerHelper;
 import com.android.systemui.util.DeviceType;
 import com.android.systemui.util.SystemUIAnalytics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SubroomSoundSettingsView extends LinearLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -71,20 +70,28 @@ public class SubroomSoundSettingsView extends LinearLayout {
         this.mSoundBackground = (LinearLayout) findViewById(R.id.sound_background);
         this.mSoundButton.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qp.SubroomSoundSettingsView$$ExternalSyntheticLambda0
             /* JADX WARN: Multi-variable type inference failed */
+            /* JADX WARN: Removed duplicated region for block: B:7:0x0024  */
             @Override // android.view.View.OnClickListener
+            /*
+                Code decompiled incorrectly, please refer to instructions dump.
+            */
             public final void onClick(View view) {
-                SubroomSoundSettingsView subroomSoundSettingsView = SubroomSoundSettingsView.this;
+                SubroomSoundSettingsView subroomSoundSettingsView = this.f$0;
                 int i = SubroomSoundSettingsView.$r8$clinit;
                 EdmMonitor edmMonitor = ((KnoxStateMonitorImpl) ((KnoxStateMonitor) Dependency.sDependency.getDependencyInner(KnoxStateMonitor.class))).mEdmMonitor;
                 if (edmMonitor != null) {
                     Context context = edmMonitor.knoxStateMonitor.mContext;
-                    if (!edmMonitor.mSettingsChangesAllowed) {
+                    if (edmMonitor.mSettingsChangesAllowed) {
+                        int ringerMode = SecStatusBarAudioManagerHelper.getInstance(subroomSoundSettingsView.mContext).getRingerMode(true);
+                        int iIsVibratorSupported = 0;
+                        if (ringerMode != 1) {
+                            iIsVibratorSupported = (ringerMode == 2 || Settings.Global.getInt(subroomSoundSettingsView.mContext.getContentResolver(), "all_sound_off", 0) == 1) ? DeviceType.isVibratorSupported(subroomSoundSettingsView.mContext) : 2;
+                        }
+                        SecStatusBarAudioManagerHelper.getInstance(subroomSoundSettingsView.mContext).setRingerModeInternal(iIsVibratorSupported);
+                    } else {
                         Log.d("SubroomSoundSettingsView", "Subscreen Soundmode tile not available by KnoxStateMonitor.");
-                        SystemUIAnalytics.sendEventLog(SystemUIAnalytics.getCurrentScreenID(), SystemUIAnalytics.EID_SOUND_MODE_COVER);
                     }
                 }
-                int ringerMode = SecStatusBarAudioManagerHelper.getInstance(subroomSoundSettingsView.mContext).getRingerMode(true);
-                SecStatusBarAudioManagerHelper.getInstance(subroomSoundSettingsView.mContext).setRingerModeInternal(ringerMode != 1 ? ringerMode != 2 ? Settings.Global.getInt(subroomSoundSettingsView.mContext.getContentResolver(), "all_sound_off", 0) == 1 ? DeviceType.isVibratorSupported(subroomSoundSettingsView.mContext) : 2 : DeviceType.isVibratorSupported(subroomSoundSettingsView.mContext) : 0);
                 SystemUIAnalytics.sendEventLog(SystemUIAnalytics.getCurrentScreenID(), SystemUIAnalytics.EID_SOUND_MODE_COVER);
             }
         });

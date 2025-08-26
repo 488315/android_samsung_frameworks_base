@@ -40,7 +40,6 @@ import java.util.Set;
 import java.util.function.Consumer;
 import kotlinx.coroutines.flow.StateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class FalsingCollectorImpl implements FalsingCollector {
     public static final boolean DEBUG = Log.isLoggable("FalsingCollector", 3);
@@ -68,7 +67,7 @@ public class FalsingCollectorImpl implements FalsingCollector {
         @Override // com.android.systemui.util.sensors.ThresholdSensor.Listener
         public final void onThresholdCrossed(ThresholdSensorEvent thresholdSensorEvent) {
             boolean z = FalsingCollectorImpl.DEBUG;
-            FalsingCollectorImpl falsingCollectorImpl = FalsingCollectorImpl.this;
+            FalsingCollectorImpl falsingCollectorImpl = this.f$0;
             falsingCollectorImpl.mFalsingManager.onProximityEvent(new FalsingCollectorImpl.ProximityEventImpl(thresholdSensorEvent));
         }
     };
@@ -112,7 +111,6 @@ public class FalsingCollectorImpl implements FalsingCollector {
     public final AnonymousClass5 mDockEventListener = new Object(this) { // from class: com.android.systemui.classifier.FalsingCollectorImpl.5
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ProximityEventImpl implements FalsingManager.ProximityEvent {
         public final ThresholdSensorEvent mThresholdSensorEvent;
 
@@ -184,7 +182,7 @@ public class FalsingCollectorImpl implements FalsingCollector {
         int i2 = SceneContainerFlag.$r8$clinit;
         ((KeyguardStateControllerImpl) this.mKeyguardStateController).addCallback(this.mKeyguardStateControllerCallback);
         this.mKeyguardUpdateMonitor.registerCallback(this.mKeyguardUpdateCallback);
-        StateFlow isQsExpanded = ((ShadeInteractorImpl) ((ShadeInteractor) this.mShadeInteractorLazy.get())).baseShadeInteractor.isQsExpanded();
+        StateFlow stateFlowIsQsExpanded = ((ShadeInteractorImpl) ((ShadeInteractor) this.mShadeInteractorLazy.get())).baseShadeInteractor.isQsExpanded();
         final int i3 = 0;
         Consumer consumer = new Consumer(this) { // from class: com.android.systemui.classifier.FalsingCollectorImpl$$ExternalSyntheticLambda2
             public final /* synthetic */ FalsingCollectorImpl f$0;
@@ -203,17 +201,17 @@ public class FalsingCollectorImpl implements FalsingCollector {
                         falsingCollectorImpl.onQsExpansionChanged(bool);
                         break;
                     default:
-                        boolean booleanValue = bool.booleanValue();
+                        boolean zBooleanValue = bool.booleanValue();
                         boolean z = FalsingCollectorImpl.DEBUG;
                         falsingCollectorImpl.getClass();
-                        FalsingCollectorImpl.logDebug("REAL: onShowingCommunalHubChanged(" + booleanValue + ")");
+                        FalsingCollectorImpl.logDebug("REAL: onShowingCommunalHubChanged(" + zBooleanValue + ")");
                         falsingCollectorImpl.updateSessionActive();
                         break;
                 }
             }
         };
         JavaAdapter javaAdapter = this.mJavaAdapter;
-        javaAdapter.alwaysCollectFlow(isQsExpanded, consumer);
+        javaAdapter.alwaysCollectFlow(stateFlowIsQsExpanded, consumer);
         CommunalInteractor communalInteractor = (CommunalInteractor) this.mCommunalInteractorLazy.get();
         javaAdapter.alwaysCollectFlow(BooleanFlowOperators.INSTANCE.allOf(communalInteractor.isCommunalEnabled, communalInteractor.isCommunalShowing), new Consumer(this) { // from class: com.android.systemui.classifier.FalsingCollectorImpl$$ExternalSyntheticLambda2
             public final /* synthetic */ FalsingCollectorImpl f$0;
@@ -232,10 +230,10 @@ public class FalsingCollectorImpl implements FalsingCollector {
                         falsingCollectorImpl.onQsExpansionChanged(bool);
                         break;
                     default:
-                        boolean booleanValue = bool.booleanValue();
+                        boolean zBooleanValue = bool.booleanValue();
                         boolean z = FalsingCollectorImpl.DEBUG;
                         falsingCollectorImpl.getClass();
-                        FalsingCollectorImpl.logDebug("REAL: onShowingCommunalHubChanged(" + booleanValue + ")");
+                        FalsingCollectorImpl.logDebug("REAL: onShowingCommunalHubChanged(" + zBooleanValue + ")");
                         falsingCollectorImpl.updateSessionActive();
                         break;
                 }
@@ -286,7 +284,7 @@ public class FalsingCollectorImpl implements FalsingCollector {
         this.mMainExecutor.executeDelayed(new Runnable() { // from class: com.android.systemui.classifier.FalsingCollectorImpl$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                FalsingDataProvider falsingDataProvider2 = FalsingDataProvider.this;
+                FalsingDataProvider falsingDataProvider2 = falsingDataProvider;
                 if (falsingDataProvider2.mRecentMotionEvents.isEmpty()) {
                     return;
                 }
@@ -301,10 +299,10 @@ public class FalsingCollectorImpl implements FalsingCollector {
 
     public void onQsExpansionChanged(Boolean bool) {
         logDebug("REAL: onQsExpansionChanged(" + bool + ")");
-        boolean booleanValue = bool.booleanValue();
+        boolean zBooleanValue = bool.booleanValue();
         ProximitySensor proximitySensor = this.mProximitySensor;
         FalsingCollectorImpl$$ExternalSyntheticLambda1 falsingCollectorImpl$$ExternalSyntheticLambda1 = this.mSensorEventListener;
-        if (booleanValue) {
+        if (zBooleanValue) {
             proximitySensor.unregister(falsingCollectorImpl$$ExternalSyntheticLambda1);
         } else if (this.mSessionStarted) {
             proximitySensor.register(falsingCollectorImpl$$ExternalSyntheticLambda1);

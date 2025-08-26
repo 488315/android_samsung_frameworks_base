@@ -17,7 +17,6 @@ import com.android.systemui.Dependency;
 import com.android.systemui.R;
 import com.android.systemui.util.SecQsUiDisplayModeInteractor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class DataUsageLabelCommonView extends TextView {
     public Display mDisplay;
@@ -31,32 +30,32 @@ public class DataUsageLabelCommonView extends TextView {
 
     public final void dynamicallyReduceTextSize() {
         int dimensionPixelSize = ((SecQsUiDisplayModeInteractor) Dependency.sDependency.getDependencyInner(SecQsUiDisplayModeInteractor.class)).isTablet() ? this.mViewContext.getResources().getDimensionPixelSize(R.dimen.notification_panel_carrier_label_text_size_tablet) : this.mViewContext.getResources().getDimensionPixelSize(R.dimen.notification_panel_carrier_label_text_size);
-        float max = Math.max(1.0f, Math.min(1.3f, getResources().getConfiguration().fontScale));
+        float fMax = Math.max(1.0f, Math.min(1.3f, getResources().getConfiguration().fontScale));
         float f = dimensionPixelSize;
-        setTextSize(0, f * max);
-        String charSequence = getText().toString();
+        setTextSize(0, f * fMax);
+        String string = getText().toString();
         TextPaint paint = getPaint();
         DisplayMetrics displayMetrics = this.mDisplayMetrics;
         int i = displayMetrics != null ? displayMetrics.densityDpi : 160;
         int i2 = displayMetrics != null ? displayMetrics.widthPixels : 1440;
         int i3 = 0;
         while (i3 < 10) {
-            int measureText = (int) paint.measureText(charSequence);
-            if (i2 <= 0 || i2 >= measureText) {
+            int iMeasureText = (int) paint.measureText(string);
+            if (i2 <= 0 || i2 >= iMeasureText) {
                 if (DataUsageLabelManager.DEBUG) {
-                    StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i3, i2, "dynamicallyReduceTextSize(", " done ! ) maxWidthPixels:", ", textWidth:");
-                    ViewPager$$ExternalSyntheticOutline0.m(m, measureText, ", densityDPI:", i, ", defaultTextSize:");
-                    m.append(dimensionPixelSize);
-                    m.append(", newScaleRatio:");
-                    m.append(max);
-                    Log.d("DataUsageLabelCommonView", m.toString());
+                    StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i3, i2, "dynamicallyReduceTextSize(", " done ! ) maxWidthPixels:", ", textWidth:");
+                    ViewPager$$ExternalSyntheticOutline0.m(sbM, iMeasureText, ", densityDPI:", i, ", defaultTextSize:");
+                    sbM.append(dimensionPixelSize);
+                    sbM.append(", newScaleRatio:");
+                    sbM.append(fMax);
+                    Log.d("DataUsageLabelCommonView", sbM.toString());
                     return;
                 }
                 return;
             }
             float f2 = f;
             int i4 = i3 + 1;
-            String str = charSequence;
+            String str = string;
             float f3 = f2 - ((i / 160.0f) * i4);
             if (DataUsageLabelManager.DEBUG) {
                 StringBuilder sb = new StringBuilder("dynamicallyReduceTextSize(");
@@ -64,13 +63,13 @@ public class DataUsageLabelCommonView extends TextView {
                 sb.append(") scaledNewFontSize:");
                 sb.append(f3);
                 sb.append(", maxWidthPixels:");
-                ViewPager$$ExternalSyntheticOutline0.m(sb, i2, ", textWidth:", measureText, ", densityDPI:");
+                ViewPager$$ExternalSyntheticOutline0.m(sb, i2, ", textWidth:", iMeasureText, ", densityDPI:");
                 ViewPager$$ExternalSyntheticOutline0.m(sb, i, ", defaultTextSize:", dimensionPixelSize, ", newScaleRatio:");
-                SeslColorSpectrumView$$ExternalSyntheticOutline0.m(max, "DataUsageLabelCommonView", sb);
+                SeslColorSpectrumView$$ExternalSyntheticOutline0.m(fMax, "DataUsageLabelCommonView", sb);
             }
             setTextSize(0, f3);
             f = f2;
-            charSequence = str;
+            string = str;
             i3 = i4;
         }
     }

@@ -6,12 +6,10 @@ import com.android.systemui.R;
 import com.samsung.systemui.splugins.navigationbar.LayoutProvider;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class LayoutProviderImpl implements LayoutProvider {
     public final Context mContext;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -66,16 +64,16 @@ public final class LayoutProviderImpl implements LayoutProvider {
 
     @Override // com.samsung.systemui.splugins.navigationbar.LayoutProvider
     public final int getSpaceWidth(Point point, boolean z, boolean z2) {
-        double min;
+        double dMin;
         double d;
         if (z2) {
-            min = Math.min(point.x, point.y);
+            dMin = Math.min(point.x, point.y);
             d = 0.14d;
         } else {
-            min = Math.min(point.x, point.y);
+            dMin = Math.min(point.x, point.y);
             d = 0.11d;
         }
-        return (int) (min * d);
+        return (int) (dMin * d);
     }
 
     @Override // com.samsung.systemui.splugins.navigationbar.LayoutProvider
@@ -85,16 +83,16 @@ public final class LayoutProviderImpl implements LayoutProvider {
 
     @Override // com.samsung.systemui.splugins.navigationbar.LayoutProvider
     public final int getSpaceSidePadding(Point point, boolean z, boolean z2) {
-        double min;
+        double dMin;
         double d;
         if (z2) {
-            min = Math.min(point.x, point.y);
+            dMin = Math.min(point.x, point.y);
             d = 0.077d;
         } else {
-            min = Math.min(point.x, point.y);
+            dMin = Math.min(point.x, point.y);
             d = 0.0d;
         }
-        return (int) (min * d);
+        return (int) (dMin * d);
     }
 
     @Override // com.samsung.systemui.splugins.navigationbar.LayoutProvider

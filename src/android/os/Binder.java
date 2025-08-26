@@ -48,9 +48,7 @@ public class Binder implements IBinder {
     static ThreadLocal<Boolean> sWarnOnBlockingOnCurrentThread = ThreadLocal.withInitial(new Supplier() { // from class: android.os.Binder$$ExternalSyntheticLambda0
         @Override // java.util.function.Supplier
         public final Object get() {
-            Boolean valueOf;
-            valueOf = Boolean.valueOf(Binder.sWarnOnBlocking);
-            return valueOf;
+            return Boolean.valueOf(Binder.sWarnOnBlocking);
         }
     });
     private static boolean sIsHandlingBinderTransaction = false;
@@ -58,9 +56,7 @@ public class Binder implements IBinder {
     private static volatile BinderInternal.WorkSourceProvider sWorkSourceProvider = new BinderInternal.WorkSourceProvider() { // from class: android.os.Binder$$ExternalSyntheticLambda1
         @Override // com.android.internal.os.BinderInternal.WorkSourceProvider
         public final int resolveWorkSourceUid(int i) {
-            int callingUid;
-            callingUid = Binder.getCallingUid();
-            return callingUid;
+            return Binder.getCallingUid();
         }
     };
 
@@ -172,14 +168,10 @@ public class Binder implements IBinder {
     }
 
     public static synchronized TransactionTracker getTransactionTracker() {
-        TransactionTracker transactionTracker;
-        synchronized (Binder.class) {
-            if (sTransactionTracker == null) {
-                sTransactionTracker = new TransactionTracker();
-            }
-            transactionTracker = sTransactionTracker;
+        if (sTransactionTracker == null) {
+            sTransactionTracker = new TransactionTracker();
         }
-        return transactionTracker;
+        return sTransactionTracker;
     }
 
     public static void setObserver(BinderInternal.Observer observer) {
@@ -253,24 +245,24 @@ public class Binder implements IBinder {
     }
 
     public static final void withCleanCallingIdentity(FunctionalUtils.ThrowingRunnable throwingRunnable) {
-        long clearCallingIdentity = clearCallingIdentity();
+        long jClearCallingIdentity = clearCallingIdentity();
         try {
             throwingRunnable.runOrThrow();
-            restoreCallingIdentity(clearCallingIdentity);
+            restoreCallingIdentity(jClearCallingIdentity);
         } catch (Throwable th) {
-            restoreCallingIdentity(clearCallingIdentity);
+            restoreCallingIdentity(jClearCallingIdentity);
             throw ExceptionUtils.propagate(th);
         }
     }
 
     public static final <T> T withCleanCallingIdentity(FunctionalUtils.ThrowingSupplier<T> throwingSupplier) {
-        long clearCallingIdentity = clearCallingIdentity();
+        long jClearCallingIdentity = clearCallingIdentity();
         try {
             T orThrow = throwingSupplier.getOrThrow();
-            restoreCallingIdentity(clearCallingIdentity);
+            restoreCallingIdentity(jClearCallingIdentity);
             return orThrow;
         } catch (Throwable th) {
-            restoreCallingIdentity(clearCallingIdentity);
+            restoreCallingIdentity(jClearCallingIdentity);
             throw ExceptionUtils.propagate(th);
         }
     }
@@ -366,20 +358,20 @@ public class Binder implements IBinder {
     }
 
     protected boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2) throws RemoteException {
-        ParcelFileDescriptor readFileDescriptor;
-        FileDescriptor fileDescriptor;
+        ParcelFileDescriptor fileDescriptor;
+        FileDescriptor fileDescriptor2;
         if (i == 1598968902) {
             parcel2.writeString(getInterfaceDescriptor());
             return true;
         }
         if (i == 1598311760) {
-            readFileDescriptor = parcel.readFileDescriptor();
-            String[] readStringArray = parcel.readStringArray();
-            if (readFileDescriptor != null) {
+            fileDescriptor = parcel.readFileDescriptor();
+            String[] stringArray = parcel.readStringArray();
+            if (fileDescriptor != null) {
                 try {
-                    dump(readFileDescriptor.getFileDescriptor(), readStringArray);
+                    dump(fileDescriptor.getFileDescriptor(), stringArray);
                 } finally {
-                    IoUtils.closeQuietly(readFileDescriptor);
+                    IoUtils.closeQuietly(fileDescriptor);
                 }
             }
             if (parcel2 != null) {
@@ -400,19 +392,19 @@ public class Binder implements IBinder {
             }
             return true;
         }
-        ParcelFileDescriptor readFileDescriptor2 = parcel.readFileDescriptor();
-        ParcelFileDescriptor readFileDescriptor3 = parcel.readFileDescriptor();
-        readFileDescriptor = parcel.readFileDescriptor();
-        String[] readStringArray2 = parcel.readStringArray();
-        ShellCallback createFromParcel = ShellCallback.CREATOR.createFromParcel(parcel);
-        ResultReceiver createFromParcel2 = ResultReceiver.CREATOR.createFromParcel(parcel);
-        if (readFileDescriptor3 != null) {
-            if (readFileDescriptor2 != null) {
+        ParcelFileDescriptor fileDescriptor3 = parcel.readFileDescriptor();
+        ParcelFileDescriptor fileDescriptor4 = parcel.readFileDescriptor();
+        fileDescriptor = parcel.readFileDescriptor();
+        String[] stringArray2 = parcel.readStringArray();
+        ShellCallback shellCallbackCreateFromParcel = ShellCallback.CREATOR.createFromParcel(parcel);
+        ResultReceiver resultReceiverCreateFromParcel = ResultReceiver.CREATOR.createFromParcel(parcel);
+        if (fileDescriptor4 != null) {
+            if (fileDescriptor3 != null) {
                 try {
-                    fileDescriptor = readFileDescriptor2.getFileDescriptor();
+                    fileDescriptor2 = fileDescriptor3.getFileDescriptor();
                 } catch (Throwable th) {
-                    IoUtils.closeQuietly(readFileDescriptor2);
-                    IoUtils.closeQuietly(readFileDescriptor3);
+                    IoUtils.closeQuietly(fileDescriptor3);
+                    IoUtils.closeQuietly(fileDescriptor4);
                     if (parcel2 != null) {
                         parcel2.writeNoException();
                         throw th;
@@ -421,12 +413,12 @@ public class Binder implements IBinder {
                     throw th;
                 }
             } else {
-                fileDescriptor = null;
+                fileDescriptor2 = null;
             }
-            shellCommand(fileDescriptor, readFileDescriptor3.getFileDescriptor(), readFileDescriptor != null ? readFileDescriptor.getFileDescriptor() : readFileDescriptor3.getFileDescriptor(), readStringArray2, createFromParcel, createFromParcel2);
+            shellCommand(fileDescriptor2, fileDescriptor4.getFileDescriptor(), fileDescriptor != null ? fileDescriptor.getFileDescriptor() : fileDescriptor4.getFileDescriptor(), stringArray2, shellCallbackCreateFromParcel, resultReceiverCreateFromParcel);
         }
-        IoUtils.closeQuietly(readFileDescriptor2);
-        IoUtils.closeQuietly(readFileDescriptor3);
+        IoUtils.closeQuietly(fileDescriptor3);
+        IoUtils.closeQuietly(fileDescriptor4);
         if (parcel2 != null) {
             parcel2.writeNoException();
         } else {
@@ -438,9 +430,9 @@ public class Binder implements IBinder {
     public final String getTransactionTraceName(int i) {
         boolean z = getMaxTransactionId() == 0;
         if (this.mTransactionTraceNames == null) {
-            int min = z ? 1024 : Math.min(getMaxTransactionId(), 1024);
+            int iMin = z ? 1024 : Math.min(getMaxTransactionId(), 1024);
             this.mSimpleDescriptor = getSimpleDescriptor();
-            this.mTransactionTraceNames = new AtomicReferenceArray<>(min + 1);
+            this.mTransactionTraceNames = new AtomicReferenceArray<>(iMin + 1);
         }
         int i2 = z ? i : i - 1;
         if (i2 >= this.mTransactionTraceNames.length() || i2 < 0) {
@@ -458,9 +450,9 @@ public class Binder implements IBinder {
             stringBuffer.append(this.mSimpleDescriptor).append("::#").append(i);
         }
         stringBuffer.append("::server");
-        String stringBuffer2 = stringBuffer.toString();
-        this.mTransactionTraceNames.setRelease(i2, stringBuffer2);
-        return stringBuffer2;
+        String string = stringBuffer.toString();
+        this.mTransactionTraceNames.setRelease(i2, string);
+        return string;
     }
 
     private String getSimpleDescriptor() {
@@ -468,8 +460,8 @@ public class Binder implements IBinder {
         if (str == null) {
             return TAG;
         }
-        int lastIndexOf = str.lastIndexOf(MediaMetrics.SEPARATOR);
-        return lastIndexOf > 0 ? str.substring(lastIndexOf + 1) : str;
+        int iLastIndexOf = str.lastIndexOf(MediaMetrics.SEPARATOR);
+        return iLastIndexOf > 0 ? str.substring(iLastIndexOf + 1) : str;
     }
 
     @Override // android.os.IBinder
@@ -516,11 +508,11 @@ public class Binder implements IBinder {
     }
 
     @Override // android.os.IBinder
-    public void shellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) throws RemoteException {
+    public void shellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) throws IOException, RemoteException {
         onShellCommand(fileDescriptor, fileDescriptor2, fileDescriptor3, strArr, shellCallback, resultReceiver);
     }
 
-    public void onShellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) throws RemoteException {
+    public void onShellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) throws IOException, RemoteException {
         int callingUid = getCallingUid();
         if (callingUid != 0 && callingUid != 2000) {
             resultReceiver.send(-1, null);
@@ -549,31 +541,31 @@ public class Binder implements IBinder {
             strArr = new String[0];
         }
         try {
-            ParcelFileDescriptor dup = ParcelFileDescriptor.dup(fileDescriptor);
+            ParcelFileDescriptor parcelFileDescriptorDup = ParcelFileDescriptor.dup(fileDescriptor);
             try {
-                ParcelFileDescriptor dup2 = ParcelFileDescriptor.dup(fileDescriptor2);
+                ParcelFileDescriptor parcelFileDescriptorDup2 = ParcelFileDescriptor.dup(fileDescriptor2);
                 try {
-                    ParcelFileDescriptor dup3 = ParcelFileDescriptor.dup(fileDescriptor3);
+                    ParcelFileDescriptor parcelFileDescriptorDup3 = ParcelFileDescriptor.dup(fileDescriptor3);
                     try {
-                        int handleShellCommand = handleShellCommand(dup, dup2, dup3, strArr);
-                        if (dup3 != null) {
-                            dup3.close();
+                        int iHandleShellCommand = handleShellCommand(parcelFileDescriptorDup, parcelFileDescriptorDup2, parcelFileDescriptorDup3, strArr);
+                        if (parcelFileDescriptorDup3 != null) {
+                            parcelFileDescriptorDup3.close();
                         }
-                        if (dup2 != null) {
-                            dup2.close();
+                        if (parcelFileDescriptorDup2 != null) {
+                            parcelFileDescriptorDup2.close();
                         }
-                        if (dup != null) {
-                            dup.close();
+                        if (parcelFileDescriptorDup != null) {
+                            parcelFileDescriptorDup.close();
                         }
-                        resultReceiver.send(handleShellCommand, null);
+                        resultReceiver.send(iHandleShellCommand, null);
                     } finally {
                     }
                 } finally {
                 }
             } catch (Throwable th) {
-                if (dup != null) {
+                if (parcelFileDescriptorDup != null) {
                     try {
-                        dup.close();
+                        parcelFileDescriptorDup.close();
                     } catch (Throwable th2) {
                         th.addSuppressed(th2);
                     }
@@ -612,11 +604,11 @@ public class Binder implements IBinder {
         if (parcel != null) {
             parcel.setDataPosition(0);
         }
-        boolean onTransact = onTransact(i, parcel, parcel2, i2);
+        boolean zOnTransact = onTransact(i, parcel, parcel2, i2);
         if (parcel2 != null) {
             parcel2.setDataPosition(0);
         }
-        return onTransact;
+        return zOnTransact;
     }
 
     public static void setWorkSourceProvider(BinderInternal.WorkSourceProvider workSourceProvider) {
@@ -627,31 +619,31 @@ public class Binder implements IBinder {
     }
 
     private boolean execTransact(int i, long j, long j2, int i2) {
-        Parcel obtain = Parcel.obtain(j);
-        Parcel obtain2 = Parcel.obtain(j2);
-        int callingUid = obtain.isForRpc() ? -1 : getCallingUid();
+        Parcel parcelObtain = Parcel.obtain(j);
+        Parcel parcelObtain2 = Parcel.obtain(j2);
+        int callingUid = parcelObtain.isForRpc() ? -1 : getCallingUid();
         long uid = callingUid == -1 ? -1L : ThreadLocalWorkSource.setUid(callingUid);
         try {
-            boolean execTransactInternal = execTransactInternal(i, obtain, obtain2, i2, callingUid);
-            obtain2.recycle();
-            obtain.recycle();
+            boolean zExecTransactInternal = execTransactInternal(i, parcelObtain, parcelObtain2, i2, callingUid);
+            parcelObtain2.recycle();
+            parcelObtain.recycle();
             if (callingUid != -1) {
                 ThreadLocalWorkSource.restore(uid);
             }
-            return execTransactInternal;
+            return zExecTransactInternal;
         } finally {
         }
     }
 
     private boolean execTransactInternal(int i, Parcel parcel, Parcel parcel2, int i2, int i3) {
         boolean z;
-        boolean onTransact;
+        boolean zOnTransact;
         BinderInternal.Observer observer = sObserver;
-        BinderInternal.CallSession callStarted = observer != null ? observer.callStarted(this, i, -1) : null;
-        boolean isTagEnabled = Trace.isTagEnabled(16777216L);
+        BinderInternal.CallSession callSessionCallStarted = observer != null ? observer.callStarted(this, i, -1) : null;
+        boolean zIsTagEnabled = Trace.isTagEnabled(16777216L);
         getMaxTransactionId();
-        String transactionTraceName = isTagEnabled ? getTransactionTraceName(i) : null;
-        boolean z2 = isTagEnabled && transactionTraceName != null;
+        String transactionTraceName = zIsTagEnabled ? getTransactionTraceName(i) : null;
+        boolean z2 = zIsTagEnabled && transactionTraceName != null;
         try {
             try {
                 BinderCallHeavyHitterWatcher binderCallHeavyHitterWatcher = sHeavyHitterWatcher;
@@ -662,90 +654,88 @@ public class Binder implements IBinder {
                     Trace.traceBegin(16777216L, transactionTraceName);
                 }
                 if ((i2 & 2) == 0 || i3 == -1) {
-                    onTransact = onTransact(i, parcel, parcel2, i2);
+                    zOnTransact = onTransact(i, parcel, parcel2, i2);
                 } else {
                     AppOpsManager.startNotedAppOpsCollection(i3);
                     try {
-                        onTransact = onTransact(i, parcel, parcel2, i2);
+                        zOnTransact = onTransact(i, parcel, parcel2, i2);
                         AppOpsManager.finishNotedAppOpsCollection();
                     } catch (Throwable th) {
                         AppOpsManager.finishNotedAppOpsCollection();
                         throw th;
                     }
                 }
-                z = onTransact;
+                z = zOnTransact;
                 if (z2) {
                     Trace.traceEnd(16777216L);
                 }
                 if (observer != null) {
-                    observer.callEnded(callStarted, parcel.dataSize(), parcel2.dataSize(), sWorkSourceProvider.resolveWorkSourceUid(parcel.readCallingWorkSourceUid()));
+                    observer.callEnded(callSessionCallStarted, parcel.dataSize(), parcel2.dataSize(), sWorkSourceProvider.resolveWorkSourceUid(parcel.readCallingWorkSourceUid()));
                 }
                 checkParcel(this, i, parcel2, "Unreasonably large binder reply buffer");
-            } catch (Throwable th2) {
-                if (z2) {
-                    Trace.traceEnd(16777216L);
-                }
+            } catch (RemoteException | RuntimeException e) {
                 if (observer != null) {
-                    observer.callEnded(callStarted, parcel.dataSize(), parcel2.dataSize(), sWorkSourceProvider.resolveWorkSourceUid(parcel.readCallingWorkSourceUid()));
+                    observer.callThrewException(callSessionCallStarted, e);
                 }
-                checkParcel(this, i, parcel2, "Unreasonably large binder reply buffer");
-                throw th2;
-            }
-        } catch (RemoteException | RuntimeException e) {
-            if (observer != null) {
-                observer.callThrewException(callStarted, e);
-            }
-            if (LOG_RUNTIME_EXCEPTION) {
-                Log.w(TAG, "Caught a RuntimeException from the binder stub implementation.", e);
-            }
-            if ((i2 & 1) != 0) {
-                if (e instanceof RemoteException) {
-                    Log.w(TAG, "Binder call failed.", e);
-                } else {
+                if (LOG_RUNTIME_EXCEPTION) {
                     Log.w(TAG, "Caught a RuntimeException from the binder stub implementation.", e);
                 }
-                onUnhandledException(i, i2, e);
-            } else {
-                parcel2.setDataSize(0);
-                parcel2.setDataPosition(0);
-                if (Parcel.getExceptionCode(e) == 0) {
+                if ((i2 & 1) != 0) {
+                    if (e instanceof RemoteException) {
+                        Log.w(TAG, "Binder call failed.", e);
+                    } else {
+                        Log.w(TAG, "Caught a RuntimeException from the binder stub implementation.", e);
+                    }
                     onUnhandledException(i, i2, e);
+                } else {
+                    parcel2.setDataSize(0);
+                    parcel2.setDataPosition(0);
+                    if (Parcel.getExceptionCode(e) == 0) {
+                        onUnhandledException(i, i2, e);
+                    }
+                    parcel2.writeException(e);
                 }
-                parcel2.writeException(e);
+                if (z2) {
+                    Trace.traceEnd(16777216L);
+                }
+                if (observer != null) {
+                    observer.callEnded(callSessionCallStarted, parcel.dataSize(), parcel2.dataSize(), sWorkSourceProvider.resolveWorkSourceUid(parcel.readCallingWorkSourceUid()));
+                }
+                checkParcel(this, i, parcel2, "Unreasonably large binder reply buffer");
+                z = true;
             }
+            StrictMode.clearGatheredViolations();
+            return z;
+        } catch (Throwable th2) {
             if (z2) {
                 Trace.traceEnd(16777216L);
             }
             if (observer != null) {
-                observer.callEnded(callStarted, parcel.dataSize(), parcel2.dataSize(), sWorkSourceProvider.resolveWorkSourceUid(parcel.readCallingWorkSourceUid()));
+                observer.callEnded(callSessionCallStarted, parcel.dataSize(), parcel2.dataSize(), sWorkSourceProvider.resolveWorkSourceUid(parcel.readCallingWorkSourceUid()));
             }
             checkParcel(this, i, parcel2, "Unreasonably large binder reply buffer");
-            z = true;
+            throw th2;
         }
-        StrictMode.clearGatheredViolations();
-        return z;
     }
 
     public static synchronized void setHeavyHitterWatcherConfig(boolean z, int i, float f, BinderCallHeavyHitterWatcher.BinderCallHeavyHitterListener binderCallHeavyHitterListener) {
-        synchronized (Binder.class) {
-            Slog.i(TAG, "Setting heavy hitter watcher config: " + z + ", " + i + ", " + f);
-            BinderCallHeavyHitterWatcher binderCallHeavyHitterWatcher = sHeavyHitterWatcher;
-            boolean z2 = false;
-            if (z) {
-                if (binderCallHeavyHitterListener == null) {
-                    throw new IllegalArgumentException();
-                }
-                if (binderCallHeavyHitterWatcher == null) {
-                    binderCallHeavyHitterWatcher = BinderCallHeavyHitterWatcher.getInstance();
-                    z2 = true;
-                }
-                binderCallHeavyHitterWatcher.setConfig(true, i, f, binderCallHeavyHitterListener);
-                if (z2) {
-                    sHeavyHitterWatcher = binderCallHeavyHitterWatcher;
-                }
-            } else if (binderCallHeavyHitterWatcher != null) {
-                binderCallHeavyHitterWatcher.setConfig(false, 0, 0.0f, null);
+        Slog.i(TAG, "Setting heavy hitter watcher config: " + z + ", " + i + ", " + f);
+        BinderCallHeavyHitterWatcher binderCallHeavyHitterWatcher = sHeavyHitterWatcher;
+        boolean z2 = false;
+        if (z) {
+            if (binderCallHeavyHitterListener == null) {
+                throw new IllegalArgumentException();
             }
+            if (binderCallHeavyHitterWatcher == null) {
+                binderCallHeavyHitterWatcher = BinderCallHeavyHitterWatcher.getInstance();
+                z2 = true;
+            }
+            binderCallHeavyHitterWatcher.setConfig(true, i, f, binderCallHeavyHitterListener);
+            if (z2) {
+                sHeavyHitterWatcher = binderCallHeavyHitterWatcher;
+            }
+        } else if (binderCallHeavyHitterWatcher != null) {
+            binderCallHeavyHitterWatcher.setConfig(false, 0, 0.0f, null);
         }
     }
 }

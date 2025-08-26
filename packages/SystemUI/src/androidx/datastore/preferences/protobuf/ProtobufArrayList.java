@@ -6,7 +6,6 @@ import java.util.AbstractList;
 import java.util.Arrays;
 import java.util.RandomAccess;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ProtobufArrayList extends AbstractProtobufList implements RandomAccess {
     public static final ProtobufArrayList EMPTY_LIST = new ProtobufArrayList(new Object[0], 0, false);
@@ -35,9 +34,9 @@ public final class ProtobufArrayList extends AbstractProtobufList implements Ran
 
     public final void ensureIndexInRange$5(int i) {
         if (i < 0 || i >= this.size) {
-            StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Index:", ", Size:");
-            m.append(this.size);
-            throw new IndexOutOfBoundsException(m.toString());
+            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Index:", ", Size:");
+            sbM.append(this.size);
+            throw new IndexOutOfBoundsException(sbM.toString());
         }
     }
 
@@ -110,8 +109,8 @@ public final class ProtobufArrayList extends AbstractProtobufList implements Ran
             ((AbstractList) this).modCount++;
             return;
         }
-        StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Index:", ", Size:");
-        m.append(this.size);
-        throw new IndexOutOfBoundsException(m.toString());
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Index:", ", Size:");
+        sbM.append(this.size);
+        throw new IndexOutOfBoundsException(sbM.toString());
     }
 }

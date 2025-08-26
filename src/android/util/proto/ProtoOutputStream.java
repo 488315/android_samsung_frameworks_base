@@ -2,6 +2,7 @@ package android.util.proto;
 
 import android.hardware.scontext.SContextConstants;
 import android.util.Log;
+import com.android.internal.logging.nano.MetricsProto;
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -55,23 +56,151 @@ public final class ProtoOutputStream extends ProtoStream {
     /* JADX WARN: Removed duplicated region for block: B:19:0x0050  */
     /* JADX WARN: Removed duplicated region for block: B:21:0x0055  */
     /* JADX WARN: Removed duplicated region for block: B:23:0x005a  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x0064  */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x0069  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x006e  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x0073  */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x0078  */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x007d  */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x0082  */
+    /* JADX WARN: Removed duplicated region for block: B:29:0x0064  */
+    /* JADX WARN: Removed duplicated region for block: B:31:0x0069  */
+    /* JADX WARN: Removed duplicated region for block: B:33:0x006e  */
+    /* JADX WARN: Removed duplicated region for block: B:35:0x0073  */
+    /* JADX WARN: Removed duplicated region for block: B:37:0x0078  */
+    /* JADX WARN: Removed duplicated region for block: B:39:0x007d  */
+    /* JADX WARN: Removed duplicated region for block: B:41:0x0082  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void write(long r7, double r9) {
-        /*
-            Method dump skipped, instructions count: 316
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.util.proto.ProtoOutputStream.write(long, double):void");
+    public void write(long j, double d) {
+        assertNotCompacted();
+        int i = (int) j;
+        int i2 = (int) ((17587891077120L & j) >> 32);
+        switch (i2) {
+            case 257:
+                writeDoubleImpl(i, d);
+                return;
+            case 258:
+                writeFloatImpl(i, (float) d);
+                return;
+            case 259:
+                writeInt64Impl(i, (long) d);
+                return;
+            case 260:
+                writeUInt64Impl(i, (long) d);
+                return;
+            case 261:
+                writeInt32Impl(i, (int) d);
+                return;
+            case 262:
+                writeFixed64Impl(i, (long) d);
+                return;
+            case 263:
+                writeFixed32Impl(i, (int) d);
+                return;
+            case 264:
+                writeBoolImpl(i, d != SContextConstants.ENVIRONMENT_VALUE_UNKNOWN);
+                return;
+            default:
+                switch (i2) {
+                    case 269:
+                        writeUInt32Impl(i, (int) d);
+                        return;
+                    case 270:
+                        writeEnumImpl(i, (int) d);
+                        return;
+                    case 271:
+                        writeSFixed32Impl(i, (int) d);
+                        return;
+                    case 272:
+                        writeSFixed64Impl(i, (long) d);
+                        return;
+                    case 273:
+                        writeSInt32Impl(i, (int) d);
+                        return;
+                    case 274:
+                        writeSInt64Impl(i, (long) d);
+                        return;
+                    default:
+                        switch (i2) {
+                            case 513:
+                                writeRepeatedDoubleImpl(i, d);
+                                return;
+                            case 514:
+                                writeRepeatedFloatImpl(i, (float) d);
+                                return;
+                            case 515:
+                                writeRepeatedInt64Impl(i, (long) d);
+                                return;
+                            case 516:
+                                writeRepeatedUInt64Impl(i, (long) d);
+                                return;
+                            case 517:
+                                writeRepeatedInt32Impl(i, (int) d);
+                                return;
+                            case 518:
+                                writeRepeatedFixed64Impl(i, (long) d);
+                                return;
+                            case 519:
+                                writeRepeatedFixed32Impl(i, (int) d);
+                                return;
+                            case 520:
+                                writeRepeatedBoolImpl(i, d != SContextConstants.ENVIRONMENT_VALUE_UNKNOWN);
+                                return;
+                            default:
+                                switch (i2) {
+                                    case 525:
+                                        writeRepeatedUInt32Impl(i, (int) d);
+                                        return;
+                                    case 526:
+                                        writeRepeatedEnumImpl(i, (int) d);
+                                        return;
+                                    case 527:
+                                        writeRepeatedSFixed32Impl(i, (int) d);
+                                        return;
+                                    case 528:
+                                        writeRepeatedSFixed64Impl(i, (long) d);
+                                        return;
+                                    case 529:
+                                        writeRepeatedSInt32Impl(i, (int) d);
+                                        return;
+                                    case 530:
+                                        writeRepeatedSInt64Impl(i, (long) d);
+                                        return;
+                                    default:
+                                        switch (i2) {
+                                            case 1281:
+                                                break;
+                                            case 1282:
+                                                break;
+                                            case 1283:
+                                                break;
+                                            case 1284:
+                                                break;
+                                            case 1285:
+                                                break;
+                                            case 1286:
+                                                break;
+                                            case 1287:
+                                                break;
+                                            case MetricsProto.MetricsEvent.ROTATION_SUGGESTION_SHOWN /* 1288 */:
+                                                break;
+                                            default:
+                                                switch (i2) {
+                                                    case 1293:
+                                                        break;
+                                                    case 1294:
+                                                        break;
+                                                    case MetricsProto.MetricsEvent.OUTPUT_CHOOSER /* 1295 */:
+                                                        break;
+                                                    case MetricsProto.MetricsEvent.ACTION_OUTPUT_CHOOSER_CONNECT /* 1296 */:
+                                                        break;
+                                                    case MetricsProto.MetricsEvent.ACTION_OUTPUT_CHOOSER_DISCONNECT /* 1297 */:
+                                                        break;
+                                                    case MetricsProto.MetricsEvent.SETTINGS_TV_HOME_THEATER_CONTROL_CATEGORY /* 1298 */:
+                                                        break;
+                                                    default:
+                                                        throw new IllegalArgumentException("Attempt to call write(long, double) with " + getFieldIdString(j));
+                                                }
+                                        }
+                                }
+                        }
+                }
+        }
     }
 
     /* JADX WARN: Removed duplicated region for block: B:11:0x003b  */
@@ -81,23 +210,151 @@ public final class ProtoOutputStream extends ProtoStream {
     /* JADX WARN: Removed duplicated region for block: B:19:0x004f  */
     /* JADX WARN: Removed duplicated region for block: B:21:0x0054  */
     /* JADX WARN: Removed duplicated region for block: B:23:0x0059  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x0063  */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x0068  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x006d  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x0072  */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x0077  */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x007c  */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x0080  */
+    /* JADX WARN: Removed duplicated region for block: B:29:0x0063  */
+    /* JADX WARN: Removed duplicated region for block: B:31:0x0068  */
+    /* JADX WARN: Removed duplicated region for block: B:33:0x006d  */
+    /* JADX WARN: Removed duplicated region for block: B:35:0x0072  */
+    /* JADX WARN: Removed duplicated region for block: B:37:0x0077  */
+    /* JADX WARN: Removed duplicated region for block: B:39:0x007c  */
+    /* JADX WARN: Removed duplicated region for block: B:41:0x0080  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void write(long r6, float r8) {
-        /*
-            Method dump skipped, instructions count: 316
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.util.proto.ProtoOutputStream.write(long, float):void");
+    public void write(long j, float f) {
+        assertNotCompacted();
+        int i = (int) j;
+        int i2 = (int) ((17587891077120L & j) >> 32);
+        switch (i2) {
+            case 257:
+                writeDoubleImpl(i, f);
+                return;
+            case 258:
+                writeFloatImpl(i, f);
+                return;
+            case 259:
+                writeInt64Impl(i, (long) f);
+                return;
+            case 260:
+                writeUInt64Impl(i, (long) f);
+                return;
+            case 261:
+                writeInt32Impl(i, (int) f);
+                return;
+            case 262:
+                writeFixed64Impl(i, (long) f);
+                return;
+            case 263:
+                writeFixed32Impl(i, (int) f);
+                return;
+            case 264:
+                writeBoolImpl(i, f != 0.0f);
+                return;
+            default:
+                switch (i2) {
+                    case 269:
+                        writeUInt32Impl(i, (int) f);
+                        return;
+                    case 270:
+                        writeEnumImpl(i, (int) f);
+                        return;
+                    case 271:
+                        writeSFixed32Impl(i, (int) f);
+                        return;
+                    case 272:
+                        writeSFixed64Impl(i, (long) f);
+                        return;
+                    case 273:
+                        writeSInt32Impl(i, (int) f);
+                        return;
+                    case 274:
+                        writeSInt64Impl(i, (long) f);
+                        return;
+                    default:
+                        switch (i2) {
+                            case 513:
+                                writeRepeatedDoubleImpl(i, f);
+                                return;
+                            case 514:
+                                writeRepeatedFloatImpl(i, f);
+                                return;
+                            case 515:
+                                writeRepeatedInt64Impl(i, (long) f);
+                                return;
+                            case 516:
+                                writeRepeatedUInt64Impl(i, (long) f);
+                                return;
+                            case 517:
+                                writeRepeatedInt32Impl(i, (int) f);
+                                return;
+                            case 518:
+                                writeRepeatedFixed64Impl(i, (long) f);
+                                return;
+                            case 519:
+                                writeRepeatedFixed32Impl(i, (int) f);
+                                return;
+                            case 520:
+                                writeRepeatedBoolImpl(i, f != 0.0f);
+                                return;
+                            default:
+                                switch (i2) {
+                                    case 525:
+                                        writeRepeatedUInt32Impl(i, (int) f);
+                                        return;
+                                    case 526:
+                                        writeRepeatedEnumImpl(i, (int) f);
+                                        return;
+                                    case 527:
+                                        writeRepeatedSFixed32Impl(i, (int) f);
+                                        return;
+                                    case 528:
+                                        writeRepeatedSFixed64Impl(i, (long) f);
+                                        return;
+                                    case 529:
+                                        writeRepeatedSInt32Impl(i, (int) f);
+                                        return;
+                                    case 530:
+                                        writeRepeatedSInt64Impl(i, (long) f);
+                                        return;
+                                    default:
+                                        switch (i2) {
+                                            case 1281:
+                                                break;
+                                            case 1282:
+                                                break;
+                                            case 1283:
+                                                break;
+                                            case 1284:
+                                                break;
+                                            case 1285:
+                                                break;
+                                            case 1286:
+                                                break;
+                                            case 1287:
+                                                break;
+                                            case MetricsProto.MetricsEvent.ROTATION_SUGGESTION_SHOWN /* 1288 */:
+                                                break;
+                                            default:
+                                                switch (i2) {
+                                                    case 1293:
+                                                        break;
+                                                    case 1294:
+                                                        break;
+                                                    case MetricsProto.MetricsEvent.OUTPUT_CHOOSER /* 1295 */:
+                                                        break;
+                                                    case MetricsProto.MetricsEvent.ACTION_OUTPUT_CHOOSER_CONNECT /* 1296 */:
+                                                        break;
+                                                    case MetricsProto.MetricsEvent.ACTION_OUTPUT_CHOOSER_DISCONNECT /* 1297 */:
+                                                        break;
+                                                    case MetricsProto.MetricsEvent.SETTINGS_TV_HOME_THEATER_CONTROL_CATEGORY /* 1298 */:
+                                                        break;
+                                                    default:
+                                                        throw new IllegalArgumentException("Attempt to call write(long, float) with " + getFieldIdString(j));
+                                                }
+                                        }
+                                }
+                        }
+                }
+        }
     }
 
     /* JADX WARN: Removed duplicated region for block: B:11:0x003a  */
@@ -107,214 +364,151 @@ public final class ProtoOutputStream extends ProtoStream {
     /* JADX WARN: Removed duplicated region for block: B:19:0x004c  */
     /* JADX WARN: Removed duplicated region for block: B:21:0x0050  */
     /* JADX WARN: Removed duplicated region for block: B:23:0x0054  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x005c  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x0060  */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x0065  */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x0069  */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x006e  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x0073  */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x0078  */
+    /* JADX WARN: Removed duplicated region for block: B:28:0x005c  */
+    /* JADX WARN: Removed duplicated region for block: B:30:0x0060  */
+    /* JADX WARN: Removed duplicated region for block: B:32:0x0065  */
+    /* JADX WARN: Removed duplicated region for block: B:34:0x0069  */
+    /* JADX WARN: Removed duplicated region for block: B:36:0x006e  */
+    /* JADX WARN: Removed duplicated region for block: B:38:0x0073  */
+    /* JADX WARN: Removed duplicated region for block: B:40:0x0078  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void write(long r5, int r7) {
-        /*
-            r4 = this;
-            r4.assertNotCompacted()
-            int r0 = (int) r5
-            r1 = 17587891077120(0xfff00000000, double:8.689572764003E-311)
-            long r1 = r1 & r5
-            r3 = 32
-            long r1 = r1 >> r3
-            int r1 = (int) r1
-            r2 = 1
-            r3 = 0
-            switch(r1) {
-                case 257: goto Lbb;
-                case 258: goto Lb6;
-                case 259: goto Lb1;
-                case 260: goto Lac;
-                case 261: goto La8;
-                case 262: goto La3;
-                case 263: goto L9f;
-                case 264: goto L97;
-                default: goto L13;
-            }
-        L13:
-            switch(r1) {
-                case 269: goto L93;
-                case 270: goto L8f;
-                case 271: goto L8b;
-                case 272: goto L86;
-                case 273: goto L82;
-                case 274: goto L7d;
-                default: goto L16;
-            }
-        L16:
-            switch(r1) {
-                case 513: goto L78;
-                case 514: goto L73;
-                case 515: goto L6e;
-                case 516: goto L69;
-                case 517: goto L65;
-                case 518: goto L60;
-                case 519: goto L5c;
-                case 520: goto L54;
-                default: goto L19;
-            }
-        L19:
-            switch(r1) {
-                case 525: goto L50;
-                case 526: goto L4c;
-                case 527: goto L48;
-                case 528: goto L43;
-                case 529: goto L3f;
-                case 530: goto L3a;
-                default: goto L1c;
-            }
-        L1c:
-            switch(r1) {
-                case 1281: goto L78;
-                case 1282: goto L73;
-                case 1283: goto L6e;
-                case 1284: goto L69;
-                case 1285: goto L65;
-                case 1286: goto L60;
-                case 1287: goto L5c;
-                case 1288: goto L54;
-                default: goto L1f;
-            }
-        L1f:
-            switch(r1) {
-                case 1293: goto L50;
-                case 1294: goto L4c;
-                case 1295: goto L48;
-                case 1296: goto L43;
-                case 1297: goto L3f;
-                case 1298: goto L3a;
-                default: goto L22;
-            }
-        L22:
-            java.lang.IllegalArgumentException r4 = new java.lang.IllegalArgumentException
-            java.lang.StringBuilder r7 = new java.lang.StringBuilder
-            java.lang.String r0 = "Attempt to call write(long, int) with "
-            r7.<init>(r0)
-            java.lang.String r5 = getFieldIdString(r5)
-            r7.append(r5)
-            java.lang.String r5 = r7.toString()
-            r4.<init>(r5)
-            throw r4
-        L3a:
-            long r5 = (long) r7
-            r4.writeRepeatedSInt64Impl(r0, r5)
-            return
-        L3f:
-            r4.writeRepeatedSInt32Impl(r0, r7)
-            return
-        L43:
-            long r5 = (long) r7
-            r4.writeRepeatedSFixed64Impl(r0, r5)
-            return
-        L48:
-            r4.writeRepeatedSFixed32Impl(r0, r7)
-            return
-        L4c:
-            r4.writeRepeatedEnumImpl(r0, r7)
-            return
-        L50:
-            r4.writeRepeatedUInt32Impl(r0, r7)
-            return
-        L54:
-            if (r7 == 0) goto L57
-            goto L58
-        L57:
-            r2 = r3
-        L58:
-            r4.writeRepeatedBoolImpl(r0, r2)
-            return
-        L5c:
-            r4.writeRepeatedFixed32Impl(r0, r7)
-            return
-        L60:
-            long r5 = (long) r7
-            r4.writeRepeatedFixed64Impl(r0, r5)
-            return
-        L65:
-            r4.writeRepeatedInt32Impl(r0, r7)
-            return
-        L69:
-            long r5 = (long) r7
-            r4.writeRepeatedUInt64Impl(r0, r5)
-            return
-        L6e:
-            long r5 = (long) r7
-            r4.writeRepeatedInt64Impl(r0, r5)
-            return
-        L73:
-            float r5 = (float) r7
-            r4.writeRepeatedFloatImpl(r0, r5)
-            return
-        L78:
-            double r5 = (double) r7
-            r4.writeRepeatedDoubleImpl(r0, r5)
-            return
-        L7d:
-            long r5 = (long) r7
-            r4.writeSInt64Impl(r0, r5)
-            return
-        L82:
-            r4.writeSInt32Impl(r0, r7)
-            return
-        L86:
-            long r5 = (long) r7
-            r4.writeSFixed64Impl(r0, r5)
-            return
-        L8b:
-            r4.writeSFixed32Impl(r0, r7)
-            return
-        L8f:
-            r4.writeEnumImpl(r0, r7)
-            return
-        L93:
-            r4.writeUInt32Impl(r0, r7)
-            return
-        L97:
-            if (r7 == 0) goto L9a
-            goto L9b
-        L9a:
-            r2 = r3
-        L9b:
-            r4.writeBoolImpl(r0, r2)
-            return
-        L9f:
-            r4.writeFixed32Impl(r0, r7)
-            return
-        La3:
-            long r5 = (long) r7
-            r4.writeFixed64Impl(r0, r5)
-            return
-        La8:
-            r4.writeInt32Impl(r0, r7)
-            return
-        Lac:
-            long r5 = (long) r7
-            r4.writeUInt64Impl(r0, r5)
-            return
-        Lb1:
-            long r5 = (long) r7
-            r4.writeInt64Impl(r0, r5)
-            return
-        Lb6:
-            float r5 = (float) r7
-            r4.writeFloatImpl(r0, r5)
-            return
-        Lbb:
-            double r5 = (double) r7
-            r4.writeDoubleImpl(r0, r5)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.util.proto.ProtoOutputStream.write(long, int):void");
+    public void write(long j, int i) {
+        assertNotCompacted();
+        int i2 = (int) j;
+        int i3 = (int) ((17587891077120L & j) >> 32);
+        switch (i3) {
+            case 257:
+                writeDoubleImpl(i2, i);
+                return;
+            case 258:
+                writeFloatImpl(i2, i);
+                return;
+            case 259:
+                writeInt64Impl(i2, i);
+                return;
+            case 260:
+                writeUInt64Impl(i2, i);
+                return;
+            case 261:
+                writeInt32Impl(i2, i);
+                return;
+            case 262:
+                writeFixed64Impl(i2, i);
+                return;
+            case 263:
+                writeFixed32Impl(i2, i);
+                return;
+            case 264:
+                writeBoolImpl(i2, i != 0);
+                return;
+            default:
+                switch (i3) {
+                    case 269:
+                        writeUInt32Impl(i2, i);
+                        return;
+                    case 270:
+                        writeEnumImpl(i2, i);
+                        return;
+                    case 271:
+                        writeSFixed32Impl(i2, i);
+                        return;
+                    case 272:
+                        writeSFixed64Impl(i2, i);
+                        return;
+                    case 273:
+                        writeSInt32Impl(i2, i);
+                        return;
+                    case 274:
+                        writeSInt64Impl(i2, i);
+                        return;
+                    default:
+                        switch (i3) {
+                            case 513:
+                                writeRepeatedDoubleImpl(i2, i);
+                                return;
+                            case 514:
+                                writeRepeatedFloatImpl(i2, i);
+                                return;
+                            case 515:
+                                writeRepeatedInt64Impl(i2, i);
+                                return;
+                            case 516:
+                                writeRepeatedUInt64Impl(i2, i);
+                                return;
+                            case 517:
+                                writeRepeatedInt32Impl(i2, i);
+                                return;
+                            case 518:
+                                writeRepeatedFixed64Impl(i2, i);
+                                return;
+                            case 519:
+                                writeRepeatedFixed32Impl(i2, i);
+                                return;
+                            case 520:
+                                writeRepeatedBoolImpl(i2, i != 0);
+                                return;
+                            default:
+                                switch (i3) {
+                                    case 525:
+                                        writeRepeatedUInt32Impl(i2, i);
+                                        return;
+                                    case 526:
+                                        writeRepeatedEnumImpl(i2, i);
+                                        return;
+                                    case 527:
+                                        writeRepeatedSFixed32Impl(i2, i);
+                                        return;
+                                    case 528:
+                                        writeRepeatedSFixed64Impl(i2, i);
+                                        return;
+                                    case 529:
+                                        writeRepeatedSInt32Impl(i2, i);
+                                        return;
+                                    case 530:
+                                        writeRepeatedSInt64Impl(i2, i);
+                                        return;
+                                    default:
+                                        switch (i3) {
+                                            case 1281:
+                                                break;
+                                            case 1282:
+                                                break;
+                                            case 1283:
+                                                break;
+                                            case 1284:
+                                                break;
+                                            case 1285:
+                                                break;
+                                            case 1286:
+                                                break;
+                                            case 1287:
+                                                break;
+                                            case MetricsProto.MetricsEvent.ROTATION_SUGGESTION_SHOWN /* 1288 */:
+                                                break;
+                                            default:
+                                                switch (i3) {
+                                                    case 1293:
+                                                        break;
+                                                    case 1294:
+                                                        break;
+                                                    case MetricsProto.MetricsEvent.OUTPUT_CHOOSER /* 1295 */:
+                                                        break;
+                                                    case MetricsProto.MetricsEvent.ACTION_OUTPUT_CHOOSER_CONNECT /* 1296 */:
+                                                        break;
+                                                    case MetricsProto.MetricsEvent.ACTION_OUTPUT_CHOOSER_DISCONNECT /* 1297 */:
+                                                        break;
+                                                    case MetricsProto.MetricsEvent.SETTINGS_TV_HOME_THEATER_CONTROL_CATEGORY /* 1298 */:
+                                                        break;
+                                                    default:
+                                                        throw new IllegalArgumentException("Attempt to call write(long, int) with " + getFieldIdString(j));
+                                                }
+                                        }
+                                }
+                        }
+                }
+        }
     }
 
     /* JADX WARN: Removed duplicated region for block: B:11:0x003c  */
@@ -324,23 +518,151 @@ public final class ProtoOutputStream extends ProtoStream {
     /* JADX WARN: Removed duplicated region for block: B:19:0x004e  */
     /* JADX WARN: Removed duplicated region for block: B:21:0x0053  */
     /* JADX WARN: Removed duplicated region for block: B:23:0x0058  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x0062  */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x0067  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x006b  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x0070  */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x0074  */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x0078  */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x007d  */
+    /* JADX WARN: Removed duplicated region for block: B:29:0x0062  */
+    /* JADX WARN: Removed duplicated region for block: B:31:0x0067  */
+    /* JADX WARN: Removed duplicated region for block: B:33:0x006b  */
+    /* JADX WARN: Removed duplicated region for block: B:35:0x0070  */
+    /* JADX WARN: Removed duplicated region for block: B:37:0x0074  */
+    /* JADX WARN: Removed duplicated region for block: B:39:0x0078  */
+    /* JADX WARN: Removed duplicated region for block: B:41:0x007d  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void write(long r7, long r9) {
-        /*
-            Method dump skipped, instructions count: 308
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.util.proto.ProtoOutputStream.write(long, long):void");
+    public void write(long j, long j2) {
+        assertNotCompacted();
+        int i = (int) j;
+        int i2 = (int) ((17587891077120L & j) >> 32);
+        switch (i2) {
+            case 257:
+                writeDoubleImpl(i, j2);
+                return;
+            case 258:
+                writeFloatImpl(i, j2);
+                return;
+            case 259:
+                writeInt64Impl(i, j2);
+                return;
+            case 260:
+                writeUInt64Impl(i, j2);
+                return;
+            case 261:
+                writeInt32Impl(i, (int) j2);
+                return;
+            case 262:
+                writeFixed64Impl(i, j2);
+                return;
+            case 263:
+                writeFixed32Impl(i, (int) j2);
+                return;
+            case 264:
+                writeBoolImpl(i, j2 != 0);
+                return;
+            default:
+                switch (i2) {
+                    case 269:
+                        writeUInt32Impl(i, (int) j2);
+                        return;
+                    case 270:
+                        writeEnumImpl(i, (int) j2);
+                        return;
+                    case 271:
+                        writeSFixed32Impl(i, (int) j2);
+                        return;
+                    case 272:
+                        writeSFixed64Impl(i, j2);
+                        return;
+                    case 273:
+                        writeSInt32Impl(i, (int) j2);
+                        return;
+                    case 274:
+                        writeSInt64Impl(i, j2);
+                        return;
+                    default:
+                        switch (i2) {
+                            case 513:
+                                writeRepeatedDoubleImpl(i, j2);
+                                return;
+                            case 514:
+                                writeRepeatedFloatImpl(i, j2);
+                                return;
+                            case 515:
+                                writeRepeatedInt64Impl(i, j2);
+                                return;
+                            case 516:
+                                writeRepeatedUInt64Impl(i, j2);
+                                return;
+                            case 517:
+                                writeRepeatedInt32Impl(i, (int) j2);
+                                return;
+                            case 518:
+                                writeRepeatedFixed64Impl(i, j2);
+                                return;
+                            case 519:
+                                writeRepeatedFixed32Impl(i, (int) j2);
+                                return;
+                            case 520:
+                                writeRepeatedBoolImpl(i, j2 != 0);
+                                return;
+                            default:
+                                switch (i2) {
+                                    case 525:
+                                        writeRepeatedUInt32Impl(i, (int) j2);
+                                        return;
+                                    case 526:
+                                        writeRepeatedEnumImpl(i, (int) j2);
+                                        return;
+                                    case 527:
+                                        writeRepeatedSFixed32Impl(i, (int) j2);
+                                        return;
+                                    case 528:
+                                        writeRepeatedSFixed64Impl(i, j2);
+                                        return;
+                                    case 529:
+                                        writeRepeatedSInt32Impl(i, (int) j2);
+                                        return;
+                                    case 530:
+                                        writeRepeatedSInt64Impl(i, j2);
+                                        return;
+                                    default:
+                                        switch (i2) {
+                                            case 1281:
+                                                break;
+                                            case 1282:
+                                                break;
+                                            case 1283:
+                                                break;
+                                            case 1284:
+                                                break;
+                                            case 1285:
+                                                break;
+                                            case 1286:
+                                                break;
+                                            case 1287:
+                                                break;
+                                            case MetricsProto.MetricsEvent.ROTATION_SUGGESTION_SHOWN /* 1288 */:
+                                                break;
+                                            default:
+                                                switch (i2) {
+                                                    case 1293:
+                                                        break;
+                                                    case 1294:
+                                                        break;
+                                                    case MetricsProto.MetricsEvent.OUTPUT_CHOOSER /* 1295 */:
+                                                        break;
+                                                    case MetricsProto.MetricsEvent.ACTION_OUTPUT_CHOOSER_CONNECT /* 1296 */:
+                                                        break;
+                                                    case MetricsProto.MetricsEvent.ACTION_OUTPUT_CHOOSER_DISCONNECT /* 1297 */:
+                                                        break;
+                                                    case MetricsProto.MetricsEvent.SETTINGS_TV_HOME_THEATER_CONTROL_CATEGORY /* 1298 */:
+                                                        break;
+                                                    default:
+                                                        throw new IllegalArgumentException("Attempt to call write(long, long) with " + getFieldIdString(j));
+                                                }
+                                        }
+                                }
+                        }
+                }
+        }
     }
 
     public void write(long j, boolean z) {
@@ -441,10 +763,10 @@ public final class ProtoOutputStream extends ProtoStream {
     @Deprecated
     public void writePackedDouble(long j, double[] dArr) {
         assertNotCompacted();
-        int checkFieldId = checkFieldId(j, 5501853106176L);
+        int iCheckFieldId = checkFieldId(j, 5501853106176L);
         int length = dArr != null ? dArr.length : 0;
         if (length > 0) {
-            writeKnownLengthHeader(checkFieldId, length * 8);
+            writeKnownLengthHeader(iCheckFieldId, length * 8);
             for (int i = 0; i < length; i++) {
                 this.mBuffer.writeRawFixed64(Double.doubleToLongBits(dArr[i]));
             }
@@ -478,10 +800,10 @@ public final class ProtoOutputStream extends ProtoStream {
     @Deprecated
     public void writePackedFloat(long j, float[] fArr) {
         assertNotCompacted();
-        int checkFieldId = checkFieldId(j, 5506148073472L);
+        int iCheckFieldId = checkFieldId(j, 5506148073472L);
         int length = fArr != null ? fArr.length : 0;
         if (length > 0) {
-            writeKnownLengthHeader(checkFieldId, length * 4);
+            writeKnownLengthHeader(iCheckFieldId, length * 4);
             for (int i = 0; i < length; i++) {
                 this.mBuffer.writeRawFixed32(Float.floatToIntBits(fArr[i]));
             }
@@ -523,17 +845,17 @@ public final class ProtoOutputStream extends ProtoStream {
     @Deprecated
     public void writePackedInt32(long j, int[] iArr) {
         assertNotCompacted();
-        int checkFieldId = checkFieldId(j, 5519032975360L);
+        int iCheckFieldId = checkFieldId(j, 5519032975360L);
         int length = iArr != null ? iArr.length : 0;
         if (length > 0) {
-            int i = 0;
-            for (int i2 = 0; i2 < length; i2++) {
-                int i3 = iArr[i2];
-                i += i3 >= 0 ? EncodedBuffer.getRawVarint32Size(i3) : 10;
+            int rawVarint32Size = 0;
+            for (int i = 0; i < length; i++) {
+                int i2 = iArr[i];
+                rawVarint32Size += i2 >= 0 ? EncodedBuffer.getRawVarint32Size(i2) : 10;
             }
-            writeKnownLengthHeader(checkFieldId, i);
-            for (int i4 = 0; i4 < length; i4++) {
-                writeUnsignedVarintFromSignedInt(iArr[i4]);
+            writeKnownLengthHeader(iCheckFieldId, rawVarint32Size);
+            for (int i3 = 0; i3 < length; i3++) {
+                writeUnsignedVarintFromSignedInt(iArr[i3]);
             }
         }
     }
@@ -565,16 +887,16 @@ public final class ProtoOutputStream extends ProtoStream {
     @Deprecated
     public void writePackedInt64(long j, long[] jArr) {
         assertNotCompacted();
-        int checkFieldId = checkFieldId(j, 5510443040768L);
+        int iCheckFieldId = checkFieldId(j, 5510443040768L);
         int length = jArr != null ? jArr.length : 0;
         if (length > 0) {
-            int i = 0;
-            for (int i2 = 0; i2 < length; i2++) {
-                i += EncodedBuffer.getRawVarint64Size(jArr[i2]);
+            int rawVarint64Size = 0;
+            for (int i = 0; i < length; i++) {
+                rawVarint64Size += EncodedBuffer.getRawVarint64Size(jArr[i]);
             }
-            writeKnownLengthHeader(checkFieldId, i);
-            for (int i3 = 0; i3 < length; i3++) {
-                this.mBuffer.writeRawVarint64(jArr[i3]);
+            writeKnownLengthHeader(iCheckFieldId, rawVarint64Size);
+            for (int i2 = 0; i2 < length; i2++) {
+                this.mBuffer.writeRawVarint64(jArr[i2]);
             }
         }
     }
@@ -606,16 +928,16 @@ public final class ProtoOutputStream extends ProtoStream {
     @Deprecated
     public void writePackedUInt32(long j, int[] iArr) {
         assertNotCompacted();
-        int checkFieldId = checkFieldId(j, 5553392713728L);
+        int iCheckFieldId = checkFieldId(j, 5553392713728L);
         int length = iArr != null ? iArr.length : 0;
         if (length > 0) {
-            int i = 0;
-            for (int i2 = 0; i2 < length; i2++) {
-                i += EncodedBuffer.getRawVarint32Size(iArr[i2]);
+            int rawVarint32Size = 0;
+            for (int i = 0; i < length; i++) {
+                rawVarint32Size += EncodedBuffer.getRawVarint32Size(iArr[i]);
             }
-            writeKnownLengthHeader(checkFieldId, i);
-            for (int i3 = 0; i3 < length; i3++) {
-                this.mBuffer.writeRawVarint32(iArr[i3]);
+            writeKnownLengthHeader(iCheckFieldId, rawVarint32Size);
+            for (int i2 = 0; i2 < length; i2++) {
+                this.mBuffer.writeRawVarint32(iArr[i2]);
             }
         }
     }
@@ -647,16 +969,16 @@ public final class ProtoOutputStream extends ProtoStream {
     @Deprecated
     public void writePackedUInt64(long j, long[] jArr) {
         assertNotCompacted();
-        int checkFieldId = checkFieldId(j, 5514738008064L);
+        int iCheckFieldId = checkFieldId(j, 5514738008064L);
         int length = jArr != null ? jArr.length : 0;
         if (length > 0) {
-            int i = 0;
-            for (int i2 = 0; i2 < length; i2++) {
-                i += EncodedBuffer.getRawVarint64Size(jArr[i2]);
+            int rawVarint64Size = 0;
+            for (int i = 0; i < length; i++) {
+                rawVarint64Size += EncodedBuffer.getRawVarint64Size(jArr[i]);
             }
-            writeKnownLengthHeader(checkFieldId, i);
-            for (int i3 = 0; i3 < length; i3++) {
-                this.mBuffer.writeRawVarint64(jArr[i3]);
+            writeKnownLengthHeader(iCheckFieldId, rawVarint64Size);
+            for (int i2 = 0; i2 < length; i2++) {
+                this.mBuffer.writeRawVarint64(jArr[i2]);
             }
         }
     }
@@ -688,16 +1010,16 @@ public final class ProtoOutputStream extends ProtoStream {
     @Deprecated
     public void writePackedSInt32(long j, int[] iArr) {
         assertNotCompacted();
-        int checkFieldId = checkFieldId(j, 5570572582912L);
+        int iCheckFieldId = checkFieldId(j, 5570572582912L);
         int length = iArr != null ? iArr.length : 0;
         if (length > 0) {
-            int i = 0;
-            for (int i2 = 0; i2 < length; i2++) {
-                i += EncodedBuffer.getRawZigZag32Size(iArr[i2]);
+            int rawZigZag32Size = 0;
+            for (int i = 0; i < length; i++) {
+                rawZigZag32Size += EncodedBuffer.getRawZigZag32Size(iArr[i]);
             }
-            writeKnownLengthHeader(checkFieldId, i);
-            for (int i3 = 0; i3 < length; i3++) {
-                this.mBuffer.writeRawZigZag32(iArr[i3]);
+            writeKnownLengthHeader(iCheckFieldId, rawZigZag32Size);
+            for (int i2 = 0; i2 < length; i2++) {
+                this.mBuffer.writeRawZigZag32(iArr[i2]);
             }
         }
     }
@@ -729,16 +1051,16 @@ public final class ProtoOutputStream extends ProtoStream {
     @Deprecated
     public void writePackedSInt64(long j, long[] jArr) {
         assertNotCompacted();
-        int checkFieldId = checkFieldId(j, 5574867550208L);
+        int iCheckFieldId = checkFieldId(j, 5574867550208L);
         int length = jArr != null ? jArr.length : 0;
         if (length > 0) {
-            int i = 0;
-            for (int i2 = 0; i2 < length; i2++) {
-                i += EncodedBuffer.getRawZigZag64Size(jArr[i2]);
+            int rawZigZag64Size = 0;
+            for (int i = 0; i < length; i++) {
+                rawZigZag64Size += EncodedBuffer.getRawZigZag64Size(jArr[i]);
             }
-            writeKnownLengthHeader(checkFieldId, i);
-            for (int i3 = 0; i3 < length; i3++) {
-                this.mBuffer.writeRawZigZag64(jArr[i3]);
+            writeKnownLengthHeader(iCheckFieldId, rawZigZag64Size);
+            for (int i2 = 0; i2 < length; i2++) {
+                this.mBuffer.writeRawZigZag64(jArr[i2]);
             }
         }
     }
@@ -770,10 +1092,10 @@ public final class ProtoOutputStream extends ProtoStream {
     @Deprecated
     public void writePackedFixed32(long j, int[] iArr) {
         assertNotCompacted();
-        int checkFieldId = checkFieldId(j, 5527622909952L);
+        int iCheckFieldId = checkFieldId(j, 5527622909952L);
         int length = iArr != null ? iArr.length : 0;
         if (length > 0) {
-            writeKnownLengthHeader(checkFieldId, length * 4);
+            writeKnownLengthHeader(iCheckFieldId, length * 4);
             for (int i = 0; i < length; i++) {
                 this.mBuffer.writeRawFixed32(iArr[i]);
             }
@@ -807,10 +1129,10 @@ public final class ProtoOutputStream extends ProtoStream {
     @Deprecated
     public void writePackedFixed64(long j, long[] jArr) {
         assertNotCompacted();
-        int checkFieldId = checkFieldId(j, 5523327942656L);
+        int iCheckFieldId = checkFieldId(j, 5523327942656L);
         int length = jArr != null ? jArr.length : 0;
         if (length > 0) {
-            writeKnownLengthHeader(checkFieldId, length * 8);
+            writeKnownLengthHeader(iCheckFieldId, length * 8);
             for (int i = 0; i < length; i++) {
                 this.mBuffer.writeRawFixed64(jArr[i]);
             }
@@ -844,10 +1166,10 @@ public final class ProtoOutputStream extends ProtoStream {
     @Deprecated
     public void writePackedSFixed32(long j, int[] iArr) {
         assertNotCompacted();
-        int checkFieldId = checkFieldId(j, 5561982648320L);
+        int iCheckFieldId = checkFieldId(j, 5561982648320L);
         int length = iArr != null ? iArr.length : 0;
         if (length > 0) {
-            writeKnownLengthHeader(checkFieldId, length * 4);
+            writeKnownLengthHeader(iCheckFieldId, length * 4);
             for (int i = 0; i < length; i++) {
                 this.mBuffer.writeRawFixed32(iArr[i]);
             }
@@ -881,10 +1203,10 @@ public final class ProtoOutputStream extends ProtoStream {
     @Deprecated
     public void writePackedSFixed64(long j, long[] jArr) {
         assertNotCompacted();
-        int checkFieldId = checkFieldId(j, 5566277615616L);
+        int iCheckFieldId = checkFieldId(j, 5566277615616L);
         int length = jArr != null ? jArr.length : 0;
         if (length > 0) {
-            writeKnownLengthHeader(checkFieldId, length * 8);
+            writeKnownLengthHeader(iCheckFieldId, length * 8);
             for (int i = 0; i < length; i++) {
                 this.mBuffer.writeRawFixed64(jArr[i]);
             }
@@ -918,10 +1240,10 @@ public final class ProtoOutputStream extends ProtoStream {
     @Deprecated
     public void writePackedBool(long j, boolean[] zArr) {
         assertNotCompacted();
-        int checkFieldId = checkFieldId(j, 5531917877248L);
+        int iCheckFieldId = checkFieldId(j, 5531917877248L);
         int length = zArr != null ? zArr.length : 0;
         if (length > 0) {
-            writeKnownLengthHeader(checkFieldId, length);
+            writeKnownLengthHeader(iCheckFieldId, length);
             for (int i = 0; i < length; i++) {
                 this.mBuffer.writeRawByte(zArr[i] ? (byte) 1 : (byte) 0);
             }
@@ -929,12 +1251,12 @@ public final class ProtoOutputStream extends ProtoStream {
     }
 
     @Deprecated
-    public void writeString(long j, String str) {
+    public void writeString(long j, String str) throws UnsupportedEncodingException {
         assertNotCompacted();
         writeStringImpl(checkFieldId(j, 1138166333440L), str);
     }
 
-    private void writeStringImpl(int i, String str) {
+    private void writeStringImpl(int i, String str) throws UnsupportedEncodingException {
         if (str == null || str.length() <= 0) {
             return;
         }
@@ -942,12 +1264,12 @@ public final class ProtoOutputStream extends ProtoStream {
     }
 
     @Deprecated
-    public void writeRepeatedString(long j, String str) {
+    public void writeRepeatedString(long j, String str) throws UnsupportedEncodingException {
         assertNotCompacted();
         writeRepeatedStringImpl(checkFieldId(j, 2237677961216L), str);
     }
 
-    private void writeRepeatedStringImpl(int i, String str) {
+    private void writeRepeatedStringImpl(int i, String str) throws UnsupportedEncodingException {
         if (str == null || str.length() == 0) {
             writeKnownLengthHeader(i, 0);
         } else {
@@ -955,7 +1277,7 @@ public final class ProtoOutputStream extends ProtoStream {
         }
     }
 
-    private void writeUtf8String(int i, String str) {
+    private void writeUtf8String(int i, String str) throws UnsupportedEncodingException {
         try {
             byte[] bytes = str.getBytes("UTF-8");
             writeKnownLengthHeader(i, bytes.length);
@@ -1017,17 +1339,17 @@ public final class ProtoOutputStream extends ProtoStream {
     @Deprecated
     public void writePackedEnum(long j, int[] iArr) {
         assertNotCompacted();
-        int checkFieldId = checkFieldId(j, 5557687681024L);
+        int iCheckFieldId = checkFieldId(j, 5557687681024L);
         int length = iArr != null ? iArr.length : 0;
         if (length > 0) {
-            int i = 0;
-            for (int i2 = 0; i2 < length; i2++) {
-                int i3 = iArr[i2];
-                i += i3 >= 0 ? EncodedBuffer.getRawVarint32Size(i3) : 10;
+            int rawVarint32Size = 0;
+            for (int i = 0; i < length; i++) {
+                int i2 = iArr[i];
+                rawVarint32Size += i2 >= 0 ? EncodedBuffer.getRawVarint32Size(i2) : 10;
             }
-            writeKnownLengthHeader(checkFieldId, i);
-            for (int i4 = 0; i4 < length; i4++) {
-                writeUnsignedVarintFromSignedInt(iArr[i4]);
+            writeKnownLengthHeader(iCheckFieldId, rawVarint32Size);
+            for (int i3 = 0; i3 < length; i3++) {
+                writeUnsignedVarintFromSignedInt(iArr[i3]);
             }
         }
     }
@@ -1063,9 +1385,9 @@ public final class ProtoOutputStream extends ProtoStream {
         this.mNextObjectId--;
         this.mBuffer.writeRawFixed32((int) (this.mExpectedObjectToken >> 32));
         this.mBuffer.writeRawFixed32((int) this.mExpectedObjectToken);
-        long makeToken = makeToken(getTagSize(i), z, this.mDepth, this.mNextObjectId, writePos);
-        this.mExpectedObjectToken = makeToken;
-        return makeToken;
+        long jMakeToken = makeToken(getTagSize(i), z, this.mDepth, this.mNextObjectId, writePos);
+        this.mExpectedObjectToken = jMakeToken;
+        return jMakeToken;
     }
 
     private void endObjectImpl(long j, boolean z) {
@@ -1223,230 +1545,106 @@ public final class ProtoOutputStream extends ProtoStream {
         this.mCompacted = true;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:47:0x0075, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:21:0x0075, code lost:
     
         throw new java.lang.RuntimeException("groups not supported at index " + r1);
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private int editEncodedSize(int r6) {
-        /*
-            r5 = this;
-            android.util.proto.EncodedBuffer r0 = r5.mBuffer
-            int r0 = r0.getReadPos()
-            int r0 = r0 + r6
-            r6 = 0
-        L8:
-            android.util.proto.EncodedBuffer r1 = r5.mBuffer
-            int r1 = r1.getReadPos()
-            if (r1 >= r0) goto Le0
-            int r2 = r5.readRawTag()
-            int r3 = android.util.proto.EncodedBuffer.getRawVarint32Size(r2)
-            int r6 = r6 + r3
-            r3 = r2 & 7
-            if (r3 == 0) goto Ld3
-            r4 = 1
-            if (r3 == r4) goto Lc8
-            r4 = 2
-            if (r3 == r4) goto L76
-            r4 = 3
-            if (r3 == r4) goto L62
-            r4 = 4
-            if (r3 == r4) goto L62
-            r1 = 5
-            if (r3 != r1) goto L34
-            int r6 = r6 + 4
-            android.util.proto.EncodedBuffer r1 = r5.mBuffer
-            r1.skipRead(r4)
-            goto L8
-        L34:
-            android.util.proto.ProtoParseException r6 = new android.util.proto.ProtoParseException
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder
-            java.lang.String r1 = "editEncodedSize Bad tag tag=0x"
-            r0.<init>(r1)
-            java.lang.String r1 = java.lang.Integer.toHexString(r2)
-            r0.append(r1)
-            java.lang.String r1 = " wireType="
-            r0.append(r1)
-            r0.append(r3)
-            java.lang.String r1 = " -- "
-            r0.append(r1)
-            android.util.proto.EncodedBuffer r5 = r5.mBuffer
-            java.lang.String r5 = r5.getDebugString()
-            r0.append(r5)
-            java.lang.String r5 = r0.toString()
-            r6.<init>(r5)
-            throw r6
-        L62:
-            java.lang.RuntimeException r5 = new java.lang.RuntimeException
-            java.lang.StringBuilder r6 = new java.lang.StringBuilder
-            java.lang.String r0 = "groups not supported at index "
-            r6.<init>(r0)
-            r6.append(r1)
-            java.lang.String r6 = r6.toString()
-            r5.<init>(r6)
-            throw r5
-        L76:
-            android.util.proto.EncodedBuffer r1 = r5.mBuffer
-            int r1 = r1.readRawFixed32()
-            android.util.proto.EncodedBuffer r2 = r5.mBuffer
-            int r2 = r2.getReadPos()
-            android.util.proto.EncodedBuffer r3 = r5.mBuffer
-            int r3 = r3.readRawFixed32()
-            if (r1 < 0) goto Lb6
-            if (r3 != r1) goto L92
-            android.util.proto.EncodedBuffer r2 = r5.mBuffer
-            r2.skipRead(r1)
-            goto Lc0
-        L92:
-            java.lang.RuntimeException r5 = new java.lang.RuntimeException
-            java.lang.StringBuilder r6 = new java.lang.StringBuilder
-            java.lang.String r0 = "Pre-computed size where the precomputed size and the raw size in the buffer don't match! childRawSize="
-            r6.<init>(r0)
-            r6.append(r1)
-            java.lang.String r0 = " childEncodedSize="
-            r6.append(r0)
-            r6.append(r3)
-            java.lang.String r0 = " childEncodedSizePos="
-            r6.append(r0)
-            r6.append(r2)
-            java.lang.String r6 = r6.toString()
-            r5.<init>(r6)
-            throw r5
-        Lb6:
-            int r1 = -r1
-            int r3 = r5.editEncodedSize(r1)
-            android.util.proto.EncodedBuffer r1 = r5.mBuffer
-            r1.editRawFixed32(r2, r3)
-        Lc0:
-            int r1 = android.util.proto.EncodedBuffer.getRawVarint32Size(r3)
-            int r1 = r1 + r3
-            int r6 = r6 + r1
-            goto L8
-        Lc8:
-            int r6 = r6 + 8
-            android.util.proto.EncodedBuffer r1 = r5.mBuffer
-            r2 = 8
-            r1.skipRead(r2)
-            goto L8
-        Ld3:
-            int r6 = r6 + 1
-            android.util.proto.EncodedBuffer r1 = r5.mBuffer
-            byte r1 = r1.readRawByte()
-            r1 = r1 & 128(0x80, float:1.8E-43)
-            if (r1 == 0) goto L8
-            goto Ld3
-        Le0:
-            return r6
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.util.proto.ProtoOutputStream.editEncodedSize(int):int");
+    private int editEncodedSize(int i) {
+        int readPos = this.mBuffer.getReadPos() + i;
+        int rawVarint32Size = 0;
+        while (true) {
+            int readPos2 = this.mBuffer.getReadPos();
+            if (readPos2 >= readPos) {
+                return rawVarint32Size;
+            }
+            int rawTag = readRawTag();
+            rawVarint32Size += EncodedBuffer.getRawVarint32Size(rawTag);
+            int i2 = rawTag & 7;
+            if (i2 == 0) {
+                do {
+                    rawVarint32Size++;
+                } while ((this.mBuffer.readRawByte() & 128) != 0);
+            } else if (i2 == 1) {
+                rawVarint32Size += 8;
+                this.mBuffer.skipRead(8);
+            } else if (i2 == 2) {
+                int rawFixed32 = this.mBuffer.readRawFixed32();
+                int readPos3 = this.mBuffer.getReadPos();
+                int rawFixed322 = this.mBuffer.readRawFixed32();
+                if (rawFixed32 < 0) {
+                    rawFixed322 = editEncodedSize(-rawFixed32);
+                    this.mBuffer.editRawFixed32(readPos3, rawFixed322);
+                } else {
+                    if (rawFixed322 != rawFixed32) {
+                        throw new RuntimeException("Pre-computed size where the precomputed size and the raw size in the buffer don't match! childRawSize=" + rawFixed32 + " childEncodedSize=" + rawFixed322 + " childEncodedSizePos=" + readPos3);
+                    }
+                    this.mBuffer.skipRead(rawFixed32);
+                }
+                rawVarint32Size += EncodedBuffer.getRawVarint32Size(rawFixed322) + rawFixed322;
+            } else {
+                if (i2 == 3 || i2 == 4) {
+                    break;
+                }
+                if (i2 == 5) {
+                    rawVarint32Size += 4;
+                    this.mBuffer.skipRead(4);
+                } else {
+                    throw new ProtoParseException("editEncodedSize Bad tag tag=0x" + Integer.toHexString(rawTag) + " wireType=" + i2 + " -- " + this.mBuffer.getDebugString());
+                }
+            }
+        }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:45:0x006d, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:21:0x006d, code lost:
     
         throw new java.lang.RuntimeException("groups not supported at index " + r5);
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private void compactSizes(int r5) {
-        /*
-            r4 = this;
-            android.util.proto.EncodedBuffer r0 = r4.mBuffer
-            int r0 = r0.getReadPos()
-            int r0 = r0 + r5
-        L7:
-            android.util.proto.EncodedBuffer r5 = r4.mBuffer
-            int r5 = r5.getReadPos()
-            if (r5 >= r0) goto Lb8
-            int r1 = r4.readRawTag()
-            r2 = r1 & 7
-            if (r2 == 0) goto Lad
-            r3 = 1
-            if (r2 == r3) goto La4
-            r3 = 2
-            if (r2 == r3) goto L6e
-            r3 = 3
-            if (r2 == r3) goto L5a
-            r3 = 4
-            if (r2 == r3) goto L5a
-            r5 = 5
-            if (r2 != r5) goto L2c
-            android.util.proto.EncodedBuffer r5 = r4.mBuffer
-            r5.skipRead(r3)
-            goto L7
-        L2c:
-            android.util.proto.ProtoParseException r5 = new android.util.proto.ProtoParseException
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder
-            java.lang.String r3 = "compactSizes Bad tag tag=0x"
-            r0.<init>(r3)
-            java.lang.String r1 = java.lang.Integer.toHexString(r1)
-            r0.append(r1)
-            java.lang.String r1 = " wireType="
-            r0.append(r1)
-            r0.append(r2)
-            java.lang.String r1 = " -- "
-            r0.append(r1)
-            android.util.proto.EncodedBuffer r4 = r4.mBuffer
-            java.lang.String r4 = r4.getDebugString()
-            r0.append(r4)
-            java.lang.String r4 = r0.toString()
-            r5.<init>(r4)
-            throw r5
-        L5a:
-            java.lang.RuntimeException r4 = new java.lang.RuntimeException
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder
-            java.lang.String r1 = "groups not supported at index "
-            r0.<init>(r1)
-            r0.append(r5)
-            java.lang.String r5 = r0.toString()
-            r4.<init>(r5)
-            throw r4
-        L6e:
-            android.util.proto.EncodedBuffer r5 = r4.mBuffer
-            int r1 = r4.mCopyBegin
-            int r2 = r5.getReadPos()
-            int r3 = r4.mCopyBegin
-            int r2 = r2 - r3
-            r5.writeFromThisBuffer(r1, r2)
-            android.util.proto.EncodedBuffer r5 = r4.mBuffer
-            int r5 = r5.readRawFixed32()
-            android.util.proto.EncodedBuffer r1 = r4.mBuffer
-            int r1 = r1.readRawFixed32()
-            android.util.proto.EncodedBuffer r2 = r4.mBuffer
-            r2.writeRawVarint32(r1)
-            android.util.proto.EncodedBuffer r2 = r4.mBuffer
-            int r2 = r2.getReadPos()
-            r4.mCopyBegin = r2
-            if (r5 < 0) goto L9e
-            android.util.proto.EncodedBuffer r5 = r4.mBuffer
-            r5.skipRead(r1)
-            goto L7
-        L9e:
-            int r5 = -r5
-            r4.compactSizes(r5)
-            goto L7
-        La4:
-            android.util.proto.EncodedBuffer r5 = r4.mBuffer
-            r1 = 8
-            r5.skipRead(r1)
-            goto L7
-        Lad:
-            android.util.proto.EncodedBuffer r5 = r4.mBuffer
-            byte r5 = r5.readRawByte()
-            r5 = r5 & 128(0x80, float:1.8E-43)
-            if (r5 == 0) goto L7
-            goto Lad
-        Lb8:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.util.proto.ProtoOutputStream.compactSizes(int):void");
+    private void compactSizes(int i) {
+        int readPos = this.mBuffer.getReadPos() + i;
+        while (true) {
+            int readPos2 = this.mBuffer.getReadPos();
+            if (readPos2 >= readPos) {
+                return;
+            }
+            int rawTag = readRawTag();
+            int i2 = rawTag & 7;
+            if (i2 == 0) {
+                while ((this.mBuffer.readRawByte() & 128) != 0) {
+                }
+            } else if (i2 == 1) {
+                this.mBuffer.skipRead(8);
+            } else if (i2 == 2) {
+                EncodedBuffer encodedBuffer = this.mBuffer;
+                encodedBuffer.writeFromThisBuffer(this.mCopyBegin, encodedBuffer.getReadPos() - this.mCopyBegin);
+                int rawFixed32 = this.mBuffer.readRawFixed32();
+                int rawFixed322 = this.mBuffer.readRawFixed32();
+                this.mBuffer.writeRawVarint32(rawFixed322);
+                this.mCopyBegin = this.mBuffer.getReadPos();
+                if (rawFixed32 >= 0) {
+                    this.mBuffer.skipRead(rawFixed322);
+                } else {
+                    compactSizes(-rawFixed32);
+                }
+            } else {
+                if (i2 == 3 || i2 == 4) {
+                    break;
+                }
+                if (i2 == 5) {
+                    this.mBuffer.skipRead(4);
+                } else {
+                    throw new ProtoParseException("compactSizes Bad tag tag=0x" + Integer.toHexString(rawTag) + " wireType=" + i2 + " -- " + this.mBuffer.getDebugString());
+                }
+            }
+        }
     }
 
-    public void flush() {
+    public void flush() throws IOException {
         if (this.mStream == null || this.mDepth != 0 || this.mCompacted) {
             return;
         }

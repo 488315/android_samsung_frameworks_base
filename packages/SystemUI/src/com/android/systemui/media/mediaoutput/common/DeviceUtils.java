@@ -17,7 +17,6 @@ import kotlin.LazyKt__LazyJVMKt;
 import kotlin.jvm.functions.Function0;
 import kotlin.text.StringsKt__StringsJVMKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class DeviceUtils {
     public static final DeviceUtils INSTANCE = new DeviceUtils();
@@ -38,17 +37,18 @@ public final class DeviceUtils {
                     case 1:
                         DeviceUtils deviceUtils2 = DeviceUtils.INSTANCE;
                         String salesCode = SemSystemProperties.getSalesCode();
-                        List asList = Arrays.asList("CBK", "CHM", "CTC", "CHN", "CHC", "CHU");
-                        if (!(asList instanceof Collection) || !asList.isEmpty()) {
-                            Iterator it = asList.iterator();
+                        List listAsList = Arrays.asList("CBK", "CHM", "CTC", "CHN", "CHC", "CHU");
+                        if ((listAsList instanceof Collection) && listAsList.isEmpty()) {
+                            z = false;
+                        } else {
+                            Iterator it = listAsList.iterator();
                             while (it.hasNext()) {
                                 z = true;
                                 if (StringsKt__StringsJVMKt.equals(salesCode, (String) it.next(), true)) {
-                                    return Boolean.valueOf(z);
                                 }
                             }
+                            z = false;
                         }
-                        z = false;
                         return Boolean.valueOf(z);
                     default:
                         DeviceUtils deviceUtils3 = DeviceUtils.INSTANCE;
@@ -68,17 +68,18 @@ public final class DeviceUtils {
                     case 1:
                         DeviceUtils deviceUtils2 = DeviceUtils.INSTANCE;
                         String salesCode = SemSystemProperties.getSalesCode();
-                        List asList = Arrays.asList("CBK", "CHM", "CTC", "CHN", "CHC", "CHU");
-                        if (!(asList instanceof Collection) || !asList.isEmpty()) {
-                            Iterator it = asList.iterator();
+                        List listAsList = Arrays.asList("CBK", "CHM", "CTC", "CHN", "CHC", "CHU");
+                        if ((listAsList instanceof Collection) && listAsList.isEmpty()) {
+                            z = false;
+                        } else {
+                            Iterator it = listAsList.iterator();
                             while (it.hasNext()) {
                                 z = true;
                                 if (StringsKt__StringsJVMKt.equals(salesCode, (String) it.next(), true)) {
-                                    return Boolean.valueOf(z);
                                 }
                             }
+                            z = false;
                         }
-                        z = false;
                         return Boolean.valueOf(z);
                     default:
                         DeviceUtils deviceUtils3 = DeviceUtils.INSTANCE;
@@ -98,17 +99,18 @@ public final class DeviceUtils {
                     case 1:
                         DeviceUtils deviceUtils2 = DeviceUtils.INSTANCE;
                         String salesCode = SemSystemProperties.getSalesCode();
-                        List asList = Arrays.asList("CBK", "CHM", "CTC", "CHN", "CHC", "CHU");
-                        if (!(asList instanceof Collection) || !asList.isEmpty()) {
-                            Iterator it = asList.iterator();
+                        List listAsList = Arrays.asList("CBK", "CHM", "CTC", "CHN", "CHC", "CHU");
+                        if ((listAsList instanceof Collection) && listAsList.isEmpty()) {
+                            z = false;
+                        } else {
+                            Iterator it = listAsList.iterator();
                             while (it.hasNext()) {
                                 z = true;
                                 if (StringsKt__StringsJVMKt.equals(salesCode, (String) it.next(), true)) {
-                                    return Boolean.valueOf(z);
                                 }
                             }
+                            z = false;
                         }
-                        z = false;
                         return Boolean.valueOf(z);
                     default:
                         DeviceUtils deviceUtils3 = DeviceUtils.INSTANCE;

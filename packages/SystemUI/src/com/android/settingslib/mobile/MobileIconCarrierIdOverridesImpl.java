@@ -13,13 +13,11 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.ranges.IntProgression;
 import kotlin.ranges.RangesKt___RangesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class MobileIconCarrierIdOverridesImpl implements MobileIconCarrierIdOverrides {
     public static final Companion Companion = new Companion(null);
     public static final Map MAPPING;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -31,10 +29,10 @@ public final class MobileIconCarrierIdOverridesImpl implements MobileIconCarrier
                 return MapsKt__MapsKt.emptyMap();
             }
             LinkedHashMap linkedHashMap = new LinkedHashMap();
-            IntProgression step = RangesKt___RangesKt.step(RangesKt___RangesKt.until(0, typedArray.length()), 2);
-            int i = step.first;
-            int i2 = step.last;
-            int i3 = step.step;
+            IntProgression intProgressionStep = RangesKt___RangesKt.step(RangesKt___RangesKt.until(0, typedArray.length()), 2);
+            int i = intProgressionStep.first;
+            int i2 = intProgressionStep.last;
+            int i3 = intProgressionStep.step;
             if ((i3 > 0 && i <= i2) || (i3 < 0 && i2 <= i)) {
                 while (true) {
                     String string = typedArray.getString(i);
@@ -69,10 +67,10 @@ public final class MobileIconCarrierIdOverridesImpl implements MobileIconCarrier
     public final int getOverrideFor(int i, Resources resources, String str) {
         Integer num = (Integer) MAPPING.get(Integer.valueOf(i));
         if (num != null) {
-            TypedArray obtainTypedArray = resources.obtainTypedArray(num.intValue());
-            Map<String, Integer> parseNetworkIconOverrideTypedArray = Companion.parseNetworkIconOverrideTypedArray(obtainTypedArray);
-            obtainTypedArray.recycle();
-            Integer num2 = parseNetworkIconOverrideTypedArray.get(str);
+            TypedArray typedArrayObtainTypedArray = resources.obtainTypedArray(num.intValue());
+            Map<String, Integer> networkIconOverrideTypedArray = Companion.parseNetworkIconOverrideTypedArray(typedArrayObtainTypedArray);
+            typedArrayObtainTypedArray.recycle();
+            Integer num2 = networkIconOverrideTypedArray.get(str);
             if (num2 != null) {
                 return num2.intValue();
             }

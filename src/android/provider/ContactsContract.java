@@ -652,36 +652,36 @@ public final class ContactsContract {
         }
 
         static {
-            Uri withAppendedPath = Uri.withAppendedPath(ContactsContract.AUTHORITY_URI, android.provider.Contacts.AUTHORITY);
-            CONTENT_URI = withAppendedPath;
-            ENTERPRISE_CONTENT_URI = Uri.withAppendedPath(withAppendedPath, ApnSetting.TYPE_ENTERPRISE_STRING);
+            Uri uriWithAppendedPath = Uri.withAppendedPath(ContactsContract.AUTHORITY_URI, android.provider.Contacts.AUTHORITY);
+            CONTENT_URI = uriWithAppendedPath;
+            ENTERPRISE_CONTENT_URI = Uri.withAppendedPath(uriWithAppendedPath, ApnSetting.TYPE_ENTERPRISE_STRING);
             CORP_CONTENT_URI = Uri.withAppendedPath(ContactsContract.AUTHORITY_URI, "contacts_corp");
-            CONTENT_LOOKUP_URI = Uri.withAppendedPath(withAppendedPath, "lookup");
-            CONTENT_VCARD_URI = Uri.withAppendedPath(withAppendedPath, "as_vcard");
-            CONTENT_MULTI_VCARD_URI = Uri.withAppendedPath(withAppendedPath, "as_multi_vcard");
-            CONTENT_FILTER_URI = Uri.withAppendedPath(withAppendedPath, "filter");
-            ENTERPRISE_CONTENT_FILTER_URI = Uri.withAppendedPath(withAppendedPath, "filter_enterprise");
-            Uri withAppendedPath2 = Uri.withAppendedPath(withAppendedPath, "strequent");
-            CONTENT_STREQUENT_URI = withAppendedPath2;
-            CONTENT_FREQUENT_URI = Uri.withAppendedPath(withAppendedPath, CallLog.Calls.SEM_FREQUENT);
-            CONTENT_STREQUENT_FILTER_URI = Uri.withAppendedPath(withAppendedPath2, "filter");
-            CONTENT_GROUP_URI = Uri.withAppendedPath(withAppendedPath, "group");
+            CONTENT_LOOKUP_URI = Uri.withAppendedPath(uriWithAppendedPath, "lookup");
+            CONTENT_VCARD_URI = Uri.withAppendedPath(uriWithAppendedPath, "as_vcard");
+            CONTENT_MULTI_VCARD_URI = Uri.withAppendedPath(uriWithAppendedPath, "as_multi_vcard");
+            CONTENT_FILTER_URI = Uri.withAppendedPath(uriWithAppendedPath, "filter");
+            ENTERPRISE_CONTENT_FILTER_URI = Uri.withAppendedPath(uriWithAppendedPath, "filter_enterprise");
+            Uri uriWithAppendedPath2 = Uri.withAppendedPath(uriWithAppendedPath, "strequent");
+            CONTENT_STREQUENT_URI = uriWithAppendedPath2;
+            CONTENT_FREQUENT_URI = Uri.withAppendedPath(uriWithAppendedPath, CallLog.Calls.SEM_FREQUENT);
+            CONTENT_STREQUENT_FILTER_URI = Uri.withAppendedPath(uriWithAppendedPath2, "filter");
+            CONTENT_GROUP_URI = Uri.withAppendedPath(uriWithAppendedPath, "group");
             ENTERPRISE_CONTACT_ID_BASE = 1000000000L;
             ENTERPRISE_CONTACT_LOOKUP_PREFIX = "c-";
         }
 
         public static Uri getLookupUri(ContentResolver contentResolver, Uri uri) {
-            Cursor query = contentResolver.query(uri, new String[]{"lookup", "_id"}, null, null, null);
-            if (query == null) {
+            Cursor cursorQuery = contentResolver.query(uri, new String[]{"lookup", "_id"}, null, null, null);
+            if (cursorQuery == null) {
                 return null;
             }
             try {
-                if (!query.moveToFirst()) {
+                if (!cursorQuery.moveToFirst()) {
                     return null;
                 }
-                return getLookupUri(query.getLong(1), query.getString(0));
+                return getLookupUri(cursorQuery.getLong(1), cursorQuery.getString(0));
             } finally {
-                query.close();
+                cursorQuery.close();
             }
         }
 
@@ -693,17 +693,17 @@ public final class ContactsContract {
         }
 
         public static Uri lookupContact(ContentResolver contentResolver, Uri uri) {
-            Cursor query;
-            if (uri == null || (query = contentResolver.query(uri, new String[]{"_id"}, null, null, null)) == null) {
+            Cursor cursorQuery;
+            if (uri == null || (cursorQuery = contentResolver.query(uri, new String[]{"_id"}, null, null, null)) == null) {
                 return null;
             }
             try {
-                if (query.moveToFirst()) {
-                    return ContentUris.withAppendedId(CONTENT_URI, query.getLong(0));
+                if (cursorQuery.moveToFirst()) {
+                    return ContentUris.withAppendedId(CONTENT_URI, cursorQuery.getLong(0));
                 }
                 return null;
             } finally {
-                query.close();
+                cursorQuery.close();
             }
         }
 
@@ -766,18 +766,18 @@ public final class ContactsContract {
                 }
 
                 public Uri build() {
-                    Uri.Builder buildUpon = Contacts.CONTENT_URI.buildUpon();
-                    buildUpon.appendEncodedPath(String.valueOf(this.mContactId));
-                    buildUpon.appendPath(AggregationSuggestions.CONTENT_DIRECTORY);
+                    Uri.Builder builderBuildUpon = Contacts.CONTENT_URI.buildUpon();
+                    builderBuildUpon.appendEncodedPath(String.valueOf(this.mContactId));
+                    builderBuildUpon.appendPath(AggregationSuggestions.CONTENT_DIRECTORY);
                     int i = this.mLimit;
                     if (i != 0) {
-                        buildUpon.appendQueryParameter("limit", String.valueOf(i));
+                        builderBuildUpon.appendQueryParameter("limit", String.valueOf(i));
                     }
                     int size = this.mValues.size();
                     for (int i2 = 0; i2 < size; i2++) {
-                        buildUpon.appendQueryParameter("query", "name:" + this.mValues.get(i2));
+                        builderBuildUpon.appendQueryParameter("query", "name:" + this.mValues.get(i2));
                     }
-                    return buildUpon.build();
+                    return builderBuildUpon.build();
                 }
             }
 
@@ -799,39 +799,39 @@ public final class ContactsContract {
         public static InputStream openContactPhotoInputStream(ContentResolver contentResolver, Uri uri, boolean z) {
             if (z) {
                 try {
-                    AssetFileDescriptor openAssetFileDescriptor = contentResolver.openAssetFileDescriptor(Uri.withAppendedPath(uri, "display_photo"), "r");
-                    if (openAssetFileDescriptor != null) {
-                        return openAssetFileDescriptor.createInputStream();
+                    AssetFileDescriptor assetFileDescriptorOpenAssetFileDescriptor = contentResolver.openAssetFileDescriptor(Uri.withAppendedPath(uri, "display_photo"), "r");
+                    if (assetFileDescriptorOpenAssetFileDescriptor != null) {
+                        return assetFileDescriptorOpenAssetFileDescriptor.createInputStream();
                     }
                 } catch (IOException unused) {
                 }
             }
-            Uri withAppendedPath = Uri.withAppendedPath(uri, "photo");
-            if (withAppendedPath == null) {
+            Uri uriWithAppendedPath = Uri.withAppendedPath(uri, "photo");
+            if (uriWithAppendedPath == null) {
                 return null;
             }
-            Cursor query = contentResolver.query(withAppendedPath, new String[]{"data15"}, null, null, null);
-            if (query != null) {
+            Cursor cursorQuery = contentResolver.query(uriWithAppendedPath, new String[]{"data15"}, null, null, null);
+            if (cursorQuery != null) {
                 try {
-                    if (query.moveToNext()) {
-                        byte[] blob = query.getBlob(0);
+                    if (cursorQuery.moveToNext()) {
+                        byte[] blob = cursorQuery.getBlob(0);
                         if (blob == null) {
-                            if (query != null) {
-                                query.close();
+                            if (cursorQuery != null) {
+                                cursorQuery.close();
                             }
                             return null;
                         }
                         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(blob);
-                        if (query != null) {
-                            query.close();
+                        if (cursorQuery != null) {
+                            cursorQuery.close();
                         }
                         return byteArrayInputStream;
                     }
                 } finally {
                 }
             }
-            if (query != null) {
-                query.close();
+            if (cursorQuery != null) {
+                cursorQuery.close();
             }
             return null;
         }
@@ -862,10 +862,10 @@ public final class ContactsContract {
         }
 
         static {
-            Uri withAppendedPath = Uri.withAppendedPath(ContactsContract.AUTHORITY_URI, "profile");
-            CONTENT_URI = withAppendedPath;
-            CONTENT_VCARD_URI = Uri.withAppendedPath(withAppendedPath, "as_vcard");
-            CONTENT_RAW_CONTACTS_URI = Uri.withAppendedPath(withAppendedPath, "raw_contacts");
+            Uri uriWithAppendedPath = Uri.withAppendedPath(ContactsContract.AUTHORITY_URI, "profile");
+            CONTENT_URI = uriWithAppendedPath;
+            CONTENT_VCARD_URI = Uri.withAppendedPath(uriWithAppendedPath, "as_vcard");
+            CONTENT_RAW_CONTACTS_URI = Uri.withAppendedPath(uriWithAppendedPath, "raw_contacts");
         }
     }
 
@@ -893,21 +893,21 @@ public final class ContactsContract {
         }
 
         public static Uri getContactLookupUri(ContentResolver contentResolver, Uri uri) {
-            Cursor query = contentResolver.query(Uri.withAppendedPath(uri, "data"), new String[]{"contact_id", "lookup"}, null, null, null);
-            if (query != null) {
+            Cursor cursorQuery = contentResolver.query(Uri.withAppendedPath(uri, "data"), new String[]{"contact_id", "lookup"}, null, null, null);
+            if (cursorQuery != null) {
                 try {
-                    if (query.moveToFirst()) {
-                        Uri lookupUri = Contacts.getLookupUri(query.getLong(0), query.getString(1));
-                        if (query != null) {
-                            query.close();
+                    if (cursorQuery.moveToFirst()) {
+                        Uri lookupUri = Contacts.getLookupUri(cursorQuery.getLong(0), cursorQuery.getString(1));
+                        if (cursorQuery != null) {
+                            cursorQuery.close();
                         }
                         return lookupUri;
                     }
                 } finally {
                 }
             }
-            if (query != null) {
-                query.close();
+            if (cursorQuery != null) {
+                cursorQuery.close();
             }
             return null;
         }
@@ -1011,19 +1011,20 @@ public final class ContactsContract {
                 }
             }
 
+            /* JADX WARN: Multi-variable type inference failed */
             public static DefaultAccountAndState getDefaultAccountForNewContacts(ContentResolver contentResolver) {
-                byte b = 0;
-                byte b2 = 0;
-                Bundle nullSafeCall = ContactsContract.nullSafeCall(contentResolver, ContactsContract.AUTHORITY_URI, QUERY_DEFAULT_ACCOUNT_FOR_NEW_CONTACTS_METHOD, null, null);
-                int i = nullSafeCall.getInt(KEY_DEFAULT_ACCOUNT_STATE, -1);
+                Object[] objArr = 0;
+                Object[] objArr2 = 0;
+                Bundle bundleNullSafeCall = ContactsContract.nullSafeCall(contentResolver, ContactsContract.AUTHORITY_URI, QUERY_DEFAULT_ACCOUNT_FOR_NEW_CONTACTS_METHOD, null, null);
+                int i = bundleNullSafeCall.getInt(KEY_DEFAULT_ACCOUNT_STATE, -1);
                 if (!DefaultAccountAndState.isCloudOrSimAccount(i)) {
                     if (i == 2 || i == 1) {
-                        return new DefaultAccountAndState(i, b2 == true ? 1 : 0);
+                        return new DefaultAccountAndState(i, objArr2 == true ? 1 : 0);
                     }
                     throw new IllegalStateException("Invalid default account state");
                 }
-                String string = nullSafeCall.getString("account_name");
-                String string2 = nullSafeCall.getString("account_type");
+                String string = bundleNullSafeCall.getString("account_name");
+                String string2 = bundleNullSafeCall.getString("account_type");
                 if (TextUtils.isEmpty(string) || TextUtils.isEmpty(string2)) {
                     throw new IllegalStateException("account name and type cannot be null or empty");
                 }
@@ -1114,7 +1115,7 @@ public final class ContactsContract {
             }
 
             @Override // android.content.CursorEntityIterator
-            public android.content.Entity getEntityAndIncrementCursor(Cursor cursor) throws RemoteException {
+            public android.content.Entity getEntityAndIncrementCursor(Cursor cursor) throws RemoteException, IllegalArgumentException {
                 int columnIndexOrThrow = cursor.getColumnIndexOrThrow("_id");
                 long j = cursor.getLong(columnIndexOrThrow);
                 ContentValues contentValues = new ContentValues();
@@ -1192,9 +1193,9 @@ public final class ContactsContract {
         }
 
         static {
-            Uri withAppendedPath = Uri.withAppendedPath(ContactsContract.AUTHORITY_URI, "stream_items");
-            CONTENT_URI = withAppendedPath;
-            CONTENT_PHOTO_URI = Uri.withAppendedPath(withAppendedPath, "photo");
+            Uri uriWithAppendedPath = Uri.withAppendedPath(ContactsContract.AUTHORITY_URI, "stream_items");
+            CONTENT_URI = uriWithAppendedPath;
+            CONTENT_PHOTO_URI = Uri.withAppendedPath(uriWithAppendedPath, "photo");
             CONTENT_LIMIT_URI = Uri.withAppendedPath(ContactsContract.AUTHORITY_URI, "stream_items_limit");
         }
 
@@ -1242,21 +1243,21 @@ public final class ContactsContract {
         }
 
         public static Uri getContactLookupUri(ContentResolver contentResolver, Uri uri) {
-            Cursor query = contentResolver.query(uri, new String[]{"contact_id", "lookup"}, null, null, null);
-            if (query != null) {
+            Cursor cursorQuery = contentResolver.query(uri, new String[]{"contact_id", "lookup"}, null, null, null);
+            if (cursorQuery != null) {
                 try {
-                    if (query.moveToFirst()) {
-                        Uri lookupUri = Contacts.getLookupUri(query.getLong(0), query.getString(1));
-                        if (query != null) {
-                            query.close();
+                    if (cursorQuery.moveToFirst()) {
+                        Uri lookupUri = Contacts.getLookupUri(cursorQuery.getLong(0), cursorQuery.getString(1));
+                        if (cursorQuery != null) {
+                            cursorQuery.close();
                         }
                         return lookupUri;
                     }
                 } finally {
                 }
             }
-            if (query != null) {
-                query.close();
+            if (cursorQuery != null) {
+                cursorQuery.close();
             }
             return null;
         }
@@ -1282,42 +1283,42 @@ public final class ContactsContract {
                 j -= Contacts.ENTERPRISE_CONTACT_ID_BASE;
             }
             Uri uri2 = uri;
-            HashMap hashMap = new HashMap();
+            HashMap map = new HashMap();
             try {
-                EntityIterator newEntityIterator = RawContacts.newEntityIterator(contentResolver.query(uri2, null, "contact_id=?", new String[]{String.valueOf(j)}, null));
-                if (newEntityIterator == null) {
+                EntityIterator entityIteratorNewEntityIterator = RawContacts.newEntityIterator(contentResolver.query(uri2, null, "contact_id=?", new String[]{String.valueOf(j)}, null));
+                if (entityIteratorNewEntityIterator == null) {
                     Log.e(TAG, "EntityIterator is null");
-                    if (newEntityIterator != null) {
-                        newEntityIterator.close();
-                        return hashMap;
+                    if (entityIteratorNewEntityIterator != null) {
+                        entityIteratorNewEntityIterator.close();
+                        return map;
                     }
-                } else if (!newEntityIterator.hasNext()) {
+                } else if (!entityIteratorNewEntityIterator.hasNext()) {
                     Log.w(TAG, "Data does not exist. contactId: " + j);
-                    if (newEntityIterator != null) {
-                        newEntityIterator.close();
-                        return hashMap;
+                    if (entityIteratorNewEntityIterator != null) {
+                        entityIteratorNewEntityIterator.close();
+                        return map;
                     }
                 } else {
-                    while (newEntityIterator.hasNext()) {
-                        Iterator<Entity.NamedContentValues> it = newEntityIterator.next().getSubValues().iterator();
+                    while (entityIteratorNewEntityIterator.hasNext()) {
+                        Iterator<Entity.NamedContentValues> it = entityIteratorNewEntityIterator.next().getSubValues().iterator();
                         while (it.hasNext()) {
                             ContentValues contentValues = it.next().values;
                             String asString = contentValues.getAsString("mimetype");
                             if (asString != null) {
-                                List list = (List) hashMap.get(asString);
-                                if (list == null) {
-                                    list = new ArrayList();
-                                    hashMap.put(asString, list);
+                                List arrayList = (List) map.get(asString);
+                                if (arrayList == null) {
+                                    arrayList = new ArrayList();
+                                    map.put(asString, arrayList);
                                 }
-                                list.add(contentValues);
+                                arrayList.add(contentValues);
                             }
                         }
                     }
-                    if (newEntityIterator != null) {
-                        newEntityIterator.close();
+                    if (entityIteratorNewEntityIterator != null) {
+                        entityIteratorNewEntityIterator.close();
                     }
                 }
-                return hashMap;
+                return map;
             } finally {
             }
         }
@@ -1504,11 +1505,11 @@ public final class ContactsContract {
             }
 
             static {
-                Uri withAppendedPath = Uri.withAppendedPath(Data.CONTENT_URI, Contacts.People.Phones.CONTENT_DIRECTORY);
-                CONTENT_URI = withAppendedPath;
+                Uri uriWithAppendedPath = Uri.withAppendedPath(Data.CONTENT_URI, Contacts.People.Phones.CONTENT_DIRECTORY);
+                CONTENT_URI = uriWithAppendedPath;
                 ENTERPRISE_CONTENT_URI = Uri.withAppendedPath(Data.ENTERPRISE_CONTENT_URI, Contacts.People.Phones.CONTENT_DIRECTORY);
-                CONTENT_FILTER_URI = Uri.withAppendedPath(withAppendedPath, "filter");
-                ENTERPRISE_CONTENT_FILTER_URI = Uri.withAppendedPath(withAppendedPath, "filter_enterprise");
+                CONTENT_FILTER_URI = Uri.withAppendedPath(uriWithAppendedPath, "filter");
+                ENTERPRISE_CONTENT_FILTER_URI = Uri.withAppendedPath(uriWithAppendedPath, "filter_enterprise");
             }
 
             @Deprecated
@@ -1549,12 +1550,12 @@ public final class ContactsContract {
             }
 
             static {
-                Uri withAppendedPath = Uri.withAppendedPath(Data.CONTENT_URI, "emails");
-                CONTENT_URI = withAppendedPath;
-                CONTENT_LOOKUP_URI = Uri.withAppendedPath(withAppendedPath, "lookup");
-                ENTERPRISE_CONTENT_LOOKUP_URI = Uri.withAppendedPath(withAppendedPath, "lookup_enterprise");
-                CONTENT_FILTER_URI = Uri.withAppendedPath(withAppendedPath, "filter");
-                ENTERPRISE_CONTENT_FILTER_URI = Uri.withAppendedPath(withAppendedPath, "filter_enterprise");
+                Uri uriWithAppendedPath = Uri.withAppendedPath(Data.CONTENT_URI, "emails");
+                CONTENT_URI = uriWithAppendedPath;
+                CONTENT_LOOKUP_URI = Uri.withAppendedPath(uriWithAppendedPath, "lookup");
+                ENTERPRISE_CONTENT_LOOKUP_URI = Uri.withAppendedPath(uriWithAppendedPath, "lookup_enterprise");
+                CONTENT_FILTER_URI = Uri.withAppendedPath(uriWithAppendedPath, "filter");
+                ENTERPRISE_CONTENT_FILTER_URI = Uri.withAppendedPath(uriWithAppendedPath, "filter_enterprise");
             }
 
             public static final CharSequence getTypeLabel(Resources resources, int i, CharSequence charSequence) {
@@ -1774,8 +1775,8 @@ public final class ContactsContract {
                 if (num == null) {
                     return R.string.eventTypeOther;
                 }
-                int intValue = num.intValue();
-                return intValue != 1 ? intValue != 2 ? intValue != 3 ? R.string.eventTypeCustom : R.string.eventTypeBirthday : R.string.eventTypeOther : R.string.eventTypeAnniversary;
+                int iIntValue = num.intValue();
+                return iIntValue != 1 ? iIntValue != 2 ? iIntValue != 3 ? R.string.eventTypeCustom : R.string.eventTypeBirthday : R.string.eventTypeOther : R.string.eventTypeAnniversary;
             }
 
             public static final CharSequence getTypeLabel(Resources resources, int i, CharSequence charSequence) {
@@ -1859,10 +1860,10 @@ public final class ContactsContract {
             public static final Uri ENTERPRISE_CONTENT_FILTER_URI;
 
             static {
-                Uri withAppendedPath = Uri.withAppendedPath(Data.CONTENT_URI, "callables");
-                CONTENT_URI = withAppendedPath;
-                CONTENT_FILTER_URI = Uri.withAppendedPath(withAppendedPath, "filter");
-                ENTERPRISE_CONTENT_FILTER_URI = Uri.withAppendedPath(withAppendedPath, "filter_enterprise");
+                Uri uriWithAppendedPath = Uri.withAppendedPath(Data.CONTENT_URI, "callables");
+                CONTENT_URI = uriWithAppendedPath;
+                CONTENT_FILTER_URI = Uri.withAppendedPath(uriWithAppendedPath, "filter");
+                ENTERPRISE_CONTENT_FILTER_URI = Uri.withAppendedPath(uriWithAppendedPath, "filter_enterprise");
             }
         }
 
@@ -1872,9 +1873,9 @@ public final class ContactsContract {
             public static final String VISIBLE_CONTACTS_ONLY = "visible_contacts_only";
 
             static {
-                Uri withAppendedPath = Uri.withAppendedPath(Data.CONTENT_URI, "contactables");
-                CONTENT_URI = withAppendedPath;
-                CONTENT_FILTER_URI = Uri.withAppendedPath(withAppendedPath, "filter");
+                Uri uriWithAppendedPath = Uri.withAppendedPath(Data.CONTENT_URI, "contactables");
+                CONTENT_URI = uriWithAppendedPath;
+                CONTENT_FILTER_URI = Uri.withAppendedPath(uriWithAppendedPath, "filter");
             }
         }
     }
@@ -2125,10 +2126,10 @@ public final class ContactsContract {
         }
 
         public static void pin(ContentResolver contentResolver, long j, int i) {
-            Uri withAppendedPath = Uri.withAppendedPath(Contacts.CONTENT_URI, String.valueOf(j));
+            Uri uriWithAppendedPath = Uri.withAppendedPath(Contacts.CONTENT_URI, String.valueOf(j));
             ContentValues contentValues = new ContentValues();
             contentValues.put(ContactOptionsColumns.PINNED, Integer.valueOf(i));
-            contentResolver.update(withAppendedPath, contentValues, null, null);
+            contentResolver.update(uriWithAppendedPath, contentValues, null, null);
         }
     }
 
@@ -2160,28 +2161,28 @@ public final class ContactsContract {
             while ((context instanceof ContextWrapper) && !(context instanceof Activity)) {
                 context = ((ContextWrapper) context).getBaseContext();
             }
-            Intent addFlags = new Intent(ACTION_QUICK_CONTACT).addFlags((context instanceof Activity ? 0 : 268468224) | 536870912);
-            addFlags.setData(uri);
-            addFlags.setSourceBounds(rect);
-            addFlags.putExtra(EXTRA_MODE, i);
-            addFlags.putExtra(EXTRA_EXCLUDE_MIMES, strArr);
-            return addFlags;
+            Intent intentAddFlags = new Intent(ACTION_QUICK_CONTACT).addFlags((context instanceof Activity ? 0 : 268468224) | 536870912);
+            intentAddFlags.setData(uri);
+            intentAddFlags.setSourceBounds(rect);
+            intentAddFlags.putExtra(EXTRA_MODE, i);
+            intentAddFlags.putExtra(EXTRA_EXCLUDE_MIMES, strArr);
+            return intentAddFlags;
         }
 
         public static Intent rebuildManagedQuickContactsIntent(String str, long j, boolean z, long j2, Intent intent) {
-            Uri uri;
+            Uri uriBuild;
             Intent intent2 = new Intent(ACTION_QUICK_CONTACT);
             if (TextUtils.isEmpty(str)) {
-                uri = null;
+                uriBuild = null;
             } else if (z) {
-                uri = Uri.withAppendedPath(Contacts.CONTENT_LOOKUP_URI, str);
+                uriBuild = Uri.withAppendedPath(Contacts.CONTENT_LOOKUP_URI, str);
             } else {
-                uri = Contacts.getLookupUri(j, str);
+                uriBuild = Contacts.getLookupUri(j, str);
             }
-            if (uri != null && j2 != 0) {
-                uri = uri.buildUpon().appendQueryParameter("directory", String.valueOf(j2)).build();
+            if (uriBuild != null && j2 != 0) {
+                uriBuild = uriBuild.buildUpon().appendQueryParameter("directory", String.valueOf(j2)).build();
             }
-            intent2.setData(uri);
+            intent2.setData(uriBuild);
             intent2.setFlags(intent.getFlags() | 268435456);
             intent2.setSourceBounds(intent.getSourceBounds());
             intent2.putExtra(EXTRA_MODE, intent.getIntExtra(EXTRA_MODE, 3));
@@ -2198,15 +2199,15 @@ public final class ContactsContract {
         }
 
         public static void showQuickContact(Context context, View view, Uri uri, String[] strArr, String str) {
-            Intent composeQuickContactsIntent = composeQuickContactsIntent(context, view, uri, 3, strArr);
-            composeQuickContactsIntent.putExtra(EXTRA_PRIORITIZED_MIMETYPE, str);
-            ContactsInternal.startQuickContactWithErrorToast(context, composeQuickContactsIntent);
+            Intent intentComposeQuickContactsIntent = composeQuickContactsIntent(context, view, uri, 3, strArr);
+            intentComposeQuickContactsIntent.putExtra(EXTRA_PRIORITIZED_MIMETYPE, str);
+            ContactsInternal.startQuickContactWithErrorToast(context, intentComposeQuickContactsIntent);
         }
 
         public static void showQuickContact(Context context, Rect rect, Uri uri, String[] strArr, String str) {
-            Intent composeQuickContactsIntent = composeQuickContactsIntent(context, rect, uri, 3, strArr);
-            composeQuickContactsIntent.putExtra(EXTRA_PRIORITIZED_MIMETYPE, str);
-            ContactsInternal.startQuickContactWithErrorToast(context, composeQuickContactsIntent);
+            Intent intentComposeQuickContactsIntent = composeQuickContactsIntent(context, rect, uri, 3, strArr);
+            intentComposeQuickContactsIntent.putExtra(EXTRA_PRIORITIZED_MIMETYPE, str);
+            ContactsInternal.startQuickContactWithErrorToast(context, intentComposeQuickContactsIntent);
         }
     }
 
@@ -2230,9 +2231,9 @@ public final class ContactsContract {
         public static final Uri METADATA_AUTHORITY_URI;
 
         static {
-            Uri parse = Uri.parse("content://com.android.contacts.metadata");
-            METADATA_AUTHORITY_URI = parse;
-            CONTENT_URI = Uri.withAppendedPath(parse, "metadata_sync");
+            Uri uri = Uri.parse("content://com.android.contacts.metadata");
+            METADATA_AUTHORITY_URI = uri;
+            CONTENT_URI = Uri.withAppendedPath(uri, "metadata_sync");
         }
 
         private MetadataSync() {
@@ -2253,13 +2254,13 @@ public final class ContactsContract {
     /* JADX INFO: Access modifiers changed from: private */
     public static Bundle nullSafeCall(ContentResolver contentResolver, Uri uri, String str, String str2, Bundle bundle) {
         try {
-            ContentProviderClient acquireContentProviderClient = contentResolver.acquireContentProviderClient(uri);
+            ContentProviderClient contentProviderClientAcquireContentProviderClient = contentResolver.acquireContentProviderClient(uri);
             try {
-                Bundle call = acquireContentProviderClient.call(str, str2, bundle);
-                if (acquireContentProviderClient != null) {
-                    acquireContentProviderClient.close();
+                Bundle bundleCall = contentProviderClientAcquireContentProviderClient.call(str, str2, bundle);
+                if (contentProviderClientAcquireContentProviderClient != null) {
+                    contentProviderClientAcquireContentProviderClient.close();
                 }
-                return call;
+                return bundleCall;
             } finally {
             }
         } catch (RemoteException e) {

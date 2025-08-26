@@ -83,9 +83,9 @@ public interface ITvInteractiveAppService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ITvInteractiveAppService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ITvInteractiveAppService)) {
-                return (ITvInteractiveAppService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ITvInteractiveAppService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ITvInteractiveAppService)) {
+                return (ITvInteractiveAppService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -125,22 +125,22 @@ public interface ITvInteractiveAppService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    ITvInteractiveAppServiceCallback asInterface = ITvInteractiveAppServiceCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ITvInteractiveAppServiceCallback iTvInteractiveAppServiceCallbackAsInterface = ITvInteractiveAppServiceCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerCallback(asInterface);
+                    registerCallback(iTvInteractiveAppServiceCallbackAsInterface);
                     return true;
                 case 2:
-                    ITvInteractiveAppServiceCallback asInterface2 = ITvInteractiveAppServiceCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ITvInteractiveAppServiceCallback iTvInteractiveAppServiceCallbackAsInterface2 = ITvInteractiveAppServiceCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterCallback(asInterface2);
+                    unregisterCallback(iTvInteractiveAppServiceCallbackAsInterface2);
                     return true;
                 case 3:
                     InputChannel inputChannel = (InputChannel) parcel.readTypedObject(InputChannel.CREATOR);
-                    ITvInteractiveAppSessionCallback asInterface3 = ITvInteractiveAppSessionCallback.Stub.asInterface(parcel.readStrongBinder());
-                    String readString = parcel.readString();
-                    int readInt = parcel.readInt();
+                    ITvInteractiveAppSessionCallback iTvInteractiveAppSessionCallbackAsInterface = ITvInteractiveAppSessionCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string = parcel.readString();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    createSession(inputChannel, asInterface3, readString, readInt);
+                    createSession(inputChannel, iTvInteractiveAppSessionCallbackAsInterface, string, i3);
                     return true;
                 case 4:
                     AppLinkInfo appLinkInfo = (AppLinkInfo) parcel.readTypedObject(AppLinkInfo.CREATOR);
@@ -180,76 +180,76 @@ public interface ITvInteractiveAppService extends IInterface {
 
             @Override // android.media.tv.interactive.ITvInteractiveAppService
             public void registerCallback(ITvInteractiveAppServiceCallback iTvInteractiveAppServiceCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iTvInteractiveAppServiceCallback);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iTvInteractiveAppServiceCallback);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppService
             public void unregisterCallback(ITvInteractiveAppServiceCallback iTvInteractiveAppServiceCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iTvInteractiveAppServiceCallback);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iTvInteractiveAppServiceCallback);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppService
             public void createSession(InputChannel inputChannel, ITvInteractiveAppSessionCallback iTvInteractiveAppSessionCallback, String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppService.DESCRIPTOR);
-                    obtain.writeTypedObject(inputChannel, 0);
-                    obtain.writeStrongInterface(iTvInteractiveAppSessionCallback);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(inputChannel, 0);
+                    parcelObtain.writeStrongInterface(iTvInteractiveAppSessionCallback);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppService
             public void registerAppLinkInfo(AppLinkInfo appLinkInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppService.DESCRIPTOR);
-                    obtain.writeTypedObject(appLinkInfo, 0);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(appLinkInfo, 0);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppService
             public void unregisterAppLinkInfo(AppLinkInfo appLinkInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppService.DESCRIPTOR);
-                    obtain.writeTypedObject(appLinkInfo, 0);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(appLinkInfo, 0);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppService
             public void sendAppLinkCommand(Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvInteractiveAppService.DESCRIPTOR);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvInteractiveAppService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

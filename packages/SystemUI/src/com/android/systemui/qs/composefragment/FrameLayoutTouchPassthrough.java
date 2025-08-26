@@ -28,7 +28,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class FrameLayoutTouchPassthrough extends FrameLayout {
     public final Function0 canScrollForwardQs;
@@ -42,32 +41,30 @@ public final class FrameLayoutTouchPassthrough extends FrameLayout {
     public boolean preventingIntercept;
     public final int touchSlop;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.qs.composefragment.FrameLayoutTouchPassthrough$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function3 {
         private /* synthetic */ Object L$0;
         int label;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.qs.composefragment.FrameLayoutTouchPassthrough$1$1, reason: invalid class name and collision with other inner class name */
-        final class C02371 extends SuspendLambda implements Function2 {
+        final class C03801 extends SuspendLambda implements Function2 {
             int label;
             final /* synthetic */ FrameLayoutTouchPassthrough this$0;
 
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-            public C02371(FrameLayoutTouchPassthrough frameLayoutTouchPassthrough, Continuation continuation) {
+            public C03801(FrameLayoutTouchPassthrough frameLayoutTouchPassthrough, Continuation continuation) {
                 super(2, continuation);
                 this.this$0 = frameLayoutTouchPassthrough;
             }
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
             public final Continuation create(Object obj, Continuation continuation) {
-                return new C02371(this.this$0, continuation);
+                return new C03801(this.this$0, continuation);
             }
 
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
-                return ((C02371) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                return ((C03801) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
             }
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
@@ -82,7 +79,7 @@ public final class FrameLayoutTouchPassthrough extends FrameLayout {
                         @Override // kotlinx.coroutines.flow.FlowCollector
                         public final Object emit(Object obj2, Continuation continuation) {
                             NotificationScrimClipParams notificationScrimClipParams = (NotificationScrimClipParams) obj2;
-                            FrameLayoutTouchPassthrough frameLayoutTouchPassthrough2 = FrameLayoutTouchPassthrough.this;
+                            FrameLayoutTouchPassthrough frameLayoutTouchPassthrough2 = frameLayoutTouchPassthrough;
                             if (!Intrinsics.areEqual(frameLayoutTouchPassthrough2.currentClipParams, notificationScrimClipParams)) {
                                 frameLayoutTouchPassthrough2.currentClipParams = notificationScrimClipParams;
                                 frameLayoutTouchPassthrough2.updateClippingPath();
@@ -123,9 +120,9 @@ public final class FrameLayoutTouchPassthrough extends FrameLayout {
                 ResultKt.throwOnFailure(obj);
                 LifecycleOwner lifecycleOwner = (LifecycleOwner) this.L$0;
                 Lifecycle.State state = Lifecycle.State.STARTED;
-                C02371 c02371 = new C02371(FrameLayoutTouchPassthrough.this, null);
+                C03801 c03801 = new C03801(FrameLayoutTouchPassthrough.this, null);
                 this.label = 1;
-                if (RepeatOnLifecycleKt.repeatOnLifecycle(lifecycleOwner, state, c02371, this) == coroutineSingletons) {
+                if (RepeatOnLifecycleKt.repeatOnLifecycle(lifecycleOwner, state, c03801, this) == coroutineSingletons) {
                     return coroutineSingletons;
                 }
             } else {

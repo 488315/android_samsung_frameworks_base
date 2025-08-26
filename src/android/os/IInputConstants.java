@@ -89,9 +89,9 @@ public interface IInputConstants extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IInputConstants.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IInputConstants)) {
-                return (IInputConstants) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IInputConstants.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IInputConstants)) {
+                return (IInputConstants) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }

@@ -21,9 +21,9 @@ public final class SelectedProcessCpuThreadReader {
                 return this.mKernelCpuThreadReader.getProcessCpuUsage();
             }
             this.mPid = i;
-            KernelSingleProcessCpuThreadReader create = KernelSingleProcessCpuThreadReader.create(i);
-            this.mKernelCpuThreadReader = create;
-            create.startTrackingThreadCpuTimes();
+            KernelSingleProcessCpuThreadReader kernelSingleProcessCpuThreadReaderCreate = KernelSingleProcessCpuThreadReader.create(i);
+            this.mKernelCpuThreadReader = kernelSingleProcessCpuThreadReaderCreate;
+            kernelSingleProcessCpuThreadReaderCreate.startTrackingThreadCpuTimes();
         }
         return null;
     }

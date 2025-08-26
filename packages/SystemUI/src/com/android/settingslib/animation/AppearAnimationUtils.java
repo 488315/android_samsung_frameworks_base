@@ -12,7 +12,6 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
 import com.android.keyguard.KeyguardInputView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AppearAnimationUtils implements AppearAnimationCreator {
     public boolean mAppearing;
@@ -23,7 +22,6 @@ public class AppearAnimationUtils implements AppearAnimationCreator {
     public RowTranslationScaler mRowTranslationScaler;
     public final float mStartTranslation;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AppearAnimationProperties {
         public long[][] delays;
         public int maxDelayColIndex;
@@ -33,7 +31,6 @@ public class AppearAnimationUtils implements AppearAnimationCreator {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface RowTranslationScaler {
     }
 
@@ -42,26 +39,26 @@ public class AppearAnimationUtils implements AppearAnimationCreator {
     }
 
     public static void startTranslationYAnimation(final View view, long j, long j2, final float f, Interpolator interpolator, KeyguardInputView.AnonymousClass1 anonymousClass1) {
-        RenderNodeAnimator ofFloat;
+        RenderNodeAnimator renderNodeAnimatorOfFloat;
         if (view.isHardwareAccelerated()) {
-            ofFloat = new RenderNodeAnimator(1, f);
-            ofFloat.setTarget(view);
+            renderNodeAnimatorOfFloat = new RenderNodeAnimator(1, f);
+            renderNodeAnimatorOfFloat.setTarget(view);
         } else {
-            ofFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.TRANSLATION_Y, view.getTranslationY(), f);
+            renderNodeAnimatorOfFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.TRANSLATION_Y, view.getTranslationY(), f);
         }
-        ofFloat.setInterpolator(interpolator);
-        ofFloat.setDuration(j2);
-        ofFloat.setStartDelay(j);
+        renderNodeAnimatorOfFloat.setInterpolator(interpolator);
+        renderNodeAnimatorOfFloat.setDuration(j2);
+        renderNodeAnimatorOfFloat.setStartDelay(j);
         if (anonymousClass1 != null) {
-            ofFloat.addListener(anonymousClass1);
+            renderNodeAnimatorOfFloat.addListener(anonymousClass1);
         }
-        ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.settingslib.animation.AppearAnimationUtils.3
+        renderNodeAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.settingslib.animation.AppearAnimationUtils.3
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
                 view.setTranslationY(f);
             }
         });
-        ofFloat.start();
+        renderNodeAnimatorOfFloat.start();
     }
 
     public long calculateDelay(int i, int i2) {
@@ -207,31 +204,31 @@ public class AppearAnimationUtils implements AppearAnimationCreator {
     }
 
     public final void createAnimation(final View view, long j, long j2, float f, boolean z, Interpolator interpolator, final Runnable runnable, KeyguardInputView.AnonymousClass1 anonymousClass1) {
-        RenderNodeAnimator ofFloat;
+        RenderNodeAnimator renderNodeAnimatorOfFloat;
         if (view != null) {
             final float f2 = z ? 1.0f : 0.0f;
             float f3 = z ? 0.0f : f;
             view.setAlpha(1.0f - f2);
             view.setTranslationY(f - f3);
             if (view.isHardwareAccelerated()) {
-                ofFloat = new RenderNodeAnimator(11, f2);
-                ofFloat.setTarget(view);
+                renderNodeAnimatorOfFloat = new RenderNodeAnimator(11, f2);
+                renderNodeAnimatorOfFloat.setTarget(view);
             } else {
-                ofFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.ALPHA, view.getAlpha(), f2);
+                renderNodeAnimatorOfFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.ALPHA, view.getAlpha(), f2);
             }
-            ofFloat.setInterpolator(interpolator);
-            ofFloat.setDuration(j2);
-            ofFloat.setStartDelay(j);
+            renderNodeAnimatorOfFloat.setInterpolator(interpolator);
+            renderNodeAnimatorOfFloat.setDuration(j2);
+            renderNodeAnimatorOfFloat.setStartDelay(j);
             if (view.hasOverlappingRendering()) {
                 view.setLayerType(2, null);
-                ofFloat.addListener(new AnimatorListenerAdapter(this) { // from class: com.android.settingslib.animation.AppearAnimationUtils.1
+                renderNodeAnimatorOfFloat.addListener(new AnimatorListenerAdapter(this) { // from class: com.android.settingslib.animation.AppearAnimationUtils.1
                     @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                     public final void onAnimationEnd(Animator animator) {
                         view.setLayerType(0, null);
                     }
                 });
             }
-            ofFloat.addListener(new AnimatorListenerAdapter(this) { // from class: com.android.settingslib.animation.AppearAnimationUtils.2
+            renderNodeAnimatorOfFloat.addListener(new AnimatorListenerAdapter(this) { // from class: com.android.settingslib.animation.AppearAnimationUtils.2
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public final void onAnimationEnd(Animator animator) {
                     view.setAlpha(f2);
@@ -241,7 +238,7 @@ public class AppearAnimationUtils implements AppearAnimationCreator {
                     }
                 }
             });
-            ofFloat.start();
+            renderNodeAnimatorOfFloat.start();
             startTranslationYAnimation(view, j, j2, f3, interpolator, anonymousClass1);
         }
     }

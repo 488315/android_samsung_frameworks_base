@@ -13,7 +13,6 @@ import com.android.systemui.media.audiovisseekbar.config.AudioVisSeekBarConfig;
 import com.android.systemui.media.audiovisseekbar.utils.animator.SingleStateValueAnimator;
 import kotlin.jvm.internal.Reflection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SecSeekBarObserver implements Observer {
     public final SecPlayerViewHolder holder;
@@ -80,17 +79,17 @@ public final class SecSeekBarObserver implements Observer {
         textView3.setText(DateUtils.formatElapsedTime(i / 1000));
         Integer num = progress.elapsedTime;
         if (num != null) {
-            int intValue = num.intValue();
+            int iIntValue = num.intValue();
             SeekBar seekBar7 = secPlayerViewHolder.seekBar;
             if (seekBar7 == null) {
                 seekBar7 = null;
             }
-            seekBar7.setProgress(intValue);
+            seekBar7.setProgress(iIntValue);
             TextView textView4 = secPlayerViewHolder.elapsedTimeView;
             if (textView4 == null) {
                 textView4 = null;
             }
-            textView4.setText(DateUtils.formatElapsedTime(intValue / 1000));
+            textView4.setText(DateUtils.formatElapsedTime(iIntValue / 1000));
         }
         LayerDrawable layerDrawable = secPlayerViewHolder.dummyProgressDrawable;
         String str = this.TAG;

@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.Set;
 import kotlin.collections.AbstractMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ArrayMapK extends AbstractMap implements MapK {
     public final ArrayMapK$entries$1 entries = new ArrayMapK$entries$1(this);

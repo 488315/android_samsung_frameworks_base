@@ -5,7 +5,6 @@ import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SuppressedAttachState {
     public static final Companion Companion = new Companion(null);
@@ -13,7 +12,6 @@ public final class SuppressedAttachState {
     public NotifSection section;
     public boolean wasPruneSuppressed;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -40,9 +38,9 @@ public final class SuppressedAttachState {
 
     public final int hashCode() {
         NotifSection notifSection = this.section;
-        int hashCode = (notifSection == null ? 0 : notifSection.hashCode()) * 31;
+        int iHashCode = (notifSection == null ? 0 : notifSection.hashCode()) * 31;
         PipelineEntry pipelineEntry = this.parent;
-        return Boolean.hashCode(this.wasPruneSuppressed) + ((hashCode + (pipelineEntry != null ? pipelineEntry.hashCode() : 0)) * 31);
+        return Boolean.hashCode(this.wasPruneSuppressed) + ((iHashCode + (pipelineEntry != null ? pipelineEntry.hashCode() : 0)) * 31);
     }
 
     public final String toString() {

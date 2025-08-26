@@ -15,9 +15,9 @@ public class GLException extends RuntimeException {
     }
 
     private static String getErrorString(int i) {
-        String gluErrorString = GLU.gluErrorString(i);
-        if (gluErrorString != null) {
-            return gluErrorString;
+        String strGluErrorString = GLU.gluErrorString(i);
+        if (strGluErrorString != null) {
+            return strGluErrorString;
         }
         return "Unknown error 0x" + Integer.toHexString(i);
     }

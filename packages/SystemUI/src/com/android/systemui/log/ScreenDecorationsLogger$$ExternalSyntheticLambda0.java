@@ -10,7 +10,6 @@ import com.android.keyguard.logging.CarrierTextManagerLogger$$ExternalSyntheticO
 import com.android.systemui.log.core.LogMessage;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class ScreenDecorationsLogger$$ExternalSyntheticLambda0 implements Function1 {
     public final /* synthetic */ int $r8$classId;
@@ -21,7 +20,7 @@ public final /* synthetic */ class ScreenDecorationsLogger$$ExternalSyntheticLam
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
         LogMessage logMessage = (LogMessage) obj;
         switch (this.$r8$classId) {
             case 0:
@@ -43,12 +42,12 @@ public final /* synthetic */ class ScreenDecorationsLogger$$ExternalSyntheticLam
                 String str2 = logMessage.getStr2();
                 boolean bool3 = logMessage.getBool3();
                 boolean bool4 = logMessage.getBool4();
-                StringBuilder m = CarrierTextManagerLogger$$ExternalSyntheticOutline0.m("cameraProtectionShownOrHidden showAnimationNow: ", str1, ", isFaceDetectionRunning: ", ", isBiometricPromptShowing: ", bool1);
-                m.append(bool2);
-                m.append(", faceAuthenticated: ");
-                m.append(str2);
-                m.append(", isCameraActive: ");
-                return KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(m, bool3, ", currentState: ", bool4);
+                StringBuilder sbM = CarrierTextManagerLogger$$ExternalSyntheticOutline0.m("cameraProtectionShownOrHidden showAnimationNow: ", str1, ", isFaceDetectionRunning: ", ", isBiometricPromptShowing: ", bool1);
+                sbM.append(bool2);
+                sbM.append(", faceAuthenticated: ");
+                sbM.append(str2);
+                sbM.append(", isCameraActive: ");
+                return KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sbM, bool3, ", currentState: ", bool4);
             case 7:
                 return AnimatorInflaterCompat$$ExternalSyntheticOutline0.m("Bounding rect ", logMessage.getStr1(), " : ", logMessage.getStr2());
             case 8:

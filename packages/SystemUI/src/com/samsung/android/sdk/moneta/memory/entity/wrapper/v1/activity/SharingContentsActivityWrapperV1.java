@@ -14,7 +14,6 @@ import java.util.Iterator;
 import java.util.List;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class SharingContentsActivityWrapperV1 extends ActivityWrapper {
     private final List<Content> contents;
@@ -27,7 +26,6 @@ public final class SharingContentsActivityWrapperV1 extends ActivityWrapper {
     public static final Companion Companion = new Companion(null);
     public static final Parcelable.Creator<SharingContentsActivityWrapperV1> CREATOR = new Creator();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -37,33 +35,32 @@ public final class SharingContentsActivityWrapperV1 extends ActivityWrapper {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Creator implements Parcelable.Creator {
         @Override // android.os.Parcelable.Creator
         public final Object createFromParcel(Parcel parcel) {
             ArrayList arrayList;
-            String readString = parcel.readString();
-            int readInt = parcel.readInt();
-            ArrayList arrayList2 = new ArrayList(readInt);
-            int i = 0;
-            while (i != readInt) {
-                i = Engram$Creator$$ExternalSyntheticOutline0.m(SharingContentsActivityWrapperV1.class, parcel, arrayList2, i, 1);
+            String string = parcel.readString();
+            int i = parcel.readInt();
+            ArrayList arrayList2 = new ArrayList(i);
+            int iM = 0;
+            while (iM != i) {
+                iM = Engram$Creator$$ExternalSyntheticOutline0.m(SharingContentsActivityWrapperV1.class, parcel, arrayList2, iM, 1);
             }
-            long readLong = parcel.readLong();
-            String readString2 = parcel.readString();
+            long j = parcel.readLong();
+            String string2 = parcel.readString();
             Parcelable.Creator<MobileApplication> creator = MobileApplication.CREATOR;
-            MobileApplication createFromParcel = creator.createFromParcel(parcel);
-            MobileApplication createFromParcel2 = creator.createFromParcel(parcel);
+            MobileApplication mobileApplicationCreateFromParcel = creator.createFromParcel(parcel);
+            MobileApplication mobileApplicationCreateFromParcel2 = creator.createFromParcel(parcel);
             if (parcel.readInt() == 0) {
                 arrayList = null;
             } else {
-                int readInt2 = parcel.readInt();
-                arrayList = new ArrayList(readInt2);
-                for (int i2 = 0; i2 != readInt2; i2++) {
+                int i2 = parcel.readInt();
+                arrayList = new ArrayList(i2);
+                for (int i3 = 0; i3 != i2; i3++) {
                     arrayList.add(Person.CREATOR.createFromParcel(parcel));
                 }
             }
-            return new SharingContentsActivityWrapperV1(readString, arrayList2, readLong, readString2, createFromParcel, createFromParcel2, arrayList);
+            return new SharingContentsActivityWrapperV1(string, arrayList2, j, string2, mobileApplicationCreateFromParcel, mobileApplicationCreateFromParcel2, arrayList);
         }
 
         @Override // android.os.Parcelable.Creator
@@ -119,9 +116,9 @@ public final class SharingContentsActivityWrapperV1 extends ActivityWrapper {
     @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(this.id);
-        Iterator m = KnoxConfigurationType$$ExternalSyntheticOutline0.m(parcel, this.contents);
-        while (m.hasNext()) {
-            parcel.writeParcelable((Parcelable) m.next(), i);
+        Iterator itM = KnoxConfigurationType$$ExternalSyntheticOutline0.m(parcel, this.contents);
+        while (itM.hasNext()) {
+            parcel.writeParcelable((Parcelable) itM.next(), i);
         }
         parcel.writeLong(this.sharedTime);
         parcel.writeString(this.recipientName);

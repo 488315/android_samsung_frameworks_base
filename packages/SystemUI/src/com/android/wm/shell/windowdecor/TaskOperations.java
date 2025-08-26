@@ -19,7 +19,6 @@ import com.samsung.android.rune.CoreRune;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import java.util.Iterator;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class TaskOperations {
     public final Context mContext;
@@ -93,8 +92,8 @@ public class TaskOperations {
     }
 
     public final void sendBackEvent(int i, int i2) {
-        long uptimeMillis = SystemClock.uptimeMillis();
-        KeyEvent keyEvent = new KeyEvent(uptimeMillis, uptimeMillis, i, 4, 0, 0, -1, 0, 72, 257);
+        long jUptimeMillis = SystemClock.uptimeMillis();
+        KeyEvent keyEvent = new KeyEvent(jUptimeMillis, jUptimeMillis, i, 4, 0, 0, -1, 0, 72, 257);
         keyEvent.setDisplayId(i2);
         if (((InputManager) this.mContext.getSystemService(InputManager.class)).injectInputEvent(keyEvent, 0)) {
             return;

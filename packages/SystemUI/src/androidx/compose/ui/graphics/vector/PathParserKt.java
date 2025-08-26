@@ -7,7 +7,6 @@ import androidx.compose.ui.graphics.PathFillType;
 import androidx.compose.ui.graphics.vector.PathNode;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class PathParserKt {
     public static final void drawArc(Path path, double d, double d2, double d3, double d4, double d5, double d6, double d7, boolean z, boolean z2) {
@@ -15,12 +14,12 @@ public abstract class PathParserKt {
         double d9;
         double d10 = d5;
         double d11 = (d7 / 180) * 3.141592653589793d;
-        double cos = Math.cos(d11);
-        double sin = Math.sin(d11);
-        double d12 = ((d2 * sin) + (d * cos)) / d10;
-        double d13 = ((d2 * cos) + ((-d) * sin)) / d6;
-        double d14 = ((d4 * sin) + (d3 * cos)) / d10;
-        double d15 = ((d4 * cos) + ((-d3) * sin)) / d6;
+        double dCos = Math.cos(d11);
+        double dSin = Math.sin(d11);
+        double d12 = ((d2 * dSin) + (d * dCos)) / d10;
+        double d13 = ((d2 * dCos) + ((-d) * dSin)) / d6;
+        double d14 = ((d4 * dSin) + (d3 * dCos)) / d10;
+        double d15 = ((d4 * dCos) + ((-d3) * dSin)) / d6;
         double d16 = d12 - d14;
         double d17 = d13 - d15;
         double d18 = 2;
@@ -32,13 +31,13 @@ public abstract class PathParserKt {
         }
         double d22 = (1.0d / d21) - 0.25d;
         if (d22 < 0.0d) {
-            double sqrt = (float) (Math.sqrt(d21) / 1.99999d);
-            drawArc(path, d, d2, d3, d4, d10 * sqrt, d6 * sqrt, d7, z, z2);
+            double dSqrt = (float) (Math.sqrt(d21) / 1.99999d);
+            drawArc(path, d, d2, d3, d4, d10 * dSqrt, d6 * dSqrt, d7, z, z2);
             return;
         }
-        double sqrt2 = Math.sqrt(d22);
-        double d23 = d16 * sqrt2;
-        double d24 = sqrt2 * d17;
+        double dSqrt2 = Math.sqrt(d22);
+        double d23 = d16 * dSqrt2;
+        double d24 = dSqrt2 * d17;
         if (z == z2) {
             d8 = d19 - d24;
             d9 = d20 + d23;
@@ -46,51 +45,51 @@ public abstract class PathParserKt {
             d8 = d19 + d24;
             d9 = d20 - d23;
         }
-        double atan2 = Math.atan2(d13 - d9, d12 - d8);
-        double atan22 = Math.atan2(d15 - d9, d14 - d8) - atan2;
-        if (z2 != (atan22 >= 0.0d)) {
-            atan22 = atan22 > 0.0d ? atan22 - 6.283185307179586d : atan22 + 6.283185307179586d;
+        double dAtan2 = Math.atan2(d13 - d9, d12 - d8);
+        double dAtan22 = Math.atan2(d15 - d9, d14 - d8) - dAtan2;
+        if (z2 != (dAtan22 >= 0.0d)) {
+            dAtan22 = dAtan22 > 0.0d ? dAtan22 - 6.283185307179586d : dAtan22 + 6.283185307179586d;
         }
         double d25 = d8 * d10;
         double d26 = d9 * d6;
-        double d27 = (d25 * cos) - (d26 * sin);
-        double d28 = (d26 * cos) + (d25 * sin);
+        double d27 = (d25 * dCos) - (d26 * dSin);
+        double d28 = (d26 * dCos) + (d25 * dSin);
         double d29 = 4;
-        int ceil = (int) Math.ceil(Math.abs((atan22 * d29) / 3.141592653589793d));
-        double cos2 = Math.cos(d11);
-        double sin2 = Math.sin(d11);
-        double cos3 = Math.cos(atan2);
-        double sin3 = Math.sin(atan2);
-        double d30 = atan22;
+        int iCeil = (int) Math.ceil(Math.abs((dAtan22 * d29) / 3.141592653589793d));
+        double dCos2 = Math.cos(d11);
+        double dSin2 = Math.sin(d11);
+        double dCos3 = Math.cos(dAtan2);
+        double dSin3 = Math.sin(dAtan2);
+        double d30 = dAtan22;
         double d31 = -d10;
-        double d32 = d31 * cos2;
-        double d33 = d6 * sin2;
-        double d34 = (d32 * sin3) - (d33 * cos3);
-        double d35 = d31 * sin2;
-        double d36 = d6 * cos2;
-        double d37 = (cos3 * d36) + (sin3 * d35);
-        double d38 = d30 / ceil;
+        double d32 = d31 * dCos2;
+        double d33 = d6 * dSin2;
+        double d34 = (d32 * dSin3) - (d33 * dCos3);
+        double d35 = d31 * dSin2;
+        double d36 = d6 * dCos2;
+        double d37 = (dCos3 * d36) + (dSin3 * d35);
+        double d38 = d30 / iCeil;
         int i = 0;
         double d39 = d34;
         double d40 = d37;
         double d41 = d2;
-        double d42 = atan2;
+        double d42 = dAtan2;
         double d43 = d;
-        while (i < ceil) {
+        while (i < iCeil) {
             double d44 = d42 + d38;
-            double sin4 = Math.sin(d44);
-            double cos4 = Math.cos(d44);
+            double dSin4 = Math.sin(d44);
+            double dCos4 = Math.cos(d44);
             int i2 = i;
-            double d45 = (((d10 * cos2) * cos4) + d27) - (d33 * sin4);
-            int i3 = ceil;
-            double d46 = (d36 * sin4) + (d10 * sin2 * cos4) + d28;
-            double d47 = (d32 * sin4) - (d33 * cos4);
-            double d48 = (cos4 * d36) + (sin4 * d35);
+            double d45 = (((d10 * dCos2) * dCos4) + d27) - (d33 * dSin4);
+            int i3 = iCeil;
+            double d46 = (d36 * dSin4) + (d10 * dSin2 * dCos4) + d28;
+            double d47 = (d32 * dSin4) - (d33 * dCos4);
+            double d48 = (dCos4 * d36) + (dSin4 * d35);
             double d49 = d44 - d42;
-            double tan = Math.tan(d49 / d18);
-            double sqrt3 = ((Math.sqrt(((3.0d * tan) * tan) + d29) - 1) * Math.sin(d49)) / 3;
-            ((AndroidPath) path).internalPath.cubicTo((float) ((d39 * sqrt3) + d43), (float) ((d40 * sqrt3) + d41), (float) (d45 - (sqrt3 * d47)), (float) (d46 - (sqrt3 * d48)), (float) d45, (float) d46);
-            sin2 = sin2;
+            double dTan = Math.tan(d49 / d18);
+            double dSqrt3 = ((Math.sqrt(((3.0d * dTan) * dTan) + d29) - 1) * Math.sin(d49)) / 3;
+            ((AndroidPath) path).internalPath.cubicTo((float) ((d39 * dSqrt3) + d43), (float) ((d40 * dSqrt3) + d41), (float) (d45 - (dSqrt3 * d47)), (float) (d46 - (dSqrt3 * d48)), (float) d45, (float) d46);
+            dSin2 = dSin2;
             d43 = d45;
             i = i2 + 1;
             d27 = d27;
@@ -99,7 +98,7 @@ public abstract class PathParserKt {
             d40 = d48;
             d39 = d47;
             d41 = d46;
-            ceil = i3;
+            iCeil = i3;
             d10 = d5;
         }
     }
@@ -132,7 +131,7 @@ public abstract class PathParserKt {
             i = 0;
         }
         androidPath.internalPath.rewind();
-        androidPath.m444setFillTypeoQ8Xj4U(i);
+        androidPath.m446setFillTypeoQ8Xj4U(i);
         PathNode pathNode3 = list2.isEmpty() ? PathNode.Close.INSTANCE : (PathNode) list2.get(0);
         int size = list2.size();
         float f12 = 0.0f;

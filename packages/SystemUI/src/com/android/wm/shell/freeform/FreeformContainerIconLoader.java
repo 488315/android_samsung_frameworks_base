@@ -17,7 +17,6 @@ import android.util.Log;
 import android.util.PathParser;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class FreeformContainerIconLoader {
     public Path mAppIconFramePath;
@@ -37,118 +36,118 @@ public class FreeformContainerIconLoader {
     public int mPhotoIconRightBottomPaddingSize;
     public int mPhotoIconSize;
 
-    public FreeformContainerIconLoader(Context context) {
+    public FreeformContainerIconLoader(Context context) throws Resources.NotFoundException {
         this.mContext = context;
         this.mPackageManager = context.getPackageManager();
         loadResources();
     }
 
     public static Bitmap clipPath(Bitmap bitmap, Path path) {
-        Bitmap createBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(createBitmap);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmapCreateBitmap);
         canvas.drawBitmap(bitmap, 0.0f, 0.0f, (Paint) null);
         canvas.clipPath(path, Region.Op.DIFFERENCE);
         canvas.drawColor(0, PorterDuff.Mode.CLEAR);
-        return createBitmap;
+        return bitmapCreateBitmap;
     }
 
     public final Bitmap createIconFrameBitmap(Path path, int i, int i2, boolean z) {
         Bitmap.Config config = Bitmap.Config.ARGB_8888;
-        Bitmap createBitmap = Bitmap.createBitmap(i, i, config);
-        Canvas canvas = new Canvas(createBitmap);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(i, i, config);
+        Canvas canvas = new Canvas(bitmapCreateBitmap);
         Paint paint = new Paint(1);
         paint.setColor(i2);
         canvas.drawPath(path, paint);
         if (!z) {
-            return createBitmap;
+            return bitmapCreateBitmap;
         }
-        Bitmap createIconFrameShadowBitmap = createIconFrameShadowBitmap(path, i);
-        Bitmap createBitmap2 = Bitmap.createBitmap(createIconFrameShadowBitmap.getWidth(), createIconFrameShadowBitmap.getHeight(), config);
-        canvas.setBitmap(createBitmap2);
-        canvas.drawBitmap(createIconFrameShadowBitmap, 0.0f, 0.0f, (Paint) null);
+        Bitmap bitmapCreateIconFrameShadowBitmap = createIconFrameShadowBitmap(path, i);
+        Bitmap bitmapCreateBitmap2 = Bitmap.createBitmap(bitmapCreateIconFrameShadowBitmap.getWidth(), bitmapCreateIconFrameShadowBitmap.getHeight(), config);
+        canvas.setBitmap(bitmapCreateBitmap2);
+        canvas.drawBitmap(bitmapCreateIconFrameShadowBitmap, 0.0f, 0.0f, (Paint) null);
         canvas.save();
-        canvas.translate(createBitmap2.getWidth() / 2.0f, createBitmap2.getHeight() / 2.0f);
-        canvas.drawBitmap(createBitmap, (-createBitmap.getWidth()) / 2.0f, (-createBitmap.getHeight()) / 2.0f, (Paint) null);
+        canvas.translate(bitmapCreateBitmap2.getWidth() / 2.0f, bitmapCreateBitmap2.getHeight() / 2.0f);
+        canvas.drawBitmap(bitmapCreateBitmap, (-bitmapCreateBitmap.getWidth()) / 2.0f, (-bitmapCreateBitmap.getHeight()) / 2.0f, (Paint) null);
         canvas.restore();
-        createBitmap.recycle();
-        createIconFrameShadowBitmap.recycle();
-        return createBitmap2;
+        bitmapCreateBitmap.recycle();
+        bitmapCreateIconFrameShadowBitmap.recycle();
+        return bitmapCreateBitmap2;
     }
 
     public final Bitmap createIconFrameShadowBitmap(Path path, int i) {
         int i2 = (this.mIconFrameShadowSize * 2) + i;
-        Bitmap createBitmap = Bitmap.createBitmap(i2, i2, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(createBitmap);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(i2, i2, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmapCreateBitmap);
         Paint paint = new Paint(1);
         paint.setColor(0);
         paint.setShadowLayer(this.mIconFrameShadowSize, 0.0f, 3.0f, this.mIconFrameShadowColor);
         float f = this.mIconFrameShadowSize;
         canvas.translate(f, f);
         canvas.drawPath(path, paint);
-        return createBitmap;
+        return bitmapCreateBitmap;
     }
 
     public final Drawable getShowingIcon(Drawable drawable, Drawable drawable2) {
         if (drawable2 == null) {
             int i = this.mAppIconSize;
-            Bitmap clipPath = clipPath(scale(drawable, i, i), this.mAppIconPath);
-            Bitmap createIconFrameBitmap = createIconFrameBitmap(this.mAppIconFramePath, this.mAppIconFrameSize, this.mIconFrameColor, true);
+            Bitmap bitmapClipPath = clipPath(scale(drawable, i, i), this.mAppIconPath);
+            Bitmap bitmapCreateIconFrameBitmap = createIconFrameBitmap(this.mAppIconFramePath, this.mAppIconFrameSize, this.mIconFrameColor, true);
             int i2 = this.mFreeformContainerOuterSize;
-            Bitmap createBitmap = Bitmap.createBitmap(i2, i2, Bitmap.Config.ARGB_8888);
-            Canvas canvas = new Canvas(createBitmap);
+            Bitmap bitmapCreateBitmap = Bitmap.createBitmap(i2, i2, Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(bitmapCreateBitmap);
             Paint paint = new Paint(1);
             canvas.save();
             float f = this.mFreeformContainerOuterSizeRadius;
             canvas.translate(f, f);
-            canvas.drawBitmap(createIconFrameBitmap, (-createIconFrameBitmap.getWidth()) / 2.0f, (-createIconFrameBitmap.getHeight()) / 2.0f, paint);
-            canvas.drawBitmap(clipPath, (-clipPath.getWidth()) / 2.0f, (-clipPath.getHeight()) / 2.0f, paint);
+            canvas.drawBitmap(bitmapCreateIconFrameBitmap, (-bitmapCreateIconFrameBitmap.getWidth()) / 2.0f, (-bitmapCreateIconFrameBitmap.getHeight()) / 2.0f, paint);
+            canvas.drawBitmap(bitmapClipPath, (-bitmapClipPath.getWidth()) / 2.0f, (-bitmapClipPath.getHeight()) / 2.0f, paint);
             canvas.restore();
-            clipPath.recycle();
-            createIconFrameBitmap.recycle();
-            return new BitmapDrawable(this.mContext.getResources(), createBitmap);
+            bitmapClipPath.recycle();
+            bitmapCreateIconFrameBitmap.recycle();
+            return new BitmapDrawable(this.mContext.getResources(), bitmapCreateBitmap);
         }
         int i3 = this.mAppIconSize;
-        Bitmap scale = scale(drawable, i3, i3);
+        Bitmap bitmapScale = scale(drawable, i3, i3);
         int i4 = this.mPhotoIconSize;
-        Bitmap scale2 = scale(drawable2, i4, i4);
-        Bitmap clipPath2 = clipPath(scale, this.mAppIconPath);
-        Bitmap createIconFrameBitmap2 = createIconFrameBitmap(this.mAppIconFramePath, this.mAppIconFrameSize, this.mIconFrameColor, true);
-        Bitmap clipPath3 = clipPath(scale2, this.mPhotoIconPath);
-        Bitmap createIconFrameBitmap3 = createIconFrameBitmap(this.mPhotoIconFramePath, this.mPhotoIconFrameSize, this.mIconFrameColor, false);
-        Bitmap createIconFrameShadowBitmap = createIconFrameShadowBitmap(this.mPhotoIconFramePath, this.mPhotoIconFrameSize);
+        Bitmap bitmapScale2 = scale(drawable2, i4, i4);
+        Bitmap bitmapClipPath2 = clipPath(bitmapScale, this.mAppIconPath);
+        Bitmap bitmapCreateIconFrameBitmap2 = createIconFrameBitmap(this.mAppIconFramePath, this.mAppIconFrameSize, this.mIconFrameColor, true);
+        Bitmap bitmapClipPath3 = clipPath(bitmapScale2, this.mPhotoIconPath);
+        Bitmap bitmapCreateIconFrameBitmap3 = createIconFrameBitmap(this.mPhotoIconFramePath, this.mPhotoIconFrameSize, this.mIconFrameColor, false);
+        Bitmap bitmapCreateIconFrameShadowBitmap = createIconFrameShadowBitmap(this.mPhotoIconFramePath, this.mPhotoIconFrameSize);
         int i5 = this.mFreeformContainerOuterSize;
-        Bitmap createBitmap2 = Bitmap.createBitmap(i5, i5, Bitmap.Config.ARGB_8888);
-        Canvas canvas2 = new Canvas(createBitmap2);
+        Bitmap bitmapCreateBitmap2 = Bitmap.createBitmap(i5, i5, Bitmap.Config.ARGB_8888);
+        Canvas canvas2 = new Canvas(bitmapCreateBitmap2);
         Paint paint2 = new Paint(1);
         canvas2.save();
         float f2 = this.mFreeformContainerOuterSizeRadius;
         canvas2.translate(f2, f2);
         float f3 = this.mAppIconFrameSize / 2.0f;
         canvas2.save();
-        canvas2.translate((f3 - (createIconFrameBitmap3.getWidth() / 2.0f)) - this.mPhotoIconRightBottomPaddingSize, (f3 - (createIconFrameBitmap3.getHeight() / 2.0f)) - this.mPhotoIconRightBottomPaddingSize);
-        canvas2.drawBitmap(createIconFrameShadowBitmap, (-createIconFrameShadowBitmap.getWidth()) / 2.0f, (-createIconFrameShadowBitmap.getHeight()) / 2.0f, paint2);
+        canvas2.translate((f3 - (bitmapCreateIconFrameBitmap3.getWidth() / 2.0f)) - this.mPhotoIconRightBottomPaddingSize, (f3 - (bitmapCreateIconFrameBitmap3.getHeight() / 2.0f)) - this.mPhotoIconRightBottomPaddingSize);
+        canvas2.drawBitmap(bitmapCreateIconFrameShadowBitmap, (-bitmapCreateIconFrameShadowBitmap.getWidth()) / 2.0f, (-bitmapCreateIconFrameShadowBitmap.getHeight()) / 2.0f, paint2);
         canvas2.restore();
-        canvas2.drawBitmap(createIconFrameBitmap2, (-createIconFrameBitmap2.getWidth()) / 2.0f, (-createIconFrameBitmap2.getHeight()) / 2.0f, paint2);
+        canvas2.drawBitmap(bitmapCreateIconFrameBitmap2, (-bitmapCreateIconFrameBitmap2.getWidth()) / 2.0f, (-bitmapCreateIconFrameBitmap2.getHeight()) / 2.0f, paint2);
         canvas2.save();
         float f4 = f3 - this.mPhotoIconRightBottomPaddingSize;
         canvas2.translate(f4, f4);
-        canvas2.drawBitmap(createIconFrameBitmap3, -createIconFrameBitmap3.getWidth(), -createIconFrameBitmap3.getHeight(), paint2);
+        canvas2.drawBitmap(bitmapCreateIconFrameBitmap3, -bitmapCreateIconFrameBitmap3.getWidth(), -bitmapCreateIconFrameBitmap3.getHeight(), paint2);
         canvas2.restore();
-        canvas2.drawBitmap(clipPath2, (-clipPath2.getWidth()) / 2.0f, (-clipPath2.getHeight()) / 2.0f, paint2);
+        canvas2.drawBitmap(bitmapClipPath2, (-bitmapClipPath2.getWidth()) / 2.0f, (-bitmapClipPath2.getHeight()) / 2.0f, paint2);
         canvas2.save();
-        canvas2.translate((clipPath2.getWidth() / 2.0f) - this.mPhotoIconRightBottomPaddingSize, (clipPath2.getHeight() / 2.0f) - this.mPhotoIconRightBottomPaddingSize);
-        canvas2.drawBitmap(clipPath3, -clipPath3.getWidth(), -clipPath3.getHeight(), paint2);
+        canvas2.translate((bitmapClipPath2.getWidth() / 2.0f) - this.mPhotoIconRightBottomPaddingSize, (bitmapClipPath2.getHeight() / 2.0f) - this.mPhotoIconRightBottomPaddingSize);
+        canvas2.drawBitmap(bitmapClipPath3, -bitmapClipPath3.getWidth(), -bitmapClipPath3.getHeight(), paint2);
         canvas2.restore();
         canvas2.restore();
-        clipPath2.recycle();
-        createIconFrameBitmap2.recycle();
-        clipPath3.recycle();
-        createIconFrameBitmap3.recycle();
-        createIconFrameShadowBitmap.recycle();
-        return new BitmapDrawable(this.mContext.getResources(), createBitmap2);
+        bitmapClipPath2.recycle();
+        bitmapCreateIconFrameBitmap2.recycle();
+        bitmapClipPath3.recycle();
+        bitmapCreateIconFrameBitmap3.recycle();
+        bitmapCreateIconFrameShadowBitmap.recycle();
+        return new BitmapDrawable(this.mContext.getResources(), bitmapCreateBitmap2);
     }
 
-    public final void loadResources() {
+    public final void loadResources() throws Resources.NotFoundException {
         Resources resources = this.mContext.getResources();
         int dimensionPixelSize = resources.getDimensionPixelSize(R.dimen.freeform_container_folder_item_size);
         this.mFreeformContainerOuterSize = dimensionPixelSize;
@@ -158,13 +157,13 @@ public class FreeformContainerIconLoader {
         this.mIconFrameShadowSize = resources.getDimensionPixelSize(R.dimen.freeform_container_icon_frame_shadow_size);
         this.mIconFrameColor = resources.getColor(R.color.freeform_container_icon_frame_color);
         this.mIconFrameShadowColor = resources.getColor(R.color.freeform_container_icon_frame_shadow_color);
-        Path createPathFromPathData = PathParser.createPathFromPathData(resources.getString(android.R.string.eventTypeAnniversary));
-        this.mAppIconPath = new Path(createPathFromPathData);
+        Path pathCreatePathFromPathData = PathParser.createPathFromPathData(resources.getString(android.R.string.eventTypeCustom));
+        this.mAppIconPath = new Path(pathCreatePathFromPathData);
         Matrix matrix = new Matrix();
         int i = this.mAppIconSize;
         matrix.setScale(i / 100.0f, i / 100.0f);
         this.mAppIconPath.transform(matrix);
-        this.mAppIconFramePath = new Path(createPathFromPathData);
+        this.mAppIconFramePath = new Path(pathCreatePathFromPathData);
         Matrix matrix2 = new Matrix();
         int i2 = this.mAppIconFrameSize;
         matrix2.setScale(i2 / 100.0f, i2 / 100.0f);
@@ -186,23 +185,23 @@ public class FreeformContainerIconLoader {
     public final Bitmap scale(Drawable drawable, int i, int i2) {
         int i3 = this.mContext.getResources().getConfiguration().densityDpi;
         if (drawable instanceof BitmapDrawable) {
-            Bitmap createScaledBitmap = Bitmap.createScaledBitmap(((BitmapDrawable) drawable).getBitmap(), i, i2, true);
-            if (i3 > 0 && i3 != createScaledBitmap.getDensity()) {
-                StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i3, "[IconLoader] change bitmap densityDpi=", ", old=");
-                m.append(createScaledBitmap.getDensity());
-                Log.i("FreeformContainer", m.toString());
-                createScaledBitmap.setDensity(i3);
+            Bitmap bitmapCreateScaledBitmap = Bitmap.createScaledBitmap(((BitmapDrawable) drawable).getBitmap(), i, i2, true);
+            if (i3 > 0 && i3 != bitmapCreateScaledBitmap.getDensity()) {
+                StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i3, "[IconLoader] change bitmap densityDpi=", ", old=");
+                sbM.append(bitmapCreateScaledBitmap.getDensity());
+                Log.i("FreeformContainer", sbM.toString());
+                bitmapCreateScaledBitmap.setDensity(i3);
             }
-            return createScaledBitmap;
+            return bitmapCreateScaledBitmap;
         }
-        Bitmap createBitmap = Bitmap.createBitmap(i, i2, Bitmap.Config.ARGB_8888);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(i, i2, Bitmap.Config.ARGB_8888);
         if (drawable == null) {
             Log.w("FreeformContainer", "[IconLoader] drawable is null");
-            return createBitmap;
+            return bitmapCreateBitmap;
         }
-        Canvas canvas = new Canvas(createBitmap);
+        Canvas canvas = new Canvas(bitmapCreateBitmap);
         drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
         drawable.draw(canvas);
-        return createBitmap;
+        return bitmapCreateBitmap;
     }
 }

@@ -205,11 +205,11 @@ public final class FloatingToolbar {
     private void tidy(List<MenuItem> list) {
         int size = list.size();
         int i = -1;
-        Drawable drawable = null;
+        Drawable icon = null;
         for (int i2 = 0; i2 < size; i2++) {
             MenuItem menuItem = list.get(i2);
             if (menuItem.getItemId() == 16908353) {
-                drawable = menuItem.getIcon();
+                icon = menuItem.getIcon();
                 i = i2;
             }
             if (!TextUtils.isEmpty(menuItem.getTitle())) {
@@ -217,9 +217,9 @@ public final class FloatingToolbar {
             }
         }
         if (i > -1) {
-            MenuItem remove = list.remove(i);
-            remove.setIcon(drawable);
-            list.add(0, remove);
+            MenuItem menuItemRemove = list.remove(i);
+            menuItemRemove.setIcon(icon);
+            list.add(0, menuItemRemove);
         }
     }
 }

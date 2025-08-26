@@ -1,6 +1,7 @@
 package android.preference;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
 import android.preference.GenericInflater.Parent;
 import android.util.AttributeSet;
@@ -53,8 +54,8 @@ abstract class GenericInflater<T, P extends Parent> {
 
         @Override // android.preference.GenericInflater.Factory
         public T onCreateItem(String str, Context context, AttributeSet attributeSet) {
-            T onCreateItem = this.mF1.onCreateItem(str, context, attributeSet);
-            return onCreateItem != null ? onCreateItem : this.mF2.onCreateItem(str, context, attributeSet);
+            T tOnCreateItem = this.mF1.onCreateItem(str, context, attributeSet);
+            return tOnCreateItem != null ? tOnCreateItem : this.mF2.onCreateItem(str, context, attributeSet);
         }
     }
 
@@ -110,7 +111,7 @@ abstract class GenericInflater<T, P extends Parent> {
         return inflate(xmlPullParser, (XmlPullParser) p, p != null);
     }
 
-    public T inflate(int i, P p, boolean z) {
+    public T inflate(int i, P p, boolean z) throws Resources.NotFoundException {
         XmlResourceParser xml = getContext().getResources().getXml(i);
         try {
             return inflate((XmlPullParser) xml, (XmlResourceParser) p, z);
@@ -119,12 +120,11 @@ abstract class GenericInflater<T, P extends Parent> {
         }
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public T inflate(XmlPullParser xmlPullParser, P p, boolean z) {
         int next;
         T t;
         synchronized (this.mConstructorArgs) {
-            AttributeSet asAttributeSet = Xml.asAttributeSet(xmlPullParser);
+            AttributeSet attributeSetAsAttributeSet = Xml.asAttributeSet(xmlPullParser);
             this.mConstructorArgs[0] = this.mContext;
             do {
                 try {
@@ -147,16 +147,16 @@ abstract class GenericInflater<T, P extends Parent> {
             if (next != 2) {
                 throw new InflateException(xmlPullParser.getPositionDescription() + ": No start tag found!");
             }
-            t = (T) onMergeRoots(p, z, (Parent) createItemFromTag(xmlPullParser, xmlPullParser.getName(), asAttributeSet));
-            rInflate(xmlPullParser, t, asAttributeSet);
+            t = (T) onMergeRoots(p, z, (Parent) createItemFromTag(xmlPullParser, xmlPullParser.getName(), attributeSetAsAttributeSet));
+            rInflate(xmlPullParser, t, attributeSetAsAttributeSet);
         }
         return t;
     }
 
-    public final T createItem(String str, String str2, AttributeSet attributeSet) throws ClassNotFoundException, InflateException {
+    public final T createItem(String str, String str2, AttributeSet attributeSet) throws InflateException, NoSuchMethodException, ClassNotFoundException, SecurityException {
         String str3;
-        HashMap hashMap = sConstructorMap;
-        Constructor<?> constructor = (Constructor) hashMap.get(str);
+        HashMap map = sConstructorMap;
+        Constructor<?> constructor = (Constructor) map.get(str);
         if (constructor == null) {
             try {
                 ClassLoader classLoader = this.mContext.getClassLoader();
@@ -167,7 +167,7 @@ abstract class GenericInflater<T, P extends Parent> {
                 }
                 constructor = classLoader.loadClass(str3).getConstructor(mConstructorSignature);
                 constructor.setAccessible(true);
-                hashMap.put(str, constructor);
+                map.put(str, constructor);
             } catch (ClassNotFoundException e) {
                 throw e;
             } catch (NoSuchMethodException e2) {
@@ -199,9 +199,9 @@ abstract class GenericInflater<T, P extends Parent> {
     private final T createItemFromTag(XmlPullParser xmlPullParser, String str, AttributeSet attributeSet) {
         try {
             Factory<T> factory = this.mFactory;
-            T onCreateItem = factory == null ? null : factory.onCreateItem(str, this.mContext, attributeSet);
-            if (onCreateItem != null) {
-                return onCreateItem;
+            T tOnCreateItem = factory == null ? null : factory.onCreateItem(str, this.mContext, attributeSet);
+            if (tOnCreateItem != null) {
+                return tOnCreateItem;
             }
             if (-1 == str.indexOf(46)) {
                 return onCreateItem(str, attributeSet);
@@ -228,9 +228,9 @@ abstract class GenericInflater<T, P extends Parent> {
                 return;
             }
             if (next == 2 && !onCreateCustomFromTag(xmlPullParser, t, attributeSet)) {
-                T createItemFromTag = createItemFromTag(xmlPullParser, xmlPullParser.getName(), attributeSet);
-                ((Parent) t).addItemFromInflater(createItemFromTag);
-                rInflate(xmlPullParser, createItemFromTag, attributeSet);
+                T tCreateItemFromTag = createItemFromTag(xmlPullParser, xmlPullParser.getName(), attributeSet);
+                ((Parent) t).addItemFromInflater(tCreateItemFromTag);
+                rInflate(xmlPullParser, tCreateItemFromTag, attributeSet);
             }
         }
     }

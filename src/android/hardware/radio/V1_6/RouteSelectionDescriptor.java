@@ -39,13 +39,13 @@ public final class RouteSelectionDescriptor {
 
     public static final ArrayList<RouteSelectionDescriptor> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<RouteSelectionDescriptor> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 48, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 48, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             RouteSelectionDescriptor routeSelectionDescriptor = new RouteSelectionDescriptor();
-            routeSelectionDescriptor.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 48);
+            routeSelectionDescriptor.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 48);
             arrayList.add(routeSelectionDescriptor);
         }
         return arrayList;
@@ -56,21 +56,21 @@ public final class RouteSelectionDescriptor {
         this.sessionType.readEmbeddedFromParcel(hwParcel, hwBlob, 4 + j);
         this.sscMode.readEmbeddedFromParcel(hwParcel, hwBlob, 12 + j);
         int int32 = hwBlob.getInt32(24 + j);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 20, hwBlob.handle(), j + 16, true);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 20, hwBlob.handle(), j + 16, true);
         this.sliceInfo.clear();
         for (int i = 0; i < int32; i++) {
             SliceInfo sliceInfo = new SliceInfo();
-            sliceInfo.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 20);
+            sliceInfo.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 20);
             this.sliceInfo.add(sliceInfo);
         }
         int int322 = hwBlob.getInt32(j + 40);
-        HwBlob readEmbeddedBuffer2 = hwParcel.readEmbeddedBuffer(int322 * 16, hwBlob.handle(), j + 32, true);
+        HwBlob embeddedBuffer2 = hwParcel.readEmbeddedBuffer(int322 * 16, hwBlob.handle(), j + 32, true);
         this.dnn.clear();
         for (int i2 = 0; i2 < int322; i2++) {
             new String();
             int i3 = i2 * 16;
-            String string = readEmbeddedBuffer2.getString(i3);
-            hwParcel.readEmbeddedBuffer(string.getBytes().length + 1, readEmbeddedBuffer2.handle(), i3, false);
+            String string = embeddedBuffer2.getString(i3);
+            hwParcel.readEmbeddedBuffer(string.getBytes().length + 1, embeddedBuffer2.handle(), i3, false);
             this.dnn.add(string);
         }
     }

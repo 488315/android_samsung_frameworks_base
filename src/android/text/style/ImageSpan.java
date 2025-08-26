@@ -7,6 +7,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.Log;
+import java.io.IOException;
 import java.io.InputStream;
 
 /* loaded from: classes4.dex */
@@ -32,8 +33,8 @@ public class ImageSpan extends DynamicDrawableSpan {
     }
 
     public ImageSpan(Context context, Bitmap bitmap, int i) {
-        super(i);
         BitmapDrawable bitmapDrawable;
+        super(i);
         this.mContext = context;
         if (context != null) {
             bitmapDrawable = new BitmapDrawable(context.getResources(), bitmap);
@@ -87,7 +88,9 @@ public class ImageSpan extends DynamicDrawableSpan {
     }
 
     @Override // android.text.style.DynamicDrawableSpan
-    public Drawable getDrawable() {
+    public Drawable getDrawable() throws IOException {
+        InputStream inputStreamOpenInputStream;
+        BitmapDrawable bitmapDrawable;
         Drawable drawable = this.mDrawable;
         if (drawable != null) {
             return drawable;
@@ -95,29 +98,28 @@ public class ImageSpan extends DynamicDrawableSpan {
         Drawable drawable2 = null;
         if (this.mContentUri != null) {
             try {
-                InputStream openInputStream = this.mContext.getContentResolver().openInputStream(this.mContentUri);
-                BitmapDrawable bitmapDrawable = new BitmapDrawable(this.mContext.getResources(), BitmapFactory.decodeStream(openInputStream));
-                try {
-                    bitmapDrawable.setBounds(0, 0, bitmapDrawable.getIntrinsicWidth(), bitmapDrawable.getIntrinsicHeight());
-                    openInputStream.close();
-                    return bitmapDrawable;
-                } catch (Exception e) {
-                    e = e;
-                    drawable2 = bitmapDrawable;
-                    Log.e("ImageSpan", "Failed to loaded content " + this.mContentUri, e);
-                    return drawable2;
-                }
+                inputStreamOpenInputStream = this.mContext.getContentResolver().openInputStream(this.mContentUri);
+                bitmapDrawable = new BitmapDrawable(this.mContext.getResources(), BitmapFactory.decodeStream(inputStreamOpenInputStream));
+            } catch (Exception e) {
+                e = e;
+            }
+            try {
+                bitmapDrawable.setBounds(0, 0, bitmapDrawable.getIntrinsicWidth(), bitmapDrawable.getIntrinsicHeight());
+                inputStreamOpenInputStream.close();
+                return bitmapDrawable;
             } catch (Exception e2) {
                 e = e2;
-            }
-        } else {
-            try {
-                drawable2 = this.mContext.getDrawable(this.mResourceId);
-                drawable2.setBounds(0, 0, drawable2.getIntrinsicWidth(), drawable2.getIntrinsicHeight());
+                drawable2 = bitmapDrawable;
+                Log.e("ImageSpan", "Failed to loaded content " + this.mContentUri, e);
                 return drawable2;
-            } catch (Exception unused) {
-                Log.e("ImageSpan", "Unable to find resource: " + this.mResourceId);
             }
+        }
+        try {
+            drawable2 = this.mContext.getDrawable(this.mResourceId);
+            drawable2.setBounds(0, 0, drawable2.getIntrinsicWidth(), drawable2.getIntrinsicHeight());
+            return drawable2;
+        } catch (Exception unused) {
+            Log.e("ImageSpan", "Unable to find resource: " + this.mResourceId);
         }
         return drawable2;
     }

@@ -37,13 +37,13 @@ public final class CdmaBroadcastSmsConfigInfo {
 
     public static final ArrayList<CdmaBroadcastSmsConfigInfo> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<CdmaBroadcastSmsConfigInfo> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 12, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 12, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             CdmaBroadcastSmsConfigInfo cdmaBroadcastSmsConfigInfo = new CdmaBroadcastSmsConfigInfo();
-            cdmaBroadcastSmsConfigInfo.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 12);
+            cdmaBroadcastSmsConfigInfo.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 12);
             arrayList.add(cdmaBroadcastSmsConfigInfo);
         }
         return arrayList;

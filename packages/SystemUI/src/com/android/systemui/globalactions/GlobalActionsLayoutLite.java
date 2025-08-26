@@ -1,6 +1,7 @@
 package com.android.systemui.globalactions;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
@@ -10,7 +11,6 @@ import androidx.constraintlayout.helper.widget.Flow;
 import com.android.systemui.HardwareBgDrawable;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class GlobalActionsLayoutLite extends GlobalActionsLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -63,7 +63,7 @@ public class GlobalActionsLayoutLite extends GlobalActionsLayout {
     }
 
     @Override // com.android.systemui.globalactions.GlobalActionsLayout, com.android.systemui.MultiListLayout
-    public final void onUpdateList() {
+    public final void onUpdateList() throws Resources.NotFoundException {
         super.onUpdateList();
         int integer = getResources().getInteger(R.integer.power_menu_lite_max_columns);
         if (getListView().getChildCount() - 1 == integer + 1 && integer > 2) {
@@ -76,9 +76,9 @@ public class GlobalActionsLayoutLite extends GlobalActionsLayout {
 
     @Override // com.android.systemui.MultiListLayout
     public final void removeAllListViews() {
-        View findViewById = findViewById(R.id.list_flow);
+        View viewFindViewById = findViewById(R.id.list_flow);
         super.removeAllListViews();
-        super.addToListView(findViewById, false);
+        super.addToListView(viewFindViewById, false);
     }
 
     @Override // com.android.systemui.globalactions.GlobalActionsLayout

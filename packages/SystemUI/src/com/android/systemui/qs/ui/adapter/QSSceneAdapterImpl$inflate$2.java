@@ -1,6 +1,7 @@
 package com.android.systemui.qs.ui.adapter;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +22,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class QSSceneAdapterImpl$inflate$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ Context $context;
@@ -47,12 +47,12 @@ final class QSSceneAdapterImpl$inflate$2 extends SuspendLambda implements Functi
     }
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
-    public final Object invokeSuspend(Object obj) {
+    public final Object invokeSuspend(Object obj) throws InterruptedException, Resources.NotFoundException {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
-            AsyncLayoutInflater asyncLayoutInflater = (AsyncLayoutInflater) this.this$0.asyncLayoutInflaterFactory.mo779invoke(this.$context);
+            AsyncLayoutInflater asyncLayoutInflater = (AsyncLayoutInflater) this.this$0.asyncLayoutInflaterFactory.mo781invoke(this.$context);
             this.L$0 = asyncLayoutInflater;
             this.label = 1;
             final SafeContinuation safeContinuation = new SafeContinuation(IntrinsicsKt__IntrinsicsJvmKt.intercepted(this));
@@ -60,7 +60,7 @@ final class QSSceneAdapterImpl$inflate$2 extends SuspendLambda implements Functi
                 @Override // androidx.asynclayoutinflater.view.AsyncLayoutInflater.OnInflateFinishedListener
                 public final void onInflateFinished(int i2, View view, ViewGroup viewGroup) {
                     int i3 = Result.$r8$clinit;
-                    Continuation.this.resumeWith(view);
+                    safeContinuation.resumeWith(view);
                 }
             }, asyncLayoutInflater.mInflater);
             obj = safeContinuation.getOrThrow();
@@ -83,13 +83,13 @@ final class QSSceneAdapterImpl$inflate$2 extends SuspendLambda implements Functi
         if (qSImpl2 != null) {
             qSImpl2.onDestroy();
         }
-        QSSceneComponent create = this.this$0.qsSceneComponentFactory.create(view);
+        QSSceneComponent qSSceneComponentCreate = this.this$0.qsSceneComponentFactory.create(view);
         QSImpl qSImpl3 = (QSImpl) this.this$0.qsImplProvider.get();
         String simpleName = qSImpl3.getClass().getSimpleName();
         DumpManager dumpManager = qSImpl3.mDumpManager;
         dumpManager.getClass();
         DumpManager.registerDumpable$default(dumpManager, simpleName, qSImpl3);
-        qSImpl3.onComponentCreated(create, bundle);
+        qSImpl3.onComponentCreated(qSSceneComponentCreate, bundle);
         this.this$0._qsImpl.updateState(null, qSImpl3);
         qSImpl3.mRootView.setPadding(0, 0, 0, 0);
         qSImpl3.setContainerController(this.this$0);

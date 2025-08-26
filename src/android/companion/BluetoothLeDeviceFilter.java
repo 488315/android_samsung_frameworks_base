@@ -23,23 +23,23 @@ public final class BluetoothLeDeviceFilter implements DeviceFilter<ScanResult> {
         @Override // android.os.Parcelable.Creator
         public BluetoothLeDeviceFilter createFromParcel(Parcel parcel) {
             Builder scanFilter = new Builder().setNamePattern(BluetoothDeviceFilterUtils.patternFromString(parcel.readString())).setScanFilter((ScanFilter) parcel.readParcelable(null, ScanFilter.class));
-            byte[] createByteArray = parcel.createByteArray();
-            byte[] createByteArray2 = parcel.createByteArray();
-            if (createByteArray != null) {
-                scanFilter.setRawDataFilter(createByteArray, createByteArray2);
+            byte[] bArrCreateByteArray = parcel.createByteArray();
+            byte[] bArrCreateByteArray2 = parcel.createByteArray();
+            if (bArrCreateByteArray != null) {
+                scanFilter.setRawDataFilter(bArrCreateByteArray, bArrCreateByteArray2);
             }
-            String readString = parcel.readString();
-            String readString2 = parcel.readString();
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
-            int readInt3 = parcel.readInt();
-            int readInt4 = parcel.readInt();
-            boolean readBoolean = parcel.readBoolean();
-            if (readString != null) {
-                if (readInt >= 0) {
-                    scanFilter.setRenameFromBytes(readString, readString2, readInt, readInt2, readBoolean ? ByteOrder.LITTLE_ENDIAN : ByteOrder.BIG_ENDIAN);
+            String string = parcel.readString();
+            String string2 = parcel.readString();
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
+            int i3 = parcel.readInt();
+            int i4 = parcel.readInt();
+            boolean z = parcel.readBoolean();
+            if (string != null) {
+                if (i >= 0) {
+                    scanFilter.setRenameFromBytes(string, string2, i, i2, z ? ByteOrder.LITTLE_ENDIAN : ByteOrder.BIG_ENDIAN);
                 } else {
-                    scanFilter.setRenameFromName(readString, readString2, readInt3, readInt4);
+                    scanFilter.setRenameFromName(string, string2, i3, i4);
                 }
             }
             return scanFilter.build();

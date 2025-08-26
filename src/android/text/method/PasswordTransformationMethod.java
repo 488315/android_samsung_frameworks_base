@@ -136,42 +136,42 @@ public class PasswordTransformationMethod implements TransformationMethod, TextW
 
         @Override // android.text.GetChars
         public void getChars(int i, int i2, char[] cArr, int i3) {
-            int i4;
+            int spanStart;
             int[] iArr;
-            int i5;
-            int i6;
+            int spanEnd;
+            int length;
             int[] iArr2;
-            int i7;
+            int i4;
             TextUtils.getChars(this.mSource, i, i2, cArr, i3);
             CharSequence charSequence = this.mSource;
             if (charSequence instanceof Spanned) {
                 Spanned spanned = (Spanned) charSequence;
-                i4 = spanned.getSpanStart(TextKeyListener.ACTIVE);
-                i5 = spanned.getSpanEnd(TextKeyListener.ACTIVE);
+                spanStart = spanned.getSpanStart(TextKeyListener.ACTIVE);
+                spanEnd = spanned.getSpanEnd(TextKeyListener.ACTIVE);
                 Visible[] visibleArr = (Visible[]) spanned.getSpans(0, spanned.length(), Visible.class);
-                i6 = visibleArr.length;
-                iArr = new int[i6];
-                iArr2 = new int[i6];
-                for (int i8 = 0; i8 < i6; i8++) {
-                    if (spanned.getSpanStart(visibleArr[i8].mTransformer) >= 0) {
-                        iArr[i8] = spanned.getSpanStart(visibleArr[i8]);
-                        iArr2[i8] = spanned.getSpanEnd(visibleArr[i8]);
+                length = visibleArr.length;
+                iArr = new int[length];
+                iArr2 = new int[length];
+                for (int i5 = 0; i5 < length; i5++) {
+                    if (spanned.getSpanStart(visibleArr[i5].mTransformer) >= 0) {
+                        iArr[i5] = spanned.getSpanStart(visibleArr[i5]);
+                        iArr2[i5] = spanned.getSpanEnd(visibleArr[i5]);
                     }
                 }
             } else {
-                i4 = -1;
+                spanStart = -1;
                 iArr = null;
-                i5 = -1;
-                i6 = 0;
+                spanEnd = -1;
+                length = 0;
                 iArr2 = null;
             }
-            for (int i9 = i; i9 < i2; i9++) {
-                if (i9 < i4 || i9 >= i5) {
+            for (int i6 = i; i6 < i2; i6++) {
+                if (i6 < spanStart || i6 >= spanEnd) {
                     while (true) {
-                        if (i7 < i6) {
-                            i7 = (i9 < iArr[i7] || i9 >= iArr2[i7]) ? i7 + 1 : 0;
+                        if (i4 < length) {
+                            i4 = (i6 < iArr[i4] || i6 >= iArr2[i4]) ? i4 + 1 : 0;
                         } else {
-                            cArr[(i9 - i) + i3] = PasswordTransformationMethod.DOT;
+                            cArr[(i6 - i) + i3] = PasswordTransformationMethod.DOT;
                             break;
                         }
                     }

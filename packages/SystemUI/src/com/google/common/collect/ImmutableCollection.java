@@ -10,13 +10,11 @@ import java.util.Collection;
 import java.util.Spliterator;
 import java.util.Spliterators;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class ImmutableCollection<E> extends AbstractCollection<E> implements Serializable {
     public static final Object[] EMPTY_ARRAY = new Object[0];
     private static final long serialVersionUID = 912559;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class ArrayBasedBuilder extends Builder {
         public Object[] contents;
         public boolean forceCopy;
@@ -31,9 +29,9 @@ public abstract class ImmutableCollection<E> extends AbstractCollection<E> imple
         public ArrayBasedBuilder add(Object obj) {
             obj.getClass();
             Object[] objArr = this.contents;
-            int expandedCapacity = Builder.expandedCapacity(objArr.length, this.size + 1);
-            if (expandedCapacity > objArr.length || this.forceCopy) {
-                this.contents = Arrays.copyOf(this.contents, expandedCapacity);
+            int iExpandedCapacity = Builder.expandedCapacity(objArr.length, this.size + 1);
+            if (iExpandedCapacity > objArr.length || this.forceCopy) {
+                this.contents = Arrays.copyOf(this.contents, iExpandedCapacity);
                 this.forceCopy = false;
             }
             Object[] objArr2 = this.contents;
@@ -44,7 +42,6 @@ public abstract class ImmutableCollection<E> extends AbstractCollection<E> imple
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Builder {
         public static int expandedCapacity(int i, int i2) {
             if (i2 < 0) {
@@ -53,14 +50,14 @@ public abstract class ImmutableCollection<E> extends AbstractCollection<E> imple
             if (i2 <= i) {
                 return i;
             }
-            int i3 = i + (i >> 1) + 1;
-            if (i3 < i2) {
-                i3 = Integer.highestOneBit(i2 - 1) << 1;
+            int iHighestOneBit = i + (i >> 1) + 1;
+            if (iHighestOneBit < i2) {
+                iHighestOneBit = Integer.highestOneBit(i2 - 1) << 1;
             }
-            if (i3 < 0) {
+            if (iHighestOneBit < 0) {
                 return Integer.MAX_VALUE;
             }
-            return i3;
+            return iHighestOneBit;
         }
     }
 
@@ -156,9 +153,9 @@ public abstract class ImmutableCollection<E> extends AbstractCollection<E> imple
         objArr.getClass();
         int size = size();
         if (objArr.length < size) {
-            Object[] internalArray = internalArray();
-            if (internalArray != null) {
-                return Arrays.copyOfRange(internalArray, internalArrayStart(), internalArrayEnd(), objArr.getClass());
+            Object[] objArrInternalArray = internalArray();
+            if (objArrInternalArray != null) {
+                return Arrays.copyOfRange(objArrInternalArray, internalArrayStart(), internalArrayEnd(), objArr.getClass());
             }
             if (objArr.length != 0) {
                 objArr = Arrays.copyOf(objArr, 0);

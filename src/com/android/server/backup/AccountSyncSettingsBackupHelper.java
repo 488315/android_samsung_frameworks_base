@@ -21,6 +21,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -68,12 +69,12 @@ public class AccountSyncSettingsBackupHelper extends BackupHelperWithLogger {
     }
 
     @Override // android.app.backup.BackupHelperWithLogger, android.app.backup.BackupHelper
-    public void performBackup(ParcelFileDescriptor parcelFileDescriptor, BackupDataOutput backupDataOutput, ParcelFileDescriptor parcelFileDescriptor2) {
+    public void performBackup(ParcelFileDescriptor parcelFileDescriptor, BackupDataOutput backupDataOutput, ParcelFileDescriptor parcelFileDescriptor2) throws UnsupportedEncodingException {
         try {
             byte[] bytes = serializeAccountSyncSettingsToJSON(this.mUserId).toString().getBytes("UTF-8");
-            byte[] readOldMd5Checksum = readOldMd5Checksum(parcelFileDescriptor);
-            byte[] generateMd5Checksum = generateMd5Checksum(bytes);
-            if (Arrays.equals(readOldMd5Checksum, generateMd5Checksum)) {
+            byte[] oldMd5Checksum = readOldMd5Checksum(parcelFileDescriptor);
+            byte[] bArrGenerateMd5Checksum = generateMd5Checksum(bytes);
+            if (Arrays.equals(oldMd5Checksum, bArrGenerateMd5Checksum)) {
                 Log.i(TAG, "Old and new MD5 checksums match. Skipping backup.");
             } else {
                 int length = bytes.length;
@@ -81,7 +82,7 @@ public class AccountSyncSettingsBackupHelper extends BackupHelperWithLogger {
                 backupDataOutput.writeEntityData(bytes, length);
                 Log.i(TAG, "Backup successful.");
             }
-            writeNewMd5Checksum(parcelFileDescriptor2, generateMd5Checksum);
+            writeNewMd5Checksum(parcelFileDescriptor2, bArrGenerateMd5Checksum);
         } catch (IOException | NoSuchAlgorithmException | JSONException e) {
             Log.e(TAG, "Couldn't backup account sync settings\n" + e);
         }
@@ -90,13 +91,13 @@ public class AccountSyncSettingsBackupHelper extends BackupHelperWithLogger {
     private JSONObject serializeAccountSyncSettingsToJSON(int i) throws JSONException {
         Account[] accountsAsUser = this.mAccountManager.getAccountsAsUser(i);
         SyncAdapterType[] syncAdapterTypesAsUser = ContentResolver.getSyncAdapterTypesAsUser(i);
-        HashMap hashMap = new HashMap();
+        HashMap map = new HashMap();
         for (SyncAdapterType syncAdapterType : syncAdapterTypesAsUser) {
             if (syncAdapterType.isUserVisible()) {
-                if (!hashMap.containsKey(syncAdapterType.accountType)) {
-                    hashMap.put(syncAdapterType.accountType, new ArrayList());
+                if (!map.containsKey(syncAdapterType.accountType)) {
+                    map.put(syncAdapterType.accountType, new ArrayList());
                 }
-                ((List) hashMap.get(syncAdapterType.accountType)).add(syncAdapterType.authority);
+                ((List) map.get(syncAdapterType.accountType)).add(syncAdapterType.authority);
             }
         }
         JSONObject jSONObject = new JSONObject();
@@ -104,7 +105,7 @@ public class AccountSyncSettingsBackupHelper extends BackupHelperWithLogger {
         jSONObject.put(KEY_MASTER_SYNC_ENABLED, ContentResolver.getMasterSyncAutomaticallyAsUser(i));
         JSONArray jSONArray = new JSONArray();
         for (Account account : accountsAsUser) {
-            List<String> list = (List) hashMap.get(account.type);
+            List<String> list = (List) map.get(account.type);
             if (list != null && !list.isEmpty()) {
                 JSONObject jSONObject2 = new JSONObject();
                 jSONObject2.put("name", account.name);
@@ -131,13 +132,13 @@ public class AccountSyncSettingsBackupHelper extends BackupHelperWithLogger {
         DataInputStream dataInputStream = new DataInputStream(new FileInputStream(parcelFileDescriptor.getFileDescriptor()));
         byte[] bArr = new byte[16];
         try {
-            int readInt = dataInputStream.readInt();
-            if (readInt <= 1) {
-                for (int i = 0; i < 16; i++) {
-                    bArr[i] = dataInputStream.readByte();
+            int i = dataInputStream.readInt();
+            if (i <= 1) {
+                for (int i2 = 0; i2 < 16; i2++) {
+                    bArr[i2] = dataInputStream.readByte();
                 }
             } else {
-                Log.i(TAG, "Backup state version is: " + readInt + " (support only up to version 1)");
+                Log.i(TAG, "Backup state version is: " + i + " (support only up to version 1)");
             }
         } catch (EOFException unused) {
         }
@@ -158,7 +159,7 @@ public class AccountSyncSettingsBackupHelper extends BackupHelperWithLogger {
     }
 
     @Override // android.app.backup.BackupHelperWithLogger, android.app.backup.BackupHelper
-    public void restoreEntity(BackupDataInputStream backupDataInputStream) {
+    public void restoreEntity(BackupDataInputStream backupDataInputStream) throws JSONException {
         byte[] bArr = new byte[backupDataInputStream.size()];
         try {
             backupDataInputStream.read(bArr);
@@ -181,7 +182,7 @@ public class AccountSyncSettingsBackupHelper extends BackupHelperWithLogger {
         }
     }
 
-    private void restoreFromJsonArray(JSONArray jSONArray, int i) throws JSONException {
+    private void restoreFromJsonArray(JSONArray jSONArray, int i) throws JSONException, IOException {
         Set<Account> accounts = getAccounts(i);
         JSONArray jSONArray2 = new JSONArray();
         for (int i2 = 0; i2 < jSONArray.length(); i2++) {
@@ -215,14 +216,14 @@ public class AccountSyncSettingsBackupHelper extends BackupHelperWithLogger {
         }
     }
 
-    private void accountAddedInternal(int i) {
+    private void accountAddedInternal(int i) throws IOException {
         try {
             FileInputStream fileInputStream = new FileInputStream(getStashFile(i));
             try {
-                String readUTF = new DataInputStream(fileInputStream).readUTF();
+                String utf = new DataInputStream(fileInputStream).readUTF();
                 fileInputStream.close();
                 try {
-                    restoreFromJsonArray(new JSONArray(readUTF), i);
+                    restoreFromJsonArray(new JSONArray(utf), i);
                 } catch (JSONException e) {
                     Log.e(TAG, "there was an error with the stashed sync settings", e);
                 }
@@ -238,7 +239,7 @@ public class AccountSyncSettingsBackupHelper extends BackupHelperWithLogger {
         }
     }
 
-    public static void accountAdded(Context context, int i) {
+    public static void accountAdded(Context context, int i) throws IOException {
         new AccountSyncSettingsBackupHelper(context, i).accountAddedInternal(i);
     }
 

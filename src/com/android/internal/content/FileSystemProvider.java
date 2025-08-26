@@ -102,9 +102,8 @@ public abstract class FileSystemProvider extends DocumentsProvider {
     }
 
     @Override // android.provider.DocumentsProvider
-    public Bundle getDocumentMetadata(String str) throws FileNotFoundException {
+    public Bundle getDocumentMetadata(String str) throws Throwable {
         FileInputStream fileInputStream;
-        Bundle bundle;
         File fileForDocId = getFileForDocId(str);
         if (!fileForDocId.exists()) {
             throw new FileNotFoundException("Can't find the file for documentId: " + str);
@@ -138,10 +137,10 @@ public abstract class FileSystemProvider extends DocumentsProvider {
                         return FileVisitResult.CONTINUE;
                     }
                 });
-                Bundle bundle2 = new Bundle();
-                bundle2.putLong(DocumentsContract.METADATA_TREE_COUNT, int64Ref.value);
-                bundle2.putLong(DocumentsContract.METADATA_TREE_SIZE, int64Ref2.value);
-                return bundle2;
+                Bundle bundle = new Bundle();
+                bundle.putLong(DocumentsContract.METADATA_TREE_COUNT, int64Ref.value);
+                bundle.putLong(DocumentsContract.METADATA_TREE_SIZE, int64Ref2.value);
+                return bundle;
             } catch (IOException e) {
                 Log.e(TAG, "An error occurred retrieving the metadata", e);
                 return null;
@@ -160,32 +159,32 @@ public abstract class FileSystemProvider extends DocumentsProvider {
             return null;
         }
         try {
-            bundle = new Bundle();
+            Bundle bundle2 = new Bundle();
             fileInputStream = new FileInputStream(fileForDocId.getAbsolutePath());
-        } catch (IOException e2) {
-            e = e2;
-            fileInputStream = null;
-        } catch (Throwable th) {
-            th = th;
-            IoUtils.closeQuietly(fileInputStream2);
-            throw th;
-        }
-        try {
             try {
-                MetadataReader.getMetadata(bundle, fileInputStream, documentType, null);
-                IoUtils.closeQuietly(fileInputStream);
-                return bundle;
-            } catch (Throwable th2) {
-                th = th2;
+                try {
+                    MetadataReader.getMetadata(bundle2, fileInputStream, documentType, null);
+                    IoUtils.closeQuietly(fileInputStream);
+                    return bundle2;
+                } catch (IOException e2) {
+                    e = e2;
+                    Log.e(TAG, "An error occurred retrieving the metadata", e);
+                    IoUtils.closeQuietly(fileInputStream);
+                    return null;
+                }
+            } catch (Throwable th) {
+                th = th;
                 fileInputStream2 = fileInputStream;
                 IoUtils.closeQuietly(fileInputStream2);
                 throw th;
             }
         } catch (IOException e3) {
             e = e3;
-            Log.e(TAG, "An error occurred retrieving the metadata", e);
-            IoUtils.closeQuietly(fileInputStream);
-            return null;
+            fileInputStream = null;
+        } catch (Throwable th2) {
+            th = th2;
+            IoUtils.closeQuietly(fileInputStream2);
+            throw th;
         }
     }
 
@@ -207,43 +206,43 @@ public abstract class FileSystemProvider extends DocumentsProvider {
     @Override // android.provider.DocumentsProvider
     public String createDocument(String str, String str2, String str3) throws FileNotFoundException {
         String docIdForFile;
-        String buildValidFatFilename = FileUtils.buildValidFatFilename(str3);
+        String strBuildValidFatFilename = FileUtils.buildValidFatFilename(str3);
         File fileForDocId = getFileForDocId(str);
         if (!fileForDocId.isDirectory()) {
             throw new IllegalArgumentException("Parent document isn't a directory");
         }
-        File buildUniqueFile = FileUtils.buildUniqueFile(fileForDocId, str2, buildValidFatFilename);
+        File fileBuildUniqueFile = FileUtils.buildUniqueFile(fileForDocId, str2, strBuildValidFatFilename);
         if (DocumentsContract.Document.MIME_TYPE_DIR.equals(str2)) {
-            if (!buildUniqueFile.mkdir()) {
-                throw new IllegalStateException("Failed to mkdir " + buildUniqueFile);
+            if (!fileBuildUniqueFile.mkdir()) {
+                throw new IllegalStateException("Failed to mkdir " + fileBuildUniqueFile);
             }
-            docIdForFile = getDocIdForFile(buildUniqueFile);
+            docIdForFile = getDocIdForFile(fileBuildUniqueFile);
             onDocIdChanged(docIdForFile);
         } else {
             try {
-                if (!buildUniqueFile.createNewFile()) {
-                    throw new IllegalStateException("Failed to touch " + buildUniqueFile);
+                if (!fileBuildUniqueFile.createNewFile()) {
+                    throw new IllegalStateException("Failed to touch " + fileBuildUniqueFile);
                 }
-                docIdForFile = getDocIdForFile(buildUniqueFile);
+                docIdForFile = getDocIdForFile(fileBuildUniqueFile);
                 onDocIdChanged(docIdForFile);
             } catch (IOException e) {
-                throw new IllegalStateException("Failed to touch " + buildUniqueFile + ": " + e);
+                throw new IllegalStateException("Failed to touch " + fileBuildUniqueFile + ": " + e);
             }
         }
-        updateMediaStore(getContext(), buildUniqueFile);
+        updateMediaStore(getContext(), fileBuildUniqueFile);
         return docIdForFile;
     }
 
     @Override // android.provider.DocumentsProvider
     public String renameDocument(String str, String str2) throws FileNotFoundException {
-        String buildValidFatFilename = FileUtils.buildValidFatFilename(str2);
+        String strBuildValidFatFilename = FileUtils.buildValidFatFilename(str2);
         File fileForDocId = getFileForDocId(str);
         File fileForDocId2 = getFileForDocId(str, true);
-        File buildUniqueFile = FileUtils.buildUniqueFile(fileForDocId.getParentFile(), buildValidFatFilename);
-        if (!fileForDocId.renameTo(buildUniqueFile)) {
-            throw new IllegalStateException("Failed to rename to " + buildUniqueFile);
+        File fileBuildUniqueFile = FileUtils.buildUniqueFile(fileForDocId.getParentFile(), strBuildValidFatFilename);
+        if (!fileForDocId.renameTo(fileBuildUniqueFile)) {
+            throw new IllegalStateException("Failed to rename to " + fileBuildUniqueFile);
         }
-        String docIdForFile = getDocIdForFile(buildUniqueFile);
+        String docIdForFile = getDocIdForFile(fileBuildUniqueFile);
         onDocIdChanged(str);
         onDocIdChanged(docIdForFile);
         File fileForDocId3 = getFileForDocId(docIdForFile, true);
@@ -330,8 +329,8 @@ public abstract class FileSystemProvider extends DocumentsProvider {
             Log.w(TAG, "Queried directory \"" + str + "\" is hidden");
             return directoryCursor;
         }
-        File[] listFilesOrEmpty = FileUtils.listFilesOrEmpty(fileForDocId);
-        for (File file : listFilesOrEmpty) {
+        File[] fileArrListFilesOrEmpty = FileUtils.listFilesOrEmpty(fileForDocId);
+        for (File file : fileArrListFilesOrEmpty) {
             if (z || !shouldHideDocument(file)) {
                 includeFile(directoryCursor, null, file);
             }
@@ -374,9 +373,9 @@ public abstract class FileSystemProvider extends DocumentsProvider {
         if (file.isDirectory()) {
             return DocumentsContract.Document.MIME_TYPE_DIR;
         }
-        int lastIndexOf = str.lastIndexOf(46);
-        if (lastIndexOf >= 0) {
-            String mimeTypeFromExtension = MimeTypeMap.getSingleton().getMimeTypeFromExtension(str.substring(lastIndexOf + 1).toLowerCase());
+        int iLastIndexOf = str.lastIndexOf(46);
+        if (iLastIndexOf >= 0) {
+            String mimeTypeFromExtension = MimeTypeMap.getSingleton().getMimeTypeFromExtension(str.substring(iLastIndexOf + 1).toLowerCase());
             return mimeTypeFromExtension != null ? mimeTypeFromExtension : "application/octet-stream";
         }
         return "application/octet-stream";
@@ -386,18 +385,18 @@ public abstract class FileSystemProvider extends DocumentsProvider {
     public ParcelFileDescriptor openDocument(final String str, String str2, CancellationSignal cancellationSignal) throws FileNotFoundException {
         File fileForDocId = getFileForDocId(str);
         final File fileForDocId2 = getFileForDocId(str, true);
-        int parseMode = ParcelFileDescriptor.parseMode(str2);
+        int mode = ParcelFileDescriptor.parseMode(str2);
         if (fileForDocId2 == null) {
-            return ParcelFileDescriptor.open(fileForDocId, parseMode);
+            return ParcelFileDescriptor.open(fileForDocId, mode);
         }
-        if (parseMode == 268435456) {
+        if (mode == 268435456) {
             return openFileForRead(fileForDocId2);
         }
         try {
-            return ParcelFileDescriptor.open(fileForDocId, parseMode, this.mHandler, new ParcelFileDescriptor.OnCloseListener() { // from class: com.android.internal.content.FileSystemProvider$$ExternalSyntheticLambda0
+            return ParcelFileDescriptor.open(fileForDocId, mode, this.mHandler, new ParcelFileDescriptor.OnCloseListener() { // from class: com.android.internal.content.FileSystemProvider$$ExternalSyntheticLambda0
                 @Override // android.os.ParcelFileDescriptor.OnCloseListener
                 public final void onClose(IOException iOException) {
-                    FileSystemProvider.this.lambda$openDocument$0(str, fileForDocId2, iOException);
+                    this.f$0.lambda$openDocument$0(str, fileForDocId2, iOException);
                 }
             });
         } catch (IOException e) {
@@ -412,19 +411,19 @@ public abstract class FileSystemProvider extends DocumentsProvider {
     }
 
     private ParcelFileDescriptor openFileForRead(File file) throws FileNotFoundException {
-        Uri scanFile = MediaStore.scanFile(getContext().getContentResolver(), file);
-        if (scanFile == null) {
+        Uri uriScanFile = MediaStore.scanFile(getContext().getContentResolver(), file);
+        if (uriScanFile == null) {
             Log.w(TAG, "Failed to retrieve media store URI for: " + file);
             return ParcelFileDescriptor.open(file, 268435456);
         }
         Bundle bundle = new Bundle();
         bundle.putInt("android.provider.extra.MEDIA_CAPABILITIES_UID", Binder.getCallingUid());
-        AssetFileDescriptor openTypedAssetFileDescriptor = getContext().getContentResolver().openTypedAssetFileDescriptor(scanFile, "*/*", bundle);
-        if (openTypedAssetFileDescriptor == null) {
-            Log.w(TAG, "Failed to open with media_capabilities uid for URI: " + scanFile);
+        AssetFileDescriptor assetFileDescriptorOpenTypedAssetFileDescriptor = getContext().getContentResolver().openTypedAssetFileDescriptor(uriScanFile, "*/*", bundle);
+        if (assetFileDescriptorOpenTypedAssetFileDescriptor == null) {
+            Log.w(TAG, "Failed to open with media_capabilities uid for URI: " + uriScanFile);
             return ParcelFileDescriptor.open(file, 268435456);
         }
-        return openTypedAssetFileDescriptor.getParcelFileDescriptor();
+        return assetFileDescriptorOpenTypedAssetFileDescriptor.getParcelFileDescriptor();
     }
 
     private boolean matchSearchQueryArguments(File file, Bundle bundle) {
@@ -436,11 +435,11 @@ public abstract class FileSystemProvider extends DocumentsProvider {
         if (file.isDirectory()) {
             mimeTypeFromExtension = DocumentsContract.Document.MIME_TYPE_DIR;
         } else {
-            int lastIndexOf = name.lastIndexOf(46);
-            if (lastIndexOf < 0) {
+            int iLastIndexOf = name.lastIndexOf(46);
+            if (iLastIndexOf < 0) {
                 return false;
             }
-            mimeTypeFromExtension = MimeTypeMap.getSingleton().getMimeTypeFromExtension(name.substring(lastIndexOf + 1));
+            mimeTypeFromExtension = MimeTypeMap.getSingleton().getMimeTypeFromExtension(name.substring(iLastIndexOf + 1));
         }
         return DocumentsContract.matchSearchQueryArguments(bundle, name, mimeTypeFromExtension, file.lastModified(), file.length());
     }
@@ -458,20 +457,20 @@ public abstract class FileSystemProvider extends DocumentsProvider {
 
     protected MatrixCursor.RowBuilder includeFile(MatrixCursor matrixCursor, String str, File file) throws FileNotFoundException {
         String[] columnNames = matrixCursor.getColumnNames();
-        MatrixCursor.RowBuilder newRow = matrixCursor.newRow();
+        MatrixCursor.RowBuilder rowBuilderNewRow = matrixCursor.newRow();
         if (str == null) {
             str = getDocIdForFile(file);
         } else {
             file = getFileForDocId(str);
         }
         String documentType = getDocumentType(str, file);
-        newRow.add("document_id", str);
-        newRow.add("mime_type", documentType);
-        int indexOf = ArrayUtils.indexOf(columnNames, "flags");
-        if (indexOf != -1) {
-            boolean equals = documentType.equals(DocumentsContract.Document.MIME_TYPE_DIR);
-            int i = file.canWrite() ? equals ? 332 : 326 : 0;
-            if (equals && shouldBlockDirectoryFromTree(str)) {
+        rowBuilderNewRow.add("document_id", str);
+        rowBuilderNewRow.add("mime_type", documentType);
+        int iIndexOf = ArrayUtils.indexOf(columnNames, "flags");
+        if (iIndexOf != -1) {
+            boolean zEquals = documentType.equals(DocumentsContract.Document.MIME_TYPE_DIR);
+            int i = file.canWrite() ? zEquals ? 332 : 326 : 0;
+            if (zEquals && shouldBlockDirectoryFromTree(str)) {
                 i |= 32768;
             }
             if (documentType.startsWith(MessagingMessage.IMAGE_MIME_TYPE_PREFIX)) {
@@ -480,24 +479,24 @@ public abstract class FileSystemProvider extends DocumentsProvider {
             if (typeSupportsMetadata(documentType)) {
                 i |= 16384;
             }
-            newRow.add(indexOf, Integer.valueOf(i));
+            rowBuilderNewRow.add(iIndexOf, Integer.valueOf(i));
         }
-        int indexOf2 = ArrayUtils.indexOf(columnNames, "_display_name");
-        if (indexOf2 != -1) {
-            newRow.add(indexOf2, file.getName());
+        int iIndexOf2 = ArrayUtils.indexOf(columnNames, "_display_name");
+        if (iIndexOf2 != -1) {
+            rowBuilderNewRow.add(iIndexOf2, file.getName());
         }
-        int indexOf3 = ArrayUtils.indexOf(columnNames, "last_modified");
-        if (indexOf3 != -1) {
-            long lastModified = file.lastModified();
-            if (lastModified > 31536000000L) {
-                newRow.add(indexOf3, Long.valueOf(lastModified));
+        int iIndexOf3 = ArrayUtils.indexOf(columnNames, "last_modified");
+        if (iIndexOf3 != -1) {
+            long jLastModified = file.lastModified();
+            if (jLastModified > 31536000000L) {
+                rowBuilderNewRow.add(iIndexOf3, Long.valueOf(jLastModified));
             }
         }
-        int indexOf4 = ArrayUtils.indexOf(columnNames, "_size");
-        if (indexOf4 != -1) {
-            newRow.add(indexOf4, Long.valueOf(file.length()));
+        int iIndexOf4 = ArrayUtils.indexOf(columnNames, "_size");
+        if (iIndexOf4 != -1) {
+            rowBuilderNewRow.add(iIndexOf4, Long.valueOf(file.length()));
         }
-        return newRow;
+        return rowBuilderNewRow;
     }
 
     protected final boolean shouldHideDocument(File file) throws FileNotFoundException {
@@ -580,10 +579,10 @@ public abstract class FileSystemProvider extends DocumentsProvider {
 
         public DirectoryCursor(String[] strArr, String str, File file) {
             super(strArr);
-            Uri buildNotificationUri = FileSystemProvider.this.buildNotificationUri(str);
-            setNotificationUris(FileSystemProvider.this.getContext().getContentResolver(), Arrays.asList(buildNotificationUri), FileSystemProvider.this.getContext().getContentResolver().getUserId(), false);
+            Uri uriBuildNotificationUri = FileSystemProvider.this.buildNotificationUri(str);
+            setNotificationUris(FileSystemProvider.this.getContext().getContentResolver(), Arrays.asList(uriBuildNotificationUri), FileSystemProvider.this.getContext().getContentResolver().getUserId(), false);
             this.mFile = file;
-            FileSystemProvider.this.startObserving(file, buildNotificationUri, this);
+            FileSystemProvider.this.startObserving(file, uriBuildNotificationUri, this);
         }
 
         public void notifyChanged() {

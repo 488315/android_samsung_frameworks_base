@@ -72,13 +72,13 @@ public class FloatFunctionDefine extends Operation implements VariableSupport, C
     }
 
     public static void read(WireBuffer wireBuffer, List<Operation> list) {
-        int readInt = wireBuffer.readInt();
-        int readInt2 = wireBuffer.readInt();
-        int[] iArr = new int[readInt2];
-        for (int i = 0; i < readInt2; i++) {
-            iArr[i] = wireBuffer.readInt();
+        int i = wireBuffer.readInt();
+        int i2 = wireBuffer.readInt();
+        int[] iArr = new int[i2];
+        for (int i3 = 0; i3 < i2; i3++) {
+            iArr[i3] = wireBuffer.readInt();
         }
-        list.add(new FloatFunctionDefine(readInt, iArr));
+        list.add(new FloatFunctionDefine(i, iArr));
     }
 
     public static void documentation(DocumentationBuilder documentationBuilder) {

@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.HardwareRenderer;
 import android.graphics.RecordingCanvas;
@@ -71,7 +72,6 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;
 import kotlin.jvm.internal.Reflection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class AppClipsActivity extends ComponentActivity {
     public static final PackageManager.ApplicationInfoFlags APPLICATION_INFO_FLAGS = PackageManager.ApplicationInfoFlags.of(0);
@@ -130,20 +130,20 @@ public class AppClipsActivity extends ComponentActivity {
             appClipsViewModel.mBgExecutor.execute(new Runnable() { // from class: com.android.systemui.screenshot.appclips.AppClipsViewModel$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    AppClipsViewModel appClipsViewModel2 = AppClipsViewModel.this;
+                    AppClipsViewModel appClipsViewModel2 = appClipsViewModel;
                     Drawable drawable2 = drawable;
                     Rect rect = cropBoundaries;
                     UserHandle userHandle = user;
                     appClipsViewModel2.getClass();
                     RenderNode renderNode = new RenderNode("Screenshot save");
                     renderNode.setPosition(0, 0, rect.width(), rect.height());
-                    RecordingCanvas beginRecording = renderNode.beginRecording();
-                    beginRecording.translate(-rect.left, -rect.top);
-                    beginRecording.clipRect(rect);
-                    drawable2.draw(beginRecording);
+                    RecordingCanvas recordingCanvasBeginRecording = renderNode.beginRecording();
+                    recordingCanvasBeginRecording.translate(-rect.left, -rect.top);
+                    recordingCanvasBeginRecording.clipRect(rect);
+                    drawable2.draw(recordingCanvasBeginRecording);
                     renderNode.endRecording();
-                    CallbackToFutureAdapter.SafeFuture export = appClipsViewModel2.mImageExporter.export(appClipsViewModel2.mBgExecutor, UUID.randomUUID(), HardwareRenderer.createHardwareBitmap(renderNode, rect.width(), rect.height()), userHandle, 0);
-                    export.delegate.addListener(new AppClipsViewModel$$ExternalSyntheticLambda2(appClipsViewModel2, export, 0), appClipsViewModel2.mMainExecutor);
+                    CallbackToFutureAdapter.SafeFuture safeFutureExport = appClipsViewModel2.mImageExporter.export(appClipsViewModel2.mBgExecutor, UUID.randomUUID(), HardwareRenderer.createHardwareBitmap(renderNode, rect.width(), rect.height()), userHandle, 0);
+                    safeFutureExport.delegate.addListener(new AppClipsViewModel$$ExternalSyntheticLambda2(appClipsViewModel2, safeFutureExport, 0), appClipsViewModel2.mMainExecutor);
                 }
             });
         }
@@ -186,13 +186,13 @@ public class AppClipsActivity extends ComponentActivity {
             finish();
             return;
         }
-        View inflate = getLayoutInflater().inflate(R.layout.app_clips_screenshot, (ViewGroup) null);
-        this.mLayout = inflate;
-        View findViewById = inflate.findViewById(R.id.root);
-        this.mRoot = findViewById;
+        View viewInflate = getLayoutInflater().inflate(R.layout.app_clips_screenshot, (ViewGroup) null);
+        this.mLayout = viewInflate;
+        View viewFindViewById = viewInflate.findViewById(R.id.root);
+        this.mRoot = viewFindViewById;
         AppClipsActivity$$ExternalSyntheticLambda0 appClipsActivity$$ExternalSyntheticLambda0 = new AppClipsActivity$$ExternalSyntheticLambda0();
         WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-        ViewCompat.Api21Impl.setOnApplyWindowInsetsListener(findViewById, appClipsActivity$$ExternalSyntheticLambda0);
+        ViewCompat.Api21Impl.setOnApplyWindowInsetsListener(viewFindViewById, appClipsActivity$$ExternalSyntheticLambda0);
         this.mSave = (Button) this.mLayout.findViewById(R.id.save);
         this.mCancel = (Button) this.mLayout.findViewById(R.id.cancel);
         this.mSave.setOnClickListener(new AppClipsActivity$$ExternalSyntheticLambda1(this, i2));
@@ -203,7 +203,7 @@ public class AppClipsActivity extends ComponentActivity {
         imageView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() { // from class: com.android.systemui.screenshot.appclips.AppClipsActivity$$ExternalSyntheticLambda2
             @Override // android.view.View.OnLayoutChangeListener
             public final void onLayoutChange(View view, int i3, int i4, int i5, int i6, int i7, int i8, int i9, int i10) {
-                AppClipsActivity appClipsActivity = AppClipsActivity.this;
+                AppClipsActivity appClipsActivity = this.f$0;
                 PackageManager.ApplicationInfoFlags applicationInfoFlags = AppClipsActivity.APPLICATION_INFO_FLAGS;
                 appClipsActivity.updateImageDimensions();
             }
@@ -223,7 +223,7 @@ public class AppClipsActivity extends ComponentActivity {
             }
 
             @Override // androidx.lifecycle.Observer
-            public final void onChanged(Object obj) {
+            public final void onChanged(Object obj) throws Resources.NotFoundException {
                 final AppClipsActivity appClipsActivity = this.f$0;
                 switch (i) {
                     case 0:
@@ -261,9 +261,9 @@ public class AppClipsActivity extends ComponentActivity {
                         appClipsActivity.mRoot.requestApplyInsets();
                         break;
                     case 2:
-                        int intValue = ((Integer) obj).intValue();
+                        int iIntValue = ((Integer) obj).intValue();
                         PackageManager.ApplicationInfoFlags applicationInfoFlags2 = AppClipsActivity.APPLICATION_INFO_FLAGS;
-                        appClipsActivity.setError(intValue);
+                        appClipsActivity.setError(iIntValue);
                         appClipsActivity.finish();
                         break;
                     case 3:
@@ -271,28 +271,28 @@ public class AppClipsActivity extends ComponentActivity {
                         appClipsActivity.mBacklinksIncludeDataCheckBox.setVisibility(0);
                         appClipsActivity.mBacklinksDataTextView.setVisibility(appClipsActivity.mBacklinksIncludeDataCheckBox.isChecked() ? 0 : 8);
                         if (list.size() > 1) {
-                            HashMap hashMap = new HashMap();
+                            HashMap map = new HashMap();
                             for (InternalBacklinksData internalBacklinksData2 : list) {
-                                boolean containsKey = hashMap.containsKey(internalBacklinksData2.backlinkDisplayInfo.displayLabel);
+                                boolean zContainsKey = map.containsKey(internalBacklinksData2.backlinkDisplayInfo.displayLabel);
                                 BacklinkDisplayInfo backlinkDisplayInfo = internalBacklinksData2.backlinkDisplayInfo;
-                                if (containsKey) {
-                                    int intValue2 = ((Integer) hashMap.get(backlinkDisplayInfo.displayLabel)).intValue();
-                                    if (intValue2 == 0) {
-                                        hashMap.put(backlinkDisplayInfo.displayLabel, 2);
+                                if (zContainsKey) {
+                                    int iIntValue2 = ((Integer) map.get(backlinkDisplayInfo.displayLabel)).intValue();
+                                    if (iIntValue2 == 0) {
+                                        map.put(backlinkDisplayInfo.displayLabel, 2);
                                     } else {
-                                        hashMap.put(backlinkDisplayInfo.displayLabel, Integer.valueOf(intValue2 + 1));
+                                        map.put(backlinkDisplayInfo.displayLabel, Integer.valueOf(iIntValue2 + 1));
                                     }
                                 } else {
-                                    hashMap.put(backlinkDisplayInfo.displayLabel, 0);
+                                    map.put(backlinkDisplayInfo.displayLabel, 0);
                                 }
                             }
                             for (InternalBacklinksData internalBacklinksData3 : list.reversed()) {
                                 String str = internalBacklinksData3.backlinkDisplayInfo.displayLabel;
-                                Integer num = (Integer) hashMap.get(str);
-                                int intValue3 = num.intValue();
-                                if (intValue3 > 0) {
+                                Integer num = (Integer) map.get(str);
+                                int iIntValue3 = num.intValue();
+                                if (iIntValue3 > 0) {
                                     internalBacklinksData3.backlinkDisplayInfo.displayLabel = appClipsActivity.getString(R.string.backlinks_duplicate_label_format, new Object[]{str, num});
-                                    hashMap.put(str, Integer.valueOf(intValue3 - 1));
+                                    map.put(str, Integer.valueOf(iIntValue3 - 1));
                                 }
                             }
                             TextView textView = appClipsActivity.mBacklinksDataTextView;
@@ -303,7 +303,7 @@ public class AppClipsActivity extends ComponentActivity {
                             listPopupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() { // from class: com.android.systemui.screenshot.appclips.AppClipsActivity$$ExternalSyntheticLambda9
                                 @Override // android.widget.AdapterView.OnItemClickListener
                                 public final void onItemClick(AdapterView adapterView, View view, int i3, long j) {
-                                    AppClipsActivity appClipsActivity2 = AppClipsActivity.this;
+                                    AppClipsActivity appClipsActivity2 = appClipsActivity;
                                     List list2 = list;
                                     ListPopupWindow listPopupWindow2 = listPopupWindow;
                                     appClipsActivity2.mViewModel.mSelectedBacklinksLiveData.setValue((InternalBacklinksData) list2.get(i3));
@@ -312,7 +312,7 @@ public class AppClipsActivity extends ComponentActivity {
                             });
                             ArrayAdapter arrayAdapter = new ArrayAdapter(appClipsActivity, R.layout.app_clips_backlinks_drop_down_entry) { // from class: com.android.systemui.screenshot.appclips.AppClipsActivity.2
                                 @Override // android.widget.ArrayAdapter, android.widget.Adapter
-                                public final View getView(int i3, View view, ViewGroup viewGroup) {
+                                public final View getView(int i3, View view, ViewGroup viewGroup) throws Resources.NotFoundException {
                                     TextView textView2 = (TextView) super.getView(i3, view, viewGroup);
                                     InternalBacklinksData internalBacklinksData4 = (InternalBacklinksData) list.get(i3);
                                     textView2.setText(internalBacklinksData4.backlinkDisplayInfo.displayLabel);
@@ -373,7 +373,7 @@ public class AppClipsActivity extends ComponentActivity {
             }
 
             @Override // androidx.lifecycle.Observer
-            public final void onChanged(Object obj) {
+            public final void onChanged(Object obj) throws Resources.NotFoundException {
                 final Context appClipsActivity = this.f$0;
                 switch (i2) {
                     case 0:
@@ -411,9 +411,9 @@ public class AppClipsActivity extends ComponentActivity {
                         appClipsActivity.mRoot.requestApplyInsets();
                         break;
                     case 2:
-                        int intValue = ((Integer) obj).intValue();
+                        int iIntValue = ((Integer) obj).intValue();
                         PackageManager.ApplicationInfoFlags applicationInfoFlags2 = AppClipsActivity.APPLICATION_INFO_FLAGS;
-                        appClipsActivity.setError(intValue);
+                        appClipsActivity.setError(iIntValue);
                         appClipsActivity.finish();
                         break;
                     case 3:
@@ -421,28 +421,28 @@ public class AppClipsActivity extends ComponentActivity {
                         appClipsActivity.mBacklinksIncludeDataCheckBox.setVisibility(0);
                         appClipsActivity.mBacklinksDataTextView.setVisibility(appClipsActivity.mBacklinksIncludeDataCheckBox.isChecked() ? 0 : 8);
                         if (list.size() > 1) {
-                            HashMap hashMap = new HashMap();
+                            HashMap map = new HashMap();
                             for (InternalBacklinksData internalBacklinksData2 : list) {
-                                boolean containsKey = hashMap.containsKey(internalBacklinksData2.backlinkDisplayInfo.displayLabel);
+                                boolean zContainsKey = map.containsKey(internalBacklinksData2.backlinkDisplayInfo.displayLabel);
                                 BacklinkDisplayInfo backlinkDisplayInfo = internalBacklinksData2.backlinkDisplayInfo;
-                                if (containsKey) {
-                                    int intValue2 = ((Integer) hashMap.get(backlinkDisplayInfo.displayLabel)).intValue();
-                                    if (intValue2 == 0) {
-                                        hashMap.put(backlinkDisplayInfo.displayLabel, 2);
+                                if (zContainsKey) {
+                                    int iIntValue2 = ((Integer) map.get(backlinkDisplayInfo.displayLabel)).intValue();
+                                    if (iIntValue2 == 0) {
+                                        map.put(backlinkDisplayInfo.displayLabel, 2);
                                     } else {
-                                        hashMap.put(backlinkDisplayInfo.displayLabel, Integer.valueOf(intValue2 + 1));
+                                        map.put(backlinkDisplayInfo.displayLabel, Integer.valueOf(iIntValue2 + 1));
                                     }
                                 } else {
-                                    hashMap.put(backlinkDisplayInfo.displayLabel, 0);
+                                    map.put(backlinkDisplayInfo.displayLabel, 0);
                                 }
                             }
                             for (InternalBacklinksData internalBacklinksData3 : list.reversed()) {
                                 String str = internalBacklinksData3.backlinkDisplayInfo.displayLabel;
-                                Integer num = (Integer) hashMap.get(str);
-                                int intValue3 = num.intValue();
-                                if (intValue3 > 0) {
+                                Integer num = (Integer) map.get(str);
+                                int iIntValue3 = num.intValue();
+                                if (iIntValue3 > 0) {
                                     internalBacklinksData3.backlinkDisplayInfo.displayLabel = appClipsActivity.getString(R.string.backlinks_duplicate_label_format, new Object[]{str, num});
-                                    hashMap.put(str, Integer.valueOf(intValue3 - 1));
+                                    map.put(str, Integer.valueOf(iIntValue3 - 1));
                                 }
                             }
                             TextView textView = appClipsActivity.mBacklinksDataTextView;
@@ -453,7 +453,7 @@ public class AppClipsActivity extends ComponentActivity {
                             listPopupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() { // from class: com.android.systemui.screenshot.appclips.AppClipsActivity$$ExternalSyntheticLambda9
                                 @Override // android.widget.AdapterView.OnItemClickListener
                                 public final void onItemClick(AdapterView adapterView, View view, int i3, long j) {
-                                    AppClipsActivity appClipsActivity2 = AppClipsActivity.this;
+                                    AppClipsActivity appClipsActivity2 = appClipsActivity;
                                     List list2 = list;
                                     ListPopupWindow listPopupWindow2 = listPopupWindow;
                                     appClipsActivity2.mViewModel.mSelectedBacklinksLiveData.setValue((InternalBacklinksData) list2.get(i3));
@@ -462,7 +462,7 @@ public class AppClipsActivity extends ComponentActivity {
                             });
                             ArrayAdapter arrayAdapter = new ArrayAdapter(appClipsActivity, R.layout.app_clips_backlinks_drop_down_entry) { // from class: com.android.systemui.screenshot.appclips.AppClipsActivity.2
                                 @Override // android.widget.ArrayAdapter, android.widget.Adapter
-                                public final View getView(int i3, View view, ViewGroup viewGroup) {
+                                public final View getView(int i3, View view, ViewGroup viewGroup) throws Resources.NotFoundException {
                                     TextView textView2 = (TextView) super.getView(i3, view, viewGroup);
                                     InternalBacklinksData internalBacklinksData4 = (InternalBacklinksData) list.get(i3);
                                     textView2.setText(internalBacklinksData4.backlinkDisplayInfo.displayLabel);
@@ -524,7 +524,7 @@ public class AppClipsActivity extends ComponentActivity {
             }
 
             @Override // androidx.lifecycle.Observer
-            public final void onChanged(Object obj) {
+            public final void onChanged(Object obj) throws Resources.NotFoundException {
                 final Context appClipsActivity = this.f$0;
                 switch (i3) {
                     case 0:
@@ -562,9 +562,9 @@ public class AppClipsActivity extends ComponentActivity {
                         appClipsActivity.mRoot.requestApplyInsets();
                         break;
                     case 2:
-                        int intValue = ((Integer) obj).intValue();
+                        int iIntValue = ((Integer) obj).intValue();
                         PackageManager.ApplicationInfoFlags applicationInfoFlags2 = AppClipsActivity.APPLICATION_INFO_FLAGS;
-                        appClipsActivity.setError(intValue);
+                        appClipsActivity.setError(iIntValue);
                         appClipsActivity.finish();
                         break;
                     case 3:
@@ -572,28 +572,28 @@ public class AppClipsActivity extends ComponentActivity {
                         appClipsActivity.mBacklinksIncludeDataCheckBox.setVisibility(0);
                         appClipsActivity.mBacklinksDataTextView.setVisibility(appClipsActivity.mBacklinksIncludeDataCheckBox.isChecked() ? 0 : 8);
                         if (list.size() > 1) {
-                            HashMap hashMap = new HashMap();
+                            HashMap map = new HashMap();
                             for (InternalBacklinksData internalBacklinksData2 : list) {
-                                boolean containsKey = hashMap.containsKey(internalBacklinksData2.backlinkDisplayInfo.displayLabel);
+                                boolean zContainsKey = map.containsKey(internalBacklinksData2.backlinkDisplayInfo.displayLabel);
                                 BacklinkDisplayInfo backlinkDisplayInfo = internalBacklinksData2.backlinkDisplayInfo;
-                                if (containsKey) {
-                                    int intValue2 = ((Integer) hashMap.get(backlinkDisplayInfo.displayLabel)).intValue();
-                                    if (intValue2 == 0) {
-                                        hashMap.put(backlinkDisplayInfo.displayLabel, 2);
+                                if (zContainsKey) {
+                                    int iIntValue2 = ((Integer) map.get(backlinkDisplayInfo.displayLabel)).intValue();
+                                    if (iIntValue2 == 0) {
+                                        map.put(backlinkDisplayInfo.displayLabel, 2);
                                     } else {
-                                        hashMap.put(backlinkDisplayInfo.displayLabel, Integer.valueOf(intValue2 + 1));
+                                        map.put(backlinkDisplayInfo.displayLabel, Integer.valueOf(iIntValue2 + 1));
                                     }
                                 } else {
-                                    hashMap.put(backlinkDisplayInfo.displayLabel, 0);
+                                    map.put(backlinkDisplayInfo.displayLabel, 0);
                                 }
                             }
                             for (InternalBacklinksData internalBacklinksData3 : list.reversed()) {
                                 String str = internalBacklinksData3.backlinkDisplayInfo.displayLabel;
-                                Integer num = (Integer) hashMap.get(str);
-                                int intValue3 = num.intValue();
-                                if (intValue3 > 0) {
+                                Integer num = (Integer) map.get(str);
+                                int iIntValue3 = num.intValue();
+                                if (iIntValue3 > 0) {
                                     internalBacklinksData3.backlinkDisplayInfo.displayLabel = appClipsActivity.getString(R.string.backlinks_duplicate_label_format, new Object[]{str, num});
-                                    hashMap.put(str, Integer.valueOf(intValue3 - 1));
+                                    map.put(str, Integer.valueOf(iIntValue3 - 1));
                                 }
                             }
                             TextView textView = appClipsActivity.mBacklinksDataTextView;
@@ -604,7 +604,7 @@ public class AppClipsActivity extends ComponentActivity {
                             listPopupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() { // from class: com.android.systemui.screenshot.appclips.AppClipsActivity$$ExternalSyntheticLambda9
                                 @Override // android.widget.AdapterView.OnItemClickListener
                                 public final void onItemClick(AdapterView adapterView, View view, int i32, long j) {
-                                    AppClipsActivity appClipsActivity2 = AppClipsActivity.this;
+                                    AppClipsActivity appClipsActivity2 = appClipsActivity;
                                     List list2 = list;
                                     ListPopupWindow listPopupWindow2 = listPopupWindow;
                                     appClipsActivity2.mViewModel.mSelectedBacklinksLiveData.setValue((InternalBacklinksData) list2.get(i32));
@@ -613,7 +613,7 @@ public class AppClipsActivity extends ComponentActivity {
                             });
                             ArrayAdapter arrayAdapter = new ArrayAdapter(appClipsActivity, R.layout.app_clips_backlinks_drop_down_entry) { // from class: com.android.systemui.screenshot.appclips.AppClipsActivity.2
                                 @Override // android.widget.ArrayAdapter, android.widget.Adapter
-                                public final View getView(int i32, View view, ViewGroup viewGroup) {
+                                public final View getView(int i32, View view, ViewGroup viewGroup) throws Resources.NotFoundException {
                                     TextView textView2 = (TextView) super.getView(i32, view, viewGroup);
                                     InternalBacklinksData internalBacklinksData4 = (InternalBacklinksData) list.get(i32);
                                     textView2.setText(internalBacklinksData4.backlinkDisplayInfo.displayLabel);
@@ -675,7 +675,7 @@ public class AppClipsActivity extends ComponentActivity {
             }
 
             @Override // androidx.lifecycle.Observer
-            public final void onChanged(Object obj) {
+            public final void onChanged(Object obj) throws Resources.NotFoundException {
                 final Context appClipsActivity = this.f$0;
                 switch (i4) {
                     case 0:
@@ -713,9 +713,9 @@ public class AppClipsActivity extends ComponentActivity {
                         appClipsActivity.mRoot.requestApplyInsets();
                         break;
                     case 2:
-                        int intValue = ((Integer) obj).intValue();
+                        int iIntValue = ((Integer) obj).intValue();
                         PackageManager.ApplicationInfoFlags applicationInfoFlags2 = AppClipsActivity.APPLICATION_INFO_FLAGS;
-                        appClipsActivity.setError(intValue);
+                        appClipsActivity.setError(iIntValue);
                         appClipsActivity.finish();
                         break;
                     case 3:
@@ -723,28 +723,28 @@ public class AppClipsActivity extends ComponentActivity {
                         appClipsActivity.mBacklinksIncludeDataCheckBox.setVisibility(0);
                         appClipsActivity.mBacklinksDataTextView.setVisibility(appClipsActivity.mBacklinksIncludeDataCheckBox.isChecked() ? 0 : 8);
                         if (list.size() > 1) {
-                            HashMap hashMap = new HashMap();
+                            HashMap map = new HashMap();
                             for (InternalBacklinksData internalBacklinksData2 : list) {
-                                boolean containsKey = hashMap.containsKey(internalBacklinksData2.backlinkDisplayInfo.displayLabel);
+                                boolean zContainsKey = map.containsKey(internalBacklinksData2.backlinkDisplayInfo.displayLabel);
                                 BacklinkDisplayInfo backlinkDisplayInfo = internalBacklinksData2.backlinkDisplayInfo;
-                                if (containsKey) {
-                                    int intValue2 = ((Integer) hashMap.get(backlinkDisplayInfo.displayLabel)).intValue();
-                                    if (intValue2 == 0) {
-                                        hashMap.put(backlinkDisplayInfo.displayLabel, 2);
+                                if (zContainsKey) {
+                                    int iIntValue2 = ((Integer) map.get(backlinkDisplayInfo.displayLabel)).intValue();
+                                    if (iIntValue2 == 0) {
+                                        map.put(backlinkDisplayInfo.displayLabel, 2);
                                     } else {
-                                        hashMap.put(backlinkDisplayInfo.displayLabel, Integer.valueOf(intValue2 + 1));
+                                        map.put(backlinkDisplayInfo.displayLabel, Integer.valueOf(iIntValue2 + 1));
                                     }
                                 } else {
-                                    hashMap.put(backlinkDisplayInfo.displayLabel, 0);
+                                    map.put(backlinkDisplayInfo.displayLabel, 0);
                                 }
                             }
                             for (InternalBacklinksData internalBacklinksData3 : list.reversed()) {
                                 String str = internalBacklinksData3.backlinkDisplayInfo.displayLabel;
-                                Integer num = (Integer) hashMap.get(str);
-                                int intValue3 = num.intValue();
-                                if (intValue3 > 0) {
+                                Integer num = (Integer) map.get(str);
+                                int iIntValue3 = num.intValue();
+                                if (iIntValue3 > 0) {
                                     internalBacklinksData3.backlinkDisplayInfo.displayLabel = appClipsActivity.getString(R.string.backlinks_duplicate_label_format, new Object[]{str, num});
-                                    hashMap.put(str, Integer.valueOf(intValue3 - 1));
+                                    map.put(str, Integer.valueOf(iIntValue3 - 1));
                                 }
                             }
                             TextView textView = appClipsActivity.mBacklinksDataTextView;
@@ -755,7 +755,7 @@ public class AppClipsActivity extends ComponentActivity {
                             listPopupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() { // from class: com.android.systemui.screenshot.appclips.AppClipsActivity$$ExternalSyntheticLambda9
                                 @Override // android.widget.AdapterView.OnItemClickListener
                                 public final void onItemClick(AdapterView adapterView, View view, int i32, long j) {
-                                    AppClipsActivity appClipsActivity2 = AppClipsActivity.this;
+                                    AppClipsActivity appClipsActivity2 = appClipsActivity;
                                     List list2 = list;
                                     ListPopupWindow listPopupWindow2 = listPopupWindow;
                                     appClipsActivity2.mViewModel.mSelectedBacklinksLiveData.setValue((InternalBacklinksData) list2.get(i32));
@@ -764,7 +764,7 @@ public class AppClipsActivity extends ComponentActivity {
                             });
                             ArrayAdapter arrayAdapter = new ArrayAdapter(appClipsActivity, R.layout.app_clips_backlinks_drop_down_entry) { // from class: com.android.systemui.screenshot.appclips.AppClipsActivity.2
                                 @Override // android.widget.ArrayAdapter, android.widget.Adapter
-                                public final View getView(int i32, View view, ViewGroup viewGroup) {
+                                public final View getView(int i32, View view, ViewGroup viewGroup) throws Resources.NotFoundException {
                                     TextView textView2 = (TextView) super.getView(i32, view, viewGroup);
                                     InternalBacklinksData internalBacklinksData4 = (InternalBacklinksData) list.get(i32);
                                     textView2.setText(internalBacklinksData4.backlinkDisplayInfo.displayLabel);
@@ -826,7 +826,7 @@ public class AppClipsActivity extends ComponentActivity {
             }
 
             @Override // androidx.lifecycle.Observer
-            public final void onChanged(Object obj) {
+            public final void onChanged(Object obj) throws Resources.NotFoundException {
                 final Context appClipsActivity = this.f$0;
                 switch (i5) {
                     case 0:
@@ -864,9 +864,9 @@ public class AppClipsActivity extends ComponentActivity {
                         appClipsActivity.mRoot.requestApplyInsets();
                         break;
                     case 2:
-                        int intValue = ((Integer) obj).intValue();
+                        int iIntValue = ((Integer) obj).intValue();
                         PackageManager.ApplicationInfoFlags applicationInfoFlags2 = AppClipsActivity.APPLICATION_INFO_FLAGS;
-                        appClipsActivity.setError(intValue);
+                        appClipsActivity.setError(iIntValue);
                         appClipsActivity.finish();
                         break;
                     case 3:
@@ -874,28 +874,28 @@ public class AppClipsActivity extends ComponentActivity {
                         appClipsActivity.mBacklinksIncludeDataCheckBox.setVisibility(0);
                         appClipsActivity.mBacklinksDataTextView.setVisibility(appClipsActivity.mBacklinksIncludeDataCheckBox.isChecked() ? 0 : 8);
                         if (list.size() > 1) {
-                            HashMap hashMap = new HashMap();
+                            HashMap map = new HashMap();
                             for (InternalBacklinksData internalBacklinksData2 : list) {
-                                boolean containsKey = hashMap.containsKey(internalBacklinksData2.backlinkDisplayInfo.displayLabel);
+                                boolean zContainsKey = map.containsKey(internalBacklinksData2.backlinkDisplayInfo.displayLabel);
                                 BacklinkDisplayInfo backlinkDisplayInfo = internalBacklinksData2.backlinkDisplayInfo;
-                                if (containsKey) {
-                                    int intValue2 = ((Integer) hashMap.get(backlinkDisplayInfo.displayLabel)).intValue();
-                                    if (intValue2 == 0) {
-                                        hashMap.put(backlinkDisplayInfo.displayLabel, 2);
+                                if (zContainsKey) {
+                                    int iIntValue2 = ((Integer) map.get(backlinkDisplayInfo.displayLabel)).intValue();
+                                    if (iIntValue2 == 0) {
+                                        map.put(backlinkDisplayInfo.displayLabel, 2);
                                     } else {
-                                        hashMap.put(backlinkDisplayInfo.displayLabel, Integer.valueOf(intValue2 + 1));
+                                        map.put(backlinkDisplayInfo.displayLabel, Integer.valueOf(iIntValue2 + 1));
                                     }
                                 } else {
-                                    hashMap.put(backlinkDisplayInfo.displayLabel, 0);
+                                    map.put(backlinkDisplayInfo.displayLabel, 0);
                                 }
                             }
                             for (InternalBacklinksData internalBacklinksData3 : list.reversed()) {
                                 String str = internalBacklinksData3.backlinkDisplayInfo.displayLabel;
-                                Integer num = (Integer) hashMap.get(str);
-                                int intValue3 = num.intValue();
-                                if (intValue3 > 0) {
+                                Integer num = (Integer) map.get(str);
+                                int iIntValue3 = num.intValue();
+                                if (iIntValue3 > 0) {
                                     internalBacklinksData3.backlinkDisplayInfo.displayLabel = appClipsActivity.getString(R.string.backlinks_duplicate_label_format, new Object[]{str, num});
-                                    hashMap.put(str, Integer.valueOf(intValue3 - 1));
+                                    map.put(str, Integer.valueOf(iIntValue3 - 1));
                                 }
                             }
                             TextView textView = appClipsActivity.mBacklinksDataTextView;
@@ -906,7 +906,7 @@ public class AppClipsActivity extends ComponentActivity {
                             listPopupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() { // from class: com.android.systemui.screenshot.appclips.AppClipsActivity$$ExternalSyntheticLambda9
                                 @Override // android.widget.AdapterView.OnItemClickListener
                                 public final void onItemClick(AdapterView adapterView, View view, int i32, long j) {
-                                    AppClipsActivity appClipsActivity2 = AppClipsActivity.this;
+                                    AppClipsActivity appClipsActivity2 = appClipsActivity;
                                     List list2 = list;
                                     ListPopupWindow listPopupWindow2 = listPopupWindow;
                                     appClipsActivity2.mViewModel.mSelectedBacklinksLiveData.setValue((InternalBacklinksData) list2.get(i32));
@@ -915,7 +915,7 @@ public class AppClipsActivity extends ComponentActivity {
                             });
                             ArrayAdapter arrayAdapter = new ArrayAdapter(appClipsActivity, R.layout.app_clips_backlinks_drop_down_entry) { // from class: com.android.systemui.screenshot.appclips.AppClipsActivity.2
                                 @Override // android.widget.ArrayAdapter, android.widget.Adapter
-                                public final View getView(int i32, View view, ViewGroup viewGroup) {
+                                public final View getView(int i32, View view, ViewGroup viewGroup) throws Resources.NotFoundException {
                                     TextView textView2 = (TextView) super.getView(i32, view, viewGroup);
                                     InternalBacklinksData internalBacklinksData4 = (InternalBacklinksData) list.get(i32);
                                     textView2.setText(internalBacklinksData4.backlinkDisplayInfo.displayLabel);
@@ -974,8 +974,8 @@ public class AppClipsActivity extends ComponentActivity {
             appClipsViewModel2.mBgExecutor.execute(new Runnable() { // from class: com.android.systemui.screenshot.appclips.AppClipsViewModel$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    Bitmap bitmap;
-                    AppClipsViewModel appClipsViewModel3 = AppClipsViewModel.this;
+                    Bitmap bitmapWrapHardwareBuffer;
+                    AppClipsViewModel appClipsViewModel3 = appClipsViewModel2;
                     final int i6 = displayId;
                     AppClipsCrossProcessHelper appClipsCrossProcessHelper = appClipsViewModel3.mAppClipsCrossProcessHelper;
                     appClipsCrossProcessHelper.getClass();
@@ -985,28 +985,28 @@ public class AppClipsActivity extends ComponentActivity {
                                 return ((IAppClipsScreenshotHelperService) obj).takeScreenshot(i6);
                             }
                         }).get();
-                        bitmap = Bitmap.wrapHardwareBuffer(screenshotHardwareBufferInternal.mHardwareBuffer, screenshotHardwareBufferInternal.mParcelableColorSpace.getColorSpace());
+                        bitmapWrapHardwareBuffer = Bitmap.wrapHardwareBuffer(screenshotHardwareBufferInternal.mHardwareBuffer, screenshotHardwareBufferInternal.mParcelableColorSpace.getColorSpace());
                         screenshotHardwareBufferInternal.mHardwareBuffer.close();
                     } catch (Exception e2) {
                         Log.e("AppClipsCrossProcessHelper", String.format("Error while capturing a screenshot of displayId %d", Integer.valueOf(i6)), e2);
-                        bitmap = null;
+                        bitmapWrapHardwareBuffer = null;
                     }
-                    appClipsViewModel3.mMainExecutor.execute(new AppClipsViewModel$$ExternalSyntheticLambda2(appClipsViewModel3, bitmap, 1));
+                    appClipsViewModel3.mMainExecutor.execute(new AppClipsViewModel$$ExternalSyntheticLambda2(appClipsViewModel3, bitmapWrapHardwareBuffer, 1));
                 }
             });
-            final Set of = Set.of(Integer.valueOf(getTaskId()), Integer.valueOf(intent.getIntExtra(AppClipsTrampolineActivity.EXTRA_CALLING_PACKAGE_TASK_ID, -1)));
+            final Set setOf = Set.of(Integer.valueOf(getTaskId()), Integer.valueOf(intent.getIntExtra(AppClipsTrampolineActivity.EXTRA_CALLING_PACKAGE_TASK_ID, -1)));
             final AppClipsViewModel appClipsViewModel3 = this.mViewModel;
             appClipsViewModel3.getClass();
             DebugLogger.INSTANCE.getClass();
             boolean z = Build.IS_DEBUGGABLE;
             Reflection.getOrCreateKotlinClass(AppClipsViewModel.class).getSimpleName();
-            final SettableFuture create = SettableFuture.create();
+            final SettableFuture settableFutureCreate = SettableFuture.create();
             appClipsViewModel3.mBgExecutor.execute(new Runnable() { // from class: com.android.systemui.screenshot.appclips.AppClipsViewModel$$ExternalSyntheticLambda6
                 @Override // java.lang.Runnable
                 public final void run() {
-                    AppClipsViewModel appClipsViewModel4 = AppClipsViewModel.this;
+                    AppClipsViewModel appClipsViewModel4 = appClipsViewModel3;
                     int i6 = displayId;
-                    SettableFuture settableFuture = create;
+                    SettableFuture settableFuture = settableFutureCreate;
                     appClipsViewModel4.getClass();
                     try {
                         settableFuture.set(appClipsViewModel4.mAtmService.getTasks(Integer.MAX_VALUE, false, false, i6).stream().map(new AppClipsViewModel$$ExternalSyntheticLambda10()).toList());
@@ -1017,23 +1017,23 @@ public class AppClipsActivity extends ComponentActivity {
                 }
             });
             TimeUnit timeUnit = TimeUnit.SECONDS;
-            ScheduledExecutorService newSingleThreadScheduledExecutor = Executors.newSingleThreadScheduledExecutor();
-            boolean isDone = create.isDone();
-            AbstractFuture.Trusted trusted = create;
-            if (!isDone) {
-                trusted = TimeoutFuture.create(create, newSingleThreadScheduledExecutor);
+            ScheduledExecutorService scheduledExecutorServiceNewSingleThreadScheduledExecutor = Executors.newSingleThreadScheduledExecutor();
+            boolean zIsDone = settableFutureCreate.isDone();
+            AbstractFuture.Trusted trustedCreate = settableFutureCreate;
+            if (!zIsDone) {
+                trustedCreate = TimeoutFuture.create(settableFutureCreate, scheduledExecutorServiceNewSingleThreadScheduledExecutor);
             }
-            AbstractTransformFuture.TransformFuture transform = Futures.transform(trusted, new Function() { // from class: com.android.systemui.screenshot.appclips.AppClipsViewModel$$ExternalSyntheticLambda4
+            AbstractTransformFuture.TransformFuture transformFutureTransform = Futures.transform(trustedCreate, new Function() { // from class: com.android.systemui.screenshot.appclips.AppClipsViewModel$$ExternalSyntheticLambda4
                 @Override // com.google.common.base.Function
                 public final Object apply(Object obj) {
-                    final Set set = of;
-                    final AppClipsViewModel appClipsViewModel4 = AppClipsViewModel.this;
+                    final Set set = setOf;
+                    final AppClipsViewModel appClipsViewModel4 = appClipsViewModel3;
                     appClipsViewModel4.getClass();
                     final int i6 = 0;
                     Stream map = ((List) obj).stream().filter(new Predicate() { // from class: com.android.systemui.screenshot.appclips.AppClipsViewModel$$ExternalSyntheticLambda7
                         @Override // java.util.function.Predicate
                         public final boolean test(Object obj2) {
-                            AppClipsViewModel appClipsViewModel5 = AppClipsViewModel.this;
+                            AppClipsViewModel appClipsViewModel5 = appClipsViewModel4;
                             Set set2 = set;
                             TaskInfo taskInfo = (TaskInfo) obj2;
                             appClipsViewModel5.getClass();
@@ -1064,11 +1064,16 @@ public class AppClipsActivity extends ComponentActivity {
                                     if (internalTaskInfo.userId != UserHandle.myUserId()) {
                                         return Futures.immediateFuture(new InternalBacklinksData.CrossProfileError((Drawable) internalTaskInfo.topActivityAppIcon$delegate.getValue(), (String) internalTaskInfo.topActivityAppName$delegate.getValue()));
                                     }
-                                    final SettableFuture create2 = SettableFuture.create();
+                                    final SettableFuture settableFutureCreate2 = SettableFuture.create();
                                     AssistContentRequester.Callback callback = new AssistContentRequester.Callback() { // from class: com.android.systemui.screenshot.appclips.AppClipsViewModel$$ExternalSyntheticLambda11
+                                        /* JADX WARN: Removed duplicated region for block: B:10:0x0072  */
+                                        /* JADX WARN: Removed duplicated region for block: B:15:0x009e  */
                                         @Override // com.android.systemui.screenshot.AssistContentRequester.Callback
+                                        /*
+                                            Code decompiled incorrectly, please refer to instructions dump.
+                                        */
                                         public final void onAssistContentAvailable(AssistContent assistContent) {
-                                            AppClipsViewModel appClipsViewModel6 = AppClipsViewModel.this;
+                                            AppClipsViewModel appClipsViewModel6 = appClipsViewModel5;
                                             appClipsViewModel6.getClass();
                                             DebugLogger.INSTANCE.getClass();
                                             boolean z3 = Build.IS_DEBUGGABLE;
@@ -1084,26 +1089,26 @@ public class AppClipsActivity extends ComponentActivity {
                                                     if (infoThatResolvesIntent != null) {
                                                         Reflection.getOrCreateKotlinClass(AppClipsViewModel.class).getSimpleName();
                                                         backlinksData = new InternalBacklinksData.BacklinksData(ClipData.newRawUri(infoThatResolvesIntent.displayLabel, webUri), infoThatResolvesIntent.appIcon);
-                                                    }
-                                                }
-                                                if (assistContent.isAppProvidedIntent()) {
-                                                    Reflection.getOrCreateKotlinClass(AppClipsViewModel.class).getSimpleName();
-                                                    Intent intent2 = assistContent.getIntent();
-                                                    BacklinkDisplayInfo infoThatResolvesIntent2 = appClipsViewModel6.getInfoThatResolvesIntent(intent2, internalTaskInfo2);
-                                                    if (infoThatResolvesIntent2 != null) {
+                                                    } else if (assistContent.isAppProvidedIntent()) {
                                                         Reflection.getOrCreateKotlinClass(AppClipsViewModel.class).getSimpleName();
-                                                        backlinksData = new InternalBacklinksData.BacklinksData(ClipData.newIntent(infoThatResolvesIntent2.displayLabel, intent2), infoThatResolvesIntent2.appIcon);
+                                                        Intent intent2 = assistContent.getIntent();
+                                                        BacklinkDisplayInfo infoThatResolvesIntent2 = appClipsViewModel6.getInfoThatResolvesIntent(intent2, internalTaskInfo2);
+                                                        if (infoThatResolvesIntent2 != null) {
+                                                            Reflection.getOrCreateKotlinClass(AppClipsViewModel.class).getSimpleName();
+                                                            backlinksData = new InternalBacklinksData.BacklinksData(ClipData.newIntent(infoThatResolvesIntent2.displayLabel, intent2), infoThatResolvesIntent2.appIcon);
+                                                        } else {
+                                                            Reflection.getOrCreateKotlinClass(AppClipsViewModel.class).getSimpleName();
+                                                        }
                                                     }
                                                 }
-                                                Reflection.getOrCreateKotlinClass(AppClipsViewModel.class).getSimpleName();
                                             }
-                                            create2.set(backlinksData);
+                                            settableFutureCreate2.set(backlinksData);
                                         }
                                     };
                                     AssistContentRequester assistContentRequester = appClipsViewModel5.mAssistContentRequester;
                                     assistContentRequester.mSystemInteractionExecutor.execute(new AssistContentRequester$$ExternalSyntheticLambda0(assistContentRequester, callback, internalTaskInfo.taskId));
                                     TimeUnit timeUnit2 = TimeUnit.SECONDS;
-                                    return create2.isDone() ? create2 : TimeoutFuture.create(create2, Executors.newSingleThreadScheduledExecutor());
+                                    return settableFutureCreate2.isDone() ? settableFutureCreate2 : TimeoutFuture.create(settableFutureCreate2, Executors.newSingleThreadScheduledExecutor());
                             }
                         }
                     });
@@ -1130,11 +1135,16 @@ public class AppClipsActivity extends ComponentActivity {
                                     if (internalTaskInfo.userId != UserHandle.myUserId()) {
                                         return Futures.immediateFuture(new InternalBacklinksData.CrossProfileError((Drawable) internalTaskInfo.topActivityAppIcon$delegate.getValue(), (String) internalTaskInfo.topActivityAppName$delegate.getValue()));
                                     }
-                                    final SettableFuture create2 = SettableFuture.create();
+                                    final SettableFuture settableFutureCreate2 = SettableFuture.create();
                                     AssistContentRequester.Callback callback = new AssistContentRequester.Callback() { // from class: com.android.systemui.screenshot.appclips.AppClipsViewModel$$ExternalSyntheticLambda11
+                                        /* JADX WARN: Removed duplicated region for block: B:10:0x0072  */
+                                        /* JADX WARN: Removed duplicated region for block: B:15:0x009e  */
                                         @Override // com.android.systemui.screenshot.AssistContentRequester.Callback
+                                        /*
+                                            Code decompiled incorrectly, please refer to instructions dump.
+                                        */
                                         public final void onAssistContentAvailable(AssistContent assistContent) {
-                                            AppClipsViewModel appClipsViewModel6 = AppClipsViewModel.this;
+                                            AppClipsViewModel appClipsViewModel6 = appClipsViewModel5;
                                             appClipsViewModel6.getClass();
                                             DebugLogger.INSTANCE.getClass();
                                             boolean z3 = Build.IS_DEBUGGABLE;
@@ -1150,26 +1160,26 @@ public class AppClipsActivity extends ComponentActivity {
                                                     if (infoThatResolvesIntent != null) {
                                                         Reflection.getOrCreateKotlinClass(AppClipsViewModel.class).getSimpleName();
                                                         backlinksData = new InternalBacklinksData.BacklinksData(ClipData.newRawUri(infoThatResolvesIntent.displayLabel, webUri), infoThatResolvesIntent.appIcon);
-                                                    }
-                                                }
-                                                if (assistContent.isAppProvidedIntent()) {
-                                                    Reflection.getOrCreateKotlinClass(AppClipsViewModel.class).getSimpleName();
-                                                    Intent intent2 = assistContent.getIntent();
-                                                    BacklinkDisplayInfo infoThatResolvesIntent2 = appClipsViewModel6.getInfoThatResolvesIntent(intent2, internalTaskInfo2);
-                                                    if (infoThatResolvesIntent2 != null) {
+                                                    } else if (assistContent.isAppProvidedIntent()) {
                                                         Reflection.getOrCreateKotlinClass(AppClipsViewModel.class).getSimpleName();
-                                                        backlinksData = new InternalBacklinksData.BacklinksData(ClipData.newIntent(infoThatResolvesIntent2.displayLabel, intent2), infoThatResolvesIntent2.appIcon);
+                                                        Intent intent2 = assistContent.getIntent();
+                                                        BacklinkDisplayInfo infoThatResolvesIntent2 = appClipsViewModel6.getInfoThatResolvesIntent(intent2, internalTaskInfo2);
+                                                        if (infoThatResolvesIntent2 != null) {
+                                                            Reflection.getOrCreateKotlinClass(AppClipsViewModel.class).getSimpleName();
+                                                            backlinksData = new InternalBacklinksData.BacklinksData(ClipData.newIntent(infoThatResolvesIntent2.displayLabel, intent2), infoThatResolvesIntent2.appIcon);
+                                                        } else {
+                                                            Reflection.getOrCreateKotlinClass(AppClipsViewModel.class).getSimpleName();
+                                                        }
                                                     }
                                                 }
-                                                Reflection.getOrCreateKotlinClass(AppClipsViewModel.class).getSimpleName();
                                             }
-                                            create2.set(backlinksData);
+                                            settableFutureCreate2.set(backlinksData);
                                         }
                                     };
                                     AssistContentRequester assistContentRequester = appClipsViewModel5.mAssistContentRequester;
                                     assistContentRequester.mSystemInteractionExecutor.execute(new AssistContentRequester$$ExternalSyntheticLambda0(assistContentRequester, callback, internalTaskInfo.taskId));
                                     TimeUnit timeUnit2 = TimeUnit.SECONDS;
-                                    return create2.isDone() ? create2 : TimeoutFuture.create(create2, Executors.newSingleThreadScheduledExecutor());
+                                    return settableFutureCreate2.isDone() ? settableFutureCreate2 : TimeoutFuture.create(settableFutureCreate2, Executors.newSingleThreadScheduledExecutor());
                             }
                         }
                     }).toList();
@@ -1179,8 +1189,8 @@ public class AppClipsActivity extends ComponentActivity {
             Executor executor = appClipsViewModel3.mBgExecutor;
             int i6 = AbstractTransformFuture.$r8$clinit;
             executor.getClass();
-            AbstractTransformFuture.AsyncTransformFuture asyncTransformFuture = new AbstractTransformFuture.AsyncTransformFuture(transform, appClipsViewModel$$ExternalSyntheticLambda5);
-            transform.addListener(asyncTransformFuture, MoreExecutors.rejectionPropagatingExecutor(executor, asyncTransformFuture));
+            AbstractTransformFuture.AsyncTransformFuture asyncTransformFuture = new AbstractTransformFuture.AsyncTransformFuture(transformFutureTransform, appClipsViewModel$$ExternalSyntheticLambda5);
+            transformFutureTransform.addListener(asyncTransformFuture, MoreExecutors.rejectionPropagatingExecutor(executor, asyncTransformFuture));
             asyncTransformFuture.addListener(new Futures.CallbackListener(asyncTransformFuture, new FutureCallback() { // from class: com.android.systemui.screenshot.appclips.AppClipsViewModel.1
                 public AnonymousClass1() {
                 }
@@ -1236,19 +1246,19 @@ public class AppClipsActivity extends ComponentActivity {
             return;
         }
         Rect bounds = drawable.getBounds();
-        float width = bounds.width() / bounds.height();
-        int width2 = (this.mPreview.getWidth() - this.mPreview.getPaddingLeft()) - this.mPreview.getPaddingRight();
+        float fWidth = bounds.width() / bounds.height();
+        int width = (this.mPreview.getWidth() - this.mPreview.getPaddingLeft()) - this.mPreview.getPaddingRight();
         int height = (this.mPreview.getHeight() - this.mPreview.getPaddingTop()) - this.mPreview.getPaddingBottom();
         float f = height;
-        float f2 = width2 / f;
-        if (width > f2) {
-            int i = (height - ((int) ((f * f2) / width))) / 2;
+        float f2 = width / f;
+        if (fWidth > f2) {
+            int i = (height - ((int) ((f * f2) / fWidth))) / 2;
             CropView cropView = this.mCropView;
             cropView.mExtraTopPadding = i;
             cropView.mExtraBottomPadding = i;
             cropView.invalidate();
             CropView cropView2 = this.mCropView;
-            cropView2.mImageWidth = width2;
+            cropView2.mImageWidth = width;
             cropView2.invalidate();
             return;
         }
@@ -1259,7 +1269,7 @@ public class AppClipsActivity extends ComponentActivity {
         cropView3.mExtraBottomPadding = paddingBottom;
         cropView3.invalidate();
         CropView cropView4 = this.mCropView;
-        cropView4.mImageWidth = (int) (f * width);
+        cropView4.mImageWidth = (int) (f * fWidth);
         cropView4.invalidate();
     }
 }

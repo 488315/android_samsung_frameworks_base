@@ -35,9 +35,9 @@ public final class DisplayLuts {
                 if (fArr.length % 3 != 0) {
                     throw new IllegalArgumentException("The lut buffer of 3dlut should have 3 channels!");
                 }
-                double cbrt = Math.cbrt(r1 / 3);
-                int i3 = (int) cbrt;
-                if (cbrt == i3) {
+                double dCbrt = Math.cbrt(r1 / 3);
+                int i3 = (int) dCbrt;
+                if (dCbrt == i3) {
                     this.mSize = i3;
                 } else {
                     throw new IllegalArgumentException("Cannot get the cube root of the 3d lut buffer!");

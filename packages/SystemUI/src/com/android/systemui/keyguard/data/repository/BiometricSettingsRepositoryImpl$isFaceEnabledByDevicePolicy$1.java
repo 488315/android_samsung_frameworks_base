@@ -8,7 +8,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class BiometricSettingsRepositoryImpl$isFaceEnabledByDevicePolicy$1 extends SuspendLambda implements Function3 {
     final /* synthetic */ DevicePolicyManager $devicePolicyManager;
@@ -23,9 +22,9 @@ final class BiometricSettingsRepositoryImpl$isFaceEnabledByDevicePolicy$1 extend
 
     @Override // kotlin.jvm.functions.Function3
     public final Object invoke(Object obj, Object obj2, Object obj3) {
-        int intValue = ((Number) obj).intValue();
+        int iIntValue = ((Number) obj).intValue();
         BiometricSettingsRepositoryImpl$isFaceEnabledByDevicePolicy$1 biometricSettingsRepositoryImpl$isFaceEnabledByDevicePolicy$1 = new BiometricSettingsRepositoryImpl$isFaceEnabledByDevicePolicy$1(this.$devicePolicyManager, (Continuation) obj3);
-        biometricSettingsRepositoryImpl$isFaceEnabledByDevicePolicy$1.I$0 = intValue;
+        biometricSettingsRepositoryImpl$isFaceEnabledByDevicePolicy$1.I$0 = iIntValue;
         return biometricSettingsRepositoryImpl$isFaceEnabledByDevicePolicy$1.invokeSuspend(Unit.INSTANCE);
     }
 

@@ -39,10 +39,10 @@ public class PlainDSAEncoding implements DSAEncoding {
 
     private void encodeValue(BigInteger bigInteger, BigInteger bigInteger2, byte[] bArr, int i, int i2) {
         byte[] byteArray = checkValue(bigInteger, bigInteger2).toByteArray();
-        int max = Math.max(0, byteArray.length - i2);
-        int length = byteArray.length - max;
+        int iMax = Math.max(0, byteArray.length - i2);
+        int length = byteArray.length - iMax;
         int i3 = (i2 - length) + i;
         Arrays.fill(bArr, i, i3, (byte) 0);
-        System.arraycopy(byteArray, max, bArr, i3, length);
+        System.arraycopy(byteArray, iMax, bArr, i3, length);
     }
 }

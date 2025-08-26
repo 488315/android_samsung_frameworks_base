@@ -10,7 +10,6 @@ import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class ComposeStackTraceBuilder {
     public final List trace = new ArrayList();
@@ -23,7 +22,7 @@ public abstract class ComposeStackTraceBuilder {
         int i2;
         boolean z;
         String str3;
-        int[] iArr;
+        int[] intArray;
         String str4;
         String str5;
         int i3 = 0;
@@ -40,9 +39,9 @@ public abstract class ComposeStackTraceBuilder {
                     while (str6.charAt(i5) != ')') {
                         i5++;
                     }
-                    String substring = str6.substring(i4, i5);
+                    String strSubstring = str6.substring(i4, i5);
                     int i6 = i5 + 1;
-                    str5 = substring;
+                    str5 = strSubstring;
                     i2 = i6;
                 } else {
                     str5 = "<lambda>";
@@ -65,33 +64,33 @@ public abstract class ComposeStackTraceBuilder {
                 i7++;
             }
             if (i2 < i7) {
-                List<String> split$default = StringsKt__StringsKt.split$default(str6.substring(i2, i7), new char[]{','}, 6);
-                ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(split$default, 10));
-                for (String str7 : split$default) {
-                    int indexOf$default = StringsKt__StringsKt.indexOf$default(str7, '@', 0, 6);
-                    if (indexOf$default != -1) {
-                        str7 = str7.substring(0, indexOf$default);
+                List<String> listSplit$default = StringsKt__StringsKt.split$default(str6.substring(i2, i7), new char[]{','}, 6);
+                ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(listSplit$default, 10));
+                for (String strSubstring2 : listSplit$default) {
+                    int iIndexOf$default = StringsKt__StringsKt.indexOf$default(strSubstring2, '@', 0, 6);
+                    if (iIndexOf$default != -1) {
+                        strSubstring2 = strSubstring2.substring(0, iIndexOf$default);
                     }
-                    arrayList.add(Integer.valueOf(Integer.parseInt(StringsKt__StringsKt.substringAfter$default(str7, '*')) + 1));
+                    arrayList.add(Integer.valueOf(Integer.parseInt(StringsKt__StringsKt.substringAfter$default(strSubstring2, '*')) + 1));
                 }
-                iArr = CollectionsKt___CollectionsKt.toIntArray(arrayList);
+                intArray = CollectionsKt___CollectionsKt.toIntArray(arrayList);
             } else {
-                iArr = ComposeStackTraceBuilderKt.EmptyIntArray;
+                intArray = ComposeStackTraceBuilderKt.EmptyIntArray;
             }
-            int[] iArr2 = iArr;
+            int[] iArr = intArray;
             if (i7 < str6.length()) {
                 int i8 = i7 + 1;
                 int i9 = i8;
                 while (str6.charAt(i9) != '#') {
                     i9++;
                 }
-                String substring2 = str6.substring(i8, i9);
+                String strSubstring3 = str6.substring(i8, i9);
                 i7 = i9;
-                str4 = substring2;
+                str4 = strSubstring3;
             } else {
                 str4 = null;
             }
-            parsedSourceInformation = new ParsedSourceInformation(z, str3, str4, i7 < str6.length() ? str6.substring(i7 + 1) : null, iArr2, str6);
+            parsedSourceInformation = new ParsedSourceInformation(z, str3, str4, i7 < str6.length() ? str6.substring(i7 + 1) : null, iArr, str6);
         }
         if (parsedSourceInformation != null) {
             if (obj == null) {
@@ -106,19 +105,19 @@ public abstract class ComposeStackTraceBuilder {
                         if (Intrinsics.areEqual(obj2, obj)) {
                             break;
                         }
-                        GroupSourceInformation sourceInformationOf = sourceInformationOf(obj2);
-                        if (sourceInformationOf != null && (((i = sourceInformationOf.key) == -127 || (i == 0 && (obj2 instanceof Anchor) && groupKeyOf((Anchor) obj2) == -127)) && sourceInformationOf.sourceInformation == null)) {
-                            ArrayList arrayList3 = sourceInformationOf.groups;
+                        GroupSourceInformation groupSourceInformationSourceInformationOf = sourceInformationOf(obj2);
+                        if (groupSourceInformationSourceInformationOf != null && (((i = groupSourceInformationSourceInformationOf.key) == -127 || (i == 0 && (obj2 instanceof Anchor) && groupKeyOf((Anchor) obj2) == -127)) && groupSourceInformationSourceInformationOf.sourceInformation == null)) {
+                            ArrayList arrayList3 = groupSourceInformationSourceInformationOf.groups;
                             if (arrayList3 != null) {
                                 int size2 = arrayList3.size();
                                 for (int i12 = 0; i12 < size2; i12++) {
-                                    GroupSourceInformation sourceInformationOf2 = sourceInformationOf(arrayList3.get(i12));
-                                    if (sourceInformationOf2 != null && (str2 = sourceInformationOf2.sourceInformation) != null && str2.startsWith(ImsProfile.TIMER_NAME_C)) {
+                                    GroupSourceInformation groupSourceInformationSourceInformationOf2 = sourceInformationOf(arrayList3.get(i12));
+                                    if (groupSourceInformationSourceInformationOf2 != null && (str2 = groupSourceInformationSourceInformationOf2.sourceInformation) != null && str2.startsWith(ImsProfile.TIMER_NAME_C)) {
                                         i10++;
                                     }
                                 }
                             }
-                        } else if (sourceInformationOf != null && (str = sourceInformationOf.sourceInformation) != null && str.startsWith(ImsProfile.TIMER_NAME_C)) {
+                        } else if (groupSourceInformationSourceInformationOf != null && (str = groupSourceInformationSourceInformationOf.sourceInformation) != null && str.startsWith(ImsProfile.TIMER_NAME_C)) {
                             i10++;
                         }
                     }

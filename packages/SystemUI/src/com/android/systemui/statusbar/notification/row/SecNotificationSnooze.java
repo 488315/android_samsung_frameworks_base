@@ -39,7 +39,6 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 import noticolorpicker.NotificationColorPicker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SecNotificationSnooze extends LinearLayout implements NotificationGuts.GutsContent, View.OnClickListener, GutContentInitializer {
     public TextView mCancel;
@@ -83,7 +82,7 @@ public class SecNotificationSnooze extends LinearLayout implements NotificationG
     }
 
     @Override // com.android.systemui.statusbar.notification.row.GutContentInitializer
-    public final boolean initializeGutContentView(final ExpandableNotificationRow expandableNotificationRow) {
+    public final boolean initializeGutContentView(final ExpandableNotificationRow expandableNotificationRow) throws PackageManager.NameNotFoundException {
         Drawable defaultActivityIcon;
         NotificationGuts notificationGuts = expandableNotificationRow.mGuts;
         final AtomicReference atomicReference = new AtomicReference();
@@ -95,11 +94,11 @@ public class SecNotificationSnooze extends LinearLayout implements NotificationG
         this.mSbn = statusBarNotification;
         if (statusBarNotification != null) {
             PackageManager packageManagerForUser = CentralSurfaces.getPackageManagerForUser(statusBarNotification.getUser().getIdentifier(), this.mContext);
-            String str = "";
+            String strValueOf = "";
             try {
                 ApplicationInfo applicationInfo = packageManagerForUser.getApplicationInfo(this.mSbn.getPackageName(), 795136);
                 if (applicationInfo != null) {
-                    str = String.valueOf(packageManagerForUser.getApplicationLabel(applicationInfo));
+                    strValueOf = String.valueOf(packageManagerForUser.getApplicationLabel(applicationInfo));
                     defaultActivityIcon = packageManagerForUser.semGetApplicationIconForIconTray(applicationInfo, 1);
                 } else {
                     defaultActivityIcon = null;
@@ -108,7 +107,7 @@ public class SecNotificationSnooze extends LinearLayout implements NotificationG
                 defaultActivityIcon = packageManagerForUser.getDefaultActivityIcon();
             }
             findViewById(R.id.snooze_header_icon).setImageDrawable(defaultActivityIcon);
-            ((TextView) findViewById(R.id.snooze_header_title)).setText(str);
+            ((TextView) findViewById(R.id.snooze_header_title)).setText(strValueOf);
         }
         List snoozeCriteria = expandableNotificationRow.mEntry.mRanking.getSnoozeCriteria();
         NotificationColorPicker notificationColorPicker = (NotificationColorPicker) Dependency.sDependency.getDependencyInner(NotificationColorPicker.class);
@@ -143,10 +142,10 @@ public class SecNotificationSnooze extends LinearLayout implements NotificationG
                 textView3.setTextColor(gutsTextColor);
                 ViewGroup viewGroup = (ViewGroup) this.mCancel.getParent();
                 if (viewGroup != null && (viewGroup instanceof LinearLayout)) {
-                    Drawable mutate = getContext().getDrawable(R.drawable.notification_guts_button_divider).mutate();
-                    mutate.setTint(ColorUtils.setAlphaComponent(gutsTextColor, 76));
-                    mutate.setTintMode(PorterDuff.Mode.SRC);
-                    ((LinearLayout) viewGroup).setDividerDrawable(mutate);
+                    Drawable drawableMutate = getContext().getDrawable(R.drawable.notification_guts_button_divider).mutate();
+                    drawableMutate.setTint(ColorUtils.setAlphaComponent(gutsTextColor, 76));
+                    drawableMutate.setTintMode(PorterDuff.Mode.SRC);
+                    ((LinearLayout) viewGroup).setDividerDrawable(drawableMutate);
                 }
             }
             TextView textView4 = this.mDone;
@@ -158,8 +157,8 @@ public class SecNotificationSnooze extends LinearLayout implements NotificationG
             SnoozeOptionManager snoozeOptionManager2 = this.mSnoozeOptionManager;
             ((ArrayList) snoozeOptionManager2.mSnoozeOptions).clear();
             snoozeOptionManager2.mSnoozeOptions = snoozeOptionManager2.getDefaultSnoozeOptions();
-            int min = Math.min(1, snoozeCriteria.size());
-            for (int i2 = 0; i2 < min; i2++) {
+            int iMin = Math.min(1, snoozeCriteria.size());
+            for (int i2 = 0; i2 < iMin; i2++) {
                 SnoozeCriterion snoozeCriterion = (SnoozeCriterion) snoozeCriteria.get(i2);
                 ((ArrayList) snoozeOptionManager2.mSnoozeOptions).add(new SnoozeOptionManager.NotificationSnoozeOption(snoozeOptionManager2, snoozeCriterion, 0, snoozeCriterion.getExplanation(), snoozeCriterion.getConfirmation(), new AccessibilityNodeInfo.AccessibilityAction(R.id.action_snooze_assistant_suggestion_1, snoozeCriterion.getExplanation())));
             }

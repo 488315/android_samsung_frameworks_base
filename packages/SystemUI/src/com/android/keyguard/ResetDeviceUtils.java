@@ -14,7 +14,6 @@ import com.android.systemui.R;
 import com.android.systemui.keyguard.SecurityLog;
 import com.samsung.android.knox.EnterpriseDeviceManager;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ResetDeviceUtils {
     public final Context mContext;
@@ -58,9 +57,9 @@ public class ResetDeviceUtils {
         }
         EnterpriseDeviceManager enterpriseDeviceManager = EnterpriseDeviceManager.getInstance(this.mContext);
         if (enterpriseDeviceManager != null) {
-            boolean isFactoryResetAllowed = enterpriseDeviceManager.getRestrictionPolicy().isFactoryResetAllowed();
-            SecurityLog.d("ResetDeviceUtils", "isFactoryResetAllowed = " + isFactoryResetAllowed);
-            if (!isFactoryResetAllowed) {
+            boolean zIsFactoryResetAllowed = enterpriseDeviceManager.getRestrictionPolicy().isFactoryResetAllowed();
+            SecurityLog.d("ResetDeviceUtils", "isFactoryResetAllowed = " + zIsFactoryResetAllowed);
+            if (!zIsFactoryResetAllowed) {
                 SecurityLog.d("ResetDeviceUtils", "Factory Reset is not allowed");
                 return;
             }
@@ -68,8 +67,8 @@ public class ResetDeviceUtils {
                 SecurityLog.d("ResetDeviceUtils", "Factory Reset is not allowed DISALLOW_FACTORY_RESET");
                 return;
             }
-            boolean isExternalStorageForFailedPasswordsWipeExcluded = enterpriseDeviceManager.getPasswordPolicy().isExternalStorageForFailedPasswordsWipeExcluded();
-            SecurityLog.d("ResetDeviceUtils", "wipeExcludeExternalStorage = " + isExternalStorageForFailedPasswordsWipeExcluded);
+            boolean zIsExternalStorageForFailedPasswordsWipeExcluded = enterpriseDeviceManager.getPasswordPolicy().isExternalStorageForFailedPasswordsWipeExcluded();
+            SecurityLog.d("ResetDeviceUtils", "wipeExcludeExternalStorage = " + zIsExternalStorageForFailedPasswordsWipeExcluded);
             Log.d("ResetDeviceUtils", "findSDCard ()");
             if (this.mStorageManager == null) {
                 this.mStorageManager = (StorageManager) this.mContext.getSystemService("storage");
@@ -85,9 +84,12 @@ public class ResetDeviceUtils {
                         break;
                     }
                 }
+                Log.d("ResetDeviceUtils", "findSDCard ( null )");
+                storageVolume = null;
+            } else {
+                Log.d("ResetDeviceUtils", "findSDCard ( null )");
+                storageVolume = null;
             }
-            Log.d("ResetDeviceUtils", "findSDCard ( null )");
-            storageVolume = null;
             if (this.mProgressDialog == null) {
                 ProgressDialog progressDialog = new ProgressDialog(this.mContext, 5);
                 this.mProgressDialog = progressDialog;
@@ -97,7 +99,7 @@ public class ResetDeviceUtils {
                 this.mProgressDialog.getWindow().setType(2009);
             }
             this.mProgressDialog.show();
-            if (storageVolume == null || isExternalStorageForFailedPasswordsWipeExcluded) {
+            if (storageVolume == null || zIsExternalStorageForFailedPasswordsWipeExcluded) {
                 SecurityLog.d("ResetDeviceUtils", "wipeOut ( send ACTION_FACTORY_RESET )");
                 intent = new Intent("android.intent.action.FACTORY_RESET");
                 intent.addFlags(268435456);

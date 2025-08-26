@@ -24,40 +24,37 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.StateFlowImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class KeyguardSecBottomAreaView$bindToViews$1 extends SuspendLambda implements Function3 {
     private /* synthetic */ Object L$0;
     int label;
     final /* synthetic */ KeyguardSecBottomAreaView this$0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaView$bindToViews$1$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         private /* synthetic */ Object L$0;
         int label;
         final /* synthetic */ KeyguardSecBottomAreaView this$0;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaView$bindToViews$1$1$1, reason: invalid class name and collision with other inner class name */
-        final class C03311 extends SuspendLambda implements Function2 {
+        final class C05281 extends SuspendLambda implements Function2 {
             int label;
             final /* synthetic */ KeyguardSecBottomAreaView this$0;
 
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-            public C03311(KeyguardSecBottomAreaView keyguardSecBottomAreaView, Continuation continuation) {
+            public C05281(KeyguardSecBottomAreaView keyguardSecBottomAreaView, Continuation continuation) {
                 super(2, continuation);
                 this.this$0 = keyguardSecBottomAreaView;
             }
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
             public final Continuation create(Object obj, Continuation continuation) {
-                return new C03311(this.this$0, continuation);
+                return new C05281(this.this$0, continuation);
             }
 
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
-                return ((C03311) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                return ((C05281) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
             }
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
@@ -72,7 +69,7 @@ final class KeyguardSecBottomAreaView$bindToViews$1 extends SuspendLambda implem
                         @Override // kotlinx.coroutines.flow.FlowCollector
                         public final Object emit(Object obj2, Continuation continuation) {
                             KeyguardSecBottomAreaView.ConfigurationBasedDimensions configurationBasedDimensions = (KeyguardSecBottomAreaView.ConfigurationBasedDimensions) obj2;
-                            KeyguardSecBottomAreaView keyguardSecBottomAreaView2 = KeyguardSecBottomAreaView.this;
+                            KeyguardSecBottomAreaView keyguardSecBottomAreaView2 = keyguardSecBottomAreaView;
                             KeyguardSecAffordanceView leftView = keyguardSecBottomAreaView2.getLeftView();
                             ViewGroup.LayoutParams layoutParams = leftView.getLayoutParams();
                             if (layoutParams == null) {
@@ -126,9 +123,9 @@ final class KeyguardSecBottomAreaView$bindToViews$1 extends SuspendLambda implem
                             int marginStart = layoutParams8.getMarginStart();
                             int marginEnd = layoutParams8.getMarginEnd();
                             int i2 = layoutParams8.bottomMargin;
-                            StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(marginStart, marginEnd, "mIndicationArea margin start : ", ", end : ", ", bottom : ");
-                            m.append(i2);
-                            Log.d("KeyguardSecBottomAreaView", m.toString());
+                            StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(marginStart, marginEnd, "mIndicationArea margin start : ", ", end : ", ", bottom : ");
+                            sbM.append(i2);
+                            Log.d("KeyguardSecBottomAreaView", sbM.toString());
                             viewGroup.setLayoutParams(layoutParams8);
                             KeyguardIndicationTextView keyguardIndicationTextView = (KeyguardIndicationTextView) keyguardSecBottomAreaView2.upperFPIndication$delegate.getValue();
                             ViewGroup.LayoutParams layoutParams9 = keyguardIndicationTextView.getLayoutParams();
@@ -190,7 +187,7 @@ final class KeyguardSecBottomAreaView$bindToViews$1 extends SuspendLambda implem
                 throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
             }
             ResultKt.throwOnFailure(obj);
-            BuildersKt.launch$default((CoroutineScope) this.L$0, null, null, new C03311(this.this$0, null), 3);
+            BuildersKt.launch$default((CoroutineScope) this.L$0, null, null, new C05281(this.this$0, null), 3);
             return Unit.INSTANCE;
         }
     }

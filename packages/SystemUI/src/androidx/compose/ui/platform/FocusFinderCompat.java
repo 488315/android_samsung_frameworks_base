@@ -21,7 +21,6 @@ import java.util.Comparator;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class FocusFinderCompat {
     public static final Companion Companion = new Companion(null);
@@ -38,7 +37,6 @@ public final class FocusFinderCompat {
     });
     public final ArrayList tmpList = new ArrayList();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -48,7 +46,6 @@ public final class FocusFinderCompat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class UserSpecifiedFocusComparator implements Comparator<View> {
         public final NextFocusGetter mNextFocusGetter;
         public View root;
@@ -57,7 +54,6 @@ public final class FocusFinderCompat {
         public final MutableScatterMap headsOfChains = ScatterMapKt.mutableScatterMapOf();
         public final MutableObjectIntMap originalOrdinal = ObjectIntMapKt.mutableObjectIntMapOf();
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public interface NextFocusGetter {
         }
 
@@ -112,10 +108,10 @@ public final class FocusFinderCompat {
                     ((FocusFinderCompat$$ExternalSyntheticLambda0) this.mNextFocusGetter).getClass();
                     Companion companion = FocusFinderCompat.Companion;
                     int nextFocusForwardId = view2.getNextFocusForwardId();
-                    View access$findUserSetNextFocus = (nextFocusForwardId == 0 || nextFocusForwardId == -1) ? null : FocusFinderCompat_androidKt.access$findUserSetNextFocus(view2, view, 2);
-                    if (access$findUserSetNextFocus != null && this.originalOrdinal.findKeyIndex(access$findUserSetNextFocus) >= 0) {
-                        this.nextFoci.set(view2, access$findUserSetNextFocus);
-                        this.isConnectedTo.add(access$findUserSetNextFocus);
+                    View viewAccess$findUserSetNextFocus = (nextFocusForwardId == 0 || nextFocusForwardId == -1) ? null : FocusFinderCompat_androidKt.access$findUserSetNextFocus(view2, view, 2);
+                    if (viewAccess$findUserSetNextFocus != null && this.originalOrdinal.findKeyIndex(viewAccess$findUserSetNextFocus) >= 0) {
+                        this.nextFoci.set(view2, viewAccess$findUserSetNextFocus);
+                        this.isConnectedTo.add(viewAccess$findUserSetNextFocus);
                     }
                     if (i2 < 0) {
                         break;
@@ -161,11 +157,12 @@ public final class FocusFinderCompat {
         rect.set(width, height, width, height);
     }
 
-    /* JADX WARN: Multi-variable type inference failed */
     public final View findNextFocus(int i, View view, ViewGroup viewGroup) {
         ViewGroup viewGroup2;
-        View view2 = null;
-        if (view != null && view != viewGroup) {
+        View viewFindNextFocus = null;
+        if (view == null || view == viewGroup) {
+            viewGroup2 = viewGroup;
+        } else {
             ViewParent parent = view.getParent();
             ViewGroup viewGroup3 = null;
             while (true) {
@@ -178,42 +175,45 @@ public final class FocusFinderCompat {
                         viewGroup3 = viewGroup4;
                     }
                     parent = viewGroup4.getParent();
-                } else if (viewGroup3 != null) {
+                } else {
+                    if (viewGroup3 == null) {
+                        break;
+                    }
                     viewGroup2 = viewGroup3;
                 }
             }
+            viewGroup2 = viewGroup;
         }
-        viewGroup2 = viewGroup;
-        View access$findUserSetNextFocus = FocusFinderCompat_androidKt.access$findUserSetNextFocus(view, viewGroup2, i);
-        int i2 = true;
-        View view3 = access$findUserSetNextFocus;
-        while (access$findUserSetNextFocus != null) {
-            if (access$findUserSetNextFocus.isFocusable() && access$findUserSetNextFocus.getVisibility() == 0 && (!access$findUserSetNextFocus.isInTouchMode() || access$findUserSetNextFocus.isFocusableInTouchMode())) {
-                view2 = access$findUserSetNextFocus;
+        View viewAccess$findUserSetNextFocus = FocusFinderCompat_androidKt.access$findUserSetNextFocus(view, viewGroup2, i);
+        boolean z = true;
+        View viewAccess$findUserSetNextFocus2 = viewAccess$findUserSetNextFocus;
+        while (viewAccess$findUserSetNextFocus != null) {
+            if (viewAccess$findUserSetNextFocus.isFocusable() && viewAccess$findUserSetNextFocus.getVisibility() == 0 && (!viewAccess$findUserSetNextFocus.isInTouchMode() || viewAccess$findUserSetNextFocus.isFocusableInTouchMode())) {
+                viewFindNextFocus = viewAccess$findUserSetNextFocus;
                 break;
             }
-            access$findUserSetNextFocus = FocusFinderCompat_androidKt.access$findUserSetNextFocus(access$findUserSetNextFocus, viewGroup2, i);
-            int i3 = i2 ^ true;
-            if (i2 == false) {
-                view3 = view3 != null ? FocusFinderCompat_androidKt.access$findUserSetNextFocus(view3, viewGroup2, i) : null;
-                if (view3 == access$findUserSetNextFocus) {
+            viewAccess$findUserSetNextFocus = FocusFinderCompat_androidKt.access$findUserSetNextFocus(viewAccess$findUserSetNextFocus, viewGroup2, i);
+            boolean z2 = !z;
+            if (!z) {
+                viewAccess$findUserSetNextFocus2 = viewAccess$findUserSetNextFocus2 != null ? FocusFinderCompat_androidKt.access$findUserSetNextFocus(viewAccess$findUserSetNextFocus2, viewGroup2, i) : null;
+                if (viewAccess$findUserSetNextFocus2 == viewAccess$findUserSetNextFocus) {
                     break;
                 }
             }
-            i2 = i3;
+            z = z2;
         }
-        if (view2 != null) {
-            return view2;
+        if (viewFindNextFocus != null) {
+            return viewFindNextFocus;
         }
         ArrayList<View> arrayList = this.tmpList;
         try {
             arrayList.clear();
             viewGroup2.addFocusables(arrayList, i, viewGroup2.isInTouchMode() ? 1 : 0);
             if (!arrayList.isEmpty()) {
-                view2 = findNextFocus(i, null, view, viewGroup2, arrayList);
+                viewFindNextFocus = findNextFocus(i, null, view, viewGroup2, arrayList);
             }
             arrayList.clear();
-            return view2;
+            return viewFindNextFocus;
         } catch (Throwable th) {
             arrayList.clear();
             throw th;
@@ -249,7 +249,7 @@ public final class FocusFinderCompat {
                     FocusDirection.Companion.getClass();
                     i2 = FocusDirection.Next;
                 }
-                if (TwoDimensionalFocusSearchKt.m388isBetterCandidateI7lrPNg(composeRect, composeRect2, composeRect3, i2)) {
+                if (TwoDimensionalFocusSearchKt.m390isBetterCandidateI7lrPNg(composeRect, composeRect2, composeRect3, i2)) {
                     this.bestCandidateRect.set(this.otherRect);
                     view2 = view3;
                 }
@@ -259,8 +259,8 @@ public final class FocusFinderCompat {
     }
 
     public final View findNextFocus(int i, Rect rect, View view, ViewGroup viewGroup, ArrayList arrayList) {
-        int indexOf;
-        int lastIndexOf;
+        int iIndexOf;
+        int iLastIndexOf;
         int i2;
         Rect rect2 = this.cachedFocusedRect;
         if (view != null) {
@@ -306,30 +306,30 @@ public final class FocusFinderCompat {
             userSpecifiedFocusComparator.originalOrdinal.clear();
             userSpecifiedFocusComparator.nextFoci.clear();
             int size = arrayList.size();
-            View view2 = null;
+            View viewFindNextFocusInAbsoluteDirection = null;
             if (size < 2) {
                 return null;
             }
             if (i != 1) {
                 if (i != 2) {
                     if (i == 17 || i == 33 || i == 66 || i == 130) {
-                        view2 = findNextFocusInAbsoluteDirection(i, this.cachedFocusedRect, view, viewGroup, arrayList);
+                        viewFindNextFocusInAbsoluteDirection = findNextFocusInAbsoluteDirection(i, this.cachedFocusedRect, view, viewGroup, arrayList);
                     }
                 } else if (size >= 2) {
-                    if (view != null && (lastIndexOf = arrayList.lastIndexOf(view)) >= 0 && (i2 = lastIndexOf + 1) < size) {
-                        view2 = (View) arrayList.get(i2);
+                    if (view != null && (iLastIndexOf = arrayList.lastIndexOf(view)) >= 0 && (i2 = iLastIndexOf + 1) < size) {
+                        viewFindNextFocusInAbsoluteDirection = (View) arrayList.get(i2);
                     } else {
-                        view2 = (View) arrayList.get(0);
+                        viewFindNextFocusInAbsoluteDirection = (View) arrayList.get(0);
                     }
                 }
             } else if (size >= 2) {
-                if (view != null && (indexOf = arrayList.indexOf(view)) > 0) {
-                    view2 = (View) arrayList.get(indexOf - 1);
+                if (view != null && (iIndexOf = arrayList.indexOf(view)) > 0) {
+                    viewFindNextFocusInAbsoluteDirection = (View) arrayList.get(iIndexOf - 1);
                 } else {
-                    view2 = (View) arrayList.get(size - 1);
+                    viewFindNextFocusInAbsoluteDirection = (View) arrayList.get(size - 1);
                 }
             }
-            return view2 == null ? (View) arrayList.get(size - 1) : view2;
+            return viewFindNextFocusInAbsoluteDirection == null ? (View) arrayList.get(size - 1) : viewFindNextFocusInAbsoluteDirection;
         } catch (Throwable th) {
             userSpecifiedFocusComparator.headsOfChains.clear();
             userSpecifiedFocusComparator.isConnectedTo.clear();

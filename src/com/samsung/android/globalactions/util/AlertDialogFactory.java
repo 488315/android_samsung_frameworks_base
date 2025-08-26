@@ -58,9 +58,9 @@ public class AlertDialogFactory {
                 runnable2.run();
             }
         });
-        AlertDialog create = this.mAlertDialogBuilder.create();
-        this.mAlertDialog = create;
-        create.getWindow().getAttributes().setTitle("GlobalActions_ProKioskDialog");
+        AlertDialog alertDialogCreate = this.mAlertDialogBuilder.create();
+        this.mAlertDialog = alertDialogCreate;
+        alertDialogCreate.getWindow().getAttributes().setTitle("GlobalActions_ProKioskDialog");
         this.mAlertDialog.getWindow().setType(2008);
         this.mAlertDialog.getWindow().setSoftInputMode(20);
         return this.mAlertDialog;
@@ -71,9 +71,9 @@ public class AlertDialogFactory {
         this.mAlertDialogBuilder.setTitle(R.string.global_action_insert_sim_card);
         this.mAlertDialogBuilder.setMessage(R.string.global_action_insert_sim_card_message);
         this.mAlertDialogBuilder.setPositiveButton(17039370, (DialogInterface.OnClickListener) null);
-        AlertDialog create = this.mAlertDialogBuilder.create();
-        this.mAlertDialog = create;
-        create.getWindow().getAttributes().setTitle("GlobalActions_InsertSimCardDialog");
+        AlertDialog alertDialogCreate = this.mAlertDialogBuilder.create();
+        this.mAlertDialog = alertDialogCreate;
+        alertDialogCreate.getWindow().getAttributes().setTitle("GlobalActions_InsertSimCardDialog");
         this.mAlertDialog.getWindow().setType(2009);
         return this.mAlertDialog;
     }

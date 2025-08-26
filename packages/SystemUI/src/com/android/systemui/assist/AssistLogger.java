@@ -18,7 +18,6 @@ import kotlin.collections.ArraysKt___ArraysKt;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AssistLogger {
     public static final Set SESSION_END_EVENTS;
@@ -30,7 +29,6 @@ public class AssistLogger {
     public final UiEventLogger uiEventLogger;
     public final UserTracker userTracker;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -67,17 +65,17 @@ public class AssistLogger {
 
     public final void reportAssistantInvocationEventFromLegacy(int i, boolean z, ComponentName componentName, Integer num) {
         int i2;
-        Integer valueOf;
+        Integer numValueOf;
         AssistantInvocationEvent assistantInvocationEvent;
-        String str;
-        int i3 = 3;
+        String strFlattenToString;
+        int iIntValue = 3;
         if (num == null) {
-            valueOf = null;
+            numValueOf = null;
         } else {
             AssistantInvocationEvent.Companion companion = AssistantInvocationEvent.Companion;
-            int intValue = num.intValue();
+            int iIntValue2 = num.intValue();
             companion.getClass();
-            switch (intValue) {
+            switch (iIntValue2) {
                 case 1:
                     i2 = 1;
                     break;
@@ -112,7 +110,7 @@ public class AssistLogger {
                     i2 = 0;
                     break;
             }
-            valueOf = Integer.valueOf(i2);
+            numValueOf = Integer.valueOf(i2);
         }
         AssistantInvocationEvent.Companion.getClass();
         if (z) {
@@ -144,71 +142,71 @@ public class AssistLogger {
         }
         ComponentName assistComponentForUser = componentName == null ? this.assistUtils.getAssistComponentForUser(((UserTrackerImpl) this.userTracker).getUserId()) : componentName;
         int assistantUid = getAssistantUid(assistComponentForUser);
-        if (valueOf == null) {
+        if (numValueOf == null) {
             switch (this.phoneStateMonitor.getPhoneState()) {
                 case 1:
-                    i3 = 1;
+                    iIntValue = 1;
                     break;
                 case 2:
-                    i3 = 2;
+                    iIntValue = 2;
                     break;
                 case 3:
                     break;
                 case 4:
-                    i3 = 4;
+                    iIntValue = 4;
                     break;
                 case 5:
-                    i3 = 5;
+                    iIntValue = 5;
                     break;
                 case 6:
-                    i3 = 6;
+                    iIntValue = 6;
                     break;
                 case 7:
-                    i3 = 7;
+                    iIntValue = 7;
                     break;
                 case 8:
-                    i3 = 8;
+                    iIntValue = 8;
                     break;
                 case 9:
-                    i3 = 9;
+                    iIntValue = 9;
                     break;
                 case 10:
-                    i3 = 10;
+                    iIntValue = 10;
                     break;
                 default:
-                    i3 = 0;
+                    iIntValue = 0;
                     break;
             }
         } else {
-            i3 = valueOf.intValue();
+            iIntValue = numValueOf.intValue();
         }
-        int i4 = i3;
+        int i3 = iIntValue;
         int id = assistantInvocationEvent.getId();
-        if (assistComponentForUser == null || (str = assistComponentForUser.flattenToString()) == null) {
-            str = "";
+        if (assistComponentForUser == null || (strFlattenToString = assistComponentForUser.flattenToString()) == null) {
+            strFlattenToString = "";
         }
-        String str2 = str;
-        InstanceId instanceId = this.currentInstanceId;
-        if (instanceId == null) {
-            instanceId = this.instanceIdSequence.newInstanceId();
+        String str = strFlattenToString;
+        InstanceId instanceIdNewInstanceId = this.currentInstanceId;
+        if (instanceIdNewInstanceId == null) {
+            instanceIdNewInstanceId = this.instanceIdSequence.newInstanceId();
         }
-        this.currentInstanceId = instanceId;
-        instanceId.getClass();
-        FrameworkStatsLog.write(IKnoxCustomManager.Stub.TRANSACTION_setBootingAnimationSub, id, assistantUid, str2, instanceId.getId(), i4, false);
+        this.currentInstanceId = instanceIdNewInstanceId;
+        instanceIdNewInstanceId.getClass();
+        FrameworkStatsLog.write(IKnoxCustomManager.Stub.TRANSACTION_setBootingAnimationSub, id, assistantUid, str, instanceIdNewInstanceId.getId(), i3, false);
     }
 
     public final void reportAssistantSessionEvent(AssistantSessionEvent assistantSessionEvent) {
         ComponentName assistComponentForUser = this.assistUtils.getAssistComponentForUser(((UserTrackerImpl) this.userTracker).getUserId());
         int assistantUid = getAssistantUid(assistComponentForUser);
         UiEventLogger uiEventLogger = this.uiEventLogger;
-        String flattenToString = assistComponentForUser != null ? assistComponentForUser.flattenToString() : null;
-        InstanceId instanceId = this.currentInstanceId;
-        if (instanceId == null) {
-            instanceId = this.instanceIdSequence.newInstanceId();
+        String strFlattenToString = assistComponentForUser != null ? assistComponentForUser.flattenToString() : null;
+        InstanceId instanceIdNewInstanceId = this.currentInstanceId;
+        if (instanceIdNewInstanceId == null) {
+            instanceIdNewInstanceId = this.instanceIdSequence.newInstanceId();
         }
-        this.currentInstanceId = instanceId;
-        instanceId.getClass();
-        uiEventLogger.logWithInstanceId(assistantSessionEvent, assistantUid, flattenToString, instanceId);
+        this.currentInstanceId = instanceIdNewInstanceId;
+        instanceIdNewInstanceId.getClass();
+        uiEventLogger.logWithInstanceId(assistantSessionEvent, assistantUid, strFlattenToString, instanceIdNewInstanceId);
         if (CollectionsKt___CollectionsKt.contains(SESSION_END_EVENTS, assistantSessionEvent)) {
             this.currentInstanceId = null;
         }

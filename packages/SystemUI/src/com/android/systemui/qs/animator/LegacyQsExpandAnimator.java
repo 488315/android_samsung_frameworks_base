@@ -59,7 +59,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class LegacyQsExpandAnimator extends SecQSImplAnimatorBase implements QSHost.Callback, TouchAnimator.Listener, View.OnAttachStateChangeListener, TunerService.Tunable, View.OnLayoutChangeListener {
     public TouchAnimator mAnimatorForListener;
@@ -67,6 +66,7 @@ public class LegacyQsExpandAnimator extends SecQSImplAnimatorBase implements QSH
     public BottomLargeTileBar mBottomLargeTileBar;
     public BrightnessMediaDevicesBar mBrightnessMediaDevicesBar;
     public BrightnessVolumeBar mBrightnessVolumeBar;
+    public TouchAnimator mButtonsAnimator;
     public View mButtonsContainer;
     public View mClockDateContainer;
     public final Context mContext;
@@ -81,13 +81,13 @@ public class LegacyQsExpandAnimator extends SecQSImplAnimatorBase implements QSH
     public final KeyguardEditModeController mKeyguardEditModeController;
     public MultiSIMPreferredSlotBar mMultiSIMBar;
     public View mMumContainer;
-    public View mNetworkSpeedContainer;
     public TouchAnimator mPanelAlphaAnimator;
     public TouchAnimator mPanelBarAnimator;
     public TouchAnimator mPanelYAnimator;
     public View mPowerContainer;
     public View mPrivacyContainer;
     public TouchAnimator mQsButtonsAnimator;
+    public View mQsButtonsContainer;
     public SecQSPanel mQsPanel;
     public final SecQSPanelController mQsPanelController;
     public View mQsRootPanel;
@@ -201,6 +201,7 @@ public class LegacyQsExpandAnimator extends SecQSImplAnimatorBase implements QSH
         this.mMumContainer = null;
         this.mEditContainer = null;
         this.mPowerContainer = null;
+        this.mQsButtonsContainer = null;
         this.mQuickQSPanelTileContainer = null;
     }
 
@@ -365,6 +366,16 @@ public class LegacyQsExpandAnimator extends SecQSImplAnimatorBase implements QSH
         this.mQsPanel.removeOnAttachStateChangeListener(this);
     }
 
+    public final void setButtonsPosition(float f) {
+        if (this.mButtonsAnimator != null) {
+            if (this.mMumContainer.getVisibility() == 0) {
+                this.mButtonsAnimator.setPosition(f);
+            } else {
+                this.mButtonsAnimator.setPosition(0.0f);
+            }
+        }
+    }
+
     public final void setPanelImmediatePosition(float f) {
         Log.d("QsExpandAnimator", "expandImmediate " + f);
         TouchAnimator touchAnimator = this.mPanelAlphaAnimator;
@@ -404,7 +415,6 @@ public class LegacyQsExpandAnimator extends SecQSImplAnimatorBase implements QSH
 
     @Override // com.android.systemui.qs.animator.SecQSImplAnimatorBase
     public final void setQsExpansionPosition(float f) {
-        TouchAnimator touchAnimator;
         if (isThereNoView() || !this.mAnimatorsInitialiezed || Float.isNaN(f) || QsAnimatorState.expandedByNotiOverScroll) {
             return;
         }
@@ -414,28 +424,30 @@ public class LegacyQsExpandAnimator extends SecQSImplAnimatorBase implements QSH
         float f2 = 1.0f;
         if (QsAnimatorState.state == 1) {
             if (QsAnimatorState.qsExpanded) {
-                TouchAnimator touchAnimator2 = this.mPanelAlphaAnimator;
+                TouchAnimator touchAnimator = this.mPanelAlphaAnimator;
+                if (touchAnimator != null) {
+                    touchAnimator.setPosition(f);
+                }
+                TouchAnimator touchAnimator2 = this.mShadeHeaderAnimator;
                 if (touchAnimator2 != null) {
                     touchAnimator2.setPosition(f);
                 }
-                TouchAnimator touchAnimator3 = this.mShadeHeaderAnimator;
+                TouchAnimator touchAnimator3 = this.mHeaderAnimator;
                 if (touchAnimator3 != null) {
                     touchAnimator3.setPosition(f);
                 }
-                TouchAnimator touchAnimator4 = this.mHeaderAnimator;
-                if (touchAnimator4 != null) {
-                    touchAnimator4.setPosition(f);
-                }
+                setButtonsPosition(f);
                 f = 1.0f;
             } else {
-                TouchAnimator touchAnimator5 = this.mShadeHeaderAnimator;
+                TouchAnimator touchAnimator4 = this.mShadeHeaderAnimator;
+                if (touchAnimator4 != null) {
+                    touchAnimator4.setPosition(0.0f);
+                }
+                TouchAnimator touchAnimator5 = this.mHeaderAnimator;
                 if (touchAnimator5 != null) {
-                    touchAnimator5.setPosition(0.0f);
+                    touchAnimator5.setPosition(f);
                 }
-                TouchAnimator touchAnimator6 = this.mHeaderAnimator;
-                if (touchAnimator6 != null) {
-                    touchAnimator6.setPosition(f);
-                }
+                setButtonsPosition(f);
             }
         } else if (!isPanelExpandImmediate()) {
             this.mQsRootPanel.setAlpha(1.0f);
@@ -447,16 +459,16 @@ public class LegacyQsExpandAnimator extends SecQSImplAnimatorBase implements QSH
             setPanelImmediatePosition(1.0f);
         }
         if (!this.mForceUpdate && SecQSImplAnimatorBase.isDetailVisible()) {
-            TouchAnimator touchAnimator7 = this.mHeaderAnimator;
-            if (touchAnimator7 != null) {
-                touchAnimator7.setPosition(f2);
-                return;
+            TouchAnimator touchAnimator6 = this.mHeaderAnimator;
+            if (touchAnimator6 != null) {
+                touchAnimator6.setPosition(f2);
             }
+            setButtonsPosition(f2);
             return;
         }
-        TouchAnimator touchAnimator8 = this.mQuickQsAnimator;
-        if (touchAnimator8 != null) {
-            touchAnimator8.setPosition(f2);
+        TouchAnimator touchAnimator7 = this.mQuickQsAnimator;
+        if (touchAnimator7 != null) {
+            touchAnimator7.setPosition(f2);
         }
         ArrayList arrayList = this.mTileAnimators;
         int size = arrayList.size();
@@ -466,20 +478,24 @@ public class LegacyQsExpandAnimator extends SecQSImplAnimatorBase implements QSH
             i++;
             ((TouchAnimator) obj).setPosition(f2);
         }
-        TouchAnimator touchAnimator9 = this.mPanelBarAnimator;
+        TouchAnimator touchAnimator8 = this.mPanelBarAnimator;
+        if (touchAnimator8 != null) {
+            touchAnimator8.setPosition(f2);
+        }
+        TouchAnimator touchAnimator9 = this.mHeaderBarAnimator;
         if (touchAnimator9 != null) {
             touchAnimator9.setPosition(f2);
         }
-        TouchAnimator touchAnimator10 = this.mHeaderBarAnimator;
+        TouchAnimator touchAnimator10 = this.mQsButtonsAnimator;
         if (touchAnimator10 != null) {
             touchAnimator10.setPosition(f2);
         }
-        TouchAnimator touchAnimator11 = this.mQsButtonsAnimator;
-        if (touchAnimator11 != null) {
-            touchAnimator11.setPosition(f2);
-        }
-        if (this.mStackScrollerController != null && (touchAnimator = this.mHeaderAnimator) != null) {
-            touchAnimator.setPosition(f2);
+        if (this.mStackScrollerController != null) {
+            TouchAnimator touchAnimator11 = this.mHeaderAnimator;
+            if (touchAnimator11 != null) {
+                touchAnimator11.setPosition(f2);
+            }
+            setButtonsPosition(f2);
         }
         KeyguardEditModeController keyguardEditModeController = this.mKeyguardEditModeController;
         if (keyguardEditModeController == null || !((KeyguardEditModeControllerImpl) keyguardEditModeController).getVIRunning()) {
@@ -570,6 +586,7 @@ public class LegacyQsExpandAnimator extends SecQSImplAnimatorBase implements QSH
                 qQSPanelSidePadding = this.mResourcePicker.getQQSPanelSidePadding(this.mContext);
             }
             int qQSPanelSidePadding3 = z2 ? this.mResourcePicker.getQQSPanelSidePadding(this.mContext) : 0;
+            int i3 = -this.mMumContainer.getMeasuredWidth();
             if (QpRune.QUICK_TABLET || ((SecQsUiDisplayModeInteractor) Dependency.sDependency.getDependencyInner(SecQsUiDisplayModeInteractor.class)).isTablet()) {
                 qQSPanelSidePadding3 = this.mResourcePicker.getPanelSidePadding(this.mContext) * (-1);
                 qQSPanelSidePadding = 0;
@@ -577,51 +594,55 @@ public class LegacyQsExpandAnimator extends SecQSImplAnimatorBase implements QSH
             if (resources.getConfiguration().getLayoutDirection() == 1) {
                 qQSPanelSidePadding *= -1;
                 qQSPanelSidePadding3 *= -1;
+                i3 *= -1;
             }
-            if (this.mNetworkSpeedContainer == null || this.mSystemIconContainer == null || this.mPrivacyContainer == null || this.mClockDateContainer == null || this.mButtonsContainer == null) {
+            if (this.mSystemIconContainer == null || this.mPrivacyContainer == null || this.mClockDateContainer == null || this.mButtonsContainer == null || this.mQsButtonsContainer == null) {
                 i2 = 1;
             } else {
                 TouchAnimator.Builder builder5 = new TouchAnimator.Builder();
                 i2 = 1;
                 float f3 = qQSPanelSidePadding2;
-                builder5.addFloat(this.mNetworkSpeedContainer, "translationX", f2, f3);
                 builder5.addFloat(this.mSystemIconContainer, "translationX", f2, f3);
                 builder5.addFloat(this.mPrivacyContainer, "translationX", f2, f3);
                 builder5.addFloat(this.mClockDateContainer, "translationX", f2, -qQSPanelSidePadding2);
                 builder5.addFloat(this.mClockDateContainer, "alpha", 1.0f, 0.0f);
                 builder5.addFloat(this.mButtonsContainer, "translationX", -qQSPanelSidePadding, qQSPanelSidePadding3);
                 this.mHeaderAnimator = builder5.build();
+                TouchAnimator.Builder builder6 = new TouchAnimator.Builder();
+                builder6.addFloat(this.mQsButtonsContainer, "translationX", f2, i3);
+                this.mButtonsAnimator = builder6.build();
             }
         }
         if (!isThereNoView()) {
-            TouchAnimator.Builder builder6 = new TouchAnimator.Builder();
-            builder6.addFloat(this.mQsRootPanel, "alpha", 0.0f, 1.0f);
-            builder6.mStartDelay = 0.3f;
-            this.mPanelAlphaAnimator = builder6.build();
             TouchAnimator.Builder builder7 = new TouchAnimator.Builder();
+            builder7.addFloat(this.mQsRootPanel, "alpha", 0.0f, 1.0f);
+            builder7.mStartDelay = 0.3f;
+            this.mPanelAlphaAnimator = builder7.build();
+            TouchAnimator.Builder builder8 = new TouchAnimator.Builder();
             View view = this.mQsRootPanel;
             float[] fArr = new float[2];
             fArr[i] = (-this.mHeader.getHeight()) * 0.2f;
             fArr[i2] = f2;
-            builder7.addFloat(view, "translationY", fArr);
+            builder8.addFloat(view, "translationY", fArr);
             MotionLayout motionLayout = this.mShadeHeader;
             float[] fArr2 = new float[2];
             fArr2[i] = (-this.mHeader.getHeight()) * 0.2f;
             fArr2[i2] = f2;
-            builder7.addFloat(motionLayout, "translationY", fArr2);
-            this.mPanelYAnimator = builder7.build();
+            builder8.addFloat(motionLayout, "translationY", fArr2);
+            this.mPanelYAnimator = builder8.build();
             this.mAllViews.add(new Pair("view_visible_always", this.mTileChunkLayout));
             if (this.mMumContainer != null && this.mEditContainer != null && this.mPowerContainer != null) {
-                TouchAnimator.Builder builder8 = new TouchAnimator.Builder();
-                builder8.addFloat(this.mMumContainer, "alpha", 0.0f, 1.0f);
-                builder8.addFloat(this.mEditContainer, "alpha", 0.0f, 1.0f);
-                builder8.addFloat(this.mPowerContainer, "alpha", 0.0f, 1.0f);
-                builder8.mStartDelay = 0.5f;
-                this.mQsButtonsAnimator = builder8.build();
+                TouchAnimator.Builder builder9 = new TouchAnimator.Builder();
+                builder9.addFloat(this.mMumContainer, "alpha", 0.0f, 1.0f);
+                builder9.addFloat(this.mEditContainer, "alpha", 0.0f, 1.0f);
+                builder9.addFloat(this.mPowerContainer, "alpha", 0.0f, 1.0f);
+                builder9.mStartDelay = 0.5f;
+                this.mQsButtonsAnimator = builder9.build();
             }
             this.mAllViews.add(new Pair("view_visible_expanded_state", this.mMumContainer));
             this.mAllViews.add(new Pair("view_visible_expanded_state", this.mEditContainer));
             this.mAllViews.add(new Pair("view_visible_expanded_state", this.mPowerContainer));
+            this.mAllViews.add(new Pair("view_visible_always", this.mQsButtonsContainer));
             this.mAllViews.add(new Pair("view_visible_always", this.mQsRootPanel));
             this.mAllViews.add(new Pair("view_visible_always", this.mShadeHeader));
         }
@@ -661,22 +682,22 @@ public class LegacyQsExpandAnimator extends SecQSImplAnimatorBase implements QSH
             arrayList2.add(barView$111);
             arrayList2.add(barView$112);
             arrayList2.add(barView$113);
-            TouchAnimator.Builder builder9 = new TouchAnimator.Builder();
             TouchAnimator.Builder builder10 = new TouchAnimator.Builder();
+            TouchAnimator.Builder builder11 = new TouchAnimator.Builder();
             int size = arrayList.size();
-            int i3 = i;
-            while (i3 < size) {
-                Object obj3 = arrayList.get(i3);
-                i3++;
+            int i4 = i;
+            while (i4 < size) {
+                Object obj3 = arrayList.get(i4);
+                i4++;
                 View view2 = (View) obj3;
                 if (view2 != null) {
-                    builder9.addFloat(view2, "alpha", 1.0f, 0.0f);
+                    builder10.addFloat(view2, "alpha", 1.0f, 0.0f);
                     float dimensionPixelSize = resources.getDimensionPixelSize(R.dimen.expand_animation_translation_y);
                     float[] fArr3 = new float[2];
                     fArr3[i] = f2;
                     fArr3[i2] = dimensionPixelSize;
-                    builder9.addFloat(view2, "translationY", fArr3);
-                    builder9.mEndDelay = 0.5f;
+                    builder10.addFloat(view2, "translationY", fArr3);
+                    builder10.mEndDelay = 0.5f;
                     str = str3;
                     this.mAllViews.add(new Pair(str, view2));
                 } else {
@@ -686,52 +707,52 @@ public class LegacyQsExpandAnimator extends SecQSImplAnimatorBase implements QSH
             }
             legacyQsExpandAnimator = this;
             str2 = str3;
-            legacyQsExpandAnimator.mHeaderBarAnimator = builder9.build();
-            int i4 = 2;
-            int i5 = resources.getConfiguration().orientation == 2 ? i2 : i;
+            legacyQsExpandAnimator.mHeaderBarAnimator = builder10.build();
+            int i5 = 2;
+            int i6 = resources.getConfiguration().orientation == 2 ? i2 : i;
             int size2 = arrayList2.size();
-            int i6 = i;
-            while (i6 < size2) {
-                Object obj4 = arrayList2.get(i6);
-                i6++;
+            int i7 = i;
+            while (i7 < size2) {
+                Object obj4 = arrayList2.get(i7);
+                i7++;
                 View view3 = (View) obj4;
                 if (view3 != null) {
-                    float[] fArr4 = new float[i4];
+                    float[] fArr4 = new float[i5];
                     // fill-array-data instruction
                     fArr4[0] = 0.0f;
                     fArr4[1] = 1.0f;
-                    builder10.addFloat(view3, "alpha", fArr4);
-                    float[] fArr5 = new float[i4];
-                    fArr5[i] = i5 != 0 ? 10.0f : 20.0f;
+                    builder11.addFloat(view3, "alpha", fArr4);
+                    float[] fArr5 = new float[i5];
+                    fArr5[i] = i6 != 0 ? 10.0f : 20.0f;
                     fArr5[i2] = f2;
-                    builder10.addFloat(view3, "translationY", fArr5);
+                    builder11.addFloat(view3, "translationY", fArr5);
                     float f4 = legacyQsExpandAnimator.SCALE_DOWN_RATIO;
-                    float[] fArr6 = new float[i4];
+                    float[] fArr6 = new float[i5];
                     fArr6[i] = f4;
                     fArr6[i2] = f;
-                    builder10.addFloat(view3, "scaleX", fArr6);
-                    float[] fArr7 = new float[i4];
+                    builder11.addFloat(view3, "scaleX", fArr6);
+                    float[] fArr7 = new float[i5];
                     fArr7[i] = f4;
                     fArr7[i2] = f;
-                    builder10.addFloat(view3, "scaleY", fArr7);
-                    builder10.mStartDelay = 0.5f;
-                    builder10.build();
+                    builder11.addFloat(view3, "scaleY", fArr7);
+                    builder11.mStartDelay = 0.5f;
+                    builder11.build();
                     obj = obj2;
                     legacyQsExpandAnimator.mAllViews.add(new Pair(obj, view3));
                 } else {
                     obj = obj2;
                 }
                 obj2 = obj;
-                i4 = 2;
+                i5 = 2;
             }
-            legacyQsExpandAnimator.mPanelBarAnimator = builder10.build();
+            legacyQsExpandAnimator.mPanelBarAnimator = builder11.build();
         }
         if (!SecPanelSplitHelper.isEnabled() && (notificationStackScrollLayoutController = legacyQsExpandAnimator.mStackScrollerController) != null && notificationStackScrollLayoutController.mView != null) {
-            TouchAnimator.Builder builder11 = new TouchAnimator.Builder();
-            builder11.addFloat(legacyQsExpandAnimator.mStackScrollerController.mView, "alpha", 1.0f, 0.0f);
-            builder11.mStartDelay = 0.93f;
-            builder11.mEndDelay = 0.04f;
-            legacyQsExpandAnimator.mStackScrollLayoutAnimator = builder11.build();
+            TouchAnimator.Builder builder12 = new TouchAnimator.Builder();
+            builder12.addFloat(legacyQsExpandAnimator.mStackScrollerController.mView, "alpha", 1.0f, 0.0f);
+            builder12.mStartDelay = 0.93f;
+            builder12.mEndDelay = 0.04f;
+            legacyQsExpandAnimator.mStackScrollLayoutAnimator = builder12.build();
             legacyQsExpandAnimator.mAllViews.add(new Pair(str2, legacyQsExpandAnimator.mStackScrollerController.mView));
         }
         boolean z3 = i2;
@@ -759,8 +780,8 @@ public class LegacyQsExpandAnimator extends SecQSImplAnimatorBase implements QSH
             this.mEditContainer = this.mHeader.findViewById(R.id.edit_button_container);
             this.mQuickQsPanel = (SecQuickQSPanel) this.mHeader.findViewById(R.id.quick_qs_panel);
             this.mClockDateContainer = this.mHeader.findViewById(R.id.clock_parent);
+            this.mQsButtonsContainer = this.mHeader.findViewById(R.id.qs_buttons_container);
         }
-        this.mNetworkSpeedContainer = this.mShadeHeader.findViewById(R.id.quick_qs_network_speed_container);
         this.mSystemIconContainer = this.mShadeHeader.findViewById(R.id.shade_header_system_icons);
         this.mPrivacyContainer = this.mShadeHeader.findViewById(R.id.privacy_container);
         SecQuickQSPanel secQuickQSPanel = this.mQuickQsPanel;

@@ -20,7 +20,6 @@ import com.android.settingslib.wifi.WifiUtils;
 import com.android.systemui.R;
 import com.android.systemui.animation.ActivityTransitionAnimator;
 import com.android.systemui.animation.DialogTransitionAnimator;
-import com.android.systemui.animation.DialogTransitionAnimator$createActivityTransitionController$1;
 import com.android.systemui.qs.tiles.dialog.InternetAdapter;
 import com.android.systemui.qs.tiles.dialog.InternetDetailsContentController;
 import com.android.wifitrackerlib.WifiEntry;
@@ -31,7 +30,6 @@ import kotlin.jvm.functions.Function1;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.StandaloneCoroutine;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class InternetAdapter extends RecyclerView.Adapter {
     public final CoroutineScope mCoroutineScope;
@@ -41,7 +39,6 @@ public class InternetAdapter extends RecyclerView.Adapter {
     public List mWifiEntries;
     protected int mWifiEntriesCount;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class InternetViewHolder extends RecyclerView.ViewHolder {
         public static final /* synthetic */ int $r8$clinit = 0;
         public final Context mContext;
@@ -67,9 +64,9 @@ public class InternetAdapter extends RecyclerView.Adapter {
         }
 
         public final void wifiConnect(WifiEntry wifiEntry, View view) {
-            boolean shouldEditBeforeConnect = wifiEntry.shouldEditBeforeConnect();
+            boolean zShouldEditBeforeConnect = wifiEntry.shouldEditBeforeConnect();
             InternetDetailsContentController internetDetailsContentController = this.mInternetDetailsContentController;
-            if (shouldEditBeforeConnect) {
+            if (zShouldEditBeforeConnect) {
                 String key = wifiEntry.getKey();
                 WifiUtils.Companion.getClass();
                 Intent intent = new Intent(WifiUtils.ACTION_WIFI_DIALOG);
@@ -133,13 +130,13 @@ public class InternetAdapter extends RecyclerView.Adapter {
         }
         imageView.setImageDrawable(drawable);
         String title = wifiEntry.getTitle();
-        Spanned fromHtml = Html.fromHtml(wifiEntry.getSummary(false), 0);
+        Spanned spannedFromHtml = Html.fromHtml(wifiEntry.getSummary(false), 0);
         internetViewHolder.mWifiTitleText.setText(title);
-        if (TextUtils.isEmpty(fromHtml)) {
+        if (TextUtils.isEmpty(spannedFromHtml)) {
             internetViewHolder.mWifiSummaryText.setVisibility(8);
         } else {
             internetViewHolder.mWifiSummaryText.setVisibility(0);
-            internetViewHolder.mWifiSummaryText.setText(fromHtml);
+            internetViewHolder.mWifiSummaryText.setText(spannedFromHtml);
         }
         int connectedState = wifiEntry.getConnectedState();
         int security = wifiEntry.getSecurity();
@@ -178,8 +175,8 @@ public class InternetAdapter extends RecyclerView.Adapter {
                                 internetViewHolder2.mJob = WifiUtils.checkWepAllowed(internetViewHolder2.mContext, internetViewHolder2.mCoroutineScope, wifiEntry2.getSsid(), new Function1() { // from class: com.android.systemui.qs.tiles.dialog.InternetAdapter$InternetViewHolder$$ExternalSyntheticLambda2
                                     @Override // kotlin.jvm.functions.Function1
                                     /* renamed from: invoke */
-                                    public final Object mo779invoke(Object obj) {
-                                        InternetAdapter.InternetViewHolder.this.mInternetDetailsContentController.mActivityStarter.startActivity((Intent) obj, false);
+                                    public final Object mo781invoke(Object obj) {
+                                        internetViewHolder2.mInternetDetailsContentController.mActivityStarter.startActivity((Intent) obj, false);
                                         return null;
                                     }
                                 }, new Function0() { // from class: com.android.systemui.qs.tiles.dialog.InternetAdapter$InternetViewHolder$$ExternalSyntheticLambda3
@@ -187,24 +184,24 @@ public class InternetAdapter extends RecyclerView.Adapter {
                                     public final Object invoke() {
                                         View view2 = view;
                                         int i4 = InternetAdapter.InternetViewHolder.$r8$clinit;
-                                        InternetAdapter.InternetViewHolder.this.wifiConnect(wifiEntry2, view2);
+                                        internetViewHolder2.wifiConnect(wifiEntry2, view2);
                                         return null;
                                     }
                                 }, new Function1() { // from class: com.android.systemui.qs.tiles.dialog.InternetAdapter$InternetViewHolder$$ExternalSyntheticLambda4
                                     @Override // kotlin.jvm.functions.Function1
                                     /* renamed from: invoke */
-                                    public final Object mo779invoke(Object obj) {
+                                    public final Object mo781invoke(Object obj) {
                                         View view2 = view;
                                         Intent intent = (Intent) obj;
-                                        InternetDetailsContentController internetDetailsContentController = InternetAdapter.InternetViewHolder.this.mInternetDetailsContentController;
+                                        InternetDetailsContentController internetDetailsContentController = internetViewHolder2.mInternetDetailsContentController;
                                         DialogTransitionAnimator dialogTransitionAnimator = internetDetailsContentController.mDialogTransitionAnimator;
                                         dialogTransitionAnimator.getClass();
-                                        DialogTransitionAnimator$createActivityTransitionController$1 createActivityTransitionController$default = DialogTransitionAnimator.createActivityTransitionController$default(dialogTransitionAnimator, view2);
+                                        DialogTransitionAnimator.AnonymousClass1 anonymousClass1CreateActivityTransitionController$default = DialogTransitionAnimator.createActivityTransitionController$default(dialogTransitionAnimator, view2);
                                         InternetDetailsContentController.InternetDialogCallback internetDialogCallback = internetDetailsContentController.mCallback;
                                         if (internetDialogCallback != null) {
                                             internetDialogCallback.dismissDialog();
                                         }
-                                        internetDetailsContentController.mActivityStarter.startActivity(intent, false, (ActivityTransitionAnimator.Controller) createActivityTransitionController$default);
+                                        internetDetailsContentController.mActivityStarter.startActivity(intent, false, (ActivityTransitionAnimator.Controller) anonymousClass1CreateActivityTransitionController$default);
                                         return null;
                                     }
                                 });
@@ -237,8 +234,8 @@ public class InternetAdapter extends RecyclerView.Adapter {
                                 internetViewHolder2.mJob = WifiUtils.checkWepAllowed(internetViewHolder2.mContext, internetViewHolder2.mCoroutineScope, wifiEntry2.getSsid(), new Function1() { // from class: com.android.systemui.qs.tiles.dialog.InternetAdapter$InternetViewHolder$$ExternalSyntheticLambda2
                                     @Override // kotlin.jvm.functions.Function1
                                     /* renamed from: invoke */
-                                    public final Object mo779invoke(Object obj) {
-                                        InternetAdapter.InternetViewHolder.this.mInternetDetailsContentController.mActivityStarter.startActivity((Intent) obj, false);
+                                    public final Object mo781invoke(Object obj) {
+                                        internetViewHolder2.mInternetDetailsContentController.mActivityStarter.startActivity((Intent) obj, false);
                                         return null;
                                     }
                                 }, new Function0() { // from class: com.android.systemui.qs.tiles.dialog.InternetAdapter$InternetViewHolder$$ExternalSyntheticLambda3
@@ -246,24 +243,24 @@ public class InternetAdapter extends RecyclerView.Adapter {
                                     public final Object invoke() {
                                         View view2 = view;
                                         int i4 = InternetAdapter.InternetViewHolder.$r8$clinit;
-                                        InternetAdapter.InternetViewHolder.this.wifiConnect(wifiEntry2, view2);
+                                        internetViewHolder2.wifiConnect(wifiEntry2, view2);
                                         return null;
                                     }
                                 }, new Function1() { // from class: com.android.systemui.qs.tiles.dialog.InternetAdapter$InternetViewHolder$$ExternalSyntheticLambda4
                                     @Override // kotlin.jvm.functions.Function1
                                     /* renamed from: invoke */
-                                    public final Object mo779invoke(Object obj) {
+                                    public final Object mo781invoke(Object obj) {
                                         View view2 = view;
                                         Intent intent = (Intent) obj;
-                                        InternetDetailsContentController internetDetailsContentController = InternetAdapter.InternetViewHolder.this.mInternetDetailsContentController;
+                                        InternetDetailsContentController internetDetailsContentController = internetViewHolder2.mInternetDetailsContentController;
                                         DialogTransitionAnimator dialogTransitionAnimator = internetDetailsContentController.mDialogTransitionAnimator;
                                         dialogTransitionAnimator.getClass();
-                                        DialogTransitionAnimator$createActivityTransitionController$1 createActivityTransitionController$default = DialogTransitionAnimator.createActivityTransitionController$default(dialogTransitionAnimator, view2);
+                                        DialogTransitionAnimator.AnonymousClass1 anonymousClass1CreateActivityTransitionController$default = DialogTransitionAnimator.createActivityTransitionController$default(dialogTransitionAnimator, view2);
                                         InternetDetailsContentController.InternetDialogCallback internetDialogCallback = internetDetailsContentController.mCallback;
                                         if (internetDialogCallback != null) {
                                             internetDialogCallback.dismissDialog();
                                         }
-                                        internetDetailsContentController.mActivityStarter.startActivity(intent, false, (ActivityTransitionAnimator.Controller) createActivityTransitionController$default);
+                                        internetDetailsContentController.mActivityStarter.startActivity(intent, false, (ActivityTransitionAnimator.Controller) anonymousClass1CreateActivityTransitionController$default);
                                         return null;
                                     }
                                 });

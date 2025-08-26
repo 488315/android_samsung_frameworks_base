@@ -71,34 +71,34 @@ public final class InputQueue {
     }
 
     public void sendInputEvent(InputEvent inputEvent, Object obj, boolean z, FinishedInputEventCallback finishedInputEventCallback) {
-        long nativeSendMotionEvent;
-        ActiveInputEvent obtainActiveInputEvent = obtainActiveInputEvent(obj, finishedInputEventCallback);
+        long jNativeSendMotionEvent;
+        ActiveInputEvent activeInputEventObtainActiveInputEvent = obtainActiveInputEvent(obj, finishedInputEventCallback);
         if (inputEvent instanceof KeyEvent) {
-            nativeSendMotionEvent = nativeSendKeyEvent(this.mPtr, (KeyEvent) inputEvent, z);
+            jNativeSendMotionEvent = nativeSendKeyEvent(this.mPtr, (KeyEvent) inputEvent, z);
         } else {
-            nativeSendMotionEvent = nativeSendMotionEvent(this.mPtr, (MotionEvent) inputEvent);
+            jNativeSendMotionEvent = nativeSendMotionEvent(this.mPtr, (MotionEvent) inputEvent);
         }
-        this.mActiveEventArray.put(nativeSendMotionEvent, obtainActiveInputEvent);
+        this.mActiveEventArray.put(jNativeSendMotionEvent, activeInputEventObtainActiveInputEvent);
     }
 
     private void finishInputEvent(long j, boolean z) {
-        int indexOfKey = this.mActiveEventArray.indexOfKey(j);
-        if (indexOfKey >= 0) {
-            ActiveInputEvent valueAt = this.mActiveEventArray.valueAt(indexOfKey);
-            this.mActiveEventArray.removeAt(indexOfKey);
-            valueAt.mCallback.onFinishedInputEvent(valueAt.mToken, z);
-            recycleActiveInputEvent(valueAt);
+        int iIndexOfKey = this.mActiveEventArray.indexOfKey(j);
+        if (iIndexOfKey >= 0) {
+            ActiveInputEvent activeInputEventValueAt = this.mActiveEventArray.valueAt(iIndexOfKey);
+            this.mActiveEventArray.removeAt(iIndexOfKey);
+            activeInputEventValueAt.mCallback.onFinishedInputEvent(activeInputEventValueAt.mToken, z);
+            recycleActiveInputEvent(activeInputEventValueAt);
         }
     }
 
     private ActiveInputEvent obtainActiveInputEvent(Object obj, FinishedInputEventCallback finishedInputEventCallback) {
-        ActiveInputEvent acquire = this.mActiveInputEventPool.acquire();
-        if (acquire == null) {
-            acquire = new ActiveInputEvent();
+        ActiveInputEvent activeInputEventAcquire = this.mActiveInputEventPool.acquire();
+        if (activeInputEventAcquire == null) {
+            activeInputEventAcquire = new ActiveInputEvent();
         }
-        acquire.mToken = obj;
-        acquire.mCallback = finishedInputEventCallback;
-        return acquire;
+        activeInputEventAcquire.mToken = obj;
+        activeInputEventAcquire.mCallback = finishedInputEventCallback;
+        return activeInputEventAcquire;
     }
 
     private void recycleActiveInputEvent(ActiveInputEvent activeInputEvent) {

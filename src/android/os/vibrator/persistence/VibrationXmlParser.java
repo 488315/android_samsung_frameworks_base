@@ -56,9 +56,7 @@ public final class VibrationXmlParser {
         return (VibrationEffect) parseDocumentInternal(reader, i, new ElementParser() { // from class: android.os.vibrator.persistence.VibrationXmlParser$$ExternalSyntheticLambda1
             @Override // android.os.vibrator.persistence.VibrationXmlParser.ElementParser
             public final Object parse(TypedXmlPullParser typedXmlPullParser, int i2) {
-                VibrationEffect parseVibrationEffectInternal;
-                parseVibrationEffectInternal = VibrationXmlParser.parseVibrationEffectInternal(typedXmlPullParser, i2);
-                return parseVibrationEffectInternal;
+                return VibrationXmlParser.parseVibrationEffectInternal(typedXmlPullParser, i2);
             }
         });
     }
@@ -71,9 +69,7 @@ public final class VibrationXmlParser {
         return (ParsedVibration) parseDocumentInternal(reader, i, new ElementParser() { // from class: android.os.vibrator.persistence.VibrationXmlParser$$ExternalSyntheticLambda0
             @Override // android.os.vibrator.persistence.VibrationXmlParser.ElementParser
             public final Object parse(TypedXmlPullParser typedXmlPullParser, int i2) {
-                ParsedVibration parseElementInternal;
-                parseElementInternal = VibrationXmlParser.parseElementInternal(typedXmlPullParser, i2);
-                return parseElementInternal;
+                return VibrationXmlParser.parseElementInternal(typedXmlPullParser, i2);
             }
         });
     }
@@ -118,13 +114,13 @@ public final class VibrationXmlParser {
 
     private static <T> T parseDocumentInternal(Reader reader, int i, ElementParser<T> elementParser) throws IOException {
         try {
-            TypedXmlPullParser newFastPullParser = Xml.newFastPullParser();
-            newFastPullParser.setFeature("http://xmlpull.org/v1/doc/features.html#process-namespaces", true);
-            newFastPullParser.setInput(reader);
-            XmlReader.readDocumentStart(newFastPullParser);
-            T parse = elementParser.parse(newFastPullParser, i);
-            XmlReader.readDocumentEndTag(newFastPullParser);
-            return parse;
+            TypedXmlPullParser typedXmlPullParserNewFastPullParser = Xml.newFastPullParser();
+            typedXmlPullParserNewFastPullParser.setFeature("http://xmlpull.org/v1/doc/features.html#process-namespaces", true);
+            typedXmlPullParserNewFastPullParser.setInput(reader);
+            XmlReader.readDocumentStart(typedXmlPullParserNewFastPullParser);
+            T t = elementParser.parse(typedXmlPullParserNewFastPullParser, i);
+            XmlReader.readDocumentEndTag(typedXmlPullParserNewFastPullParser);
+            return t;
         } catch (XmlParserException e) {
             throw new ParseFailedException(e);
         } catch (XmlPullParserException e2) {

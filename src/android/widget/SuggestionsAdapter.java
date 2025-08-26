@@ -99,10 +99,10 @@ class SuggestionsAdapter extends ResourceCursorAdapter implements View.OnClickLi
 
     @Override // android.widget.CursorAdapter, android.widget.CursorFilter.CursorFilterClient
     public Cursor runQueryOnBackgroundThread(CharSequence charSequence) {
-        String charSequence2 = charSequence == null ? "" : charSequence.toString();
+        String string = charSequence == null ? "" : charSequence.toString();
         if (this.mSearchView.getVisibility() == 0 && this.mSearchView.getWindowVisibility() == 0) {
             try {
-                Cursor suggestions = this.mSearchManager.getSuggestions(this.mSearchable, charSequence2, 50);
+                Cursor suggestions = this.mSearchManager.getSuggestions(this.mSearchable, string, 50);
                 if (suggestions != null) {
                     suggestions.getCount();
                     return suggestions;
@@ -165,10 +165,10 @@ class SuggestionsAdapter extends ResourceCursorAdapter implements View.OnClickLi
 
     @Override // android.widget.ResourceCursorAdapter, android.widget.CursorAdapter
     public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
-        View newView = super.newView(context, cursor, viewGroup);
-        newView.setTag(new ChildViewCache(newView));
-        ((ImageView) newView.findViewById(R.id.edit_query)).setImageResource(this.mCommitIconResId);
-        return newView;
+        View viewNewView = super.newView(context, cursor, viewGroup);
+        viewNewView.setTag(new ChildViewCache(viewNewView));
+        ((ImageView) viewNewView.findViewById(R.id.edit_query)).setImageResource(this.mCommitIconResId);
+        return viewNewView;
     }
 
     private static final class ChildViewCache {
@@ -258,7 +258,7 @@ class SuggestionsAdapter extends ResourceCursorAdapter implements View.OnClickLi
         }
     }
 
-    private Drawable getIcon1(Cursor cursor) {
+    private Drawable getIcon1(Cursor cursor) throws NumberFormatException, IOException {
         int i = this.mIconName1Col;
         if (i == -1) {
             return null;
@@ -312,11 +312,11 @@ class SuggestionsAdapter extends ResourceCursorAdapter implements View.OnClickLi
             return super.getView(i, view, viewGroup);
         } catch (RuntimeException e) {
             Log.w(LOG_TAG, "Search suggestions cursor threw exception.", e);
-            View newView = this.newView(this.mContext, this.mCursor, viewGroup);
-            if (newView != null) {
-                ((ChildViewCache) newView.getTag()).mText1.lambda$setTextAsync$0(e.toString());
+            View viewNewView = this.newView(this.mContext, this.mCursor, viewGroup);
+            if (viewNewView != null) {
+                ((ChildViewCache) viewNewView.getTag()).mText1.lambda$setTextAsync$0(e.toString());
             }
-            return newView;
+            return viewNewView;
         }
     }
 
@@ -326,35 +326,35 @@ class SuggestionsAdapter extends ResourceCursorAdapter implements View.OnClickLi
             return super.getDropDownView(i, view, viewGroup);
         } catch (RuntimeException e) {
             Log.w(LOG_TAG, "Search suggestions cursor threw exception.", e);
-            View newDropDownView = this.newDropDownView(this.mDropDownContext == null ? this.mContext : this.mDropDownContext, this.mCursor, viewGroup);
-            if (newDropDownView != null) {
-                ((ChildViewCache) newDropDownView.getTag()).mText1.lambda$setTextAsync$0(e.toString());
+            View viewNewDropDownView = this.newDropDownView(this.mDropDownContext == null ? this.mContext : this.mDropDownContext, this.mCursor, viewGroup);
+            if (viewNewDropDownView != null) {
+                ((ChildViewCache) viewNewDropDownView.getTag()).mText1.lambda$setTextAsync$0(e.toString());
             }
-            return newDropDownView;
+            return viewNewDropDownView;
         }
     }
 
-    private Drawable getDrawableFromResourceValue(String str) {
+    private Drawable getDrawableFromResourceValue(String str) throws NumberFormatException, IOException {
         if (str == null || str.length() == 0 || "0".equals(str)) {
             return null;
         }
         try {
-            int parseInt = Integer.parseInt(str);
-            String str2 = "android.resource://" + this.mProviderContext.getPackageName() + "/" + parseInt;
-            Drawable checkIconCache = checkIconCache(str2);
-            if (checkIconCache != null) {
-                return checkIconCache;
+            int i = Integer.parseInt(str);
+            String str2 = "android.resource://" + this.mProviderContext.getPackageName() + "/" + i;
+            Drawable drawableCheckIconCache = checkIconCache(str2);
+            if (drawableCheckIconCache != null) {
+                return drawableCheckIconCache;
             }
-            Drawable drawable = this.mProviderContext.getDrawable(parseInt);
+            Drawable drawable = this.mProviderContext.getDrawable(i);
             storeInIconCache(str2, drawable);
             return drawable;
         } catch (Resources.NotFoundException unused) {
             Log.w(LOG_TAG, "Icon resource not found: " + str);
             return null;
         } catch (NumberFormatException unused2) {
-            Drawable checkIconCache2 = checkIconCache(str);
-            if (checkIconCache2 != null) {
-                return checkIconCache2;
+            Drawable drawableCheckIconCache2 = checkIconCache(str);
+            if (drawableCheckIconCache2 != null) {
+                return drawableCheckIconCache2;
             }
             Drawable drawable2 = getDrawable(Uri.parse(str));
             storeInIconCache(str, drawable2);
@@ -362,7 +362,7 @@ class SuggestionsAdapter extends ResourceCursorAdapter implements View.OnClickLi
         }
     }
 
-    private Drawable getDrawable(Uri uri) {
+    private Drawable getDrawable(Uri uri) throws IOException {
         try {
             if (ContentResolver.SCHEME_ANDROID_RESOURCE.equals(uri.getScheme())) {
                 ContentResolver.OpenResourceIdResult resourceId = this.mProviderContext.getContentResolver().getResourceId(uri);
@@ -372,20 +372,20 @@ class SuggestionsAdapter extends ResourceCursorAdapter implements View.OnClickLi
                     throw new FileNotFoundException("Resource does not exist: " + uri);
                 }
             }
-            InputStream openInputStream = this.mProviderContext.getContentResolver().openInputStream(uri);
-            if (openInputStream == null) {
+            InputStream inputStreamOpenInputStream = this.mProviderContext.getContentResolver().openInputStream(uri);
+            if (inputStreamOpenInputStream == null) {
                 throw new FileNotFoundException("Failed to open " + uri);
             }
             try {
-                Drawable createFromStream = Drawable.createFromStream(openInputStream, null);
+                Drawable drawableCreateFromStream = Drawable.createFromStream(inputStreamOpenInputStream, null);
                 try {
-                    return createFromStream;
+                    return drawableCreateFromStream;
                 } catch (IOException e) {
-                    return createFromStream;
+                    return drawableCreateFromStream;
                 }
             } finally {
                 try {
-                    openInputStream.close();
+                    inputStreamOpenInputStream.close();
                 } catch (IOException e2) {
                     Log.e(LOG_TAG, "Error closing icon stream for " + uri, e2);
                 }
@@ -418,16 +418,16 @@ class SuggestionsAdapter extends ResourceCursorAdapter implements View.OnClickLi
     }
 
     private Drawable getActivityIconWithCache(ComponentName componentName) {
-        String flattenToShortString = componentName.flattenToShortString();
-        if (this.mOutsideDrawablesCache.containsKey(flattenToShortString)) {
-            Drawable.ConstantState constantState = this.mOutsideDrawablesCache.get(flattenToShortString);
+        String strFlattenToShortString = componentName.flattenToShortString();
+        if (this.mOutsideDrawablesCache.containsKey(strFlattenToShortString)) {
+            Drawable.ConstantState constantState = this.mOutsideDrawablesCache.get(strFlattenToShortString);
             if (constantState == null) {
                 return null;
             }
             return constantState.newDrawable(this.mProviderContext.getResources());
         }
         Drawable activityIcon = getActivityIcon(componentName);
-        this.mOutsideDrawablesCache.put(flattenToShortString, activityIcon != null ? activityIcon.getConstantState() : null);
+        this.mOutsideDrawablesCache.put(strFlattenToShortString, activityIcon != null ? activityIcon.getConstantState() : null);
         return activityIcon;
     }
 

@@ -1,12 +1,15 @@
 package com.android.systemui.media.controls.ui.controller;
 
+import android.animation.AnimatorSet;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.ContentObserver;
+import android.graphics.BlendMode;
 import android.os.Trace;
 import android.provider.Settings;
+import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
 import android.util.Log;
 import android.util.MathUtils;
 import android.view.LayoutInflater;
@@ -14,13 +17,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.PathInterpolator;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.SeekBar;
+import android.widget.TextView;
 import androidx.compose.runtime.collection.MutableVectorKt$$ExternalSyntheticOutline0;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.RepeatOnLifecycleKt;
+import com.android.app.animation.Interpolators;
 import com.android.app.tracing.TraceUtilsKt;
 import com.android.app.tracing.coroutines.CoroutineTracingKt;
 import com.android.compose.animation.scene.SceneKey;
+import com.android.internal.widget.CachingIconView;
 import com.android.keyguard.ActiveUnlockConfig$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.keyguard.KeyguardUpdateMonitorCallback;
@@ -39,6 +47,8 @@ import com.android.systemui.log.LogBuffer;
 import com.android.systemui.log.core.LogLevel;
 import com.android.systemui.media.controls.domain.pipeline.MediaDataManager;
 import com.android.systemui.media.controls.shared.model.MediaData;
+import com.android.systemui.media.controls.ui.animation.ColorSchemeTransition;
+import com.android.systemui.media.controls.ui.animation.MetadataAnimationHandler;
 import com.android.systemui.media.controls.ui.binder.SeekBarObserver;
 import com.android.systemui.media.controls.ui.controller.MediaCarouselController;
 import com.android.systemui.media.controls.ui.controller.MediaHierarchyManager;
@@ -61,9 +71,14 @@ import com.android.systemui.statusbar.featurepods.media.domain.interactor.MediaC
 import com.android.systemui.statusbar.notification.collection.provider.VisualStabilityProvider;
 import com.android.systemui.statusbar.phone.ConfigurationControllerImpl;
 import com.android.systemui.statusbar.policy.ConfigurationController;
+import com.android.systemui.surfaceeffects.loadingeffect.LoadingEffectView;
+import com.android.systemui.surfaceeffects.ripple.MultiRippleController;
+import com.android.systemui.surfaceeffects.turbulencenoise.TurbulenceNoiseController;
+import com.android.systemui.surfaceeffects.turbulencenoise.TurbulenceNoiseView;
 import com.android.systemui.util.SettingsHelper;
 import com.android.systemui.util.animation.MeasurementInput;
 import com.android.systemui.util.animation.TransitionLayout;
+import com.android.systemui.util.animation.TransitionViewState;
 import com.android.systemui.util.animation.UniqueObjectHostView;
 import com.android.systemui.util.animation.UniqueObjectHostViewKt;
 import com.android.systemui.util.concurrency.DelayableExecutor;
@@ -108,7 +123,6 @@ import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.SharingStarted;
 import kotlinx.coroutines.flow.StartedEagerly;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MediaCarouselController implements Dumpable {
     public static final Companion Companion = new Companion(null);
@@ -166,7 +180,6 @@ public final class MediaCarouselController implements Dumpable {
     public final Set keysNeedRemoval = new LinkedHashSet();
     public boolean currentlyExpanded = true;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.media.controls.ui.controller.MediaCarouselController$1, reason: invalid class name */
     final /* synthetic */ class AnonymousClass1 extends FunctionReferenceImpl implements Function0 {
         public AnonymousClass1(Object obj) {
@@ -180,7 +193,6 @@ public final class MediaCarouselController implements Dumpable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.media.controls.ui.controller.MediaCarouselController$2, reason: invalid class name */
     final /* synthetic */ class AnonymousClass2 extends FunctionReferenceImpl implements Function0 {
         public AnonymousClass2(Object obj) {
@@ -196,7 +208,6 @@ public final class MediaCarouselController implements Dumpable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.media.controls.ui.controller.MediaCarouselController$3, reason: invalid class name */
     final /* synthetic */ class AnonymousClass3 extends FunctionReferenceImpl implements Function1 {
         public AnonymousClass3(Object obj) {
@@ -205,16 +216,15 @@ public final class MediaCarouselController implements Dumpable {
 
         @Override // kotlin.jvm.functions.Function1
         /* renamed from: invoke */
-        public final Object mo779invoke(Object obj) {
-            boolean booleanValue = ((Boolean) obj).booleanValue();
+        public final Object mo781invoke(Object obj) {
+            boolean zBooleanValue = ((Boolean) obj).booleanValue();
             MediaCarouselController mediaCarouselController = (MediaCarouselController) this.receiver;
             Companion companion = MediaCarouselController.Companion;
-            mediaCarouselController.updateSeekbarListening(booleanValue);
+            mediaCarouselController.updateSeekbarListening(zBooleanValue);
             return Unit.INSTANCE;
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.media.controls.ui.controller.MediaCarouselController$4, reason: invalid class name */
     final /* synthetic */ class AnonymousClass4 extends FunctionReferenceImpl implements Function1 {
         public AnonymousClass4(Object obj) {
@@ -223,21 +233,19 @@ public final class MediaCarouselController implements Dumpable {
 
         @Override // kotlin.jvm.functions.Function1
         /* renamed from: invoke */
-        public final Object mo779invoke(Object obj) {
-            boolean booleanValue = ((Boolean) obj).booleanValue();
+        public final Object mo781invoke(Object obj) {
+            boolean zBooleanValue = ((Boolean) obj).booleanValue();
             ((MediaCarouselController) this.receiver).getClass();
-            MediaCarouselController.closeGuts(booleanValue);
+            MediaCarouselController.closeGuts(zBooleanValue);
             return Unit.INSTANCE;
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.media.controls.ui.controller.MediaCarouselController$7, reason: invalid class name */
     final class AnonymousClass7 extends SuspendLambda implements Function3 {
         private /* synthetic */ Object L$0;
         int label;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.media.controls.ui.controller.MediaCarouselController$7$1, reason: invalid class name */
         final class AnonymousClass1 extends SuspendLambda implements Function2 {
             private /* synthetic */ Object L$0;
@@ -311,7 +319,6 @@ public final class MediaCarouselController implements Dumpable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -329,7 +336,7 @@ public final class MediaCarouselController implements Dumpable {
     /* JADX WARN: Type inference failed for: r8v0, types: [com.android.keyguard.KeyguardUpdateMonitorCallback, com.android.systemui.media.controls.ui.controller.MediaCarouselController$keyguardUpdateMonitorCallback$1] */
     public MediaCarouselController(CoroutineScope coroutineScope, Context context, Provider provider, VisualStabilityProvider visualStabilityProvider, MediaHostStatesManager mediaHostStatesManager, ActivityStarter activityStarter, SystemClock systemClock, CoroutineDispatcher coroutineDispatcher, final DelayableExecutor delayableExecutor, Executor executor, CoroutineDispatcher coroutineDispatcher2, MediaDataManager mediaDataManager, ConfigurationController configurationController, FalsingManager falsingManager, DumpManager dumpManager, MediaUiEventLogger mediaUiEventLogger, MediaCarouselControllerLogger mediaCarouselControllerLogger, KeyguardUpdateMonitor keyguardUpdateMonitor, KeyguardTransitionInteractor keyguardTransitionInteractor, GlobalSettings globalSettings, SecureSettings secureSettings, MediaCarouselViewModel mediaCarouselViewModel, Provider provider2, DeviceEntryInteractor deviceEntryInteractor, MediaControlChipInteractor mediaControlChipInteractor) {
         ViewGroup viewGroup;
-        int i;
+        int width;
         this.context = context;
         this.mediaControlPanelFactory = provider;
         this.visualStabilityProvider = visualStabilityProvider;
@@ -373,10 +380,10 @@ public final class MediaCarouselController implements Dumpable {
                 if (configuration == null) {
                     return;
                 }
-                int i2 = 0;
+                int width2 = 0;
                 ?? r1 = configuration.getLayoutDirection() != 1 ? 0 : 1;
                 MediaCarouselController.Companion companion = MediaCarouselController.Companion;
-                MediaCarouselController mediaCarouselController = MediaCarouselController.this;
+                MediaCarouselController mediaCarouselController = this.this$0;
                 if (r1 != mediaCarouselController.isRtl) {
                     mediaCarouselController.isRtl = r1;
                     mediaCarouselController.mediaFrame.setLayoutDirection(r1);
@@ -386,23 +393,23 @@ public final class MediaCarouselController implements Dumpable {
                         if (viewGroup2 == null) {
                             viewGroup2 = null;
                         }
-                        i2 = viewGroup2.getWidth() - mediaScrollView.getWidth();
+                        width2 = viewGroup2.getWidth() - mediaScrollView.getWidth();
                     }
-                    mediaScrollView.setScrollX(i2);
+                    mediaScrollView.setScrollX(width2);
                 }
             }
 
             @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
-            public final void onDensityOrFontScaleChanged() {
+            public final void onDensityOrFontScaleChanged() throws Resources.NotFoundException {
                 MediaCarouselController.Companion companion = MediaCarouselController.Companion;
-                MediaCarouselController mediaCarouselController = MediaCarouselController.this;
+                MediaCarouselController mediaCarouselController = this.this$0;
                 mediaCarouselController.updatePlayers(true);
                 mediaCarouselController.inflateSettingsButton();
             }
 
             @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
-            public final void onLocaleListChanged() {
-                MediaCarouselController mediaCarouselController = MediaCarouselController.this;
+            public final void onLocaleListChanged() throws Resources.NotFoundException {
+                MediaCarouselController mediaCarouselController = this.this$0;
                 if (Intrinsics.areEqual(mediaCarouselController.carouselLocale, mediaCarouselController.context.getResources().getConfiguration().getLocales().get(0))) {
                     return;
                 }
@@ -412,28 +419,28 @@ public final class MediaCarouselController implements Dumpable {
             }
 
             @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
-            public final void onThemeChanged() {
+            public final void onThemeChanged() throws Resources.NotFoundException {
                 MediaCarouselController.Companion companion = MediaCarouselController.Companion;
-                MediaCarouselController mediaCarouselController = MediaCarouselController.this;
+                MediaCarouselController mediaCarouselController = this.this$0;
                 mediaCarouselController.updatePlayers(false);
                 mediaCarouselController.inflateSettingsButton();
             }
 
             @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
-            public final void onUiModeChanged() {
+            public final void onUiModeChanged() throws Resources.NotFoundException {
                 MediaCarouselController.Companion companion = MediaCarouselController.Companion;
-                MediaCarouselController mediaCarouselController = MediaCarouselController.this;
+                MediaCarouselController mediaCarouselController = this.this$0;
                 mediaCarouselController.updatePlayers(false);
                 mediaCarouselController.inflateSettingsButton();
             }
         };
         ?? r8 = new KeyguardUpdateMonitorCallback() { // from class: com.android.systemui.media.controls.ui.controller.MediaCarouselController$keyguardUpdateMonitorCallback$1
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
-            public final void onStrongAuthStateChanged(int i2) {
-                MediaCarouselController mediaCarouselController = MediaCarouselController.this;
-                boolean isUserInLockdown = mediaCarouselController.keyguardUpdateMonitor.isUserInLockdown(i2);
+            public final void onStrongAuthStateChanged(int i) {
+                MediaCarouselController mediaCarouselController = this.this$0;
+                boolean zIsUserInLockdown = mediaCarouselController.keyguardUpdateMonitor.isUserInLockdown(i);
                 MediaCarouselControllerLogger mediaCarouselControllerLogger2 = mediaCarouselController.debugLogger;
-                if (isUserInLockdown) {
+                if (zIsUserInLockdown) {
                     mediaCarouselControllerLogger2.getClass();
                     LogLevel logLevel = LogLevel.DEBUG;
                     MediaCarouselControllerLogger$$ExternalSyntheticLambda0 mediaCarouselControllerLogger$$ExternalSyntheticLambda0 = new MediaCarouselControllerLogger$$ExternalSyntheticLambda0(1);
@@ -442,7 +449,7 @@ public final class MediaCarouselController implements Dumpable {
                     mediaCarouselController.mediaCarousel.setVisibility(8);
                     return;
                 }
-                if (mediaCarouselController.keyguardUpdateMonitor.mUserManager.isUserUnlocked(i2)) {
+                if (mediaCarouselController.keyguardUpdateMonitor.mUserManager.isUserUnlocked(i)) {
                     mediaCarouselControllerLogger2.getClass();
                     LogLevel logLevel2 = LogLevel.DEBUG;
                     MediaCarouselControllerLogger$$ExternalSyntheticLambda0 mediaCarouselControllerLogger$$ExternalSyntheticLambda02 = new MediaCarouselControllerLogger$$ExternalSyntheticLambda0(2);
@@ -457,11 +464,11 @@ public final class MediaCarouselController implements Dumpable {
         this.controllerById = new LinkedHashMap();
         this.controlViewModels = new ArrayList();
         SceneKey sceneKey = Scenes.Communal;
-        Flow isFinishedIn = keyguardTransitionInteractor.isFinishedIn(KeyguardState.GONE);
+        Flow flowIsFinishedIn = keyguardTransitionInteractor.isFinishedIn(KeyguardState.GONE);
         SharingStarted.Companion.getClass();
         StartedEagerly startedEagerly = SharingStarted.Companion.Eagerly;
         Boolean bool = Boolean.TRUE;
-        this.isOnGone = FlowKt.stateIn(isFinishedIn, coroutineScope, startedEagerly, bool);
+        this.isOnGone = FlowKt.stateIn(flowIsFinishedIn, coroutineScope, startedEagerly, bool);
         this.isGoingToDozing = FlowKt.stateIn(keyguardTransitionInteractor.isInTransition(Edge.Companion.create$default(Edge.Companion, null, KeyguardState.DOZING, 1), null), coroutineScope, startedEagerly, bool);
         dumpManager.registerNormalDumpable("MediaCarouselController", this);
         ViewGroup viewGroup2 = (ViewGroup) LayoutInflater.from(context).inflate(R.layout.media_carousel, (ViewGroup) new UniqueObjectHostView(context), false);
@@ -482,11 +489,11 @@ public final class MediaCarouselController implements Dumpable {
             MediaScrollView mediaScrollView2 = mediaCarouselScrollHandler.scrollView;
             if (mediaScrollView2.isLayoutRtl()) {
                 ViewGroup viewGroup4 = mediaScrollView2.contentContainer;
-                i = (viewGroup4 == null ? null : viewGroup4).getWidth() - mediaScrollView2.getWidth();
+                width = (viewGroup4 == null ? null : viewGroup4).getWidth() - mediaScrollView2.getWidth();
             } else {
-                i = 0;
+                width = 0;
             }
-            mediaScrollView2.setScrollX(i);
+            mediaScrollView2.setScrollX(width);
             viewGroup = viewGroup3;
         } else {
             viewGroup = viewGroup2;
@@ -496,7 +503,7 @@ public final class MediaCarouselController implements Dumpable {
         ((ConfigurationControllerImpl) configurationController).addCallback(configurationListener);
         viewGroup.addOnLayoutChangeListener(new View.OnLayoutChangeListener() { // from class: com.android.systemui.media.controls.ui.controller.MediaCarouselController.5
             @Override // android.view.View.OnLayoutChangeListener
-            public final void onLayoutChange(View view, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9) {
+            public final void onLayoutChange(View view, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8) {
                 MediaCarouselController mediaCarouselController = MediaCarouselController.this;
                 Companion companion = MediaCarouselController.Companion;
                 mediaCarouselController.updatePageIndicatorLocation();
@@ -504,16 +511,16 @@ public final class MediaCarouselController implements Dumpable {
         });
         mediaHostStatesManager.callbacks.add(new MediaHostStatesManager.Callback() { // from class: com.android.systemui.media.controls.ui.controller.MediaCarouselController.6
             @Override // com.android.systemui.media.controls.ui.controller.MediaHostStatesManager.Callback
-            public final void onHostStateChanged(int i2, MediaHostState mediaHostState) {
+            public final void onHostStateChanged(int i, MediaHostState mediaHostState) {
                 MediaCarouselController mediaCarouselController = MediaCarouselController.this;
                 Function0 function0 = mediaCarouselController.updateUserVisibility;
                 if (function0 == null) {
                     function0 = null;
                 }
                 ((MediaHierarchyManager.AnonymousClass5) function0).invoke();
-                int i3 = mediaCarouselController.desiredLocation;
-                if (i2 == i3) {
-                    mediaCarouselController.onDesiredLocationChanged(i3, mediaHostState, false, 200L, 0L);
+                int i2 = mediaCarouselController.desiredLocation;
+                if (i == i2) {
+                    mediaCarouselController.onDesiredLocationChanged(i2, mediaHostState, false, 200L, 0L);
                 }
             }
         });
@@ -532,31 +539,31 @@ public final class MediaCarouselController implements Dumpable {
         mediaCarouselController.getClass();
         MediaPlayerData.INSTANCE.getClass();
         Iterator it = MediaPlayerData.mediaPlayers.values().iterator();
-        int i = 0;
-        int i2 = 0;
+        int iMax = 0;
+        int iMax2 = 0;
         while (it.hasNext()) {
             MediaViewController mediaViewController = ((MediaControlPanel) it.next()).mMediaViewController;
-            int i3 = mediaViewController.currentWidth;
+            int i = mediaViewController.currentWidth;
             TransitionLayout transitionLayout = mediaViewController.transitionLayout;
-            float f = 0.0f;
-            i = Math.max(i, i3 + ((int) (transitionLayout != null ? transitionLayout.getTranslationX() : 0.0f)));
-            int i4 = mediaViewController.currentHeight;
+            float translationY = 0.0f;
+            iMax = Math.max(iMax, i + ((int) (transitionLayout != null ? transitionLayout.getTranslationX() : 0.0f)));
+            int i2 = mediaViewController.currentHeight;
             TransitionLayout transitionLayout2 = mediaViewController.transitionLayout;
             if (transitionLayout2 != null) {
-                f = transitionLayout2.getTranslationY();
+                translationY = transitionLayout2.getTranslationY();
             }
-            i2 = Math.max(i2, i4 + ((int) f));
+            iMax2 = Math.max(iMax2, i2 + ((int) translationY));
         }
-        if (i == mediaCarouselController.currentCarouselWidth && i2 == mediaCarouselController.currentCarouselHeight) {
+        if (iMax == mediaCarouselController.currentCarouselWidth && iMax2 == mediaCarouselController.currentCarouselHeight) {
             return;
         }
-        mediaCarouselController.currentCarouselWidth = i;
-        mediaCarouselController.currentCarouselHeight = i2;
+        mediaCarouselController.currentCarouselWidth = iMax;
+        mediaCarouselController.currentCarouselHeight = iMax2;
         MediaCarouselScrollHandler mediaCarouselScrollHandler = mediaCarouselController.mediaCarouselScrollHandler;
-        int i5 = mediaCarouselScrollHandler.carouselHeight;
-        if (i2 != i5 || i != i5) {
-            mediaCarouselScrollHandler.carouselWidth = i;
-            mediaCarouselScrollHandler.carouselHeight = i2;
+        int i3 = mediaCarouselScrollHandler.carouselHeight;
+        if (iMax2 != i3 || iMax != i3) {
+            mediaCarouselScrollHandler.carouselWidth = iMax;
+            mediaCarouselScrollHandler.carouselHeight = iMax2;
             mediaCarouselScrollHandler.scrollView.invalidateOutline();
         }
         mediaCarouselController.updatePageIndicatorLocation();
@@ -582,11 +589,11 @@ public final class MediaCarouselController implements Dumpable {
         printWriter.println("current size: " + this.currentCarouselWidth + " x " + this.currentCarouselHeight);
         DeviceEntryFaceAuthRepositoryImpl$$ExternalSyntheticOutline0.m("location: ", this.desiredLocation, printWriter);
         MediaHostState mediaHostState = this.desiredHostState;
-        Float valueOf = mediaHostState != null ? Float.valueOf(mediaHostState.getExpansion()) : null;
+        Float fValueOf = mediaHostState != null ? Float.valueOf(mediaHostState.getExpansion()) : null;
         MediaHostState mediaHostState2 = this.desiredHostState;
-        Boolean valueOf2 = mediaHostState2 != null ? Boolean.valueOf(mediaHostState2.getShowsOnlyActiveMedia()) : null;
+        Boolean boolValueOf = mediaHostState2 != null ? Boolean.valueOf(mediaHostState2.getShowsOnlyActiveMedia()) : null;
         MediaHostState mediaHostState3 = this.desiredHostState;
-        printWriter.println("state: " + valueOf + ", only active " + valueOf2 + ", visible " + (mediaHostState3 != null ? Boolean.valueOf(mediaHostState3.getVisible()) : null));
+        printWriter.println("state: " + fValueOf + ", only active " + boolValueOf + ", visible " + (mediaHostState3 != null ? Boolean.valueOf(mediaHostState3.getVisible()) : null));
         ActiveUnlockConfig$$ExternalSyntheticOutline0.m(printWriter, "isSwipedAway: ", MediaPlayerData.isSwipedAway);
         ActiveUnlockConfig$$ExternalSyntheticOutline0.m(printWriter, "allowMediaPlayerOnLockScreen: ", this.allowMediaPlayerOnLockScreen);
     }
@@ -617,7 +624,7 @@ public final class MediaCarouselController implements Dumpable {
         mediaCarouselScrollHandler.updateSettingsPresentation();
         mediaCarouselScrollHandler.scrollView.invalidateOutline();
         ImageView imageView3 = this.settingsButton;
-        (imageView3 != null ? imageView3 : null).setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.media.controls.ui.controller.MediaCarouselController$inflateSettingsButton$1
+        (imageView3 != null ? imageView3 : null).setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.media.controls.ui.controller.MediaCarouselController.inflateSettingsButton.1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view2) {
                 MediaCarouselController.this.logger.logger.log(MediaUiEvent.OPEN_SETTINGS_CAROUSEL);
@@ -642,20 +649,129 @@ public final class MediaCarouselController implements Dumpable {
         return CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new MediaCarouselController$listenForLockscreenSettingChanges$1(this, null), 7);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:52:0x00e9  */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x00f9 A[Catch: all -> 0x0022, TryCatch #0 {all -> 0x0022, blocks: (B:11:0x0013, B:13:0x0017, B:14:0x0025, B:17:0x0039, B:20:0x003f, B:23:0x0049, B:26:0x004f, B:27:0x006e, B:29:0x0072, B:31:0x007a, B:34:0x0083, B:35:0x0092, B:37:0x0098, B:39:0x00a0, B:41:0x00bb, B:43:0x00c1, B:44:0x00c6, B:50:0x00d5, B:54:0x00f9, B:58:0x00eb, B:60:0x00f1, B:64:0x0103, B:66:0x011b, B:68:0x011f, B:69:0x0122, B:73:0x005c, B:76:0x0062), top: B:10:0x0013 }] */
-    /* JADX WARN: Removed duplicated region for block: B:57:0x00fe A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:58:0x00eb A[Catch: all -> 0x0022, TryCatch #0 {all -> 0x0022, blocks: (B:11:0x0013, B:13:0x0017, B:14:0x0025, B:17:0x0039, B:20:0x003f, B:23:0x0049, B:26:0x004f, B:27:0x006e, B:29:0x0072, B:31:0x007a, B:34:0x0083, B:35:0x0092, B:37:0x0098, B:39:0x00a0, B:41:0x00bb, B:43:0x00c1, B:44:0x00c6, B:50:0x00d5, B:54:0x00f9, B:58:0x00eb, B:60:0x00f1, B:64:0x0103, B:66:0x011b, B:68:0x011f, B:69:0x0122, B:73:0x005c, B:76:0x0062), top: B:10:0x0013 }] */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public final kotlin.Unit onDesiredLocationChanged(final int r19, com.android.systemui.media.controls.ui.view.MediaHostState r20, boolean r21, long r22, long r24) {
-        /*
-            Method dump skipped, instructions count: 309
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.media.controls.ui.controller.MediaCarouselController.onDesiredLocationChanged(int, com.android.systemui.media.controls.ui.view.MediaHostState, boolean, long, long):kotlin.Unit");
+    public final Unit onDesiredLocationChanged(final int i, MediaHostState mediaHostState, boolean z, long j, long j2) {
+        Unit unit;
+        boolean z2;
+        boolean z3;
+        TransitionViewState transitionViewStateObtainViewState;
+        boolean zIsEnabled = Trace.isEnabled();
+        if (zIsEnabled) {
+            TraceUtilsKt.beginSlice("MediaCarouselController#onDesiredLocationChanged");
+        }
+        if (mediaHostState != null) {
+            try {
+                if (this.desiredLocation != i) {
+                    this.bgExecutor.execute(new Runnable() { // from class: com.android.systemui.media.controls.ui.controller.MediaCarouselController$onDesiredLocationChanged$1$1$1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            MediaUiEvent mediaUiEvent;
+                            MediaUiEventLogger mediaUiEventLogger = this.this$0.logger;
+                            int i2 = i;
+                            mediaUiEventLogger.getClass();
+                            if (i2 == 0) {
+                                mediaUiEvent = MediaUiEvent.MEDIA_CAROUSEL_LOCATION_QS;
+                            } else if (i2 == 1) {
+                                mediaUiEvent = MediaUiEvent.MEDIA_CAROUSEL_LOCATION_QQS;
+                            } else if (i2 == 2) {
+                                mediaUiEvent = MediaUiEvent.MEDIA_CAROUSEL_LOCATION_LOCKSCREEN;
+                            } else if (i2 == 3) {
+                                mediaUiEvent = MediaUiEvent.MEDIA_CAROUSEL_LOCATION_DREAM;
+                            } else if (i2 == 4) {
+                                mediaUiEvent = MediaUiEvent.MEDIA_CAROUSEL_LOCATION_COMMUNAL;
+                            } else {
+                                if (i2 != 5) {
+                                    throw new IllegalArgumentException(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i2, "Unknown media carousel location "));
+                                }
+                                mediaUiEvent = MediaUiEvent.MEDIA_CAROUSEL_LOCATION_STATUS_BAR_POPUP;
+                            }
+                            mediaUiEventLogger.logger.log(mediaUiEvent);
+                        }
+                    });
+                }
+                int i2 = this.desiredLocation;
+                this.desiredLocation = i;
+                this.desiredHostState = mediaHostState;
+                boolean z4 = true;
+                boolean z5 = mediaHostState.getExpansion() > 0.0f;
+                boolean z6 = this.currentlyExpanded;
+                MediaCarouselScrollHandler mediaCarouselScrollHandler = this.mediaCarouselScrollHandler;
+                if (z6 != z5) {
+                    this.currentlyExpanded = z5;
+                    updateSeekbarListening(mediaCarouselScrollHandler.visibleToUser);
+                }
+                if (i == 4) {
+                    ImageView imageView = this.settingsButton;
+                    if (imageView == null) {
+                        imageView = null;
+                    }
+                    imageView.setColorFilter(this.context.getColor(android.R.color.resolver_profile_tab_text));
+                } else {
+                    ImageView imageView2 = this.settingsButton;
+                    if (imageView2 == null) {
+                        imageView2 = null;
+                    }
+                    imageView2.setColorFilter(this.context.getColor(R.color.notification_gear_color));
+                }
+                boolean z7 = (this.currentlyExpanded || this.mediaManager.hasActiveMediaOrRecommendation() || !mediaHostState.getShowsOnlyActiveMedia()) ? false : true;
+                MediaPlayerData.INSTANCE.getClass();
+                for (MediaControlPanel mediaControlPanel : MediaPlayerData.mediaPlayers.values()) {
+                    if (z) {
+                        MediaViewController mediaViewController = mediaControlPanel.mMediaViewController;
+                        mediaViewController.animateNextStateChange = z4;
+                        mediaViewController.animationDuration = j;
+                        z2 = z4;
+                        z3 = z7;
+                        mediaViewController.animationDelay = j2;
+                    } else {
+                        z2 = z4;
+                        z3 = z7;
+                    }
+                    if (z3 && mediaControlPanel.mMediaViewController.isGutsVisible) {
+                        mediaControlPanel.closeGuts(!z);
+                    }
+                    MediaViewController mediaViewController2 = mediaControlPanel.mMediaViewController;
+                    mediaViewController2.isFontUpdateAllowed = (mediaViewController2.isFontUpdateAllowed || 4 == i || 4 == i2) ? z2 : false;
+                    MediaHostState mediaHostState2 = (MediaHostState) ((LinkedHashMap) mediaViewController2.mediaHostStatesManager.mediaHostStates).get(Integer.valueOf(i));
+                    if (mediaHostState2 == null) {
+                        transitionViewStateObtainViewState = null;
+                    } else {
+                        transitionViewStateObtainViewState = mediaViewController2.obtainViewState(mediaHostState2, false);
+                        if (transitionViewStateObtainViewState != null) {
+                            TransitionViewState transitionViewState = mediaViewController2.tmpState;
+                            mediaViewController2.updateViewStateSize(transitionViewStateObtainViewState, i, transitionViewState);
+                            transitionViewStateObtainViewState = transitionViewState;
+                        }
+                    }
+                    if (transitionViewStateObtainViewState != null) {
+                        mediaViewController2.layoutController.setMeasureState(transitionViewStateObtainViewState);
+                    }
+                    z4 = z2;
+                    z7 = z3;
+                }
+                mediaCarouselScrollHandler.showsSettingsButton = !mediaHostState.getShowsOnlyActiveMedia();
+                mediaCarouselScrollHandler.falsingProtectionNeeded = mediaHostState.getFalsingProtectionNeeded();
+                boolean visible = mediaHostState.getVisible();
+                if (visible != this.playersVisible) {
+                    this.playersVisible = visible;
+                    if (visible) {
+                        mediaCarouselScrollHandler.resetTranslation(false);
+                    }
+                }
+                updateCarouselSize();
+                unit = Unit.INSTANCE;
+            } catch (Throwable th) {
+                if (zIsEnabled) {
+                    TraceUtilsKt.endSlice();
+                }
+                throw th;
+            }
+        } else {
+            unit = null;
+        }
+        if (zIsEnabled) {
+            TraceUtilsKt.endSlice();
+        }
+        return unit;
     }
 
     public final void onSwipeToDismiss() {
@@ -665,7 +781,7 @@ public final class MediaCarouselController implements Dumpable {
         this.mediaManager.onSwipeToDismiss();
     }
 
-    public final MediaControlPanel removePlayer(String str, boolean z) {
+    public final MediaControlPanel removePlayer(String str, boolean z) throws Resources.NotFoundException {
         MediaPlayerData.INSTANCE.getClass();
         MediaPlayerData.MediaSortKey mediaSortKey = (MediaPlayerData.MediaSortKey) MediaPlayerData.mediaData.remove(str);
         MediaControlPanel mediaControlPanel = mediaSortKey != null ? (MediaControlPanel) MediaPlayerData.mediaPlayers.remove(mediaSortKey) : null;
@@ -675,10 +791,10 @@ public final class MediaCarouselController implements Dumpable {
         MediaViewHolder mediaViewHolder = mediaControlPanel.mMediaViewHolder;
         TransitionLayout transitionLayout = mediaViewHolder != null ? mediaViewHolder.player : null;
         MediaCarouselScrollHandler mediaCarouselScrollHandler = this.mediaCarouselScrollHandler;
-        int indexOfChild = mediaCarouselScrollHandler.mediaContent.indexOfChild(transitionLayout);
+        int iIndexOfChild = mediaCarouselScrollHandler.mediaContent.indexOfChild(transitionLayout);
         int i = mediaCarouselScrollHandler.visibleMediaIndex;
         boolean z2 = true;
-        boolean z3 = indexOfChild <= i;
+        boolean z3 = iIndexOfChild <= i;
         if (z3) {
             mediaCarouselScrollHandler.visibleMediaIndex = Math.max(0, i - 1);
         }
@@ -701,7 +817,7 @@ public final class MediaCarouselController implements Dumpable {
         return mediaControlPanel;
     }
 
-    public final void reorderAllPlayers() {
+    public final void reorderAllPlayers() throws Resources.NotFoundException {
         this.mediaContent.removeAllViews();
         MediaPlayerData.INSTANCE.getClass();
         Iterator it = MediaPlayerData.mediaPlayers.values().iterator();
@@ -729,124 +845,50 @@ public final class MediaCarouselController implements Dumpable {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:36:0x00b3, code lost:
-    
-        if (r0 == r1) goto L43;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:42:0x00b5  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void setCurrentState(int r7, int r8, float r9, boolean r10) {
-        /*
-            r6 = this;
-            int r0 = r6.currentStartLocation
-            if (r7 != r0) goto L12
-            int r0 = r6.currentEndLocation
-            if (r8 != r0) goto L12
-            float r0 = r6.currentTransitionProgress
-            int r0 = (r9 > r0 ? 1 : (r9 == r0 ? 0 : -1))
-            if (r0 != 0) goto L12
-            if (r10 == 0) goto L11
-            goto L12
-        L11:
-            return
-        L12:
-            r6.currentStartLocation = r7
-            r6.currentEndLocation = r8
-            r6.currentTransitionProgress = r9
-            com.android.systemui.media.controls.ui.controller.MediaPlayerData r7 = com.android.systemui.media.controls.ui.controller.MediaPlayerData.INSTANCE
-            r7.getClass()
-            java.util.TreeMap r7 = com.android.systemui.media.controls.ui.controller.MediaPlayerData.mediaPlayers
-            java.util.Collection r7 = r7.values()
-            java.util.Iterator r7 = r7.iterator()
-        L27:
-            boolean r8 = r7.hasNext()
-            if (r8 == 0) goto L44
-            java.lang.Object r8 = r7.next()
-            com.android.systemui.media.controls.ui.controller.MediaControlPanel r8 = (com.android.systemui.media.controls.ui.controller.MediaControlPanel) r8
-            com.android.systemui.media.controls.ui.controller.MediaViewController r0 = r8.mMediaViewController
-            int r1 = r6.currentStartLocation
-            int r2 = r6.currentEndLocation
-            float r3 = r6.currentTransitionProgress
-            int r8 = com.android.systemui.media.controls.ui.controller.MediaViewController.$r8$clinit
-            r5 = 0
-            r4 = r10
-            r0.setCurrentState(r1, r2, r3, r4, r5)
-            r10 = r4
-            goto L27
-        L44:
-            com.android.systemui.media.controls.ui.controller.MediaHostStatesManager r7 = r6.mediaHostStatesManager
-            java.util.Map r7 = r7.mediaHostStates
-            int r8 = r6.currentEndLocation
-            java.lang.Integer r8 = java.lang.Integer.valueOf(r8)
-            java.util.LinkedHashMap r7 = (java.util.LinkedHashMap) r7
-            java.lang.Object r8 = r7.get(r8)
-            com.android.systemui.media.controls.ui.view.MediaHostState r8 = (com.android.systemui.media.controls.ui.view.MediaHostState) r8
-            r9 = 1
-            if (r8 == 0) goto L5e
-            boolean r8 = r8.getShowsOnlyActiveMedia()
-            goto L5f
-        L5e:
-            r8 = r9
-        L5f:
-            int r10 = r6.currentStartLocation
-            java.lang.Integer r10 = java.lang.Integer.valueOf(r10)
-            java.lang.Object r10 = r7.get(r10)
-            com.android.systemui.media.controls.ui.view.MediaHostState r10 = (com.android.systemui.media.controls.ui.view.MediaHostState) r10
-            if (r10 == 0) goto L72
-            boolean r10 = r10.getShowsOnlyActiveMedia()
-            goto L73
-        L72:
-            r10 = r8
-        L73:
-            int r0 = r6.currentStartLocation
-            java.lang.Integer r0 = java.lang.Integer.valueOf(r0)
-            java.lang.Object r0 = r7.get(r0)
-            com.android.systemui.media.controls.ui.view.MediaHostState r0 = (com.android.systemui.media.controls.ui.view.MediaHostState) r0
-            r1 = 0
-            if (r0 == 0) goto L87
-            boolean r0 = r0.getDisableScrolling()
-            goto L88
-        L87:
-            r0 = r1
-        L88:
-            int r2 = r6.currentEndLocation
-            java.lang.Integer r2 = java.lang.Integer.valueOf(r2)
-            java.lang.Object r7 = r7.get(r2)
-            com.android.systemui.media.controls.ui.view.MediaHostState r7 = (com.android.systemui.media.controls.ui.view.MediaHostState) r7
-            if (r7 == 0) goto L9a
-            boolean r1 = r7.getDisableScrolling()
-        L9a:
-            boolean r7 = r6.currentlyShowingOnlyActive
-            if (r7 != r8) goto Lb5
-            boolean r7 = r6.currentlyDisableScrolling
-            if (r7 != r1) goto Lb5
-            float r7 = r6.currentTransitionProgress
-            r2 = 1065353216(0x3f800000, float:1.0)
-            int r2 = (r7 > r2 ? 1 : (r7 == r2 ? 0 : -1))
-            if (r2 != 0) goto Lab
-            goto Lc2
-        Lab:
-            r2 = 0
-            int r7 = (r7 > r2 ? 1 : (r7 == r2 ? 0 : -1))
-            if (r7 != 0) goto Lb1
-            goto Lc2
-        Lb1:
-            if (r10 != r8) goto Lb5
-            if (r0 == r1) goto Lc2
-        Lb5:
-            r6.currentlyShowingOnlyActive = r8
-            r6.currentlyDisableScrolling = r1
-            com.android.systemui.media.controls.ui.view.MediaCarouselScrollHandler r7 = r6.mediaCarouselScrollHandler
-            r7.resetTranslation(r9)
-            boolean r8 = r6.currentlyDisableScrolling
-            r7.scrollingDisabled = r8
-        Lc2:
-            r6.updatePageIndicatorAlpha()
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.media.controls.ui.controller.MediaCarouselController.setCurrentState(int, int, float, boolean):void");
+    public final void setCurrentState(int i, int i2, float f, boolean z) {
+        if (i == this.currentStartLocation && i2 == this.currentEndLocation && f == this.currentTransitionProgress && !z) {
+            return;
+        }
+        this.currentStartLocation = i;
+        this.currentEndLocation = i2;
+        this.currentTransitionProgress = f;
+        MediaPlayerData.INSTANCE.getClass();
+        Iterator it = MediaPlayerData.mediaPlayers.values().iterator();
+        while (it.hasNext()) {
+            MediaViewController mediaViewController = ((MediaControlPanel) it.next()).mMediaViewController;
+            int i3 = this.currentStartLocation;
+            int i4 = this.currentEndLocation;
+            float f2 = this.currentTransitionProgress;
+            int i5 = MediaViewController.$r8$clinit;
+            boolean z2 = z;
+            mediaViewController.setCurrentState(i3, i4, f2, z2, false);
+            z = z2;
+        }
+        LinkedHashMap linkedHashMap = (LinkedHashMap) this.mediaHostStatesManager.mediaHostStates;
+        MediaHostState mediaHostState = (MediaHostState) linkedHashMap.get(Integer.valueOf(this.currentEndLocation));
+        boolean showsOnlyActiveMedia = mediaHostState != null ? mediaHostState.getShowsOnlyActiveMedia() : true;
+        MediaHostState mediaHostState2 = (MediaHostState) linkedHashMap.get(Integer.valueOf(this.currentStartLocation));
+        boolean showsOnlyActiveMedia2 = mediaHostState2 != null ? mediaHostState2.getShowsOnlyActiveMedia() : showsOnlyActiveMedia;
+        MediaHostState mediaHostState3 = (MediaHostState) linkedHashMap.get(Integer.valueOf(this.currentStartLocation));
+        boolean disableScrolling = mediaHostState3 != null ? mediaHostState3.getDisableScrolling() : false;
+        MediaHostState mediaHostState4 = (MediaHostState) linkedHashMap.get(Integer.valueOf(this.currentEndLocation));
+        boolean disableScrolling2 = mediaHostState4 != null ? mediaHostState4.getDisableScrolling() : false;
+        if (this.currentlyShowingOnlyActive == showsOnlyActiveMedia && this.currentlyDisableScrolling == disableScrolling2) {
+            float f3 = this.currentTransitionProgress;
+            if (f3 != 1.0f && f3 != 0.0f && (showsOnlyActiveMedia2 != showsOnlyActiveMedia || disableScrolling != disableScrolling2)) {
+            }
+        } else {
+            this.currentlyShowingOnlyActive = showsOnlyActiveMedia;
+            this.currentlyDisableScrolling = disableScrolling2;
+            MediaCarouselScrollHandler mediaCarouselScrollHandler = this.mediaCarouselScrollHandler;
+            mediaCarouselScrollHandler.resetTranslation(true);
+            mediaCarouselScrollHandler.scrollingDisabled = this.currentlyDisableScrolling;
+        }
+        updatePageIndicatorAlpha();
     }
 
     public final void updateCarouselSize() {
@@ -863,7 +905,7 @@ public final class MediaCarouselController implements Dumpable {
         }
         this.carouselMeasureWidth = width;
         this.carouselMeasureHeight = height;
-        int m = StrongAuthPopup$$ExternalSyntheticOutline0.m(this.context, R.dimen.qs_media_padding, width);
+        int iM = StrongAuthPopup$$ExternalSyntheticOutline0.m(this.context, R.dimen.qs_media_padding, width);
         MediaHostState mediaHostState3 = this.desiredHostState;
         int widthMeasureSpec = (mediaHostState3 == null || (measurementInput2 = mediaHostState3.getMeasurementInput()) == null) ? 0 : measurementInput2.getWidthMeasureSpec();
         MediaHostState mediaHostState4 = this.desiredHostState;
@@ -872,19 +914,19 @@ public final class MediaCarouselController implements Dumpable {
         mediaScrollView.measure(widthMeasureSpec, heightMeasureSpec);
         mediaScrollView.layout(0, 0, width, mediaScrollView.getMeasuredHeight());
         MediaCarouselScrollHandler mediaCarouselScrollHandler = this.mediaCarouselScrollHandler;
-        mediaCarouselScrollHandler.playerWidthPlusPadding = m;
-        int i = mediaCarouselScrollHandler.visibleMediaIndex * m;
+        mediaCarouselScrollHandler.playerWidthPlusPadding = iM;
+        int i = mediaCarouselScrollHandler.visibleMediaIndex * iM;
         int i2 = mediaCarouselScrollHandler.scrollIntoCurrentMedia;
-        int i3 = i2 > m ? (m - (i2 - m)) + i : i + i2;
+        int width2 = i2 > iM ? (iM - (i2 - iM)) + i : i + i2;
         MediaScrollView mediaScrollView2 = mediaCarouselScrollHandler.scrollView;
         if (mediaScrollView2.isLayoutRtl()) {
             ViewGroup viewGroup = mediaScrollView2.contentContainer;
             if (viewGroup == null) {
                 viewGroup = null;
             }
-            i3 = (viewGroup.getWidth() - mediaScrollView2.getWidth()) - i3;
+            width2 = (viewGroup.getWidth() - mediaScrollView2.getWidth()) - width2;
         }
-        mediaScrollView2.setScrollX(i3);
+        mediaScrollView2.setScrollX(width2);
     }
 
     public final void updatePageIndicator$2() {
@@ -903,46 +945,46 @@ public final class MediaCarouselController implements Dumpable {
         boolean visible = mediaHostState != null ? mediaHostState.getVisible() : false;
         MediaHostState mediaHostState2 = (MediaHostState) linkedHashMap.get(Integer.valueOf(this.currentStartLocation));
         boolean visible2 = mediaHostState2 != null ? mediaHostState2.getVisible() : false;
-        float f = 1.0f;
-        float f2 = visible2 ? 1.0f : 0.0f;
+        float fLerp = 1.0f;
+        float f = visible2 ? 1.0f : 0.0f;
         MediaHostState mediaHostState3 = (MediaHostState) linkedHashMap.get(Integer.valueOf(this.currentEndLocation));
         float squishFraction = mediaHostState3 != null ? mediaHostState3.getSquishFraction() : 1.0f;
-        float f3 = visible ? 1.0f : 0.0f;
+        float f2 = visible ? 1.0f : 0.0f;
         PageIndicator pageIndicator = this.pageIndicator;
         float translationY = (pageIndicator.getTranslationY() + pageIndicator.getHeight()) / this.mediaCarousel.getMeasuredHeight();
         Companion.getClass();
-        float interpolation = TRANSFORM_BEZIER.getInterpolation(MathUtils.constrain((squishFraction - translationY) / (1.0f - translationY), 0.0f, 1.0f)) * f3;
+        float interpolation = TRANSFORM_BEZIER.getInterpolation(MathUtils.constrain((squishFraction - translationY) / (1.0f - translationY), 0.0f, 1.0f)) * f2;
         if (!visible || !visible2) {
-            float f4 = this.currentTransitionProgress;
+            float f3 = this.currentTransitionProgress;
             if (!visible) {
-                f4 = 1.0f - f4;
+                f3 = 1.0f - f3;
             }
-            f = MathUtils.lerp(f2, interpolation, MathUtils.constrain(MathUtils.map(0.95f, 1.0f, 0.0f, 1.0f, f4), 0.0f, 1.0f));
+            fLerp = MathUtils.lerp(f, interpolation, MathUtils.constrain(MathUtils.map(0.95f, 1.0f, 0.0f, 1.0f, f3), 0.0f, 1.0f));
         }
-        pageIndicator.setAlpha(f);
+        pageIndicator.setAlpha(fLerp);
     }
 
     public final void updatePageIndicatorLocation() {
-        int i;
         int width;
+        int width2;
         boolean z = this.isRtl;
         PageIndicator pageIndicator = this.pageIndicator;
         if (z) {
-            i = pageIndicator.getWidth();
-            width = this.currentCarouselWidth;
-        } else {
-            i = this.currentCarouselWidth;
             width = pageIndicator.getWidth();
+            width2 = this.currentCarouselWidth;
+        } else {
+            width = this.currentCarouselWidth;
+            width2 = pageIndicator.getWidth();
         }
-        pageIndicator.setTranslationX(((i - width) / 2.0f) + this.mediaCarouselScrollHandler.contentTranslation);
+        pageIndicator.setTranslationX(((width - width2) / 2.0f) + this.mediaCarouselScrollHandler.contentTranslation);
         pageIndicator.setTranslationY((this.mediaCarousel.getMeasuredHeight() - pageIndicator.getHeight()) - ((ViewGroup.MarginLayoutParams) pageIndicator.getLayoutParams()).bottomMargin);
     }
 
-    public final void updatePlayers(final boolean z) {
-        ColorStateList valueOf = ColorStateList.valueOf(this.context.getColor(R.color.media_paging_indicator));
+    public final void updatePlayers(final boolean z) throws Resources.NotFoundException {
+        ColorStateList colorStateListValueOf = ColorStateList.valueOf(this.context.getColor(R.color.media_paging_indicator));
         PageIndicator pageIndicator = this.pageIndicator;
-        if (!valueOf.equals(pageIndicator.mTint)) {
-            pageIndicator.mTint = valueOf;
+        if (!colorStateListValueOf.equals(pageIndicator.mTint)) {
+            pageIndicator.mTint = colorStateListValueOf;
             int childCount = pageIndicator.getChildCount();
             for (int i = 0; i < childCount; i++) {
                 View childAt = pageIndicator.getChildAt(i);
@@ -952,12 +994,12 @@ public final class MediaCarouselController implements Dumpable {
             }
         }
         MediaPlayerData.INSTANCE.getClass();
-        Collection values = MediaPlayerData.visibleMediaPlayers.values();
+        Collection collectionValues = MediaPlayerData.visibleMediaPlayers.values();
         MediaCarouselScrollHandler mediaCarouselScrollHandler = this.mediaCarouselScrollHandler;
-        final MediaPlayerData.MediaSortKey mediaSortKey = (MediaPlayerData.MediaSortKey) CollectionsKt___CollectionsKt.elementAtOrNull(values, mediaCarouselScrollHandler.visibleMediaIndex);
+        final MediaPlayerData.MediaSortKey mediaSortKey = (MediaPlayerData.MediaSortKey) CollectionsKt___CollectionsKt.elementAtOrNull(collectionValues, mediaCarouselScrollHandler.visibleMediaIndex);
         final Runnable runnable = new Runnable() { // from class: com.android.systemui.media.controls.ui.controller.MediaCarouselController$updatePlayers$onUiExecutionEnd$1
             @Override // java.lang.Runnable
-            public final void run() {
+            public final void run() throws Resources.NotFoundException {
                 if (z) {
                     MediaCarouselController mediaCarouselController = this;
                     MediaCarouselController.Companion companion = MediaCarouselController.Companion;
@@ -965,9 +1007,9 @@ public final class MediaCarouselController implements Dumpable {
                 }
             }
         };
-        Set<Map.Entry> entrySet = ((LinkedHashMap) MediaPlayerData.mediaData).entrySet();
-        ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(entrySet, 10));
-        for (Map.Entry entry : entrySet) {
+        Set<Map.Entry> setEntrySet = ((LinkedHashMap) MediaPlayerData.mediaData).entrySet();
+        ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(setEntrySet, 10));
+        for (Map.Entry entry : setEntrySet) {
             arrayList.add(new Pair(entry.getKey(), ((MediaPlayerData.MediaSortKey) entry.getValue()).data));
         }
         int size = arrayList.size();
@@ -980,8 +1022,8 @@ public final class MediaCarouselController implements Dumpable {
             if (z) {
                 removePlayer(str, false);
             }
-            boolean isEnabled = Trace.isEnabled();
-            if (isEnabled) {
+            boolean zIsEnabled = Trace.isEnabled();
+            if (zIsEnabled) {
                 TraceUtilsKt.beginSlice("MediaCarouselController#addOrUpdatePlayer");
             }
             try {
@@ -994,145 +1036,150 @@ public final class MediaCarouselController implements Dumpable {
                     this.bgExecutor.execute(new Runnable() { // from class: com.android.systemui.media.controls.ui.controller.MediaCarouselController$addOrUpdatePlayer$1$1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            MediaCarouselController mediaCarouselController = MediaCarouselController.this;
+                            MediaCarouselController mediaCarouselController = this.this$0;
                             MediaCarouselController.Companion companion = MediaCarouselController.Companion;
                             mediaCarouselController.getClass();
                             MediaViewHolder.Companion companion2 = MediaViewHolder.Companion;
-                            LayoutInflater from = LayoutInflater.from(mediaCarouselController.context);
+                            LayoutInflater layoutInflaterFrom = LayoutInflater.from(mediaCarouselController.context);
                             ViewGroup viewGroup = mediaCarouselController.mediaContent;
                             companion2.getClass();
-                            View inflate = from.inflate(R.layout.media_session_view, viewGroup, false);
-                            inflate.setLayerType(2, null);
-                            inflate.setLayoutDirection(3);
-                            final MediaViewHolder mediaViewHolder = new MediaViewHolder(inflate);
+                            View viewInflate = layoutInflaterFrom.inflate(R.layout.media_session_view, viewGroup, false);
+                            viewInflate.setLayerType(2, null);
+                            viewInflate.setLayoutDirection(3);
+                            final MediaViewHolder mediaViewHolder = new MediaViewHolder(viewInflate);
                             mediaViewHolder.seekBar.setLayoutDirection(0);
-                            final MediaCarouselController mediaCarouselController2 = MediaCarouselController.this;
+                            final MediaCarouselController mediaCarouselController2 = this.this$0;
                             DelayableExecutor delayableExecutor = mediaCarouselController2.uiExecutor;
                             final String str2 = str;
                             final MediaData mediaData2 = mediaData;
                             final MediaPlayerData.MediaSortKey mediaSortKey4 = mediaSortKey3;
                             final Runnable runnable2 = runnable;
                             delayableExecutor.execute(new Runnable() { // from class: com.android.systemui.media.controls.ui.controller.MediaCarouselController$addOrUpdatePlayer$1$1.1
-                                /* JADX WARN: Code restructure failed: missing block: B:10:0x0098, code lost:
-                                
-                                    r2.player.setOnLongClickListener(new com.android.systemui.media.controls.ui.controller.MediaControlPanel$$ExternalSyntheticLambda4(r5));
-                                    r5.mMediaViewHolder.albumView.setLayerType(2, null);
-                                    r7 = r5.mMediaViewHolder;
-                                    r11 = r7.titleText;
-                                    r12 = r7.artistText;
-                                    r7 = r7.explicitIndicator;
-                                    r10 = r5.loadAnimator(com.android.systemui.R.anim.media_metadata_enter, com.android.app.animation.Interpolators.EMPHASIZED_DECELERATE, r11, r12, r7);
-                                    r7 = r5.loadAnimator(com.android.systemui.R.anim.media_metadata_exit, com.android.app.animation.Interpolators.EMPHASIZED_ACCELERATE, r11, r12, r7);
-                                    r5.mMultiRippleController = new com.android.systemui.surfaceeffects.ripple.MultiRippleController(r2.multiRippleView);
-                                    r11 = android.graphics.BlendMode.SCREEN;
-                                    r12 = r2.turbulenceNoiseView;
-                                    r12.getClass();
-                                    r12.paint.setBlendMode(r11);
-                                    r2 = r2.loadingEffectView;
-                                    r2.blendMode = r11;
-                                    r2.setVisibility(4);
-                                    r5.mColorSchemeTransition = new com.android.systemui.media.controls.ui.animation.ColorSchemeTransition(r5.mContext, r5.mMediaViewHolder, r5.mMultiRippleController, new com.android.systemui.surfaceeffects.turbulencenoise.TurbulenceNoiseController(r12));
-                                    r5.mMetadataAnimationHandler = new com.android.systemui.media.controls.ui.animation.MetadataAnimationHandler(r7, r10);
-                                    r9.sizeChangedListener = new com.android.systemui.media.controls.ui.controller.MediaCarouselController$setupNewPlayer$1(r1);
-                                    r2 = new android.widget.LinearLayout.LayoutParams(-1, -2);
-                                    r6 = r5.mMediaViewHolder;
-                                 */
-                                /* JADX WARN: Code restructure failed: missing block: B:11:0x0121, code lost:
-                                
-                                    if (r6 == null) goto L18;
-                                 */
-                                /* JADX WARN: Code restructure failed: missing block: B:12:0x0123, code lost:
-                                
-                                    r6 = r6.player;
-                                 */
-                                /* JADX WARN: Code restructure failed: missing block: B:13:0x0125, code lost:
-                                
-                                    if (r6 == null) goto L18;
-                                 */
-                                /* JADX WARN: Code restructure failed: missing block: B:14:0x0127, code lost:
-                                
-                                    r6.setLayoutParams(r2);
-                                 */
-                                /* JADX WARN: Code restructure failed: missing block: B:15:0x012a, code lost:
-                                
-                                    r5.bindPlayer(r4, r3);
-                                 */
-                                /* JADX WARN: Code restructure failed: missing block: B:16:0x0131, code lost:
-                                
-                                    if (r1.mediaCarouselScrollHandler.visibleToUser == false) goto L23;
-                                 */
-                                /* JADX WARN: Code restructure failed: missing block: B:18:0x0135, code lost:
-                                
-                                    if (r1.currentlyExpanded == false) goto L23;
-                                 */
-                                /* JADX WARN: Code restructure failed: missing block: B:19:0x0137, code lost:
-                                
-                                    r2 = true;
-                                 */
-                                /* JADX WARN: Code restructure failed: missing block: B:20:0x013c, code lost:
-                                
-                                    r8.bgExecutor.execute(new com.android.systemui.media.controls.ui.viewmodel.SeekBarViewModel$listening$1(r8, r2));
-                                    r2 = com.android.systemui.media.controls.ui.controller.MediaPlayerData.INSTANCE;
-                                    r2.addMediaPlayer(r3, r4, r5, r1.systemClock, r1.debugLogger);
-                                    r10 = r1.currentStartLocation;
-                                    r11 = r1.currentEndLocation;
-                                    r12 = r1.currentTransitionProgress;
-                                    r3 = com.android.systemui.media.controls.ui.controller.MediaViewController.$r8$clinit;
-                                    r9.setCurrentState(r10, r11, r12, true, false);
-                                 */
-                                /* JADX WARN: Code restructure failed: missing block: B:21:0x015f, code lost:
-                                
-                                    if (r4.active == false) goto L27;
-                                 */
-                                /* JADX WARN: Code restructure failed: missing block: B:22:0x0161, code lost:
-                                
-                                    r1.reorderAllPlayers();
-                                 */
-                                /* JADX WARN: Code restructure failed: missing block: B:23:0x0164, code lost:
-                                
-                                    r1.updatePageIndicator$2();
-                                    r1.mediaCarouselScrollHandler.onPlayersChanged();
-                                    r1 = r1.mediaControlChipInteractor;
-                                    r2.getClass();
-                                    r1.updateMediaControlChipModelLegacy(com.android.systemui.media.controls.ui.controller.MediaPlayerData.getFirstActiveMediaData());
-                                    com.android.systemui.util.animation.UniqueObjectHostViewKt.setRequiresRemeasuring(r1.mediaFrame, true);
-                                    r0 = r6;
-                                 */
-                                /* JADX WARN: Code restructure failed: missing block: B:24:0x0188, code lost:
-                                
-                                    if (r0 == null) goto L37;
-                                 */
-                                /* JADX WARN: Code restructure failed: missing block: B:25:0x018a, code lost:
-                                
-                                    r0.run();
-                                 */
-                                /* JADX WARN: Code restructure failed: missing block: B:26:0x018d, code lost:
-                                
-                                    return;
-                                 */
-                                /* JADX WARN: Code restructure failed: missing block: B:28:?, code lost:
-                                
-                                    return;
-                                 */
-                                /* JADX WARN: Code restructure failed: missing block: B:29:0x013a, code lost:
-                                
-                                    r2 = false;
-                                 */
-                                /* JADX WARN: Code restructure failed: missing block: B:31:0x0095, code lost:
-                                
-                                    if (r7 != false) goto L9;
-                                 */
+                                /* JADX WARN: Removed duplicated region for block: B:9:0x0086 A[DONT_GENERATE] */
                                 @Override // java.lang.Runnable
                                 /*
                                     Code decompiled incorrectly, please refer to instructions dump.
-                                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                                 */
-                                public final void run() {
-                                    /*
-                                        Method dump skipped, instructions count: 405
-                                        To view this dump change 'Code comments level' option to 'DEBUG'
-                                    */
-                                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.media.controls.ui.controller.MediaCarouselController$addOrUpdatePlayer$1$1.AnonymousClass1.run():void");
+                                public final void run() throws Resources.NotFoundException {
+                                    TransitionLayout transitionLayout;
+                                    MediaCarouselController mediaCarouselController3 = mediaCarouselController2;
+                                    String str3 = str2;
+                                    MediaData mediaData3 = mediaData2;
+                                    MediaViewHolder mediaViewHolder2 = mediaViewHolder;
+                                    MediaCarouselController.Companion companion3 = MediaCarouselController.Companion;
+                                    final MediaControlPanel mediaControlPanel2 = (MediaControlPanel) mediaCarouselController3.mediaControlPanelFactory.get();
+                                    mediaControlPanel2.mMediaViewHolder = mediaViewHolder2;
+                                    TransitionLayout transitionLayout2 = mediaViewHolder2.player;
+                                    SeekBarObserver seekBarObserver = new SeekBarObserver(mediaViewHolder2);
+                                    mediaControlPanel2.mSeekBarObserver = seekBarObserver;
+                                    SeekBarViewModel seekBarViewModel = mediaControlPanel2.mSeekBarViewModel;
+                                    seekBarViewModel._progress.observeForever(seekBarObserver);
+                                    SeekBar seekBar = mediaViewHolder2.seekBar;
+                                    seekBar.setOnSeekBarChangeListener(new SeekBarViewModel.SeekBarChangeListener(seekBarViewModel, seekBarViewModel.falsingManager));
+                                    seekBar.setOnTouchListener(new SeekBarViewModel.SeekBarTouchListener(seekBarViewModel, seekBar));
+                                    seekBarViewModel.scrubbingChangeListener = mediaControlPanel2.mScrubbingChangeListener;
+                                    seekBarViewModel.enabledChangeListener = mediaControlPanel2.mEnabledChangeListener;
+                                    seekBarViewModel.contentDescriptionListener = mediaControlPanel2.mContentDescriptionListener;
+                                    MediaViewController mediaViewController = mediaControlPanel2.mMediaViewController;
+                                    mediaViewController.getClass();
+                                    boolean zIsEnabled2 = Trace.isEnabled();
+                                    if (zIsEnabled2) {
+                                        TraceUtilsKt.beginSlice("MediaViewController#attach");
+                                    }
+                                    try {
+                                        mediaViewController.collapsedLayout.load(mediaViewController.context, R.xml.media_session_collapsed);
+                                        mediaViewController.expandedLayout.load(mediaViewController.context, R.xml.media_session_expanded);
+                                        mediaViewController.refreshState();
+                                        mediaViewController.logger.logMediaLocation(mediaViewController.currentStartLocation, mediaViewController.currentEndLocation, "attach");
+                                        mediaViewController.transitionLayout = transitionLayout2;
+                                        mediaViewController.layoutController.attach(transitionLayout2);
+                                        int i4 = mediaViewController.currentEndLocation;
+                                        if (i4 != -1) {
+                                            mediaViewController.setCurrentState(mediaViewController.currentStartLocation, i4, mediaViewController.currentTransitionProgress, true, false);
+                                            Unit unit = Unit.INSTANCE;
+                                            if (zIsEnabled2) {
+                                            }
+                                        }
+                                        mediaViewHolder2.player.setOnLongClickListener(new View.OnLongClickListener() { // from class: com.android.systemui.media.controls.ui.controller.MediaControlPanel$$ExternalSyntheticLambda4
+                                            @Override // android.view.View.OnLongClickListener
+                                            public final boolean onLongClick(View view) {
+                                                MediaControlPanel mediaControlPanel3 = mediaControlPanel2;
+                                                if (mediaControlPanel3.mFalsingManager.isFalseLongTap(1)) {
+                                                    return true;
+                                                }
+                                                MediaViewController mediaViewController2 = mediaControlPanel3.mMediaViewController;
+                                                if (mediaViewController2.isGutsVisible) {
+                                                    mediaControlPanel3.closeGuts(false);
+                                                    return true;
+                                                }
+                                                MediaViewHolder mediaViewHolder3 = mediaControlPanel3.mMediaViewHolder;
+                                                if (mediaViewHolder3 != null) {
+                                                    mediaViewHolder3.marquee(MediaViewController.GUTS_ANIMATION_DURATION, true);
+                                                }
+                                                if (!mediaViewController2.isGutsVisible) {
+                                                    mediaViewController2.isGutsVisible = true;
+                                                    mediaViewController2.animateNextStateChange = true;
+                                                    mediaViewController2.animationDuration = MediaViewController.GUTS_ANIMATION_DURATION;
+                                                    mediaViewController2.animationDelay = 0L;
+                                                    mediaViewController2.setCurrentState(mediaViewController2.currentStartLocation, mediaViewController2.currentEndLocation, mediaViewController2.currentTransitionProgress, false, true);
+                                                }
+                                                if (mediaControlPanel3.mMediaViewHolder != null) {
+                                                    mediaControlPanel3.bindPlayerContentDescription(mediaControlPanel3.mMediaData);
+                                                }
+                                                mediaControlPanel3.mLogger.logger.logWithInstanceId(MediaUiEvent.OPEN_LONG_PRESS, mediaControlPanel3.mUid, mediaControlPanel3.mPackageName, mediaControlPanel3.mInstanceId);
+                                                return true;
+                                            }
+                                        });
+                                        mediaControlPanel2.mMediaViewHolder.albumView.setLayerType(2, null);
+                                        MediaViewHolder mediaViewHolder3 = mediaControlPanel2.mMediaViewHolder;
+                                        TextView textView = mediaViewHolder3.titleText;
+                                        TextView textView2 = mediaViewHolder3.artistText;
+                                        CachingIconView cachingIconView = mediaViewHolder3.explicitIndicator;
+                                        AnimatorSet animatorSetLoadAnimator = mediaControlPanel2.loadAnimator(R.anim.media_metadata_enter, Interpolators.EMPHASIZED_DECELERATE, textView, textView2, cachingIconView);
+                                        AnimatorSet animatorSetLoadAnimator2 = mediaControlPanel2.loadAnimator(R.anim.media_metadata_exit, Interpolators.EMPHASIZED_ACCELERATE, textView, textView2, cachingIconView);
+                                        mediaControlPanel2.mMultiRippleController = new MultiRippleController(mediaViewHolder2.multiRippleView);
+                                        BlendMode blendMode = BlendMode.SCREEN;
+                                        TurbulenceNoiseView turbulenceNoiseView = mediaViewHolder2.turbulenceNoiseView;
+                                        turbulenceNoiseView.getClass();
+                                        turbulenceNoiseView.paint.setBlendMode(blendMode);
+                                        LoadingEffectView loadingEffectView = mediaViewHolder2.loadingEffectView;
+                                        loadingEffectView.blendMode = blendMode;
+                                        loadingEffectView.setVisibility(4);
+                                        mediaControlPanel2.mColorSchemeTransition = new ColorSchemeTransition(mediaControlPanel2.mContext, mediaControlPanel2.mMediaViewHolder, mediaControlPanel2.mMultiRippleController, new TurbulenceNoiseController(turbulenceNoiseView));
+                                        mediaControlPanel2.mMetadataAnimationHandler = new MetadataAnimationHandler(animatorSetLoadAnimator2, animatorSetLoadAnimator);
+                                        mediaViewController.sizeChangedListener = new MediaCarouselController$setupNewPlayer$1(mediaCarouselController3);
+                                        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(-1, -2);
+                                        MediaViewHolder mediaViewHolder4 = mediaControlPanel2.mMediaViewHolder;
+                                        if (mediaViewHolder4 != null && (transitionLayout = mediaViewHolder4.player) != null) {
+                                            transitionLayout.setLayoutParams(layoutParams);
+                                        }
+                                        mediaControlPanel2.bindPlayer(mediaData3, str3);
+                                        seekBarViewModel.bgExecutor.execute(new SeekBarViewModel$listening$1(seekBarViewModel, mediaCarouselController3.mediaCarouselScrollHandler.visibleToUser && mediaCarouselController3.currentlyExpanded));
+                                        MediaPlayerData mediaPlayerData2 = MediaPlayerData.INSTANCE;
+                                        mediaPlayerData2.addMediaPlayer(str3, mediaData3, mediaControlPanel2, mediaCarouselController3.systemClock, mediaCarouselController3.debugLogger);
+                                        int i5 = mediaCarouselController3.currentStartLocation;
+                                        int i6 = mediaCarouselController3.currentEndLocation;
+                                        float f = mediaCarouselController3.currentTransitionProgress;
+                                        int i7 = MediaViewController.$r8$clinit;
+                                        mediaViewController.setCurrentState(i5, i6, f, true, false);
+                                        if (mediaData3.active) {
+                                            mediaCarouselController3.reorderAllPlayers();
+                                        }
+                                        mediaCarouselController2.updatePageIndicator$2();
+                                        mediaCarouselController2.mediaCarouselScrollHandler.onPlayersChanged();
+                                        MediaControlChipInteractor mediaControlChipInteractor = mediaCarouselController2.mediaControlChipInteractor;
+                                        mediaPlayerData2.getClass();
+                                        mediaControlChipInteractor.updateMediaControlChipModelLegacy(MediaPlayerData.getFirstActiveMediaData());
+                                        UniqueObjectHostViewKt.setRequiresRemeasuring(mediaCarouselController2.mediaFrame, true);
+                                        Runnable runnable3 = runnable2;
+                                        if (runnable3 != null) {
+                                            runnable3.run();
+                                        }
+                                    } finally {
+                                        if (zIsEnabled2) {
+                                            TraceUtilsKt.endSlice();
+                                        }
+                                    }
                                 }
                             });
                         }
@@ -1149,12 +1196,12 @@ public final class MediaCarouselController implements Dumpable {
                     UniqueObjectHostViewKt.setRequiresRemeasuring(this.mediaFrame, true);
                     runnable.run();
                 }
-                if (isEnabled) {
+                if (zIsEnabled) {
                     TraceUtilsKt.endSlice();
                 }
                 i2 = i3;
             } catch (Throwable th) {
-                if (isEnabled) {
+                if (zIsEnabled) {
                     TraceUtilsKt.endSlice();
                 }
                 throw th;

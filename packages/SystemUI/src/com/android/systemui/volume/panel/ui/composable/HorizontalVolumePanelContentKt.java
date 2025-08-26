@@ -6,6 +6,7 @@ import androidx.compose.animation.AnimatedVisibilityKt;
 import androidx.compose.animation.EnterTransition;
 import androidx.compose.animation.ExitTransition;
 import androidx.compose.foundation.ScrollKt;
+import androidx.compose.foundation.ScrollState;
 import androidx.compose.foundation.ScrollingContainerKt;
 import androidx.compose.foundation.ScrollingLayoutElement;
 import androidx.compose.foundation.gestures.Orientation;
@@ -43,12 +44,9 @@ import kotlin.jvm.functions.Function3;
 import kotlin.jvm.functions.Function4;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class HorizontalVolumePanelContentKt {
-    public static final void HorizontalVolumePanelContent(final VolumePanelComposeScope volumePanelComposeScope, final ComponentsLayout componentsLayout, final Modifier modifier, Composer composer, final int i) {
-        Modifier then;
-        Modifier then2;
+    public static final void HorizontalVolumePanelContent(final VolumePanelComposeScope volumePanelComposeScope, final ComponentsLayout componentsLayout, final Modifier modifier, Composer composer, final int i) throws Throwable {
         ComposerImpl composerImpl = (ComposerImpl) composer;
         composerImpl.startRestartGroup(-1334321093);
         int i2 = (i & 6) == 0 ? (composerImpl.changed(volumePanelComposeScope) ? 4 : 2) | i : i;
@@ -67,12 +65,12 @@ public abstract class HorizontalVolumePanelContentKt {
             final float f = 20;
             Dp.Companion companion = Dp.Companion;
             Arrangement.INSTANCE.getClass();
-            Arrangement.SpacedAligned m91spacedBy0680j_4 = Arrangement.m91spacedBy0680j_4(f);
+            Arrangement.SpacedAligned spacedAlignedM92spacedBy0680j_4 = Arrangement.m92spacedBy0680j_4(f);
             Alignment.Companion.getClass();
-            RowMeasurePolicy rowMeasurePolicy = RowKt.rowMeasurePolicy(m91spacedBy0680j_4, Alignment.Companion.Top, composerImpl, 6);
+            RowMeasurePolicy rowMeasurePolicy = RowKt.rowMeasurePolicy(spacedAlignedM92spacedBy0680j_4, Alignment.Companion.Top, composerImpl, 6);
             int currentCompositeKeyHash = ComposablesKt.getCurrentCompositeKeyHash(composerImpl);
-            PersistentCompositionLocalMap currentCompositionLocalScope = composerImpl.currentCompositionLocalScope();
-            Modifier materializeModifier = ComposedModifierKt.materializeModifier(composerImpl, modifier);
+            PersistentCompositionLocalMap persistentCompositionLocalMapCurrentCompositionLocalScope = composerImpl.currentCompositionLocalScope();
+            Modifier modifierMaterializeModifier = ComposedModifierKt.materializeModifier(composerImpl, modifier);
             ComposeUiNode.Companion.getClass();
             Function0 function0 = ComposeUiNode.Companion.Constructor;
             if (composerImpl.applier == null) {
@@ -86,33 +84,35 @@ public abstract class HorizontalVolumePanelContentKt {
                 composerImpl.useNode();
             }
             Function2 function2 = ComposeUiNode.Companion.SetMeasurePolicy;
-            Updater.m336setimpl(composerImpl, rowMeasurePolicy, function2);
+            Updater.m337setimpl(composerImpl, rowMeasurePolicy, function2);
             Function2 function22 = ComposeUiNode.Companion.SetResolvedCompositionLocals;
-            Updater.m336setimpl(composerImpl, currentCompositionLocalScope, function22);
+            Updater.m337setimpl(composerImpl, persistentCompositionLocalMapCurrentCompositionLocalScope, function22);
             Function2 function23 = ComposeUiNode.Companion.SetCompositeKeyHash;
             if (composerImpl.inserting || !Intrinsics.areEqual(composerImpl.rememberedValue(), Integer.valueOf(currentCompositeKeyHash))) {
                 AnimatedContentKt$$ExternalSyntheticOutline0.m(currentCompositeKeyHash, composerImpl, currentCompositeKeyHash, function23);
             }
             Function2 function24 = ComposeUiNode.Companion.SetModifier;
-            Updater.m336setimpl(composerImpl, materializeModifier, function24);
+            Updater.m337setimpl(composerImpl, modifierMaterializeModifier, function24);
             RowScopeInstance rowScopeInstance = RowScopeInstance.INSTANCE;
-            then = ScrollingContainerKt.scrollingContainer(rowScopeInstance.weight(Modifier.Companion, 1.0f, true), r13, Orientation.Vertical, (r14 & 2) != 0, false, null, r13.internalInteractionSource, true, null, null).then(new ScrollingLayoutElement(ScrollKt.rememberScrollState(composerImpl), false, true));
-            ColumnMeasurePolicy columnMeasurePolicy = ColumnKt.columnMeasurePolicy(Arrangement.m91spacedBy0680j_4(f), Alignment.Companion.Start, composerImpl, 6);
+            Modifier modifierWeight = rowScopeInstance.weight(Modifier.Companion, 1.0f, true);
+            ScrollState scrollStateRememberScrollState = ScrollKt.rememberScrollState(composerImpl);
+            Modifier modifierThen = ScrollingContainerKt.scrollingContainer(modifierWeight, scrollStateRememberScrollState, Orientation.Vertical, (14 & 2) != 0, false, null, scrollStateRememberScrollState.internalInteractionSource, true, null, null).then(new ScrollingLayoutElement(scrollStateRememberScrollState, false, true));
+            ColumnMeasurePolicy columnMeasurePolicy = ColumnKt.columnMeasurePolicy(Arrangement.m92spacedBy0680j_4(f), Alignment.Companion.Start, composerImpl, 6);
             int currentCompositeKeyHash2 = ComposablesKt.getCurrentCompositeKeyHash(composerImpl);
-            PersistentCompositionLocalMap currentCompositionLocalScope2 = composerImpl.currentCompositionLocalScope();
-            Modifier materializeModifier2 = ComposedModifierKt.materializeModifier(composerImpl, then);
+            PersistentCompositionLocalMap persistentCompositionLocalMapCurrentCompositionLocalScope2 = composerImpl.currentCompositionLocalScope();
+            Modifier modifierMaterializeModifier2 = ComposedModifierKt.materializeModifier(composerImpl, modifierThen);
             composerImpl.startReusableNode();
             if (composerImpl.inserting) {
                 composerImpl.createNode(function0);
             } else {
                 composerImpl.useNode();
             }
-            Updater.m336setimpl(composerImpl, columnMeasurePolicy, function2);
-            Updater.m336setimpl(composerImpl, currentCompositionLocalScope2, function22);
+            Updater.m337setimpl(composerImpl, columnMeasurePolicy, function2);
+            Updater.m337setimpl(composerImpl, persistentCompositionLocalMapCurrentCompositionLocalScope2, function22);
             if (composerImpl.inserting || !Intrinsics.areEqual(composerImpl.rememberedValue(), Integer.valueOf(currentCompositeKeyHash2))) {
                 AnimatedContentKt$$ExternalSyntheticOutline0.m(currentCompositeKeyHash2, composerImpl, currentCompositeKeyHash2, function23);
             }
-            Updater.m336setimpl(composerImpl, materializeModifier2, function24);
+            Updater.m337setimpl(composerImpl, modifierMaterializeModifier2, function24);
             ColumnScopeInstance columnScopeInstance = ColumnScopeInstance.INSTANCE;
             composerImpl.startReplaceGroup(1575846307);
             for (Iterator it = componentsLayout.contentComponents.iterator(); it.hasNext(); it = it) {
@@ -125,7 +125,7 @@ public abstract class HorizontalVolumePanelContentKt {
                         if (ComposerKt.isTraceInProgress()) {
                             ComposerKt.traceEventStart("com.android.systemui.volume.panel.ui.composable.HorizontalVolumePanelContent.<anonymous>.<anonymous>.<anonymous> (HorizontalVolumePanelContent.kt:45)");
                         }
-                        ((ComposeVolumePanelUiComponent) ComponentState.this.component).Content(volumePanelComposeScope, Modifier.Companion, composer2, 48);
+                        ((ComposeVolumePanelUiComponent) componentState.component).Content(volumePanelComposeScope, Modifier.Companion, composer2, 48);
                         if (ComposerKt.isTraceInProgress()) {
                             ComposerKt.traceEventEnd();
                         }
@@ -135,15 +135,17 @@ public abstract class HorizontalVolumePanelContentKt {
             }
             composerImpl.end(false);
             composerImpl.end(true);
-            then2 = ScrollingContainerKt.scrollingContainer(rowScopeInstance.weight(Modifier.Companion, 1.0f, true), r5, Orientation.Vertical, (r14 & 2) != 0, false, null, r5.internalInteractionSource, true, null, null).then(new ScrollingLayoutElement(ScrollKt.rememberScrollState(composerImpl), false, true));
+            Modifier modifierWeight2 = rowScopeInstance.weight(Modifier.Companion, 1.0f, true);
+            ScrollState scrollStateRememberScrollState2 = ScrollKt.rememberScrollState(composerImpl);
+            Modifier modifierThen2 = ScrollingContainerKt.scrollingContainer(modifierWeight2, scrollStateRememberScrollState2, Orientation.Vertical, (14 & 2) != 0, false, null, scrollStateRememberScrollState2.internalInteractionSource, true, null, null).then(new ScrollingLayoutElement(scrollStateRememberScrollState2, false, true));
             Arrangement arrangement = Arrangement.INSTANCE;
             Alignment.Companion.getClass();
             BiasAlignment.Vertical vertical = Alignment.Companion.Top;
             arrangement.getClass();
-            ColumnMeasurePolicy columnMeasurePolicy2 = ColumnKt.columnMeasurePolicy(Arrangement.m93spacedByD5KLDUw(f, vertical), Alignment.Companion.Start, composerImpl, 6);
+            ColumnMeasurePolicy columnMeasurePolicy2 = ColumnKt.columnMeasurePolicy(Arrangement.m94spacedByD5KLDUw(f, vertical), Alignment.Companion.Start, composerImpl, 6);
             int currentCompositeKeyHash3 = ComposablesKt.getCurrentCompositeKeyHash(composerImpl);
-            PersistentCompositionLocalMap currentCompositionLocalScope3 = composerImpl.currentCompositionLocalScope();
-            Modifier materializeModifier3 = ComposedModifierKt.materializeModifier(composerImpl, then2);
+            PersistentCompositionLocalMap persistentCompositionLocalMapCurrentCompositionLocalScope3 = composerImpl.currentCompositionLocalScope();
+            Modifier modifierMaterializeModifier3 = ComposedModifierKt.materializeModifier(composerImpl, modifierThen2);
             ComposeUiNode.Companion.getClass();
             Function0 function02 = ComposeUiNode.Companion.Constructor;
             composerImpl.startReusableNode();
@@ -152,13 +154,13 @@ public abstract class HorizontalVolumePanelContentKt {
             } else {
                 composerImpl.useNode();
             }
-            Updater.m336setimpl(composerImpl, columnMeasurePolicy2, ComposeUiNode.Companion.SetMeasurePolicy);
-            Updater.m336setimpl(composerImpl, currentCompositionLocalScope3, ComposeUiNode.Companion.SetResolvedCompositionLocals);
+            Updater.m337setimpl(composerImpl, columnMeasurePolicy2, ComposeUiNode.Companion.SetMeasurePolicy);
+            Updater.m337setimpl(composerImpl, persistentCompositionLocalMapCurrentCompositionLocalScope3, ComposeUiNode.Companion.SetResolvedCompositionLocals);
             Function2 function25 = ComposeUiNode.Companion.SetCompositeKeyHash;
             if (composerImpl.inserting || !Intrinsics.areEqual(composerImpl.rememberedValue(), Integer.valueOf(currentCompositeKeyHash3))) {
                 AnimatedContentKt$$ExternalSyntheticOutline0.m(currentCompositeKeyHash3, composerImpl, currentCompositeKeyHash3, function25);
             }
-            Updater.m336setimpl(composerImpl, materializeModifier3, ComposeUiNode.Companion.SetModifier);
+            Updater.m337setimpl(composerImpl, modifierMaterializeModifier3, ComposeUiNode.Companion.SetModifier);
             ColumnScopeInstance columnScopeInstance2 = ColumnScopeInstance.INSTANCE;
             composerImpl.startReplaceGroup(1575861324);
             for (final ComponentState componentState2 : componentsLayout.headerComponents) {
@@ -170,7 +172,7 @@ public abstract class HorizontalVolumePanelContentKt {
                         if (ComposerKt.isTraceInProgress()) {
                             ComposerKt.traceEventStart("com.android.systemui.volume.panel.ui.composable.HorizontalVolumePanelContent.<anonymous>.<anonymous>.<anonymous> (HorizontalVolumePanelContent.kt:56)");
                         }
-                        ((ComposeVolumePanelUiComponent) ComponentState.this.component).Content(volumePanelComposeScope, Modifier.Companion, composer2, 48);
+                        ((ComposeVolumePanelUiComponent) componentState2.component).Content(volumePanelComposeScope, Modifier.Companion, composer2, 48);
                         if (ComposerKt.isTraceInProgress()) {
                             ComposerKt.traceEventEnd();
                         }
@@ -188,15 +190,15 @@ public abstract class HorizontalVolumePanelContentKt {
                     if (ComposerKt.isTraceInProgress()) {
                         ComposerKt.traceEventStart("com.android.systemui.volume.panel.ui.composable.HorizontalVolumePanelContent.<anonymous>.<anonymous>.<anonymous> (HorizontalVolumePanelContent.kt:63)");
                     }
-                    Modifier fillMaxWidth = SizeKt.fillMaxWidth(Modifier.Companion, 1.0f);
+                    Modifier modifierFillMaxWidth = SizeKt.fillMaxWidth(Modifier.Companion, 1.0f);
                     Arrangement.INSTANCE.getClass();
-                    Arrangement.SpacedAligned m91spacedBy0680j_42 = Arrangement.m91spacedBy0680j_4(f);
+                    Arrangement.SpacedAligned spacedAlignedM92spacedBy0680j_42 = Arrangement.m92spacedBy0680j_4(f);
                     Alignment.Companion.getClass();
-                    RowMeasurePolicy rowMeasurePolicy2 = RowKt.rowMeasurePolicy(m91spacedBy0680j_42, Alignment.Companion.Top, composer2, 6);
+                    RowMeasurePolicy rowMeasurePolicy2 = RowKt.rowMeasurePolicy(spacedAlignedM92spacedBy0680j_42, Alignment.Companion.Top, composer2, 6);
                     int currentCompositeKeyHash4 = ComposablesKt.getCurrentCompositeKeyHash(composer2);
                     ComposerImpl composerImpl2 = (ComposerImpl) composer2;
-                    PersistentCompositionLocalMap currentCompositionLocalScope4 = composerImpl2.currentCompositionLocalScope();
-                    Modifier materializeModifier4 = ComposedModifierKt.materializeModifier(composer2, fillMaxWidth);
+                    PersistentCompositionLocalMap persistentCompositionLocalMapCurrentCompositionLocalScope4 = composerImpl2.currentCompositionLocalScope();
+                    Modifier modifierMaterializeModifier4 = ComposedModifierKt.materializeModifier(composer2, modifierFillMaxWidth);
                     ComposeUiNode.Companion.getClass();
                     Function0 function03 = ComposeUiNode.Companion.Constructor;
                     if (composerImpl2.applier == null) {
@@ -209,13 +211,13 @@ public abstract class HorizontalVolumePanelContentKt {
                     } else {
                         composerImpl2.useNode();
                     }
-                    Updater.m336setimpl(composer2, rowMeasurePolicy2, ComposeUiNode.Companion.SetMeasurePolicy);
-                    Updater.m336setimpl(composer2, currentCompositionLocalScope4, ComposeUiNode.Companion.SetResolvedCompositionLocals);
+                    Updater.m337setimpl(composer2, rowMeasurePolicy2, ComposeUiNode.Companion.SetMeasurePolicy);
+                    Updater.m337setimpl(composer2, persistentCompositionLocalMapCurrentCompositionLocalScope4, ComposeUiNode.Companion.SetResolvedCompositionLocals);
                     Function2 function26 = ComposeUiNode.Companion.SetCompositeKeyHash;
                     if (composerImpl2.inserting || !Intrinsics.areEqual(composerImpl2.rememberedValue(), Integer.valueOf(currentCompositeKeyHash4))) {
                         AnimatedContentKt$$ExternalSyntheticOutline0.m(currentCompositeKeyHash4, composerImpl2, currentCompositeKeyHash4, function26);
                     }
-                    Updater.m336setimpl(composer2, materializeModifier4, ComposeUiNode.Companion.SetModifier);
+                    Updater.m337setimpl(composer2, modifierMaterializeModifier4, ComposeUiNode.Companion.SetModifier);
                     RowScopeInstance rowScopeInstance2 = RowScopeInstance.INSTANCE;
                     composerImpl2.startReplaceGroup(-2088177327);
                     for (ComponentState componentState3 : list) {
@@ -235,14 +237,14 @@ public abstract class HorizontalVolumePanelContentKt {
                 ComposerKt.traceEventEnd();
             }
         }
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
-            endRestartGroup.block = new Function2() { // from class: com.android.systemui.volume.panel.ui.composable.HorizontalVolumePanelContentKt$$ExternalSyntheticLambda0
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new Function2() { // from class: com.android.systemui.volume.panel.ui.composable.HorizontalVolumePanelContentKt$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function2
-                public final Object invoke(Object obj, Object obj2) {
+                public final Object invoke(Object obj, Object obj2) throws Throwable {
                     ((Integer) obj2).getClass();
-                    int updateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i | 1);
-                    HorizontalVolumePanelContentKt.HorizontalVolumePanelContent(VolumePanelComposeScope.this, componentsLayout, modifier, (Composer) obj, updateChangedFlags);
+                    int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i | 1);
+                    HorizontalVolumePanelContentKt.HorizontalVolumePanelContent(volumePanelComposeScope, componentsLayout, modifier, (Composer) obj, iUpdateChangedFlags);
                     return Unit.INSTANCE;
                 }
             };

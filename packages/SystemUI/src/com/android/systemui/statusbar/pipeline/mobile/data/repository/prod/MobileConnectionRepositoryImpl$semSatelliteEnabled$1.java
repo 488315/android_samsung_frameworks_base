@@ -22,7 +22,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class MobileConnectionRepositoryImpl$semSatelliteEnabled$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ MobileInputLogger $logger;
@@ -52,9 +51,6 @@ final class MobileConnectionRepositoryImpl$semSatelliteEnabled$1 extends Suspend
     /* JADX WARN: Multi-variable type inference failed */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
-        SettingsHelper settingsHelper;
-        SettingsHelper settingsHelper2;
-        SettingsHelper settingsHelper3;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i == 0) {
@@ -65,49 +61,40 @@ final class MobileConnectionRepositoryImpl$semSatelliteEnabled$1 extends Suspend
             SettingsHelper.OnChangedCallback onChangedCallback = new SettingsHelper.OnChangedCallback() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionRepositoryImpl$semSatelliteEnabled$1$callback$1
                 @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
                 public final void onChanged(Uri uri) {
-                    SettingsHelper settingsHelper4;
-                    SettingsHelper settingsHelper5;
-                    SettingsHelper settingsHelper6;
                     int i2 = SystemProperties.getInt("ril.tiantong.phone.id", -1);
                     MobileConnectionRepositoryImpl mobileConnectionRepositoryImpl2 = mobileConnectionRepositoryImpl;
-                    settingsHelper4 = mobileConnectionRepositoryImpl2.settingsHelper;
-                    boolean isSatelliteEnabled = settingsHelper4.isSatelliteEnabled();
-                    MobileInputLogger mobileInputLogger2 = MobileInputLogger.this;
+                    boolean zIsSatelliteEnabled = mobileConnectionRepositoryImpl2.settingsHelper.isSatelliteEnabled();
+                    MobileInputLogger mobileInputLogger2 = mobileInputLogger;
                     mobileInputLogger2.getClass();
                     LogLevel logLevel = LogLevel.INFO;
                     MobileInputLogger$$ExternalSyntheticLambda0 mobileInputLogger$$ExternalSyntheticLambda0 = new MobileInputLogger$$ExternalSyntheticLambda0(16);
                     LogBuffer logBuffer = mobileInputLogger2.buffer;
-                    LogMessage obtain = logBuffer.obtain("MobileInputLog", logLevel, mobileInputLogger$$ExternalSyntheticLambda0, null);
-                    LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
-                    logMessageImpl.bool1 = isSatelliteEnabled;
+                    LogMessage logMessageObtain = logBuffer.obtain("MobileInputLog", logLevel, mobileInputLogger$$ExternalSyntheticLambda0, null);
+                    LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
+                    logMessageImpl.bool1 = zIsSatelliteEnabled;
                     logMessageImpl.int1 = i2;
-                    logBuffer.commit(obtain);
-                    settingsHelper5 = mobileConnectionRepositoryImpl2.settingsHelper;
-                    StringBuilder m = KeyguardFMMViewController$$ExternalSyntheticOutline0.m("isSatelliteEnabled: ", i2, ", phoneId: ", settingsHelper5.isSatelliteEnabled(), ", slotId: ");
+                    logBuffer.commit(logMessageObtain);
+                    StringBuilder sbM = KeyguardFMMViewController$$ExternalSyntheticOutline0.m("isSatelliteEnabled: ", i2, ", phoneId: ", mobileConnectionRepositoryImpl2.settingsHelper.isSatelliteEnabled(), ", slotId: ");
                     int i3 = mobileConnectionRepositoryImpl2.slotId;
-                    m.append(i3);
-                    Log.d("MobileConnectionRepositoryImpl", m.toString());
-                    settingsHelper6 = mobileConnectionRepositoryImpl2.settingsHelper;
-                    ((ChannelCoroutine) producerScope).mo3456trySendJP2dKIU(Boolean.valueOf(settingsHelper6.isSatelliteEnabled() && i2 == i3));
+                    sbM.append(i3);
+                    Log.d("MobileConnectionRepositoryImpl", sbM.toString());
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(mobileConnectionRepositoryImpl2.settingsHelper.isSatelliteEnabled() && i2 == i3));
                 }
             };
-            settingsHelper = this.this$0.settingsHelper;
-            ((ChannelCoroutine) producerScope).mo3456trySendJP2dKIU(Boolean.valueOf(settingsHelper.isSatelliteEnabled() && SystemProperties.getInt("ril.tiantong.phone.id", -1) == this.this$0.slotId));
+            ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(this.this$0.settingsHelper.isSatelliteEnabled() && SystemProperties.getInt("ril.tiantong.phone.id", -1) == this.this$0.slotId));
             MobileInputLogger mobileInputLogger2 = this.$logger;
-            settingsHelper2 = this.this$0.settingsHelper;
-            boolean isSatelliteEnabled = settingsHelper2.isSatelliteEnabled();
+            boolean zIsSatelliteEnabled = this.this$0.settingsHelper.isSatelliteEnabled();
             int i2 = SystemProperties.getInt("ril.tiantong.phone.id", -1);
             mobileInputLogger2.getClass();
             LogLevel logLevel = LogLevel.INFO;
             MobileInputLogger$$ExternalSyntheticLambda0 mobileInputLogger$$ExternalSyntheticLambda0 = new MobileInputLogger$$ExternalSyntheticLambda0(16);
             LogBuffer logBuffer = mobileInputLogger2.buffer;
-            LogMessage obtain = logBuffer.obtain("MobileInputLog", logLevel, mobileInputLogger$$ExternalSyntheticLambda0, null);
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
-            logMessageImpl.bool1 = isSatelliteEnabled;
+            LogMessage logMessageObtain = logBuffer.obtain("MobileInputLog", logLevel, mobileInputLogger$$ExternalSyntheticLambda0, null);
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
+            logMessageImpl.bool1 = zIsSatelliteEnabled;
             logMessageImpl.int1 = i2;
-            logBuffer.commit(obtain);
-            settingsHelper3 = this.this$0.settingsHelper;
-            settingsHelper3.registerCallback(onChangedCallback, Settings.Global.getUriFor("satellite_mode_enabled"));
+            logBuffer.commit(logMessageObtain);
+            this.this$0.settingsHelper.registerCallback(onChangedCallback, Settings.Global.getUriFor("satellite_mode_enabled"));
             MobileConnectionRepositoryImpl$imsRegState$1$$ExternalSyntheticLambda0 mobileConnectionRepositoryImpl$imsRegState$1$$ExternalSyntheticLambda0 = new MobileConnectionRepositoryImpl$imsRegState$1$$ExternalSyntheticLambda0(5, this.this$0, onChangedCallback);
             this.label = 1;
             if (ProduceKt.awaitClose(producerScope, mobileConnectionRepositoryImpl$imsRegState$1$$ExternalSyntheticLambda0, this) == coroutineSingletons) {

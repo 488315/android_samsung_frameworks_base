@@ -20,9 +20,7 @@ public final class PowerMonitorReadings {
     private static final Comparator<PowerMonitor> POWER_MONITOR_COMPARATOR = Comparator.comparingInt(new ToIntFunction() { // from class: android.os.PowerMonitorReadings$$ExternalSyntheticLambda0
         @Override // java.util.function.ToIntFunction
         public final int applyAsInt(Object obj) {
-            int i;
-            i = ((PowerMonitor) obj).index;
-            return i;
+            return ((PowerMonitor) obj).index;
         }
     });
     private final long[] mEnergyUws;
@@ -42,17 +40,17 @@ public final class PowerMonitorReadings {
     }
 
     public long getConsumedEnergy(PowerMonitor powerMonitor) {
-        int binarySearch = Arrays.binarySearch(this.mPowerMonitors, powerMonitor, POWER_MONITOR_COMPARATOR);
-        if (binarySearch >= 0) {
-            return this.mEnergyUws[binarySearch];
+        int iBinarySearch = Arrays.binarySearch(this.mPowerMonitors, powerMonitor, POWER_MONITOR_COMPARATOR);
+        if (iBinarySearch >= 0) {
+            return this.mEnergyUws[iBinarySearch];
         }
         return -1L;
     }
 
     public long getTimestampMillis(PowerMonitor powerMonitor) {
-        int binarySearch = Arrays.binarySearch(this.mPowerMonitors, powerMonitor, POWER_MONITOR_COMPARATOR);
-        if (binarySearch >= 0) {
-            return this.mTimestampsMs[binarySearch];
+        int iBinarySearch = Arrays.binarySearch(this.mPowerMonitors, powerMonitor, POWER_MONITOR_COMPARATOR);
+        if (iBinarySearch >= 0) {
+            return this.mTimestampsMs[iBinarySearch];
         }
         return 0L;
     }

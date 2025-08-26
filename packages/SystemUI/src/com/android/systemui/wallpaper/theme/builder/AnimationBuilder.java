@@ -6,7 +6,6 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageView;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class AnimationBuilder {
     public ImageView imageView;
@@ -44,7 +43,6 @@ public class AnimationBuilder {
     public boolean isAnimationStarted = false;
     public TimeInterpolator interpolator = new AccelerateDecelerateInterpolator();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ParabolaEvaluator implements TypeEvaluator {
         public final float key;
         public final float pX;
@@ -58,13 +56,12 @@ public class AnimationBuilder {
 
         @Override // android.animation.TypeEvaluator
         public final Object evaluate(float f, Object obj, Object obj2) {
-            float floatValue = ((Number) obj).floatValue();
-            float floatValue2 = ((((Number) obj2).floatValue() - floatValue) * f) + floatValue + this.pX;
-            return Float.valueOf((this.key * floatValue2 * floatValue2) + this.pY);
+            float fFloatValue = ((Number) obj).floatValue();
+            float fFloatValue2 = ((((Number) obj2).floatValue() - fFloatValue) * f) + fFloatValue + this.pX;
+            return Float.valueOf((this.key * fFloatValue2 * fFloatValue2) + this.pY);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ParabolaEvaluatorReverse implements TypeEvaluator {
         public final float key;
         public final float pX;
@@ -78,14 +75,13 @@ public class AnimationBuilder {
 
         @Override // android.animation.TypeEvaluator
         public final Object evaluate(float f, Object obj, Object obj2) {
-            float floatValue = ((Number) obj).floatValue();
-            float floatValue2 = ((Number) obj2).floatValue();
-            float f2 = (floatValue2 - ((floatValue2 - floatValue) * f)) + this.pX;
+            float fFloatValue = ((Number) obj).floatValue();
+            float fFloatValue2 = ((Number) obj2).floatValue();
+            float f2 = (fFloatValue2 - ((fFloatValue2 - fFloatValue) * f)) + this.pX;
             return Float.valueOf((this.key * f2 * f2) + this.pY);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SinXEvaluator implements TypeEvaluator {
         public final float adjust;
         public final float key;
@@ -101,12 +97,11 @@ public class AnimationBuilder {
 
         @Override // android.animation.TypeEvaluator
         public final Object evaluate(float f, Object obj, Object obj2) {
-            float floatValue = ((Number) obj).floatValue();
-            return Float.valueOf((this.key * ((float) Math.sin(this.adjust * (((((Number) obj2).floatValue() - floatValue) * f) + floatValue + this.pX)))) + this.pY);
+            float fFloatValue = ((Number) obj).floatValue();
+            return Float.valueOf((this.key * ((float) Math.sin(this.adjust * (((((Number) obj2).floatValue() - fFloatValue) * f) + fFloatValue + this.pX)))) + this.pY);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SinXEvaluatorReverse implements TypeEvaluator {
         public final float adjust;
         public final float key;
@@ -122,13 +117,12 @@ public class AnimationBuilder {
 
         @Override // android.animation.TypeEvaluator
         public final Object evaluate(float f, Object obj, Object obj2) {
-            float floatValue = ((Number) obj).floatValue();
-            float floatValue2 = ((Number) obj2).floatValue();
-            return Float.valueOf((this.key * ((float) Math.sin(this.adjust * ((floatValue2 - ((floatValue2 - floatValue) * f)) + this.pX)))) + this.pY);
+            float fFloatValue = ((Number) obj).floatValue();
+            float fFloatValue2 = ((Number) obj2).floatValue();
+            return Float.valueOf((this.key * ((float) Math.sin(this.adjust * ((fFloatValue2 - ((fFloatValue2 - fFloatValue) * f)) + this.pX)))) + this.pY);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SinYEvaluator implements TypeEvaluator {
         public final float adjust;
         public final float key;
@@ -144,12 +138,11 @@ public class AnimationBuilder {
 
         @Override // android.animation.TypeEvaluator
         public final Object evaluate(float f, Object obj, Object obj2) {
-            float floatValue = ((Number) obj).floatValue();
-            return Float.valueOf((this.key * ((float) Math.sin(this.adjust * (((((Number) obj2).floatValue() - floatValue) * f) + floatValue + this.pX)))) + this.pY);
+            float fFloatValue = ((Number) obj).floatValue();
+            return Float.valueOf((this.key * ((float) Math.sin(this.adjust * (((((Number) obj2).floatValue() - fFloatValue) * f) + fFloatValue + this.pX)))) + this.pY);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SinYEvaluatorReverse implements TypeEvaluator {
         public final float adjust;
         public final float key;
@@ -165,9 +158,9 @@ public class AnimationBuilder {
 
         @Override // android.animation.TypeEvaluator
         public final Object evaluate(float f, Object obj, Object obj2) {
-            float floatValue = ((Number) obj).floatValue();
-            float floatValue2 = ((Number) obj2).floatValue();
-            return Float.valueOf((this.key * ((float) Math.sin(this.adjust * ((floatValue2 - ((floatValue2 - floatValue) * f)) + this.pX)))) + this.pY);
+            float fFloatValue = ((Number) obj).floatValue();
+            float fFloatValue2 = ((Number) obj2).floatValue();
+            return Float.valueOf((this.key * ((float) Math.sin(this.adjust * ((fFloatValue2 - ((fFloatValue2 - fFloatValue) * f)) + this.pX)))) + this.pY);
         }
     }
 }

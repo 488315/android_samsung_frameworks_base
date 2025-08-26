@@ -7,9 +7,10 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.DrawableWrapper;
 import android.util.AttributeSet;
 import com.android.systemui.R;
+import java.io.IOException;
 import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class CastDrawable extends DrawableWrapper {
     public Drawable mFillDrawable;
@@ -46,7 +47,7 @@ public class CastDrawable extends DrawableWrapper {
     }
 
     @Override // android.graphics.drawable.DrawableWrapper, android.graphics.drawable.Drawable
-    public final void inflate(Resources resources, XmlPullParser xmlPullParser, AttributeSet attributeSet, Resources.Theme theme) {
+    public final void inflate(Resources resources, XmlPullParser xmlPullParser, AttributeSet attributeSet, Resources.Theme theme) throws XmlPullParserException, IOException {
         super.inflate(resources, xmlPullParser, attributeSet, theme);
         setDrawable(resources.getDrawable(R.drawable.ic_cast, theme).mutate());
         this.mFillDrawable = resources.getDrawable(R.drawable.ic_cast_connected_fill, theme).mutate();

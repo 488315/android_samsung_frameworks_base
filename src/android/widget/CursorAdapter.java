@@ -177,9 +177,9 @@ public abstract class CursorAdapter extends BaseAdapter implements Filterable, C
 
     @Override // android.widget.CursorFilter.CursorFilterClient
     public void changeCursor(Cursor cursor) {
-        Cursor swapCursor = swapCursor(cursor);
-        if (swapCursor != null) {
-            swapCursor.close();
+        Cursor cursorSwapCursor = swapCursor(cursor);
+        if (cursorSwapCursor != null) {
+            cursorSwapCursor.close();
         }
     }
 

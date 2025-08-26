@@ -45,10 +45,10 @@ public final class OverlayInfoExt implements Parcelable {
 
     public static OverlayInfoExt initFromInfo(OverlayInfo overlayInfo) {
         if (overlayInfo.category != null) {
-            String[] split = overlayInfo.category.split(":");
-            if (split.length == 3) {
+            String[] strArrSplit = overlayInfo.category.split(":");
+            if (strArrSplit.length == 3) {
                 try {
-                    return new OverlayInfoExt(Integer.parseInt(split[1]), Integer.parseInt(split[2]), overlayInfo);
+                    return new OverlayInfoExt(Integer.parseInt(strArrSplit[1]), Integer.parseInt(strArrSplit[2]), overlayInfo);
                 } catch (NumberFormatException unused) {
                 }
             }
@@ -60,13 +60,13 @@ public final class OverlayInfoExt implements Parcelable {
         return TextUtils.emptyIfNull(str) + ":" + i + ":" + i2;
     }
 
-    public static boolean isOverlayInfoExt(OverlayInfo overlayInfo) {
+    public static boolean isOverlayInfoExt(OverlayInfo overlayInfo) throws NumberFormatException {
         if (overlayInfo.baseCodePath.startsWith("/data/overlays") && overlayInfo.category != null) {
-            String[] split = overlayInfo.category.split(":");
-            if (split.length == 3) {
+            String[] strArrSplit = overlayInfo.category.split(":");
+            if (strArrSplit.length == 3) {
                 try {
-                    int parseInt = Integer.parseInt(split[1]);
-                    return parseInt == 0 || parseInt == 1 || parseInt == 2;
+                    int i = Integer.parseInt(strArrSplit[1]);
+                    return i == 0 || i == 1 || i == 2;
                 } catch (NumberFormatException unused) {
                     Slog.i(TAG, "Ignore");
                 }
@@ -81,10 +81,10 @@ public final class OverlayInfoExt implements Parcelable {
 
     public static boolean isOverlayInfoExtOfCategory(OverlayInfo overlayInfo, int i) {
         if (overlayInfo != null && overlayInfo.category != null) {
-            String[] split = overlayInfo.category.split(":");
-            if (split.length == 3) {
+            String[] strArrSplit = overlayInfo.category.split(":");
+            if (strArrSplit.length == 3) {
                 try {
-                    return Integer.parseInt(split[1]) == i;
+                    return Integer.parseInt(strArrSplit[1]) == i;
                 } catch (NumberFormatException unused) {
                     Slog.i(TAG, "Ignore");
                 }

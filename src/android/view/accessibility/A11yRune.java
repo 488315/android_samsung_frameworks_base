@@ -1,8 +1,12 @@
 package android.view.accessibility;
 
 import android.content.ContentProviderClient;
+import android.content.ContentResolver;
+import android.content.Context;
 import android.database.Cursor;
+import android.database.CursorIndexOutOfBoundsException;
 import android.net.Uri;
+import android.os.RemoteException;
 import android.os.SemSystemProperties;
 import com.samsung.android.feature.SemFloatingFeature;
 
@@ -96,97 +100,52 @@ public class A11yRune {
         mClient = null;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:12:0x0035, code lost:
-    
-        if (r6 != null) goto L30;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:14:0x005e, code lost:
-    
-        return android.view.accessibility.A11yRune.value;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:16:0x0059, code lost:
-    
-        r6.close();
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:33:0x0046, code lost:
-    
-        if (r6 == null) goto L31;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:41:0x0057, code lost:
-    
-        if (r6 == null) goto L31;
-     */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public static java.lang.String readDataFromAccessibilityProvider(android.content.Context r6, java.lang.String r7) {
-        /*
-            android.content.ContentResolver r6 = r6.getContentResolver()     // Catch: android.database.CursorIndexOutOfBoundsException -> L38 android.os.RemoteException -> L49 java.lang.Throwable -> L5f
-            android.net.Uri r1 = android.view.accessibility.A11yRune.CONTENT_URI     // Catch: android.database.CursorIndexOutOfBoundsException -> L38 android.os.RemoteException -> L49 java.lang.Throwable -> L5f
-            android.content.ContentProviderClient r0 = r6.acquireContentProviderClient(r1)     // Catch: android.database.CursorIndexOutOfBoundsException -> L38 android.os.RemoteException -> L49 java.lang.Throwable -> L5f
-            android.view.accessibility.A11yRune.mClient = r0     // Catch: android.database.CursorIndexOutOfBoundsException -> L38 android.os.RemoteException -> L49 java.lang.Throwable -> L5f
-            if (r0 == 0) goto L2c
-            java.lang.String[] r2 = android.view.accessibility.A11yRune.SELECT_PROJECTION     // Catch: android.database.CursorIndexOutOfBoundsException -> L38 android.os.RemoteException -> L49 java.lang.Throwable -> L5f
-            java.lang.String r3 = "name=?"
-            java.lang.String[] r4 = new java.lang.String[]{r7}     // Catch: android.database.CursorIndexOutOfBoundsException -> L38 android.os.RemoteException -> L49 java.lang.Throwable -> L5f
-            r5 = 0
-            android.database.Cursor r6 = r0.query(r1, r2, r3, r4, r5)     // Catch: android.database.CursorIndexOutOfBoundsException -> L38 android.os.RemoteException -> L49 java.lang.Throwable -> L5f
-            android.view.accessibility.A11yRune.cursor = r6     // Catch: android.database.CursorIndexOutOfBoundsException -> L38 android.os.RemoteException -> L49 java.lang.Throwable -> L5f
-            if (r6 == 0) goto L2c
-            r6.moveToFirst()     // Catch: android.database.CursorIndexOutOfBoundsException -> L38 android.os.RemoteException -> L49 java.lang.Throwable -> L5f
-            android.database.Cursor r6 = android.view.accessibility.A11yRune.cursor     // Catch: android.database.CursorIndexOutOfBoundsException -> L38 android.os.RemoteException -> L49 java.lang.Throwable -> L5f
-            r7 = 2
-            java.lang.String r6 = r6.getString(r7)     // Catch: android.database.CursorIndexOutOfBoundsException -> L38 android.os.RemoteException -> L49 java.lang.Throwable -> L5f
-            android.view.accessibility.A11yRune.value = r6     // Catch: android.database.CursorIndexOutOfBoundsException -> L38 android.os.RemoteException -> L49 java.lang.Throwable -> L5f
-        L2c:
-            android.database.Cursor r6 = android.view.accessibility.A11yRune.cursor
-            if (r6 == 0) goto L33
-            r6.close()
-        L33:
-            android.content.ContentProviderClient r6 = android.view.accessibility.A11yRune.mClient
-            if (r6 == 0) goto L5c
-            goto L59
-        L38:
-            r0 = move-exception
-            r6 = r0
-            r6.printStackTrace()     // Catch: java.lang.Throwable -> L5f
-            android.database.Cursor r6 = android.view.accessibility.A11yRune.cursor
-            if (r6 == 0) goto L44
-            r6.close()
-        L44:
-            android.content.ContentProviderClient r6 = android.view.accessibility.A11yRune.mClient
-            if (r6 == 0) goto L5c
-            goto L59
-        L49:
-            r0 = move-exception
-            r6 = r0
-            r6.printStackTrace()     // Catch: java.lang.Throwable -> L5f
-            android.database.Cursor r6 = android.view.accessibility.A11yRune.cursor
-            if (r6 == 0) goto L55
-            r6.close()
-        L55:
-            android.content.ContentProviderClient r6 = android.view.accessibility.A11yRune.mClient
-            if (r6 == 0) goto L5c
-        L59:
-            r6.close()
-        L5c:
-            java.lang.String r6 = android.view.accessibility.A11yRune.value
-            return r6
-        L5f:
-            r0 = move-exception
-            r6 = r0
-            android.database.Cursor r7 = android.view.accessibility.A11yRune.cursor
-            if (r7 == 0) goto L68
-            r7.close()
-        L68:
-            android.content.ContentProviderClient r7 = android.view.accessibility.A11yRune.mClient
-            if (r7 == 0) goto L6f
-            r7.close()
-        L6f:
-            throw r6
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.view.accessibility.A11yRune.readDataFromAccessibilityProvider(android.content.Context, java.lang.String):java.lang.String");
+    public static String readDataFromAccessibilityProvider(Context context, String str) {
+        ContentProviderClient contentProviderClient;
+        try {
+            try {
+                ContentResolver contentResolver = context.getContentResolver();
+                Uri uri = CONTENT_URI;
+                ContentProviderClient contentProviderClientAcquireContentProviderClient = contentResolver.acquireContentProviderClient(uri);
+                mClient = contentProviderClientAcquireContentProviderClient;
+                if (contentProviderClientAcquireContentProviderClient != null) {
+                    Cursor cursorQuery = contentProviderClientAcquireContentProviderClient.query(uri, SELECT_PROJECTION, "name=?", new String[]{str}, null);
+                    cursor = cursorQuery;
+                    if (cursorQuery != null) {
+                        cursorQuery.moveToFirst();
+                        value = cursor.getString(2);
+                    }
+                }
+                Cursor cursor2 = cursor;
+                if (cursor2 != null) {
+                    cursor2.close();
+                }
+                contentProviderClient = mClient;
+            } catch (CursorIndexOutOfBoundsException e) {
+                e.printStackTrace();
+                Cursor cursor3 = cursor;
+                if (cursor3 != null) {
+                    cursor3.close();
+                }
+                contentProviderClient = mClient;
+                if (contentProviderClient != null) {
+                }
+            } catch (RemoteException e2) {
+                e2.printStackTrace();
+                Cursor cursor4 = cursor;
+                if (cursor4 != null) {
+                    cursor4.close();
+                }
+                contentProviderClient = mClient;
+                if (contentProviderClient != null) {
+                }
+            }
+            if (contentProviderClient != null) {
+                contentProviderClient.close();
+            }
+            return value;
+        } finally {
+        }
     }
 
     public static Uri getUriFor(Uri uri, String str) {

@@ -23,14 +23,14 @@ public class InstallConstraintsTagParser {
         if (!set.contains(parsingPackage.getPackageName())) {
             return parseInput.skip("install-constraints cannot be used by this package");
         }
-        ParseResult<Set<String>> parseFingerprintPrefixes = parseFingerprintPrefixes(parseInput, parsingPackage, resources, xmlResourceParser);
-        if (parseFingerprintPrefixes.isSuccess()) {
-            if (validateFingerprintPrefixes(parseFingerprintPrefixes.getResult())) {
+        ParseResult<Set<String>> fingerprintPrefixes = parseFingerprintPrefixes(parseInput, parsingPackage, resources, xmlResourceParser);
+        if (fingerprintPrefixes.isSuccess()) {
+            if (validateFingerprintPrefixes(fingerprintPrefixes.getResult())) {
                 return parseInput.success(parsingPackage);
             }
             return parseInput.skip("Install of this package is restricted on this device; device fingerprint does not start with one of the allowed prefixes");
         }
-        return parseInput.skip(parseFingerprintPrefixes.getErrorMessage());
+        return parseInput.skip(fingerprintPrefixes.getErrorMessage());
     }
 
     private static ParseResult<Set<String>> parseFingerprintPrefixes(ParseInput parseInput, ParsingPackage parsingPackage, Resources resources, XmlResourceParser xmlResourceParser) throws XmlPullParserException, IOException {
@@ -45,15 +45,15 @@ public class InstallConstraintsTagParser {
             }
             if (next == 2 && !ParsingPackageUtils.getAconfigFlags().skipCurrentElement(parsingPackage, xmlResourceParser)) {
                 if (xmlResourceParser.getName().equals(TAG_FINGERPRINT_PREFIX)) {
-                    ParseResult<String> readFingerprintPrefixValue = readFingerprintPrefixValue(parseInput, resources, xmlResourceParser);
-                    if (readFingerprintPrefixValue.isSuccess()) {
-                        arraySet.add(readFingerprintPrefixValue.getResult());
+                    ParseResult<String> fingerprintPrefixValue = readFingerprintPrefixValue(parseInput, resources, xmlResourceParser);
+                    if (fingerprintPrefixValue.isSuccess()) {
+                        arraySet.add(fingerprintPrefixValue.getResult());
                         int next2 = xmlResourceParser.next();
                         if (next2 != 3) {
                             return parseInput.error("Expected end tag; instead got " + next2);
                         }
                     } else {
-                        return parseInput.error(readFingerprintPrefixValue.getErrorMessage());
+                        return parseInput.error(fingerprintPrefixValue.getErrorMessage());
                     }
                 } else {
                     return parseInput.error("Unexpected tag: " + xmlResourceParser.getName());
@@ -63,15 +63,15 @@ public class InstallConstraintsTagParser {
     }
 
     private static ParseResult<String> readFingerprintPrefixValue(ParseInput parseInput, Resources resources, XmlResourceParser xmlResourceParser) {
-        TypedArray obtainAttributes = resources.obtainAttributes(xmlResourceParser, R.styleable.AndroidManifestInstallConstraintsFingerprintPrefix);
+        TypedArray typedArrayObtainAttributes = resources.obtainAttributes(xmlResourceParser, R.styleable.AndroidManifestInstallConstraintsFingerprintPrefix);
         try {
-            String string = obtainAttributes.getString(0);
+            String string = typedArrayObtainAttributes.getString(0);
             if (string == null) {
                 return parseInput.error("Failed to specify prefix value");
             }
             return parseInput.success(string);
         } finally {
-            obtainAttributes.recycle();
+            typedArrayObtainAttributes.recycle();
         }
     }
 

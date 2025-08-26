@@ -22,7 +22,7 @@ public class LsUtil {
         return getTimeForLog() + SEPARATOR + str;
     }
 
-    public static String gethashStr(byte[] bArr) {
+    public static String gethashStr(byte[] bArr) throws NoSuchAlgorithmException {
         if (bArr == null) {
             return "[null]";
         }

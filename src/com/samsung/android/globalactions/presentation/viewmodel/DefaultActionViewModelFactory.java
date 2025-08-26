@@ -1,6 +1,7 @@
 package com.samsung.android.globalactions.presentation.viewmodel;
 
 import android.content.Context;
+import android.content.res.Resources;
 import com.android.internal.R;
 import com.samsung.android.globalactions.presentation.SamsungGlobalActions;
 import com.samsung.android.globalactions.presentation.SamsungGlobalActionsManager;
@@ -45,101 +46,24 @@ public class DefaultActionViewModelFactory implements ActionViewModelFactory {
         return ((Context) this.mUtilFactory.get(Context.class)).getResources().getString(i);
     }
 
-    public String getResString(int i, int i2) {
+    public String getResString(int i, int i2) throws Resources.NotFoundException {
         return ((Context) this.mUtilFactory.get(Context.class)).getResources().getString(i, Integer.valueOf(((Context) this.mUtilFactory.get(Context.class)).getResources().getInteger(i2)));
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
+    /* JADX WARN: Removed duplicated region for block: B:4:0x003c  */
     @Override // com.samsung.android.globalactions.presentation.viewmodel.ActionViewModelFactory
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public ActionViewModel createActionViewModel(SamsungGlobalActions samsungGlobalActions, String str) {
-        char c;
-        ActionInfo actionInfo = new ActionInfo();
-        boolean isEnabled = this.mConditionChecker.isEnabled(SystemConditions.IS_TABLET_DEVICE);
+        ActionInfo actionInfo;
+        boolean zIsEnabled;
+        actionInfo = new ActionInfo();
+        zIsEnabled = this.mConditionChecker.isEnabled(SystemConditions.IS_TABLET_DEVICE);
         str.hashCode();
-        switch (str.hashCode()) {
-            case -1250803636:
-                if (str.equals(DefaultActionNames.ACTION_EMERGENCY_CALL)) {
-                    c = 0;
-                    break;
-                }
-                c = 65535;
-                break;
-            case -1131224299:
-                if (str.equals(DefaultActionNames.ACTION_SAFE_MODE)) {
-                    c = 1;
-                    break;
-                }
-                c = 65535;
-                break;
-            case -1097329270:
-                if (str.equals(DefaultActionNames.ACTION_LOGOUT)) {
-                    c = 2;
-                    break;
-                }
-                c = 65535;
-                break;
-            case -562960116:
-                if (str.equals(DefaultActionNames.ACTION_LOCKDOWN_MODE)) {
-                    c = 3;
-                    break;
-                }
-                c = 65535;
-                break;
-            case -363578088:
-                if (str.equals(DefaultActionNames.ACTION_DATA_MODE)) {
-                    c = 4;
-                    break;
-                }
-                c = 65535;
-                break;
-            case 106858757:
-                if (str.equals("power")) {
-                    c = 5;
-                    break;
-                }
-                c = 65535;
-                break;
-            case 916977052:
-                if (str.equals(DefaultActionNames.ACTION_MEDICAL_INFO)) {
-                    c = 6;
-                    break;
-                }
-                c = 65535;
-                break;
-            case 1097506319:
-                if (str.equals(DefaultActionNames.ACTION_RESTART)) {
-                    c = 7;
-                    break;
-                }
-                c = 65535;
-                break;
-            case 1629013393:
-                if (str.equals("emergency")) {
-                    c = '\b';
-                    break;
-                }
-                c = 65535;
-                break;
-            case 2092525919:
-                if (str.equals("bug_report")) {
-                    c = '\t';
-                    break;
-                }
-                c = 65535;
-                break;
-            case 2146922627:
-                if (str.equals(DefaultActionNames.ACTION_FORCE_RESTART_MESSAGE)) {
-                    c = '\n';
-                    break;
-                }
-                c = 65535;
-                break;
-            default:
-                c = 65535;
-                break;
-        }
-        switch (c) {
-            case 0:
+        switch (str) {
+            case "emergency_call":
                 EmergencyCallActionViewModel emergencyCallActionViewModel = new EmergencyCallActionViewModel((Context) this.mUtilFactory.get(Context.class), samsungGlobalActions, this.mSAnalytics, (SystemController) this.mUtilFactory.get(SystemController.class));
                 actionInfo.setName(DefaultActionNames.ACTION_EMERGENCY_CALL);
                 actionInfo.setLabel(getResString(R.string.global_action_emergency_call));
@@ -147,16 +71,16 @@ public class DefaultActionViewModelFactory implements ActionViewModelFactory {
                 actionInfo.setViewType(ViewType.CENTER_ICON_4P_VIEW);
                 emergencyCallActionViewModel.setActionInfo(actionInfo);
                 return emergencyCallActionViewModel;
-            case 1:
+            case "safe_mode":
                 SafeModeActionViewModel safeModeActionViewModel = new SafeModeActionViewModel(samsungGlobalActions, (SamsungGlobalActionsManager) this.mUtilFactory.get(SamsungGlobalActionsManager.class), this.mConditionChecker, (KeyGuardManagerWrapper) this.mUtilFactory.get(KeyGuardManagerWrapper.class), (ResourcesWrapper) this.mUtilFactory.get(ResourcesWrapper.class), (ToastController) this.mUtilFactory.get(ToastController.class), this.mSAnalytics);
                 actionInfo.setName(DefaultActionNames.ACTION_SAFE_MODE);
                 actionInfo.setLabel(getResString(R.string.global_action_safemode));
-                actionInfo.setDescription(getResString(isEnabled ? R.string.global_action_confirm_msg_safemode_tablet : R.string.global_action_confirm_msg_safemode));
+                actionInfo.setDescription(getResString(zIsEnabled ? R.string.global_action_confirm_msg_safemode_tablet : R.string.global_action_confirm_msg_safemode));
                 actionInfo.setIcon(this.mResourceFactory.get(ResourceType.DRAWABLE_SAFEMODE));
                 actionInfo.setViewType(ViewType.CENTER_ICON_1P_VIEW);
                 safeModeActionViewModel.setActionInfo(actionInfo);
                 return safeModeActionViewModel;
-            case 2:
+            case "logout":
                 LogoutActionViewModel logoutActionViewModel = new LogoutActionViewModel(samsungGlobalActions, (HandlerUtil) this.mUtilFactory.get(HandlerUtil.class), (LogWrapper) this.mUtilFactory.get(LogWrapper.class));
                 actionInfo.setName(DefaultActionNames.ACTION_LOGOUT);
                 actionInfo.setLabel(getResString(R.string.global_action_logout));
@@ -164,7 +88,7 @@ public class DefaultActionViewModelFactory implements ActionViewModelFactory {
                 actionInfo.setViewType(ViewType.CENTER_ICON_3P_VIEW);
                 logoutActionViewModel.setActionInfo(actionInfo);
                 return logoutActionViewModel;
-            case 3:
+            case "lock_down_mode":
                 LockdownModeActionViewModel lockdownModeActionViewModel = new LockdownModeActionViewModel(this.mSAnalytics, (LockPatternUtilsWrapper) this.mUtilFactory.get(LockPatternUtilsWrapper.class), samsungGlobalActions);
                 actionInfo.setName(DefaultActionNames.ACTION_LOCKDOWN_MODE);
                 actionInfo.setLabel(getResString(R.string.global_action_lockdown_mode));
@@ -172,7 +96,7 @@ public class DefaultActionViewModelFactory implements ActionViewModelFactory {
                 actionInfo.setViewType(ViewType.CENTER_ICON_5P_VIEW);
                 lockdownModeActionViewModel.setActionInfo(actionInfo);
                 return lockdownModeActionViewModel;
-            case 4:
+            case "data_mode":
                 DataModeActionViewModel dataModeActionViewModel = new DataModeActionViewModel(samsungGlobalActions, this.mConditionChecker, this.mSAnalytics, (SystemController) this.mUtilFactory.get(SystemController.class), (AlertDialogFactory) this.mUtilFactory.get(AlertDialogFactory.class), this.mFeatureFactory, (ResourcesWrapper) this.mUtilFactory.get(ResourcesWrapper.class), (KeyGuardManagerWrapper) this.mUtilFactory.get(KeyGuardManagerWrapper.class));
                 actionInfo.setName(DefaultActionNames.ACTION_DATA_MODE);
                 actionInfo.setLabel(getResString(R.string.global_action_toggle_data_mode));
@@ -180,16 +104,16 @@ public class DefaultActionViewModelFactory implements ActionViewModelFactory {
                 actionInfo.setViewType(ViewType.CENTER_ICON_2P_VIEW);
                 dataModeActionViewModel.setActionInfo(actionInfo);
                 return dataModeActionViewModel;
-            case 5:
+            case "power":
                 PowerActionViewModel powerActionViewModel = new PowerActionViewModel(samsungGlobalActions, this.mConditionChecker, this.mSAnalytics, (SamsungGlobalActionsManager) this.mUtilFactory.get(SamsungGlobalActionsManager.class), this.mFeatureFactory, (ToastController) this.mUtilFactory.get(ToastController.class), (KeyGuardManagerWrapper) this.mUtilFactory.get(KeyGuardManagerWrapper.class), (ResourcesWrapper) this.mUtilFactory.get(ResourcesWrapper.class), (UsageStatsWrapper) this.mUtilFactory.get(UsageStatsWrapper.class));
                 actionInfo.setName("power");
                 actionInfo.setLabel(getResString(R.string.samsung_global_action_power_off));
-                actionInfo.setDescription(getResString(isEnabled ? R.string.global_action_confirm_msg_poweroff_tablet : R.string.global_action_confirm_msg_poweroff));
+                actionInfo.setDescription(getResString(zIsEnabled ? R.string.global_action_confirm_msg_poweroff_tablet : R.string.global_action_confirm_msg_poweroff));
                 actionInfo.setIcon(this.mResourceFactory.get(ResourceType.DRAWABLE_POWEROFF));
                 actionInfo.setViewType(ViewType.CENTER_ICON_1P_VIEW);
                 powerActionViewModel.setActionInfo(actionInfo);
                 return powerActionViewModel;
-            case 6:
+            case "medical_info":
                 MedicalInfoActionViewModel medicalInfoActionViewModel = new MedicalInfoActionViewModel((Context) this.mUtilFactory.get(Context.class), samsungGlobalActions, this.mSAnalytics, (SystemController) this.mUtilFactory.get(SystemController.class));
                 actionInfo.setName(DefaultActionNames.ACTION_MEDICAL_INFO);
                 actionInfo.setLabel(getResString(R.string.global_action_medical_info));
@@ -197,16 +121,16 @@ public class DefaultActionViewModelFactory implements ActionViewModelFactory {
                 actionInfo.setViewType(ViewType.CENTER_ICON_5P_VIEW);
                 medicalInfoActionViewModel.setActionInfo(actionInfo);
                 return medicalInfoActionViewModel;
-            case 7:
+            case "restart":
                 RestartActionViewModel restartActionViewModel = new RestartActionViewModel(samsungGlobalActions, this.mConditionChecker, this.mSAnalytics, (SamsungGlobalActionsManager) this.mUtilFactory.get(SamsungGlobalActionsManager.class), this.mFeatureFactory, (ToastController) this.mUtilFactory.get(ToastController.class), (KeyGuardManagerWrapper) this.mUtilFactory.get(KeyGuardManagerWrapper.class), (ResourcesWrapper) this.mUtilFactory.get(ResourcesWrapper.class), (UsageStatsWrapper) this.mUtilFactory.get(UsageStatsWrapper.class));
                 actionInfo.setName(DefaultActionNames.ACTION_RESTART);
                 actionInfo.setLabel(getResString(R.string.samsung_global_action_restart));
-                actionInfo.setDescription(getResString(isEnabled ? R.string.global_action_confirm_msg_restart_tablet : R.string.global_action_confirm_msg_restart));
+                actionInfo.setDescription(getResString(zIsEnabled ? R.string.global_action_confirm_msg_restart_tablet : R.string.global_action_confirm_msg_restart));
                 actionInfo.setIcon(this.mResourceFactory.get(ResourceType.DRAWABLE_RESTART));
                 actionInfo.setViewType(ViewType.CENTER_ICON_3P_VIEW);
                 restartActionViewModel.setActionInfo(actionInfo);
                 return restartActionViewModel;
-            case '\b':
+            case "emergency":
                 EmergencyActionViewModel emergencyActionViewModel = new EmergencyActionViewModel(samsungGlobalActions, this.mConditionChecker, this.mSAnalytics, (SystemController) this.mUtilFactory.get(SystemController.class), this.mFeatureFactory, (KeyGuardManagerWrapper) this.mUtilFactory.get(KeyGuardManagerWrapper.class), (ToastController) this.mUtilFactory.get(ToastController.class), (ResourcesWrapper) this.mUtilFactory.get(ResourcesWrapper.class));
                 actionInfo.setName("emergency");
                 actionInfo.setLabel(getResString(R.string.global_action_toggle_emergency_mode));
@@ -214,7 +138,7 @@ public class DefaultActionViewModelFactory implements ActionViewModelFactory {
                 actionInfo.setViewType(ViewType.CENTER_ICON_4P_VIEW);
                 emergencyActionViewModel.setActionInfo(actionInfo);
                 return emergencyActionViewModel;
-            case '\t':
+            case "bug_report":
                 BugReportActionViewModel bugReportActionViewModel = new BugReportActionViewModel(samsungGlobalActions, (SystemController) this.mUtilFactory.get(SystemController.class), (ResourcesWrapper) this.mUtilFactory.get(ResourcesWrapper.class));
                 actionInfo.setName("bug_report");
                 actionInfo.setLabel(getResString(R.string.samsung_bugreport_title));
@@ -223,7 +147,7 @@ public class DefaultActionViewModelFactory implements ActionViewModelFactory {
                 actionInfo.setViewType(ViewType.BOTTOM_BTN_LIST_VIEW);
                 bugReportActionViewModel.setActionInfo(actionInfo);
                 return bugReportActionViewModel;
-            case '\n':
+            case "force_restart_message":
                 ForceRestartMessageActionViewModel forceRestartMessageActionViewModel = new ForceRestartMessageActionViewModel();
                 actionInfo.setName(DefaultActionNames.ACTION_FORCE_RESTART_MESSAGE);
                 actionInfo.setStateLabel(getResString(R.string.global_action_force_restart_message, this.mResourceFactory.get(ResourceType.INTEGER_FORCE_RESTART_TIME)));

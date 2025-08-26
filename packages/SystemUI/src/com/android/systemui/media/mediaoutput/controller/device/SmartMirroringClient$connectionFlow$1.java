@@ -21,7 +21,6 @@ import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class SmartMirroringClient$connectionFlow$1 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -63,7 +62,7 @@ final class SmartMirroringClient$connectionFlow$1 extends SuspendLambda implemen
                     Object failure;
                     Log.d("SmartMirroringClient", "onServiceConnected()");
                     ServiceConnection serviceConnection = null;
-                    if (!Ref$BooleanRef.this.element) {
+                    if (!ref$BooleanRef.element) {
                         smartMirroringClient.service = new Messenger(iBinder);
                         ProducerScope producerScope2 = producerScope;
                         BuildersKt.launch$default(producerScope2, null, null, new SmartMirroringClient$connectionFlow$1$1$onServiceConnected$3(producerScope2, null), 3);
@@ -83,16 +82,16 @@ final class SmartMirroringClient$connectionFlow$1 extends SuspendLambda implemen
                         int i3 = Result.$r8$clinit;
                         failure = new Result.Failure(th);
                     }
-                    Throwable m3422exceptionOrNullimpl = Result.m3422exceptionOrNullimpl(failure);
-                    if (m3422exceptionOrNullimpl != null) {
-                        m3422exceptionOrNullimpl.printStackTrace();
+                    Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
+                    if (thM3442exceptionOrNullimpl != null) {
+                        thM3442exceptionOrNullimpl.printStackTrace();
                     }
                 }
 
                 @Override // android.content.ServiceConnection
                 public final void onServiceDisconnected(ComponentName componentName) {
                     Log.d("SmartMirroringClient", "onServiceDisconnected()");
-                    Ref$BooleanRef.this.element = true;
+                    ref$BooleanRef.element = true;
                     smartMirroringClient.service = null;
                     ProducerScope producerScope2 = producerScope;
                     BuildersKt.launch$default(producerScope2, null, null, new SmartMirroringClient$connectionFlow$1$1$onServiceDisconnected$1(producerScope2, null), 3);
@@ -109,7 +108,7 @@ final class SmartMirroringClient$connectionFlow$1 extends SuspendLambda implemen
                 public final Object invoke() {
                     Object failure;
                     Ref$ObjectRef ref$ObjectRef2 = ref$ObjectRef;
-                    SmartMirroringClient smartMirroringClient3 = SmartMirroringClient.this;
+                    SmartMirroringClient smartMirroringClient3 = smartMirroringClient2;
                     smartMirroringClient3.stopScanMirroring();
                     Log.d("SmartMirroringClient", "unbindService()");
                     ref$BooleanRef.element = true;
@@ -128,9 +127,9 @@ final class SmartMirroringClient$connectionFlow$1 extends SuspendLambda implemen
                         int i3 = Result.$r8$clinit;
                         failure = new Result.Failure(th);
                     }
-                    Throwable m3422exceptionOrNullimpl = Result.m3422exceptionOrNullimpl(failure);
-                    if (m3422exceptionOrNullimpl != null) {
-                        m3422exceptionOrNullimpl.printStackTrace();
+                    Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
+                    if (thM3442exceptionOrNullimpl != null) {
+                        thM3442exceptionOrNullimpl.printStackTrace();
                     }
                     return Unit.INSTANCE;
                 }

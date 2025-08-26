@@ -17,9 +17,7 @@ public class RingBuffer<T> {
         this(new Supplier() { // from class: com.android.internal.util.RingBuffer$$ExternalSyntheticLambda0
             @Override // java.util.function.Supplier
             public final Object get() {
-                Object createNewItem;
-                createNewItem = RingBuffer.createNewItem(cls);
-                return createNewItem;
+                return RingBuffer.createNewItem(cls);
             }
         }, new IntFunction() { // from class: com.android.internal.util.RingBuffer$$ExternalSyntheticLambda1
             @Override // java.util.function.IntFunction
@@ -75,12 +73,12 @@ public class RingBuffer<T> {
     public T getNextSlot() {
         long j = this.mCursor;
         this.mCursor = 1 + j;
-        int indexOf = indexOf(j);
+        int iIndexOf = indexOf(j);
         T[] tArr = this.mBuffer;
-        if (tArr[indexOf] == null) {
-            tArr[indexOf] = this.mNewItem.get();
+        if (tArr[iIndexOf] == null) {
+            tArr[iIndexOf] = this.mNewItem.get();
         }
-        return this.mBuffer[indexOf];
+        return this.mBuffer[iIndexOf];
     }
 
     public T[] toArray() {

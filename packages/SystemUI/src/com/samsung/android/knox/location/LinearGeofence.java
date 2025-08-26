@@ -7,7 +7,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class LinearGeofence extends Geofence implements Serializable, Parcelable {
     private static final long serialVersionUID = 1;
@@ -30,13 +29,13 @@ public class LinearGeofence extends Geofence implements Serializable, Parcelable
     @Override // com.samsung.android.knox.location.Geofence
     public void readFromParcel(Parcel parcel) {
         super.readFromParcel(parcel);
-        int readInt = parcel.readInt();
-        for (int i = 0; i < readInt; i++) {
-            LatLongPoint createFromParcel = LatLongPoint.CREATOR.createFromParcel(parcel);
-            if (createFromParcel == null) {
+        int i = parcel.readInt();
+        for (int i2 = 0; i2 < i; i2++) {
+            LatLongPoint latLongPointCreateFromParcel = LatLongPoint.CREATOR.createFromParcel(parcel);
+            if (latLongPointCreateFromParcel == null) {
                 throw new ParcelFormatException("Parcel format exception");
             }
-            this.points.add(createFromParcel);
+            this.points.add(latLongPointCreateFromParcel);
         }
         this.width = parcel.readDouble();
     }

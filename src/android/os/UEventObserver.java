@@ -60,9 +60,9 @@ public abstract class UEventObserver {
     }
 
     public final void stopObserving() {
-        UEventThread peekThread = peekThread();
-        if (peekThread != null) {
-            peekThread.removeObserver(this);
+        UEventThread uEventThreadPeekThread = peekThread();
+        if (uEventThreadPeekThread != null) {
+            uEventThreadPeekThread.removeObserver(this);
         }
     }
 
@@ -73,15 +73,15 @@ public abstract class UEventObserver {
             int length = str.length();
             int i = 0;
             while (i < length) {
-                int indexOf = str.indexOf(61, i);
-                int indexOf2 = str.indexOf(0, i);
-                if (indexOf2 < 0) {
+                int iIndexOf = str.indexOf(61, i);
+                int iIndexOf2 = str.indexOf(0, i);
+                if (iIndexOf2 < 0) {
                     return;
                 }
-                if (indexOf > i && indexOf < indexOf2) {
-                    this.mMap.put(str.substring(i, indexOf), str.substring(indexOf + 1, indexOf2));
+                if (iIndexOf > i && iIndexOf < iIndexOf2) {
+                    this.mMap.put(str.substring(i, iIndexOf), str.substring(iIndexOf + 1, iIndexOf2));
                 }
-                i = indexOf2 + 1;
+                i = iIndexOf2 + 1;
             }
         }
 
@@ -113,9 +113,9 @@ public abstract class UEventObserver {
         public void run() {
             UEventObserver.nativeSetup();
             while (true) {
-                String nativeWaitForNextEvent = UEventObserver.nativeWaitForNextEvent();
-                if (nativeWaitForNextEvent != null) {
-                    sendEvent(nativeWaitForNextEvent);
+                String strNativeWaitForNextEvent = UEventObserver.nativeWaitForNextEvent();
+                if (strNativeWaitForNextEvent != null) {
+                    sendEvent(strNativeWaitForNextEvent);
                 }
             }
         }

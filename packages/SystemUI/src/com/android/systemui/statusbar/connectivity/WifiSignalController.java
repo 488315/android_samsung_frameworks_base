@@ -17,7 +17,6 @@ import com.android.settingslib.wifi.WifiStatusTracker;
 import com.android.systemui.R;
 import java.io.PrintWriter;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class WifiSignalController extends SignalController {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -28,7 +27,6 @@ public class WifiSignalController extends SignalController {
     public final WifiManager mWifiManager;
     public final WifiStatusTracker mWifiTracker;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class WifiTrafficStateCallback implements WifiManager.TrafficStateCallback {
         public /* synthetic */ WifiTrafficStateCallback(WifiSignalController wifiSignalController, int i) {
             this();
@@ -92,9 +90,9 @@ public class WifiSignalController extends SignalController {
     }
 
     public final void doInBackground(Runnable runnable) {
-        Thread currentThread = Thread.currentThread();
+        Thread threadCurrentThread = Thread.currentThread();
         Handler handler = this.mBgHandler;
-        if (currentThread != handler.getLooper().getThread()) {
+        if (threadCurrentThread != handler.getLooper().getThread()) {
             handler.post(runnable);
         } else {
             runnable.run();
@@ -150,31 +148,31 @@ public class WifiSignalController extends SignalController {
         if (!wifiState.isCarrierMerged) {
             boolean z = wifiState.enabled && ((wifiState.connected && wifiState.inetCondition == 1) || !this.mHasMobileDataFeature || wifiState.isDefault || this.mContext.getResources().getBoolean(R.bool.config_showWifiIndicatorWhenEnabled));
             String str = wifiState.connected ? wifiState.ssid : null;
-            byte b = z && wifiState.ssid != null;
-            String charSequence = getTextIfExists(getContentDescription()).toString();
+            Object[] objArr = z && wifiState.ssid != null;
+            String string = getTextIfExists(getContentDescription()).toString();
             if (wifiState.inetCondition == 0) {
-                charSequence = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(this.mContext, R.string.data_connection_no_internet, MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(charSequence, ","));
+                string = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(this.mContext, R.string.data_connection_no_internet, MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(string, ","));
             }
-            signalCallback.setWifiIndicators(new WifiIndicators(wifiState.enabled, new IconState(z, getCurrentIconId(), charSequence), new IconState(wifiState.connected, this.mWifiTracker.isCaptivePortal ? R.drawable.ic_qs_wifi_disconnected : connectivityState.connected ? connectivityState.iconGroup.qsIcons[connectivityState.inetCondition][connectivityState.level] : connectivityState.enabled ? connectivityState.iconGroup.qsDiscState : connectivityState.iconGroup.qsNullState, charSequence), b == true && wifiState.activityIn, b == true && wifiState.activityOut, str, wifiState.isTransient, wifiState.statusLabel, wifiState.inetCondition));
+            signalCallback.setWifiIndicators(new WifiIndicators(wifiState.enabled, new IconState(z, getCurrentIconId(), string), new IconState(wifiState.connected, this.mWifiTracker.isCaptivePortal ? R.drawable.ic_qs_wifi_disconnected : connectivityState.connected ? connectivityState.iconGroup.qsIcons[connectivityState.inetCondition][connectivityState.level] : connectivityState.enabled ? connectivityState.iconGroup.qsDiscState : connectivityState.iconGroup.qsNullState, string), objArr == true && wifiState.activityIn, objArr == true && wifiState.activityOut, str, wifiState.isTransient, wifiState.statusLabel, wifiState.inetCondition));
             return;
         }
         boolean z2 = wifiState.isDefault;
         NetworkControllerImpl networkControllerImpl = this.mNetworkController;
         if (z2 || networkControllerImpl.mAirplaneMode) {
-            String charSequence2 = getTextIfExists(getContentDescription()).toString();
+            String string2 = getTextIfExists(getContentDescription()).toString();
             SignalIcon$MobileIconGroup signalIcon$MobileIconGroup = this.mCarrierMergedWifiIconGroup;
             CharSequence textIfExists = getTextIfExists(signalIcon$MobileIconGroup.dataContentDescription);
-            String spanned = Html.fromHtml(textIfExists.toString(), 0).toString();
+            String string3 = Html.fromHtml(textIfExists.toString(), 0).toString();
             if (wifiState.inetCondition == 0) {
-                spanned = this.mContext.getString(R.string.data_connection_no_internet);
+                string3 = this.mContext.getString(R.string.data_connection_no_internet);
             }
-            String str2 = spanned;
+            String str2 = string3;
             boolean z3 = wifiState.enabled && wifiState.connected && wifiState.isDefault;
-            IconState iconState2 = new IconState(z3, getCurrentIconIdForCarrierWifi(), charSequence2);
+            IconState iconState2 = new IconState(z3, getCurrentIconIdForCarrierWifi(), string2);
             int i2 = signalIcon$MobileIconGroup.dataType;
             int i3 = z3 ? i2 : 0;
             if (z3) {
-                iconState = new IconState(wifiState.connected, getCurrentIconIdForCarrierWifi(), charSequence2);
+                iconState = new IconState(wifiState.connected, getCurrentIconIdForCarrierWifi(), string2);
                 i = i2;
             } else {
                 i = 0;

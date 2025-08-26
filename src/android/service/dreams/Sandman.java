@@ -20,9 +20,9 @@ public final class Sandman {
     }
 
     public static boolean shouldStartDockApp(Context context, Intent intent) {
-        ComponentName unflattenFromString = ComponentName.unflattenFromString(context.getResources().getString(R.string.config_somnambulatorComponent));
-        ComponentName resolveActivity = intent.resolveActivity(context.getPackageManager());
-        return (resolveActivity == null || resolveActivity.equals(unflattenFromString)) ? false : true;
+        ComponentName componentNameUnflattenFromString = ComponentName.unflattenFromString(context.getResources().getString(R.string.config_somnambulatorComponent));
+        ComponentName componentNameResolveActivity = intent.resolveActivity(context.getPackageManager());
+        return (componentNameResolveActivity == null || componentNameResolveActivity.equals(componentNameUnflattenFromString)) ? false : true;
     }
 
     public static void startDreamByUserRequest(Context context) {
@@ -39,8 +39,8 @@ public final class Sandman {
 
     private static void startDream(Context context, boolean z) {
         try {
-            IDreamManager asInterface = IDreamManager.Stub.asInterface(ServiceManager.getService(DreamService.DREAM_SERVICE));
-            if (asInterface == null || asInterface.isDreaming()) {
+            IDreamManager iDreamManagerAsInterface = IDreamManager.Stub.asInterface(ServiceManager.getService(DreamService.DREAM_SERVICE));
+            if (iDreamManagerAsInterface == null || iDreamManagerAsInterface.isDreaming()) {
                 return;
             }
             if (z) {
@@ -49,7 +49,7 @@ public final class Sandman {
             } else {
                 Slog.i(TAG, "Activating dream by user request.");
             }
-            asInterface.dream();
+            iDreamManagerAsInterface.dream();
         } catch (RemoteException e) {
             Slog.e(TAG, "Could not start dream when docked.", e);
         }

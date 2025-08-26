@@ -12,7 +12,6 @@ import android.os.UserHandle;
 import java.util.concurrent.Executor;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class AsyncActivityLauncher {
     public static final int $stable = 8;
@@ -46,29 +45,20 @@ public final class AsyncActivityLauncher {
         }
         this.pendingCallback = function1;
         intent.setFlags(intent.getFlags() | 268435456);
-        this.backgroundExecutor.execute(new Runnable() { // from class: com.android.systemui.util.AsyncActivityLauncher$startActivityAsUser$1
+        this.backgroundExecutor.execute(new Runnable() { // from class: com.android.systemui.util.AsyncActivityLauncher.startActivityAsUser.1
             @Override // java.lang.Runnable
             public final void run() {
-                IActivityTaskManager iActivityTaskManager;
-                Context context;
-                Context context2;
-                Executor executor;
-                iActivityTaskManager = AsyncActivityLauncher.this.activityTaskManager;
-                context = AsyncActivityLauncher.this.context;
-                String packageName = context.getPackageName();
-                context2 = AsyncActivityLauncher.this.context;
-                final WaitResult startActivityAndWait = iActivityTaskManager.startActivityAndWait((IApplicationThread) null, packageName, context2.getAttributionTag(), intent, (String) null, (IBinder) null, (String) null, 0, 0, (ProfilerInfo) null, bundle, userHandle.getIdentifier());
-                executor = AsyncActivityLauncher.this.mainExecutor;
+                final WaitResult waitResultStartActivityAndWait = AsyncActivityLauncher.this.activityTaskManager.startActivityAndWait((IApplicationThread) null, AsyncActivityLauncher.this.context.getPackageName(), AsyncActivityLauncher.this.context.getAttributionTag(), intent, (String) null, (IBinder) null, (String) null, 0, 0, (ProfilerInfo) null, bundle, userHandle.getIdentifier());
+                Executor executor = AsyncActivityLauncher.this.mainExecutor;
                 final AsyncActivityLauncher asyncActivityLauncher = AsyncActivityLauncher.this;
-                executor.execute(new Runnable() { // from class: com.android.systemui.util.AsyncActivityLauncher$startActivityAsUser$1.1
+                executor.execute(new Runnable() { // from class: com.android.systemui.util.AsyncActivityLauncher.startActivityAsUser.1.1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        Function1 function12;
-                        function12 = AsyncActivityLauncher.this.pendingCallback;
+                        Function1 function12 = asyncActivityLauncher.pendingCallback;
                         if (function12 != null) {
-                            WaitResult waitResult = startActivityAndWait;
+                            WaitResult waitResult = waitResultStartActivityAndWait;
                             waitResult.getClass();
-                            function12.mo779invoke(waitResult);
+                            function12.mo781invoke(waitResult);
                         }
                     }
                 });

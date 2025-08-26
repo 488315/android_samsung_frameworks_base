@@ -7,11 +7,11 @@ public class SystemPropertySetter {
     public static final int PROPERTY_FAILURE_RETRY_DELAY_MILLIS = 200;
     public static final int PROPERTY_FAILURE_RETRY_LIMIT = 5;
 
-    public static void setWithRetry(String str, String str2) {
+    public static void setWithRetry(String str, String str2) throws InterruptedException {
         setWithRetry(str, str2, 200, 5L);
     }
 
-    public static void setWithRetry(String str, String str2, int i, long j) {
+    public static void setWithRetry(String str, String str2, int i, long j) throws InterruptedException {
         if (i < 0) {
             throw new IllegalArgumentException("invalid retry count: " + i);
         }

@@ -4,14 +4,12 @@ import java.text.BreakIterator;
 import java.util.Locale;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AccessibilityIterators$WordTextSegmentIterator extends AccessibilityIterators$AbstractTextSegmentIterator {
     public static final Companion Companion = new Companion(null);
     public static AccessibilityIterators$WordTextSegmentIterator instance;
     public final BreakIterator impl;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -54,9 +52,9 @@ public final class AccessibilityIterators$WordTextSegmentIterator extends Access
                 if (breakIterator2 == null) {
                     breakIterator2 = null;
                 }
-                int following = breakIterator2.following(i);
-                if (following != -1 && isEndBoundary$1(following)) {
-                    return getRange(i, following);
+                int iFollowing = breakIterator2.following(i);
+                if (iFollowing != -1 && isEndBoundary$1(iFollowing)) {
+                    return getRange(i, iFollowing);
                 }
             }
         }
@@ -114,9 +112,9 @@ public final class AccessibilityIterators$WordTextSegmentIterator extends Access
             if (breakIterator2 == null) {
                 breakIterator2 = null;
             }
-            int preceding = breakIterator2.preceding(i);
-            if (preceding != -1 && isLetterOrDigit(preceding) && (preceding == 0 || !isLetterOrDigit(preceding - 1))) {
-                return getRange(preceding, i);
+            int iPreceding = breakIterator2.preceding(i);
+            if (iPreceding != -1 && isLetterOrDigit(iPreceding) && (iPreceding == 0 || !isLetterOrDigit(iPreceding - 1))) {
+                return getRange(iPreceding, i);
             }
         }
         return null;

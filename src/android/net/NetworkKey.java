@@ -80,12 +80,12 @@ public class NetworkKey implements Parcelable {
     }
 
     private NetworkKey(Parcel parcel) {
-        int readInt = parcel.readInt();
-        this.type = readInt;
-        if (readInt == 1) {
+        int i = parcel.readInt();
+        this.type = i;
+        if (i == 1) {
             this.wifiKey = WifiKey.CREATOR.createFromParcel(parcel);
         } else {
-            throw new IllegalArgumentException("Parcel has unknown type: " + readInt);
+            throw new IllegalArgumentException("Parcel has unknown type: " + i);
         }
     }
 

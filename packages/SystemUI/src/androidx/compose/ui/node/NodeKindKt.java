@@ -28,7 +28,6 @@ import androidx.compose.ui.relocation.BringIntoViewModifierNode;
 import androidx.compose.ui.semantics.SemanticsModifier;
 import com.samsung.android.knox.net.nap.NetworkAnalyticsConstants;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class NodeKindKt {
     public static final MutableObjectIntMap classToKindSetMap = ObjectIntMapKt.mutableObjectIntMapOf();
@@ -52,15 +51,15 @@ public abstract class NodeKindKt {
             if ((i & 2) != 0 && (node instanceof LayoutModifierNode)) {
                 LayoutModifierNodeKt.invalidateMeasurement((LayoutModifierNode) node);
                 if (i2 == 2) {
-                    NodeCoordinator m632requireCoordinator64DMado = DelegatableNodeKt.m632requireCoordinator64DMado(node, 2);
-                    m632requireCoordinator64DMado.released = true;
-                    ((NodeCoordinator$invalidateParentLayer$1) m632requireCoordinator64DMado.invalidateParentLayer).invoke();
-                    if (m632requireCoordinator64DMado.layer != null) {
-                        if (m632requireCoordinator64DMado.explicitLayer != null) {
-                            m632requireCoordinator64DMado.explicitLayer = null;
+                    NodeCoordinator nodeCoordinatorM634requireCoordinator64DMado = DelegatableNodeKt.m634requireCoordinator64DMado(node, 2);
+                    nodeCoordinatorM634requireCoordinator64DMado.released = true;
+                    ((NodeCoordinator$invalidateParentLayer$1) nodeCoordinatorM634requireCoordinator64DMado.invalidateParentLayer).invoke();
+                    if (nodeCoordinatorM634requireCoordinator64DMado.layer != null) {
+                        if (nodeCoordinatorM634requireCoordinator64DMado.explicitLayer != null) {
+                            nodeCoordinatorM634requireCoordinator64DMado.explicitLayer = null;
                         }
-                        m632requireCoordinator64DMado.updateLayerBlock(null, false);
-                        m632requireCoordinator64DMado.layoutNode.requestRelayout$ui_release(false);
+                        nodeCoordinatorM634requireCoordinator64DMado.updateLayerBlock(null, false);
+                        nodeCoordinatorM634requireCoordinator64DMado.layoutNode.requestRelayout$ui_release(false);
                     }
                 }
             }
@@ -68,11 +67,11 @@ public abstract class NodeKindKt {
                 DelegatableNodeKt.requireLayoutNode(node).invalidateMeasurements$ui_release();
             }
             if ((i & 256) != 0 && (node instanceof GlobalPositionAwareModifierNode) && i2 != 2) {
-                LayoutNode requireLayoutNode = DelegatableNodeKt.requireLayoutNode(node);
-                if (!requireLayoutNode.getLayoutPending$ui_release() && !requireLayoutNode.getMeasurePending$ui_release() && !requireLayoutNode.needsOnPositionedDispatch) {
-                    AndroidComposeView androidComposeView = (AndroidComposeView) LayoutNodeKt.requireOwner(requireLayoutNode);
-                    androidComposeView.measureAndLayoutDelegate.onPositionedDispatcher.layoutNodes.add(requireLayoutNode);
-                    requireLayoutNode.needsOnPositionedDispatch = true;
+                LayoutNode layoutNodeRequireLayoutNode = DelegatableNodeKt.requireLayoutNode(node);
+                if (!layoutNodeRequireLayoutNode.getLayoutPending$ui_release() && !layoutNodeRequireLayoutNode.getMeasurePending$ui_release() && !layoutNodeRequireLayoutNode.needsOnPositionedDispatch) {
+                    AndroidComposeView androidComposeView = (AndroidComposeView) LayoutNodeKt.requireOwner(layoutNodeRequireLayoutNode);
+                    androidComposeView.measureAndLayoutDelegate.onPositionedDispatcher.layoutNodes.add(layoutNodeRequireLayoutNode);
+                    layoutNodeRequireLayoutNode.needsOnPositionedDispatch = true;
                     androidComposeView.scheduleMeasureAndLayout(null);
                 }
             }
@@ -97,9 +96,7 @@ public abstract class NodeKindKt {
                 CanFocusChecker.canFocusValue = null;
                 focusPropertiesModifierNode.applyFocusProperties(canFocusChecker);
                 if (CanFocusChecker.canFocusValue != null) {
-                    if (ComposeUiFlags.isTrackFocusEnabled) {
-                        scheduleInvalidationOfAssociatedFocusTargets(focusPropertiesModifierNode);
-                    } else if (i2 == 2) {
+                    if (ComposeUiFlags.isTrackFocusEnabled || i2 == 2) {
                         scheduleInvalidationOfAssociatedFocusTargets(focusPropertiesModifierNode);
                     } else {
                         FocusInvalidationManager focusInvalidationManager = ((AndroidComposeView) DelegatableNodeKt.requireOwner(focusPropertiesModifierNode)).focusOwner.focusInvalidationManager;
@@ -156,15 +153,15 @@ public abstract class NodeKindKt {
             return calculateNodeKindSetFrom(node);
         }
         DelegatingNode delegatingNode = (DelegatingNode) node;
-        int i = delegatingNode.selfKindSet;
+        int iCalculateNodeKindSetFromIncludingDelegates = delegatingNode.selfKindSet;
         for (Modifier.Node node2 = delegatingNode.delegate; node2 != null; node2 = node2.child) {
-            i |= calculateNodeKindSetFromIncludingDelegates(node2);
+            iCalculateNodeKindSetFromIncludingDelegates |= calculateNodeKindSetFromIncludingDelegates(node2);
         }
-        return i;
+        return iCalculateNodeKindSetFromIncludingDelegates;
     }
 
     /* renamed from: getIncludeSelfInTraversal-H91voCI, reason: not valid java name */
-    public static final boolean m681getIncludeSelfInTraversalH91voCI(int i) {
+    public static final boolean m683getIncludeSelfInTraversalH91voCI(int i) {
         return (i & 128) != 0;
     }
 
@@ -187,45 +184,45 @@ public abstract class NodeKindKt {
             if (i == 0) {
                 return;
             }
-            Modifier.Node node4 = (Modifier.Node) mutableVector.removeAt(i - 1);
-            if ((node4.aggregateChildKindSet & 1024) == 0) {
-                DelegatableNodeKt.access$addLayoutNodeChildren(mutableVector, node4);
+            Modifier.Node nodeAccess$pop = (Modifier.Node) mutableVector.removeAt(i - 1);
+            if ((nodeAccess$pop.aggregateChildKindSet & 1024) == 0) {
+                DelegatableNodeKt.access$addLayoutNodeChildren(mutableVector, nodeAccess$pop);
             } else {
                 while (true) {
-                    if (node4 == null) {
+                    if (nodeAccess$pop == null) {
                         break;
                     }
-                    if ((node4.kindSet & 1024) != 0) {
+                    if ((nodeAccess$pop.kindSet & 1024) != 0) {
                         MutableVector mutableVector2 = null;
-                        while (node4 != null) {
-                            if (node4 instanceof FocusTargetNode) {
-                                FocusTargetNodeKt.invalidateFocusTarget((FocusTargetNode) node4);
-                            } else if ((node4.kindSet & 1024) != 0 && (node4 instanceof DelegatingNode)) {
+                        while (nodeAccess$pop != null) {
+                            if (nodeAccess$pop instanceof FocusTargetNode) {
+                                FocusTargetNodeKt.invalidateFocusTarget((FocusTargetNode) nodeAccess$pop);
+                            } else if ((nodeAccess$pop.kindSet & 1024) != 0 && (nodeAccess$pop instanceof DelegatingNode)) {
                                 int i2 = 0;
-                                for (Modifier.Node node5 = ((DelegatingNode) node4).delegate; node5 != null; node5 = node5.child) {
-                                    if ((node5.kindSet & 1024) != 0) {
+                                for (Modifier.Node node4 = ((DelegatingNode) nodeAccess$pop).delegate; node4 != null; node4 = node4.child) {
+                                    if ((node4.kindSet & 1024) != 0) {
                                         i2++;
                                         if (i2 == 1) {
-                                            node4 = node5;
+                                            nodeAccess$pop = node4;
                                         } else {
                                             if (mutableVector2 == null) {
                                                 mutableVector2 = new MutableVector(new Modifier.Node[16], 0);
                                             }
-                                            if (node4 != null) {
-                                                mutableVector2.add(node4);
-                                                node4 = null;
+                                            if (nodeAccess$pop != null) {
+                                                mutableVector2.add(nodeAccess$pop);
+                                                nodeAccess$pop = null;
                                             }
-                                            mutableVector2.add(node5);
+                                            mutableVector2.add(node4);
                                         }
                                     }
                                 }
                                 if (i2 == 1) {
                                 }
                             }
-                            node4 = DelegatableNodeKt.access$pop(mutableVector2);
+                            nodeAccess$pop = DelegatableNodeKt.access$pop(mutableVector2);
                         }
                     } else {
-                        node4 = node4.child;
+                        nodeAccess$pop = nodeAccess$pop.child;
                     }
                 }
             }
@@ -239,9 +236,9 @@ public abstract class NodeKindKt {
         }
         Class<?> cls = node.getClass();
         MutableObjectIntMap mutableObjectIntMap = classToKindSetMap;
-        int findKeyIndex = mutableObjectIntMap.findKeyIndex(cls);
-        if (findKeyIndex >= 0) {
-            return mutableObjectIntMap.values[findKeyIndex];
+        int iFindKeyIndex = mutableObjectIntMap.findKeyIndex(cls);
+        if (iFindKeyIndex >= 0) {
+            return mutableObjectIntMap.values[iFindKeyIndex];
         }
         int i2 = node instanceof LayoutModifierNode ? 3 : 1;
         if (node instanceof DrawModifierNode) {

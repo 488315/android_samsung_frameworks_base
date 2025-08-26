@@ -4,9 +4,12 @@ import androidx.compose.animation.AnimatedContentKt$$ExternalSyntheticOutline0;
 import androidx.compose.foundation.BackgroundKt;
 import androidx.compose.foundation.IndicationKt;
 import androidx.compose.foundation.gestures.PressGestureScope;
+import androidx.compose.foundation.gestures.PressGestureScopeImpl;
 import androidx.compose.foundation.gestures.TapGestureDetectorKt;
 import androidx.compose.foundation.interaction.InteractionSourceKt;
 import androidx.compose.foundation.interaction.MutableInteractionSource;
+import androidx.compose.foundation.interaction.PressInteraction$Press;
+import androidx.compose.foundation.interaction.PressInteraction$Release;
 import androidx.compose.foundation.layout.BoxKt;
 import androidx.compose.foundation.layout.BoxScopeInstance;
 import androidx.compose.foundation.layout.SizeKt;
@@ -48,6 +51,7 @@ import androidx.compose.ui.node.ComposeUiNode;
 import androidx.compose.ui.platform.CompositionLocalsKt;
 import androidx.compose.ui.platform.ViewConfiguration;
 import androidx.compose.ui.unit.Dp;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.EmptyCoroutineContext;
@@ -58,9 +62,11 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.Intrinsics;
+import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
+import kotlinx.coroutines.Job;
+import kotlinx.coroutines.StandaloneCoroutine;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class LongPressIconButtonKt {
     public static final void LongPressIconButton(final Function0 function0, Modifier modifier, boolean z, IconButtonColors iconButtonColors, MutableInteractionSource mutableInteractionSource, ComposableLambdaImpl composableLambdaImpl, Composer composer, final int i) {
@@ -95,14 +101,14 @@ public abstract class LongPressIconButtonKt {
                 IconButtonDefaults.INSTANCE.getClass();
                 IconButtonColors iconButtonColors4 = IconButtonDefaults.iconButtonColors(composerImpl3);
                 int i5 = i3 & (-7169);
-                Object m = BasicTextKt$$ExternalSyntheticOutline0.m(composerImpl3, 889655645, companion);
-                if (m == Composer.Companion.Empty) {
-                    m = InteractionSourceKt.MutableInteractionSource();
-                    composerImpl3.updateRememberedValue(m);
+                Object objM = BasicTextKt$$ExternalSyntheticOutline0.m(composerImpl3, 889655645, companion);
+                if (objM == Composer.Companion.Empty) {
+                    objM = InteractionSourceKt.MutableInteractionSource();
+                    composerImpl3.updateRememberedValue(objM);
                 }
                 composerImpl3.end(false);
                 iconButtonColors2 = iconButtonColors4;
-                mutableInteractionSource2 = (MutableInteractionSource) m;
+                mutableInteractionSource2 = (MutableInteractionSource) objM;
                 i2 = i5;
                 z2 = true;
             } else {
@@ -116,27 +122,27 @@ public abstract class LongPressIconButtonKt {
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventStart("com.android.systemui.media.mediaoutput.compose.widget.LongPressIconButton (LongPressIconButton.kt:40)");
             }
-            Object rememberedValue = composerImpl3.rememberedValue();
+            Object objRememberedValue = composerImpl3.rememberedValue();
             companion.getClass();
             Composer$Companion$Empty$1 composer$Companion$Empty$1 = Composer.Companion.Empty;
-            if (rememberedValue == composer$Companion$Empty$1) {
-                rememberedValue = EffectsKt.createCompositionCoroutineScope(EmptyCoroutineContext.INSTANCE, composerImpl3);
-                composerImpl3.updateRememberedValue(rememberedValue);
+            if (objRememberedValue == composer$Companion$Empty$1) {
+                objRememberedValue = EffectsKt.createCompositionCoroutineScope(EmptyCoroutineContext.INSTANCE, composerImpl3);
+                composerImpl3.updateRememberedValue(objRememberedValue);
             }
-            final CoroutineScope coroutineScope = (CoroutineScope) rememberedValue;
+            final CoroutineScope coroutineScope = (CoroutineScope) objRememberedValue;
             final ViewConfiguration viewConfiguration = (ViewConfiguration) composerImpl3.consume(CompositionLocalsKt.LocalViewConfiguration);
             composerImpl3.startReplaceGroup(889662392);
-            Object rememberedValue2 = composerImpl3.rememberedValue();
-            if (rememberedValue2 == composer$Companion$Empty$1) {
-                rememberedValue2 = SnapshotStateKt.mutableStateOf$default(Boolean.FALSE);
-                composerImpl3.updateRememberedValue(rememberedValue2);
+            Object objRememberedValue2 = composerImpl3.rememberedValue();
+            if (objRememberedValue2 == composer$Companion$Empty$1) {
+                objRememberedValue2 = SnapshotStateKt.mutableStateOf$default(Boolean.FALSE);
+                composerImpl3.updateRememberedValue(objRememberedValue2);
             }
-            final MutableState mutableState = (MutableState) rememberedValue2;
+            final MutableState mutableState = (MutableState) objRememberedValue2;
             composerImpl3.end(false);
             StaticProvidableCompositionLocal staticProvidableCompositionLocal = InteractiveComponentSizeKt.LocalMinimumInteractiveComponentSize;
             modifier2 = modifier;
             Dp.Companion companion2 = Dp.Companion;
-            Modifier clip = ClipKt.clip(SizeKt.m139size3ABfNKs(modifier2.then(MinimumInteractiveModifier.INSTANCE), 48), RoundedCornerShapeKt.CircleShape);
+            Modifier modifierClip = ClipKt.clip(SizeKt.m140size3ABfNKs(modifier2.then(MinimumInteractiveModifier.INSTANCE), 48), RoundedCornerShapeKt.CircleShape);
             if (z2) {
                 composerImpl = composerImpl3;
                 j = iconButtonColors2.containerColor;
@@ -144,16 +150,15 @@ public abstract class LongPressIconButtonKt {
                 composerImpl = composerImpl3;
                 j = iconButtonColors2.disabledContainerColor;
             }
-            Modifier indication = IndicationKt.indication(BackgroundKt.m26backgroundbw27NRU(clip, j, RectangleShapeKt.RectangleShape), mutableInteractionSource2, RippleKt.m280rippleH2RKhps$default(0.0f, false, 6));
+            Modifier modifierIndication = IndicationKt.indication(BackgroundKt.m26backgroundbw27NRU(modifierClip, j, RectangleShapeKt.RectangleShape), mutableInteractionSource2, RippleKt.m281rippleH2RKhps$default(0.0f, false, 6));
             Unit unit = Unit.INSTANCE;
             composerImpl2 = composerImpl;
             composerImpl2.startReplaceGroup(889676491);
-            boolean changedInstance = ((i2 & 14) == 4) | composerImpl2.changedInstance(coroutineScope) | composerImpl2.changedInstance(viewConfiguration);
-            Object rememberedValue3 = composerImpl2.rememberedValue();
-            if (changedInstance || rememberedValue3 == composer$Companion$Empty$1) {
+            boolean zChangedInstance = ((i2 & 14) == 4) | composerImpl2.changedInstance(coroutineScope) | composerImpl2.changedInstance(viewConfiguration);
+            Object objRememberedValue3 = composerImpl2.rememberedValue();
+            if (zChangedInstance || objRememberedValue3 == composer$Companion$Empty$1) {
                 PointerInputEventHandler pointerInputEventHandler = new PointerInputEventHandler() { // from class: com.android.systemui.media.mediaoutput.compose.widget.LongPressIconButtonKt$LongPressIconButton$2$1
 
-                    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
                     /* renamed from: com.android.systemui.media.mediaoutput.compose.widget.LongPressIconButtonKt$LongPressIconButton$2$1$1, reason: invalid class name */
                     final class AnonymousClass1 extends SuspendLambda implements Function3 {
                         final /* synthetic */ CoroutineScope $coroutineScope;
@@ -184,134 +189,101 @@ public abstract class LongPressIconButtonKt {
                             return anonymousClass1.invokeSuspend(Unit.INSTANCE);
                         }
 
-                        /* JADX WARN: Code restructure failed: missing block: B:14:0x0097, code lost:
+                        /* JADX WARN: Code restructure failed: missing block: B:21:0x0097, code lost:
                         
                             if (r12.emit(r1, r11) != r0) goto L23;
                          */
                         @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
                         /*
                             Code decompiled incorrectly, please refer to instructions dump.
-                            To view partially-correct code enable 'Show inconsistent code' option in preferences
                         */
-                        public final java.lang.Object invokeSuspend(java.lang.Object r12) {
-                            /*
-                                r11 = this;
-                                kotlin.coroutines.intrinsics.CoroutineSingletons r0 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                                int r1 = r11.label
-                                r2 = 3
-                                r3 = 0
-                                r4 = 2
-                                r5 = 1
-                                if (r1 == 0) goto L31
-                                if (r1 == r5) goto L27
-                                if (r1 == r4) goto L1d
-                                if (r1 != r2) goto L15
-                                kotlin.ResultKt.throwOnFailure(r12)
-                                goto L9a
-                            L15:
-                                java.lang.IllegalStateException r11 = new java.lang.IllegalStateException
-                                java.lang.String r12 = "call to 'resume' before 'invoke' with coroutine"
-                                r11.<init>(r12)
-                                throw r11
-                            L1d:
-                                long r4 = r11.J$0
-                                java.lang.Object r1 = r11.L$0
-                                kotlinx.coroutines.Job r1 = (kotlinx.coroutines.Job) r1
-                                kotlin.ResultKt.throwOnFailure(r12)
-                                goto L79
-                            L27:
-                                long r5 = r11.J$0
-                                java.lang.Object r1 = r11.L$0
-                                androidx.compose.foundation.gestures.PressGestureScope r1 = (androidx.compose.foundation.gestures.PressGestureScope) r1
-                                kotlin.ResultKt.throwOnFailure(r12)
-                                goto L50
-                            L31:
-                                kotlin.ResultKt.throwOnFailure(r12)
-                                java.lang.Object r12 = r11.L$0
-                                r1 = r12
-                                androidx.compose.foundation.gestures.PressGestureScope r1 = (androidx.compose.foundation.gestures.PressGestureScope) r1
-                                long r6 = r11.J$0
-                                androidx.compose.foundation.interaction.MutableInteractionSource r12 = r11.$interactionSource
-                                androidx.compose.foundation.interaction.PressInteraction$Press r8 = new androidx.compose.foundation.interaction.PressInteraction$Press
-                                r8.<init>(r6, r3)
-                                r11.L$0 = r1
-                                r11.J$0 = r6
-                                r11.label = r5
-                                java.lang.Object r12 = r12.emit(r8, r11)
-                                if (r12 != r0) goto L4f
-                                goto L99
-                            L4f:
-                                r5 = r6
-                            L50:
-                                androidx.compose.runtime.MutableState<java.lang.Boolean> r12 = r11.$isPressed$delegate
-                                java.lang.Boolean r7 = java.lang.Boolean.TRUE
-                                r12.setValue(r7)
-                                kotlinx.coroutines.CoroutineScope r12 = r11.$coroutineScope
-                                com.android.systemui.media.mediaoutput.compose.widget.LongPressIconButtonKt$LongPressIconButton$2$1$1$job$1 r7 = new com.android.systemui.media.mediaoutput.compose.widget.LongPressIconButtonKt$LongPressIconButton$2$1$1$job$1
-                                androidx.compose.ui.platform.ViewConfiguration r8 = r11.$viewConfiguration
-                                kotlin.jvm.functions.Function0 r9 = r11.$onClick
-                                androidx.compose.runtime.MutableState<java.lang.Boolean> r10 = r11.$isPressed$delegate
-                                r7.<init>(r8, r9, r10, r3)
-                                kotlinx.coroutines.StandaloneCoroutine r12 = kotlinx.coroutines.BuildersKt.launch$default(r12, r3, r3, r7, r2)
-                                r11.L$0 = r12
-                                r11.J$0 = r5
-                                r11.label = r4
-                                androidx.compose.foundation.gestures.PressGestureScopeImpl r1 = (androidx.compose.foundation.gestures.PressGestureScopeImpl) r1
-                                java.lang.Object r1 = r1.tryAwaitRelease(r11)
-                                if (r1 != r0) goto L77
-                                goto L99
-                            L77:
-                                r1 = r12
-                                r4 = r5
-                            L79:
-                                androidx.compose.runtime.MutableState<java.lang.Boolean> r12 = r11.$isPressed$delegate
-                                java.lang.Boolean r6 = java.lang.Boolean.FALSE
-                                r12.setValue(r6)
-                                r1.cancel(r3)
-                                androidx.compose.foundation.interaction.MutableInteractionSource r12 = r11.$interactionSource
-                                androidx.compose.foundation.interaction.PressInteraction$Release r1 = new androidx.compose.foundation.interaction.PressInteraction$Release
-                                androidx.compose.foundation.interaction.PressInteraction$Press r6 = new androidx.compose.foundation.interaction.PressInteraction$Press
-                                r6.<init>(r4, r3)
-                                r1.<init>(r6)
-                                r11.L$0 = r3
-                                r11.label = r2
-                                java.lang.Object r11 = r12.emit(r1, r11)
-                                if (r11 != r0) goto L9a
-                            L99:
-                                return r0
-                            L9a:
-                                kotlin.Unit r11 = kotlin.Unit.INSTANCE
-                                return r11
-                            */
-                            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.media.mediaoutput.compose.widget.LongPressIconButtonKt$LongPressIconButton$2$1.AnonymousClass1.invokeSuspend(java.lang.Object):java.lang.Object");
+                        public final Object invokeSuspend(Object obj) {
+                            PressGestureScope pressGestureScope;
+                            long j;
+                            Job job;
+                            long j2;
+                            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                            int i = this.label;
+                            if (i == 0) {
+                                ResultKt.throwOnFailure(obj);
+                                pressGestureScope = (PressGestureScope) this.L$0;
+                                long j3 = this.J$0;
+                                MutableInteractionSource mutableInteractionSource = this.$interactionSource;
+                                PressInteraction$Press pressInteraction$Press = new PressInteraction$Press(j3, null);
+                                this.L$0 = pressGestureScope;
+                                this.J$0 = j3;
+                                this.label = 1;
+                                if (mutableInteractionSource.emit(pressInteraction$Press, this) != coroutineSingletons) {
+                                    j = j3;
+                                }
+                                return coroutineSingletons;
+                            }
+                            if (i == 1) {
+                                j = this.J$0;
+                                pressGestureScope = (PressGestureScope) this.L$0;
+                                ResultKt.throwOnFailure(obj);
+                            } else {
+                                if (i != 2) {
+                                    if (i != 3) {
+                                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                                    }
+                                    ResultKt.throwOnFailure(obj);
+                                    return Unit.INSTANCE;
+                                }
+                                j2 = this.J$0;
+                                job = (Job) this.L$0;
+                                ResultKt.throwOnFailure(obj);
+                                this.$isPressed$delegate.setValue(Boolean.FALSE);
+                                job.cancel(null);
+                                MutableInteractionSource mutableInteractionSource2 = this.$interactionSource;
+                                PressInteraction$Release pressInteraction$Release = new PressInteraction$Release(new PressInteraction$Press(j2, null));
+                                this.L$0 = null;
+                                this.label = 3;
+                            }
+                            this.$isPressed$delegate.setValue(Boolean.TRUE);
+                            StandaloneCoroutine standaloneCoroutineLaunch$default = BuildersKt.launch$default(this.$coroutineScope, null, null, new LongPressIconButtonKt$LongPressIconButton$2$1$1$job$1(this.$viewConfiguration, this.$onClick, this.$isPressed$delegate, null), 3);
+                            this.L$0 = standaloneCoroutineLaunch$default;
+                            this.J$0 = j;
+                            this.label = 2;
+                            if (((PressGestureScopeImpl) pressGestureScope).tryAwaitRelease(this) != coroutineSingletons) {
+                                job = standaloneCoroutineLaunch$default;
+                                j2 = j;
+                                this.$isPressed$delegate.setValue(Boolean.FALSE);
+                                job.cancel(null);
+                                MutableInteractionSource mutableInteractionSource22 = this.$interactionSource;
+                                PressInteraction$Release pressInteraction$Release2 = new PressInteraction$Release(new PressInteraction$Press(j2, null));
+                                this.L$0 = null;
+                                this.label = 3;
+                            }
+                            return coroutineSingletons;
                         }
                     }
 
                     @Override // androidx.compose.ui.input.pointer.PointerInputEventHandler
                     public final Object invoke(PointerInputScope pointerInputScope, Continuation continuation) {
-                        AnonymousClass1 anonymousClass1 = new AnonymousClass1(MutableInteractionSource.this, coroutineScope, mutableState, viewConfiguration, function0, null);
+                        AnonymousClass1 anonymousClass1 = new AnonymousClass1(mutableInteractionSource2, coroutineScope, mutableState, viewConfiguration, function0, null);
                         final Function0 function02 = function0;
-                        Object detectTapGestures$default = TapGestureDetectorKt.detectTapGestures$default(pointerInputScope, null, null, anonymousClass1, new Function1() { // from class: com.android.systemui.media.mediaoutput.compose.widget.LongPressIconButtonKt$LongPressIconButton$2$1$$ExternalSyntheticLambda0
+                        Object objDetectTapGestures$default = TapGestureDetectorKt.detectTapGestures$default(pointerInputScope, null, null, anonymousClass1, new Function1() { // from class: com.android.systemui.media.mediaoutput.compose.widget.LongPressIconButtonKt$LongPressIconButton$2$1$$ExternalSyntheticLambda0
                             @Override // kotlin.jvm.functions.Function1
                             /* renamed from: invoke */
-                            public final Object mo779invoke(Object obj) {
-                                Function0.this.invoke();
+                            public final Object mo781invoke(Object obj) {
+                                function02.invoke();
                                 return Unit.INSTANCE;
                             }
                         }, continuation, 3);
-                        return detectTapGestures$default == CoroutineSingletons.COROUTINE_SUSPENDED ? detectTapGestures$default : Unit.INSTANCE;
+                        return objDetectTapGestures$default == CoroutineSingletons.COROUTINE_SUSPENDED ? objDetectTapGestures$default : Unit.INSTANCE;
                     }
                 };
                 composerImpl2.updateRememberedValue(pointerInputEventHandler);
-                rememberedValue3 = pointerInputEventHandler;
+                objRememberedValue3 = pointerInputEventHandler;
             }
             composerImpl2.end(false);
-            Modifier pointerInput = SuspendingPointerInputFilterKt.pointerInput(indication, unit, (PointerInputEventHandler) rememberedValue3);
+            Modifier modifierPointerInput = SuspendingPointerInputFilterKt.pointerInput(modifierIndication, unit, (PointerInputEventHandler) objRememberedValue3);
             Alignment.Companion.getClass();
-            MeasurePolicy maybeCachedBoxMeasurePolicy = BoxKt.maybeCachedBoxMeasurePolicy(Alignment.Companion.Center, false);
+            MeasurePolicy measurePolicyMaybeCachedBoxMeasurePolicy = BoxKt.maybeCachedBoxMeasurePolicy(Alignment.Companion.Center, false);
             int currentCompositeKeyHash = ComposablesKt.getCurrentCompositeKeyHash(composerImpl2);
-            PersistentCompositionLocalMap currentCompositionLocalScope = composerImpl2.currentCompositionLocalScope();
-            Modifier materializeModifier = ComposedModifierKt.materializeModifier(composerImpl2, pointerInput);
+            PersistentCompositionLocalMap persistentCompositionLocalMapCurrentCompositionLocalScope = composerImpl2.currentCompositionLocalScope();
+            Modifier modifierMaterializeModifier = ComposedModifierKt.materializeModifier(composerImpl2, modifierPointerInput);
             ComposeUiNode.Companion.getClass();
             Function0 function02 = ComposeUiNode.Companion.Constructor;
             if (composerImpl2.applier == null) {
@@ -324,16 +296,16 @@ public abstract class LongPressIconButtonKt {
             } else {
                 composerImpl2.useNode();
             }
-            Updater.m336setimpl(composerImpl2, maybeCachedBoxMeasurePolicy, ComposeUiNode.Companion.SetMeasurePolicy);
-            Updater.m336setimpl(composerImpl2, currentCompositionLocalScope, ComposeUiNode.Companion.SetResolvedCompositionLocals);
+            Updater.m337setimpl(composerImpl2, measurePolicyMaybeCachedBoxMeasurePolicy, ComposeUiNode.Companion.SetMeasurePolicy);
+            Updater.m337setimpl(composerImpl2, persistentCompositionLocalMapCurrentCompositionLocalScope, ComposeUiNode.Companion.SetResolvedCompositionLocals);
             Function2 function2 = ComposeUiNode.Companion.SetCompositeKeyHash;
             if (composerImpl2.inserting || !Intrinsics.areEqual(composerImpl2.rememberedValue(), Integer.valueOf(currentCompositeKeyHash))) {
                 AnimatedContentKt$$ExternalSyntheticOutline0.m(currentCompositeKeyHash, composerImpl2, currentCompositeKeyHash, function2);
             }
-            Updater.m336setimpl(composerImpl2, materializeModifier, ComposeUiNode.Companion.SetModifier);
+            Updater.m337setimpl(composerImpl2, modifierMaterializeModifier, ComposeUiNode.Companion.SetModifier);
             BoxScopeInstance boxScopeInstance = BoxScopeInstance.INSTANCE;
             composableLambdaImpl2 = composableLambdaImpl;
-            CompositionLocalKt.CompositionLocalProvider(ContentColorKt.LocalContentColor.defaultProvidedValue$runtime_release(Color.m454boximpl(z2 ? iconButtonColors2.contentColor : iconButtonColors2.disabledContentColor)), composableLambdaImpl2, composerImpl2, 56);
+            CompositionLocalKt.CompositionLocalProvider(ContentColorKt.LocalContentColor.defaultProvidedValue$runtime_release(Color.m456boximpl(z2 ? iconButtonColors2.contentColor : iconButtonColors2.disabledContentColor)), composableLambdaImpl2, composerImpl2, 56);
             composerImpl2.end(true);
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventEnd();
@@ -342,10 +314,10 @@ public abstract class LongPressIconButtonKt {
             mutableInteractionSource3 = mutableInteractionSource2;
             iconButtonColors3 = iconButtonColors2;
         }
-        RecomposeScopeImpl endRestartGroup = composerImpl2.endRestartGroup();
-        if (endRestartGroup != null) {
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl2.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
             final Modifier modifier3 = modifier2;
-            endRestartGroup.block = new Function2(modifier3, z3, iconButtonColors3, mutableInteractionSource3, composableLambdaImpl2, i) { // from class: com.android.systemui.media.mediaoutput.compose.widget.LongPressIconButtonKt$$ExternalSyntheticLambda0
+            recomposeScopeImplEndRestartGroup.block = new Function2(modifier3, z3, iconButtonColors3, mutableInteractionSource3, composableLambdaImpl2, i) { // from class: com.android.systemui.media.mediaoutput.compose.widget.LongPressIconButtonKt$$ExternalSyntheticLambda0
                 public final /* synthetic */ Modifier f$1;
                 public final /* synthetic */ boolean f$2;
                 public final /* synthetic */ IconButtonColors f$3;
@@ -355,10 +327,10 @@ public abstract class LongPressIconButtonKt {
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj, Object obj2) {
                     ((Integer) obj2).getClass();
-                    int updateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(196657);
+                    int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(196657);
                     MutableInteractionSource mutableInteractionSource4 = this.f$4;
                     ComposableLambdaImpl composableLambdaImpl3 = this.f$5;
-                    LongPressIconButtonKt.LongPressIconButton(Function0.this, this.f$1, this.f$2, this.f$3, mutableInteractionSource4, composableLambdaImpl3, (Composer) obj, updateChangedFlags);
+                    LongPressIconButtonKt.LongPressIconButton(this.f$0, this.f$1, this.f$2, this.f$3, mutableInteractionSource4, composableLambdaImpl3, (Composer) obj, iUpdateChangedFlags);
                     return Unit.INSTANCE;
                 }
             };

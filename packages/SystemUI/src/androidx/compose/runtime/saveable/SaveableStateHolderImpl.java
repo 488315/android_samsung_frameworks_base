@@ -18,7 +18,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class SaveableStateHolderImpl implements SaveableStateHolder {
     public static final Companion Companion = new Companion(null);
@@ -28,7 +27,6 @@ final class SaveableStateHolderImpl implements SaveableStateHolder {
     public final MutableScatterMap registries;
     public final Map savedStates;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -40,7 +38,11 @@ final class SaveableStateHolderImpl implements SaveableStateHolder {
 
     static {
         SaveableStateHolderImpl$Companion$Saver$1 saveableStateHolderImpl$Companion$Saver$1 = new Function2() { // from class: androidx.compose.runtime.saveable.SaveableStateHolderImpl$Companion$Saver$1
+            /* JADX WARN: Removed duplicated region for block: B:17:0x005a  */
             @Override // kotlin.jvm.functions.Function2
+            /*
+                Code decompiled incorrectly, please refer to instructions dump.
+            */
             public final Object invoke(Object obj, Object obj2) {
                 SaveableStateHolderImpl saveableStateHolderImpl = (SaveableStateHolderImpl) obj2;
                 Map map = saveableStateHolderImpl.savedStates;
@@ -59,11 +61,11 @@ final class SaveableStateHolderImpl implements SaveableStateHolder {
                                 if ((255 & j) < 128) {
                                     int i4 = (i << 3) + i3;
                                     Object obj3 = objArr[i4];
-                                    Map performSave = ((SaveableStateRegistry) objArr2[i4]).performSave();
-                                    if (performSave.isEmpty()) {
+                                    Map mapPerformSave = ((SaveableStateRegistry) objArr2[i4]).performSave();
+                                    if (mapPerformSave.isEmpty()) {
                                         map.remove(obj3);
                                     } else {
-                                        map.put(obj3, performSave);
+                                        map.put(obj3, mapPerformSave);
                                     }
                                 }
                                 j >>= 8;
@@ -71,11 +73,11 @@ final class SaveableStateHolderImpl implements SaveableStateHolder {
                             if (i2 != 8) {
                                 break;
                             }
+                            if (i == length) {
+                                break;
+                            }
+                            i++;
                         }
-                        if (i == length) {
-                            break;
-                        }
-                        i++;
                     }
                 }
                 if (map.isEmpty()) {
@@ -87,7 +89,7 @@ final class SaveableStateHolderImpl implements SaveableStateHolder {
         SaveableStateHolderImpl$Companion$Saver$2 saveableStateHolderImpl$Companion$Saver$2 = new Function1() { // from class: androidx.compose.runtime.saveable.SaveableStateHolderImpl$Companion$Saver$2
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 return new SaveableStateHolderImpl((Map) obj);
             }
         };
@@ -95,6 +97,7 @@ final class SaveableStateHolderImpl implements SaveableStateHolder {
         Saver = new SaverKt$Saver$1(saveableStateHolderImpl$Companion$Saver$1, saveableStateHolderImpl$Companion$Saver$2);
     }
 
+    /* JADX WARN: Multi-variable type inference failed */
     public SaveableStateHolderImpl() {
         this(null, 1, 0 == true ? 1 : 0);
     }
@@ -107,27 +110,27 @@ final class SaveableStateHolderImpl implements SaveableStateHolder {
             ComposerKt.traceEventStart("androidx.compose.runtime.saveable.SaveableStateHolderImpl.SaveableStateProvider (SaveableStateHolder.kt:69)");
         }
         composerImpl.startReusableGroup(obj);
-        Object rememberedValue = composerImpl.rememberedValue();
+        Object objRememberedValue = composerImpl.rememberedValue();
         Composer.Companion.getClass();
         Composer$Companion$Empty$1 composer$Companion$Empty$1 = Composer.Companion.Empty;
-        if (rememberedValue == composer$Companion$Empty$1) {
+        if (objRememberedValue == composer$Companion$Empty$1) {
             Function1 function1 = this.canBeSaved;
-            if (!((Boolean) ((SaveableStateHolderImpl$canBeSaved$1) function1).mo779invoke(obj)).booleanValue()) {
+            if (!((Boolean) ((SaveableStateHolderImpl$canBeSaved$1) function1).mo781invoke(obj)).booleanValue()) {
                 throw new IllegalArgumentException(("Type of the key " + obj + " is not supported. On Android you can only use types which can be stored inside the Bundle.").toString());
             }
             Map map = (Map) this.savedStates.get(obj);
             StaticProvidableCompositionLocal staticProvidableCompositionLocal = SaveableStateRegistryKt.LocalSaveableStateRegistry;
             SaveableStateRegistryImpl saveableStateRegistryImpl = new SaveableStateRegistryImpl(map, function1);
             composerImpl.updateRememberedValue(saveableStateRegistryImpl);
-            rememberedValue = saveableStateRegistryImpl;
+            objRememberedValue = saveableStateRegistryImpl;
         }
-        final SaveableStateRegistry saveableStateRegistry = (SaveableStateRegistry) rememberedValue;
+        final SaveableStateRegistry saveableStateRegistry = (SaveableStateRegistry) objRememberedValue;
         CompositionLocalKt.CompositionLocalProvider(SaveableStateRegistryKt.LocalSaveableStateRegistry.defaultProvidedValue$runtime_release(saveableStateRegistry), function2, composerImpl, (i & 112) | 8);
         Unit unit = Unit.INSTANCE;
-        boolean changedInstance = composerImpl.changedInstance(this) | composerImpl.changedInstance(obj) | composerImpl.changedInstance(saveableStateRegistry);
-        Object rememberedValue2 = composerImpl.rememberedValue();
-        if (changedInstance || rememberedValue2 == composer$Companion$Empty$1) {
-            rememberedValue2 = new Function1() { // from class: androidx.compose.runtime.saveable.SaveableStateHolderImpl$SaveableStateProvider$1$1$1
+        boolean zChangedInstance = composerImpl.changedInstance(this) | composerImpl.changedInstance(obj) | composerImpl.changedInstance(saveableStateRegistry);
+        Object objRememberedValue2 = composerImpl.rememberedValue();
+        if (zChangedInstance || objRememberedValue2 == composer$Companion$Empty$1) {
+            objRememberedValue2 = new Function1() { // from class: androidx.compose.runtime.saveable.SaveableStateHolderImpl$SaveableStateProvider$1$1$1
                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(1);
@@ -135,41 +138,41 @@ final class SaveableStateHolderImpl implements SaveableStateHolder {
 
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj2) {
-                    boolean contains = SaveableStateHolderImpl.this.registries.contains(obj);
+                public final Object mo781invoke(Object obj2) {
+                    boolean zContains = this.this$0.registries.contains(obj);
                     Object obj3 = obj;
-                    if (contains) {
+                    if (zContains) {
                         throw new IllegalArgumentException(("Key " + obj3 + " was used multiple times ").toString());
                     }
-                    SaveableStateHolderImpl.this.savedStates.remove(obj3);
-                    SaveableStateHolderImpl.this.registries.set(obj, saveableStateRegistry);
-                    final SaveableStateHolderImpl saveableStateHolderImpl = SaveableStateHolderImpl.this;
+                    this.this$0.savedStates.remove(obj3);
+                    this.this$0.registries.set(obj, saveableStateRegistry);
+                    final SaveableStateHolderImpl saveableStateHolderImpl = this.this$0;
                     final Object obj4 = obj;
                     final SaveableStateRegistry saveableStateRegistry2 = saveableStateRegistry;
                     return new DisposableEffectResult() { // from class: androidx.compose.runtime.saveable.SaveableStateHolderImpl$SaveableStateProvider$1$1$1$invoke$$inlined$onDispose$1
                         @Override // androidx.compose.runtime.DisposableEffectResult
                         public final void dispose() {
-                            SaveableStateHolderImpl saveableStateHolderImpl2 = SaveableStateHolderImpl.this;
+                            SaveableStateHolderImpl saveableStateHolderImpl2 = saveableStateHolderImpl;
                             MutableScatterMap mutableScatterMap = saveableStateHolderImpl2.registries;
                             Object obj5 = obj4;
-                            Object remove = mutableScatterMap.remove(obj5);
+                            Object objRemove = mutableScatterMap.remove(obj5);
                             SaveableStateRegistry saveableStateRegistry3 = saveableStateRegistry2;
-                            if (remove == saveableStateRegistry3) {
+                            if (objRemove == saveableStateRegistry3) {
                                 Map map2 = saveableStateHolderImpl2.savedStates;
-                                Map performSave = saveableStateRegistry3.performSave();
-                                if (performSave.isEmpty()) {
+                                Map mapPerformSave = saveableStateRegistry3.performSave();
+                                if (mapPerformSave.isEmpty()) {
                                     map2.remove(obj5);
                                 } else {
-                                    map2.put(obj5, performSave);
+                                    map2.put(obj5, mapPerformSave);
                                 }
                             }
                         }
                     };
                 }
             };
-            composerImpl.updateRememberedValue(rememberedValue2);
+            composerImpl.updateRememberedValue(objRememberedValue2);
         }
-        EffectsKt.DisposableEffect(unit, (Function1) rememberedValue2, composerImpl);
+        EffectsKt.DisposableEffect(unit, (Function1) objRememberedValue2, composerImpl);
         if (composerImpl.reusing && composerImpl.reader.parent == composerImpl.reusingGroup) {
             composerImpl.reusingGroup = -1;
             composerImpl.reusing = false;

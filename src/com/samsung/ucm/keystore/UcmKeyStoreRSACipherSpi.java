@@ -61,25 +61,25 @@ public class UcmKeyStoreRSACipherSpi extends UcmKeyStoreGenericCipher {
 
     @Override // com.samsung.ucm.keystore.UcmKeyStoreGenericCipher
     public byte[] doFinalInternal(int i) throws IllegalBlockSizeException {
-        byte[] bArr = this.mBuffer;
-        if (bArr == null || bArr.length == 0) {
+        byte[] bArrCopyOf = this.mBuffer;
+        if (bArrCopyOf == null || bArrCopyOf.length == 0) {
             throw new IllegalBlockSizeException("Invalid input data");
         }
         if (this.mIsInputTooLarge) {
             throw new IllegalBlockSizeException("Input must be under " + this.mBuffer.length + " bytes");
         }
         int i2 = this.mBufferOffset;
-        if (i2 != bArr.length) {
+        if (i2 != bArrCopyOf.length) {
             if (i == 1) {
-                byte[] bArr2 = new byte[bArr.length];
-                System.arraycopy(bArr, 0, bArr2, bArr.length - i2, i2);
-                bArr = bArr2;
+                byte[] bArr = new byte[bArrCopyOf.length];
+                System.arraycopy(bArrCopyOf, 0, bArr, bArrCopyOf.length - i2, i2);
+                bArrCopyOf = bArr;
             } else {
-                bArr = Arrays.copyOf(bArr, i2);
+                bArrCopyOf = Arrays.copyOf(bArrCopyOf, i2);
             }
         }
         this.mBufferOffset = 0;
-        return bArr;
+        return bArrCopyOf;
     }
 
     @Override // com.samsung.ucm.keystore.UcmKeyStoreGenericCipher

@@ -3,6 +3,7 @@ package com.android.server;
 import android.content.Context;
 import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbManager;
+import android.media.tv.interactive.TvInteractiveAppService;
 import android.util.Log;
 import com.samsung.android.common.AsPackageName;
 
@@ -40,10 +41,10 @@ public class PlayerExternalChipsetBesRichwave extends PlayerExternalChipsetBes i
             return -1;
         }
         byte[] bArr = {-1, -1};
-        int controlTransfer = this.mUsbDeviceConnection.controlTransfer(192, 162, 4, 0, bArr, 2, 4000);
-        log("get_rssith_cmd ret: " + controlTransfer + ", data: " + toHex(bArr) + ", ascii: " + toASCII(bArr));
+        int iControlTransfer = this.mUsbDeviceConnection.controlTransfer(192, 162, 4, 0, bArr, 2, 4000);
+        log("get_rssith_cmd ret: " + iControlTransfer + ", data: " + toHex(bArr) + ", ascii: " + toASCII(bArr));
         closeConnection();
-        if (controlTransfer == 2) {
+        if (iControlTransfer == 2) {
             return bytesToInt(bArr);
         }
         return -1;
@@ -121,9 +122,9 @@ public class PlayerExternalChipsetBesRichwave extends PlayerExternalChipsetBes i
             return false;
         }
         byte[] bArr2 = new byte[2];
-        int controlTransfer = this.mUsbDeviceConnection.controlTransfer(192, 162, 1, 0, bArr2, 2, 0);
-        log("ret: " + controlTransfer + ", data: " + toHex(bArr2) + ", ascii: " + toASCII(bArr2));
-        if (controlTransfer == 2 && startsWith(bArr2, new byte[]{1})) {
+        int iControlTransfer = this.mUsbDeviceConnection.controlTransfer(192, 162, 1, 0, bArr2, 2, 0);
+        log("ret: " + iControlTransfer + ", data: " + toHex(bArr2) + ", ascii: " + toASCII(bArr2));
+        if (iControlTransfer == 2 && startsWith(bArr2, new byte[]{1})) {
             byte[] bArr3 = {-1};
             log("on set power state begin");
             log("open_fm_cmd ret: " + this.mUsbDeviceConnection.controlTransfer(192, 161, 0, 1, bArr3, 1, 4000) + ", data: " + toHex(bArr3) + ", ascii: " + toASCII(bArr3));
@@ -187,10 +188,10 @@ public class PlayerExternalChipsetBesRichwave extends PlayerExternalChipsetBes i
             return -1;
         }
         byte[] bArr = {-1, -1};
-        int controlTransfer = this.mUsbDeviceConnection.controlTransfer(192, 162, 13, 0, bArr, 2, 4000);
-        log("getTunedFrequency ret: " + controlTransfer + ", data: " + toHex(bArr) + ", ascii: " + toASCII(bArr));
+        int iControlTransfer = this.mUsbDeviceConnection.controlTransfer(192, 162, 13, 0, bArr, 2, 4000);
+        log("getTunedFrequency ret: " + iControlTransfer + ", data: " + toHex(bArr) + ", ascii: " + toASCII(bArr));
         closeConnection();
-        if (controlTransfer == 2) {
+        if (iControlTransfer == 2) {
             return bytesToInt(bArr);
         }
         return -1;
@@ -210,23 +211,92 @@ public class PlayerExternalChipsetBesRichwave extends PlayerExternalChipsetBes i
         return this.mSeekFreq;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:23:0x0088 A[Catch: all -> 0x00d4, TryCatch #0 {, blocks: (B:6:0x0008, B:7:0x0015, B:9:0x0019, B:10:0x001e, B:12:0x0025, B:17:0x002d, B:19:0x0031, B:20:0x0037, B:21:0x0083, B:23:0x0088, B:26:0x0092, B:28:0x0096, B:29:0x0099, B:32:0x00ac, B:34:0x00b8, B:36:0x00be, B:37:0x00c6, B:40:0x00cc, B:41:0x00cf, B:45:0x00c4, B:50:0x000d), top: B:4:0x0006 }] */
+    /* JADX WARN: Removed duplicated region for block: B:20:0x0036  */
+    /* JADX WARN: Removed duplicated region for block: B:24:0x0088 A[Catch: all -> 0x00d4, TryCatch #0 {, blocks: (B:6:0x0008, B:8:0x0015, B:10:0x0019, B:11:0x001e, B:13:0x0025, B:17:0x002d, B:19:0x0031, B:21:0x0037, B:22:0x0083, B:24:0x0088, B:26:0x0092, B:28:0x0096, B:29:0x0099, B:33:0x00ac, B:35:0x00b8, B:37:0x00be, B:39:0x00c6, B:42:0x00cc, B:43:0x00cf, B:38:0x00c4, B:7:0x000d), top: B:50:0x0006 }] */
     /* JADX WARN: Removed duplicated region for block: B:31:0x00a5  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x00b8 A[Catch: all -> 0x00d4, TryCatch #0 {, blocks: (B:6:0x0008, B:7:0x0015, B:9:0x0019, B:10:0x001e, B:12:0x0025, B:17:0x002d, B:19:0x0031, B:20:0x0037, B:21:0x0083, B:23:0x0088, B:26:0x0092, B:28:0x0096, B:29:0x0099, B:32:0x00ac, B:34:0x00b8, B:36:0x00be, B:37:0x00c6, B:40:0x00cc, B:41:0x00cf, B:45:0x00c4, B:50:0x000d), top: B:4:0x0006 }] */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x00ca  */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x00c4 A[Catch: all -> 0x00d4, TryCatch #0 {, blocks: (B:6:0x0008, B:7:0x0015, B:9:0x0019, B:10:0x001e, B:12:0x0025, B:17:0x002d, B:19:0x0031, B:20:0x0037, B:21:0x0083, B:23:0x0088, B:26:0x0092, B:28:0x0096, B:29:0x0099, B:32:0x00ac, B:34:0x00b8, B:36:0x00be, B:37:0x00c6, B:40:0x00cc, B:41:0x00cf, B:45:0x00c4, B:50:0x000d), top: B:4:0x0006 }] */
-    /* JADX WARN: Removed duplicated region for block: B:46:0x00a9  */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x0099 A[EDGE_INSN: B:48:0x0099->B:29:0x0099 BREAK  A[LOOP:0: B:21:0x0083->B:47:?], SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:32:0x00a9  */
+    /* JADX WARN: Removed duplicated region for block: B:35:0x00b8 A[Catch: all -> 0x00d4, TryCatch #0 {, blocks: (B:6:0x0008, B:8:0x0015, B:10:0x0019, B:11:0x001e, B:13:0x0025, B:17:0x002d, B:19:0x0031, B:21:0x0037, B:22:0x0083, B:24:0x0088, B:26:0x0092, B:28:0x0096, B:29:0x0099, B:33:0x00ac, B:35:0x00b8, B:37:0x00be, B:39:0x00c6, B:42:0x00cc, B:43:0x00cf, B:38:0x00c4, B:7:0x000d), top: B:50:0x0006 }] */
+    /* JADX WARN: Removed duplicated region for block: B:38:0x00c4 A[Catch: all -> 0x00d4, TryCatch #0 {, blocks: (B:6:0x0008, B:8:0x0015, B:10:0x0019, B:11:0x001e, B:13:0x0025, B:17:0x002d, B:19:0x0031, B:21:0x0037, B:22:0x0083, B:24:0x0088, B:26:0x0092, B:28:0x0096, B:29:0x0099, B:33:0x00ac, B:35:0x00b8, B:37:0x00be, B:39:0x00c6, B:42:0x00cc, B:43:0x00cf, B:38:0x00c4, B:7:0x000d), top: B:50:0x0006 }] */
+    /* JADX WARN: Removed duplicated region for block: B:41:0x00ca  */
+    /* JADX WARN: Removed duplicated region for block: B:52:0x0099 A[EDGE_INSN: B:52:0x0099->B:29:0x0099 BREAK  A[LOOP:0: B:22:0x0083->B:54:?], SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private synchronized void seekTune(int r14, int r15) {
-        /*
-            Method dump skipped, instructions count: 216
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.PlayerExternalChipsetBesRichwave.seekTune(int, int):void");
+    private synchronized void seekTune(int i, int i2) {
+        boolean z;
+        if (i == 9) {
+            this.mIsTuning = true;
+            this.mCmdTuneFreq = i2;
+        } else {
+            this.mIsSeeking = true;
+            this.mPreviousTuneFreq = getTunedFrequency();
+        }
+        if (this.mIsRDSEnabled) {
+            this.rdsParser.reset();
+        }
+        this.mIsSeekTuneing = true;
+        if (!this.mIsScanning) {
+            if (startNotifyThread(false)) {
+                if (this.mIsRDSEnabled) {
+                    setRdsEnable(false);
+                    z = true;
+                }
+                byte[] bArr = {-1};
+                log("cmd:" + i + ", value: " + i2 + ", ret: " + this.mUsbDeviceConnection.controlTransfer(192, 161, i, i2, bArr, 1, 4000) + ", data: " + toHex(bArr) + ", ascii: " + toASCII(bArr));
+                int i3 = 0;
+                while (true) {
+                    if (this.mIsSeekTuneing) {
+                    }
+                }
+                StringBuilder sb = new StringBuilder();
+                sb.append("after ");
+                sb.append(i != 7 ? "seek" : TvInteractiveAppService.PLAYBACK_COMMAND_TYPE_TUNE);
+                log(sb.toString());
+                if (i != 9) {
+                }
+                if (!this.mIsScanning) {
+                }
+                return;
+            }
+            return;
+        }
+        z = false;
+        byte[] bArr2 = {-1};
+        log("cmd:" + i + ", value: " + i2 + ", ret: " + this.mUsbDeviceConnection.controlTransfer(192, 161, i, i2, bArr2, 1, 4000) + ", data: " + toHex(bArr2) + ", ascii: " + toASCII(bArr2));
+        int i32 = 0;
+        while (true) {
+            if (this.mIsSeekTuneing) {
+                break;
+            }
+            i32++;
+            threadSleep(10L);
+            if (i32 == 2100) {
+                this.mIsSeekTuneing = false;
+                if (i == 7) {
+                    stopSeek();
+                }
+            }
+        }
+        StringBuilder sb2 = new StringBuilder();
+        sb2.append("after ");
+        sb2.append(i != 7 ? "seek" : TvInteractiveAppService.PLAYBACK_COMMAND_TYPE_TUNE);
+        log(sb2.toString());
+        if (i != 9) {
+            this.mIsTuning = false;
+            if (this.mNeedToStopSeek) {
+                stopSeekExecute();
+                this.mNeedToStopSeek = false;
+            }
+        } else {
+            this.mIsSeeking = false;
+        }
+        if (!this.mIsScanning) {
+            if (z) {
+                setRdsEnable(true);
+            }
+            stopNotifyThread(false);
+        }
+        return;
     }
 
     @Override // com.android.server.PlayerExternalChipsetBase
@@ -251,8 +321,8 @@ public class PlayerExternalChipsetBesRichwave extends PlayerExternalChipsetBes i
             return false;
         }
         byte[] bArr = {-1};
-        int controlTransfer = this.mUsbDeviceConnection.controlTransfer(192, 161, 8, 0, bArr, 1, 200);
-        log("seek_stop ret: " + controlTransfer + ", data: " + toHex(bArr) + ", ascii: " + toASCII(bArr));
+        int iControlTransfer = this.mUsbDeviceConnection.controlTransfer(192, 161, 8, 0, bArr, 1, 200);
+        log("seek_stop ret: " + iControlTransfer + ", data: " + toHex(bArr) + ", ascii: " + toASCII(bArr));
         threadSleep(50L);
         if (!this.mIsScanning && this.mIsSeeking) {
             this.mSeekFreq = this.mPreviousTuneFreq;
@@ -260,7 +330,7 @@ public class PlayerExternalChipsetBesRichwave extends PlayerExternalChipsetBes i
         this.mIsSeekTuneing = false;
         closeConnection();
         log("stopSeek is done");
-        return controlTransfer > 0;
+        return iControlTransfer > 0;
     }
 
     @Override // com.android.server.PlayerExternalChipsetBase
@@ -276,11 +346,11 @@ public class PlayerExternalChipsetBesRichwave extends PlayerExternalChipsetBes i
             return false;
         }
         byte[] bArr = {-1};
-        int controlTransfer = this.mUsbDeviceConnection.controlTransfer(192, 161, 5, i, bArr, 1, 4000);
-        log("set_volume_cmd ret: " + controlTransfer + ", data: " + toHex(bArr) + ", ascii: " + toASCII(bArr));
+        int iControlTransfer = this.mUsbDeviceConnection.controlTransfer(192, 161, 5, i, bArr, 1, 4000);
+        log("set_volume_cmd ret: " + iControlTransfer + ", data: " + toHex(bArr) + ", ascii: " + toASCII(bArr));
         threadSleep(30L);
         closeConnection();
-        return controlTransfer == 1 && startsWith(bArr, new byte[]{0});
+        return iControlTransfer == 1 && startsWith(bArr, new byte[]{0});
     }
 
     @Override // com.android.server.PlayerExternalChipsetBase
@@ -290,10 +360,10 @@ public class PlayerExternalChipsetBesRichwave extends PlayerExternalChipsetBes i
             return -1;
         }
         byte[] bArr = {-1, -1};
-        int controlTransfer = this.mUsbDeviceConnection.controlTransfer(192, 162, 8, 0, bArr, 2, 4000);
-        log("get_volume_cmd ret: " + controlTransfer + ", data: " + toHex(bArr) + ", ascii: " + toASCII(bArr));
+        int iControlTransfer = this.mUsbDeviceConnection.controlTransfer(192, 162, 8, 0, bArr, 2, 4000);
+        log("get_volume_cmd ret: " + iControlTransfer + ", data: " + toHex(bArr) + ", ascii: " + toASCII(bArr));
         closeConnection();
-        if (controlTransfer != 2) {
+        if (iControlTransfer != 2) {
             return -1;
         }
         log("get_volume_cmd[0]: " + ((int) bArr[0]) + " - get_volume_cmd[1]: " + ((int) bArr[1]));
@@ -307,11 +377,11 @@ public class PlayerExternalChipsetBesRichwave extends PlayerExternalChipsetBes i
             return false;
         }
         byte[] bArr = {-1};
-        int controlTransfer = this.mUsbDeviceConnection.controlTransfer(192, 161, 6, i, bArr, 1, 4000);
-        log("sound_mode_cmd ret: " + controlTransfer + ", data: " + toHex(bArr) + ", ascii: " + toASCII(bArr));
+        int iControlTransfer = this.mUsbDeviceConnection.controlTransfer(192, 161, 6, i, bArr, 1, 4000);
+        log("sound_mode_cmd ret: " + iControlTransfer + ", data: " + toHex(bArr) + ", ascii: " + toASCII(bArr));
         closeConnection();
         threadSleep(15L);
-        return controlTransfer == 1 && startsWith(bArr, new byte[]{0});
+        return iControlTransfer == 1 && startsWith(bArr, new byte[]{0});
     }
 
     @Override // com.android.server.PlayerExternalChipsetBase
@@ -321,10 +391,10 @@ public class PlayerExternalChipsetBesRichwave extends PlayerExternalChipsetBes i
             return false;
         }
         byte[] bArr = {-1, -1};
-        int controlTransfer = this.mUsbDeviceConnection.controlTransfer(192, 162, 7, 0, bArr, 2, 4000);
-        log("get_soundmode_cmd ret: " + controlTransfer + ", data: " + toHex(bArr) + ", ascii: " + toASCII(bArr));
+        int iControlTransfer = this.mUsbDeviceConnection.controlTransfer(192, 162, 7, 0, bArr, 2, 4000);
+        log("get_soundmode_cmd ret: " + iControlTransfer + ", data: " + toHex(bArr) + ", ascii: " + toASCII(bArr));
         closeConnection();
-        if (controlTransfer != 2) {
+        if (iControlTransfer != 2) {
             return false;
         }
         log("data[0]: " + ((int) bArr[0]) + " - data[1]: " + ((int) bArr[1]));
@@ -343,10 +413,10 @@ public class PlayerExternalChipsetBesRichwave extends PlayerExternalChipsetBes i
             return false;
         }
         byte[] bArr = {-1};
-        int controlTransfer = this.mUsbDeviceConnection.controlTransfer(192, 161, 10, z ? 1 : 0, bArr, 1, 4000);
-        log("set_rds_cmd ret: " + controlTransfer + ", data: " + toHex(bArr) + ", ascii: " + toASCII(bArr));
+        int iControlTransfer = this.mUsbDeviceConnection.controlTransfer(192, 161, 10, z ? 1 : 0, bArr, 1, 4000);
+        log("set_rds_cmd ret: " + iControlTransfer + ", data: " + toHex(bArr) + ", ascii: " + toASCII(bArr));
         threadSleep(10L);
-        if (controlTransfer != 1 || !startsWith(bArr, new byte[]{0})) {
+        if (iControlTransfer != 1 || !startsWith(bArr, new byte[]{0})) {
             closeConnection();
             return false;
         }
@@ -366,10 +436,10 @@ public class PlayerExternalChipsetBesRichwave extends PlayerExternalChipsetBes i
             return false;
         }
         byte[] bArr = {-1, -1};
-        int controlTransfer = this.mUsbDeviceConnection.controlTransfer(192, 162, 10, 0, bArr, 2, 4000);
-        log("is_rdsenabled_cmd ret: " + controlTransfer + ", data: " + toHex(bArr) + ", ascii: " + toASCII(bArr));
+        int iControlTransfer = this.mUsbDeviceConnection.controlTransfer(192, 162, 10, 0, bArr, 2, 4000);
+        log("is_rdsenabled_cmd ret: " + iControlTransfer + ", data: " + toHex(bArr) + ", ascii: " + toASCII(bArr));
         closeConnection();
-        if (controlTransfer != 2) {
+        if (iControlTransfer != 2) {
             return false;
         }
         log("data[0]: " + ((int) bArr[0]) + " - data[1]: " + ((int) bArr[1]));
@@ -395,11 +465,11 @@ public class PlayerExternalChipsetBesRichwave extends PlayerExternalChipsetBes i
             return false;
         }
         byte[] bArr = {-1};
-        int controlTransfer = this.mUsbDeviceConnection.controlTransfer(192, 161, 1, i, bArr, 1, 4000);
-        log("set_band_cmd ret: " + controlTransfer + ", data: " + toHex(bArr) + ", ascii: " + toASCII(bArr));
+        int iControlTransfer = this.mUsbDeviceConnection.controlTransfer(192, 161, 1, i, bArr, 1, 4000);
+        log("set_band_cmd ret: " + iControlTransfer + ", data: " + toHex(bArr) + ", ascii: " + toASCII(bArr));
         closeConnection();
         threadSleep(15L);
-        return controlTransfer == 1 && startsWith(bArr, new byte[]{0});
+        return iControlTransfer == 1 && startsWith(bArr, new byte[]{0});
     }
 
     @Override // com.android.server.PlayerExternalChipsetBase
@@ -409,10 +479,10 @@ public class PlayerExternalChipsetBesRichwave extends PlayerExternalChipsetBes i
             return 0;
         }
         byte[] bArr = {-1, -1};
-        int controlTransfer = this.mUsbDeviceConnection.controlTransfer(192, 162, 3, 0, bArr, 2, 4000);
-        log("get_band_cmd ret: " + controlTransfer + ", data: " + toHex(bArr) + ", ascii: " + toASCII(bArr));
+        int iControlTransfer = this.mUsbDeviceConnection.controlTransfer(192, 162, 3, 0, bArr, 2, 4000);
+        log("get_band_cmd ret: " + iControlTransfer + ", data: " + toHex(bArr) + ", ascii: " + toASCII(bArr));
         closeConnection();
-        if (controlTransfer != 2) {
+        if (iControlTransfer != 2) {
             return 0;
         }
         log("get_band_cmd[0]: " + ((int) bArr[0]) + " - get_band_cmd[1]: " + ((int) bArr[1]));
@@ -426,11 +496,11 @@ public class PlayerExternalChipsetBesRichwave extends PlayerExternalChipsetBes i
             return false;
         }
         byte[] bArr = {-1};
-        int controlTransfer = this.mUsbDeviceConnection.controlTransfer(192, 161, 3, i, bArr, 1, 4000);
-        log("set_space_cmd ret: " + controlTransfer + ", data: " + toHex(bArr) + ", ascii: " + toASCII(bArr));
+        int iControlTransfer = this.mUsbDeviceConnection.controlTransfer(192, 161, 3, i, bArr, 1, 4000);
+        log("set_space_cmd ret: " + iControlTransfer + ", data: " + toHex(bArr) + ", ascii: " + toASCII(bArr));
         closeConnection();
         threadSleep(15L);
-        return controlTransfer == 1 && startsWith(bArr, new byte[]{0});
+        return iControlTransfer == 1 && startsWith(bArr, new byte[]{0});
     }
 
     @Override // com.android.server.PlayerExternalChipsetBase
@@ -440,10 +510,10 @@ public class PlayerExternalChipsetBesRichwave extends PlayerExternalChipsetBes i
             return 0;
         }
         byte[] bArr = {-1, -1};
-        int controlTransfer = this.mUsbDeviceConnection.controlTransfer(192, 162, 5, 0, bArr, 2, 4000);
-        log("get_spacing_cmd ret: " + controlTransfer + ", data: " + toHex(bArr) + ", ascii: " + toASCII(bArr));
+        int iControlTransfer = this.mUsbDeviceConnection.controlTransfer(192, 162, 5, 0, bArr, 2, 4000);
+        log("get_spacing_cmd ret: " + iControlTransfer + ", data: " + toHex(bArr) + ", ascii: " + toASCII(bArr));
         closeConnection();
-        if (controlTransfer != 2) {
+        if (iControlTransfer != 2) {
             return 0;
         }
         log("get_spacing_cmd[0]: " + ((int) bArr[0]) + " - get_spacing_cmd[1]: " + ((int) bArr[1]));
@@ -516,11 +586,11 @@ public class PlayerExternalChipsetBesRichwave extends PlayerExternalChipsetBes i
             return false;
         }
         byte[] bArr = {-1};
-        int controlTransfer = this.mUsbDeviceConnection.controlTransfer(192, 161, 12, i, bArr, 1, 4000);
-        log("set_qa_cmd ret: " + controlTransfer + ", data: " + toHex(bArr) + ", ascii: " + toASCII(bArr));
+        int iControlTransfer = this.mUsbDeviceConnection.controlTransfer(192, 161, 12, i, bArr, 1, 4000);
+        log("set_qa_cmd ret: " + iControlTransfer + ", data: " + toHex(bArr) + ", ascii: " + toASCII(bArr));
         closeConnection();
         threadSleep(15L);
-        return controlTransfer == 1 && startsWith(bArr, new byte[]{0});
+        return iControlTransfer == 1 && startsWith(bArr, new byte[]{0});
     }
 
     @Override // com.android.server.PlayerExternalChipsetBase, com.android.server.RichwaveTuningParameteres
@@ -530,10 +600,10 @@ public class PlayerExternalChipsetBesRichwave extends PlayerExternalChipsetBes i
             return 0;
         }
         byte[] bArr = {-1, -1};
-        int controlTransfer = this.mUsbDeviceConnection.controlTransfer(192, 162, 15, 0, bArr, 2, 4000);
-        log("get_qa_cmd ret: " + controlTransfer + ", data: " + toHex(bArr) + ", ascii: " + toASCII(bArr));
+        int iControlTransfer = this.mUsbDeviceConnection.controlTransfer(192, 162, 15, 0, bArr, 2, 4000);
+        log("get_qa_cmd ret: " + iControlTransfer + ", data: " + toHex(bArr) + ", ascii: " + toASCII(bArr));
         closeConnection();
-        if (controlTransfer != 2) {
+        if (iControlTransfer != 2) {
             return 0;
         }
         log("get_qa_cmd[0]: " + ((int) bArr[0]) + " - get_qa_cmd[1]: " + ((int) bArr[1]));
@@ -547,11 +617,11 @@ public class PlayerExternalChipsetBesRichwave extends PlayerExternalChipsetBes i
             return false;
         }
         byte[] bArr = {-1};
-        int controlTransfer = this.mUsbDeviceConnection.controlTransfer(192, 161, 11, i, bArr, 1, 4000);
-        log("set_dc_cmd ret: " + controlTransfer + ", data: " + toHex(bArr) + ", ascii: " + toASCII(bArr));
+        int iControlTransfer = this.mUsbDeviceConnection.controlTransfer(192, 161, 11, i, bArr, 1, 4000);
+        log("set_dc_cmd ret: " + iControlTransfer + ", data: " + toHex(bArr) + ", ascii: " + toASCII(bArr));
         closeConnection();
         threadSleep(15L);
-        return controlTransfer == 1 && startsWith(bArr, new byte[]{0});
+        return iControlTransfer == 1 && startsWith(bArr, new byte[]{0});
     }
 
     @Override // com.android.server.PlayerExternalChipsetBase, com.android.server.RichwaveTuningParameteres
@@ -561,10 +631,10 @@ public class PlayerExternalChipsetBesRichwave extends PlayerExternalChipsetBes i
             return 0;
         }
         byte[] bArr = {-1, -1};
-        int controlTransfer = this.mUsbDeviceConnection.controlTransfer(192, 162, 14, 0, bArr, 2, 4000);
-        log("get_dc_cmd ret: " + controlTransfer + ", data: " + toHex(bArr) + ", ascii: " + toASCII(bArr));
+        int iControlTransfer = this.mUsbDeviceConnection.controlTransfer(192, 162, 14, 0, bArr, 2, 4000);
+        log("get_dc_cmd ret: " + iControlTransfer + ", data: " + toHex(bArr) + ", ascii: " + toASCII(bArr));
         this.mUsbDeviceConnection.close();
-        if (controlTransfer != 2) {
+        if (iControlTransfer != 2) {
             return 0;
         }
         log("get_dc_cmd[0]: " + ((int) bArr[0]) + " - get_dc_cmd[1]: " + ((int) bArr[1]));

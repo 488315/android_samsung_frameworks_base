@@ -26,7 +26,6 @@ import kotlinx.coroutines.channels.BufferedChannel;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class NotificationStatsLoggerBinder$bindLogger$6 extends SuspendLambda implements Function2 {
     final /* synthetic */ NotificationStatsLogger $logger;
@@ -35,7 +34,6 @@ final class NotificationStatsLoggerBinder$bindLogger$6 extends SuspendLambda imp
     /* synthetic */ Object L$0;
     int label;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.notification.stack.ui.viewbinder.NotificationStatsLoggerBinder$bindLogger$6$3, reason: invalid class name */
     final /* synthetic */ class AnonymousClass3 extends AdaptedFunctionReference implements Function3 {
         public static final AnonymousClass3 INSTANCE = new AnonymousClass3();
@@ -77,16 +75,16 @@ final class NotificationStatsLoggerBinder$bindLogger$6 extends SuspendLambda imp
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             Triple triple = (Triple) this.L$0;
-            boolean booleanValue = ((Boolean) triple.component1()).booleanValue();
-            boolean booleanValue2 = ((Boolean) triple.component2()).booleanValue();
+            boolean zBooleanValue = ((Boolean) triple.component1()).booleanValue();
+            boolean zBooleanValue2 = ((Boolean) triple.component2()).booleanValue();
             List list = (List) triple.component3();
-            if (booleanValue) {
-                ((NotificationStatsLoggerImpl) this.$logger).onLockscreenOrShadeInteractive(list, booleanValue2);
+            if (zBooleanValue) {
+                ((NotificationStatsLoggerImpl) this.$logger).onLockscreenOrShadeInteractive(list, zBooleanValue2);
                 NotificationStackScrollLayout notificationStackScrollLayout = this.$view;
                 ConflatedCallbackFlow conflatedCallbackFlow = ConflatedCallbackFlow.INSTANCE;
                 NotificationStatsLoggerBinderKt$onNotificationLocationsUpdated$1 notificationStatsLoggerBinderKt$onNotificationLocationsUpdated$1 = new NotificationStatsLoggerBinderKt$onNotificationLocationsUpdated$1(notificationStackScrollLayout, null);
                 conflatedCallbackFlow.getClass();
-                Flow sample = FlowKt.sample(FlowKt.throttle$default(FlowConflatedKt.conflatedCallbackFlow(notificationStatsLoggerBinderKt$onNotificationLocationsUpdated$1), 500L, null, 2, null), this.$viewModel.activeNotificationRanks, AnonymousClass3.INSTANCE);
+                Flow flowSample = FlowKt.sample(FlowKt.throttle$default(FlowConflatedKt.conflatedCallbackFlow(notificationStatsLoggerBinderKt$onNotificationLocationsUpdated$1), 500L, null, 2, null), this.$viewModel.activeNotificationRanks, AnonymousClass3.INSTANCE);
                 final NotificationStatsLogger notificationStatsLogger = this.$logger;
                 FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.statusbar.notification.stack.ui.viewbinder.NotificationStatsLoggerBinder$bindLogger$6.4
                     @Override // kotlinx.coroutines.flow.FlowCollector
@@ -95,26 +93,26 @@ final class NotificationStatsLoggerBinder$bindLogger$6 extends SuspendLambda imp
                         Callable callable = (Callable) pair.component1();
                         Map map = (Map) pair.component2();
                         callable.getClass();
-                        BufferedChannel bufferedChannel = ((NotificationStatsLoggerImpl) NotificationStatsLogger.this).visibilityLogger;
+                        BufferedChannel bufferedChannel = ((NotificationStatsLoggerImpl) notificationStatsLogger).visibilityLogger;
                         Map map2 = (Map) callable.call();
                         LinkedHashMap linkedHashMap = new LinkedHashMap(MapsKt__MapsJVMKt.mapCapacity(map2.size()));
                         for (Map.Entry entry : map2.entrySet()) {
                             Object key = entry.getKey();
                             String str = (String) entry.getKey();
-                            int intValue = ((Number) entry.getValue()).intValue();
+                            int iIntValue = ((Number) entry.getValue()).intValue();
                             Integer num = (Integer) map.get(entry.getKey());
-                            linkedHashMap.put(key, new NotificationStatsLoggerImpl.VisibilityState(str, intValue, num != null ? num.intValue() : -1));
+                            linkedHashMap.put(key, new NotificationStatsLoggerImpl.VisibilityState(str, iIntValue, num != null ? num.intValue() : -1));
                         }
-                        bufferedChannel.mo3456trySendJP2dKIU(new NotificationStatsLoggerImpl.VisibilityAction.Change(linkedHashMap, map.size()));
+                        bufferedChannel.mo3476trySendJP2dKIU(new NotificationStatsLoggerImpl.VisibilityAction.Change(linkedHashMap, map.size()));
                         return Unit.INSTANCE;
                     }
                 };
                 this.label = 1;
-                if (sample.collect(flowCollector, this) == coroutineSingletons) {
+                if (flowSample.collect(flowCollector, this) == coroutineSingletons) {
                     return coroutineSingletons;
                 }
             } else {
-                ((NotificationStatsLoggerImpl) this.$logger).visibilityLogger.mo3456trySendJP2dKIU(new NotificationStatsLoggerImpl.VisibilityAction.Clear(list.size()));
+                ((NotificationStatsLoggerImpl) this.$logger).visibilityLogger.mo3476trySendJP2dKIU(new NotificationStatsLoggerImpl.VisibilityAction.Clear(list.size()));
             }
         } else {
             if (i != 1) {

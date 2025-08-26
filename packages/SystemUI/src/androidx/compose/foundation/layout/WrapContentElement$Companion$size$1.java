@@ -8,7 +8,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.Lambda;
 
 /* JADX INFO: Access modifiers changed from: package-private */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class WrapContentElement$Companion$size$1 extends Lambda implements Function2 {
     final /* synthetic */ Alignment $align;
@@ -23,6 +22,6 @@ public final class WrapContentElement$Companion$size$1 extends Lambda implements
     public final Object invoke(Object obj, Object obj2) {
         Alignment alignment = this.$align;
         IntSize.Companion.getClass();
-        return IntOffset.m847boximpl(alignment.mo352alignKFBX0sM(0L, ((IntSize) obj).packedValue, (LayoutDirection) obj2));
+        return IntOffset.m849boximpl(alignment.mo353alignKFBX0sM(0L, ((IntSize) obj).packedValue, (LayoutDirection) obj2));
     }
 }

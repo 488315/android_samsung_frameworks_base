@@ -6,7 +6,6 @@ import androidx.compose.runtime.snapshots.SnapshotStateObserver$$ExternalSynthet
 import com.android.systemui.util.concurrency.DelayableExecutor;
 import com.android.systemui.util.wakelock.WakeLock;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class TileLifecycleManager$$ExternalSyntheticLambda0 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -46,9 +45,9 @@ public final /* synthetic */ class TileLifecycleManager$$ExternalSyntheticLambda
                         ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
                         tileLifecycleManager.mActivityManager.getMemoryInfo(memoryInfo);
                         long j = memoryInfo.lowMemory ? WakeLock.DEFAULT_MAX_TIMEOUT : 5000L;
-                        StringBuilder m = SnapshotStateObserver$$ExternalSyntheticOutline0.m("Rebinding with a delay=", j, " - ");
-                        m.append(tileLifecycleManager.mIntent.getComponent());
-                        Log.i("TileLifecycleManager", m.toString());
+                        StringBuilder sbM = SnapshotStateObserver$$ExternalSyntheticOutline0.m("Rebinding with a delay=", j, " - ");
+                        sbM.append(tileLifecycleManager.mIntent.getComponent());
+                        Log.i("TileLifecycleManager", sbM.toString());
                         delayableExecutor.executeDelayed(tileLifecycleManager$$ExternalSyntheticLambda0, j);
                         break;
                     }

@@ -22,7 +22,6 @@ import android.os.Process;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.provider.Telephony;
-import android.telephony.SubscriptionManager;
 import android.telephony.euicc.EuiccManager;
 import android.text.TextUtils;
 import android.util.Base64;
@@ -366,9 +365,9 @@ public class SubscriptionManager {
         WFC_ROAMING_MODE_CONTENT_URI = Uri.withAppendedPath(uri, "wfc_roaming_mode");
         VT_ENABLED_CONTENT_URI = Uri.withAppendedPath(uri, "vt_enabled");
         WFC_ROAMING_ENABLED_CONTENT_URI = Uri.withAppendedPath(uri, "wfc_roaming_enabled");
-        Uri withAppendedPath = Uri.withAppendedPath(uri, "backup_and_restore");
-        SIM_INFO_BACKUP_AND_RESTORE_CONTENT_URI = withAppendedPath;
-        SIM_INFO_SUW_RESTORE_CONTENT_URI = Uri.withAppendedPath(withAppendedPath, "suw_restore");
+        Uri uriWithAppendedPath = Uri.withAppendedPath(uri, "backup_and_restore");
+        SIM_INFO_BACKUP_AND_RESTORE_CONTENT_URI = uriWithAppendedPath;
+        SIM_INFO_SUW_RESTORE_CONTENT_URI = Uri.withAppendedPath(uriWithAppendedPath, "suw_restore");
         CROSS_SIM_ENABLED_CONTENT_URI = Uri.withAppendedPath(uri, "cross_sim_calling_enabled");
         SERVICE_CAPABILITY_VOICE_BITMASK = serviceCapabilityToBitmask(1);
         SERVICE_CAPABILITY_SMS_BITMASK = serviceCapabilityToBitmask(2);
@@ -462,9 +461,9 @@ public class SubscriptionManager {
         }
 
         public OnSubscriptionsChangedListener() {
-            Looper myLooper = Looper.myLooper();
-            this.mCreatorLooper = myLooper;
-            if (myLooper != null || Compatibility.isChangeEnabled(LAZY_INITIALIZE_SUBSCRIPTIONS_CHANGED_HANDLER)) {
+            Looper looperMyLooper = Looper.myLooper();
+            this.mCreatorLooper = looperMyLooper;
+            if (looperMyLooper != null || Compatibility.isChangeEnabled(LAZY_INITIALIZE_SUBSCRIPTIONS_CHANGED_HANDLER)) {
                 return;
             }
             throw new RuntimeException("Can't create handler inside thread " + Thread.currentThread() + " that has not called Looper.prepare()");
@@ -526,7 +525,7 @@ public class SubscriptionManager {
         executor.execute(new Runnable() { // from class: android.telephony.SubscriptionManager$$ExternalSyntheticLambda2
             @Override // java.lang.Runnable
             public final void run() {
-                SubscriptionManager.OnSubscriptionsChangedListener.this.onAddListenerFailed();
+                onSubscriptionsChangedListener.onAddListenerFailed();
             }
         });
     }
@@ -625,34 +624,32 @@ public class SubscriptionManager {
         return null;
     }
 
-    public List<SubscriptionInfo> getAllSubscriptionInfoList() {
-        List<SubscriptionInfo> list = null;
+    public List<SubscriptionInfo> getAllSubscriptionInfoList() throws RemoteException {
+        List<SubscriptionInfo> allSubInfoList = null;
         try {
             ISub subscriptionService = TelephonyManager.getSubscriptionService();
             if (subscriptionService != null) {
-                list = subscriptionService.getAllSubInfoList(this.mContext.getOpPackageName(), this.mContext.getAttributionTag());
+                allSubInfoList = subscriptionService.getAllSubInfoList(this.mContext.getOpPackageName(), this.mContext.getAttributionTag());
             }
         } catch (RemoteException unused) {
         }
-        return list == null ? Collections.EMPTY_LIST : list;
+        return allSubInfoList == null ? Collections.EMPTY_LIST : allSubInfoList;
     }
 
     public List<SubscriptionInfo> getActiveSubscriptionInfoList() {
-        List<SubscriptionInfo> list = null;
+        List<SubscriptionInfo> activeSubscriptionInfoList = null;
         try {
             ISub subscriptionService = TelephonyManager.getSubscriptionService();
             if (subscriptionService != null) {
-                list = subscriptionService.getActiveSubscriptionInfoList(this.mContext.getOpPackageName(), this.mContext.getAttributionTag(), this.mIsForAllUserProfiles);
+                activeSubscriptionInfoList = subscriptionService.getActiveSubscriptionInfoList(this.mContext.getOpPackageName(), this.mContext.getAttributionTag(), this.mIsForAllUserProfiles);
             }
         } catch (RemoteException unused) {
         }
-        if (list != null) {
-            return (List) list.stream().filter(new Predicate() { // from class: android.telephony.SubscriptionManager$$ExternalSyntheticLambda6
+        if (activeSubscriptionInfoList != null) {
+            return (List) activeSubscriptionInfoList.stream().filter(new Predicate() { // from class: android.telephony.SubscriptionManager$$ExternalSyntheticLambda6
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
-                    boolean lambda$getActiveSubscriptionInfoList$1;
-                    lambda$getActiveSubscriptionInfoList$1 = SubscriptionManager.this.lambda$getActiveSubscriptionInfoList$1((SubscriptionInfo) obj);
-                    return lambda$getActiveSubscriptionInfoList$1;
+                    return this.f$0.lambda$getActiveSubscriptionInfoList$1((SubscriptionInfo) obj);
                 }
             }).collect(Collectors.toList());
         }
@@ -668,38 +665,36 @@ public class SubscriptionManager {
     }
 
     public List<SubscriptionInfo> getActiveSubscriptionInfoList(boolean z) {
-        List<SubscriptionInfo> list = null;
+        List<SubscriptionInfo> activeSubscriptionInfoList = null;
         try {
             ISub subscriptionService = TelephonyManager.getSubscriptionService();
             if (subscriptionService != null) {
-                list = subscriptionService.getActiveSubscriptionInfoList(this.mContext.getOpPackageName(), this.mContext.getAttributionTag(), true);
+                activeSubscriptionInfoList = subscriptionService.getActiveSubscriptionInfoList(this.mContext.getOpPackageName(), this.mContext.getAttributionTag(), true);
             }
         } catch (RemoteException unused) {
         }
-        if (list == null || list.isEmpty()) {
+        if (activeSubscriptionInfoList == null || activeSubscriptionInfoList.isEmpty()) {
             return Collections.EMPTY_LIST;
         }
-        return z ? (List) list.stream().filter(new Predicate() { // from class: android.telephony.SubscriptionManager$$ExternalSyntheticLambda17
+        return z ? (List) activeSubscriptionInfoList.stream().filter(new Predicate() { // from class: android.telephony.SubscriptionManager$$ExternalSyntheticLambda17
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                boolean lambda$getActiveSubscriptionInfoList$2;
-                lambda$getActiveSubscriptionInfoList$2 = SubscriptionManager.this.lambda$getActiveSubscriptionInfoList$2((SubscriptionInfo) obj);
-                return lambda$getActiveSubscriptionInfoList$2;
+                return this.f$0.lambda$getActiveSubscriptionInfoList$2((SubscriptionInfo) obj);
             }
-        }).collect(Collectors.toList()) : list;
+        }).collect(Collectors.toList()) : activeSubscriptionInfoList;
     }
 
     @SystemApi
-    public List<SubscriptionInfo> getAvailableSubscriptionInfoList() {
-        List<SubscriptionInfo> list = null;
+    public List<SubscriptionInfo> getAvailableSubscriptionInfoList() throws RemoteException {
+        List<SubscriptionInfo> availableSubscriptionInfoList = null;
         try {
             ISub subscriptionService = TelephonyManager.getSubscriptionService();
             if (subscriptionService != null) {
-                list = subscriptionService.getAvailableSubscriptionInfoList(this.mContext.getOpPackageName(), this.mContext.getAttributionTag());
+                availableSubscriptionInfoList = subscriptionService.getAvailableSubscriptionInfoList(this.mContext.getOpPackageName(), this.mContext.getAttributionTag());
             }
         } catch (RemoteException unused) {
         }
-        return list == null ? Collections.EMPTY_LIST : list;
+        return availableSubscriptionInfoList == null ? Collections.EMPTY_LIST : availableSubscriptionInfoList;
     }
 
     public List<SubscriptionInfo> semGetAvailableSubscriptionInfoListWithSelectable(boolean z) {
@@ -709,16 +704,16 @@ public class SubscriptionManager {
         return getAvailableSubscriptionInfoList();
     }
 
-    public List<SubscriptionInfo> getAccessibleSubscriptionInfoList() {
-        List<SubscriptionInfo> list = null;
+    public List<SubscriptionInfo> getAccessibleSubscriptionInfoList() throws RemoteException {
+        List<SubscriptionInfo> accessibleSubscriptionInfoList = null;
         try {
             ISub subscriptionService = TelephonyManager.getSubscriptionService();
             if (subscriptionService != null) {
-                list = subscriptionService.getAccessibleSubscriptionInfoList(this.mContext.getOpPackageName());
+                accessibleSubscriptionInfoList = subscriptionService.getAccessibleSubscriptionInfoList(this.mContext.getOpPackageName());
             }
         } catch (RemoteException unused) {
         }
-        return list == null ? Collections.EMPTY_LIST : list;
+        return accessibleSubscriptionInfoList == null ? Collections.EMPTY_LIST : accessibleSubscriptionInfoList;
     }
 
     @SystemApi
@@ -793,9 +788,9 @@ public class SubscriptionManager {
                 Log.e(LOG_TAG, "[addSubscriptionInfoRecord]- ISub service is null");
                 return;
             }
-            int addSubInfo = subscriptionService.addSubInfo(str, str2, i, i2);
-            if (addSubInfo < 0) {
-                Log.e(LOG_TAG, "Adding of subscription didn't succeed: error = " + addSubInfo);
+            int iAddSubInfo = subscriptionService.addSubInfo(str, str2, i, i2);
+            if (iAddSubInfo < 0) {
+                Log.e(LOG_TAG, "Adding of subscription didn't succeed: error = " + iAddSubInfo);
                 return;
             }
             logd("successfully added new subscription");
@@ -826,9 +821,7 @@ public class SubscriptionManager {
         return setSubscriptionPropertyHelper(i2, "setIconTint", new CallISubMethodHelper() { // from class: android.telephony.SubscriptionManager$$ExternalSyntheticLambda4
             @Override // android.telephony.SubscriptionManager.CallISubMethodHelper
             public final int callMethod(ISub iSub) {
-                int iconTint;
-                iconTint = iSub.setIconTint(i2, i);
-                return iconTint;
+                return iSub.setIconTint(i2, i);
             }
         });
     }
@@ -837,9 +830,7 @@ public class SubscriptionManager {
         return setSubscriptionPropertyHelper(i, "setDisplayName", new CallISubMethodHelper() { // from class: android.telephony.SubscriptionManager$$ExternalSyntheticLambda16
             @Override // android.telephony.SubscriptionManager.CallISubMethodHelper
             public final int callMethod(ISub iSub) {
-                int displayNameUsingSrc;
-                displayNameUsingSrc = iSub.setDisplayNameUsingSrc(str, i, i2);
-                return displayNameUsingSrc;
+                return iSub.setDisplayNameUsingSrc(str, i, i2);
             }
         });
     }
@@ -852,9 +843,7 @@ public class SubscriptionManager {
         return setSubscriptionPropertyHelper(i, "setDisplayNumber", new CallISubMethodHelper() { // from class: android.telephony.SubscriptionManager$$ExternalSyntheticLambda19
             @Override // android.telephony.SubscriptionManager.CallISubMethodHelper
             public final int callMethod(ISub iSub) {
-                int displayNumber;
-                displayNumber = iSub.setDisplayNumber(str, i);
-                return displayNumber;
+                return iSub.setDisplayNumber(str, i);
             }
         });
     }
@@ -863,9 +852,7 @@ public class SubscriptionManager {
         return setSubscriptionPropertyHelper(i2, "setDataRoaming", new CallISubMethodHelper() { // from class: android.telephony.SubscriptionManager$$ExternalSyntheticLambda5
             @Override // android.telephony.SubscriptionManager.CallISubMethodHelper
             public final int callMethod(ISub iSub) {
-                int dataRoaming;
-                dataRoaming = iSub.setDataRoaming(i, i2);
-                return dataRoaming;
+                return iSub.setDataRoaming(i, i2);
             }
         });
     }
@@ -1055,7 +1042,7 @@ public class SubscriptionManager {
         }
     }
 
-    public static String serializeUriLists(List<Uri> list) {
+    public static String serializeUriLists(List<Uri> list) throws IOException {
         ArrayList arrayList = new ArrayList();
         Iterator<Uri> it = list.iterator();
         while (it.hasNext()) {
@@ -1073,19 +1060,19 @@ public class SubscriptionManager {
         }
     }
 
-    private static String getStringSubscriptionProperty(Context context, int i, String str) {
-        String str2 = null;
+    private static String getStringSubscriptionProperty(Context context, int i, String str) throws RemoteException {
+        String subscriptionProperty = null;
         try {
             ISub subscriptionService = TelephonyManager.getSubscriptionService();
             if (subscriptionService != null) {
-                str2 = subscriptionService.getSubscriptionProperty(i, str, context.getOpPackageName(), context.getAttributionTag());
+                subscriptionProperty = subscriptionService.getSubscriptionProperty(i, str, context.getOpPackageName(), context.getAttributionTag());
             }
         } catch (RemoteException unused) {
         }
-        return TextUtils.emptyIfNull(str2);
+        return TextUtils.emptyIfNull(subscriptionProperty);
     }
 
-    public static boolean getBooleanSubscriptionProperty(int i, String str, boolean z, Context context) {
+    public static boolean getBooleanSubscriptionProperty(int i, String str, boolean z, Context context) throws RemoteException {
         String stringSubscriptionProperty = getStringSubscriptionProperty(context, i, str);
         if (!stringSubscriptionProperty.isEmpty()) {
             try {
@@ -1097,7 +1084,7 @@ public class SubscriptionManager {
         return z;
     }
 
-    public static int getIntegerSubscriptionProperty(int i, String str, int i2, Context context) {
+    public static int getIntegerSubscriptionProperty(int i, String str, int i2, Context context) throws RemoteException {
         String stringSubscriptionProperty = getStringSubscriptionProperty(context, i, str);
         if (!stringSubscriptionProperty.isEmpty()) {
             try {
@@ -1109,7 +1096,7 @@ public class SubscriptionManager {
         return i2;
     }
 
-    public static long getLongSubscriptionProperty(int i, String str, long j, Context context) {
+    public static long getLongSubscriptionProperty(int i, String str, long j, Context context) throws RemoteException {
         String stringSubscriptionProperty = getStringSubscriptionProperty(context, i, str);
         if (!stringSubscriptionProperty.isEmpty()) {
             try {
@@ -1127,23 +1114,23 @@ public class SubscriptionManager {
     }
 
     public static Resources getResourcesForSubId(Context context, int i, boolean z) {
-        Pair<String, Configuration> pair;
-        Pair<String, Configuration> pair2 = null;
+        Pair<String, Configuration> pairCreate;
+        Pair<String, Configuration> pair = null;
         if (isValidSubscriptionId(i)) {
             Configuration configuration = new Configuration(context.getResources().getConfiguration());
             if (z) {
                 configuration.setLocale(Locale.ROOT);
             }
-            pair = Pair.create(context.getPackageName() + ", subid=" + i, configuration);
+            pairCreate = Pair.create(context.getPackageName() + ", subid=" + i, configuration);
             LruCache<Pair<String, Configuration>, Resources> lruCache = sResourcesCache;
             synchronized (lruCache) {
-                Resources resources = lruCache.get(pair);
+                Resources resources = lruCache.get(pairCreate);
                 if (resources != null) {
                     return resources;
                 }
             }
         } else {
-            pair = null;
+            pairCreate = null;
         }
         SubscriptionInfo activeSubscriptionInfo = from(context).getActiveSubscriptionInfo(i);
         Configuration configuration2 = new Configuration();
@@ -1153,19 +1140,19 @@ public class SubscriptionManager {
             if (configuration2.mnc == 0) {
                 configuration2.mnc = 65535;
             } else {
-                pair2 = pair;
+                pair = pairCreate;
             }
         }
         if (z) {
             configuration2.setLocale(Locale.ROOT);
         }
         Resources resources2 = context.createConfigurationContext(configuration2).getResources();
-        if (pair2 == null) {
+        if (pair == null) {
             return resources2;
         }
         LruCache<Pair<String, Configuration>, Resources> lruCache2 = sResourcesCache;
         synchronized (lruCache2) {
-            lruCache2.put(pair2, resources2);
+            lruCache2.put(pair, resources2);
         }
         return resources2;
     }
@@ -1295,7 +1282,7 @@ public class SubscriptionManager {
             if (this.val$executor == null || this.val$callback == null) {
                 return;
             }
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
                 final Consumer consumer = this.val$callback;
@@ -1306,7 +1293,7 @@ public class SubscriptionManager {
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -1327,20 +1314,20 @@ public class SubscriptionManager {
         }
     }
 
-    public List<SubscriptionInfo> getOpportunisticSubscriptions() {
+    public List<SubscriptionInfo> getOpportunisticSubscriptions() throws RemoteException {
         Context context = this.mContext;
         String opPackageName = context != null ? context.getOpPackageName() : "<unknown>";
         Context context2 = this.mContext;
-        List<SubscriptionInfo> list = null;
+        List<SubscriptionInfo> opportunisticSubscriptions = null;
         String attributionTag = context2 != null ? context2.getAttributionTag() : null;
         try {
             ISub subscriptionService = TelephonyManager.getSubscriptionService();
             if (subscriptionService != null) {
-                list = subscriptionService.getOpportunisticSubscriptions(opPackageName, attributionTag);
+                opportunisticSubscriptions = subscriptionService.getOpportunisticSubscriptions(opPackageName, attributionTag);
             }
         } catch (RemoteException unused) {
         }
-        return list == null ? new ArrayList() : list;
+        return opportunisticSubscriptions == null ? new ArrayList() : opportunisticSubscriptions;
     }
 
     @Deprecated
@@ -1353,9 +1340,7 @@ public class SubscriptionManager {
         return setSubscriptionPropertyHelper(i, "setOpportunistic", new CallISubMethodHelper() { // from class: android.telephony.SubscriptionManager$$ExternalSyntheticLambda18
             @Override // android.telephony.SubscriptionManager.CallISubMethodHelper
             public final int callMethod(ISub iSub) {
-                int lambda$setOpportunistic$7;
-                lambda$setOpportunistic$7 = SubscriptionManager.this.lambda$setOpportunistic$7(z, i, iSub);
-                return lambda$setOpportunistic$7;
+                return this.f$0.lambda$setOpportunistic$7(z, i, iSub);
             }
         }) == 1;
     }
@@ -1372,9 +1357,7 @@ public class SubscriptionManager {
         int[] array = list.stream().mapToInt(new ToIntFunction() { // from class: android.telephony.SubscriptionManager$$ExternalSyntheticLambda7
             @Override // java.util.function.ToIntFunction
             public final int applyAsInt(Object obj) {
-                int intValue;
-                intValue = ((Integer) obj).intValue();
-                return intValue;
+                return ((Integer) obj).intValue();
             }
         }).toArray();
         try {
@@ -1398,9 +1381,7 @@ public class SubscriptionManager {
         int[] array = list.stream().mapToInt(new ToIntFunction() { // from class: android.telephony.SubscriptionManager$$ExternalSyntheticLambda20
             @Override // java.util.function.ToIntFunction
             public final int applyAsInt(Object obj) {
-                int intValue;
-                intValue = ((Integer) obj).intValue();
-                return intValue;
+                return ((Integer) obj).intValue();
             }
         }).toArray();
         try {
@@ -1428,9 +1409,7 @@ public class SubscriptionManager {
         int[] array = list.stream().mapToInt(new ToIntFunction() { // from class: android.telephony.SubscriptionManager$$ExternalSyntheticLambda0
             @Override // java.util.function.ToIntFunction
             public final int applyAsInt(Object obj) {
-                int intValue;
-                intValue = ((Integer) obj).intValue();
-                return intValue;
+                return ((Integer) obj).intValue();
             }
         }).toArray();
         try {
@@ -1451,12 +1430,12 @@ public class SubscriptionManager {
         Context context = this.mContext;
         String opPackageName = context != null ? context.getOpPackageName() : "<unknown>";
         Context context2 = this.mContext;
-        List<SubscriptionInfo> list = null;
+        List<SubscriptionInfo> subscriptionsInGroup = null;
         String attributionTag = context2 != null ? context2.getAttributionTag() : null;
         try {
             ISub subscriptionService = TelephonyManager.getSubscriptionService();
             if (subscriptionService != null) {
-                list = subscriptionService.getSubscriptionsInGroup(parcelUuid, opPackageName, attributionTag);
+                subscriptionsInGroup = subscriptionService.getSubscriptionsInGroup(parcelUuid, opPackageName, attributionTag);
             } else if (!isSystemProcess()) {
                 throw new IllegalStateException("telephony service is null.");
             }
@@ -1466,7 +1445,7 @@ public class SubscriptionManager {
                 e.rethrowAsRuntimeException();
             }
         }
-        return list == null ? Collections.EMPTY_LIST : list;
+        return subscriptionsInGroup == null ? Collections.EMPTY_LIST : subscriptionsInGroup;
     }
 
     /* renamed from: isSubscriptionVisible, reason: merged with bridge method [inline-methods] and merged with bridge method [inline-methods] */
@@ -1477,22 +1456,22 @@ public class SubscriptionManager {
         return subscriptionInfo.getGroupUuid() == null || !subscriptionInfo.isOpportunistic() || TelephonyManager.from(this.mContext).hasCarrierPrivileges(subscriptionInfo.getSubscriptionId()) || canManageSubscription(subscriptionInfo);
     }
 
-    public List<SubscriptionInfo> getSelectableSubscriptionInfoList() {
+    public List<SubscriptionInfo> getSelectableSubscriptionInfoList() throws RemoteException {
         List<SubscriptionInfo> availableSubscriptionInfoList = getAvailableSubscriptionInfoList();
         if (availableSubscriptionInfoList == null) {
             return null;
         }
         ArrayList arrayList = new ArrayList();
-        HashMap hashMap = new HashMap();
+        HashMap map = new HashMap();
         for (SubscriptionInfo subscriptionInfo : availableSubscriptionInfoList) {
             if (subscriptionInfo.getGroupUuid() == null || !subscriptionInfo.isOpportunistic()) {
                 ParcelUuid groupUuid = subscriptionInfo.getGroupUuid();
                 if (groupUuid == null) {
                     arrayList.add(subscriptionInfo);
-                } else if (!hashMap.containsKey(groupUuid) || (((SubscriptionInfo) hashMap.get(groupUuid)).getSimSlotIndex() == -1 && subscriptionInfo.getSimSlotIndex() != -1)) {
-                    arrayList.remove(hashMap.get(groupUuid));
+                } else if (!map.containsKey(groupUuid) || (((SubscriptionInfo) map.get(groupUuid)).getSimSlotIndex() == -1 && subscriptionInfo.getSimSlotIndex() != -1)) {
+                    arrayList.remove(map.get(groupUuid));
                     arrayList.add(subscriptionInfo);
-                    hashMap.put(groupUuid, subscriptionInfo);
+                    map.put(groupUuid, subscriptionInfo);
                 }
             }
         }
@@ -1562,9 +1541,7 @@ public class SubscriptionManager {
         setSubscriptionPropertyHelper(i, "setDeviceToDeviceSharingStatus", new CallISubMethodHelper() { // from class: android.telephony.SubscriptionManager$$ExternalSyntheticLambda1
             @Override // android.telephony.SubscriptionManager.CallISubMethodHelper
             public final int callMethod(ISub iSub) {
-                int deviceToDeviceStatusSharing;
-                deviceToDeviceStatusSharing = iSub.setDeviceToDeviceStatusSharing(i2, i);
-                return deviceToDeviceStatusSharing;
+                return iSub.setDeviceToDeviceStatusSharing(i2, i);
             }
         });
     }
@@ -1573,19 +1550,17 @@ public class SubscriptionManager {
         return getIntegerSubscriptionProperty(i, "d2d_sharing_status", 0, this.mContext);
     }
 
-    public void setDeviceToDeviceStatusSharingContacts(final int i, final List<Uri> list) {
+    public void setDeviceToDeviceStatusSharingContacts(final int i, final List<Uri> list) throws IOException {
         serializeUriLists(list);
         setSubscriptionPropertyHelper(i, "setDeviceToDeviceSharingStatus", new CallISubMethodHelper() { // from class: android.telephony.SubscriptionManager$$ExternalSyntheticLambda8
             @Override // android.telephony.SubscriptionManager.CallISubMethodHelper
             public final int callMethod(ISub iSub) {
-                int deviceToDeviceStatusSharingContacts;
-                deviceToDeviceStatusSharingContacts = iSub.setDeviceToDeviceStatusSharingContacts(SubscriptionManager.serializeUriLists(list), i);
-                return deviceToDeviceStatusSharingContacts;
+                return iSub.setDeviceToDeviceStatusSharingContacts(SubscriptionManager.serializeUriLists(list), i);
             }
         });
     }
 
-    public List<Uri> getDeviceToDeviceStatusSharingContacts(int i) {
+    public List<Uri> getDeviceToDeviceStatusSharingContacts(int i) throws RemoteException {
         String stringSubscriptionProperty = getStringSubscriptionProperty(this.mContext, i, "d2d_sharing_contacts");
         if (stringSubscriptionProperty != null) {
             try {
@@ -1746,9 +1721,7 @@ public class SubscriptionManager {
         setSubscriptionPropertyHelper(i, "setUsageSetting", new CallISubMethodHelper() { // from class: android.telephony.SubscriptionManager$$ExternalSyntheticLambda3
             @Override // android.telephony.SubscriptionManager.CallISubMethodHelper
             public final int callMethod(ISub iSub) {
-                int lambda$setUsageSetting$13;
-                lambda$setUsageSetting$13 = SubscriptionManager.this.lambda$setUsageSetting$13(i2, i, iSub);
-                return lambda$setUsageSetting$13;
+                return this.f$0.lambda$setUsageSetting$13(i2, i, iSub);
             }
         });
     }
@@ -1923,8 +1896,8 @@ public class SubscriptionManager {
     public static Set<Integer> getServiceCapabilitiesSet(int i) {
         HashSet hashSet = new HashSet();
         for (int i2 = 1; i2 <= 3; i2++) {
-            int serviceCapabilityToBitmask = serviceCapabilityToBitmask(i2);
-            if ((i & serviceCapabilityToBitmask) == serviceCapabilityToBitmask) {
+            int iServiceCapabilityToBitmask = serviceCapabilityToBitmask(i2);
+            if ((i & iServiceCapabilityToBitmask) == iServiceCapabilityToBitmask) {
                 hashSet.add(Integer.valueOf(i2));
             }
         }

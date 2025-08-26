@@ -11,7 +11,6 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.util.PathParser;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SplashscreenIconDrawableFactory$MaskBackgroundDrawable extends Drawable {
     public static Path sMask;
@@ -20,7 +19,7 @@ public class SplashscreenIconDrawableFactory$MaskBackgroundDrawable extends Draw
     public final Path mMaskScaleOnly;
 
     public SplashscreenIconDrawableFactory$MaskBackgroundDrawable(int i) {
-        sMask = PathParser.createPathFromPathData(Resources.getSystem().getString(R.string.eventTypeAnniversary));
+        sMask = PathParser.createPathFromPathData(Resources.getSystem().getString(R.string.eventTypeCustom));
         this.mMaskScaleOnly = new Path(new Path(sMask));
         this.mMaskMatrix = new Matrix();
         if (i == 0) {

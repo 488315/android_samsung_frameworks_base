@@ -12,7 +12,6 @@ import kotlin.collections.MapsKt__MapsKt;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class PaddingModifier extends InspectorValueInfo implements LayoutModifier {
     public final Function1 bottom;
@@ -41,22 +40,21 @@ public final class PaddingModifier extends InspectorValueInfo implements LayoutM
 
     @Override // androidx.compose.ui.layout.LayoutModifier
     /* renamed from: measure-3p2s80s */
-    public final MeasureResult mo108measure3p2s80s(MeasureScope measureScope, Measurable measurable, long j) {
-        MeasureResult layout$1;
-        final int intValue = ((Number) this.start.mo779invoke(measureScope)).intValue();
-        final int intValue2 = ((Number) this.top.mo779invoke(measureScope)).intValue();
-        int intValue3 = ((Number) this.end.mo779invoke(measureScope)).intValue() + intValue;
-        int intValue4 = ((Number) this.bottom.mo779invoke(measureScope)).intValue() + intValue2;
-        final Placeable mo608measureBRTryo0 = measurable.mo608measureBRTryo0(ConstraintsKt.m833offsetNN6EwU(-intValue3, -intValue4, j));
-        layout$1 = measureScope.layout$1(ConstraintsKt.m832constrainWidthK40F9xA(mo608measureBRTryo0.width + intValue3, j), ConstraintsKt.m831constrainHeightK40F9xA(mo608measureBRTryo0.height + intValue4, j), MapsKt__MapsKt.emptyMap(), new Function1() { // from class: com.android.compose.modifiers.PaddingModifier$$ExternalSyntheticLambda0
+    public final MeasureResult mo109measure3p2s80s(MeasureScope measureScope, Measurable measurable, long j) {
+        final int iIntValue = ((Number) this.start.mo781invoke(measureScope)).intValue();
+        final int iIntValue2 = ((Number) this.top.mo781invoke(measureScope)).intValue();
+        int iIntValue3 = ((Number) this.end.mo781invoke(measureScope)).intValue() + iIntValue;
+        int iIntValue4 = ((Number) this.bottom.mo781invoke(measureScope)).intValue() + iIntValue2;
+        final Placeable placeableMo610measureBRTryo0 = measurable.mo610measureBRTryo0(ConstraintsKt.m835offsetNN6EwU(-iIntValue3, -iIntValue4, j));
+        return measureScope.layout$1(ConstraintsKt.m834constrainWidthK40F9xA(placeableMo610measureBRTryo0.width + iIntValue3, j), ConstraintsKt.m833constrainHeightK40F9xA(placeableMo610measureBRTryo0.height + iIntValue4, j), MapsKt__MapsKt.emptyMap(), new Function1() { // from class: com.android.compose.modifiers.PaddingModifier$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Placeable.PlacementScope placementScope = (Placeable.PlacementScope) obj;
-                boolean z = PaddingModifier.this.rtlAware;
-                Placeable placeable = mo608measureBRTryo0;
-                int i = intValue;
-                int i2 = intValue2;
+                boolean z = this.f$0.rtlAware;
+                Placeable placeable = placeableMo610measureBRTryo0;
+                int i = iIntValue;
+                int i2 = iIntValue2;
                 if (z) {
                     placementScope.placeRelative(placeable, i, i2, 0.0f);
                 } else {
@@ -65,6 +63,5 @@ public final class PaddingModifier extends InspectorValueInfo implements LayoutM
                 return Unit.INSTANCE;
             }
         });
-        return layout$1;
     }
 }

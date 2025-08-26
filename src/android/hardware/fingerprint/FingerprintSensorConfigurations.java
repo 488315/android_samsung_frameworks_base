@@ -122,32 +122,32 @@ public class FingerprintSensorConfigurations implements Parcelable {
 
     public static IFingerprint getIFingerprint(String str) {
         if (str.contains(AudioDeviceDescription.CONNECTION_VIRTUAL)) {
-            String remapFqName = remapFqName(str);
-            Slog.i(TAG, "getIFingerprint fqName is mapped: " + str + Session.SUBSESSION_SEPARATION_CHAR + remapFqName);
+            String strRemapFqName = remapFqName(str);
+            Slog.i(TAG, "getIFingerprint fqName is mapped: " + str + Session.SUBSESSION_SEPARATION_CHAR + strRemapFqName);
             try {
-                return IVirtualHal.Stub.asInterface(Binder.allowBlocking(ServiceManager.waitForService(remapFqName))).getFingerprintHal();
+                return IVirtualHal.Stub.asInterface(Binder.allowBlocking(ServiceManager.waitForService(strRemapFqName))).getFingerprintHal();
             } catch (RemoteException unused) {
-                Slog.e(TAG, "Remote exception in vhal.getFingerprintHal() call" + remapFqName);
+                Slog.e(TAG, "Remote exception in vhal.getFingerprintHal() call" + strRemapFqName);
             }
         }
         return IFingerprint.Stub.asInterface(Binder.allowBlocking(ServiceManager.waitForDeclaredService(str)));
     }
 
     public SensorProps[] getSensorPropForInstance(String str) {
-        SensorProps[] sensorPropsArr = this.mSensorPropsMap.get(str);
-        if (sensorPropsArr != null) {
-            return sensorPropsArr;
+        SensorProps[] sensorProps = this.mSensorPropsMap.get(str);
+        if (sensorProps != null) {
+            return sensorProps;
         }
         try {
             IFingerprint iFingerprint = getIFingerprint(IFingerprint.DESCRIPTOR + "/" + str);
             if (iFingerprint != null) {
-                sensorPropsArr = iFingerprint.getSensorProps();
+                sensorProps = iFingerprint.getSensorProps();
             } else {
                 Log.d(TAG, "IFingerprint null for instance " + str);
             }
         } catch (RemoteException unused) {
             Log.d(TAG, "Unable to get sensor properties!");
         }
-        return sensorPropsArr == null ? new SensorProps[0] : sensorPropsArr;
+        return sensorProps == null ? new SensorProps[0] : sensorProps;
     }
 }

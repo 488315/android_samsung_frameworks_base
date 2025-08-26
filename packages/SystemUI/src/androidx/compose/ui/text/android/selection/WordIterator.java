@@ -10,7 +10,6 @@ import java.util.Locale;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class WordIterator {
     public static final Companion Companion = new Companion(null);
@@ -19,7 +18,6 @@ public final class WordIterator {
     public final BreakIterator iterator;
     public final int start;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -59,10 +57,10 @@ public final class WordIterator {
         if (z) {
             return;
         }
-        StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "Invalid offset: ", ". Valid range is [", " , ");
-        m.append(i3);
-        m.append(']');
-        InlineClassHelperKt.throwIllegalArgumentException(m.toString());
+        StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "Invalid offset: ", ". Valid range is [", " , ");
+        sbM.append(i3);
+        sbM.append(']');
+        InlineClassHelperKt.throwIllegalArgumentException(sbM.toString());
     }
 
     public final boolean isAfterLetterOrDigitOrEmoji(int i) {
@@ -90,9 +88,9 @@ public final class WordIterator {
         if (i > this.end || i2 > i) {
             return false;
         }
-        int codePointBefore = Character.codePointBefore(this.charSequence, i);
+        int iCodePointBefore = Character.codePointBefore(this.charSequence, i);
         Companion.getClass();
-        return Companion.isPunctuation$ui_text_release(codePointBefore);
+        return Companion.isPunctuation$ui_text_release(iCodePointBefore);
     }
 
     public final boolean isBoundary(int i) {
@@ -108,9 +106,9 @@ public final class WordIterator {
 
     public final boolean isHiraganaKatakanaBoundary(int i) {
         int i2 = i - 1;
-        Character.UnicodeBlock of = Character.UnicodeBlock.of(this.charSequence.charAt(i2));
+        Character.UnicodeBlock unicodeBlockOf = Character.UnicodeBlock.of(this.charSequence.charAt(i2));
         Character.UnicodeBlock unicodeBlock = Character.UnicodeBlock.HIRAGANA;
-        if (Intrinsics.areEqual(of, unicodeBlock) && Intrinsics.areEqual(Character.UnicodeBlock.of(this.charSequence.charAt(i)), Character.UnicodeBlock.KATAKANA)) {
+        if (Intrinsics.areEqual(unicodeBlockOf, unicodeBlock) && Intrinsics.areEqual(Character.UnicodeBlock.of(this.charSequence.charAt(i)), Character.UnicodeBlock.KATAKANA)) {
             return true;
         }
         return Intrinsics.areEqual(Character.UnicodeBlock.of(this.charSequence.charAt(i)), unicodeBlock) && Intrinsics.areEqual(Character.UnicodeBlock.of(this.charSequence.charAt(i2)), Character.UnicodeBlock.KATAKANA);
@@ -136,20 +134,20 @@ public final class WordIterator {
         if (i >= this.end || this.start > i) {
             return false;
         }
-        int codePointAt = Character.codePointAt(this.charSequence, i);
+        int iCodePointAt = Character.codePointAt(this.charSequence, i);
         Companion.getClass();
-        return Companion.isPunctuation$ui_text_release(codePointAt);
+        return Companion.isPunctuation$ui_text_release(iCodePointAt);
     }
 
     public final int nextBoundary(int i) {
         checkOffsetIsValid(i);
-        int following = this.iterator.following(i);
-        return (isOnLetterOrDigitOrEmoji(following + (-1)) && isOnLetterOrDigitOrEmoji(following) && !isHiraganaKatakanaBoundary(following)) ? nextBoundary(following) : following;
+        int iFollowing = this.iterator.following(i);
+        return (isOnLetterOrDigitOrEmoji(iFollowing + (-1)) && isOnLetterOrDigitOrEmoji(iFollowing) && !isHiraganaKatakanaBoundary(iFollowing)) ? nextBoundary(iFollowing) : iFollowing;
     }
 
     public final int prevBoundary(int i) {
         checkOffsetIsValid(i);
-        int preceding = this.iterator.preceding(i);
-        return (isOnLetterOrDigitOrEmoji(preceding) && isAfterLetterOrDigitOrEmoji(preceding) && !isHiraganaKatakanaBoundary(preceding)) ? prevBoundary(preceding) : preceding;
+        int iPreceding = this.iterator.preceding(i);
+        return (isOnLetterOrDigitOrEmoji(iPreceding) && isAfterLetterOrDigitOrEmoji(iPreceding) && !isHiraganaKatakanaBoundary(iPreceding)) ? prevBoundary(iPreceding) : iPreceding;
     }
 }

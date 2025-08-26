@@ -58,16 +58,16 @@ public class DataListFloat extends Operation implements VariableSupport, ArrayAc
     }
 
     public static void read(WireBuffer wireBuffer, List<Operation> list) {
-        int readInt = wireBuffer.readInt();
-        int readInt2 = wireBuffer.readInt();
-        if (readInt2 > 2000) {
-            throw new RuntimeException(readInt2 + " map entries more than max = 2000");
+        int i = wireBuffer.readInt();
+        int i2 = wireBuffer.readInt();
+        if (i2 > 2000) {
+            throw new RuntimeException(i2 + " map entries more than max = 2000");
         }
-        float[] fArr = new float[readInt2];
-        for (int i = 0; i < readInt2; i++) {
-            fArr[i] = wireBuffer.readFloat();
+        float[] fArr = new float[i2];
+        for (int i3 = 0; i3 < i2; i3++) {
+            fArr[i3] = wireBuffer.readFloat();
         }
-        list.add(new DataListFloat(readInt, fArr));
+        list.add(new DataListFloat(i, fArr));
     }
 
     public static void documentation(DocumentationBuilder documentationBuilder) {

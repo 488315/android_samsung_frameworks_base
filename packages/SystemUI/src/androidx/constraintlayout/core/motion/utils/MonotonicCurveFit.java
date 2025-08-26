@@ -2,7 +2,6 @@ package androidx.constraintlayout.core.motion.utils;
 
 import java.lang.reflect.Array;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class MonotonicCurveFit extends CurveFit {
     public final boolean mExtrapolate = true;
@@ -46,9 +45,9 @@ public class MonotonicCurveFit extends CurveFit {
                     double d4 = dArr4[i5][i6] / d3;
                     int i7 = i5 + 1;
                     double d5 = dArr4[i7][i6] / d3;
-                    double hypot = Math.hypot(d4, d5);
-                    if (hypot > 9.0d) {
-                        double d6 = 3.0d / hypot;
+                    double dHypot = Math.hypot(d4, d5);
+                    if (dHypot > 9.0d) {
+                        double d6 = 3.0d / dHypot;
                         double[] dArr6 = dArr4[i5];
                         double[] dArr7 = dArr3[i5];
                         dArr6[i6] = d4 * d6 * dArr7[i6];

@@ -8,7 +8,6 @@ import androidx.compose.runtime.StaticProvidableCompositionLocal;
 import kotlin.NoWhenBranchMatchedException;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class MotionSchemeKt {
     public static final StaticProvidableCompositionLocal LocalMotionScheme = new StaticProvidableCompositionLocal(new Function0() { // from class: androidx.compose.material3.MotionSchemeKt$LocalMotionScheme$1
@@ -19,7 +18,6 @@ public abstract class MotionSchemeKt {
         }
     });
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -77,10 +75,10 @@ public abstract class MotionSchemeKt {
             ComposerKt.traceEventStart("androidx.compose.material3.value (MotionScheme.kt:304)");
         }
         MaterialTheme.INSTANCE.getClass();
-        SpringSpec fromToken = fromToken(MaterialTheme.getMotionScheme(composer), motionSchemeKeyTokens);
+        SpringSpec springSpecFromToken = fromToken(MaterialTheme.getMotionScheme(composer), motionSchemeKeyTokens);
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventEnd();
         }
-        return fromToken;
+        return springSpecFromToken;
     }
 }

@@ -87,23 +87,26 @@ public class ClipDescription implements Parcelable {
         this.mTimeStamp = clipDescription.mTimeStamp;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:16:0x002e  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public static boolean compareMimeTypes(String str, String str2) {
         int length = str2.length();
         if (length == 3 && str2.equals("*/*")) {
             return true;
         }
-        int indexOf = str2.indexOf(47);
-        if (indexOf > 0) {
-            if (length == indexOf + 2) {
-                int i = indexOf + 1;
+        int iIndexOf = str2.indexOf(47);
+        if (iIndexOf > 0) {
+            if (length == iIndexOf + 2) {
+                int i = iIndexOf + 1;
                 if (str2.charAt(i) == '*') {
                     if (str2.regionMatches(0, str, 0, i)) {
                         return true;
                     }
+                } else if (str2.equals(str)) {
+                    return true;
                 }
-            }
-            if (str2.equals(str)) {
-                return true;
             }
         }
         return false;
@@ -324,7 +327,7 @@ public class ClipDescription implements Parcelable {
     }
 
     public void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         int size = this.mMimeTypes.size();
         for (int i = 0; i < size; i++) {
             protoOutputStream.write(2237677961217L, this.mMimeTypes.get(i));
@@ -341,7 +344,7 @@ public class ClipDescription implements Parcelable {
         if (j2 > 0) {
             protoOutputStream.write(1112396529668L, j2);
         }
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 
     @Override // android.os.Parcelable

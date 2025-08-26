@@ -11,13 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SpannableBuilder extends SpannableStringBuilder {
     public final Class mWatcherClass;
     public final List mWatchers;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class WatcherWrapper implements TextWatcher, SpanWatcher {
         public final AtomicInteger mBlockCalls = new AtomicInteger(0);
         public final Object mObject;
@@ -167,18 +165,18 @@ public final class SpannableBuilder extends SpannableStringBuilder {
 
     @Override // android.text.SpannableStringBuilder, android.text.Spannable
     public final void removeSpan(Object obj) {
-        WatcherWrapper watcherWrapper;
+        WatcherWrapper watcherFor;
         if (isWatcher(obj)) {
-            watcherWrapper = getWatcherFor(obj);
-            if (watcherWrapper != null) {
-                obj = watcherWrapper;
+            watcherFor = getWatcherFor(obj);
+            if (watcherFor != null) {
+                obj = watcherFor;
             }
         } else {
-            watcherWrapper = null;
+            watcherFor = null;
         }
         super.removeSpan(obj);
-        if (watcherWrapper != null) {
-            ((ArrayList) this.mWatchers).remove(watcherWrapper);
+        if (watcherFor != null) {
+            ((ArrayList) this.mWatchers).remove(watcherFor);
         }
     }
 

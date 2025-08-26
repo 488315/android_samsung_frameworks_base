@@ -92,16 +92,16 @@ public class TypedValue {
     }
 
     public static int complexToDimensionPixelSize(int i, DisplayMetrics displayMetrics) {
-        float complexToFloat = complexToFloat(i);
-        float applyDimension = applyDimension(i & 15, complexToFloat, displayMetrics);
-        int i2 = (int) (applyDimension >= 0.0f ? applyDimension + 0.5f : applyDimension - 0.5f);
+        float fComplexToFloat = complexToFloat(i);
+        float fApplyDimension = applyDimension(i & 15, fComplexToFloat, displayMetrics);
+        int i2 = (int) (fApplyDimension >= 0.0f ? fApplyDimension + 0.5f : fApplyDimension - 0.5f);
         if (i2 != 0) {
             return i2;
         }
-        if (complexToFloat == 0.0f) {
+        if (fComplexToFloat == 0.0f) {
             return 0;
         }
-        return complexToFloat > 0.0f ? 1 : -1;
+        return fComplexToFloat > 0.0f ? 1 : -1;
     }
 
     @Deprecated
@@ -228,14 +228,14 @@ public class TypedValue {
             if (f == i) {
                 return createComplex(i, 0);
             }
-            float abs = Math.abs(f);
-            if (abs < 1.0f) {
+            float fAbs = Math.abs(f);
+            if (fAbs < 1.0f) {
                 return createComplex(Math.round(8388608.0f * f), 3);
             }
-            if (abs < 256.0f) {
+            if (fAbs < 256.0f) {
                 return createComplex(Math.round(32768.0f * f), 2);
             }
-            if (abs < 65536.0f) {
+            if (fAbs < 65536.0f) {
                 return createComplex(Math.round(128.0f * f), 1);
             }
             return createComplex(Math.round(f), 0);

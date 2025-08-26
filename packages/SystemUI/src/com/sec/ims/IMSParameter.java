@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import android.util.SparseArray;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class IMSParameter implements Parcelable {
     public static final Parcelable.Creator<IMSParameter> CREATOR = new Parcelable.Creator<IMSParameter>() { // from class: com.sec.ims.IMSParameter.1
@@ -27,7 +26,6 @@ public class IMSParameter implements Parcelable {
     private IMSProfileParams[] mProfileParams;
     private IMSRegistrationInfo mRegistrationInfo;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CALL {
         public static final String ACTION = "action";
         public static final String ADDED_SESSION_ID = "addedsessionid";
@@ -78,7 +76,6 @@ public class IMSParameter implements Parcelable {
         public static final String VMS_CALL = "vmscall";
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CALL_DIRECTION {
         public static final int CALL_DIRECTION_MO = 0;
         public static final int CALL_DIRECTION_MT = 1;
@@ -86,7 +83,6 @@ public class IMSParameter implements Parcelable {
         public static final int CALL_DIRECTION_PULLED_MT = 3;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class GENERAL {
         public static final String APCS_INFO = "apcsinfo";
         public static final String CONNECTION_STATE = "connectionState";
@@ -103,7 +99,6 @@ public class IMSParameter implements Parcelable {
         public static final String SETTINGS_VALUE = "settingsvalue";
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class MEDIA {
         public static final String CAMERA_ID = "cameraid";
         public static final String FILENAME = "filename";
@@ -113,7 +108,6 @@ public class IMSParameter implements Parcelable {
         public static final String VIDEO_ORIENTATION = "videoorientation";
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PRESENCE {
         public static final String ERROR_CODE = "errorcode";
         public static final String ERROR_PHRASE = "reasonphrase";
@@ -123,7 +117,6 @@ public class IMSParameter implements Parcelable {
         public static final String TOKEN = "token";
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SMS {
         public static final String CONTENT_TYPE = "contenttype";
         public static final String DATA = "data";
@@ -132,7 +125,6 @@ public class IMSParameter implements Parcelable {
         public static final String RETRY_AFTER = "retry_after";
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SSCONFIG {
         public static final String CB_TYPE = "cbtype";
         public static final String CF_TYPE = "cftype";
@@ -155,14 +147,12 @@ public class IMSParameter implements Parcelable {
         public static final String SUB_EVENT_TYPE = "subeventtype";
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class TYPE_HOLDTONE {
         public static final int TYPE_HOLDTONE_START = 0;
         public static final int TYPE_HOLDTONE_STOP = 1;
         public static final int TYPE_HOLDTONE_STOP_WITHOUT_NOTIFICATION = 2;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class VZW_API_SUPPORT {
         public static final String DIALOG_ID = "dialogId";
         public static final String MESSAGE = "sipMessage";
@@ -307,7 +297,7 @@ public class IMSParameter implements Parcelable {
     public void putParcelable(String str, Parcelable parcelable) {
         if (str.equals(GENERAL.APCS_INFO) && (parcelable instanceof IMSAPCSInfo)) {
             try {
-                this.mAPCSInfo = ((IMSAPCSInfo) parcelable).m3370clone();
+                this.mAPCSInfo = ((IMSAPCSInfo) parcelable).m3390clone();
                 return;
             } catch (CloneNotSupportedException e) {
                 e.printStackTrace();
@@ -319,7 +309,7 @@ public class IMSParameter implements Parcelable {
             return;
         }
         try {
-            this.mRegistrationInfo = ((IMSRegistrationInfo) parcelable).m3372clone();
+            this.mRegistrationInfo = ((IMSRegistrationInfo) parcelable).m3392clone();
         } catch (CloneNotSupportedException e2) {
             e2.printStackTrace();
         }
@@ -333,7 +323,7 @@ public class IMSParameter implements Parcelable {
         try {
             this.mProfileParams = new IMSProfileParams[parcelableArr.length];
             for (int i = 0; i < parcelableArr.length; i++) {
-                this.mProfileParams[i] = ((IMSProfileParams) parcelableArr[i]).m3371clone();
+                this.mProfileParams[i] = ((IMSProfileParams) parcelableArr[i]).m3391clone();
             }
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
@@ -417,11 +407,11 @@ public class IMSParameter implements Parcelable {
         if (parcel.readInt() != 0) {
             this.mRegistrationInfo = (IMSRegistrationInfo) parcel.readParcelable(IMSRegistrationInfo.class.getClassLoader(), IMSRegistrationInfo.class);
         }
-        int readInt = parcel.readInt();
-        if (readInt > 0) {
-            this.mProfileParams = new IMSProfileParams[readInt];
-            for (int i = 0; i < readInt; i++) {
-                this.mProfileParams[i] = (IMSProfileParams) parcel.readParcelable(IMSProfileParams.class.getClassLoader(), IMSProfileParams.class);
+        int i = parcel.readInt();
+        if (i > 0) {
+            this.mProfileParams = new IMSProfileParams[i];
+            for (int i2 = 0; i2 < i; i2++) {
+                this.mProfileParams[i2] = (IMSProfileParams) parcel.readParcelable(IMSProfileParams.class.getClassLoader(), IMSProfileParams.class);
             }
         }
     }

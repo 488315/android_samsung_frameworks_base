@@ -15,7 +15,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class ScreenshotSoundControllerImpl$player$1 extends SuspendLambda implements Function2 {
     int label;
@@ -46,7 +45,7 @@ final class ScreenshotSoundControllerImpl$player$1 extends SuspendLambda impleme
         ResultKt.throwOnFailure(obj);
         try {
             ScreenshotSoundProviderImpl screenshotSoundProviderImpl = (ScreenshotSoundProviderImpl) this.this$0.soundProvider;
-            return MediaPlayer.create(screenshotSoundProviderImpl.context, Uri.fromFile(new File(screenshotSoundProviderImpl.context.getResources().getString(R.string.data_usage_warning_title))), null, new AudioAttributes.Builder().setUsage(13).setContentType(4).build(), AudioSystem.newAudioSessionId());
+            return MediaPlayer.create(screenshotSoundProviderImpl.context, Uri.fromFile(new File(screenshotSoundProviderImpl.context.getResources().getString(R.string.data_usage_wifi_limit_title))), null, new AudioAttributes.Builder().setUsage(13).setContentType(4).build(), AudioSystem.newAudioSessionId());
         } catch (IllegalStateException e) {
             Log.w("ScreenshotSoundControllerImpl", "Screenshot sound initialization failed", e);
             return null;

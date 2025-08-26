@@ -1,10 +1,12 @@
 package com.android.internal.widget;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Trace;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -57,11 +59,11 @@ public class NotificationOptimizedLinearLayout extends LinearLayout {
     }
 
     private boolean isUseOptimizedLinearLayoutFlagEnabled() {
-        boolean notifLinearlayoutOptimized = Flags.notifLinearlayoutOptimized();
-        if (!notifLinearlayoutOptimized) {
+        boolean zNotifLinearlayoutOptimized = Flags.notifLinearlayoutOptimized();
+        if (!zNotifLinearlayoutOptimized) {
             logSkipOptimizedOnMeasure("enableNotifLinearlayoutOptimized flag is off.");
         }
-        return notifLinearlayoutOptimized;
+        return zNotifLinearlayoutOptimized;
     }
 
     private boolean isOptimizationPossible(int i, int i2) {
@@ -190,12 +192,12 @@ public class NotificationOptimizedLinearLayout extends LinearLayout {
             if (getOrientation() == 0) {
                 ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
                 int i3 = layoutParams.width;
-                boolean isBaselineAligned = isBaselineAligned();
+                boolean zIsBaselineAligned = isBaselineAligned();
                 layoutParams.width = 0;
                 setBaselineAligned(false);
                 super.onMeasure(i, i2);
                 layoutParams.width = i3;
-                setBaselineAligned(isBaselineAligned);
+                setBaselineAligned(zIsBaselineAligned);
             } else {
                 measureVerticalOptimized(view, i, i2);
             }
@@ -221,7 +223,7 @@ public class NotificationOptimizedLinearLayout extends LinearLayout {
         }
     }
 
-    private void onLayoutOptimized(boolean z, int i, int i2, int i3, int i4) {
+    private void onLayoutOptimized(boolean z, int i, int i2, int i3, int i4) throws Resources.NotFoundException {
         if (getOrientation() == 0) {
             super.onLayout(z, i, i2, i3, i4);
         } else {
@@ -230,36 +232,36 @@ public class NotificationOptimizedLinearLayout extends LinearLayout {
     }
 
     private void measureVerticalOptimized(View view, int i, int i2) {
-        int makeMeasureSpec;
+        int iMakeMeasureSpec;
         int size = View.MeasureSpec.getSize(i2);
         int mode = View.MeasureSpec.getMode(i2);
-        int i3 = 0;
-        int i4 = 0;
-        for (int i5 = 0; i5 < getChildCount(); i5++) {
-            View childAt = getChildAt(i5);
+        int iMax = 0;
+        int iMax2 = 0;
+        for (int i3 = 0; i3 < getChildCount(); i3++) {
+            View childAt = getChildAt(i3);
             if (childAt != null && childAt.getVisibility() != 8) {
                 ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) childAt.getLayoutParams();
                 if (childAt == view) {
                     if (marginLayoutParams.height == 0 && mode == 1073741824) {
-                        i3 = Math.max(i3, marginLayoutParams.topMargin + i3 + marginLayoutParams.bottomMargin);
+                        iMax = Math.max(iMax, marginLayoutParams.topMargin + iMax + marginLayoutParams.bottomMargin);
                     }
                 } else {
                     measureChildWithMargins(childAt, i, 0, i2, 0);
-                    i3 = Math.max(i3, childAt.getMeasuredHeight() + i3 + marginLayoutParams.topMargin + marginLayoutParams.bottomMargin);
-                    i4 = Math.max(i4, childAt.getMeasuredWidth() + marginLayoutParams.leftMargin + marginLayoutParams.rightMargin);
+                    iMax = Math.max(iMax, childAt.getMeasuredHeight() + iMax + marginLayoutParams.topMargin + marginLayoutParams.bottomMargin);
+                    iMax2 = Math.max(iMax2, childAt.getMeasuredWidth() + marginLayoutParams.leftMargin + marginLayoutParams.rightMargin);
                 }
             }
         }
-        int i6 = i3 + this.mPaddingTop + this.mPaddingBottom;
+        int i4 = iMax + this.mPaddingTop + this.mPaddingBottom;
         ViewGroup.MarginLayoutParams marginLayoutParams2 = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
-        int i7 = mode == 1073741824 ? 1073741824 : Integer.MIN_VALUE;
+        int i5 = mode == 1073741824 ? 1073741824 : Integer.MIN_VALUE;
         if (marginLayoutParams2.height == 0 && mode == 1073741824) {
-            makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(Math.max(0, size - i6), i7);
+            iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(Math.max(0, size - i4), i5);
         } else {
-            makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(Math.max(0, size - ((marginLayoutParams2.topMargin + marginLayoutParams2.bottomMargin) + i6)), i7);
+            iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(Math.max(0, size - ((marginLayoutParams2.topMargin + marginLayoutParams2.bottomMargin) + i4)), i5);
         }
-        view.measure(getChildMeasureSpec(i, this.mPaddingLeft + this.mPaddingRight + marginLayoutParams2.leftMargin + marginLayoutParams2.rightMargin, marginLayoutParams2.width), makeMeasureSpec);
-        setMeasuredDimension(resolveSizeAndState(Math.max(Math.max(i4, view.getMeasuredWidth() + marginLayoutParams2.leftMargin + marginLayoutParams2.rightMargin) + getPaddingLeft() + getPaddingRight(), getSuggestedMinimumWidth()), i, 0), resolveSizeAndState(Math.max(Math.max(i6, view.getMeasuredHeight() + i6 + marginLayoutParams2.topMargin + marginLayoutParams2.bottomMargin), getSuggestedMinimumHeight()), i2, 0));
+        view.measure(getChildMeasureSpec(i, this.mPaddingLeft + this.mPaddingRight + marginLayoutParams2.leftMargin + marginLayoutParams2.rightMargin, marginLayoutParams2.width), iMakeMeasureSpec);
+        setMeasuredDimension(resolveSizeAndState(Math.max(Math.max(iMax2, view.getMeasuredWidth() + marginLayoutParams2.leftMargin + marginLayoutParams2.rightMargin) + getPaddingLeft() + getPaddingRight(), getSuggestedMinimumWidth()), i, 0), resolveSizeAndState(Math.max(Math.max(i4, view.getMeasuredHeight() + i4 + marginLayoutParams2.topMargin + marginLayoutParams2.bottomMargin), getSuggestedMinimumHeight()), i2, 0));
     }
 
     private List<View> getActiveChildren() {
@@ -274,107 +276,65 @@ public class NotificationOptimizedLinearLayout extends LinearLayout {
         return arrayList;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:22:0x008d  */
+    /* JADX WARN: Removed duplicated region for block: B:28:0x008d  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private void layoutVerticalOptimized(int r11, int r12, int r13, int r14) {
-        /*
-            r10 = this;
-            int r0 = r10.mPaddingLeft
-            int r1 = r10.getMeasuredHeight()
-            int r13 = r13 - r11
-            int r11 = r10.mPaddingRight
-            int r11 = r13 - r11
-            int r13 = r13 - r0
-            int r2 = r10.mPaddingRight
-            int r13 = r13 - r2
-            int r2 = r10.getChildCount()
-            int r3 = r10.getGravity()
-            r3 = r3 & 112(0x70, float:1.57E-43)
-            int r4 = r10.getGravity()
-            r5 = 8388615(0x800007, float:1.1754953E-38)
-            r4 = r4 & r5
-            r5 = 16
-            if (r3 == r5) goto L33
-            r5 = 80
-            if (r3 == r5) goto L2c
-            int r12 = r10.mPaddingTop
-            goto L3b
-        L2c:
-            int r3 = r10.mPaddingTop
-            int r3 = r3 + r14
-            int r3 = r3 - r12
-            int r12 = r3 - r1
-            goto L3b
-        L33:
-            int r3 = r10.mPaddingTop
-            int r14 = r14 - r12
-            int r14 = r14 - r1
-            int r14 = r14 / 2
-            int r12 = r3 + r14
-        L3b:
-            int r14 = r10.getDividerHeight()
-            r1 = 0
-        L40:
-            if (r1 >= r2) goto L9e
-            android.view.View r3 = r10.getChildAt(r1)
-            if (r3 == 0) goto L9b
-            int r5 = r3.getVisibility()
-            r6 = 8
-            if (r5 == r6) goto L9b
-            int r5 = r3.getMeasuredWidth()
-            int r6 = r3.getMeasuredHeight()
-            android.view.ViewGroup$LayoutParams r7 = r3.getLayoutParams()
-            android.widget.LinearLayout$LayoutParams r7 = (android.widget.LinearLayout.LayoutParams) r7
-            int r8 = r7.gravity
-            if (r8 >= 0) goto L63
-            r8 = r4
-        L63:
-            int r9 = r10.getLayoutDirection()
-            int r8 = android.view.Gravity.getAbsoluteGravity(r8, r9)
-            r8 = r8 & 7
-            r9 = 1
-            if (r8 == r9) goto L7c
-            r9 = 5
-            if (r8 == r9) goto L77
-            int r8 = r7.leftMargin
-            int r8 = r8 + r0
-            goto L87
-        L77:
-            int r8 = r11 - r5
-            int r9 = r7.rightMargin
-            goto L86
-        L7c:
-            int r8 = r13 - r5
-            int r8 = r8 / 2
-            int r8 = r8 + r0
-            int r9 = r7.leftMargin
-            int r8 = r8 + r9
-            int r9 = r7.rightMargin
-        L86:
-            int r8 = r8 - r9
-        L87:
-            boolean r9 = r10.hasDividerBeforeChildAt(r1)
-            if (r9 == 0) goto L8e
-            int r12 = r12 + r14
-        L8e:
-            int r9 = r7.topMargin
-            int r12 = r12 + r9
-            int r5 = r5 + r8
-            int r9 = r12 + r6
-            r3.layout(r8, r12, r5, r9)
-            int r3 = r7.bottomMargin
-            int r6 = r6 + r3
-            int r12 = r12 + r6
-        L9b:
-            int r1 = r1 + 1
-            goto L40
-        L9e:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.widget.NotificationOptimizedLinearLayout.layoutVerticalOptimized(int, int, int, int):void");
+    private void layoutVerticalOptimized(int i, int i2, int i3, int i4) throws Resources.NotFoundException {
+        int i5;
+        int i6;
+        int i7;
+        int i8;
+        int i9 = this.mPaddingLeft;
+        int measuredHeight = getMeasuredHeight();
+        int i10 = i3 - i;
+        int i11 = i10 - this.mPaddingRight;
+        int i12 = (i10 - i9) - this.mPaddingRight;
+        int childCount = getChildCount();
+        int gravity = getGravity() & 112;
+        int gravity2 = getGravity() & Gravity.RELATIVE_HORIZONTAL_GRAVITY_MASK;
+        if (gravity == 16) {
+            i5 = this.mPaddingTop + (((i4 - i2) - measuredHeight) / 2);
+        } else if (gravity == 80) {
+            i5 = ((this.mPaddingTop + i4) - i2) - measuredHeight;
+        } else {
+            i5 = this.mPaddingTop;
+        }
+        int dividerHeight = getDividerHeight();
+        for (int i13 = 0; i13 < childCount; i13++) {
+            View childAt = getChildAt(i13);
+            if (childAt != null && childAt.getVisibility() != 8) {
+                int measuredWidth = childAt.getMeasuredWidth();
+                int measuredHeight2 = childAt.getMeasuredHeight();
+                LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) childAt.getLayoutParams();
+                int i14 = layoutParams.gravity;
+                if (i14 < 0) {
+                    i14 = gravity2;
+                }
+                int absoluteGravity = Gravity.getAbsoluteGravity(i14, getLayoutDirection()) & 7;
+                if (absoluteGravity == 1) {
+                    i6 = ((i12 - measuredWidth) / 2) + i9 + layoutParams.leftMargin;
+                    i7 = layoutParams.rightMargin;
+                } else if (absoluteGravity == 5) {
+                    i6 = i11 - measuredWidth;
+                    i7 = layoutParams.rightMargin;
+                } else {
+                    i8 = layoutParams.leftMargin + i9;
+                    if (hasDividerBeforeChildAt(i13)) {
+                        i5 += dividerHeight;
+                    }
+                    int i15 = i5 + layoutParams.topMargin;
+                    childAt.layout(i8, i15, measuredWidth + i8, i15 + measuredHeight2);
+                    i5 = i15 + measuredHeight2 + layoutParams.bottomMargin;
+                }
+                i8 = i6 - i7;
+                if (hasDividerBeforeChildAt(i13)) {
+                }
+                int i152 = i5 + layoutParams.topMargin;
+                childAt.layout(i8, i152, measuredWidth + i8, i152 + measuredHeight2);
+                i5 = i152 + measuredHeight2 + layoutParams.bottomMargin;
+            }
+        }
     }
 
     private int getDividerHeight() {

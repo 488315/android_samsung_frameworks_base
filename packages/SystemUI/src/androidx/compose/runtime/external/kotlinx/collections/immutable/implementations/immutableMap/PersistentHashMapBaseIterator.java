@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import kotlin.jvm.internal.markers.KMappedMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class PersistentHashMapBaseIterator<K, V, T> implements Iterator<T>, KMappedMarker {
     public boolean hasNext = true;
@@ -26,19 +25,19 @@ public abstract class PersistentHashMapBaseIterator<K, V, T> implements Iterator
             return;
         }
         while (-1 < i) {
-            int moveToNextNodeWithData = moveToNextNodeWithData(i);
-            if (moveToNextNodeWithData == -1) {
+            int iMoveToNextNodeWithData = moveToNextNodeWithData(i);
+            if (iMoveToNextNodeWithData == -1) {
                 TrieNodeBaseIterator trieNodeBaseIterator2 = this.path[i];
                 int i2 = trieNodeBaseIterator2.index;
                 Object[] objArr = trieNodeBaseIterator2.buffer;
                 if (i2 < objArr.length) {
                     int length = objArr.length;
                     trieNodeBaseIterator2.index = i2 + 1;
-                    moveToNextNodeWithData = moveToNextNodeWithData(i);
+                    iMoveToNextNodeWithData = moveToNextNodeWithData(i);
                 }
             }
-            if (moveToNextNodeWithData != -1) {
-                this.pathLastIndex = moveToNextNodeWithData;
+            if (iMoveToNextNodeWithData != -1) {
+                this.pathLastIndex = iMoveToNextNodeWithData;
                 return;
             }
             if (i > 0) {

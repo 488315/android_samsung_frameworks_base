@@ -8,7 +8,6 @@ import com.android.systemui.R;
 import com.google.android.setupcompat.partnerconfig.PartnerConfig;
 import com.google.android.setupcompat.partnerconfig.PartnerConfigHelper;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class LayoutStyler {
     private LayoutStyler() {
@@ -22,18 +21,18 @@ public final class LayoutStyler {
         Context context = view.getContext();
         PartnerConfigHelper partnerConfigHelper = PartnerConfigHelper.get(context);
         PartnerConfig partnerConfig = PartnerConfig.CONFIG_LAYOUT_MARGIN_START;
-        boolean isPartnerConfigAvailable = partnerConfigHelper.isPartnerConfigAvailable(partnerConfig);
+        boolean zIsPartnerConfigAvailable = partnerConfigHelper.isPartnerConfigAvailable(partnerConfig);
         PartnerConfigHelper partnerConfigHelper2 = PartnerConfigHelper.get(context);
         PartnerConfig partnerConfig2 = PartnerConfig.CONFIG_LAYOUT_MARGIN_END;
-        boolean isPartnerConfigAvailable2 = partnerConfigHelper2.isPartnerConfigAvailable(partnerConfig2);
+        boolean zIsPartnerConfigAvailable2 = partnerConfigHelper2.isPartnerConfigAvailable(partnerConfig2);
         if (PartnerStyleHelper.shouldApplyPartnerResource(view)) {
-            if (isPartnerConfigAvailable || isPartnerConfigAvailable2) {
-                TypedArray obtainStyledAttributes = context.obtainStyledAttributes(new int[]{R.attr.sudMarginStart, R.attr.sudMarginEnd});
-                int dimensionPixelSize = obtainStyledAttributes.getDimensionPixelSize(0, 0);
-                int dimensionPixelSize2 = obtainStyledAttributes.getDimensionPixelSize(1, 0);
-                obtainStyledAttributes.recycle();
-                int dimension = isPartnerConfigAvailable ? ((int) PartnerConfigHelper.get(context).getDimension(context, partnerConfig, 0.0f)) - dimensionPixelSize : view.getPaddingStart();
-                if (isPartnerConfigAvailable2) {
+            if (zIsPartnerConfigAvailable || zIsPartnerConfigAvailable2) {
+                TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(new int[]{R.attr.sudMarginStart, R.attr.sudMarginEnd});
+                int dimensionPixelSize = typedArrayObtainStyledAttributes.getDimensionPixelSize(0, 0);
+                int dimensionPixelSize2 = typedArrayObtainStyledAttributes.getDimensionPixelSize(1, 0);
+                typedArrayObtainStyledAttributes.recycle();
+                int dimension = zIsPartnerConfigAvailable ? ((int) PartnerConfigHelper.get(context).getDimension(context, partnerConfig, 0.0f)) - dimensionPixelSize : view.getPaddingStart();
+                if (zIsPartnerConfigAvailable2) {
                     paddingEnd = ((int) PartnerConfigHelper.get(context).getDimension(context, partnerConfig2, 0.0f)) - dimensionPixelSize2;
                     if (view.getId() == R.id.sud_layout_content) {
                         paddingEnd = ((int) PartnerConfigHelper.get(context).getDimension(context, partnerConfig, 0.0f)) - dimensionPixelSize2;
@@ -62,14 +61,14 @@ public final class LayoutStyler {
         Context context = view.getContext();
         PartnerConfigHelper partnerConfigHelper = PartnerConfigHelper.get(context);
         PartnerConfig partnerConfig = PartnerConfig.CONFIG_LAYOUT_MARGIN_START;
-        boolean isPartnerConfigAvailable = partnerConfigHelper.isPartnerConfigAvailable(partnerConfig);
+        boolean zIsPartnerConfigAvailable = partnerConfigHelper.isPartnerConfigAvailable(partnerConfig);
         PartnerConfigHelper partnerConfigHelper2 = PartnerConfigHelper.get(context);
         PartnerConfig partnerConfig2 = PartnerConfig.CONFIG_LAYOUT_MARGIN_END;
-        boolean isPartnerConfigAvailable2 = partnerConfigHelper2.isPartnerConfigAvailable(partnerConfig2);
+        boolean zIsPartnerConfigAvailable2 = partnerConfigHelper2.isPartnerConfigAvailable(partnerConfig2);
         if (PartnerStyleHelper.shouldApplyPartnerResource(view)) {
-            if (isPartnerConfigAvailable || isPartnerConfigAvailable2) {
-                int dimension = isPartnerConfigAvailable ? (int) PartnerConfigHelper.get(context).getDimension(context, partnerConfig, 0.0f) : view.getPaddingStart();
-                int dimension2 = isPartnerConfigAvailable2 ? (int) PartnerConfigHelper.get(context).getDimension(context, partnerConfig2, 0.0f) : view.getPaddingEnd();
+            if (zIsPartnerConfigAvailable || zIsPartnerConfigAvailable2) {
+                int dimension = zIsPartnerConfigAvailable ? (int) PartnerConfigHelper.get(context).getDimension(context, partnerConfig, 0.0f) : view.getPaddingStart();
+                int dimension2 = zIsPartnerConfigAvailable2 ? (int) PartnerConfigHelper.get(context).getDimension(context, partnerConfig2, 0.0f) : view.getPaddingEnd();
                 if (dimension == view.getPaddingStart() && dimension2 == view.getPaddingEnd()) {
                     return;
                 }

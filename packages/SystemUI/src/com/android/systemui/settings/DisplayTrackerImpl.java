@@ -18,7 +18,6 @@ import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DisplayTrackerImpl implements DisplayTracker {
     public final Handler backgroundHandler;
@@ -29,9 +28,9 @@ public final class DisplayTrackerImpl implements DisplayTracker {
         @Override // android.hardware.display.DisplayManager.DisplayListener
         public final void onDisplayAdded(final int i) {
             List<DisplayTrackerImpl.DisplayTrackerDataItem> list;
-            DisplayTrackerImpl displayTrackerImpl = DisplayTrackerImpl.this;
-            boolean isEnabled = Trace.isEnabled();
-            if (isEnabled) {
+            DisplayTrackerImpl displayTrackerImpl = this.this$0;
+            boolean zIsEnabled = Trace.isEnabled();
+            if (zIsEnabled) {
                 TraceUtilsKt.beginSlice("DisplayTrackerImpl.displayChangedDisplayListener#onDisplayAdded");
             }
             try {
@@ -44,7 +43,7 @@ public final class DisplayTrackerImpl implements DisplayTracker {
                         displayTrackerDataItem.executor.execute(new Runnable() { // from class: com.android.systemui.settings.DisplayTrackerImpl$onDisplayAdded$$inlined$notifySubscribers$1
                             @Override // java.lang.Runnable
                             public final void run() {
-                                DisplayTracker.Callback callback = (DisplayTracker.Callback) DisplayTrackerImpl.DisplayTrackerDataItem.this.callback.get();
+                                DisplayTracker.Callback callback = (DisplayTracker.Callback) displayTrackerDataItem.callback.get();
                                 if (callback != null) {
                                     callback.onDisplayAdded(i);
                                 }
@@ -54,7 +53,7 @@ public final class DisplayTrackerImpl implements DisplayTracker {
                 }
                 Unit unit = Unit.INSTANCE;
             } finally {
-                if (isEnabled) {
+                if (zIsEnabled) {
                     TraceUtilsKt.endSlice();
                 }
             }
@@ -63,9 +62,9 @@ public final class DisplayTrackerImpl implements DisplayTracker {
         @Override // android.hardware.display.DisplayManager.DisplayListener
         public final void onDisplayChanged(int i) {
             List list;
-            DisplayTrackerImpl displayTrackerImpl = DisplayTrackerImpl.this;
-            boolean isEnabled = Trace.isEnabled();
-            if (isEnabled) {
+            DisplayTrackerImpl displayTrackerImpl = this.this$0;
+            boolean zIsEnabled = Trace.isEnabled();
+            if (zIsEnabled) {
                 TraceUtilsKt.beginSlice("DisplayTrackerImpl.displayChangedDisplayListener#onDisplayChanged");
             }
             try {
@@ -75,7 +74,7 @@ public final class DisplayTrackerImpl implements DisplayTracker {
                 DisplayTrackerImpl.access$onDisplayChanged(displayTrackerImpl, i, list);
                 Unit unit = Unit.INSTANCE;
             } finally {
-                if (isEnabled) {
+                if (zIsEnabled) {
                     TraceUtilsKt.endSlice();
                 }
             }
@@ -84,9 +83,9 @@ public final class DisplayTrackerImpl implements DisplayTracker {
         @Override // android.hardware.display.DisplayManager.DisplayListener
         public final void onDisplayRemoved(final int i) {
             List<DisplayTrackerImpl.DisplayTrackerDataItem> list;
-            DisplayTrackerImpl displayTrackerImpl = DisplayTrackerImpl.this;
-            boolean isEnabled = Trace.isEnabled();
-            if (isEnabled) {
+            DisplayTrackerImpl displayTrackerImpl = this.this$0;
+            boolean zIsEnabled = Trace.isEnabled();
+            if (zIsEnabled) {
                 TraceUtilsKt.beginSlice("DisplayTrackerImpl.displayChangedDisplayListener#onDisplayRemoved");
             }
             try {
@@ -99,7 +98,7 @@ public final class DisplayTrackerImpl implements DisplayTracker {
                         displayTrackerDataItem.executor.execute(new Runnable() { // from class: com.android.systemui.settings.DisplayTrackerImpl$onDisplayRemoved$$inlined$notifySubscribers$1
                             @Override // java.lang.Runnable
                             public final void run() {
-                                DisplayTracker.Callback callback = (DisplayTracker.Callback) DisplayTrackerImpl.DisplayTrackerDataItem.this.callback.get();
+                                DisplayTracker.Callback callback = (DisplayTracker.Callback) displayTrackerDataItem.callback.get();
                                 if (callback != null) {
                                     callback.onDisplayRemoved(i);
                                 }
@@ -109,7 +108,7 @@ public final class DisplayTrackerImpl implements DisplayTracker {
                 }
                 Unit unit = Unit.INSTANCE;
             } finally {
-                if (isEnabled) {
+                if (zIsEnabled) {
                     TraceUtilsKt.endSlice();
                 }
             }
@@ -119,9 +118,9 @@ public final class DisplayTrackerImpl implements DisplayTracker {
         @Override // android.hardware.display.DisplayManager.DisplayListener
         public final void onDisplayChanged(int i) {
             List list;
-            DisplayTrackerImpl displayTrackerImpl = DisplayTrackerImpl.this;
-            boolean isEnabled = Trace.isEnabled();
-            if (isEnabled) {
+            DisplayTrackerImpl displayTrackerImpl = this.this$0;
+            boolean zIsEnabled = Trace.isEnabled();
+            if (zIsEnabled) {
                 TraceUtilsKt.beginSlice("DisplayTrackerImpl.displayBrightnessChangedDisplayListener#onDisplayChanged");
             }
             try {
@@ -131,7 +130,7 @@ public final class DisplayTrackerImpl implements DisplayTracker {
                 DisplayTrackerImpl.access$onDisplayChanged(displayTrackerImpl, i, list);
                 Unit unit = Unit.INSTANCE;
             } finally {
-                if (isEnabled) {
+                if (zIsEnabled) {
                     TraceUtilsKt.endSlice();
                 }
             }
@@ -146,7 +145,6 @@ public final class DisplayTrackerImpl implements DisplayTracker {
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DisplayTrackerDataItem {
         public final WeakReference callback;
         public final Executor executor;
@@ -193,7 +191,7 @@ public final class DisplayTrackerImpl implements DisplayTracker {
                 displayTrackerDataItem.executor.execute(new Runnable() { // from class: com.android.systemui.settings.DisplayTrackerImpl$onDisplayChanged$$inlined$notifySubscribers$1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        DisplayTracker.Callback callback = (DisplayTracker.Callback) DisplayTrackerImpl.DisplayTrackerDataItem.this.callback.get();
+                        DisplayTracker.Callback callback = (DisplayTracker.Callback) displayTrackerDataItem.callback.get();
                         if (callback != null) {
                             callback.onDisplayChanged(i);
                         }
@@ -237,7 +235,7 @@ public final class DisplayTrackerImpl implements DisplayTracker {
                 final Function1 function1 = new Function1() { // from class: com.android.systemui.settings.DisplayTrackerImpl$$ExternalSyntheticLambda0
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
+                    public final Object mo781invoke(Object obj) {
                         DisplayTrackerImpl.DisplayTrackerDataItem displayTrackerDataItem = (DisplayTrackerImpl.DisplayTrackerDataItem) obj;
                         switch (i) {
                             case 0:
@@ -252,7 +250,7 @@ public final class DisplayTrackerImpl implements DisplayTracker {
                 if (((ArrayList) list).removeIf(new Predicate() { // from class: com.android.systemui.settings.DisplayTrackerImpl$sam$java_util_function_Predicate$0
                     @Override // java.util.function.Predicate
                     public final /* synthetic */ boolean test(Object obj) {
-                        return ((Boolean) Function1.this.mo779invoke(obj)).booleanValue();
+                        return ((Boolean) function1.mo781invoke(obj)).booleanValue();
                     }
                 }) && ((ArrayList) this.displayCallbacks).isEmpty()) {
                     this.displayManager.unregisterDisplayListener(this.displayChangedListener);
@@ -268,7 +266,7 @@ public final class DisplayTrackerImpl implements DisplayTracker {
             final Function1 function12 = new Function1() { // from class: com.android.systemui.settings.DisplayTrackerImpl$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
+                public final Object mo781invoke(Object obj) {
                     DisplayTrackerImpl.DisplayTrackerDataItem displayTrackerDataItem = (DisplayTrackerImpl.DisplayTrackerDataItem) obj;
                     switch (i2) {
                         case 0:
@@ -283,7 +281,7 @@ public final class DisplayTrackerImpl implements DisplayTracker {
             if (((ArrayList) list2).removeIf(new Predicate() { // from class: com.android.systemui.settings.DisplayTrackerImpl$sam$java_util_function_Predicate$0
                 @Override // java.util.function.Predicate
                 public final /* synthetic */ boolean test(Object obj) {
-                    return ((Boolean) Function1.this.mo779invoke(obj)).booleanValue();
+                    return ((Boolean) function12.mo781invoke(obj)).booleanValue();
                 }
             }) && ((ArrayList) this.brightnessCallbacks).isEmpty()) {
                 this.displayManager.unregisterDisplayListener(this.displayBrightnessChangedListener);

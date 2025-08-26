@@ -35,9 +35,8 @@ public class ParallelFilterCreator implements MediaFilterCreator {
         final List<MediaFilter> list = (List) stream.map(new ParallelFilterCreator$$ExternalSyntheticLambda0(mediaFilterFactory)).map(new Function() { // from class: com.samsung.android.sume.core.filter.factory.ParallelFilterCreator$$ExternalSyntheticLambda1
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                MediaFilter newFilter;
-                newFilter = MediaFilterFactory.this.newFilter(AsyncFilter.class, r1.getDescriptor(), (MediaFilter) obj);
-                return newFilter;
+                MediaFilter mediaFilter2 = (MediaFilter) obj;
+                return mediaFilterFactory.newFilter(AsyncFilter.class, mediaFilter2.getDescriptor(), mediaFilter2);
             }
         }).collect(Collectors.toList());
         IntStream.range(0, list.size()).forEach(new IntConsumer() { // from class: com.samsung.android.sume.core.filter.factory.ParallelFilterCreator$$ExternalSyntheticLambda2

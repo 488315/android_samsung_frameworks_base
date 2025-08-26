@@ -10,7 +10,6 @@ import android.widget.ListPopupWindow;
 import android.widget.ListView;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class UserSwitcherPopupMenu extends ListPopupWindow {
     public ListAdapter adapter;
@@ -33,7 +32,7 @@ public final class UserSwitcherPopupMenu extends ListPopupWindow {
     }
 
     @Override // android.widget.ListPopupWindow
-    public final void show() {
+    public final void show() throws Resources.NotFoundException {
         super.show();
         ListView listView = getListView();
         if (listView != null) {
@@ -69,15 +68,15 @@ public final class UserSwitcherPopupMenu extends ListPopupWindow {
             }, null, false);
             ListAdapter listAdapter = this.adapter;
             if (listAdapter != null) {
-                int makeMeasureSpec = View.MeasureSpec.makeMeasureSpec((int) (this.res.getDisplayMetrics().widthPixels * 0.25d), Integer.MIN_VALUE);
+                int iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec((int) (this.res.getDisplayMetrics().widthPixels * 0.25d), Integer.MIN_VALUE);
                 int count = listAdapter.getCount();
-                int i2 = 0;
-                for (int i3 = 0; i3 < count; i3++) {
-                    View view = listAdapter.getView(i3, null, listView);
-                    view.measure(makeMeasureSpec, 0);
-                    i2 = Math.max(view.getMeasuredWidth(), i2);
+                int iMax = 0;
+                for (int i2 = 0; i2 < count; i2++) {
+                    View view = listAdapter.getView(i2, null, listView);
+                    view.measure(iMakeMeasureSpec, 0);
+                    iMax = Math.max(view.getMeasuredWidth(), iMax);
                 }
-                i = i2;
+                i = iMax;
             }
             setWidth(i);
         }

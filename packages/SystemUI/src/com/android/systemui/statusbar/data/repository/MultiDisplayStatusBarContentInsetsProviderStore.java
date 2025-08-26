@@ -15,7 +15,6 @@ import com.android.systemui.statusbar.layout.StatusBarContentInsetsProviderImpl$
 import com.android.systemui.statusbar.phone.ConfigurationControllerImpl;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class MultiDisplayStatusBarContentInsetsProviderStore extends StatusBarPerDisplayStoreImpl implements StatusBarContentInsetsProviderStore {
     public final CameraProtectionLoaderImpl.Factory cameraProtectionLoaderFactory;
@@ -46,11 +45,11 @@ public final class MultiDisplayStatusBarContentInsetsProviderStore extends Statu
         if (statusBarConfigurationController == null) {
             return null;
         }
-        StatusBarContentInsetsProviderImpl create = this.factory.create(context, statusBarConfigurationController, this.sysUICutoutProviderFactory.create(context, this.cameraProtectionLoaderFactory.create(context)));
-        ((ConfigurationControllerImpl) create.configurationController).addCallback(create);
-        create.dumpManager.registerNormalDumpable(create.dumpableName, create);
-        create.commandRegistry.registerCommand(create.commandName, new StatusBarContentInsetsProviderImpl$$ExternalSyntheticLambda0(create, 1));
-        return create;
+        StatusBarContentInsetsProviderImpl statusBarContentInsetsProviderImplCreate = this.factory.create(context, statusBarConfigurationController, this.sysUICutoutProviderFactory.create(context, this.cameraProtectionLoaderFactory.create(context)));
+        ((ConfigurationControllerImpl) statusBarContentInsetsProviderImplCreate.configurationController).addCallback(statusBarContentInsetsProviderImplCreate);
+        statusBarContentInsetsProviderImplCreate.dumpManager.registerNormalDumpable(statusBarContentInsetsProviderImplCreate.dumpableName, statusBarContentInsetsProviderImplCreate);
+        statusBarContentInsetsProviderImplCreate.commandRegistry.registerCommand(statusBarContentInsetsProviderImplCreate.commandName, new StatusBarContentInsetsProviderImpl$$ExternalSyntheticLambda0(statusBarContentInsetsProviderImplCreate, 1));
+        return statusBarContentInsetsProviderImplCreate;
     }
 
     @Override // com.android.systemui.display.data.repository.PerDisplayStoreImpl

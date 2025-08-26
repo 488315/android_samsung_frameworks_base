@@ -10,55 +10,55 @@ public class OpenGlHelper {
     }
 
     public static int createProgram(String str, String str2) {
-        int compileShader = compileShader(GLES20.GL_VERTEX_SHADER, str);
-        if (compileShader == 0) {
+        int iCompileShader = compileShader(GLES20.GL_VERTEX_SHADER, str);
+        if (iCompileShader == 0) {
             return 0;
         }
-        int compileShader2 = compileShader(GLES20.GL_FRAGMENT_SHADER, str2);
-        if (compileShader2 == 0) {
-            GLES20.glDeleteShader(compileShader);
+        int iCompileShader2 = compileShader(GLES20.GL_FRAGMENT_SHADER, str2);
+        if (iCompileShader2 == 0) {
+            GLES20.glDeleteShader(iCompileShader);
             return 0;
         }
-        int linkProgram = linkProgram(compileShader, compileShader2);
-        GLES20.glDeleteShader(compileShader);
-        GLES20.glDeleteShader(compileShader2);
-        return linkProgram;
+        int iLinkProgram = linkProgram(iCompileShader, iCompileShader2);
+        GLES20.glDeleteShader(iCompileShader);
+        GLES20.glDeleteShader(iCompileShader2);
+        return iLinkProgram;
     }
 
     private static int compileShader(int i, String str) {
-        int glCreateShader = GLES20.glCreateShader(i);
-        if (glCreateShader == 0) {
+        int iGlCreateShader = GLES20.glCreateShader(i);
+        if (iGlCreateShader == 0) {
             checkGLError("shader type " + i + " creation failded");
             return 0;
         }
-        GLES20.glShaderSource(glCreateShader, str);
-        GLES20.glCompileShader(glCreateShader);
+        GLES20.glShaderSource(iGlCreateShader, str);
+        GLES20.glCompileShader(iGlCreateShader);
         int[] iArr = new int[1];
-        GLES20.glGetShaderiv(glCreateShader, GLES20.GL_COMPILE_STATUS, iArr, 0);
+        GLES20.glGetShaderiv(iGlCreateShader, GLES20.GL_COMPILE_STATUS, iArr, 0);
         if (iArr[0] != 0) {
-            return glCreateShader;
+            return iGlCreateShader;
         }
-        LogS.e("TranscodeLib", "Could not compile shader " + i + " " + GLES20.glGetShaderInfoLog(glCreateShader));
-        GLES20.glDeleteShader(glCreateShader);
+        LogS.e("TranscodeLib", "Could not compile shader " + i + " " + GLES20.glGetShaderInfoLog(iGlCreateShader));
+        GLES20.glDeleteShader(iGlCreateShader);
         return 0;
     }
 
     private static int linkProgram(int i, int i2) {
-        int glCreateProgram = GLES20.glCreateProgram();
-        if (glCreateProgram == 0) {
+        int iGlCreateProgram = GLES20.glCreateProgram();
+        if (iGlCreateProgram == 0) {
             checkGLError("CreateProgram failed");
             return 0;
         }
-        GLES20.glAttachShader(glCreateProgram, i);
-        GLES20.glAttachShader(glCreateProgram, i2);
-        GLES20.glLinkProgram(glCreateProgram);
+        GLES20.glAttachShader(iGlCreateProgram, i);
+        GLES20.glAttachShader(iGlCreateProgram, i2);
+        GLES20.glLinkProgram(iGlCreateProgram);
         int[] iArr = new int[1];
-        GLES20.glGetProgramiv(glCreateProgram, GLES20.GL_LINK_STATUS, iArr, 0);
+        GLES20.glGetProgramiv(iGlCreateProgram, GLES20.GL_LINK_STATUS, iArr, 0);
         if (iArr[0] != 0) {
-            return glCreateProgram;
+            return iGlCreateProgram;
         }
-        LogS.e("TranscodeLib", "Couldn't link program :" + GLES20.glGetProgramInfoLog(glCreateProgram));
-        GLES20.glDeleteProgram(glCreateProgram);
+        LogS.e("TranscodeLib", "Couldn't link program :" + GLES20.glGetProgramInfoLog(iGlCreateProgram));
+        GLES20.glDeleteProgram(iGlCreateProgram);
         return 0;
     }
 
@@ -92,11 +92,11 @@ public class OpenGlHelper {
 
     public static int checkGLError(String str) {
         while (true) {
-            int glGetError = GLES20.glGetError();
-            if (glGetError == 0) {
-                return glGetError;
+            int iGlGetError = GLES20.glGetError();
+            if (iGlGetError == 0) {
+                return iGlGetError;
             }
-            LogS.e("TranscodeLib", str + ": glError " + glGetError);
+            LogS.e("TranscodeLib", str + ": glError " + iGlGetError);
         }
     }
 }

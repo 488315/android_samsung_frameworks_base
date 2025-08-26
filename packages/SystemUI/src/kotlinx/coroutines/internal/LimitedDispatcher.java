@@ -11,7 +11,6 @@ import kotlinx.coroutines.DefaultExecutorKt;
 import kotlinx.coroutines.Delay;
 import kotlinx.coroutines.DisposableHandle;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class LimitedDispatcher extends CoroutineDispatcher implements Delay {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -23,7 +22,6 @@ public final class LimitedDispatcher extends CoroutineDispatcher implements Dela
     public final AtomicInt runningWorkers;
     public final Object workerAllocationLock;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Worker implements Runnable {
         public Runnable currentTask;
 
@@ -42,11 +40,11 @@ public final class LimitedDispatcher extends CoroutineDispatcher implements Dela
                 }
                 LimitedDispatcher limitedDispatcher = LimitedDispatcher.this;
                 int i2 = LimitedDispatcher.$r8$clinit;
-                Runnable obtainTaskOrDeallocateWorker = limitedDispatcher.obtainTaskOrDeallocateWorker();
-                if (obtainTaskOrDeallocateWorker == null) {
+                Runnable runnableObtainTaskOrDeallocateWorker = limitedDispatcher.obtainTaskOrDeallocateWorker();
+                if (runnableObtainTaskOrDeallocateWorker == null) {
                     return;
                 }
-                this.currentTask = obtainTaskOrDeallocateWorker;
+                this.currentTask = runnableObtainTaskOrDeallocateWorker;
                 i++;
                 if (i >= 16) {
                     LimitedDispatcher limitedDispatcher2 = LimitedDispatcher.this;
@@ -74,22 +72,22 @@ public final class LimitedDispatcher extends CoroutineDispatcher implements Dela
 
     @Override // kotlinx.coroutines.CoroutineDispatcher
     public final void dispatch(CoroutineContext coroutineContext, Runnable runnable) {
-        Runnable obtainTaskOrDeallocateWorker;
+        Runnable runnableObtainTaskOrDeallocateWorker;
         this.queue.addLast(runnable);
-        if (this.runningWorkers.value >= this.parallelism || !tryAllocateWorker() || (obtainTaskOrDeallocateWorker = obtainTaskOrDeallocateWorker()) == null) {
+        if (this.runningWorkers.value >= this.parallelism || !tryAllocateWorker() || (runnableObtainTaskOrDeallocateWorker = obtainTaskOrDeallocateWorker()) == null) {
             return;
         }
-        DispatchedContinuationKt.safeDispatch(this.dispatcher, this, new Worker(obtainTaskOrDeallocateWorker));
+        DispatchedContinuationKt.safeDispatch(this.dispatcher, this, new Worker(runnableObtainTaskOrDeallocateWorker));
     }
 
     @Override // kotlinx.coroutines.CoroutineDispatcher
     public final void dispatchYield(CoroutineContext coroutineContext, Runnable runnable) {
-        Runnable obtainTaskOrDeallocateWorker;
+        Runnable runnableObtainTaskOrDeallocateWorker;
         this.queue.addLast(runnable);
-        if (this.runningWorkers.value >= this.parallelism || !tryAllocateWorker() || (obtainTaskOrDeallocateWorker = obtainTaskOrDeallocateWorker()) == null) {
+        if (this.runningWorkers.value >= this.parallelism || !tryAllocateWorker() || (runnableObtainTaskOrDeallocateWorker = obtainTaskOrDeallocateWorker()) == null) {
             return;
         }
-        this.dispatcher.dispatchYield(this, new Worker(obtainTaskOrDeallocateWorker));
+        this.dispatcher.dispatchYield(this, new Worker(runnableObtainTaskOrDeallocateWorker));
     }
 
     @Override // kotlinx.coroutines.Delay

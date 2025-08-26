@@ -22,25 +22,25 @@ public class AbnormalUsage {
     }
 
     private void checkViewUsage() {
-        long j;
+        long jCountInstancesOfClass;
         this.mCurrStopCount++;
-        long freeMemory = (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1024;
+        long jFreeMemory = (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1024;
         boolean z = false;
-        if ((freeMemory < RUNTIME_USED_WARM_LIMIT || (this.mCurrStopCount & 7) != 1) && freeMemory < RUNTIME_USED_LIMIT) {
-            j = 0;
+        if ((jFreeMemory < RUNTIME_USED_WARM_LIMIT || (this.mCurrStopCount & 7) != 1) && jFreeMemory < RUNTIME_USED_LIMIT) {
+            jCountInstancesOfClass = 0;
         } else {
-            j = VMDebug.countInstancesOfClass(View.class, false);
-            if (j > VIEW_COUNT_WARM_LIMIT) {
+            jCountInstancesOfClass = VMDebug.countInstancesOfClass(View.class, false);
+            if (jCountInstancesOfClass > VIEW_COUNT_WARM_LIMIT) {
                 z = true;
             }
         }
-        if (j > VIEW_COUNT_LIMIT || (z && freeMemory > RUNTIME_USED_LIMIT)) {
+        if (jCountInstancesOfClass > VIEW_COUNT_LIMIT || (z && jFreeMemory > RUNTIME_USED_LIMIT)) {
             try {
                 ActivityManager.getService().reportAbnormalUsage(Process.myPid(), 1);
             } catch (RemoteException e) {
                 Slog.e(TAG, "ViewCount: report abnormal resource usage: " + e.getMessage());
             }
-            Slog.e(TAG, "report abnormal resource usage: PID " + Process.myPid() + " view count : " + j + " memory usage : " + freeMemory + " stop count : " + this.mCurrStopCount);
+            Slog.e(TAG, "report abnormal resource usage: PID " + Process.myPid() + " view count : " + jCountInstancesOfClass + " memory usage : " + jFreeMemory + " stop count : " + this.mCurrStopCount);
         }
     }
 }

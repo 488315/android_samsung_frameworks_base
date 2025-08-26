@@ -2,7 +2,6 @@ package com.android.systemui.qs.tiles.impl.modes.domain.model;
 
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ModesDndTileModel {
     public final String extraStatus;
@@ -25,9 +24,9 @@ public final class ModesDndTileModel {
     }
 
     public final int hashCode() {
-        int hashCode = Boolean.hashCode(this.isActivated) * 31;
+        int iHashCode = Boolean.hashCode(this.isActivated) * 31;
         String str = this.extraStatus;
-        return hashCode + (str == null ? 0 : str.hashCode());
+        return iHashCode + (str == null ? 0 : str.hashCode());
     }
 
     public final String toString() {

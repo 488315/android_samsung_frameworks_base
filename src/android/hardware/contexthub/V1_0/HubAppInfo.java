@@ -38,13 +38,13 @@ public final class HubAppInfo {
 
     public static final ArrayList<HubAppInfo> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<HubAppInfo> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 40, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 40, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             HubAppInfo hubAppInfo = new HubAppInfo();
-            hubAppInfo.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 40);
+            hubAppInfo.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 40);
             arrayList.add(hubAppInfo);
         }
         return arrayList;
@@ -54,11 +54,11 @@ public final class HubAppInfo {
         this.appId = hwBlob.getInt64(j);
         this.version = hwBlob.getInt32(8 + j);
         int int32 = hwBlob.getInt32(24 + j);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 16, hwBlob.handle(), j + 16, true);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 16, hwBlob.handle(), j + 16, true);
         this.memUsage.clear();
         for (int i = 0; i < int32; i++) {
             MemRange memRange = new MemRange();
-            memRange.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 16);
+            memRange.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 16);
             this.memUsage.add(memRange);
         }
         this.enabled = hwBlob.getBool(j + 32);

@@ -33,7 +33,7 @@ public class ResolverAppPredictorCallback {
         return new Consumer() { // from class: com.android.internal.app.ResolverAppPredictorCallback$$ExternalSyntheticLambda2
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                ResolverAppPredictorCallback.this.notifyCallback((List) obj);
+                this.f$0.notifyCallback((List) obj);
             }
         };
     }
@@ -42,7 +42,7 @@ public class ResolverAppPredictorCallback {
         return new AppPredictor.Callback() { // from class: com.android.internal.app.ResolverAppPredictorCallback$$ExternalSyntheticLambda1
             @Override // android.app.prediction.AppPredictor.Callback
             public final void onTargetsAvailable(List list) {
-                ResolverAppPredictorCallback.this.notifyCallback(list);
+                this.f$0.notifyCallback(list);
             }
         };
     }

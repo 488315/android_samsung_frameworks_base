@@ -21,11 +21,11 @@ public class RingtonePreference extends Preference implements PreferenceManager.
 
     public RingtonePreference(Context context, AttributeSet attributeSet, int i, int i2) {
         super(context, attributeSet, i, i2);
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.RingtonePreference, i, i2);
-        this.mRingtoneType = obtainStyledAttributes.getInt(0, 1);
-        this.mShowDefault = obtainStyledAttributes.getBoolean(1, true);
-        this.mShowSilent = obtainStyledAttributes.getBoolean(2, true);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.RingtonePreference, i, i2);
+        this.mRingtoneType = typedArrayObtainStyledAttributes.getInt(0, 1);
+        this.mShowDefault = typedArrayObtainStyledAttributes.getBoolean(1, true);
+        this.mShowSilent = typedArrayObtainStyledAttributes.getBoolean(2, true);
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     public RingtonePreference(Context context, AttributeSet attributeSet, int i) {

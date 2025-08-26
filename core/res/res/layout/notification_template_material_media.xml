@@ -24,7 +24,7 @@
             <include android:id="@id/action2" layout="@layout/notification_material_media_action" />
         </LinearLayout>
         <FrameLayout android:id="@id/expand_button_touch_container" android:layout_width="wrap_content" android:layout_height="fill_parent" android:minWidth="@dimen/notification_content_margin_end">
-            <include android:layout_gravity="end|center|top" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/notification_expand_button_margin_top" android:layout_marginStart="@dimen/notification_expand_button_margin_start" android:layout_marginEnd="@dimen/notification_expand_button_margin_end" layout="@layout/notification_expand_button" />
+            <include android:layout_gravity="end|top" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/notification_expand_button_margin_top" android:layout_marginStart="@dimen/notification_expand_button_margin_start" android:layout_marginEnd="@dimen/notification_expand_button_margin_end" layout="@layout/notification_expand_button" />
         </FrameLayout>
         <ViewStub android:id="@id/notification_media_seekbar_container" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true" />
     </LinearLayout>

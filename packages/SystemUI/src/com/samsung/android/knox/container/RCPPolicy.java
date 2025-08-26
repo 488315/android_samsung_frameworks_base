@@ -8,7 +8,6 @@ import com.samsung.android.knox.container.IRCPPolicy;
 import com.samsung.android.knox.license.EnterpriseLicenseManager;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class RCPPolicy {
     public static final String CALENDAR = "Calendar";
@@ -26,18 +25,14 @@ public class RCPPolicy {
     }
 
     public static synchronized IRCPPolicy getRCPPolicyService() {
-        IRCPPolicy iRCPPolicy;
-        synchronized (RCPPolicy.class) {
-            try {
-                if (gRCPService == null) {
-                    gRCPService = IRCPPolicy.Stub.asInterface(ServiceManager.getService("mum_container_rcp_policy"));
-                }
-                iRCPPolicy = gRCPService;
-            } catch (Throwable th) {
-                throw th;
+        try {
+            if (gRCPService == null) {
+                gRCPService = IRCPPolicy.Stub.asInterface(ServiceManager.getService("mum_container_rcp_policy"));
             }
+        } catch (Throwable th) {
+            throw th;
         }
-        return iRCPPolicy;
+        return gRCPService;
     }
 
     public boolean allowMoveAppsToContainer(boolean z) {
@@ -88,18 +83,18 @@ public class RCPPolicy {
     public boolean allowShareClipboardDataToContainer(boolean z) {
         EnterpriseLicenseManager.log(this.mContextInfo, "RCPPolicy.allowShareClipboardDataToContainer " + z);
         IRCPPolicy rCPPolicyService = getRCPPolicyService();
-        boolean z2 = false;
+        boolean zAllowShareClipboardDataToContainer = false;
         if (rCPPolicyService == null) {
             Log.d(TAG, " RCP policy service is not yet ready!!!");
             return false;
         }
         try {
-            z2 = rCPPolicyService.allowShareClipboardDataToContainer(this.mContextInfo, z);
-            Log.d(TAG, "retVal after MUM is " + z2);
-            return z2;
+            zAllowShareClipboardDataToContainer = rCPPolicyService.allowShareClipboardDataToContainer(this.mContextInfo, z);
+            Log.d(TAG, "retVal after MUM is " + zAllowShareClipboardDataToContainer);
+            return zAllowShareClipboardDataToContainer;
         } catch (RemoteException e) {
             RCPPolicy$$ExternalSyntheticOutline0.m(e, new StringBuilder("Failed talking with RCP policy service: "), TAG);
-            return z2;
+            return zAllowShareClipboardDataToContainer;
         }
     }
 
@@ -218,18 +213,18 @@ public class RCPPolicy {
 
     public boolean isShareClipboardDataToContainerAllowed() {
         IRCPPolicy rCPPolicyService = getRCPPolicyService();
-        boolean z = false;
+        boolean zIsShareClipboardDataToContainerAllowed = false;
         if (rCPPolicyService == null) {
             Log.d(TAG, " RCP policy service is not yet ready!!!");
             return false;
         }
         try {
-            z = rCPPolicyService.isShareClipboardDataToContainerAllowed(this.mContextInfo);
-            Log.d(TAG, "retVal after MUM is " + z);
-            return z;
+            zIsShareClipboardDataToContainerAllowed = rCPPolicyService.isShareClipboardDataToContainerAllowed(this.mContextInfo);
+            Log.d(TAG, "retVal after MUM is " + zIsShareClipboardDataToContainerAllowed);
+            return zIsShareClipboardDataToContainerAllowed;
         } catch (RemoteException e) {
             RCPPolicy$$ExternalSyntheticOutline0.m(e, new StringBuilder("Failed talking with RCP policy service: "), TAG);
-            return z;
+            return zIsShareClipboardDataToContainerAllowed;
         }
     }
 

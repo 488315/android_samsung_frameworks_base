@@ -27,9 +27,7 @@ import com.android.systemui.kairos.internal.store.SingletonMapK;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
-import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class StateKt$$ExternalSyntheticLambda1 implements Function1 {
     public final /* synthetic */ int $r8$classId;
@@ -44,7 +42,7 @@ public final /* synthetic */ class StateKt$$ExternalSyntheticLambda1 implements 
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
         switch (this.$r8$classId) {
             case 0:
                 StateKt$$ExternalSyntheticLambda0 stateKt$$ExternalSyntheticLambda0 = new StateKt$$ExternalSyntheticLambda0(this.f$2, 1);
@@ -66,7 +64,7 @@ public final /* synthetic */ class StateKt$$ExternalSyntheticLambda1 implements 
                 StateKt$$ExternalSyntheticLambda0 stateKt$$ExternalSyntheticLambda02 = new StateKt$$ExternalSyntheticLambda0(this.f$2, 2);
                 final Function2 function22 = this.f$3;
                 final int i2 = 1;
-                final StateImpl mapStateImpl = StateImplKt.mapStateImpl(stateKt$$ExternalSyntheticLambda02, null, "flatMap", new Function2() { // from class: com.android.systemui.kairos.StateKt$$ExternalSyntheticLambda4
+                final StateImpl stateImplMapStateImpl = StateImplKt.mapStateImpl(stateKt$$ExternalSyntheticLambda02, null, "flatMap", new Function2() { // from class: com.android.systemui.kairos.StateKt$$ExternalSyntheticLambda4
                     @Override // kotlin.jvm.functions.Function2
                     public final Object invoke(Object obj2, Object obj3) {
                         EvalScope evalScope = (EvalScope) obj2;
@@ -81,55 +79,55 @@ public final /* synthetic */ class StateKt$$ExternalSyntheticLambda1 implements 
                 final Function1 function1 = new Function1() { // from class: com.android.systemui.kairos.internal.StateImplKt$flatMapStateImpl$1
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj2) {
-                        return StateImpl.this;
+                    public final Object mo781invoke(Object obj2) {
+                        return stateImplMapStateImpl;
                     }
                 };
                 final StateImplKt$$ExternalSyntheticLambda0 stateImplKt$$ExternalSyntheticLambda0 = new StateImplKt$$ExternalSyntheticLambda0(0);
                 final StateImplKt$$ExternalSyntheticLambda1 stateImplKt$$ExternalSyntheticLambda1 = new StateImplKt$$ExternalSyntheticLambda1(new EventsImpl() { // from class: com.android.systemui.kairos.internal.StateImplKt$flattenStateImpl$$inlined$mapImpl$1
                     @Override // com.android.systemui.kairos.internal.EventsImpl
                     public final ActivationResult activate(EvalScope evalScope, Schedulable schedulable) {
-                        ActivationResult activate = ((StateImpl) function1.mo779invoke(evalScope)).changes.activate(evalScope, schedulable);
-                        if (activate == null) {
+                        ActivationResult activationResultActivate = ((StateImpl) function1.mo781invoke(evalScope)).changes.activate(evalScope, schedulable);
+                        if (activationResultActivate == null) {
                             return null;
                         }
-                        NodeConnection nodeConnection = activate.connection;
-                        return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, Function3.this), nodeConnection.schedulerUpstream), activate.needsEval);
+                        NodeConnection nodeConnection = activationResultActivate.connection;
+                        return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, stateImplKt$$ExternalSyntheticLambda0), nodeConnection.schedulerUpstream), activationResultActivate.needsEval);
                     }
                 }, 0);
                 final EventsImpl eventsImpl = new EventsImpl() { // from class: com.android.systemui.kairos.internal.StateImplKt$flattenStateImpl$$inlined$mapImpl$2
                     @Override // com.android.systemui.kairos.internal.EventsImpl
                     public final ActivationResult activate(EvalScope evalScope, Schedulable schedulable) {
-                        ActivationResult activate = ((StateImpl) function1.mo779invoke(evalScope)).changes.activate(evalScope, schedulable);
-                        if (activate == null) {
+                        ActivationResult activationResultActivate = ((StateImpl) function1.mo781invoke(evalScope)).changes.activate(evalScope, schedulable);
+                        if (activationResultActivate == null) {
                             return null;
                         }
-                        NodeConnection nodeConnection = activate.connection;
-                        return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, Function3.this), nodeConnection.schedulerUpstream), activate.needsEval);
+                        NodeConnection nodeConnection = activationResultActivate.connection;
+                        return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, stateImplKt$$ExternalSyntheticLambda1), nodeConnection.schedulerUpstream), activationResultActivate.needsEval);
                     }
                 };
                 MuxPromptKt$switchPromptImplSingle$$inlined$mapImpl$1 muxPromptKt$switchPromptImplSingle$$inlined$mapImpl$1 = new MuxPromptKt$switchPromptImplSingle$$inlined$mapImpl$1(MuxPromptKt$switchPromptImplSingle$2.INSTANCE, new MuxLifecycle(new MuxLifecycleState.Inactive(new MuxPromptActivator(null, new Function1() { // from class: com.android.systemui.kairos.internal.StateImplKt$flattenStateImpl$$inlined$switchPromptImplSingle$1
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj2) {
+                    public final Object mo781invoke(Object obj2) {
                         EvalScope evalScope = (EvalScope) obj2;
-                        return new Single(((StateImpl) ((StateImpl) Function1.this.mo779invoke(evalScope)).store.getCurrentWithEpoch(evalScope).getFirst()).changes).getEntries();
+                        return new Single(((StateImpl) ((StateImpl) function1.mo781invoke(evalScope)).store.getCurrentWithEpoch(evalScope).getFirst()).changes).getEntries();
                     }
                 }, new SingletonMapK.Factory(), new Function1() { // from class: com.android.systemui.kairos.internal.StateImplKt$flattenStateImpl$$inlined$switchPromptImplSingle$2
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj2) {
+                    public final Object mo781invoke(Object obj2) {
                         final MuxPromptKt$switchPromptImplSingle$switchPromptImpl$2$1 muxPromptKt$switchPromptImplSingle$switchPromptImpl$2$1 = MuxPromptKt$switchPromptImplSingle$switchPromptImpl$2$1.INSTANCE;
-                        final EventsImpl eventsImpl2 = EventsImpl.this;
+                        final EventsImpl eventsImpl2 = eventsImpl;
                         return new EventsImpl() { // from class: com.android.systemui.kairos.internal.StateImplKt$flattenStateImpl$$inlined$switchPromptImplSingle$2.1
                             @Override // com.android.systemui.kairos.internal.EventsImpl
                             public final ActivationResult activate(EvalScope evalScope, Schedulable schedulable) {
-                                ActivationResult activate = eventsImpl2.activate(evalScope, schedulable);
-                                if (activate == null) {
+                                ActivationResult activationResultActivate = eventsImpl2.activate(evalScope, schedulable);
+                                if (activationResultActivate == null) {
                                     return null;
                                 }
-                                NodeConnection nodeConnection = activate.connection;
-                                return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, Function3.this), nodeConnection.schedulerUpstream), activate.needsEval);
+                                NodeConnection nodeConnection = activationResultActivate.connection;
+                                return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, muxPromptKt$switchPromptImplSingle$switchPromptImpl$2$1), nodeConnection.schedulerUpstream), activationResultActivate.needsEval);
                             }
                         };
                     }
@@ -143,12 +141,12 @@ public final /* synthetic */ class StateKt$$ExternalSyntheticLambda1 implements 
                 return new StateImpl("map", "map", new EventsImpl() { // from class: com.android.systemui.kairos.internal.StateImplKt$mapStateImplCheap$$inlined$mapImpl$1
                     @Override // com.android.systemui.kairos.internal.EventsImpl
                     public final ActivationResult activate(EvalScope evalScope, Schedulable schedulable) {
-                        ActivationResult activate = ((StateImpl) init$frameworks__base__packages__SystemUI__utils__kairos__android_common__kairos.connect(evalScope)).changes.activate(evalScope, schedulable);
-                        if (activate == null) {
+                        ActivationResult activationResultActivate = ((StateImpl) init$frameworks__base__packages__SystemUI__utils__kairos__android_common__kairos.connect(evalScope)).changes.activate(evalScope, schedulable);
+                        if (activationResultActivate == null) {
                             return null;
                         }
-                        NodeConnection nodeConnection = activate.connection;
-                        return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, Function3.this), nodeConnection.schedulerUpstream), activate.needsEval);
+                        NodeConnection nodeConnection = activationResultActivate.connection;
+                        return new ActivationResult(new NodeConnection(new MapNode(nodeConnection.directUpstream, stateImplKt$$ExternalSyntheticLambda12), nodeConnection.schedulerUpstream), activationResultActivate.needsEval);
                     }
                 }, new DerivedMapCheap(init$frameworks__base__packages__SystemUI__utils__kairos__android_common__kairos, stateKt$$ExternalSyntheticLambda8));
         }

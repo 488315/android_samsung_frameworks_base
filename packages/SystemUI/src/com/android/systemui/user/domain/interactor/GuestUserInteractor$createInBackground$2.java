@@ -11,7 +11,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class GuestUserInteractor$createInBackground$2 extends SuspendLambda implements Function2 {
     int label;
@@ -43,9 +42,9 @@ final class GuestUserInteractor$createInBackground$2 extends SuspendLambda imple
         int i = -10000;
         try {
             GuestUserInteractor guestUserInteractor = this.this$0;
-            UserInfo createGuest = guestUserInteractor.manager.createGuest(guestUserInteractor.applicationContext);
-            if (createGuest != null) {
-                i = createGuest.id;
+            UserInfo userInfoCreateGuest = guestUserInteractor.manager.createGuest(guestUserInteractor.applicationContext);
+            if (userInfoCreateGuest != null) {
+                i = userInfoCreateGuest.id;
             } else {
                 Log.e("GuestUserInteractor", "Couldn't create guest, most likely because there already exists one!");
             }

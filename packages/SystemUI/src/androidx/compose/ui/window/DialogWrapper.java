@@ -25,7 +25,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 import kotlin.math.MathKt__MathJVMKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class DialogWrapper extends ComponentDialog {
     public final View composeView;
@@ -33,7 +32,6 @@ final class DialogWrapper extends ComponentDialog {
     public Function0 onDismissRequest;
     public DialogProperties properties;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -69,7 +67,7 @@ final class DialogWrapper extends ComponentDialog {
         DialogLayout dialogLayout = new DialogLayout(getContext(), window);
         dialogLayout.setTag(R.id.compose_view_saveable_id_tag, "Dialog:" + uuid);
         dialogLayout.setClipChildren(false);
-        dialogLayout.setElevation(density.mo57toPx0680j_4(f));
+        dialogLayout.setElevation(density.mo58toPx0680j_4(f));
         dialogLayout.setOutlineProvider(new ViewOutlineProvider() { // from class: androidx.compose.ui.window.DialogWrapper$1$2
             @Override // android.view.ViewOutlineProvider
             public final void getOutline(View view2, Outline outline) {
@@ -91,7 +89,7 @@ final class DialogWrapper extends ComponentDialog {
         OnBackPressedDispatcherKt.addCallback$default(this.onBackPressedDispatcher, this, new Function1() { // from class: androidx.compose.ui.window.DialogWrapper.2
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 DialogWrapper dialogWrapper = DialogWrapper.this;
                 if (dialogWrapper.properties.dismissOnBackPress) {
                     dialogWrapper.onDismissRequest.invoke();
@@ -128,10 +126,10 @@ final class DialogWrapper extends ComponentDialog {
     @Override // android.app.Dialog
     public final boolean onTouchEvent(MotionEvent motionEvent) {
         View childAt;
-        int roundToInt;
-        boolean onTouchEvent = super.onTouchEvent(motionEvent);
+        int iRoundToInt;
+        boolean zOnTouchEvent = super.onTouchEvent(motionEvent);
         if (!this.properties.dismissOnClickOutside) {
-            return onTouchEvent;
+            return zOnTouchEvent;
         }
         DialogLayout dialogLayout = this.dialogLayout;
         dialogLayout.getClass();
@@ -143,9 +141,9 @@ final class DialogWrapper extends ComponentDialog {
                 int width = childAt.getWidth() + left;
                 int top = childAt.getTop() + dialogLayout.getTop();
                 int height = childAt.getHeight() + top;
-                int roundToInt2 = MathKt__MathJVMKt.roundToInt(motionEvent.getX());
-                if (left <= roundToInt2 && roundToInt2 <= width && top <= (roundToInt = MathKt__MathJVMKt.roundToInt(motionEvent.getY())) && roundToInt <= height) {
-                    return onTouchEvent;
+                int iRoundToInt2 = MathKt__MathJVMKt.roundToInt(motionEvent.getX());
+                if (left <= iRoundToInt2 && iRoundToInt2 <= width && top <= (iRoundToInt = MathKt__MathJVMKt.roundToInt(motionEvent.getY())) && iRoundToInt <= height) {
+                    return zOnTouchEvent;
                 }
             }
         }
@@ -158,18 +156,18 @@ final class DialogWrapper extends ComponentDialog {
         this.onDismissRequest = function0;
         this.properties = dialogProperties;
         SecureFlagPolicy secureFlagPolicy = dialogProperties.securePolicy;
-        boolean isFlagSecureEnabled = AndroidPopup_androidKt.isFlagSecureEnabled(this.composeView);
+        boolean zIsFlagSecureEnabled = AndroidPopup_androidKt.isFlagSecureEnabled(this.composeView);
         int i2 = SecureFlagPolicy_androidKt$WhenMappings.$EnumSwitchMapping$0[secureFlagPolicy.ordinal()];
         if (i2 == 1) {
-            isFlagSecureEnabled = false;
+            zIsFlagSecureEnabled = false;
         } else if (i2 == 2) {
-            isFlagSecureEnabled = true;
+            zIsFlagSecureEnabled = true;
         } else if (i2 != 3) {
             throw new NoWhenBranchMatchedException();
         }
         Window window = getWindow();
         window.getClass();
-        window.setFlags(isFlagSecureEnabled ? 8192 : -8193, 8192);
+        window.setFlags(zIsFlagSecureEnabled ? 8192 : -8193, 8192);
         DialogLayout dialogLayout = this.dialogLayout;
         int i3 = WhenMappings.$EnumSwitchMapping$0[layoutDirection.ordinal()];
         if (i3 == 1) {

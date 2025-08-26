@@ -5,6 +5,7 @@ import android.os.PackageTagsList;
 import android.os.Parcelable;
 import android.util.ArrayMap;
 import android.util.ArraySet;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -19,13 +20,13 @@ public final class PackageTagsList implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public PackageTagsList createFromParcel(Parcel parcel) {
-            int readInt = parcel.readInt();
-            ArrayMap arrayMap = new ArrayMap(readInt);
-            int i = 0;
+            int i = parcel.readInt();
+            ArrayMap arrayMap = new ArrayMap(i);
+            int i2 = 0;
             while (true) {
-                if (i < readInt) {
+                if (i2 < i) {
                     arrayMap.append(parcel.readString8(), parcel.readArraySet(null));
-                    i++;
+                    i2++;
                 } else {
                     return new PackageTagsList(arrayMap);
                 }
@@ -94,8 +95,8 @@ public final class PackageTagsList implements Parcelable {
                 return false;
             }
             if (!arraySet.isEmpty()) {
-                ArraySet<String> valueAt = packageTagsList.mPackageTags.valueAt(i);
-                if (valueAt.isEmpty() || !arraySet.containsAll(valueAt)) {
+                ArraySet<String> arraySetValueAt = packageTagsList.mPackageTags.valueAt(i);
+                if (arraySetValueAt.isEmpty() || !arraySet.containsAll(arraySetValueAt)) {
                     return false;
                 }
             }
@@ -109,7 +110,7 @@ public final class PackageTagsList implements Parcelable {
     }
 
     @Override // android.os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
         int size = this.mPackageTags.size();
         parcel.writeInt(size);
         for (int i2 = 0; i2 < size; i2++) {
@@ -139,22 +140,22 @@ public final class PackageTagsList implements Parcelable {
     public void dump(PrintWriter printWriter) {
         int size = this.mPackageTags.size();
         for (int i = 0; i < size; i++) {
-            String keyAt = this.mPackageTags.keyAt(i);
-            printWriter.print(keyAt);
+            String strKeyAt = this.mPackageTags.keyAt(i);
+            printWriter.print(strKeyAt);
             printWriter.print(NavigationBarInflaterView.SIZE_MOD_START);
             int size2 = this.mPackageTags.valueAt(i).size();
             if (size2 == 0) {
                 printWriter.print("*");
             } else {
                 for (int i2 = 0; i2 < size2; i2++) {
-                    String valueAt = this.mPackageTags.valueAt(i).valueAt(i2);
+                    String strValueAt = this.mPackageTags.valueAt(i).valueAt(i2);
                     if (i2 > 0) {
                         printWriter.print(", ");
                     }
-                    if (valueAt != null && valueAt.startsWith(keyAt)) {
-                        printWriter.print(valueAt.substring(keyAt.length()));
+                    if (strValueAt != null && strValueAt.startsWith(strKeyAt)) {
+                        printWriter.print(strValueAt.substring(strKeyAt.length()));
                     } else {
-                        printWriter.print(valueAt);
+                        printWriter.print(strValueAt);
                     }
                 }
             }

@@ -9,7 +9,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function4;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class CommunalTransitionViewModel$recentsBackgroundColor$1 extends SuspendLambda implements Function4 {
     /* synthetic */ Object L$0;
@@ -23,9 +22,9 @@ final class CommunalTransitionViewModel$recentsBackgroundColor$1 extends Suspend
 
     @Override // kotlin.jvm.functions.Function4
     public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4) {
-        boolean booleanValue = ((Boolean) obj).booleanValue();
+        boolean zBooleanValue = ((Boolean) obj).booleanValue();
         CommunalTransitionViewModel$recentsBackgroundColor$1 communalTransitionViewModel$recentsBackgroundColor$1 = new CommunalTransitionViewModel$recentsBackgroundColor$1((Continuation) obj4);
-        communalTransitionViewModel$recentsBackgroundColor$1.Z$0 = booleanValue;
+        communalTransitionViewModel$recentsBackgroundColor$1.Z$0 = zBooleanValue;
         communalTransitionViewModel$recentsBackgroundColor$1.L$0 = (Color) obj2;
         communalTransitionViewModel$recentsBackgroundColor$1.L$1 = (CommunalBackgroundType) obj3;
         return communalTransitionViewModel$recentsBackgroundColor$1.invokeSuspend(Unit.INSTANCE);

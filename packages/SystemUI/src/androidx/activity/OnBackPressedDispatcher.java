@@ -14,9 +14,9 @@ import kotlin.collections.ArrayDeque;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
+import kotlin.jvm.internal.FunctionReferenceImpl;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class OnBackPressedDispatcher {
     public boolean backInvokedCallbackRegistered;
@@ -28,7 +28,6 @@ public final class OnBackPressedDispatcher {
     public final ArrayDeque onBackPressedCallbacks;
     public final Consumer onHasEnabledCallbacksChanged;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Api33Impl {
         public static final Api33Impl INSTANCE = new Api33Impl();
 
@@ -36,7 +35,6 @@ public final class OnBackPressedDispatcher {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Api34Impl {
         public static final Api34Impl INSTANCE = new Api34Impl();
 
@@ -44,7 +42,6 @@ public final class OnBackPressedDispatcher {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class LifecycleOnBackPressedCancellable implements LifecycleEventObserver, Cancellable {
         public OnBackPressedCancellable currentCancellable;
         public final Lifecycle lifecycle;
@@ -94,7 +91,6 @@ public final class OnBackPressedDispatcher {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class OnBackPressedCancellable implements Cancellable {
         public final OnBackPressedCallback onBackPressedCallback;
 
@@ -122,6 +118,20 @@ public final class OnBackPressedDispatcher {
         }
     }
 
+    /* renamed from: androidx.activity.OnBackPressedDispatcher$addCallback$1, reason: invalid class name and case insensitive filesystem */
+    final /* synthetic */ class C06711 extends FunctionReferenceImpl implements Function0 {
+        public C06711(Object obj) {
+            super(0, obj, OnBackPressedDispatcher.class, "updateEnabledCallbacks", "updateEnabledCallbacks()V", 0);
+        }
+
+        @Override // kotlin.jvm.functions.Function0
+        public final Object invoke() {
+            ((OnBackPressedDispatcher) this.receiver).updateEnabledCallbacks();
+            return Unit.INSTANCE;
+        }
+    }
+
+    /* JADX WARN: Multi-variable type inference failed */
     public OnBackPressedDispatcher() {
         this(null, 1, 0 == true ? 1 : 0);
     }
@@ -133,7 +143,7 @@ public final class OnBackPressedDispatcher {
         }
         onBackPressedCallback.cancellables.add(new LifecycleOnBackPressedCancellable(lifecycle, onBackPressedCallback));
         updateEnabledCallbacks();
-        onBackPressedCallback.enabledChangedCallback = new OnBackPressedDispatcher$addCallback$1(this);
+        onBackPressedCallback.enabledChangedCallback = new C06711(this);
     }
 
     /* JADX WARN: Multi-variable type inference failed */
@@ -141,27 +151,27 @@ public final class OnBackPressedDispatcher {
     /* JADX WARN: Type inference failed for: r2v3 */
     /* JADX WARN: Type inference failed for: r2v4, types: [java.lang.Object] */
     public final void onBackCancelled() {
-        OnBackPressedCallback onBackPressedCallback;
-        OnBackPressedCallback onBackPressedCallback2 = this.inProgressCallback;
-        if (onBackPressedCallback2 == null) {
+        OnBackPressedCallback onBackPressedCallbackPrevious;
+        OnBackPressedCallback onBackPressedCallback = this.inProgressCallback;
+        if (onBackPressedCallback == null) {
             ArrayDeque arrayDeque = this.onBackPressedCallbacks;
             ListIterator listIterator = arrayDeque.listIterator(arrayDeque.size());
             while (true) {
                 if (!listIterator.hasPrevious()) {
-                    onBackPressedCallback = 0;
+                    onBackPressedCallbackPrevious = 0;
                     break;
                 } else {
-                    onBackPressedCallback = listIterator.previous();
-                    if (((OnBackPressedCallback) onBackPressedCallback).isEnabled) {
+                    onBackPressedCallbackPrevious = listIterator.previous();
+                    if (((OnBackPressedCallback) onBackPressedCallbackPrevious).isEnabled) {
                         break;
                     }
                 }
             }
-            onBackPressedCallback2 = onBackPressedCallback;
+            onBackPressedCallback = onBackPressedCallbackPrevious;
         }
         this.inProgressCallback = null;
-        if (onBackPressedCallback2 != null) {
-            onBackPressedCallback2.handleOnBackCancelled();
+        if (onBackPressedCallback != null) {
+            onBackPressedCallback.handleOnBackCancelled();
         }
     }
 
@@ -170,27 +180,27 @@ public final class OnBackPressedDispatcher {
     /* JADX WARN: Type inference failed for: r2v3 */
     /* JADX WARN: Type inference failed for: r2v4, types: [java.lang.Object] */
     public final void onBackPressed() {
-        OnBackPressedCallback onBackPressedCallback;
-        OnBackPressedCallback onBackPressedCallback2 = this.inProgressCallback;
-        if (onBackPressedCallback2 == null) {
+        OnBackPressedCallback onBackPressedCallbackPrevious;
+        OnBackPressedCallback onBackPressedCallback = this.inProgressCallback;
+        if (onBackPressedCallback == null) {
             ArrayDeque arrayDeque = this.onBackPressedCallbacks;
             ListIterator listIterator = arrayDeque.listIterator(arrayDeque.getSize());
             while (true) {
                 if (!listIterator.hasPrevious()) {
-                    onBackPressedCallback = 0;
+                    onBackPressedCallbackPrevious = 0;
                     break;
                 } else {
-                    onBackPressedCallback = listIterator.previous();
-                    if (((OnBackPressedCallback) onBackPressedCallback).isEnabled) {
+                    onBackPressedCallbackPrevious = listIterator.previous();
+                    if (((OnBackPressedCallback) onBackPressedCallbackPrevious).isEnabled) {
                         break;
                     }
                 }
             }
-            onBackPressedCallback2 = onBackPressedCallback;
+            onBackPressedCallback = onBackPressedCallbackPrevious;
         }
         this.inProgressCallback = null;
-        if (onBackPressedCallback2 != null) {
-            onBackPressedCallback2.handleOnBackPressed();
+        if (onBackPressedCallback != null) {
+            onBackPressedCallback.handleOnBackPressed();
             return;
         }
         Runnable runnable = this.fallbackOnBackPressed;
@@ -258,22 +268,22 @@ public final class OnBackPressedDispatcher {
         final Function1 function1 = new Function1() { // from class: androidx.activity.OnBackPressedDispatcher.1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                Object obj2;
+            public final Object mo781invoke(Object obj) {
+                Object objPrevious;
                 OnBackPressedDispatcher onBackPressedDispatcher = OnBackPressedDispatcher.this;
                 ArrayDeque arrayDeque = onBackPressedDispatcher.onBackPressedCallbacks;
                 ListIterator listIterator = arrayDeque.listIterator(arrayDeque.getSize());
                 while (true) {
                     if (!listIterator.hasPrevious()) {
-                        obj2 = null;
+                        objPrevious = null;
                         break;
                     }
-                    obj2 = listIterator.previous();
-                    if (((OnBackPressedCallback) obj2).isEnabled) {
+                    objPrevious = listIterator.previous();
+                    if (((OnBackPressedCallback) objPrevious).isEnabled) {
                         break;
                     }
                 }
-                OnBackPressedCallback onBackPressedCallback = (OnBackPressedCallback) obj2;
+                OnBackPressedCallback onBackPressedCallback = (OnBackPressedCallback) objPrevious;
                 if (onBackPressedDispatcher.inProgressCallback != null) {
                     onBackPressedDispatcher.onBackCancelled();
                 }
@@ -287,8 +297,8 @@ public final class OnBackPressedDispatcher {
         final Function1 function12 = new Function1() { // from class: androidx.activity.OnBackPressedDispatcher.2
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                Object obj2;
+            public final Object mo781invoke(Object obj) {
+                Object objPrevious;
                 BackEventCompat backEventCompat = (BackEventCompat) obj;
                 OnBackPressedDispatcher onBackPressedDispatcher = OnBackPressedDispatcher.this;
                 OnBackPressedCallback onBackPressedCallback = onBackPressedDispatcher.inProgressCallback;
@@ -297,15 +307,15 @@ public final class OnBackPressedDispatcher {
                     ListIterator listIterator = arrayDeque.listIterator(arrayDeque.getSize());
                     while (true) {
                         if (!listIterator.hasPrevious()) {
-                            obj2 = null;
+                            objPrevious = null;
                             break;
                         }
-                        obj2 = listIterator.previous();
-                        if (((OnBackPressedCallback) obj2).isEnabled) {
+                        objPrevious = listIterator.previous();
+                        if (((OnBackPressedCallback) objPrevious).isEnabled) {
                             break;
                         }
                     }
-                    onBackPressedCallback = (OnBackPressedCallback) obj2;
+                    onBackPressedCallback = (OnBackPressedCallback) objPrevious;
                 }
                 if (onBackPressedCallback != null) {
                     onBackPressedCallback.handleOnBackProgressed(backEventCompat);
@@ -341,12 +351,12 @@ public final class OnBackPressedDispatcher {
 
             @Override // android.window.OnBackAnimationCallback
             public final void onBackProgressed(BackEvent backEvent) {
-                function12.mo779invoke(new BackEventCompat(backEvent));
+                function12.mo781invoke(new BackEventCompat(backEvent));
             }
 
             @Override // android.window.OnBackAnimationCallback
             public final void onBackStarted(BackEvent backEvent) {
-                Function1.this.mo779invoke(new BackEventCompat(backEvent));
+                function1.mo781invoke(new BackEventCompat(backEvent));
             }
         };
     }

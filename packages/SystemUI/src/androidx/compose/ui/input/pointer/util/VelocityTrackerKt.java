@@ -7,16 +7,15 @@ import androidx.compose.ui.internal.InlineClassHelperKt;
 import java.util.List;
 import kotlin.collections.EmptyList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class VelocityTrackerKt {
     public static final void addPointerInputChange(VelocityTracker velocityTracker, PointerInputChange pointerInputChange) {
         if (PointerEventKt.changedToDownIgnoreConsumed(pointerInputChange)) {
             velocityTracker.resetTracking();
         }
-        boolean changedToUpIgnoreConsumed = PointerEventKt.changedToUpIgnoreConsumed(pointerInputChange);
+        boolean zChangedToUpIgnoreConsumed = PointerEventKt.changedToUpIgnoreConsumed(pointerInputChange);
         long j = pointerInputChange.uptimeMillis;
-        if (!changedToUpIgnoreConsumed) {
+        if (!zChangedToUpIgnoreConsumed) {
             List list = pointerInputChange._historical;
             if (list == null) {
                 list = EmptyList.INSTANCE;
@@ -24,9 +23,9 @@ public abstract class VelocityTrackerKt {
             int size = list.size();
             for (int i = 0; i < size; i++) {
                 HistoricalChange historicalChange = (HistoricalChange) list.get(i);
-                velocityTracker.m599addPositionUv8p0NA(historicalChange.uptimeMillis, historicalChange.originalEventPosition);
+                velocityTracker.m601addPositionUv8p0NA(historicalChange.uptimeMillis, historicalChange.originalEventPosition);
             }
-            velocityTracker.m599addPositionUv8p0NA(j, pointerInputChange.originalEventPosition);
+            velocityTracker.m601addPositionUv8p0NA(j, pointerInputChange.originalEventPosition);
         }
         if (PointerEventKt.changedToUpIgnoreConsumed(pointerInputChange) && j - velocityTracker.lastMoveEventTimeStamp > 40) {
             velocityTracker.resetTracking();
@@ -73,16 +72,16 @@ public abstract class VelocityTrackerKt {
             System.arraycopy(fArr4[i9], 0, fArr7, 0, i);
             for (int i10 = 0; i10 < i9; i10++) {
                 float[] fArr8 = fArr5[i10];
-                float dot = dot(fArr7, fArr8);
+                float fDot = dot(fArr7, fArr8);
                 for (int i11 = 0; i11 < i; i11++) {
-                    fArr7[i11] = fArr7[i11] - (fArr8[i11] * dot);
+                    fArr7[i11] = fArr7[i11] - (fArr8[i11] * fDot);
                 }
             }
-            float sqrt = (float) Math.sqrt(dot(fArr7, fArr7));
-            if (sqrt < 1.0E-6f) {
-                sqrt = 1.0E-6f;
+            float fSqrt = (float) Math.sqrt(dot(fArr7, fArr7));
+            if (fSqrt < 1.0E-6f) {
+                fSqrt = 1.0E-6f;
             }
-            float f = 1.0f / sqrt;
+            float f = 1.0f / fSqrt;
             for (int i12 = 0; i12 < i; i12++) {
                 fArr7[i12] = fArr7[i12] * f;
             }
@@ -95,19 +94,19 @@ public abstract class VelocityTrackerKt {
             i9++;
         }
         for (int i14 = i2; -1 < i14; i14--) {
-            float dot2 = dot(fArr5[i14], fArr2);
+            float fDot2 = dot(fArr5[i14], fArr2);
             float[] fArr10 = fArr6[i14];
             int i15 = i14 + 1;
             if (i15 <= i2) {
                 int i16 = i2;
                 while (true) {
-                    dot2 -= fArr10[i16] * fArr3[i16];
+                    fDot2 -= fArr10[i16] * fArr3[i16];
                     if (i16 != i15) {
                         i16--;
                     }
                 }
             }
-            fArr3[i14] = dot2 / fArr10[i14];
+            fArr3[i14] = fDot2 / fArr10[i14];
         }
     }
 }

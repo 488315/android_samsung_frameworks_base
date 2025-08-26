@@ -5,7 +5,6 @@ import java.util.Iterator;
 import kotlin.collections.AbstractMutableCollection;
 import kotlin.collections.builders.MapBuilder;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class MapBuilderValues extends AbstractMutableCollection implements Collection {
     public final MapBuilder backing;
@@ -55,11 +54,11 @@ public final class MapBuilderValues extends AbstractMutableCollection implements
     public final boolean remove(Object obj) {
         MapBuilder mapBuilder = this.backing;
         mapBuilder.checkIsMutable$kotlin_stdlib();
-        int findValue = mapBuilder.findValue(obj);
-        if (findValue < 0) {
+        int iFindValue = mapBuilder.findValue(obj);
+        if (iFindValue < 0) {
             return false;
         }
-        mapBuilder.removeEntryAt(findValue);
+        mapBuilder.removeEntryAt(iFindValue);
         return true;
     }
 

@@ -4,7 +4,6 @@ import kotlin.math.MathKt__MathJVMKt;
 import kotlin.ranges.RangesKt___RangesKt;
 import kotlin.time.Duration;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class DurationKt {
     public static final long durationOfMillis(long j) {
@@ -34,19 +33,19 @@ public abstract class DurationKt {
 
     public static final long toDuration(long j, DurationUnit durationUnit) {
         DurationUnit durationUnit2 = DurationUnit.NANOSECONDS;
-        long convert = durationUnit.getTimeUnit$kotlin_stdlib().convert(4611686018426999999L, durationUnit2.getTimeUnit$kotlin_stdlib());
-        if ((-convert) <= j && j <= convert) {
+        long jConvert = durationUnit.getTimeUnit$kotlin_stdlib().convert(4611686018426999999L, durationUnit2.getTimeUnit$kotlin_stdlib());
+        if ((-jConvert) <= j && j <= jConvert) {
             return durationOfNanos(durationUnit2.getTimeUnit$kotlin_stdlib().convert(j, durationUnit.getTimeUnit$kotlin_stdlib()));
         }
         return durationOfMillis(RangesKt___RangesKt.coerceIn(DurationUnit.MILLISECONDS.getTimeUnit$kotlin_stdlib().convert(j, durationUnit.getTimeUnit$kotlin_stdlib()), -4611686018427387903L, 4611686018427387903L));
     }
 
     public static final long toDuration(double d, DurationUnit durationUnit) {
-        double convertDurationUnit = DurationUnitKt__DurationUnitJvmKt.convertDurationUnit(d, durationUnit, DurationUnit.NANOSECONDS);
-        if (!Double.isNaN(convertDurationUnit)) {
-            long roundToLong = MathKt__MathJVMKt.roundToLong(convertDurationUnit);
-            if (-4611686018426999999L <= roundToLong && roundToLong < 4611686018427000000L) {
-                return durationOfNanos(roundToLong);
+        double dConvertDurationUnit = DurationUnitKt__DurationUnitJvmKt.convertDurationUnit(d, durationUnit, DurationUnit.NANOSECONDS);
+        if (!Double.isNaN(dConvertDurationUnit)) {
+            long jRoundToLong = MathKt__MathJVMKt.roundToLong(dConvertDurationUnit);
+            if (-4611686018426999999L <= jRoundToLong && jRoundToLong < 4611686018427000000L) {
+                return durationOfNanos(jRoundToLong);
             }
             return durationOfMillisNormalized(MathKt__MathJVMKt.roundToLong(DurationUnitKt__DurationUnitJvmKt.convertDurationUnit(d, durationUnit, DurationUnit.MILLISECONDS)));
         }

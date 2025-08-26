@@ -16,7 +16,6 @@ import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class AudioMirroringDevice implements RouteDevice {
     public final boolean cancelable;
@@ -166,11 +165,11 @@ public final class AudioMirroringDevice implements RouteDevice {
     }
 
     public final int hashCode() {
-        int hashCode = (this.mediaRoute2Info.hashCode() + TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.volumeMax, ReorderTile$$ExternalSyntheticOutline0.m(this.volume, (this.state.hashCode() + ((this.icon.hashCode() + ControlInfo$$ExternalSyntheticOutline0.m(this.id.hashCode() * 31, 31, this.name)) * 31)) * 31, 31), 31), 31, this.selectable), 31, this.deselectable), 31, this.transferable), 31, this.cancelable)) * 31;
+        int iHashCode = (this.mediaRoute2Info.hashCode() + TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.volumeMax, ReorderTile$$ExternalSyntheticOutline0.m(this.volume, (this.state.hashCode() + AudioMirroringDevice$$ExternalSyntheticOutline0.m(this.icon, ControlInfo$$ExternalSyntheticOutline0.m(this.id.hashCode() * 31, 31, this.name), 31)) * 31, 31), 31), 31, this.selectable), 31, this.deselectable), 31, this.transferable), 31, this.cancelable)) * 31;
         RouteListingPreference.Item item = this.preferenceItem;
-        int hashCode2 = (hashCode + (item == null ? 0 : item.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (item == null ? 0 : item.hashCode())) * 31;
         ComponentName componentName = this.linkedItemComponentName;
-        return hashCode2 + (componentName != null ? componentName.hashCode() : 0);
+        return iHashCode2 + (componentName != null ? componentName.hashCode() : 0);
     }
 
     public final String toString() {

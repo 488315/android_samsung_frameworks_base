@@ -13,7 +13,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.SharedFlowImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class DeviceEntryIconViewBinder$bind$1$onLongPressDetected$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ View $view;
@@ -38,7 +37,7 @@ final class DeviceEntryIconViewBinder$bind$1$onLongPressDetected$1 extends Suspe
     }
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
-    public final Object invokeSuspend(Object obj) {
+    public final Object invokeSuspend(Object obj) throws Throwable {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i == 0) {
@@ -50,12 +49,12 @@ final class DeviceEntryIconViewBinder$bind$1$onLongPressDetected$1 extends Suspe
             ((StatusBarKeyguardViewManager) ((KeyguardViewController) deviceEntryIconViewModel.keyguardViewController.get())).showPrimaryBouncer("DeviceEntryIconViewModel#onUserInteraction", true);
             SharedFlowImpl sharedFlowImpl = deviceEntryIconViewModel.deviceEntrySourceInteractor._attemptEnterDeviceFromDeviceEntryIcon;
             Object obj2 = Unit.INSTANCE;
-            Object emit = sharedFlowImpl.emit(obj2, this);
-            if (emit != coroutineSingletons) {
-                emit = obj2;
+            Object objEmit = sharedFlowImpl.emit(obj2, this);
+            if (objEmit != coroutineSingletons) {
+                objEmit = obj2;
             }
-            if (emit == coroutineSingletons) {
-                obj2 = emit;
+            if (objEmit == coroutineSingletons) {
+                obj2 = objEmit;
             }
             if (obj2 == coroutineSingletons) {
                 return coroutineSingletons;

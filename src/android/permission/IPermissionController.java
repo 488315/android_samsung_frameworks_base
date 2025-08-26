@@ -169,9 +169,9 @@ public interface IPermissionController extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IPermissionController.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IPermissionController)) {
-                return (IPermissionController) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IPermissionController.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IPermissionController)) {
+                return (IPermissionController) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -236,12 +236,12 @@ public interface IPermissionController extends IInterface {
             switch (i) {
                 case 1:
                     Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                    boolean readBoolean = parcel.readBoolean();
-                    int readInt = parcel.readInt();
-                    String readString = parcel.readString();
+                    boolean z = parcel.readBoolean();
+                    int i3 = parcel.readInt();
+                    String string = parcel.readString();
                     AndroidFuture androidFuture = (AndroidFuture) parcel.readTypedObject(AndroidFuture.CREATOR);
                     parcel.enforceNoDataAvail();
-                    revokeRuntimePermissions(bundle, readBoolean, readInt, readString, androidFuture);
+                    revokeRuntimePermissions(bundle, z, i3, string, androidFuture);
                     return true;
                 case 2:
                     UserHandle userHandle = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
@@ -256,44 +256,44 @@ public interface IPermissionController extends IInterface {
                     stageAndApplyRuntimePermissionsBackup(userHandle2, parcelFileDescriptor2);
                     return true;
                 case 4:
-                    String readString2 = parcel.readString();
+                    String string2 = parcel.readString();
                     UserHandle userHandle3 = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
                     AndroidFuture androidFuture2 = (AndroidFuture) parcel.readTypedObject(AndroidFuture.CREATOR);
                     parcel.enforceNoDataAvail();
-                    applyStagedRuntimePermissionBackup(readString2, userHandle3, androidFuture2);
+                    applyStagedRuntimePermissionBackup(string2, userHandle3, androidFuture2);
                     return true;
                 case 5:
-                    String readString3 = parcel.readString();
+                    String string3 = parcel.readString();
                     AndroidFuture androidFuture3 = (AndroidFuture) parcel.readTypedObject(AndroidFuture.CREATOR);
                     parcel.enforceNoDataAvail();
-                    getAppPermissions(readString3, androidFuture3);
+                    getAppPermissions(string3, androidFuture3);
                     return true;
                 case 6:
-                    String readString4 = parcel.readString();
-                    String readString5 = parcel.readString();
+                    String string4 = parcel.readString();
+                    String string5 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    revokeRuntimePermission(readString4, readString5);
+                    revokeRuntimePermission(string4, string5);
                     return true;
                 case 7:
-                    ArrayList<String> createStringArrayList = parcel.createStringArrayList();
-                    int readInt2 = parcel.readInt();
+                    ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
+                    int i4 = parcel.readInt();
                     AndroidFuture androidFuture4 = (AndroidFuture) parcel.readTypedObject(AndroidFuture.CREATOR);
                     parcel.enforceNoDataAvail();
-                    countPermissionApps(createStringArrayList, readInt2, androidFuture4);
+                    countPermissionApps(arrayListCreateStringArrayList, i4, androidFuture4);
                     return true;
                 case 8:
-                    boolean readBoolean2 = parcel.readBoolean();
-                    long readLong = parcel.readLong();
+                    boolean z2 = parcel.readBoolean();
+                    long j = parcel.readLong();
                     AndroidFuture androidFuture5 = (AndroidFuture) parcel.readTypedObject(AndroidFuture.CREATOR);
                     parcel.enforceNoDataAvail();
-                    getPermissionUsages(readBoolean2, readLong, androidFuture5);
+                    getPermissionUsages(z2, j, androidFuture5);
                     return true;
                 case 9:
-                    String readString6 = parcel.readString();
+                    String string6 = parcel.readString();
                     AdminPermissionControlParams adminPermissionControlParams = (AdminPermissionControlParams) parcel.readTypedObject(AdminPermissionControlParams.CREATOR);
                     AndroidFuture androidFuture6 = (AndroidFuture) parcel.readTypedObject(AndroidFuture.CREATOR);
                     parcel.enforceNoDataAvail();
-                    setRuntimePermissionGrantStateByDeviceAdminFromParams(readString6, adminPermissionControlParams, androidFuture6);
+                    setRuntimePermissionGrantStateByDeviceAdminFromParams(string6, adminPermissionControlParams, androidFuture6);
                     return true;
                 case 10:
                     AndroidFuture androidFuture7 = (AndroidFuture) parcel.readTypedObject(AndroidFuture.CREATOR);
@@ -301,34 +301,34 @@ public interface IPermissionController extends IInterface {
                     grantOrUpgradeDefaultRuntimePermissions(androidFuture7);
                     return true;
                 case 11:
-                    String readString7 = parcel.readString();
-                    int readInt3 = parcel.readInt();
+                    String string7 = parcel.readString();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    notifyOneTimePermissionSessionTimeout(readString7, readInt3);
+                    notifyOneTimePermissionSessionTimeout(string7, i5);
                     return true;
                 case 12:
-                    int readInt4 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     AndroidFuture androidFuture8 = (AndroidFuture) parcel.readTypedObject(AndroidFuture.CREATOR);
                     parcel.enforceNoDataAvail();
-                    updateUserSensitiveForApp(readInt4, androidFuture8);
+                    updateUserSensitiveForApp(i6, androidFuture8);
                     return true;
                 case 13:
-                    String readString8 = parcel.readString();
+                    String string8 = parcel.readString();
                     AndroidFuture<String> androidFuture9 = (AndroidFuture) parcel.readTypedObject(AndroidFuture.CREATOR);
                     parcel.enforceNoDataAvail();
-                    getPrivilegesDescriptionStringForProfile(readString8, androidFuture9);
+                    getPrivilegesDescriptionStringForProfile(string8, androidFuture9);
                     return true;
                 case 14:
-                    String readString9 = parcel.readString();
+                    String string9 = parcel.readString();
                     AndroidFuture<List<String>> androidFuture10 = (AndroidFuture) parcel.readTypedObject(AndroidFuture.CREATOR);
                     parcel.enforceNoDataAvail();
-                    getPlatformPermissionsForGroup(readString9, androidFuture10);
+                    getPlatformPermissionsForGroup(string9, androidFuture10);
                     return true;
                 case 15:
-                    String readString10 = parcel.readString();
+                    String string10 = parcel.readString();
                     AndroidFuture<String> androidFuture11 = (AndroidFuture) parcel.readTypedObject(AndroidFuture.CREATOR);
                     parcel.enforceNoDataAvail();
-                    getGroupOfPlatformPermission(readString10, androidFuture11);
+                    getGroupOfPlatformPermission(string10, androidFuture11);
                     return true;
                 case 16:
                     AndroidFuture androidFuture12 = (AndroidFuture) parcel.readTypedObject(AndroidFuture.CREATOR);
@@ -336,18 +336,18 @@ public interface IPermissionController extends IInterface {
                     getUnusedAppCount(androidFuture12);
                     return true;
                 case 17:
-                    String readString11 = parcel.readString();
+                    String string11 = parcel.readString();
                     AndroidFuture androidFuture13 = (AndroidFuture) parcel.readTypedObject(AndroidFuture.CREATOR);
                     parcel.enforceNoDataAvail();
-                    getHibernationEligibility(readString11, androidFuture13);
+                    getHibernationEligibility(string11, androidFuture13);
                     return true;
                 case 18:
-                    String readString12 = parcel.readString();
-                    ArrayList<String> createStringArrayList2 = parcel.createStringArrayList();
-                    int readInt5 = parcel.readInt();
+                    String string12 = parcel.readString();
+                    ArrayList<String> arrayListCreateStringArrayList2 = parcel.createStringArrayList();
+                    int i7 = parcel.readInt();
                     AndroidFuture androidFuture14 = (AndroidFuture) parcel.readTypedObject(AndroidFuture.CREATOR);
                     parcel.enforceNoDataAvail();
-                    revokeSelfPermissionsOnKill(readString12, createStringArrayList2, readInt5, androidFuture14);
+                    revokeSelfPermissionsOnKill(string12, arrayListCreateStringArrayList2, i7, androidFuture14);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -372,242 +372,242 @@ public interface IPermissionController extends IInterface {
 
             @Override // android.permission.IPermissionController
             public void revokeRuntimePermissions(Bundle bundle, boolean z, int i, String str, AndroidFuture androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IPermissionController.DESCRIPTOR);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IPermissionController.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionController
             public void getRuntimePermissionBackup(UserHandle userHandle, ParcelFileDescriptor parcelFileDescriptor) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IPermissionController.DESCRIPTOR);
-                    obtain.writeTypedObject(userHandle, 0);
-                    obtain.writeTypedObject(parcelFileDescriptor, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IPermissionController.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionController
             public void stageAndApplyRuntimePermissionsBackup(UserHandle userHandle, ParcelFileDescriptor parcelFileDescriptor) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IPermissionController.DESCRIPTOR);
-                    obtain.writeTypedObject(userHandle, 0);
-                    obtain.writeTypedObject(parcelFileDescriptor, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IPermissionController.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionController
             public void applyStagedRuntimePermissionBackup(String str, UserHandle userHandle, AndroidFuture androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IPermissionController.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(userHandle, 0);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IPermissionController.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionController
             public void getAppPermissions(String str, AndroidFuture androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IPermissionController.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IPermissionController.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionController
             public void revokeRuntimePermission(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IPermissionController.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IPermissionController.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionController
             public void countPermissionApps(List<String> list, int i, AndroidFuture androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IPermissionController.DESCRIPTOR);
-                    obtain.writeStringList(list);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IPermissionController.DESCRIPTOR);
+                    parcelObtain.writeStringList(list);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionController
             public void getPermissionUsages(boolean z, long j, AndroidFuture androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IPermissionController.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeLong(j);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IPermissionController.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionController
             public void setRuntimePermissionGrantStateByDeviceAdminFromParams(String str, AdminPermissionControlParams adminPermissionControlParams, AndroidFuture androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IPermissionController.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(adminPermissionControlParams, 0);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IPermissionController.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(adminPermissionControlParams, 0);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionController
             public void grantOrUpgradeDefaultRuntimePermissions(AndroidFuture androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IPermissionController.DESCRIPTOR);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(10, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IPermissionController.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(10, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionController
             public void notifyOneTimePermissionSessionTimeout(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IPermissionController.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(11, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IPermissionController.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(11, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionController
             public void updateUserSensitiveForApp(int i, AndroidFuture androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IPermissionController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(12, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IPermissionController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(12, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionController
             public void getPrivilegesDescriptionStringForProfile(String str, AndroidFuture<String> androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IPermissionController.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(13, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IPermissionController.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(13, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionController
             public void getPlatformPermissionsForGroup(String str, AndroidFuture<List<String>> androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IPermissionController.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(14, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IPermissionController.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(14, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionController
             public void getGroupOfPlatformPermission(String str, AndroidFuture<String> androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IPermissionController.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(15, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IPermissionController.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(15, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionController
             public void getUnusedAppCount(AndroidFuture androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IPermissionController.DESCRIPTOR);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(16, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IPermissionController.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(16, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionController
             public void getHibernationEligibility(String str, AndroidFuture androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IPermissionController.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(17, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IPermissionController.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(17, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.permission.IPermissionController
             public void revokeSelfPermissionsOnKill(String str, List<String> list, int i, AndroidFuture androidFuture) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IPermissionController.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStringList(list);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(androidFuture, 0);
-                    this.mRemote.transact(18, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IPermissionController.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStringList(list);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(androidFuture, 0);
+                    this.mRemote.transact(18, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

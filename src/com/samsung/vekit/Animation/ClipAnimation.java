@@ -96,8 +96,8 @@ public class ClipAnimation extends Animation<Integer> {
     }
 
     public void setClipIntensity(float f) {
-        String valueOf = String.valueOf(f);
-        Log.i(this.TAG, "setClipIntensity : " + valueOf);
+        String strValueOf = String.valueOf(f);
+        Log.i(this.TAG, "setClipIntensity : " + strValueOf);
         this.clipIntensity = f;
     }
 

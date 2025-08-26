@@ -11,7 +11,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class LogMessageImpl implements LogMessage {
     public static final Factory Factory = new Factory(null);
@@ -36,7 +35,6 @@ public final class LogMessageImpl implements LogMessage {
     public long threadId;
     public long timestamp;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Factory {
         public /* synthetic */ Factory(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -185,17 +183,17 @@ public final class LogMessageImpl implements LogMessage {
     }
 
     public final int hashCode() {
-        int hashCode = (this.messagePrinter.hashCode() + MoveResult$$ExternalSyntheticOutline0.m(PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.level.hashCode() * 31, 31, this.tag), 31, this.timestamp)) * 31;
+        int iHashCode = (this.messagePrinter.hashCode() + MoveResult$$ExternalSyntheticOutline0.m(PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.level.hashCode() * 31, 31, this.tag), 31, this.timestamp)) * 31;
         Throwable th = this.exception;
-        int hashCode2 = (hashCode + (th == null ? 0 : th.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (th == null ? 0 : th.hashCode())) * 31;
         String str = this.str1;
-        int hashCode3 = (hashCode2 + (str == null ? 0 : str.hashCode())) * 31;
+        int iHashCode3 = (iHashCode2 + (str == null ? 0 : str.hashCode())) * 31;
         String str2 = this.str2;
-        int hashCode4 = (hashCode3 + (str2 == null ? 0 : str2.hashCode())) * 31;
+        int iHashCode4 = (iHashCode3 + (str2 == null ? 0 : str2.hashCode())) * 31;
         String str3 = this.str3;
-        int m = MoveResult$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m((Double.hashCode(this.double1) + MoveResult$$ExternalSyntheticOutline0.m(MoveResult$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.int2, ReorderTile$$ExternalSyntheticOutline0.m(this.int1, (hashCode4 + (str3 == null ? 0 : str3.hashCode())) * 31, 31), 31), 31, this.long1), 31, this.long2)) * 31, 31, this.bool1), 31, this.bool2), 31, this.bool3), 31, this.bool4), 31, this.bool5), 31, this.threadId);
+        int iM = MoveResult$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m((Double.hashCode(this.double1) + MoveResult$$ExternalSyntheticOutline0.m(MoveResult$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.int2, ReorderTile$$ExternalSyntheticOutline0.m(this.int1, (iHashCode4 + (str3 == null ? 0 : str3.hashCode())) * 31, 31), 31), 31, this.long1), 31, this.long2)) * 31, 31, this.bool1), 31, this.bool2), 31, this.bool3), 31, this.bool4), 31, this.bool5), 31, this.threadId);
         Character ch = this.tagSeparator;
-        return m + (ch != null ? ch.hashCode() : 0);
+        return iM + (ch != null ? ch.hashCode() : 0);
     }
 
     public final void reset(String str, LogLevel logLevel, long j, Function1 function1, Throwable th) {

@@ -35,7 +35,6 @@ import javax.crypto.MacSpi;
 import javax.crypto.SecretKey;
 import javax.crypto.ShortBufferException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class UcmAgentProviderImpl extends Provider {
     public static final String CIPHER = "Cipher";
@@ -57,25 +56,23 @@ public class UcmAgentProviderImpl extends Provider {
     public static final String SECURERANDOM = "SecureRandom";
     public static final String SECURERANDOM_SHA1PRNG = "SHA1PRNG";
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class AbstractProviderService extends Provider.Service {
         public AbstractProviderService(Provider provider, String str, String str2, String str3, Context context) {
             super(provider, str, str2, str3, null, null);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class UcmAgentCipherSpi extends CipherSpi implements UcmAgentSpiProperty {
         private int errorStatus = 0;
         private Bundle mProperty;
 
         @Override // javax.crypto.CipherSpi
-        public int engineDoFinal(byte[] bArr, int i, int i2, byte[] bArr2, int i3) throws ShortBufferException, IllegalBlockSizeException, BadPaddingException {
+        public int engineDoFinal(byte[] bArr, int i, int i2, byte[] bArr2, int i3) throws BadPaddingException, IllegalBlockSizeException, ShortBufferException {
             throw new UnsupportedOperationException("Not supported");
         }
 
         @Override // javax.crypto.CipherSpi
-        public abstract byte[] engineDoFinal(byte[] bArr, int i, int i2) throws IllegalBlockSizeException, BadPaddingException;
+        public abstract byte[] engineDoFinal(byte[] bArr, int i, int i2) throws BadPaddingException, IllegalBlockSizeException;
 
         @Override // javax.crypto.CipherSpi
         public int engineGetBlockSize() {
@@ -142,7 +139,6 @@ public class UcmAgentProviderImpl extends Provider {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class UcmAgentKeyAgreementSpi extends KeyAgreementSpi implements UcmAgentSpiProperty {
         private int errorStatus = 0;
         private Bundle mProperty;
@@ -154,7 +150,7 @@ public class UcmAgentProviderImpl extends Provider {
         public abstract int engineGenerateSecret(byte[] bArr, int i) throws IllegalStateException, ShortBufferException;
 
         @Override // javax.crypto.KeyAgreementSpi
-        public abstract SecretKey engineGenerateSecret(String str) throws IllegalStateException, InvalidKeyException, NoSuchAlgorithmException;
+        public abstract SecretKey engineGenerateSecret(String str) throws IllegalStateException, NoSuchAlgorithmException, InvalidKeyException;
 
         @Override // javax.crypto.KeyAgreementSpi
         public abstract byte[] engineGenerateSecret() throws IllegalStateException;
@@ -163,7 +159,7 @@ public class UcmAgentProviderImpl extends Provider {
         public abstract void engineInit(Key key, SecureRandom secureRandom) throws InvalidKeyException;
 
         @Override // javax.crypto.KeyAgreementSpi
-        public abstract void engineInit(Key key, AlgorithmParameterSpec algorithmParameterSpec, SecureRandom secureRandom) throws InvalidAlgorithmParameterException, InvalidKeyException;
+        public abstract void engineInit(Key key, AlgorithmParameterSpec algorithmParameterSpec, SecureRandom secureRandom) throws InvalidKeyException, InvalidAlgorithmParameterException;
 
         @Override // com.samsung.android.knox.ucm.plugin.agent.UcmAgentProviderImpl.UcmAgentSpiProperty
         public int getErrorCode() {
@@ -186,7 +182,6 @@ public class UcmAgentProviderImpl extends Provider {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class UcmAgentKeyGeneratorSpi extends KeyGeneratorSpi implements UcmAgentSpiProperty {
         private int errorStatus = 0;
         private Bundle mProperty;
@@ -228,7 +223,6 @@ public class UcmAgentProviderImpl extends Provider {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class UcmAgentKeyPairGeneratorSpi extends KeyPairGeneratorSpi implements UcmAgentSpiProperty {
         private int errorStatus = 0;
         private Bundle mProperty;
@@ -259,7 +253,6 @@ public class UcmAgentProviderImpl extends Provider {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class UcmAgentKeyStoreSpi extends KeyStoreSpi implements UcmAgentSpiProperty {
         private int errorStatus = 0;
         private Bundle mProperty;
@@ -275,12 +268,12 @@ public class UcmAgentProviderImpl extends Provider {
         }
 
         @Override // java.security.KeyStoreSpi
-        public void engineLoad(InputStream inputStream, char[] cArr) throws IOException, NoSuchAlgorithmException, CertificateException {
+        public void engineLoad(InputStream inputStream, char[] cArr) throws NoSuchAlgorithmException, IOException, CertificateException {
             throw new UnsupportedOperationException("please use engineLoad(LoadStoreParameter)");
         }
 
         @Override // java.security.KeyStoreSpi
-        public abstract void engineLoad(KeyStore.LoadStoreParameter loadStoreParameter) throws IOException, NoSuchAlgorithmException, CertificateException;
+        public abstract void engineLoad(KeyStore.LoadStoreParameter loadStoreParameter) throws NoSuchAlgorithmException, IOException, CertificateException;
 
         @Override // java.security.KeyStoreSpi
         public void engineSetCertificateEntry(String str, Certificate certificate) throws KeyStoreException {
@@ -296,7 +289,7 @@ public class UcmAgentProviderImpl extends Provider {
         }
 
         @Override // java.security.KeyStoreSpi
-        public void engineStore(OutputStream outputStream, char[] cArr) throws IOException, NoSuchAlgorithmException, CertificateException {
+        public void engineStore(OutputStream outputStream, char[] cArr) throws NoSuchAlgorithmException, IOException, CertificateException {
             throw new UnsupportedOperationException("Can not serialize to OutputStream");
         }
 
@@ -326,7 +319,6 @@ public class UcmAgentProviderImpl extends Provider {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class UcmAgentMacSpi extends MacSpi implements UcmAgentSpiProperty {
         private int errorStatus = 0;
         private Bundle mProperty;
@@ -376,7 +368,6 @@ public class UcmAgentProviderImpl extends Provider {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class UcmAgentSecureRandomSpi extends SecureRandomSpi implements UcmAgentSpiProperty {
         private int errorStatus = 0;
         private Bundle mProperty;
@@ -419,7 +410,6 @@ public class UcmAgentProviderImpl extends Provider {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class UcmAgentSignatureSpi extends SignatureSpi implements UcmAgentSpiProperty {
         private int errorStatus = 0;
         private Bundle mProperty;
@@ -479,7 +469,6 @@ public class UcmAgentProviderImpl extends Provider {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface UcmAgentSpiProperty {
         public static final String KEY_ADMIN_ID = "admin_id";
         public static final String KEY_ALGORITHM = "algorithm";
@@ -513,7 +502,6 @@ public class UcmAgentProviderImpl extends Provider {
         void setProperty(Bundle bundle);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class UcsKeyPairGeneratorSpec implements AlgorithmParameterSpec {
         private final int mKeySize;
         private final String mKeystoreAlias;

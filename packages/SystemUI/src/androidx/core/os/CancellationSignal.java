@@ -1,13 +1,11 @@
 package androidx.core.os;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class CancellationSignal {
     public boolean mCancelInProgress;
     public boolean mIsCanceled;
     public OnCancelListener mOnCancelListener;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface OnCancelListener {
         void onCancel();
     }

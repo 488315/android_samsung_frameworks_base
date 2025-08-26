@@ -71,12 +71,12 @@ public class RecognizerIntent {
 
     public static final Intent getVoiceDetailsIntent(Context context) {
         String string;
-        ResolveInfo resolveActivity = context.getPackageManager().resolveActivity(new Intent(ACTION_WEB_SEARCH), 128);
-        if (resolveActivity == null || resolveActivity.activityInfo == null || resolveActivity.activityInfo.metaData == null || (string = resolveActivity.activityInfo.metaData.getString(DETAILS_META_DATA)) == null) {
+        ResolveInfo resolveInfoResolveActivity = context.getPackageManager().resolveActivity(new Intent(ACTION_WEB_SEARCH), 128);
+        if (resolveInfoResolveActivity == null || resolveInfoResolveActivity.activityInfo == null || resolveInfoResolveActivity.activityInfo.metaData == null || (string = resolveInfoResolveActivity.activityInfo.metaData.getString(DETAILS_META_DATA)) == null) {
             return null;
         }
         Intent intent = new Intent(ACTION_GET_LANGUAGE_DETAILS);
-        intent.setComponent(new ComponentName(resolveActivity.activityInfo.packageName, string));
+        intent.setComponent(new ComponentName(resolveInfoResolveActivity.activityInfo.packageName, string));
         return intent;
     }
 }

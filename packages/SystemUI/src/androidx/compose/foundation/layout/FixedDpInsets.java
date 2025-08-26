@@ -7,7 +7,6 @@ import androidx.compose.ui.unit.Dp;
 import androidx.compose.ui.unit.LayoutDirection;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class FixedDpInsets implements WindowInsets {
     public final float bottomDp;
@@ -27,27 +26,27 @@ final class FixedDpInsets implements WindowInsets {
             return false;
         }
         FixedDpInsets fixedDpInsets = (FixedDpInsets) obj;
-        return Dp.m836equalsimpl0(this.leftDp, fixedDpInsets.leftDp) && Dp.m836equalsimpl0(this.topDp, fixedDpInsets.topDp) && Dp.m836equalsimpl0(this.rightDp, fixedDpInsets.rightDp) && Dp.m836equalsimpl0(this.bottomDp, fixedDpInsets.bottomDp);
+        return Dp.m838equalsimpl0(this.leftDp, fixedDpInsets.leftDp) && Dp.m838equalsimpl0(this.topDp, fixedDpInsets.topDp) && Dp.m838equalsimpl0(this.rightDp, fixedDpInsets.rightDp) && Dp.m838equalsimpl0(this.bottomDp, fixedDpInsets.bottomDp);
     }
 
     @Override // androidx.compose.foundation.layout.WindowInsets
     public final int getBottom(Density density) {
-        return density.mo51roundToPx0680j_4(this.bottomDp);
+        return density.mo52roundToPx0680j_4(this.bottomDp);
     }
 
     @Override // androidx.compose.foundation.layout.WindowInsets
     public final int getLeft(Density density, LayoutDirection layoutDirection) {
-        return density.mo51roundToPx0680j_4(this.leftDp);
+        return density.mo52roundToPx0680j_4(this.leftDp);
     }
 
     @Override // androidx.compose.foundation.layout.WindowInsets
     public final int getRight(Density density, LayoutDirection layoutDirection) {
-        return density.mo51roundToPx0680j_4(this.rightDp);
+        return density.mo52roundToPx0680j_4(this.rightDp);
     }
 
     @Override // androidx.compose.foundation.layout.WindowInsets
     public final int getTop(Density density) {
-        return density.mo51roundToPx0680j_4(this.topDp);
+        return density.mo52roundToPx0680j_4(this.topDp);
     }
 
     public final int hashCode() {
@@ -60,7 +59,7 @@ final class FixedDpInsets implements WindowInsets {
         BorderModifierNodeElement$$ExternalSyntheticOutline0.m(this.leftDp, ", top=", sb);
         BorderModifierNodeElement$$ExternalSyntheticOutline0.m(this.topDp, ", right=", sb);
         BorderModifierNodeElement$$ExternalSyntheticOutline0.m(this.rightDp, ", bottom=", sb);
-        sb.append((Object) Dp.m837toStringimpl(this.bottomDp));
+        sb.append((Object) Dp.m839toStringimpl(this.bottomDp));
         sb.append(')');
         return sb.toString();
     }

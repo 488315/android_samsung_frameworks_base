@@ -1,6 +1,7 @@
 package com.android.systemui.statusbar.events;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -18,7 +19,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.math.MathKt__MathJVMKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class BatteryStatusChipClearTextView extends View {
     public final Paint clearTextPaint;
@@ -39,9 +39,9 @@ public final class BatteryStatusChipClearTextView extends View {
         if (Intrinsics.areEqual(locale.toString(), "my_MM")) {
             return String.valueOf(this.level);
         }
-        String format = NumberFormat.getInstance(locale).format(Integer.valueOf(this.level));
-        format.getClass();
-        return format;
+        String str = NumberFormat.getInstance(locale).format(Integer.valueOf(this.level));
+        str.getClass();
+        return str;
     }
 
     @Override // android.view.View
@@ -50,15 +50,15 @@ public final class BatteryStatusChipClearTextView extends View {
         this.textPaint.getTextBounds(String.valueOf(this.level), 0, String.valueOf(this.level).length(), new Rect());
         float width = canvas.getWidth() / 2.0f;
         this.textPaint.getTextBounds(String.valueOf(this.level), 0, String.valueOf(this.level).length(), new Rect());
-        float height = ((r2.height() / 2.0f) + (getMeasuredHeight() / 2.0f)) - r2.bottom;
+        float fHeight = ((r2.height() / 2.0f) + (getMeasuredHeight() / 2.0f)) - r2.bottom;
         int i = this.shadowColor;
         this.textPaint.setShadowLayer(this.shadowRadius, this.shadowDx, this.shadowDy, Color.argb(MathKt__MathJVMKt.roundToInt(Color.alpha(i) * (this.textPaint.getAlpha() / 255.0f)), Color.red(i), Color.green(i), Color.blue(i)));
-        canvas.drawText(getText(), width, height, this.textPaint);
+        canvas.drawText(getText(), width, fHeight, this.textPaint);
         if (this.isClear) {
-            canvas.drawText(getText(), width, height, this.clearTextPaint);
+            canvas.drawText(getText(), width, fHeight, this.clearTextPaint);
         }
         this.textPaint.setShadowLayer(0.0f, 0.0f, 0.0f, 0);
-        canvas.drawText(getText(), width, height, this.textPaint);
+        canvas.drawText(getText(), width, fHeight, this.textPaint);
     }
 
     @Override // android.view.View
@@ -83,7 +83,7 @@ public final class BatteryStatusChipClearTextView extends View {
         this(context, (i2 & 2) != 0 ? null : attributeSet, (i2 & 4) != 0 ? 0 : i);
     }
 
-    public BatteryStatusChipClearTextView(Context context, AttributeSet attributeSet, int i) {
+    public BatteryStatusChipClearTextView(Context context, AttributeSet attributeSet, int i) throws Resources.NotFoundException {
         super(context, attributeSet, i);
         this.shadowColor = -16777216;
         Paint paint = new Paint();
@@ -99,58 +99,58 @@ public final class BatteryStatusChipClearTextView extends View {
         paint2.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_OVER));
         paint2.setColor(-65536);
         this.textPaint = paint2;
-        TypedArray obtainStyledAttributes = getContext().getTheme().obtainStyledAttributes(attributeSet, R.styleable.TextViewAppearance, i, 0);
-        int resourceId = obtainStyledAttributes.getResourceId(0, -1);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = getContext().getTheme().obtainStyledAttributes(attributeSet, R.styleable.TextViewAppearance, i, 0);
+        int resourceId = typedArrayObtainStyledAttributes.getResourceId(0, -1);
+        typedArrayObtainStyledAttributes.recycle();
         if (resourceId != -1) {
-            TypedArray obtainStyledAttributes2 = getContext().getTheme().obtainStyledAttributes(resourceId, R.styleable.TextAppearance);
-            int indexCount = obtainStyledAttributes2.getIndexCount();
+            TypedArray typedArrayObtainStyledAttributes2 = getContext().getTheme().obtainStyledAttributes(resourceId, R.styleable.TextAppearance);
+            int indexCount = typedArrayObtainStyledAttributes2.getIndexCount();
             if (indexCount >= 0) {
                 int i2 = 0;
                 while (true) {
-                    int index = obtainStyledAttributes2.getIndex(i2);
+                    int index = typedArrayObtainStyledAttributes2.getIndex(i2);
                     if (index == 0) {
-                        float dimension = obtainStyledAttributes2.getDimension(index, 0.0f);
+                        float dimension = typedArrayObtainStyledAttributes2.getDimension(index, 0.0f);
                         this.clearTextPaint.setTextSize(dimension);
                         this.textPaint.setTextSize(dimension);
                     } else if (index == 12) {
-                        String string = obtainStyledAttributes2.getString(index);
+                        String string = typedArrayObtainStyledAttributes2.getString(index);
                         if (string != null) {
-                            Typeface create = Typeface.create(string, 0);
-                            create = this.textPaint.getTypeface() != null ? Typeface.create(create, this.textPaint.getTypeface().getWeight(), this.textPaint.getTypeface().isItalic()) : create;
-                            this.clearTextPaint.setTypeface(create);
-                            this.textPaint.setTypeface(create);
+                            Typeface typefaceCreate = Typeface.create(string, 0);
+                            typefaceCreate = this.textPaint.getTypeface() != null ? Typeface.create(typefaceCreate, this.textPaint.getTypeface().getWeight(), this.textPaint.getTypeface().isItalic()) : typefaceCreate;
+                            this.clearTextPaint.setTypeface(typefaceCreate);
+                            this.textPaint.setTypeface(typefaceCreate);
                         }
                     } else if (index != 18) {
                         switch (index) {
                             case 7:
-                                this.shadowColor = obtainStyledAttributes2.getColor(index, this.shadowColor);
+                                this.shadowColor = typedArrayObtainStyledAttributes2.getColor(index, this.shadowColor);
                                 break;
                             case 8:
-                                this.shadowDx = obtainStyledAttributes2.getFloat(index, this.shadowDx);
+                                this.shadowDx = typedArrayObtainStyledAttributes2.getFloat(index, this.shadowDx);
                                 break;
                             case 9:
-                                this.shadowDy = obtainStyledAttributes2.getFloat(index, this.shadowDy);
+                                this.shadowDy = typedArrayObtainStyledAttributes2.getFloat(index, this.shadowDy);
                                 break;
                             case 10:
-                                this.shadowRadius = obtainStyledAttributes2.getFloat(index, this.shadowRadius);
+                                this.shadowRadius = typedArrayObtainStyledAttributes2.getFloat(index, this.shadowRadius);
                                 break;
                         }
                     } else {
-                        int i3 = obtainStyledAttributes2.getInt(index, 400);
+                        int i3 = typedArrayObtainStyledAttributes2.getInt(index, 400);
                         Typeface typeface = this.textPaint.getTypeface();
                         typeface = typeface == null ? Typeface.create("sec", 0) : typeface;
                         Typeface typeface2 = this.textPaint.getTypeface();
-                        Typeface create2 = Typeface.create(typeface, i3, typeface2 != null ? typeface2.isItalic() : false);
-                        this.clearTextPaint.setTypeface(create2);
-                        this.textPaint.setTypeface(create2);
+                        Typeface typefaceCreate2 = Typeface.create(typeface, i3, typeface2 != null ? typeface2.isItalic() : false);
+                        this.clearTextPaint.setTypeface(typefaceCreate2);
+                        this.textPaint.setTypeface(typefaceCreate2);
                     }
                     if (i2 != indexCount) {
                         i2++;
                     }
                 }
             }
-            obtainStyledAttributes2.recycle();
+            typedArrayObtainStyledAttributes2.recycle();
         }
     }
 }

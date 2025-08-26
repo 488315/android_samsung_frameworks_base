@@ -11,7 +11,6 @@ import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class InternetTileViewModel$special$$inlined$flatMapLatest$3 extends SuspendLambda implements Function3 {
     private /* synthetic */ Object L$0;
@@ -35,7 +34,7 @@ public final class InternetTileViewModel$special$$inlined$flatMapLatest$3 extend
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
-        Flow combine;
+        Flow flowCombine;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i == 0) {
@@ -43,15 +42,15 @@ public final class InternetTileViewModel$special$$inlined$flatMapLatest$3 extend
             FlowCollector flowCollector = (FlowCollector) this.L$0;
             MobileIconInteractor mobileIconInteractor = (MobileIconInteractor) this.L$1;
             if (mobileIconInteractor == null) {
-                combine = this.this$0.notConnectedFlow;
+                flowCombine = this.this$0.notConnectedFlow;
             } else {
                 Flow networkName = mobileIconInteractor.getNetworkName();
                 Flow signalLevelIcon = mobileIconInteractor.getSignalLevelIcon();
                 InternetTileViewModel internetTileViewModel = this.this$0;
-                combine = FlowKt.combine(networkName, signalLevelIcon, internetTileViewModel.mobileDataContentName, new InternetTileViewModel$mobileIconFlow$1$1(internetTileViewModel, null));
+                flowCombine = FlowKt.combine(networkName, signalLevelIcon, internetTileViewModel.mobileDataContentName, new InternetTileViewModel$mobileIconFlow$1$1(internetTileViewModel, null));
             }
             this.label = 1;
-            if (FlowKt.emitAll(flowCollector, combine, this) == coroutineSingletons) {
+            if (FlowKt.emitAll(flowCollector, flowCombine, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

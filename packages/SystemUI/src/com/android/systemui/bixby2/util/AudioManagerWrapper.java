@@ -5,7 +5,6 @@ import android.media.AudioManager;
 import android.view.KeyEvent;
 import com.sec.ims.presence.ServiceTuple;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AudioManagerWrapper {
     private final AudioManager mAudioManager;
@@ -39,8 +38,8 @@ public class AudioManagerWrapper {
     }
 
     public int getAdjustedStreamType(Context context) {
-        int semGetActiveStreamType = AudioManager.semGetActiveStreamType();
-        return isStreamValid(semGetActiveStreamType) ? semGetActiveStreamType : getDefaultStream(context);
+        int iSemGetActiveStreamType = AudioManager.semGetActiveStreamType();
+        return isStreamValid(iSemGetActiveStreamType) ? iSemGetActiveStreamType : getDefaultStream(context);
     }
 
     public int getRingerMode() {

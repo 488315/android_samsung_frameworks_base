@@ -54,7 +54,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class VisualStabilityCoordinator implements Coordinator, Dumpable {
     protected static final long ALLOW_SECTION_CHANGE_TIMEOUT = 500;
@@ -435,16 +434,16 @@ public class VisualStabilityCoordinator implements Coordinator, Dumpable {
             public final void accept(Object obj) {
                 int i3 = i;
                 VisualStabilityCoordinator visualStabilityCoordinator = this.f$0;
-                boolean booleanValue = ((Boolean) obj).booleanValue();
+                boolean zBooleanValue = ((Boolean) obj).booleanValue();
                 switch (i3) {
                     case 0:
-                        visualStabilityCoordinator.onShadeOrQsClosingChanged(booleanValue);
+                        visualStabilityCoordinator.onShadeOrQsClosingChanged(zBooleanValue);
                         break;
                     case 1:
-                        visualStabilityCoordinator.onLaunchingActivityChanged(booleanValue);
+                        visualStabilityCoordinator.onLaunchingActivityChanged(zBooleanValue);
                         break;
                     default:
-                        visualStabilityCoordinator.onCommunalShowingChanged(booleanValue);
+                        visualStabilityCoordinator.onCommunalShowingChanged(zBooleanValue);
                         break;
                 }
             }
@@ -460,16 +459,16 @@ public class VisualStabilityCoordinator implements Coordinator, Dumpable {
             public final void accept(Object obj) {
                 int i3 = i2;
                 VisualStabilityCoordinator visualStabilityCoordinator = this.f$0;
-                boolean booleanValue = ((Boolean) obj).booleanValue();
+                boolean zBooleanValue = ((Boolean) obj).booleanValue();
                 switch (i3) {
                     case 0:
-                        visualStabilityCoordinator.onShadeOrQsClosingChanged(booleanValue);
+                        visualStabilityCoordinator.onShadeOrQsClosingChanged(zBooleanValue);
                         break;
                     case 1:
-                        visualStabilityCoordinator.onLaunchingActivityChanged(booleanValue);
+                        visualStabilityCoordinator.onLaunchingActivityChanged(zBooleanValue);
                         break;
                     default:
-                        visualStabilityCoordinator.onCommunalShowingChanged(booleanValue);
+                        visualStabilityCoordinator.onCommunalShowingChanged(zBooleanValue);
                         break;
                 }
             }
@@ -488,16 +487,16 @@ public class VisualStabilityCoordinator implements Coordinator, Dumpable {
             public final void accept(Object obj) {
                 int i32 = i3;
                 VisualStabilityCoordinator visualStabilityCoordinator = this.f$0;
-                boolean booleanValue = ((Boolean) obj).booleanValue();
+                boolean zBooleanValue = ((Boolean) obj).booleanValue();
                 switch (i32) {
                     case 0:
-                        visualStabilityCoordinator.onShadeOrQsClosingChanged(booleanValue);
+                        visualStabilityCoordinator.onShadeOrQsClosingChanged(zBooleanValue);
                         break;
                     case 1:
-                        visualStabilityCoordinator.onLaunchingActivityChanged(booleanValue);
+                        visualStabilityCoordinator.onLaunchingActivityChanged(zBooleanValue);
                         break;
                     default:
-                        visualStabilityCoordinator.onCommunalShowingChanged(booleanValue);
+                        visualStabilityCoordinator.onCommunalShowingChanged(zBooleanValue);
                         break;
                 }
             }
@@ -528,9 +527,9 @@ public class VisualStabilityCoordinator implements Coordinator, Dumpable {
         if (this.mCheckLockScreenTransitionEnabled) {
             KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("  lockscreenInGoneTransition: "), this.mLockscreenInGoneTransition, printWriter);
         }
-        StringBuilder m = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("reorderingAllowed: "), this.mReorderingAllowed, printWriter, "  sleepy: "), this.mSleepy, printWriter, "  fullyDozed: "), this.mFullyDozed, printWriter, "  panelExpanded: "), this.mPanelExpanded, printWriter, "  pulsing: "), this.mPulsing, printWriter, "  communalShowing: "), this.mCommunalShowing, printWriter, "isSuppressingPipelineRun: "), this.mIsSuppressingPipelineRun, printWriter, "isSuppressingGroupChange: "), this.mIsSuppressingGroupChange, printWriter, "isSuppressingEntryReorder: ");
-        m.append(this.mIsSuppressingEntryReorder);
-        printWriter.println(m.toString());
+        StringBuilder sbM = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("reorderingAllowed: "), this.mReorderingAllowed, printWriter, "  sleepy: "), this.mSleepy, printWriter, "  fullyDozed: "), this.mFullyDozed, printWriter, "  panelExpanded: "), this.mPanelExpanded, printWriter, "  pulsing: "), this.mPulsing, printWriter, "  communalShowing: "), this.mCommunalShowing, printWriter, "isSuppressingPipelineRun: "), this.mIsSuppressingPipelineRun, printWriter, "isSuppressingGroupChange: "), this.mIsSuppressingGroupChange, printWriter, "isSuppressingEntryReorder: ");
+        sbM.append(this.mIsSuppressingEntryReorder);
+        printWriter.println(sbM.toString());
         if (StabilizeHeadsUpGroup.isEnabled()) {
             printWriter.println("headsUpGroupKeys: " + this.mHeadsUpGroupKeys.size());
         }
@@ -572,12 +571,12 @@ public class VisualStabilityCoordinator implements Coordinator, Dumpable {
 
     public void temporarilyAllowSectionChanges(NotificationEntry notificationEntry, long j) {
         String str = notificationEntry.mKey;
-        boolean isSectionChangeAllowed = this.mNotifStabilityManager.isSectionChangeAllowed(notificationEntry);
+        boolean zIsSectionChangeAllowed = this.mNotifStabilityManager.isSectionChangeAllowed(notificationEntry);
         if (this.mEntriesThatCanChangeSection.containsKey(str)) {
             this.mEntriesThatCanChangeSection.get(str).run();
         }
         this.mEntriesThatCanChangeSection.put(str, this.mDelayableExecutor.executeAtTime(new VisualStabilityCoordinator$$ExternalSyntheticLambda0(this, str, 1), j + ALLOW_SECTION_CHANGE_TIMEOUT));
-        if (isSectionChangeAllowed) {
+        if (zIsSectionChangeAllowed) {
             return;
         }
         this.mNotifStabilityManager.invalidateList("temporarilyAllowSectionChanges");
@@ -588,20 +587,20 @@ public class VisualStabilityCoordinator implements Coordinator, Dumpable {
         boolean z4 = this.mPipelineRunAllowed;
         boolean z5 = this.mReorderingAllowed;
         this.mPipelineRunAllowed = (isPanelCollapsingOrLaunchingActivity() || (this.mCheckLockScreenTransitionEnabled && this.mLockscreenInGoneTransition)) ? false : true;
-        boolean isReorderingAllowed = isReorderingAllowed();
-        this.mReorderingAllowed = isReorderingAllowed;
+        boolean zIsReorderingAllowed = isReorderingAllowed();
+        this.mReorderingAllowed = zIsReorderingAllowed;
         boolean z6 = this.mPipelineRunAllowed;
-        if (z4 == z6 && z5 == isReorderingAllowed) {
+        if (z4 == z6 && z5 == zIsReorderingAllowed) {
             z3 = z2;
         } else {
             z3 = z2;
-            this.mLogger.logAllowancesChanged(z4, z6, z5, isReorderingAllowed, str, z, z3);
+            this.mLogger.logAllowancesChanged(z4, z6, z5, zIsReorderingAllowed, str, z, z3);
         }
         if (z3) {
             this.mMainExecutor.execute(new Runnable() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.VisualStabilityCoordinator$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    VisualStabilityCoordinator.this.maybeInvalidateList();
+                    this.f$0.maybeInvalidateList();
                 }
             });
         } else {

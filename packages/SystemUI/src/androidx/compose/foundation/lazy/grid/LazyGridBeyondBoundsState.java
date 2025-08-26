@@ -4,7 +4,6 @@ import androidx.compose.foundation.gestures.Orientation;
 import androidx.compose.foundation.lazy.layout.LazyLayoutBeyondBoundsState;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class LazyGridBeyondBoundsState implements LazyLayoutBeyondBoundsState {
     public final LazyGridState state;
@@ -40,10 +39,10 @@ public final class LazyGridBeyondBoundsState implements LazyLayoutBeyondBoundsSt
             return 0;
         }
         LazyGridLayoutInfo layoutInfo = lazyGridState.getLayoutInfo();
-        int m160getViewportSizeYbymL2g = ((int) (((LazyGridMeasureResult) layoutInfo).orientation == Orientation.Vertical ? ((LazyGridMeasureResult) layoutInfo).m160getViewportSizeYbymL2g() & 4294967295L : ((LazyGridMeasureResult) layoutInfo).m160getViewportSizeYbymL2g() >> 32)) / LazyGridLayoutInfoKt.visibleLinesAverageMainAxisSize(lazyGridState.getLayoutInfo());
-        if (m160getViewportSizeYbymL2g < 1) {
+        int iM161getViewportSizeYbymL2g = ((int) (((LazyGridMeasureResult) layoutInfo).orientation == Orientation.Vertical ? ((LazyGridMeasureResult) layoutInfo).m161getViewportSizeYbymL2g() & 4294967295L : ((LazyGridMeasureResult) layoutInfo).m161getViewportSizeYbymL2g() >> 32)) / LazyGridLayoutInfoKt.visibleLinesAverageMainAxisSize(lazyGridState.getLayoutInfo());
+        if (iM161getViewportSizeYbymL2g < 1) {
             return 1;
         }
-        return m160getViewportSizeYbymL2g;
+        return iM161getViewportSizeYbymL2g;
     }
 }

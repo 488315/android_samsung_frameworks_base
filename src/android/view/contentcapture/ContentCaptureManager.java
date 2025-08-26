@@ -244,14 +244,14 @@ public final class ContentCaptureManager {
     }
 
     public static ComponentName getServiceSettingsComponentName() {
-        IBinder checkService = ServiceManager.checkService(Context.CONTENT_CAPTURE_MANAGER_SERVICE);
-        if (checkService == null) {
+        IBinder iBinderCheckService = ServiceManager.checkService(Context.CONTENT_CAPTURE_MANAGER_SERVICE);
+        if (iBinderCheckService == null) {
             return null;
         }
-        IContentCaptureManager asInterface = IContentCaptureManager.Stub.asInterface(checkService);
+        IContentCaptureManager iContentCaptureManagerAsInterface = IContentCaptureManager.Stub.asInterface(iBinderCheckService);
         SyncResultReceiver syncResultReceiver = new SyncResultReceiver(5000);
         try {
-            asInterface.getServiceSettingsActivity(syncResultReceiver);
+            iContentCaptureManagerAsInterface.getServiceSettingsActivity(syncResultReceiver);
             if (syncResultReceiver.getIntResult() == -1) {
                 throw new SecurityException(syncResultReceiver.getStringResult());
             }
@@ -282,8 +282,8 @@ public final class ContentCaptureManager {
         try {
             return ContentCaptureHelper.toSet(syncRun(new MyRunnable() { // from class: android.view.contentcapture.ContentCaptureManager$$ExternalSyntheticLambda0
                 @Override // android.view.contentcapture.ContentCaptureManager.MyRunnable
-                public final void run(SyncResultReceiver syncResultReceiver) {
-                    ContentCaptureManager.this.lambda$getContentCaptureConditions$0(syncResultReceiver);
+                public final void run(SyncResultReceiver syncResultReceiver) throws RemoteException {
+                    this.f$0.lambda$getContentCaptureConditions$0(syncResultReceiver);
                 }
             }).getParcelableListResult());
         } catch (SyncResultReceiver.TimeoutException unused) {
@@ -363,8 +363,8 @@ public final class ContentCaptureManager {
         try {
             int intResult = syncRun(new MyRunnable() { // from class: android.view.contentcapture.ContentCaptureManager$$ExternalSyntheticLambda1
                 @Override // android.view.contentcapture.ContentCaptureManager.MyRunnable
-                public final void run(SyncResultReceiver syncResultReceiver) {
-                    ContentCaptureManager.this.lambda$isContentCaptureFeatureEnabled$1(syncResultReceiver);
+                public final void run(SyncResultReceiver syncResultReceiver) throws RemoteException {
+                    this.f$0.lambda$isContentCaptureFeatureEnabled$1(syncResultReceiver);
                 }
             }).getIntResult();
             if (intResult == 1) {
@@ -438,7 +438,7 @@ public final class ContentCaptureManager {
         @Override // android.util.Dumpable
         public void dump(PrintWriter printWriter, String[] strArr) {
             printWriter.print("");
-            printWriter.println("ContentCaptureManager");
+            printWriter.println(ContentCaptureManager.DUMPABLE_NAME);
             synchronized (ContentCaptureManager.this.mLock) {
                 printWriter.print("  ");
                 printWriter.print("isContentCaptureEnabled(): ");
@@ -477,7 +477,7 @@ public final class ContentCaptureManager {
 
         @Override // android.util.Dumpable
         public String getDumpableName() {
-            return "ContentCaptureManager";
+            return ContentCaptureManager.DUMPABLE_NAME;
         }
     }
 
@@ -538,7 +538,7 @@ public final class ContentCaptureManager {
             executeAdapterMethodLocked(new Consumer() { // from class: android.view.contentcapture.ContentCaptureManager$DataShareAdapterDelegate$$ExternalSyntheticLambda2
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    ((DataShareWriteAdapter) obj).onWrite(ParcelFileDescriptor.this);
+                    ((DataShareWriteAdapter) obj).onWrite(parcelFileDescriptor);
                 }
             }, "onWrite");
         }
@@ -582,7 +582,7 @@ public final class ContentCaptureManager {
                 Slog.w(ContentCaptureManager.TAG, "Can't execute " + str + "(), references are null");
                 return;
             }
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 executor.execute(new Runnable() { // from class: android.view.contentcapture.ContentCaptureManager$DataShareAdapterDelegate$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
@@ -591,7 +591,7 @@ public final class ContentCaptureManager {
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 

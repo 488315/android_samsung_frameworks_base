@@ -7,7 +7,6 @@ import androidx.compose.runtime.SnapshotStateKt;
 import androidx.compose.runtime.State;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AnimationState<T, V extends AnimationVector> implements State<T> {
     public long finishedTimeNanos;
@@ -18,16 +17,16 @@ public final class AnimationState<T, V extends AnimationVector> implements State
     public AnimationVector velocityVector;
 
     public AnimationState(TwoWayConverter<T, V> twoWayConverter, T t, V v, long j, long j2, boolean z) {
-        AnimationVector animationVector;
+        AnimationVector animationVectorCopy;
         this.typeConverter = twoWayConverter;
         this.value$delegate = SnapshotStateKt.mutableStateOf$default(t);
         if (v != null) {
-            animationVector = AnimationVectorsKt.copy(v);
+            animationVectorCopy = AnimationVectorsKt.copy(v);
         } else {
-            animationVector = (AnimationVector) ((TwoWayConverterImpl) twoWayConverter).convertToVector.mo779invoke(t);
-            animationVector.reset$animation_core();
+            animationVectorCopy = (AnimationVector) ((TwoWayConverterImpl) twoWayConverter).convertToVector.mo781invoke(t);
+            animationVectorCopy.reset$animation_core();
         }
-        this.velocityVector = animationVector;
+        this.velocityVector = animationVectorCopy;
         this.lastFrameTimeNanos = j;
         this.finishedTimeNanos = j2;
         this.isRunning = z;
@@ -39,7 +38,7 @@ public final class AnimationState<T, V extends AnimationVector> implements State
     }
 
     public final Object getVelocity() {
-        return ((TwoWayConverterImpl) this.typeConverter).convertFromVector.mo779invoke(this.velocityVector);
+        return ((TwoWayConverterImpl) this.typeConverter).convertFromVector.mo781invoke(this.velocityVector);
     }
 
     public final String toString() {

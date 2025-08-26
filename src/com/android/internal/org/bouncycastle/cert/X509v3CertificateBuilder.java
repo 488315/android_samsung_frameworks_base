@@ -66,9 +66,9 @@ public class X509v3CertificateBuilder {
         this.tbsGen.setSubjectPublicKeyInfo(x509CertificateHolder.getSubjectPublicKeyInfo());
         this.extGenerator = new ExtensionsGenerator();
         Extensions extensions = x509CertificateHolder.getExtensions();
-        Enumeration oids = extensions.oids();
-        while (oids.hasMoreElements()) {
-            ASN1ObjectIdentifier aSN1ObjectIdentifier = (ASN1ObjectIdentifier) oids.nextElement();
+        Enumeration enumerationOids = extensions.oids();
+        while (enumerationOids.hasMoreElements()) {
+            ASN1ObjectIdentifier aSN1ObjectIdentifier = (ASN1ObjectIdentifier) enumerationOids.nextElement();
             if (!Extension.subjectAltPublicKeyInfo.equals((ASN1Primitive) aSN1ObjectIdentifier) && !Extension.altSignatureAlgorithm.equals((ASN1Primitive) aSN1ObjectIdentifier) && !Extension.altSignatureValue.equals((ASN1Primitive) aSN1ObjectIdentifier)) {
                 this.extGenerator.addExtension(extensions.getExtension(aSN1ObjectIdentifier));
             }
@@ -166,8 +166,8 @@ public class X509v3CertificateBuilder {
             this.tbsGen.setExtensions(this.extGenerator.generate());
         }
         try {
-            TBSCertificate generateTBSCertificate = this.tbsGen.generateTBSCertificate();
-            return new X509CertificateHolder(generateStructure(generateTBSCertificate, contentSigner.getAlgorithmIdentifier(), generateSig(contentSigner, generateTBSCertificate)));
+            TBSCertificate tBSCertificateGenerateTBSCertificate = this.tbsGen.generateTBSCertificate();
+            return new X509CertificateHolder(generateStructure(tBSCertificateGenerateTBSCertificate, contentSigner.getAlgorithmIdentifier(), generateSig(contentSigner, tBSCertificateGenerateTBSCertificate)));
         } catch (IOException e2) {
             throw Exceptions.illegalArgumentException("cannot produce certificate signature", e2);
         }
@@ -195,8 +195,8 @@ public class X509v3CertificateBuilder {
                 this.extGenerator.addExtension(Extension.altSignatureValue, z, new DERBitString(generateSig(contentSigner2, this.tbsGen.generatePreTBSCertificate())));
                 this.tbsGen.setSignature(contentSigner.getAlgorithmIdentifier());
                 this.tbsGen.setExtensions(this.extGenerator.generate());
-                TBSCertificate generateTBSCertificate = this.tbsGen.generateTBSCertificate();
-                return new X509CertificateHolder(generateStructure(generateTBSCertificate, contentSigner.getAlgorithmIdentifier(), generateSig(contentSigner, generateTBSCertificate)));
+                TBSCertificate tBSCertificateGenerateTBSCertificate = this.tbsGen.generateTBSCertificate();
+                return new X509CertificateHolder(generateStructure(tBSCertificateGenerateTBSCertificate, contentSigner.getAlgorithmIdentifier(), generateSig(contentSigner, tBSCertificateGenerateTBSCertificate)));
             } catch (IOException e2) {
                 throw Exceptions.illegalArgumentException("cannot produce certificate signature", e2);
             }

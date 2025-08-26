@@ -8,7 +8,6 @@ import android.os.Looper;
 import android.os.RemoteException;
 import android.util.Log;
 import com.samsung.android.wifi.p2p.ISemWifiP2pCallback;
-import com.samsung.android.wifi.p2p.SemWifiP2pManager;
 import java.util.List;
 
 /* loaded from: classes6.dex */
@@ -62,7 +61,7 @@ public class SemWifiP2pManager {
                 this.mHandler.post(new Runnable() { // from class: com.samsung.android.wifi.p2p.SemWifiP2pManager$SemWifiP2pCallbackProxy$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SemWifiP2pManager.SemWifiP2pCallbackProxy.this.lambda$onSuccess$0();
+                        this.f$0.lambda$onSuccess$0();
                     }
                 });
             }
@@ -80,7 +79,7 @@ public class SemWifiP2pManager {
                 this.mHandler.post(new Runnable() { // from class: com.samsung.android.wifi.p2p.SemWifiP2pManager$SemWifiP2pCallbackProxy$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SemWifiP2pManager.SemWifiP2pCallbackProxy.this.lambda$onFailure$1(i);
+                        this.f$0.lambda$onFailure$1(i);
                     }
                 });
             }

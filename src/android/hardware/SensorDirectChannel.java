@@ -68,13 +68,13 @@ public final class SensorDirectChannel implements Channel {
     }
 
     static long[] encodeData(MemoryFile memoryFile) {
-        int i;
+        int int$;
         try {
-            i = memoryFile.getFileDescriptor().getInt$();
+            int$ = memoryFile.getFileDescriptor().getInt$();
         } catch (IOException unused) {
-            i = -1;
+            int$ = -1;
         }
-        return new long[]{1, 0, i};
+        return new long[]{1, 0, int$};
     }
 
     protected void finalize() throws Throwable {

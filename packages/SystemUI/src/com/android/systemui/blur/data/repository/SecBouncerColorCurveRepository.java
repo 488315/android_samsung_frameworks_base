@@ -4,7 +4,6 @@ import android.view.SemBlurInfo;
 import com.android.systemui.blur.BouncerColorCurve;
 import com.android.systemui.keyguard.KeyguardFoldController;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SecBouncerColorCurveRepository {
     public final BouncerColorCurve bouncerColorCurve = new BouncerColorCurve();

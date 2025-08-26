@@ -36,7 +36,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AccessibilityFloatingMenuController implements AccessibilityButtonModeObserver.ModeChangedListener, AccessibilityButtonTargetsObserver.TargetsChangedListener {
     public final AccessibilityButtonModeObserver mAccessibilityButtonModeObserver;
@@ -115,7 +114,6 @@ public class AccessibilityFloatingMenuController implements AccessibilityButtonM
     };
     public boolean mIsKeyguardVisible = false;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.accessibility.floatingmenu.AccessibilityFloatingMenuController$2, reason: invalid class name */
     public class AnonymousClass2 implements SemDesktopModeManager.DesktopModeListener {
         public AnonymousClass2() {
@@ -128,7 +126,7 @@ public class AccessibilityFloatingMenuController implements AccessibilityButtonM
             AccessibilityFloatingMenuController.this.mHandler.post(new Runnable() { // from class: com.android.systemui.accessibility.floatingmenu.AccessibilityFloatingMenuController$2$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    AccessibilityFloatingMenuController.AnonymousClass2 anonymousClass2 = AccessibilityFloatingMenuController.AnonymousClass2.this;
+                    AccessibilityFloatingMenuController.AnonymousClass2 anonymousClass2 = this.f$0;
                     SemDesktopModeState semDesktopModeState2 = semDesktopModeState;
                     AccessibilityFloatingMenuController accessibilityFloatingMenuController = AccessibilityFloatingMenuController.this;
                     accessibilityFloatingMenuController.handleFloatingMenuVisibility(accessibilityFloatingMenuController.mBtnMode, accessibilityFloatingMenuController.mBtnTargets, accessibilityFloatingMenuController.mIsKeyguardVisible);
@@ -141,12 +139,11 @@ public class AccessibilityFloatingMenuController implements AccessibilityButtonM
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class UserInitializationCompleteCallback extends IUserInitializationCompleteCallback.Stub {
         public UserInitializationCompleteCallback() {
         }
 
-        public final void onUserInitializationComplete(int i) {
+        public final void onUserInitializationComplete(int i) throws NumberFormatException {
             AccessibilityFloatingMenuController accessibilityFloatingMenuController = AccessibilityFloatingMenuController.this;
             int i2 = 0;
             accessibilityFloatingMenuController.mIsUserInInitialization = false;
@@ -161,7 +158,7 @@ public class AccessibilityFloatingMenuController implements AccessibilityButtonM
             AccessibilityFloatingMenuController.this.mHandler.post(new Runnable() { // from class: com.android.systemui.accessibility.floatingmenu.AccessibilityFloatingMenuController$UserInitializationCompleteCallback$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    AccessibilityFloatingMenuController.UserInitializationCompleteCallback userInitializationCompleteCallback = AccessibilityFloatingMenuController.UserInitializationCompleteCallback.this;
+                    AccessibilityFloatingMenuController.UserInitializationCompleteCallback userInitializationCompleteCallback = this.f$0;
                     AccessibilityFloatingMenuController.this.destroyFloatingMenu();
                     AccessibilityFloatingMenuController accessibilityFloatingMenuController3 = AccessibilityFloatingMenuController.this;
                     accessibilityFloatingMenuController3.handleFloatingMenuVisibility(accessibilityFloatingMenuController3.mBtnMode, accessibilityFloatingMenuController3.mBtnTargets, accessibilityFloatingMenuController3.mIsKeyguardVisible);
@@ -240,11 +237,11 @@ public class AccessibilityFloatingMenuController implements AccessibilityButtonM
                         this.mDisplayTracker.getClass();
                         i2 = 0;
                     }
-                    Context createWindowContext = this.mContext.createWindowContext(displayManager.getDisplay(i2), 2024, null);
+                    Context contextCreateWindowContext = this.mContext.createWindowContext(displayManager.getDisplay(i2), 2024, null);
                     if (AccessibilityUtils.isFoldedLargeCoverScreen()) {
                         this.mContext = AccessibilityUtils.getSubDisplayContext(this.mContext);
                     }
-                    this.mFloatingMenu = new AccessibilityFloatingMenu(createWindowContext, this.mWindowManager, this.mAccessibilityManager, this.mSecureSettings, this.mNavigationModeController, this.mHearingAidDeviceManager);
+                    this.mFloatingMenu = new AccessibilityFloatingMenu(contextCreateWindowContext, this.mWindowManager, this.mAccessibilityManager, this.mSecureSettings, this.mNavigationModeController, this.mHearingAidDeviceManager);
                     this.mContext.registerReceiver(this.mBroadcastReceiver, KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m("android.intent.action.LOCALE_CHANGED", "com.samsung.android.theme.themecenter.THEME_APPLY"), 2);
                     SemDesktopModeManager semDesktopModeManager = this.mSemDesktopModeManager;
                     if (semDesktopModeManager != null) {
@@ -289,7 +286,7 @@ public class AccessibilityFloatingMenuController implements AccessibilityButtonM
         destroyFloatingMenu();
     }
 
-    public final void init() {
+    public final void init() throws NumberFormatException {
         int i;
         AccessibilityButtonModeObserver accessibilityButtonModeObserver = this.mAccessibilityButtonModeObserver;
         try {

@@ -6,7 +6,6 @@ import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class WallpaperFocalAreaRepositoryImpl implements WallpaperFocalAreaRepository {
     public final StateFlowImpl _notificationDefaultTop;
@@ -22,19 +21,19 @@ public final class WallpaperFocalAreaRepositoryImpl implements WallpaperFocalAre
 
     public WallpaperFocalAreaRepositoryImpl(WallpaperRepository wallpaperRepository) {
         this.wallpaperRepository = wallpaperRepository;
-        Float valueOf = Float.valueOf(0.0f);
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(valueOf);
-        this._shortcutAbsoluteTop = MutableStateFlow;
-        this.shortcutAbsoluteTop = FlowKt.asStateFlow(MutableStateFlow);
-        StateFlowImpl MutableStateFlow2 = StateFlowKt.MutableStateFlow(valueOf);
-        this._notificationStackAbsoluteBottom = MutableStateFlow2;
-        this.notificationStackAbsoluteBottom = FlowKt.asStateFlow(MutableStateFlow2);
-        StateFlowImpl MutableStateFlow3 = StateFlowKt.MutableStateFlow(new RectF(0.0f, 0.0f, 0.0f, 0.0f));
-        this._wallpaperFocalAreaBounds = MutableStateFlow3;
-        this.wallpaperFocalAreaBounds = FlowKt.asStateFlow(MutableStateFlow3);
-        StateFlowImpl MutableStateFlow4 = StateFlowKt.MutableStateFlow(valueOf);
-        this._notificationDefaultTop = MutableStateFlow4;
-        this.notificationDefaultTop = FlowKt.asStateFlow(MutableStateFlow4);
+        Float fValueOf = Float.valueOf(0.0f);
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(fValueOf);
+        this._shortcutAbsoluteTop = stateFlowImplMutableStateFlow;
+        this.shortcutAbsoluteTop = FlowKt.asStateFlow(stateFlowImplMutableStateFlow);
+        StateFlowImpl stateFlowImplMutableStateFlow2 = StateFlowKt.MutableStateFlow(fValueOf);
+        this._notificationStackAbsoluteBottom = stateFlowImplMutableStateFlow2;
+        this.notificationStackAbsoluteBottom = FlowKt.asStateFlow(stateFlowImplMutableStateFlow2);
+        StateFlowImpl stateFlowImplMutableStateFlow3 = StateFlowKt.MutableStateFlow(new RectF(0.0f, 0.0f, 0.0f, 0.0f));
+        this._wallpaperFocalAreaBounds = stateFlowImplMutableStateFlow3;
+        this.wallpaperFocalAreaBounds = FlowKt.asStateFlow(stateFlowImplMutableStateFlow3);
+        StateFlowImpl stateFlowImplMutableStateFlow4 = StateFlowKt.MutableStateFlow(fValueOf);
+        this._notificationDefaultTop = stateFlowImplMutableStateFlow4;
+        this.notificationDefaultTop = FlowKt.asStateFlow(stateFlowImplMutableStateFlow4);
         this.hasFocalArea = ((WallpaperRepositoryImpl) wallpaperRepository).shouldSendFocalArea;
     }
 }

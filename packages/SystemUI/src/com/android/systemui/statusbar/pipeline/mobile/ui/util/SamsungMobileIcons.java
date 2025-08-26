@@ -3,7 +3,6 @@ package com.android.systemui.statusbar.pipeline.mobile.ui.util;
 import com.android.systemui.R;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SamsungMobileIcons {
     public static final Companion Companion = new Companion(null);
@@ -61,7 +60,6 @@ public final class SamsungMobileIcons {
     public static final int DISABLED_5G_AVAILABLE = R.drawable.stat_sys_data_disabled_5g_available;
     public static final int SIGNAL_LIMITED_WHILE_OTHER_SLOT_CALL = R.drawable.stat_sys_data_type_at_signal_area_limited;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();

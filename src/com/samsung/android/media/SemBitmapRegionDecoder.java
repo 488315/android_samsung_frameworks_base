@@ -44,9 +44,9 @@ public class SemBitmapRegionDecoder {
         }
         Log.d(TAG, "newInstance file e");
         SemBitmapRegionDecoder semBitmapRegionDecoder = new SemBitmapRegionDecoder();
-        InternalRegionDecoder newInstance = InternalRegionDecoder.newInstance(str);
-        semBitmapRegionDecoder.mRegionDecoder = newInstance;
-        if (newInstance != null) {
+        InternalRegionDecoder internalRegionDecoderNewInstance = InternalRegionDecoder.newInstance(str);
+        semBitmapRegionDecoder.mRegionDecoder = internalRegionDecoderNewInstance;
+        if (internalRegionDecoderNewInstance != null) {
             return semBitmapRegionDecoder;
         }
         Log.e(TAG, "newInstance file fail");
@@ -62,9 +62,9 @@ public class SemBitmapRegionDecoder {
         }
         Log.d(TAG, "newInstance byteArray e");
         SemBitmapRegionDecoder semBitmapRegionDecoder = new SemBitmapRegionDecoder();
-        InternalRegionDecoder newInstance = InternalRegionDecoder.newInstance(bArr, i, i2);
-        semBitmapRegionDecoder.mRegionDecoder = newInstance;
-        if (newInstance != null) {
+        InternalRegionDecoder internalRegionDecoderNewInstance = InternalRegionDecoder.newInstance(bArr, i, i2);
+        semBitmapRegionDecoder.mRegionDecoder = internalRegionDecoderNewInstance;
+        if (internalRegionDecoderNewInstance != null) {
             return semBitmapRegionDecoder;
         }
         Log.e(TAG, "newInstance byteArray fail");
@@ -77,9 +77,9 @@ public class SemBitmapRegionDecoder {
         }
         FileInputStream fileInputStream = new FileInputStream(fileDescriptor);
         try {
-            SemBitmapRegionDecoder newInstance = newInstance(fileInputStream);
+            SemBitmapRegionDecoder semBitmapRegionDecoderNewInstance = newInstance(fileInputStream);
             fileInputStream.close();
-            return newInstance;
+            return semBitmapRegionDecoderNewInstance;
         } catch (Throwable th) {
             try {
                 fileInputStream.close();
@@ -97,9 +97,9 @@ public class SemBitmapRegionDecoder {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         byte[] bArr = new byte[8192];
         while (true) {
-            int read = inputStream.read(bArr);
-            if (read != -1) {
-                byteArrayOutputStream.write(bArr, 0, read);
+            int i = inputStream.read(bArr);
+            if (i != -1) {
+                byteArrayOutputStream.write(bArr, 0, i);
             } else {
                 byte[] byteArray = byteArrayOutputStream.toByteArray();
                 byteArrayOutputStream.close();
@@ -116,7 +116,7 @@ public class SemBitmapRegionDecoder {
     }
 
     public Bitmap decodeRegion(Rect rect, BitmapFactory.Options options) {
-        Bitmap decodeRegion;
+        Bitmap bitmapDecodeRegion;
         Log.d(TAG, "decode regioin:e");
         checkRecycled("decodeRegion called on recycled region decoder");
         if (this.mRegionDecoder == null) {
@@ -132,9 +132,9 @@ public class SemBitmapRegionDecoder {
                 i = 1;
             }
             options.inSampleSize = i;
-            int width = ((rect.width() + i) - 1) / i;
-            int height = ((rect.height() + i) - 1) / i;
-            if (options.inBitmap != null && (options.inBitmap.getWidth() != width || options.inBitmap.getHeight() != height)) {
+            int iWidth = ((rect.width() + i) - 1) / i;
+            int iHeight = ((rect.height() + i) - 1) / i;
+            if (options.inBitmap != null && (options.inBitmap.getWidth() != iWidth || options.inBitmap.getHeight() != iHeight)) {
                 Log.w(TAG, "RegionDecode Input Bitmap error");
                 return options.inBitmap;
             }
@@ -145,17 +145,17 @@ public class SemBitmapRegionDecoder {
         Log.d(TAG, "decode region");
         if (options != null && options.semInApplyPhotoHdr) {
             Log.d(TAG, "decodePhotoHdrRegion opt.semInApplyPhotoHdr true");
-            decodeRegion = this.mRegionDecoder.decodePhotoHdrRegion(rect, options);
+            bitmapDecodeRegion = this.mRegionDecoder.decodePhotoHdrRegion(rect, options);
         } else {
             Log.d(TAG, "decodeRegion opt.semInApplyPhotoHdr false");
-            decodeRegion = this.mRegionDecoder.decodeRegion(rect, options);
+            bitmapDecodeRegion = this.mRegionDecoder.decodeRegion(rect, options);
         }
-        if (decodeRegion == null) {
+        if (bitmapDecodeRegion == null) {
             Log.e(TAG, "coverBitmap null");
             return null;
         }
         Log.d(TAG, "decode regioin:x");
-        return decodeRegion;
+        return bitmapDecodeRegion;
     }
 
     public int getWidth() {

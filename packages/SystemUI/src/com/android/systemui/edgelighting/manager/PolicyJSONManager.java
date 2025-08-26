@@ -12,7 +12,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class PolicyJSONManager {
     /* JADX WARN: Multi-variable type inference failed */
@@ -51,9 +50,10 @@ public class PolicyJSONManager {
     /* JADX WARN: Type inference failed for: r3v7 */
     /* JADX WARN: Type inference failed for: r3v8, types: [java.io.FileOutputStream] */
     /* JADX WARN: Type inference failed for: r3v9, types: [java.io.FileOutputStream, java.io.OutputStream] */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:82:0x0036 -> B:18:0x006d). Please report as a decompilation issue!!! */
-    public static void writeJson(Context e, long j, int i, SparseArray sparseArray) {
-        ?? r0 = "edge_lighting_policy.json";
+    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:19:0x0036 -> B:66:0x006d). Please report as a decompilation issue!!! */
+    public static void writeJson(Context e, long j, int i, SparseArray sparseArray) throws Throwable {
+        JsonWriter jsonWriter;
+        ?? outputStreamWriter = "edge_lighting_policy.json";
         ?? r1 = 0;
         r1 = 0;
         r1 = 0;
@@ -62,109 +62,109 @@ public class PolicyJSONManager {
         r1 = 0;
         r1 = 0;
         try {
-        } catch (IOException e2) {
-            e = e2;
-            e.printStackTrace();
-        }
-        try {
             try {
-                e.deleteFile("edge_lighting_policy.json");
-                e = e.openFileOutput("edge_lighting_policy.json", 0);
                 try {
-                    r0 = new OutputStreamWriter((OutputStream) e, "UTF-8");
+                    e.deleteFile("edge_lighting_policy.json");
+                    e = e.openFileOutput("edge_lighting_policy.json", 0);
                     try {
-                        JsonWriter jsonWriter = new JsonWriter(r0);
+                        outputStreamWriter = new OutputStreamWriter((OutputStream) e, "UTF-8");
                         try {
-                            r1 = " ";
-                            jsonWriter.setIndent(" ");
-                            writePolicy(jsonWriter, j, i, sparseArray);
-                            try {
-                                jsonWriter.close();
-                            } catch (IOException e3) {
-                                e3.printStackTrace();
-                            }
-                            try {
-                                r0.close();
-                            } catch (IOException e4) {
-                                e4.printStackTrace();
-                            }
-                            if (e != 0) {
-                                e.close();
-                            }
-                        } catch (IOException e5) {
-                            e = e5;
-                            r1 = jsonWriter;
-                            e.printStackTrace();
-                            if (r1 != 0) {
-                                try {
-                                    r1.close();
-                                } catch (IOException e6) {
-                                    e6.printStackTrace();
-                                }
-                            }
-                            if (r0 != 0) {
-                                try {
-                                    r0.close();
-                                } catch (IOException e7) {
-                                    e7.printStackTrace();
-                                }
-                            }
-                            if (e != 0) {
-                                e.close();
-                            }
-                        } catch (Throwable th) {
-                            th = th;
-                            r1 = jsonWriter;
-                            if (r1 != 0) {
-                                try {
-                                    r1.close();
-                                } catch (IOException e8) {
-                                    e8.printStackTrace();
-                                }
-                            }
-                            if (r0 != 0) {
-                                try {
-                                    r0.close();
-                                } catch (IOException e9) {
-                                    e9.printStackTrace();
-                                }
-                            }
-                            if (e == 0) {
-                                throw th;
-                            }
-                            try {
-                                e.close();
-                                throw th;
-                            } catch (IOException e10) {
-                                e10.printStackTrace();
-                                throw th;
-                            }
+                            jsonWriter = new JsonWriter(outputStreamWriter);
+                        } catch (IOException e2) {
+                            e = e2;
                         }
-                    } catch (IOException e11) {
-                        e = e11;
+                    } catch (IOException e3) {
+                        e = e3;
+                        outputStreamWriter = 0;
+                    } catch (Throwable th) {
+                        th = th;
+                        outputStreamWriter = 0;
                     }
-                } catch (IOException e12) {
-                    e = e12;
-                    r0 = 0;
                 } catch (Throwable th2) {
                     th = th2;
-                    r0 = 0;
                 }
-            } catch (IOException e13) {
-                e = e13;
+            } catch (IOException e4) {
+                e = e4;
                 e = 0;
-                r0 = 0;
+                outputStreamWriter = 0;
             } catch (Throwable th3) {
                 th = th3;
                 e = 0;
-                r0 = 0;
+                outputStreamWriter = 0;
+            }
+        } catch (IOException e5) {
+            e = e5;
+            e.printStackTrace();
+        }
+        try {
+            r1 = " ";
+            jsonWriter.setIndent(" ");
+            writePolicy(jsonWriter, j, i, sparseArray);
+            try {
+                jsonWriter.close();
+            } catch (IOException e6) {
+                e6.printStackTrace();
+            }
+            try {
+                outputStreamWriter.close();
+            } catch (IOException e7) {
+                e7.printStackTrace();
+            }
+            if (e != 0) {
+                e.close();
+            }
+        } catch (IOException e8) {
+            e = e8;
+            r1 = jsonWriter;
+            e.printStackTrace();
+            if (r1 != 0) {
+                try {
+                    r1.close();
+                } catch (IOException e9) {
+                    e9.printStackTrace();
+                }
+            }
+            if (outputStreamWriter != 0) {
+                try {
+                    outputStreamWriter.close();
+                } catch (IOException e10) {
+                    e10.printStackTrace();
+                }
+            }
+            if (e != 0) {
+                e.close();
             }
         } catch (Throwable th4) {
             th = th4;
+            r1 = jsonWriter;
+            if (r1 != 0) {
+                try {
+                    r1.close();
+                } catch (IOException e11) {
+                    e11.printStackTrace();
+                }
+            }
+            if (outputStreamWriter != 0) {
+                try {
+                    outputStreamWriter.close();
+                } catch (IOException e12) {
+                    e12.printStackTrace();
+                }
+            }
+            if (e == 0) {
+                throw th;
+            }
+            try {
+                e.close();
+                throw th;
+            } catch (IOException e13) {
+                e13.printStackTrace();
+                throw th;
+            }
         }
     }
 
-    public static void writePolicy(JsonWriter jsonWriter, long j, int i, SparseArray sparseArray) {
+    public static void writePolicy(JsonWriter jsonWriter, long j, int i, SparseArray sparseArray) throws IOException {
         jsonWriter.beginObject();
         jsonWriter.name("policy_version").value(j);
         jsonWriter.name("policy_type").value(i);
@@ -172,10 +172,10 @@ public class PolicyJSONManager {
         jsonWriter.beginArray();
         int size = sparseArray.size();
         for (int i2 = 0; i2 < size; i2++) {
-            int keyAt = sparseArray.keyAt(i2);
-            HashMap hashMap = (HashMap) sparseArray.valueAt(i2);
-            if (keyAt == 1 || keyAt == 2) {
-                Iterator it = hashMap.entrySet().iterator();
+            int iKeyAt = sparseArray.keyAt(i2);
+            HashMap map = (HashMap) sparseArray.valueAt(i2);
+            if (iKeyAt == 1 || iKeyAt == 2) {
+                Iterator it = map.entrySet().iterator();
                 while (it.hasNext()) {
                     PolicyInfo policyInfo = (PolicyInfo) ((Map.Entry) it.next()).getValue();
                     jsonWriter.beginObject();
@@ -189,11 +189,11 @@ public class PolicyJSONManager {
             }
         }
         jsonWriter.endArray();
-        HashMap hashMap2 = (HashMap) sparseArray.get(10);
-        if (hashMap2 != null) {
+        HashMap map2 = (HashMap) sparseArray.get(10);
+        if (map2 != null) {
             jsonWriter.name("edge_lighting_priority");
             jsonWriter.beginArray();
-            Iterator it2 = hashMap2.entrySet().iterator();
+            Iterator it2 = map2.entrySet().iterator();
             while (it2.hasNext()) {
                 PolicyInfo policyInfo2 = (PolicyInfo) ((Map.Entry) it2.next()).getValue();
                 jsonWriter.beginObject();
@@ -205,11 +205,11 @@ public class PolicyJSONManager {
             }
             jsonWriter.endArray();
         }
-        HashMap hashMap3 = (HashMap) sparseArray.get(11);
-        if (hashMap3 != null) {
+        HashMap map3 = (HashMap) sparseArray.get(11);
+        if (map3 != null) {
             jsonWriter.name("edge_lighting_whitelist");
             jsonWriter.beginArray();
-            Iterator it3 = hashMap3.entrySet().iterator();
+            Iterator it3 = map3.entrySet().iterator();
             while (it3.hasNext()) {
                 PolicyInfo policyInfo3 = (PolicyInfo) ((Map.Entry) it3.next()).getValue();
                 jsonWriter.beginObject();

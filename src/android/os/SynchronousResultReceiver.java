@@ -45,12 +45,12 @@ public class SynchronousResultReceiver extends ResultReceiver {
     }
 
     public Result awaitResult(long j) throws TimeoutException {
-        long currentTimeMillis = System.currentTimeMillis() + j;
+        long jCurrentTimeMillis = System.currentTimeMillis() + j;
         while (j >= 0) {
             try {
                 return this.mFuture.get(j, TimeUnit.MILLISECONDS);
             } catch (InterruptedException unused) {
-                j -= currentTimeMillis - System.currentTimeMillis();
+                j -= jCurrentTimeMillis - System.currentTimeMillis();
             } catch (ExecutionException e) {
                 throw new AssertionError("Error receiving response", e);
             }

@@ -7,13 +7,13 @@ import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.GridView;
 import android.widget.ListAdapter;
 import androidx.core.view.AccessibilityDelegateCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 final class MaterialCalendarGridView extends GridView {
     public final boolean nestedScrollable;
@@ -22,9 +22,8 @@ final class MaterialCalendarGridView extends GridView {
         this(context, null);
     }
 
-    /* JADX WARN: Can't rename method to resolve collision */
     @Override // android.widget.GridView, android.widget.AdapterView
-    public final ListAdapter getAdapter() {
+    public final Adapter getAdapter() {
         return (MonthAdapter) super.getAdapter();
     }
 
@@ -39,10 +38,10 @@ final class MaterialCalendarGridView extends GridView {
         super.onDraw(canvas);
         MonthAdapter monthAdapter = (MonthAdapter) super.getAdapter();
         monthAdapter.getClass();
-        int max = Math.max(monthAdapter.firstPositionInMonth(), getFirstVisiblePosition());
-        int min = Math.min(monthAdapter.lastPositionInMonth(), getLastVisiblePosition());
-        monthAdapter.getItem(max);
-        monthAdapter.getItem(min);
+        int iMax = Math.max(monthAdapter.firstPositionInMonth(), getFirstVisiblePosition());
+        int iMin = Math.min(monthAdapter.lastPositionInMonth(), getLastVisiblePosition());
+        monthAdapter.getItem(iMax);
+        monthAdapter.getItem(iMin);
         throw null;
     }
 
@@ -100,8 +99,7 @@ final class MaterialCalendarGridView extends GridView {
     }
 
     @Override // android.widget.GridView, android.widget.AdapterView
-    /* renamed from: getAdapter, reason: avoid collision after fix types in other method */
-    public final ListAdapter getAdapter2() {
+    public final ListAdapter getAdapter() {
         return (MonthAdapter) super.getAdapter();
     }
 
@@ -131,7 +129,7 @@ final class MaterialCalendarGridView extends GridView {
     }
 
     @Override // android.widget.GridView, android.widget.AdapterView
-    public final ListAdapter getAdapter() {
+    public final MonthAdapter getAdapter() {
         return (MonthAdapter) super.getAdapter();
     }
 }

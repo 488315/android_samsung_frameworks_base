@@ -6,14 +6,20 @@ import androidx.sqlite.db.SupportSQLiteOpenHelper;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
+import kotlin.ResultKt;
+import kotlin.Unit;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
+import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
+import kotlinx.coroutines.DelayKt;
 import kotlinx.coroutines.StandaloneCoroutine;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AutoCloser {
     public StandaloneCoroutine autoCloseJob;
@@ -28,7 +34,6 @@ public final class AutoCloser {
     public final AtomicInteger referenceCount;
     public final Watch watch;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -38,8 +43,67 @@ public final class AutoCloser {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Watch {
+    }
+
+    /* renamed from: androidx.room.support.AutoCloser$decrementCountAndScheduleClose$2, reason: invalid class name */
+    final class AnonymousClass2 extends SuspendLambda implements Function2 {
+        int label;
+
+        public AnonymousClass2(Continuation continuation) {
+            super(2, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return AutoCloser.this.new AnonymousClass2(continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((AnonymousClass2) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                long j = AutoCloser.this.autoCloseTimeoutInMs;
+                this.label = 1;
+                if (DelayKt.delay(j, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            AutoCloser autoCloser = AutoCloser.this;
+            synchronized (autoCloser.lock) {
+                try {
+                    ((AutoCloser$$ExternalSyntheticLambda0) autoCloser.watch).getClass();
+                    if (SystemClock.uptimeMillis() - autoCloser.lastDecrementRefCountTimeStamp.get() >= autoCloser.autoCloseTimeoutInMs && autoCloser.referenceCount.get() == 0) {
+                        Function0 function0 = autoCloser.onAutoCloseCallback;
+                        if (function0 == null) {
+                            throw new IllegalStateException("onAutoCloseCallback is null but it should  have been set before use. Please file a bug against Room at: https://issuetracker.google.com/issues/new?component=413107&template=1096568");
+                        }
+                        function0.invoke();
+                        SupportSQLiteDatabase supportSQLiteDatabase = autoCloser.delegateDatabase;
+                        if (supportSQLiteDatabase != null && supportSQLiteDatabase.isOpen()) {
+                            supportSQLiteDatabase.close();
+                        }
+                        autoCloser.delegateDatabase = null;
+                        Unit unit = Unit.INSTANCE;
+                    }
+                } catch (Throwable th) {
+                    throw th;
+                }
+            }
+            return Unit.INSTANCE;
+        }
     }
 
     static {
@@ -56,25 +120,25 @@ public final class AutoCloser {
     }
 
     public final void decrementCountAndScheduleClose() {
-        int decrementAndGet = this.referenceCount.decrementAndGet();
-        if (decrementAndGet < 0) {
+        int iDecrementAndGet = this.referenceCount.decrementAndGet();
+        if (iDecrementAndGet < 0) {
             throw new IllegalStateException("Unbalanced reference count.");
         }
         AtomicLong atomicLong = this.lastDecrementRefCountTimeStamp;
         ((AutoCloser$$ExternalSyntheticLambda0) this.watch).getClass();
         atomicLong.set(SystemClock.uptimeMillis());
-        if (decrementAndGet == 0) {
+        if (iDecrementAndGet == 0) {
             CoroutineScope coroutineScope = this.coroutineScope;
             if (coroutineScope == null) {
                 coroutineScope = null;
             }
-            this.autoCloseJob = BuildersKt.launch$default(coroutineScope, null, null, new AutoCloser$decrementCountAndScheduleClose$2(this, null), 3);
+            this.autoCloseJob = BuildersKt.launch$default(coroutineScope, null, null, new AnonymousClass2(null), 3);
         }
     }
 
     public final Object executeRefCountingFunction(Function1 function1) {
         try {
-            return function1.mo779invoke(incrementCountAndEnsureDbIsOpen());
+            return function1.mo781invoke(incrementCountAndEnsureDbIsOpen());
         } finally {
             decrementCountAndScheduleClose();
         }

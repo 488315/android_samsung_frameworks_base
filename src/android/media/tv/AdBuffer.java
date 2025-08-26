@@ -94,21 +94,21 @@ public final class AdBuffer implements Parcelable {
     }
 
     private AdBuffer(Parcel parcel) {
-        int readInt = parcel.readInt();
-        String readString = parcel.readString();
+        int i = parcel.readInt();
+        String string = parcel.readString();
         SharedMemory sharedMemory = (SharedMemory) parcel.readTypedObject(SharedMemory.CREATOR);
-        int readInt2 = parcel.readInt();
-        int readInt3 = parcel.readInt();
-        long readLong = parcel.readLong();
-        int readInt4 = parcel.readInt();
-        this.mId = readInt;
-        this.mMimeType = readString;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString);
+        int i2 = parcel.readInt();
+        int i3 = parcel.readInt();
+        long j = parcel.readLong();
+        int i4 = parcel.readInt();
+        this.mId = i;
+        this.mMimeType = string;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string);
         this.mBuffer = sharedMemory;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) sharedMemory);
-        this.mOffset = readInt2;
-        this.mLength = readInt3;
-        this.mPresentationTimeUs = readLong;
-        this.mFlags = readInt4;
+        this.mOffset = i2;
+        this.mLength = i3;
+        this.mPresentationTimeUs = j;
+        this.mFlags = i4;
     }
 }

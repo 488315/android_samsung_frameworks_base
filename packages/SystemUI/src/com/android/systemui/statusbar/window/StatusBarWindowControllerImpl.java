@@ -1,6 +1,7 @@
 package com.android.systemui.statusbar.window;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Insets;
 import android.graphics.Rect;
 import android.os.Binder;
@@ -32,7 +33,6 @@ import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class StatusBarWindowControllerImpl implements StatusBarWindowController {
     public int mBarHeight;
@@ -51,12 +51,10 @@ public class StatusBarWindowControllerImpl implements StatusBarWindowController 
     public final State mCurrentState = new State(0);
     public final Binder mInsetsSourceOwner = new Binder();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory extends StatusBarWindowController.Factory {
         StatusBarWindowControllerImpl create(Context context, WindowManager windowManager, StatusBarConfigurationController statusBarConfigurationController, StatusBarContentInsetsProvider statusBarContentInsetsProvider);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class State {
         public boolean mChangeStatusBarHeight;
         public boolean mForceStatusBarVisible;
@@ -96,11 +94,11 @@ public class StatusBarWindowControllerImpl implements StatusBarWindowController 
         optional.ifPresent(new Consumer() { // from class: com.android.systemui.statusbar.window.StatusBarWindowControllerImpl$$ExternalSyntheticLambda0
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                final StatusBarWindowControllerImpl statusBarWindowControllerImpl = StatusBarWindowControllerImpl.this;
+                final StatusBarWindowControllerImpl statusBarWindowControllerImpl = this.f$0;
                 ((UnfoldTransitionProgressProvider) obj).addCallback(new JankMonitorTransitionProgressListener(new Supplier() { // from class: com.android.systemui.statusbar.window.StatusBarWindowControllerImpl$$ExternalSyntheticLambda1
                     @Override // java.util.function.Supplier
                     public final Object get() {
-                        return StatusBarWindowControllerImpl.this.mStatusBarWindowView;
+                        return statusBarWindowControllerImpl.mStatusBarWindowView;
                     }
                 }));
             }
@@ -159,7 +157,7 @@ public class StatusBarWindowControllerImpl implements StatusBarWindowController 
         }
     }
 
-    public final WindowManager.LayoutParams getBarLayoutParamsForRotation(int i) {
+    public final WindowManager.LayoutParams getBarLayoutParamsForRotation(int i) throws Resources.NotFoundException {
         int statusBarHeightForRotation = SystemBarUtils.getStatusBarHeightForRotation(this.mContext, i);
         WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams(-1, statusBarHeightForRotation, 2000, -2147483640, -3);
         layoutParams.privateFlags |= 16777216;
@@ -170,7 +168,7 @@ public class StatusBarWindowControllerImpl implements StatusBarWindowController 
         layoutParams.packageName = this.mContext.getPackageName();
         layoutParams.layoutInDisplayCutoutMode = 3;
         InsetsFrameProvider insetsFrameProvider = new InsetsFrameProvider(this.mInsetsSourceOwner, 0, WindowInsets.Type.mandatorySystemGestures());
-        int dimensionPixelSize = this.mContext.getResources().getDimensionPixelSize(android.R.dimen.indeterminate_progress_alpha_22);
+        int dimensionPixelSize = this.mContext.getResources().getDimensionPixelSize(android.R.dimen.indeterminate_progress_alpha_23);
         if (dimensionPixelSize > 0) {
             insetsFrameProvider.setMinimalInsetsSizeInDisplayCutoutSafe(Insets.of(0, dimensionPixelSize, 0, 0));
         }

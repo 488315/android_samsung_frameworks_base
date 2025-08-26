@@ -9,13 +9,11 @@ import kotlin.collections.AbstractMutableSet;
 import kotlin.collections.builders.MapBuilder;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class SetBuilder<E> extends AbstractMutableSet implements Set<E>, Serializable {
     public static final SetBuilder Empty;
     private final MapBuilder<E, ?> backing;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -35,7 +33,7 @@ public final class SetBuilder<E> extends AbstractMutableSet implements Set<E>, S
         this.backing = mapBuilder;
     }
 
-    private final Object writeReplace() {
+    private final Object writeReplace() throws NotSerializableException {
         if (this.backing.isReadOnly$kotlin_stdlib()) {
             return new SerializedCollection(this, 1);
         }
@@ -89,11 +87,11 @@ public final class SetBuilder<E> extends AbstractMutableSet implements Set<E>, S
     public final boolean remove(Object obj) {
         MapBuilder<E, ?> mapBuilder = this.backing;
         mapBuilder.checkIsMutable$kotlin_stdlib();
-        int findKey = mapBuilder.findKey(obj);
-        if (findKey < 0) {
+        int iFindKey = mapBuilder.findKey(obj);
+        if (iFindKey < 0) {
             return false;
         }
-        mapBuilder.removeEntryAt(findKey);
+        mapBuilder.removeEntryAt(iFindKey);
         return true;
     }
 

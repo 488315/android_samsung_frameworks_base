@@ -116,12 +116,12 @@ class Cea608CCWidget extends ClosedCaptionWidget implements Cea608CCParser.Displ
             this.mShadowOffset = f;
             setScaleX(1.0f);
             getPaint().getTextBounds(Cea608CCWidget.mDummyText, 0, 34, Cea608CCWidget.mTextBounds);
-            float width = Cea608CCWidget.mTextBounds.width();
+            float fWidth = Cea608CCWidget.mTextBounds.width();
             float size2 = View.MeasureSpec.getSize(i);
             try {
-                setScaleX(size2 / width);
+                setScaleX(size2 / fWidth);
             } catch (IllegalArgumentException e) {
-                Log.w("CCLineBox", "setScaleX(" + size2 + ", " + width + ") : " + e.getMessage());
+                Log.w("CCLineBox", "setScaleX(" + size2 + ", " + fWidth + ") : " + e.getMessage());
             }
             super.onMeasure(i, i2);
         }
@@ -240,10 +240,10 @@ class Cea608CCWidget extends ClosedCaptionWidget implements Cea608CCParser.Displ
                 measuredHeight = i3 / 4;
             }
             int i5 = (int) (measuredWidth * SAFE_AREA_RATIO);
-            int makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(((int) (measuredHeight * SAFE_AREA_RATIO)) / 15, 1073741824);
-            int makeMeasureSpec2 = View.MeasureSpec.makeMeasureSpec(i5, 1073741824);
+            int iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(((int) (measuredHeight * SAFE_AREA_RATIO)) / 15, 1073741824);
+            int iMakeMeasureSpec2 = View.MeasureSpec.makeMeasureSpec(i5, 1073741824);
             for (int i6 = 0; i6 < 15; i6++) {
-                this.mLineBoxes[i6].measure(makeMeasureSpec2, makeMeasureSpec);
+                this.mLineBoxes[i6].measure(iMakeMeasureSpec2, iMakeMeasureSpec);
             }
         }
 

@@ -6,7 +6,6 @@ import androidx.compose.animation.graphics.vector.PropertyValuesHolder2D$$Extern
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class UnreleasedFlag extends BooleanFlag {
     public final String name;
@@ -58,12 +57,12 @@ public final class UnreleasedFlag extends BooleanFlag {
         String str2 = this.namespace;
         boolean z = this.teamfood;
         boolean z2 = this.overridden;
-        StringBuilder m = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("UnreleasedFlag(name=", str, ", namespace=", str2, ", teamfood=");
-        m.append(z);
-        m.append(", overridden=");
-        m.append(z2);
-        m.append(")");
-        return m.toString();
+        StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("UnreleasedFlag(name=", str, ", namespace=", str2, ", teamfood=");
+        sbM.append(z);
+        sbM.append(", overridden=");
+        sbM.append(z2);
+        sbM.append(")");
+        return sbM.toString();
     }
 
     public UnreleasedFlag(String str, String str2, boolean z, boolean z2) {

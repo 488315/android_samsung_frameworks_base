@@ -8,7 +8,7 @@
             <include android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/notification_content_margin" layout="@layout/notification_template_conversation_header" />
             <include layout="@layout/notification_template_text" />
         </LinearLayout>
-        <FrameLayout android:layout_gravity="end|center|top" android:layout_width="wrap_content" android:layout_height="fill_parent" android:minWidth="@dimen/notification_content_margin_end">
+        <FrameLayout android:layout_gravity="end|top" android:layout_width="wrap_content" android:layout_height="fill_parent" android:minWidth="@dimen/notification_content_margin_end">
             <include android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/notification_content_margin" android:layout_marginStart="@dimen/notification_expand_button_margin_start" android:layout_marginEnd="@dimen/notification_expand_button_margin_end" layout="@layout/notification_expand_button" />
         </FrameLayout>
     </LinearLayout>

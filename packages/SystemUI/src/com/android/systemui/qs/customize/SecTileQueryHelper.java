@@ -15,7 +15,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SecTileQueryHelper {
     public final Executor mBgExecutor;
@@ -29,7 +28,6 @@ public class SecTileQueryHelper {
     public final ArraySet mSpecs = new ArraySet();
     public final SecQSPanelResourcePicker mResourcePicker = (SecQSPanelResourcePicker) Dependency.sDependency.getDependencyInner(SecQSPanelResourcePicker.class);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class TileCollector implements QSTile.Callback {
         public final QSHost mQSHost;
         public final List mQSTileList = new ArrayList();
@@ -44,7 +42,7 @@ public class SecTileQueryHelper {
                 SecTileQueryHelper.this.mBgExecutor.execute(new Runnable() { // from class: com.android.systemui.qs.customize.SecTileQueryHelper$TileCollector$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SecTileQueryHelper.TileCollector tileCollector = SecTileQueryHelper.TileCollector.this;
+                        SecTileQueryHelper.TileCollector tileCollector = this.f$0;
                         SecTileQueryHelper secTileQueryHelper = SecTileQueryHelper.this;
                         secTileQueryHelper.getClass();
                         secTileQueryHelper.mMainExecutor.execute(new SecTileQueryHelper$$ExternalSyntheticLambda1(secTileQueryHelper, false, new ArrayList(secTileQueryHelper.mTiles)));
@@ -94,15 +92,14 @@ public class SecTileQueryHelper {
                 Object obj2 = arrayList2.get(i2);
                 i2++;
                 QSTile qSTile2 = ((TilePair) obj2).mTile;
-                QSTile.State copy = qSTile2.getState().copy();
-                copy.label = qSTile2.getTileLabel();
+                QSTile.State stateCopy = qSTile2.getState().copy();
+                stateCopy.label = qSTile2.getTileLabel();
                 qSTile2.destroy();
-                secTileQueryHelper.addTile(qSTile2.getTileSpec(), null, copy, true);
+                secTileQueryHelper.addTile(qSTile2.getTileSpec(), null, stateCopy, true);
             }
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class TileInfo {
         public boolean isActive;
         public String spec;
@@ -117,7 +114,6 @@ public class SecTileQueryHelper {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class TilePair {
         public boolean mReady;
         public final QSTile mTile;

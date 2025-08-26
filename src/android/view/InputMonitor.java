@@ -91,12 +91,12 @@ public final class InputMonitor implements Parcelable {
 
     InputMonitor(Parcel parcel) {
         InputChannel inputChannel = (InputChannel) parcel.readTypedObject(InputChannel.CREATOR);
-        IInputMonitorHost asInterface = IInputMonitorHost.Stub.asInterface(parcel.readStrongBinder());
+        IInputMonitorHost iInputMonitorHostAsInterface = IInputMonitorHost.Stub.asInterface(parcel.readStrongBinder());
         SurfaceControl surfaceControl = (SurfaceControl) parcel.readTypedObject(SurfaceControl.CREATOR);
         this.mInputChannel = inputChannel;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) inputChannel);
-        this.mHost = asInterface;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) asInterface);
+        this.mHost = iInputMonitorHostAsInterface;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) iInputMonitorHostAsInterface);
         this.mSurface = surfaceControl;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) surfaceControl);
     }

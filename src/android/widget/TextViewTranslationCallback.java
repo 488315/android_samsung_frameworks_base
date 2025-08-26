@@ -3,14 +3,18 @@ package android.widget;
 import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.text.TextUtils;
 import android.text.method.TransformationMethod;
 import android.text.method.TranslationTransformationMethod;
 import android.util.Log;
 import android.view.View;
+import android.view.translation.TranslationResponseValue;
 import android.view.translation.UiTranslationManager;
 import android.view.translation.ViewTranslationCallback;
+import android.view.translation.ViewTranslationRequest;
+import android.view.translation.ViewTranslationResponse;
 import java.lang.ref.WeakReference;
 
 /* loaded from: classes5.dex */
@@ -40,93 +44,56 @@ public class TextViewTranslationCallback implements ViewTranslationCallback {
         this.mTranslationTransformation = null;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:21:0x0058  */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x005e  */
+    /* JADX WARN: Removed duplicated region for block: B:11:0x002c  */
     @Override // android.view.translation.ViewTranslationCallback
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public boolean onShowTranslation(android.view.View r6) {
-        /*
-            r5 = this;
-            r0 = 0
-            if (r6 == 0) goto L2c
-            android.view.translation.ViewTranslationResponse r1 = r6.getViewTranslationResponse()
-            if (r1 == 0) goto L2c
-            android.view.translation.ViewTranslationResponse r1 = r6.getViewTranslationResponse()
-            java.lang.String r2 = "android:text"
-            android.view.translation.TranslationResponseValue r1 = r1.getValue(r2)
-            if (r1 == 0) goto L2c
-            android.view.translation.ViewTranslationResponse r1 = r6.getViewTranslationResponse()
-            android.view.translation.TranslationResponseValue r1 = r1.getValue(r2)
-            java.lang.CharSequence r2 = r1.getText()
-            if (r2 == 0) goto L2c
-            java.lang.CharSequence r1 = r1.getText()
-            int r1 = r1.length()
-            goto L2d
-        L2c:
-            r1 = r0
-        L2d:
-            boolean r2 = r5.mIsShowingTranslation
-            java.lang.String r3 = "TextViewTranslationCb"
-            if (r2 == 0) goto L50
-            int r2 = r5.mTranslatedTextLength
-            if (r2 != r1) goto L50
-            boolean r5 = android.widget.TextViewTranslationCallback.DEBUG
-            if (r5 == 0) goto L4f
-            java.lang.StringBuilder r5 = new java.lang.StringBuilder
-            r5.<init>()
-            r5.append(r6)
-            java.lang.String r6 = " is already showing translated text."
-            r5.append(r6)
-            java.lang.String r5 = r5.toString()
-            android.util.Log.d(r3, r5)
-        L4f:
-            return r0
-        L50:
-            android.view.translation.ViewTranslationResponse r2 = r6.getViewTranslationResponse()
-            r5.mTranslatedTextLength = r1
-            if (r2 != 0) goto L5e
-            java.lang.String r5 = "onShowTranslation() shouldn't be called before onViewTranslationResponse()."
-            android.util.Log.e(r3, r5)
-            return r0
-        L5e:
-            r0 = r6
-            android.widget.TextView r0 = (android.widget.TextView) r0
-            android.text.method.TranslationTransformationMethod r1 = r5.mTranslationTransformation
-            if (r1 == 0) goto L6f
-            android.view.translation.ViewTranslationResponse r1 = r1.getViewTranslationResponse()
-            boolean r1 = r2.equals(r1)
-            if (r1 != 0) goto L7a
-        L6f:
-            android.text.method.TransformationMethod r1 = r0.getTransformationMethod()
-            android.text.method.TranslationTransformationMethod r3 = new android.text.method.TranslationTransformationMethod
-            r3.<init>(r2, r1)
-            r5.mTranslationTransformation = r3
-        L7a:
-            android.text.method.TranslationTransformationMethod r1 = r5.mTranslationTransformation
-            java.lang.ref.WeakReference r3 = new java.lang.ref.WeakReference
-            r3.<init>(r0)
-            android.widget.TextViewTranslationCallback$$ExternalSyntheticLambda1 r4 = new android.widget.TextViewTranslationCallback$$ExternalSyntheticLambda1
-            r4.<init>()
-            r5.runChangeTextWithAnimationIfNeeded(r0, r4)
-            java.util.Set r0 = r2.getKeys()
-            java.lang.String r1 = "android:content_description"
-            boolean r0 = r0.contains(r1)
-            if (r0 == 0) goto Lac
-            android.view.translation.TranslationResponseValue r0 = r2.getValue(r1)
-            java.lang.CharSequence r0 = r0.getText()
-            boolean r1 = android.text.TextUtils.isEmpty(r0)
-            if (r1 != 0) goto Lac
-            java.lang.CharSequence r1 = r6.getContentDescription()
-            r5.mContentDescription = r1
-            r6.setContentDescription(r0)
-        Lac:
-            r5 = 1
-            return r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.TextViewTranslationCallback.onShowTranslation(android.view.View):boolean");
+    public boolean onShowTranslation(View view) throws Resources.NotFoundException {
+        int length;
+        if (view == null || view.getViewTranslationResponse() == null || view.getViewTranslationResponse().getValue(ViewTranslationRequest.ID_TEXT) == null) {
+            length = 0;
+        } else {
+            TranslationResponseValue value = view.getViewTranslationResponse().getValue(ViewTranslationRequest.ID_TEXT);
+            if (value.getText() != null) {
+                length = value.getText().length();
+            }
+        }
+        if (this.mIsShowingTranslation && this.mTranslatedTextLength == length) {
+            if (DEBUG) {
+                Log.d(TAG, view + " is already showing translated text.");
+            }
+            return false;
+        }
+        ViewTranslationResponse viewTranslationResponse = view.getViewTranslationResponse();
+        this.mTranslatedTextLength = length;
+        if (viewTranslationResponse == null) {
+            Log.e(TAG, "onShowTranslation() shouldn't be called before onViewTranslationResponse().");
+            return false;
+        }
+        TextView textView = (TextView) view;
+        TranslationTransformationMethod translationTransformationMethod = this.mTranslationTransformation;
+        if (translationTransformationMethod == null || !viewTranslationResponse.equals(translationTransformationMethod.getViewTranslationResponse())) {
+            this.mTranslationTransformation = new TranslationTransformationMethod(viewTranslationResponse, textView.getTransformationMethod());
+        }
+        final TranslationTransformationMethod translationTransformationMethod2 = this.mTranslationTransformation;
+        final WeakReference weakReference = new WeakReference(textView);
+        runChangeTextWithAnimationIfNeeded(textView, new Runnable() { // from class: android.widget.TextViewTranslationCallback$$ExternalSyntheticLambda1
+            @Override // java.lang.Runnable
+            public final void run() {
+                this.f$0.lambda$onShowTranslation$0(weakReference, translationTransformationMethod2);
+            }
+        });
+        if (!viewTranslationResponse.getKeys().contains(ViewTranslationRequest.ID_CONTENT_DESCRIPTION)) {
+            return true;
+        }
+        CharSequence text = viewTranslationResponse.getValue(ViewTranslationRequest.ID_CONTENT_DESCRIPTION).getText();
+        if (TextUtils.isEmpty(text)) {
+            return true;
+        }
+        this.mContentDescription = view.getContentDescription();
+        view.setContentDescription(text);
+        return true;
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -137,9 +104,9 @@ public class TextViewTranslationCallback implements ViewTranslationCallback {
         if (textView == null) {
             return;
         }
-        boolean isTextSelectable = textView.isTextSelectable();
-        this.mOriginalIsTextSelectable = isTextSelectable;
-        if (isTextSelectable) {
+        boolean zIsTextSelectable = textView.isTextSelectable();
+        this.mOriginalIsTextSelectable = zIsTextSelectable;
+        if (zIsTextSelectable) {
             this.mOriginalFocusableInTouchMode = textView.isFocusableInTouchMode();
             this.mOriginalFocusable = textView.getFocusable();
             this.mOriginalClickable = textView.isClickable();
@@ -150,7 +117,7 @@ public class TextViewTranslationCallback implements ViewTranslationCallback {
     }
 
     @Override // android.view.translation.ViewTranslationCallback
-    public boolean onHideTranslation(View view) {
+    public boolean onHideTranslation(View view) throws Resources.NotFoundException {
         if (view.getViewTranslationResponse() == null) {
             Log.e(TAG, "onHideTranslation() shouldn't be called before onViewTranslationResponse().");
             return false;
@@ -163,7 +130,7 @@ public class TextViewTranslationCallback implements ViewTranslationCallback {
             runChangeTextWithAnimationIfNeeded(textView, new Runnable() { // from class: android.widget.TextViewTranslationCallback$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    TextViewTranslationCallback.this.lambda$onHideTranslation$1(weakReference, originalTransformationMethod);
+                    this.f$0.lambda$onHideTranslation$1(weakReference, originalTransformationMethod);
                 }
             });
             if (TextUtils.isEmpty(this.mContentDescription)) {
@@ -199,7 +166,7 @@ public class TextViewTranslationCallback implements ViewTranslationCallback {
     }
 
     @Override // android.view.translation.ViewTranslationCallback
-    public boolean onClearTranslation(View view) {
+    public boolean onClearTranslation(View view) throws Resources.NotFoundException {
         if (this.mTranslationTransformation != null) {
             onHideTranslation(view);
             clearTranslationTransformation();
@@ -269,12 +236,12 @@ public class TextViewTranslationCallback implements ViewTranslationCallback {
             valueAnimator.end();
         }
         this.mAnimationRunning = true;
-        ValueAnimator ofArgb = ValueAnimator.ofArgb(textView.getCurrentTextColor(), colorWithAlpha(textView.getCurrentTextColor(), 0));
-        this.mAnimator = ofArgb;
-        ofArgb.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: android.widget.TextViewTranslationCallback$$ExternalSyntheticLambda2
+        ValueAnimator valueAnimatorOfArgb = ValueAnimator.ofArgb(textView.getCurrentTextColor(), colorWithAlpha(textView.getCurrentTextColor(), 0));
+        this.mAnimator = valueAnimatorOfArgb;
+        valueAnimatorOfArgb.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: android.widget.TextViewTranslationCallback$$ExternalSyntheticLambda2
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator2) {
-                TextView.this.setTextColor(((Integer) valueAnimator2.getAnimatedValue()).intValue());
+                textView.setTextColor(((Integer) valueAnimator2.getAnimatedValue()).intValue());
             }
         });
         this.mAnimator.setRepeatMode(2);

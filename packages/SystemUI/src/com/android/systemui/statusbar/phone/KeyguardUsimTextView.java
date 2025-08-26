@@ -17,7 +17,6 @@ import com.android.systemui.R;
 import com.android.systemui.util.DeviceState;
 import com.android.systemui.widget.SystemUITextView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class KeyguardUsimTextView extends SystemUITextView {
     public int mCurrentSimState;
@@ -40,7 +39,7 @@ public class KeyguardUsimTextView extends SystemUITextView {
     }
 
     @Override // com.android.systemui.widget.SystemUITextView, android.widget.TextView, android.view.View
-    public final void onConfigurationChanged(Configuration configuration) {
+    public final void onConfigurationChanged(Configuration configuration) throws Resources.NotFoundException {
         super.onConfigurationChanged(configuration);
         updateText(this.mCurrentSimState);
     }
@@ -56,7 +55,7 @@ public class KeyguardUsimTextView extends SystemUITextView {
     }
 
     @Override // com.android.systemui.widget.SystemUITextView, android.view.View
-    public final void onFinishInflate() {
+    public final void onFinishInflate() throws Resources.NotFoundException {
         super.onFinishInflate();
         this.mTelephonyManager = (TelephonyManager) ((TextView) this).mContext.getSystemService("phone");
         this.mUpdateMonitor = (KeyguardUpdateMonitor) Dependency.sDependency.getDependencyInner(KeyguardUpdateMonitor.class);
@@ -112,8 +111,8 @@ public class KeyguardUsimTextView extends SystemUITextView {
         sb.append(text.toString());
         ?? text2 = getContext().getText(R.string.keyguard_missing_sim_message);
         sb.append((text2 != 0 ? text2 : "").toString());
-        String sb2 = sb.toString();
-        setText(sb2.subSequence(0, sb2.length()));
+        String string = sb.toString();
+        setText(string.subSequence(0, string.length()));
     }
 
     public KeyguardUsimTextView(Context context, AttributeSet attributeSet) {

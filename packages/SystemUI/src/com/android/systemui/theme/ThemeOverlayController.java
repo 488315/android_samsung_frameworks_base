@@ -1,5 +1,6 @@
 package com.android.systemui.theme;
 
+import android.R;
 import android.app.ActivityManager;
 import android.app.UiModeManager;
 import android.app.WallpaperColors;
@@ -9,6 +10,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.om.FabricatedOverlay;
+import android.content.om.OverlayIdentifier;
+import android.content.om.OverlayInfo;
+import android.content.om.OverlayManagerTransaction;
+import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.graphics.Color;
@@ -19,6 +24,8 @@ import android.os.UserManager;
 import android.provider.Settings;
 import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
 import android.text.TextUtils;
+import android.util.ArrayMap;
+import android.util.ArraySet;
 import android.util.Log;
 import android.util.Pair;
 import android.util.SparseArray;
@@ -73,19 +80,25 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.Executor;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import kotlin.jvm.functions.Function1;
 import kotlinx.coroutines.flow.FlowKt;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ThemeOverlayController implements CoreStartable, Dumpable {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -125,7 +138,6 @@ public class ThemeOverlayController implements CoreStartable, Dumpable {
     public final SparseArray mDeferredWallpaperColors = new SparseArray();
     public final SparseIntArray mDeferredWallpaperColorsFlags = new SparseIntArray();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class HardwareDefaultSetting extends Record {
         public final String colorSource;
         public final Color seedColor;
@@ -151,22 +163,22 @@ public class ThemeOverlayController implements CoreStartable, Dumpable {
             int i = this.style;
             Color color = this.seedColor;
             String str = this.colorSource;
-            int hashCode = Objects.hashCode(color);
-            return Objects.hashCode(str) + ((hashCode + (i * 31)) * 31);
+            int iHashCode = Objects.hashCode(color);
+            return Objects.hashCode(str) + ((iHashCode + (i * 31)) * 31);
         }
 
         @Override // java.lang.Record
         public final String toString() {
             Object[] objArr = {this.seedColor, Integer.valueOf(this.style), this.colorSource};
-            String[] split = "seedColor;style;colorSource".length() == 0 ? new String[0] : "seedColor;style;colorSource".split(";");
+            String[] strArrSplit = "seedColor;style;colorSource".length() == 0 ? new String[0] : "seedColor;style;colorSource".split(";");
             StringBuilder sb = new StringBuilder();
             sb.append(HardwareDefaultSetting.class.getSimpleName());
             sb.append("[");
-            for (int i = 0; i < split.length; i++) {
-                sb.append(split[i]);
+            for (int i = 0; i < strArrSplit.length; i++) {
+                sb.append(strArrSplit[i]);
                 sb.append("=");
                 sb.append(objArr[i]);
-                if (i != split.length - 1) {
+                if (i != strArrSplit.length - 1) {
                     sb.append(", ");
                 }
             }
@@ -194,7 +206,7 @@ public class ThemeOverlayController implements CoreStartable, Dumpable {
                 throw new IllegalStateException("This should never be invoked, all messages should arrive on the overload that has a user id");
             }
 
-            public final void onColorsChanged(WallpaperColors wallpaperColors, int i, int i2) {
+            public final void onColorsChanged(WallpaperColors wallpaperColors, int i, int i2) throws JSONException {
                 WallpaperColors wallpaperColors2 = ThemeOverlayController.this.mCurrentColors.get(i2);
                 if (wallpaperColors == null || !wallpaperColors.equals(wallpaperColors2)) {
                     boolean z = i2 == ((UserTrackerImpl) ThemeOverlayController.this.mUserTracker).getUserId();
@@ -248,11 +260,11 @@ public class ThemeOverlayController implements CoreStartable, Dumpable {
                     boolean z6 = i == 1;
                     try {
                         JSONObject jSONObject = stringForUser == null ? new JSONObject() : new JSONObject(stringForUser);
-                        String optString = jSONObject.optString("android.theme.customization.color_source");
+                        String strOptString = jSONObject.optString("android.theme.customization.color_source");
                         boolean z7 = z5;
-                        boolean equals = "preset".equals(optString);
-                        boolean z8 = z6 && "lock_wallpaper".equals(optString);
-                        if (!equals && !z8 && z4 && !ThemeOverlayController.isSeedColorSet(jSONObject, wallpaperColors)) {
+                        boolean zEquals = "preset".equals(strOptString);
+                        boolean z8 = z6 && "lock_wallpaper".equals(strOptString);
+                        if (!zEquals && !z8 && z4 && !ThemeOverlayController.isSeedColorSet(jSONObject, wallpaperColors)) {
                             themeOverlayController2.mSkipSettingChange = true;
                             if (jSONObject.has("android.theme.customization.accent_color") || jSONObject.has("android.theme.customization.system_palette")) {
                                 jSONObject.remove("android.theme.customization.dynamic_color");
@@ -280,9 +292,9 @@ public class ThemeOverlayController implements CoreStartable, Dumpable {
             @Override // com.android.systemui.settings.UserTracker.Callback
             public final void onUserChanged(int i, Context context2) {
                 ThemeOverlayController themeOverlayController = ThemeOverlayController.this;
-                boolean isManagedProfile = themeOverlayController.mUserManager.isManagedProfile(i);
-                if (!((DeviceProvisionedControllerImpl) themeOverlayController.mDeviceProvisionedController).isCurrentUserSetup() && isManagedProfile) {
-                    AODAmbientWallpaperHelper$initAODAmbientWallpaperHelper$1$$ExternalSyntheticOutline0.m("User setup not finished when new user event was received. Deferring... Managed profile? ", "ThemeOverlayController", isManagedProfile);
+                boolean zIsManagedProfile = themeOverlayController.mUserManager.isManagedProfile(i);
+                if (!((DeviceProvisionedControllerImpl) themeOverlayController.mDeviceProvisionedController).isCurrentUserSetup() && zIsManagedProfile) {
+                    AODAmbientWallpaperHelper$initAODAmbientWallpaperHelper$1$$ExternalSyntheticOutline0.m("User setup not finished when new user event was received. Deferring... Managed profile? ", "ThemeOverlayController", zIsManagedProfile);
                 } else {
                     Log.d("ThemeOverlayController", "Updating overlays for user switch / profile added.");
                     themeOverlayController.reevaluateSystemTheme(true);
@@ -310,9 +322,9 @@ public class ThemeOverlayController implements CoreStartable, Dumpable {
                     return;
                 }
                 UserHandle userHandle = (UserHandle) intent.getParcelableExtra("android.intent.extra.USER", UserHandle.class);
-                boolean isManagedProfile = ThemeOverlayController.this.mUserManager.isManagedProfile(userHandle.getIdentifier());
-                if (!((DeviceProvisionedControllerImpl) ThemeOverlayController.this.mDeviceProvisionedController).isUserSetup(userHandle.getIdentifier()) && isManagedProfile) {
-                    Log.i("ThemeOverlayController", "User setup not finished when " + intent.getAction() + " was received. Deferring... Managed profile? " + isManagedProfile);
+                boolean zIsManagedProfile = ThemeOverlayController.this.mUserManager.isManagedProfile(userHandle.getIdentifier());
+                if (!((DeviceProvisionedControllerImpl) ThemeOverlayController.this.mDeviceProvisionedController).isUserSetup(userHandle.getIdentifier()) && zIsManagedProfile) {
+                    Log.i("ThemeOverlayController", "User setup not finished when " + intent.getAction() + " was received. Deferring... Managed profile? " + zIsManagedProfile);
                     return;
                 }
                 if (ThemeOverlayController.this.isPrivateProfile(userHandle)) {
@@ -348,19 +360,19 @@ public class ThemeOverlayController implements CoreStartable, Dumpable {
         javaAdapter.stateInApp(FlowKt.distinctUntilChanged(new KeyguardTransitionInteractor$isFinishedInStateWhere$$inlined$map$1(keyguardTransitionInteractor.finishedKeyguardState, new Function1() { // from class: com.android.systemui.theme.ThemeOverlayController$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                KeyguardState.Companion.this.getClass();
+            public final Object mo781invoke(Object obj) {
+                companion.getClass();
                 return Boolean.valueOf(KeyguardState.Companion.deviceIsAsleepInState((KeyguardState) obj));
             }
         })), Boolean.FALSE);
     }
 
     public static void assignTonalPaletteToOverlay(String str, final FabricatedOverlay fabricatedOverlay, TonalPalette tonalPalette) {
-        final String concat = "android:color/system_".concat(str);
+        final String strConcat = "android:color/system_".concat(str);
         tonalPalette.allShadesMapped.forEach(new BiConsumer() { // from class: com.android.systemui.theme.ThemeOverlayController$$ExternalSyntheticLambda5
             @Override // java.util.function.BiConsumer
             public final void accept(Object obj, Object obj2) {
-                String str2 = concat;
+                String str2 = strConcat;
                 FabricatedOverlay fabricatedOverlay2 = fabricatedOverlay;
                 int i = ThemeOverlayController.$r8$clinit;
                 fabricatedOverlay2.setResourceValue(str2 + "_" + ((Integer) obj), 28, ColorUtils.setAlphaComponent(((Integer) obj2).intValue(), 255), (String) null);
@@ -369,18 +381,18 @@ public class ThemeOverlayController implements CoreStartable, Dumpable {
     }
 
     public static boolean isSeedColorSet(JSONObject jSONObject, WallpaperColors wallpaperColors) {
-        String str;
-        if (wallpaperColors == null || (str = (String) jSONObject.opt("android.theme.customization.system_palette")) == null) {
+        String strConcat;
+        if (wallpaperColors == null || (strConcat = (String) jSONObject.opt("android.theme.customization.system_palette")) == null) {
             return false;
         }
-        if (!str.startsWith("#")) {
-            str = "#".concat(str);
+        if (!strConcat.startsWith("#")) {
+            strConcat = "#".concat(strConcat);
         }
-        int parseColor = Color.parseColor(str);
+        int color = Color.parseColor(strConcat);
         Iterator it = ColorScheme.getSeedColors(wallpaperColors, true).iterator();
         while (it.hasNext()) {
-            if (((Integer) it.next()).intValue() == parseColor) {
-                MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("Same as previous set system palette: ", str, "ThemeOverlayController");
+            if (((Integer) it.next()).intValue() == color) {
+                MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("Same as previous set system palette: ", strConcat, "ThemeOverlayController");
                 return true;
             }
         }
@@ -395,16 +407,16 @@ public class ThemeOverlayController implements CoreStartable, Dumpable {
         double d2 = this.mContrast;
         this.mLightColorScheme = new ColorScheme(i, false, i3, d2 == -1.0d ? 0.0d : d2);
         this.mColorScheme = isNightMode() ? this.mDarkColorScheme : this.mLightColorScheme;
-        FabricatedOverlay newFabricatedOverlay = newFabricatedOverlay("neutral");
-        assignTonalPaletteToOverlay("neutral1", newFabricatedOverlay, this.mColorScheme.mNeutral1);
-        assignTonalPaletteToOverlay("neutral2", newFabricatedOverlay, this.mColorScheme.mNeutral2);
-        this.mNeutralOverlay = newFabricatedOverlay;
-        FabricatedOverlay newFabricatedOverlay2 = newFabricatedOverlay("accent");
-        assignTonalPaletteToOverlay("accent1", newFabricatedOverlay2, this.mColorScheme.mAccent1);
-        assignTonalPaletteToOverlay("accent2", newFabricatedOverlay2, this.mColorScheme.mAccent2);
-        assignTonalPaletteToOverlay("accent3", newFabricatedOverlay2, this.mColorScheme.mAccent3);
-        this.mSecondaryOverlay = newFabricatedOverlay2;
-        final FabricatedOverlay newFabricatedOverlay3 = newFabricatedOverlay("dynamic");
+        FabricatedOverlay fabricatedOverlayNewFabricatedOverlay = newFabricatedOverlay("neutral");
+        assignTonalPaletteToOverlay("neutral1", fabricatedOverlayNewFabricatedOverlay, this.mColorScheme.mNeutral1);
+        assignTonalPaletteToOverlay("neutral2", fabricatedOverlayNewFabricatedOverlay, this.mColorScheme.mNeutral2);
+        this.mNeutralOverlay = fabricatedOverlayNewFabricatedOverlay;
+        FabricatedOverlay fabricatedOverlayNewFabricatedOverlay2 = newFabricatedOverlay("accent");
+        assignTonalPaletteToOverlay("accent1", fabricatedOverlayNewFabricatedOverlay2, this.mColorScheme.mAccent1);
+        assignTonalPaletteToOverlay("accent2", fabricatedOverlayNewFabricatedOverlay2, this.mColorScheme.mAccent2);
+        assignTonalPaletteToOverlay("accent3", fabricatedOverlayNewFabricatedOverlay2, this.mColorScheme.mAccent3);
+        this.mSecondaryOverlay = fabricatedOverlayNewFabricatedOverlay2;
+        final FabricatedOverlay fabricatedOverlayNewFabricatedOverlay3 = newFabricatedOverlay("dynamic");
         final MaterialDynamicColors materialDynamicColors = new MaterialDynamicColors(false);
         final int i4 = 0;
         final int i5 = 3;
@@ -456,7 +468,7 @@ public class ThemeOverlayController implements CoreStartable, Dumpable {
         final int i51 = 5;
         final int i52 = 6;
         final int i53 = 7;
-        List generateSysUINames = DynamicColors.generateSysUINames(new Supplier[]{new Supplier() { // from class: com.android.systemui.monet.DynamicColors$$ExternalSyntheticLambda1
+        List listGenerateSysUINames = DynamicColors.generateSysUINames(new Supplier[]{new Supplier() { // from class: com.android.systemui.monet.DynamicColors$$ExternalSyntheticLambda1
             @Override // java.util.function.Supplier
             public final Object get() {
                 switch (i4) {
@@ -4402,12 +4414,12 @@ public class ThemeOverlayController implements CoreStartable, Dumpable {
             }
         }});
         final Boolean bool = Boolean.FALSE;
-        ((ArrayList) generateSysUINames).forEach(new Consumer() { // from class: com.android.systemui.theme.ThemeOverlayController$$ExternalSyntheticLambda6
+        ((ArrayList) listGenerateSysUINames).forEach(new Consumer() { // from class: com.android.systemui.theme.ThemeOverlayController$$ExternalSyntheticLambda6
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                ThemeOverlayController themeOverlayController = ThemeOverlayController.this;
+                ThemeOverlayController themeOverlayController = this.f$0;
                 Boolean bool2 = bool;
-                FabricatedOverlay fabricatedOverlay = newFabricatedOverlay3;
+                FabricatedOverlay fabricatedOverlay = fabricatedOverlayNewFabricatedOverlay3;
                 Pair pair = (Pair) obj;
                 int i54 = ThemeOverlayController.$r8$clinit;
                 themeOverlayController.getClass();
@@ -4433,7 +4445,7 @@ public class ThemeOverlayController implements CoreStartable, Dumpable {
         final int i63 = 27;
         final int i64 = 16;
         final int i65 = 17;
-        List generateSysUINames2 = DynamicColors.generateSysUINames(new Supplier[]{new Supplier() { // from class: com.android.systemui.monet.DynamicColors$$ExternalSyntheticLambda3
+        List listGenerateSysUINames2 = DynamicColors.generateSysUINames(new Supplier[]{new Supplier() { // from class: com.android.systemui.monet.DynamicColors$$ExternalSyntheticLambda3
             @Override // java.util.function.Supplier
             public final Object get() {
                 switch (i54) {
@@ -5407,12 +5419,12 @@ public class ThemeOverlayController implements CoreStartable, Dumpable {
             }
         }});
         final Boolean bool2 = Boolean.TRUE;
-        ((ArrayList) generateSysUINames2).forEach(new Consumer() { // from class: com.android.systemui.theme.ThemeOverlayController$$ExternalSyntheticLambda6
+        ((ArrayList) listGenerateSysUINames2).forEach(new Consumer() { // from class: com.android.systemui.theme.ThemeOverlayController$$ExternalSyntheticLambda6
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                ThemeOverlayController themeOverlayController = ThemeOverlayController.this;
+                ThemeOverlayController themeOverlayController = this.f$0;
                 Boolean bool22 = bool2;
-                FabricatedOverlay fabricatedOverlay = newFabricatedOverlay3;
+                FabricatedOverlay fabricatedOverlay = fabricatedOverlayNewFabricatedOverlay3;
                 Pair pair = (Pair) obj;
                 int i542 = ThemeOverlayController.$r8$clinit;
                 themeOverlayController.getClass();
@@ -5428,9 +5440,9 @@ public class ThemeOverlayController implements CoreStartable, Dumpable {
         ((ArrayList) DynamicColors.generateSysUINames(new CustomDynamicColors(false).allColors)).forEach(new Consumer() { // from class: com.android.systemui.theme.ThemeOverlayController$$ExternalSyntheticLambda6
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                ThemeOverlayController themeOverlayController = ThemeOverlayController.this;
+                ThemeOverlayController themeOverlayController = this.f$0;
                 Boolean bool22 = bool;
-                FabricatedOverlay fabricatedOverlay = newFabricatedOverlay3;
+                FabricatedOverlay fabricatedOverlay = fabricatedOverlayNewFabricatedOverlay3;
                 Pair pair = (Pair) obj;
                 int i542 = ThemeOverlayController.$r8$clinit;
                 themeOverlayController.getClass();
@@ -5443,7 +5455,7 @@ public class ThemeOverlayController implements CoreStartable, Dumpable {
                 }
             }
         });
-        this.mDynamicOverlay = newFabricatedOverlay3;
+        this.mDynamicOverlay = fabricatedOverlayNewFabricatedOverlay3;
     }
 
     @Override // com.android.systemui.CoreStartable, com.android.systemui.Dumpable
@@ -5460,53 +5472,53 @@ public class ThemeOverlayController implements CoreStartable, Dumpable {
         MagnificationImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("mNeedsOverlayCreation="), this.mNeedsOverlayCreation, printWriter, "mAcceptColorEvents="), this.mAcceptColorEvents, printWriter, "mDeferredThemeEvaluation="), this.mDeferredThemeEvaluation, printWriter, "mThemeStyle="), this.mThemeStyle, printWriter);
     }
 
-    public HardwareDefaultSetting getThemeSettingsDefaults() {
-        String[] stringArray = this.mResources.getStringArray(17236495);
-        HashMap hashMap = new HashMap();
+    public HardwareDefaultSetting getThemeSettingsDefaults() throws Resources.NotFoundException {
+        String[] stringArray = this.mResources.getStringArray(17236496);
+        HashMap map = new HashMap();
         int length = stringArray.length;
         int i = 0;
         while (true) {
             if (i >= length) {
                 break;
             }
-            String[] split = stringArray[i].split("\\|");
-            if (split.length == 3) {
-                hashMap.put(split[0], new Pair(Integer.valueOf(Style.valueOf(split[1])), split[2]));
+            String[] strArrSplit = stringArray[i].split("\\|");
+            if (strArrSplit.length == 3) {
+                map.put(strArrSplit[0], new Pair(Integer.valueOf(Style.valueOf(strArrSplit[1])), strArrSplit[2]));
             }
             i++;
         }
-        Pair pair = (Pair) hashMap.get("*");
+        Pair pair = (Pair) map.get("*");
         if (pair == null) {
             Log.d("ThemeOverlayController", "Theming wildcard not found. Fallback to TONAL_SPOT|home_wallpaper");
             pair = new Pair(1, "home_wallpaper");
         }
         this.mSystemPropertiesHelper.getClass();
         String str = SystemProperties.get("ro.boot.hardware.color");
-        Pair pair2 = (Pair) hashMap.get(str);
+        Pair pair2 = (Pair) map.get(str);
         if (pair2 == null) {
             ExifInterface$$ExternalSyntheticOutline0.m(ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("Sysprop `ro.boot.hardware.color` of value '", str, "' not found in theming_defaults: "), Arrays.toString(stringArray), "ThemeOverlayController");
         } else {
             pair = pair2;
         }
-        Color valueOf = Color.valueOf(-14979341);
-        boolean equals = ((String) pair.second).equals("home_wallpaper");
-        if (equals) {
+        Color colorValueOf = Color.valueOf(-14979341);
+        boolean zEquals = ((String) pair.second).equals("home_wallpaper");
+        if (zEquals) {
             WallpaperManager wallpaperManager = this.mWallpaperManager;
             int userId = ((UserTrackerImpl) this.mUserTracker).getUserId();
             WallpaperColors wallpaperColors = wallpaperManager.getWallpaperColors(this.mWallpaperManager.getWallpaperIdForUser(2, userId) <= this.mWallpaperManager.getWallpaperIdForUser(1, userId) ? 1 : 2);
             if (wallpaperColors != null) {
-                valueOf = wallpaperColors.getPrimaryColor();
+                colorValueOf = wallpaperColors.getPrimaryColor();
             }
-            Log.d("ThemeOverlayController", "Default seed color read from home wallpaper: " + Integer.toHexString(valueOf.toArgb()));
+            Log.d("ThemeOverlayController", "Default seed color read from home wallpaper: " + Integer.toHexString(colorValueOf.toArgb()));
         } else {
             try {
-                valueOf = Color.valueOf(Color.parseColor((String) pair.second));
-                Log.d("ThemeOverlayController", "Default seed color read from resource: " + Integer.toHexString(valueOf.toArgb()));
+                colorValueOf = Color.valueOf(Color.parseColor((String) pair.second));
+                Log.d("ThemeOverlayController", "Default seed color read from resource: " + Integer.toHexString(colorValueOf.toArgb()));
             } catch (IllegalArgumentException e) {
                 Log.e("ThemeOverlayController", "Error parsing color: " + ((String) pair.second), e);
             }
         }
-        return new HardwareDefaultSetting(valueOf, ((Integer) pair.first).intValue(), equals ? "home_wallpaper" : "preset");
+        return new HardwareDefaultSetting(colorValueOf, ((Integer) pair.first).intValue(), zEquals ? "home_wallpaper" : "preset");
     }
 
     public boolean isNightMode() {
@@ -5521,21 +5533,516 @@ public class ThemeOverlayController implements CoreStartable, Dumpable {
         return new FabricatedOverlay.Builder("com.android.systemui", str, "android").build();
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:17:0x0092, code lost:
-    
-        if (r0.contains(java.lang.Integer.valueOf(r12)) == false) goto L16;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:100:0x0318  */
+    /* JADX WARN: Removed duplicated region for block: B:105:0x0344  */
+    /* JADX WARN: Removed duplicated region for block: B:16:0x0094  */
     /* JADX WARN: Type inference failed for: r5v6, types: [com.android.systemui.theme.ThemeOverlayController$$ExternalSyntheticLambda3] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void reevaluateSystemTheme(boolean r21) {
-        /*
-            Method dump skipped, instructions count: 882
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.theme.ThemeOverlayController.reevaluateSystemTheme(boolean):void");
+    public final void reevaluateSystemTheme(boolean z) {
+        char c;
+        FabricatedOverlay[] fabricatedOverlayArr;
+        final FabricatedOverlay[] fabricatedOverlayArr2;
+        FabricatedOverlay fabricatedOverlay;
+        FabricatedOverlay fabricatedOverlay2;
+        FabricatedOverlay fabricatedOverlay3;
+        int iValueOf;
+        SparseArray<WallpaperColors> sparseArray = this.mCurrentColors;
+        UserTrackerImpl userTrackerImpl = (UserTrackerImpl) this.mUserTracker;
+        WallpaperColors wallpaperColors = sparseArray.get(userTrackerImpl.getUserId());
+        int iIntValue = wallpaperColors == null ? 0 : ((Integer) ColorScheme.getSeedColors(wallpaperColors, true).get(0)).intValue();
+        if (this.mMainWallpaperColor != iIntValue || z) {
+            this.mMainWallpaperColor = iIntValue;
+            SecureSettings secureSettings = this.mSecureSettings;
+            char c2 = 2;
+            boolean z2 = this.mIsMonetEnabled;
+            if (z2) {
+                ArrayList arrayList = new ArrayList(Arrays.asList(3, 0, 1, 5, 4, 2, 7));
+                String stringForUser = secureSettings.getStringForUser("theme_customization_overlay_packages", userTrackerImpl.getUserId());
+                if (!TextUtils.isEmpty(stringForUser)) {
+                    try {
+                        iValueOf = Style.valueOf(new JSONObject(stringForUser).getString("android.theme.customization.theme_style"));
+                    } catch (IllegalArgumentException | JSONException e) {
+                        Log.i("ThemeOverlayController", "Failed to parse THEME_CUSTOMIZATION_OVERLAY_PACKAGES.", e);
+                    }
+                    if (!arrayList.contains(Integer.valueOf(iValueOf))) {
+                        iValueOf = 1;
+                    }
+                    this.mThemeStyle = iValueOf;
+                    createOverlays(this.mMainWallpaperColor);
+                    this.mNeedsOverlayCreation = true;
+                    Log.d("ThemeOverlayController", "fetched overlays. accent: " + this.mSecondaryOverlay + " neutral: " + this.mNeutralOverlay + " dynamic: " + this.mDynamicOverlay);
+                }
+            }
+            final int userId = userTrackerImpl.getUserId();
+            String stringForUser2 = secureSettings.getStringForUser("theme_customization_overlay_packages", userId);
+            Log.d("ThemeOverlayController", "updateThemeOverlays. Setting: " + stringForUser2);
+            final ArrayMap arrayMap = new ArrayMap();
+            if (!TextUtils.isEmpty(stringForUser2)) {
+                try {
+                    JSONObject jSONObject = new JSONObject(stringForUser2);
+                    for (String str : ThemeOverlayApplier.THEME_CATEGORIES) {
+                        if (jSONObject.has(str)) {
+                            arrayMap.put(str, new OverlayIdentifier(jSONObject.getString(str)));
+                        }
+                    }
+                } catch (JSONException e2) {
+                    Log.i("ThemeOverlayController", "Failed to parse THEME_CUSTOMIZATION_OVERLAY_PACKAGES.", e2);
+                }
+            }
+            OverlayIdentifier overlayIdentifier = (OverlayIdentifier) arrayMap.get("android.theme.customization.system_palette");
+            if (z2 && overlayIdentifier != null && overlayIdentifier.getPackageName() != null) {
+                try {
+                    String lowerCase = overlayIdentifier.getPackageName().toLowerCase();
+                    if (!lowerCase.startsWith("#")) {
+                        lowerCase = "#" + lowerCase;
+                    }
+                    createOverlays(Color.parseColor(lowerCase));
+                    this.mNeedsOverlayCreation = true;
+                    arrayMap.remove("android.theme.customization.system_palette");
+                    arrayMap.remove("android.theme.customization.accent_color");
+                    arrayMap.remove("android.theme.customization.dynamic_color");
+                } catch (Exception e3) {
+                    Log.w("ThemeOverlayController", "Invalid color definition: " + overlayIdentifier.getPackageName(), e3);
+                }
+            } else if (!z2 && overlayIdentifier != null) {
+                try {
+                    arrayMap.remove("android.theme.customization.system_palette");
+                    arrayMap.remove("android.theme.customization.accent_color");
+                    arrayMap.remove("android.theme.customization.dynamic_color");
+                } catch (NumberFormatException unused) {
+                }
+            }
+            if (!arrayMap.containsKey("android.theme.customization.system_palette") && (fabricatedOverlay3 = this.mNeutralOverlay) != null) {
+                arrayMap.put("android.theme.customization.system_palette", fabricatedOverlay3.getIdentifier());
+            }
+            if (!arrayMap.containsKey("android.theme.customization.accent_color") && (fabricatedOverlay2 = this.mSecondaryOverlay) != null) {
+                arrayMap.put("android.theme.customization.accent_color", fabricatedOverlay2.getIdentifier());
+            }
+            if (!arrayMap.containsKey("android.theme.customization.dynamic_color") && (fabricatedOverlay = this.mDynamicOverlay) != null) {
+                arrayMap.put("android.theme.customization.dynamic_color", fabricatedOverlay.getIdentifier());
+            }
+            final HashSet hashSet = new HashSet();
+            for (UserInfo userInfo : this.mUserManager.getEnabledProfiles(userId)) {
+                if (userInfo.isProfile()) {
+                    hashSet.add(userInfo.getUserHandle());
+                }
+            }
+            final ?? r5 = new Runnable() { // from class: com.android.systemui.theme.ThemeOverlayController$$ExternalSyntheticLambda3
+                @Override // java.lang.Runnable
+                public final void run() {
+                    ThemeOverlayController themeOverlayController = this.f$0;
+                    int i = userId;
+                    int i2 = ThemeOverlayController.$r8$clinit;
+                    themeOverlayController.getClass();
+                    Log.d("ThemeOverlayController", "ThemeHomeDelay: ThemeOverlayController ready with user " + i);
+                    themeOverlayController.mActivityManager.setThemeOverlayReady(i);
+                }
+            };
+            ArraySet arraySet = new ArraySet(hashSet);
+            arraySet.add(UserHandle.SYSTEM);
+            Iterator it = arraySet.iterator();
+            while (it.hasNext()) {
+                UserHandle userHandle = (UserHandle) it.next();
+                Resources resources = userHandle.isSystem() ? this.mResources : this.mContext.createContextAsUser(userHandle, 0).getResources();
+                Resources.Theme theme = this.mContext.getTheme();
+                MaterialDynamicColors materialDynamicColors = new MaterialDynamicColors(false);
+                if (resources.getColor(R.color.system_accent1_500, theme) != this.mColorScheme.mAccent1.getS500() || resources.getColor(R.color.system_accent2_500, theme) != this.mColorScheme.mAccent2.getS500() || resources.getColor(R.color.system_accent3_500, theme) != this.mColorScheme.mAccent3.getS500() || resources.getColor(R.color.system_neutral1_500, theme) != this.mColorScheme.mNeutral1.getS500() || resources.getColor(R.color.system_neutral2_500, theme) != this.mColorScheme.mNeutral2.getS500()) {
+                    c = c2;
+                    ExifInterface$$ExternalSyntheticOutline0.m(new StringBuilder("Applying overlays: "), (String) arrayMap.keySet().stream().map(new Function() { // from class: com.android.systemui.theme.ThemeOverlayController$$ExternalSyntheticLambda4
+                        @Override // java.util.function.Function
+                        public final Object apply(Object obj) {
+                            Map map = arrayMap;
+                            String str2 = (String) obj;
+                            int i = ThemeOverlayController.$r8$clinit;
+                            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(str2, " -> ");
+                            sbM.append(map.get(str2));
+                            return sbM.toString();
+                        }
+                    }).collect(Collectors.joining(", ")), "ThemeOverlayController");
+                    if (this.mNeedsOverlayCreation) {
+                        fabricatedOverlayArr = null;
+                    } else {
+                        this.mNeedsOverlayCreation = false;
+                        if (Settings.System.getInt(this.mContext.getContentResolver(), "wallpapertheme_state", -1) != 1) {
+                            FabricatedOverlay[] fabricatedOverlayArr3 = new FabricatedOverlay[3];
+                            fabricatedOverlayArr3[0] = this.mSecondaryOverlay;
+                            fabricatedOverlayArr3[1] = this.mNeutralOverlay;
+                            fabricatedOverlayArr3[c] = this.mDynamicOverlay;
+                            fabricatedOverlayArr2 = fabricatedOverlayArr3;
+                            final ThemeOverlayApplier themeOverlayApplier = this.mThemeManager;
+                            themeOverlayApplier.mBgExecutor.execute(new Runnable() { // from class: com.android.systemui.theme.ThemeOverlayApplier$$ExternalSyntheticLambda0
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    final int i = 1;
+                                    final int i2 = 0;
+                                    final ThemeOverlayApplier themeOverlayApplier2 = themeOverlayApplier;
+                                    final Map map = arrayMap;
+                                    FabricatedOverlay[] fabricatedOverlayArr4 = fabricatedOverlayArr2;
+                                    int i3 = userId;
+                                    Set set = hashSet;
+                                    ThemeOverlayController$$ExternalSyntheticLambda3 themeOverlayController$$ExternalSyntheticLambda3 = r5;
+                                    boolean z3 = ThemeOverlayApplier.DEBUG;
+                                    themeOverlayApplier2.getClass();
+                                    final HashSet hashSet2 = new HashSet(ThemeOverlayApplier.THEME_CATEGORIES);
+                                    Set set2 = (Set) hashSet2.stream().map(new Function() { // from class: com.android.systemui.theme.ThemeOverlayApplier$$ExternalSyntheticLambda1
+                                        @Override // java.util.function.Function
+                                        public final Object apply(Object obj) {
+                                            return (String) ((ArrayMap) themeOverlayApplier2.mCategoryToTargetPackage).get((String) obj);
+                                        }
+                                    }).collect(Collectors.toSet());
+                                    final ArrayList arrayList2 = new ArrayList();
+                                    set2.forEach(new Consumer() { // from class: com.android.systemui.theme.ThemeOverlayApplier$$ExternalSyntheticLambda2
+                                        @Override // java.util.function.Consumer
+                                        public final void accept(Object obj) {
+                                            ThemeOverlayApplier themeOverlayApplier3 = themeOverlayApplier2;
+                                            arrayList2.addAll(themeOverlayApplier3.mOverlayManager.getOverlayInfosForTarget((String) obj, UserHandle.SYSTEM));
+                                        }
+                                    });
+                                    Stream streamFilter = arrayList2.stream().filter(new Predicate() { // from class: com.android.systemui.theme.ThemeOverlayApplier$$ExternalSyntheticLambda3
+                                        @Override // java.util.function.Predicate
+                                        public final boolean test(Object obj) {
+                                            int i4 = i2;
+                                            Object obj2 = themeOverlayApplier2;
+                                            switch (i4) {
+                                                case 0:
+                                                    OverlayInfo overlayInfo = (OverlayInfo) obj;
+                                                    return ((Set) ((ArrayMap) ((ThemeOverlayApplier) obj2).mTargetPackageToCategories).get(overlayInfo.targetPackageName)).contains(overlayInfo.category);
+                                                case 1:
+                                                    boolean z4 = ThemeOverlayApplier.DEBUG;
+                                                    return ((Set) obj2).contains(((OverlayInfo) obj).category);
+                                                default:
+                                                    boolean z5 = ThemeOverlayApplier.DEBUG;
+                                                    return !((Map) obj2).containsValue(new OverlayIdentifier(((OverlayInfo) obj).packageName));
+                                            }
+                                        }
+                                    }).filter(new Predicate() { // from class: com.android.systemui.theme.ThemeOverlayApplier$$ExternalSyntheticLambda3
+                                        @Override // java.util.function.Predicate
+                                        public final boolean test(Object obj) {
+                                            int i4 = i;
+                                            Object obj2 = hashSet2;
+                                            switch (i4) {
+                                                case 0:
+                                                    OverlayInfo overlayInfo = (OverlayInfo) obj;
+                                                    return ((Set) ((ArrayMap) ((ThemeOverlayApplier) obj2).mTargetPackageToCategories).get(overlayInfo.targetPackageName)).contains(overlayInfo.category);
+                                                case 1:
+                                                    boolean z4 = ThemeOverlayApplier.DEBUG;
+                                                    return ((Set) obj2).contains(((OverlayInfo) obj).category);
+                                                default:
+                                                    boolean z5 = ThemeOverlayApplier.DEBUG;
+                                                    return !((Map) obj2).containsValue(new OverlayIdentifier(((OverlayInfo) obj).packageName));
+                                            }
+                                        }
+                                    });
+                                    final int i4 = 2;
+                                    List<Pair> list = (List) streamFilter.filter(new Predicate() { // from class: com.android.systemui.theme.ThemeOverlayApplier$$ExternalSyntheticLambda3
+                                        @Override // java.util.function.Predicate
+                                        public final boolean test(Object obj) {
+                                            int i42 = i4;
+                                            Object obj2 = map;
+                                            switch (i42) {
+                                                case 0:
+                                                    OverlayInfo overlayInfo = (OverlayInfo) obj;
+                                                    return ((Set) ((ArrayMap) ((ThemeOverlayApplier) obj2).mTargetPackageToCategories).get(overlayInfo.targetPackageName)).contains(overlayInfo.category);
+                                                case 1:
+                                                    boolean z4 = ThemeOverlayApplier.DEBUG;
+                                                    return ((Set) obj2).contains(((OverlayInfo) obj).category);
+                                                default:
+                                                    boolean z5 = ThemeOverlayApplier.DEBUG;
+                                                    return !((Map) obj2).containsValue(new OverlayIdentifier(((OverlayInfo) obj).packageName));
+                                            }
+                                        }
+                                    }).filter(new ThemeOverlayApplier$$ExternalSyntheticLambda6()).map(new ThemeOverlayApplier$$ExternalSyntheticLambda7()).collect(Collectors.toList());
+                                    OverlayManagerTransaction.Builder transactionBuilder = themeOverlayApplier2.getTransactionBuilder();
+                                    HashSet hashSet3 = new HashSet();
+                                    if (fabricatedOverlayArr4 != null) {
+                                        int length = fabricatedOverlayArr4.length;
+                                        while (i2 < length) {
+                                            FabricatedOverlay fabricatedOverlay4 = fabricatedOverlayArr4[i2];
+                                            hashSet3.add(fabricatedOverlay4.getIdentifier());
+                                            transactionBuilder.registerFabricatedOverlay(fabricatedOverlay4);
+                                            i2++;
+                                        }
+                                    }
+                                    for (Pair pair : list) {
+                                        OverlayIdentifier overlayIdentifier2 = new OverlayIdentifier((String) pair.second);
+                                        themeOverlayApplier2.setEnabled(transactionBuilder, overlayIdentifier2, (String) pair.first, i3, set, false, hashSet3.contains(overlayIdentifier2));
+                                    }
+                                    for (String str2 : ThemeOverlayApplier.THEME_CATEGORIES) {
+                                        ArrayMap arrayMap2 = (ArrayMap) map;
+                                        if (arrayMap2.containsKey(str2)) {
+                                            OverlayIdentifier overlayIdentifier3 = (OverlayIdentifier) arrayMap2.get(str2);
+                                            themeOverlayApplier2.setEnabled(transactionBuilder, overlayIdentifier3, str2, i3, set, true, hashSet3.contains(overlayIdentifier3));
+                                        }
+                                    }
+                                    try {
+                                        themeOverlayApplier2.mOverlayManager.commit(transactionBuilder.build());
+                                        Log.d("ThemeOverlayApplier", "Executing onComplete runnable");
+                                        themeOverlayApplier2.mMainExecutor.execute(themeOverlayController$$ExternalSyntheticLambda3);
+                                    } catch (IllegalStateException | SecurityException e4) {
+                                        Log.e("ThemeOverlayApplier", "setEnabled failed", e4);
+                                    }
+                                }
+                            });
+                            return;
+                        }
+                        fabricatedOverlayArr = new FabricatedOverlay[]{this.mDynamicOverlay};
+                    }
+                    fabricatedOverlayArr2 = fabricatedOverlayArr;
+                    final ThemeOverlayApplier themeOverlayApplier2 = this.mThemeManager;
+                    themeOverlayApplier2.mBgExecutor.execute(new Runnable() { // from class: com.android.systemui.theme.ThemeOverlayApplier$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            final int i = 1;
+                            final int i2 = 0;
+                            final Object themeOverlayApplier22 = themeOverlayApplier2;
+                            final Object map = arrayMap;
+                            FabricatedOverlay[] fabricatedOverlayArr4 = fabricatedOverlayArr2;
+                            int i3 = userId;
+                            Set set = hashSet;
+                            ThemeOverlayController$$ExternalSyntheticLambda3 themeOverlayController$$ExternalSyntheticLambda3 = r5;
+                            boolean z3 = ThemeOverlayApplier.DEBUG;
+                            themeOverlayApplier22.getClass();
+                            final Object hashSet2 = new HashSet(ThemeOverlayApplier.THEME_CATEGORIES);
+                            Set set2 = (Set) hashSet2.stream().map(new Function() { // from class: com.android.systemui.theme.ThemeOverlayApplier$$ExternalSyntheticLambda1
+                                @Override // java.util.function.Function
+                                public final Object apply(Object obj) {
+                                    return (String) ((ArrayMap) themeOverlayApplier22.mCategoryToTargetPackage).get((String) obj);
+                                }
+                            }).collect(Collectors.toSet());
+                            final List arrayList2 = new ArrayList();
+                            set2.forEach(new Consumer() { // from class: com.android.systemui.theme.ThemeOverlayApplier$$ExternalSyntheticLambda2
+                                @Override // java.util.function.Consumer
+                                public final void accept(Object obj) {
+                                    ThemeOverlayApplier themeOverlayApplier3 = themeOverlayApplier22;
+                                    arrayList2.addAll(themeOverlayApplier3.mOverlayManager.getOverlayInfosForTarget((String) obj, UserHandle.SYSTEM));
+                                }
+                            });
+                            Stream streamFilter = arrayList2.stream().filter(new Predicate() { // from class: com.android.systemui.theme.ThemeOverlayApplier$$ExternalSyntheticLambda3
+                                @Override // java.util.function.Predicate
+                                public final boolean test(Object obj) {
+                                    int i42 = i2;
+                                    Object obj2 = themeOverlayApplier22;
+                                    switch (i42) {
+                                        case 0:
+                                            OverlayInfo overlayInfo = (OverlayInfo) obj;
+                                            return ((Set) ((ArrayMap) ((ThemeOverlayApplier) obj2).mTargetPackageToCategories).get(overlayInfo.targetPackageName)).contains(overlayInfo.category);
+                                        case 1:
+                                            boolean z4 = ThemeOverlayApplier.DEBUG;
+                                            return ((Set) obj2).contains(((OverlayInfo) obj).category);
+                                        default:
+                                            boolean z5 = ThemeOverlayApplier.DEBUG;
+                                            return !((Map) obj2).containsValue(new OverlayIdentifier(((OverlayInfo) obj).packageName));
+                                    }
+                                }
+                            }).filter(new Predicate() { // from class: com.android.systemui.theme.ThemeOverlayApplier$$ExternalSyntheticLambda3
+                                @Override // java.util.function.Predicate
+                                public final boolean test(Object obj) {
+                                    int i42 = i;
+                                    Object obj2 = hashSet2;
+                                    switch (i42) {
+                                        case 0:
+                                            OverlayInfo overlayInfo = (OverlayInfo) obj;
+                                            return ((Set) ((ArrayMap) ((ThemeOverlayApplier) obj2).mTargetPackageToCategories).get(overlayInfo.targetPackageName)).contains(overlayInfo.category);
+                                        case 1:
+                                            boolean z4 = ThemeOverlayApplier.DEBUG;
+                                            return ((Set) obj2).contains(((OverlayInfo) obj).category);
+                                        default:
+                                            boolean z5 = ThemeOverlayApplier.DEBUG;
+                                            return !((Map) obj2).containsValue(new OverlayIdentifier(((OverlayInfo) obj).packageName));
+                                    }
+                                }
+                            });
+                            final int i4 = 2;
+                            List<Pair> list = (List) streamFilter.filter(new Predicate() { // from class: com.android.systemui.theme.ThemeOverlayApplier$$ExternalSyntheticLambda3
+                                @Override // java.util.function.Predicate
+                                public final boolean test(Object obj) {
+                                    int i42 = i4;
+                                    Object obj2 = map;
+                                    switch (i42) {
+                                        case 0:
+                                            OverlayInfo overlayInfo = (OverlayInfo) obj;
+                                            return ((Set) ((ArrayMap) ((ThemeOverlayApplier) obj2).mTargetPackageToCategories).get(overlayInfo.targetPackageName)).contains(overlayInfo.category);
+                                        case 1:
+                                            boolean z4 = ThemeOverlayApplier.DEBUG;
+                                            return ((Set) obj2).contains(((OverlayInfo) obj).category);
+                                        default:
+                                            boolean z5 = ThemeOverlayApplier.DEBUG;
+                                            return !((Map) obj2).containsValue(new OverlayIdentifier(((OverlayInfo) obj).packageName));
+                                    }
+                                }
+                            }).filter(new ThemeOverlayApplier$$ExternalSyntheticLambda6()).map(new ThemeOverlayApplier$$ExternalSyntheticLambda7()).collect(Collectors.toList());
+                            OverlayManagerTransaction.Builder transactionBuilder = themeOverlayApplier22.getTransactionBuilder();
+                            HashSet hashSet3 = new HashSet();
+                            if (fabricatedOverlayArr4 != null) {
+                                int length = fabricatedOverlayArr4.length;
+                                while (i2 < length) {
+                                    FabricatedOverlay fabricatedOverlay4 = fabricatedOverlayArr4[i2];
+                                    hashSet3.add(fabricatedOverlay4.getIdentifier());
+                                    transactionBuilder.registerFabricatedOverlay(fabricatedOverlay4);
+                                    i2++;
+                                }
+                            }
+                            for (Pair pair : list) {
+                                OverlayIdentifier overlayIdentifier2 = new OverlayIdentifier((String) pair.second);
+                                themeOverlayApplier22.setEnabled(transactionBuilder, overlayIdentifier2, (String) pair.first, i3, set, false, hashSet3.contains(overlayIdentifier2));
+                            }
+                            for (String str2 : ThemeOverlayApplier.THEME_CATEGORIES) {
+                                ArrayMap arrayMap2 = (ArrayMap) map;
+                                if (arrayMap2.containsKey(str2)) {
+                                    OverlayIdentifier overlayIdentifier3 = (OverlayIdentifier) arrayMap2.get(str2);
+                                    themeOverlayApplier22.setEnabled(transactionBuilder, overlayIdentifier3, str2, i3, set, true, hashSet3.contains(overlayIdentifier3));
+                                }
+                            }
+                            try {
+                                themeOverlayApplier22.mOverlayManager.commit(transactionBuilder.build());
+                                Log.d("ThemeOverlayApplier", "Executing onComplete runnable");
+                                themeOverlayApplier22.mMainExecutor.execute(themeOverlayController$$ExternalSyntheticLambda3);
+                            } catch (IllegalStateException | SecurityException e4) {
+                                Log.e("ThemeOverlayApplier", "setEnabled failed", e4);
+                            }
+                        }
+                    });
+                    return;
+                }
+                c = c2;
+                if (resources.getColor(R.color.system_outline_variant_dark, theme) != materialDynamicColors.outlineVariant().getArgb(this.mDarkColorScheme.mMaterialScheme) || resources.getColor(R.color.system_outline_variant_light, theme) != materialDynamicColors.outlineVariant().getArgb(this.mLightColorScheme.mMaterialScheme) || resources.getColor(R.color.system_primary_container_dark, theme) != materialDynamicColors.primaryContainer().getArgb(this.mDarkColorScheme.mMaterialScheme) || resources.getColor(R.color.system_primary_container_light, theme) != materialDynamicColors.primaryContainer().getArgb(this.mLightColorScheme.mMaterialScheme) || resources.getColor(R.color.system_primary_fixed, theme) != materialDynamicColors.primaryFixed().getArgb(this.mLightColorScheme.mMaterialScheme)) {
+                    ExifInterface$$ExternalSyntheticOutline0.m(new StringBuilder("Applying overlays: "), (String) arrayMap.keySet().stream().map(new Function() { // from class: com.android.systemui.theme.ThemeOverlayController$$ExternalSyntheticLambda4
+                        @Override // java.util.function.Function
+                        public final Object apply(Object obj) {
+                            Map map = arrayMap;
+                            String str2 = (String) obj;
+                            int i = ThemeOverlayController.$r8$clinit;
+                            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(str2, " -> ");
+                            sbM.append(map.get(str2));
+                            return sbM.toString();
+                        }
+                    }).collect(Collectors.joining(", ")), "ThemeOverlayController");
+                    if (this.mNeedsOverlayCreation) {
+                    }
+                    fabricatedOverlayArr2 = fabricatedOverlayArr;
+                    final ThemeOverlayApplier themeOverlayApplier22 = this.mThemeManager;
+                    themeOverlayApplier22.mBgExecutor.execute(new Runnable() { // from class: com.android.systemui.theme.ThemeOverlayApplier$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            final int i = 1;
+                            final int i2 = 0;
+                            final Object themeOverlayApplier222 = themeOverlayApplier22;
+                            final Object map = arrayMap;
+                            FabricatedOverlay[] fabricatedOverlayArr4 = fabricatedOverlayArr2;
+                            int i3 = userId;
+                            Set set = hashSet;
+                            ThemeOverlayController$$ExternalSyntheticLambda3 themeOverlayController$$ExternalSyntheticLambda3 = r5;
+                            boolean z3 = ThemeOverlayApplier.DEBUG;
+                            themeOverlayApplier222.getClass();
+                            final Object hashSet2 = new HashSet(ThemeOverlayApplier.THEME_CATEGORIES);
+                            Set set2 = (Set) hashSet2.stream().map(new Function() { // from class: com.android.systemui.theme.ThemeOverlayApplier$$ExternalSyntheticLambda1
+                                @Override // java.util.function.Function
+                                public final Object apply(Object obj) {
+                                    return (String) ((ArrayMap) themeOverlayApplier222.mCategoryToTargetPackage).get((String) obj);
+                                }
+                            }).collect(Collectors.toSet());
+                            final List arrayList2 = new ArrayList();
+                            set2.forEach(new Consumer() { // from class: com.android.systemui.theme.ThemeOverlayApplier$$ExternalSyntheticLambda2
+                                @Override // java.util.function.Consumer
+                                public final void accept(Object obj) {
+                                    ThemeOverlayApplier themeOverlayApplier3 = themeOverlayApplier222;
+                                    arrayList2.addAll(themeOverlayApplier3.mOverlayManager.getOverlayInfosForTarget((String) obj, UserHandle.SYSTEM));
+                                }
+                            });
+                            Stream streamFilter = arrayList2.stream().filter(new Predicate() { // from class: com.android.systemui.theme.ThemeOverlayApplier$$ExternalSyntheticLambda3
+                                @Override // java.util.function.Predicate
+                                public final boolean test(Object obj) {
+                                    int i42 = i2;
+                                    Object obj2 = themeOverlayApplier222;
+                                    switch (i42) {
+                                        case 0:
+                                            OverlayInfo overlayInfo = (OverlayInfo) obj;
+                                            return ((Set) ((ArrayMap) ((ThemeOverlayApplier) obj2).mTargetPackageToCategories).get(overlayInfo.targetPackageName)).contains(overlayInfo.category);
+                                        case 1:
+                                            boolean z4 = ThemeOverlayApplier.DEBUG;
+                                            return ((Set) obj2).contains(((OverlayInfo) obj).category);
+                                        default:
+                                            boolean z5 = ThemeOverlayApplier.DEBUG;
+                                            return !((Map) obj2).containsValue(new OverlayIdentifier(((OverlayInfo) obj).packageName));
+                                    }
+                                }
+                            }).filter(new Predicate() { // from class: com.android.systemui.theme.ThemeOverlayApplier$$ExternalSyntheticLambda3
+                                @Override // java.util.function.Predicate
+                                public final boolean test(Object obj) {
+                                    int i42 = i;
+                                    Object obj2 = hashSet2;
+                                    switch (i42) {
+                                        case 0:
+                                            OverlayInfo overlayInfo = (OverlayInfo) obj;
+                                            return ((Set) ((ArrayMap) ((ThemeOverlayApplier) obj2).mTargetPackageToCategories).get(overlayInfo.targetPackageName)).contains(overlayInfo.category);
+                                        case 1:
+                                            boolean z4 = ThemeOverlayApplier.DEBUG;
+                                            return ((Set) obj2).contains(((OverlayInfo) obj).category);
+                                        default:
+                                            boolean z5 = ThemeOverlayApplier.DEBUG;
+                                            return !((Map) obj2).containsValue(new OverlayIdentifier(((OverlayInfo) obj).packageName));
+                                    }
+                                }
+                            });
+                            final int i4 = 2;
+                            List<Pair> list = (List) streamFilter.filter(new Predicate() { // from class: com.android.systemui.theme.ThemeOverlayApplier$$ExternalSyntheticLambda3
+                                @Override // java.util.function.Predicate
+                                public final boolean test(Object obj) {
+                                    int i42 = i4;
+                                    Object obj2 = map;
+                                    switch (i42) {
+                                        case 0:
+                                            OverlayInfo overlayInfo = (OverlayInfo) obj;
+                                            return ((Set) ((ArrayMap) ((ThemeOverlayApplier) obj2).mTargetPackageToCategories).get(overlayInfo.targetPackageName)).contains(overlayInfo.category);
+                                        case 1:
+                                            boolean z4 = ThemeOverlayApplier.DEBUG;
+                                            return ((Set) obj2).contains(((OverlayInfo) obj).category);
+                                        default:
+                                            boolean z5 = ThemeOverlayApplier.DEBUG;
+                                            return !((Map) obj2).containsValue(new OverlayIdentifier(((OverlayInfo) obj).packageName));
+                                    }
+                                }
+                            }).filter(new ThemeOverlayApplier$$ExternalSyntheticLambda6()).map(new ThemeOverlayApplier$$ExternalSyntheticLambda7()).collect(Collectors.toList());
+                            OverlayManagerTransaction.Builder transactionBuilder = themeOverlayApplier222.getTransactionBuilder();
+                            HashSet hashSet3 = new HashSet();
+                            if (fabricatedOverlayArr4 != null) {
+                                int length = fabricatedOverlayArr4.length;
+                                while (i2 < length) {
+                                    FabricatedOverlay fabricatedOverlay4 = fabricatedOverlayArr4[i2];
+                                    hashSet3.add(fabricatedOverlay4.getIdentifier());
+                                    transactionBuilder.registerFabricatedOverlay(fabricatedOverlay4);
+                                    i2++;
+                                }
+                            }
+                            for (Pair pair : list) {
+                                OverlayIdentifier overlayIdentifier2 = new OverlayIdentifier((String) pair.second);
+                                themeOverlayApplier222.setEnabled(transactionBuilder, overlayIdentifier2, (String) pair.first, i3, set, false, hashSet3.contains(overlayIdentifier2));
+                            }
+                            for (String str2 : ThemeOverlayApplier.THEME_CATEGORIES) {
+                                ArrayMap arrayMap2 = (ArrayMap) map;
+                                if (arrayMap2.containsKey(str2)) {
+                                    OverlayIdentifier overlayIdentifier3 = (OverlayIdentifier) arrayMap2.get(str2);
+                                    themeOverlayApplier222.setEnabled(transactionBuilder, overlayIdentifier3, str2, i3, set, true, hashSet3.contains(overlayIdentifier3));
+                                }
+                            }
+                            try {
+                                themeOverlayApplier222.mOverlayManager.commit(transactionBuilder.build());
+                                Log.d("ThemeOverlayApplier", "Executing onComplete runnable");
+                                themeOverlayApplier222.mMainExecutor.execute(themeOverlayController$$ExternalSyntheticLambda3);
+                            } catch (IllegalStateException | SecurityException e4) {
+                                Log.e("ThemeOverlayApplier", "setEnabled failed", e4);
+                            }
+                        }
+                    });
+                    return;
+                }
+                c2 = c;
+            }
+            Log.d("ThemeOverlayController", "Skipping overlay creation. Theme was already: " + this.mColorScheme);
+            r5.run();
+        }
     }
 
     /* JADX WARN: Type inference failed for: r0v1, types: [com.android.systemui.theme.ThemeOverlayController$$ExternalSyntheticLambda1, java.lang.Runnable] */
@@ -5545,22 +6052,22 @@ public class ThemeOverlayController implements CoreStartable, Dumpable {
         final ?? r0 = new Runnable() { // from class: com.android.systemui.theme.ThemeOverlayController$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
-                final ThemeOverlayController themeOverlayController = ThemeOverlayController.this;
+                final ThemeOverlayController themeOverlayController = this.f$0;
                 WallpaperManager wallpaperManager = themeOverlayController.mWallpaperManager;
                 int userId = ((UserTrackerImpl) themeOverlayController.mUserTracker).getUserId();
                 final WallpaperColors wallpaperColors = wallpaperManager.getWallpaperColors(themeOverlayController.mWallpaperManager.getWallpaperIdForUser(2, userId) <= themeOverlayController.mWallpaperManager.getWallpaperIdForUser(1, userId) ? 1 : 2);
                 themeOverlayController.mMainExecutor.execute(new Runnable() { // from class: com.android.systemui.theme.ThemeOverlayController$$ExternalSyntheticLambda7
                     @Override // java.lang.Runnable
                     public final void run() {
-                        ThemeOverlayController themeOverlayController2 = ThemeOverlayController.this;
+                        ThemeOverlayController themeOverlayController2 = themeOverlayController;
                         themeOverlayController2.mCurrentColors.put(((UserTrackerImpl) themeOverlayController2.mUserTracker).getUserId(), wallpaperColors);
                         themeOverlayController2.reevaluateSystemTheme(true);
                     }
                 });
             }
         };
-        IntentFilter m = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m("android.intent.action.PROFILE_ADDED", "android.intent.action.WALLPAPER_CHANGED");
-        this.mBroadcastDispatcher.registerReceiver(this.mBroadcastReceiver, m, this.mMainExecutor, UserHandle.ALL);
+        IntentFilter intentFilterM = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m("android.intent.action.PROFILE_ADDED", "android.intent.action.WALLPAPER_CHANGED");
+        this.mBroadcastDispatcher.registerReceiver(this.mBroadcastReceiver, intentFilterM, this.mMainExecutor, UserHandle.ALL);
         this.mSecureSettings.registerContentObserverForUserSync("theme_customization_overlay_packages", false, new ContentObserver(this.mBgHandler) { // from class: com.android.systemui.theme.ThemeOverlayController.5
             public final void onChange(boolean z, Collection collection, int i, int i2) {
                 if (TextUtils.isEmpty(ThemeOverlayController.this.mSecureSettings.getStringForUser("theme_customization_overlay_packages", i2))) {
@@ -5587,7 +6094,7 @@ public class ThemeOverlayController implements CoreStartable, Dumpable {
         this.mUiModeManager.addContrastChangeListener(this.mMainExecutor, new UiModeManager.ContrastChangeListener() { // from class: com.android.systemui.theme.ThemeOverlayController$$ExternalSyntheticLambda2
             @Override // android.app.UiModeManager.ContrastChangeListener
             public final void onContrastChanged(float f) {
-                ThemeOverlayController themeOverlayController = ThemeOverlayController.this;
+                ThemeOverlayController themeOverlayController = this.f$0;
                 ThemeOverlayController$$ExternalSyntheticLambda1 themeOverlayController$$ExternalSyntheticLambda1 = r0;
                 double d = f;
                 themeOverlayController.mContrast = d;

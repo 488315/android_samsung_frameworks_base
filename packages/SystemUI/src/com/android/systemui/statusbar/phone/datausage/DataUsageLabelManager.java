@@ -9,20 +9,27 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.PathInterpolator;
+import androidx.appcompat.widget.ActionBarContextView$$ExternalSyntheticOutline0;
+import androidx.slice.widget.RowView$$ExternalSyntheticOutline0;
 import androidx.viewpager.widget.ViewPager$$ExternalSyntheticOutline0;
+import com.android.keyguard.KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0;
 import com.android.systemui.Dependency;
+import com.android.systemui.QpRune;
 import com.android.systemui.R;
+import com.android.systemui.qs.animator.QsAnimatorState;
+import com.android.systemui.shade.NotificationPanelView;
 import com.android.systemui.shade.NotificationPanelViewController;
 import com.android.systemui.shade.NotificationPanelViewController$$ExternalSyntheticLambda12;
 import com.android.systemui.shade.NotificationPanelViewController$$ExternalSyntheticLambda13;
 import com.android.systemui.shade.NotificationPanelViewController$$ExternalSyntheticLambda15;
+import com.android.systemui.shade.SecPanelSplitHelper;
 import com.android.systemui.slimindicator.SlimIndicatorViewMediator;
+import com.android.systemui.slimindicator.SlimIndicatorViewMediatorImpl;
 import com.android.systemui.slimindicator.SlimIndicatorViewSubscriber;
 import com.android.systemui.util.DeviceType;
 import com.android.systemui.util.SettingsHelper;
 import java.util.function.DoubleSupplier;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class DataUsageLabelManager {
     public static final boolean DEBUG = DeviceType.isEngOrUTBinary();
@@ -41,7 +48,6 @@ public class DataUsageLabelManager {
     public boolean mLabelAlphaAnimStarted = true;
     public int mInsetNavigationBarBottomHeight = 0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class NavSettingsHelper implements SettingsHelper.OnChangedCallback {
         public boolean IsNavigationBarGestureHintEnabled;
         public boolean IsNavigationBarGestureProtectionEnabled;
@@ -91,13 +97,12 @@ public class DataUsageLabelManager {
             boolean z3 = this.IsNavigationBarHideKeyboardButtonEnabled;
             this.IsNavigationBarGestureProtectionEnabled = settingsHelper.isNavigationBarGestureProtectionEnabled();
             this.IsNavigationBarGestureHintEnabled = this.mSettingsHelper.isNavigationBarGestureHintEnabled();
-            boolean isNavigationBarHideKeyboardButtonEnabled = this.mSettingsHelper.isNavigationBarHideKeyboardButtonEnabled();
-            this.IsNavigationBarHideKeyboardButtonEnabled = isNavigationBarHideKeyboardButtonEnabled;
-            return (this.IsNavigationBarGestureProtectionEnabled == z && this.IsNavigationBarGestureHintEnabled == z2 && isNavigationBarHideKeyboardButtonEnabled == z3) ? false : true;
+            boolean zIsNavigationBarHideKeyboardButtonEnabled = this.mSettingsHelper.isNavigationBarHideKeyboardButtonEnabled();
+            this.IsNavigationBarHideKeyboardButtonEnabled = zIsNavigationBarHideKeyboardButtonEnabled;
+            return (this.IsNavigationBarGestureProtectionEnabled == z && this.IsNavigationBarGestureHintEnabled == z2 && zIsNavigationBarHideKeyboardButtonEnabled == z3) ? false : true;
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class QuickStarHelper implements SlimIndicatorViewSubscriber {
         public final SlimIndicatorViewMediator mSlimIndicatorViewMediator;
 
@@ -113,17 +118,17 @@ public class DataUsageLabelManager {
 
     public DataUsageLabelManager(final NotificationPanelViewController notificationPanelViewController, SlimIndicatorViewMediator slimIndicatorViewMediator) {
         if (notificationPanelViewController.mDataUsageLabelParent == null) {
-            int i = 1;
-            notificationPanelViewController.mDataUsageLabelParent = new DataUsageLabelParent(new NotificationPanelViewController$$ExternalSyntheticLambda12(notificationPanelViewController, 2), new NotificationPanelViewController$$ExternalSyntheticLambda13(notificationPanelViewController, i), new DoubleSupplier() { // from class: com.android.systemui.shade.NotificationPanelViewController$$ExternalSyntheticLambda32
+            notificationPanelViewController.mDataUsageLabelParent = new DataUsageLabelParent(new NotificationPanelViewController$$ExternalSyntheticLambda12(notificationPanelViewController, 2), new NotificationPanelViewController$$ExternalSyntheticLambda13(notificationPanelViewController, 3), new DoubleSupplier() { // from class: com.android.systemui.shade.NotificationPanelViewController$$ExternalSyntheticLambda39
                 @Override // java.util.function.DoubleSupplier
                 public final double getAsDouble() {
-                    return NotificationPanelViewController.this.mQsController.mExpansionHeight;
+                    return notificationPanelViewController.mQsController.mExpansionHeight;
                 }
-            }, new NotificationPanelViewController$$ExternalSyntheticLambda15(notificationPanelViewController, i), new NotificationPanelViewController$$ExternalSyntheticLambda13(notificationPanelViewController, 2), new NotificationPanelViewController$$ExternalSyntheticLambda15(notificationPanelViewController, 0));
+            }, new NotificationPanelViewController$$ExternalSyntheticLambda15(notificationPanelViewController, 1), new NotificationPanelViewController$$ExternalSyntheticLambda13(notificationPanelViewController, 4), new NotificationPanelViewController$$ExternalSyntheticLambda15(notificationPanelViewController, 0));
         }
         DataUsageLabelParent dataUsageLabelParent = notificationPanelViewController.mDataUsageLabelParent;
         this.mDataUsageLabelParent = dataUsageLabelParent;
-        this.mContext = dataUsageLabelParent.getViewContext();
+        NotificationPanelView notificationPanelView = (NotificationPanelView) dataUsageLabelParent.mPanelViewSupplier.get();
+        this.mContext = notificationPanelView != null ? notificationPanelView.getContext() : null;
         this.mNavSettingsHelper = new NavSettingsHelper();
         this.mQuickStarHelper = new QuickStarHelper(slimIndicatorViewMediator);
     }
@@ -133,73 +138,37 @@ public class DataUsageLabelManager {
             return;
         }
         view.animate().alpha(z ? 1.0f : 0.0f).setDuration(150L).setStartDelay(z ? 150L : 0L).setInterpolator(new PathInterpolator(0.42f, 0.0f, 0.58f, 1.0f)).setUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.phone.datausage.DataUsageLabelManager.1
-            /* JADX WARN: Code restructure failed: missing block: B:8:0x0028, code lost:
-            
-                if (java.lang.Float.compare(0.0f, r8) != 0) goto L12;
-             */
+            /* JADX WARN: Removed duplicated region for block: B:11:0x002a  */
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             /*
                 Code decompiled incorrectly, please refer to instructions dump.
-                To view partially-correct code enable 'Show inconsistent code' option in preferences
             */
-            public final void onAnimationUpdate(android.animation.ValueAnimator r8) {
-                /*
-                    r7 = this;
-                    float r8 = r8.getAnimatedFraction()
-                    com.android.systemui.statusbar.phone.datausage.DataUsageLabelManager r0 = com.android.systemui.statusbar.phone.datausage.DataUsageLabelManager.this
-                    float r0 = r0.mPrvAlpha
-                    r1 = 1065353216(0x3f800000, float:1.0)
-                    int r2 = java.lang.Float.compare(r1, r0)
-                    r3 = 0
-                    r4 = 1
-                    if (r2 == 0) goto L2a
-                    int r0 = java.lang.Float.compare(r3, r0)
-                    if (r0 != 0) goto L19
-                    goto L2a
-                L19:
-                    com.android.systemui.statusbar.phone.datausage.DataUsageLabelManager r0 = com.android.systemui.statusbar.phone.datausage.DataUsageLabelManager.this
-                    r0.getClass()
-                    int r0 = java.lang.Float.compare(r1, r8)
-                    if (r0 == 0) goto L2a
-                    int r0 = java.lang.Float.compare(r3, r8)
-                    if (r0 != 0) goto L2f
-                L2a:
-                    com.android.systemui.statusbar.phone.datausage.DataUsageLabelManager r0 = com.android.systemui.statusbar.phone.datausage.DataUsageLabelManager.this
-                    r0.updateLabelVisibility(r4)
-                L2f:
-                    com.android.systemui.statusbar.phone.datausage.DataUsageLabelManager r0 = com.android.systemui.statusbar.phone.datausage.DataUsageLabelManager.this
-                    float r2 = r0.mPrvAlpha
-                    int r5 = java.lang.Float.compare(r2, r8)
-                    r6 = 0
-                    if (r5 == 0) goto L57
-                    int r1 = java.lang.Float.compare(r1, r8)
-                    if (r1 == 0) goto L57
-                    int r1 = java.lang.Float.compare(r3, r8)
-                    if (r1 != 0) goto L47
-                    goto L57
-                L47:
-                    int r1 = java.lang.Float.compare(r2, r8)
-                    if (r1 <= 0) goto L52
-                    r0.mIsFadingIn = r6
-                    r0.mIsFadingOut = r4
-                    goto L5b
-                L52:
-                    r0.mIsFadingIn = r4
-                    r0.mIsFadingOut = r6
-                    goto L5b
-                L57:
-                    r0.mIsFadingIn = r6
-                    r0.mIsFadingOut = r6
-                L5b:
-                    int r0 = java.lang.Float.compare(r2, r8)
-                    if (r0 != 0) goto L62
-                    return
-                L62:
-                    com.android.systemui.statusbar.phone.datausage.DataUsageLabelManager r7 = com.android.systemui.statusbar.phone.datausage.DataUsageLabelManager.this
-                    r7.mPrvAlpha = r8
-                    return
-                */
-                throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.phone.datausage.DataUsageLabelManager.AnonymousClass1.onAnimationUpdate(android.animation.ValueAnimator):void");
+            public final void onAnimationUpdate(ValueAnimator valueAnimator) {
+                float animatedFraction = valueAnimator.getAnimatedFraction();
+                float f = DataUsageLabelManager.this.mPrvAlpha;
+                if (Float.compare(1.0f, f) == 0 || Float.compare(0.0f, f) == 0) {
+                    DataUsageLabelManager.this.updateLabelVisibility(true);
+                } else {
+                    DataUsageLabelManager.this.getClass();
+                    if (Float.compare(1.0f, animatedFraction) == 0 || Float.compare(0.0f, animatedFraction) == 0) {
+                    }
+                }
+                DataUsageLabelManager dataUsageLabelManager = DataUsageLabelManager.this;
+                float f2 = dataUsageLabelManager.mPrvAlpha;
+                if (Float.compare(f2, animatedFraction) == 0 || Float.compare(1.0f, animatedFraction) == 0 || Float.compare(0.0f, animatedFraction) == 0) {
+                    dataUsageLabelManager.mIsFadingIn = false;
+                    dataUsageLabelManager.mIsFadingOut = false;
+                } else if (Float.compare(f2, animatedFraction) > 0) {
+                    dataUsageLabelManager.mIsFadingIn = false;
+                    dataUsageLabelManager.mIsFadingOut = true;
+                } else {
+                    dataUsageLabelManager.mIsFadingIn = true;
+                    dataUsageLabelManager.mIsFadingOut = false;
+                }
+                if (Float.compare(f2, animatedFraction) == 0) {
+                    return;
+                }
+                DataUsageLabelManager.this.mPrvAlpha = animatedFraction;
             }
         }).start();
     }
@@ -226,104 +195,41 @@ public class DataUsageLabelManager {
         dataUsageLabelView.setTextColor(this.mContext.getColor(R.color.sec_qs_security_footer_tint_color));
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:40:0x0091  */
+    /* JADX WARN: Removed duplicated region for block: B:23:0x0050  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void updateLabelVisibility(boolean r9) {
-        /*
-            r8 = this;
-            boolean r0 = com.android.systemui.QpRune.QUICK_DATA_USAGE_LABEL
-            com.android.systemui.statusbar.phone.datausage.DataUsageLabelParent r1 = r8.mDataUsageLabelParent
-            r2 = 1
-            r3 = 0
-            if (r0 == 0) goto L50
-            r1.getClass()
-            boolean r0 = com.android.systemui.qs.animator.QsAnimatorState.isDetailOpening
-            if (r0 != 0) goto L50
-            boolean r0 = com.android.systemui.qs.animator.QsAnimatorState.isDetailShowing
-            if (r0 == 0) goto L14
-            goto L50
-        L14:
-            boolean r0 = com.android.systemui.shade.SecPanelSplitHelper.isEnabled()
-            if (r0 != 0) goto L50
-            java.util.function.BooleanSupplier r0 = r1.mOnKeyguardStateSupplier
-            boolean r0 = r0.getAsBoolean()
-            if (r0 != 0) goto L50
-            java.util.function.DoubleSupplier r0 = r1.mExpansionHeightSupplier
-            double r4 = r0.getAsDouble()
-            java.util.function.IntSupplier r0 = r1.mMinExpansionHeightSupplier
-            int r0 = r0.getAsInt()
-            double r6 = (double) r0
-            int r0 = (r4 > r6 ? 1 : (r4 == r6 ? 0 : -1))
-            if (r0 > 0) goto L50
-            java.util.function.BooleanSupplier r0 = r1.mFullyExpandedSupplier
-            boolean r0 = r0.getAsBoolean()
-            if (r0 != 0) goto L50
-            com.android.systemui.statusbar.phone.datausage.DataUsageLabelManager$QuickStarHelper r0 = r8.mQuickStarHelper
-            com.android.systemui.slimindicator.SlimIndicatorViewMediator r0 = r0.mSlimIndicatorViewMediator
-            com.android.systemui.slimindicator.SlimIndicatorViewMediatorImpl r0 = (com.android.systemui.slimindicator.SlimIndicatorViewMediatorImpl) r0
-            com.android.systemui.slimindicator.SlimIndicatorPluginMediator r4 = r0.mPluginMediator
-            boolean r4 = r4.mIsSPluginConnected
-            if (r4 == 0) goto L4e
-            com.android.systemui.slimindicator.SlimIndicatorCarrierCrew r0 = r0.mCarrierCrew
-            int r0 = r0.mIsPanelCarrierDisabled
-            if (r0 != r2) goto L4e
-            goto L50
-        L4e:
-            r0 = r2
-            goto L51
-        L50:
-            r0 = r3
-        L51:
-            boolean r4 = r8.mPreviousVisible
-            if (r4 != r0) goto L59
-            if (r9 == 0) goto L58
-            goto L59
-        L58:
-            return
-        L59:
-            boolean r5 = com.android.systemui.statusbar.phone.datausage.DataUsageLabelManager.DEBUG
-            if (r5 == 0) goto L80
-            if (r4 == r0) goto L80
-            java.lang.String r4 = "updateLabelVisibility(forceUpdate:"
-            java.lang.String r5 = ") preV:"
-            java.lang.StringBuilder r4 = androidx.slice.widget.RowView$$ExternalSyntheticOutline0.m(r4, r5, r9)
-            boolean r5 = r8.mPreviousVisible
-            java.lang.String r6 = " >> newV:"
-            java.lang.String r7 = ", isFadingAnimationRunning()"
-            com.android.keyguard.KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(r4, r5, r6, r0, r7)
-            boolean r5 = r8.mIsFadingIn
-            if (r5 != 0) goto L7b
-            boolean r5 = r8.mIsFadingOut
-            if (r5 == 0) goto L7a
-            goto L7b
-        L7a:
-            r2 = r3
-        L7b:
-            java.lang.String r5 = "DataUsageLabelManager"
-            androidx.appcompat.widget.ActionBarContextView$$ExternalSyntheticOutline0.m(r4, r2, r5)
-        L80:
-            boolean r2 = r8.mIsFadingIn
-            if (r2 != 0) goto L88
-            boolean r2 = r8.mIsFadingOut
-            if (r2 == 0) goto L8a
-        L88:
-            if (r9 == 0) goto L96
-        L8a:
-            android.view.ViewGroup r9 = r1.getParentViewGroup()
-            if (r0 == 0) goto L91
-            goto L93
-        L91:
-            r3 = 8
-        L93:
-            r9.setVisibility(r3)
-        L96:
-            r8.mPreviousVisible = r0
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.phone.datausage.DataUsageLabelManager.updateLabelVisibility(boolean):void");
+    public final void updateLabelVisibility(boolean z) {
+        boolean z2;
+        boolean z3 = QpRune.QUICK_DATA_USAGE_LABEL;
+        DataUsageLabelParent dataUsageLabelParent = this.mDataUsageLabelParent;
+        boolean z4 = true;
+        if (z3) {
+            dataUsageLabelParent.getClass();
+            if (QsAnimatorState.isDetailOpening || QsAnimatorState.isDetailShowing || SecPanelSplitHelper.isEnabled() || dataUsageLabelParent.mOnKeyguardStateSupplier.getAsBoolean() || dataUsageLabelParent.mExpansionHeightSupplier.getAsDouble() > dataUsageLabelParent.mMinExpansionHeightSupplier.getAsInt() || dataUsageLabelParent.mFullyExpandedSupplier.getAsBoolean()) {
+                z2 = false;
+            } else {
+                SlimIndicatorViewMediatorImpl slimIndicatorViewMediatorImpl = (SlimIndicatorViewMediatorImpl) this.mQuickStarHelper.mSlimIndicatorViewMediator;
+                if (!slimIndicatorViewMediatorImpl.mPluginMediator.mIsSPluginConnected || slimIndicatorViewMediatorImpl.mCarrierCrew.mIsPanelCarrierDisabled != 1) {
+                    z2 = true;
+                }
+            }
+        }
+        boolean z5 = this.mPreviousVisible;
+        if (z5 != z2 || z) {
+            if (DEBUG && z5 != z2) {
+                StringBuilder sbM = RowView$$ExternalSyntheticOutline0.m("updateLabelVisibility(forceUpdate:", ") preV:", z);
+                KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sbM, this.mPreviousVisible, " >> newV:", z2, ", isFadingAnimationRunning()");
+                if (!this.mIsFadingIn && !this.mIsFadingOut) {
+                    z4 = false;
+                }
+                ActionBarContextView$$ExternalSyntheticOutline0.m(sbM, z4, "DataUsageLabelManager");
+            }
+            if ((!this.mIsFadingIn && !this.mIsFadingOut) || z) {
+                dataUsageLabelParent.getParentViewGroup().setVisibility(z2 ? 0 : 8);
+            }
+            this.mPreviousVisible = z2;
+        }
     }
 
     public final void updateNavBarHeight(int i) {

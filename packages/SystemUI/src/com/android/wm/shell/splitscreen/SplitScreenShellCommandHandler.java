@@ -12,7 +12,6 @@ import com.android.wm.shell.sysui.ShellCommandHandler;
 import com.samsung.android.rune.CoreRune;
 import java.io.PrintWriter;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SplitScreenShellCommandHandler implements ShellCommandHandler.ShellCommandActionHandler {
     public final SplitScreenController mController;
@@ -28,15 +27,15 @@ public class SplitScreenShellCommandHandler implements ShellCommandHandler.Shell
     }
 
     @Override // com.android.wm.shell.sysui.ShellCommandHandler.ShellCommandActionHandler
-    public final boolean onShellCommand(PrintWriter printWriter, String[] strArr) {
-        Intent intent;
+    public final boolean onShellCommand(PrintWriter printWriter, String[] strArr) throws NumberFormatException {
+        Intent intentMakeBasicIntent;
         SplitScreenController splitScreenController;
-        int parseInt;
+        int i;
         boolean z;
         z = false;
         String str = strArr[0];
         str.getClass();
-        intent = null;
+        intentMakeBasicIntent = null;
         splitScreenController = this.mController;
         switch (str) {
             case "startTasks":
@@ -79,10 +78,10 @@ public class SplitScreenShellCommandHandler implements ShellCommandHandler.Shell
                     printWriter.println("Error: task id should be provided as arguments");
                     return false;
                 }
-                int intValue = new Integer(strArr[1]).intValue();
-                int intValue2 = strArr.length > 2 ? new Integer(strArr[2]).intValue() : 1;
+                int iIntValue = new Integer(strArr[1]).intValue();
+                int iIntValue2 = strArr.length > 2 ? new Integer(strArr[2]).intValue() : 1;
                 splitScreenController.getClass();
-                splitScreenController.moveToStage(intValue, intValue2, new WindowContainerTransaction());
+                splitScreenController.moveToStage(iIntValue, iIntValue2, new WindowContainerTransaction());
                 return true;
             case "setSplitCreateMode":
                 if (!CoreRune.MW_MULTI_SPLIT_CREATE_MODE) {
@@ -107,19 +106,19 @@ public class SplitScreenShellCommandHandler implements ShellCommandHandler.Shell
                     printWriter.println("Error: side stage position should be provided as arguments");
                     return false;
                 }
-                int intValue3 = new Integer(strArr[1]).intValue();
+                int iIntValue3 = new Integer(strArr[1]).intValue();
                 if (CoreRune.MW_MULTI_SPLIT_FREE_POSITION) {
-                    splitScreenController.setSideStagePosition(null, intValue3);
+                    splitScreenController.setSideStagePosition(null, iIntValue3);
                     return true;
                 }
-                splitScreenController.mStageCoordinator.setSideStagePosition$1(null, intValue3);
+                splitScreenController.mStageCoordinator.setSideStagePosition$1(null, iIntValue3);
                 return true;
             case "startSplitTasks":
                 if (strArr.length < 4) {
                     printWriter.println("Error: start multiple tasks should be provided as arguments");
                     return false;
                 }
-                this.mController.startSplitTasks(Integer.parseInt(strArr[1]), Integer.parseInt(strArr[2]), -1, false, 0, Float.parseFloat(strArr[3]), 0.5f);
+                this.mController.startSplitTasks(Integer.parseInt(strArr[1]), Integer.parseInt(strArr[2]), -1, false, 0, Float.parseFloat(strArr[3]), 0.5f, false);
                 return true;
             case "startIntents":
                 if (strArr.length < 4) {
@@ -127,22 +126,22 @@ public class SplitScreenShellCommandHandler implements ShellCommandHandler.Shell
                     printWriter.println("$ adb shell ~ WMShell splitscreen startIntents pkg1 pkg2 pkg3(optional) [splitDivision] [parallelMultiSplit]");
                     return true;
                 }
-                Intent makeBasicIntent = makeBasicIntent(strArr[1]);
-                Intent makeBasicIntent2 = makeBasicIntent(strArr[2]);
+                Intent intentMakeBasicIntent2 = makeBasicIntent(strArr[1]);
+                Intent intentMakeBasicIntent3 = makeBasicIntent(strArr[2]);
                 if (strArr.length > 4) {
-                    intent = makeBasicIntent(strArr[3]);
-                    parseInt = Integer.parseInt(strArr[4]);
+                    intentMakeBasicIntent = makeBasicIntent(strArr[3]);
+                    i = Integer.parseInt(strArr[4]);
                     z = Boolean.parseBoolean(strArr[5]);
                 } else {
-                    parseInt = Integer.parseInt(strArr[3]);
+                    i = Integer.parseInt(strArr[3]);
                 }
-                int i = parseInt;
+                int i2 = i;
                 boolean z2 = z;
-                Intent intent2 = intent;
+                Intent intent = intentMakeBasicIntent;
                 StageCoordinator stageCoordinator2 = splitScreenController.mStageCoordinator;
                 stageCoordinator2.getClass();
                 UserHandle userHandle = UserHandle.CURRENT;
-                stageCoordinator2.startSplitScreen(-1, null, makeBasicIntent, makeBasicIntent2, intent2, userHandle, userHandle, userHandle, 0, 0, 0.5f, 0.5f, 1, i, z2, null, null);
+                stageCoordinator2.startSplitScreen(-1, null, intentMakeBasicIntent2, intentMakeBasicIntent3, intent, userHandle, userHandle, userHandle, 0, 0, 0.5f, 0.5f, 1, i2, z2, null, null);
                 return true;
             case "enterSplitByGesture":
                 if (strArr.length < 4) {
@@ -151,9 +150,9 @@ public class SplitScreenShellCommandHandler implements ShellCommandHandler.Shell
                 }
                 if (strArr[2].equals("interface")) {
                     SplitScreenController.SplitScreenImpl splitScreenImpl = splitScreenController.mImpl;
-                    int parseInt2 = Integer.parseInt(strArr[3]);
+                    int i3 = Integer.parseInt(strArr[3]);
                     splitScreenImpl.getClass();
-                    SplitScreenController.this.mMainExecutor.execute(new SplitScreenController$SplitScreenImpl$$ExternalSyntheticLambda9(splitScreenImpl, parseInt2, Debug.getCaller()));
+                    SplitScreenController.this.mMainExecutor.execute(new SplitScreenController$SplitScreenImpl$$ExternalSyntheticLambda9(splitScreenImpl, i3, Debug.getCaller()));
                     return true;
                 }
                 return true;

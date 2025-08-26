@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.appcompat.widget.MenuPopupWindow$MenuDropDownListView$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class KeyboardShortcutKeysLayout extends ViewGroup {
     public final Context mContext;
@@ -25,14 +24,14 @@ public final class KeyboardShortcutKeysLayout extends ViewGroup {
 
     @Override // android.view.ViewGroup
     public final ViewGroup.LayoutParams generateDefaultLayoutParams() {
-        int applyDimension = (int) TypedValue.applyDimension(1, 4.0f, getResources().getDisplayMetrics());
-        return new LayoutParams(applyDimension, applyDimension);
+        int iApplyDimension = (int) TypedValue.applyDimension(1, 4.0f, getResources().getDisplayMetrics());
+        return new LayoutParams(iApplyDimension, iApplyDimension);
     }
 
     @Override // android.view.ViewGroup
     public final ViewGroup.LayoutParams generateLayoutParams(ViewGroup.LayoutParams layoutParams) {
-        int applyDimension = (int) TypedValue.applyDimension(1, 4.0f, getResources().getDisplayMetrics());
-        return new LayoutParams(applyDimension, applyDimension, layoutParams);
+        int iApplyDimension = (int) TypedValue.applyDimension(1, 4.0f, getResources().getDisplayMetrics());
+        return new LayoutParams(iApplyDimension, iApplyDimension, layoutParams);
     }
 
     public final boolean isRTL() {
@@ -126,32 +125,31 @@ public final class KeyboardShortcutKeysLayout extends ViewGroup {
         int size2 = (View.MeasureSpec.getSize(i2) - getPaddingTop()) - getPaddingBottom();
         int paddingLeft = getPaddingLeft();
         int paddingTop = getPaddingTop();
-        int makeMeasureSpec = View.MeasureSpec.getMode(i2) == Integer.MIN_VALUE ? View.MeasureSpec.makeMeasureSpec(size2, Integer.MIN_VALUE) : View.MeasureSpec.makeMeasureSpec(0, 0);
-        int i4 = 0;
-        for (int i5 = 0; i5 < childCount; i5++) {
-            View childAt = getChildAt(i5);
+        int iMakeMeasureSpec = View.MeasureSpec.getMode(i2) == Integer.MIN_VALUE ? View.MeasureSpec.makeMeasureSpec(size2, Integer.MIN_VALUE) : View.MeasureSpec.makeMeasureSpec(0, 0);
+        int iMax = 0;
+        for (int i4 = 0; i4 < childCount; i4++) {
+            View childAt = getChildAt(i4);
             if (childAt.getVisibility() != 8) {
                 LayoutParams layoutParams = (LayoutParams) childAt.getLayoutParams();
-                childAt.measure(View.MeasureSpec.makeMeasureSpec(size, Integer.MIN_VALUE), makeMeasureSpec);
+                childAt.measure(View.MeasureSpec.makeMeasureSpec(size, Integer.MIN_VALUE), iMakeMeasureSpec);
                 int measuredWidth = childAt.getMeasuredWidth();
-                i4 = Math.max(i4, childAt.getMeasuredHeight() + layoutParams.mVerticalSpacing);
+                iMax = Math.max(iMax, childAt.getMeasuredHeight() + layoutParams.mVerticalSpacing);
                 if (paddingLeft + measuredWidth > size) {
                     paddingLeft = getPaddingLeft();
-                    paddingTop += i4;
+                    paddingTop += iMax;
                 }
                 paddingLeft = measuredWidth + layoutParams.mHorizontalSpacing + paddingLeft;
             }
         }
-        this.mLineHeight = i4;
+        this.mLineHeight = iMax;
         if (View.MeasureSpec.getMode(i2) == 0) {
-            size2 = paddingTop + i4;
-        } else if (View.MeasureSpec.getMode(i2) == Integer.MIN_VALUE && (i3 = paddingTop + i4) < size2) {
+            size2 = paddingTop + iMax;
+        } else if (View.MeasureSpec.getMode(i2) == Integer.MIN_VALUE && (i3 = paddingTop + iMax) < size2) {
             size2 = i3;
         }
         setMeasuredDimension(size, size2);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class LayoutParams extends ViewGroup.LayoutParams {
         public final int mHorizontalSpacing;
         public final int mVerticalSpacing;

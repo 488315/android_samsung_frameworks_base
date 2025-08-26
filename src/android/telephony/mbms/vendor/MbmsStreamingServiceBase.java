@@ -52,7 +52,7 @@ public class MbmsStreamingServiceBase extends IMbmsStreamingService.Stub {
             throw new NullPointerException("Callback must not be null");
         }
         final int callingUid = Binder.getCallingUid();
-        int initialize = initialize(new MbmsStreamingSessionCallback() { // from class: android.telephony.mbms.vendor.MbmsStreamingServiceBase.1
+        int iInitialize = initialize(new MbmsStreamingSessionCallback() { // from class: android.telephony.mbms.vendor.MbmsStreamingServiceBase.1
             @Override // android.telephony.mbms.MbmsStreamingSessionCallback
             public void onError(int i2, String str) {
                 try {
@@ -83,7 +83,7 @@ public class MbmsStreamingServiceBase extends IMbmsStreamingService.Stub {
                 }
             }
         }, i);
-        if (initialize == 0) {
+        if (iInitialize == 0) {
             iMbmsStreamingSessionCallback.asBinder().linkToDeath(new IBinder.DeathRecipient() { // from class: android.telephony.mbms.vendor.MbmsStreamingServiceBase.2
                 @Override // android.os.IBinder.DeathRecipient
                 public void binderDied() {
@@ -91,7 +91,7 @@ public class MbmsStreamingServiceBase extends IMbmsStreamingService.Stub {
                 }
             }, 0);
         }
-        return initialize;
+        return iInitialize;
     }
 
     @Override // android.telephony.mbms.vendor.IMbmsStreamingService
@@ -100,7 +100,7 @@ public class MbmsStreamingServiceBase extends IMbmsStreamingService.Stub {
             throw new NullPointerException("Callback must not be null");
         }
         final int callingUid = Binder.getCallingUid();
-        int startStreaming = startStreaming(i, str, new StreamingServiceCallback() { // from class: android.telephony.mbms.vendor.MbmsStreamingServiceBase.3
+        int iStartStreaming = startStreaming(i, str, new StreamingServiceCallback() { // from class: android.telephony.mbms.vendor.MbmsStreamingServiceBase.3
             @Override // android.telephony.mbms.StreamingServiceCallback
             public void onError(int i2, String str2) {
                 try {
@@ -149,7 +149,7 @@ public class MbmsStreamingServiceBase extends IMbmsStreamingService.Stub {
                 }
             }
         });
-        if (startStreaming == 0) {
+        if (iStartStreaming == 0) {
             iStreamingServiceCallback.asBinder().linkToDeath(new IBinder.DeathRecipient() { // from class: android.telephony.mbms.vendor.MbmsStreamingServiceBase.4
                 @Override // android.os.IBinder.DeathRecipient
                 public void binderDied() {
@@ -157,7 +157,7 @@ public class MbmsStreamingServiceBase extends IMbmsStreamingService.Stub {
                 }
             }, 0);
         }
-        return startStreaming;
+        return iStartStreaming;
     }
 
     @Override // android.telephony.mbms.vendor.IMbmsStreamingService.Stub, android.os.IInterface

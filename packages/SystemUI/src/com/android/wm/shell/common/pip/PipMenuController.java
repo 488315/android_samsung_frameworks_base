@@ -7,7 +7,6 @@ import android.view.WindowManager;
 import com.android.systemui.R;
 import com.samsung.systemui.splugins.volume.VolumePanelValues;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public interface PipMenuController {
     static WindowManager.LayoutParams getPipMenuLayoutParams(Context context, int i, int i2) {

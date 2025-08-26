@@ -18,14 +18,12 @@ import android.util.Log;
 import com.android.app.tracing.TraceUtilsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DrawableSize {
     public static final int $stable = 0;
     public static final Companion Companion = new Companion(null);
     public static final String TAG = "SysUiDrawableSize";
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -63,8 +61,8 @@ public final class DrawableSize {
             Bitmap bitmap;
             Bitmap bitmap2;
             Bitmap bitmap3;
-            boolean isEnabled = Trace.isEnabled();
-            if (isEnabled) {
+            boolean zIsEnabled = Trace.isEnabled();
+            if (zIsEnabled) {
                 TraceUtilsKt.beginSlice("DrawableSize#downscaleToSize");
             }
             try {
@@ -73,14 +71,14 @@ public final class DrawableSize {
                 BitmapDrawable bitmapDrawable2 = drawable instanceof BitmapDrawable ? (BitmapDrawable) drawable : null;
                 int intrinsicHeight = (bitmapDrawable2 == null || (bitmap2 = bitmapDrawable2.getBitmap()) == null) ? drawable.getIntrinsicHeight() : bitmap2.getHeight();
                 if (intrinsicWidth <= 0 || intrinsicHeight <= 0) {
-                    if (isEnabled) {
+                    if (zIsEnabled) {
                         TraceUtilsKt.endSlice();
                     }
                 } else if (intrinsicWidth < i && intrinsicHeight < i2) {
                     if (Log.isLoggable(DrawableSize.TAG, 3)) {
                         Log.d(DrawableSize.TAG, "Not resizing " + intrinsicWidth + " x " + intrinsicHeight + " to " + i + " x " + i2);
                     }
-                    if (isEnabled) {
+                    if (zIsEnabled) {
                         TraceUtilsKt.endSlice();
                         return drawable;
                     }
@@ -88,9 +86,9 @@ public final class DrawableSize {
                     if (!DrawableSize.Companion.isComplicatedBitmap(drawable)) {
                         float f = intrinsicWidth;
                         float f2 = intrinsicHeight;
-                        float min = Math.min(i2 / f2, i / f);
-                        int i3 = (int) (f * min);
-                        int i4 = (int) (f2 * min);
+                        float fMin = Math.min(i2 / f2, i / f);
+                        int i3 = (int) (f * fMin);
+                        int i4 = (int) (f2 * fMin);
                         if (i3 > 0 && i4 > 0) {
                             if (Log.isLoggable(DrawableSize.TAG, 3)) {
                                 Log.d(DrawableSize.TAG, "Resizing large drawable (" + drawable.getClass().getSimpleName() + ") from " + intrinsicWidth + " x " + intrinsicHeight + " to " + i3 + " x " + i4);
@@ -99,32 +97,32 @@ public final class DrawableSize {
                             if (bitmapDrawable3 == null || (bitmap = bitmapDrawable3.getBitmap()) == null || (config = bitmap.getConfig()) == null) {
                                 config = Bitmap.Config.ARGB_8888;
                             }
-                            Bitmap createBitmap = Bitmap.createBitmap(i3, i4, config);
-                            Canvas canvas = new Canvas(createBitmap);
+                            Bitmap bitmapCreateBitmap = Bitmap.createBitmap(i3, i4, config);
+                            Canvas canvas = new Canvas(bitmapCreateBitmap);
                             Rect bounds = drawable.getBounds();
                             drawable.setBounds(0, 0, i3, i4);
                             drawable.draw(canvas);
                             drawable.setBounds(bounds);
-                            BitmapDrawable bitmapDrawable4 = new BitmapDrawable(resources, createBitmap);
-                            if (isEnabled) {
+                            BitmapDrawable bitmapDrawable4 = new BitmapDrawable(resources, bitmapCreateBitmap);
+                            if (zIsEnabled) {
                                 TraceUtilsKt.endSlice();
                             }
                             return bitmapDrawable4;
                         }
                         Log.w(DrawableSize.TAG, "Attempted to resize " + drawable.getClass().getSimpleName() + " from " + intrinsicWidth + " x " + intrinsicHeight + " to invalid " + i3 + " x " + i4 + ".");
-                        if (isEnabled) {
+                        if (zIsEnabled) {
                             TraceUtilsKt.endSlice();
                         }
                         return drawable;
                     }
-                    if (isEnabled) {
+                    if (zIsEnabled) {
                         TraceUtilsKt.endSlice();
                         return drawable;
                     }
                 }
                 return drawable;
             } catch (Throwable th) {
-                if (isEnabled) {
+                if (zIsEnabled) {
                     TraceUtilsKt.endSlice();
                 }
                 throw th;

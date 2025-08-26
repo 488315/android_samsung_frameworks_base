@@ -4,7 +4,7 @@
   xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="@android:color/secondary_text_default_material_dark" />
+            <solid android:color="@android:color/notification_close_button_state_tint" />
             <corners android:radius="@dimen/hearing_devices_preset_spinner_background_radius" />
         </shape>
     </item>

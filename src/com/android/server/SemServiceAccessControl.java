@@ -11,17 +11,36 @@ import android.os.Process;
 import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.security.keystore.KeyProperties;
+import android.security.keystore2.AndroidKeyStoreSpi;
+import android.telecom.Logging.Session;
 import android.util.Base64;
 import android.util.Log;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
+import java.security.UnrecoverableEntryException;
+import java.security.cert.CertificateException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.Mac;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /* loaded from: classes6.dex */
 public class SemServiceAccessControl {
@@ -317,7 +336,7 @@ public class SemServiceAccessControl {
         }
     }
 
-    public boolean hasAccessPermission(PackageList packageList) {
+    public boolean hasAccessPermission(PackageList packageList) throws JSONException, NumberFormatException, IOException {
         switch (packageList.ordinal()) {
             case 1:
                 setDAScpkmList();
@@ -344,17 +363,17 @@ public class SemServiceAccessControl {
     private boolean hasAccessPermission(AllowList allowList) {
         String packageName = getPackageName();
         int callingUid = Binder.getCallingUid();
-        boolean match = allowList.match(packageName, callingUid % 100000);
-        if (!match) {
+        boolean zMatch = allowList.match(packageName, callingUid % 100000);
+        if (!zMatch) {
             Log.e(TAG, "Permission denied. Package name = [" + packageName + "], UID = [" + callingUid + NavigationBarInflaterView.SIZE_MOD_END);
-            return match;
+            return zMatch;
         }
         if (callingUid >= 100000) {
             Log.i(TAG, "Requested package name = [" + packageName + "], called from secure container");
-            return match;
+            return zMatch;
         }
         Log.i(TAG, "Requested package name = [" + packageName + NavigationBarInflaterView.SIZE_MOD_END);
-        return match;
+        return zMatch;
     }
 
     public boolean SEAPIAccessPermission() {
@@ -362,10 +381,10 @@ public class SemServiceAccessControl {
         int callingUid = Binder.getCallingUid();
         int callingUserId = UserHandle.getCallingUserId();
         int i = callingUid % 100000;
-        boolean match = this.mJavaPkgAllowList.match(packageName, i);
-        if (!match) {
+        boolean zMatch = this.mJavaPkgAllowList.match(packageName, i);
+        if (!zMatch) {
             Log.e(TAG, "Permission denied. Package name = [" + packageName + "], UID = [" + callingUid + "], userId = [" + callingUserId + NavigationBarInflaterView.SIZE_MOD_END);
-            return match;
+            return zMatch;
         }
         if (callingUid >= 100000) {
             Log.i(TAG, "Requested package name = [" + packageName + "], called from secure container");
@@ -380,7 +399,7 @@ public class SemServiceAccessControl {
                     packageInfoAsUser.signingInfo.getSigningCertificateHistory();
                     Log.d(TAG, "Get signing cert success");
                     try {
-                        r2 = null;
+                        signature = null;
                         for (Signature signature : packageInfoAsUser.signingInfo.getApkContentsSigners()) {
                             Log.d(TAG, "getApkContentsSigners = " + signature.toCharsString());
                         }
@@ -411,7 +430,7 @@ public class SemServiceAccessControl {
             }
         }
         Log.i(TAG, packageName + " uses permitted uid, skip certificate validation");
-        return match;
+        return zMatch;
     }
 
     public String getPackageName() {
@@ -437,13 +456,13 @@ public class SemServiceAccessControl {
         }
     }
 
-    private String getProcessNameViaCmdLine(int i) {
+    private String getProcessNameViaCmdLine(int i) throws IOException {
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(new File("/proc/" + i + "/cmdline"), StandardCharsets.UTF_8));
             try {
-                String readLine = bufferedReader.readLine();
-                if (readLine != null) {
-                    byte[] bytes = readLine.getBytes(StandardCharsets.UTF_8);
+                String line = bufferedReader.readLine();
+                if (line != null) {
+                    byte[] bytes = line.getBytes(StandardCharsets.UTF_8);
                     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                     for (byte b : bytes) {
                         if (b != 0) {
@@ -467,12 +486,12 @@ public class SemServiceAccessControl {
 
     public boolean checkStatus() {
         Log.d(TAG, "Start checkStatus!!");
-        int ICCCcheckDeviceStatus = ICCCcheckDeviceStatus();
-        if (this.RET_ERR_NOT_SUPPORTED == ICCCcheckDeviceStatus) {
+        int iICCCcheckDeviceStatus = ICCCcheckDeviceStatus();
+        if (this.RET_ERR_NOT_SUPPORTED == iICCCcheckDeviceStatus) {
             Log.d(TAG, "Not Supported!!");
             return true;
         }
-        if (ICCCcheckDeviceStatus != 0) {
+        if (iICCCcheckDeviceStatus != 0) {
             Log.e(TAG, "ICCCcheckDeviceStatus Fail!!");
             return false;
         }
@@ -480,21 +499,83 @@ public class SemServiceAccessControl {
         return true;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:28:0x00c6 A[Catch: Error -> 0x0108, Exception -> 0x011b, IllegalBlockSizeException -> 0x012e, TryCatch #2 {IllegalBlockSizeException -> 0x012e, blocks: (B:3:0x0009, B:8:0x0016, B:10:0x0027, B:13:0x002d, B:15:0x0032, B:18:0x0043, B:20:0x005b, B:21:0x0084, B:23:0x008d, B:26:0x0091, B:28:0x00c6, B:30:0x00cc, B:32:0x00d2, B:34:0x00e4, B:36:0x00ea, B:38:0x00f0, B:40:0x00f6, B:42:0x00fc, B:47:0x0063, B:49:0x0074, B:50:0x0102), top: B:2:0x0009 }] */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x00cc A[Catch: Error -> 0x0108, Exception -> 0x011b, IllegalBlockSizeException -> 0x012e, TryCatch #2 {IllegalBlockSizeException -> 0x012e, blocks: (B:3:0x0009, B:8:0x0016, B:10:0x0027, B:13:0x002d, B:15:0x0032, B:18:0x0043, B:20:0x005b, B:21:0x0084, B:23:0x008d, B:26:0x0091, B:28:0x00c6, B:30:0x00cc, B:32:0x00d2, B:34:0x00e4, B:36:0x00ea, B:38:0x00f0, B:40:0x00f6, B:42:0x00fc, B:47:0x0063, B:49:0x0074, B:50:0x0102), top: B:2:0x0009 }] */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    private java.lang.String allowListDecrypt(java.lang.String r10, java.lang.String r11, java.lang.String r12) {
-        /*
-            Method dump skipped, instructions count: 311
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.SemServiceAccessControl.allowListDecrypt(java.lang.String, java.lang.String, java.lang.String):java.lang.String");
+    private String allowListDecrypt(String str, String str2, String str3) throws BadPaddingException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, IOException, InvalidKeyException, KeyStoreException, CertificateException, UnrecoverableEntryException, InvalidAlgorithmParameterException {
+        KeyStore.Entry entry;
+        try {
+            try {
+                Log.i(TAG, "Start S-AL");
+            } catch (IllegalBlockSizeException unused) {
+                Log.e(TAG, "D-e IBEx");
+                deleteALFile();
+            }
+        } catch (Error e) {
+            Log.d(TAG, "D-err " + e);
+        } catch (Exception e2) {
+            Log.d(TAG, "D-e " + e2);
+        }
+        if (str != null && str2 != null && str3 != null) {
+            Cipher cipher = Cipher.getInstance("RSA/ECB/OAEPWithSHA-256AndMGF1Padding");
+            byte[] bArrDecode = Base64.decode(str.getBytes(), 2);
+            if (bArrDecode == null) {
+                Log.e(TAG, "TS Data Error");
+                return null;
+            }
+            if (bArrDecode.length < 64) {
+                Log.e(TAG, "TS Data Error : " + bArrDecode.length);
+                return null;
+            }
+            try {
+                Log.d(TAG, "GK");
+                KeyStore keyStore = KeyStore.getInstance(AndroidKeyStoreSpi.NAME);
+                keyStore.load(null);
+                entry = keyStore.getEntry("SEMALKEY", null);
+            } catch (Error e3) {
+                Log.e(TAG, "GS Er " + e3);
+            } catch (Exception e4) {
+                Log.e(TAG, "GS Ex " + e4);
+            }
+            PrivateKey privateKey = entry instanceof KeyStore.PrivateKeyEntry ? ((KeyStore.PrivateKeyEntry) entry).getPrivateKey() : null;
+            cipher.init(2, privateKey);
+            byte[] bArrDoFinal = cipher.doFinal(bArrDecode);
+            if (bArrDoFinal != null && bArrDoFinal.length >= 64) {
+                byte[] bArr = new byte[16];
+                byte[] bArr2 = new byte[32];
+                byte[] bArr3 = new byte[16];
+                System.arraycopy(bArrDoFinal, 0, bArr, 0, 16);
+                System.arraycopy(bArrDoFinal, 16, bArr2, 0, 32);
+                System.arraycopy(bArrDoFinal, 48, bArr3, 0, 16);
+                byte[] bArrDecode2 = Base64.decode(str2.getBytes(), 2);
+                Cipher cipher2 = Cipher.getInstance("AES/CBC/PKCS5Padding");
+                cipher2.init(2, new SecretKeySpec(bArr2, "AES"), new IvParameterSpec(bArr));
+                if (bArrDecode2 == null) {
+                    Log.e(TAG, "eAB Size Error");
+                    return null;
+                }
+                byte[] bArrDoFinal2 = cipher2.doFinal(bArrDecode2);
+                if (bArrDoFinal2 == null) {
+                    Log.e(TAG, "LD Data Error");
+                    return null;
+                }
+                String str4 = new String(bArrDoFinal2, StandardCharsets.UTF_8);
+                Log.i(TAG, "Start verify");
+                String strVerifyHmac = verifyHmac(bArr3, str4);
+                if (strVerifyHmac != null) {
+                    if (strVerifyHmac.equalsIgnoreCase(str3)) {
+                        Log.i(TAG, "MS");
+                        return str4;
+                    }
+                    Log.e(TAG, "MF");
+                }
+                return null;
+            }
+            Log.e(TAG, "KB Size Error");
+            return null;
+        }
+        Log.e(TAG, "TS KData Error");
+        return null;
     }
 
-    private String verifyHmac(byte[] bArr, String str) {
+    private String verifyHmac(byte[] bArr, String str) throws IllegalStateException, NoSuchAlgorithmException, InvalidKeyException {
         try {
             if (bArr == null || str == null) {
                 Log.e(TAG, "VM Data Error");
@@ -503,11 +584,11 @@ public class SemServiceAccessControl {
             SecretKeySpec secretKeySpec = new SecretKeySpec(bArr, KeyProperties.KEY_ALGORITHM_HMAC_SHA256);
             Mac mac = Mac.getInstance(KeyProperties.KEY_ALGORITHM_HMAC_SHA256);
             mac.init(secretKeySpec);
-            byte[] doFinal = mac.doFinal(str.getBytes());
-            if (doFinal == null) {
+            byte[] bArrDoFinal = mac.doFinal(str.getBytes());
+            if (bArrDoFinal == null) {
                 return null;
             }
-            return Base64.encodeToString(doFinal, 2);
+            return Base64.encodeToString(bArrDoFinal, 2);
         } catch (Error e) {
             Log.e(TAG, "VM Er " + e);
             return null;
@@ -517,21 +598,170 @@ public class SemServiceAccessControl {
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:109:? A[RETURN, SYNTHETIC] */
     /* JADX WARN: Removed duplicated region for block: B:42:0x00fb  */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x0193 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:78:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:79:0x0189 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:95:0x0216  */
+    /* JADX WARN: Removed duplicated region for block: B:83:0x0216  */
+    /* JADX WARN: Removed duplicated region for block: B:85:0x0189 A[EXC_TOP_SPLITTER, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:87:0x0193 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private void setDAScpkmList() {
-        /*
-            Method dump skipped, instructions count: 593
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.SemServiceAccessControl.setDAScpkmList():void");
+    private void setDAScpkmList() throws JSONException, NumberFormatException, IOException {
+        String str;
+        String str2;
+        BufferedReader bufferedReader;
+        String strAllowListDecrypt;
+        String name;
+        String str3 = "";
+        AllowList allowList = new AllowList();
+        this.mScpKmAllowList = allowList;
+        if (DEBUG) {
+            allowList.add("com.sec.security.scpKmTest", 1000);
+            this.mScpKmAllowList.add("com.samsung.android.tzv", 1000);
+        }
+        this.isDAFileExist = false;
+        try {
+            str2 = this.mContext.getPackageManager().getApplicationInfo("com.skms.android.agent", 0).dataDir + "/files/";
+        } catch (Error e) {
+            e = e;
+            str = "";
+        } catch (Exception e2) {
+            e = e2;
+            str = "";
+        }
+        try {
+            Log.i(TAG, "SET S-DA");
+            File file = new File(str2);
+            if (file.exists()) {
+                Log.i(TAG, "Start get FL list");
+                File[] fileArrListFiles = file.listFiles();
+                String str4 = Build.VERSION.RELEASE;
+                int i = 0;
+                for (File file2 : fileArrListFiles) {
+                    if (file2.isFile() && (name = file2.getName()) != null && name.startsWith("SEMAL_SCPKM")) {
+                        String[] strArrSplit = name.split("\\.")[0].split(Session.SESSION_SEPARATION_CHAR_CHILD);
+                        if (strArrSplit.length >= 3) {
+                            String str5 = strArrSplit[2];
+                            if (str5 != null && str4.equalsIgnoreCase(str5)) {
+                                if (i < Integer.parseInt(strArrSplit[3])) {
+                                    i = Integer.parseInt(strArrSplit[3]);
+                                    this.isDAFileExist = true;
+                                    str3 = name;
+                                }
+                            } else {
+                                Log.e(TAG, "OSV NM");
+                            }
+                        } else {
+                            Log.e(TAG, "FN Error " + strArrSplit.length);
+                        }
+                    }
+                }
+            }
+        } catch (Error e3) {
+            e = e3;
+            str = str3;
+            str3 = str2;
+            Log.e(TAG, "Get Path Error : " + e);
+            String str6 = str;
+            str2 = str3;
+            str3 = str6;
+            if (this.isDAFileExist) {
+            }
+        } catch (Exception e4) {
+            e = e4;
+            str = str3;
+            str3 = str2;
+            Log.e(TAG, "Get Path Exception : " + e);
+            String str62 = str;
+            str2 = str3;
+            str3 = str62;
+            if (this.isDAFileExist) {
+            }
+        }
+        if (this.isDAFileExist) {
+            Log.i(TAG, "isFileExist : " + this.isDAFileExist);
+            BufferedReader bufferedReader2 = null;
+            try {
+                StringBuilder sb = new StringBuilder();
+                bufferedReader = new BufferedReader(new FileReader(str2 + str3));
+                while (true) {
+                    try {
+                        String line = bufferedReader.readLine();
+                        if (line == null) {
+                            break;
+                        } else {
+                            sb.append(line);
+                        }
+                    } catch (Error e5) {
+                        e = e5;
+                        Log.e(TAG, "Get DA List Error : " + e);
+                        strAllowListDecrypt = null;
+                        bufferedReader2 = bufferedReader;
+                        if (bufferedReader2 != null) {
+                        }
+                        if (strAllowListDecrypt != null) {
+                        }
+                    } catch (Exception e6) {
+                        e = e6;
+                        Log.e(TAG, "Get DA List Exception " + e);
+                        strAllowListDecrypt = null;
+                        bufferedReader2 = bufferedReader;
+                        if (bufferedReader2 != null) {
+                        }
+                        if (strAllowListDecrypt != null) {
+                        }
+                    }
+                }
+                bufferedReader.close();
+                JSONObject jSONObject = new JSONObject(sb.toString());
+                strAllowListDecrypt = allowListDecrypt(jSONObject.getString("CIPHER_KEY"), jSONObject.getString("CIPHER_AL"), jSONObject.getString("MAC_AL"));
+            } catch (Error e7) {
+                e = e7;
+                bufferedReader = null;
+            } catch (Exception e8) {
+                e = e8;
+                bufferedReader = null;
+            }
+            if (bufferedReader2 != null) {
+                try {
+                    bufferedReader2.close();
+                } catch (IOException e9) {
+                    e9.printStackTrace();
+                }
+            }
+            if (strAllowListDecrypt != null) {
+                try {
+                    JSONObject jSONObject2 = (JSONObject) new JSONObject(strAllowListDecrypt).get("allowedList");
+                    JSONArray jSONArray = (JSONArray) jSONObject2.get("package");
+                    for (int i2 = 0; i2 < jSONArray.length(); i2++) {
+                        JSONObject jSONObject3 = jSONArray.getJSONObject(i2);
+                        String string = jSONObject3.getString("name");
+                        String string2 = jSONObject3.getString("uid");
+                        if (string2 != null && string2.equalsIgnoreCase("None")) {
+                            this.mScpKmAllowList.add(string);
+                        } else {
+                            this.mScpKmAllowList.add(string, string2);
+                        }
+                    }
+                    this.teeSigData = (String) jSONObject2.get("teeAllowListSignature");
+                    this.teeListData = (String) jSONObject2.get("teeAllowList");
+                    return;
+                } catch (Error e10) {
+                    Log.e(TAG, "SEMAL Error : " + e10);
+                    return;
+                } catch (Exception e11) {
+                    Log.e(TAG, "SEMAL Exception : " + e11);
+                    return;
+                }
+            }
+            return;
+        }
+        Log.i(TAG, "Not FileExist : " + this.isDAFileExist);
+        this.mScpKmAllowList.add("com.samsung.android.authfw", "SPASS_UID");
+        this.mScpKmAllowList.add("com.samsung.android.digitalkey");
+        this.mScpKmAllowList.add("com.samsung.android.carkey");
+        this.mScpKmAllowList.add("com.samsung.android.spay");
+        this.mScpKmAllowList.add("com.samsung.android.spayfw", "SPAY_UID");
     }
 
     private void deleteALFile() {
@@ -539,9 +769,9 @@ public class SemServiceAccessControl {
         Log.d(TAG, "D-DA");
         try {
             String str = this.mContext.getPackageManager().getApplicationInfo("com.skms.android.agent", 0).dataDir + "/files/";
-            File[] listFiles = new File(str).listFiles();
-            if (listFiles != null) {
-                for (File file : listFiles) {
+            File[] fileArrListFiles = new File(str).listFiles();
+            if (fileArrListFiles != null) {
+                for (File file : fileArrListFiles) {
                     if (file.isFile() && (name = file.getName()) != null && name.startsWith("SEMAL_")) {
                         Log.d(TAG, "DA D " + name);
                         File file2 = new File(str + name);

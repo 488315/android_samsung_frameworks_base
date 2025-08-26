@@ -1,6 +1,7 @@
 package com.android.systemui.screenshot.sep.widget;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
@@ -13,7 +14,6 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class CaptureEffectViewB5 extends CaptureEffectView {
     public final PorterDuffXfermode MODE_ADD;
@@ -34,13 +34,13 @@ public class CaptureEffectViewB5 extends CaptureEffectView {
         this(context, null);
     }
 
-    public final Bitmap getBitmapFromVectorDrawable(int i) {
+    public final Bitmap getBitmapFromVectorDrawable(int i) throws Resources.NotFoundException {
         Drawable drawable = getResources().getDrawable(i, null);
-        Bitmap createBitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(createBitmap);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmapCreateBitmap);
         drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
         drawable.draw(canvas);
-        return createBitmap;
+        return bitmapCreateBitmap;
     }
 
     @Override // com.android.systemui.screenshot.sep.widget.CaptureEffectView, android.view.View

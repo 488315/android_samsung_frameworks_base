@@ -174,11 +174,11 @@ public class ListFragment extends Fragment {
             }
             this.mProgressContainer = view.findViewById(R.id.progressContainer);
             this.mListContainer = view.findViewById(R.id.listContainer);
-            View findViewById = view.findViewById(16908298);
-            if (!(findViewById instanceof ListView)) {
+            View viewFindViewById = view.findViewById(16908298);
+            if (!(viewFindViewById instanceof ListView)) {
                 throw new RuntimeException("Content has view with id attribute 'android.R.id.list' that is not a ListView class");
             }
-            ListView listView = (ListView) findViewById;
+            ListView listView = (ListView) viewFindViewById;
             this.mList = listView;
             if (listView == null) {
                 throw new RuntimeException("Your content must have a ListView whose id attribute is 'android.R.id.list'");

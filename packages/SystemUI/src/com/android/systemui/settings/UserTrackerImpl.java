@@ -42,7 +42,6 @@ import kotlin.reflect.KProperty;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class UserTrackerImpl extends BroadcastReceiver implements UserTracker, Dumpable {
     public static final /* synthetic */ KProperty[] $$delegatedProperties;
@@ -63,7 +62,6 @@ public class UserTrackerImpl extends BroadcastReceiver implements UserTracker, D
     public final SynchronizedDelegate userProfiles$delegate = new SynchronizedDelegate(EmptyList.INSTANCE);
     public final List callbacks = new ArrayList();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -104,11 +102,11 @@ public class UserTrackerImpl extends BroadcastReceiver implements UserTracker, D
     }
 
     public final Context createCurrentUserContext(Context context) {
-        Context createContextAsUser;
+        Context contextCreateContextAsUser;
         synchronized (this.mutex) {
-            createContextAsUser = context.createContextAsUser(getUserHandle(), 0);
+            contextCreateContextAsUser = context.createContextAsUser(getUserHandle(), 0);
         }
-        return createContextAsUser;
+        return contextCreateContextAsUser;
     }
 
     @Override // com.android.systemui.Dumpable
@@ -251,10 +249,10 @@ public class UserTrackerImpl extends BroadcastReceiver implements UserTracker, D
                     dataItem.executor.execute(new Runnable() { // from class: com.android.systemui.settings.UserTrackerImpl$handleProfilesChanged$$inlined$notifySubscribers$1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            UserTracker.Callback callback2 = UserTracker.Callback.this;
+                            UserTracker.Callback callback2 = callback;
                             final CountDownLatch countDownLatch2 = countDownLatch;
-                            boolean isEnabled = Trace.isEnabled();
-                            if (isEnabled) {
+                            boolean zIsEnabled = Trace.isEnabled();
+                            if (zIsEnabled) {
                                 TraceUtilsKt.beginSlice("UserTrackerImpl::" + callback2);
                             }
                             try {
@@ -267,7 +265,7 @@ public class UserTrackerImpl extends BroadcastReceiver implements UserTracker, D
                                 profiles.getClass();
                                 callback2.onProfilesChanged(profiles);
                             } finally {
-                                if (isEnabled) {
+                                if (zIsEnabled) {
                                     TraceUtilsKt.endSlice();
                                 }
                             }
@@ -286,16 +284,16 @@ public class UserTrackerImpl extends BroadcastReceiver implements UserTracker, D
             final Function1 function1 = new Function1() { // from class: com.android.systemui.settings.UserTrackerImpl$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
+                public final Object mo781invoke(Object obj) {
                     KProperty[] kPropertyArr = UserTrackerImpl.$$delegatedProperties;
                     UserTracker.Callback callback2 = (UserTracker.Callback) ((DataItem) obj).callback.get();
-                    return Boolean.valueOf(callback2 != null ? callback2.equals(UserTracker.Callback.this) : true);
+                    return Boolean.valueOf(callback2 != null ? callback2.equals(callback) : true);
                 }
             };
             ((ArrayList) list).removeIf(new Predicate() { // from class: com.android.systemui.settings.UserTrackerImpl$sam$java_util_function_Predicate$0
                 @Override // java.util.function.Predicate
                 public final /* synthetic */ boolean test(Object obj) {
-                    return ((Boolean) Function1.this.mo779invoke(obj)).booleanValue();
+                    return ((Boolean) function1.mo781invoke(obj)).booleanValue();
                 }
             });
         }
@@ -304,7 +302,7 @@ public class UserTrackerImpl extends BroadcastReceiver implements UserTracker, D
     public final void setUserIdInternal(int i) {
         List profiles = this.userManager.getProfiles(i);
         UserHandle userHandle = new UserHandle(i);
-        Context createContextAsUser = this.context.createContextAsUser(userHandle, 0);
+        Context contextCreateContextAsUser = this.context.createContextAsUser(userHandle, 0);
         synchronized (this.mutex) {
             try {
                 SynchronizedDelegate synchronizedDelegate = this.userId$delegate;
@@ -316,7 +314,7 @@ public class UserTrackerImpl extends BroadcastReceiver implements UserTracker, D
                 synchronizedDelegate2.setValue(this, userHandle);
                 SynchronizedDelegate synchronizedDelegate3 = this.userContext$delegate;
                 KProperty kProperty3 = kPropertyArr[2];
-                synchronizedDelegate3.setValue(this, createContextAsUser);
+                synchronizedDelegate3.setValue(this, contextCreateContextAsUser);
                 profiles.getClass();
                 List list = profiles;
                 ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(list, 10));
@@ -340,10 +338,9 @@ public class UserTrackerImpl extends BroadcastReceiver implements UserTracker, D
                 throw th;
             }
         }
-        new Pair(createContextAsUser, profiles);
+        new Pair(contextCreateContextAsUser, profiles);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SynchronizedDelegate implements ReadWriteProperty {
         public Object value;
 

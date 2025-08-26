@@ -165,16 +165,16 @@ class WebVttRenderingWidget extends ViewGroup implements SubtitleTrack.Rendering
 
     /* JADX INFO: Access modifiers changed from: private */
     public void setCaptionStyle(CaptioningManager.CaptionStyle captionStyle, float f) {
-        CaptioningManager.CaptionStyle applyStyle = DEFAULT_CAPTION_STYLE.applyStyle(captionStyle);
-        this.mCaptionStyle = applyStyle;
+        CaptioningManager.CaptionStyle captionStyleApplyStyle = DEFAULT_CAPTION_STYLE.applyStyle(captionStyle);
+        this.mCaptionStyle = captionStyleApplyStyle;
         this.mFontSize = f;
         int size = this.mCueBoxes.size();
         for (int i = 0; i < size; i++) {
-            this.mCueBoxes.valueAt(i).setCaptionStyle(applyStyle, f);
+            this.mCueBoxes.valueAt(i).setCaptionStyle(captionStyleApplyStyle, f);
         }
         int size2 = this.mRegionBoxes.size();
         for (int i2 = 0; i2 < size2; i2++) {
-            this.mRegionBoxes.valueAt(i2).setCaptionStyle(applyStyle, f);
+            this.mRegionBoxes.valueAt(i2).setCaptionStyle(captionStyleApplyStyle, f);
         }
     }
 
@@ -183,9 +183,9 @@ class WebVttRenderingWidget extends ViewGroup implements SubtitleTrack.Rendering
         int i = 0;
         int i2 = 0;
         while (i2 < size) {
-            RegionLayout valueAt = this.mRegionBoxes.valueAt(i2);
-            if (valueAt.prune()) {
-                removeView(valueAt);
+            RegionLayout regionLayoutValueAt = this.mRegionBoxes.valueAt(i2);
+            if (regionLayoutValueAt.prune()) {
+                removeView(regionLayoutValueAt);
                 this.mRegionBoxes.removeAt(i2);
                 size--;
                 i2--;
@@ -194,9 +194,9 @@ class WebVttRenderingWidget extends ViewGroup implements SubtitleTrack.Rendering
         }
         int size2 = this.mCueBoxes.size();
         while (i < size2) {
-            CueLayout valueAt2 = this.mCueBoxes.valueAt(i);
-            if (!valueAt2.isActive()) {
-                removeView(valueAt2);
+            CueLayout cueLayoutValueAt = this.mCueBoxes.valueAt(i);
+            if (!cueLayoutValueAt.isActive()) {
+                removeView(cueLayoutValueAt);
                 this.mCueBoxes.removeAt(i);
                 size2--;
                 i--;
@@ -257,12 +257,12 @@ class WebVttRenderingWidget extends ViewGroup implements SubtitleTrack.Rendering
         int i3;
         TextTrackCue cue = cueLayout.getCue();
         int layoutDirection = getLayoutDirection();
-        int resolveCueAlignment = resolveCueAlignment(layoutDirection, cue.mAlignment);
+        int iResolveCueAlignment = resolveCueAlignment(layoutDirection, cue.mAlignment);
         boolean z = cue.mSnapToLines;
         int measuredWidth = (cueLayout.getMeasuredWidth() * 100) / i;
-        if (resolveCueAlignment == 203) {
+        if (iResolveCueAlignment == 203) {
             i3 = cue.mTextPosition;
-        } else if (resolveCueAlignment == 204) {
+        } else if (iResolveCueAlignment == 204) {
             i3 = cue.mTextPosition - measuredWidth;
         } else {
             i3 = cue.mTextPosition - (measuredWidth / 2);
@@ -284,9 +284,9 @@ class WebVttRenderingWidget extends ViewGroup implements SubtitleTrack.Rendering
         }
         int i4 = (i3 * i) / 100;
         int i5 = (measuredWidth * i) / 100;
-        int calculateLinePosition = calculateLinePosition(cueLayout);
+        int iCalculateLinePosition = calculateLinePosition(cueLayout);
         int measuredHeight = cueLayout.getMeasuredHeight();
-        int i6 = calculateLinePosition < 0 ? i2 + (calculateLinePosition * measuredHeight) : (calculateLinePosition * (i2 - measuredHeight)) / 100;
+        int i6 = iCalculateLinePosition < 0 ? i2 + (iCalculateLinePosition * measuredHeight) : (iCalculateLinePosition * (i2 - measuredHeight)) / 100;
         cueLayout.layout(i4, i6, i5 + i4, measuredHeight + i6);
     }
 
@@ -439,10 +439,10 @@ class WebVttRenderingWidget extends ViewGroup implements SubtitleTrack.Rendering
             Layout.Alignment alignment;
             this.mActive = true;
             removeAllViews();
-            int resolveCueAlignment = WebVttRenderingWidget.resolveCueAlignment(getLayoutDirection(), this.mCue.mAlignment);
-            if (resolveCueAlignment == 203) {
+            int iResolveCueAlignment = WebVttRenderingWidget.resolveCueAlignment(getLayoutDirection(), this.mCue.mAlignment);
+            if (iResolveCueAlignment == 203) {
                 alignment = Layout.Alignment.ALIGN_LEFT;
-            } else if (resolveCueAlignment == 204) {
+            } else if (iResolveCueAlignment == 204) {
                 alignment = Layout.Alignment.ALIGN_RIGHT;
             } else {
                 alignment = Layout.Alignment.ALIGN_CENTER;
@@ -468,18 +468,18 @@ class WebVttRenderingWidget extends ViewGroup implements SubtitleTrack.Rendering
             TextTrackCue textTrackCue = this.mCue;
             int size = View.MeasureSpec.getSize(i);
             int size2 = View.MeasureSpec.getSize(i2);
-            int resolveCueAlignment = WebVttRenderingWidget.resolveCueAlignment(getLayoutDirection(), textTrackCue.mAlignment);
-            if (resolveCueAlignment == 200) {
+            int iResolveCueAlignment = WebVttRenderingWidget.resolveCueAlignment(getLayoutDirection(), textTrackCue.mAlignment);
+            if (iResolveCueAlignment == 200) {
                 if (textTrackCue.mTextPosition <= 50) {
                     i3 = textTrackCue.mTextPosition;
                 } else {
                     i3 = 100 - textTrackCue.mTextPosition;
                 }
                 i4 = i3 * 2;
-            } else if (resolveCueAlignment == 203) {
+            } else if (iResolveCueAlignment == 203) {
                 i4 = 100 - textTrackCue.mTextPosition;
             } else {
-                i4 = resolveCueAlignment != 204 ? 0 : textTrackCue.mTextPosition;
+                i4 = iResolveCueAlignment != 204 ? 0 : textTrackCue.mTextPosition;
             }
             measure(View.MeasureSpec.makeMeasureSpec((Math.min(textTrackCue.mSize, i4) * size) / 100, Integer.MIN_VALUE), View.MeasureSpec.makeMeasureSpec(size2, Integer.MIN_VALUE));
         }

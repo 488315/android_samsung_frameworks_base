@@ -6,13 +6,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class StatusBarIconList {
     public final ArrayList mSlots;
     public final List mViewOnlySlots;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Slot {
         public StatusBarIconHolder mHolder;
         public final String mName;
@@ -131,33 +129,33 @@ public class StatusBarIconList {
     }
 
     public final int getViewIndex(int i, String str) {
-        int findOrInsertSlot = findOrInsertSlot(str);
+        int iFindOrInsertSlot = findOrInsertSlot(str);
+        int size = 0;
         int i2 = 0;
         int i3 = 0;
-        int i4 = 0;
         while (true) {
-            if (i3 >= findOrInsertSlot) {
+            if (i2 >= iFindOrInsertSlot) {
                 break;
             }
-            Slot slot = (Slot) this.mSlots.get(i3);
+            Slot slot = (Slot) this.mSlots.get(i2);
             if (slot.hasIconsInSlot()) {
-                int i5 = slot.mHolder == null ? 0 : 1;
+                int size2 = slot.mHolder == null ? 0 : 1;
                 ArrayList arrayList = slot.mSubSlots;
                 if (arrayList != null) {
-                    i5 += arrayList.size();
+                    size2 += arrayList.size();
                 }
-                i4 += i5;
+                i3 += size2;
             }
-            i3++;
+            i2++;
         }
-        Slot slot2 = (Slot) this.mSlots.get(findOrInsertSlot);
+        Slot slot2 = (Slot) this.mSlots.get(iFindOrInsertSlot);
         ArrayList arrayList2 = slot2.mSubSlots;
         if (arrayList2 != null) {
-            i2 = arrayList2.size();
+            size = arrayList2.size();
             if (i != 0) {
-                i2 = (i2 - slot2.getIndexForTag(i)) - 1;
+                size = (size - slot2.getIndexForTag(i)) - 1;
             }
         }
-        return i4 + i2;
+        return i3 + size;
     }
 }

@@ -125,18 +125,18 @@ public class AdaptiveIconDrawable extends Drawable implements Drawable.Callback 
     }
 
     @Override // android.graphics.drawable.Drawable
-    public void inflate(Resources resources, XmlPullParser xmlPullParser, AttributeSet attributeSet, Resources.Theme theme) throws XmlPullParserException, IOException {
+    public void inflate(Resources resources, XmlPullParser xmlPullParser, AttributeSet attributeSet, Resources.Theme theme) throws XmlPullParserException, Resources.NotFoundException, IOException {
         super.inflate(resources, xmlPullParser, attributeSet, theme);
         LayerState layerState = this.mLayerState;
         if (layerState == null) {
             return;
         }
-        int resolveDensity = Drawable.resolveDensity(resources, 0);
-        layerState.setDensity(resolveDensity);
+        int iResolveDensity = Drawable.resolveDensity(resources, 0);
+        layerState.setDensity(iResolveDensity);
         layerState.mSrcDensityOverride = this.mSrcDensityOverride;
         layerState.mSourceDrawableId = Resources.getAttributeSetSourceResId(attributeSet);
         for (ChildDrawable childDrawable : layerState.mChildren) {
-            childDrawable.setDensity(resolveDensity);
+            childDrawable.setDensity(iResolveDensity);
         }
         inflateLayers(resources, xmlPullParser, attributeSet, theme);
     }
@@ -179,15 +179,15 @@ public class AdaptiveIconDrawable extends Drawable implements Drawable.Callback 
     }
 
     private void updateLayerBoundsInternal(Rect rect) {
-        int width = rect.width() / 2;
-        int height = rect.height() / 2;
+        int iWidth = rect.width() / 2;
+        int iHeight = rect.height() / 2;
         for (int i = 0; i < 3; i++) {
             Drawable drawable = this.mLayerState.mChildren[i].mDrawable;
             if (drawable != null) {
-                int width2 = (int) (rect.width() / 1.3333334f);
-                int height2 = (int) (rect.height() / 1.3333334f);
+                int iWidth2 = (int) (rect.width() / 1.3333334f);
+                int iHeight2 = (int) (rect.height() / 1.3333334f);
                 Rect rect2 = this.mTmpOutRect;
-                rect2.set(width - width2, height - height2, width2 + width, height2 + height);
+                rect2.set(iWidth - iWidth2, iHeight - iHeight2, iWidth2 + iWidth, iHeight2 + iHeight);
                 drawable.setBounds(rect2);
             }
         }
@@ -271,22 +271,22 @@ public class AdaptiveIconDrawable extends Drawable implements Drawable.Callback 
     }
 
     @Override // android.graphics.drawable.Drawable
-    public void applyTheme(Resources.Theme theme) {
+    public void applyTheme(Resources.Theme theme) throws Resources.NotFoundException {
         super.applyTheme(theme);
         LayerState layerState = this.mLayerState;
         if (layerState == null) {
             return;
         }
-        int resolveDensity = Drawable.resolveDensity(theme.getResources(), 0);
-        layerState.setDensity(resolveDensity);
+        int iResolveDensity = Drawable.resolveDensity(theme.getResources(), 0);
+        layerState.setDensity(iResolveDensity);
         ChildDrawable[] childDrawableArr = layerState.mChildren;
         for (int i = 0; i < 3; i++) {
             ChildDrawable childDrawable = childDrawableArr[i];
-            childDrawable.setDensity(resolveDensity);
+            childDrawable.setDensity(iResolveDensity);
             if (childDrawable.mThemeAttrs != null) {
-                TypedArray resolveAttributes = theme.resolveAttributes(childDrawable.mThemeAttrs, R.styleable.AdaptiveIconDrawableLayer);
-                updateLayerFromTypedArray(childDrawable, resolveAttributes);
-                resolveAttributes.recycle();
+                TypedArray typedArrayResolveAttributes = theme.resolveAttributes(childDrawable.mThemeAttrs, R.styleable.AdaptiveIconDrawableLayer);
+                updateLayerFromTypedArray(childDrawable, typedArrayResolveAttributes);
+                typedArrayResolveAttributes.recycle();
             }
             Drawable drawable = childDrawable.mDrawable;
             if (drawable != null && drawable.canApplyTheme()) {
@@ -304,141 +304,86 @@ public class AdaptiveIconDrawable extends Drawable implements Drawable.Callback 
         return layerState.mSourceDrawableId;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:49:0x0008, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:57:0x0008, code lost:
     
         continue;
      */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x006e  */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x007c  */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x0097 A[SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:35:0x006e  */
+    /* JADX WARN: Removed duplicated region for block: B:41:0x007c  */
+    /* JADX WARN: Removed duplicated region for block: B:53:0x0097 A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private void inflateLayers(android.content.res.Resources r9, org.xmlpull.v1.XmlPullParser r10, android.util.AttributeSet r11, android.content.res.Resources.Theme r12) throws org.xmlpull.v1.XmlPullParserException, java.io.IOException {
-        /*
-            r8 = this;
-            android.graphics.drawable.AdaptiveIconDrawable$LayerState r0 = r8.mLayerState
-            int r1 = r10.getDepth()
-            r2 = 1
-            int r1 = r1 + r2
-        L8:
-            int r3 = r10.next()
-            if (r3 == r2) goto Lb7
-            int r4 = r10.getDepth()
-            if (r4 >= r1) goto L17
-            r5 = 3
-            if (r3 == r5) goto Lb7
-        L17:
-            r5 = 2
-            if (r3 == r5) goto L1b
-            goto L8
-        L1b:
-            if (r4 <= r1) goto L1e
-            goto L8
-        L1e:
-            java.lang.String r3 = r10.getName()
-            r3.hashCode()
-            int r4 = r3.hashCode()
-            r6 = 0
-            r7 = -1
-            switch(r4) {
-                case -1905977571: goto L45;
-                case -1332194002: goto L3a;
-                case 1984457027: goto L2f;
-                default: goto L2e;
+    private void inflateLayers(Resources resources, XmlPullParser xmlPullParser, AttributeSet attributeSet, Resources.Theme theme) throws XmlPullParserException, Resources.NotFoundException, IOException {
+        int i;
+        ChildDrawable childDrawable;
+        int next;
+        LayerState layerState = this.mLayerState;
+        int depth = xmlPullParser.getDepth() + 1;
+        while (true) {
+            int next2 = xmlPullParser.next();
+            if (next2 == 1) {
+                return;
             }
-        L2e:
-            goto L50
-        L2f:
-            java.lang.String r4 = "foreground"
-            boolean r3 = r3.equals(r4)
-            if (r3 != 0) goto L38
-            goto L50
-        L38:
-            r7 = r5
-            goto L50
-        L3a:
-            java.lang.String r4 = "background"
-            boolean r3 = r3.equals(r4)
-            if (r3 != 0) goto L43
-            goto L50
-        L43:
-            r7 = r2
-            goto L50
-        L45:
-            java.lang.String r4 = "monochrome"
-            boolean r3 = r3.equals(r4)
-            if (r3 != 0) goto L4f
-            goto L50
-        L4f:
-            r7 = r6
-        L50:
-            switch(r7) {
-                case 0: goto L56;
-                case 1: goto L57;
-                case 2: goto L54;
-                default: goto L53;
+            int depth2 = xmlPullParser.getDepth();
+            if (depth2 < depth && next2 == 3) {
+                return;
             }
-        L53:
-            goto L8
-        L54:
-            r6 = r2
-            goto L57
-        L56:
-            r6 = r5
-        L57:
-            android.graphics.drawable.AdaptiveIconDrawable$ChildDrawable r3 = new android.graphics.drawable.AdaptiveIconDrawable$ChildDrawable
-            int r4 = r0.mDensity
-            r3.<init>(r4)
-            int[] r4 = com.android.internal.R.styleable.AdaptiveIconDrawableLayer
-            android.content.res.TypedArray r4 = obtainAttributes(r9, r12, r11, r4)
-            r8.updateLayerFromTypedArray(r3, r4)
-            r4.recycle()
-            android.graphics.drawable.Drawable r4 = r3.mDrawable
-            if (r4 != 0) goto Lb2
-            int[] r4 = r3.mThemeAttrs
-            if (r4 != 0) goto Lb2
-        L72:
-            int r4 = r10.next()
-            r7 = 4
-            if (r4 != r7) goto L7a
-            goto L72
-        L7a:
-            if (r4 != r5) goto L97
-            android.graphics.drawable.AdaptiveIconDrawable$LayerState r4 = r8.mLayerState
-            int r4 = r4.mSrcDensityOverride
-            android.graphics.drawable.Drawable r4 = android.graphics.drawable.Drawable.createFromXmlInnerForDensity(r9, r10, r11, r4, r12)
-            r3.mDrawable = r4
-            android.graphics.drawable.Drawable r4 = r3.mDrawable
-            r4.setCallback(r8)
-            int r4 = r0.mChildrenChangingConfigurations
-            android.graphics.drawable.Drawable r5 = r3.mDrawable
-            int r5 = r5.getChangingConfigurations()
-            r4 = r4 | r5
-            r0.mChildrenChangingConfigurations = r4
-            goto Lb2
-        L97:
-            org.xmlpull.v1.XmlPullParserException r8 = new org.xmlpull.v1.XmlPullParserException
-            java.lang.StringBuilder r9 = new java.lang.StringBuilder
-            r9.<init>()
-            java.lang.String r10 = r10.getPositionDescription()
-            r9.append(r10)
-            java.lang.String r10 = ": <foreground> or <background> tag requires a 'drawable'attribute or child tag defining a drawable"
-            r9.append(r10)
-            java.lang.String r9 = r9.toString()
-            r8.<init>(r9)
-            throw r8
-        Lb2:
-            r8.addLayer(r6, r3)
-            goto L8
-        Lb7:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.graphics.drawable.AdaptiveIconDrawable.inflateLayers(android.content.res.Resources, org.xmlpull.v1.XmlPullParser, android.util.AttributeSet, android.content.res.Resources$Theme):void");
+            if (next2 == 2 && depth2 <= depth) {
+                String name = xmlPullParser.getName();
+                name.hashCode();
+                i = 0;
+                switch (name) {
+                    case "monochrome":
+                        i = 2;
+                        childDrawable = new ChildDrawable(layerState.mDensity);
+                        TypedArray typedArrayObtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.AdaptiveIconDrawableLayer);
+                        updateLayerFromTypedArray(childDrawable, typedArrayObtainAttributes);
+                        typedArrayObtainAttributes.recycle();
+                        if (childDrawable.mDrawable == null && childDrawable.mThemeAttrs == null) {
+                            do {
+                                next = xmlPullParser.next();
+                            } while (next == 4);
+                            if (next == 2) {
+                                throw new XmlPullParserException(xmlPullParser.getPositionDescription() + ": <foreground> or <background> tag requires a 'drawable'attribute or child tag defining a drawable");
+                            }
+                            childDrawable.mDrawable = Drawable.createFromXmlInnerForDensity(resources, xmlPullParser, attributeSet, this.mLayerState.mSrcDensityOverride, theme);
+                            childDrawable.mDrawable.setCallback(this);
+                            layerState.mChildrenChangingConfigurations |= childDrawable.mDrawable.getChangingConfigurations();
+                        }
+                        addLayer(i, childDrawable);
+                        break;
+                    case "background":
+                        childDrawable = new ChildDrawable(layerState.mDensity);
+                        TypedArray typedArrayObtainAttributes2 = obtainAttributes(resources, theme, attributeSet, R.styleable.AdaptiveIconDrawableLayer);
+                        updateLayerFromTypedArray(childDrawable, typedArrayObtainAttributes2);
+                        typedArrayObtainAttributes2.recycle();
+                        if (childDrawable.mDrawable == null) {
+                            do {
+                                next = xmlPullParser.next();
+                            } while (next == 4);
+                            if (next == 2) {
+                            }
+                            break;
+                        }
+                        addLayer(i, childDrawable);
+                        break;
+                    case "foreground":
+                        i = 1;
+                        childDrawable = new ChildDrawable(layerState.mDensity);
+                        TypedArray typedArrayObtainAttributes22 = obtainAttributes(resources, theme, attributeSet, R.styleable.AdaptiveIconDrawableLayer);
+                        updateLayerFromTypedArray(childDrawable, typedArrayObtainAttributes22);
+                        typedArrayObtainAttributes22.recycle();
+                        if (childDrawable.mDrawable == null) {
+                        }
+                        addLayer(i, childDrawable);
+                        break;
+                }
+            }
+        }
     }
 
-    private void updateLayerFromTypedArray(ChildDrawable childDrawable, TypedArray typedArray) {
+    private void updateLayerFromTypedArray(ChildDrawable childDrawable, TypedArray typedArray) throws Resources.NotFoundException {
         LayerState layerState = this.mLayerState;
         layerState.mChildrenChangingConfigurations |= typedArray.getChangingConfigurations();
         childDrawable.mThemeAttrs = typedArray.extractThemeAttrs();
@@ -789,25 +734,25 @@ public class AdaptiveIconDrawable extends Drawable implements Drawable.Callback 
         }
 
         ChildDrawable(ChildDrawable childDrawable, AdaptiveIconDrawable adaptiveIconDrawable, Resources resources) {
-            Drawable drawable;
+            Drawable drawableNewDrawable;
             this.mDensity = 160;
-            Drawable drawable2 = childDrawable.mDrawable;
-            if (drawable2 != null) {
-                Drawable.ConstantState constantState = drawable2.getConstantState();
+            Drawable drawable = childDrawable.mDrawable;
+            if (drawable != null) {
+                Drawable.ConstantState constantState = drawable.getConstantState();
                 if (constantState == null) {
-                    drawable = drawable2;
+                    drawableNewDrawable = drawable;
                 } else if (resources != null) {
-                    drawable = constantState.newDrawable(resources);
+                    drawableNewDrawable = constantState.newDrawable(resources);
                 } else {
-                    drawable = constantState.newDrawable();
+                    drawableNewDrawable = constantState.newDrawable();
                 }
-                drawable.setCallback(adaptiveIconDrawable);
-                drawable.setBounds(drawable2.getBounds());
-                drawable.setLevel(drawable2.getLevel());
+                drawableNewDrawable.setCallback(adaptiveIconDrawable);
+                drawableNewDrawable.setBounds(drawable.getBounds());
+                drawableNewDrawable.setLevel(drawable.getLevel());
             } else {
-                drawable = null;
+                drawableNewDrawable = null;
             }
-            this.mDrawable = drawable;
+            this.mDrawable = drawableNewDrawable;
             this.mThemeAttrs = childDrawable.mThemeAttrs;
             this.mDensity = Drawable.resolveDensity(resources, childDrawable.mDensity);
         }

@@ -1,6 +1,7 @@
 package android.content;
 
 import android.content.pm.ActivityInfo;
+import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Parcel;
@@ -16,8 +17,13 @@ import android.util.proto.ProtoOutputStream;
 import android.view.textclassifier.TextLinks;
 import com.android.internal.transition.EpicenterTranslateClipReveal;
 import com.android.internal.util.ArrayUtils;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import libcore.io.IoUtils;
 
 /* loaded from: classes.dex */
 public class ClipData implements Parcelable {
@@ -192,18 +198,138 @@ public class ClipData implements Parcelable {
             this.mTextLinks = textLinks;
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:31:0x0091  */
-        /* JADX WARN: Removed duplicated region for block: B:32:0x0040 A[EXC_TOP_SPLITTER, SYNTHETIC] */
+        /* JADX WARN: Removed duplicated region for block: B:45:0x0091  */
+        /* JADX WARN: Removed duplicated region for block: B:76:0x0040 A[EXC_TOP_SPLITTER, SYNTHETIC] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public java.lang.CharSequence coerceToText(android.content.Context r8) {
-            /*
-                Method dump skipped, instructions count: 217
-                To view this dump change 'Code comments level' option to 'DEBUG'
-            */
-            throw new UnsupportedOperationException("Method not decompiled: android.content.ClipData.Item.coerceToText(android.content.Context):java.lang.CharSequence");
+        public CharSequence coerceToText(Context context) throws Throwable {
+            ContentResolver contentResolver;
+            FileInputStream fileInputStream;
+            InputStreamReader inputStreamReader;
+            AssetFileDescriptor assetFileDescriptorOpenTypedAssetFileDescriptor;
+            IOException e;
+            FileInputStream fileInputStreamCreateInputStream;
+            Throwable th;
+            String string;
+            CharSequence text = getText();
+            if (text != null) {
+                return text;
+            }
+            AssetFileDescriptor assetFileDescriptor = null;
+            try {
+                contentResolver = context.getContentResolver();
+            } catch (Exception e2) {
+                Log.w(ClipData.TAG, "Failed to obtain ContentResolver: " + e2);
+                contentResolver = null;
+            }
+            Uri uri = getUri();
+            if (uri != null) {
+                try {
+                    if (contentResolver != null) {
+                        try {
+                            assetFileDescriptorOpenTypedAssetFileDescriptor = contentResolver.openTypedAssetFileDescriptor(uri, "text/*", null);
+                        } catch (FileNotFoundException | RuntimeException unused) {
+                            assetFileDescriptorOpenTypedAssetFileDescriptor = null;
+                            if (assetFileDescriptorOpenTypedAssetFileDescriptor != null) {
+                            }
+                        } catch (SecurityException e3) {
+                            Log.w(ClipData.TAG, "Failure opening stream", e3);
+                            assetFileDescriptorOpenTypedAssetFileDescriptor = null;
+                            if (assetFileDescriptorOpenTypedAssetFileDescriptor != null) {
+                            }
+                        }
+                        if (assetFileDescriptorOpenTypedAssetFileDescriptor != null) {
+                            try {
+                                fileInputStreamCreateInputStream = assetFileDescriptorOpenTypedAssetFileDescriptor.createInputStream();
+                                try {
+                                    inputStreamReader = new InputStreamReader(fileInputStreamCreateInputStream, "UTF-8");
+                                    try {
+                                        try {
+                                            StringBuilder sb = new StringBuilder(128);
+                                            char[] cArr = new char[8192];
+                                            while (true) {
+                                                int i = inputStreamReader.read(cArr);
+                                                if (i <= 0) {
+                                                    break;
+                                                }
+                                                sb.append(cArr, 0, i);
+                                            }
+                                            string = sb.toString();
+                                        } catch (IOException e4) {
+                                            e = e4;
+                                            Log.w(ClipData.TAG, "Failure loading text", e);
+                                            string = e.toString();
+                                            IoUtils.closeQuietly(assetFileDescriptorOpenTypedAssetFileDescriptor);
+                                            IoUtils.closeQuietly(fileInputStreamCreateInputStream);
+                                            IoUtils.closeQuietly(inputStreamReader);
+                                            return string;
+                                        }
+                                    } catch (Throwable th2) {
+                                        th = th2;
+                                        assetFileDescriptor = assetFileDescriptorOpenTypedAssetFileDescriptor;
+                                        fileInputStream = fileInputStreamCreateInputStream;
+                                        th = th;
+                                        IoUtils.closeQuietly(assetFileDescriptor);
+                                        IoUtils.closeQuietly(fileInputStream);
+                                        IoUtils.closeQuietly(inputStreamReader);
+                                        throw th;
+                                    }
+                                } catch (IOException e5) {
+                                    inputStreamReader = null;
+                                    e = e5;
+                                } catch (Throwable th3) {
+                                    th = th3;
+                                    inputStreamReader = null;
+                                    assetFileDescriptor = assetFileDescriptorOpenTypedAssetFileDescriptor;
+                                    fileInputStream = fileInputStreamCreateInputStream;
+                                    th = th;
+                                    IoUtils.closeQuietly(assetFileDescriptor);
+                                    IoUtils.closeQuietly(fileInputStream);
+                                    IoUtils.closeQuietly(inputStreamReader);
+                                    throw th;
+                                }
+                            } catch (IOException e6) {
+                                inputStreamReader = null;
+                                e = e6;
+                                fileInputStreamCreateInputStream = null;
+                            } catch (Throwable th4) {
+                                th = th4;
+                                inputStreamReader = null;
+                                assetFileDescriptor = assetFileDescriptorOpenTypedAssetFileDescriptor;
+                                fileInputStream = null;
+                                IoUtils.closeQuietly(assetFileDescriptor);
+                                IoUtils.closeQuietly(fileInputStream);
+                                IoUtils.closeQuietly(inputStreamReader);
+                                throw th;
+                            }
+                            IoUtils.closeQuietly(assetFileDescriptorOpenTypedAssetFileDescriptor);
+                            IoUtils.closeQuietly(fileInputStreamCreateInputStream);
+                            IoUtils.closeQuietly(inputStreamReader);
+                            return string;
+                        }
+                        IoUtils.closeQuietly(assetFileDescriptorOpenTypedAssetFileDescriptor);
+                        IoUtils.closeQuietly((AutoCloseable) null);
+                        IoUtils.closeQuietly((AutoCloseable) null);
+                    }
+                } catch (Throwable th5) {
+                    th = th5;
+                    fileInputStream = null;
+                    inputStreamReader = null;
+                }
+            }
+            if (uri != null) {
+                String scheme = uri.getScheme();
+                if ("content".equals(scheme) || ContentResolver.SCHEME_ANDROID_RESOURCE.equals(scheme) || "file".equals(scheme)) {
+                    return "";
+                }
+                return uri.toString();
+            }
+            Intent intent = getIntent();
+            if (intent == null) {
+                return "";
+            }
+            return intent.toUri(1);
         }
 
         public CharSequence coerceToStyledText(Context context) {
@@ -212,9 +338,9 @@ public class ClipData implements Parcelable {
                 String htmlText = getHtmlText();
                 if (htmlText != null) {
                     try {
-                        Spanned fromHtml = Html.fromHtml(htmlText);
-                        if (fromHtml != null) {
-                            return fromHtml;
+                        Spanned spannedFromHtml = Html.fromHtml(htmlText);
+                        if (spannedFromHtml != null) {
+                            return spannedFromHtml;
                         }
                     } catch (RuntimeException unused) {
                     }
@@ -226,7 +352,7 @@ public class ClipData implements Parcelable {
             return text;
         }
 
-        public String coerceToHtmlText(Context context) {
+        public String coerceToHtmlText(Context context) throws IOException {
             String htmlText = getHtmlText();
             if (htmlText != null) {
                 return htmlText;
@@ -238,49 +364,150 @@ public class ClipData implements Parcelable {
                 }
                 return Html.escapeHtml(text);
             }
-            CharSequence coerceToHtmlOrStyledText = coerceToHtmlOrStyledText(context, false);
-            if (coerceToHtmlOrStyledText != null) {
-                return coerceToHtmlOrStyledText.toString();
+            CharSequence charSequenceCoerceToHtmlOrStyledText = coerceToHtmlOrStyledText(context, false);
+            if (charSequenceCoerceToHtmlOrStyledText != null) {
+                return charSequenceCoerceToHtmlOrStyledText.toString();
             }
             return null;
         }
 
-        /* JADX WARN: Code restructure failed: missing block: B:104:0x00c9, code lost:
-        
-            if (0 == 0) goto L68;
-         */
-        /* JADX WARN: Code restructure failed: missing block: B:66:0x0087, code lost:
-        
-            if (r1 != null) goto L116;
-         */
-        /* JADX WARN: Code restructure failed: missing block: B:69:0x0089, code lost:
-        
-            r1.close();
-         */
-        /* JADX WARN: Code restructure failed: missing block: B:73:0x0099, code lost:
-        
-            if (r1 != null) goto L116;
-         */
-        /* JADX WARN: Code restructure failed: missing block: B:97:0x00bd, code lost:
-        
-            if (0 != 0) goto L102;
-         */
-        /* JADX WARN: Code restructure failed: missing block: B:99:0x00bf, code lost:
-        
-            r1.close();
-         */
         /* JADX WARN: Multi-variable type inference failed */
+        /* JADX WARN: Removed duplicated region for block: B:102:0x00bf A[EXC_TOP_SPLITTER, SYNTHETIC] */
         /* JADX WARN: Type inference failed for: r13v8, types: [android.text.Spanned] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        private java.lang.CharSequence coerceToHtmlOrStyledText(android.content.Context r14, boolean r15) {
-            /*
-                Method dump skipped, instructions count: 291
-                To view this dump change 'Code comments level' option to 'DEBUG'
-            */
-            throw new UnsupportedOperationException("Method not decompiled: android.content.ClipData.Item.coerceToHtmlOrStyledText(android.content.Context, boolean):java.lang.CharSequence");
+        private CharSequence coerceToHtmlOrStyledText(Context context, boolean z) throws IOException {
+            String[] streamTypes;
+            boolean z2;
+            boolean z3;
+            if (this.mUri == null) {
+                Intent intent = this.mIntent;
+                return intent != null ? z ? uriToStyledText(intent.toUri(1)) : uriToHtml(intent.toUri(1)) : "";
+            }
+            FileInputStream fileInputStream = null;
+            try {
+                streamTypes = context.getContentResolver().getStreamTypes(this.mUri, "text/*");
+            } catch (SecurityException unused) {
+                streamTypes = null;
+            }
+            String str = "text/html";
+            if (streamTypes != null) {
+                z2 = false;
+                z3 = false;
+                for (String str2 : streamTypes) {
+                    if ("text/html".equals(str2)) {
+                        z2 = true;
+                    } else if (str2.startsWith("text/")) {
+                        z3 = true;
+                    }
+                }
+            } else {
+                z2 = false;
+                z3 = false;
+            }
+            if (z2 || z3) {
+                try {
+                    try {
+                        try {
+                            ContentResolver contentResolver = context.getContentResolver();
+                            Uri uri = this.mUri;
+                            if (!z2) {
+                                str = "text/plain";
+                            }
+                            FileInputStream fileInputStreamCreateInputStream = contentResolver.openTypedAssetFileDescriptor(uri, str, null).createInputStream();
+                            InputStreamReader inputStreamReader = new InputStreamReader(fileInputStreamCreateInputStream, "UTF-8");
+                            StringBuilder sb = new StringBuilder(128);
+                            char[] cArr = new char[8192];
+                            while (true) {
+                                int i = inputStreamReader.read(cArr);
+                                if (i <= 0) {
+                                    break;
+                                }
+                                sb.append(cArr, 0, i);
+                            }
+                            String string = sb.toString();
+                            if (z2) {
+                                if (!z) {
+                                    String string2 = string.toString();
+                                    if (fileInputStreamCreateInputStream != null) {
+                                        try {
+                                            fileInputStreamCreateInputStream.close();
+                                        } catch (IOException unused2) {
+                                        }
+                                    }
+                                    return string2;
+                                }
+                                try {
+                                    ?? FromHtml = Html.fromHtml(string);
+                                    if (FromHtml != 0) {
+                                        string = FromHtml;
+                                    }
+                                    if (fileInputStreamCreateInputStream != null) {
+                                        try {
+                                            fileInputStreamCreateInputStream.close();
+                                        } catch (IOException unused3) {
+                                        }
+                                    }
+                                    return string;
+                                } catch (RuntimeException unused4) {
+                                    if (fileInputStreamCreateInputStream != null) {
+                                    }
+                                }
+                            } else {
+                                if (!z) {
+                                    String strEscapeHtml = Html.escapeHtml(string);
+                                    if (fileInputStreamCreateInputStream != null) {
+                                        try {
+                                            fileInputStreamCreateInputStream.close();
+                                        } catch (IOException unused5) {
+                                        }
+                                    }
+                                    return strEscapeHtml;
+                                }
+                                if (fileInputStreamCreateInputStream != null) {
+                                    try {
+                                        fileInputStreamCreateInputStream.close();
+                                    } catch (IOException unused6) {
+                                    }
+                                }
+                            }
+                            return string;
+                        } catch (Throwable th) {
+                            if (0 != 0) {
+                                try {
+                                    fileInputStream.close();
+                                } catch (IOException unused7) {
+                                }
+                            }
+                            throw th;
+                        }
+                    } catch (IOException e) {
+                        Log.w(ClipData.TAG, "Failure loading text", e);
+                        String strEscapeHtml2 = Html.escapeHtml(e.toString());
+                        if (0 != 0) {
+                            try {
+                                fileInputStream.close();
+                            } catch (IOException unused8) {
+                            }
+                        }
+                        return strEscapeHtml2;
+                    }
+                } catch (FileNotFoundException unused9) {
+                    if (0 != 0) {
+                        try {
+                            fileInputStream.close();
+                        } catch (IOException unused10) {
+                        }
+                    }
+                } catch (SecurityException e2) {
+                    Log.w(ClipData.TAG, "Failure opening stream", e2);
+                    if (0 != 0) {
+                    }
+                }
+            }
+            String scheme = this.mUri.getScheme();
+            return ("content".equals(scheme) || ContentResolver.SCHEME_ANDROID_RESOURCE.equals(scheme) || "file".equals(scheme)) ? "" : z ? uriToStyledText(this.mUri.toString()) : uriToHtml(this.mUri.toString());
         }
 
         private String uriToHtml(String str) {
@@ -364,7 +591,7 @@ public class ClipData implements Parcelable {
 
         public void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
             ProtoOutputStream protoOutputStream2;
-            long start = protoOutputStream.start(j);
+            long jStart = protoOutputStream.start(j);
             String str = this.mHtmlText;
             if (str != null) {
                 protoOutputStream.write(1138166333441L, str);
@@ -385,12 +612,12 @@ public class ClipData implements Parcelable {
                             protoOutputStream2 = protoOutputStream;
                             protoOutputStream2.write(1133871366149L, true);
                         }
-                        protoOutputStream2.end(start);
+                        protoOutputStream2.end(jStart);
                     }
                 }
             }
             protoOutputStream2 = protoOutputStream;
-            protoOutputStream2.end(start);
+            protoOutputStream2.end(jStart);
         }
     }
 
@@ -488,24 +715,24 @@ public class ClipData implements Parcelable {
     }
 
     private static String[] getMimeTypes(ContentResolver contentResolver, Uri uri) {
-        String[] strArr;
+        String[] streamTypes;
         if ("content".equals(uri.getScheme())) {
             String type = contentResolver.getType(uri);
-            strArr = contentResolver.getStreamTypes(uri, "*/*");
+            streamTypes = contentResolver.getStreamTypes(uri, "*/*");
             if (type != null) {
-                if (strArr == null) {
-                    strArr = new String[]{type};
-                } else if (!ArrayUtils.contains(strArr, type)) {
-                    String[] strArr2 = new String[strArr.length + 1];
-                    strArr2[0] = type;
-                    System.arraycopy(strArr, 0, strArr2, 1, strArr.length);
-                    strArr = strArr2;
+                if (streamTypes == null) {
+                    streamTypes = new String[]{type};
+                } else if (!ArrayUtils.contains(streamTypes, type)) {
+                    String[] strArr = new String[streamTypes.length + 1];
+                    strArr[0] = type;
+                    System.arraycopy(streamTypes, 0, strArr, 1, streamTypes.length);
+                    streamTypes = strArr;
                 }
             }
         } else {
-            strArr = null;
+            streamTypes = null;
         }
-        return strArr == null ? MIMETYPES_TEXT_URILIST : strArr;
+        return streamTypes == null ? MIMETYPES_TEXT_URILIST : streamTypes;
     }
 
     public static ClipData newRawUri(CharSequence charSequence, Uri uri) {
@@ -666,21 +893,21 @@ public class ClipData implements Parcelable {
     }
 
     public void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         ClipDescription clipDescription = this.mClipDescription;
         if (clipDescription != null) {
             clipDescription.dumpDebug(protoOutputStream, 1146756268033L);
         }
         if (this.mIcon != null) {
-            long start2 = protoOutputStream.start(1146756268034L);
+            long jStart2 = protoOutputStream.start(1146756268034L);
             protoOutputStream.write(1120986464257L, this.mIcon.getWidth());
             protoOutputStream.write(1120986464258L, this.mIcon.getHeight());
-            protoOutputStream.end(start2);
+            protoOutputStream.end(jStart2);
         }
         for (int i = 0; i < this.mItems.size(); i++) {
             this.mItems.get(i).dumpDebug(protoOutputStream, 2246267895811L);
         }
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 
     public void collectUris(List<Uri> list) {
@@ -741,16 +968,16 @@ public class ClipData implements Parcelable {
             this.mIcon = null;
         }
         this.mItems = new ArrayList<>();
-        int readInt = parcel.readInt();
-        for (int i = 0; i < readInt; i++) {
-            CharSequence createFromParcel = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(parcel);
-            String readString8 = parcel.readString8();
+        int i = parcel.readInt();
+        for (int i2 = 0; i2 < i; i2++) {
+            CharSequence charSequenceCreateFromParcel = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(parcel);
+            String string8 = parcel.readString8();
             Intent intent = (Intent) parcel.readTypedObject(Intent.CREATOR);
             IntentSender intentSender = (IntentSender) parcel.readTypedObject(IntentSender.CREATOR);
             Uri uri = (Uri) parcel.readTypedObject(Uri.CREATOR);
             ActivityInfo activityInfo = (ActivityInfo) parcel.readTypedObject(ActivityInfo.CREATOR);
             TextLinks textLinks = (TextLinks) parcel.readTypedObject(TextLinks.CREATOR);
-            Item item = new Item(createFromParcel, readString8, intent, intentSender, uri);
+            Item item = new Item(charSequenceCreateFromParcel, string8, intent, intentSender, uri);
             item.setActivityInfo(activityInfo);
             item.setTextLinks(textLinks);
             this.mItems.add(item);

@@ -63,22 +63,22 @@ public final class ResampleInputStream extends InputStream {
             if (i6 <= 0) {
                 InputStream inputStream = this.mInputStream;
                 byte[] bArr4 = this.mBuf;
-                int read = inputStream.read(bArr4, i5, bArr4.length - i5);
-                if (read == -1) {
+                int i7 = inputStream.read(bArr4, i5, bArr4.length - i5);
+                if (i7 == -1) {
                     return -1;
                 }
-                this.mBufCount += read;
+                this.mBufCount += i7;
             } else {
                 if (i6 >= i2) {
                     i6 = i3 * 2;
                 }
                 fir21(this.mBuf, 0, bArr, i, i6 / 2);
-                int i7 = (this.mRateIn * i6) / this.mRateOut;
-                int i8 = this.mBufCount - i7;
-                this.mBufCount = i8;
-                if (i8 > 0) {
+                int i8 = (this.mRateIn * i6) / this.mRateOut;
+                int i9 = this.mBufCount - i8;
+                this.mBufCount = i9;
+                if (i9 > 0) {
                     byte[] bArr5 = this.mBuf;
-                    System.arraycopy(bArr5, i7, bArr5, 0, i8);
+                    System.arraycopy(bArr5, i8, bArr5, 0, i9);
                 }
                 return i6;
             }

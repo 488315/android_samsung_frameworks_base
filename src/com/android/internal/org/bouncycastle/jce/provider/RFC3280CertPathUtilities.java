@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.jce.provider;
 
 import android.sec.enterprise.certificate.CertificatePolicy;
+import android.text.format.Time;
 import com.android.internal.org.bouncycastle.asn1.ASN1Encodable;
 import com.android.internal.org.bouncycastle.asn1.ASN1EncodableVector;
 import com.android.internal.org.bouncycastle.asn1.ASN1Integer;
@@ -14,6 +15,7 @@ import com.android.internal.org.bouncycastle.asn1.x500.RDN;
 import com.android.internal.org.bouncycastle.asn1.x500.X500Name;
 import com.android.internal.org.bouncycastle.asn1.x500.style.BCStyle;
 import com.android.internal.org.bouncycastle.asn1.x509.BasicConstraints;
+import com.android.internal.org.bouncycastle.asn1.x509.CRLDistPoint;
 import com.android.internal.org.bouncycastle.asn1.x509.DistributionPoint;
 import com.android.internal.org.bouncycastle.asn1.x509.DistributionPointName;
 import com.android.internal.org.bouncycastle.asn1.x509.Extension;
@@ -23,6 +25,7 @@ import com.android.internal.org.bouncycastle.asn1.x509.GeneralSubtree;
 import com.android.internal.org.bouncycastle.asn1.x509.IssuingDistributionPoint;
 import com.android.internal.org.bouncycastle.asn1.x509.NameConstraints;
 import com.android.internal.org.bouncycastle.asn1.x509.PolicyInformation;
+import com.android.internal.org.bouncycastle.jcajce.PKIXCRLStore;
 import com.android.internal.org.bouncycastle.jcajce.PKIXCertRevocationChecker;
 import com.android.internal.org.bouncycastle.jcajce.PKIXCertRevocationCheckerParameters;
 import com.android.internal.org.bouncycastle.jcajce.PKIXCertStoreSelector;
@@ -34,7 +37,12 @@ import com.android.internal.org.bouncycastle.jce.exception.ExtCertPathValidatorE
 import com.android.internal.org.bouncycastle.util.Arrays;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
 import java.security.PublicKey;
+import java.security.SignatureException;
+import java.security.cert.CRLException;
 import java.security.cert.CertPath;
 import java.security.cert.CertPathBuilderException;
 import java.security.cert.CertPathValidatorException;
@@ -46,14 +54,17 @@ import java.security.cert.X509CRL;
 import java.security.cert.X509CertSelector;
 import java.security.cert.X509Certificate;
 import java.security.cert.X509Extension;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TimeZone;
 
 /* loaded from: classes5.dex */
 class RFC3280CertPathUtilities {
@@ -82,7 +93,7 @@ class RFC3280CertPathUtilities {
 
     protected static void processCRLB2(DistributionPoint distributionPoint, Object obj, X509CRL x509crl) throws AnnotatedException {
         int i;
-        GeneralName[] generalNameArr;
+        GeneralName[] names;
         try {
             IssuingDistributionPoint issuingDistributionPoint = IssuingDistributionPoint.getInstance(CertPathValidatorUtilities.getExtensionValue(x509crl, ISSUING_DISTRIBUTION_POINT));
             if (issuingDistributionPoint != null) {
@@ -109,32 +120,32 @@ class RFC3280CertPathUtilities {
                     }
                     if (distributionPoint.getDistributionPoint() != null) {
                         DistributionPointName distributionPoint3 = distributionPoint.getDistributionPoint();
-                        GeneralName[] names = distributionPoint3.getType() == 0 ? GeneralNames.getInstance(distributionPoint3.getName()).getNames() : null;
+                        GeneralName[] names2 = distributionPoint3.getType() == 0 ? GeneralNames.getInstance(distributionPoint3.getName()).getNames() : null;
                         if (distributionPoint3.getType() == 1) {
                             if (distributionPoint.getCRLIssuer() != null) {
-                                generalNameArr = distributionPoint.getCRLIssuer().getNames();
+                                names = distributionPoint.getCRLIssuer().getNames();
                             } else {
-                                generalNameArr = new GeneralName[1];
+                                names = new GeneralName[1];
                                 try {
-                                    generalNameArr[0] = new GeneralName(PrincipalUtils.getEncodedIssuerPrincipal(obj));
+                                    names[0] = new GeneralName(PrincipalUtils.getEncodedIssuerPrincipal(obj));
                                 } catch (Exception e2) {
                                     throw new AnnotatedException("Could not read certificate issuer.", e2);
                                 }
                             }
-                            names = generalNameArr;
-                            for (int i2 = 0; i2 < names.length; i2++) {
-                                Enumeration objects2 = ASN1Sequence.getInstance(names[i2].getName().toASN1Primitive()).getObjects();
+                            names2 = names;
+                            for (int i2 = 0; i2 < names2.length; i2++) {
+                                Enumeration objects2 = ASN1Sequence.getInstance(names2[i2].getName().toASN1Primitive()).getObjects();
                                 ASN1EncodableVector aSN1EncodableVector2 = new ASN1EncodableVector();
                                 while (objects2.hasMoreElements()) {
                                     aSN1EncodableVector2.add((ASN1Encodable) objects2.nextElement());
                                 }
                                 aSN1EncodableVector2.add(distributionPoint3.getName());
-                                names[i2] = new GeneralName(X500Name.getInstance(new DERSequence(aSN1EncodableVector2)));
+                                names2[i2] = new GeneralName(X500Name.getInstance(new DERSequence(aSN1EncodableVector2)));
                             }
                         }
-                        if (names != null) {
-                            while (i < names.length) {
-                                i = arrayList.contains(names[i]) ? 0 : i + 1;
+                        if (names2 != null) {
+                            while (i < names2.length) {
+                                i = arrayList.contains(names2[i]) ? 0 : i + 1;
                             }
                         }
                         throw new AnnotatedException("No match for certificate CRL issuing distribution point name to cRLIssuer CRL distribution point.");
@@ -142,9 +153,9 @@ class RFC3280CertPathUtilities {
                     if (distributionPoint.getCRLIssuer() == null) {
                         throw new AnnotatedException("Either the cRLIssuer or the distributionPoint field must be contained in DistributionPoint.");
                     }
-                    GeneralName[] names2 = distributionPoint.getCRLIssuer().getNames();
-                    while (i < names2.length) {
-                        i = arrayList.contains(names2[i]) ? 0 : i + 1;
+                    GeneralName[] names3 = distributionPoint.getCRLIssuer().getNames();
+                    while (i < names3.length) {
+                        i = arrayList.contains(names3[i]) ? 0 : i + 1;
                     }
                     throw new AnnotatedException("No match for certificate CRL issuing distribution point name to cRLIssuer CRL distribution point.");
                 }
@@ -235,16 +246,16 @@ class RFC3280CertPathUtilities {
         }
     }
 
-    protected static Set processCRLF(X509CRL x509crl, Object obj, X509Certificate x509Certificate, PublicKey publicKey, PKIXExtendedParameters pKIXExtendedParameters, List list, JcaJceHelper jcaJceHelper) throws AnnotatedException {
+    protected static Set processCRLF(X509CRL x509crl, Object obj, X509Certificate x509Certificate, PublicKey publicKey, PKIXExtendedParameters pKIXExtendedParameters, List list, JcaJceHelper jcaJceHelper) throws AnnotatedException, IOException {
         int i;
         X509CertSelector x509CertSelector = new X509CertSelector();
         try {
             x509CertSelector.setSubject(PrincipalUtils.getIssuerPrincipal(x509crl).getEncoded());
-            PKIXCertStoreSelector<? extends Certificate> build = new PKIXCertStoreSelector.Builder(x509CertSelector).build();
+            PKIXCertStoreSelector<? extends Certificate> pKIXCertStoreSelectorBuild = new PKIXCertStoreSelector.Builder(x509CertSelector).build();
             LinkedHashSet linkedHashSet = new LinkedHashSet();
             try {
-                CertPathValidatorUtilities.findCertificates(linkedHashSet, build, pKIXExtendedParameters.getCertificateStores());
-                CertPathValidatorUtilities.findCertificates(linkedHashSet, build, pKIXExtendedParameters.getCertStores());
+                CertPathValidatorUtilities.findCertificates(linkedHashSet, pKIXCertStoreSelectorBuild, pKIXExtendedParameters.getCertificateStores());
+                CertPathValidatorUtilities.findCertificates(linkedHashSet, pKIXCertStoreSelectorBuild, pKIXExtendedParameters.getCertStores());
                 linkedHashSet.add(x509Certificate);
                 Iterator it = linkedHashSet.iterator();
                 ArrayList arrayList = new ArrayList();
@@ -305,7 +316,7 @@ class RFC3280CertPathUtilities {
         }
     }
 
-    protected static PublicKey processCRLG(X509CRL x509crl, Set set) throws AnnotatedException {
+    protected static PublicKey processCRLG(X509CRL x509crl, Set set) throws NoSuchAlgorithmException, SignatureException, AnnotatedException, InvalidKeyException, CRLException, NoSuchProviderException {
         Iterator it = set.iterator();
         Exception e = null;
         while (it.hasNext()) {
@@ -320,7 +331,7 @@ class RFC3280CertPathUtilities {
         throw new AnnotatedException("Cannot verify CRL.", e);
     }
 
-    protected static X509CRL processCRLH(Set set, PublicKey publicKey) throws AnnotatedException {
+    protected static X509CRL processCRLH(Set set, PublicKey publicKey) throws NoSuchAlgorithmException, SignatureException, AnnotatedException, InvalidKeyException, CRLException, NoSuchProviderException {
         Iterator it = set.iterator();
         Exception e = null;
         while (it.hasNext()) {
@@ -399,114 +410,173 @@ class RFC3280CertPathUtilities {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:101:0x014b, code lost:
-    
-        r0 = move-exception;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:103:0x0153, code lost:
-    
-        throw new com.android.internal.org.bouncycastle.jce.exception.ExtCertPathValidatorException("Certificate policies extension could not be decoded.", r0, r16, r17);
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:105:0x0076, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:100:0x0076, code lost:
     
         continue;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:62:0x00aa, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:24:0x00aa, code lost:
     
         r5 = r18[r7].iterator();
      */
-    /* JADX WARN: Code restructure failed: missing block: B:64:0x00b4, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:26:0x00b4, code lost:
     
         if (r5.hasNext() == false) goto L100;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:65:0x00b6, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:27:0x00b6, code lost:
     
         r6 = (com.android.internal.org.bouncycastle.jce.provider.PKIXPolicyNode) r5.next();
      */
-    /* JADX WARN: Code restructure failed: missing block: B:66:0x00c6, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:28:0x00c6, code lost:
     
         if (com.android.internal.org.bouncycastle.jce.provider.RFC3280CertPathUtilities.ANY_POLICY.equals(r6.getValidPolicy()) == false) goto L112;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:69:0x00d0, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:30:0x00d0, code lost:
     
         r5 = ((com.android.internal.org.bouncycastle.asn1.ASN1Sequence) com.android.internal.org.bouncycastle.jce.provider.CertPathValidatorUtilities.getExtensionValue(r4, com.android.internal.org.bouncycastle.jce.provider.RFC3280CertPathUtilities.CERTIFICATE_POLICIES)).getObjects();
      */
-    /* JADX WARN: Code restructure failed: missing block: B:71:0x00d8, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:32:0x00d8, code lost:
     
         if (r5.hasMoreElements() == false) goto L113;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:73:0x00da, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:33:0x00da, code lost:
     
         r8 = com.android.internal.org.bouncycastle.asn1.x509.PolicyInformation.getInstance(r5.nextElement());
      */
-    /* JADX WARN: Code restructure failed: missing block: B:75:0x00ee, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:35:0x00ee, code lost:
     
         if (com.android.internal.org.bouncycastle.jce.provider.RFC3280CertPathUtilities.ANY_POLICY.equals(r8.getPolicyIdentifier().getId()) == false) goto L114;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:77:0x00f0, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:36:0x00f0, code lost:
     
         r5 = com.android.internal.org.bouncycastle.jce.provider.CertPathValidatorUtilities.getQualifierSet(r8.getPolicyQualifiers());
      */
-    /* JADX WARN: Code restructure failed: missing block: B:78:0x010c, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:38:0x00f9, code lost:
+    
+        r0 = move-exception;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:40:0x0101, code lost:
+    
+        throw new com.android.internal.org.bouncycastle.jce.exception.ExtCertPathValidatorException("Policy qualifier info set could not be decoded.", r0, r16, r17);
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:41:0x0102, code lost:
+    
+        r0 = move-exception;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:43:0x010a, code lost:
+    
+        throw new java.security.cert.CertPathValidatorException("Policy information could not be decoded.", r0, r16, r17);
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:44:0x010b, code lost:
+    
+        r5 = null;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:45:0x010c, code lost:
     
         r10 = r5;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:79:0x0111, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:46:0x0111, code lost:
     
         if (r4.getCriticalExtensionOIDs() == null) goto L48;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:80:0x0113, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:47:0x0113, code lost:
     
         r12 = r4.getCriticalExtensionOIDs().contains(com.android.internal.org.bouncycastle.jce.provider.RFC3280CertPathUtilities.CERTIFICATE_POLICIES);
      */
-    /* JADX WARN: Code restructure failed: missing block: B:81:0x0120, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:48:0x011f, code lost:
+    
+        r12 = false;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:49:0x0120, code lost:
     
         r5 = (com.android.internal.org.bouncycastle.jce.provider.PKIXPolicyNode) r6.getParent();
      */
-    /* JADX WARN: Code restructure failed: missing block: B:82:0x012e, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:50:0x012e, code lost:
     
         if (com.android.internal.org.bouncycastle.jce.provider.RFC3280CertPathUtilities.ANY_POLICY.equals(r5.getValidPolicy()) == false) goto L101;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:84:0x0130, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:51:0x0130, code lost:
     
         r5 = new com.android.internal.org.bouncycastle.jce.provider.PKIXPolicyNode(new java.util.ArrayList(), r7, (java.util.Set) r13.get(r11), r5, r10, r11, r12);
         r5.addChild(r5);
         r18[r7].add(r5);
      */
-    /* JADX WARN: Code restructure failed: missing block: B:87:0x011f, code lost:
-    
-        r12 = false;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:89:0x00f9, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:52:0x014b, code lost:
     
         r0 = move-exception;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:91:0x0101, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:54:0x0153, code lost:
     
-        throw new com.android.internal.org.bouncycastle.jce.exception.ExtCertPathValidatorException("Policy qualifier info set could not be decoded.", r0, r16, r17);
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:95:0x0102, code lost:
-    
-        r0 = move-exception;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:97:0x010a, code lost:
-    
-        throw new java.security.cert.CertPathValidatorException("Policy information could not be decoded.", r0, r16, r17);
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:99:0x010b, code lost:
-    
-        r5 = null;
+        throw new com.android.internal.org.bouncycastle.jce.exception.ExtCertPathValidatorException("Certificate policies extension could not be decoded.", r0, r16, r17);
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    protected static com.android.internal.org.bouncycastle.jce.provider.PKIXPolicyNode prepareCertB(java.security.cert.CertPath r16, int r17, java.util.List[] r18, com.android.internal.org.bouncycastle.jce.provider.PKIXPolicyNode r19, int r20) throws java.security.cert.CertPathValidatorException {
-        /*
-            Method dump skipped, instructions count: 432
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.org.bouncycastle.jce.provider.RFC3280CertPathUtilities.prepareCertB(java.security.cert.CertPath, int, java.util.List[], com.android.internal.org.bouncycastle.jce.provider.PKIXPolicyNode, int):com.android.internal.org.bouncycastle.jce.provider.PKIXPolicyNode");
+    protected static PKIXPolicyNode prepareCertB(CertPath certPath, int i, List[] listArr, PKIXPolicyNode pKIXPolicyNode, int i2) throws CertPathValidatorException {
+        List<? extends Certificate> certificates = certPath.getCertificates();
+        X509Certificate x509Certificate = (X509Certificate) certificates.get(i);
+        int size = certificates.size() - i;
+        try {
+            ASN1Sequence aSN1Sequence = ASN1Sequence.getInstance(CertPathValidatorUtilities.getExtensionValue(x509Certificate, POLICY_MAPPINGS));
+            if (aSN1Sequence == null) {
+                return pKIXPolicyNode;
+            }
+            HashMap map = new HashMap();
+            HashSet<String> hashSet = new HashSet();
+            for (int i3 = 0; i3 < aSN1Sequence.size(); i3++) {
+                ASN1Sequence aSN1Sequence2 = (ASN1Sequence) aSN1Sequence.getObjectAt(i3);
+                String id = ((ASN1ObjectIdentifier) aSN1Sequence2.getObjectAt(0)).getId();
+                String id2 = ((ASN1ObjectIdentifier) aSN1Sequence2.getObjectAt(1)).getId();
+                if (!map.containsKey(id)) {
+                    HashSet hashSet2 = new HashSet();
+                    hashSet2.add(id2);
+                    map.put(id, hashSet2);
+                    hashSet.add(id);
+                } else {
+                    ((Set) map.get(id)).add(id2);
+                }
+            }
+            PKIXPolicyNode pKIXPolicyNode2 = pKIXPolicyNode;
+            for (String str : hashSet) {
+                if (i2 > 0) {
+                    Iterator it = listArr[size].iterator();
+                    while (true) {
+                        if (!it.hasNext()) {
+                            break;
+                        }
+                        PKIXPolicyNode pKIXPolicyNode3 = (PKIXPolicyNode) it.next();
+                        if (pKIXPolicyNode3.getValidPolicy().equals(str)) {
+                            pKIXPolicyNode3.expectedPolicies = (Set) map.get(str);
+                            break;
+                        }
+                    }
+                } else if (i2 <= 0) {
+                    Iterator it2 = listArr[size].iterator();
+                    while (it2.hasNext()) {
+                        PKIXPolicyNode pKIXPolicyNode4 = (PKIXPolicyNode) it2.next();
+                        if (pKIXPolicyNode4.getValidPolicy().equals(str)) {
+                            ((PKIXPolicyNode) pKIXPolicyNode4.getParent()).removeChild(pKIXPolicyNode4);
+                            it2.remove();
+                            for (int i4 = size - 1; i4 >= 0; i4--) {
+                                List list = listArr[i4];
+                                for (int i5 = 0; i5 < list.size(); i5++) {
+                                    PKIXPolicyNode pKIXPolicyNode5 = (PKIXPolicyNode) list.get(i5);
+                                    if (!pKIXPolicyNode5.hasChildren()) {
+                                        PKIXPolicyNode pKIXPolicyNodeRemovePolicyNode = CertPathValidatorUtilities.removePolicyNode(pKIXPolicyNode2, listArr, pKIXPolicyNode5);
+                                        pKIXPolicyNode2 = pKIXPolicyNodeRemovePolicyNode;
+                                        if (pKIXPolicyNodeRemovePolicyNode == null) {
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return pKIXPolicyNode2;
+        } catch (AnnotatedException e) {
+            throw new ExtCertPathValidatorException("Policy mappings extension could not be decoded.", e, certPath, i);
+        }
     }
 
     protected static void prepareNextCertA(CertPath certPath, int i) throws CertPathValidatorException {
@@ -602,7 +672,7 @@ class RFC3280CertPathUtilities {
     }
 
     protected static PKIXPolicyNode processCertD(CertPath certPath, int i, Set set, PKIXPolicyNode pKIXPolicyNode, List[] listArr, int i2, boolean z) throws CertPathValidatorException {
-        String str;
+        String id;
         int i3;
         List<? extends Certificate> certificates = certPath.getCertificates();
         X509Certificate x509Certificate = (X509Certificate) certificates.get(i);
@@ -657,22 +727,22 @@ class RFC3280CertPathUtilities {
                             PKIXPolicyNode pKIXPolicyNode2 = (PKIXPolicyNode) list.get(i5);
                             for (Object obj2 : pKIXPolicyNode2.getExpectedPolicies()) {
                                 if (obj2 instanceof String) {
-                                    str = (String) obj2;
+                                    id = (String) obj2;
                                 } else if (obj2 instanceof ASN1ObjectIdentifier) {
-                                    str = ((ASN1ObjectIdentifier) obj2).getId();
+                                    id = ((ASN1ObjectIdentifier) obj2).getId();
                                 }
-                                String str2 = str;
+                                String str = id;
                                 Iterator children = pKIXPolicyNode2.getChildren();
                                 boolean z2 = false;
                                 while (children.hasNext()) {
-                                    if (str2.equals(((PKIXPolicyNode) children.next()).getValidPolicy())) {
+                                    if (str.equals(((PKIXPolicyNode) children.next()).getValidPolicy())) {
                                         z2 = true;
                                     }
                                 }
                                 if (!z2) {
                                     HashSet hashSet3 = new HashSet();
-                                    hashSet3.add(str2);
-                                    PKIXPolicyNode pKIXPolicyNode3 = new PKIXPolicyNode(new ArrayList(), i4, hashSet3, pKIXPolicyNode2, qualifierSet2, str2, false);
+                                    hashSet3.add(str);
+                                    PKIXPolicyNode pKIXPolicyNode3 = new PKIXPolicyNode(new ArrayList(), i4, hashSet3, pKIXPolicyNode2, qualifierSet2, str, false);
                                     pKIXPolicyNode2.addChild(pKIXPolicyNode3);
                                     listArr[i4].add(pKIXPolicyNode3);
                                 }
@@ -681,29 +751,29 @@ class RFC3280CertPathUtilities {
                     }
                 }
             }
-            PKIXPolicyNode pKIXPolicyNode4 = pKIXPolicyNode;
+            PKIXPolicyNode pKIXPolicyNodeRemovePolicyNode = pKIXPolicyNode;
             for (int i6 = i4 - 1; i6 >= 0; i6--) {
                 List list2 = listArr[i6];
                 for (0; i3 < list2.size(); i3 + 1) {
-                    PKIXPolicyNode pKIXPolicyNode5 = (PKIXPolicyNode) list2.get(i3);
-                    i3 = (pKIXPolicyNode5.hasChildren() || (pKIXPolicyNode4 = CertPathValidatorUtilities.removePolicyNode(pKIXPolicyNode4, listArr, pKIXPolicyNode5)) != null) ? i3 + 1 : 0;
+                    PKIXPolicyNode pKIXPolicyNode4 = (PKIXPolicyNode) list2.get(i3);
+                    i3 = (pKIXPolicyNode4.hasChildren() || (pKIXPolicyNodeRemovePolicyNode = CertPathValidatorUtilities.removePolicyNode(pKIXPolicyNodeRemovePolicyNode, listArr, pKIXPolicyNode4)) != null) ? i3 + 1 : 0;
                 }
             }
             Set<String> criticalExtensionOIDs = x509Certificate.getCriticalExtensionOIDs();
             if (criticalExtensionOIDs != null) {
-                boolean contains = criticalExtensionOIDs.contains(CERTIFICATE_POLICIES);
+                boolean zContains = criticalExtensionOIDs.contains(CERTIFICATE_POLICIES);
                 List list3 = listArr[i4];
                 for (int i7 = 0; i7 < list3.size(); i7++) {
-                    ((PKIXPolicyNode) list3.get(i7)).setCritical(contains);
+                    ((PKIXPolicyNode) list3.get(i7)).setCritical(zContains);
                 }
             }
-            return pKIXPolicyNode4;
+            return pKIXPolicyNodeRemovePolicyNode;
         } catch (AnnotatedException e2) {
             throw new ExtCertPathValidatorException("Could not read certificate policies extension from certificate.", e2, certPath, i);
         }
     }
 
-    protected static void processCertA(CertPath certPath, PKIXExtendedParameters pKIXExtendedParameters, Date date, PKIXCertRevocationChecker pKIXCertRevocationChecker, int i, PublicKey publicKey, boolean z, X500Name x500Name, X509Certificate x509Certificate) throws CertPathValidatorException {
+    protected static void processCertA(CertPath certPath, PKIXExtendedParameters pKIXExtendedParameters, Date date, PKIXCertRevocationChecker pKIXCertRevocationChecker, int i, PublicKey publicKey, boolean z, X500Name x500Name, X509Certificate x509Certificate) throws CertificateNotYetValidException, CertPathValidatorException, CertificateExpiredException {
         X509Certificate x509Certificate2 = (X509Certificate) certPath.getCertificates().get(i);
         if (!z) {
             try {
@@ -735,117 +805,84 @@ class RFC3280CertPathUtilities {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:12:0x002e, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:10:0x002e, code lost:
     
         r3 = com.android.internal.org.bouncycastle.asn1.ASN1Integer.getInstance(r1, false).intValueExact();
      */
-    /* JADX WARN: Code restructure failed: missing block: B:13:0x0037, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:11:0x0037, code lost:
     
         if (r3 >= r5) goto L16;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:14:0x0039, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:12:0x0039, code lost:
     
         return r3;
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    protected static int prepareNextCertI1(java.security.cert.CertPath r3, int r4, int r5) throws java.security.cert.CertPathValidatorException {
-        /*
-            java.util.List r0 = r3.getCertificates()
-            java.lang.Object r0 = r0.get(r4)
-            java.security.cert.X509Certificate r0 = (java.security.cert.X509Certificate) r0
-            java.lang.String r1 = com.android.internal.org.bouncycastle.jce.provider.RFC3280CertPathUtilities.POLICY_CONSTRAINTS     // Catch: java.lang.Exception -> L44
-            com.android.internal.org.bouncycastle.asn1.ASN1Primitive r0 = com.android.internal.org.bouncycastle.jce.provider.CertPathValidatorUtilities.getExtensionValue(r0, r1)     // Catch: java.lang.Exception -> L44
-            com.android.internal.org.bouncycastle.asn1.ASN1Sequence r0 = com.android.internal.org.bouncycastle.asn1.ASN1Sequence.getInstance(r0)     // Catch: java.lang.Exception -> L44
-            if (r0 == 0) goto L43
-            java.util.Enumeration r0 = r0.getObjects()
-        L1a:
-            boolean r1 = r0.hasMoreElements()
-            if (r1 == 0) goto L43
-            java.lang.Object r1 = r0.nextElement()     // Catch: java.lang.IllegalArgumentException -> L3a
-            com.android.internal.org.bouncycastle.asn1.ASN1TaggedObject r1 = com.android.internal.org.bouncycastle.asn1.ASN1TaggedObject.getInstance(r1)     // Catch: java.lang.IllegalArgumentException -> L3a
-            int r2 = r1.getTagNo()     // Catch: java.lang.IllegalArgumentException -> L3a
-            if (r2 != 0) goto L1a
-            r0 = 0
-            com.android.internal.org.bouncycastle.asn1.ASN1Integer r0 = com.android.internal.org.bouncycastle.asn1.ASN1Integer.getInstance(r1, r0)     // Catch: java.lang.IllegalArgumentException -> L3a
-            int r3 = r0.intValueExact()     // Catch: java.lang.IllegalArgumentException -> L3a
-            if (r3 >= r5) goto L43
-            return r3
-        L3a:
-            r5 = move-exception
-            com.android.internal.org.bouncycastle.jce.exception.ExtCertPathValidatorException r0 = new com.android.internal.org.bouncycastle.jce.exception.ExtCertPathValidatorException
-            java.lang.String r1 = "Policy constraints extension contents cannot be decoded."
-            r0.<init>(r1, r5, r3, r4)
-            throw r0
-        L43:
-            return r5
-        L44:
-            r5 = move-exception
-            com.android.internal.org.bouncycastle.jce.exception.ExtCertPathValidatorException r0 = new com.android.internal.org.bouncycastle.jce.exception.ExtCertPathValidatorException
-            java.lang.String r1 = "Policy constraints extension cannot be decoded."
-            r0.<init>(r1, r5, r3, r4)
-            throw r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.org.bouncycastle.jce.provider.RFC3280CertPathUtilities.prepareNextCertI1(java.security.cert.CertPath, int, int):int");
+    protected static int prepareNextCertI1(CertPath certPath, int i, int i2) throws CertPathValidatorException {
+        try {
+            ASN1Sequence aSN1Sequence = ASN1Sequence.getInstance(CertPathValidatorUtilities.getExtensionValue((X509Certificate) certPath.getCertificates().get(i), POLICY_CONSTRAINTS));
+            if (aSN1Sequence != null) {
+                Enumeration objects = aSN1Sequence.getObjects();
+                while (true) {
+                    if (!objects.hasMoreElements()) {
+                        break;
+                    }
+                    try {
+                        ASN1TaggedObject aSN1TaggedObject = ASN1TaggedObject.getInstance(objects.nextElement());
+                        if (aSN1TaggedObject.getTagNo() == 0) {
+                            break;
+                        }
+                    } catch (IllegalArgumentException e) {
+                        throw new ExtCertPathValidatorException("Policy constraints extension contents cannot be decoded.", e, certPath, i);
+                    }
+                }
+            }
+            return i2;
+        } catch (Exception e2) {
+            throw new ExtCertPathValidatorException("Policy constraints extension cannot be decoded.", e2, certPath, i);
+        }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:12:0x002f, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:10:0x002f, code lost:
     
         r4 = com.android.internal.org.bouncycastle.asn1.ASN1Integer.getInstance(r1, false).intValueExact();
      */
-    /* JADX WARN: Code restructure failed: missing block: B:13:0x0038, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:11:0x0038, code lost:
     
         if (r4 >= r6) goto L16;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:14:0x003a, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:12:0x003a, code lost:
     
         return r4;
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    protected static int prepareNextCertI2(java.security.cert.CertPath r4, int r5, int r6) throws java.security.cert.CertPathValidatorException {
-        /*
-            java.util.List r0 = r4.getCertificates()
-            java.lang.Object r0 = r0.get(r5)
-            java.security.cert.X509Certificate r0 = (java.security.cert.X509Certificate) r0
-            java.lang.String r1 = com.android.internal.org.bouncycastle.jce.provider.RFC3280CertPathUtilities.POLICY_CONSTRAINTS     // Catch: java.lang.Exception -> L45
-            com.android.internal.org.bouncycastle.asn1.ASN1Primitive r0 = com.android.internal.org.bouncycastle.jce.provider.CertPathValidatorUtilities.getExtensionValue(r0, r1)     // Catch: java.lang.Exception -> L45
-            com.android.internal.org.bouncycastle.asn1.ASN1Sequence r0 = com.android.internal.org.bouncycastle.asn1.ASN1Sequence.getInstance(r0)     // Catch: java.lang.Exception -> L45
-            if (r0 == 0) goto L44
-            java.util.Enumeration r0 = r0.getObjects()
-        L1a:
-            boolean r1 = r0.hasMoreElements()
-            if (r1 == 0) goto L44
-            java.lang.Object r1 = r0.nextElement()     // Catch: java.lang.IllegalArgumentException -> L3b
-            com.android.internal.org.bouncycastle.asn1.ASN1TaggedObject r1 = com.android.internal.org.bouncycastle.asn1.ASN1TaggedObject.getInstance(r1)     // Catch: java.lang.IllegalArgumentException -> L3b
-            int r2 = r1.getTagNo()     // Catch: java.lang.IllegalArgumentException -> L3b
-            r3 = 1
-            if (r2 != r3) goto L1a
-            r0 = 0
-            com.android.internal.org.bouncycastle.asn1.ASN1Integer r0 = com.android.internal.org.bouncycastle.asn1.ASN1Integer.getInstance(r1, r0)     // Catch: java.lang.IllegalArgumentException -> L3b
-            int r4 = r0.intValueExact()     // Catch: java.lang.IllegalArgumentException -> L3b
-            if (r4 >= r6) goto L44
-            return r4
-        L3b:
-            r6 = move-exception
-            com.android.internal.org.bouncycastle.jce.exception.ExtCertPathValidatorException r0 = new com.android.internal.org.bouncycastle.jce.exception.ExtCertPathValidatorException
-            java.lang.String r1 = "Policy constraints extension contents cannot be decoded."
-            r0.<init>(r1, r6, r4, r5)
-            throw r0
-        L44:
-            return r6
-        L45:
-            r6 = move-exception
-            com.android.internal.org.bouncycastle.jce.exception.ExtCertPathValidatorException r0 = new com.android.internal.org.bouncycastle.jce.exception.ExtCertPathValidatorException
-            java.lang.String r1 = "Policy constraints extension cannot be decoded."
-            r0.<init>(r1, r6, r4, r5)
-            throw r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.org.bouncycastle.jce.provider.RFC3280CertPathUtilities.prepareNextCertI2(java.security.cert.CertPath, int, int):int");
+    protected static int prepareNextCertI2(CertPath certPath, int i, int i2) throws CertPathValidatorException {
+        try {
+            ASN1Sequence aSN1Sequence = ASN1Sequence.getInstance(CertPathValidatorUtilities.getExtensionValue((X509Certificate) certPath.getCertificates().get(i), POLICY_CONSTRAINTS));
+            if (aSN1Sequence != null) {
+                Enumeration objects = aSN1Sequence.getObjects();
+                while (true) {
+                    if (!objects.hasMoreElements()) {
+                        break;
+                    }
+                    try {
+                        ASN1TaggedObject aSN1TaggedObject = ASN1TaggedObject.getInstance(objects.nextElement());
+                        if (aSN1TaggedObject.getTagNo() == 1) {
+                            break;
+                        }
+                    } catch (IllegalArgumentException e) {
+                        throw new ExtCertPathValidatorException("Policy constraints extension contents cannot be decoded.", e, certPath, i);
+                    }
+                }
+            }
+            return i2;
+        } catch (Exception e2) {
+            throw new ExtCertPathValidatorException("Policy constraints extension cannot be decoded.", e2, certPath, i);
+        }
     }
 
     protected static void prepareNextCertG(CertPath certPath, int i, PKIXNameConstraintValidator pKIXNameConstraintValidator) throws CertPathValidatorException {
@@ -877,41 +914,177 @@ class RFC3280CertPathUtilities {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:65:0x0121, code lost:
-    
-        return;
-     */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    private static void checkCRL(com.android.internal.org.bouncycastle.jcajce.PKIXCertRevocationCheckerParameters r19, com.android.internal.org.bouncycastle.asn1.x509.DistributionPoint r20, com.android.internal.org.bouncycastle.jcajce.PKIXExtendedParameters r21, java.util.Date r22, java.util.Date r23, java.security.cert.X509Certificate r24, java.security.cert.X509Certificate r25, java.security.PublicKey r26, com.android.internal.org.bouncycastle.jce.provider.CertStatus r27, com.android.internal.org.bouncycastle.jce.provider.ReasonsMask r28, java.util.List r29, com.android.internal.org.bouncycastle.jcajce.util.JcaJceHelper r30) throws com.android.internal.org.bouncycastle.jce.provider.AnnotatedException, com.android.internal.org.bouncycastle.jce.provider.RecoverableCertPathValidatorException {
-        /*
-            Method dump skipped, instructions count: 299
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.org.bouncycastle.jce.provider.RFC3280CertPathUtilities.checkCRL(com.android.internal.org.bouncycastle.jcajce.PKIXCertRevocationCheckerParameters, com.android.internal.org.bouncycastle.asn1.x509.DistributionPoint, com.android.internal.org.bouncycastle.jcajce.PKIXExtendedParameters, java.util.Date, java.util.Date, java.security.cert.X509Certificate, java.security.cert.X509Certificate, java.security.PublicKey, com.android.internal.org.bouncycastle.jce.provider.CertStatus, com.android.internal.org.bouncycastle.jce.provider.ReasonsMask, java.util.List, com.android.internal.org.bouncycastle.jcajce.util.JcaJceHelper):void");
+    private static void checkCRL(PKIXCertRevocationCheckerParameters pKIXCertRevocationCheckerParameters, DistributionPoint distributionPoint, PKIXExtendedParameters pKIXExtendedParameters, Date date, Date date2, X509Certificate x509Certificate, X509Certificate x509Certificate2, PublicKey publicKey, CertStatus certStatus, ReasonsMask reasonsMask, List list, JcaJceHelper jcaJceHelper) throws RecoverableCertPathValidatorException, AnnotatedException {
+        Set<String> criticalExtensionOIDs;
+        if (date2.getTime() > date.getTime()) {
+            throw new AnnotatedException("Validation time is in future.");
+        }
+        Iterator it = CertPathValidatorUtilities.getCompleteCRLs(pKIXCertRevocationCheckerParameters, distributionPoint, x509Certificate, pKIXExtendedParameters, date2).iterator();
+        boolean z = false;
+        AnnotatedException e = null;
+        while (it.hasNext() && certStatus.getCertStatus() == 11 && !reasonsMask.isAllReasons()) {
+            try {
+                X509CRL x509crl = (X509CRL) it.next();
+                ReasonsMask reasonsMaskProcessCRLD = processCRLD(x509crl, distributionPoint);
+                if (reasonsMaskProcessCRLD.hasNewReasons(reasonsMask)) {
+                    try {
+                        X509CRL x509crlProcessCRLH = pKIXExtendedParameters.isUseDeltasEnabled() ? processCRLH(CertPathValidatorUtilities.getDeltaCRLs(date2, x509crl, pKIXExtendedParameters.getCertStores(), pKIXExtendedParameters.getCRLStores(), jcaJceHelper), processCRLG(x509crl, processCRLF(x509crl, x509Certificate, x509Certificate2, publicKey, pKIXExtendedParameters, list, jcaJceHelper))) : null;
+                        if (pKIXExtendedParameters.getValidityModel() != 1 && x509Certificate.getNotAfter().getTime() < x509crl.getThisUpdate().getTime()) {
+                            throw new AnnotatedException("No valid CRL for current time found.");
+                        }
+                        processCRLB1(distributionPoint, x509Certificate, x509crl);
+                        processCRLB2(distributionPoint, x509Certificate, x509crl);
+                        processCRLC(x509crlProcessCRLH, x509crl, pKIXExtendedParameters);
+                        processCRLI(date2, x509crlProcessCRLH, x509Certificate, certStatus, pKIXExtendedParameters);
+                        processCRLJ(date2, x509crl, x509Certificate, certStatus);
+                        if (certStatus.getCertStatus() == 8) {
+                            certStatus.setCertStatus(11);
+                        }
+                        reasonsMask.addReasons(reasonsMaskProcessCRLD);
+                        Set<String> criticalExtensionOIDs2 = x509crl.getCriticalExtensionOIDs();
+                        if (criticalExtensionOIDs2 != null) {
+                            HashSet hashSet = new HashSet(criticalExtensionOIDs2);
+                            hashSet.remove(Extension.issuingDistributionPoint.getId());
+                            hashSet.remove(Extension.deltaCRLIndicator.getId());
+                            if (!hashSet.isEmpty()) {
+                                throw new AnnotatedException("CRL contains unsupported critical extensions.");
+                            }
+                        }
+                        if (x509crlProcessCRLH != null && (criticalExtensionOIDs = x509crlProcessCRLH.getCriticalExtensionOIDs()) != null) {
+                            HashSet hashSet2 = new HashSet(criticalExtensionOIDs);
+                            hashSet2.remove(Extension.issuingDistributionPoint.getId());
+                            hashSet2.remove(Extension.deltaCRLIndicator.getId());
+                            if (!hashSet2.isEmpty()) {
+                                throw new AnnotatedException("Delta CRL contains unsupported critical extension.");
+                            }
+                        }
+                        z = true;
+                    } catch (AnnotatedException e2) {
+                        e = e2;
+                    }
+                } else {
+                    continue;
+                }
+            } catch (AnnotatedException e3) {
+                e = e3;
+            }
+        }
+        if (!z) {
+            throw e;
+        }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:28:0x00ec  */
-    /* JADX WARN: Removed duplicated region for block: B:33:0x00f9  */
+    /* JADX WARN: Removed duplicated region for block: B:34:0x0098  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    protected static void checkCRLs(com.android.internal.org.bouncycastle.jcajce.PKIXCertRevocationCheckerParameters r19, com.android.internal.org.bouncycastle.jcajce.PKIXExtendedParameters r20, java.util.Date r21, java.util.Date r22, java.security.cert.X509Certificate r23, java.security.cert.X509Certificate r24, java.security.PublicKey r25, java.util.List r26, com.android.internal.org.bouncycastle.jcajce.util.JcaJceHelper r27) throws com.android.internal.org.bouncycastle.jce.provider.AnnotatedException, com.android.internal.org.bouncycastle.jce.provider.RecoverableCertPathValidatorException {
-        /*
-            Method dump skipped, instructions count: 378
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.org.bouncycastle.jce.provider.RFC3280CertPathUtilities.checkCRLs(com.android.internal.org.bouncycastle.jcajce.PKIXCertRevocationCheckerParameters, com.android.internal.org.bouncycastle.jcajce.PKIXExtendedParameters, java.util.Date, java.util.Date, java.security.cert.X509Certificate, java.security.cert.X509Certificate, java.security.PublicKey, java.util.List, com.android.internal.org.bouncycastle.jcajce.util.JcaJceHelper):void");
+    protected static void checkCRLs(PKIXCertRevocationCheckerParameters pKIXCertRevocationCheckerParameters, PKIXExtendedParameters pKIXExtendedParameters, Date date, Date date2, X509Certificate x509Certificate, X509Certificate x509Certificate2, PublicKey publicKey, List list, JcaJceHelper jcaJceHelper) throws RecoverableCertPathValidatorException, AnnotatedException {
+        AnnotatedException e;
+        boolean z;
+        int i;
+        int i2;
+        DistributionPoint[] distributionPointArr;
+        int i3;
+        try {
+            X509Certificate x509Certificate3 = x509Certificate;
+            CRLDistPoint cRLDistPoint = CRLDistPoint.getInstance(CertPathValidatorUtilities.getExtensionValue(x509Certificate3, CRL_DISTRIBUTION_POINTS));
+            PKIXExtendedParameters.Builder builder = new PKIXExtendedParameters.Builder(pKIXExtendedParameters);
+            try {
+                Date date3 = date2;
+                JcaJceHelper jcaJceHelper2 = jcaJceHelper;
+                Iterator<PKIXCRLStore> it = CertPathValidatorUtilities.getAdditionalStoresFromCRLDistributionPoint(cRLDistPoint, pKIXExtendedParameters.getNamedCRLStoreMap(), date3, jcaJceHelper2).iterator();
+                while (it.hasNext()) {
+                    builder.addCRLStore(it.next());
+                }
+                CertStatus certStatus = new CertStatus();
+                ReasonsMask reasonsMask = new ReasonsMask();
+                PKIXExtendedParameters pKIXExtendedParametersBuild = builder.build();
+                int i4 = 11;
+                Object obj = null;
+                if (cRLDistPoint != null) {
+                    try {
+                        DistributionPoint[] distributionPoints = cRLDistPoint.getDistributionPoints();
+                        if (distributionPoints != null) {
+                            e = null;
+                            int i5 = 0;
+                            z = false;
+                            while (i5 < distributionPoints.length && certStatus.getCertStatus() == i4 && !reasonsMask.isAllReasons()) {
+                                try {
+                                    i2 = i4;
+                                    distributionPointArr = distributionPoints;
+                                    i3 = i5;
+                                    try {
+                                        checkCRL(pKIXCertRevocationCheckerParameters, distributionPoints[i5], pKIXExtendedParametersBuild, date, date3, x509Certificate3, x509Certificate2, publicKey, certStatus, reasonsMask, list, jcaJceHelper2);
+                                        z = true;
+                                    } catch (AnnotatedException e2) {
+                                        e = e2;
+                                    }
+                                } catch (AnnotatedException e3) {
+                                    e = e3;
+                                    i2 = i4;
+                                    distributionPointArr = distributionPoints;
+                                    i3 = i5;
+                                }
+                                i5 = i3 + 1;
+                                date3 = date2;
+                                x509Certificate3 = x509Certificate;
+                                jcaJceHelper2 = jcaJceHelper;
+                                i4 = i2;
+                                distributionPoints = distributionPointArr;
+                                obj = null;
+                            }
+                            i = i4;
+                        } else {
+                            i = 11;
+                            z = false;
+                            e = null;
+                        }
+                    } catch (Exception e4) {
+                        throw new AnnotatedException(CertificatePolicy.MSG_DIST_POINT_COULD_NOT_BE_READ, e4);
+                    }
+                }
+                if (certStatus.getCertStatus() == i && !reasonsMask.isAllReasons()) {
+                    try {
+                        try {
+                            checkCRL(pKIXCertRevocationCheckerParameters, new DistributionPoint(new DistributionPointName(0, new GeneralNames(new GeneralName(4, PrincipalUtils.getIssuerPrincipal(x509Certificate)))), null, null), (PKIXExtendedParameters) pKIXExtendedParameters.clone(), date, date2, x509Certificate, x509Certificate2, publicKey, certStatus, reasonsMask, list, jcaJceHelper);
+                            z = true;
+                        } catch (RuntimeException e5) {
+                            throw new AnnotatedException("Issuer from certificate for CRL could not be reencoded.", e5);
+                        }
+                    } catch (AnnotatedException e6) {
+                        e = e6;
+                    }
+                }
+                if (!z) {
+                    if (e instanceof AnnotatedException) {
+                        throw e;
+                    }
+                    throw new AnnotatedException(CertificatePolicy.MSG_CRL_NOT_VALID, e);
+                }
+                if (certStatus.getCertStatus() != i) {
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss Z");
+                    simpleDateFormat.setTimeZone(TimeZone.getTimeZone(Time.TIMEZONE_UTC));
+                    throw new AnnotatedException(("Certificate revocation after " + simpleDateFormat.format(certStatus.getRevocationDate())) + ", reason: " + crlReasons[certStatus.getCertStatus()]);
+                }
+                if (!reasonsMask.isAllReasons() && certStatus.getCertStatus() == i) {
+                    certStatus.setCertStatus(12);
+                }
+                if (certStatus.getCertStatus() == 12) {
+                    throw new AnnotatedException(CertificatePolicy.MSG_UNABLE_CHECK_REVOCATION_STATUS);
+                }
+            } catch (AnnotatedException e7) {
+                throw new AnnotatedException(CertificatePolicy.MSG_NO_ADDITIONAL_CRL_DECODED, e7);
+            }
+        } catch (Exception e8) {
+            throw new AnnotatedException("CRL distribution point extension could not be read.", e8);
+        }
     }
 
     protected static int prepareNextCertJ(CertPath certPath, int i, int i2) throws CertPathValidatorException {
-        int intValueExact;
+        int iIntValueExact;
         try {
             ASN1Integer aSN1Integer = ASN1Integer.getInstance(CertPathValidatorUtilities.getExtensionValue((X509Certificate) certPath.getCertificates().get(i), INHIBIT_ANY_POLICY));
-            return (aSN1Integer == null || (intValueExact = aSN1Integer.intValueExact()) >= i2) ? i2 : intValueExact;
+            return (aSN1Integer == null || (iIntValueExact = aSN1Integer.intValueExact()) >= i2) ? i2 : iIntValueExact;
         } catch (Exception e) {
             throw new ExtCertPathValidatorException("Inhibit any-policy extension cannot be decoded.", e, certPath, i);
         }

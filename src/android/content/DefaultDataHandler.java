@@ -59,19 +59,19 @@ public class DefaultDataHandler implements ContentInsertHandler {
     }
 
     @Override // android.content.ContentInsertHandler
-    public void insert(ContentResolver contentResolver, InputStream inputStream) throws IOException, SAXException {
+    public void insert(ContentResolver contentResolver, InputStream inputStream) throws SAXException, IOException {
         this.mContentResolver = contentResolver;
         Xml.parse(inputStream, Xml.Encoding.UTF_8, this);
     }
 
     @Override // android.content.ContentInsertHandler
-    public void insert(ContentResolver contentResolver, String str) throws SAXException {
+    public void insert(ContentResolver contentResolver, String str) throws SAXException, IOException {
         this.mContentResolver = contentResolver;
         Xml.parse(str, this);
     }
 
     private void parseRow(Attributes attributes) throws SAXException {
-        Uri lastElement;
+        Uri uriLastElement;
         Uri uri;
         String value = attributes.getValue("uri");
         if (value != null) {
@@ -82,11 +82,11 @@ public class DefaultDataHandler implements ContentInsertHandler {
         } else if (this.mUris.size() > 0) {
             String value2 = attributes.getValue(POSTFIX);
             if (value2 != null) {
-                lastElement = Uri.withAppendedPath(this.mUris.lastElement(), value2);
+                uriLastElement = Uri.withAppendedPath(this.mUris.lastElement(), value2);
             } else {
-                lastElement = this.mUris.lastElement();
+                uriLastElement = this.mUris.lastElement();
             }
-            uri = lastElement;
+            uri = uriLastElement;
         } else {
             throw new SAXException("attribute parsing failure");
         }
@@ -94,9 +94,9 @@ public class DefaultDataHandler implements ContentInsertHandler {
     }
 
     private Uri insertRow() {
-        Uri insert = this.mContentResolver.insert(this.mUris.lastElement(), this.mValues);
+        Uri uriInsert = this.mContentResolver.insert(this.mUris.lastElement(), this.mValues);
         this.mValues = null;
-        return insert;
+        return uriInsert;
     }
 
     @Override // org.xml.sax.ContentHandler
@@ -106,12 +106,12 @@ public class DefaultDataHandler implements ContentInsertHandler {
                 if (this.mUris.empty()) {
                     throw new SAXException("uri is empty");
                 }
-                Uri insertRow = insertRow();
-                if (insertRow == null) {
+                Uri uriInsertRow = insertRow();
+                if (uriInsertRow == null) {
                     throw new SAXException("insert to uri " + this.mUris.lastElement().toString() + " failure");
                 }
                 this.mUris.pop();
-                this.mUris.push(insertRow);
+                this.mUris.push(uriInsertRow);
                 parseRow(attributes);
                 return;
             }
@@ -141,17 +141,17 @@ public class DefaultDataHandler implements ContentInsertHandler {
             throw new SAXException("illegal attributes value");
         }
         if (DEL.equals(str2)) {
-            Uri parse = Uri.parse(attributes.getValue("uri"));
-            if (parse == null) {
+            Uri uri = Uri.parse(attributes.getValue("uri"));
+            if (uri == null) {
                 throw new SAXException("attribute " + attributes.getValue("uri") + " parsing failure");
             }
             int length2 = attributes.getLength() - 2;
             if (length2 <= 0) {
                 if (length2 == 0) {
-                    this.mContentResolver.delete(parse, attributes.getValue(1), null);
+                    this.mContentResolver.delete(uri, attributes.getValue(1), null);
                     return;
                 } else {
-                    this.mContentResolver.delete(parse, null, null);
+                    this.mContentResolver.delete(uri, null, null);
                     return;
                 }
             }
@@ -159,7 +159,7 @@ public class DefaultDataHandler implements ContentInsertHandler {
             for (int i = 0; i < length2; i++) {
                 strArr[i] = attributes.getValue(i + 2);
             }
-            this.mContentResolver.delete(parse, attributes.getValue(1), strArr);
+            this.mContentResolver.delete(uri, attributes.getValue(1), strArr);
             return;
         }
         throw new SAXException("unknown element: " + str2);

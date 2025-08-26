@@ -108,13 +108,13 @@ public class BorderModifierOperation extends DecoratorModifierOperation {
             paintContext.drawRect(0.0f, 0.0f, this.mWidth, this.mHeight);
             paintContext2 = paintContext;
         } else {
-            float f = this.mRoundedCorner;
+            float fMin = this.mRoundedCorner;
             if (i == 1) {
-                f = Math.min(this.mWidth, this.mHeight) / 2.0f;
+                fMin = Math.min(this.mWidth, this.mHeight) / 2.0f;
             }
-            float f2 = f;
+            float f = fMin;
             paintContext2 = paintContext;
-            paintContext2.drawRoundRect(0.0f, 0.0f, this.mWidth, this.mHeight, f2, f2);
+            paintContext2.drawRoundRect(0.0f, 0.0f, this.mWidth, this.mHeight, f, f);
         }
         paintContext2.restorePaint();
     }

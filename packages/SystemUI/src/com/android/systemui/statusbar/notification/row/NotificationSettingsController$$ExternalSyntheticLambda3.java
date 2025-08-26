@@ -1,10 +1,10 @@
 package com.android.systemui.statusbar.notification.row;
 
+import android.content.res.Resources;
 import android.net.Uri;
 import com.android.systemui.statusbar.notification.row.ExpandableNotificationRowController;
 import com.android.systemui.statusbar.notification.row.NotificationSettingsController;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class NotificationSettingsController$$ExternalSyntheticLambda3 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -22,7 +22,7 @@ public final /* synthetic */ class NotificationSettingsController$$ExternalSynth
     }
 
     @Override // java.lang.Runnable
-    public final void run() {
+    public final void run() throws Resources.NotFoundException {
         switch (this.$r8$classId) {
             case 0:
                 NotificationSettingsController.Listener listener = this.f$0;

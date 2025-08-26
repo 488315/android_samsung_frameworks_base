@@ -44,11 +44,11 @@ public final class PerformanceHintManager {
     public static native void nativeUpdateTargetWorkDuration(long j, long j2);
 
     public static PerformanceHintManager create() throws ServiceManager.ServiceNotFoundException {
-        long nativeAcquireManager = nativeAcquireManager();
-        if (nativeAcquireManager == 0) {
+        long jNativeAcquireManager = nativeAcquireManager();
+        if (jNativeAcquireManager == 0) {
             throw new ServiceManager.ServiceNotFoundException(Context.PERFORMANCE_HINT_SERVICE);
         }
-        return new PerformanceHintManager(nativeAcquireManager);
+        return new PerformanceHintManager(jNativeAcquireManager);
     }
 
     private PerformanceHintManager(long j) {
@@ -65,11 +65,11 @@ public final class PerformanceHintManager {
             throw new IllegalArgumentException("thread id list can't be empty.");
         }
         Preconditions.checkArgumentPositive(j, "the hint target duration should be positive.");
-        long nativeCreateSession = nativeCreateSession(this.mNativeManagerPtr, iArr, j);
-        if (nativeCreateSession == 0) {
+        long jNativeCreateSession = nativeCreateSession(this.mNativeManagerPtr, iArr, j);
+        if (jNativeCreateSession == 0) {
             return null;
         }
-        return new Session(nativeCreateSession);
+        return new Session(jNativeCreateSession);
     }
 
     public static class Session implements Closeable {

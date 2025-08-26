@@ -207,9 +207,9 @@ public class LineBreaker {
     }
 
     private LineBreaker(int i, int i2, int i3, int[] iArr, boolean z) {
-        long nInit = nInit(i, i2, i3 == 1, iArr, z);
-        this.mNativePtr = nInit;
-        NoImagePreloadHolder.sRegistry.registerNativeAllocation(this, nInit);
+        long jNInit = nInit(i, i2, i3 == 1, iArr, z);
+        this.mNativePtr = jNInit;
+        NoImagePreloadHolder.sRegistry.registerNativeAllocation(this, jNInit);
         this.mBreakStrategy = i;
         this.mHyphenationFrequency = i2;
         this.mJustificationMode = i3;

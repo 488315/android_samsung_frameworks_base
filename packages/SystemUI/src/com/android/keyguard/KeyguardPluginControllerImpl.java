@@ -14,7 +14,6 @@ import com.android.systemui.subscreen.SubScreenManager;
 import com.android.systemui.user.domain.interactor.SelectedUserInteractor;
 import com.android.systemui.util.DesktopManager;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardPluginControllerImpl {
     public final Context mContext;
@@ -30,7 +29,6 @@ public class KeyguardPluginControllerImpl {
     public final SubScreenManager mSubScreenManager;
     public final ViewMediatorCallback mViewMediatorCallback;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.keyguard.KeyguardPluginControllerImpl$2, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass2 {
         public static final /* synthetic */ int[] $SwitchMap$com$android$keyguard$KeyguardSecurityModel$SecurityMode;
@@ -53,7 +51,6 @@ public class KeyguardPluginControllerImpl {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Factory {
         public final Context mContext;
         public final DesktopManager mDesktopManager;
@@ -77,7 +74,7 @@ public class KeyguardPluginControllerImpl {
     }
 
     /* renamed from: -$$Nest$monPasswordChecked, reason: not valid java name */
-    public static void m955$$Nest$monPasswordChecked(KeyguardPluginControllerImpl keyguardPluginControllerImpl, int i, boolean z, int i2) {
+    public static void m957$$Nest$monPasswordChecked(KeyguardPluginControllerImpl keyguardPluginControllerImpl, int i, boolean z, int i2) {
         keyguardPluginControllerImpl.getClass();
         Log.d("KeyguardPluginController", "onPasswordChecked matched " + z + " timeoutMs " + i2);
         KeyguardSecurityCallback keyguardSecurityCallback = keyguardPluginControllerImpl.mKeyguardCallback;

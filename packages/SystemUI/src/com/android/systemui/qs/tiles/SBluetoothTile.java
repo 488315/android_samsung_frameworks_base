@@ -12,8 +12,10 @@ import android.provider.Settings;
 import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
 import android.util.Log;
 import androidx.appcompat.widget.ListPopupWindow$$ExternalSyntheticOutline0;
+import androidx.appcompat.widget.SuggestionsAdapter$$ExternalSyntheticOutline0;
 import com.android.internal.logging.MetricsLogger;
 import com.android.keyguard.EmergencyButtonController$$ExternalSyntheticOutline0;
+import com.android.keyguard.KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.systemui.Dependency;
@@ -42,13 +44,15 @@ import com.android.systemui.statusbar.policy.KeyguardStateController;
 import com.android.systemui.statusbar.policy.KeyguardStateControllerImpl;
 import com.android.systemui.statusbar.policy.SBluetoothController;
 import com.android.systemui.statusbar.policy.SBluetoothControllerImpl;
-import com.android.systemui.statusbar.policy.SatelliteModeObserver$SatelliteModeCallback;
+import com.android.systemui.statusbar.policy.SatelliteEnabledListener;
 import com.android.systemui.statusbar.policy.SatelliteModeObserverHelper;
 import com.android.systemui.util.SettingsHelper;
 import com.android.systemui.util.SystemUIAnalytics;
+import com.samsung.android.bluetooth.SemBluetoothCastDevice;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SBluetoothTile extends SQSTileImpl {
     public final ActivityStarter mActivityStarter;
@@ -75,7 +79,6 @@ public class SBluetoothTile extends SQSTileImpl {
     public static final boolean DEBUG = Log.isLoggable("SBluetoothTile", 3);
     public static final Intent BLUETOOTH_SETTINGS = new Intent("android.settings.BLUETOOTH_SETTINGS");
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SubscreenBluetoothTileReceiver extends BroadcastReceiver {
         public SubscreenBluetoothTileReceiver() {
         }
@@ -103,9 +106,9 @@ public class SBluetoothTile extends SQSTileImpl {
         ArrayList arrayList = new ArrayList();
         this.mAvailableItemList = arrayList;
         this.mIsSatelliteModeOn = false;
-        this.mSatelliteModeCallback = new SatelliteModeObserver$SatelliteModeCallback() { // from class: com.android.systemui.qs.tiles.SBluetoothTile.1
-            @Override // com.android.systemui.statusbar.policy.SatelliteModeObserver$SatelliteModeCallback
-            public final void onSatelliteModeChanged(boolean z) {
+        this.mSatelliteModeCallback = new SatelliteEnabledListener() { // from class: com.android.systemui.qs.tiles.SBluetoothTile.1
+            @Override // com.android.systemui.statusbar.policy.SatelliteEnabledListener
+            public final void onSatelliteEnabledChanged(boolean z) {
                 boolean z2 = SBluetoothTile.DEBUG;
                 SBluetoothTile sBluetoothTile = SBluetoothTile.this;
                 String string = Settings.Global.getString(sBluetoothTile.mContext.getContentResolver(), "satellite_mode_radios");
@@ -140,16 +143,16 @@ public class SBluetoothTile extends SQSTileImpl {
                 boolean z = SBluetoothTile.DEBUG;
                 ((SQSTileImpl) SBluetoothTile.this).mHandler.post(new Runnable() { // from class: com.android.systemui.qs.tiles.SBluetoothTile.4.1
                     @Override // java.lang.Runnable
-                    public final void run() {
+                    public final void run() throws Throwable {
                         if (SBluetoothTile.DEBUG) {
                             Log.d("SBluetoothTile", "onBluetoothDevicesChanged ");
                         }
                         SBluetoothTile.this.refreshState(null);
                         SBluetoothTile sBluetoothTile = SBluetoothTile.this;
                         if (sBluetoothTile.mDetailListening) {
-                            boolean booleanValue = sBluetoothTile.mDetailAdapter.getToggleState().booleanValue();
-                            EmergencyButtonController$$ExternalSyntheticOutline0.m("onBluetoothDevicesChanged update: ", "SBluetoothTile", booleanValue);
-                            if (booleanValue) {
+                            boolean zBooleanValue = sBluetoothTile.mDetailAdapter.getToggleState().booleanValue();
+                            EmergencyButtonController$$ExternalSyntheticOutline0.m("onBluetoothDevicesChanged update: ", "SBluetoothTile", zBooleanValue);
+                            if (zBooleanValue) {
                                 SBluetoothTile.this.mDetailAdapter.updateItems$1();
                                 if (QpRune.QUICK_BLUETOOTH_MUSIC_SHARE) {
                                     SBluetoothTile.this.mDetailAdapter.updateMusicShareItems();
@@ -167,12 +170,12 @@ public class SBluetoothTile extends SQSTileImpl {
                 if (sBluetoothTile.mDetailListening && !z) {
                     ((SQSTileImpl) sBluetoothTile).mHandler.post(new Runnable() { // from class: com.android.systemui.qs.tiles.SBluetoothTile.4.2
                         @Override // java.lang.Runnable
-                        public final void run() {
-                            boolean booleanValue = SBluetoothTile.this.mDetailAdapter.getToggleState().booleanValue();
+                        public final void run() throws Throwable {
+                            boolean zBooleanValue = SBluetoothTile.this.mDetailAdapter.getToggleState().booleanValue();
                             if (SBluetoothTile.DEBUG) {
-                                EmergencyButtonController$$ExternalSyntheticOutline0.m("onBluetoothScanStateChanged update = ", "SBluetoothTile", booleanValue);
+                                EmergencyButtonController$$ExternalSyntheticOutline0.m("onBluetoothScanStateChanged update = ", "SBluetoothTile", zBooleanValue);
                             }
-                            if (booleanValue) {
+                            if (zBooleanValue) {
                                 SBluetoothTile.this.mDetailAdapter.updateItems$1();
                             }
                         }
@@ -185,7 +188,7 @@ public class SBluetoothTile extends SQSTileImpl {
             }
 
             @Override // com.android.systemui.statusbar.policy.BluetoothController.Callback
-            public final void onBluetoothStateChange(boolean z) {
+            public final void onBluetoothStateChange(boolean z) throws InterruptedException {
                 SBluetoothTile sBluetoothTile = SBluetoothTile.this;
                 sBluetoothTile.refreshState(null);
                 int i = ((SBluetoothControllerImpl) sBluetoothTile.mController).mState;
@@ -316,7 +319,7 @@ public class SBluetoothTile extends SQSTileImpl {
                     activityStarter.postQSRunnableDismissingKeyguard(new Runnable() { // from class: com.android.systemui.qs.tiles.SBluetoothTile$$ExternalSyntheticLambda2
                         @Override // java.lang.Runnable
                         public final void run() {
-                            SBluetoothTile sBluetoothTile = SBluetoothTile.this;
+                            SBluetoothTile sBluetoothTile = this.f$0;
                             Expandable expandable2 = expandable;
                             boolean z4 = SBluetoothTile.DEBUG;
                             sBluetoothTile.handleClick(expandable2);
@@ -393,20 +396,160 @@ public class SBluetoothTile extends SQSTileImpl {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:31:0x00cc  */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x023b  */
-    /* JADX WARN: Removed duplicated region for block: B:45:0x00ee  */
+    /* JADX WARN: Removed duplicated region for block: B:94:0x01a5  */
+    /* JADX WARN: Removed duplicated region for block: B:96:0x01b3  */
     @Override // com.android.systemui.qs.tileimpl.QSTileImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void handleUpdateState(com.android.systemui.plugins.qs.QSTile.State r18, java.lang.Object r19) {
-        /*
-            Method dump skipped, instructions count: 594
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.tiles.SBluetoothTile.handleUpdateState(com.android.systemui.plugins.qs.QSTile$State, java.lang.Object):void");
+    public final void handleUpdateState(QSTile.State state, Object obj) {
+        List connectedDevices;
+        int i;
+        int i2;
+        List<SemBluetoothCastDevice> connectedDevices2;
+        String deviceName;
+        String string;
+        QSTile.BooleanState booleanState = (QSTile.BooleanState) state;
+        checkIfRestrictionEnforcedByAdminOnly(booleanState, "no_bluetooth");
+        boolean z = obj == SQSTileImpl.ARG_SHOW_TRANSIENT_ENABLING;
+        SBluetoothControllerImpl sBluetoothControllerImpl = (SBluetoothControllerImpl) this.mController;
+        int i3 = sBluetoothControllerImpl.mConnectionState;
+        boolean z2 = i3 == 2;
+        boolean z3 = i3 == 1;
+        boolean z4 = sBluetoothControllerImpl.mEnabled;
+        int i4 = sBluetoothControllerImpl.mState;
+        boolean z5 = booleanState.value != z4;
+        boolean z6 = this.mBlueToothState != i4;
+        StringBuilder sbM = EmergencyButtonController$$ExternalSyntheticOutline0.m(" handleUpdateState enabled = ", " connected = ", " connecting = ", z4, z2);
+        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sbM, z3, " changedState =", z6, " bluetoothState = ");
+        sbM.append(i4);
+        sbM.append(" enabledChanging = ");
+        sbM.append(z5);
+        sbM.append(" state = ");
+        sbM.append(booleanState);
+        Log.d("SBluetoothTile", sbM.toString());
+        if ((z5 || z6) && this.mDetailListening) {
+            onToggleStateChange(z4);
+        }
+        this.mBlueToothState = i4;
+        boolean z7 = z || z3 || sBluetoothControllerImpl.mState == 11 || this.mIsSatelliteModeOn;
+        booleanState.dualTarget = true;
+        booleanState.value = z4;
+        booleanState.label = getTileLabel();
+        boolean z8 = QpRune.QUICK_BLUETOOTH_MUSIC_SHARE;
+        LocalBluetoothManager localBluetoothManager = sBluetoothControllerImpl.mLocalBluetoothManager;
+        if (z8) {
+            try {
+                connectedDevices = localBluetoothManager.mLocalCastProfileManager.mAudioCastProfile.getConnectedDevices();
+            } catch (Exception unused) {
+                connectedDevices = null;
+            }
+            if (connectedDevices == null) {
+                Log.d("SBluetoothTile", "getCastDeviceConnectedList return null : count");
+                i = 0;
+            } else {
+                Iterator it = connectedDevices.iterator();
+                i = 0;
+                while (it.hasNext()) {
+                    if (((SemBluetoothCastDevice) it.next()).getLocalDeviceRole() == 1) {
+                        i++;
+                    }
+                }
+            }
+        } else {
+            i = 0;
+        }
+        String string2 = "";
+        if (z7) {
+            booleanState.icon = QSTileImpl.ResourceIcon.get(R.drawable.ic_qs_bluetooth_connecting);
+            booleanState.contentDescription = this.mContext.getString(R.string.accessibility_quick_settings_bluetooth_connecting);
+            if (z || sBluetoothControllerImpl.mState == 11 || this.mIsSatelliteModeOn) {
+                booleanState.state = 0;
+            }
+        } else if (z4) {
+            if (z2 || (QpRune.QUICK_BLUETOOTH_MUSIC_SHARE && i > 0)) {
+                booleanState.icon = QSTileImpl.ResourceIcon.get(R.drawable.ic_qs_bluetooth_connected);
+                List connectedDevicesForGroup = sBluetoothControllerImpl.getConnectedDevicesForGroup();
+                int size = connectedDevicesForGroup != null ? connectedDevicesForGroup.size() : 0;
+                boolean z9 = QpRune.QUICK_BLUETOOTH_MUSIC_SHARE;
+                if (z9) {
+                    if (DEBUG) {
+                        SuggestionsAdapter$$ExternalSyntheticOutline0.m(size, i, "connectedDeviceCount = ", ", musicShareConnectedCount = ", "SBluetoothTile");
+                    }
+                    int i5 = size - i;
+                    int i6 = i + i5;
+                    if (i6 > 1) {
+                        string2 = this.mContext.getString(R.string.quick_settings_bluetooth_connected_devices, Integer.valueOf(i6));
+                        booleanState.contentDescription = this.mContext.getString(R.string.quick_settings_bluetooth_connected_devices, Integer.valueOf(i6));
+                    } else if (i == 1) {
+                        if (z9) {
+                            try {
+                                connectedDevices2 = localBluetoothManager.mLocalCastProfileManager.mAudioCastProfile.getConnectedDevices();
+                            } catch (Exception unused2) {
+                                connectedDevices2 = null;
+                            }
+                            if (connectedDevices2 != null) {
+                                for (SemBluetoothCastDevice semBluetoothCastDevice : connectedDevices2) {
+                                    if (semBluetoothCastDevice.getLocalDeviceRole() == 1) {
+                                        deviceName = semBluetoothCastDevice.getDeviceName();
+                                        break;
+                                    }
+                                }
+                            } else {
+                                Log.d("SBluetoothTile", "getCastDeviceConnectedList return null : label");
+                            }
+                            deviceName = null;
+                            if (deviceName != null) {
+                                Log.d("SBluetoothTile", "getMusicShareLabel return null.");
+                                string = this.mContext.getString(R.string.quick_settings_bluetooth_label);
+                            } else {
+                                string = deviceName.toString();
+                            }
+                            string2 = string;
+                            booleanState.contentDescription = this.mContext.getString(R.string.accessibility_bluetooth_name, string2);
+                        } else {
+                            deviceName = null;
+                            if (deviceName != null) {
+                            }
+                            string2 = string;
+                            booleanState.contentDescription = this.mContext.getString(R.string.accessibility_bluetooth_name, string2);
+                        }
+                    } else if (i5 == 1) {
+                        string2 = sBluetoothControllerImpl.getLastDeviceName();
+                        booleanState.contentDescription = this.mContext.getString(R.string.accessibility_bluetooth_name, string2);
+                    } else {
+                        Log.d("SBluetoothTile", "no connected device");
+                    }
+                } else if (size == 1) {
+                    string2 = sBluetoothControllerImpl.getLastDeviceName();
+                    booleanState.contentDescription = this.mContext.getString(R.string.accessibility_bluetooth_name, string2);
+                } else if (size >= 2) {
+                    string2 = this.mContext.getString(R.string.quick_settings_bluetooth_connected_devices, Integer.valueOf(size));
+                    booleanState.contentDescription = this.mContext.getString(R.string.quick_settings_bluetooth_connected_devices, Integer.valueOf(size));
+                } else {
+                    Log.d("SBluetoothTile", "no connected device");
+                }
+                i2 = 2;
+            } else {
+                booleanState.icon = QSTileImpl.ResourceIcon.get(R.drawable.ic_qs_bluetooth_on);
+                StringBuilder sb = new StringBuilder();
+                sb.append(this.mContext.getString(R.string.accessibility_quick_settings_bluetooth_on));
+                sb.append(",");
+                booleanState.contentDescription = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(this.mContext, R.string.accessibility_not_connected, sb);
+                i2 = 2;
+            }
+            booleanState.state = i2;
+        } else {
+            booleanState.icon = QSTileImpl.ResourceIcon.get(R.drawable.ic_qs_bluetooth_on);
+            booleanState.contentDescription = this.mContext.getString(R.string.accessibility_quick_settings_bluetooth_off);
+            booleanState.state = 1;
+        }
+        booleanState.secondaryLabel = string2;
+        booleanState.icon = QSTileImpl.ResourceIcon.get(R.drawable.quick_panel_icon_bluetooth);
+        if (z2) {
+            booleanState.dualLabelContentDescription = this.mContext.getString(R.string.accessibility_bluetooth_name, booleanState.secondaryLabel);
+        }
+        booleanState.contentDescription = this.mContext.getString(R.string.quick_settings_bluetooth_label);
     }
 
     @Override // com.android.systemui.qs.tileimpl.QSTileImpl, com.android.systemui.plugins.qs.QSTile, com.android.systemui.plugins.qs.LockQSTile
@@ -433,7 +576,7 @@ public class SBluetoothTile extends SQSTileImpl {
     }
 
     @Override // com.android.systemui.qs.tileimpl.QSTileImpl, com.android.systemui.plugins.qs.QSTile
-    public final void setDetailListening(boolean z) {
+    public final void setDetailListening(boolean z) throws InterruptedException {
         if (this.mDetailListening == z) {
             return;
         }

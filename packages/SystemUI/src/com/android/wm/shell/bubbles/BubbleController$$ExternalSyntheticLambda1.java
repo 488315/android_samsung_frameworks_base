@@ -42,7 +42,6 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import kotlin.collections.CollectionsKt__IterablesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class BubbleController$$ExternalSyntheticLambda1 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -55,7 +54,7 @@ public final /* synthetic */ class BubbleController$$ExternalSyntheticLambda1 im
 
     @Override // java.lang.Runnable
     public final void run() {
-        boolean z;
+        boolean zRemoveIf;
         int i = this.$r8$classId;
         final BubbleController bubbleController = this.f$0;
         switch (i) {
@@ -73,17 +72,17 @@ public final /* synthetic */ class BubbleController$$ExternalSyntheticLambda1 im
                 ShellTaskOrganizer shellTaskOrganizer = bubbleController.mTaskOrganizer;
                 ShellTaskOrganizer.LocusIdListener locusIdListener = new ShellTaskOrganizer.LocusIdListener() { // from class: com.android.wm.shell.bubbles.BubbleController$$ExternalSyntheticLambda7
                     @Override // com.android.wm.shell.ShellTaskOrganizer.LocusIdListener
-                    public final void onVisibilityChanged(int i2, LocusId locusId, boolean z2) {
-                        BubbleData bubbleData2 = BubbleController.this.mBubbleData;
+                    public final void onVisibilityChanged(int i2, LocusId locusId, boolean z) {
+                        BubbleData bubbleData2 = bubbleController.mBubbleData;
                         bubbleData2.getClass();
                         if (locusId == null) {
                             return;
                         }
                         if (ProtoLogImpl_1771455215.Cache.WM_SHELL_BUBBLES_enabled[0]) {
-                            ProtoLogImpl_1771455215.d(ShellProtoLogGroup.WM_SHELL_BUBBLES, 5004922702703375966L, 28, String.valueOf(locusId.getId()), Boolean.valueOf(z2), Long.valueOf(i2));
+                            ProtoLogImpl_1771455215.d(ShellProtoLogGroup.WM_SHELL_BUBBLES, 5004922702703375966L, 28, String.valueOf(locusId.getId()), Boolean.valueOf(z), Long.valueOf(i2));
                         }
                         Bubble bubbleWithPredicate = BubbleData.getBubbleWithPredicate(bubbleData2.mBubbles, new BubbleData$$ExternalSyntheticLambda7(locusId, 1));
-                        if (!z2 || (bubbleWithPredicate != null && bubbleWithPredicate.getTaskId() == i2)) {
+                        if (!z || (bubbleWithPredicate != null && bubbleWithPredicate.getTaskId() == i2)) {
                             bubbleData2.mVisibleLocusIds.remove(locusId);
                         } else {
                             bubbleData2.mVisibleLocusIds.add(locusId);
@@ -91,13 +90,13 @@ public final /* synthetic */ class BubbleController$$ExternalSyntheticLambda1 im
                         if (bubbleWithPredicate == null && (bubbleWithPredicate = (Bubble) bubbleData2.mSuppressedBubbles.get(locusId)) == null) {
                             return;
                         }
-                        boolean z3 = bubbleData2.mSuppressedBubbles.get(locusId) != null;
-                        if (z2 && !z3 && (bubbleWithPredicate.mFlags & 4) != 0 && i2 != bubbleWithPredicate.getTaskId()) {
+                        boolean z2 = bubbleData2.mSuppressedBubbles.get(locusId) != null;
+                        if (z && !z2 && (bubbleWithPredicate.mFlags & 4) != 0 && i2 != bubbleWithPredicate.getTaskId()) {
                             bubbleData2.mSuppressedBubbles.put(locusId, bubbleWithPredicate);
                             bubbleData2.doSuppress(bubbleWithPredicate);
                             bubbleData2.dispatchPendingChanges();
                         } else {
-                            if (z2) {
+                            if (z) {
                                 return;
                             }
                             Bubble bubble = (Bubble) bubbleData2.mSuppressedBubbles.remove(locusId);
@@ -111,7 +110,7 @@ public final /* synthetic */ class BubbleController$$ExternalSyntheticLambda1 im
                 synchronized (shellTaskOrganizer.mLock) {
                     try {
                         shellTaskOrganizer.mLocusIdListeners.add(locusIdListener);
-                        z = false;
+                        zRemoveIf = false;
                         for (int i2 = 0; i2 < shellTaskOrganizer.mVisibleTasksWithLocusId.size(); i2++) {
                             locusIdListener.onVisibilityChanged(shellTaskOrganizer.mVisibleTasksWithLocusId.keyAt(i2), (LocusId) shellTaskOrganizer.mVisibleTasksWithLocusId.valueAt(i2), true);
                         }
@@ -134,7 +133,7 @@ public final /* synthetic */ class BubbleController$$ExternalSyntheticLambda1 im
                     }
 
                     @Override // android.content.pm.LauncherApps.Callback
-                    public final void onPackagesUnavailable(String[] strArr, UserHandle userHandle, boolean z2) {
+                    public final void onPackagesUnavailable(String[] strArr, UserHandle userHandle, boolean z) {
                         for (String str : strArr) {
                             BubbleData bubbleData2 = BubbleController.this.mBubbleData;
                             bubbleData2.getClass();
@@ -163,11 +162,11 @@ public final /* synthetic */ class BubbleController$$ExternalSyntheticLambda1 im
                                 Set set = hashSet;
                                 Bubble bubble = (Bubble) obj;
                                 Comparator comparator = BubbleData.BUBBLES_BY_SORT_KEY_DESCENDING;
-                                boolean equals = str2.equals(bubble.mPackageName);
-                                boolean hasMetadataShortcutId = bubble.hasMetadataShortcutId();
-                                if (equals && hasMetadataShortcutId) {
-                                    boolean z2 = bubble.hasMetadataShortcutId() && (shortcutInfo = bubble.mShortcutInfo) != null && shortcutInfo.isEnabled() && set.contains(bubble.mShortcutInfo.getId());
-                                    if (equals && !z2) {
+                                boolean zEquals = str2.equals(bubble.mPackageName);
+                                boolean zHasMetadataShortcutId = bubble.hasMetadataShortcutId();
+                                if (zEquals && zHasMetadataShortcutId) {
+                                    boolean z = bubble.hasMetadataShortcutId() && (shortcutInfo = bubble.mShortcutInfo) != null && shortcutInfo.isEnabled() && set.contains(bubble.mShortcutInfo.getId());
+                                    if (zEquals && !z) {
                                         return true;
                                     }
                                 }
@@ -188,7 +187,7 @@ public final /* synthetic */ class BubbleController$$ExternalSyntheticLambda1 im
                     }
 
                     @Override // android.content.pm.LauncherApps.Callback
-                    public final void onPackagesAvailable(String[] strArr, UserHandle userHandle, boolean z2) {
+                    public final void onPackagesAvailable(String[] strArr, UserHandle userHandle, boolean z) {
                     }
                 }, bubbleController.mMainHandler);
                 bubbleController.mTransitions.registerObserver(new BubblesTransitionObserver(bubbleController, bubbleController.mBubbleData));
@@ -197,7 +196,7 @@ public final /* synthetic */ class BubbleController$$ExternalSyntheticLambda1 im
                     }
 
                     @Override // com.android.wm.shell.common.TaskStackListenerCallback
-                    public final void onActivityRestartAttempt(ActivityManager.RunningTaskInfo runningTaskInfo, boolean z2, boolean z3) {
+                    public final void onActivityRestartAttempt(ActivityManager.RunningTaskInfo runningTaskInfo, boolean z, boolean z2) {
                         final int i3 = runningTaskInfo.taskId;
                         BubbleController bubbleController2 = BubbleController.this;
                         final int i4 = 0;
@@ -269,7 +268,7 @@ public final /* synthetic */ class BubbleController$$ExternalSyntheticLambda1 im
                     @Override // com.android.wm.shell.common.DisplayChangeController.OnDisplayChangingListener
                     public final void onDisplayChange(int i3, int i4, int i5, DisplayAreaInfo displayAreaInfo, WindowContainerTransaction windowContainerTransaction) {
                         BubbleStackView bubbleStackView;
-                        BubbleController bubbleController2 = BubbleController.this;
+                        BubbleController bubbleController2 = bubbleController;
                         Rect rect = new Rect();
                         if (displayAreaInfo != null) {
                             rect = displayAreaInfo.configuration.windowConfiguration.getBounds();
@@ -305,19 +304,19 @@ public final /* synthetic */ class BubbleController$$ExternalSyntheticLambda1 im
                     int i3 = 0;
                     while (true) {
                         if (i3 < size) {
-                            int keyAt = bubbleVolatileRepository.entitiesByUser.keyAt(i3);
-                            if (!arrayList.contains(Integer.valueOf(keyAt))) {
-                                bubbleVolatileRepository.entitiesByUser.remove(keyAt);
-                                z = true;
-                            } else if (bubbleVolatileRepository.entitiesByUser.get(keyAt) != null) {
-                                z = ((List) bubbleVolatileRepository.entitiesByUser.get(keyAt)).removeIf(new BubbleVolatileRepositoryKt$sam$java_util_function_Predicate$0(new BubbleVolatileRepository$$ExternalSyntheticLambda0(arrayList, 2)));
+                            int iKeyAt = bubbleVolatileRepository.entitiesByUser.keyAt(i3);
+                            if (!arrayList.contains(Integer.valueOf(iKeyAt))) {
+                                bubbleVolatileRepository.entitiesByUser.remove(iKeyAt);
+                                zRemoveIf = true;
+                            } else if (bubbleVolatileRepository.entitiesByUser.get(iKeyAt) != null) {
+                                zRemoveIf = ((List) bubbleVolatileRepository.entitiesByUser.get(iKeyAt)).removeIf(new BubbleVolatileRepositoryKt$sam$java_util_function_Predicate$0(new BubbleVolatileRepository$$ExternalSyntheticLambda0(arrayList, 2)));
                             } else {
                                 i3++;
                             }
                         }
                     }
                 }
-                if (z) {
+                if (zRemoveIf) {
                     BubbleDataRepository.persistToDisk$default(bubbleDataRepository);
                 }
                 SparseArray sparseArray = new SparseArray();
@@ -329,7 +328,7 @@ public final /* synthetic */ class BubbleController$$ExternalSyntheticLambda1 im
                 bubbleController.mShellController.addExternalInterface("com.android.wm.shell.bubbles.IBubbles", new Supplier() { // from class: com.android.wm.shell.bubbles.BubbleController$$ExternalSyntheticLambda10
                     @Override // java.util.function.Supplier
                     public final Object get() {
-                        BubbleController bubbleController2 = BubbleController.this;
+                        BubbleController bubbleController2 = bubbleController;
                         bubbleController2.getClass();
                         return bubbleController2.new IBubblesImpl(bubbleController2);
                     }
@@ -337,7 +336,7 @@ public final /* synthetic */ class BubbleController$$ExternalSyntheticLambda1 im
                 bubbleController.mShellCommandHandler.addDumpCallback(new BiConsumer() { // from class: com.android.wm.shell.bubbles.BubbleController$$ExternalSyntheticLambda11
                     @Override // java.util.function.BiConsumer
                     public final void accept(Object obj, Object obj2) {
-                        BubbleController bubbleController2 = BubbleController.this;
+                        BubbleController bubbleController2 = bubbleController;
                         PrintWriter printWriter = (PrintWriter) obj;
                         String str = (String) obj2;
                         printWriter.print(str);
@@ -410,9 +409,9 @@ public final /* synthetic */ class BubbleController$$ExternalSyntheticLambda1 im
                                     sb.append("\n");
                                 }
                             }
-                            String sb2 = sb.toString();
+                            String string = sb.toString();
                             printWriter.println("  bubbles on screen:       ");
-                            printWriter.println(sb2);
+                            printWriter.println(string);
                             printWriter.print("  gestureInProgress:       ");
                             printWriter.println(bubbleStackView.mIsGestureInProgress);
                             printWriter.print("  showingDismiss:          ");
@@ -458,9 +457,9 @@ public final /* synthetic */ class BubbleController$$ExternalSyntheticLambda1 im
                             printWriter.print("  springingBubble:   ");
                             printWriter.println(expandedAnimationController.mSpringingBubbleToTouch);
                             if (bubbleStackView.mExpandedBubble != null) {
-                                StringBuilder m = CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "Expanded bubble state:", "  expandedBubbleKey: ");
-                                m.append(bubbleStackView.mExpandedBubble.getKey());
-                                printWriter.println(m.toString());
+                                StringBuilder sbM = CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "Expanded bubble state:", "  expandedBubbleKey: ");
+                                sbM.append(bubbleStackView.mExpandedBubble.getKey());
+                                printWriter.println(sbM.toString());
                                 BubbleExpandedView expandedView = bubbleStackView.getExpandedView();
                                 if (expandedView != null) {
                                     printWriter.println("  expandedViewVis:    " + expandedView.getVisibility());

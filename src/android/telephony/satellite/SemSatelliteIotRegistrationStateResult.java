@@ -117,11 +117,11 @@ public final class SemSatelliteIotRegistrationStateResult implements Parcelable 
     }
 
     private SemSatelliteIotRegistrationStateResult copy() {
-        Parcel obtain = Parcel.obtain();
-        writeToParcel(obtain, 0);
-        obtain.setDataPosition(0);
-        SemSatelliteIotRegistrationStateResult semSatelliteIotRegistrationStateResult = new SemSatelliteIotRegistrationStateResult(obtain);
-        obtain.recycle();
+        Parcel parcelObtain = Parcel.obtain();
+        writeToParcel(parcelObtain, 0);
+        parcelObtain.setDataPosition(0);
+        SemSatelliteIotRegistrationStateResult semSatelliteIotRegistrationStateResult = new SemSatelliteIotRegistrationStateResult(parcelObtain);
+        parcelObtain.recycle();
         return semSatelliteIotRegistrationStateResult;
     }
 

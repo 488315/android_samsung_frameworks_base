@@ -39,7 +39,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @CoordinatorScope
 /* loaded from: classes3.dex */
 public class LockScreenNotiIconCoordinator implements Coordinator, ConfigurationController.ConfigurationListener {
@@ -175,24 +174,22 @@ public class LockScreenNotiIconCoordinator implements Coordinator, Configuration
 
     private void applyNotificationInfoArray(List<PipelineEntry> list) {
         SubscreenNotificationController subscreenNotificationController;
-        LockscreenNotificationManager lockscreenNotificationManager = this.mLockscreenNotificationManager;
-        boolean z = lockscreenNotificationManager.mIsCovered;
-        boolean z2 = lockscreenNotificationManager.mIsFolded;
-        boolean z3 = ((StatusBarStateControllerImpl) this.mStatusBarStateController).mUpcomingState == 1;
-        boolean z4 = NotiRune.NOTI_SUBSCREEN_ALL && (subscreenNotificationController = this.mSubscreenController) != null && subscreenNotificationController.mDeviceModel.isSubScreen();
-        boolean z5 = z3 || z || z2;
+        boolean z = this.mLockscreenNotificationManager.mIsCovered;
+        boolean z2 = ((StatusBarStateControllerImpl) this.mStatusBarStateController).mUpcomingState == 1;
+        boolean z3 = NotiRune.NOTI_SUBSCREEN_ALL && (subscreenNotificationController = this.mSubscreenController) != null && subscreenNotificationController.mDeviceModel.isSubScreen();
+        boolean z4 = z2 || z3;
         for (PipelineEntry pipelineEntry : list) {
             NotificationEntry representativeEntry = pipelineEntry.getRepresentativeEntry();
             ExpandableNotificationRow expandableNotificationRow = representativeEntry.row;
-            if (((this.mPluginLockMode == 1 && z3) || ((KeyguardStateControllerImpl) this.mKeyguardStateController).mPrimaryBouncerShowing) && !this.mAmbientState.mDragDownOnKeyguard) {
+            if (((this.mPluginLockMode == 1 && z2) || ((KeyguardStateControllerImpl) this.mKeyguardStateController).mPrimaryBouncerShowing) && !this.mAmbientState.mDragDownOnKeyguard) {
                 expandableNotificationRow.setVisibility(8);
             } else if (!z || ((NotificationLockscreenUserManagerImpl) this.mLockscreenUserManager).mShowLockscreenNotifications) {
-                if (z5) {
+                if (z4) {
                     expandableNotificationRow.getClass();
-                    if (((ArrayList) representativeEntry.mDismissInterceptors).size() <= 0 && needToSendOngoingEntry(representativeEntry, z4) && !representativeEntry.isInsignificant()) {
-                        LockscreenNotificationManager lockscreenNotificationManager2 = this.mLockscreenNotificationManager;
+                    if (((ArrayList) representativeEntry.mDismissInterceptors).size() <= 0 && needToSendOngoingEntry(representativeEntry, z3) && !representativeEntry.isInsignificant()) {
+                        LockscreenNotificationManager lockscreenNotificationManager = this.mLockscreenNotificationManager;
                         ArrayList<LockscreenNotificationInfo> arrayList = this.mNotificationInfoArray;
-                        lockscreenNotificationManager2.getClass();
+                        lockscreenNotificationManager.getClass();
                         LockscreenNotificationInfo lockscreenNotificationInfo = new LockscreenNotificationInfo();
                         lockscreenNotificationInfo.mStatusBarIcon = representativeEntry.mIcons.mStatusBarIcon;
                         lockscreenNotificationInfo.mSbn = representativeEntry.mSbn;
@@ -201,11 +198,12 @@ public class LockScreenNotiIconCoordinator implements Coordinator, Configuration
                         arrayList.add(lockscreenNotificationInfo);
                     }
                 }
-                if (z3) {
+                if (z2) {
                     this.mLockscreenNotificationManager.getClass();
-                    if (LockscreenNotificationManager.isNotificationIconsOnlyShowing() && !this.mAmbientState.mDragDownOnKeyguard) {
+                    int i = LockscreenNotificationManager.mCurrentNotificationType;
+                    if ((i == 1 || i == 3 || i == 2 || i == 4) && !this.mAmbientState.mDragDownOnKeyguard) {
                         expandableNotificationRow.setVisibility(8);
-                    } else if (representativeEntry.isOngoingActivity() && representativeEntry.isPromotedState() && z4) {
+                    } else if (representativeEntry.isOngoingActivity() && representativeEntry.isPromotedState() && z3) {
                         expandableNotificationRow.setVisibility(8);
                     }
                 }
@@ -271,7 +269,7 @@ public class LockScreenNotiIconCoordinator implements Coordinator, Configuration
             ((GroupEntry) pipelineEntry).mUnmodifiableChildren.stream().forEach(new Consumer() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.LockScreenNotiIconCoordinator$$ExternalSyntheticLambda0
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    LockScreenNotiIconCoordinator.this.lambda$restoreVisibility$0((NotificationEntry) obj);
+                    this.f$0.lambda$restoreVisibility$0((NotificationEntry) obj);
                 }
             });
         }
@@ -282,13 +280,13 @@ public class LockScreenNotiIconCoordinator implements Coordinator, Configuration
         notifPipeline.addOnBeforeFinalizeFilterListener(new OnBeforeFinalizeFilterListener() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.LockScreenNotiIconCoordinator$$ExternalSyntheticLambda1
             @Override // com.android.systemui.statusbar.notification.collection.listbuilder.OnBeforeFinalizeFilterListener
             public final void onBeforeFinalizeFilter(List list) {
-                LockScreenNotiIconCoordinator.this.resetNotificationInfoArray(list);
+                this.f$0.resetNotificationInfoArray(list);
             }
         });
         notifPipeline.addOnBeforeRenderListListener(new OnBeforeRenderListListener() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.LockScreenNotiIconCoordinator$$ExternalSyntheticLambda2
             @Override // com.android.systemui.statusbar.notification.collection.listbuilder.OnBeforeRenderListListener
             public final void onBeforeRenderList(List list) {
-                LockScreenNotiIconCoordinator.this.notifyLockScreenNotiInfoArrayUpdated(list);
+                this.f$0.notifyLockScreenNotiInfoArrayUpdated(list);
             }
         });
         notifPipeline.addFinalizeFilter(this.mNotifFilter);

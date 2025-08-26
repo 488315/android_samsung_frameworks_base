@@ -15,7 +15,6 @@ import com.android.systemui.wallpaper.KeyguardWallpaper;
 import com.android.systemui.wallpaper.WallpaperUtils;
 import com.samsung.android.wallpaper.utils.SemWallpaperProperties;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class WallpaperImageInjectCreator extends WallpaperImageCreator {
     public final SelectedUserInteractor mSelectedUserInteractor;
@@ -28,9 +27,9 @@ public class WallpaperImageInjectCreator extends WallpaperImageCreator {
     @Override // com.android.systemui.keyguardimage.WallpaperImageCreator, com.android.systemui.keyguardimage.ImageCreator
     public final Bitmap createImage(ImageOptionCreator.ImageOption imageOption, Point point) {
         int i = WallpaperUtils.sCurrentWhich;
-        int semGetWallpaperType = WallpaperManager.getInstance(this.mContext).semGetWallpaperType(i);
-        Log.i(this.TAG, MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(semGetWallpaperType, "createImage, wallpaperViewType = "));
-        if (semGetWallpaperType == 7) {
+        int iSemGetWallpaperType = WallpaperManager.getInstance(this.mContext).semGetWallpaperType(i);
+        Log.i(this.TAG, MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(iSemGetWallpaperType, "createImage, wallpaperViewType = "));
+        if (iSemGetWallpaperType == 7) {
             if ((i & 60) == 0) {
                 i |= 4;
             }

@@ -9,12 +9,10 @@ import com.samsung.android.knox.ContextInfo;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface IBluetoothSecureModePolicy extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.knox.bluetooth.IBluetoothSecureModePolicy";
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements IBluetoothSecureModePolicy {
         @Override // com.samsung.android.knox.bluetooth.IBluetoothSecureModePolicy
         public boolean addBluetoothDevicesToWhiteList(ContextInfo contextInfo, List<BluetoothSecureModeWhitelistConfig> list) throws RemoteException {
@@ -85,7 +83,6 @@ public interface IBluetoothSecureModePolicy extends IInterface {
 
     boolean removeBluetoothDevicesFromWhiteList(ContextInfo contextInfo, List<BluetoothSecureModeWhitelistConfig> list) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IBluetoothSecureModePolicy {
         public static final int TRANSACTION_addBluetoothDevicesToWhiteList = 8;
         public static final int TRANSACTION_disableSecureMode = 2;
@@ -97,7 +94,6 @@ public interface IBluetoothSecureModePolicy extends IInterface {
         public static final int TRANSACTION_isSecureModeEnabled = 4;
         public static final int TRANSACTION_removeBluetoothDevicesFromWhiteList = 9;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements IBluetoothSecureModePolicy {
             public IBinder mRemote;
 
@@ -107,18 +103,18 @@ public interface IBluetoothSecureModePolicy extends IInterface {
 
             @Override // com.samsung.android.knox.bluetooth.IBluetoothSecureModePolicy
             public boolean addBluetoothDevicesToWhiteList(ContextInfo contextInfo, List<BluetoothSecureModeWhitelistConfig> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IBluetoothSecureModePolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IBluetoothSecureModePolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -129,68 +125,68 @@ public interface IBluetoothSecureModePolicy extends IInterface {
 
             @Override // com.samsung.android.knox.bluetooth.IBluetoothSecureModePolicy
             public boolean disableSecureMode(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IBluetoothSecureModePolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IBluetoothSecureModePolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.bluetooth.IBluetoothSecureModePolicy
             public boolean enableDeviceWhiteList(ContextInfo contextInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IBluetoothSecureModePolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IBluetoothSecureModePolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.bluetooth.IBluetoothSecureModePolicy
             public boolean enableSecureMode(ContextInfo contextInfo, BluetoothSecureModeConfig bluetoothSecureModeConfig, List<BluetoothSecureModeWhitelistConfig> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IBluetoothSecureModePolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeTypedObject(bluetoothSecureModeConfig, 0);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IBluetoothSecureModePolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeTypedObject(bluetoothSecureModeConfig, 0);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.bluetooth.IBluetoothSecureModePolicy
             public List<BluetoothSecureModeWhitelistConfig> getBluetoothDevicesFromWhiteList(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IBluetoothSecureModePolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(BluetoothSecureModeWhitelistConfig.CREATOR);
+                    parcelObtain.writeInterfaceToken(IBluetoothSecureModePolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(BluetoothSecureModeWhitelistConfig.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -200,66 +196,66 @@ public interface IBluetoothSecureModePolicy extends IInterface {
 
             @Override // com.samsung.android.knox.bluetooth.IBluetoothSecureModePolicy
             public BluetoothSecureModeConfig getSecureModeConfiguration(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IBluetoothSecureModePolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (BluetoothSecureModeConfig) obtain2.readTypedObject(BluetoothSecureModeConfig.CREATOR);
+                    parcelObtain.writeInterfaceToken(IBluetoothSecureModePolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (BluetoothSecureModeConfig) parcelObtain2.readTypedObject(BluetoothSecureModeConfig.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.bluetooth.IBluetoothSecureModePolicy
             public boolean isDeviceWhiteListEnabled(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IBluetoothSecureModePolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IBluetoothSecureModePolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.bluetooth.IBluetoothSecureModePolicy
             public boolean isSecureModeEnabled(ContextInfo contextInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IBluetoothSecureModePolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IBluetoothSecureModePolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.bluetooth.IBluetoothSecureModePolicy
             public boolean removeBluetoothDevicesFromWhiteList(ContextInfo contextInfo, List<BluetoothSecureModeWhitelistConfig> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IBluetoothSecureModePolicy.DESCRIPTOR);
-                    obtain.writeTypedObject(contextInfo, 0);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IBluetoothSecureModePolicy.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextInfo, 0);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -272,8 +268,8 @@ public interface IBluetoothSecureModePolicy extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IBluetoothSecureModePolicy.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IBluetoothSecureModePolicy)) ? new Proxy(iBinder) : (IBluetoothSecureModePolicy) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IBluetoothSecureModePolicy.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IBluetoothSecureModePolicy)) ? new Proxy(iBinder) : (IBluetoothSecureModePolicy) iInterfaceQueryLocalInterface;
         }
 
         public static String getDefaultTransactionName(int i) {
@@ -322,18 +318,18 @@ public interface IBluetoothSecureModePolicy extends IInterface {
                 case 1:
                     ContextInfo contextInfo = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     BluetoothSecureModeConfig bluetoothSecureModeConfig = (BluetoothSecureModeConfig) parcel.readTypedObject(BluetoothSecureModeConfig.CREATOR);
-                    ArrayList createTypedArrayList = parcel.createTypedArrayList(BluetoothSecureModeWhitelistConfig.CREATOR);
+                    ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(BluetoothSecureModeWhitelistConfig.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean enableSecureMode = enableSecureMode(contextInfo, bluetoothSecureModeConfig, createTypedArrayList);
+                    boolean zEnableSecureMode = enableSecureMode(contextInfo, bluetoothSecureModeConfig, arrayListCreateTypedArrayList);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(enableSecureMode);
+                    parcel2.writeBoolean(zEnableSecureMode);
                     return true;
                 case 2:
                     ContextInfo contextInfo2 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean disableSecureMode = disableSecureMode(contextInfo2);
+                    boolean zDisableSecureMode = disableSecureMode(contextInfo2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(disableSecureMode);
+                    parcel2.writeBoolean(zDisableSecureMode);
                     return true;
                 case 3:
                     ContextInfo contextInfo3 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
@@ -345,24 +341,24 @@ public interface IBluetoothSecureModePolicy extends IInterface {
                 case 4:
                     ContextInfo contextInfo4 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isSecureModeEnabled = isSecureModeEnabled(contextInfo4);
+                    boolean zIsSecureModeEnabled = isSecureModeEnabled(contextInfo4);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSecureModeEnabled);
+                    parcel2.writeBoolean(zIsSecureModeEnabled);
                     return true;
                 case 5:
                     ContextInfo contextInfo5 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    boolean readBoolean = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean enableDeviceWhiteList = enableDeviceWhiteList(contextInfo5, readBoolean);
+                    boolean zEnableDeviceWhiteList = enableDeviceWhiteList(contextInfo5, z);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(enableDeviceWhiteList);
+                    parcel2.writeBoolean(zEnableDeviceWhiteList);
                     return true;
                 case 6:
                     ContextInfo contextInfo6 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isDeviceWhiteListEnabled = isDeviceWhiteListEnabled(contextInfo6);
+                    boolean zIsDeviceWhiteListEnabled = isDeviceWhiteListEnabled(contextInfo6);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isDeviceWhiteListEnabled);
+                    parcel2.writeBoolean(zIsDeviceWhiteListEnabled);
                     return true;
                 case 7:
                     ContextInfo contextInfo7 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
@@ -373,19 +369,19 @@ public interface IBluetoothSecureModePolicy extends IInterface {
                     return true;
                 case 8:
                     ContextInfo contextInfo8 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    ArrayList createTypedArrayList2 = parcel.createTypedArrayList(BluetoothSecureModeWhitelistConfig.CREATOR);
+                    ArrayList arrayListCreateTypedArrayList2 = parcel.createTypedArrayList(BluetoothSecureModeWhitelistConfig.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean addBluetoothDevicesToWhiteList = addBluetoothDevicesToWhiteList(contextInfo8, createTypedArrayList2);
+                    boolean zAddBluetoothDevicesToWhiteList = addBluetoothDevicesToWhiteList(contextInfo8, arrayListCreateTypedArrayList2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(addBluetoothDevicesToWhiteList);
+                    parcel2.writeBoolean(zAddBluetoothDevicesToWhiteList);
                     return true;
                 case 9:
                     ContextInfo contextInfo9 = (ContextInfo) parcel.readTypedObject(ContextInfo.CREATOR);
-                    ArrayList createTypedArrayList3 = parcel.createTypedArrayList(BluetoothSecureModeWhitelistConfig.CREATOR);
+                    ArrayList arrayListCreateTypedArrayList3 = parcel.createTypedArrayList(BluetoothSecureModeWhitelistConfig.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean removeBluetoothDevicesFromWhiteList = removeBluetoothDevicesFromWhiteList(contextInfo9, createTypedArrayList3);
+                    boolean zRemoveBluetoothDevicesFromWhiteList = removeBluetoothDevicesFromWhiteList(contextInfo9, arrayListCreateTypedArrayList3);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(removeBluetoothDevicesFromWhiteList);
+                    parcel2.writeBoolean(zRemoveBluetoothDevicesFromWhiteList);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);

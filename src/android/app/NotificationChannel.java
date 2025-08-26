@@ -225,9 +225,9 @@ public final class NotificationChannel implements Parcelable {
         this.mBypassDnd = parcel.readByte() != 0;
         this.mLockscreenVisibility = parcel.readInt();
         if (parcel.readByte() != 0) {
-            Uri createFromParcel = Uri.CREATOR.createFromParcel(parcel);
-            this.mSound = createFromParcel;
-            this.mSound = Uri.parse(getTrimmedString(createFromParcel.toString()));
+            Uri uriCreateFromParcel = Uri.CREATOR.createFromParcel(parcel);
+            this.mSound = uriCreateFromParcel;
+            this.mSound = Uri.parse(getTrimmedString(uriCreateFromParcel.toString()));
         } else {
             this.mSound = null;
         }
@@ -254,10 +254,10 @@ public final class NotificationChannel implements Parcelable {
         this.mImportantConvo = parcel.readBoolean();
         this.mDeletedTime = parcel.readLong();
         this.mImportanceLockedDefaultApp = parcel.readBoolean();
-        long[] createLongArray = parcel.createLongArray();
-        this.mVibrationPattern = createLongArray;
-        if (createLongArray != null && createLongArray.length > 500) {
-            this.mVibrationPattern = Arrays.copyOf(createLongArray, 500);
+        long[] jArrCreateLongArray = parcel.createLongArray();
+        this.mVibrationPattern = jArrCreateLongArray;
+        if (jArrCreateLongArray != null && jArrCreateLongArray.length > 500) {
+            this.mVibrationPattern = Arrays.copyOf(jArrCreateLongArray, 500);
         }
         if (Flags.notifChannelEstimateEffectSize() && parcel.dataAvail() > 32768) {
             z = true;
@@ -419,9 +419,9 @@ public final class NotificationChannel implements Parcelable {
         if (vibrationEffect == null) {
             return null;
         }
-        VibrationEffect cropToLengthOrNull = vibrationEffect.cropToLengthOrNull(500);
-        if (cropToLengthOrNull != null) {
-            vibrationEffect = cropToLengthOrNull;
+        VibrationEffect vibrationEffectCropToLengthOrNull = vibrationEffect.cropToLengthOrNull(500);
+        if (vibrationEffectCropToLengthOrNull != null) {
+            vibrationEffect = vibrationEffectCropToLengthOrNull;
         }
         if (vibrationToString(vibrationEffect).length() > 32768) {
             return null;
@@ -430,7 +430,7 @@ public final class NotificationChannel implements Parcelable {
     }
 
     public void setId(String str) {
-        this.mId = str;
+        this.mId = getTrimmedString(str);
     }
 
     public void setGroup(String str) {
@@ -477,13 +477,13 @@ public final class NotificationChannel implements Parcelable {
         this.mVibrationEnabled = vibrationEffect != null;
         this.mVibrationEffect = vibrationEffect;
         if (Flags.notifChannelCropVibrationEffects() && vibrationEffect != null) {
-            long[] computeCreateWaveformOffOnTimingsOrNull = vibrationEffect.computeCreateWaveformOffOnTimingsOrNull();
-            if (computeCreateWaveformOffOnTimingsOrNull != null) {
-                if (computeCreateWaveformOffOnTimingsOrNull.length > 500) {
-                    setVibrationPattern(computeCreateWaveformOffOnTimingsOrNull);
+            long[] jArrComputeCreateWaveformOffOnTimingsOrNull = vibrationEffect.computeCreateWaveformOffOnTimingsOrNull();
+            if (jArrComputeCreateWaveformOffOnTimingsOrNull != null) {
+                if (jArrComputeCreateWaveformOffOnTimingsOrNull.length > 500) {
+                    setVibrationPattern(jArrComputeCreateWaveformOffOnTimingsOrNull);
                     return;
                 } else {
-                    this.mVibrationPattern = computeCreateWaveformOffOnTimingsOrNull;
+                    this.mVibrationPattern = jArrComputeCreateWaveformOffOnTimingsOrNull;
                     return;
                 }
             }
@@ -516,8 +516,8 @@ public final class NotificationChannel implements Parcelable {
     }
 
     public void setConversationId(String str, String str2) {
-        this.mParentId = str;
-        this.mConversationId = str2;
+        this.mParentId = getTrimmedString(str);
+        this.mConversationId = getTrimmedString(str2);
     }
 
     public String getId() {
@@ -674,33 +674,33 @@ public final class NotificationChannel implements Parcelable {
         this.mLastNotificationUpdateTimeMs = j;
     }
 
-    public void populateFromXmlForRestore(XmlPullParser xmlPullParser, boolean z, Context context) {
+    public void populateFromXmlForRestore(XmlPullParser xmlPullParser, boolean z, Context context) throws Throwable {
         populateFromXml(XmlUtils.makeTyped(xmlPullParser), true, z, context);
     }
 
     @SystemApi
-    public void populateFromXml(XmlPullParser xmlPullParser) {
+    public void populateFromXml(XmlPullParser xmlPullParser) throws Throwable {
         populateFromXml(XmlUtils.makeTyped(xmlPullParser), false, true, null);
     }
 
-    private void populateFromXml(TypedXmlPullParser typedXmlPullParser, boolean z, boolean z2, Context context) {
-        VibrationEffect safeVibrationEffect;
+    private void populateFromXml(TypedXmlPullParser typedXmlPullParser, boolean z, boolean z2, Context context) throws Throwable {
+        VibrationEffect vibrationEffectSafeVibrationEffect;
         Preconditions.checkArgument((z && context == null) ? false : true, "forRestore is true but got null context");
         setDescription(typedXmlPullParser.getAttributeValue(null, ATT_DESC));
         setBypassDnd(safeInt(typedXmlPullParser, "priority", 0) != 0);
         setLockscreenVisibility(safeInt(typedXmlPullParser, "visibility", -1000));
-        Uri safeUri = safeUri(typedXmlPullParser, "sound");
-        AudioAttributes safeAudioAttributes = safeAudioAttributes(typedXmlPullParser);
-        int usage = safeAudioAttributes.getUsage();
+        Uri uriSafeUri = safeUri(typedXmlPullParser, "sound");
+        AudioAttributes audioAttributesSafeAudioAttributes = safeAudioAttributes(typedXmlPullParser);
+        int usage = audioAttributesSafeAudioAttributes.getUsage();
         if (z) {
-            safeUri = restoreSoundUri(context, safeUri, z2, usage);
+            uriSafeUri = restoreSoundUri(context, uriSafeUri, z2, usage);
         }
-        setSound(safeUri, safeAudioAttributes);
+        setSound(uriSafeUri, audioAttributesSafeAudioAttributes);
         enableLights(safeBool(typedXmlPullParser, "lights", false));
         setLightColor(safeInt(typedXmlPullParser, ATT_LIGHT_COLOR, 0));
         setVibrationPattern(safeLongArray(typedXmlPullParser, "vibration", null));
-        if (Flags.notificationChannelVibrationEffectApi() && (safeVibrationEffect = safeVibrationEffect(typedXmlPullParser, ATT_VIBRATION_EFFECT)) != null) {
-            setVibrationEffect(safeVibrationEffect);
+        if (Flags.notificationChannelVibrationEffectApi() && (vibrationEffectSafeVibrationEffect = safeVibrationEffect(typedXmlPullParser, ATT_VIBRATION_EFFECT)) != null) {
+            setVibrationEffect(vibrationEffectSafeVibrationEffect);
         }
         enableVibration(safeBool(typedXmlPullParser, ATT_VIBRATION_ENABLED, false));
         setShowBadge(safeBool(typedXmlPullParser, ATT_SHOW_BADGE, false));
@@ -750,9 +750,9 @@ public final class NotificationChannel implements Parcelable {
         }
     }
 
-    public Uri restoreSoundUri(Context context, Uri uri, boolean z, int i) {
+    public Uri restoreSoundUri(Context context, Uri uri, boolean z, int i) throws Throwable {
         String volumeName;
-        Cursor query;
+        Cursor cursorQuery;
         if (uri == null || Uri.EMPTY.equals(uri)) {
             return null;
         }
@@ -768,40 +768,40 @@ public final class NotificationChannel implements Parcelable {
             return uri;
         }
         this.mSoundRestored = true;
-        Uri uncanonicalize = contentResolver.uncanonicalize(canonicalizedSoundUri);
-        if (uncanonicalize != null) {
-            return uncanonicalize;
+        Uri uriUncanonicalize = contentResolver.uncanonicalize(canonicalizedSoundUri);
+        if (uriUncanonicalize != null) {
+            return uriUncanonicalize;
         }
         try {
             volumeName = MediaStore.getVolumeName(canonicalizedSoundUri);
             String queryParameter = canonicalizedSoundUri.getQueryParameter("title");
             Bundle bundle = new Bundle();
             bundle.putString(ContentResolver.QUERY_ARG_SQL_SELECTION, "title='" + queryParameter + "'");
-            query = contentResolver.query(MediaStore.Audio.Media.getContentUri(volumeName), new String[]{"_id", "is_notification"}, bundle, null);
-            try {
-                try {
-                } finally {
-                    query.close();
-                }
-            } finally {
-            }
+            cursorQuery = contentResolver.query(MediaStore.Audio.Media.getContentUri(volumeName), new String[]{"_id", "is_notification"}, bundle, null);
         } catch (IllegalArgumentException e) {
             Slog.e("NotiChannel", "This is not MediaSore uri : " + canonicalizedSoundUri, e);
         }
-        if (query.moveToFirst()) {
-            Uri contentUri = MediaStore.Audio.Media.getContentUri(volumeName, query.getLong(0));
-            if (contentUri == null) {
-                this.mSoundMissingReason = 3;
+        try {
+            try {
+                if (cursorQuery.moveToFirst()) {
+                    Uri contentUri = MediaStore.Audio.Media.getContentUri(volumeName, cursorQuery.getLong(0));
+                    if (contentUri == null) {
+                        this.mSoundMissingReason = 3;
+                    }
+                    if (cursorQuery != null) {
+                    }
+                    return contentUri;
+                }
+                cursorQuery.close();
+                if (cursorQuery != null) {
+                }
+                this.mSoundMissingReason = 4;
+                return Settings.System.DEFAULT_NOTIFICATION_URI;
+            } finally {
             }
-            if (query != null) {
-            }
-            return contentUri;
+        } finally {
+            cursorQuery.close();
         }
-        query.close();
-        if (query != null) {
-        }
-        this.mSoundMissingReason = 4;
-        return Settings.System.DEFAULT_NOTIFICATION_URI;
     }
 
     @SystemApi
@@ -819,8 +819,8 @@ public final class NotificationChannel implements Parcelable {
             return null;
         }
         try {
-            Uri canonicalize = context.getContentResolver().canonicalize(sound);
-            return canonicalize == null ? Settings.System.DEFAULT_NOTIFICATION_URI : canonicalize;
+            Uri uriCanonicalize = context.getContentResolver().canonicalize(sound);
+            return uriCanonicalize == null ? Settings.System.DEFAULT_NOTIFICATION_URI : uriCanonicalize;
         } catch (SecurityException e) {
             Slog.e("NotiChannel", sound + " uri permission from App", e);
             return Settings.System.DEFAULT_NOTIFICATION_URI;
@@ -957,9 +957,9 @@ public final class NotificationChannel implements Parcelable {
     }
 
     private static AudioAttributes safeAudioAttributes(TypedXmlPullParser typedXmlPullParser) {
-        int safeInt = safeInt(typedXmlPullParser, ATT_USAGE, 5);
-        int safeInt2 = safeInt(typedXmlPullParser, ATT_CONTENT_TYPE, 4);
-        return new AudioAttributes.Builder().setUsage(safeInt).setContentType(safeInt2).setFlags(safeInt(typedXmlPullParser, "flags", 0)).build();
+        int iSafeInt = safeInt(typedXmlPullParser, ATT_USAGE, 5);
+        int iSafeInt2 = safeInt(typedXmlPullParser, ATT_CONTENT_TYPE, 4);
+        return new AudioAttributes.Builder().setUsage(iSafeInt).setContentType(iSafeInt2).setFlags(safeInt(typedXmlPullParser, "flags", 0)).build();
     }
 
     private static Uri safeUri(TypedXmlPullParser typedXmlPullParser, String str) {
@@ -1005,11 +1005,11 @@ public final class NotificationChannel implements Parcelable {
         if (TextUtils.isEmpty(attributeValue)) {
             return jArr;
         }
-        String[] split = attributeValue.split(",");
-        long[] jArr2 = new long[split.length];
-        for (int i = 0; i < split.length; i++) {
+        String[] strArrSplit = attributeValue.split(",");
+        long[] jArr2 = new long[strArrSplit.length];
+        for (int i = 0; i < strArrSplit.length; i++) {
             try {
-                jArr2[i] = Long.parseLong(split[i]);
+                jArr2[i] = Long.parseLong(strArrSplit[i]);
             } catch (NumberFormatException unused) {
                 jArr2[i] = 0;
             }
@@ -1157,7 +1157,7 @@ public final class NotificationChannel implements Parcelable {
     }
 
     public void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         protoOutputStream.write(1138166333441L, this.mId);
         protoOutputStream.write(1138166333442L, this.mName);
         protoOutputStream.write(1138166333443L, this.mDesc);
@@ -1188,6 +1188,6 @@ public final class NotificationChannel implements Parcelable {
         }
         protoOutputStream.write(1133871366161L, this.mBlockableSystem);
         protoOutputStream.write(1133871366163L, this.mAllowBubbles);
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 }

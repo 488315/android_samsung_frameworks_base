@@ -109,17 +109,17 @@ public class ImageUtils {
         }
         float f = intrinsicWidth;
         float f2 = intrinsicHeight;
-        float min = Math.min(i / f, i2 / f2);
+        float fMin = Math.min(i / f, i2 / f2);
         if (!z) {
-            min = Math.min(1.0f, min);
+            fMin = Math.min(1.0f, fMin);
         }
-        int i3 = (int) (f * min);
-        int i4 = (int) (min * f2);
-        Bitmap createBitmap = Bitmap.createBitmap(i3, i4, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(createBitmap);
+        int i3 = (int) (f * fMin);
+        int i4 = (int) (fMin * f2);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(i3, i4, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmapCreateBitmap);
         drawable.setBounds(0, 0, i3, i4);
         drawable.draw(canvas);
-        return createBitmap;
+        return bitmapCreateBitmap;
     }
 
     public static int calculateSampleSize(Size size, Size size2) {
@@ -136,31 +136,29 @@ public class ImageUtils {
     }
 
     public static Bitmap loadThumbnail(ContentResolver contentResolver, final Uri uri, final Size size) throws IOException {
-        final ContentProviderClient acquireContentProviderClient = contentResolver.acquireContentProviderClient(uri);
+        final ContentProviderClient contentProviderClientAcquireContentProviderClient = contentResolver.acquireContentProviderClient(uri);
         try {
             final Bundle bundle = new Bundle();
             bundle.putParcelable(ContentResolver.EXTRA_SIZE, new Point(size.getWidth(), size.getHeight()));
-            Bitmap decodeBitmap = ImageDecoder.decodeBitmap(ImageDecoder.createSource((Callable<AssetFileDescriptor>) new Callable() { // from class: com.android.internal.util.ImageUtils$$ExternalSyntheticLambda0
+            Bitmap bitmapDecodeBitmap = ImageDecoder.decodeBitmap(ImageDecoder.createSource((Callable<AssetFileDescriptor>) new Callable() { // from class: com.android.internal.util.ImageUtils$$ExternalSyntheticLambda0
                 @Override // java.util.concurrent.Callable
                 public final Object call() {
-                    AssetFileDescriptor openTypedAssetFile;
-                    openTypedAssetFile = ContentProviderClient.this.openTypedAssetFile(uri, ContentType.IMAGE_UNSPECIFIED, bundle, null);
-                    return openTypedAssetFile;
+                    return contentProviderClientAcquireContentProviderClient.openTypedAssetFile(uri, ContentType.IMAGE_UNSPECIFIED, bundle, null);
                 }
             }), new ImageDecoder.OnHeaderDecodedListener() { // from class: com.android.internal.util.ImageUtils$$ExternalSyntheticLambda1
                 @Override // android.graphics.ImageDecoder.OnHeaderDecodedListener
                 public final void onHeaderDecoded(ImageDecoder imageDecoder, ImageDecoder.ImageInfo imageInfo, ImageDecoder.Source source) {
-                    ImageUtils.lambda$loadThumbnail$1(Size.this, imageDecoder, imageInfo, source);
+                    ImageUtils.lambda$loadThumbnail$1(size, imageDecoder, imageInfo, source);
                 }
             });
-            if (acquireContentProviderClient != null) {
-                acquireContentProviderClient.close();
+            if (contentProviderClientAcquireContentProviderClient != null) {
+                contentProviderClientAcquireContentProviderClient.close();
             }
-            return decodeBitmap;
+            return bitmapDecodeBitmap;
         } catch (Throwable th) {
-            if (acquireContentProviderClient != null) {
+            if (contentProviderClientAcquireContentProviderClient != null) {
                 try {
-                    acquireContentProviderClient.close();
+                    contentProviderClientAcquireContentProviderClient.close();
                 } catch (Throwable th2) {
                     th.addSuppressed(th2);
                 }
@@ -171,9 +169,9 @@ public class ImageUtils {
 
     static /* synthetic */ void lambda$loadThumbnail$1(Size size, ImageDecoder imageDecoder, ImageDecoder.ImageInfo imageInfo, ImageDecoder.Source source) {
         imageDecoder.setAllocator(1);
-        int calculateSampleSize = calculateSampleSize(imageInfo.getSize(), size);
-        if (calculateSampleSize > 1) {
-            imageDecoder.setTargetSampleSize(calculateSampleSize);
+        int iCalculateSampleSize = calculateSampleSize(imageInfo.getSize(), size);
+        if (iCalculateSampleSize > 1) {
+            imageDecoder.setTargetSampleSize(iCalculateSampleSize);
         }
     }
 }

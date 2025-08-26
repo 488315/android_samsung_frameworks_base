@@ -45,9 +45,9 @@ public interface IAppOpsAsyncNotedCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IAppOpsAsyncNotedCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IAppOpsAsyncNotedCallback)) {
-                return (IAppOpsAsyncNotedCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IAppOpsAsyncNotedCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IAppOpsAsyncNotedCallback)) {
+                return (IAppOpsAsyncNotedCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -100,13 +100,13 @@ public interface IAppOpsAsyncNotedCallback extends IInterface {
 
             @Override // com.android.internal.app.IAppOpsAsyncNotedCallback
             public void opNoted(AsyncNotedAppOp asyncNotedAppOp) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IAppOpsAsyncNotedCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(asyncNotedAppOp, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IAppOpsAsyncNotedCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(asyncNotedAppOp, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

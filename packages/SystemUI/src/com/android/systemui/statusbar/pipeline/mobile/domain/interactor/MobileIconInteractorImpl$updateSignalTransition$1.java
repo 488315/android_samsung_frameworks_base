@@ -9,7 +9,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function4;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class MobileIconInteractorImpl$updateSignalTransition$1 extends SuspendLambda implements Function4 {
     /* synthetic */ int I$0;
@@ -26,13 +25,13 @@ final class MobileIconInteractorImpl$updateSignalTransition$1 extends SuspendLam
 
     @Override // kotlin.jvm.functions.Function4
     public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4) {
-        boolean booleanValue = ((Boolean) obj).booleanValue();
-        int intValue = ((Number) obj2).intValue();
-        int intValue2 = ((Number) obj3).intValue();
+        boolean zBooleanValue = ((Boolean) obj).booleanValue();
+        int iIntValue = ((Number) obj2).intValue();
+        int iIntValue2 = ((Number) obj3).intValue();
         MobileIconInteractorImpl$updateSignalTransition$1 mobileIconInteractorImpl$updateSignalTransition$1 = new MobileIconInteractorImpl$updateSignalTransition$1(this.this$0, (Continuation) obj4);
-        mobileIconInteractorImpl$updateSignalTransition$1.Z$0 = booleanValue;
-        mobileIconInteractorImpl$updateSignalTransition$1.I$0 = intValue;
-        mobileIconInteractorImpl$updateSignalTransition$1.I$1 = intValue2;
+        mobileIconInteractorImpl$updateSignalTransition$1.Z$0 = zBooleanValue;
+        mobileIconInteractorImpl$updateSignalTransition$1.I$0 = iIntValue;
+        mobileIconInteractorImpl$updateSignalTransition$1.I$1 = iIntValue2;
         return mobileIconInteractorImpl$updateSignalTransition$1.invokeSuspend(Unit.INSTANCE);
     }
 

@@ -21,7 +21,6 @@ import com.android.systemui.settings.UserTracker;
 import java.util.concurrent.Executor;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ControlsSettingActivity extends BaseActivity {
     public final BroadcastDispatcher broadcastDispatcher;
@@ -29,7 +28,6 @@ public final class ControlsSettingActivity extends BaseActivity {
     public final LayoutUtil layoutUtil;
     public final SALogger saLogger;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -79,11 +77,11 @@ public final class ControlsSettingActivity extends BaseActivity {
         super.onCreate(bundle);
         setContentView(R.layout.activity_controls_settings);
         Toolbar toolbar = (Toolbar) requireViewById(R.id.toolbar);
-        ColorStateList valueOf = ColorStateList.valueOf(toolbar.getResources().getColor(R.color.sec_control_primary_text, getTheme()));
-        toolbar.mTitleTextColor = valueOf;
+        ColorStateList colorStateListValueOf = ColorStateList.valueOf(toolbar.getResources().getColor(R.color.sec_control_primary_text, getTheme()));
+        toolbar.mTitleTextColor = colorStateListValueOf;
         AppCompatTextView appCompatTextView = toolbar.mTitleTextView;
         if (appCompatTextView != null) {
-            appCompatTextView.setTextColor(valueOf);
+            appCompatTextView.setTextColor(colorStateListValueOf);
         }
         setSupportActionBar(toolbar);
         ScrollView scrollView = (ScrollView) requireViewById(R.id.main_layout);

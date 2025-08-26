@@ -1,6 +1,7 @@
 package com.android.systemui.keyguard.ui.view.layout.sections;
 
 import android.content.Context;
+import android.content.res.Resources;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 import com.android.systemui.R;
@@ -19,7 +20,6 @@ import com.android.systemui.statusbar.ui.SystemBarUtilsState;
 import com.android.systemui.util.ui.AnimatedValue;
 import kotlin.NoWhenBranchMatchedException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class AodNotificationIconsSection extends KeyguardSection {
     public final Context context;
@@ -47,7 +47,7 @@ public final class AodNotificationIconsSection extends KeyguardSection {
     }
 
     @Override // com.android.systemui.keyguard.shared.model.KeyguardSection
-    public final void applyConstraints(ConstraintSet constraintSet) {
+    public final void applyConstraints(ConstraintSet constraintSet) throws Resources.NotFoundException {
         Object value;
         int dimensionPixelSize = this.context.getResources().getDimensionPixelSize(R.dimen.keyguard_status_view_bottom_margin);
         int dimensionPixelSize2 = this.context.getResources().getDimensionPixelSize(R$dimen.status_view_margin_horizontal);

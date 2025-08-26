@@ -17,13 +17,11 @@ import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class AnimHelper {
     public static final int $stable = 0;
     public static final AnimHelper INSTANCE = new AnimHelper();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AnimPairSet {
         public static final int $stable = 8;
         private final AnimProperty animProperty;
@@ -85,7 +83,6 @@ public final class AnimHelper {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AnimProperty {
         public static final int $stable = 8;
         private AnimationType animType;
@@ -218,7 +215,6 @@ public final class AnimHelper {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AnimationState {
         private static final /* synthetic */ EnumEntries $ENTRIES;
         private static final /* synthetic */ AnimationState[] $VALUES;
@@ -231,9 +227,9 @@ public final class AnimHelper {
         }
 
         static {
-            AnimationState[] $values = $values();
-            $VALUES = $values;
-            $ENTRIES = EnumEntriesKt.enumEntries($values);
+            AnimationState[] animationStateArr$values = $values();
+            $VALUES = animationStateArr$values;
+            $ENTRIES = EnumEntriesKt.enumEntries(animationStateArr$values);
         }
 
         private AnimationState(String str, int i) {
@@ -254,7 +250,6 @@ public final class AnimHelper {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AnimationType {
         private static final /* synthetic */ EnumEntries $ENTRIES;
         private static final /* synthetic */ AnimationType[] $VALUES;
@@ -266,9 +261,9 @@ public final class AnimHelper {
         }
 
         static {
-            AnimationType[] $values = $values();
-            $VALUES = $values;
-            $ENTRIES = EnumEntriesKt.enumEntries($values);
+            AnimationType[] animationTypeArr$values = $values();
+            $VALUES = animationTypeArr$values;
+            $ENTRIES = EnumEntriesKt.enumEntries(animationTypeArr$values);
         }
 
         private AnimationType(String str, int i) {
@@ -287,7 +282,6 @@ public final class AnimHelper {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -319,20 +313,20 @@ public final class AnimHelper {
         if (animProperty == null) {
             return null;
         }
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(animProperty.getFromValue(), animProperty.getToValue());
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(animProperty.getFromValue(), animProperty.getToValue());
         if (view == null) {
-            return ofFloat;
+            return valueAnimatorOfFloat;
         }
-        ofFloat.setDuration(animProperty.getDuration());
-        ofFloat.setStartDelay(animProperty.getStartDelay());
-        ofFloat.setInterpolator(animProperty.getInterpolator());
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.util.AnimHelper$makeAnimator$1$1$1
+        valueAnimatorOfFloat.setDuration(animProperty.getDuration());
+        valueAnimatorOfFloat.setStartDelay(animProperty.getStartDelay());
+        valueAnimatorOfFloat.setInterpolator(animProperty.getInterpolator());
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.util.AnimHelper$makeAnimator$1$1$1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                 AnimHelper.INSTANCE.updateProperty(view, ((Float) valueAnimator.getAnimatedValue()).floatValue(), animProperty.getAnimType());
             }
         });
-        return ofFloat;
+        return valueAnimatorOfFloat;
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -358,9 +352,9 @@ public final class AnimHelper {
 
     public final AnimatorSet makeAnimSet(AnimPairSet[] animPairSetArr, ArrayList<Animator> arrayList, BaseAnimatorListener baseAnimatorListener) {
         for (AnimPairSet animPairSet : animPairSetArr) {
-            Animator makeAnimator = INSTANCE.makeAnimator(animPairSet.getView(), animPairSet.getAnimProperty());
-            if (makeAnimator != null) {
-                arrayList.add(makeAnimator);
+            Animator animatorMakeAnimator = INSTANCE.makeAnimator(animPairSet.getView(), animPairSet.getAnimProperty());
+            if (animatorMakeAnimator != null) {
+                arrayList.add(animatorMakeAnimator);
             }
         }
         AnimatorSet animatorSet = new AnimatorSet();
@@ -371,7 +365,6 @@ public final class AnimHelper {
         return animatorSet;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class BaseAnimatorListener implements Animator.AnimatorListener {
         public static final int $stable = 8;
         private final boolean debug;

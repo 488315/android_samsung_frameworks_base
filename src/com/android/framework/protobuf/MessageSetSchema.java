@@ -1,6 +1,8 @@
 package com.android.framework.protobuf;
 
+import com.android.framework.protobuf.ArrayDecoders;
 import com.android.framework.protobuf.FieldSet;
+import com.android.framework.protobuf.GeneratedMessageLite;
 import com.android.framework.protobuf.LazyField;
 import com.android.framework.protobuf.WireFormat;
 import java.io.IOException;
@@ -48,8 +50,8 @@ final class MessageSetSchema<T> implements Schema<T> {
 
     @Override // com.android.framework.protobuf.Schema
     public int hashCode(T t) {
-        int hashCode = this.unknownFieldSchema.getFromMessage(t).hashCode();
-        return this.hasExtensions ? (hashCode * 53) + this.extensionSchema.getExtensions(t).hashCode() : hashCode;
+        int iHashCode = this.unknownFieldSchema.getFromMessage(t).hashCode();
+        return this.hasExtensions ? (iHashCode * 53) + this.extensionSchema.getExtensions(t).hashCode() : iHashCode;
     }
 
     @Override // com.android.framework.protobuf.Schema
@@ -62,17 +64,17 @@ final class MessageSetSchema<T> implements Schema<T> {
 
     @Override // com.android.framework.protobuf.Schema
     public void writeTo(T t, Writer writer) throws IOException {
-        Iterator<Map.Entry<?, Object>> it = this.extensionSchema.getExtensions(t).iterator();
+        Iterator it = this.extensionSchema.getExtensions(t).iterator();
         while (it.hasNext()) {
-            Map.Entry<?, Object> next = it.next();
-            FieldSet.FieldDescriptorLite fieldDescriptorLite = (FieldSet.FieldDescriptorLite) next.getKey();
+            Map.Entry entry = (Map.Entry) it.next();
+            FieldSet.FieldDescriptorLite fieldDescriptorLite = (FieldSet.FieldDescriptorLite) entry.getKey();
             if (fieldDescriptorLite.getLiteJavaType() != WireFormat.JavaType.MESSAGE || fieldDescriptorLite.isRepeated() || fieldDescriptorLite.isPacked()) {
                 throw new IllegalStateException("Found invalid MessageSet item.");
             }
-            if (next instanceof LazyField.LazyEntry) {
-                writer.writeMessageSetItem(fieldDescriptorLite.getNumber(), ((LazyField.LazyEntry) next).getField().toByteString());
+            if (entry instanceof LazyField.LazyEntry) {
+                writer.writeMessageSetItem(fieldDescriptorLite.getNumber(), ((LazyField.LazyEntry) entry).getField().toByteString());
             } else {
-                writer.writeMessageSetItem(fieldDescriptorLite.getNumber(), next.getValue());
+                writer.writeMessageSetItem(fieldDescriptorLite.getNumber(), entry.getValue());
             }
         }
         writeUnknownFieldsHelper(this.unknownFieldSchema, t, writer);
@@ -83,60 +85,121 @@ final class MessageSetSchema<T> implements Schema<T> {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x00c9  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x00cf A[EDGE_INSN: B:24:0x00cf->B:25:0x00cf BREAK  A[LOOP:1: B:10:0x006f->B:18:0x006f], SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:32:0x00c9  */
+    /* JADX WARN: Removed duplicated region for block: B:62:0x00cf A[EDGE_INSN: B:62:0x00cf->B:34:0x00cf BREAK  A[LOOP:1: B:17:0x006f->B:65:0x006f], SYNTHETIC] */
     @Override // com.android.framework.protobuf.Schema
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void mergeFrom(T r11, byte[] r12, int r13, int r14, com.android.framework.protobuf.ArrayDecoders.Registers r15) throws java.io.IOException {
-        /*
-            Method dump skipped, instructions count: 230
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.framework.protobuf.MessageSetSchema.mergeFrom(java.lang.Object, byte[], int, int, com.android.framework.protobuf.ArrayDecoders$Registers):void");
+    public void mergeFrom(T t, byte[] bArr, int i, int i2, ArrayDecoders.Registers registers) throws IOException {
+        int iDecodeVarint32;
+        GeneratedMessageLite generatedMessageLite = (GeneratedMessageLite) t;
+        UnknownFieldSetLite unknownFieldSetLiteNewInstance = generatedMessageLite.unknownFields;
+        if (unknownFieldSetLiteNewInstance == UnknownFieldSetLite.getDefaultInstance()) {
+            unknownFieldSetLiteNewInstance = UnknownFieldSetLite.newInstance();
+            generatedMessageLite.unknownFields = unknownFieldSetLiteNewInstance;
+        }
+        UnknownFieldSetLite unknownFieldSetLite = unknownFieldSetLiteNewInstance;
+        FieldSet<GeneratedMessageLite.ExtensionDescriptor> fieldSetEnsureExtensionsAreMutable = ((GeneratedMessageLite.ExtendableMessage) t).ensureExtensionsAreMutable();
+        GeneratedMessageLite.GeneratedExtension generatedExtension = null;
+        while (i < i2) {
+            int iDecodeVarint322 = ArrayDecoders.decodeVarint32(bArr, i, registers);
+            int i3 = registers.int1;
+            if (i3 == WireFormat.MESSAGE_SET_ITEM_TAG) {
+                int i4 = i2;
+                ArrayDecoders.Registers registers2 = registers;
+                int i5 = 0;
+                ByteString byteString = null;
+                while (true) {
+                    if (iDecodeVarint322 >= i4) {
+                        iDecodeVarint32 = iDecodeVarint322;
+                        break;
+                    }
+                    iDecodeVarint32 = ArrayDecoders.decodeVarint32(bArr, iDecodeVarint322, registers2);
+                    int i6 = registers2.int1;
+                    int tagFieldNumber = WireFormat.getTagFieldNumber(i6);
+                    int tagWireType = WireFormat.getTagWireType(i6);
+                    if (tagFieldNumber != 2) {
+                        if (tagFieldNumber == 3) {
+                            if (generatedExtension != null) {
+                                iDecodeVarint322 = ArrayDecoders.decodeMessageField(Protobuf.getInstance().schemaFor((Class) generatedExtension.getMessageDefaultInstance().getClass()), bArr, iDecodeVarint32, i4, registers2);
+                                fieldSetEnsureExtensionsAreMutable.setField(generatedExtension.descriptor, registers2.object1);
+                            } else if (tagWireType == 2) {
+                                iDecodeVarint322 = ArrayDecoders.decodeBytes(bArr, iDecodeVarint32, registers2);
+                                byteString = (ByteString) registers2.object1;
+                            }
+                        }
+                        if (i6 != WireFormat.MESSAGE_SET_ITEM_END_TAG) {
+                            break;
+                        } else {
+                            iDecodeVarint322 = ArrayDecoders.skipField(i6, bArr, iDecodeVarint32, i4, registers2);
+                        }
+                    } else if (tagWireType == 0) {
+                        iDecodeVarint322 = ArrayDecoders.decodeVarint32(bArr, iDecodeVarint32, registers2);
+                        i5 = registers2.int1;
+                        generatedExtension = (GeneratedMessageLite.GeneratedExtension) this.extensionSchema.findExtensionByNumber(registers2.extensionRegistry, this.defaultInstance, i5);
+                    } else if (i6 != WireFormat.MESSAGE_SET_ITEM_END_TAG) {
+                    }
+                }
+                if (byteString != null) {
+                    unknownFieldSetLite.storeField(WireFormat.makeTag(i5, 2), byteString);
+                }
+                i = iDecodeVarint32;
+                i2 = i4;
+                registers = registers2;
+            } else if (WireFormat.getTagWireType(i3) == 2) {
+                generatedExtension = (GeneratedMessageLite.GeneratedExtension) this.extensionSchema.findExtensionByNumber(registers.extensionRegistry, this.defaultInstance, WireFormat.getTagFieldNumber(i3));
+                if (generatedExtension != null) {
+                    i = ArrayDecoders.decodeMessageField(Protobuf.getInstance().schemaFor((Class) generatedExtension.getMessageDefaultInstance().getClass()), bArr, iDecodeVarint322, i2, registers);
+                    fieldSetEnsureExtensionsAreMutable.setField(generatedExtension.descriptor, registers.object1);
+                } else {
+                    i = ArrayDecoders.decodeUnknownField(i3, bArr, iDecodeVarint322, i2, unknownFieldSetLite, registers);
+                }
+            } else {
+                i = ArrayDecoders.skipField(i3, bArr, iDecodeVarint322, i2, registers);
+            }
+        }
+        if (i != i2) {
+            throw InvalidProtocolBufferException.parseFailure();
+        }
     }
 
     @Override // com.android.framework.protobuf.Schema
-    public void mergeFrom(T t, Reader reader, ExtensionRegistryLite extensionRegistryLite) throws IOException {
+    public void mergeFrom(T t, Reader reader, ExtensionRegistryLite extensionRegistryLite) throws Throwable {
         mergeFromHelper(this.unknownFieldSchema, this.extensionSchema, t, reader, extensionRegistryLite);
     }
 
-    private <UT, UB, ET extends FieldSet.FieldDescriptorLite<ET>> void mergeFromHelper(UnknownFieldSchema<UT, UB> unknownFieldSchema, ExtensionSchema<ET> extensionSchema, T t, Reader reader, ExtensionRegistryLite extensionRegistryLite) throws IOException {
+    /* JADX WARN: Multi-variable type inference failed */
+    private <UT, UB, ET extends FieldSet.FieldDescriptorLite<ET>> void mergeFromHelper(UnknownFieldSchema<UT, UB> unknownFieldSchema, ExtensionSchema<ET> extensionSchema, T t, Reader reader, ExtensionRegistryLite extensionRegistryLite) throws Throwable {
         UnknownFieldSchema<UT, UB> unknownFieldSchema2;
-        MessageSetSchema<T> messageSetSchema;
-        ExtensionSchema<ET> extensionSchema2;
-        Reader reader2;
-        ExtensionRegistryLite extensionRegistryLite2;
         UB builderFromMessage = unknownFieldSchema.getBuilderFromMessage(t);
-        FieldSet<ET> mutableExtensions = extensionSchema.getMutableExtensions(t);
+        Object mutableExtensions = extensionSchema.getMutableExtensions(t);
         while (reader.getFieldNumber() != Integer.MAX_VALUE) {
             try {
-                messageSetSchema = this;
+                MessageSetSchema messageSetSchema = this;
                 unknownFieldSchema2 = unknownFieldSchema;
-                extensionSchema2 = extensionSchema;
-                reader2 = reader;
-                extensionRegistryLite2 = extensionRegistryLite;
-            } catch (Throwable th) {
-                th = th;
-                unknownFieldSchema2 = unknownFieldSchema;
-            }
-            try {
-                if (!messageSetSchema.parseMessageSetItemOrUnknownField(reader2, extensionRegistryLite2, extensionSchema2, mutableExtensions, unknownFieldSchema2, builderFromMessage)) {
+                ExtensionSchema<ET> extensionSchema2 = extensionSchema;
+                Reader reader2 = reader;
+                ExtensionRegistryLite extensionRegistryLite2 = extensionRegistryLite;
+                try {
+                    if (!messageSetSchema.parseMessageSetItemOrUnknownField(reader2, extensionRegistryLite2, extensionSchema2, mutableExtensions, unknownFieldSchema2, builderFromMessage)) {
+                        unknownFieldSchema2.setBuilderToMessage(t, builderFromMessage);
+                        return;
+                    }
+                    this = messageSetSchema;
+                    reader = reader2;
+                    extensionRegistryLite = extensionRegistryLite2;
+                    extensionSchema = extensionSchema2;
+                    unknownFieldSchema = unknownFieldSchema2;
+                } catch (Throwable th) {
+                    th = th;
+                    Throwable th2 = th;
                     unknownFieldSchema2.setBuilderToMessage(t, builderFromMessage);
-                    return;
+                    throw th2;
                 }
-                this = messageSetSchema;
-                reader = reader2;
-                extensionRegistryLite = extensionRegistryLite2;
-                extensionSchema = extensionSchema2;
-                unknownFieldSchema = unknownFieldSchema2;
-            } catch (Throwable th2) {
-                th = th2;
-                Throwable th3 = th;
-                unknownFieldSchema2.setBuilderToMessage(t, builderFromMessage);
-                throw th3;
+            } catch (Throwable th3) {
+                th = th3;
+                unknownFieldSchema2 = unknownFieldSchema;
             }
         }
         unknownFieldSchema.setBuilderToMessage(t, builderFromMessage);
@@ -148,32 +211,33 @@ final class MessageSetSchema<T> implements Schema<T> {
         this.extensionSchema.makeImmutable(t);
     }
 
+    /* JADX WARN: Multi-variable type inference failed */
     private <UT, UB, ET extends FieldSet.FieldDescriptorLite<ET>> boolean parseMessageSetItemOrUnknownField(Reader reader, ExtensionRegistryLite extensionRegistryLite, ExtensionSchema<ET> extensionSchema, FieldSet<ET> fieldSet, UnknownFieldSchema<UT, UB> unknownFieldSchema, UB ub) throws IOException {
         int tag = reader.getTag();
         if (tag != WireFormat.MESSAGE_SET_ITEM_TAG) {
             if (WireFormat.getTagWireType(tag) == 2) {
-                Object findExtensionByNumber = extensionSchema.findExtensionByNumber(extensionRegistryLite, this.defaultInstance, WireFormat.getTagFieldNumber(tag));
-                if (findExtensionByNumber != null) {
-                    extensionSchema.parseLengthPrefixedMessageSetItem(reader, findExtensionByNumber, extensionRegistryLite, fieldSet);
+                Object objFindExtensionByNumber = extensionSchema.findExtensionByNumber(extensionRegistryLite, this.defaultInstance, WireFormat.getTagFieldNumber(tag));
+                if (objFindExtensionByNumber != null) {
+                    extensionSchema.parseLengthPrefixedMessageSetItem(reader, objFindExtensionByNumber, extensionRegistryLite, fieldSet);
                     return true;
                 }
                 return unknownFieldSchema.mergeOneFieldFrom(ub, reader);
             }
             return reader.skipField();
         }
-        Object obj = null;
-        int i = 0;
-        ByteString byteString = null;
+        Object objFindExtensionByNumber2 = null;
+        int uInt32 = 0;
+        ByteString bytes = null;
         while (reader.getFieldNumber() != Integer.MAX_VALUE) {
             int tag2 = reader.getTag();
             if (tag2 == WireFormat.MESSAGE_SET_TYPE_ID_TAG) {
-                i = reader.readUInt32();
-                obj = extensionSchema.findExtensionByNumber(extensionRegistryLite, this.defaultInstance, i);
+                uInt32 = reader.readUInt32();
+                objFindExtensionByNumber2 = extensionSchema.findExtensionByNumber(extensionRegistryLite, this.defaultInstance, uInt32);
             } else if (tag2 == WireFormat.MESSAGE_SET_MESSAGE_TAG) {
-                if (obj != null) {
-                    extensionSchema.parseLengthPrefixedMessageSetItem(reader, obj, extensionRegistryLite, fieldSet);
+                if (objFindExtensionByNumber2 != null) {
+                    extensionSchema.parseLengthPrefixedMessageSetItem(reader, objFindExtensionByNumber2, extensionRegistryLite, fieldSet);
                 } else {
-                    byteString = reader.readBytes();
+                    bytes = reader.readBytes();
                 }
             } else if (!reader.skipField()) {
                 break;
@@ -182,11 +246,11 @@ final class MessageSetSchema<T> implements Schema<T> {
         if (reader.getTag() != WireFormat.MESSAGE_SET_ITEM_END_TAG) {
             throw InvalidProtocolBufferException.invalidEndTag();
         }
-        if (byteString != null) {
-            if (obj != null) {
-                extensionSchema.parseMessageSetItem(byteString, obj, extensionRegistryLite, fieldSet);
+        if (bytes != null) {
+            if (objFindExtensionByNumber2 != null) {
+                extensionSchema.parseMessageSetItem(bytes, objFindExtensionByNumber2, extensionRegistryLite, fieldSet);
             } else {
-                unknownFieldSchema.addLengthDelimited(ub, i, byteString);
+                unknownFieldSchema.addLengthDelimited(ub, uInt32, bytes);
             }
         }
         return true;

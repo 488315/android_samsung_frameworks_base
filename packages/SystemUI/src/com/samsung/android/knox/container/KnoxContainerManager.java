@@ -51,7 +51,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class KnoxContainerManager {
     public static final String ACTION_CONTAINER_ADMIN_LOCK = "com.samsung.android.knox.intent.action.CONTAINER_ADMIN_LOCK";
@@ -199,7 +198,6 @@ public class KnoxContainerManager {
     public volatile boolean mEnterpriseBillingPolicyCreated = false;
     public boolean mNAPCreated = false;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum ConfigType {
         LIGHTWEIGHT("lightweight"),
         KIOSK("kiosk"),
@@ -281,7 +279,7 @@ public class KnoxContainerManager {
 
     public static int createContainerForMigration(ContextInfo contextInfo, String str) {
         IKnoxContainerManager containerService = getContainerService();
-        int i = ERROR_INTERNAL_ERROR;
+        int iCreateContainer = ERROR_INTERNAL_ERROR;
         if (containerService == null) {
             Log.e(TAG, "KnoxMUMContainerPolicy Service is not yet ready!!!");
             return ERROR_INTERNAL_ERROR;
@@ -289,11 +287,11 @@ public class KnoxContainerManager {
         CreationParams creationParams = new CreationParams();
         creationParams.setConfigurationName(str);
         try {
-            i = containerService.createContainer(contextInfo, creationParams, 326);
-            return processCreateReturn(i);
+            iCreateContainer = containerService.createContainer(contextInfo, creationParams, 326);
+            return processCreateReturn(iCreateContainer);
         } catch (RemoteException e) {
             KnoxContainerManager$$ExternalSyntheticOutline0.m(e, new StringBuilder("Failed at KnoxContainerManager API createContainerForMigration "), TAG);
-            return i;
+            return iCreateContainer;
         }
     }
 
@@ -378,18 +376,14 @@ public class KnoxContainerManager {
     }
 
     public static synchronized IKnoxContainerManager getContainerService() {
-        IKnoxContainerManager iKnoxContainerManager;
-        synchronized (KnoxContainerManager.class) {
-            try {
-                if (mContainerService == null) {
-                    mContainerService = IKnoxContainerManager.Stub.asInterface(ServiceManager.getService("mum_container_policy"));
-                }
-                iKnoxContainerManager = mContainerService;
-            } catch (Throwable th) {
-                throw th;
+        try {
+            if (mContainerService == null) {
+                mContainerService = IKnoxContainerManager.Stub.asInterface(ServiceManager.getService("mum_container_policy"));
             }
+        } catch (Throwable th) {
+            throw th;
         }
-        return iKnoxContainerManager;
+        return mContainerService;
     }
 
     public static List<Integer> getContainers() {
@@ -481,20 +475,20 @@ public class KnoxContainerManager {
         }
         sb.append(z);
         Log.d(TAG, sb.toString());
-        String str = null;
-        String copyFileToDataLocalDirectory = (knoxConfigurationType.getCustomBadgeIcon() == null || knoxConfigurationType.getCustomBadgeIcon().equals("")) ? null : LSOUtils.copyFileToDataLocalDirectory(context, knoxConfigurationType.getCustomBadgeIcon(), "icon");
-        String copyFileToDataLocalDirectory2 = (knoxConfigurationType.getCustomStatusIcon() == null || knoxConfigurationType.getCustomStatusIcon().equals("")) ? null : LSOUtils.copyFileToDataLocalDirectory(context, knoxConfigurationType.getCustomStatusIcon(), "icon");
-        knoxConfigurationType.setCustomBadgeIcon(copyFileToDataLocalDirectory);
-        knoxConfigurationType.setCustomStatusIcon(copyFileToDataLocalDirectory2);
+        String strCopyFileToDataLocalDirectory = null;
+        String strCopyFileToDataLocalDirectory2 = (knoxConfigurationType.getCustomBadgeIcon() == null || knoxConfigurationType.getCustomBadgeIcon().equals("")) ? null : LSOUtils.copyFileToDataLocalDirectory(context, knoxConfigurationType.getCustomBadgeIcon(), "icon");
+        String strCopyFileToDataLocalDirectory3 = (knoxConfigurationType.getCustomStatusIcon() == null || knoxConfigurationType.getCustomStatusIcon().equals("")) ? null : LSOUtils.copyFileToDataLocalDirectory(context, knoxConfigurationType.getCustomStatusIcon(), "icon");
+        knoxConfigurationType.setCustomBadgeIcon(strCopyFileToDataLocalDirectory2);
+        knoxConfigurationType.setCustomStatusIcon(strCopyFileToDataLocalDirectory3);
         if (knoxConfigurationType instanceof LightweightConfigurationType) {
             LightweightConfigurationType lightweightConfigurationType = (LightweightConfigurationType) knoxConfigurationType;
             String folderHeaderIcon = lightweightConfigurationType.getFolderHeaderIcon();
             MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("folder header icon: ", folderHeaderIcon, TAG);
             if (folderHeaderIcon != null && !folderHeaderIcon.isEmpty()) {
-                str = LSOUtils.copyFileToDataLocalDirectory(context, folderHeaderIcon, "icon");
+                strCopyFileToDataLocalDirectory = LSOUtils.copyFileToDataLocalDirectory(context, folderHeaderIcon, "icon");
             }
-            Log.d(TAG, "folder header icon after copy: " + str);
-            lightweightConfigurationType.setFolderHeaderIcon(str);
+            Log.d(TAG, "folder header icon after copy: " + strCopyFileToDataLocalDirectory);
+            lightweightConfigurationType.setFolderHeaderIcon(strCopyFileToDataLocalDirectory);
         }
         Log.d(TAG, "Images after copy:" + knoxConfigurationType.getCustomBadgeIcon() + " " + knoxConfigurationType.getCustomHomeScreenWallpaper() + " " + knoxConfigurationType.getCustomLockScreenWallpaper() + " " + knoxConfigurationType.getCustomStatusIcon());
     }
@@ -589,15 +583,15 @@ public class KnoxContainerManager {
         }
     }
 
-    public final boolean checkContainerType(int i, int i2) {
+    public final boolean checkContainerType(int i, int i2) throws NumberFormatException {
         String str = SystemProperties.get("persist.sys.knox.userinfo");
         if (str != null && str.length() > 0) {
             for (String str2 : str.split(":")) {
-                String[] split = str2.split(",");
-                if (split != null && split.length == 2) {
-                    int parseInt = Integer.parseInt(split[0]);
-                    int parseInt2 = Integer.parseInt(split[1]);
-                    if (parseInt == i && (parseInt2 & i2) > 0) {
+                String[] strArrSplit = str2.split(",");
+                if (strArrSplit != null && strArrSplit.length == 2) {
+                    int i3 = Integer.parseInt(strArrSplit[0]);
+                    int i4 = Integer.parseInt(strArrSplit[1]);
+                    if (i3 == i && (i4 & i2) > 0) {
                         return true;
                     }
                 }
@@ -607,7 +601,7 @@ public class KnoxContainerManager {
     }
 
     public void enforceMultifactorAuthentication(boolean z) {
-        boolean z2;
+        boolean zEnforceMultifactorAuthentication;
         EnterpriseLicenseManager.log(this.mContextInfo, "KnoxContainerManager.enforceMultifactorAuthentication");
         IKnoxContainerManager containerService = getContainerService();
         if (containerService == null) {
@@ -615,12 +609,12 @@ public class KnoxContainerManager {
             return;
         }
         try {
-            z2 = containerService.enforceMultifactorAuthentication(this.mContextInfo, z);
+            zEnforceMultifactorAuthentication = containerService.enforceMultifactorAuthentication(this.mContextInfo, z);
         } catch (RemoteException e) {
             Log.w(TAG, "Failed at KnoxContainerManager API unlock ", e);
-            z2 = false;
+            zEnforceMultifactorAuthentication = false;
         }
-        AODAmbientWallpaperHelper$initAODAmbientWallpaperHelper$1$$ExternalSyntheticOutline0.m("enforceMultifactorAuthentication result = ", TAG, z2);
+        AODAmbientWallpaperHelper$initAODAmbientWallpaperHelper$1$$ExternalSyntheticOutline0.m("enforceMultifactorAuthentication result = ", TAG, zEnforceMultifactorAuthentication);
     }
 
     public APMPolicy getAPMPolicy() {
@@ -1272,41 +1266,41 @@ public class KnoxContainerManager {
     }
 
     public static KnoxConfigurationType getConfigurationType(ContextInfo contextInfo, int i) {
-        List list;
+        List configurationType;
         IKnoxContainerManager containerService = getContainerService();
         if (containerService == null) {
             Log.e(TAG, "KnoxMUMContainerPolicy Service is not yet ready!!!");
             return null;
         }
         try {
-            list = containerService.getConfigurationType(contextInfo, i);
+            configurationType = containerService.getConfigurationType(contextInfo, i);
         } catch (RemoteException e) {
             KnoxContainerManager$$ExternalSyntheticOutline0.m(e, new StringBuilder("Failed at KnoxContainerManager API getConfigurationType by id:"), TAG);
-            list = null;
+            configurationType = null;
         }
-        if (list == null || list.isEmpty()) {
+        if (configurationType == null || configurationType.isEmpty()) {
             return null;
         }
-        return (KnoxConfigurationType) list.get(0);
+        return (KnoxConfigurationType) configurationType.get(0);
     }
 
     public static KnoxConfigurationType getConfigurationTypeByName(ContextInfo contextInfo, String str) {
-        List list;
+        List configurationTypeByName;
         IKnoxContainerManager containerService = getContainerService();
         if (containerService == null) {
             Log.e(TAG, "KnoxMUMContainerPolicy Service is not yet ready!!!");
             return null;
         }
         try {
-            list = containerService.getConfigurationTypeByName(contextInfo, str);
+            configurationTypeByName = containerService.getConfigurationTypeByName(contextInfo, str);
         } catch (RemoteException e) {
             KnoxContainerManager$$ExternalSyntheticOutline0.m(e, ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("Failed at KnoxContainerManager API getContainer(", str, ") :"), TAG);
-            list = null;
+            configurationTypeByName = null;
         }
-        if (list == null || list.isEmpty()) {
+        if (configurationTypeByName == null || configurationTypeByName.isEmpty()) {
             return null;
         }
-        return (KnoxConfigurationType) list.get(0);
+        return (KnoxConfigurationType) configurationTypeByName.get(0);
     }
 
     public static List<KnoxConfigurationType> getConfigurationTypes(ContextInfo contextInfo) {
@@ -1365,7 +1359,7 @@ public class KnoxContainerManager {
 
     public static int createContainer(ContextInfo contextInfo, String str, String str2) {
         IKnoxContainerManager containerService = getContainerService();
-        int i = ERROR_INTERNAL_ERROR;
+        int iCreateContainer = ERROR_INTERNAL_ERROR;
         if (containerService == null) {
             Log.e(TAG, "KnoxMUMContainerPolicy Service is not yet ready!!!");
             return ERROR_INTERNAL_ERROR;
@@ -1374,11 +1368,11 @@ public class KnoxContainerManager {
         creationParams.setConfigurationName(str);
         creationParams.setAdminPackageName(str2);
         try {
-            i = containerService.createContainer(contextInfo, creationParams, str.equals("secure-folder") ? 8238 : 46);
-            return processCreateReturn(i);
+            iCreateContainer = containerService.createContainer(contextInfo, creationParams, str.equals("secure-folder") ? 8238 : 46);
+            return processCreateReturn(iCreateContainer);
         } catch (RemoteException e) {
             KnoxContainerManager$$ExternalSyntheticOutline0.m(e, new StringBuilder("Failed at KnoxContainerManager API createContainer "), TAG);
-            return i;
+            return iCreateContainer;
         }
     }
 
@@ -1432,7 +1426,7 @@ public class KnoxContainerManager {
 
     public static int createContainerForMigration(ContextInfo contextInfo, String str, Uri uri) {
         IKnoxContainerManager containerService = getContainerService();
-        int i = ERROR_INTERNAL_ERROR;
+        int iCreateContainer = ERROR_INTERNAL_ERROR;
         if (containerService == null) {
             Log.e(TAG, "KnoxMUMContainerPolicy Service is not yet ready!!!");
             return ERROR_INTERNAL_ERROR;
@@ -1441,11 +1435,11 @@ public class KnoxContainerManager {
         creationParams.setConfigurationName(str);
         creationParams.setAdminPackageName(uri.toString());
         try {
-            i = containerService.createContainer(contextInfo, creationParams, IKnoxCustomManager.Stub.TRANSACTION_stopProKioskMode);
-            return processCreateReturn(i);
+            iCreateContainer = containerService.createContainer(contextInfo, creationParams, IKnoxCustomManager.Stub.TRANSACTION_stopProKioskMode);
+            return processCreateReturn(iCreateContainer);
         } catch (RemoteException e) {
             KnoxContainerManager$$ExternalSyntheticOutline0.m(e, new StringBuilder("Failed at KnoxContainerManager API createContainerForMigration "), TAG);
-            return i;
+            return iCreateContainer;
         }
     }
 
@@ -1456,7 +1450,7 @@ public class KnoxContainerManager {
 
     public static int createContainer(ContextInfo contextInfo, CreationParams creationParams) {
         IKnoxContainerManager containerService = getContainerService();
-        int i = ERROR_INTERNAL_ERROR;
+        int iCreateContainer = ERROR_INTERNAL_ERROR;
         if (containerService == null) {
             Log.e(TAG, "KnoxMUMContainerPolicy Service is not yet ready!!!");
             return ERROR_INTERNAL_ERROR;
@@ -1469,11 +1463,11 @@ public class KnoxContainerManager {
             return ERROR_INVALID_PASSWORD_RESET_TOKEN;
         }
         try {
-            i = containerService.createContainer(contextInfo, creationParams, creationParams.getAdminPackageName() == null ? 70 : 46);
-            return processCreateReturn(i);
+            iCreateContainer = containerService.createContainer(contextInfo, creationParams, creationParams.getAdminPackageName() == null ? 70 : 46);
+            return processCreateReturn(iCreateContainer);
         } catch (RemoteException e) {
             KnoxContainerManager$$ExternalSyntheticOutline0.m(e, new StringBuilder("Failed at KnoxContainerManager API createContainer "), TAG);
-            return i;
+            return iCreateContainer;
         }
     }
 
@@ -1484,7 +1478,7 @@ public class KnoxContainerManager {
 
     public static int createContainer(ContextInfo contextInfo, String str, Uri uri) {
         IKnoxContainerManager containerService = getContainerService();
-        int i = ERROR_INTERNAL_ERROR;
+        int iCreateContainer = ERROR_INTERNAL_ERROR;
         if (containerService == null) {
             Log.e(TAG, "KnoxMUMContainerPolicy Service is not yet ready!!!");
             return ERROR_INTERNAL_ERROR;
@@ -1493,11 +1487,11 @@ public class KnoxContainerManager {
         creationParams.setConfigurationName(str);
         creationParams.setAdminPackageName(uri.toString());
         try {
-            i = containerService.createContainer(contextInfo, creationParams, 30);
-            return processCreateReturn(i);
+            iCreateContainer = containerService.createContainer(contextInfo, creationParams, 30);
+            return processCreateReturn(iCreateContainer);
         } catch (RemoteException e) {
             KnoxContainerManager$$ExternalSyntheticOutline0.m(e, new StringBuilder("Failed at KnoxContainerManager API createContainer "), TAG);
-            return i;
+            return iCreateContainer;
         }
     }
 
@@ -1508,7 +1502,7 @@ public class KnoxContainerManager {
 
     public static int createContainer(ContextInfo contextInfo, String str) {
         IKnoxContainerManager containerService = getContainerService();
-        int i = ERROR_INTERNAL_ERROR;
+        int iCreateContainer = ERROR_INTERNAL_ERROR;
         if (containerService == null) {
             Log.e(TAG, "KnoxMUMContainerPolicy Service is not yet ready!!!");
             return ERROR_INTERNAL_ERROR;
@@ -1516,17 +1510,17 @@ public class KnoxContainerManager {
         CreationParams creationParams = new CreationParams();
         creationParams.setConfigurationName(str);
         try {
-            i = containerService.createContainer(contextInfo, creationParams, 70);
-            return processCreateReturn(i);
+            iCreateContainer = containerService.createContainer(contextInfo, creationParams, 70);
+            return processCreateReturn(iCreateContainer);
         } catch (RemoteException e) {
             KnoxContainerManager$$ExternalSyntheticOutline0.m(e, new StringBuilder("Failed at KnoxContainerManager API createContainer "), TAG);
-            return i;
+            return iCreateContainer;
         }
     }
 
     public static int createContainer(ContextInfo contextInfo, String str, IEnterpriseContainerCallback iEnterpriseContainerCallback) {
         IKnoxContainerManager containerService = getContainerService();
-        int i = ERROR_INTERNAL_ERROR;
+        int iCreateContainerWithCallback = ERROR_INTERNAL_ERROR;
         if (containerService == null) {
             Log.e(TAG, "KnoxMUMContainerPolicy Service is not yet ready!!!");
             return ERROR_INTERNAL_ERROR;
@@ -1534,11 +1528,11 @@ public class KnoxContainerManager {
         CreationParams creationParams = new CreationParams();
         creationParams.setConfigurationName(str);
         try {
-            i = containerService.createContainerWithCallback(contextInfo, creationParams, 70, iEnterpriseContainerCallback);
-            return processCreateReturn(i);
+            iCreateContainerWithCallback = containerService.createContainerWithCallback(contextInfo, creationParams, 70, iEnterpriseContainerCallback);
+            return processCreateReturn(iCreateContainerWithCallback);
         } catch (RemoteException e) {
             KnoxContainerManager$$ExternalSyntheticOutline0.m(e, new StringBuilder("Failed at KnoxContainerManager API createContainer "), TAG);
-            return i;
+            return iCreateContainerWithCallback;
         }
     }
 }

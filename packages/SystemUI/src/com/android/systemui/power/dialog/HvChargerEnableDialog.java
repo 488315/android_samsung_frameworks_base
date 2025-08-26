@@ -18,7 +18,6 @@ import com.android.systemui.R;
 import com.android.systemui.power.SecBatterySnapshot;
 import com.android.systemui.util.DeviceState;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class HvChargerEnableDialog extends PowerUiDialog {
     public HvChargerEnableDialog(Context context) {
@@ -38,18 +37,18 @@ public class HvChargerEnableDialog extends PowerUiDialog {
                 Log.d("PowerUI.Dialog.HvChargerEnable", "Once AFC enable charging pop up was showed, so we doesn't show again");
                 return false;
             }
-            SharedPreferences.Editor edit = this.mSharedPref.edit();
-            edit.putInt(str, i + 1);
-            edit.remove("DoNotShowAfcEnablePopup");
-            edit.commit();
+            SharedPreferences.Editor editorEdit = this.mSharedPref.edit();
+            editorEdit.putInt(str, i + 1);
+            editorEdit.remove("DoNotShowAfcEnablePopup");
+            editorEdit.commit();
         }
         return true;
     }
 
     @Override // com.android.systemui.power.dialog.PowerUiDialog
     public final AlertDialog getDialog() {
-        View inflate = LayoutInflater.from(new ContextThemeWrapper(this.mContext, R.style.power_ui_dialog_theme)).inflate(R.layout.power_ui_dialog, (ViewGroup) null);
-        TextView textView = (TextView) inflate.findViewById(R.id.notice_text);
+        View viewInflate = LayoutInflater.from(new ContextThemeWrapper(this.mContext, R.style.power_ui_dialog_theme)).inflate(R.layout.power_ui_dialog, (ViewGroup) null);
+        TextView textView = (TextView) viewInflate.findViewById(R.id.notice_text);
         boolean z = PowerUiRune.SPECIFIC_POWER_REQUEST_BY_CHN;
         textView.setText(z ? this.mContext.getString(R.string.pd_hv_charger_dialog_description_chn) : this.mContext.getString(R.string.pd_hv_charger_dialog_description));
         AlertDialog.Builder builder = new AlertDialog.Builder(this.mContext, R.style.power_ui_dialog_theme);
@@ -60,17 +59,17 @@ public class HvChargerEnableDialog extends PowerUiDialog {
         DialogInterface.OnClickListener onClickListener = new DialogInterface.OnClickListener() { // from class: com.android.systemui.power.dialog.HvChargerEnableDialog$$ExternalSyntheticLambda0
             @Override // android.content.DialogInterface.OnClickListener
             public final void onClick(DialogInterface dialogInterface, int i) {
-                Settings.System.putIntForUser(HvChargerEnableDialog.this.mContext.getContentResolver(), "adaptive_fast_charging", 1, -2);
+                Settings.System.putIntForUser(this.f$0.mContext.getContentResolver(), "adaptive_fast_charging", 1, -2);
             }
         };
         alertParams.mPositiveButtonText = alertParams.mContext.getText(R.string.pd_hv_charger_dialog_turn_on_button);
         alertParams.mPositiveButtonListener = onClickListener;
         alertParams.mNegativeButtonText = alertParams.mContext.getText(android.R.string.cancel);
         alertParams.mNegativeButtonListener = null;
-        builder.setView(inflate);
-        AlertDialog create = builder.create();
-        create.getWindow().setType(2009);
-        return create;
+        builder.setView(viewInflate);
+        AlertDialog alertDialogCreate = builder.create();
+        alertDialogCreate.getWindow().setType(2009);
+        return alertDialogCreate;
     }
 
     @Override // com.android.systemui.power.dialog.PowerUiDialog

@@ -58,7 +58,7 @@ public class SemWifiApWhiteList {
         }
     }
 
-    private SemWifiApWhiteList() {
+    private SemWifiApWhiteList() throws Throwable {
         createOrChangePermission();
         readWhiteListFile();
     }
@@ -70,8 +70,8 @@ public class SemWifiApWhiteList {
         return uniqueInstance;
     }
 
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:17:0x0034 -> B:11:0x0037). Please report as a decompilation issue!!! */
-    private void createOrChangePermission() {
+    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:15:0x0034 -> B:17:0x0037). Please report as a decompilation issue!!! */
+    private void createOrChangePermission() throws InterruptedException, IOException {
         File file = new File("/data/misc/wifi_hostapd/hostapd.accept");
         if (file.exists()) {
             return;
@@ -82,10 +82,10 @@ public class SemWifiApWhiteList {
             e.printStackTrace();
         }
         try {
-            Process exec = Runtime.getRuntime().exec(new String[]{"/system/bin/sh", "-c", "/system/bin/chmod 665 /data/misc/wifi_hostapd/hostapd.accept"});
+            Process processExec = Runtime.getRuntime().exec(new String[]{"/system/bin/sh", "-c", "/system/bin/chmod 665 /data/misc/wifi_hostapd/hostapd.accept"});
             try {
-                exec.waitFor();
-                exec.destroy();
+                processExec.waitFor();
+                processExec.destroy();
             } catch (InterruptedException e2) {
                 e2.printStackTrace();
             }
@@ -94,7 +94,7 @@ public class SemWifiApWhiteList {
         }
     }
 
-    private void readWhiteListFile() {
+    private void readWhiteListFile() throws Throwable {
         this.mWhiteList.clear();
         BufferedReader bufferedReader = null;
         try {
@@ -103,16 +103,16 @@ public class SemWifiApWhiteList {
                     BufferedReader bufferedReader2 = new BufferedReader(new FileReader("/data/misc/wifi_hostapd/hostapd.accept", StandardCharsets.UTF_8), 64);
                     while (true) {
                         try {
-                            String readLine = bufferedReader2.readLine();
-                            if (readLine != null) {
-                                if (readLine.startsWith("#")) {
+                            String line = bufferedReader2.readLine();
+                            if (line != null) {
+                                if (line.startsWith("#")) {
                                     boolean z = true;
-                                    String substring = readLine.substring(1);
-                                    String readLine2 = bufferedReader2.readLine();
+                                    String strSubstring = line.substring(1);
+                                    String line2 = bufferedReader2.readLine();
                                     if (bufferedReader2.readLine() != "1") {
                                         z = false;
                                     }
-                                    this.mWhiteList.add(new WhiteList(readLine2, substring, z));
+                                    this.mWhiteList.add(new WhiteList(line2, strSubstring, z));
                                 }
                             } else {
                                 bufferedReader2.close();
@@ -139,68 +139,69 @@ public class SemWifiApWhiteList {
                         }
                     }
                 } catch (IOException e3) {
-                    e = e3;
+                    e3.printStackTrace();
                 }
             } catch (IOException e4) {
-                e4.printStackTrace();
+                e = e4;
             }
         } catch (Throwable th2) {
             th = th2;
         }
     }
 
-    private void writeWhiteListFile() {
-        FileWriter fileWriter = null;
+    private void writeWhiteListFile() throws Throwable {
+        FileWriter fileWriter;
+        FileWriter fileWriter2 = null;
         try {
             try {
                 try {
-                    FileWriter fileWriter2 = new FileWriter("/data/misc/wifi_hostapd/hostapd.accept", StandardCharsets.UTF_8);
-                    try {
-                        Iterator<WhiteList> it = this.mWhiteList.iterator();
-                        while (it.hasNext()) {
-                            WhiteList next = it.next();
-                            fileWriter2.write("#");
-                            if (next.getName() != null) {
-                                fileWriter2.write(next.getName());
-                            }
-                            fileWriter2.write(ShaderAssembler.NEWLINE);
-                            fileWriter2.write(next.getMac());
-                            fileWriter2.write(ShaderAssembler.NEWLINE);
-                            fileWriter2.write(next.getEnable() ? "1" : "0");
-                            fileWriter2.write(ShaderAssembler.NEWLINE);
-                        }
-                        fileWriter2.close();
-                    } catch (IOException e) {
-                        e = e;
-                        fileWriter = fileWriter2;
-                        e.printStackTrace();
-                        if (fileWriter != null) {
-                            fileWriter.close();
-                        }
-                    } catch (Throwable th) {
-                        th = th;
-                        fileWriter = fileWriter2;
-                        if (fileWriter != null) {
-                            try {
-                                fileWriter.close();
-                            } catch (IOException e2) {
-                                e2.printStackTrace();
-                            }
-                        }
-                        throw th;
-                    }
-                } catch (IOException e3) {
-                    e = e3;
+                    fileWriter = new FileWriter("/data/misc/wifi_hostapd/hostapd.accept", StandardCharsets.UTF_8);
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-            } catch (IOException e4) {
-                e4.printStackTrace();
+            } catch (IOException e2) {
+                e = e2;
+            }
+        } catch (Throwable th) {
+            th = th;
+        }
+        try {
+            Iterator<WhiteList> it = this.mWhiteList.iterator();
+            while (it.hasNext()) {
+                WhiteList next = it.next();
+                fileWriter.write("#");
+                if (next.getName() != null) {
+                    fileWriter.write(next.getName());
+                }
+                fileWriter.write(ShaderAssembler.NEWLINE);
+                fileWriter.write(next.getMac());
+                fileWriter.write(ShaderAssembler.NEWLINE);
+                fileWriter.write(next.getEnable() ? "1" : "0");
+                fileWriter.write(ShaderAssembler.NEWLINE);
+            }
+            fileWriter.close();
+        } catch (IOException e3) {
+            e = e3;
+            fileWriter2 = fileWriter;
+            e.printStackTrace();
+            if (fileWriter2 != null) {
+                fileWriter2.close();
             }
         } catch (Throwable th2) {
             th = th2;
+            fileWriter2 = fileWriter;
+            if (fileWriter2 != null) {
+                try {
+                    fileWriter2.close();
+                } catch (IOException e4) {
+                    e4.printStackTrace();
+                }
+            }
+            throw th;
         }
     }
 
-    public int addWhiteList(String str, String str2, boolean z) {
+    public int addWhiteList(String str, String str2, boolean z) throws Throwable {
         if (!isMacAddress(str)) {
             return 3;
         }
@@ -216,7 +217,7 @@ public class SemWifiApWhiteList {
         return 1;
     }
 
-    public int removeWhiteList(String str) {
+    public int removeWhiteList(String str) throws Throwable {
         Iterator<WhiteList> it = this.mWhiteList.iterator();
         while (it.hasNext()) {
             WhiteList next = it.next();
@@ -231,7 +232,7 @@ public class SemWifiApWhiteList {
         return 2;
     }
 
-    public int modifyWhiteList(String str, String str2, boolean z) {
+    public int modifyWhiteList(String str, String str2, boolean z) throws Throwable {
         Iterator<WhiteList> it = this.mWhiteList.iterator();
         while (it.hasNext()) {
             WhiteList next = it.next();

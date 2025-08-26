@@ -32,7 +32,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SecDeviceControlsTile extends QSTileImpl {
     public final ControlsListingController mControlsListingController;
@@ -49,7 +48,7 @@ public class SecDeviceControlsTile extends QSTileImpl {
         ?? r1 = new ControlsListingController.ControlsListingCallback() { // from class: com.android.systemui.qs.tiles.SecDeviceControlsTile$$ExternalSyntheticLambda1
             @Override // com.android.systemui.controls.management.ControlsListingController.ControlsListingCallback
             public final void onServicesUpdated(List list) {
-                SecDeviceControlsTile secDeviceControlsTile = SecDeviceControlsTile.this;
+                SecDeviceControlsTile secDeviceControlsTile = this.f$0;
                 if (secDeviceControlsTile.mHasControlsApps.compareAndSet(((ArrayList) list).isEmpty(), !r1.isEmpty())) {
                     Log.d(secDeviceControlsTile.TAG, "onServiceConnected serviceInfos = " + list);
                     secDeviceControlsTile.refreshState(null);
@@ -96,7 +95,7 @@ public class SecDeviceControlsTile extends QSTileImpl {
         this.mUiHandler.post(new Runnable() { // from class: com.android.systemui.qs.tiles.SecDeviceControlsTile$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                SecDeviceControlsTile secDeviceControlsTile = SecDeviceControlsTile.this;
+                SecDeviceControlsTile secDeviceControlsTile = this.f$0;
                 Expandable expandable2 = expandable;
                 secDeviceControlsTile.getClass();
                 KeyguardUnlockInfo.setUnlockTrigger(KeyguardUnlockInfo.UnlockTrigger.TRIGGER_QUICK_TILE);
@@ -107,10 +106,8 @@ public class SecDeviceControlsTile extends QSTileImpl {
 
     @Override // com.android.systemui.qs.tileimpl.QSTileImpl
     public final void handleUpdateState(QSTile.State state, Object obj) {
-        SelectedComponentRepository.SelectedComponent selectedComponent;
+        String packageName;
         String str;
-        SelectedComponentRepository.SelectedComponent selectedComponent2;
-        String str2;
         ComponentName componentName;
         QSTile.BooleanState booleanState = (QSTile.BooleanState) state;
         booleanState.state = 1;
@@ -118,33 +115,33 @@ public class SecDeviceControlsTile extends QSTileImpl {
         booleanState.icon = QSTileImpl.ResourceIcon.get(R.drawable.ic_smartthings);
         booleanState.secondaryLabel = this.mContext.getString(R.string.qspanel_quickcontrol_button_text);
         boolean z = this.mHasControlsApps.get();
-        String str3 = this.TAG;
+        String str2 = this.TAG;
         if (!z) {
-            Log.d(str3, "handleUpdateState hasControlsApps is false");
+            Log.d(str2, "handleUpdateState hasControlsApps is false");
             return;
         }
         SecControlsUiController secControlsUiController = this.mSecControlsUiController;
         if (secControlsUiController == null) {
-            Log.e(str3, "mSecControlsUiController is null");
+            Log.e(str2, "mSecControlsUiController is null");
             return;
         }
         SecSelectedComponentRepository secSelectedComponentRepository = ((SecControlsUiControllerImpl) secControlsUiController).secSelectedComponentRepository;
-        selectedComponent = ((SecSelectedComponentRepositoryImpl) secSelectedComponentRepository).getSelectedComponent(UserHandle.CURRENT);
-        String str4 = "";
-        if (selectedComponent == null || (componentName = selectedComponent.componentName) == null || (str = componentName.getPackageName()) == null) {
-            str = "";
+        SelectedComponentRepository.SelectedComponent selectedComponent = ((SecSelectedComponentRepositoryImpl) secSelectedComponentRepository).getSelectedComponent(UserHandle.CURRENT);
+        String str3 = "";
+        if (selectedComponent == null || (componentName = selectedComponent.componentName) == null || (packageName = componentName.getPackageName()) == null) {
+            packageName = "";
         }
-        if (!str.isEmpty() && !str.equals("com.samsung.android.oneconnect")) {
-            selectedComponent2 = ((SecSelectedComponentRepositoryImpl) secSelectedComponentRepository).getSelectedComponent(UserHandle.CURRENT);
-            if (selectedComponent2 != null && (str2 = selectedComponent2.name) != null) {
-                str4 = str2;
+        if (!packageName.isEmpty() && !packageName.equals("com.samsung.android.oneconnect")) {
+            SelectedComponentRepository.SelectedComponent selectedComponent2 = ((SecSelectedComponentRepositoryImpl) secSelectedComponentRepository).getSelectedComponent(UserHandle.CURRENT);
+            if (selectedComponent2 != null && (str = selectedComponent2.name) != null) {
+                str3 = str;
             }
-            if (!str4.isEmpty()) {
-                booleanState.label = str4;
+            if (!str3.isEmpty()) {
+                booleanState.label = str3;
                 booleanState.icon = QSTileImpl.ResourceIcon.get(R.drawable.quick_panel_icon_device_control);
             }
         }
-        Log.d(str3, "handleUpdateState appName = " + ((Object) booleanState.label));
+        Log.d(str2, "handleUpdateState appName = " + ((Object) booleanState.label));
     }
 
     @Override // com.android.systemui.qs.tileimpl.QSTileImpl

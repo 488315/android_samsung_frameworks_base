@@ -83,8 +83,8 @@ public class GsmAlphabet {
         if (i == 27 || i < 0 || i >= 128) {
             return ' ';
         }
-        char charAt = sLanguageShiftTables[0].charAt(i);
-        return charAt == ' ' ? sLanguageTables[0].charAt(i) : charAt;
+        char cCharAt = sLanguageShiftTables[0].charAt(i);
+        return cCharAt == ' ' ? sLanguageTables[0].charAt(i) : cCharAt;
     }
 
     public static byte[] stringToGsm7BitPackedWithHeader(String str, byte[] bArr) throws EncodeException {
@@ -95,10 +95,10 @@ public class GsmAlphabet {
         if (bArr == null || bArr.length == 0) {
             return stringToGsm7BitPacked(str, i, i2);
         }
-        byte[] stringToGsm7BitPacked = stringToGsm7BitPacked(str, (((bArr.length + 1) * 8) + 6) / 7, true, i, i2);
-        stringToGsm7BitPacked[1] = (byte) bArr.length;
-        System.arraycopy(bArr, 0, stringToGsm7BitPacked, 2, bArr.length);
-        return stringToGsm7BitPacked;
+        byte[] bArrStringToGsm7BitPacked = stringToGsm7BitPacked(str, (((bArr.length + 1) * 8) + 6) / 7, true, i, i2);
+        bArrStringToGsm7BitPacked[1] = (byte) bArr.length;
+        System.arraycopy(bArr, 0, bArrStringToGsm7BitPacked, 2, bArr.length);
+        return bArrStringToGsm7BitPacked;
     }
 
     public static byte[] stringToGsm7BitPacked(String str) throws EncodeException {
@@ -111,11 +111,11 @@ public class GsmAlphabet {
 
     public static byte[] stringToGsm7BitPacked(String str, int i, boolean z, int i2, int i3) throws EncodeException {
         int length = str.length();
-        int countGsmSeptetsUsingTables = countGsmSeptetsUsingTables(str, !z, i2, i3);
-        if (countGsmSeptetsUsingTables == -1) {
+        int iCountGsmSeptetsUsingTables = countGsmSeptetsUsingTables(str, !z, i2, i3);
+        if (iCountGsmSeptetsUsingTables == -1) {
             throw new EncodeException("countGsmSeptetsUsingTables(): unencodable char");
         }
-        int i4 = countGsmSeptetsUsingTables + i;
+        int i4 = iCountGsmSeptetsUsingTables + i;
         if (i4 > 255) {
             throw new EncodeException("Payload cannot exceed 255 septets", 1);
         }
@@ -125,10 +125,10 @@ public class GsmAlphabet {
         int i5 = i * 7;
         int i6 = 0;
         while (i6 < length && i < i4) {
-            char charAt = str.charAt(i6);
-            int i7 = sparseIntArray.get(charAt, -1);
+            char cCharAt = str.charAt(i6);
+            int i7 = sparseIntArray.get(cCharAt, -1);
             if (i7 == -1) {
-                i7 = sparseIntArray2.get(charAt, -1);
+                i7 = sparseIntArray2.get(cCharAt, -1);
                 if (i7 != -1) {
                     packSmsChar(bArr, i5, 27);
                     i5 += 7;
@@ -202,11 +202,11 @@ public class GsmAlphabet {
                     if (i13 == 27) {
                         sb.append(' ');
                     } else {
-                        char charAt = str2.charAt(i13);
-                        if (charAt == ' ') {
+                        char cCharAt = str2.charAt(i13);
+                        if (cCharAt == ' ') {
                             sb.append(str.charAt(i13));
                         } else {
-                            sb.append(charAt);
+                            sb.append(cCharAt);
                         }
                     }
                     z = false;
@@ -228,18 +228,18 @@ public class GsmAlphabet {
     }
 
     public static String gsm8BitUnpackedToString(byte[] bArr, int i, int i2, String str) {
-        Charset charset;
-        ByteBuffer byteBuffer;
+        Charset charsetForName;
+        ByteBuffer byteBufferAllocate;
         boolean z;
         int i3;
         int i4;
         if (TextUtils.isEmpty(str) || str.equalsIgnoreCase(CharacterSets.MIMENAME_US_ASCII) || !Charset.isSupported(str)) {
-            charset = null;
-            byteBuffer = null;
+            charsetForName = null;
+            byteBufferAllocate = null;
             z = false;
         } else {
-            charset = Charset.forName(str);
-            byteBuffer = ByteBuffer.allocate(2);
+            charsetForName = Charset.forName(str);
+            byteBufferAllocate = ByteBuffer.allocate(2);
             z = true;
         }
         String str2 = sLanguageTables[0];
@@ -260,15 +260,15 @@ public class GsmAlphabet {
                     i5++;
                 }
             } else if (z2) {
-                char charAt = i3 < str3.length() ? str3.charAt(i3) : ' ';
-                if (charAt == ' ') {
+                char cCharAt = i3 < str3.length() ? str3.charAt(i3) : ' ';
+                if (cCharAt == ' ') {
                     if (i3 < str2.length()) {
                         sb.append(str2.charAt(i3));
                     } else {
                         sb.append(' ');
                     }
                 } else {
-                    sb.append(charAt);
+                    sb.append(cCharAt);
                 }
             } else if (!z || i3 < 128 || (i4 = i5 + 1) >= i6) {
                 if (i3 < str2.length()) {
@@ -277,10 +277,10 @@ public class GsmAlphabet {
                     sb.append(' ');
                 }
             } else {
-                byteBuffer.clear();
-                byteBuffer.put(bArr, i5, 2);
-                byteBuffer.flip();
-                sb.append(charset.decode(byteBuffer).toString());
+                byteBufferAllocate.clear();
+                byteBufferAllocate.put(bArr, i5, 2);
+                byteBufferAllocate.flip();
+                sb.append(charsetForName.decode(byteBufferAllocate).toString());
                 i5 = i4;
             }
             z2 = false;
@@ -290,9 +290,9 @@ public class GsmAlphabet {
     }
 
     public static byte[] stringToGsm8BitPacked(String str) {
-        int countGsmSeptetsUsingTables = countGsmSeptetsUsingTables(str, true, 0, 0);
-        byte[] bArr = new byte[countGsmSeptetsUsingTables];
-        stringToGsm8BitUnpackedField(str, bArr, 0, countGsmSeptetsUsingTables);
+        int iCountGsmSeptetsUsingTables = countGsmSeptetsUsingTables(str, true, 0, 0);
+        byte[] bArr = new byte[iCountGsmSeptetsUsingTables];
+        stringToGsm8BitUnpackedField(str, bArr, 0, iCountGsmSeptetsUsingTables);
         return bArr;
     }
 
@@ -303,10 +303,10 @@ public class GsmAlphabet {
         int length = str.length();
         int i4 = i;
         while (i3 < length && i4 - i < i2) {
-            char charAt = str.charAt(i3);
-            int i5 = sparseIntArray.get(charAt, -1);
+            char cCharAt = str.charAt(i3);
+            int i5 = sparseIntArray.get(cCharAt, -1);
             if (i5 == -1) {
-                i5 = sparseIntArray2.get(charAt, -1);
+                i5 = sparseIntArray2.get(cCharAt, -1);
                 if (i5 == -1) {
                     i5 = sparseIntArray.get(32, 32);
                 } else {
@@ -353,31 +353,39 @@ public class GsmAlphabet {
         return (sCharsToGsmTables[0].get(c, -1) == -1 && sCharsToShiftTables[0].get(c, -1) == -1) ? false : true;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:17:0x003a  */
+    /* JADX WARN: Removed duplicated region for block: B:33:0x0047 A[ADDED_TO_REGION, REMOVE, SYNTHETIC] */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public static int countGsmSeptetsUsingTables(CharSequence charSequence, boolean z, int i, int i2) {
         int length = charSequence.length();
         SparseIntArray sparseIntArray = sCharsToGsmTables[i];
         SparseIntArray sparseIntArray2 = sCharsToShiftTables[i2];
         int i3 = 0;
         for (int i4 = 0; i4 < length; i4++) {
-            char charAt = charSequence.charAt(i4);
-            if (charAt == 27) {
+            char cCharAt = charSequence.charAt(i4);
+            if (cCharAt == 27) {
                 Log.w(TAG, "countGsmSeptets() string contains Escape character, skipping.");
-            } else {
-                if (sparseIntArray.get(charAt, -1) == -1) {
-                    if (sparseIntArray2.get(charAt, -1) != -1) {
-                        i3 += 2;
-                        if (sEnableIgnoreSpecialChar && (charAt == 165 || charAt == 163 || charAt == 8364)) {
-                            return -1;
-                        }
-                    } else if (!z) {
+            } else if (sparseIntArray.get(cCharAt, -1) == -1) {
+                if (sparseIntArray2.get(cCharAt, -1) != -1) {
+                    i3 += 2;
+                    if (!sEnableIgnoreSpecialChar && (cCharAt == 165 || cCharAt == 163 || cCharAt == 8364)) {
                         return -1;
                     }
+                } else {
+                    if (!z) {
+                        return -1;
+                    }
+                    i3++;
+                    if (!sEnableIgnoreSpecialChar) {
+                        continue;
+                    }
                 }
+            } else {
                 i3++;
-                if (sEnableIgnoreSpecialChar) {
-                    return -1;
+                if (!sEnableIgnoreSpecialChar) {
                 }
-                continue;
             }
         }
         return i3;
@@ -395,19 +403,19 @@ public class GsmAlphabet {
         int i4 = 160;
         if (sEnabledSingleShiftTables.length + sEnabledLockingShiftTables.length == 0) {
             TextEncodingDetails textEncodingDetails3 = new TextEncodingDetails();
-            int countGsmSeptetsUsingTables = countGsmSeptetsUsingTables(charSequence, z, 0, 0);
-            if (countGsmSeptetsUsingTables == -1) {
+            int iCountGsmSeptetsUsingTables = countGsmSeptetsUsingTables(charSequence, z, 0, 0);
+            if (iCountGsmSeptetsUsingTables == -1) {
                 return null;
             }
             textEncodingDetails3.codeUnitSize = 1;
-            textEncodingDetails3.codeUnitCount = countGsmSeptetsUsingTables;
-            if (countGsmSeptetsUsingTables > 160) {
-                textEncodingDetails3.msgCount = (countGsmSeptetsUsingTables + 152) / 153;
-                textEncodingDetails3.codeUnitsRemaining = (textEncodingDetails3.msgCount * 153) - countGsmSeptetsUsingTables;
+            textEncodingDetails3.codeUnitCount = iCountGsmSeptetsUsingTables;
+            if (iCountGsmSeptetsUsingTables > 160) {
+                textEncodingDetails3.msgCount = (iCountGsmSeptetsUsingTables + 152) / 153;
+                textEncodingDetails3.codeUnitsRemaining = (textEncodingDetails3.msgCount * 153) - iCountGsmSeptetsUsingTables;
                 return textEncodingDetails3;
             }
             textEncodingDetails3.msgCount = 1;
-            textEncodingDetails3.codeUnitsRemaining = 160 - countGsmSeptetsUsingTables;
+            textEncodingDetails3.codeUnitsRemaining = 160 - iCountGsmSeptetsUsingTables;
             return textEncodingDetails3;
         }
         int i5 = sHighestEnabledSingleShiftCode;
@@ -420,15 +428,15 @@ public class GsmAlphabet {
         }
         int length = charSequence.length();
         for (int i7 = 0; i7 < length && !arrayList.isEmpty(); i7++) {
-            char charAt = charSequence.charAt(i7);
-            if (charAt == 27) {
+            char cCharAt = charSequence.charAt(i7);
+            if (cCharAt == 27) {
                 Log.w(TAG, "countGsmSeptets() string contains Escape character, ignoring!");
             } else {
                 for (LanguagePairCount languagePairCount : arrayList) {
-                    if (sCharsToGsmTables[languagePairCount.languageCode].get(charAt, -1) == -1) {
+                    if (sCharsToGsmTables[languagePairCount.languageCode].get(cCharAt, -1) == -1) {
                         for (int i8 = 0; i8 <= i5; i8++) {
                             if (languagePairCount.septetCounts[i8] != -1) {
-                                if (sCharsToShiftTables[i8].get(charAt, -1) != -1) {
+                                if (sCharsToShiftTables[i8].get(cCharAt, -1) != -1) {
                                     int[] iArr = languagePairCount.septetCounts;
                                     iArr[i8] = iArr[i8] + 2;
                                 } else if (z) {
@@ -514,38 +522,26 @@ public class GsmAlphabet {
     }
 
     public static synchronized void setEnabledSingleShiftTables(int[] iArr) {
-        synchronized (GsmAlphabet.class) {
-            sEnabledSingleShiftTables = iArr;
-            sDisableCountryEncodingCheck = true;
-            if (iArr.length > 0) {
-                sHighestEnabledSingleShiftCode = iArr[iArr.length - 1];
-            } else {
-                sHighestEnabledSingleShiftCode = 0;
-            }
+        sEnabledSingleShiftTables = iArr;
+        sDisableCountryEncodingCheck = true;
+        if (iArr.length > 0) {
+            sHighestEnabledSingleShiftCode = iArr[iArr.length - 1];
+        } else {
+            sHighestEnabledSingleShiftCode = 0;
         }
     }
 
     public static synchronized void setEnabledLockingShiftTables(int[] iArr) {
-        synchronized (GsmAlphabet.class) {
-            sEnabledLockingShiftTables = iArr;
-            sDisableCountryEncodingCheck = true;
-        }
+        sEnabledLockingShiftTables = iArr;
+        sDisableCountryEncodingCheck = true;
     }
 
     public static synchronized int[] getEnabledSingleShiftTables() {
-        int[] iArr;
-        synchronized (GsmAlphabet.class) {
-            iArr = sEnabledSingleShiftTables;
-        }
-        return iArr;
+        return sEnabledSingleShiftTables;
     }
 
     public static synchronized int[] getEnabledLockingShiftTables() {
-        int[] iArr;
-        synchronized (GsmAlphabet.class) {
-            iArr = sEnabledLockingShiftTables;
-        }
-        return iArr;
+        return sEnabledLockingShiftTables;
     }
 
     private static void enableCountrySpecificEncodings() {
@@ -624,9 +620,9 @@ public class GsmAlphabet {
             SparseIntArray sparseIntArray2 = new SparseIntArray(length4);
             sCharsToShiftTables[i3] = sparseIntArray2;
             for (int i4 = 0; i4 < length4; i4++) {
-                char charAt = str2.charAt(i4);
-                if (charAt != ' ') {
-                    sparseIntArray2.put(charAt, i4);
+                char cCharAt = str2.charAt(i4);
+                if (cCharAt != ' ') {
+                    sparseIntArray2.put(cCharAt, i4);
                 }
             }
         }
@@ -642,24 +638,24 @@ public class GsmAlphabet {
         Log.d(TAG, sb.toString());
         if (sEnabledSingleShiftTables.length + sEnabledLockingShiftTables.length == 0) {
             TextEncodingDetails textEncodingDetails = new TextEncodingDetails();
-            int countGsmSeptetsUsingTables = countGsmSeptetsUsingTables(charSequence, z, 0, 0);
-            if (countGsmSeptetsUsingTables == -1) {
+            int iCountGsmSeptetsUsingTables = countGsmSeptetsUsingTables(charSequence, z, 0, 0);
+            if (iCountGsmSeptetsUsingTables == -1) {
                 return null;
             }
             int i6 = i > 0 ? 159 - i : 160;
             int i7 = i > 0 ? 152 - i : 153;
-            if (countGsmSeptetsUsingTables != -1 && countGsmSeptetsUsingTables <= i6) {
+            if (iCountGsmSeptetsUsingTables != -1 && iCountGsmSeptetsUsingTables <= i6) {
                 textEncodingDetails.msgCount = 1;
-                textEncodingDetails.codeUnitCount = countGsmSeptetsUsingTables;
-                textEncodingDetails.codeUnitsRemaining = i6 - countGsmSeptetsUsingTables;
+                textEncodingDetails.codeUnitCount = iCountGsmSeptetsUsingTables;
+                textEncodingDetails.codeUnitsRemaining = i6 - iCountGsmSeptetsUsingTables;
                 textEncodingDetails.codeUnitSize = 1;
                 return textEncodingDetails;
             }
-            if (countGsmSeptetsUsingTables != -1) {
-                textEncodingDetails.codeUnitCount = countGsmSeptetsUsingTables;
-                if (countGsmSeptetsUsingTables > i6) {
-                    textEncodingDetails.msgCount = ((i7 - 1) + countGsmSeptetsUsingTables) / i7;
-                    int i8 = countGsmSeptetsUsingTables % i7;
+            if (iCountGsmSeptetsUsingTables != -1) {
+                textEncodingDetails.codeUnitCount = iCountGsmSeptetsUsingTables;
+                if (iCountGsmSeptetsUsingTables > i6) {
+                    textEncodingDetails.msgCount = ((i7 - 1) + iCountGsmSeptetsUsingTables) / i7;
+                    int i8 = iCountGsmSeptetsUsingTables % i7;
                     if (i8 > 0) {
                         textEncodingDetails.codeUnitsRemaining = i7 - i8;
                     } else {
@@ -667,7 +663,7 @@ public class GsmAlphabet {
                     }
                 } else {
                     textEncodingDetails.msgCount = 1;
-                    textEncodingDetails.codeUnitsRemaining = i6 - countGsmSeptetsUsingTables;
+                    textEncodingDetails.codeUnitsRemaining = i6 - iCountGsmSeptetsUsingTables;
                 }
                 textEncodingDetails.codeUnitSize = 1;
             }
@@ -683,15 +679,15 @@ public class GsmAlphabet {
         }
         int length = charSequence.length();
         for (int i11 = 0; i11 < length && !arrayList.isEmpty(); i11++) {
-            char charAt = charSequence.charAt(i11);
-            if (charAt == 27) {
+            char cCharAt = charSequence.charAt(i11);
+            if (cCharAt == 27) {
                 Log.d(TAG, "countGsmSeptets() string contains Escape character, ignoring!");
             } else {
                 for (LanguagePairCount languagePairCount : arrayList) {
-                    if (sCharsToGsmTables[languagePairCount.languageCode].get(charAt, -1) == -1) {
+                    if (sCharsToGsmTables[languagePairCount.languageCode].get(cCharAt, -1) == -1) {
                         for (int i12 = 0; i12 <= i9; i12++) {
                             if (languagePairCount.septetCounts[i12] != -1) {
-                                if (sCharsToShiftTables[i12].get(charAt, -1) != -1) {
+                                if (sCharsToShiftTables[i12].get(cCharAt, -1) != -1) {
                                     int[] iArr = languagePairCount.septetCounts;
                                     iArr[i12] = iArr[i12] + 2;
                                 } else if (z) {
@@ -762,9 +758,9 @@ public class GsmAlphabet {
 
     public static TextEncodingDetails countGsmSeptets(CharSequence charSequence, boolean z, boolean z2) {
         sEnableIgnoreSpecialChar = z2;
-        TextEncodingDetails countGsmSeptets = countGsmSeptets(charSequence, z);
+        TextEncodingDetails textEncodingDetailsCountGsmSeptets = countGsmSeptets(charSequence, z);
         sEnableIgnoreSpecialChar = false;
-        return countGsmSeptets;
+        return textEncodingDetailsCountGsmSeptets;
     }
 
     public static byte[] stringToGsm8BitPackedForAutoLogin(String str) {

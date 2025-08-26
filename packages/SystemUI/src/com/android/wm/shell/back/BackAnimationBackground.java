@@ -8,7 +8,6 @@ import com.android.internal.view.AppearanceRegion;
 import com.android.systemui.navigationbar.gestural.EdgeBackGestureHandler$$ExternalSyntheticLambda10;
 import com.android.wm.shell.RootTaskDisplayAreaOrganizer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class BackAnimationBackground {
     public boolean mBackgroundIsDark;
@@ -47,9 +46,9 @@ public class BackAnimationBackground {
         float[] fArr = {Color.red(i) / 255.0f, Color.green(i) / 255.0f, Color.blue(i) / 255.0f};
         SurfaceControl.Builder colorLayer = new SurfaceControl.Builder().setName("back-animation-background").setCallsite("BackAnimationBackground").setColorLayer();
         this.mRootTaskDisplayAreaOrganizer.attachToDisplayArea(0, colorLayer);
-        SurfaceControl build = colorLayer.build();
-        this.mBackgroundSurface = build;
-        transaction.setColor(build, fArr).setLayer(this.mBackgroundSurface, -1).show(this.mBackgroundSurface);
+        SurfaceControl surfaceControlBuild = colorLayer.build();
+        this.mBackgroundSurface = surfaceControlBuild;
+        transaction.setColor(surfaceControlBuild, fArr).setLayer(this.mBackgroundSurface, -1).show(this.mBackgroundSurface);
         if (rect2 != null && !rect2.isEmpty()) {
             transaction.setCrop(this.mBackgroundSurface, rect2).setCornerRadius(this.mBackgroundSurface, f);
         }

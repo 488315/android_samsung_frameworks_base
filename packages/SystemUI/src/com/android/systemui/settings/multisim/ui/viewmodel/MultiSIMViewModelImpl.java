@@ -30,7 +30,6 @@ import com.android.systemui.settings.UserTracker;
 import com.android.systemui.settings.UserTrackerImpl;
 import com.android.systemui.settings.multisim.data.repository.SimInfoRepository;
 import com.android.systemui.settings.multisim.data.repository.prod.SimInfoRepositoryImpl;
-import com.android.systemui.settings.multisim.data.repository.prod.SimInfoRepositoryImpl$registerSimCardManagerCallback$1;
 import com.android.systemui.settings.multisim.ui.view.MultiSIMPreferredSlotView;
 import com.android.systemui.settings.multisim.ui.view.MultiSIMPreferredSlotView$PrefferedSlotButton$$ExternalSyntheticLambda0;
 import com.android.systemui.settings.multisim.ui.view.MultiSIMPreferredSlotView.PrefferedSlotPopupWindow;
@@ -45,6 +44,7 @@ import com.samsung.android.app.telephonyui.netsettings.ui.simcardmanager.service
 import com.samsung.android.knox.custom.IKnoxCustomManager;
 import com.samsung.android.knox.ucm.configurator.UniversalCredentialManager;
 import com.samsung.android.view.SemWindowManager;
+import com.samsung.systemui.splugins.volume.VolumePanelState;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -74,10 +74,8 @@ import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 import kotlinx.coroutines.flow.internal.CombineKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class MultiSIMViewModelImpl implements MultiSIMViewModel, Button.ClickListener {
-    public static final /* synthetic */ int $r8$clinit = 0;
     public final ActivityStarter activityStarter;
     public final FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 barUpdateEvents;
     public SlotsView bindedView;
@@ -89,7 +87,9 @@ public final class MultiSIMViewModelImpl implements MultiSIMViewModel, Button.Cl
     public final StateFlowImpl isBarShowing;
     public final ReadonlyStateFlow isButtonDisabled;
     public final Flow isButtonDisabledForData;
+    public boolean isQpExpanded;
     public final StateFlowImpl isSecondaryUser;
+    public boolean isUpdating;
     public final KeyguardStateController keyguardStateController;
     public final KnoxStateMonitor knoxStateMonitor;
     public final Context mContext;
@@ -101,7 +101,6 @@ public final class MultiSIMViewModelImpl implements MultiSIMViewModel, Button.Cl
     public final Map simNameFlows;
     public final ReadonlyStateFlow slots;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -111,7 +110,6 @@ public final class MultiSIMViewModelImpl implements MultiSIMViewModel, Button.Cl
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -153,13 +151,13 @@ public final class MultiSIMViewModelImpl implements MultiSIMViewModel, Button.Cl
         this.knoxStateMonitor = knoxStateMonitor;
         this.simInfoRepository = simInfoRepository;
         UserTrackerImpl userTrackerImpl = (UserTrackerImpl) userTracker;
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(Boolean.valueOf(userTrackerImpl.getUserId() != 0));
-        this.isSecondaryUser = MutableStateFlow;
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(Boolean.valueOf(userTrackerImpl.getUserId() != 0));
+        this.isSecondaryUser = stateFlowImplMutableStateFlow;
         this.mUserManager = (UserManager) context.getSystemService("user");
         UserTracker.Callback callback = new UserTracker.Callback() { // from class: com.android.systemui.settings.multisim.ui.viewmodel.MultiSIMViewModelImpl$mUserChangedCallback$1
             @Override // com.android.systemui.settings.UserTracker.Callback
             public final void onUserChanged(int i, Context context2) {
-                MultiSIMViewModelImpl.this.isSecondaryUser.updateState(null, Boolean.valueOf(!r0.mUserManager.getUserInfo(i).isAdmin()));
+                this.this$0.isSecondaryUser.updateState(null, Boolean.valueOf(!r0.mUserManager.getUserInfo(i).isAdmin()));
             }
         };
         this.mUserChangedCallback = callback;
@@ -167,7 +165,6 @@ public final class MultiSIMViewModelImpl implements MultiSIMViewModel, Button.Cl
         final Flow[] flowArr = {simInfoRepositoryImpl.sim1Name, simInfoRepositoryImpl.sim2Name, simInfoRepositoryImpl.sim1CarrierName, simInfoRepositoryImpl.sim2CarrierName, simInfoRepositoryImpl.sim1PhoneNumber, simInfoRepositoryImpl.sim2PhoneNumber, simInfoRepositoryImpl.sim1IconIndex, simInfoRepositoryImpl.sim2IconIndex, simInfoRepositoryImpl.isESim1, simInfoRepositoryImpl.isESim2, simInfoRepositoryImpl.isSlotReversed};
         Flow flow = new Flow() { // from class: com.android.systemui.settings.multisim.ui.viewmodel.MultiSIMViewModelImpl$special$$inlined$combine$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.settings.multisim.ui.viewmodel.MultiSIMViewModelImpl$special$$inlined$combine$1$3, reason: invalid class name */
             public final class AnonymousClass3 extends SuspendLambda implements Function3 {
                 private /* synthetic */ Object L$0;
@@ -203,16 +200,16 @@ public final class MultiSIMViewModelImpl implements MultiSIMViewModel, Button.Cl
                         String str4 = (String) objArr[3];
                         String str5 = (String) objArr[4];
                         String str6 = (String) objArr[5];
-                        int intValue = ((Integer) objArr[6]).intValue();
-                        int intValue2 = ((Integer) objArr[7]).intValue();
-                        boolean booleanValue = ((Boolean) objArr[8]).booleanValue();
-                        boolean booleanValue2 = ((Boolean) objArr[9]).booleanValue();
-                        boolean booleanValue3 = ((Boolean) objArr[10]).booleanValue();
-                        int simIcon = ((SimInfoRepositoryImpl) this.this$0.simInfoRepository).getSimIcon(intValue, booleanValue);
-                        int simIcon2 = ((SimInfoRepositoryImpl) this.this$0.simInfoRepository).getSimIcon(intValue2, booleanValue2);
-                        List asList = booleanValue3 ? Arrays.asList(new SlotItem(str2, simIcon2, str4, str6), new SlotItem(str, simIcon, str3, str5)) : Arrays.asList(new SlotItem(str, simIcon, str3, str5), new SlotItem(str2, simIcon2, str4, str6));
+                        int iIntValue = ((Integer) objArr[6]).intValue();
+                        int iIntValue2 = ((Integer) objArr[7]).intValue();
+                        boolean zBooleanValue = ((Boolean) objArr[8]).booleanValue();
+                        boolean zBooleanValue2 = ((Boolean) objArr[9]).booleanValue();
+                        boolean zBooleanValue3 = ((Boolean) objArr[10]).booleanValue();
+                        int simIcon = ((SimInfoRepositoryImpl) this.this$0.simInfoRepository).getSimIcon(iIntValue, zBooleanValue);
+                        int simIcon2 = ((SimInfoRepositoryImpl) this.this$0.simInfoRepository).getSimIcon(iIntValue2, zBooleanValue2);
+                        List listAsList = zBooleanValue3 ? Arrays.asList(new SlotItem(str2, simIcon2, str4, str6), new SlotItem(str, simIcon, str3, str5)) : Arrays.asList(new SlotItem(str, simIcon, str3, str5), new SlotItem(str2, simIcon2, str4, str6));
                         this.label = 1;
-                        if (flowCollector.emit(asList, this) == coroutineSingletons) {
+                        if (flowCollector.emit(listAsList, this) == coroutineSingletons) {
                             return coroutineSingletons;
                         }
                     } else {
@@ -228,18 +225,18 @@ public final class MultiSIMViewModelImpl implements MultiSIMViewModel, Button.Cl
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
                 final Flow[] flowArr2 = flowArr;
-                Object combineInternal = CombineKt.combineInternal(flowArr2, new Function0() { // from class: com.android.systemui.settings.multisim.ui.viewmodel.MultiSIMViewModelImpl$special$$inlined$combine$1.2
+                Object objCombineInternal = CombineKt.combineInternal(flowArr2, new Function0() { // from class: com.android.systemui.settings.multisim.ui.viewmodel.MultiSIMViewModelImpl$special$$inlined$combine$1.2
                     @Override // kotlin.jvm.functions.Function0
                     public final Object invoke() {
                         return new Object[flowArr2.length];
                     }
                 }, new AnonymousClass3(null, this), flowCollector, continuation);
-                return combineInternal == CoroutineSingletons.COROUTINE_SUSPENDED ? combineInternal : Unit.INSTANCE;
+                return objCombineInternal == CoroutineSingletons.COROUTINE_SUSPENDED ? objCombineInternal : Unit.INSTANCE;
             }
         };
         SharingStarted.Companion companion = SharingStarted.Companion;
-        ReadonlyStateFlow stateIn = FlowKt.stateIn(flow, coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), Arrays.asList(new SlotItem(UniversalCredentialManager.APPLET_FORM_FACTOR_SIM1, 0, simInfoRepositoryImpl._networkNameDefault, simInfoRepositoryImpl._unknownPhoneNumber), new SlotItem(UniversalCredentialManager.APPLET_FORM_FACTOR_SIM2, 1, simInfoRepositoryImpl._networkNameDefault, simInfoRepositoryImpl._unknownPhoneNumber)));
-        this.slots = stateIn;
+        ReadonlyStateFlow readonlyStateFlowStateIn = FlowKt.stateIn(flow, coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), Arrays.asList(new SlotItem(UniversalCredentialManager.APPLET_FORM_FACTOR_SIM1, 0, simInfoRepositoryImpl._networkNameDefault, simInfoRepositoryImpl._unknownPhoneNumber), new SlotItem(UniversalCredentialManager.APPLET_FORM_FACTOR_SIM2, 1, simInfoRepositoryImpl._networkNameDefault, simInfoRepositoryImpl._unknownPhoneNumber)));
+        this.slots = readonlyStateFlowStateIn;
         this.simNameFlows = new LinkedHashMap();
         this.carrierNameFlows = new LinkedHashMap();
         this.iconResIdFlows = new LinkedHashMap();
@@ -247,7 +244,6 @@ public final class MultiSIMViewModelImpl implements MultiSIMViewModel, Button.Cl
         final ReadonlyStateFlow readonlyStateFlow = simInfoRepositoryImpl.defaultVoiceSimId;
         this.buttonLayoutForVoice = FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.settings.multisim.ui.viewmodel.MultiSIMViewModelImpl$special$$inlined$map$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.settings.multisim.ui.viewmodel.MultiSIMViewModelImpl$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -274,110 +270,80 @@ public final class MultiSIMViewModelImpl implements MultiSIMViewModel, Button.Cl
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.settings.multisim.ui.viewmodel.MultiSIMViewModelImpl$special$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.settings.multisim.ui.viewmodel.MultiSIMViewModelImpl$special$$inlined$map$1$2$1 r0 = (com.android.systemui.settings.multisim.ui.viewmodel.MultiSIMViewModelImpl$special$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.settings.multisim.ui.viewmodel.MultiSIMViewModelImpl$special$$inlined$map$1$2$1 r0 = new com.android.systemui.settings.multisim.ui.viewmodel.MultiSIMViewModelImpl$special$$inlined$map$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L50
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        java.lang.Number r5 = (java.lang.Number) r5
-                        int r5 = r5.intValue()
-                        int r5 = r5 - r3
-                        if (r5 >= 0) goto L3e
-                        com.android.systemui.settings.multisim.ui.viewmodel.Button$Layout r5 = com.android.systemui.settings.multisim.ui.viewmodel.Button.Layout.TEXTONLY_1
-                        goto L45
-                    L3e:
-                        if (r5 <= r3) goto L43
-                        com.android.systemui.settings.multisim.ui.viewmodel.Button$Layout r5 = com.android.systemui.settings.multisim.ui.viewmodel.Button.Layout.TEXTONLY_2
-                        goto L45
-                    L43:
-                        com.android.systemui.settings.multisim.ui.viewmodel.Button$Layout r5 = com.android.systemui.settings.multisim.ui.viewmodel.Button.Layout.NORMAL
-                    L45:
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L50
-                        return r1
-                    L50:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.settings.multisim.ui.viewmodel.MultiSIMViewModelImpl$special$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        int iIntValue = ((Number) obj).intValue() - 1;
+                        Button.Layout layout = iIntValue < 0 ? Button.Layout.TEXTONLY_1 : iIntValue > 1 ? Button.Layout.TEXTONLY_2 : Button.Layout.NORMAL;
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(layout, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = readonlyStateFlow.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         });
-        this.buttonLayoutForData = FlowKt.distinctUntilChanged(FlowKt.combine(simInfoRepositoryImpl.isDataEnabled, simInfoRepositoryImpl.defaultDataSimId, stateIn, new MultiSIMViewModelImpl$buttonLayoutForData$1(this, null)));
-        ReadonlyStateFlow stateIn2 = FlowKt.stateIn(FlowKt.combine(simInfoRepositoryImpl.isAirplaneMode, simInfoRepositoryImpl.isSatelliteMode, simInfoRepositoryImpl.isCalling, simInfoRepositoryImpl.isSRoaming, simInfoRepositoryImpl.isRestrictionsForMmsUse, new MultiSIMViewModelImpl$isButtonDisabled$1(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), Boolean.TRUE);
-        this.isButtonDisabled = stateIn2;
-        this.isButtonDisabledForData = FlowKt.distinctUntilChanged(FlowKt.combine(stateIn2, simInfoRepositoryImpl.isDataSimSwitching, simInfoRepositoryImpl.isNetModeChanging, new MultiSIMViewModelImpl$isButtonDisabledForData$1(null)));
+        this.buttonLayoutForData = FlowKt.distinctUntilChanged(FlowKt.combine(simInfoRepositoryImpl.isDataEnabled, simInfoRepositoryImpl.defaultDataSimId, readonlyStateFlowStateIn, new MultiSIMViewModelImpl$buttonLayoutForData$1(this, null)));
+        ReadonlyStateFlow readonlyStateFlowStateIn2 = FlowKt.stateIn(FlowKt.combine(simInfoRepositoryImpl.isAirplaneMode, simInfoRepositoryImpl.isSatelliteMode, simInfoRepositoryImpl.isCalling, simInfoRepositoryImpl.isSRoaming, simInfoRepositoryImpl.isRestrictionsForMmsUse, new MultiSIMViewModelImpl$isButtonDisabled$1(null)), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), Boolean.TRUE);
+        this.isButtonDisabled = readonlyStateFlowStateIn2;
+        this.isButtonDisabledForData = FlowKt.distinctUntilChanged(FlowKt.combine(readonlyStateFlowStateIn2, simInfoRepositoryImpl.isDataSimSwitching, simInfoRepositoryImpl.isNetModeChanging, new MultiSIMViewModelImpl$isButtonDisabledForData$1(null)));
         this.simInfoPrimaryId = FlowKt.stateIn(FlowKt.distinctUntilChanged(new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(simInfoRepositoryImpl.defaultDataSimId, simInfoRepositoryImpl.isSlotReversed, new MultiSIMViewModelImpl$simInfoPrimaryId$1(null))), coroutineScope, SharingStarted.Companion.WhileSubscribed$default(companion, 3), 0);
-        this.barUpdateEvents = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(simInfoRepositoryImpl.isMultiSIMReady, MutableStateFlow, new MultiSIMViewModelImpl$barUpdateEvents$1(null));
+        this.barUpdateEvents = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(simInfoRepositoryImpl.isMultiSIMReady, stateFlowImplMutableStateFlow, new MultiSIMViewModelImpl$barUpdateEvents$1(null));
         this.isBarShowing = StateFlowKt.MutableStateFlow(Boolean.FALSE);
         userTrackerImpl.addCallback(callback, new HandlerExecutor(handler));
     }
 
     public final Flow getButtonCarrierName(ButtonType buttonType) {
         LinkedHashMap linkedHashMap = (LinkedHashMap) this.carrierNameFlows;
-        Object obj = linkedHashMap.get(buttonType);
-        if (obj == null) {
+        Object objDistinctUntilChanged = linkedHashMap.get(buttonType);
+        if (objDistinctUntilChanged == null) {
             ReadonlyStateFlow defaultSimId = toDefaultSimId(buttonType);
             SimInfoRepositoryImpl simInfoRepositoryImpl = (SimInfoRepositoryImpl) this.simInfoRepository;
-            obj = FlowKt.distinctUntilChanged(FlowKt.combine(defaultSimId, simInfoRepositoryImpl.sim1CarrierName, simInfoRepositoryImpl.sim2CarrierName, simInfoRepositoryImpl.isSlotReversed, new MultiSIMViewModelImpl$getButtonCarrierName$1$1(buttonType, null)));
-            linkedHashMap.put(buttonType, obj);
+            objDistinctUntilChanged = FlowKt.distinctUntilChanged(FlowKt.combine(defaultSimId, simInfoRepositoryImpl.sim1CarrierName, simInfoRepositoryImpl.sim2CarrierName, simInfoRepositoryImpl.isSlotReversed, new MultiSIMViewModelImpl$getButtonCarrierName$1$1(buttonType, null)));
+            linkedHashMap.put(buttonType, objDistinctUntilChanged);
         }
-        return (Flow) obj;
+        return (Flow) objDistinctUntilChanged;
     }
 
     public final Flow getButtonIconResId(final ButtonType buttonType) {
         LinkedHashMap linkedHashMap = (LinkedHashMap) this.iconResIdFlows;
-        Object obj = linkedHashMap.get(buttonType);
-        if (obj == null) {
+        Object objDistinctUntilChanged = linkedHashMap.get(buttonType);
+        if (objDistinctUntilChanged == null) {
             ReadonlyStateFlow defaultSimId = toDefaultSimId(buttonType);
             SimInfoRepositoryImpl simInfoRepositoryImpl = (SimInfoRepositoryImpl) this.simInfoRepository;
             final Flow[] flowArr = {defaultSimId, simInfoRepositoryImpl.sim1IconIndex, simInfoRepositoryImpl.sim2IconIndex, simInfoRepositoryImpl.isESim1, simInfoRepositoryImpl.isESim2, simInfoRepositoryImpl.isSlotReversed};
-            obj = FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.settings.multisim.ui.viewmodel.MultiSIMViewModelImpl$getButtonIconResId$lambda$4$$inlined$combine$1
+            objDistinctUntilChanged = FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.settings.multisim.ui.viewmodel.MultiSIMViewModelImpl$getButtonIconResId$lambda$4$$inlined$combine$1
 
-                /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
                 /* renamed from: com.android.systemui.settings.multisim.ui.viewmodel.MultiSIMViewModelImpl$getButtonIconResId$lambda$4$$inlined$combine$1$3, reason: invalid class name */
                 public final class AnonymousClass3 extends SuspendLambda implements Function3 {
                     final /* synthetic */ ButtonType $type$inlined;
@@ -415,22 +381,22 @@ public final class MultiSIMViewModelImpl implements MultiSIMViewModel, Button.Cl
                             Object obj4 = objArr[2];
                             Object obj5 = objArr[3];
                             Object obj6 = objArr[4];
-                            boolean booleanValue = ((Boolean) objArr[5]).booleanValue();
-                            boolean booleanValue2 = ((Boolean) obj6).booleanValue();
-                            boolean booleanValue3 = ((Boolean) obj5).booleanValue();
-                            int intValue = ((Number) obj4).intValue();
-                            int intValue2 = ((Number) obj3).intValue();
-                            int intValue3 = ((Number) obj2).intValue();
+                            boolean zBooleanValue = ((Boolean) objArr[5]).booleanValue();
+                            boolean zBooleanValue2 = ((Boolean) obj6).booleanValue();
+                            boolean zBooleanValue3 = ((Boolean) obj5).booleanValue();
+                            int iIntValue = ((Number) obj4).intValue();
+                            int iIntValue2 = ((Number) obj3).intValue();
+                            int iIntValue3 = ((Number) obj2).intValue();
                             ButtonType buttonType = this.$type$inlined;
                             if (buttonType == ButtonType.VOICE) {
-                                intValue3--;
+                                iIntValue3--;
                             }
                             if (buttonType == ButtonType.SIMINFO1) {
-                                num = new Integer(booleanValue ? ((SimInfoRepositoryImpl) this.this$0.simInfoRepository).getSimIcon(intValue, booleanValue2) : ((SimInfoRepositoryImpl) this.this$0.simInfoRepository).getSimIcon(intValue2, booleanValue3));
+                                num = new Integer(zBooleanValue ? ((SimInfoRepositoryImpl) this.this$0.simInfoRepository).getSimIcon(iIntValue, zBooleanValue2) : ((SimInfoRepositoryImpl) this.this$0.simInfoRepository).getSimIcon(iIntValue2, zBooleanValue3));
                             } else if (buttonType == ButtonType.SIMINFO2) {
-                                num = new Integer(booleanValue ? ((SimInfoRepositoryImpl) this.this$0.simInfoRepository).getSimIcon(intValue2, booleanValue3) : ((SimInfoRepositoryImpl) this.this$0.simInfoRepository).getSimIcon(intValue, booleanValue2));
+                                num = new Integer(zBooleanValue ? ((SimInfoRepositoryImpl) this.this$0.simInfoRepository).getSimIcon(iIntValue2, zBooleanValue3) : ((SimInfoRepositoryImpl) this.this$0.simInfoRepository).getSimIcon(iIntValue, zBooleanValue2));
                             } else {
-                                num = new Integer(intValue3 == 1 ? ((SimInfoRepositoryImpl) this.this$0.simInfoRepository).getSimIcon(intValue, booleanValue2) : ((SimInfoRepositoryImpl) this.this$0.simInfoRepository).getSimIcon(intValue2, booleanValue3));
+                                num = new Integer(iIntValue3 == 1 ? ((SimInfoRepositoryImpl) this.this$0.simInfoRepository).getSimIcon(iIntValue, zBooleanValue2) : ((SimInfoRepositoryImpl) this.this$0.simInfoRepository).getSimIcon(iIntValue2, zBooleanValue3));
                             }
                             this.label = 1;
                             if (flowCollector.emit(num, this) == coroutineSingletons) {
@@ -449,52 +415,52 @@ public final class MultiSIMViewModelImpl implements MultiSIMViewModel, Button.Cl
                 @Override // kotlinx.coroutines.flow.Flow
                 public final Object collect(FlowCollector flowCollector, Continuation continuation) {
                     final Flow[] flowArr2 = flowArr;
-                    Object combineInternal = CombineKt.combineInternal(flowArr2, new Function0() { // from class: com.android.systemui.settings.multisim.ui.viewmodel.MultiSIMViewModelImpl$getButtonIconResId$lambda$4$$inlined$combine$1.2
+                    Object objCombineInternal = CombineKt.combineInternal(flowArr2, new Function0() { // from class: com.android.systemui.settings.multisim.ui.viewmodel.MultiSIMViewModelImpl$getButtonIconResId$lambda$4$$inlined$combine$1.2
                         @Override // kotlin.jvm.functions.Function0
                         public final Object invoke() {
                             return new Object[flowArr2.length];
                         }
                     }, new AnonymousClass3(null, buttonType, this), flowCollector, continuation);
-                    return combineInternal == CoroutineSingletons.COROUTINE_SUSPENDED ? combineInternal : Unit.INSTANCE;
+                    return objCombineInternal == CoroutineSingletons.COROUTINE_SUSPENDED ? objCombineInternal : Unit.INSTANCE;
                 }
             });
-            linkedHashMap.put(buttonType, obj);
+            linkedHashMap.put(buttonType, objDistinctUntilChanged);
         }
-        return (Flow) obj;
+        return (Flow) objDistinctUntilChanged;
     }
 
     public final Flow getButtonSimName(ButtonType buttonType) {
         LinkedHashMap linkedHashMap = (LinkedHashMap) this.simNameFlows;
-        Object obj = linkedHashMap.get(buttonType);
-        if (obj == null) {
+        Object objDistinctUntilChanged = linkedHashMap.get(buttonType);
+        if (objDistinctUntilChanged == null) {
             ReadonlyStateFlow defaultSimId = toDefaultSimId(buttonType);
             SimInfoRepositoryImpl simInfoRepositoryImpl = (SimInfoRepositoryImpl) this.simInfoRepository;
-            obj = FlowKt.distinctUntilChanged(FlowKt.combine(defaultSimId, simInfoRepositoryImpl.sim1Name, simInfoRepositoryImpl.sim2Name, simInfoRepositoryImpl.isSlotReversed, new MultiSIMViewModelImpl$getButtonSimName$1$1(buttonType, null)));
-            linkedHashMap.put(buttonType, obj);
+            objDistinctUntilChanged = FlowKt.distinctUntilChanged(FlowKt.combine(defaultSimId, simInfoRepositoryImpl.sim1Name, simInfoRepositoryImpl.sim2Name, simInfoRepositoryImpl.isSlotReversed, new MultiSIMViewModelImpl$getButtonSimName$1$1(buttonType, null)));
+            linkedHashMap.put(buttonType, objDistinctUntilChanged);
         }
-        return (Flow) obj;
+        return (Flow) objDistinctUntilChanged;
     }
 
     public final int getDefaultSlotIndex(ButtonType buttonType) {
-        int intValue = ((Number) toDefaultSimId(buttonType).$$delegate_0.getValue()).intValue();
+        int iIntValue = ((Number) toDefaultSimId(buttonType).$$delegate_0.getValue()).intValue();
         ButtonType buttonType2 = ButtonType.VOICE;
         SimInfoRepository simInfoRepository = this.simInfoRepository;
         if (buttonType != buttonType2) {
             if (((Boolean) ((SimInfoRepositoryImpl) simInfoRepository).isSlotReversed.$$delegate_0.getValue()).booleanValue()) {
-                return 1 - intValue;
+                return 1 - iIntValue;
             }
-        } else if ((intValue == 1 || intValue == 2) && ((Boolean) ((SimInfoRepositoryImpl) simInfoRepository).isSlotReversed.$$delegate_0.getValue()).booleanValue()) {
-            return 3 - intValue;
+        } else if ((iIntValue == 1 || iIntValue == 2) && ((Boolean) ((SimInfoRepositoryImpl) simInfoRepository).isSlotReversed.$$delegate_0.getValue()).booleanValue()) {
+            return 3 - iIntValue;
         }
-        return intValue;
+        return iIntValue;
     }
 
     public final boolean isAvailable() {
         if (((Boolean) ((SimInfoRepositoryImpl) this.simInfoRepository).isMultiSIMReady.$$delegate_0.getValue()).booleanValue()) {
             boolean z = DeviceType.isLDUSKU() || DeviceType.isLDUOLDModel();
-            boolean booleanValue = ((Boolean) this.isSecondaryUser.getValue()).booleanValue();
-            KeyguardKnoxGuardViewController$$ExternalSyntheticOutline0.m("isLDUModel = ", " isSecondaryUser = ", "MULTISIM-VM", z, booleanValue);
-            if (!z && !booleanValue && !this.settingsHelper.isEmergencyMode()) {
+            boolean zBooleanValue = ((Boolean) this.isSecondaryUser.getValue()).booleanValue();
+            KeyguardKnoxGuardViewController$$ExternalSyntheticOutline0.m("isLDUModel = ", " isSecondaryUser = ", "MULTISIM-VM", z, zBooleanValue);
+            if (!z && !zBooleanValue && !this.settingsHelper.isEmergencyMode()) {
                 return true;
             }
         }
@@ -526,9 +492,14 @@ public final class MultiSIMViewModelImpl implements MultiSIMViewModel, Button.Cl
     }
 
     /* JADX WARN: Multi-variable type inference failed */
+    /* JADX WARN: Removed duplicated region for block: B:136:0x03cf  */
+    /* JADX WARN: Removed duplicated region for block: B:165:0x04cf  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void onSlotButtonClick(ButtonType buttonType, View view) {
-        SemBlurInfo.Builder builder;
-        Bitmap bitmap;
+        Bitmap bitmapScreenshot;
+        SemBlurInfo.Builder bitmap;
         SimInfoRepository simInfoRepository = this.simInfoRepository;
         SimInfoRepositoryImpl simInfoRepositoryImpl = (SimInfoRepositoryImpl) simInfoRepository;
         if (((Boolean) simInfoRepositoryImpl.isAirplaneMode.$$delegate_0.getValue()).booleanValue()) {
@@ -572,6 +543,7 @@ public final class MultiSIMViewModelImpl implements MultiSIMViewModel, Button.Cl
             if (multiSIMPreferredSlotView.mPopupWindow == null) {
                 multiSIMPreferredSlotView.mPopupWindow = multiSIMPreferredSlotView.new PrefferedSlotPopupWindow(multiSIMPreferredSlotView.mContext);
             }
+            multiSIMPreferredSlotView.mPopupWindow.updateSlotListPopupContents((List) this.slots.$$delegate_0.getValue());
             MultiSIMPreferredSlotView.PrefferedSlotPopupWindow prefferedSlotPopupWindow = multiSIMPreferredSlotView.mPopupWindow;
             prefferedSlotPopupWindow.mSlotListButton1Group.setVisibility(0);
             prefferedSlotPopupWindow.mSlotListButton2Group.setVisibility(0);
@@ -652,10 +624,10 @@ public final class MultiSIMViewModelImpl implements MultiSIMViewModel, Button.Cl
                 prefferedSlotPopupWindow.mSlotListButton1Group.setBackground(prefferedSlotPopupWindow.mContext.getResources().getDrawable(R.drawable.qs_panel_multi_sim_menu_item_top_ripple_bg));
             }
             if (buttonType == buttonType3) {
-                TelecomManager from = TelecomManager.from(this.mContext);
-                Iterator it = from.getCallCapablePhoneAccounts(true).iterator();
+                TelecomManager telecomManagerFrom = TelecomManager.from(this.mContext);
+                Iterator it = telecomManagerFrom.getCallCapablePhoneAccounts(true).iterator();
                 while (it.hasNext()) {
-                    PhoneAccount phoneAccount = from.getPhoneAccount((PhoneAccountHandle) it.next());
+                    PhoneAccount phoneAccount = telecomManagerFrom.getPhoneAccount((PhoneAccountHandle) it.next());
                     if (phoneAccount != null && (phoneAccount.getCapabilities() & 4) == 0) {
                         Log.d("MULTISIM-VM", "Support Call preferred Others");
                         prefferedSlotPopupWindow.mSlotListOthersButtonGroup.setVisibility(0);
@@ -664,65 +636,65 @@ public final class MultiSIMViewModelImpl implements MultiSIMViewModel, Button.Cl
                         break;
                     }
                 }
-            }
-            prefferedSlotPopupWindow.mSlotListOthersButtonGroup.setVisibility(8);
-            prefferedSlotPopupWindow.mSlotListButton2Group.setPaddingRelative(dimensionPixelSize3, dimensionPixelSize, dimensionPixelSize3, dimensionPixelSize5);
-            prefferedSlotPopupWindow.mSlotListButton2Group.setBackground(prefferedSlotPopupWindow.mContext.getResources().getDrawable(R.drawable.qs_panel_multi_sim_menu_item_bottom_ripple_bg));
-            if (view != null) {
-                View contentView = prefferedSlotPopupWindow.getContentView();
-                int[] iArr = new int[2];
-                view.getLocationOnScreen(iArr);
-                int height = view.getHeight();
-                int width = view.getWidth();
-                contentView.measure(0, 0);
-                int measuredHeight = contentView.getMeasuredHeight();
-                int measuredWidth = contentView.getMeasuredWidth();
-                int i2 = prefferedSlotPopupWindow.mContext.getResources().getDisplayMetrics().heightPixels;
-                int i3 = prefferedSlotPopupWindow.mContext.getResources().getDisplayMetrics().widthPixels;
-                int i4 = prefferedSlotPopupWindow.mPopupWindowTopMargin;
-                int i5 = iArr[1];
-                byte b = (i2 - i5) - i4 < measuredHeight;
-                int i6 = iArr[0];
-                if (i3 - i6 < measuredWidth) {
-                    i6 = (i6 + width) - measuredWidth;
-                }
-                if (b != false) {
-                    i4 = height - measuredHeight;
-                }
-                int[] iArr2 = {i6, i5 + i4};
-                MultiSIMPreferredSlotView multiSIMPreferredSlotView2 = MultiSIMPreferredSlotView.this;
-                multiSIMPreferredSlotView2.getClass();
-                prefferedSlotPopupWindow.showAtLocation(view, (!DeviceState.isTablet() || DeviceState.isVoiceCapable(multiSIMPreferredSlotView2.mContext)) ? 8388659 : 49, iArr2[0], iArr2[1]);
-                float dimensionPixelSize6 = prefferedSlotPopupWindow.mContext.getResources().getDimensionPixelSize(R.dimen.qs_multisim_popup_menu_bg_radius);
-                int color = prefferedSlotPopupWindow.mContext.getResources().getColor(R.color.sec_qs_multisim_preffered_slot_background);
-                if (QpRune.QUICK_PANEL_BLUR_DEFAULT) {
-                    builder = new SemBlurInfo.Builder(0).setRadius(200).setBackgroundColor(color).setBackgroundCornerRadius(dimensionPixelSize6);
-                } else {
-                    if (QpRune.QUICK_PANEL_BLUR_MASSIVE) {
+                prefferedSlotPopupWindow.mSlotListOthersButtonGroup.setVisibility(8);
+                prefferedSlotPopupWindow.mSlotListButton2Group.setPaddingRelative(dimensionPixelSize3, dimensionPixelSize, dimensionPixelSize3, dimensionPixelSize5);
+                prefferedSlotPopupWindow.mSlotListButton2Group.setBackground(prefferedSlotPopupWindow.mContext.getResources().getDrawable(R.drawable.qs_panel_multi_sim_menu_item_bottom_ripple_bg));
+                if (view != null) {
+                    View contentView = prefferedSlotPopupWindow.getContentView();
+                    int[] iArr = new int[2];
+                    view.getLocationOnScreen(iArr);
+                    int height = view.getHeight();
+                    int width = view.getWidth();
+                    contentView.measure(0, 0);
+                    int measuredHeight = contentView.getMeasuredHeight();
+                    int measuredWidth = contentView.getMeasuredWidth();
+                    int i2 = prefferedSlotPopupWindow.mContext.getResources().getDisplayMetrics().heightPixels;
+                    int i3 = prefferedSlotPopupWindow.mContext.getResources().getDisplayMetrics().widthPixels;
+                    int i4 = prefferedSlotPopupWindow.mPopupWindowTopMargin;
+                    int i5 = iArr[1];
+                    Object[] objArr = (i2 - i5) - i4 < measuredHeight;
+                    int i6 = iArr[0];
+                    if (i3 - i6 < measuredWidth) {
+                        i6 = (i6 + width) - measuredWidth;
+                    }
+                    if (objArr != false) {
+                        i4 = height - measuredHeight;
+                    }
+                    int[] iArr2 = {i6, i5 + i4};
+                    MultiSIMPreferredSlotView multiSIMPreferredSlotView2 = MultiSIMPreferredSlotView.this;
+                    multiSIMPreferredSlotView2.getClass();
+                    prefferedSlotPopupWindow.showAtLocation(view, (!DeviceState.isTablet() || DeviceState.isVoiceCapable(multiSIMPreferredSlotView2.mContext)) ? 8388659 : 49, iArr2[0], iArr2[1]);
+                    float dimensionPixelSize6 = prefferedSlotPopupWindow.mContext.getResources().getDimensionPixelSize(R.dimen.qs_multisim_popup_menu_bg_radius);
+                    int color = prefferedSlotPopupWindow.mContext.getResources().getColor(R.color.sec_qs_multisim_preffered_slot_background);
+                    if (QpRune.QUICK_PANEL_BLUR_DEFAULT) {
+                        bitmap = new SemBlurInfo.Builder(0).setRadius(200).setBackgroundColor(color).setBackgroundCornerRadius(dimensionPixelSize6);
+                    } else if (QpRune.QUICK_PANEL_BLUR_MASSIVE) {
                         int i7 = iArr2[0];
                         int i8 = iArr2[1];
                         int measuredWidth2 = prefferedSlotPopupWindow.mPopupContentView.getMeasuredWidth();
                         int measuredHeight2 = prefferedSlotPopupWindow.mPopupContentView.getMeasuredHeight();
                         try {
-                            bitmap = SemWindowManager.getInstance().screenshot(((WindowManager) prefferedSlotPopupWindow.mContext.getSystemService("window")).getDefaultDisplay().getDisplayId(), 2036, true, new Rect(i7, i8, i7 + measuredWidth2, i8 + measuredHeight2), measuredWidth2, measuredHeight2, false, 0, true);
+                            bitmapScreenshot = SemWindowManager.getInstance().screenshot(((WindowManager) prefferedSlotPopupWindow.mContext.getSystemService("window")).getDefaultDisplay().getDisplayId(), 2036, true, new Rect(i7, i8, i7 + measuredWidth2, i8 + measuredHeight2), measuredWidth2, measuredHeight2, false, 0, true);
                         } catch (SecurityException e) {
                             e.printStackTrace();
-                            bitmap = null;
+                            bitmapScreenshot = null;
                         }
-                        if (bitmap == null) {
-                            bitmap = null;
+                        if (bitmapScreenshot == null) {
+                            bitmapScreenshot = null;
                         }
-                        if (bitmap != null) {
-                            builder = new SemBlurInfo.Builder(1).setRadius(IKnoxCustomManager.Stub.TRANSACTION_addDexURLShortcutExtend).setBitmap(bitmap);
-                        }
+                        bitmap = bitmapScreenshot != null ? new SemBlurInfo.Builder(1).setRadius(IKnoxCustomManager.Stub.TRANSACTION_addDexURLShortcutExtend).setBitmap(bitmapScreenshot) : null;
                     }
-                    builder = null;
+                    if (bitmap != null) {
+                        prefferedSlotPopupWindow.mPopupContentView.semSetBlurInfo(bitmap.build());
+                    }
                 }
-                if (builder != null) {
-                    prefferedSlotPopupWindow.mPopupContentView.semSetBlurInfo(builder.build());
+            } else {
+                prefferedSlotPopupWindow.mSlotListOthersButtonGroup.setVisibility(8);
+                prefferedSlotPopupWindow.mSlotListButton2Group.setPaddingRelative(dimensionPixelSize3, dimensionPixelSize, dimensionPixelSize3, dimensionPixelSize5);
+                prefferedSlotPopupWindow.mSlotListButton2Group.setBackground(prefferedSlotPopupWindow.mContext.getResources().getDrawable(R.drawable.qs_panel_multi_sim_menu_item_bottom_ripple_bg));
+                if (view != null) {
                 }
             }
-            multiSIMPreferredSlotView.mPopupWindow.updateSlotListPopupContents((List) this.slots.$$delegate_0.getValue());
         }
         simInfoRepositoryImpl.updatePhoneNumberWhenNeeded();
     }
@@ -759,43 +731,6 @@ public final class MultiSIMViewModelImpl implements MultiSIMViewModel, Button.Cl
         return true;
     }
 
-    public final void register(SlotsView slotsView) {
-        this.bindedView = slotsView;
-        MultiSIMViewModelImpl$$ExternalSyntheticLambda0 multiSIMViewModelImpl$$ExternalSyntheticLambda0 = new MultiSIMViewModelImpl$$ExternalSyntheticLambda0(slotsView);
-        SimInfoRepositoryImpl simInfoRepositoryImpl = (SimInfoRepositoryImpl) this.simInfoRepository;
-        simInfoRepositoryImpl.needUpdatePhoneNumber = multiSIMViewModelImpl$$ExternalSyntheticLambda0;
-        if (simInfoRepositoryImpl.simCardManagerService == null) {
-            SimCardManagerServiceProvider service = SimCardManagerServiceProvider.getService(simInfoRepositoryImpl.mContext);
-            simInfoRepositoryImpl.simCardManagerService = service;
-            Log.d("MULTISIM-PROD-REPO", "registerSimCardManagerCallback SimCardManagerService " + service);
-        }
-        SimInfoRepositoryImpl$registerSimCardManagerCallback$1 simInfoRepositoryImpl$registerSimCardManagerCallback$1 = SimCardManagerServiceProvider.sSimCardManagerServiceCallback;
-        simInfoRepositoryImpl.simCardCallback = simInfoRepositoryImpl$registerSimCardManagerCallback$1;
-        if (simInfoRepositoryImpl$registerSimCardManagerCallback$1 == null) {
-            SimInfoRepositoryImpl$registerSimCardManagerCallback$1 simInfoRepositoryImpl$registerSimCardManagerCallback$12 = new SimInfoRepositoryImpl$registerSimCardManagerCallback$1(simInfoRepositoryImpl);
-            simInfoRepositoryImpl.simCardCallback = simInfoRepositoryImpl$registerSimCardManagerCallback$12;
-            if (simInfoRepositoryImpl.simCardManagerService != null) {
-                try {
-                    SimCardManagerServiceProvider.sSimCardManagerServiceCallback = simInfoRepositoryImpl$registerSimCardManagerCallback$12;
-                } catch (Exception e) {
-                    Log.d("MULTISIM-PROD-REPO", "Caught exception from registerSimCardManagerCallback", e);
-                }
-            } else {
-                Log.d("MULTISIM-PROD-REPO", "registerSimCardManagerCallback : mSimCardManagerService is null ");
-            }
-        } else {
-            Log.d("MULTISIM-PROD-REPO", "registerSimCardManagerCallback : mSimCardCallback is not null ");
-        }
-        simInfoRepositoryImpl.isRegistered = true;
-        Log.d("MULTISIM-PROD-REPO", "updateCurrentDefaultSlot list");
-        List list = CollectionsKt___CollectionsKt.toList(simInfoRepositoryImpl.mDefaultIdUpdateList);
-        ((ArrayList) simInfoRepositoryImpl.mDefaultIdUpdateList).clear();
-        Iterator it = list.iterator();
-        while (it.hasNext()) {
-            simInfoRepositoryImpl.updateCurrentDefaultSlot((ButtonType) it.next());
-        }
-    }
-
     public final void setDefaultSlot(ButtonType buttonType, int i) {
         int i2 = i;
         ButtonType buttonType2 = ButtonType.VOICE;
@@ -807,10 +742,9 @@ public final class MultiSIMViewModelImpl implements MultiSIMViewModel, Button.Cl
         } else if ((i2 == 1 || i2 == 2) && ((Boolean) ((SimInfoRepositoryImpl) simInfoRepository).isSlotReversed.$$delegate_0.getValue()).booleanValue()) {
             i2 = 3 - i2;
         }
-        int i3 = i2;
-        SimInfoRepositoryImpl simInfoRepositoryImpl = (SimInfoRepositoryImpl) simInfoRepository;
+        SimInfoRepositoryImpl simInfoRepositoryImpl = (SimInfoRepositoryImpl) this.simInfoRepository;
         simInfoRepositoryImpl.getClass();
-        Log.w("MULTISIM-PROD-REPO", "setDefaultSlot : type = " + buttonType + ", slotId = " + i3);
+        Log.w("MULTISIM-PROD-REPO", "setDefaultSlot : type = " + buttonType + ", slotId = " + i2);
         String str = "PREFERRED_MOBILE_DATA";
         if (SimCardManagerServiceProvider.isServiceRunningCheck(simInfoRepositoryImpl.mContext)) {
             int index = buttonType.getIndex();
@@ -825,12 +759,12 @@ public final class MultiSIMViewModelImpl implements MultiSIMViewModel, Button.Cl
                     SimCardManagerServiceProvider.mIsRemainCallbackCall = true;
                 }
                 Log.d("SimCardManagerServiceProvider", "setChangeSimCardManagerSlot : mIsRemainCallbackCall = " + SimCardManagerServiceProvider.mIsRemainCallbackCall);
-                bundle.putInt("selectItem", i3);
-                Bundle call = SimCardManagerServiceProvider.mContext.getContentResolver().call(SimCardManagerServiceProvider.INTERNAL_URI, "quickpanel_simcard_change", (String) null, bundle);
-                if (call == null) {
+                bundle.putInt("selectItem", i2);
+                Bundle bundleCall = SimCardManagerServiceProvider.mContext.getContentResolver().call(SimCardManagerServiceProvider.INTERNAL_URI, "quickpanel_simcard_change", (String) null, bundle);
+                if (bundleCall == null) {
                     Log.d("SimCardManagerServiceProvider", "bundle is null : quickpanel_simcard_change");
                 } else {
-                    call.getBoolean("success");
+                    bundleCall.getBoolean("success");
                 }
             } catch (Throwable th) {
                 Log.e("SimCardManagerServiceProvider", th.toString());
@@ -847,22 +781,93 @@ public final class MultiSIMViewModelImpl implements MultiSIMViewModel, Button.Cl
             try {
                 Bundle bundle2 = new Bundle();
                 bundle2.putString("changeType", str);
-                bundle2.putInt("selectItem", i3);
-                Bundle call2 = simInfoRepositoryImpl.mContext.getContentResolver().call(SimInfoRepositoryImpl.INTERNAL_URI, "quickpanel_simcard_change", (String) null, bundle2);
-                if (call2 == null) {
+                bundle2.putInt("selectItem", i2);
+                Bundle bundleCall2 = simInfoRepositoryImpl.mContext.getContentResolver().call(SimInfoRepositoryImpl.INTERNAL_URI, "quickpanel_simcard_change", (String) null, bundle2);
+                if (bundleCall2 == null) {
                     Log.d("MULTISIM-PROD-REPO", "bundle is null : quickpanel_simcard_change");
                 } else {
-                    Log.d("MULTISIM-PROD-REPO", "quickpanel_simcard_change, " + call2.getBoolean("success") + ", " + ((Throwable) call2.getParcelable("error")));
+                    Log.d("MULTISIM-PROD-REPO", "quickpanel_simcard_change, " + bundleCall2.getBoolean("success") + ", " + ((Throwable) bundleCall2.getParcelable("error")));
                 }
             } catch (Throwable th2) {
                 Log.e("MULTISIM-PROD-REPO", "quickpanel_simcard_change, " + th2);
             }
             simInfoRepositoryImpl.simCardManagerService = SimCardManagerServiceProvider.getService(simInfoRepositoryImpl.mContext);
         }
-        if (buttonType != ButtonType.DATA || i3 == ((Number) simInfoRepositoryImpl._defaultDataSimId.getValue()).intValue()) {
+        if (buttonType != ButtonType.DATA || i2 == ((Number) simInfoRepositoryImpl._defaultDataSimId.getValue()).intValue()) {
             return;
         }
         simInfoRepositoryImpl._isDataSimSwitching.updateState(null, Boolean.TRUE);
+    }
+
+    public final void startUpdating(boolean z) {
+        if (z) {
+            if (!this.isUpdating && this.isQpExpanded && ((Boolean) this.isBarShowing.getValue()).booleanValue()) {
+                SimInfoRepositoryImpl simInfoRepositoryImpl = (SimInfoRepositoryImpl) this.simInfoRepository;
+                simInfoRepositoryImpl.needUpdatePhoneNumber = new MultiSIMViewModelImpl$$ExternalSyntheticLambda0(this);
+                if (simInfoRepositoryImpl.simCardManagerService == null) {
+                    simInfoRepositoryImpl.simCardManagerService = SimCardManagerServiceProvider.getService(simInfoRepositoryImpl.mContext);
+                    Log.d("MULTISIM-PROD-REPO", "registerSimCardManagerCallback SimCardManagerService " + simInfoRepositoryImpl.simCardManagerService);
+                }
+                if (SimCardManagerServiceProvider.sSimCardManagerServiceCallback == null) {
+                    try {
+                        if (simInfoRepositoryImpl.simCardManagerService != null) {
+                            SimCardManagerServiceProvider.sSimCardManagerServiceCallback = simInfoRepositoryImpl.simCardCallback;
+                        } else {
+                            Log.d("MULTISIM-PROD-REPO", "registerSimCardManagerCallback : mSimCardManagerService is null ");
+                        }
+                    } catch (Exception e) {
+                        Log.d("MULTISIM-PROD-REPO", "Caught exception from registerSimCardManagerCallback", e);
+                    }
+                } else {
+                    Log.d("MULTISIM-PROD-REPO", "registerSimCardManagerCallback : mSimCardCallback is not null ");
+                }
+                simInfoRepositoryImpl.isRegistered = true;
+                Log.d("MULTISIM-PROD-REPO", "updateCurrentDefaultSlot list");
+                List list = CollectionsKt___CollectionsKt.toList(simInfoRepositoryImpl.mDefaultIdUpdateList);
+                ((ArrayList) simInfoRepositoryImpl.mDefaultIdUpdateList).clear();
+                Iterator it = list.iterator();
+                while (it.hasNext()) {
+                    simInfoRepositoryImpl.updateCurrentDefaultSlot((ButtonType) it.next());
+                }
+                this.isUpdating = true;
+                return;
+            }
+            return;
+        }
+        if (this.isUpdating) {
+            SimInfoRepositoryImpl simInfoRepositoryImpl2 = (SimInfoRepositoryImpl) this.simInfoRepository;
+            simInfoRepositoryImpl2.needUpdatePhoneNumber = null;
+            try {
+                if (simInfoRepositoryImpl2.simCardManagerService == null) {
+                    Log.d("MULTISIM-PROD-REPO", "unRegisterSimCardManagerCallback : mSimCardManagerService is null ");
+                } else if (!SimCardManagerServiceProvider.mIsRemainCallbackCall) {
+                    SimCardManagerServiceProvider.sSimCardManagerServiceCallback = null;
+                }
+            } catch (Exception e2) {
+                Log.w("MULTISIM-PROD-REPO", "Caught exception from unRegisterSimCardManagerCallback", e2);
+            }
+            if (SimCardManagerServiceProvider.sServiceBindHelper != null) {
+                int i = (SimCardManagerServiceProvider.mIsRemainCallbackCall && SimCardManagerServiceProvider.isServiceRunningCheck(SimCardManagerServiceProvider.mContext)) ? VolumePanelState.DIALOG_TIMEOUT_SET_SAFE_MEDIA_VOLUME_MILLIS : 0;
+                SimCardManagerServiceProvider.AnonymousClass1 anonymousClass1 = SimCardManagerServiceProvider.mHandler;
+                if (anonymousClass1 != null) {
+                    Log.d("SimCardManagerServiceProvider", "CloseService : mIsRemainCallbackCall = " + SimCardManagerServiceProvider.mIsRemainCallbackCall + ", delayTime = " + i);
+                    if (SimCardManagerServiceProvider.sServiceBindHelper.mServiceStatus == 0) {
+                        Log.d("SimCardManagerServiceProvider", "CloseService : already disconnected so initial value");
+                        SimCardManagerServiceProvider.sSimCardManagerServiceCallback = null;
+                        SimCardManagerServiceProvider.sServiceBindHelper = null;
+                        SimCardManagerServiceProvider.sInstance = null;
+                        SimCardManagerServiceProvider.mIsServiceClose = true;
+                        SimCardManagerServiceProvider.mIsRemainCallbackCall = false;
+                    } else {
+                        anonymousClass1.sendMessageDelayed(anonymousClass1.obtainMessage(0), i);
+                    }
+                }
+            }
+            simInfoRepositoryImpl2.simCardManagerService = null;
+            Log.d("MULTISIM-PROD-REPO", "SimCardManagerCallback unregistered");
+            simInfoRepositoryImpl2.isRegistered = false;
+            this.isUpdating = false;
+        }
     }
 
     public final ReadonlyStateFlow toDefaultSimId(ButtonType buttonType) {

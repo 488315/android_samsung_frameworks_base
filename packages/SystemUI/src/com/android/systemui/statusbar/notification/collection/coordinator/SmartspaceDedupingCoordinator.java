@@ -25,7 +25,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @CoordinatorScope
 /* loaded from: classes3.dex */
 public final class SmartspaceDedupingCoordinator implements Coordinator {
@@ -44,34 +43,23 @@ public final class SmartspaceDedupingCoordinator implements Coordinator {
 
         @Override // com.android.systemui.statusbar.notification.collection.listbuilder.pluggable.NotifFilter
         public boolean shouldFilterOut(NotificationEntry notificationEntry, long j) {
-            boolean z;
-            boolean isDupedWithSmartspaceContent;
-            z = SmartspaceDedupingCoordinator.this.isOnLockscreen;
-            if (!z) {
-                return false;
-            }
-            isDupedWithSmartspaceContent = SmartspaceDedupingCoordinator.this.isDupedWithSmartspaceContent(notificationEntry);
-            return isDupedWithSmartspaceContent;
+            return this.this$0.isOnLockscreen && this.this$0.isDupedWithSmartspaceContent(notificationEntry);
         }
     };
     private final SmartspaceDedupingCoordinator$collectionListener$1 collectionListener = new NotifCollectionListener() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.SmartspaceDedupingCoordinator$collectionListener$1
         @Override // com.android.systemui.statusbar.notification.collection.notifcollection.NotifCollectionListener
         public void onEntryAdded(NotificationEntry notificationEntry) {
-            Map map;
-            map = SmartspaceDedupingCoordinator.this.trackedSmartspaceTargets;
-            TrackedSmartspaceTarget trackedSmartspaceTarget = (TrackedSmartspaceTarget) map.get(notificationEntry.mKey);
+            TrackedSmartspaceTarget trackedSmartspaceTarget = (TrackedSmartspaceTarget) this.this$0.trackedSmartspaceTargets.get(notificationEntry.mKey);
             if (trackedSmartspaceTarget != null) {
-                SmartspaceDedupingCoordinator.this.updateFilterStatus(trackedSmartspaceTarget);
+                this.this$0.updateFilterStatus(trackedSmartspaceTarget);
             }
         }
 
         @Override // com.android.systemui.statusbar.notification.collection.notifcollection.NotifCollectionListener
         public void onEntryRemoved(NotificationEntry notificationEntry, int i) {
-            Map map;
-            map = SmartspaceDedupingCoordinator.this.trackedSmartspaceTargets;
-            TrackedSmartspaceTarget trackedSmartspaceTarget = (TrackedSmartspaceTarget) map.get(notificationEntry.mKey);
+            TrackedSmartspaceTarget trackedSmartspaceTarget = (TrackedSmartspaceTarget) this.this$0.trackedSmartspaceTargets.get(notificationEntry.mKey);
             if (trackedSmartspaceTarget != null) {
-                SmartspaceDedupingCoordinator.this.cancelExceptionTimeout(trackedSmartspaceTarget);
+                this.this$0.cancelExceptionTimeout(trackedSmartspaceTarget);
             }
         }
 
@@ -82,11 +70,9 @@ public final class SmartspaceDedupingCoordinator implements Coordinator {
 
         @Override // com.android.systemui.statusbar.notification.collection.notifcollection.NotifCollectionListener
         public void onEntryUpdated(NotificationEntry notificationEntry) {
-            Map map;
-            map = SmartspaceDedupingCoordinator.this.trackedSmartspaceTargets;
-            TrackedSmartspaceTarget trackedSmartspaceTarget = (TrackedSmartspaceTarget) map.get(notificationEntry.mKey);
+            TrackedSmartspaceTarget trackedSmartspaceTarget = (TrackedSmartspaceTarget) this.this$0.trackedSmartspaceTargets.get(notificationEntry.mKey);
             if (trackedSmartspaceTarget != null) {
-                SmartspaceDedupingCoordinator.this.updateFilterStatus(trackedSmartspaceTarget);
+                this.this$0.updateFilterStatus(trackedSmartspaceTarget);
             }
         }
 
@@ -118,7 +104,7 @@ public final class SmartspaceDedupingCoordinator implements Coordinator {
     private final SmartspaceDedupingCoordinator$statusBarStateListener$1 statusBarStateListener = new StatusBarStateController.StateListener() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.SmartspaceDedupingCoordinator$statusBarStateListener$1
         @Override // com.android.systemui.plugins.statusbar.StatusBarStateController.StateListener
         public void onStateChanged(int i) {
-            SmartspaceDedupingCoordinator.this.recordStatusBarState(i);
+            this.this$0.recordStatusBarState(i);
         }
     };
 
@@ -144,10 +130,7 @@ public final class SmartspaceDedupingCoordinator implements Coordinator {
     }
 
     private final boolean hasRecentlyAlerted(NotificationEntry notificationEntry) {
-        long j;
-        long currentTimeMillis = this.clock.currentTimeMillis() - notificationEntry.mRanking.getLastAudiblyAlertedMillis();
-        j = SmartspaceDedupingCoordinatorKt.ALERT_WINDOW;
-        return currentTimeMillis <= j;
+        return this.clock.currentTimeMillis() - notificationEntry.mRanking.getLastAudiblyAlertedMillis() <= SmartspaceDedupingCoordinatorKt.ALERT_WINDOW;
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -166,7 +149,7 @@ public final class SmartspaceDedupingCoordinator implements Coordinator {
         LinkedHashMap linkedHashMap = new LinkedHashMap();
         Map<String, TrackedSmartspaceTarget> map = this.trackedSmartspaceTargets;
         Iterator<? extends Parcelable> it = list.iterator();
-        boolean z = false;
+        boolean zUpdateFilterStatus = false;
         if (it.hasNext()) {
             SmartspaceTarget smartspaceTarget = (Parcelable) it.next();
             SmartspaceTarget smartspaceTarget2 = smartspaceTarget instanceof SmartspaceTarget ? smartspaceTarget : null;
@@ -177,7 +160,7 @@ public final class SmartspaceDedupingCoordinator implements Coordinator {
                 }
                 TrackedSmartspaceTarget trackedSmartspaceTarget2 = trackedSmartspaceTarget;
                 linkedHashMap.put(sourceNotificationKey, trackedSmartspaceTarget2);
-                z = updateFilterStatus(trackedSmartspaceTarget2);
+                zUpdateFilterStatus = updateFilterStatus(trackedSmartspaceTarget2);
             }
         }
         for (String str : map.keySet()) {
@@ -186,10 +169,10 @@ public final class SmartspaceDedupingCoordinator implements Coordinator {
                 if (trackedSmartspaceTarget3 != null && (cancelTimeoutRunnable = trackedSmartspaceTarget3.getCancelTimeoutRunnable()) != null) {
                     cancelTimeoutRunnable.run();
                 }
-                z = true;
+                zUpdateFilterStatus = true;
             }
         }
-        if (z) {
+        if (zUpdateFilterStatus) {
             invalidateList("onNewSmartspaceTargets");
         }
         this.trackedSmartspaceTargets = linkedHashMap;
@@ -206,29 +189,24 @@ public final class SmartspaceDedupingCoordinator implements Coordinator {
     }
 
     private final void updateAlertException(final TrackedSmartspaceTarget trackedSmartspaceTarget, final NotificationEntry notificationEntry) {
-        long j;
-        long currentTimeMillis = this.clock.currentTimeMillis();
-        long lastAudiblyAlertedMillis = notificationEntry.mRanking.getLastAudiblyAlertedMillis();
-        j = SmartspaceDedupingCoordinatorKt.ALERT_WINDOW;
-        long j2 = j + lastAudiblyAlertedMillis;
-        if (j2 == trackedSmartspaceTarget.getAlertExceptionExpires() || j2 <= currentTimeMillis) {
+        long jCurrentTimeMillis = this.clock.currentTimeMillis();
+        long lastAudiblyAlertedMillis = SmartspaceDedupingCoordinatorKt.ALERT_WINDOW + notificationEntry.mRanking.getLastAudiblyAlertedMillis();
+        if (lastAudiblyAlertedMillis == trackedSmartspaceTarget.getAlertExceptionExpires() || lastAudiblyAlertedMillis <= jCurrentTimeMillis) {
             return;
         }
         Runnable cancelTimeoutRunnable = trackedSmartspaceTarget.getCancelTimeoutRunnable();
         if (cancelTimeoutRunnable != null) {
             cancelTimeoutRunnable.run();
         }
-        trackedSmartspaceTarget.setAlertExceptionExpires(j2);
-        trackedSmartspaceTarget.setCancelTimeoutRunnable(this.executor.executeDelayed(new Runnable() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.SmartspaceDedupingCoordinator$updateAlertException$1
+        trackedSmartspaceTarget.setAlertExceptionExpires(lastAudiblyAlertedMillis);
+        trackedSmartspaceTarget.setCancelTimeoutRunnable(this.executor.executeDelayed(new Runnable() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.SmartspaceDedupingCoordinator.updateAlertException.1
             @Override // java.lang.Runnable
             public final void run() {
-                SmartspaceDedupingCoordinator$filter$1 smartspaceDedupingCoordinator$filter$1;
-                TrackedSmartspaceTarget.this.setCancelTimeoutRunnable(null);
-                TrackedSmartspaceTarget.this.setShouldFilter(true);
-                smartspaceDedupingCoordinator$filter$1 = this.filter;
-                smartspaceDedupingCoordinator$filter$1.invalidateList("updateAlertException: " + NotificationUtilsKt.getLogKey(notificationEntry));
+                trackedSmartspaceTarget.setCancelTimeoutRunnable(null);
+                trackedSmartspaceTarget.setShouldFilter(true);
+                invalidateList("updateAlertException: " + NotificationUtilsKt.getLogKey(notificationEntry));
             }
-        }, j2 - currentTimeMillis));
+        }, lastAudiblyAlertedMillis - jCurrentTimeMillis));
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -248,7 +226,7 @@ public final class SmartspaceDedupingCoordinator implements Coordinator {
         notifPipeline.addCollectionListener(this.collectionListener);
         this.statusBarStateController.addCallback(this.statusBarStateListener);
         LockscreenSmartspaceController lockscreenSmartspaceController = this.smartspaceController;
-        BcSmartspaceDataPlugin.SmartspaceTargetListener smartspaceTargetListener = new BcSmartspaceDataPlugin.SmartspaceTargetListener() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.SmartspaceDedupingCoordinator$attach$1
+        BcSmartspaceDataPlugin.SmartspaceTargetListener smartspaceTargetListener = new BcSmartspaceDataPlugin.SmartspaceTargetListener() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.SmartspaceDedupingCoordinator.attach.1
             @Override // com.android.systemui.plugins.BcSmartspaceDataPlugin.SmartspaceTargetListener
             public final void onSmartspaceTargetsUpdated(List<? extends Parcelable> list) {
                 SmartspaceDedupingCoordinator.this.onNewSmartspaceTargets(list);

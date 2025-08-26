@@ -123,10 +123,10 @@ public class Selection {
         int selectionStart = getSelectionStart(spannable);
         int selectionEnd = getSelectionEnd(spannable);
         if (selectionStart != selectionEnd) {
-            int min = Math.min(selectionStart, selectionEnd);
-            int max = Math.max(selectionStart, selectionEnd);
-            setSelection(spannable, min);
-            return (min == 0 && max == spannable.length()) ? false : true;
+            int iMin = Math.min(selectionStart, selectionEnd);
+            int iMax = Math.max(selectionStart, selectionEnd);
+            setSelection(spannable, iMin);
+            return (iMin == 0 && iMax == spannable.length()) ? false : true;
         }
         int lineForOffset = layout.getLineForOffset(selectionEnd);
         if (lineForOffset > 0) {
@@ -168,10 +168,10 @@ public class Selection {
         int selectionStart = getSelectionStart(spannable);
         int selectionEnd = getSelectionEnd(spannable);
         if (selectionStart != selectionEnd) {
-            int min = Math.min(selectionStart, selectionEnd);
-            int max = Math.max(selectionStart, selectionEnd);
-            setSelection(spannable, max);
-            return (min == 0 && max == spannable.length()) ? false : true;
+            int iMin = Math.min(selectionStart, selectionEnd);
+            int iMax = Math.max(selectionStart, selectionEnd);
+            setSelection(spannable, iMax);
+            return (iMin == 0 && iMax == spannable.length()) ? false : true;
         }
         int lineForOffset = layout.getLineForOffset(selectionEnd);
         if (lineForOffset < layout.getLineCount() - 1) {
@@ -222,14 +222,14 @@ public class Selection {
             setSelection(spannable, chooseHorizontal(layout, -1, selectionStart, selectionEnd));
             return true;
         }
-        int lastIndexOf = TextUtils.lastIndexOf(spannable, PARAGRAPH_SEPARATOR, selectionStart - 1);
-        if (lastIndexOf == -1) {
-            lastIndexOf = 0;
+        int iLastIndexOf = TextUtils.lastIndexOf(spannable, PARAGRAPH_SEPARATOR, selectionStart - 1);
+        if (iLastIndexOf == -1) {
+            iLastIndexOf = 0;
         }
-        if (lastIndexOf == selectionEnd) {
+        if (iLastIndexOf == selectionEnd) {
             return false;
         }
-        setSelection(spannable, lastIndexOf);
+        setSelection(spannable, iLastIndexOf);
         return true;
     }
 
@@ -240,40 +240,40 @@ public class Selection {
             setSelection(spannable, chooseHorizontal(layout, 1, selectionStart, selectionEnd));
             return true;
         }
-        int indexOf = TextUtils.indexOf(spannable, PARAGRAPH_SEPARATOR, selectionEnd + 1);
-        if (indexOf == -1) {
-            indexOf = spannable.length();
+        int iIndexOf = TextUtils.indexOf(spannable, PARAGRAPH_SEPARATOR, selectionEnd + 1);
+        if (iIndexOf == -1) {
+            iIndexOf = spannable.length();
         }
-        if (indexOf == selectionEnd) {
+        if (iIndexOf == selectionEnd) {
             return false;
         }
-        setSelection(spannable, indexOf);
+        setSelection(spannable, iIndexOf);
         return true;
     }
 
     public static boolean extendToParagraphStart(Spannable spannable) {
         int selectionEnd = getSelectionEnd(spannable);
-        int lastIndexOf = TextUtils.lastIndexOf(spannable, PARAGRAPH_SEPARATOR, selectionEnd - 1);
-        if (lastIndexOf == -1) {
-            lastIndexOf = 0;
+        int iLastIndexOf = TextUtils.lastIndexOf(spannable, PARAGRAPH_SEPARATOR, selectionEnd - 1);
+        if (iLastIndexOf == -1) {
+            iLastIndexOf = 0;
         }
-        if (lastIndexOf == selectionEnd) {
+        if (iLastIndexOf == selectionEnd) {
             return false;
         }
-        extendSelection(spannable, lastIndexOf);
+        extendSelection(spannable, iLastIndexOf);
         return true;
     }
 
     public static boolean extendToParagraphEnd(Spannable spannable) {
         int selectionEnd = getSelectionEnd(spannable);
-        int indexOf = TextUtils.indexOf(spannable, PARAGRAPH_SEPARATOR, selectionEnd + 1);
-        if (indexOf == -1) {
-            indexOf = spannable.length();
+        int iIndexOf = TextUtils.indexOf(spannable, PARAGRAPH_SEPARATOR, selectionEnd + 1);
+        if (iIndexOf == -1) {
+            iIndexOf = spannable.length();
         }
-        if (indexOf == selectionEnd) {
+        if (iIndexOf == selectionEnd) {
             return false;
         }
-        extendSelection(spannable, indexOf);
+        extendSelection(spannable, iIndexOf);
         return true;
     }
 
@@ -342,28 +342,28 @@ public class Selection {
     }
 
     public static boolean moveToPreceding(Spannable spannable, PositionIterator positionIterator, boolean z) {
-        int preceding = positionIterator.preceding(getSelectionEnd(spannable));
-        if (preceding == -1) {
+        int iPreceding = positionIterator.preceding(getSelectionEnd(spannable));
+        if (iPreceding == -1) {
             return true;
         }
         if (z) {
-            extendSelection(spannable, preceding);
+            extendSelection(spannable, iPreceding);
             return true;
         }
-        setSelection(spannable, preceding);
+        setSelection(spannable, iPreceding);
         return true;
     }
 
     public static boolean moveToFollowing(Spannable spannable, PositionIterator positionIterator, boolean z) {
-        int following = positionIterator.following(getSelectionEnd(spannable));
-        if (following == -1) {
+        int iFollowing = positionIterator.following(getSelectionEnd(spannable));
+        if (iFollowing == -1) {
             return true;
         }
         if (z) {
-            extendSelection(spannable, following);
+            extendSelection(spannable, iFollowing);
             return true;
         }
-        setSelection(spannable, following);
+        setSelection(spannable, iFollowing);
         return true;
     }
 

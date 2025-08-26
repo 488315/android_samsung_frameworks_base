@@ -10,7 +10,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function4;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class AudioVolumeInteractor$getAudioStream$1 extends SuspendLambda implements Function4 {
     /* synthetic */ int I$0;
@@ -28,15 +27,19 @@ final class AudioVolumeInteractor$getAudioStream$1 extends SuspendLambda impleme
     @Override // kotlin.jvm.functions.Function4
     public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4) {
         int i = ((RingerMode) obj2).value;
-        boolean booleanValue = ((Boolean) obj3).booleanValue();
+        boolean zBooleanValue = ((Boolean) obj3).booleanValue();
         AudioVolumeInteractor$getAudioStream$1 audioVolumeInteractor$getAudioStream$1 = new AudioVolumeInteractor$getAudioStream$1(this.this$0, (Continuation) obj4);
         audioVolumeInteractor$getAudioStream$1.L$0 = (AudioStreamModel) obj;
         audioVolumeInteractor$getAudioStream$1.I$0 = i;
-        audioVolumeInteractor$getAudioStream$1.Z$0 = booleanValue;
+        audioVolumeInteractor$getAudioStream$1.Z$0 = zBooleanValue;
         return audioVolumeInteractor$getAudioStream$1.invokeSuspend(Unit.INSTANCE);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:21:0x005f  */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final Object invokeSuspend(Object obj) {
         Object num;
         AudioStreamModel audioStreamModel;
@@ -53,21 +56,15 @@ final class AudioVolumeInteractor$getAudioStream$1 extends SuspendLambda impleme
             this.label = 1;
             audioVolumeInteractor.getClass();
             if (z) {
-                num = ((AudioRepositoryImpl) audioVolumeInteractor.audioRepository).m979getLastAudibleVolumeVrMivd8(audioStreamModel2.audioStream, this);
+                num = ((AudioRepositoryImpl) audioVolumeInteractor.audioRepository).m981getLastAudibleVolumeVrMivd8(audioStreamModel2.audioStream, this);
             } else {
                 int i3 = audioStreamModel2.audioStream;
                 int i4 = audioStreamModel2.minVolume;
                 boolean z2 = audioStreamModel2.isMuted;
                 if ((i3 == 2 || i3 == 5) && i2 == 1) {
-                    if (i3 == 2 || (i3 == 5 && z2)) {
-                        num = new Integer(i4);
-                    }
-                    num = new Integer(audioStreamModel2.volume);
-                } else {
-                    if (z2) {
-                        num = new Integer(i4);
-                    }
-                    num = new Integer(audioStreamModel2.volume);
+                    num = (i3 == 2 || (i3 == 5 && z2)) ? new Integer(i4) : new Integer(audioStreamModel2.volume);
+                } else if (z2) {
+                    num = new Integer(i4);
                 }
             }
             if (num == coroutineSingletons) {

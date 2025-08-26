@@ -1,168 +1,384 @@
 package com.android.systemui.inputmethod.data.repository;
 
+import android.os.UserHandle;
+import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.view.inputmethod.InputMethodSubtype;
+import com.android.systemui.inputmethod.data.model.InputMethodModel;
+import java.util.ArrayList;
+import java.util.List;
+import kotlin.ResultKt;
 import kotlin.Unit;
+import kotlin.collections.CollectionsKt__IterablesKt;
+import kotlin.collections.EmptyList;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
+import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineDispatcher;
+import kotlinx.coroutines.CoroutineScope;
+import kotlinx.coroutines.flow.Flow;
+import kotlinx.coroutines.flow.FlowCollector;
+import kotlinx.coroutines.flow.FlowKt__BuildersKt$asFlow$$inlined$unsafeFlow$3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class InputMethodRepositoryImpl implements InputMethodRepository {
     public final CoroutineDispatcher backgroundDispatcher;
     public final InputMethodManager inputMethodManager;
+
+    /* renamed from: com.android.systemui.inputmethod.data.repository.InputMethodRepositoryImpl$enabledInputMethodSubtypes$1, reason: invalid class name */
+    final class AnonymousClass1 extends ContinuationImpl {
+        int label;
+        /* synthetic */ Object result;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return InputMethodRepositoryImpl.this.enabledInputMethodSubtypes(null, null, false, this);
+        }
+    }
+
+    /* renamed from: com.android.systemui.inputmethod.data.repository.InputMethodRepositoryImpl$enabledInputMethodSubtypes$2, reason: invalid class name */
+    final class AnonymousClass2 extends SuspendLambda implements Function2 {
+        final /* synthetic */ boolean $allowsImplicitlyEnabledSubtypes;
+        final /* synthetic */ String $imeId;
+        final /* synthetic */ UserHandle $user;
+        int label;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public AnonymousClass2(String str, boolean z, UserHandle userHandle, Continuation continuation) {
+            super(2, continuation);
+            this.$imeId = str;
+            this.$allowsImplicitlyEnabledSubtypes = z;
+            this.$user = userHandle;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return InputMethodRepositoryImpl.this.new AnonymousClass2(this.$imeId, this.$allowsImplicitlyEnabledSubtypes, this.$user, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((AnonymousClass2) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            return InputMethodRepositoryImpl.this.inputMethodManager.getEnabledInputMethodSubtypeListAsUser(this.$imeId, this.$allowsImplicitlyEnabledSubtypes, this.$user);
+        }
+    }
+
+    /* renamed from: com.android.systemui.inputmethod.data.repository.InputMethodRepositoryImpl$enabledInputMethods$1, reason: invalid class name and case insensitive filesystem */
+    final class C08761 extends ContinuationImpl {
+        Object L$0;
+        Object L$1;
+        boolean Z$0;
+        int label;
+        /* synthetic */ Object result;
+
+        public C08761(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return InputMethodRepositoryImpl.this.enabledInputMethods(null, false, this);
+        }
+    }
+
+    /* renamed from: com.android.systemui.inputmethod.data.repository.InputMethodRepositoryImpl$enabledInputMethods$2, reason: invalid class name and case insensitive filesystem */
+    final class C08772 extends SuspendLambda implements Function2 {
+        final /* synthetic */ UserHandle $user;
+        int label;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public C08772(UserHandle userHandle, Continuation continuation) {
+            super(2, continuation);
+            this.$user = userHandle;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return InputMethodRepositoryImpl.this.new C08772(this.$user, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((C08772) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            return InputMethodRepositoryImpl.this.inputMethodManager.getEnabledInputMethodListAsUser(this.$user);
+        }
+    }
+
+    /* renamed from: com.android.systemui.inputmethod.data.repository.InputMethodRepositoryImpl$showInputMethodPicker$2, reason: invalid class name and case insensitive filesystem */
+    final class C08782 extends SuspendLambda implements Function2 {
+        final /* synthetic */ int $displayId;
+        final /* synthetic */ boolean $showAuxiliarySubtypes;
+        int label;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public C08782(boolean z, int i, Continuation continuation) {
+            super(2, continuation);
+            this.$showAuxiliarySubtypes = z;
+            this.$displayId = i;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return InputMethodRepositoryImpl.this.new C08782(this.$showAuxiliarySubtypes, this.$displayId, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((C08782) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            InputMethodRepositoryImpl.this.inputMethodManager.showInputMethodPickerFromSystem(this.$showAuxiliarySubtypes, this.$displayId);
+            return Unit.INSTANCE;
+        }
+    }
 
     public InputMethodRepositoryImpl(CoroutineDispatcher coroutineDispatcher, InputMethodManager inputMethodManager) {
         this.backgroundDispatcher = coroutineDispatcher;
         this.inputMethodManager = inputMethodManager;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x005e A[LOOP:0: B:11:0x0058->B:13:0x005e, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x002f  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object enabledInputMethodSubtypes(android.os.UserHandle r11, java.lang.String r12, boolean r13, kotlin.coroutines.jvm.internal.ContinuationImpl r14) {
-        /*
-            r10 = this;
-            boolean r0 = r14 instanceof com.android.systemui.inputmethod.data.repository.InputMethodRepositoryImpl$enabledInputMethodSubtypes$1
-            if (r0 == 0) goto L13
-            r0 = r14
-            com.android.systemui.inputmethod.data.repository.InputMethodRepositoryImpl$enabledInputMethodSubtypes$1 r0 = (com.android.systemui.inputmethod.data.repository.InputMethodRepositoryImpl$enabledInputMethodSubtypes$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.systemui.inputmethod.data.repository.InputMethodRepositoryImpl$enabledInputMethodSubtypes$1 r0 = new com.android.systemui.inputmethod.data.repository.InputMethodRepositoryImpl$enabledInputMethodSubtypes$1
-            r0.<init>(r10, r14)
-        L18:
-            java.lang.Object r14 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L2f
-            if (r2 != r3) goto L27
-            kotlin.ResultKt.throwOnFailure(r14)
-            goto L47
-        L27:
-            java.lang.IllegalStateException r10 = new java.lang.IllegalStateException
-            java.lang.String r11 = "call to 'resume' before 'invoke' with coroutine"
-            r10.<init>(r11)
-            throw r10
-        L2f:
-            kotlin.ResultKt.throwOnFailure(r14)
-            com.android.systemui.inputmethod.data.repository.InputMethodRepositoryImpl$enabledInputMethodSubtypes$2 r4 = new com.android.systemui.inputmethod.data.repository.InputMethodRepositoryImpl$enabledInputMethodSubtypes$2
-            r9 = 0
-            r5 = r10
-            r8 = r11
-            r6 = r12
-            r7 = r13
-            r4.<init>(r5, r6, r7, r8, r9)
-            r0.label = r3
-            kotlinx.coroutines.CoroutineDispatcher r10 = r5.backgroundDispatcher
-            java.lang.Object r14 = kotlinx.coroutines.BuildersKt.withContext(r10, r4, r0)
-            if (r14 != r1) goto L47
-            return r1
-        L47:
-            java.lang.Iterable r14 = (java.lang.Iterable) r14
-            java.util.ArrayList r10 = new java.util.ArrayList
-            r11 = 10
-            int r11 = kotlin.collections.CollectionsKt__IterablesKt.collectionSizeOrDefault(r14, r11)
-            r10.<init>(r11)
-            java.util.Iterator r11 = r14.iterator()
-        L58:
-            boolean r12 = r11.hasNext()
-            if (r12 == 0) goto L75
-            java.lang.Object r12 = r11.next()
-            android.view.inputmethod.InputMethodSubtype r12 = (android.view.inputmethod.InputMethodSubtype) r12
-            com.android.systemui.inputmethod.data.model.InputMethodModel$Subtype r13 = new com.android.systemui.inputmethod.data.model.InputMethodModel$Subtype
-            int r14 = r12.getSubtypeId()
-            boolean r12 = r12.isAuxiliary()
-            r13.<init>(r14, r12)
-            r10.add(r13)
-            goto L58
-        L75:
-            return r10
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.inputmethod.data.repository.InputMethodRepositoryImpl.enabledInputMethodSubtypes(android.os.UserHandle, java.lang.String, boolean, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object enabledInputMethodSubtypes(UserHandle userHandle, String str, boolean z, ContinuationImpl continuationImpl) throws Throwable {
+        AnonymousClass1 anonymousClass1;
+        if (continuationImpl instanceof AnonymousClass1) {
+            anonymousClass1 = (AnonymousClass1) continuationImpl;
+            int i = anonymousClass1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                anonymousClass1.label = i - Integer.MIN_VALUE;
+            } else {
+                anonymousClass1 = new AnonymousClass1(continuationImpl);
+            }
+        }
+        Object objWithContext = anonymousClass1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = anonymousClass1.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(objWithContext);
+            AnonymousClass2 anonymousClass2 = new AnonymousClass2(str, z, userHandle, null);
+            anonymousClass1.label = 1;
+            objWithContext = BuildersKt.withContext(this.backgroundDispatcher, anonymousClass2, anonymousClass1);
+            if (objWithContext == coroutineSingletons) {
+                return coroutineSingletons;
+            }
+        } else {
+            if (i2 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(objWithContext);
+        }
+        Iterable<InputMethodSubtype> iterable = (Iterable) objWithContext;
+        ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(iterable, 10));
+        for (InputMethodSubtype inputMethodSubtype : iterable) {
+            arrayList.add(new InputMethodModel.Subtype(inputMethodSubtype.getSubtypeId(), inputMethodSubtype.isAuxiliary()));
+        }
+        return arrayList;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x003a  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object enabledInputMethods(final android.os.UserHandle r5, final boolean r6, kotlin.coroutines.jvm.internal.ContinuationImpl r7) {
-        /*
-            r4 = this;
-            boolean r0 = r7 instanceof com.android.systemui.inputmethod.data.repository.InputMethodRepositoryImpl$enabledInputMethods$1
-            if (r0 == 0) goto L13
-            r0 = r7
-            com.android.systemui.inputmethod.data.repository.InputMethodRepositoryImpl$enabledInputMethods$1 r0 = (com.android.systemui.inputmethod.data.repository.InputMethodRepositoryImpl$enabledInputMethods$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.systemui.inputmethod.data.repository.InputMethodRepositoryImpl$enabledInputMethods$1 r0 = new com.android.systemui.inputmethod.data.repository.InputMethodRepositoryImpl$enabledInputMethods$1
-            r0.<init>(r4, r7)
-        L18:
-            java.lang.Object r7 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L3a
-            if (r2 != r3) goto L32
-            boolean r6 = r0.Z$0
-            java.lang.Object r4 = r0.L$1
-            r5 = r4
-            android.os.UserHandle r5 = (android.os.UserHandle) r5
-            java.lang.Object r4 = r0.L$0
-            com.android.systemui.inputmethod.data.repository.InputMethodRepositoryImpl r4 = (com.android.systemui.inputmethod.data.repository.InputMethodRepositoryImpl) r4
-            kotlin.ResultKt.throwOnFailure(r7)
-            goto L54
-        L32:
-            java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-            java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-            r4.<init>(r5)
-            throw r4
-        L3a:
-            kotlin.ResultKt.throwOnFailure(r7)
-            com.android.systemui.inputmethod.data.repository.InputMethodRepositoryImpl$enabledInputMethods$2 r7 = new com.android.systemui.inputmethod.data.repository.InputMethodRepositoryImpl$enabledInputMethods$2
-            r2 = 0
-            r7.<init>(r4, r5, r2)
-            r0.L$0 = r4
-            r0.L$1 = r5
-            r0.Z$0 = r6
-            r0.label = r3
-            kotlinx.coroutines.CoroutineDispatcher r2 = r4.backgroundDispatcher
-            java.lang.Object r7 = kotlinx.coroutines.BuildersKt.withContext(r2, r7, r0)
-            if (r7 != r1) goto L54
-            return r1
-        L54:
-            java.lang.Iterable r7 = (java.lang.Iterable) r7
-            kotlinx.coroutines.flow.FlowKt__BuildersKt$asFlow$$inlined$unsafeFlow$3 r0 = new kotlinx.coroutines.flow.FlowKt__BuildersKt$asFlow$$inlined$unsafeFlow$3
-            r0.<init>(r7)
-            com.android.systemui.inputmethod.data.repository.InputMethodRepositoryImpl$enabledInputMethods$$inlined$map$1 r7 = new com.android.systemui.inputmethod.data.repository.InputMethodRepositoryImpl$enabledInputMethods$$inlined$map$1
-            r7.<init>()
-            return r7
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.inputmethod.data.repository.InputMethodRepositoryImpl.enabledInputMethods(android.os.UserHandle, boolean, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object enabledInputMethods(final UserHandle userHandle, final boolean z, ContinuationImpl continuationImpl) throws Throwable {
+        C08761 c08761;
+        if (continuationImpl instanceof C08761) {
+            c08761 = (C08761) continuationImpl;
+            int i = c08761.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                c08761.label = i - Integer.MIN_VALUE;
+            } else {
+                c08761 = new C08761(continuationImpl);
+            }
+        }
+        Object objWithContext = c08761.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = c08761.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(objWithContext);
+            C08772 c08772 = new C08772(userHandle, null);
+            c08761.L$0 = this;
+            c08761.L$1 = userHandle;
+            c08761.Z$0 = z;
+            c08761.label = 1;
+            objWithContext = BuildersKt.withContext(this.backgroundDispatcher, c08772, c08761);
+            if (objWithContext == coroutineSingletons) {
+                return coroutineSingletons;
+            }
+        } else {
+            if (i2 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            z = c08761.Z$0;
+            userHandle = (UserHandle) c08761.L$1;
+            this = (InputMethodRepositoryImpl) c08761.L$0;
+            ResultKt.throwOnFailure(objWithContext);
+        }
+        final FlowKt__BuildersKt$asFlow$$inlined$unsafeFlow$3 flowKt__BuildersKt$asFlow$$inlined$unsafeFlow$3 = new FlowKt__BuildersKt$asFlow$$inlined$unsafeFlow$3((Iterable) objWithContext);
+        return new Flow() { // from class: com.android.systemui.inputmethod.data.repository.InputMethodRepositoryImpl$enabledInputMethods$$inlined$map$1
+
+            /* renamed from: com.android.systemui.inputmethod.data.repository.InputMethodRepositoryImpl$enabledInputMethods$$inlined$map$1$2, reason: invalid class name */
+            public final class AnonymousClass2 implements FlowCollector {
+                public final /* synthetic */ boolean $fetchSubtypes$inlined;
+                public final /* synthetic */ FlowCollector $this_unsafeFlow;
+                public final /* synthetic */ UserHandle $user$inlined;
+                public final /* synthetic */ InputMethodRepositoryImpl this$0;
+
+                /* renamed from: com.android.systemui.inputmethod.data.repository.InputMethodRepositoryImpl$enabledInputMethods$$inlined$map$1$2$1, reason: invalid class name */
+                public final class AnonymousClass1 extends ContinuationImpl {
+                    int I$0;
+                    Object L$0;
+                    Object L$1;
+                    int label;
+                    /* synthetic */ Object result;
+
+                    public AnonymousClass1(Continuation continuation) {
+                        super(continuation);
+                    }
+
+                    @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+                    public final Object invokeSuspend(Object obj) {
+                        this.result = obj;
+                        this.label |= Integer.MIN_VALUE;
+                        return AnonymousClass2.this.emit(null, this);
+                    }
+                }
+
+                public AnonymousClass2(FlowCollector flowCollector, UserHandle userHandle, boolean z, InputMethodRepositoryImpl inputMethodRepositoryImpl) {
+                    this.$this_unsafeFlow = flowCollector;
+                    this.$user$inlined = userHandle;
+                    this.$fetchSubtypes$inlined = z;
+                    this.this$0 = inputMethodRepositoryImpl;
+                }
+
+                /* JADX WARN: Code restructure failed: missing block: B:25:0x008c, code lost:
+                
+                    if (r6.emit(r9, r0) != r1) goto L27;
+                 */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
+                @Override // kotlinx.coroutines.flow.FlowCollector
+                /*
+                    Code decompiled incorrectly, please refer to instructions dump.
+                */
+                public final Object emit(Object obj, Continuation continuation) throws Throwable {
+                    AnonymousClass1 anonymousClass1;
+                    String id;
+                    FlowCollector flowCollector;
+                    List list;
+                    int i;
+                    String str;
+                    FlowCollector flowCollector2;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i2 = anonymousClass1.label;
+                        if ((i2 & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i2 - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i3 = anonymousClass1.label;
+                    if (i3 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        InputMethodInfo inputMethodInfo = (InputMethodInfo) obj;
+                        int identifier = this.$user$inlined.getIdentifier();
+                        id = inputMethodInfo.getId();
+                        boolean z = this.$fetchSubtypes$inlined;
+                        flowCollector = this.$this_unsafeFlow;
+                        if (z) {
+                            UserHandle userHandle = this.$user$inlined;
+                            String id2 = inputMethodInfo.getId();
+                            anonymousClass1.L$0 = flowCollector;
+                            anonymousClass1.L$1 = id;
+                            anonymousClass1.I$0 = identifier;
+                            anonymousClass1.label = 1;
+                            Object objEnabledInputMethodSubtypes = this.this$0.enabledInputMethodSubtypes(userHandle, id2, true, anonymousClass1);
+                            if (objEnabledInputMethodSubtypes != coroutineSingletons) {
+                                obj2 = objEnabledInputMethodSubtypes;
+                                i = identifier;
+                                str = id;
+                                flowCollector2 = flowCollector;
+                            }
+                            return coroutineSingletons;
+                        }
+                        list = EmptyList.INSTANCE;
+                        i = identifier;
+                        InputMethodModel inputMethodModel = new InputMethodModel(i, id, list);
+                        anonymousClass1.L$0 = null;
+                        anonymousClass1.L$1 = null;
+                        anonymousClass1.label = 2;
+                    } else {
+                        if (i3 != 1) {
+                            if (i3 != 2) {
+                                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                            }
+                            ResultKt.throwOnFailure(obj2);
+                            return Unit.INSTANCE;
+                        }
+                        i = anonymousClass1.I$0;
+                        str = (String) anonymousClass1.L$1;
+                        flowCollector2 = (FlowCollector) anonymousClass1.L$0;
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    list = (List) obj2;
+                    flowCollector = flowCollector2;
+                    id = str;
+                    InputMethodModel inputMethodModel2 = new InputMethodModel(i, id, list);
+                    anonymousClass1.L$0 = null;
+                    anonymousClass1.L$1 = null;
+                    anonymousClass1.label = 2;
+                }
+            }
+
+            @Override // kotlinx.coroutines.flow.Flow
+            public final Object collect(FlowCollector flowCollector, Continuation continuation) {
+                Object objCollect = flowKt__BuildersKt$asFlow$$inlined$unsafeFlow$3.collect(new AnonymousClass2(flowCollector, userHandle, z, this), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
+            }
+        };
     }
 
-    public final Object showInputMethodPicker(int i, Continuation continuation) {
-        Object withContext = BuildersKt.withContext(this.backgroundDispatcher, new InputMethodRepositoryImpl$showInputMethodPicker$2(this, false, i, null), continuation);
-        return withContext == CoroutineSingletons.COROUTINE_SUSPENDED ? withContext : Unit.INSTANCE;
+    public final Object showInputMethodPicker(int i, Continuation continuation) throws Throwable {
+        Object objWithContext = BuildersKt.withContext(this.backgroundDispatcher, new C08782(false, i, null), continuation);
+        return objWithContext == CoroutineSingletons.COROUTINE_SUSPENDED ? objWithContext : Unit.INSTANCE;
     }
 }

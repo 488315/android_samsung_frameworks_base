@@ -3,6 +3,7 @@ package com.android.keyguard;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.CountDownTimer;
 import android.text.Editable;
@@ -30,7 +31,6 @@ import com.android.systemui.user.domain.interactor.SelectedUserInteractor;
 import com.android.systemui.util.ViewController;
 import com.android.systemui.vibrate.VibrationUtil;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardCarrierPasswordViewController extends KeyguardSecAbsKeyInputViewController implements TextWatcher, TextView.OnEditorActionListener {
     public final ConfigurationController mConfigurationController;
@@ -47,7 +47,7 @@ public class KeyguardCarrierPasswordViewController extends KeyguardSecAbsKeyInpu
     public final AnonymousClass3 mShowImeRunnable;
 
     /* renamed from: $r8$lambda$-goCXBIlA97VX0btFJtY2f5PTY8, reason: not valid java name */
-    public static void m951$r8$lambda$goCXBIlA97VX0btFJtY2f5PTY8(KeyguardCarrierPasswordViewController keyguardCarrierPasswordViewController, boolean z) {
+    public static void m953$r8$lambda$goCXBIlA97VX0btFJtY2f5PTY8(KeyguardCarrierPasswordViewController keyguardCarrierPasswordViewController, boolean z) throws Resources.NotFoundException {
         keyguardCarrierPasswordViewController.mPendingLockCheck = null;
         EmergencyButtonController$$ExternalSyntheticOutline0.m("check result : ", "KeyguardCarrierPasswordView", z);
         if (z) {
@@ -74,7 +74,7 @@ public class KeyguardCarrierPasswordViewController extends KeyguardSecAbsKeyInpu
         this.mCurrentOrientation = -1;
         this.mConfigurationListener = new ConfigurationController.ConfigurationListener() { // from class: com.android.keyguard.KeyguardCarrierPasswordViewController.1
             @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
-            public final void onConfigChanged(Configuration configuration) {
+            public final void onConfigChanged(Configuration configuration) throws Resources.NotFoundException {
                 KeyguardCarrierPasswordViewController keyguardCarrierPasswordViewController = KeyguardCarrierPasswordViewController.this;
                 if (keyguardCarrierPasswordViewController.mCurrentOrientation != configuration.orientation) {
                     keyguardCarrierPasswordViewController.updateLayout$1();
@@ -166,7 +166,7 @@ public class KeyguardCarrierPasswordViewController extends KeyguardSecAbsKeyInpu
     }
 
     @Override // com.android.keyguard.KeyguardSecAbsKeyInputViewController, com.android.keyguard.KeyguardAbsKeyInputViewController, com.android.keyguard.KeyguardInputViewController, com.android.systemui.util.ViewController
-    public final void onViewAttached() {
+    public final void onViewAttached() throws Resources.NotFoundException {
         super.onViewAttached();
         ((ConfigurationControllerImpl) this.mConfigurationController).addCallback(this.mConfigurationListener);
         this.mPasswordEntry.addTextChangedListener(this);
@@ -177,7 +177,7 @@ public class KeyguardCarrierPasswordViewController extends KeyguardSecAbsKeyInpu
         this.mPasswordEntry.setOnClickListener(new View.OnClickListener() { // from class: com.android.keyguard.KeyguardCarrierPasswordViewController$$ExternalSyntheticLambda0
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                KeyguardCarrierPasswordViewController.this.getKeyguardSecurityCallback().userActivity();
+                this.f$0.getKeyguardSecurityCallback().userActivity();
             }
         });
         this.mPasswordEntry.addTextChangedListener(new TextWatcher() { // from class: com.android.keyguard.KeyguardCarrierPasswordViewController.2
@@ -221,7 +221,7 @@ public class KeyguardCarrierPasswordViewController extends KeyguardSecAbsKeyInpu
     }
 
     @Override // com.android.keyguard.KeyguardSecAbsKeyInputViewController
-    public final void updateLayout$1() {
+    public final void updateLayout$1() throws Resources.NotFoundException {
         if (this.mPasswordEntryBoxLayout != null) {
             int dimensionPixelSize = getResources().getDimensionPixelSize(R.dimen.kg_security_input_box_side_margin);
             ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) this.mPasswordEntryBoxLayout.getLayoutParams();
@@ -234,14 +234,14 @@ public class KeyguardCarrierPasswordViewController extends KeyguardSecAbsKeyInpu
     @Override // com.android.keyguard.KeyguardSecAbsKeyInputViewController
     public final void verifyPasswordAndUnlock() {
         getKeyguardSecurityCallback().userActivity();
-        byte[] charSequenceToByteArray = KeyguardSecAbsKeyInputViewController.charSequenceToByteArray(this.mPasswordEntry.getText());
+        byte[] bArrCharSequenceToByteArray = KeyguardSecAbsKeyInputViewController.charSequenceToByteArray(this.mPasswordEntry.getText());
         AsyncTask asyncTask = this.mPendingLockCheck;
         if (asyncTask != null) {
             asyncTask.cancel(false);
         }
-        this.mPendingLockCheck = LockPatternChecker.checkRemoteLockPassword(this.mLockPatternUtils, 1, charSequenceToByteArray, this.mSelectedUserInteractor.getSelectedUserId(), new LockPatternChecker.OnCheckCallback() { // from class: com.android.keyguard.KeyguardCarrierPasswordViewController$$ExternalSyntheticLambda1
-            public final void onChecked(boolean z, int i) {
-                KeyguardCarrierPasswordViewController.m951$r8$lambda$goCXBIlA97VX0btFJtY2f5PTY8(KeyguardCarrierPasswordViewController.this, z);
+        this.mPendingLockCheck = LockPatternChecker.checkRemoteLockPassword(this.mLockPatternUtils, 1, bArrCharSequenceToByteArray, this.mSelectedUserInteractor.getSelectedUserId(), new LockPatternChecker.OnCheckCallback() { // from class: com.android.keyguard.KeyguardCarrierPasswordViewController$$ExternalSyntheticLambda1
+            public final void onChecked(boolean z, int i) throws Resources.NotFoundException {
+                KeyguardCarrierPasswordViewController.m953$r8$lambda$goCXBIlA97VX0btFJtY2f5PTY8(this.f$0, z);
             }
         });
     }

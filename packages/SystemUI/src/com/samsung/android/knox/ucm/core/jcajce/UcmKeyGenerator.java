@@ -12,7 +12,6 @@ import java.security.spec.AlgorithmParameterSpec;
 import javax.crypto.KeyGeneratorSpi;
 import javax.crypto.SecretKey;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class UcmKeyGenerator extends KeyGeneratorSpi {
     public static final String TAG = "UcmKeyGenerator";
@@ -30,17 +29,17 @@ public class UcmKeyGenerator extends KeyGeneratorSpi {
 
     @Override // javax.crypto.KeyGeneratorSpi
     public final SecretKey engineGenerateKey() {
-        String build = new UniversalCredentialUtil.UcmUriBuilder(this.mSource).setResourceId(2).setUid(Process.myUid()).setAlias(this.mAlias).build();
+        String strBuild = new UniversalCredentialUtil.UcmUriBuilder(this.mSource).setResourceId(2).setUid(Process.myUid()).setAlias(this.mAlias).build();
         UniversalCredentialUtil universalCredentialUtil = UniversalCredentialUtil.getInstance();
-        universalCredentialUtil.delete(build);
+        universalCredentialUtil.delete(strBuild);
         Bundle bundle = new Bundle();
         bundle.putBoolean(UcmAgentProviderImpl.KEY_EXTRA_RANDOMIZED_ENCRYPTION, this.mIsRandomizedEncryptionRequired);
         bundle.putInt(UcmAgentProviderImpl.KEY_EXTRA_PURPOSE, this.mPurposes);
-        Bundle generateKey = universalCredentialUtil.generateKey(build, this.mAlgorithm, this.mKeySize, bundle);
-        if (generateKey == null || !generateKey.getBoolean(UcmAgentService.PLUGIN_BOOLEAN_RESPONSE, false)) {
+        Bundle bundleGenerateKey = universalCredentialUtil.generateKey(strBuild, this.mAlgorithm, this.mKeySize, bundle);
+        if (bundleGenerateKey == null || !bundleGenerateKey.getBoolean(UcmAgentService.PLUGIN_BOOLEAN_RESPONSE, false)) {
             return null;
         }
-        return universalCredentialUtil.getSecretKey(build, this.mAlgorithm);
+        return universalCredentialUtil.getSecretKey(strBuild, this.mAlgorithm);
     }
 
     @Override // javax.crypto.KeyGeneratorSpi

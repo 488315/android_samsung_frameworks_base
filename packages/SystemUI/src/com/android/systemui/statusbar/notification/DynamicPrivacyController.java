@@ -12,7 +12,6 @@ import com.android.systemui.statusbar.policy.KeyguardStateControllerImpl;
 import com.android.systemui.util.SettingsHelper;
 import java.util.Iterator;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class DynamicPrivacyController implements KeyguardStateController.Callback {
     public boolean mCacheInvalid;
@@ -22,7 +21,6 @@ public class DynamicPrivacyController implements KeyguardStateController.Callbac
     public final NotificationLockscreenUserManager mLockscreenUserManager;
     public final StatusBarStateController mStateController;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Listener {
         void onDynamicPrivacyChanged();
     }
@@ -72,9 +70,9 @@ public class DynamicPrivacyController implements KeyguardStateController.Callbac
             this.mCacheInvalid = true;
             return;
         }
-        boolean isDynamicallyUnlocked = isDynamicallyUnlocked();
-        if (isDynamicallyUnlocked != this.mLastDynamicUnlocked || this.mCacheInvalid) {
-            this.mLastDynamicUnlocked = isDynamicallyUnlocked;
+        boolean zIsDynamicallyUnlocked = isDynamicallyUnlocked();
+        if (zIsDynamicallyUnlocked != this.mLastDynamicUnlocked || this.mCacheInvalid) {
+            this.mLastDynamicUnlocked = zIsDynamicallyUnlocked;
             Iterator it = this.mListeners.iterator();
             while (it.hasNext()) {
                 ((Listener) it.next()).onDynamicPrivacyChanged();

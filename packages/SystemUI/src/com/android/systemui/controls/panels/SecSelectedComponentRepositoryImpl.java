@@ -13,14 +13,12 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.CoroutineDispatcher;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SecSelectedComponentRepositoryImpl implements SecSelectedComponentRepository {
     public final CoroutineDispatcher bgDispatcher;
     public final UserFileManager userFileManager;
     public final UserTracker userTracker;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -56,8 +54,8 @@ public final class SecSelectedComponentRepositoryImpl implements SecSelectedComp
     }
 
     public final void setSelectedComponent(SelectedComponentRepository.SelectedComponent selectedComponent) {
-        SharedPreferences.Editor edit = ((UserFileManagerImpl) this.userFileManager).getSharedPreferences$1(((UserTrackerImpl) this.userTracker).getUserId(), SystemUIAnalytics.CONTROL_PREF_NAME).edit();
+        SharedPreferences.Editor editorEdit = ((UserFileManagerImpl) this.userFileManager).getSharedPreferences$1(((UserTrackerImpl) this.userTracker).getUserId(), SystemUIAnalytics.CONTROL_PREF_NAME).edit();
         ComponentName componentName = selectedComponent.componentName;
-        edit.putString("controls_custom_component", componentName != null ? componentName.flattenToString() : null).putString("controls_custom_structure", selectedComponent.name).putBoolean("controls_custom_is_panel", selectedComponent.isPanel).apply();
+        editorEdit.putString("controls_custom_component", componentName != null ? componentName.flattenToString() : null).putString("controls_custom_structure", selectedComponent.name).putBoolean("controls_custom_is_panel", selectedComponent.isPanel).apply();
     }
 }

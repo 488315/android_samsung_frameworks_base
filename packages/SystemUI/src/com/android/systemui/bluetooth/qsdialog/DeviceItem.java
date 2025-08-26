@@ -9,7 +9,6 @@ import kotlin.Pair;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class DeviceItem {
     public final String actionAccessibilityLabel;
@@ -48,11 +47,11 @@ public final class DeviceItem {
     }
 
     public final int hashCode() {
-        int m = PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(PropertyValuesHolder2D$$ExternalSyntheticOutline0.m((this.cachedBluetoothDevice.hashCode() + (this.type.hashCode() * 31)) * 31, 31, this.deviceName), 31, this.connectionSummary);
+        int iM = PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(PropertyValuesHolder2D$$ExternalSyntheticOutline0.m((this.cachedBluetoothDevice.hashCode() + (this.type.hashCode() * 31)) * 31, 31, this.deviceName), 31, this.connectionSummary);
         Pair pair = this.iconWithDescription;
-        int hashCode = (m + (pair == null ? 0 : pair.hashCode())) * 31;
+        int iHashCode = (iM + (pair == null ? 0 : pair.hashCode())) * 31;
         Integer num = this.background;
-        return Integer.hashCode(this.actionIconRes) + TransitionData$$ExternalSyntheticOutline0.m(PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m((hashCode + (num != null ? num.hashCode() : 0)) * 31, 31, this.isEnabled), 31, this.actionAccessibilityLabel), 31, this.isActive);
+        return Integer.hashCode(this.actionIconRes) + TransitionData$$ExternalSyntheticOutline0.m(PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m((iHashCode + (num != null ? num.hashCode() : 0)) * 31, 31, this.isEnabled), 31, this.actionAccessibilityLabel), 31, this.isActive);
     }
 
     public final String toString() {

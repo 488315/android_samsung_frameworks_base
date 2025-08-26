@@ -146,7 +146,7 @@ public class BCRSAPrivateCrtKey extends BCRSAPrivateKey implements RSAPrivateCrt
         return getModulus().equals(rSAPrivateCrtKey.getModulus()) && getPublicExponent().equals(rSAPrivateCrtKey.getPublicExponent()) && getPrivateExponent().equals(rSAPrivateCrtKey.getPrivateExponent()) && getPrimeP().equals(rSAPrivateCrtKey.getPrimeP()) && getPrimeQ().equals(rSAPrivateCrtKey.getPrimeQ()) && getPrimeExponentP().equals(rSAPrivateCrtKey.getPrimeExponentP()) && getPrimeExponentQ().equals(rSAPrivateCrtKey.getPrimeExponentQ()) && getCrtCoefficient().equals(rSAPrivateCrtKey.getCrtCoefficient());
     }
 
-    private void readObject(ObjectInputStream objectInputStream) throws IOException, ClassNotFoundException {
+    private void readObject(ObjectInputStream objectInputStream) throws ClassNotFoundException, IOException {
         objectInputStream.defaultReadObject();
         this.attrCarrier = new PKCS12BagAttributeCarrierImpl();
         this.rsaPrivateKey = new RSAPrivateCrtKeyParameters(getModulus(), getPublicExponent(), getPrivateExponent(), getPrimeP(), getPrimeQ(), getPrimeExponentP(), getPrimeExponentQ(), getCrtCoefficient());
@@ -159,10 +159,10 @@ public class BCRSAPrivateCrtKey extends BCRSAPrivateKey implements RSAPrivateCrt
     @Override // com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.rsa.BCRSAPrivateKey
     public String toString() {
         StringBuffer stringBuffer = new StringBuffer("RSA Private CRT Key [");
-        String lineSeparator = Strings.lineSeparator();
-        stringBuffer.append(RSAUtil.generateKeyFingerprint(getModulus())).append("],[").append(RSAUtil.generateExponentFingerprint(getPublicExponent())).append(NavigationBarInflaterView.SIZE_MOD_END).append(lineSeparator);
-        stringBuffer.append("             modulus: ").append(getModulus().toString(16)).append(lineSeparator);
-        stringBuffer.append("     public exponent: ").append(getPublicExponent().toString(16)).append(lineSeparator);
+        String strLineSeparator = Strings.lineSeparator();
+        stringBuffer.append(RSAUtil.generateKeyFingerprint(getModulus())).append("],[").append(RSAUtil.generateExponentFingerprint(getPublicExponent())).append(NavigationBarInflaterView.SIZE_MOD_END).append(strLineSeparator);
+        stringBuffer.append("             modulus: ").append(getModulus().toString(16)).append(strLineSeparator);
+        stringBuffer.append("     public exponent: ").append(getPublicExponent().toString(16)).append(strLineSeparator);
         return stringBuffer.toString();
     }
 }

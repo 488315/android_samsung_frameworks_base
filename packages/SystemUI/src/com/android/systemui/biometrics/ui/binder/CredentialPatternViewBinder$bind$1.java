@@ -29,7 +29,6 @@ import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$unsafeFlow$1;
 import kotlinx.coroutines.flow.ReadonlySharedFlow;
 
 /* JADX INFO: Access modifiers changed from: package-private */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class CredentialPatternViewBinder$bind$1 extends SuspendLambda implements Function3 {
     final /* synthetic */ CredentialView.Host $host;
@@ -38,7 +37,6 @@ public final class CredentialPatternViewBinder$bind$1 extends SuspendLambda impl
     private /* synthetic */ Object L$0;
     int label;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.biometrics.ui.binder.CredentialPatternViewBinder$bind$1$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ CredentialView.Host $host;
@@ -47,16 +45,15 @@ public final class CredentialPatternViewBinder$bind$1 extends SuspendLambda impl
         private /* synthetic */ Object L$0;
         int label;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.biometrics.ui.binder.CredentialPatternViewBinder$bind$1$1$1, reason: invalid class name and collision with other inner class name */
-        final class C00361 extends SuspendLambda implements Function2 {
+        final class C00861 extends SuspendLambda implements Function2 {
             final /* synthetic */ LockPatternView $lockPatternView;
             final /* synthetic */ CredentialViewModel $viewModel;
             private /* synthetic */ Object L$0;
             int label;
 
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-            public C00361(CredentialViewModel credentialViewModel, LockPatternView lockPatternView, Continuation continuation) {
+            public C00861(CredentialViewModel credentialViewModel, LockPatternView lockPatternView, Continuation continuation) {
                 super(2, continuation);
                 this.$viewModel = credentialViewModel;
                 this.$lockPatternView = lockPatternView;
@@ -64,14 +61,14 @@ public final class CredentialPatternViewBinder$bind$1 extends SuspendLambda impl
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
             public final Continuation create(Object obj, Continuation continuation) {
-                C00361 c00361 = new C00361(this.$viewModel, this.$lockPatternView, continuation);
-                c00361.L$0 = obj;
-                return c00361;
+                C00861 c00861 = new C00861(this.$viewModel, this.$lockPatternView, continuation);
+                c00861.L$0 = obj;
+                return c00861;
             }
 
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
-                return ((C00361) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                return ((C00861) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
             }
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
@@ -94,11 +91,11 @@ public final class CredentialPatternViewBinder$bind$1 extends SuspendLambda impl
                             lockPatternView2.setOnPatternListener(new OnPatternDetectedListener(new Function1() { // from class: com.android.systemui.biometrics.ui.binder.CredentialPatternViewBinder$bind$1$1$1$1$$ExternalSyntheticLambda0
                                 @Override // kotlin.jvm.functions.Function1
                                 /* renamed from: invoke */
-                                public final Object mo779invoke(Object obj3) {
+                                public final Object mo781invoke(Object obj3) {
                                     LockPatternView lockPatternView3 = lockPatternView2;
                                     List list = (List) obj3;
                                     int size = list.size();
-                                    CredentialViewModel credentialViewModel3 = CredentialViewModel.this;
+                                    CredentialViewModel credentialViewModel3 = credentialViewModel2;
                                     if (size < 4) {
                                         credentialViewModel3.credentialInteractor._verificationError.updateState(null, new CredentialStatus.Fail.Error(CredentialViewModelKt.asBadCredentialErrorMessage(credentialViewModel3.applicationContext, Reflection.getOrCreateKotlinClass(BiometricPromptRequest.Credential.Pattern.class)), null, null, 6, null));
                                     } else {
@@ -125,7 +122,6 @@ public final class CredentialPatternViewBinder$bind$1 extends SuspendLambda impl
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.biometrics.ui.binder.CredentialPatternViewBinder$bind$1$1$2, reason: invalid class name */
         final class AnonymousClass2 extends SuspendLambda implements Function2 {
             final /* synthetic */ LockPatternView $lockPatternView;
@@ -178,7 +174,6 @@ public final class CredentialPatternViewBinder$bind$1 extends SuspendLambda impl
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.biometrics.ui.binder.CredentialPatternViewBinder$bind$1$1$3, reason: invalid class name */
         final class AnonymousClass3 extends SuspendLambda implements Function2 {
             final /* synthetic */ CredentialView.Host $host;
@@ -270,7 +265,7 @@ public final class CredentialPatternViewBinder$bind$1 extends SuspendLambda impl
             }
             ResultKt.throwOnFailure(obj);
             CoroutineScope coroutineScope = (CoroutineScope) this.L$0;
-            CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new C00361(this.$viewModel, this.$lockPatternView, null), 7);
+            CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new C00861(this.$viewModel, this.$lockPatternView, null), 7);
             CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass2(this.$viewModel, this.$lockPatternView, null), 7);
             CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass3(this.$viewModel, this.$lockPatternView, this.$host, null), 7);
             return Unit.INSTANCE;

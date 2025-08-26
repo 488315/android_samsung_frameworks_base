@@ -13,7 +13,6 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import kotlin.Unit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class LockscreenPrecondition implements SmartspacePrecondition {
     public final DeviceProvisionedController deviceProvisionedController;
@@ -30,12 +29,12 @@ public final class LockscreenPrecondition implements SmartspacePrecondition {
         ?? r2 = new DeviceProvisionedController.DeviceProvisionedListener() { // from class: com.android.systemui.smartspace.preconditions.LockscreenPrecondition$deviceProvisionedListener$1
             @Override // com.android.systemui.statusbar.policy.DeviceProvisionedController.DeviceProvisionedListener
             public final void onDeviceProvisionedChanged() {
-                LockscreenPrecondition.this.updateDeviceReadiness();
+                this.this$0.updateDeviceReadiness();
             }
 
             @Override // com.android.systemui.statusbar.policy.DeviceProvisionedController.DeviceProvisionedListener
             public final void onUserSetupChanged() {
-                LockscreenPrecondition.this.updateDeviceReadiness();
+                this.this$0.updateDeviceReadiness();
             }
         };
         this.deviceProvisionedListener = r2;

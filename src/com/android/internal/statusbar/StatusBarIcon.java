@@ -96,7 +96,7 @@ public class StatusBarIcon implements Parcelable {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public StatusBarIcon m8283clone() {
+    public StatusBarIcon m8294clone() {
         StatusBarIcon statusBarIcon = new StatusBarIcon(this.user, this.pkg, this.icon, this.iconLevel, this.number, this.contentDescription, this.type, this.shape);
         statusBarIcon.visible = this.visible;
         statusBarIcon.preloadedIcon = this.preloadedIcon;

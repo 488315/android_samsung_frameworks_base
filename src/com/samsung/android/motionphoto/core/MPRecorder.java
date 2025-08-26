@@ -27,16 +27,19 @@ public class MPRecorder {
     private native int native_store(String str);
 
     static {
-        System.loadLibrary(Def.MP_LEGACY_NATIVE_LIB);
-        native_init();
+        String property = System.getProperty(Def.JUNIT_TEST_EXECUTION_MODE);
+        if (property == null || !Boolean.parseBoolean(property)) {
+            System.loadLibrary(Def.MP_LEGACY_NATIVE_LIB);
+            native_init();
+        }
         TAG = "MPRecorder";
     }
 
     public MPRecorder(MPRecorderListener mPRecorderListener) {
         this.mListener = mPRecorderListener;
-        int native_setup = native_setup(mPRecorderListener, getClass().getName());
-        this.mToken = native_setup;
-        mPRecorderListener.setToken(native_setup);
+        int iNative_setup = native_setup(mPRecorderListener, getClass().getName());
+        this.mToken = iNative_setup;
+        mPRecorderListener.setToken(iNative_setup);
     }
 
     public void release() {

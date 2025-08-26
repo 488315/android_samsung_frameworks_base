@@ -10,7 +10,6 @@ import android.view.DisplayInfo;
 import com.android.systemui.util.DumpUtilsKt;
 import java.io.PrintWriter;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class CoverScreenDecorHwcLayer extends ScreenDecorHwcLayer {
     public final int mDisplayHeight;
@@ -41,17 +40,17 @@ public final class CoverScreenDecorHwcLayer extends ScreenDecorHwcLayer {
 
     @Override // com.android.systemui.ScreenDecorHwcLayer, com.android.systemui.DisplayCutoutBaseView
     public final void dump(PrintWriter printWriter) {
-        IndentingPrintWriter asIndenting = DumpUtilsKt.asIndenting(printWriter);
-        asIndenting.increaseIndent();
-        asIndenting.println("CoverScreenDecorHwcLayer:");
+        IndentingPrintWriter indentingPrintWriterAsIndenting = DumpUtilsKt.asIndenting(printWriter);
+        indentingPrintWriterAsIndenting.increaseIndent();
+        indentingPrintWriterAsIndenting.println("CoverScreenDecorHwcLayer:");
         super.dump(printWriter);
-        asIndenting.println("this=" + this);
-        asIndenting.println("transparentRect=" + this.transparentRect);
-        CoverScreenDecorHwcLayer$$ExternalSyntheticOutline0.m("hasTopRoundedCorner=", this.hasTopRoundedCorner, asIndenting);
-        CoverScreenDecorHwcLayer$$ExternalSyntheticOutline0.m("hasBottomRoundedCorner=", this.hasBottomRoundedCorner, asIndenting);
-        asIndenting.println("roundedCornerTopSize=" + this.roundedCornerTopSize);
-        asIndenting.println("roundedCornerBottomSize=" + this.roundedCornerBottomSize);
-        asIndenting.decreaseIndent();
+        indentingPrintWriterAsIndenting.println("this=" + this);
+        indentingPrintWriterAsIndenting.println("transparentRect=" + this.transparentRect);
+        CoverScreenDecorHwcLayer$$ExternalSyntheticOutline0.m("hasTopRoundedCorner=", this.hasTopRoundedCorner, indentingPrintWriterAsIndenting);
+        CoverScreenDecorHwcLayer$$ExternalSyntheticOutline0.m("hasBottomRoundedCorner=", this.hasBottomRoundedCorner, indentingPrintWriterAsIndenting);
+        indentingPrintWriterAsIndenting.println("roundedCornerTopSize=" + this.roundedCornerTopSize);
+        indentingPrintWriterAsIndenting.println("roundedCornerBottomSize=" + this.roundedCornerBottomSize);
+        indentingPrintWriterAsIndenting.decreaseIndent();
     }
 
     @Override // com.android.systemui.ScreenDecorHwcLayer

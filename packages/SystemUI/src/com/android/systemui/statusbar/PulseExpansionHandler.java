@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.PowerManager;
 import android.util.IndentingPrintWriter;
 import android.view.MotionEvent;
@@ -37,7 +38,6 @@ import com.android.systemui.statusbar.policy.ConfigurationController;
 import java.io.PrintWriter;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class PulseExpansionHandler implements Gefingerpoken, Dumpable {
     public static final int SPRING_BACK_ANIMATION_LENGTH_MS;
@@ -62,7 +62,6 @@ public final class PulseExpansionHandler implements Gefingerpoken, Dumpable {
     public VelocityTracker velocityTracker;
     public final NotificationWakeUpCoordinator wakeUpCoordinator;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -77,7 +76,7 @@ public final class PulseExpansionHandler implements Gefingerpoken, Dumpable {
         SPRING_BACK_ANIMATION_LENGTH_MS = 375;
     }
 
-    public PulseExpansionHandler(final Context context, NotificationWakeUpCoordinator notificationWakeUpCoordinator, KeyguardBypassController keyguardBypassController, HeadsUpManager headsUpManager, ConfigurationController configurationController, StatusBarStateController statusBarStateController, FalsingManager falsingManager, ShadeInteractor shadeInteractor, LockscreenShadeTransitionController lockscreenShadeTransitionController, DumpManager dumpManager) {
+    public PulseExpansionHandler(final Context context, NotificationWakeUpCoordinator notificationWakeUpCoordinator, KeyguardBypassController keyguardBypassController, HeadsUpManager headsUpManager, ConfigurationController configurationController, StatusBarStateController statusBarStateController, FalsingManager falsingManager, ShadeInteractor shadeInteractor, LockscreenShadeTransitionController lockscreenShadeTransitionController, DumpManager dumpManager) throws Resources.NotFoundException {
         this.wakeUpCoordinator = notificationWakeUpCoordinator;
         this.bypassController = keyguardBypassController;
         this.headsUpManager = headsUpManager;
@@ -89,7 +88,7 @@ public final class PulseExpansionHandler implements Gefingerpoken, Dumpable {
         this.touchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
         ((ConfigurationControllerImpl) configurationController).addCallback(new ConfigurationController.ConfigurationListener() { // from class: com.android.systemui.statusbar.PulseExpansionHandler.1
             @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
-            public final void onConfigChanged(Configuration configuration) {
+            public final void onConfigChanged(Configuration configuration) throws Resources.NotFoundException {
                 Context context2 = context;
                 int i = PulseExpansionHandler.SPRING_BACK_ANIMATION_LENGTH_MS;
                 PulseExpansionHandler pulseExpansionHandler = PulseExpansionHandler.this;
@@ -134,35 +133,22 @@ public final class PulseExpansionHandler implements Gefingerpoken, Dumpable {
         return canHandleMotionEvent() && startExpansion(motionEvent);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:69:0x012b  */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public final boolean onTouchEvent(android.view.MotionEvent r11) {
-        /*
-            Method dump skipped, instructions count: 312
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.PulseExpansionHandler.onTouchEvent(android.view.MotionEvent):boolean");
-    }
-
     public final void reset(final ExpandableView expandableView, long j) {
         if (expandableView.mActualHeight == expandableView.getCollapsedHeight()) {
             if (expandableView instanceof ExpandableNotificationRow) {
                 ((ExpandableNotificationRow) expandableView).setUserLocked(false);
             }
         } else {
-            ValueAnimator ofInt = ValueAnimator.ofInt(expandableView.mActualHeight, expandableView.getCollapsedHeight());
-            ofInt.setInterpolator(Interpolators.FAST_OUT_SLOW_IN);
-            ofInt.setDuration(j);
-            ofInt.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.PulseExpansionHandler$reset$1
+            ValueAnimator valueAnimatorOfInt = ValueAnimator.ofInt(expandableView.mActualHeight, expandableView.getCollapsedHeight());
+            valueAnimatorOfInt.setInterpolator(Interpolators.FAST_OUT_SLOW_IN);
+            valueAnimatorOfInt.setDuration(j);
+            valueAnimatorOfInt.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.PulseExpansionHandler.reset.1
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                    ExpandableView.this.setActualHeight(((Integer) valueAnimator.getAnimatedValue()).intValue(), true);
+                    expandableView.setActualHeight(((Integer) valueAnimator.getAnimatedValue()).intValue(), true);
                 }
             });
-            ofInt.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.statusbar.PulseExpansionHandler$reset$2
+            valueAnimatorOfInt.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.statusbar.PulseExpansionHandler.reset.2
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public final void onAnimationEnd(Animator animator) {
                     PulseExpansionHandler pulseExpansionHandler = PulseExpansionHandler.this;
@@ -174,7 +160,7 @@ public final class PulseExpansionHandler implements Gefingerpoken, Dumpable {
                     }
                 }
             });
-            ofInt.start();
+            valueAnimatorOfInt.start();
         }
     }
 

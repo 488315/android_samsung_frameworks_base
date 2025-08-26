@@ -256,13 +256,13 @@ public abstract class Vibrator {
     }
 
     public void vibrate(VibrationEffect vibrationEffect, AudioAttributes audioAttributes) {
-        VibrationAttributes build;
+        VibrationAttributes vibrationAttributesBuild;
         if (audioAttributes == null) {
-            build = new VibrationAttributes.Builder().build();
+            vibrationAttributesBuild = new VibrationAttributes.Builder().build();
         } else {
-            build = new VibrationAttributes.Builder(audioAttributes).build();
+            vibrationAttributesBuild = new VibrationAttributes.Builder(audioAttributes).build();
         }
-        vibrate(vibrationEffect, build);
+        vibrate(vibrationEffect, vibrationAttributesBuild);
     }
 
     public void vibrate(VibrationEffect vibrationEffect, VibrationAttributes vibrationAttributes) {
@@ -294,9 +294,9 @@ public abstract class Vibrator {
         VibratorInfo info = getInfo();
         int i = 1;
         for (int i2 : iArr) {
-            int isEffectSupported = info.isEffectSupported(i2);
-            if (isEffectSupported != 1) {
-                if (isEffectSupported == 2) {
+            int iIsEffectSupported = info.isEffectSupported(i2);
+            if (iIsEffectSupported != 1) {
+                if (iIsEffectSupported == 2) {
                     return 2;
                 }
                 i = 0;
@@ -339,7 +339,7 @@ public abstract class Vibrator {
         executor.execute(new Runnable() { // from class: android.os.Vibrator$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                VendorVibrationSession.Callback.this.onFinished(3);
+                callback.onFinished(3);
             }
         });
     }

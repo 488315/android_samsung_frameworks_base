@@ -116,9 +116,9 @@ public interface ISoundTriggerInjection extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISoundTriggerInjection.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISoundTriggerInjection)) {
-                return (ISoundTriggerInjection) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISoundTriggerInjection.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISoundTriggerInjection)) {
+                return (ISoundTriggerInjection) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -134,63 +134,63 @@ public interface ISoundTriggerInjection extends IInterface {
             }
             switch (i) {
                 case 1:
-                    IInjectGlobalEvent asInterface = IInjectGlobalEvent.Stub.asInterface(parcel.readStrongBinder());
+                    IInjectGlobalEvent iInjectGlobalEventAsInterface = IInjectGlobalEvent.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerGlobalEventInjection(asInterface);
+                    registerGlobalEventInjection(iInjectGlobalEventAsInterface);
                     return true;
                 case 2:
-                    IInjectGlobalEvent asInterface2 = IInjectGlobalEvent.Stub.asInterface(parcel.readStrongBinder());
+                    IInjectGlobalEvent iInjectGlobalEventAsInterface2 = IInjectGlobalEvent.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    onRestarted(asInterface2);
+                    onRestarted(iInjectGlobalEventAsInterface2);
                     return true;
                 case 3:
-                    IInjectGlobalEvent asInterface3 = IInjectGlobalEvent.Stub.asInterface(parcel.readStrongBinder());
+                    IInjectGlobalEvent iInjectGlobalEventAsInterface3 = IInjectGlobalEvent.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    onFrameworkDetached(asInterface3);
+                    onFrameworkDetached(iInjectGlobalEventAsInterface3);
                     return true;
                 case 4:
-                    IBinder readStrongBinder = parcel.readStrongBinder();
-                    IInjectGlobalEvent asInterface4 = IInjectGlobalEvent.Stub.asInterface(parcel.readStrongBinder());
+                    IBinder strongBinder = parcel.readStrongBinder();
+                    IInjectGlobalEvent iInjectGlobalEventAsInterface4 = IInjectGlobalEvent.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    onClientAttached(readStrongBinder, asInterface4);
+                    onClientAttached(strongBinder, iInjectGlobalEventAsInterface4);
                     return true;
                 case 5:
-                    IBinder readStrongBinder2 = parcel.readStrongBinder();
+                    IBinder strongBinder2 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    onClientDetached(readStrongBinder2);
+                    onClientDetached(strongBinder2);
                     return true;
                 case 6:
                     SoundModel soundModel = (SoundModel) parcel.readTypedObject(SoundModel.CREATOR);
                     Phrase[] phraseArr = (Phrase[]) parcel.createTypedArray(Phrase.CREATOR);
-                    IInjectModelEvent asInterface5 = IInjectModelEvent.Stub.asInterface(parcel.readStrongBinder());
-                    IInjectGlobalEvent asInterface6 = IInjectGlobalEvent.Stub.asInterface(parcel.readStrongBinder());
+                    IInjectModelEvent iInjectModelEventAsInterface = IInjectModelEvent.Stub.asInterface(parcel.readStrongBinder());
+                    IInjectGlobalEvent iInjectGlobalEventAsInterface5 = IInjectGlobalEvent.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    onSoundModelLoaded(soundModel, phraseArr, asInterface5, asInterface6);
+                    onSoundModelLoaded(soundModel, phraseArr, iInjectModelEventAsInterface, iInjectGlobalEventAsInterface5);
                     return true;
                 case 7:
-                    int readInt = parcel.readInt();
-                    int readInt2 = parcel.readInt();
-                    IInjectModelEvent asInterface7 = IInjectModelEvent.Stub.asInterface(parcel.readStrongBinder());
+                    int i3 = parcel.readInt();
+                    int i4 = parcel.readInt();
+                    IInjectModelEvent iInjectModelEventAsInterface2 = IInjectModelEvent.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    onParamSet(readInt, readInt2, asInterface7);
+                    onParamSet(i3, i4, iInjectModelEventAsInterface2);
                     return true;
                 case 8:
-                    int readInt3 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     RecognitionConfig recognitionConfig = (RecognitionConfig) parcel.readTypedObject(RecognitionConfig.CREATOR);
-                    IInjectRecognitionEvent asInterface8 = IInjectRecognitionEvent.Stub.asInterface(parcel.readStrongBinder());
-                    IInjectModelEvent asInterface9 = IInjectModelEvent.Stub.asInterface(parcel.readStrongBinder());
+                    IInjectRecognitionEvent iInjectRecognitionEventAsInterface = IInjectRecognitionEvent.Stub.asInterface(parcel.readStrongBinder());
+                    IInjectModelEvent iInjectModelEventAsInterface3 = IInjectModelEvent.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    onRecognitionStarted(readInt3, recognitionConfig, asInterface8, asInterface9);
+                    onRecognitionStarted(i5, recognitionConfig, iInjectRecognitionEventAsInterface, iInjectModelEventAsInterface3);
                     return true;
                 case 9:
-                    IInjectRecognitionEvent asInterface10 = IInjectRecognitionEvent.Stub.asInterface(parcel.readStrongBinder());
+                    IInjectRecognitionEvent iInjectRecognitionEventAsInterface2 = IInjectRecognitionEvent.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    onRecognitionStopped(asInterface10);
+                    onRecognitionStopped(iInjectRecognitionEventAsInterface2);
                     return true;
                 case 10:
-                    IInjectModelEvent asInterface11 = IInjectModelEvent.Stub.asInterface(parcel.readStrongBinder());
+                    IInjectModelEvent iInjectModelEventAsInterface4 = IInjectModelEvent.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    onSoundModelUnloaded(asInterface11);
+                    onSoundModelUnloaded(iInjectModelEventAsInterface4);
                     return true;
                 case 11:
                     onPreempted();
@@ -218,141 +218,141 @@ public interface ISoundTriggerInjection extends IInterface {
 
             @Override // android.media.soundtrigger_middleware.ISoundTriggerInjection
             public void registerGlobalEventInjection(IInjectGlobalEvent iInjectGlobalEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISoundTriggerInjection.DESCRIPTOR);
-                    obtain.writeStrongInterface(iInjectGlobalEvent);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISoundTriggerInjection.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iInjectGlobalEvent);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.soundtrigger_middleware.ISoundTriggerInjection
             public void onRestarted(IInjectGlobalEvent iInjectGlobalEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISoundTriggerInjection.DESCRIPTOR);
-                    obtain.writeStrongInterface(iInjectGlobalEvent);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISoundTriggerInjection.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iInjectGlobalEvent);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.soundtrigger_middleware.ISoundTriggerInjection
             public void onFrameworkDetached(IInjectGlobalEvent iInjectGlobalEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISoundTriggerInjection.DESCRIPTOR);
-                    obtain.writeStrongInterface(iInjectGlobalEvent);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISoundTriggerInjection.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iInjectGlobalEvent);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.soundtrigger_middleware.ISoundTriggerInjection
             public void onClientAttached(IBinder iBinder, IInjectGlobalEvent iInjectGlobalEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISoundTriggerInjection.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeStrongInterface(iInjectGlobalEvent);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISoundTriggerInjection.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeStrongInterface(iInjectGlobalEvent);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.soundtrigger_middleware.ISoundTriggerInjection
             public void onClientDetached(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISoundTriggerInjection.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISoundTriggerInjection.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.soundtrigger_middleware.ISoundTriggerInjection
             public void onSoundModelLoaded(SoundModel soundModel, Phrase[] phraseArr, IInjectModelEvent iInjectModelEvent, IInjectGlobalEvent iInjectGlobalEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISoundTriggerInjection.DESCRIPTOR);
-                    obtain.writeTypedObject(soundModel, 0);
-                    obtain.writeTypedArray(phraseArr, 0);
-                    obtain.writeStrongInterface(iInjectModelEvent);
-                    obtain.writeStrongInterface(iInjectGlobalEvent);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISoundTriggerInjection.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(soundModel, 0);
+                    parcelObtain.writeTypedArray(phraseArr, 0);
+                    parcelObtain.writeStrongInterface(iInjectModelEvent);
+                    parcelObtain.writeStrongInterface(iInjectGlobalEvent);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.soundtrigger_middleware.ISoundTriggerInjection
             public void onParamSet(int i, int i2, IInjectModelEvent iInjectModelEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISoundTriggerInjection.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeStrongInterface(iInjectModelEvent);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISoundTriggerInjection.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeStrongInterface(iInjectModelEvent);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.soundtrigger_middleware.ISoundTriggerInjection
             public void onRecognitionStarted(int i, RecognitionConfig recognitionConfig, IInjectRecognitionEvent iInjectRecognitionEvent, IInjectModelEvent iInjectModelEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISoundTriggerInjection.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(recognitionConfig, 0);
-                    obtain.writeStrongInterface(iInjectRecognitionEvent);
-                    obtain.writeStrongInterface(iInjectModelEvent);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISoundTriggerInjection.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(recognitionConfig, 0);
+                    parcelObtain.writeStrongInterface(iInjectRecognitionEvent);
+                    parcelObtain.writeStrongInterface(iInjectModelEvent);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.soundtrigger_middleware.ISoundTriggerInjection
             public void onRecognitionStopped(IInjectRecognitionEvent iInjectRecognitionEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISoundTriggerInjection.DESCRIPTOR);
-                    obtain.writeStrongInterface(iInjectRecognitionEvent);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISoundTriggerInjection.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iInjectRecognitionEvent);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.soundtrigger_middleware.ISoundTriggerInjection
             public void onSoundModelUnloaded(IInjectModelEvent iInjectModelEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISoundTriggerInjection.DESCRIPTOR);
-                    obtain.writeStrongInterface(iInjectModelEvent);
-                    this.mRemote.transact(10, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISoundTriggerInjection.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iInjectModelEvent);
+                    this.mRemote.transact(10, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.soundtrigger_middleware.ISoundTriggerInjection
             public void onPreempted() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISoundTriggerInjection.DESCRIPTOR);
-                    this.mRemote.transact(11, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISoundTriggerInjection.DESCRIPTOR);
+                    this.mRemote.transact(11, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

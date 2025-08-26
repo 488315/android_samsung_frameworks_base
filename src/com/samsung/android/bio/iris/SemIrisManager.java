@@ -631,10 +631,10 @@ public class SemIrisManager {
 
         public void postDelayedGetterCallback(Runnable runnable, long j) {
             runnable.getClass();
-            Message obtain = Message.obtain();
-            obtain.what = 1;
-            obtain.obj = runnable;
-            sendMessageDelayed(obtain, j);
+            Message messageObtain = Message.obtain();
+            messageObtain.what = 1;
+            messageObtain.obj = runnable;
+            sendMessageDelayed(messageObtain, j);
         }
 
         public void removeAllGetterCallbacks() {
@@ -709,19 +709,19 @@ public class SemIrisManager {
             try {
                 try {
                     i3 = 1;
-                } catch (RemoteException unused) {
+                    try {
+                        this.mService.enroll(this.mToken, windowToken, iArr[0], iArr[1], view.getWidth(), view.getHeight(), bArr, i2, this.mServiceReceiver, i, this.mContext.getOpPackageName(), bundle);
+                    } catch (RemoteException unused) {
+                        Log.w(TAG, "Remote exception in enroll");
+                        if (enrollmentCallback != null) {
+                            enrollmentCallback.onEnrollmentError(i3, getErrorString(i3));
+                        }
+                    }
+                } catch (RemoteException unused2) {
                     i3 = 1;
                 }
-            } catch (RemoteException unused2) {
-                i3 = 1;
-            }
-            try {
-                this.mService.enroll(this.mToken, windowToken, iArr[0], iArr[1], view.getWidth(), view.getHeight(), bArr, i2, this.mServiceReceiver, i, this.mContext.getOpPackageName(), bundle);
             } catch (RemoteException unused3) {
-                Log.w(TAG, "Remote exception in enroll");
-                if (enrollmentCallback != null) {
-                    enrollmentCallback.onEnrollmentError(i3, getErrorString(i3));
-                }
+                i3 = 1;
             }
         } catch (RemoteException unused4) {
             i3 = 1;
@@ -888,13 +888,13 @@ public class SemIrisManager {
         int i;
         DisplayMetrics displayMetrics = new DisplayMetrics();
         ((WindowManager) this.mContext.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getMetrics(displayMetrics);
-        int round = Math.round(displayMetrics.density);
+        int iRound = Math.round(displayMetrics.density);
         if (displayMetrics.widthPixels < displayMetrics.heightPixels) {
-            i = displayMetrics.widthPixels / round;
+            i = displayMetrics.widthPixels / iRound;
         } else {
-            i = displayMetrics.heightPixels / round;
+            i = displayMetrics.heightPixels / iRound;
         }
-        return new Size(i * round, ((int) (i / 1.7777778f)) * round);
+        return new Size(i * iRound, ((int) (i / 1.7777778f)) * iRound);
     }
 
     public void setIrisViewType(int i) {
@@ -936,70 +936,43 @@ public class SemIrisManager {
             } catch (RemoteException unused) {
                 Log.v(TAG, "Remote exception in getEnrolledIrises");
             }
-            if (enrolledIrises != null || enrolledIrises.size() <= 0 || this.mContext == null) {
-                return null;
-            }
-            Iterator<Iris> it = enrolledIrises.iterator();
-            int i = 1;
-            while (it.hasNext()) {
-                sparseArray.put(i, byteArrayToHex(requestGetUniqueID(it.next().getIrisId(), this.mContext.getOpPackageName())));
-                i++;
-            }
-            return sparseArray;
+        } else {
+            enrolledIrises = null;
         }
-        enrolledIrises = null;
-        return enrolledIrises != null ? null : null;
+        if (enrolledIrises == null || enrolledIrises.size() <= 0 || this.mContext == null) {
+            return null;
+        }
+        Iterator<Iris> it = enrolledIrises.iterator();
+        int i = 1;
+        while (it.hasNext()) {
+            sparseArray.put(i, byteArrayToHex(requestGetUniqueID(it.next().getIrisId(), this.mContext.getOpPackageName())));
+            i++;
+        }
+        return sparseArray;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x003a  */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public java.lang.String getEnrolledIrisId() {
-        /*
-            r4 = this;
-            boolean r0 = r4.ensureServiceConnected()
-            r1 = 0
-            if (r0 != 0) goto L8
-            return r1
-        L8:
-            com.samsung.android.camera.iris.IIrisService r0 = r4.mService
-            if (r0 == 0) goto L22
-            int r2 = android.os.UserHandle.myUserId()     // Catch: android.os.RemoteException -> L1b
-            android.content.Context r3 = r4.mContext     // Catch: android.os.RemoteException -> L1b
-            java.lang.String r3 = r3.getOpPackageName()     // Catch: android.os.RemoteException -> L1b
-            java.util.List r0 = r0.getEnrolledIrises(r2, r3)     // Catch: android.os.RemoteException -> L1b
-            goto L23
-        L1b:
-            java.lang.String r0 = "Bio.SemIrisManager"
-            java.lang.String r2 = "Remote exception in getEnrolledIrises"
-            android.util.Log.v(r0, r2)
-        L22:
-            r0 = r1
-        L23:
-            if (r0 == 0) goto L53
-            int r2 = r0.size()
-            if (r2 <= 0) goto L53
-            android.content.Context r2 = r4.mContext
-            if (r2 != 0) goto L30
-            goto L53
-        L30:
-            java.util.Iterator r0 = r0.iterator()
-            boolean r2 = r0.hasNext()
-            if (r2 == 0) goto L53
-            java.lang.Object r0 = r0.next()
-            com.samsung.android.camera.iris.Iris r0 = (com.samsung.android.camera.iris.Iris) r0
-            int r0 = r0.getIrisId()
-            android.content.Context r1 = r4.mContext
-            java.lang.String r1 = r1.getOpPackageName()
-            byte[] r4 = r4.requestGetUniqueID(r0, r1)
-            java.lang.String r4 = byteArrayToHex(r4)
-            return r4
-        L53:
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.bio.iris.SemIrisManager.getEnrolledIrisId():java.lang.String");
+    public String getEnrolledIrisId() {
+        List<Iris> enrolledIrises;
+        if (!ensureServiceConnected()) {
+            return null;
+        }
+        IIrisService iIrisService = this.mService;
+        if (iIrisService != null) {
+            try {
+                enrolledIrises = iIrisService.getEnrolledIrises(UserHandle.myUserId(), this.mContext.getOpPackageName());
+            } catch (RemoteException unused) {
+                Log.v(TAG, "Remote exception in getEnrolledIrises");
+            }
+        } else {
+            enrolledIrises = null;
+        }
+        if (enrolledIrises != null && enrolledIrises.size() > 0 && this.mContext != null) {
+            Iterator<Iris> it = enrolledIrises.iterator();
+            if (it.hasNext()) {
+                return byteArrayToHex(requestGetUniqueID(it.next().getIrisId(), this.mContext.getOpPackageName()));
+            }
+        }
+        return null;
     }
 
     public int request(int i, byte[] bArr, byte[] bArr2, int i2, RequestCallback requestCallback) {
@@ -1037,62 +1010,42 @@ public class SemIrisManager {
 
     public byte[] requestGetVersion() {
         byte[] bArr = new byte[256];
-        int request = request(4, null, bArr, 0, null);
-        if (request <= 0) {
+        int iRequest = request(4, null, bArr, 0, null);
+        if (iRequest <= 0) {
             return null;
         }
-        return Arrays.copyOf(bArr, request);
+        return Arrays.copyOf(bArr, iRequest);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x002e  */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x002d A[RETURN] */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    private byte[] requestGetUniqueID(int r11, java.lang.String r12) {
-        /*
-            r10 = this;
-            boolean r0 = r10.ensureServiceConnected()
-            r1 = 0
-            if (r0 != 0) goto L8
-            return r1
-        L8:
-            r0 = 256(0x100, float:3.59E-43)
-            byte[] r6 = new byte[r0]
-            com.samsung.android.camera.iris.IIrisService r2 = r10.mService
-            if (r2 == 0) goto L2a
-            android.os.IBinder r3 = r10.mToken     // Catch: android.os.RemoteException -> L23
-            byte[] r5 = r12.getBytes()     // Catch: android.os.RemoteException -> L23
-            int r8 = android.os.UserHandle.myUserId()     // Catch: android.os.RemoteException -> L23
-            com.samsung.android.camera.iris.IIrisServiceReceiver r9 = r10.mServiceReceiver     // Catch: android.os.RemoteException -> L23
-            r4 = 7
-            r7 = r11
-            int r10 = r2.request(r3, r4, r5, r6, r7, r8, r9)     // Catch: android.os.RemoteException -> L23
-            goto L2b
-        L23:
-            java.lang.String r10 = "Bio.SemIrisManager"
-            java.lang.String r11 = "Remote exception in request()"
-            android.util.Log.v(r10, r11)
-        L2a:
-            r10 = 0
-        L2b:
-            if (r10 > 0) goto L2e
-            return r1
-        L2e:
-            byte[] r10 = java.util.Arrays.copyOf(r6, r10)
-            return r10
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.bio.iris.SemIrisManager.requestGetUniqueID(int, java.lang.String):byte[]");
+    private byte[] requestGetUniqueID(int i, String str) {
+        int iRequest;
+        if (!ensureServiceConnected()) {
+            return null;
+        }
+        byte[] bArr = new byte[256];
+        IIrisService iIrisService = this.mService;
+        if (iIrisService != null) {
+            try {
+                iRequest = iIrisService.request(this.mToken, 7, str.getBytes(), bArr, i, UserHandle.myUserId(), this.mServiceReceiver);
+            } catch (RemoteException unused) {
+                Log.v(TAG, "Remote exception in request()");
+            }
+        } else {
+            iRequest = 0;
+        }
+        if (iRequest <= 0) {
+            return null;
+        }
+        return Arrays.copyOf(bArr, iRequest);
     }
 
     public byte[] requestProcessFIDO(byte[] bArr) {
         byte[] bArr2 = new byte[10240];
-        int request = request(9, bArr, bArr2, 0, null);
-        if (request <= 0) {
+        int iRequest = request(9, bArr, bArr2, 0, null);
+        if (iRequest <= 0) {
             return null;
         }
-        return Arrays.copyOf(bArr2, request);
+        return Arrays.copyOf(bArr2, iRequest);
     }
 
     public boolean requestUpdateSID(byte[] bArr) {
@@ -1160,15 +1113,15 @@ public class SemIrisManager {
                     this.mService.addLockoutResetCallback(new IIrisServiceLockoutResetCallback.Stub() { // from class: com.samsung.android.bio.iris.SemIrisManager.3
                         @Override // com.samsung.android.camera.iris.IIrisServiceLockoutResetCallback
                         public void onLockoutReset(long j) throws RemoteException {
-                            final PowerManager.WakeLock newWakeLock = powerManager.newWakeLock(1, "lockoutResetCallback");
-                            newWakeLock.acquire();
+                            final PowerManager.WakeLock wakeLockNewWakeLock = powerManager.newWakeLock(1, "lockoutResetCallback");
+                            wakeLockNewWakeLock.acquire();
                             SemIrisManager.this.mHandler.post(new Runnable() { // from class: com.samsung.android.bio.iris.SemIrisManager.3.1
                                 @Override // java.lang.Runnable
                                 public void run() {
                                     try {
                                         lockoutResetCallback.onLockoutReset();
                                     } finally {
-                                        newWakeLock.release();
+                                        wakeLockNewWakeLock.release();
                                     }
                                 }
                             });
@@ -1370,14 +1323,14 @@ public class SemIrisManager {
     }
 
     private String getErrorString(int i) {
-        Resources resources;
+        Resources resourcesForApplication;
         try {
-            resources = this.mContext.getPackageManager().getResourcesForApplication("com.samsung.android.server.iris");
+            resourcesForApplication = this.mContext.getPackageManager().getResourcesForApplication("com.samsung.android.server.iris");
         } catch (Exception e) {
             Log.e(TAG, "getErrorString, Exception = " + e);
-            resources = null;
+            resourcesForApplication = null;
         }
-        if (resources == null) {
+        if (resourcesForApplication == null) {
             Log.e(TAG, "mRes is null");
             return null;
         }
@@ -1386,53 +1339,53 @@ public class SemIrisManager {
                 if (i != 123) {
                     switch (i) {
                         case 0:
-                            return resources.getString(resources.getIdentifier("iris_error_sensor_no_response", "string", "com.samsung.android.server.iris"));
+                            return resourcesForApplication.getString(resourcesForApplication.getIdentifier("iris_error_sensor_no_response", "string", "com.samsung.android.server.iris"));
                         case 1:
-                            return resources.getString(resources.getIdentifier("iris_error_unable_to_process", "string", "com.samsung.android.server.iris"));
+                            return resourcesForApplication.getString(resourcesForApplication.getIdentifier("iris_error_unable_to_process", "string", "com.samsung.android.server.iris"));
                         case 2:
-                            return resources.getString(resources.getIdentifier("iris_error_timeout", "string", "com.samsung.android.server.iris"));
+                            return resourcesForApplication.getString(resourcesForApplication.getIdentifier("iris_error_timeout", "string", "com.samsung.android.server.iris"));
                         case 3:
-                            return resources.getString(resources.getIdentifier("iris_error_no_space", "string", "com.samsung.android.server.iris"));
+                            return resourcesForApplication.getString(resourcesForApplication.getIdentifier("iris_error_no_space", "string", "com.samsung.android.server.iris"));
                         case 4:
-                            return resources.getString(resources.getIdentifier("iris_error_canceled", "string", "com.samsung.android.server.iris"));
+                            return resourcesForApplication.getString(resourcesForApplication.getIdentifier("iris_error_canceled", "string", "com.samsung.android.server.iris"));
                         case 5:
-                            return resources.getString(resources.getIdentifier("iris_error_unable_to_remove", "string", "com.samsung.android.server.iris"));
+                            return resourcesForApplication.getString(resourcesForApplication.getIdentifier("iris_error_unable_to_remove", "string", "com.samsung.android.server.iris"));
                         case 6:
-                            return resources.getString(resources.getIdentifier("iris_error_lockout", "string", "com.samsung.android.server.iris"));
+                            return resourcesForApplication.getString(resourcesForApplication.getIdentifier("iris_error_lockout", "string", "com.samsung.android.server.iris"));
                         case 7:
                         case 8:
                             return "";
                         case 9:
-                            return resources.getString(resources.getIdentifier("iris_error_eye_safety_timeout", "string", "com.samsung.android.server.iris"));
+                            return resourcesForApplication.getString(resourcesForApplication.getIdentifier("iris_error_eye_safety_timeout", "string", "com.samsung.android.server.iris"));
                         case 10:
-                            return resources.getString(resources.getIdentifier("iris_error_auth_view_size", "string", "com.samsung.android.server.iris"));
+                            return resourcesForApplication.getString(resourcesForApplication.getIdentifier("iris_error_auth_view_size", "string", "com.samsung.android.server.iris"));
                         default:
                             switch (i) {
                                 case 12:
-                                    return resources.getString(resources.getIdentifier("iris_error_proximity_timeout", "string", "com.samsung.android.server.iris"));
+                                    return resourcesForApplication.getString(resourcesForApplication.getIdentifier("iris_error_proximity_timeout", "string", "com.samsung.android.server.iris"));
                                 case 13:
-                                    return resources.getString(resources.getIdentifier("iris_error_evicted", "string", "com.samsung.android.server.iris"));
+                                    return resourcesForApplication.getString(resourcesForApplication.getIdentifier("iris_error_evicted", "string", "com.samsung.android.server.iris"));
                                 case 14:
-                                    return resources.getString(resources.getIdentifier("iris_error_video_call_interrupt", "string", "com.samsung.android.server.iris"));
+                                    return resourcesForApplication.getString(resourcesForApplication.getIdentifier("iris_error_video_call_interrupt", "string", "com.samsung.android.server.iris"));
                                 case 15:
-                                    return resources.getString(resources.getIdentifier("iris_error_no_eye_detected", "string", "com.samsung.android.server.iris"));
+                                    return resourcesForApplication.getString(resourcesForApplication.getIdentifier("iris_error_no_eye_detected", "string", "com.samsung.android.server.iris"));
                                 default:
                                     switch (i) {
                                         case 17:
-                                            return resources.getString(resources.getIdentifier("iris_error_flip_off", "string", "com.samsung.android.server.iris"));
+                                            return resourcesForApplication.getString(resourcesForApplication.getIdentifier("iris_error_flip_off", "string", "com.samsung.android.server.iris"));
                                         case 18:
-                                            return resources.getString(resources.getIdentifier("iris_error_need_set_lock_type", "string", "com.samsung.android.server.iris"));
+                                            return resourcesForApplication.getString(resourcesForApplication.getIdentifier("iris_error_need_set_lock_type", "string", "com.samsung.android.server.iris"));
                                         case 19:
-                                            return resources.getString(resources.getIdentifier("iris_error_while_camera_in_use", "string", "com.samsung.android.server.iris"));
+                                            return resourcesForApplication.getString(resourcesForApplication.getIdentifier("iris_error_while_camera_in_use", "string", "com.samsung.android.server.iris"));
                                         case 20:
-                                            return resources.getString(resources.getIdentifier("iris_error_unsupported_orientation", "string", "com.samsung.android.server.iris"));
+                                            return resourcesForApplication.getString(resourcesForApplication.getIdentifier("iris_error_unsupported_orientation", "string", "com.samsung.android.server.iris"));
                                         default:
-                                            return resources.getString(resources.getIdentifier("iris_error_unable_to_process", "string", "com.samsung.android.server.iris"));
+                                            return resourcesForApplication.getString(resourcesForApplication.getIdentifier("iris_error_unable_to_process", "string", "com.samsung.android.server.iris"));
                                     }
                             }
                     }
                 }
-                return resources.getString(resources.getIdentifier("iris_error_proximity_alert", "string", "com.samsung.android.server.iris"));
+                return resourcesForApplication.getString(resourcesForApplication.getIdentifier("iris_error_proximity_alert", "string", "com.samsung.android.server.iris"));
             } catch (Resources.NotFoundException e2) {
                 Log.d(TAG, "getErrorString, NotFoundException = " + e2);
             }
@@ -1441,34 +1394,34 @@ public class SemIrisManager {
     }
 
     private String getAcquiredString(int i) {
-        Resources resources;
+        Resources resourcesForApplication;
         try {
-            resources = this.mContext.getPackageManager().getResourcesForApplication("com.samsung.android.server.iris");
+            resourcesForApplication = this.mContext.getPackageManager().getResourcesForApplication("com.samsung.android.server.iris");
         } catch (Exception e) {
             Log.e(TAG, "getAcquiredString, Exception = " + e);
-            resources = null;
+            resourcesForApplication = null;
         }
-        if (resources == null) {
+        if (resourcesForApplication == null) {
             Log.e(TAG, "mRes is null");
             return null;
         }
         try {
             if (i == 1) {
-                return resources.getString(resources.getIdentifier("iris_acquired_change_your_position", "string", "com.samsung.android.server.iris"));
+                return resourcesForApplication.getString(resourcesForApplication.getIdentifier("iris_acquired_change_your_position", "string", "com.samsung.android.server.iris"));
             }
             if (i == 9) {
-                return resources.getString(resources.getIdentifier("iris_acquired_open_wider", "string", "com.samsung.android.server.iris"));
+                return resourcesForApplication.getString(resourcesForApplication.getIdentifier("iris_acquired_open_wider", "string", "com.samsung.android.server.iris"));
             }
             if (i == 11) {
-                return resources.getString(resources.getIdentifier("iris_acquired_move_somewhere_darker", "string", "com.samsung.android.server.iris"));
+                return resourcesForApplication.getString(resourcesForApplication.getIdentifier("iris_acquired_move_somewhere_darker", "string", "com.samsung.android.server.iris"));
             }
             if (i == 3) {
-                return resources.getString(resources.getIdentifier("iris_acquired_move_closer", "string", "com.samsung.android.server.iris"));
+                return resourcesForApplication.getString(resourcesForApplication.getIdentifier("iris_acquired_move_closer", "string", "com.samsung.android.server.iris"));
             }
             if (i != 4) {
                 return null;
             }
-            return resources.getString(resources.getIdentifier("iris_acquired_move_farther", "string", "com.samsung.android.server.iris"));
+            return resourcesForApplication.getString(resourcesForApplication.getIdentifier("iris_acquired_move_farther", "string", "com.samsung.android.server.iris"));
         } catch (Resources.NotFoundException e2) {
             Log.d(TAG, "getAcquiredString, NotFoundException = " + e2);
             return null;
@@ -1476,27 +1429,23 @@ public class SemIrisManager {
     }
 
     public static synchronized SemIrisManager getInstance(Context context) {
-        synchronized (SemIrisManager.class) {
-            if (!context.getPackageManager().hasSystemFeature(SYSTEM_FEATURE_IRIS)) {
-                return null;
-            }
-            if (mSemIrisManager == null) {
-                mSemIrisManager = new SemIrisManager(context);
-            }
-            return mSemIrisManager;
+        if (!context.getPackageManager().hasSystemFeature(SYSTEM_FEATURE_IRIS)) {
+            return null;
         }
+        if (mSemIrisManager == null) {
+            mSemIrisManager = new SemIrisManager(context);
+        }
+        return mSemIrisManager;
     }
 
     public static synchronized SemIrisManager getSemIrisManager(Context context) {
-        synchronized (SemIrisManager.class) {
-            if (!context.getPackageManager().hasSystemFeature(SYSTEM_FEATURE_IRIS)) {
-                return null;
-            }
-            if (mSemIrisManager == null) {
-                mSemIrisManager = new SemIrisManager(context);
-            }
-            return mSemIrisManager;
+        if (!context.getPackageManager().hasSystemFeature(SYSTEM_FEATURE_IRIS)) {
+            return null;
         }
+        if (mSemIrisManager == null) {
+            mSemIrisManager = new SemIrisManager(context);
+        }
+        return mSemIrisManager;
     }
 
     public SemIrisManager(Context context) {
@@ -1505,6 +1454,12 @@ public class SemIrisManager {
         this.mGetterHandler = new GetterHandler(context);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:13:0x001d A[Catch: all -> 0x002c, TryCatch #1 {, blocks: (B:3:0x0001, B:5:0x0005, B:11:0x0019, B:13:0x001d, B:14:0x0023, B:8:0x0012, B:10:0x0016), top: B:25:0x0001, inners: #0 }] */
+    /* JADX WARN: Removed duplicated region for block: B:16:0x0027  */
+    /* JADX WARN: Removed duplicated region for block: B:17:0x0029  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     private synchronized boolean ensureServiceConnected() {
         IIrisService iIrisService = this.mService;
         if (iIrisService != null) {
@@ -1515,12 +1470,15 @@ public class SemIrisManager {
                     this.mService = null;
                 }
             }
+            if (this.mService == null) {
+                startIrisService();
+                waitForService();
+            }
+        } else {
+            if (this.mService == null) {
+            }
         }
-        if (this.mService == null) {
-            startIrisService();
-            waitForService();
-        }
-        return this.mService != null;
+        return this.mService == null;
     }
 
     private void startIrisService() {
@@ -1533,11 +1491,11 @@ public class SemIrisManager {
         }
     }
 
-    private void waitForService() {
+    private void waitForService() throws InterruptedException {
         for (int i = 1; i <= 20; i++) {
-            IIrisService asInterface = IIrisService.Stub.asInterface(ServiceManager.getService("samsung.iris"));
-            this.mService = asInterface;
-            if (asInterface != null) {
+            IIrisService iIrisServiceAsInterface = IIrisService.Stub.asInterface(ServiceManager.getService("samsung.iris"));
+            this.mService = iIrisServiceAsInterface;
+            if (iIrisServiceAsInterface != null) {
                 Log.v(TAG, "Service connected!");
                 return;
             }

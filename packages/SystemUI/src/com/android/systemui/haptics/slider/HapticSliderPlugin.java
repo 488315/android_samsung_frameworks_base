@@ -8,10 +8,17 @@ import com.android.systemui.haptics.slider.HapticSlider;
 import com.android.systemui.statusbar.VibratorHelper;
 import com.android.systemui.util.time.SystemClock;
 import com.google.android.msdl.domain.MSDLPlayer;
+import kotlin.ResultKt;
+import kotlin.Unit;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
+import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
+import kotlinx.coroutines.CoroutineScope;
+import kotlinx.coroutines.DelayKt;
 import kotlinx.coroutines.StandaloneCoroutine;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class HapticSliderPlugin {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -25,13 +32,55 @@ public final class HapticSliderPlugin {
     public final SeekableSliderTrackerConfig sliderTrackerConfig;
     public final VelocityTracker velocityTracker;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
         }
 
         private Companion() {
+        }
+    }
+
+    /* renamed from: com.android.systemui.haptics.slider.HapticSliderPlugin$onKeyDown$1, reason: invalid class name */
+    final class AnonymousClass1 extends SuspendLambda implements Function2 {
+        int label;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(2, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return HapticSliderPlugin.this.new AnonymousClass1(continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((AnonymousClass1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                this.label = 1;
+                if (DelayKt.delay(60L, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            HapticSliderPlugin hapticSliderPlugin = HapticSliderPlugin.this;
+            int i2 = HapticSliderPlugin.$r8$clinit;
+            if (hapticSliderPlugin.isTracking()) {
+                hapticSliderPlugin.sliderEventProducer.onStopTracking(false);
+            }
+            return Unit.INSTANCE;
         }
     }
 
@@ -65,7 +114,7 @@ public final class HapticSliderPlugin {
                 standaloneCoroutine.cancel(null);
             }
             LifecycleCoroutineScopeImpl lifecycleCoroutineScopeImpl = this.pluginScope;
-            this.keyUpJob = lifecycleCoroutineScopeImpl != null ? CoroutineTracingKt.launchTraced$default(lifecycleCoroutineScopeImpl, null, null, new HapticSliderPlugin$onKeyDown$1(this, null), 7) : null;
+            this.keyUpJob = lifecycleCoroutineScopeImpl != null ? CoroutineTracingKt.launchTraced$default(lifecycleCoroutineScopeImpl, null, null, new AnonymousClass1(null), 7) : null;
         }
     }
 
@@ -80,18 +129,18 @@ public final class HapticSliderPlugin {
                 sliderStateProducer.onProgressChanged(normalizeProgress(hapticSlider, i), z);
                 return;
             }
-            float normalizeProgress = normalizeProgress(hapticSlider, i);
+            float fNormalizeProgress = normalizeProgress(hapticSlider, i);
             sliderStateProducer.getClass();
-            sliderStateProducer._currentEvent.updateState(null, new SliderEvent(SliderEventType.NOTHING, normalizeProgress));
+            sliderStateProducer._currentEvent.updateState(null, new SliderEvent(SliderEventType.NOTHING, fNormalizeProgress));
             sliderStateProducer.onStartTracking(false);
         }
     }
 
     public final void onTouchEvent(MotionEvent motionEvent) {
-        Integer valueOf = motionEvent != null ? Integer.valueOf(motionEvent.getActionMasked()) : null;
-        if ((valueOf != null && valueOf.intValue() == 1) || (valueOf != null && valueOf.intValue() == 3)) {
+        Integer numValueOf = motionEvent != null ? Integer.valueOf(motionEvent.getActionMasked()) : null;
+        if ((numValueOf != null && numValueOf.intValue() == 1) || (numValueOf != null && numValueOf.intValue() == 3)) {
             this.velocityTracker.clear();
-        } else if ((valueOf != null && valueOf.intValue() == 0) || (valueOf != null && valueOf.intValue() == 2)) {
+        } else if ((numValueOf != null && numValueOf.intValue() == 0) || (numValueOf != null && numValueOf.intValue() == 2)) {
             this.velocityTracker.addMovement(motionEvent);
         }
     }
@@ -108,7 +157,7 @@ public final class HapticSliderPlugin {
         ?? r3 = new SliderDragVelocityProvider() { // from class: com.android.systemui.haptics.slider.HapticSliderPlugin$dragVelocityProvider$1
             @Override // com.android.systemui.haptics.slider.SliderDragVelocityProvider
             public final float getTrackedVelocity() {
-                HapticSliderPlugin hapticSliderPlugin = HapticSliderPlugin.this;
+                HapticSliderPlugin hapticSliderPlugin = this.this$0;
                 VelocityTracker velocityTracker = hapticSliderPlugin.velocityTracker;
                 SliderHapticFeedbackConfig sliderHapticFeedbackConfig2 = sliderHapticFeedbackConfig;
                 velocityTracker.computeCurrentVelocity(1000, sliderHapticFeedbackConfig2.maxVelocityToScale);

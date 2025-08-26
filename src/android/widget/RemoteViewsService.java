@@ -37,9 +37,9 @@ public abstract class RemoteViewsService extends Service {
         void onDestroy();
 
         default RemoteViews.RemoteCollectionItems getRemoteCollectionItems(int i, int i2) {
-            RemoteViews.RemoteCollectionItems build = new RemoteViews.RemoteCollectionItems.Builder().build();
-            Parcel obtain = Parcel.obtain();
-            boolean allowSquashing = obtain.allowSquashing();
+            RemoteViews.RemoteCollectionItems remoteCollectionItemsBuild = new RemoteViews.RemoteCollectionItems.Builder().build();
+            Parcel parcelObtain = Parcel.obtain();
+            boolean zAllowSquashing = parcelObtain.allowSquashing();
             try {
                 RemoteViews.RemoteCollectionItems.Builder builder = new RemoteViews.RemoteCollectionItems.Builder();
                 onDataSetChanged();
@@ -55,8 +55,8 @@ public abstract class RemoteViewsService extends Service {
                         Log.w(RemoteViewsService.LOG_TAG, "getViewAt is null it replaced with LoadingView. Pos" + i4 + "/" + count);
                         viewAt = getLoadingView();
                     }
-                    viewAt.writeToParcel(obtain, i3);
-                    if (obtain.dataSize() > i) {
+                    viewAt.writeToParcel(parcelObtain, i3);
+                    if (parcelObtain.dataSize() > i) {
                         break;
                     }
                     if (bitmapCache == null) {
@@ -76,10 +76,10 @@ public abstract class RemoteViewsService extends Service {
                 return builder.build();
             } catch (Exception e) {
                 Log.e(RemoteViewsService.LOG_TAG, "Error getting RemoteCollectionItems", e);
-                return build;
+                return remoteCollectionItemsBuild;
             } finally {
-                obtain.restoreAllowSquashing(allowSquashing);
-                obtain.recycle();
+                parcelObtain.restoreAllowSquashing(zAllowSquashing);
+                parcelObtain.recycle();
             }
         }
     }
@@ -115,77 +115,77 @@ public abstract class RemoteViewsService extends Service {
 
         @Override // com.android.internal.widget.IRemoteViewsFactory
         public synchronized int getCount() {
-            int i;
+            int count;
             try {
-                i = this.mFactory.getCount();
+                count = this.mFactory.getCount();
             } catch (Exception e) {
                 Thread.getDefaultUncaughtExceptionHandler().uncaughtException(Thread.currentThread(), e);
-                i = 0;
+                count = 0;
             }
-            return i;
+            return count;
         }
 
         @Override // com.android.internal.widget.IRemoteViewsFactory
         public synchronized RemoteViews getViewAt(int i) {
-            RemoteViews remoteViews;
-            remoteViews = null;
+            RemoteViews viewAt;
+            viewAt = null;
             try {
-                remoteViews = this.mFactory.getViewAt(i);
-                if (remoteViews != null) {
-                    remoteViews.addFlags(2);
+                viewAt = this.mFactory.getViewAt(i);
+                if (viewAt != null) {
+                    viewAt.addFlags(2);
                 }
             } catch (Exception e) {
                 Thread.getDefaultUncaughtExceptionHandler().uncaughtException(Thread.currentThread(), e);
             }
-            return remoteViews;
+            return viewAt;
         }
 
         @Override // com.android.internal.widget.IRemoteViewsFactory
         public synchronized RemoteViews getLoadingView() {
-            RemoteViews remoteViews;
+            RemoteViews loadingView;
             try {
-                remoteViews = this.mFactory.getLoadingView();
+                loadingView = this.mFactory.getLoadingView();
             } catch (Exception e) {
                 Thread.getDefaultUncaughtExceptionHandler().uncaughtException(Thread.currentThread(), e);
-                remoteViews = null;
+                loadingView = null;
             }
-            return remoteViews;
+            return loadingView;
         }
 
         @Override // com.android.internal.widget.IRemoteViewsFactory
         public synchronized int getViewTypeCount() {
-            int i;
+            int viewTypeCount;
             try {
-                i = this.mFactory.getViewTypeCount();
+                viewTypeCount = this.mFactory.getViewTypeCount();
             } catch (Exception e) {
                 Thread.getDefaultUncaughtExceptionHandler().uncaughtException(Thread.currentThread(), e);
-                i = 0;
+                viewTypeCount = 0;
             }
-            return i;
+            return viewTypeCount;
         }
 
         @Override // com.android.internal.widget.IRemoteViewsFactory
         public synchronized long getItemId(int i) {
-            long j;
+            long itemId;
             try {
-                j = this.mFactory.getItemId(i);
+                itemId = this.mFactory.getItemId(i);
             } catch (Exception e) {
                 Thread.getDefaultUncaughtExceptionHandler().uncaughtException(Thread.currentThread(), e);
-                j = 0;
+                itemId = 0;
             }
-            return j;
+            return itemId;
         }
 
         @Override // com.android.internal.widget.IRemoteViewsFactory
         public synchronized boolean hasStableIds() {
-            boolean z;
+            boolean zHasStableIds;
             try {
-                z = this.mFactory.hasStableIds();
+                zHasStableIds = this.mFactory.hasStableIds();
             } catch (Exception e) {
                 Thread.getDefaultUncaughtExceptionHandler().uncaughtException(Thread.currentThread(), e);
-                z = false;
+                zHasStableIds = false;
             }
-            return z;
+            return zHasStableIds;
         }
 
         @Override // com.android.internal.widget.IRemoteViewsFactory
@@ -205,34 +205,34 @@ public abstract class RemoteViewsService extends Service {
 
         @Override // com.android.internal.widget.IRemoteViewsFactory
         public RemoteViews.RemoteCollectionItems getRemoteCollectionItems(int i, int i2) {
-            RemoteViews.RemoteCollectionItems build = new RemoteViews.RemoteCollectionItems.Builder().build();
+            RemoteViews.RemoteCollectionItems remoteCollectionItemsBuild = new RemoteViews.RemoteCollectionItems.Builder().build();
             try {
                 return this.mFactory.getRemoteCollectionItems(i, i2);
             } catch (Exception e) {
                 Thread.getDefaultUncaughtExceptionHandler().uncaughtException(Thread.currentThread(), e);
-                return build;
+                return remoteCollectionItemsBuild;
             }
         }
     }
 
     @Override // android.app.Service
     public IBinder onBind(Intent intent) {
-        RemoteViewsFactory remoteViewsFactory;
+        RemoteViewsFactory remoteViewsFactoryOnGetViewFactory;
         boolean z;
         RemoteViewsFactoryAdapter remoteViewsFactoryAdapter;
         synchronized (sLock) {
             Intent.FilterComparison filterComparison = new Intent.FilterComparison(intent);
-            HashMap<Intent.FilterComparison, RemoteViewsFactory> hashMap = sRemoteViewFactories;
-            if (!hashMap.containsKey(filterComparison)) {
-                remoteViewsFactory = onGetViewFactory(intent);
-                hashMap.put(filterComparison, remoteViewsFactory);
-                remoteViewsFactory.onCreate();
+            HashMap<Intent.FilterComparison, RemoteViewsFactory> map = sRemoteViewFactories;
+            if (!map.containsKey(filterComparison)) {
+                remoteViewsFactoryOnGetViewFactory = onGetViewFactory(intent);
+                map.put(filterComparison, remoteViewsFactoryOnGetViewFactory);
+                remoteViewsFactoryOnGetViewFactory.onCreate();
                 z = false;
             } else {
-                remoteViewsFactory = hashMap.get(filterComparison);
+                remoteViewsFactoryOnGetViewFactory = map.get(filterComparison);
                 z = true;
             }
-            remoteViewsFactoryAdapter = new RemoteViewsFactoryAdapter(remoteViewsFactory, z);
+            remoteViewsFactoryAdapter = new RemoteViewsFactoryAdapter(remoteViewsFactoryOnGetViewFactory, z);
         }
         return remoteViewsFactoryAdapter;
     }

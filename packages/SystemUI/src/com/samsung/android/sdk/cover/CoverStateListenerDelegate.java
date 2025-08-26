@@ -8,13 +8,11 @@ import com.samsung.android.cover.ICoverStateListenerCallback;
 import com.samsung.android.sdk.cover.ScoverManager;
 import java.lang.ref.WeakReference;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class CoverStateListenerDelegate extends ICoverStateListenerCallback.Stub {
     public final ListenerDelegateHandler mHandler;
     public final ScoverManager.CoverStateListener mListener;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ListenerDelegateHandler extends Handler {
         public final WeakReference mListenerRef;
 

@@ -66,9 +66,9 @@ public interface IQualifiedNetworksServiceCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IQualifiedNetworksServiceCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IQualifiedNetworksServiceCallback)) {
-                return (IQualifiedNetworksServiceCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IQualifiedNetworksServiceCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IQualifiedNetworksServiceCallback)) {
+                return (IQualifiedNetworksServiceCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -104,24 +104,24 @@ public interface IQualifiedNetworksServiceCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                int[] createIntArray = parcel.createIntArray();
+                int i3 = parcel.readInt();
+                int[] iArrCreateIntArray = parcel.createIntArray();
                 parcel.enforceNoDataAvail();
-                onQualifiedNetworkTypesChanged(readInt, createIntArray);
+                onQualifiedNetworkTypesChanged(i3, iArrCreateIntArray);
             } else if (i == 2) {
-                int readInt2 = parcel.readInt();
-                IIntegerConsumer asInterface = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
+                int i4 = parcel.readInt();
+                IIntegerConsumer iIntegerConsumerAsInterface = IIntegerConsumer.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                onNetworkValidationRequested(readInt2, asInterface);
+                onNetworkValidationRequested(i4, iIntegerConsumerAsInterface);
             } else if (i == 3) {
-                int readInt3 = parcel.readInt();
-                int readInt4 = parcel.readInt();
+                int i5 = parcel.readInt();
+                int i6 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onReconnectQualifiedNetworkType(readInt3, readInt4);
+                onReconnectQualifiedNetworkType(i5, i6);
             } else if (i == 4) {
-                int readInt5 = parcel.readInt();
+                int i7 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onHandoverEnabledChanged(readInt5);
+                onHandoverEnabledChanged(i7);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -146,52 +146,52 @@ public interface IQualifiedNetworksServiceCallback extends IInterface {
 
             @Override // android.telephony.data.IQualifiedNetworksServiceCallback
             public void onQualifiedNetworkTypesChanged(int i, int[] iArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IQualifiedNetworksServiceCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeIntArray(iArr);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IQualifiedNetworksServiceCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeIntArray(iArr);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.data.IQualifiedNetworksServiceCallback
             public void onNetworkValidationRequested(int i, IIntegerConsumer iIntegerConsumer) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IQualifiedNetworksServiceCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iIntegerConsumer);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IQualifiedNetworksServiceCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iIntegerConsumer);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.data.IQualifiedNetworksServiceCallback
             public void onReconnectQualifiedNetworkType(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IQualifiedNetworksServiceCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IQualifiedNetworksServiceCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.data.IQualifiedNetworksServiceCallback
             public void onHandoverEnabledChanged(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IQualifiedNetworksServiceCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IQualifiedNetworksServiceCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

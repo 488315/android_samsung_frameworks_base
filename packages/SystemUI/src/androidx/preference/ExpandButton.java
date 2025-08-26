@@ -7,7 +7,6 @@ import com.android.systemui.R;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ExpandButton extends Preference {
     public final long mId;
@@ -20,7 +19,7 @@ public final class ExpandButton extends Preference {
         setTitle(R.string.expand_button_title);
         setOrder(999);
         ArrayList arrayList = new ArrayList();
-        CharSequence charSequence = null;
+        CharSequence string = null;
         for (Preference preference : list) {
             CharSequence title = preference.getTitle();
             boolean z = preference instanceof PreferenceGroup;
@@ -32,10 +31,10 @@ public final class ExpandButton extends Preference {
                     arrayList.add((PreferenceGroup) preference);
                 }
             } else if (!TextUtils.isEmpty(title)) {
-                charSequence = charSequence == null ? title : this.mContext.getString(R.string.summary_collapsed_preference_list, charSequence, title);
+                string = string == null ? title : this.mContext.getString(R.string.summary_collapsed_preference_list, string, title);
             }
         }
-        setSummary(charSequence);
+        setSummary(string);
         this.mId = j + 1000000;
     }
 

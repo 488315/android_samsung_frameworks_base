@@ -1,7 +1,9 @@
 package com.android.systemui.wallpaper.engines.multipack;
 
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.SurfaceHolder;
@@ -12,8 +14,8 @@ import com.android.systemui.wallpapers.ImageWallpaper;
 import com.android.systemui.wallpapers.ImageWallpaper$IntegratedEngine$2$$ExternalSyntheticLambda1;
 import com.samsung.android.wallpaper.live.sdk.utils.BitmapUtils;
 import com.samsung.android.wallpaper.live.sdk.utils.DisplayUtils;
+import com.samsung.android.wallpaper.live.sdk.utils.GraphicsUtils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class TransitionEngine extends WallpaperEngine {
     public final String TAG;
@@ -35,7 +37,7 @@ public class TransitionEngine extends WallpaperEngine {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:53:0x014d A[Catch: all -> 0x002b, TRY_ENTER, TryCatch #4 {, blocks: (B:4:0x0007, B:6:0x000d, B:8:0x0013, B:10:0x0017, B:14:0x0022, B:18:0x002e, B:22:0x0041, B:24:0x0051, B:32:0x00fc, B:33:0x0100, B:34:0x0126, B:36:0x012c, B:40:0x0135, B:53:0x014d, B:54:0x0154, B:48:0x0121), top: B:3:0x0007 }] */
+    /* JADX WARN: Removed duplicated region for block: B:57:0x014d A[Catch: all -> 0x002b, TRY_ENTER, TryCatch #4 {, blocks: (B:4:0x0007, B:6:0x000d, B:8:0x0013, B:10:0x0017, B:15:0x0022, B:20:0x002e, B:24:0x0041, B:26:0x0051, B:32:0x00fc, B:33:0x0100, B:46:0x0126, B:48:0x012c, B:53:0x0135, B:57:0x014d, B:58:0x0154, B:45:0x0121), top: B:65:0x0007 }] */
     /* JADX WARN: Type inference failed for: r14v0, types: [android.view.SurfaceHolder] */
     /* JADX WARN: Type inference failed for: r14v13 */
     /* JADX WARN: Type inference failed for: r14v14 */
@@ -50,40 +52,108 @@ public class TransitionEngine extends WallpaperEngine {
     @Override // com.android.systemui.wallpaper.engines.WallpaperEngine
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final synchronized boolean draw(android.view.SurfaceHolder r14) {
-        /*
-            Method dump skipped, instructions count: 343
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.wallpaper.engines.multipack.TransitionEngine.draw(android.view.SurfaceHolder):boolean");
+    public final synchronized boolean draw(SurfaceHolder surfaceHolder) {
+        Canvas canvasLockHardwareCanvas;
+        Exception e;
+        Bitmap bitmap;
+        Bitmap bitmap2 = this.mPrevThumbnail;
+        if (!((bitmap2 == null || bitmap2.isRecycled() || (bitmap = this.mNextThumbnail) == null || bitmap.isRecycled()) ? false : true)) {
+            Log.w(this.TAG, "draw: invalid thumbnails");
+            return false;
+        }
+        long jElapsedRealtime = SystemClock.elapsedRealtime() - this.mStartTime;
+        if (!surfaceHolder.getSurface().isValid()) {
+            return false;
+        }
+        int i = this.mRotation;
+        ?? displayRotation = DisplayUtils.getDisplayRotation(getWhich(), getAppContext());
+        if (i != displayRotation) {
+            Log.d(this.TAG, "draw: animation finished due to rotation. elapsed=" + jElapsedRealtime);
+            release$1();
+            return false;
+        }
+        Canvas canvas = null;
+        try {
+            try {
+                Rect surfaceFrame = surfaceHolder.getSurfaceFrame();
+                canvasLockHardwareCanvas = surfaceHolder.getSurface().lockHardwareCanvas();
+                try {
+                    canvasLockHardwareCanvas.save();
+                    Rect centerCropRect = GraphicsUtils.getCenterCropRect(this.mPrevThumbnail.getWidth(), this.mPrevThumbnail.getHeight(), surfaceFrame.width(), surfaceFrame.height());
+                    float fWidth = surfaceFrame.width() / centerCropRect.width();
+                    canvasLockHardwareCanvas.scale(fWidth, fWidth);
+                    canvasLockHardwareCanvas.drawBitmap(this.mPrevThumbnail, -centerCropRect.left, -centerCropRect.top, (Paint) null);
+                    canvasLockHardwareCanvas.restore();
+                    this.mPaint.setAlpha(Math.min(255, (int) ((jElapsedRealtime * 255.0f) / this.TRANSITION_ANIMATION_DURATION)));
+                    canvasLockHardwareCanvas.save();
+                    Rect centerCropRect2 = GraphicsUtils.getCenterCropRect(this.mNextThumbnail.getWidth(), this.mNextThumbnail.getHeight(), surfaceFrame.width(), surfaceFrame.height());
+                    float fWidth2 = surfaceFrame.width() / centerCropRect2.width();
+                    canvasLockHardwareCanvas.scale(fWidth2, fWidth2);
+                    canvasLockHardwareCanvas.drawBitmap(this.mNextThumbnail, -centerCropRect2.left, -centerCropRect2.top, this.mPaint);
+                    canvasLockHardwareCanvas.restore();
+                    displayRotation = canvasLockHardwareCanvas;
+                    surfaceHolder = surfaceHolder.getSurface();
+                } catch (Exception e2) {
+                    e = e2;
+                    Log.e(this.TAG, "draw: e=" + e, e);
+                    if (canvasLockHardwareCanvas != null) {
+                        displayRotation = canvasLockHardwareCanvas;
+                        surfaceHolder = surfaceHolder.getSurface();
+                        surfaceHolder.unlockCanvasAndPost(displayRotation);
+                    }
+                    if (jElapsedRealtime > this.TRANSITION_ANIMATION_DURATION) {
+                    }
+                    Log.d(this.TAG, "draw: animation finished due to time. elapsed=" + jElapsedRealtime);
+                    release$1();
+                    return false;
+                }
+            } catch (Throwable th) {
+                th = th;
+                canvas = displayRotation;
+                if (canvas != null) {
+                    surfaceHolder.getSurface().unlockCanvasAndPost(canvas);
+                }
+                throw th;
+            }
+        } catch (Exception e3) {
+            canvasLockHardwareCanvas = null;
+            e = e3;
+        } catch (Throwable th2) {
+            th = th2;
+            if (canvas != null) {
+            }
+            throw th;
+        }
+        surfaceHolder.unlockCanvasAndPost(displayRotation);
+        if (jElapsedRealtime > this.TRANSITION_ANIMATION_DURATION && isVisible()) {
+            return true;
+        }
+        Log.d(this.TAG, "draw: animation finished due to time. elapsed=" + jElapsedRealtime);
+        release$1();
+        return false;
     }
 
     @Override // com.android.systemui.wallpaper.engines.WallpaperEngine
-    public final void onCreate(SurfaceHolder surfaceHolder) {
-        boolean semIsFixedOrientationRequested;
+    public final void onCreate(SurfaceHolder surfaceHolder) throws NoSuchMethodException, SecurityException {
         Log.d(this.TAG, "onCreate: prev=" + BitmapUtils.getBitmapSizeString(this.mPrevThumbnail) + ", next=" + BitmapUtils.getBitmapSizeString(this.mNextThumbnail));
         this.mPaint = new Paint();
         int displayRotation = DisplayUtils.getDisplayRotation(getWhich(), getAppContext());
         this.mRotation = displayRotation;
-        if (displayRotation == 1 || displayRotation == 3) {
-            semIsFixedOrientationRequested = ImageWallpaper.IntegratedEngine.this.semIsFixedOrientationRequested();
-            if (semIsFixedOrientationRequested) {
-                int convertDisplayRotationToAngle = DisplayUtils.convertDisplayRotationToAngle(this.mRotation);
-                Bitmap cropRotateResizeBitmap = BitmapUtils.cropRotateResizeBitmap(this.mPrevThumbnail, null, convertDisplayRotationToAngle, 1.0f, true);
-                Bitmap bitmap = this.mPrevThumbnail;
-                if (cropRotateResizeBitmap != bitmap) {
-                    bitmap.recycle();
-                }
-                this.mPrevThumbnail = cropRotateResizeBitmap;
-                Bitmap cropRotateResizeBitmap2 = BitmapUtils.cropRotateResizeBitmap(this.mNextThumbnail, null, convertDisplayRotationToAngle, 1.0f, true);
-                Bitmap bitmap2 = this.mNextThumbnail;
-                if (cropRotateResizeBitmap2 != bitmap2) {
-                    bitmap2.recycle();
-                }
-                this.mNextThumbnail = cropRotateResizeBitmap2;
+        if ((displayRotation == 1 || displayRotation == 3) && ImageWallpaper.IntegratedEngine.this.semIsFixedOrientationRequested()) {
+            int iConvertDisplayRotationToAngle = DisplayUtils.convertDisplayRotationToAngle(this.mRotation);
+            Bitmap bitmapCropRotateResizeBitmap = BitmapUtils.cropRotateResizeBitmap(this.mPrevThumbnail, null, iConvertDisplayRotationToAngle, 1.0f, true);
+            Bitmap bitmap = this.mPrevThumbnail;
+            if (bitmapCropRotateResizeBitmap != bitmap) {
+                bitmap.recycle();
             }
+            this.mPrevThumbnail = bitmapCropRotateResizeBitmap;
+            Bitmap bitmapCropRotateResizeBitmap2 = BitmapUtils.cropRotateResizeBitmap(this.mNextThumbnail, null, iConvertDisplayRotationToAngle, 1.0f, true);
+            Bitmap bitmap2 = this.mNextThumbnail;
+            if (bitmapCropRotateResizeBitmap2 != bitmap2) {
+                bitmap2.recycle();
+            }
+            this.mNextThumbnail = bitmapCropRotateResizeBitmap2;
         }
     }
 

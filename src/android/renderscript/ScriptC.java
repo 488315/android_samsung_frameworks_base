@@ -22,25 +22,25 @@ public class ScriptC extends Script {
 
     protected ScriptC(RenderScript renderScript, Resources resources, int i) {
         super(0L, renderScript);
-        long internalCreate = internalCreate(renderScript, resources, i);
-        if (internalCreate == 0) {
+        long jInternalCreate = internalCreate(renderScript, resources, i);
+        if (jInternalCreate == 0) {
             throw new RSRuntimeException("Loading of ScriptC script failed.");
         }
-        setID(internalCreate);
+        setID(jInternalCreate);
     }
 
     protected ScriptC(RenderScript renderScript, String str, byte[] bArr, byte[] bArr2) {
+        long jInternalStringCreate;
         super(0L, renderScript);
-        long internalStringCreate;
         if (RenderScript.sPointerSize == 4) {
-            internalStringCreate = internalStringCreate(renderScript, str, bArr);
+            jInternalStringCreate = internalStringCreate(renderScript, str, bArr);
         } else {
-            internalStringCreate = internalStringCreate(renderScript, str, bArr2);
+            jInternalStringCreate = internalStringCreate(renderScript, str, bArr2);
         }
-        if (internalStringCreate == 0) {
+        if (jInternalStringCreate == 0) {
             throw new RSRuntimeException("Loading of ScriptC script failed.");
         }
-        setID(internalStringCreate);
+        setID(jInternalStringCreate);
     }
 
     private static void throwExceptionIfScriptCUnsupported() {
@@ -56,46 +56,40 @@ public class ScriptC extends Script {
     }
 
     private static synchronized long internalCreate(RenderScript renderScript, Resources resources, int i) {
-        long nScriptCCreate;
-        synchronized (ScriptC.class) {
-            throwExceptionIfScriptCUnsupported();
-            InputStream openRawResource = resources.openRawResource(i);
+        byte[] bArr;
+        int i2;
+        throwExceptionIfScriptCUnsupported();
+        InputStream inputStreamOpenRawResource = resources.openRawResource(i);
+        try {
             try {
-                try {
-                    byte[] bArr = new byte[1024];
-                    int i2 = 0;
-                    while (true) {
-                        int length = bArr.length - i2;
-                        if (length == 0) {
-                            int length2 = bArr.length * 2;
-                            byte[] bArr2 = new byte[length2];
-                            System.arraycopy(bArr, 0, bArr2, 0, bArr.length);
-                            length = length2 - i2;
-                            bArr = bArr2;
-                        }
-                        int read = openRawResource.read(bArr, i2, length);
-                        if (read <= 0) {
-                            nScriptCCreate = renderScript.nScriptCCreate(resources.getResourceEntryName(i), RenderScript.getCachePath(), bArr, i2);
-                        } else {
-                            i2 += read;
-                        }
+                bArr = new byte[1024];
+                i2 = 0;
+                while (true) {
+                    int length = bArr.length - i2;
+                    if (length == 0) {
+                        int length2 = bArr.length * 2;
+                        byte[] bArr2 = new byte[length2];
+                        System.arraycopy(bArr, 0, bArr2, 0, bArr.length);
+                        length = length2 - i2;
+                        bArr = bArr2;
                     }
-                } finally {
-                    openRawResource.close();
+                    int i3 = inputStreamOpenRawResource.read(bArr, i2, length);
+                    if (i3 <= 0) {
+                    } else {
+                        i2 += i3;
+                    }
                 }
-            } catch (IOException unused) {
-                throw new Resources.NotFoundException();
+            } finally {
+                inputStreamOpenRawResource.close();
             }
+        } catch (IOException unused) {
+            throw new Resources.NotFoundException();
         }
-        return nScriptCCreate;
+        return renderScript.nScriptCCreate(resources.getResourceEntryName(i), RenderScript.getCachePath(), bArr, i2);
     }
 
     private static synchronized long internalStringCreate(RenderScript renderScript, String str, byte[] bArr) {
-        long nScriptCCreate;
-        synchronized (ScriptC.class) {
-            throwExceptionIfScriptCUnsupported();
-            nScriptCCreate = renderScript.nScriptCCreate(str, RenderScript.getCachePath(), bArr, bArr.length);
-        }
-        return nScriptCCreate;
+        throwExceptionIfScriptCUnsupported();
+        return renderScript.nScriptCCreate(str, RenderScript.getCachePath(), bArr, bArr.length);
     }
 }

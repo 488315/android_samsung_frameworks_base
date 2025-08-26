@@ -8,21 +8,20 @@ import android.util.Log;
 import com.android.systemui.navigationbar.BasicRuneWrapper;
 import java.util.StringJoiner;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class QuickStepContract {
     public static final boolean ALLOW_BACK_GESTURE_IN_SHADE = BasicRuneWrapper.NAVBAR_GESTURE;
     public static boolean SYSUI_FORCE_SET_BACK_GESTURE_BY_SPLUGIN = false;
 
     public static void addInterface(IInterface iInterface, Bundle bundle) {
-        IBinder asBinder;
-        if (iInterface == null || (asBinder = iInterface.asBinder()) == null) {
+        IBinder iBinderAsBinder;
+        if (iInterface == null || (iBinderAsBinder = iInterface.asBinder()) == null) {
             return;
         }
         try {
-            bundle.putIBinder(asBinder.getInterfaceDescriptor(), asBinder);
+            bundle.putIBinder(iBinderAsBinder.getInterfaceDescriptor(), iBinderAsBinder);
         } catch (RemoteException e) {
-            Log.d("QuickStepContract", "Invalid interface description " + asBinder, e);
+            Log.d("QuickStepContract", "Invalid interface description " + iBinderAsBinder, e);
         }
     }
 

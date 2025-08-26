@@ -209,16 +209,16 @@ public interface ImeTracker {
             SystemProperties.addChangeCallback(new Runnable() { // from class: android.view.inputmethod.ImeTracker$1$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ImeTracker.AnonymousClass1.this.reloadSystemProperties();
+                    this.f$0.reloadSystemProperties();
                 }
             });
         }
 
         @Override // android.view.inputmethod.ImeTracker
         public Token onStart(String str, int i, int i2, int i3, int i4, boolean z) {
-            Token onStart = IInputMethodManagerGlobalInvoker.onStart(Token.createTag(str), i, i2, i3, i4, z);
-            Log.i(ImeTracker.TAG, onStart.mTag + ": " + getOnStartPrefix(i2) + " at " + Debug.originToString(i3) + " reason " + InputMethodDebug.softInputDisplayReasonToString(i4) + " fromUser " + z, this.mLogStackTrace ? new Throwable() : null);
-            return onStart;
+            Token tokenOnStart = IInputMethodManagerGlobalInvoker.onStart(Token.createTag(str), i, i2, i3, i4, z);
+            Log.i(ImeTracker.TAG, tokenOnStart.mTag + ": " + getOnStartPrefix(i2) + " at " + Debug.originToString(i3) + " reason " + InputMethodDebug.softInputDisplayReasonToString(i4) + " fromUser " + z, this.mLogStackTrace ? new Throwable() : null);
+            return tokenOnStart;
         }
 
         @Override // android.view.inputmethod.ImeTracker
@@ -415,16 +415,12 @@ public interface ImeTracker {
             return (Map) Arrays.stream(cls.getDeclaredFields()).filter(new Predicate() { // from class: android.view.inputmethod.ImeTracker$Debug$$ExternalSyntheticLambda0
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
-                    boolean startsWith;
-                    startsWith = ((Field) obj).getName().startsWith(str);
-                    return startsWith;
+                    return ((Field) obj).getName().startsWith(str);
                 }
             }).collect(Collectors.toMap(new Function() { // from class: android.view.inputmethod.ImeTracker$Debug$$ExternalSyntheticLambda1
                 @Override // java.util.function.Function
                 public final Object apply(Object obj) {
-                    int fieldValue;
-                    fieldValue = ImeTracker.Debug.getFieldValue((Field) obj);
-                    return Integer.valueOf(fieldValue);
+                    return Integer.valueOf(ImeTracker.Debug.getFieldValue((Field) obj));
                 }
             }, new Function() { // from class: android.view.inputmethod.ImeTracker$Debug$$ExternalSyntheticLambda2
                 @Override // java.util.function.Function

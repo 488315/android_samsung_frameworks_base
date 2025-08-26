@@ -81,9 +81,9 @@ public interface IZtd extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IZtd.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IZtd)) {
-                return (IZtd) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IZtd.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IZtd)) {
+                return (IZtd) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -123,53 +123,53 @@ public interface IZtd extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int readInt = parcel.readInt();
-                    int readInt2 = parcel.readInt();
-                    long readLong = parcel.readLong();
-                    IZtdListener asInterface = IZtdListener.Stub.asInterface(parcel.readStrongBinder());
+                    int i3 = parcel.readInt();
+                    int i4 = parcel.readInt();
+                    long j = parcel.readLong();
+                    IZtdListener iZtdListenerAsInterface = IZtdListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    startTracing(readInt, readInt2, readLong, asInterface);
+                    startTracing(i3, i4, j, iZtdListenerAsInterface);
                     return true;
                 case 2:
-                    int readInt3 = parcel.readInt();
-                    int readInt4 = parcel.readInt();
+                    int i5 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    stopTracing(readInt3, readInt4);
+                    stopTracing(i5, i6);
                     return true;
                 case 3:
-                    int readInt5 = parcel.readInt();
-                    int[] createIntArray = parcel.createIntArray();
-                    ArrayList<String> createStringArrayList = parcel.createStringArrayList();
-                    ArrayList<String> createStringArrayList2 = parcel.createStringArrayList();
-                    IZtdListener asInterface2 = IZtdListener.Stub.asInterface(parcel.readStrongBinder());
+                    int i7 = parcel.readInt();
+                    int[] iArrCreateIntArray = parcel.createIntArray();
+                    ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
+                    ArrayList<String> arrayListCreateStringArrayList2 = parcel.createStringArrayList();
+                    IZtdListener iZtdListenerAsInterface2 = IZtdListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int startMonitoringFiles = startMonitoringFiles(readInt5, createIntArray, createStringArrayList, createStringArrayList2, asInterface2);
+                    int iStartMonitoringFiles = startMonitoringFiles(i7, iArrCreateIntArray, arrayListCreateStringArrayList, arrayListCreateStringArrayList2, iZtdListenerAsInterface2);
                     parcel2.writeNoException();
-                    parcel2.writeInt(startMonitoringFiles);
+                    parcel2.writeInt(iStartMonitoringFiles);
                     return true;
                 case 4:
-                    int readInt6 = parcel.readInt();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int stopMonitoringFiles = stopMonitoringFiles(readInt6);
+                    int iStopMonitoringFiles = stopMonitoringFiles(i8);
                     parcel2.writeNoException();
-                    parcel2.writeInt(stopMonitoringFiles);
+                    parcel2.writeInt(iStopMonitoringFiles);
                     return true;
                 case 5:
-                    int readInt7 = parcel.readInt();
-                    int[] createIntArray2 = parcel.createIntArray();
-                    ArrayList<String> createStringArrayList3 = parcel.createStringArrayList();
-                    IZtdListener asInterface3 = IZtdListener.Stub.asInterface(parcel.readStrongBinder());
+                    int i9 = parcel.readInt();
+                    int[] iArrCreateIntArray2 = parcel.createIntArray();
+                    ArrayList<String> arrayListCreateStringArrayList3 = parcel.createStringArrayList();
+                    IZtdListener iZtdListenerAsInterface3 = IZtdListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int startMonitoringDomains = startMonitoringDomains(readInt7, createIntArray2, createStringArrayList3, asInterface3);
+                    int iStartMonitoringDomains = startMonitoringDomains(i9, iArrCreateIntArray2, arrayListCreateStringArrayList3, iZtdListenerAsInterface3);
                     parcel2.writeNoException();
-                    parcel2.writeInt(startMonitoringDomains);
+                    parcel2.writeInt(iStartMonitoringDomains);
                     return true;
                 case 6:
-                    int readInt8 = parcel.readInt();
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int stopMonitoringDomains = stopMonitoringDomains(readInt8);
+                    int iStopMonitoringDomains = stopMonitoringDomains(i10);
                     parcel2.writeNoException();
-                    parcel2.writeInt(stopMonitoringDomains);
+                    parcel2.writeInt(iStopMonitoringDomains);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -194,100 +194,100 @@ public interface IZtd extends IInterface {
 
             @Override // android.os.IZtd
             public void startTracing(int i, int i2, long j, IZtdListener iZtdListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IZtd.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeLong(j);
-                    obtain.writeStrongInterface(iZtdListener);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IZtd.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeStrongInterface(iZtdListener);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IZtd
             public void stopTracing(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IZtd.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IZtd.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IZtd
             public int startMonitoringFiles(int i, int[] iArr, List<String> list, List<String> list2, IZtdListener iZtdListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IZtd.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeIntArray(iArr);
-                    obtain.writeStringList(list);
-                    obtain.writeStringList(list2);
-                    obtain.writeStrongInterface(iZtdListener);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IZtd.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeIntArray(iArr);
+                    parcelObtain.writeStringList(list);
+                    parcelObtain.writeStringList(list2);
+                    parcelObtain.writeStrongInterface(iZtdListener);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IZtd
             public int stopMonitoringFiles(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IZtd.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IZtd.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IZtd
             public int startMonitoringDomains(int i, int[] iArr, List<String> list, IZtdListener iZtdListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IZtd.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeIntArray(iArr);
-                    obtain.writeStringList(list);
-                    obtain.writeStrongInterface(iZtdListener);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IZtd.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeIntArray(iArr);
+                    parcelObtain.writeStringList(list);
+                    parcelObtain.writeStrongInterface(iZtdListener);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IZtd
             public int stopMonitoringDomains(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IZtd.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IZtd.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

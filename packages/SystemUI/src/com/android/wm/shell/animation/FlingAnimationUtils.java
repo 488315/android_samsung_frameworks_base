@@ -8,7 +8,6 @@ import android.view.animation.PathInterpolator;
 import androidx.compose.animation.core.CubicBezierEasing$$ExternalSyntheticOutline0;
 import com.android.wm.shell.shared.animation.Interpolators;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class FlingAnimationUtils {
     public final AnimatorProperties mAnimatorProperties;
@@ -22,7 +21,6 @@ public class FlingAnimationUtils {
     public final float mSpeedUpFactor;
     public final float mY2;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AnimatorProperties {
         public long mDuration;
         public Interpolator mInterpolator;
@@ -35,7 +33,6 @@ public class FlingAnimationUtils {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Builder {
         public final DisplayMetrics mDisplayMetrics;
         public float mMaxLengthSeconds;
@@ -60,7 +57,6 @@ public class FlingAnimationUtils {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class InterpolatorInterpolator implements Interpolator {
         public final Interpolator mCrossfader;
         public final Interpolator mInterpolator1;
@@ -80,7 +76,6 @@ public class FlingAnimationUtils {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class VelocityInterpolator implements Interpolator {
         public final float mDiff;
         public final float mDurationSeconds;
@@ -114,24 +109,24 @@ public class FlingAnimationUtils {
 
     public final void applyDismissing(Animator animator, float f, float f2, float f3, float f4) {
         float f5 = f2 - f;
-        float pow = (float) (Math.pow(Math.abs(f5) / f4, 0.5d) * this.mMaxLengthSeconds);
-        float abs = Math.abs(f5);
-        float abs2 = Math.abs(f3);
+        float fPow = (float) (Math.pow(Math.abs(f5) / f4, 0.5d) * this.mMaxLengthSeconds);
+        float fAbs = Math.abs(f5);
+        float fAbs2 = Math.abs(f3);
         float f6 = this.mMinVelocityPxPerSecond;
-        float max = Math.max(0.0f, Math.min(1.0f, (abs2 - f6) / (this.mHighVelocityPxPerSecond - f6)));
-        float f7 = (max * 0.5f) + ((1.0f - max) * 0.4f);
+        float fMax = Math.max(0.0f, Math.min(1.0f, (fAbs2 - f6) / (this.mHighVelocityPxPerSecond - f6)));
+        float f7 = (fMax * 0.5f) + ((1.0f - fMax) * 0.4f);
         PathInterpolator pathInterpolator = new PathInterpolator(0.0f, 0.0f, 0.5f, f7);
-        float f8 = ((f7 / 0.5f) * abs) / abs2;
+        float f8 = ((f7 / 0.5f) * fAbs) / fAbs2;
         AnimatorProperties animatorProperties = this.mAnimatorProperties;
-        if (f8 <= pow) {
+        if (f8 <= fPow) {
             animatorProperties.mInterpolator = pathInterpolator;
-            pow = f8;
-        } else if (abs2 >= f6) {
-            animatorProperties.mInterpolator = new InterpolatorInterpolator(new VelocityInterpolator(pow, abs2, abs, 0), pathInterpolator, Interpolators.LINEAR_OUT_SLOW_IN);
+            fPow = f8;
+        } else if (fAbs2 >= f6) {
+            animatorProperties.mInterpolator = new InterpolatorInterpolator(new VelocityInterpolator(fPow, fAbs2, fAbs, 0), pathInterpolator, Interpolators.LINEAR_OUT_SLOW_IN);
         } else {
             animatorProperties.mInterpolator = Interpolators.FAST_OUT_LINEAR_IN;
         }
-        long j = (long) (pow * 1000.0f);
+        long j = (long) (fPow * 1000.0f);
         animatorProperties.mDuration = j;
         animator.setDuration(j);
         animator.setInterpolator(animatorProperties.mInterpolator);
@@ -140,47 +135,47 @@ public class FlingAnimationUtils {
     public final AnimatorProperties getProperties(float f, float f2, float f3, float f4) {
         Interpolator interpolator;
         float f5 = f2 - f;
-        float sqrt = (float) (Math.sqrt(Math.abs(f5) / f4) * this.mMaxLengthSeconds);
-        float abs = Math.abs(f5);
-        float abs2 = Math.abs(f3);
+        float fSqrt = (float) (Math.sqrt(Math.abs(f5) / f4) * this.mMaxLengthSeconds);
+        float fAbs = Math.abs(f5);
+        float fAbs2 = Math.abs(f3);
         float f6 = this.mSpeedUpFactor;
-        float min = f6 == 0.0f ? 1.0f : Math.min(abs2 / 3000.0f, 1.0f);
+        float fMin = f6 == 0.0f ? 1.0f : Math.min(fAbs2 / 3000.0f, 1.0f);
         float f7 = this.mLinearOutSlowInX2;
         float f8 = this.mY2;
-        float f9 = 1.0f - min;
-        float f10 = ((f8 / f7) * min) + (0.75f * f9);
-        float f11 = (f10 * abs) / abs2;
-        if (Float.isNaN(min)) {
+        float f9 = 1.0f - fMin;
+        float f10 = ((f8 / f7) * fMin) + (0.75f * f9);
+        float f11 = (f10 * fAbs) / fAbs2;
+        if (Float.isNaN(fMin)) {
             Log.e("FlingAnimationUtils", "Invalid velocity factor", new Throwable());
             interpolator = Interpolators.LINEAR_OUT_SLOW_IN;
         } else {
-            if (f10 != this.mCachedStartGradient || min != this.mCachedVelocityFactor) {
+            if (f10 != this.mCachedStartGradient || fMin != this.mCachedVelocityFactor) {
                 float f12 = f9 * f6;
                 float f13 = f12 * f10;
                 try {
                     this.mInterpolator = new PathInterpolator(f12, f13, f7, f8);
                     this.mCachedStartGradient = f10;
-                    this.mCachedVelocityFactor = min;
+                    this.mCachedVelocityFactor = fMin;
                 } catch (IllegalArgumentException e) {
-                    StringBuilder m = CubicBezierEasing$$ExternalSyntheticOutline0.m("Illegal path with x1=", f12, " y1=", f13, " x2=");
-                    m.append(f7);
-                    m.append(" y2=");
-                    m.append(f8);
-                    throw new IllegalArgumentException(m.toString(), e);
+                    StringBuilder sbM = CubicBezierEasing$$ExternalSyntheticOutline0.m("Illegal path with x1=", f12, " y1=", f13, " x2=");
+                    sbM.append(f7);
+                    sbM.append(" y2=");
+                    sbM.append(f8);
+                    throw new IllegalArgumentException(sbM.toString(), e);
                 }
             }
             interpolator = this.mInterpolator;
         }
         AnimatorProperties animatorProperties = this.mAnimatorProperties;
-        if (f11 <= sqrt) {
+        if (f11 <= fSqrt) {
             animatorProperties.mInterpolator = interpolator;
-            sqrt = f11;
-        } else if (abs2 >= this.mMinVelocityPxPerSecond) {
-            animatorProperties.mInterpolator = new InterpolatorInterpolator(new VelocityInterpolator(sqrt, abs2, abs, 0), interpolator, Interpolators.LINEAR_OUT_SLOW_IN);
+            fSqrt = f11;
+        } else if (fAbs2 >= this.mMinVelocityPxPerSecond) {
+            animatorProperties.mInterpolator = new InterpolatorInterpolator(new VelocityInterpolator(fSqrt, fAbs2, fAbs, 0), interpolator, Interpolators.LINEAR_OUT_SLOW_IN);
         } else {
             animatorProperties.mInterpolator = Interpolators.FAST_OUT_SLOW_IN;
         }
-        animatorProperties.mDuration = (long) (sqrt * 1000.0f);
+        animatorProperties.mDuration = (long) (fSqrt * 1000.0f);
         return animatorProperties;
     }
 

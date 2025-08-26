@@ -8,7 +8,6 @@ import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AudioStreamModel {
     public final int audioStream;
@@ -43,18 +42,18 @@ public final class AudioStreamModel {
 
     public final String toString() {
         AudioStream.Companion companion = AudioStream.Companion;
-        StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("AudioStreamModel(audioStream=", AudioSystem.streamToString(this.audioStream), ", volume=");
-        m.append(this.volume);
-        m.append(", minVolume=");
-        m.append(this.minVolume);
-        m.append(", maxVolume=");
-        m.append(this.maxVolume);
-        m.append(", isAffectedByMute=");
-        m.append(this.isAffectedByMute);
-        m.append(", isAffectedByRingerMode=");
-        m.append(this.isAffectedByRingerMode);
-        m.append(", isMuted=");
-        return MoveResult$$ExternalSyntheticOutline0.m(m, this.isMuted, ")");
+        StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("AudioStreamModel(audioStream=", AudioSystem.streamToString(this.audioStream), ", volume=");
+        sbM.append(this.volume);
+        sbM.append(", minVolume=");
+        sbM.append(this.minVolume);
+        sbM.append(", maxVolume=");
+        sbM.append(this.maxVolume);
+        sbM.append(", isAffectedByMute=");
+        sbM.append(this.isAffectedByMute);
+        sbM.append(", isAffectedByRingerMode=");
+        sbM.append(this.isAffectedByRingerMode);
+        sbM.append(", isMuted=");
+        return MoveResult$$ExternalSyntheticOutline0.m(sbM, this.isMuted, ")");
     }
 
     private AudioStreamModel(int i, int i2, int i3, int i4, boolean z, boolean z2, boolean z3) {

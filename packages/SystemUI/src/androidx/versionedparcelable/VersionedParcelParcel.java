@@ -9,7 +9,6 @@ import android.util.SparseIntArray;
 import androidx.collection.ArrayMap;
 import androidx.compose.animation.core.TransitionKt$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class VersionedParcelParcel extends VersionedParcel {
     public int mCurrentField;
@@ -29,22 +28,22 @@ public class VersionedParcelParcel extends VersionedParcel {
         int i = this.mCurrentField;
         if (i >= 0) {
             int i2 = this.mPositionLookup.get(i);
-            int dataPosition = this.mParcel.dataPosition();
+            int iDataPosition = this.mParcel.dataPosition();
             this.mParcel.setDataPosition(i2);
-            this.mParcel.writeInt(dataPosition - i2);
-            this.mParcel.setDataPosition(dataPosition);
+            this.mParcel.writeInt(iDataPosition - i2);
+            this.mParcel.setDataPosition(iDataPosition);
         }
     }
 
     @Override // androidx.versionedparcelable.VersionedParcel
     public final VersionedParcelParcel createSubParcel() {
         Parcel parcel = this.mParcel;
-        int dataPosition = parcel.dataPosition();
+        int iDataPosition = parcel.dataPosition();
         int i = this.mNextRead;
         if (i == this.mOffset) {
             i = this.mEnd;
         }
-        return new VersionedParcelParcel(parcel, dataPosition, i, TransitionKt$$ExternalSyntheticOutline0.m(new StringBuilder(), this.mPrefix, "  "), this.mReadCache, this.mWriteCache, this.mParcelizerCache);
+        return new VersionedParcelParcel(parcel, iDataPosition, i, TransitionKt$$ExternalSyntheticOutline0.m(new StringBuilder(), this.mPrefix, "  "), this.mReadCache, this.mWriteCache, this.mParcelizerCache);
     }
 
     @Override // androidx.versionedparcelable.VersionedParcel
@@ -59,11 +58,11 @@ public class VersionedParcelParcel extends VersionedParcel {
 
     @Override // androidx.versionedparcelable.VersionedParcel
     public final byte[] readByteArray() {
-        int readInt = this.mParcel.readInt();
-        if (readInt < 0) {
+        int i = this.mParcel.readInt();
+        if (i < 0) {
             return null;
         }
-        byte[] bArr = new byte[readInt];
+        byte[] bArr = new byte[i];
         this.mParcel.readByteArray(bArr);
         return bArr;
     }
@@ -84,9 +83,9 @@ public class VersionedParcelParcel extends VersionedParcel {
                 return false;
             }
             this.mParcel.setDataPosition(this.mNextRead);
-            int readInt = this.mParcel.readInt();
+            int i3 = this.mParcel.readInt();
             this.mFieldId = this.mParcel.readInt();
-            this.mNextRead += readInt;
+            this.mNextRead += i3;
         }
         return this.mFieldId == i;
     }

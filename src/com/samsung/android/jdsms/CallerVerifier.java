@@ -14,17 +14,17 @@ final class CallerVerifier {
     }
 
     final boolean wasCallerValid() {
-        StackTraceElement extractCaller = extractCaller();
-        if (extractCaller == null) {
+        StackTraceElement stackTraceElementExtractCaller = extractCaller();
+        if (stackTraceElementExtractCaller == null) {
             DsmsLog.e("[CallPolicy] DENY (caller frame not found)");
             return false;
         }
-        String mountFrameCannonName = mountFrameCannonName(extractCaller);
-        if (!mAllowList.contains(mountFrameCannonName)) {
-            DsmsLog.e("[CallPolicy] DENY callerName [" + mountFrameCannonName + NavigationBarInflaterView.SIZE_MOD_END);
+        String strMountFrameCannonName = mountFrameCannonName(stackTraceElementExtractCaller);
+        if (!mAllowList.contains(strMountFrameCannonName)) {
+            DsmsLog.e("[CallPolicy] DENY callerName [" + strMountFrameCannonName + NavigationBarInflaterView.SIZE_MOD_END);
             return false;
         }
-        DsmsLog.d("[CallPolicy] ALLOW callerName [" + mountFrameCannonName + NavigationBarInflaterView.SIZE_MOD_END);
+        DsmsLog.d("[CallPolicy] ALLOW callerName [" + strMountFrameCannonName + NavigationBarInflaterView.SIZE_MOD_END);
         return true;
     }
 
@@ -35,12 +35,12 @@ final class CallerVerifier {
             return null;
         }
         DsmsLog.d(SUBTAG + String.format("Frames length: %d", Integer.valueOf(stackTrace.length)));
-        Integer findBaseIndex = findBaseIndex(stackTrace);
-        if (findBaseIndex == null || findBaseIndex.intValue() + 1 >= stackTrace.length) {
+        Integer numFindBaseIndex = findBaseIndex(stackTrace);
+        if (numFindBaseIndex == null || numFindBaseIndex.intValue() + 1 >= stackTrace.length) {
             DsmsLog.e("[CallPolicy] Impossible to reach caller");
             return null;
         }
-        return stackTrace[findBaseIndex.intValue() + 1];
+        return stackTrace[numFindBaseIndex.intValue() + 1];
     }
 
     private static Integer findBaseIndex(StackTraceElement[] stackTraceElementArr) {

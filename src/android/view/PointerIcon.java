@@ -167,19 +167,19 @@ public final class PointerIcon implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public PointerIcon createFromParcel(Parcel parcel) {
-            PointerIcon create;
+            PointerIcon pointerIconCreate;
             try {
-                int readInt = parcel.readInt();
-                if (readInt != -1 && readInt != 20000) {
-                    return PointerIcon.getSystemIcon(readInt);
+                int i = parcel.readInt();
+                if (i != -1 && i != 20000) {
+                    return PointerIcon.getSystemIcon(i);
                 }
-                if (readInt == 20000) {
-                    create = PointerIcon.createSpenIcon(Bitmap.CREATOR.createFromParcel(parcel), parcel.readFloat(), parcel.readFloat());
+                if (i == 20000) {
+                    pointerIconCreate = PointerIcon.createSpenIcon(Bitmap.CREATOR.createFromParcel(parcel), parcel.readFloat(), parcel.readFloat());
                 } else {
-                    create = PointerIcon.create(Bitmap.CREATOR.createFromParcel(parcel), parcel.readFloat(), parcel.readFloat());
+                    pointerIconCreate = PointerIcon.create(Bitmap.CREATOR.createFromParcel(parcel), parcel.readFloat(), parcel.readFloat());
                 }
-                create.mDrawNativeDropShadow = parcel.readBoolean();
-                return create;
+                pointerIconCreate.mDrawNativeDropShadow = parcel.readBoolean();
+                return pointerIconCreate;
             } catch (IllegalStateException e) {
                 e.printStackTrace();
                 return PointerIcon.getSystemIcon(0);
@@ -293,8 +293,8 @@ public final class PointerIcon implements Parcelable {
         return pointerIcon2;
     }
 
-    public static PointerIcon getLoadedSystemIcon(Context context, int i, boolean z, float f) {
-        TypedArray obtainStyledAttributes;
+    public static PointerIcon getLoadedSystemIcon(Context context, int i, boolean z, float f) throws Resources.NotFoundException {
+        TypedArray typedArrayObtainStyledAttributes;
         if (i == 1) {
             throw new IllegalStateException("Cannot load icon for type TYPE_NOT_SPECIFIED");
         }
@@ -312,12 +312,12 @@ public final class PointerIcon implements Parcelable {
             }
         }
         if (i >= 10000 || (CoreRune.DIRECT_WRITING && i == 1022)) {
-            obtainStyledAttributes = context.obtainStyledAttributes(null, R.styleable.DeviceDefault_Pointer, R.attr.zzz_DeviceDefaultPointerStyle, 0);
+            typedArrayObtainStyledAttributes = context.obtainStyledAttributes(null, R.styleable.DeviceDefault_Pointer, R.attr.zzz_DeviceDefaultPointerStyle, 0);
         } else {
-            obtainStyledAttributes = context.obtainStyledAttributes(null, R.styleable.Pointer, 0, z ? R.style.LargePointer : R.style.Pointer);
+            typedArrayObtainStyledAttributes = context.obtainStyledAttributes(null, R.styleable.Pointer, 0, z ? R.style.LargePointer : R.style.Pointer);
         }
-        int resourceId = obtainStyledAttributes.getResourceId(systemIconTypeIndex, -1);
-        obtainStyledAttributes.recycle();
+        int resourceId = typedArrayObtainStyledAttributes.getResourceId(systemIconTypeIndex, -1);
+        typedArrayObtainStyledAttributes.recycle();
         if (resourceId == -1) {
             Log.w(TAG, "Missing theme resources for pointer icon type " + i);
             if (i == 1000) {
@@ -361,7 +361,7 @@ public final class PointerIcon implements Parcelable {
         return pointerIcon;
     }
 
-    public static PointerIcon load(Resources resources, int i) {
+    public static PointerIcon load(Resources resources, int i) throws Resources.NotFoundException {
         if (resources == null) {
             throw new IllegalArgumentException("resources must not be null");
         }
@@ -421,33 +421,33 @@ public final class PointerIcon implements Parcelable {
         }
         Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
         RectF rectF = new RectF(0.0f, 0.0f, i, i2);
-        Bitmap createBitmap = Bitmap.createBitmap(i, i2, bitmap.getConfig());
-        Canvas canvas = new Canvas(createBitmap);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(i, i2, bitmap.getConfig());
+        Canvas canvas = new Canvas(bitmapCreateBitmap);
         Paint paint = new Paint();
         paint.setFilterBitmap(true);
         canvas.drawBitmap(bitmap, rect, rectF, paint);
-        return createBitmap;
+        return bitmapCreateBitmap;
     }
 
     private BitmapDrawable getBitmapDrawableFromVectorDrawable(Resources resources, VectorDrawable vectorDrawable, float f) {
-        Bitmap createBitmap = Bitmap.createBitmap(resources.getDisplayMetrics(), (int) (vectorDrawable.getIntrinsicWidth() * f), (int) (vectorDrawable.getIntrinsicHeight() * f), Bitmap.Config.ARGB_8888, true);
-        Canvas canvas = new Canvas(createBitmap);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(resources.getDisplayMetrics(), (int) (vectorDrawable.getIntrinsicWidth() * f), (int) (vectorDrawable.getIntrinsicHeight() * f), Bitmap.Config.ARGB_8888, true);
+        Canvas canvas = new Canvas(bitmapCreateBitmap);
         vectorDrawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
         vectorDrawable.draw(canvas);
-        return new BitmapDrawable(resources, createBitmap);
+        return new BitmapDrawable(resources, bitmapCreateBitmap);
     }
 
-    private void loadResource(Resources resources, int i, Resources.Theme theme, float f) {
+    private void loadResource(Resources resources, int i, Resources.Theme theme, float f) throws Resources.NotFoundException {
         Bitmap bitmapFromVectorDrawable;
         XmlResourceParser xml = resources.getXml(i);
         try {
             try {
                 XmlUtils.beginDocument(xml, "pointer-icon");
-                TypedArray obtainAttributes = resources.obtainAttributes(xml, R.styleable.PointerIcon);
-                int resourceId = obtainAttributes.getResourceId(0, 0);
-                float dimension = (int) obtainAttributes.getDimension(1, 0.0f);
-                float dimension2 = (int) obtainAttributes.getDimension(2, 0.0f);
-                obtainAttributes.recycle();
+                TypedArray typedArrayObtainAttributes = resources.obtainAttributes(xml, R.styleable.PointerIcon);
+                int resourceId = typedArrayObtainAttributes.getResourceId(0, 0);
+                float dimension = (int) typedArrayObtainAttributes.getDimension(1, 0.0f);
+                float dimension2 = (int) typedArrayObtainAttributes.getDimension(2, 0.0f);
+                typedArrayObtainAttributes.recycle();
                 if (resourceId == 0) {
                     throw new IllegalArgumentException("<pointer-icon> is missing bitmap attribute.");
                 }
@@ -799,9 +799,9 @@ public final class PointerIcon implements Parcelable {
     }
 
     private static Bitmap resizeBitmap(Bitmap bitmap, float f) {
-        Bitmap createScaledBitmap = Bitmap.createScaledBitmap(bitmap, (int) (bitmap.getWidth() * f), (int) (bitmap.getHeight() * f), true);
+        Bitmap bitmapCreateScaledBitmap = Bitmap.createScaledBitmap(bitmap, (int) (bitmap.getWidth() * f), (int) (bitmap.getHeight() * f), true);
         bitmap.recycle();
-        return createScaledBitmap;
+        return bitmapCreateScaledBitmap;
     }
 
     public static void clearSystemIcons() {
@@ -822,11 +822,11 @@ public final class PointerIcon implements Parcelable {
         float intrinsicWidth = vectorDrawable.getIntrinsicWidth();
         float intrinsicHeight = vectorDrawable.getIntrinsicHeight();
         float f = this.mPointerIconSizeScale;
-        Bitmap createBitmap = Bitmap.createBitmap((int) (intrinsicWidth * f), (int) (intrinsicHeight * f), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(createBitmap);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap((int) (intrinsicWidth * f), (int) (intrinsicHeight * f), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmapCreateBitmap);
         vectorDrawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
         vectorDrawable.draw(canvas);
-        return createBitmap;
+        return bitmapCreateBitmap;
     }
 
     public static void semSetDefaultPointerIcon(int i, PointerIcon pointerIcon) {

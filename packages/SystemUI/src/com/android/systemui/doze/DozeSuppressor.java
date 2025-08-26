@@ -19,7 +19,6 @@ import com.android.systemui.statusbar.policy.DeviceProvisionedControllerImpl;
 import dagger.Lazy;
 import java.io.PrintWriter;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class DozeSuppressor implements DozeMachine.Part {
     public final Lazy mBiometricUnlockControllerLazy;
@@ -29,7 +28,6 @@ public class DozeSuppressor implements DozeMachine.Part {
     public DozeMachine mMachine;
     public final UserTracker mUserTracker;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.doze.DozeSuppressor$2, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass2 {
         public static final /* synthetic */ int[] $SwitchMap$com$android$systemui$doze$DozeMachine$State;
@@ -59,11 +57,11 @@ public class DozeSuppressor implements DozeMachine.Part {
                 LogLevel logLevel = LogLevel.INFO;
                 DozeLogger$$ExternalSyntheticLambda0 dozeLogger$$ExternalSyntheticLambda0 = new DozeLogger$$ExternalSyntheticLambda0(28);
                 LogBuffer logBuffer = dozeLogger.buffer;
-                LogMessage obtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda0, null);
-                LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+                LogMessage logMessageObtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda0, null);
+                LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
                 logMessageImpl.bool1 = z;
                 logMessageImpl.str1 = state.name();
-                logBuffer.commit(obtain);
+                logBuffer.commit(logMessageObtain);
                 dozeSuppressor.mMachine.requestState(state);
             }
 
@@ -78,11 +76,11 @@ public class DozeSuppressor implements DozeMachine.Part {
                     LogLevel logLevel = LogLevel.INFO;
                     DozeLogger$$ExternalSyntheticLambda0 dozeLogger$$ExternalSyntheticLambda0 = new DozeLogger$$ExternalSyntheticLambda0(27);
                     LogBuffer logBuffer = dozeLogger.buffer;
-                    LogMessage obtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda0, null);
-                    LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+                    LogMessage logMessageObtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda0, null);
+                    LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
                     logMessageImpl.bool1 = z;
                     logMessageImpl.str1 = state.name();
-                    logBuffer.commit(obtain);
+                    logBuffer.commit(logMessageObtain);
                     dozeSuppressor.mMachine.requestState(state);
                 }
             }
@@ -96,9 +94,9 @@ public class DozeSuppressor implements DozeMachine.Part {
 
     @Override // com.android.systemui.doze.DozeMachine.Part
     public final void dump(PrintWriter printWriter) {
-        StringBuilder m = CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, " isCarModeEnabled=false", " hasPendingAuth=");
-        m.append(((BiometricUnlockController) this.mBiometricUnlockControllerLazy.get()).hasPendingAuthentication());
-        printWriter.println(m.toString());
+        StringBuilder sbM = CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, " isCarModeEnabled=false", " hasPendingAuth=");
+        sbM.append(((BiometricUnlockController) this.mBiometricUnlockControllerLazy.get()).hasPendingAuthentication());
+        printWriter.println(sbM.toString());
         StringBuilder sb = new StringBuilder(" isProvisioned=");
         DozeServiceHost dozeServiceHost = (DozeServiceHost) this.mDozeHost;
         DeviceProvisionedControllerImpl deviceProvisionedControllerImpl = (DeviceProvisionedControllerImpl) dozeServiceHost.mDeviceProvisionedController;
@@ -125,9 +123,9 @@ public class DozeSuppressor implements DozeMachine.Part {
         LogLevel logLevel = LogLevel.INFO;
         DozeLogger$$ExternalSyntheticLambda0 dozeLogger$$ExternalSyntheticLambda0 = new DozeLogger$$ExternalSyntheticLambda0(7);
         LogBuffer logBuffer = dozeLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda0, null);
-        ((LogMessageImpl) obtain).str1 = str;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda0, null);
+        ((LogMessageImpl) logMessageObtain).str1 = str;
+        logBuffer.commit(logMessageObtain);
         this.mMachine.requestState(DozeMachine.State.FINISH);
     }
 

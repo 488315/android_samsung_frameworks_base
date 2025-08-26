@@ -12,7 +12,6 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class LottieTask {
     public static final Executor EXECUTOR = Executors.newCachedThreadPool();
@@ -21,7 +20,6 @@ public class LottieTask {
     public volatile LottieResult result;
     public final Set successListeners;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class LottieFutureTask extends FutureTask {
         public LottieFutureTask(Callable<LottieResult> callable) {
             super(callable);
@@ -84,7 +82,7 @@ public class LottieTask {
         this.handler.post(new Runnable() { // from class: com.airbnb.lottie.LottieTask$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                LottieTask lottieTask = LottieTask.this;
+                LottieTask lottieTask = this.f$0;
                 LottieResult lottieResult2 = lottieTask.result;
                 if (lottieResult2 == null) {
                     return;

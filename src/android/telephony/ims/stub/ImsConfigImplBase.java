@@ -10,7 +10,6 @@ import android.telephony.ims.RcsConfig;
 import android.telephony.ims.aidl.IImsConfig;
 import android.telephony.ims.aidl.IImsConfigCallback;
 import android.telephony.ims.aidl.IRcsConfigCallback;
-import android.telephony.ims.stub.ImsConfigImplBase;
 import android.util.Log;
 import com.android.internal.telephony.util.RemoteCallbackListExt;
 import com.android.internal.telephony.util.TelephonyUtils;
@@ -105,7 +104,7 @@ public class ImsConfigImplBase {
             executeMethodAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsConfigImplBase$ImsConfigStub$$ExternalSyntheticLambda11
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ImsConfigImplBase.ImsConfigStub.this.lambda$addImsConfigCallback$0(iImsConfigCallback, atomicReference);
+                    this.f$0.lambda$addImsConfigCallback$0(iImsConfigCallback, atomicReference);
                 }
             }, "addImsConfigCallback");
             if (atomicReference.get() == null) {
@@ -130,7 +129,7 @@ public class ImsConfigImplBase {
             executeMethodAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsConfigImplBase$ImsConfigStub$$ExternalSyntheticLambda14
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ImsConfigImplBase.ImsConfigStub.this.lambda$removeImsConfigCallback$1(iImsConfigCallback, atomicReference);
+                    this.f$0.lambda$removeImsConfigCallback$1(iImsConfigCallback, atomicReference);
                 }
             }, "removeImsConfigCallback");
             if (atomicReference.get() == null) {
@@ -152,16 +151,14 @@ public class ImsConfigImplBase {
         @Override // android.telephony.ims.aidl.IImsConfig
         public int getConfigInt(final int i) throws RemoteException {
             final AtomicReference atomicReference = new AtomicReference();
-            int intValue = ((Integer) executeMethodAsyncForResult(new Supplier() { // from class: android.telephony.ims.stub.ImsConfigImplBase$ImsConfigStub$$ExternalSyntheticLambda12
+            int iIntValue = ((Integer) executeMethodAsyncForResult(new Supplier() { // from class: android.telephony.ims.stub.ImsConfigImplBase$ImsConfigStub$$ExternalSyntheticLambda12
                 @Override // java.util.function.Supplier
                 public final Object get() {
-                    Integer lambda$getConfigInt$2;
-                    lambda$getConfigInt$2 = ImsConfigImplBase.ImsConfigStub.this.lambda$getConfigInt$2(i, atomicReference);
-                    return lambda$getConfigInt$2;
+                    return this.f$0.lambda$getConfigInt$2(i, atomicReference);
                 }
             }, "getConfigInt")).intValue();
             if (atomicReference.get() == null) {
-                return intValue;
+                return iIntValue;
             }
             Log.d(ImsConfigImplBase.TAG, "ImsConfigImplBase Exception getConfigString");
             throw ((RemoteException) atomicReference.get());
@@ -199,9 +196,7 @@ public class ImsConfigImplBase {
             String str = (String) executeMethodAsyncForResult(new Supplier() { // from class: android.telephony.ims.stub.ImsConfigImplBase$ImsConfigStub$$ExternalSyntheticLambda2
                 @Override // java.util.function.Supplier
                 public final Object get() {
-                    String lambda$getConfigString$3;
-                    lambda$getConfigString$3 = ImsConfigImplBase.ImsConfigStub.this.lambda$getConfigString$3(i, atomicReference);
-                    return lambda$getConfigString$3;
+                    return this.f$0.lambda$getConfigString$3(i, atomicReference);
                 }
             }, "getConfigString");
             if (atomicReference.get() == null) {
@@ -218,16 +213,16 @@ public class ImsConfigImplBase {
                 if (this.mProvisionedStringValue.containsKey(Integer.valueOf(i))) {
                     str = this.mProvisionedStringValue.get(Integer.valueOf(i));
                 } else {
-                    String str2 = null;
+                    String configString = null;
                     try {
-                        str2 = getImsConfigImpl().getConfigString(i);
-                        if (str2 != null) {
-                            this.mProvisionedStringValue.put(Integer.valueOf(i), str2);
+                        configString = getImsConfigImpl().getConfigString(i);
+                        if (configString != null) {
+                            this.mProvisionedStringValue.put(Integer.valueOf(i), configString);
                         }
-                        str = str2;
+                        str = configString;
                     } catch (RemoteException e) {
                         atomicReference.set(e);
-                        return str2;
+                        return configString;
                     }
                 }
             }
@@ -237,16 +232,14 @@ public class ImsConfigImplBase {
         @Override // android.telephony.ims.aidl.IImsConfig
         public int setConfigInt(final int i, final int i2) throws RemoteException {
             final AtomicReference atomicReference = new AtomicReference();
-            int intValue = ((Integer) executeMethodAsyncForResult(new Supplier() { // from class: android.telephony.ims.stub.ImsConfigImplBase$ImsConfigStub$$ExternalSyntheticLambda16
+            int iIntValue = ((Integer) executeMethodAsyncForResult(new Supplier() { // from class: android.telephony.ims.stub.ImsConfigImplBase$ImsConfigStub$$ExternalSyntheticLambda16
                 @Override // java.util.function.Supplier
                 public final Object get() {
-                    Integer lambda$setConfigInt$4;
-                    lambda$setConfigInt$4 = ImsConfigImplBase.ImsConfigStub.this.lambda$setConfigInt$4(i, i2, atomicReference);
-                    return lambda$setConfigInt$4;
+                    return this.f$0.lambda$setConfigInt$4(i, i2, atomicReference);
                 }
             }, "setConfigInt")).intValue();
             if (atomicReference.get() == null) {
-                return intValue;
+                return iIntValue;
             }
             Log.d(ImsConfigImplBase.TAG, "ImsConfigImplBase Exception setConfigInt");
             throw ((RemoteException) atomicReference.get());
@@ -254,38 +247,36 @@ public class ImsConfigImplBase {
 
         /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ Integer lambda$setConfigInt$4(int i, int i2, AtomicReference atomicReference) {
-            int i3 = -1;
+            int config = -1;
             try {
                 synchronized (this.mLock) {
                     this.mProvisionedIntValue.remove(Integer.valueOf(i));
-                    i3 = getImsConfigImpl().setConfig(i, i2);
-                    if (i3 == 0) {
+                    config = getImsConfigImpl().setConfig(i, i2);
+                    if (config == 0) {
                         this.mProvisionedIntValue.put(Integer.valueOf(i), Integer.valueOf(i2));
                     } else {
-                        Log.d(ImsConfigImplBase.TAG, "Set provision value of " + i + " to " + i2 + " failed with error code " + i3);
+                        Log.d(ImsConfigImplBase.TAG, "Set provision value of " + i + " to " + i2 + " failed with error code " + config);
                     }
                 }
                 notifyImsConfigChanged(i, i2);
-                return Integer.valueOf(i3);
+                return Integer.valueOf(config);
             } catch (RemoteException e) {
                 atomicReference.set(e);
-                return Integer.valueOf(i3);
+                return Integer.valueOf(config);
             }
         }
 
         @Override // android.telephony.ims.aidl.IImsConfig
         public int setConfigString(final int i, final String str) throws RemoteException {
             final AtomicReference atomicReference = new AtomicReference();
-            int intValue = ((Integer) executeMethodAsyncForResult(new Supplier() { // from class: android.telephony.ims.stub.ImsConfigImplBase$ImsConfigStub$$ExternalSyntheticLambda3
+            int iIntValue = ((Integer) executeMethodAsyncForResult(new Supplier() { // from class: android.telephony.ims.stub.ImsConfigImplBase$ImsConfigStub$$ExternalSyntheticLambda3
                 @Override // java.util.function.Supplier
                 public final Object get() {
-                    Integer lambda$setConfigString$5;
-                    lambda$setConfigString$5 = ImsConfigImplBase.ImsConfigStub.this.lambda$setConfigString$5(i, str, atomicReference);
-                    return lambda$setConfigString$5;
+                    return this.f$0.lambda$setConfigString$5(i, str, atomicReference);
                 }
             }, "setConfigString")).intValue();
             if (atomicReference.get() == null) {
-                return intValue;
+                return iIntValue;
             }
             Log.d(ImsConfigImplBase.TAG, "ImsConfigImplBase Exception setConfigInt");
             throw ((RemoteException) atomicReference.get());
@@ -293,20 +284,20 @@ public class ImsConfigImplBase {
 
         /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ Integer lambda$setConfigString$5(int i, String str, AtomicReference atomicReference) {
-            int i2 = -1;
+            int config = -1;
             try {
                 synchronized (this.mLock) {
                     this.mProvisionedStringValue.remove(Integer.valueOf(i));
-                    i2 = getImsConfigImpl().setConfig(i, str);
-                    if (i2 == 0) {
+                    config = getImsConfigImpl().setConfig(i, str);
+                    if (config == 0) {
                         this.mProvisionedStringValue.put(Integer.valueOf(i), str);
                     }
                 }
                 notifyImsConfigChanged(i, str);
-                return Integer.valueOf(i2);
+                return Integer.valueOf(config);
             } catch (RemoteException e) {
                 atomicReference.set(e);
-                return Integer.valueOf(i2);
+                return Integer.valueOf(config);
             }
         }
 
@@ -316,7 +307,7 @@ public class ImsConfigImplBase {
             executeMethodAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsConfigImplBase$ImsConfigStub$$ExternalSyntheticLambda10
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ImsConfigImplBase.ImsConfigStub.this.lambda$updateImsCarrierConfigs$6(persistableBundle, atomicReference);
+                    this.f$0.lambda$updateImsCarrierConfigs$6(persistableBundle, atomicReference);
                 }
             }, "updateImsCarrierConfigs");
             if (atomicReference.get() == null) {
@@ -349,7 +340,7 @@ public class ImsConfigImplBase {
             executeMethodAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsConfigImplBase$ImsConfigStub$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ImsConfigImplBase.ImsConfigStub.this.lambda$notifyRcsAutoConfigurationReceived$7(bArr, z, atomicReference);
+                    this.f$0.lambda$notifyRcsAutoConfigurationReceived$7(bArr, z, atomicReference);
                 }
             }, "notifyRcsAutoConfigurationReceived");
             if (atomicReference.get() == null) {
@@ -374,7 +365,7 @@ public class ImsConfigImplBase {
             executeMethodAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsConfigImplBase$ImsConfigStub$$ExternalSyntheticLambda9
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ImsConfigImplBase.ImsConfigStub.this.lambda$notifyRcsAutoConfigurationRemoved$8(atomicReference);
+                    this.f$0.lambda$notifyRcsAutoConfigurationRemoved$8(atomicReference);
                 }
             }, "notifyRcsAutoConfigurationRemoved");
             if (atomicReference.get() == null) {
@@ -441,7 +432,7 @@ public class ImsConfigImplBase {
             executeMethodAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsConfigImplBase$ImsConfigStub$$ExternalSyntheticLambda7
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ImsConfigImplBase.ImsConfigStub.this.lambda$addRcsConfigCallback$9(iRcsConfigCallback, atomicReference);
+                    this.f$0.lambda$addRcsConfigCallback$9(iRcsConfigCallback, atomicReference);
                 }
             }, "addRcsConfigCallback");
             if (atomicReference.get() == null) {
@@ -466,7 +457,7 @@ public class ImsConfigImplBase {
             executeMethodAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsConfigImplBase$ImsConfigStub$$ExternalSyntheticLambda15
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ImsConfigImplBase.ImsConfigStub.this.lambda$removeRcsConfigCallback$10(iRcsConfigCallback, atomicReference);
+                    this.f$0.lambda$removeRcsConfigCallback$10(iRcsConfigCallback, atomicReference);
                 }
             }, "removeRcsConfigCallback");
             if (atomicReference.get() == null) {
@@ -491,7 +482,7 @@ public class ImsConfigImplBase {
             executeMethodAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsConfigImplBase$ImsConfigStub$$ExternalSyntheticLambda6
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ImsConfigImplBase.ImsConfigStub.this.lambda$triggerRcsReconfiguration$11(atomicReference);
+                    this.f$0.lambda$triggerRcsReconfiguration$11(atomicReference);
                 }
             }, "triggerRcsReconfiguration");
             if (atomicReference.get() == null) {
@@ -521,7 +512,7 @@ public class ImsConfigImplBase {
             executeMethodAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsConfigImplBase$ImsConfigStub$$ExternalSyntheticLambda5
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ImsConfigImplBase.ImsConfigStub.this.lambda$setRcsClientConfiguration$12(rcsClientConfiguration, atomicReference);
+                    this.f$0.lambda$setRcsClientConfiguration$12(rcsClientConfiguration, atomicReference);
                 }
             }, "setRcsClientConfiguration");
             if (atomicReference.get() == null) {
@@ -546,7 +537,7 @@ public class ImsConfigImplBase {
             executeMethodAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsConfigImplBase$ImsConfigStub$$ExternalSyntheticLambda13
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ImsConfigImplBase.ImsConfigStub.this.lambda$notifyIntImsConfigChanged$13(i, i2, atomicReference);
+                    this.f$0.lambda$notifyIntImsConfigChanged$13(i, i2, atomicReference);
                 }
             }, "notifyIntImsConfigChanged");
             if (atomicReference.get() == null) {
@@ -571,7 +562,7 @@ public class ImsConfigImplBase {
             executeMethodAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsConfigImplBase$ImsConfigStub$$ExternalSyntheticLambda8
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ImsConfigImplBase.ImsConfigStub.this.lambda$notifyStringImsConfigChanged$14(i, str, atomicReference);
+                    this.f$0.lambda$notifyStringImsConfigChanged$14(i, str, atomicReference);
                 }
             }, "notifyStringImsConfigChanged");
             if (atomicReference.get() == null) {
@@ -617,9 +608,7 @@ public class ImsConfigImplBase {
                 return (T) CompletableFuture.supplyAsync(new Supplier() { // from class: android.telephony.ims.stub.ImsConfigImplBase$ImsConfigStub$$ExternalSyntheticLambda1
                     @Override // java.util.function.Supplier
                     public final Object get() {
-                        Object runWithCleanCallingIdentity;
-                        runWithCleanCallingIdentity = TelephonyUtils.runWithCleanCallingIdentity((Supplier<Object>) supplier);
-                        return runWithCleanCallingIdentity;
+                        return TelephonyUtils.runWithCleanCallingIdentity(supplier);
                     }
                 }, getExecutor()).get();
             } catch (InterruptedException | ExecutionException e) {
@@ -732,19 +721,19 @@ public class ImsConfigImplBase {
 
     /* JADX INFO: Access modifiers changed from: private */
     public void onNotifyRcsAutoConfigurationReceived(byte[] bArr, boolean z) {
-        final byte[] decompressGzip = z ? RcsConfig.decompressGzip(bArr) : bArr;
+        final byte[] bArrDecompressGzip = z ? RcsConfig.decompressGzip(bArr) : bArr;
         synchronized (this.mRcsConfigDataLock) {
             if (Arrays.equals(this.mRcsConfigData, bArr)) {
                 return;
             }
-            this.mRcsConfigData = decompressGzip;
+            this.mRcsConfigData = bArrDecompressGzip;
             RemoteCallbackListExt<IRcsConfigCallback> remoteCallbackListExt = this.mRcsCallbacks;
             if (remoteCallbackListExt != null) {
                 synchronized (remoteCallbackListExt) {
                     this.mRcsCallbacks.broadcastAction(new Consumer() { // from class: android.telephony.ims.stub.ImsConfigImplBase$$ExternalSyntheticLambda1
                         @Override // java.util.function.Consumer
                         public final void accept(Object obj) {
-                            ImsConfigImplBase.lambda$onNotifyRcsAutoConfigurationReceived$2(decompressGzip, (IRcsConfigCallback) obj);
+                            ImsConfigImplBase.lambda$onNotifyRcsAutoConfigurationReceived$2(bArrDecompressGzip, (IRcsConfigCallback) obj);
                         }
                     });
                 }

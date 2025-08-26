@@ -3,7 +3,7 @@ package com.android.internal.protolog;
 import com.android.internal.protolog.common.IProtoLogGroup;
 import java.util.UUID;
 
-/* loaded from: classes3.dex */
+/* loaded from: classes4.dex */
 public enum WmProtoLogGroups implements IProtoLogGroup {
     WM_ERROR(true, true, true, "WindowManager"),
     WM_DEBUG_ORIENTATION(true, true, false, "WindowManager"),

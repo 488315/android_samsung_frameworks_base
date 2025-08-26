@@ -26,7 +26,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class IndicatorViewController {
     public Animator captionAnimator;
@@ -100,19 +99,19 @@ public final class IndicatorViewController {
         if (this.indicatorArea == null || (editText = this.textInputView.editText) == null) {
             return;
         }
-        boolean isFontScaleAtLeast1_3 = MaterialResources.isFontScaleAtLeast1_3(this.context);
+        boolean zIsFontScaleAtLeast1_3 = MaterialResources.isFontScaleAtLeast1_3(this.context);
         LinearLayout linearLayout = this.indicatorArea;
         WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
         int paddingStart = editText.getPaddingStart();
-        if (isFontScaleAtLeast1_3) {
+        if (zIsFontScaleAtLeast1_3) {
             paddingStart = this.context.getResources().getDimensionPixelSize(R.dimen.material_helper_text_font_1_3_padding_horizontal);
         }
         int dimensionPixelSize = this.context.getResources().getDimensionPixelSize(R.dimen.material_helper_text_default_padding_top);
-        if (isFontScaleAtLeast1_3) {
+        if (zIsFontScaleAtLeast1_3) {
             dimensionPixelSize = this.context.getResources().getDimensionPixelSize(R.dimen.material_helper_text_font_1_3_padding_top);
         }
         int paddingEnd = editText.getPaddingEnd();
-        if (isFontScaleAtLeast1_3) {
+        if (zIsFontScaleAtLeast1_3) {
             paddingEnd = this.context.getResources().getDimensionPixelSize(R.dimen.material_helper_text_font_1_3_padding_horizontal);
         }
         linearLayout.setPaddingRelative(paddingStart, dimensionPixelSize, paddingEnd, 0);
@@ -131,23 +130,23 @@ public final class IndicatorViewController {
         }
         if (i == i3 || i == i2) {
             boolean z2 = i3 == i;
-            ObjectAnimator ofFloat = ObjectAnimator.ofFloat(appCompatTextView, (Property<AppCompatTextView, Float>) View.ALPHA, z2 ? 1.0f : 0.0f);
+            ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(appCompatTextView, (Property<AppCompatTextView, Float>) View.ALPHA, z2 ? 1.0f : 0.0f);
             int i4 = this.captionFadeOutAnimationDuration;
-            ofFloat.setDuration(z2 ? this.captionFadeInAnimationDuration : i4);
-            ofFloat.setInterpolator(z2 ? this.captionFadeInAnimationInterpolator : this.captionFadeOutAnimationInterpolator);
+            objectAnimatorOfFloat.setDuration(z2 ? this.captionFadeInAnimationDuration : i4);
+            objectAnimatorOfFloat.setInterpolator(z2 ? this.captionFadeInAnimationInterpolator : this.captionFadeOutAnimationInterpolator);
             if (i == i3 && i2 != 0) {
-                ofFloat.setStartDelay(i4);
+                objectAnimatorOfFloat.setStartDelay(i4);
             }
             ArrayList arrayList = (ArrayList) list;
-            arrayList.add(ofFloat);
+            arrayList.add(objectAnimatorOfFloat);
             if (i3 != i || i2 == 0) {
                 return;
             }
-            ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(appCompatTextView, (Property<AppCompatTextView, Float>) View.TRANSLATION_Y, -this.captionTranslationYPx, 0.0f);
-            ofFloat2.setDuration(this.captionTranslationYAnimationDuration);
-            ofFloat2.setInterpolator(this.captionTranslationYAnimationInterpolator);
-            ofFloat2.setStartDelay(i4);
-            arrayList.add(ofFloat2);
+            ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(appCompatTextView, (Property<AppCompatTextView, Float>) View.TRANSLATION_Y, -this.captionTranslationYPx, 0.0f);
+            objectAnimatorOfFloat2.setDuration(this.captionTranslationYAnimationDuration);
+            objectAnimatorOfFloat2.setInterpolator(this.captionTranslationYAnimationInterpolator);
+            objectAnimatorOfFloat2.setStartDelay(i4);
+            arrayList.add(objectAnimatorOfFloat2);
         }
     }
 

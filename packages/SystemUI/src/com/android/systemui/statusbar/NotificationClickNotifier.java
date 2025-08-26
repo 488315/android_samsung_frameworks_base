@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class NotificationClickNotifier {
     public final Executor backgroundExecutor;
@@ -37,7 +36,7 @@ public final class NotificationClickNotifier {
             this.barService.onNotificationClick(str, notificationVisibility);
         } catch (RemoteException unused) {
         }
-        this.mainExecutor.execute(new Runnable() { // from class: com.android.systemui.statusbar.NotificationClickNotifier$onNotificationClick$1
+        this.mainExecutor.execute(new Runnable() { // from class: com.android.systemui.statusbar.NotificationClickNotifier.onNotificationClick.1
             @Override // java.lang.Runnable
             public final void run() {
                 NotificationClickNotifier.access$notifyListenersAboutInteraction(NotificationClickNotifier.this, str);

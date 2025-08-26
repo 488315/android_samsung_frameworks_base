@@ -12,7 +12,6 @@ import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.SnackbarManager;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SwipeDismissBehavior<V extends View> extends CoordinatorLayout.Behavior {
     public boolean interceptingEvents;
@@ -100,114 +99,56 @@ public class SwipeDismissBehavior<V extends View> extends CoordinatorLayout.Beha
             SwipeDismissBehavior swipeDismissBehavior = SwipeDismissBehavior.this;
             float f = width * swipeDismissBehavior.alphaStartSwipeDistance;
             float width2 = view.getWidth() * swipeDismissBehavior.alphaEndSwipeDistance;
-            float abs = Math.abs(i - this.originalCapturedViewLeft);
-            if (abs <= f) {
+            float fAbs = Math.abs(i - this.originalCapturedViewLeft);
+            if (fAbs <= f) {
                 view.setAlpha(1.0f);
-            } else if (abs >= width2) {
+            } else if (fAbs >= width2) {
                 view.setAlpha(0.0f);
             } else {
-                view.setAlpha(Math.min(Math.max(0.0f, 1.0f - ((abs - f) / (width2 - f))), 1.0f));
+                view.setAlpha(Math.min(Math.max(0.0f, 1.0f - ((fAbs - f) / (width2 - f))), 1.0f));
             }
         }
 
-        /* JADX WARN: Code restructure failed: missing block: B:39:0x0050, code lost:
-        
-            if (java.lang.Math.abs(r9.getLeft() - r8.originalCapturedViewLeft) >= java.lang.Math.round(r9.getWidth() * r3.dragDismissThreshold)) goto L27;
-         */
+        /* JADX WARN: Removed duplicated region for block: B:27:0x0052  */
+        /* JADX WARN: Removed duplicated region for block: B:33:0x0061  */
+        /* JADX WARN: Removed duplicated region for block: B:34:0x0066  */
         @Override // androidx.customview.widget.ViewDragHelper.Callback
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final void onViewReleased(android.view.View r9, float r10, float r11) {
-            /*
-                r8 = this;
-                r11 = -1
-                r8.activePointerId = r11
-                int r11 = r9.getWidth()
-                r0 = 0
-                int r1 = (r10 > r0 ? 1 : (r10 == r0 ? 0 : -1))
-                r2 = 1
-                com.google.android.material.behavior.SwipeDismissBehavior r3 = com.google.android.material.behavior.SwipeDismissBehavior.this
-                r4 = 0
-                if (r1 == 0) goto L39
-                java.util.WeakHashMap r5 = androidx.core.view.ViewCompat.sViewPropertyAnimatorMap
-                int r5 = r9.getLayoutDirection()
-                if (r5 != r2) goto L1a
-                r5 = r2
-                goto L1b
-            L1a:
-                r5 = r4
-            L1b:
-                int r6 = r3.swipeDirection
-                r7 = 2
-                if (r6 != r7) goto L21
-                goto L52
-            L21:
-                if (r6 != 0) goto L2d
-                if (r5 == 0) goto L2a
-                int r1 = (r10 > r0 ? 1 : (r10 == r0 ? 0 : -1))
-                if (r1 >= 0) goto L66
-                goto L52
-            L2a:
-                if (r1 <= 0) goto L66
-                goto L52
-            L2d:
-                if (r6 != r2) goto L66
-                if (r5 == 0) goto L34
-                if (r1 <= 0) goto L66
-                goto L52
-            L34:
-                int r1 = (r10 > r0 ? 1 : (r10 == r0 ? 0 : -1))
-                if (r1 >= 0) goto L66
-                goto L52
-            L39:
-                int r1 = r9.getLeft()
-                int r5 = r8.originalCapturedViewLeft
-                int r1 = r1 - r5
-                int r5 = r9.getWidth()
-                float r5 = (float) r5
-                float r6 = r3.dragDismissThreshold
-                float r5 = r5 * r6
-                int r5 = java.lang.Math.round(r5)
-                int r1 = java.lang.Math.abs(r1)
-                if (r1 < r5) goto L66
-            L52:
-                int r10 = (r10 > r0 ? 1 : (r10 == r0 ? 0 : -1))
-                if (r10 < 0) goto L61
-                int r10 = r9.getLeft()
-                int r0 = r8.originalCapturedViewLeft
-                if (r10 >= r0) goto L5f
-                goto L61
-            L5f:
-                int r0 = r0 + r11
-                goto L69
-            L61:
-                int r8 = r8.originalCapturedViewLeft
-                int r0 = r8 - r11
-                goto L69
-            L66:
-                int r0 = r8.originalCapturedViewLeft
-                r2 = r4
-            L69:
-                androidx.customview.widget.ViewDragHelper r8 = r3.viewDragHelper
-                int r10 = r9.getTop()
-                boolean r8 = r8.settleCapturedViewAt(r0, r10)
-                if (r8 == 0) goto L80
-                com.google.android.material.behavior.SwipeDismissBehavior$SettleRunnable r8 = new com.google.android.material.behavior.SwipeDismissBehavior$SettleRunnable
-                r8.<init>(r9, r2)
-                java.util.WeakHashMap r10 = androidx.core.view.ViewCompat.sViewPropertyAnimatorMap
-                r9.postOnAnimation(r8)
-                return
-            L80:
-                if (r2 == 0) goto L89
-                com.google.android.material.snackbar.BaseTransientBottomBar$7 r8 = r3.listener
-                if (r8 == 0) goto L89
-                r8.onDismiss(r9)
-            L89:
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.google.android.material.behavior.SwipeDismissBehavior.AnonymousClass1.onViewReleased(android.view.View, float, float):void");
+        public final void onViewReleased(View view, float f, float f2) {
+            int i;
+            BaseTransientBottomBar.AnonymousClass7 anonymousClass7;
+            this.activePointerId = -1;
+            int width = view.getWidth();
+            boolean z = true;
+            SwipeDismissBehavior swipeDismissBehavior = SwipeDismissBehavior.this;
+            if (f != 0.0f) {
+                WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
+                boolean z2 = view.getLayoutDirection() == 1;
+                int i2 = swipeDismissBehavior.swipeDirection;
+                if (i2 != 2 && (i2 != 0 ? i2 != 1 || (!z2 ? f < 0.0f : f > 0.0f) : !z2 ? f > 0.0f : f < 0.0f)) {
+                    i = this.originalCapturedViewLeft;
+                    z = false;
+                } else if (f >= 0.0f) {
+                    int left = view.getLeft();
+                    int i3 = this.originalCapturedViewLeft;
+                    i = left < i3 ? this.originalCapturedViewLeft - width : i3 + width;
+                }
+            } else {
+                if (Math.abs(view.getLeft() - this.originalCapturedViewLeft) >= Math.round(view.getWidth() * swipeDismissBehavior.dragDismissThreshold)) {
+                }
+            }
+            if (swipeDismissBehavior.viewDragHelper.settleCapturedViewAt(i, view.getTop())) {
+                SettleRunnable settleRunnable = new SettleRunnable(view, z);
+                WeakHashMap weakHashMap2 = ViewCompat.sViewPropertyAnimatorMap;
+                view.postOnAnimation(settleRunnable);
+            } else {
+                if (!z || (anonymousClass7 = swipeDismissBehavior.listener) == null) {
+                    return;
+                }
+                anonymousClass7.onDismiss(view);
+            }
         }
 
         @Override // androidx.customview.widget.ViewDragHelper.Callback
@@ -217,11 +158,9 @@ public class SwipeDismissBehavior<V extends View> extends CoordinatorLayout.Beha
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface OnDismissListener {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SettleRunnable implements Runnable {
         public final boolean dismiss;
         public final View view;
@@ -258,15 +197,15 @@ public class SwipeDismissBehavior<V extends View> extends CoordinatorLayout.Beha
 
     @Override // androidx.coordinatorlayout.widget.CoordinatorLayout.Behavior
     public boolean onInterceptTouchEvent(CoordinatorLayout coordinatorLayout, View view, MotionEvent motionEvent) {
-        boolean z = this.interceptingEvents;
+        boolean zIsPointInChildBounds = this.interceptingEvents;
         int actionMasked = motionEvent.getActionMasked();
         if (actionMasked == 0) {
-            z = coordinatorLayout.isPointInChildBounds(view, (int) motionEvent.getX(), (int) motionEvent.getY());
-            this.interceptingEvents = z;
+            zIsPointInChildBounds = coordinatorLayout.isPointInChildBounds(view, (int) motionEvent.getX(), (int) motionEvent.getY());
+            this.interceptingEvents = zIsPointInChildBounds;
         } else if (actionMasked == 1 || actionMasked == 3) {
             this.interceptingEvents = false;
         }
-        if (z) {
+        if (zIsPointInChildBounds) {
             if (this.viewDragHelper == null) {
                 this.viewDragHelper = ViewDragHelper.create(coordinatorLayout, this.dragCallback);
             }

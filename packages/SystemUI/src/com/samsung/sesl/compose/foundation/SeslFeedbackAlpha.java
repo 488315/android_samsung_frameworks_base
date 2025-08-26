@@ -4,7 +4,6 @@ import androidx.compose.animation.FlingCalculator$FlingInfo$$ExternalSyntheticOu
 import androidx.compose.foundation.shape.DpCornerSize$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class SeslFeedbackAlpha {
     public static final Companion Companion = new Companion(null);
@@ -14,10 +13,8 @@ public final class SeslFeedbackAlpha {
     public final float hoveredAlpha;
     public final float pressedAlpha;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Impl28 {
             public static final Impl28 INSTANCE = new Impl28();
 

@@ -14,7 +14,6 @@ import com.android.systemui.statusbar.notification.PropertyData;
 import com.android.systemui.statusbar.notification.row.ExpandableNotificationRow;
 import com.android.systemui.statusbar.notification.row.ExpandableView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ExpandableViewState extends ViewState {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -49,7 +48,7 @@ public class ExpandableViewState extends ViewState {
                     if (!(tag instanceof PropertyData) ? tag == null : ((PropertyData) tag).animator == null) {
                         onAnimationEndListener = new DynamicAnimation.OnAnimationEndListener() { // from class: com.android.systemui.statusbar.notification.stack.ExpandableViewState$$ExternalSyntheticLambda0
                             public final void onAnimationEnd(DynamicAnimation dynamicAnimation, boolean z3, float f, float f2) {
-                                ExpandableView expandableView2 = ExpandableView.this;
+                                ExpandableView expandableView2 = expandableView;
                                 View view2 = view;
                                 int i = ExpandableViewState.$r8$clinit;
                                 expandableView2.setActualHeightAnimating(false);
@@ -74,23 +73,23 @@ public class ExpandableViewState extends ViewState {
                         PhysicsProperty physicsProperty2 = ExpandableView.HEIGHT_PROPERTY;
                         ValueAnimator valueAnimator = (ValueAnimator) expandableView.getTag(R.id.height_animator_tag);
                         if (animationProperties2.getAnimationFilter().animateHeight) {
-                            ValueAnimator ofInt = ValueAnimator.ofInt(expandableView.mActualHeight, i);
-                            ofInt.addUpdateListener(new ValueAnimator.AnimatorUpdateListener(this) { // from class: com.android.systemui.statusbar.notification.stack.ExpandableViewState.1
+                            ValueAnimator valueAnimatorOfInt = ValueAnimator.ofInt(expandableView.mActualHeight, i);
+                            valueAnimatorOfInt.addUpdateListener(new ValueAnimator.AnimatorUpdateListener(this) { // from class: com.android.systemui.statusbar.notification.stack.ExpandableViewState.1
                                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                                 public final void onAnimationUpdate(ValueAnimator valueAnimator2) {
                                     expandableView.setActualHeight(((Integer) valueAnimator2.getAnimatedValue()).intValue(), false);
                                 }
                             });
-                            ofInt.setInterpolator(Interpolators.FAST_OUT_SLOW_IN);
-                            ofInt.setDuration(ViewState.cancelAnimatorAndGetNewDuration(animationProperties2.duration, valueAnimator));
+                            valueAnimatorOfInt.setInterpolator(Interpolators.FAST_OUT_SLOW_IN);
+                            valueAnimatorOfInt.setDuration(ViewState.cancelAnimatorAndGetNewDuration(animationProperties2.duration, valueAnimator));
                             if (animationProperties2.delay > 0 && (valueAnimator == null || valueAnimator.getAnimatedFraction() == 0.0f)) {
-                                ofInt.setStartDelay(animationProperties2.delay);
+                                valueAnimatorOfInt.setStartDelay(animationProperties2.delay);
                             }
                             AnimatorListenerAdapter animationFinishListener = animationProperties2.getAnimationFinishListener(null);
                             if (animationFinishListener != null) {
-                                ofInt.addListener(animationFinishListener);
+                                valueAnimatorOfInt.addListener(animationFinishListener);
                             }
-                            ofInt.addListener(new AnimatorListenerAdapter(this) { // from class: com.android.systemui.statusbar.notification.stack.ExpandableViewState.2
+                            valueAnimatorOfInt.addListener(new AnimatorListenerAdapter(this) { // from class: com.android.systemui.statusbar.notification.stack.ExpandableViewState.2
                                 public boolean mWasCancelled;
 
                                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
@@ -122,17 +121,17 @@ public class ExpandableViewState extends ViewState {
                                     this.mWasCancelled = false;
                                 }
                             });
-                            ViewState.startAnimator(ofInt, animationFinishListener);
-                            expandableView.setTag(R.id.height_animator_tag, ofInt);
+                            ViewState.startAnimator(valueAnimatorOfInt, animationFinishListener);
+                            expandableView.setTag(R.id.height_animator_tag, valueAnimatorOfInt);
                             expandableView.setTag(R.id.height_animator_start_value_tag, Integer.valueOf(expandableView.mActualHeight));
                             expandableView.setTag(R.id.height_animator_end_value_tag, Integer.valueOf(i));
                             z = true;
                             expandableView.setActualHeightAnimating(true);
                         } else if (valueAnimator != null) {
                             PropertyValuesHolder[] values = valueAnimator.getValues();
-                            int intValue = num.intValue() + (i - num2.intValue());
-                            values[0].setIntValues(intValue, i);
-                            expandableView.setTag(R.id.height_animator_start_value_tag, Integer.valueOf(intValue));
+                            int iIntValue = num.intValue() + (i - num2.intValue());
+                            values[0].setIntValues(iIntValue, i);
+                            expandableView.setTag(R.id.height_animator_start_value_tag, Integer.valueOf(iIntValue));
                             expandableView.setTag(R.id.height_animator_end_value_tag, Integer.valueOf(i));
                             valueAnimator.setCurrentPlayTime(valueAnimator.getCurrentPlayTime());
                         } else {
@@ -247,9 +246,9 @@ public class ExpandableViewState extends ViewState {
                     }
                 }
                 PropertyValuesHolder[] values = valueAnimator.getValues();
-                int intValue = num.intValue() + (i2 - num2.intValue());
-                values[0].setIntValues(intValue, i2);
-                expandableView.setTag(z ? R.id.top_inset_animator_start_value_tag : R.id.bottom_inset_animator_start_value_tag, Integer.valueOf(intValue));
+                int iIntValue = num.intValue() + (i2 - num2.intValue());
+                values[0].setIntValues(iIntValue, i2);
+                expandableView.setTag(z ? R.id.top_inset_animator_start_value_tag : R.id.bottom_inset_animator_start_value_tag, Integer.valueOf(iIntValue));
                 if (z) {
                     i = R.id.top_inset_animator_end_value_tag;
                 }
@@ -257,8 +256,8 @@ public class ExpandableViewState extends ViewState {
                 valueAnimator.setCurrentPlayTime(valueAnimator.getCurrentPlayTime());
                 return;
             }
-            ValueAnimator ofInt = ValueAnimator.ofInt(z ? expandableView.mClipTopAmount : expandableView.mClipBottomAmount, i2);
-            ofInt.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.notification.stack.ExpandableViewState$$ExternalSyntheticLambda1
+            ValueAnimator valueAnimatorOfInt = ValueAnimator.ofInt(z ? expandableView.mClipTopAmount : expandableView.mClipBottomAmount, i2);
+            valueAnimatorOfInt.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.notification.stack.ExpandableViewState$$ExternalSyntheticLambda1
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public final void onAnimationUpdate(ValueAnimator valueAnimator2) {
                     boolean z2 = z;
@@ -271,20 +270,20 @@ public class ExpandableViewState extends ViewState {
                     }
                 }
             });
-            ofInt.setInterpolator(Interpolators.FAST_OUT_SLOW_IN);
-            long cancelAnimatorAndGetNewDuration = ViewState.cancelAnimatorAndGetNewDuration(animationProperties.duration, valueAnimator);
+            valueAnimatorOfInt.setInterpolator(Interpolators.FAST_OUT_SLOW_IN);
+            long jCancelAnimatorAndGetNewDuration = ViewState.cancelAnimatorAndGetNewDuration(animationProperties.duration, valueAnimator);
             if (num3 != null) {
-                cancelAnimatorAndGetNewDuration = num3.intValue();
+                jCancelAnimatorAndGetNewDuration = num3.intValue();
             }
-            ofInt.setDuration(cancelAnimatorAndGetNewDuration);
+            valueAnimatorOfInt.setDuration(jCancelAnimatorAndGetNewDuration);
             if (animationProperties.delay > 0 && (valueAnimator == null || valueAnimator.getAnimatedFraction() == 0.0f)) {
-                ofInt.setStartDelay(animationProperties.delay);
+                valueAnimatorOfInt.setStartDelay(animationProperties.delay);
             }
             AnimatorListenerAdapter animationFinishListener = animationProperties.getAnimationFinishListener(null);
             if (animationFinishListener != null) {
-                ofInt.addListener(animationFinishListener);
+                valueAnimatorOfInt.addListener(animationFinishListener);
             }
-            ofInt.addListener(new AnimatorListenerAdapter(this) { // from class: com.android.systemui.statusbar.notification.stack.ExpandableViewState.3
+            valueAnimatorOfInt.addListener(new AnimatorListenerAdapter(this) { // from class: com.android.systemui.statusbar.notification.stack.ExpandableViewState.3
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public final void onAnimationEnd(Animator animator) {
                     int i4;
@@ -301,11 +300,11 @@ public class ExpandableViewState extends ViewState {
                     expandableView.setTag(z ? R.id.top_inset_animator_end_value_tag : R.id.bottom_inset_animator_end_value_tag, null);
                 }
             });
-            ViewState.startAnimator(ofInt, animationFinishListener);
+            ViewState.startAnimator(valueAnimatorOfInt, animationFinishListener);
             if (z) {
                 i3 = R.id.top_inset_animator_tag;
             }
-            expandableView.setTag(i3, ofInt);
+            expandableView.setTag(i3, valueAnimatorOfInt);
             expandableView.setTag(z ? R.id.top_inset_animator_start_value_tag : R.id.bottom_inset_animator_start_value_tag, Integer.valueOf(z ? expandableView.mClipTopAmount : expandableView.mClipBottomAmount));
             if (z) {
                 i = R.id.top_inset_animator_end_value_tag;

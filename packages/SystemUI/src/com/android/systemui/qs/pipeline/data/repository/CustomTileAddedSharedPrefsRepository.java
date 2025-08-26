@@ -5,12 +5,10 @@ import com.android.systemui.settings.UserFileManager;
 import com.android.systemui.settings.UserFileManagerImpl;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class CustomTileAddedSharedPrefsRepository implements CustomTileAddedRepository {
     public final UserFileManager userFileManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();

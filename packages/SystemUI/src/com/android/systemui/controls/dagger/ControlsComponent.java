@@ -11,7 +11,6 @@ import java.util.Optional;
 import kotlin.enums.EnumEntriesKt;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ControlsComponent {
     public final ReadonlyStateFlow canShowWhileLockedSetting;
@@ -29,7 +28,6 @@ public final class ControlsComponent {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Visibility {
         public static final /* synthetic */ Visibility[] $VALUES;
         public static final Visibility AVAILABLE;
@@ -77,12 +75,12 @@ public final class ControlsComponent {
 
     public static Optional optionalIf(boolean z, Lazy lazy) {
         if (z) {
-            Optional of = Optional.of(lazy.get());
-            of.getClass();
-            return of;
+            Optional optionalOf = Optional.of(lazy.get());
+            optionalOf.getClass();
+            return optionalOf;
         }
-        Optional empty = Optional.empty();
-        empty.getClass();
-        return empty;
+        Optional optionalEmpty = Optional.empty();
+        optionalEmpty.getClass();
+        return optionalEmpty;
     }
 }

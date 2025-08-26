@@ -25,7 +25,7 @@ public class NoiseSuppressor extends AudioEffect {
         }
     }
 
-    private NoiseSuppressor(int i) throws IllegalArgumentException, UnsupportedOperationException, RuntimeException {
+    private NoiseSuppressor(int i) throws RuntimeException {
         super(EFFECT_TYPE_NS, EFFECT_TYPE_NULL, 0, i);
     }
 }

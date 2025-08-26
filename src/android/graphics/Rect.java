@@ -180,16 +180,16 @@ public final class Rect implements Parcelable {
     }
 
     public void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         protoOutputStream.write(1120986464257L, this.left);
         protoOutputStream.write(1120986464258L, this.top);
         protoOutputStream.write(1120986464259L, this.right);
         protoOutputStream.write(1120986464260L, this.bottom);
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 
-    public void readFromProto(ProtoInputStream protoInputStream, long j) throws IOException, WireTypeMismatchException {
-        long start = protoInputStream.start(j);
+    public void readFromProto(ProtoInputStream protoInputStream, long j) throws WireTypeMismatchException, IOException {
+        long jStart = protoInputStream.start(j);
         while (protoInputStream.nextField() != -1) {
             try {
                 int fieldNumber = protoInputStream.getFieldNumber();
@@ -203,7 +203,7 @@ public final class Rect implements Parcelable {
                     this.bottom = protoInputStream.readInt(1120986464260L);
                 }
             } finally {
-                protoInputStream.end(start);
+                protoInputStream.end(jStart);
             }
         }
     }
@@ -446,27 +446,27 @@ public final class Rect implements Parcelable {
 
     public void splitVertically(Rect... rectArr) {
         int length = rectArr.length;
-        int width = width() / length;
+        int iWidth = width() / length;
         for (int i = 0; i < length; i++) {
             Rect rect = rectArr[i];
-            int i2 = this.left + (width * i);
+            int i2 = this.left + (iWidth * i);
             rect.left = i2;
             rect.top = this.top;
-            rect.right = i2 + width;
+            rect.right = i2 + iWidth;
             rect.bottom = this.bottom;
         }
     }
 
     public void splitHorizontally(Rect... rectArr) {
         int length = rectArr.length;
-        int height = height() / length;
+        int iHeight = height() / length;
         for (int i = 0; i < length; i++) {
             Rect rect = rectArr[i];
             rect.left = this.left;
-            int i2 = this.top + (height * i);
+            int i2 = this.top + (iHeight * i);
             rect.top = i2;
             rect.right = this.right;
-            rect.bottom = i2 + height;
+            rect.bottom = i2 + iHeight;
         }
     }
 

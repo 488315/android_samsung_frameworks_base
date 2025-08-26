@@ -80,8 +80,8 @@ public abstract class PrinterDiscoverySession {
             ArrayList arrayList = null;
             while (i < size) {
                 PrinterInfo printerInfo = list.get(i);
-                PrinterInfo put = this.mPrinters.put(printerInfo.getId(), printerInfo);
-                if (put == null || !put.equals(printerInfo)) {
+                PrinterInfo printerInfoPut = this.mPrinters.put(printerInfo.getId(), printerInfo);
+                if (printerInfoPut == null || !printerInfoPut.equals(printerInfo)) {
                     if (arrayList == null) {
                         arrayList = new ArrayList();
                     }

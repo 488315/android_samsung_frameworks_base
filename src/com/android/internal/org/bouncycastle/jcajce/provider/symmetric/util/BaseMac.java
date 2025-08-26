@@ -2,6 +2,7 @@ package com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util;
 
 import android.security.keystore.KeyProperties;
 import com.android.internal.org.bouncycastle.crypto.CipherParameters;
+import com.android.internal.org.bouncycastle.crypto.DataLengthException;
 import com.android.internal.org.bouncycastle.crypto.Mac;
 import com.android.internal.org.bouncycastle.crypto.macs.HMac;
 import com.android.internal.org.bouncycastle.crypto.params.AEADParameters;
@@ -47,7 +48,7 @@ public class BaseMac extends MacSpi implements PBE {
     protected void engineInit(Key key, AlgorithmParameterSpec algorithmParameterSpec) throws InvalidKeyException, InvalidAlgorithmParameterException {
         int i;
         int i2;
-        CipherParameters makePBEMacParameters;
+        CipherParameters cipherParametersMakePBEMacParameters;
         KeyParameter keyParameter;
         if (key == null) {
             throw new InvalidKeyException("key is null");
@@ -81,7 +82,7 @@ public class BaseMac extends MacSpi implements PBE {
                         i = 9;
                         i2 = 512;
                     }
-                    makePBEMacParameters = PBE.Util.makePBEMacParameters(secretKey, 2, i, i2, pBEParameterSpec);
+                    cipherParametersMakePBEMacParameters = PBE.Util.makePBEMacParameters(secretKey, 2, i, i2, pBEParameterSpec);
                 } catch (Exception unused) {
                     throw new InvalidAlgorithmParameterException("PKCS12 requires a PBEParameterSpec");
                 }
@@ -91,9 +92,9 @@ public class BaseMac extends MacSpi implements PBE {
         } else if (key instanceof BCPBEKey) {
             BCPBEKey bCPBEKey = (BCPBEKey) key;
             if (bCPBEKey.getParam() != null) {
-                makePBEMacParameters = bCPBEKey.getParam();
+                cipherParametersMakePBEMacParameters = bCPBEKey.getParam();
             } else if (algorithmParameterSpec instanceof PBEParameterSpec) {
-                makePBEMacParameters = PBE.Util.makePBEMacParameters(bCPBEKey, algorithmParameterSpec);
+                cipherParametersMakePBEMacParameters = PBE.Util.makePBEMacParameters(bCPBEKey, algorithmParameterSpec);
             } else {
                 throw new InvalidAlgorithmParameterException("PBE requires PBE parameters to be set.");
             }
@@ -101,27 +102,27 @@ public class BaseMac extends MacSpi implements PBE {
             if (algorithmParameterSpec instanceof PBEParameterSpec) {
                 throw new InvalidAlgorithmParameterException("inappropriate parameter type: " + algorithmParameterSpec.getClass().getName());
             }
-            makePBEMacParameters = new KeyParameter(key.getEncoded());
+            cipherParametersMakePBEMacParameters = new KeyParameter(key.getEncoded());
         }
-        if (makePBEMacParameters instanceof ParametersWithIV) {
-            keyParameter = (KeyParameter) ((ParametersWithIV) makePBEMacParameters).getParameters();
+        if (cipherParametersMakePBEMacParameters instanceof ParametersWithIV) {
+            keyParameter = (KeyParameter) ((ParametersWithIV) cipherParametersMakePBEMacParameters).getParameters();
         } else {
-            keyParameter = (KeyParameter) makePBEMacParameters;
+            keyParameter = (KeyParameter) cipherParametersMakePBEMacParameters;
         }
         if (algorithmParameterSpec instanceof AEADParameterSpec) {
             AEADParameterSpec aEADParameterSpec = (AEADParameterSpec) algorithmParameterSpec;
-            makePBEMacParameters = new AEADParameters(keyParameter, aEADParameterSpec.getMacSizeInBits(), aEADParameterSpec.getNonce(), aEADParameterSpec.getAssociatedData());
+            cipherParametersMakePBEMacParameters = new AEADParameters(keyParameter, aEADParameterSpec.getMacSizeInBits(), aEADParameterSpec.getNonce(), aEADParameterSpec.getAssociatedData());
         } else if (algorithmParameterSpec instanceof IvParameterSpec) {
-            makePBEMacParameters = new ParametersWithIV(keyParameter, ((IvParameterSpec) algorithmParameterSpec).getIV());
+            cipherParametersMakePBEMacParameters = new ParametersWithIV(keyParameter, ((IvParameterSpec) algorithmParameterSpec).getIV());
         } else if (algorithmParameterSpec == null) {
-            makePBEMacParameters = new KeyParameter(key.getEncoded());
+            cipherParametersMakePBEMacParameters = new KeyParameter(key.getEncoded());
         } else if (GcmSpecUtil.isGcmSpec(algorithmParameterSpec)) {
-            makePBEMacParameters = GcmSpecUtil.extractAeadParameters(keyParameter, algorithmParameterSpec);
+            cipherParametersMakePBEMacParameters = GcmSpecUtil.extractAeadParameters(keyParameter, algorithmParameterSpec);
         } else if (!(algorithmParameterSpec instanceof PBEParameterSpec)) {
             throw new InvalidAlgorithmParameterException("unknown parameter type: " + algorithmParameterSpec.getClass().getName());
         }
         try {
-            this.macEngine.init(makePBEMacParameters);
+            this.macEngine.init(cipherParametersMakePBEMacParameters);
         } catch (Exception e) {
             throw new InvalidAlgorithmParameterException("cannot initialize MAC: " + e.getMessage());
         }
@@ -138,17 +139,17 @@ public class BaseMac extends MacSpi implements PBE {
     }
 
     @Override // javax.crypto.MacSpi
-    protected void engineUpdate(byte b) {
+    protected void engineUpdate(byte b) throws IllegalStateException {
         this.macEngine.update(b);
     }
 
     @Override // javax.crypto.MacSpi
-    protected void engineUpdate(byte[] bArr, int i, int i2) {
+    protected void engineUpdate(byte[] bArr, int i, int i2) throws IllegalStateException, DataLengthException {
         this.macEngine.update(bArr, i, i2);
     }
 
     @Override // javax.crypto.MacSpi
-    protected byte[] engineDoFinal() {
+    protected byte[] engineDoFinal() throws IllegalStateException, DataLengthException {
         byte[] bArr = new byte[engineGetMacLength()];
         this.macEngine.doFinal(bArr, 0);
         return bArr;

@@ -10,7 +10,6 @@ import com.android.systemui.popup.util.PopupUIUtil;
 import com.android.systemui.util.DeviceType;
 import java.util.Arrays;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class DataConnectionErrorData {
     private static final int INVALID_MODE = -1;
@@ -35,7 +34,7 @@ public class DataConnectionErrorData {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$getPButtonClickListener$2(boolean z, PendingIntent pendingIntent) {
+    public /* synthetic */ void lambda$getPButtonClickListener$2(boolean z, PendingIntent pendingIntent) throws PendingIntent.CanceledException {
         if (!z || pendingIntent == null) {
             return;
         }
@@ -132,8 +131,8 @@ public class DataConnectionErrorData {
         }
         return new Runnable() { // from class: com.android.systemui.popup.data.DataConnectionErrorData$$ExternalSyntheticLambda2
             @Override // java.lang.Runnable
-            public final void run() {
-                DataConnectionErrorData.this.lambda$getPButtonClickListener$2(z, pendingIntent);
+            public final void run() throws PendingIntent.CanceledException {
+                this.f$0.lambda$getPButtonClickListener$2(z, pendingIntent);
             }
         };
     }

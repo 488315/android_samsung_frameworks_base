@@ -11,10 +11,10 @@ import com.android.systemui.log.core.LogLevel;
 import com.android.systemui.log.core.LogMessage;
 import com.android.systemui.statusbar.notification.collection.NotificationEntry;
 import com.android.systemui.statusbar.notification.collection.notifcollection.UpdateSource;
+import java.io.IOException;
 import java.util.Set;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class KeyguardCoordinatorLogger {
     public static final int $stable = 8;
@@ -89,45 +89,45 @@ public final class KeyguardCoordinatorLogger {
         String str1 = logMessage.getStr1();
         String str2 = logMessage.getStr2();
         long long1 = logMessage.getLong1();
-        StringBuilder m = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("Unseen notif updated: ", str1, ", source: ", str2, ", postTime: ");
-        m.append(long1);
-        return m.toString();
+        StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("Unseen notif updated: ", str1, ", source: ", str2, ", postTime: ");
+        sbM.append(long1);
+        return sbM.toString();
     }
 
     public final void logAllMarkedSeenOnUnlock(int i, int i2) {
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("KeyguardCoordinator", LogLevel.DEBUG, new KeyguardCoordinatorLogger$$ExternalSyntheticLambda0(3), null);
-        ((LogMessageImpl) obtain).int1 = i;
-        ((LogMessageImpl) obtain).int2 = i2;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("KeyguardCoordinator", LogLevel.DEBUG, new KeyguardCoordinatorLogger$$ExternalSyntheticLambda0(3), null);
+        ((LogMessageImpl) logMessageObtain).int1 = i;
+        ((LogMessageImpl) logMessageObtain).int2 = i2;
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void logProviderHasFilteredOutSeenNotifs(boolean z) {
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("KeyguardCoordinator", LogLevel.DEBUG, new KeyguardCoordinatorLogger$$ExternalSyntheticLambda0(8), null);
-        ((LogMessageImpl) obtain).bool1 = z;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("KeyguardCoordinator", LogLevel.DEBUG, new KeyguardCoordinatorLogger$$ExternalSyntheticLambda0(8), null);
+        ((LogMessageImpl) logMessageObtain).bool1 = z;
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void logRemoveSeenOnLockscreen(NotificationEntry notificationEntry) {
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("KeyguardCoordinator", LogLevel.DEBUG, new KeyguardCoordinatorLogger$$ExternalSyntheticLambda0(9), null);
-        ((LogMessageImpl) obtain).str1 = notificationEntry.mKey;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("KeyguardCoordinator", LogLevel.DEBUG, new KeyguardCoordinatorLogger$$ExternalSyntheticLambda0(9), null);
+        ((LogMessageImpl) logMessageObtain).str1 = notificationEntry.mKey;
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void logResetSeenOnLockscreen(NotificationEntry notificationEntry) {
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("KeyguardCoordinator", LogLevel.DEBUG, new KeyguardCoordinatorLogger$$ExternalSyntheticLambda0(10), null);
-        ((LogMessageImpl) obtain).str1 = notificationEntry.mKey;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("KeyguardCoordinator", LogLevel.DEBUG, new KeyguardCoordinatorLogger$$ExternalSyntheticLambda0(10), null);
+        ((LogMessageImpl) logMessageObtain).str1 = notificationEntry.mKey;
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void logSeenOnLockscreen(NotificationEntry notificationEntry) {
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("KeyguardCoordinator", LogLevel.DEBUG, new KeyguardCoordinatorLogger$$ExternalSyntheticLambda0(1), null);
-        ((LogMessageImpl) obtain).str1 = notificationEntry.mKey;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("KeyguardCoordinator", LogLevel.DEBUG, new KeyguardCoordinatorLogger$$ExternalSyntheticLambda0(1), null);
+        ((LogMessageImpl) logMessageObtain).str1 = notificationEntry.mKey;
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void logShadeExpanded() {
@@ -136,64 +136,64 @@ public final class KeyguardCoordinatorLogger {
 
     public final void logStopTrackingLockscreenSeenDuration(NotificationEntry notificationEntry) {
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("KeyguardCoordinator", LogLevel.DEBUG, new KeyguardCoordinatorLogger$$ExternalSyntheticLambda0(2), null);
-        ((LogMessageImpl) obtain).str1 = notificationEntry.mKey;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("KeyguardCoordinator", LogLevel.DEBUG, new KeyguardCoordinatorLogger$$ExternalSyntheticLambda0(2), null);
+        ((LogMessageImpl) logMessageObtain).str1 = notificationEntry.mKey;
+        logBuffer.commit(logMessageObtain);
     }
 
-    public final void logTrackingLockscreenSeenDuration(Set<NotificationEntry> set) {
+    public final void logTrackingLockscreenSeenDuration(Set<NotificationEntry> set) throws IOException {
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("KeyguardCoordinator", LogLevel.DEBUG, new KeyguardCoordinatorLogger$$ExternalSyntheticLambda0(6), null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("KeyguardCoordinator", LogLevel.DEBUG, new KeyguardCoordinatorLogger$$ExternalSyntheticLambda0(6), null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = CollectionsKt___CollectionsKt.joinToString$default(set, null, null, null, new KeyguardCoordinatorLogger$$ExternalSyntheticLambda0(7), 31);
         logMessageImpl.int1 = set.size();
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void logTrackingUnseen(boolean z) {
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("KeyguardCoordinator", LogLevel.DEBUG, new KeyguardCoordinatorLogger$$ExternalSyntheticLambda0(0), null);
-        ((LogMessageImpl) obtain).bool1 = z;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("KeyguardCoordinator", LogLevel.DEBUG, new KeyguardCoordinatorLogger$$ExternalSyntheticLambda0(0), null);
+        ((LogMessageImpl) logMessageObtain).bool1 = z;
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void logUnseenAdded(String str, long j) {
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("KeyguardCoordinator", LogLevel.DEBUG, new KeyguardCoordinatorLogger$$ExternalSyntheticLambda0(12), null);
-        ((LogMessageImpl) obtain).str1 = str;
-        ((LogMessageImpl) obtain).long1 = j;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("KeyguardCoordinator", LogLevel.DEBUG, new KeyguardCoordinatorLogger$$ExternalSyntheticLambda0(12), null);
+        ((LogMessageImpl) logMessageObtain).str1 = str;
+        ((LogMessageImpl) logMessageObtain).long1 = j;
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void logUnseenHun(String str) {
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("KeyguardCoordinator", LogLevel.DEBUG, new KeyguardCoordinatorLogger$$ExternalSyntheticLambda0(13), null);
-        ((LogMessageImpl) obtain).str1 = str;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("KeyguardCoordinator", LogLevel.DEBUG, new KeyguardCoordinatorLogger$$ExternalSyntheticLambda0(13), null);
+        ((LogMessageImpl) logMessageObtain).str1 = str;
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void logUnseenRemoved(String str) {
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("KeyguardCoordinator", LogLevel.DEBUG, new KeyguardCoordinatorLogger$$ExternalSyntheticLambda0(4), null);
-        ((LogMessageImpl) obtain).str1 = str;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("KeyguardCoordinator", LogLevel.DEBUG, new KeyguardCoordinatorLogger$$ExternalSyntheticLambda0(4), null);
+        ((LogMessageImpl) logMessageObtain).str1 = str;
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void logUnseenUpdated(String str, UpdateSource updateSource, long j) {
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("KeyguardCoordinator", LogLevel.DEBUG, new KeyguardCoordinatorLogger$$ExternalSyntheticLambda0(11), null);
-        ((LogMessageImpl) obtain).str1 = str;
-        String str2 = updateSource.toString();
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
-        logMessageImpl.str2 = str2;
+        LogMessage logMessageObtain = logBuffer.obtain("KeyguardCoordinator", LogLevel.DEBUG, new KeyguardCoordinatorLogger$$ExternalSyntheticLambda0(11), null);
+        ((LogMessageImpl) logMessageObtain).str1 = str;
+        String string = updateSource.toString();
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
+        logMessageImpl.str2 = string;
         logMessageImpl.long1 = j;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void logTrackingLockscreenSeenDuration(NotificationEntry notificationEntry) {
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("KeyguardCoordinator", LogLevel.DEBUG, new KeyguardCoordinatorLogger$$ExternalSyntheticLambda0(5), null);
-        ((LogMessageImpl) obtain).str1 = notificationEntry.mKey;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("KeyguardCoordinator", LogLevel.DEBUG, new KeyguardCoordinatorLogger$$ExternalSyntheticLambda0(5), null);
+        ((LogMessageImpl) logMessageObtain).str1 = notificationEntry.mKey;
+        logBuffer.commit(logMessageObtain);
     }
 }

@@ -6,7 +6,6 @@ import androidx.room.IMultiInstanceInvalidationService;
 import java.util.LinkedHashMap;
 import kotlin.Unit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class MultiInstanceInvalidationService$binder$1 extends IMultiInstanceInvalidationService.Stub {
     public final /* synthetic */ MultiInstanceInvalidationService this$0;
@@ -24,13 +23,13 @@ public final class MultiInstanceInvalidationService$binder$1 extends IMultiInsta
                 Log.w("ROOM", "Remote invalidation client ID not registered");
                 return;
             }
-            int beginBroadcast = multiInstanceInvalidationService.callbackList.beginBroadcast();
-            for (int i2 = 0; i2 < beginBroadcast; i2++) {
+            int iBeginBroadcast = multiInstanceInvalidationService.callbackList.beginBroadcast();
+            for (int i2 = 0; i2 < iBeginBroadcast; i2++) {
                 try {
                     Integer num = (Integer) multiInstanceInvalidationService.callbackList.getBroadcastCookie(i2);
-                    int intValue = num.intValue();
+                    int iIntValue = num.intValue();
                     String str2 = (String) ((LinkedHashMap) multiInstanceInvalidationService.clientNames).get(num);
-                    if (i != intValue && str.equals(str2)) {
+                    if (i != iIntValue && str.equals(str2)) {
                         try {
                             ((IMultiInstanceInvalidationCallback) multiInstanceInvalidationService.callbackList.getBroadcastItem(i2)).onInvalidation(strArr);
                             Unit unit = Unit.INSTANCE;

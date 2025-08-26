@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class NotificationCustomContentMemoryVerifier {
     public static final NotificationCustomContentMemoryVerifier INSTANCE = new NotificationCustomContentMemoryVerifier();
@@ -41,11 +40,11 @@ public final class NotificationCustomContentMemoryVerifier {
         }
         ViewGroup viewGroup = (ViewGroup) view;
         int childCount = viewGroup.getChildCount();
-        int i = 0;
-        for (int i2 = 0; i2 < childCount; i2++) {
-            i += computeViewHierarchyImageViewSize(viewGroup.getChildAt(i2));
+        int iComputeViewHierarchyImageViewSize = 0;
+        for (int i = 0; i < childCount; i++) {
+            iComputeViewHierarchyImageViewSize += computeViewHierarchyImageViewSize(viewGroup.getChildAt(i));
         }
-        return i;
+        return iComputeViewHierarchyImageViewSize;
     }
 
     public final int getStripViewSizeLimit(Context context) {

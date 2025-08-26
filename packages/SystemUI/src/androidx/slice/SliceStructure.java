@@ -4,7 +4,6 @@ import android.net.Uri;
 import java.util.Arrays;
 import java.util.Iterator;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SliceStructure {
     public final String mStructure;
@@ -49,68 +48,64 @@ public class SliceStructure {
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
+    /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
+    /* JADX WARN: Removed duplicated region for block: B:29:0x005f  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public static void getStructure(SliceItem sliceItem, StringBuilder sb) {
         char c;
         String str = sliceItem.mFormat;
         switch (str.hashCode()) {
             case -1422950858:
-                if (str.equals("action")) {
+                if (!str.equals("action")) {
+                    c = 65535;
+                    break;
+                } else {
                     c = 1;
                     break;
                 }
-                c = 65535;
-                break;
             case -1377881982:
                 if (str.equals("bundle")) {
                     c = 7;
                     break;
                 }
-                c = 65535;
                 break;
             case 104431:
                 if (str.equals("int")) {
                     c = 4;
                     break;
                 }
-                c = 65535;
                 break;
             case 3327612:
                 if (str.equals("long")) {
                     c = 5;
                     break;
                 }
-                c = 65535;
                 break;
             case 3556653:
                 if (str.equals("text")) {
                     c = 2;
                     break;
                 }
-                c = 65535;
                 break;
             case 100313435:
                 if (str.equals("image")) {
                     c = 3;
                     break;
                 }
-                c = 65535;
                 break;
             case 100358090:
                 if (str.equals("input")) {
                     c = 6;
                     break;
                 }
-                c = 65535;
                 break;
             case 109526418:
                 if (str.equals("slice")) {
                     c = 0;
                     break;
                 }
-                c = 65535;
-                break;
-            default:
-                c = 65535;
                 break;
         }
         if (c == 0) {

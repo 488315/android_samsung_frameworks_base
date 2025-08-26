@@ -5,7 +5,6 @@ import com.android.app.tracing.TraceUtilsKt;
 import kotlin.Unit;
 import kotlin.jvm.internal.Reflection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ShadeNode {
     public final NodeController controller;
@@ -17,9 +16,9 @@ public final class ShadeNode {
 
     public final void addChildAt(ShadeNode shadeNode, int i) {
         NodeController nodeController = shadeNode.controller;
-        boolean isEnabled = Trace.isEnabled();
+        boolean zIsEnabled = Trace.isEnabled();
         NodeController nodeController2 = this.controller;
-        if (isEnabled) {
+        if (zIsEnabled) {
             TraceUtilsKt.beginSlice("ShadeNode#" + Reflection.getOrCreateKotlinClass(nodeController2.getClass()).getSimpleName() + "#addChildAt");
         }
         try {
@@ -27,7 +26,7 @@ public final class ShadeNode {
             nodeController.onViewAdded();
             Unit unit = Unit.INSTANCE;
         } finally {
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
         }
@@ -35,9 +34,9 @@ public final class ShadeNode {
 
     public final void moveChildTo(ShadeNode shadeNode, int i) {
         NodeController nodeController = shadeNode.controller;
-        boolean isEnabled = Trace.isEnabled();
+        boolean zIsEnabled = Trace.isEnabled();
         NodeController nodeController2 = this.controller;
-        if (isEnabled) {
+        if (zIsEnabled) {
             TraceUtilsKt.beginSlice("ShadeNode#" + Reflection.getOrCreateKotlinClass(nodeController2.getClass()).getSimpleName() + "#moveChildTo");
         }
         try {
@@ -45,7 +44,7 @@ public final class ShadeNode {
             nodeController.getClass();
             Unit unit = Unit.INSTANCE;
         } finally {
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
         }

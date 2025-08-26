@@ -56,9 +56,9 @@ public class MediaRouteChooserDialogFragment extends DialogFragment {
 
     @Override // android.app.DialogFragment
     public Dialog onCreateDialog(Bundle bundle) {
-        MediaRouteChooserDialog onCreateChooserDialog = onCreateChooserDialog(getActivity(), bundle);
-        onCreateChooserDialog.setRouteTypes(getRouteTypes());
-        onCreateChooserDialog.setExtendedSettingsClickListener(this.mExtendedSettingsClickListener);
-        return onCreateChooserDialog;
+        MediaRouteChooserDialog mediaRouteChooserDialogOnCreateChooserDialog = onCreateChooserDialog(getActivity(), bundle);
+        mediaRouteChooserDialogOnCreateChooserDialog.setRouteTypes(getRouteTypes());
+        mediaRouteChooserDialogOnCreateChooserDialog.setExtendedSettingsClickListener(this.mExtendedSettingsClickListener);
+        return mediaRouteChooserDialogOnCreateChooserDialog;
     }
 }

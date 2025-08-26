@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyTimeCycle extends Key {
     public int mCurveFit = -1;
@@ -31,7 +30,6 @@ public class KeyTimeCycle extends Key {
     public float mWavePeriod = Float.NaN;
     public float mWaveOffset = 0.0f;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Loader {
         public static final SparseIntArray sAttrMap;
 
@@ -115,18 +113,18 @@ public class KeyTimeCycle extends Key {
 
     @Override // androidx.constraintlayout.motion.widget.Key
     public final void load(Context context, AttributeSet attributeSet) {
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.KeyTimeCycle);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.KeyTimeCycle);
         SparseIntArray sparseIntArray = Loader.sAttrMap;
-        int indexCount = obtainStyledAttributes.getIndexCount();
+        int indexCount = typedArrayObtainStyledAttributes.getIndexCount();
         for (int i = 0; i < indexCount; i++) {
-            int index = obtainStyledAttributes.getIndex(i);
+            int index = typedArrayObtainStyledAttributes.getIndex(i);
             SparseIntArray sparseIntArray2 = Loader.sAttrMap;
             switch (sparseIntArray2.get(index)) {
                 case 1:
-                    this.mAlpha = obtainStyledAttributes.getFloat(index, this.mAlpha);
+                    this.mAlpha = typedArrayObtainStyledAttributes.getFloat(index, this.mAlpha);
                     break;
                 case 2:
-                    this.mElevation = obtainStyledAttributes.getDimension(index, this.mElevation);
+                    this.mElevation = typedArrayObtainStyledAttributes.getDimension(index, this.mElevation);
                     break;
                 case 3:
                 case 11:
@@ -134,79 +132,79 @@ public class KeyTimeCycle extends Key {
                     Log.e("KeyTimeCycle", "unused attribute 0x" + Integer.toHexString(index) + "   " + sparseIntArray2.get(index));
                     break;
                 case 4:
-                    this.mRotation = obtainStyledAttributes.getFloat(index, this.mRotation);
+                    this.mRotation = typedArrayObtainStyledAttributes.getFloat(index, this.mRotation);
                     break;
                 case 5:
-                    this.mRotationX = obtainStyledAttributes.getFloat(index, this.mRotationX);
+                    this.mRotationX = typedArrayObtainStyledAttributes.getFloat(index, this.mRotationX);
                     break;
                 case 6:
-                    this.mRotationY = obtainStyledAttributes.getFloat(index, this.mRotationY);
+                    this.mRotationY = typedArrayObtainStyledAttributes.getFloat(index, this.mRotationY);
                     break;
                 case 7:
-                    this.mScaleX = obtainStyledAttributes.getFloat(index, this.mScaleX);
+                    this.mScaleX = typedArrayObtainStyledAttributes.getFloat(index, this.mScaleX);
                     break;
                 case 8:
-                    this.mTransitionPathRotate = obtainStyledAttributes.getFloat(index, this.mTransitionPathRotate);
+                    this.mTransitionPathRotate = typedArrayObtainStyledAttributes.getFloat(index, this.mTransitionPathRotate);
                     break;
                 case 9:
-                    obtainStyledAttributes.getString(index);
+                    typedArrayObtainStyledAttributes.getString(index);
                     break;
                 case 10:
                     if (MotionLayout.IS_IN_EDIT_MODE) {
-                        int resourceId = obtainStyledAttributes.getResourceId(index, this.mTargetId);
+                        int resourceId = typedArrayObtainStyledAttributes.getResourceId(index, this.mTargetId);
                         this.mTargetId = resourceId;
                         if (resourceId == -1) {
-                            this.mTargetString = obtainStyledAttributes.getString(index);
+                            this.mTargetString = typedArrayObtainStyledAttributes.getString(index);
                             break;
                         } else {
                             break;
                         }
-                    } else if (obtainStyledAttributes.peekValue(index).type == 3) {
-                        this.mTargetString = obtainStyledAttributes.getString(index);
+                    } else if (typedArrayObtainStyledAttributes.peekValue(index).type == 3) {
+                        this.mTargetString = typedArrayObtainStyledAttributes.getString(index);
                         break;
                     } else {
-                        this.mTargetId = obtainStyledAttributes.getResourceId(index, this.mTargetId);
+                        this.mTargetId = typedArrayObtainStyledAttributes.getResourceId(index, this.mTargetId);
                         break;
                     }
                 case 12:
-                    this.mFramePosition = obtainStyledAttributes.getInt(index, this.mFramePosition);
+                    this.mFramePosition = typedArrayObtainStyledAttributes.getInt(index, this.mFramePosition);
                     break;
                 case 13:
-                    this.mCurveFit = obtainStyledAttributes.getInteger(index, this.mCurveFit);
+                    this.mCurveFit = typedArrayObtainStyledAttributes.getInteger(index, this.mCurveFit);
                     break;
                 case 14:
-                    this.mScaleY = obtainStyledAttributes.getFloat(index, this.mScaleY);
+                    this.mScaleY = typedArrayObtainStyledAttributes.getFloat(index, this.mScaleY);
                     break;
                 case 15:
-                    this.mTranslationX = obtainStyledAttributes.getDimension(index, this.mTranslationX);
+                    this.mTranslationX = typedArrayObtainStyledAttributes.getDimension(index, this.mTranslationX);
                     break;
                 case 16:
-                    this.mTranslationY = obtainStyledAttributes.getDimension(index, this.mTranslationY);
+                    this.mTranslationY = typedArrayObtainStyledAttributes.getDimension(index, this.mTranslationY);
                     break;
                 case 17:
-                    this.mTranslationZ = obtainStyledAttributes.getDimension(index, this.mTranslationZ);
+                    this.mTranslationZ = typedArrayObtainStyledAttributes.getDimension(index, this.mTranslationZ);
                     break;
                 case 18:
-                    this.mProgress = obtainStyledAttributes.getFloat(index, this.mProgress);
+                    this.mProgress = typedArrayObtainStyledAttributes.getFloat(index, this.mProgress);
                     break;
                 case 19:
-                    if (obtainStyledAttributes.peekValue(index).type == 3) {
-                        obtainStyledAttributes.getString(index);
+                    if (typedArrayObtainStyledAttributes.peekValue(index).type == 3) {
+                        typedArrayObtainStyledAttributes.getString(index);
                         this.mWaveShape = 7;
                         break;
                     } else {
-                        this.mWaveShape = obtainStyledAttributes.getInt(index, this.mWaveShape);
+                        this.mWaveShape = typedArrayObtainStyledAttributes.getInt(index, this.mWaveShape);
                         break;
                     }
                 case 20:
-                    this.mWavePeriod = obtainStyledAttributes.getFloat(index, this.mWavePeriod);
+                    this.mWavePeriod = typedArrayObtainStyledAttributes.getFloat(index, this.mWavePeriod);
                     break;
                 case 21:
-                    if (obtainStyledAttributes.peekValue(index).type == 5) {
-                        this.mWaveOffset = obtainStyledAttributes.getDimension(index, this.mWaveOffset);
+                    if (typedArrayObtainStyledAttributes.peekValue(index).type == 5) {
+                        this.mWaveOffset = typedArrayObtainStyledAttributes.getDimension(index, this.mWaveOffset);
                         break;
                     } else {
-                        this.mWaveOffset = obtainStyledAttributes.getFloat(index, this.mWaveOffset);
+                        this.mWaveOffset = typedArrayObtainStyledAttributes.getFloat(index, this.mWaveOffset);
                         break;
                     }
             }
@@ -214,57 +212,57 @@ public class KeyTimeCycle extends Key {
     }
 
     @Override // androidx.constraintlayout.motion.widget.Key
-    public final void setInterpolation(HashMap hashMap) {
+    public final void setInterpolation(HashMap map) {
         if (this.mCurveFit == -1) {
             return;
         }
         if (!Float.isNaN(this.mAlpha)) {
-            hashMap.put("alpha", Integer.valueOf(this.mCurveFit));
+            map.put("alpha", Integer.valueOf(this.mCurveFit));
         }
         if (!Float.isNaN(this.mElevation)) {
-            hashMap.put("elevation", Integer.valueOf(this.mCurveFit));
+            map.put("elevation", Integer.valueOf(this.mCurveFit));
         }
         if (!Float.isNaN(this.mRotation)) {
-            hashMap.put("rotation", Integer.valueOf(this.mCurveFit));
+            map.put("rotation", Integer.valueOf(this.mCurveFit));
         }
         if (!Float.isNaN(this.mRotationX)) {
-            hashMap.put("rotationX", Integer.valueOf(this.mCurveFit));
+            map.put("rotationX", Integer.valueOf(this.mCurveFit));
         }
         if (!Float.isNaN(this.mRotationY)) {
-            hashMap.put("rotationY", Integer.valueOf(this.mCurveFit));
+            map.put("rotationY", Integer.valueOf(this.mCurveFit));
         }
         if (!Float.isNaN(this.mTranslationX)) {
-            hashMap.put("translationX", Integer.valueOf(this.mCurveFit));
+            map.put("translationX", Integer.valueOf(this.mCurveFit));
         }
         if (!Float.isNaN(this.mTranslationY)) {
-            hashMap.put("translationY", Integer.valueOf(this.mCurveFit));
+            map.put("translationY", Integer.valueOf(this.mCurveFit));
         }
         if (!Float.isNaN(this.mTranslationZ)) {
-            hashMap.put("translationZ", Integer.valueOf(this.mCurveFit));
+            map.put("translationZ", Integer.valueOf(this.mCurveFit));
         }
         if (!Float.isNaN(this.mTransitionPathRotate)) {
-            hashMap.put("transitionPathRotate", Integer.valueOf(this.mCurveFit));
+            map.put("transitionPathRotate", Integer.valueOf(this.mCurveFit));
         }
         if (!Float.isNaN(this.mScaleX)) {
-            hashMap.put("scaleX", Integer.valueOf(this.mCurveFit));
+            map.put("scaleX", Integer.valueOf(this.mCurveFit));
         }
         if (!Float.isNaN(this.mScaleX)) {
-            hashMap.put("scaleY", Integer.valueOf(this.mCurveFit));
+            map.put("scaleY", Integer.valueOf(this.mCurveFit));
         }
         if (!Float.isNaN(this.mProgress)) {
-            hashMap.put("progress", Integer.valueOf(this.mCurveFit));
+            map.put("progress", Integer.valueOf(this.mCurveFit));
         }
         if (this.mCustomConstraints.size() > 0) {
             Iterator it = this.mCustomConstraints.keySet().iterator();
             while (it.hasNext()) {
-                hashMap.put(AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("CUSTOM,", (String) it.next()), Integer.valueOf(this.mCurveFit));
+                map.put(AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("CUSTOM,", (String) it.next()), Integer.valueOf(this.mCurveFit));
             }
         }
     }
 
     @Override // androidx.constraintlayout.motion.widget.Key
     /* renamed from: clone */
-    public final Key mo886clone() {
+    public final Key mo888clone() {
         KeyTimeCycle keyTimeCycle = new KeyTimeCycle();
         super.copy(this);
         keyTimeCycle.mCurveFit = this.mCurveFit;

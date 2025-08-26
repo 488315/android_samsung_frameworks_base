@@ -113,27 +113,27 @@ public abstract class CursorTreeAdapter extends BaseExpandableListAdapter implem
 
     @Override // android.widget.ExpandableListAdapter
     public View getGroupView(int i, boolean z, View view, ViewGroup viewGroup) {
-        Cursor moveTo = this.mGroupCursorHelper.moveTo(i);
-        if (moveTo == null) {
+        Cursor cursorMoveTo = this.mGroupCursorHelper.moveTo(i);
+        if (cursorMoveTo == null) {
             throw new IllegalStateException("this should only be called when the cursor is valid");
         }
         if (view == null) {
-            view = newGroupView(this.mContext, moveTo, z, viewGroup);
+            view = newGroupView(this.mContext, cursorMoveTo, z, viewGroup);
         }
-        bindGroupView(view, this.mContext, moveTo, z);
+        bindGroupView(view, this.mContext, cursorMoveTo, z);
         return view;
     }
 
     @Override // android.widget.ExpandableListAdapter
     public View getChildView(int i, int i2, boolean z, View view, ViewGroup viewGroup) {
-        Cursor moveTo = getChildrenCursorHelper(i, true).moveTo(i2);
-        if (moveTo == null) {
+        Cursor cursorMoveTo = getChildrenCursorHelper(i, true).moveTo(i2);
+        if (cursorMoveTo == null) {
             throw new IllegalStateException("this should only be called when the cursor is valid");
         }
         if (view == null) {
-            view = newChildView(this.mContext, moveTo, z, viewGroup);
+            view = newChildView(this.mContext, cursorMoveTo, z, viewGroup);
         }
-        bindChildView(view, this.mContext, moveTo, z);
+        bindChildView(view, this.mContext, cursorMoveTo, z);
         return view;
     }
 

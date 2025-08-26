@@ -3,7 +3,6 @@ package com.android.systemui.controls.controller;
 import android.util.Log;
 import com.android.systemui.controls.util.ControlsUtil;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ControlsProviderLifecycleManager$bindService$1 implements Runnable {
     public final /* synthetic */ boolean $bind;
@@ -16,15 +15,19 @@ public final class ControlsProviderLifecycleManager$bindService$1 implements Run
         this.$forPanel = z2;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:21:0x006d  */
     @Override // java.lang.Runnable
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void run() {
-        boolean z;
+        boolean zBindServiceAsUser;
         ControlsProviderLifecycleManager controlsProviderLifecycleManager = this.this$0;
-        boolean z2 = this.$bind;
-        boolean z3 = this.$forPanel;
+        boolean z = this.$bind;
+        boolean z2 = this.$forPanel;
         ControlsProviderLifecycleManager$serviceConnection$1 controlsProviderLifecycleManager$serviceConnection$1 = controlsProviderLifecycleManager.serviceConnection;
-        controlsProviderLifecycleManager.requiresBound = z2;
-        if (!z2) {
+        controlsProviderLifecycleManager.requiresBound = z;
+        if (!z) {
             controlsProviderLifecycleManager.unbindAndCleanup("unbind requested");
             PackageUpdateMonitor packageUpdateMonitor = controlsProviderLifecycleManager.packageUpdateMonitor;
             if (packageUpdateMonitor.monitoring.compareAndSet(true, false)) {
@@ -38,22 +41,17 @@ public final class ControlsProviderLifecycleManager$bindService$1 implements Run
             String str2 = controlsProviderLifecycleManager.TAG;
             Log.d(str2, str);
             try {
-                controlsProviderLifecycleManager.lastForPanel = z3;
-                int i = z3 ? ControlsProviderLifecycleManager.BIND_FLAGS_PANEL : ControlsProviderLifecycleManager.BIND_FLAGS;
+                controlsProviderLifecycleManager.lastForPanel = z2;
+                int i = z2 ? ControlsProviderLifecycleManager.BIND_FLAGS_PANEL : ControlsProviderLifecycleManager.BIND_FLAGS;
                 if (controlsProviderLifecycleManager$serviceConnection$1.connected.compareAndSet(false, true)) {
-                    z = controlsProviderLifecycleManager.context.bindServiceAsUser(controlsProviderLifecycleManager.intent, controlsProviderLifecycleManager$serviceConnection$1, i, controlsProviderLifecycleManager.user);
-                } else {
-                    if (controlsProviderLifecycleManager$serviceConnection$1.connected.get()) {
-                        ControlsUtil controlsUtil = controlsProviderLifecycleManager.controlsUtil;
-                        String packageName = controlsProviderLifecycleManager.componentName.getPackageName();
-                        controlsUtil.getClass();
-                        if ("com.samsung.android.oneconnect".equals(packageName)) {
-                            z = controlsProviderLifecycleManager.context.bindServiceAsUser(controlsProviderLifecycleManager.intent, controlsProviderLifecycleManager$serviceConnection$1, i, controlsProviderLifecycleManager.user);
-                        }
-                    }
-                    z = false;
+                    zBindServiceAsUser = controlsProviderLifecycleManager.context.bindServiceAsUser(controlsProviderLifecycleManager.intent, controlsProviderLifecycleManager$serviceConnection$1, i, controlsProviderLifecycleManager.user);
+                } else if (controlsProviderLifecycleManager$serviceConnection$1.connected.get()) {
+                    ControlsUtil controlsUtil = controlsProviderLifecycleManager.controlsUtil;
+                    String packageName = controlsProviderLifecycleManager.componentName.getPackageName();
+                    controlsUtil.getClass();
+                    zBindServiceAsUser = "com.samsung.android.oneconnect".equals(packageName) ? controlsProviderLifecycleManager.context.bindServiceAsUser(controlsProviderLifecycleManager.intent, controlsProviderLifecycleManager$serviceConnection$1, i, controlsProviderLifecycleManager.user) : false;
                 }
-                if (z) {
+                if (zBindServiceAsUser) {
                     return;
                 }
                 Log.d(str2, "Couldn't bind to " + controlsProviderLifecycleManager.intent);

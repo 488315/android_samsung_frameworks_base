@@ -2591,9 +2591,9 @@ public interface IAudioService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IAudioService)) {
-                return (IAudioService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IAudioService)) {
+                return (IAudioService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -3288,46 +3288,46 @@ public interface IAudioService extends IInterface {
                 case 2:
                     PlayerBase.PlayerIdCard playerIdCard = (PlayerBase.PlayerIdCard) parcel.readTypedObject(PlayerBase.PlayerIdCard.CREATOR);
                     parcel.enforceNoDataAvail();
-                    int trackPlayer = trackPlayer(playerIdCard);
+                    int iTrackPlayer = trackPlayer(playerIdCard);
                     parcel2.writeNoException();
-                    parcel2.writeInt(trackPlayer);
+                    parcel2.writeInt(iTrackPlayer);
                     return true;
                 case 3:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     AudioAttributes audioAttributes = (AudioAttributes) parcel.readTypedObject(AudioAttributes.CREATOR);
                     parcel.enforceNoDataAvail();
-                    playerAttributes(readInt, audioAttributes);
+                    playerAttributes(i3, audioAttributes);
                     return true;
                 case 4:
                     return onTransact$playerEvent$(parcel, parcel2);
                 case 5:
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    releasePlayer(readInt2);
+                    releasePlayer(i4);
                     return true;
                 case 6:
-                    IBinder readStrongBinder = parcel.readStrongBinder();
+                    IBinder strongBinder = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    int trackRecorder = trackRecorder(readStrongBinder);
+                    int iTrackRecorder = trackRecorder(strongBinder);
                     parcel2.writeNoException();
-                    parcel2.writeInt(trackRecorder);
+                    parcel2.writeInt(iTrackRecorder);
                     return true;
                 case 7:
-                    int readInt3 = parcel.readInt();
-                    int readInt4 = parcel.readInt();
+                    int i5 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    recorderEvent(readInt3, readInt4);
+                    recorderEvent(i5, i6);
                     return true;
                 case 8:
-                    int readInt5 = parcel.readInt();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    releaseRecorder(readInt5);
+                    releaseRecorder(i7);
                     return true;
                 case 9:
-                    int readInt6 = parcel.readInt();
-                    int readInt7 = parcel.readInt();
+                    int i8 = parcel.readInt();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    playerSessionId(readInt6, readInt7);
+                    playerSessionId(i8, i9);
                     return true;
                 case 10:
                     return onTransact$portEvent$(parcel, parcel2);
@@ -3350,44 +3350,44 @@ public interface IAudioService extends IInterface {
                 case 18:
                     return onTransact$handleVolumeKey$(parcel, parcel2);
                 case 19:
-                    int readInt8 = parcel.readInt();
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isStreamMute = isStreamMute(readInt8);
+                    boolean zIsStreamMute = isStreamMute(i10);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isStreamMute);
+                    parcel2.writeBoolean(zIsStreamMute);
                     return true;
                 case 20:
-                    boolean readBoolean = parcel.readBoolean();
-                    IBinder readStrongBinder2 = parcel.readStrongBinder();
+                    boolean z = parcel.readBoolean();
+                    IBinder strongBinder2 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    forceRemoteSubmixFullVolume(readBoolean, readStrongBinder2);
+                    forceRemoteSubmixFullVolume(z, strongBinder2);
                     parcel2.writeNoException();
                     return true;
                 case 21:
-                    boolean isMasterMute = isMasterMute();
+                    boolean zIsMasterMute = isMasterMute();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isMasterMute);
+                    parcel2.writeBoolean(zIsMasterMute);
                     return true;
                 case 22:
                     return onTransact$setMasterMute$(parcel, parcel2);
                 case 23:
-                    int readInt9 = parcel.readInt();
+                    int i11 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int streamVolume = getStreamVolume(readInt9);
+                    int streamVolume = getStreamVolume(i11);
                     parcel2.writeNoException();
                     parcel2.writeInt(streamVolume);
                     return true;
                 case 24:
-                    int readInt10 = parcel.readInt();
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int streamMinVolume = getStreamMinVolume(readInt10);
+                    int streamMinVolume = getStreamMinVolume(i12);
                     parcel2.writeNoException();
                     parcel2.writeInt(streamMinVolume);
                     return true;
                 case 25:
-                    int readInt11 = parcel.readInt();
+                    int i13 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int streamMaxVolume = getStreamMaxVolume(readInt11);
+                    int streamMaxVolume = getStreamMaxVolume(i13);
                     parcel2.writeNoException();
                     parcel2.writeInt(streamMaxVolume);
                     return true;
@@ -3399,53 +3399,53 @@ public interface IAudioService extends IInterface {
                 case 27:
                     return onTransact$setVolumeGroupVolumeIndex$(parcel, parcel2);
                 case 28:
-                    int readInt12 = parcel.readInt();
+                    int i14 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int volumeGroupVolumeIndex = getVolumeGroupVolumeIndex(readInt12);
+                    int volumeGroupVolumeIndex = getVolumeGroupVolumeIndex(i14);
                     parcel2.writeNoException();
                     parcel2.writeInt(volumeGroupVolumeIndex);
                     return true;
                 case 29:
-                    int readInt13 = parcel.readInt();
+                    int i15 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int volumeGroupMaxVolumeIndex = getVolumeGroupMaxVolumeIndex(readInt13);
+                    int volumeGroupMaxVolumeIndex = getVolumeGroupMaxVolumeIndex(i15);
                     parcel2.writeNoException();
                     parcel2.writeInt(volumeGroupMaxVolumeIndex);
                     return true;
                 case 30:
-                    int readInt14 = parcel.readInt();
+                    int i16 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int volumeGroupMinVolumeIndex = getVolumeGroupMinVolumeIndex(readInt14);
+                    int volumeGroupMinVolumeIndex = getVolumeGroupMinVolumeIndex(i16);
                     parcel2.writeNoException();
                     parcel2.writeInt(volumeGroupMinVolumeIndex);
                     return true;
                 case 31:
-                    int readInt15 = parcel.readInt();
+                    int i17 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int lastAudibleVolumeForVolumeGroup = getLastAudibleVolumeForVolumeGroup(readInt15);
+                    int lastAudibleVolumeForVolumeGroup = getLastAudibleVolumeForVolumeGroup(i17);
                     parcel2.writeNoException();
                     parcel2.writeInt(lastAudibleVolumeForVolumeGroup);
                     return true;
                 case 32:
-                    int readInt16 = parcel.readInt();
+                    int i18 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isVolumeGroupMuted = isVolumeGroupMuted(readInt16);
+                    boolean zIsVolumeGroupMuted = isVolumeGroupMuted(i18);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isVolumeGroupMuted);
+                    parcel2.writeBoolean(zIsVolumeGroupMuted);
                     return true;
                 case 33:
                     return onTransact$adjustVolumeGroupVolume$(parcel, parcel2);
                 case 34:
-                    int readInt17 = parcel.readInt();
+                    int i19 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int lastAudibleStreamVolume = getLastAudibleStreamVolume(readInt17);
+                    int lastAudibleStreamVolume = getLastAudibleStreamVolume(i19);
                     parcel2.writeNoException();
                     parcel2.writeInt(lastAudibleStreamVolume);
                     return true;
                 case 35:
-                    int[] createIntArray = parcel.createIntArray();
+                    int[] iArrCreateIntArray = parcel.createIntArray();
                     parcel.enforceNoDataAvail();
-                    setSupportedSystemUsages(createIntArray);
+                    setSupportedSystemUsages(iArrCreateIntArray);
                     parcel2.writeNoException();
                     return true;
                 case 36:
@@ -3459,29 +3459,29 @@ public interface IAudioService extends IInterface {
                     parcel2.writeTypedList(audioProductStrategies, 1);
                     return true;
                 case 38:
-                    boolean isMicrophoneMuted = isMicrophoneMuted();
+                    boolean zIsMicrophoneMuted = isMicrophoneMuted();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isMicrophoneMuted);
+                    parcel2.writeBoolean(zIsMicrophoneMuted);
                     return true;
                 case 39:
-                    boolean isUltrasoundSupported = isUltrasoundSupported();
+                    boolean zIsUltrasoundSupported = isUltrasoundSupported();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isUltrasoundSupported);
+                    parcel2.writeBoolean(zIsUltrasoundSupported);
                     return true;
                 case 40:
-                    boolean readBoolean2 = parcel.readBoolean();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isHotwordStreamSupported = isHotwordStreamSupported(readBoolean2);
+                    boolean zIsHotwordStreamSupported = isHotwordStreamSupported(z2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isHotwordStreamSupported);
+                    parcel2.writeBoolean(zIsHotwordStreamSupported);
                     return true;
                 case 41:
                     return onTransact$setMicrophoneMute$(parcel, parcel2);
                 case 42:
                     AudioDeviceAttributes audioDeviceAttributes = (AudioDeviceAttributes) parcel.readTypedObject(AudioDeviceAttributes.CREATOR);
-                    int readInt18 = parcel.readInt();
+                    int i20 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setInputGainIndex(audioDeviceAttributes, readInt18);
+                    setInputGainIndex(audioDeviceAttributes, i20);
                     parcel2.writeNoException();
                     return true;
                 case 43:
@@ -3504,27 +3504,27 @@ public interface IAudioService extends IInterface {
                 case 46:
                     AudioDeviceAttributes audioDeviceAttributes3 = (AudioDeviceAttributes) parcel.readTypedObject(AudioDeviceAttributes.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isInputGainFixed = isInputGainFixed(audioDeviceAttributes3);
+                    boolean zIsInputGainFixed = isInputGainFixed(audioDeviceAttributes3);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isInputGainFixed);
+                    parcel2.writeBoolean(zIsInputGainFixed);
                     return true;
                 case 47:
-                    boolean readBoolean3 = parcel.readBoolean();
+                    boolean z3 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setMicrophoneMuteFromSwitch(readBoolean3);
+                    setMicrophoneMuteFromSwitch(z3);
                     return true;
                 case 48:
-                    int readInt19 = parcel.readInt();
-                    String readString = parcel.readString();
+                    int i21 = parcel.readInt();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    setRingerModeExternal(readInt19, readString);
+                    setRingerModeExternal(i21, string);
                     parcel2.writeNoException();
                     return true;
                 case 49:
-                    int readInt20 = parcel.readInt();
-                    String readString2 = parcel.readString();
+                    int i22 = parcel.readInt();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    setRingerModeInternal(readInt20, readString2);
+                    setRingerModeInternal(i22, string2);
                     parcel2.writeNoException();
                     return true;
                 case 50:
@@ -3538,32 +3538,32 @@ public interface IAudioService extends IInterface {
                     parcel2.writeInt(ringerModeInternal);
                     return true;
                 case 52:
-                    int readInt21 = parcel.readInt();
+                    int i23 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isValidRingerMode = isValidRingerMode(readInt21);
+                    boolean zIsValidRingerMode = isValidRingerMode(i23);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isValidRingerMode);
+                    parcel2.writeBoolean(zIsValidRingerMode);
                     return true;
                 case 53:
-                    int readInt22 = parcel.readInt();
-                    int readInt23 = parcel.readInt();
+                    int i24 = parcel.readInt();
+                    int i25 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setVibrateSetting(readInt22, readInt23);
+                    setVibrateSetting(i24, i25);
                     parcel2.writeNoException();
                     return true;
                 case 54:
-                    int readInt24 = parcel.readInt();
+                    int i26 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int vibrateSetting = getVibrateSetting(readInt24);
+                    int vibrateSetting = getVibrateSetting(i26);
                     parcel2.writeNoException();
                     parcel2.writeInt(vibrateSetting);
                     return true;
                 case 55:
-                    int readInt25 = parcel.readInt();
+                    int i27 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean shouldVibrate = shouldVibrate(readInt25);
+                    boolean zShouldVibrate = shouldVibrate(i27);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(shouldVibrate);
+                    parcel2.writeBoolean(zShouldVibrate);
                     return true;
                 case 56:
                     return onTransact$setMode$(parcel, parcel2);
@@ -3573,21 +3573,21 @@ public interface IAudioService extends IInterface {
                     parcel2.writeInt(mode);
                     return true;
                 case 58:
-                    int readInt26 = parcel.readInt();
-                    int readInt27 = parcel.readInt();
+                    int i28 = parcel.readInt();
+                    int i29 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    playSoundEffect(readInt26, readInt27);
+                    playSoundEffect(i28, i29);
                     return true;
                 case 59:
-                    int readInt28 = parcel.readInt();
-                    float readFloat = parcel.readFloat();
+                    int i30 = parcel.readInt();
+                    float f = parcel.readFloat();
                     parcel.enforceNoDataAvail();
-                    playSoundEffectVolume(readInt28, readFloat);
+                    playSoundEffectVolume(i30, f);
                     return true;
                 case 60:
-                    boolean loadSoundEffects = loadSoundEffects();
+                    boolean zLoadSoundEffects = loadSoundEffects();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(loadSoundEffects);
+                    parcel2.writeBoolean(zLoadSoundEffects);
                     return true;
                 case 61:
                     unloadSoundEffects();
@@ -3606,83 +3606,83 @@ public interface IAudioService extends IInterface {
                     parcel2.writeList(reportedSurroundFormats);
                     return true;
                 case 65:
-                    int readInt29 = parcel.readInt();
-                    boolean readBoolean4 = parcel.readBoolean();
+                    int i31 = parcel.readInt();
+                    boolean z4 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean surroundFormatEnabled = setSurroundFormatEnabled(readInt29, readBoolean4);
+                    boolean surroundFormatEnabled = setSurroundFormatEnabled(i31, z4);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(surroundFormatEnabled);
                     return true;
                 case 66:
-                    int readInt30 = parcel.readInt();
+                    int i32 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isSurroundFormatEnabled = isSurroundFormatEnabled(readInt30);
+                    boolean zIsSurroundFormatEnabled = isSurroundFormatEnabled(i32);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSurroundFormatEnabled);
+                    parcel2.writeBoolean(zIsSurroundFormatEnabled);
                     return true;
                 case 67:
-                    int readInt31 = parcel.readInt();
+                    int i33 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean encodedSurroundMode = setEncodedSurroundMode(readInt31);
+                    boolean encodedSurroundMode = setEncodedSurroundMode(i33);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(encodedSurroundMode);
                     return true;
                 case 68:
-                    int readInt32 = parcel.readInt();
+                    int i34 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int encodedSurroundMode2 = getEncodedSurroundMode(readInt32);
+                    int encodedSurroundMode2 = getEncodedSurroundMode(i34);
                     parcel2.writeNoException();
                     parcel2.writeInt(encodedSurroundMode2);
                     return true;
                 case 69:
                     return onTransact$setSpeakerphoneOn$(parcel, parcel2);
                 case 70:
-                    boolean isSpeakerphoneOn = isSpeakerphoneOn();
+                    boolean zIsSpeakerphoneOn = isSpeakerphoneOn();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSpeakerphoneOn);
+                    parcel2.writeBoolean(zIsSpeakerphoneOn);
                     return true;
                 case 71:
-                    boolean readBoolean5 = parcel.readBoolean();
+                    boolean z5 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setBluetoothScoOn(readBoolean5);
+                    setBluetoothScoOn(z5);
                     parcel2.writeNoException();
                     return true;
                 case 72:
-                    boolean readBoolean6 = parcel.readBoolean();
+                    boolean z6 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setA2dpSuspended(readBoolean6);
+                    setA2dpSuspended(z6);
                     parcel2.writeNoException();
                     return true;
                 case 73:
-                    boolean readBoolean7 = parcel.readBoolean();
+                    boolean z7 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setLeAudioSuspended(readBoolean7);
+                    setLeAudioSuspended(z7);
                     parcel2.writeNoException();
                     return true;
                 case 74:
-                    boolean isBluetoothScoOn = isBluetoothScoOn();
+                    boolean zIsBluetoothScoOn = isBluetoothScoOn();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isBluetoothScoOn);
+                    parcel2.writeBoolean(zIsBluetoothScoOn);
                     return true;
                 case 75:
-                    boolean readBoolean8 = parcel.readBoolean();
+                    boolean z8 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setBluetoothA2dpOn(readBoolean8);
+                    setBluetoothA2dpOn(z8);
                     parcel2.writeNoException();
                     return true;
                 case 76:
-                    boolean isBluetoothA2dpOn = isBluetoothA2dpOn();
+                    boolean zIsBluetoothA2dpOn = isBluetoothA2dpOn();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isBluetoothA2dpOn);
+                    parcel2.writeBoolean(zIsBluetoothA2dpOn);
                     return true;
                 case 77:
                     return onTransact$requestAudioFocus$(parcel, parcel2);
                 case 78:
                     return onTransact$abandonAudioFocus$(parcel, parcel2);
                 case 79:
-                    String readString3 = parcel.readString();
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    unregisterAudioFocusClient(readString3);
+                    unregisterAudioFocusClient(string3);
                     parcel2.writeNoException();
                     return true;
                 case 80:
@@ -3693,30 +3693,30 @@ public interface IAudioService extends IInterface {
                 case 81:
                     return onTransact$startBluetoothSco$(parcel, parcel2);
                 case 82:
-                    IBinder readStrongBinder3 = parcel.readStrongBinder();
+                    IBinder strongBinder3 = parcel.readStrongBinder();
                     AttributionSource attributionSource = (AttributionSource) parcel.readTypedObject(AttributionSource.CREATOR);
                     parcel.enforceNoDataAvail();
-                    startBluetoothScoVirtualCall(readStrongBinder3, attributionSource);
+                    startBluetoothScoVirtualCall(strongBinder3, attributionSource);
                     parcel2.writeNoException();
                     return true;
                 case 83:
-                    IBinder readStrongBinder4 = parcel.readStrongBinder();
+                    IBinder strongBinder4 = parcel.readStrongBinder();
                     AttributionSource attributionSource2 = (AttributionSource) parcel.readTypedObject(AttributionSource.CREATOR);
                     parcel.enforceNoDataAvail();
-                    stopBluetoothSco(readStrongBinder4, attributionSource2);
+                    stopBluetoothSco(strongBinder4, attributionSource2);
                     parcel2.writeNoException();
                     return true;
                 case 84:
-                    int readInt33 = parcel.readInt();
-                    IBinder readStrongBinder5 = parcel.readStrongBinder();
+                    int i35 = parcel.readInt();
+                    IBinder strongBinder5 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    forceVolumeControlStream(readInt33, readStrongBinder5);
+                    forceVolumeControlStream(i35, strongBinder5);
                     parcel2.writeNoException();
                     return true;
                 case 85:
-                    IRingtonePlayer asInterface = IRingtonePlayer.Stub.asInterface(parcel.readStrongBinder());
+                    IRingtonePlayer iRingtonePlayerAsInterface = IRingtonePlayer.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    setRingtonePlayer(asInterface);
+                    setRingtonePlayer(iRingtonePlayerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 86:
@@ -3735,48 +3735,48 @@ public interface IAudioService extends IInterface {
                     parcel2.writeList(independentStreamTypes);
                     return true;
                 case 89:
-                    int readInt34 = parcel.readInt();
+                    int i36 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int streamTypeAlias = getStreamTypeAlias(readInt34);
+                    int streamTypeAlias = getStreamTypeAlias(i36);
                     parcel2.writeNoException();
                     parcel2.writeInt(streamTypeAlias);
                     return true;
                 case 90:
-                    boolean isVolumeControlUsingVolumeGroups = isVolumeControlUsingVolumeGroups();
+                    boolean zIsVolumeControlUsingVolumeGroups = isVolumeControlUsingVolumeGroups();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isVolumeControlUsingVolumeGroups);
+                    parcel2.writeBoolean(zIsVolumeControlUsingVolumeGroups);
                     return true;
                 case 91:
-                    IStreamAliasingDispatcher asInterface2 = IStreamAliasingDispatcher.Stub.asInterface(parcel.readStrongBinder());
-                    boolean readBoolean9 = parcel.readBoolean();
+                    IStreamAliasingDispatcher iStreamAliasingDispatcherAsInterface = IStreamAliasingDispatcher.Stub.asInterface(parcel.readStrongBinder());
+                    boolean z9 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    registerStreamAliasingDispatcher(asInterface2, readBoolean9);
+                    registerStreamAliasingDispatcher(iStreamAliasingDispatcherAsInterface, z9);
                     parcel2.writeNoException();
                     return true;
                 case 92:
-                    boolean readBoolean10 = parcel.readBoolean();
+                    boolean z10 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setNotifAliasRingForTest(readBoolean10);
+                    setNotifAliasRingForTest(z10);
                     parcel2.writeNoException();
                     return true;
                 case 93:
                     return onTransact$setWiredDeviceConnectionState$(parcel, parcel2);
                 case 94:
-                    IAudioRoutesObserver asInterface3 = IAudioRoutesObserver.Stub.asInterface(parcel.readStrongBinder());
+                    IAudioRoutesObserver iAudioRoutesObserverAsInterface = IAudioRoutesObserver.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    AudioRoutesInfo startWatchingRoutes = startWatchingRoutes(asInterface3);
+                    AudioRoutesInfo audioRoutesInfoStartWatchingRoutes = startWatchingRoutes(iAudioRoutesObserverAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(startWatchingRoutes, 1);
+                    parcel2.writeTypedObject(audioRoutesInfoStartWatchingRoutes, 1);
                     return true;
                 case 95:
-                    boolean isCameraSoundForced = isCameraSoundForced();
+                    boolean zIsCameraSoundForced = isCameraSoundForced();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isCameraSoundForced);
+                    parcel2.writeBoolean(zIsCameraSoundForced);
                     return true;
                 case 96:
-                    IVolumeController asInterface4 = IVolumeController.Stub.asInterface(parcel.readStrongBinder());
+                    IVolumeController iVolumeControllerAsInterface = IVolumeController.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    setVolumeController(asInterface4);
+                    setVolumeController(iVolumeControllerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 97:
@@ -3785,48 +3785,48 @@ public interface IAudioService extends IInterface {
                     parcel2.writeStrongInterface(volumeController);
                     return true;
                 case 98:
-                    IVolumeController asInterface5 = IVolumeController.Stub.asInterface(parcel.readStrongBinder());
-                    boolean readBoolean11 = parcel.readBoolean();
+                    IVolumeController iVolumeControllerAsInterface2 = IVolumeController.Stub.asInterface(parcel.readStrongBinder());
+                    boolean z11 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    notifyVolumeControllerVisible(asInterface5, readBoolean11);
+                    notifyVolumeControllerVisible(iVolumeControllerAsInterface2, z11);
                     parcel2.writeNoException();
                     return true;
                 case 99:
-                    boolean readBoolean12 = parcel.readBoolean();
+                    boolean z12 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setVolumeControllerLongPressTimeoutEnabled(readBoolean12);
+                    setVolumeControllerLongPressTimeoutEnabled(z12);
                     return true;
                 case 100:
-                    int readInt35 = parcel.readInt();
+                    int i37 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isStreamAffectedByRingerMode = isStreamAffectedByRingerMode(readInt35);
+                    boolean zIsStreamAffectedByRingerMode = isStreamAffectedByRingerMode(i37);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isStreamAffectedByRingerMode);
+                    parcel2.writeBoolean(zIsStreamAffectedByRingerMode);
                     return true;
                 case 101:
-                    int readInt36 = parcel.readInt();
+                    int i38 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isStreamAffectedByMute = isStreamAffectedByMute(readInt36);
+                    boolean zIsStreamAffectedByMute = isStreamAffectedByMute(i38);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isStreamAffectedByMute);
+                    parcel2.writeBoolean(zIsStreamAffectedByMute);
                     return true;
                 case 102:
-                    int readInt37 = parcel.readInt();
+                    int i39 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isStreamMutableByUi = isStreamMutableByUi(readInt37);
+                    boolean zIsStreamMutableByUi = isStreamMutableByUi(i39);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isStreamMutableByUi);
+                    parcel2.writeBoolean(zIsStreamMutableByUi);
                     return true;
                 case 103:
-                    String readString4 = parcel.readString();
+                    String string4 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    disableSafeMediaVolume(readString4);
+                    disableSafeMediaVolume(string4);
                     parcel2.writeNoException();
                     return true;
                 case 104:
-                    String readString5 = parcel.readString();
+                    String string5 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    lowerVolumeToRs1(readString5);
+                    lowerVolumeToRs1(string5);
                     return true;
                 case 105:
                     float outputRs2UpperBound = getOutputRs2UpperBound();
@@ -3834,9 +3834,9 @@ public interface IAudioService extends IInterface {
                     parcel2.writeFloat(outputRs2UpperBound);
                     return true;
                 case 106:
-                    float readFloat2 = parcel.readFloat();
+                    float f2 = parcel.readFloat();
                     parcel.enforceNoDataAvail();
-                    setOutputRs2UpperBound(readFloat2);
+                    setOutputRs2UpperBound(f2);
                     return true;
                 case 107:
                     float csd = getCsd();
@@ -3844,80 +3844,80 @@ public interface IAudioService extends IInterface {
                     parcel2.writeFloat(csd);
                     return true;
                 case 108:
-                    float readFloat3 = parcel.readFloat();
+                    float f3 = parcel.readFloat();
                     parcel.enforceNoDataAvail();
-                    setCsd(readFloat3);
+                    setCsd(f3);
                     return true;
                 case 109:
-                    boolean readBoolean13 = parcel.readBoolean();
+                    boolean z13 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    forceUseFrameworkMel(readBoolean13);
+                    forceUseFrameworkMel(z13);
                     return true;
                 case 110:
-                    boolean readBoolean14 = parcel.readBoolean();
+                    boolean z14 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    forceComputeCsdOnAllDevices(readBoolean14);
+                    forceComputeCsdOnAllDevices(z14);
                     return true;
                 case 111:
-                    boolean isCsdEnabled = isCsdEnabled();
+                    boolean zIsCsdEnabled = isCsdEnabled();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isCsdEnabled);
+                    parcel2.writeBoolean(zIsCsdEnabled);
                     return true;
                 case 112:
-                    boolean isCsdAsAFeatureAvailable = isCsdAsAFeatureAvailable();
+                    boolean zIsCsdAsAFeatureAvailable = isCsdAsAFeatureAvailable();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isCsdAsAFeatureAvailable);
+                    parcel2.writeBoolean(zIsCsdAsAFeatureAvailable);
                     return true;
                 case 113:
-                    boolean isCsdAsAFeatureEnabled = isCsdAsAFeatureEnabled();
+                    boolean zIsCsdAsAFeatureEnabled = isCsdAsAFeatureEnabled();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isCsdAsAFeatureEnabled);
+                    parcel2.writeBoolean(zIsCsdAsAFeatureEnabled);
                     return true;
                 case 114:
-                    boolean readBoolean15 = parcel.readBoolean();
+                    boolean z15 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setCsdAsAFeatureEnabled(readBoolean15);
+                    setCsdAsAFeatureEnabled(z15);
                     return true;
                 case 115:
-                    String readString6 = parcel.readString();
-                    int readInt38 = parcel.readInt();
+                    String string6 = parcel.readString();
+                    int i40 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean bluetoothAudioDeviceCategory = setBluetoothAudioDeviceCategory(readString6, readInt38);
+                    boolean bluetoothAudioDeviceCategory = setBluetoothAudioDeviceCategory(string6, i40);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(bluetoothAudioDeviceCategory);
                     return true;
                 case 116:
-                    String readString7 = parcel.readString();
+                    String string7 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int bluetoothAudioDeviceCategory2 = getBluetoothAudioDeviceCategory(readString7);
+                    int bluetoothAudioDeviceCategory2 = getBluetoothAudioDeviceCategory(string7);
                     parcel2.writeNoException();
                     parcel2.writeInt(bluetoothAudioDeviceCategory2);
                     return true;
                 case 117:
-                    String readString8 = parcel.readString();
+                    String string8 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isBluetoothAudioDeviceCategoryFixed = isBluetoothAudioDeviceCategoryFixed(readString8);
+                    boolean zIsBluetoothAudioDeviceCategoryFixed = isBluetoothAudioDeviceCategoryFixed(string8);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isBluetoothAudioDeviceCategoryFixed);
+                    parcel2.writeBoolean(zIsBluetoothAudioDeviceCategoryFixed);
                     return true;
                 case 118:
-                    boolean readBoolean16 = parcel.readBoolean();
+                    boolean z16 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    int hdmiSystemAudioSupported = setHdmiSystemAudioSupported(readBoolean16);
+                    int hdmiSystemAudioSupported = setHdmiSystemAudioSupported(z16);
                     parcel2.writeNoException();
                     parcel2.writeInt(hdmiSystemAudioSupported);
                     return true;
                 case 119:
-                    boolean isHdmiSystemAudioSupported = isHdmiSystemAudioSupported();
+                    boolean zIsHdmiSystemAudioSupported = isHdmiSystemAudioSupported();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isHdmiSystemAudioSupported);
+                    parcel2.writeBoolean(zIsHdmiSystemAudioSupported);
                     return true;
                 case 120:
                     return onTransact$registerAudioPolicy$(parcel, parcel2);
                 case 121:
-                    IAudioPolicyCallback asInterface6 = IAudioPolicyCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IAudioPolicyCallback iAudioPolicyCallbackAsInterface = IAudioPolicyCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterAudioPolicyAsync(asInterface6);
+                    unregisterAudioPolicyAsync(iAudioPolicyCallbackAsInterface);
                     return true;
                 case 122:
                     List<android.media.audiopolicy.AudioMix> registeredPolicyMixes = getRegisteredPolicyMixes();
@@ -3925,34 +3925,34 @@ public interface IAudioService extends IInterface {
                     parcel2.writeTypedList(registeredPolicyMixes, 1);
                     return true;
                 case 123:
-                    IAudioPolicyCallback asInterface7 = IAudioPolicyCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IAudioPolicyCallback iAudioPolicyCallbackAsInterface2 = IAudioPolicyCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterAudioPolicy(asInterface7);
+                    unregisterAudioPolicy(iAudioPolicyCallbackAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 124:
                     android.media.audiopolicy.AudioPolicyConfig audioPolicyConfig = (android.media.audiopolicy.AudioPolicyConfig) parcel.readTypedObject(android.media.audiopolicy.AudioPolicyConfig.CREATOR);
-                    IAudioPolicyCallback asInterface8 = IAudioPolicyCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IAudioPolicyCallback iAudioPolicyCallbackAsInterface3 = IAudioPolicyCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int addMixForPolicy = addMixForPolicy(audioPolicyConfig, asInterface8);
+                    int iAddMixForPolicy = addMixForPolicy(audioPolicyConfig, iAudioPolicyCallbackAsInterface3);
                     parcel2.writeNoException();
-                    parcel2.writeInt(addMixForPolicy);
+                    parcel2.writeInt(iAddMixForPolicy);
                     return true;
                 case 125:
                     android.media.audiopolicy.AudioPolicyConfig audioPolicyConfig2 = (android.media.audiopolicy.AudioPolicyConfig) parcel.readTypedObject(android.media.audiopolicy.AudioPolicyConfig.CREATOR);
-                    IAudioPolicyCallback asInterface9 = IAudioPolicyCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IAudioPolicyCallback iAudioPolicyCallbackAsInterface4 = IAudioPolicyCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int removeMixForPolicy = removeMixForPolicy(audioPolicyConfig2, asInterface9);
+                    int iRemoveMixForPolicy = removeMixForPolicy(audioPolicyConfig2, iAudioPolicyCallbackAsInterface4);
                     parcel2.writeNoException();
-                    parcel2.writeInt(removeMixForPolicy);
+                    parcel2.writeInt(iRemoveMixForPolicy);
                     return true;
                 case 126:
                     return onTransact$updateMixingRulesForPolicy$(parcel, parcel2);
                 case 127:
-                    int readInt39 = parcel.readInt();
-                    IAudioPolicyCallback asInterface10 = IAudioPolicyCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i41 = parcel.readInt();
+                    IAudioPolicyCallback iAudioPolicyCallbackAsInterface5 = IAudioPolicyCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int focusPropertiesForPolicy = setFocusPropertiesForPolicy(readInt39, asInterface10);
+                    int focusPropertiesForPolicy = setFocusPropertiesForPolicy(i41, iAudioPolicyCallbackAsInterface5);
                     parcel2.writeNoException();
                     parcel2.writeInt(focusPropertiesForPolicy);
                     return true;
@@ -3968,20 +3968,20 @@ public interface IAudioService extends IInterface {
                     parcel2.writeTypedObject(volumePolicy2, 1);
                     return true;
                 case 130:
-                    boolean hasRegisteredDynamicPolicy = hasRegisteredDynamicPolicy();
+                    boolean zHasRegisteredDynamicPolicy = hasRegisteredDynamicPolicy();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(hasRegisteredDynamicPolicy);
+                    parcel2.writeBoolean(zHasRegisteredDynamicPolicy);
                     return true;
                 case 131:
-                    IRecordingConfigDispatcher asInterface11 = IRecordingConfigDispatcher.Stub.asInterface(parcel.readStrongBinder());
+                    IRecordingConfigDispatcher iRecordingConfigDispatcherAsInterface = IRecordingConfigDispatcher.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerRecordingCallback(asInterface11);
+                    registerRecordingCallback(iRecordingConfigDispatcherAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 132:
-                    IRecordingConfigDispatcher asInterface12 = IRecordingConfigDispatcher.Stub.asInterface(parcel.readStrongBinder());
+                    IRecordingConfigDispatcher iRecordingConfigDispatcherAsInterface2 = IRecordingConfigDispatcher.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterRecordingCallback(asInterface12);
+                    unregisterRecordingCallback(iRecordingConfigDispatcherAsInterface2);
                     return true;
                 case 133:
                     List<AudioRecordingConfiguration> activeRecordingConfigurations = getActiveRecordingConfigurations();
@@ -3989,15 +3989,15 @@ public interface IAudioService extends IInterface {
                     parcel2.writeTypedList(activeRecordingConfigurations, 1);
                     return true;
                 case 134:
-                    IPlaybackConfigDispatcher asInterface13 = IPlaybackConfigDispatcher.Stub.asInterface(parcel.readStrongBinder());
+                    IPlaybackConfigDispatcher iPlaybackConfigDispatcherAsInterface = IPlaybackConfigDispatcher.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerPlaybackCallback(asInterface13);
+                    registerPlaybackCallback(iPlaybackConfigDispatcherAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 135:
-                    IPlaybackConfigDispatcher asInterface14 = IPlaybackConfigDispatcher.Stub.asInterface(parcel.readStrongBinder());
+                    IPlaybackConfigDispatcher iPlaybackConfigDispatcherAsInterface2 = IPlaybackConfigDispatcher.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterPlaybackCallback(asInterface14);
+                    unregisterPlaybackCallback(iPlaybackConfigDispatcherAsInterface2);
                     return true;
                 case 136:
                     List<AudioPlaybackConfiguration> activePlaybackConfigurations = getActivePlaybackConfigurations();
@@ -4005,10 +4005,10 @@ public interface IAudioService extends IInterface {
                     parcel2.writeTypedList(activePlaybackConfigurations, 1);
                     return true;
                 case 137:
-                    int readInt40 = parcel.readInt();
+                    int i42 = parcel.readInt();
                     AudioAttributes audioAttributes2 = (AudioAttributes) parcel.readTypedObject(AudioAttributes.CREATOR);
                     parcel.enforceNoDataAvail();
-                    int focusRampTimeMs = getFocusRampTimeMs(readInt40, audioAttributes2);
+                    int focusRampTimeMs = getFocusRampTimeMs(i42, audioAttributes2);
                     parcel2.writeNoException();
                     parcel2.writeInt(focusRampTimeMs);
                     return true;
@@ -4017,116 +4017,116 @@ public interface IAudioService extends IInterface {
                 case 139:
                     return onTransact$dispatchFocusChangeWithFade$(parcel, parcel2);
                 case 140:
-                    int readInt41 = parcel.readInt();
-                    boolean readBoolean17 = parcel.readBoolean();
+                    int i43 = parcel.readInt();
+                    boolean z17 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    playerHasOpPlayAudio(readInt41, readBoolean17);
+                    playerHasOpPlayAudio(i43, z17);
                     return true;
                 case 141:
                     return onTransact$handleBluetoothActiveDeviceChanged$(parcel, parcel2);
                 case 142:
                     return onTransact$setFocusRequestResultFromExtPolicy$(parcel, parcel2);
                 case 143:
-                    IAudioServerStateDispatcher asInterface15 = IAudioServerStateDispatcher.Stub.asInterface(parcel.readStrongBinder());
+                    IAudioServerStateDispatcher iAudioServerStateDispatcherAsInterface = IAudioServerStateDispatcher.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerAudioServerStateDispatcher(asInterface15);
+                    registerAudioServerStateDispatcher(iAudioServerStateDispatcherAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 144:
-                    IAudioServerStateDispatcher asInterface16 = IAudioServerStateDispatcher.Stub.asInterface(parcel.readStrongBinder());
+                    IAudioServerStateDispatcher iAudioServerStateDispatcherAsInterface2 = IAudioServerStateDispatcher.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterAudioServerStateDispatcher(asInterface16);
+                    unregisterAudioServerStateDispatcher(iAudioServerStateDispatcherAsInterface2);
                     return true;
                 case 145:
-                    boolean isAudioServerRunning = isAudioServerRunning();
+                    boolean zIsAudioServerRunning = isAudioServerRunning();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isAudioServerRunning);
+                    parcel2.writeBoolean(zIsAudioServerRunning);
                     return true;
                 case 146:
-                    IAudioVolumeChangeDispatcher asInterface17 = IAudioVolumeChangeDispatcher.Stub.asInterface(parcel.readStrongBinder());
+                    IAudioVolumeChangeDispatcher iAudioVolumeChangeDispatcherAsInterface = IAudioVolumeChangeDispatcher.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerAudioVolumeCallback(asInterface17);
+                    registerAudioVolumeCallback(iAudioVolumeChangeDispatcherAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 147:
-                    IAudioVolumeChangeDispatcher asInterface18 = IAudioVolumeChangeDispatcher.Stub.asInterface(parcel.readStrongBinder());
+                    IAudioVolumeChangeDispatcher iAudioVolumeChangeDispatcherAsInterface2 = IAudioVolumeChangeDispatcher.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterAudioVolumeCallback(asInterface18);
+                    unregisterAudioVolumeCallback(iAudioVolumeChangeDispatcherAsInterface2);
                     return true;
                 case 148:
                     return onTransact$setUidDeviceAffinity$(parcel, parcel2);
                 case 149:
-                    IAudioPolicyCallback asInterface19 = IAudioPolicyCallback.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt42 = parcel.readInt();
+                    IAudioPolicyCallback iAudioPolicyCallbackAsInterface6 = IAudioPolicyCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i44 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int removeUidDeviceAffinity = removeUidDeviceAffinity(asInterface19, readInt42);
+                    int iRemoveUidDeviceAffinity = removeUidDeviceAffinity(iAudioPolicyCallbackAsInterface6, i44);
                     parcel2.writeNoException();
-                    parcel2.writeInt(removeUidDeviceAffinity);
+                    parcel2.writeInt(iRemoveUidDeviceAffinity);
                     return true;
                 case 150:
                     return onTransact$setUserIdDeviceAffinity$(parcel, parcel2);
                 case 151:
-                    IAudioPolicyCallback asInterface20 = IAudioPolicyCallback.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt43 = parcel.readInt();
+                    IAudioPolicyCallback iAudioPolicyCallbackAsInterface7 = IAudioPolicyCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i45 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int removeUserIdDeviceAffinity = removeUserIdDeviceAffinity(asInterface20, readInt43);
+                    int iRemoveUserIdDeviceAffinity = removeUserIdDeviceAffinity(iAudioPolicyCallbackAsInterface7, i45);
                     parcel2.writeNoException();
-                    parcel2.writeInt(removeUserIdDeviceAffinity);
+                    parcel2.writeInt(iRemoveUserIdDeviceAffinity);
                     return true;
                 case 152:
                     Uri uri = (Uri) parcel.readTypedObject(Uri.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean hasHapticChannels = hasHapticChannels(uri);
+                    boolean zHasHapticChannels = hasHapticChannels(uri);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(hasHapticChannels);
+                    parcel2.writeBoolean(zHasHapticChannels);
                     return true;
                 case 153:
-                    boolean isCallScreeningModeSupported = isCallScreeningModeSupported();
+                    boolean zIsCallScreeningModeSupported = isCallScreeningModeSupported();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isCallScreeningModeSupported);
+                    parcel2.writeBoolean(zIsCallScreeningModeSupported);
                     return true;
                 case 154:
-                    int readInt44 = parcel.readInt();
-                    ArrayList createTypedArrayList = parcel.createTypedArrayList(AudioDeviceAttributes.CREATOR);
+                    int i46 = parcel.readInt();
+                    ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(AudioDeviceAttributes.CREATOR);
                     parcel.enforceNoDataAvail();
-                    int preferredDevicesForStrategy = setPreferredDevicesForStrategy(readInt44, createTypedArrayList);
+                    int preferredDevicesForStrategy = setPreferredDevicesForStrategy(i46, arrayListCreateTypedArrayList);
                     parcel2.writeNoException();
                     parcel2.writeInt(preferredDevicesForStrategy);
                     return true;
                 case 155:
-                    int readInt45 = parcel.readInt();
+                    int i47 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int removePreferredDevicesForStrategy = removePreferredDevicesForStrategy(readInt45);
+                    int iRemovePreferredDevicesForStrategy = removePreferredDevicesForStrategy(i47);
                     parcel2.writeNoException();
-                    parcel2.writeInt(removePreferredDevicesForStrategy);
+                    parcel2.writeInt(iRemovePreferredDevicesForStrategy);
                     return true;
                 case 156:
-                    int readInt46 = parcel.readInt();
+                    int i48 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<AudioDeviceAttributes> preferredDevicesForStrategy2 = getPreferredDevicesForStrategy(readInt46);
+                    List<AudioDeviceAttributes> preferredDevicesForStrategy2 = getPreferredDevicesForStrategy(i48);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(preferredDevicesForStrategy2, 1);
                     return true;
                 case 157:
-                    int readInt47 = parcel.readInt();
+                    int i49 = parcel.readInt();
                     AudioDeviceAttributes audioDeviceAttributes4 = (AudioDeviceAttributes) parcel.readTypedObject(AudioDeviceAttributes.CREATOR);
                     parcel.enforceNoDataAvail();
-                    int deviceAsNonDefaultForStrategy = setDeviceAsNonDefaultForStrategy(readInt47, audioDeviceAttributes4);
+                    int deviceAsNonDefaultForStrategy = setDeviceAsNonDefaultForStrategy(i49, audioDeviceAttributes4);
                     parcel2.writeNoException();
                     parcel2.writeInt(deviceAsNonDefaultForStrategy);
                     return true;
                 case 158:
-                    int readInt48 = parcel.readInt();
+                    int i50 = parcel.readInt();
                     AudioDeviceAttributes audioDeviceAttributes5 = (AudioDeviceAttributes) parcel.readTypedObject(AudioDeviceAttributes.CREATOR);
                     parcel.enforceNoDataAvail();
-                    int removeDeviceAsNonDefaultForStrategy = removeDeviceAsNonDefaultForStrategy(readInt48, audioDeviceAttributes5);
+                    int iRemoveDeviceAsNonDefaultForStrategy = removeDeviceAsNonDefaultForStrategy(i50, audioDeviceAttributes5);
                     parcel2.writeNoException();
-                    parcel2.writeInt(removeDeviceAsNonDefaultForStrategy);
+                    parcel2.writeInt(iRemoveDeviceAsNonDefaultForStrategy);
                     return true;
                 case 159:
-                    int readInt49 = parcel.readInt();
+                    int i51 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<AudioDeviceAttributes> nonDefaultDevicesForStrategy = getNonDefaultDevicesForStrategy(readInt49);
+                    List<AudioDeviceAttributes> nonDefaultDevicesForStrategy = getNonDefaultDevicesForStrategy(i51);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(nonDefaultDevicesForStrategy, 1);
                     return true;
@@ -4146,20 +4146,20 @@ public interface IAudioService extends IInterface {
                     return true;
                 case 162:
                     AudioAttributes audioAttributes5 = (AudioAttributes) parcel.readTypedObject(AudioAttributes.CREATOR);
-                    IDevicesForAttributesCallback asInterface21 = IDevicesForAttributesCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IDevicesForAttributesCallback iDevicesForAttributesCallbackAsInterface = IDevicesForAttributesCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    addOnDevicesForAttributesChangedListener(audioAttributes5, asInterface21);
+                    addOnDevicesForAttributesChangedListener(audioAttributes5, iDevicesForAttributesCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 163:
-                    IDevicesForAttributesCallback asInterface22 = IDevicesForAttributesCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IDevicesForAttributesCallback iDevicesForAttributesCallbackAsInterface2 = IDevicesForAttributesCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    removeOnDevicesForAttributesChangedListener(asInterface22);
+                    removeOnDevicesForAttributesChangedListener(iDevicesForAttributesCallbackAsInterface2);
                     return true;
                 case 164:
-                    int readInt50 = parcel.readInt();
+                    int i52 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int allowedCapturePolicy = setAllowedCapturePolicy(readInt50);
+                    int allowedCapturePolicy = setAllowedCapturePolicy(i52);
                     parcel2.writeNoException();
                     parcel2.writeInt(allowedCapturePolicy);
                     return true;
@@ -4169,31 +4169,31 @@ public interface IAudioService extends IInterface {
                     parcel2.writeInt(allowedCapturePolicy2);
                     return true;
                 case 166:
-                    IStrategyPreferredDevicesDispatcher asInterface23 = IStrategyPreferredDevicesDispatcher.Stub.asInterface(parcel.readStrongBinder());
+                    IStrategyPreferredDevicesDispatcher iStrategyPreferredDevicesDispatcherAsInterface = IStrategyPreferredDevicesDispatcher.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerStrategyPreferredDevicesDispatcher(asInterface23);
+                    registerStrategyPreferredDevicesDispatcher(iStrategyPreferredDevicesDispatcherAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 167:
-                    IStrategyPreferredDevicesDispatcher asInterface24 = IStrategyPreferredDevicesDispatcher.Stub.asInterface(parcel.readStrongBinder());
+                    IStrategyPreferredDevicesDispatcher iStrategyPreferredDevicesDispatcherAsInterface2 = IStrategyPreferredDevicesDispatcher.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterStrategyPreferredDevicesDispatcher(asInterface24);
+                    unregisterStrategyPreferredDevicesDispatcher(iStrategyPreferredDevicesDispatcherAsInterface2);
                     return true;
                 case 168:
-                    IStrategyNonDefaultDevicesDispatcher asInterface25 = IStrategyNonDefaultDevicesDispatcher.Stub.asInterface(parcel.readStrongBinder());
+                    IStrategyNonDefaultDevicesDispatcher iStrategyNonDefaultDevicesDispatcherAsInterface = IStrategyNonDefaultDevicesDispatcher.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerStrategyNonDefaultDevicesDispatcher(asInterface25);
+                    registerStrategyNonDefaultDevicesDispatcher(iStrategyNonDefaultDevicesDispatcherAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 169:
-                    IStrategyNonDefaultDevicesDispatcher asInterface26 = IStrategyNonDefaultDevicesDispatcher.Stub.asInterface(parcel.readStrongBinder());
+                    IStrategyNonDefaultDevicesDispatcher iStrategyNonDefaultDevicesDispatcherAsInterface2 = IStrategyNonDefaultDevicesDispatcher.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterStrategyNonDefaultDevicesDispatcher(asInterface26);
+                    unregisterStrategyNonDefaultDevicesDispatcher(iStrategyNonDefaultDevicesDispatcherAsInterface2);
                     return true;
                 case 170:
-                    boolean readBoolean18 = parcel.readBoolean();
+                    boolean z18 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setRttEnabled(readBoolean18);
+                    setRttEnabled(z18);
                     return true;
                 case 171:
                     return onTransact$setDeviceVolumeBehavior$(parcel, parcel2);
@@ -4205,42 +4205,42 @@ public interface IAudioService extends IInterface {
                     parcel2.writeInt(deviceVolumeBehavior);
                     return true;
                 case 173:
-                    boolean readBoolean19 = parcel.readBoolean();
+                    boolean z19 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setMultiAudioFocusEnabled(readBoolean19);
+                    setMultiAudioFocusEnabled(z19);
                     return true;
                 case 174:
-                    int readInt51 = parcel.readInt();
-                    ArrayList createTypedArrayList2 = parcel.createTypedArrayList(AudioDeviceAttributes.CREATOR);
+                    int i53 = parcel.readInt();
+                    ArrayList arrayListCreateTypedArrayList2 = parcel.createTypedArrayList(AudioDeviceAttributes.CREATOR);
                     parcel.enforceNoDataAvail();
-                    int preferredDevicesForCapturePreset = setPreferredDevicesForCapturePreset(readInt51, createTypedArrayList2);
+                    int preferredDevicesForCapturePreset = setPreferredDevicesForCapturePreset(i53, arrayListCreateTypedArrayList2);
                     parcel2.writeNoException();
                     parcel2.writeInt(preferredDevicesForCapturePreset);
                     return true;
                 case 175:
-                    int readInt52 = parcel.readInt();
+                    int i54 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int clearPreferredDevicesForCapturePreset = clearPreferredDevicesForCapturePreset(readInt52);
+                    int iClearPreferredDevicesForCapturePreset = clearPreferredDevicesForCapturePreset(i54);
                     parcel2.writeNoException();
-                    parcel2.writeInt(clearPreferredDevicesForCapturePreset);
+                    parcel2.writeInt(iClearPreferredDevicesForCapturePreset);
                     return true;
                 case 176:
-                    int readInt53 = parcel.readInt();
+                    int i55 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<AudioDeviceAttributes> preferredDevicesForCapturePreset2 = getPreferredDevicesForCapturePreset(readInt53);
+                    List<AudioDeviceAttributes> preferredDevicesForCapturePreset2 = getPreferredDevicesForCapturePreset(i55);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(preferredDevicesForCapturePreset2, 1);
                     return true;
                 case 177:
-                    ICapturePresetDevicesRoleDispatcher asInterface27 = ICapturePresetDevicesRoleDispatcher.Stub.asInterface(parcel.readStrongBinder());
+                    ICapturePresetDevicesRoleDispatcher iCapturePresetDevicesRoleDispatcherAsInterface = ICapturePresetDevicesRoleDispatcher.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerCapturePresetDevicesRoleDispatcher(asInterface27);
+                    registerCapturePresetDevicesRoleDispatcher(iCapturePresetDevicesRoleDispatcherAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 178:
-                    ICapturePresetDevicesRoleDispatcher asInterface28 = ICapturePresetDevicesRoleDispatcher.Stub.asInterface(parcel.readStrongBinder());
+                    ICapturePresetDevicesRoleDispatcher iCapturePresetDevicesRoleDispatcherAsInterface2 = ICapturePresetDevicesRoleDispatcher.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterCapturePresetDevicesRoleDispatcher(asInterface28);
+                    unregisterCapturePresetDevicesRoleDispatcher(iCapturePresetDevicesRoleDispatcherAsInterface2);
                     return true;
                 case 179:
                     return onTransact$adjustStreamVolumeForUid$(parcel, parcel2);
@@ -4249,24 +4249,24 @@ public interface IAudioService extends IInterface {
                 case 181:
                     return onTransact$setStreamVolumeForUid$(parcel, parcel2);
                 case 182:
-                    int readInt54 = parcel.readInt();
-                    int readInt55 = parcel.readInt();
+                    int i56 = parcel.readInt();
+                    int i57 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    adjustVolume(readInt54, readInt55);
+                    adjustVolume(i56, i57);
                     return true;
                 case 183:
                     return onTransact$adjustSuggestedStreamVolume$(parcel, parcel2);
                 case 184:
-                    boolean readBoolean20 = parcel.readBoolean();
+                    boolean z20 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean isMusicActive = isMusicActive(readBoolean20);
+                    boolean zIsMusicActive = isMusicActive(z20);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isMusicActive);
+                    parcel2.writeBoolean(zIsMusicActive);
                     return true;
                 case 185:
-                    int readInt56 = parcel.readInt();
+                    int i58 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int deviceMaskForStream = getDeviceMaskForStream(readInt56);
+                    int deviceMaskForStream = getDeviceMaskForStream(i58);
                     parcel2.writeNoException();
                     parcel2.writeInt(deviceMaskForStream);
                     return true;
@@ -4283,41 +4283,41 @@ public interface IAudioService extends IInterface {
                     parcel2.writeInt(communicationDevice);
                     return true;
                 case 189:
-                    ICommunicationDeviceDispatcher asInterface29 = ICommunicationDeviceDispatcher.Stub.asInterface(parcel.readStrongBinder());
+                    ICommunicationDeviceDispatcher iCommunicationDeviceDispatcherAsInterface = ICommunicationDeviceDispatcher.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerCommunicationDeviceDispatcher(asInterface29);
+                    registerCommunicationDeviceDispatcher(iCommunicationDeviceDispatcherAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 190:
-                    ICommunicationDeviceDispatcher asInterface30 = ICommunicationDeviceDispatcher.Stub.asInterface(parcel.readStrongBinder());
+                    ICommunicationDeviceDispatcher iCommunicationDeviceDispatcherAsInterface2 = ICommunicationDeviceDispatcher.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterCommunicationDeviceDispatcher(asInterface30);
+                    unregisterCommunicationDeviceDispatcher(iCommunicationDeviceDispatcherAsInterface2);
                     return true;
                 case 191:
-                    boolean areNavigationRepeatSoundEffectsEnabled = areNavigationRepeatSoundEffectsEnabled();
+                    boolean zAreNavigationRepeatSoundEffectsEnabled = areNavigationRepeatSoundEffectsEnabled();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(areNavigationRepeatSoundEffectsEnabled);
+                    parcel2.writeBoolean(zAreNavigationRepeatSoundEffectsEnabled);
                     return true;
                 case 192:
-                    boolean readBoolean21 = parcel.readBoolean();
+                    boolean z21 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setNavigationRepeatSoundEffectsEnabled(readBoolean21);
+                    setNavigationRepeatSoundEffectsEnabled(z21);
                     return true;
                 case 193:
-                    boolean isHomeSoundEffectEnabled = isHomeSoundEffectEnabled();
+                    boolean zIsHomeSoundEffectEnabled = isHomeSoundEffectEnabled();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isHomeSoundEffectEnabled);
+                    parcel2.writeBoolean(zIsHomeSoundEffectEnabled);
                     return true;
                 case 194:
-                    boolean readBoolean22 = parcel.readBoolean();
+                    boolean z22 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setHomeSoundEffectEnabled(readBoolean22);
+                    setHomeSoundEffectEnabled(z22);
                     return true;
                 case 195:
                     AudioDeviceAttributes audioDeviceAttributes7 = (AudioDeviceAttributes) parcel.readTypedObject(AudioDeviceAttributes.CREATOR);
-                    long readLong = parcel.readLong();
+                    long j = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    boolean additionalOutputDeviceDelay = setAdditionalOutputDeviceDelay(audioDeviceAttributes7, readLong);
+                    boolean additionalOutputDeviceDelay = setAdditionalOutputDeviceDelay(audioDeviceAttributes7, j);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(additionalOutputDeviceDelay);
                     return true;
@@ -4362,30 +4362,30 @@ public interface IAudioService extends IInterface {
                     parcel2.writeLong(focusUnmuteDelayAfterFadeOutForTest);
                     return true;
                 case 204:
-                    IBinder readStrongBinder6 = parcel.readStrongBinder();
-                    int[] createIntArray2 = parcel.createIntArray();
+                    IBinder strongBinder6 = parcel.readStrongBinder();
+                    int[] iArrCreateIntArray2 = parcel.createIntArray();
                     parcel.enforceNoDataAvail();
-                    boolean enterAudioFocusFreezeForTest = enterAudioFocusFreezeForTest(readStrongBinder6, createIntArray2);
+                    boolean zEnterAudioFocusFreezeForTest = enterAudioFocusFreezeForTest(strongBinder6, iArrCreateIntArray2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(enterAudioFocusFreezeForTest);
+                    parcel2.writeBoolean(zEnterAudioFocusFreezeForTest);
                     return true;
                 case 205:
-                    IBinder readStrongBinder7 = parcel.readStrongBinder();
+                    IBinder strongBinder7 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    boolean exitAudioFocusFreezeForTest = exitAudioFocusFreezeForTest(readStrongBinder7);
+                    boolean zExitAudioFocusFreezeForTest = exitAudioFocusFreezeForTest(strongBinder7);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(exitAudioFocusFreezeForTest);
+                    parcel2.writeBoolean(zExitAudioFocusFreezeForTest);
                     return true;
                 case 206:
-                    IAudioModeDispatcher asInterface31 = IAudioModeDispatcher.Stub.asInterface(parcel.readStrongBinder());
+                    IAudioModeDispatcher iAudioModeDispatcherAsInterface = IAudioModeDispatcher.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerModeDispatcher(asInterface31);
+                    registerModeDispatcher(iAudioModeDispatcherAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 207:
-                    IAudioModeDispatcher asInterface32 = IAudioModeDispatcher.Stub.asInterface(parcel.readStrongBinder());
+                    IAudioModeDispatcher iAudioModeDispatcherAsInterface2 = IAudioModeDispatcher.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterModeDispatcher(asInterface32);
+                    unregisterModeDispatcher(iAudioModeDispatcherAsInterface2);
                     return true;
                 case 208:
                     int spatializerImmersiveAudioLevel = getSpatializerImmersiveAudioLevel();
@@ -4393,68 +4393,68 @@ public interface IAudioService extends IInterface {
                     parcel2.writeInt(spatializerImmersiveAudioLevel);
                     return true;
                 case 209:
-                    boolean isSpatializerEnabled = isSpatializerEnabled();
+                    boolean zIsSpatializerEnabled = isSpatializerEnabled();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSpatializerEnabled);
+                    parcel2.writeBoolean(zIsSpatializerEnabled);
                     return true;
                 case 210:
-                    boolean isSpatializerAvailable = isSpatializerAvailable();
+                    boolean zIsSpatializerAvailable = isSpatializerAvailable();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSpatializerAvailable);
+                    parcel2.writeBoolean(zIsSpatializerAvailable);
                     return true;
                 case 211:
                     AudioDeviceAttributes audioDeviceAttributes10 = (AudioDeviceAttributes) parcel.readTypedObject(AudioDeviceAttributes.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isSpatializerAvailableForDevice = isSpatializerAvailableForDevice(audioDeviceAttributes10);
+                    boolean zIsSpatializerAvailableForDevice = isSpatializerAvailableForDevice(audioDeviceAttributes10);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSpatializerAvailableForDevice);
+                    parcel2.writeBoolean(zIsSpatializerAvailableForDevice);
                     return true;
                 case 212:
                     AudioDeviceAttributes audioDeviceAttributes11 = (AudioDeviceAttributes) parcel.readTypedObject(AudioDeviceAttributes.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean hasHeadTracker = hasHeadTracker(audioDeviceAttributes11);
+                    boolean zHasHeadTracker = hasHeadTracker(audioDeviceAttributes11);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(hasHeadTracker);
+                    parcel2.writeBoolean(zHasHeadTracker);
                     return true;
                 case 213:
-                    boolean readBoolean23 = parcel.readBoolean();
+                    boolean z23 = parcel.readBoolean();
                     AudioDeviceAttributes audioDeviceAttributes12 = (AudioDeviceAttributes) parcel.readTypedObject(AudioDeviceAttributes.CREATOR);
                     parcel.enforceNoDataAvail();
-                    setHeadTrackerEnabled(readBoolean23, audioDeviceAttributes12);
+                    setHeadTrackerEnabled(z23, audioDeviceAttributes12);
                     parcel2.writeNoException();
                     return true;
                 case 214:
                     AudioDeviceAttributes audioDeviceAttributes13 = (AudioDeviceAttributes) parcel.readTypedObject(AudioDeviceAttributes.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isHeadTrackerEnabled = isHeadTrackerEnabled(audioDeviceAttributes13);
+                    boolean zIsHeadTrackerEnabled = isHeadTrackerEnabled(audioDeviceAttributes13);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isHeadTrackerEnabled);
+                    parcel2.writeBoolean(zIsHeadTrackerEnabled);
                     return true;
                 case 215:
-                    boolean isHeadTrackerAvailable = isHeadTrackerAvailable();
+                    boolean zIsHeadTrackerAvailable = isHeadTrackerAvailable();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isHeadTrackerAvailable);
+                    parcel2.writeBoolean(zIsHeadTrackerAvailable);
                     return true;
                 case 216:
-                    ISpatializerHeadTrackerAvailableCallback asInterface33 = ISpatializerHeadTrackerAvailableCallback.Stub.asInterface(parcel.readStrongBinder());
-                    boolean readBoolean24 = parcel.readBoolean();
+                    ISpatializerHeadTrackerAvailableCallback iSpatializerHeadTrackerAvailableCallbackAsInterface = ISpatializerHeadTrackerAvailableCallback.Stub.asInterface(parcel.readStrongBinder());
+                    boolean z24 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    registerSpatializerHeadTrackerAvailableCallback(asInterface33, readBoolean24);
+                    registerSpatializerHeadTrackerAvailableCallback(iSpatializerHeadTrackerAvailableCallbackAsInterface, z24);
                     parcel2.writeNoException();
                     return true;
                 case 217:
-                    boolean readBoolean25 = parcel.readBoolean();
+                    boolean z25 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setSpatializerEnabled(readBoolean25);
+                    setSpatializerEnabled(z25);
                     parcel2.writeNoException();
                     return true;
                 case 218:
                     AudioAttributes audioAttributes7 = (AudioAttributes) parcel.readTypedObject(AudioAttributes.CREATOR);
                     AudioFormat audioFormat = (AudioFormat) parcel.readTypedObject(AudioFormat.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean canBeSpatialized = canBeSpatialized(audioAttributes7, audioFormat);
+                    boolean zCanBeSpatialized = canBeSpatialized(audioAttributes7, audioFormat);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(canBeSpatialized);
+                    parcel2.writeBoolean(zCanBeSpatialized);
                     return true;
                 case 219:
                     List spatializedChannelMasks = getSpatializedChannelMasks();
@@ -4462,39 +4462,39 @@ public interface IAudioService extends IInterface {
                     parcel2.writeList(spatializedChannelMasks);
                     return true;
                 case 220:
-                    ISpatializerCallback asInterface34 = ISpatializerCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ISpatializerCallback iSpatializerCallbackAsInterface = ISpatializerCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerSpatializerCallback(asInterface34);
+                    registerSpatializerCallback(iSpatializerCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 221:
-                    ISpatializerCallback asInterface35 = ISpatializerCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ISpatializerCallback iSpatializerCallbackAsInterface2 = ISpatializerCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterSpatializerCallback(asInterface35);
+                    unregisterSpatializerCallback(iSpatializerCallbackAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 222:
-                    ISpatializerHeadTrackingModeCallback asInterface36 = ISpatializerHeadTrackingModeCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ISpatializerHeadTrackingModeCallback iSpatializerHeadTrackingModeCallbackAsInterface = ISpatializerHeadTrackingModeCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerSpatializerHeadTrackingCallback(asInterface36);
+                    registerSpatializerHeadTrackingCallback(iSpatializerHeadTrackingModeCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 223:
-                    ISpatializerHeadTrackingModeCallback asInterface37 = ISpatializerHeadTrackingModeCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ISpatializerHeadTrackingModeCallback iSpatializerHeadTrackingModeCallbackAsInterface2 = ISpatializerHeadTrackingModeCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterSpatializerHeadTrackingCallback(asInterface37);
+                    unregisterSpatializerHeadTrackingCallback(iSpatializerHeadTrackingModeCallbackAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 224:
-                    ISpatializerHeadToSoundStagePoseCallback asInterface38 = ISpatializerHeadToSoundStagePoseCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ISpatializerHeadToSoundStagePoseCallback iSpatializerHeadToSoundStagePoseCallbackAsInterface = ISpatializerHeadToSoundStagePoseCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerHeadToSoundstagePoseCallback(asInterface38);
+                    registerHeadToSoundstagePoseCallback(iSpatializerHeadToSoundStagePoseCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 225:
-                    ISpatializerHeadToSoundStagePoseCallback asInterface39 = ISpatializerHeadToSoundStagePoseCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ISpatializerHeadToSoundStagePoseCallback iSpatializerHeadToSoundStagePoseCallbackAsInterface2 = ISpatializerHeadToSoundStagePoseCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterHeadToSoundstagePoseCallback(asInterface39);
+                    unregisterHeadToSoundstagePoseCallback(iSpatializerHeadToSoundStagePoseCallbackAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 226:
@@ -4515,9 +4515,9 @@ public interface IAudioService extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 229:
-                    int readInt57 = parcel.readInt();
+                    int i59 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setDesiredHeadTrackingMode(readInt57);
+                    setDesiredHeadTrackingMode(i59);
                     parcel2.writeNoException();
                     return true;
                 case 230:
@@ -4536,27 +4536,27 @@ public interface IAudioService extends IInterface {
                     parcel2.writeInt(actualHeadTrackingMode);
                     return true;
                 case 233:
-                    float[] createFloatArray = parcel.createFloatArray();
+                    float[] fArrCreateFloatArray = parcel.createFloatArray();
                     parcel.enforceNoDataAvail();
-                    setSpatializerGlobalTransform(createFloatArray);
+                    setSpatializerGlobalTransform(fArrCreateFloatArray);
                     return true;
                 case 234:
                     recenterHeadTracker();
                     return true;
                 case 235:
-                    int readInt58 = parcel.readInt();
-                    byte[] createByteArray = parcel.createByteArray();
+                    int i60 = parcel.readInt();
+                    byte[] bArrCreateByteArray = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    setSpatializerParameter(readInt58, createByteArray);
+                    setSpatializerParameter(i60, bArrCreateByteArray);
                     parcel2.writeNoException();
                     return true;
                 case 236:
-                    int readInt59 = parcel.readInt();
-                    byte[] createByteArray2 = parcel.createByteArray();
+                    int i61 = parcel.readInt();
+                    byte[] bArrCreateByteArray2 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    getSpatializerParameter(readInt59, createByteArray2);
+                    getSpatializerParameter(i61, bArrCreateByteArray2);
                     parcel2.writeNoException();
-                    parcel2.writeByteArray(createByteArray2);
+                    parcel2.writeByteArray(bArrCreateByteArray2);
                     return true;
                 case 237:
                     int spatializerOutput = getSpatializerOutput();
@@ -4564,21 +4564,21 @@ public interface IAudioService extends IInterface {
                     parcel2.writeInt(spatializerOutput);
                     return true;
                 case 238:
-                    ISpatializerOutputCallback asInterface40 = ISpatializerOutputCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ISpatializerOutputCallback iSpatializerOutputCallbackAsInterface = ISpatializerOutputCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerSpatializerOutputCallback(asInterface40);
+                    registerSpatializerOutputCallback(iSpatializerOutputCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 239:
-                    ISpatializerOutputCallback asInterface41 = ISpatializerOutputCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ISpatializerOutputCallback iSpatializerOutputCallbackAsInterface2 = ISpatializerOutputCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterSpatializerOutputCallback(asInterface41);
+                    unregisterSpatializerOutputCallback(iSpatializerOutputCallbackAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 240:
-                    boolean isVolumeFixed = isVolumeFixed();
+                    boolean zIsVolumeFixed = isVolumeFixed();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isVolumeFixed);
+                    parcel2.writeBoolean(zIsVolumeFixed);
                     return true;
                 case 241:
                     VolumeInfo defaultVolumeInfo = getDefaultVolumeInfo();
@@ -4586,9 +4586,9 @@ public interface IAudioService extends IInterface {
                     parcel2.writeTypedObject(defaultVolumeInfo, 1);
                     return true;
                 case 242:
-                    boolean isPstnCallAudioInterceptable = isPstnCallAudioInterceptable();
+                    boolean zIsPstnCallAudioInterceptable = isPstnCallAudioInterceptable();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isPstnCallAudioInterceptable);
+                    parcel2.writeBoolean(zIsPstnCallAudioInterceptable);
                     return true;
                 case 243:
                     return onTransact$muteAwaitConnection$(parcel, parcel2);
@@ -4603,24 +4603,24 @@ public interface IAudioService extends IInterface {
                     parcel2.writeTypedObject(mutingExpectedDevice, 1);
                     return true;
                 case 246:
-                    IMuteAwaitConnectionCallback asInterface42 = IMuteAwaitConnectionCallback.Stub.asInterface(parcel.readStrongBinder());
-                    boolean readBoolean26 = parcel.readBoolean();
+                    IMuteAwaitConnectionCallback iMuteAwaitConnectionCallbackAsInterface = IMuteAwaitConnectionCallback.Stub.asInterface(parcel.readStrongBinder());
+                    boolean z26 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    registerMuteAwaitConnectionDispatcher(asInterface42, readBoolean26);
+                    registerMuteAwaitConnectionDispatcher(iMuteAwaitConnectionCallbackAsInterface, z26);
                     parcel2.writeNoException();
                     return true;
                 case 247:
                     AudioDeviceAttributes audioDeviceAttributes17 = (AudioDeviceAttributes) parcel.readTypedObject(AudioDeviceAttributes.CREATOR);
-                    boolean readBoolean27 = parcel.readBoolean();
+                    boolean z27 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setTestDeviceConnectionState(audioDeviceAttributes17, readBoolean27);
+                    setTestDeviceConnectionState(audioDeviceAttributes17, z27);
                     parcel2.writeNoException();
                     return true;
                 case 248:
-                    boolean readBoolean28 = parcel.readBoolean();
-                    IDeviceVolumeBehaviorDispatcher asInterface43 = IDeviceVolumeBehaviorDispatcher.Stub.asInterface(parcel.readStrongBinder());
+                    boolean z28 = parcel.readBoolean();
+                    IDeviceVolumeBehaviorDispatcher iDeviceVolumeBehaviorDispatcherAsInterface = IDeviceVolumeBehaviorDispatcher.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerDeviceVolumeBehaviorDispatcher(readBoolean28, asInterface43);
+                    registerDeviceVolumeBehaviorDispatcher(z28, iDeviceVolumeBehaviorDispatcherAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 249:
@@ -4630,34 +4630,34 @@ public interface IAudioService extends IInterface {
                     return true;
                 case 250:
                     AudioFocusInfo audioFocusInfo = (AudioFocusInfo) parcel.readTypedObject(AudioFocusInfo.CREATOR);
-                    IAudioPolicyCallback asInterface44 = IAudioPolicyCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IAudioPolicyCallback iAudioPolicyCallbackAsInterface8 = IAudioPolicyCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    sendFocusLossAndUpdate(audioFocusInfo, asInterface44);
+                    sendFocusLossAndUpdate(audioFocusInfo, iAudioPolicyCallbackAsInterface8);
                     return true;
                 case 251:
                     AudioFocusInfo audioFocusInfo2 = (AudioFocusInfo) parcel.readTypedObject(AudioFocusInfo.CREATOR);
-                    IAudioPolicyCallback asInterface45 = IAudioPolicyCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IAudioPolicyCallback iAudioPolicyCallbackAsInterface9 = IAudioPolicyCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    boolean sendFocusLoss = sendFocusLoss(audioFocusInfo2, asInterface45);
+                    boolean zSendFocusLoss = sendFocusLoss(audioFocusInfo2, iAudioPolicyCallbackAsInterface9);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(sendFocusLoss);
+                    parcel2.writeBoolean(zSendFocusLoss);
                     return true;
                 case 252:
-                    int[] createIntArray3 = parcel.createIntArray();
+                    int[] iArrCreateIntArray3 = parcel.createIntArray();
                     parcel.enforceNoDataAvail();
-                    addAssistantServicesUids(createIntArray3);
+                    addAssistantServicesUids(iArrCreateIntArray3);
                     parcel2.writeNoException();
                     return true;
                 case 253:
-                    int[] createIntArray4 = parcel.createIntArray();
+                    int[] iArrCreateIntArray4 = parcel.createIntArray();
                     parcel.enforceNoDataAvail();
-                    removeAssistantServicesUids(createIntArray4);
+                    removeAssistantServicesUids(iArrCreateIntArray4);
                     parcel2.writeNoException();
                     return true;
                 case 254:
-                    int[] createIntArray5 = parcel.createIntArray();
+                    int[] iArrCreateIntArray5 = parcel.createIntArray();
                     parcel.enforceNoDataAvail();
-                    setActiveAssistantServiceUids(createIntArray5);
+                    setActiveAssistantServiceUids(iArrCreateIntArray5);
                     parcel2.writeNoException();
                     return true;
                 case 255:
@@ -4681,70 +4681,70 @@ public interface IAudioService extends IInterface {
                     return onTransact$setPreferredMixerAttributes$(parcel, parcel2);
                 case 260:
                     AudioAttributes audioAttributes8 = (AudioAttributes) parcel.readTypedObject(AudioAttributes.CREATOR);
-                    int readInt60 = parcel.readInt();
+                    int i62 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int clearPreferredMixerAttributes = clearPreferredMixerAttributes(audioAttributes8, readInt60);
+                    int iClearPreferredMixerAttributes = clearPreferredMixerAttributes(audioAttributes8, i62);
                     parcel2.writeNoException();
-                    parcel2.writeInt(clearPreferredMixerAttributes);
+                    parcel2.writeInt(iClearPreferredMixerAttributes);
                     return true;
                 case 261:
-                    IPreferredMixerAttributesDispatcher asInterface46 = IPreferredMixerAttributesDispatcher.Stub.asInterface(parcel.readStrongBinder());
+                    IPreferredMixerAttributesDispatcher iPreferredMixerAttributesDispatcherAsInterface = IPreferredMixerAttributesDispatcher.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerPreferredMixerAttributesDispatcher(asInterface46);
+                    registerPreferredMixerAttributesDispatcher(iPreferredMixerAttributesDispatcherAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 262:
-                    IPreferredMixerAttributesDispatcher asInterface47 = IPreferredMixerAttributesDispatcher.Stub.asInterface(parcel.readStrongBinder());
+                    IPreferredMixerAttributesDispatcher iPreferredMixerAttributesDispatcherAsInterface2 = IPreferredMixerAttributesDispatcher.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterPreferredMixerAttributesDispatcher(asInterface47);
+                    unregisterPreferredMixerAttributesDispatcher(iPreferredMixerAttributesDispatcherAsInterface2);
                     return true;
                 case 263:
-                    boolean supportsBluetoothVariableLatency = supportsBluetoothVariableLatency();
+                    boolean zSupportsBluetoothVariableLatency = supportsBluetoothVariableLatency();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(supportsBluetoothVariableLatency);
+                    parcel2.writeBoolean(zSupportsBluetoothVariableLatency);
                     return true;
                 case 264:
-                    boolean readBoolean29 = parcel.readBoolean();
+                    boolean z29 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setBluetoothVariableLatencyEnabled(readBoolean29);
+                    setBluetoothVariableLatencyEnabled(z29);
                     parcel2.writeNoException();
                     return true;
                 case 265:
-                    boolean isBluetoothVariableLatencyEnabled = isBluetoothVariableLatencyEnabled();
+                    boolean zIsBluetoothVariableLatencyEnabled = isBluetoothVariableLatencyEnabled();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isBluetoothVariableLatencyEnabled);
+                    parcel2.writeBoolean(zIsBluetoothVariableLatencyEnabled);
                     return true;
                 case 266:
-                    ILoudnessCodecUpdatesDispatcher asInterface48 = ILoudnessCodecUpdatesDispatcher.Stub.asInterface(parcel.readStrongBinder());
+                    ILoudnessCodecUpdatesDispatcher iLoudnessCodecUpdatesDispatcherAsInterface = ILoudnessCodecUpdatesDispatcher.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerLoudnessCodecUpdatesDispatcher(asInterface48);
+                    registerLoudnessCodecUpdatesDispatcher(iLoudnessCodecUpdatesDispatcherAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 267:
-                    ILoudnessCodecUpdatesDispatcher asInterface49 = ILoudnessCodecUpdatesDispatcher.Stub.asInterface(parcel.readStrongBinder());
+                    ILoudnessCodecUpdatesDispatcher iLoudnessCodecUpdatesDispatcherAsInterface2 = ILoudnessCodecUpdatesDispatcher.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterLoudnessCodecUpdatesDispatcher(asInterface49);
+                    unregisterLoudnessCodecUpdatesDispatcher(iLoudnessCodecUpdatesDispatcherAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 268:
-                    int readInt61 = parcel.readInt();
+                    int i63 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    startLoudnessCodecUpdates(readInt61);
+                    startLoudnessCodecUpdates(i63);
                     parcel2.writeNoException();
                     return true;
                 case 269:
-                    int readInt62 = parcel.readInt();
+                    int i64 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    stopLoudnessCodecUpdates(readInt62);
+                    stopLoudnessCodecUpdates(i64);
                     parcel2.writeNoException();
                     return true;
                 case 270:
                     return onTransact$addLoudnessCodecInfo$(parcel, parcel2);
                 case 271:
-                    int readInt63 = parcel.readInt();
+                    int i65 = parcel.readInt();
                     LoudnessCodecInfo loudnessCodecInfo = (LoudnessCodecInfo) parcel.readTypedObject(LoudnessCodecInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    removeLoudnessCodecInfo(readInt63, loudnessCodecInfo);
+                    removeLoudnessCodecInfo(i65, loudnessCodecInfo);
                     parcel2.writeNoException();
                     return true;
                 case 272:
@@ -4762,9 +4762,9 @@ public interface IAudioService extends IInterface {
                     parcel2.writeInt(fadeManagerConfigurationForFocusLoss);
                     return true;
                 case 274:
-                    int clearFadeManagerConfigurationForFocusLoss = clearFadeManagerConfigurationForFocusLoss();
+                    int iClearFadeManagerConfigurationForFocusLoss = clearFadeManagerConfigurationForFocusLoss();
                     parcel2.writeNoException();
-                    parcel2.writeInt(clearFadeManagerConfigurationForFocusLoss);
+                    parcel2.writeInt(iClearFadeManagerConfigurationForFocusLoss);
                     return true;
                 case 275:
                     FadeManagerConfiguration fadeManagerConfigurationForFocusLoss2 = getFadeManagerConfigurationForFocusLoss();
@@ -4774,90 +4774,90 @@ public interface IAudioService extends IInterface {
                 case 276:
                     AudioAttributes audioAttributes9 = (AudioAttributes) parcel.readTypedObject(AudioAttributes.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean shouldNotificationSoundPlay = shouldNotificationSoundPlay(audioAttributes9);
+                    boolean zShouldNotificationSoundPlay = shouldNotificationSoundPlay(audioAttributes9);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(shouldNotificationSoundPlay);
+                    parcel2.writeBoolean(zShouldNotificationSoundPlay);
                     return true;
                 case 277:
-                    boolean readBoolean30 = parcel.readBoolean();
+                    boolean z30 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setEnableHardening(readBoolean30);
+                    setEnableHardening(z30);
                     parcel2.writeNoException();
                     return true;
                 case 278:
-                    String readString9 = parcel.readString();
+                    String string9 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    setAudioServiceConfig(readString9);
+                    setAudioServiceConfig(string9);
                     parcel2.writeNoException();
                     return true;
                 case 279:
-                    String readString10 = parcel.readString();
+                    String string10 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String audioServiceConfig = getAudioServiceConfig(readString10);
+                    String audioServiceConfig = getAudioServiceConfig(string10);
                     parcel2.writeNoException();
                     parcel2.writeString(audioServiceConfig);
                     return true;
                 case 280:
-                    boolean shouldShowRingtoneVolume = shouldShowRingtoneVolume();
+                    boolean zShouldShowRingtoneVolume = shouldShowRingtoneVolume();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(shouldShowRingtoneVolume);
+                    parcel2.writeBoolean(zShouldShowRingtoneVolume);
                     return true;
                 case 281:
-                    int readInt64 = parcel.readInt();
+                    int i66 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int secGetActiveStreamType = secGetActiveStreamType(readInt64);
+                    int iSecGetActiveStreamType = secGetActiveStreamType(i66);
                     parcel2.writeNoException();
-                    parcel2.writeInt(secGetActiveStreamType);
+                    parcel2.writeInt(iSecGetActiveStreamType);
                     return true;
                 case 282:
-                    int readInt65 = parcel.readInt();
+                    int i67 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int uidForDevice = getUidForDevice(readInt65);
+                    int uidForDevice = getUidForDevice(i67);
                     parcel2.writeNoException();
                     parcel2.writeInt(uidForDevice);
                     return true;
                 case 283:
                     return onTransact$setAppDevice$(parcel, parcel2);
                 case 284:
-                    int readInt66 = parcel.readInt();
+                    int i68 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int appDevice = getAppDevice(readInt66);
+                    int appDevice = getAppDevice(i68);
                     parcel2.writeNoException();
                     parcel2.writeInt(appDevice);
                     return true;
                 case 285:
                     return onTransact$setAppVolume$(parcel, parcel2);
                 case 286:
-                    int readInt67 = parcel.readInt();
+                    int i69 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int appVolume = getAppVolume(readInt67);
+                    int appVolume = getAppVolume(i69);
                     parcel2.writeNoException();
                     parcel2.writeInt(appVolume);
                     return true;
                 case 287:
                     return onTransact$setAppMute$(parcel, parcel2);
                 case 288:
-                    int readInt68 = parcel.readInt();
+                    int i70 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isAppMute = isAppMute(readInt68);
+                    boolean zIsAppMute = isAppMute(i70);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isAppMute);
+                    parcel2.writeBoolean(zIsAppMute);
                     return true;
                 case 289:
                     return onTransact$setMultiSoundOn$(parcel, parcel2);
                 case 290:
-                    boolean isMultiSoundOn = isMultiSoundOn();
+                    boolean zIsMultiSoundOn = isMultiSoundOn();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isMultiSoundOn);
+                    parcel2.writeBoolean(zIsMultiSoundOn);
                     return true;
                 case 291:
                     return onTransact$setStreamVolumeForDeviceWithAttribution$(parcel, parcel2);
                 case 292:
                     return onTransact$getStreamVolumeForDevice$(parcel, parcel2);
                 case 293:
-                    int readInt69 = parcel.readInt();
+                    int i71 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    String pinAppInfo = getPinAppInfo(readInt69);
+                    String pinAppInfo = getPinAppInfo(i71);
                     parcel2.writeNoException();
                     parcel2.writeString(pinAppInfo);
                     return true;
@@ -4874,39 +4874,39 @@ public interface IAudioService extends IInterface {
                 case 296:
                     return onTransact$addPackage$(parcel, parcel2);
                 case 297:
-                    String readString11 = parcel.readString();
+                    String string11 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    removePackageForName(readString11);
+                    removePackageForName(string11);
                     parcel2.writeNoException();
                     return true;
                 case 298:
-                    String readString12 = parcel.readString();
+                    String string12 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isAlreadyInDB = isAlreadyInDB(readString12);
+                    boolean zIsAlreadyInDB = isAlreadyInDB(string12);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isAlreadyInDB);
+                    parcel2.writeBoolean(zIsAlreadyInDB);
                     return true;
                 case 299:
-                    String readString13 = parcel.readString();
+                    String string13 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isInAllowedList = isInAllowedList(readString13);
+                    boolean zIsInAllowedList = isInAllowedList(string13);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isInAllowedList);
+                    parcel2.writeBoolean(zIsInAllowedList);
                     return true;
                 case 300:
                     return onTransact$setFineVolume$(parcel, parcel2);
                 case 301:
                     return onTransact$getFineVolume$(parcel, parcel2);
                 case 302:
-                    boolean readBoolean31 = parcel.readBoolean();
+                    boolean z31 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setForceSpeakerOn(readBoolean31);
+                    setForceSpeakerOn(z31);
                     parcel2.writeNoException();
                     return true;
                 case 303:
-                    boolean isForceSpeakerOn = isForceSpeakerOn();
+                    boolean zIsForceSpeakerOn = isForceSpeakerOn();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isForceSpeakerOn);
+                    parcel2.writeBoolean(zIsForceSpeakerOn);
                     return true;
                 case 304:
                     return onTransact$setDeviceToForceByUser$(parcel, parcel2);
@@ -4930,9 +4930,9 @@ public interface IAudioService extends IInterface {
                 case 309:
                     return onTransact$setSoundSettingEventBroadcastIntent$(parcel, parcel2);
                 case 310:
-                    int[] createIntArray6 = parcel.createIntArray();
+                    int[] iArrCreateIntArray6 = parcel.createIntArray();
                     parcel.enforceNoDataAvail();
-                    boolean mediaVolumeSteps = setMediaVolumeSteps(createIntArray6);
+                    boolean mediaVolumeSteps = setMediaVolumeSteps(iArrCreateIntArray6);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(mediaVolumeSteps);
                     return true;
@@ -4942,9 +4942,9 @@ public interface IAudioService extends IInterface {
                     parcel2.writeIntArray(mediaVolumeSteps2);
                     return true;
                 case 312:
-                    int readInt70 = parcel.readInt();
+                    int i72 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setRadioOutputPath(readInt70);
+                    setRadioOutputPath(i72);
                     parcel2.writeNoException();
                     return true;
                 case 313:
@@ -4962,11 +4962,11 @@ public interface IAudioService extends IInterface {
                     parcel2.writeString(currentAudioFocusPackageName);
                     return true;
                 case 316:
-                    int readInt71 = parcel.readInt();
+                    int i73 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isUsingAudio = isUsingAudio(readInt71);
+                    boolean zIsUsingAudio = isUsingAudio(i73);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isUsingAudio);
+                    parcel2.writeBoolean(zIsUsingAudio);
                     return true;
                 case 317:
                     return onTransact$setA2dpDeviceVolume$(parcel, parcel2);
@@ -4978,33 +4978,33 @@ public interface IAudioService extends IInterface {
                     parcel2.writeFloatArray(floatVolumeTable);
                     return true;
                 case 320:
-                    boolean readBoolean32 = parcel.readBoolean();
+                    boolean z32 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setRemoteMic(readBoolean32);
+                    setRemoteMic(z32);
                     parcel2.writeNoException();
                     return true;
                 case 321:
-                    String readString14 = parcel.readString();
+                    String string14 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    recordRingtoneChanger(readString14);
+                    recordRingtoneChanger(string14);
                     return true;
                 case 322:
                     return onTransact$registerPlaybackCallbackWithPackage$(parcel, parcel2);
                 case 323:
-                    int readInt72 = parcel.readInt();
+                    int i74 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setBtOffloadEnable(readInt72);
+                    setBtOffloadEnable(i74);
                     parcel2.writeNoException();
                     return true;
                 case 324:
-                    boolean isSafeMediaVolumeStateActive = isSafeMediaVolumeStateActive();
+                    boolean zIsSafeMediaVolumeStateActive = isSafeMediaVolumeStateActive();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSafeMediaVolumeStateActive);
+                    parcel2.writeBoolean(zIsSafeMediaVolumeStateActive);
                     return true;
                 case 325:
-                    int readInt73 = parcel.readInt();
+                    int i75 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<String> excludedRingtoneTitles = getExcludedRingtoneTitles(readInt73);
+                    List<String> excludedRingtoneTitles = getExcludedRingtoneTitles(i75);
                     parcel2.writeNoException();
                     parcel2.writeStringList(excludedRingtoneTitles);
                     return true;
@@ -5016,9 +5016,9 @@ public interface IAudioService extends IInterface {
                     parcel2.writeInt(modeInternal);
                     return true;
                 case 328:
-                    int readInt74 = parcel.readInt();
+                    int i76 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setMicInputControlMode(readInt74);
+                    setMicInputControlMode(i76);
                     parcel2.writeNoException();
                     return true;
                 case 329:
@@ -5054,5163 +5054,5163 @@ public interface IAudioService extends IInterface {
 
             @Override // android.media.IAudioService
             public IAudioManagerNative getNativeInterface() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IAudioManagerNative.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IAudioManagerNative.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int trackPlayer(PlayerBase.PlayerIdCard playerIdCard) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(playerIdCard, 0);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(playerIdCard, 0);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void playerAttributes(int i, AudioAttributes audioAttributes) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(audioAttributes, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(audioAttributes, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void playerEvent(int i, int i2, int[] iArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeIntArray(iArr);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeIntArray(iArr);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void releasePlayer(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int trackRecorder(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void recorderEvent(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void releaseRecorder(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void playerSessionId(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void portEvent(int i, int i2, PersistableBundle persistableBundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(persistableBundle, 0);
-                    this.mRemote.transact(10, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(persistableBundle, 0);
+                    this.mRemote.transact(10, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void permissionUpdateBarrier() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void adjustStreamVolume(int i, int i2, int i3, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeString(str);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void adjustStreamVolumeWithAttribution(int i, int i2, int i3, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setStreamVolume(int i, int i2, int i3, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeString(str);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setStreamVolumeWithAttribution(int i, int i2, int i3, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setDeviceVolume(VolumeInfo volumeInfo, AudioDeviceAttributes audioDeviceAttributes, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(volumeInfo, 0);
-                    obtain.writeTypedObject(audioDeviceAttributes, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(volumeInfo, 0);
+                    parcelObtain.writeTypedObject(audioDeviceAttributes, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public VolumeInfo getDeviceVolume(VolumeInfo volumeInfo, AudioDeviceAttributes audioDeviceAttributes, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(volumeInfo, 0);
-                    obtain.writeTypedObject(audioDeviceAttributes, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (VolumeInfo) obtain2.readTypedObject(VolumeInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(volumeInfo, 0);
+                    parcelObtain.writeTypedObject(audioDeviceAttributes, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (VolumeInfo) parcelObtain2.readTypedObject(VolumeInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void handleVolumeKey(KeyEvent keyEvent, boolean z, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(keyEvent, 0);
-                    obtain.writeBoolean(z);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(18, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(keyEvent, 0);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(18, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean isStreamMute(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void forceRemoteSubmixFullVolume(boolean z, IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean isMasterMute() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setMasterMute(boolean z, int i, String str, int i2, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int getStreamVolume(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int getStreamMinVolume(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int getStreamMaxVolume(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public List<android.media.audiopolicy.AudioVolumeGroup> getAudioVolumeGroups() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(26, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(android.media.audiopolicy.AudioVolumeGroup.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(26, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(android.media.audiopolicy.AudioVolumeGroup.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setVolumeGroupVolumeIndex(int i, int i2, int i3, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(27, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(27, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int getVolumeGroupVolumeIndex(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(28, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(28, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int getVolumeGroupMaxVolumeIndex(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(29, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(29, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int getVolumeGroupMinVolumeIndex(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(30, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(30, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int getLastAudibleVolumeForVolumeGroup(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(31, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(31, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean isVolumeGroupMuted(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(32, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(32, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void adjustVolumeGroupVolume(int i, int i2, int i3, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeString(str);
-                    this.mRemote.transact(33, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(33, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int getLastAudibleStreamVolume(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(34, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(34, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setSupportedSystemUsages(int[] iArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeIntArray(iArr);
-                    this.mRemote.transact(35, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeIntArray(iArr);
+                    this.mRemote.transact(35, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int[] getSupportedSystemUsages() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(36, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createIntArray();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(36, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createIntArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public List<android.media.audiopolicy.AudioProductStrategy> getAudioProductStrategies() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(37, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(android.media.audiopolicy.AudioProductStrategy.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(37, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(android.media.audiopolicy.AudioProductStrategy.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean isMicrophoneMuted() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(38, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(38, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean isUltrasoundSupported() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(39, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(39, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean isHotwordStreamSupported(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(40, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(40, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setMicrophoneMute(boolean z, String str, int i, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(41, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(41, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setInputGainIndex(AudioDeviceAttributes audioDeviceAttributes, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(audioDeviceAttributes, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(42, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(audioDeviceAttributes, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(42, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int getInputGainIndex(AudioDeviceAttributes audioDeviceAttributes) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(audioDeviceAttributes, 0);
-                    this.mRemote.transact(43, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(audioDeviceAttributes, 0);
+                    this.mRemote.transact(43, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int getMaxInputGainIndex() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(44, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(44, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int getMinInputGainIndex() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(45, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(45, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean isInputGainFixed(AudioDeviceAttributes audioDeviceAttributes) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(audioDeviceAttributes, 0);
-                    this.mRemote.transact(46, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(audioDeviceAttributes, 0);
+                    this.mRemote.transact(46, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setMicrophoneMuteFromSwitch(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(47, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(47, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setRingerModeExternal(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(48, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(48, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setRingerModeInternal(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(49, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(49, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int getRingerModeExternal() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(50, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(50, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int getRingerModeInternal() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(51, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(51, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean isValidRingerMode(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(52, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(52, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setVibrateSetting(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(53, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(53, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int getVibrateSetting(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(54, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(54, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean shouldVibrate(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(55, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(55, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setMode(int i, IBinder iBinder, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeString(str);
-                    this.mRemote.transact(56, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(56, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int getMode() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(57, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(57, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void playSoundEffect(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(58, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(58, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void playSoundEffectVolume(int i, float f) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeFloat(f);
-                    this.mRemote.transact(59, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeFloat(f);
+                    this.mRemote.transact(59, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean loadSoundEffects() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(60, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(60, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void unloadSoundEffects() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(61, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(61, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void reloadAudioSettings() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(62, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(62, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public Map getSurroundFormats() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(63, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readHashMap(getClass().getClassLoader());
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(63, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readHashMap(getClass().getClassLoader());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public List getReportedSurroundFormats() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(64, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readArrayList(getClass().getClassLoader());
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(64, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readArrayList(getClass().getClassLoader());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean setSurroundFormatEnabled(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(65, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(65, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean isSurroundFormatEnabled(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(66, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(66, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean setEncodedSurroundMode(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(67, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(67, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int getEncodedSurroundMode(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(68, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(68, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setSpeakerphoneOn(IBinder iBinder, boolean z, AttributionSource attributionSource) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeBoolean(z);
-                    obtain.writeTypedObject(attributionSource, 0);
-                    this.mRemote.transact(69, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeTypedObject(attributionSource, 0);
+                    this.mRemote.transact(69, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean isSpeakerphoneOn() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(70, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(70, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setBluetoothScoOn(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(71, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(71, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setA2dpSuspended(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(72, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(72, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setLeAudioSuspended(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(73, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(73, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean isBluetoothScoOn() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(74, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(74, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setBluetoothA2dpOn(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(75, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(75, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean isBluetoothA2dpOn() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(76, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(76, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int requestAudioFocus(AudioAttributes audioAttributes, int i, IBinder iBinder, IAudioFocusDispatcher iAudioFocusDispatcher, String str, String str2, String str3, int i2, IAudioPolicyCallback iAudioPolicyCallback, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(audioAttributes, 0);
-                    obtain.writeInt(i);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeStrongInterface(iAudioFocusDispatcher);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeInt(i2);
-                    obtain.writeStrongInterface(iAudioPolicyCallback);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(77, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(audioAttributes, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeStrongInterface(iAudioFocusDispatcher);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeStrongInterface(iAudioPolicyCallback);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(77, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int abandonAudioFocus(IAudioFocusDispatcher iAudioFocusDispatcher, String str, AudioAttributes audioAttributes, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAudioFocusDispatcher);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(audioAttributes, 0);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(78, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAudioFocusDispatcher);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(audioAttributes, 0);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(78, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void unregisterAudioFocusClient(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(79, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(79, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int getCurrentAudioFocus() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(80, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(80, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void startBluetoothSco(IBinder iBinder, int i, AttributionSource attributionSource) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(attributionSource, 0);
-                    this.mRemote.transact(81, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(attributionSource, 0);
+                    this.mRemote.transact(81, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void startBluetoothScoVirtualCall(IBinder iBinder, AttributionSource attributionSource) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(attributionSource, 0);
-                    this.mRemote.transact(82, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(attributionSource, 0);
+                    this.mRemote.transact(82, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void stopBluetoothSco(IBinder iBinder, AttributionSource attributionSource) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(attributionSource, 0);
-                    this.mRemote.transact(83, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(attributionSource, 0);
+                    this.mRemote.transact(83, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void forceVolumeControlStream(int i, IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(84, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(84, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setRingtonePlayer(IRingtonePlayer iRingtonePlayer) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iRingtonePlayer);
-                    this.mRemote.transact(85, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iRingtonePlayer);
+                    this.mRemote.transact(85, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public IRingtonePlayer getRingtonePlayer() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(86, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IRingtonePlayer.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(86, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IRingtonePlayer.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int getUiSoundsStreamType() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(87, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(87, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public List getIndependentStreamTypes() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(88, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readArrayList(getClass().getClassLoader());
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(88, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readArrayList(getClass().getClassLoader());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int getStreamTypeAlias(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(89, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(89, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean isVolumeControlUsingVolumeGroups() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(90, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(90, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void registerStreamAliasingDispatcher(IStreamAliasingDispatcher iStreamAliasingDispatcher, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iStreamAliasingDispatcher);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(91, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iStreamAliasingDispatcher);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(91, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setNotifAliasRingForTest(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(92, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(92, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setWiredDeviceConnectionState(AudioDeviceAttributes audioDeviceAttributes, int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(audioDeviceAttributes, 0);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(93, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(audioDeviceAttributes, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(93, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public AudioRoutesInfo startWatchingRoutes(IAudioRoutesObserver iAudioRoutesObserver) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAudioRoutesObserver);
-                    this.mRemote.transact(94, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (AudioRoutesInfo) obtain2.readTypedObject(AudioRoutesInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAudioRoutesObserver);
+                    this.mRemote.transact(94, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (AudioRoutesInfo) parcelObtain2.readTypedObject(AudioRoutesInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean isCameraSoundForced() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(95, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(95, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setVolumeController(IVolumeController iVolumeController) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iVolumeController);
-                    this.mRemote.transact(96, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iVolumeController);
+                    this.mRemote.transact(96, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public IVolumeController getVolumeController() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(97, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IVolumeController.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(97, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IVolumeController.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void notifyVolumeControllerVisible(IVolumeController iVolumeController, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iVolumeController);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(98, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iVolumeController);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(98, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setVolumeControllerLongPressTimeoutEnabled(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(99, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(99, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean isStreamAffectedByRingerMode(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(100, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(100, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean isStreamAffectedByMute(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(101, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(101, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean isStreamMutableByUi(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(102, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(102, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void disableSafeMediaVolume(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(103, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(103, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void lowerVolumeToRs1(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(104, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(104, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public float getOutputRs2UpperBound() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(105, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readFloat();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(105, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readFloat();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setOutputRs2UpperBound(float f) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeFloat(f);
-                    this.mRemote.transact(106, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeFloat(f);
+                    this.mRemote.transact(106, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public float getCsd() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(107, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readFloat();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(107, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readFloat();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setCsd(float f) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeFloat(f);
-                    this.mRemote.transact(108, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeFloat(f);
+                    this.mRemote.transact(108, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void forceUseFrameworkMel(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(109, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(109, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void forceComputeCsdOnAllDevices(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(110, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(110, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean isCsdEnabled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(111, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(111, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean isCsdAsAFeatureAvailable() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(112, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(112, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean isCsdAsAFeatureEnabled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(113, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(113, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setCsdAsAFeatureEnabled(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(114, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(114, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean setBluetoothAudioDeviceCategory(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(115, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(115, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int getBluetoothAudioDeviceCategory(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(116, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(116, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean isBluetoothAudioDeviceCategoryFixed(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(117, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(117, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int setHdmiSystemAudioSupported(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(118, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(118, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean isHdmiSystemAudioSupported() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(119, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(119, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public String registerAudioPolicy(android.media.audiopolicy.AudioPolicyConfig audioPolicyConfig, IAudioPolicyCallback iAudioPolicyCallback, boolean z, boolean z2, boolean z3, boolean z4, IMediaProjection iMediaProjection, AttributionSource attributionSource) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(audioPolicyConfig, 0);
-                    obtain.writeStrongInterface(iAudioPolicyCallback);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    obtain.writeBoolean(z3);
-                    obtain.writeBoolean(z4);
-                    obtain.writeStrongInterface(iMediaProjection);
-                    obtain.writeTypedObject(attributionSource, 0);
-                    this.mRemote.transact(120, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(audioPolicyConfig, 0);
+                    parcelObtain.writeStrongInterface(iAudioPolicyCallback);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    parcelObtain.writeBoolean(z3);
+                    parcelObtain.writeBoolean(z4);
+                    parcelObtain.writeStrongInterface(iMediaProjection);
+                    parcelObtain.writeTypedObject(attributionSource, 0);
+                    this.mRemote.transact(120, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void unregisterAudioPolicyAsync(IAudioPolicyCallback iAudioPolicyCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAudioPolicyCallback);
-                    this.mRemote.transact(121, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAudioPolicyCallback);
+                    this.mRemote.transact(121, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public List<android.media.audiopolicy.AudioMix> getRegisteredPolicyMixes() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(122, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(android.media.audiopolicy.AudioMix.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(122, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(android.media.audiopolicy.AudioMix.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void unregisterAudioPolicy(IAudioPolicyCallback iAudioPolicyCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAudioPolicyCallback);
-                    this.mRemote.transact(123, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAudioPolicyCallback);
+                    this.mRemote.transact(123, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int addMixForPolicy(android.media.audiopolicy.AudioPolicyConfig audioPolicyConfig, IAudioPolicyCallback iAudioPolicyCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(audioPolicyConfig, 0);
-                    obtain.writeStrongInterface(iAudioPolicyCallback);
-                    this.mRemote.transact(124, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(audioPolicyConfig, 0);
+                    parcelObtain.writeStrongInterface(iAudioPolicyCallback);
+                    this.mRemote.transact(124, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int removeMixForPolicy(android.media.audiopolicy.AudioPolicyConfig audioPolicyConfig, IAudioPolicyCallback iAudioPolicyCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(audioPolicyConfig, 0);
-                    obtain.writeStrongInterface(iAudioPolicyCallback);
-                    this.mRemote.transact(125, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(audioPolicyConfig, 0);
+                    parcelObtain.writeStrongInterface(iAudioPolicyCallback);
+                    this.mRemote.transact(125, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int updateMixingRulesForPolicy(android.media.audiopolicy.AudioMix[] audioMixArr, AudioMixingRule[] audioMixingRuleArr, IAudioPolicyCallback iAudioPolicyCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedArray(audioMixArr, 0);
-                    obtain.writeTypedArray(audioMixingRuleArr, 0);
-                    obtain.writeStrongInterface(iAudioPolicyCallback);
-                    this.mRemote.transact(126, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedArray(audioMixArr, 0);
+                    parcelObtain.writeTypedArray(audioMixingRuleArr, 0);
+                    parcelObtain.writeStrongInterface(iAudioPolicyCallback);
+                    this.mRemote.transact(126, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int setFocusPropertiesForPolicy(int i, IAudioPolicyCallback iAudioPolicyCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iAudioPolicyCallback);
-                    this.mRemote.transact(127, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iAudioPolicyCallback);
+                    this.mRemote.transact(127, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setVolumePolicy(VolumePolicy volumePolicy) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(volumePolicy, 0);
-                    this.mRemote.transact(128, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(volumePolicy, 0);
+                    this.mRemote.transact(128, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public VolumePolicy getVolumePolicy() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(129, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (VolumePolicy) obtain2.readTypedObject(VolumePolicy.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(129, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (VolumePolicy) parcelObtain2.readTypedObject(VolumePolicy.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean hasRegisteredDynamicPolicy() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(130, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(130, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void registerRecordingCallback(IRecordingConfigDispatcher iRecordingConfigDispatcher) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iRecordingConfigDispatcher);
-                    this.mRemote.transact(131, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iRecordingConfigDispatcher);
+                    this.mRemote.transact(131, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void unregisterRecordingCallback(IRecordingConfigDispatcher iRecordingConfigDispatcher) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iRecordingConfigDispatcher);
-                    this.mRemote.transact(132, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iRecordingConfigDispatcher);
+                    this.mRemote.transact(132, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public List<AudioRecordingConfiguration> getActiveRecordingConfigurations() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(133, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(AudioRecordingConfiguration.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(133, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(AudioRecordingConfiguration.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void registerPlaybackCallback(IPlaybackConfigDispatcher iPlaybackConfigDispatcher) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iPlaybackConfigDispatcher);
-                    this.mRemote.transact(134, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iPlaybackConfigDispatcher);
+                    this.mRemote.transact(134, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void unregisterPlaybackCallback(IPlaybackConfigDispatcher iPlaybackConfigDispatcher) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iPlaybackConfigDispatcher);
-                    this.mRemote.transact(135, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iPlaybackConfigDispatcher);
+                    this.mRemote.transact(135, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public List<AudioPlaybackConfiguration> getActivePlaybackConfigurations() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(136, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(AudioPlaybackConfiguration.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(136, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(AudioPlaybackConfiguration.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int getFocusRampTimeMs(int i, AudioAttributes audioAttributes) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(audioAttributes, 0);
-                    this.mRemote.transact(137, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(audioAttributes, 0);
+                    this.mRemote.transact(137, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int dispatchFocusChange(AudioFocusInfo audioFocusInfo, int i, IAudioPolicyCallback iAudioPolicyCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(audioFocusInfo, 0);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iAudioPolicyCallback);
-                    this.mRemote.transact(138, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(audioFocusInfo, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iAudioPolicyCallback);
+                    this.mRemote.transact(138, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int dispatchFocusChangeWithFade(AudioFocusInfo audioFocusInfo, int i, IAudioPolicyCallback iAudioPolicyCallback, List<AudioFocusInfo> list, FadeManagerConfiguration fadeManagerConfiguration) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(audioFocusInfo, 0);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iAudioPolicyCallback);
-                    obtain.writeTypedList(list, 0);
-                    obtain.writeTypedObject(fadeManagerConfiguration, 0);
-                    this.mRemote.transact(139, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(audioFocusInfo, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iAudioPolicyCallback);
+                    parcelObtain.writeTypedList(list, 0);
+                    parcelObtain.writeTypedObject(fadeManagerConfiguration, 0);
+                    this.mRemote.transact(139, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void playerHasOpPlayAudio(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(140, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(140, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void handleBluetoothActiveDeviceChanged(BluetoothDevice bluetoothDevice, BluetoothDevice bluetoothDevice2, BluetoothProfileConnectionInfo bluetoothProfileConnectionInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(bluetoothDevice, 0);
-                    obtain.writeTypedObject(bluetoothDevice2, 0);
-                    obtain.writeTypedObject(bluetoothProfileConnectionInfo, 0);
-                    this.mRemote.transact(141, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(bluetoothDevice, 0);
+                    parcelObtain.writeTypedObject(bluetoothDevice2, 0);
+                    parcelObtain.writeTypedObject(bluetoothProfileConnectionInfo, 0);
+                    this.mRemote.transact(141, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setFocusRequestResultFromExtPolicy(AudioFocusInfo audioFocusInfo, int i, IAudioPolicyCallback iAudioPolicyCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(audioFocusInfo, 0);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iAudioPolicyCallback);
-                    this.mRemote.transact(142, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(audioFocusInfo, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iAudioPolicyCallback);
+                    this.mRemote.transact(142, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void registerAudioServerStateDispatcher(IAudioServerStateDispatcher iAudioServerStateDispatcher) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAudioServerStateDispatcher);
-                    this.mRemote.transact(143, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAudioServerStateDispatcher);
+                    this.mRemote.transact(143, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void unregisterAudioServerStateDispatcher(IAudioServerStateDispatcher iAudioServerStateDispatcher) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAudioServerStateDispatcher);
-                    this.mRemote.transact(144, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAudioServerStateDispatcher);
+                    this.mRemote.transact(144, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean isAudioServerRunning() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(145, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(145, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void registerAudioVolumeCallback(IAudioVolumeChangeDispatcher iAudioVolumeChangeDispatcher) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAudioVolumeChangeDispatcher);
-                    this.mRemote.transact(146, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAudioVolumeChangeDispatcher);
+                    this.mRemote.transact(146, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void unregisterAudioVolumeCallback(IAudioVolumeChangeDispatcher iAudioVolumeChangeDispatcher) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAudioVolumeChangeDispatcher);
-                    this.mRemote.transact(147, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAudioVolumeChangeDispatcher);
+                    this.mRemote.transact(147, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int setUidDeviceAffinity(IAudioPolicyCallback iAudioPolicyCallback, int i, int[] iArr, String[] strArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAudioPolicyCallback);
-                    obtain.writeInt(i);
-                    obtain.writeIntArray(iArr);
-                    obtain.writeStringArray(strArr);
-                    this.mRemote.transact(148, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAudioPolicyCallback);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeIntArray(iArr);
+                    parcelObtain.writeStringArray(strArr);
+                    this.mRemote.transact(148, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int removeUidDeviceAffinity(IAudioPolicyCallback iAudioPolicyCallback, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAudioPolicyCallback);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(149, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAudioPolicyCallback);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(149, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int setUserIdDeviceAffinity(IAudioPolicyCallback iAudioPolicyCallback, int i, int[] iArr, String[] strArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAudioPolicyCallback);
-                    obtain.writeInt(i);
-                    obtain.writeIntArray(iArr);
-                    obtain.writeStringArray(strArr);
-                    this.mRemote.transact(150, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAudioPolicyCallback);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeIntArray(iArr);
+                    parcelObtain.writeStringArray(strArr);
+                    this.mRemote.transact(150, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int removeUserIdDeviceAffinity(IAudioPolicyCallback iAudioPolicyCallback, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAudioPolicyCallback);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(151, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAudioPolicyCallback);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(151, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean hasHapticChannels(Uri uri) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(uri, 0);
-                    this.mRemote.transact(152, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(uri, 0);
+                    this.mRemote.transact(152, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean isCallScreeningModeSupported() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(153, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(153, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int setPreferredDevicesForStrategy(int i, List<AudioDeviceAttributes> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(154, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(154, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int removePreferredDevicesForStrategy(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(155, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(155, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public List<AudioDeviceAttributes> getPreferredDevicesForStrategy(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(156, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(AudioDeviceAttributes.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(156, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(AudioDeviceAttributes.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int setDeviceAsNonDefaultForStrategy(int i, AudioDeviceAttributes audioDeviceAttributes) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(audioDeviceAttributes, 0);
-                    this.mRemote.transact(157, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(audioDeviceAttributes, 0);
+                    this.mRemote.transact(157, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int removeDeviceAsNonDefaultForStrategy(int i, AudioDeviceAttributes audioDeviceAttributes) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(audioDeviceAttributes, 0);
-                    this.mRemote.transact(158, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(audioDeviceAttributes, 0);
+                    this.mRemote.transact(158, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public List<AudioDeviceAttributes> getNonDefaultDevicesForStrategy(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(159, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(AudioDeviceAttributes.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(159, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(AudioDeviceAttributes.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public List<AudioDeviceAttributes> getDevicesForAttributes(AudioAttributes audioAttributes) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(audioAttributes, 0);
-                    this.mRemote.transact(160, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(AudioDeviceAttributes.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(audioAttributes, 0);
+                    this.mRemote.transact(160, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(AudioDeviceAttributes.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public List<AudioDeviceAttributes> getDevicesForAttributesUnprotected(AudioAttributes audioAttributes) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(audioAttributes, 0);
-                    this.mRemote.transact(161, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(AudioDeviceAttributes.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(audioAttributes, 0);
+                    this.mRemote.transact(161, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(AudioDeviceAttributes.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void addOnDevicesForAttributesChangedListener(AudioAttributes audioAttributes, IDevicesForAttributesCallback iDevicesForAttributesCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(audioAttributes, 0);
-                    obtain.writeStrongInterface(iDevicesForAttributesCallback);
-                    this.mRemote.transact(162, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(audioAttributes, 0);
+                    parcelObtain.writeStrongInterface(iDevicesForAttributesCallback);
+                    this.mRemote.transact(162, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void removeOnDevicesForAttributesChangedListener(IDevicesForAttributesCallback iDevicesForAttributesCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iDevicesForAttributesCallback);
-                    this.mRemote.transact(163, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iDevicesForAttributesCallback);
+                    this.mRemote.transact(163, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int setAllowedCapturePolicy(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(164, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(164, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int getAllowedCapturePolicy() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(165, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(165, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void registerStrategyPreferredDevicesDispatcher(IStrategyPreferredDevicesDispatcher iStrategyPreferredDevicesDispatcher) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iStrategyPreferredDevicesDispatcher);
-                    this.mRemote.transact(166, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iStrategyPreferredDevicesDispatcher);
+                    this.mRemote.transact(166, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void unregisterStrategyPreferredDevicesDispatcher(IStrategyPreferredDevicesDispatcher iStrategyPreferredDevicesDispatcher) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iStrategyPreferredDevicesDispatcher);
-                    this.mRemote.transact(167, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iStrategyPreferredDevicesDispatcher);
+                    this.mRemote.transact(167, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void registerStrategyNonDefaultDevicesDispatcher(IStrategyNonDefaultDevicesDispatcher iStrategyNonDefaultDevicesDispatcher) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iStrategyNonDefaultDevicesDispatcher);
-                    this.mRemote.transact(168, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iStrategyNonDefaultDevicesDispatcher);
+                    this.mRemote.transact(168, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void unregisterStrategyNonDefaultDevicesDispatcher(IStrategyNonDefaultDevicesDispatcher iStrategyNonDefaultDevicesDispatcher) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iStrategyNonDefaultDevicesDispatcher);
-                    this.mRemote.transact(169, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iStrategyNonDefaultDevicesDispatcher);
+                    this.mRemote.transact(169, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setRttEnabled(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(170, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(170, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setDeviceVolumeBehavior(AudioDeviceAttributes audioDeviceAttributes, int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(audioDeviceAttributes, 0);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(171, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(audioDeviceAttributes, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(171, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int getDeviceVolumeBehavior(AudioDeviceAttributes audioDeviceAttributes) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(audioDeviceAttributes, 0);
-                    this.mRemote.transact(172, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(audioDeviceAttributes, 0);
+                    this.mRemote.transact(172, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setMultiAudioFocusEnabled(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(173, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(173, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int setPreferredDevicesForCapturePreset(int i, List<AudioDeviceAttributes> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(174, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(174, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int clearPreferredDevicesForCapturePreset(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(175, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(175, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public List<AudioDeviceAttributes> getPreferredDevicesForCapturePreset(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(176, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(AudioDeviceAttributes.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(176, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(AudioDeviceAttributes.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void registerCapturePresetDevicesRoleDispatcher(ICapturePresetDevicesRoleDispatcher iCapturePresetDevicesRoleDispatcher) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iCapturePresetDevicesRoleDispatcher);
-                    this.mRemote.transact(177, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iCapturePresetDevicesRoleDispatcher);
+                    this.mRemote.transact(177, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void unregisterCapturePresetDevicesRoleDispatcher(ICapturePresetDevicesRoleDispatcher iCapturePresetDevicesRoleDispatcher) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iCapturePresetDevicesRoleDispatcher);
-                    this.mRemote.transact(178, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iCapturePresetDevicesRoleDispatcher);
+                    this.mRemote.transact(178, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void adjustStreamVolumeForUid(int i, int i2, int i3, String str, int i4, int i5, UserHandle userHandle, int i6) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeString(str);
-                    obtain.writeInt(i4);
-                    obtain.writeInt(i5);
-                    obtain.writeTypedObject(userHandle, 0);
-                    obtain.writeInt(i6);
-                    this.mRemote.transact(179, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i4);
+                    parcelObtain.writeInt(i5);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    parcelObtain.writeInt(i6);
+                    this.mRemote.transact(179, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void adjustSuggestedStreamVolumeForUid(int i, int i2, int i3, String str, int i4, int i5, UserHandle userHandle, int i6) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeString(str);
-                    obtain.writeInt(i4);
-                    obtain.writeInt(i5);
-                    obtain.writeTypedObject(userHandle, 0);
-                    obtain.writeInt(i6);
-                    this.mRemote.transact(180, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i4);
+                    parcelObtain.writeInt(i5);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    parcelObtain.writeInt(i6);
+                    this.mRemote.transact(180, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setStreamVolumeForUid(int i, int i2, int i3, String str, int i4, int i5, UserHandle userHandle, int i6) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeString(str);
-                    obtain.writeInt(i4);
-                    obtain.writeInt(i5);
-                    obtain.writeTypedObject(userHandle, 0);
-                    obtain.writeInt(i6);
-                    this.mRemote.transact(181, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i4);
+                    parcelObtain.writeInt(i5);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    parcelObtain.writeInt(i6);
+                    this.mRemote.transact(181, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void adjustVolume(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(182, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(182, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void adjustSuggestedStreamVolume(int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(183, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(183, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean isMusicActive(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(184, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(184, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int getDeviceMaskForStream(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(185, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(185, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int[] getAvailableCommunicationDeviceIds() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(186, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createIntArray();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(186, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createIntArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean setCommunicationDevice(IBinder iBinder, int i, AttributionSource attributionSource) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(attributionSource, 0);
-                    this.mRemote.transact(187, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(attributionSource, 0);
+                    this.mRemote.transact(187, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int getCommunicationDevice() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(188, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(188, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void registerCommunicationDeviceDispatcher(ICommunicationDeviceDispatcher iCommunicationDeviceDispatcher) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iCommunicationDeviceDispatcher);
-                    this.mRemote.transact(189, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iCommunicationDeviceDispatcher);
+                    this.mRemote.transact(189, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void unregisterCommunicationDeviceDispatcher(ICommunicationDeviceDispatcher iCommunicationDeviceDispatcher) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iCommunicationDeviceDispatcher);
-                    this.mRemote.transact(190, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iCommunicationDeviceDispatcher);
+                    this.mRemote.transact(190, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean areNavigationRepeatSoundEffectsEnabled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(191, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(191, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setNavigationRepeatSoundEffectsEnabled(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(192, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(192, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean isHomeSoundEffectEnabled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(193, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(193, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setHomeSoundEffectEnabled(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(194, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(194, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean setAdditionalOutputDeviceDelay(AudioDeviceAttributes audioDeviceAttributes, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(audioDeviceAttributes, 0);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(195, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(audioDeviceAttributes, 0);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(195, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public long getAdditionalOutputDeviceDelay(AudioDeviceAttributes audioDeviceAttributes) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(audioDeviceAttributes, 0);
-                    this.mRemote.transact(196, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(audioDeviceAttributes, 0);
+                    this.mRemote.transact(196, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public long getMaxAdditionalOutputDeviceDelay(AudioDeviceAttributes audioDeviceAttributes) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(audioDeviceAttributes, 0);
-                    this.mRemote.transact(197, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(audioDeviceAttributes, 0);
+                    this.mRemote.transact(197, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int requestAudioFocusForTest(AudioAttributes audioAttributes, int i, IBinder iBinder, IAudioFocusDispatcher iAudioFocusDispatcher, String str, String str2, int i2, int i3, int i4) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(audioAttributes, 0);
-                    obtain.writeInt(i);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeStrongInterface(iAudioFocusDispatcher);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeInt(i4);
-                    this.mRemote.transact(198, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(audioAttributes, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeStrongInterface(iAudioFocusDispatcher);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeInt(i4);
+                    this.mRemote.transact(198, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int abandonAudioFocusForTest(IAudioFocusDispatcher iAudioFocusDispatcher, String str, AudioAttributes audioAttributes, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAudioFocusDispatcher);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(audioAttributes, 0);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(199, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAudioFocusDispatcher);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(audioAttributes, 0);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(199, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public long getFadeOutDurationOnFocusLossMillis(AudioAttributes audioAttributes) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(audioAttributes, 0);
-                    this.mRemote.transact(200, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(audioAttributes, 0);
+                    this.mRemote.transact(200, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public List getFocusDuckedUidsForTest() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(201, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readArrayList(getClass().getClassLoader());
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(201, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readArrayList(getClass().getClassLoader());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public long getFocusFadeOutDurationForTest() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(202, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(202, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public long getFocusUnmuteDelayAfterFadeOutForTest() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(203, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(203, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean enterAudioFocusFreezeForTest(IBinder iBinder, int[] iArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeIntArray(iArr);
-                    this.mRemote.transact(204, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeIntArray(iArr);
+                    this.mRemote.transact(204, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean exitAudioFocusFreezeForTest(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(205, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(205, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void registerModeDispatcher(IAudioModeDispatcher iAudioModeDispatcher) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAudioModeDispatcher);
-                    this.mRemote.transact(206, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAudioModeDispatcher);
+                    this.mRemote.transact(206, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void unregisterModeDispatcher(IAudioModeDispatcher iAudioModeDispatcher) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAudioModeDispatcher);
-                    this.mRemote.transact(207, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAudioModeDispatcher);
+                    this.mRemote.transact(207, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int getSpatializerImmersiveAudioLevel() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(208, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(208, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean isSpatializerEnabled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(209, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(209, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean isSpatializerAvailable() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(210, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(210, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean isSpatializerAvailableForDevice(AudioDeviceAttributes audioDeviceAttributes) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(audioDeviceAttributes, 0);
-                    this.mRemote.transact(211, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(audioDeviceAttributes, 0);
+                    this.mRemote.transact(211, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean hasHeadTracker(AudioDeviceAttributes audioDeviceAttributes) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(audioDeviceAttributes, 0);
-                    this.mRemote.transact(212, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(audioDeviceAttributes, 0);
+                    this.mRemote.transact(212, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setHeadTrackerEnabled(boolean z, AudioDeviceAttributes audioDeviceAttributes) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeTypedObject(audioDeviceAttributes, 0);
-                    this.mRemote.transact(213, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeTypedObject(audioDeviceAttributes, 0);
+                    this.mRemote.transact(213, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean isHeadTrackerEnabled(AudioDeviceAttributes audioDeviceAttributes) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(audioDeviceAttributes, 0);
-                    this.mRemote.transact(214, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(audioDeviceAttributes, 0);
+                    this.mRemote.transact(214, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean isHeadTrackerAvailable() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(215, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(215, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void registerSpatializerHeadTrackerAvailableCallback(ISpatializerHeadTrackerAvailableCallback iSpatializerHeadTrackerAvailableCallback, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSpatializerHeadTrackerAvailableCallback);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(216, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSpatializerHeadTrackerAvailableCallback);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(216, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setSpatializerEnabled(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(217, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(217, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean canBeSpatialized(AudioAttributes audioAttributes, AudioFormat audioFormat) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(audioAttributes, 0);
-                    obtain.writeTypedObject(audioFormat, 0);
-                    this.mRemote.transact(218, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(audioAttributes, 0);
+                    parcelObtain.writeTypedObject(audioFormat, 0);
+                    this.mRemote.transact(218, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public List getSpatializedChannelMasks() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(219, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readArrayList(getClass().getClassLoader());
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(219, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readArrayList(getClass().getClassLoader());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void registerSpatializerCallback(ISpatializerCallback iSpatializerCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSpatializerCallback);
-                    this.mRemote.transact(220, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSpatializerCallback);
+                    this.mRemote.transact(220, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void unregisterSpatializerCallback(ISpatializerCallback iSpatializerCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSpatializerCallback);
-                    this.mRemote.transact(221, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSpatializerCallback);
+                    this.mRemote.transact(221, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void registerSpatializerHeadTrackingCallback(ISpatializerHeadTrackingModeCallback iSpatializerHeadTrackingModeCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSpatializerHeadTrackingModeCallback);
-                    this.mRemote.transact(222, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSpatializerHeadTrackingModeCallback);
+                    this.mRemote.transact(222, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void unregisterSpatializerHeadTrackingCallback(ISpatializerHeadTrackingModeCallback iSpatializerHeadTrackingModeCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSpatializerHeadTrackingModeCallback);
-                    this.mRemote.transact(223, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSpatializerHeadTrackingModeCallback);
+                    this.mRemote.transact(223, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void registerHeadToSoundstagePoseCallback(ISpatializerHeadToSoundStagePoseCallback iSpatializerHeadToSoundStagePoseCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSpatializerHeadToSoundStagePoseCallback);
-                    this.mRemote.transact(224, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSpatializerHeadToSoundStagePoseCallback);
+                    this.mRemote.transact(224, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void unregisterHeadToSoundstagePoseCallback(ISpatializerHeadToSoundStagePoseCallback iSpatializerHeadToSoundStagePoseCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSpatializerHeadToSoundStagePoseCallback);
-                    this.mRemote.transact(225, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSpatializerHeadToSoundStagePoseCallback);
+                    this.mRemote.transact(225, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public List<AudioDeviceAttributes> getSpatializerCompatibleAudioDevices() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(226, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(AudioDeviceAttributes.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(226, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(AudioDeviceAttributes.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void addSpatializerCompatibleAudioDevice(AudioDeviceAttributes audioDeviceAttributes) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(audioDeviceAttributes, 0);
-                    this.mRemote.transact(227, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(audioDeviceAttributes, 0);
+                    this.mRemote.transact(227, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void removeSpatializerCompatibleAudioDevice(AudioDeviceAttributes audioDeviceAttributes) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(audioDeviceAttributes, 0);
-                    this.mRemote.transact(228, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(audioDeviceAttributes, 0);
+                    this.mRemote.transact(228, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setDesiredHeadTrackingMode(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(229, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(229, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int getDesiredHeadTrackingMode() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(230, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(230, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int[] getSupportedHeadTrackingModes() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(231, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createIntArray();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(231, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createIntArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int getActualHeadTrackingMode() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(232, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(232, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setSpatializerGlobalTransform(float[] fArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeFloatArray(fArr);
-                    this.mRemote.transact(233, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeFloatArray(fArr);
+                    this.mRemote.transact(233, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void recenterHeadTracker() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(234, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(234, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setSpatializerParameter(int i, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(235, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(235, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void getSpatializerParameter(int i, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(236, obtain, obtain2, 0);
-                    obtain2.readException();
-                    obtain2.readByteArray(bArr);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(236, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    parcelObtain2.readByteArray(bArr);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int getSpatializerOutput() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(237, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(237, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void registerSpatializerOutputCallback(ISpatializerOutputCallback iSpatializerOutputCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSpatializerOutputCallback);
-                    this.mRemote.transact(238, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSpatializerOutputCallback);
+                    this.mRemote.transact(238, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void unregisterSpatializerOutputCallback(ISpatializerOutputCallback iSpatializerOutputCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSpatializerOutputCallback);
-                    this.mRemote.transact(239, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSpatializerOutputCallback);
+                    this.mRemote.transact(239, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean isVolumeFixed() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(240, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(240, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public VolumeInfo getDefaultVolumeInfo() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(241, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (VolumeInfo) obtain2.readTypedObject(VolumeInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(241, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (VolumeInfo) parcelObtain2.readTypedObject(VolumeInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean isPstnCallAudioInterceptable() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(242, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(242, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void muteAwaitConnection(int[] iArr, AudioDeviceAttributes audioDeviceAttributes, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeIntArray(iArr);
-                    obtain.writeTypedObject(audioDeviceAttributes, 0);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(243, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeIntArray(iArr);
+                    parcelObtain.writeTypedObject(audioDeviceAttributes, 0);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(243, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void cancelMuteAwaitConnection(AudioDeviceAttributes audioDeviceAttributes) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(audioDeviceAttributes, 0);
-                    this.mRemote.transact(244, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(audioDeviceAttributes, 0);
+                    this.mRemote.transact(244, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public AudioDeviceAttributes getMutingExpectedDevice() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(245, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (AudioDeviceAttributes) obtain2.readTypedObject(AudioDeviceAttributes.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(245, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (AudioDeviceAttributes) parcelObtain2.readTypedObject(AudioDeviceAttributes.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void registerMuteAwaitConnectionDispatcher(IMuteAwaitConnectionCallback iMuteAwaitConnectionCallback, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iMuteAwaitConnectionCallback);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(246, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iMuteAwaitConnectionCallback);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(246, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setTestDeviceConnectionState(AudioDeviceAttributes audioDeviceAttributes, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(audioDeviceAttributes, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(247, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(audioDeviceAttributes, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(247, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void registerDeviceVolumeBehaviorDispatcher(boolean z, IDeviceVolumeBehaviorDispatcher iDeviceVolumeBehaviorDispatcher) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeStrongInterface(iDeviceVolumeBehaviorDispatcher);
-                    this.mRemote.transact(248, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeStrongInterface(iDeviceVolumeBehaviorDispatcher);
+                    this.mRemote.transact(248, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public List<AudioFocusInfo> getFocusStack() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(249, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(AudioFocusInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(249, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(AudioFocusInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void sendFocusLossAndUpdate(AudioFocusInfo audioFocusInfo, IAudioPolicyCallback iAudioPolicyCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(audioFocusInfo, 0);
-                    obtain.writeStrongInterface(iAudioPolicyCallback);
-                    this.mRemote.transact(250, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(audioFocusInfo, 0);
+                    parcelObtain.writeStrongInterface(iAudioPolicyCallback);
+                    this.mRemote.transact(250, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean sendFocusLoss(AudioFocusInfo audioFocusInfo, IAudioPolicyCallback iAudioPolicyCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(audioFocusInfo, 0);
-                    obtain.writeStrongInterface(iAudioPolicyCallback);
-                    this.mRemote.transact(251, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(audioFocusInfo, 0);
+                    parcelObtain.writeStrongInterface(iAudioPolicyCallback);
+                    this.mRemote.transact(251, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void addAssistantServicesUids(int[] iArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeIntArray(iArr);
-                    this.mRemote.transact(252, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeIntArray(iArr);
+                    this.mRemote.transact(252, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void removeAssistantServicesUids(int[] iArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeIntArray(iArr);
-                    this.mRemote.transact(253, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeIntArray(iArr);
+                    this.mRemote.transact(253, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setActiveAssistantServiceUids(int[] iArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeIntArray(iArr);
-                    this.mRemote.transact(254, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeIntArray(iArr);
+                    this.mRemote.transact(254, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int[] getAssistantServicesUids() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(255, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createIntArray();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(255, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createIntArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int[] getActiveAssistantServiceUids() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(256, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createIntArray();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(256, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createIntArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void registerDeviceVolumeDispatcherForAbsoluteVolume(boolean z, IAudioDeviceVolumeDispatcher iAudioDeviceVolumeDispatcher, String str, AudioDeviceAttributes audioDeviceAttributes, List<VolumeInfo> list, boolean z2, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeStrongInterface(iAudioDeviceVolumeDispatcher);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(audioDeviceAttributes, 0);
-                    obtain.writeTypedList(list, 0);
-                    obtain.writeBoolean(z2);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(257, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeStrongInterface(iAudioDeviceVolumeDispatcher);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(audioDeviceAttributes, 0);
+                    parcelObtain.writeTypedList(list, 0);
+                    parcelObtain.writeBoolean(z2);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(257, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public AudioHalVersionInfo getHalVersion() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(258, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (AudioHalVersionInfo) obtain2.readTypedObject(AudioHalVersionInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(258, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (AudioHalVersionInfo) parcelObtain2.readTypedObject(AudioHalVersionInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int setPreferredMixerAttributes(AudioAttributes audioAttributes, int i, AudioMixerAttributes audioMixerAttributes) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(audioAttributes, 0);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(audioMixerAttributes, 0);
-                    this.mRemote.transact(259, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(audioAttributes, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(audioMixerAttributes, 0);
+                    this.mRemote.transact(259, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int clearPreferredMixerAttributes(AudioAttributes audioAttributes, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(audioAttributes, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(260, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(audioAttributes, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(260, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void registerPreferredMixerAttributesDispatcher(IPreferredMixerAttributesDispatcher iPreferredMixerAttributesDispatcher) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iPreferredMixerAttributesDispatcher);
-                    this.mRemote.transact(261, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iPreferredMixerAttributesDispatcher);
+                    this.mRemote.transact(261, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void unregisterPreferredMixerAttributesDispatcher(IPreferredMixerAttributesDispatcher iPreferredMixerAttributesDispatcher) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iPreferredMixerAttributesDispatcher);
-                    this.mRemote.transact(262, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iPreferredMixerAttributesDispatcher);
+                    this.mRemote.transact(262, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean supportsBluetoothVariableLatency() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(263, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(263, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setBluetoothVariableLatencyEnabled(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(264, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(264, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean isBluetoothVariableLatencyEnabled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(265, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(265, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void registerLoudnessCodecUpdatesDispatcher(ILoudnessCodecUpdatesDispatcher iLoudnessCodecUpdatesDispatcher) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iLoudnessCodecUpdatesDispatcher);
-                    this.mRemote.transact(266, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iLoudnessCodecUpdatesDispatcher);
+                    this.mRemote.transact(266, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void unregisterLoudnessCodecUpdatesDispatcher(ILoudnessCodecUpdatesDispatcher iLoudnessCodecUpdatesDispatcher) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iLoudnessCodecUpdatesDispatcher);
-                    this.mRemote.transact(267, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iLoudnessCodecUpdatesDispatcher);
+                    this.mRemote.transact(267, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void startLoudnessCodecUpdates(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(268, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(268, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void stopLoudnessCodecUpdates(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(269, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(269, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void addLoudnessCodecInfo(int i, int i2, LoudnessCodecInfo loudnessCodecInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(loudnessCodecInfo, 0);
-                    this.mRemote.transact(270, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(loudnessCodecInfo, 0);
+                    this.mRemote.transact(270, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void removeLoudnessCodecInfo(int i, LoudnessCodecInfo loudnessCodecInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(loudnessCodecInfo, 0);
-                    this.mRemote.transact(271, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(loudnessCodecInfo, 0);
+                    this.mRemote.transact(271, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public PersistableBundle getLoudnessParams(LoudnessCodecInfo loudnessCodecInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(loudnessCodecInfo, 0);
-                    this.mRemote.transact(272, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (PersistableBundle) obtain2.readTypedObject(PersistableBundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(loudnessCodecInfo, 0);
+                    this.mRemote.transact(272, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (PersistableBundle) parcelObtain2.readTypedObject(PersistableBundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int setFadeManagerConfigurationForFocusLoss(FadeManagerConfiguration fadeManagerConfiguration) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(fadeManagerConfiguration, 0);
-                    this.mRemote.transact(273, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(fadeManagerConfiguration, 0);
+                    this.mRemote.transact(273, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int clearFadeManagerConfigurationForFocusLoss() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(274, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(274, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public FadeManagerConfiguration getFadeManagerConfigurationForFocusLoss() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(275, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (FadeManagerConfiguration) obtain2.readTypedObject(FadeManagerConfiguration.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(275, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (FadeManagerConfiguration) parcelObtain2.readTypedObject(FadeManagerConfiguration.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean shouldNotificationSoundPlay(AudioAttributes audioAttributes) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(audioAttributes, 0);
-                    this.mRemote.transact(276, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(audioAttributes, 0);
+                    this.mRemote.transact(276, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setEnableHardening(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(277, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(277, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setAudioServiceConfig(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(278, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(278, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public String getAudioServiceConfig(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(279, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(279, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean shouldShowRingtoneVolume() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(280, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(280, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int secGetActiveStreamType(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(281, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(281, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int getUidForDevice(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(282, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(282, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setAppDevice(int i, int i2, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(283, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(283, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int getAppDevice(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(284, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(284, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setAppVolume(int i, int i2, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str);
-                    this.mRemote.transact(285, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(285, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int getAppVolume(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(286, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(286, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setAppMute(int i, boolean z, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    obtain.writeString(str);
-                    this.mRemote.transact(287, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(287, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean isAppMute(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(288, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(288, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setMultiSoundOn(boolean z, boolean z2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    this.mRemote.transact(289, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    this.mRemote.transact(289, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean isMultiSoundOn() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(290, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(290, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setStreamVolumeForDeviceWithAttribution(int i, int i2, int i3, String str, String str2, int i4) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i4);
-                    this.mRemote.transact(291, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i4);
+                    this.mRemote.transact(291, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int getStreamVolumeForDevice(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(292, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(292, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public String getPinAppInfo(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(293, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(293, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int getPinDevice() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(294, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(294, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public String[] getSelectedAppList() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(295, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArray();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(295, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void addPackage(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(296, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(296, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void removePackageForName(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(297, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(297, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean isAlreadyInDB(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(298, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(298, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean isInAllowedList(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(299, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(299, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setFineVolume(int i, int i2, int i3, int i4, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeInt(i4);
-                    obtain.writeString(str);
-                    this.mRemote.transact(300, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeInt(i4);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(300, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int getFineVolume(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(301, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(301, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setForceSpeakerOn(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(302, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(302, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean isForceSpeakerOn() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(303, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(303, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int setDeviceToForceByUser(int i, String str, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(304, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(304, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setMuteInterval(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(305, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(305, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int getMuteInterval() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(306, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(306, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int getRemainingMuteIntervalMs() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(307, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(307, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int getPrevRingerMode() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(308, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(308, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setSoundSettingEventBroadcastIntent(int i, PendingIntent pendingIntent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(pendingIntent, 0);
-                    this.mRemote.transact(309, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(pendingIntent, 0);
+                    this.mRemote.transact(309, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean setMediaVolumeSteps(int[] iArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeIntArray(iArr);
-                    this.mRemote.transact(310, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeIntArray(iArr);
+                    this.mRemote.transact(310, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int[] getMediaVolumeSteps() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(311, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createIntArray();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(311, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createIntArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setRadioOutputPath(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(312, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(312, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int getRadioOutputPath() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(313, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(313, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void dismissVolumePanel() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(314, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(314, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public String getCurrentAudioFocusPackageName() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(315, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(315, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean isUsingAudio(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(316, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(316, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setA2dpDeviceVolume(BluetoothDevice bluetoothDevice, int i, int i2, int i3, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(bluetoothDevice, 0);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeString(str);
-                    this.mRemote.transact(317, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(bluetoothDevice, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(317, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int getA2dpDeviceVolume(BluetoothDevice bluetoothDevice, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(bluetoothDevice, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(318, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(bluetoothDevice, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(318, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public float[] getFloatVolumeTable() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(319, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createFloatArray();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(319, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createFloatArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setRemoteMic(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(320, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(320, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void recordRingtoneChanger(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(321, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(321, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void registerPlaybackCallbackWithPackage(IPlaybackConfigDispatcher iPlaybackConfigDispatcher, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iPlaybackConfigDispatcher);
-                    obtain.writeString(str);
-                    this.mRemote.transact(322, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iPlaybackConfigDispatcher);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(322, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setBtOffloadEnable(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(323, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(323, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public boolean isSafeMediaVolumeStateActive() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(324, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(324, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public List<String> getExcludedRingtoneTitles(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(325, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(325, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void notifySafetyVolumeDialogVisible(IVolumeController iVolumeController, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iVolumeController);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(326, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iVolumeController);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(326, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int getModeInternal() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(327, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(327, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public void setMicInputControlMode(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(328, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(328, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int getMicModeType() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(329, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(329, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IAudioService
             public int getEarProtectLimit() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(330, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(330, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
 
         private boolean onTransact$playerEvent$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
-            int[] createIntArray = parcel.createIntArray();
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
+            int[] iArrCreateIntArray = parcel.createIntArray();
             parcel.enforceNoDataAvail();
-            playerEvent(readInt, readInt2, createIntArray);
+            playerEvent(i, i2, iArrCreateIntArray);
             return true;
         }
 
         private boolean onTransact$portEvent$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
             PersistableBundle persistableBundle = (PersistableBundle) parcel.readTypedObject(PersistableBundle.CREATOR);
             parcel.enforceNoDataAvail();
-            portEvent(readInt, readInt2, persistableBundle);
+            portEvent(i, i2, persistableBundle);
             return true;
         }
 
         private boolean onTransact$adjustStreamVolume$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
-            int readInt3 = parcel.readInt();
-            String readString = parcel.readString();
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
+            int i3 = parcel.readInt();
+            String string = parcel.readString();
             parcel.enforceNoDataAvail();
-            adjustStreamVolume(readInt, readInt2, readInt3, readString);
+            adjustStreamVolume(i, i2, i3, string);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$adjustStreamVolumeWithAttribution$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
-            int readInt3 = parcel.readInt();
-            String readString = parcel.readString();
-            String readString2 = parcel.readString();
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
+            int i3 = parcel.readInt();
+            String string = parcel.readString();
+            String string2 = parcel.readString();
             parcel.enforceNoDataAvail();
-            adjustStreamVolumeWithAttribution(readInt, readInt2, readInt3, readString, readString2);
+            adjustStreamVolumeWithAttribution(i, i2, i3, string, string2);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$setStreamVolume$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
-            int readInt3 = parcel.readInt();
-            String readString = parcel.readString();
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
+            int i3 = parcel.readInt();
+            String string = parcel.readString();
             parcel.enforceNoDataAvail();
-            setStreamVolume(readInt, readInt2, readInt3, readString);
+            setStreamVolume(i, i2, i3, string);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$setStreamVolumeWithAttribution$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
-            int readInt3 = parcel.readInt();
-            String readString = parcel.readString();
-            String readString2 = parcel.readString();
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
+            int i3 = parcel.readInt();
+            String string = parcel.readString();
+            String string2 = parcel.readString();
             parcel.enforceNoDataAvail();
-            setStreamVolumeWithAttribution(readInt, readInt2, readInt3, readString, readString2);
+            setStreamVolumeWithAttribution(i, i2, i3, string, string2);
             parcel2.writeNoException();
             return true;
         }
@@ -10218,9 +10218,9 @@ public interface IAudioService extends IInterface {
         private boolean onTransact$setDeviceVolume$(Parcel parcel, Parcel parcel2) throws RemoteException {
             VolumeInfo volumeInfo = (VolumeInfo) parcel.readTypedObject(VolumeInfo.CREATOR);
             AudioDeviceAttributes audioDeviceAttributes = (AudioDeviceAttributes) parcel.readTypedObject(AudioDeviceAttributes.CREATOR);
-            String readString = parcel.readString();
+            String string = parcel.readString();
             parcel.enforceNoDataAvail();
-            setDeviceVolume(volumeInfo, audioDeviceAttributes, readString);
+            setDeviceVolume(volumeInfo, audioDeviceAttributes, string);
             parcel2.writeNoException();
             return true;
         }
@@ -10232,9 +10232,9 @@ public interface IAudioService extends IInterface {
         private boolean onTransact$getDeviceVolume$(Parcel parcel, Parcel parcel2) throws RemoteException {
             VolumeInfo volumeInfo = (VolumeInfo) parcel.readTypedObject(VolumeInfo.CREATOR);
             AudioDeviceAttributes audioDeviceAttributes = (AudioDeviceAttributes) parcel.readTypedObject(AudioDeviceAttributes.CREATOR);
-            String readString = parcel.readString();
+            String string = parcel.readString();
             parcel.enforceNoDataAvail();
-            VolumeInfo deviceVolume = getDeviceVolume(volumeInfo, audioDeviceAttributes, readString);
+            VolumeInfo deviceVolume = getDeviceVolume(volumeInfo, audioDeviceAttributes, string);
             parcel2.writeNoException();
             parcel2.writeTypedObject(deviceVolume, 1);
             return true;
@@ -10246,22 +10246,22 @@ public interface IAudioService extends IInterface {
 
         private boolean onTransact$handleVolumeKey$(Parcel parcel, Parcel parcel2) throws RemoteException {
             KeyEvent keyEvent = (KeyEvent) parcel.readTypedObject(KeyEvent.CREATOR);
-            boolean readBoolean = parcel.readBoolean();
-            String readString = parcel.readString();
-            String readString2 = parcel.readString();
+            boolean z = parcel.readBoolean();
+            String string = parcel.readString();
+            String string2 = parcel.readString();
             parcel.enforceNoDataAvail();
-            handleVolumeKey(keyEvent, readBoolean, readString, readString2);
+            handleVolumeKey(keyEvent, z, string, string2);
             return true;
         }
 
         private boolean onTransact$setMasterMute$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            boolean readBoolean = parcel.readBoolean();
-            int readInt = parcel.readInt();
-            String readString = parcel.readString();
-            int readInt2 = parcel.readInt();
-            String readString2 = parcel.readString();
+            boolean z = parcel.readBoolean();
+            int i = parcel.readInt();
+            String string = parcel.readString();
+            int i2 = parcel.readInt();
+            String string2 = parcel.readString();
             parcel.enforceNoDataAvail();
-            setMasterMute(readBoolean, readInt, readString, readInt2, readString2);
+            setMasterMute(z, i, string, i2, string2);
             parcel2.writeNoException();
             return true;
         }
@@ -10275,13 +10275,13 @@ public interface IAudioService extends IInterface {
         }
 
         private boolean onTransact$setVolumeGroupVolumeIndex$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
-            int readInt3 = parcel.readInt();
-            String readString = parcel.readString();
-            String readString2 = parcel.readString();
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
+            int i3 = parcel.readInt();
+            String string = parcel.readString();
+            String string2 = parcel.readString();
             parcel.enforceNoDataAvail();
-            setVolumeGroupVolumeIndex(readInt, readInt2, readInt3, readString, readString2);
+            setVolumeGroupVolumeIndex(i, i2, i3, string, string2);
             parcel2.writeNoException();
             return true;
         }
@@ -10307,12 +10307,12 @@ public interface IAudioService extends IInterface {
         }
 
         private boolean onTransact$adjustVolumeGroupVolume$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
-            int readInt3 = parcel.readInt();
-            String readString = parcel.readString();
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
+            int i3 = parcel.readInt();
+            String string = parcel.readString();
             parcel.enforceNoDataAvail();
-            adjustVolumeGroupVolume(readInt, readInt2, readInt3, readString);
+            adjustVolumeGroupVolume(i, i2, i3, string);
             parcel2.writeNoException();
             return true;
         }
@@ -10342,12 +10342,12 @@ public interface IAudioService extends IInterface {
         }
 
         private boolean onTransact$setMicrophoneMute$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            boolean readBoolean = parcel.readBoolean();
-            String readString = parcel.readString();
-            int readInt = parcel.readInt();
-            String readString2 = parcel.readString();
+            boolean z = parcel.readBoolean();
+            String string = parcel.readString();
+            int i = parcel.readInt();
+            String string2 = parcel.readString();
             parcel.enforceNoDataAvail();
-            setMicrophoneMute(readBoolean, readString, readInt, readString2);
+            setMicrophoneMute(z, string, i, string2);
             parcel2.writeNoException();
             return true;
         }
@@ -10373,11 +10373,11 @@ public interface IAudioService extends IInterface {
         }
 
         private boolean onTransact$setMode$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            int readInt = parcel.readInt();
-            IBinder readStrongBinder = parcel.readStrongBinder();
-            String readString = parcel.readString();
+            int i = parcel.readInt();
+            IBinder strongBinder = parcel.readStrongBinder();
+            String string = parcel.readString();
             parcel.enforceNoDataAvail();
-            setMode(readInt, readStrongBinder, readString);
+            setMode(i, strongBinder, string);
             parcel2.writeNoException();
             return true;
         }
@@ -10387,11 +10387,11 @@ public interface IAudioService extends IInterface {
         }
 
         private boolean onTransact$setSpeakerphoneOn$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            IBinder readStrongBinder = parcel.readStrongBinder();
-            boolean readBoolean = parcel.readBoolean();
+            IBinder strongBinder = parcel.readStrongBinder();
+            boolean z = parcel.readBoolean();
             AttributionSource attributionSource = (AttributionSource) parcel.readTypedObject(AttributionSource.CREATOR);
             parcel.enforceNoDataAvail();
-            setSpeakerphoneOn(readStrongBinder, readBoolean, attributionSource);
+            setSpeakerphoneOn(strongBinder, z, attributionSource);
             parcel2.writeNoException();
             return true;
         }
@@ -10406,40 +10406,40 @@ public interface IAudioService extends IInterface {
 
         private boolean onTransact$requestAudioFocus$(Parcel parcel, Parcel parcel2) throws RemoteException {
             AudioAttributes audioAttributes = (AudioAttributes) parcel.readTypedObject(AudioAttributes.CREATOR);
-            int readInt = parcel.readInt();
-            IBinder readStrongBinder = parcel.readStrongBinder();
-            IAudioFocusDispatcher asInterface = IAudioFocusDispatcher.Stub.asInterface(parcel.readStrongBinder());
-            String readString = parcel.readString();
-            String readString2 = parcel.readString();
-            String readString3 = parcel.readString();
-            int readInt2 = parcel.readInt();
-            IAudioPolicyCallback asInterface2 = IAudioPolicyCallback.Stub.asInterface(parcel.readStrongBinder());
-            int readInt3 = parcel.readInt();
+            int i = parcel.readInt();
+            IBinder strongBinder = parcel.readStrongBinder();
+            IAudioFocusDispatcher iAudioFocusDispatcherAsInterface = IAudioFocusDispatcher.Stub.asInterface(parcel.readStrongBinder());
+            String string = parcel.readString();
+            String string2 = parcel.readString();
+            String string3 = parcel.readString();
+            int i2 = parcel.readInt();
+            IAudioPolicyCallback iAudioPolicyCallbackAsInterface = IAudioPolicyCallback.Stub.asInterface(parcel.readStrongBinder());
+            int i3 = parcel.readInt();
             parcel.enforceNoDataAvail();
-            int requestAudioFocus = requestAudioFocus(audioAttributes, readInt, readStrongBinder, asInterface, readString, readString2, readString3, readInt2, asInterface2, readInt3);
+            int iRequestAudioFocus = requestAudioFocus(audioAttributes, i, strongBinder, iAudioFocusDispatcherAsInterface, string, string2, string3, i2, iAudioPolicyCallbackAsInterface, i3);
             parcel2.writeNoException();
-            parcel2.writeInt(requestAudioFocus);
+            parcel2.writeInt(iRequestAudioFocus);
             return true;
         }
 
         private boolean onTransact$abandonAudioFocus$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            IAudioFocusDispatcher asInterface = IAudioFocusDispatcher.Stub.asInterface(parcel.readStrongBinder());
-            String readString = parcel.readString();
+            IAudioFocusDispatcher iAudioFocusDispatcherAsInterface = IAudioFocusDispatcher.Stub.asInterface(parcel.readStrongBinder());
+            String string = parcel.readString();
             AudioAttributes audioAttributes = (AudioAttributes) parcel.readTypedObject(AudioAttributes.CREATOR);
-            String readString2 = parcel.readString();
+            String string2 = parcel.readString();
             parcel.enforceNoDataAvail();
-            int abandonAudioFocus = abandonAudioFocus(asInterface, readString, audioAttributes, readString2);
+            int iAbandonAudioFocus = abandonAudioFocus(iAudioFocusDispatcherAsInterface, string, audioAttributes, string2);
             parcel2.writeNoException();
-            parcel2.writeInt(abandonAudioFocus);
+            parcel2.writeInt(iAbandonAudioFocus);
             return true;
         }
 
         private boolean onTransact$startBluetoothSco$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            IBinder readStrongBinder = parcel.readStrongBinder();
-            int readInt = parcel.readInt();
+            IBinder strongBinder = parcel.readStrongBinder();
+            int i = parcel.readInt();
             AttributionSource attributionSource = (AttributionSource) parcel.readTypedObject(AttributionSource.CREATOR);
             parcel.enforceNoDataAvail();
-            startBluetoothSco(readStrongBinder, readInt, attributionSource);
+            startBluetoothSco(strongBinder, i, attributionSource);
             parcel2.writeNoException();
             return true;
         }
@@ -10470,10 +10470,10 @@ public interface IAudioService extends IInterface {
 
         private boolean onTransact$setWiredDeviceConnectionState$(Parcel parcel, Parcel parcel2) throws RemoteException {
             AudioDeviceAttributes audioDeviceAttributes = (AudioDeviceAttributes) parcel.readTypedObject(AudioDeviceAttributes.CREATOR);
-            int readInt = parcel.readInt();
-            String readString = parcel.readString();
+            int i = parcel.readInt();
+            String string = parcel.readString();
             parcel.enforceNoDataAvail();
-            setWiredDeviceConnectionState(audioDeviceAttributes, readInt, readString);
+            setWiredDeviceConnectionState(audioDeviceAttributes, i, string);
             parcel2.writeNoException();
             return true;
         }
@@ -10540,28 +10540,28 @@ public interface IAudioService extends IInterface {
 
         private boolean onTransact$registerAudioPolicy$(Parcel parcel, Parcel parcel2) throws RemoteException {
             android.media.audiopolicy.AudioPolicyConfig audioPolicyConfig = (android.media.audiopolicy.AudioPolicyConfig) parcel.readTypedObject(android.media.audiopolicy.AudioPolicyConfig.CREATOR);
-            IAudioPolicyCallback asInterface = IAudioPolicyCallback.Stub.asInterface(parcel.readStrongBinder());
-            boolean readBoolean = parcel.readBoolean();
-            boolean readBoolean2 = parcel.readBoolean();
-            boolean readBoolean3 = parcel.readBoolean();
-            boolean readBoolean4 = parcel.readBoolean();
-            IMediaProjection asInterface2 = IMediaProjection.Stub.asInterface(parcel.readStrongBinder());
+            IAudioPolicyCallback iAudioPolicyCallbackAsInterface = IAudioPolicyCallback.Stub.asInterface(parcel.readStrongBinder());
+            boolean z = parcel.readBoolean();
+            boolean z2 = parcel.readBoolean();
+            boolean z3 = parcel.readBoolean();
+            boolean z4 = parcel.readBoolean();
+            IMediaProjection iMediaProjectionAsInterface = IMediaProjection.Stub.asInterface(parcel.readStrongBinder());
             AttributionSource attributionSource = (AttributionSource) parcel.readTypedObject(AttributionSource.CREATOR);
             parcel.enforceNoDataAvail();
-            String registerAudioPolicy = registerAudioPolicy(audioPolicyConfig, asInterface, readBoolean, readBoolean2, readBoolean3, readBoolean4, asInterface2, attributionSource);
+            String strRegisterAudioPolicy = registerAudioPolicy(audioPolicyConfig, iAudioPolicyCallbackAsInterface, z, z2, z3, z4, iMediaProjectionAsInterface, attributionSource);
             parcel2.writeNoException();
-            parcel2.writeString(registerAudioPolicy);
+            parcel2.writeString(strRegisterAudioPolicy);
             return true;
         }
 
         private boolean onTransact$updateMixingRulesForPolicy$(Parcel parcel, Parcel parcel2) throws RemoteException {
             android.media.audiopolicy.AudioMix[] audioMixArr = (android.media.audiopolicy.AudioMix[]) parcel.createTypedArray(android.media.audiopolicy.AudioMix.CREATOR);
             AudioMixingRule[] audioMixingRuleArr = (AudioMixingRule[]) parcel.createTypedArray(AudioMixingRule.CREATOR);
-            IAudioPolicyCallback asInterface = IAudioPolicyCallback.Stub.asInterface(parcel.readStrongBinder());
+            IAudioPolicyCallback iAudioPolicyCallbackAsInterface = IAudioPolicyCallback.Stub.asInterface(parcel.readStrongBinder());
             parcel.enforceNoDataAvail();
-            int updateMixingRulesForPolicy = updateMixingRulesForPolicy(audioMixArr, audioMixingRuleArr, asInterface);
+            int iUpdateMixingRulesForPolicy = updateMixingRulesForPolicy(audioMixArr, audioMixingRuleArr, iAudioPolicyCallbackAsInterface);
             parcel2.writeNoException();
-            parcel2.writeInt(updateMixingRulesForPolicy);
+            parcel2.writeInt(iUpdateMixingRulesForPolicy);
             return true;
         }
 
@@ -10571,25 +10571,25 @@ public interface IAudioService extends IInterface {
 
         private boolean onTransact$dispatchFocusChange$(Parcel parcel, Parcel parcel2) throws RemoteException {
             AudioFocusInfo audioFocusInfo = (AudioFocusInfo) parcel.readTypedObject(AudioFocusInfo.CREATOR);
-            int readInt = parcel.readInt();
-            IAudioPolicyCallback asInterface = IAudioPolicyCallback.Stub.asInterface(parcel.readStrongBinder());
+            int i = parcel.readInt();
+            IAudioPolicyCallback iAudioPolicyCallbackAsInterface = IAudioPolicyCallback.Stub.asInterface(parcel.readStrongBinder());
             parcel.enforceNoDataAvail();
-            int dispatchFocusChange = dispatchFocusChange(audioFocusInfo, readInt, asInterface);
+            int iDispatchFocusChange = dispatchFocusChange(audioFocusInfo, i, iAudioPolicyCallbackAsInterface);
             parcel2.writeNoException();
-            parcel2.writeInt(dispatchFocusChange);
+            parcel2.writeInt(iDispatchFocusChange);
             return true;
         }
 
         private boolean onTransact$dispatchFocusChangeWithFade$(Parcel parcel, Parcel parcel2) throws RemoteException {
             AudioFocusInfo audioFocusInfo = (AudioFocusInfo) parcel.readTypedObject(AudioFocusInfo.CREATOR);
-            int readInt = parcel.readInt();
-            IAudioPolicyCallback asInterface = IAudioPolicyCallback.Stub.asInterface(parcel.readStrongBinder());
-            ArrayList createTypedArrayList = parcel.createTypedArrayList(AudioFocusInfo.CREATOR);
+            int i = parcel.readInt();
+            IAudioPolicyCallback iAudioPolicyCallbackAsInterface = IAudioPolicyCallback.Stub.asInterface(parcel.readStrongBinder());
+            ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(AudioFocusInfo.CREATOR);
             FadeManagerConfiguration fadeManagerConfiguration = (FadeManagerConfiguration) parcel.readTypedObject(FadeManagerConfiguration.CREATOR);
             parcel.enforceNoDataAvail();
-            int dispatchFocusChangeWithFade = dispatchFocusChangeWithFade(audioFocusInfo, readInt, asInterface, createTypedArrayList, fadeManagerConfiguration);
+            int iDispatchFocusChangeWithFade = dispatchFocusChangeWithFade(audioFocusInfo, i, iAudioPolicyCallbackAsInterface, arrayListCreateTypedArrayList, fadeManagerConfiguration);
             parcel2.writeNoException();
-            parcel2.writeInt(dispatchFocusChangeWithFade);
+            parcel2.writeInt(iDispatchFocusChangeWithFade);
             return true;
         }
 
@@ -10613,32 +10613,32 @@ public interface IAudioService extends IInterface {
 
         private boolean onTransact$setFocusRequestResultFromExtPolicy$(Parcel parcel, Parcel parcel2) throws RemoteException {
             AudioFocusInfo audioFocusInfo = (AudioFocusInfo) parcel.readTypedObject(AudioFocusInfo.CREATOR);
-            int readInt = parcel.readInt();
-            IAudioPolicyCallback asInterface = IAudioPolicyCallback.Stub.asInterface(parcel.readStrongBinder());
+            int i = parcel.readInt();
+            IAudioPolicyCallback iAudioPolicyCallbackAsInterface = IAudioPolicyCallback.Stub.asInterface(parcel.readStrongBinder());
             parcel.enforceNoDataAvail();
-            setFocusRequestResultFromExtPolicy(audioFocusInfo, readInt, asInterface);
+            setFocusRequestResultFromExtPolicy(audioFocusInfo, i, iAudioPolicyCallbackAsInterface);
             return true;
         }
 
         private boolean onTransact$setUidDeviceAffinity$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            IAudioPolicyCallback asInterface = IAudioPolicyCallback.Stub.asInterface(parcel.readStrongBinder());
-            int readInt = parcel.readInt();
-            int[] createIntArray = parcel.createIntArray();
-            String[] createStringArray = parcel.createStringArray();
+            IAudioPolicyCallback iAudioPolicyCallbackAsInterface = IAudioPolicyCallback.Stub.asInterface(parcel.readStrongBinder());
+            int i = parcel.readInt();
+            int[] iArrCreateIntArray = parcel.createIntArray();
+            String[] strArrCreateStringArray = parcel.createStringArray();
             parcel.enforceNoDataAvail();
-            int uidDeviceAffinity = setUidDeviceAffinity(asInterface, readInt, createIntArray, createStringArray);
+            int uidDeviceAffinity = setUidDeviceAffinity(iAudioPolicyCallbackAsInterface, i, iArrCreateIntArray, strArrCreateStringArray);
             parcel2.writeNoException();
             parcel2.writeInt(uidDeviceAffinity);
             return true;
         }
 
         private boolean onTransact$setUserIdDeviceAffinity$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            IAudioPolicyCallback asInterface = IAudioPolicyCallback.Stub.asInterface(parcel.readStrongBinder());
-            int readInt = parcel.readInt();
-            int[] createIntArray = parcel.createIntArray();
-            String[] createStringArray = parcel.createStringArray();
+            IAudioPolicyCallback iAudioPolicyCallbackAsInterface = IAudioPolicyCallback.Stub.asInterface(parcel.readStrongBinder());
+            int i = parcel.readInt();
+            int[] iArrCreateIntArray = parcel.createIntArray();
+            String[] strArrCreateStringArray = parcel.createStringArray();
             parcel.enforceNoDataAvail();
-            int userIdDeviceAffinity = setUserIdDeviceAffinity(asInterface, readInt, createIntArray, createStringArray);
+            int userIdDeviceAffinity = setUserIdDeviceAffinity(iAudioPolicyCallbackAsInterface, i, iArrCreateIntArray, strArrCreateStringArray);
             parcel2.writeNoException();
             parcel2.writeInt(userIdDeviceAffinity);
             return true;
@@ -10674,10 +10674,10 @@ public interface IAudioService extends IInterface {
 
         private boolean onTransact$setDeviceVolumeBehavior$(Parcel parcel, Parcel parcel2) throws RemoteException {
             AudioDeviceAttributes audioDeviceAttributes = (AudioDeviceAttributes) parcel.readTypedObject(AudioDeviceAttributes.CREATOR);
-            int readInt = parcel.readInt();
-            String readString = parcel.readString();
+            int i = parcel.readInt();
+            String string = parcel.readString();
             parcel.enforceNoDataAvail();
-            setDeviceVolumeBehavior(audioDeviceAttributes, readInt, readString);
+            setDeviceVolumeBehavior(audioDeviceAttributes, i, string);
             parcel2.writeNoException();
             return true;
         }
@@ -10703,62 +10703,62 @@ public interface IAudioService extends IInterface {
         }
 
         private boolean onTransact$adjustStreamVolumeForUid$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
-            int readInt3 = parcel.readInt();
-            String readString = parcel.readString();
-            int readInt4 = parcel.readInt();
-            int readInt5 = parcel.readInt();
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
+            int i3 = parcel.readInt();
+            String string = parcel.readString();
+            int i4 = parcel.readInt();
+            int i5 = parcel.readInt();
             UserHandle userHandle = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
-            int readInt6 = parcel.readInt();
+            int i6 = parcel.readInt();
             parcel.enforceNoDataAvail();
-            adjustStreamVolumeForUid(readInt, readInt2, readInt3, readString, readInt4, readInt5, userHandle, readInt6);
+            adjustStreamVolumeForUid(i, i2, i3, string, i4, i5, userHandle, i6);
             return true;
         }
 
         private boolean onTransact$adjustSuggestedStreamVolumeForUid$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
-            int readInt3 = parcel.readInt();
-            String readString = parcel.readString();
-            int readInt4 = parcel.readInt();
-            int readInt5 = parcel.readInt();
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
+            int i3 = parcel.readInt();
+            String string = parcel.readString();
+            int i4 = parcel.readInt();
+            int i5 = parcel.readInt();
             UserHandle userHandle = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
-            int readInt6 = parcel.readInt();
+            int i6 = parcel.readInt();
             parcel.enforceNoDataAvail();
-            adjustSuggestedStreamVolumeForUid(readInt, readInt2, readInt3, readString, readInt4, readInt5, userHandle, readInt6);
+            adjustSuggestedStreamVolumeForUid(i, i2, i3, string, i4, i5, userHandle, i6);
             return true;
         }
 
         private boolean onTransact$setStreamVolumeForUid$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
-            int readInt3 = parcel.readInt();
-            String readString = parcel.readString();
-            int readInt4 = parcel.readInt();
-            int readInt5 = parcel.readInt();
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
+            int i3 = parcel.readInt();
+            String string = parcel.readString();
+            int i4 = parcel.readInt();
+            int i5 = parcel.readInt();
             UserHandle userHandle = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
-            int readInt6 = parcel.readInt();
+            int i6 = parcel.readInt();
             parcel.enforceNoDataAvail();
-            setStreamVolumeForUid(readInt, readInt2, readInt3, readString, readInt4, readInt5, userHandle, readInt6);
+            setStreamVolumeForUid(i, i2, i3, string, i4, i5, userHandle, i6);
             return true;
         }
 
         private boolean onTransact$adjustSuggestedStreamVolume$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
-            int readInt3 = parcel.readInt();
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
+            int i3 = parcel.readInt();
             parcel.enforceNoDataAvail();
-            adjustSuggestedStreamVolume(readInt, readInt2, readInt3);
+            adjustSuggestedStreamVolume(i, i2, i3);
             return true;
         }
 
         private boolean onTransact$setCommunicationDevice$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            IBinder readStrongBinder = parcel.readStrongBinder();
-            int readInt = parcel.readInt();
+            IBinder strongBinder = parcel.readStrongBinder();
+            int i = parcel.readInt();
             AttributionSource attributionSource = (AttributionSource) parcel.readTypedObject(AttributionSource.CREATOR);
             parcel.enforceNoDataAvail();
-            boolean communicationDevice = setCommunicationDevice(readStrongBinder, readInt, attributionSource);
+            boolean communicationDevice = setCommunicationDevice(strongBinder, i, attributionSource);
             parcel2.writeNoException();
             parcel2.writeBoolean(communicationDevice);
             return true;
@@ -10766,30 +10766,30 @@ public interface IAudioService extends IInterface {
 
         private boolean onTransact$requestAudioFocusForTest$(Parcel parcel, Parcel parcel2) throws RemoteException {
             AudioAttributes audioAttributes = (AudioAttributes) parcel.readTypedObject(AudioAttributes.CREATOR);
-            int readInt = parcel.readInt();
-            IBinder readStrongBinder = parcel.readStrongBinder();
-            IAudioFocusDispatcher asInterface = IAudioFocusDispatcher.Stub.asInterface(parcel.readStrongBinder());
-            String readString = parcel.readString();
-            String readString2 = parcel.readString();
-            int readInt2 = parcel.readInt();
-            int readInt3 = parcel.readInt();
-            int readInt4 = parcel.readInt();
+            int i = parcel.readInt();
+            IBinder strongBinder = parcel.readStrongBinder();
+            IAudioFocusDispatcher iAudioFocusDispatcherAsInterface = IAudioFocusDispatcher.Stub.asInterface(parcel.readStrongBinder());
+            String string = parcel.readString();
+            String string2 = parcel.readString();
+            int i2 = parcel.readInt();
+            int i3 = parcel.readInt();
+            int i4 = parcel.readInt();
             parcel.enforceNoDataAvail();
-            int requestAudioFocusForTest = requestAudioFocusForTest(audioAttributes, readInt, readStrongBinder, asInterface, readString, readString2, readInt2, readInt3, readInt4);
+            int iRequestAudioFocusForTest = requestAudioFocusForTest(audioAttributes, i, strongBinder, iAudioFocusDispatcherAsInterface, string, string2, i2, i3, i4);
             parcel2.writeNoException();
-            parcel2.writeInt(requestAudioFocusForTest);
+            parcel2.writeInt(iRequestAudioFocusForTest);
             return true;
         }
 
         private boolean onTransact$abandonAudioFocusForTest$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            IAudioFocusDispatcher asInterface = IAudioFocusDispatcher.Stub.asInterface(parcel.readStrongBinder());
-            String readString = parcel.readString();
+            IAudioFocusDispatcher iAudioFocusDispatcherAsInterface = IAudioFocusDispatcher.Stub.asInterface(parcel.readStrongBinder());
+            String string = parcel.readString();
             AudioAttributes audioAttributes = (AudioAttributes) parcel.readTypedObject(AudioAttributes.CREATOR);
-            String readString2 = parcel.readString();
+            String string2 = parcel.readString();
             parcel.enforceNoDataAvail();
-            int abandonAudioFocusForTest = abandonAudioFocusForTest(asInterface, readString, audioAttributes, readString2);
+            int iAbandonAudioFocusForTest = abandonAudioFocusForTest(iAudioFocusDispatcherAsInterface, string, audioAttributes, string2);
             parcel2.writeNoException();
-            parcel2.writeInt(abandonAudioFocusForTest);
+            parcel2.writeInt(iAbandonAudioFocusForTest);
             return true;
         }
 
@@ -10910,11 +10910,11 @@ public interface IAudioService extends IInterface {
         }
 
         private boolean onTransact$muteAwaitConnection$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            int[] createIntArray = parcel.createIntArray();
+            int[] iArrCreateIntArray = parcel.createIntArray();
             AudioDeviceAttributes audioDeviceAttributes = (AudioDeviceAttributes) parcel.readTypedObject(AudioDeviceAttributes.CREATOR);
-            long readLong = parcel.readLong();
+            long j = parcel.readLong();
             parcel.enforceNoDataAvail();
-            muteAwaitConnection(createIntArray, audioDeviceAttributes, readLong);
+            muteAwaitConnection(iArrCreateIntArray, audioDeviceAttributes, j);
             return true;
         }
 
@@ -10959,25 +10959,25 @@ public interface IAudioService extends IInterface {
         }
 
         private boolean onTransact$registerDeviceVolumeDispatcherForAbsoluteVolume$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            boolean readBoolean = parcel.readBoolean();
-            IAudioDeviceVolumeDispatcher asInterface = IAudioDeviceVolumeDispatcher.Stub.asInterface(parcel.readStrongBinder());
-            String readString = parcel.readString();
+            boolean z = parcel.readBoolean();
+            IAudioDeviceVolumeDispatcher iAudioDeviceVolumeDispatcherAsInterface = IAudioDeviceVolumeDispatcher.Stub.asInterface(parcel.readStrongBinder());
+            String string = parcel.readString();
             AudioDeviceAttributes audioDeviceAttributes = (AudioDeviceAttributes) parcel.readTypedObject(AudioDeviceAttributes.CREATOR);
-            ArrayList createTypedArrayList = parcel.createTypedArrayList(VolumeInfo.CREATOR);
-            boolean readBoolean2 = parcel.readBoolean();
-            int readInt = parcel.readInt();
+            ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(VolumeInfo.CREATOR);
+            boolean z2 = parcel.readBoolean();
+            int i = parcel.readInt();
             parcel.enforceNoDataAvail();
-            registerDeviceVolumeDispatcherForAbsoluteVolume(readBoolean, asInterface, readString, audioDeviceAttributes, createTypedArrayList, readBoolean2, readInt);
+            registerDeviceVolumeDispatcherForAbsoluteVolume(z, iAudioDeviceVolumeDispatcherAsInterface, string, audioDeviceAttributes, arrayListCreateTypedArrayList, z2, i);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$setPreferredMixerAttributes$(Parcel parcel, Parcel parcel2) throws RemoteException {
             AudioAttributes audioAttributes = (AudioAttributes) parcel.readTypedObject(AudioAttributes.CREATOR);
-            int readInt = parcel.readInt();
+            int i = parcel.readInt();
             AudioMixerAttributes audioMixerAttributes = (AudioMixerAttributes) parcel.readTypedObject(AudioMixerAttributes.CREATOR);
             parcel.enforceNoDataAvail();
-            int preferredMixerAttributes = setPreferredMixerAttributes(audioAttributes, readInt, audioMixerAttributes);
+            int preferredMixerAttributes = setPreferredMixerAttributes(audioAttributes, i, audioMixerAttributes);
             parcel2.writeNoException();
             parcel2.writeInt(preferredMixerAttributes);
             return true;
@@ -10996,11 +10996,11 @@ public interface IAudioService extends IInterface {
         }
 
         private boolean onTransact$addLoudnessCodecInfo$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
             LoudnessCodecInfo loudnessCodecInfo = (LoudnessCodecInfo) parcel.readTypedObject(LoudnessCodecInfo.CREATOR);
             parcel.enforceNoDataAvail();
-            addLoudnessCodecInfo(readInt, readInt2, loudnessCodecInfo);
+            addLoudnessCodecInfo(i, i2, loudnessCodecInfo);
             parcel2.writeNoException();
             return true;
         }
@@ -11026,162 +11026,162 @@ public interface IAudioService extends IInterface {
         }
 
         private boolean onTransact$setAppDevice$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
-            boolean readBoolean = parcel.readBoolean();
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            setAppDevice(readInt, readInt2, readBoolean);
+            setAppDevice(i, i2, z);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$setAppVolume$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
-            String readString = parcel.readString();
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
+            String string = parcel.readString();
             parcel.enforceNoDataAvail();
-            setAppVolume(readInt, readInt2, readString);
+            setAppVolume(i, i2, string);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$setAppMute$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            int readInt = parcel.readInt();
-            boolean readBoolean = parcel.readBoolean();
-            String readString = parcel.readString();
+            int i = parcel.readInt();
+            boolean z = parcel.readBoolean();
+            String string = parcel.readString();
             parcel.enforceNoDataAvail();
-            setAppMute(readInt, readBoolean, readString);
+            setAppMute(i, z, string);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$setMultiSoundOn$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            boolean readBoolean = parcel.readBoolean();
-            boolean readBoolean2 = parcel.readBoolean();
+            boolean z = parcel.readBoolean();
+            boolean z2 = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            setMultiSoundOn(readBoolean, readBoolean2);
+            setMultiSoundOn(z, z2);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$setStreamVolumeForDeviceWithAttribution$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
-            int readInt3 = parcel.readInt();
-            String readString = parcel.readString();
-            String readString2 = parcel.readString();
-            int readInt4 = parcel.readInt();
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
+            int i3 = parcel.readInt();
+            String string = parcel.readString();
+            String string2 = parcel.readString();
+            int i4 = parcel.readInt();
             parcel.enforceNoDataAvail();
-            setStreamVolumeForDeviceWithAttribution(readInt, readInt2, readInt3, readString, readString2, readInt4);
+            setStreamVolumeForDeviceWithAttribution(i, i2, i3, string, string2, i4);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$getStreamVolumeForDevice$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
             parcel.enforceNoDataAvail();
-            int streamVolumeForDevice = getStreamVolumeForDevice(readInt, readInt2);
+            int streamVolumeForDevice = getStreamVolumeForDevice(i, i2);
             parcel2.writeNoException();
             parcel2.writeInt(streamVolumeForDevice);
             return true;
         }
 
         private boolean onTransact$addPackage$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            int readInt = parcel.readInt();
-            String readString = parcel.readString();
+            int i = parcel.readInt();
+            String string = parcel.readString();
             parcel.enforceNoDataAvail();
-            addPackage(readInt, readString);
+            addPackage(i, string);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$setFineVolume$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
-            int readInt3 = parcel.readInt();
-            int readInt4 = parcel.readInt();
-            String readString = parcel.readString();
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
+            int i3 = parcel.readInt();
+            int i4 = parcel.readInt();
+            String string = parcel.readString();
             parcel.enforceNoDataAvail();
-            setFineVolume(readInt, readInt2, readInt3, readInt4, readString);
+            setFineVolume(i, i2, i3, i4, string);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$getFineVolume$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
             parcel.enforceNoDataAvail();
-            int fineVolume = getFineVolume(readInt, readInt2);
+            int fineVolume = getFineVolume(i, i2);
             parcel2.writeNoException();
             parcel2.writeInt(fineVolume);
             return true;
         }
 
         private boolean onTransact$setDeviceToForceByUser$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            int readInt = parcel.readInt();
-            String readString = parcel.readString();
-            boolean readBoolean = parcel.readBoolean();
+            int i = parcel.readInt();
+            String string = parcel.readString();
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            int deviceToForceByUser = setDeviceToForceByUser(readInt, readString, readBoolean);
+            int deviceToForceByUser = setDeviceToForceByUser(i, string, z);
             parcel2.writeNoException();
             parcel2.writeInt(deviceToForceByUser);
             return true;
         }
 
         private boolean onTransact$setMuteInterval$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            int readInt = parcel.readInt();
-            String readString = parcel.readString();
+            int i = parcel.readInt();
+            String string = parcel.readString();
             parcel.enforceNoDataAvail();
-            setMuteInterval(readInt, readString);
+            setMuteInterval(i, string);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$setSoundSettingEventBroadcastIntent$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            int readInt = parcel.readInt();
+            int i = parcel.readInt();
             PendingIntent pendingIntent = (PendingIntent) parcel.readTypedObject(PendingIntent.CREATOR);
             parcel.enforceNoDataAvail();
-            setSoundSettingEventBroadcastIntent(readInt, pendingIntent);
+            setSoundSettingEventBroadcastIntent(i, pendingIntent);
             return true;
         }
 
         private boolean onTransact$setA2dpDeviceVolume$(Parcel parcel, Parcel parcel2) throws RemoteException {
             BluetoothDevice bluetoothDevice = (BluetoothDevice) parcel.readTypedObject(BluetoothDevice.CREATOR);
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
-            int readInt3 = parcel.readInt();
-            String readString = parcel.readString();
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
+            int i3 = parcel.readInt();
+            String string = parcel.readString();
             parcel.enforceNoDataAvail();
-            setA2dpDeviceVolume(bluetoothDevice, readInt, readInt2, readInt3, readString);
+            setA2dpDeviceVolume(bluetoothDevice, i, i2, i3, string);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$getA2dpDeviceVolume$(Parcel parcel, Parcel parcel2) throws RemoteException {
             BluetoothDevice bluetoothDevice = (BluetoothDevice) parcel.readTypedObject(BluetoothDevice.CREATOR);
-            int readInt = parcel.readInt();
+            int i = parcel.readInt();
             parcel.enforceNoDataAvail();
-            int a2dpDeviceVolume = getA2dpDeviceVolume(bluetoothDevice, readInt);
+            int a2dpDeviceVolume = getA2dpDeviceVolume(bluetoothDevice, i);
             parcel2.writeNoException();
             parcel2.writeInt(a2dpDeviceVolume);
             return true;
         }
 
         private boolean onTransact$registerPlaybackCallbackWithPackage$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            IPlaybackConfigDispatcher asInterface = IPlaybackConfigDispatcher.Stub.asInterface(parcel.readStrongBinder());
-            String readString = parcel.readString();
+            IPlaybackConfigDispatcher iPlaybackConfigDispatcherAsInterface = IPlaybackConfigDispatcher.Stub.asInterface(parcel.readStrongBinder());
+            String string = parcel.readString();
             parcel.enforceNoDataAvail();
-            registerPlaybackCallbackWithPackage(asInterface, readString);
+            registerPlaybackCallbackWithPackage(iPlaybackConfigDispatcherAsInterface, string);
             parcel2.writeNoException();
             return true;
         }
 
         private boolean onTransact$notifySafetyVolumeDialogVisible$(Parcel parcel, Parcel parcel2) throws RemoteException {
-            IVolumeController asInterface = IVolumeController.Stub.asInterface(parcel.readStrongBinder());
-            boolean readBoolean = parcel.readBoolean();
+            IVolumeController iVolumeControllerAsInterface = IVolumeController.Stub.asInterface(parcel.readStrongBinder());
+            boolean z = parcel.readBoolean();
             parcel.enforceNoDataAvail();
-            notifySafetyVolumeDialogVisible(asInterface, readBoolean);
+            notifySafetyVolumeDialogVisible(iVolumeControllerAsInterface, z);
             return true;
         }
     }

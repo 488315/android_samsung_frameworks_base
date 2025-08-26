@@ -6,18 +6,21 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Property;
 import android.view.View;
 import android.widget.TextView;
 import com.android.app.animation.Interpolators;
+import com.android.systemui.Dependency;
+import com.android.systemui.LsRune;
 import com.android.systemui.R;
 import com.android.systemui.keyguard.KeyguardIndication;
 import com.android.systemui.widget.SystemUITextView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class KeyguardIndicationTextView extends SystemUITextView {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -42,10 +45,10 @@ public class KeyguardIndicationTextView extends SystemUITextView {
 
     public final AnimatorSet getOutAnimator() {
         AnimatorSet animatorSet = new AnimatorSet();
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this, (Property<KeyguardIndicationTextView, Float>) View.ALPHA, 0.0f);
-        ofFloat.setDuration(!this.mAnimationsEnabled ? 0L : 167L);
-        ofFloat.setInterpolator(Interpolators.FAST_OUT_LINEAR_IN);
-        ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.statusbar.phone.KeyguardIndicationTextView.3
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this, (Property<KeyguardIndicationTextView, Float>) View.ALPHA, 0.0f);
+        objectAnimatorOfFloat.setDuration(!this.mAnimationsEnabled ? 0L : 167L);
+        objectAnimatorOfFloat.setInterpolator(Interpolators.FAST_OUT_LINEAR_IN);
+        objectAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.statusbar.phone.KeyguardIndicationTextView.3
             public boolean mCancelled = false;
 
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
@@ -66,14 +69,14 @@ public class KeyguardIndicationTextView extends SystemUITextView {
                 keyguardIndicationTextView.setNextIndication();
             }
         });
-        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(this, (Property<KeyguardIndicationTextView, Float>) View.TRANSLATION_Y, 0.0f, -((TextView) this).mContext.getResources().getDimensionPixelSize(R.dimen.keyguard_indication_y_translation));
-        ofFloat2.setDuration(this.mAnimationsEnabled ? 167L : 0L);
-        animatorSet.playTogether(ofFloat, ofFloat2);
+        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(this, (Property<KeyguardIndicationTextView, Float>) View.TRANSLATION_Y, 0.0f, -((TextView) this).mContext.getResources().getDimensionPixelSize(R.dimen.keyguard_indication_y_translation));
+        objectAnimatorOfFloat2.setDuration(this.mAnimationsEnabled ? 167L : 0L);
+        animatorSet.playTogether(objectAnimatorOfFloat, objectAnimatorOfFloat2);
         return animatorSet;
     }
 
     @Override // com.android.systemui.widget.SystemUITextView, android.view.View
-    public final void onFinishInflate() {
+    public final void onFinishInflate() throws Resources.NotFoundException {
         super.onFinishInflate();
         Configuration configuration = getResources().getConfiguration();
         this.mOriginalFontSizeDp /= configuration.fontScale;
@@ -111,18 +114,81 @@ public class KeyguardIndicationTextView extends SystemUITextView {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0027  */
-    /* JADX WARN: Removed duplicated region for block: B:37:0x00d4  */
+    /* JADX WARN: Removed duplicated region for block: B:9:0x001a  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void switchIndication(java.lang.CharSequence r12, com.android.systemui.keyguard.KeyguardIndication r13) {
-        /*
-            Method dump skipped, instructions count: 231
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.phone.KeyguardIndicationTextView.switchIndication(java.lang.CharSequence, com.android.systemui.keyguard.KeyguardIndication):void");
+    public final void switchIndication(CharSequence charSequence, KeyguardIndication keyguardIndication) {
+        boolean z;
+        if (LsRune.AOD_FULLSCREEN) {
+            SecUnlockedScreenOffAnimationHelper secUnlockedScreenOffAnimationHelper = (SecUnlockedScreenOffAnimationHelper) Dependency.sDependency.getDependencyInner(SecUnlockedScreenOffAnimationHelper.class);
+            z = (secUnlockedScreenOffAnimationHelper.lastShouldPlay || secUnlockedScreenOffAnimationHelper.skipAnimationInOthers) ? false : true;
+        }
+        this.mMessage = charSequence;
+        this.mKeyguardIndicationInfo = keyguardIndication;
+        final Runnable runnable = null;
+        if (!z) {
+            setAlpha(1.0f);
+            setTranslationY(0.0f);
+            setNextIndication();
+            Animator animator = this.mLastAnimator;
+            if (animator != null) {
+                animator.cancel();
+                this.mLastAnimator = null;
+                return;
+            }
+            return;
+        }
+        boolean z2 = (keyguardIndication == null || keyguardIndication.mIcon == null) ? false : true;
+        AnimatorSet animatorSet = new AnimatorSet();
+        if (!TextUtils.isEmpty(this.mMessage) || z2) {
+            AnimatorSet animatorSet2 = new AnimatorSet();
+            ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this, (Property<KeyguardIndicationTextView, Float>) View.ALPHA, 1.0f);
+            objectAnimatorOfFloat.setStartDelay(!this.mAnimationsEnabled ? 0L : 150L);
+            objectAnimatorOfFloat.setDuration(!this.mAnimationsEnabled ? 0L : 317L);
+            objectAnimatorOfFloat.setInterpolator(Interpolators.LINEAR_OUT_SLOW_IN);
+            ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(this, (Property<KeyguardIndicationTextView, Float>) View.TRANSLATION_Y, ((TextView) this).mContext.getResources().getDimensionPixelSize(R.dimen.keyguard_indication_y_translation), 0.0f);
+            objectAnimatorOfFloat2.setDuration(this.mAnimationsEnabled ? 600L : 0L);
+            objectAnimatorOfFloat2.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.statusbar.phone.KeyguardIndicationTextView.4
+                @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
+                public final void onAnimationCancel(Animator animator2) {
+                    super.onAnimationCancel(animator2);
+                    KeyguardIndicationTextView.this.setTranslationY(0.0f);
+                    KeyguardIndicationTextView.this.setAlpha(1.0f);
+                }
+            });
+            animatorSet2.playTogether(objectAnimatorOfFloat2, objectAnimatorOfFloat);
+            animatorSet2.addListener(new AnimatorListenerAdapter(this) { // from class: com.android.systemui.statusbar.phone.KeyguardIndicationTextView.1
+                @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
+                public final void onAnimationEnd(Animator animator2) {
+                    super.onAnimationEnd(animator2);
+                    Runnable runnable2 = runnable;
+                    if (runnable2 != null) {
+                        runnable2.run();
+                    }
+                }
+            });
+            animatorSet.playSequentially(getOutAnimator(), animatorSet2);
+        } else {
+            Animator outAnimator = getOutAnimator();
+            outAnimator.addListener(new AnimatorListenerAdapter(this) { // from class: com.android.systemui.statusbar.phone.KeyguardIndicationTextView.2
+                @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
+                public final void onAnimationEnd(Animator animator2) {
+                    super.onAnimationEnd(animator2);
+                    Runnable runnable2 = runnable;
+                    if (runnable2 != null) {
+                        runnable2.run();
+                    }
+                }
+            });
+            animatorSet.play(outAnimator);
+        }
+        Animator animator2 = this.mLastAnimator;
+        if (animator2 != null) {
+            animator2.cancel();
+        }
+        this.mLastAnimator = animatorSet;
+        animatorSet.start();
     }
 
     public KeyguardIndicationTextView(Context context, AttributeSet attributeSet) {

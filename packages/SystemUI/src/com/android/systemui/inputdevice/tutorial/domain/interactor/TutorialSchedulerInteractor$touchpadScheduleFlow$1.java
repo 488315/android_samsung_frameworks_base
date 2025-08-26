@@ -1,12 +1,15 @@
 package com.android.systemui.inputdevice.tutorial.domain.interactor;
 
+import com.android.systemui.inputdevice.tutorial.data.repository.DeviceType;
+import com.android.systemui.inputdevice.tutorial.data.repository.TutorialSchedulerRepository;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class TutorialSchedulerInteractor$touchpadScheduleFlow$1 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -31,88 +34,61 @@ final class TutorialSchedulerInteractor$touchpadScheduleFlow$1 extends SuspendLa
         return ((TutorialSchedulerInteractor$touchpadScheduleFlow$1) create((FlowCollector) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:14:0x0068, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:22:0x0068, code lost:
     
-        if (r1.emit(r8, r7) == r0) goto L23;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:20:0x005a, code lost:
-    
-        if (com.android.systemui.inputdevice.tutorial.domain.interactor.TutorialSchedulerInteractor.access$schedule(r8, r4, r7) == r0) goto L23;
+        if (r1.emit(r8, r7) != r0) goto L24;
      */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object invokeSuspend(java.lang.Object r8) {
-        /*
-            r7 = this;
-            kotlin.coroutines.intrinsics.CoroutineSingletons r0 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r1 = r7.label
-            r2 = 3
-            r3 = 2
-            r4 = 1
-            if (r1 == 0) goto L2b
-            if (r1 == r4) goto L23
-            if (r1 == r3) goto L1b
-            if (r1 != r2) goto L13
-            kotlin.ResultKt.throwOnFailure(r8)
-            goto L6b
-        L13:
-            java.lang.IllegalStateException r7 = new java.lang.IllegalStateException
-            java.lang.String r8 = "call to 'resume' before 'invoke' with coroutine"
-            r7.<init>(r8)
-            throw r7
-        L1b:
-            java.lang.Object r1 = r7.L$0
-            kotlinx.coroutines.flow.FlowCollector r1 = (kotlinx.coroutines.flow.FlowCollector) r1
-            kotlin.ResultKt.throwOnFailure(r8)
-            goto L5d
-        L23:
-            java.lang.Object r1 = r7.L$0
-            kotlinx.coroutines.flow.FlowCollector r1 = (kotlinx.coroutines.flow.FlowCollector) r1
-            kotlin.ResultKt.throwOnFailure(r8)
-            goto L46
-        L2b:
-            kotlin.ResultKt.throwOnFailure(r8)
-            java.lang.Object r8 = r7.L$0
-            kotlinx.coroutines.flow.FlowCollector r8 = (kotlinx.coroutines.flow.FlowCollector) r8
-            com.android.systemui.inputdevice.tutorial.domain.interactor.TutorialSchedulerInteractor r1 = r7.this$0
-            com.android.systemui.inputdevice.tutorial.data.repository.TutorialSchedulerRepository r1 = r1.repo
-            com.android.systemui.inputdevice.tutorial.data.repository.DeviceType r5 = com.android.systemui.inputdevice.tutorial.data.repository.DeviceType.TOUCHPAD
-            r7.L$0 = r8
-            r7.label = r4
-            java.lang.Object r1 = r1.isNotified(r5, r7)
-            if (r1 != r0) goto L43
-            goto L6a
-        L43:
-            r6 = r1
-            r1 = r8
-            r8 = r6
-        L46:
-            java.lang.Boolean r8 = (java.lang.Boolean) r8
-            boolean r8 = r8.booleanValue()
-            if (r8 != 0) goto L6b
-            com.android.systemui.inputdevice.tutorial.domain.interactor.TutorialSchedulerInteractor r8 = r7.this$0
-            com.android.systemui.inputdevice.tutorial.data.repository.DeviceType r4 = com.android.systemui.inputdevice.tutorial.data.repository.DeviceType.TOUCHPAD
-            r7.L$0 = r1
-            r7.label = r3
-            java.lang.Object r8 = com.android.systemui.inputdevice.tutorial.domain.interactor.TutorialSchedulerInteractor.access$schedule(r8, r4, r7)
-            if (r8 != r0) goto L5d
-            goto L6a
-        L5d:
-            com.android.systemui.inputdevice.tutorial.data.repository.DeviceType r8 = com.android.systemui.inputdevice.tutorial.data.repository.DeviceType.TOUCHPAD
-            r3 = 0
-            r7.L$0 = r3
-            r7.label = r2
-            java.lang.Object r7 = r1.emit(r8, r7)
-            if (r7 != r0) goto L6b
-        L6a:
-            return r0
-        L6b:
-            kotlin.Unit r7 = kotlin.Unit.INSTANCE
-            return r7
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.inputdevice.tutorial.domain.interactor.TutorialSchedulerInteractor$touchpadScheduleFlow$1.invokeSuspend(java.lang.Object):java.lang.Object");
+    public final Object invokeSuspend(Object obj) {
+        FlowCollector flowCollector;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i = this.label;
+        if (i == 0) {
+            ResultKt.throwOnFailure(obj);
+            FlowCollector flowCollector2 = (FlowCollector) this.L$0;
+            TutorialSchedulerRepository tutorialSchedulerRepository = this.this$0.repo;
+            DeviceType deviceType = DeviceType.TOUCHPAD;
+            this.L$0 = flowCollector2;
+            this.label = 1;
+            Object objIsNotified = tutorialSchedulerRepository.isNotified(deviceType, this);
+            if (objIsNotified != coroutineSingletons) {
+                flowCollector = flowCollector2;
+                obj = objIsNotified;
+            }
+            return coroutineSingletons;
+        }
+        if (i == 1) {
+            flowCollector = (FlowCollector) this.L$0;
+            ResultKt.throwOnFailure(obj);
+        } else {
+            if (i != 2) {
+                if (i != 3) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+                return Unit.INSTANCE;
+            }
+            flowCollector = (FlowCollector) this.L$0;
+            ResultKt.throwOnFailure(obj);
+            DeviceType deviceType2 = DeviceType.TOUCHPAD;
+            this.L$0 = null;
+            this.label = 3;
+        }
+        if (!((Boolean) obj).booleanValue()) {
+            TutorialSchedulerInteractor tutorialSchedulerInteractor = this.this$0;
+            DeviceType deviceType3 = DeviceType.TOUCHPAD;
+            this.L$0 = flowCollector;
+            this.label = 2;
+            if (TutorialSchedulerInteractor.access$schedule(tutorialSchedulerInteractor, deviceType3, this) != coroutineSingletons) {
+                DeviceType deviceType22 = DeviceType.TOUCHPAD;
+                this.L$0 = null;
+                this.label = 3;
+            }
+            return coroutineSingletons;
+        }
+        return Unit.INSTANCE;
     }
 }

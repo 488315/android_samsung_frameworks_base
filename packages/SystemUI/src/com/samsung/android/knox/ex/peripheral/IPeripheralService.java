@@ -13,12 +13,10 @@ import com.samsung.android.knox.ex.peripheral.IStateListener;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface IPeripheralService extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.knox.ex.peripheral.IPeripheralService";
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements IPeripheralService {
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -292,7 +290,6 @@ public interface IPeripheralService extends IInterface {
 
     int vibrate(String str, int i, Bundle bundle, IResultListener iResultListener) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IPeripheralService {
         public static final int TRANSACTION_beep = 37;
         public static final int TRANSACTION_check = 6;
@@ -333,7 +330,6 @@ public interface IPeripheralService extends IInterface {
         public static final int TRANSACTION_updateFirmware = 27;
         public static final int TRANSACTION_vibrate = 38;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements IPeripheralService {
             public IBinder mRemote;
 
@@ -348,224 +344,224 @@ public interface IPeripheralService extends IInterface {
 
             @Override // com.samsung.android.knox.ex.peripheral.IPeripheralService
             public int beep(String str, int i, Bundle bundle, IResultListener iResultListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeStrongInterface(iResultListener);
-                    this.mRemote.transact(37, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeStrongInterface(iResultListener);
+                    this.mRemote.transact(37, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ex.peripheral.IPeripheralService
             public int check(IResultListener iResultListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iResultListener);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iResultListener);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ex.peripheral.IPeripheralService
             public int clearMemory(String str, String str2, IResultListener iResultListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeStrongInterface(iResultListener);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeStrongInterface(iResultListener);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ex.peripheral.IPeripheralService
             public int connectPeripheral(Bundle bundle, IResultListener iResultListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeStrongInterface(iResultListener);
-                    this.mRemote.transact(34, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeStrongInterface(iResultListener);
+                    this.mRemote.transact(34, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ex.peripheral.IPeripheralService
             public int disable() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ex.peripheral.IPeripheralService
             public int disconnectPeripheral(String str, IResultListener iResultListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iResultListener);
-                    this.mRemote.transact(35, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iResultListener);
+                    this.mRemote.transact(35, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ex.peripheral.IPeripheralService
             public int displayText(String str, String str2, int i, Bundle bundle, IResultListener iResultListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeStrongInterface(iResultListener);
-                    this.mRemote.transact(36, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeStrongInterface(iResultListener);
+                    this.mRemote.transact(36, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ex.peripheral.IPeripheralService
             public int enable(Bundle bundle, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ex.peripheral.IPeripheralService
             public int getAvailablePeripherals(IResultListener iResultListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iResultListener);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iResultListener);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ex.peripheral.IPeripheralService
             public int getBluetoothPeripherals(String str, IResultListener iResultListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iResultListener);
-                    this.mRemote.transact(33, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iResultListener);
+                    this.mRemote.transact(33, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ex.peripheral.IPeripheralService
             public int getConfiguration(String str, List<String> list, IResultListener iResultListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStringList(list);
-                    obtain.writeStrongInterface(iResultListener);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStringList(list);
+                    parcelObtain.writeStrongInterface(iResultListener);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ex.peripheral.IPeripheralService
             public int getConnectionProfile(String str, IResultListener iResultListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iResultListener);
-                    this.mRemote.transact(28, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iResultListener);
+                    this.mRemote.transact(28, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ex.peripheral.IPeripheralService
             public int getInformation(IResultListener iResultListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iResultListener);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iResultListener);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -575,421 +571,421 @@ public interface IPeripheralService extends IInterface {
 
             @Override // com.samsung.android.knox.ex.peripheral.IPeripheralService
             public int getPairingBarcodeData(String str, IResultListener iResultListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iResultListener);
-                    this.mRemote.transact(31, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iResultListener);
+                    this.mRemote.transact(31, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ex.peripheral.IPeripheralService
             public List<String> getPluginsToSetup() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ex.peripheral.IPeripheralService
             public int getStoredData(String str, IResultListener iResultListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iResultListener);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iResultListener);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ex.peripheral.IPeripheralService
             public int getSupportedPeripherals(IResultListener iResultListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iResultListener);
-                    this.mRemote.transact(30, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iResultListener);
+                    this.mRemote.transact(30, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ex.peripheral.IPeripheralService
             public boolean isEnabled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ex.peripheral.IPeripheralService
             public boolean isStarted() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ex.peripheral.IPeripheralService
             public int registerDataListener(IDataListener iDataListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iDataListener);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iDataListener);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ex.peripheral.IPeripheralService
             public int registerInfoListener(IInfoListener iInfoListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iInfoListener);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iInfoListener);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ex.peripheral.IPeripheralService
             public int registerStateListener(IStateListener iStateListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iStateListener);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iStateListener);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ex.peripheral.IPeripheralService
             public int resetPeripheral(String str, String str2, IResultListener iResultListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeStrongInterface(iResultListener);
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeStrongInterface(iResultListener);
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ex.peripheral.IPeripheralService
             public int setConfiguration(String str, Bundle bundle, IResultListener iResultListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeStrongInterface(iResultListener);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeStrongInterface(iResultListener);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ex.peripheral.IPeripheralService
             public int setConnectionProfile(String str, String str2, IResultListener iResultListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeStrongInterface(iResultListener);
-                    this.mRemote.transact(29, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeStrongInterface(iResultListener);
+                    this.mRemote.transact(29, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ex.peripheral.IPeripheralService
             public int start(IResultListener iResultListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iResultListener);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iResultListener);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ex.peripheral.IPeripheralService
             public int startAutoTriggerMode(String str, IResultListener iResultListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iResultListener);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iResultListener);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ex.peripheral.IPeripheralService
             public int startBarcodeScan(String str, IResultListener iResultListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iResultListener);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iResultListener);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ex.peripheral.IPeripheralService
             public int stop(IResultListener iResultListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iResultListener);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iResultListener);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ex.peripheral.IPeripheralService
             public int stopAutoTriggerMode(String str, IResultListener iResultListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iResultListener);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iResultListener);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ex.peripheral.IPeripheralService
             public int stopBarcodeScan(String str, IResultListener iResultListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iResultListener);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iResultListener);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ex.peripheral.IPeripheralService
             public int stopPairingPeripheral(IResultListener iResultListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iResultListener);
-                    this.mRemote.transact(32, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iResultListener);
+                    this.mRemote.transact(32, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ex.peripheral.IPeripheralService
             public int triggerVendorCommand(String str, int i, Bundle bundle, IResultListener iResultListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeStrongInterface(iResultListener);
-                    this.mRemote.transact(26, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeStrongInterface(iResultListener);
+                    this.mRemote.transact(26, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ex.peripheral.IPeripheralService
             public int unregisterDataListener(IDataListener iDataListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iDataListener);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iDataListener);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ex.peripheral.IPeripheralService
             public int unregisterInfoListener(IInfoListener iInfoListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iInfoListener);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iInfoListener);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ex.peripheral.IPeripheralService
             public int unregisterStateListener(IStateListener iStateListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iStateListener);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iStateListener);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ex.peripheral.IPeripheralService
             public int updateFirmware(String str, byte[] bArr, int i, int i2, Bundle bundle, IResultListener iResultListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeStrongInterface(iResultListener);
-                    this.mRemote.transact(27, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeStrongInterface(iResultListener);
+                    this.mRemote.transact(27, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.ex.peripheral.IPeripheralService
             public int vibrate(String str, int i, Bundle bundle, IResultListener iResultListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeStrongInterface(iResultListener);
-                    this.mRemote.transact(38, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IPeripheralService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeStrongInterface(iResultListener);
+                    this.mRemote.transact(38, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -1002,8 +998,8 @@ public interface IPeripheralService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IPeripheralService.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IPeripheralService)) ? new Proxy(iBinder) : (IPeripheralService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IPeripheralService.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IPeripheralService)) ? new Proxy(iBinder) : (IPeripheralService) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder
@@ -1017,14 +1013,14 @@ public interface IPeripheralService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    boolean isEnabled = isEnabled();
+                    boolean zIsEnabled = isEnabled();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isEnabled);
+                    parcel2.writeBoolean(zIsEnabled);
                     return true;
                 case 2:
-                    boolean isStarted = isStarted();
+                    boolean zIsStarted = isStarted();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isStarted);
+                    parcel2.writeBoolean(zIsStarted);
                     return true;
                 case 3:
                     List<String> pluginsToSetup = getPluginsToSetup();
@@ -1033,285 +1029,285 @@ public interface IPeripheralService extends IInterface {
                     return true;
                 case 4:
                     Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                    boolean readBoolean = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    int enable = enable(bundle, readBoolean);
+                    int iEnable = enable(bundle, z);
                     parcel2.writeNoException();
-                    parcel2.writeInt(enable);
+                    parcel2.writeInt(iEnable);
                     return true;
                 case 5:
-                    int disable = disable();
+                    int iDisable = disable();
                     parcel2.writeNoException();
-                    parcel2.writeInt(disable);
+                    parcel2.writeInt(iDisable);
                     return true;
                 case 6:
-                    IResultListener asInterface = IResultListener.Stub.asInterface(parcel.readStrongBinder());
+                    IResultListener iResultListenerAsInterface = IResultListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int check = check(asInterface);
+                    int iCheck = check(iResultListenerAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeInt(check);
+                    parcel2.writeInt(iCheck);
                     return true;
                 case 7:
-                    IResultListener asInterface2 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
+                    IResultListener iResultListenerAsInterface2 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int start = start(asInterface2);
+                    int iStart = start(iResultListenerAsInterface2);
                     parcel2.writeNoException();
-                    parcel2.writeInt(start);
+                    parcel2.writeInt(iStart);
                     return true;
                 case 8:
-                    IResultListener asInterface3 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
+                    IResultListener iResultListenerAsInterface3 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int stop = stop(asInterface3);
+                    int iStop = stop(iResultListenerAsInterface3);
                     parcel2.writeNoException();
-                    parcel2.writeInt(stop);
+                    parcel2.writeInt(iStop);
                     return true;
                 case 9:
-                    IResultListener asInterface4 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
+                    IResultListener iResultListenerAsInterface4 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int availablePeripherals = getAvailablePeripherals(asInterface4);
+                    int availablePeripherals = getAvailablePeripherals(iResultListenerAsInterface4);
                     parcel2.writeNoException();
                     parcel2.writeInt(availablePeripherals);
                     return true;
                 case 10:
-                    IResultListener asInterface5 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
+                    IResultListener iResultListenerAsInterface5 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int information = getInformation(asInterface5);
+                    int information = getInformation(iResultListenerAsInterface5);
                     parcel2.writeNoException();
                     parcel2.writeInt(information);
                     return true;
                 case 11:
-                    String readString = parcel.readString();
-                    ArrayList<String> createStringArrayList = parcel.createStringArrayList();
-                    IResultListener asInterface6 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
+                    String string = parcel.readString();
+                    ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
+                    IResultListener iResultListenerAsInterface6 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int configuration = getConfiguration(readString, createStringArrayList, asInterface6);
+                    int configuration = getConfiguration(string, arrayListCreateStringArrayList, iResultListenerAsInterface6);
                     parcel2.writeNoException();
                     parcel2.writeInt(configuration);
                     return true;
                 case 12:
-                    String readString2 = parcel.readString();
+                    String string2 = parcel.readString();
                     Bundle bundle2 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                    IResultListener asInterface7 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
+                    IResultListener iResultListenerAsInterface7 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int configuration2 = setConfiguration(readString2, bundle2, asInterface7);
+                    int configuration2 = setConfiguration(string2, bundle2, iResultListenerAsInterface7);
                     parcel2.writeNoException();
                     parcel2.writeInt(configuration2);
                     return true;
                 case 13:
-                    IDataListener asInterface8 = IDataListener.Stub.asInterface(parcel.readStrongBinder());
+                    IDataListener iDataListenerAsInterface = IDataListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int registerDataListener = registerDataListener(asInterface8);
+                    int iRegisterDataListener = registerDataListener(iDataListenerAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeInt(registerDataListener);
+                    parcel2.writeInt(iRegisterDataListener);
                     return true;
                 case 14:
-                    IDataListener asInterface9 = IDataListener.Stub.asInterface(parcel.readStrongBinder());
+                    IDataListener iDataListenerAsInterface2 = IDataListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int unregisterDataListener = unregisterDataListener(asInterface9);
+                    int iUnregisterDataListener = unregisterDataListener(iDataListenerAsInterface2);
                     parcel2.writeNoException();
-                    parcel2.writeInt(unregisterDataListener);
+                    parcel2.writeInt(iUnregisterDataListener);
                     return true;
                 case 15:
-                    IInfoListener asInterface10 = IInfoListener.Stub.asInterface(parcel.readStrongBinder());
+                    IInfoListener iInfoListenerAsInterface = IInfoListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int registerInfoListener = registerInfoListener(asInterface10);
+                    int iRegisterInfoListener = registerInfoListener(iInfoListenerAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeInt(registerInfoListener);
+                    parcel2.writeInt(iRegisterInfoListener);
                     return true;
                 case 16:
-                    IInfoListener asInterface11 = IInfoListener.Stub.asInterface(parcel.readStrongBinder());
+                    IInfoListener iInfoListenerAsInterface2 = IInfoListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int unregisterInfoListener = unregisterInfoListener(asInterface11);
+                    int iUnregisterInfoListener = unregisterInfoListener(iInfoListenerAsInterface2);
                     parcel2.writeNoException();
-                    parcel2.writeInt(unregisterInfoListener);
+                    parcel2.writeInt(iUnregisterInfoListener);
                     return true;
                 case 17:
-                    IStateListener asInterface12 = IStateListener.Stub.asInterface(parcel.readStrongBinder());
+                    IStateListener iStateListenerAsInterface = IStateListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int registerStateListener = registerStateListener(asInterface12);
+                    int iRegisterStateListener = registerStateListener(iStateListenerAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeInt(registerStateListener);
+                    parcel2.writeInt(iRegisterStateListener);
                     return true;
                 case 18:
-                    IStateListener asInterface13 = IStateListener.Stub.asInterface(parcel.readStrongBinder());
+                    IStateListener iStateListenerAsInterface2 = IStateListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int unregisterStateListener = unregisterStateListener(asInterface13);
+                    int iUnregisterStateListener = unregisterStateListener(iStateListenerAsInterface2);
                     parcel2.writeNoException();
-                    parcel2.writeInt(unregisterStateListener);
+                    parcel2.writeInt(iUnregisterStateListener);
                     return true;
                 case 19:
-                    String readString3 = parcel.readString();
-                    IResultListener asInterface14 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
+                    String string3 = parcel.readString();
+                    IResultListener iResultListenerAsInterface8 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int startBarcodeScan = startBarcodeScan(readString3, asInterface14);
+                    int iStartBarcodeScan = startBarcodeScan(string3, iResultListenerAsInterface8);
                     parcel2.writeNoException();
-                    parcel2.writeInt(startBarcodeScan);
+                    parcel2.writeInt(iStartBarcodeScan);
                     return true;
                 case 20:
-                    String readString4 = parcel.readString();
-                    IResultListener asInterface15 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
+                    String string4 = parcel.readString();
+                    IResultListener iResultListenerAsInterface9 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int stopBarcodeScan = stopBarcodeScan(readString4, asInterface15);
+                    int iStopBarcodeScan = stopBarcodeScan(string4, iResultListenerAsInterface9);
                     parcel2.writeNoException();
-                    parcel2.writeInt(stopBarcodeScan);
+                    parcel2.writeInt(iStopBarcodeScan);
                     return true;
                 case 21:
-                    String readString5 = parcel.readString();
-                    IResultListener asInterface16 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
+                    String string5 = parcel.readString();
+                    IResultListener iResultListenerAsInterface10 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int storedData = getStoredData(readString5, asInterface16);
+                    int storedData = getStoredData(string5, iResultListenerAsInterface10);
                     parcel2.writeNoException();
                     parcel2.writeInt(storedData);
                     return true;
                 case 22:
-                    String readString6 = parcel.readString();
-                    String readString7 = parcel.readString();
-                    IResultListener asInterface17 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
+                    String string6 = parcel.readString();
+                    String string7 = parcel.readString();
+                    IResultListener iResultListenerAsInterface11 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int clearMemory = clearMemory(readString6, readString7, asInterface17);
+                    int iClearMemory = clearMemory(string6, string7, iResultListenerAsInterface11);
                     parcel2.writeNoException();
-                    parcel2.writeInt(clearMemory);
+                    parcel2.writeInt(iClearMemory);
                     return true;
                 case 23:
-                    String readString8 = parcel.readString();
-                    IResultListener asInterface18 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
+                    String string8 = parcel.readString();
+                    IResultListener iResultListenerAsInterface12 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int startAutoTriggerMode = startAutoTriggerMode(readString8, asInterface18);
+                    int iStartAutoTriggerMode = startAutoTriggerMode(string8, iResultListenerAsInterface12);
                     parcel2.writeNoException();
-                    parcel2.writeInt(startAutoTriggerMode);
+                    parcel2.writeInt(iStartAutoTriggerMode);
                     return true;
                 case 24:
-                    String readString9 = parcel.readString();
-                    IResultListener asInterface19 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
+                    String string9 = parcel.readString();
+                    IResultListener iResultListenerAsInterface13 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int stopAutoTriggerMode = stopAutoTriggerMode(readString9, asInterface19);
+                    int iStopAutoTriggerMode = stopAutoTriggerMode(string9, iResultListenerAsInterface13);
                     parcel2.writeNoException();
-                    parcel2.writeInt(stopAutoTriggerMode);
+                    parcel2.writeInt(iStopAutoTriggerMode);
                     return true;
                 case 25:
-                    String readString10 = parcel.readString();
-                    String readString11 = parcel.readString();
-                    IResultListener asInterface20 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
+                    String string10 = parcel.readString();
+                    String string11 = parcel.readString();
+                    IResultListener iResultListenerAsInterface14 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int resetPeripheral = resetPeripheral(readString10, readString11, asInterface20);
+                    int iResetPeripheral = resetPeripheral(string10, string11, iResultListenerAsInterface14);
                     parcel2.writeNoException();
-                    parcel2.writeInt(resetPeripheral);
+                    parcel2.writeInt(iResetPeripheral);
                     return true;
                 case 26:
-                    String readString12 = parcel.readString();
-                    int readInt = parcel.readInt();
+                    String string12 = parcel.readString();
+                    int i3 = parcel.readInt();
                     Bundle bundle3 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                    IResultListener asInterface21 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
+                    IResultListener iResultListenerAsInterface15 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int triggerVendorCommand = triggerVendorCommand(readString12, readInt, bundle3, asInterface21);
+                    int iTriggerVendorCommand = triggerVendorCommand(string12, i3, bundle3, iResultListenerAsInterface15);
                     parcel2.writeNoException();
-                    parcel2.writeInt(triggerVendorCommand);
+                    parcel2.writeInt(iTriggerVendorCommand);
                     return true;
                 case 27:
-                    String readString13 = parcel.readString();
-                    byte[] createByteArray = parcel.createByteArray();
-                    int readInt2 = parcel.readInt();
-                    int readInt3 = parcel.readInt();
+                    String string13 = parcel.readString();
+                    byte[] bArrCreateByteArray = parcel.createByteArray();
+                    int i4 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     Bundle bundle4 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                    IResultListener asInterface22 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
+                    IResultListener iResultListenerAsInterface16 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int updateFirmware = updateFirmware(readString13, createByteArray, readInt2, readInt3, bundle4, asInterface22);
+                    int iUpdateFirmware = updateFirmware(string13, bArrCreateByteArray, i4, i5, bundle4, iResultListenerAsInterface16);
                     parcel2.writeNoException();
-                    parcel2.writeInt(updateFirmware);
+                    parcel2.writeInt(iUpdateFirmware);
                     return true;
                 case 28:
-                    String readString14 = parcel.readString();
-                    IResultListener asInterface23 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
+                    String string14 = parcel.readString();
+                    IResultListener iResultListenerAsInterface17 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int connectionProfile = getConnectionProfile(readString14, asInterface23);
+                    int connectionProfile = getConnectionProfile(string14, iResultListenerAsInterface17);
                     parcel2.writeNoException();
                     parcel2.writeInt(connectionProfile);
                     return true;
                 case 29:
-                    String readString15 = parcel.readString();
-                    String readString16 = parcel.readString();
-                    IResultListener asInterface24 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
+                    String string15 = parcel.readString();
+                    String string16 = parcel.readString();
+                    IResultListener iResultListenerAsInterface18 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int connectionProfile2 = setConnectionProfile(readString15, readString16, asInterface24);
+                    int connectionProfile2 = setConnectionProfile(string15, string16, iResultListenerAsInterface18);
                     parcel2.writeNoException();
                     parcel2.writeInt(connectionProfile2);
                     return true;
                 case 30:
-                    IResultListener asInterface25 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
+                    IResultListener iResultListenerAsInterface19 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int supportedPeripherals = getSupportedPeripherals(asInterface25);
+                    int supportedPeripherals = getSupportedPeripherals(iResultListenerAsInterface19);
                     parcel2.writeNoException();
                     parcel2.writeInt(supportedPeripherals);
                     return true;
                 case 31:
-                    String readString17 = parcel.readString();
-                    IResultListener asInterface26 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
+                    String string17 = parcel.readString();
+                    IResultListener iResultListenerAsInterface20 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int pairingBarcodeData = getPairingBarcodeData(readString17, asInterface26);
+                    int pairingBarcodeData = getPairingBarcodeData(string17, iResultListenerAsInterface20);
                     parcel2.writeNoException();
                     parcel2.writeInt(pairingBarcodeData);
                     return true;
                 case 32:
-                    IResultListener asInterface27 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
+                    IResultListener iResultListenerAsInterface21 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int stopPairingPeripheral = stopPairingPeripheral(asInterface27);
+                    int iStopPairingPeripheral = stopPairingPeripheral(iResultListenerAsInterface21);
                     parcel2.writeNoException();
-                    parcel2.writeInt(stopPairingPeripheral);
+                    parcel2.writeInt(iStopPairingPeripheral);
                     return true;
                 case 33:
-                    String readString18 = parcel.readString();
-                    IResultListener asInterface28 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
+                    String string18 = parcel.readString();
+                    IResultListener iResultListenerAsInterface22 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int bluetoothPeripherals = getBluetoothPeripherals(readString18, asInterface28);
+                    int bluetoothPeripherals = getBluetoothPeripherals(string18, iResultListenerAsInterface22);
                     parcel2.writeNoException();
                     parcel2.writeInt(bluetoothPeripherals);
                     return true;
                 case 34:
                     Bundle bundle5 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                    IResultListener asInterface29 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
+                    IResultListener iResultListenerAsInterface23 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int connectPeripheral = connectPeripheral(bundle5, asInterface29);
+                    int iConnectPeripheral = connectPeripheral(bundle5, iResultListenerAsInterface23);
                     parcel2.writeNoException();
-                    parcel2.writeInt(connectPeripheral);
+                    parcel2.writeInt(iConnectPeripheral);
                     return true;
                 case 35:
-                    String readString19 = parcel.readString();
-                    IResultListener asInterface30 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
+                    String string19 = parcel.readString();
+                    IResultListener iResultListenerAsInterface24 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int disconnectPeripheral = disconnectPeripheral(readString19, asInterface30);
+                    int iDisconnectPeripheral = disconnectPeripheral(string19, iResultListenerAsInterface24);
                     parcel2.writeNoException();
-                    parcel2.writeInt(disconnectPeripheral);
+                    parcel2.writeInt(iDisconnectPeripheral);
                     return true;
                 case 36:
-                    String readString20 = parcel.readString();
-                    String readString21 = parcel.readString();
-                    int readInt4 = parcel.readInt();
+                    String string20 = parcel.readString();
+                    String string21 = parcel.readString();
+                    int i6 = parcel.readInt();
                     Bundle bundle6 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                    IResultListener asInterface31 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
+                    IResultListener iResultListenerAsInterface25 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int displayText = displayText(readString20, readString21, readInt4, bundle6, asInterface31);
+                    int iDisplayText = displayText(string20, string21, i6, bundle6, iResultListenerAsInterface25);
                     parcel2.writeNoException();
-                    parcel2.writeInt(displayText);
+                    parcel2.writeInt(iDisplayText);
                     return true;
                 case 37:
-                    String readString22 = parcel.readString();
-                    int readInt5 = parcel.readInt();
+                    String string22 = parcel.readString();
+                    int i7 = parcel.readInt();
                     Bundle bundle7 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                    IResultListener asInterface32 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
+                    IResultListener iResultListenerAsInterface26 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int beep = beep(readString22, readInt5, bundle7, asInterface32);
+                    int iBeep = beep(string22, i7, bundle7, iResultListenerAsInterface26);
                     parcel2.writeNoException();
-                    parcel2.writeInt(beep);
+                    parcel2.writeInt(iBeep);
                     return true;
                 case 38:
-                    String readString23 = parcel.readString();
-                    int readInt6 = parcel.readInt();
+                    String string23 = parcel.readString();
+                    int i8 = parcel.readInt();
                     Bundle bundle8 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                    IResultListener asInterface33 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
+                    IResultListener iResultListenerAsInterface27 = IResultListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int vibrate = vibrate(readString23, readInt6, bundle8, asInterface33);
+                    int iVibrate = vibrate(string23, i8, bundle8, iResultListenerAsInterface27);
                     parcel2.writeNoException();
-                    parcel2.writeInt(vibrate);
+                    parcel2.writeInt(iVibrate);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);

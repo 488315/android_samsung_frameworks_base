@@ -6,11 +6,11 @@ import androidx.compose.ui.input.pointer.util.VelocityTracker1D;
 import java.util.Arrays;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class VerticalVelocityTracker implements VelocityTracker {
     public final VelocityTracker1D velocityTracker;
 
+    /* JADX WARN: Multi-variable type inference failed */
     public VerticalVelocityTracker() {
         this(null, 1, 0 == true ? 1 : 0);
     }

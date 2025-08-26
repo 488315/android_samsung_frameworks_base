@@ -15,18 +15,15 @@ import com.android.systemui.utils.windowmanager.WindowManagerProvider;
 import com.android.systemui.utils.windowmanager.WindowManagerProviderImpl;
 import com.android.systemui.utils.windowmanager.WindowManagerUtils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class WirelessChargingAnimation {
     public static final boolean DEBUG = Log.isLoggable("WirelessChargingView", 3);
     public static WirelessChargingView mPreviousWirelessChargingView;
     public final WirelessChargingView mCurrentWirelessChargingView;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Callback {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class WirelessChargingView {
         public final Callback mCallback;
         public final AnonymousClass1 mHandler;
@@ -37,7 +34,6 @@ public class WirelessChargingAnimation {
         public WindowManager mWM;
         public final WindowManagerProvider mWindowManagerProvider;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         enum WirelessChargingRippleEvent implements UiEventLogger.UiEventEnum {
             WIRELESS_RIPPLE_PLAYED(830);
 

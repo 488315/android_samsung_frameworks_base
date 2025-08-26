@@ -26,14 +26,13 @@ import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.Pair;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SecSeekBarViewModel {
     public Progress _data = new Progress(false, false, false, false, null, 0, false);
     public final MutableLiveData _progress;
     public final RepeatableExecutor bgExecutor;
     public final SecSeekBarViewModel$callback$1 callback;
-    public SecSeekBarViewModel$checkIfPollingNeeded$1 cancel;
+    public AnonymousClass1 cancel;
     public MediaController controller;
     public CoverMusicCapsuleController coverMusicCapsuleController;
     public boolean isFalseSeek;
@@ -45,7 +44,6 @@ public final class SecSeekBarViewModel {
     public PlaybackState playbackState;
     public boolean scrubbing;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Progress {
         public final int duration;
         public final Integer elapsedTime;
@@ -103,9 +101,9 @@ public final class SecSeekBarViewModel {
         }
 
         public final int hashCode() {
-            int m = TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(Boolean.hashCode(this.enabled) * 31, 31, this.seekAvailable), 31, this.playing), 31, this.scrubbing);
+            int iM = TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(Boolean.hashCode(this.enabled) * 31, 31, this.seekAvailable), 31, this.playing), 31, this.scrubbing);
             Integer num = this.elapsedTime;
-            return Boolean.hashCode(this.listening) + ReorderTile$$ExternalSyntheticOutline0.m(this.duration, (m + (num == null ? 0 : num.hashCode())) * 31, 31);
+            return Boolean.hashCode(this.listening) + ReorderTile$$ExternalSyntheticOutline0.m(this.duration, (iM + (num == null ? 0 : num.hashCode())) * 31, 31);
         }
 
         public final String toString() {
@@ -126,7 +124,6 @@ public final class SecSeekBarViewModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SeekBarChangeListener implements SeekBar.OnSeekBarChangeListener {
         public final SecSeekBarViewModel viewModel;
 
@@ -144,11 +141,11 @@ public final class SecSeekBarViewModel {
                 secSeekBarViewModel.bgExecutor.execute(new Runnable() { // from class: com.android.systemui.media.SecSeekBarViewModel$onSeekProgress$1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        if (SecSeekBarViewModel.this.scrubbing) {
+                        if (secSeekBarViewModel.scrubbing) {
                             if (j == seekBar.getMax() || j == 0) {
                                 seekBar.performHapticFeedback(HapticFeedbackConstants.semGetVibrationIndex(41));
                             }
-                            SecSeekBarViewModel secSeekBarViewModel2 = SecSeekBarViewModel.this;
+                            SecSeekBarViewModel secSeekBarViewModel2 = secSeekBarViewModel;
                             secSeekBarViewModel2.set_data(SecSeekBarViewModel.Progress.copy$default(secSeekBarViewModel2._data, false, false, Integer.valueOf((int) j), 0, false, 111));
                         }
                     }
@@ -163,8 +160,8 @@ public final class SecSeekBarViewModel {
             secSeekBarViewModel.bgExecutor.execute(new Runnable() { // from class: com.android.systemui.media.SecSeekBarViewModel$onSeekStarting$1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SecSeekBarViewModel.access$setScrubbing(SecSeekBarViewModel.this, true);
-                    SecSeekBarViewModel.this.isFalseSeek = false;
+                    SecSeekBarViewModel.access$setScrubbing(secSeekBarViewModel, true);
+                    secSeekBarViewModel.isFalseSeek = false;
                 }
             });
             SystemUIAnalytics.sendEventLog(SystemUIAnalytics.getCurrentScreenID(), SystemUIAnalytics.EID_QPNE_MEDIA_SEEK_BAR_INTERACTION);
@@ -179,21 +176,38 @@ public final class SecSeekBarViewModel {
                 @Override // java.lang.Runnable
                 public final void run() {
                     MediaController.TransportControls transportControls;
-                    SecSeekBarViewModel secSeekBarViewModel2 = SecSeekBarViewModel.this;
+                    SecSeekBarViewModel secSeekBarViewModel2 = secSeekBarViewModel;
                     if (secSeekBarViewModel2.isFalseSeek) {
                         SecSeekBarViewModel.access$setScrubbing(secSeekBarViewModel2, false);
-                        SecSeekBarViewModel.this.checkPlaybackPosition();
+                        secSeekBarViewModel.checkPlaybackPosition();
                         return;
                     }
                     MediaController mediaController = secSeekBarViewModel2.controller;
                     if (mediaController != null && (transportControls = mediaController.getTransportControls()) != null) {
                         transportControls.seekTo(progress);
                     }
-                    SecSeekBarViewModel secSeekBarViewModel3 = SecSeekBarViewModel.this;
+                    SecSeekBarViewModel secSeekBarViewModel3 = secSeekBarViewModel;
                     secSeekBarViewModel3.playbackState = null;
                     SecSeekBarViewModel.access$setScrubbing(secSeekBarViewModel3, false);
                 }
             });
+        }
+    }
+
+    /* renamed from: com.android.systemui.media.SecSeekBarViewModel$checkIfPollingNeeded$1, reason: invalid class name */
+    public final class AnonymousClass1 implements Runnable {
+        public final /* synthetic */ Runnable $cancelPolling;
+        public final /* synthetic */ int $traceCookie;
+
+        public AnonymousClass1(Runnable runnable, int i) {
+            this.$cancelPolling = runnable;
+            this.$traceCookie = i;
+        }
+
+        @Override // java.lang.Runnable
+        public final void run() {
+            this.$cancelPolling.run();
+            Trace.endAsyncSection("SeekBarPollingPosition", this.$traceCookie);
         }
     }
 
@@ -207,25 +221,25 @@ public final class SecSeekBarViewModel {
         this.callback = new MediaController.Callback() { // from class: com.android.systemui.media.SecSeekBarViewModel$callback$1
             @Override // android.media.session.MediaController.Callback
             public final void onMetadataChanged(MediaMetadata mediaMetadata) {
-                Pair enabledStateAndDuration = SecSeekBarViewModel.this.getEnabledStateAndDuration(mediaMetadata);
-                boolean booleanValue = ((Boolean) enabledStateAndDuration.component1()).booleanValue();
-                int intValue = ((Number) enabledStateAndDuration.component2()).intValue();
-                SecSeekBarViewModel secSeekBarViewModel = SecSeekBarViewModel.this;
+                Pair enabledStateAndDuration = this.this$0.getEnabledStateAndDuration(mediaMetadata);
+                boolean zBooleanValue = ((Boolean) enabledStateAndDuration.component1()).booleanValue();
+                int iIntValue = ((Number) enabledStateAndDuration.component2()).intValue();
+                SecSeekBarViewModel secSeekBarViewModel = this.this$0;
                 SecSeekBarViewModel.Progress progress = secSeekBarViewModel._data;
-                if (progress.duration != intValue) {
-                    secSeekBarViewModel.set_data(SecSeekBarViewModel.Progress.copy$default(progress, booleanValue, false, null, intValue, false, 94));
+                if (progress.duration != iIntValue) {
+                    secSeekBarViewModel.set_data(SecSeekBarViewModel.Progress.copy$default(progress, zBooleanValue, false, null, iIntValue, false, 94));
                 }
             }
 
             @Override // android.media.session.MediaController.Callback
             public final void onPlaybackStateChanged(PlaybackState playbackState) {
                 PlaybackState playbackState2;
-                SecSeekBarViewModel.this.playbackState = playbackState;
+                this.this$0.playbackState = playbackState;
                 if (playbackState != null) {
                     Integer num = 0;
-                    if (!num.equals(SecSeekBarViewModel.this.playbackState)) {
-                        SecSeekBarViewModel.this.checkIfPollingNeeded(true);
-                        final SecSeekBarViewModel secSeekBarViewModel = SecSeekBarViewModel.this;
+                    if (!num.equals(this.this$0.playbackState)) {
+                        this.this$0.checkIfPollingNeeded(true);
+                        final SecSeekBarViewModel secSeekBarViewModel = this.this$0;
                         final PlaybackState playbackState3 = secSeekBarViewModel.playbackState;
                         if (playbackState3 != null) {
                             PlaybackState playbackState4 = secSeekBarViewModel.lastState;
@@ -246,22 +260,22 @@ public final class SecSeekBarViewModel {
                                     }
                                 }
                                 PlaybackState playbackState8 = secSeekBarViewModel.lastState;
-                                Long valueOf = playbackState8 != null ? Long.valueOf(playbackState8.getPosition()) : null;
+                                Long lValueOf = playbackState8 != null ? Long.valueOf(playbackState8.getPosition()) : null;
                                 long position = playbackState3.getPosition();
                                 PlaybackState playbackState9 = secSeekBarViewModel.lastState;
-                                Integer valueOf2 = playbackState9 != null ? Integer.valueOf(playbackState9.getState()) : null;
+                                Integer numValueOf = playbackState9 != null ? Integer.valueOf(playbackState9.getState()) : null;
                                 int state = playbackState3.getState();
                                 PlaybackState playbackState10 = secSeekBarViewModel.lastState;
-                                Long valueOf3 = playbackState10 != null ? Long.valueOf(playbackState10.getLastPositionUpdateTime()) : null;
+                                Long lValueOf2 = playbackState10 != null ? Long.valueOf(playbackState10.getLastPositionUpdateTime()) : null;
                                 long lastPositionUpdateTime = playbackState3.getLastPositionUpdateTime();
                                 PlaybackState playbackState11 = secSeekBarViewModel.lastState;
-                                Float valueOf4 = playbackState11 != null ? Float.valueOf(playbackState11.getPlaybackSpeed()) : null;
-                                Log.d("CapsuleValue", "last position : " + valueOf + ", after position : " + position + ", last state : " + valueOf2 + ", after state : " + state + " last update : " + valueOf3 + " after update : " + lastPositionUpdateTime + " last speed : " + valueOf4 + " after speed : " + playbackState3.getPlaybackSpeed());
+                                Float fValueOf = playbackState11 != null ? Float.valueOf(playbackState11.getPlaybackSpeed()) : null;
+                                Log.d("CapsuleValue", "last position : " + lValueOf + ", after position : " + position + ", last state : " + numValueOf + ", after state : " + state + " last update : " + lValueOf2 + " after update : " + lastPositionUpdateTime + " last speed : " + fValueOf + " after speed : " + playbackState3.getPlaybackSpeed());
                                 secSeekBarViewModel.lastState = playbackState3;
                                 Runnable runnable = new Runnable() { // from class: com.android.systemui.media.SecSeekBarViewModel$checkIfCapsuleUpdateNeeded$1
                                     @Override // java.lang.Runnable
                                     public final void run() {
-                                        CoverMusicCapsuleController coverMusicCapsuleController = SecSeekBarViewModel.this.coverMusicCapsuleController;
+                                        CoverMusicCapsuleController coverMusicCapsuleController = secSeekBarViewModel.coverMusicCapsuleController;
                                         if (coverMusicCapsuleController != null) {
                                             coverMusicCapsuleController.updateEqualizerState(playbackState3);
                                         }
@@ -272,7 +286,7 @@ public final class SecSeekBarViewModel {
                                 delayableExecutor2.execute(new Runnable() { // from class: com.android.systemui.media.SecSeekBarViewModel$checkIfCapsuleUpdateNeeded$2
                                     @Override // java.lang.Runnable
                                     public final void run() {
-                                        OAMusicChipController oAMusicChipController = SecSeekBarViewModel.this.oaMusicChipController;
+                                        OAMusicChipController oAMusicChipController = secSeekBarViewModel.oaMusicChipController;
                                         if (oAMusicChipController != null) {
                                             oAMusicChipController.updatePlaybackState(playbackState3);
                                         }
@@ -285,14 +299,14 @@ public final class SecSeekBarViewModel {
                         return;
                     }
                 }
-                SecSeekBarViewModel secSeekBarViewModel2 = SecSeekBarViewModel.this;
+                SecSeekBarViewModel secSeekBarViewModel2 = this.this$0;
                 secSeekBarViewModel2.getClass();
                 secSeekBarViewModel2.bgExecutor.execute(new SecSeekBarViewModel$clearController$1(secSeekBarViewModel2));
             }
 
             @Override // android.media.session.MediaController.Callback
             public final void onSessionDestroyed() {
-                SecSeekBarViewModel secSeekBarViewModel = SecSeekBarViewModel.this;
+                SecSeekBarViewModel secSeekBarViewModel = this.this$0;
                 secSeekBarViewModel.getClass();
                 secSeekBarViewModel.bgExecutor.execute(new SecSeekBarViewModel$clearController$1(secSeekBarViewModel));
             }
@@ -312,32 +326,36 @@ public final class SecSeekBarViewModel {
         boolean z2 = this.listening && !this.scrubbing && (playbackState = this.playbackState) != null && (playbackState.getState() == 3 || playbackState.getState() == 4 || playbackState.getState() == 5);
         MediaController mediaController = this.controller;
         MediaSession.Token sessionToken = mediaController != null ? mediaController.getSessionToken() : null;
-        int hashCode = sessionToken != null ? sessionToken.hashCode() : 0;
+        int iHashCode = sessionToken != null ? sessionToken.hashCode() : 0;
         if (z2) {
             if (this.cancel == null) {
-                Trace.beginAsyncSection("SeekBarPollingPosition", hashCode);
-                this.cancel = new SecSeekBarViewModel$checkIfPollingNeeded$1(this.bgExecutor.executeRepeatedly(new Runnable() { // from class: com.android.systemui.media.SecSeekBarViewModel$checkIfPollingNeeded$cancelPolling$1
+                Trace.beginAsyncSection("SeekBarPollingPosition", iHashCode);
+                this.cancel = new AnonymousClass1(this.bgExecutor.executeRepeatedly(new Runnable() { // from class: com.android.systemui.media.SecSeekBarViewModel$checkIfPollingNeeded$cancelPolling$1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SecSeekBarViewModel.this.checkPlaybackPosition();
+                        this.$tmp0.checkPlaybackPosition();
                     }
-                }, 0L, 100L), hashCode);
+                }, 0L, 100L), iHashCode);
                 return;
             }
             return;
         }
         if (z) {
             checkPlaybackPosition();
-            SecSeekBarViewModel$checkIfPollingNeeded$1 secSeekBarViewModel$checkIfPollingNeeded$1 = this.cancel;
-            if (secSeekBarViewModel$checkIfPollingNeeded$1 != null) {
-                secSeekBarViewModel$checkIfPollingNeeded$1.run();
+            AnonymousClass1 anonymousClass1 = this.cancel;
+            if (anonymousClass1 != null) {
+                anonymousClass1.run();
             }
             this.cancel = null;
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:21:0x004e  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void checkPlaybackPosition() {
-        Integer num;
+        Integer numValueOf;
         int i = this._data.duration;
         PlaybackState playbackState = this.playbackState;
         if (playbackState != null) {
@@ -345,27 +363,27 @@ public final class SecSeekBarViewModel {
             long position = playbackState.getPosition();
             if (playbackState.getState() == 3 || playbackState.getState() == 4 || playbackState.getState() == 5) {
                 long lastPositionUpdateTime = playbackState.getLastPositionUpdateTime();
-                long elapsedRealtime = SystemClock.elapsedRealtime();
+                long jElapsedRealtime = SystemClock.elapsedRealtime();
                 if (lastPositionUpdateTime > 0) {
-                    long position2 = playbackState.getPosition() + ((long) (playbackState.getPlaybackSpeed() * (elapsedRealtime - lastPositionUpdateTime)));
+                    long position2 = playbackState.getPosition() + ((long) (playbackState.getPlaybackSpeed() * (jElapsedRealtime - lastPositionUpdateTime)));
                     if (j < 0 || position2 <= j) {
                         j = position2 < 0 ? 0L : position2;
                     }
-                    num = Integer.valueOf((int) j);
+                } else {
+                    j = position;
                 }
+                numValueOf = Integer.valueOf((int) j);
             }
-            j = position;
-            num = Integer.valueOf((int) j);
         } else {
-            num = null;
+            numValueOf = null;
         }
-        Integer num2 = num;
-        if (num2 == null || Intrinsics.areEqual(this._data.elapsedTime, num2)) {
+        Integer num = numValueOf;
+        if (num == null || Intrinsics.areEqual(this._data.elapsedTime, num)) {
             return;
         }
         int i2 = (int) this.onSeekBarPreesedValue;
         if (i2 == 0) {
-            set_data(Progress.copy$default(this._data, false, false, num2, 0, false, 111));
+            set_data(Progress.copy$default(this._data, false, false, num, 0, false, 111));
         } else {
             set_data(Progress.copy$default(this._data, false, false, Integer.valueOf(i2), 0, false, 111));
             this.onSeekBarPreesedValue = 0L;
@@ -403,7 +421,6 @@ public final class SecSeekBarViewModel {
         this._progress.postValue(progress);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SeekBarTouchListener implements View.OnTouchListener, GestureDetector.OnGestureListener {
         public final SeekBar bar;
         public final GestureDetectorCompat detector;
@@ -430,11 +447,11 @@ public final class SecSeekBarViewModel {
             int width = (this.bar.getWidth() - paddingLeft) - paddingRight;
             double d = this.bar.isLayoutRtl() ? ((1 - min) * width) + paddingLeft : (width * min) + paddingLeft;
             long height = this.bar.getHeight() / 2;
-            int round = (int) (Math.round(d) - height);
-            int round2 = (int) (Math.round(d) + height);
-            int round3 = Math.round(motionEvent.getX());
+            int iRound = (int) (Math.round(d) - height);
+            int iRound2 = (int) (Math.round(d) + height);
+            int iRound3 = Math.round(motionEvent.getX());
             boolean z = false;
-            if (round <= round3 && round3 <= round2) {
+            if (iRound <= iRound3 && iRound3 <= iRound2) {
                 z = true;
             }
             this.shouldGoToSeekBar = z;
@@ -453,7 +470,7 @@ public final class SecSeekBarViewModel {
                 secSeekBarViewModel.bgExecutor.execute(new Runnable() { // from class: com.android.systemui.media.SecSeekBarViewModel$onSeekFalse$1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SecSeekBarViewModel secSeekBarViewModel2 = SecSeekBarViewModel.this;
+                        SecSeekBarViewModel secSeekBarViewModel2 = secSeekBarViewModel;
                         if (secSeekBarViewModel2.scrubbing) {
                             secSeekBarViewModel2.isFalseSeek = true;
                         }

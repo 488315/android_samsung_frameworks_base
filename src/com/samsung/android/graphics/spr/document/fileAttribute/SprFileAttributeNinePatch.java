@@ -36,21 +36,21 @@ public class SprFileAttributeNinePatch extends SprFileAttributeBase {
 
     @Override // com.samsung.android.graphics.spr.document.fileAttribute.SprFileAttributeBase
     public void fromSPR(SprInputStream sprInputStream) throws IOException {
-        int readInt = sprInputStream.readInt();
-        this.xSize = readInt;
-        this.xStart = new float[readInt];
-        this.xEnd = new float[readInt];
-        for (int i = 0; i < this.xSize; i++) {
-            this.xStart[i] = sprInputStream.readFloat();
-            this.xEnd[i] = sprInputStream.readFloat();
+        int i = sprInputStream.readInt();
+        this.xSize = i;
+        this.xStart = new float[i];
+        this.xEnd = new float[i];
+        for (int i2 = 0; i2 < this.xSize; i2++) {
+            this.xStart[i2] = sprInputStream.readFloat();
+            this.xEnd[i2] = sprInputStream.readFloat();
         }
-        int readInt2 = sprInputStream.readInt();
-        this.ySize = readInt2;
-        this.yStart = new float[readInt2];
-        this.yEnd = new float[readInt2];
-        for (int i2 = 0; i2 < this.ySize; i2++) {
-            this.yStart[i2] = sprInputStream.readFloat();
-            this.yEnd[i2] = sprInputStream.readFloat();
+        int i3 = sprInputStream.readInt();
+        this.ySize = i3;
+        this.yStart = new float[i3];
+        this.yEnd = new float[i3];
+        for (int i4 = 0; i4 < this.ySize; i4++) {
+            this.yStart[i4] = sprInputStream.readFloat();
+            this.yEnd[i4] = sprInputStream.readFloat();
         }
     }
 

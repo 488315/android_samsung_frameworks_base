@@ -2,6 +2,7 @@ package com.android.wm.shell.compatui;
 
 import android.app.TaskInfo;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Rect;
 import android.provider.Settings;
 import android.util.Pair;
@@ -18,7 +19,6 @@ import com.android.wm.shell.common.SyncTransactionQueue;
 import com.android.wm.shell.transition.Transitions;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class LetterboxEduWindowManager extends CompatUIWindowManagerAbstract {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -50,49 +50,23 @@ public class LetterboxEduWindowManager extends CompatUIWindowManagerAbstract {
         return this.mLayout;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:8:0x001d, code lost:
-    
-        if (r3.mCompatUIConfiguration.mLetterboxEduSharedPreferences.getBoolean(java.lang.String.valueOf(r3.mUserId), false) == false) goto L10;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:10:0x001f  */
     @Override // com.android.wm.shell.compatui.CompatUIWindowManagerAbstract
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final boolean eligibleToShowLayout() {
-        /*
-            r3 = this;
-            boolean r0 = r3.mEligibleForLetterboxEducation
-            r1 = 0
-            if (r0 == 0) goto L37
-            boolean r0 = r3.isTaskbarEduShowing()
-            if (r0 != 0) goto L37
-            com.android.wm.shell.compatui.LetterboxEduDialogLayout r0 = r3.mLayout
-            if (r0 != 0) goto L1f
-            com.android.wm.shell.compatui.CompatUIConfiguration r0 = r3.mCompatUIConfiguration
-            int r2 = r3.mUserId
-            android.content.SharedPreferences r0 = r0.mLetterboxEduSharedPreferences
-            java.lang.String r2 = java.lang.String.valueOf(r2)
-            boolean r0 = r0.getBoolean(r2, r1)
-            if (r0 != 0) goto L37
-        L1f:
-            com.android.wm.shell.common.DockStateReader r3 = r3.mDockStateReader
-            android.content.Context r3 = r3.mContext
-            android.content.IntentFilter r0 = com.android.wm.shell.common.DockStateReader.DOCK_INTENT_FILTER
-            r2 = 0
-            android.content.Intent r3 = r3.registerReceiver(r2, r0)
-            if (r3 == 0) goto L35
-            java.lang.String r0 = "android.intent.extra.DOCK_STATE"
-            int r3 = r3.getIntExtra(r0, r1)
-            if (r3 == 0) goto L35
-            goto L37
-        L35:
-            r3 = 1
-            return r3
-        L37:
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.compatui.LetterboxEduWindowManager.eligibleToShowLayout():boolean");
+        if (this.mEligibleForLetterboxEducation && !isTaskbarEduShowing()) {
+            if (this.mLayout == null) {
+                if (!this.mCompatUIConfiguration.mLetterboxEduSharedPreferences.getBoolean(String.valueOf(this.mUserId), false)) {
+                    Intent intentRegisterReceiver = this.mDockStateReader.mContext.registerReceiver(null, DockStateReader.DOCK_INTENT_FILTER);
+                    if (intentRegisterReceiver == null || intentRegisterReceiver.getIntExtra("android.intent.extra.DOCK_STATE", 0) == 0) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     @Override // com.android.wm.shell.compatui.CompatUIWindowManagerAbstract

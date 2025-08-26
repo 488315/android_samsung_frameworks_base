@@ -1,6 +1,7 @@
 package com.android.wm.shell.pip2.phone;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.SurfaceControl;
@@ -25,7 +26,6 @@ import com.samsung.android.knox.custom.IKnoxCustomManager;
 import java.util.Optional;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PipMotionHelper implements PipAppOpsListener.Callback, FloatingContentCoordinator.FloatingContent, PipTransitionState.PipTransitionStateChangedListener {
     public final Context mContext;
@@ -56,7 +56,7 @@ public class PipMotionHelper implements PipAppOpsListener.Callback, FloatingCont
     public final PipMotionHelper$$ExternalSyntheticLambda0 mResizePipUpdateListener = new PhysicsAnimator.UpdateListener() { // from class: com.android.wm.shell.pip2.phone.PipMotionHelper$$ExternalSyntheticLambda0
         @Override // com.android.wm.shell.shared.animation.PhysicsAnimator.UpdateListener
         public final void onAnimationUpdateForProperty(Object obj) {
-            PipMotionHelper pipMotionHelper = PipMotionHelper.this;
+            PipMotionHelper pipMotionHelper = this.f$0;
             PipBoundsState pipBoundsState = pipMotionHelper.mPipBoundsState;
             if (pipBoundsState.mMotionBoundsState.isInMotion()) {
                 pipMotionHelper.mPipScheduler.scheduleUserResizePip(pipBoundsState.mMotionBoundsState.mBoundsInMotion, 0.0f);
@@ -138,24 +138,24 @@ public class PipMotionHelper implements PipAppOpsListener.Callback, FloatingCont
         float f3 = f;
         PhysicsAnimator physicsAnimator = this.mTemporaryBoundsPhysicsAnimator;
         FloatProperties$Companion$RECT_WIDTH$1 floatProperties$Companion$RECT_WIDTH$1 = FloatProperties.RECT_WIDTH;
-        float width = pipBoundsState.getBounds().width();
+        float fWidth = pipBoundsState.getBounds().width();
         PhysicsAnimator.SpringConfig springConfig = this.mSpringConfig;
-        physicsAnimator.spring(floatProperties$Companion$RECT_WIDTH$1, width, 0.0f, springConfig);
+        physicsAnimator.spring(floatProperties$Companion$RECT_WIDTH$1, fWidth, 0.0f, springConfig);
         physicsAnimator.spring(FloatProperties.RECT_HEIGHT, pipBoundsState.getBounds().height(), 0.0f, springConfig);
         physicsAnimator.flingThenSpring(FloatProperties.RECT_X, f3, z ? this.mStashConfigX : this.mFlingConfigX, this.mSpringConfig, true);
         physicsAnimator.flingThenSpring(FloatProperties.RECT_Y, f2, this.mFlingConfigY, this.mSpringConfig, false);
         PipDisplayLayoutState pipDisplayLayoutState = pipBoundsState.mPipDisplayLayoutState;
         Rect rect = pipDisplayLayoutState.getDisplayLayout().mStableInsets;
-        float width2 = z ? (pipBoundsState.mStashOffset - pipBoundsState.getBounds().width()) + rect.left : pipBoundsState.mMovementBounds.left;
+        float fWidth2 = z ? (pipBoundsState.mStashOffset - pipBoundsState.getBounds().width()) + rect.left : pipBoundsState.mMovementBounds.left;
         float f4 = z ? (pipDisplayLayoutState.getDisplayBounds().right - pipBoundsState.mStashOffset) - rect.right : pipBoundsState.mMovementBounds.right;
         if (f3 >= 0.0f) {
-            width2 = f4;
+            fWidth2 = f4;
         }
-        startBoundsAnimator(width2, PhysicsAnimator.estimateFlingEndValue(pipBoundsState.mMotionBoundsState.mBoundsInMotion.top, f2, this.mFlingConfigY), pipTouchHandler$$ExternalSyntheticLambda3);
+        startBoundsAnimator(fWidth2, PhysicsAnimator.estimateFlingEndValue(pipBoundsState.mMotionBoundsState.mBoundsInMotion.top, f2, this.mFlingConfigY), pipTouchHandler$$ExternalSyntheticLambda3);
     }
 
     @Override // com.android.wm.shell.pip2.phone.PipTransitionState.PipTransitionStateChangedListener
-    public final void onPipTransitionStateChanged(int i, int i2, Bundle bundle) {
+    public final void onPipTransitionStateChanged(int i, int i2, Bundle bundle) throws Resources.NotFoundException {
         PipScheduler pipScheduler = this.mPipScheduler;
         final PipTransitionState pipTransitionState = this.mPipTransitionState;
         PipBoundsState pipBoundsState = this.mPipBoundsState;
@@ -180,7 +180,7 @@ public class PipMotionHelper implements PipAppOpsListener.Callback, FloatingCont
                 pipTransitionState.mMainHandler.post(new Runnable() { // from class: com.android.wm.shell.pip2.phone.PipTransitionState$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        PipTransitionState.this.setState(6, null);
+                        pipTransitionState.setState(6, null);
                     }
                 });
                 return;
@@ -224,7 +224,7 @@ public class PipMotionHelper implements PipAppOpsListener.Callback, FloatingCont
                 pipResizeAnimator.mAnimationEndCallback = new Runnable() { // from class: com.android.wm.shell.pip2.phone.PipMotionHelper$$ExternalSyntheticLambda3
                     @Override // java.lang.Runnable
                     public final void run() {
-                        PipMotionHelper pipMotionHelper = PipMotionHelper.this;
+                        PipMotionHelper pipMotionHelper = this.f$0;
                         Rect rect2 = rect;
                         pipMotionHelper.mPipBoundsState.mMotionBoundsState.setBoundsInMotion(rect2);
                         pipMotionHelper.settlePipBoundsAfterPhysicsAnimation(false);
@@ -297,7 +297,7 @@ public class PipMotionHelper implements PipAppOpsListener.Callback, FloatingCont
                 this.mPipHighPerfSession = pipPerfHintController.startSession(new Consumer() { // from class: com.android.wm.shell.pip2.phone.PipMotionHelper$$ExternalSyntheticLambda1
                     @Override // java.util.function.Consumer
                     public final void accept(Object obj) {
-                        PipMotionHelper.this.getClass();
+                        this.f$0.getClass();
                     }
                 }, "startBoundsAnimator");
             }
@@ -324,7 +324,7 @@ public class PipMotionHelper implements PipAppOpsListener.Callback, FloatingCont
             @Override // java.lang.Runnable
             public final void run() {
                 WindowContainerTransaction windowContainerTransaction;
-                PipScheduler pipScheduler2 = PipScheduler.this;
+                PipScheduler pipScheduler2 = pipScheduler;
                 boolean z2 = z;
                 if (pipScheduler2.mPipTransitionState.isInPip()) {
                     PipTransition pipTransition = pipScheduler2.mPipTransitionController;

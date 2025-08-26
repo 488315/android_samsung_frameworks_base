@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import java.util.List;
 import kotlin.text.StringsKt__IndentKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class PhysicsBasedUnfoldTransitionProgressProvider implements UnfoldTransitionProgressProvider, FoldStateProvider.FoldUpdatesListener, DynamicAnimation.OnAnimationEndListener {
     public ValueAnimator cannedAnimator;
@@ -41,7 +40,6 @@ public final class PhysicsBasedUnfoldTransitionProgressProvider implements Unfol
     public final SpringAnimation springAnimation;
     public float transitionProgress;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AnimationProgressProperty extends FloatProperty {
         public static final AnimationProgressProperty INSTANCE = new AnimationProgressProperty();
 
@@ -60,7 +58,6 @@ public final class PhysicsBasedUnfoldTransitionProgressProvider implements Unfol
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class CannedAnimationListener extends AnimatorListenerAdapter {
         public CannedAnimationListener() {
         }
@@ -92,13 +89,13 @@ public final class PhysicsBasedUnfoldTransitionProgressProvider implements Unfol
             public final void run() {
                 PhysicsBasedUnfoldTransitionProgressProvider physicsBasedUnfoldTransitionProgressProvider = PhysicsBasedUnfoldTransitionProgressProvider.this;
                 SpringAnimation springAnimation2 = physicsBasedUnfoldTransitionProgressProvider.springAnimation;
-                UnfoldFrameCallbackScheduler create = physicsBasedUnfoldTransitionProgressProvider.schedulerFactory.create();
+                UnfoldFrameCallbackScheduler unfoldFrameCallbackSchedulerCreate = physicsBasedUnfoldTransitionProgressProvider.schedulerFactory.create();
                 AnimationHandler animationHandler = springAnimation2.mAnimationHandler;
-                if (animationHandler == null || animationHandler.mScheduler != create) {
+                if (animationHandler == null || animationHandler.mScheduler != unfoldFrameCallbackSchedulerCreate) {
                     if (springAnimation2.mRunning) {
                         throw new AndroidRuntimeException("Animations are still running and the animationhandler should not be set at this timming");
                     }
-                    springAnimation2.mAnimationHandler = new AnimationHandler(create);
+                    springAnimation2.mAnimationHandler = new AnimationHandler(unfoldFrameCallbackSchedulerCreate);
                 }
                 PhysicsBasedUnfoldTransitionProgressProvider physicsBasedUnfoldTransitionProgressProvider2 = PhysicsBasedUnfoldTransitionProgressProvider.this;
                 ((DeviceFoldStateProvider) physicsBasedUnfoldTransitionProgressProvider2.foldStateProvider).addCallback(physicsBasedUnfoldTransitionProgressProvider2);
@@ -110,7 +107,7 @@ public final class PhysicsBasedUnfoldTransitionProgressProvider implements Unfol
     @Override // com.android.systemui.unfold.util.CallbackController
     public final void addCallback(Object obj) {
         final UnfoldTransitionProgressProvider.TransitionProgressListener transitionProgressListener = (UnfoldTransitionProgressProvider.TransitionProgressListener) obj;
-        this.progressHandler.post(new Runnable() { // from class: com.android.systemui.unfold.progress.PhysicsBasedUnfoldTransitionProgressProvider$addCallback$1
+        this.progressHandler.post(new Runnable() { // from class: com.android.systemui.unfold.progress.PhysicsBasedUnfoldTransitionProgressProvider.addCallback.1
             @Override // java.lang.Runnable
             public final void run() {
                 ((ArrayList) PhysicsBasedUnfoldTransitionProgressProvider.this.listeners).add(transitionProgressListener);
@@ -124,8 +121,8 @@ public final class PhysicsBasedUnfoldTransitionProgressProvider implements Unfol
             return;
         }
         Thread thread = handler.getLooper().getThread();
-        Thread currentThread = Thread.currentThread();
-        throw new IllegalStateException(StringsKt__IndentKt.trimMargin$default("should be called from the progress thread.\n                progressThread=" + thread + " tid=" + thread.getId() + "\n                Thread.currentThread()=" + currentThread + " tid=" + currentThread.getId()).toString());
+        Thread threadCurrentThread = Thread.currentThread();
+        throw new IllegalStateException(StringsKt__IndentKt.trimMargin$default("should be called from the progress thread.\n                progressThread=" + thread + " tid=" + thread.getId() + "\n                Thread.currentThread()=" + threadCurrentThread + " tid=" + threadCurrentThread.getId()).toString());
     }
 
     public final void cancelTransition(float f, boolean z) {
@@ -177,12 +174,12 @@ public final class PhysicsBasedUnfoldTransitionProgressProvider implements Unfol
         springAnimation.removeEndListener(this);
         springAnimation.cancel();
         springAnimation.addEndListener(this);
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this, AnimationProgressProperty.INSTANCE, this.transitionProgress, 1.0f);
-        ofFloat.addListener(new CannedAnimationListener());
-        ofFloat.setDuration((long) ((1.0f - this.transitionProgress) * 1000.0f));
-        ofFloat.setInterpolator(this.emphasizedInterpolator);
-        ofFloat.start();
-        this.cannedAnimator = ofFloat;
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this, AnimationProgressProperty.INSTANCE, this.transitionProgress, 1.0f);
+        objectAnimatorOfFloat.addListener(new CannedAnimationListener());
+        objectAnimatorOfFloat.setDuration((long) ((1.0f - this.transitionProgress) * 1000.0f));
+        objectAnimatorOfFloat.setInterpolator(this.emphasizedInterpolator);
+        objectAnimatorOfFloat.start();
+        this.cannedAnimator = objectAnimatorOfFloat;
     }
 
     @Override // androidx.dynamicanimation.animation.DynamicAnimation.OnAnimationEndListener
@@ -222,45 +219,27 @@ public final class PhysicsBasedUnfoldTransitionProgressProvider implements Unfol
         Trace.setCounter("fold_update", i);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:12:0x001a, code lost:
-    
-        if (r3 > 1.0f) goto L9;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:9:0x0014 A[PHI: r0
+      0x0014: PHI (r0v5 float) = (r0v3 float), (r0v4 float) binds: [B:8:0x0012, B:11:0x001a] A[DONT_GENERATE, DONT_INLINE]] */
     @Override // com.android.systemui.unfold.updates.FoldStateProvider.FoldUpdatesListener
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void onHingeAngleUpdate(float r3) {
-        /*
-            r2 = this;
-            r2.assertInProgressThread$1()
-            boolean r0 = r2.isTransitionRunning
-            if (r0 == 0) goto L22
-            boolean r0 = r2.isAnimatedCancelRunning
-            if (r0 == 0) goto Lc
-            goto L22
-        Lc:
-            r0 = 1126498304(0x43250000, float:165.0)
-            float r3 = r3 / r0
-            r0 = 0
-            int r1 = (r3 > r0 ? 1 : (r3 == r0 ? 0 : -1))
-            if (r1 >= 0) goto L16
-        L14:
-            r3 = r0
-            goto L1d
-        L16:
-            r0 = 1065353216(0x3f800000, float:1.0)
-            int r1 = (r3 > r0 ? 1 : (r3 == r0 ? 0 : -1))
-            if (r1 <= 0) goto L1d
-            goto L14
-        L1d:
-            androidx.dynamicanimation.animation.SpringAnimation r2 = r2.springAnimation
-            r2.animateToFinalPosition(r3)
-        L22:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.unfold.progress.PhysicsBasedUnfoldTransitionProgressProvider.onHingeAngleUpdate(float):void");
+    public final void onHingeAngleUpdate(float f) {
+        assertInProgressThread$1();
+        if (!this.isTransitionRunning || this.isAnimatedCancelRunning) {
+            return;
+        }
+        float f2 = f / 165.0f;
+        float f3 = 0.0f;
+        if (f2 < 0.0f) {
+            f2 = f3;
+        } else {
+            f3 = 1.0f;
+            if (f2 > 1.0f) {
+            }
+        }
+        this.springAnimation.animateToFinalPosition(f2);
     }
 
     @Override // com.android.systemui.unfold.updates.FoldStateProvider.FoldUpdatesListener
@@ -280,7 +259,7 @@ public final class PhysicsBasedUnfoldTransitionProgressProvider implements Unfol
     @Override // com.android.systemui.unfold.util.CallbackController
     public final void removeCallback(Object obj) {
         final UnfoldTransitionProgressProvider.TransitionProgressListener transitionProgressListener = (UnfoldTransitionProgressProvider.TransitionProgressListener) obj;
-        this.progressHandler.post(new Runnable() { // from class: com.android.systemui.unfold.progress.PhysicsBasedUnfoldTransitionProgressProvider$removeCallback$1
+        this.progressHandler.post(new Runnable() { // from class: com.android.systemui.unfold.progress.PhysicsBasedUnfoldTransitionProgressProvider.removeCallback.1
             @Override // java.lang.Runnable
             public final void run() {
                 ((ArrayList) PhysicsBasedUnfoldTransitionProgressProvider.this.listeners).remove(transitionProgressListener);

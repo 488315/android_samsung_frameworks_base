@@ -3,10 +3,15 @@ package android.inputmethodservice;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.hardware.display.DisplayManager;
 import android.net.Uri;
+import android.os.RemoteException;
 import android.os.UserManager;
 import android.util.Log;
 import android.util.Printer;
+import android.view.Display;
+import android.view.IWindowManager;
+import android.view.WindowManagerGlobal;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import com.samsung.android.desktopmode.SemDesktopModeManager;
@@ -26,6 +31,38 @@ final class SemDesktopModeManagerWrapper {
     SemDesktopModeManagerWrapper(Context context) {
         this.mSemDesktopModeManager = (SemDesktopModeManager) context.getSystemService(Context.SEM_DESKTOP_MODE_SERVICE);
         this.mImm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+    }
+
+    boolean isNewDexMode(Context context) {
+        for (Display display : ((DisplayManager) context.getSystemService(Context.DISPLAY_SERVICE)).getDisplays()) {
+            if ((display.getFlags() & 131072) != 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    boolean isDexDesktopDisplay(Context context) {
+        int focusedDisplayId = getFocusedDisplayId();
+        for (Display display : ((DisplayManager) context.getSystemService(Context.DISPLAY_SERVICE)).getDisplays()) {
+            if (display.getDisplayId() == focusedDisplayId && (display.getFlags() & 131072) != 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private int getFocusedDisplayId() {
+        try {
+            IWindowManager windowManagerService = WindowManagerGlobal.getWindowManagerService();
+            if (windowManagerService != null) {
+                return windowManagerService.getTopFocusedDisplayId();
+            }
+            return 0;
+        } catch (RemoteException unused) {
+            Log.w(TAG, "Unable to get focusedDisplayId");
+            return 0;
+        }
     }
 
     static Uri getDexKeyboardSettingsUri() {

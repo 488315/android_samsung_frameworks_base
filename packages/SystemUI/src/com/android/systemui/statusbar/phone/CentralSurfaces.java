@@ -19,13 +19,11 @@ import com.samsung.android.knox.custom.IKnoxCustomManager;
 import com.samsung.android.sdk.scs.ai.visual.c2pa.C2paManifestList;
 import java.io.PrintWriter;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public interface CentralSurfaces extends Dumpable, LifecycleOwner, CoreStartable {
     public static final long[] CAMERA_LAUNCH_GESTURE_VIBRATION_TIMINGS = {20, 20, 20, 20, 100, 20};
     public static final int[] CAMERA_LAUNCH_GESTURE_VIBRATION_AMPLITUDES = {39, 82, 139, IKnoxCustomManager.Stub.TRANSACTION_addAutoCallNumber, 0, 127};
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class KeyboardShortcutsMessage {
         public final int mDeviceId;
 
@@ -54,18 +52,18 @@ public interface CentralSurfaces extends Dumpable, LifecycleOwner, CoreStartable
     }
 
     static ActivityOptions getDefaultActivityOptions(RemoteAnimationAdapter remoteAnimationAdapter) {
-        ActivityOptions makeBasic;
+        ActivityOptions activityOptionsMakeBasic;
         if (remoteAnimationAdapter == null) {
-            makeBasic = ActivityOptions.makeBasic();
+            activityOptionsMakeBasic = ActivityOptions.makeBasic();
         } else if (Transitions.ENABLE_SHELL_TRANSITIONS) {
             IRemoteAnimationRunner runner = remoteAnimationAdapter.getRunner();
             boolean z = RemoteAnimationRunnerCompat.IS_SHELL_TRANSITION_ENABLED;
-            makeBasic = ActivityOptions.makeRemoteTransition(new RemoteTransition(new RemoteAnimationRunnerCompat.AnonymousClass1(runner), remoteAnimationAdapter.getCallingApplication(), "SysUILaunch"));
+            activityOptionsMakeBasic = ActivityOptions.makeRemoteTransition(new RemoteTransition(new RemoteAnimationRunnerCompat.AnonymousClass1(runner), remoteAnimationAdapter.getCallingApplication(), "SysUILaunch"));
         } else {
-            makeBasic = ActivityOptions.makeRemoteAnimation(remoteAnimationAdapter);
+            activityOptionsMakeBasic = ActivityOptions.makeRemoteAnimation(remoteAnimationAdapter);
         }
-        makeBasic.setSplashScreenStyle(0);
-        return makeBasic;
+        activityOptionsMakeBasic.setSplashScreenStyle(0);
+        return activityOptionsMakeBasic;
     }
 
     static PackageManager getPackageManagerForUser(int i, Context context) {

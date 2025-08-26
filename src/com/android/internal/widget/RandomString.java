@@ -9,9 +9,9 @@ class RandomString {
     }
 
     public static String randomstring(int i, int i2) {
-        int rand = rand(i, i2);
-        byte[] bArr = new byte[rand];
-        for (int i3 = 0; i3 < rand; i3++) {
+        int iRand = rand(i, i2);
+        byte[] bArr = new byte[iRand];
+        for (int i3 = 0; i3 < iRand; i3++) {
             if (rand(0, 10) % 2 == 0) {
                 bArr[i3] = (byte) rand(48, 57);
             } else {
@@ -22,11 +22,11 @@ class RandomString {
     }
 
     private static int rand(int i, int i2) {
-        int nextInt = new Random().nextInt((i2 - i) + 1);
-        if (nextInt < 0) {
-            nextInt = -nextInt;
+        int iNextInt = new Random().nextInt((i2 - i) + 1);
+        if (iNextInt < 0) {
+            iNextInt = -iNextInt;
         }
-        return i + nextInt;
+        return i + iNextInt;
     }
 
     public static String randomstring() {

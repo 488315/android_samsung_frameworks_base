@@ -7,7 +7,6 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.android.app.tracing.TraceUtilsKt;
 import kotlin.jvm.internal.Reflection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class LottieViewWrapper extends LottieAnimationView {
     public static final int $stable = 0;
@@ -19,14 +18,14 @@ public class LottieViewWrapper extends LottieAnimationView {
     @Override // com.airbnb.lottie.LottieAnimationView, android.view.View
     public void invalidate() {
         String str = Reflection.getOrCreateKotlinClass(getClass()) + " invalidate";
-        boolean isEnabled = Trace.isEnabled();
-        if (isEnabled) {
+        boolean zIsEnabled = Trace.isEnabled();
+        if (zIsEnabled) {
             TraceUtilsKt.beginSlice(str);
         }
         try {
             super.invalidate();
         } finally {
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
         }

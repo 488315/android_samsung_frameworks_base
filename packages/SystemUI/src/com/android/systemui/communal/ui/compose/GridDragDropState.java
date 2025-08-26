@@ -10,7 +10,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class GridDragDropState {
     public final GridDragDropStateV1 dragDropState;
@@ -40,15 +39,15 @@ public final class GridDragDropState {
                 contentListState.onRemove(i);
                 gridDragDropStateV1.setDraggingToRemove(false);
                 IntRect.Companion.getClass();
-                gridDragDropStateV1.updateDragPositionForRemove.mo779invoke(IntRect.Zero);
+                gridDragDropStateV1.updateDragPositionForRemove.mo781invoke(IntRect.Zero);
             }
             ContentListState.onSaveList$default(contentListState);
             ((SnapshotMutableStateImpl) gridDragDropStateV1.draggingItemKey$delegate).setValue(null);
         }
         gridDragDropStateV1.previousTargetItemKey = null;
         Offset.Companion.getClass();
-        ((SnapshotMutableStateImpl) gridDragDropStateV1.draggingItemDraggedDelta$delegate).setValue(Offset.m393boximpl(0L));
-        ((SnapshotMutableStateImpl) gridDragDropStateV1.draggingItemInitialOffset$delegate).setValue(Offset.m393boximpl(0L));
+        ((SnapshotMutableStateImpl) gridDragDropStateV1.draggingItemDraggedDelta$delegate).setValue(Offset.m395boximpl(0L));
+        ((SnapshotMutableStateImpl) gridDragDropStateV1.draggingItemInitialOffset$delegate).setValue(Offset.m395boximpl(0L));
         Integer num = gridDragDropStateV1.spacerIndex;
         if (num != null) {
             contentListState.list.remove(num.intValue());

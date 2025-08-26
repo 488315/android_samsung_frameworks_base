@@ -83,7 +83,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.CoroutineDispatcher;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class NotificationShadeWindowViewController implements Dumpable {
     public final AmbientState mAmbientState;
@@ -134,7 +133,6 @@ public class NotificationShadeWindowViewController implements Dumpable {
     public boolean mIsOcclusionTransitionRunning = false;
     public boolean mPluginLockTouchArea = false;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.shade.NotificationShadeWindowViewController$1, reason: invalid class name */
     public class AnonymousClass1 {
         public boolean mLastInterceptWasDragDownHelper = false;
@@ -144,7 +142,7 @@ public class NotificationShadeWindowViewController implements Dumpable {
     }
 
     /* renamed from: -$$Nest$mdidNotificationPanelInterceptEvent, reason: not valid java name */
-    public static boolean m2930$$Nest$mdidNotificationPanelInterceptEvent(NotificationShadeWindowViewController notificationShadeWindowViewController, MotionEvent motionEvent) {
+    public static boolean m2947$$Nest$mdidNotificationPanelInterceptEvent(NotificationShadeWindowViewController notificationShadeWindowViewController, MotionEvent motionEvent) {
         if (!notificationShadeWindowViewController.mShadeViewController.handleExternalInterceptTouch(motionEvent)) {
             return false;
         }
@@ -153,7 +151,7 @@ public class NotificationShadeWindowViewController implements Dumpable {
     }
 
     /* renamed from: -$$Nest$mlogDownDispatch, reason: not valid java name */
-    public static void m2931$$Nest$mlogDownDispatch(NotificationShadeWindowViewController notificationShadeWindowViewController, MotionEvent motionEvent, String str, final Boolean bool) {
+    public static void m2948$$Nest$mlogDownDispatch(NotificationShadeWindowViewController notificationShadeWindowViewController, MotionEvent motionEvent, String str, final Boolean bool) {
         notificationShadeWindowViewController.getClass();
         if (motionEvent.getAction() == 0) {
             ShadeLogger shadeLogger = notificationShadeWindowViewController.mShadeLogger;
@@ -162,7 +160,7 @@ public class NotificationShadeWindowViewController implements Dumpable {
             Function1 function1 = new Function1() { // from class: com.android.systemui.shade.ShadeLogger$$ExternalSyntheticLambda19
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
+                public final Object mo781invoke(Object obj) {
                     String str2;
                     LogMessage logMessage = (LogMessage) obj;
                     Boolean bool2 = Boolean.TRUE;
@@ -181,12 +179,12 @@ public class NotificationShadeWindowViewController implements Dumpable {
                 }
             };
             LogBuffer logBuffer = shadeLogger.buffer;
-            LogMessage obtain = logBuffer.obtain("systemui.shade", logLevel, function1, null);
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+            LogMessage logMessageObtain = logBuffer.obtain("systemui.shade", logLevel, function1, null);
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
             logMessageImpl.str1 = str;
             logMessageImpl.long1 = motionEvent.getEventTime();
             logMessageImpl.long2 = motionEvent.getDownTime();
-            logBuffer.commit(obtain);
+            logBuffer.commit(logMessageObtain);
         }
     }
 
@@ -288,7 +286,7 @@ public class NotificationShadeWindowViewController implements Dumpable {
 
             @Override // android.view.View.OnAttachStateChangeListener
             public final void onViewDetachedFromWindow(View view) {
-                SecLockIconViewController.m970$$Nest$munregisterCallbacks(SecLockIconViewController.this);
+                SecLockIconViewController.m972$$Nest$munregisterCallbacks(SecLockIconViewController.this);
             }
         });
         if (secLockIconView.isAttachedToWindow()) {
@@ -297,7 +295,7 @@ public class NotificationShadeWindowViewController implements Dumpable {
         secLockIconView.setOnTouchListener(new View.OnTouchListener() { // from class: com.android.keyguard.SecLockIconViewController$$ExternalSyntheticLambda2
             @Override // android.view.View.OnTouchListener
             public final boolean onTouch(View view, MotionEvent motionEvent) {
-                SecLockIconViewController.this.getClass();
+                secLockIconViewController.getClass();
                 return false;
             }
         });
@@ -321,14 +319,14 @@ public class NotificationShadeWindowViewController implements Dumpable {
     public final void cancelCurrentTouch() {
         this.mShadeLogger.d("NSWVC: cancelling current touch");
         if (this.mTouchActive) {
-            long uptimeMillis = this.mClock.uptimeMillis();
-            MotionEvent obtain = MotionEvent.obtain(this.mDownEvent);
-            obtain.setDownTime(uptimeMillis);
-            obtain.setAction(3);
-            obtain.setLocation(0.0f, 0.0f);
+            long jUptimeMillis = this.mClock.uptimeMillis();
+            MotionEvent motionEventObtain = MotionEvent.obtain(this.mDownEvent);
+            motionEventObtain.setDownTime(jUptimeMillis);
+            motionEventObtain.setAction(3);
+            motionEventObtain.setLocation(0.0f, 0.0f);
             Log.w("NotifShadeWindowVC", "Canceling current touch event (should be very rare)");
-            this.mView.dispatchTouchEvent(obtain);
-            obtain.recycle();
+            this.mView.dispatchTouchEvent(motionEventObtain);
+            motionEventObtain.recycle();
             this.mTouchCancelled = true;
         }
         int i = SceneContainerFlag.$r8$clinit;

@@ -28,13 +28,13 @@ public abstract class SurfaceControlHdrLayerInfoListener {
     }
 
     public void unregister(IBinder iBinder) {
-        Runnable remove;
+        Runnable runnableRemove;
         Objects.requireNonNull(iBinder);
         synchronized (this) {
-            remove = this.mRegisteredListeners.remove(iBinder);
+            runnableRemove = this.mRegisteredListeners.remove(iBinder);
         }
-        if (remove != null) {
-            remove.run();
+        if (runnableRemove != null) {
+            runnableRemove.run();
         }
     }
 

@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SPluginEnablerImpl implements SPluginEnabler {
     private static final String CRASH_DISABLED_PLUGINS_PREF_FILE = "auto_disabled_splugins_prefs";

@@ -8,6 +8,8 @@ import android.icu.text.DateTimePatternGenerator;
 import android.icu.util.ULocale;
 import android.provider.Settings;
 import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.SpannedString;
 import com.android.internal.content.NativeLibraryHelper;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -82,18 +84,18 @@ public class DateFormat {
                 return sIs24Hour;
             }
             java.text.DateFormat timeInstance = java.text.DateFormat.getTimeInstance(1, locale);
-            boolean hasDesignator = timeInstance instanceof SimpleDateFormat ? hasDesignator(((SimpleDateFormat) timeInstance).toPattern(), 'H') : false;
+            boolean zHasDesignator = timeInstance instanceof SimpleDateFormat ? hasDesignator(((SimpleDateFormat) timeInstance).toPattern(), 'H') : false;
             synchronized (obj) {
                 sIs24HourLocale = locale;
-                sIs24Hour = hasDesignator;
+                sIs24Hour = zHasDesignator;
             }
-            return hasDesignator;
+            return zHasDesignator;
         }
     }
 
     public static String getBestDateTimePattern(Locale locale, String str) {
-        ULocale forLocale = ULocale.forLocale(locale);
-        return getCompatibleEnglishPattern(forLocale, DateTimePatternGenerator.getInstance(forLocale).getBestPattern(str, 0, !CompatChanges.isChangeEnabled(DISALLOW_DUPLICATE_FIELD_IN_SKELETON)));
+        ULocale uLocaleForLocale = ULocale.forLocale(locale);
+        return getCompatibleEnglishPattern(uLocaleForLocale, DateTimePatternGenerator.getInstance(uLocaleForLocale).getBestPattern(str, 0, !CompatChanges.isChangeEnabled(DISALLOW_DUPLICATE_FIELD_IN_SKELETON)));
     }
 
     public static java.text.DateFormat getTimeFormat(Context context) {
@@ -105,9 +107,9 @@ public class DateFormat {
     }
 
     public static String getTimeFormatString(Context context, int i) {
-        ULocale forLocale = ULocale.forLocale(context.getResources().getConfiguration().locale);
-        DateTimePatternGenerator dateTimePatternGenerator = DateTimePatternGenerator.getInstance(forLocale);
-        return getCompatibleEnglishPattern(forLocale, is24HourFormat(context, i) ? dateTimePatternGenerator.getBestPattern("Hm") : dateTimePatternGenerator.getBestPattern("hm"));
+        ULocale uLocaleForLocale = ULocale.forLocale(context.getResources().getConfiguration().locale);
+        DateTimePatternGenerator dateTimePatternGenerator = DateTimePatternGenerator.getInstance(uLocaleForLocale);
+        return getCompatibleEnglishPattern(uLocaleForLocale, is24HourFormat(context, i) ? dateTimePatternGenerator.getBestPattern("Hm") : dateTimePatternGenerator.getBestPattern("hm"));
     }
 
     public static java.text.DateFormat getDateFormat(Context context) {
@@ -126,6 +128,10 @@ public class DateFormat {
         return getDateFormatOrder(getDateFormatString(context));
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:32:0x006c  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public static char[] getDateFormatOrder(String str) {
         char[] cArr = new char[3];
         int i = 0;
@@ -134,41 +140,40 @@ public class DateFormat {
         boolean z2 = false;
         boolean z3 = false;
         while (i < str.length()) {
-            char charAt = str.charAt(i);
-            if (charAt == 'd' || charAt == 'L' || charAt == 'M' || charAt == 'y') {
-                if (charAt == 'd' && !z) {
+            char cCharAt = str.charAt(i);
+            if (cCharAt == 'd' || cCharAt == 'L' || cCharAt == 'M' || cCharAt == 'y') {
+                if (cCharAt == 'd' && !z) {
                     cArr[i2] = DATE;
                     i2++;
                     z = true;
-                } else if ((charAt == 'L' || charAt == 'M') && !z2) {
+                } else if ((cCharAt == 'L' || cCharAt == 'M') && !z2) {
                     cArr[i2] = MONTH;
                     i2++;
                     z2 = true;
-                } else if (charAt == 'y' && !z3) {
+                } else if (cCharAt == 'y' && !z3) {
                     cArr[i2] = 'y';
                     i2++;
                     z3 = true;
                 }
-            } else if (charAt == 'G') {
+            } else if (cCharAt == 'G') {
                 continue;
             } else {
-                if ((charAt >= 'a' && charAt <= 'z') || (charAt >= 'A' && charAt <= 'Z')) {
-                    throw new IllegalArgumentException("Bad pattern character '" + charAt + "' in " + str);
+                if ((cCharAt >= 'a' && cCharAt <= 'z') || (cCharAt >= 'A' && cCharAt <= 'Z')) {
+                    throw new IllegalArgumentException("Bad pattern character '" + cCharAt + "' in " + str);
                 }
-                if (charAt != '\'') {
+                if (cCharAt != '\'') {
                     continue;
-                } else {
-                    if (i < str.length() - 1) {
-                        int i3 = i + 1;
-                        if (str.charAt(i3) == '\'') {
-                            i = i3;
+                } else if (i < str.length() - 1) {
+                    int i3 = i + 1;
+                    if (str.charAt(i3) == '\'') {
+                        i = i3;
+                    } else {
+                        int iIndexOf = str.indexOf(39, i + 1);
+                        if (iIndexOf == -1) {
+                            throw new IllegalArgumentException("Bad quoting in " + str);
                         }
+                        i = iIndexOf + 1;
                     }
-                    int indexOf = str.indexOf(39, i + 1);
-                    if (indexOf == -1) {
-                        throw new IllegalArgumentException("Bad quoting in " + str);
-                    }
-                    i = indexOf + 1;
                 }
             }
             i++;
@@ -205,28 +210,110 @@ public class DateFormat {
         int length = charSequence.length();
         boolean z = false;
         for (int i = 0; i < length; i++) {
-            char charAt = charSequence.charAt(i);
-            if (charAt == '\'') {
+            char cCharAt = charSequence.charAt(i);
+            if (cCharAt == '\'') {
                 z = !z;
-            } else if (!z && charAt == c) {
+            } else if (!z && cCharAt == c) {
                 return true;
             }
         }
         return false;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:42:0x00d6  */
-    /* JADX WARN: Removed duplicated region for block: B:44:0x00e2  */
+    /* JADX WARN: Removed duplicated region for block: B:45:0x00a6  */
+    /* JADX WARN: Removed duplicated region for block: B:51:0x00b7  */
+    /* JADX WARN: Removed duplicated region for block: B:52:0x00c2  */
+    /* JADX WARN: Removed duplicated region for block: B:53:0x00cc  */
+    /* JADX WARN: Removed duplicated region for block: B:55:0x00d6  */
+    /* JADX WARN: Removed duplicated region for block: B:56:0x00e2  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static java.lang.CharSequence format(java.lang.CharSequence r12, java.util.Calendar r13) {
-        /*
-            Method dump skipped, instructions count: 258
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.text.format.DateFormat.format(java.lang.CharSequence, java.util.Calendar):java.lang.CharSequence");
+    public static CharSequence format(CharSequence charSequence, Calendar calendar) {
+        int i;
+        String dayOfWeekString;
+        int length;
+        int length2;
+        SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(charSequence);
+        DateFormatSymbols icuDateFormatSymbols = getIcuDateFormatSymbols(Locale.getDefault());
+        String[] amPmStrings = icuDateFormatSymbols.getAmPmStrings();
+        int length3 = charSequence.length();
+        int i2 = 0;
+        while (i2 < length3) {
+            char cCharAt = spannableStringBuilder.charAt(i2);
+            if (cCharAt == '\'') {
+                length2 = appendQuotedText(spannableStringBuilder, i2);
+                length = spannableStringBuilder.length();
+            } else {
+                int i3 = 1;
+                while (true) {
+                    i = i2 + i3;
+                    if (i < length3 && spannableStringBuilder.charAt(i) == cCharAt) {
+                        i3++;
+                    }
+                }
+                if (cCharAt == 'A') {
+                    dayOfWeekString = amPmStrings[calendar.get(9)];
+                    if (dayOfWeekString == null) {
+                        spannableStringBuilder.replace(i2, i, (CharSequence) dayOfWeekString);
+                        length2 = dayOfWeekString.length();
+                        length = spannableStringBuilder.length();
+                    } else {
+                        length = length3;
+                        length2 = i3;
+                    }
+                } else if (cCharAt == 'E') {
+                    dayOfWeekString = getDayOfWeekString(icuDateFormatSymbols, calendar.get(7), i3, cCharAt);
+                    if (dayOfWeekString == null) {
+                    }
+                } else if (cCharAt == 'H') {
+                    dayOfWeekString = zeroPad(calendar.get(11), i3);
+                    if (dayOfWeekString == null) {
+                    }
+                } else {
+                    if (cCharAt != 'a') {
+                        if (cCharAt == 'h') {
+                            int i4 = calendar.get(10);
+                            dayOfWeekString = zeroPad((cCharAt == 'h' && i4 == 0) ? 12 : i4, i3);
+                        } else if (cCharAt != 'k') {
+                            if (cCharAt == 'm') {
+                                dayOfWeekString = zeroPad(calendar.get(12), i3);
+                            } else if (cCharAt == 's') {
+                                dayOfWeekString = zeroPad(calendar.get(13), i3);
+                            } else if (cCharAt != 'c') {
+                                if (cCharAt == 'd') {
+                                    dayOfWeekString = zeroPad(calendar.get(5), i3);
+                                } else if (cCharAt == 'y') {
+                                    dayOfWeekString = getYearString(calendar.get(1), i3);
+                                } else if (cCharAt != 'z') {
+                                    switch (cCharAt) {
+                                        case 'K':
+                                            break;
+                                        case 'L':
+                                        case 'M':
+                                            dayOfWeekString = getMonthString(icuDateFormatSymbols, calendar.get(2), i3, cCharAt);
+                                            break;
+                                        default:
+                                            dayOfWeekString = null;
+                                            break;
+                                    }
+                                } else {
+                                    dayOfWeekString = getTimeZoneString(calendar, i3);
+                                }
+                            }
+                        }
+                    }
+                    if (dayOfWeekString == null) {
+                    }
+                }
+            }
+            i2 += length2;
+            length3 = length;
+        }
+        if (charSequence instanceof Spanned) {
+            return new SpannedString(spannableStringBuilder);
+        }
+        return spannableStringBuilder.toString();
     }
 
     private static String getDayOfWeekString(DateFormatSymbols dateFormatSymbols, int i, int i2, int i3) {

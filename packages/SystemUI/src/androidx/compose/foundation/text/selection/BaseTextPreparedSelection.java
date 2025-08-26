@@ -12,7 +12,6 @@ import androidx.compose.ui.text.input.OffsetMapping;
 import androidx.compose.ui.text.style.ResolvedTextDirection;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class BaseTextPreparedSelection<T extends BaseTextPreparedSelection<T>> {
     public final AnnotatedString annotatedString;
@@ -23,7 +22,6 @@ public abstract class BaseTextPreparedSelection<T extends BaseTextPreparedSelect
     public long selection;
     public final TextPreparedSelectionState state;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -46,11 +44,11 @@ public abstract class BaseTextPreparedSelection<T extends BaseTextPreparedSelect
         if (textLayoutResult == null) {
             return null;
         }
-        int m749getMaximpl = TextRange.m749getMaximpl(this.selection);
+        int iM751getMaximpl = TextRange.m751getMaximpl(this.selection);
         OffsetMapping offsetMapping = this.offsetMapping;
-        int originalToTransformed = offsetMapping.originalToTransformed(m749getMaximpl);
+        int iOriginalToTransformed = offsetMapping.originalToTransformed(iM751getMaximpl);
         MultiParagraph multiParagraph = textLayoutResult.multiParagraph;
-        return Integer.valueOf(offsetMapping.transformedToOriginal(multiParagraph.getLineEnd(multiParagraph.getLineForOffset(originalToTransformed), true)));
+        return Integer.valueOf(offsetMapping.transformedToOriginal(multiParagraph.getLineEnd(multiParagraph.getLineForOffset(iOriginalToTransformed), true)));
     }
 
     public final Integer getLineStartByOffset() {
@@ -58,9 +56,9 @@ public abstract class BaseTextPreparedSelection<T extends BaseTextPreparedSelect
         if (textLayoutResult == null) {
             return null;
         }
-        int m750getMinimpl = TextRange.m750getMinimpl(this.selection);
+        int iM752getMinimpl = TextRange.m752getMinimpl(this.selection);
         OffsetMapping offsetMapping = this.offsetMapping;
-        return Integer.valueOf(offsetMapping.transformedToOriginal(textLayoutResult.getLineStart(textLayoutResult.multiParagraph.getLineForOffset(offsetMapping.originalToTransformed(m750getMinimpl)))));
+        return Integer.valueOf(offsetMapping.transformedToOriginal(textLayoutResult.getLineStart(textLayoutResult.multiParagraph.getLineForOffset(offsetMapping.originalToTransformed(iM752getMinimpl)))));
     }
 
     public final Integer getNextWordOffset() {
@@ -69,22 +67,22 @@ public abstract class BaseTextPreparedSelection<T extends BaseTextPreparedSelect
         if (textLayoutResult == null) {
             return null;
         }
-        int transformedEndOffset = transformedEndOffset();
+        int iTransformedEndOffset = transformedEndOffset();
         while (true) {
             AnnotatedString annotatedString = this.originalText;
-            if (transformedEndOffset < annotatedString.text.length()) {
+            if (iTransformedEndOffset < annotatedString.text.length()) {
                 int length2 = this.annotatedString.text.length() - 1;
-                if (transformedEndOffset <= length2) {
-                    length2 = transformedEndOffset;
+                if (iTransformedEndOffset <= length2) {
+                    length2 = iTransformedEndOffset;
                 }
-                long m744getWordBoundaryjx7JFs = textLayoutResult.m744getWordBoundaryjx7JFs(length2);
+                long jM746getWordBoundaryjx7JFs = textLayoutResult.m746getWordBoundaryjx7JFs(length2);
                 TextRange.Companion companion = TextRange.Companion;
-                int i = (int) (m744getWordBoundaryjx7JFs & 4294967295L);
-                if (i > transformedEndOffset) {
+                int i = (int) (jM746getWordBoundaryjx7JFs & 4294967295L);
+                if (i > iTransformedEndOffset) {
                     length = this.offsetMapping.transformedToOriginal(i);
                     break;
                 }
-                transformedEndOffset++;
+                iTransformedEndOffset++;
             } else {
                 length = annotatedString.text.length();
                 break;
@@ -94,31 +92,31 @@ public abstract class BaseTextPreparedSelection<T extends BaseTextPreparedSelect
     }
 
     public final Integer getPreviousWordOffset() {
-        int i;
+        int iTransformedToOriginal;
         TextLayoutResult textLayoutResult = this.layoutResult;
         if (textLayoutResult == null) {
             return null;
         }
-        int transformedEndOffset = transformedEndOffset();
+        int iTransformedEndOffset = transformedEndOffset();
         while (true) {
-            if (transformedEndOffset <= 0) {
-                i = 0;
+            if (iTransformedEndOffset <= 0) {
+                iTransformedToOriginal = 0;
                 break;
             }
             int length = this.annotatedString.text.length() - 1;
-            if (transformedEndOffset <= length) {
-                length = transformedEndOffset;
+            if (iTransformedEndOffset <= length) {
+                length = iTransformedEndOffset;
             }
-            long m744getWordBoundaryjx7JFs = textLayoutResult.m744getWordBoundaryjx7JFs(length);
+            long jM746getWordBoundaryjx7JFs = textLayoutResult.m746getWordBoundaryjx7JFs(length);
             TextRange.Companion companion = TextRange.Companion;
-            int i2 = (int) (m744getWordBoundaryjx7JFs >> 32);
-            if (i2 < transformedEndOffset) {
-                i = this.offsetMapping.transformedToOriginal(i2);
+            int i = (int) (jM746getWordBoundaryjx7JFs >> 32);
+            if (i < iTransformedEndOffset) {
+                iTransformedToOriginal = this.offsetMapping.transformedToOriginal(i);
                 break;
             }
-            transformedEndOffset--;
+            iTransformedEndOffset--;
         }
-        return Integer.valueOf(i);
+        return Integer.valueOf(iTransformedToOriginal);
     }
 
     public final boolean isLtr() {
@@ -127,12 +125,12 @@ public abstract class BaseTextPreparedSelection<T extends BaseTextPreparedSelect
     }
 
     public final int jumpByLinesOffset(TextLayoutResult textLayoutResult, int i) {
-        int transformedEndOffset = transformedEndOffset();
+        int iTransformedEndOffset = transformedEndOffset();
         TextPreparedSelectionState textPreparedSelectionState = this.state;
         if (textPreparedSelectionState.cachedX == null) {
-            textPreparedSelectionState.cachedX = Float.valueOf(textLayoutResult.getCursorRect(transformedEndOffset).left);
+            textPreparedSelectionState.cachedX = Float.valueOf(textLayoutResult.getCursorRect(iTransformedEndOffset).left);
         }
-        int lineForOffset = textLayoutResult.multiParagraph.getLineForOffset(transformedEndOffset) + i;
+        int lineForOffset = textLayoutResult.multiParagraph.getLineForOffset(iTransformedEndOffset) + i;
         if (lineForOffset < 0) {
             return 0;
         }
@@ -143,24 +141,24 @@ public abstract class BaseTextPreparedSelection<T extends BaseTextPreparedSelect
         float lineBottom = multiParagraph.getLineBottom(lineForOffset) - 1;
         Float f = textPreparedSelectionState.cachedX;
         f.getClass();
-        float floatValue = f.floatValue();
-        if ((isLtr() && floatValue >= textLayoutResult.getLineRight(lineForOffset)) || (!isLtr() && floatValue <= textLayoutResult.getLineLeft(lineForOffset))) {
+        float fFloatValue = f.floatValue();
+        if ((isLtr() && fFloatValue >= textLayoutResult.getLineRight(lineForOffset)) || (!isLtr() && fFloatValue <= textLayoutResult.getLineLeft(lineForOffset))) {
             return multiParagraph.getLineEnd(lineForOffset, true);
         }
-        long floatToRawIntBits = (Float.floatToRawIntBits(f.floatValue()) << 32) | (Float.floatToRawIntBits(lineBottom) & 4294967295L);
+        long jFloatToRawIntBits = (Float.floatToRawIntBits(f.floatValue()) << 32) | (Float.floatToRawIntBits(lineBottom) & 4294967295L);
         Offset.Companion companion = Offset.Companion;
-        return this.offsetMapping.transformedToOriginal(multiParagraph.m734getOffsetForPositionk4lQ0M(floatToRawIntBits));
+        return this.offsetMapping.transformedToOriginal(multiParagraph.m736getOffsetForPositionk4lQ0M(jFloatToRawIntBits));
     }
 
     public final void moveCursorNextByParagraph() {
         this.state.cachedX = null;
         AnnotatedString annotatedString = this.annotatedString;
         if (annotatedString.text.length() > 0) {
-            int findParagraphEnd = StringHelpersKt.findParagraphEnd(TextRange.m749getMaximpl(this.selection), annotatedString.text);
-            if (findParagraphEnd == TextRange.m749getMaximpl(this.selection) && findParagraphEnd != annotatedString.text.length()) {
-                findParagraphEnd = StringHelpersKt.findParagraphEnd(findParagraphEnd + 1, annotatedString.text);
+            int iFindParagraphEnd = StringHelpersKt.findParagraphEnd(TextRange.m751getMaximpl(this.selection), annotatedString.text);
+            if (iFindParagraphEnd == TextRange.m751getMaximpl(this.selection) && iFindParagraphEnd != annotatedString.text.length()) {
+                iFindParagraphEnd = StringHelpersKt.findParagraphEnd(iFindParagraphEnd + 1, annotatedString.text);
             }
-            setSelection(findParagraphEnd, findParagraphEnd);
+            setSelection(iFindParagraphEnd, iFindParagraphEnd);
         }
     }
 
@@ -168,11 +166,11 @@ public abstract class BaseTextPreparedSelection<T extends BaseTextPreparedSelect
         this.state.cachedX = null;
         AnnotatedString annotatedString = this.annotatedString;
         if (annotatedString.text.length() > 0) {
-            int findParagraphStart = StringHelpersKt.findParagraphStart(TextRange.m750getMinimpl(this.selection), annotatedString.text);
-            if (findParagraphStart == TextRange.m750getMinimpl(this.selection) && findParagraphStart != 0) {
-                findParagraphStart = StringHelpersKt.findParagraphStart(findParagraphStart - 1, annotatedString.text);
+            int iFindParagraphStart = StringHelpersKt.findParagraphStart(TextRange.m752getMinimpl(this.selection), annotatedString.text);
+            if (iFindParagraphStart == TextRange.m752getMinimpl(this.selection) && iFindParagraphStart != 0) {
+                iFindParagraphStart = StringHelpersKt.findParagraphStart(iFindParagraphStart - 1, annotatedString.text);
             }
-            setSelection(findParagraphStart, findParagraphStart);
+            setSelection(iFindParagraphStart, iFindParagraphStart);
         }
     }
 
@@ -182,8 +180,8 @@ public abstract class BaseTextPreparedSelection<T extends BaseTextPreparedSelect
         if (this.annotatedString.text.length() <= 0 || (lineEndByOffset = getLineEndByOffset()) == null) {
             return;
         }
-        int intValue = lineEndByOffset.intValue();
-        setSelection(intValue, intValue);
+        int iIntValue = lineEndByOffset.intValue();
+        setSelection(iIntValue, iIntValue);
     }
 
     public final void moveCursorToLineStart() {
@@ -192,8 +190,8 @@ public abstract class BaseTextPreparedSelection<T extends BaseTextPreparedSelect
         if (this.annotatedString.text.length() <= 0 || (lineStartByOffset = getLineStartByOffset()) == null) {
             return;
         }
-        int intValue = lineStartByOffset.intValue();
-        setSelection(intValue, intValue);
+        int iIntValue = lineStartByOffset.intValue();
+        setSelection(iIntValue, iIntValue);
     }
 
     public final void selectMovement() {

@@ -22,7 +22,6 @@ import java.util.Iterator;
 import java.util.Optional;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PipExpandHandler implements Transitions.TransitionHandler {
     public final Context mContext;
@@ -36,7 +35,6 @@ public class PipExpandHandler implements Transitions.TransitionHandler {
     public final Optional mSplitScreenControllerOptional;
     public PipExpandAnimator mTransitionAnimator;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     interface PipExpandAnimatorSupplier {
         PipExpandAnimator get(Context context, SurfaceControl surfaceControl, SurfaceControl.Transaction transaction, SurfaceControl.Transaction transaction2, Rect rect, Rect rect2, Rect rect3, Rect rect4, int i);
     }
@@ -228,16 +226,16 @@ public class PipExpandHandler implements Transitions.TransitionHandler {
         int i3 = -PipTransitionUtils.getFixedRotationDelta(transitionInfo, changeByToken2, this.mPipDisplayLayoutState);
         if (i3 != 0) {
             Rect endAbsBounds3 = changeByToken2.getEndAbsBounds();
-            int width = endAbsBounds3.width();
-            int height = endAbsBounds3.height();
+            int iWidth = endAbsBounds3.width();
+            int iHeight = endAbsBounds3.height();
             int i4 = endAbsBounds3.left;
             int i5 = endAbsBounds3.top;
             if (i3 == 1) {
-                i4 = -(i4 + width);
+                i4 = -(i4 + iWidth);
             } else {
-                i5 = -(i5 + height);
+                i5 = -(i5 + iHeight);
             }
-            endAbsBounds3.set(i5, i4, height + i5, width + i4);
+            endAbsBounds3.set(i5, i4, iHeight + i5, iWidth + i4);
         }
         PipExpandAnimator pipExpandAnimator2 = this.mPipExpandAnimatorSupplier.get(this.mContext, leash2, transaction, transaction2, endAbsBounds2, startAbsBounds2, endAbsBounds2, rect, i3);
         final int i6 = 1;

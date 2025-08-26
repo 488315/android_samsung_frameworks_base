@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyCycle extends Key {
     public int mCurveFit = 0;
@@ -33,7 +32,6 @@ public class KeyCycle extends Key {
     public float mTranslationY = Float.NaN;
     public float mTranslationZ = Float.NaN;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Loader {
         public static final SparseIntArray sAttrMap;
 
@@ -116,100 +114,100 @@ public class KeyCycle extends Key {
 
     @Override // androidx.constraintlayout.motion.widget.Key
     public final void load(Context context, AttributeSet attributeSet) {
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.KeyCycle);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.KeyCycle);
         SparseIntArray sparseIntArray = Loader.sAttrMap;
-        int indexCount = obtainStyledAttributes.getIndexCount();
+        int indexCount = typedArrayObtainStyledAttributes.getIndexCount();
         for (int i = 0; i < indexCount; i++) {
-            int index = obtainStyledAttributes.getIndex(i);
+            int index = typedArrayObtainStyledAttributes.getIndex(i);
             SparseIntArray sparseIntArray2 = Loader.sAttrMap;
             switch (sparseIntArray2.get(index)) {
                 case 1:
                     if (MotionLayout.IS_IN_EDIT_MODE) {
-                        int resourceId = obtainStyledAttributes.getResourceId(index, this.mTargetId);
+                        int resourceId = typedArrayObtainStyledAttributes.getResourceId(index, this.mTargetId);
                         this.mTargetId = resourceId;
                         if (resourceId == -1) {
-                            this.mTargetString = obtainStyledAttributes.getString(index);
+                            this.mTargetString = typedArrayObtainStyledAttributes.getString(index);
                             break;
                         } else {
                             break;
                         }
-                    } else if (obtainStyledAttributes.peekValue(index).type == 3) {
-                        this.mTargetString = obtainStyledAttributes.getString(index);
+                    } else if (typedArrayObtainStyledAttributes.peekValue(index).type == 3) {
+                        this.mTargetString = typedArrayObtainStyledAttributes.getString(index);
                         break;
                     } else {
-                        this.mTargetId = obtainStyledAttributes.getResourceId(index, this.mTargetId);
+                        this.mTargetId = typedArrayObtainStyledAttributes.getResourceId(index, this.mTargetId);
                         break;
                     }
                 case 2:
-                    this.mFramePosition = obtainStyledAttributes.getInt(index, this.mFramePosition);
+                    this.mFramePosition = typedArrayObtainStyledAttributes.getInt(index, this.mFramePosition);
                     break;
                 case 3:
-                    obtainStyledAttributes.getString(index);
+                    typedArrayObtainStyledAttributes.getString(index);
                     break;
                 case 4:
-                    this.mCurveFit = obtainStyledAttributes.getInteger(index, this.mCurveFit);
+                    this.mCurveFit = typedArrayObtainStyledAttributes.getInteger(index, this.mCurveFit);
                     break;
                 case 5:
-                    if (obtainStyledAttributes.peekValue(index).type == 3) {
-                        this.mCustomWaveShape = obtainStyledAttributes.getString(index);
+                    if (typedArrayObtainStyledAttributes.peekValue(index).type == 3) {
+                        this.mCustomWaveShape = typedArrayObtainStyledAttributes.getString(index);
                         this.mWaveShape = 7;
                         break;
                     } else {
-                        this.mWaveShape = obtainStyledAttributes.getInt(index, this.mWaveShape);
+                        this.mWaveShape = typedArrayObtainStyledAttributes.getInt(index, this.mWaveShape);
                         break;
                     }
                 case 6:
-                    this.mWavePeriod = obtainStyledAttributes.getFloat(index, this.mWavePeriod);
+                    this.mWavePeriod = typedArrayObtainStyledAttributes.getFloat(index, this.mWavePeriod);
                     break;
                 case 7:
-                    if (obtainStyledAttributes.peekValue(index).type == 5) {
-                        this.mWaveOffset = obtainStyledAttributes.getDimension(index, this.mWaveOffset);
+                    if (typedArrayObtainStyledAttributes.peekValue(index).type == 5) {
+                        this.mWaveOffset = typedArrayObtainStyledAttributes.getDimension(index, this.mWaveOffset);
                         break;
                     } else {
-                        this.mWaveOffset = obtainStyledAttributes.getFloat(index, this.mWaveOffset);
+                        this.mWaveOffset = typedArrayObtainStyledAttributes.getFloat(index, this.mWaveOffset);
                         break;
                     }
                 case 8:
-                    this.mWaveVariesBy = obtainStyledAttributes.getInt(index, this.mWaveVariesBy);
+                    this.mWaveVariesBy = typedArrayObtainStyledAttributes.getInt(index, this.mWaveVariesBy);
                     break;
                 case 9:
-                    this.mAlpha = obtainStyledAttributes.getFloat(index, this.mAlpha);
+                    this.mAlpha = typedArrayObtainStyledAttributes.getFloat(index, this.mAlpha);
                     break;
                 case 10:
-                    this.mElevation = obtainStyledAttributes.getDimension(index, this.mElevation);
+                    this.mElevation = typedArrayObtainStyledAttributes.getDimension(index, this.mElevation);
                     break;
                 case 11:
-                    this.mRotation = obtainStyledAttributes.getFloat(index, this.mRotation);
+                    this.mRotation = typedArrayObtainStyledAttributes.getFloat(index, this.mRotation);
                     break;
                 case 12:
-                    this.mRotationX = obtainStyledAttributes.getFloat(index, this.mRotationX);
+                    this.mRotationX = typedArrayObtainStyledAttributes.getFloat(index, this.mRotationX);
                     break;
                 case 13:
-                    this.mRotationY = obtainStyledAttributes.getFloat(index, this.mRotationY);
+                    this.mRotationY = typedArrayObtainStyledAttributes.getFloat(index, this.mRotationY);
                     break;
                 case 14:
-                    this.mTransitionPathRotate = obtainStyledAttributes.getFloat(index, this.mTransitionPathRotate);
+                    this.mTransitionPathRotate = typedArrayObtainStyledAttributes.getFloat(index, this.mTransitionPathRotate);
                     break;
                 case 15:
-                    this.mScaleX = obtainStyledAttributes.getFloat(index, this.mScaleX);
+                    this.mScaleX = typedArrayObtainStyledAttributes.getFloat(index, this.mScaleX);
                     break;
                 case 16:
-                    this.mScaleY = obtainStyledAttributes.getFloat(index, this.mScaleY);
+                    this.mScaleY = typedArrayObtainStyledAttributes.getFloat(index, this.mScaleY);
                     break;
                 case 17:
-                    this.mTranslationX = obtainStyledAttributes.getDimension(index, this.mTranslationX);
+                    this.mTranslationX = typedArrayObtainStyledAttributes.getDimension(index, this.mTranslationX);
                     break;
                 case 18:
-                    this.mTranslationY = obtainStyledAttributes.getDimension(index, this.mTranslationY);
+                    this.mTranslationY = typedArrayObtainStyledAttributes.getDimension(index, this.mTranslationY);
                     break;
                 case 19:
-                    this.mTranslationZ = obtainStyledAttributes.getDimension(index, this.mTranslationZ);
+                    this.mTranslationZ = typedArrayObtainStyledAttributes.getDimension(index, this.mTranslationZ);
                     break;
                 case 20:
-                    this.mProgress = obtainStyledAttributes.getFloat(index, this.mProgress);
+                    this.mProgress = typedArrayObtainStyledAttributes.getFloat(index, this.mProgress);
                     break;
                 case 21:
-                    this.mWavePhase = obtainStyledAttributes.getFloat(index, this.mWavePhase) / 360.0f;
+                    this.mWavePhase = typedArrayObtainStyledAttributes.getFloat(index, this.mWavePhase) / 360.0f;
                     break;
                 default:
                     Log.e("KeyCycle", "unused attribute 0x" + Integer.toHexString(index) + "   " + sparseIntArray2.get(index));
@@ -220,7 +218,7 @@ public class KeyCycle extends Key {
 
     @Override // androidx.constraintlayout.motion.widget.Key
     /* renamed from: clone */
-    public final Key mo886clone() {
+    public final Key mo888clone() {
         KeyCycle keyCycle = new KeyCycle();
         super.copy(this);
         keyCycle.mCurveFit = this.mCurveFit;

@@ -1,6 +1,8 @@
 package com.android.systemui.shade;
 
-import android.view.ViewStub;
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
 import androidx.constraintlayout.motion.widget.MotionLayout;
 import com.android.systemui.BasicRune;
 import com.android.systemui.R;
@@ -13,25 +15,25 @@ import com.android.systemui.statusbar.policy.NetspeedView;
 import com.android.systemui.statusbar.policy.NetspeedViewController;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class ShadeViewProviderModule {
     public static final Companion Companion = new Companion(null);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
         }
 
-        public static NetspeedViewController provideNetspeedViewController(MotionLayout motionLayout, IndicatorScaleGardener indicatorScaleGardener, IndicatorCutoutUtil indicatorCutoutUtil, UserTracker userTracker, WakefulnessLifecycle wakefulnessLifecycle) {
+        public static NetspeedViewController provideNetspeedViewController(MotionLayout motionLayout, Context context, IndicatorScaleGardener indicatorScaleGardener, IndicatorCutoutUtil indicatorCutoutUtil, UserTracker userTracker, WakefulnessLifecycle wakefulnessLifecycle) {
             if (!BasicRune.STATUS_REAL_TIME_NETWORK_SPEED) {
                 return null;
             }
-            ViewStub viewStub = (ViewStub) motionLayout.findViewById(R.id.quick_qs_network_speed_viewstub);
-            if (viewStub != null) {
-                viewStub.inflate();
+            ViewGroup viewGroup = (ViewGroup) motionLayout.findViewById(R.id.hover_system_icons_container);
+            NetspeedView netspeedView = (NetspeedView) LayoutInflater.from(context).inflate(R.layout.samsung_status_bar_network_speed_view, (ViewGroup) null);
+            if (BasicRune.STATUS_LAYOUT_SIDELING_CUTOUT && BasicRune.STATUS_POP_OVER_PANEL_BAR) {
+                netspeedView.mInStatusBar = true;
             }
+            viewGroup.addView(netspeedView, 0);
             return new NetspeedViewController((NetspeedView) motionLayout.findViewById(R.id.networkSpeed), indicatorScaleGardener, indicatorCutoutUtil, userTracker, wakefulnessLifecycle);
         }
 

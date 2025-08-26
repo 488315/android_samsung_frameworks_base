@@ -8,10 +8,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Insets;
 import android.os.CancellationSignal;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.provider.Settings;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -26,6 +28,7 @@ import android.view.WindowInsetsController;
 import android.view.accessibility.AccessibilityManager;
 import android.view.animation.PathInterpolator;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.view.ViewCompat;
 import androidx.reflect.SeslBaseReflector;
 import androidx.reflect.content.res.SeslConfigurationReflector;
 import com.android.keyguard.KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0;
@@ -33,10 +36,11 @@ import com.android.systemui.aod.AODAmbientWallpaperHelper$initAODAmbientWallpape
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.SeslAppBarHelper;
 import com.google.android.material.internal.SeslContextUtils;
+import com.google.android.material.internal.SeslDisplayUtils;
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class SeslImmersiveScrollBehavior extends AppBarLayout.Behavior {
     public boolean isRoundedCornerHide;
@@ -99,7 +103,7 @@ public final class SeslImmersiveScrollBehavior extends AppBarLayout.Behavior {
                         final AppBarLayout appBarLayout = seslImmersiveScrollBehavior.mAppBarLayout;
                         seslImmersiveScrollBehavior.mPrevOffset = i;
                         PathInterpolator pathInterpolator = new PathInterpolator(0.17f, 0.17f, 0.2f, 1.0f);
-                        float seslGetCollapsedHeight = (-seslImmersiveScrollBehavior.mAppBarLayout.getHeight()) + seslImmersiveScrollBehavior.mAppBarLayout.seslGetCollapsedHeight();
+                        float fSeslGetCollapsedHeight = (-seslImmersiveScrollBehavior.mAppBarLayout.getHeight()) + seslImmersiveScrollBehavior.mAppBarLayout.seslGetCollapsedHeight();
                         final int[] iArr = {0};
                         ValueAnimator valueAnimator = seslImmersiveScrollBehavior.mOffsetAnimator;
                         if (valueAnimator == null) {
@@ -112,14 +116,14 @@ public final class SeslImmersiveScrollBehavior extends AppBarLayout.Behavior {
                                         Log.e("SeslImmersiveScrollBehavior", "mTargetView is null");
                                         return;
                                     }
-                                    int intValue = ((Integer) valueAnimator3.getAnimatedValue()).intValue();
+                                    int iIntValue = ((Integer) valueAnimator3.getAnimatedValue()).intValue();
                                     int[] iArr2 = iArr;
                                     SeslImmersiveScrollBehavior seslImmersiveScrollBehavior2 = SeslImmersiveScrollBehavior.this;
-                                    int i2 = seslImmersiveScrollBehavior2.mPrevOffset - intValue;
+                                    int i2 = seslImmersiveScrollBehavior2.mPrevOffset - iIntValue;
                                     iArr2[0] = i2;
                                     seslImmersiveScrollBehavior2.mTargetView.scrollBy(0, -i2);
-                                    SeslImmersiveScrollBehavior.this.setHeaderTopBottomOffset(coordinatorLayout, appBarLayout, intValue);
-                                    SeslImmersiveScrollBehavior.this.mPrevOffset = intValue;
+                                    SeslImmersiveScrollBehavior.this.setHeaderTopBottomOffset(coordinatorLayout, appBarLayout, iIntValue);
+                                    SeslImmersiveScrollBehavior.this.mPrevOffset = iIntValue;
                                 }
                             });
                         } else {
@@ -142,29 +146,208 @@ public final class SeslImmersiveScrollBehavior extends AppBarLayout.Behavior {
                         seslImmersiveScrollBehavior.mOffsetAnimator.setDuration(150L);
                         seslImmersiveScrollBehavior.mOffsetAnimator.setInterpolator(pathInterpolator);
                         seslImmersiveScrollBehavior.mOffsetAnimator.setStartDelay(0L);
-                        seslImmersiveScrollBehavior.mOffsetAnimator.setIntValues(seslImmersiveScrollBehavior.mNeedRestoreAnim ? -seslImmersiveScrollBehavior.mAppBarLayout.getHeight() : (int) seslGetCollapsedHeight, (int) seslGetCollapsedHeight);
+                        seslImmersiveScrollBehavior.mOffsetAnimator.setIntValues(seslImmersiveScrollBehavior.mNeedRestoreAnim ? -seslImmersiveScrollBehavior.mAppBarLayout.getHeight() : (int) fSeslGetCollapsedHeight, (int) fSeslGetCollapsedHeight);
                         seslImmersiveScrollBehavior.mOffsetAnimator.start();
                     }
                 }
             }
         };
         this.mOffsetChangedListener = new AppBarLayout.OnOffsetChangedListener() { // from class: com.google.android.material.appbar.SeslImmersiveScrollBehavior.2
-            /* JADX WARN: Code restructure failed: missing block: B:86:0x0186, code lost:
-            
-                if (r5 == 1) goto L95;
-             */
-            /* JADX WARN: Removed duplicated region for block: B:82:0x019c  */
+            /* JADX WARN: Removed duplicated region for block: B:94:0x0189  */
             @Override // com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
             /*
                 Code decompiled incorrectly, please refer to instructions dump.
-                To view partially-correct code enable 'Show inconsistent code' option in preferences
             */
-            public final void onOffsetChanged(com.google.android.material.appbar.AppBarLayout r17, int r18) {
-                /*
-                    Method dump skipped, instructions count: 660
-                    To view this dump change 'Code comments level' option to 'DEBUG'
-                */
-                throw new UnsupportedOperationException("Method not decompiled: com.google.android.material.appbar.SeslImmersiveScrollBehavior.AnonymousClass2.onOffsetChanged(com.google.android.material.appbar.AppBarLayout, int):void");
+            public final void onOffsetChanged(AppBarLayout appBarLayout, int i) {
+                View view;
+                SeslImmersiveScrollBehavior seslImmersiveScrollBehavior = SeslImmersiveScrollBehavior.this;
+                AppBarLayout appBarLayout2 = seslImmersiveScrollBehavior.mAppBarLayout;
+                if (appBarLayout2 != null && appBarLayout2.mIsDetachedState) {
+                    Log.e("SeslImmersiveScrollBehavior", "AppBarLayout was DetachedState. Skip onOffsetChanged");
+                    return;
+                }
+                if (!seslImmersiveScrollBehavior.mCanImmersiveScroll) {
+                    View view2 = seslImmersiveScrollBehavior.mStatusBarBg;
+                    if (view2 != null) {
+                        view2.setTranslationY(0.0f);
+                    }
+                    View view3 = seslImmersiveScrollBehavior.mNavigationBarBg;
+                    if (view3 != null) {
+                        view3.setTranslationY(0.0f);
+                    }
+                    View view4 = seslImmersiveScrollBehavior.mBottomArea;
+                    if (view4 != null) {
+                        view4.setTranslationY(0.0f);
+                    }
+                    AppBarLayout appBarLayout3 = seslImmersiveScrollBehavior.mAppBarLayout;
+                    if (appBarLayout3 == null || appBarLayout3.willNotDraw()) {
+                        return;
+                    }
+                    WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
+                    appBarLayout3.postInvalidateOnAnimation();
+                    return;
+                }
+                View view5 = seslImmersiveScrollBehavior.mBottomArea;
+                int i2 = 0;
+                int height = view5 != null ? view5.getHeight() : 0;
+                float fSeslGetCollapsedHeight = appBarLayout.seslGetCollapsedHeight();
+                float f = (seslImmersiveScrollBehavior.mNavigationBarBgHeight + height) / (fSeslGetCollapsedHeight == 0.0f ? 1.0f : fSeslGetCollapsedHeight);
+                float totalScrollRange = (appBarLayout.getTotalScrollRange() + i) - fSeslGetCollapsedHeight;
+                float f2 = seslImmersiveScrollBehavior.mStatusBarHeight;
+                float f3 = totalScrollRange + f2;
+                float f4 = f * totalScrollRange * 2.0f;
+                float fMin = Math.min(f2, f3);
+                float f5 = seslImmersiveScrollBehavior.mNavigationBarBgHeight;
+                float fMax = Math.max(Math.min(f5, f4 + f5), 0.0f);
+                if (appBarLayout.getBottom() <= fSeslGetCollapsedHeight) {
+                    if (seslImmersiveScrollBehavior.canImmersiveScroll()) {
+                        View view6 = seslImmersiveScrollBehavior.mBottomArea;
+                        if (view6 == null || view6.getVisibility() == 8 || height == 0) {
+                            Math.max(fMax, 0.0f);
+                            appBarLayout.getTotalScrollRange();
+                        } else {
+                            float fMin2 = Math.min(height + f4, fMax);
+                            seslImmersiveScrollBehavior.mBottomArea.setTranslationY(-Math.round(fMin2));
+                            if (seslImmersiveScrollBehavior.mBottomArea.getVisibility() != 0) {
+                                height = 0;
+                            }
+                            Math.max(height + fMin2, 0.0f);
+                            appBarLayout.getTotalScrollRange();
+                        }
+                        if (seslImmersiveScrollBehavior.mNavigationBarBg != null) {
+                            if (SeslImmersiveScrollBehavior.isHideCameraCutout(seslImmersiveScrollBehavior.mDecorViewInset)) {
+                                seslImmersiveScrollBehavior.mNavigationBarBg.setTranslationY(0.0f);
+                            } else {
+                                seslImmersiveScrollBehavior.mNavigationBarBg.setTranslationY(-Math.min(0, Math.round(f4)));
+                            }
+                        } else if (seslImmersiveScrollBehavior.mNavigationBarBgHeight != 0) {
+                            seslImmersiveScrollBehavior.findSystemBarsBackground();
+                            View view7 = seslImmersiveScrollBehavior.mNavigationBarBg;
+                            if (view7 != null) {
+                                view7.setTranslationY(0.0f);
+                            }
+                        }
+                        View view8 = seslImmersiveScrollBehavior.mStatusBarBg;
+                        if (view8 != null) {
+                            view8.setTranslationY(Math.min(0.0f, totalScrollRange));
+                        }
+                        if (seslImmersiveScrollBehavior.mCurOffset != f3) {
+                            seslImmersiveScrollBehavior.mCurOffset = f3;
+                            WindowInsetsAnimationController windowInsetsAnimationController = seslImmersiveScrollBehavior.mAnimationController;
+                            if (windowInsetsAnimationController != null) {
+                                if (windowInsetsAnimationController.isFinished()) {
+                                    Log.e("SeslImmersiveScrollBehavior", "AnimationController is already finished by App side");
+                                } else {
+                                    int i3 = (int) fMax;
+                                    WindowInsetsAnimationController windowInsetsAnimationController2 = seslImmersiveScrollBehavior.mAnimationController;
+                                    if (windowInsetsAnimationController2 != null && seslImmersiveScrollBehavior.mDecorView != null) {
+                                        boolean z = i3 != windowInsetsAnimationController2.getShownStateInsets().bottom;
+                                        if (z != seslImmersiveScrollBehavior.isRoundedCornerHide) {
+                                            seslImmersiveScrollBehavior.isRoundedCornerHide = z;
+                                            View view9 = seslImmersiveScrollBehavior.mDecorView;
+                                            Method declaredMethod = SeslBaseReflector.getDeclaredMethod(view9.getClass(), "hidden_semSetForceHideRoundedCorner", Boolean.TYPE);
+                                            if (declaredMethod != null) {
+                                                SeslBaseReflector.invoke(view9, declaredMethod, Boolean.valueOf(z));
+                                            }
+                                        }
+                                    }
+                                    if (SeslDisplayUtils.isPinEdgeEnabled(seslImmersiveScrollBehavior.mContext)) {
+                                        Insets insets = seslImmersiveScrollBehavior.mDecorViewInset.getInsets(WindowInsets.Type.navigationBars());
+                                        int pinnedEdgeWidth = SeslDisplayUtils.getPinnedEdgeWidth(seslImmersiveScrollBehavior.mContext);
+                                        int i4 = Settings.System.getInt(seslImmersiveScrollBehavior.mContext.getContentResolver(), "active_edge_area", 1);
+                                        if (pinnedEdgeWidth == insets.left && i4 == 0) {
+                                            i2 = pinnedEdgeWidth;
+                                            pinnedEdgeWidth = 0;
+                                        } else if (pinnedEdgeWidth != insets.right || i4 != 1) {
+                                            pinnedEdgeWidth = 0;
+                                        }
+                                        float f6 = seslImmersiveScrollBehavior.mNavigationBarFrameHeight;
+                                        float fMax2 = Math.max(Math.min(f6, f4 + f6), 0.0f);
+                                        int i5 = seslImmersiveScrollBehavior.mNavigationBarFrameHeight;
+                                        seslImmersiveScrollBehavior.mAnimationController.setInsetsAndAlpha(Insets.of(i2, (int) fMin, pinnedEdgeWidth, (int) fMax2), 1.0f, (i5 - fMax) / (i5 != 0 ? i5 : 1));
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        View view10 = seslImmersiveScrollBehavior.mStatusBarBg;
+                        if (view10 != null) {
+                            view10.setTranslationY(0.0f);
+                        }
+                        View view11 = seslImmersiveScrollBehavior.mNavigationBarBg;
+                        if (view11 != null) {
+                            view11.setTranslationY(0.0f);
+                        }
+                        AppBarLayout appBarLayout4 = seslImmersiveScrollBehavior.mAppBarLayout;
+                        if (appBarLayout4 != null) {
+                            appBarLayout4.getTotalScrollRange();
+                            if (seslImmersiveScrollBehavior.mBottomArea != null) {
+                                float f7 = height;
+                                if (fSeslGetCollapsedHeight == 0.0f) {
+                                    fSeslGetCollapsedHeight = 1.0f;
+                                }
+                                float bottom = f7 - (seslImmersiveScrollBehavior.mAppBarLayout.getBottom() * (f7 / fSeslGetCollapsedHeight));
+                                seslImmersiveScrollBehavior.mBottomArea.setTranslationY(Math.max(bottom, 0.0f));
+                                seslImmersiveScrollBehavior.mBottomArea.getHeight();
+                                Math.max(bottom, 0.0f);
+                            }
+                        }
+                        AppBarLayout appBarLayout5 = seslImmersiveScrollBehavior.mAppBarLayout;
+                        if (appBarLayout5 != null) {
+                            WindowInsetsAnimationController windowInsetsAnimationController3 = seslImmersiveScrollBehavior.mAnimationController;
+                            if (seslImmersiveScrollBehavior.mContentView == null) {
+                                View rootView = appBarLayout5.getRootView();
+                                seslImmersiveScrollBehavior.mDecorView = rootView;
+                                seslImmersiveScrollBehavior.mContentView = rootView.findViewById(R.id.content);
+                            }
+                            if (windowInsetsAnimationController3 == null) {
+                                CancellationSignal cancellationSignal = seslImmersiveScrollBehavior.mCancellationSignal;
+                                if (cancellationSignal != null) {
+                                    cancellationSignal.cancel();
+                                }
+                            } else {
+                                int i6 = windowInsetsAnimationController3.getCurrentInsets().bottom;
+                                int i7 = windowInsetsAnimationController3.getShownStateInsets().bottom;
+                                int i8 = windowInsetsAnimationController3.getHiddenStateInsets().bottom;
+                                if (i6 == i7) {
+                                    windowInsetsAnimationController3.finish(true);
+                                } else if (i6 == i8) {
+                                    windowInsetsAnimationController3.finish(false);
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    AppBarLayout appBarLayout6 = seslImmersiveScrollBehavior.mAppBarLayout;
+                    if (appBarLayout6 != null) {
+                        appBarLayout6.getTotalScrollRange();
+                    }
+                    if (seslImmersiveScrollBehavior.mIsMultiWindow && (view = seslImmersiveScrollBehavior.mBottomArea) != null) {
+                        view.setTranslationY(0.0f);
+                        seslImmersiveScrollBehavior.mBottomArea.getHeight();
+                    }
+                    if (!seslImmersiveScrollBehavior.mIsMultiWindow && seslImmersiveScrollBehavior.mBottomArea != null && seslImmersiveScrollBehavior.mDecorViewInset != null) {
+                        if (seslImmersiveScrollBehavior.isNavigationBarBottomPosition()) {
+                            seslImmersiveScrollBehavior.mBottomArea.setTranslationY(-seslImmersiveScrollBehavior.mNavigationBarBgHeight);
+                            View view12 = seslImmersiveScrollBehavior.mNavigationBarBg;
+                            if (view12 != null && view12.getTranslationY() != 0.0f) {
+                                seslImmersiveScrollBehavior.mNavigationBarBg.setTranslationY(0.0f);
+                            }
+                        } else {
+                            View view13 = seslImmersiveScrollBehavior.mNavigationBarBg;
+                            if (view13 != null && view13.getTranslationY() != 0.0f) {
+                                seslImmersiveScrollBehavior.mBottomArea.setTranslationY(0.0f);
+                            }
+                        }
+                        seslImmersiveScrollBehavior.mBottomArea.getHeight();
+                    }
+                }
+                AppBarLayout appBarLayout7 = seslImmersiveScrollBehavior.mAppBarLayout;
+                if (appBarLayout7 == null || appBarLayout7.willNotDraw()) {
+                    return;
+                }
+                WeakHashMap weakHashMap2 = ViewCompat.sViewPropertyAnimatorMap;
+                appBarLayout7.postInvalidateOnAnimation();
             }
         };
         this.mWindowInsetsAnimationControlListener = new WindowInsetsAnimationControlListener() { // from class: com.google.android.material.appbar.SeslImmersiveScrollBehavior.5
@@ -181,67 +364,31 @@ public final class SeslImmersiveScrollBehavior extends AppBarLayout.Behavior {
                 seslImmersiveScrollBehavior.mShownAtDown = false;
             }
 
-            /* JADX WARN: Code restructure failed: missing block: B:14:0x003f, code lost:
-            
-                if (r1 == 1) goto L15;
-             */
+            /* JADX WARN: Removed duplicated region for block: B:14:0x0042  */
             @Override // android.view.WindowInsetsAnimationControlListener
             /*
                 Code decompiled incorrectly, please refer to instructions dump.
-                To view partially-correct code enable 'Show inconsistent code' option in preferences
             */
-            public final void onReady(android.view.WindowInsetsAnimationController r6, int r7) {
-                /*
-                    r5 = this;
-                    com.google.android.material.appbar.SeslImmersiveScrollBehavior r5 = com.google.android.material.appbar.SeslImmersiveScrollBehavior.this
-                    android.view.View r7 = r5.mDecorView
-                    if (r7 == 0) goto L56
-                    r7 = 0
-                    r5.mCancellationSignal = r7
-                    r5.mAnimationController = r6
-                    android.content.Context r6 = r5.mContext
-                    boolean r6 = com.google.android.material.internal.SeslDisplayUtils.isPinEdgeEnabled(r6)
-                    r7 = 0
-                    if (r6 == 0) goto L42
-                    android.view.WindowInsets r6 = r5.mDecorViewInset
-                    int r0 = android.view.WindowInsets.Type.navigationBars()
-                    android.graphics.Insets r6 = r6.getInsets(r0)
-                    android.content.Context r0 = r5.mContext
-                    int r0 = com.google.android.material.internal.SeslDisplayUtils.getPinnedEdgeWidth(r0)
-                    android.content.Context r1 = r5.mContext
-                    android.content.ContentResolver r1 = r1.getContentResolver()
-                    java.lang.String r2 = "active_edge_area"
-                    r3 = 1
-                    int r1 = android.provider.Settings.System.getInt(r1, r2, r3)
-                    int r2 = r6.left
-                    if (r0 != r2) goto L3b
-                    if (r1 != 0) goto L3b
-                    r4 = r0
-                    r0 = r7
-                    r7 = r4
-                    goto L43
-                L3b:
-                    int r6 = r6.right
-                    if (r0 != r6) goto L42
-                    if (r1 != r3) goto L42
-                    goto L43
-                L42:
-                    r0 = r7
-                L43:
-                    int r6 = r5.mStatusBarHeight
-                    float r6 = (float) r6
-                    int r1 = r5.mNavigationBarFrameHeight
-                    float r1 = (float) r1
-                    android.view.WindowInsetsAnimationController r5 = r5.mAnimationController
-                    int r6 = (int) r6
-                    int r1 = (int) r1
-                    android.graphics.Insets r6 = android.graphics.Insets.of(r7, r6, r0, r1)
-                    r7 = 1065353216(0x3f800000, float:1.0)
-                    r5.setInsetsAndAlpha(r6, r7, r7)
-                L56:
-                    return
-                */
-                throw new UnsupportedOperationException("Method not decompiled: com.google.android.material.appbar.SeslImmersiveScrollBehavior.AnonymousClass5.onReady(android.view.WindowInsetsAnimationController, int):void");
+            public final void onReady(WindowInsetsAnimationController windowInsetsAnimationController, int i) {
+                int pinnedEdgeWidth;
+                SeslImmersiveScrollBehavior seslImmersiveScrollBehavior = SeslImmersiveScrollBehavior.this;
+                if (seslImmersiveScrollBehavior.mDecorView != null) {
+                    seslImmersiveScrollBehavior.mCancellationSignal = null;
+                    seslImmersiveScrollBehavior.mAnimationController = windowInsetsAnimationController;
+                    int i2 = 0;
+                    if (SeslDisplayUtils.isPinEdgeEnabled(seslImmersiveScrollBehavior.mContext)) {
+                        Insets insets = seslImmersiveScrollBehavior.mDecorViewInset.getInsets(WindowInsets.Type.navigationBars());
+                        pinnedEdgeWidth = SeslDisplayUtils.getPinnedEdgeWidth(seslImmersiveScrollBehavior.mContext);
+                        int i3 = Settings.System.getInt(seslImmersiveScrollBehavior.mContext.getContentResolver(), "active_edge_area", 1);
+                        if (pinnedEdgeWidth == insets.left && i3 == 0) {
+                            pinnedEdgeWidth = 0;
+                            i2 = pinnedEdgeWidth;
+                        } else if (pinnedEdgeWidth != insets.right || i3 != 1) {
+                            pinnedEdgeWidth = 0;
+                        }
+                    }
+                    seslImmersiveScrollBehavior.mAnimationController.setInsetsAndAlpha(Insets.of(i2, seslImmersiveScrollBehavior.mStatusBarHeight, pinnedEdgeWidth, seslImmersiveScrollBehavior.mNavigationBarFrameHeight), 1.0f, 1.0f);
+                }
             }
         };
         this.mWindowAnimationCallback = new WindowInsetsAnimation.Callback(1) { // from class: com.google.android.material.appbar.SeslImmersiveScrollBehavior.6
@@ -275,7 +422,7 @@ public final class SeslImmersiveScrollBehavior extends AppBarLayout.Behavior {
         return windowInsets.getDisplayCutout() == null && windowInsets.getInsets(WindowInsets.Type.statusBars()).top == 0;
     }
 
-    public final boolean canImmersiveScroll() {
+    public final boolean canImmersiveScroll() throws Resources.NotFoundException {
         boolean z;
         AppBarLayout appBarLayout;
         if (this.mAppBarLayout != null && !isDexEnabled()) {
@@ -298,7 +445,7 @@ public final class SeslImmersiveScrollBehavior extends AppBarLayout.Behavior {
                     KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e, new StringBuilder("ERROR, e : "), "SeslImmersiveScrollBehavior");
                     z = true;
                 }
-                boolean updateOrientationState = z ? updateOrientationState() : true;
+                boolean zUpdateOrientationState = z ? updateOrientationState() : true;
                 Context context2 = this.mContext;
                 if (context2 != null) {
                     Activity activity = SeslContextUtils.getActivity(context2);
@@ -307,18 +454,18 @@ public final class SeslImmersiveScrollBehavior extends AppBarLayout.Behavior {
                         activity = SeslContextUtils.getActivity(this.mAppBarLayout.getContext());
                     }
                     if (activity != null) {
-                        boolean isInMultiWindowMode = activity.isInMultiWindowMode();
-                        if (this.mIsMultiWindow != isInMultiWindowMode) {
+                        boolean zIsInMultiWindowMode = activity.isInMultiWindowMode();
+                        if (this.mIsMultiWindow != zIsInMultiWindowMode) {
                             forceRestoreWindowInset(true);
                             cancelWindowInsetsAnimationController();
                         }
-                        this.mIsMultiWindow = isInMultiWindowMode;
-                        if (isInMultiWindowMode) {
+                        this.mIsMultiWindow = zIsInMultiWindowMode;
+                        if (zIsInMultiWindowMode) {
                             return false;
                         }
                     }
                 }
-                return updateOrientationState;
+                return zUpdateOrientationState;
             }
             prepareImmersiveScroll(false, false);
         }
@@ -348,7 +495,7 @@ public final class SeslImmersiveScrollBehavior extends AppBarLayout.Behavior {
     }
 
     @Override // androidx.coordinatorlayout.widget.CoordinatorLayout.Behavior
-    public final boolean dispatchGenericMotionEvent(MotionEvent motionEvent) {
+    public final boolean dispatchGenericMotionEvent(MotionEvent motionEvent) throws Resources.NotFoundException {
         boolean z = motionEvent.getToolType(0) == 3;
         if (this.mToolIsMouse != z) {
             this.mToolIsMouse = z;
@@ -361,16 +508,16 @@ public final class SeslImmersiveScrollBehavior extends AppBarLayout.Behavior {
         return false;
     }
 
-    public final boolean dispatchImmersiveScrollEnabled() {
+    public final boolean dispatchImmersiveScrollEnabled() throws Resources.NotFoundException {
         AppBarLayout appBarLayout = this.mAppBarLayout;
         if (appBarLayout == null || appBarLayout.mIsDetachedState) {
             return false;
         }
-        boolean canImmersiveScroll = canImmersiveScroll();
-        setupDecorsFitSystemWindowState(canImmersiveScroll);
+        boolean zCanImmersiveScroll = canImmersiveScroll();
+        setupDecorsFitSystemWindowState(zCanImmersiveScroll);
         updateAppBarHeightProportion();
         updateSystemBarsHeight();
-        return canImmersiveScroll;
+        return zCanImmersiveScroll;
     }
 
     public final void findSystemBarsBackground() {
@@ -398,9 +545,9 @@ public final class SeslImmersiveScrollBehavior extends AppBarLayout.Behavior {
             WindowInsets rootWindowInsets = this.mDecorView.getRootWindowInsets();
             this.mDecorViewInset = rootWindowInsets;
             if (rootWindowInsets != null) {
-                boolean isVisible = rootWindowInsets.isVisible(WindowInsets.Type.statusBars());
-                boolean isVisible2 = this.mDecorViewInset.isVisible(WindowInsets.Type.navigationBars());
-                if (!isVisible || !isVisible2 || isAppBarHide() || z) {
+                boolean zIsVisible = rootWindowInsets.isVisible(WindowInsets.Type.statusBars());
+                boolean zIsVisible2 = this.mDecorViewInset.isVisible(WindowInsets.Type.navigationBars());
+                if (!zIsVisible || !zIsVisible2 || isAppBarHide() || z) {
                     try {
                         this.mWindowInsetsController.show(WindowInsets.Type.statusBars() | WindowInsets.Type.navigationBars());
                     } catch (IllegalStateException unused) {
@@ -427,11 +574,11 @@ public final class SeslImmersiveScrollBehavior extends AppBarLayout.Behavior {
         Configuration configuration = context.getResources().getConfiguration();
         Class cls = SeslConfigurationReflector.mClass;
         Method declaredMethod = SeslBaseReflector.getDeclaredMethod(cls, "hidden_semDesktopModeEnabled", new Class[0]);
-        Object invoke = declaredMethod != null ? SeslBaseReflector.invoke(configuration, declaredMethod, new Object[0]) : null;
-        int intValue = invoke instanceof Integer ? ((Integer) invoke).intValue() : -1;
+        Object objInvoke = declaredMethod != null ? SeslBaseReflector.invoke(configuration, declaredMethod, new Object[0]) : null;
+        int iIntValue = objInvoke instanceof Integer ? ((Integer) objInvoke).intValue() : -1;
         Method declaredMethod2 = SeslBaseReflector.getDeclaredMethod(cls, "hidden_SEM_DESKTOP_MODE_ENABLED", new Class[0]);
-        Object invoke2 = declaredMethod2 != null ? SeslBaseReflector.invoke(null, declaredMethod2, new Object[0]) : null;
-        return intValue == (invoke2 instanceof Integer ? ((Integer) invoke2).intValue() : 0);
+        Object objInvoke2 = declaredMethod2 != null ? SeslBaseReflector.invoke(null, declaredMethod2, new Object[0]) : null;
+        return iIntValue == (objInvoke2 instanceof Integer ? ((Integer) objInvoke2).intValue() : 0);
     }
 
     public final boolean isNavigationBarBottomPosition() {
@@ -448,7 +595,7 @@ public final class SeslImmersiveScrollBehavior extends AppBarLayout.Behavior {
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Type inference failed for: r5v8, types: [android.view.WindowInsetsController$OnControllableInsetsChangedListener, com.google.android.material.appbar.SeslImmersiveScrollBehavior$3] */
     @Override // com.google.android.material.appbar.ViewOffsetBehavior
-    public final void layoutChild(CoordinatorLayout coordinatorLayout, View view, int i) {
+    public final void layoutChild(CoordinatorLayout coordinatorLayout, View view, int i) throws Resources.NotFoundException {
         AppBarLayout appBarLayout = (AppBarLayout) view;
         coordinatorLayout.onLayoutChild(appBarLayout, i);
         if (this.mWindowInsetsController != null && this.mOnInsetsChangedListener == null) {
@@ -499,9 +646,9 @@ public final class SeslImmersiveScrollBehavior extends AppBarLayout.Behavior {
             }
             View rootView = this.mAppBarLayout.getRootView();
             this.mDecorView = rootView;
-            View findViewById = rootView.findViewById(R.id.content);
-            this.mContentView = findViewById;
-            findViewById.setWindowInsetsAnimationCallback(this.mWindowAnimationCallback);
+            View viewFindViewById = rootView.findViewById(R.id.content);
+            this.mContentView = viewFindViewById;
+            viewFindViewById.setWindowInsetsAnimationCallback(this.mWindowAnimationCallback);
             findSystemBarsBackground();
             dispatchImmersiveScrollEnabled();
             while (true) {
@@ -518,9 +665,9 @@ public final class SeslImmersiveScrollBehavior extends AppBarLayout.Behavior {
                 }
                 i2++;
             }
-            View findViewById2 = coordinatorLayout.findViewById(com.android.systemui.R.id.bottom_bar_overlay);
-            if (this.mBottomArea == null || findViewById2 != null) {
-                this.mBottomArea = findViewById2;
+            View viewFindViewById2 = coordinatorLayout.findViewById(com.android.systemui.R.id.bottom_bar_overlay);
+            if (this.mBottomArea == null || viewFindViewById2 != null) {
+                this.mBottomArea = viewFindViewById2;
             }
         }
     }
@@ -726,7 +873,7 @@ public final class SeslImmersiveScrollBehavior extends AppBarLayout.Behavior {
     }
 
     @Override // com.google.android.material.appbar.AppBarLayout.BaseBehavior, androidx.coordinatorlayout.widget.CoordinatorLayout.Behavior
-    public final boolean onMeasureChild(CoordinatorLayout coordinatorLayout, AppBarLayout appBarLayout, int i, int i2, int i3) {
+    public final boolean onMeasureChild(CoordinatorLayout coordinatorLayout, AppBarLayout appBarLayout, int i, int i2, int i3) throws Resources.NotFoundException {
         dispatchImmersiveScrollEnabled();
         return super.onMeasureChild(coordinatorLayout, appBarLayout, i, i2, i3);
     }
@@ -760,16 +907,16 @@ public final class SeslImmersiveScrollBehavior extends AppBarLayout.Behavior {
             if (this.mCancellationSignal == null) {
                 this.mCancellationSignal = new CancellationSignal();
             }
-            int statusBars = WindowInsets.Type.statusBars() | WindowInsets.Type.navigationBars();
+            int iStatusBars = WindowInsets.Type.statusBars() | WindowInsets.Type.navigationBars();
             if (!isHideCameraCutout(this.mDecorViewInset)) {
                 try {
-                    this.mWindowInsetsController.hide(statusBars);
+                    this.mWindowInsetsController.hide(iStatusBars);
                 } catch (IllegalStateException unused) {
                     Log.w("SeslImmersiveScrollBehavior", "startAnimationControlRequest: mWindowInsetsController.hide failed!");
                 }
             }
             this.mWindowInsetsController.setSystemBarsBehavior(2);
-            this.mWindowInsetsController.controlWindowInsetsAnimation(statusBars, -1L, null, this.mCancellationSignal, this.mWindowInsetsAnimationControlListener);
+            this.mWindowInsetsController.controlWindowInsetsAnimation(iStatusBars, -1L, null, this.mCancellationSignal, this.mWindowInsetsAnimationControlListener);
         }
         return super.onStartNestedScroll(coordinatorLayout, appBarLayout, view, view2, i, i2);
     }

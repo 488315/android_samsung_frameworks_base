@@ -52,14 +52,14 @@ public abstract class RotationResolverService extends Service {
         public void resolveRotation(IRotationResolverCallback iRotationResolverCallback, RotationResolutionRequest rotationResolutionRequest) throws RemoteException {
             Objects.requireNonNull(iRotationResolverCallback);
             Objects.requireNonNull(rotationResolutionRequest);
-            ICancellationSignal createTransport = CancellationSignal.createTransport();
-            iRotationResolverCallback.onCancellable(createTransport);
+            ICancellationSignal iCancellationSignalCreateTransport = CancellationSignal.createTransport();
+            iRotationResolverCallback.onCancellable(iCancellationSignalCreateTransport);
             RotationResolverService.this.mMainThreadHandler.sendMessage(PooledLambda.obtainMessage(new QuadConsumer() { // from class: android.service.rotationresolver.RotationResolverService$1$$ExternalSyntheticLambda0
                 @Override // com.android.internal.util.function.QuadConsumer
                 public final void accept(Object obj, Object obj2, Object obj3, Object obj4) {
                     ((RotationResolverService) obj).resolveRotation((IRotationResolverCallback) obj2, (RotationResolutionRequest) obj3, (ICancellationSignal) obj4);
                 }
-            }, RotationResolverService.this, iRotationResolverCallback, rotationResolutionRequest, createTransport));
+            }, RotationResolverService.this, iRotationResolverCallback, rotationResolutionRequest, iCancellationSignalCreateTransport));
         }
     }
 
@@ -79,9 +79,9 @@ public abstract class RotationResolverService extends Service {
             return;
         }
         this.mPendingCallback = new RotationResolverCallbackWrapper(iRotationResolverCallback, this, rotationResolutionRequest.getTimeoutMillis() + SystemClock.uptimeMillis());
-        CancellationSignal fromTransport = CancellationSignal.fromTransport(iCancellationSignal);
-        this.mCancellationSignal = fromTransport;
-        onResolveRotation(rotationResolutionRequest, fromTransport, this.mPendingCallback);
+        CancellationSignal cancellationSignalFromTransport = CancellationSignal.fromTransport(iCancellationSignal);
+        this.mCancellationSignal = cancellationSignalFromTransport;
+        onResolveRotation(rotationResolutionRequest, cancellationSignalFromTransport, this.mPendingCallback);
     }
 
     /* JADX INFO: Access modifiers changed from: private */

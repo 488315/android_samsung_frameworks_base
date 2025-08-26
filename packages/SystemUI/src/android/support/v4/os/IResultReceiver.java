@@ -8,16 +8,13 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.support.v4.os.ResultReceiver.MyRunnable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public interface IResultReceiver extends IInterface {
     public static final String DESCRIPTOR = "android$support$v4$os$IResultReceiver".replace('$', '.');
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IResultReceiver {
         public static final /* synthetic */ int $r8$clinit = 0;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class Proxy implements IResultReceiver {
             public final IBinder mRemote;
 
@@ -48,14 +45,14 @@ public interface IResultReceiver extends IInterface {
             if (i != 1) {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
-            int readInt = parcel.readInt();
+            int i3 = parcel.readInt();
             Bundle bundle = (Bundle) (parcel.readInt() != 0 ? Bundle.CREATOR.createFromParcel(parcel) : null);
             ResultReceiver resultReceiver = ResultReceiver.this;
             Handler handler = resultReceiver.mHandler;
             if (handler != null) {
-                handler.post(resultReceiver.new MyRunnable(readInt, bundle));
+                handler.post(resultReceiver.new MyRunnable(i3, bundle));
             } else {
-                resultReceiver.onReceiveResult(readInt, bundle);
+                resultReceiver.onReceiveResult(i3, bundle);
             }
             return true;
         }

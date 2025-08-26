@@ -101,43 +101,39 @@ public class InstallLocationUtils {
     }
 
     private static synchronized TestableInterface getDefaultTestableInterface() {
-        TestableInterface testableInterface;
-        synchronized (InstallLocationUtils.class) {
-            if (sDefaultTestableInterface == null) {
-                sDefaultTestableInterface = new TestableInterface() { // from class: com.android.internal.content.InstallLocationUtils.1
-                    @Override // com.android.internal.content.InstallLocationUtils.TestableInterface
-                    public StorageManager getStorageManager(Context context) {
-                        return (StorageManager) context.getSystemService(StorageManager.class);
-                    }
+        if (sDefaultTestableInterface == null) {
+            sDefaultTestableInterface = new TestableInterface() { // from class: com.android.internal.content.InstallLocationUtils.1
+                @Override // com.android.internal.content.InstallLocationUtils.TestableInterface
+                public StorageManager getStorageManager(Context context) {
+                    return (StorageManager) context.getSystemService(StorageManager.class);
+                }
 
-                    @Override // com.android.internal.content.InstallLocationUtils.TestableInterface
-                    public boolean getForceAllowOnExternalSetting(Context context) {
-                        return Settings.Global.getInt(context.getContentResolver(), Settings.Global.FORCE_ALLOW_ON_EXTERNAL, 0) != 0;
-                    }
+                @Override // com.android.internal.content.InstallLocationUtils.TestableInterface
+                public boolean getForceAllowOnExternalSetting(Context context) {
+                    return Settings.Global.getInt(context.getContentResolver(), Settings.Global.FORCE_ALLOW_ON_EXTERNAL, 0) != 0;
+                }
 
-                    @Override // com.android.internal.content.InstallLocationUtils.TestableInterface
-                    public boolean getAllow3rdPartyOnInternalConfig(Context context) {
-                        return context.getResources().getBoolean(R.bool.config_allow3rdPartyAppOnInternal);
-                    }
+                @Override // com.android.internal.content.InstallLocationUtils.TestableInterface
+                public boolean getAllow3rdPartyOnInternalConfig(Context context) {
+                    return context.getResources().getBoolean(R.bool.config_allow3rdPartyAppOnInternal);
+                }
 
-                    @Override // com.android.internal.content.InstallLocationUtils.TestableInterface
-                    public ApplicationInfo getExistingAppInfo(Context context, String str) {
-                        try {
-                            return context.getPackageManager().getApplicationInfo(str, 4194304);
-                        } catch (PackageManager.NameNotFoundException unused) {
-                            return null;
-                        }
+                @Override // com.android.internal.content.InstallLocationUtils.TestableInterface
+                public ApplicationInfo getExistingAppInfo(Context context, String str) {
+                    try {
+                        return context.getPackageManager().getApplicationInfo(str, 4194304);
+                    } catch (PackageManager.NameNotFoundException unused) {
+                        return null;
                     }
+                }
 
-                    @Override // com.android.internal.content.InstallLocationUtils.TestableInterface
-                    public File getDataDirectory() {
-                        return Environment.getDataDirectory();
-                    }
-                };
-            }
-            testableInterface = sDefaultTestableInterface;
+                @Override // com.android.internal.content.InstallLocationUtils.TestableInterface
+                public File getDataDirectory() {
+                    return Environment.getDataDirectory();
+                }
+            };
         }
-        return testableInterface;
+        return sDefaultTestableInterface;
     }
 
     @Deprecated
@@ -153,20 +149,20 @@ public class InstallLocationUtils {
         return resolveInstallVolume(context, sessionParams.appPackageName, sessionParams.installLocation, sessionParams.sizeBytes, getDefaultTestableInterface());
     }
 
-    private static boolean checkFitOnVolume(StorageManager storageManager, String str, PackageInstaller.SessionParams sessionParams) throws IOException {
+    private static boolean checkFitOnVolume(StorageManager storageManager, String str, PackageInstaller.SessionParams sessionParams) throws Throwable {
         if (str == null) {
             return false;
         }
-        int translateAllocateFlags = translateAllocateFlags(sessionParams.installFlags);
+        int iTranslateAllocateFlags = translateAllocateFlags(sessionParams.installFlags);
         UUID uuidForPath = storageManager.getUuidForPath(new File(str));
-        long allocatableBytes = storageManager.getAllocatableBytes(uuidForPath, translateAllocateFlags | 8);
+        long allocatableBytes = storageManager.getAllocatableBytes(uuidForPath, iTranslateAllocateFlags | 8);
         if (sessionParams.sizeBytes <= allocatableBytes) {
             return true;
         }
-        return sessionParams.sizeBytes <= allocatableBytes + storageManager.getAllocatableBytes(uuidForPath, translateAllocateFlags | 16);
+        return sessionParams.sizeBytes <= allocatableBytes + storageManager.getAllocatableBytes(uuidForPath, iTranslateAllocateFlags | 16);
     }
 
-    public static String resolveInstallVolume(Context context, PackageInstaller.SessionParams sessionParams, TestableInterface testableInterface) throws IOException {
+    public static String resolveInstallVolume(Context context, PackageInstaller.SessionParams sessionParams, TestableInterface testableInterface) throws Throwable {
         StorageManager storageManager = testableInterface.getStorageManager(context);
         boolean forceAllowOnExternalSetting = testableInterface.getForceAllowOnExternalSetting(context);
         boolean allow3rdPartyOnInternalConfig = testableInterface.getAllow3rdPartyOnInternalConfig(context);
@@ -175,11 +171,11 @@ public class InstallLocationUtils {
         String str = null;
         for (VolumeInfo volumeInfo : storageManager.getVolumes()) {
             if (volumeInfo.type == 1 && volumeInfo.isMountedWritable()) {
-                boolean equals = VolumeInfo.ID_PRIVATE_INTERNAL.equals(volumeInfo.id);
-                if (equals) {
+                boolean zEquals = VolumeInfo.ID_PRIVATE_INTERNAL.equals(volumeInfo.id);
+                if (zEquals) {
                     str = volumeInfo.path;
                 }
-                if (!equals || allow3rdPartyOnInternalConfig) {
+                if (!zEquals || allow3rdPartyOnInternalConfig) {
                     arrayMap.put(volumeInfo.fsUuid, volumeInfo.path);
                 }
             }
@@ -204,48 +200,48 @@ public class InstallLocationUtils {
         }
         if (existingAppInfo != null) {
             if (Objects.equals(existingAppInfo.volumeUuid, StorageManager.UUID_PRIVATE_INTERNAL)) {
-                r4 = str;
+                str = str;
             } else if (arrayMap.containsKey(existingAppInfo.volumeUuid)) {
-                r4 = (String) arrayMap.get(existingAppInfo.volumeUuid);
+                str = (String) arrayMap.get(existingAppInfo.volumeUuid);
             }
-            if (!checkFitOnVolume(storageManager, r4, sessionParams)) {
+            if (!checkFitOnVolume(storageManager, str, sessionParams)) {
                 throw new IOException("Not enough space on existing volume " + existingAppInfo.volumeUuid + " for " + sessionParams.appPackageName + " upgrade");
             }
             return existingAppInfo.volumeUuid;
         }
-        r4 = arrayMap.isEmpty() ? null : (String) arrayMap.keyAt(0);
+        str = arrayMap.isEmpty() ? null : (String) arrayMap.keyAt(0);
         if (arrayMap.size() == 1) {
             if (checkFitOnVolume(storageManager, (String) arrayMap.valueAt(0), sessionParams)) {
-                return r4;
+                return str;
             }
         } else {
             long j = Long.MIN_VALUE;
             for (String str2 : arrayMap.keySet()) {
                 long allocatableBytes = storageManager.getAllocatableBytes(storageManager.getUuidForPath(new File((String) arrayMap.get(str2))), translateAllocateFlags(sessionParams.installFlags));
                 if (allocatableBytes >= j) {
-                    r4 = str2;
+                    str = str2;
                     j = allocatableBytes;
                 }
             }
             if (j >= sessionParams.sizeBytes) {
-                return r4;
+                return str;
             }
         }
         if (!arrayMap.isEmpty() && 2147483647L == sessionParams.sizeBytes && SystemProperties.getBoolean("debug.pm.install_skip_size_check_for_maxint", false)) {
-            return r4;
+            return str;
         }
         throw new IOException("No special requests, but no room on allowed volumes.  allow3rdPartyOnInternal? " + allow3rdPartyOnInternalConfig);
     }
 
-    public static boolean fitsOnInternal(Context context, PackageInstaller.SessionParams sessionParams) throws IOException {
+    public static boolean fitsOnInternal(Context context, PackageInstaller.SessionParams sessionParams) throws Throwable {
         StorageManager storageManager = (StorageManager) context.getSystemService(StorageManager.class);
         UUID uuidForPath = storageManager.getUuidForPath(Environment.getDataDirectory());
-        int translateAllocateFlags = translateAllocateFlags(sessionParams.installFlags);
-        long allocatableBytes = storageManager.getAllocatableBytes(uuidForPath, translateAllocateFlags | 8);
+        int iTranslateAllocateFlags = translateAllocateFlags(sessionParams.installFlags);
+        long allocatableBytes = storageManager.getAllocatableBytes(uuidForPath, iTranslateAllocateFlags | 8);
         if (sessionParams.sizeBytes <= allocatableBytes) {
             return true;
         }
-        return sessionParams.sizeBytes <= allocatableBytes + storageManager.getAllocatableBytes(uuidForPath, translateAllocateFlags | 16);
+        return sessionParams.sizeBytes <= allocatableBytes + storageManager.getAllocatableBytes(uuidForPath, iTranslateAllocateFlags | 16);
     }
 
     public static boolean fitsOnExternal(Context context, PackageInstaller.SessionParams sessionParams) {
@@ -254,6 +250,11 @@ public class InstallLocationUtils {
         return AsecUtils.fitsOnExternal(sessionParams, storageManager);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:10:0x0021  */
+    /* JADX WARN: Removed duplicated region for block: B:19:0x0038  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public static int resolveInstallLocation(Context context, PackageInstaller.SessionParams sessionParams) throws IOException {
         ApplicationInfo applicationInfo;
         char c;
@@ -268,47 +269,42 @@ public class InstallLocationUtils {
             z2 = false;
             c = 1;
             z = true;
-        } else {
-            if ((sessionParams.installFlags & 16) == 0) {
-                if ((sessionParams.installFlags & 8) != 0) {
-                    c = 2;
-                    z2 = false;
-                    z = false;
-                } else if (sessionParams.installLocation != 1) {
-                    if (sessionParams.installLocation != 2) {
-                        if (sessionParams.installLocation == 0) {
-                            if (applicationInfo == null || (applicationInfo.flags & 262144) == 0) {
-                                c = 1;
-                                z = false;
-                                z2 = true;
-                            }
-                        }
-                    }
-                    c = 2;
+        } else if ((sessionParams.installFlags & 16) == 0) {
+            if ((sessionParams.installFlags & 8) != 0) {
+                c = 2;
+                z2 = false;
+                z = false;
+            } else if (sessionParams.installLocation == 1) {
+                z2 = false;
+                z = false;
+                c = 1;
+            } else if (sessionParams.installLocation != 2) {
+                if (sessionParams.installLocation == 0) {
+                    c = (applicationInfo == null || (applicationInfo.flags & 262144) == 0) ? (char) 1 : (char) 2;
                     z = false;
                     z2 = true;
                 }
+                z2 = false;
+                z = false;
+                c = 1;
             }
-            z2 = false;
-            z = false;
-            c = 1;
         }
-        boolean fitsOnInternal = (z2 || c == 1) ? fitsOnInternal(context, sessionParams) : false;
-        boolean fitsOnExternal = (z2 || c == 2) ? fitsOnExternal(context, sessionParams) : false;
+        boolean zFitsOnInternal = (z2 || c == 1) ? fitsOnInternal(context, sessionParams) : false;
+        boolean zFitsOnExternal = (z2 || c == 2) ? fitsOnExternal(context, sessionParams) : false;
         if (c == 1) {
-            if (fitsOnInternal) {
+            if (zFitsOnInternal) {
                 return z ? 3 : 1;
             }
-        } else if (c == 2 && fitsOnExternal) {
+        } else if (c == 2 && zFitsOnExternal) {
             return 2;
         }
         if (!z2) {
             return -1;
         }
-        if (fitsOnInternal) {
+        if (zFitsOnInternal) {
             return 1;
         }
-        return fitsOnExternal ? 2 : -1;
+        return zFitsOnExternal ? 2 : -1;
     }
 
     @Deprecated
@@ -321,15 +317,15 @@ public class InstallLocationUtils {
     }
 
     public static long calculateInstalledSize(PackageLite packageLite, String str, FileDescriptor fileDescriptor) throws IOException {
-        NativeLibraryHelper.Handle create;
+        NativeLibraryHelper.Handle handleCreate;
         NativeLibraryHelper.Handle handle = null;
         try {
             if (fileDescriptor != null) {
-                create = NativeLibraryHelper.Handle.createFd(packageLite, fileDescriptor);
+                handleCreate = NativeLibraryHelper.Handle.createFd(packageLite, fileDescriptor);
             } else {
-                create = NativeLibraryHelper.Handle.create(packageLite);
+                handleCreate = NativeLibraryHelper.Handle.create(packageLite);
             }
-            handle = create;
+            handle = handleCreate;
             return calculateInstalledSize(packageLite, handle, str);
         } finally {
             IoUtils.closeQuietly(handle);
@@ -343,11 +339,11 @@ public class InstallLocationUtils {
 
     public static long calculateInstalledSize(PackageLite packageLite, NativeLibraryHelper.Handle handle, String str) throws IOException {
         Iterator<String> it = packageLite.getAllApkPaths().iterator();
-        long j = 0;
+        long length = 0;
         while (it.hasNext()) {
-            j += new File(it.next()).length();
+            length += new File(it.next()).length();
         }
-        long packageDexMetadataSize = j + DexMetadataHelper.getPackageDexMetadataSize(packageLite);
+        long packageDexMetadataSize = length + DexMetadataHelper.getPackageDexMetadataSize(packageLite);
         return packageLite.isExtractNativeLibs() ? packageDexMetadataSize + NativeLibraryHelper.sumNativeBinariesWithOverride(handle, str) : packageDexMetadataSize;
     }
 

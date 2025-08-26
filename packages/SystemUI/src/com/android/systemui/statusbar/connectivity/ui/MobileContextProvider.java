@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.Map;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class MobileContextProvider implements Dumpable, DemoMode {
     public static final Companion Companion = new Companion(null);
@@ -31,7 +30,6 @@ public final class MobileContextProvider implements Dumpable, DemoMode {
     public final DemoModeController demoModeController;
     public final Map subscriptions = new LinkedHashMap();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -46,7 +44,7 @@ public final class MobileContextProvider implements Dumpable, DemoMode {
         ((NetworkControllerImpl) networkController).addCallback(new SignalCallback() { // from class: com.android.systemui.statusbar.connectivity.ui.MobileContextProvider$signalCallback$1
             @Override // com.android.systemui.statusbar.connectivity.SignalCallback
             public final void setSubs(List list) {
-                MobileContextProvider mobileContextProvider = MobileContextProvider.this;
+                MobileContextProvider mobileContextProvider = this.this$0;
                 mobileContextProvider.subscriptions.clear();
                 Iterator it = list.iterator();
                 while (it.hasNext()) {
@@ -80,14 +78,14 @@ public final class MobileContextProvider implements Dumpable, DemoMode {
     public final void dump(PrintWriter printWriter, String[] strArr) {
         printWriter.println("Subscriptions below will be inflated with a configuration context with MCC/MNC overrides");
         for (Map.Entry entry : ((LinkedHashMap) this.subscriptions).entrySet()) {
-            int intValue = ((Number) entry.getKey()).intValue();
+            int iIntValue = ((Number) entry.getKey()).intValue();
             SubscriptionInfo subscriptionInfo = (SubscriptionInfo) entry.getValue();
             int mcc = subscriptionInfo.getMcc();
             int mnc = subscriptionInfo.getMnc();
-            StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(intValue, mcc, "  Subscription with subId(", ") with MCC/MNC(", "/");
-            m.append(mnc);
-            m.append(")");
-            printWriter.println(m.toString());
+            StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(iIntValue, mcc, "  Subscription with subId(", ") with MCC/MNC(", "/");
+            sbM.append(mnc);
+            sbM.append(")");
+            printWriter.println(sbM.toString());
         }
         Object obj = this.demoMcc;
         if (obj == null) {

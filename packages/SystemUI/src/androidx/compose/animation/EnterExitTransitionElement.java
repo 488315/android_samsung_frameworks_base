@@ -9,7 +9,6 @@ import androidx.compose.ui.unit.IntSize;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class EnterExitTransitionElement extends ModifierNodeElement<EnterExitTransitionModifierNode> {
     public final EnterTransition enter;
@@ -51,13 +50,13 @@ final class EnterExitTransitionElement extends ModifierNodeElement<EnterExitTran
     }
 
     public final int hashCode() {
-        int hashCode = this.transition.hashCode() * 31;
+        int iHashCode = this.transition.hashCode() * 31;
         Transition.DeferredAnimation deferredAnimation = this.sizeAnimation;
-        int hashCode2 = (hashCode + (deferredAnimation == null ? 0 : deferredAnimation.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (deferredAnimation == null ? 0 : deferredAnimation.hashCode())) * 31;
         Transition.DeferredAnimation deferredAnimation2 = this.offsetAnimation;
-        int hashCode3 = (hashCode2 + (deferredAnimation2 == null ? 0 : deferredAnimation2.hashCode())) * 31;
+        int iHashCode3 = (iHashCode2 + (deferredAnimation2 == null ? 0 : deferredAnimation2.hashCode())) * 31;
         Transition.DeferredAnimation deferredAnimation3 = this.slideAnimation;
-        return this.graphicsLayerBlock.hashCode() + ((this.isEnabled.hashCode() + ((this.exit.hashCode() + ((this.enter.hashCode() + ((hashCode3 + (deferredAnimation3 != null ? deferredAnimation3.hashCode() : 0)) * 31)) * 31)) * 31)) * 31);
+        return this.graphicsLayerBlock.hashCode() + ((this.isEnabled.hashCode() + ((this.exit.hashCode() + ((this.enter.hashCode() + ((iHashCode3 + (deferredAnimation3 != null ? deferredAnimation3.hashCode() : 0)) * 31)) * 31)) * 31)) * 31);
     }
 
     public final String toString() {

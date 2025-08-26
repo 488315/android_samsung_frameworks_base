@@ -25,10 +25,10 @@ public class MultiSelectListPreference extends DialogPreference {
         super(context, attributeSet, i, i2);
         this.mValues = new HashSet();
         this.mNewValues = new HashSet();
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.MultiSelectListPreference, i, i2);
-        this.mEntries = obtainStyledAttributes.getTextArray(0);
-        this.mEntryValues = obtainStyledAttributes.getTextArray(1);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.MultiSelectListPreference, i, i2);
+        this.mEntries = typedArrayObtainStyledAttributes.getTextArray(0);
+        this.mEntryValues = typedArrayObtainStyledAttributes.getTextArray(1);
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     public MultiSelectListPreference(Context context, AttributeSet attributeSet, int i) {
@@ -152,11 +152,11 @@ public class MultiSelectListPreference extends DialogPreference {
 
     @Override // android.preference.DialogPreference, android.preference.Preference
     protected Parcelable onSaveInstanceState() {
-        Parcelable onSaveInstanceState = super.onSaveInstanceState();
+        Parcelable parcelableOnSaveInstanceState = super.onSaveInstanceState();
         if (isPersistent()) {
-            return onSaveInstanceState;
+            return parcelableOnSaveInstanceState;
         }
-        SavedState savedState = new SavedState(onSaveInstanceState);
+        SavedState savedState = new SavedState(parcelableOnSaveInstanceState);
         savedState.values = getValues();
         return savedState;
     }

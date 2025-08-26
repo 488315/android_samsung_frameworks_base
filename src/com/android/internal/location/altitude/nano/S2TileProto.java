@@ -60,34 +60,34 @@ public final class S2TileProto extends MessageNano {
 
     @Override // com.android.framework.protobuf.nano.MessageNano
     protected int computeSerializedSize() {
-        int computeSerializedSize = super.computeSerializedSize();
+        int iComputeSerializedSize = super.computeSerializedSize();
         if (!this.tileKey.equals("")) {
-            computeSerializedSize += CodedOutputByteBufferNano.computeStringSize(1, this.tileKey);
+            iComputeSerializedSize += CodedOutputByteBufferNano.computeStringSize(1, this.tileKey);
         }
         if (!Arrays.equals(this.byteBuffer, WireFormatNano.EMPTY_BYTES)) {
-            computeSerializedSize += CodedOutputByteBufferNano.computeBytesSize(2, this.byteBuffer);
+            iComputeSerializedSize += CodedOutputByteBufferNano.computeBytesSize(2, this.byteBuffer);
         }
         if (!Arrays.equals(this.byteJpeg, WireFormatNano.EMPTY_BYTES)) {
-            computeSerializedSize += CodedOutputByteBufferNano.computeBytesSize(3, this.byteJpeg);
+            iComputeSerializedSize += CodedOutputByteBufferNano.computeBytesSize(3, this.byteJpeg);
         }
-        return !Arrays.equals(this.bytePng, WireFormatNano.EMPTY_BYTES) ? computeSerializedSize + CodedOutputByteBufferNano.computeBytesSize(4, this.bytePng) : computeSerializedSize;
+        return !Arrays.equals(this.bytePng, WireFormatNano.EMPTY_BYTES) ? iComputeSerializedSize + CodedOutputByteBufferNano.computeBytesSize(4, this.bytePng) : iComputeSerializedSize;
     }
 
     @Override // com.android.framework.protobuf.nano.MessageNano
     public S2TileProto mergeFrom(CodedInputByteBufferNano codedInputByteBufferNano) throws IOException {
         while (true) {
-            int readTag = codedInputByteBufferNano.readTag();
-            if (readTag == 0) {
+            int tag = codedInputByteBufferNano.readTag();
+            if (tag == 0) {
                 break;
             }
-            if (readTag == 10) {
+            if (tag == 10) {
                 this.tileKey = codedInputByteBufferNano.readString();
-            } else if (readTag == 18) {
+            } else if (tag == 18) {
                 this.byteBuffer = codedInputByteBufferNano.readBytes();
-            } else if (readTag == 26) {
+            } else if (tag == 26) {
                 this.byteJpeg = codedInputByteBufferNano.readBytes();
-            } else if (readTag != 34) {
-                if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, readTag)) {
+            } else if (tag != 34) {
+                if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, tag)) {
                     break;
                 }
             } else {

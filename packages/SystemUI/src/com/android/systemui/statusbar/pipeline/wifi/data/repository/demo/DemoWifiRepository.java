@@ -11,7 +11,6 @@ import kotlinx.coroutines.flow.StateFlow;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DemoWifiRepository implements WifiRepository {
     public final StateFlowImpl _isWifiDefault;
@@ -33,7 +32,6 @@ public final class DemoWifiRepository implements WifiRepository {
     public final StateFlowImpl wifiNetwork;
     public final StateFlowImpl wifiScanResults;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -51,25 +49,25 @@ public final class DemoWifiRepository implements WifiRepository {
         this.dataSource = demoModeWifiDataSource;
         this.scope = coroutineScope;
         Boolean bool = Boolean.FALSE;
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(bool);
-        this._isWifiEnabled = MutableStateFlow;
-        this.isWifiEnabled = MutableStateFlow;
-        StateFlowImpl MutableStateFlow2 = StateFlowKt.MutableStateFlow(bool);
-        this._isWifiDefault = MutableStateFlow2;
-        this.isWifiDefault = MutableStateFlow2;
-        StateFlowImpl MutableStateFlow3 = StateFlowKt.MutableStateFlow(new WifiNetworkModel.Inactive(null, 1, null));
-        this._wifiNetwork = MutableStateFlow3;
-        this.wifiNetwork = MutableStateFlow3;
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(bool);
+        this._isWifiEnabled = stateFlowImplMutableStateFlow;
+        this.isWifiEnabled = stateFlowImplMutableStateFlow;
+        StateFlowImpl stateFlowImplMutableStateFlow2 = StateFlowKt.MutableStateFlow(bool);
+        this._isWifiDefault = stateFlowImplMutableStateFlow2;
+        this.isWifiDefault = stateFlowImplMutableStateFlow2;
+        StateFlowImpl stateFlowImplMutableStateFlow3 = StateFlowKt.MutableStateFlow(new WifiNetworkModel.Inactive(null, 1, null));
+        this._wifiNetwork = stateFlowImplMutableStateFlow3;
+        this.wifiNetwork = stateFlowImplMutableStateFlow3;
         EmptyList emptyList = EmptyList.INSTANCE;
-        StateFlowImpl MutableStateFlow4 = StateFlowKt.MutableStateFlow(emptyList);
-        this._secondaryNetworks = MutableStateFlow4;
-        this.secondaryNetworks = MutableStateFlow4;
-        StateFlowImpl MutableStateFlow5 = StateFlowKt.MutableStateFlow(new DataActivityModel(false, false));
-        this._wifiActivity = MutableStateFlow5;
-        this.wifiActivity = MutableStateFlow5;
-        StateFlowImpl MutableStateFlow6 = StateFlowKt.MutableStateFlow(emptyList);
-        this._wifiScanResults = MutableStateFlow6;
-        this.wifiScanResults = MutableStateFlow6;
+        StateFlowImpl stateFlowImplMutableStateFlow4 = StateFlowKt.MutableStateFlow(emptyList);
+        this._secondaryNetworks = stateFlowImplMutableStateFlow4;
+        this.secondaryNetworks = stateFlowImplMutableStateFlow4;
+        StateFlowImpl stateFlowImplMutableStateFlow5 = StateFlowKt.MutableStateFlow(new DataActivityModel(false, false));
+        this._wifiActivity = stateFlowImplMutableStateFlow5;
+        this.wifiActivity = stateFlowImplMutableStateFlow5;
+        StateFlowImpl stateFlowImplMutableStateFlow6 = StateFlowKt.MutableStateFlow(emptyList);
+        this._wifiScanResults = stateFlowImplMutableStateFlow6;
+        this.wifiScanResults = stateFlowImplMutableStateFlow6;
         this.hideDuringMobileSwitching = StateFlowKt.MutableStateFlow(bool);
         this.wifiConnectivityTestReported = StateFlowKt.MutableStateFlow(bool);
         this.receivedInetCondition = StateFlowKt.MutableStateFlow(-1);

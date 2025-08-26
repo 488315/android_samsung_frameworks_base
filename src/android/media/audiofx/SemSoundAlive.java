@@ -198,39 +198,39 @@ public class SemSoundAlive extends AudioEffect {
         public void onParameterChange(AudioEffect audioEffect, int i, byte[] bArr, byte[] bArr2) {
             OnParameterChangeListener onParameterChangeListener;
             int i2;
+            int iByteArrayToInt;
             int i3;
-            int i4;
-            int byteArrayToInt;
+            int iByteArrayToInt2;
             synchronized (SemSoundAlive.this.mParamListenerLock) {
                 onParameterChangeListener = SemSoundAlive.this.mParamListener != null ? SemSoundAlive.this.mParamListener : null;
             }
             if (onParameterChangeListener != null) {
                 if (bArr.length >= 4) {
-                    int byteArrayToInt2 = AudioEffect.byteArrayToInt(bArr, 0);
+                    int iByteArrayToInt3 = AudioEffect.byteArrayToInt(bArr, 0);
                     if (bArr.length >= 8) {
-                        i2 = byteArrayToInt2;
-                        i3 = AudioEffect.byteArrayToInt(bArr, 4);
+                        i2 = iByteArrayToInt3;
+                        iByteArrayToInt = AudioEffect.byteArrayToInt(bArr, 4);
                     } else {
-                        i2 = byteArrayToInt2;
-                        i3 = -1;
+                        i2 = iByteArrayToInt3;
+                        iByteArrayToInt = -1;
                     }
                 } else {
                     i2 = -1;
-                    i3 = -1;
+                    iByteArrayToInt = -1;
                 }
                 if (bArr2.length == 2) {
-                    byteArrayToInt = AudioEffect.byteArrayToShort(bArr2, 0);
+                    iByteArrayToInt2 = AudioEffect.byteArrayToShort(bArr2, 0);
                 } else {
                     if (bArr2.length != 4) {
-                        i4 = -1;
-                        if (i2 != -1 || i4 == -1) {
+                        i3 = -1;
+                        if (i2 != -1 || i3 == -1) {
                         }
-                        onParameterChangeListener.onParameterChange(SemSoundAlive.this, i, i2, i3, i4);
+                        onParameterChangeListener.onParameterChange(SemSoundAlive.this, i, i2, iByteArrayToInt, i3);
                         return;
                     }
-                    byteArrayToInt = AudioEffect.byteArrayToInt(bArr2, 0);
+                    iByteArrayToInt2 = AudioEffect.byteArrayToInt(bArr2, 0);
                 }
-                i4 = byteArrayToInt;
+                i3 = iByteArrayToInt2;
                 if (i2 != -1) {
                 }
             }
@@ -294,47 +294,47 @@ public class SemSoundAlive extends AudioEffect {
             if (stringTokenizer.countTokens() < 5) {
                 throw new IllegalArgumentException("settings: " + str);
             }
-            String nextToken = stringTokenizer.nextToken();
-            if (!SemSoundAlive.TAG.equals(nextToken)) {
-                throw new IllegalArgumentException("invalid settings for SemSoundAlive: " + nextToken);
+            String strNextToken = stringTokenizer.nextToken();
+            if (!SemSoundAlive.TAG.equals(strNextToken)) {
+                throw new IllegalArgumentException("invalid settings for SemSoundAlive: " + strNextToken);
             }
             try {
-                String nextToken2 = stringTokenizer.nextToken();
-                if (!"curPreset".equals(nextToken2)) {
-                    throw new IllegalArgumentException("invalid key name: " + nextToken2);
+                String strNextToken2 = stringTokenizer.nextToken();
+                if (!"curPreset".equals(strNextToken2)) {
+                    throw new IllegalArgumentException("invalid key name: " + strNextToken2);
                 }
                 this.curPreset = Short.parseShort(stringTokenizer.nextToken());
-                String nextToken3 = stringTokenizer.nextToken();
-                if (!"numBands".equals(nextToken3)) {
-                    throw new IllegalArgumentException("invalid key name: " + nextToken3);
+                String strNextToken3 = stringTokenizer.nextToken();
+                if (!"numBands".equals(strNextToken3)) {
+                    throw new IllegalArgumentException("invalid key name: " + strNextToken3);
                 }
                 this.numBands = Short.parseShort(stringTokenizer.nextToken());
-                int countTokens = stringTokenizer.countTokens();
+                int iCountTokens = stringTokenizer.countTokens();
                 int i2 = this.numBands;
-                if (countTokens != i2 * 2) {
+                if (iCountTokens != i2 * 2) {
                     throw new IllegalArgumentException("settings: " + str);
                 }
                 this.bandLevels = new short[i2];
                 while (i < this.numBands) {
-                    String nextToken4 = stringTokenizer.nextToken();
+                    String strNextToken4 = stringTokenizer.nextToken();
                     StringBuilder sb = new StringBuilder();
                     sb.append("band");
                     int i3 = i + 1;
                     sb.append(i3);
                     sb.append("Level");
-                    if (!sb.toString().equals(nextToken4)) {
-                        throw new IllegalArgumentException("invalid key name: " + nextToken4);
+                    if (!sb.toString().equals(strNextToken4)) {
+                        throw new IllegalArgumentException("invalid key name: " + strNextToken4);
                     }
                     this.bandLevels[i] = Short.parseShort(stringTokenizer.nextToken());
                     i = i3;
                 }
             } catch (NumberFormatException unused) {
-                throw new IllegalArgumentException("invalid value for key: " + nextToken);
+                throw new IllegalArgumentException("invalid value for key: " + strNextToken);
             }
         }
 
         public String toString() {
-            String str = "SemSoundAlive;curPreset=" + ((int) this.curPreset) + ";numBands=" + ((int) this.numBands);
+            String strConcat = "SemSoundAlive;curPreset=" + ((int) this.curPreset) + ";numBands=" + ((int) this.numBands);
             int i = 0;
             while (i < this.numBands) {
                 StringBuilder sb = new StringBuilder(";band");
@@ -342,10 +342,10 @@ public class SemSoundAlive extends AudioEffect {
                 sb.append(i2);
                 sb.append("Level=");
                 sb.append((int) this.bandLevels[i]);
-                str = str.concat(sb.toString());
+                strConcat = strConcat.concat(sb.toString());
                 i = i2;
             }
-            return str;
+            return strConcat;
         }
     }
 
@@ -371,10 +371,10 @@ public class SemSoundAlive extends AudioEffect {
         if (settings.numBands != settings.bandLevels.length || settings.numBands != this.mNumBands) {
             throw new IllegalArgumentException("settings invalid band count: " + ((int) settings.numBands));
         }
-        byte[] concatArrays = concatArrays(shortToByteArray(settings.curPreset), shortToByteArray(this.mNumBands));
+        byte[] bArrConcatArrays = concatArrays(shortToByteArray(settings.curPreset), shortToByteArray(this.mNumBands));
         for (int i = 0; i < this.mNumBands; i++) {
-            concatArrays = concatArrays(concatArrays, shortToByteArray(settings.bandLevels[i]));
+            bArrConcatArrays = concatArrays(bArrConcatArrays, shortToByteArray(settings.bandLevels[i]));
         }
-        checkStatus(setParameter(9, concatArrays));
+        checkStatus(setParameter(9, bArrConcatArrays));
     }
 }

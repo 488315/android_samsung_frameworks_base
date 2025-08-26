@@ -71,7 +71,6 @@ import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 import noticolorpicker.NotificationColorPicker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class HeadsUpManagerImpl implements HeadsUpManager, HeadsUpRepository, OnHeadsUpChangedListener {
     public final AccessibilityManagerWrapper mAccessibilityMgr;
@@ -114,7 +113,6 @@ public class HeadsUpManagerImpl implements HeadsUpManager, HeadsUpRepository, On
     public int mUser;
     public final VisualStabilityProvider mVisualStabilityProvider;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class HeadsUpEntry implements Comparable, HeadsUpRowRepository {
         public boolean extended;
         public Runnable mCancelRemoveRunnable;
@@ -148,11 +146,11 @@ public class HeadsUpManagerImpl implements HeadsUpManager, HeadsUpRepository, On
             LogLevel logLevel = LogLevel.INFO;
             HeadsUpManagerLogger$$ExternalSyntheticLambda0 headsUpManagerLogger$$ExternalSyntheticLambda0 = new HeadsUpManagerLogger$$ExternalSyntheticLambda0(4);
             LogBuffer logBuffer = headsUpManagerLogger.buffer;
-            LogMessage obtain = logBuffer.obtain("HeadsUpManager", logLevel, headsUpManagerLogger$$ExternalSyntheticLambda0, null);
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+            LogMessage logMessageObtain = logBuffer.obtain("HeadsUpManager", logLevel, headsUpManagerLogger$$ExternalSyntheticLambda0, null);
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
             logMessageImpl.str1 = NotificationUtilsKt.getLogKey(notificationEntry2);
             logMessageImpl.str2 = str;
-            logBuffer.commit(obtain);
+            logBuffer.commit(logMessageObtain);
             HeadsUpManagerImpl.this.mAvalancheController.update(this, headsUpManagerImpl$HeadsUpEntry$$ExternalSyntheticLambda1, str.concat(" cancelAutoRemovalCallbacks"));
         }
 
@@ -168,23 +166,23 @@ public class HeadsUpManagerImpl implements HeadsUpManager, HeadsUpRepository, On
                 return 1;
             }
             HeadsUpManagerImpl.this.getClass();
-            boolean hasFullScreenIntent = HeadsUpManagerImpl.hasFullScreenIntent(notificationEntry);
+            boolean zHasFullScreenIntent = HeadsUpManagerImpl.hasFullScreenIntent(notificationEntry);
             HeadsUpManagerImpl headsUpManagerImpl = HeadsUpManagerImpl.this;
             NotificationEntry notificationEntry2 = headsUpEntry.mEntry;
             headsUpManagerImpl.getClass();
-            boolean hasFullScreenIntent2 = HeadsUpManagerImpl.hasFullScreenIntent(notificationEntry2);
-            if (hasFullScreenIntent && !hasFullScreenIntent2) {
+            boolean zHasFullScreenIntent2 = HeadsUpManagerImpl.hasFullScreenIntent(notificationEntry2);
+            if (zHasFullScreenIntent && !zHasFullScreenIntent2) {
                 return -1;
             }
-            if (!hasFullScreenIntent && hasFullScreenIntent2) {
+            if (!zHasFullScreenIntent && zHasFullScreenIntent2) {
                 return 1;
             }
-            boolean m3064$$Nest$smisCriticalCallNotif = HeadsUpManagerImpl.m3064$$Nest$smisCriticalCallNotif(this.mEntry);
-            boolean m3064$$Nest$smisCriticalCallNotif2 = HeadsUpManagerImpl.m3064$$Nest$smisCriticalCallNotif(headsUpEntry.mEntry);
-            if (m3064$$Nest$smisCriticalCallNotif && !m3064$$Nest$smisCriticalCallNotif2) {
+            boolean zM3081$$Nest$smisCriticalCallNotif = HeadsUpManagerImpl.m3081$$Nest$smisCriticalCallNotif(this.mEntry);
+            boolean zM3081$$Nest$smisCriticalCallNotif2 = HeadsUpManagerImpl.m3081$$Nest$smisCriticalCallNotif(headsUpEntry.mEntry);
+            if (zM3081$$Nest$smisCriticalCallNotif && !zM3081$$Nest$smisCriticalCallNotif2) {
                 return -1;
             }
-            if (!m3064$$Nest$smisCriticalCallNotif && m3064$$Nest$smisCriticalCallNotif2) {
+            if (!zM3081$$Nest$smisCriticalCallNotif && zM3081$$Nest$smisCriticalCallNotif2) {
                 return 1;
             }
             boolean z = this.mRemoteInputActive;
@@ -253,11 +251,11 @@ public class HeadsUpManagerImpl implements HeadsUpManager, HeadsUpRepository, On
             LogLevel logLevel = LogLevel.INFO;
             HeadsUpManagerLogger$$ExternalSyntheticLambda0 headsUpManagerLogger$$ExternalSyntheticLambda0 = new HeadsUpManagerLogger$$ExternalSyntheticLambda0(7);
             LogBuffer logBuffer = headsUpManagerLogger.buffer;
-            LogMessage obtain = logBuffer.obtain("HeadsUpManager", logLevel, headsUpManagerLogger$$ExternalSyntheticLambda0, null);
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+            LogMessage logMessageObtain = logBuffer.obtain("HeadsUpManager", logLevel, headsUpManagerLogger$$ExternalSyntheticLambda0, null);
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
             logMessageImpl.str1 = NotificationUtils.logKey(notificationEntry);
             logMessageImpl.str2 = str;
-            logBuffer.commit(obtain);
+            logBuffer.commit(logMessageObtain);
             HeadsUpManagerImpl.this.mAvalancheController.update(this, new HeadsUpManagerImpl$$ExternalSyntheticLambda0(this, headsUpManagerImpl$HeadsUpEntry$$ExternalSyntheticLambda0, str), str.concat(" scheduleAutoRemovalCallback"));
         }
 
@@ -266,7 +264,7 @@ public class HeadsUpManagerImpl implements HeadsUpManager, HeadsUpRepository, On
             NotificationEntry notificationEntry = this.mEntry;
             if (notificationEntry != null && (expandableNotificationRow = notificationEntry.row) != null) {
                 int intrinsicHeight = expandableNotificationRow.getIntrinsicHeight();
-                boolean isAboveShelf = expandableNotificationRow.isAboveShelf();
+                boolean zIsAboveShelf = expandableNotificationRow.isAboveShelf();
                 expandableNotificationRow.mPinnedStatus = pinnedStatus;
                 if (intrinsicHeight != expandableNotificationRow.getIntrinsicHeight()) {
                     expandableNotificationRow.notifyHeightChanged(false);
@@ -280,12 +278,12 @@ public class HeadsUpManagerImpl implements HeadsUpManager, HeadsUpRepository, On
                     expandableNotificationRow.setUserExpanded(true, false);
                 }
                 expandableNotificationRow.setChronometerRunning(expandableNotificationRow.mLastChronometerRunning);
-                if (expandableNotificationRow.isAboveShelf() != isAboveShelf) {
-                    expandableNotificationRow.mAboveShelfChangedListener.onAboveShelfStateChanged(!isAboveShelf);
+                if (expandableNotificationRow.isAboveShelf() != zIsAboveShelf) {
+                    expandableNotificationRow.mAboveShelfChangedListener.onAboveShelfStateChanged(!zIsAboveShelf);
                 }
-                boolean isPinned = expandableNotificationRow.mPinnedStatus.isPinned();
+                boolean zIsPinned = expandableNotificationRow.mPinnedStatus.isPinned();
                 NotificationBackgroundView notificationBackgroundView = expandableNotificationRow.mBackgroundNormal;
-                notificationBackgroundView.mIsPinned = isPinned;
+                notificationBackgroundView.mIsPinned = zIsPinned;
                 notificationBackgroundView.invalidate();
             }
             this.mPinnedStatus.setValue(pinnedStatus);
@@ -295,7 +293,7 @@ public class HeadsUpManagerImpl implements HeadsUpManager, HeadsUpRepository, On
             HeadsUpManagerImpl.this.mAvalancheController.update(this, new Runnable() { // from class: com.android.systemui.statusbar.notification.headsup.HeadsUpManagerImpl$HeadsUpEntry$$ExternalSyntheticLambda3
                 @Override // java.lang.Runnable
                 public final void run() {
-                    HeadsUpManagerImpl.HeadsUpEntry headsUpEntry = HeadsUpManagerImpl.HeadsUpEntry.this;
+                    HeadsUpManagerImpl.HeadsUpEntry headsUpEntry = this.f$0;
                     boolean z3 = z;
                     String str2 = str;
                     boolean z4 = z2;
@@ -309,19 +307,19 @@ public class HeadsUpManagerImpl implements HeadsUpManager, HeadsUpRepository, On
                     LogLevel logLevel = LogLevel.INFO;
                     HeadsUpManagerLogger$$ExternalSyntheticLambda0 headsUpManagerLogger$$ExternalSyntheticLambda0 = new HeadsUpManagerLogger$$ExternalSyntheticLambda0(17);
                     LogBuffer logBuffer = headsUpManagerLogger.buffer;
-                    LogMessage obtain = logBuffer.obtain("HeadsUpManager", logLevel, headsUpManagerLogger$$ExternalSyntheticLambda0, null);
-                    LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+                    LogMessage logMessageObtain = logBuffer.obtain("HeadsUpManager", logLevel, headsUpManagerLogger$$ExternalSyntheticLambda0, null);
+                    LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
                     logMessageImpl.str1 = NotificationUtils.logKey(notificationEntry);
                     logMessageImpl.bool1 = z3;
                     logMessageImpl.str2 = str2;
-                    logBuffer.commit(obtain);
-                    long elapsedRealtime = HeadsUpManagerImpl.this.mSystemClock.elapsedRealtime();
+                    logBuffer.commit(logMessageObtain);
+                    long jElapsedRealtime = HeadsUpManagerImpl.this.mSystemClock.elapsedRealtime();
                     if (z4) {
                         int i = StatusBarNotifChips.$r8$clinit;
-                        headsUpEntry.mEarliestRemovalTime = HeadsUpManagerImpl.this.mMinimumDisplayTimeDefault + elapsedRealtime;
+                        headsUpEntry.mEarliestRemovalTime = HeadsUpManagerImpl.this.mMinimumDisplayTimeDefault + jElapsedRealtime;
                     }
                     if (z3) {
-                        headsUpEntry.mPostTime = Math.max(headsUpEntry.mPostTime, elapsedRealtime);
+                        headsUpEntry.mPostTime = Math.max(headsUpEntry.mPostTime, jElapsedRealtime);
                     }
                 }
             }, FakeFeatures$$ExternalSyntheticOutline0.m("updateEntry reason:", str, " updatePostTime:", z));
@@ -348,17 +346,17 @@ public class HeadsUpManagerImpl implements HeadsUpManager, HeadsUpRepository, On
             if (notificationEntry == null) {
                 return 1;
             }
-            boolean isRowPinned = notificationEntry.isRowPinned();
-            boolean isRowPinned2 = headsUpEntry.mEntry.isRowPinned();
-            if (isRowPinned && !isRowPinned2) {
+            boolean zIsRowPinned = notificationEntry.isRowPinned();
+            boolean zIsRowPinned2 = headsUpEntry.mEntry.isRowPinned();
+            if (zIsRowPinned && !zIsRowPinned2) {
                 return -1;
             }
-            if (!isRowPinned && isRowPinned2) {
+            if (!zIsRowPinned && zIsRowPinned2) {
                 return 1;
             }
-            int compareNonTimeFields = compareNonTimeFields(headsUpEntry);
-            if (compareNonTimeFields != 0) {
-                return compareNonTimeFields;
+            int iCompareNonTimeFields = compareNonTimeFields(headsUpEntry);
+            if (iCompareNonTimeFields != 0) {
+                return iCompareNonTimeFields;
             }
             long j = this.mPostTime;
             long j2 = headsUpEntry.mPostTime;
@@ -386,7 +384,6 @@ public class HeadsUpManagerImpl implements HeadsUpManager, HeadsUpRepository, On
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     enum NotificationPeekEvent implements UiEventLogger.UiEventEnum {
         NOTIFICATION_PEEK(801);
 
@@ -402,7 +399,7 @@ public class HeadsUpManagerImpl implements HeadsUpManager, HeadsUpRepository, On
     }
 
     /* renamed from: -$$Nest$smisCriticalCallNotif, reason: not valid java name */
-    public static boolean m3064$$Nest$smisCriticalCallNotif(NotificationEntry notificationEntry) {
+    public static boolean m3081$$Nest$smisCriticalCallNotif(NotificationEntry notificationEntry) {
         Notification notification2 = notificationEntry.mSbn.getNotification();
         return (notification2.isStyle(Notification.CallStyle.class) && notification2.extras.getInt("android.callType") == 1) || (notificationEntry.mSbn.isOngoing() && "call".equals(notification2.category));
     }
@@ -410,7 +407,7 @@ public class HeadsUpManagerImpl implements HeadsUpManager, HeadsUpRepository, On
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Type inference failed for: r1v15, types: [com.android.systemui.statusbar.notification.headsup.HeadsUpManagerImpl$1] */
     /* JADX WARN: Type inference failed for: r3v0, types: [com.android.systemui.plugins.statusbar.StatusBarStateController$StateListener, com.android.systemui.statusbar.notification.headsup.HeadsUpManagerImpl$4] */
-    public HeadsUpManagerImpl(Context context, HeadsUpManagerLogger headsUpManagerLogger, StatusBarStateController statusBarStateController, KeyguardBypassController keyguardBypassController, GroupMembershipManager groupMembershipManager, VisualStabilityProvider visualStabilityProvider, ConfigurationController configurationController, Handler handler, final GlobalSettings globalSettings, SystemClock systemClock, DelayableExecutor delayableExecutor, AccessibilityManagerWrapper accessibilityManagerWrapper, UiEventLogger uiEventLogger, JavaAdapter javaAdapter, ShadeInteractor shadeInteractor, AvalancheController avalancheController) {
+    public HeadsUpManagerImpl(Context context, HeadsUpManagerLogger headsUpManagerLogger, StatusBarStateController statusBarStateController, KeyguardBypassController keyguardBypassController, GroupMembershipManager groupMembershipManager, VisualStabilityProvider visualStabilityProvider, ConfigurationController configurationController, Handler handler, final GlobalSettings globalSettings, SystemClock systemClock, DelayableExecutor delayableExecutor, AccessibilityManagerWrapper accessibilityManagerWrapper, UiEventLogger uiEventLogger, JavaAdapter javaAdapter, ShadeInteractor shadeInteractor, AvalancheController avalancheController) throws Resources.NotFoundException {
         PinnedStatus pinnedStatus = PinnedStatus.NotPinned;
         this.mHeadsUpPhoneListeners = new ArrayList();
         this.mHeadsUpEntryMap = new ArrayMap<>();
@@ -442,7 +439,7 @@ public class HeadsUpManagerImpl implements HeadsUpManager, HeadsUpRepository, On
         OnReorderingAllowedListener onReorderingAllowedListener = new OnReorderingAllowedListener() { // from class: com.android.systemui.statusbar.notification.headsup.HeadsUpManagerImpl$$ExternalSyntheticLambda3
             @Override // com.android.systemui.statusbar.notification.collection.provider.OnReorderingAllowedListener
             public final void onReorderingAllowed() {
-                HeadsUpManagerImpl headsUpManagerImpl = HeadsUpManagerImpl.this;
+                HeadsUpManagerImpl headsUpManagerImpl = this.f$0;
                 NotificationThrottleHun notificationThrottleHun = NotificationThrottleHun.INSTANCE;
                 AvalancheController avalancheController2 = headsUpManagerImpl.mAvalancheController;
                 if (!avalancheController2.enableAtRuntime) {
@@ -525,7 +522,7 @@ public class HeadsUpManagerImpl implements HeadsUpManager, HeadsUpRepository, On
         avalancheController.baseEntryMapStr = new Function0() { // from class: com.android.systemui.statusbar.notification.headsup.HeadsUpManagerImpl$$ExternalSyntheticLambda5
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                HeadsUpManagerImpl headsUpManagerImpl = HeadsUpManagerImpl.this;
+                HeadsUpManagerImpl headsUpManagerImpl = this.f$0;
                 if (headsUpManagerImpl.mHeadsUpEntryMap.isEmpty()) {
                     return "";
                 }
@@ -564,9 +561,9 @@ public class HeadsUpManagerImpl implements HeadsUpManager, HeadsUpRepository, On
                         LogLevel logLevel = LogLevel.INFO;
                         HeadsUpManagerLogger$$ExternalSyntheticLambda0 headsUpManagerLogger$$ExternalSyntheticLambda0 = new HeadsUpManagerLogger$$ExternalSyntheticLambda0(11);
                         LogBuffer logBuffer = headsUpManagerLogger2.buffer;
-                        LogMessage obtain = logBuffer.obtain("HeadsUpManager", logLevel, headsUpManagerLogger$$ExternalSyntheticLambda0, null);
-                        ((LogMessageImpl) obtain).int1 = i;
-                        logBuffer.commit(obtain);
+                        LogMessage logMessageObtain = logBuffer.obtain("HeadsUpManager", logLevel, headsUpManagerLogger$$ExternalSyntheticLambda0, null);
+                        ((LogMessageImpl) logMessageObtain).int1 = i;
+                        logBuffer.commit(logMessageObtain);
                     }
                 }
             }
@@ -587,7 +584,7 @@ public class HeadsUpManagerImpl implements HeadsUpManager, HeadsUpRepository, On
         javaAdapter.alwaysCollectFlow(((ShadeInteractorImpl) shadeInteractor).baseShadeInteractor.isAnyExpanded(), new Consumer() { // from class: com.android.systemui.statusbar.notification.headsup.HeadsUpManagerImpl$$ExternalSyntheticLambda6
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                HeadsUpManagerImpl headsUpManagerImpl = HeadsUpManagerImpl.this;
+                HeadsUpManagerImpl headsUpManagerImpl = this.f$0;
                 Boolean bool2 = (Boolean) obj;
                 if (bool2.booleanValue() != headsUpManagerImpl.mIsShadeOrQsExpanded) {
                     headsUpManagerImpl.mIsShadeOrQsExpanded = bool2.booleanValue();
@@ -750,9 +747,9 @@ public class HeadsUpManagerImpl implements HeadsUpManager, HeadsUpRepository, On
         LogLevel logLevel = LogLevel.INFO;
         HeadsUpManagerLogger$$ExternalSyntheticLambda0 headsUpManagerLogger$$ExternalSyntheticLambda0 = new HeadsUpManagerLogger$$ExternalSyntheticLambda0(3);
         LogBuffer logBuffer = headsUpManagerLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("HeadsUpManager", logLevel, headsUpManagerLogger$$ExternalSyntheticLambda0, null);
-        ((LogMessageImpl) obtain).str1 = NotificationUtils.logKey(notificationEntry);
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("HeadsUpManager", logLevel, headsUpManagerLogger$$ExternalSyntheticLambda0, null);
+        ((LogMessageImpl) logMessageObtain).str1 = NotificationUtils.logKey(notificationEntry);
+        logBuffer.commit(logMessageObtain);
         Iterator it = this.mListeners.iterator();
         while (it.hasNext()) {
             ((OnHeadsUpChangedListener) it.next()).onHeadsUpStateChanged(notificationEntry, false);
@@ -797,28 +794,28 @@ public class HeadsUpManagerImpl implements HeadsUpManager, HeadsUpRepository, On
 
     public final void removeEntry(String str, String str2) {
         boolean z;
-        HeadsUpEntry headsUpEntry = this.mHeadsUpEntryMap.get(str);
+        HeadsUpEntry waitingEntry = this.mHeadsUpEntryMap.get(str);
         AvalancheController avalancheController = this.mAvalancheController;
-        if (headsUpEntry == null) {
-            headsUpEntry = avalancheController.getWaitingEntry(str);
+        if (waitingEntry == null) {
+            waitingEntry = avalancheController.getWaitingEntry(str);
             z = true;
         } else {
             z = false;
         }
-        HeadsUpEntry headsUpEntry2 = headsUpEntry;
+        HeadsUpEntry headsUpEntry = waitingEntry;
         boolean z2 = z;
         HeadsUpManagerLogger headsUpManagerLogger = this.mLogger;
         headsUpManagerLogger.getClass();
         LogLevel logLevel = LogLevel.INFO;
         HeadsUpManagerLogger$$ExternalSyntheticLambda11 headsUpManagerLogger$$ExternalSyntheticLambda11 = new HeadsUpManagerLogger$$ExternalSyntheticLambda11(z2, 0);
         LogBuffer logBuffer = headsUpManagerLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("HeadsUpManager", logLevel, headsUpManagerLogger$$ExternalSyntheticLambda11, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("HeadsUpManager", logLevel, headsUpManagerLogger$$ExternalSyntheticLambda11, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = NotificationUtils.logKey(str);
         logMessageImpl.str2 = str2;
         logMessageImpl.bool1 = z2;
-        logBuffer.commit(obtain);
-        avalancheController.delete(headsUpEntry2, new HeadsUpManagerImpl$$ExternalSyntheticLambda1(this, str, str2, z2, headsUpEntry2), "removeEntry");
+        logBuffer.commit(logMessageObtain);
+        avalancheController.delete(headsUpEntry, new HeadsUpManagerImpl$$ExternalSyntheticLambda1(this, str, str2, z2, headsUpEntry), "removeEntry");
     }
 
     public final void removeListener(OnHeadsUpChangedListener onHeadsUpChangedListener) {
@@ -827,30 +824,30 @@ public class HeadsUpManagerImpl implements HeadsUpManager, HeadsUpRepository, On
 
     public final boolean removeNotification(String str, String str2, boolean z) {
         AvalancheController avalancheController = this.mAvalancheController;
-        boolean isWaiting = avalancheController.isWaiting(str);
+        boolean zIsWaiting = avalancheController.isWaiting(str);
         HeadsUpManagerLogger headsUpManagerLogger = this.mLogger;
         headsUpManagerLogger.getClass();
         LogLevel logLevel = LogLevel.INFO;
         HeadsUpManagerLogger$$ExternalSyntheticLambda0 headsUpManagerLogger$$ExternalSyntheticLambda0 = new HeadsUpManagerLogger$$ExternalSyntheticLambda0(20);
         LogBuffer logBuffer = headsUpManagerLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("HeadsUpManager", logLevel, headsUpManagerLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("HeadsUpManager", logLevel, headsUpManagerLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = NotificationUtils.logKey(str);
         logMessageImpl.bool1 = z;
-        logMessageImpl.bool2 = isWaiting;
+        logMessageImpl.bool2 = zIsWaiting;
         logMessageImpl.str2 = str2;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         if (avalancheController.isWaiting(str)) {
             removeEntry(str, "removeNotification (isWaiting)");
             return true;
         }
         HeadsUpEntry headsUpEntry = this.mHeadsUpEntryMap.get(str);
         if (headsUpEntry == null) {
-            LogMessage obtain2 = logBuffer.obtain("HeadsUpManager", logLevel, new HeadsUpManagerLogger$$ExternalSyntheticLambda0(21), null);
-            LogMessageImpl logMessageImpl2 = (LogMessageImpl) obtain2;
+            LogMessage logMessageObtain2 = logBuffer.obtain("HeadsUpManager", logLevel, new HeadsUpManagerLogger$$ExternalSyntheticLambda0(21), null);
+            LogMessageImpl logMessageImpl2 = (LogMessageImpl) logMessageObtain2;
             logMessageImpl2.str1 = NotificationUtils.logKey(str);
             logMessageImpl2.str2 = str2;
-            logBuffer.commit(obtain2);
+            logBuffer.commit(logMessageObtain2);
             return true;
         }
         if (z) {
@@ -879,14 +876,14 @@ public class HeadsUpManagerImpl implements HeadsUpManager, HeadsUpRepository, On
         LogLevel logLevel = LogLevel.VERBOSE;
         HeadsUpManagerLogger$$ExternalSyntheticLambda0 headsUpManagerLogger$$ExternalSyntheticLambda0 = new HeadsUpManagerLogger$$ExternalSyntheticLambda0(10);
         LogBuffer logBuffer = headsUpManagerLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("HeadsUpManager", logLevel, headsUpManagerLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("HeadsUpManager", logLevel, headsUpManagerLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = NotificationUtils.logKey(notificationEntry2);
         logMessageImpl.str2 = str;
         logMessageImpl.str3 = pinnedStatus.name();
-        logBuffer.commit(obtain);
-        boolean isPinned = pinnedStatus.isPinned();
-        if (!isPinned) {
+        logBuffer.commit(logMessageObtain);
+        boolean zIsPinned = pinnedStatus.isPinned();
+        if (!zIsPinned) {
             headsUpEntry.mWasUnpinned = true;
         }
         if (headsUpEntry.mPinnedStatus.getValue() != pinnedStatus) {
@@ -919,11 +916,11 @@ public class HeadsUpManagerImpl implements HeadsUpManager, HeadsUpRepository, On
             boolean z2 = this.mHasPinnedNotification;
             ListenerSet listenerSet = this.mListeners;
             if (z != z2) {
-                LogMessage obtain2 = logBuffer.obtain("HeadsUpManager", LogLevel.INFO, new HeadsUpManagerLogger$$ExternalSyntheticLambda0(5), null);
-                LogMessageImpl logMessageImpl2 = (LogMessageImpl) obtain2;
+                LogMessage logMessageObtain2 = logBuffer.obtain("HeadsUpManager", LogLevel.INFO, new HeadsUpManagerLogger$$ExternalSyntheticLambda0(5), null);
+                LogMessageImpl logMessageImpl2 = (LogMessageImpl) logMessageObtain2;
                 logMessageImpl2.bool1 = z;
                 logMessageImpl2.str1 = pinnedStatus2.name();
-                logBuffer.commit(obtain2);
+                logBuffer.commit(logMessageObtain2);
                 this.mHasPinnedNotification = z;
                 if (z) {
                     MetricsLogger.count(this.mContext, "note_peek", 1);
@@ -933,13 +930,13 @@ public class HeadsUpManagerImpl implements HeadsUpManager, HeadsUpRepository, On
                     ((OnHeadsUpChangedListener) it3.next()).onHeadsUpPinnedModeChanged(z);
                 }
             }
-            if (isPinned) {
+            if (zIsPinned) {
                 this.mUiEventLogger.logWithInstanceId(NotificationPeekEvent.NOTIFICATION_PEEK, notificationEntry2.mSbn.getUid(), notificationEntry2.mSbn.getPackageName(), notificationEntry2.mSbn.getInstanceId());
             }
             Iterator it4 = listenerSet.iterator();
             while (it4.hasNext()) {
                 OnHeadsUpChangedListener onHeadsUpChangedListener = (OnHeadsUpChangedListener) it4.next();
-                if (isPinned) {
+                if (zIsPinned) {
                     onHeadsUpChangedListener.onHeadsUpPinned(notificationEntry2);
                 } else {
                     onHeadsUpChangedListener.onHeadsUpUnPinned(notificationEntry2);
@@ -1054,9 +1051,9 @@ public class HeadsUpManagerImpl implements HeadsUpManager, HeadsUpRepository, On
                 LogLevel logLevel = LogLevel.INFO;
                 HeadsUpManagerLogger$$ExternalSyntheticLambda0 headsUpManagerLogger$$ExternalSyntheticLambda0 = new HeadsUpManagerLogger$$ExternalSyntheticLambda0(0);
                 LogBuffer logBuffer = headsUpManagerLogger.buffer;
-                LogMessage obtain = logBuffer.obtain("HeadsUpManager", logLevel, headsUpManagerLogger$$ExternalSyntheticLambda0, null);
-                ((LogMessageImpl) obtain).str1 = str;
-                logBuffer.commit(obtain);
+                LogMessage logMessageObtain = logBuffer.obtain("HeadsUpManager", logLevel, headsUpManagerLogger$$ExternalSyntheticLambda0, null);
+                ((LogMessageImpl) logMessageObtain).str1 = str;
+                logBuffer.commit(logMessageObtain);
                 this.mSnoozedPackages.put(str, Long.valueOf(this.mSystemClock.elapsedRealtime() + this.mSnoozeLengthMs));
             }
         }
@@ -1074,9 +1071,9 @@ public class HeadsUpManagerImpl implements HeadsUpManager, HeadsUpRepository, On
                 LogLevel logLevel = LogLevel.INFO;
                 HeadsUpManagerLogger$$ExternalSyntheticLambda0 headsUpManagerLogger$$ExternalSyntheticLambda0 = new HeadsUpManagerLogger$$ExternalSyntheticLambda0(27);
                 LogBuffer logBuffer = headsUpManagerLogger.buffer;
-                LogMessage obtain = logBuffer.obtain("HeadsUpManager", logLevel, headsUpManagerLogger$$ExternalSyntheticLambda0, null);
-                ((LogMessageImpl) obtain).str1 = NotificationUtils.logKey(str);
-                logBuffer.commit(obtain);
+                LogMessage logMessageObtain = logBuffer.obtain("HeadsUpManager", logLevel, headsUpManagerLogger$$ExternalSyntheticLambda0, null);
+                ((LogMessageImpl) logMessageObtain).str1 = NotificationUtils.logKey(str);
+                logBuffer.commit(logMessageObtain);
                 this.mAvalancheController.delete(headsUpEntry, new HeadsUpManagerImpl$$ExternalSyntheticLambda0(this, str, headsUpEntry), "unpinAll");
             }
         }
@@ -1090,12 +1087,12 @@ public class HeadsUpManagerImpl implements HeadsUpManager, HeadsUpRepository, On
         LogLevel logLevel = LogLevel.INFO;
         HeadsUpManagerLogger$$ExternalSyntheticLambda0 headsUpManagerLogger$$ExternalSyntheticLambda0 = new HeadsUpManagerLogger$$ExternalSyntheticLambda0(26);
         LogBuffer logBuffer = headsUpManagerLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("HeadsUpManager", logLevel, headsUpManagerLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("HeadsUpManager", logLevel, headsUpManagerLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = NotificationUtils.logKey(str);
         logMessageImpl.bool1 = z;
         logMessageImpl.str2 = pinnedStatus.name();
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         this.mAvalancheController.update(headsUpEntry, new HeadsUpManagerImpl$$ExternalSyntheticLambda0(this, str, pinnedStatus), "updateNotification");
     }
 
@@ -1108,12 +1105,12 @@ public class HeadsUpManagerImpl implements HeadsUpManager, HeadsUpRepository, On
         LogLevel logLevel = LogLevel.INFO;
         HeadsUpManagerLogger$$ExternalSyntheticLambda0 headsUpManagerLogger$$ExternalSyntheticLambda0 = new HeadsUpManagerLogger$$ExternalSyntheticLambda0(22);
         LogBuffer logBuffer = headsUpManagerLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("HeadsUpManager", logLevel, headsUpManagerLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("HeadsUpManager", logLevel, headsUpManagerLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = NotificationUtils.logKey(str);
         logMessageImpl.bool1 = z;
         logMessageImpl.str2 = pinnedStatus.name();
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         if (headsUpEntry == null) {
             return;
         }

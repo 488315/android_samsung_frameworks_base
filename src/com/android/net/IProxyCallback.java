@@ -67,9 +67,9 @@ public interface IProxyCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IProxyCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IProxyCallback)) {
-                return (IProxyCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IProxyCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IProxyCallback)) {
+                return (IProxyCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -105,21 +105,21 @@ public interface IProxyCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IBinder readStrongBinder = parcel.readStrongBinder();
+                IBinder strongBinder = parcel.readStrongBinder();
                 parcel.enforceNoDataAvail();
-                getProxyPort(readStrongBinder);
+                getProxyPort(strongBinder);
             } else if (i == 2) {
                 clearProxyServerCache();
             } else if (i == 3) {
                 Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                IProxyCredentialsCallback asInterface = IProxyCredentialsCallback.Stub.asInterface(parcel.readStrongBinder());
+                IProxyCredentialsCallback iProxyCredentialsCallbackAsInterface = IProxyCredentialsCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                onCredentialsReceived(bundle, asInterface);
+                onCredentialsReceived(bundle, iProxyCredentialsCallbackAsInterface);
                 parcel2.writeNoException();
             } else if (i == 4) {
-                boolean readBoolean = parcel.readBoolean();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                setEnterpriseProxy(readBoolean);
+                setEnterpriseProxy(z);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -144,52 +144,52 @@ public interface IProxyCallback extends IInterface {
 
             @Override // com.android.net.IProxyCallback
             public void getProxyPort(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IProxyCallback.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IProxyCallback.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.net.IProxyCallback
             public void clearProxyServerCache() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IProxyCallback.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IProxyCallback.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.net.IProxyCallback
             public void onCredentialsReceived(Bundle bundle, IProxyCredentialsCallback iProxyCredentialsCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IProxyCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeStrongInterface(iProxyCredentialsCallback);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IProxyCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeStrongInterface(iProxyCredentialsCallback);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.net.IProxyCallback
             public void setEnterpriseProxy(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IProxyCallback.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IProxyCallback.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

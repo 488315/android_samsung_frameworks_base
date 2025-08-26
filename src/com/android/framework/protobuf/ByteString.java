@@ -109,12 +109,12 @@ public abstract class ByteString implements Iterable<Byte>, Serializable {
             /* JADX WARN: Type inference failed for: r3v1, types: [com.android.framework.protobuf.ByteString$ByteIterator] */
             @Override // java.util.Comparator
             public int compare(ByteString byteString, ByteString byteString2) {
-                ?? iterator2 = byteString.iterator2();
-                ?? iterator22 = byteString2.iterator2();
-                while (iterator2.hasNext() && iterator22.hasNext()) {
-                    int compareTo = Integer.valueOf(ByteString.toInt(iterator2.nextByte())).compareTo(Integer.valueOf(ByteString.toInt(iterator22.nextByte())));
-                    if (compareTo != 0) {
-                        return compareTo;
+                ?? Iterator2 = byteString.iterator2();
+                ?? Iterator22 = byteString2.iterator2();
+                while (Iterator2.hasNext() && Iterator22.hasNext()) {
+                    int iCompareTo = Integer.valueOf(ByteString.toInt(Iterator2.nextByte())).compareTo(Integer.valueOf(ByteString.toInt(Iterator22.nextByte())));
+                    if (iCompareTo != 0) {
+                        return iCompareTo;
                     }
                 }
                 return Integer.valueOf(byteString.size()).compareTo(Integer.valueOf(byteString2.size()));
@@ -200,9 +200,9 @@ public abstract class ByteString implements Iterable<Byte>, Serializable {
     }
 
     private static int extractHexDigit(String str, int i) {
-        int hexDigit = hexDigit(str.charAt(i));
-        if (hexDigit != -1) {
-            return hexDigit;
+        int iHexDigit = hexDigit(str.charAt(i));
+        if (iHexDigit != -1) {
+            return iHexDigit;
         }
         throw new NumberFormatException("Invalid hexString " + str + " must only contain [0-9a-fA-F] but contained " + str.charAt(i) + " at index " + i);
     }
@@ -294,9 +294,9 @@ public abstract class ByteString implements Iterable<Byte>, Serializable {
     public static ByteString readFrom(InputStream inputStream, int i, int i2) throws IOException {
         ArrayList arrayList = new ArrayList();
         while (true) {
-            ByteString readChunk = readChunk(inputStream, i);
-            if (readChunk != null) {
-                arrayList.add(readChunk);
+            ByteString chunk = readChunk(inputStream, i);
+            if (chunk != null) {
+                arrayList.add(chunk);
                 i = Math.min(i * 2, i2);
             } else {
                 return copyFrom(arrayList);
@@ -308,11 +308,11 @@ public abstract class ByteString implements Iterable<Byte>, Serializable {
         byte[] bArr = new byte[i];
         int i2 = 0;
         while (i2 < i) {
-            int read = inputStream.read(bArr, i2, i - i2);
-            if (read == -1) {
+            int i3 = inputStream.read(bArr, i2, i - i2);
+            if (i3 == -1) {
                 break;
             }
-            i2 += read;
+            i2 += i3;
         }
         if (i2 == 0) {
             return null;
@@ -427,16 +427,16 @@ public abstract class ByteString implements Iterable<Byte>, Serializable {
     }
 
     public final int hashCode() {
-        int i = this.hash;
-        if (i == 0) {
+        int iPartialHash = this.hash;
+        if (iPartialHash == 0) {
             int size = size();
-            i = partialHash(size, 0, size);
-            if (i == 0) {
-                i = 1;
+            iPartialHash = partialHash(size, 0, size);
+            if (iPartialHash == 0) {
+                iPartialHash = 1;
             }
-            this.hash = i;
+            this.hash = iPartialHash;
         }
-        return i;
+        return iPartialHash;
     }
 
     public static Output newOutput(int i) {
@@ -648,11 +648,11 @@ public abstract class ByteString implements Iterable<Byte>, Serializable {
 
         @Override // com.android.framework.protobuf.ByteString
         public final ByteString substring(int i, int i2) {
-            int checkRange = checkRange(i, i2, size());
-            if (checkRange == 0) {
+            int iCheckRange = checkRange(i, i2, size());
+            if (iCheckRange == 0) {
                 return ByteString.EMPTY;
             }
-            return new BoundedByteString(this.bytes, getOffsetIntoBytes() + i, checkRange);
+            return new BoundedByteString(this.bytes, getOffsetIntoBytes() + i, iCheckRange);
         }
 
         @Override // com.android.framework.protobuf.ByteString
@@ -720,9 +720,9 @@ public abstract class ByteString implements Iterable<Byte>, Serializable {
             }
             if (obj instanceof LiteralByteString) {
                 LiteralByteString literalByteString = (LiteralByteString) obj;
-                int peekCachedHashCode = peekCachedHashCode();
-                int peekCachedHashCode2 = literalByteString.peekCachedHashCode();
-                if (peekCachedHashCode == 0 || peekCachedHashCode2 == 0 || peekCachedHashCode == peekCachedHashCode2) {
+                int iPeekCachedHashCode = peekCachedHashCode();
+                int iPeekCachedHashCode2 = literalByteString.peekCachedHashCode();
+                if (iPeekCachedHashCode == 0 || iPeekCachedHashCode2 == 0 || iPeekCachedHashCode == iPeekCachedHashCode2) {
                     return equalsRange(literalByteString, 0, size());
                 }
                 return false;

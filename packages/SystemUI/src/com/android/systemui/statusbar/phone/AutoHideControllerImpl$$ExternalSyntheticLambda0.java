@@ -5,7 +5,6 @@ import android.util.Log;
 import com.android.systemui.BasicRune;
 import com.android.systemui.statusbar.AutoHideUiElement;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class AutoHideControllerImpl$$ExternalSyntheticLambda0 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -24,7 +23,7 @@ public final /* synthetic */ class AutoHideControllerImpl$$ExternalSyntheticLamb
             case 0:
                 AutoHideControllerImpl autoHideControllerImpl = (AutoHideControllerImpl) obj;
                 if (autoHideControllerImpl.isAnyTransientBarShown()) {
-                    if (!BasicRune.NAVBAR_ENABLED || !autoHideControllerImpl.mGameToolsShown) {
+                    if (!BasicRune.NAVBAR_ENABLED || (!autoHideControllerImpl.mGameToolsShown && !autoHideControllerImpl.mTaskBarSuspend)) {
                         try {
                             autoHideControllerImpl.mWindowManagerService.hideTransientBars(autoHideControllerImpl.mDisplayId);
                         } catch (RemoteException unused) {

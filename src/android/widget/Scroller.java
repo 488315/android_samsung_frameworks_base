@@ -188,16 +188,16 @@ public class Scroller {
         if (this.mFinished) {
             return false;
         }
-        int currentAnimationTimeMillis = (int) (AnimationUtils.currentAnimationTimeMillis() - this.mStartTime);
+        int iCurrentAnimationTimeMillis = (int) (AnimationUtils.currentAnimationTimeMillis() - this.mStartTime);
         int i = this.mDuration;
-        if (currentAnimationTimeMillis < i) {
+        if (iCurrentAnimationTimeMillis < i) {
             int i2 = this.mMode;
             if (i2 == 0) {
-                float interpolation = this.mInterpolator.getInterpolation(currentAnimationTimeMillis * this.mDurationReciprocal);
+                float interpolation = this.mInterpolator.getInterpolation(iCurrentAnimationTimeMillis * this.mDurationReciprocal);
                 this.mCurrX = this.mStartX + Math.round(this.mDeltaX * interpolation);
                 this.mCurrY = this.mStartY + Math.round(interpolation * this.mDeltaY);
             } else if (i2 == 1) {
-                float f3 = currentAnimationTimeMillis / i;
+                float f3 = iCurrentAnimationTimeMillis / i;
                 int i3 = (int) (f3 * 100.0f);
                 if (i3 < 100) {
                     float f4 = i3 / 100.0f;
@@ -211,18 +211,18 @@ public class Scroller {
                     f2 = 0.0f;
                 }
                 this.mCurrVelocity = ((f2 * this.mDistance) / i) * 1000.0f;
-                int round = this.mStartX + Math.round((this.mFinalX - r0) * f);
-                this.mCurrX = round;
-                int min = Math.min(round, this.mMaxX);
-                this.mCurrX = min;
-                this.mCurrX = Math.max(min, this.mMinX);
-                int round2 = this.mStartY + Math.round(f * (this.mFinalY - r0));
-                this.mCurrY = round2;
-                int min2 = Math.min(round2, this.mMaxY);
-                this.mCurrY = min2;
-                int max = Math.max(min2, this.mMinY);
-                this.mCurrY = max;
-                if (this.mCurrX == this.mFinalX && max == this.mFinalY) {
+                int iRound = this.mStartX + Math.round((this.mFinalX - r0) * f);
+                this.mCurrX = iRound;
+                int iMin = Math.min(iRound, this.mMaxX);
+                this.mCurrX = iMin;
+                this.mCurrX = Math.max(iMin, this.mMinX);
+                int iRound2 = this.mStartY + Math.round(f * (this.mFinalY - r0));
+                this.mCurrY = iRound2;
+                int iMin2 = Math.min(iRound2, this.mMaxY);
+                this.mCurrY = iMin2;
+                int iMax = Math.max(iMin2, this.mMinY);
+                this.mCurrY = iMax;
+                if (this.mCurrX == this.mFinalX && iMax == this.mFinalY) {
                     this.mFinished = true;
                 }
             }
@@ -257,9 +257,9 @@ public class Scroller {
             float currVelocity = getCurrVelocity();
             float f = this.mFinalX - this.mStartX;
             float f2 = this.mFinalY - this.mStartY;
-            float hypot = (float) Math.hypot(f, f2);
-            float f3 = (f / hypot) * currVelocity;
-            float f4 = (f2 / hypot) * currVelocity;
+            float fHypot = (float) Math.hypot(f, f2);
+            float f3 = (f / fHypot) * currVelocity;
+            float f4 = (f2 / fHypot) * currVelocity;
             float f5 = i3;
             if (Math.signum(f5) == Math.signum(f3)) {
                 float f6 = i4;
@@ -271,30 +271,30 @@ public class Scroller {
         }
         this.mMode = 1;
         this.mFinished = false;
-        float hypot2 = (float) Math.hypot(i3, i4);
-        this.mVelocity = hypot2;
-        this.mDuration = getSplineFlingDuration(hypot2);
+        float fHypot2 = (float) Math.hypot(i3, i4);
+        this.mVelocity = fHypot2;
+        this.mDuration = getSplineFlingDuration(fHypot2);
         this.mStartTime = AnimationUtils.currentAnimationTimeMillis();
         this.mStartX = i;
         this.mStartY = i2;
-        float f7 = hypot2 == 0.0f ? 1.0f : i3 / hypot2;
-        float f8 = hypot2 != 0.0f ? i4 / hypot2 : 1.0f;
-        double splineFlingDistance = getSplineFlingDistance(hypot2);
-        this.mDistance = (int) (Math.signum(hypot2) * splineFlingDistance);
+        float f7 = fHypot2 == 0.0f ? 1.0f : i3 / fHypot2;
+        float f8 = fHypot2 != 0.0f ? i4 / fHypot2 : 1.0f;
+        double splineFlingDistance = getSplineFlingDistance(fHypot2);
+        this.mDistance = (int) (Math.signum(fHypot2) * splineFlingDistance);
         this.mMinX = i5;
         this.mMaxX = i6;
         this.mMinY = i7;
         this.mMaxY = i8;
-        int round = i + ((int) Math.round(f7 * splineFlingDistance));
-        this.mFinalX = round;
-        int min = Math.min(round, this.mMaxX);
-        this.mFinalX = min;
-        this.mFinalX = Math.max(min, this.mMinX);
-        int round2 = i2 + ((int) Math.round(splineFlingDistance * f8));
-        this.mFinalY = round2;
-        int min2 = Math.min(round2, this.mMaxY);
-        this.mFinalY = min2;
-        this.mFinalY = Math.max(min2, this.mMinY);
+        int iRound = i + ((int) Math.round(f7 * splineFlingDistance));
+        this.mFinalX = iRound;
+        int iMin = Math.min(iRound, this.mMaxX);
+        this.mFinalX = iMin;
+        this.mFinalX = Math.max(iMin, this.mMinX);
+        int iRound2 = i2 + ((int) Math.round(splineFlingDistance * f8));
+        this.mFinalY = iRound2;
+        int iMin2 = Math.min(iRound2, this.mMaxY);
+        this.mFinalY = iMin2;
+        this.mFinalY = Math.max(iMin2, this.mMinY);
     }
 
     private double getSplineDeceleration(float f) {
@@ -318,9 +318,9 @@ public class Scroller {
     }
 
     public void extendDuration(int i) {
-        int timePassed = timePassed() + i;
-        this.mDuration = timePassed;
-        this.mDurationReciprocal = 1.0f / timePassed;
+        int iTimePassed = timePassed() + i;
+        this.mDuration = iTimePassed;
+        this.mDurationReciprocal = 1.0f / iTimePassed;
         this.mFinished = false;
     }
 
@@ -353,9 +353,9 @@ public class Scroller {
         }
 
         static {
-            float viscousFluid = 1.0f / viscousFluid(1.0f);
-            VISCOUS_FLUID_NORMALIZE = viscousFluid;
-            VISCOUS_FLUID_OFFSET = 1.0f - (viscousFluid * viscousFluid(1.0f));
+            float fViscousFluid = 1.0f / viscousFluid(1.0f);
+            VISCOUS_FLUID_NORMALIZE = fViscousFluid;
+            VISCOUS_FLUID_OFFSET = 1.0f - (fViscousFluid * viscousFluid(1.0f));
         }
 
         private static float viscousFluid(float f) {
@@ -368,8 +368,8 @@ public class Scroller {
 
         @Override // android.animation.TimeInterpolator
         public float getInterpolation(float f) {
-            float viscousFluid = VISCOUS_FLUID_NORMALIZE * viscousFluid(f);
-            return viscousFluid > 0.0f ? viscousFluid + VISCOUS_FLUID_OFFSET : viscousFluid;
+            float fViscousFluid = VISCOUS_FLUID_NORMALIZE * viscousFluid(f);
+            return fViscousFluid > 0.0f ? fViscousFluid + VISCOUS_FLUID_OFFSET : fViscousFluid;
         }
     }
 }

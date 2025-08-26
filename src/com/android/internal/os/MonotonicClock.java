@@ -63,25 +63,25 @@ public class MonotonicClock {
         }
     }
 
-    public void write() {
-        FileOutputStream fileOutputStream;
+    public void write() throws IOException {
+        FileOutputStream fileOutputStreamStartWrite;
         AtomicFile atomicFile = this.mFile;
         if (atomicFile == null) {
             return;
         }
         try {
-            fileOutputStream = atomicFile.startWrite();
-            try {
-                writeXml(fileOutputStream, Xml.newBinarySerializer());
-                this.mFile.finishWrite(fileOutputStream);
-            } catch (IOException e) {
-                e = e;
-                Log.e(TAG, "Cannot write monotonic clock to " + this.mFile.getBaseFile(), e);
-                this.mFile.failWrite(fileOutputStream);
-            }
+            fileOutputStreamStartWrite = atomicFile.startWrite();
+        } catch (IOException e) {
+            e = e;
+            fileOutputStreamStartWrite = null;
+        }
+        try {
+            writeXml(fileOutputStreamStartWrite, Xml.newBinarySerializer());
+            this.mFile.finishWrite(fileOutputStreamStartWrite);
         } catch (IOException e2) {
             e = e2;
-            fileOutputStream = null;
+            Log.e(TAG, "Cannot write monotonic clock to " + this.mFile.getBaseFile(), e);
+            this.mFile.failWrite(fileOutputStreamStartWrite);
         }
     }
 
@@ -89,16 +89,16 @@ public class MonotonicClock {
         try {
             typedXmlPullParser.setInput(inputStream, StandardCharsets.UTF_8.name());
             int eventType = typedXmlPullParser.getEventType();
-            long j = 0;
+            long attributeLong = 0;
             while (eventType != 1) {
                 if (eventType == 2) {
                     if (typedXmlPullParser.getName().equals(XML_TAG_MONOTONIC_TIME)) {
-                        j = typedXmlPullParser.getAttributeLong(null, XML_ATTR_TIMESHIFT);
+                        attributeLong = typedXmlPullParser.getAttributeLong(null, XML_ATTR_TIMESHIFT);
                     }
                 }
                 eventType = typedXmlPullParser.next();
             }
-            return j - this.mClock.elapsedRealtime();
+            return attributeLong - this.mClock.elapsedRealtime();
         } catch (XmlPullParserException e) {
             throw new IOException(e);
         }

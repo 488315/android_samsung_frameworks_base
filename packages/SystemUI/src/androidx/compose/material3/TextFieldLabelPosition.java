@@ -4,11 +4,9 @@ import androidx.compose.ui.Alignment;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class TextFieldLabelPosition {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Above extends TextFieldLabelPosition {
         public final Alignment.Horizontal alignment;
 
@@ -40,27 +38,15 @@ public abstract class TextFieldLabelPosition {
         }
 
         /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public Above(androidx.compose.ui.Alignment.Horizontal r1, int r2, kotlin.jvm.internal.DefaultConstructorMarker r3) {
-            /*
-                r0 = this;
-                r2 = r2 & 1
-                if (r2 == 0) goto Lb
-                androidx.compose.ui.Alignment$Companion r1 = androidx.compose.ui.Alignment.Companion
-                r1.getClass()
-                androidx.compose.ui.BiasAlignment$Horizontal r1 = androidx.compose.ui.Alignment.Companion.Start
-            Lb:
-                r0.<init>(r1)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: androidx.compose.material3.TextFieldLabelPosition.Above.<init>(androidx.compose.ui.Alignment$Horizontal, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+        public Above(Alignment.Horizontal horizontal, int i, DefaultConstructorMarker defaultConstructorMarker) {
+            if ((i & 1) != 0) {
+                Alignment.Companion.getClass();
+                horizontal = Alignment.Companion.Start;
+            }
+            this(horizontal);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Attached extends TextFieldLabelPosition {
         public final boolean alwaysMinimize;
         public final Alignment.Horizontal expandedAlignment;
@@ -90,33 +76,17 @@ public abstract class TextFieldLabelPosition {
         }
 
         /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public Attached(boolean r1, androidx.compose.ui.Alignment.Horizontal r2, androidx.compose.ui.Alignment.Horizontal r3, int r4, kotlin.jvm.internal.DefaultConstructorMarker r5) {
-            /*
-                r0 = this;
-                r5 = r4 & 1
-                if (r5 == 0) goto L5
-                r1 = 0
-            L5:
-                r5 = r4 & 2
-                if (r5 == 0) goto L10
-                androidx.compose.ui.Alignment$Companion r2 = androidx.compose.ui.Alignment.Companion
-                r2.getClass()
-                androidx.compose.ui.BiasAlignment$Horizontal r2 = androidx.compose.ui.Alignment.Companion.Start
-            L10:
-                r4 = r4 & 4
-                if (r4 == 0) goto L1b
-                androidx.compose.ui.Alignment$Companion r3 = androidx.compose.ui.Alignment.Companion
-                r3.getClass()
-                androidx.compose.ui.BiasAlignment$Horizontal r3 = androidx.compose.ui.Alignment.Companion.Start
-            L1b:
-                r0.<init>(r1, r2, r3)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: androidx.compose.material3.TextFieldLabelPosition.Attached.<init>(boolean, androidx.compose.ui.Alignment$Horizontal, androidx.compose.ui.Alignment$Horizontal, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+        public Attached(boolean z, Alignment.Horizontal horizontal, Alignment.Horizontal horizontal2, int i, DefaultConstructorMarker defaultConstructorMarker) {
+            z = (i & 1) != 0 ? false : z;
+            if ((i & 2) != 0) {
+                Alignment.Companion.getClass();
+                horizontal = Alignment.Companion.Start;
+            }
+            if ((i & 4) != 0) {
+                Alignment.Companion.getClass();
+                horizontal2 = Alignment.Companion.Start;
+            }
+            this(z, horizontal, horizontal2);
         }
 
         public Attached(boolean z, Alignment.Horizontal horizontal, Alignment.Horizontal horizontal2) {

@@ -4,7 +4,6 @@ import gov.nist.core.NameValue;
 import gov.nist.javax.sip.address.AddressImpl;
 import javax.sip.header.ContactHeader;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class Contact extends AddressParametersHeader implements ContactHeader {
     private static final long serialVersionUID = 1677294871695706288L;

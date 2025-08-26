@@ -7,7 +7,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 
 /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
 /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class NoteTaskBubbleExpandBehavior implements Parcelable {
     public static final /* synthetic */ NoteTaskBubbleExpandBehavior[] $VALUES;
@@ -15,7 +14,6 @@ public final class NoteTaskBubbleExpandBehavior implements Parcelable {
     public static final NoteTaskBubbleExpandBehavior DEFAULT;
     public static final NoteTaskBubbleExpandBehavior KEEP_IF_EXPANDED;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class CREATOR implements Parcelable.Creator {
         public /* synthetic */ CREATOR(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -23,9 +21,9 @@ public final class NoteTaskBubbleExpandBehavior implements Parcelable {
 
         @Override // android.os.Parcelable.Creator
         public final Object createFromParcel(Parcel parcel) {
-            String readString;
-            NoteTaskBubbleExpandBehavior valueOf;
-            return (parcel == null || (readString = parcel.readString()) == null || (valueOf = NoteTaskBubbleExpandBehavior.valueOf(readString)) == null) ? NoteTaskBubbleExpandBehavior.DEFAULT : valueOf;
+            String string;
+            NoteTaskBubbleExpandBehavior noteTaskBubbleExpandBehaviorValueOf;
+            return (parcel == null || (string = parcel.readString()) == null || (noteTaskBubbleExpandBehaviorValueOf = NoteTaskBubbleExpandBehavior.valueOf(string)) == null) ? NoteTaskBubbleExpandBehavior.DEFAULT : noteTaskBubbleExpandBehaviorValueOf;
         }
 
         @Override // android.os.Parcelable.Creator

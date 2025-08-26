@@ -84,10 +84,10 @@ class StrictJarVerifier {
         throw new SecurityException(str + " failed verification of " + str2, th);
     }
 
-    StrictJarVerifier(String str, StrictJarManifest strictJarManifest, HashMap<String, byte[]> hashMap, boolean z) {
+    StrictJarVerifier(String str, StrictJarManifest strictJarManifest, HashMap<String, byte[]> map, boolean z) {
         this.jarName = str;
         this.manifest = strictJarManifest;
-        this.metaEntries = hashMap;
+        this.metaEntries = map;
         this.mainAttributesEnd = strictJarManifest.getMainAttributesEnd();
         this.signatureSchemeRollbackProtectionsEnforced = z;
     }
@@ -119,7 +119,9 @@ class StrictJarVerifier {
             }
             String str3 = strArr[i];
             String value = attributes.getValue(str3 + "-Digest");
-            if (value != null) {
+            if (value == null) {
+                str2 = str;
+            } else {
                 byte[] bytes = value.getBytes(StandardCharsets.ISO_8859_1);
                 try {
                     str2 = str;
@@ -131,7 +133,6 @@ class StrictJarVerifier {
                 } catch (NoSuchAlgorithmException unused2) {
                 }
             }
-            str2 = str;
             i++;
             str = str2;
         }
@@ -164,13 +165,13 @@ class StrictJarVerifier {
     static Certificate[] verifyBytes(byte[] bArr, byte[] bArr2) throws GeneralSecurityException {
         try {
             try {
-                Object startJarVerification = Providers.startJarVerification();
+                Object objStartJarVerification = Providers.startJarVerification();
                 PKCS7 pkcs7 = new PKCS7(bArr);
-                SignerInfo[] verify = pkcs7.verify(bArr2);
-                if (verify == null || verify.length == 0) {
+                SignerInfo[] signerInfoArrVerify = pkcs7.verify(bArr2);
+                if (signerInfoArrVerify == null || signerInfoArrVerify.length == 0) {
                     throw new GeneralSecurityException("Failed to verify signature: no verified SignerInfos");
                 }
-                ArrayList certificateChain = verify[0].getCertificateChain(pkcs7);
+                ArrayList certificateChain = signerInfoArrVerify[0].getCertificateChain(pkcs7);
                 if (certificateChain == null) {
                     throw new GeneralSecurityException("Failed to find verified SignerInfo certificate chain");
                 }
@@ -178,7 +179,7 @@ class StrictJarVerifier {
                     throw new GeneralSecurityException("Verified SignerInfo certificate chain is emtpy");
                 }
                 Certificate[] certificateArr = (Certificate[]) certificateChain.toArray(new X509Certificate[certificateChain.size()]);
-                Providers.stopJarVerification(startJarVerification);
+                Providers.stopJarVerification(objStartJarVerification);
                 return certificateArr;
             } catch (IOException e) {
                 throw new GeneralSecurityException("IO exception verifying jar cert", e);
@@ -189,7 +190,7 @@ class StrictJarVerifier {
         }
     }
 
-    private void verifyCertificate(String str) {
+    private void verifyCertificate(String str) throws NumberFormatException {
         byte[] bArr;
         StrictJarVerifier strictJarVerifier;
         GeneralSecurityException generalSecurityException;
@@ -201,26 +202,26 @@ class StrictJarVerifier {
         boolean z3 = false;
         sb.append(str.substring(0, str.lastIndexOf(46)));
         sb.append(".SF");
-        String sb2 = sb.toString();
-        byte[] bArr2 = this.metaEntries.get(sb2);
+        String string = sb.toString();
+        byte[] bArr2 = this.metaEntries.get(string);
         if (bArr2 == null || (bArr = this.metaEntries.get("META-INF/MANIFEST.MF")) == null) {
             return;
         }
         try {
-            Certificate[] verifyBytes = verifyBytes(this.metaEntries.get(str), bArr2);
-            if (verifyBytes != null) {
+            Certificate[] certificateArrVerifyBytes = verifyBytes(this.metaEntries.get(str), bArr2);
+            if (certificateArrVerifyBytes != null) {
                 try {
-                    this.certificates.put(sb2, verifyBytes);
+                    this.certificates.put(string, certificateArrVerifyBytes);
                 } catch (GeneralSecurityException e) {
                     generalSecurityException = e;
                     strictJarVerifier = this;
-                    throw failedVerification(strictJarVerifier.jarName, sb2, generalSecurityException);
+                    throw failedVerification(strictJarVerifier.jarName, string, generalSecurityException);
                 }
             }
             Attributes attributes = new Attributes();
-            HashMap<String, Attributes> hashMap = new HashMap<>();
+            HashMap<String, Attributes> map = new HashMap<>();
             try {
-                new StrictJarManifestReader(bArr2, attributes).readEntries(hashMap, null);
+                new StrictJarManifestReader(bArr2, attributes).readEntries(map, null);
                 if (this.signatureSchemeRollbackProtectionsEnforced && (value = attributes.getValue(SF_ATTRIBUTE_ANDROID_APK_SIGNED_NAME)) != null) {
                     StringTokenizer stringTokenizer = new StringTokenizer(value, ",");
                     while (true) {
@@ -229,12 +230,12 @@ class StrictJarVerifier {
                             z2 = false;
                             break;
                         }
-                        String trim = stringTokenizer.nextToken().trim();
-                        if (!trim.isEmpty()) {
+                        String strTrim = stringTokenizer.nextToken().trim();
+                        if (!strTrim.isEmpty()) {
                             try {
-                                int parseInt = Integer.parseInt(trim);
-                                if (parseInt != 2) {
-                                    if (parseInt == 3) {
+                                int i = Integer.parseInt(strTrim);
+                                if (i != 2) {
+                                    if (i == 3) {
                                         z = false;
                                         z2 = true;
                                         break;
@@ -250,10 +251,10 @@ class StrictJarVerifier {
                         }
                     }
                     if (z) {
-                        throw new SecurityException(sb2 + " indicates " + this.jarName + " is signed using APK Signature Scheme v2, but no such signature was found. Signature stripped?");
+                        throw new SecurityException(string + " indicates " + this.jarName + " is signed using APK Signature Scheme v2, but no such signature was found. Signature stripped?");
                     }
                     if (z2) {
-                        throw new SecurityException(sb2 + " indicates " + this.jarName + " is signed using APK Signature Scheme v3, but no such signature was found. Signature stripped?");
+                        throw new SecurityException(string + " indicates " + this.jarName + " is signed using APK Signature Scheme v3, but no such signature was found. Signature stripped?");
                     }
                 }
                 if (attributes.get(Attributes.Name.SIGNATURE_VERSION) == null) {
@@ -263,30 +264,30 @@ class StrictJarVerifier {
                 if (value2 != null && value2.indexOf("signtool") != -1) {
                     z3 = true;
                 }
-                int i = this.mainAttributesEnd;
-                if (i <= 0 || z3) {
+                int i2 = this.mainAttributesEnd;
+                if (i2 <= 0 || z3) {
                     strictJarVerifier2 = this;
                 } else {
                     strictJarVerifier2 = this;
-                    if (!strictJarVerifier2.verify(attributes, "-Digest-Manifest-Main-Attributes", bArr, 0, i, false, true)) {
-                        throw failedVerification(strictJarVerifier2.jarName, sb2);
+                    if (!strictJarVerifier2.verify(attributes, "-Digest-Manifest-Main-Attributes", bArr, 0, i2, false, true)) {
+                        throw failedVerification(strictJarVerifier2.jarName, string);
                     }
                 }
                 if (!strictJarVerifier2.verify(attributes, z3 ? "-Digest" : "-Digest-Manifest", bArr, 0, bArr.length, false, false)) {
-                    for (Map.Entry<String, Attributes> entry : hashMap.entrySet()) {
+                    for (Map.Entry<String, Attributes> entry : map.entrySet()) {
                         StrictJarManifest.Chunk chunk = strictJarVerifier2.manifest.getChunk(entry.getKey());
                         if (chunk == null) {
                             return;
                         }
                         boolean z4 = z3;
                         if (!strictJarVerifier2.verify(entry.getValue(), "-Digest", bArr, chunk.start, chunk.end, z4, false)) {
-                            throw invalidDigest(sb2, entry.getKey(), strictJarVerifier2.jarName);
+                            throw invalidDigest(string, entry.getKey(), strictJarVerifier2.jarName);
                         }
                         z3 = z4;
                     }
                 }
-                strictJarVerifier2.metaEntries.put(sb2, null);
-                strictJarVerifier2.signatures.put(sb2, hashMap);
+                strictJarVerifier2.metaEntries.put(string, null);
+                strictJarVerifier2.signatures.put(string, map);
             } catch (IOException unused2) {
             }
         } catch (GeneralSecurityException e2) {
@@ -299,7 +300,11 @@ class StrictJarVerifier {
         return this.certificates.size() > 0;
     }
 
-    private boolean verify(Attributes attributes, String str, byte[] bArr, int i, int i2, boolean z, boolean z2) {
+    /* JADX WARN: Removed duplicated region for block: B:15:0x0037  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    private boolean verify(Attributes attributes, String str, byte[] bArr, int i, int i2, boolean z, boolean z2) throws NoSuchAlgorithmException {
         int i3 = 0;
         while (true) {
             String[] strArr = DIGEST_ALGORITHMS;
@@ -315,10 +320,10 @@ class StrictJarVerifier {
                         int i4 = i2 - 1;
                         if (bArr[i4] == 10 && bArr[i2 - 2] == 10) {
                             messageDigest.update(bArr, i, i4 - i);
-                            return verifyMessageDigest(messageDigest.digest(), value.getBytes(StandardCharsets.ISO_8859_1));
+                        } else {
+                            messageDigest.update(bArr, i, i2 - i);
                         }
                     }
-                    messageDigest.update(bArr, i, i2 - i);
                     return verifyMessageDigest(messageDigest.digest(), value.getBytes(StandardCharsets.ISO_8859_1));
                 } catch (NoSuchAlgorithmException unused) {
                     continue;

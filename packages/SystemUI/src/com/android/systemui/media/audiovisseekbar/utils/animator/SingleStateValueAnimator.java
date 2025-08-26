@@ -6,7 +6,6 @@ import android.view.animation.Interpolator;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SingleStateValueAnimator {
     public final ValueAnimator animator;
@@ -36,21 +35,21 @@ public class SingleStateValueAnimator {
         this.callback = function1;
         this.value = f;
         this.goal = f;
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(f, f);
-        ofFloat.setDuration(j);
-        ofFloat.setInterpolator(interpolator);
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.media.audiovisseekbar.utils.animator.SingleStateValueAnimator$animator$1$1
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(f, f);
+        valueAnimatorOfFloat.setDuration(j);
+        valueAnimatorOfFloat.setInterpolator(interpolator);
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.media.audiovisseekbar.utils.animator.SingleStateValueAnimator$animator$1$1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                SingleStateValueAnimator.this.value = ((Float) valueAnimator.getAnimatedValue()).floatValue();
-                SingleStateValueAnimator singleStateValueAnimator = SingleStateValueAnimator.this;
+                this.this$0.value = ((Float) valueAnimator.getAnimatedValue()).floatValue();
+                SingleStateValueAnimator singleStateValueAnimator = this.this$0;
                 Function1 function12 = singleStateValueAnimator.callback;
                 if (function12 != null) {
-                    function12.mo779invoke(Float.valueOf(singleStateValueAnimator.value));
+                    function12.mo781invoke(Float.valueOf(singleStateValueAnimator.value));
                 }
             }
         });
-        this.animator = ofFloat;
+        this.animator = valueAnimatorOfFloat;
     }
 
     public /* synthetic */ SingleStateValueAnimator(float f, long j, Interpolator interpolator, Function1 function1, int i, DefaultConstructorMarker defaultConstructorMarker) {

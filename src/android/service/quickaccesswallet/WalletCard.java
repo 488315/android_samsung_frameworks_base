@@ -85,17 +85,17 @@ public final class WalletCard implements Parcelable {
 
     /* JADX INFO: Access modifiers changed from: private */
     public static WalletCard readFromParcel(Parcel parcel) {
-        String readString = parcel.readString();
-        int readInt = parcel.readInt();
-        Icon createFromParcel = Icon.CREATOR.createFromParcel(parcel);
-        CharSequence createFromParcel2 = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(parcel);
-        PendingIntent readPendingIntentOrNullFromParcel = PendingIntent.readPendingIntentOrNullFromParcel(parcel);
-        Icon createFromParcel3 = parcel.readByte() == 0 ? null : Icon.CREATOR.createFromParcel(parcel);
-        CharSequence createFromParcel4 = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(parcel);
-        Icon createFromParcel5 = parcel.readByte() != 0 ? Icon.CREATOR.createFromParcel(parcel) : null;
-        Builder cardLabel = new Builder(readString, readInt, createFromParcel, createFromParcel2, readPendingIntentOrNullFromParcel).setCardIcon(createFromParcel3).setCardLabel(createFromParcel4);
-        if (readInt == 2) {
-            cardLabel.setNonPaymentCardSecondaryImage(createFromParcel5);
+        String string = parcel.readString();
+        int i = parcel.readInt();
+        Icon iconCreateFromParcel = Icon.CREATOR.createFromParcel(parcel);
+        CharSequence charSequenceCreateFromParcel = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(parcel);
+        PendingIntent pendingIntentOrNullFromParcel = PendingIntent.readPendingIntentOrNullFromParcel(parcel);
+        Icon iconCreateFromParcel2 = parcel.readByte() == 0 ? null : Icon.CREATOR.createFromParcel(parcel);
+        CharSequence charSequenceCreateFromParcel2 = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(parcel);
+        Icon iconCreateFromParcel3 = parcel.readByte() != 0 ? Icon.CREATOR.createFromParcel(parcel) : null;
+        Builder cardLabel = new Builder(string, i, iconCreateFromParcel, charSequenceCreateFromParcel, pendingIntentOrNullFromParcel).setCardIcon(iconCreateFromParcel2).setCardLabel(charSequenceCreateFromParcel2);
+        if (i == 2) {
+            cardLabel.setNonPaymentCardSecondaryImage(iconCreateFromParcel3);
         }
         ArrayList arrayList = new ArrayList();
         parcel.readTypedList(arrayList, Location.CREATOR);

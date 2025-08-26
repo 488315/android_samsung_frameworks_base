@@ -9,12 +9,10 @@ import com.android.systemui.edgelighting.effect.data.EdgeEffectInfo;
 import com.android.systemui.edgelighting.effect.view.SpotLightEffectView;
 import com.sec.ims.volte2.data.VolteConstants;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class NotificationSpotlightEffect extends NotificationEffect {
     public SpotLightEffectView mSpotlightEffect;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.edgelighting.effect.container.NotificationSpotlightEffect$1, reason: invalid class name */
     public class AnonymousClass1 {
         public AnonymousClass1() {

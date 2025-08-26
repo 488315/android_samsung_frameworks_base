@@ -7,7 +7,6 @@ import com.android.systemui.media.controls.shared.model.MediaData;
 import com.android.systemui.surfaceeffects.loadingeffect.LoadingEffect;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class MediaControlPanel$$ExternalSyntheticLambda3 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -38,7 +37,7 @@ public final /* synthetic */ class MediaControlPanel$$ExternalSyntheticLambda3 i
                 MediaControlPanel.SEMANTIC_ACTIONS_HIDE_WHEN_SCRUBBING.forEach(new Consumer() { // from class: com.android.systemui.media.controls.ui.controller.MediaControlPanel$$ExternalSyntheticLambda13
                     @Override // java.util.function.Consumer
                     public final void accept(Object obj2) {
-                        MediaControlPanel mediaControlPanel3 = MediaControlPanel.this;
+                        MediaControlPanel mediaControlPanel3 = mediaControlPanel2;
                         MediaButton mediaButton2 = mediaButton;
                         Integer num = (Integer) obj2;
                         Intent intent = MediaControlPanel.SETTINGS_INTENT;

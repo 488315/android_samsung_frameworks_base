@@ -2,7 +2,6 @@ package com.android.wm.shell.desktopmode.persistence;
 
 import com.google.protobuf.Internal;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public enum DesktopTaskState implements Internal.EnumLite {
     VISIBLE(0),
@@ -10,7 +9,6 @@ public enum DesktopTaskState implements Internal.EnumLite {
 
     private final int value;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DesktopTaskStateVerifier implements Internal.EnumVerifier {
         public static final DesktopTaskStateVerifier INSTANCE = new DesktopTaskStateVerifier();
 

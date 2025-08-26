@@ -105,7 +105,7 @@ public class SpellCheckerSession {
         this.mExecutor.execute(new Runnable() { // from class: android.view.textservice.SpellCheckerSession$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
-                SpellCheckerSession.this.lambda$handleOnGetSuggestionsMultiple$0(suggestionsInfoArr);
+                this.f$0.lambda$handleOnGetSuggestionsMultiple$0(suggestionsInfoArr);
             }
         });
     }
@@ -114,7 +114,7 @@ public class SpellCheckerSession {
         this.mExecutor.execute(new Runnable() { // from class: android.view.textservice.SpellCheckerSession$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                SpellCheckerSession.this.lambda$handleOnGetSentenceSuggestionsMultiple$1(sentenceSuggestionsInfoArr);
+                this.f$0.lambda$handleOnGetSentenceSuggestionsMultiple$1(sentenceSuggestionsInfoArr);
             }
         });
     }
@@ -270,7 +270,7 @@ public class SpellCheckerSession {
                 }
                 this.mISpellCheckerSession = iSpellCheckerSession;
                 if ((iSpellCheckerSession.asBinder() instanceof Binder) && this.mThread == null) {
-                    HandlerThread handlerThread = new HandlerThread(SpellCheckerSession.TAG, 10);
+                    HandlerThread handlerThread = new HandlerThread("SpellCheckerSession", 10);
                     this.mThread = handlerThread;
                     handlerThread.start();
                     this.mAsyncHandler = new Handler(this.mThread.getLooper()) { // from class: android.view.textservice.SpellCheckerSession.SpellCheckerSessionListenerImpl.1
@@ -334,9 +334,9 @@ public class SpellCheckerSession {
                     SpellCheckerParams spellCheckerParams2 = null;
                     if (spellCheckerParams.mWhat == 1) {
                         while (!this.mPendingTasks.isEmpty()) {
-                            SpellCheckerParams poll = this.mPendingTasks.poll();
-                            if (poll.mWhat == 3) {
-                                spellCheckerParams2 = poll;
+                            SpellCheckerParams spellCheckerParamsPoll = this.mPendingTasks.poll();
+                            if (spellCheckerParamsPoll.mWhat == 3) {
+                                spellCheckerParams2 = spellCheckerParamsPoll;
                             }
                         }
                     }

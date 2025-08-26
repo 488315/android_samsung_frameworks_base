@@ -3,6 +3,7 @@ package com.android.systemui.tuner;
 import android.content.Context;
 import android.content.pm.LauncherActivityInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 import com.android.systemui.tuner.ShortcutParser;
@@ -11,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class ShortcutPicker$$ExternalSyntheticLambda0 implements Consumer {
     public final /* synthetic */ int $r8$classId = 1;
@@ -28,7 +28,7 @@ public final /* synthetic */ class ShortcutPicker$$ExternalSyntheticLambda0 impl
     }
 
     @Override // java.util.function.Consumer
-    public final void accept(Object obj) {
+    public final void accept(Object obj) throws Resources.NotFoundException {
         switch (this.$r8$classId) {
             case 0:
                 ShortcutPicker shortcutPicker = this.f$0;

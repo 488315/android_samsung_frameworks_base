@@ -9,9 +9,9 @@ public final class Messenger implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public Messenger createFromParcel(Parcel parcel) {
-            IBinder readStrongBinder = parcel.readStrongBinder();
-            if (readStrongBinder != null) {
-                return new Messenger(readStrongBinder);
+            IBinder strongBinder = parcel.readStrongBinder();
+            if (strongBinder != null) {
+                return new Messenger(strongBinder);
             }
             return null;
         }
@@ -66,9 +66,9 @@ public final class Messenger implements Parcelable {
     }
 
     public static Messenger readMessengerOrNullFromParcel(Parcel parcel) {
-        IBinder readStrongBinder = parcel.readStrongBinder();
-        if (readStrongBinder != null) {
-            return new Messenger(readStrongBinder);
+        IBinder strongBinder = parcel.readStrongBinder();
+        if (strongBinder != null) {
+            return new Messenger(strongBinder);
         }
         return null;
     }

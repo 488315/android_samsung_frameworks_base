@@ -15,7 +15,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class ExpandableNotificationRow$$ExternalSyntheticLambda4 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -122,20 +121,22 @@ public final /* synthetic */ class ExpandableNotificationRow$$ExternalSyntheticL
                     indentingPrintWriter.print("null");
                 }
                 indentingPrintWriter.println();
-                IndentingPrintWriter asIndenting = DumpUtilsKt.asIndenting(indentingPrintWriter);
-                asIndenting.print("ContentDimensions: ");
+                indentingPrintWriter.print("bubbleButton visibility: " + showingLayout.mBubbleButtonVisibility);
+                indentingPrintWriter.println(", snoozeButton visibility: " + showingLayout.mSnoozeButtonVisibility);
+                IndentingPrintWriter indentingPrintWriterAsIndenting = DumpUtilsKt.asIndenting(indentingPrintWriter);
+                indentingPrintWriterAsIndenting.print("ContentDimensions: ");
                 int i3 = showingLayout.mVisibleType;
-                asIndenting.print("visibleType(String)", i3 != 0 ? i3 != 1 ? i3 != 2 ? i3 != 3 ? PeripheralBarcodeConstants.Symbology.Type.TYPE_NONE : "SINGLELINE" : "HEADSUP" : "EXPANDED" : "CONTRACTED");
-                asIndenting.print("measured width", Integer.valueOf(showingLayout.getMeasuredWidth()));
-                asIndenting.print("measured height", Integer.valueOf(showingLayout.getMeasuredHeight()));
-                asIndenting.print("maxHeight", Integer.valueOf(showingLayout.getMaxHeight()));
-                asIndenting.print("minHeight", Integer.valueOf(showingLayout.getMinHeight(true)));
-                asIndenting.println();
-                asIndenting.println("ChildViews:");
-                DumpUtilsKt.withIncreasedIndent(asIndenting, new NotificationContentView$$ExternalSyntheticLambda3(showingLayout, asIndenting));
-                asIndenting.print("expandedRemoteInputHeight", Integer.valueOf(showingLayout.getExtraRemoteInputHeight(showingLayout.mExpandedRemoteInput)));
-                asIndenting.print("headsUpRemoteInputHeight", 0);
-                asIndenting.println();
+                indentingPrintWriterAsIndenting.print("visibleType(String)", i3 != 0 ? i3 != 1 ? i3 != 2 ? i3 != 3 ? PeripheralBarcodeConstants.Symbology.Type.TYPE_NONE : "SINGLELINE" : "HEADSUP" : "EXPANDED" : "CONTRACTED");
+                indentingPrintWriterAsIndenting.print("measured width", Integer.valueOf(showingLayout.getMeasuredWidth()));
+                indentingPrintWriterAsIndenting.print("measured height", Integer.valueOf(showingLayout.getMeasuredHeight()));
+                indentingPrintWriterAsIndenting.print("maxHeight", Integer.valueOf(showingLayout.getMaxHeight()));
+                indentingPrintWriterAsIndenting.print("minHeight", Integer.valueOf(showingLayout.getMinHeight(true)));
+                indentingPrintWriterAsIndenting.println();
+                indentingPrintWriterAsIndenting.println("ChildViews:");
+                DumpUtilsKt.withIncreasedIndent(indentingPrintWriterAsIndenting, new NotificationContentView$$ExternalSyntheticLambda3(showingLayout, indentingPrintWriterAsIndenting));
+                indentingPrintWriterAsIndenting.print("expandedRemoteInputHeight", Integer.valueOf(showingLayout.getExtraRemoteInputHeight(showingLayout.mExpandedRemoteInput)));
+                indentingPrintWriterAsIndenting.print("headsUpRemoteInputHeight", 0);
+                indentingPrintWriterAsIndenting.println();
                 indentingPrintWriter.println("mBubblesEnabledForUser: " + showingLayout.mBubblesEnabledForUser);
                 indentingPrintWriter.print("RemoteInputViews { ");
                 indentingPrintWriter.print(" visibleType: " + showingLayout.mVisibleType);
@@ -198,7 +199,7 @@ public final /* synthetic */ class ExpandableNotificationRow$$ExternalSyntheticL
                     DumpUtilsKt.withIncreasedIndent(indentingPrintWriter, new Runnable() { // from class: com.android.systemui.statusbar.notification.row.ExpandableNotificationRow$$ExternalSyntheticLambda9
                         @Override // java.lang.Runnable
                         public final void run() {
-                            ExpandableNotificationRow expandableNotificationRow2 = ExpandableNotificationRow.this;
+                            ExpandableNotificationRow expandableNotificationRow2 = expandableNotificationRow;
                             int i4 = transientViewCount;
                             PrintWriter printWriter = indentingPrintWriter;
                             String[] strArr2 = strArr;

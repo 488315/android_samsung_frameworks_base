@@ -19,6 +19,7 @@ import android.text.TextUtils;
 import com.samsung.android.content.clipboard.provider.SemImageClipDataProvider;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /* loaded from: classes6.dex */
 public class SemHtmlClipData extends SemClipData {
@@ -108,9 +109,9 @@ public class SemHtmlClipData extends SemClipData {
         }
         this.mHtml = charSequence2.toString();
         if (TextUtils.isEmpty(charSequence)) {
-            String replaceAll = this.mHtml.replaceAll(REGEX, "");
-            this.mPlainText = replaceAll;
-            this.mPlainText = Html.fromHtml(replaceAll).toString();
+            String strReplaceAll = this.mHtml.replaceAll(REGEX, "");
+            this.mPlainText = strReplaceAll;
+            this.mPlainText = Html.fromHtml(strReplaceAll).toString();
         } else {
             this.mPlainText = charSequence.toString();
         }
@@ -147,30 +148,30 @@ public class SemHtmlClipData extends SemClipData {
     }
 
     public Bitmap getThumbnailBitmap(int i, int i2) {
-        String str;
+        String string;
         if (this.mHtml.length() < 1) {
             Log.secW(TAG, "getThumbnailBitmap : Data is empty.");
             return null;
         }
-        String str2 = "";
+        String strDecode = "";
         try {
-            str2 = Uri.decode(ClipboardProcText.getImgFileNameFromHtml(this.mHtml));
-            str = Html.fromHtml(str2).toString();
+            strDecode = Uri.decode(ClipboardProcText.getImgFileNameFromHtml(this.mHtml));
+            string = Html.fromHtml(strDecode).toString();
         } catch (Exception e) {
             e.printStackTrace();
-            str = str2;
+            string = strDecode;
         }
-        if (str != null && str.length() < 1) {
+        if (string != null && string.length() < 1) {
             Log.secW(TAG, "getThumbnailBitmap : FileName is empty.");
             return null;
         }
-        if (str != null && str.length() > 7 && str.substring(0, 7).compareTo("http://") == 0) {
+        if (string != null && string.length() > 7 && string.substring(0, 7).compareTo("http://") == 0) {
             return null;
         }
-        if (str != null && str.length() > 7 && str.substring(0, 7).compareTo("file://") == 0) {
-            return ClipboardDataBitmapUtil.getFilePathBitmap(str.substring(7, str.length()), i, i2);
+        if (string != null && string.length() > 7 && string.substring(0, 7).compareTo("file://") == 0) {
+            return ClipboardDataBitmapUtil.getFilePathBitmap(string.substring(7, string.length()), i, i2);
         }
-        return ClipboardDataBitmapUtil.getFilePathBitmap(str, i, i2);
+        return ClipboardDataBitmapUtil.getFilePathBitmap(string, i, i2);
     }
 
     public boolean setThumbnailImagePath(String str) {
@@ -227,7 +228,7 @@ public class SemHtmlClipData extends SemClipData {
     }
 
     @Override // com.samsung.android.content.clipboard.data.SemClipData, android.os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
         Log.secI(TAG, "html write to parcel");
         parcel.writeInt(4);
         super.writeToParcel(parcel, i);
@@ -279,16 +280,16 @@ public class SemHtmlClipData extends SemClipData {
 
     @Override // com.samsung.android.content.clipboard.data.SemClipData
     public void insertContentUri(Context context, String str) {
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             ContentValues contentValues = new ContentValues();
             contentValues.put("_data", str);
-            Uri insert = context.getContentResolver().insert(SemImageClipDataProvider.CONTENT_URI, contentValues);
-            setHtml(this.mHtml.replace(ClipboardConstants.CLIPBOARD_REMOTE_SEND_PATH + str.substring(str.lastIndexOf("/")), insert.toString()));
+            Uri uriInsert = context.getContentResolver().insert(SemImageClipDataProvider.CONTENT_URI, contentValues);
+            setHtml(this.mHtml.replace(ClipboardConstants.CLIPBOARD_REMOTE_SEND_PATH + str.substring(str.lastIndexOf("/")), uriInsert.toString()));
         } catch (Exception e) {
             Log.e(TAG, "Exception occurs because " + e.getMessage());
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 

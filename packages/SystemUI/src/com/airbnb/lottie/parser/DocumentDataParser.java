@@ -4,7 +4,6 @@ import android.graphics.PointF;
 import com.airbnb.lottie.model.DocumentData;
 import com.airbnb.lottie.parser.moshi.JsonReader;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class DocumentDataParser implements ValueParser {
     public static final DocumentDataParser INSTANCE = new DocumentDataParser();
@@ -18,57 +17,59 @@ public class DocumentDataParser implements ValueParser {
         DocumentData.Justification justification = DocumentData.Justification.CENTER;
         jsonReader.beginObject();
         DocumentData.Justification justification2 = justification;
-        String str = null;
-        String str2 = null;
+        String strNextString = null;
+        String strNextString2 = null;
         PointF pointF = null;
         PointF pointF2 = null;
-        float f2 = 0.0f;
-        float f3 = 0.0f;
-        float f4 = 0.0f;
-        float f5 = 0.0f;
-        int i = 0;
-        int i2 = 0;
-        int i3 = 0;
-        boolean z = true;
+        float fNextDouble = 0.0f;
+        float fNextDouble2 = 0.0f;
+        float fNextDouble3 = 0.0f;
+        float fNextDouble4 = 0.0f;
+        int iNextInt = 0;
+        int iJsonToColor = 0;
+        int iJsonToColor2 = 0;
+        boolean zNextBoolean = true;
         while (jsonReader.hasNext()) {
             switch (jsonReader.selectName(NAMES)) {
                 case 0:
-                    str = jsonReader.nextString();
+                    strNextString = jsonReader.nextString();
                     break;
                 case 1:
-                    str2 = jsonReader.nextString();
+                    strNextString2 = jsonReader.nextString();
                     break;
                 case 2:
-                    f2 = (float) jsonReader.nextDouble();
+                    fNextDouble = (float) jsonReader.nextDouble();
                     break;
                 case 3:
-                    int nextInt = jsonReader.nextInt();
+                    int iNextInt2 = jsonReader.nextInt();
                     justification2 = DocumentData.Justification.CENTER;
-                    if (nextInt <= justification2.ordinal() && nextInt >= 0) {
-                        justification2 = DocumentData.Justification.values()[nextInt];
+                    if (iNextInt2 <= justification2.ordinal() && iNextInt2 >= 0) {
+                        justification2 = DocumentData.Justification.values()[iNextInt2];
+                        break;
+                    } else {
                         break;
                     }
                     break;
                 case 4:
-                    i = jsonReader.nextInt();
+                    iNextInt = jsonReader.nextInt();
                     break;
                 case 5:
-                    f3 = (float) jsonReader.nextDouble();
+                    fNextDouble2 = (float) jsonReader.nextDouble();
                     break;
                 case 6:
-                    f4 = (float) jsonReader.nextDouble();
+                    fNextDouble3 = (float) jsonReader.nextDouble();
                     break;
                 case 7:
-                    i2 = JsonUtils.jsonToColor(jsonReader);
+                    iJsonToColor = JsonUtils.jsonToColor(jsonReader);
                     break;
                 case 8:
-                    i3 = JsonUtils.jsonToColor(jsonReader);
+                    iJsonToColor2 = JsonUtils.jsonToColor(jsonReader);
                     break;
                 case 9:
-                    f5 = (float) jsonReader.nextDouble();
+                    fNextDouble4 = (float) jsonReader.nextDouble();
                     break;
                 case 10:
-                    z = jsonReader.nextBoolean();
+                    zNextBoolean = jsonReader.nextBoolean();
                     break;
                 case 11:
                     jsonReader.beginArray();
@@ -89,6 +90,6 @@ public class DocumentDataParser implements ValueParser {
             }
         }
         jsonReader.endObject();
-        return new DocumentData(str, str2, f2, justification2, i, f3, f4, i2, i3, f5, z, pointF, pointF2);
+        return new DocumentData(strNextString, strNextString2, fNextDouble, justification2, iNextInt, fNextDouble2, fNextDouble3, iJsonToColor, iJsonToColor2, fNextDouble4, zNextBoolean, pointF, pointF2);
     }
 }

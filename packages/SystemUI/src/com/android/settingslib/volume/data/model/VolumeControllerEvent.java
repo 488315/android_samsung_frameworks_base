@@ -2,11 +2,9 @@ package com.android.settingslib.volume.data.model;
 
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public interface VolumeControllerEvent {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Dismiss implements VolumeControllerEvent {
         public static final Dismiss INSTANCE = new Dismiss();
 
@@ -26,7 +24,6 @@ public interface VolumeControllerEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DisplayCsdWarning implements VolumeControllerEvent {
         public final int csdWarning;
         public final int displayDurationMs;
@@ -59,7 +56,6 @@ public interface VolumeControllerEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DisplaySafeVolumeWarning implements VolumeControllerEvent {
         public final int flags;
 
@@ -83,7 +79,6 @@ public interface VolumeControllerEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class MasterMuteChanged implements VolumeControllerEvent {
         public final int flags;
 
@@ -107,7 +102,6 @@ public interface VolumeControllerEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SetA11yMode implements VolumeControllerEvent {
         public final int mode;
 
@@ -131,7 +125,6 @@ public interface VolumeControllerEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SetLayoutDirection implements VolumeControllerEvent {
         public final int layoutDirection;
 
@@ -155,7 +148,6 @@ public interface VolumeControllerEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class VolumeChanged implements VolumeControllerEvent {
         public final int flags;
         public final int streamType;
@@ -188,7 +180,6 @@ public interface VolumeControllerEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class displayVolumeLimiterToast implements VolumeControllerEvent {
         public static final displayVolumeLimiterToast INSTANCE = new displayVolumeLimiterToast();
 

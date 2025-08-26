@@ -8,7 +8,6 @@ import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Reflection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class NoteTaskInfoResolver {
     public static final Companion Companion = new Companion(null);
@@ -17,7 +16,6 @@ public final class NoteTaskInfoResolver {
     public final PackageManager packageManager;
     public final RoleManager roleManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -33,9 +31,9 @@ public final class NoteTaskInfoResolver {
             simpleName = "";
         }
         TAG = simpleName;
-        PackageManager.ApplicationInfoFlags of = PackageManager.ApplicationInfoFlags.of(0L);
-        of.getClass();
-        EMPTY_APPLICATION_INFO_FLAGS = of;
+        PackageManager.ApplicationInfoFlags applicationInfoFlagsOf = PackageManager.ApplicationInfoFlags.of(0L);
+        applicationInfoFlagsOf.getClass();
+        EMPTY_APPLICATION_INFO_FLAGS = applicationInfoFlagsOf;
     }
 
     public NoteTaskInfoResolver(RoleManager roleManager, PackageManager packageManager) {

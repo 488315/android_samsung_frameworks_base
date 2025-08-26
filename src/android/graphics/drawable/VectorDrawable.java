@@ -284,9 +284,9 @@ public class VectorDrawable extends Drawable {
     }
 
     private void updateLocalState(Resources resources) {
-        int resolveDensity = Drawable.resolveDensity(resources, this.mVectorState.mDensity);
-        if (this.mTargetDensity != resolveDensity) {
-            this.mTargetDensity = resolveDensity;
+        int iResolveDensity = Drawable.resolveDensity(resources, this.mVectorState.mDensity);
+        if (this.mTargetDensity != iResolveDensity) {
+            this.mTargetDensity = iResolveDensity;
             this.mDpiScaledDirty = true;
         }
         updateColorFilters(this.mVectorState.mBlendMode, this.mVectorState.mTint);
@@ -328,16 +328,16 @@ public class VectorDrawable extends Drawable {
         if (colorFilter == null) {
             colorFilter = this.mBlendModeColorFilter;
         }
-        int nDraw = nDraw(this.mVectorState.getNativeRenderer(), canvas.getNativeCanvasWrapper(), colorFilter == null ? 0L : colorFilter.getNativeInstance(), this.mTmpBounds, needMirroring(), this.mVectorState.canReuseCache());
-        if (nDraw == 0) {
+        int iNDraw = nDraw(this.mVectorState.getNativeRenderer(), canvas.getNativeCanvasWrapper(), colorFilter == null ? 0L : colorFilter.getNativeInstance(), this.mTmpBounds, needMirroring(), this.mVectorState.canReuseCache());
+        if (iNDraw == 0) {
             return;
         }
         if (canvas.isHardwareAccelerated()) {
-            i = (nDraw - this.mVectorState.mLastHWCachePixelCount) * 4;
-            this.mVectorState.mLastHWCachePixelCount = nDraw;
+            i = (iNDraw - this.mVectorState.mLastHWCachePixelCount) * 4;
+            this.mVectorState.mLastHWCachePixelCount = iNDraw;
         } else {
-            i = (nDraw - this.mVectorState.mLastSWCachePixelCount) * 4;
-            this.mVectorState.mLastSWCachePixelCount = nDraw;
+            i = (iNDraw - this.mVectorState.mLastSWCachePixelCount) * 4;
+            this.mVectorState.mLastSWCachePixelCount = iNDraw;
         }
         if (i > 0) {
             VMRuntime.getRuntime().registerNativeAllocation(i);
@@ -489,18 +489,18 @@ public class VectorDrawable extends Drawable {
         }
         this.mDpiScaledDirty = vectorDrawableState.setDensity(Drawable.resolveDensity(theme.getResources(), 0)) | this.mDpiScaledDirty;
         if (vectorDrawableState.mThemeAttrs != null) {
-            TypedArray resolveAttributes = theme.resolveAttributes(vectorDrawableState.mThemeAttrs, R.styleable.VectorDrawable);
+            TypedArray typedArrayResolveAttributes = theme.resolveAttributes(vectorDrawableState.mThemeAttrs, R.styleable.VectorDrawable);
             try {
                 try {
                     vectorDrawableState.mCacheDirty = true;
-                    updateStateFromTypedArray(resolveAttributes);
-                    resolveAttributes.recycle();
+                    updateStateFromTypedArray(typedArrayResolveAttributes);
+                    typedArrayResolveAttributes.recycle();
                     this.mDpiScaledDirty = true;
                 } catch (XmlPullParserException e) {
                     throw new RuntimeException(e);
                 }
             } catch (Throwable th) {
-                resolveAttributes.recycle();
+                typedArrayResolveAttributes.recycle();
                 throw th;
             }
         }
@@ -592,11 +592,11 @@ public class VectorDrawable extends Drawable {
         }
     }
 
-    public static VectorDrawable create(Resources resources, int i) {
+    public static VectorDrawable create(Resources resources, int i) throws XmlPullParserException, Resources.NotFoundException, IOException {
         int next;
         try {
             XmlResourceParser xml = resources.getXml(i);
-            AttributeSet asAttributeSet = Xml.asAttributeSet(xml);
+            AttributeSet attributeSetAsAttributeSet = Xml.asAttributeSet(xml);
             do {
                 next = xml.next();
                 if (next == 2) {
@@ -607,7 +607,7 @@ public class VectorDrawable extends Drawable {
                 throw new XmlPullParserException("No start tag found");
             }
             VectorDrawable vectorDrawable = new VectorDrawable();
-            vectorDrawable.inflate(resources, xml, asAttributeSet);
+            vectorDrawable.inflate(resources, xml, attributeSetAsAttributeSet);
             return vectorDrawable;
         } catch (IOException e) {
             Log.e(LOGTAG, "parser error", e);
@@ -637,9 +637,9 @@ public class VectorDrawable extends Drawable {
             }
             VectorDrawableState vectorDrawableState2 = this.mVectorState;
             vectorDrawableState2.setDensity(Drawable.resolveDensity(resources, 0));
-            TypedArray obtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.VectorDrawable);
-            updateStateFromTypedArray(obtainAttributes);
-            obtainAttributes.recycle();
+            TypedArray typedArrayObtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.VectorDrawable);
+            updateStateFromTypedArray(typedArrayObtainAttributes);
+            typedArrayObtainAttributes.recycle();
             this.mDpiScaledDirty = true;
             vectorDrawableState2.mCacheDirty = true;
             inflateChildElements(resources, xmlPullParser, attributeSet, theme);
@@ -917,6 +917,7 @@ public class VectorDrawable extends Drawable {
             return (colorStateList != null && colorStateList.canApplyTheme()) || super.canApplyTheme();
         }
 
+        /* JADX WARN: Multi-variable type inference failed */
         @Override // android.graphics.drawable.Drawable.ConstantState
         public Drawable newDrawable() {
             return new VectorDrawable(this, null);
@@ -1189,9 +1190,9 @@ public class VectorDrawable extends Drawable {
 
         @Override // android.graphics.drawable.VectorDrawable.VObject
         public void inflate(Resources resources, AttributeSet attributeSet, Resources.Theme theme) {
-            TypedArray obtainAttributes = Drawable.obtainAttributes(resources, theme, attributeSet, R.styleable.VectorDrawableGroup);
-            updateStateFromTypedArray(obtainAttributes);
-            obtainAttributes.recycle();
+            TypedArray typedArrayObtainAttributes = Drawable.obtainAttributes(resources, theme, attributeSet, R.styleable.VectorDrawableGroup);
+            updateStateFromTypedArray(typedArrayObtainAttributes);
+            typedArrayObtainAttributes.recycle();
         }
 
         void updateStateFromTypedArray(TypedArray typedArray) {
@@ -1222,14 +1223,14 @@ public class VectorDrawable extends Drawable {
         public boolean onStateChange(int[] iArr) {
             ArrayList<VObject> arrayList = this.mChildren;
             int size = arrayList.size();
-            boolean z = false;
+            boolean zOnStateChange = false;
             for (int i = 0; i < size; i++) {
                 VObject vObject = arrayList.get(i);
                 if (vObject.isStateful()) {
-                    z |= vObject.onStateChange(iArr);
+                    zOnStateChange |= vObject.onStateChange(iArr);
                 }
             }
-            return z;
+            return zOnStateChange;
         }
 
         @Override // android.graphics.drawable.VectorDrawable.VObject
@@ -1241,23 +1242,23 @@ public class VectorDrawable extends Drawable {
         public boolean hasFocusStateSpecified() {
             ArrayList<VObject> arrayList = this.mChildren;
             int size = arrayList.size();
-            boolean z = false;
+            boolean zHasFocusStateSpecified = false;
             for (int i = 0; i < size; i++) {
                 VObject vObject = arrayList.get(i);
                 if (vObject.isStateful()) {
-                    z |= vObject.hasFocusStateSpecified();
+                    zHasFocusStateSpecified |= vObject.hasFocusStateSpecified();
                 }
             }
-            return z;
+            return zHasFocusStateSpecified;
         }
 
         @Override // android.graphics.drawable.VectorDrawable.VObject
         int getNativeSize() {
-            int i = 100;
-            for (int i2 = 0; i2 < this.mChildren.size(); i2++) {
-                i += this.mChildren.get(i2).getNativeSize();
+            int nativeSize = 100;
+            for (int i = 0; i < this.mChildren.size(); i++) {
+                nativeSize += this.mChildren.get(i).getNativeSize();
             }
-            return i;
+            return nativeSize;
         }
 
         @Override // android.graphics.drawable.VectorDrawable.VObject
@@ -1279,9 +1280,9 @@ public class VectorDrawable extends Drawable {
         public void applyTheme(Resources.Theme theme) {
             int[] iArr = this.mThemeAttrs;
             if (iArr != null) {
-                TypedArray resolveAttributes = theme.resolveAttributes(iArr, R.styleable.VectorDrawableGroup);
-                updateStateFromTypedArray(resolveAttributes);
-                resolveAttributes.recycle();
+                TypedArray typedArrayResolveAttributes = theme.resolveAttributes(iArr, R.styleable.VectorDrawableGroup);
+                updateStateFromTypedArray(typedArrayResolveAttributes);
+                typedArrayResolveAttributes.recycle();
             }
             ArrayList<VObject> arrayList = this.mChildren;
             int size = arrayList.size();
@@ -1494,9 +1495,9 @@ public class VectorDrawable extends Drawable {
 
         @Override // android.graphics.drawable.VectorDrawable.VObject
         public void inflate(Resources resources, AttributeSet attributeSet, Resources.Theme theme) {
-            TypedArray obtainAttributes = Drawable.obtainAttributes(resources, theme, attributeSet, R.styleable.VectorDrawableClipPath);
-            updateStateFromTypedArray(obtainAttributes);
-            obtainAttributes.recycle();
+            TypedArray typedArrayObtainAttributes = Drawable.obtainAttributes(resources, theme, attributeSet, R.styleable.VectorDrawableClipPath);
+            updateStateFromTypedArray(typedArrayObtainAttributes);
+            typedArrayObtainAttributes.recycle();
         }
 
         private void updateStateFromTypedArray(TypedArray typedArray) {
@@ -1733,56 +1734,56 @@ public class VectorDrawable extends Drawable {
 
         @Override // android.graphics.drawable.VectorDrawable.VObject
         public void inflate(Resources resources, AttributeSet attributeSet, Resources.Theme theme) {
-            TypedArray obtainAttributes = Drawable.obtainAttributes(resources, theme, attributeSet, R.styleable.VectorDrawablePath);
-            updateStateFromTypedArray(obtainAttributes);
-            obtainAttributes.recycle();
+            TypedArray typedArrayObtainAttributes = Drawable.obtainAttributes(resources, theme, attributeSet, R.styleable.VectorDrawablePath);
+            updateStateFromTypedArray(typedArrayObtainAttributes);
+            typedArrayObtainAttributes.recycle();
         }
 
         private void updateStateFromTypedArray(TypedArray typedArray) {
             int i;
             int i2;
             Shader shader;
+            int defaultColor;
+            int defaultColor2;
             int i3;
-            int i4;
-            int i5;
-            long j;
+            long nativeInstance;
             if (this.mPropertyData == null) {
                 this.mPropertyData = new byte[48];
             }
             if (!VectorDrawable.nGetFullPathProperties(this.mNativePtr, this.mPropertyData, 48)) {
                 throw new RuntimeException("Error: inconsistent property count");
             }
-            ByteBuffer wrap = ByteBuffer.wrap(this.mPropertyData);
-            wrap.order(ByteOrder.nativeOrder());
-            float f = wrap.getFloat(0);
-            int i6 = wrap.getInt(4);
-            float f2 = wrap.getFloat(8);
-            int i7 = wrap.getInt(12);
-            float f3 = wrap.getFloat(16);
-            float f4 = wrap.getFloat(20);
-            float f5 = wrap.getFloat(24);
-            float f6 = wrap.getFloat(28);
-            int i8 = wrap.getInt(32);
-            int i9 = wrap.getInt(36);
-            float f7 = wrap.getFloat(40);
-            int i10 = wrap.getInt(44);
+            ByteBuffer byteBufferWrap = ByteBuffer.wrap(this.mPropertyData);
+            byteBufferWrap.order(ByteOrder.nativeOrder());
+            float f = byteBufferWrap.getFloat(0);
+            int i4 = byteBufferWrap.getInt(4);
+            float f2 = byteBufferWrap.getFloat(8);
+            int i5 = byteBufferWrap.getInt(12);
+            float f3 = byteBufferWrap.getFloat(16);
+            float f4 = byteBufferWrap.getFloat(20);
+            float f5 = byteBufferWrap.getFloat(24);
+            float f6 = byteBufferWrap.getFloat(28);
+            int i6 = byteBufferWrap.getInt(32);
+            int i7 = byteBufferWrap.getInt(36);
+            float f7 = byteBufferWrap.getFloat(40);
+            int i8 = byteBufferWrap.getInt(44);
             this.mChangingConfigurations |= typedArray.getChangingConfigurations();
             this.mThemeAttrs = typedArray.extractThemeAttrs();
             String string = typedArray.getString(0);
             if (string != null) {
                 this.mPathName = string;
-                i = i7;
+                i = i5;
                 VectorDrawable.nSetName(this.mNativePtr, this.mPathName);
             } else {
-                i = i7;
+                i = i5;
             }
             String string2 = typedArray.getString(2);
             if (string2 != null) {
                 this.mPathData = new PathParser.PathData(string2);
-                i2 = i6;
+                i2 = i4;
                 VectorDrawable.nSetPathString(this.mNativePtr, string2, string2.length());
             } else {
-                i2 = i6;
+                i2 = i4;
             }
             ComplexColor complexColor = typedArray.getComplexColor(1);
             Shader shader2 = null;
@@ -1798,10 +1799,10 @@ public class VectorDrawable extends Drawable {
                     }
                     shader = null;
                 }
-                i3 = complexColor.getDefaultColor();
+                defaultColor = complexColor.getDefaultColor();
             } else {
                 shader = null;
-                i3 = i;
+                defaultColor = i;
             }
             ComplexColor complexColor2 = typedArray.getComplexColor(3);
             if (complexColor2 != null) {
@@ -1813,26 +1814,26 @@ public class VectorDrawable extends Drawable {
                 } else {
                     this.mStrokeColors = null;
                 }
-                i4 = complexColor2.getDefaultColor();
+                defaultColor2 = complexColor2.getDefaultColor();
             } else {
-                i4 = i2;
+                defaultColor2 = i2;
             }
             Shader shader3 = shader;
-            long j2 = this.mNativePtr;
+            long j = this.mNativePtr;
             if (shader3 != null) {
-                i5 = i10;
-                j = shader3.getNativeInstance();
+                i3 = i8;
+                nativeInstance = shader3.getNativeInstance();
             } else {
-                i5 = i10;
-                j = 0;
+                i3 = i8;
+                nativeInstance = 0;
             }
-            VectorDrawable.nUpdateFullPathFillGradient(j2, j);
+            VectorDrawable.nUpdateFullPathFillGradient(j, nativeInstance);
             VectorDrawable.nUpdateFullPathStrokeGradient(this.mNativePtr, shader2 != null ? shader2.getNativeInstance() : 0L);
             float f8 = typedArray.getFloat(12, f3);
-            int i11 = typedArray.getInt(8, i8);
-            int i12 = typedArray.getInt(9, i9);
+            int i9 = typedArray.getInt(8, i6);
+            int i10 = typedArray.getInt(9, i7);
             float f9 = typedArray.getFloat(10, f7);
-            VectorDrawable.nUpdateFullPathProperties(this.mNativePtr, typedArray.getFloat(4, f), i4, typedArray.getFloat(11, f2), i3, f8, typedArray.getFloat(5, f4), typedArray.getFloat(6, f5), typedArray.getFloat(7, f6), f9, i11, i12, typedArray.getInt(13, i5));
+            VectorDrawable.nUpdateFullPathProperties(this.mNativePtr, typedArray.getFloat(4, f), defaultColor2, typedArray.getFloat(11, f2), defaultColor, f8, typedArray.getFloat(5, f4), typedArray.getFloat(6, f5), typedArray.getFloat(7, f6), f9, i9, i10, typedArray.getInt(13, i3));
         }
 
         @Override // android.graphics.drawable.VectorDrawable.VObject
@@ -1847,28 +1848,28 @@ public class VectorDrawable extends Drawable {
         public void applyTheme(Resources.Theme theme) {
             int[] iArr = this.mThemeAttrs;
             if (iArr != null) {
-                TypedArray resolveAttributes = theme.resolveAttributes(iArr, R.styleable.VectorDrawablePath);
-                updateStateFromTypedArray(resolveAttributes);
-                resolveAttributes.recycle();
+                TypedArray typedArrayResolveAttributes = theme.resolveAttributes(iArr, R.styleable.VectorDrawablePath);
+                updateStateFromTypedArray(typedArrayResolveAttributes);
+                typedArrayResolveAttributes.recycle();
             }
-            boolean canComplexColorApplyTheme = canComplexColorApplyTheme(this.mFillColors);
-            boolean canComplexColorApplyTheme2 = canComplexColorApplyTheme(this.mStrokeColors);
-            if (canComplexColorApplyTheme) {
-                ComplexColor obtainForTheme = this.mFillColors.obtainForTheme(theme);
-                this.mFillColors = obtainForTheme;
-                if (obtainForTheme instanceof GradientColor) {
-                    VectorDrawable.nUpdateFullPathFillGradient(this.mNativePtr, ((GradientColor) obtainForTheme).getShader().getNativeInstance());
-                } else if (obtainForTheme instanceof ColorStateList) {
-                    VectorDrawable.nSetFillColor(this.mNativePtr, obtainForTheme.getDefaultColor());
+            boolean zCanComplexColorApplyTheme = canComplexColorApplyTheme(this.mFillColors);
+            boolean zCanComplexColorApplyTheme2 = canComplexColorApplyTheme(this.mStrokeColors);
+            if (zCanComplexColorApplyTheme) {
+                ComplexColor complexColorObtainForTheme = this.mFillColors.obtainForTheme(theme);
+                this.mFillColors = complexColorObtainForTheme;
+                if (complexColorObtainForTheme instanceof GradientColor) {
+                    VectorDrawable.nUpdateFullPathFillGradient(this.mNativePtr, ((GradientColor) complexColorObtainForTheme).getShader().getNativeInstance());
+                } else if (complexColorObtainForTheme instanceof ColorStateList) {
+                    VectorDrawable.nSetFillColor(this.mNativePtr, complexColorObtainForTheme.getDefaultColor());
                 }
             }
-            if (canComplexColorApplyTheme2) {
-                ComplexColor obtainForTheme2 = this.mStrokeColors.obtainForTheme(theme);
-                this.mStrokeColors = obtainForTheme2;
-                if (obtainForTheme2 instanceof GradientColor) {
-                    VectorDrawable.nUpdateFullPathStrokeGradient(this.mNativePtr, ((GradientColor) obtainForTheme2).getShader().getNativeInstance());
-                } else if (obtainForTheme2 instanceof ColorStateList) {
-                    VectorDrawable.nSetStrokeColor(this.mNativePtr, obtainForTheme2.getDefaultColor());
+            if (zCanComplexColorApplyTheme2) {
+                ComplexColor complexColorObtainForTheme2 = this.mStrokeColors.obtainForTheme(theme);
+                this.mStrokeColors = complexColorObtainForTheme2;
+                if (complexColorObtainForTheme2 instanceof GradientColor) {
+                    VectorDrawable.nUpdateFullPathStrokeGradient(this.mNativePtr, ((GradientColor) complexColorObtainForTheme2).getShader().getNativeInstance());
+                } else if (complexColorObtainForTheme2 instanceof ColorStateList) {
+                    VectorDrawable.nSetStrokeColor(this.mNativePtr, complexColorObtainForTheme2.getDefaultColor());
                 }
             }
         }

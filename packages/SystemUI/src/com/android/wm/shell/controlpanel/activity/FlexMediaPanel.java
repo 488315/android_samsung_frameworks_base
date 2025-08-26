@@ -9,6 +9,7 @@ import android.media.session.PlaybackState;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
+import android.support.v4.media.session.MediaSessionCompat$QueueItem$$ExternalSyntheticOutline0;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.SparseArray;
@@ -22,6 +23,7 @@ import android.widget.TextView;
 import androidx.appcompat.widget.SeslSeekBar;
 import androidx.compose.runtime.ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0;
 import androidx.concurrent.futures.AbstractResolvableFuture$$ExternalSyntheticOutline0;
+import androidx.core.animation.ValueAnimator$$ExternalSyntheticOutline0;
 import androidx.core.content.ContextCompat;
 import androidx.datastore.preferences.protobuf.BooleanArrayList$$ExternalSyntheticOutline0;
 import androidx.reflect.view.SeslViewReflector;
@@ -34,7 +36,6 @@ import com.samsung.systemui.splugins.pluginlock.PluginLock;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class FlexMediaPanel {
     public final SparseArray mActionViewIdMap;
@@ -67,7 +68,6 @@ public class FlexMediaPanel {
     public boolean mSeekBarFromUser = false;
     public boolean mSeekBarEnabled = false;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class H extends Handler {
         public H() {
         }
@@ -102,13 +102,13 @@ public class FlexMediaPanel {
                     }
                     flexMediaPanel.mSeekBarText.setText(FlexMediaPanel.makeCurrentText(seslSeekBar.getProgress()));
                     SeslSeekBar seslSeekBar2 = flexMediaPanel.mMediaSeekBarView;
-                    float m = BooleanArrayList$$ExternalSyntheticOutline0.m((seslSeekBar2.getWidth() - SeslViewReflector.getField_mPaddingLeft(seslSeekBar2)) - SeslViewReflector.getField_mPaddingRight(seslSeekBar2), seslSeekBar2.getProgress() / 1000, seslSeekBar2.getMax() / 1000, SeslViewReflector.getField_mPaddingLeft(seslSeekBar2) + seslSeekBar2.getLeft());
-                    if (m - (flexMediaPanel.mSeekBarText.getWidth() / 2.0f) < 0.0f) {
+                    float fM = BooleanArrayList$$ExternalSyntheticOutline0.m((seslSeekBar2.getWidth() - SeslViewReflector.getField_mPaddingLeft(seslSeekBar2)) - SeslViewReflector.getField_mPaddingRight(seslSeekBar2), seslSeekBar2.getProgress() / 1000, seslSeekBar2.getMax() / 1000, SeslViewReflector.getField_mPaddingLeft(seslSeekBar2) + seslSeekBar2.getLeft());
+                    if (fM - (flexMediaPanel.mSeekBarText.getWidth() / 2.0f) < 0.0f) {
                         flexMediaPanel.mSeekBarText.setX(0.0f);
-                    } else if ((flexMediaPanel.mSeekBarText.getWidth() / 2) + m > ControlPanelUtils.getDisplayX(flexMediaPanel.mContext)) {
+                    } else if ((flexMediaPanel.mSeekBarText.getWidth() / 2) + fM > ControlPanelUtils.getDisplayX(flexMediaPanel.mContext)) {
                         flexMediaPanel.mSeekBarText.setX(ControlPanelUtils.getDisplayX(flexMediaPanel.mContext) - flexMediaPanel.mSeekBarText.getWidth());
                     } else {
-                        flexMediaPanel.mSeekBarText.setX(m - (r2.getWidth() / 2));
+                        flexMediaPanel.mSeekBarText.setX(fM - (r2.getWidth() / 2));
                     }
                 }
             }
@@ -138,9 +138,9 @@ public class FlexMediaPanel {
                 flexMediaPanel.checkPlaybackPosition(0L);
                 if (CoreRune.MW_SPLIT_FLEX_PANEL_MODE_SA_LOGGING) {
                     MediaController mediaController3 = flexMediaPanel.mMediaController;
-                    HashMap hashMap = new HashMap();
-                    hashMap.put("packageName", mediaController3.getPackageName());
-                    ControlPanelUtils.eventLogging("F003", flexMediaPanel.mContext.getString(R.string.seekbar_sa_logging), hashMap);
+                    HashMap map = new HashMap();
+                    map.put("packageName", mediaController3.getPackageName());
+                    ControlPanelUtils.eventLogging("F003", flexMediaPanel.mContext.getString(R.string.seekbar_sa_logging), map);
                 }
                 flexMediaPanel.mSeekBarText.setText("");
             }
@@ -149,7 +149,7 @@ public class FlexMediaPanel {
         this.mUpdateTimer = new Runnable() { // from class: com.android.wm.shell.controlpanel.activity.FlexMediaPanel$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                FlexMediaPanel flexMediaPanel = FlexMediaPanel.this;
+                FlexMediaPanel flexMediaPanel = this.f$0;
                 if (flexMediaPanel.mSeekBarEnabled) {
                     flexMediaPanel.updateSeekbarPosition();
                 }
@@ -198,7 +198,7 @@ public class FlexMediaPanel {
             linearLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() { // from class: com.android.wm.shell.controlpanel.activity.FlexMediaPanel$$ExternalSyntheticLambda1
                 @Override // android.view.ViewTreeObserver.OnGlobalLayoutListener
                 public final void onGlobalLayout() {
-                    FlexMediaPanel.this.mFloatingPanelView.setY((r6.mContext.getResources().getDimensionPixelSize(R.dimen.basic_panel_top_margin) + ((int) ((r6.mDisplayY * 18.55d) / 100.0d))) - (r6.mFloatingPanelView.getHeight() / 2));
+                    this.f$0.mFloatingPanelView.setY((r6.mContext.getResources().getDimensionPixelSize(R.dimen.basic_panel_top_margin) + ((int) ((r6.mDisplayY * 18.55d) / 100.0d))) - (r6.mFloatingPanelView.getHeight() / 2));
                 }
             });
             linearLayout.findViewById(R.id.seekbar_value_top_margin_layout).setLayoutParams(getRatioLayoutParams(0.0d, 2.6d));
@@ -248,7 +248,7 @@ public class FlexMediaPanel {
 
     public static String makeCurrentText(int i) {
         String str;
-        String str2;
+        String strM;
         int i2;
         int i3 = i / 1000;
         int i4 = i3 / PluginLock.VERSION;
@@ -258,74 +258,38 @@ public class FlexMediaPanel {
             str = "";
         }
         if (str.equals("") || (i2 = (i3 / 60) % 60) >= 10) {
-            str2 = ((i3 / 60) % 60) + ":";
+            strM = ((i3 / 60) % 60) + ":";
         } else {
-            str2 = ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(i2, "0", ":");
+            strM = ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(i2, "0", ":");
         }
         int i5 = i3 % 60;
-        return AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, str2, i5 < 10 ? MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i5, "0") : String.valueOf(i5));
+        return AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, strM, i5 < 10 ? MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i5, "0") : String.valueOf(i5));
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0056  */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x005b  */
+    /* JADX WARN: Removed duplicated region for block: B:11:0x0045  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static java.lang.String makeDurationText(long r11) {
-        /*
-            r0 = 1000(0x3e8, double:4.94E-321)
-            long r11 = r11 / r0
-            r0 = 3600(0xe10, double:1.7786E-320)
-            long r0 = r11 / r0
-            r2 = 0
-            int r2 = (r0 > r2 ? 1 : (r0 == r2 ? 0 : -1))
-            java.lang.String r3 = ""
-            java.lang.String r4 = ":"
-            if (r2 == 0) goto L21
-            java.lang.StringBuilder r2 = new java.lang.StringBuilder
-            r2.<init>()
-            r2.append(r0)
-            r2.append(r4)
-            java.lang.String r0 = r2.toString()
-            goto L22
-        L21:
-            r0 = r3
-        L22:
-            boolean r1 = r0.equals(r3)
-            java.lang.String r2 = "0"
-            r5 = 10
-            r7 = 60
-            if (r1 != 0) goto L45
-            long r9 = r11 / r7
-            long r9 = r9 % r7
-            int r1 = (r9 > r5 ? 1 : (r9 == r5 ? 0 : -1))
-            if (r1 >= 0) goto L45
-            java.lang.StringBuilder r1 = new java.lang.StringBuilder
-            r1.<init>(r2)
-            r1.append(r9)
-            r1.append(r4)
-            java.lang.String r1 = r1.toString()
-            goto L51
-        L45:
-            java.lang.StringBuilder r1 = new java.lang.StringBuilder
-            r1.<init>()
-            long r9 = r11 / r7
-            long r9 = r9 % r7
-            java.lang.String r1 = android.support.v4.media.session.MediaSessionCompat$QueueItem$$ExternalSyntheticOutline0.m(r9, r4, r1)
-        L51:
-            long r11 = r11 % r7
-            int r3 = (r11 > r5 ? 1 : (r11 == r5 ? 0 : -1))
-            if (r3 >= 0) goto L5b
-            java.lang.String r11 = androidx.core.animation.ValueAnimator$$ExternalSyntheticOutline0.m(r2, r11)
-            goto L5f
-        L5b:
-            java.lang.String r11 = java.lang.String.valueOf(r11)
-        L5f:
-            java.lang.String r11 = androidx.concurrent.futures.AbstractResolvableFuture$$ExternalSyntheticOutline0.m(r0, r1, r11)
-            return r11
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.controlpanel.activity.FlexMediaPanel.makeDurationText(long):java.lang.String");
+    public static String makeDurationText(long j) {
+        String str;
+        String strM;
+        long j2 = j / 1000;
+        long j3 = j2 / 3600;
+        if (j3 != 0) {
+            str = j3 + ":";
+        } else {
+            str = "";
+        }
+        if (!str.equals("")) {
+            long j4 = (j2 / 60) % 60;
+            if (j4 < 10) {
+                strM = "0" + j4 + ":";
+            } else {
+                strM = MediaSessionCompat$QueueItem$$ExternalSyntheticOutline0.m((j2 / 60) % 60, ":", new StringBuilder());
+            }
+        }
+        long j5 = j2 % 60;
+        return AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, strM, j5 < 10 ? ValueAnimator$$ExternalSyntheticOutline0.m("0", j5) : String.valueOf(j5));
     }
 
     public final void checkPlaybackPosition(long j) {
@@ -407,9 +371,9 @@ public class FlexMediaPanel {
         }
         if (CoreRune.MW_SPLIT_FLEX_PANEL_MODE_SA_LOGGING) {
             MediaController mediaController2 = this.mMediaController;
-            HashMap hashMap = new HashMap();
-            hashMap.put("packageName", mediaController2.getPackageName());
-            ControlPanelUtils.eventLogging("F003", this.mContext.getString(i2), hashMap);
+            HashMap map = new HashMap();
+            map.put("packageName", mediaController2.getPackageName());
+            ControlPanelUtils.eventLogging("F003", this.mContext.getString(i2), map);
         }
     }
 
@@ -682,10 +646,10 @@ public class FlexMediaPanel {
             int size = this.mActionViewIdMap.size();
             ArrayList arrayList = new ArrayList();
             for (int i = 0; i < size; i++) {
-                int keyAt = this.mActionViewIdMap.keyAt(i);
-                long longValue = ((Long) this.mActionViewIdMap.valueAt(i)).longValue();
-                LinearLayout linearLayout = (LinearLayout) this.mFloatingPanelView.findViewById(keyAt);
-                long j2 = actions & longValue;
+                int iKeyAt = this.mActionViewIdMap.keyAt(i);
+                long jLongValue = ((Long) this.mActionViewIdMap.valueAt(i)).longValue();
+                LinearLayout linearLayout = (LinearLayout) this.mFloatingPanelView.findViewById(iKeyAt);
+                long j2 = actions & jLongValue;
                 linearLayout.setEnabled(j2 != 0);
                 if (j2 != 0) {
                     linearLayout.setAlpha(1.0f);
@@ -706,13 +670,12 @@ public class FlexMediaPanel {
                 this.mMediaPauseButton.setVisibility(8);
                 this.mMediaResumeButton.setVisibility(0);
                 this.mMediaResumeButton.setAlpha(0.4f);
-            } else {
-                if (this.mPlaybackState.getState() != 3 && this.mPlaybackState.getState() != 6) {
-                    this.mMediaPauseButton.setVisibility(8);
-                    this.mMediaResumeButton.setVisibility(0);
-                }
+            } else if (this.mPlaybackState.getState() == 3 || this.mPlaybackState.getState() == 6) {
                 this.mMediaResumeButton.setVisibility(8);
                 this.mMediaPauseButton.setVisibility(0);
+            } else {
+                this.mMediaPauseButton.setVisibility(8);
+                this.mMediaResumeButton.setVisibility(0);
             }
         } catch (NullPointerException unused) {
             Log.e("FlexMediaPanel", "MediaPanel updatePlayPauseIcon mPlaybackState.getState is null");

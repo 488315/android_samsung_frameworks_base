@@ -233,9 +233,9 @@ public interface IPrintManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IPrintManager)) {
-                return (IPrintManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IPrintManager)) {
+                return (IPrintManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -313,194 +313,194 @@ public interface IPrintManager extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int readInt = parcel.readInt();
-                    int readInt2 = parcel.readInt();
+                    int i3 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<PrintJobInfo> printJobInfos = getPrintJobInfos(readInt, readInt2);
+                    List<PrintJobInfo> printJobInfos = getPrintJobInfos(i3, i4);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(printJobInfos, 1);
                     return true;
                 case 2:
                     PrintJobId printJobId = (PrintJobId) parcel.readTypedObject(PrintJobId.CREATOR);
-                    int readInt3 = parcel.readInt();
-                    int readInt4 = parcel.readInt();
+                    int i5 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    PrintJobInfo printJobInfo = getPrintJobInfo(printJobId, readInt3, readInt4);
+                    PrintJobInfo printJobInfo = getPrintJobInfo(printJobId, i5, i6);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(printJobInfo, 1);
                     return true;
                 case 3:
-                    String readString = parcel.readString();
-                    IPrintDocumentAdapter asInterface = IPrintDocumentAdapter.Stub.asInterface(parcel.readStrongBinder());
+                    String string = parcel.readString();
+                    IPrintDocumentAdapter iPrintDocumentAdapterAsInterface = IPrintDocumentAdapter.Stub.asInterface(parcel.readStrongBinder());
                     PrintAttributes printAttributes = (PrintAttributes) parcel.readTypedObject(PrintAttributes.CREATOR);
-                    String readString2 = parcel.readString();
-                    int readInt5 = parcel.readInt();
-                    int readInt6 = parcel.readInt();
+                    String string2 = parcel.readString();
+                    int i7 = parcel.readInt();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    Bundle print = print(readString, asInterface, printAttributes, readString2, readInt5, readInt6);
+                    Bundle bundlePrint = print(string, iPrintDocumentAdapterAsInterface, printAttributes, string2, i7, i8);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(print, 1);
+                    parcel2.writeTypedObject(bundlePrint, 1);
                     return true;
                 case 4:
                     PrintJobId printJobId2 = (PrintJobId) parcel.readTypedObject(PrintJobId.CREATOR);
-                    int readInt7 = parcel.readInt();
-                    int readInt8 = parcel.readInt();
+                    int i9 = parcel.readInt();
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    cancelPrintJob(printJobId2, readInt7, readInt8);
+                    cancelPrintJob(printJobId2, i9, i10);
                     parcel2.writeNoException();
                     return true;
                 case 5:
                     PrintJobId printJobId3 = (PrintJobId) parcel.readTypedObject(PrintJobId.CREATOR);
-                    int readInt9 = parcel.readInt();
-                    int readInt10 = parcel.readInt();
+                    int i11 = parcel.readInt();
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    restartPrintJob(printJobId3, readInt9, readInt10);
+                    restartPrintJob(printJobId3, i11, i12);
                     parcel2.writeNoException();
                     return true;
                 case 6:
-                    IPrintJobStateChangeListener asInterface2 = IPrintJobStateChangeListener.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt11 = parcel.readInt();
-                    int readInt12 = parcel.readInt();
+                    IPrintJobStateChangeListener iPrintJobStateChangeListenerAsInterface = IPrintJobStateChangeListener.Stub.asInterface(parcel.readStrongBinder());
+                    int i13 = parcel.readInt();
+                    int i14 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    addPrintJobStateChangeListener(asInterface2, readInt11, readInt12);
+                    addPrintJobStateChangeListener(iPrintJobStateChangeListenerAsInterface, i13, i14);
                     parcel2.writeNoException();
                     return true;
                 case 7:
-                    IPrintJobStateChangeListener asInterface3 = IPrintJobStateChangeListener.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt13 = parcel.readInt();
+                    IPrintJobStateChangeListener iPrintJobStateChangeListenerAsInterface2 = IPrintJobStateChangeListener.Stub.asInterface(parcel.readStrongBinder());
+                    int i15 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    removePrintJobStateChangeListener(asInterface3, readInt13);
+                    removePrintJobStateChangeListener(iPrintJobStateChangeListenerAsInterface2, i15);
                     parcel2.writeNoException();
                     return true;
                 case 8:
-                    IPrintServicesChangeListener asInterface4 = IPrintServicesChangeListener.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt14 = parcel.readInt();
+                    IPrintServicesChangeListener iPrintServicesChangeListenerAsInterface = IPrintServicesChangeListener.Stub.asInterface(parcel.readStrongBinder());
+                    int i16 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    addPrintServicesChangeListener(asInterface4, readInt14);
+                    addPrintServicesChangeListener(iPrintServicesChangeListenerAsInterface, i16);
                     parcel2.writeNoException();
                     return true;
                 case 9:
-                    IPrintServicesChangeListener asInterface5 = IPrintServicesChangeListener.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt15 = parcel.readInt();
+                    IPrintServicesChangeListener iPrintServicesChangeListenerAsInterface2 = IPrintServicesChangeListener.Stub.asInterface(parcel.readStrongBinder());
+                    int i17 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    removePrintServicesChangeListener(asInterface5, readInt15);
+                    removePrintServicesChangeListener(iPrintServicesChangeListenerAsInterface2, i17);
                     parcel2.writeNoException();
                     return true;
                 case 10:
-                    int readInt16 = parcel.readInt();
-                    int readInt17 = parcel.readInt();
+                    int i18 = parcel.readInt();
+                    int i19 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<PrintServiceInfo> printServices = getPrintServices(readInt16, readInt17);
+                    List<PrintServiceInfo> printServices = getPrintServices(i18, i19);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(printServices, 1);
                     return true;
                 case 11:
                     ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    boolean readBoolean = parcel.readBoolean();
-                    int readInt18 = parcel.readInt();
+                    boolean z = parcel.readBoolean();
+                    int i20 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setPrintServiceEnabled(componentName, readBoolean, readInt18);
+                    setPrintServiceEnabled(componentName, z, i20);
                     parcel2.writeNoException();
                     return true;
                 case 12:
                     ComponentName componentName2 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    int readInt19 = parcel.readInt();
+                    int i21 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isPrintServiceEnabled = isPrintServiceEnabled(componentName2, readInt19);
+                    boolean zIsPrintServiceEnabled = isPrintServiceEnabled(componentName2, i21);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isPrintServiceEnabled);
+                    parcel2.writeBoolean(zIsPrintServiceEnabled);
                     return true;
                 case 13:
-                    IRecommendationsChangeListener asInterface6 = IRecommendationsChangeListener.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt20 = parcel.readInt();
+                    IRecommendationsChangeListener iRecommendationsChangeListenerAsInterface = IRecommendationsChangeListener.Stub.asInterface(parcel.readStrongBinder());
+                    int i22 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    addPrintServiceRecommendationsChangeListener(asInterface6, readInt20);
+                    addPrintServiceRecommendationsChangeListener(iRecommendationsChangeListenerAsInterface, i22);
                     parcel2.writeNoException();
                     return true;
                 case 14:
-                    IRecommendationsChangeListener asInterface7 = IRecommendationsChangeListener.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt21 = parcel.readInt();
+                    IRecommendationsChangeListener iRecommendationsChangeListenerAsInterface2 = IRecommendationsChangeListener.Stub.asInterface(parcel.readStrongBinder());
+                    int i23 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    removePrintServiceRecommendationsChangeListener(asInterface7, readInt21);
+                    removePrintServiceRecommendationsChangeListener(iRecommendationsChangeListenerAsInterface2, i23);
                     parcel2.writeNoException();
                     return true;
                 case 15:
-                    int readInt22 = parcel.readInt();
+                    int i24 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    List<RecommendationInfo> printServiceRecommendations = getPrintServiceRecommendations(readInt22);
+                    List<RecommendationInfo> printServiceRecommendations = getPrintServiceRecommendations(i24);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(printServiceRecommendations, 1);
                     return true;
                 case 16:
-                    IPrinterDiscoveryObserver asInterface8 = IPrinterDiscoveryObserver.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt23 = parcel.readInt();
+                    IPrinterDiscoveryObserver iPrinterDiscoveryObserverAsInterface = IPrinterDiscoveryObserver.Stub.asInterface(parcel.readStrongBinder());
+                    int i25 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    createPrinterDiscoverySession(asInterface8, readInt23);
+                    createPrinterDiscoverySession(iPrinterDiscoveryObserverAsInterface, i25);
                     parcel2.writeNoException();
                     return true;
                 case 17:
-                    IPrinterDiscoveryObserver asInterface9 = IPrinterDiscoveryObserver.Stub.asInterface(parcel.readStrongBinder());
-                    ArrayList createTypedArrayList = parcel.createTypedArrayList(PrinterId.CREATOR);
-                    int readInt24 = parcel.readInt();
+                    IPrinterDiscoveryObserver iPrinterDiscoveryObserverAsInterface2 = IPrinterDiscoveryObserver.Stub.asInterface(parcel.readStrongBinder());
+                    ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(PrinterId.CREATOR);
+                    int i26 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    startPrinterDiscovery(asInterface9, createTypedArrayList, readInt24);
+                    startPrinterDiscovery(iPrinterDiscoveryObserverAsInterface2, arrayListCreateTypedArrayList, i26);
                     parcel2.writeNoException();
                     return true;
                 case 18:
-                    IPrinterDiscoveryObserver asInterface10 = IPrinterDiscoveryObserver.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt25 = parcel.readInt();
+                    IPrinterDiscoveryObserver iPrinterDiscoveryObserverAsInterface3 = IPrinterDiscoveryObserver.Stub.asInterface(parcel.readStrongBinder());
+                    int i27 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    stopPrinterDiscovery(asInterface10, readInt25);
+                    stopPrinterDiscovery(iPrinterDiscoveryObserverAsInterface3, i27);
                     parcel2.writeNoException();
                     return true;
                 case 19:
-                    ArrayList createTypedArrayList2 = parcel.createTypedArrayList(PrinterId.CREATOR);
-                    int readInt26 = parcel.readInt();
+                    ArrayList arrayListCreateTypedArrayList2 = parcel.createTypedArrayList(PrinterId.CREATOR);
+                    int i28 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    validatePrinters(createTypedArrayList2, readInt26);
+                    validatePrinters(arrayListCreateTypedArrayList2, i28);
                     parcel2.writeNoException();
                     return true;
                 case 20:
                     PrinterId printerId = (PrinterId) parcel.readTypedObject(PrinterId.CREATOR);
-                    int readInt27 = parcel.readInt();
+                    int i29 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    startPrinterStateTracking(printerId, readInt27);
+                    startPrinterStateTracking(printerId, i29);
                     parcel2.writeNoException();
                     return true;
                 case 21:
                     PrinterId printerId2 = (PrinterId) parcel.readTypedObject(PrinterId.CREATOR);
-                    int readInt28 = parcel.readInt();
+                    int i30 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    Icon customPrinterIcon = getCustomPrinterIcon(printerId2, readInt28);
+                    Icon customPrinterIcon = getCustomPrinterIcon(printerId2, i30);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(customPrinterIcon, 1);
                     return true;
                 case 22:
                     PrinterId printerId3 = (PrinterId) parcel.readTypedObject(PrinterId.CREATOR);
-                    int readInt29 = parcel.readInt();
+                    int i31 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    stopPrinterStateTracking(printerId3, readInt29);
+                    stopPrinterStateTracking(printerId3, i31);
                     parcel2.writeNoException();
                     return true;
                 case 23:
-                    IPrinterDiscoveryObserver asInterface11 = IPrinterDiscoveryObserver.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt30 = parcel.readInt();
+                    IPrinterDiscoveryObserver iPrinterDiscoveryObserverAsInterface4 = IPrinterDiscoveryObserver.Stub.asInterface(parcel.readStrongBinder());
+                    int i32 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    destroyPrinterDiscoverySession(asInterface11, readInt30);
+                    destroyPrinterDiscoverySession(iPrinterDiscoveryObserverAsInterface4, i32);
                     parcel2.writeNoException();
                     return true;
                 case 24:
-                    int readInt31 = parcel.readInt();
+                    int i33 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean bindInstantServiceAllowed = getBindInstantServiceAllowed(readInt31);
+                    boolean bindInstantServiceAllowed = getBindInstantServiceAllowed(i33);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(bindInstantServiceAllowed);
                     return true;
                 case 25:
-                    int readInt32 = parcel.readInt();
-                    boolean readBoolean2 = parcel.readBoolean();
+                    int i34 = parcel.readInt();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setBindInstantServiceAllowed(readInt32, readBoolean2);
+                    setBindInstantServiceAllowed(i34, z2);
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -526,417 +526,417 @@ public interface IPrintManager extends IInterface {
 
             @Override // android.print.IPrintManager
             public List<PrintJobInfo> getPrintJobInfos(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(PrintJobInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(PrintJobInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.print.IPrintManager
             public PrintJobInfo getPrintJobInfo(PrintJobId printJobId, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(printJobId, 0);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (PrintJobInfo) obtain2.readTypedObject(PrintJobInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(printJobId, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (PrintJobInfo) parcelObtain2.readTypedObject(PrintJobInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.print.IPrintManager
             public Bundle print(String str, IPrintDocumentAdapter iPrintDocumentAdapter, PrintAttributes printAttributes, String str2, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iPrintDocumentAdapter);
-                    obtain.writeTypedObject(printAttributes, 0);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iPrintDocumentAdapter);
+                    parcelObtain.writeTypedObject(printAttributes, 0);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.print.IPrintManager
             public void cancelPrintJob(PrintJobId printJobId, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(printJobId, 0);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(printJobId, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.print.IPrintManager
             public void restartPrintJob(PrintJobId printJobId, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(printJobId, 0);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(printJobId, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.print.IPrintManager
             public void addPrintJobStateChangeListener(IPrintJobStateChangeListener iPrintJobStateChangeListener, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iPrintJobStateChangeListener);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iPrintJobStateChangeListener);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.print.IPrintManager
             public void removePrintJobStateChangeListener(IPrintJobStateChangeListener iPrintJobStateChangeListener, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iPrintJobStateChangeListener);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iPrintJobStateChangeListener);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.print.IPrintManager
             public void addPrintServicesChangeListener(IPrintServicesChangeListener iPrintServicesChangeListener, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iPrintServicesChangeListener);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iPrintServicesChangeListener);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.print.IPrintManager
             public void removePrintServicesChangeListener(IPrintServicesChangeListener iPrintServicesChangeListener, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iPrintServicesChangeListener);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iPrintServicesChangeListener);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.print.IPrintManager
             public List<PrintServiceInfo> getPrintServices(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(PrintServiceInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(PrintServiceInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.print.IPrintManager
             public void setPrintServiceEnabled(ComponentName componentName, boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.print.IPrintManager
             public boolean isPrintServiceEnabled(ComponentName componentName, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.print.IPrintManager
             public void addPrintServiceRecommendationsChangeListener(IRecommendationsChangeListener iRecommendationsChangeListener, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iRecommendationsChangeListener);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iRecommendationsChangeListener);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.print.IPrintManager
             public void removePrintServiceRecommendationsChangeListener(IRecommendationsChangeListener iRecommendationsChangeListener, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iRecommendationsChangeListener);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iRecommendationsChangeListener);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.print.IPrintManager
             public List<RecommendationInfo> getPrintServiceRecommendations(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(RecommendationInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(RecommendationInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.print.IPrintManager
             public void createPrinterDiscoverySession(IPrinterDiscoveryObserver iPrinterDiscoveryObserver, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iPrinterDiscoveryObserver);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iPrinterDiscoveryObserver);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.print.IPrintManager
             public void startPrinterDiscovery(IPrinterDiscoveryObserver iPrinterDiscoveryObserver, List<PrinterId> list, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iPrinterDiscoveryObserver);
-                    obtain.writeTypedList(list, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iPrinterDiscoveryObserver);
+                    parcelObtain.writeTypedList(list, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.print.IPrintManager
             public void stopPrinterDiscovery(IPrinterDiscoveryObserver iPrinterDiscoveryObserver, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iPrinterDiscoveryObserver);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iPrinterDiscoveryObserver);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.print.IPrintManager
             public void validatePrinters(List<PrinterId> list, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.print.IPrintManager
             public void startPrinterStateTracking(PrinterId printerId, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(printerId, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(printerId, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.print.IPrintManager
             public Icon getCustomPrinterIcon(PrinterId printerId, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(printerId, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Icon) obtain2.readTypedObject(Icon.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(printerId, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Icon) parcelObtain2.readTypedObject(Icon.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.print.IPrintManager
             public void stopPrinterStateTracking(PrinterId printerId, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(printerId, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(printerId, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.print.IPrintManager
             public void destroyPrinterDiscoverySession(IPrinterDiscoveryObserver iPrinterDiscoveryObserver, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iPrinterDiscoveryObserver);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iPrinterDiscoveryObserver);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.print.IPrintManager
             public boolean getBindInstantServiceAllowed(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.print.IPrintManager
             public void setBindInstantServiceAllowed(int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

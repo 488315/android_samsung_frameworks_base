@@ -43,14 +43,14 @@ public class ConditionVariable {
         boolean z;
         if (j != 0) {
             synchronized (this) {
-                long elapsedRealtime = SystemClock.elapsedRealtime();
-                long j2 = j + elapsedRealtime;
-                while (!this.mCondition && elapsedRealtime < j2) {
+                long jElapsedRealtime = SystemClock.elapsedRealtime();
+                long j2 = j + jElapsedRealtime;
+                while (!this.mCondition && jElapsedRealtime < j2) {
                     try {
-                        wait(j2 - elapsedRealtime);
+                        wait(j2 - jElapsedRealtime);
                     } catch (InterruptedException unused) {
                     }
-                    elapsedRealtime = SystemClock.elapsedRealtime();
+                    jElapsedRealtime = SystemClock.elapsedRealtime();
                 }
                 z = this.mCondition;
             }

@@ -131,7 +131,15 @@ public class ViewRune {
         return false;
     }
 
+    public static boolean supportFoldableFlipCoverScreen() {
+        return false;
+    }
+
     public static boolean supportFoldableNoSubDisplay() {
+        return false;
+    }
+
+    public static boolean supportMultiFoldableDualDisplay() {
         return false;
     }
 

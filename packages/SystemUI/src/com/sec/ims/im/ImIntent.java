@@ -1,11 +1,9 @@
 package com.sec.ims.im;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface ImIntent {
     public static final String CATEGORY_ACTION = "com.samsung.rcs.framework.instantmessaging.category.ACTION";
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Action {
         public static final String ACCEPT_CHAT = "com.samsung.rcs.framework.instantmessaging.action.ACCEPT_CHAT";
         public static final String ADD_PARTICIPANTS = "com.samsung.rcs.framework.instantmessaging.action.ADD_PARTICIPANTS";
@@ -74,7 +72,6 @@ public interface ImIntent {
         public static final String SET_GROUPCHAT_ICON_RESPONSE = "com.samsung.rcs.framework.instantmessaging.action.SET_GROUPCHAT_ICON_RESPONSE";
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Extras {
         public static final String BOOLEAN_ANSWER = "invitation_answer";
         public static final String CHATBOT_ANONYMIZE_ACTION = "chatbot_anonymize_action";

@@ -134,10 +134,10 @@ public class Color {
     }
 
     public Color convert(ColorSpace colorSpace) {
-        ColorSpace.Connector connect = ColorSpace.connect(this.mColorSpace, colorSpace);
+        ColorSpace.Connector connectorConnect = ColorSpace.connect(this.mColorSpace, colorSpace);
         float[] fArr = this.mComponents;
         float[] fArr2 = {fArr[0], fArr[1], fArr[2], fArr[3]};
-        connect.transform(fArr2);
+        connectorConnect.transform(fArr2);
         return new Color(fArr2, colorSpace);
     }
 
@@ -260,12 +260,12 @@ public class Color {
         if ((63 & j) == 0) {
             return (int) (j >> 32);
         }
-        float red = red(j);
-        float green = green(j);
-        float blue = blue(j);
-        float alpha = alpha(j);
-        float[] transform = ColorSpace.connect(colorSpace(j)).transform(red, green, blue);
-        return ((int) ((transform[2] * 255.0f) + 0.5f)) | (((int) ((alpha * 255.0f) + 0.5f)) << 24) | (((int) ((transform[0] * 255.0f) + 0.5f)) << 16) | (((int) ((transform[1] * 255.0f) + 0.5f)) << 8);
+        float fRed = red(j);
+        float fGreen = green(j);
+        float fBlue = blue(j);
+        float fAlpha = alpha(j);
+        float[] fArrTransform = ColorSpace.connect(colorSpace(j)).transform(fRed, fGreen, fBlue);
+        return ((int) ((fArrTransform[2] * 255.0f) + 0.5f)) | (((int) ((fAlpha * 255.0f) + 0.5f)) << 24) | (((int) ((fArrTransform[0] * 255.0f) + 0.5f)) << 16) | (((int) ((fArrTransform[1] * 255.0f) + 0.5f)) << 8);
     }
 
     public static Color valueOf(int i) {
@@ -329,8 +329,8 @@ public class Color {
     }
 
     public static long convert(float f, float f2, float f3, float f4, ColorSpace colorSpace, ColorSpace colorSpace2) {
-        float[] transform = ColorSpace.connect(colorSpace, colorSpace2).transform(f, f2, f3);
-        return pack(transform[0], transform[1], transform[2], f4, colorSpace2);
+        float[] fArrTransform = ColorSpace.connect(colorSpace, colorSpace2).transform(f, f2, f3);
+        return pack(fArrTransform[0], fArrTransform[1], fArrTransform[2], f4, colorSpace2);
     }
 
     public static long convert(long j, ColorSpace.Connector connector) {
@@ -338,8 +338,8 @@ public class Color {
     }
 
     public static long convert(float f, float f2, float f3, float f4, ColorSpace.Connector connector) {
-        float[] transform = connector.transform(f, f2, f3);
-        return pack(transform[0], transform[1], transform[2], f4, connector.getDestination());
+        float[] fArrTransform = connector.transform(f, f2, f3);
+        return pack(fArrTransform[0], fArrTransform[1], fArrTransform[2], f4, connector.getDestination());
     }
 
     public static float luminance(long j) {
@@ -356,15 +356,15 @@ public class Color {
         return (float) ((eotf.applyAsDouble(red(i) / 255.0d) * 0.2126d) + (eotf.applyAsDouble(green(i) / 255.0d) * 0.7152d) + (eotf.applyAsDouble(blue(i) / 255.0d) * 0.0722d));
     }
 
-    public static int parseColor(String str) {
+    public static int parseColor(String str) throws NumberFormatException {
         if (str.charAt(0) == '#') {
-            long parseLong = Long.parseLong(str.substring(1), 16);
+            long j = Long.parseLong(str.substring(1), 16);
             if (str.length() == 7) {
-                parseLong |= -16777216;
+                j |= -16777216;
             } else if (str.length() != 9) {
                 throw new IllegalArgumentException("Unknown color");
             }
-            return (int) parseLong;
+            return (int) j;
         }
         Integer num = sColorNameMap.get(str.toLowerCase(Locale.ROOT));
         if (num != null) {
@@ -396,35 +396,35 @@ public class Color {
     }
 
     static {
-        HashMap<String, Integer> hashMap = new HashMap<>();
-        sColorNameMap = hashMap;
-        hashMap.put("black", -16777216);
-        hashMap.put("darkgray", -12303292);
-        Integer valueOf = Integer.valueOf(GRAY);
-        hashMap.put("gray", valueOf);
-        Integer valueOf2 = Integer.valueOf(LTGRAY);
-        hashMap.put("lightgray", valueOf2);
-        hashMap.put("white", -1);
-        hashMap.put("red", -65536);
-        Integer valueOf3 = Integer.valueOf(GREEN);
-        hashMap.put("green", valueOf3);
-        hashMap.put("blue", -16776961);
-        hashMap.put("yellow", -256);
-        Integer valueOf4 = Integer.valueOf(CYAN);
-        hashMap.put("cyan", valueOf4);
-        Integer valueOf5 = Integer.valueOf(MAGENTA);
-        hashMap.put("magenta", valueOf5);
-        hashMap.put(Camera.Parameters.EFFECT_AQUA, valueOf4);
-        hashMap.put("fuchsia", valueOf5);
-        hashMap.put("darkgrey", -12303292);
-        hashMap.put("grey", valueOf);
-        hashMap.put("lightgrey", valueOf2);
-        hashMap.put("lime", valueOf3);
-        hashMap.put("maroon", -8388608);
-        hashMap.put("navy", -16777088);
-        hashMap.put("olive", -8355840);
-        hashMap.put("purple", -8388480);
-        hashMap.put("silver", -4144960);
-        hashMap.put("teal", -16744320);
+        HashMap<String, Integer> map = new HashMap<>();
+        sColorNameMap = map;
+        map.put("black", -16777216);
+        map.put("darkgray", -12303292);
+        Integer numValueOf = Integer.valueOf(GRAY);
+        map.put("gray", numValueOf);
+        Integer numValueOf2 = Integer.valueOf(LTGRAY);
+        map.put("lightgray", numValueOf2);
+        map.put("white", -1);
+        map.put("red", -65536);
+        Integer numValueOf3 = Integer.valueOf(GREEN);
+        map.put("green", numValueOf3);
+        map.put("blue", -16776961);
+        map.put("yellow", -256);
+        Integer numValueOf4 = Integer.valueOf(CYAN);
+        map.put("cyan", numValueOf4);
+        Integer numValueOf5 = Integer.valueOf(MAGENTA);
+        map.put("magenta", numValueOf5);
+        map.put(Camera.Parameters.EFFECT_AQUA, numValueOf4);
+        map.put("fuchsia", numValueOf5);
+        map.put("darkgrey", -12303292);
+        map.put("grey", numValueOf);
+        map.put("lightgrey", numValueOf2);
+        map.put("lime", numValueOf3);
+        map.put("maroon", -8388608);
+        map.put("navy", -16777088);
+        map.put("olive", -8355840);
+        map.put("purple", -8388480);
+        map.put("silver", -4144960);
+        map.put("teal", -16744320);
     }
 }

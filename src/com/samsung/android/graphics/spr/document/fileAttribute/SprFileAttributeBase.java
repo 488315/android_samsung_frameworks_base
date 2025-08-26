@@ -28,7 +28,7 @@ public abstract class SprFileAttributeBase implements Cloneable {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public SprFileAttributeBase m9223clone() throws CloneNotSupportedException {
+    public SprFileAttributeBase m9235clone() throws CloneNotSupportedException {
         return (SprFileAttributeBase) super.clone();
     }
 }

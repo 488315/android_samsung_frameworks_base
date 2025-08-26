@@ -51,9 +51,9 @@ public interface IGetCandidateCredentialsCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IGetCandidateCredentialsCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IGetCandidateCredentialsCallback)) {
-                return (IGetCandidateCredentialsCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IGetCandidateCredentialsCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IGetCandidateCredentialsCallback)) {
+                return (IGetCandidateCredentialsCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -87,10 +87,10 @@ public interface IGetCandidateCredentialsCallback extends IInterface {
                 parcel.enforceNoDataAvail();
                 onResponse(getCandidateCredentialsResponse);
             } else if (i == 2) {
-                String readString = parcel.readString();
-                String readString2 = parcel.readString();
+                String string = parcel.readString();
+                String string2 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                onError(readString, readString2);
+                onError(string, string2);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -115,26 +115,26 @@ public interface IGetCandidateCredentialsCallback extends IInterface {
 
             @Override // android.credentials.IGetCandidateCredentialsCallback
             public void onResponse(GetCandidateCredentialsResponse getCandidateCredentialsResponse) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IGetCandidateCredentialsCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(getCandidateCredentialsResponse, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IGetCandidateCredentialsCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(getCandidateCredentialsResponse, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.credentials.IGetCandidateCredentialsCallback
             public void onError(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IGetCandidateCredentialsCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IGetCandidateCredentialsCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

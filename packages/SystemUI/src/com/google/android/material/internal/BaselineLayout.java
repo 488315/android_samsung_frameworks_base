@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.appcompat.widget.AbsActionBarView$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class BaselineLayout extends ViewGroup {
     public int baseline;
@@ -32,9 +31,9 @@ public class BaselineLayout extends ViewGroup {
             if (childAt.getVisibility() != 8) {
                 int measuredWidth = childAt.getMeasuredWidth();
                 int measuredHeight = childAt.getMeasuredHeight();
-                int m = AbsActionBarView$$ExternalSyntheticOutline0.m(paddingRight, measuredWidth, 2, paddingLeft);
+                int iM = AbsActionBarView$$ExternalSyntheticOutline0.m(paddingRight, measuredWidth, 2, paddingLeft);
                 int baseline = (this.baseline == -1 || childAt.getBaseline() == -1) ? paddingTop : (this.baseline + paddingTop) - childAt.getBaseline();
-                childAt.layout(m, baseline, measuredWidth + m, measuredHeight + baseline);
+                childAt.layout(iM, baseline, measuredWidth + iM, measuredHeight + baseline);
             }
         }
     }
@@ -42,30 +41,30 @@ public class BaselineLayout extends ViewGroup {
     @Override // android.view.View
     public final void onMeasure(int i, int i2) {
         int childCount = getChildCount();
-        int i3 = 0;
-        int i4 = 0;
-        int i5 = 0;
-        int i6 = -1;
-        int i7 = -1;
-        for (int i8 = 0; i8 < childCount; i8++) {
-            View childAt = getChildAt(i8);
+        int iMax = 0;
+        int iMax2 = 0;
+        int iCombineMeasuredStates = 0;
+        int iMax3 = -1;
+        int iMax4 = -1;
+        for (int i3 = 0; i3 < childCount; i3++) {
+            View childAt = getChildAt(i3);
             if (childAt.getVisibility() != 8) {
                 measureChild(childAt, i, i2);
                 int baseline = childAt.getBaseline();
                 if (baseline != -1) {
-                    i6 = Math.max(i6, baseline);
-                    i7 = Math.max(i7, childAt.getMeasuredHeight() - baseline);
+                    iMax3 = Math.max(iMax3, baseline);
+                    iMax4 = Math.max(iMax4, childAt.getMeasuredHeight() - baseline);
                 }
-                i4 = Math.max(i4, childAt.getMeasuredWidth());
-                i3 = Math.max(i3, childAt.getMeasuredHeight());
-                i5 = View.combineMeasuredStates(i5, childAt.getMeasuredState());
+                iMax2 = Math.max(iMax2, childAt.getMeasuredWidth());
+                iMax = Math.max(iMax, childAt.getMeasuredHeight());
+                iCombineMeasuredStates = View.combineMeasuredStates(iCombineMeasuredStates, childAt.getMeasuredState());
             }
         }
-        if (i6 != -1) {
-            i3 = Math.max(i3, Math.max(i7, getPaddingBottom()) + i6);
-            this.baseline = i6;
+        if (iMax3 != -1) {
+            iMax = Math.max(iMax, Math.max(iMax4, getPaddingBottom()) + iMax3);
+            this.baseline = iMax3;
         }
-        setMeasuredDimension(View.resolveSizeAndState(Math.max(i4, getSuggestedMinimumWidth()), i, i5), View.resolveSizeAndState(Math.max(i3, getSuggestedMinimumHeight()), i2, i5 << 16));
+        setMeasuredDimension(View.resolveSizeAndState(Math.max(iMax2, getSuggestedMinimumWidth()), i, iCombineMeasuredStates), View.resolveSizeAndState(Math.max(iMax, getSuggestedMinimumHeight()), i2, iCombineMeasuredStates << 16));
     }
 
     public BaselineLayout(Context context, AttributeSet attributeSet) {

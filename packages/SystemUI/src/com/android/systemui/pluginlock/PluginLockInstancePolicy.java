@@ -7,7 +7,6 @@ import com.android.systemui.LsRune;
 import java.util.HashMap;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class PluginLockInstancePolicy {
     private static final int CATEGORY_DEFAULT = 1;
@@ -42,38 +41,18 @@ public class PluginLockInstancePolicy {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:4:0x0018, code lost:
-    
-        if ((r3.intValue() & 1) == 1) goto L8;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x001b  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public boolean isDefaultInstance(int r4) {
-        /*
-            r3 = this;
-            java.util.Map<java.lang.Integer, java.lang.Integer> r0 = r3.mCategoryMap
-            int r3 = r3.getBaseNumber(r4)
-            java.lang.Integer r3 = java.lang.Integer.valueOf(r3)
-            java.lang.Object r3 = r0.get(r3)
-            java.lang.Integer r3 = (java.lang.Integer) r3
-            if (r3 == 0) goto L1b
-            int r3 = r3.intValue()
-            r0 = 1
-            r3 = r3 & r0
-            if (r3 != r0) goto L1b
-            goto L1c
-        L1b:
-            r0 = 0
-        L1c:
-            java.lang.String r3 = "isDefaultInstance() allowedNumber:"
-            java.lang.String r1 = ", ret:"
-            java.lang.String r2 = "PluginLockInstancePolicy"
-            com.android.keyguard.KeyguardSecSecurityContainerController$$ExternalSyntheticOutline0.m(r3, r4, r1, r0, r2)
-            return r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.pluginlock.PluginLockInstancePolicy.isDefaultInstance(int):boolean");
+    public boolean isDefaultInstance(int i) {
+        boolean z;
+        Integer num = this.mCategoryMap.get(Integer.valueOf(getBaseNumber(i)));
+        if (num != null) {
+            z = (num.intValue() & 1) == 1;
+        }
+        KeyguardSecSecurityContainerController$$ExternalSyntheticOutline0.m("isDefaultInstance() allowedNumber:", i, ", ret:", z, TAG);
+        return z;
     }
 
     public boolean isDualDisplayInstance(int i) {

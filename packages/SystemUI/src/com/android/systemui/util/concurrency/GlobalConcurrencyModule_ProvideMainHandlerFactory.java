@@ -5,7 +5,6 @@ import android.os.Looper;
 import dagger.internal.Provider;
 import dagger.internal.Providers;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class GlobalConcurrencyModule_ProvideMainHandlerFactory implements Provider {
     private final Provider mainLooperProvider;
@@ -19,9 +18,9 @@ public final class GlobalConcurrencyModule_ProvideMainHandlerFactory implements 
     }
 
     public static Handler provideMainHandler(Looper looper) {
-        Handler provideMainHandler = GlobalConcurrencyModule.provideMainHandler(looper);
-        provideMainHandler.getClass();
-        return provideMainHandler;
+        Handler handlerProvideMainHandler = GlobalConcurrencyModule.provideMainHandler(looper);
+        handlerProvideMainHandler.getClass();
+        return handlerProvideMainHandler;
     }
 
     public static GlobalConcurrencyModule_ProvideMainHandlerFactory create(Provider provider) {

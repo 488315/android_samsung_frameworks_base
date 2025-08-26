@@ -17,7 +17,7 @@ public class ServiceThread extends HandlerThread {
     }
 
     @Override // android.os.HandlerThread, java.lang.Thread, java.lang.Runnable
-    public void run() {
+    public void run() throws SecurityException, IllegalArgumentException {
         Process.setCanSelfBackground(false);
         if (!this.mAllowIo) {
             StrictMode.initThreadDefaults(null);

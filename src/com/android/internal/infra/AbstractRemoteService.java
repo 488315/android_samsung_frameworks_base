@@ -160,16 +160,16 @@ public abstract class AbstractRemoteService<S extends AbstractRemoteService<S, I
     }
 
     private void updateServicelicationExitInfo(ComponentName componentName, int i) {
-        ParceledListSlice<ApplicationExitInfo> parceledListSlice;
+        ParceledListSlice<ApplicationExitInfo> historicalProcessExitReasons;
         try {
-            parceledListSlice = ActivityManager.getService().getHistoricalProcessExitReasons(componentName.getPackageName(), 0, 1, i);
+            historicalProcessExitReasons = ActivityManager.getService().getHistoricalProcessExitReasons(componentName.getPackageName(), 0, 1, i);
         } catch (RemoteException unused) {
-            parceledListSlice = null;
+            historicalProcessExitReasons = null;
         }
-        if (parceledListSlice == null) {
+        if (historicalProcessExitReasons == null) {
             return;
         }
-        List list = parceledListSlice.getList();
+        List list = historicalProcessExitReasons.getList();
         if (list.isEmpty()) {
             return;
         }
@@ -188,10 +188,10 @@ public abstract class AbstractRemoteService<S extends AbstractRemoteService<S, I
         printWriter.append((CharSequence) str).append("  ").append("destroyed=").append((CharSequence) String.valueOf(this.mDestroyed)).println();
         printWriter.append((CharSequence) str).append("  ").append("numUnfinishedRequests=").append((CharSequence) String.valueOf(this.mUnfinishedRequests.size())).println();
         printWriter.append((CharSequence) str).append("  ").append("bound=").append((CharSequence) String.valueOf(this.mBound));
-        boolean handleIsBound = handleIsBound();
-        printWriter.append((CharSequence) str).append("  ").append("connected=").append((CharSequence) String.valueOf(handleIsBound));
+        boolean zHandleIsBound = handleIsBound();
+        printWriter.append((CharSequence) str).append("  ").append("connected=").append((CharSequence) String.valueOf(zHandleIsBound));
         long timeoutIdleBindMillis = getTimeoutIdleBindMillis();
-        if (handleIsBound) {
+        if (zHandleIsBound) {
             if (timeoutIdleBindMillis > 0) {
                 printWriter.append(" (unbind in : ");
                 TimeUtils.formatDuration(this.mNextUnbind - SystemClock.elapsedRealtime(), printWriter);
@@ -358,9 +358,9 @@ public abstract class AbstractRemoteService<S extends AbstractRemoteService<S, I
         }
         this.mConnecting = true;
         int i = this.mBindingFlags | 67112961;
-        boolean bindServiceAsUser = this.mContext.bindServiceAsUser(this.mIntent, this.mServiceConnection, i, this.mHandler, new UserHandle(this.mUserId));
+        boolean zBindServiceAsUser = this.mContext.bindServiceAsUser(this.mIntent, this.mServiceConnection, i, this.mHandler, new UserHandle(this.mUserId));
         this.mBound = true;
-        if (bindServiceAsUser) {
+        if (zBindServiceAsUser) {
             return;
         }
         Slog.w(this.mTag, "could not bind to " + this.mIntent + " using flags " + i);
@@ -542,7 +542,7 @@ public abstract class AbstractRemoteService<S extends AbstractRemoteService<S, I
             Runnable runnable = new Runnable() { // from class: com.android.internal.infra.AbstractRemoteService$PendingRequest$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    AbstractRemoteService.PendingRequest.this.lambda$new$0(s);
+                    this.f$0.lambda$new$0(s);
                 }
             };
             this.mTimeoutTrigger = runnable;

@@ -55,9 +55,9 @@ public interface IServiceListExportSession extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.servicedb.IServiceListExportSession");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IServiceListExportSession)) {
-                return (IServiceListExportSession) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.servicedb.IServiceListExportSession");
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IServiceListExportSession)) {
+                return (IServiceListExportSession) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -90,13 +90,13 @@ public interface IServiceListExportSession extends IInterface {
                 ParcelFileDescriptor parcelFileDescriptor = (ParcelFileDescriptor) parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
                 Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                 parcel.enforceNoDataAvail();
-                int exportServiceList = exportServiceList(parcelFileDescriptor, bundle);
+                int iExportServiceList = exportServiceList(parcelFileDescriptor, bundle);
                 parcel2.writeNoException();
-                parcel2.writeInt(exportServiceList);
+                parcel2.writeInt(iExportServiceList);
             } else if (i == 2) {
-                int release = release();
+                int iRelease = release();
                 parcel2.writeNoException();
-                parcel2.writeInt(release);
+                parcel2.writeInt(iRelease);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -121,33 +121,33 @@ public interface IServiceListExportSession extends IInterface {
 
             @Override // android.media.tv.extension.servicedb.IServiceListExportSession
             public int exportServiceList(ParcelFileDescriptor parcelFileDescriptor, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListExportSession");
-                    obtain.writeTypedObject(parcelFileDescriptor, 0);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListExportSession");
+                    parcelObtain.writeTypedObject(parcelFileDescriptor, 0);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.servicedb.IServiceListExportSession
             public int release() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListExportSession");
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.servicedb.IServiceListExportSession");
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

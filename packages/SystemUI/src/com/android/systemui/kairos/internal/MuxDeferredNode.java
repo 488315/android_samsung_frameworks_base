@@ -12,7 +12,6 @@ import java.util.Map;
 import java.util.Objects;
 import kotlin.jvm.internal.Reflection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MuxDeferredNode extends MuxNode {
     public final String name;
@@ -69,11 +68,11 @@ public final class MuxDeferredNode extends MuxNode {
         String simpleName = Reflection.getOrCreateKotlinClass(MuxDeferredNode.class).getSimpleName();
         String hashString = UtilKt.getHashString(this);
         String str = this.name;
-        String m = str != null ? ContentInViewNode$Request$$ExternalSyntheticOutline0.m("[", str, "]") : null;
-        if (m == null) {
-            m = "";
+        String strM = str != null ? ContentInViewNode$Request$$ExternalSyntheticOutline0.m("[", str, "]") : null;
+        if (strM == null) {
+            strM = "";
         }
-        return simpleName + "@" + hashString + m;
+        return simpleName + "@" + hashString + strM;
     }
 
     @Override // com.android.systemui.kairos.internal.MuxNode
@@ -85,24 +84,24 @@ public final class MuxDeferredNode extends MuxNode {
         if (mutableMapK == null) {
             mutableMapK = null;
         }
-        boolean isEmpty = mutableMapK.isEmpty();
+        boolean zIsEmpty = mutableMapK.isEmpty();
         MutableMapK mutableMapK2 = this.upstreamData;
         if (mutableMapK2 == null) {
             mutableMapK2 = null;
         }
-        MapK readOnlyCopy = mutableMapK2.readOnlyCopy();
+        MapK onlyCopy = mutableMapK2.readOnlyCopy();
         MutableMapK mutableMapK3 = this.upstreamData;
         (mutableMapK3 != null ? mutableMapK3 : null).clear();
         if (this.name != null) {
             toString();
-            Objects.toString(readOnlyCopy);
+            Objects.toString(onlyCopy);
         }
-        boolean isDirty = this.depthTracker.isDirty();
-        if (!isEmpty || isDirty) {
-            if (isDirty) {
+        boolean zIsDirty = this.depthTracker.isDirty();
+        if (!zIsEmpty || zIsDirty) {
+            if (zIsDirty) {
                 this.depthTracker.applyChanges(evalScopeImpl.$$delegate_0.getScheduler(), this.downstreamSet, this);
             }
-            if (isEmpty) {
+            if (zIsEmpty) {
                 return;
             }
             if (this.name != null) {
@@ -111,7 +110,7 @@ public final class MuxDeferredNode extends MuxNode {
             TransactionCache transactionCache = this.transactionCache;
             transactionCache.getClass();
             transactionCache.epoch = evalScopeImpl.getEpoch();
-            evalScopeImpl.getTransactionStore().set(transactionCache.key, readOnlyCopy);
+            evalScopeImpl.getTransactionStore().set(transactionCache.key, onlyCopy);
             if (GraphKt.scheduleAll(this.downstreamSet, evalScopeImpl)) {
                 return;
             }

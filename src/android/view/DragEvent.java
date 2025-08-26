@@ -42,31 +42,31 @@ public class DragEvent implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public DragEvent createFromParcel(Parcel parcel) {
-            DragEvent obtain = DragEvent.obtain();
-            obtain.mAction = parcel.readInt();
-            obtain.mX = parcel.readFloat();
-            obtain.mY = parcel.readFloat();
-            obtain.mOffsetX = parcel.readFloat();
-            obtain.mOffsetY = parcel.readFloat();
-            obtain.mFlags = parcel.readInt();
-            obtain.mDragResult = parcel.readInt() != 0;
-            obtain.mIsEavesDropEvent = parcel.readBoolean();
-            obtain.mIsStickyEvent = parcel.readBoolean();
-            obtain.mDisplayId = parcel.readInt();
+            DragEvent dragEventObtain = DragEvent.obtain();
+            dragEventObtain.mAction = parcel.readInt();
+            dragEventObtain.mX = parcel.readFloat();
+            dragEventObtain.mY = parcel.readFloat();
+            dragEventObtain.mOffsetX = parcel.readFloat();
+            dragEventObtain.mOffsetY = parcel.readFloat();
+            dragEventObtain.mFlags = parcel.readInt();
+            dragEventObtain.mDragResult = parcel.readInt() != 0;
+            dragEventObtain.mIsEavesDropEvent = parcel.readBoolean();
+            dragEventObtain.mIsStickyEvent = parcel.readBoolean();
+            dragEventObtain.mDisplayId = parcel.readInt();
             if (parcel.readInt() != 0) {
-                obtain.mClipData = ClipData.CREATOR.createFromParcel(parcel);
+                dragEventObtain.mClipData = ClipData.CREATOR.createFromParcel(parcel);
             }
             if (parcel.readInt() != 0) {
-                obtain.mClipDescription = ClipDescription.CREATOR.createFromParcel(parcel);
+                dragEventObtain.mClipDescription = ClipDescription.CREATOR.createFromParcel(parcel);
             }
             if (parcel.readInt() != 0) {
-                obtain.mDragSurface = SurfaceControl.CREATOR.createFromParcel(parcel);
-                obtain.mDragSurface.setUnreleasedWarningCallSite("DragEvent");
+                dragEventObtain.mDragSurface = SurfaceControl.CREATOR.createFromParcel(parcel);
+                dragEventObtain.mDragSurface.setUnreleasedWarningCallSite("DragEvent");
             }
             if (parcel.readInt() != 0) {
-                obtain.mDragAndDropPermissions = IDragAndDropPermissions.Stub.asInterface(parcel.readStrongBinder());
+                dragEventObtain.mDragAndDropPermissions = IDragAndDropPermissions.Stub.asInterface(parcel.readStrongBinder());
             }
-            return obtain;
+            return dragEventObtain;
         }
 
         /* JADX WARN: Can't rename method to resolve collision */

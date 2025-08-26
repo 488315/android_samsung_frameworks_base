@@ -4,7 +4,6 @@ import android.view.View;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class KshView$$ExternalSyntheticLambda0 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -23,13 +22,13 @@ public final /* synthetic */ class KshView$$ExternalSyntheticLambda0 implements 
         switch (i) {
             case 0:
                 KshView kshView = (KshView) obj;
-                boolean canScrollHorizontally = kshView.mKshGroupRecyclerView.canScrollHorizontally(1);
-                boolean canScrollHorizontally2 = kshView.mKshGroupRecyclerView.canScrollHorizontally(-1);
+                boolean zCanScrollHorizontally = kshView.mKshGroupRecyclerView.canScrollHorizontally(1);
+                boolean zCanScrollHorizontally2 = kshView.mKshGroupRecyclerView.canScrollHorizontally(-1);
                 boolean z = kshView.mRightScrolled;
-                if (z && !canScrollHorizontally) {
+                if (z && !zCanScrollHorizontally) {
                     kshView.moveSelector(kshView.isRTL() ? 0 : kshView.mKshViewAdapter.mData.size() - 1);
                     break;
-                } else if (!z && !canScrollHorizontally2) {
+                } else if (!z && !zCanScrollHorizontally2) {
                     kshView.moveSelector(kshView.isRTL() ? kshView.mKshViewAdapter.mData.size() - 1 : 0);
                     break;
                 } else {
@@ -40,8 +39,8 @@ public final /* synthetic */ class KshView$$ExternalSyntheticLambda0 implements 
                         position = kshView.mLayoutManager.findLastCompletelyVisibleItemPosition();
                     } else {
                         LinearLayoutManager linearLayoutManager = kshView.mLayoutManager;
-                        View findOneVisibleChild = linearLayoutManager.findOneVisibleChild(0, linearLayoutManager.getChildCount(), true, false);
-                        position = findOneVisibleChild == null ? -1 : RecyclerView.LayoutManager.getPosition(findOneVisibleChild);
+                        View viewFindOneVisibleChild = linearLayoutManager.findOneVisibleChild(0, linearLayoutManager.getChildCount(), true, false);
+                        position = viewFindOneVisibleChild == null ? -1 : RecyclerView.LayoutManager.getPosition(viewFindOneVisibleChild);
                     }
                     if (kshView.mMaxColumn == 1) {
                         kshView.mPosition = kshView.mLayoutManager.findFirstVisibleItemPosition() + (kshView.mRightScrolled ? 1 : 0);

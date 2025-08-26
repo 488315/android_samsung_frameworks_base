@@ -3,7 +3,6 @@ package com.google.dexmaker.dx.rop.cst;
 import com.google.dexmaker.dx.rop.type.Type;
 import java.util.HashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class CstType extends TypedConstant {
     public static final HashMap interns = new HashMap(100);
@@ -42,13 +41,13 @@ public final class CstType extends TypedConstant {
 
     public static CstType intern(Type type) {
         CstType cstType;
-        HashMap hashMap = interns;
-        synchronized (hashMap) {
+        HashMap map = interns;
+        synchronized (map) {
             try {
-                cstType = (CstType) hashMap.get(type);
+                cstType = (CstType) map.get(type);
                 if (cstType == null) {
                     cstType = new CstType(type);
-                    hashMap.put(type, cstType);
+                    map.put(type, cstType);
                 }
             } catch (Throwable th) {
                 throw th;

@@ -12,7 +12,6 @@ import android.os.IBinder;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.RemoteException;
-import android.telephony.DomainSelectionService;
 import android.telephony.ims.ImsReasonInfo;
 import android.text.TextUtils;
 import android.util.Log;
@@ -387,7 +386,7 @@ public abstract class DomainSelectionService extends Service {
                 DomainSelectionService.this.executeMethodAsyncNoException(this.mExecutor, new Runnable() { // from class: android.telephony.DomainSelectionService$TransportSelectorCallbackWrapper$ITransportSelectorResultCallbackAdapter$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        DomainSelectionService.TransportSelectorCallbackWrapper.ITransportSelectorResultCallbackAdapter.this.lambda$onCompleted$0(wwanSelectorCallbackWrapper);
+                        this.f$0.lambda$onCompleted$0(wwanSelectorCallbackWrapper);
                     }
                 }, TransportSelectorCallbackWrapper.TAG, "onWwanSelectedAsync-Completed");
             }
@@ -427,7 +426,7 @@ public abstract class DomainSelectionService extends Service {
                 DomainSelectionService.this.executeMethodAsyncNoException(this.mExecutor, new Runnable() { // from class: android.telephony.DomainSelectionService$DomainSelectorWrapper$IDomainSelectorAdapter$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        DomainSelector.this.reselectDomain(selectionAttributes);
+                        domainSelector.reselectDomain(selectionAttributes);
                     }
                 }, DomainSelectorWrapper.TAG, "reselectDomain");
             }
@@ -441,7 +440,7 @@ public abstract class DomainSelectionService extends Service {
                 DomainSelectionService.this.executeMethodAsyncNoException(this.mExecutor, new Runnable() { // from class: android.telephony.DomainSelectionService$DomainSelectorWrapper$IDomainSelectorAdapter$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        DomainSelector.this.finishSelection();
+                        domainSelector.finishSelection();
                     }
                 }, DomainSelectorWrapper.TAG, "finishSelection");
             }
@@ -514,7 +513,7 @@ public abstract class DomainSelectionService extends Service {
                 DomainSelectionService.this.executeMethodAsyncNoException(this.mExecutor, new Runnable() { // from class: android.telephony.DomainSelectionService$WwanSelectorCallbackWrapper$IWwanSelectorResultCallbackAdapter$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        DomainSelectionService.WwanSelectorCallbackWrapper.IWwanSelectorResultCallbackAdapter.this.lambda$onComplete$0(emergencyRegistrationResult);
+                        this.f$0.lambda$onComplete$0(emergencyRegistrationResult);
                     }
                 }, WwanSelectorCallbackWrapper.TAG, "onScanComplete");
             }
@@ -536,7 +535,7 @@ public abstract class DomainSelectionService extends Service {
             DomainSelectionService.executeMethodAsync(DomainSelectionService.this.getCachedExecutor(), new Runnable() { // from class: android.telephony.DomainSelectionService$1$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    DomainSelectionService.AnonymousClass1.this.lambda$selectDomain$0(selectionAttributes, iTransportSelectorCallback);
+                    this.f$0.lambda$selectDomain$0(selectionAttributes, iTransportSelectorCallback);
                 }
             }, DomainSelectionService.LOG_TAG, "onDomainSelection");
         }
@@ -554,7 +553,7 @@ public abstract class DomainSelectionService extends Service {
             domainSelectionService.executeMethodAsyncNoException(domainSelectionService.getCachedExecutor(), new Runnable() { // from class: android.telephony.DomainSelectionService$1$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    DomainSelectionService.AnonymousClass1.this.lambda$updateServiceState$1(i, i2, serviceState);
+                    this.f$0.lambda$updateServiceState$1(i, i2, serviceState);
                 }
             }, DomainSelectionService.LOG_TAG, "onServiceStateUpdated");
         }
@@ -570,7 +569,7 @@ public abstract class DomainSelectionService extends Service {
             domainSelectionService.executeMethodAsyncNoException(domainSelectionService.getCachedExecutor(), new Runnable() { // from class: android.telephony.DomainSelectionService$1$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    DomainSelectionService.AnonymousClass1.this.lambda$updateBarringInfo$2(i, i2, barringInfo);
+                    this.f$0.lambda$updateBarringInfo$2(i, i2, barringInfo);
                 }
             }, DomainSelectionService.LOG_TAG, "onBarringInfoUpdated");
         }

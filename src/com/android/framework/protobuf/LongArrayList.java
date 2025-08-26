@@ -65,11 +65,11 @@ final class LongArrayList extends AbstractProtobufList<Long> implements Internal
 
     @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractList, java.util.Collection, java.util.List
     public int hashCode() {
-        int i = 1;
-        for (int i2 = 0; i2 < this.size; i2++) {
-            i = (i * 31) + Internal.hashLong(this.array[i2]);
+        int iHashLong = 1;
+        for (int i = 0; i < this.size; i++) {
+            iHashLong = (iHashLong * 31) + Internal.hashLong(this.array[i]);
         }
-        return i;
+        return iHashLong;
     }
 
     @Override // com.android.framework.protobuf.Internal.ProtobufList, com.android.framework.protobuf.Internal.BooleanList
@@ -97,10 +97,10 @@ final class LongArrayList extends AbstractProtobufList<Long> implements Internal
         if (!(obj instanceof Long)) {
             return -1;
         }
-        long longValue = ((Long) obj).longValue();
+        long jLongValue = ((Long) obj).longValue();
         int size = size();
         for (int i = 0; i < size; i++) {
-            if (this.array[i] == longValue) {
+            if (this.array[i] == jLongValue) {
                 return i;
             }
         }

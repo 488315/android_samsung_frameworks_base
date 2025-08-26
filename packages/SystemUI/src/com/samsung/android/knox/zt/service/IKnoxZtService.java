@@ -12,12 +12,10 @@ import com.samsung.android.knox.zt.service.IServiceCertProvisionListener;
 import com.samsung.android.knox.zt.service.IServiceMonitoringListener;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface IKnoxZtService extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.knox.zt.service.IKnoxZtService";
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements IKnoxZtService {
         @Override // com.samsung.android.knox.zt.service.IKnoxZtService
         public String ackSignal(long[] jArr) throws RemoteException {
@@ -125,7 +123,6 @@ public interface IKnoxZtService extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class _Parcel {
         public static <T> T readTypedObject(Parcel parcel, Parcelable.Creator<T> creator) {
             if (parcel.readInt() != 0) {
@@ -196,7 +193,6 @@ public interface IKnoxZtService extends IInterface {
 
     int stopTracing(int i, IServiceMonitoringListener iServiceMonitoringListener) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IKnoxZtService {
         public static final int TRANSACTION_ackSignal = 20;
         public static final int TRANSACTION_getAppIdStatus = 1;
@@ -219,7 +215,6 @@ public interface IKnoxZtService extends IInterface {
         public static final int TRANSACTION_stopMonitoringFiles = 11;
         public static final int TRANSACTION_stopTracing = 15;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements IKnoxZtService {
             public IBinder mRemote;
 
@@ -229,17 +224,17 @@ public interface IKnoxZtService extends IInterface {
 
             @Override // com.samsung.android.knox.zt.service.IKnoxZtService
             public String ackSignal(long[] jArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxZtService.DESCRIPTOR);
-                    obtain.writeLongArray(jArr);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IKnoxZtService.DESCRIPTOR);
+                    parcelObtain.writeLongArray(jArr);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -250,82 +245,82 @@ public interface IKnoxZtService extends IInterface {
 
             @Override // com.samsung.android.knox.zt.service.IKnoxZtService
             public int getAppIdStatus(ParcelableCertificate parcelableCertificate, String[] strArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxZtService.DESCRIPTOR);
-                    _Parcel.writeTypedObject(obtain, parcelableCertificate, 0);
-                    obtain.writeStringArray(strArr);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IKnoxZtService.DESCRIPTOR);
+                    _Parcel.writeTypedObject(parcelObtain, parcelableCertificate, 0);
+                    parcelObtain.writeStringArray(strArr);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.service.IKnoxZtService
             public byte[] getChallenge(ParcelableCertificate parcelableCertificate) throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxZtService.DESCRIPTOR);
-                    _Parcel.writeTypedObject(obtain, parcelableCertificate, 0);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(IKnoxZtService.DESCRIPTOR);
+                    _Parcel.writeTypedObject(parcelObtain, parcelableCertificate, 0);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.service.IKnoxZtService
             public String getDeviceId(ParcelableCertificate parcelableCertificate) throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxZtService.DESCRIPTOR);
-                    _Parcel.writeTypedObject(obtain, parcelableCertificate, 0);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IKnoxZtService.DESCRIPTOR);
+                    _Parcel.writeTypedObject(parcelObtain, parcelableCertificate, 0);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.service.IKnoxZtService
             public int getDeviceIdStatus(ParcelableCertificate parcelableCertificate) throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxZtService.DESCRIPTOR);
-                    _Parcel.writeTypedObject(obtain, parcelableCertificate, 0);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IKnoxZtService.DESCRIPTOR);
+                    _Parcel.writeTypedObject(parcelObtain, parcelableCertificate, 0);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.service.IKnoxZtService
             public int getIntegrityStatus(ParcelableCertificate parcelableCertificate) throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxZtService.DESCRIPTOR);
-                    _Parcel.writeTypedObject(obtain, parcelableCertificate, 0);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IKnoxZtService.DESCRIPTOR);
+                    _Parcel.writeTypedObject(parcelObtain, parcelableCertificate, 0);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -335,231 +330,231 @@ public interface IKnoxZtService extends IInterface {
 
             @Override // com.samsung.android.knox.zt.service.IKnoxZtService
             public String getMonitoringSnapshot(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxZtService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IKnoxZtService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.service.IKnoxZtService
             public int getOrigin(ParcelableCertificate parcelableCertificate) throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxZtService.DESCRIPTOR);
-                    _Parcel.writeTypedObject(obtain, parcelableCertificate, 0);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IKnoxZtService.DESCRIPTOR);
+                    _Parcel.writeTypedObject(parcelObtain, parcelableCertificate, 0);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.service.IKnoxZtService
             public int getRootOfTrustStatus(ParcelableCertificate parcelableCertificate) throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxZtService.DESCRIPTOR);
-                    _Parcel.writeTypedObject(obtain, parcelableCertificate, 0);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IKnoxZtService.DESCRIPTOR);
+                    _Parcel.writeTypedObject(parcelObtain, parcelableCertificate, 0);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.service.IKnoxZtService
             public int getSecurityLevel(ParcelableCertificate parcelableCertificate) throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxZtService.DESCRIPTOR);
-                    _Parcel.writeTypedObject(obtain, parcelableCertificate, 0);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IKnoxZtService.DESCRIPTOR);
+                    _Parcel.writeTypedObject(parcelObtain, parcelableCertificate, 0);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.service.IKnoxZtService
             public String getVersion() throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxZtService.DESCRIPTOR);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IKnoxZtService.DESCRIPTOR);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.service.IKnoxZtService
             public int provisionCert(ParcelableProfile parcelableProfile, IServiceCertProvisionListener iServiceCertProvisionListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxZtService.DESCRIPTOR);
-                    _Parcel.writeTypedObject(obtain, parcelableProfile, 0);
-                    obtain.writeStrongInterface(iServiceCertProvisionListener);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IKnoxZtService.DESCRIPTOR);
+                    _Parcel.writeTypedObject(parcelObtain, parcelableProfile, 0);
+                    parcelObtain.writeStrongInterface(iServiceCertProvisionListener);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.service.IKnoxZtService
             public int queryAllSignals(IChunkedAidlInterface iChunkedAidlInterface) throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxZtService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iChunkedAidlInterface);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IKnoxZtService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iChunkedAidlInterface);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.service.IKnoxZtService
             public int querySignals(String str, IChunkedAidlInterface iChunkedAidlInterface) throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxZtService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iChunkedAidlInterface);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IKnoxZtService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iChunkedAidlInterface);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.service.IKnoxZtService
             public int startMonitoringDomains(List<String> list, List<String> list2, IServiceMonitoringListener iServiceMonitoringListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxZtService.DESCRIPTOR);
-                    obtain.writeStringList(list);
-                    obtain.writeStringList(list2);
-                    obtain.writeStrongInterface(iServiceMonitoringListener);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IKnoxZtService.DESCRIPTOR);
+                    parcelObtain.writeStringList(list);
+                    parcelObtain.writeStringList(list2);
+                    parcelObtain.writeStrongInterface(iServiceMonitoringListener);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.service.IKnoxZtService
             public int startMonitoringFiles(List<String> list, List<Bundle> list2, IServiceMonitoringListener iServiceMonitoringListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxZtService.DESCRIPTOR);
-                    obtain.writeStringList(list);
-                    _Parcel.writeTypedList(obtain, list2, 0);
-                    obtain.writeStrongInterface(iServiceMonitoringListener);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IKnoxZtService.DESCRIPTOR);
+                    parcelObtain.writeStringList(list);
+                    _Parcel.writeTypedList(parcelObtain, list2, 0);
+                    parcelObtain.writeStrongInterface(iServiceMonitoringListener);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.service.IKnoxZtService
             public int startTracing(int i, Bundle bundle, IServiceMonitoringListener iServiceMonitoringListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxZtService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    _Parcel.writeTypedObject(obtain, bundle, 0);
-                    obtain.writeStrongInterface(iServiceMonitoringListener);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IKnoxZtService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    _Parcel.writeTypedObject(parcelObtain, bundle, 0);
+                    parcelObtain.writeStrongInterface(iServiceMonitoringListener);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.service.IKnoxZtService
             public int stopMonitoringDomains() throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxZtService.DESCRIPTOR);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IKnoxZtService.DESCRIPTOR);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.service.IKnoxZtService
             public int stopMonitoringFiles() throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxZtService.DESCRIPTOR);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IKnoxZtService.DESCRIPTOR);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.service.IKnoxZtService
             public int stopTracing(int i, IServiceMonitoringListener iServiceMonitoringListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKnoxZtService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iServiceMonitoringListener);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IKnoxZtService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iServiceMonitoringListener);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -572,8 +567,8 @@ public interface IKnoxZtService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IKnoxZtService.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IKnoxZtService)) ? new Proxy(iBinder) : (IKnoxZtService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IKnoxZtService.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IKnoxZtService)) ? new Proxy(iBinder) : (IKnoxZtService) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder
@@ -627,49 +622,49 @@ public interface IKnoxZtService extends IInterface {
                     parcel2.writeInt(securityLevel);
                     return true;
                 case 9:
-                    int provisionCert = provisionCert((ParcelableProfile) _Parcel.readTypedObject(parcel, ParcelableProfile.CREATOR), IServiceCertProvisionListener.Stub.asInterface(parcel.readStrongBinder()));
+                    int iProvisionCert = provisionCert((ParcelableProfile) _Parcel.readTypedObject(parcel, ParcelableProfile.CREATOR), IServiceCertProvisionListener.Stub.asInterface(parcel.readStrongBinder()));
                     parcel2.writeNoException();
-                    parcel2.writeInt(provisionCert);
+                    parcel2.writeInt(iProvisionCert);
                     return true;
                 case 10:
-                    int startMonitoringFiles = startMonitoringFiles(parcel.createStringArrayList(), parcel.createTypedArrayList(Bundle.CREATOR), IServiceMonitoringListener.Stub.asInterface(parcel.readStrongBinder()));
+                    int iStartMonitoringFiles = startMonitoringFiles(parcel.createStringArrayList(), parcel.createTypedArrayList(Bundle.CREATOR), IServiceMonitoringListener.Stub.asInterface(parcel.readStrongBinder()));
                     parcel2.writeNoException();
-                    parcel2.writeInt(startMonitoringFiles);
+                    parcel2.writeInt(iStartMonitoringFiles);
                     return true;
                 case 11:
-                    int stopMonitoringFiles = stopMonitoringFiles();
+                    int iStopMonitoringFiles = stopMonitoringFiles();
                     parcel2.writeNoException();
-                    parcel2.writeInt(stopMonitoringFiles);
+                    parcel2.writeInt(iStopMonitoringFiles);
                     return true;
                 case 12:
-                    int startMonitoringDomains = startMonitoringDomains(parcel.createStringArrayList(), parcel.createStringArrayList(), IServiceMonitoringListener.Stub.asInterface(parcel.readStrongBinder()));
+                    int iStartMonitoringDomains = startMonitoringDomains(parcel.createStringArrayList(), parcel.createStringArrayList(), IServiceMonitoringListener.Stub.asInterface(parcel.readStrongBinder()));
                     parcel2.writeNoException();
-                    parcel2.writeInt(startMonitoringDomains);
+                    parcel2.writeInt(iStartMonitoringDomains);
                     return true;
                 case 13:
-                    int stopMonitoringDomains = stopMonitoringDomains();
+                    int iStopMonitoringDomains = stopMonitoringDomains();
                     parcel2.writeNoException();
-                    parcel2.writeInt(stopMonitoringDomains);
+                    parcel2.writeInt(iStopMonitoringDomains);
                     return true;
                 case 14:
-                    int startTracing = startTracing(parcel.readInt(), (Bundle) _Parcel.readTypedObject(parcel, Bundle.CREATOR), IServiceMonitoringListener.Stub.asInterface(parcel.readStrongBinder()));
+                    int iStartTracing = startTracing(parcel.readInt(), (Bundle) _Parcel.readTypedObject(parcel, Bundle.CREATOR), IServiceMonitoringListener.Stub.asInterface(parcel.readStrongBinder()));
                     parcel2.writeNoException();
-                    parcel2.writeInt(startTracing);
+                    parcel2.writeInt(iStartTracing);
                     return true;
                 case 15:
-                    int stopTracing = stopTracing(parcel.readInt(), IServiceMonitoringListener.Stub.asInterface(parcel.readStrongBinder()));
+                    int iStopTracing = stopTracing(parcel.readInt(), IServiceMonitoringListener.Stub.asInterface(parcel.readStrongBinder()));
                     parcel2.writeNoException();
-                    parcel2.writeInt(stopTracing);
+                    parcel2.writeInt(iStopTracing);
                     return true;
                 case 16:
-                    int queryAllSignals = queryAllSignals(IChunkedAidlInterface.Stub.asInterface(parcel.readStrongBinder()));
+                    int iQueryAllSignals = queryAllSignals(IChunkedAidlInterface.Stub.asInterface(parcel.readStrongBinder()));
                     parcel2.writeNoException();
-                    parcel2.writeInt(queryAllSignals);
+                    parcel2.writeInt(iQueryAllSignals);
                     return true;
                 case 17:
-                    int querySignals = querySignals(parcel.readString(), IChunkedAidlInterface.Stub.asInterface(parcel.readStrongBinder()));
+                    int iQuerySignals = querySignals(parcel.readString(), IChunkedAidlInterface.Stub.asInterface(parcel.readStrongBinder()));
                     parcel2.writeNoException();
-                    parcel2.writeInt(querySignals);
+                    parcel2.writeInt(iQuerySignals);
                     return true;
                 case 18:
                     String monitoringSnapshot = getMonitoringSnapshot(parcel.readInt());
@@ -682,9 +677,9 @@ public interface IKnoxZtService extends IInterface {
                     parcel2.writeString(version);
                     return true;
                 case 20:
-                    String ackSignal = ackSignal(parcel.createLongArray());
+                    String strAckSignal = ackSignal(parcel.createLongArray());
                     parcel2.writeNoException();
-                    parcel2.writeString(ackSignal);
+                    parcel2.writeString(strAckSignal);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);

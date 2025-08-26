@@ -52,7 +52,7 @@ public final class UiccAccessRule implements Parcelable {
         return 0;
     }
 
-    public static byte[] encodeRules(UiccAccessRule[] uiccAccessRuleArr) {
+    public static byte[] encodeRules(UiccAccessRule[] uiccAccessRuleArr) throws IOException {
         if (uiccAccessRuleArr == null) {
             return null;
         }
@@ -85,13 +85,13 @@ public final class UiccAccessRule implements Parcelable {
         }
         ArrayList arrayList = new ArrayList();
         for (String str : strArr) {
-            String[] split = str.split(":");
-            byte[] hexStringToBytes = IccUtils.hexStringToBytes(split[0]);
-            if (split.length == 1) {
-                arrayList.add(new UiccAccessRule(hexStringToBytes, null, 0L));
+            String[] strArrSplit = str.split(":");
+            byte[] bArrHexStringToBytes = IccUtils.hexStringToBytes(strArrSplit[0]);
+            if (strArrSplit.length == 1) {
+                arrayList.add(new UiccAccessRule(bArrHexStringToBytes, null, 0L));
             } else {
-                for (String str2 : split[1].split(",")) {
-                    arrayList.add(new UiccAccessRule(hexStringToBytes, str2, 0L));
+                for (String str2 : strArrSplit[1].split(",")) {
+                    arrayList.add(new UiccAccessRule(bArrHexStringToBytes, str2, 0L));
                 }
             }
         }
@@ -106,12 +106,12 @@ public final class UiccAccessRule implements Parcelable {
             DataInputStream dataInputStream = new DataInputStream(new ByteArrayInputStream(bArr));
             try {
                 dataInputStream.readInt();
-                int readInt = dataInputStream.readInt();
-                UiccAccessRule[] uiccAccessRuleArr = new UiccAccessRule[readInt];
-                for (int i = 0; i < readInt; i++) {
+                int i = dataInputStream.readInt();
+                UiccAccessRule[] uiccAccessRuleArr = new UiccAccessRule[i];
+                for (int i2 = 0; i2 < i; i2++) {
                     byte[] bArr2 = new byte[dataInputStream.readInt()];
                     dataInputStream.readFully(bArr2);
-                    uiccAccessRuleArr[i] = new UiccAccessRule(bArr2, dataInputStream.readBoolean() ? dataInputStream.readUTF() : null, dataInputStream.readLong());
+                    uiccAccessRuleArr[i2] = new UiccAccessRule(bArr2, dataInputStream.readBoolean() ? dataInputStream.readUTF() : null, dataInputStream.readLong());
                 }
                 dataInputStream.close();
                 dataInputStream.close();
@@ -131,9 +131,9 @@ public final class UiccAccessRule implements Parcelable {
     }
 
     UiccAccessRule(Parcel parcel) {
-        byte[] createByteArray = parcel.createByteArray();
-        this.mCertificateHash = createByteArray;
-        this.mCertificateHashHashCode = getCertificateHashHashCode(createByteArray);
+        byte[] bArrCreateByteArray = parcel.createByteArray();
+        this.mCertificateHash = bArrCreateByteArray;
+        this.mCertificateHashHashCode = getCertificateHashHashCode(bArrCreateByteArray);
         this.mPackageName = parcel.readString();
         this.mAccessType = parcel.readLong();
     }
@@ -219,15 +219,15 @@ public final class UiccAccessRule implements Parcelable {
     }
 
     public static List<Signature> getSignatures(PackageInfo packageInfo) {
-        Signature[] signatureArr = packageInfo.signatures;
+        Signature[] signingCertificateHistory = packageInfo.signatures;
         SigningInfo signingInfo = packageInfo.signingInfo;
         if (signingInfo != null) {
-            signatureArr = signingInfo.getSigningCertificateHistory();
+            signingCertificateHistory = signingInfo.getSigningCertificateHistory();
             if (signingInfo.hasMultipleSigners()) {
-                signatureArr = signingInfo.getApkContentsSigners();
+                signingCertificateHistory = signingInfo.getApkContentsSigners();
             }
         }
-        return signatureArr == null ? Collections.EMPTY_LIST : Arrays.asList(signatureArr);
+        return signingCertificateHistory == null ? Collections.EMPTY_LIST : Arrays.asList(signingCertificateHistory);
     }
 
     public static byte[] getCertHash(Signature signature, String str) {

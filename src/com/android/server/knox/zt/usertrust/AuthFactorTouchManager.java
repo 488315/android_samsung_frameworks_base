@@ -65,9 +65,9 @@ public class AuthFactorTouchManager {
     }
 
     public void onPointerEvent(MotionEvent motionEvent) {
-        for (int beginBroadcast = this.mAuthTouchEventListener.beginBroadcast() - 1; beginBroadcast >= 0; beginBroadcast--) {
+        for (int iBeginBroadcast = this.mAuthTouchEventListener.beginBroadcast() - 1; iBeginBroadcast >= 0; iBeginBroadcast--) {
             try {
-                this.mAuthTouchEventListener.getBroadcastItem(beginBroadcast).onPointerEvent(motionEvent);
+                ((IAuthTouchEventListener) this.mAuthTouchEventListener.getBroadcastItem(iBeginBroadcast)).onPointerEvent(motionEvent);
             } catch (RemoteException e) {
                 Log.e(TAG, "Failed to notify AuthTouchEventListener", e);
             }

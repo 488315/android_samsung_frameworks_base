@@ -41,13 +41,13 @@ public class CameraDeviceSetupImpl extends CameraDevice.CameraDeviceSetup {
             }
             try {
                 try {
-                    CameraMetadataNative createDefaultRequest = cameraService.createDefaultRequest(this.mCameraId, i, this.mCameraManager.getClientAttribution(), this.mCameraManager.getDevicePolicyFromContext(this.mContext));
-                    CameraDeviceImpl.disableZslIfNeeded(createDefaultRequest, this.mTargetSdkVersion, i);
-                    builder = new CaptureRequest.Builder(createDefaultRequest, false, -1, this.mCameraId, null);
-                } catch (ServiceSpecificException e) {
+                    CameraMetadataNative cameraMetadataNativeCreateDefaultRequest = cameraService.createDefaultRequest(this.mCameraId, i, this.mCameraManager.getClientAttribution(), this.mCameraManager.getDevicePolicyFromContext(this.mContext));
+                    CameraDeviceImpl.disableZslIfNeeded(cameraMetadataNativeCreateDefaultRequest, this.mTargetSdkVersion, i);
+                    builder = new CaptureRequest.Builder(cameraMetadataNativeCreateDefaultRequest, false, -1, this.mCameraId, null);
+                } catch (RemoteException e) {
                     throw ExceptionUtils.throwAsPublicException(e);
                 }
-            } catch (RemoteException e2) {
+            } catch (ServiceSpecificException e2) {
                 throw ExceptionUtils.throwAsPublicException(e2);
             }
         }
@@ -56,7 +56,7 @@ public class CameraDeviceSetupImpl extends CameraDevice.CameraDeviceSetup {
 
     @Override // android.hardware.camera2.CameraDevice.CameraDeviceSetup
     public boolean isSessionConfigurationSupported(SessionConfiguration sessionConfiguration) throws CameraAccessException {
-        boolean isSessionConfigurationWithParametersSupported;
+        boolean zIsSessionConfigurationWithParametersSupported;
         synchronized (this.mInterfaceLock) {
             if (this.mCameraManager.isCameraServiceDisabled()) {
                 throw new IllegalArgumentException("No cameras available on device");
@@ -66,19 +66,19 @@ public class CameraDeviceSetupImpl extends CameraDevice.CameraDeviceSetup {
                 throw new CameraAccessException(2, "Camera service is currently unavailable.");
             }
             try {
-                isSessionConfigurationWithParametersSupported = cameraService.isSessionConfigurationWithParametersSupported(this.mCameraId, this.mTargetSdkVersion, sessionConfiguration, this.mCameraManager.getClientAttribution(), this.mCameraManager.getDevicePolicyFromContext(this.mContext));
+                zIsSessionConfigurationWithParametersSupported = cameraService.isSessionConfigurationWithParametersSupported(this.mCameraId, this.mTargetSdkVersion, sessionConfiguration, this.mCameraManager.getClientAttribution(), this.mCameraManager.getDevicePolicyFromContext(this.mContext));
             } catch (RemoteException e) {
                 throw ExceptionUtils.throwAsPublicException(e);
             } catch (ServiceSpecificException e2) {
                 throw ExceptionUtils.throwAsPublicException(e2);
             }
         }
-        return isSessionConfigurationWithParametersSupported;
+        return zIsSessionConfigurationWithParametersSupported;
     }
 
     @Override // android.hardware.camera2.CameraDevice.CameraDeviceSetup
     public CameraCharacteristics getSessionCharacteristics(SessionConfiguration sessionConfiguration) throws CameraAccessException {
-        CameraCharacteristics prepareCameraCharacteristics;
+        CameraCharacteristics cameraCharacteristicsPrepareCameraCharacteristics;
         synchronized (this.mInterfaceLock) {
             if (this.mCameraManager.isCameraServiceDisabled()) {
                 throw new CameraAccessException(2, "Camera service is currently disabled");
@@ -89,22 +89,22 @@ public class CameraDeviceSetupImpl extends CameraDevice.CameraDeviceSetup {
             }
             try {
                 try {
-                    prepareCameraCharacteristics = this.mCameraManager.prepareCameraCharacteristics(this.mCameraId, cameraService.getSessionCharacteristics(this.mCameraId, this.mTargetSdkVersion, CameraManager.getRotationOverride(this.mContext), sessionConfiguration, this.mCameraManager.getClientAttribution(), this.mCameraManager.getDevicePolicyFromContext(this.mContext)), cameraService);
-                } catch (RemoteException e) {
+                    cameraCharacteristicsPrepareCameraCharacteristics = this.mCameraManager.prepareCameraCharacteristics(this.mCameraId, cameraService.getSessionCharacteristics(this.mCameraId, this.mTargetSdkVersion, CameraManager.getRotationOverride(this.mContext), sessionConfiguration, this.mCameraManager.getClientAttribution(), this.mCameraManager.getDevicePolicyFromContext(this.mContext)), cameraService);
+                } catch (ServiceSpecificException e) {
+                    int i = e.errorCode;
+                    if (i == 3) {
+                        throw new IllegalArgumentException("Invalid Session Configuration");
+                    }
+                    if (i == 10) {
+                        throw new UnsupportedOperationException("Session Characteristics Query not supported by device.");
+                    }
                     throw ExceptionUtils.throwAsPublicException(e);
                 }
-            } catch (ServiceSpecificException e2) {
-                int i = e2.errorCode;
-                if (i == 3) {
-                    throw new IllegalArgumentException("Invalid Session Configuration");
-                }
-                if (i == 10) {
-                    throw new UnsupportedOperationException("Session Characteristics Query not supported by device.");
-                }
+            } catch (RemoteException e2) {
                 throw ExceptionUtils.throwAsPublicException(e2);
             }
         }
-        return prepareCameraCharacteristics;
+        return cameraCharacteristicsPrepareCameraCharacteristics;
     }
 
     @Override // android.hardware.camera2.CameraDevice.CameraDeviceSetup

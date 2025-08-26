@@ -3,7 +3,6 @@ package com.android.systemui.statusbar.commandline;
 import android.graphics.Color;
 import kotlin.Result;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class ValueParserKt {
     public static final ValueParserKt$parseColor$1 parseColor = null;
@@ -16,7 +15,7 @@ public abstract class ValueParserKt {
         ValueParserKt$parseColor$1 valueParserKt$parseColor$1 = new ValueParser() { // from class: com.android.systemui.statusbar.commandline.ValueParserKt$parseColor$1
             @Override // com.android.systemui.statusbar.commandline.ValueParser
             /* renamed from: parseValue-IoAF18A */
-            public final Object mo2548parseValueIoAF18A(String str) {
+            public final Object mo2565parseValueIoAF18A(String str) {
                 try {
                     int i = Result.$r8$clinit;
                     return Integer.valueOf(Color.parseColor(str));

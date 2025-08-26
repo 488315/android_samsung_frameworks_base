@@ -12,7 +12,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class StatusBarStateControllerExtKt$expansionChanges$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ StatusBarStateController $this_expansionChanges;
@@ -49,16 +48,16 @@ final class StatusBarStateControllerExtKt$expansionChanges$1 extends SuspendLamb
             final ?? r1 = new StatusBarStateController.StateListener() { // from class: com.android.systemui.statusbar.StatusBarStateControllerExtKt$expansionChanges$1$listener$1
                 @Override // com.android.systemui.plugins.statusbar.StatusBarStateController.StateListener
                 public final void onExpandedChanged(boolean z) {
-                    ((ChannelCoroutine) ProducerScope.this).mo3456trySendJP2dKIU(Boolean.valueOf(z));
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(z));
                 }
             };
-            ((ChannelCoroutine) producerScope).mo3456trySendJP2dKIU(Boolean.valueOf(this.$this_expansionChanges.isExpanded()));
+            ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(this.$this_expansionChanges.isExpanded()));
             this.$this_expansionChanges.addCallback(r1);
             final StatusBarStateController statusBarStateController = this.$this_expansionChanges;
             Function0 function0 = new Function0() { // from class: com.android.systemui.statusbar.StatusBarStateControllerExtKt$expansionChanges$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    StatusBarStateController.this.removeCallback(r1);
+                    statusBarStateController.removeCallback(r1);
                     return Unit.INSTANCE;
                 }
             };

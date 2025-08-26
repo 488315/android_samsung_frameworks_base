@@ -23,7 +23,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class NoLabelTileView extends QSTileView implements LaunchableView {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -32,7 +31,6 @@ public final class NoLabelTileView extends QSTileView implements LaunchableView 
     public final QSIconViewImpl iconView;
     public final LaunchableViewDelegate launchableViewDelegate;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -53,10 +51,10 @@ public final class NoLabelTileView extends QSTileView implements LaunchableView 
         this.launchableViewDelegate = new LaunchableViewDelegate(this, new Function1() { // from class: com.android.systemui.qs.tileimpl.NoLabelTileView$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                int intValue = ((Integer) obj).intValue();
+            public final Object mo781invoke(Object obj) {
+                int iIntValue = ((Integer) obj).intValue();
                 int i = NoLabelTileView.$r8$clinit;
-                NoLabelTileView.this.setVisibility(intValue);
+                this.f$0.setVisibility(iIntValue);
                 return Unit.INSTANCE;
             }
         });
@@ -94,16 +92,16 @@ public final class NoLabelTileView extends QSTileView implements LaunchableView 
         final Expandable$Companion$fromView$1 expandable$Companion$fromView$1 = new Expandable$Companion$fromView$1(this);
         this.commonTileView.tileSpec = qSTile.getTileSpec();
         this.iconFrame.setBackground(null);
-        setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qs.tileimpl.NoLabelTileView$init$1
+        setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qs.tileimpl.NoLabelTileView.init.1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                QSTile.this.click(expandable$Companion$fromView$1);
+                qSTile.click(expandable$Companion$fromView$1);
             }
         });
-        setOnLongClickListener(new View.OnLongClickListener() { // from class: com.android.systemui.qs.tileimpl.NoLabelTileView$init$2
+        setOnLongClickListener(new View.OnLongClickListener() { // from class: com.android.systemui.qs.tileimpl.NoLabelTileView.init.2
             @Override // android.view.View.OnLongClickListener
             public final boolean onLongClick(View view) {
-                QSTile.this.longClick(expandable$Companion$fromView$1);
+                qSTile.longClick(expandable$Companion$fromView$1);
                 this.setPressed(false);
                 return true;
             }
@@ -141,7 +139,7 @@ public final class NoLabelTileView extends QSTileView implements LaunchableView 
 
     @Override // com.android.systemui.plugins.qs.QSTileView
     public final void onStateChanged(final QSTile.State state) {
-        new Handler(Looper.getMainLooper()).post(new Runnable() { // from class: com.android.systemui.qs.tileimpl.NoLabelTileView$onStateChanged$1
+        new Handler(Looper.getMainLooper()).post(new Runnable() { // from class: com.android.systemui.qs.tileimpl.NoLabelTileView.onStateChanged.1
             @Override // java.lang.Runnable
             public final void run() {
                 SecQSCommonTileView secQSCommonTileView = NoLabelTileView.this.commonTileView;

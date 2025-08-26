@@ -16,7 +16,6 @@ import java.util.List;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class CacheWindowListPrefetchStrategy implements LazyListPrefetchStrategy {
     public final MutableIntSet indicesToRemove;
@@ -69,10 +68,10 @@ public final class CacheWindowListPrefetchStrategy implements LazyListPrefetchSt
     @Override // androidx.compose.foundation.lazy.LazyListPrefetchStrategy
     public final void onVisibleItemsUpdated(LazyListState$prefetchScope$1 lazyListState$prefetchScope$1, LazyListMeasureResult lazyListMeasureResult) {
         int i = lazyListMeasureResult.totalItemsCount;
-        boolean isEmpty = lazyListMeasureResult.visibleItemsInfo.isEmpty();
+        boolean zIsEmpty = lazyListMeasureResult.visibleItemsInfo.isEmpty();
         MutableIntObjectMap mutableIntObjectMap = this.prefetchWindowHandles;
         MutableIntIntMap mutableIntIntMap = this.windowCache;
-        if (!isEmpty) {
+        if (!zIsEmpty) {
             List list = lazyListMeasureResult.visibleItemsInfo;
             int size = list.size();
             for (int i2 = 0; i2 < size; i2++) {

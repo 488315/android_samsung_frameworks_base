@@ -3,6 +3,7 @@ package com.android.keyguard;
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.Property;
@@ -28,7 +29,6 @@ import com.android.systemui.vibrate.VibrationUtil;
 import com.android.systemui.wallpaper.WallpaperUtils;
 import com.android.systemui.widget.SystemUIImageView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SecLockIconView extends FrameLayout {
     public ObjectAnimator mAnimTranslationX;
@@ -87,9 +87,9 @@ public class SecLockIconView extends FrameLayout {
             this.mlockIcon.setTranslationX(0.0f);
             return;
         }
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this.mlockIcon, (Property<View, Float>) View.TRANSLATION_X, 0.0f);
-        this.mAnimTranslationX = ofFloat;
-        KeyguardSecPatternViewController$$ExternalSyntheticOutline0.m(0.4f, 0.5f, 0.0f, 1.0f, ofFloat);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this.mlockIcon, (Property<View, Float>) View.TRANSLATION_X, 0.0f);
+        this.mAnimTranslationX = objectAnimatorOfFloat;
+        KeyguardSecPatternViewController$$ExternalSyntheticOutline0.m(0.4f, 0.5f, 0.0f, 1.0f, objectAnimatorOfFloat);
         this.mAnimTranslationX.setDuration(400L);
         this.mAnimTranslationX.addListener(new Animator.AnimatorListener(this) { // from class: com.android.keyguard.SecLockIconView.1
             public boolean mIsCancelled = false;
@@ -156,9 +156,9 @@ public class SecLockIconView extends FrameLayout {
         if (x > displayWidth) {
             x = displayWidth;
         }
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this.mlockIcon, (Property<View, Float>) View.TRANSLATION_X, x * (-1));
-        this.mAnimTranslationX = ofFloat;
-        KeyguardSecPatternViewController$$ExternalSyntheticOutline0.m(0.4f, 0.5f, 0.0f, 1.0f, ofFloat);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this.mlockIcon, (Property<View, Float>) View.TRANSLATION_X, x * (-1));
+        this.mAnimTranslationX = objectAnimatorOfFloat;
+        KeyguardSecPatternViewController$$ExternalSyntheticOutline0.m(0.4f, 0.5f, 0.0f, 1.0f, objectAnimatorOfFloat);
         this.mAnimTranslationX.setDuration(400L);
         this.mAnimTranslationX.start();
         SpringForce springForce = new SpringForce(1.0f);
@@ -179,9 +179,9 @@ public class SecLockIconView extends FrameLayout {
             }
             return;
         }
-        boolean isWhiteKeyguardWallpaper = WallpaperUtils.isWhiteKeyguardWallpaper(BriefViewController.SUGGESTION_BACKGROUND_KEY);
+        boolean zIsWhiteKeyguardWallpaper = WallpaperUtils.isWhiteKeyguardWallpaper(BriefViewController.SUGGESTION_BACKGROUND_KEY);
         this.mLottieIcon.setAnimation("unlock_fail_icon.json");
-        this.mLottieIcon.addValueCallback(new KeyPath("**"), (KeyPath) LottieProperty.COLOR_FILTER, new LottieValueCallback(new SimpleColorFilter(getResources().getColor(isWhiteKeyguardWallpaper ? R.color.biometric_toast_text_color : R.color.origin_keyguard_message_area_text_color, null))));
+        this.mLottieIcon.addValueCallback(new KeyPath("**"), (KeyPath) LottieProperty.COLOR_FILTER, new LottieValueCallback(new SimpleColorFilter(getResources().getColor(zIsWhiteKeyguardWallpaper ? R.color.biometric_toast_text_color : R.color.origin_keyguard_message_area_text_color, null))));
         this.mLottieIcon.playAnimation();
         if (vibrationUtil != null) {
             vibrationUtil.playVibration(114);
@@ -189,24 +189,24 @@ public class SecLockIconView extends FrameLayout {
         this.mLottieIcon = null;
     }
 
-    public final void updateLockIconViewLayoutParams(int i) {
+    public final void updateLockIconViewLayoutParams(int i) throws Resources.NotFoundException {
         FrameLayout.LayoutParams layoutParams;
         int dimensionPixelSize;
-        int i2;
+        int dimensionPixelSize2;
         SystemUIImageView systemUIImageView = this.mSecLockIcon;
         if (systemUIImageView == null || (layoutParams = (FrameLayout.LayoutParams) systemUIImageView.getLayoutParams()) == null) {
             return;
         }
         if (!this.mKeyguardUpdateMonitor.getUserHasTrust(i) || this.mKeyguardUpdateMonitor.isForcedLock()) {
             dimensionPixelSize = getResources().getDimensionPixelSize((DeviceType.isTablet() || this.mKeyguardUpdateMonitor.isDualDisplayPolicyAllowed()) ? R.dimen.kg_biometric_view_height : R.dimen.kg_biometric_view_min_height);
-            i2 = 0;
+            dimensionPixelSize2 = 0;
         } else {
             dimensionPixelSize = getResources().getDimensionPixelSize(R.dimen.kg_extend_lock_view_height);
-            i2 = getResources().getDimensionPixelSize(R.dimen.kg_extend_lock_view_padding);
+            dimensionPixelSize2 = getResources().getDimensionPixelSize(R.dimen.kg_extend_lock_view_padding);
         }
         layoutParams.width = dimensionPixelSize;
         layoutParams.height = dimensionPixelSize;
-        this.mSecLockIcon.setPadding(i2, i2, i2, i2);
+        this.mSecLockIcon.setPadding(dimensionPixelSize2, dimensionPixelSize2, dimensionPixelSize2, dimensionPixelSize2);
         this.mSecLockIcon.setLayoutParams(layoutParams);
     }
 

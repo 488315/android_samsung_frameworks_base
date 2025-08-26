@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -158,9 +159,9 @@ public abstract class SemAbsDragAndDropAnimator {
                 setDndModeInternal(true);
                 this.mDragHandleAlpha = 0;
             }
-            ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-            ofFloat.setDuration(200L);
-            ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.samsung.android.animation.SemAbsDragAndDropAnimator.1
+            ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+            valueAnimatorOfFloat.setDuration(200L);
+            valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.samsung.android.animation.SemAbsDragAndDropAnimator.1
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public void onAnimationUpdate(ValueAnimator valueAnimator) {
                     float animatedFraction = valueAnimator.getAnimatedFraction();
@@ -172,14 +173,14 @@ public abstract class SemAbsDragAndDropAnimator {
                     SemAbsDragAndDropAnimator.this.mView.invalidate();
                 }
             });
-            ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.samsung.android.animation.SemAbsDragAndDropAnimator.2
+            valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.samsung.android.animation.SemAbsDragAndDropAnimator.2
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                public void onAnimationStart(Animator animator) {
+                public void onAnimationStart(Animator animator) throws Resources.NotFoundException {
                     SemAbsDragAndDropAnimator.this.mView.setEnabled(false);
                 }
 
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                public void onAnimationEnd(Animator animator) {
+                public void onAnimationEnd(Animator animator) throws Resources.NotFoundException {
                     if (z2) {
                         SemAbsDragAndDropAnimator.this.setDndModeInternal(false);
                     }
@@ -192,8 +193,8 @@ public abstract class SemAbsDragAndDropAnimator {
             } else {
                 interpolator = FADE_IN_INTERPOLATOR;
             }
-            ofFloat.setInterpolator(interpolator);
-            ofFloat.start();
+            valueAnimatorOfFloat.setInterpolator(interpolator);
+            valueAnimatorOfFloat.start();
         }
     }
 

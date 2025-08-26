@@ -9,7 +9,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
 /* JADX INFO: Access modifiers changed from: package-private */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AnchoredDraggableElement<T> extends ModifierNodeElement<AnchoredDraggableNode<T>> {
     public final boolean enabled;
@@ -42,17 +41,17 @@ public final class AnchoredDraggableElement<T> extends ModifierNodeElement<Ancho
     }
 
     public final int hashCode() {
-        int m = TransitionData$$ExternalSyntheticOutline0.m((this.orientation.hashCode() + (this.state.hashCode() * 31)) * 31, 31, this.enabled);
+        int iM = TransitionData$$ExternalSyntheticOutline0.m((this.orientation.hashCode() + (this.state.hashCode() * 31)) * 31, 31, this.enabled);
         Boolean bool = this.reverseDirection;
-        int hashCode = (m + (bool != null ? bool.hashCode() : 0)) * 31;
+        int iHashCode = (iM + (bool != null ? bool.hashCode() : 0)) * 31;
         MutableInteractionSource mutableInteractionSource = this.interactionSource;
-        int hashCode2 = (hashCode + (mutableInteractionSource != null ? mutableInteractionSource.hashCode() : 0)) * 31;
+        int iHashCode2 = (iHashCode + (mutableInteractionSource != null ? mutableInteractionSource.hashCode() : 0)) * 31;
         Boolean bool2 = this.startDragImmediately;
-        int hashCode3 = (hashCode2 + (bool2 != null ? bool2.hashCode() : 0)) * 31;
+        int iHashCode3 = (iHashCode2 + (bool2 != null ? bool2.hashCode() : 0)) * 31;
         OverscrollEffect overscrollEffect = this.overscrollEffect;
-        int hashCode4 = (hashCode3 + (overscrollEffect != null ? overscrollEffect.hashCode() : 0)) * 31;
+        int iHashCode4 = (iHashCode3 + (overscrollEffect != null ? overscrollEffect.hashCode() : 0)) * 31;
         FlingBehavior flingBehavior = this.flingBehavior;
-        return hashCode4 + (flingBehavior != null ? flingBehavior.hashCode() : 0);
+        return iHashCode4 + (flingBehavior != null ? flingBehavior.hashCode() : 0);
     }
 
     @Override // androidx.compose.ui.node.ModifierNodeElement

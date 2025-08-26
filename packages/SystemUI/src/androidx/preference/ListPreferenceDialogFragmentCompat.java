@@ -5,7 +5,6 @@ import android.os.Bundle;
 import androidx.appcompat.app.AlertController;
 import androidx.appcompat.app.AlertDialog;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ListPreferenceDialogFragmentCompat extends PreferenceDialogFragmentCompat {
     public int mClickedDialogEntryIndex;
@@ -36,10 +35,10 @@ public class ListPreferenceDialogFragmentCompat extends PreferenceDialogFragment
         if (!z || (i = this.mClickedDialogEntryIndex) < 0) {
             return;
         }
-        String charSequence = this.mEntryValues[i].toString();
+        String string = this.mEntryValues[i].toString();
         ListPreference listPreference = (ListPreference) getPreference();
-        if (listPreference.callChangeListener(charSequence)) {
-            listPreference.setValue(charSequence);
+        if (listPreference.callChangeListener(string)) {
+            listPreference.setValue(string);
         }
     }
 

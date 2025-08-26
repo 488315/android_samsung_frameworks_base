@@ -44,9 +44,9 @@ public interface IHdmiCecVolumeControlFeatureListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IHdmiCecVolumeControlFeatureListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IHdmiCecVolumeControlFeatureListener)) {
-                return (IHdmiCecVolumeControlFeatureListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IHdmiCecVolumeControlFeatureListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IHdmiCecVolumeControlFeatureListener)) {
+                return (IHdmiCecVolumeControlFeatureListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,9 +73,9 @@ public interface IHdmiCecVolumeControlFeatureListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onHdmiCecVolumeControlFeature(readInt);
+                onHdmiCecVolumeControlFeature(i3);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -99,13 +99,13 @@ public interface IHdmiCecVolumeControlFeatureListener extends IInterface {
 
             @Override // android.hardware.hdmi.IHdmiCecVolumeControlFeatureListener
             public void onHdmiCecVolumeControlFeature(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IHdmiCecVolumeControlFeatureListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IHdmiCecVolumeControlFeatureListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

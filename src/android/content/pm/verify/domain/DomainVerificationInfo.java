@@ -142,14 +142,14 @@ public final class DomainVerificationInfo implements Parcelable {
     }
 
     DomainVerificationInfo(Parcel parcel) {
-        UUID unparcel = sParcellingForIdentifier.unparcel(parcel);
-        String readString = parcel.readString();
-        Map<String, Integer> unparcelHostToStateMap = unparcelHostToStateMap(parcel);
-        this.mIdentifier = unparcel;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) unparcel);
-        this.mPackageName = readString;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString);
-        this.mHostToStateMap = unparcelHostToStateMap;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) unparcelHostToStateMap);
+        UUID uuidUnparcel = sParcellingForIdentifier.unparcel(parcel);
+        String string = parcel.readString();
+        Map<String, Integer> mapUnparcelHostToStateMap = unparcelHostToStateMap(parcel);
+        this.mIdentifier = uuidUnparcel;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) uuidUnparcel);
+        this.mPackageName = string;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string);
+        this.mHostToStateMap = mapUnparcelHostToStateMap;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) mapUnparcelHostToStateMap);
     }
 }

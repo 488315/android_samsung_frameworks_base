@@ -6,11 +6,10 @@ import com.android.systemui.wallpaper.theme.builder.AnimationBuilder;
 import com.android.systemui.wallpaper.theme.view.FrameAnimationView;
 import org.xmlpull.v1.XmlPullParser;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class FrameParser extends BaseParser {
     @Override // com.android.systemui.wallpaper.theme.xmlparser.BaseParser
-    public final void parseAttribute(ParserData parserData) {
+    public final void parseAttribute(ParserData parserData) throws NumberFormatException {
         XmlPullParser xmlPullParser;
         if (parserData == null || (xmlPullParser = parserData.mXpp) == null) {
             return;
@@ -37,11 +36,11 @@ public class FrameParser extends BaseParser {
             String attributeName = xmlPullParser.getAttributeName(i);
             String attributeValue = xmlPullParser.getAttributeValue(i);
             if (!TextUtils.isEmpty(attributeName) && !TextUtils.isEmpty(attributeValue)) {
-                int parseInt = Integer.parseInt(attributeValue);
+                int i2 = Integer.parseInt(attributeValue);
                 if (attributeName.equalsIgnoreCase("top")) {
-                    parserData.mAnimationBuilder.top = parseInt;
+                    parserData.mAnimationBuilder.top = i2;
                 } else if (attributeName.equalsIgnoreCase("minInterval")) {
-                    parserData.mAnimationBuilder.minInterval = parseInt;
+                    parserData.mAnimationBuilder.minInterval = i2;
                 }
             }
         }

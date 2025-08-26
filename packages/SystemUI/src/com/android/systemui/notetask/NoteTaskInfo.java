@@ -7,7 +7,6 @@ import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class NoteTaskInfo {
     public final NoteTaskEntryPoint entryPoint;
@@ -38,9 +37,9 @@ public final class NoteTaskInfo {
     }
 
     public final int hashCode() {
-        int hashCode = (this.user.hashCode() + ReorderTile$$ExternalSyntheticOutline0.m(this.uid, this.packageName.hashCode() * 31, 31)) * 31;
+        int iHashCode = (this.user.hashCode() + ReorderTile$$ExternalSyntheticOutline0.m(this.uid, this.packageName.hashCode() * 31, 31)) * 31;
         NoteTaskEntryPoint noteTaskEntryPoint = this.entryPoint;
-        return Boolean.hashCode(this.isKeyguardLocked) + ((hashCode + (noteTaskEntryPoint == null ? 0 : noteTaskEntryPoint.hashCode())) * 31);
+        return Boolean.hashCode(this.isKeyguardLocked) + ((iHashCode + (noteTaskEntryPoint == null ? 0 : noteTaskEntryPoint.hashCode())) * 31);
     }
 
     public final String toString() {

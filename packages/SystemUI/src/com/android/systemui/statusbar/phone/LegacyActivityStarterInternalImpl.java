@@ -11,6 +11,7 @@ import android.app.TaskStackBuilder;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
@@ -63,6 +64,7 @@ import com.android.systemui.statusbar.window.StatusBarWindowControllerStore;
 import com.android.systemui.user.domain.interactor.SelectedUserInteractor;
 import com.android.systemui.util.LogUtil;
 import com.android.systemui.util.concurrency.DelayableExecutor;
+import com.samsung.systemui.splugins.volume.VolumePanelValues;
 import dagger.Lazy;
 import java.util.Optional;
 import kotlin.jvm.functions.Function1;
@@ -70,7 +72,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class LegacyActivityStarterInternalImpl implements ActivityStarterInternal {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -101,7 +102,6 @@ public final class LegacyActivityStarterInternalImpl implements ActivityStarterI
     public final UserTracker userTracker;
     public final WakefulnessLifecycle wakefulnessLifecycle;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -156,10 +156,10 @@ public final class LegacyActivityStarterInternalImpl implements ActivityStarterI
     public final void dismissKeyguardThenExecute(ActivityStarter.OnDismissAction onDismissAction, Runnable runnable, boolean z) {
         CentralSurfaces centralSurfaces$1;
         Log.i("LegacyActivityStarterInternalImpl", "Invoking dismissKeyguardThenExecute, afterKeyguardGone: " + z);
-        boolean willRunAnimationOnKeyguard = onDismissAction.willRunAnimationOnKeyguard();
+        boolean zWillRunAnimationOnKeyguard = onDismissAction.willRunAnimationOnKeyguard();
         SysuiStatusBarStateController sysuiStatusBarStateController = this.statusBarStateController;
         KeyguardStateController keyguardStateController = this.keyguardStateController;
-        if (!willRunAnimationOnKeyguard && this.wakefulnessLifecycle.mWakefulness == 0 && ((KeyguardStateControllerImpl) keyguardStateController).mCanDismissLockScreen && !((StatusBarStateControllerImpl) sysuiStatusBarStateController).mLeaveOpenOnKeyguardHide && ((DozeServiceHost) this.dozeServiceHostLazy.get()).mPulsing) {
+        if (!zWillRunAnimationOnKeyguard && this.wakefulnessLifecycle.mWakefulness == 0 && ((KeyguardStateControllerImpl) keyguardStateController).mCanDismissLockScreen && !((StatusBarStateControllerImpl) sysuiStatusBarStateController).mLeaveOpenOnKeyguardHide && ((DozeServiceHost) this.dozeServiceHostLazy.get()).mPulsing) {
             ((BiometricUnlockController) this.biometricUnlockControllerLazy.get()).startWakeAndUnlock(2, (BiometricUnlockSource) null);
         }
         boolean z2 = ((KeyguardStateControllerImpl) keyguardStateController).mShowing;
@@ -187,11 +187,11 @@ public final class LegacyActivityStarterInternalImpl implements ActivityStarterI
         int i5 = LogUtil.getInt(z3);
         int i6 = LogUtil.getInt(z4);
         int i7 = LogUtil.getInt(str);
-        StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "dismissAction requested r=", " cancel=", " collapse=");
-        ViewPager$$ExternalSyntheticOutline0.m(m, i3, " after=", i4, " def=");
-        ViewPager$$ExternalSyntheticOutline0.m(m, i5, " will=", i6, ", msg=");
-        m.append(i7);
-        com.android.systemui.keyguard.Log.d("KeyguardUnlockInfo", m.toString());
+        StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "dismissAction requested r=", " cancel=", " collapse=");
+        ViewPager$$ExternalSyntheticOutline0.m(sbM, i3, " after=", i4, " def=");
+        ViewPager$$ExternalSyntheticOutline0.m(sbM, i5, " will=", i6, ", msg=");
+        sbM.append(i7);
+        com.android.systemui.keyguard.Log.d("KeyguardUnlockInfo", sbM.toString());
         dismissKeyguardThenExecute(new ActivityStarter.OnDismissAction() { // from class: com.android.systemui.statusbar.phone.LegacyActivityStarterInternalImpl$executeRunnableDismissingKeyguard$onDismissAction$1
             @Override // com.android.systemui.plugins.ActivityStarter.OnDismissAction
             public final boolean onDismiss() {
@@ -215,16 +215,16 @@ public final class LegacyActivityStarterInternalImpl implements ActivityStarterI
                     Log.d("LegacyActivityStarterInternalImpl", "ignored deferred");
                     return false;
                 }
-                boolean isExpandedVisible = ((ShadeController) legacyActivityStarterInternalImpl.shadeControllerLazy.get()).isExpandedVisible();
+                boolean zIsExpandedVisible = ((ShadeController) legacyActivityStarterInternalImpl.shadeControllerLazy.get()).isExpandedVisible();
                 Lazy lazy = legacyActivityStarterInternalImpl.shadeControllerLazy;
-                if (isExpandedVisible && !((StatusBarKeyguardViewManager) legacyActivityStarterInternalImpl.statusBarKeyguardViewManagerLazy.get()).isBouncerShowing()) {
+                if (zIsExpandedVisible && !((StatusBarKeyguardViewManager) legacyActivityStarterInternalImpl.statusBarKeyguardViewManagerLazy.get()).isBouncerShowing()) {
                     Lazy lazy2 = legacyActivityStarterInternalImpl.keyguardViewMediatorLazy;
                     if (((KeyguardViewMediator) lazy2.get()).isShowing()) {
                         if (!((KeyguardViewMediator) lazy2.get()).mHelper.needsCollapsePanelWithNoAnimation()) {
                             legacyActivityStarterInternalImpl.mainExecutor.executeDelayed(new Runnable() { // from class: com.android.systemui.statusbar.phone.LegacyActivityStarterInternalImpl$executeRunnableDismissingKeyguard$onDismissAction$1$onDismiss$1
                                 @Override // java.lang.Runnable
                                 public final void run() {
-                                    ((ShadeController) LegacyActivityStarterInternalImpl.this.shadeControllerLazy.get()).collapseShade(false);
+                                    ((ShadeController) legacyActivityStarterInternalImpl.shadeControllerLazy.get()).collapseShade(false);
                                 }
                             }, 120L);
                             return z7;
@@ -245,7 +245,7 @@ public final class LegacyActivityStarterInternalImpl implements ActivityStarterI
         }, runnable2, z2);
     }
 
-    public final UserHandle getActivityUserHandle$1(Intent intent) {
+    public final UserHandle getActivityUserHandle$1(Intent intent) throws Resources.NotFoundException {
         for (String str : this.context.getResources().getStringArray(R.array.system_ui_packages)) {
             str.getClass();
             ComponentName component = intent.getComponent();
@@ -299,10 +299,10 @@ public final class LegacyActivityStarterInternalImpl implements ActivityStarterI
         this.activityTransitionAnimator.startIntentWithAnimation(null, false, intent.getPackage(), z2, new Function1() { // from class: com.android.systemui.statusbar.phone.LegacyActivityStarterInternalImpl$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Intent intent2 = intent;
                 UserHandle userHandle2 = activityUserHandle$1;
-                LegacyActivityStarterInternalImpl legacyActivityStarterInternalImpl = LegacyActivityStarterInternalImpl.this;
+                LegacyActivityStarterInternalImpl legacyActivityStarterInternalImpl = this.f$0;
                 return Integer.valueOf(TaskStackBuilder.create(legacyActivityStarterInternalImpl.context).addNextIntent(intent2).startActivities(CentralSurfaces.getActivityOptions(legacyActivityStarterInternalImpl.displayId, (RemoteAnimationAdapter) obj), userHandle2));
             }
         });
@@ -312,35 +312,35 @@ public final class LegacyActivityStarterInternalImpl implements ActivityStarterI
     public final void startActivityDismissingKeyguard(final Intent intent, boolean z, boolean z2, final ActivityStarter.Callback callback, final int i, ActivityTransitionAnimator.Controller controller, String str, final boolean z3, UserHandle userHandle) {
         final UserHandle activityUserHandle$1 = userHandle == null ? getActivityUserHandle$1(intent) : userHandle;
         if (!z2 || ((DeviceProvisionedControllerImpl) this.deviceProvisionedController).deviceProvisioned.get()) {
-            boolean wouldLaunchResolverActivity = this.activityIntentHelper.wouldLaunchResolverActivity(((NotificationLockscreenUserManagerImpl) this.lockScreenUserManager).mCurrentUserId, intent);
-            final ActivityTransitionAnimator.Controller wrapAnimationControllerForShadeOrStatusBar$1 = wrapAnimationControllerForShadeOrStatusBar$1(controller, z, true);
-            boolean z4 = z && wrapAnimationControllerForShadeOrStatusBar$1 == null;
+            boolean zWouldLaunchResolverActivity = this.activityIntentHelper.wouldLaunchResolverActivity(((NotificationLockscreenUserManagerImpl) this.lockScreenUserManager).mCurrentUserId, intent);
+            final ActivityTransitionAnimator.Controller controllerWrapAnimationControllerForShadeOrStatusBar$1 = wrapAnimationControllerForShadeOrStatusBar$1(controller, z, true);
+            boolean z4 = z && controllerWrapAnimationControllerForShadeOrStatusBar$1 == null;
             final boolean z5 = false;
             Runnable runnable = new Runnable() { // from class: com.android.systemui.statusbar.phone.LegacyActivityStarterInternalImpl$startActivityDismissingKeyguard$runnable$1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ((AssistManager) LegacyActivityStarterInternalImpl.this.assistManagerLazy.get()).hideAssist();
+                    ((AssistManager) this.this$0.assistManagerLazy.get()).hideAssist();
                     Intent intent2 = intent;
                     intent2.setFlags((intent2.getFlags() & 131072) != 0 ? 268435456 : 335544320);
                     intent.addFlags(i);
                     final int[] iArr = {-96};
-                    ActivityTransitionAnimator activityTransitionAnimator = LegacyActivityStarterInternalImpl.this.activityTransitionAnimator;
-                    ActivityTransitionAnimator.Controller controller2 = wrapAnimationControllerForShadeOrStatusBar$1;
+                    ActivityTransitionAnimator activityTransitionAnimator = this.this$0.activityTransitionAnimator;
+                    ActivityTransitionAnimator.Controller controller2 = controllerWrapAnimationControllerForShadeOrStatusBar$1;
                     boolean z6 = z5;
                     String str2 = intent.getPackage();
-                    final LegacyActivityStarterInternalImpl legacyActivityStarterInternalImpl = LegacyActivityStarterInternalImpl.this;
+                    final LegacyActivityStarterInternalImpl legacyActivityStarterInternalImpl = this.this$0;
                     final boolean z7 = z3;
                     final Intent intent3 = intent;
                     final UserHandle userHandle2 = activityUserHandle$1;
                     Function1 function1 = new Function1() { // from class: com.android.systemui.statusbar.phone.LegacyActivityStarterInternalImpl$startActivityDismissingKeyguard$runnable$1$$ExternalSyntheticLambda0
                         @Override // kotlin.jvm.functions.Function1
                         /* renamed from: invoke */
-                        public final Object mo779invoke(Object obj) {
+                        public final Object mo781invoke(Object obj) {
                             int displayId;
                             Intent intent4 = intent3;
                             int[] iArr2 = iArr;
                             UserHandle userHandle3 = userHandle2;
-                            LegacyActivityStarterInternalImpl legacyActivityStarterInternalImpl2 = LegacyActivityStarterInternalImpl.this;
+                            LegacyActivityStarterInternalImpl legacyActivityStarterInternalImpl2 = legacyActivityStarterInternalImpl;
                             ActivityOptions activityOptions = new ActivityOptions(CentralSurfaces.getActivityOptions(legacyActivityStarterInternalImpl2.displayId, (RemoteAnimationAdapter) obj));
                             activityOptions.setDismissKeyguardIfInsecure();
                             activityOptions.setDisallowEnterPictureInPictureWhileLaunching(z7);
@@ -380,14 +380,14 @@ public final class LegacyActivityStarterInternalImpl implements ActivityStarterI
             Runnable runnable2 = new Runnable() { // from class: com.android.systemui.statusbar.phone.LegacyActivityStarterInternalImpl$startActivityDismissingKeyguard$cancelRunnable$1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ActivityStarter.Callback callback2 = ActivityStarter.Callback.this;
+                    ActivityStarter.Callback callback2 = callback;
                     if (callback2 != null) {
                         callback2.onActivityStarted(-96);
                     }
                 }
             };
             KeyguardStateControllerImpl keyguardStateControllerImpl = (KeyguardStateControllerImpl) this.keyguardStateController;
-            executeRunnableDismissingKeyguard(runnable, runnable2, z4, wouldLaunchResolverActivity, !(keyguardStateControllerImpl.mShowing && keyguardStateControllerImpl.mOccluded) || (this.communalSettingsInteractor.isCommunalFlagEnabled() && ((Boolean) this.communalSceneInteractor.isCommunalVisible.$$delegate_0.getValue()).booleanValue() && z4), false, str);
+            executeRunnableDismissingKeyguard(runnable, runnable2, z4, zWouldLaunchResolverActivity, !(keyguardStateControllerImpl.mShowing && keyguardStateControllerImpl.mOccluded) || (this.communalSettingsInteractor.isCommunalFlagEnabled() && ((Boolean) this.communalSceneInteractor.isCommunalVisible.$$delegate_0.getValue()).booleanValue() && z4), false, str);
         }
     }
 
@@ -395,49 +395,49 @@ public final class LegacyActivityStarterInternalImpl implements ActivityStarterI
     public final void startCameraActivity(final Intent intent, boolean z, final ActivityStarter.Callback callback) {
         Runnable runnable;
         Runnable runnable2;
-        boolean wouldLaunchResolverActivity = this.activityIntentHelper.wouldLaunchResolverActivity(((NotificationLockscreenUserManagerImpl) this.lockScreenUserManager).mCurrentUserId, intent);
+        boolean zWouldLaunchResolverActivity = this.activityIntentHelper.wouldLaunchResolverActivity(((NotificationLockscreenUserManagerImpl) this.lockScreenUserManager).mCurrentUserId, intent);
         Runnable runnable3 = new Runnable() { // from class: com.android.systemui.statusbar.phone.LegacyActivityStarterInternalImpl$startCameraActivity$runnable$1
             @Override // java.lang.Runnable
             public final void run() {
-                int i;
+                int iStartActivityAsUser;
                 int displayId;
-                ((AssistManager) LegacyActivityStarterInternalImpl.this.assistManagerLazy.get()).hideAssist();
+                ((AssistManager) this.this$0.assistManagerLazy.get()).hideAssist();
                 try {
                     ActivityManagerNative.getDefault().resumeAppSwitches();
-                    ActivityOptions makeBasic = ActivityOptions.makeBasic();
-                    makeBasic.setForceLaunchWindowingMode(1);
+                    ActivityOptions activityOptionsMakeBasic = ActivityOptions.makeBasic();
+                    activityOptionsMakeBasic.setForceLaunchWindowingMode(1);
                     if (!LsRune.SUBSCREEN_LARGE_FRONT_SUB_DISPLAY || ((DisplayLifecycle) Dependency.sDependency.getDependencyInner(DisplayLifecycle.class)).mIsFolderOpened) {
-                        Display display = LegacyActivityStarterInternalImpl.this.context.getDisplay();
+                        Display display = this.this$0.context.getDisplay();
                         display.getClass();
                         displayId = display.getDisplayId();
                     } else {
-                        displayId = LegacyActivityStarterInternalImpl.access$getSubDisplayID(LegacyActivityStarterInternalImpl.this);
+                        displayId = LegacyActivityStarterInternalImpl.access$getSubDisplayID(this.this$0);
                     }
-                    makeBasic.setLaunchDisplayId(displayId);
+                    activityOptionsMakeBasic.setLaunchDisplayId(displayId);
                     IActivityManager iActivityManager = ActivityManagerNative.getDefault();
-                    String basePackageName = LegacyActivityStarterInternalImpl.this.context.getBasePackageName();
+                    String basePackageName = this.this$0.context.getBasePackageName();
                     Intent intent2 = intent;
-                    i = iActivityManager.startActivityAsUser((IApplicationThread) null, basePackageName, intent2, intent2.resolveTypeIfNeeded(LegacyActivityStarterInternalImpl.this.context.getContentResolver()), (IBinder) null, (String) null, 0, 268435456, (ProfilerInfo) null, makeBasic.toBundle(), UserHandle.CURRENT.getIdentifier());
+                    iStartActivityAsUser = iActivityManager.startActivityAsUser((IApplicationThread) null, basePackageName, intent2, intent2.resolveTypeIfNeeded(this.this$0.context.getContentResolver()), (IBinder) null, (String) null, 0, 268435456, (ProfilerInfo) null, activityOptionsMakeBasic.toBundle(), UserHandle.CURRENT.getIdentifier());
                 } catch (RemoteException e) {
                     Log.w("LegacyActivityStarterInternalImpl", "Unable to start activity", e);
-                    i = -96;
+                    iStartActivityAsUser = -96;
                 }
                 ActivityStarter.Callback callback2 = callback;
                 if (callback2 != null) {
-                    callback2.onActivityStarted(i);
+                    callback2.onActivityStarted(iStartActivityAsUser);
                 }
             }
         };
         Runnable runnable4 = new Runnable() { // from class: com.android.systemui.statusbar.phone.LegacyActivityStarterInternalImpl$startCameraActivity$cancelRunnable$1
             @Override // java.lang.Runnable
             public final void run() {
-                ActivityStarter.Callback callback2 = ActivityStarter.Callback.this;
+                ActivityStarter.Callback callback2 = callback;
                 if (callback2 != null) {
                     callback2.onActivityStarted(-96);
                 }
             }
         };
-        if (wouldLaunchResolverActivity) {
+        if (zWouldLaunchResolverActivity) {
             runnable = runnable4;
             runnable2 = runnable3;
         } else {
@@ -445,24 +445,24 @@ public final class LegacyActivityStarterInternalImpl implements ActivityStarterI
             runnable2 = null;
             runnable = null;
         }
-        ActivityStarterInternal.executeRunnableDismissingKeyguard$default(this, runnable2, runnable, z, wouldLaunchResolverActivity, true, false, null, 96);
+        ActivityStarterInternal.executeRunnableDismissingKeyguard$default(this, runnable2, runnable, z, zWouldLaunchResolverActivity, true, false, null, 96);
     }
 
     @Override // com.android.systemui.statusbar.phone.ActivityStarterInternal
     public final void startPendingIntentDismissingKeyguard(final PendingIntent pendingIntent, final boolean z, final Runnable runnable, View view, ActivityTransitionAnimator.Controller controller, boolean z2, boolean z3, final Intent intent, final Bundle bundle, final String str) {
-        ActivityTransitionAnimator.Controller controller2;
+        ActivityTransitionAnimator.Controller animatorController;
         DelegateTransitionAnimatorController delegateTransitionAnimatorController;
         final boolean z4;
         if (view instanceof ExpandableNotificationRow) {
             CentralSurfaces centralSurfaces$1 = getCentralSurfaces$1();
-            controller2 = centralSurfaces$1 != null ? ((CentralSurfacesImpl) centralSurfaces$1).mNotificationAnimationProvider.getAnimatorController((ExpandableNotificationRow) view) : null;
+            animatorController = centralSurfaces$1 != null ? ((CentralSurfacesImpl) centralSurfaces$1).mNotificationAnimationProvider.getAnimatorController((ExpandableNotificationRow) view) : null;
         } else {
-            controller2 = controller;
+            animatorController = controller;
         }
-        boolean isActivity = pendingIntent.isActivity();
+        boolean zIsActivity = pendingIntent.isActivity();
         NotificationLockscreenUserManager notificationLockscreenUserManager = this.lockScreenUserManager;
         ActivityIntentHelper activityIntentHelper = this.activityIntentHelper;
-        boolean z5 = isActivity && activityIntentHelper.getPendingTargetActivityInfo(((NotificationLockscreenUserManagerImpl) notificationLockscreenUserManager).mCurrentUserId, pendingIntent) == null;
+        boolean z5 = zIsActivity && activityIntentHelper.getPendingTargetActivityInfo(((NotificationLockscreenUserManagerImpl) notificationLockscreenUserManager).mCurrentUserId, pendingIntent) == null;
         if (z2 && pendingIntent.isActivity() && (z3 || activityIntentHelper.wouldPendingShowOverLockscreen(((NotificationLockscreenUserManagerImpl) notificationLockscreenUserManager).mCurrentUserId, pendingIntent))) {
             delegateTransitionAnimatorController = null;
             z4 = true;
@@ -470,13 +470,13 @@ public final class LegacyActivityStarterInternalImpl implements ActivityStarterI
             delegateTransitionAnimatorController = null;
             z4 = false;
         }
-        if (!z5 && controller2 != null) {
+        if (!z5 && animatorController != null) {
             pendingIntent.isActivity();
         }
-        final ActivityTransitionAnimator.Controller wrapAnimationControllerForShadeOrStatusBar$1 = wrapAnimationControllerForShadeOrStatusBar$1(controller2, z, pendingIntent.isActivity());
+        final ActivityTransitionAnimator.Controller controllerWrapAnimationControllerForShadeOrStatusBar$1 = wrapAnimationControllerForShadeOrStatusBar$1(animatorController, z, pendingIntent.isActivity());
         if (z4) {
-            if (wrapAnimationControllerForShadeOrStatusBar$1 != null) {
-                delegateTransitionAnimatorController = new DelegateTransitionAnimatorController(wrapAnimationControllerForShadeOrStatusBar$1) { // from class: com.android.systemui.statusbar.phone.LegacyActivityStarterInternalImpl$wrapAnimationControllerForLockscreen$1$1
+            if (controllerWrapAnimationControllerForShadeOrStatusBar$1 != null) {
+                delegateTransitionAnimatorController = new DelegateTransitionAnimatorController(controllerWrapAnimationControllerForShadeOrStatusBar$1) { // from class: com.android.systemui.statusbar.phone.LegacyActivityStarterInternalImpl$wrapAnimationControllerForLockscreen$1$1
                     @Override // com.android.systemui.animation.DelegateTransitionAnimatorController, com.android.systemui.animation.ActivityTransitionAnimator.Controller
                     public final void onIntentStarted(boolean z6) {
                         this.delegate.onIntentStarted(z6);
@@ -522,7 +522,7 @@ public final class LegacyActivityStarterInternalImpl implements ActivityStarterI
                     }
                 };
             }
-            wrapAnimationControllerForShadeOrStatusBar$1 = delegateTransitionAnimatorController;
+            controllerWrapAnimationControllerForShadeOrStatusBar$1 = delegateTransitionAnimatorController;
         }
         boolean z6 = isCommunalWidgetLaunch() && !z4;
         final boolean z7 = z || z6;
@@ -531,19 +531,19 @@ public final class LegacyActivityStarterInternalImpl implements ActivityStarterI
             @Override // java.lang.Runnable
             public final void run() {
                 try {
-                    ActivityTransitionAnimator activityTransitionAnimator = LegacyActivityStarterInternalImpl.this.activityTransitionAnimator;
-                    ActivityTransitionAnimator.Controller controller3 = wrapAnimationControllerForShadeOrStatusBar$1;
+                    ActivityTransitionAnimator activityTransitionAnimator = this.this$0.activityTransitionAnimator;
+                    ActivityTransitionAnimator.Controller controller2 = controllerWrapAnimationControllerForShadeOrStatusBar$1;
                     boolean z9 = z8;
                     String creatorPackage = pendingIntent.getCreatorPackage();
                     boolean z10 = z4;
-                    final LegacyActivityStarterInternalImpl legacyActivityStarterInternalImpl = LegacyActivityStarterInternalImpl.this;
+                    final LegacyActivityStarterInternalImpl legacyActivityStarterInternalImpl = this.this$0;
                     final PendingIntent pendingIntent2 = pendingIntent;
                     final Intent intent2 = intent;
                     final Bundle bundle2 = bundle;
                     ActivityTransitionAnimator.PendingIntentStarter pendingIntentStarter = new ActivityTransitionAnimator.PendingIntentStarter() { // from class: com.android.systemui.statusbar.phone.LegacyActivityStarterInternalImpl$startPendingIntentDismissingKeyguard$runnable$1.1
                         @Override // com.android.systemui.animation.ActivityTransitionAnimator.PendingIntentStarter
                         public final int startPendingIntent(RemoteAnimationAdapter remoteAnimationAdapter) {
-                            LegacyActivityStarterInternalImpl legacyActivityStarterInternalImpl2 = LegacyActivityStarterInternalImpl.this;
+                            LegacyActivityStarterInternalImpl legacyActivityStarterInternalImpl2 = legacyActivityStarterInternalImpl;
                             Bundle activityOptions = CentralSurfaces.getActivityOptions(legacyActivityStarterInternalImpl2.displayId, remoteAnimationAdapter);
                             Bundle bundle3 = bundle2;
                             if (bundle3 != null) {
@@ -556,19 +556,19 @@ public final class LegacyActivityStarterInternalImpl implements ActivityStarterI
                         }
                     };
                     activityTransitionAnimator.getClass();
-                    activityTransitionAnimator.startIntentWithAnimation(controller3, z9, creatorPackage, z10, new ActivityTransitionAnimator$$ExternalSyntheticLambda0(pendingIntentStarter));
+                    activityTransitionAnimator.startIntentWithAnimation(controller2, z9, creatorPackage, z10, new ActivityTransitionAnimator$$ExternalSyntheticLambda0(pendingIntentStarter));
                 } catch (PendingIntent.CanceledException e) {
                     Log.w("LegacyActivityStarterInternalImpl", "Sending intent failed: " + e);
                     if (!z7) {
-                        ((ShadeController) LegacyActivityStarterInternalImpl.this.shadeControllerLazy.get()).collapseOnMainThread();
+                        ((ShadeController) this.this$0.shadeControllerLazy.get()).collapseOnMainThread();
                     }
                 }
                 if (pendingIntent.isActivity()) {
-                    ((AssistManager) LegacyActivityStarterInternalImpl.this.assistManagerLazy.get()).hideAssist();
+                    ((AssistManager) this.this$0.assistManagerLazy.get()).hideAssist();
                 }
                 Runnable runnable3 = runnable;
                 if (runnable3 != null) {
-                    LegacyActivityStarterInternalImpl legacyActivityStarterInternalImpl2 = LegacyActivityStarterInternalImpl.this;
+                    LegacyActivityStarterInternalImpl legacyActivityStarterInternalImpl2 = this.this$0;
                     int i = LegacyActivityStarterInternalImpl.$r8$clinit;
                     legacyActivityStarterInternalImpl2.mainExecutor.executeDelayed(runnable3, 0);
                 }
@@ -582,7 +582,7 @@ public final class LegacyActivityStarterInternalImpl implements ActivityStarterI
         final boolean z9 = z7;
         final boolean z10 = z5;
         final boolean z11 = z6;
-        delayableExecutor.executeDelayed(new Runnable() { // from class: com.android.systemui.statusbar.phone.LegacyActivityStarterInternalImpl$startPendingIntentDismissingKeyguard$1
+        delayableExecutor.executeDelayed(new Runnable() { // from class: com.android.systemui.statusbar.phone.LegacyActivityStarterInternalImpl.startPendingIntentDismissingKeyguard.1
             @Override // java.lang.Runnable
             public final void run() {
                 ActivityStarterInternal.executeRunnableDismissingKeyguard$default(LegacyActivityStarterInternalImpl.this, runnable2, null, z9, z10, z11, z8, str, 2);
@@ -603,9 +603,9 @@ public final class LegacyActivityStarterInternalImpl implements ActivityStarterI
         View rootView = controller.getTransitionContainer().getRootView();
         StatusBarWindowController statusBarWindowController = (StatusBarWindowController) this.statusBarWindowControllerStore.getDefaultDisplay();
         rootView.getClass();
-        Optional wrapAnimationControllerIfInStatusBar = ((StatusBarWindowControllerImpl) statusBarWindowController).wrapAnimationControllerIfInStatusBar(rootView, controller);
-        if (wrapAnimationControllerIfInStatusBar.isPresent()) {
-            return (ActivityTransitionAnimator.Controller) wrapAnimationControllerIfInStatusBar.get();
+        Optional optionalWrapAnimationControllerIfInStatusBar = ((StatusBarWindowControllerImpl) statusBarWindowController).wrapAnimationControllerIfInStatusBar(rootView, controller);
+        if (optionalWrapAnimationControllerIfInStatusBar.isPresent()) {
+            return (ActivityTransitionAnimator.Controller) optionalWrapAnimationControllerIfInStatusBar.get();
         }
         if (getCentralSurfaces$1() == null || !z) {
             return controller;
@@ -618,139 +618,76 @@ public final class LegacyActivityStarterInternalImpl implements ActivityStarterI
         final UserHandle activityUserHandle$1 = userHandle == null ? getActivityUserHandle$1(intent) : userHandle;
         if (!z || ((DeviceProvisionedControllerImpl) this.deviceProvisionedController).deviceProvisioned.get()) {
             KeyguardUnlockInfo.setUnlockTriggerIfNotSet(KeyguardUnlockInfo.UnlockTrigger.TRIGGER_INTERNAL);
-            boolean wouldLaunchResolverActivity = this.activityIntentHelper.wouldLaunchResolverActivity(((NotificationLockscreenUserManagerImpl) this.lockScreenUserManager).mCurrentUserId, intent);
-            final ActivityTransitionAnimator.Controller wrapAnimationControllerForShadeOrStatusBar$1 = wrapAnimationControllerForShadeOrStatusBar$1(controller, z2, true);
+            boolean zWouldLaunchResolverActivity = this.activityIntentHelper.wouldLaunchResolverActivity(((NotificationLockscreenUserManagerImpl) this.lockScreenUserManager).mCurrentUserId, intent);
+            final ActivityTransitionAnimator.Controller controllerWrapAnimationControllerForShadeOrStatusBar$1 = wrapAnimationControllerForShadeOrStatusBar$1(controller, z2, true);
             boolean z4 = false;
-            boolean z5 = z2 && wrapAnimationControllerForShadeOrStatusBar$1 == null;
+            boolean z5 = z2 && controllerWrapAnimationControllerForShadeOrStatusBar$1 == null;
             final boolean z6 = false;
             Runnable runnable = new Runnable() { // from class: com.android.systemui.statusbar.phone.LegacyActivityStarterInternalImpl$startActivityDismissingKeyguard$runnable$2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ((AssistManager) LegacyActivityStarterInternalImpl.this.assistManagerLazy.get()).hideAssist();
+                    ((AssistManager) this.this$0.assistManagerLazy.get()).hideAssist();
                     intent.setFlags(335544320);
                     intent.addFlags(i);
                     final int[] iArr = {-96};
-                    ActivityTransitionAnimator activityTransitionAnimator = LegacyActivityStarterInternalImpl.this.activityTransitionAnimator;
-                    ActivityTransitionAnimator.Controller controller2 = wrapAnimationControllerForShadeOrStatusBar$1;
+                    ActivityTransitionAnimator activityTransitionAnimator = this.this$0.activityTransitionAnimator;
+                    ActivityTransitionAnimator.Controller controller2 = controllerWrapAnimationControllerForShadeOrStatusBar$1;
                     boolean z7 = z6;
                     String str = intent.getPackage();
-                    final LegacyActivityStarterInternalImpl legacyActivityStarterInternalImpl = LegacyActivityStarterInternalImpl.this;
+                    final LegacyActivityStarterInternalImpl legacyActivityStarterInternalImpl = this.this$0;
                     final boolean z8 = z3;
                     final Intent intent2 = intent;
                     final int i3 = i2;
                     final UserHandle userHandle2 = activityUserHandle$1;
                     Function1 function1 = new Function1() { // from class: com.android.systemui.statusbar.phone.LegacyActivityStarterInternalImpl$startActivityDismissingKeyguard$runnable$2$$ExternalSyntheticLambda0
-                        /* JADX WARN: Removed duplicated region for block: B:10:0x0056  */
+                        /* JADX WARN: Removed duplicated region for block: B:9:0x0049  */
                         @Override // kotlin.jvm.functions.Function1
                         /* renamed from: invoke */
                         /*
                             Code decompiled incorrectly, please refer to instructions dump.
-                            To view partially-correct code enable 'Show inconsistent code' option in preferences
                         */
-                        public final java.lang.Object mo779invoke(java.lang.Object r15) {
-                            /*
-                                r14 = this;
-                                android.content.Intent r4 = r3
-                                int[] r13 = r5
-                                android.os.UserHandle r0 = r6
-                                r1 = r15
-                                android.view.RemoteAnimationAdapter r1 = (android.view.RemoteAnimationAdapter) r1
-                                android.app.ActivityOptions r2 = new android.app.ActivityOptions
-                                com.android.systemui.statusbar.phone.LegacyActivityStarterInternalImpl r3 = com.android.systemui.statusbar.phone.LegacyActivityStarterInternalImpl.this
-                                int r5 = r3.displayId
-                                android.os.Bundle r1 = com.android.systemui.statusbar.phone.CentralSurfaces.getActivityOptions(r5, r1)
-                                r2.<init>(r1)
-                                r2.setDismissKeyguardIfInsecure()
-                                boolean r1 = r2
-                                r2.setDisallowEnterPictureInPictureWhileLaunching(r1)
-                                com.android.systemui.camera.CameraIntents$Companion r1 = com.android.systemui.camera.CameraIntents.Companion
-                                r1.getClass()
-                                com.android.systemui.statusbar.KeyguardShortcutManager$Companion r1 = com.android.systemui.statusbar.KeyguardShortcutManager.Companion
-                                r1.getClass()
-                                android.content.Intent r1 = com.android.systemui.statusbar.KeyguardShortcutManager.INSECURE_CAMERA_INTENT
-                                boolean r1 = kotlin.jvm.internal.Intrinsics.areEqual(r4, r1)
-                                r5 = 1
-                                if (r1 == 0) goto L5f
-                                com.android.systemui.statusbar.phone.CentralSurfaces r1 = r3.getCentralSurfaces$1()
-                                if (r1 == 0) goto L49
-                                android.content.ComponentName r6 = r4.getComponent()
-                                com.android.systemui.statusbar.phone.CentralSurfacesImpl r1 = (com.android.systemui.statusbar.phone.CentralSurfacesImpl) r1
-                                boolean r1 = r1.isForegroundComponentName(r6)
-                                if (r1 != r5) goto L49
-                                r1 = 270532608(0x10200000, float:3.1554436E-29)
-                                r4.setFlags(r1)
-                                goto L52
-                            L49:
-                                r1 = 536870912(0x20000000, float:1.0842022E-19)
-                                android.content.Intent r1 = r4.addFlags(r1)
-                                r1.getClass()
-                            L52:
-                                int r14 = r4
-                                if (r14 != r5) goto L5b
-                                java.lang.String r14 = "isQuickLaunchMode"
-                                r4.putExtra(r14, r5)
-                            L5b:
-                                r14 = 3
-                                r2.setRotationAnimationHint(r14)
-                            L5f:
-                                java.lang.String r14 = r4.getAction()
-                                java.lang.String r1 = "android.settings.panel.action.VOLUME"
-                                boolean r14 = r1.equals(r14)
-                                if (r14 == 0) goto L6e
-                                r2.setDisallowEnterPictureInPictureWhileLaunching(r5)
-                            L6e:
-                                boolean r14 = com.android.systemui.LsRune.SUBSCREEN_LARGE_FRONT_SUB_DISPLAY
-                                if (r14 == 0) goto L85
-                                com.android.systemui.Dependency r14 = com.android.systemui.Dependency.sDependency
-                                java.lang.Class<com.android.systemui.keyguard.DisplayLifecycle> r1 = com.android.systemui.keyguard.DisplayLifecycle.class
-                                java.lang.Object r14 = r14.getDependencyInner(r1)
-                                com.android.systemui.keyguard.DisplayLifecycle r14 = (com.android.systemui.keyguard.DisplayLifecycle) r14
-                                boolean r14 = r14.mIsFolderOpened
-                                if (r14 != 0) goto L85
-                                int r14 = com.android.systemui.statusbar.phone.LegacyActivityStarterInternalImpl.access$getSubDisplayID(r3)
-                                goto L92
-                            L85:
-                                android.content.Context r14 = r3.context
-                                android.view.Display r14 = r14.getDisplay()
-                                r14.getClass()
-                                int r14 = r14.getDisplayId()
-                            L92:
-                                r2.setLaunchDisplayId(r14)
-                                r14 = 0
-                                r1 = r0
-                                android.app.IActivityTaskManager r0 = android.app.ActivityTaskManager.getService()     // Catch: android.os.RemoteException -> Lca
-                                android.content.Context r5 = r3.context     // Catch: android.os.RemoteException -> Lca
-                                java.lang.String r5 = r5.getBasePackageName()     // Catch: android.os.RemoteException -> Lca
-                                android.content.Context r6 = r3.context     // Catch: android.os.RemoteException -> Lca
-                                java.lang.String r6 = r6.getAttributionTag()     // Catch: android.os.RemoteException -> Lca
-                                android.content.Context r3 = r3.context     // Catch: android.os.RemoteException -> Lca
-                                android.content.ContentResolver r3 = r3.getContentResolver()     // Catch: android.os.RemoteException -> Lca
-                                java.lang.String r3 = r4.resolveTypeIfNeeded(r3)     // Catch: android.os.RemoteException -> Lca
-                                android.os.Bundle r11 = r2.toBundle()     // Catch: android.os.RemoteException -> Lca
-                                int r12 = r1.getIdentifier()     // Catch: android.os.RemoteException -> Lca
-                                r1 = 0
-                                r2 = r5
-                                r5 = r3
-                                r3 = r6
-                                r6 = 0
-                                r7 = 0
-                                r8 = 0
-                                r9 = 268435456(0x10000000, float:2.524355E-29)
-                                r10 = 0
-                                int r0 = r0.startActivityAsUser(r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12)     // Catch: android.os.RemoteException -> Lca
-                                r13[r14] = r0     // Catch: android.os.RemoteException -> Lca
-                                goto Ld2
-                            Lca:
-                                r0 = move-exception
-                                java.lang.String r1 = "LegacyActivityStarterInternalImpl"
-                                java.lang.String r2 = "Unable to start activity"
-                                android.util.Log.w(r1, r2, r0)
-                            Ld2:
-                                r14 = r13[r14]
-                                java.lang.Integer r14 = java.lang.Integer.valueOf(r14)
-                                return r14
-                            */
-                            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.phone.LegacyActivityStarterInternalImpl$startActivityDismissingKeyguard$runnable$2$$ExternalSyntheticLambda0.mo779invoke(java.lang.Object):java.lang.Object");
+                        public final Object mo781invoke(Object obj) {
+                            int displayId;
+                            Intent intent3 = intent2;
+                            int[] iArr2 = iArr;
+                            UserHandle userHandle3 = userHandle2;
+                            LegacyActivityStarterInternalImpl legacyActivityStarterInternalImpl2 = legacyActivityStarterInternalImpl;
+                            ActivityOptions activityOptions = new ActivityOptions(CentralSurfaces.getActivityOptions(legacyActivityStarterInternalImpl2.displayId, (RemoteAnimationAdapter) obj));
+                            activityOptions.setDismissKeyguardIfInsecure();
+                            activityOptions.setDisallowEnterPictureInPictureWhileLaunching(z8);
+                            CameraIntents.Companion.getClass();
+                            KeyguardShortcutManager.Companion.getClass();
+                            if (Intrinsics.areEqual(intent3, KeyguardShortcutManager.INSECURE_CAMERA_INTENT)) {
+                                CentralSurfaces centralSurfaces$1 = legacyActivityStarterInternalImpl2.getCentralSurfaces$1();
+                                if (centralSurfaces$1 != null) {
+                                    if (((CentralSurfacesImpl) centralSurfaces$1).isForegroundComponentName(intent3.getComponent())) {
+                                        intent3.setFlags(270532608);
+                                    } else {
+                                        intent3.addFlags(VolumePanelValues.FLAG_SHOW_CSD_100_WARNINGS).getClass();
+                                    }
+                                    if (i3 == 1) {
+                                        intent3.putExtra("isQuickLaunchMode", true);
+                                    }
+                                    activityOptions.setRotationAnimationHint(3);
+                                }
+                            }
+                            if ("android.settings.panel.action.VOLUME".equals(intent3.getAction())) {
+                                activityOptions.setDisallowEnterPictureInPictureWhileLaunching(true);
+                            }
+                            if (!LsRune.SUBSCREEN_LARGE_FRONT_SUB_DISPLAY || ((DisplayLifecycle) Dependency.sDependency.getDependencyInner(DisplayLifecycle.class)).mIsFolderOpened) {
+                                Display display = legacyActivityStarterInternalImpl2.context.getDisplay();
+                                display.getClass();
+                                displayId = display.getDisplayId();
+                            } else {
+                                displayId = LegacyActivityStarterInternalImpl.access$getSubDisplayID(legacyActivityStarterInternalImpl2);
+                            }
+                            activityOptions.setLaunchDisplayId(displayId);
+                            try {
+                                iArr2[0] = ActivityTaskManager.getService().startActivityAsUser((IApplicationThread) null, legacyActivityStarterInternalImpl2.context.getBasePackageName(), legacyActivityStarterInternalImpl2.context.getAttributionTag(), intent3, intent3.resolveTypeIfNeeded(legacyActivityStarterInternalImpl2.context.getContentResolver()), (IBinder) null, (String) null, 0, 268435456, (ProfilerInfo) null, activityOptions.toBundle(), userHandle3.getIdentifier());
+                            } catch (RemoteException e) {
+                                Log.w("LegacyActivityStarterInternalImpl", "Unable to start activity", e);
+                            }
+                            return Integer.valueOf(iArr2[0]);
                         }
                     };
                     ActivityTransitionAnimator.Companion companion = ActivityTransitionAnimator.Companion;
@@ -764,7 +701,7 @@ public final class LegacyActivityStarterInternalImpl implements ActivityStarterI
             Runnable runnable2 = new Runnable() { // from class: com.android.systemui.statusbar.phone.LegacyActivityStarterInternalImpl$startActivityDismissingKeyguard$cancelRunnable$2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ActivityStarter.Callback callback2 = ActivityStarter.Callback.this;
+                    ActivityStarter.Callback callback2 = callback;
                     if (callback2 != null) {
                         callback2.onActivityStarted(-96);
                     }
@@ -774,7 +711,7 @@ public final class LegacyActivityStarterInternalImpl implements ActivityStarterI
             if (keyguardStateControllerImpl.mShowing && keyguardStateControllerImpl.mOccluded) {
                 z4 = true;
             }
-            executeRunnableDismissingKeyguard(runnable, runnable2, z5, wouldLaunchResolverActivity, !z4, false, null);
+            executeRunnableDismissingKeyguard(runnable, runnable2, z5, zWouldLaunchResolverActivity, !z4, false, null);
         }
     }
 }

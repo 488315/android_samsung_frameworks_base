@@ -2,7 +2,6 @@ package com.android.systemui.util.kotlin;
 
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class Quint<A, B, C, D, E> {
     public static final int $stable = 0;
@@ -104,15 +103,15 @@ public final class Quint<A, B, C, D, E> {
 
     public int hashCode() {
         A a = this.first;
-        int hashCode = (a == null ? 0 : a.hashCode()) * 31;
+        int iHashCode = (a == null ? 0 : a.hashCode()) * 31;
         B b = this.second;
-        int hashCode2 = (hashCode + (b == null ? 0 : b.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (b == null ? 0 : b.hashCode())) * 31;
         C c = this.third;
-        int hashCode3 = (hashCode2 + (c == null ? 0 : c.hashCode())) * 31;
+        int iHashCode3 = (iHashCode2 + (c == null ? 0 : c.hashCode())) * 31;
         D d = this.fourth;
-        int hashCode4 = (hashCode3 + (d == null ? 0 : d.hashCode())) * 31;
+        int iHashCode4 = (iHashCode3 + (d == null ? 0 : d.hashCode())) * 31;
         E e = this.fifth;
-        return hashCode4 + (e != null ? e.hashCode() : 0);
+        return iHashCode4 + (e != null ? e.hashCode() : 0);
     }
 
     public String toString() {

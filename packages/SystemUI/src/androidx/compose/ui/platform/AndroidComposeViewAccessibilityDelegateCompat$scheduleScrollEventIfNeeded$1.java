@@ -9,7 +9,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.Lambda;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class AndroidComposeViewAccessibilityDelegateCompat$scheduleScrollEventIfNeeded$1 extends Lambda implements Function0 {
     final /* synthetic */ ScrollObservationScope $scrollObservationScope;
@@ -31,13 +30,13 @@ final class AndroidComposeViewAccessibilityDelegateCompat$scheduleScrollEventIfN
         ScrollAxisRange scrollAxisRange2 = scrollObservationScope.verticalScrollAxisRange;
         Float f = scrollObservationScope.oldXValue;
         Float f2 = scrollObservationScope.oldYValue;
-        float floatValue = (scrollAxisRange == null || f == null) ? 0.0f : ((Number) scrollAxisRange.value.invoke()).floatValue() - f.floatValue();
-        float floatValue2 = (scrollAxisRange2 == null || f2 == null) ? 0.0f : ((Number) scrollAxisRange2.value.invoke()).floatValue() - f2.floatValue();
-        if (floatValue != 0.0f || floatValue2 != 0.0f) {
+        float fFloatValue = (scrollAxisRange == null || f == null) ? 0.0f : ((Number) scrollAxisRange.value.invoke()).floatValue() - f.floatValue();
+        float fFloatValue2 = (scrollAxisRange2 == null || f2 == null) ? 0.0f : ((Number) scrollAxisRange2.value.invoke()).floatValue() - f2.floatValue();
+        if (fFloatValue != 0.0f || fFloatValue2 != 0.0f) {
             AndroidComposeViewAccessibilityDelegateCompat androidComposeViewAccessibilityDelegateCompat = this.this$0;
             int i = this.$scrollObservationScope.semanticsNodeId;
             MutableIntList mutableIntList = AndroidComposeViewAccessibilityDelegateCompat.AccessibilityActionsResourceIds;
-            int semanticsNodeIdToAccessibilityVirtualNodeId = androidComposeViewAccessibilityDelegateCompat.semanticsNodeIdToAccessibilityVirtualNodeId(i);
+            int iSemanticsNodeIdToAccessibilityVirtualNodeId = androidComposeViewAccessibilityDelegateCompat.semanticsNodeIdToAccessibilityVirtualNodeId(i);
             SemanticsNodeWithAdjustedBounds semanticsNodeWithAdjustedBounds = (SemanticsNodeWithAdjustedBounds) this.this$0.getCurrentSemanticsNodes().get(this.this$0.accessibilityFocusedVirtualViewId);
             if (semanticsNodeWithAdjustedBounds != null) {
                 AndroidComposeViewAccessibilityDelegateCompat androidComposeViewAccessibilityDelegateCompat2 = this.this$0;
@@ -65,14 +64,14 @@ final class AndroidComposeViewAccessibilityDelegateCompat$scheduleScrollEventIfN
                 }
             }
             this.this$0.view.invalidate();
-            SemanticsNodeWithAdjustedBounds semanticsNodeWithAdjustedBounds3 = (SemanticsNodeWithAdjustedBounds) this.this$0.getCurrentSemanticsNodes().get(semanticsNodeIdToAccessibilityVirtualNodeId);
+            SemanticsNodeWithAdjustedBounds semanticsNodeWithAdjustedBounds3 = (SemanticsNodeWithAdjustedBounds) this.this$0.getCurrentSemanticsNodes().get(iSemanticsNodeIdToAccessibilityVirtualNodeId);
             if (semanticsNodeWithAdjustedBounds3 != null && (semanticsNode = semanticsNodeWithAdjustedBounds3.semanticsNode) != null && (layoutNode = semanticsNode.layoutNode) != null) {
                 AndroidComposeViewAccessibilityDelegateCompat androidComposeViewAccessibilityDelegateCompat4 = this.this$0;
                 if (scrollAxisRange != null) {
-                    androidComposeViewAccessibilityDelegateCompat4.pendingHorizontalScrollEvents.set(semanticsNodeIdToAccessibilityVirtualNodeId, scrollAxisRange);
+                    androidComposeViewAccessibilityDelegateCompat4.pendingHorizontalScrollEvents.set(iSemanticsNodeIdToAccessibilityVirtualNodeId, scrollAxisRange);
                 }
                 if (scrollAxisRange2 != null) {
-                    androidComposeViewAccessibilityDelegateCompat4.pendingVerticalScrollEvents.set(semanticsNodeIdToAccessibilityVirtualNodeId, scrollAxisRange2);
+                    androidComposeViewAccessibilityDelegateCompat4.pendingVerticalScrollEvents.set(iSemanticsNodeIdToAccessibilityVirtualNodeId, scrollAxisRange2);
                 }
                 androidComposeViewAccessibilityDelegateCompat4.notifySubtreeAccessibilityStateChangedIfNeeded(layoutNode);
             }

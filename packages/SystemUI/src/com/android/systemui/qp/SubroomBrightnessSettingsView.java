@@ -3,6 +3,7 @@ package com.android.systemui.qp;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.PorterDuff;
 import android.provider.Settings;
 import android.util.AttributeSet;
@@ -16,7 +17,6 @@ import com.android.systemui.R;
 import com.android.systemui.settings.brightness.BrightnessAnimationIcon;
 import com.android.systemui.util.SettingsHelper;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SubroomBrightnessSettingsView extends LinearLayout {
     public final int SEEK_BAR_MAX_VALUE;
@@ -31,10 +31,10 @@ public class SubroomBrightnessSettingsView extends LinearLayout {
     public ValueAnimator mThumbAnimator;
     public int mThumbThreshold;
 
-    public SubroomBrightnessSettingsView(Context context, AttributeSet attributeSet) {
+    public SubroomBrightnessSettingsView(Context context, AttributeSet attributeSet) throws Resources.NotFoundException {
         super(context, attributeSet);
         this.mContext = context;
-        int[] intArray = context.getResources().getIntArray(17236337);
+        int[] intArray = context.getResources().getIntArray(17236338);
         this.mBrightnessLevels = intArray;
         this.SEEK_BAR_MAX_VALUE = intArray[intArray.length - 1];
     }
@@ -101,19 +101,19 @@ public class SubroomBrightnessSettingsView extends LinearLayout {
             if (imageView != null) {
                 imageView.setColorFilter(this.mContext.getColor(R.color.subroom_qp_seekbar_icon_color), PorterDuff.Mode.SRC_IN);
             }
-            int floor = (int) Math.floor((this.mSeekBar.getMax() * this.mContext.getResources().getInteger(R.integer.sec_brightness_slider_warning_percent)) / 100.0d);
-            this.mDualSeekBarThreshold = floor;
-            if (floor <= this.mSeekBar.getProgress() && z && (brightnessAnimationIcon = this.mSunIcon) != null) {
+            int iFloor = (int) Math.floor((this.mSeekBar.getMax() * this.mContext.getResources().getInteger(R.integer.sec_brightness_slider_warning_percent)) / 100.0d);
+            this.mDualSeekBarThreshold = iFloor;
+            if (iFloor <= this.mSeekBar.getProgress() && z && (brightnessAnimationIcon = this.mSunIcon) != null) {
                 brightnessAnimationIcon.play(this.mSeekBar.getProgress(), this.mSeekBar.getMax());
             }
         }
         if (this.mSeekBar.getThumb() != null) {
-            ValueAnimator ofInt = ValueAnimator.ofInt(0, 255);
-            this.mThumbAnimator = ofInt;
-            ofInt.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.qp.SubroomBrightnessSettingsView$$ExternalSyntheticLambda0
+            ValueAnimator valueAnimatorOfInt = ValueAnimator.ofInt(0, 255);
+            this.mThumbAnimator = valueAnimatorOfInt;
+            valueAnimatorOfInt.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.qp.SubroomBrightnessSettingsView$$ExternalSyntheticLambda0
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                    SubroomBrightnessSettingsView subroomBrightnessSettingsView = SubroomBrightnessSettingsView.this;
+                    SubroomBrightnessSettingsView subroomBrightnessSettingsView = this.f$0;
                     subroomBrightnessSettingsView.mThumbAnimator.setDuration(200L);
                     subroomBrightnessSettingsView.mSeekBar.getThumb().setAlpha(((Integer) valueAnimator.getAnimatedValue()).intValue());
                 }

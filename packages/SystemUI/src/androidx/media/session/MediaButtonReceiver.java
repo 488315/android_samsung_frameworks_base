@@ -20,12 +20,10 @@ import android.view.KeyEvent;
 import androidx.activity.result.ActivityResultRegistry$register$3$$ExternalSyntheticOutline0;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class MediaButtonReceiver extends BroadcastReceiver {
     public static final /* synthetic */ int $r8$clinit = 0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Api31 {
         private Api31() {
         }
@@ -39,7 +37,6 @@ public class MediaButtonReceiver extends BroadcastReceiver {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class MediaButtonConnectionCallback extends MediaBrowserCompat.ConnectionCallback {
         public final Context mContext;
         public final Intent mIntent;
@@ -100,17 +97,17 @@ public class MediaButtonReceiver extends BroadcastReceiver {
         PackageManager packageManager = context.getPackageManager();
         Intent intent = new Intent(str);
         intent.setPackage(context.getPackageName());
-        List<ResolveInfo> queryIntentServices = packageManager.queryIntentServices(intent, 0);
-        if (queryIntentServices.size() == 1) {
-            ServiceInfo serviceInfo = queryIntentServices.get(0).serviceInfo;
+        List<ResolveInfo> listQueryIntentServices = packageManager.queryIntentServices(intent, 0);
+        if (listQueryIntentServices.size() == 1) {
+            ServiceInfo serviceInfo = listQueryIntentServices.get(0).serviceInfo;
             return new ComponentName(serviceInfo.packageName, serviceInfo.name);
         }
-        if (queryIntentServices.isEmpty()) {
+        if (listQueryIntentServices.isEmpty()) {
             return null;
         }
-        StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("Expected 1 service that handles ", str, ", found ");
-        m.append(queryIntentServices.size());
-        throw new IllegalStateException(m.toString());
+        StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("Expected 1 service that handles ", str, ", found ");
+        sbM.append(listQueryIntentServices.size());
+        throw new IllegalStateException(sbM.toString());
     }
 
     @Override // android.content.BroadcastReceiver
@@ -137,9 +134,9 @@ public class MediaButtonReceiver extends BroadcastReceiver {
         if (serviceComponentByAction2 == null) {
             throw new IllegalStateException("Could not find any Service that handles android.intent.action.MEDIA_BUTTON or implements a media browser service.");
         }
-        BroadcastReceiver.PendingResult goAsync = goAsync();
+        BroadcastReceiver.PendingResult pendingResultGoAsync = goAsync();
         Context applicationContext = context.getApplicationContext();
-        MediaButtonConnectionCallback mediaButtonConnectionCallback = new MediaButtonConnectionCallback(applicationContext, intent, goAsync);
+        MediaButtonConnectionCallback mediaButtonConnectionCallback = new MediaButtonConnectionCallback(applicationContext, intent, pendingResultGoAsync);
         MediaBrowserCompat mediaBrowserCompat = new MediaBrowserCompat(applicationContext, serviceComponentByAction2, mediaButtonConnectionCallback, null);
         mediaButtonConnectionCallback.mMediaBrowser = mediaBrowserCompat;
         Log.d("MediaBrowserCompat", "Connecting to a MediaBrowserService.");

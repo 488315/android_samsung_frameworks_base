@@ -24,7 +24,7 @@ class TtmlParser {
         this.mListener = ttmlNodeListener;
     }
 
-    public void parse(String str, long j) throws XmlPullParserException, IOException {
+    public void parse(String str, long j) throws XmlPullParserException, IOException, NumberFormatException {
         this.mParser = null;
         this.mCurrentRunId = j;
         loadParser(str);
@@ -32,9 +32,9 @@ class TtmlParser {
     }
 
     private void loadParser(String str) throws XmlPullParserException {
-        XmlPullParserFactory newInstance = XmlPullParserFactory.newInstance();
-        newInstance.setNamespaceAware(false);
-        this.mParser = newInstance.newPullParser();
+        XmlPullParserFactory xmlPullParserFactoryNewInstance = XmlPullParserFactory.newInstance();
+        xmlPullParserFactoryNewInstance.setNamespaceAware(false);
+        this.mParser = xmlPullParserFactoryNewInstance.newPullParser();
         this.mParser.setInput(new StringReader(str));
     }
 
@@ -46,7 +46,7 @@ class TtmlParser {
         sb.append("\"");
     }
 
-    private void parseTtml() throws XmlPullParserException, IOException {
+    private void parseTtml() throws XmlPullParserException, IOException, NumberFormatException {
         ArrayDeque arrayDeque = new ArrayDeque();
         int i = 0;
         boolean z = true;
@@ -60,10 +60,10 @@ class TtmlParser {
                         i++;
                         z = false;
                     } else {
-                        TtmlNode parseNode = parseNode(ttmlNode);
-                        arrayDeque.addLast(parseNode);
+                        TtmlNode node = parseNode(ttmlNode);
+                        arrayDeque.addLast(node);
                         if (ttmlNode != null) {
-                            ttmlNode.mChildren.add(parseNode);
+                            ttmlNode.mChildren.add(node);
                         }
                     }
                 } else if (eventType == 4) {
@@ -88,53 +88,53 @@ class TtmlParser {
         }
     }
 
-    private TtmlNode parseNode(TtmlNode ttmlNode) throws XmlPullParserException, IOException {
+    private TtmlNode parseNode(TtmlNode ttmlNode) throws XmlPullParserException, NumberFormatException, IOException {
         long j;
-        long j2;
-        long j3;
-        long j4;
+        long timeExpression;
+        long timeExpression2;
+        long timeExpression3;
         if (this.mParser.getEventType() != 2) {
             return null;
         }
         if (this.mParser.getName().equals("p")) {
-            j2 = 0;
-            j3 = 0;
-            j4 = Long.MAX_VALUE;
-            for (int i = 0; i < this.mParser.getAttributeCount() && (j2 == 0 || ((j4 == 0 && j3 == 0) || i <= 1)); i++) {
+            timeExpression = 0;
+            timeExpression2 = 0;
+            timeExpression3 = Long.MAX_VALUE;
+            for (int i = 0; i < this.mParser.getAttributeCount() && (timeExpression == 0 || ((timeExpression3 == 0 && timeExpression2 == 0) || i <= 1)); i++) {
                 String attributeName = this.mParser.getAttributeName(i);
                 String attributeValue = this.mParser.getAttributeValue(i);
-                String replaceFirst = attributeName.replaceFirst("^.*:", "");
-                if (replaceFirst.equals("begin")) {
-                    j2 = TtmlUtils.parseTimeExpression(attributeValue, 30, 1, 1);
-                } else if (replaceFirst.equals("end")) {
-                    j4 = TtmlUtils.parseTimeExpression(attributeValue, 30, 1, 1);
-                } else if (replaceFirst.equals(TtmlUtils.ATTR_DURATION)) {
-                    j3 = TtmlUtils.parseTimeExpression(attributeValue, 30, 1, 1);
+                String strReplaceFirst = attributeName.replaceFirst("^.*:", "");
+                if (strReplaceFirst.equals("begin")) {
+                    timeExpression = TtmlUtils.parseTimeExpression(attributeValue, 30, 1, 1);
+                } else if (strReplaceFirst.equals("end")) {
+                    timeExpression3 = TtmlUtils.parseTimeExpression(attributeValue, 30, 1, 1);
+                } else if (strReplaceFirst.equals(TtmlUtils.ATTR_DURATION)) {
+                    timeExpression2 = TtmlUtils.parseTimeExpression(attributeValue, 30, 1, 1);
                 }
             }
             j = Long.MAX_VALUE;
         } else {
             j = Long.MAX_VALUE;
-            j2 = 0;
-            j3 = 0;
-            j4 = Long.MAX_VALUE;
+            timeExpression = 0;
+            timeExpression2 = 0;
+            timeExpression3 = Long.MAX_VALUE;
         }
         if (ttmlNode != null) {
-            j2 += ttmlNode.mStartTimeMs;
-            if (j4 != j) {
-                j4 += ttmlNode.mStartTimeMs;
+            timeExpression += ttmlNode.mStartTimeMs;
+            if (timeExpression3 != j) {
+                timeExpression3 += ttmlNode.mStartTimeMs;
             }
         }
-        if (j3 > 0) {
-            if (j4 != j) {
+        if (timeExpression2 > 0) {
+            if (timeExpression3 != j) {
                 Log.e(TAG, "'dur' and 'end' attributes are defined at the same time.'end' value is ignored.");
             }
-            j4 = j2 + j3;
+            timeExpression3 = timeExpression + timeExpression2;
         }
-        if (ttmlNode != null && j4 == j && ttmlNode.mEndTimeMs != j && j4 > ttmlNode.mEndTimeMs) {
-            j4 = ttmlNode.mEndTimeMs;
+        if (ttmlNode != null && timeExpression3 == j && ttmlNode.mEndTimeMs != j && timeExpression3 > ttmlNode.mEndTimeMs) {
+            timeExpression3 = ttmlNode.mEndTimeMs;
         }
-        return new TtmlNode(this.mParser.getName(), null, null, j2, j4, ttmlNode, this.mCurrentRunId);
+        return new TtmlNode(this.mParser.getName(), null, null, timeExpression, timeExpression3, ttmlNode, this.mCurrentRunId);
     }
 
     private boolean isEndOfDoc() throws XmlPullParserException {

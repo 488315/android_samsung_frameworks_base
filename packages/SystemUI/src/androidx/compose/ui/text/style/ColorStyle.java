@@ -6,7 +6,6 @@ import androidx.compose.ui.text.internal.InlineClassHelperKt;
 import kotlin.ULong;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class ColorStyle implements TextForegroundStyle {
     public final long value;
@@ -24,12 +23,12 @@ final class ColorStyle implements TextForegroundStyle {
         }
         long j = ((ColorStyle) obj).value;
         Color.Companion companion = Color.Companion;
-        return ULong.m3427equalsimpl0(this.value, j);
+        return ULong.m3447equalsimpl0(this.value, j);
     }
 
     @Override // androidx.compose.ui.text.style.TextForegroundStyle
     public final float getAlpha() {
-        return Color.m457getAlphaimpl(this.value);
+        return Color.m459getAlphaimpl(this.value);
     }
 
     @Override // androidx.compose.ui.text.style.TextForegroundStyle
@@ -39,7 +38,7 @@ final class ColorStyle implements TextForegroundStyle {
 
     @Override // androidx.compose.ui.text.style.TextForegroundStyle
     /* renamed from: getColor-0d7_KjU */
-    public final long mo792getColor0d7_KjU() {
+    public final long mo794getColor0d7_KjU() {
         return this.value;
     }
 
@@ -50,7 +49,7 @@ final class ColorStyle implements TextForegroundStyle {
     }
 
     public final String toString() {
-        return "ColorStyle(value=" + ((Object) Color.m462toStringimpl(this.value)) + ')';
+        return "ColorStyle(value=" + ((Object) Color.m464toStringimpl(this.value)) + ')';
     }
 
     private ColorStyle(long j) {

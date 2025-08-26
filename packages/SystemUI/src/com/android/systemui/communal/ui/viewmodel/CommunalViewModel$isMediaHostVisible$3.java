@@ -10,7 +10,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class CommunalViewModel$isMediaHostVisible$3 extends SuspendLambda implements Function2 {
     /* synthetic */ boolean Z$0;
@@ -47,9 +46,9 @@ final class CommunalViewModel$isMediaHostVisible$3 extends SuspendLambda impleme
         boolean z = this.Z$0;
         Logger logger = this.this$0.logger;
         CommunalViewModel$communalContent$2$$ExternalSyntheticLambda0 communalViewModel$communalContent$2$$ExternalSyntheticLambda0 = new CommunalViewModel$communalContent$2$$ExternalSyntheticLambda0(2);
-        LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.DEBUG, communalViewModel$communalContent$2$$ExternalSyntheticLambda0, null);
-        obtain.setBool1(z);
-        logger.getBuffer().commit(obtain);
+        LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.DEBUG, communalViewModel$communalContent$2$$ExternalSyntheticLambda0, null);
+        logMessageObtain.setBool1(z);
+        logger.getBuffer().commit(logMessageObtain);
         return Unit.INSTANCE;
     }
 }

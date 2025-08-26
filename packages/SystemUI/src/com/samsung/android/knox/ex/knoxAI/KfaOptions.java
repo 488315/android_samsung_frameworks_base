@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class KfaOptions implements Parcelable {
     public static final Parcelable.Creator<KfaOptions> CREATOR = new Parcelable.Creator<KfaOptions>() { // from class: com.samsung.android.knox.ex.knoxAI.KfaOptions.1
@@ -47,7 +46,6 @@ public class KfaOptions implements Parcelable {
     public ArrayList<String> outputNames;
     public String weights_file;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class InputShapeVector implements Parcelable {
         public final Parcelable.Creator<InputShapeVector> CREATOR = new Parcelable.Creator<InputShapeVector>() { // from class: com.samsung.android.knox.ex.knoxAI.KfaOptions.InputShapeVector.1
             /* JADX WARN: Can't rename method to resolve collision */
@@ -184,10 +182,10 @@ public class KfaOptions implements Parcelable {
             }
             return;
         }
-        int readInt = parcel.readInt();
-        this.model_package_buffer_len = readInt;
-        if (readInt > 0) {
-            byte[] bArr = new byte[readInt];
+        int i2 = parcel.readInt();
+        this.model_package_buffer_len = i2;
+        if (i2 > 0) {
+            byte[] bArr = new byte[i2];
             this.model_package_buffer_ptr = bArr;
             parcel.readByteArray(bArr);
         }

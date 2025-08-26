@@ -19,7 +19,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-/* loaded from: classes3.dex */
+/* loaded from: classes4.dex */
 public class ProtoLogDataSource extends DataSource<Instance, TlsState, IncrementalState> {
     private static final String DATASOURCE_NAME = "android.protolog";
     private final Set<Runnable> mOnFlushCallbacks;
@@ -33,6 +33,16 @@ public class ProtoLogDataSource extends DataSource<Instance, TlsState, Increment
         public final Map<String, Integer> argumentInterningMap = new HashMap();
         public final Map<String, Integer> stacktraceInterningMap = new HashMap();
         public boolean clearReported = false;
+    }
+
+    @Override // android.tracing.perfetto.DataSource
+    public /* bridge */ /* synthetic */ IncrementalState createIncrementalState(CreateIncrementalStateArgs createIncrementalStateArgs) {
+        return createIncrementalState((CreateIncrementalStateArgs<Instance>) createIncrementalStateArgs);
+    }
+
+    @Override // android.tracing.perfetto.DataSource
+    public /* bridge */ /* synthetic */ TlsState createTlsState(CreateTlsStateArgs createTlsStateArgs) {
+        return createTlsState((CreateTlsStateArgs<Instance>) createTlsStateArgs);
     }
 
     public ProtoLogDataSource() {
@@ -72,17 +82,17 @@ public class ProtoLogDataSource extends DataSource<Instance, TlsState, Increment
         return new Instance(this, i, protoLogConfig, new Instance.TracingInstanceStartCallback() { // from class: com.android.internal.protolog.ProtoLogDataSource$$ExternalSyntheticLambda0
             @Override // com.android.internal.protolog.ProtoLogDataSource.Instance.TracingInstanceStartCallback
             public final void run(int i2, ProtoLogDataSource.ProtoLogConfig protoLogConfig2) {
-                ProtoLogDataSource.this.executeOnStartCallbacks(i2, protoLogConfig2);
+                this.f$0.executeOnStartCallbacks(i2, protoLogConfig2);
             }
         }, new Runnable() { // from class: com.android.internal.protolog.ProtoLogDataSource$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
-                ProtoLogDataSource.this.executeOnFlushCallbacks();
+                this.f$0.executeOnFlushCallbacks();
             }
         }, new Instance.TracingInstanceStopCallback() { // from class: com.android.internal.protolog.ProtoLogDataSource$$ExternalSyntheticLambda2
             @Override // com.android.internal.protolog.ProtoLogDataSource.Instance.TracingInstanceStopCallback
             public final void run(int i2, ProtoLogDataSource.ProtoLogConfig protoLogConfig2) {
-                ProtoLogDataSource.this.executeOnStopCallbacks(i2, protoLogConfig2);
+                this.f$0.executeOnStopCallbacks(i2, protoLogConfig2);
             }
         });
     }
@@ -90,24 +100,24 @@ public class ProtoLogDataSource extends DataSource<Instance, TlsState, Increment
     /* JADX WARN: Can't rename method to resolve collision */
     @Override // android.tracing.perfetto.DataSource
     public TlsState createTlsState(CreateTlsStateArgs<Instance> createTlsStateArgs) {
-        Instance dataSourceInstanceLocked = createTlsStateArgs.getDataSourceInstanceLocked();
+        Instance instance = (Instance) createTlsStateArgs.getDataSourceInstanceLocked();
         try {
-            if (dataSourceInstanceLocked == null) {
+            if (instance == null) {
                 TlsState tlsState = new TlsState(ProtoLogConfig.DEFAULT);
-                if (dataSourceInstanceLocked != null) {
-                    dataSourceInstanceLocked.close();
+                if (instance != null) {
+                    instance.close();
                 }
                 return tlsState;
             }
-            TlsState tlsState2 = new TlsState(dataSourceInstanceLocked.mConfig);
-            if (dataSourceInstanceLocked != null) {
-                dataSourceInstanceLocked.close();
+            TlsState tlsState2 = new TlsState(instance.mConfig);
+            if (instance != null) {
+                instance.close();
             }
             return tlsState2;
         } catch (Throwable th) {
-            if (dataSourceInstanceLocked != null) {
+            if (instance != null) {
                 try {
-                    dataSourceInstanceLocked.close();
+                    instance.close();
                 } catch (Throwable th2) {
                     th.addSuppressed(th2);
                 }
@@ -228,64 +238,65 @@ public class ProtoLogDataSource extends DataSource<Instance, TlsState, Increment
         }
     }
 
+    /* JADX WARN: Multi-variable type inference failed */
     private ProtoLogConfig readProtoLogConfig(ProtoInputStream protoInputStream) throws IOException {
-        int readInt;
-        long start = protoInputStream.start(1146756268158L);
-        LogLevel logLevel = LogLevel.WTF;
-        HashMap hashMap = new HashMap();
+        int i;
+        long jStart = protoInputStream.start(1146756268158L);
+        LogLevel logLevelLogLevelFromInt = LogLevel.WTF;
+        HashMap map = new HashMap();
         while (true) {
-            String str = null;
-            byte b = 0;
-            int i = -1;
+            String string = null;
+            Object[] objArr = 0;
+            int i2 = -1;
             if (protoInputStream.nextField() != -1) {
                 int fieldNumber = protoInputStream.getFieldNumber();
                 long j = 1159641169922L;
-                int i2 = 1;
+                int i3 = 1;
                 if (fieldNumber == 1) {
-                    long start2 = protoInputStream.start(2246267895809L);
+                    long jStart2 = protoInputStream.start(2246267895809L);
                     boolean z = false;
-                    LogLevel logLevel2 = logLevel;
-                    while (protoInputStream.nextField() != i) {
-                        long j2 = start2;
-                        if (protoInputStream.getFieldNumber() == i2) {
-                            str = protoInputStream.readString(1138166333441L);
+                    LogLevel logLevelLogLevelFromInt2 = logLevelLogLevelFromInt;
+                    while (protoInputStream.nextField() != i2) {
+                        long j2 = jStart2;
+                        if (protoInputStream.getFieldNumber() == i3) {
+                            string = protoInputStream.readString(1138166333441L);
                         }
                         if (protoInputStream.getFieldNumber() == 2) {
-                            logLevel2 = logLevelFromInt(protoInputStream.readInt(j));
+                            logLevelLogLevelFromInt2 = logLevelFromInt(protoInputStream.readInt(j));
                         }
                         if (protoInputStream.getFieldNumber() == 3) {
                             z = protoInputStream.readBoolean(1133871366147L);
-                            start2 = j2;
-                            i = -1;
+                            jStart2 = j2;
+                            i2 = -1;
                             j = 1159641169922L;
                         } else {
-                            start2 = j2;
+                            jStart2 = j2;
                         }
-                        i2 = 1;
+                        i3 = 1;
                     }
-                    long j3 = start2;
-                    if (str == null) {
+                    long j3 = jStart2;
+                    if (string == null) {
                         throw new RuntimeException("Failed to decode proto config. Got a group override without a group tag.");
                     }
-                    hashMap.put(str, new GroupConfig(logLevel2, z));
+                    map.put(string, new GroupConfig(logLevelLogLevelFromInt2, z));
                     protoInputStream.end(j3);
                 } else if (fieldNumber != 2) {
-                    if (fieldNumber == 3 && (readInt = protoInputStream.readInt(1159641169923L)) < logLevel.ordinal()) {
-                        logLevel = logLevelFromInt(readInt);
+                    if (fieldNumber == 3 && (i = protoInputStream.readInt(1159641169923L)) < logLevelLogLevelFromInt.ordinal()) {
+                        logLevelLogLevelFromInt = logLevelFromInt(i);
                     }
                 } else {
-                    int readInt2 = protoInputStream.readInt(1159641169922L);
-                    if (readInt2 == 0) {
+                    int i4 = protoInputStream.readInt(1159641169922L);
+                    if (i4 == 0) {
                         continue;
-                    } else if (readInt2 == 1) {
-                        logLevel = LogLevel.DEBUG;
+                    } else if (i4 == 1) {
+                        logLevelLogLevelFromInt = LogLevel.DEBUG;
                     } else {
                         throw new RuntimeException("Unhandled ProtoLog tracing mode type");
                     }
                 }
             } else {
-                protoInputStream.end(start);
-                return new ProtoLogConfig(logLevel, hashMap);
+                protoInputStream.end(jStart);
+                return new ProtoLogConfig(logLevelLogLevelFromInt, map);
             }
         }
     }

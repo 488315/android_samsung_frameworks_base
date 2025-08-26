@@ -13,7 +13,6 @@ import java.io.EOFException;
 import java.io.IOException;
 import java.io.Writer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class Streams {
     private Streams() {
@@ -26,25 +25,25 @@ public final class Streams {
             try {
                 jsonReader.peek();
                 z = false;
-                try {
-                    return TypeAdapters.JSON_ELEMENT.read2(jsonReader);
-                } catch (EOFException e) {
-                    e = e;
-                    if (z) {
-                        return JsonNull.INSTANCE;
-                    }
-                    throw new JsonSyntaxException(e);
-                }
-            } catch (MalformedJsonException e2) {
-                throw new JsonSyntaxException(e2);
-            } catch (IOException e3) {
-                throw new JsonIOException(e3);
-            } catch (NumberFormatException e4) {
-                throw new JsonSyntaxException(e4);
+            } catch (EOFException e) {
+                e = e;
+                z = true;
             }
-        } catch (EOFException e5) {
-            e = e5;
-            z = true;
+            try {
+                return TypeAdapters.JSON_ELEMENT.read2(jsonReader);
+            } catch (EOFException e2) {
+                e = e2;
+                if (z) {
+                    return JsonNull.INSTANCE;
+                }
+                throw new JsonSyntaxException(e);
+            }
+        } catch (MalformedJsonException e3) {
+            throw new JsonSyntaxException(e3);
+        } catch (IOException e4) {
+            throw new JsonIOException(e4);
+        } catch (NumberFormatException e5) {
+            throw new JsonSyntaxException(e5);
         }
     }
 
@@ -56,12 +55,10 @@ public final class Streams {
         return appendable instanceof Writer ? (Writer) appendable : new AppendableWriter(appendable);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class AppendableWriter extends Writer {
         private final Appendable appendable;
         private final CurrentWrite currentWrite = new CurrentWrite();
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class CurrentWrite implements CharSequence {
             char[] chars;
 

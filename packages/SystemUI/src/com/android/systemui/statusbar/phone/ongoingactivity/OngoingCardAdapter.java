@@ -1,19 +1,27 @@
 package com.android.systemui.statusbar.phone.ongoingactivity;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.content.res.Resources;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.Icon;
 import android.os.Trace;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.widget.BaseAdapter;
+import android.widget.Chronometer;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RemoteViews;
+import android.widget.TextView;
 import androidx.core.os.BundleKt;
+import com.android.internal.util.ContrastColorUtil;
 import com.android.systemui.R;
 import com.android.systemui.facewidget.plugin.FaceWidgetNotificationControllerWrapper;
 import com.android.systemui.media.SecMediaHost;
@@ -21,12 +29,13 @@ import com.android.systemui.statusbar.NotificationRemoteInputManager;
 import com.android.systemui.statusbar.phone.IndicatorScaleGardener;
 import com.android.systemui.statusbar.phone.ongoingactivity.CardStackview.CardRemoteContainer;
 import com.android.systemui.statusbar.phone.ongoingactivity.CardStackview.CardStackViewUtils;
+import com.android.systemui.statusbar.phone.ongoingactivity.media.OngoingMediaResourceUtils;
+import com.sec.ims.volte2.data.VolteConstants;
 import kotlin.Pair;
 import kotlin.Unit;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.math.MathKt__MathJVMKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class OngoingCardAdapter extends BaseAdapter {
     public int customChipSidePadding;
@@ -45,7 +54,6 @@ public class OngoingCardAdapter extends BaseAdapter {
     public final int sportScoreMaxWidth;
     public int topHeight;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -59,7 +67,7 @@ public class OngoingCardAdapter extends BaseAdapter {
         new Companion(null);
     }
 
-    public OngoingCardAdapter(Context context, IndicatorScaleGardener indicatorScaleGardener, NotificationRemoteInputManager notificationRemoteInputManager, SecMediaHost secMediaHost, FaceWidgetNotificationControllerWrapper faceWidgetNotificationControllerWrapper) {
+    public OngoingCardAdapter(Context context, IndicatorScaleGardener indicatorScaleGardener, NotificationRemoteInputManager notificationRemoteInputManager, SecMediaHost secMediaHost, FaceWidgetNotificationControllerWrapper faceWidgetNotificationControllerWrapper) throws Resources.NotFoundException {
         this.mContext = context;
         this.indicatorScaleGardener = indicatorScaleGardener;
         this.remoteHandler = notificationRemoteInputManager;
@@ -107,11 +115,11 @@ public class OngoingCardAdapter extends BaseAdapter {
                         ((ViewGroup) parent).removeView(view2);
                     }
                     if (view2 == null) {
-                        View apply = remoteViews.apply(this.mContext, null, this.remoteHandler.mInteractionHandler);
+                        View viewApply = remoteViews.apply(this.mContext, null, this.remoteHandler.mInteractionHandler);
                         if (dataByIndex.mCustomExpandedCardView != null) {
-                            apply = this.faceWidgetNotificationControllerWrapper.getViewFromNowBar(apply, BundleKt.bundleOf(new Pair("type", "OA")));
+                            viewApply = this.faceWidgetNotificationControllerWrapper.getViewFromNowBar(viewApply, BundleKt.bundleOf(new Pair("type", "OA")));
                         }
-                        view2 = apply;
+                        view2 = viewApply;
                     }
                     if (dataByIndex.mCustomExpandedCardView != null) {
                         CardRemoteContainer cardRemoteContainer = new CardRemoteContainer(this.mContext, null, 0, 6, null);
@@ -126,19 +134,20 @@ public class OngoingCardAdapter extends BaseAdapter {
                     View view3 = view2;
                     Context context2 = this.mContext;
                     int measuredHeight = view3.getMeasuredHeight();
-                    Drawable drawable = null;
+                    Drawable background = null;
                     int i2 = dataByIndex.mChipBackground;
                     ViewGroup viewGroup3 = this.mCardExpandContents;
                     if (viewGroup3 != null) {
-                        drawable = viewGroup3.getBackground();
+                        background = viewGroup3.getBackground();
                     }
                     cardStackViewUtils.getClass();
-                    CardStackViewUtils.addGradientBackground(context2, ongoingCardWidth, measuredHeight, i2, drawable, true, z);
+                    CardStackViewUtils.addGradientBackground(context2, ongoingCardWidth, measuredHeight, i2, background, true, z);
                     viewGroup2.getLayoutParams().height = -2;
                 }
             }
             OngoingActivityLayoutUtil.updateNowbarSports(this.mContext, view, dataByIndex, OngoingType.OA);
             OngoingActivityLayoutUtil.updateOngoingChronometer(view, dataByIndex, false);
+            OngoingActivityLayoutUtil.updateOngoingDescription(view);
         }
         if (i == 0) {
             view.setImportantForAccessibility(1);
@@ -155,14 +164,14 @@ public class OngoingCardAdapter extends BaseAdapter {
         return OngoingActivityDataHelper.mOngoingActivityLists.size();
     }
 
-    public final View getDetachedMediaView() {
+    public final View getDetachedMediaView() throws Resources.NotFoundException {
         View view;
         OngoingCardController$$ExternalSyntheticLambda0 ongoingCardController$$ExternalSyntheticLambda0 = this.getMediaCardView;
         if (ongoingCardController$$ExternalSyntheticLambda0 == null) {
             Log.e("MediaOngoingActivity", "getMediaCard. lambda is not initialized");
             view = null;
         } else {
-            view = (View) ongoingCardController$$ExternalSyntheticLambda0.mo779invoke(Unit.INSTANCE);
+            view = (View) ongoingCardController$$ExternalSyntheticLambda0.mo781invoke(Unit.INSTANCE);
         }
         if (view == null) {
             Log.e("MediaOngoingActivity", "getDetachedMediaView getMediaCard is null");
@@ -196,9 +205,9 @@ public class OngoingCardAdapter extends BaseAdapter {
         OngoingActivityDataHelper.INSTANCE.getClass();
         if (OngoingActivityDataHelper.mOngoingActivityLists.size() <= i || !OngoingActivityDataHelper.getDataByIndex(i).mIsMediaOngoingData) {
             viewGroup.getClass();
-            View inflate = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.sec_ongoing_card_item_layout, viewGroup, false);
-            bindView(inflate, i);
-            return inflate;
+            View viewInflate = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.sec_ongoing_card_item_layout, viewGroup, false);
+            bindView(viewInflate, i);
+            return viewInflate;
         }
         View detachedMediaView = getDetachedMediaView();
         if (detachedMediaView != null) {
@@ -210,49 +219,347 @@ public class OngoingCardAdapter extends BaseAdapter {
         return LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.sec_ongoing_card_item_layout, viewGroup, false);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:67:0x0110, code lost:
-    
-        if (r1 == null) goto L67;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:8:0x002b, code lost:
-    
-        if (r1 == null) goto L11;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:100:0x01e7  */
+    /* JADX WARN: Removed duplicated region for block: B:101:0x01ec  */
+    /* JADX WARN: Removed duplicated region for block: B:108:0x022a  */
+    /* JADX WARN: Removed duplicated region for block: B:116:0x023e  */
+    /* JADX WARN: Removed duplicated region for block: B:11:0x002d  */
+    /* JADX WARN: Removed duplicated region for block: B:122:0x025a  */
+    /* JADX WARN: Removed duplicated region for block: B:18:0x003e  */
+    /* JADX WARN: Removed duplicated region for block: B:21:0x0045  */
+    /* JADX WARN: Removed duplicated region for block: B:27:0x0064  */
+    /* JADX WARN: Removed duplicated region for block: B:30:0x006b  */
+    /* JADX WARN: Removed duplicated region for block: B:33:0x0072  */
+    /* JADX WARN: Removed duplicated region for block: B:36:0x009a  */
+    /* JADX WARN: Removed duplicated region for block: B:42:0x00d0  */
+    /* JADX WARN: Removed duplicated region for block: B:45:0x00d7  */
+    /* JADX WARN: Removed duplicated region for block: B:72:0x0130  */
+    /* JADX WARN: Removed duplicated region for block: B:79:0x0141  */
+    /* JADX WARN: Removed duplicated region for block: B:82:0x0148  */
+    /* JADX WARN: Removed duplicated region for block: B:88:0x016c  */
+    /* JADX WARN: Removed duplicated region for block: B:89:0x0187  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void inflateDummyChipView(com.android.systemui.statusbar.phone.ongoingactivity.OngoingActivityData r9) {
-        /*
-            Method dump skipped, instructions count: 593
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.phone.ongoingactivity.OngoingCardAdapter.inflateDummyChipView(com.android.systemui.statusbar.phone.ongoingactivity.OngoingActivityData):void");
+    public final void inflateDummyChipView(OngoingActivityData ongoingActivityData) {
+        ImageView imageView;
+        ImageView imageView2;
+        ImageView imageView3;
+        TextView textView;
+        LinearLayout linearLayout;
+        FrameLayout frameLayout;
+        LinearLayout linearLayout2;
+        LinearLayout linearLayout3;
+        ViewGroup.LayoutParams layoutParams;
+        FrameLayout frameLayout2;
+        ViewGroup.LayoutParams layoutParams2;
+        Unit unit;
+        ImageView imageView4;
+        ImageView imageView5;
+        ImageView imageView6;
+        LinearLayout linearLayout4;
+        FrameLayout frameLayout3;
+        FrameLayout frameLayout4;
+        View viewApply;
+        float f;
+        View viewFindViewWithTag;
+        FrameLayout frameLayout5;
+        FrameLayout frameLayout6;
+        FrameLayout frameLayout7;
+        FrameLayout frameLayout8;
+        ViewGroup.LayoutParams layoutParams3;
+        ViewGroup.LayoutParams layoutParams4;
+        Unit unit2;
+        Trace.beginSection("OCA.inflateDummyChipView");
+        int mediaCardPrimaryInfoColor = OngoingMediaResourceUtils.getMediaCardUiType$default(OngoingMediaResourceUtils.INSTANCE, ongoingActivityData.mChipBackground).getMediaCardPrimaryInfoColor(this.mContext);
+        if (ongoingActivityData.mExpandedChipView != null) {
+            Icon icon = ongoingActivityData.mChipIcon;
+            if (icon == null) {
+                Icon icon2 = ongoingActivityData.mCardIcon;
+                if (icon2 != null && (imageView4 = this.mDummySmallIcon) != null) {
+                    imageView4.setImageIcon(icon2);
+                    Unit unit3 = Unit.INSTANCE;
+                }
+                imageView5 = this.mDummySmallIcon;
+                if (imageView5 != null) {
+                    imageView5.setVisibility(0);
+                }
+                imageView6 = this.mDummySmallIcon;
+                if (imageView6 != null) {
+                    if (ContrastColorUtil.getInstance(this.mContext).isGrayscaleIcon(imageView6.getDrawable())) {
+                        imageView6.setImageTintList(ColorStateList.valueOf(mediaCardPrimaryInfoColor));
+                    } else {
+                        imageView6.setImageTintList(null);
+                    }
+                }
+                linearLayout4 = this.mDummyNotiParentLayout;
+                if (linearLayout4 != null) {
+                    linearLayout4.setVisibility(8);
+                }
+                frameLayout3 = this.mDummyRemoteContainer;
+                if (frameLayout3 != null) {
+                    frameLayout3.setVisibility(0);
+                }
+                frameLayout4 = this.mDummyRemoteContainer;
+                if (frameLayout4 != null) {
+                    frameLayout4.removeAllViews();
+                }
+                RemoteViews remoteViews = ongoingActivityData.mExpandedChipView;
+                remoteViews.getClass();
+                viewApply = remoteViews.apply(this.mContext, null);
+                f = this.indicatorScaleGardener.getLatestScaleModel(this.mContext).ratio;
+                viewApply.setScaleX(f);
+                viewApply.setScaleY(f);
+                viewFindViewWithTag = viewApply.findViewWithTag("chip_sports_score");
+                if (viewFindViewWithTag instanceof TextView) {
+                    TextView textView2 = (TextView) viewFindViewWithTag;
+                    textView2.measure(0, 0);
+                    if (MathKt__MathJVMKt.roundToInt(textView2.getMeasuredWidth() * f) >= MathKt__MathJVMKt.roundToInt(this.sportScoreMaxWidth * f)) {
+                        textView2.setText("-");
+                    }
+                    textView2.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+                    textView2.setHorizontalFadingEdgeEnabled(true);
+                    textView2.setTextColor(this.mContext.getColor(R.color.ongoing_activity_custom_chip_text_color));
+                }
+                frameLayout5 = this.mDummyRemoteContainer;
+                if (frameLayout5 != null) {
+                    frameLayout5.addView(viewApply);
+                }
+                frameLayout6 = this.mDummyRemoteContainer;
+                if (frameLayout6 != null) {
+                    int i = this.customChipSidePadding;
+                    frameLayout6.setPadding(i, 0, i, 0);
+                }
+                viewApply.measure(0, 0);
+                frameLayout7 = this.mDummyRemoteContainer;
+                if (frameLayout7 != null && (layoutParams4 = frameLayout7.getLayoutParams()) != null) {
+                    layoutParams4.width = MathKt__MathJVMKt.roundToInt(((this.customChipSidePadding * 2) + viewApply.getMeasuredWidth()) * f);
+                }
+                frameLayout8 = this.mDummyRemoteContainer;
+                if (frameLayout8 != null && (layoutParams3 = frameLayout8.getLayoutParams()) != null) {
+                    layoutParams3.height = this.topHeight;
+                }
+            } else {
+                ImageView imageView7 = this.mDummySmallIcon;
+                if (imageView7 != null) {
+                    imageView7.setImageIcon(icon);
+                    unit2 = Unit.INSTANCE;
+                } else {
+                    unit2 = null;
+                }
+                if (unit2 == null) {
+                }
+                imageView5 = this.mDummySmallIcon;
+                if (imageView5 != null) {
+                }
+                imageView6 = this.mDummySmallIcon;
+                if (imageView6 != null) {
+                }
+                linearLayout4 = this.mDummyNotiParentLayout;
+                if (linearLayout4 != null) {
+                }
+                frameLayout3 = this.mDummyRemoteContainer;
+                if (frameLayout3 != null) {
+                }
+                frameLayout4 = this.mDummyRemoteContainer;
+                if (frameLayout4 != null) {
+                }
+                RemoteViews remoteViews2 = ongoingActivityData.mExpandedChipView;
+                remoteViews2.getClass();
+                viewApply = remoteViews2.apply(this.mContext, null);
+                f = this.indicatorScaleGardener.getLatestScaleModel(this.mContext).ratio;
+                viewApply.setScaleX(f);
+                viewApply.setScaleY(f);
+                viewFindViewWithTag = viewApply.findViewWithTag("chip_sports_score");
+                if (viewFindViewWithTag instanceof TextView) {
+                }
+                frameLayout5 = this.mDummyRemoteContainer;
+                if (frameLayout5 != null) {
+                }
+                frameLayout6 = this.mDummyRemoteContainer;
+                if (frameLayout6 != null) {
+                }
+                viewApply.measure(0, 0);
+                frameLayout7 = this.mDummyRemoteContainer;
+                if (frameLayout7 != null) {
+                    layoutParams4.width = MathKt__MathJVMKt.roundToInt(((this.customChipSidePadding * 2) + viewApply.getMeasuredWidth()) * f);
+                }
+                frameLayout8 = this.mDummyRemoteContainer;
+                if (frameLayout8 != null) {
+                    layoutParams3.height = this.topHeight;
+                }
+            }
+        } else {
+            FrameLayout frameLayout9 = this.mDummyRemoteContainer;
+            if (frameLayout9 != null) {
+                frameLayout9.removeAllViews();
+            }
+            FrameLayout frameLayout10 = this.mDummyRemoteContainer;
+            if (frameLayout10 != null) {
+                frameLayout10.setVisibility(8);
+            }
+            LinearLayout linearLayout5 = this.mDummyNotiParentLayout;
+            if (linearLayout5 != null) {
+                linearLayout5.setVisibility(0);
+            }
+            Icon icon3 = ongoingActivityData.mChipIcon;
+            if (icon3 == null) {
+                Icon icon4 = ongoingActivityData.mCardIcon;
+                if (icon4 != null && (imageView = this.mDummySmallIcon) != null) {
+                    imageView.setImageIcon(icon4);
+                    Unit unit4 = Unit.INSTANCE;
+                }
+                imageView2 = this.mDummySmallIcon;
+                if (imageView2 != null) {
+                    imageView2.setVisibility(0);
+                }
+                imageView3 = this.mDummySmallIcon;
+                if (imageView3 != null) {
+                    if (ContrastColorUtil.getInstance(this.mContext).isGrayscaleIcon(imageView3.getDrawable())) {
+                        imageView3.setImageTintList(ColorStateList.valueOf(mediaCardPrimaryInfoColor));
+                    } else {
+                        imageView3.setImageTintList(null);
+                    }
+                }
+                if (ongoingActivityData.mExpandedChipText == null) {
+                    TextView textView3 = new TextView(this.mContext);
+                    textView3.setTypeface(Typeface.create(Typeface.create("sec", 0), VolteConstants.ErrorCode.BUSY_EVERYWHERE, false));
+                    CharSequence charSequence = ongoingActivityData.mExpandedChipText;
+                    charSequence.getClass();
+                    textView3.setText(charSequence);
+                    textView = textView3;
+                } else {
+                    RemoteViews remoteViews3 = ongoingActivityData.mChronometerView;
+                    if (remoteViews3 != null) {
+                        Chronometer chronometer = (Chronometer) remoteViews3.apply(this.mContext, null);
+                        chronometer.setTypeface(Typeface.create(Typeface.create("sec-num-fixed", 0), VolteConstants.ErrorCode.BUSY_EVERYWHERE, false));
+                        chronometer.setFormat("%s");
+                        chronometer.hidden_semSetMilliSecondCount(0);
+                        chronometer.hidden_semSetForceTickTime(1000);
+                        textView = chronometer;
+                    } else {
+                        TextView textView4 = new TextView(this.mContext);
+                        textView4.setTypeface(Typeface.create(Typeface.create("sec", 0), VolteConstants.ErrorCode.BUSY_EVERYWHERE, false));
+                        textView4.setText(ongoingActivityData.mPrimaryInfo);
+                        textView = textView4;
+                    }
+                }
+                textView.setSingleLine(true);
+                textView.setTextColor(mediaCardPrimaryInfoColor);
+                textView.setTextSize(0, this.mDummyTextSize);
+                textView.setHorizontalFadingEdgeEnabled(true);
+                linearLayout = this.mDummyNotiParentLayout;
+                if (linearLayout != null && (layoutParams2 = linearLayout.getLayoutParams()) != null) {
+                    layoutParams2.height = this.topHeight;
+                }
+                frameLayout = this.mDummyExpandedInfo;
+                if ((frameLayout == null ? frameLayout.getChildCount() : 0) > 0 && (frameLayout2 = this.mDummyExpandedInfo) != null) {
+                    frameLayout2.removeAllViews();
+                }
+                float f2 = this.indicatorScaleGardener.getLatestScaleModel(this.mContext).ratio;
+                int iRoundToInt = MathKt__MathJVMKt.roundToInt(this.mContext.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_expanded_chip_padding_start) * f2);
+                int iRoundToInt2 = MathKt__MathJVMKt.roundToInt(this.mContext.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_expanded_chip_padding_end) * f2);
+                linearLayout2 = this.mDummyNotiParentLayout;
+                if (linearLayout2 != null) {
+                    linearLayout2.setPadding(iRoundToInt, 0, iRoundToInt2, 0);
+                }
+                linearLayout3 = this.mDummyNotiParentLayout;
+                if (linearLayout3 != null && (layoutParams = linearLayout3.getLayoutParams()) != null) {
+                    layoutParams.width = -2;
+                }
+                if (textView instanceof Chronometer) {
+                    textView.setElegantTextHeight(false);
+                    FrameLayout frameLayout11 = this.mDummyExpandedInfo;
+                    if (frameLayout11 != null) {
+                        frameLayout11.addView(textView);
+                    }
+                    FrameLayout frameLayout12 = this.mDummyExpandedInfo;
+                    if (frameLayout12 != null) {
+                        frameLayout12.setVisibility(0);
+                    }
+                } else {
+                    textView.measure(0, 0);
+                    Chronometer chronometer2 = (Chronometer) textView;
+                    chronometer2.setElegantTextHeight(false);
+                    FrameLayout frameLayout13 = this.mDummyExpandedInfo;
+                    if (frameLayout13 != null) {
+                        frameLayout13.addView(textView, -2, chronometer2.getMeasuredHeight());
+                    }
+                    FrameLayout frameLayout14 = this.mDummyExpandedInfo;
+                    if (frameLayout14 != null) {
+                        frameLayout14.setVisibility(0);
+                    }
+                }
+            } else {
+                ImageView imageView8 = this.mDummySmallIcon;
+                if (imageView8 != null) {
+                    imageView8.setImageIcon(icon3);
+                    unit = Unit.INSTANCE;
+                } else {
+                    unit = null;
+                }
+                if (unit == null) {
+                }
+                imageView2 = this.mDummySmallIcon;
+                if (imageView2 != null) {
+                }
+                imageView3 = this.mDummySmallIcon;
+                if (imageView3 != null) {
+                }
+                if (ongoingActivityData.mExpandedChipText == null) {
+                }
+                textView.setSingleLine(true);
+                textView.setTextColor(mediaCardPrimaryInfoColor);
+                textView.setTextSize(0, this.mDummyTextSize);
+                textView.setHorizontalFadingEdgeEnabled(true);
+                linearLayout = this.mDummyNotiParentLayout;
+                if (linearLayout != null) {
+                    layoutParams2.height = this.topHeight;
+                }
+                frameLayout = this.mDummyExpandedInfo;
+                if ((frameLayout == null ? frameLayout.getChildCount() : 0) > 0) {
+                    frameLayout2.removeAllViews();
+                }
+                float f22 = this.indicatorScaleGardener.getLatestScaleModel(this.mContext).ratio;
+                int iRoundToInt3 = MathKt__MathJVMKt.roundToInt(this.mContext.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_expanded_chip_padding_start) * f22);
+                int iRoundToInt22 = MathKt__MathJVMKt.roundToInt(this.mContext.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_expanded_chip_padding_end) * f22);
+                linearLayout2 = this.mDummyNotiParentLayout;
+                if (linearLayout2 != null) {
+                }
+                linearLayout3 = this.mDummyNotiParentLayout;
+                if (linearLayout3 != null) {
+                    layoutParams.width = -2;
+                }
+                if (textView instanceof Chronometer) {
+                }
+            }
+        }
+        Trace.endSection();
     }
 
-    public final void initNormalNotificationView(View view) {
+    public final void initNormalNotificationView(View view) throws Resources.NotFoundException {
         ViewGroup.LayoutParams layoutParams;
         view.setLayoutDirection(this.mContext.getResources().getConfiguration().getLayoutDirection());
         this.mCardParentLayout = (ViewGroup) view.findViewById(R.id.stack_pip_layout);
         this.mCardExpandContents = (ViewGroup) view.findViewById(R.id.stack_expand_contents);
-        View findViewById = view.findViewById(R.id.dummy_capsule_item_top_layout);
-        findViewById.getClass();
-        this.mDummyNotiParentLayout = (LinearLayout) findViewById;
-        View findViewById2 = view.findViewById(R.id.dummy_capsule_item_app_icon);
-        findViewById2.getClass();
-        this.mDummySmallIcon = (ImageView) findViewById2;
-        View findViewById3 = view.findViewById(R.id.dummy_capsule_item_noti_expanded_info);
-        findViewById3.getClass();
-        this.mDummyExpandedInfo = (FrameLayout) findViewById3;
-        View findViewById4 = view.findViewById(R.id.dummy_capsule_remote_container);
-        findViewById4.getClass();
-        this.mDummyRemoteContainer = (FrameLayout) findViewById4;
+        View viewFindViewById = view.findViewById(R.id.dummy_capsule_item_top_layout);
+        viewFindViewById.getClass();
+        this.mDummyNotiParentLayout = (LinearLayout) viewFindViewById;
+        View viewFindViewById2 = view.findViewById(R.id.dummy_capsule_item_app_icon);
+        viewFindViewById2.getClass();
+        this.mDummySmallIcon = (ImageView) viewFindViewById2;
+        View viewFindViewById3 = view.findViewById(R.id.dummy_capsule_item_noti_expanded_info);
+        viewFindViewById3.getClass();
+        this.mDummyExpandedInfo = (FrameLayout) viewFindViewById3;
+        View viewFindViewById4 = view.findViewById(R.id.dummy_capsule_remote_container);
+        viewFindViewById4.getClass();
+        this.mDummyRemoteContainer = (FrameLayout) viewFindViewById4;
         float f = this.indicatorScaleGardener.getLatestScaleModel(this.mContext).ratio;
-        int roundToInt = MathKt__MathJVMKt.roundToInt(this.mContext.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_chip_size) * f);
+        int iRoundToInt = MathKt__MathJVMKt.roundToInt(this.mContext.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_chip_size) * f);
         ImageView imageView = this.mDummySmallIcon;
         if (imageView != null && (layoutParams = imageView.getLayoutParams()) != null) {
-            layoutParams.width = roundToInt;
-            layoutParams.height = roundToInt;
+            layoutParams.width = iRoundToInt;
+            layoutParams.height = iRoundToInt;
         }
         FrameLayout frameLayout = this.mDummyExpandedInfo;
         ViewGroup.LayoutParams layoutParams2 = frameLayout != null ? frameLayout.getLayoutParams() : null;

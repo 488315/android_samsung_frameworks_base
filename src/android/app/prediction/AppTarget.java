@@ -116,12 +116,12 @@ public final class AppTarget implements Parcelable {
     }
 
     public int hashCode() {
-        int hash = Objects.hash(this.mId, this.mPackageName, this.mClassName, this.mUser);
+        int iHash = Objects.hash(this.mId, this.mPackageName, this.mClassName, this.mUser);
         ShortcutInfo shortcutInfo = this.mShortcutInfo;
         if (shortcutInfo != null) {
-            hash = (hash * 31) + shortcutInfo.getId().hashCode();
+            iHash = (iHash * 31) + shortcutInfo.getId().hashCode();
         }
-        return (hash * 31) + this.mRank;
+        return (iHash * 31) + this.mRank;
     }
 
     @Override // android.os.Parcelable

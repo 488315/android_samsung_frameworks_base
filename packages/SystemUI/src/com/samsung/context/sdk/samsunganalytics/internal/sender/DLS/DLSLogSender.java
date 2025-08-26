@@ -26,7 +26,6 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class DLSLogSender extends BaseLogSender {
     public final DeviceInfo deviceInfo;
@@ -45,7 +44,7 @@ public class DLSLogSender extends BaseLogSender {
         while (it.hasNext()) {
             LinkedBlockingQueue linkedBlockingQueue = new LinkedBlockingQueue();
             SharedPreferences preferences = Preferences.getPreferences(this.context);
-            int i4 = 0;
+            int length = 0;
             if (i == 1) {
                 i3 = preferences.getInt("dq-w", 0);
                 i2 = preferences.getInt("wifi_used", 0);
@@ -56,19 +55,19 @@ public class DLSLogSender extends BaseLogSender {
                 i2 = 0;
                 i3 = 0;
             }
-            int min = Math.min(51200, i3 - i2);
+            int iMin = Math.min(51200, i3 - i2);
             while (true) {
-                boolean hasNext = it.hasNext();
+                boolean zHasNext = it.hasNext();
                 manager = this.manager;
-                if (!hasNext) {
+                if (!zHasNext) {
                     break;
                 }
                 SimpleLog simpleLog = (SimpleLog) it.next();
                 if (simpleLog.type == logType) {
-                    if (simpleLog.data.getBytes().length + i4 > min) {
+                    if (simpleLog.data.getBytes().length + length > iMin) {
                         break;
                     }
-                    i4 += simpleLog.data.getBytes().length;
+                    length += simpleLog.data.getBytes().length;
                     linkedBlockingQueue.add(simpleLog);
                     it.remove();
                     arrayList.add(simpleLog._id);
@@ -83,16 +82,16 @@ public class DLSLogSender extends BaseLogSender {
                 return;
             }
             manager.remove(arrayList);
-            PolicyUtils.useQuota(this.context, i, i4);
+            PolicyUtils.useQuota(this.context, i, length);
             this.executor.execute(new DLSAPIClient(logType, linkedBlockingQueue, this.configuration.trackingId, anonymousClass1));
-            Debug.LogD("DLSLogSender", "send packet : num(" + linkedBlockingQueue.size() + ") size(" + i4 + ")");
+            Debug.LogD("DLSLogSender", "send packet : num(" + linkedBlockingQueue.size() + ") size(" + length + ")");
         }
     }
 
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Type inference failed for: r1v8, types: [com.samsung.context.sdk.samsunganalytics.internal.sender.DLS.DLSLogSender$1] */
     @Override // com.samsung.context.sdk.samsunganalytics.internal.sender.BaseLogSender
-    public final int send(Map map) {
+    public final int send(Map map) throws NumberFormatException {
         NetworkInfo activeNetworkInfo = ((ConnectivityManager) this.context.getSystemService("connectivity")).getActiveNetworkInfo();
         int i = -4;
         final int type = (activeNetworkInfo == null || !activeNetworkInfo.isConnected()) ? -4 : activeNetworkInfo.getType();
@@ -117,16 +116,16 @@ public class DLSLogSender extends BaseLogSender {
         }
         ?? r1 = new AsyncTaskCallback() { // from class: com.samsung.context.sdk.samsunganalytics.internal.sender.DLS.DLSLogSender.1
             @Override // com.sec.android.diagmonagent.common.util.executor.AsyncTaskCallback
-            public final void onFail(String str, String str2, String str3) {
+            public final void onFail(String str, String str2, String str3) throws NumberFormatException {
                 DLSLogSender dLSLogSender = DLSLogSender.this;
                 Manager manager2 = dLSLogSender.manager;
-                long parseLong = Long.parseLong(str);
+                long j = Long.parseLong(str);
                 LogType logType = LogType.DEVICE;
                 if (!str3.equals(logType.getAbbrev())) {
                     logType = LogType.UIX;
                 }
                 manager2.getClass();
-                manager2.insert(new SimpleLog(parseLong, str2, logType));
+                manager2.insert(new SimpleLog(j, str2, logType));
                 PolicyUtils.useQuota(dLSLogSender.context, type, str2.getBytes().length * (-1));
             }
 
@@ -134,21 +133,21 @@ public class DLSLogSender extends BaseLogSender {
             public final void onSuccess() {
             }
         };
-        long parseLong = Long.parseLong((String) map.get("ts"));
+        long j = Long.parseLong((String) map.get("ts"));
         setCommonParamToLog(map);
-        int sendOne = sendOne(type, new SimpleLog(parseLong, Utils.makeDelimiterString(map, Utils.Depth.ONE_DEPTH), BaseLogSender.getLogType(map)), r1);
-        if (sendOne == -1) {
-            return sendOne;
+        int iSendOne = sendOne(type, new SimpleLog(j, Utils.makeDelimiterString(map, Utils.Depth.ONE_DEPTH), BaseLogSender.getLogType(map)), r1);
+        if (iSendOne == -1) {
+            return iSendOne;
         }
         Queue queue = manager.get(200);
         if (manager.useDatabase) {
             flushBufferedLogs(type, LogType.UIX, queue, r1);
             flushBufferedLogs(type, LogType.DEVICE, queue, r1);
-            return sendOne;
+            return iSendOne;
         }
-        while (!queue.isEmpty() && (sendOne = sendOne(type, (SimpleLog) queue.poll(), r1)) != -1) {
+        while (!queue.isEmpty() && (iSendOne = sendOne(type, (SimpleLog) queue.poll(), r1)) != -1) {
         }
-        return sendOne;
+        return iSendOne;
     }
 
     public final int sendOne(int i, SimpleLog simpleLog, AnonymousClass1 anonymousClass1) {
@@ -174,16 +173,16 @@ public class DLSLogSender extends BaseLogSender {
             i3 = 0;
             i4 = 0;
         }
-        StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i3, i4, "Quota : ", "/ Uploaded : ", "/ limit : ");
-        m.append(i2);
-        m.append("/ size : ");
-        m.append(length);
-        Debug.LogENG(m.toString());
+        StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i3, i4, "Quota : ", "/ Uploaded : ", "/ limit : ");
+        sbM.append(i2);
+        sbM.append("/ size : ");
+        sbM.append(length);
+        Debug.LogENG(sbM.toString());
         if (i3 < i4 + length) {
-            StringBuilder m2 = MutableObjectList$$ExternalSyntheticOutline0.m(i3, i4, "send result fail : Over daily quota (quota: ", "/ uploaded: ", "/ size: ");
-            m2.append(length);
-            m2.append(")");
-            Debug.LogD("DLS Sender", m2.toString());
+            StringBuilder sbM2 = MutableObjectList$$ExternalSyntheticOutline0.m(i3, i4, "send result fail : Over daily quota (quota: ", "/ uploaded: ", "/ size: ");
+            sbM2.append(length);
+            sbM2.append(")");
+            Debug.LogD("DLS Sender", sbM2.toString());
             i5 = -1;
         } else if (i2 < length) {
             Debug.LogD("DLS Sender", MutableVectorKt$$ExternalSyntheticOutline0.m(i2, length, "send result fail : Over once quota (limit: ", "/ size: ", ")"));

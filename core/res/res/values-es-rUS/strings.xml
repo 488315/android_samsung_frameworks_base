@@ -593,6 +593,7 @@ Si decide instalarla de todos modos, revise cuidadosamente el Aviso de Privacida
     <string name="call_notification_screening_text">Filtrando una llamada entrante</string>
     <string name="camera_restrict">La política de seguridad impide el uso de la cámara.</string>
     <string name="can_not_install_app">No es posible instalar la aplicación; no está optimizada para que se use con %s.</string>
+    <string name="can_not_open_searcle_on_the_external_display">No es posible abrir Rodear para buscar en una pantalla conectada.</string>
     <string name="can_not_open_searcle_on_the_lockscreen">No es posible abrir Marcar para buscar en la pantalla de bloqueo.</string>
     <string name="cannot_open_app_concentration_mode">No es posible abrir la aplicación</string>
     <string name="capability_desc_canCaptureFingerprintGestures">Capturará los gestos que se hacen en el sensor de huellas dactilares del dispositivo.</string>
@@ -674,6 +675,7 @@ Si decide instalarla de todos modos, revise cuidadosamente el Aviso de Privacida
     <string name="common_secure_boot_nwlock_notification_text">Esta tarjeta SIM no es compatible.</string>
     <string name="common_secure_boot_nwlock_notification_title">Se insertó una tarjeta SIM no válida</string>
     <string name="compat_restart_education_text">Si esta aplicación no se muestra correctamente, intente cerrarla y abrirla de nuevo.</string>
+    <string name="compat_restart_menu_education_text">Si esta aplicación no se muestra correctamente, reiníciela desde el menú Más.</string>
     <string name="concurrent_display_notification_active_content">%1$s está usando ambas pantallas para mostrar contenido</string>
     <string name="concurrent_display_notification_active_title">La función Dual Screen está activada</string>
     <string name="concurrent_display_notification_name">Dual Screen</string>
@@ -2921,7 +2923,7 @@ Escuchar a un alto volumen durante largos períodos puede dañar tu audición."<
     <string name="satellite_notification_manual_title">¿Quieres usar la mensajería satelital?</string>
     <string name="satellite_notification_open_message">Abrir Mensajes</string>
     <string name="satellite_notification_summary">Puedes enviar y recibir mensajes incluso si no tienes conexión a una red móvil o Wi-Fi</string>
-    <string name="satellite_notification_summary_with_data">Puedes enviar y recibir mensajes, y usar datos limitados por satélite</string>
+    <string name="satellite_notification_summary_with_data">Puedes enviar y recibir mensajes, y usar algunas apps por satélite</string>
     <string name="satellite_notification_title">Conexión automática a satélite</string>
     <string name="satellite_sos_available_notification_summary">Puedes enviar mensajes a los servicios de emergencia si no hay una red móvil o Wi-Fi. Tu app de mensajería predeterminada debe ser Mensajes de Google.</string>
     <string name="satellite_sos_available_notification_title">La función SOS por satélite ya está disponible</string>

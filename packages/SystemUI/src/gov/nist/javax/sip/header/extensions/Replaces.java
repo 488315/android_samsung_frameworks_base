@@ -5,7 +5,6 @@ import gov.nist.javax.sip.header.CallIdentifier;
 import gov.nist.javax.sip.header.ParametersHeader;
 import javax.sip.header.Header;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class Replaces extends ParametersHeader implements Header {
     private static final long serialVersionUID = 8765762413224043300L;
@@ -25,9 +24,9 @@ public class Replaces extends ParametersHeader implements Header {
         if (this.parameters.isEmpty()) {
             return str;
         }
-        StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(str, ";");
-        m.append(this.parameters.encode());
-        return m.toString();
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(str, ";");
+        sbM.append(this.parameters.encode());
+        return sbM.toString();
     }
 
     public Replaces(String str) throws IllegalArgumentException {

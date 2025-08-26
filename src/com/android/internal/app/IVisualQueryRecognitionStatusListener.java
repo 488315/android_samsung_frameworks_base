@@ -51,9 +51,9 @@ public interface IVisualQueryRecognitionStatusListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IVisualQueryRecognitionStatusListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IVisualQueryRecognitionStatusListener)) {
-                return (IVisualQueryRecognitionStatusListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IVisualQueryRecognitionStatusListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IVisualQueryRecognitionStatusListener)) {
+                return (IVisualQueryRecognitionStatusListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -110,23 +110,23 @@ public interface IVisualQueryRecognitionStatusListener extends IInterface {
 
             @Override // com.android.internal.app.IVisualQueryRecognitionStatusListener
             public void onStartPerceiving() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IVisualQueryRecognitionStatusListener.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IVisualQueryRecognitionStatusListener.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVisualQueryRecognitionStatusListener
             public void onStopPerceiving() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IVisualQueryRecognitionStatusListener.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IVisualQueryRecognitionStatusListener.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

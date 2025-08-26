@@ -30,16 +30,16 @@ public class AccelerateInterpolator extends BaseInterpolator implements NativeIn
     }
 
     public AccelerateInterpolator(Resources resources, Resources.Theme theme, AttributeSet attributeSet) {
-        TypedArray obtainAttributes;
+        TypedArray typedArrayObtainAttributes;
         if (theme != null) {
-            obtainAttributes = theme.obtainStyledAttributes(attributeSet, R.styleable.AccelerateInterpolator, 0, 0);
+            typedArrayObtainAttributes = theme.obtainStyledAttributes(attributeSet, R.styleable.AccelerateInterpolator, 0, 0);
         } else {
-            obtainAttributes = resources.obtainAttributes(attributeSet, R.styleable.AccelerateInterpolator);
+            typedArrayObtainAttributes = resources.obtainAttributes(attributeSet, R.styleable.AccelerateInterpolator);
         }
-        this.mFactor = obtainAttributes.getFloat(0, 1.0f);
+        this.mFactor = typedArrayObtainAttributes.getFloat(0, 1.0f);
         this.mDoubleFactor = r3 * 2.0f;
-        setChangingConfiguration(obtainAttributes.getChangingConfigurations());
-        obtainAttributes.recycle();
+        setChangingConfiguration(typedArrayObtainAttributes.getChangingConfigurations());
+        typedArrayObtainAttributes.recycle();
     }
 
     @Override // android.animation.TimeInterpolator

@@ -107,9 +107,9 @@ public interface ITranslationManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ITranslationManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ITranslationManager)) {
-                return (ITranslationManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ITranslationManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ITranslationManager)) {
+                return (ITranslationManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -155,70 +155,70 @@ public interface ITranslationManager extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int readInt = parcel.readInt();
-                    int readInt2 = parcel.readInt();
+                    int i3 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     ResultReceiver resultReceiver = (ResultReceiver) parcel.readTypedObject(ResultReceiver.CREATOR);
-                    int readInt3 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onTranslationCapabilitiesRequest(readInt, readInt2, resultReceiver, readInt3);
+                    onTranslationCapabilitiesRequest(i3, i4, resultReceiver, i5);
                     return true;
                 case 2:
-                    IRemoteCallback asInterface = IRemoteCallback.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt4 = parcel.readInt();
+                    IRemoteCallback iRemoteCallbackAsInterface = IRemoteCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    registerTranslationCapabilityCallback(asInterface, readInt4);
+                    registerTranslationCapabilityCallback(iRemoteCallbackAsInterface, i6);
                     return true;
                 case 3:
-                    IRemoteCallback asInterface2 = IRemoteCallback.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt5 = parcel.readInt();
+                    IRemoteCallback iRemoteCallbackAsInterface2 = IRemoteCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    unregisterTranslationCapabilityCallback(asInterface2, readInt5);
+                    unregisterTranslationCapabilityCallback(iRemoteCallbackAsInterface2, i7);
                     return true;
                 case 4:
                     TranslationContext translationContext = (TranslationContext) parcel.readTypedObject(TranslationContext.CREATOR);
-                    int readInt6 = parcel.readInt();
-                    IResultReceiver asInterface3 = IResultReceiver.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt7 = parcel.readInt();
+                    int i8 = parcel.readInt();
+                    IResultReceiver iResultReceiverAsInterface = IResultReceiver.Stub.asInterface(parcel.readStrongBinder());
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onSessionCreated(translationContext, readInt6, asInterface3, readInt7);
+                    onSessionCreated(translationContext, i8, iResultReceiverAsInterface, i9);
                     return true;
                 case 5:
-                    int readInt8 = parcel.readInt();
+                    int i10 = parcel.readInt();
                     TranslationSpec translationSpec = (TranslationSpec) parcel.readTypedObject(TranslationSpec.CREATOR);
                     TranslationSpec translationSpec2 = (TranslationSpec) parcel.readTypedObject(TranslationSpec.CREATOR);
-                    ArrayList createTypedArrayList = parcel.createTypedArrayList(AutofillId.CREATOR);
-                    IBinder readStrongBinder = parcel.readStrongBinder();
-                    int readInt9 = parcel.readInt();
+                    ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(AutofillId.CREATOR);
+                    IBinder strongBinder = parcel.readStrongBinder();
+                    int i11 = parcel.readInt();
                     UiTranslationSpec uiTranslationSpec = (UiTranslationSpec) parcel.readTypedObject(UiTranslationSpec.CREATOR);
-                    int readInt10 = parcel.readInt();
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    updateUiTranslationState(readInt8, translationSpec, translationSpec2, createTypedArrayList, readStrongBinder, readInt9, uiTranslationSpec, readInt10);
+                    updateUiTranslationState(i10, translationSpec, translationSpec2, arrayListCreateTypedArrayList, strongBinder, i11, uiTranslationSpec, i12);
                     return true;
                 case 6:
-                    IRemoteCallback asInterface4 = IRemoteCallback.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt11 = parcel.readInt();
+                    IRemoteCallback iRemoteCallbackAsInterface3 = IRemoteCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i13 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    registerUiTranslationStateCallback(asInterface4, readInt11);
+                    registerUiTranslationStateCallback(iRemoteCallbackAsInterface3, i13);
                     return true;
                 case 7:
-                    IRemoteCallback asInterface5 = IRemoteCallback.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt12 = parcel.readInt();
+                    IRemoteCallback iRemoteCallbackAsInterface4 = IRemoteCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i14 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    unregisterUiTranslationStateCallback(asInterface5, readInt12);
+                    unregisterUiTranslationStateCallback(iRemoteCallbackAsInterface4, i14);
                     return true;
                 case 8:
-                    IResultReceiver asInterface6 = IResultReceiver.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt13 = parcel.readInt();
+                    IResultReceiver iResultReceiverAsInterface2 = IResultReceiver.Stub.asInterface(parcel.readStrongBinder());
+                    int i15 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    getServiceSettingsActivity(asInterface6, readInt13);
+                    getServiceSettingsActivity(iResultReceiverAsInterface2, i15);
                     return true;
                 case 9:
-                    boolean readBoolean = parcel.readBoolean();
-                    IBinder readStrongBinder2 = parcel.readStrongBinder();
+                    boolean z = parcel.readBoolean();
+                    IBinder strongBinder2 = parcel.readStrongBinder();
                     ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
-                    int readInt14 = parcel.readInt();
+                    int i16 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onTranslationFinished(readBoolean, readStrongBinder2, componentName, readInt14);
+                    onTranslationFinished(z, strongBinder2, componentName, i16);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -243,130 +243,130 @@ public interface ITranslationManager extends IInterface {
 
             @Override // android.view.translation.ITranslationManager
             public void onTranslationCapabilitiesRequest(int i, int i2, ResultReceiver resultReceiver, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITranslationManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(resultReceiver, 0);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITranslationManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(resultReceiver, 0);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.translation.ITranslationManager
             public void registerTranslationCapabilityCallback(IRemoteCallback iRemoteCallback, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITranslationManager.DESCRIPTOR);
-                    obtain.writeStrongInterface(iRemoteCallback);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITranslationManager.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iRemoteCallback);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.translation.ITranslationManager
             public void unregisterTranslationCapabilityCallback(IRemoteCallback iRemoteCallback, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITranslationManager.DESCRIPTOR);
-                    obtain.writeStrongInterface(iRemoteCallback);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITranslationManager.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iRemoteCallback);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.translation.ITranslationManager
             public void onSessionCreated(TranslationContext translationContext, int i, IResultReceiver iResultReceiver, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITranslationManager.DESCRIPTOR);
-                    obtain.writeTypedObject(translationContext, 0);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iResultReceiver);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITranslationManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(translationContext, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iResultReceiver);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.translation.ITranslationManager
             public void updateUiTranslationState(int i, TranslationSpec translationSpec, TranslationSpec translationSpec2, List<AutofillId> list, IBinder iBinder, int i2, UiTranslationSpec uiTranslationSpec, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITranslationManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(translationSpec, 0);
-                    obtain.writeTypedObject(translationSpec2, 0);
-                    obtain.writeTypedList(list, 0);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(uiTranslationSpec, 0);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITranslationManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(translationSpec, 0);
+                    parcelObtain.writeTypedObject(translationSpec2, 0);
+                    parcelObtain.writeTypedList(list, 0);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(uiTranslationSpec, 0);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.translation.ITranslationManager
             public void registerUiTranslationStateCallback(IRemoteCallback iRemoteCallback, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITranslationManager.DESCRIPTOR);
-                    obtain.writeStrongInterface(iRemoteCallback);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITranslationManager.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iRemoteCallback);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.translation.ITranslationManager
             public void unregisterUiTranslationStateCallback(IRemoteCallback iRemoteCallback, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITranslationManager.DESCRIPTOR);
-                    obtain.writeStrongInterface(iRemoteCallback);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITranslationManager.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iRemoteCallback);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.translation.ITranslationManager
             public void getServiceSettingsActivity(IResultReceiver iResultReceiver, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITranslationManager.DESCRIPTOR);
-                    obtain.writeStrongInterface(iResultReceiver);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITranslationManager.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iResultReceiver);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.translation.ITranslationManager
             public void onTranslationFinished(boolean z, IBinder iBinder, ComponentName componentName, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITranslationManager.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITranslationManager.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

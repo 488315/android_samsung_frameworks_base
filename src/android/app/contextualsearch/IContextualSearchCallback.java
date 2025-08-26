@@ -52,9 +52,9 @@ public interface IContextualSearchCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IContextualSearchCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IContextualSearchCallback)) {
-                return (IContextualSearchCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IContextualSearchCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IContextualSearchCallback)) {
+                return (IContextualSearchCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -115,25 +115,25 @@ public interface IContextualSearchCallback extends IInterface {
 
             @Override // android.app.contextualsearch.IContextualSearchCallback
             public void onResult(ContextualSearchState contextualSearchState) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IContextualSearchCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(contextualSearchState, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IContextualSearchCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextualSearchState, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.contextualsearch.IContextualSearchCallback
             public void onError(ParcelableException parcelableException) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IContextualSearchCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(parcelableException, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IContextualSearchCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(parcelableException, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

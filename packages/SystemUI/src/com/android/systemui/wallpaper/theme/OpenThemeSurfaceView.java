@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class OpenThemeSurfaceView extends SurfaceView implements SurfaceHolder.Callback, LockscreenCallback {
     public final String TAG;
@@ -16,7 +15,6 @@ public abstract class OpenThemeSurfaceView extends SurfaceView implements Surfac
     public boolean mIsScreenOn;
     public int mMinInterval;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class FrameDrawThread extends Thread {
         public boolean isSuspended;
         public final SurfaceHolder mHolder;
@@ -30,26 +28,26 @@ public abstract class OpenThemeSurfaceView extends SurfaceView implements Surfac
         }
 
         @Override // java.lang.Thread, java.lang.Runnable
-        public final void run() {
-            Canvas canvas;
+        public final void run() throws InterruptedException {
+            Canvas canvasLockCanvas;
             SurfaceHolder surfaceHolder;
-            long nanoTime = System.nanoTime();
+            long jNanoTime = System.nanoTime();
             while (this.isRunning) {
-                long currentTimeMillis = System.currentTimeMillis();
+                long jCurrentTimeMillis = System.currentTimeMillis();
                 synchronized (this) {
                     while (true) {
-                        canvas = null;
+                        canvasLockCanvas = null;
                         if (!this.isSuspended || this.mTick <= 0) {
                             break;
                         }
                         this.mTick = 0;
                         wait();
                     }
-                    canvas = this.mHolder.lockCanvas();
-                    if (canvas != null) {
-                        OpenThemeSurfaceView.this.drawFrame(canvas);
+                    canvasLockCanvas = this.mHolder.lockCanvas();
+                    if (canvasLockCanvas != null) {
+                        OpenThemeSurfaceView.this.drawFrame(canvasLockCanvas);
                     }
-                    if (canvas != null) {
+                    if (canvasLockCanvas != null) {
                         try {
                             surfaceHolder = this.mHolder;
                         } catch (Exception unused) {
@@ -63,25 +61,25 @@ public abstract class OpenThemeSurfaceView extends SurfaceView implements Surfac
                             throw th;
                         } finally {
                         }
-                        surfaceHolder.unlockCanvasAndPost(canvas);
+                        surfaceHolder.unlockCanvasAndPost(canvasLockCanvas);
                     }
                 }
                 this.mTick++;
                 int i = this.mCount + 1;
                 this.mCount = i;
                 if (i == 60) {
-                    long nanoTime2 = System.nanoTime();
+                    long jNanoTime2 = System.nanoTime();
                     String str = OpenThemeSurfaceView.this.TAG;
-                    Log.d(str, "fps: " + (Math.round((1.0E11d / (nanoTime2 - nanoTime)) * 60.0d) / 100.0d));
+                    Log.d(str, "fps: " + (Math.round((1.0E11d / (jNanoTime2 - jNanoTime)) * 60.0d) / 100.0d));
                     this.mCount = 0;
-                    nanoTime = nanoTime2;
+                    jNanoTime = jNanoTime2;
                 }
-                long currentTimeMillis2 = System.currentTimeMillis();
-                long j = currentTimeMillis2 - currentTimeMillis;
+                long jCurrentTimeMillis2 = System.currentTimeMillis();
+                long j = jCurrentTimeMillis2 - jCurrentTimeMillis;
                 try {
                     long j2 = this.mMinInterval;
                     if (j < j2) {
-                        long j3 = (j2 + currentTimeMillis) - currentTimeMillis2;
+                        long j3 = (j2 + jCurrentTimeMillis) - jCurrentTimeMillis2;
                         if (j3 > 150) {
                             Thread.sleep(100L);
                         } else {

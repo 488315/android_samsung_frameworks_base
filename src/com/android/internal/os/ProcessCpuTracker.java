@@ -14,6 +14,7 @@ import com.android.internal.content.NativeLibraryHelper;
 import com.android.internal.util.FastPrintWriter;
 import java.io.File;
 import java.io.FileDescriptor;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
@@ -201,9 +202,9 @@ public class ProcessCpuTracker {
         long j3;
         char c;
         ?? r19;
-        long uptimeMillis = SystemClock.uptimeMillis();
-        long elapsedRealtime = SystemClock.elapsedRealtime();
-        long currentTimeMillis = System.currentTimeMillis();
+        long jUptimeMillis = SystemClock.uptimeMillis();
+        long jElapsedRealtime = SystemClock.elapsedRealtime();
+        long jCurrentTimeMillis = System.currentTimeMillis();
         long[] jArr = this.mSystemCpuData;
         if (Process.readProcFile("/proc/stat", SYSTEM_CPU_FORMAT, null, jArr, null)) {
             long j4 = jArr[0] + jArr[1];
@@ -214,11 +215,11 @@ public class ProcessCpuTracker {
             long j7 = jArr[2] * j5;
             long j8 = jArr[3] * j5;
             long j9 = jArr[4] * j5;
-            j3 = currentTimeMillis;
+            j3 = jCurrentTimeMillis;
             long j10 = jArr[5] * j5;
-            j2 = elapsedRealtime;
+            j2 = jElapsedRealtime;
             long j11 = jArr[6] * j5;
-            j = uptimeMillis;
+            j = jUptimeMillis;
             this.mRelUserTime = (int) (j6 - this.mBaseUserTime);
             this.mRelSystemTime = (int) (j7 - this.mBaseSystemTime);
             this.mRelIoWaitTime = (int) (j9 - this.mBaseIoWaitTime);
@@ -233,9 +234,9 @@ public class ProcessCpuTracker {
             this.mBaseSoftIrqTime = j11;
             this.mBaseIdleTime = j8;
         } else {
-            j = uptimeMillis;
-            j2 = elapsedRealtime;
-            j3 = currentTimeMillis;
+            j = jUptimeMillis;
+            j2 = jElapsedRealtime;
+            j3 = jCurrentTimeMillis;
             c = 2;
             r19 = 0;
         }
@@ -245,10 +246,10 @@ public class ProcessCpuTracker {
         this.mCurrentSampleRealTime = j2;
         this.mLastSampleWallTime = this.mCurrentSampleWallTime;
         this.mCurrentSampleWallTime = j3;
-        StrictMode.ThreadPolicy allowThreadDiskReads = StrictMode.allowThreadDiskReads();
+        StrictMode.ThreadPolicy threadPolicyAllowThreadDiskReads = StrictMode.allowThreadDiskReads();
         try {
             this.mCurPids = collectStats("/proc", -1, this.mFirst, this.mCurPids, this.mProcStats);
-            StrictMode.setThreadPolicy(allowThreadDiskReads);
+            StrictMode.setThreadPolicy(threadPolicyAllowThreadDiskReads);
             float[] fArr = this.mLoadAverageData;
             if (Process.readProcFile("/proc/loadavg", LOAD_AVERAGE_FORMAT, null, null, fArr)) {
                 float f = fArr[r19];
@@ -265,11 +266,15 @@ public class ProcessCpuTracker {
             this.mWorkingProcsSorted = z;
             this.mFirst = z;
         } catch (Throwable th) {
-            StrictMode.setThreadPolicy(allowThreadDiskReads);
+            StrictMode.setThreadPolicy(threadPolicyAllowThreadDiskReads);
             throw th;
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:38:0x00c8  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     private int[] collectStats(String str, int i, boolean z, int[] iArr, ArrayList<Stats> arrayList) {
         int i2;
         int[] iArr2;
@@ -297,7 +302,7 @@ public class ProcessCpuTracker {
                 if (stats2.interesting) {
                     boolean z3 = z2;
                     i3 = length;
-                    long uptimeMillis = SystemClock.uptimeMillis();
+                    long jUptimeMillis = SystemClock.uptimeMillis();
                     long[] jArr = this.mProcessStatsData;
                     if (Process.readProcFile(stats2.statFile.toString(), PROCESS_STATS_FORMAT, null, jArr, null)) {
                         long j3 = jArr[z3 ? 1 : 0];
@@ -329,44 +334,34 @@ public class ProcessCpuTracker {
                                     i6 = i9;
                                     j2 = j3;
                                     this.mCurThreadPids = collectStats(stats3.threadsDir, i2, false, this.mCurThreadPids, stats3.threadStats);
-                                    stats.rel_uptime = uptimeMillis - stats.base_uptime;
-                                    stats.base_uptime = uptimeMillis;
-                                    stats.rel_utime = (int) (j - stats.base_utime);
-                                    stats.rel_stime = (int) (j8 - stats.base_stime);
-                                    stats.base_utime = j;
-                                    stats.base_stime = j8;
-                                    stats.rel_minfaults = (int) (j2 - stats.base_minfaults);
-                                    stats.rel_majfaults = (int) (j4 - stats.base_majfaults);
-                                    stats.base_minfaults = j2;
-                                    stats.base_majfaults = j4;
-                                    stats.working = true;
-                                    arrayList2 = arrayList;
-                                    i8 = i10;
-                                    size = i7;
-                                    i5 = i6;
+                                } else {
+                                    iArr2 = pids;
+                                    j = j7;
+                                    stats = stats3;
+                                    i7 = size;
+                                    i6 = i9;
+                                    j2 = j3;
                                 }
+                                stats.rel_uptime = jUptimeMillis - stats.base_uptime;
+                                stats.base_uptime = jUptimeMillis;
+                                stats.rel_utime = (int) (j - stats.base_utime);
+                                stats.rel_stime = (int) (j8 - stats.base_stime);
+                                stats.base_utime = j;
+                                stats.base_stime = j8;
+                                stats.rel_minfaults = (int) (j2 - stats.base_minfaults);
+                                stats.rel_majfaults = (int) (j4 - stats.base_majfaults);
+                                stats.base_minfaults = j2;
+                                stats.base_majfaults = j4;
+                                stats.working = true;
+                                arrayList2 = arrayList;
+                                i8 = i10;
+                                size = i7;
+                                i5 = i6;
                             }
-                            iArr2 = pids;
-                            j = j7;
-                            stats = stats3;
-                            i7 = size;
-                            i6 = i9;
-                            j2 = j3;
-                            stats.rel_uptime = uptimeMillis - stats.base_uptime;
-                            stats.base_uptime = uptimeMillis;
-                            stats.rel_utime = (int) (j - stats.base_utime);
-                            stats.rel_stime = (int) (j8 - stats.base_stime);
-                            stats.base_utime = j;
-                            stats.base_stime = j8;
-                            stats.rel_minfaults = (int) (j2 - stats.base_minfaults);
-                            stats.rel_majfaults = (int) (j4 - stats.base_majfaults);
-                            stats.base_minfaults = j2;
-                            stats.base_majfaults = j4;
-                            stats.working = true;
-                            arrayList2 = arrayList;
-                            i8 = i10;
-                            size = i7;
-                            i5 = i6;
+                            i9 = i5 + i4;
+                            length = i3;
+                            pids = iArr2;
+                            z2 = false;
                         }
                     }
                     iArr2 = pids;
@@ -578,16 +573,16 @@ public class ProcessCpuTracker {
         return this.mWorkingProcs.get(i);
     }
 
-    public final void dumpProto(FileDescriptor fileDescriptor) {
-        long uptimeMillis = SystemClock.uptimeMillis();
+    public final void dumpProto(FileDescriptor fileDescriptor) throws IOException {
+        long jUptimeMillis = SystemClock.uptimeMillis();
         ProtoOutputStream protoOutputStream = new ProtoOutputStream(fileDescriptor);
-        long start = protoOutputStream.start(1146756268033L);
+        long jStart = protoOutputStream.start(1146756268033L);
         protoOutputStream.write(1108101562369L, this.mLoad1);
         protoOutputStream.write(1108101562370L, this.mLoad5);
         protoOutputStream.write(1108101562371L, this.mLoad15);
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
         buildWorkingProcs();
-        protoOutputStream.write(1112396529666L, uptimeMillis);
+        protoOutputStream.write(1112396529666L, jUptimeMillis);
         protoOutputStream.write(1112396529667L, this.mLastSampleTime);
         protoOutputStream.write(1112396529668L, this.mCurrentSampleTime);
         protoOutputStream.write(1112396529669L, this.mLastSampleRealTime);
@@ -616,7 +611,7 @@ public class ProcessCpuTracker {
     }
 
     private static void dumpProcessCpuProto(ProtoOutputStream protoOutputStream, Stats stats, Stats stats2) {
-        long start = protoOutputStream.start(2246267895824L);
+        long jStart = protoOutputStream.start(2246267895824L);
         protoOutputStream.write(1120986464257L, stats.uid);
         protoOutputStream.write(1120986464258L, stats.pid);
         protoOutputStream.write(1138166333443L, stats.name);
@@ -630,7 +625,7 @@ public class ProcessCpuTracker {
         if (stats2 != null) {
             protoOutputStream.write(1120986464267L, stats2.pid);
         }
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 
     public final String printCurrentLoad() {
@@ -684,12 +679,12 @@ public class ProcessCpuTracker {
         }
         fastPrintWriter.println(":");
         int i2 = processCpuTracker.mRelUserTime + processCpuTracker.mRelSystemTime + processCpuTracker.mRelIoWaitTime + processCpuTracker.mRelIrqTime + processCpuTracker.mRelSoftIrqTime + processCpuTracker.mRelIdleTime;
-        int min = Math.min(i, processCpuTracker.mWorkingProcs.size());
+        int iMin = Math.min(i, processCpuTracker.mWorkingProcs.size());
         int i3 = 0;
-        while (i3 < min) {
+        while (i3 < iMin) {
             Stats stats = processCpuTracker.mWorkingProcs.get(i3);
             int i4 = i3;
-            int i5 = min;
+            int i5 = iMin;
             FastPrintWriter fastPrintWriter2 = fastPrintWriter;
             processCpuTracker.printProcessCPU(fastPrintWriter2, stats.added ? " +" : stats.removed ? " -" : "  ", stats.pid, stats.name, (int) stats.rel_uptime, stats.rel_utime, stats.rel_stime, 0, 0, 0, stats.rel_minfaults, stats.rel_majfaults);
             if (!stats.removed && stats.workingThreads != null) {
@@ -703,7 +698,7 @@ public class ProcessCpuTracker {
             processCpuTracker = this;
             i3 = i4 + 1;
             fastPrintWriter = fastPrintWriter2;
-            min = i5;
+            iMin = i5;
         }
         FastPrintWriter fastPrintWriter3 = fastPrintWriter;
         processCpuTracker.printProcessCPU(fastPrintWriter3, "", -1, "TOTAL", i2, processCpuTracker.mRelUserTime, processCpuTracker.mRelSystemTime, processCpuTracker.mRelIoWaitTime, processCpuTracker.mRelIrqTime, processCpuTracker.mRelSoftIrqTime, 0, 0);
@@ -773,13 +768,13 @@ public class ProcessCpuTracker {
     private void getName(Stats stats, String str) {
         String str2 = stats.name;
         if (stats.name == null || stats.name.equals("app_process") || stats.name.equals("<pre-initialized>") || stats.name.equals("usap32") || stats.name.equals("usap64")) {
-            String readTerminatedProcFile = ProcStatsUtil.readTerminatedProcFile(str, (byte) 0);
-            if (readTerminatedProcFile != null && readTerminatedProcFile.length() > 1) {
-                int lastIndexOf = readTerminatedProcFile.lastIndexOf("/");
-                if (lastIndexOf > 0 && lastIndexOf < readTerminatedProcFile.length() - 1) {
-                    readTerminatedProcFile = readTerminatedProcFile.substring(lastIndexOf + 1);
+            String terminatedProcFile = ProcStatsUtil.readTerminatedProcFile(str, (byte) 0);
+            if (terminatedProcFile != null && terminatedProcFile.length() > 1) {
+                int iLastIndexOf = terminatedProcFile.lastIndexOf("/");
+                if (iLastIndexOf > 0 && iLastIndexOf < terminatedProcFile.length() - 1) {
+                    terminatedProcFile = terminatedProcFile.substring(iLastIndexOf + 1);
                 }
-                str2 = readTerminatedProcFile;
+                str2 = terminatedProcFile;
             }
             if (str2 == null) {
                 str2 = stats.baseName;
@@ -836,21 +831,21 @@ public class ProcessCpuTracker {
             i4++;
             z = z2;
         }
-        int parseInt = Process.readProcFile("/sys/devices/system/cpu/possible", iArr, strArr4, null, null) ? Integer.parseInt(strArr4[i].replace("?", "").trim().substring(2).trim()) : i;
-        if (parseInt > 0) {
+        int i5 = Process.readProcFile("/sys/devices/system/cpu/possible", iArr, strArr4, null, null) ? Integer.parseInt(strArr4[i].replace("?", "").trim().substring(2).trim()) : i;
+        if (i5 > 0) {
             fastPrintWriter.print("                  ");
-            for (int i5 = i; i5 <= parseInt; i5++) {
-                fastPrintWriter.print(String.format("%12d", Integer.valueOf(i5)));
+            for (int i6 = i; i6 <= i5; i6++) {
+                fastPrintWriter.print(String.format("%12d", Integer.valueOf(i6)));
             }
             fastPrintWriter.print("\n------------------");
-            for (int i6 = i; i6 <= parseInt; i6++) {
+            for (int i7 = i; i7 <= i5; i7++) {
                 fastPrintWriter.print("------------");
             }
-            for (int i7 = i; i7 < 3; i7++) {
-                String str2 = strArr2[i7];
+            for (int i8 = i; i8 < 3; i8++) {
+                String str2 = strArr2[i8];
                 fastPrintWriter.print(String.format("%n%-18s", str2.substring(str2.lastIndexOf(47) + 1)));
-                for (int i8 = i; i8 <= parseInt; i8++) {
-                    if (Process.readProcFile(String.format(strArr2[i7], Integer.valueOf(i8)), iArr, strArr4, null, null)) {
+                for (int i9 = i; i9 <= i5; i9++) {
+                    if (Process.readProcFile(String.format(strArr2[i8], Integer.valueOf(i9)), iArr, strArr4, null, null)) {
                         fastPrintWriter.print(String.format("%12s", strArr4[i].replace("?", "").trim()));
                     } else {
                         fastPrintWriter.print("           -");
@@ -858,7 +853,7 @@ public class ProcessCpuTracker {
                 }
             }
             fastPrintWriter.print("\n------------------");
-            for (int i9 = i; i9 <= parseInt; i9++) {
+            for (int i10 = i; i10 <= i5; i10++) {
                 fastPrintWriter.print("------------");
             }
             fastPrintWriter.println();

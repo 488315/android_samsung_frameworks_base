@@ -24,19 +24,17 @@ import com.android.systemui.util.SettingsHelper;
 import com.android.systemui.util.settings.GlobalSettings;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardSecSecurityContainer extends KeyguardSecurityContainer {
     public static final /* synthetic */ int $r8$clinit = 0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ArrowViewMode implements SecViewMode {
         public KeyguardSecSecurityContainer mView;
         public KeyguardSecurityViewFlipper mViewFlipper;
         public int mViewFlipperWidth;
 
         @Override // com.android.keyguard.KeyguardSecSecurityContainer.SecViewMode
-        public final void init(KeyguardSecSecurityContainer keyguardSecSecurityContainer, KeyguardSecurityViewFlipper keyguardSecurityViewFlipper) {
+        public final void init(KeyguardSecSecurityContainer keyguardSecSecurityContainer, KeyguardSecurityViewFlipper keyguardSecurityViewFlipper) throws Resources.NotFoundException {
             this.mView = keyguardSecSecurityContainer;
             this.mViewFlipper = keyguardSecurityViewFlipper;
             updateSecurityViewFlipperWidth();
@@ -48,8 +46,8 @@ public class KeyguardSecSecurityContainer extends KeyguardSecurityContainer {
         }
 
         @Override // com.android.keyguard.KeyguardSecSecurityContainer.SecViewMode
-        public final void updateSecurityViewPosition(int i, boolean z) {
-            int i2;
+        public final void updateSecurityViewPosition(int i, boolean z) throws Resources.NotFoundException {
+            int inDisplayFingerprintHeight;
             if (z) {
                 TransitionManager.beginDelayedTransition(this.mView, new KeyguardSecurityViewTransition());
             }
@@ -58,29 +56,29 @@ public class KeyguardSecSecurityContainer extends KeyguardSecurityContainer {
             Resources resources = this.mView.getResources();
             int dimensionPixelSize = resources.getDimensionPixelSize(DeviceType.isTablet() ? R.dimen.kg_security_view_side_margin_tablet : R.dimen.kg_security_view_side_margin);
             int rotation = DeviceState.shouldEnableKeyguardScreenRotation(this.mView.getContext()) ? DeviceState.getRotation(resources.getConfiguration().windowConfiguration.getRotation()) : 0;
-            int inDisplayFingerprintHeight = ((KeyguardUpdateMonitor) Dependency.sDependency.getDependencyInner(KeyguardUpdateMonitor.class)).isInDisplayFingerprintMarginAccepted() ? DeviceState.getInDisplayFingerprintHeight() : 0;
+            int inDisplayFingerprintHeight2 = ((KeyguardUpdateMonitor) Dependency.sDependency.getDependencyInner(KeyguardUpdateMonitor.class)).isInDisplayFingerprintMarginAccepted() ? DeviceState.getInDisplayFingerprintHeight() : 0;
             if (i == 0 ? rotation == 3 : !(i != 2 || rotation != 1)) {
-                dimensionPixelSize += inDisplayFingerprintHeight;
+                dimensionPixelSize += inDisplayFingerprintHeight2;
             }
-            int i3 = dimensionPixelSize;
+            int i2 = dimensionPixelSize;
             Resources resources2 = this.mView.getResources();
-            int dimensionPixelSize2 = LsRune.SECURITY_NAVBAR_ENABLED ? resources2.getDimensionPixelSize(android.R.dimen.secondary_waterfall_display_left_edge_size) : 0;
+            int dimensionPixelSize2 = LsRune.SECURITY_NAVBAR_ENABLED ? resources2.getDimensionPixelSize(android.R.dimen.secondary_waterfall_display_right_edge_size) : 0;
             int rotation2 = DeviceState.shouldEnableKeyguardScreenRotation(this.mView.getContext()) ? DeviceState.getRotation(resources2.getConfiguration().windowConfiguration.getRotation()) : 0;
             if (((KeyguardUpdateMonitor) Dependency.sDependency.getDependencyInner(KeyguardUpdateMonitor.class)).isInDisplayFingerprintMarginAccepted()) {
-                i2 = DeviceState.getInDisplayFingerprintHeight();
+                inDisplayFingerprintHeight = DeviceState.getInDisplayFingerprintHeight();
                 if (DeviceType.isTablet()) {
-                    i2 += this.mView.getResources().getDimensionPixelSize(R.dimen.kg_emergency_button_margin_bottom_for_tablet_fingerprint);
+                    inDisplayFingerprintHeight += this.mView.getResources().getDimensionPixelSize(R.dimen.kg_emergency_button_margin_bottom_for_tablet_fingerprint);
                 }
             } else {
-                i2 = 0;
+                inDisplayFingerprintHeight = 0;
             }
-            if (rotation2 == 0 && i2 != 0) {
-                dimensionPixelSize2 = i2;
+            if (rotation2 == 0 && inDisplayFingerprintHeight != 0) {
+                dimensionPixelSize2 = inDisplayFingerprintHeight;
             }
             if (i == 0) {
-                constraintSet.connect(this.mViewFlipper.getId(), 1, 0, 1, i3);
+                constraintSet.connect(this.mViewFlipper.getId(), 1, 0, 1, i2);
             } else if (i == 2) {
-                constraintSet.connect(this.mViewFlipper.getId(), 2, 0, 2, i3);
+                constraintSet.connect(this.mViewFlipper.getId(), 2, 0, 2, i2);
             } else {
                 constraintSet.connect(this.mViewFlipper.getId(), 1, 0, 1);
                 constraintSet.connect(this.mViewFlipper.getId(), 2, 0, 2);
@@ -153,10 +151,10 @@ public class KeyguardSecSecurityContainer extends KeyguardSecurityContainer {
             this.mAlertDialog = null;
         }
         final KeyguardUpdateMonitor keyguardUpdateMonitor = (KeyguardUpdateMonitor) Dependency.sDependency.getDependencyInner(KeyguardUpdateMonitor.class);
-        AlertDialog create = new AlertDialog.Builder(((ViewGroup) this).mContext, R.style.Theme_SystemUI_DayNightDialog).setTitle((CharSequence) null).setMessage(str).setCancelable(false).setNegativeButton(android.R.string.ok, new DialogInterface.OnClickListener() { // from class: com.android.keyguard.KeyguardSecSecurityContainer$$ExternalSyntheticLambda0
+        AlertDialog alertDialogCreate = new AlertDialog.Builder(((ViewGroup) this).mContext, R.style.Theme_SystemUI_DayNightDialog).setTitle((CharSequence) null).setMessage(str).setCancelable(false).setNegativeButton(android.R.string.ok, new DialogInterface.OnClickListener() { // from class: com.android.keyguard.KeyguardSecSecurityContainer$$ExternalSyntheticLambda0
             @Override // android.content.DialogInterface.OnClickListener
             public final void onClick(DialogInterface dialogInterface, int i) {
-                KeyguardSecSecurityContainer keyguardSecSecurityContainer = KeyguardSecSecurityContainer.this;
+                KeyguardSecSecurityContainer keyguardSecSecurityContainer = this.f$0;
                 KeyguardUpdateMonitor keyguardUpdateMonitor2 = keyguardUpdateMonitor;
                 int i2 = KeyguardSecSecurityContainer.$r8$clinit;
                 keyguardSecSecurityContainer.getClass();
@@ -168,14 +166,14 @@ public class KeyguardSecSecurityContainer extends KeyguardSecurityContainer {
         }).setOnDismissListener(new DialogInterface.OnDismissListener() { // from class: com.android.keyguard.KeyguardSecSecurityContainer$$ExternalSyntheticLambda1
             @Override // android.content.DialogInterface.OnDismissListener
             public final void onDismiss(DialogInterface dialogInterface) {
-                KeyguardUpdateMonitor keyguardUpdateMonitor2 = KeyguardUpdateMonitor.this;
+                KeyguardUpdateMonitor keyguardUpdateMonitor2 = keyguardUpdateMonitor;
                 int i = KeyguardSecSecurityContainer.$r8$clinit;
                 keyguardUpdateMonitor2.setDisableBiometricBySecurityDialog(false);
             }
         }).create();
-        this.mAlertDialog = create;
+        this.mAlertDialog = alertDialogCreate;
         if (!(((ViewGroup) this).mContext instanceof Activity)) {
-            Window window = create.getWindow();
+            Window window = alertDialogCreate.getWindow();
             Objects.requireNonNull(window);
             window.setType(2009);
         }
@@ -191,14 +189,12 @@ public class KeyguardSecSecurityContainer extends KeyguardSecurityContainer {
         super(context, attributeSet, i);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SecDefaultViewMode implements SecViewMode {
         @Override // com.android.keyguard.KeyguardSecSecurityContainer.SecViewMode
         public final void init(KeyguardSecSecurityContainer keyguardSecSecurityContainer, KeyguardSecurityViewFlipper keyguardSecurityViewFlipper) {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface SecViewMode extends KeyguardSecurityContainer.ViewMode {
         void init(KeyguardSecSecurityContainer keyguardSecSecurityContainer, KeyguardSecurityViewFlipper keyguardSecurityViewFlipper);
 

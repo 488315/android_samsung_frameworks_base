@@ -75,7 +75,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Optional;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class TaskbarDelegate implements CommandQueue.Callbacks, LauncherProxyService.LauncherProxyListener, NavigationModeController.ModeChangedListener, Dumpable {
     public int mAppearance;
@@ -185,7 +184,6 @@ public class TaskbarDelegate implements CommandQueue.Callbacks, LauncherProxySer
     public boolean shouldInitializeAgain = false;
     public final TaskbarDelegate$$ExternalSyntheticLambda0 mPipListener = new TaskbarDelegate$$ExternalSyntheticLambda0(this, 0);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.navigationbar.TaskbarDelegate$4, reason: invalid class name */
     public class AnonymousClass4 implements LightBarTransitionsController.DarkIntensityApplier {
         public AnonymousClass4() {
@@ -196,7 +194,7 @@ public class TaskbarDelegate implements CommandQueue.Callbacks, LauncherProxySer
             TaskbarDelegate.this.mBgHandler.post(new Runnable() { // from class: com.android.systemui.navigationbar.TaskbarDelegate$4$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    TaskbarDelegate.AnonymousClass4 anonymousClass4 = TaskbarDelegate.AnonymousClass4.this;
+                    TaskbarDelegate.AnonymousClass4 anonymousClass4 = this.f$0;
                     TaskbarDelegate.this.mLauncherProxyService.onNavButtonsDarkIntensityChanged(f);
                 }
             });
@@ -222,7 +220,7 @@ public class TaskbarDelegate implements CommandQueue.Callbacks, LauncherProxySer
             this.mNavBarStore = navBarStore;
             this.mNavBarStateManager = navBarStore.getNavStateManager();
         }
-        if (BasicRune.NAVBAR_TASKBAR) {
+        if (BasicRune.NAVBAR_TASKBAR || BasicRune.NAVBAR_DESKTOP) {
             NavBarButtonDrawableProvider.Companion.getClass();
             NavBarButtonDrawableProvider navBarButtonDrawableProvider = NavBarButtonDrawableProvider.INSTANCE;
             if (navBarButtonDrawableProvider == null) {
@@ -397,18 +395,18 @@ public class TaskbarDelegate implements CommandQueue.Callbacks, LauncherProxySer
             this.mLauncherProxyService.addCallback((LauncherProxyService.LauncherProxyListener) this);
             onNavigationModeChanged(this.mNavigationModeController.addListener(this));
             this.mNavBarHelper.registerNavTaskStateUpdater(this.mNavbarTaskbarStateUpdater);
-            Context createWindowContext = this.mContext.createWindowContext(this.mDisplayManager.getDisplay(i), 2, null);
-            this.mWindowContext = createWindowContext;
-            this.mScreenPinningNotify = new ScreenPinningNotify(createWindowContext);
+            Context contextCreateWindowContext = this.mContext.createWindowContext(this.mDisplayManager.getDisplay(i), 2, null);
+            this.mWindowContext = contextCreateWindowContext;
+            this.mScreenPinningNotify = new ScreenPinningNotify(contextCreateWindowContext);
             updateSysuiFlags();
             boolean z = BasicRune.NAVBAR_TASKBAR;
             AnonymousClass3 anonymousClass3 = this.mAutoHideUiElement;
             if (z) {
                 this.shouldInitializeAgain = false;
                 this.mNavbarFlags = this.mNavBarHelper.mLastIMEhints;
-                LightBarTransitionsController create = this.mLightBarTransitionsControllerFactory.create(new AnonymousClass4());
-                this.mLightBarTransitionsController = create;
-                this.mLauncherProxyService.onNavButtonsDarkIntensityChanged(create.mDarkIntensity);
+                LightBarTransitionsController lightBarTransitionsControllerCreate = this.mLightBarTransitionsControllerFactory.create(new AnonymousClass4());
+                this.mLightBarTransitionsController = lightBarTransitionsControllerCreate;
+                this.mLauncherProxyService.onNavButtonsDarkIntensityChanged(lightBarTransitionsControllerCreate.mDarkIntensity);
                 if (BasicRune.NAVBAR_POLICY_VISIBILITY) {
                     ((AutoHideControllerImpl) this.mAutoHideController).registerElementToObserver(anonymousClass3);
                     LightBarController lightBarController = this.mLightBarController;
@@ -444,7 +442,13 @@ public class TaskbarDelegate implements CommandQueue.Callbacks, LauncherProxySer
             return;
         }
         EmergencyButtonController$$ExternalSyntheticOutline0.m("notifyRequestedGameToolsWin visible : ", "TaskbarDelegate", z);
-        ((AutoHideControllerImpl) this.mAutoHideController).notifyRequestedGameToolsWin(z);
+        AutoHideControllerImpl autoHideControllerImpl = (AutoHideControllerImpl) this.mAutoHideController;
+        autoHideControllerImpl.mGameToolsShown = z;
+        if (z) {
+            autoHideControllerImpl.suspendAutoHide();
+        } else {
+            autoHideControllerImpl.resumeSuspendedAutoHideImmediately();
+        }
     }
 
     @Override // com.android.systemui.statusbar.CommandQueue.Callbacks
@@ -459,12 +463,12 @@ public class TaskbarDelegate implements CommandQueue.Callbacks, LauncherProxySer
         if (BasicRune.NAVBAR_TASKBAR && this.mDefaultDisplayId == i && i == 0) {
             Log.d("TaskbarDelegate", String.format("notifySamsungPayInfo displayId: %d, visible: %s", Integer.valueOf(i), Boolean.valueOf(z)));
             LauncherProxyService launcherProxyService = this.mLauncherProxyService;
-            int width = rect.width();
+            int iWidth = rect.width();
             launcherProxyService.getClass();
             try {
                 ILauncherProxy iLauncherProxy = launcherProxyService.mLauncherProxy;
                 if (iLauncherProxy != null) {
-                    ((ILauncherProxy.Stub.Proxy) iLauncherProxy).notifyPayInfo(width, z);
+                    ((ILauncherProxy.Stub.Proxy) iLauncherProxy).notifyPayInfo(iWidth, z);
                 }
             } catch (RemoteException e) {
                 Log.e("LauncherProxyService", "Failed to notify pay info.", e);
@@ -479,9 +483,12 @@ public class TaskbarDelegate implements CommandQueue.Callbacks, LauncherProxySer
             this.shouldInitializeAgain = false;
             onInitializedTaskbarNavigationBar();
             try {
-                ILauncherProxy iLauncherProxy = this.mLauncherProxyService.mLauncherProxy;
-                if (iLauncherProxy != null) {
-                    ((ILauncherProxy.Stub.Proxy) iLauncherProxy).isTaskbarEnabled(((NavBarStateManagerImpl) this.mNavBarStateManager).isTaskBarEnabled(false));
+                boolean zIsTaskBarEnabled = ((NavBarStateManagerImpl) this.mNavBarStateManager).isTaskBarEnabled(false);
+                if (this.mLauncherProxyService.mLauncherProxy == null) {
+                    Log.w("TaskbarDelegate", "LauncherProxyService is not connected. isTaskBarEnabled=" + zIsTaskBarEnabled);
+                } else {
+                    Log.w("TaskbarDelegate", "onConnectionChanged. isTaskBarEnabled=" + zIsTaskBarEnabled);
+                    ((ILauncherProxy.Stub.Proxy) this.mLauncherProxyService.mLauncherProxy).isTaskbarEnabled(zIsTaskBarEnabled);
                 }
             } catch (Exception e) {
                 Log.e("TaskbarDelegate", "Failed to call isTaskbarEnabled()", e);
@@ -538,6 +545,7 @@ public class TaskbarDelegate implements CommandQueue.Callbacks, LauncherProxySer
     @Override // com.android.systemui.recents.LauncherProxyService.LauncherProxyListener
     public final void onInitializedTaskbarNavigationBar() {
         NavBarStateManager navBarStateManager;
+        boolean zIsNavBarHiddenByKnox;
         Bundle bundle;
         boolean z = BasicRune.NAVBAR_TASKBAR;
         if (z && this.mInitialized) {
@@ -570,13 +578,12 @@ public class TaskbarDelegate implements CommandQueue.Callbacks, LauncherProxySer
                 navBarEvents2.rotationLocked = ((RotationLockController) Dependency.sDependency.getDependencyInner(RotationLockController.class)).isRotationLocked();
                 sendNavbarEvent(navBarEvents2);
             }
-            if (z2 && (navBarStateManager = this.mNavBarStateManager) != null) {
-                boolean isNavBarHiddenByKnox = ((NavBarStateManagerImpl) navBarStateManager).isNavBarHiddenByKnox();
+            if (z2 && (navBarStateManager = this.mNavBarStateManager) != null && (zIsNavBarHiddenByKnox = ((NavBarStateManagerImpl) navBarStateManager).isNavBarHiddenByKnox())) {
                 NavBarEvents navBarEvents3 = new NavBarEvents();
                 navBarEvents3.eventType = NavBarEvents.EventType.ON_UPDATE_TASKBAR_VIS_BY_KNOX;
-                navBarEvents3.hiddenByKnox = isNavBarHiddenByKnox;
+                navBarEvents3.hiddenByKnox = zIsNavBarHiddenByKnox;
                 sendNavbarEvent(navBarEvents3);
-                ((SysUiStateImpl) this.mSysUiState.setFlag(1099511627776L, isNavBarHiddenByKnox)).commitUpdate();
+                ((SysUiStateImpl) this.mSysUiState.setFlag(1099511627776L, zIsNavBarHiddenByKnox)).commitUpdate();
             }
             this.mLauncherProxyService.onNavButtonsDarkIntensityChanged(this.mLightBarTransitionsController.mDarkIntensity);
             this.mPluginTaskbar.updatePluginBundle();
@@ -611,11 +618,11 @@ public class TaskbarDelegate implements CommandQueue.Callbacks, LauncherProxySer
 
     @Override // com.android.systemui.statusbar.CommandQueue.Callbacks
     public final void onSystemBarAttributesChanged(int i, int i2, AppearanceRegion[] appearanceRegionArr, boolean z, int i3, int i4, String str, LetterboxDetails[] letterboxDetailsArr) {
-        boolean z2;
+        boolean zUpdateTransitionMode$1;
         if (!BasicRune.NAVBAR_ENABLED || this.mDefaultDisplayId == i) {
             this.mLauncherProxyService.onSystemBarAttributesChanged(i, i3);
-            boolean z3 = BasicRune.NAVBAR_TASKBAR;
-            if (z3) {
+            boolean z2 = BasicRune.NAVBAR_TASKBAR;
+            if (z2) {
                 NavBarEvents navBarEvents = new NavBarEvents();
                 navBarEvents.eventType = NavBarEvents.EventType.ON_APPEARANCE_CHANGED;
                 navBarEvents.appearance = (-2097153) & i2;
@@ -625,12 +632,12 @@ public class TaskbarDelegate implements CommandQueue.Callbacks, LauncherProxySer
             }
             if (this.mAppearance != i2) {
                 this.mAppearance = i2;
-                z2 = updateTransitionMode$1(NavBarHelper.transitionMode(i2, this.mTaskbarTransientShowing));
+                zUpdateTransitionMode$1 = updateTransitionMode$1(NavBarHelper.transitionMode(i2, this.mTaskbarTransientShowing));
             } else {
-                z2 = false;
+                zUpdateTransitionMode$1 = false;
             }
             if (i == this.mDefaultDisplayId) {
-                ((LightBarControllerImpl) this.mLightBarController).onNavigationBarAppearanceChanged(i2, z3 ? this.mTransitionMode : 0, z2, z, str);
+                ((LightBarControllerImpl) this.mLightBarController).onNavigationBarAppearanceChanged(i2, z2 ? this.mTransitionMode : 0, zUpdateTransitionMode$1, z, str);
             }
             if (this.mBehavior != i3) {
                 this.mBehavior = i3;
@@ -649,6 +656,19 @@ public class TaskbarDelegate implements CommandQueue.Callbacks, LauncherProxySer
     }
 
     @Override // com.android.systemui.recents.LauncherProxyService.LauncherProxyListener
+    public final void onTaskbarAutohideSuspendForDisplay(int i, boolean z) {
+        if (BasicRune.NAVBAR_TASKBAR && i == this.mDefaultDisplayId) {
+            AutoHideControllerImpl autoHideControllerImpl = (AutoHideControllerImpl) this.mAutoHideController;
+            autoHideControllerImpl.mTaskBarSuspend = z;
+            if (z) {
+                autoHideControllerImpl.suspendAutoHide();
+            } else {
+                autoHideControllerImpl.resumeSuspendedAutoHideImmediately();
+            }
+        }
+    }
+
+    @Override // com.android.systemui.recents.LauncherProxyService.LauncherProxyListener
     public final void onTaskbarSPluginButtonClicked() {
         this.mPluginTaskbar.buttonDispatcherProxy.pinButton.view.performClick();
     }
@@ -657,12 +677,12 @@ public class TaskbarDelegate implements CommandQueue.Callbacks, LauncherProxySer
         EdgeBackGestureHandler edgeBackGestureHandler = this.mEdgeBackGestureHandler;
         boolean z = this.mTaskbarTransientShowing;
         edgeBackGestureHandler.mIsNavBarShownTransiently = z;
-        int transitionMode = NavBarHelper.transitionMode(this.mAppearance, z);
-        if (updateTransitionMode$1(transitionMode)) {
+        int iTransitionMode = NavBarHelper.transitionMode(this.mAppearance, z);
+        if (updateTransitionMode$1(iTransitionMode)) {
             LightBarControllerImpl lightBarControllerImpl = (LightBarControllerImpl) this.mLightBarController;
-            lightBarControllerImpl.mHasLightNavigationBar = LightBarControllerImpl.isLight(lightBarControllerImpl.mAppearance, transitionMode, 16);
+            lightBarControllerImpl.mHasLightNavigationBar = LightBarControllerImpl.isLight(lightBarControllerImpl.mAppearance, iTransitionMode, 16);
             if (BasicRune.NAVBAR_AOSP_BUG_FIX) {
-                lightBarControllerImpl.mNavigationBarMode = transitionMode;
+                lightBarControllerImpl.mNavigationBarMode = iTransitionMode;
                 lightBarControllerImpl.reevaluate();
             }
         }
@@ -680,11 +700,11 @@ public class TaskbarDelegate implements CommandQueue.Callbacks, LauncherProxySer
 
     public final void putButtonBitmapsToBundle(IconType iconType, Bundle bundle) {
         KeyButtonDrawable buttonDrawable = this.mIconResourceMapper.getButtonDrawable(iconType);
-        Drawable mutate = buttonDrawable.mLayerDrawable.getDrawable(0).mutate();
-        Drawable mutate2 = buttonDrawable.mLayerDrawable.getDrawable(1).mutate();
-        mutate.setAlpha(255);
-        mutate2.setAlpha(255);
-        Bitmap[] bitmapArr = {IconDrawableUtil.getBitmap(mutate), IconDrawableUtil.getBitmap(mutate2)};
+        Drawable drawableMutate = buttonDrawable.mLayerDrawable.getDrawable(0).mutate();
+        Drawable drawableMutate2 = buttonDrawable.mLayerDrawable.getDrawable(1).mutate();
+        drawableMutate.setAlpha(255);
+        drawableMutate2.setAlpha(255);
+        Bitmap[] bitmapArr = {IconDrawableUtil.getBitmap(drawableMutate), IconDrawableUtil.getBitmap(drawableMutate2)};
         bundle.putParcelable(iconType.name() + "_LIGHT", bitmapArr[0]);
         bundle.putParcelable(iconType.name() + "_DARK", bitmapArr[1]);
     }
@@ -708,20 +728,20 @@ public class TaskbarDelegate implements CommandQueue.Callbacks, LauncherProxySer
 
     @Override // com.android.systemui.statusbar.CommandQueue.Callbacks
     public final void setImeWindowStatus(int i, int i2, int i3, boolean z) {
-        boolean isImeVisible = this.mNavBarHelper.isImeVisible(i2);
-        int updateNavbarFlagsFromIme = Utilities.updateNavbarFlagsFromIme(this.mNavbarFlags, i3, isImeVisible, z);
-        if (updateNavbarFlagsFromIme == this.mNavbarFlags) {
+        boolean zIsImeVisible = this.mNavBarHelper.isImeVisible(i2);
+        int iUpdateNavbarFlagsFromIme = Utilities.updateNavbarFlagsFromIme(this.mNavbarFlags, i3, zIsImeVisible, z);
+        if (iUpdateNavbarFlagsFromIme == this.mNavbarFlags) {
             return;
         }
-        this.mNavbarFlags = updateNavbarFlagsFromIme;
+        this.mNavbarFlags = iUpdateNavbarFlagsFromIme;
         updateSysuiFlags();
         if (BasicRune.NAVBAR_TASKBAR) {
-            StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "setImeWindowStatus displayId=", " vis=", " backDisposition=");
-            m.append(i3);
-            m.append(" showImeSwitcher=");
-            m.append(z);
-            m.append(" imeVisible=");
-            ActionBarContextView$$ExternalSyntheticOutline0.m(m, isImeVisible, "TaskbarDelegate");
+            StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "setImeWindowStatus displayId=", " vis=", " backDisposition=");
+            sbM.append(i3);
+            sbM.append(" showImeSwitcher=");
+            sbM.append(z);
+            sbM.append(" imeVisible=");
+            ActionBarContextView$$ExternalSyntheticOutline0.m(sbM, zIsImeVisible, "TaskbarDelegate");
             this.mNavBarHelper.mLastIMEhints = this.mNavbarFlags;
         }
     }
@@ -801,7 +821,7 @@ public class TaskbarDelegate implements CommandQueue.Callbacks, LauncherProxySer
         ((SysUiStateImpl) this.mSysUiState.setFlag(16L, (j & 16) != 0).setFlag(32L, (j & 32) != 0).setFlag(262144L, (this.mNavbarFlags & 2) != 0).setFlag(1048576L, (this.mNavbarFlags & 4) != 0).setFlag(68719476736L, (this.mNavbarFlags & 1) != 0).setFlag(128L, (this.mDisabledFlags & 16777216) != 0).setFlag(256L, (this.mDisabledFlags & 2097152) != 0).setFlag(4194304L, (this.mDisabledFlags & 4194304) != 0).setFlag(2L, !(this.mTaskBarWindowState == 0)).setFlag(131072L, this.mBehavior != 2)).commitUpdate();
     }
 
-    public final void updateTaskbarButtonIconsAndHints() {
+    public final NavBarEvents updateTaskbarButtonIconsAndHints() {
         int i = 1;
         boolean z = MenuPopupWindow$MenuDropDownListView$$ExternalSyntheticOutline0.m(this.mContext) == 1;
         NavBarIconResourceMapper navBarIconResourceMapper = this.mIconResourceMapper;
@@ -847,7 +867,7 @@ public class TaskbarDelegate implements CommandQueue.Callbacks, LauncherProxySer
                 navBarEvents.eventType = NavBarEvents.EventType.ON_UPDATE_ICON_BITMAP;
                 navBarEvents.iconBitmapBundle = bundle;
                 sendNavbarEvent(navBarEvents);
-                return;
+                return navBarEvents;
             }
             Bitmap bitmap = (Bitmap) samsungPluginTaskBar.pluginBundle.getParcelable("extra" + i + "_LIGHT");
             if (bitmap != null) {

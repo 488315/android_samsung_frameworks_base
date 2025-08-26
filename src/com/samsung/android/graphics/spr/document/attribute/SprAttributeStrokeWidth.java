@@ -31,9 +31,9 @@ public class SprAttributeStrokeWidth extends SprAttributeBase {
 
     @Override // com.samsung.android.graphics.spr.document.attribute.SprAttributeBase
     public void fromSPR(SprInputStream sprInputStream) throws IOException {
-        float readFloat = sprInputStream.readFloat();
-        this.strokeWidth = readFloat;
-        if (readFloat <= 0.0f || readFloat >= 0.3f) {
+        float f = sprInputStream.readFloat();
+        this.strokeWidth = f;
+        if (f <= 0.0f || f >= 0.3f) {
             return;
         }
         this.strokeWidth = 0.3f;

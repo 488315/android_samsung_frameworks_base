@@ -33,7 +33,6 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.function.Function;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PipTouchHandler {
     public final AccessibilityManager mAccessibilityManager;
@@ -74,7 +73,6 @@ public class PipTouchHandler {
     public float mSavedSnapFraction = -1.0f;
     public final Rect mTmpBounds = new Rect();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DefaultPipTouchGesture extends PipTouchGesture {
         public final PointF mDelta;
         public PipPerfHintController.PipHighPerfSession mPipHighPerfSession;
@@ -91,7 +89,6 @@ public class PipTouchHandler {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PipMenuListener {
         public /* synthetic */ PipMenuListener(PipTouchHandler pipTouchHandler, int i) {
             this();
@@ -105,8 +102,8 @@ public class PipTouchHandler {
         int i = 0;
         this.mContext = context;
         this.mMainExecutor = shellExecutor;
-        PipPerfHintController orElse = optional.orElse(null);
-        this.mPipPerfHintController = orElse;
+        PipPerfHintController pipPerfHintControllerOrElse = optional.orElse(null);
+        this.mPipPerfHintController = pipPerfHintControllerOrElse;
         this.mAccessibilityManager = (AccessibilityManager) context.getSystemService(AccessibilityManager.class);
         this.mPipBoundsAlgorithm = pipBoundsAlgorithm;
         this.mPipBoundsState = pipBoundsState;
@@ -132,7 +129,7 @@ public class PipTouchHandler {
             }
 
             @Override // java.lang.Runnable
-            public final void run() {
+            public final void run() throws Resources.NotFoundException {
                 int i3 = i2;
                 final PipTouchHandler pipTouchHandler = this.f$0;
                 switch (i3) {
@@ -229,7 +226,7 @@ public class PipTouchHandler {
         this.mPipResizeGestureHandler = new PipResizeGestureHandler(context, pipBoundsAlgorithm, pipBoundsState, this.mMotionHelper, pipTouchState, pipTaskOrganizer, pipDismissTargetHandler, new Function() { // from class: com.android.wm.shell.pip.phone.PipTouchHandler$$ExternalSyntheticLambda2
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                PipTouchHandler pipTouchHandler = PipTouchHandler.this;
+                PipTouchHandler pipTouchHandler = this.f$0;
                 Rect rect = (Rect) obj;
                 Rect rect2 = new Rect();
                 Rect rect3 = pipTouchHandler.mInsetBounds;
@@ -246,7 +243,7 @@ public class PipTouchHandler {
             }
 
             @Override // java.lang.Runnable
-            public final void run() {
+            public final void run() throws Resources.NotFoundException {
                 int i32 = i3;
                 final PipTouchHandler pipTouchHandler = this.f$0;
                 switch (i32) {
@@ -337,7 +334,7 @@ public class PipTouchHandler {
                         break;
                 }
             }
-        }, pipUiEventLogger, phonePipMenuController, shellExecutor, orElse);
+        }, pipUiEventLogger, phonePipMenuController, shellExecutor, pipPerfHintControllerOrElse);
         PipMotionHelper pipMotionHelper2 = this.mMotionHelper;
         PipSnapAlgorithm pipSnapAlgorithm = pipBoundsAlgorithm.mSnapAlgorithm;
         PipTouchHandler$$ExternalSyntheticLambda4 pipTouchHandler$$ExternalSyntheticLambda4 = new PipTouchHandler$$ExternalSyntheticLambda4(this);
@@ -350,7 +347,7 @@ public class PipTouchHandler {
             }
 
             @Override // java.lang.Runnable
-            public final void run() {
+            public final void run() throws Resources.NotFoundException {
                 int i32 = i4;
                 final PipTouchHandler pipTouchHandler = this.f$0;
                 switch (i32) {
@@ -451,7 +448,7 @@ public class PipTouchHandler {
             }
 
             @Override // java.lang.Runnable
-            public final void run() {
+            public final void run() throws Resources.NotFoundException {
                 int i32 = i5;
                 final PipTouchHandler pipTouchHandler = this.f$0;
                 switch (i32) {
@@ -559,7 +556,7 @@ public class PipTouchHandler {
                 }
 
                 @Override // java.lang.Runnable
-                public final void run() {
+                public final void run() throws Resources.NotFoundException {
                     int i32 = i6;
                     final PipTouchHandler pipTouchHandler = this.f$0;
                     switch (i32) {
@@ -664,7 +661,7 @@ public class PipTouchHandler {
             }
 
             @Override // java.lang.Runnable
-            public final void run() {
+            public final void run() throws Resources.NotFoundException {
                 int i32 = i7;
                 final PipTouchHandler pipTouchHandler = this.f$0;
                 switch (i32) {
@@ -758,32 +755,32 @@ public class PipTouchHandler {
         }, this);
     }
 
-    public final void animateToNormalSize(PipMenuView$$ExternalSyntheticLambda0 pipMenuView$$ExternalSyntheticLambda0) {
+    public final void animateToNormalSize(PipMenuView$$ExternalSyntheticLambda0 pipMenuView$$ExternalSyntheticLambda0) throws Resources.NotFoundException {
         PipResizeGestureHandler pipResizeGestureHandler = this.mPipResizeGestureHandler;
         PipBoundsState pipBoundsState = this.mPipBoundsState;
         pipResizeGestureHandler.setUserResizeBounds(pipBoundsState.getBounds());
-        Rect adjustNormalBoundsToFitMenu = this.mPipBoundsAlgorithm.adjustNormalBoundsToFitMenu(pipBoundsState.mNormalBounds, this.mMenuController.getEstimatedMinMenuSize());
+        Rect rectAdjustNormalBoundsToFitMenu = this.mPipBoundsAlgorithm.adjustNormalBoundsToFitMenu(pipBoundsState.mNormalBounds, this.mMenuController.getEstimatedMinMenuSize());
         if (!pipBoundsState.getBounds().isEmpty()) {
-            float width = pipBoundsState.getBounds().width() / pipBoundsState.getBounds().height();
+            float fWidth = pipBoundsState.getBounds().width() / pipBoundsState.getBounds().height();
             float f = pipBoundsState.mAspectRatio;
-            if ((width >= 1.0f && f < 1.0f) || (width < 1.0f && f >= 1.0f)) {
-                Log.d("PipTouchHandler", "[PipTaskOrganizer] animateToNormalSize setUserResizeBounds=" + adjustNormalBoundsToFitMenu + " reason=ratio_change");
-                this.mPipResizeGestureHandler.setUserResizeBounds(adjustNormalBoundsToFitMenu);
+            if ((fWidth >= 1.0f && f < 1.0f) || (fWidth < 1.0f && f >= 1.0f)) {
+                Log.d("PipTouchHandler", "[PipTaskOrganizer] animateToNormalSize setUserResizeBounds=" + rectAdjustNormalBoundsToFitMenu + " reason=ratio_change");
+                this.mPipResizeGestureHandler.setUserResizeBounds(rectAdjustNormalBoundsToFitMenu);
             }
         }
         Rect rect = new Rect();
-        PipBoundsAlgorithm.getMovementBounds(adjustNormalBoundsToFitMenu, this.mInsetBounds, rect, this.mIsImeShowing ? this.mImeHeight : 0);
+        PipBoundsAlgorithm.getMovementBounds(rectAdjustNormalBoundsToFitMenu, this.mInsetBounds, rect, this.mIsImeShowing ? this.mImeHeight : 0);
         PipMotionHelper pipMotionHelper = this.mMotionHelper;
         Rect rect2 = pipBoundsState.mMovementBounds;
         pipMotionHelper.getClass();
         float snapFraction = pipMotionHelper.mSnapAlgorithm.getSnapFraction(0, new Rect(pipMotionHelper.mPipBoundsState.getBounds()), rect2);
-        PipSnapAlgorithm.applySnapFraction(adjustNormalBoundsToFitMenu, rect, snapFraction);
+        PipSnapAlgorithm.applySnapFraction(rectAdjustNormalBoundsToFitMenu, rect, snapFraction);
         pipMotionHelper.mPostPipTransitionCallback = pipMenuView$$ExternalSyntheticLambda0;
-        pipMotionHelper.resizeAndAnimatePipUnchecked$1(adjustNormalBoundsToFitMenu);
+        pipMotionHelper.resizeAndAnimatePipUnchecked$1(rectAdjustNormalBoundsToFitMenu);
         this.mSavedSnapFraction = snapFraction;
     }
 
-    public final void animateToUnStashedState() {
+    public final void animateToUnStashedState() throws Resources.NotFoundException {
         PipBoundsState pipBoundsState = this.mPipBoundsState;
         Rect bounds = pipBoundsState.getBounds();
         boolean z = bounds.left < pipBoundsState.mPipDisplayLayoutState.getDisplayBounds().left;
@@ -826,11 +823,11 @@ public class PipTouchHandler {
 
     public final void sendAccessibilityHoverEvent(int i) {
         if (this.mAccessibilityManager.isEnabled()) {
-            AccessibilityEvent obtain = AccessibilityEvent.obtain(i);
-            obtain.setImportantForAccessibility(true);
-            obtain.setSourceNodeId(AccessibilityNodeInfo.ROOT_NODE_ID);
-            obtain.setWindowId(-3);
-            this.mAccessibilityManager.sendAccessibilityEvent(obtain);
+            AccessibilityEvent accessibilityEventObtain = AccessibilityEvent.obtain(i);
+            accessibilityEventObtain.setImportantForAccessibility(true);
+            accessibilityEventObtain.setSourceNodeId(AccessibilityNodeInfo.ROOT_NODE_ID);
+            accessibilityEventObtain.setWindowId(-3);
+            this.mAccessibilityManager.sendAccessibilityEvent(accessibilityEventObtain);
         }
     }
 
@@ -883,7 +880,7 @@ public class PipTouchHandler {
         pipResizeGestureHandler3.updateMaxSize(point2.x, point2.y);
     }
 
-    public final boolean willResizeMenu() {
+    public final boolean willResizeMenu() throws Resources.NotFoundException {
         if (!this.mEnableResize) {
             return false;
         }

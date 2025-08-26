@@ -13,7 +13,6 @@ import com.android.systemui.statusbar.SysuiStatusBarStateController;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class AlternateBouncerToGoneTransitionViewModel implements DeviceEntryIconTransition {
     public final KeyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1 deviceEntryParentViewAlpha;
@@ -30,12 +29,12 @@ public final class AlternateBouncerToGoneTransitionViewModel implements DeviceEn
         KeyguardState keyguardState = KeyguardState.ALTERNATE_BOUNCER;
         SceneKey sceneKey = Scenes.Gone;
         companion.getClass();
-        KeyguardTransitionAnimationFlow.FlowBuilder m = AlternateBouncerToGoneTransitionViewModel$$ExternalSyntheticOutline0.m(keyguardState, KeyguardState.GONE, keyguardTransitionAnimationFlow.m2598setupVtjQ1oo(j, new Edge.StateToContent(keyguardState, sceneKey)));
-        this.transitionAnimation = m;
-        this.showAllNotifications = bouncerToGoneFlows.m2605showAllNotificationsVtjQ1oo(j, keyguardState);
+        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM = AlternateBouncerToGoneTransitionViewModel$$ExternalSyntheticOutline0.m(keyguardState, KeyguardState.GONE, keyguardTransitionAnimationFlow.m2615setupVtjQ1oo(j, new Edge.StateToContent(keyguardState, sceneKey)));
+        this.transitionAnimation = flowBuilderM;
+        this.showAllNotifications = bouncerToGoneFlows.m2622showAllNotificationsVtjQ1oo(j, keyguardState);
         ComposeBouncerFlags.INSTANCE.getClass();
-        this.scrimAlpha = bouncerToGoneFlows.m2604createScrimAlphaFlowKLykuaI(j, keyguardState, new BouncerToGoneFlows$scrimAlpha$2(bouncerToGoneFlows.primaryBouncerInteractor));
-        this.deviceEntryParentViewAlpha = m.immediatelyTransitionTo(0.0f);
+        this.scrimAlpha = bouncerToGoneFlows.m2621createScrimAlphaFlowKLykuaI(j, keyguardState, new BouncerToGoneFlows$scrimAlpha$2(bouncerToGoneFlows.primaryBouncerInteractor));
+        this.deviceEntryParentViewAlpha = flowBuilderM.immediatelyTransitionTo(0.0f);
     }
 
     @Override // com.android.systemui.keyguard.ui.transitions.DeviceEntryIconTransition

@@ -23,7 +23,6 @@ import kotlin.time.DurationUnit;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class PrimaryBouncerToGoneTransitionViewModel implements PrimaryBouncerTransition {
     public final BlurConfig blurConfig;
@@ -48,17 +47,17 @@ public final class PrimaryBouncerToGoneTransitionViewModel implements PrimaryBou
         FromPrimaryBouncerTransitionInteractor.Companion.getClass();
         long j = FromPrimaryBouncerTransitionInteractor.TO_GONE_DURATION;
         Edge.Companion.getClass();
-        KeyguardTransitionAnimationFlow.FlowBuilder m2598setupVtjQ1oo = keyguardTransitionAnimationFlow.m2598setupVtjQ1oo(j, Edge.INVALID);
+        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM2615setupVtjQ1oo = keyguardTransitionAnimationFlow.m2615setupVtjQ1oo(j, Edge.INVALID);
         KeyguardState keyguardState = KeyguardState.PRIMARY_BOUNCER;
-        KeyguardTransitionAnimationFlow.FlowBuilder m = AlternateBouncerToGoneTransitionViewModel$$ExternalSyntheticOutline0.m(keyguardState, KeyguardState.GONE, m2598setupVtjQ1oo);
-        this.transitionAnimation = m;
-        this.showAllNotifications = bouncerToGoneFlows.m2605showAllNotificationsVtjQ1oo(j, keyguardState);
+        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM = AlternateBouncerToGoneTransitionViewModel$$ExternalSyntheticOutline0.m(keyguardState, KeyguardState.GONE, flowBuilderM2615setupVtjQ1oo);
+        this.transitionAnimation = flowBuilderM;
+        this.showAllNotifications = bouncerToGoneFlows.m2622showAllNotificationsVtjQ1oo(j, keyguardState);
         ComposeBouncerFlags composeBouncerFlags = ComposeBouncerFlags.INSTANCE;
         composeBouncerFlags.getClass();
         final PrimaryBouncerToGoneTransitionViewModel$bouncerAlpha$2 primaryBouncerToGoneTransitionViewModel$bouncerAlpha$2 = new PrimaryBouncerToGoneTransitionViewModel$bouncerAlpha$2(primaryBouncerInteractor);
         FromPrimaryBouncerTransitionInteractor.Companion.getClass();
         final int i3 = 2;
-        this.bouncerAlpha = KeyguardTransitionAnimationFlow.FlowBuilder.m2599sharedFlow74qcysc$default(this.transitionAnimation, FromPrimaryBouncerTransitionInteractor.TO_GONE_SHORT_DURATION, new Function1(this) { // from class: com.android.systemui.keyguard.ui.viewmodel.PrimaryBouncerToGoneTransitionViewModel$$ExternalSyntheticLambda0
+        this.bouncerAlpha = KeyguardTransitionAnimationFlow.FlowBuilder.m2616sharedFlow74qcysc$default(this.transitionAnimation, FromPrimaryBouncerTransitionInteractor.TO_GONE_SHORT_DURATION, new Function1(this) { // from class: com.android.systemui.keyguard.ui.viewmodel.PrimaryBouncerToGoneTransitionViewModel$$ExternalSyntheticLambda0
             public final /* synthetic */ PrimaryBouncerToGoneTransitionViewModel f$0;
 
             {
@@ -67,7 +66,7 @@ public final class PrimaryBouncerToGoneTransitionViewModel implements PrimaryBou
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Float f = (Float) obj;
                 switch (i3) {
                     case 0:
@@ -75,11 +74,11 @@ public final class PrimaryBouncerToGoneTransitionViewModel implements PrimaryBou
                         PrimaryBouncerToGoneTransitionViewModel primaryBouncerToGoneTransitionViewModel = this.f$0;
                         return (primaryBouncerToGoneTransitionViewModel.willRunDismissFromKeyguard || primaryBouncerToGoneTransitionViewModel.leaveShadeOpen) ? Float.valueOf(1.0f) : Float.valueOf(0.0f);
                     case 1:
-                        float floatValue = f.floatValue();
+                        float fFloatValue = f.floatValue();
                         PrimaryBouncerToGoneTransitionViewModel primaryBouncerToGoneTransitionViewModel2 = this.f$0;
                         boolean z = primaryBouncerToGoneTransitionViewModel2.leaveShadeOpen;
                         BlurConfig blurConfig2 = primaryBouncerToGoneTransitionViewModel2.blurConfig;
-                        return Float.valueOf(MathUtils.lerp(blurConfig2.maxBlurRadiusPx, blurConfig2.minBlurRadiusPx, floatValue));
+                        return Float.valueOf(MathUtils.lerp(blurConfig2.maxBlurRadiusPx, blurConfig2.minBlurRadiusPx, fFloatValue));
                     default:
                         return this.f$0.willRunDismissFromKeyguard ? Float.valueOf(0.0f) : Float.valueOf(1.0f - f.floatValue());
                 }
@@ -108,7 +107,7 @@ public final class PrimaryBouncerToGoneTransitionViewModel implements PrimaryBou
         }, null, null, null, null, IKnoxCustomManager.Stub.TRANSACTION_getHardKeyIntentMode);
         final PrimaryBouncerToGoneTransitionViewModel$lockscreenAlpha$2 primaryBouncerToGoneTransitionViewModel$lockscreenAlpha$2 = new PrimaryBouncerToGoneTransitionViewModel$lockscreenAlpha$2(primaryBouncerInteractor);
         Duration.Companion companion = Duration.Companion;
-        this.lockscreenAlpha = KeyguardTransitionAnimationFlow.FlowBuilder.m2599sharedFlow74qcysc$default(this.transitionAnimation, DurationKt.toDuration(50, DurationUnit.MILLISECONDS), new Function1(this) { // from class: com.android.systemui.keyguard.ui.viewmodel.PrimaryBouncerToGoneTransitionViewModel$$ExternalSyntheticLambda0
+        this.lockscreenAlpha = KeyguardTransitionAnimationFlow.FlowBuilder.m2616sharedFlow74qcysc$default(this.transitionAnimation, DurationKt.toDuration(50, DurationUnit.MILLISECONDS), new Function1(this) { // from class: com.android.systemui.keyguard.ui.viewmodel.PrimaryBouncerToGoneTransitionViewModel$$ExternalSyntheticLambda0
             public final /* synthetic */ PrimaryBouncerToGoneTransitionViewModel f$0;
 
             {
@@ -117,7 +116,7 @@ public final class PrimaryBouncerToGoneTransitionViewModel implements PrimaryBou
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Float f = (Float) obj;
                 switch (i) {
                     case 0:
@@ -125,11 +124,11 @@ public final class PrimaryBouncerToGoneTransitionViewModel implements PrimaryBou
                         PrimaryBouncerToGoneTransitionViewModel primaryBouncerToGoneTransitionViewModel = this.f$0;
                         return (primaryBouncerToGoneTransitionViewModel.willRunDismissFromKeyguard || primaryBouncerToGoneTransitionViewModel.leaveShadeOpen) ? Float.valueOf(1.0f) : Float.valueOf(0.0f);
                     case 1:
-                        float floatValue = f.floatValue();
+                        float fFloatValue = f.floatValue();
                         PrimaryBouncerToGoneTransitionViewModel primaryBouncerToGoneTransitionViewModel2 = this.f$0;
                         boolean z = primaryBouncerToGoneTransitionViewModel2.leaveShadeOpen;
                         BlurConfig blurConfig2 = primaryBouncerToGoneTransitionViewModel2.blurConfig;
-                        return Float.valueOf(MathUtils.lerp(blurConfig2.maxBlurRadiusPx, blurConfig2.minBlurRadiusPx, floatValue));
+                        return Float.valueOf(MathUtils.lerp(blurConfig2.maxBlurRadiusPx, blurConfig2.minBlurRadiusPx, fFloatValue));
                     default:
                         return this.f$0.willRunDismissFromKeyguard ? Float.valueOf(0.0f) : Float.valueOf(1.0f - f.floatValue());
                 }
@@ -156,7 +155,7 @@ public final class PrimaryBouncerToGoneTransitionViewModel implements PrimaryBou
                 return Unit.INSTANCE;
             }
         }, null, new AlternateBouncerToAodTransitionViewModel$$ExternalSyntheticLambda1(), null, null, IKnoxCustomManager.Stub.TRANSACTION_getWifiState);
-        this.windowBlurRadius = KeyguardTransitionAnimationFlow.FlowBuilder.m2599sharedFlow74qcysc$default(m, FromPrimaryBouncerTransitionInteractor.TO_GONE_SHORT_DURATION, new Function1(this) { // from class: com.android.systemui.keyguard.ui.viewmodel.PrimaryBouncerToGoneTransitionViewModel$$ExternalSyntheticLambda0
+        this.windowBlurRadius = KeyguardTransitionAnimationFlow.FlowBuilder.m2616sharedFlow74qcysc$default(flowBuilderM, FromPrimaryBouncerTransitionInteractor.TO_GONE_SHORT_DURATION, new Function1(this) { // from class: com.android.systemui.keyguard.ui.viewmodel.PrimaryBouncerToGoneTransitionViewModel$$ExternalSyntheticLambda0
             public final /* synthetic */ PrimaryBouncerToGoneTransitionViewModel f$0;
 
             {
@@ -165,7 +164,7 @@ public final class PrimaryBouncerToGoneTransitionViewModel implements PrimaryBou
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 Float f = (Float) obj;
                 switch (i2) {
                     case 0:
@@ -173,11 +172,11 @@ public final class PrimaryBouncerToGoneTransitionViewModel implements PrimaryBou
                         PrimaryBouncerToGoneTransitionViewModel primaryBouncerToGoneTransitionViewModel = this.f$0;
                         return (primaryBouncerToGoneTransitionViewModel.willRunDismissFromKeyguard || primaryBouncerToGoneTransitionViewModel.leaveShadeOpen) ? Float.valueOf(1.0f) : Float.valueOf(0.0f);
                     case 1:
-                        float floatValue = f.floatValue();
+                        float fFloatValue = f.floatValue();
                         PrimaryBouncerToGoneTransitionViewModel primaryBouncerToGoneTransitionViewModel2 = this.f$0;
                         boolean z = primaryBouncerToGoneTransitionViewModel2.leaveShadeOpen;
                         BlurConfig blurConfig2 = primaryBouncerToGoneTransitionViewModel2.blurConfig;
-                        return Float.valueOf(MathUtils.lerp(blurConfig2.maxBlurRadiusPx, blurConfig2.minBlurRadiusPx, floatValue));
+                        return Float.valueOf(MathUtils.lerp(blurConfig2.maxBlurRadiusPx, blurConfig2.minBlurRadiusPx, fFloatValue));
                     default:
                         return this.f$0.willRunDismissFromKeyguard ? Float.valueOf(0.0f) : Float.valueOf(1.0f - f.floatValue());
                 }
@@ -185,14 +184,14 @@ public final class PrimaryBouncerToGoneTransitionViewModel implements PrimaryBou
         }, 0L, new Function0() { // from class: com.android.systemui.keyguard.ui.viewmodel.PrimaryBouncerToGoneTransitionViewModel$$ExternalSyntheticLambda3
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                PrimaryBouncerToGoneTransitionViewModel primaryBouncerToGoneTransitionViewModel = PrimaryBouncerToGoneTransitionViewModel.this;
+                PrimaryBouncerToGoneTransitionViewModel primaryBouncerToGoneTransitionViewModel = this.f$0;
                 primaryBouncerToGoneTransitionViewModel.leaveShadeOpen = ((StatusBarStateControllerImpl) primaryBouncerToGoneTransitionViewModel.statusBarStateController).mLeaveOpenOnKeyguardHide;
                 return Unit.INSTANCE;
             }
         }, null, null, null, null, IKnoxCustomManager.Stub.TRANSACTION_getHardKeyIntentMode);
-        this.notificationBlurRadius = m.immediatelyTransitionTo(0.0f);
+        this.notificationBlurRadius = flowBuilderM.immediatelyTransitionTo(0.0f);
         composeBouncerFlags.getClass();
-        this.scrimAlpha = bouncerToGoneFlows.m2604createScrimAlphaFlowKLykuaI(j, keyguardState, new BouncerToGoneFlows$scrimAlpha$2(bouncerToGoneFlows.primaryBouncerInteractor));
+        this.scrimAlpha = bouncerToGoneFlows.m2621createScrimAlphaFlowKLykuaI(j, keyguardState, new BouncerToGoneFlows$scrimAlpha$2(bouncerToGoneFlows.primaryBouncerInteractor));
     }
 
     @Override // com.android.systemui.keyguard.ui.transitions.PrimaryBouncerTransition

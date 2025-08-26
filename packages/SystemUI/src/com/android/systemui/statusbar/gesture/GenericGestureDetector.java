@@ -13,7 +13,6 @@ import java.util.Map;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class GenericGestureDetector {
     public final Map callbacks = new LinkedHashMap();
@@ -30,9 +29,9 @@ public abstract class GenericGestureDetector {
     public final void addOnGestureDetectedCallback(String str, Function1 function1) {
         synchronized (this.callbacks) {
             try {
-                boolean isEmpty = this.callbacks.isEmpty();
+                boolean zIsEmpty = this.callbacks.isEmpty();
                 this.callbacks.put(str, function1);
-                if (isEmpty) {
+                if (zIsEmpty) {
                     startGestureListening$frameworks__base__packages__SystemUI__android_common__SystemUI_core();
                 }
                 Unit unit = Unit.INSTANCE;
@@ -52,7 +51,7 @@ public abstract class GenericGestureDetector {
         while (i < size) {
             Object obj = arrayList.get(i);
             i++;
-            ((Function1) obj).mo779invoke(motionEvent);
+            ((Function1) obj).mo781invoke(motionEvent);
         }
     }
 
@@ -78,7 +77,7 @@ public abstract class GenericGestureDetector {
         this.inputReceiver = inputMonitorCompat.getInputReceiver(Looper.getMainLooper(), Choreographer.getInstance(), new InputChannelCompat$InputEventListener() { // from class: com.android.systemui.statusbar.gesture.GenericGestureDetector$startGestureListening$1$1
             @Override // com.android.systemui.shared.system.InputChannelCompat$InputEventListener
             public final void onInputEvent(InputEvent inputEvent) {
-                GenericGestureDetector.this.onInputEvent(inputEvent);
+                this.$tmp0.onInputEvent(inputEvent);
             }
         });
         this.inputMonitor = inputMonitorCompat;

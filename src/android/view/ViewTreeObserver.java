@@ -613,11 +613,11 @@ public final class ViewTreeObserver {
         if (copyOnWriteArray == null || copyOnWriteArray.size() <= 0) {
             return;
         }
-        CopyOnWriteArray.Access<OnGlobalLayoutListener> start = copyOnWriteArray.start();
+        CopyOnWriteArray.Access<OnGlobalLayoutListener> accessStart = copyOnWriteArray.start();
         try {
-            int size = start.size();
+            int size = accessStart.size();
             for (int i = 0; i < size; i++) {
-                start.get(i).onGlobalLayout();
+                accessStart.get(i).onGlobalLayout();
             }
         } finally {
             copyOnWriteArray.end();
@@ -636,15 +636,15 @@ public final class ViewTreeObserver {
         if (copyOnWriteArray == null || copyOnWriteArray.size() <= 0) {
             return false;
         }
-        CopyOnWriteArray.Access<OnPreDrawListener> start = copyOnWriteArray.start();
+        CopyOnWriteArray.Access<OnPreDrawListener> accessStart = copyOnWriteArray.start();
         try {
-            int size = start.size();
+            int size = accessStart.size();
             boolean z = false;
             for (int i = 0; i < size; i++) {
-                OnPreDrawListener onPreDrawListener = start.get(i);
-                boolean onPreDraw = onPreDrawListener.onPreDraw();
-                z |= !onPreDraw;
-                if (!onPreDraw) {
+                OnPreDrawListener onPreDrawListener = accessStart.get(i);
+                boolean zOnPreDraw = onPreDrawListener.onPreDraw();
+                z |= !zOnPreDraw;
+                if (!zOnPreDraw) {
                     String name = onPreDrawListener.getClass().getName();
                     StringBuilder sb = this.mLastDispatchOnPreDrawCanceledReason;
                     if (sb == null) {
@@ -678,11 +678,11 @@ public final class ViewTreeObserver {
         if (copyOnWriteArray == null || copyOnWriteArray.size() <= 0) {
             return;
         }
-        CopyOnWriteArray.Access<OnWindowShownListener> start = copyOnWriteArray.start();
+        CopyOnWriteArray.Access<OnWindowShownListener> accessStart = copyOnWriteArray.start();
         try {
-            int size = start.size();
+            int size = accessStart.size();
             for (int i = 0; i < size; i++) {
-                start.get(i).onWindowShown();
+                accessStart.get(i).onWindowShown();
             }
         } finally {
             copyOnWriteArray.end();
@@ -717,11 +717,11 @@ public final class ViewTreeObserver {
         if (copyOnWriteArray == null || copyOnWriteArray.size() <= 0) {
             return;
         }
-        CopyOnWriteArray.Access<OnScrollChangedListener> start = copyOnWriteArray.start();
+        CopyOnWriteArray.Access<OnScrollChangedListener> accessStart = copyOnWriteArray.start();
         try {
-            int size = start.size();
+            int size = accessStart.size();
             for (int i = 0; i < size; i++) {
-                start.get(i).onScrollChanged();
+                accessStart.get(i).onScrollChanged();
             }
         } finally {
             copyOnWriteArray.end();
@@ -738,11 +738,11 @@ public final class ViewTreeObserver {
         if (copyOnWriteArray == null || copyOnWriteArray.size() <= 0) {
             return;
         }
-        CopyOnWriteArray.Access<OnComputeInternalInsetsListener> start = copyOnWriteArray.start();
+        CopyOnWriteArray.Access<OnComputeInternalInsetsListener> accessStart = copyOnWriteArray.start();
         try {
-            int size = start.size();
+            int size = accessStart.size();
             for (int i = 0; i < size; i++) {
-                start.get(i).onComputeInternalInsets(internalInsetsInfo);
+                accessStart.get(i).onComputeInternalInsets(internalInsetsInfo);
             }
         } finally {
             copyOnWriteArray.end();
@@ -765,11 +765,11 @@ public final class ViewTreeObserver {
         if (copyOnWriteArray == null || copyOnWriteArray.size() <= 0) {
             return;
         }
-        CopyOnWriteArray.Access<Consumer<List<Rect>>> start = copyOnWriteArray.start();
+        CopyOnWriteArray.Access<Consumer<List<Rect>>> accessStart = copyOnWriteArray.start();
         try {
-            int size = start.size();
+            int size = accessStart.size();
             for (int i = 0; i < size; i++) {
-                start.get(i).accept(list);
+                accessStart.get(i).accept(list);
             }
         } finally {
             copyOnWriteArray.end();

@@ -15,7 +15,6 @@ import com.android.systemui.util.time.SystemClock;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class QuickAccessWalletController {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -35,7 +34,6 @@ public class QuickAccessWalletController {
     public int mDefaultPaymentAppChangeEvents = 0;
     public int mDefaultWalletAppChangeEvents = 0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.wallet.controller.QuickAccessWalletController$1, reason: invalid class name */
     public class AnonymousClass1 extends ContentObserver {
         public final /* synthetic */ QuickAccessWalletClient.OnWalletCardsRetrievedCallback val$cardsRetriever;
@@ -52,7 +50,6 @@ public class QuickAccessWalletController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.wallet.controller.QuickAccessWalletController$2, reason: invalid class name */
     public class AnonymousClass2 extends ContentObserver {
         public AnonymousClass2(Handler handler) {
@@ -70,7 +67,6 @@ public class QuickAccessWalletController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum WalletChangeEvent {
         DEFAULT_PAYMENT_APP_CHANGE,
         DEFAULT_WALLET_APP_CHANGE,
@@ -129,7 +125,7 @@ public class QuickAccessWalletController {
                 if (this.mDefaultWalletAppObserver == null) {
                     ?? r3 = new OnRoleHoldersChangedListener() { // from class: com.android.systemui.wallet.controller.QuickAccessWalletController$$ExternalSyntheticLambda0
                         public final void onRoleHoldersChanged(String str, UserHandle userHandle) {
-                            QuickAccessWalletController quickAccessWalletController = QuickAccessWalletController.this;
+                            QuickAccessWalletController quickAccessWalletController = this.f$0;
                             QuickAccessWalletClient.OnWalletCardsRetrievedCallback onWalletCardsRetrievedCallback2 = onWalletCardsRetrievedCallback;
                             int i = QuickAccessWalletController.$r8$clinit;
                             quickAccessWalletController.getClass();

@@ -50,26 +50,26 @@ public class FontCustomizationParser {
     }
 
     public static Result parse(InputStream inputStream, String str, Map<String, File> map) throws XmlPullParserException, IOException {
-        XmlPullParser newPullParser = Xml.newPullParser();
-        newPullParser.setInput(inputStream, null);
-        newPullParser.nextTag();
-        return readFamilies(newPullParser, str, map);
+        XmlPullParser xmlPullParserNewPullParser = Xml.newPullParser();
+        xmlPullParserNewPullParser.setInput(inputStream, null);
+        xmlPullParserNewPullParser.nextTag();
+        return readFamilies(xmlPullParserNewPullParser, str, map);
     }
 
     private static Result validateAndTransformToResult(List<FontConfig.NamedFamilyList> list, List<FontConfig.Customization.LocaleFallback> list2, List<FontConfig.Alias> list3) {
-        HashMap hashMap = new HashMap();
+        HashMap map = new HashMap();
         for (int i = 0; i < list.size(); i++) {
             FontConfig.NamedFamilyList namedFamilyList = list.get(i);
             String name = namedFamilyList.getName();
             if (name != null) {
-                if (hashMap.put(name, namedFamilyList) != null) {
+                if (map.put(name, namedFamilyList) != null) {
                     throw new IllegalArgumentException("new-named-family requires unique name attribute");
                 }
             } else {
                 throw new IllegalArgumentException("new-named-family requires name attribute or new-default-fallback-familyrequires fallackTarget attribute");
             }
         }
-        return new Result(hashMap, list2, list3);
+        return new Result(map, list2, list3);
     }
 
     private static Result readFamilies(XmlPullParser xmlPullParser, String str, Map<String, File> map) throws XmlPullParserException, IOException {
@@ -101,9 +101,9 @@ public class FontCustomizationParser {
             throw new IllegalArgumentException("customizationType must be specified");
         }
         if (attributeValue.equals("new-named-family")) {
-            FontConfig.NamedFamilyList readNamedFamily = FontListParser.readNamedFamily(xmlPullParser, str, map, false);
-            if (readNamedFamily != null) {
-                list.add(readNamedFamily);
+            FontConfig.NamedFamilyList namedFamily = FontListParser.readNamedFamily(xmlPullParser, str, map, false);
+            if (namedFamily != null) {
+                list.add(namedFamily);
                 return;
             }
             return;
@@ -133,9 +133,9 @@ public class FontCustomizationParser {
             throw new IllegalArgumentException("customizationType must be specified");
         }
         if (attributeValue.equals("new-named-family")) {
-            FontConfig.NamedFamilyList readNamedFamilyList = FontListParser.readNamedFamilyList(xmlPullParser, str, map, false);
-            if (readNamedFamilyList != null) {
-                list.add(readNamedFamilyList);
+            FontConfig.NamedFamilyList namedFamilyList = FontListParser.readNamedFamilyList(xmlPullParser, str, map, false);
+            if (namedFamilyList != null) {
+                list.add(namedFamilyList);
                 return;
             }
             return;

@@ -76,7 +76,7 @@ public class AppSearchShortcutInfo extends GenericDocument {
         Bundle bundle;
         String namespace = getNamespace();
         String propertyString = getPropertyString("activity");
-        ComponentName unflattenFromString = propertyString == null ? null : ComponentName.unflattenFromString(propertyString);
+        ComponentName componentNameUnflattenFromString = propertyString == null ? null : ComponentName.unflattenFromString(propertyString);
         String propertyString2 = getPropertyString(KEY_SHORT_LABEL);
         String propertyString3 = getPropertyString(KEY_LONG_LABEL);
         String propertyString4 = getPropertyString(KEY_DISABLED_MESSAGE);
@@ -102,9 +102,7 @@ public class AppSearchShortcutInfo extends GenericDocument {
         Bundle[] bundleArr = propertyBytesArray == null ? null : (Bundle[]) Arrays.stream(propertyBytesArray).map(new Function() { // from class: android.content.pm.AppSearchShortcutInfo$$ExternalSyntheticLambda3
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                Bundle transformToBundle;
-                transformToBundle = AppSearchShortcutInfo.this.transformToBundle((byte[]) obj);
-                return transformToBundle;
+                return this.f$0.transformToBundle((byte[]) obj);
             }
         }).toArray(new IntFunction() { // from class: android.content.pm.AppSearchShortcutInfo$$ExternalSyntheticLambda4
             @Override // java.util.function.IntFunction
@@ -120,9 +118,9 @@ public class AppSearchShortcutInfo extends GenericDocument {
                 }
             }
         }
-        Person[] parsePerson = parsePerson(getPropertyDocumentArray("person"));
+        Person[] person = parsePerson(getPropertyDocumentArray("person"));
         String propertyString5 = getPropertyString(KEY_LOCUS_ID);
-        return new ShortcutInfo(i, getId(), namespace, unflattenFromString, null, propertyString2, 0, null, propertyString3, 0, null, propertyString4, 0, null, arraySet, intentArr, Integer.MAX_VALUE, transformToPersistableBundle(getPropertyBytes(KEY_EXTRAS)), getCreationTimestampMillis(), parseFlags(getPropertyStringArray("flags")), (int) getPropertyLong("iconResId"), getPropertyString("iconResName"), null, getPropertyString(KEY_ICON_URI), TextUtils.isEmpty(getPropertyString(KEY_DISABLED_REASON)) ? 0 : Integer.parseInt(getPropertyString(KEY_DISABLED_REASON)), parsePerson, propertyString5 != null ? new LocusId(propertyString5) : null, null, parseCapabilityBindings(getPropertyStringArray(KEY_CAPABILITY_BINDINGS)));
+        return new ShortcutInfo(i, getId(), namespace, componentNameUnflattenFromString, null, propertyString2, 0, null, propertyString3, 0, null, propertyString4, 0, null, arraySet, intentArr, Integer.MAX_VALUE, transformToPersistableBundle(getPropertyBytes(KEY_EXTRAS)), getCreationTimestampMillis(), parseFlags(getPropertyStringArray("flags")), (int) getPropertyLong("iconResId"), getPropertyString("iconResName"), null, getPropertyString(KEY_ICON_URI), TextUtils.isEmpty(getPropertyString(KEY_DISABLED_REASON)) ? 0 : Integer.parseInt(getPropertyString(KEY_DISABLED_REASON)), person, propertyString5 != null ? new LocusId(propertyString5) : null, null, parseCapabilityBindings(getPropertyStringArray(KEY_CAPABILITY_BINDINGS)));
     }
 
     static /* synthetic */ Intent lambda$toShortcutInfo$0(String str) {
@@ -230,9 +228,7 @@ public class AppSearchShortcutInfo extends GenericDocument {
                 setPropertyString(AppSearchShortcutInfo.KEY_INTENTS, (String[]) Arrays.stream(intentArr).map(new Function() { // from class: android.content.pm.AppSearchShortcutInfo$Builder$$ExternalSyntheticLambda0
                     @Override // java.util.function.Function
                     public final Object apply(Object obj) {
-                        String uri;
-                        uri = ((Intent) obj).toUri(0);
-                        return uri;
+                        return ((Intent) obj).toUri(0);
                     }
                 }).toArray(new IntFunction() { // from class: android.content.pm.AppSearchShortcutInfo$Builder$$ExternalSyntheticLambda1
                     @Override // java.util.function.IntFunction
@@ -275,9 +271,9 @@ public class AppSearchShortcutInfo extends GenericDocument {
         }
 
         public Builder setFlags(int i) {
-            String[] flattenFlags = AppSearchShortcutInfo.flattenFlags(i);
-            if (flattenFlags != null && flattenFlags.length > 0) {
-                this.mFlags.addAll(Arrays.asList(flattenFlags));
+            String[] strArrFlattenFlags = AppSearchShortcutInfo.flattenFlags(i);
+            if (strArrFlattenFlags != null && strArrFlattenFlags.length > 0) {
+                this.mFlags.addAll(Arrays.asList(strArrFlattenFlags));
             }
             return this;
         }
@@ -308,9 +304,9 @@ public class AppSearchShortcutInfo extends GenericDocument {
 
         public Builder setCapabilityBindings(Map<String, Map<String, List<String>>> map) {
             if (map != null && !map.isEmpty()) {
-                Set<String> keySet = map.keySet();
+                Set<String> setKeySet = map.keySet();
                 final ArraySet arraySet = new ArraySet(1);
-                for (final String str : keySet) {
+                for (final String str : setKeySet) {
                     Map<String, List<String>> map2 = map.get(str);
                     for (final String str2 : map2.keySet()) {
                         map2.get(str2).stream().map(new Function() { // from class: android.content.pm.AppSearchShortcutInfo$Builder$$ExternalSyntheticLambda3
@@ -326,7 +322,7 @@ public class AppSearchShortcutInfo extends GenericDocument {
                         });
                     }
                 }
-                setPropertyString(AppSearchShortcutInfo.KEY_CAPABILITY, (String[]) keySet.toArray(new String[0]));
+                setPropertyString(AppSearchShortcutInfo.KEY_CAPABILITY, (String[]) setKeySet.toArray(new String[0]));
                 setPropertyString(AppSearchShortcutInfo.KEY_CAPABILITY_BINDINGS, (String[]) arraySet.toArray(new String[0]));
             }
             return this;
@@ -344,7 +340,7 @@ public class AppSearchShortcutInfo extends GenericDocument {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public static byte[] transformToByteArray(PersistableBundle persistableBundle) {
+    public static byte[] transformToByteArray(PersistableBundle persistableBundle) throws IOException {
         Objects.requireNonNull(persistableBundle);
         try {
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -361,7 +357,7 @@ public class AppSearchShortcutInfo extends GenericDocument {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public Bundle transformToBundle(byte[] bArr) {
+    public Bundle transformToBundle(byte[] bArr) throws IOException {
         if (bArr == null) {
             return null;
         }
@@ -380,16 +376,16 @@ public class AppSearchShortcutInfo extends GenericDocument {
         }
     }
 
-    private PersistableBundle transformToPersistableBundle(byte[] bArr) {
+    private PersistableBundle transformToPersistableBundle(byte[] bArr) throws IOException {
         if (bArr == null) {
             return null;
         }
         try {
             ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bArr);
             try {
-                PersistableBundle readFromStream = PersistableBundle.readFromStream(byteArrayInputStream);
+                PersistableBundle fromStream = PersistableBundle.readFromStream(byteArrayInputStream);
                 byteArrayInputStream.close();
-                return readFromStream;
+                return fromStream;
             } finally {
             }
         } catch (IOException unused) {
@@ -401,9 +397,9 @@ public class AppSearchShortcutInfo extends GenericDocument {
     public static String[] flattenFlags(int i) {
         ArrayList arrayList = new ArrayList();
         for (int i2 = 0; i2 < 31; i2++) {
-            String flagToString = flagToString(i, 1 << i2);
-            if (flagToString != null) {
-                arrayList.add(flagToString);
+            String strFlagToString = flagToString(i, 1 << i2);
+            if (strFlagToString != null) {
+                arrayList.add(strFlagToString);
             }
         }
         return (String[]) arrayList.toArray(new String[0]);
@@ -429,11 +425,11 @@ public class AppSearchShortcutInfo extends GenericDocument {
         if (strArr == null) {
             return 0;
         }
-        int i = 0;
+        int flag = 0;
         for (String str : strArr) {
-            i |= parseFlag(str);
+            flag |= parseFlag(str);
         }
-        return i;
+        return flag;
     }
 
     private static int parseFlag(String str) {
@@ -481,25 +477,25 @@ public class AppSearchShortcutInfo extends GenericDocument {
     }
 
     static /* synthetic */ void lambda$parseCapabilityBindings$3(Map map, String str) {
-        int indexOf;
-        if (TextUtils.isEmpty(str) || (indexOf = str.indexOf("/")) == -1 || indexOf == str.length() - 1) {
+        int iIndexOf;
+        if (TextUtils.isEmpty(str) || (iIndexOf = str.indexOf("/")) == -1 || iIndexOf == str.length() - 1) {
             return;
         }
-        String substring = str.substring(0, indexOf);
-        int i = indexOf + 1;
-        int indexOf2 = str.indexOf("/", i);
-        if (indexOf2 == -1 || indexOf2 == str.length() - 1) {
+        String strSubstring = str.substring(0, iIndexOf);
+        int i = iIndexOf + 1;
+        int iIndexOf2 = str.indexOf("/", i);
+        if (iIndexOf2 == -1 || iIndexOf2 == str.length() - 1) {
             return;
         }
-        String substring2 = str.substring(i, indexOf2);
-        String substring3 = str.substring(indexOf2 + 1);
-        if (!map.containsKey(substring)) {
-            map.put(substring, new ArrayMap(1));
+        String strSubstring2 = str.substring(i, iIndexOf2);
+        String strSubstring3 = str.substring(iIndexOf2 + 1);
+        if (!map.containsKey(strSubstring)) {
+            map.put(strSubstring, new ArrayMap(1));
         }
-        Map map2 = (Map) map.get(substring);
-        if (!map2.containsKey(substring2)) {
-            map2.put(substring2, new ArrayList(1));
+        Map map2 = (Map) map.get(strSubstring);
+        if (!map2.containsKey(strSubstring2)) {
+            map2.put(strSubstring2, new ArrayList(1));
         }
-        ((List) map2.get(substring2)).add(substring3);
+        ((List) map2.get(strSubstring2)).add(strSubstring3);
     }
 }

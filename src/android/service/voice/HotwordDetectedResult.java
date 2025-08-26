@@ -182,40 +182,40 @@ public final class HotwordDetectedResult implements Parcelable {
     }
 
     public static int getParcelableSize(Parcelable parcelable) {
-        Parcel obtain = Parcel.obtain();
-        parcelable.writeToParcel(obtain, 0);
-        obtain.setDataPosition(0);
-        int dataSize = obtain.dataSize();
-        obtain.recycle();
-        return dataSize;
+        Parcel parcelObtain = Parcel.obtain();
+        parcelable.writeToParcel(parcelObtain, 0);
+        parcelObtain.setDataPosition(0);
+        int iDataSize = parcelObtain.dataSize();
+        parcelObtain.recycle();
+        return iDataSize;
     }
 
     public static int getUsageSize(HotwordDetectedResult hotwordDetectedResult) {
-        int bitCount = hotwordDetectedResult.getConfidenceLevel() != defaultConfidenceLevel() ? bitCount(6L) : 0;
+        int iBitCount = hotwordDetectedResult.getConfidenceLevel() != defaultConfidenceLevel() ? bitCount(6L) : 0;
         if (hotwordDetectedResult.getHotwordOffsetMillis() != -1) {
-            bitCount += bitCount(3600000L);
+            iBitCount += bitCount(3600000L);
         }
         if (hotwordDetectedResult.getHotwordDurationMillis() != 0) {
-            bitCount += bitCount(AudioRecord.getMaxSharedAudioHistoryMillis());
+            iBitCount += bitCount(AudioRecord.getMaxSharedAudioHistoryMillis());
         }
         if (hotwordDetectedResult.getAudioChannel() != -1) {
-            bitCount += bitCount(63L);
+            iBitCount += bitCount(63L);
         }
-        int i = bitCount + 1;
+        int parcelableSize = iBitCount + 1;
         if (hotwordDetectedResult.getScore() != defaultScore()) {
-            i += bitCount(getMaxScore());
+            parcelableSize += bitCount(getMaxScore());
         }
         if (hotwordDetectedResult.getPersonalizedScore() != defaultPersonalizedScore()) {
-            i += bitCount(getMaxScore());
+            parcelableSize += bitCount(getMaxScore());
         }
         if (hotwordDetectedResult.getHotwordPhraseId() != defaultHotwordPhraseId()) {
-            i += bitCount(getMaxHotwordPhraseId());
+            parcelableSize += bitCount(getMaxHotwordPhraseId());
         }
         PersistableBundle extras = hotwordDetectedResult.getExtras();
         if (!extras.isEmpty()) {
-            i += getParcelableSize(extras) * 8;
+            parcelableSize += getParcelableSize(extras) * 8;
         }
-        return hotwordDetectedResult.getBackgroundAudioPower() != defaultBackgroundAudioPower() ? i + bitCount(getMaxBackgroundAudioPower()) : i;
+        return hotwordDetectedResult.getBackgroundAudioPower() != defaultBackgroundAudioPower() ? parcelableSize + bitCount(getMaxBackgroundAudioPower()) : parcelableSize;
     }
 
     private void onConstructed() {
@@ -256,9 +256,9 @@ public final class HotwordDetectedResult implements Parcelable {
     }
 
     public void setProximity(double d) {
-        int convertToProximityLevel = convertToProximityLevel(d);
-        if (convertToProximityLevel != -1) {
-            this.mExtras.putInt(EXTRA_PROXIMITY, convertToProximityLevel);
+        int iConvertToProximityLevel = convertToProximityLevel(d);
+        if (iConvertToProximityLevel != -1) {
+            this.mExtras.putInt(EXTRA_PROXIMITY, iConvertToProximityLevel);
         }
     }
 
@@ -447,37 +447,37 @@ public final class HotwordDetectedResult implements Parcelable {
         this.mHotwordDurationMillis = 0;
         this.mAudioChannel = -1;
         this.mHotwordDetectionPersonalized = false;
-        int readInt = parcel.readInt();
-        boolean z = (readInt & 64) != 0;
-        int readInt2 = parcel.readInt();
-        int readInt3 = parcel.readInt();
-        MediaSyncEvent mediaSyncEvent = (readInt & 4) == 0 ? null : (MediaSyncEvent) parcel.readTypedObject(MediaSyncEvent.CREATOR);
-        int readInt4 = parcel.readInt();
-        int readInt5 = parcel.readInt();
-        int readInt6 = parcel.readInt();
-        int readInt7 = parcel.readInt();
-        int readInt8 = parcel.readInt();
-        int readInt9 = parcel.readInt();
+        int i = parcel.readInt();
+        boolean z = (i & 64) != 0;
+        int i2 = parcel.readInt();
+        int i3 = parcel.readInt();
+        MediaSyncEvent mediaSyncEvent = (i & 4) == 0 ? null : (MediaSyncEvent) parcel.readTypedObject(MediaSyncEvent.CREATOR);
+        int i4 = parcel.readInt();
+        int i5 = parcel.readInt();
+        int i6 = parcel.readInt();
+        int i7 = parcel.readInt();
+        int i8 = parcel.readInt();
+        int i9 = parcel.readInt();
         ArrayList arrayList = new ArrayList();
         parcel.readParcelableList(arrayList, HotwordAudioStream.class.getClassLoader());
         PersistableBundle persistableBundle = (PersistableBundle) parcel.readTypedObject(PersistableBundle.CREATOR);
-        int readInt10 = parcel.readInt();
-        this.mSpeakerId = readInt2;
-        this.mConfidenceLevel = readInt3;
-        AnnotationValidations.validate((Class<? extends Annotation>) HotwordConfidenceLevelValue.class, (Annotation) null, readInt3);
+        int i10 = parcel.readInt();
+        this.mSpeakerId = i2;
+        this.mConfidenceLevel = i3;
+        AnnotationValidations.validate((Class<? extends Annotation>) HotwordConfidenceLevelValue.class, (Annotation) null, i3);
         this.mMediaSyncEvent = mediaSyncEvent;
-        this.mHotwordOffsetMillis = readInt4;
-        this.mHotwordDurationMillis = readInt5;
-        this.mAudioChannel = readInt6;
+        this.mHotwordOffsetMillis = i4;
+        this.mHotwordDurationMillis = i5;
+        this.mAudioChannel = i6;
         this.mHotwordDetectionPersonalized = z;
-        this.mScore = readInt7;
-        this.mPersonalizedScore = readInt8;
-        this.mHotwordPhraseId = readInt9;
+        this.mScore = i7;
+        this.mPersonalizedScore = i8;
+        this.mHotwordPhraseId = i9;
         this.mAudioStreams = arrayList;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) arrayList);
         this.mExtras = persistableBundle;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) persistableBundle);
-        this.mBackgroundAudioPower = readInt10;
+        this.mBackgroundAudioPower = i10;
         onConstructed();
     }
 

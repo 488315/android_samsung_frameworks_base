@@ -8,7 +8,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class LockscreenContentViewModel$areNotificationsVisible$2 extends SuspendLambda implements Function3 {
     /* synthetic */ Object L$0;
@@ -21,10 +20,10 @@ final class LockscreenContentViewModel$areNotificationsVisible$2 extends Suspend
 
     @Override // kotlin.jvm.functions.Function3
     public final Object invoke(Object obj, Object obj2, Object obj3) {
-        boolean booleanValue = ((Boolean) obj2).booleanValue();
+        boolean zBooleanValue = ((Boolean) obj2).booleanValue();
         LockscreenContentViewModel$areNotificationsVisible$2 lockscreenContentViewModel$areNotificationsVisible$2 = new LockscreenContentViewModel$areNotificationsVisible$2((Continuation) obj3);
         lockscreenContentViewModel$areNotificationsVisible$2.L$0 = (ClockSize) obj;
-        lockscreenContentViewModel$areNotificationsVisible$2.Z$0 = booleanValue;
+        lockscreenContentViewModel$areNotificationsVisible$2.Z$0 = zBooleanValue;
         return lockscreenContentViewModel$areNotificationsVisible$2.invokeSuspend(Unit.INSTANCE);
     }
 

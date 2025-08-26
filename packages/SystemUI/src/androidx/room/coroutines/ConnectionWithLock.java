@@ -8,7 +8,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.sync.Mutex;
 import kotlinx.coroutines.sync.MutexKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ConnectionWithLock implements SQLiteConnection, Mutex {
     public CoroutineContext acquireCoroutineContext;
@@ -22,7 +21,7 @@ public final class ConnectionWithLock implements SQLiteConnection, Mutex {
     }
 
     @Override // java.lang.AutoCloseable
-    public final void close() {
+    public final void close() throws Exception {
         this.delegate.close();
     }
 

@@ -114,7 +114,7 @@ public class SemEdgeManager {
     }
 
     public void unbindEdgeLightingService(OnEdgeLightingCallback onEdgeLightingCallback) {
-        EdgeLightingCallbackDelegate edgeLightingCallbackDelegate;
+        EdgeLightingCallbackDelegate next;
         if (getService() == null) {
             return;
         }
@@ -126,21 +126,21 @@ public class SemEdgeManager {
             Iterator<EdgeLightingCallbackDelegate> it = this.mEdgeLightingCallbackDelegates.iterator();
             while (true) {
                 if (!it.hasNext()) {
-                    edgeLightingCallbackDelegate = null;
+                    next = null;
                     break;
                 }
-                edgeLightingCallbackDelegate = it.next();
-                if (edgeLightingCallbackDelegate.getCallback() != null && edgeLightingCallbackDelegate.getCallback().equals(onEdgeLightingCallback)) {
+                next = it.next();
+                if (next.getCallback() != null && next.getCallback().equals(onEdgeLightingCallback)) {
                     break;
                 }
             }
-            if (edgeLightingCallbackDelegate == null) {
+            if (next == null) {
                 SemLog.w(TAG, "unbindEdgeLightingService : cannot find the callback");
                 return;
             }
             try {
-                this.mService.unbindEdgeLightingService(edgeLightingCallbackDelegate, this.mPackageName);
-                this.mEdgeLightingCallbackDelegates.remove(edgeLightingCallbackDelegate);
+                this.mService.unbindEdgeLightingService(next, this.mPackageName);
+                this.mEdgeLightingCallbackDelegates.remove(next);
             } catch (RemoteException e) {
                 SemLog.e(TAG, "unbindEdgeLightingService : RemoteException : ", e);
             }
@@ -184,7 +184,7 @@ public class SemEdgeManager {
     }
 
     public void unregisterEdgeLightingListener(OnEdgeLightingListener onEdgeLightingListener) {
-        EdgeLightingCallbackDelegate edgeLightingCallbackDelegate;
+        EdgeLightingCallbackDelegate next;
         if (getService() == null) {
             return;
         }
@@ -196,21 +196,21 @@ public class SemEdgeManager {
             Iterator<EdgeLightingCallbackDelegate> it = this.mEdgeLightingCallbackDelegates.iterator();
             while (true) {
                 if (!it.hasNext()) {
-                    edgeLightingCallbackDelegate = null;
+                    next = null;
                     break;
                 }
-                edgeLightingCallbackDelegate = it.next();
-                if (edgeLightingCallbackDelegate.getListener() != null && edgeLightingCallbackDelegate.getListener().equals(onEdgeLightingListener)) {
+                next = it.next();
+                if (next.getListener() != null && next.getListener().equals(onEdgeLightingListener)) {
                     break;
                 }
             }
-            if (edgeLightingCallbackDelegate == null) {
+            if (next == null) {
                 SemLog.w(TAG, "unregisterEdgeLightingListener : cannot find the listener");
                 return;
             }
             try {
-                this.mService.unregisterEdgeLightingListener(edgeLightingCallbackDelegate, this.mPackageName);
-                this.mEdgeLightingCallbackDelegates.remove(edgeLightingCallbackDelegate);
+                this.mService.unregisterEdgeLightingListener(next, this.mPackageName);
+                this.mEdgeLightingCallbackDelegates.remove(next);
             } catch (RemoteException e) {
                 SemLog.e(TAG, "unbindEdgeLightingService : RemoteException : ", e);
             }
@@ -425,19 +425,19 @@ public class SemEdgeManager {
 
         @Override // com.samsung.android.edge.IEdgeLightingCallback
         public void onStartEdgeLighting(String str, SemEdgeLightingInfo semEdgeLightingInfo, int i) throws RemoteException {
-            Message obtain = Message.obtain(this.mHandler, 0, i, 0);
+            Message messageObtain = Message.obtain(this.mHandler, 0, i, 0);
             Bundle bundle = new Bundle();
             bundle.putString("packageName", str);
             bundle.putParcelable(DocumentsContract.EXTRA_INFO, semEdgeLightingInfo);
-            obtain.obj = bundle;
-            obtain.sendToTarget();
+            messageObtain.obj = bundle;
+            messageObtain.sendToTarget();
         }
 
         @Override // com.samsung.android.edge.IEdgeLightingCallback
         public void onStopEdgeLighting(String str, int i) throws RemoteException {
-            Message obtain = Message.obtain(this.mHandler, 1, i, 0);
-            obtain.obj = str;
-            obtain.sendToTarget();
+            Message messageObtain = Message.obtain(this.mHandler, 1, i, 0);
+            messageObtain.obj = str;
+            messageObtain.sendToTarget();
         }
 
         @Override // com.samsung.android.edge.IEdgeLightingCallback

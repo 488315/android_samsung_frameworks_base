@@ -1,6 +1,7 @@
 package com.android.systemui.doze;
 
 import android.app.IWallpaperManager;
+import android.os.RemoteException;
 import android.util.Log;
 import com.android.keyguard.CarrierTextController$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0;
@@ -9,7 +10,6 @@ import com.android.systemui.statusbar.phone.BiometricUnlockController;
 import com.android.systemui.statusbar.phone.DozeParameters;
 import java.io.PrintWriter;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class DozeWallpaperState implements DozeMachine.Part {
     public static final boolean DEBUG = Log.isLoggable("DozeWallpaperState", 3);
@@ -18,7 +18,6 @@ public class DozeWallpaperState implements DozeMachine.Part {
     public boolean mIsAmbientMode;
     public final IWallpaperManager mWallpaperManagerService;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.doze.DozeWallpaperState$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$com$android$systemui$doze$DozeMachine$State;
@@ -76,109 +75,58 @@ public class DozeWallpaperState implements DozeMachine.Part {
         KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(CarrierTextController$$ExternalSyntheticOutline0.m(printWriter, "DozeWallpaperState:", " isAmbientMode: "), this.mIsAmbientMode, printWriter, " hasWallpaperService: "), this.mWallpaperManagerService != null, printWriter);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:36:0x0036, code lost:
-    
-        if (r9.mFadedAwayAfterWakeAndUnlock == false) goto L24;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:21:0x0038  */
     @Override // com.android.systemui.doze.DozeMachine.Part
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void transitionTo(com.android.systemui.doze.DozeMachine.State r8, com.android.systemui.doze.DozeMachine.State r9) {
-        /*
-            r7 = this;
-            java.lang.String r0 = "DozeWallpaperState"
-            java.lang.String r1 = "AOD wallpaper state changed to: "
-            int[] r2 = com.android.systemui.doze.DozeWallpaperState.AnonymousClass1.$SwitchMap$com$android$systemui$doze$DozeMachine$State
-            int r3 = r9.ordinal()
-            r2 = r2[r3]
-            r3 = 1
-            r4 = 0
-            switch(r2) {
-                case 1: goto L13;
-                case 2: goto L13;
-                case 3: goto L13;
-                case 4: goto L13;
-                case 5: goto L13;
-                case 6: goto L13;
-                case 7: goto L13;
-                case 8: goto L13;
-                default: goto L11;
+    public final void transitionTo(DozeMachine.State state, DozeMachine.State state2) {
+        boolean z;
+        boolean z2;
+        boolean z3 = true;
+        switch (AnonymousClass1.$SwitchMap$com$android$systemui$doze$DozeMachine$State[state2.ordinal()]) {
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+            case 6:
+            case 7:
+            case 8:
+                z = true;
+                break;
+            default:
+                z = false;
+                break;
+        }
+        DozeParameters dozeParameters = this.mDozeParameters;
+        if (z) {
+            z2 = dozeParameters.mControlScreenOffAnimation;
+        } else {
+            boolean z4 = state == DozeMachine.State.DOZE_PULSING && state2 == DozeMachine.State.FINISH;
+            if (!dozeParameters.getDisplayNeedsBlanking()) {
+                BiometricUnlockController biometricUnlockController = this.mBiometricUnlockController;
+                if (biometricUnlockController.isWakeAndUnlock() || biometricUnlockController.mFadedAwayAfterWakeAndUnlock) {
+                    if (!z4) {
+                        z3 = false;
+                    }
+                }
+                z2 = z3;
             }
-        L11:
-            r2 = r4
-            goto L14
-        L13:
-            r2 = r3
-        L14:
-            com.android.systemui.statusbar.phone.DozeParameters r5 = r7.mDozeParameters
-            if (r2 == 0) goto L1b
-            boolean r8 = r5.mControlScreenOffAnimation
-            goto L3d
-        L1b:
-            com.android.systemui.doze.DozeMachine$State r6 = com.android.systemui.doze.DozeMachine.State.DOZE_PULSING
-            if (r8 != r6) goto L25
-            com.android.systemui.doze.DozeMachine$State r8 = com.android.systemui.doze.DozeMachine.State.FINISH
-            if (r9 != r8) goto L25
-            r8 = r3
-            goto L26
-        L25:
-            r8 = r4
-        L26:
-            boolean r9 = r5.getDisplayNeedsBlanking()
-            if (r9 != 0) goto L38
-            com.android.systemui.statusbar.phone.BiometricUnlockController r9 = r7.mBiometricUnlockController
-            boolean r5 = r9.isWakeAndUnlock()
-            if (r5 != 0) goto L38
-            boolean r9 = r9.mFadedAwayAfterWakeAndUnlock
-            if (r9 == 0) goto L3c
-        L38:
-            if (r8 == 0) goto L3b
-            goto L3c
-        L3b:
-            r3 = r4
-        L3c:
-            r8 = r3
-        L3d:
-            boolean r9 = r7.mIsAmbientMode
-            if (r2 == r9) goto L86
-            r7.mIsAmbientMode = r2
-            android.app.IWallpaperManager r9 = r7.mWallpaperManagerService
-            if (r9 == 0) goto L86
-            if (r8 == 0) goto L4c
-            r8 = 500(0x1f4, double:2.47E-321)
-            goto L4e
-        L4c:
-            r8 = 0
-        L4e:
-            boolean r2 = com.android.systemui.doze.DozeWallpaperState.DEBUG     // Catch: android.os.RemoteException -> L73
-            if (r2 == 0) goto L6b
-            java.lang.StringBuilder r2 = new java.lang.StringBuilder     // Catch: android.os.RemoteException -> L73
-            r2.<init>(r1)     // Catch: android.os.RemoteException -> L73
-            boolean r1 = r7.mIsAmbientMode     // Catch: android.os.RemoteException -> L73
-            r2.append(r1)     // Catch: android.os.RemoteException -> L73
-            java.lang.String r1 = ", animationDuration: "
-            r2.append(r1)     // Catch: android.os.RemoteException -> L73
-            r2.append(r8)     // Catch: android.os.RemoteException -> L73
-            java.lang.String r1 = r2.toString()     // Catch: android.os.RemoteException -> L73
-            android.util.Log.i(r0, r1)     // Catch: android.os.RemoteException -> L73
-        L6b:
-            android.app.IWallpaperManager r1 = r7.mWallpaperManagerService     // Catch: android.os.RemoteException -> L73
-            boolean r2 = r7.mIsAmbientMode     // Catch: android.os.RemoteException -> L73
-            r1.setInAmbientMode(r2, r8)     // Catch: android.os.RemoteException -> L73
-            return
-        L73:
-            java.lang.StringBuilder r8 = new java.lang.StringBuilder
-            java.lang.String r9 = "Cannot notify state to WallpaperManagerService: "
-            r8.<init>(r9)
-            boolean r7 = r7.mIsAmbientMode
-            r8.append(r7)
-            java.lang.String r7 = r8.toString()
-            android.util.Log.w(r0, r7)
-        L86:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.doze.DozeWallpaperState.transitionTo(com.android.systemui.doze.DozeMachine$State, com.android.systemui.doze.DozeMachine$State):void");
+        }
+        if (z != this.mIsAmbientMode) {
+            this.mIsAmbientMode = z;
+            if (this.mWallpaperManagerService != null) {
+                long j = z2 ? 500L : 0L;
+                try {
+                    if (DEBUG) {
+                        Log.i("DozeWallpaperState", "AOD wallpaper state changed to: " + this.mIsAmbientMode + ", animationDuration: " + j);
+                    }
+                    this.mWallpaperManagerService.setInAmbientMode(this.mIsAmbientMode, j);
+                } catch (RemoteException unused) {
+                    Log.w("DozeWallpaperState", "Cannot notify state to WallpaperManagerService: " + this.mIsAmbientMode);
+                }
+            }
+        }
     }
 }

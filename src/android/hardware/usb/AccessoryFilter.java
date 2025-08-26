@@ -51,7 +51,7 @@ public class AccessoryFilter {
         return new AccessoryFilter(str, str3, str2);
     }
 
-    public void write(XmlSerializer xmlSerializer) throws IOException {
+    public void write(XmlSerializer xmlSerializer) throws IllegalStateException, IOException, IllegalArgumentException {
         xmlSerializer.startTag(null, "usb-accessory");
         String str = this.mManufacturer;
         if (str != null) {
@@ -110,11 +110,11 @@ public class AccessoryFilter {
 
     public int hashCode() {
         String str = this.mManufacturer;
-        int hashCode = str == null ? 0 : str.hashCode();
+        int iHashCode = str == null ? 0 : str.hashCode();
         String str2 = this.mModel;
-        int hashCode2 = hashCode ^ (str2 == null ? 0 : str2.hashCode());
+        int iHashCode2 = iHashCode ^ (str2 == null ? 0 : str2.hashCode());
         String str3 = this.mVersion;
-        return hashCode2 ^ (str3 != null ? str3.hashCode() : 0);
+        return iHashCode2 ^ (str3 != null ? str3.hashCode() : 0);
     }
 
     public String toString() {
@@ -122,10 +122,10 @@ public class AccessoryFilter {
     }
 
     public void dump(DualDumpOutputStream dualDumpOutputStream, String str, long j) {
-        long start = dualDumpOutputStream.start(str, j);
+        long jStart = dualDumpOutputStream.start(str, j);
         dualDumpOutputStream.write(MidiDeviceInfo.PROPERTY_MANUFACTURER, 1138166333441L, this.mManufacturer);
         dualDumpOutputStream.write("model", 1138166333442L, this.mModel);
         dualDumpOutputStream.write("version", 1138166333443L, this.mVersion);
-        dualDumpOutputStream.end(start);
+        dualDumpOutputStream.end(jStart);
     }
 }

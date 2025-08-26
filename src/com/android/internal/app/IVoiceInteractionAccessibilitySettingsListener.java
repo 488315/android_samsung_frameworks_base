@@ -44,9 +44,9 @@ public interface IVoiceInteractionAccessibilitySettingsListener extends IInterfa
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IVoiceInteractionAccessibilitySettingsListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IVoiceInteractionAccessibilitySettingsListener)) {
-                return (IVoiceInteractionAccessibilitySettingsListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IVoiceInteractionAccessibilitySettingsListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IVoiceInteractionAccessibilitySettingsListener)) {
+                return (IVoiceInteractionAccessibilitySettingsListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,9 +73,9 @@ public interface IVoiceInteractionAccessibilitySettingsListener extends IInterfa
                 return true;
             }
             if (i == 1) {
-                boolean readBoolean = parcel.readBoolean();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                onAccessibilityDetectionChanged(readBoolean);
+                onAccessibilityDetectionChanged(z);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -99,13 +99,13 @@ public interface IVoiceInteractionAccessibilitySettingsListener extends IInterfa
 
             @Override // com.android.internal.app.IVoiceInteractionAccessibilitySettingsListener
             public void onAccessibilityDetectionChanged(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IVoiceInteractionAccessibilitySettingsListener.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IVoiceInteractionAccessibilitySettingsListener.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

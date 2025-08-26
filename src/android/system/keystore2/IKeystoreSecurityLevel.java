@@ -105,9 +105,9 @@ public interface IKeystoreSecurityLevel extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IKeystoreSecurityLevel)) {
-                return (IKeystoreSecurityLevel) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IKeystoreSecurityLevel)) {
+                return (IKeystoreSecurityLevel) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -167,51 +167,51 @@ public interface IKeystoreSecurityLevel extends IInterface {
                 case 1:
                     KeyDescriptor keyDescriptor = (KeyDescriptor) parcel.readTypedObject(KeyDescriptor.CREATOR);
                     KeyParameter[] keyParameterArr = (KeyParameter[]) parcel.createTypedArray(KeyParameter.CREATOR);
-                    boolean readBoolean = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    CreateOperationResponse createOperation = createOperation(keyDescriptor, keyParameterArr, readBoolean);
+                    CreateOperationResponse createOperationResponseCreateOperation = createOperation(keyDescriptor, keyParameterArr, z);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(createOperation, 1);
+                    parcel2.writeTypedObject(createOperationResponseCreateOperation, 1);
                     return true;
                 case 2:
                     KeyDescriptor keyDescriptor2 = (KeyDescriptor) parcel.readTypedObject(KeyDescriptor.CREATOR);
                     KeyDescriptor keyDescriptor3 = (KeyDescriptor) parcel.readTypedObject(KeyDescriptor.CREATOR);
                     KeyParameter[] keyParameterArr2 = (KeyParameter[]) parcel.createTypedArray(KeyParameter.CREATOR);
-                    int readInt = parcel.readInt();
-                    byte[] createByteArray = parcel.createByteArray();
+                    int i3 = parcel.readInt();
+                    byte[] bArrCreateByteArray = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    KeyMetadata generateKey = generateKey(keyDescriptor2, keyDescriptor3, keyParameterArr2, readInt, createByteArray);
+                    KeyMetadata keyMetadataGenerateKey = generateKey(keyDescriptor2, keyDescriptor3, keyParameterArr2, i3, bArrCreateByteArray);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(generateKey, 1);
+                    parcel2.writeTypedObject(keyMetadataGenerateKey, 1);
                     return true;
                 case 3:
                     KeyDescriptor keyDescriptor4 = (KeyDescriptor) parcel.readTypedObject(KeyDescriptor.CREATOR);
                     KeyDescriptor keyDescriptor5 = (KeyDescriptor) parcel.readTypedObject(KeyDescriptor.CREATOR);
                     KeyParameter[] keyParameterArr3 = (KeyParameter[]) parcel.createTypedArray(KeyParameter.CREATOR);
-                    int readInt2 = parcel.readInt();
-                    byte[] createByteArray2 = parcel.createByteArray();
+                    int i4 = parcel.readInt();
+                    byte[] bArrCreateByteArray2 = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    KeyMetadata importKey = importKey(keyDescriptor4, keyDescriptor5, keyParameterArr3, readInt2, createByteArray2);
+                    KeyMetadata keyMetadataImportKey = importKey(keyDescriptor4, keyDescriptor5, keyParameterArr3, i4, bArrCreateByteArray2);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(importKey, 1);
+                    parcel2.writeTypedObject(keyMetadataImportKey, 1);
                     return true;
                 case 4:
                     KeyDescriptor keyDescriptor6 = (KeyDescriptor) parcel.readTypedObject(KeyDescriptor.CREATOR);
                     KeyDescriptor keyDescriptor7 = (KeyDescriptor) parcel.readTypedObject(KeyDescriptor.CREATOR);
-                    byte[] createByteArray3 = parcel.createByteArray();
+                    byte[] bArrCreateByteArray3 = parcel.createByteArray();
                     KeyParameter[] keyParameterArr4 = (KeyParameter[]) parcel.createTypedArray(KeyParameter.CREATOR);
                     AuthenticatorSpec[] authenticatorSpecArr = (AuthenticatorSpec[]) parcel.createTypedArray(AuthenticatorSpec.CREATOR);
                     parcel.enforceNoDataAvail();
-                    KeyMetadata importWrappedKey = importWrappedKey(keyDescriptor6, keyDescriptor7, createByteArray3, keyParameterArr4, authenticatorSpecArr);
+                    KeyMetadata keyMetadataImportWrappedKey = importWrappedKey(keyDescriptor6, keyDescriptor7, bArrCreateByteArray3, keyParameterArr4, authenticatorSpecArr);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(importWrappedKey, 1);
+                    parcel2.writeTypedObject(keyMetadataImportWrappedKey, 1);
                     return true;
                 case 5:
                     KeyDescriptor keyDescriptor8 = (KeyDescriptor) parcel.readTypedObject(KeyDescriptor.CREATOR);
                     parcel.enforceNoDataAvail();
-                    EphemeralStorageKeyResponse convertStorageKeyToEphemeral = convertStorageKeyToEphemeral(keyDescriptor8);
+                    EphemeralStorageKeyResponse ephemeralStorageKeyResponseConvertStorageKeyToEphemeral = convertStorageKeyToEphemeral(keyDescriptor8);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(convertStorageKeyToEphemeral, 1);
+                    parcel2.writeTypedObject(ephemeralStorageKeyResponseConvertStorageKeyToEphemeral, 1);
                     return true;
                 case 6:
                     KeyDescriptor keyDescriptor9 = (KeyDescriptor) parcel.readTypedObject(KeyDescriptor.CREATOR);
@@ -244,144 +244,144 @@ public interface IKeystoreSecurityLevel extends IInterface {
 
             @Override // android.system.keystore2.IKeystoreSecurityLevel
             public CreateOperationResponse createOperation(KeyDescriptor keyDescriptor, KeyParameter[] keyParameterArr, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                obtain.markSensitive();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                parcelObtain.markSensitive();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(keyDescriptor, 0);
-                    obtain.writeTypedArray(keyParameterArr, 0);
-                    obtain.writeBoolean(z);
-                    if (!this.mRemote.transact(1, obtain, obtain2, 32)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(keyDescriptor, 0);
+                    parcelObtain.writeTypedArray(keyParameterArr, 0);
+                    parcelObtain.writeBoolean(z);
+                    if (!this.mRemote.transact(1, parcelObtain, parcelObtain2, 32)) {
                         throw new RemoteException("Method createOperation is unimplemented.");
                     }
-                    obtain2.readException();
-                    return (CreateOperationResponse) obtain2.readTypedObject(CreateOperationResponse.CREATOR);
+                    parcelObtain2.readException();
+                    return (CreateOperationResponse) parcelObtain2.readTypedObject(CreateOperationResponse.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.system.keystore2.IKeystoreSecurityLevel
             public KeyMetadata generateKey(KeyDescriptor keyDescriptor, KeyDescriptor keyDescriptor2, KeyParameter[] keyParameterArr, int i, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                obtain.markSensitive();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                parcelObtain.markSensitive();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(keyDescriptor, 0);
-                    obtain.writeTypedObject(keyDescriptor2, 0);
-                    obtain.writeTypedArray(keyParameterArr, 0);
-                    obtain.writeInt(i);
-                    obtain.writeByteArray(bArr);
-                    if (!this.mRemote.transact(2, obtain, obtain2, 32)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(keyDescriptor, 0);
+                    parcelObtain.writeTypedObject(keyDescriptor2, 0);
+                    parcelObtain.writeTypedArray(keyParameterArr, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByteArray(bArr);
+                    if (!this.mRemote.transact(2, parcelObtain, parcelObtain2, 32)) {
                         throw new RemoteException("Method generateKey is unimplemented.");
                     }
-                    obtain2.readException();
-                    return (KeyMetadata) obtain2.readTypedObject(KeyMetadata.CREATOR);
+                    parcelObtain2.readException();
+                    return (KeyMetadata) parcelObtain2.readTypedObject(KeyMetadata.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.system.keystore2.IKeystoreSecurityLevel
             public KeyMetadata importKey(KeyDescriptor keyDescriptor, KeyDescriptor keyDescriptor2, KeyParameter[] keyParameterArr, int i, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                obtain.markSensitive();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                parcelObtain.markSensitive();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(keyDescriptor, 0);
-                    obtain.writeTypedObject(keyDescriptor2, 0);
-                    obtain.writeTypedArray(keyParameterArr, 0);
-                    obtain.writeInt(i);
-                    obtain.writeByteArray(bArr);
-                    if (!this.mRemote.transact(3, obtain, obtain2, 32)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(keyDescriptor, 0);
+                    parcelObtain.writeTypedObject(keyDescriptor2, 0);
+                    parcelObtain.writeTypedArray(keyParameterArr, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByteArray(bArr);
+                    if (!this.mRemote.transact(3, parcelObtain, parcelObtain2, 32)) {
                         throw new RemoteException("Method importKey is unimplemented.");
                     }
-                    obtain2.readException();
-                    return (KeyMetadata) obtain2.readTypedObject(KeyMetadata.CREATOR);
+                    parcelObtain2.readException();
+                    return (KeyMetadata) parcelObtain2.readTypedObject(KeyMetadata.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.system.keystore2.IKeystoreSecurityLevel
             public KeyMetadata importWrappedKey(KeyDescriptor keyDescriptor, KeyDescriptor keyDescriptor2, byte[] bArr, KeyParameter[] keyParameterArr, AuthenticatorSpec[] authenticatorSpecArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                obtain.markSensitive();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                parcelObtain.markSensitive();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(keyDescriptor, 0);
-                    obtain.writeTypedObject(keyDescriptor2, 0);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeTypedArray(keyParameterArr, 0);
-                    obtain.writeTypedArray(authenticatorSpecArr, 0);
-                    if (!this.mRemote.transact(4, obtain, obtain2, 32)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(keyDescriptor, 0);
+                    parcelObtain.writeTypedObject(keyDescriptor2, 0);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeTypedArray(keyParameterArr, 0);
+                    parcelObtain.writeTypedArray(authenticatorSpecArr, 0);
+                    if (!this.mRemote.transact(4, parcelObtain, parcelObtain2, 32)) {
                         throw new RemoteException("Method importWrappedKey is unimplemented.");
                     }
-                    obtain2.readException();
-                    return (KeyMetadata) obtain2.readTypedObject(KeyMetadata.CREATOR);
+                    parcelObtain2.readException();
+                    return (KeyMetadata) parcelObtain2.readTypedObject(KeyMetadata.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.system.keystore2.IKeystoreSecurityLevel
             public EphemeralStorageKeyResponse convertStorageKeyToEphemeral(KeyDescriptor keyDescriptor) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                obtain.markSensitive();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                parcelObtain.markSensitive();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(keyDescriptor, 0);
-                    if (!this.mRemote.transact(5, obtain, obtain2, 32)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(keyDescriptor, 0);
+                    if (!this.mRemote.transact(5, parcelObtain, parcelObtain2, 32)) {
                         throw new RemoteException("Method convertStorageKeyToEphemeral is unimplemented.");
                     }
-                    obtain2.readException();
-                    return (EphemeralStorageKeyResponse) obtain2.readTypedObject(EphemeralStorageKeyResponse.CREATOR);
+                    parcelObtain2.readException();
+                    return (EphemeralStorageKeyResponse) parcelObtain2.readTypedObject(EphemeralStorageKeyResponse.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.system.keystore2.IKeystoreSecurityLevel
             public void deleteKey(KeyDescriptor keyDescriptor) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                obtain.markSensitive();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                parcelObtain.markSensitive();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(keyDescriptor, 0);
-                    if (!this.mRemote.transact(6, obtain, obtain2, 32)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(keyDescriptor, 0);
+                    if (!this.mRemote.transact(6, parcelObtain, parcelObtain2, 32)) {
                         throw new RemoteException("Method deleteKey is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.system.keystore2.IKeystoreSecurityLevel
             public int getInterfaceVersion() throws RemoteException {
                 if (this.mCachedVersion == -1) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777215, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedVersion = obtain2.readInt();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777215, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedVersion = parcelObtain2.readInt();
                     } finally {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     }
                 }
                 return this.mCachedVersion;
@@ -390,18 +390,18 @@ public interface IKeystoreSecurityLevel extends IInterface {
             @Override // android.system.keystore2.IKeystoreSecurityLevel
             public synchronized String getInterfaceHash() throws RemoteException {
                 if ("-1".equals(this.mCachedHash)) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777214, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedHash = obtain2.readString();
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777214, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedHash = parcelObtain2.readString();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     } catch (Throwable th) {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                         throw th;
                     }
                 }

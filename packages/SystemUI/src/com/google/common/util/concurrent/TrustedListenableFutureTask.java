@@ -6,12 +6,10 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.RunnableFuture;
 import java.util.concurrent.locks.LockSupport;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class TrustedListenableFutureTask extends FluentFuture.TrustedFuture implements RunnableFuture {
     public volatile InterruptibleTask task;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class TrustedFutureInterruptibleAsyncTask extends InterruptibleTask<ListenableFuture> {
         private final AsyncCallable callable;
 
@@ -45,7 +43,6 @@ public class TrustedListenableFutureTask extends FluentFuture.TrustedFuture impl
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class TrustedFutureInterruptibleTask extends InterruptibleTask<Object> {
         private final Callable<Object> callable;
 

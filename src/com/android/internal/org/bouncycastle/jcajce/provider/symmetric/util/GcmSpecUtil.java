@@ -22,9 +22,9 @@ public class GcmSpecUtil {
     private static final Method tLen;
 
     static {
-        Class loadClass = ClassUtil.loadClass(GcmSpecUtil.class, "javax.crypto.spec.GCMParameterSpec");
-        gcmSpecClass = loadClass;
-        if (loadClass != null) {
+        Class clsLoadClass = ClassUtil.loadClass(GcmSpecUtil.class, "javax.crypto.spec.GCMParameterSpec");
+        gcmSpecClass = clsLoadClass;
+        if (clsLoadClass != null) {
             constructor = extractConstructor();
             tLen = extractMethod("getTLen");
             iv = extractMethod("getIV");
@@ -93,7 +93,7 @@ public class GcmSpecUtil {
             return (AEADParameters) AccessController.doPrivileged(new PrivilegedExceptionAction() { // from class: com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util.GcmSpecUtil.3
                 @Override // java.security.PrivilegedExceptionAction
                 public Object run() throws Exception {
-                    return new AEADParameters(KeyParameter.this, ((Integer) GcmSpecUtil.tLen.invoke(algorithmParameterSpec, null)).intValue(), (byte[]) GcmSpecUtil.iv.invoke(algorithmParameterSpec, null));
+                    return new AEADParameters(keyParameter, ((Integer) GcmSpecUtil.tLen.invoke(algorithmParameterSpec, null)).intValue(), (byte[]) GcmSpecUtil.iv.invoke(algorithmParameterSpec, null));
                 }
             });
         } catch (Exception unused) {

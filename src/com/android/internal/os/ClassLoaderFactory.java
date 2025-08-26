@@ -56,19 +56,19 @@ public class ClassLoaderFactory {
     }
 
     public static ClassLoader createClassLoader(String str, String str2, String str3, ClassLoader classLoader, int i, boolean z, String str4, List<ClassLoader> list, List<String> list2, List<ClassLoader> list3) {
-        String str5;
-        ClassLoader createClassLoader = createClassLoader(str, str2, classLoader, str4, list, list3);
+        String strJoin;
+        ClassLoader classLoaderCreateClassLoader = createClassLoader(str, str2, classLoader, str4, list, list3);
         if (list2 == null) {
-            str5 = "";
+            strJoin = "";
         } else {
-            str5 = String.join(":", list2);
+            strJoin = String.join(":", list2);
         }
         Trace.traceBegin(64L, "createClassloaderNamespace");
-        String createClassloaderNamespace = createClassloaderNamespace(createClassLoader, i, str2, str3, z, str, str5);
+        String strCreateClassloaderNamespace = createClassloaderNamespace(classLoaderCreateClassLoader, i, str2, str3, z, str, strJoin);
         Trace.traceEnd(64L);
-        if (createClassloaderNamespace == null) {
-            return createClassLoader;
+        if (strCreateClassloaderNamespace == null) {
+            return classLoaderCreateClassLoader;
         }
-        throw new UnsatisfiedLinkError("Unable to create namespace for the classloader " + createClassLoader + ": " + createClassloaderNamespace);
+        throw new UnsatisfiedLinkError("Unable to create namespace for the classloader " + classLoaderCreateClassLoader + ": " + strCreateClassloaderNamespace);
     }
 }

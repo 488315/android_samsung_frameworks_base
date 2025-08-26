@@ -14,7 +14,6 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class NeuralTranslator {
     public Map languageDirectionStateMap = new HashMap();
@@ -30,7 +29,7 @@ public class NeuralTranslator {
         Stream map = this.languageDirectionStateMap.entrySet().stream().filter(new Predicate() { // from class: com.samsung.android.sdk.scs.ai.translation.NeuralTranslator$$ExternalSyntheticLambda1
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                return ((Map.Entry) obj).getValue() == LanguageDirectionState.this;
+                return ((Map.Entry) obj).getValue() == languageDirectionState;
             }
         }).map(new Function() { // from class: com.samsung.android.sdk.scs.ai.translation.NeuralTranslator$$ExternalSyntheticLambda2
             @Override // java.util.function.Function
@@ -79,7 +78,7 @@ public class NeuralTranslator {
         task.addOnCompleteListener(new OnCompleteListener() { // from class: com.samsung.android.sdk.scs.ai.translation.NeuralTranslator$$ExternalSyntheticLambda0
             @Override // com.samsung.android.sdk.scs.base.tasks.OnCompleteListener
             public final void onComplete(Task task2) {
-                NeuralTranslator neuralTranslator = NeuralTranslator.this;
+                NeuralTranslator neuralTranslator = this.f$0;
                 neuralTranslator.getClass();
                 try {
                     neuralTranslator.languageDirectionStateMap = (Map) task2.getResult();

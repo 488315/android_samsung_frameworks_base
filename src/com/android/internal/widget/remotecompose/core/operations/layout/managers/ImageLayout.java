@@ -62,11 +62,11 @@ public class ImageLayout extends LayoutManager implements VariableSupport {
 
     @Override // com.android.internal.widget.remotecompose.core.operations.layout.managers.LayoutManager
     public void computeSize(PaintContext paintContext, float f, float f2, float f3, float f4, MeasurePass measurePass) {
-        float computeModifierDefinedWidth = computeModifierDefinedWidth(paintContext.getContext());
-        float computeModifierDefinedHeight = computeModifierDefinedHeight(paintContext.getContext());
+        float fComputeModifierDefinedWidth = computeModifierDefinedWidth(paintContext.getContext());
+        float fComputeModifierDefinedHeight = computeModifierDefinedHeight(paintContext.getContext());
         ComponentMeasure componentMeasure = measurePass.get(this);
-        componentMeasure.setW(computeModifierDefinedWidth);
-        componentMeasure.setH(computeModifierDefinedHeight);
+        componentMeasure.setW(fComputeModifierDefinedWidth);
+        componentMeasure.setH(fComputeModifierDefinedHeight);
     }
 
     @Override // com.android.internal.widget.remotecompose.core.operations.layout.LayoutComponent, com.android.internal.widget.remotecompose.core.operations.layout.Component

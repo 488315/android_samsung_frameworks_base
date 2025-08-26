@@ -6,7 +6,6 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.Lifecycle;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class ViewPositionTracker implements DefaultLifecycleObserver {
     public FragmentActivity mActivity;
@@ -17,7 +16,7 @@ public abstract class ViewPositionTracker implements DefaultLifecycleObserver {
     public final ViewPositionTracker$$ExternalSyntheticLambda0 mSetupLayoutRunnable = new Runnable() { // from class: com.android.systemui.dextouchpad.activity.ViewPositionTracker$$ExternalSyntheticLambda0
         @Override // java.lang.Runnable
         public final void run() {
-            ViewPositionTracker viewPositionTracker = ViewPositionTracker.this;
+            ViewPositionTracker viewPositionTracker = this.f$0;
             if (viewPositionTracker.mActivity.lifecycleRegistry.state.isAtLeast(Lifecycle.State.CREATED)) {
                 viewPositionTracker.mBaseView.getViewTreeObserver().addOnGlobalLayoutListener(viewPositionTracker.mBaseViewLayoutListener);
                 viewPositionTracker.mLayoutSetup = true;
@@ -57,7 +56,7 @@ public abstract class ViewPositionTracker implements DefaultLifecycleObserver {
             this.mBaseViewLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() { // from class: com.android.systemui.dextouchpad.activity.ViewPositionTracker$$ExternalSyntheticLambda1
                 @Override // android.view.ViewTreeObserver.OnGlobalLayoutListener
                 public final void onGlobalLayout() {
-                    FloatingWindow floatingWindow2 = FloatingWindow.this;
+                    FloatingWindow floatingWindow2 = floatingWindow;
                     if (floatingWindow2.mActivity.lifecycleRegistry.state.isAtLeast(Lifecycle.State.CREATED) && floatingWindow2.mWindowView.isAttachedToWindow()) {
                         floatingWindow2.mActivity.getWindowManager().updateViewLayout(floatingWindow2.mWindowView, floatingWindow2.createLayoutParams(floatingWindow2.mBaseView));
                     }

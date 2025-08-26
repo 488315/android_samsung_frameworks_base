@@ -47,9 +47,9 @@ public interface IChooserTargetService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IChooserTargetService)) {
-                return (IChooserTargetService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IChooserTargetService)) {
+                return (IChooserTargetService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -78,9 +78,9 @@ public interface IChooserTargetService extends IInterface {
             if (i == 1) {
                 ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
                 IntentFilter intentFilter = (IntentFilter) parcel.readTypedObject(IntentFilter.CREATOR);
-                IChooserTargetResult asInterface = IChooserTargetResult.Stub.asInterface(parcel.readStrongBinder());
+                IChooserTargetResult iChooserTargetResultAsInterface = IChooserTargetResult.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                getChooserTargets(componentName, intentFilter, asInterface);
+                getChooserTargets(componentName, intentFilter, iChooserTargetResultAsInterface);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -104,15 +104,15 @@ public interface IChooserTargetService extends IInterface {
 
             @Override // android.service.chooser.IChooserTargetService
             public void getChooserTargets(ComponentName componentName, IntentFilter intentFilter, IChooserTargetResult iChooserTargetResult) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(componentName, 0);
-                    obtain.writeTypedObject(intentFilter, 0);
-                    obtain.writeStrongInterface(iChooserTargetResult);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(componentName, 0);
+                    parcelObtain.writeTypedObject(intentFilter, 0);
+                    parcelObtain.writeStrongInterface(iChooserTargetResult);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

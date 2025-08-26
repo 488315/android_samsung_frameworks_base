@@ -66,9 +66,9 @@ public interface ISipDelegate extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISipDelegate.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISipDelegate)) {
-                return (ISipDelegate) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISipDelegate.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISipDelegate)) {
+                return (ISipDelegate) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -105,22 +105,22 @@ public interface ISipDelegate extends IInterface {
             }
             if (i == 1) {
                 SipMessage sipMessage = (SipMessage) parcel.readTypedObject(SipMessage.CREATOR);
-                long readLong = parcel.readLong();
+                long j = parcel.readLong();
                 parcel.enforceNoDataAvail();
-                sendMessage(sipMessage, readLong);
+                sendMessage(sipMessage, j);
             } else if (i == 2) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                notifyMessageReceived(readString);
+                notifyMessageReceived(string);
             } else if (i == 3) {
-                String readString2 = parcel.readString();
-                int readInt = parcel.readInt();
+                String string2 = parcel.readString();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                notifyMessageReceiveError(readString2, readInt);
+                notifyMessageReceiveError(string2, i3);
             } else if (i == 4) {
-                String readString3 = parcel.readString();
+                String string3 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                cleanupSession(readString3);
+                cleanupSession(string3);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -145,51 +145,51 @@ public interface ISipDelegate extends IInterface {
 
             @Override // android.telephony.ims.aidl.ISipDelegate
             public void sendMessage(SipMessage sipMessage, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISipDelegate.DESCRIPTOR);
-                    obtain.writeTypedObject(sipMessage, 0);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISipDelegate.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(sipMessage, 0);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.ISipDelegate
             public void notifyMessageReceived(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISipDelegate.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISipDelegate.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.ISipDelegate
             public void notifyMessageReceiveError(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISipDelegate.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISipDelegate.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.ISipDelegate
             public void cleanupSession(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISipDelegate.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISipDelegate.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -17,14 +17,12 @@ import kotlin.jvm.internal.Ref$ObjectRef;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class IconManager$getLauncherShortcutIconForPeopleAvatar$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ NotificationEntry $entry;
     int label;
     final /* synthetic */ IconManager this$0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.notification.icon.IconManager$getLauncherShortcutIconForPeopleAvatar$2$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ NotificationEntry $entry;

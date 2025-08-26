@@ -15,7 +15,6 @@ import kotlin.ranges.IntRange;
 import kotlin.ranges.RangesKt___RangesKt;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class MobileConnectionsRepositoryKairosImpl$doAnyModemsSupportEmergencyCalls$2 extends SuspendLambda implements Function2 {
     int label;
@@ -46,19 +45,21 @@ final class MobileConnectionsRepositoryKairosImpl$doAnyModemsSupportEmergencyCal
         }
         ResultKt.throwOnFailure(obj);
         int activeModemCount = this.this$0.telephonyManager.getActiveModemCount();
-        boolean hasSystemFeature = this.this$0.context.getPackageManager().hasSystemFeature("android.hardware.type.automotive");
-        boolean hasSystemFeature2 = this.this$0.context.getPackageManager().hasSystemFeature("android.hardware.telephony.calling");
-        if (hasSystemFeature && !hasSystemFeature2) {
+        boolean zHasSystemFeature = this.this$0.context.getPackageManager().hasSystemFeature("android.hardware.type.automotive");
+        boolean zHasSystemFeature2 = this.this$0.context.getPackageManager().hasSystemFeature("android.hardware.telephony.calling");
+        if (zHasSystemFeature && !zHasSystemFeature2) {
             return Boolean.FALSE;
         }
-        IntRange until = RangesKt___RangesKt.until(0, activeModemCount);
+        IntRange intRangeUntil = RangesKt___RangesKt.until(0, activeModemCount);
         MobileConnectionsRepositoryKairosImpl mobileConnectionsRepositoryKairosImpl = this.this$0;
-        ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(until, 10));
-        Iterator it = until.iterator();
+        ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(intRangeUntil, 10));
+        Iterator it = intRangeUntil.iterator();
         while (it.hasNext()) {
             arrayList.add(mobileConnectionsRepositoryKairosImpl.telephonyManager.getServiceStateForSlot(((IntIterator) it).nextInt()));
         }
-        if (!arrayList.isEmpty()) {
+        if (arrayList.isEmpty()) {
+            z = false;
+        } else {
             int size = arrayList.size();
             int i = 0;
             while (i < size) {
@@ -69,8 +70,8 @@ final class MobileConnectionsRepositoryKairosImpl$doAnyModemsSupportEmergencyCal
                     break;
                 }
             }
+            z = false;
         }
-        z = false;
         return Boolean.valueOf(z);
     }
 }

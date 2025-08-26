@@ -12,7 +12,6 @@ import kotlinx.coroutines.ExceptionsKt;
 import kotlinx.coroutines.StandaloneCoroutine;
 import kotlinx.coroutines.internal.ContextScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class LaunchedEffectImpl implements RememberObserver, CoroutineExceptionHandler {
     public StandaloneCoroutine job;
@@ -42,7 +41,7 @@ public final class LaunchedEffectImpl implements RememberObserver, CoroutineExce
     }
 
     @Override // kotlinx.coroutines.CoroutineExceptionHandler
-    public final void handleException(Throwable th, CoroutineContext coroutineContext) {
+    public final void handleException(Throwable th, CoroutineContext coroutineContext) throws Throwable {
         Unit unit;
         CompositionErrorContextImpl compositionErrorContextImpl = (CompositionErrorContextImpl) coroutineContext.get(CompositionErrorContextImpl.Key);
         if (compositionErrorContextImpl != null) {

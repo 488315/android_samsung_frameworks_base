@@ -22,8 +22,8 @@ public class InterfaceConfiguration implements Parcelable {
             if (parcel.readByte() == 1) {
                 interfaceConfiguration.mAddr = (LinkAddress) parcel.readParcelable(null);
             }
-            int readInt = parcel.readInt();
-            for (int i = 0; i < readInt; i++) {
+            int i = parcel.readInt();
+            for (int i2 = 0; i2 < i; i2++) {
                 interfaceConfiguration.mFlags.add(parcel.readString());
             }
             return interfaceConfiguration;

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.Log;
 import com.android.keyguard.ClockEventController$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class AttestationUtils {
     public static final String ERROR_MESSAGE_PERMISSION_ERROR = "permission error";
@@ -60,11 +59,11 @@ public class AttestationUtils {
     public final boolean hasPermission() {
         Context context = this.mContext;
         if (context != null) {
-            int checkSelfPermission = context.checkSelfPermission(PERMISSION_KNOX_ZT);
-            if (checkSelfPermission != 0) {
-                ClockEventController$$ExternalSyntheticOutline0.m(checkSelfPermission, "hasPermission:", TAG);
+            int iCheckSelfPermission = context.checkSelfPermission(PERMISSION_KNOX_ZT);
+            if (iCheckSelfPermission != 0) {
+                ClockEventController$$ExternalSyntheticOutline0.m(iCheckSelfPermission, "hasPermission:", TAG);
             }
-            if (checkSelfPermission == 0) {
+            if (iCheckSelfPermission == 0) {
                 return true;
             }
         }

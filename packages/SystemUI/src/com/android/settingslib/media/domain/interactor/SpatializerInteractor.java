@@ -1,71 +1,73 @@
 package com.android.settingslib.media.domain.interactor;
 
+import android.media.AudioDeviceAttributes;
 import com.android.settingslib.media.data.repository.SpatializerRepository;
+import com.android.settingslib.media.data.repository.SpatializerRepositoryImpl;
+import java.util.Collection;
+import kotlin.ResultKt;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SpatializerInteractor {
     public final SpatializerRepository repository;
+
+    /* renamed from: com.android.settingslib.media.domain.interactor.SpatializerInteractor$isSpatialAudioEnabled$1, reason: invalid class name */
+    final class AnonymousClass1 extends ContinuationImpl {
+        Object L$0;
+        int label;
+        /* synthetic */ Object result;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return SpatializerInteractor.this.isSpatialAudioEnabled(null, this);
+        }
+    }
 
     public SpatializerInteractor(SpatializerRepository spatializerRepository) {
         this.repository = spatializerRepository;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0034  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object isSpatialAudioEnabled(android.media.AudioDeviceAttributes r5, kotlin.coroutines.jvm.internal.ContinuationImpl r6) {
-        /*
-            r4 = this;
-            boolean r0 = r6 instanceof com.android.settingslib.media.domain.interactor.SpatializerInteractor$isSpatialAudioEnabled$1
-            if (r0 == 0) goto L13
-            r0 = r6
-            com.android.settingslib.media.domain.interactor.SpatializerInteractor$isSpatialAudioEnabled$1 r0 = (com.android.settingslib.media.domain.interactor.SpatializerInteractor$isSpatialAudioEnabled$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.settingslib.media.domain.interactor.SpatializerInteractor$isSpatialAudioEnabled$1 r0 = new com.android.settingslib.media.domain.interactor.SpatializerInteractor$isSpatialAudioEnabled$1
-            r0.<init>(r4, r6)
-        L18:
-            java.lang.Object r6 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L34
-            if (r2 != r3) goto L2c
-            java.lang.Object r4 = r0.L$0
-            r5 = r4
-            android.media.AudioDeviceAttributes r5 = (android.media.AudioDeviceAttributes) r5
-            kotlin.ResultKt.throwOnFailure(r6)
-            goto L46
-        L2c:
-            java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-            java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-            r4.<init>(r5)
-            throw r4
-        L34:
-            kotlin.ResultKt.throwOnFailure(r6)
-            r0.L$0 = r5
-            r0.label = r3
-            com.android.settingslib.media.data.repository.SpatializerRepository r4 = r4.repository
-            com.android.settingslib.media.data.repository.SpatializerRepositoryImpl r4 = (com.android.settingslib.media.data.repository.SpatializerRepositoryImpl) r4
-            java.lang.Object r6 = r4.getSpatialAudioCompatibleDevices(r0)
-            if (r6 != r1) goto L46
-            return r1
-        L46:
-            java.util.Collection r6 = (java.util.Collection) r6
-            boolean r4 = r6.contains(r5)
-            java.lang.Boolean r4 = java.lang.Boolean.valueOf(r4)
-            return r4
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.settingslib.media.domain.interactor.SpatializerInteractor.isSpatialAudioEnabled(android.media.AudioDeviceAttributes, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object isSpatialAudioEnabled(AudioDeviceAttributes audioDeviceAttributes, ContinuationImpl continuationImpl) throws Throwable {
+        AnonymousClass1 anonymousClass1;
+        if (continuationImpl instanceof AnonymousClass1) {
+            anonymousClass1 = (AnonymousClass1) continuationImpl;
+            int i = anonymousClass1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                anonymousClass1.label = i - Integer.MIN_VALUE;
+            } else {
+                anonymousClass1 = new AnonymousClass1(continuationImpl);
+            }
+        }
+        Object spatialAudioCompatibleDevices = anonymousClass1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = anonymousClass1.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(spatialAudioCompatibleDevices);
+            anonymousClass1.L$0 = audioDeviceAttributes;
+            anonymousClass1.label = 1;
+            spatialAudioCompatibleDevices = ((SpatializerRepositoryImpl) this.repository).getSpatialAudioCompatibleDevices(anonymousClass1);
+            if (spatialAudioCompatibleDevices == coroutineSingletons) {
+                return coroutineSingletons;
+            }
+        } else {
+            if (i2 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            audioDeviceAttributes = (AudioDeviceAttributes) anonymousClass1.L$0;
+            ResultKt.throwOnFailure(spatialAudioCompatibleDevices);
+        }
+        return Boolean.valueOf(((Collection) spatialAudioCompatibleDevices).contains(audioDeviceAttributes));
     }
 }

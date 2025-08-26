@@ -25,6 +25,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.security.AlgorithmParameters;
 import java.security.GeneralSecurityException;
+import java.security.InvalidAlgorithmParameterException;
 import java.security.KeyPairGenerator;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -52,50 +53,50 @@ class OperatorHelper {
     private JcaJceHelper helper;
 
     static {
-        HashMap hashMap = new HashMap();
-        oids = hashMap;
-        HashMap hashMap2 = new HashMap();
-        asymmetricWrapperAlgNames = hashMap2;
-        HashMap hashMap3 = new HashMap();
-        symmetricWrapperAlgNames = hashMap3;
-        HashMap hashMap4 = new HashMap();
-        symmetricKeyAlgNames = hashMap4;
-        HashMap hashMap5 = new HashMap();
-        symmetricWrapperKeySizes = hashMap5;
+        HashMap map = new HashMap();
+        oids = map;
+        HashMap map2 = new HashMap();
+        asymmetricWrapperAlgNames = map2;
+        HashMap map3 = new HashMap();
+        symmetricWrapperAlgNames = map3;
+        HashMap map4 = new HashMap();
+        symmetricKeyAlgNames = map4;
+        HashMap map5 = new HashMap();
+        symmetricWrapperKeySizes = map5;
         sigFinder = new DefaultSignatureNameFinder();
-        hashMap.put(OIWObjectIdentifiers.idSHA1, "SHA1");
-        hashMap.put(NISTObjectIdentifiers.id_sha224, "SHA224");
-        hashMap.put(NISTObjectIdentifiers.id_sha256, "SHA256");
-        hashMap.put(NISTObjectIdentifiers.id_sha384, "SHA384");
-        hashMap.put(NISTObjectIdentifiers.id_sha512, "SHA512");
-        hashMap2.put(PKCSObjectIdentifiers.rsaEncryption, "RSA/ECB/PKCS1Padding");
-        hashMap2.put(OIWObjectIdentifiers.elGamalAlgorithm, "Elgamal/ECB/PKCS1Padding");
-        hashMap2.put(PKCSObjectIdentifiers.id_RSAES_OAEP, "RSA/ECB/OAEPPadding");
-        hashMap3.put(PKCSObjectIdentifiers.id_alg_CMS3DESwrap, "DESEDEWrap");
-        hashMap3.put(PKCSObjectIdentifiers.id_alg_CMSRC2wrap, "RC2Wrap");
-        hashMap3.put(NISTObjectIdentifiers.id_aes128_wrap, "AESWrap");
-        hashMap3.put(NISTObjectIdentifiers.id_aes192_wrap, "AESWrap");
-        hashMap3.put(NISTObjectIdentifiers.id_aes256_wrap, "AESWrap");
-        hashMap3.put(NTTObjectIdentifiers.id_camellia128_wrap, "CamelliaWrap");
-        hashMap3.put(NTTObjectIdentifiers.id_camellia192_wrap, "CamelliaWrap");
-        hashMap3.put(NTTObjectIdentifiers.id_camellia256_wrap, "CamelliaWrap");
-        hashMap3.put(KISAObjectIdentifiers.id_npki_app_cmsSeed_wrap, "SEEDWrap");
-        hashMap3.put(PKCSObjectIdentifiers.des_EDE3_CBC, KeyProperties.KEY_ALGORITHM_3DES);
-        hashMap5.put(PKCSObjectIdentifiers.id_alg_CMS3DESwrap, Integers.valueOf(192));
-        hashMap5.put(NISTObjectIdentifiers.id_aes128_wrap, Integers.valueOf(128));
-        hashMap5.put(NISTObjectIdentifiers.id_aes192_wrap, Integers.valueOf(192));
-        hashMap5.put(NISTObjectIdentifiers.id_aes256_wrap, Integers.valueOf(256));
-        hashMap5.put(NTTObjectIdentifiers.id_camellia128_wrap, Integers.valueOf(128));
-        hashMap5.put(NTTObjectIdentifiers.id_camellia192_wrap, Integers.valueOf(192));
-        hashMap5.put(NTTObjectIdentifiers.id_camellia256_wrap, Integers.valueOf(256));
-        hashMap5.put(KISAObjectIdentifiers.id_npki_app_cmsSeed_wrap, Integers.valueOf(128));
-        hashMap5.put(PKCSObjectIdentifiers.des_EDE3_CBC, Integers.valueOf(192));
-        hashMap4.put(NISTObjectIdentifiers.aes, "AES");
-        hashMap4.put(NISTObjectIdentifiers.id_aes128_CBC, "AES");
-        hashMap4.put(NISTObjectIdentifiers.id_aes192_CBC, "AES");
-        hashMap4.put(NISTObjectIdentifiers.id_aes256_CBC, "AES");
-        hashMap4.put(PKCSObjectIdentifiers.des_EDE3_CBC, KeyProperties.KEY_ALGORITHM_3DES);
-        hashMap4.put(PKCSObjectIdentifiers.RC2_CBC, "RC2");
+        map.put(OIWObjectIdentifiers.idSHA1, "SHA1");
+        map.put(NISTObjectIdentifiers.id_sha224, "SHA224");
+        map.put(NISTObjectIdentifiers.id_sha256, "SHA256");
+        map.put(NISTObjectIdentifiers.id_sha384, "SHA384");
+        map.put(NISTObjectIdentifiers.id_sha512, "SHA512");
+        map2.put(PKCSObjectIdentifiers.rsaEncryption, "RSA/ECB/PKCS1Padding");
+        map2.put(OIWObjectIdentifiers.elGamalAlgorithm, "Elgamal/ECB/PKCS1Padding");
+        map2.put(PKCSObjectIdentifiers.id_RSAES_OAEP, "RSA/ECB/OAEPPadding");
+        map3.put(PKCSObjectIdentifiers.id_alg_CMS3DESwrap, "DESEDEWrap");
+        map3.put(PKCSObjectIdentifiers.id_alg_CMSRC2wrap, "RC2Wrap");
+        map3.put(NISTObjectIdentifiers.id_aes128_wrap, "AESWrap");
+        map3.put(NISTObjectIdentifiers.id_aes192_wrap, "AESWrap");
+        map3.put(NISTObjectIdentifiers.id_aes256_wrap, "AESWrap");
+        map3.put(NTTObjectIdentifiers.id_camellia128_wrap, "CamelliaWrap");
+        map3.put(NTTObjectIdentifiers.id_camellia192_wrap, "CamelliaWrap");
+        map3.put(NTTObjectIdentifiers.id_camellia256_wrap, "CamelliaWrap");
+        map3.put(KISAObjectIdentifiers.id_npki_app_cmsSeed_wrap, "SEEDWrap");
+        map3.put(PKCSObjectIdentifiers.des_EDE3_CBC, KeyProperties.KEY_ALGORITHM_3DES);
+        map5.put(PKCSObjectIdentifiers.id_alg_CMS3DESwrap, Integers.valueOf(192));
+        map5.put(NISTObjectIdentifiers.id_aes128_wrap, Integers.valueOf(128));
+        map5.put(NISTObjectIdentifiers.id_aes192_wrap, Integers.valueOf(192));
+        map5.put(NISTObjectIdentifiers.id_aes256_wrap, Integers.valueOf(256));
+        map5.put(NTTObjectIdentifiers.id_camellia128_wrap, Integers.valueOf(128));
+        map5.put(NTTObjectIdentifiers.id_camellia192_wrap, Integers.valueOf(192));
+        map5.put(NTTObjectIdentifiers.id_camellia256_wrap, Integers.valueOf(256));
+        map5.put(KISAObjectIdentifiers.id_npki_app_cmsSeed_wrap, Integers.valueOf(128));
+        map5.put(PKCSObjectIdentifiers.des_EDE3_CBC, Integers.valueOf(192));
+        map4.put(NISTObjectIdentifiers.aes, "AES");
+        map4.put(NISTObjectIdentifiers.id_aes128_CBC, "AES");
+        map4.put(NISTObjectIdentifiers.id_aes192_CBC, "AES");
+        map4.put(NISTObjectIdentifiers.id_aes256_CBC, "AES");
+        map4.put(PKCSObjectIdentifiers.des_EDE3_CBC, KeyProperties.KEY_ALGORITHM_3DES);
+        map4.put(PKCSObjectIdentifiers.RC2_CBC, "RC2");
     }
 
     OperatorHelper(JcaJceHelper jcaJceHelper) {
@@ -173,80 +174,36 @@ class OperatorHelper {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x003f A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    java.security.AlgorithmParameters createAlgorithmParameters(com.android.internal.org.bouncycastle.asn1.x509.AlgorithmIdentifier r5) throws com.android.internal.org.bouncycastle.operator.OperatorCreationException {
-        /*
-            r4 = this;
-            com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier r0 = r5.getAlgorithm()
-            com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier r1 = com.android.internal.org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers.rsaEncryption
-            boolean r0 = r0.equals(r1)
-            r1 = 0
-            if (r0 == 0) goto Le
-            return r1
-        Le:
-            com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier r0 = r5.getAlgorithm()
-            com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier r2 = com.android.internal.org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers.id_RSAES_OAEP
-            boolean r0 = r0.equals(r2)
-            java.lang.String r2 = "cannot create algorithm parameters: "
-            if (r0 == 0) goto L3c
-            com.android.internal.org.bouncycastle.jcajce.util.JcaJceHelper r0 = r4.helper     // Catch: java.security.NoSuchProviderException -> L25 java.security.NoSuchAlgorithmException -> L3c
-            java.lang.String r3 = "OAEP"
-            java.security.AlgorithmParameters r0 = r0.createAlgorithmParameters(r3)     // Catch: java.security.NoSuchProviderException -> L25 java.security.NoSuchAlgorithmException -> L3c
-            goto L3d
-        L25:
-            r4 = move-exception
-            com.android.internal.org.bouncycastle.operator.OperatorCreationException r5 = new com.android.internal.org.bouncycastle.operator.OperatorCreationException
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder
-            r0.<init>(r2)
-            java.lang.String r1 = r4.getMessage()
-            r0.append(r1)
-            java.lang.String r0 = r0.toString()
-            r5.<init>(r0, r4)
-            throw r5
-        L3c:
-            r0 = r1
-        L3d:
-            if (r0 != 0) goto L66
-            com.android.internal.org.bouncycastle.jcajce.util.JcaJceHelper r4 = r4.helper     // Catch: java.security.NoSuchProviderException -> L4e java.security.NoSuchAlgorithmException -> L65
-            com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier r0 = r5.getAlgorithm()     // Catch: java.security.NoSuchProviderException -> L4e java.security.NoSuchAlgorithmException -> L65
-            java.lang.String r0 = r0.getId()     // Catch: java.security.NoSuchProviderException -> L4e java.security.NoSuchAlgorithmException -> L65
-            java.security.AlgorithmParameters r0 = r4.createAlgorithmParameters(r0)     // Catch: java.security.NoSuchProviderException -> L4e java.security.NoSuchAlgorithmException -> L65
-            goto L66
-        L4e:
-            r4 = move-exception
-            com.android.internal.org.bouncycastle.operator.OperatorCreationException r5 = new com.android.internal.org.bouncycastle.operator.OperatorCreationException
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder
-            r0.<init>(r2)
-            java.lang.String r1 = r4.getMessage()
-            r0.append(r1)
-            java.lang.String r0 = r0.toString()
-            r5.<init>(r0, r4)
-            throw r5
-        L65:
-            return r1
-        L66:
-            com.android.internal.org.bouncycastle.asn1.ASN1Encodable r4 = r5.getParameters()     // Catch: java.io.IOException -> L76
-            com.android.internal.org.bouncycastle.asn1.ASN1Primitive r4 = r4.toASN1Primitive()     // Catch: java.io.IOException -> L76
-            byte[] r4 = r4.getEncoded()     // Catch: java.io.IOException -> L76
-            r0.init(r4)     // Catch: java.io.IOException -> L76
-            return r0
-        L76:
-            r4 = move-exception
-            com.android.internal.org.bouncycastle.operator.OperatorCreationException r5 = new com.android.internal.org.bouncycastle.operator.OperatorCreationException
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder
-            java.lang.String r1 = "cannot initialise algorithm parameters: "
-            r0.<init>(r1)
-            java.lang.String r1 = r4.getMessage()
-            r0.append(r1)
-            java.lang.String r0 = r0.toString()
-            r5.<init>(r0, r4)
-            throw r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.org.bouncycastle.operator.jcajce.OperatorHelper.createAlgorithmParameters(com.android.internal.org.bouncycastle.asn1.x509.AlgorithmIdentifier):java.security.AlgorithmParameters");
+    AlgorithmParameters createAlgorithmParameters(AlgorithmIdentifier algorithmIdentifier) throws OperatorCreationException, IOException {
+        AlgorithmParameters algorithmParametersCreateAlgorithmParameters;
+        if (algorithmIdentifier.getAlgorithm().equals((ASN1Primitive) PKCSObjectIdentifiers.rsaEncryption)) {
+            return null;
+        }
+        if (algorithmIdentifier.getAlgorithm().equals((ASN1Primitive) PKCSObjectIdentifiers.id_RSAES_OAEP)) {
+            try {
+                algorithmParametersCreateAlgorithmParameters = this.helper.createAlgorithmParameters("OAEP");
+            } catch (NoSuchAlgorithmException unused) {
+            } catch (NoSuchProviderException e) {
+                throw new OperatorCreationException("cannot create algorithm parameters: " + e.getMessage(), e);
+            }
+        } else {
+            algorithmParametersCreateAlgorithmParameters = null;
+        }
+        if (algorithmParametersCreateAlgorithmParameters == null) {
+            try {
+                algorithmParametersCreateAlgorithmParameters = this.helper.createAlgorithmParameters(algorithmIdentifier.getAlgorithm().getId());
+            } catch (NoSuchAlgorithmException unused2) {
+                return null;
+            } catch (NoSuchProviderException e2) {
+                throw new OperatorCreationException("cannot create algorithm parameters: " + e2.getMessage(), e2);
+            }
+        }
+        try {
+            algorithmParametersCreateAlgorithmParameters.init(algorithmIdentifier.getParameters().toASN1Primitive().getEncoded());
+            return algorithmParametersCreateAlgorithmParameters;
+        } catch (IOException e3) {
+            throw new OperatorCreationException("cannot initialise algorithm parameters: " + e3.getMessage(), e3);
+        }
     }
 
     MessageDigest createDigest(AlgorithmIdentifier algorithmIdentifier) throws GeneralSecurityException {
@@ -267,14 +224,14 @@ class OperatorHelper {
         }
     }
 
-    Signature createSignature(AlgorithmIdentifier algorithmIdentifier) throws GeneralSecurityException {
-        Signature createSignature;
+    Signature createSignature(AlgorithmIdentifier algorithmIdentifier) throws GeneralSecurityException, IOException {
+        Signature signatureCreateSignature;
         String signatureName = getSignatureName(algorithmIdentifier);
         try {
-            createSignature = this.helper.createSignature(signatureName);
+            signatureCreateSignature = this.helper.createSignature(signatureName);
         } catch (NoSuchAlgorithmException e) {
             if (signatureName.endsWith("WITHRSAANDMGF1")) {
-                createSignature = this.helper.createSignature(signatureName.substring(0, signatureName.indexOf(87)) + "WITHRSASSA-PSS");
+                signatureCreateSignature = this.helper.createSignature(signatureName.substring(0, signatureName.indexOf(87)) + "WITHRSASSA-PSS");
             } else {
                 throw e;
             }
@@ -283,28 +240,28 @@ class OperatorHelper {
             ASN1Sequence aSN1Sequence = ASN1Sequence.getInstance(algorithmIdentifier.getParameters());
             if (notDefaultPSSParams(aSN1Sequence)) {
                 try {
-                    AlgorithmParameters createAlgorithmParameters = this.helper.createAlgorithmParameters(KeyProperties.SIGNATURE_PADDING_RSA_PSS);
-                    createAlgorithmParameters.init(aSN1Sequence.getEncoded());
-                    createSignature.setParameter(createAlgorithmParameters.getParameterSpec(PSSParameterSpec.class));
+                    AlgorithmParameters algorithmParametersCreateAlgorithmParameters = this.helper.createAlgorithmParameters(KeyProperties.SIGNATURE_PADDING_RSA_PSS);
+                    algorithmParametersCreateAlgorithmParameters.init(aSN1Sequence.getEncoded());
+                    signatureCreateSignature.setParameter(algorithmParametersCreateAlgorithmParameters.getParameterSpec(PSSParameterSpec.class));
                 } catch (IOException e2) {
                     throw new GeneralSecurityException("unable to process PSS parameters: " + e2.getMessage());
                 }
             }
         }
-        return createSignature;
+        return signatureCreateSignature;
     }
 
-    Signature createRawSignature(AlgorithmIdentifier algorithmIdentifier) {
+    Signature createRawSignature(AlgorithmIdentifier algorithmIdentifier) throws InvalidAlgorithmParameterException {
         try {
             String signatureName = getSignatureName(algorithmIdentifier);
             String str = KeyProperties.DIGEST_NONE + signatureName.substring(signatureName.indexOf("WITH"));
-            Signature createSignature = this.helper.createSignature(str);
+            Signature signatureCreateSignature = this.helper.createSignature(str);
             if (algorithmIdentifier.getAlgorithm().equals((ASN1Primitive) PKCSObjectIdentifiers.id_RSASSA_PSS)) {
-                AlgorithmParameters createAlgorithmParameters = this.helper.createAlgorithmParameters(str);
-                AlgorithmParametersUtils.loadParameters(createAlgorithmParameters, algorithmIdentifier.getParameters());
-                createSignature.setParameter((PSSParameterSpec) createAlgorithmParameters.getParameterSpec(PSSParameterSpec.class));
+                AlgorithmParameters algorithmParametersCreateAlgorithmParameters = this.helper.createAlgorithmParameters(str);
+                AlgorithmParametersUtils.loadParameters(algorithmParametersCreateAlgorithmParameters, algorithmIdentifier.getParameters());
+                signatureCreateSignature.setParameter((PSSParameterSpec) algorithmParametersCreateAlgorithmParameters.getParameterSpec(PSSParameterSpec.class));
             }
-            return createSignature;
+            return signatureCreateSignature;
         } catch (Exception unused) {
             return null;
         }
@@ -316,11 +273,11 @@ class OperatorHelper {
 
     static String getDigestName(ASN1ObjectIdentifier aSN1ObjectIdentifier) {
         String digestName = MessageDigestUtils.getDigestName(aSN1ObjectIdentifier);
-        int indexOf = digestName.indexOf(45);
-        if (indexOf <= 0 || digestName.startsWith("SHA3")) {
+        int iIndexOf = digestName.indexOf(45);
+        if (iIndexOf <= 0 || digestName.startsWith("SHA3")) {
             return digestName;
         }
-        return digestName.substring(0, indexOf) + digestName.substring(indexOf + 1);
+        return digestName.substring(0, iIndexOf) + digestName.substring(iIndexOf + 1);
     }
 
     public X509Certificate convertCertificate(X509CertificateHolder x509CertificateHolder) throws CertificateException {

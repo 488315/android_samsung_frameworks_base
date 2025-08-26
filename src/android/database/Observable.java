@@ -23,11 +23,11 @@ public abstract class Observable<T> {
             throw new IllegalArgumentException("The observer is null.");
         }
         synchronized (this.mObservers) {
-            int indexOf = this.mObservers.indexOf(t);
-            if (indexOf == -1) {
+            int iIndexOf = this.mObservers.indexOf(t);
+            if (iIndexOf == -1) {
                 throw new IllegalStateException("Observer " + t + " was not registered.");
             }
-            this.mObservers.remove(indexOf);
+            this.mObservers.remove(iIndexOf);
         }
     }
 

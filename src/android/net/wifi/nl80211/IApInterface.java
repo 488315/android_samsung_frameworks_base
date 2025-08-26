@@ -57,9 +57,9 @@ public interface IApInterface extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IApInterface.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IApInterface)) {
-                return (IApInterface) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IApInterface.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IApInterface)) {
+                return (IApInterface) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -89,11 +89,11 @@ public interface IApInterface extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IApInterfaceEventCallback asInterface = IApInterfaceEventCallback.Stub.asInterface(parcel.readStrongBinder());
+                IApInterfaceEventCallback iApInterfaceEventCallbackAsInterface = IApInterfaceEventCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                boolean registerCallback = registerCallback(asInterface);
+                boolean zRegisterCallback = registerCallback(iApInterfaceEventCallbackAsInterface);
                 parcel2.writeNoException();
-                parcel2.writeBoolean(registerCallback);
+                parcel2.writeBoolean(zRegisterCallback);
             } else if (i == 2) {
                 String interfaceName = getInterfaceName();
                 parcel2.writeNoException();
@@ -122,32 +122,32 @@ public interface IApInterface extends IInterface {
 
             @Override // android.net.wifi.nl80211.IApInterface
             public boolean registerCallback(IApInterfaceEventCallback iApInterfaceEventCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApInterface.DESCRIPTOR);
-                    obtain.writeStrongInterface(iApInterfaceEventCallback);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IApInterface.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iApInterfaceEventCallback);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.net.wifi.nl80211.IApInterface
             public String getInterfaceName() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IApInterface.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IApInterface.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

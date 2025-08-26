@@ -34,7 +34,6 @@ import com.android.systemui.edgelighting.effect.utils.VerificationCodeUtils;
 import com.samsung.android.content.clipboard.SemClipboardManager;
 import com.samsung.android.content.clipboard.data.SemTextClipData;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class MorphView extends AbsToastView {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -73,12 +72,12 @@ public class MorphView extends AbsToastView {
         this.mExpandButton = (ImageView) findViewById(R.id.expand_button);
         TextView textView = (TextView) findViewById(R.id.verification_code);
         this.mCodeText = textView;
-        float round = Math.round(TypedValue.applyDimension(1, 36.0f, context.getResources().getDisplayMetrics())) + Math.round(TypedValue.applyDimension(1, 8.0f, context.getResources().getDisplayMetrics())) + SystemBarUtils.getStatusBarHeight(context);
-        this.mAnimationRangeY = round;
-        this.mHideShowRange = round / 2.0f;
+        float fRound = Math.round(TypedValue.applyDimension(1, 36.0f, context.getResources().getDisplayMetrics())) + Math.round(TypedValue.applyDimension(1, 8.0f, context.getResources().getDisplayMetrics())) + SystemBarUtils.getStatusBarHeight(context);
+        this.mAnimationRangeY = fRound;
+        this.mHideShowRange = fRound / 2.0f;
         textView.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.edgelighting.effect.view.MorphView.1
             @Override // android.view.View.OnClickListener
-            public final void onClick(View view) {
+            public final void onClick(View view) throws ClassNotFoundException {
                 Class<?> cls;
                 IEdgeLightingWindowCallback iEdgeLightingWindowCallback;
                 MorphView morphView = MorphView.this;
@@ -93,7 +92,7 @@ public class MorphView extends AbsToastView {
                     return;
                 }
                 Context context2 = MorphView.this.getContext();
-                String charSequence = MorphView.this.mCodeText.getText().toString();
+                String string = MorphView.this.mCodeText.getText().toString();
                 String str = Utils.TAG;
                 SemClipboardManager semClipboardManager = (SemClipboardManager) context2.getSystemService("semclipboard");
                 try {
@@ -103,13 +102,13 @@ public class MorphView extends AbsToastView {
                     cls = null;
                 }
                 if (cls == null || !semClipboardManager.isEnabled()) {
-                    ((ClipboardManager) context2.getSystemService("clipboard")).setPrimaryClip(ClipData.newPlainText("label", charSequence));
+                    ((ClipboardManager) context2.getSystemService("clipboard")).setPrimaryClip(ClipData.newPlainText("label", string));
                 } else {
                     SemTextClipData semTextClipData = new SemTextClipData();
-                    semTextClipData.setText(charSequence);
+                    semTextClipData.setText(string);
                     semClipboardManager.addClip(context2, semTextClipData, (SemClipboardManager.OnAddClipResultListener) null);
                 }
-                Slog.i(str, "doCopyCode : copiedCode = " + charSequence);
+                Slog.i(str, "doCopyCode : copiedCode = " + string);
                 MorphView morphView2 = MorphView.this;
                 NotificationEffect.AnonymousClass1 anonymousClass1 = morphView2.mPopupListener;
                 if (anonymousClass1 != null) {
@@ -131,11 +130,11 @@ public class MorphView extends AbsToastView {
             return;
         }
         this.mIsHiding = true;
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this, "alpha", 0.0f);
-        ofFloat.setInterpolator(new LinearInterpolator());
-        ofFloat.setDuration(200L);
-        ofFloat.setStartDelay(0L);
-        ofFloat.addListener(new Animator.AnimatorListener() { // from class: com.android.systemui.edgelighting.effect.view.MorphView.4
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this, "alpha", 0.0f);
+        objectAnimatorOfFloat.setInterpolator(new LinearInterpolator());
+        objectAnimatorOfFloat.setDuration(200L);
+        objectAnimatorOfFloat.setStartDelay(0L);
+        objectAnimatorOfFloat.addListener(new Animator.AnimatorListener() { // from class: com.android.systemui.edgelighting.effect.view.MorphView.4
             @Override // android.animation.Animator.AnimatorListener
             public final void onAnimationCancel(Animator animator) {
                 MorphView.this.mIsHiding = false;
@@ -155,7 +154,7 @@ public class MorphView extends AbsToastView {
             public final void onAnimationStart(Animator animator) {
             }
         });
-        ofFloat.start();
+        objectAnimatorOfFloat.start();
     }
 
     public final void hide() {
@@ -183,23 +182,23 @@ public class MorphView extends AbsToastView {
         springAnimation.addUpdateListener(new DynamicAnimation.OnAnimationUpdateListener() { // from class: com.android.systemui.edgelighting.effect.view.MorphView.6
             public final void onAnimationUpdate(DynamicAnimation dynamicAnimation, float f2, float f3) {
                 if (MorphView.this.mPopupListener != null) {
-                    float abs = Math.abs(f2);
+                    float fAbs = Math.abs(f2);
                     MorphView morphView = MorphView.this;
-                    if (abs >= morphView.mHideShowRange) {
+                    if (fAbs >= morphView.mHideShowRange) {
                         morphView.setAlpha(0.0f);
                         return;
                     }
-                    float abs2 = Math.abs(f2);
+                    float fAbs2 = Math.abs(f2);
                     float f4 = MorphView.this.mHideShowRange;
-                    MorphView.this.setAlpha(Math.abs((abs2 - f4) / f4));
+                    MorphView.this.setAlpha(Math.abs((fAbs2 - f4) / f4));
                 }
             }
         });
         postDelayed(new MorphView$$ExternalSyntheticLambda0(this, springAnimation, 0), 0L);
     }
 
-    public final void initialize() {
-        int i;
+    public final void initialize() throws Resources.NotFoundException {
+        int measuredWidth;
         int dimensionPixelOffset;
         double d;
         double d2;
@@ -214,24 +213,24 @@ public class MorphView extends AbsToastView {
             this.mCodeText.setTextSize(13.0f);
         }
         if (this.mMainText.getText() == null || this.mMainText.getText().length() <= 0) {
-            i = 0;
+            measuredWidth = 0;
         } else {
             this.mMainText.measure(0, 0);
-            i = this.mMainText.getMeasuredWidth();
+            measuredWidth = this.mMainText.getMeasuredWidth();
         }
         if (this.mSubText.getText() != null && this.mSubText.getText().length() > 0) {
             this.mSubText.measure(0, 0);
-            i += this.mSubText.getMeasuredWidth();
+            measuredWidth += this.mSubText.getMeasuredWidth();
         }
         if (this.mCodeText.getVisibility() == 0 && VerificationCodeUtils.getVerifyCode() != null) {
             this.mCodeText.measure(0, 0);
-            i += this.mCodeText.getMeasuredWidth();
+            measuredWidth += this.mCodeText.getMeasuredWidth();
         }
         if (this.mExpandButton.getVisibility() == 0) {
             this.mExpandButton.measure(0, 0);
-            i += this.mExpandButton.getMeasuredWidth();
+            measuredWidth += this.mExpandButton.getMeasuredWidth();
         }
-        int dimensionPixelSize2 = i > 0 ? getResources().getDimensionPixelSize(R.dimen.toast_text_layout_end_padding) + getResources().getDimensionPixelSize(R.dimen.toast_text_layout_start_padding) + i + dimensionPixelSize : dimensionPixelSize;
+        int dimensionPixelSize2 = measuredWidth > 0 ? getResources().getDimensionPixelSize(R.dimen.toast_text_layout_end_padding) + getResources().getDimensionPixelSize(R.dimen.toast_text_layout_start_padding) + measuredWidth + dimensionPixelSize : dimensionPixelSize;
         if (this.mIsUsingAppIcon) {
             int dimensionPixelOffset2 = getResources().getDimensionPixelOffset(R.dimen.toast_app_icon_additional_margin);
             dimensionPixelSize2 += dimensionPixelOffset2;
@@ -254,9 +253,9 @@ public class MorphView extends AbsToastView {
             }
             dimensionPixelOffset = (int) (d * d2);
         }
-        int min = Math.min(dimensionPixelOffset, dimensionPixelSize2);
+        int iMin = Math.min(dimensionPixelOffset, dimensionPixelSize2);
         this.mMinWidth = dimensionPixelSize;
-        this.mMaxWidth = min;
+        this.mMaxWidth = iMin;
         updateMargin(getRootWindowInsets());
         int dimensionPixelSize3 = getResources().getDimensionPixelSize(R.dimen.toast_elevation_margin);
         ViewGroup.LayoutParams layoutParams = getLayoutParams();
@@ -264,12 +263,12 @@ public class MorphView extends AbsToastView {
         layoutParams.height = dimensionPixelSize3 + dimensionPixelSize;
         setLayoutParams(layoutParams);
         ViewGroup.LayoutParams layoutParams2 = this.mToastRootLayout.getLayoutParams();
-        layoutParams2.width = min;
+        layoutParams2.width = iMin;
         layoutParams2.height = dimensionPixelSize;
         this.mToastRootLayout.setLayoutParams(layoutParams2);
         this.mTextRootLayout.setPaddingRelative(getResources().getDimensionPixelSize(R.dimen.toast_text_layout_start_padding), 0, getResources().getDimensionPixelSize(R.dimen.toast_text_layout_end_padding), 0);
         LinearLayout.LayoutParams layoutParams3 = (LinearLayout.LayoutParams) this.mTextRootLayout.getLayoutParams();
-        layoutParams3.width = min - this.mMinWidth;
+        layoutParams3.width = iMin - this.mMinWidth;
         this.mTextRootLayout.setLayoutParams(layoutParams3);
         this.mToastBlurLayout.semSetBlurInfo(new SemBlurInfo.Builder(0).setColorCurvePreset((getResources().getConfiguration().uiMode & 48) == 32 ? 124 : 114).setBackgroundCornerRadius(getResources().getDimensionPixelOffset(R.dimen.lighting_popup_round_scaled)).setBackgroundColor(getContext().getColor(R.color.blend_blur_color)).build());
         this.mToastRootLayout.setElevation(getResources().getDimensionPixelSize(R.dimen.toast_root_elevation));
@@ -324,9 +323,9 @@ public class MorphView extends AbsToastView {
                 if (MorphView.this.mPopupListener == null || Math.abs(f) >= MorphView.this.mHideShowRange) {
                     return;
                 }
-                float abs = Math.abs(f);
+                float fAbs = Math.abs(f);
                 float f3 = MorphView.this.mHideShowRange;
-                MorphView.this.setAlpha(Math.abs((abs - f3) / f3));
+                MorphView.this.setAlpha(Math.abs((fAbs - f3) / f3));
             }
         });
         SpringForce springForce = new SpringForce(0.0f);

@@ -17,7 +17,6 @@ import com.android.systemui.statusbar.connectivity.SignalCallback;
 import com.android.systemui.statusbar.connectivity.WifiIndicators;
 import com.sec.ims.settings.ImsProfile;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SubscreenWifiController implements SubscreenQSControllerContract$Presenter {
     public static Context mContext;
@@ -30,7 +29,6 @@ public class SubscreenWifiController implements SubscreenQSControllerContract$Pr
     public final NetworkController mNetworkController = (NetworkController) Dependency.sDependency.getDependencyInner(NetworkController.class);
     public final WifiSignalCallback mSignalCallback = new WifiSignalCallback(this, 0);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class TileReceiver extends BroadcastReceiver {
         public TileReceiver() {
         }
@@ -49,7 +47,6 @@ public class SubscreenWifiController implements SubscreenQSControllerContract$Pr
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class WifiSignalCallback implements SignalCallback {
         public /* synthetic */ WifiSignalCallback(SubscreenWifiController subscreenWifiController, int i) {
             this();
@@ -85,14 +82,14 @@ public class SubscreenWifiController implements SubscreenQSControllerContract$Pr
 
     @Override // com.android.systemui.qp.SubscreenQSControllerContract$Presenter
     public final void registerReceiver(boolean z) {
-        IntentFilter m = AppCompatDelegateImpl$AutoBatteryNightModeManager$$ExternalSyntheticOutline0.m("WIFI_STATE_CHANGE");
+        IntentFilter intentFilterM = AppCompatDelegateImpl$AutoBatteryNightModeManager$$ExternalSyntheticOutline0.m("WIFI_STATE_CHANGE");
         if (z) {
             this.mWifiViewReceiver = new TileReceiver();
         } else {
             this.mWifiReceiver = new TileReceiver();
         }
         Log.d("SubscreenWifiController", "SWC registerWifiReceiver mWifiViewReceiver: " + this.mWifiViewReceiver + "mWifiReceiver: " + this.mWifiReceiver);
-        ((BroadcastDispatcher) Dependency.sDependency.getDependencyInner(BroadcastDispatcher.class)).registerReceiver(z ? this.mWifiViewReceiver : this.mWifiReceiver, m, null, UserHandle.ALL, 2, "com.samsung.systemui.permission.WIFI_STATE_CHANGE");
+        ((BroadcastDispatcher) Dependency.sDependency.getDependencyInner(BroadcastDispatcher.class)).registerReceiver(z ? this.mWifiViewReceiver : this.mWifiReceiver, intentFilterM, null, UserHandle.ALL, 2, "com.samsung.systemui.permission.WIFI_STATE_CHANGE");
         ((NetworkControllerImpl) this.mNetworkController).addCallback(this.mSignalCallback);
     }
 

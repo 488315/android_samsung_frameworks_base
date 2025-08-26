@@ -3,10 +3,19 @@ package com.android.systemui.statusbar.notification.promoted.domain.interactor;
 import com.android.systemui.statusbar.chips.call.domain.interactor.CallChipInteractor;
 import com.android.systemui.statusbar.chips.mediaprojection.domain.interactor.MediaProjectionChipInteractor;
 import com.android.systemui.statusbar.chips.notification.domain.interactor.StatusBarNotificationChipsInteractor;
+import com.android.systemui.statusbar.chips.notification.domain.model.NotificationChipModel;
 import com.android.systemui.statusbar.chips.screenrecord.domain.interactor.ScreenRecordChipInteractor;
 import com.android.systemui.statusbar.notification.domain.interactor.ActiveNotificationsInteractor;
+import com.android.systemui.statusbar.notification.promoted.domain.interactor.PromotedNotificationsInteractor;
 import com.android.systemui.statusbar.notification.promoted.shared.model.PromotedNotificationContentModels;
+import com.android.systemui.statusbar.phone.ongoingcall.shared.model.OngoingCallModel;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import kotlin.NoWhenBranchMatchedException;
+import kotlin.ResultKt;
 import kotlin.Unit;
+import kotlin.collections.CollectionsKt__IterablesKt;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
@@ -21,7 +30,6 @@ import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$unsafeFlow$1;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class PromotedNotificationsInteractor {
     public final ActiveNotificationsInteractor activeNotificationsInteractor;
@@ -31,7 +39,6 @@ public final class PromotedNotificationsInteractor {
     public final ChannelFlowTransformLatest screenRecordChipNotification;
     public final DistinctFlowImpl topPromotedChipNotification;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class NotifAndPromotedContent {
         public final String key;
         public final PromotedNotificationContentModels promotedContent;
@@ -57,9 +64,9 @@ public final class PromotedNotificationsInteractor {
 
         public final int hashCode() {
             String str;
-            int hashCode = this.key.hashCode() * 31;
+            int iHashCode = this.key.hashCode() * 31;
             PromotedNotificationContentModels promotedNotificationContentModels = this.promotedContent;
-            return hashCode + ((promotedNotificationContentModels == null || (str = promotedNotificationContentModels.privateVersion.identity.key) == null) ? 0 : str.hashCode());
+            return iHashCode + ((promotedNotificationContentModels == null || (str = promotedNotificationContentModels.privateVersion.identity.key) == null) ? 0 : str.hashCode());
         }
 
         public final String toString() {
@@ -69,14 +76,13 @@ public final class PromotedNotificationsInteractor {
 
     public PromotedNotificationsInteractor(ActiveNotificationsInteractor activeNotificationsInteractor, ScreenRecordChipInteractor screenRecordChipInteractor, MediaProjectionChipInteractor mediaProjectionChipInteractor, CallChipInteractor callChipInteractor, StatusBarNotificationChipsInteractor statusBarNotificationChipsInteractor, CoroutineDispatcher coroutineDispatcher) {
         this.activeNotificationsInteractor = activeNotificationsInteractor;
-        ChannelFlowTransformLatest transformLatest = FlowKt.transformLatest(screenRecordChipInteractor.screenRecordState, new PromotedNotificationsInteractor$special$$inlined$flatMapLatest$1(null, this));
-        this.screenRecordChipNotification = transformLatest;
-        ChannelFlowTransformLatest transformLatest2 = FlowKt.transformLatest(mediaProjectionChipInteractor.projection, new PromotedNotificationsInteractor$special$$inlined$flatMapLatest$2(null, this));
-        this.mediaProjectionChipNotification = transformLatest2;
+        ChannelFlowTransformLatest channelFlowTransformLatestTransformLatest = FlowKt.transformLatest(screenRecordChipInteractor.screenRecordState, new PromotedNotificationsInteractor$special$$inlined$flatMapLatest$1(null, this));
+        this.screenRecordChipNotification = channelFlowTransformLatestTransformLatest;
+        ChannelFlowTransformLatest channelFlowTransformLatestTransformLatest2 = FlowKt.transformLatest(mediaProjectionChipInteractor.projection, new PromotedNotificationsInteractor$special$$inlined$flatMapLatest$2(null, this));
+        this.mediaProjectionChipNotification = channelFlowTransformLatestTransformLatest2;
         final ReadonlyStateFlow readonlyStateFlow = callChipInteractor.ongoingCallState;
-        Flow distinctUntilChanged = FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.statusbar.notification.promoted.domain.interactor.PromotedNotificationsInteractor$special$$inlined$map$1
+        Flow flowDistinctUntilChanged = FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.statusbar.notification.promoted.domain.interactor.PromotedNotificationsInteractor$special$$inlined$map$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.statusbar.notification.promoted.domain.interactor.PromotedNotificationsInteractor$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -103,87 +109,61 @@ public final class PromotedNotificationsInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.statusbar.notification.promoted.domain.interactor.PromotedNotificationsInteractor$special$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.statusbar.notification.promoted.domain.interactor.PromotedNotificationsInteractor$special$$inlined$map$1$2$1 r0 = (com.android.systemui.statusbar.notification.promoted.domain.interactor.PromotedNotificationsInteractor$special$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.statusbar.notification.promoted.domain.interactor.PromotedNotificationsInteractor$special$$inlined$map$1$2$1 r0 = new com.android.systemui.statusbar.notification.promoted.domain.interactor.PromotedNotificationsInteractor$special$$inlined$map$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L54
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        com.android.systemui.statusbar.phone.ongoingcall.shared.model.OngoingCallModel r5 = (com.android.systemui.statusbar.phone.ongoingcall.shared.model.OngoingCallModel) r5
-                        boolean r6 = r5 instanceof com.android.systemui.statusbar.phone.ongoingcall.shared.model.OngoingCallModel.InCall
-                        if (r6 == 0) goto L44
-                        com.android.systemui.statusbar.notification.promoted.domain.interactor.PromotedNotificationsInteractor$NotifAndPromotedContent r6 = new com.android.systemui.statusbar.notification.promoted.domain.interactor.PromotedNotificationsInteractor$NotifAndPromotedContent
-                        com.android.systemui.statusbar.phone.ongoingcall.shared.model.OngoingCallModel$InCall r5 = (com.android.systemui.statusbar.phone.ongoingcall.shared.model.OngoingCallModel.InCall) r5
-                        java.lang.String r2 = r5.notificationKey
-                        com.android.systemui.statusbar.notification.promoted.shared.model.PromotedNotificationContentModels r5 = r5.promotedContent
-                        r6.<init>(r2, r5)
-                        goto L49
-                    L44:
-                        boolean r5 = r5 instanceof com.android.systemui.statusbar.phone.ongoingcall.shared.model.OngoingCallModel.NoCall
-                        if (r5 == 0) goto L57
-                        r6 = 0
-                    L49:
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r6, r0)
-                        if (r4 != r1) goto L54
-                        return r1
-                    L54:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    L57:
-                        kotlin.NoWhenBranchMatchedException r4 = new kotlin.NoWhenBranchMatchedException
-                        r4.<init>()
-                        throw r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.notification.promoted.domain.interactor.PromotedNotificationsInteractor$special$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    PromotedNotificationsInteractor.NotifAndPromotedContent notifAndPromotedContent;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        OngoingCallModel ongoingCallModel = (OngoingCallModel) obj;
+                        if (ongoingCallModel instanceof OngoingCallModel.InCall) {
+                            OngoingCallModel.InCall inCall = (OngoingCallModel.InCall) ongoingCallModel;
+                            notifAndPromotedContent = new PromotedNotificationsInteractor.NotifAndPromotedContent(inCall.notificationKey, inCall.promotedContent);
+                        } else {
+                            if (!(ongoingCallModel instanceof OngoingCallModel.NoCall)) {
+                                throw new NoWhenBranchMatchedException();
+                            }
+                            notifAndPromotedContent = null;
+                        }
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(notifAndPromotedContent, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = readonlyStateFlow.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         });
         final ReadonlyStateFlow readonlyStateFlow2 = statusBarNotificationChipsInteractor.allNotificationChips;
-        final FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$2 combine = FlowKt.combine(transformLatest, transformLatest2, distinctUntilChanged, FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.statusbar.notification.promoted.domain.interactor.PromotedNotificationsInteractor$special$$inlined$map$2
+        final FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$2 flowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$2Combine = FlowKt.combine(channelFlowTransformLatestTransformLatest, channelFlowTransformLatestTransformLatest2, flowDistinctUntilChanged, FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.statusbar.notification.promoted.domain.interactor.PromotedNotificationsInteractor$special$$inlined$map$2
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.statusbar.notification.promoted.domain.interactor.PromotedNotificationsInteractor$special$$inlined$map$2$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -210,88 +190,55 @@ public final class PromotedNotificationsInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r7, kotlin.coroutines.Continuation r8) {
-                    /*
-                        r6 = this;
-                        boolean r0 = r8 instanceof com.android.systemui.statusbar.notification.promoted.domain.interactor.PromotedNotificationsInteractor$special$$inlined$map$2.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r8
-                        com.android.systemui.statusbar.notification.promoted.domain.interactor.PromotedNotificationsInteractor$special$$inlined$map$2$2$1 r0 = (com.android.systemui.statusbar.notification.promoted.domain.interactor.PromotedNotificationsInteractor$special$$inlined$map$2.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.statusbar.notification.promoted.domain.interactor.PromotedNotificationsInteractor$special$$inlined$map$2$2$1 r0 = new com.android.systemui.statusbar.notification.promoted.domain.interactor.PromotedNotificationsInteractor$special$$inlined$map$2$2$1
-                        r0.<init>(r8)
-                    L18:
-                        java.lang.Object r8 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r8)
-                        goto L69
-                    L27:
-                        java.lang.IllegalStateException r6 = new java.lang.IllegalStateException
-                        java.lang.String r7 = "call to 'resume' before 'invoke' with coroutine"
-                        r6.<init>(r7)
-                        throw r6
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r8)
-                        java.util.List r7 = (java.util.List) r7
-                        java.lang.Iterable r7 = (java.lang.Iterable) r7
-                        java.util.ArrayList r8 = new java.util.ArrayList
-                        r2 = 10
-                        int r2 = kotlin.collections.CollectionsKt__IterablesKt.collectionSizeOrDefault(r7, r2)
-                        r8.<init>(r2)
-                        java.util.Iterator r7 = r7.iterator()
-                    L45:
-                        boolean r2 = r7.hasNext()
-                        if (r2 == 0) goto L5e
-                        java.lang.Object r2 = r7.next()
-                        com.android.systemui.statusbar.chips.notification.domain.model.NotificationChipModel r2 = (com.android.systemui.statusbar.chips.notification.domain.model.NotificationChipModel) r2
-                        com.android.systemui.statusbar.notification.promoted.domain.interactor.PromotedNotificationsInteractor$NotifAndPromotedContent r4 = new com.android.systemui.statusbar.notification.promoted.domain.interactor.PromotedNotificationsInteractor$NotifAndPromotedContent
-                        java.lang.String r5 = r2.key
-                        com.android.systemui.statusbar.notification.promoted.shared.model.PromotedNotificationContentModels r2 = r2.promotedContent
-                        r4.<init>(r5, r2)
-                        r8.add(r4)
-                        goto L45
-                    L5e:
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r6 = r6.$this_unsafeFlow
-                        java.lang.Object r6 = r6.emit(r8, r0)
-                        if (r6 != r1) goto L69
-                        return r1
-                    L69:
-                        kotlin.Unit r6 = kotlin.Unit.INSTANCE
-                        return r6
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.notification.promoted.domain.interactor.PromotedNotificationsInteractor$special$$inlined$map$2.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        List<NotificationChipModel> list = (List) obj;
+                        ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(list, 10));
+                        for (NotificationChipModel notificationChipModel : list) {
+                            arrayList.add(new PromotedNotificationsInteractor.NotifAndPromotedContent(notificationChipModel.key, notificationChipModel.promotedContent));
+                        }
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(arrayList, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = readonlyStateFlow2.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         }), new PromotedNotificationsInteractor$orderedChipNotifications$1(null));
-        this.orderedChipNotifications = combine;
-        DistinctFlowImpl distinctUntilChanged2 = FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.statusbar.notification.promoted.domain.interactor.PromotedNotificationsInteractor$special$$inlined$map$3
+        this.orderedChipNotifications = flowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$2Combine;
+        DistinctFlowImpl distinctFlowImplDistinctUntilChanged = FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.statusbar.notification.promoted.domain.interactor.PromotedNotificationsInteractor$special$$inlined$map$3
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.statusbar.notification.promoted.domain.interactor.PromotedNotificationsInteractor$special$$inlined$map$3$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -318,84 +265,63 @@ public final class PromotedNotificationsInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.statusbar.notification.promoted.domain.interactor.PromotedNotificationsInteractor$special$$inlined$map$3.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.statusbar.notification.promoted.domain.interactor.PromotedNotificationsInteractor$special$$inlined$map$3$2$1 r0 = (com.android.systemui.statusbar.notification.promoted.domain.interactor.PromotedNotificationsInteractor$special$$inlined$map$3.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.statusbar.notification.promoted.domain.interactor.PromotedNotificationsInteractor$special$$inlined$map$3$2$1 r0 = new com.android.systemui.statusbar.notification.promoted.domain.interactor.PromotedNotificationsInteractor$special$$inlined$map$3$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L57
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        java.util.List r5 = (java.util.List) r5
-                        java.lang.Iterable r5 = (java.lang.Iterable) r5
-                        java.util.Iterator r5 = r5.iterator()
-                    L3a:
-                        boolean r6 = r5.hasNext()
-                        if (r6 == 0) goto L4b
-                        java.lang.Object r6 = r5.next()
-                        com.android.systemui.statusbar.notification.promoted.domain.interactor.PromotedNotificationsInteractor$NotifAndPromotedContent r6 = (com.android.systemui.statusbar.notification.promoted.domain.interactor.PromotedNotificationsInteractor.NotifAndPromotedContent) r6
-                        com.android.systemui.statusbar.notification.promoted.shared.model.PromotedNotificationContentModels r6 = r6.promotedContent
-                        if (r6 == 0) goto L3a
-                        goto L4c
-                    L4b:
-                        r6 = 0
-                    L4c:
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r6, r0)
-                        if (r4 != r1) goto L57
-                        return r1
-                    L57:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.notification.promoted.domain.interactor.PromotedNotificationsInteractor$special$$inlined$map$3.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    PromotedNotificationContentModels promotedNotificationContentModels;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        Iterator it = ((List) obj).iterator();
+                        while (true) {
+                            if (!it.hasNext()) {
+                                promotedNotificationContentModels = null;
+                                break;
+                            }
+                            promotedNotificationContentModels = ((PromotedNotificationsInteractor.NotifAndPromotedContent) it.next()).promotedContent;
+                            if (promotedNotificationContentModels != null) {
+                                break;
+                            }
+                        }
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(promotedNotificationContentModels, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$2Combine.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         }, new PromotedNotificationsInteractor$$ExternalSyntheticLambda0());
-        this.topPromotedChipNotification = distinctUntilChanged2;
-        this.aodPromotedNotification = FlowKt.distinctUntilChanged(new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(distinctUntilChanged2, activeNotificationsInteractor.topLevelRepresentativeNotifications, new PromotedNotificationsInteractor$aodPromotedNotification$1(this, null)), new PromotedNotificationsInteractor$$ExternalSyntheticLambda0());
+        this.topPromotedChipNotification = distinctFlowImplDistinctUntilChanged;
+        this.aodPromotedNotification = FlowKt.distinctUntilChanged(new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(distinctFlowImplDistinctUntilChanged, activeNotificationsInteractor.topLevelRepresentativeNotifications, new PromotedNotificationsInteractor$aodPromotedNotification$1(this, null)), new PromotedNotificationsInteractor$$ExternalSyntheticLambda0());
         FlowKt.flowOn(FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.statusbar.notification.promoted.domain.interactor.PromotedNotificationsInteractor$special$$inlined$map$4
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.statusbar.notification.promoted.domain.interactor.PromotedNotificationsInteractor$special$$inlined$map$4$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -422,79 +348,51 @@ public final class PromotedNotificationsInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.statusbar.notification.promoted.domain.interactor.PromotedNotificationsInteractor$special$$inlined$map$4.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.statusbar.notification.promoted.domain.interactor.PromotedNotificationsInteractor$special$$inlined$map$4$2$1 r0 = (com.android.systemui.statusbar.notification.promoted.domain.interactor.PromotedNotificationsInteractor$special$$inlined$map$4.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.statusbar.notification.promoted.domain.interactor.PromotedNotificationsInteractor$special$$inlined$map$4$2$1 r0 = new com.android.systemui.statusbar.notification.promoted.domain.interactor.PromotedNotificationsInteractor$special$$inlined$map$4$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L62
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        java.util.List r5 = (java.util.List) r5
-                        java.lang.Iterable r5 = (java.lang.Iterable) r5
-                        java.util.ArrayList r6 = new java.util.ArrayList
-                        r2 = 10
-                        int r2 = kotlin.collections.CollectionsKt__IterablesKt.collectionSizeOrDefault(r5, r2)
-                        r6.<init>(r2)
-                        java.util.Iterator r5 = r5.iterator()
-                    L45:
-                        boolean r2 = r5.hasNext()
-                        if (r2 == 0) goto L57
-                        java.lang.Object r2 = r5.next()
-                        com.android.systemui.statusbar.notification.promoted.domain.interactor.PromotedNotificationsInteractor$NotifAndPromotedContent r2 = (com.android.systemui.statusbar.notification.promoted.domain.interactor.PromotedNotificationsInteractor.NotifAndPromotedContent) r2
-                        java.lang.String r2 = r2.key
-                        r6.add(r2)
-                        goto L45
-                    L57:
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r6, r0)
-                        if (r4 != r1) goto L62
-                        return r1
-                    L62:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.notification.promoted.domain.interactor.PromotedNotificationsInteractor$special$$inlined$map$4.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        List list = (List) obj;
+                        ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(list, 10));
+                        Iterator it = list.iterator();
+                        while (it.hasNext()) {
+                            arrayList.add(((PromotedNotificationsInteractor.NotifAndPromotedContent) it.next()).key);
+                        }
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(arrayList, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$2Combine.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         }), coroutineDispatcher);
     }

@@ -1,36 +1,40 @@
 package com.android.systemui.qs.bar;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.widget.LinearLayout;
+import com.android.systemui.Dependency;
 import com.android.systemui.QpRune;
 import com.android.systemui.R;
 import com.android.systemui.qs.QSSecurityFooter;
 import com.android.systemui.shade.SecPanelSplitHelper;
 import com.android.systemui.statusbar.phone.datausage.DataUsageLabelView;
+import com.android.systemui.util.SecQsUiDisplayModeInteractor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class DataUsageBar extends BarItemImpl {
-    public final DataUsageLabelView mDataUsageLabelView;
+    public DataUsageLabelView mDataUsageLabelView;
+    public boolean mIsLandScape;
     public boolean mIsSecurityFooterVisible;
     public final QSSecurityFooter mSecurityFooter;
 
-    public DataUsageBar(Context context, DataUsageLabelView dataUsageLabelView, QSSecurityFooter qSSecurityFooter) {
+    public DataUsageBar(Context context, QSSecurityFooter qSSecurityFooter) {
         super(context);
         this.mIsSecurityFooterVisible = false;
+        this.mIsLandScape = false;
         this.mContext = context;
-        this.mDataUsageLabelView = dataUsageLabelView;
         this.mSecurityFooter = qSSecurityFooter;
     }
 
     @Override // com.android.systemui.qs.bar.BarItemImpl
     public final void destroy() {
+        DataUsageLabelView dataUsageLabelView;
         this.mCallback = null;
-        if (QpRune.QUICK_DATA_USAGE_LABEL) {
-            this.mDataUsageLabelView.getClass();
-            DataUsageLabelView.mVisibilityChangedListener = null;
+        if (!QpRune.QUICK_DATA_USAGE_LABEL || (dataUsageLabelView = this.mDataUsageLabelView) == null) {
+            return;
         }
+        dataUsageLabelView.mVisibilityChangedListener = null;
     }
 
     @Override // com.android.systemui.qs.bar.BarItemImpl
@@ -44,17 +48,28 @@ public class DataUsageBar extends BarItemImpl {
     }
 
     @Override // com.android.systemui.qs.bar.BarItemImpl
+    public final void onConfigChanged(Configuration configuration) throws Resources.NotFoundException {
+        this.mIsLandScape = configuration.orientation == 2;
+        updateHeightMargins();
+    }
+
+    @Override // com.android.systemui.qs.bar.BarItemImpl
     public final void onFinishInflate() {
         if (QpRune.QUICK_DATA_USAGE_LABEL) {
-            showBar(this.mDataUsageLabelView.mDataUsageVisibility && SecPanelSplitHelper.isEnabled());
-            DataUsageLabelView.mVisibilityChangedListener = this;
+            DataUsageLabelView dataUsageLabelView = (DataUsageLabelView) this.mBarRootView.findViewById(R.id.data_usage_label_view);
+            this.mDataUsageLabelView = dataUsageLabelView;
+            if (dataUsageLabelView != null) {
+                showBar(dataUsageLabelView.mDataUsageVisibility && SecPanelSplitHelper.isEnabled());
+                this.mDataUsageLabelView.mVisibilityChangedListener = this;
+            }
         }
     }
 
     @Override // com.android.systemui.qs.bar.BarItemImpl
-    public final void setExpanded(boolean z) {
+    public final void setExpanded(boolean z) throws Resources.NotFoundException {
         if (QpRune.QUICK_DATA_USAGE_LABEL) {
-            showBar(z && SecPanelSplitHelper.isEnabled());
+            DataUsageLabelView dataUsageLabelView = this.mDataUsageLabelView;
+            showBar(dataUsageLabelView != null && dataUsageLabelView.mDataUsageVisibility && SecPanelSplitHelper.isEnabled());
             QSSecurityFooter qSSecurityFooter = this.mSecurityFooter;
             if (qSSecurityFooter == null || !z || this.mIsSecurityFooterVisible == qSSecurityFooter.mIsVisible) {
                 return;
@@ -65,7 +80,7 @@ public class DataUsageBar extends BarItemImpl {
     }
 
     @Override // com.android.systemui.qs.bar.BarItemImpl
-    public final void updateHeightMargins() {
+    public final void updateHeightMargins() throws Resources.NotFoundException {
         if (QpRune.QUICK_DATA_USAGE_LABEL) {
             Resources resources = this.mContext.getResources();
             int dimensionPixelSize = resources.getDimensionPixelSize(R.dimen.bar_bottom_margin_security_footer);
@@ -74,8 +89,10 @@ public class DataUsageBar extends BarItemImpl {
             layoutParams.bottomMargin = dimensionPixelSize;
             if (this.mIsSecurityFooterVisible) {
                 layoutParams.topMargin = resources.getDimensionPixelSize(R.dimen.data_usage_bar_top_margin_with_security_footer);
-            } else {
+            } else if (!this.mIsLandScape || ((SecQsUiDisplayModeInteractor) Dependency.sDependency.getDependencyInner(SecQsUiDisplayModeInteractor.class)).isTablet()) {
                 layoutParams.topMargin = dimensionPixelSize;
+            } else {
+                layoutParams.topMargin = dimensionPixelSize - resources.getDimensionPixelSize(R.dimen.bar_top_margin);
             }
             linearLayout.setLayoutParams(layoutParams);
         }

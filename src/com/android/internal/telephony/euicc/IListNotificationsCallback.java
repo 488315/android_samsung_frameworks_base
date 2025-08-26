@@ -45,9 +45,9 @@ public interface IListNotificationsCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IListNotificationsCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IListNotificationsCallback)) {
-                return (IListNotificationsCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IListNotificationsCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IListNotificationsCallback)) {
+                return (IListNotificationsCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,10 +74,10 @@ public interface IListNotificationsCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 EuiccNotification[] euiccNotificationArr = (EuiccNotification[]) parcel.createTypedArray(EuiccNotification.CREATOR);
                 parcel.enforceNoDataAvail();
-                onComplete(readInt, euiccNotificationArr);
+                onComplete(i3, euiccNotificationArr);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -101,14 +101,14 @@ public interface IListNotificationsCallback extends IInterface {
 
             @Override // com.android.internal.telephony.euicc.IListNotificationsCallback
             public void onComplete(int i, EuiccNotification[] euiccNotificationArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IListNotificationsCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedArray(euiccNotificationArr, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IListNotificationsCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedArray(euiccNotificationArr, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

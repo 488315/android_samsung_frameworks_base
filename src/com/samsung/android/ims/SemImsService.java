@@ -236,9 +236,9 @@ public interface SemImsService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(SemImsService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof SemImsService)) {
-                return (SemImsService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(SemImsService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof SemImsService)) {
+                return (SemImsService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -316,183 +316,183 @@ public interface SemImsService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    SemImsRegiListener asInterface = SemImsRegiListener.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt = parcel.readInt();
+                    SemImsRegiListener semImsRegiListenerAsInterface = SemImsRegiListener.Stub.asInterface(parcel.readStrongBinder());
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    String registerImsRegistrationListenerForSlot = registerImsRegistrationListenerForSlot(asInterface, readInt);
+                    String strRegisterImsRegistrationListenerForSlot = registerImsRegistrationListenerForSlot(semImsRegiListenerAsInterface, i3);
                     parcel2.writeNoException();
-                    parcel2.writeString(registerImsRegistrationListenerForSlot);
+                    parcel2.writeString(strRegisterImsRegistrationListenerForSlot);
                     return true;
                 case 2:
-                    String readString = parcel.readString();
-                    int readInt2 = parcel.readInt();
+                    String string = parcel.readString();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    unregisterImsRegistrationListenerForSlot(readString, readInt2);
+                    unregisterImsRegistrationListenerForSlot(string, i4);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    SemSimMobStatusListener asInterface2 = SemSimMobStatusListener.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt3 = parcel.readInt();
+                    SemSimMobStatusListener semSimMobStatusListenerAsInterface = SemSimMobStatusListener.Stub.asInterface(parcel.readStrongBinder());
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    String registerSimMobilityStatusListener = registerSimMobilityStatusListener(asInterface2, readInt3);
+                    String strRegisterSimMobilityStatusListener = registerSimMobilityStatusListener(semSimMobStatusListenerAsInterface, i5);
                     parcel2.writeNoException();
-                    parcel2.writeString(registerSimMobilityStatusListener);
+                    parcel2.writeString(strRegisterSimMobilityStatusListener);
                     return true;
                 case 4:
-                    String readString2 = parcel.readString();
-                    int readInt4 = parcel.readInt();
+                    String string2 = parcel.readString();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    unregisterSimMobilityStatusListener(readString2, readInt4);
+                    unregisterSimMobilityStatusListener(string2, i6);
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    SemImsDmConfigListener asInterface3 = SemImsDmConfigListener.Stub.asInterface(parcel.readStrongBinder());
+                    SemImsDmConfigListener semImsDmConfigListenerAsInterface = SemImsDmConfigListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerDmValueListener(asInterface3);
+                    registerDmValueListener(semImsDmConfigListenerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 6:
-                    SemImsDmConfigListener asInterface4 = SemImsDmConfigListener.Stub.asInterface(parcel.readStrongBinder());
+                    SemImsDmConfigListener semImsDmConfigListenerAsInterface2 = SemImsDmConfigListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterDmValueListener(asInterface4);
+                    unregisterDmValueListener(semImsDmConfigListenerAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 7:
-                    String readString3 = parcel.readString();
-                    int readInt5 = parcel.readInt();
+                    String string3 = parcel.readString();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    SemImsRegistration registrationInfoByServiceType = getRegistrationInfoByServiceType(readString3, readInt5);
+                    SemImsRegistration registrationInfoByServiceType = getRegistrationInfoByServiceType(string3, i7);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(registrationInfoByServiceType, 1);
                     return true;
                 case 8:
-                    int readInt6 = parcel.readInt();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    SemImsRegistration[] registrationInfoByPhoneId = getRegistrationInfoByPhoneId(readInt6);
+                    SemImsRegistration[] registrationInfoByPhoneId = getRegistrationInfoByPhoneId(i8);
                     parcel2.writeNoException();
                     parcel2.writeTypedArray(registrationInfoByPhoneId, 1);
                     return true;
                 case 9:
-                    String readString4 = parcel.readString();
-                    int readInt7 = parcel.readInt();
-                    int readInt8 = parcel.readInt();
+                    String string4 = parcel.readString();
+                    int i9 = parcel.readInt();
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isServiceAvailable = isServiceAvailable(readString4, readInt7, readInt8);
+                    boolean zIsServiceAvailable = isServiceAvailable(string4, i9, i10);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isServiceAvailable);
+                    parcel2.writeBoolean(zIsServiceAvailable);
                     return true;
                 case 10:
-                    int readInt9 = parcel.readInt();
+                    int i11 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isNonVerifiedMno = isNonVerifiedMno(readInt9);
+                    boolean zIsNonVerifiedMno = isNonVerifiedMno(i11);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isNonVerifiedMno);
+                    parcel2.writeBoolean(zIsNonVerifiedMno);
                     return true;
                 case 11:
-                    int readInt10 = parcel.readInt();
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    String rcsProfileType = getRcsProfileType(readInt10);
+                    String rcsProfileType = getRcsProfileType(i12);
                     parcel2.writeNoException();
                     parcel2.writeString(rcsProfileType);
                     return true;
                 case 12:
-                    int readInt11 = parcel.readInt();
+                    int i13 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isVoLteAvailable = isVoLteAvailable(readInt11);
+                    boolean zIsVoLteAvailable = isVoLteAvailable(i13);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isVoLteAvailable);
+                    parcel2.writeBoolean(zIsVoLteAvailable);
                     return true;
                 case 13:
-                    int readInt12 = parcel.readInt();
+                    int i14 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isSimMobilityActivated = isSimMobilityActivated(readInt12);
+                    boolean zIsSimMobilityActivated = isSimMobilityActivated(i14);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSimMobilityActivated);
+                    parcel2.writeBoolean(zIsSimMobilityActivated);
                     return true;
                 case 14:
-                    int readInt13 = parcel.readInt();
-                    int readInt14 = parcel.readInt();
+                    int i15 = parcel.readInt();
+                    int i16 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setRttMode(readInt13, readInt14);
+                    setRttMode(i15, i16);
                     parcel2.writeNoException();
                     return true;
                 case 15:
-                    int readInt15 = parcel.readInt();
+                    int i17 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    sendTryRegisterByPhoneId(readInt15);
+                    sendTryRegisterByPhoneId(i17);
                     parcel2.writeNoException();
                     return true;
                 case 16:
-                    boolean readBoolean = parcel.readBoolean();
-                    int readInt16 = parcel.readInt();
+                    boolean z = parcel.readBoolean();
+                    int i18 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    enableRcsByPhoneId(readBoolean, readInt16);
+                    enableRcsByPhoneId(z, i18);
                     parcel2.writeNoException();
                     return true;
                 case 17:
-                    boolean readBoolean2 = parcel.readBoolean();
-                    int readInt17 = parcel.readInt();
+                    boolean z2 = parcel.readBoolean();
+                    int i19 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isRcsEnabled = isRcsEnabled(readBoolean2, readInt17);
+                    boolean zIsRcsEnabled = isRcsEnabled(z2, i19);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isRcsEnabled);
+                    parcel2.writeBoolean(zIsRcsEnabled);
                     return true;
                 case 18:
-                    int readInt18 = parcel.readInt();
+                    int i20 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    SemImsProfile[] currentProfileForSlot = getCurrentProfileForSlot(readInt18);
+                    SemImsProfile[] currentProfileForSlot = getCurrentProfileForSlot(i20);
                     parcel2.writeNoException();
                     parcel2.writeTypedArray(currentProfileForSlot, 1);
                     return true;
                 case 19:
-                    int readInt19 = parcel.readInt();
+                    int i21 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isForbiddenByPhoneId = isForbiddenByPhoneId(readInt19);
+                    boolean zIsForbiddenByPhoneId = isForbiddenByPhoneId(i21);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isForbiddenByPhoneId);
+                    parcel2.writeBoolean(zIsForbiddenByPhoneId);
                     return true;
                 case 20:
-                    String[] createStringArray = parcel.createStringArray();
-                    int readInt20 = parcel.readInt();
+                    String[] strArrCreateStringArray = parcel.createStringArray();
+                    int i22 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    ContentValues configValues = getConfigValues(createStringArray, readInt20);
+                    ContentValues configValues = getConfigValues(strArrCreateStringArray, i22);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(configValues, 1);
                     return true;
                 case 21:
-                    String readString5 = parcel.readString();
-                    int readInt21 = parcel.readInt();
+                    String string5 = parcel.readString();
+                    int i23 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean booleanConfig = getBooleanConfig(readString5, readInt21);
+                    boolean booleanConfig = getBooleanConfig(string5, i23);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(booleanConfig);
                     return true;
                 case 22:
-                    ISemEpdgListener asInterface5 = ISemEpdgListener.Stub.asInterface(parcel.readStrongBinder());
+                    ISemEpdgListener iSemEpdgListenerAsInterface = ISemEpdgListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    String registerEpdgListener = registerEpdgListener(asInterface5);
+                    String strRegisterEpdgListener = registerEpdgListener(iSemEpdgListenerAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeString(registerEpdgListener);
+                    parcel2.writeString(strRegisterEpdgListener);
                     return true;
                 case 23:
-                    String readString6 = parcel.readString();
+                    String string6 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    unRegisterEpdgListener(readString6);
+                    unRegisterEpdgListener(string6);
                     parcel2.writeNoException();
                     return true;
                 case 24:
-                    int readInt22 = parcel.readInt();
+                    int i24 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isCrossSimCallingRegistered = isCrossSimCallingRegistered(readInt22);
+                    boolean zIsCrossSimCallingRegistered = isCrossSimCallingRegistered(i24);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isCrossSimCallingRegistered);
+                    parcel2.writeBoolean(zIsCrossSimCallingRegistered);
                     return true;
                 case 25:
-                    int readInt23 = parcel.readInt();
+                    int i25 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean hasCrossSimCallingSupport = hasCrossSimCallingSupport(readInt23);
+                    boolean zHasCrossSimCallingSupport = hasCrossSimCallingSupport(i25);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(hasCrossSimCallingSupport);
+                    parcel2.writeBoolean(zHasCrossSimCallingSupport);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -517,405 +517,405 @@ public interface SemImsService extends IInterface {
 
             @Override // com.samsung.android.ims.SemImsService
             public String registerImsRegistrationListenerForSlot(SemImsRegiListener semImsRegiListener, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(SemImsService.DESCRIPTOR);
-                    obtain.writeStrongInterface(semImsRegiListener);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(SemImsService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(semImsRegiListener);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.ims.SemImsService
             public void unregisterImsRegistrationListenerForSlot(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(SemImsService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(SemImsService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.ims.SemImsService
             public String registerSimMobilityStatusListener(SemSimMobStatusListener semSimMobStatusListener, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(SemImsService.DESCRIPTOR);
-                    obtain.writeStrongInterface(semSimMobStatusListener);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(SemImsService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(semSimMobStatusListener);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.ims.SemImsService
             public void unregisterSimMobilityStatusListener(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(SemImsService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(SemImsService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.ims.SemImsService
             public void registerDmValueListener(SemImsDmConfigListener semImsDmConfigListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(SemImsService.DESCRIPTOR);
-                    obtain.writeStrongInterface(semImsDmConfigListener);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(SemImsService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(semImsDmConfigListener);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.ims.SemImsService
             public void unregisterDmValueListener(SemImsDmConfigListener semImsDmConfigListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(SemImsService.DESCRIPTOR);
-                    obtain.writeStrongInterface(semImsDmConfigListener);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(SemImsService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(semImsDmConfigListener);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.ims.SemImsService
             public SemImsRegistration getRegistrationInfoByServiceType(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(SemImsService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (SemImsRegistration) obtain2.readTypedObject(SemImsRegistration.CREATOR);
+                    parcelObtain.writeInterfaceToken(SemImsService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (SemImsRegistration) parcelObtain2.readTypedObject(SemImsRegistration.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.ims.SemImsService
             public SemImsRegistration[] getRegistrationInfoByPhoneId(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(SemImsService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (SemImsRegistration[]) obtain2.createTypedArray(SemImsRegistration.CREATOR);
+                    parcelObtain.writeInterfaceToken(SemImsService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (SemImsRegistration[]) parcelObtain2.createTypedArray(SemImsRegistration.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.ims.SemImsService
             public boolean isServiceAvailable(String str, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(SemImsService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(SemImsService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.ims.SemImsService
             public boolean isNonVerifiedMno(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(SemImsService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(SemImsService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.ims.SemImsService
             public String getRcsProfileType(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(SemImsService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(SemImsService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.ims.SemImsService
             public boolean isVoLteAvailable(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(SemImsService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(SemImsService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.ims.SemImsService
             public boolean isSimMobilityActivated(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(SemImsService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(SemImsService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.ims.SemImsService
             public void setRttMode(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(SemImsService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(SemImsService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.ims.SemImsService
             public void sendTryRegisterByPhoneId(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(SemImsService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(SemImsService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.ims.SemImsService
             public void enableRcsByPhoneId(boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(SemImsService.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(SemImsService.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.ims.SemImsService
             public boolean isRcsEnabled(boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(SemImsService.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(SemImsService.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.ims.SemImsService
             public SemImsProfile[] getCurrentProfileForSlot(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(SemImsService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (SemImsProfile[]) obtain2.createTypedArray(SemImsProfile.CREATOR);
+                    parcelObtain.writeInterfaceToken(SemImsService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (SemImsProfile[]) parcelObtain2.createTypedArray(SemImsProfile.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.ims.SemImsService
             public boolean isForbiddenByPhoneId(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(SemImsService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(SemImsService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.ims.SemImsService
             public ContentValues getConfigValues(String[] strArr, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(SemImsService.DESCRIPTOR);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ContentValues) obtain2.readTypedObject(ContentValues.CREATOR);
+                    parcelObtain.writeInterfaceToken(SemImsService.DESCRIPTOR);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ContentValues) parcelObtain2.readTypedObject(ContentValues.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.ims.SemImsService
             public boolean getBooleanConfig(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(SemImsService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(SemImsService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.ims.SemImsService
             public String registerEpdgListener(ISemEpdgListener iSemEpdgListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(SemImsService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSemEpdgListener);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(SemImsService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSemEpdgListener);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.ims.SemImsService
             public void unRegisterEpdgListener(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(SemImsService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(SemImsService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.ims.SemImsService
             public boolean isCrossSimCallingRegistered(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(SemImsService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(SemImsService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.ims.SemImsService
             public boolean hasCrossSimCallingSupport(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(SemImsService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(SemImsService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

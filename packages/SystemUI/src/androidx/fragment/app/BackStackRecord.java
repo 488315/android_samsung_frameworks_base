@@ -6,7 +6,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class BackStackRecord extends FragmentTransaction implements FragmentManager.OpGenerator {
     public boolean mCommitted;
@@ -14,29 +13,12 @@ public final class BackStackRecord extends FragmentTransaction implements Fragme
     public final FragmentManager mManager;
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public BackStackRecord(androidx.fragment.app.FragmentManager r3) {
-        /*
-            r2 = this;
-            androidx.fragment.app.FragmentFactory r0 = r3.getFragmentFactory()
-            androidx.fragment.app.FragmentHostCallback r1 = r3.mHost
-            if (r1 == 0) goto Lf
-            android.content.Context r1 = r1.context
-            java.lang.ClassLoader r1 = r1.getClassLoader()
-            goto L10
-        Lf:
-            r1 = 0
-        L10:
-            r2.<init>(r0, r1)
-            r0 = -1
-            r2.mIndex = r0
-            r2.mManager = r3
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.fragment.app.BackStackRecord.<init>(androidx.fragment.app.FragmentManager):void");
+    public BackStackRecord(FragmentManager fragmentManager) {
+        FragmentFactory fragmentFactory = fragmentManager.getFragmentFactory();
+        FragmentHostCallback fragmentHostCallback = fragmentManager.mHost;
+        super(fragmentFactory, fragmentHostCallback != null ? fragmentHostCallback.context.getClassLoader() : null);
+        this.mIndex = -1;
+        this.mManager = fragmentManager;
     }
 
     public final void bumpBackStackNesting(int i) {
@@ -236,35 +218,13 @@ public final class BackStackRecord extends FragmentTransaction implements Fragme
     }
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public BackStackRecord(androidx.fragment.app.BackStackRecord r3) {
-        /*
-            r2 = this;
-            androidx.fragment.app.FragmentManager r0 = r3.mManager
-            androidx.fragment.app.FragmentFactory r0 = r0.getFragmentFactory()
-            androidx.fragment.app.FragmentManager r1 = r3.mManager
-            androidx.fragment.app.FragmentHostCallback r1 = r1.mHost
-            if (r1 == 0) goto L13
-            android.content.Context r1 = r1.context
-            java.lang.ClassLoader r1 = r1.getClassLoader()
-            goto L14
-        L13:
-            r1 = 0
-        L14:
-            r2.<init>(r0, r1, r3)
-            r0 = -1
-            r2.mIndex = r0
-            androidx.fragment.app.FragmentManager r0 = r3.mManager
-            r2.mManager = r0
-            boolean r0 = r3.mCommitted
-            r2.mCommitted = r0
-            int r3 = r3.mIndex
-            r2.mIndex = r3
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.fragment.app.BackStackRecord.<init>(androidx.fragment.app.BackStackRecord):void");
+    public BackStackRecord(BackStackRecord backStackRecord) {
+        FragmentFactory fragmentFactory = backStackRecord.mManager.getFragmentFactory();
+        FragmentHostCallback fragmentHostCallback = backStackRecord.mManager.mHost;
+        super(fragmentFactory, fragmentHostCallback != null ? fragmentHostCallback.context.getClassLoader() : null, backStackRecord);
+        this.mIndex = -1;
+        this.mManager = backStackRecord.mManager;
+        this.mCommitted = backStackRecord.mCommitted;
+        this.mIndex = backStackRecord.mIndex;
     }
 }

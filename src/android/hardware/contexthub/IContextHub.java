@@ -187,9 +187,9 @@ public interface IContextHub extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IContextHub)) {
-                return (IContextHub) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IContextHub)) {
+                return (IContextHub) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -221,62 +221,62 @@ public interface IContextHub extends IInterface {
                     parcel2.writeTypedList(contextHubs, 1);
                     return true;
                 case 2:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     NanoappBinary nanoappBinary = (NanoappBinary) parcel.readTypedObject(NanoappBinary.CREATOR);
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    loadNanoapp(readInt, nanoappBinary, readInt2);
+                    loadNanoapp(i3, nanoappBinary, i4);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    int readInt3 = parcel.readInt();
-                    long readLong = parcel.readLong();
-                    int readInt4 = parcel.readInt();
+                    int i5 = parcel.readInt();
+                    long j = parcel.readLong();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    unloadNanoapp(readInt3, readLong, readInt4);
+                    unloadNanoapp(i5, j, i6);
                     parcel2.writeNoException();
                     return true;
                 case 4:
-                    int readInt5 = parcel.readInt();
-                    long readLong2 = parcel.readLong();
-                    int readInt6 = parcel.readInt();
+                    int i7 = parcel.readInt();
+                    long j2 = parcel.readLong();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    disableNanoapp(readInt5, readLong2, readInt6);
+                    disableNanoapp(i7, j2, i8);
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    int readInt7 = parcel.readInt();
-                    long readLong3 = parcel.readLong();
-                    int readInt8 = parcel.readInt();
+                    int i9 = parcel.readInt();
+                    long j3 = parcel.readLong();
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    enableNanoapp(readInt7, readLong3, readInt8);
+                    enableNanoapp(i9, j3, i10);
                     parcel2.writeNoException();
                     return true;
                 case 6:
-                    byte readByte = parcel.readByte();
-                    boolean readBoolean = parcel.readBoolean();
+                    byte b = parcel.readByte();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    onSettingChanged(readByte, readBoolean);
+                    onSettingChanged(b, z);
                     parcel2.writeNoException();
                     return true;
                 case 7:
-                    int readInt9 = parcel.readInt();
+                    int i11 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    queryNanoapps(readInt9);
+                    queryNanoapps(i11);
                     parcel2.writeNoException();
                     return true;
                 case 8:
-                    int readInt10 = parcel.readInt();
-                    IContextHubCallback asInterface = IContextHubCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i12 = parcel.readInt();
+                    IContextHubCallback iContextHubCallbackAsInterface = IContextHubCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerCallback(readInt10, asInterface);
+                    registerCallback(i12, iContextHubCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 9:
-                    int readInt11 = parcel.readInt();
+                    int i13 = parcel.readInt();
                     ContextHubMessage contextHubMessage = (ContextHubMessage) parcel.readTypedObject(ContextHubMessage.CREATOR);
                     parcel.enforceNoDataAvail();
-                    sendMessageToHub(readInt11, contextHubMessage);
+                    sendMessageToHub(i13, contextHubMessage);
                     parcel2.writeNoException();
                     return true;
                 case 10:
@@ -286,15 +286,15 @@ public interface IContextHub extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 11:
-                    char readInt12 = (char) parcel.readInt();
+                    char c = (char) parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onHostEndpointDisconnected(readInt12);
+                    onHostEndpointDisconnected(c);
                     parcel2.writeNoException();
                     return true;
                 case 12:
-                    int readInt13 = parcel.readInt();
+                    int i14 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    long[] preloadedNanoappIds = getPreloadedNanoappIds(readInt13);
+                    long[] preloadedNanoappIds = getPreloadedNanoappIds(i14);
                     parcel2.writeNoException();
                     parcel2.writeLongArray(preloadedNanoappIds);
                     return true;
@@ -305,16 +305,16 @@ public interface IContextHub extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 14:
-                    boolean readBoolean2 = parcel.readBoolean();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setTestMode(readBoolean2);
+                    setTestMode(z2);
                     parcel2.writeNoException();
                     return true;
                 case 15:
-                    int readInt14 = parcel.readInt();
+                    int i15 = parcel.readInt();
                     MessageDeliveryStatus messageDeliveryStatus = (MessageDeliveryStatus) parcel.readTypedObject(MessageDeliveryStatus.CREATOR);
                     parcel.enforceNoDataAvail();
-                    sendMessageDeliveryStatusToHub(readInt14, messageDeliveryStatus);
+                    sendMessageDeliveryStatusToHub(i15, messageDeliveryStatus);
                     parcel2.writeNoException();
                     return true;
                 case 16:
@@ -328,12 +328,12 @@ public interface IContextHub extends IInterface {
                     parcel2.writeTypedList(endpoints, 1);
                     return true;
                 case 18:
-                    IEndpointCallback asInterface2 = IEndpointCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IEndpointCallback iEndpointCallbackAsInterface = IEndpointCallback.Stub.asInterface(parcel.readStrongBinder());
                     HubInfo hubInfo = (HubInfo) parcel.readTypedObject(HubInfo.CREATOR);
                     parcel.enforceNoDataAvail();
-                    IEndpointCommunication registerEndpointHub = registerEndpointHub(asInterface2, hubInfo);
+                    IEndpointCommunication iEndpointCommunicationRegisterEndpointHub = registerEndpointHub(iEndpointCallbackAsInterface, hubInfo);
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(registerEndpointHub);
+                    parcel2.writeStrongInterface(iEndpointCommunicationRegisterEndpointHub);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -360,340 +360,340 @@ public interface IContextHub extends IInterface {
 
             @Override // android.hardware.contexthub.IContextHub
             public List<ContextHubInfo> getContextHubs() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(1, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(1, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getContextHubs is unimplemented.");
                     }
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(ContextHubInfo.CREATOR);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(ContextHubInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.contexthub.IContextHub
             public void loadNanoapp(int i, NanoappBinary nanoappBinary, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(nanoappBinary, 0);
-                    obtain.writeInt(i2);
-                    if (!this.mRemote.transact(2, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(nanoappBinary, 0);
+                    parcelObtain.writeInt(i2);
+                    if (!this.mRemote.transact(2, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method loadNanoapp is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.contexthub.IContextHub
             public void unloadNanoapp(int i, long j, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i2);
-                    if (!this.mRemote.transact(3, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i2);
+                    if (!this.mRemote.transact(3, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method unloadNanoapp is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.contexthub.IContextHub
             public void disableNanoapp(int i, long j, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i2);
-                    if (!this.mRemote.transact(4, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i2);
+                    if (!this.mRemote.transact(4, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method disableNanoapp is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.contexthub.IContextHub
             public void enableNanoapp(int i, long j, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i2);
-                    if (!this.mRemote.transact(5, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i2);
+                    if (!this.mRemote.transact(5, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method enableNanoapp is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.contexthub.IContextHub
             public void onSettingChanged(byte b, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeByte(b);
-                    obtain.writeBoolean(z);
-                    if (!this.mRemote.transact(6, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeByte(b);
+                    parcelObtain.writeBoolean(z);
+                    if (!this.mRemote.transact(6, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method onSettingChanged is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.contexthub.IContextHub
             public void queryNanoapps(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (!this.mRemote.transact(7, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (!this.mRemote.transact(7, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method queryNanoapps is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.contexthub.IContextHub
             public void registerCallback(int i, IContextHubCallback iContextHubCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iContextHubCallback);
-                    if (!this.mRemote.transact(8, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iContextHubCallback);
+                    if (!this.mRemote.transact(8, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method registerCallback is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.contexthub.IContextHub
             public void sendMessageToHub(int i, ContextHubMessage contextHubMessage) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(contextHubMessage, 0);
-                    if (!this.mRemote.transact(9, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(contextHubMessage, 0);
+                    if (!this.mRemote.transact(9, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method sendMessageToHub is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.contexthub.IContextHub
             public void onHostEndpointConnected(HostEndpointInfo hostEndpointInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(hostEndpointInfo, 0);
-                    if (!this.mRemote.transact(10, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(hostEndpointInfo, 0);
+                    if (!this.mRemote.transact(10, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method onHostEndpointConnected is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.contexthub.IContextHub
             public void onHostEndpointDisconnected(char c) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(c);
-                    if (!this.mRemote.transact(11, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(c);
+                    if (!this.mRemote.transact(11, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method onHostEndpointDisconnected is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.contexthub.IContextHub
             public long[] getPreloadedNanoappIds(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (!this.mRemote.transact(12, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (!this.mRemote.transact(12, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getPreloadedNanoappIds is unimplemented.");
                     }
-                    obtain2.readException();
-                    return obtain2.createLongArray();
+                    parcelObtain2.readException();
+                    return parcelObtain2.createLongArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.contexthub.IContextHub
             public void onNanSessionStateChanged(NanSessionStateUpdate nanSessionStateUpdate) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeTypedObject(nanSessionStateUpdate, 0);
-                    if (!this.mRemote.transact(13, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeTypedObject(nanSessionStateUpdate, 0);
+                    if (!this.mRemote.transact(13, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method onNanSessionStateChanged is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.contexthub.IContextHub
             public void setTestMode(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    if (!this.mRemote.transact(14, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    if (!this.mRemote.transact(14, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method setTestMode is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.contexthub.IContextHub
             public void sendMessageDeliveryStatusToHub(int i, MessageDeliveryStatus messageDeliveryStatus) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(messageDeliveryStatus, 0);
-                    if (!this.mRemote.transact(15, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(messageDeliveryStatus, 0);
+                    if (!this.mRemote.transact(15, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method sendMessageDeliveryStatusToHub is unimplemented.");
                     }
-                    obtain2.readException();
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.contexthub.IContextHub
             public List<HubInfo> getHubs() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(16, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(16, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getHubs is unimplemented.");
                     }
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(HubInfo.CREATOR);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(HubInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.contexthub.IContextHub
             public List<EndpointInfo> getEndpoints() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(17, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(17, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method getEndpoints is unimplemented.");
                     }
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(EndpointInfo.CREATOR);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(EndpointInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.contexthub.IContextHub
             public IEndpointCommunication registerEndpointHub(IEndpointCallback iEndpointCallback, HubInfo hubInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeStrongInterface(iEndpointCallback);
-                    obtain.writeTypedObject(hubInfo, 0);
-                    boolean transact = this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.setPropagateAllowBlocking();
-                    if (!transact) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iEndpointCallback);
+                    parcelObtain.writeTypedObject(hubInfo, 0);
+                    boolean zTransact = this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.setPropagateAllowBlocking();
+                    if (!zTransact) {
                         throw new RemoteException("Method registerEndpointHub is unimplemented.");
                     }
-                    obtain2.readException();
-                    return IEndpointCommunication.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain2.readException();
+                    return IEndpointCommunication.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.contexthub.IContextHub
             public int getInterfaceVersion() throws RemoteException {
                 if (this.mCachedVersion == -1) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777215, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedVersion = obtain2.readInt();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777215, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedVersion = parcelObtain2.readInt();
                     } finally {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     }
                 }
                 return this.mCachedVersion;
@@ -702,18 +702,18 @@ public interface IContextHub extends IInterface {
             @Override // android.hardware.contexthub.IContextHub
             public synchronized String getInterfaceHash() throws RemoteException {
                 if ("-1".equals(this.mCachedHash)) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777214, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedHash = obtain2.readString();
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777214, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedHash = parcelObtain2.readString();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     } catch (Throwable th) {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                         throw th;
                     }
                 }

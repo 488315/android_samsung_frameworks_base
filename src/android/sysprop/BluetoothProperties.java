@@ -302,9 +302,7 @@ public final class BluetoothProperties {
         return tryParseList(new Function() { // from class: android.sysprop.BluetoothProperties$$ExternalSyntheticLambda6
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                String tryParseString;
-                tryParseString = BluetoothProperties.tryParseString((String) obj);
-                return tryParseString;
+                return BluetoothProperties.tryParseString((String) obj);
             }
         }, SystemProperties.get("persist.bluetooth.leaudio.allow_list"));
     }
@@ -349,9 +347,7 @@ public final class BluetoothProperties {
         return tryParseList(new Function() { // from class: android.sysprop.BluetoothProperties$$ExternalSyntheticLambda4
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                Integer tryParseUInt;
-                tryParseUInt = BluetoothProperties.tryParseUInt((String) obj);
-                return tryParseUInt;
+                return BluetoothProperties.tryParseUInt((String) obj);
             }
         }, SystemProperties.get("bluetooth.device.class_of_device"));
     }
@@ -548,9 +544,7 @@ public final class BluetoothProperties {
         return tryParseList(new Function() { // from class: android.sysprop.BluetoothProperties$$ExternalSyntheticLambda0
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                Integer tryParseUInt;
-                tryParseUInt = BluetoothProperties.tryParseUInt((String) obj);
-                return tryParseUInt;
+                return BluetoothProperties.tryParseUInt((String) obj);
             }
         }, SystemProperties.get("bluetooth.core.classic.sniff_max_intervals"));
     }
@@ -559,9 +553,7 @@ public final class BluetoothProperties {
         return tryParseList(new Function() { // from class: android.sysprop.BluetoothProperties$$ExternalSyntheticLambda5
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                Integer tryParseUInt;
-                tryParseUInt = BluetoothProperties.tryParseUInt((String) obj);
-                return tryParseUInt;
+                return BluetoothProperties.tryParseUInt((String) obj);
             }
         }, SystemProperties.get("bluetooth.core.classic.sniff_min_intervals"));
     }
@@ -570,9 +562,7 @@ public final class BluetoothProperties {
         return tryParseList(new Function() { // from class: android.sysprop.BluetoothProperties$$ExternalSyntheticLambda2
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                Integer tryParseUInt;
-                tryParseUInt = BluetoothProperties.tryParseUInt((String) obj);
-                return tryParseUInt;
+                return BluetoothProperties.tryParseUInt((String) obj);
             }
         }, SystemProperties.get("bluetooth.core.classic.sniff_attempts"));
     }
@@ -581,9 +571,7 @@ public final class BluetoothProperties {
         return tryParseList(new Function() { // from class: android.sysprop.BluetoothProperties$$ExternalSyntheticLambda3
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                Integer tryParseUInt;
-                tryParseUInt = BluetoothProperties.tryParseUInt((String) obj);
-                return tryParseUInt;
+                return BluetoothProperties.tryParseUInt((String) obj);
             }
         }, SystemProperties.get("bluetooth.core.classic.sniff_timeouts"));
     }
@@ -672,9 +660,7 @@ public final class BluetoothProperties {
         return tryParseList(new Function() { // from class: android.sysprop.BluetoothProperties$$ExternalSyntheticLambda1
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                String tryParseString;
-                tryParseString = BluetoothProperties.tryParseString((String) obj);
-                return tryParseString;
+                return BluetoothProperties.tryParseString((String) obj);
             }
         }, SystemProperties.get("bluetooth.core.le.dsa_transport_preference"));
     }

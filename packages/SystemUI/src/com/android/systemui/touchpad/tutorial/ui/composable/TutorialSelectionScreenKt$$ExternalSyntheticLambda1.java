@@ -8,7 +8,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class TutorialSelectionScreenKt$$ExternalSyntheticLambda1 implements Function2 {
     public final /* synthetic */ int $r8$classId;
@@ -36,38 +35,38 @@ public final /* synthetic */ class TutorialSelectionScreenKt$$ExternalSyntheticL
         switch (this.$r8$classId) {
             case 0:
                 ((Integer) obj2).getClass();
-                int updateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(this.f$6 | 1);
+                int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(this.f$6 | 1);
                 Screen screen = this.f$4;
                 Modifier modifier = (Modifier) this.f$5;
-                TutorialSelectionScreenKt.HorizontalCompactSelectionButtons(this.f$0, this.f$1, this.f$2, this.f$3, screen, modifier, (Composer) obj, updateChangedFlags);
+                TutorialSelectionScreenKt.HorizontalCompactSelectionButtons(this.f$0, this.f$1, this.f$2, this.f$3, screen, modifier, (Composer) obj, iUpdateChangedFlags);
                 break;
             case 1:
                 ((Integer) obj2).getClass();
-                int updateChangedFlags2 = RecomposeScopeImplKt.updateChangedFlags(this.f$6 | 1);
+                int iUpdateChangedFlags2 = RecomposeScopeImplKt.updateChangedFlags(this.f$6 | 1);
                 Screen screen2 = this.f$4;
                 Modifier modifier2 = (Modifier) this.f$5;
-                TutorialSelectionScreenKt.VerticalSelectionButtons(this.f$0, this.f$1, this.f$2, this.f$3, screen2, modifier2, (Composer) obj, updateChangedFlags2);
+                TutorialSelectionScreenKt.VerticalSelectionButtons(this.f$0, this.f$1, this.f$2, this.f$3, screen2, modifier2, (Composer) obj, iUpdateChangedFlags2);
                 break;
             case 2:
                 ((Integer) obj2).getClass();
-                int updateChangedFlags3 = RecomposeScopeImplKt.updateChangedFlags(this.f$6 | 1);
+                int iUpdateChangedFlags3 = RecomposeScopeImplKt.updateChangedFlags(this.f$6 | 1);
                 Screen screen3 = this.f$4;
                 Modifier modifier3 = (Modifier) this.f$5;
-                TutorialSelectionScreenKt.HorizontalSelectionButtons(this.f$0, this.f$1, this.f$2, this.f$3, screen3, modifier3, (Composer) obj, updateChangedFlags3);
+                TutorialSelectionScreenKt.HorizontalSelectionButtons(this.f$0, this.f$1, this.f$2, this.f$3, screen3, modifier3, (Composer) obj, iUpdateChangedFlags3);
                 break;
             case 3:
                 ((Integer) obj2).getClass();
-                int updateChangedFlags4 = RecomposeScopeImplKt.updateChangedFlags(this.f$6 | 1);
+                int iUpdateChangedFlags4 = RecomposeScopeImplKt.updateChangedFlags(this.f$6 | 1);
                 Screen screen4 = this.f$4;
                 Modifier modifier4 = (Modifier) this.f$5;
-                TutorialSelectionScreenKt.FourTutorialButtons(this.f$0, this.f$1, this.f$2, this.f$3, screen4, modifier4, (Composer) obj, updateChangedFlags4);
+                TutorialSelectionScreenKt.FourTutorialButtons(this.f$0, this.f$1, this.f$2, this.f$3, screen4, modifier4, (Composer) obj, iUpdateChangedFlags4);
                 break;
             case 4:
                 ((Integer) obj2).getClass();
-                int updateChangedFlags5 = RecomposeScopeImplKt.updateChangedFlags(this.f$6 | 1);
+                int iUpdateChangedFlags5 = RecomposeScopeImplKt.updateChangedFlags(this.f$6 | 1);
                 Screen screen5 = this.f$4;
                 Modifier modifier5 = (Modifier) this.f$5;
-                TutorialSelectionScreenKt.TwoByTwoTutorialButtons(this.f$0, this.f$1, this.f$2, this.f$3, screen5, modifier5, (Composer) obj, updateChangedFlags5);
+                TutorialSelectionScreenKt.TwoByTwoTutorialButtons(this.f$0, this.f$1, this.f$2, this.f$3, screen5, modifier5, (Composer) obj, iUpdateChangedFlags5);
                 break;
             default:
                 ((Integer) obj2).intValue();

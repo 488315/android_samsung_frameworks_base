@@ -14,7 +14,6 @@ import kotlin.ranges.IntProgression;
 import kotlin.ranges.IntRange;
 import kotlin.sequences.SequencesKt___SequencesKt$asIterable$$inlined$Iterable$1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class StringsKt__StringsKt extends StringsKt__StringsJVMKt {
     public static boolean contains(CharSequence charSequence, CharSequence charSequence2, boolean z) {
@@ -30,6 +29,14 @@ public class StringsKt__StringsKt extends StringsKt__StringsJVMKt {
 
     public static boolean contains$default(CharSequence charSequence, char c) {
         return indexOf$default(charSequence, c, 0, 2) >= 0;
+    }
+
+    public static boolean endsWith$default(CharSequence charSequence, CharSequence charSequence2) {
+        if (charSequence instanceof String) {
+            return ((String) charSequence).endsWith((String) charSequence2);
+        }
+        String str = (String) charSequence2;
+        return regionMatchesImpl(charSequence, charSequence.length() - str.length(), charSequence2, 0, str.length(), false);
     }
 
     public static final int getLastIndex(CharSequence charSequence) {
@@ -122,9 +129,9 @@ public class StringsKt__StringsKt extends StringsKt__StringsJVMKt {
             return -1;
         }
         while (true) {
-            char charAt = charSequence.charAt(i);
+            char cCharAt = charSequence.charAt(i);
             for (char c : cArr) {
-                if (CharsKt__CharKt.equals(c, charAt, z)) {
+                if (CharsKt__CharKt.equals(c, cCharAt, z)) {
                     return i;
                 }
             }
@@ -150,12 +157,12 @@ public class StringsKt__StringsKt extends StringsKt__StringsJVMKt {
     }
 
     public static String padEnd(int i, String str) {
-        CharSequence charSequence;
+        CharSequence charSequenceSubSequence;
         if (i < 0) {
             throw new IllegalArgumentException(ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(i, "Desired length ", " is less than zero."));
         }
         if (i <= str.length()) {
-            charSequence = str.subSequence(0, str.length());
+            charSequenceSubSequence = str.subSequence(0, str.length());
         } else {
             StringBuilder sb = new StringBuilder(i);
             sb.append((CharSequence) str);
@@ -170,9 +177,9 @@ public class StringsKt__StringsKt extends StringsKt__StringsJVMKt {
                     i2++;
                 }
             }
-            charSequence = sb;
+            charSequenceSubSequence = sb;
         }
-        return charSequence.toString();
+        return charSequenceSubSequence.toString();
     }
 
     public static final boolean regionMatchesImpl(CharSequence charSequence, int i, CharSequence charSequence2, int i2, int i3, boolean z) {
@@ -206,8 +213,8 @@ public class StringsKt__StringsKt extends StringsKt__StringsJVMKt {
 
     public static final List split$StringsKt__StringsKt(CharSequence charSequence, String str, int i) {
         requireNonNegativeLimit(i);
-        int indexOf = indexOf(charSequence, str, 0, false);
-        if (indexOf == -1 || i == 1) {
+        int iIndexOf = indexOf(charSequence, str, 0, false);
+        if (iIndexOf == -1 || i == 1) {
             return Collections.singletonList(charSequence.toString());
         }
         boolean z = i > 0;
@@ -216,16 +223,16 @@ public class StringsKt__StringsKt extends StringsKt__StringsJVMKt {
             i2 = i;
         }
         ArrayList arrayList = new ArrayList(i2);
-        int i3 = 0;
+        int length = 0;
         do {
-            arrayList.add(charSequence.subSequence(i3, indexOf).toString());
-            i3 = str.length() + indexOf;
+            arrayList.add(charSequence.subSequence(length, iIndexOf).toString());
+            length = str.length() + iIndexOf;
             if (z && arrayList.size() == i - 1) {
                 break;
             }
-            indexOf = indexOf(charSequence, str, i3, false);
-        } while (indexOf != -1);
-        arrayList.add(charSequence.subSequence(i3, charSequence.length()).toString());
+            iIndexOf = indexOf(charSequence, str, length, false);
+        } while (iIndexOf != -1);
+        arrayList.add(charSequence.subSequence(length, charSequence.length()).toString());
         return arrayList;
     }
 
@@ -249,18 +256,18 @@ public class StringsKt__StringsKt extends StringsKt__StringsJVMKt {
     }
 
     public static String substringAfter$default(String str, char c) {
-        int indexOf$default = indexOf$default(str, c, 0, 6);
-        return indexOf$default == -1 ? str : str.substring(indexOf$default + 1, str.length());
+        int iIndexOf$default = indexOf$default(str, c, 0, 6);
+        return iIndexOf$default == -1 ? str : str.substring(iIndexOf$default + 1, str.length());
     }
 
     public static String substringAfterLast(String str, String str2) {
-        int lastIndexOf = str.lastIndexOf(46, getLastIndex(str));
-        return lastIndexOf == -1 ? str2 : str.substring(lastIndexOf + 1, str.length());
+        int iLastIndexOf = str.lastIndexOf(46, getLastIndex(str));
+        return iLastIndexOf == -1 ? str2 : str.substring(iLastIndexOf + 1, str.length());
     }
 
     public static String substringBefore$default(String str, String str2) {
-        int indexOf$default = indexOf$default(str, str2, 0, false, 6);
-        return indexOf$default == -1 ? str : str.substring(0, indexOf$default);
+        int iIndexOf$default = indexOf$default(str, str2, 0, false, 6);
+        return iIndexOf$default == -1 ? str : str.substring(0, iIndexOf$default);
     }
 
     public static Boolean toBooleanStrictOrNull(String str) {
@@ -278,13 +285,13 @@ public class StringsKt__StringsKt extends StringsKt__StringsJVMKt {
         int i = 0;
         boolean z = false;
         while (i <= length) {
-            boolean isWhitespace = CharsKt__CharJVMKt.isWhitespace(charSequence.charAt(!z ? i : length));
+            boolean zIsWhitespace = CharsKt__CharJVMKt.isWhitespace(charSequence.charAt(!z ? i : length));
             if (z) {
-                if (!isWhitespace) {
+                if (!zIsWhitespace) {
                     break;
                 }
                 length--;
-            } else if (isWhitespace) {
+            } else if (zIsWhitespace) {
                 i++;
             } else {
                 z = true;
@@ -294,8 +301,8 @@ public class StringsKt__StringsKt extends StringsKt__StringsJVMKt {
     }
 
     public static String substringAfter$default(String str, String str2) {
-        int indexOf$default = indexOf$default(str, str2, 0, false, 6);
-        return indexOf$default == -1 ? str : str.substring(str2.length() + indexOf$default, str.length());
+        int iIndexOf$default = indexOf$default(str, str2, 0, false, 6);
+        return iIndexOf$default == -1 ? str : str.substring(str2.length() + iIndexOf$default, str.length());
     }
 
     public static /* synthetic */ int indexOf$default(CharSequence charSequence, String str, int i, boolean z, int i2) {

@@ -45,9 +45,9 @@ public interface IIncidentAuthListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IIncidentAuthListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IIncidentAuthListener)) {
-                return (IIncidentAuthListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IIncidentAuthListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IIncidentAuthListener)) {
+                return (IIncidentAuthListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -104,23 +104,23 @@ public interface IIncidentAuthListener extends IInterface {
 
             @Override // android.os.IIncidentAuthListener
             public void onReportApproved() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IIncidentAuthListener.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IIncidentAuthListener.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IIncidentAuthListener
             public void onReportDenied() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IIncidentAuthListener.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IIncidentAuthListener.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -45,9 +45,9 @@ public interface IUnsafeIntentStrictModeCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IUnsafeIntentStrictModeCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IUnsafeIntentStrictModeCallback)) {
-                return (IUnsafeIntentStrictModeCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IUnsafeIntentStrictModeCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IUnsafeIntentStrictModeCallback)) {
+                return (IUnsafeIntentStrictModeCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,10 +74,10 @@ public interface IUnsafeIntentStrictModeCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 Intent intent = (Intent) parcel.readTypedObject(Intent.CREATOR);
                 parcel.enforceNoDataAvail();
-                onUnsafeIntent(readInt, intent);
+                onUnsafeIntent(i3, intent);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -101,14 +101,14 @@ public interface IUnsafeIntentStrictModeCallback extends IInterface {
 
             @Override // android.app.IUnsafeIntentStrictModeCallback
             public void onUnsafeIntent(int i, Intent intent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IUnsafeIntentStrictModeCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(intent, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IUnsafeIntentStrictModeCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(intent, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

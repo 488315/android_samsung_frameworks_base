@@ -73,7 +73,6 @@ import kotlin.jvm.internal.Ref$BooleanRef;
 import kotlin.jvm.internal.Ref$IntRef;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SceneTransitionLayoutImpl {
     public LookaheadScope _lookaheadScope;
@@ -100,7 +99,6 @@ public final class SceneTransitionLayoutImpl {
     public SwipeSourceDetector swipeSourceDetector;
     public final DraggableHandler verticalDraggableHandler;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SceneToCompose {
         public final boolean isInvisible;
         public final Scene scene;
@@ -163,7 +161,7 @@ public final class SceneTransitionLayoutImpl {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 ContentKey contentKey = (ContentKey) obj;
                 switch (i) {
                     case 0:
@@ -183,7 +181,7 @@ public final class SceneTransitionLayoutImpl {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 ContentKey contentKey = (ContentKey) obj;
                 switch (i2) {
                     case 0:
@@ -227,9 +225,9 @@ public final class SceneTransitionLayoutImpl {
                 ComposerKt.traceEventEnd();
             }
         }
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
-            endRestartGroup.block = new SceneTransitionLayoutImpl$$ExternalSyntheticLambda3(this, i, 1);
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new SceneTransitionLayoutImpl$$ExternalSyntheticLambda3(this, i, 1);
         }
     }
 
@@ -251,12 +249,12 @@ public final class SceneTransitionLayoutImpl {
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventStart("com.android.compose.animation.scene.SceneTransitionLayoutImpl.Content (SceneTransitionLayoutImpl.kt:455)");
             }
-            Modifier then = SwipeToSceneKt.swipeToScene(SwipeToSceneKt.swipeToScene(NestedScrollModifierKt.nestedScroll(modifier, this.nestedScrollConnection, this.nestedScrollDispatcher), this.horizontalDraggableHandler), this.verticalDraggableHandler).then(new LayoutElement(this, this.state.getTransitionState()));
+            Modifier modifierThen = SwipeToSceneKt.swipeToScene(SwipeToSceneKt.swipeToScene(NestedScrollModifierKt.nestedScroll(modifier, this.nestedScrollConnection, this.nestedScrollDispatcher), this.horizontalDraggableHandler), this.verticalDraggableHandler).then(new LayoutElement(this, this.state.getTransitionState()));
             Alignment.Companion.getClass();
-            MeasurePolicy maybeCachedBoxMeasurePolicy = BoxKt.maybeCachedBoxMeasurePolicy(Alignment.Companion.TopStart, false);
+            MeasurePolicy measurePolicyMaybeCachedBoxMeasurePolicy = BoxKt.maybeCachedBoxMeasurePolicy(Alignment.Companion.TopStart, false);
             int currentCompositeKeyHash = ComposablesKt.getCurrentCompositeKeyHash(composerImpl);
-            PersistentCompositionLocalMap currentCompositionLocalScope = composerImpl.currentCompositionLocalScope();
-            Modifier materializeModifier = ComposedModifierKt.materializeModifier(composerImpl, then);
+            PersistentCompositionLocalMap persistentCompositionLocalMapCurrentCompositionLocalScope = composerImpl.currentCompositionLocalScope();
+            Modifier modifierMaterializeModifier = ComposedModifierKt.materializeModifier(composerImpl, modifierThen);
             ComposeUiNode.Companion.getClass();
             Function0 function0 = ComposeUiNode.Companion.Constructor;
             if (composerImpl.applier == null) {
@@ -269,13 +267,13 @@ public final class SceneTransitionLayoutImpl {
             } else {
                 composerImpl.useNode();
             }
-            Updater.m336setimpl(composerImpl, maybeCachedBoxMeasurePolicy, ComposeUiNode.Companion.SetMeasurePolicy);
-            Updater.m336setimpl(composerImpl, currentCompositionLocalScope, ComposeUiNode.Companion.SetResolvedCompositionLocals);
+            Updater.m337setimpl(composerImpl, measurePolicyMaybeCachedBoxMeasurePolicy, ComposeUiNode.Companion.SetMeasurePolicy);
+            Updater.m337setimpl(composerImpl, persistentCompositionLocalMapCurrentCompositionLocalScope, ComposeUiNode.Companion.SetResolvedCompositionLocals);
             Function2 function2 = ComposeUiNode.Companion.SetCompositeKeyHash;
             if (composerImpl.inserting || !Intrinsics.areEqual(composerImpl.rememberedValue(), Integer.valueOf(currentCompositeKeyHash))) {
                 AnimatedContentKt$$ExternalSyntheticOutline0.m(currentCompositeKeyHash, composerImpl, currentCompositeKeyHash, function2);
             }
-            Updater.m336setimpl(composerImpl, materializeModifier, ComposeUiNode.Companion.SetModifier);
+            Updater.m337setimpl(composerImpl, modifierMaterializeModifier, ComposeUiNode.Companion.SetModifier);
             final BoxScopeInstance boxScopeInstance = BoxScopeInstance.INSTANCE;
             LookaheadScopeKt.LookaheadScope(ComposableLambdaKt.rememberComposableLambda(1261608669, new Function3() { // from class: com.android.compose.animation.scene.SceneTransitionLayoutImpl$Content$1$1
                 @Override // kotlin.jvm.functions.Function3
@@ -286,7 +284,7 @@ public final class SceneTransitionLayoutImpl {
                     if (ComposerKt.isTraceInProgress()) {
                         ComposerKt.traceEventStart("com.android.compose.animation.scene.SceneTransitionLayoutImpl.Content.<anonymous>.<anonymous> (SceneTransitionLayoutImpl.kt:469)");
                     }
-                    SceneTransitionLayoutImpl sceneTransitionLayoutImpl = SceneTransitionLayoutImpl.this;
+                    SceneTransitionLayoutImpl sceneTransitionLayoutImpl = this.this$0;
                     if (sceneTransitionLayoutImpl._lookaheadScope == null) {
                         sceneTransitionLayoutImpl._lookaheadScope = lookaheadScope;
                     }
@@ -304,14 +302,14 @@ public final class SceneTransitionLayoutImpl {
                 ComposerKt.traceEventEnd();
             }
         }
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
-            endRestartGroup.block = new Function2() { // from class: com.android.compose.animation.scene.SceneTransitionLayoutImpl$$ExternalSyntheticLambda0
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new Function2() { // from class: com.android.compose.animation.scene.SceneTransitionLayoutImpl$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj, Object obj2) {
                     ((Integer) obj2).intValue();
-                    int updateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i | 1);
-                    SceneTransitionLayoutImpl.this.Content$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout(modifier, (Composer) obj, updateChangedFlags);
+                    int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i | 1);
+                    this.f$0.Content$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout(modifier, (Composer) obj, iUpdateChangedFlags);
                     return Unit.INSTANCE;
                 }
             };
@@ -325,8 +323,8 @@ public final class SceneTransitionLayoutImpl {
     /* JADX WARN: Type inference failed for: r4v12, types: [java.util.ArrayList] */
     /* JADX WARN: Type inference failed for: r6v1, types: [androidx.compose.runtime.Composer, androidx.compose.runtime.ComposerImpl] */
     public final void Overlays(final BoxScope boxScope, Composer composer, final int i) {
-        ?? build;
-        List sortedWith;
+        ?? Build;
+        List listSortedWith;
         boolean z;
         ?? r6 = (ComposerImpl) composer;
         r6.startRestartGroup(118058814);
@@ -339,58 +337,58 @@ public final class SceneTransitionLayoutImpl {
             }
             boolean z2 = false;
             if (this._overlays == null) {
-                sortedWith = EmptyList.INSTANCE;
+                listSortedWith = EmptyList.INSTANCE;
             } else {
                 MutableSceneTransitionLayoutStateImpl mutableSceneTransitionLayoutStateImpl = this.state;
                 List currentTransitions = mutableSceneTransitionLayoutStateImpl.getCurrentTransitions();
                 if (currentTransitions.isEmpty()) {
                     Set currentOverlays = mutableSceneTransitionLayoutStateImpl.getTransitionState().getCurrentOverlays();
-                    build = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(currentOverlays, 10));
+                    Build = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(currentOverlays, 10));
                     Iterator it = currentOverlays.iterator();
                     while (it.hasNext()) {
-                        build.add(overlay$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout((OverlayKey) it.next()));
+                        Build.add(overlay$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout((OverlayKey) it.next()));
                     }
                 } else {
-                    ListBuilder createListBuilder = CollectionsKt__CollectionsJVMKt.createListBuilder();
+                    ListBuilder listBuilderCreateListBuilder = CollectionsKt__CollectionsJVMKt.createListBuilder();
                     LinkedHashSet linkedHashSet = new LinkedHashSet();
                     int size = currentTransitions.size();
                     for (int i3 = 0; i3 < size; i3++) {
                         TransitionState.Transition transition = (TransitionState.Transition) currentTransitions.get(i3);
                         if (!(transition instanceof TransitionState.Transition.ChangeScene)) {
                             if (transition instanceof TransitionState.Transition.ShowOrHideOverlay) {
-                                overlaysToComposeOrderedByZIndex$lambda$37$maybeAdd$34(linkedHashSet, createListBuilder, this, ((TransitionState.Transition.ShowOrHideOverlay) transition).overlay);
+                                overlaysToComposeOrderedByZIndex$lambda$37$maybeAdd$34(linkedHashSet, listBuilderCreateListBuilder, this, ((TransitionState.Transition.ShowOrHideOverlay) transition).overlay);
                             } else {
                                 if (!(transition instanceof TransitionState.Transition.ReplaceOverlay)) {
                                     throw new NoWhenBranchMatchedException();
                                 }
                                 TransitionState.Transition.ReplaceOverlay replaceOverlay = (TransitionState.Transition.ReplaceOverlay) transition;
-                                overlaysToComposeOrderedByZIndex$lambda$37$maybeAdd$34(linkedHashSet, createListBuilder, this, replaceOverlay.fromOverlay);
-                                overlaysToComposeOrderedByZIndex$lambda$37$maybeAdd$34(linkedHashSet, createListBuilder, this, replaceOverlay.toOverlay);
+                                overlaysToComposeOrderedByZIndex$lambda$37$maybeAdd$34(linkedHashSet, listBuilderCreateListBuilder, this, replaceOverlay.fromOverlay);
+                                overlaysToComposeOrderedByZIndex$lambda$37$maybeAdd$34(linkedHashSet, listBuilderCreateListBuilder, this, replaceOverlay.toOverlay);
                             }
                         }
                     }
                     Iterator it2 = ((TransitionState.Transition) CollectionsKt___CollectionsKt.last(currentTransitions)).getCurrentOverlays().iterator();
                     while (it2.hasNext()) {
-                        overlaysToComposeOrderedByZIndex$lambda$37$maybeAdd$34(linkedHashSet, createListBuilder, this, (OverlayKey) it2.next());
+                        overlaysToComposeOrderedByZIndex$lambda$37$maybeAdd$34(linkedHashSet, listBuilderCreateListBuilder, this, (OverlayKey) it2.next());
                     }
-                    build = createListBuilder.build();
+                    Build = listBuilderCreateListBuilder.build();
                 }
-                sortedWith = CollectionsKt___CollectionsKt.sortedWith(build, new Comparator() { // from class: com.android.compose.animation.scene.SceneTransitionLayoutImpl$overlaysToComposeOrderedByZIndex$$inlined$sortedBy$1
+                listSortedWith = CollectionsKt___CollectionsKt.sortedWith(Build, new Comparator() { // from class: com.android.compose.animation.scene.SceneTransitionLayoutImpl$overlaysToComposeOrderedByZIndex$$inlined$sortedBy$1
                     @Override // java.util.Comparator
                     public final int compare(Object obj, Object obj2) {
                         return ComparisonsKt__ComparisonsKt.compareValues(Float.valueOf(((SnapshotMutableFloatStateImpl) ((Overlay) obj).zIndex$delegate).getFloatValue()), Float.valueOf(((SnapshotMutableFloatStateImpl) ((Overlay) obj2).zIndex$delegate).getFloatValue()));
                     }
                 });
             }
-            List list = sortedWith;
+            List list = listSortedWith;
             if (list.isEmpty()) {
                 if (ComposerKt.isTraceInProgress()) {
                     ComposerKt.traceEventEnd();
                 }
-                RecomposeScopeImpl endRestartGroup = r6.endRestartGroup();
-                if (endRestartGroup != null) {
+                RecomposeScopeImpl recomposeScopeImplEndRestartGroup = r6.endRestartGroup();
+                if (recomposeScopeImplEndRestartGroup != null) {
                     final int i4 = 0;
-                    endRestartGroup.block = new Function2(this, boxScope, i, i4) { // from class: com.android.compose.animation.scene.SceneTransitionLayoutImpl$$ExternalSyntheticLambda5
+                    recomposeScopeImplEndRestartGroup.block = new Function2(this, boxScope, i, i4) { // from class: com.android.compose.animation.scene.SceneTransitionLayoutImpl$$ExternalSyntheticLambda5
                         public final /* synthetic */ int $r8$classId;
                         public final /* synthetic */ SceneTransitionLayoutImpl f$0;
                         public final /* synthetic */ BoxScope f$1;
@@ -427,12 +425,12 @@ public final class SceneTransitionLayoutImpl {
                 final OverlayKey overlayKey = r3.key;
                 r6.startMovableGroup(-644694998, overlayKey);
                 Modifier.Companion companion = Modifier.Companion;
-                Modifier zIndex = ZIndexModifierKt.zIndex(boxScope.matchParentSize(companion), ((SnapshotMutableFloatStateImpl) r3.zIndex$delegate).getFloatValue());
+                Modifier modifierZIndex = ZIndexModifierKt.zIndex(boxScope.matchParentSize(companion), ((SnapshotMutableFloatStateImpl) r3.zIndex$delegate).getFloatValue());
                 Alignment.Companion.getClass();
-                MeasurePolicy maybeCachedBoxMeasurePolicy = BoxKt.maybeCachedBoxMeasurePolicy(Alignment.Companion.TopStart, z2);
+                MeasurePolicy measurePolicyMaybeCachedBoxMeasurePolicy = BoxKt.maybeCachedBoxMeasurePolicy(Alignment.Companion.TopStart, z2);
                 int currentCompositeKeyHash = ComposablesKt.getCurrentCompositeKeyHash(r6);
-                PersistentCompositionLocalMap currentCompositionLocalScope = r6.currentCompositionLocalScope();
-                Modifier materializeModifier = ComposedModifierKt.materializeModifier(r6, zIndex);
+                PersistentCompositionLocalMap persistentCompositionLocalMapCurrentCompositionLocalScope = r6.currentCompositionLocalScope();
+                Modifier modifierMaterializeModifier = ComposedModifierKt.materializeModifier(r6, modifierZIndex);
                 ComposeUiNode.Companion.getClass();
                 Function0 function0 = ComposeUiNode.Companion.Constructor;
                 int i6 = i2;
@@ -446,48 +444,48 @@ public final class SceneTransitionLayoutImpl {
                 } else {
                     r6.useNode();
                 }
-                Updater.m336setimpl(r6, maybeCachedBoxMeasurePolicy, ComposeUiNode.Companion.SetMeasurePolicy);
-                Updater.m336setimpl(r6, currentCompositionLocalScope, ComposeUiNode.Companion.SetResolvedCompositionLocals);
+                Updater.m337setimpl(r6, measurePolicyMaybeCachedBoxMeasurePolicy, ComposeUiNode.Companion.SetMeasurePolicy);
+                Updater.m337setimpl(r6, persistentCompositionLocalMapCurrentCompositionLocalScope, ComposeUiNode.Companion.SetResolvedCompositionLocals);
                 Function2 function2 = ComposeUiNode.Companion.SetCompositeKeyHash;
                 if (r6.inserting || !Intrinsics.areEqual(r6.rememberedValue(), Integer.valueOf(currentCompositeKeyHash))) {
                     AnimatedContentKt$$ExternalSyntheticOutline0.m(currentCompositeKeyHash, r6, currentCompositeKeyHash, function2);
                 }
-                Updater.m336setimpl(r6, materializeModifier, ComposeUiNode.Companion.SetModifier);
+                Updater.m337setimpl(r6, modifierMaterializeModifier, ComposeUiNode.Companion.SetModifier);
                 BoxScopeInstance boxScopeInstance = BoxScopeInstance.INSTANCE;
                 r6.startReplaceGroup(-793278550);
                 if (((Boolean) ((SnapshotMutableStateImpl) r3.isModal$delegate).getValue()).booleanValue()) {
-                    Modifier fillMaxSize = SizeKt.fillMaxSize(companion, 1.0f);
+                    Modifier modifierFillMaxSize = SizeKt.fillMaxSize(companion, 1.0f);
                     r6.startReplaceGroup(-793267650);
-                    Object rememberedValue = r6.rememberedValue();
+                    Object objRememberedValue = r6.rememberedValue();
                     Composer.Companion.getClass();
                     Object obj = Composer.Companion.Empty;
-                    if (rememberedValue == obj) {
-                        rememberedValue = InteractionSourceKt.MutableInteractionSource();
-                        r6.updateRememberedValue(rememberedValue);
+                    if (objRememberedValue == obj) {
+                        objRememberedValue = InteractionSourceKt.MutableInteractionSource();
+                        r6.updateRememberedValue(objRememberedValue);
                     }
-                    MutableInteractionSource mutableInteractionSource = (MutableInteractionSource) rememberedValue;
+                    MutableInteractionSource mutableInteractionSource = (MutableInteractionSource) objRememberedValue;
                     r6.end(false);
                     r6.startReplaceGroup(-793263563);
-                    boolean changed = ((i6 & 112) == 32) | r6.changed(overlayKey);
-                    Object rememberedValue2 = r6.rememberedValue();
-                    if (changed || rememberedValue2 == obj) {
-                        rememberedValue2 = new Function0() { // from class: com.android.compose.animation.scene.SceneTransitionLayoutImpl$$ExternalSyntheticLambda6
+                    boolean zChanged = ((i6 & 112) == 32) | r6.changed(overlayKey);
+                    Object objRememberedValue2 = r6.rememberedValue();
+                    if (zChanged || objRememberedValue2 == obj) {
+                        objRememberedValue2 = new Function0() { // from class: com.android.compose.animation.scene.SceneTransitionLayoutImpl$$ExternalSyntheticLambda6
                             @Override // kotlin.jvm.functions.Function0
                             public final Object invoke() {
-                                SceneTransitionLayoutImpl sceneTransitionLayoutImpl = SceneTransitionLayoutImpl.this;
+                                SceneTransitionLayoutImpl sceneTransitionLayoutImpl = this.f$0;
                                 Function1 function1 = sceneTransitionLayoutImpl.state.canHideOverlay;
                                 OverlayKey overlayKey2 = overlayKey;
-                                if (((Boolean) function1.mo779invoke(overlayKey2)).booleanValue()) {
+                                if (((Boolean) function1.mo781invoke(overlayKey2)).booleanValue()) {
                                     sceneTransitionLayoutImpl.state.hideOverlay(overlayKey2, sceneTransitionLayoutImpl.animationScope, null);
                                 }
                                 return Unit.INSTANCE;
                             }
                         };
-                        r6.updateRememberedValue(rememberedValue2);
+                        r6.updateRememberedValue(objRememberedValue2);
                     }
                     z = false;
                     r6.end(false);
-                    BoxKt.Box(ClickableKt.m34clickableO2vRcR0$default(fillMaxSize, mutableInteractionSource, null, false, null, null, (Function0) rememberedValue2, 28), r6, 0);
+                    BoxKt.Box(ClickableKt.m34clickableO2vRcR0$default(modifierFillMaxSize, mutableInteractionSource, null, false, null, null, (Function0) objRememberedValue2, 28), r6, 0);
                 } else {
                     z = false;
                 }
@@ -503,10 +501,10 @@ public final class SceneTransitionLayoutImpl {
                 ComposerKt.traceEventEnd();
             }
         }
-        RecomposeScopeImpl endRestartGroup2 = r6.endRestartGroup();
-        if (endRestartGroup2 != null) {
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup2 = r6.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup2 != null) {
             final int i7 = 1;
-            endRestartGroup2.block = new Function2(this, boxScope, i, i7) { // from class: com.android.compose.animation.scene.SceneTransitionLayoutImpl$$ExternalSyntheticLambda5
+            recomposeScopeImplEndRestartGroup2.block = new Function2(this, boxScope, i, i7) { // from class: com.android.compose.animation.scene.SceneTransitionLayoutImpl$$ExternalSyntheticLambda5
                 public final /* synthetic */ int $r8$classId;
                 public final /* synthetic */ SceneTransitionLayoutImpl f$0;
                 public final /* synthetic */ BoxScope f$1;
@@ -546,10 +544,10 @@ public final class SceneTransitionLayoutImpl {
             }
             MutableSceneTransitionLayoutStateImpl mutableSceneTransitionLayoutStateImpl = this.state;
             List currentTransitions = mutableSceneTransitionLayoutStateImpl.getCurrentTransitions();
-            ListBuilder createListBuilder = CollectionsKt__CollectionsJVMKt.createListBuilder();
+            ListBuilder listBuilderCreateListBuilder = CollectionsKt__CollectionsJVMKt.createListBuilder();
             LinkedHashSet linkedHashSet = new LinkedHashSet();
             if (currentTransitions.isEmpty()) {
-                scenesToCompose$lambda$25$maybeAdd$default(linkedHashSet, createListBuilder, this, mutableSceneTransitionLayoutStateImpl.getTransitionState().getCurrentScene());
+                scenesToCompose$lambda$25$maybeAdd$default(linkedHashSet, listBuilderCreateListBuilder, this, mutableSceneTransitionLayoutStateImpl.getTransitionState().getCurrentScene());
             } else {
                 int size = currentTransitions.size() - 1;
                 if (size >= 0) {
@@ -558,10 +556,10 @@ public final class SceneTransitionLayoutImpl {
                         TransitionState.Transition transition = (TransitionState.Transition) currentTransitions.get(size);
                         if (transition instanceof TransitionState.Transition.ChangeScene) {
                             TransitionState.Transition.ChangeScene changeScene = (TransitionState.Transition.ChangeScene) transition;
-                            scenesToCompose$lambda$25$maybeAdd$default(linkedHashSet, createListBuilder, this, changeScene.toScene);
-                            scenesToCompose$lambda$25$maybeAdd$default(linkedHashSet, createListBuilder, this, changeScene.fromScene);
+                            scenesToCompose$lambda$25$maybeAdd$default(linkedHashSet, listBuilderCreateListBuilder, this, changeScene.toScene);
+                            scenesToCompose$lambda$25$maybeAdd$default(linkedHashSet, listBuilderCreateListBuilder, this, changeScene.fromScene);
                         } else if (transition instanceof TransitionState.Transition.ShowOrHideOverlay) {
-                            scenesToCompose$lambda$25$maybeAdd$default(linkedHashSet, createListBuilder, this, ((TransitionState.Transition.ShowOrHideOverlay) transition).fromOrToScene);
+                            scenesToCompose$lambda$25$maybeAdd$default(linkedHashSet, listBuilderCreateListBuilder, this, ((TransitionState.Transition.ShowOrHideOverlay) transition).fromOrToScene);
                         } else if (!(transition instanceof TransitionState.Transition.ReplaceOverlay)) {
                             throw new NoWhenBranchMatchedException();
                         }
@@ -572,7 +570,7 @@ public final class SceneTransitionLayoutImpl {
                         }
                     }
                 }
-                scenesToCompose$lambda$25$maybeAdd$default(linkedHashSet, createListBuilder, this, ((TransitionState.Transition) CollectionsKt___CollectionsKt.last(currentTransitions)).getCurrentScene());
+                scenesToCompose$lambda$25$maybeAdd$default(linkedHashSet, listBuilderCreateListBuilder, this, ((TransitionState.Transition) CollectionsKt___CollectionsKt.last(currentTransitions)).getCurrentScene());
             }
             List list = this.scenesToAlwaysCompose;
             if (list != null) {
@@ -580,14 +578,14 @@ public final class SceneTransitionLayoutImpl {
                 for (int i3 = 0; i3 < size2; i3++) {
                     SceneKey sceneKey = ((Scene) ((ArrayList) list).get(i3)).key;
                     if (linkedHashSet.add(sceneKey)) {
-                        createListBuilder.add(new SceneToCompose(scene$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout(sceneKey), true));
+                        listBuilderCreateListBuilder.add(new SceneToCompose(scene$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout(sceneKey), true));
                     }
                 }
             }
-            ListBuilder build = createListBuilder.build();
-            int size3 = build.getSize();
+            ListBuilder listBuilderBuild = listBuilderCreateListBuilder.build();
+            int size3 = listBuilderBuild.getSize();
             for (int i4 = 0; i4 < size3; i4++) {
-                SceneToCompose sceneToCompose = (SceneToCompose) build.get(i4);
+                SceneToCompose sceneToCompose = (SceneToCompose) listBuilderBuild.get(i4);
                 Scene scene = sceneToCompose.scene;
                 composerImpl.startMovableGroup(-1495293608, scene.key);
                 scene.Content(null, sceneToCompose.isInvisible, composerImpl, 0, 1);
@@ -597,9 +595,9 @@ public final class SceneTransitionLayoutImpl {
                 ComposerKt.traceEventEnd();
             }
         }
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
-            endRestartGroup.block = new SceneTransitionLayoutImpl$$ExternalSyntheticLambda3(this, i, 0);
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new SceneTransitionLayoutImpl$$ExternalSyntheticLambda3(this, i, 0);
         }
     }
 
@@ -620,10 +618,10 @@ public final class SceneTransitionLayoutImpl {
         if (!currentOverlays.isEmpty()) {
             Overlay overlay2 = null;
             for (OverlayKey overlayKey : currentOverlays) {
-                Float valueOf = overlay2 != null ? Float.valueOf(((SnapshotMutableFloatStateImpl) overlay2.zIndex$delegate).getFloatValue()) : null;
-                Overlay overlay$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout = overlay$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout(overlayKey);
-                if (valueOf == null || ((SnapshotMutableFloatStateImpl) overlay$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout.zIndex$delegate).getFloatValue() > valueOf.floatValue()) {
-                    overlay2 = overlay$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout;
+                Float fValueOf = overlay2 != null ? Float.valueOf(((SnapshotMutableFloatStateImpl) overlay2.zIndex$delegate).getFloatValue()) : null;
+                Overlay overlayOverlay$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout = overlay$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout(overlayKey);
+                if (fValueOf == null || ((SnapshotMutableFloatStateImpl) overlayOverlay$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout.zIndex$delegate).getFloatValue() > fValueOf.floatValue()) {
+                    overlay2 = overlayOverlay$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout;
                 }
             }
             overlay = overlay2;
@@ -645,15 +643,15 @@ public final class SceneTransitionLayoutImpl {
         if (Intrinsics.areEqual(hideCurrentOverlays, UserActionResult.ShowOverlay.HideCurrentOverlays.None.INSTANCE)) {
             return;
         }
-        boolean areEqual = Intrinsics.areEqual(hideCurrentOverlays, UserActionResult.ShowOverlay.HideCurrentOverlays.All.INSTANCE);
+        boolean zAreEqual = Intrinsics.areEqual(hideCurrentOverlays, UserActionResult.ShowOverlay.HideCurrentOverlays.All.INSTANCE);
         CoroutineScope coroutineScope = this.animationScope;
         MutableSceneTransitionLayoutStateImpl mutableSceneTransitionLayoutStateImpl = this.state;
-        if (areEqual) {
+        if (zAreEqual) {
             Iterator it = new HashSet(mutableSceneTransitionLayoutStateImpl.getTransitionState().getCurrentOverlays()).iterator();
             while (it.hasNext()) {
                 OverlayKey overlayKey = (OverlayKey) it.next();
                 overlayKey.getClass();
-                if (((Boolean) mutableSceneTransitionLayoutStateImpl.canHideOverlay.mo779invoke(overlayKey)).booleanValue()) {
+                if (((Boolean) mutableSceneTransitionLayoutStateImpl.canHideOverlay.mo781invoke(overlayKey)).booleanValue()) {
                     mutableSceneTransitionLayoutStateImpl.hideOverlay(overlayKey, coroutineScope, null);
                 }
             }
@@ -663,7 +661,7 @@ public final class SceneTransitionLayoutImpl {
             throw new NoWhenBranchMatchedException();
         }
         for (OverlayKey overlayKey2 : ((UserActionResult.ShowOverlay.HideCurrentOverlays.Some) hideCurrentOverlays).overlays) {
-            if (((Boolean) mutableSceneTransitionLayoutStateImpl.canHideOverlay.mo779invoke(overlayKey2)).booleanValue()) {
+            if (((Boolean) mutableSceneTransitionLayoutStateImpl.canHideOverlay.mo781invoke(overlayKey2)).booleanValue()) {
                 mutableSceneTransitionLayoutStateImpl.hideOverlay(overlayKey2, coroutineScope, null);
             }
         }
@@ -731,7 +729,7 @@ public final class SceneTransitionLayoutImpl {
     }
 
     /* renamed from: setContentsAndLayoutTargetSizeForTest-ozmzZPI$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout, reason: not valid java name */
-    public final void m925x98b17969(long j) {
+    public final void m927x98b17969(long j) {
         this.lastSize = j;
         ArrayList arrayList = (ArrayList) CollectionsKt___CollectionsKt.plus((Iterable) ((SnapshotStateMap) getOverlays()).values, this.scenes.values);
         int size = arrayList.size();
@@ -739,7 +737,7 @@ public final class SceneTransitionLayoutImpl {
         while (i < size) {
             Object obj = arrayList.get(i);
             i++;
-            ((SnapshotMutableStateImpl) ((Content) obj).targetSize$delegate).setValue(IntSize.m859boximpl(j));
+            ((SnapshotMutableStateImpl) ((Content) obj).targetSize$delegate).setValue(IntSize.m861boximpl(j));
         }
     }
 
@@ -747,7 +745,7 @@ public final class SceneTransitionLayoutImpl {
         SnapshotStateMap snapshotStateMap = this.scenes;
         Set mutableSet = CollectionsKt___CollectionsKt.toMutableSet(snapshotStateMap.keys);
         Set linkedHashSet = this._overlays == null ? new LinkedHashSet() : CollectionsKt___CollectionsKt.toMutableSet(((SnapshotStateMap) getOverlays()).keys);
-        function1.mo779invoke(new SceneTransitionLayoutImpl$updateContents$1(new Ref$BooleanRef(), mutableSet, this, layoutDirection, this.ancestors.isEmpty() ? 0L : ((SnapshotMutableLongStateImpl) content$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout(((Ancestor) CollectionsKt___CollectionsKt.last(this.ancestors)).inContent).globalZIndex$delegate).getLongValue(), new Ref$IntRef(), overscrollFactory, linkedHashSet));
+        function1.mo781invoke(new SceneTransitionLayoutImpl$updateContents$1(new Ref$BooleanRef(), mutableSet, this, layoutDirection, this.ancestors.isEmpty() ? 0L : ((SnapshotMutableLongStateImpl) content$frameworks__base__packages__SystemUI__compose__scene__android_common__PlatformComposeSceneTransitionLayout(((Ancestor) CollectionsKt___CollectionsKt.last(this.ancestors)).inContent).globalZIndex$delegate).getLongValue(), new Ref$IntRef(), overscrollFactory, linkedHashSet));
         Iterator it = mutableSet.iterator();
         while (it.hasNext()) {
             snapshotStateMap.remove((SceneKey) it.next());

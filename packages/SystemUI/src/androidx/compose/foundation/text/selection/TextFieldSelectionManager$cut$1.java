@@ -18,7 +18,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class TextFieldSelectionManager$cut$1 extends SuspendLambda implements Function2 {
     int label;
@@ -47,7 +46,7 @@ final class TextFieldSelectionManager$cut$1 extends SuspendLambda implements Fun
         int i = this.label;
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
-            if (TextRange.m747getCollapsedimpl(this.this$0.getValue$foundation_release().selection)) {
+            if (TextRange.m749getCollapsedimpl(this.this$0.getValue$foundation_release().selection)) {
                 return Unit.INSTANCE;
             }
             TextFieldSelectionManager textFieldSelectionManager = this.this$0;
@@ -70,11 +69,11 @@ final class TextFieldSelectionManager$cut$1 extends SuspendLambda implements Fun
         AnnotatedString.Builder builder = new AnnotatedString.Builder(textBeforeSelection);
         builder.append(textAfterSelection);
         AnnotatedString annotatedString = builder.toAnnotatedString();
-        int m750getMinimpl = TextRange.m750getMinimpl(this.this$0.getValue$foundation_release().selection);
+        int iM752getMinimpl = TextRange.m752getMinimpl(this.this$0.getValue$foundation_release().selection);
         TextFieldSelectionManager textFieldSelectionManager2 = this.this$0;
-        long TextRange = TextRangeKt.TextRange(m750getMinimpl, m750getMinimpl);
+        long jTextRange = TextRangeKt.TextRange(iM752getMinimpl, iM752getMinimpl);
         textFieldSelectionManager2.getClass();
-        this.this$0.onValueChange.mo779invoke(TextFieldSelectionManager.m237createTextFieldValueFDrldGo(annotatedString, TextRange));
+        this.this$0.onValueChange.mo781invoke(TextFieldSelectionManager.m238createTextFieldValueFDrldGo(annotatedString, jTextRange));
         this.this$0.setHandleState(HandleState.None);
         UndoManager undoManager = this.this$0.undoManager;
         if (undoManager != null) {

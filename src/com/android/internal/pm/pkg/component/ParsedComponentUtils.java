@@ -24,11 +24,11 @@ class ParsedComponentUtils {
             return parseInput.error(str + " does not specify android:name");
         }
         String packageName = parsingPackage.getPackageName();
-        String buildClassName = ParsingUtils.buildClassName(packageName, nonConfigurationString);
-        if (PackageManager.APP_DETAILS_ACTIVITY_CLASS_NAME.equals(buildClassName)) {
+        String strBuildClassName = ParsingUtils.buildClassName(packageName, nonConfigurationString);
+        if (PackageManager.APP_DETAILS_ACTIVITY_CLASS_NAME.equals(strBuildClassName)) {
             return parseInput.error(str + " invalid android:name");
         }
-        component.setName(buildClassName).setPackageName(packageName);
+        component.setName(strBuildClassName).setPackageName(packageName);
         int resourceId = z ? typedArray.getResourceId(i7, 0) : 0;
         if (resourceId != 0) {
             component.setIcon(resourceId).setNonLocalizedLabel(null);
@@ -50,22 +50,22 @@ class ParsedComponentUtils {
         if (i2 != -1) {
             component.setDescriptionRes(typedArray.getResourceId(i2, 0));
         }
-        TypedValue peekValue = typedArray.peekValue(i4);
-        if (peekValue != null) {
-            component.setLabelRes(peekValue.resourceId);
-            if (peekValue.resourceId == 0) {
-                component.setNonLocalizedLabel(peekValue.coerceToString());
+        TypedValue typedValuePeekValue = typedArray.peekValue(i4);
+        if (typedValuePeekValue != null) {
+            component.setLabelRes(typedValuePeekValue.resourceId);
+            if (typedValuePeekValue.resourceId == 0) {
+                component.setNonLocalizedLabel(typedValuePeekValue.coerceToString());
             }
         }
         return parseInput.success(component);
     }
 
     static ParseResult<Bundle> addMetaData(ParsedComponentImpl parsedComponentImpl, ParsingPackage parsingPackage, Resources resources, XmlResourceParser xmlResourceParser, ParseInput parseInput) {
-        ParseResult<PackageManager.Property> parseMetaData = ParsingPackageUtils.parseMetaData(parsingPackage, parsedComponentImpl, resources, xmlResourceParser, "<meta-data>", parseInput);
-        if (parseMetaData.isError()) {
-            return parseInput.error(parseMetaData);
+        ParseResult<PackageManager.Property> metaData = ParsingPackageUtils.parseMetaData(parsingPackage, parsedComponentImpl, resources, xmlResourceParser, "<meta-data>", parseInput);
+        if (metaData.isError()) {
+            return parseInput.error(metaData);
         }
-        PackageManager.Property result = parseMetaData.getResult();
+        PackageManager.Property result = metaData.getResult();
         if (result != null) {
             parsedComponentImpl.setMetaData(result.toBundle(parsedComponentImpl.getMetaData()));
         }
@@ -73,11 +73,11 @@ class ParsedComponentUtils {
     }
 
     static ParseResult<PackageManager.Property> addProperty(ParsedComponentImpl parsedComponentImpl, ParsingPackage parsingPackage, Resources resources, XmlResourceParser xmlResourceParser, ParseInput parseInput) {
-        ParseResult<PackageManager.Property> parseMetaData = ParsingPackageUtils.parseMetaData(parsingPackage, parsedComponentImpl, resources, xmlResourceParser, "<property>", parseInput);
-        if (parseMetaData.isError()) {
-            return parseInput.error(parseMetaData);
+        ParseResult<PackageManager.Property> metaData = ParsingPackageUtils.parseMetaData(parsingPackage, parsedComponentImpl, resources, xmlResourceParser, "<property>", parseInput);
+        if (metaData.isError()) {
+            return parseInput.error(metaData);
         }
-        PackageManager.Property result = parseMetaData.getResult();
+        PackageManager.Property result = metaData.getResult();
         if (result != null) {
             parsedComponentImpl.addProperty(result);
         }

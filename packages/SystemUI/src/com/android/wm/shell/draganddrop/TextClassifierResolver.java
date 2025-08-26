@@ -20,7 +20,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class TextClassifierResolver extends BaseResolver {
     public int mCallingUserId;
@@ -29,10 +28,10 @@ public class TextClassifierResolver extends BaseResolver {
         super(context, multiInstanceBlockList);
     }
 
-    public static Object runOnBlocking(TextClassifierResolver$$ExternalSyntheticLambda0 textClassifierResolver$$ExternalSyntheticLambda0) {
-        ExecutorService newCachedThreadPool = Executors.newCachedThreadPool();
-        Object obj = newCachedThreadPool.submit(textClassifierResolver$$ExternalSyntheticLambda0).get(3L, TimeUnit.SECONDS);
-        newCachedThreadPool.shutdown();
+    public static Object runOnBlocking(TextClassifierResolver$$ExternalSyntheticLambda0 textClassifierResolver$$ExternalSyntheticLambda0) throws ExecutionException, InterruptedException, TimeoutException {
+        ExecutorService executorServiceNewCachedThreadPool = Executors.newCachedThreadPool();
+        Object obj = executorServiceNewCachedThreadPool.submit(textClassifierResolver$$ExternalSyntheticLambda0).get(3L, TimeUnit.SECONDS);
+        executorServiceNewCachedThreadPool.shutdown();
         return obj;
     }
 
@@ -44,11 +43,11 @@ public class TextClassifierResolver extends BaseResolver {
             if (intent != null && !"android.intent.action.TRANSLATE".equals(intent.getAction())) {
                 resolveActivities(intent, this.mCallingUserId, this.mTempList, resultExtra);
                 if (!this.mTempList.isEmpty()) {
-                    String calculateContentType = BaseResolver.calculateContentType(intent);
-                    if (calculateContentType == null) {
-                        calculateContentType = remoteAction.getContentDescription().toString();
+                    String strCalculateContentType = BaseResolver.calculateContentType(intent);
+                    if (strCalculateContentType == null) {
+                        strCalculateContentType = remoteAction.getContentDescription().toString();
                     }
-                    String str = calculateContentType;
+                    String str = strCalculateContentType;
                     return new SingleIntentAppResult(intent, this.mTempList, this.mMultiInstanceBlockList, this.mMultiInstanceAllowList, str, true, z ? remoteAction.getIcon() : null);
                 }
             }
@@ -65,7 +64,7 @@ public class TextClassifierResolver extends BaseResolver {
                 @Override // java.util.concurrent.Callable
                 public final Object call() {
                     ClipData clipData2 = clipData;
-                    TextClassifierResolver textClassifierResolver = TextClassifierResolver.this;
+                    TextClassifierResolver textClassifierResolver = this.f$0;
                     textClassifierResolver.getClass();
                     if (clipData2.getItemCount() == 0) {
                         return Optional.empty();
@@ -74,18 +73,18 @@ public class TextClassifierResolver extends BaseResolver {
                     if (text == null) {
                         return Optional.empty();
                     }
-                    String replaceAll = text.toString().replaceAll("\u0000", "");
-                    if (TextUtils.isEmpty(replaceAll)) {
+                    String strReplaceAll = text.toString().replaceAll("\u0000", "");
+                    if (TextUtils.isEmpty(strReplaceAll)) {
                         return Optional.empty();
                     }
                     textClassifierResolver.mCallingUserId = clipData2.getCallingUserId();
-                    TextClassification.Request build = new TextClassification.Request.Builder(replaceAll, 0, replaceAll.length()).build();
-                    TextClassification classifyText = TextClassifierService.getDefaultTextClassifierImplementation(textClassifierResolver.mContext).classifyText(build);
+                    TextClassification.Request requestBuild = new TextClassification.Request.Builder(strReplaceAll, 0, strReplaceAll.length()).build();
+                    TextClassification textClassificationClassifyText = TextClassifierService.getDefaultTextClassifierImplementation(textClassifierResolver.mContext).classifyText(requestBuild);
                     AppResultFactory.ResultExtra resultExtra2 = resultExtra;
-                    SingleIntentAppResult resultFromTextClassification = textClassifierResolver.getResultFromTextClassification(classifyText, resultExtra2, false);
+                    SingleIntentAppResult resultFromTextClassification = textClassifierResolver.getResultFromTextClassification(textClassificationClassifyText, resultExtra2, false);
                     String str2 = textClassifierResolver.TAG;
                     if (resultFromTextClassification == null) {
-                        resultFromTextClassification = textClassifierResolver.getResultFromTextClassification(((TextClassificationManager) textClassifierResolver.mContext.getSystemService("textclassification")).getTextClassifier(1).classifyText(build), resultExtra2, true);
+                        resultFromTextClassification = textClassifierResolver.getResultFromTextClassification(((TextClassificationManager) textClassifierResolver.mContext.getSystemService("textclassification")).getTextClassifier(1).classifyText(requestBuild), resultExtra2, true);
                         Slog.d(str2, "updateByTextClassifying: Use System type");
                     } else {
                         Slog.d(str2, "updateByTextClassifying: Use Default System type");

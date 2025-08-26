@@ -6,7 +6,6 @@ import android.util.Log;
 import com.android.systemui.PowerUiRune;
 import java.util.HashSet;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class LowBatterySound extends PowerUiSound {
     public LowBatterySound(PowerUiSoundBuilder powerUiSoundBuilder) {
@@ -20,11 +19,11 @@ public class LowBatterySound extends PowerUiSound {
 
     @Override // com.android.systemui.power.sound.PowerUiSound
     public final AudioAttributes getAudioAttribute() {
-        AudioAttributes.Builder replaceTags = new AudioAttributes.Builder().setInternalLegacyStreamType(1).replaceTags(new HashSet());
+        AudioAttributes.Builder builderReplaceTags = new AudioAttributes.Builder().setInternalLegacyStreamType(1).replaceTags(new HashSet());
         if (PowerUiRune.AUDIO_SUPPORT_SITUATION_EXTENSION) {
-            replaceTags.semAddAudioTag("stv_low_battery");
+            builderReplaceTags.semAddAudioTag("stv_low_battery");
         }
-        return replaceTags.build();
+        return builderReplaceTags.build();
     }
 
     @Override // com.android.systemui.power.sound.PowerUiSound

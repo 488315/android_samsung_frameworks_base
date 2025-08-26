@@ -70,8 +70,8 @@ public class DomainSet implements Parcelable {
     }
 
     protected DomainSet(Parcel parcel) {
-        Set<String> unparcelDomains = unparcelDomains(parcel);
-        this.mDomains = unparcelDomains;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) unparcelDomains);
+        Set<String> setUnparcelDomains = unparcelDomains(parcel);
+        this.mDomains = setUnparcelDomains;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) setUnparcelDomains);
     }
 }

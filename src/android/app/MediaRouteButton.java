@@ -2,6 +2,7 @@ package android.app;
 
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.drawable.AnimationDrawable;
@@ -43,12 +44,12 @@ public class MediaRouteButton extends View {
         super(context, attributeSet, i, i2);
         this.mRouter = (MediaRouter) context.getSystemService(Context.MEDIA_ROUTER_SERVICE);
         this.mCallback = new MediaRouterCallback();
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.MediaRouteButton, i, i2);
-        setRemoteIndicatorDrawable(obtainStyledAttributes.getDrawable(3));
-        this.mMinWidth = obtainStyledAttributes.getDimensionPixelSize(0, 0);
-        this.mMinHeight = obtainStyledAttributes.getDimensionPixelSize(1, 0);
-        int integer = obtainStyledAttributes.getInteger(2, 1);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.MediaRouteButton, i, i2);
+        setRemoteIndicatorDrawable(typedArrayObtainStyledAttributes.getDrawable(3));
+        this.mMinWidth = typedArrayObtainStyledAttributes.getDimensionPixelSize(0, 0);
+        this.mMinHeight = typedArrayObtainStyledAttributes.getDimensionPixelSize(1, 0);
+        int integer = typedArrayObtainStyledAttributes.getInteger(2, 1);
+        typedArrayObtainStyledAttributes.recycle();
         setClickable(true);
         setRouteTypes(integer);
     }
@@ -93,31 +94,31 @@ public class MediaRouteButton extends View {
     }
 
     @Override // android.view.View
-    public void setContentDescription(CharSequence charSequence) {
+    public void setContentDescription(CharSequence charSequence) throws Resources.NotFoundException {
         super.setContentDescription(charSequence);
         setTooltipText(charSequence);
     }
 
     @Override // android.view.View
     public boolean performClick() {
-        boolean performClick = super.performClick();
-        if (!performClick) {
+        boolean zPerformClick = super.performClick();
+        if (!zPerformClick) {
             playSoundEffect(0);
         }
-        return showDialogInternal() || performClick;
+        return showDialogInternal() || zPerformClick;
     }
 
     @Override // android.view.View
     protected int[] onCreateDrawableState(int i) {
-        int[] onCreateDrawableState = super.onCreateDrawableState(i + 1);
+        int[] iArrOnCreateDrawableState = super.onCreateDrawableState(i + 1);
         if (this.mIsConnecting) {
-            mergeDrawableStates(onCreateDrawableState, CHECKED_STATE_SET);
-            return onCreateDrawableState;
+            mergeDrawableStates(iArrOnCreateDrawableState, CHECKED_STATE_SET);
+            return iArrOnCreateDrawableState;
         }
         if (this.mRemoteActive) {
-            mergeDrawableStates(onCreateDrawableState, ACTIVATED_STATE_SET);
+            mergeDrawableStates(iArrOnCreateDrawableState, ACTIVATED_STATE_SET);
         }
-        return onCreateDrawableState;
+        return iArrOnCreateDrawableState;
     }
 
     @Override // android.view.View
@@ -195,19 +196,19 @@ public class MediaRouteButton extends View {
         int mode2 = View.MeasureSpec.getMode(i2);
         int i3 = this.mMinWidth;
         Drawable drawable = this.mRemoteIndicator;
-        int max = Math.max(i3, drawable != null ? drawable.getIntrinsicWidth() + getPaddingLeft() + getPaddingRight() : 0);
+        int iMax = Math.max(i3, drawable != null ? drawable.getIntrinsicWidth() + getPaddingLeft() + getPaddingRight() : 0);
         int i4 = this.mMinHeight;
         Drawable drawable2 = this.mRemoteIndicator;
-        int max2 = Math.max(i4, drawable2 != null ? drawable2.getIntrinsicHeight() + getPaddingTop() + getPaddingBottom() : 0);
+        int iMax2 = Math.max(i4, drawable2 != null ? drawable2.getIntrinsicHeight() + getPaddingTop() + getPaddingBottom() : 0);
         if (mode == Integer.MIN_VALUE) {
-            size = Math.min(size, max);
+            size = Math.min(size, iMax);
         } else if (mode != 1073741824) {
-            size = max;
+            size = iMax;
         }
         if (mode2 == Integer.MIN_VALUE) {
-            size2 = Math.min(size2, max2);
+            size2 = Math.min(size2, iMax2);
         } else if (mode2 != 1073741824) {
-            size2 = max2;
+            size2 = iMax2;
         }
         setMeasuredDimension(size, size2);
     }

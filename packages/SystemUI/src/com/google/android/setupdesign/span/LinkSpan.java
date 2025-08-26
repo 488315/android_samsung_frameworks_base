@@ -10,11 +10,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class LinkSpan extends ClickableSpan {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface OnLinkClickListener {
         boolean onLinkClick(LinkSpan linkSpan);
     }
@@ -25,12 +23,12 @@ public class LinkSpan extends ClickableSpan {
     /* JADX WARN: Multi-variable type inference failed */
     @Override // android.text.style.ClickableSpan
     public final void onClick(View view) {
-        boolean onLinkClick = view instanceof OnLinkClickListener ? ((OnLinkClickListener) view).onLinkClick(this) : false;
-        if (!onLinkClick) {
+        boolean zOnLinkClick = view instanceof OnLinkClickListener ? ((OnLinkClickListener) view).onLinkClick(this) : false;
+        if (!zOnLinkClick) {
             for (Context context = view.getContext(); context instanceof ContextWrapper; context = ((ContextWrapper) context).getBaseContext()) {
             }
         }
-        if (onLinkClick) {
+        if (zOnLinkClick) {
             view.cancelPendingInputEvents();
         } else {
             Log.w("LinkSpan", "Dropping click event. No listener attached.");

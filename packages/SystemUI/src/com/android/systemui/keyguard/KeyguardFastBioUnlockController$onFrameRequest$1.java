@@ -5,14 +5,13 @@ import android.os.SystemClock;
 import android.support.v4.media.session.MediaSessionCompat$QueueItem$$ExternalSyntheticOutline0;
 import androidx.compose.runtime.snapshots.SnapshotStateObserver$$ExternalSyntheticOutline0;
 import com.android.systemui.keyguard.KeyguardFastBioUnlockController;
-import com.android.systemui.statusbar.phone.CentralSurfacesImpl$$ExternalSyntheticLambda3;
+import com.android.systemui.statusbar.phone.CentralSurfacesImpl$$ExternalSyntheticLambda4;
 import com.android.systemui.util.LogUtil;
 import java.util.function.LongConsumer;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.FunctionReferenceImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final /* synthetic */ class KeyguardFastBioUnlockController$onFrameRequest$1 extends FunctionReferenceImpl implements Function0 {
     public KeyguardFastBioUnlockController$onFrameRequest$1(Object obj) {
@@ -30,38 +29,38 @@ final /* synthetic */ class KeyguardFastBioUnlockController$onFrameRequest$1 ext
             LogUtil.lapTime(10000, new LongConsumer() { // from class: com.android.systemui.keyguard.KeyguardFastBioUnlockController$onFrameCommit$1
                 @Override // java.util.function.LongConsumer
                 public final void accept(long j) {
-                    String m;
-                    KeyguardFastBioUnlockController keyguardFastBioUnlockController2 = KeyguardFastBioUnlockController.this;
+                    String strM;
+                    KeyguardFastBioUnlockController keyguardFastBioUnlockController2 = keyguardFastBioUnlockController;
                     long j2 = keyguardFastBioUnlockController2.startKeyguardExitAnimationTime - keyguardFastBioUnlockController2.goingAwayTime;
-                    long nanoTime = System.nanoTime();
-                    KeyguardFastBioUnlockController keyguardFastBioUnlockController3 = KeyguardFastBioUnlockController.this;
-                    long j3 = (nanoTime - keyguardFastBioUnlockController3.waitStartTime) / 1000000;
-                    if ((keyguardFastBioUnlockController3.isFastUnlockMode() || (KeyguardFastBioUnlockController.this.isFastWakeAndUnlockMode() && KeyguardFastBioUnlockController.this.isInvisibleAfterGoingAwayTransStarted)) && j2 > 0) {
+                    long jNanoTime = System.nanoTime();
+                    KeyguardFastBioUnlockController keyguardFastBioUnlockController3 = keyguardFastBioUnlockController;
+                    long j3 = (jNanoTime - keyguardFastBioUnlockController3.waitStartTime) / 1000000;
+                    if ((keyguardFastBioUnlockController3.isFastUnlockMode() || (keyguardFastBioUnlockController.isFastWakeAndUnlockMode() && keyguardFastBioUnlockController.isInvisibleAfterGoingAwayTransStarted)) && j2 > 0) {
                         long j4 = j2 / 1000000;
-                        StringBuilder m2 = SnapshotStateObserver$$ExternalSyntheticOutline0.m("foreground is shown / vis=", j3, "ms, goingAway=");
-                        m2.append(j4);
-                        m2.append("ms, keyguard=");
-                        m2.append(j - j4);
-                        m2.append("ms, end=");
-                        m = MediaSessionCompat$QueueItem$$ExternalSyntheticOutline0.m(j, "ms", m2);
+                        StringBuilder sbM = SnapshotStateObserver$$ExternalSyntheticOutline0.m("foreground is shown / vis=", j3, "ms, goingAway=");
+                        sbM.append(j4);
+                        sbM.append("ms, keyguard=");
+                        sbM.append(j - j4);
+                        sbM.append("ms, end=");
+                        strM = MediaSessionCompat$QueueItem$$ExternalSyntheticOutline0.m(j, "ms", sbM);
                     } else {
-                        m = KeyguardFastBioUnlockController.this.needsBlankScreen ? MediaSessionCompat$QueueItem$$ExternalSyntheticOutline0.m(j, "ms", SnapshotStateObserver$$ExternalSyntheticOutline0.m("foreground is shown / blankScreen, vis=", j3, "ms, end=")) : MediaSessionCompat$QueueItem$$ExternalSyntheticOutline0.m(j, "ms", SnapshotStateObserver$$ExternalSyntheticOutline0.m("foreground is shown / vis=", j3, "ms, end="));
+                        strM = keyguardFastBioUnlockController.needsBlankScreen ? MediaSessionCompat$QueueItem$$ExternalSyntheticOutline0.m(j, "ms", SnapshotStateObserver$$ExternalSyntheticOutline0.m("foreground is shown / blankScreen, vis=", j3, "ms, end=")) : MediaSessionCompat$QueueItem$$ExternalSyntheticOutline0.m(j, "ms", SnapshotStateObserver$$ExternalSyntheticOutline0.m("foreground is shown / vis=", j3, "ms, end="));
                     }
-                    Log.d("BioUnlock", m);
+                    Log.d("BioUnlock", strM);
                 }
             });
             ((KeyguardViewMediatorHelperImpl) ((KeyguardViewMediatorHelper) keyguardFastBioUnlockController.viewMediatorHelperLazy.get())).onForegroundShown();
             keyguardFastBioUnlockController.mainHandler.post(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardFastBioUnlockController$onFrameCommit$2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    KeyguardFastBioUnlockController keyguardFastBioUnlockController2 = KeyguardFastBioUnlockController.this;
+                    KeyguardFastBioUnlockController keyguardFastBioUnlockController2 = keyguardFastBioUnlockController;
                     KeyguardFastBioUnlockController.Companion companion2 = KeyguardFastBioUnlockController.Companion;
-                    CentralSurfacesImpl$$ExternalSyntheticLambda3 centralSurfacesImpl$$ExternalSyntheticLambda3 = keyguardFastBioUnlockController2.scrimUpdater;
-                    if (centralSurfacesImpl$$ExternalSyntheticLambda3 != null && keyguardFastBioUnlockController2.scrimVisibility != 0) {
-                        centralSurfacesImpl$$ExternalSyntheticLambda3.run();
+                    CentralSurfacesImpl$$ExternalSyntheticLambda4 centralSurfacesImpl$$ExternalSyntheticLambda4 = keyguardFastBioUnlockController2.scrimUpdater;
+                    if (centralSurfacesImpl$$ExternalSyntheticLambda4 != null && keyguardFastBioUnlockController2.scrimVisibility != 0) {
+                        centralSurfacesImpl$$ExternalSyntheticLambda4.run();
                     }
-                    KeyguardFastBioUnlockController.this.runPendingRunnable();
-                    KeyguardFastBioUnlockController.DelayedActionParams delayedActionParams = KeyguardFastBioUnlockController.this.delayedActionParams;
+                    keyguardFastBioUnlockController.runPendingRunnable();
+                    KeyguardFastBioUnlockController.DelayedActionParams delayedActionParams = keyguardFastBioUnlockController.delayedActionParams;
                     if (delayedActionParams != null && !delayedActionParams.isDiscard) {
                         Handler handler = delayedActionParams.handler;
                         KeyguardFastBioUnlockController$DelayedActionParams$runnableWrapper$1 keyguardFastBioUnlockController$DelayedActionParams$runnableWrapper$1 = delayedActionParams.runnableWrapper;
@@ -72,13 +71,13 @@ final /* synthetic */ class KeyguardFastBioUnlockController$onFrameRequest$1 ext
                             delayedActionParams.start(false);
                         }
                     }
-                    if (KeyguardFastBioUnlockController.this.isFastWakeAndUnlockMode()) {
-                        final KeyguardFastBioUnlockController keyguardFastBioUnlockController3 = KeyguardFastBioUnlockController.this;
+                    if (keyguardFastBioUnlockController.isFastWakeAndUnlockMode()) {
+                        final KeyguardFastBioUnlockController keyguardFastBioUnlockController3 = keyguardFastBioUnlockController;
                         if (keyguardFastBioUnlockController3.needsBlankScreen) {
                             keyguardFastBioUnlockController3.mainHandler.post(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardFastBioUnlockController$onFrameCommit$2.2
                                 @Override // java.lang.Runnable
                                 public final void run() {
-                                    KeyguardFastBioUnlockController.this.reset();
+                                    keyguardFastBioUnlockController3.reset();
                                 }
                             });
                         }

@@ -53,15 +53,15 @@ public class TransactionTracker {
         if (z) {
             sb.append(", oneway");
         }
-        String sb2 = sb.toString();
+        String string = sb.toString();
         synchronized (this) {
-            String addTrace = addTrace(th);
-            ArrayList<String> arrayList = this.mTimestamp.get(addTrace);
+            String strAddTrace = addTrace(th);
+            ArrayList<String> arrayList = this.mTimestamp.get(strAddTrace);
             if (arrayList == null) {
                 arrayList = new ArrayList<>();
-                this.mTimestamp.put(addTrace, arrayList);
+                this.mTimestamp.put(strAddTrace, arrayList);
             }
-            arrayList.add(sb2);
+            arrayList.add(string);
         }
     }
 
@@ -75,14 +75,14 @@ public class TransactionTracker {
             int i = 1;
             for (String str : this.mTraces.keySet()) {
                 if (Binder.isSystemServerBinderTrackerEnabled) {
-                    long longValue = this.mTraces.get(str).longValue();
-                    fastPrintWriter.println("Count: " + longValue + "," + i + "/" + size);
+                    long jLongValue = this.mTraces.get(str).longValue();
+                    fastPrintWriter.println("Count: " + jLongValue + "," + i + "/" + size);
                     ArrayList<String> arrayList = this.mTimestamp.get(str);
                     if (arrayList != null) {
                         Iterator<String> it = arrayList.iterator();
                         int i2 = 1;
                         while (it.hasNext()) {
-                            fastPrintWriter.println(this.processName + " T:" + i2 + "/" + longValue + Session.SUBSESSION_SEPARATION_CHAR + it.next());
+                            fastPrintWriter.println(this.processName + " T:" + i2 + "/" + jLongValue + Session.SUBSESSION_SEPARATION_CHAR + it.next());
                             i2++;
                         }
                     }

@@ -12,7 +12,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class RepeatWhenAttachedKt$isAttached$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ View $this_isAttached;
@@ -49,16 +48,16 @@ final class RepeatWhenAttachedKt$isAttached$1 extends SuspendLambda implements F
                 @Override // android.view.View.OnAttachStateChangeListener
                 public final void onViewAttachedToWindow(View view) {
                     Assert.isMainThread();
-                    ((ChannelCoroutine) ProducerScope.this).mo3456trySendJP2dKIU(Boolean.TRUE);
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.TRUE);
                 }
 
                 @Override // android.view.View.OnAttachStateChangeListener
                 public final void onViewDetachedFromWindow(View view) {
-                    ((ChannelCoroutine) ProducerScope.this).mo3456trySendJP2dKIU(Boolean.FALSE);
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.FALSE);
                 }
             };
             this.$this_isAttached.addOnAttachStateChangeListener(onAttachStateChangeListener);
-            ((ChannelCoroutine) producerScope).mo3456trySendJP2dKIU(Boolean.valueOf(this.$this_isAttached.isAttachedToWindow()));
+            ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(this.$this_isAttached.isAttachedToWindow()));
             RepeatWhenAttachedKt$isAttached$1$$ExternalSyntheticLambda0 repeatWhenAttachedKt$isAttached$1$$ExternalSyntheticLambda0 = new RepeatWhenAttachedKt$isAttached$1$$ExternalSyntheticLambda0(0, this.$this_isAttached, onAttachStateChangeListener);
             this.label = 1;
             if (ProduceKt.awaitClose(producerScope, repeatWhenAttachedKt$isAttached$1$$ExternalSyntheticLambda0, this) == coroutineSingletons) {

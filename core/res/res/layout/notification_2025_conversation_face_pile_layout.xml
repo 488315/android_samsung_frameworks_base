@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout android:id="@id/conversation_face_pile" android:layout_width="@dimen/notification_2025_icon_circle_size" android:layout_height="@dimen/notification_2025_icon_circle_size" android:forceHasOverlappingRendering="false"
   xmlns:android="http://schemas.android.com/apk/res/android">
-    <ImageView android:layout_gravity="end|center|top" android:id="@id/conversation_face_pile_top" android:background="@drawable/notification_icon_circle" android:layout_width="@dimen/notification_2025_face_pile_avatar_size" android:layout_height="@dimen/notification_2025_face_pile_avatar_size" android:scaleType="centerCrop" android:clipToOutline="true" />
-    <FrameLayout android:layout_gravity="start|bottom|center" android:layout_width="wrap_content" android:layout_height="wrap_content">
+    <ImageView android:layout_gravity="end|top" android:id="@id/conversation_face_pile_top" android:background="@drawable/notification_icon_circle" android:layout_width="@dimen/notification_2025_face_pile_avatar_size" android:layout_height="@dimen/notification_2025_face_pile_avatar_size" android:scaleType="centerCrop" android:clipToOutline="true" />
+    <FrameLayout android:layout_gravity="start|bottom" android:layout_width="wrap_content" android:layout_height="wrap_content">
         <ImageView android:id="@id/conversation_face_pile_bottom_background" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/conversation_badge_background" />
         <ImageView android:layout_gravity="center" android:id="@id/conversation_face_pile_bottom" android:background="@drawable/notification_icon_circle" android:layout_width="@dimen/notification_2025_face_pile_avatar_size" android:layout_height="@dimen/notification_2025_face_pile_avatar_size" android:scaleType="centerCrop" android:clipToOutline="true" />
     </FrameLayout>

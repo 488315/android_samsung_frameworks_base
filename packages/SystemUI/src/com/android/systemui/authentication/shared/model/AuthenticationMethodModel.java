@@ -4,12 +4,10 @@ import com.android.systemui.log.table.Diffable;
 import com.android.systemui.log.table.TableLogBuffer;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class AuthenticationMethodModel implements Diffable {
     public final boolean isSecure;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AdminLock extends AuthenticationMethodModel {
         public static final AdminLock INSTANCE = new AdminLock();
 
@@ -30,7 +28,6 @@ public abstract class AuthenticationMethodModel implements Diffable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class FMM extends AuthenticationMethodModel {
         public static final FMM INSTANCE = new FMM();
 
@@ -51,7 +48,6 @@ public abstract class AuthenticationMethodModel implements Diffable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ForgotPassword extends AuthenticationMethodModel {
         public static final ForgotPassword INSTANCE = new ForgotPassword();
 
@@ -72,7 +68,6 @@ public abstract class AuthenticationMethodModel implements Diffable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class KNOXGUARD extends AuthenticationMethodModel {
         public static final KNOXGUARD INSTANCE = new KNOXGUARD();
 
@@ -93,7 +88,6 @@ public abstract class AuthenticationMethodModel implements Diffable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class None extends AuthenticationMethodModel {
         public static final None INSTANCE = new None();
 
@@ -114,7 +108,6 @@ public abstract class AuthenticationMethodModel implements Diffable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Password extends AuthenticationMethodModel {
         public static final Password INSTANCE = new Password();
 
@@ -135,7 +128,6 @@ public abstract class AuthenticationMethodModel implements Diffable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Pattern extends AuthenticationMethodModel {
         public static final Pattern INSTANCE = new Pattern();
 
@@ -156,7 +148,6 @@ public abstract class AuthenticationMethodModel implements Diffable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Permanent extends AuthenticationMethodModel {
         public static final Permanent INSTANCE = new Permanent();
 
@@ -177,7 +168,6 @@ public abstract class AuthenticationMethodModel implements Diffable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Pin extends AuthenticationMethodModel {
         public static final Pin INSTANCE = new Pin();
 
@@ -198,7 +188,6 @@ public abstract class AuthenticationMethodModel implements Diffable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class RMM extends AuthenticationMethodModel {
         public static final RMM INSTANCE = new RMM();
 
@@ -219,7 +208,6 @@ public abstract class AuthenticationMethodModel implements Diffable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SKTCarrierLock extends AuthenticationMethodModel {
         public static final SKTCarrierLock INSTANCE = new SKTCarrierLock();
 
@@ -240,7 +228,6 @@ public abstract class AuthenticationMethodModel implements Diffable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Sim extends AuthenticationMethodModel {
         public static final Sim INSTANCE = new Sim();
 
@@ -261,7 +248,6 @@ public abstract class AuthenticationMethodModel implements Diffable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SmartcardPIN extends AuthenticationMethodModel {
         public static final SmartcardPIN INSTANCE = new SmartcardPIN();
 
@@ -282,7 +268,6 @@ public abstract class AuthenticationMethodModel implements Diffable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Swipe extends AuthenticationMethodModel {
         public static final Swipe INSTANCE = new Swipe();
 

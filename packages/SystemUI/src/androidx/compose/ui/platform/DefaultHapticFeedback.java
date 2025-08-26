@@ -5,7 +5,6 @@ import androidx.compose.ui.hapticfeedback.HapticFeedback;
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType;
 import androidx.compose.ui.hapticfeedback.PlatformHapticFeedbackType;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class DefaultHapticFeedback implements HapticFeedback {
     public final View view;
@@ -16,7 +15,7 @@ public final class DefaultHapticFeedback implements HapticFeedback {
 
     @Override // androidx.compose.ui.hapticfeedback.HapticFeedback
     /* renamed from: performHapticFeedback-CdsT49E */
-    public final void mo570performHapticFeedbackCdsT49E(int i) {
+    public final void mo572performHapticFeedbackCdsT49E(int i) {
         HapticFeedbackType.Companion.getClass();
         PlatformHapticFeedbackType platformHapticFeedbackType = PlatformHapticFeedbackType.INSTANCE;
         platformHapticFeedbackType.getClass();
@@ -64,7 +63,7 @@ public final class DefaultHapticFeedback implements HapticFeedback {
             this.view.performHapticFeedback(26);
             return;
         }
-        if (i == HapticFeedbackType.Companion.m571getTextHandleMove5zf0vsI()) {
+        if (i == HapticFeedbackType.Companion.m573getTextHandleMove5zf0vsI()) {
             this.view.performHapticFeedback(9);
             return;
         }

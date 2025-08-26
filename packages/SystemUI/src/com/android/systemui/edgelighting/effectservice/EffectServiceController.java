@@ -17,7 +17,6 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class EffectServiceController {
     public final AbsEdgeLightingEffectReflection mAbsEdgeLightingEffectReflection;
@@ -37,11 +36,11 @@ public class EffectServiceController {
                 if (ReflectionContentContainer.sContextReflection == null) {
                     ReflectionContentContainer.sContextReflection = new ContextReflection();
                 }
-                Context createPackageContextAsUser = ReflectionContentContainer.sContextReflection.createPackageContextAsUser(context, this.mPackage);
-                if (createPackageContextAsUser != null) {
-                    this.mClassLoader = createPackageContextAsUser.getClassLoader();
+                Context contextCreatePackageContextAsUser = ReflectionContentContainer.sContextReflection.createPackageContextAsUser(context, this.mPackage);
+                if (contextCreatePackageContextAsUser != null) {
+                    this.mClassLoader = contextCreatePackageContextAsUser.getClassLoader();
                 }
-                absEdgeLightingEffectReflection = new AbsEdgeLightingEffectReflection(Class.forName(this.mComponentName, true, this.mClassLoader), createPackageContextAsUser, context, this.mClassLoader);
+                absEdgeLightingEffectReflection = new AbsEdgeLightingEffectReflection(Class.forName(this.mComponentName, true, this.mClassLoader), contextCreatePackageContextAsUser, context, this.mClassLoader);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -49,20 +48,20 @@ public class EffectServiceController {
         this.mAbsEdgeLightingEffectReflection = absEdgeLightingEffectReflection;
     }
 
-    public static void clearInflaterConstructMap(String str) {
-        HashMap hashMap;
+    public static void clearInflaterConstructMap(String str) throws NoSuchFieldException {
+        HashMap map;
         Slog.i("EffectServiceController", "clearInflaterConstructMap packageName=".concat(str));
         try {
             Field declaredField = Class.forName(LayoutInflater.class.getName()).getDeclaredField("sConstructorMap");
             declaredField.setAccessible(true);
             ArrayList arrayList = new ArrayList();
             try {
-                hashMap = (HashMap) declaredField.get("");
+                map = (HashMap) declaredField.get("");
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
-                hashMap = null;
+                map = null;
             }
-            for (String str2 : hashMap.keySet()) {
+            for (String str2 : map.keySet()) {
                 if (str2 != null && str2.contains(str)) {
                     arrayList.add(str2);
                 }
@@ -72,7 +71,7 @@ public class EffectServiceController {
             while (i < size) {
                 Object obj = arrayList.get(i);
                 i++;
-                hashMap.remove((String) obj);
+                map.remove((String) obj);
             }
         } catch (ClassNotFoundException e2) {
             e2.printStackTrace();
@@ -109,10 +108,10 @@ public class EffectServiceController {
         return effectInfoReflection;
     }
 
-    public final void dispatchStart(EdgeEffectInfo edgeEffectInfo) {
+    public final void dispatchStart(EdgeEffectInfo edgeEffectInfo) throws NoSuchMethodException, ClassNotFoundException, SecurityException {
         Class<?> cls;
         Slog.i("EffectServiceController", "dispatchStart");
-        EffectInfoReflection convertEffectInfo = convertEffectInfo(edgeEffectInfo);
+        EffectInfoReflection effectInfoReflectionConvertEffectInfo = convertEffectInfo(edgeEffectInfo);
         AbsEdgeLightingEffectReflection absEdgeLightingEffectReflection = this.mAbsEdgeLightingEffectReflection;
         try {
             cls = Class.forName("com.samsung.android.sdk.edgelighting.AbsEdgeLightingEffect$EffectInfo", true, absEdgeLightingEffectReflection.mClassLoader);
@@ -120,7 +119,7 @@ public class EffectServiceController {
             e.printStackTrace();
             cls = null;
         }
-        absEdgeLightingEffectReflection.invokeNormalMethod(absEdgeLightingEffectReflection.mInstance, NetworkAnalyticsConstants.DataPoints.OPEN_TIME, new Class[]{cls}, convertEffectInfo.mInstance);
+        absEdgeLightingEffectReflection.invokeNormalMethod(absEdgeLightingEffectReflection.mInstance, NetworkAnalyticsConstants.DataPoints.OPEN_TIME, new Class[]{cls}, effectInfoReflectionConvertEffectInfo.mInstance);
         this.mStarting = true;
     }
 
@@ -135,7 +134,7 @@ public class EffectServiceController {
         this.mStarting = false;
     }
 
-    public final void setOnEventListener(EdgeLightingDispatcher.AnonymousClass1 anonymousClass1) {
+    public final void setOnEventListener(EdgeLightingDispatcher.AnonymousClass1 anonymousClass1) throws NoSuchMethodException, ClassNotFoundException, SecurityException {
         Class<?> cls;
         AbsEdgeLightingEffectReflection absEdgeLightingEffectReflection = this.mAbsEdgeLightingEffectReflection;
         try {

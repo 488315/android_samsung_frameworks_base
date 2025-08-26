@@ -31,7 +31,7 @@ public class JournaledFile {
         return this.mReal;
     }
 
-    public File chooseForWrite() {
+    public File chooseForWrite() throws IOException {
         if (this.mWriting) {
             throw new IllegalStateException("uncommitted write already in progress");
         }

@@ -51,7 +51,6 @@ import kotlin.Unit;
 import kotlin.coroutines.SafeContinuation;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class BackwardsCompatNode extends Modifier.Node implements LayoutModifierNode, DrawModifierNode, SemanticsModifierNode, PointerInputModifierNode, ModifierLocalModifierNode, ModifierLocalReadScope, ParentDataModifierNode, LayoutAwareModifierNode, GlobalPositionAwareModifierNode, FocusEventModifierNode, FocusPropertiesModifierNode, FocusRequesterModifierNode, OwnerScope, BuildDrawCacheParams {
     public BackwardsCompatLocalMap _providedValues;
@@ -124,12 +123,11 @@ public final class BackwardsCompatNode extends Modifier.Node implements LayoutMo
                                 function = ((AccessibilityAction) obj2).action;
                             }
                             mutableScatterMap2.set(semanticsPropertyKey, new AccessibilityAction(str, function));
-                            j >>= i;
-                            i5++;
-                            i3 = i;
                         }
+                        i = i3;
+                    } else {
+                        i = i3;
                     }
-                    i = i3;
                     j >>= i;
                     i5++;
                     i3 = i;
@@ -182,56 +180,56 @@ public final class BackwardsCompatNode extends Modifier.Node implements LayoutMo
             InlineClassHelperKt.throwIllegalStateException("visitAncestors called on an unattached node");
         }
         Modifier.Node node = this.node.parent;
-        LayoutNode requireLayoutNode = DelegatableNodeKt.requireLayoutNode(this);
-        while (requireLayoutNode != null) {
-            if ((requireLayoutNode.nodes.head.aggregateChildKindSet & 32) != 0) {
+        LayoutNode layoutNodeRequireLayoutNode = DelegatableNodeKt.requireLayoutNode(this);
+        while (layoutNodeRequireLayoutNode != null) {
+            if ((layoutNodeRequireLayoutNode.nodes.head.aggregateChildKindSet & 32) != 0) {
                 while (node != null) {
                     if ((node.kindSet & 32) != 0) {
-                        DelegatingNode delegatingNode = node;
-                        ?? r3 = 0;
-                        while (delegatingNode != 0) {
-                            if (delegatingNode instanceof ModifierLocalModifierNode) {
-                                ModifierLocalModifierNode modifierLocalModifierNode = (ModifierLocalModifierNode) delegatingNode;
+                        DelegatingNode delegatingNodeAccess$pop = node;
+                        ?? mutableVector = 0;
+                        while (delegatingNodeAccess$pop != 0) {
+                            if (delegatingNodeAccess$pop instanceof ModifierLocalModifierNode) {
+                                ModifierLocalModifierNode modifierLocalModifierNode = (ModifierLocalModifierNode) delegatingNodeAccess$pop;
                                 if (modifierLocalModifierNode.getProvidedValues().contains$ui_release(providableModifierLocal)) {
                                     return modifierLocalModifierNode.getProvidedValues().get$ui_release(providableModifierLocal);
                                 }
-                            } else if ((delegatingNode.kindSet & 32) != 0 && (delegatingNode instanceof DelegatingNode)) {
-                                Modifier.Node node2 = delegatingNode.delegate;
+                            } else if ((delegatingNodeAccess$pop.kindSet & 32) != 0 && (delegatingNodeAccess$pop instanceof DelegatingNode)) {
+                                Modifier.Node node2 = delegatingNodeAccess$pop.delegate;
                                 int i = 0;
-                                delegatingNode = delegatingNode;
-                                r3 = r3;
+                                delegatingNodeAccess$pop = delegatingNodeAccess$pop;
+                                mutableVector = mutableVector;
                                 while (node2 != null) {
                                     if ((node2.kindSet & 32) != 0) {
                                         i++;
-                                        r3 = r3;
+                                        mutableVector = mutableVector;
                                         if (i == 1) {
-                                            delegatingNode = node2;
+                                            delegatingNodeAccess$pop = node2;
                                         } else {
-                                            if (r3 == 0) {
-                                                r3 = new MutableVector(new Modifier.Node[16], 0);
+                                            if (mutableVector == 0) {
+                                                mutableVector = new MutableVector(new Modifier.Node[16], 0);
                                             }
-                                            if (delegatingNode != 0) {
-                                                r3.add(delegatingNode);
-                                                delegatingNode = 0;
+                                            if (delegatingNodeAccess$pop != 0) {
+                                                mutableVector.add(delegatingNodeAccess$pop);
+                                                delegatingNodeAccess$pop = 0;
                                             }
-                                            r3.add(node2);
+                                            mutableVector.add(node2);
                                         }
                                     }
                                     node2 = node2.child;
-                                    delegatingNode = delegatingNode;
-                                    r3 = r3;
+                                    delegatingNodeAccess$pop = delegatingNodeAccess$pop;
+                                    mutableVector = mutableVector;
                                 }
                                 if (i == 1) {
                                 }
                             }
-                            delegatingNode = DelegatableNodeKt.access$pop(r3);
+                            delegatingNodeAccess$pop = DelegatableNodeKt.access$pop(mutableVector);
                         }
                     }
                     node = node.parent;
                 }
             }
-            requireLayoutNode = requireLayoutNode.getParent$ui_release();
-            node = (requireLayoutNode == null || (nodeChain = requireLayoutNode.nodes) == null) ? null : nodeChain.tail;
+            layoutNodeRequireLayoutNode = layoutNodeRequireLayoutNode.getParent$ui_release();
+            node = (layoutNodeRequireLayoutNode == null || (nodeChain = layoutNodeRequireLayoutNode.nodes) == null) ? null : nodeChain.tail;
         }
         return providableModifierLocal.defaultFactory.invoke();
     }
@@ -254,8 +252,8 @@ public final class BackwardsCompatNode extends Modifier.Node implements LayoutMo
 
     @Override // androidx.compose.ui.draw.BuildDrawCacheParams
     /* renamed from: getSize-NH-jbRc */
-    public final long mo360getSizeNHjbRc() {
-        return IntSizeKt.m864toSizeozmzZPI(DelegatableNodeKt.m632requireCoordinator64DMado(this, 128).measuredSize);
+    public final long mo361getSizeNHjbRc() {
+        return IntSizeKt.m866toSizeozmzZPI(DelegatableNodeKt.m634requireCoordinator64DMado(this, 128).measuredSize);
     }
 
     public final void initializeModifier(boolean z) {
@@ -265,11 +263,7 @@ public final class BackwardsCompatNode extends Modifier.Node implements LayoutMo
         Modifier.Element element = this.element;
         if ((this.kindSet & 32) != 0) {
             if (element instanceof ModifierLocalConsumer) {
-                ((AndroidComposeView) DelegatableNodeKt.requireOwner(this)).registerOnEndApplyChangesListener(new Function0() { // from class: androidx.compose.ui.node.BackwardsCompatNode$initializeModifier$2
-                    {
-                        super(0);
-                    }
-
+                ((AndroidComposeView) DelegatableNodeKt.requireOwner(this)).registerOnEndApplyChangesListener(new Function0() { // from class: androidx.compose.ui.node.BackwardsCompatNode.initializeModifier.2
                     @Override // kotlin.jvm.functions.Function0
                     public final Object invoke() {
                         BackwardsCompatNode.this.updateModifierLocalConsumer();
@@ -301,7 +295,7 @@ public final class BackwardsCompatNode extends Modifier.Node implements LayoutMo
             }
         }
         if ((this.kindSet & 4) != 0 && !z) {
-            DelegatableNodeKt.m632requireCoordinator64DMado(this, 2).invalidateLayer();
+            DelegatableNodeKt.m634requireCoordinator64DMado(this, 2).invalidateLayer();
         }
         if ((this.kindSet & 2) != 0) {
             BackwardsCompatNodeKt$DetachedModifierLocalReadScope$1 backwardsCompatNodeKt$DetachedModifierLocalReadScope$12 = BackwardsCompatNodeKt.DetachedModifierLocalReadScope;
@@ -315,7 +309,7 @@ public final class BackwardsCompatNode extends Modifier.Node implements LayoutMo
                 }
             }
             if (!z) {
-                DelegatableNodeKt.m632requireCoordinator64DMado(this, 2).invalidateLayer();
+                DelegatableNodeKt.m634requireCoordinator64DMado(this, 2).invalidateLayer();
                 DelegatableNodeKt.requireLayoutNode(this).invalidateMeasurements$ui_release();
             }
         }
@@ -360,7 +354,7 @@ public final class BackwardsCompatNode extends Modifier.Node implements LayoutMo
     @Override // androidx.compose.ui.node.LayoutModifierNode
     /* renamed from: measure-3p2s80s */
     public final MeasureResult mo4measure3p2s80s(MeasureScope measureScope, Measurable measurable, long j) {
-        return ((LayoutModifier) this.element).mo108measure3p2s80s(measureScope, measurable, j);
+        return ((LayoutModifier) this.element).mo109measure3p2s80s(measureScope, measurable, j);
     }
 
     @Override // androidx.compose.ui.node.LayoutModifierNode
@@ -436,7 +430,7 @@ public final class BackwardsCompatNode extends Modifier.Node implements LayoutMo
     @Override // androidx.compose.ui.node.PointerInputModifierNode
     /* renamed from: onPointerEvent-H0pRuoY */
     public final void mo16onPointerEventH0pRuoY(PointerEvent pointerEvent, PointerEventPass pointerEventPass, long j) {
-        ((PointerInteropFilter) ((PointerInputModifier) this.element)).pointerInputFilter.m594onPointerEventH0pRuoY(pointerEvent, pointerEventPass);
+        ((PointerInteropFilter) ((PointerInputModifier) this.element)).pointerInputFilter.m596onPointerEventH0pRuoY(pointerEvent, pointerEventPass);
     }
 
     @Override // androidx.compose.ui.node.PointerInputModifierNode
@@ -474,11 +468,7 @@ public final class BackwardsCompatNode extends Modifier.Node implements LayoutMo
     public final void updateModifierLocalConsumer() {
         if (this.isAttached) {
             this.readValues.clear();
-            ((AndroidComposeView) DelegatableNodeKt.requireOwner(this)).snapshotObserver.observeReads$ui_release(this, BackwardsCompatNodeKt.updateModifierLocalConsumer, new Function0() { // from class: androidx.compose.ui.node.BackwardsCompatNode$updateModifierLocalConsumer$1
-                {
-                    super(0);
-                }
-
+            ((AndroidComposeView) DelegatableNodeKt.requireOwner(this)).snapshotObserver.observeReads$ui_release(this, BackwardsCompatNodeKt.updateModifierLocalConsumer, new Function0() { // from class: androidx.compose.ui.node.BackwardsCompatNode.updateModifierLocalConsumer.1
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
                     BackwardsCompatNode backwardsCompatNode = BackwardsCompatNode.this;
@@ -491,6 +481,6 @@ public final class BackwardsCompatNode extends Modifier.Node implements LayoutMo
 
     @Override // androidx.compose.ui.node.LayoutAwareModifierNode
     /* renamed from: onRemeasured-ozmzZPI */
-    public final void mo49onRemeasuredozmzZPI(long j) {
+    public final void mo50onRemeasuredozmzZPI(long j) {
     }
 }

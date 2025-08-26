@@ -50,8 +50,8 @@ public abstract class AbsSavedState implements Parcelable {
     }
 
     protected AbsSavedState(Parcel parcel, ClassLoader classLoader) {
-        Parcelable readParcelable = parcel.readParcelable(classLoader);
-        this.mSuperState = readParcelable == null ? EMPTY_STATE : readParcelable;
+        Parcelable parcelable = parcel.readParcelable(classLoader);
+        this.mSuperState = parcelable == null ? EMPTY_STATE : parcelable;
     }
 
     public final Parcelable getSuperState() {

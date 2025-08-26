@@ -14,12 +14,10 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.markers.KMappedMarker;
 import kotlin.jvm.internal.markers.KMutableList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class MutableObjectList extends ObjectList {
     public ObjectListMutableList list;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class MutableObjectListIterator implements ListIterator, KMappedMarker {
         public final List list;
         public int prevIndex;
@@ -85,7 +83,6 @@ public final class MutableObjectList extends ObjectList {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ObjectListMutableList implements List, KMutableList {
         public final MutableObjectList objectList;
 
@@ -313,7 +310,6 @@ public final class MutableObjectList extends ObjectList {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SubList implements List, KMutableList {
         public int end;
         public final List list;
@@ -546,11 +542,11 @@ public final class MutableObjectList extends ObjectList {
     }
 
     public final boolean remove(Object obj) {
-        int indexOf = indexOf(obj);
-        if (indexOf < 0) {
+        int iIndexOf = indexOf(obj);
+        if (iIndexOf < 0) {
             return false;
         }
-        removeAt(indexOf);
+        removeAt(iIndexOf);
         return true;
     }
 
@@ -574,9 +570,9 @@ public final class MutableObjectList extends ObjectList {
     public final void removeRange(int i, int i2) {
         int i3;
         if (i < 0 || i > (i3 = this._size) || i2 < 0 || i2 > i3) {
-            StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "Start (", ") and end (", ") must be in 0..");
-            m.append(this._size);
-            RuntimeHelpersKt.throwIndexOutOfBoundsException(m.toString());
+            StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "Start (", ") and end (", ") must be in 0..");
+            sbM.append(this._size);
+            RuntimeHelpersKt.throwIndexOutOfBoundsException(sbM.toString());
             throw null;
         }
         if (i2 < i) {

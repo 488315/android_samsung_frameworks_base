@@ -4,7 +4,6 @@ import java.util.Map;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.markers.KMappedMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class MapEntry<K, V> implements Map.Entry<K, V>, KMappedMarker {
     public final Object key;
@@ -34,9 +33,9 @@ public class MapEntry<K, V> implements Map.Entry<K, V>, KMappedMarker {
     @Override // java.util.Map.Entry
     public final int hashCode() {
         Object obj = this.key;
-        int hashCode = obj != null ? obj.hashCode() : 0;
+        int iHashCode = obj != null ? obj.hashCode() : 0;
         Object value = getValue();
-        return hashCode ^ (value != null ? value.hashCode() : 0);
+        return iHashCode ^ (value != null ? value.hashCode() : 0);
     }
 
     @Override // java.util.Map.Entry

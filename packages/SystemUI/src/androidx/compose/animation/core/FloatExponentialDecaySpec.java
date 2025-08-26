@@ -2,27 +2,15 @@ package androidx.compose.animation.core;
 
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class FloatExponentialDecaySpec implements FloatDecayAnimationSpec {
     public final float absVelocityThreshold;
     public final float friction;
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
     public FloatExponentialDecaySpec() {
-        /*
-            r3 = this;
-            r0 = 3
-            r1 = 0
-            r2 = 0
-            r3.<init>(r2, r2, r0, r1)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.animation.core.FloatExponentialDecaySpec.<init>():void");
+        float f = 0.0f;
+        this(f, f, 3, null);
     }
 
     @Override // androidx.compose.animation.core.FloatDecayAnimationSpec
@@ -40,9 +28,9 @@ public final class FloatExponentialDecaySpec implements FloatDecayAnimationSpec 
         if (Math.abs(f2) <= this.absVelocityThreshold) {
             return f;
         }
-        double log = Math.log(Math.abs(r1 / f2));
+        double dLog = Math.log(Math.abs(r1 / f2));
         float f3 = this.friction;
-        return ((f2 / f3) * ((float) Math.exp((f3 * ((log / f3) * 1000)) / 1000.0f))) + (f - (f2 / f3));
+        return ((f2 / f3) * ((float) Math.exp((f3 * ((dLog / f3) * 1000)) / 1000.0f))) + (f - (f2 / f3));
     }
 
     @Override // androidx.compose.animation.core.FloatDecayAnimationSpec

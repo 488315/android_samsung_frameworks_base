@@ -115,10 +115,10 @@ public class Html {
         int length = spanned.length();
         int i2 = 0;
         while (i2 < length) {
-            int nextSpanTransition = spanned.nextSpanTransition(i2, length, ParagraphStyle.class);
+            int iNextSpanTransition = spanned.nextSpanTransition(i2, length, ParagraphStyle.class);
             String str = " ";
             boolean z = false;
-            for (ParagraphStyle paragraphStyle : (ParagraphStyle[]) spanned.getSpans(i2, nextSpanTransition, ParagraphStyle.class)) {
+            for (ParagraphStyle paragraphStyle : (ParagraphStyle[]) spanned.getSpans(i2, iNextSpanTransition, ParagraphStyle.class)) {
                 if (paragraphStyle instanceof AlignmentSpan) {
                     Layout.Alignment alignment = ((AlignmentSpan) paragraphStyle).getAlignment();
                     if (alignment == Layout.Alignment.ALIGN_CENTER) {
@@ -136,26 +136,26 @@ public class Html {
                 sb.append(str);
                 sb.append(">");
             }
-            withinDiv(sb, spanned, i2, nextSpanTransition, i);
+            withinDiv(sb, spanned, i2, iNextSpanTransition, i);
             if (z) {
                 sb.append("</div>");
             }
-            i2 = nextSpanTransition;
+            i2 = iNextSpanTransition;
         }
     }
 
     private static void withinDiv(StringBuilder sb, Spanned spanned, int i, int i2, int i3) {
         while (i < i2) {
-            int nextSpanTransition = spanned.nextSpanTransition(i, i2, QuoteSpan.class);
-            QuoteSpan[] quoteSpanArr = (QuoteSpan[]) spanned.getSpans(i, nextSpanTransition, QuoteSpan.class);
+            int iNextSpanTransition = spanned.nextSpanTransition(i, i2, QuoteSpan.class);
+            QuoteSpan[] quoteSpanArr = (QuoteSpan[]) spanned.getSpans(i, iNextSpanTransition, QuoteSpan.class);
             for (QuoteSpan quoteSpan : quoteSpanArr) {
                 sb.append("<blockquote>");
             }
-            withinBlockquote(sb, spanned, i, nextSpanTransition, i3);
+            withinBlockquote(sb, spanned, i, iNextSpanTransition, i3);
             for (QuoteSpan quoteSpan2 : quoteSpanArr) {
                 sb.append("</blockquote>\n");
             }
-            i = nextSpanTransition;
+            i = iNextSpanTransition;
         }
     }
 
@@ -220,18 +220,18 @@ public class Html {
         boolean z;
         boolean z2 = false;
         while (i <= i2) {
-            int indexOf = TextUtils.indexOf((CharSequence) spanned, '\n', i, i2);
-            if (indexOf < 0) {
-                indexOf = i2;
+            int iIndexOf = TextUtils.indexOf((CharSequence) spanned, '\n', i, i2);
+            if (iIndexOf < 0) {
+                iIndexOf = i2;
             }
-            if (indexOf == i) {
+            if (iIndexOf == i) {
                 if (z2) {
                     sb.append("</ul>\n");
                     z2 = false;
                 }
                 sb.append("<br>\n");
             } else {
-                ParagraphStyle[] paragraphStyleArr = (ParagraphStyle[]) spanned.getSpans(i, indexOf, ParagraphStyle.class);
+                ParagraphStyle[] paragraphStyleArr = (ParagraphStyle[]) spanned.getSpans(i, iIndexOf, ParagraphStyle.class);
                 int length = paragraphStyleArr.length;
                 int i3 = 0;
                 while (true) {
@@ -248,7 +248,7 @@ public class Html {
                 }
                 if (z && !z2) {
                     sb.append("<ul");
-                    sb.append(getTextStyles(spanned, i, indexOf, true, false));
+                    sb.append(getTextStyles(spanned, i, iIndexOf, true, false));
                     sb.append(">\n");
                     z2 = true;
                 }
@@ -259,19 +259,19 @@ public class Html {
                 String str = z ? "li" : "p";
                 sb.append("<");
                 sb.append(str);
-                sb.append(getTextDirection(spanned, i, indexOf));
-                sb.append(getTextStyles(spanned, i, indexOf, !z, true));
+                sb.append(getTextDirection(spanned, i, iIndexOf));
+                sb.append(getTextStyles(spanned, i, iIndexOf, !z, true));
                 sb.append(">");
-                withinParagraph(sb, spanned, i, indexOf);
+                withinParagraph(sb, spanned, i, iIndexOf);
                 sb.append("</");
                 sb.append(str);
                 sb.append(">\n");
-                if (indexOf == i2 && z2) {
+                if (iIndexOf == i2 && z2) {
                     sb.append("</ul>\n");
                     z2 = false;
                 }
             }
-            i = indexOf + 1;
+            i = iIndexOf + 1;
         }
     }
 
@@ -281,30 +281,30 @@ public class Html {
         sb.append(">");
         int i3 = i;
         while (i3 < i2) {
-            int indexOf = TextUtils.indexOf((CharSequence) spanned, '\n', i3, i2);
-            if (indexOf < 0) {
-                indexOf = i2;
+            int iIndexOf = TextUtils.indexOf((CharSequence) spanned, '\n', i3, i2);
+            if (iIndexOf < 0) {
+                iIndexOf = i2;
             }
             int i4 = 0;
-            while (indexOf < i2 && spanned.charAt(indexOf) == '\n') {
+            while (iIndexOf < i2 && spanned.charAt(iIndexOf) == '\n') {
                 i4++;
-                indexOf++;
+                iIndexOf++;
             }
-            withinParagraph(sb, spanned, i3, indexOf - i4);
+            withinParagraph(sb, spanned, i3, iIndexOf - i4);
             if (i4 == 1) {
                 sb.append("<br>\n");
             } else {
                 for (int i5 = 2; i5 < i4; i5++) {
                     sb.append("<br>");
                 }
-                if (indexOf != i2) {
+                if (iIndexOf != i2) {
                     sb.append("</p>\n");
                     sb.append("<p");
                     sb.append(getTextDirection(spanned, i, i2));
                     sb.append(">");
                 }
             }
-            i3 = indexOf;
+            i3 = iIndexOf;
         }
         sb.append("</p>\n");
     }
@@ -315,8 +315,8 @@ public class Html {
 
     private static void withinParagraph(StringBuilder sb, Spanned spanned, int i, int i2) {
         while (i < i2) {
-            int nextSpanTransition = spanned.nextSpanTransition(i, i2, CharacterStyle.class);
-            CharacterStyle[] characterStyleArr = (CharacterStyle[]) spanned.getSpans(i, nextSpanTransition, CharacterStyle.class);
+            int iNextSpanTransition = spanned.nextSpanTransition(i, i2, CharacterStyle.class);
+            CharacterStyle[] characterStyleArr = (CharacterStyle[]) spanned.getSpans(i, iNextSpanTransition, CharacterStyle.class);
             for (int i3 = 0; i3 < characterStyleArr.length; i3++) {
                 CharacterStyle characterStyle = characterStyleArr[i3];
                 if (characterStyle instanceof StyleSpan) {
@@ -353,7 +353,7 @@ public class Html {
                     sb.append("<img src=\"");
                     sb.append(((ImageSpan) characterStyleArr[i3]).getSource());
                     sb.append("\">");
-                    i = nextSpanTransition;
+                    i = iNextSpanTransition;
                 }
                 CharacterStyle characterStyle3 = characterStyleArr[i3];
                 if (characterStyle3 instanceof AbsoluteSizeSpan) {
@@ -377,7 +377,7 @@ public class Html {
                     sb.append(String.format("<span style=\"background-color:#%06X;\">", Integer.valueOf(((BackgroundColorSpan) characterStyle6).getBackgroundColor() & 16777215)));
                 }
             }
-            withinStyle(sb, spanned, i, nextSpanTransition);
+            withinStyle(sb, spanned, i, iNextSpanTransition);
             for (int length = characterStyleArr.length - 1; length >= 0; length--) {
                 if (characterStyleArr[length] instanceof BackgroundColorSpan) {
                     sb.append("</span>");
@@ -421,27 +421,27 @@ public class Html {
                     }
                 }
             }
-            i = nextSpanTransition;
+            i = iNextSpanTransition;
         }
     }
 
     private static void withinStyle(StringBuilder sb, CharSequence charSequence, int i, int i2) {
         int i3;
-        char charAt;
+        char cCharAt;
         while (i < i2) {
-            char charAt2 = charSequence.charAt(i);
-            if (charAt2 == '<') {
+            char cCharAt2 = charSequence.charAt(i);
+            if (cCharAt2 == '<') {
                 sb.append("&lt;");
-            } else if (charAt2 == '>') {
+            } else if (cCharAt2 == '>') {
                 sb.append("&gt;");
-            } else if (charAt2 == '&') {
+            } else if (cCharAt2 == '&') {
                 sb.append("&amp;");
-            } else if (charAt2 < 55296 || charAt2 > 57343) {
-                if (charAt2 > '~' || charAt2 < ' ') {
+            } else if (cCharAt2 < 55296 || cCharAt2 > 57343) {
+                if (cCharAt2 > '~' || cCharAt2 < ' ') {
                     sb.append("&#");
-                    sb.append((int) charAt2);
+                    sb.append((int) cCharAt2);
                     sb.append(NavigationBarInflaterView.GRAVITY_SEPARATOR);
-                } else if (charAt2 == ' ') {
+                } else if (cCharAt2 == ' ') {
                     while (true) {
                         int i4 = i + 1;
                         if (i4 >= i2 || charSequence.charAt(i4) != ' ') {
@@ -452,11 +452,11 @@ public class Html {
                     }
                     sb.append(' ');
                 } else {
-                    sb.append(charAt2);
+                    sb.append(cCharAt2);
                 }
-            } else if (charAt2 < 56320 && (i3 = i + 1) < i2 && (charAt = charSequence.charAt(i3)) >= 56320 && charAt <= 57343) {
+            } else if (cCharAt2 < 56320 && (i3 = i + 1) < i2 && (cCharAt = charSequence.charAt(i3)) >= 56320 && cCharAt <= 57343) {
                 sb.append("&#");
-                sb.append(((charAt2 - 55296) << 10) | 65536 | (charAt - 56320));
+                sb.append(((cCharAt2 - 55296) << 10) | 65536 | (cCharAt - 56320));
                 sb.append(NavigationBarInflaterView.GRAVITY_SEPARATOR);
                 i = i3;
             }

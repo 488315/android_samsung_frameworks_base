@@ -49,44 +49,44 @@ public class Matrix3f {
 
     public void loadRotate(float f, float f2, float f3, float f4) {
         double d = f * 0.017453292f;
-        float cos = (float) Math.cos(d);
-        float sin = (float) Math.sin(d);
-        float sqrt = (float) Math.sqrt((f2 * f2) + (f3 * f3) + (f4 * f4));
-        if (sqrt == 1.0f) {
-            float f5 = 1.0f / sqrt;
+        float fCos = (float) Math.cos(d);
+        float fSin = (float) Math.sin(d);
+        float fSqrt = (float) Math.sqrt((f2 * f2) + (f3 * f3) + (f4 * f4));
+        if (fSqrt == 1.0f) {
+            float f5 = 1.0f / fSqrt;
             f2 *= f5;
             f3 *= f5;
             f4 *= f5;
         }
-        float f6 = 1.0f - cos;
-        float f7 = f2 * sin;
-        float f8 = f3 * sin;
-        float f9 = sin * f4;
+        float f6 = 1.0f - fCos;
+        float f7 = f2 * fSin;
+        float f8 = f3 * fSin;
+        float f9 = fSin * f4;
         float[] fArr = this.mMat;
-        fArr[0] = (f2 * f2 * f6) + cos;
+        fArr[0] = (f2 * f2 * f6) + fCos;
         float f10 = f2 * f3 * f6;
         fArr[3] = f10 - f9;
         float f11 = f4 * f2 * f6;
         fArr[6] = f11 + f8;
         fArr[1] = f10 + f9;
-        fArr[4] = (f3 * f3 * f6) + cos;
+        fArr[4] = (f3 * f3 * f6) + fCos;
         float f12 = f3 * f4 * f6;
         fArr[7] = f12 - f7;
         fArr[2] = f11 - f8;
         fArr[5] = f12 + f7;
-        fArr[8] = (f4 * f4 * f6) + cos;
+        fArr[8] = (f4 * f4 * f6) + fCos;
     }
 
     public void loadRotate(float f) {
         loadIdentity();
         double d = f * 0.017453292f;
-        float cos = (float) Math.cos(d);
-        float sin = (float) Math.sin(d);
+        float fCos = (float) Math.cos(d);
+        float fSin = (float) Math.sin(d);
         float[] fArr = this.mMat;
-        fArr[0] = cos;
-        fArr[1] = -sin;
-        fArr[3] = sin;
-        fArr[4] = cos;
+        fArr[0] = fCos;
+        fArr[1] = -fSin;
+        fArr[3] = fSin;
+        fArr[4] = fCos;
     }
 
     public void loadScale(float f, float f2) {

@@ -75,9 +75,9 @@ public final class LockTaskPolicy extends PolicyValue<LockTaskPolicy> {
     private LockTaskPolicy(Parcel parcel) {
         this.mPackages = new HashSet();
         this.mFlags = 16;
-        int readInt = parcel.readInt();
+        int i = parcel.readInt();
         this.mPackages = new HashSet();
-        for (int i = 0; i < readInt; i++) {
+        for (int i2 = 0; i2 < i; i2++) {
             this.mPackages.add(parcel.readString());
         }
         this.mFlags = parcel.readInt();

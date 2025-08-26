@@ -2,6 +2,7 @@ package com.android.keyguard;
 
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.res.Resources;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.util.AttributeSet;
@@ -17,7 +18,6 @@ import com.android.systemui.util.DeviceType;
 import com.android.systemui.util.SystemUIAnalytics;
 import com.android.systemui.widget.SystemUITextView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardHintTextArea extends RelativeLayout {
     public SystemUITextView mHintText;
@@ -31,7 +31,7 @@ public class KeyguardHintTextArea extends RelativeLayout {
     }
 
     @Override // android.view.View
-    public final void onFinishInflate() {
+    public final void onFinishInflate() throws Resources.NotFoundException {
         super.onFinishInflate();
         this.mHintText = (SystemUITextView) findViewById(R.id.hint_text);
         this.mShowHintText = (SystemUITextView) findViewById(R.id.show_hint_text);

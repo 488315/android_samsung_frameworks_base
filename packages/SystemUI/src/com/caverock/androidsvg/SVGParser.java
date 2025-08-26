@@ -35,7 +35,6 @@ import org.xml.sax.ext.DefaultHandler2;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SVGParser {
     public int ignoreDepth;
@@ -48,7 +47,6 @@ public class SVGParser {
     public boolean inStyleElement = false;
     public StringBuilder styleElementContents = null;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.caverock.androidsvg.SVGParser$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$com$caverock$androidsvg$SVGParser$SVGAttr;
@@ -542,184 +540,179 @@ public class SVGParser {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AspectRatioKeywords {
         public static final Map aspectRatioKeywords;
 
         static {
-            HashMap hashMap = new HashMap(10);
-            aspectRatioKeywords = hashMap;
-            hashMap.put(SignalSeverity.NONE, PreserveAspectRatio.Alignment.none);
-            hashMap.put("xMinYMin", PreserveAspectRatio.Alignment.xMinYMin);
-            hashMap.put("xMidYMin", PreserveAspectRatio.Alignment.xMidYMin);
-            hashMap.put("xMaxYMin", PreserveAspectRatio.Alignment.xMaxYMin);
-            hashMap.put("xMinYMid", PreserveAspectRatio.Alignment.xMinYMid);
-            hashMap.put("xMidYMid", PreserveAspectRatio.Alignment.xMidYMid);
-            hashMap.put("xMaxYMid", PreserveAspectRatio.Alignment.xMaxYMid);
-            hashMap.put("xMinYMax", PreserveAspectRatio.Alignment.xMinYMax);
-            hashMap.put("xMidYMax", PreserveAspectRatio.Alignment.xMidYMax);
-            hashMap.put("xMaxYMax", PreserveAspectRatio.Alignment.xMaxYMax);
+            HashMap map = new HashMap(10);
+            aspectRatioKeywords = map;
+            map.put(SignalSeverity.NONE, PreserveAspectRatio.Alignment.none);
+            map.put("xMinYMin", PreserveAspectRatio.Alignment.xMinYMin);
+            map.put("xMidYMin", PreserveAspectRatio.Alignment.xMidYMin);
+            map.put("xMaxYMin", PreserveAspectRatio.Alignment.xMaxYMin);
+            map.put("xMinYMid", PreserveAspectRatio.Alignment.xMinYMid);
+            map.put("xMidYMid", PreserveAspectRatio.Alignment.xMidYMid);
+            map.put("xMaxYMid", PreserveAspectRatio.Alignment.xMaxYMid);
+            map.put("xMinYMax", PreserveAspectRatio.Alignment.xMinYMax);
+            map.put("xMidYMax", PreserveAspectRatio.Alignment.xMidYMax);
+            map.put("xMaxYMax", PreserveAspectRatio.Alignment.xMaxYMax);
         }
 
         private AspectRatioKeywords() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ColourKeywords {
         public static final Map colourKeywords;
 
         static {
-            HashMap hashMap = new HashMap(47);
-            colourKeywords = hashMap;
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-984833, hashMap, "aliceblue", -332841, "antiquewhite");
-            hashMap.put("aqua", -16711681);
-            hashMap.put("aquamarine", -8388652);
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-983041, hashMap, "azure", -657956, "beige");
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-6972, hashMap, "bisque", -16777216, "black");
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-5171, hashMap, "blanchedalmond", -16776961, "blue");
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-7722014, hashMap, "blueviolet", -5952982, "brown");
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-2180985, hashMap, "burlywood", -10510688, "cadetblue");
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-8388864, hashMap, "chartreuse", -2987746, "chocolate");
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-32944, hashMap, "coral", -10185235, "cornflowerblue");
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-1828, hashMap, "cornsilk", -2354116, "crimson");
-            hashMap.put("cyan", -16711681);
-            hashMap.put("darkblue", -16777077);
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-16741493, hashMap, "darkcyan", -4684277, "darkgoldenrod");
-            hashMap.put("darkgray", -5658199);
-            hashMap.put("darkgreen", -16751616);
-            hashMap.put("darkgrey", -5658199);
-            hashMap.put("darkkhaki", -4343957);
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-7667573, hashMap, "darkmagenta", -11179217, "darkolivegreen");
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-29696, hashMap, "darkorange", -6737204, "darkorchid");
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-7667712, hashMap, "darkred", -1468806, "darksalmon");
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-7357297, hashMap, "darkseagreen", -12042869, "darkslateblue");
-            hashMap.put("darkslategray", -13676721);
-            hashMap.put("darkslategrey", -13676721);
-            hashMap.put("darkturquoise", -16724271);
-            hashMap.put("darkviolet", -7077677);
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-60269, hashMap, "deeppink", -16728065, "deepskyblue");
-            hashMap.put("dimgray", -9868951);
-            hashMap.put("dimgrey", -9868951);
-            hashMap.put("dodgerblue", -14774017);
-            hashMap.put("firebrick", -5103070);
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-1296, hashMap, "floralwhite", -14513374, "forestgreen");
-            hashMap.put("fuchsia", -65281);
-            hashMap.put("gainsboro", -2302756);
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-460545, hashMap, "ghostwhite", -10496, "gold");
-            hashMap.put("goldenrod", -2448096);
-            hashMap.put("gray", -8355712);
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-16744448, hashMap, "green", -5374161, "greenyellow");
-            hashMap.put("grey", -8355712);
-            hashMap.put("honeydew", -983056);
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-38476, hashMap, "hotpink", -3318692, "indianred");
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-11861886, hashMap, "indigo", -16, "ivory");
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-989556, hashMap, "khaki", -1644806, "lavender");
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-3851, hashMap, "lavenderblush", -8586240, "lawngreen");
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-1331, hashMap, "lemonchiffon", -5383962, "lightblue");
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-1015680, hashMap, "lightcoral", -2031617, "lightcyan");
-            hashMap.put("lightgoldenrodyellow", -329006);
-            hashMap.put("lightgray", -2894893);
-            hashMap.put("lightgreen", -7278960);
-            hashMap.put("lightgrey", -2894893);
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-18751, hashMap, "lightpink", -24454, "lightsalmon");
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-14634326, hashMap, "lightseagreen", -7876870, "lightskyblue");
-            hashMap.put("lightslategray", -8943463);
-            hashMap.put("lightslategrey", -8943463);
-            hashMap.put("lightsteelblue", -5192482);
-            hashMap.put("lightyellow", -32);
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-16711936, hashMap, "lime", -13447886, "limegreen");
-            hashMap.put("linen", -331546);
-            hashMap.put("magenta", -65281);
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-8388608, hashMap, "maroon", -10039894, "mediumaquamarine");
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-16777011, hashMap, "mediumblue", -4565549, "mediumorchid");
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-7114533, hashMap, "mediumpurple", -12799119, "mediumseagreen");
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-8689426, hashMap, "mediumslateblue", -16713062, "mediumspringgreen");
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-12004916, hashMap, "mediumturquoise", -3730043, "mediumvioletred");
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-15132304, hashMap, "midnightblue", -655366, "mintcream");
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-6943, hashMap, "mistyrose", -6987, "moccasin");
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-8531, hashMap, "navajowhite", -16777088, "navy");
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-133658, hashMap, "oldlace", -8355840, "olive");
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-9728477, hashMap, "olivedrab", -23296, "orange");
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-47872, hashMap, "orangered", -2461482, "orchid");
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-1120086, hashMap, "palegoldenrod", -6751336, "palegreen");
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-5247250, hashMap, "paleturquoise", -2396013, "palevioletred");
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-4139, hashMap, "papayawhip", -9543, "peachpuff");
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-3308225, hashMap, "peru", -16181, "pink");
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-2252579, hashMap, "plum", -5185306, "powderblue");
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-8388480, hashMap, "purple", -10079335, "rebeccapurple");
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-65536, hashMap, "red", -4419697, "rosybrown");
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-12490271, hashMap, "royalblue", -7650029, "saddlebrown");
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-360334, hashMap, "salmon", -744352, "sandybrown");
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-13726889, hashMap, "seagreen", -2578, "seashell");
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-6270419, hashMap, "sienna", -4144960, "silver");
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-7876885, hashMap, "skyblue", -9807155, "slateblue");
-            hashMap.put("slategray", -9404272);
-            hashMap.put("slategrey", -9404272);
-            hashMap.put("snow", -1286);
-            hashMap.put("springgreen", -16711809);
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-12156236, hashMap, "steelblue", -2968436, "tan");
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-16744320, hashMap, "teal", -2572328, "thistle");
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-40121, hashMap, "tomato", -12525360, "turquoise");
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-1146130, hashMap, "violet", -663885, "wheat");
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-1, hashMap, "white", -657931, "whitesmoke");
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-256, hashMap, "yellow", -6632142, "yellowgreen");
-            hashMap.put("transparent", 0);
+            HashMap map = new HashMap(47);
+            colourKeywords = map;
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-984833, map, "aliceblue", -332841, "antiquewhite");
+            map.put("aqua", -16711681);
+            map.put("aquamarine", -8388652);
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-983041, map, "azure", -657956, "beige");
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-6972, map, "bisque", -16777216, "black");
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-5171, map, "blanchedalmond", -16776961, "blue");
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-7722014, map, "blueviolet", -5952982, "brown");
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-2180985, map, "burlywood", -10510688, "cadetblue");
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-8388864, map, "chartreuse", -2987746, "chocolate");
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-32944, map, "coral", -10185235, "cornflowerblue");
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-1828, map, "cornsilk", -2354116, "crimson");
+            map.put("cyan", -16711681);
+            map.put("darkblue", -16777077);
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-16741493, map, "darkcyan", -4684277, "darkgoldenrod");
+            map.put("darkgray", -5658199);
+            map.put("darkgreen", -16751616);
+            map.put("darkgrey", -5658199);
+            map.put("darkkhaki", -4343957);
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-7667573, map, "darkmagenta", -11179217, "darkolivegreen");
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-29696, map, "darkorange", -6737204, "darkorchid");
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-7667712, map, "darkred", -1468806, "darksalmon");
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-7357297, map, "darkseagreen", -12042869, "darkslateblue");
+            map.put("darkslategray", -13676721);
+            map.put("darkslategrey", -13676721);
+            map.put("darkturquoise", -16724271);
+            map.put("darkviolet", -7077677);
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-60269, map, "deeppink", -16728065, "deepskyblue");
+            map.put("dimgray", -9868951);
+            map.put("dimgrey", -9868951);
+            map.put("dodgerblue", -14774017);
+            map.put("firebrick", -5103070);
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-1296, map, "floralwhite", -14513374, "forestgreen");
+            map.put("fuchsia", -65281);
+            map.put("gainsboro", -2302756);
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-460545, map, "ghostwhite", -10496, "gold");
+            map.put("goldenrod", -2448096);
+            map.put("gray", -8355712);
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-16744448, map, "green", -5374161, "greenyellow");
+            map.put("grey", -8355712);
+            map.put("honeydew", -983056);
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-38476, map, "hotpink", -3318692, "indianred");
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-11861886, map, "indigo", -16, "ivory");
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-989556, map, "khaki", -1644806, "lavender");
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-3851, map, "lavenderblush", -8586240, "lawngreen");
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-1331, map, "lemonchiffon", -5383962, "lightblue");
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-1015680, map, "lightcoral", -2031617, "lightcyan");
+            map.put("lightgoldenrodyellow", -329006);
+            map.put("lightgray", -2894893);
+            map.put("lightgreen", -7278960);
+            map.put("lightgrey", -2894893);
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-18751, map, "lightpink", -24454, "lightsalmon");
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-14634326, map, "lightseagreen", -7876870, "lightskyblue");
+            map.put("lightslategray", -8943463);
+            map.put("lightslategrey", -8943463);
+            map.put("lightsteelblue", -5192482);
+            map.put("lightyellow", -32);
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-16711936, map, "lime", -13447886, "limegreen");
+            map.put("linen", -331546);
+            map.put("magenta", -65281);
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-8388608, map, "maroon", -10039894, "mediumaquamarine");
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-16777011, map, "mediumblue", -4565549, "mediumorchid");
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-7114533, map, "mediumpurple", -12799119, "mediumseagreen");
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-8689426, map, "mediumslateblue", -16713062, "mediumspringgreen");
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-12004916, map, "mediumturquoise", -3730043, "mediumvioletred");
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-15132304, map, "midnightblue", -655366, "mintcream");
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-6943, map, "mistyrose", -6987, "moccasin");
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-8531, map, "navajowhite", -16777088, "navy");
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-133658, map, "oldlace", -8355840, "olive");
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-9728477, map, "olivedrab", -23296, "orange");
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-47872, map, "orangered", -2461482, "orchid");
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-1120086, map, "palegoldenrod", -6751336, "palegreen");
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-5247250, map, "paleturquoise", -2396013, "palevioletred");
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-4139, map, "papayawhip", -9543, "peachpuff");
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-3308225, map, "peru", -16181, "pink");
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-2252579, map, "plum", -5185306, "powderblue");
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-8388480, map, "purple", -10079335, "rebeccapurple");
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-65536, map, "red", -4419697, "rosybrown");
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-12490271, map, "royalblue", -7650029, "saddlebrown");
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-360334, map, "salmon", -744352, "sandybrown");
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-13726889, map, "seagreen", -2578, "seashell");
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-6270419, map, "sienna", -4144960, "silver");
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-7876885, map, "skyblue", -9807155, "slateblue");
+            map.put("slategray", -9404272);
+            map.put("slategrey", -9404272);
+            map.put("snow", -1286);
+            map.put("springgreen", -16711809);
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-12156236, map, "steelblue", -2968436, "tan");
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-16744320, map, "teal", -2572328, "thistle");
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-40121, map, "tomato", -12525360, "turquoise");
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-1146130, map, "violet", -663885, "wheat");
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-1, map, "white", -657931, "whitesmoke");
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(-256, map, "yellow", -6632142, "yellowgreen");
+            map.put("transparent", 0);
         }
 
         private ColourKeywords() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class FontSizeKeywords {
         public static final Map fontSizeKeywords;
 
         static {
-            HashMap hashMap = new HashMap(9);
-            fontSizeKeywords = hashMap;
+            HashMap map = new HashMap(9);
+            fontSizeKeywords = map;
             SVG.Unit unit = SVG.Unit.pt;
-            hashMap.put("xx-small", new SVG.Length(0.694f, unit));
-            hashMap.put("x-small", new SVG.Length(0.833f, unit));
-            hashMap.put("small", new SVG.Length(10.0f, unit));
-            hashMap.put("medium", new SVG.Length(12.0f, unit));
-            hashMap.put("large", new SVG.Length(14.4f, unit));
-            hashMap.put("x-large", new SVG.Length(17.3f, unit));
-            hashMap.put("xx-large", new SVG.Length(20.7f, unit));
+            map.put("xx-small", new SVG.Length(0.694f, unit));
+            map.put("x-small", new SVG.Length(0.833f, unit));
+            map.put("small", new SVG.Length(10.0f, unit));
+            map.put("medium", new SVG.Length(12.0f, unit));
+            map.put("large", new SVG.Length(14.4f, unit));
+            map.put("x-large", new SVG.Length(17.3f, unit));
+            map.put("xx-large", new SVG.Length(20.7f, unit));
             SVG.Unit unit2 = SVG.Unit.percent;
-            hashMap.put("smaller", new SVG.Length(83.33f, unit2));
-            hashMap.put("larger", new SVG.Length(120.0f, unit2));
+            map.put("smaller", new SVG.Length(83.33f, unit2));
+            map.put("larger", new SVG.Length(120.0f, unit2));
         }
 
         private FontSizeKeywords() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class FontWeightKeywords {
         public static final Map fontWeightKeywords;
 
         static {
-            HashMap hashMap = new HashMap(13);
-            fontWeightKeywords = hashMap;
-            hashMap.put(SystemUIAnalytics.QPNE_VID_NORMAL, 400);
-            Integer valueOf = Integer.valueOf(KnoxEnterpriseLicenseManager.ERROR_LICENSE_DEACTIVATED);
-            hashMap.put("bold", valueOf);
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(1, hashMap, "bolder", -1, "lighter");
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(100, hashMap, DATA.DM_FIELD_INDEX.UT_PDN, 200, SystemUIAnalytics.SID_WALLPAPER_LOCK_COMMON_PREVIEW);
-            hashMap.put("300", 300);
-            hashMap.put("400", 400);
-            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(500, hashMap, SystemUIAnalytics.SID_SUBSCREEN_NORMAL, VolteConstants.ErrorCode.BUSY_EVERYWHERE, SystemUIAnalytics.SID_WALLPAPER_VIDEO_PREVIEW);
-            hashMap.put("700", valueOf);
-            hashMap.put(SystemUIAnalytics.SID_TOUCH_LOCKSCREEN_RESIZABLE, 800);
-            hashMap.put("900", 900);
+            HashMap map = new HashMap(13);
+            fontWeightKeywords = map;
+            map.put(SystemUIAnalytics.QPNE_VID_NORMAL, 400);
+            Integer numValueOf = Integer.valueOf(KnoxEnterpriseLicenseManager.ERROR_LICENSE_DEACTIVATED);
+            map.put("bold", numValueOf);
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(1, map, "bolder", -1, "lighter");
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(100, map, DATA.DM_FIELD_INDEX.UT_PDN, 200, SystemUIAnalytics.SID_WALLPAPER_LOCK_COMMON_PREVIEW);
+            map.put("300", 300);
+            map.put("400", 400);
+            SubtitleArrayMapping$$ExternalSyntheticOutline0.m(500, map, SystemUIAnalytics.SID_SUBSCREEN_NORMAL, VolteConstants.ErrorCode.BUSY_EVERYWHERE, SystemUIAnalytics.SID_WALLPAPER_VIDEO_PREVIEW);
+            map.put("700", numValueOf);
+            map.put(SystemUIAnalytics.SID_TOUCH_LOCKSCREEN_RESIZABLE, 800);
+            map.put("900", 900);
         }
 
         private FontWeightKeywords() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SAXHandler extends DefaultHandler2 {
         private SAXHandler() {
         }
@@ -756,7 +749,7 @@ public class SVGParser {
         }
 
         @Override // org.xml.sax.helpers.DefaultHandler, org.xml.sax.ContentHandler
-        public final void startElement(String str, String str2, String str3, Attributes attributes) {
+        public final void startElement(String str, String str2, String str3, Attributes attributes) throws SVGParseException {
             SVGParser.this.startElement(str, str2, str3, attributes);
         }
 
@@ -765,7 +758,6 @@ public class SVGParser {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     enum SVGAttr {
         CLASS,
         clip,
@@ -878,7 +870,6 @@ public class SVGParser {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     enum SVGElem {
         svg,
         a,
@@ -926,7 +917,6 @@ public class SVGParser {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class TextScanner {
         public final String input;
         public final int inputLength;
@@ -935,9 +925,9 @@ public class SVGParser {
 
         public TextScanner(String str) {
             this.inputLength = 0;
-            String trim = str.trim();
-            this.input = trim;
-            this.inputLength = trim.length();
+            String strTrim = str.trim();
+            this.input = strTrim;
+            this.inputLength = strTrim.length();
         }
 
         public static boolean isWhitespace(int i) {
@@ -967,12 +957,12 @@ public class SVGParser {
             if (i == this.inputLength) {
                 return null;
             }
-            char charAt = this.input.charAt(i);
-            if (charAt != '0' && charAt != '1') {
+            char cCharAt = this.input.charAt(i);
+            if (cCharAt != '0' && cCharAt != '1') {
                 return null;
             }
             this.position++;
-            return Boolean.valueOf(charAt == '1');
+            return Boolean.valueOf(cCharAt == '1');
         }
 
         public final float checkedNextFloat(float f) {
@@ -1009,20 +999,20 @@ public class SVGParser {
             int i = this.position;
             int i2 = this.inputLength;
             NumberParser numberParser = this.numberParser;
-            float parseNumber = numberParser.parseNumber(i, i2, this.input);
-            if (!Float.isNaN(parseNumber)) {
+            float number = numberParser.parseNumber(i, i2, this.input);
+            if (!Float.isNaN(number)) {
                 this.position = numberParser.pos;
             }
-            return parseNumber;
+            return number;
         }
 
         public final SVG.Length nextLength() {
-            float nextFloat = nextFloat();
-            if (Float.isNaN(nextFloat)) {
+            float fNextFloat = nextFloat();
+            if (Float.isNaN(fNextFloat)) {
                 return null;
             }
-            SVG.Unit nextUnit = nextUnit();
-            return nextUnit == null ? new SVG.Length(nextFloat, SVG.Unit.px) : new SVG.Length(nextFloat, nextUnit);
+            SVG.Unit unitNextUnit = nextUnit();
+            return unitNextUnit == null ? new SVG.Length(fNextFloat, SVG.Unit.px) : new SVG.Length(fNextFloat, unitNextUnit);
         }
 
         public final String nextQuotedString() {
@@ -1031,15 +1021,15 @@ public class SVGParser {
             }
             int i = this.position;
             String str = this.input;
-            char charAt = str.charAt(i);
-            if (charAt != '\'' && charAt != '\"') {
+            char cCharAt = str.charAt(i);
+            if (cCharAt != '\'' && cCharAt != '\"') {
                 return null;
             }
-            int advanceChar = advanceChar();
-            while (advanceChar != -1 && advanceChar != charAt) {
-                advanceChar = advanceChar();
+            int iAdvanceChar = advanceChar();
+            while (iAdvanceChar != -1 && iAdvanceChar != cCharAt) {
+                iAdvanceChar = advanceChar();
             }
-            if (advanceChar == -1) {
+            if (iAdvanceChar == -1) {
                 this.position = i;
                 return null;
             }
@@ -1067,9 +1057,9 @@ public class SVGParser {
                 return null;
             }
             try {
-                SVG.Unit valueOf = SVG.Unit.valueOf(str.substring(i2, i2 + 2).toLowerCase(Locale.US));
+                SVG.Unit unitValueOf = SVG.Unit.valueOf(str.substring(i2, i2 + 2).toLowerCase(Locale.US));
                 this.position += 2;
-                return valueOf;
+                return unitValueOf;
             } catch (IllegalArgumentException unused) {
                 return null;
             }
@@ -1080,11 +1070,11 @@ public class SVGParser {
             int i = this.position;
             int i2 = this.inputLength;
             NumberParser numberParser = this.numberParser;
-            float parseNumber = numberParser.parseNumber(i, i2, this.input);
-            if (!Float.isNaN(parseNumber)) {
+            float number = numberParser.parseNumber(i, i2, this.input);
+            if (!Float.isNaN(number)) {
                 this.position = numberParser.pos;
             }
-            return parseNumber;
+            return number;
         }
 
         public final boolean skipCommaWhitespace() {
@@ -1115,14 +1105,14 @@ public class SVGParser {
             }
             int i = this.position;
             String str = this.input;
-            char charAt = str.charAt(i);
-            if ((!z && isWhitespace(charAt)) || charAt == c) {
+            char cCharAt = str.charAt(i);
+            if ((!z && isWhitespace(cCharAt)) || cCharAt == c) {
                 return null;
             }
             int i2 = this.position;
-            int advanceChar = advanceChar();
-            while (advanceChar != -1 && advanceChar != c && (z || !isWhitespace(advanceChar))) {
-                advanceChar = advanceChar();
+            int iAdvanceChar = advanceChar();
+            while (iAdvanceChar != -1 && iAdvanceChar != c && (z || !isWhitespace(iAdvanceChar))) {
+                iAdvanceChar = advanceChar();
             }
             return str.substring(i2, this.position);
         }
@@ -1138,7 +1128,6 @@ public class SVGParser {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class XPPAttributesWrapper implements Attributes {
         public final XmlPullParser parser;
 
@@ -1252,15 +1241,15 @@ public class SVGParser {
 
     public static void parseAttributesConditional(SVG.SvgConditional svgConditional, Attributes attributes) {
         for (int i = 0; i < attributes.getLength(); i++) {
-            String trim = attributes.getValue(i).trim();
+            String strTrim = attributes.getValue(i).trim();
             switch (AnonymousClass1.$SwitchMap$com$caverock$androidsvg$SVGParser$SVGAttr[SVGAttr.fromString(attributes.getLocalName(i)).ordinal()]) {
                 case 21:
-                    TextScanner textScanner = new TextScanner(trim);
+                    TextScanner textScanner = new TextScanner(strTrim);
                     HashSet hashSet = new HashSet();
                     while (!textScanner.empty()) {
-                        String nextToken = textScanner.nextToken();
-                        if (nextToken.startsWith("http://www.w3.org/TR/SVG11/feature#")) {
-                            hashSet.add(nextToken.substring(35));
+                        String strNextToken = textScanner.nextToken();
+                        if (strNextToken.startsWith("http://www.w3.org/TR/SVG11/feature#")) {
+                            hashSet.add(strNextToken.substring(35));
                         } else {
                             hashSet.add("UNSUPPORTED");
                         }
@@ -1269,24 +1258,24 @@ public class SVGParser {
                     svgConditional.setRequiredFeatures(hashSet);
                     break;
                 case 22:
-                    svgConditional.setRequiredExtensions(trim);
+                    svgConditional.setRequiredExtensions(strTrim);
                     break;
                 case 23:
-                    TextScanner textScanner2 = new TextScanner(trim);
+                    TextScanner textScanner2 = new TextScanner(strTrim);
                     HashSet hashSet2 = new HashSet();
                     while (!textScanner2.empty()) {
-                        String nextToken2 = textScanner2.nextToken();
-                        int indexOf = nextToken2.indexOf(45);
-                        if (indexOf != -1) {
-                            nextToken2 = nextToken2.substring(0, indexOf);
+                        String strNextToken2 = textScanner2.nextToken();
+                        int iIndexOf = strNextToken2.indexOf(45);
+                        if (iIndexOf != -1) {
+                            strNextToken2 = strNextToken2.substring(0, iIndexOf);
                         }
-                        hashSet2.add(new Locale(nextToken2, "", "").getLanguage());
+                        hashSet2.add(new Locale(strNextToken2, "", "").getLanguage());
                         textScanner2.skipWhitespace();
                     }
                     svgConditional.setSystemLanguage(hashSet2);
                     break;
                 case 24:
-                    TextScanner textScanner3 = new TextScanner(trim);
+                    TextScanner textScanner3 = new TextScanner(strTrim);
                     HashSet hashSet3 = new HashSet();
                     while (!textScanner3.empty()) {
                         hashSet3.add(textScanner3.nextToken());
@@ -1295,14 +1284,14 @@ public class SVGParser {
                     svgConditional.setRequiredFormats(hashSet3);
                     break;
                 case 25:
-                    List parseFontFamily = parseFontFamily(trim);
-                    svgConditional.setRequiredFonts(parseFontFamily != null ? new HashSet(parseFontFamily) : new HashSet(0));
+                    List fontFamily = parseFontFamily(strTrim);
+                    svgConditional.setRequiredFonts(fontFamily != null ? new HashSet(fontFamily) : new HashSet(0));
                     break;
             }
         }
     }
 
-    public static void parseAttributesCore(SVG.SvgElementBase svgElementBase, Attributes attributes) {
+    public static void parseAttributesCore(SVG.SvgElementBase svgElementBase, Attributes attributes) throws SVGParseException {
         for (int i = 0; i < attributes.getLength(); i++) {
             String qName = attributes.getQName(i);
             if (qName.equals("id") || qName.equals("xml:id")) {
@@ -1310,13 +1299,13 @@ public class SVGParser {
                 return;
             }
             if (qName.equals("xml:space")) {
-                String trim = attributes.getValue(i).trim();
-                if ("default".equals(trim)) {
+                String strTrim = attributes.getValue(i).trim();
+                if ("default".equals(strTrim)) {
                     svgElementBase.spacePreserve = Boolean.FALSE;
                     return;
                 } else {
-                    if (!"preserve".equals(trim)) {
-                        throw new SVGParseException(AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("Invalid value for \"xml:space\" attribute: ", trim));
+                    if (!"preserve".equals(strTrim)) {
+                        throw new SVGParseException(AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("Invalid value for \"xml:space\" attribute: ", strTrim));
                     }
                     svgElementBase.spacePreserve = Boolean.TRUE;
                     return;
@@ -1325,110 +1314,66 @@ public class SVGParser {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:28:0x007f, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:38:0x007f, code lost:
     
         continue;
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void parseAttributesGradient(com.caverock.androidsvg.SVG.GradientElement r4, org.xml.sax.Attributes r5) {
-        /*
-            r0 = 0
-        L1:
-            int r1 = r5.getLength()
-            if (r0 >= r1) goto L82
-            java.lang.String r1 = r5.getValue(r0)
-            java.lang.String r1 = r1.trim()
-            int[] r2 = com.caverock.androidsvg.SVGParser.AnonymousClass1.$SwitchMap$com$caverock$androidsvg$SVGParser$SVGAttr
-            java.lang.String r3 = r5.getLocalName(r0)
-            com.caverock.androidsvg.SVGParser$SVGAttr r3 = com.caverock.androidsvg.SVGParser.SVGAttr.fromString(r3)
-            int r3 = r3.ordinal()
-            r2 = r2[r3]
-            r3 = 6
-            if (r2 == r3) goto L65
-            switch(r2) {
-                case 32: goto L42;
-                case 33: goto L3b;
-                case 34: goto L26;
-                default: goto L25;
+    public static void parseAttributesGradient(SVG.GradientElement gradientElement, Attributes attributes) throws SVGParseException {
+        for (int i = 0; i < attributes.getLength(); i++) {
+            String strTrim = attributes.getValue(i).trim();
+            int i2 = AnonymousClass1.$SwitchMap$com$caverock$androidsvg$SVGParser$SVGAttr[SVGAttr.fromString(attributes.getLocalName(i)).ordinal()];
+            if (i2 != 6) {
+                switch (i2) {
+                    case 32:
+                        if (!"objectBoundingBox".equals(strTrim)) {
+                            if (!"userSpaceOnUse".equals(strTrim)) {
+                                throw new SVGParseException("Invalid value for attribute gradientUnits");
+                            }
+                            gradientElement.gradientUnitsAreUser = Boolean.TRUE;
+                            break;
+                        } else {
+                            gradientElement.gradientUnitsAreUser = Boolean.FALSE;
+                            break;
+                        }
+                    case 33:
+                        gradientElement.gradientTransform = parseTransformList(strTrim);
+                        break;
+                    case 34:
+                        try {
+                            gradientElement.spreadMethod = SVG.GradientSpread.valueOf(strTrim);
+                            break;
+                        } catch (IllegalArgumentException unused) {
+                            throw new SVGParseException(ContentInViewNode$Request$$ExternalSyntheticOutline0.m("Invalid spreadMethod attribute. \"", strTrim, "\" is not a valid value."));
+                        }
+                }
+            } else if ("".equals(attributes.getURI(i)) || "http://www.w3.org/1999/xlink".equals(attributes.getURI(i))) {
+                gradientElement.href = strTrim;
             }
-        L25:
-            goto L7f
-        L26:
-            com.caverock.androidsvg.SVG$GradientSpread r2 = com.caverock.androidsvg.SVG.GradientSpread.valueOf(r1)     // Catch: java.lang.IllegalArgumentException -> L2d
-            r4.spreadMethod = r2     // Catch: java.lang.IllegalArgumentException -> L2d
-            goto L7f
-        L2d:
-            com.caverock.androidsvg.SVGParseException r4 = new com.caverock.androidsvg.SVGParseException
-            java.lang.String r5 = "Invalid spreadMethod attribute. \""
-            java.lang.String r0 = "\" is not a valid value."
-            java.lang.String r5 = androidx.compose.foundation.gestures.ContentInViewNode$Request$$ExternalSyntheticOutline0.m(r5, r1, r0)
-            r4.<init>(r5)
-            throw r4
-        L3b:
-            android.graphics.Matrix r1 = parseTransformList(r1)
-            r4.gradientTransform = r1
-            goto L7f
-        L42:
-            java.lang.String r2 = "objectBoundingBox"
-            boolean r2 = r2.equals(r1)
-            if (r2 == 0) goto L4f
-            java.lang.Boolean r1 = java.lang.Boolean.FALSE
-            r4.gradientUnitsAreUser = r1
-            goto L7f
-        L4f:
-            java.lang.String r2 = "userSpaceOnUse"
-            boolean r1 = r2.equals(r1)
-            if (r1 == 0) goto L5d
-            java.lang.Boolean r1 = java.lang.Boolean.TRUE
-            r4.gradientUnitsAreUser = r1
-            goto L7f
-        L5d:
-            com.caverock.androidsvg.SVGParseException r4 = new com.caverock.androidsvg.SVGParseException
-            java.lang.String r5 = "Invalid value for attribute gradientUnits"
-            r4.<init>(r5)
-            throw r4
-        L65:
-            java.lang.String r2 = ""
-            java.lang.String r3 = r5.getURI(r0)
-            boolean r2 = r2.equals(r3)
-            if (r2 != 0) goto L7d
-            java.lang.String r2 = "http://www.w3.org/1999/xlink"
-            java.lang.String r3 = r5.getURI(r0)
-            boolean r2 = r2.equals(r3)
-            if (r2 == 0) goto L7f
-        L7d:
-            r4.href = r1
-        L7f:
-            int r0 = r0 + 1
-            goto L1
-        L82:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.caverock.androidsvg.SVGParser.parseAttributesGradient(com.caverock.androidsvg.SVG$GradientElement, org.xml.sax.Attributes):void");
+        }
     }
 
-    public static void parseAttributesPolyLine(SVG.PolyLine polyLine, Attributes attributes, String str) {
+    public static void parseAttributesPolyLine(SVG.PolyLine polyLine, Attributes attributes, String str) throws SVGParseException {
         for (int i = 0; i < attributes.getLength(); i++) {
             if (SVGAttr.fromString(attributes.getLocalName(i)) == SVGAttr.points) {
                 TextScanner textScanner = new TextScanner(attributes.getValue(i));
                 ArrayList arrayList = new ArrayList();
                 textScanner.skipWhitespace();
                 while (!textScanner.empty()) {
-                    float nextFloat = textScanner.nextFloat();
-                    if (Float.isNaN(nextFloat)) {
+                    float fNextFloat = textScanner.nextFloat();
+                    if (Float.isNaN(fNextFloat)) {
                         throw new SVGParseException(ContentInViewNode$Request$$ExternalSyntheticOutline0.m("Invalid <", str, "> points attribute. Non-coordinate content found in list."));
                     }
                     textScanner.skipCommaWhitespace();
-                    float nextFloat2 = textScanner.nextFloat();
-                    if (Float.isNaN(nextFloat2)) {
+                    float fNextFloat2 = textScanner.nextFloat();
+                    if (Float.isNaN(fNextFloat2)) {
                         throw new SVGParseException(ContentInViewNode$Request$$ExternalSyntheticOutline0.m("Invalid <", str, "> points attribute. There should be an even number of coordinates."));
                     }
                     textScanner.skipCommaWhitespace();
-                    arrayList.add(Float.valueOf(nextFloat));
-                    arrayList.add(Float.valueOf(nextFloat2));
+                    arrayList.add(Float.valueOf(fNextFloat));
+                    arrayList.add(Float.valueOf(fNextFloat2));
                 }
                 polyLine.points = new float[arrayList.size()];
                 int size = arrayList.size();
@@ -1446,20 +1391,20 @@ public class SVGParser {
 
     public static void parseAttributesStyle(SVG.SvgElementBase svgElementBase, Attributes attributes) {
         for (int i = 0; i < attributes.getLength(); i++) {
-            String trim = attributes.getValue(i).trim();
-            if (trim.length() != 0) {
+            String strTrim = attributes.getValue(i).trim();
+            if (strTrim.length() != 0) {
                 int i2 = AnonymousClass1.$SwitchMap$com$caverock$androidsvg$SVGParser$SVGAttr[SVGAttr.fromString(attributes.getLocalName(i)).ordinal()];
                 if (i2 == 45) {
-                    TextScanner textScanner = new TextScanner(trim.replaceAll("/\\*.*?\\*/", ""));
+                    TextScanner textScanner = new TextScanner(strTrim.replaceAll("/\\*.*?\\*/", ""));
                     while (true) {
-                        String nextToken = textScanner.nextToken(':', false);
+                        String strNextToken = textScanner.nextToken(':', false);
                         textScanner.skipWhitespace();
                         if (!textScanner.consume(':')) {
                             break;
                         }
                         textScanner.skipWhitespace();
-                        String nextToken2 = textScanner.nextToken(';', true);
-                        if (nextToken2 == null) {
+                        String strNextToken2 = textScanner.nextToken(';', true);
+                        if (strNextToken2 == null) {
                             break;
                         }
                         textScanner.skipWhitespace();
@@ -1467,7 +1412,7 @@ public class SVGParser {
                             if (svgElementBase.style == null) {
                                 svgElementBase.style = new SVG.Style();
                             }
-                            processStyleProperty(svgElementBase.style, nextToken, nextToken2);
+                            processStyleProperty(svgElementBase.style, strNextToken, strNextToken2);
                             textScanner.skipWhitespace();
                         }
                     }
@@ -1477,15 +1422,15 @@ public class SVGParser {
                     }
                     processStyleProperty(svgElementBase.baseStyle, attributes.getLocalName(i), attributes.getValue(i).trim());
                 } else {
-                    CSSParser.CSSTextScanner cSSTextScanner = new CSSParser.CSSTextScanner(trim);
+                    CSSParser.CSSTextScanner cSSTextScanner = new CSSParser.CSSTextScanner(strTrim);
                     ArrayList arrayList = null;
                     while (!cSSTextScanner.empty()) {
-                        String nextToken3 = cSSTextScanner.nextToken();
-                        if (nextToken3 != null) {
+                        String strNextToken3 = cSSTextScanner.nextToken();
+                        if (strNextToken3 != null) {
                             if (arrayList == null) {
                                 arrayList = new ArrayList();
                             }
-                            arrayList.add(nextToken3);
+                            arrayList.add(strNextToken3);
                             cSSTextScanner.skipWhitespace();
                         }
                     }
@@ -1497,16 +1442,16 @@ public class SVGParser {
 
     public static void parseAttributesTextPosition(SVG.TextPositionedContainer textPositionedContainer, Attributes attributes) {
         for (int i = 0; i < attributes.getLength(); i++) {
-            String trim = attributes.getValue(i).trim();
+            String strTrim = attributes.getValue(i).trim();
             int i2 = AnonymousClass1.$SwitchMap$com$caverock$androidsvg$SVGParser$SVGAttr[SVGAttr.fromString(attributes.getLocalName(i)).ordinal()];
             if (i2 == 1) {
-                textPositionedContainer.x = parseLengthList(trim);
+                textPositionedContainer.x = parseLengthList(strTrim);
             } else if (i2 == 2) {
-                textPositionedContainer.y = parseLengthList(trim);
+                textPositionedContainer.y = parseLengthList(strTrim);
             } else if (i2 == 19) {
-                textPositionedContainer.dx = parseLengthList(trim);
+                textPositionedContainer.dx = parseLengthList(strTrim);
             } else if (i2 == 20) {
-                textPositionedContainer.dy = parseLengthList(trim);
+                textPositionedContainer.dy = parseLengthList(strTrim);
             }
         }
     }
@@ -1519,39 +1464,39 @@ public class SVGParser {
         }
     }
 
-    public static void parseAttributesViewBox(SVG.SvgViewBoxContainer svgViewBoxContainer, Attributes attributes) {
+    public static void parseAttributesViewBox(SVG.SvgViewBoxContainer svgViewBoxContainer, Attributes attributes) throws SVGParseException {
         for (int i = 0; i < attributes.getLength(); i++) {
-            String trim = attributes.getValue(i).trim();
+            String strTrim = attributes.getValue(i).trim();
             int i2 = AnonymousClass1.$SwitchMap$com$caverock$androidsvg$SVGParser$SVGAttr[SVGAttr.fromString(attributes.getLocalName(i)).ordinal()];
             if (i2 == 7) {
-                parsePreserveAspectRatio(svgViewBoxContainer, trim);
+                parsePreserveAspectRatio(svgViewBoxContainer, strTrim);
             } else if (i2 != 87) {
                 continue;
             } else {
-                TextScanner textScanner = new TextScanner(trim);
+                TextScanner textScanner = new TextScanner(strTrim);
                 textScanner.skipWhitespace();
-                float nextFloat = textScanner.nextFloat();
+                float fNextFloat = textScanner.nextFloat();
                 textScanner.skipCommaWhitespace();
-                float nextFloat2 = textScanner.nextFloat();
+                float fNextFloat2 = textScanner.nextFloat();
                 textScanner.skipCommaWhitespace();
-                float nextFloat3 = textScanner.nextFloat();
+                float fNextFloat3 = textScanner.nextFloat();
                 textScanner.skipCommaWhitespace();
-                float nextFloat4 = textScanner.nextFloat();
-                if (Float.isNaN(nextFloat) || Float.isNaN(nextFloat2) || Float.isNaN(nextFloat3) || Float.isNaN(nextFloat4)) {
+                float fNextFloat4 = textScanner.nextFloat();
+                if (Float.isNaN(fNextFloat) || Float.isNaN(fNextFloat2) || Float.isNaN(fNextFloat3) || Float.isNaN(fNextFloat4)) {
                     throw new SVGParseException("Invalid viewBox definition - should have four numbers");
                 }
-                if (nextFloat3 < 0.0f) {
+                if (fNextFloat3 < 0.0f) {
                     throw new SVGParseException("Invalid viewBox. width cannot be negative");
                 }
-                if (nextFloat4 < 0.0f) {
+                if (fNextFloat4 < 0.0f) {
                     throw new SVGParseException("Invalid viewBox. height cannot be negative");
                 }
-                svgViewBoxContainer.viewBox = new SVG.Box(nextFloat, nextFloat2, nextFloat3, nextFloat4);
+                svgViewBoxContainer.viewBox = new SVG.Box(fNextFloat, fNextFloat2, fNextFloat3, fNextFloat4);
             }
         }
     }
 
-    public static SVG.Colour parseColour(String str) {
+    public static SVG.Colour parseColour(String str) throws SVGParseException {
         long j;
         int i;
         if (str.charAt(0) == '#') {
@@ -1561,21 +1506,21 @@ public class SVGParser {
                 long j2 = 0;
                 int i2 = 1;
                 while (i2 < length) {
-                    char charAt = str.charAt(i2);
-                    if (charAt < '0' || charAt > '9') {
-                        if (charAt >= 'A' && charAt <= 'F') {
+                    char cCharAt = str.charAt(i2);
+                    if (cCharAt < '0' || cCharAt > '9') {
+                        if (cCharAt >= 'A' && cCharAt <= 'F') {
                             j = j2 * 16;
-                            i = charAt - 'A';
+                            i = cCharAt - 'A';
                         } else {
-                            if (charAt < 'a' || charAt > 'f') {
+                            if (cCharAt < 'a' || cCharAt > 'f') {
                                 break;
                             }
                             j = j2 * 16;
-                            i = charAt - 'a';
+                            i = cCharAt - 'a';
                         }
                         j2 = j + i + 10;
                     } else {
-                        j2 = (j2 * 16) + (charAt - '0');
+                        j2 = (j2 * 16) + (cCharAt - '0');
                     }
                     if (j2 > 4294967295L) {
                         break;
@@ -1615,71 +1560,71 @@ public class SVGParser {
             return new SVG.Colour((i12 << 24) | (i12 << 28) | (i9 << 8) | (i9 << 4) | (i10 << 4) | i10 | i11 | (i11 >> 4));
         }
         String lowerCase = str.toLowerCase(Locale.US);
-        boolean startsWith = lowerCase.startsWith("rgba(");
-        if (startsWith || lowerCase.startsWith("rgb(")) {
-            TextScanner textScanner = new TextScanner(str.substring(startsWith ? 5 : 4));
+        boolean zStartsWith = lowerCase.startsWith("rgba(");
+        if (zStartsWith || lowerCase.startsWith("rgb(")) {
+            TextScanner textScanner = new TextScanner(str.substring(zStartsWith ? 5 : 4));
             textScanner.skipWhitespace();
-            float nextFloat = textScanner.nextFloat();
-            if (!Float.isNaN(nextFloat) && textScanner.consume('%')) {
-                nextFloat = (nextFloat * 256.0f) / 100.0f;
+            float fNextFloat = textScanner.nextFloat();
+            if (!Float.isNaN(fNextFloat) && textScanner.consume('%')) {
+                fNextFloat = (fNextFloat * 256.0f) / 100.0f;
             }
-            float checkedNextFloat = textScanner.checkedNextFloat(nextFloat);
-            if (!Float.isNaN(checkedNextFloat) && textScanner.consume('%')) {
-                checkedNextFloat = (checkedNextFloat * 256.0f) / 100.0f;
+            float fCheckedNextFloat = textScanner.checkedNextFloat(fNextFloat);
+            if (!Float.isNaN(fCheckedNextFloat) && textScanner.consume('%')) {
+                fCheckedNextFloat = (fCheckedNextFloat * 256.0f) / 100.0f;
             }
-            float checkedNextFloat2 = textScanner.checkedNextFloat(checkedNextFloat);
-            if (!Float.isNaN(checkedNextFloat2) && textScanner.consume('%')) {
-                checkedNextFloat2 = (checkedNextFloat2 * 256.0f) / 100.0f;
+            float fCheckedNextFloat2 = textScanner.checkedNextFloat(fCheckedNextFloat);
+            if (!Float.isNaN(fCheckedNextFloat2) && textScanner.consume('%')) {
+                fCheckedNextFloat2 = (fCheckedNextFloat2 * 256.0f) / 100.0f;
             }
-            if (!startsWith) {
+            if (!zStartsWith) {
                 textScanner.skipWhitespace();
-                if (Float.isNaN(checkedNextFloat2) || !textScanner.consume(')')) {
+                if (Float.isNaN(fCheckedNextFloat2) || !textScanner.consume(')')) {
                     throw new SVGParseException("Bad rgb() colour value: ".concat(str));
                 }
-                return new SVG.Colour((clamp255(nextFloat) << 16) | (-16777216) | (clamp255(checkedNextFloat) << 8) | clamp255(checkedNextFloat2));
+                return new SVG.Colour((clamp255(fNextFloat) << 16) | (-16777216) | (clamp255(fCheckedNextFloat) << 8) | clamp255(fCheckedNextFloat2));
             }
-            float checkedNextFloat3 = textScanner.checkedNextFloat(checkedNextFloat2);
+            float fCheckedNextFloat3 = textScanner.checkedNextFloat(fCheckedNextFloat2);
             textScanner.skipWhitespace();
-            if (Float.isNaN(checkedNextFloat3) || !textScanner.consume(')')) {
+            if (Float.isNaN(fCheckedNextFloat3) || !textScanner.consume(')')) {
                 throw new SVGParseException("Bad rgba() colour value: ".concat(str));
             }
-            return new SVG.Colour((clamp255(checkedNextFloat3 * 256.0f) << 24) | (clamp255(nextFloat) << 16) | (clamp255(checkedNextFloat) << 8) | clamp255(checkedNextFloat2));
+            return new SVG.Colour((clamp255(fCheckedNextFloat3 * 256.0f) << 24) | (clamp255(fNextFloat) << 16) | (clamp255(fCheckedNextFloat) << 8) | clamp255(fCheckedNextFloat2));
         }
-        boolean startsWith2 = lowerCase.startsWith("hsla(");
-        if (!startsWith2 && !lowerCase.startsWith("hsl(")) {
+        boolean zStartsWith2 = lowerCase.startsWith("hsla(");
+        if (!zStartsWith2 && !lowerCase.startsWith("hsl(")) {
             Integer num = (Integer) ((HashMap) ColourKeywords.colourKeywords).get(lowerCase);
             if (num != null) {
                 return new SVG.Colour(num.intValue());
             }
             throw new SVGParseException("Invalid colour keyword: ".concat(lowerCase));
         }
-        TextScanner textScanner2 = new TextScanner(str.substring(startsWith2 ? 5 : 4));
+        TextScanner textScanner2 = new TextScanner(str.substring(zStartsWith2 ? 5 : 4));
         textScanner2.skipWhitespace();
-        float nextFloat2 = textScanner2.nextFloat();
-        float checkedNextFloat4 = textScanner2.checkedNextFloat(nextFloat2);
-        if (!Float.isNaN(checkedNextFloat4)) {
+        float fNextFloat2 = textScanner2.nextFloat();
+        float fCheckedNextFloat4 = textScanner2.checkedNextFloat(fNextFloat2);
+        if (!Float.isNaN(fCheckedNextFloat4)) {
             textScanner2.consume('%');
         }
-        float checkedNextFloat5 = textScanner2.checkedNextFloat(checkedNextFloat4);
-        if (!Float.isNaN(checkedNextFloat5)) {
+        float fCheckedNextFloat5 = textScanner2.checkedNextFloat(fCheckedNextFloat4);
+        if (!Float.isNaN(fCheckedNextFloat5)) {
             textScanner2.consume('%');
         }
-        if (!startsWith2) {
+        if (!zStartsWith2) {
             textScanner2.skipWhitespace();
-            if (Float.isNaN(checkedNextFloat5) || !textScanner2.consume(')')) {
+            if (Float.isNaN(fCheckedNextFloat5) || !textScanner2.consume(')')) {
                 throw new SVGParseException("Bad hsl() colour value: ".concat(str));
             }
-            return new SVG.Colour(hslToRgb(nextFloat2, checkedNextFloat4, checkedNextFloat5) | (-16777216));
+            return new SVG.Colour(hslToRgb(fNextFloat2, fCheckedNextFloat4, fCheckedNextFloat5) | (-16777216));
         }
-        float checkedNextFloat6 = textScanner2.checkedNextFloat(checkedNextFloat5);
+        float fCheckedNextFloat6 = textScanner2.checkedNextFloat(fCheckedNextFloat5);
         textScanner2.skipWhitespace();
-        if (Float.isNaN(checkedNextFloat6) || !textScanner2.consume(')')) {
+        if (Float.isNaN(fCheckedNextFloat6) || !textScanner2.consume(')')) {
             throw new SVGParseException("Bad hsla() colour value: ".concat(str));
         }
-        return new SVG.Colour((clamp255(checkedNextFloat6 * 256.0f) << 24) | hslToRgb(nextFloat2, checkedNextFloat4, checkedNextFloat5));
+        return new SVG.Colour((clamp255(fCheckedNextFloat6 * 256.0f) << 24) | hslToRgb(fNextFloat2, fCheckedNextFloat4, fCheckedNextFloat5));
     }
 
-    public static float parseFloat(String str) {
+    public static float parseFloat(String str) throws SVGParseException {
         int length = str.length();
         if (length != 0) {
             return parseFloat(length, str);
@@ -1691,17 +1636,17 @@ public class SVGParser {
         TextScanner textScanner = new TextScanner(str);
         ArrayList arrayList = null;
         do {
-            String nextQuotedString = textScanner.nextQuotedString();
-            if (nextQuotedString == null) {
-                nextQuotedString = textScanner.nextToken(',', true);
+            String strNextQuotedString = textScanner.nextQuotedString();
+            if (strNextQuotedString == null) {
+                strNextQuotedString = textScanner.nextToken(',', true);
             }
-            if (nextQuotedString == null) {
+            if (strNextQuotedString == null) {
                 return arrayList;
             }
             if (arrayList == null) {
                 arrayList = new ArrayList();
             }
-            arrayList.add(nextQuotedString);
+            arrayList.add(strNextQuotedString);
             textScanner.skipCommaWhitespace();
         } while (!textScanner.empty());
         return arrayList;
@@ -1714,32 +1659,32 @@ public class SVGParser {
         return null;
     }
 
-    public static SVG.Length parseLength(String str) {
+    public static SVG.Length parseLength(String str) throws SVGParseException {
         if (str.length() == 0) {
             throw new SVGParseException("Invalid length value (empty string)");
         }
         int length = str.length();
-        SVG.Unit unit = SVG.Unit.px;
-        char charAt = str.charAt(length - 1);
-        if (charAt == '%') {
+        SVG.Unit unitValueOf = SVG.Unit.px;
+        char cCharAt = str.charAt(length - 1);
+        if (cCharAt == '%') {
             length--;
-            unit = SVG.Unit.percent;
-        } else if (length > 2 && Character.isLetter(charAt) && Character.isLetter(str.charAt(length - 2))) {
+            unitValueOf = SVG.Unit.percent;
+        } else if (length > 2 && Character.isLetter(cCharAt) && Character.isLetter(str.charAt(length - 2))) {
             length -= 2;
             try {
-                unit = SVG.Unit.valueOf(str.substring(length).toLowerCase(Locale.US));
+                unitValueOf = SVG.Unit.valueOf(str.substring(length).toLowerCase(Locale.US));
             } catch (IllegalArgumentException unused) {
                 throw new SVGParseException("Invalid length unit specifier: ".concat(str));
             }
         }
         try {
-            return new SVG.Length(parseFloat(length, str), unit);
+            return new SVG.Length(parseFloat(length, str), unitValueOf);
         } catch (NumberFormatException e) {
             throw new SVGParseException("Invalid length value: ".concat(str), e);
         }
     }
 
-    public static List parseLengthList(String str) {
+    public static List parseLengthList(String str) throws SVGParseException {
         String str2;
         if (str.length() == 0) {
             throw new SVGParseException("Invalid length list (empty string)");
@@ -1748,28 +1693,28 @@ public class SVGParser {
         TextScanner textScanner = new TextScanner(str);
         textScanner.skipWhitespace();
         while (!textScanner.empty()) {
-            float nextFloat = textScanner.nextFloat();
-            if (Float.isNaN(nextFloat)) {
+            float fNextFloat = textScanner.nextFloat();
+            if (Float.isNaN(fNextFloat)) {
                 StringBuilder sb = new StringBuilder("Invalid length list value: ");
                 int i = textScanner.position;
                 while (true) {
-                    boolean empty = textScanner.empty();
+                    boolean zEmpty = textScanner.empty();
                     str2 = textScanner.input;
-                    if (empty || TextScanner.isWhitespace(str2.charAt(textScanner.position))) {
+                    if (zEmpty || TextScanner.isWhitespace(str2.charAt(textScanner.position))) {
                         break;
                     }
                     textScanner.position++;
                 }
-                String substring = str2.substring(i, textScanner.position);
+                String strSubstring = str2.substring(i, textScanner.position);
                 textScanner.position = i;
-                sb.append(substring);
+                sb.append(strSubstring);
                 throw new SVGParseException(sb.toString());
             }
-            SVG.Unit nextUnit = textScanner.nextUnit();
-            if (nextUnit == null) {
-                nextUnit = SVG.Unit.px;
+            SVG.Unit unitNextUnit = textScanner.nextUnit();
+            if (unitNextUnit == null) {
+                unitNextUnit = SVG.Unit.px;
             }
-            arrayList.add(new SVG.Length(nextFloat, nextUnit));
+            arrayList.add(new SVG.Length(fNextFloat, unitNextUnit));
             textScanner.skipCommaWhitespace();
         }
         return arrayList;
@@ -1781,23 +1726,24 @@ public class SVGParser {
 
     public static Float parseOpacity(String str) {
         try {
-            float parseFloat = parseFloat(str);
-            float f = 0.0f;
-            if (parseFloat >= 0.0f) {
-                f = 1.0f;
-                if (parseFloat > 1.0f) {
+            float f = parseFloat(str);
+            float f2 = 0.0f;
+            if (f < 0.0f) {
+                f = f2;
+            } else {
+                f2 = 1.0f;
+                if (f > 1.0f) {
+                    f = f2;
                 }
-                return Float.valueOf(parseFloat);
             }
-            parseFloat = f;
-            return Float.valueOf(parseFloat);
+            return Float.valueOf(f);
         } catch (SVGParseException unused) {
             return null;
         }
     }
 
     public static SVG.SvgPaint parsePaintSpecifier(String str) {
-        SVG.SvgPaint svgPaint = null;
+        SVG.SvgPaint colour = null;
         if (!str.startsWith("url(")) {
             if (str.equals(SignalSeverity.NONE)) {
                 return SVG.Colour.TRANSPARENT;
@@ -1811,47 +1757,47 @@ public class SVGParser {
                 return null;
             }
         }
-        int indexOf = str.indexOf(")");
-        if (indexOf == -1) {
+        int iIndexOf = str.indexOf(")");
+        if (iIndexOf == -1) {
             return new SVG.PaintReference(str.substring(4).trim(), null);
         }
-        String trim = str.substring(4, indexOf).trim();
-        String trim2 = str.substring(indexOf + 1).trim();
-        if (trim2.length() > 0) {
-            if (trim2.equals(SignalSeverity.NONE)) {
-                svgPaint = SVG.Colour.TRANSPARENT;
-            } else if (trim2.equals("currentColor")) {
-                svgPaint = SVG.CurrentColor.instance;
+        String strTrim = str.substring(4, iIndexOf).trim();
+        String strTrim2 = str.substring(iIndexOf + 1).trim();
+        if (strTrim2.length() > 0) {
+            if (strTrim2.equals(SignalSeverity.NONE)) {
+                colour = SVG.Colour.TRANSPARENT;
+            } else if (strTrim2.equals("currentColor")) {
+                colour = SVG.CurrentColor.instance;
             } else {
                 try {
-                    svgPaint = parseColour(trim2);
+                    colour = parseColour(strTrim2);
                 } catch (SVGParseException unused2) {
                 }
             }
         }
-        return new SVG.PaintReference(trim, svgPaint);
+        return new SVG.PaintReference(strTrim, colour);
     }
 
-    public static void parsePreserveAspectRatio(SVG.SvgPreserveAspectRatioContainer svgPreserveAspectRatioContainer, String str) {
+    public static void parsePreserveAspectRatio(SVG.SvgPreserveAspectRatioContainer svgPreserveAspectRatioContainer, String str) throws SVGParseException {
         PreserveAspectRatio.Scale scale;
         TextScanner textScanner = new TextScanner(str);
         textScanner.skipWhitespace();
-        String nextToken = textScanner.nextToken();
-        if ("defer".equals(nextToken)) {
+        String strNextToken = textScanner.nextToken();
+        if ("defer".equals(strNextToken)) {
             textScanner.skipWhitespace();
-            nextToken = textScanner.nextToken();
+            strNextToken = textScanner.nextToken();
         }
-        PreserveAspectRatio.Alignment alignment = (PreserveAspectRatio.Alignment) ((HashMap) AspectRatioKeywords.aspectRatioKeywords).get(nextToken);
+        PreserveAspectRatio.Alignment alignment = (PreserveAspectRatio.Alignment) ((HashMap) AspectRatioKeywords.aspectRatioKeywords).get(strNextToken);
         textScanner.skipWhitespace();
         if (textScanner.empty()) {
             scale = null;
         } else {
-            String nextToken2 = textScanner.nextToken();
-            nextToken2.getClass();
-            if (nextToken2.equals("meet")) {
+            String strNextToken2 = textScanner.nextToken();
+            strNextToken2.getClass();
+            if (strNextToken2.equals("meet")) {
                 scale = PreserveAspectRatio.Scale.meet;
             } else {
-                if (!nextToken2.equals("slice")) {
+                if (!strNextToken2.equals("slice")) {
                     throw new SVGParseException(AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("Invalid preserveAspectRatio definition: ", str));
                 }
                 scale = PreserveAspectRatio.Scale.slice;
@@ -1861,65 +1807,65 @@ public class SVGParser {
     }
 
     public static Map parseProcessingInstructionAttributes(TextScanner textScanner) {
-        HashMap hashMap = new HashMap();
+        HashMap map = new HashMap();
         textScanner.skipWhitespace();
-        String nextToken = textScanner.nextToken('=', false);
-        while (nextToken != null) {
+        String strNextToken = textScanner.nextToken('=', false);
+        while (strNextToken != null) {
             textScanner.consume('=');
-            hashMap.put(nextToken, textScanner.nextQuotedString());
+            map.put(strNextToken, textScanner.nextQuotedString());
             textScanner.skipWhitespace();
-            nextToken = textScanner.nextToken('=', false);
+            strNextToken = textScanner.nextToken('=', false);
         }
-        return hashMap;
+        return map;
     }
 
-    public static Matrix parseTransformList(String str) {
+    public static Matrix parseTransformList(String str) throws SVGParseException {
         Matrix matrix = new Matrix();
         TextScanner textScanner = new TextScanner(str);
         textScanner.skipWhitespace();
         while (!textScanner.empty()) {
-            String str2 = null;
+            String strSubstring = null;
             if (!textScanner.empty()) {
                 int i = textScanner.position;
-                String str3 = textScanner.input;
-                int charAt = str3.charAt(i);
+                String str2 = textScanner.input;
+                int iCharAt = str2.charAt(i);
                 while (true) {
-                    if ((charAt >= 97 && charAt <= 122) || (charAt >= 65 && charAt <= 90)) {
-                        charAt = textScanner.advanceChar();
+                    if ((iCharAt >= 97 && iCharAt <= 122) || (iCharAt >= 65 && iCharAt <= 90)) {
+                        iCharAt = textScanner.advanceChar();
                     }
                 }
                 int i2 = textScanner.position;
-                while (TextScanner.isWhitespace(charAt)) {
-                    charAt = textScanner.advanceChar();
+                while (TextScanner.isWhitespace(iCharAt)) {
+                    iCharAt = textScanner.advanceChar();
                 }
-                if (charAt == 40) {
+                if (iCharAt == 40) {
                     textScanner.position++;
-                    str2 = str3.substring(i, i2);
+                    strSubstring = str2.substring(i, i2);
                 } else {
                     textScanner.position = i;
                 }
             }
-            if (str2 == null) {
+            if (strSubstring == null) {
                 throw new SVGParseException(AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("Bad transform function encountered in transform list: ", str));
             }
-            switch (str2) {
+            switch (strSubstring) {
                 case "matrix":
                     textScanner.skipWhitespace();
-                    float nextFloat = textScanner.nextFloat();
+                    float fNextFloat = textScanner.nextFloat();
                     textScanner.skipCommaWhitespace();
-                    float nextFloat2 = textScanner.nextFloat();
+                    float fNextFloat2 = textScanner.nextFloat();
                     textScanner.skipCommaWhitespace();
-                    float nextFloat3 = textScanner.nextFloat();
+                    float fNextFloat3 = textScanner.nextFloat();
                     textScanner.skipCommaWhitespace();
-                    float nextFloat4 = textScanner.nextFloat();
+                    float fNextFloat4 = textScanner.nextFloat();
                     textScanner.skipCommaWhitespace();
-                    float nextFloat5 = textScanner.nextFloat();
+                    float fNextFloat5 = textScanner.nextFloat();
                     textScanner.skipCommaWhitespace();
-                    float nextFloat6 = textScanner.nextFloat();
+                    float fNextFloat6 = textScanner.nextFloat();
                     textScanner.skipWhitespace();
-                    if (!Float.isNaN(nextFloat6) && textScanner.consume(')')) {
+                    if (!Float.isNaN(fNextFloat6) && textScanner.consume(')')) {
                         Matrix matrix2 = new Matrix();
-                        matrix2.setValues(new float[]{nextFloat, nextFloat3, nextFloat5, nextFloat2, nextFloat4, nextFloat6, 0.0f, 0.0f, 1.0f});
+                        matrix2.setValues(new float[]{fNextFloat, fNextFloat3, fNextFloat5, fNextFloat2, fNextFloat4, fNextFloat6, 0.0f, 0.0f, 1.0f});
                         matrix.preConcat(matrix2);
                         break;
                     } else {
@@ -1928,34 +1874,33 @@ public class SVGParser {
                     break;
                 case "rotate":
                     textScanner.skipWhitespace();
-                    float nextFloat7 = textScanner.nextFloat();
-                    float possibleNextFloat = textScanner.possibleNextFloat();
-                    float possibleNextFloat2 = textScanner.possibleNextFloat();
+                    float fNextFloat7 = textScanner.nextFloat();
+                    float fPossibleNextFloat = textScanner.possibleNextFloat();
+                    float fPossibleNextFloat2 = textScanner.possibleNextFloat();
                     textScanner.skipWhitespace();
-                    if (Float.isNaN(nextFloat7) || !textScanner.consume(')')) {
+                    if (Float.isNaN(fNextFloat7) || !textScanner.consume(')')) {
                         throw new SVGParseException(AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("Invalid transform list: ", str));
                     }
-                    if (Float.isNaN(possibleNextFloat)) {
-                        matrix.preRotate(nextFloat7);
+                    if (Float.isNaN(fPossibleNextFloat)) {
+                        matrix.preRotate(fNextFloat7);
                         break;
-                    } else if (!Float.isNaN(possibleNextFloat2)) {
-                        matrix.preRotate(nextFloat7, possibleNextFloat, possibleNextFloat2);
+                    } else if (!Float.isNaN(fPossibleNextFloat2)) {
+                        matrix.preRotate(fNextFloat7, fPossibleNextFloat, fPossibleNextFloat2);
                         break;
                     } else {
                         throw new SVGParseException(AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("Invalid transform list: ", str));
                     }
-                    break;
                 case "scale":
                     textScanner.skipWhitespace();
-                    float nextFloat8 = textScanner.nextFloat();
-                    float possibleNextFloat3 = textScanner.possibleNextFloat();
+                    float fNextFloat8 = textScanner.nextFloat();
+                    float fPossibleNextFloat3 = textScanner.possibleNextFloat();
                     textScanner.skipWhitespace();
-                    if (!Float.isNaN(nextFloat8) && textScanner.consume(')')) {
-                        if (!Float.isNaN(possibleNextFloat3)) {
-                            matrix.preScale(nextFloat8, possibleNextFloat3);
+                    if (!Float.isNaN(fNextFloat8) && textScanner.consume(')')) {
+                        if (!Float.isNaN(fPossibleNextFloat3)) {
+                            matrix.preScale(fNextFloat8, fPossibleNextFloat3);
                             break;
                         } else {
-                            matrix.preScale(nextFloat8, nextFloat8);
+                            matrix.preScale(fNextFloat8, fNextFloat8);
                             break;
                         }
                     } else {
@@ -1964,10 +1909,10 @@ public class SVGParser {
                     break;
                 case "skewX":
                     textScanner.skipWhitespace();
-                    float nextFloat9 = textScanner.nextFloat();
+                    float fNextFloat9 = textScanner.nextFloat();
                     textScanner.skipWhitespace();
-                    if (!Float.isNaN(nextFloat9) && textScanner.consume(')')) {
-                        matrix.preSkew((float) Math.tan(Math.toRadians(nextFloat9)), 0.0f);
+                    if (!Float.isNaN(fNextFloat9) && textScanner.consume(')')) {
+                        matrix.preSkew((float) Math.tan(Math.toRadians(fNextFloat9)), 0.0f);
                         break;
                     } else {
                         throw new SVGParseException(AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("Invalid transform list: ", str));
@@ -1975,10 +1920,10 @@ public class SVGParser {
                     break;
                 case "skewY":
                     textScanner.skipWhitespace();
-                    float nextFloat10 = textScanner.nextFloat();
+                    float fNextFloat10 = textScanner.nextFloat();
                     textScanner.skipWhitespace();
-                    if (!Float.isNaN(nextFloat10) && textScanner.consume(')')) {
-                        matrix.preSkew(0.0f, (float) Math.tan(Math.toRadians(nextFloat10)));
+                    if (!Float.isNaN(fNextFloat10) && textScanner.consume(')')) {
+                        matrix.preSkew(0.0f, (float) Math.tan(Math.toRadians(fNextFloat10)));
                         break;
                     } else {
                         throw new SVGParseException(AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("Invalid transform list: ", str));
@@ -1986,15 +1931,15 @@ public class SVGParser {
                     break;
                 case "translate":
                     textScanner.skipWhitespace();
-                    float nextFloat11 = textScanner.nextFloat();
-                    float possibleNextFloat4 = textScanner.possibleNextFloat();
+                    float fNextFloat11 = textScanner.nextFloat();
+                    float fPossibleNextFloat4 = textScanner.possibleNextFloat();
                     textScanner.skipWhitespace();
-                    if (!Float.isNaN(nextFloat11) && textScanner.consume(')')) {
-                        if (!Float.isNaN(possibleNextFloat4)) {
-                            matrix.preTranslate(nextFloat11, possibleNextFloat4);
+                    if (!Float.isNaN(fNextFloat11) && textScanner.consume(')')) {
+                        if (!Float.isNaN(fPossibleNextFloat4)) {
+                            matrix.preTranslate(fNextFloat11, fPossibleNextFloat4);
                             break;
                         } else {
-                            matrix.preTranslate(nextFloat11, 0.0f);
+                            matrix.preTranslate(fNextFloat11, 0.0f);
                             break;
                         }
                     } else {
@@ -2002,7 +1947,7 @@ public class SVGParser {
                     }
                     break;
                 default:
-                    throw new SVGParseException(ContentInViewNode$Request$$ExternalSyntheticOutline0.m("Invalid transform list fn: ", str2, ")"));
+                    throw new SVGParseException(ContentInViewNode$Request$$ExternalSyntheticOutline0.m("Invalid transform list fn: ", strSubstring, ")"));
             }
             if (textScanner.empty()) {
                 return matrix;
@@ -2013,17 +1958,493 @@ public class SVGParser {
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Removed duplicated region for block: B:87:0x01ac  */
+    /* JADX WARN: Removed duplicated region for block: B:129:0x0299  */
+    /* JADX WARN: Removed duplicated region for block: B:13:0x004d  */
+    /* JADX WARN: Removed duplicated region for block: B:156:0x02e2  */
+    /* JADX WARN: Removed duplicated region for block: B:191:0x034e  */
+    /* JADX WARN: Removed duplicated region for block: B:225:0x03ae  */
+    /* JADX WARN: Removed duplicated region for block: B:285:0x0481  */
+    /* JADX WARN: Removed duplicated region for block: B:81:0x0160  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void processStyleProperty(com.caverock.androidsvg.SVG.Style r17, java.lang.String r18, java.lang.String r19) {
-        /*
-            Method dump skipped, instructions count: 1930
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.caverock.androidsvg.SVGParser.processStyleProperty(com.caverock.androidsvg.SVG$Style, java.lang.String, java.lang.String):void");
+    public static void processStyleProperty(SVG.Style style, String str, String str2) {
+        SVG.Length length;
+        SVG.Length lengthNextLength;
+        SVG.Length length2;
+        String strSubstring;
+        SVG.Style.FontStyle fontStyle;
+        SVG.Style.TextDecoration textDecoration;
+        SVG.Style.TextAnchor textAnchor;
+        Boolean bool;
+        SVG.CSSClipRect cSSClipRect;
+        SVG.Style.RenderQuality renderQuality;
+        if (str2.length() == 0 || str2.equals("inherit")) {
+            return;
+        }
+        try {
+            switch (AnonymousClass1.$SwitchMap$com$caverock$androidsvg$SVGParser$SVGAttr[SVGAttr.fromString(str).ordinal()]) {
+                case 47:
+                    SVG.SvgPaint paintSpecifier = parsePaintSpecifier(str2);
+                    style.fill = paintSpecifier;
+                    if (paintSpecifier != null) {
+                        style.specifiedFlags |= 1;
+                        break;
+                    }
+                    break;
+                case 48:
+                    SVG.Style.FillRule fillRule = "nonzero".equals(str2) ? SVG.Style.FillRule.NonZero : "evenodd".equals(str2) ? SVG.Style.FillRule.EvenOdd : null;
+                    style.fillRule = fillRule;
+                    if (fillRule != null) {
+                        style.specifiedFlags |= 2;
+                        break;
+                    }
+                    break;
+                case 49:
+                    Float opacity = parseOpacity(str2);
+                    style.fillOpacity = opacity;
+                    if (opacity != null) {
+                        style.specifiedFlags |= 4;
+                        break;
+                    }
+                    break;
+                case 50:
+                    SVG.SvgPaint paintSpecifier2 = parsePaintSpecifier(str2);
+                    style.stroke = paintSpecifier2;
+                    if (paintSpecifier2 != null) {
+                        style.specifiedFlags |= 8;
+                        break;
+                    }
+                    break;
+                case 51:
+                    Float opacity2 = parseOpacity(str2);
+                    style.strokeOpacity = opacity2;
+                    if (opacity2 != null) {
+                        style.specifiedFlags |= 16;
+                        break;
+                    }
+                    break;
+                case 52:
+                    style.strokeWidth = parseLength(str2);
+                    style.specifiedFlags |= 32;
+                    break;
+                case 53:
+                    SVG.Style.LineCap lineCap = "butt".equals(str2) ? SVG.Style.LineCap.Butt : "round".equals(str2) ? SVG.Style.LineCap.Round : "square".equals(str2) ? SVG.Style.LineCap.Square : null;
+                    style.strokeLineCap = lineCap;
+                    if (lineCap != null) {
+                        style.specifiedFlags |= 64;
+                        break;
+                    }
+                    break;
+                case 54:
+                    SVG.Style.LineJoin lineJoin = "miter".equals(str2) ? SVG.Style.LineJoin.Miter : "round".equals(str2) ? SVG.Style.LineJoin.Round : "bevel".equals(str2) ? SVG.Style.LineJoin.Bevel : null;
+                    style.strokeLineJoin = lineJoin;
+                    if (lineJoin != null) {
+                        style.specifiedFlags |= 128;
+                        break;
+                    }
+                    break;
+                case 55:
+                    style.strokeMiterLimit = Float.valueOf(parseFloat(str2));
+                    style.specifiedFlags |= 256;
+                    break;
+                case 56:
+                    if (!SignalSeverity.NONE.equals(str2)) {
+                        SVG.Length[] lengthArr = null;
+                        TextScanner textScanner = new TextScanner(str2);
+                        textScanner.skipWhitespace();
+                        if (!textScanner.empty() && (lengthNextLength = textScanner.nextLength()) != null && !lengthNextLength.isNegative()) {
+                            float f = lengthNextLength.value;
+                            ArrayList arrayList = new ArrayList();
+                            arrayList.add(lengthNextLength);
+                            while (true) {
+                                if (!textScanner.empty()) {
+                                    textScanner.skipCommaWhitespace();
+                                    SVG.Length lengthNextLength2 = textScanner.nextLength();
+                                    if (lengthNextLength2 != null && !lengthNextLength2.isNegative()) {
+                                        arrayList.add(lengthNextLength2);
+                                        f += lengthNextLength2.value;
+                                    }
+                                } else if (f != 0.0f) {
+                                    lengthArr = (SVG.Length[]) arrayList.toArray(new SVG.Length[arrayList.size()]);
+                                }
+                            }
+                        }
+                        style.strokeDashArray = lengthArr;
+                        if (lengthArr != null) {
+                            style.specifiedFlags |= 512;
+                            break;
+                        }
+                    } else {
+                        style.strokeDashArray = null;
+                        style.specifiedFlags |= 512;
+                        break;
+                    }
+                    break;
+                case 57:
+                    style.strokeDashOffset = parseLength(str2);
+                    style.specifiedFlags |= 1024;
+                    break;
+                case 58:
+                    style.opacity = parseOpacity(str2);
+                    style.specifiedFlags |= 2048;
+                    break;
+                case 59:
+                    style.color = parseColour(str2);
+                    style.specifiedFlags |= 4096;
+                    break;
+                case 60:
+                    if ("|caption|icon|menu|message-box|small-caption|status-bar|".contains("|" + str2 + '|')) {
+                        TextScanner textScanner2 = new TextScanner(str2);
+                        Integer num = null;
+                        SVG.Style.FontStyle fontStyle2 = null;
+                        String str3 = null;
+                        while (true) {
+                            String strNextToken = textScanner2.nextToken('/', false);
+                            textScanner2.skipWhitespace();
+                            if (strNextToken != null) {
+                                if (num == null || fontStyle2 == null) {
+                                    if (!strNextToken.equals(SystemUIAnalytics.QPNE_VID_NORMAL) && (num != null || (num = (Integer) ((HashMap) FontWeightKeywords.fontWeightKeywords).get(strNextToken)) == null)) {
+                                        if (fontStyle2 == null) {
+                                            switch (strNextToken) {
+                                                case "oblique":
+                                                    fontStyle2 = SVG.Style.FontStyle.Oblique;
+                                                    break;
+                                                case "italic":
+                                                    fontStyle2 = SVG.Style.FontStyle.Italic;
+                                                    break;
+                                                case "normal":
+                                                    fontStyle2 = SVG.Style.FontStyle.Normal;
+                                                    break;
+                                                default:
+                                                    fontStyle2 = null;
+                                                    break;
+                                            }
+                                            if (fontStyle2 != null) {
+                                                continue;
+                                            }
+                                        }
+                                        if (str3 == null && strNextToken.equals("small-caps")) {
+                                            str3 = strNextToken;
+                                        }
+                                    }
+                                }
+                                try {
+                                    length2 = (SVG.Length) ((HashMap) FontSizeKeywords.fontSizeKeywords).get(strNextToken);
+                                    if (length2 == null) {
+                                        length2 = parseLength(strNextToken);
+                                    }
+                                } catch (SVGParseException unused) {
+                                    length2 = null;
+                                }
+                                if (textScanner2.consume('/')) {
+                                    textScanner2.skipWhitespace();
+                                    String strNextToken2 = textScanner2.nextToken();
+                                    if (strNextToken2 != null) {
+                                        parseLength(strNextToken2);
+                                    }
+                                    textScanner2.skipWhitespace();
+                                }
+                                if (textScanner2.empty()) {
+                                    strSubstring = null;
+                                } else {
+                                    int i = textScanner2.position;
+                                    textScanner2.position = textScanner2.inputLength;
+                                    strSubstring = textScanner2.input.substring(i);
+                                }
+                                style.fontFamily = parseFontFamily(strSubstring);
+                                style.fontSize = length2;
+                                style.fontWeight = Integer.valueOf(num == null ? 400 : num.intValue());
+                                if (fontStyle2 == null) {
+                                    fontStyle2 = SVG.Style.FontStyle.Normal;
+                                }
+                                style.fontStyle = fontStyle2;
+                                style.specifiedFlags |= 122880;
+                                break;
+                            } else {
+                                break;
+                            }
+                        }
+                    }
+                    break;
+                case 61:
+                    List fontFamily = parseFontFamily(str2);
+                    style.fontFamily = fontFamily;
+                    if (fontFamily != null) {
+                        style.specifiedFlags |= 8192;
+                        break;
+                    }
+                    break;
+                case 62:
+                    try {
+                        SVG.Length length3 = (SVG.Length) ((HashMap) FontSizeKeywords.fontSizeKeywords).get(str2);
+                        length = length3 == null ? parseLength(str2) : length3;
+                    } catch (SVGParseException unused2) {
+                        length = null;
+                    }
+                    style.fontSize = length;
+                    if (length != null) {
+                        style.specifiedFlags |= 16384;
+                        break;
+                    }
+                    break;
+                case 63:
+                    Integer num2 = (Integer) ((HashMap) FontWeightKeywords.fontWeightKeywords).get(str2);
+                    style.fontWeight = num2;
+                    if (num2 != null) {
+                        style.specifiedFlags |= 32768;
+                        break;
+                    }
+                    break;
+                case 64:
+                    switch (str2) {
+                        case "oblique":
+                            fontStyle = SVG.Style.FontStyle.Oblique;
+                            break;
+                        case "italic":
+                            fontStyle = SVG.Style.FontStyle.Italic;
+                            break;
+                        case "normal":
+                            fontStyle = SVG.Style.FontStyle.Normal;
+                            break;
+                        default:
+                            fontStyle = null;
+                            break;
+                    }
+                    style.fontStyle = fontStyle;
+                    if (fontStyle != null) {
+                        style.specifiedFlags |= 65536;
+                        break;
+                    }
+                    break;
+                case 65:
+                    switch (str2) {
+                        case "line-through":
+                            textDecoration = SVG.Style.TextDecoration.LineThrough;
+                            break;
+                        case "underline":
+                            textDecoration = SVG.Style.TextDecoration.Underline;
+                            break;
+                        case "none":
+                            textDecoration = SVG.Style.TextDecoration.None;
+                            break;
+                        case "blink":
+                            textDecoration = SVG.Style.TextDecoration.Blink;
+                            break;
+                        case "overline":
+                            textDecoration = SVG.Style.TextDecoration.Overline;
+                            break;
+                        default:
+                            textDecoration = null;
+                            break;
+                    }
+                    style.textDecoration = textDecoration;
+                    if (textDecoration != null) {
+                        style.specifiedFlags |= 131072;
+                        break;
+                    }
+                    break;
+                case 66:
+                    SVG.Style.TextDirection textDirection = !str2.equals("ltr") ? !str2.equals("rtl") ? null : SVG.Style.TextDirection.RTL : SVG.Style.TextDirection.LTR;
+                    style.direction = textDirection;
+                    if (textDirection != null) {
+                        style.specifiedFlags |= 68719476736L;
+                        break;
+                    }
+                    break;
+                case 67:
+                    switch (str2) {
+                        case "middle":
+                            textAnchor = SVG.Style.TextAnchor.Middle;
+                            break;
+                        case "end":
+                            textAnchor = SVG.Style.TextAnchor.End;
+                            break;
+                        case "start":
+                            textAnchor = SVG.Style.TextAnchor.Start;
+                            break;
+                        default:
+                            textAnchor = null;
+                            break;
+                    }
+                    style.textAnchor = textAnchor;
+                    if (textAnchor != null) {
+                        style.specifiedFlags |= 262144;
+                        break;
+                    }
+                    break;
+                case 68:
+                    switch (str2) {
+                        case "hidden":
+                        case "scroll":
+                            bool = Boolean.FALSE;
+                            break;
+                        case "auto":
+                        case "visible":
+                            bool = Boolean.TRUE;
+                            break;
+                        default:
+                            bool = null;
+                            break;
+                    }
+                    style.overflow = bool;
+                    if (bool != null) {
+                        style.specifiedFlags |= 524288;
+                        break;
+                    }
+                    break;
+                case 69:
+                    String functionalIRI = parseFunctionalIRI(str2);
+                    style.markerStart = functionalIRI;
+                    style.markerMid = functionalIRI;
+                    style.markerEnd = functionalIRI;
+                    style.specifiedFlags |= 14680064;
+                    break;
+                case 70:
+                    style.markerStart = parseFunctionalIRI(str2);
+                    style.specifiedFlags |= 2097152;
+                    break;
+                case 71:
+                    style.markerMid = parseFunctionalIRI(str2);
+                    style.specifiedFlags |= 4194304;
+                    break;
+                case 72:
+                    style.markerEnd = parseFunctionalIRI(str2);
+                    style.specifiedFlags |= 8388608;
+                    break;
+                case 73:
+                    if (str2.indexOf(124) < 0) {
+                        if ("|inline|block|list-item|run-in|compact|marker|table|inline-table|table-row-group|table-header-group|table-footer-group|table-row|table-column-group|table-column|table-cell|table-caption|none|".contains("|" + str2 + '|')) {
+                            style.display = Boolean.valueOf(!str2.equals(SignalSeverity.NONE));
+                            style.specifiedFlags |= 16777216;
+                            break;
+                        }
+                    }
+                    break;
+                case 74:
+                    if (str2.indexOf(124) < 0) {
+                        if ("|visible|hidden|collapse|".contains("|" + str2 + '|')) {
+                            style.visibility = Boolean.valueOf(str2.equals("visible"));
+                            style.specifiedFlags |= 33554432;
+                            break;
+                        }
+                    }
+                    break;
+                case 75:
+                    if (str2.equals("currentColor")) {
+                        style.stopColor = SVG.CurrentColor.instance;
+                    } else {
+                        try {
+                            style.stopColor = parseColour(str2);
+                        } catch (SVGParseException e) {
+                            Log.w("SVGParser", e.getMessage());
+                            return;
+                        }
+                    }
+                    style.specifiedFlags |= 67108864;
+                    break;
+                case 76:
+                    style.stopOpacity = parseOpacity(str2);
+                    style.specifiedFlags |= 134217728;
+                    break;
+                case 77:
+                    if (!"auto".equals(str2) && str2.startsWith("rect(")) {
+                        TextScanner textScanner3 = new TextScanner(str2.substring(5));
+                        textScanner3.skipWhitespace();
+                        SVG.Length lengthOrAuto = parseLengthOrAuto(textScanner3);
+                        textScanner3.skipCommaWhitespace();
+                        SVG.Length lengthOrAuto2 = parseLengthOrAuto(textScanner3);
+                        textScanner3.skipCommaWhitespace();
+                        SVG.Length lengthOrAuto3 = parseLengthOrAuto(textScanner3);
+                        textScanner3.skipCommaWhitespace();
+                        SVG.Length lengthOrAuto4 = parseLengthOrAuto(textScanner3);
+                        textScanner3.skipWhitespace();
+                        cSSClipRect = (textScanner3.consume(')') || textScanner3.empty()) ? new SVG.CSSClipRect(lengthOrAuto, lengthOrAuto2, lengthOrAuto3, lengthOrAuto4) : null;
+                    }
+                    style.clip = cSSClipRect;
+                    if (cSSClipRect != null) {
+                        style.specifiedFlags |= 1048576;
+                        break;
+                    }
+                    break;
+                case 78:
+                    style.clipPath = parseFunctionalIRI(str2);
+                    style.specifiedFlags |= 268435456;
+                    break;
+                case 79:
+                    style.clipRule = "nonzero".equals(str2) ? SVG.Style.FillRule.NonZero : "evenodd".equals(str2) ? SVG.Style.FillRule.EvenOdd : null;
+                    style.specifiedFlags |= 536870912;
+                    break;
+                case 80:
+                    style.mask = parseFunctionalIRI(str2);
+                    style.specifiedFlags |= 1073741824;
+                    break;
+                case 81:
+                    if (str2.equals("currentColor")) {
+                        style.solidColor = SVG.CurrentColor.instance;
+                    } else {
+                        try {
+                            style.solidColor = parseColour(str2);
+                        } catch (SVGParseException e2) {
+                            Log.w("SVGParser", e2.getMessage());
+                            return;
+                        }
+                    }
+                    style.specifiedFlags |= 2147483648L;
+                    break;
+                case 82:
+                    style.solidOpacity = parseOpacity(str2);
+                    style.specifiedFlags |= 4294967296L;
+                    break;
+                case 83:
+                    if (str2.equals("currentColor")) {
+                        style.viewportFill = SVG.CurrentColor.instance;
+                    } else {
+                        try {
+                            style.viewportFill = parseColour(str2);
+                        } catch (SVGParseException e3) {
+                            Log.w("SVGParser", e3.getMessage());
+                            return;
+                        }
+                    }
+                    style.specifiedFlags |= 8589934592L;
+                    break;
+                case 84:
+                    style.viewportFillOpacity = parseOpacity(str2);
+                    style.specifiedFlags |= 17179869184L;
+                    break;
+                case 85:
+                    SVG.Style.VectorEffect vectorEffect = !str2.equals(SignalSeverity.NONE) ? !str2.equals("non-scaling-stroke") ? null : SVG.Style.VectorEffect.NonScalingStroke : SVG.Style.VectorEffect.None;
+                    style.vectorEffect = vectorEffect;
+                    if (vectorEffect != null) {
+                        style.specifiedFlags |= 34359738368L;
+                        break;
+                    }
+                    break;
+                case 86:
+                    switch (str2) {
+                        case "optimizeQuality":
+                            renderQuality = SVG.Style.RenderQuality.optimizeQuality;
+                            break;
+                        case "auto":
+                            renderQuality = SVG.Style.RenderQuality.auto;
+                            break;
+                        case "optimizeSpeed":
+                            renderQuality = SVG.Style.RenderQuality.optimizeSpeed;
+                            break;
+                        default:
+                            renderQuality = null;
+                            break;
+                    }
+                    style.imageRendering = renderQuality;
+                    if (renderQuality != null) {
+                        style.specifiedFlags |= 137438953472L;
+                        break;
+                    }
+                    break;
+            }
+        } catch (SVGParseException unused3) {
+        }
     }
 
     public final void appendToTextContainer(String str) {
@@ -2064,9 +2485,7 @@ public class SVGParser {
                         this.inMetadataElement = false;
                         if (this.metadataElementContents != null) {
                             SVGElem sVGElem2 = this.metadataTag;
-                            if (sVGElem2 == SVGElem.title) {
-                                this.svgDocument.getClass();
-                            } else if (sVGElem2 == SVGElem.desc) {
+                            if (sVGElem2 == SVGElem.title || sVGElem2 == SVGElem.desc) {
                                 this.svgDocument.getClass();
                             }
                             this.metadataElementContents.setLength(0);
@@ -2077,10 +2496,10 @@ public class SVGParser {
                         StringBuilder sb = this.styleElementContents;
                         if (sb != null) {
                             this.inStyleElement = false;
-                            String sb2 = sb.toString();
+                            String string = sb.toString();
                             CSSParser cSSParser = new CSSParser(CSSParser.MediaType.screen, CSSParser.Source.Document);
                             SVG svg = this.svgDocument;
-                            CSSParser.CSSTextScanner cSSTextScanner = new CSSParser.CSSTextScanner(sb2);
+                            CSSParser.CSSTextScanner cSSTextScanner = new CSSParser.CSSTextScanner(string);
                             cSSTextScanner.skipWhitespace();
                             svg.cssRules.addAll(cSSParser.parseRuleset(cSSTextScanner));
                             this.styleElementContents.setLength(0);
@@ -2094,13 +2513,13 @@ public class SVGParser {
         }
     }
 
-    public final void parseUsingSAX(InputStream inputStream) {
+    public final void parseUsingSAX(InputStream inputStream) throws ParserConfigurationException, SAXException, IOException {
         Log.d("SVGParser", "Falling back to SAX parser");
         try {
-            SAXParserFactory newInstance = SAXParserFactory.newInstance();
-            newInstance.setFeature("http://xml.org/sax/features/external-general-entities", false);
-            newInstance.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
-            XMLReader xMLReader = newInstance.newSAXParser().getXMLReader();
+            SAXParserFactory sAXParserFactoryNewInstance = SAXParserFactory.newInstance();
+            sAXParserFactoryNewInstance.setFeature("http://xml.org/sax/features/external-general-entities", false);
+            sAXParserFactoryNewInstance.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
+            XMLReader xMLReader = sAXParserFactoryNewInstance.newSAXParser().getXMLReader();
             SAXHandler sAXHandler = new SAXHandler(this, null);
             xMLReader.setContentHandler(sAXHandler);
             xMLReader.setProperty("http://xml.org/sax/properties/lexical-handler", sAXHandler);
@@ -2114,94 +2533,1250 @@ public class SVGParser {
         }
     }
 
-    public final void parseUsingXmlPullParser(InputStream inputStream) {
+    public final void parseUsingXmlPullParser(InputStream inputStream) throws XmlPullParserException, ParserConfigurationException, SAXException, IOException {
         try {
             try {
-                XmlPullParser newPullParser = Xml.newPullParser();
-                XPPAttributesWrapper xPPAttributesWrapper = new XPPAttributesWrapper(this, newPullParser);
-                newPullParser.setFeature("http://xmlpull.org/v1/doc/features.html#process-docdecl", false);
-                newPullParser.setFeature("http://xmlpull.org/v1/doc/features.html#process-namespaces", true);
-                newPullParser.setInput(inputStream, null);
-                for (int eventType = newPullParser.getEventType(); eventType != 1; eventType = newPullParser.nextToken()) {
+                XmlPullParser xmlPullParserNewPullParser = Xml.newPullParser();
+                XPPAttributesWrapper xPPAttributesWrapper = new XPPAttributesWrapper(this, xmlPullParserNewPullParser);
+                xmlPullParserNewPullParser.setFeature("http://xmlpull.org/v1/doc/features.html#process-docdecl", false);
+                xmlPullParserNewPullParser.setFeature("http://xmlpull.org/v1/doc/features.html#process-namespaces", true);
+                xmlPullParserNewPullParser.setInput(inputStream, null);
+                for (int eventType = xmlPullParserNewPullParser.getEventType(); eventType != 1; eventType = xmlPullParserNewPullParser.nextToken()) {
                     if (eventType == 0) {
                         this.svgDocument = new SVG();
                     } else if (eventType == 8) {
-                        Log.d("SVGParser", "PROC INSTR: " + newPullParser.getText());
-                        TextScanner textScanner = new TextScanner(newPullParser.getText());
-                        String nextToken = textScanner.nextToken();
+                        Log.d("SVGParser", "PROC INSTR: " + xmlPullParserNewPullParser.getText());
+                        TextScanner textScanner = new TextScanner(xmlPullParserNewPullParser.getText());
+                        String strNextToken = textScanner.nextToken();
                         parseProcessingInstructionAttributes(textScanner);
-                        nextToken.equals("xml-stylesheet");
-                    } else if (eventType != 10) {
-                        if (eventType == 2) {
-                            String name = newPullParser.getName();
-                            if (newPullParser.getPrefix() != null) {
-                                name = newPullParser.getPrefix() + ':' + name;
+                        strNextToken.equals("xml-stylesheet");
+                    } else if (eventType == 10) {
+                        if (this.svgDocument.rootElement == null && xmlPullParserNewPullParser.getText().contains("<!ENTITY ")) {
+                            try {
+                                Log.d("SVGParser", "Switching to SAX parser to process entities");
+                                inputStream.reset();
+                                parseUsingSAX(inputStream);
+                                return;
+                            } catch (IOException unused) {
+                                Log.w("SVGParser", "Detected internal entity definitions, but could not parse them.");
+                                return;
                             }
-                            startElement(newPullParser.getNamespace(), newPullParser.getName(), name, xPPAttributesWrapper);
-                        } else if (eventType == 3) {
-                            String name2 = newPullParser.getName();
-                            if (newPullParser.getPrefix() != null) {
-                                name2 = newPullParser.getPrefix() + ':' + name2;
-                            }
-                            endElement(newPullParser.getNamespace(), newPullParser.getName(), name2);
-                        } else if (eventType == 4) {
-                            int[] iArr = new int[2];
-                            text(newPullParser.getTextCharacters(iArr), iArr[0], iArr[1]);
-                        } else if (eventType == 5) {
-                            text(newPullParser.getText());
                         }
-                    } else if (this.svgDocument.rootElement == null && newPullParser.getText().contains("<!ENTITY ")) {
-                        try {
-                            Log.d("SVGParser", "Switching to SAX parser to process entities");
-                            inputStream.reset();
-                            parseUsingSAX(inputStream);
-                            return;
-                        } catch (IOException unused) {
-                            Log.w("SVGParser", "Detected internal entity definitions, but could not parse them.");
-                            return;
+                    } else if (eventType == 2) {
+                        String name = xmlPullParserNewPullParser.getName();
+                        if (xmlPullParserNewPullParser.getPrefix() != null) {
+                            name = xmlPullParserNewPullParser.getPrefix() + ':' + name;
                         }
+                        startElement(xmlPullParserNewPullParser.getNamespace(), xmlPullParserNewPullParser.getName(), name, xPPAttributesWrapper);
+                    } else if (eventType == 3) {
+                        String name2 = xmlPullParserNewPullParser.getName();
+                        if (xmlPullParserNewPullParser.getPrefix() != null) {
+                            name2 = xmlPullParserNewPullParser.getPrefix() + ':' + name2;
+                        }
+                        endElement(xmlPullParserNewPullParser.getNamespace(), xmlPullParserNewPullParser.getName(), name2);
+                    } else if (eventType == 4) {
+                        int[] iArr = new int[2];
+                        text(xmlPullParserNewPullParser.getTextCharacters(iArr), iArr[0], iArr[1]);
+                    } else if (eventType == 5) {
+                        text(xmlPullParserNewPullParser.getText());
                     }
                 }
-            } catch (IOException e) {
-                throw new SVGParseException("Stream error", e);
+            } catch (XmlPullParserException e) {
+                throw new SVGParseException("XML parser problem", e);
             }
-        } catch (XmlPullParserException e2) {
-            throw new SVGParseException("XML parser problem", e2);
+        } catch (IOException e2) {
+            throw new SVGParseException("Stream error", e2);
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:31:0x02ed  */
-    /* JADX WARN: Removed duplicated region for block: B:47:0x032d A[SYNTHETIC] */
+    /* JADX WARN: Code restructure failed: missing block: B:129:0x031a, code lost:
+    
+        android.util.Log.e("SVGParser", "Bad path coords for " + ((char) r4) + " path segment");
+     */
+    /* JADX WARN: Removed duplicated region for block: B:116:0x02ed  */
+    /* JADX WARN: Removed duplicated region for block: B:153:0x032d A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void path(org.xml.sax.Attributes r25) {
-        /*
-            Method dump skipped, instructions count: 918
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.caverock.androidsvg.SVGParser.path(org.xml.sax.Attributes):void");
+    public final void path(Attributes attributes) throws SVGParseException {
+        float fNextFloat;
+        float f;
+        char c;
+        float fNextFloat2;
+        float f2;
+        float f3;
+        float f4;
+        char cCharAt;
+        Attributes attributes2 = attributes;
+        if (this.currentElement == null) {
+            throw new SVGParseException("Invalid document. Root element must be <svg>");
+        }
+        SVG.Path path = new SVG.Path();
+        path.document = this.svgDocument;
+        path.parent = this.currentElement;
+        parseAttributesCore(path, attributes2);
+        parseAttributesStyle(path, attributes2);
+        parseAttributesTransform(path, attributes2);
+        parseAttributesConditional(path, attributes2);
+        int i = 0;
+        while (i < attributes2.getLength()) {
+            String strTrim = attributes2.getValue(i).trim();
+            int i2 = AnonymousClass1.$SwitchMap$com$caverock$androidsvg$SVGParser$SVGAttr[SVGAttr.fromString(attributes2.getLocalName(i)).ordinal()];
+            float f5 = 0.0f;
+            if (i2 == 8) {
+                TextScanner textScanner = new TextScanner(strTrim);
+                SVG.PathDefinition pathDefinition = new SVG.PathDefinition();
+                if (!textScanner.empty()) {
+                    int iIntValue = textScanner.nextChar().intValue();
+                    char c2 = 'm';
+                    if (iIntValue == 77 || iIntValue == 109) {
+                        float f6 = 0.0f;
+                        float fNextFloat3 = 0.0f;
+                        float f7 = 0.0f;
+                        float fCheckedNextFloat = 0.0f;
+                        float f8 = 0.0f;
+                        float f9 = 0.0f;
+                        while (true) {
+                            textScanner.skipWhitespace();
+                            float f10 = f5;
+                            switch (iIntValue) {
+                                case 65:
+                                case 97:
+                                    float fNextFloat4 = textScanner.nextFloat();
+                                    float f11 = f7;
+                                    float fCheckedNextFloat2 = textScanner.checkedNextFloat(fNextFloat4);
+                                    float fCheckedNextFloat3 = textScanner.checkedNextFloat(fCheckedNextFloat2);
+                                    Boolean boolCheckedNextFlag = textScanner.checkedNextFlag(Float.valueOf(fCheckedNextFloat3));
+                                    Boolean boolCheckedNextFlag2 = textScanner.checkedNextFlag(boolCheckedNextFlag);
+                                    if (boolCheckedNextFlag2 == null) {
+                                        fNextFloat = Float.NaN;
+                                    } else {
+                                        textScanner.skipCommaWhitespace();
+                                        fNextFloat = textScanner.nextFloat();
+                                    }
+                                    float f12 = fNextFloat;
+                                    float fCheckedNextFloat4 = textScanner.checkedNextFloat(f12);
+                                    if (Float.isNaN(fCheckedNextFloat4) || fNextFloat4 < f10 || fCheckedNextFloat2 < f10) {
+                                        break;
+                                    } else {
+                                        if (iIntValue == 97) {
+                                            fCheckedNextFloat4 += f11;
+                                            f = f12 + f6;
+                                        } else {
+                                            f = f12;
+                                        }
+                                        boolean zBooleanValue = boolCheckedNextFlag.booleanValue();
+                                        boolean zBooleanValue2 = boolCheckedNextFlag2.booleanValue();
+                                        float f13 = fCheckedNextFloat4;
+                                        c = 'm';
+                                        pathDefinition.arcTo(fNextFloat4, fCheckedNextFloat2, fCheckedNextFloat3, zBooleanValue, zBooleanValue2, f, f13);
+                                        f6 = f;
+                                        fNextFloat3 = f6;
+                                        f7 = f13;
+                                        fCheckedNextFloat = f7;
+                                        textScanner.skipCommaWhitespace();
+                                        if (!textScanner.empty()) {
+                                            break;
+                                        } else {
+                                            int i3 = textScanner.position;
+                                            if (i3 != textScanner.inputLength && (((cCharAt = textScanner.input.charAt(i3)) >= 'a' && cCharAt <= 'z') || (cCharAt >= 'A' && cCharAt <= 'Z'))) {
+                                                iIntValue = textScanner.nextChar().intValue();
+                                            }
+                                            f5 = f10;
+                                            c2 = c;
+                                        }
+                                    }
+                                    break;
+                                case 67:
+                                case 99:
+                                    float fNextFloat5 = textScanner.nextFloat();
+                                    float fCheckedNextFloat5 = textScanner.checkedNextFloat(fNextFloat5);
+                                    float fCheckedNextFloat6 = textScanner.checkedNextFloat(fCheckedNextFloat5);
+                                    float fCheckedNextFloat7 = textScanner.checkedNextFloat(fCheckedNextFloat6);
+                                    float fCheckedNextFloat8 = textScanner.checkedNextFloat(fCheckedNextFloat7);
+                                    float fCheckedNextFloat9 = textScanner.checkedNextFloat(fCheckedNextFloat8);
+                                    if (Float.isNaN(fCheckedNextFloat9)) {
+                                        Log.e("SVGParser", "Bad path coords for " + ((char) iIntValue) + " path segment");
+                                        break;
+                                    } else {
+                                        if (iIntValue == 99) {
+                                            fCheckedNextFloat8 += f6;
+                                            fCheckedNextFloat9 += f7;
+                                            fNextFloat5 += f6;
+                                            fCheckedNextFloat5 += f7;
+                                            fCheckedNextFloat6 += f6;
+                                            fCheckedNextFloat7 += f7;
+                                        }
+                                        float f14 = fCheckedNextFloat5;
+                                        fNextFloat2 = fCheckedNextFloat6;
+                                        f2 = fCheckedNextFloat7;
+                                        f3 = fCheckedNextFloat9;
+                                        f4 = fCheckedNextFloat8;
+                                        pathDefinition.cubicTo(fNextFloat5, f14, fNextFloat2, f2, f4, f3);
+                                        fNextFloat3 = fNextFloat2;
+                                        fCheckedNextFloat = f2;
+                                        f6 = f4;
+                                        f7 = f3;
+                                        c = 'm';
+                                        textScanner.skipCommaWhitespace();
+                                        if (!textScanner.empty()) {
+                                        }
+                                    }
+                                    break;
+                                case 72:
+                                case 104:
+                                    float fNextFloat6 = textScanner.nextFloat();
+                                    if (Float.isNaN(fNextFloat6)) {
+                                        Log.e("SVGParser", "Bad path coords for " + ((char) iIntValue) + " path segment");
+                                        break;
+                                    } else {
+                                        if (iIntValue == 104) {
+                                            fNextFloat6 += f6;
+                                        }
+                                        f6 = fNextFloat6;
+                                        pathDefinition.lineTo(f6, f7);
+                                        fNextFloat3 = f6;
+                                        c = c2;
+                                        textScanner.skipCommaWhitespace();
+                                        if (!textScanner.empty()) {
+                                        }
+                                    }
+                                    break;
+                                case 76:
+                                case 108:
+                                    float fNextFloat7 = textScanner.nextFloat();
+                                    float fCheckedNextFloat10 = textScanner.checkedNextFloat(fNextFloat7);
+                                    if (Float.isNaN(fCheckedNextFloat10)) {
+                                        Log.e("SVGParser", "Bad path coords for " + ((char) iIntValue) + " path segment");
+                                        break;
+                                    } else {
+                                        if (iIntValue == 108) {
+                                            fNextFloat7 += f6;
+                                            fCheckedNextFloat10 += f7;
+                                        }
+                                        f6 = fNextFloat7;
+                                        f7 = fCheckedNextFloat10;
+                                        pathDefinition.lineTo(f6, f7);
+                                        fNextFloat3 = f6;
+                                        fCheckedNextFloat = f7;
+                                        c = c2;
+                                        textScanner.skipCommaWhitespace();
+                                        if (!textScanner.empty()) {
+                                        }
+                                    }
+                                    break;
+                                case 77:
+                                case 109:
+                                    float fNextFloat8 = textScanner.nextFloat();
+                                    float fCheckedNextFloat11 = textScanner.checkedNextFloat(fNextFloat8);
+                                    if (Float.isNaN(fCheckedNextFloat11)) {
+                                        Log.e("SVGParser", "Bad path coords for " + ((char) iIntValue) + " path segment");
+                                        break;
+                                    } else {
+                                        c2 = 'm';
+                                        if (iIntValue == 109 && pathDefinition.commandsLength != 0) {
+                                            fNextFloat8 += f6;
+                                            fCheckedNextFloat11 += f7;
+                                        }
+                                        f6 = fNextFloat8;
+                                        f7 = fCheckedNextFloat11;
+                                        pathDefinition.moveTo(f6, f7);
+                                        fNextFloat3 = f6;
+                                        f8 = fNextFloat3;
+                                        fCheckedNextFloat = f7;
+                                        f9 = fCheckedNextFloat;
+                                        iIntValue = iIntValue != 109 ? 76 : 108;
+                                        c = c2;
+                                        textScanner.skipCommaWhitespace();
+                                        if (!textScanner.empty()) {
+                                        }
+                                    }
+                                    break;
+                                case 81:
+                                case 113:
+                                    fNextFloat3 = textScanner.nextFloat();
+                                    fCheckedNextFloat = textScanner.checkedNextFloat(fNextFloat3);
+                                    float fCheckedNextFloat12 = textScanner.checkedNextFloat(fCheckedNextFloat);
+                                    float fCheckedNextFloat13 = textScanner.checkedNextFloat(fCheckedNextFloat12);
+                                    if (Float.isNaN(fCheckedNextFloat13)) {
+                                        Log.e("SVGParser", "Bad path coords for " + ((char) iIntValue) + " path segment");
+                                        break;
+                                    } else {
+                                        if (iIntValue == 113) {
+                                            fCheckedNextFloat12 += f6;
+                                            fCheckedNextFloat13 += f7;
+                                            fNextFloat3 += f6;
+                                            fCheckedNextFloat += f7;
+                                        }
+                                        f6 = fCheckedNextFloat12;
+                                        f7 = fCheckedNextFloat13;
+                                        pathDefinition.quadTo(fNextFloat3, fCheckedNextFloat, f6, f7);
+                                        c = 'm';
+                                        textScanner.skipCommaWhitespace();
+                                        if (!textScanner.empty()) {
+                                        }
+                                    }
+                                    break;
+                                case 83:
+                                case 115:
+                                    float f15 = (f6 * 2.0f) - fNextFloat3;
+                                    float f16 = (f7 * 2.0f) - fCheckedNextFloat;
+                                    fNextFloat2 = textScanner.nextFloat();
+                                    float fCheckedNextFloat14 = textScanner.checkedNextFloat(fNextFloat2);
+                                    float fCheckedNextFloat15 = textScanner.checkedNextFloat(fCheckedNextFloat14);
+                                    float fCheckedNextFloat16 = textScanner.checkedNextFloat(fCheckedNextFloat15);
+                                    if (Float.isNaN(fCheckedNextFloat16)) {
+                                        Log.e("SVGParser", "Bad path coords for " + ((char) iIntValue) + " path segment");
+                                        break;
+                                    } else {
+                                        if (iIntValue == 115) {
+                                            fCheckedNextFloat15 += f6;
+                                            fCheckedNextFloat16 += f7;
+                                            fNextFloat2 += f6;
+                                            fCheckedNextFloat14 += f7;
+                                        }
+                                        f2 = fCheckedNextFloat14;
+                                        f3 = fCheckedNextFloat16;
+                                        f4 = fCheckedNextFloat15;
+                                        pathDefinition.cubicTo(f15, f16, fNextFloat2, f2, f4, f3);
+                                        fNextFloat3 = fNextFloat2;
+                                        fCheckedNextFloat = f2;
+                                        f6 = f4;
+                                        f7 = f3;
+                                        c = 'm';
+                                        textScanner.skipCommaWhitespace();
+                                        if (!textScanner.empty()) {
+                                        }
+                                    }
+                                    break;
+                                case 84:
+                                case 116:
+                                    fNextFloat3 = (f6 * 2.0f) - fNextFloat3;
+                                    fCheckedNextFloat = (f7 * 2.0f) - fCheckedNextFloat;
+                                    float fNextFloat9 = textScanner.nextFloat();
+                                    float fCheckedNextFloat17 = textScanner.checkedNextFloat(fNextFloat9);
+                                    if (Float.isNaN(fCheckedNextFloat17)) {
+                                        Log.e("SVGParser", "Bad path coords for " + ((char) iIntValue) + " path segment");
+                                        break;
+                                    } else {
+                                        if (iIntValue == 116) {
+                                            fNextFloat9 += f6;
+                                            fCheckedNextFloat17 += f7;
+                                        }
+                                        f6 = fNextFloat9;
+                                        f7 = fCheckedNextFloat17;
+                                        pathDefinition.quadTo(fNextFloat3, fCheckedNextFloat, f6, f7);
+                                        c = c2;
+                                        textScanner.skipCommaWhitespace();
+                                        if (!textScanner.empty()) {
+                                        }
+                                    }
+                                    break;
+                                case 86:
+                                case 118:
+                                    float fNextFloat10 = textScanner.nextFloat();
+                                    if (Float.isNaN(fNextFloat10)) {
+                                        Log.e("SVGParser", "Bad path coords for " + ((char) iIntValue) + " path segment");
+                                        break;
+                                    } else {
+                                        if (iIntValue == 118) {
+                                            fNextFloat10 += f7;
+                                        }
+                                        f7 = fNextFloat10;
+                                        pathDefinition.lineTo(f6, f7);
+                                        fCheckedNextFloat = f7;
+                                        c = c2;
+                                        textScanner.skipCommaWhitespace();
+                                        if (!textScanner.empty()) {
+                                        }
+                                    }
+                                    break;
+                                case 90:
+                                case 122:
+                                    pathDefinition.close();
+                                    c = c2;
+                                    f6 = f8;
+                                    fNextFloat3 = f6;
+                                    f7 = f9;
+                                    fCheckedNextFloat = f7;
+                                    textScanner.skipCommaWhitespace();
+                                    if (!textScanner.empty()) {
+                                    }
+                                    break;
+                            }
+                        }
+                    }
+                }
+                path.d = pathDefinition;
+            } else if (i2 == 9 && parseFloat(strTrim) < 0.0f) {
+                throw new SVGParseException("Invalid <path> element. pathLength cannot be negative");
+            }
+            i++;
+            attributes2 = attributes;
+        }
+        this.currentElement.addChild(path);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:206:0x036c, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:662:0x036c, code lost:
     
         continue;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:357:0x058b, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:685:0x058b, code lost:
     
         continue;
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void startElement(java.lang.String r17, java.lang.String r18, java.lang.String r19, org.xml.sax.Attributes r20) {
-        /*
-            Method dump skipped, instructions count: 3256
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.caverock.androidsvg.SVGParser.startElement(java.lang.String, java.lang.String, java.lang.String, org.xml.sax.Attributes):void");
+    public final void startElement(String str, String str2, String str3, Attributes attributes) throws SVGParseException {
+        boolean z;
+        if (this.ignoring) {
+            this.ignoreDepth++;
+            return;
+        }
+        if ("http://www.w3.org/2000/svg".equals(str) || "".equals(str)) {
+            SVGElem sVGElem = (SVGElem) ((HashMap) SVGElem.cache).get(str2.length() > 0 ? str2 : str3);
+            if (sVGElem == null) {
+                sVGElem = SVGElem.UNSUPPORTED;
+            }
+            switch (AnonymousClass1.$SwitchMap$com$caverock$androidsvg$SVGParser$SVGElem[sVGElem.ordinal()]) {
+                case 1:
+                    SVG.Svg svg = new SVG.Svg();
+                    svg.document = this.svgDocument;
+                    svg.parent = this.currentElement;
+                    parseAttributesCore(svg, attributes);
+                    parseAttributesStyle(svg, attributes);
+                    parseAttributesConditional(svg, attributes);
+                    parseAttributesViewBox(svg, attributes);
+                    for (int i = 0; i < attributes.getLength(); i++) {
+                        String strTrim = attributes.getValue(i).trim();
+                        int i2 = AnonymousClass1.$SwitchMap$com$caverock$androidsvg$SVGParser$SVGAttr[SVGAttr.fromString(attributes.getLocalName(i)).ordinal()];
+                        if (i2 == 1) {
+                            svg.x = parseLength(strTrim);
+                        } else if (i2 == 2) {
+                            svg.y = parseLength(strTrim);
+                        } else if (i2 == 3) {
+                            SVG.Length length = parseLength(strTrim);
+                            svg.width = length;
+                            if (length.isNegative()) {
+                                throw new SVGParseException("Invalid <svg> element. width cannot be negative");
+                            }
+                        } else if (i2 != 4) {
+                            continue;
+                        } else {
+                            SVG.Length length2 = parseLength(strTrim);
+                            svg.height = length2;
+                            if (length2.isNegative()) {
+                                throw new SVGParseException("Invalid <svg> element. height cannot be negative");
+                            }
+                        }
+                    }
+                    SVG.SvgContainer svgContainer = this.currentElement;
+                    if (svgContainer == null) {
+                        this.svgDocument.rootElement = svg;
+                    } else {
+                        svgContainer.addChild(svg);
+                    }
+                    this.currentElement = svg;
+                    return;
+                case 2:
+                case 3:
+                    if (this.currentElement == null) {
+                        throw new SVGParseException("Invalid document. Root element must be <svg>");
+                    }
+                    SVG.Group group = new SVG.Group();
+                    group.document = this.svgDocument;
+                    group.parent = this.currentElement;
+                    parseAttributesCore(group, attributes);
+                    parseAttributesStyle(group, attributes);
+                    parseAttributesTransform(group, attributes);
+                    parseAttributesConditional(group, attributes);
+                    this.currentElement.addChild(group);
+                    this.currentElement = group;
+                    return;
+                case 4:
+                    if (this.currentElement == null) {
+                        throw new SVGParseException("Invalid document. Root element must be <svg>");
+                    }
+                    SVG.Defs defs = new SVG.Defs();
+                    defs.document = this.svgDocument;
+                    defs.parent = this.currentElement;
+                    parseAttributesCore(defs, attributes);
+                    parseAttributesStyle(defs, attributes);
+                    parseAttributesTransform(defs, attributes);
+                    this.currentElement.addChild(defs);
+                    this.currentElement = defs;
+                    return;
+                case 5:
+                    if (this.currentElement == null) {
+                        throw new SVGParseException("Invalid document. Root element must be <svg>");
+                    }
+                    SVG.Use use = new SVG.Use();
+                    use.document = this.svgDocument;
+                    use.parent = this.currentElement;
+                    parseAttributesCore(use, attributes);
+                    parseAttributesStyle(use, attributes);
+                    parseAttributesTransform(use, attributes);
+                    parseAttributesConditional(use, attributes);
+                    for (int i3 = 0; i3 < attributes.getLength(); i3++) {
+                        String strTrim2 = attributes.getValue(i3).trim();
+                        int i4 = AnonymousClass1.$SwitchMap$com$caverock$androidsvg$SVGParser$SVGAttr[SVGAttr.fromString(attributes.getLocalName(i3)).ordinal()];
+                        if (i4 == 1) {
+                            use.x = parseLength(strTrim2);
+                        } else if (i4 == 2) {
+                            use.y = parseLength(strTrim2);
+                        } else if (i4 == 3) {
+                            SVG.Length length3 = parseLength(strTrim2);
+                            use.width = length3;
+                            if (length3.isNegative()) {
+                                throw new SVGParseException("Invalid <use> element. width cannot be negative");
+                            }
+                        } else if (i4 == 4) {
+                            SVG.Length length4 = parseLength(strTrim2);
+                            use.height = length4;
+                            if (length4.isNegative()) {
+                                throw new SVGParseException("Invalid <use> element. height cannot be negative");
+                            }
+                        } else if (i4 == 6 && ("".equals(attributes.getURI(i3)) || "http://www.w3.org/1999/xlink".equals(attributes.getURI(i3)))) {
+                            use.href = strTrim2;
+                        }
+                    }
+                    this.currentElement.addChild(use);
+                    this.currentElement = use;
+                    return;
+                case 6:
+                    path(attributes);
+                    return;
+                case 7:
+                    if (this.currentElement == null) {
+                        throw new SVGParseException("Invalid document. Root element must be <svg>");
+                    }
+                    SVG.Rect rect = new SVG.Rect();
+                    rect.document = this.svgDocument;
+                    rect.parent = this.currentElement;
+                    parseAttributesCore(rect, attributes);
+                    parseAttributesStyle(rect, attributes);
+                    parseAttributesTransform(rect, attributes);
+                    parseAttributesConditional(rect, attributes);
+                    for (int i5 = 0; i5 < attributes.getLength(); i5++) {
+                        String strTrim3 = attributes.getValue(i5).trim();
+                        int i6 = AnonymousClass1.$SwitchMap$com$caverock$androidsvg$SVGParser$SVGAttr[SVGAttr.fromString(attributes.getLocalName(i5)).ordinal()];
+                        if (i6 == 1) {
+                            rect.x = parseLength(strTrim3);
+                        } else if (i6 == 2) {
+                            rect.y = parseLength(strTrim3);
+                        } else if (i6 == 3) {
+                            SVG.Length length5 = parseLength(strTrim3);
+                            rect.width = length5;
+                            if (length5.isNegative()) {
+                                throw new SVGParseException("Invalid <rect> element. width cannot be negative");
+                            }
+                        } else if (i6 == 4) {
+                            SVG.Length length6 = parseLength(strTrim3);
+                            rect.height = length6;
+                            if (length6.isNegative()) {
+                                throw new SVGParseException("Invalid <rect> element. height cannot be negative");
+                            }
+                        } else if (i6 == 10) {
+                            SVG.Length length7 = parseLength(strTrim3);
+                            rect.rx = length7;
+                            if (length7.isNegative()) {
+                                throw new SVGParseException("Invalid <rect> element. rx cannot be negative");
+                            }
+                        } else if (i6 != 11) {
+                            continue;
+                        } else {
+                            SVG.Length length8 = parseLength(strTrim3);
+                            rect.ry = length8;
+                            if (length8.isNegative()) {
+                                throw new SVGParseException("Invalid <rect> element. ry cannot be negative");
+                            }
+                        }
+                    }
+                    this.currentElement.addChild(rect);
+                    return;
+                case 8:
+                    if (this.currentElement == null) {
+                        throw new SVGParseException("Invalid document. Root element must be <svg>");
+                    }
+                    SVG.Circle circle = new SVG.Circle();
+                    circle.document = this.svgDocument;
+                    circle.parent = this.currentElement;
+                    parseAttributesCore(circle, attributes);
+                    parseAttributesStyle(circle, attributes);
+                    parseAttributesTransform(circle, attributes);
+                    parseAttributesConditional(circle, attributes);
+                    for (int i7 = 0; i7 < attributes.getLength(); i7++) {
+                        String strTrim4 = attributes.getValue(i7).trim();
+                        switch (AnonymousClass1.$SwitchMap$com$caverock$androidsvg$SVGParser$SVGAttr[SVGAttr.fromString(attributes.getLocalName(i7)).ordinal()]) {
+                            case 12:
+                                circle.cx = parseLength(strTrim4);
+                                break;
+                            case 13:
+                                circle.cy = parseLength(strTrim4);
+                                break;
+                            case 14:
+                                SVG.Length length9 = parseLength(strTrim4);
+                                circle.r = length9;
+                                if (length9.isNegative()) {
+                                    throw new SVGParseException("Invalid <circle> element. r cannot be negative");
+                                }
+                                break;
+                        }
+                    }
+                    this.currentElement.addChild(circle);
+                    return;
+                case 9:
+                    if (this.currentElement == null) {
+                        throw new SVGParseException("Invalid document. Root element must be <svg>");
+                    }
+                    SVG.Ellipse ellipse = new SVG.Ellipse();
+                    ellipse.document = this.svgDocument;
+                    ellipse.parent = this.currentElement;
+                    parseAttributesCore(ellipse, attributes);
+                    parseAttributesStyle(ellipse, attributes);
+                    parseAttributesTransform(ellipse, attributes);
+                    parseAttributesConditional(ellipse, attributes);
+                    for (int i8 = 0; i8 < attributes.getLength(); i8++) {
+                        String strTrim5 = attributes.getValue(i8).trim();
+                        switch (AnonymousClass1.$SwitchMap$com$caverock$androidsvg$SVGParser$SVGAttr[SVGAttr.fromString(attributes.getLocalName(i8)).ordinal()]) {
+                            case 10:
+                                SVG.Length length10 = parseLength(strTrim5);
+                                ellipse.rx = length10;
+                                if (length10.isNegative()) {
+                                    throw new SVGParseException("Invalid <ellipse> element. rx cannot be negative");
+                                }
+                                break;
+                            case 11:
+                                SVG.Length length11 = parseLength(strTrim5);
+                                ellipse.ry = length11;
+                                if (length11.isNegative()) {
+                                    throw new SVGParseException("Invalid <ellipse> element. ry cannot be negative");
+                                }
+                                break;
+                            case 12:
+                                ellipse.cx = parseLength(strTrim5);
+                                break;
+                            case 13:
+                                ellipse.cy = parseLength(strTrim5);
+                                break;
+                        }
+                    }
+                    this.currentElement.addChild(ellipse);
+                    return;
+                case 10:
+                    if (this.currentElement == null) {
+                        throw new SVGParseException("Invalid document. Root element must be <svg>");
+                    }
+                    SVG.Line line = new SVG.Line();
+                    line.document = this.svgDocument;
+                    line.parent = this.currentElement;
+                    parseAttributesCore(line, attributes);
+                    parseAttributesStyle(line, attributes);
+                    parseAttributesTransform(line, attributes);
+                    parseAttributesConditional(line, attributes);
+                    for (int i9 = 0; i9 < attributes.getLength(); i9++) {
+                        String strTrim6 = attributes.getValue(i9).trim();
+                        switch (AnonymousClass1.$SwitchMap$com$caverock$androidsvg$SVGParser$SVGAttr[SVGAttr.fromString(attributes.getLocalName(i9)).ordinal()]) {
+                            case 15:
+                                line.x1 = parseLength(strTrim6);
+                                break;
+                            case 16:
+                                line.y1 = parseLength(strTrim6);
+                                break;
+                            case 17:
+                                line.x2 = parseLength(strTrim6);
+                                break;
+                            case 18:
+                                line.y2 = parseLength(strTrim6);
+                                break;
+                        }
+                    }
+                    this.currentElement.addChild(line);
+                    return;
+                case 11:
+                    if (this.currentElement == null) {
+                        throw new SVGParseException("Invalid document. Root element must be <svg>");
+                    }
+                    SVG.PolyLine polyLine = new SVG.PolyLine();
+                    polyLine.document = this.svgDocument;
+                    polyLine.parent = this.currentElement;
+                    parseAttributesCore(polyLine, attributes);
+                    parseAttributesStyle(polyLine, attributes);
+                    parseAttributesTransform(polyLine, attributes);
+                    parseAttributesConditional(polyLine, attributes);
+                    parseAttributesPolyLine(polyLine, attributes, "polyline");
+                    this.currentElement.addChild(polyLine);
+                    return;
+                case 12:
+                    if (this.currentElement == null) {
+                        throw new SVGParseException("Invalid document. Root element must be <svg>");
+                    }
+                    SVG.Polygon polygon = new SVG.Polygon();
+                    polygon.document = this.svgDocument;
+                    polygon.parent = this.currentElement;
+                    parseAttributesCore(polygon, attributes);
+                    parseAttributesStyle(polygon, attributes);
+                    parseAttributesTransform(polygon, attributes);
+                    parseAttributesConditional(polygon, attributes);
+                    parseAttributesPolyLine(polygon, attributes, "polygon");
+                    this.currentElement.addChild(polygon);
+                    return;
+                case 13:
+                    if (this.currentElement == null) {
+                        throw new SVGParseException("Invalid document. Root element must be <svg>");
+                    }
+                    SVG.Text text = new SVG.Text();
+                    text.document = this.svgDocument;
+                    text.parent = this.currentElement;
+                    parseAttributesCore(text, attributes);
+                    parseAttributesStyle(text, attributes);
+                    parseAttributesTransform(text, attributes);
+                    parseAttributesConditional(text, attributes);
+                    parseAttributesTextPosition(text, attributes);
+                    this.currentElement.addChild(text);
+                    this.currentElement = text;
+                    return;
+                case 14:
+                    SVG.SvgContainer svgContainer2 = this.currentElement;
+                    if (svgContainer2 == null) {
+                        throw new SVGParseException("Invalid document. Root element must be <svg>");
+                    }
+                    if (!(svgContainer2 instanceof SVG.TextContainer)) {
+                        throw new SVGParseException("Invalid document. <tspan> elements are only valid inside <text> or other <tspan> elements.");
+                    }
+                    SVG.TSpan tSpan = new SVG.TSpan();
+                    tSpan.document = this.svgDocument;
+                    tSpan.parent = this.currentElement;
+                    parseAttributesCore(tSpan, attributes);
+                    parseAttributesStyle(tSpan, attributes);
+                    parseAttributesConditional(tSpan, attributes);
+                    parseAttributesTextPosition(tSpan, attributes);
+                    this.currentElement.addChild(tSpan);
+                    this.currentElement = tSpan;
+                    SVG.SvgContainer svgContainer3 = tSpan.parent;
+                    if (svgContainer3 instanceof SVG.Text) {
+                        tSpan.textRoot = (SVG.Text) svgContainer3;
+                        return;
+                    } else {
+                        tSpan.textRoot = ((SVG.TextChild) svgContainer3).getTextRoot();
+                        return;
+                    }
+                case 15:
+                    SVG.SvgContainer svgContainer4 = this.currentElement;
+                    if (svgContainer4 == null) {
+                        throw new SVGParseException("Invalid document. Root element must be <svg>");
+                    }
+                    if (!(svgContainer4 instanceof SVG.TextContainer)) {
+                        throw new SVGParseException("Invalid document. <tref> elements are only valid inside <text> or <tspan> elements.");
+                    }
+                    SVG.TRef tRef = new SVG.TRef();
+                    tRef.document = this.svgDocument;
+                    tRef.parent = this.currentElement;
+                    parseAttributesCore(tRef, attributes);
+                    parseAttributesStyle(tRef, attributes);
+                    parseAttributesConditional(tRef, attributes);
+                    for (int i10 = 0; i10 < attributes.getLength(); i10++) {
+                        String strTrim7 = attributes.getValue(i10).trim();
+                        if (AnonymousClass1.$SwitchMap$com$caverock$androidsvg$SVGParser$SVGAttr[SVGAttr.fromString(attributes.getLocalName(i10)).ordinal()] == 6 && ("".equals(attributes.getURI(i10)) || "http://www.w3.org/1999/xlink".equals(attributes.getURI(i10)))) {
+                            tRef.href = strTrim7;
+                        }
+                    }
+                    this.currentElement.addChild(tRef);
+                    SVG.SvgContainer svgContainer5 = tRef.parent;
+                    if (svgContainer5 instanceof SVG.Text) {
+                        tRef.textRoot = (SVG.Text) svgContainer5;
+                        return;
+                    } else {
+                        tRef.textRoot = ((SVG.TextChild) svgContainer5).getTextRoot();
+                        return;
+                    }
+                case 16:
+                    if (this.currentElement == null) {
+                        throw new SVGParseException("Invalid document. Root element must be <svg>");
+                    }
+                    SVG.Switch r1 = new SVG.Switch();
+                    r1.document = this.svgDocument;
+                    r1.parent = this.currentElement;
+                    parseAttributesCore(r1, attributes);
+                    parseAttributesStyle(r1, attributes);
+                    parseAttributesTransform(r1, attributes);
+                    parseAttributesConditional(r1, attributes);
+                    this.currentElement.addChild(r1);
+                    this.currentElement = r1;
+                    return;
+                case 17:
+                    if (this.currentElement == null) {
+                        throw new SVGParseException("Invalid document. Root element must be <svg>");
+                    }
+                    SVG.Symbol symbol = new SVG.Symbol();
+                    symbol.document = this.svgDocument;
+                    symbol.parent = this.currentElement;
+                    parseAttributesCore(symbol, attributes);
+                    parseAttributesStyle(symbol, attributes);
+                    parseAttributesConditional(symbol, attributes);
+                    parseAttributesViewBox(symbol, attributes);
+                    this.currentElement.addChild(symbol);
+                    this.currentElement = symbol;
+                    return;
+                case 18:
+                    if (this.currentElement == null) {
+                        throw new SVGParseException("Invalid document. Root element must be <svg>");
+                    }
+                    SVG.Marker marker = new SVG.Marker();
+                    marker.document = this.svgDocument;
+                    marker.parent = this.currentElement;
+                    parseAttributesCore(marker, attributes);
+                    parseAttributesStyle(marker, attributes);
+                    parseAttributesConditional(marker, attributes);
+                    parseAttributesViewBox(marker, attributes);
+                    for (int i11 = 0; i11 < attributes.getLength(); i11++) {
+                        String strTrim8 = attributes.getValue(i11).trim();
+                        switch (AnonymousClass1.$SwitchMap$com$caverock$androidsvg$SVGParser$SVGAttr[SVGAttr.fromString(attributes.getLocalName(i11)).ordinal()]) {
+                            case 26:
+                                marker.refX = parseLength(strTrim8);
+                                continue;
+                            case 27:
+                                marker.refY = parseLength(strTrim8);
+                                continue;
+                            case 28:
+                                SVG.Length length12 = parseLength(strTrim8);
+                                marker.markerWidth = length12;
+                                if (length12.isNegative()) {
+                                    throw new SVGParseException("Invalid <marker> element. markerWidth cannot be negative");
+                                }
+                                continue;
+                            case 29:
+                                SVG.Length length13 = parseLength(strTrim8);
+                                marker.markerHeight = length13;
+                                if (length13.isNegative()) {
+                                    throw new SVGParseException("Invalid <marker> element. markerHeight cannot be negative");
+                                }
+                                continue;
+                            case 30:
+                                if ("strokeWidth".equals(strTrim8)) {
+                                    marker.markerUnitsAreUser = false;
+                                    continue;
+                                } else {
+                                    if (!"userSpaceOnUse".equals(strTrim8)) {
+                                        throw new SVGParseException("Invalid value for attribute markerUnits");
+                                    }
+                                    marker.markerUnitsAreUser = true;
+                                }
+                            case 31:
+                                if ("auto".equals(strTrim8)) {
+                                    marker.orient = Float.valueOf(Float.NaN);
+                                    break;
+                                } else {
+                                    marker.orient = Float.valueOf(parseFloat(strTrim8));
+                                    break;
+                                }
+                        }
+                    }
+                    this.currentElement.addChild(marker);
+                    this.currentElement = marker;
+                    return;
+                case 19:
+                    if (this.currentElement == null) {
+                        throw new SVGParseException("Invalid document. Root element must be <svg>");
+                    }
+                    SVG.SvgLinearGradient svgLinearGradient = new SVG.SvgLinearGradient();
+                    svgLinearGradient.document = this.svgDocument;
+                    svgLinearGradient.parent = this.currentElement;
+                    parseAttributesCore(svgLinearGradient, attributes);
+                    parseAttributesStyle(svgLinearGradient, attributes);
+                    parseAttributesGradient(svgLinearGradient, attributes);
+                    for (int i12 = 0; i12 < attributes.getLength(); i12++) {
+                        String strTrim9 = attributes.getValue(i12).trim();
+                        switch (AnonymousClass1.$SwitchMap$com$caverock$androidsvg$SVGParser$SVGAttr[SVGAttr.fromString(attributes.getLocalName(i12)).ordinal()]) {
+                            case 15:
+                                svgLinearGradient.x1 = parseLength(strTrim9);
+                                break;
+                            case 16:
+                                svgLinearGradient.y1 = parseLength(strTrim9);
+                                break;
+                            case 17:
+                                svgLinearGradient.x2 = parseLength(strTrim9);
+                                break;
+                            case 18:
+                                svgLinearGradient.y2 = parseLength(strTrim9);
+                                break;
+                        }
+                    }
+                    this.currentElement.addChild(svgLinearGradient);
+                    this.currentElement = svgLinearGradient;
+                    return;
+                case 20:
+                    if (this.currentElement == null) {
+                        throw new SVGParseException("Invalid document. Root element must be <svg>");
+                    }
+                    SVG.SvgRadialGradient svgRadialGradient = new SVG.SvgRadialGradient();
+                    svgRadialGradient.document = this.svgDocument;
+                    svgRadialGradient.parent = this.currentElement;
+                    parseAttributesCore(svgRadialGradient, attributes);
+                    parseAttributesStyle(svgRadialGradient, attributes);
+                    parseAttributesGradient(svgRadialGradient, attributes);
+                    for (int i13 = 0; i13 < attributes.getLength(); i13++) {
+                        String strTrim10 = attributes.getValue(i13).trim();
+                        int i14 = AnonymousClass1.$SwitchMap$com$caverock$androidsvg$SVGParser$SVGAttr[SVGAttr.fromString(attributes.getLocalName(i13)).ordinal()];
+                        if (i14 == 35) {
+                            svgRadialGradient.fx = parseLength(strTrim10);
+                        } else if (i14 != 36) {
+                            switch (i14) {
+                                case 12:
+                                    svgRadialGradient.cx = parseLength(strTrim10);
+                                    break;
+                                case 13:
+                                    svgRadialGradient.cy = parseLength(strTrim10);
+                                    break;
+                                case 14:
+                                    SVG.Length length14 = parseLength(strTrim10);
+                                    svgRadialGradient.r = length14;
+                                    if (length14.isNegative()) {
+                                        throw new SVGParseException("Invalid <radialGradient> element. r cannot be negative");
+                                    }
+                                    break;
+                            }
+                        } else {
+                            svgRadialGradient.fy = parseLength(strTrim10);
+                        }
+                    }
+                    this.currentElement.addChild(svgRadialGradient);
+                    this.currentElement = svgRadialGradient;
+                    return;
+                case 21:
+                    SVG.SvgContainer svgContainer6 = this.currentElement;
+                    if (svgContainer6 == null) {
+                        throw new SVGParseException("Invalid document. Root element must be <svg>");
+                    }
+                    if (!(svgContainer6 instanceof SVG.GradientElement)) {
+                        throw new SVGParseException("Invalid document. <stop> elements are only valid inside <linearGradient> or <radialGradient> elements.");
+                    }
+                    SVG.Stop stop = new SVG.Stop();
+                    stop.document = this.svgDocument;
+                    stop.parent = this.currentElement;
+                    parseAttributesCore(stop, attributes);
+                    parseAttributesStyle(stop, attributes);
+                    for (int i15 = 0; i15 < attributes.getLength(); i15++) {
+                        String strTrim11 = attributes.getValue(i15).trim();
+                        if (AnonymousClass1.$SwitchMap$com$caverock$androidsvg$SVGParser$SVGAttr[SVGAttr.fromString(attributes.getLocalName(i15)).ordinal()] == 37) {
+                            if (strTrim11.length() == 0) {
+                                throw new SVGParseException("Invalid offset value in <stop> (empty string)");
+                            }
+                            int length15 = strTrim11.length();
+                            if (strTrim11.charAt(strTrim11.length() - 1) == '%') {
+                                length15--;
+                                z = true;
+                            } else {
+                                z = false;
+                            }
+                            try {
+                                float f = parseFloat(length15, strTrim11);
+                                float f2 = 100.0f;
+                                if (z) {
+                                    f /= 100.0f;
+                                }
+                                if (f < 0.0f) {
+                                    f2 = 0.0f;
+                                } else if (f <= 100.0f) {
+                                    f2 = f;
+                                }
+                                stop.offset = Float.valueOf(f2);
+                            } catch (NumberFormatException e) {
+                                throw new SVGParseException("Invalid offset value in <stop>: ".concat(strTrim11), e);
+                            }
+                        }
+                    }
+                    this.currentElement.addChild(stop);
+                    this.currentElement = stop;
+                    return;
+                case 22:
+                case 23:
+                    this.inMetadataElement = true;
+                    this.metadataTag = sVGElem;
+                    return;
+                case 24:
+                    if (this.currentElement == null) {
+                        throw new SVGParseException("Invalid document. Root element must be <svg>");
+                    }
+                    SVG.ClipPath clipPath = new SVG.ClipPath();
+                    clipPath.document = this.svgDocument;
+                    clipPath.parent = this.currentElement;
+                    parseAttributesCore(clipPath, attributes);
+                    parseAttributesStyle(clipPath, attributes);
+                    parseAttributesTransform(clipPath, attributes);
+                    parseAttributesConditional(clipPath, attributes);
+                    for (int i16 = 0; i16 < attributes.getLength(); i16++) {
+                        String strTrim12 = attributes.getValue(i16).trim();
+                        if (AnonymousClass1.$SwitchMap$com$caverock$androidsvg$SVGParser$SVGAttr[SVGAttr.fromString(attributes.getLocalName(i16)).ordinal()] == 38) {
+                            if ("objectBoundingBox".equals(strTrim12)) {
+                                clipPath.clipPathUnitsAreUser = Boolean.FALSE;
+                            } else {
+                                if (!"userSpaceOnUse".equals(strTrim12)) {
+                                    throw new SVGParseException("Invalid value for attribute clipPathUnits");
+                                }
+                                clipPath.clipPathUnitsAreUser = Boolean.TRUE;
+                            }
+                        }
+                    }
+                    this.currentElement.addChild(clipPath);
+                    this.currentElement = clipPath;
+                    return;
+                case 25:
+                    if (this.currentElement == null) {
+                        throw new SVGParseException("Invalid document. Root element must be <svg>");
+                    }
+                    SVG.TextPath textPath = new SVG.TextPath();
+                    textPath.document = this.svgDocument;
+                    textPath.parent = this.currentElement;
+                    parseAttributesCore(textPath, attributes);
+                    parseAttributesStyle(textPath, attributes);
+                    parseAttributesConditional(textPath, attributes);
+                    for (int i17 = 0; i17 < attributes.getLength(); i17++) {
+                        String strTrim13 = attributes.getValue(i17).trim();
+                        int i18 = AnonymousClass1.$SwitchMap$com$caverock$androidsvg$SVGParser$SVGAttr[SVGAttr.fromString(attributes.getLocalName(i17)).ordinal()];
+                        if (i18 != 6) {
+                            if (i18 == 39) {
+                                textPath.startOffset = parseLength(strTrim13);
+                            }
+                        } else if ("".equals(attributes.getURI(i17)) || "http://www.w3.org/1999/xlink".equals(attributes.getURI(i17))) {
+                            textPath.href = strTrim13;
+                        }
+                    }
+                    this.currentElement.addChild(textPath);
+                    this.currentElement = textPath;
+                    SVG.SvgContainer svgContainer7 = textPath.parent;
+                    if (svgContainer7 instanceof SVG.Text) {
+                        textPath.textRoot = (SVG.Text) svgContainer7;
+                        return;
+                    } else {
+                        textPath.textRoot = ((SVG.TextChild) svgContainer7).getTextRoot();
+                        return;
+                    }
+                case 26:
+                    if (this.currentElement == null) {
+                        throw new SVGParseException("Invalid document. Root element must be <svg>");
+                    }
+                    SVG.Pattern pattern = new SVG.Pattern();
+                    pattern.document = this.svgDocument;
+                    pattern.parent = this.currentElement;
+                    parseAttributesCore(pattern, attributes);
+                    parseAttributesStyle(pattern, attributes);
+                    parseAttributesConditional(pattern, attributes);
+                    parseAttributesViewBox(pattern, attributes);
+                    for (int i19 = 0; i19 < attributes.getLength(); i19++) {
+                        String strTrim14 = attributes.getValue(i19).trim();
+                        int i20 = AnonymousClass1.$SwitchMap$com$caverock$androidsvg$SVGParser$SVGAttr[SVGAttr.fromString(attributes.getLocalName(i19)).ordinal()];
+                        if (i20 == 1) {
+                            pattern.x = parseLength(strTrim14);
+                        } else if (i20 == 2) {
+                            pattern.y = parseLength(strTrim14);
+                        } else if (i20 == 3) {
+                            SVG.Length length16 = parseLength(strTrim14);
+                            pattern.width = length16;
+                            if (length16.isNegative()) {
+                                throw new SVGParseException("Invalid <pattern> element. width cannot be negative");
+                            }
+                        } else if (i20 == 4) {
+                            SVG.Length length17 = parseLength(strTrim14);
+                            pattern.height = length17;
+                            if (length17.isNegative()) {
+                                throw new SVGParseException("Invalid <pattern> element. height cannot be negative");
+                            }
+                        } else if (i20 != 6) {
+                            switch (i20) {
+                                case 40:
+                                    if (!"objectBoundingBox".equals(strTrim14)) {
+                                        if (!"userSpaceOnUse".equals(strTrim14)) {
+                                            throw new SVGParseException("Invalid value for attribute patternUnits");
+                                        }
+                                        pattern.patternUnitsAreUser = Boolean.TRUE;
+                                        break;
+                                    } else {
+                                        pattern.patternUnitsAreUser = Boolean.FALSE;
+                                        break;
+                                    }
+                                case 41:
+                                    if (!"objectBoundingBox".equals(strTrim14)) {
+                                        if (!"userSpaceOnUse".equals(strTrim14)) {
+                                            throw new SVGParseException("Invalid value for attribute patternContentUnits");
+                                        }
+                                        pattern.patternContentUnitsAreUser = Boolean.TRUE;
+                                        break;
+                                    } else {
+                                        pattern.patternContentUnitsAreUser = Boolean.FALSE;
+                                        break;
+                                    }
+                                case 42:
+                                    pattern.patternTransform = parseTransformList(strTrim14);
+                                    break;
+                            }
+                        } else if ("".equals(attributes.getURI(i19)) || "http://www.w3.org/1999/xlink".equals(attributes.getURI(i19))) {
+                            pattern.href = strTrim14;
+                        }
+                    }
+                    this.currentElement.addChild(pattern);
+                    this.currentElement = pattern;
+                    return;
+                case 27:
+                    if (this.currentElement == null) {
+                        throw new SVGParseException("Invalid document. Root element must be <svg>");
+                    }
+                    SVG.Image image = new SVG.Image();
+                    image.document = this.svgDocument;
+                    image.parent = this.currentElement;
+                    parseAttributesCore(image, attributes);
+                    parseAttributesStyle(image, attributes);
+                    parseAttributesTransform(image, attributes);
+                    parseAttributesConditional(image, attributes);
+                    for (int i21 = 0; i21 < attributes.getLength(); i21++) {
+                        String strTrim15 = attributes.getValue(i21).trim();
+                        int i22 = AnonymousClass1.$SwitchMap$com$caverock$androidsvg$SVGParser$SVGAttr[SVGAttr.fromString(attributes.getLocalName(i21)).ordinal()];
+                        if (i22 == 1) {
+                            image.x = parseLength(strTrim15);
+                        } else if (i22 == 2) {
+                            image.y = parseLength(strTrim15);
+                        } else if (i22 == 3) {
+                            SVG.Length length18 = parseLength(strTrim15);
+                            image.width = length18;
+                            if (length18.isNegative()) {
+                                throw new SVGParseException("Invalid <use> element. width cannot be negative");
+                            }
+                        } else if (i22 == 4) {
+                            SVG.Length length19 = parseLength(strTrim15);
+                            image.height = length19;
+                            if (length19.isNegative()) {
+                                throw new SVGParseException("Invalid <use> element. height cannot be negative");
+                            }
+                        } else if (i22 != 6) {
+                            if (i22 == 7) {
+                                parsePreserveAspectRatio(image, strTrim15);
+                            }
+                        } else if ("".equals(attributes.getURI(i21)) || "http://www.w3.org/1999/xlink".equals(attributes.getURI(i21))) {
+                            image.href = strTrim15;
+                        }
+                    }
+                    this.currentElement.addChild(image);
+                    this.currentElement = image;
+                    return;
+                case 28:
+                    if (this.currentElement == null) {
+                        throw new SVGParseException("Invalid document. Root element must be <svg>");
+                    }
+                    SVG.View view = new SVG.View();
+                    view.document = this.svgDocument;
+                    view.parent = this.currentElement;
+                    parseAttributesCore(view, attributes);
+                    parseAttributesConditional(view, attributes);
+                    parseAttributesViewBox(view, attributes);
+                    this.currentElement.addChild(view);
+                    this.currentElement = view;
+                    return;
+                case 29:
+                    if (this.currentElement == null) {
+                        throw new SVGParseException("Invalid document. Root element must be <svg>");
+                    }
+                    SVG.Mask mask = new SVG.Mask();
+                    mask.document = this.svgDocument;
+                    mask.parent = this.currentElement;
+                    parseAttributesCore(mask, attributes);
+                    parseAttributesStyle(mask, attributes);
+                    parseAttributesConditional(mask, attributes);
+                    for (int i23 = 0; i23 < attributes.getLength(); i23++) {
+                        String strTrim16 = attributes.getValue(i23).trim();
+                        int i24 = AnonymousClass1.$SwitchMap$com$caverock$androidsvg$SVGParser$SVGAttr[SVGAttr.fromString(attributes.getLocalName(i23)).ordinal()];
+                        if (i24 == 1) {
+                            parseLength(strTrim16);
+                        } else if (i24 == 2) {
+                            parseLength(strTrim16);
+                        } else if (i24 == 3) {
+                            SVG.Length length20 = parseLength(strTrim16);
+                            mask.width = length20;
+                            if (length20.isNegative()) {
+                                throw new SVGParseException("Invalid <mask> element. width cannot be negative");
+                            }
+                        } else if (i24 == 4) {
+                            SVG.Length length21 = parseLength(strTrim16);
+                            mask.height = length21;
+                            if (length21.isNegative()) {
+                                throw new SVGParseException("Invalid <mask> element. height cannot be negative");
+                            }
+                        } else if (i24 != 43) {
+                            if (i24 != 44) {
+                                continue;
+                            } else if ("objectBoundingBox".equals(strTrim16)) {
+                                mask.maskContentUnitsAreUser = Boolean.FALSE;
+                            } else {
+                                if (!"userSpaceOnUse".equals(strTrim16)) {
+                                    throw new SVGParseException("Invalid value for attribute maskContentUnits");
+                                }
+                                mask.maskContentUnitsAreUser = Boolean.TRUE;
+                            }
+                        } else if ("objectBoundingBox".equals(strTrim16)) {
+                            mask.maskUnitsAreUser = Boolean.FALSE;
+                        } else {
+                            if (!"userSpaceOnUse".equals(strTrim16)) {
+                                throw new SVGParseException("Invalid value for attribute maskUnits");
+                            }
+                            mask.maskUnitsAreUser = Boolean.TRUE;
+                        }
+                    }
+                    this.currentElement.addChild(mask);
+                    this.currentElement = mask;
+                    return;
+                case 30:
+                    if (this.currentElement == null) {
+                        throw new SVGParseException("Invalid document. Root element must be <svg>");
+                    }
+                    String str4 = SystemUIAnalytics.QPNE_VID_COVER_ALL;
+                    boolean zEquals = true;
+                    for (int i25 = 0; i25 < attributes.getLength(); i25++) {
+                        String strTrim17 = attributes.getValue(i25).trim();
+                        int i26 = AnonymousClass1.$SwitchMap$com$caverock$androidsvg$SVGParser$SVGAttr[SVGAttr.fromString(attributes.getLocalName(i25)).ordinal()];
+                        if (i26 == 88) {
+                            zEquals = strTrim17.equals("text/css");
+                        } else if (i26 == 89) {
+                            str4 = strTrim17;
+                        }
+                    }
+                    if (zEquals) {
+                        CSSParser.MediaType mediaType = CSSParser.MediaType.screen;
+                        CSSParser.CSSTextScanner cSSTextScanner = new CSSParser.CSSTextScanner(str4);
+                        cSSTextScanner.skipWhitespace();
+                        ArrayList arrayList = (ArrayList) CSSParser.parseMediaList(cSSTextScanner);
+                        int size = arrayList.size();
+                        int i27 = 0;
+                        while (i27 < size) {
+                            Object obj = arrayList.get(i27);
+                            i27++;
+                            CSSParser.MediaType mediaType2 = (CSSParser.MediaType) obj;
+                            if (mediaType2 == CSSParser.MediaType.all || mediaType2 == mediaType) {
+                                this.inStyleElement = true;
+                                return;
+                            }
+                        }
+                    }
+                    this.ignoring = true;
+                    this.ignoreDepth = 1;
+                    return;
+                case 31:
+                    if (this.currentElement == null) {
+                        throw new SVGParseException("Invalid document. Root element must be <svg>");
+                    }
+                    SVG.SolidColor solidColor = new SVG.SolidColor();
+                    solidColor.document = this.svgDocument;
+                    solidColor.parent = this.currentElement;
+                    parseAttributesCore(solidColor, attributes);
+                    parseAttributesStyle(solidColor, attributes);
+                    this.currentElement.addChild(solidColor);
+                    this.currentElement = solidColor;
+                    return;
+                default:
+                    this.ignoring = true;
+                    this.ignoreDepth = 1;
+                    return;
+            }
+        }
     }
 
     public final void text(String str) {
@@ -2223,12 +3798,12 @@ public class SVGParser {
         }
     }
 
-    public static float parseFloat(int i, String str) {
-        float parseNumber = new NumberParser().parseNumber(0, i, str);
-        if (Float.isNaN(parseNumber)) {
+    public static float parseFloat(int i, String str) throws SVGParseException {
+        float number = new NumberParser().parseNumber(0, i, str);
+        if (Float.isNaN(number)) {
             throw new SVGParseException(AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("Invalid float value: ", str));
         }
-        return parseNumber;
+        return number;
     }
 
     public final void text(char[] cArr, int i, int i2) {

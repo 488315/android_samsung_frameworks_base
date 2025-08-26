@@ -8,7 +8,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.internal.ThreadContextKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class UndispatchedContextCollector implements FlowCollector {
     public final Object countOrElement;
@@ -23,7 +22,7 @@ public final class UndispatchedContextCollector implements FlowCollector {
 
     @Override // kotlinx.coroutines.flow.FlowCollector
     public final Object emit(Object obj, Continuation continuation) {
-        Object withContextUndispatched = ChannelFlowKt.withContextUndispatched(this.emitContext, obj, this.countOrElement, this.emitRef, continuation);
-        return withContextUndispatched == CoroutineSingletons.COROUTINE_SUSPENDED ? withContextUndispatched : Unit.INSTANCE;
+        Object objWithContextUndispatched = ChannelFlowKt.withContextUndispatched(this.emitContext, obj, this.countOrElement, this.emitRef, continuation);
+        return objWithContextUndispatched == CoroutineSingletons.COROUTINE_SUSPENDED ? objWithContextUndispatched : Unit.INSTANCE;
     }
 }

@@ -10,6 +10,7 @@ import android.util.SparseIntArray;
 import android.util.proto.ProtoOutputStream;
 import android.view.DisplayCutout;
 import android.view.WindowInsets;
+import android.window.DesktopModeFlags;
 import com.samsung.android.rune.CoreRune;
 import java.io.PrintWriter;
 import java.util.Objects;
@@ -103,8 +104,8 @@ public class InsetsState implements Parcelable {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0079  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x009d  */
+    /* JADX WARN: Removed duplicated region for block: B:21:0x0073  */
+    /* JADX WARN: Removed duplicated region for block: B:32:0x00b9  */
     /* JADX WARN: Type inference failed for: r15v2 */
     /* JADX WARN: Type inference failed for: r15v3, types: [int] */
     /* JADX WARN: Type inference failed for: r15v4 */
@@ -113,14 +114,113 @@ public class InsetsState implements Parcelable {
     /* JADX WARN: Type inference failed for: r4v7 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public android.view.WindowInsets calculateInsets(android.graphics.Rect r28, android.view.InsetsState r29, boolean r30, int r31, int r32, int r33, int r34, int r35, android.util.SparseIntArray r36, boolean r37) {
-        /*
-            Method dump skipped, instructions count: 355
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.view.InsetsState.calculateInsets(android.graphics.Rect, android.view.InsetsState, boolean, int, int, int, int, int, android.util.SparseIntArray, boolean):android.view.WindowInsets");
+    public WindowInsets calculateInsets(Rect rect, InsetsState insetsState, boolean z, int i, int i2, int i3, int i4, int i5, SparseIntArray sparseIntArray, boolean z2) {
+        boolean z3;
+        Insets[] insetsArr;
+        Rect rect2;
+        Rect[][] rectArr;
+        InsetsState insetsState2 = this;
+        Insets[] insetsArr2 = new Insets[10];
+        Insets[] insetsArr3 = new Insets[10];
+        boolean[] zArr = new boolean[10];
+        Rect rect3 = new Rect(rect);
+        Rect rect4 = new Rect(rect);
+        Rect[][] rectArr2 = new Rect[10][];
+        int size = insetsState2.mSources.size() - 1;
+        boolean z4 = false;
+        int i6 = -1;
+        Rect[][] rectArr3 = new Rect[10][];
+        int i7 = 0;
+        boolean z5 = false;
+        int i8 = 0;
+        while (size >= 0) {
+            Rect rect5 = rect3;
+            InsetsSource insetsSourceValueAt = insetsState2.mSources.valueAt(size);
+            Insets[] insetsArr4 = insetsArr2;
+            int type = insetsSourceValueAt.getType();
+            int flags = insetsSourceValueAt.getFlags();
+            if ((flags & 4) != 0) {
+                i7 |= type;
+            }
+            int i9 = i7;
+            boolean z6 = (!DesktopModeFlags.ENABLE_CAPTION_COMPAT_INSET_FORCE_CONSUMPTION_ALWAYS.isTrue() || (flags & 16) == 0) ? z5 : true;
+            if (!CoreRune.MW_CAPTION_TYPE) {
+                z3 = i6;
+            } else if ((flags & 32) != 0) {
+                z3 = true;
+            } else if ((flags & 64) != 0) {
+                z3 = z4;
+            }
+            if ((flags & 1) != 0) {
+                i8 |= type;
+            }
+            int i10 = size;
+            InsetsSource insetsSourcePeekSource = insetsSourceValueAt;
+            Rect[][] rectArr4 = rectArr3;
+            boolean[] zArr2 = zArr;
+            insetsState2.processSource(insetsSourcePeekSource, rect5, false, insetsArr4, sparseIntArray, zArr2, rectArr4, z2);
+            boolean z7 = z4;
+            if (type == WindowInsets.Type.ime()) {
+                insetsState2 = this;
+                insetsArr = insetsArr3;
+                rect2 = rect4;
+                rectArr = rectArr2;
+            } else {
+                if (insetsState != null) {
+                    insetsSourcePeekSource = insetsState.peekSource(insetsSourcePeekSource.getId());
+                }
+                if (insetsSourcePeekSource != null) {
+                    insetsState2 = this;
+                    Insets[] insetsArr5 = insetsArr3;
+                    rect2 = rect4;
+                    Rect[][] rectArr5 = rectArr2;
+                    insetsState2.processSource(insetsSourcePeekSource, rect2, true, insetsArr5, null, null, rectArr5);
+                    insetsArr = insetsArr5;
+                    rectArr = rectArr5;
+                }
+            }
+            insetsArr3 = insetsArr;
+            rect4 = rect2;
+            rectArr2 = rectArr;
+            size = i10 - 1;
+            rectArr3 = rectArr4;
+            insetsArr2 = insetsArr4;
+            zArr = zArr2;
+            i7 = i9;
+            z5 = z6;
+            i6 = z3;
+            rect3 = rect5;
+            z4 = z7;
+        }
+        Insets[] insetsArr6 = insetsArr2;
+        boolean[] zArr3 = zArr;
+        Insets[] insetsArr7 = insetsArr3;
+        Rect[][] rectArr6 = rectArr2;
+        boolean z8 = z4;
+        Rect[][] rectArr7 = rectArr3;
+        int i11 = i & 240;
+        int iSystemBars = WindowInsets.Type.systemBars() | WindowInsets.Type.displayCutout();
+        if (i11 == 16) {
+            iSystemBars |= WindowInsets.Type.ime();
+        }
+        if ((i2 & 1024) != 0) {
+            iSystemBars &= ~WindowInsets.Type.statusBars();
+        }
+        ?? r15 = clearsCompatInsets(i4, i2, i5, i7) ? z8 : iSystemBars;
+        DisplayCutout displayCutoutCalculateRelativeCutout = null;
+        DisplayCutout displayCutoutCalculateRelativeCutout2 = (!CoreRune.FW_CAN_DISPATCH_UDC_CUTOUT || !insetsState2.mCanDispatchUdcCutout || i4 == 2040 || i4 == 2000) ? calculateRelativeCutout(rect) : null;
+        RoundedCorners roundedCornersCalculateRelativeRoundedCorners = calculateRelativeRoundedCorners(rect);
+        PrivacyIndicatorBounds privacyIndicatorBoundsCalculateRelativePrivacyIndicatorBounds = calculateRelativePrivacyIndicatorBounds(rect);
+        DisplayShape displayShapeCalculateRelativeDisplayShape = calculateRelativeDisplayShape(rect);
+        boolean z9 = (i3 & 256) == 0 ? z8 : true;
+        int iWidth = rect.width();
+        int i12 = i8;
+        int iHeight = rect.height();
+        if (CoreRune.FW_CAN_DISPATCH_UDC_CUTOUT && insetsState2.mCanDispatchUdcCutout) {
+            displayCutoutCalculateRelativeCutout = calculateRelativeCutout(rect);
+        }
+        return new WindowInsets(insetsArr6, insetsArr7, zArr3, z, i7, z5, i6, i12, displayCutoutCalculateRelativeCutout2, roundedCornersCalculateRelativeRoundedCorners, privacyIndicatorBoundsCalculateRelativePrivacyIndicatorBounds, displayShapeCalculateRelativeDisplayShape, r15, z9, rectArr7, rectArr6, iWidth, iHeight, displayCutoutCalculateRelativeCutout);
     }
 
     private DisplayCutout calculateRelativeCutout(Rect rect) {
@@ -147,9 +247,9 @@ public class InsetsState implements Parcelable {
         }
         Rect rect2 = new Rect(this.mRoundedCornerFrame);
         for (int size = this.mSources.size() - 1; size >= 0; size--) {
-            InsetsSource valueAt = this.mSources.valueAt(size);
-            if (valueAt.hasFlags(2)) {
-                rect2.inset(valueAt.calculateInsets(rect2, false));
+            InsetsSource insetsSourceValueAt = this.mSources.valueAt(size);
+            if (insetsSourceValueAt.hasFlags(2)) {
+                rect2.inset(insetsSourceValueAt.calculateInsets(rect2, false));
             }
         }
         if (!rect2.isEmpty() && !rect2.equals(this.mDisplayFrame)) {
@@ -182,69 +282,73 @@ public class InsetsState implements Parcelable {
     }
 
     public Insets calculateInsets(Rect rect, int i, boolean z) {
-        Insets insets = Insets.NONE;
+        Insets insetsMax = Insets.NONE;
         for (int size = this.mSources.size() - 1; size >= 0; size--) {
-            InsetsSource valueAt = this.mSources.valueAt(size);
-            if ((valueAt.getType() & i) != 0) {
-                insets = Insets.max(valueAt.calculateInsets(rect, z), insets);
+            InsetsSource insetsSourceValueAt = this.mSources.valueAt(size);
+            if ((insetsSourceValueAt.getType() & i) != 0) {
+                insetsMax = Insets.max(insetsSourceValueAt.calculateInsets(rect, z), insetsMax);
             }
         }
-        return insets;
+        return insetsMax;
     }
 
     public Insets calculateInsets(Rect rect, int i, int i2) {
-        Insets insets = Insets.NONE;
+        Insets insetsMax = Insets.NONE;
         for (int size = this.mSources.size() - 1; size >= 0; size--) {
-            InsetsSource valueAt = this.mSources.valueAt(size);
-            if ((valueAt.getType() & i & i2) != 0) {
-                insets = Insets.max(valueAt.calculateInsets(rect, true), insets);
+            InsetsSource insetsSourceValueAt = this.mSources.valueAt(size);
+            if ((insetsSourceValueAt.getType() & i & i2) != 0) {
+                insetsMax = Insets.max(insetsSourceValueAt.calculateInsets(rect, true), insetsMax);
             }
         }
-        return insets;
+        return insetsMax;
     }
 
     public Insets calculateVisibleInsets(Rect rect, int i, int i2, int i3, int i4) {
-        int systemBars;
-        int displayCutout;
+        int iSystemBars;
+        int iDisplayCutout;
         if ((i3 & 240) != 48) {
-            systemBars = WindowInsets.Type.systemBars() | WindowInsets.Type.displayCutout();
-            displayCutout = WindowInsets.Type.ime();
+            iSystemBars = WindowInsets.Type.systemBars() | WindowInsets.Type.displayCutout();
+            iDisplayCutout = WindowInsets.Type.ime();
         } else {
-            systemBars = WindowInsets.Type.systemBars();
-            displayCutout = WindowInsets.Type.displayCutout();
+            iSystemBars = WindowInsets.Type.systemBars();
+            iDisplayCutout = WindowInsets.Type.displayCutout();
         }
-        int i5 = systemBars | displayCutout;
-        Insets insets = Insets.NONE;
-        int i6 = 0;
+        int i5 = iSystemBars | iDisplayCutout;
+        DisplayCutout displayCutout = this.mDisplayCutout.get();
+        if (CoreRune.FW_OVERLAPPING_WITH_CUTOUT_AS_DEFAULT && displayCutout.isCutoutOnLongEdge(this.mDisplayFrame.width(), this.mDisplayFrame.height())) {
+            i5 &= ~WindowInsets.Type.displayCutout();
+        }
+        Insets insetsMax = Insets.NONE;
+        int type = 0;
         for (int size = this.mSources.size() - 1; size >= 0; size--) {
-            InsetsSource valueAt = this.mSources.valueAt(size);
-            if ((valueAt.getType() & i5) != 0) {
-                if (valueAt.hasFlags(4)) {
-                    i6 |= valueAt.getType();
+            InsetsSource insetsSourceValueAt = this.mSources.valueAt(size);
+            if ((insetsSourceValueAt.getType() & i5) != 0) {
+                if (insetsSourceValueAt.hasFlags(4)) {
+                    type |= insetsSourceValueAt.getType();
                 }
-                insets = Insets.max(valueAt.calculateVisibleInsets(rect), insets);
+                insetsMax = Insets.max(insetsSourceValueAt.calculateVisibleInsets(rect), insetsMax);
             }
         }
-        return clearsCompatInsets(i, i4, i2, i6) ? Insets.NONE : insets;
+        return clearsCompatInsets(i, i4, i2, type) ? Insets.NONE : insetsMax;
     }
 
     public int calculateUncontrollableInsetsFromFrame(Rect rect) {
-        int i = 0;
+        int type = 0;
         for (int size = this.mSources.size() - 1; size >= 0; size--) {
-            InsetsSource valueAt = this.mSources.valueAt(size);
-            if (!canControlSource(rect, valueAt)) {
-                i |= valueAt.getType();
+            InsetsSource insetsSourceValueAt = this.mSources.valueAt(size);
+            if (!canControlSource(rect, insetsSourceValueAt)) {
+                type |= insetsSourceValueAt.getType();
             }
         }
-        return i;
+        return type;
     }
 
     private static boolean canControlSource(Rect rect, InsetsSource insetsSource) {
-        Insets calculateInsets = insetsSource.calculateInsets(rect, true);
+        Insets insetsCalculateInsets = insetsSource.calculateInsets(rect, true);
         Rect frame = insetsSource.getFrame();
-        int width = frame.width();
-        int height = frame.height();
-        return calculateInsets.left == width || calculateInsets.right == width || calculateInsets.top == height || calculateInsets.bottom == height;
+        int iWidth = frame.width();
+        int iHeight = frame.height();
+        return insetsCalculateInsets.left == iWidth || insetsCalculateInsets.right == iWidth || insetsCalculateInsets.top == iHeight || insetsCalculateInsets.bottom == iHeight;
     }
 
     private void processSource(InsetsSource insetsSource, Rect rect, boolean z, Insets[] insetsArr, SparseIntArray sparseIntArray, boolean[] zArr, Rect[][] rectArr) {
@@ -252,39 +356,39 @@ public class InsetsState implements Parcelable {
     }
 
     private void processSource(InsetsSource insetsSource, Rect rect, boolean z, Insets[] insetsArr, SparseIntArray sparseIntArray, boolean[] zArr, Rect[][] rectArr, boolean z2) {
-        Insets calculateInsets;
+        Insets insetsCalculateInsets;
         if (CoreRune.MW_EMBED_ACTIVITY && z2) {
-            calculateInsets = insetsSource.calculateInsetsIgnoreIntersection(rect, z);
+            insetsCalculateInsets = insetsSource.calculateInsetsIgnoreIntersection(rect, z);
         } else {
-            calculateInsets = insetsSource.calculateInsets(rect, z);
+            insetsCalculateInsets = insetsSource.calculateInsets(rect, z);
         }
-        Insets insets = calculateInsets;
-        Rect[] calculateBoundingRects = insetsSource.calculateBoundingRects(rect, z);
+        Insets insets = insetsCalculateInsets;
+        Rect[] rectArrCalculateBoundingRects = insetsSource.calculateBoundingRects(rect, z);
         int type = insetsSource.getType();
-        processSourceAsPublicType(insetsSource, insetsArr, sparseIntArray, zArr, rectArr, insets, calculateBoundingRects, type);
+        processSourceAsPublicType(insetsSource, insetsArr, sparseIntArray, zArr, rectArr, insets, rectArrCalculateBoundingRects, type);
         if (type == 32) {
-            processSourceAsPublicType(insetsSource, insetsArr, sparseIntArray, zArr, rectArr, insets, calculateBoundingRects, 16);
+            processSourceAsPublicType(insetsSource, insetsArr, sparseIntArray, zArr, rectArr, insets, rectArrCalculateBoundingRects, 16);
         }
         if (type == 4) {
-            processSourceAsPublicType(insetsSource, insetsArr, sparseIntArray, zArr, rectArr, insets, calculateBoundingRects, 16);
-            processSourceAsPublicType(insetsSource, insetsArr, sparseIntArray, zArr, rectArr, insets, calculateBoundingRects, 32);
-            processSourceAsPublicType(insetsSource, insetsArr, sparseIntArray, zArr, rectArr, insets, calculateBoundingRects, 64);
+            processSourceAsPublicType(insetsSource, insetsArr, sparseIntArray, zArr, rectArr, insets, rectArrCalculateBoundingRects, 16);
+            processSourceAsPublicType(insetsSource, insetsArr, sparseIntArray, zArr, rectArr, insets, rectArrCalculateBoundingRects, 32);
+            processSourceAsPublicType(insetsSource, insetsArr, sparseIntArray, zArr, rectArr, insets, rectArrCalculateBoundingRects, 64);
         }
     }
 
     private void processSourceAsPublicType(InsetsSource insetsSource, Insets[] insetsArr, SparseIntArray sparseIntArray, boolean[] zArr, Rect[][] rectArr, Insets insets, Rect[] rectArr2, int i) {
         int insetSide;
-        int indexOf = WindowInsets.Type.indexOf(i);
+        int iIndexOf = WindowInsets.Type.indexOf(i);
         if (!Insets.NONE.equals(insets)) {
-            Insets insets2 = insetsArr[indexOf];
+            Insets insets2 = insetsArr[iIndexOf];
             if (insets2 == null) {
-                insetsArr[indexOf] = insets;
+                insetsArr[iIndexOf] = insets;
             } else {
-                insetsArr[indexOf] = Insets.max(insets2, insets);
+                insetsArr[iIndexOf] = Insets.max(insets2, insets);
             }
         }
         if (zArr != null) {
-            zArr[indexOf] = insetsSource.isVisible();
+            zArr[iIndexOf] = insetsSource.isVisible();
         }
         if (sparseIntArray != null && (insetSide = InsetsSource.getInsetSide(insets)) != 5) {
             sparseIntArray.put(insetsSource.getId(), insetSide);
@@ -292,11 +396,11 @@ public class InsetsState implements Parcelable {
         if (rectArr == null || rectArr2.length <= 0) {
             return;
         }
-        Rect[] rectArr3 = rectArr[indexOf];
+        Rect[] rectArr3 = rectArr[iIndexOf];
         if (rectArr3 == null) {
-            rectArr[indexOf] = rectArr2;
+            rectArr[iIndexOf] = rectArr2;
         } else {
-            rectArr[indexOf] = concatenate(rectArr3, rectArr2);
+            rectArr[iIndexOf] = concatenate(rectArr3, rectArr2);
         }
     }
 
@@ -432,9 +536,9 @@ public class InsetsState implements Parcelable {
         this.mPrivacyIndicatorBounds = this.mPrivacyIndicatorBounds.scale(f);
         this.mDisplayShape = this.mDisplayShape.setScale(f);
         for (int size = this.mSources.size() - 1; size >= 0; size--) {
-            InsetsSource valueAt = this.mSources.valueAt(size);
-            valueAt.getFrame().scale(f);
-            Rect visibleFrame = valueAt.getVisibleFrame();
+            InsetsSource insetsSourceValueAt = this.mSources.valueAt(size);
+            insetsSourceValueAt.getFrame().scale(f);
+            Rect visibleFrame = insetsSourceValueAt.getVisibleFrame();
             if (visibleFrame != null) {
                 visibleFrame.scale(f);
             }
@@ -465,13 +569,13 @@ public class InsetsState implements Parcelable {
         this.mSources.clear();
         int size = insetsState.mSources.size();
         for (int i = 0; i < size; i++) {
-            InsetsSource valueAt = insetsState.mSources.valueAt(i);
+            InsetsSource insetsSourceValueAt = insetsState.mSources.valueAt(i);
             SparseArray<InsetsSource> sparseArray = this.mSources;
-            int id = valueAt.getId();
+            int id = insetsSourceValueAt.getId();
             if (z) {
-                valueAt = new InsetsSource(valueAt);
+                insetsSourceValueAt = new InsetsSource(insetsSourceValueAt);
             }
-            sparseArray.append(id, valueAt);
+            sparseArray.append(id, insetsSourceValueAt);
         }
     }
 
@@ -493,9 +597,9 @@ public class InsetsState implements Parcelable {
             }
         }
         for (int size2 = insetsState.mSources.size() - 1; size2 >= 0; size2--) {
-            InsetsSource valueAt = insetsState.mSources.valueAt(size2);
-            if ((valueAt.getType() & i) != 0) {
-                this.mSources.put(valueAt.getId(), valueAt);
+            InsetsSource insetsSourceValueAt = insetsState.mSources.valueAt(size2);
+            if ((insetsSourceValueAt.getType() & i) != 0) {
+                this.mSources.put(insetsSourceValueAt.getId(), insetsSourceValueAt);
             }
         }
     }
@@ -520,86 +624,82 @@ public class InsetsState implements Parcelable {
     }
 
     void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         InsetsSource insetsSource = this.mSources.get(InsetsSource.ID_IME);
         if (insetsSource != null) {
             insetsSource.dumpDebug(protoOutputStream, 2246267895809L);
         }
         this.mDisplayFrame.dumpDebug(protoOutputStream, 1146756268034L);
         this.mDisplayCutout.get().dumpDebug(protoOutputStream, 1146756268035L);
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 
     public boolean equals(Object obj) {
         return equals(obj, false, false);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:57:0x00ae, code lost:
-    
-        r8 = r12.valueAt(r5);
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:59:0x00b6, code lost:
-    
-        if (r8 == null) goto L87;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:60:0x00b8, code lost:
-    
-        if (r13 == false) goto L58;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:62:0x00c2, code lost:
-    
-        if (r8.getType() == android.view.WindowInsets.Type.captionBar()) goto L63;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:63:0x00d6, code lost:
-    
-        r5 = r5 + 1;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:64:0x00d8, code lost:
-    
-        if (r5 >= r3) goto L90;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:66:0x00da, code lost:
-    
-        r8 = r12.valueAt(r5);
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:72:0x00c4, code lost:
-    
-        if (r14 == false) goto L86;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:74:0x00ce, code lost:
-    
-        if (r8.getType() != android.view.WindowInsets.Type.ime()) goto L89;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:76:0x00d4, code lost:
-    
-        if (r8.isVisible() != false) goto L85;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:79:0x00e5, code lost:
-    
-        if (java.util.Objects.equals(r7, r8) != false) goto L69;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:82:0x00e7, code lost:
-    
-        return false;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:86:0x00b6, code lost:
-    
-        r8 = null;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:90:0x0081, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:71:0x0081, code lost:
     
         r7 = null;
      */
+    /* JADX WARN: Code restructure failed: missing block: B:72:0x00b6, code lost:
+    
+        r8 = null;
+     */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public boolean equals(java.lang.Object r12, boolean r13, boolean r14) {
-        /*
-            Method dump skipped, instructions count: 238
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.view.InsetsState.equals(java.lang.Object, boolean, boolean):boolean");
+    public boolean equals(Object obj, boolean z, boolean z2) {
+        InsetsSource insetsSourceValueAt;
+        InsetsSource insetsSourceValueAt2;
+        if (this == obj) {
+            return true;
+        }
+        if (obj != null && getClass() == obj.getClass()) {
+            InsetsState insetsState = (InsetsState) obj;
+            if (this.mDisplayFrame.equals(insetsState.mDisplayFrame) && this.mDisplayCutout.equals(insetsState.mDisplayCutout) && this.mCanDispatchUdcCutout == insetsState.mCanDispatchUdcCutout && this.mRoundedCorners.equals(insetsState.mRoundedCorners) && this.mRoundedCornerFrame.equals(insetsState.mRoundedCornerFrame) && this.mPrivacyIndicatorBounds.equals(insetsState.mPrivacyIndicatorBounds) && this.mDisplayShape.equals(insetsState.mDisplayShape)) {
+                SparseArray<InsetsSource> sparseArray = this.mSources;
+                SparseArray<InsetsSource> sparseArray2 = insetsState.mSources;
+                if (!z && !z2) {
+                    return sparseArray.contentEquals(sparseArray2);
+                }
+                int size = sparseArray.size();
+                int size2 = sparseArray2.size();
+                int i = 0;
+                int i2 = 0;
+                while (true) {
+                    if (i >= size && i2 >= size2) {
+                        return true;
+                    }
+                    if (i < size) {
+                        insetsSourceValueAt = sparseArray.valueAt(i);
+                        while (insetsSourceValueAt != null && ((z && insetsSourceValueAt.getType() == WindowInsets.Type.captionBar()) || (z2 && insetsSourceValueAt.getType() == WindowInsets.Type.ime() && !insetsSourceValueAt.isVisible()))) {
+                            i++;
+                            if (i < size) {
+                                insetsSourceValueAt = sparseArray.valueAt(i);
+                            }
+                        }
+                        if (i2 < size2) {
+                            insetsSourceValueAt2 = sparseArray2.valueAt(i2);
+                            while (insetsSourceValueAt2 != null && ((z && insetsSourceValueAt2.getType() == WindowInsets.Type.captionBar()) || (z2 && insetsSourceValueAt2.getType() == WindowInsets.Type.ime() && !insetsSourceValueAt2.isVisible()))) {
+                                i2++;
+                                if (i2 < size2) {
+                                    insetsSourceValueAt2 = sparseArray2.valueAt(i2);
+                                }
+                            }
+                            if (!Objects.equals(insetsSourceValueAt, insetsSourceValueAt2)) {
+                                return false;
+                            }
+                            i++;
+                            i2++;
+                        }
+                        insetsSourceValueAt2 = null;
+                    }
+                    insetsSourceValueAt = null;
+                }
+            }
+        }
+        return false;
     }
 
     public int hashCode() {
@@ -644,18 +744,37 @@ public class InsetsState implements Parcelable {
         this.mPrivacyIndicatorBounds = (PrivacyIndicatorBounds) parcel.readTypedObject(PrivacyIndicatorBounds.CREATOR);
         this.mDisplayShape = (DisplayShape) parcel.readTypedObject(DisplayShape.CREATOR);
         this.mSeq = parcel.readInt();
-        int readInt = parcel.readInt();
+        int i = parcel.readInt();
         SparseArray<InsetsSource> sparseArray = this.mSources;
         if (sparseArray == null) {
-            sparseArray = new SparseArray<>(readInt);
+            sparseArray = new SparseArray<>(i);
         } else {
             sparseArray.clear();
         }
-        for (int i = 0; i < readInt; i++) {
+        for (int i2 = 0; i2 < i; i2++) {
             InsetsSource insetsSource = (InsetsSource) parcel.readTypedObject(InsetsSource.CREATOR);
             sparseArray.append(insetsSource.getId(), insetsSource);
         }
         return sparseArray;
+    }
+
+    public Rect getLeftSideHintFrame() {
+        return getSideHintFrame(1);
+    }
+
+    public Rect getRightSideHintFrame() {
+        return getSideHintFrame(3);
+    }
+
+    private Rect getSideHintFrame(int i) {
+        int size = this.mSources.size();
+        for (int i2 = 0; i2 < size; i2++) {
+            InsetsSource insetsSourceValueAt = this.mSources.valueAt(i2);
+            if (insetsSourceValueAt != null && insetsSourceValueAt.getType() == WindowInsets.Type.systemGestures() && insetsSourceValueAt.getSideHint() == i) {
+                return insetsSourceValueAt.getFrame();
+            }
+        }
+        return new Rect();
     }
 
     public String toShortString() {
@@ -678,44 +797,44 @@ public class InsetsState implements Parcelable {
 
     public static void traverse(InsetsState insetsState, InsetsState insetsState2, OnTraverseCallbacks onTraverseCallbacks) {
         onTraverseCallbacks.onStart(insetsState, insetsState2);
-        int sourceSize = insetsState.sourceSize();
-        int sourceSize2 = insetsState2.sourceSize();
+        int iSourceSize = insetsState.sourceSize();
+        int iSourceSize2 = insetsState2.sourceSize();
         int i = 0;
         int i2 = 0;
-        while (i < sourceSize && i2 < sourceSize2) {
-            int sourceIdAt = insetsState.sourceIdAt(i);
-            int sourceIdAt2 = insetsState2.sourceIdAt(i2);
-            while (sourceIdAt != sourceIdAt2) {
-                if (sourceIdAt < sourceIdAt2) {
+        while (i < iSourceSize && i2 < iSourceSize2) {
+            int iSourceIdAt = insetsState.sourceIdAt(i);
+            int iSourceIdAt2 = insetsState2.sourceIdAt(i2);
+            while (iSourceIdAt != iSourceIdAt2) {
+                if (iSourceIdAt < iSourceIdAt2) {
                     onTraverseCallbacks.onIdNotFoundInState2(i, insetsState.sourceAt(i));
                     i++;
-                    if (i >= sourceSize) {
+                    if (i >= iSourceSize) {
                         break;
                     } else {
-                        sourceIdAt = insetsState.sourceIdAt(i);
+                        iSourceIdAt = insetsState.sourceIdAt(i);
                     }
                 } else {
                     onTraverseCallbacks.onIdNotFoundInState1(i2, insetsState2.sourceAt(i2));
                     i2++;
-                    if (i2 >= sourceSize2) {
+                    if (i2 >= iSourceSize2) {
                         break;
                     } else {
-                        sourceIdAt2 = insetsState2.sourceIdAt(i2);
+                        iSourceIdAt2 = insetsState2.sourceIdAt(i2);
                     }
                 }
             }
-            if (i >= sourceSize || i2 >= sourceSize2) {
+            if (i >= iSourceSize || i2 >= iSourceSize2) {
                 break;
             }
             onTraverseCallbacks.onIdMatch(insetsState.sourceAt(i), insetsState2.sourceAt(i2));
             i++;
             i2++;
         }
-        while (i2 < sourceSize2) {
+        while (i2 < iSourceSize2) {
             onTraverseCallbacks.onIdNotFoundInState1(i2, insetsState2.sourceAt(i2));
             i2++;
         }
-        while (i < sourceSize) {
+        while (i < iSourceSize) {
             onTraverseCallbacks.onIdNotFoundInState2(i, insetsState.sourceAt(i));
             i++;
         }

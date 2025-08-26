@@ -67,19 +67,19 @@ public class SnapshotDrawerUtils {
 
         private void drawSizeMismatchSnapshot() {
             HardwareBuffer hardwareBuffer = this.mSnapshot.getHardwareBuffer();
-            SurfaceControl build = new SurfaceControl.Builder().setName(((Object) this.mTitle) + " - task-snapshot-surface").setBLASTLayer().setFormat(hardwareBuffer.getFormat()).setParent(this.mRootSurface).setCallsite("TaskSnapshotWindow.drawSizeMismatchSnapshot").build();
+            SurfaceControl surfaceControlBuild = new SurfaceControl.Builder().setName(((Object) this.mTitle) + " - task-snapshot-surface").setBLASTLayer().setFormat(hardwareBuffer.getFormat()).setParent(this.mRootSurface).setCallsite("TaskSnapshotWindow.drawSizeMismatchSnapshot").build();
             Rect letterboxInsets = this.mSnapshot.getLetterboxInsets();
             float f = (float) letterboxInsets.left;
             float f2 = (float) letterboxInsets.top;
-            this.mTransaction.show(build);
+            this.mTransaction.show(surfaceControlBuild);
             if (f != 0.0f || f2 != 0.0f) {
-                this.mTransaction.setPosition(build, ((-f) * this.mContainerW) / this.mSnapshot.getTaskSize().x, ((-f2) * this.mContainerH) / this.mSnapshot.getTaskSize().y);
+                this.mTransaction.setPosition(surfaceControlBuild, ((-f) * this.mContainerW) / this.mSnapshot.getTaskSize().x, ((-f2) * this.mContainerH) / this.mSnapshot.getTaskSize().y);
             }
-            this.mTransaction.setScale(build, this.mContainerW / this.mSnapshotW, this.mContainerH / this.mSnapshotH);
-            this.mTransaction.setColorSpace(build, this.mSnapshot.getColorSpace());
-            this.mTransaction.setBuffer(build, this.mSnapshot.getHardwareBuffer());
+            this.mTransaction.setScale(surfaceControlBuild, this.mContainerW / this.mSnapshotW, this.mContainerH / this.mSnapshotH);
+            this.mTransaction.setColorSpace(surfaceControlBuild, this.mSnapshot.getColorSpace());
+            this.mTransaction.setBuffer(surfaceControlBuild, this.mSnapshot.getHardwareBuffer());
             this.mTransaction.apply();
-            build.release();
+            surfaceControlBuild.release();
         }
     }
 
@@ -94,10 +94,13 @@ public class SnapshotDrawerUtils {
 
     public static void drawSnapshotOnSurface(WindowManager.LayoutParams layoutParams, SurfaceControl surfaceControl, TaskSnapshot taskSnapshot, Rect rect, boolean z) {
         if (rect.isEmpty()) {
+            if (taskSnapshot.getHardwareBuffer() != null) {
+                taskSnapshot.getHardwareBuffer().close();
+            }
             Log.e(TAG, "Unable to draw snapshot on an empty windowBounds");
-        } else {
-            new SnapshotSurface(surfaceControl, taskSnapshot, rect, layoutParams.getTitle()).drawSnapshot(z);
+            return;
         }
+        new SnapshotSurface(surfaceControl, taskSnapshot, rect, layoutParams.getTitle()).drawSnapshot(z);
     }
 
     public static WindowManager.LayoutParams createLayoutParameters(StartingWindowInfo startingWindowInfo, CharSequence charSequence, int i, int i2, IBinder iBinder) {
@@ -156,12 +159,12 @@ public class SnapshotDrawerUtils {
             this.mScale = f;
             Context systemUiContext = ActivityThread.currentActivityThread().getSystemUiContext();
             int color = systemUiContext.getColor(R.color.system_bar_background_semi_transparent);
-            int calculateBarColor = DecorView.calculateBarColor(i, 67108864, color, taskDescription.getStatusBarColor(), i3, 8, taskDescription.getEnsureStatusBarContrastWhenTransparent(), false);
-            this.mStatusBarColor = calculateBarColor;
-            int calculateBarColor2 = DecorView.calculateBarColor(i, 134217728, color, taskDescription.getNavigationBarColor(), i3, 16, taskDescription.getEnsureNavigationBarContrastWhenTransparent() && systemUiContext.getResources().getBoolean(R.bool.config_navBarNeedsScrim), (i2 & 2048) != 0, taskDescription.getDeviceDefaultNavigationBarColor(systemUiContext));
-            this.mNavigationBarColor = calculateBarColor2;
-            paint.setColor(calculateBarColor);
-            paint2.setColor(calculateBarColor2);
+            int iCalculateBarColor = DecorView.calculateBarColor(i, 67108864, color, taskDescription.getStatusBarColor(), i3, 8, taskDescription.getEnsureStatusBarContrastWhenTransparent(), false);
+            this.mStatusBarColor = iCalculateBarColor;
+            int iCalculateBarColor2 = DecorView.calculateBarColor(i, 134217728, color, taskDescription.getNavigationBarColor(), i3, 16, taskDescription.getEnsureNavigationBarContrastWhenTransparent() && systemUiContext.getResources().getBoolean(R.bool.config_navBarNeedsScrim), (i2 & 2048) != 0, taskDescription.getDeviceDefaultNavigationBarColor(systemUiContext));
+            this.mNavigationBarColor = iCalculateBarColor2;
+            paint.setColor(iCalculateBarColor);
+            paint2.setColor(iCalculateBarColor2);
             this.mRequestedVisibleTypes = i4;
         }
 

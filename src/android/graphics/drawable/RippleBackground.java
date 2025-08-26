@@ -44,9 +44,9 @@ class RippleBackground extends RippleComponent {
 
     public void draw(Canvas canvas, Paint paint) {
         int alpha = paint.getAlpha();
-        int min = Math.min((int) ((alpha * this.mOpacity) + 0.5f), 255);
-        if (min > 0) {
-            paint.setAlpha(min);
+        int iMin = Math.min((int) ((alpha * this.mOpacity) + 0.5f), 255);
+        if (iMin > 0) {
+            paint.setAlpha(iMin);
             canvas.drawCircle(0.0f, 0.0f, this.mTargetRadius, paint);
             paint.setAlpha(alpha);
         }
@@ -76,9 +76,9 @@ class RippleBackground extends RippleComponent {
             objectAnimator.cancel();
             this.mAnimator = null;
         }
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this, OPACITY, f);
-        this.mAnimator = ofFloat;
-        ofFloat.setDuration(80L);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this, OPACITY, f);
+        this.mAnimator = objectAnimatorOfFloat;
+        objectAnimatorOfFloat.setDuration(80L);
         this.mAnimator.setInterpolator(LINEAR_INTERPOLATOR);
         this.mAnimator.start();
     }

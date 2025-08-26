@@ -2,7 +2,6 @@ package androidx.profileinstaller;
 
 import java.io.File;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class BenchmarkOperation {
     private BenchmarkOperation() {
@@ -13,12 +12,12 @@ public class BenchmarkOperation {
             file.delete();
             return true;
         }
-        File[] listFiles = file.listFiles();
-        if (listFiles == null) {
+        File[] fileArrListFiles = file.listFiles();
+        if (fileArrListFiles == null) {
             return false;
         }
         boolean z = true;
-        for (File file2 : listFiles) {
+        for (File file2 : fileArrListFiles) {
             z = deleteFilesRecursively(file2) && z;
         }
         return z;

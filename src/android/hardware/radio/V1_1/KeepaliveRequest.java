@@ -41,13 +41,13 @@ public final class KeepaliveRequest {
 
     public static final ArrayList<KeepaliveRequest> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<KeepaliveRequest> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 64, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 64, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             KeepaliveRequest keepaliveRequest = new KeepaliveRequest();
-            keepaliveRequest.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 64);
+            keepaliveRequest.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 64);
             arrayList.add(keepaliveRequest);
         }
         return arrayList;
@@ -56,17 +56,17 @@ public final class KeepaliveRequest {
     public final void readEmbeddedFromParcel(HwParcel hwParcel, HwBlob hwBlob, long j) {
         this.type = hwBlob.getInt32(j);
         int int32 = hwBlob.getInt32(16 + j);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32, hwBlob.handle(), j + 8, true);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32, hwBlob.handle(), j + 8, true);
         this.sourceAddress.clear();
         for (int i = 0; i < int32; i++) {
-            this.sourceAddress.add(Byte.valueOf(readEmbeddedBuffer.getInt8(i)));
+            this.sourceAddress.add(Byte.valueOf(embeddedBuffer.getInt8(i)));
         }
         this.sourcePort = hwBlob.getInt32(24 + j);
         int int322 = hwBlob.getInt32(40 + j);
-        HwBlob readEmbeddedBuffer2 = hwParcel.readEmbeddedBuffer(int322, hwBlob.handle(), j + 32, true);
+        HwBlob embeddedBuffer2 = hwParcel.readEmbeddedBuffer(int322, hwBlob.handle(), j + 32, true);
         this.destinationAddress.clear();
         for (int i2 = 0; i2 < int322; i2++) {
-            this.destinationAddress.add(Byte.valueOf(readEmbeddedBuffer2.getInt8(i2)));
+            this.destinationAddress.add(Byte.valueOf(embeddedBuffer2.getInt8(i2)));
         }
         this.destinationPort = hwBlob.getInt32(48 + j);
         this.maxKeepaliveIntervalMillis = hwBlob.getInt32(52 + j);

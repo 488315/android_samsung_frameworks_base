@@ -23,7 +23,6 @@ import com.android.systemui.tuner.TunerService;
 import java.io.PrintWriter;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class PulsingGestureListener extends GestureDetector.SimpleOnGestureListener implements Dumpable {
     public final AmbientDisplayConfiguration ambientDisplayConfiguration;
@@ -47,10 +46,10 @@ public final class PulsingGestureListener extends GestureDetector.SimpleOnGestur
         tunerService.addTunable(new TunerService.Tunable() { // from class: com.android.systemui.shade.PulsingGestureListener$tunable$1
             @Override // com.android.systemui.tuner.TunerService.Tunable
             public final void onTuningChanged(String str, String str2) {
-                boolean areEqual = Intrinsics.areEqual(str, "doze_pulse_on_double_tap");
+                boolean zAreEqual = Intrinsics.areEqual(str, "doze_pulse_on_double_tap");
                 UserTracker userTracker2 = userTracker;
-                PulsingGestureListener pulsingGestureListener = PulsingGestureListener.this;
-                if (areEqual) {
+                PulsingGestureListener pulsingGestureListener = this.this$0;
+                if (zAreEqual) {
                     pulsingGestureListener.doubleTapEnabled = pulsingGestureListener.ambientDisplayConfiguration.doubleTapGestureEnabled(((UserTrackerImpl) userTracker2).getUserId());
                 } else if (Intrinsics.areEqual(str, "doze_tap_gesture")) {
                     pulsingGestureListener.singleTapEnabled = pulsingGestureListener.ambientDisplayConfiguration.tapGestureEnabled(((UserTrackerImpl) userTracker2).getUserId());
@@ -84,34 +83,34 @@ public final class PulsingGestureListener extends GestureDetector.SimpleOnGestur
         float y = motionEvent.getY();
         this.dockManager.getClass();
         ShadeLogger shadeLogger = this.shadeLogger;
-        boolean isDozing = this.statusBarStateController.isDozing();
+        boolean zIsDozing = this.statusBarStateController.isDozing();
         boolean z = this.singleTapEnabled;
         shadeLogger.getClass();
         LogLevel logLevel = LogLevel.DEBUG;
         ShadeLogger$$ExternalSyntheticLambda0 shadeLogger$$ExternalSyntheticLambda0 = new ShadeLogger$$ExternalSyntheticLambda0(9);
         LogBuffer logBuffer = shadeLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("systemui.shade", logLevel, shadeLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
-        logMessageImpl.bool1 = isDozing;
+        LogMessage logMessageObtain = logBuffer.obtain("systemui.shade", logLevel, shadeLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
+        logMessageImpl.bool1 = zIsDozing;
         logMessageImpl.bool2 = z;
         logMessageImpl.bool3 = true;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         if (!this.statusBarStateController.isDozing() || !this.singleTapEnabled) {
             this.shadeLogger.d("onSingleTapUp event ignored");
             return false;
         }
-        boolean isProximityNear = this.falsingManager.isProximityNear();
-        boolean isFalseTap = this.falsingManager.isFalseTap(1);
+        boolean zIsProximityNear = this.falsingManager.isProximityNear();
+        boolean zIsFalseTap = this.falsingManager.isFalseTap(1);
         ShadeLogger shadeLogger2 = this.shadeLogger;
         shadeLogger2.getClass();
         ShadeLogger$$ExternalSyntheticLambda0 shadeLogger$$ExternalSyntheticLambda02 = new ShadeLogger$$ExternalSyntheticLambda0(11);
         LogBuffer logBuffer2 = shadeLogger2.buffer;
-        LogMessage obtain2 = logBuffer2.obtain("systemui.shade", logLevel, shadeLogger$$ExternalSyntheticLambda02, null);
-        LogMessageImpl logMessageImpl2 = (LogMessageImpl) obtain2;
-        logMessageImpl2.bool1 = !isProximityNear;
-        logMessageImpl2.bool2 = !isFalseTap;
-        logBuffer2.commit(obtain2);
-        if (isProximityNear || isFalseTap) {
+        LogMessage logMessageObtain2 = logBuffer2.obtain("systemui.shade", logLevel, shadeLogger$$ExternalSyntheticLambda02, null);
+        LogMessageImpl logMessageImpl2 = (LogMessageImpl) logMessageObtain2;
+        logMessageImpl2.bool1 = !zIsProximityNear;
+        logMessageImpl2.bool2 = !zIsFalseTap;
+        logBuffer2.commit(logMessageObtain2);
+        if (zIsProximityNear || zIsFalseTap) {
             return true;
         }
         this.shadeLogger.d("Single tap handled, requesting centralSurfaces.wakeUpIfDozing");

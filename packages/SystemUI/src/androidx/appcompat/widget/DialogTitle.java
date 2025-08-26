@@ -1,11 +1,11 @@
 package androidx.appcompat.widget;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.text.Layout;
 import android.util.AttributeSet;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class DialogTitle extends AppCompatTextView {
     public DialogTitle(Context context, AttributeSet attributeSet, int i) {
@@ -13,7 +13,7 @@ public class DialogTitle extends AppCompatTextView {
     }
 
     @Override // androidx.appcompat.widget.AppCompatTextView, android.widget.TextView, android.view.View
-    public final void onMeasure(int i, int i2) {
+    public final void onMeasure(int i, int i2) throws Resources.NotFoundException {
         int lineCount;
         super.onMeasure(i, i2);
         Layout layout = getLayout();

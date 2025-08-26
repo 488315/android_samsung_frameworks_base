@@ -245,7 +245,7 @@ public class ViewConfiguration {
         this.mViewTouchScreenHapticScrollFeedbackEnabled = false;
     }
 
-    private ViewConfiguration(Context context) {
+    private ViewConfiguration(Context context) throws Resources.NotFoundException {
         this.mConstructedWithContext = true;
         Resources resources = context.getResources();
         DisplayMetrics displayMetrics = resources.getDisplayMetrics();
@@ -681,8 +681,8 @@ public class ViewConfiguration {
             if (!com.android.internal.hidden_from_bootclasspath.android.companion.virtualdevice.flags.Flags.migrateViewconfigurationConstantsToResources()) {
                 return null;
             }
-            Application currentApplication = ActivityThread.currentApplication();
-            Context applicationContext = currentApplication != null ? currentApplication.getApplicationContext() : null;
+            Application applicationCurrentApplication = ActivityThread.currentApplication();
+            Context applicationContext = applicationCurrentApplication != null ? applicationCurrentApplication.getApplicationContext() : null;
             if (applicationContext != null) {
                 return applicationContext.getResources();
             }

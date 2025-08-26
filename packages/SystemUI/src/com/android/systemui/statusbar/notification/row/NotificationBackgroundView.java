@@ -1,6 +1,7 @@
 package com.android.systemui.statusbar.notification.row;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -18,7 +19,6 @@ import com.android.systemui.util.DrawableDumpKt;
 import java.io.PrintWriter;
 import java.util.Arrays;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class NotificationBackgroundView extends View implements Dumpable {
     public int mActualHeight;
@@ -41,7 +41,7 @@ public class NotificationBackgroundView extends View implements Dumpable {
     public Integer mRippleColor;
     public int mTintColor;
 
-    public NotificationBackgroundView(Context context, AttributeSet attributeSet) {
+    public NotificationBackgroundView(Context context, AttributeSet attributeSet) throws Resources.NotFoundException {
         super(context, attributeSet);
         this.mCornerRadii = new float[8];
         this.mFocusOverlayCornerRadii = new float[8];
@@ -77,12 +77,12 @@ public class NotificationBackgroundView extends View implements Dumpable {
 
     @Override // com.android.systemui.Dumpable
     public final void dump(PrintWriter printWriter, String[] strArr) {
-        StringBuilder m = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("mDontModifyCorners: "), this.mDontModifyCorners, printWriter, "mClipTopAmount: "), this.mClipTopAmount, printWriter, "mClipBottomAmount: "), this.mClipBottomAmount, printWriter, "mCornerRadii: ");
-        m.append(Arrays.toString(this.mCornerRadii));
-        printWriter.println(m.toString());
-        StringBuilder m2 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("mBottomIsRounded: "), this.mBottomIsRounded, printWriter, "mBottomAmountClips: "), this.mBottomAmountClips, printWriter, "mActualWidth: "), this.mActualWidth, printWriter, "mActualHeight: "), this.mActualHeight, printWriter, "mTintColor: ");
-        m2.append(ColorUtilKt.hexColorString(Integer.valueOf(this.mTintColor)));
-        printWriter.println(m2.toString());
+        StringBuilder sbM = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("mDontModifyCorners: "), this.mDontModifyCorners, printWriter, "mClipTopAmount: "), this.mClipTopAmount, printWriter, "mClipBottomAmount: "), this.mClipBottomAmount, printWriter, "mCornerRadii: ");
+        sbM.append(Arrays.toString(this.mCornerRadii));
+        printWriter.println(sbM.toString());
+        StringBuilder sbM2 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("mBottomIsRounded: "), this.mBottomIsRounded, printWriter, "mBottomAmountClips: "), this.mBottomAmountClips, printWriter, "mActualWidth: "), this.mActualWidth, printWriter, "mActualHeight: "), this.mActualHeight, printWriter, "mTintColor: ");
+        sbM2.append(ColorUtilKt.hexColorString(Integer.valueOf(this.mTintColor)));
+        printWriter.println(sbM2.toString());
         printWriter.println("mRippleColor: " + ColorUtilKt.hexColorString(this.mRippleColor));
         printWriter.println("mBackground: " + DrawableDumpKt.dumpToString(this.mBackground));
     }
@@ -107,13 +107,13 @@ public class NotificationBackgroundView extends View implements Dumpable {
 
     @Override // android.view.View
     public final void onDraw(Canvas canvas) {
-        int i;
+        int width;
         if (this.mClipTopAmount + this.mClipBottomAmount < getActualHeight() || this.mExpandAnimationRunning) {
             canvas.save();
             if (!this.mExpandAnimationRunning) {
                 canvas.clipRect(0, this.mClipTopAmount, getWidth(), getActualHeight() - this.mClipBottomAmount);
             }
-            int i2 = NotificationAddXOnHoverToDismiss.$r8$clinit;
+            int i = NotificationAddXOnHoverToDismiss.$r8$clinit;
             SeslRecoilDrawable seslRecoilDrawable = this.mBackground;
             RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
             if (seslRecoilDrawable != null) {
@@ -121,23 +121,23 @@ public class NotificationBackgroundView extends View implements Dumpable {
                 if (this.mBottomClipRounded || (this.mBottomIsRounded && this.mBottomAmountClips && !this.mExpandAnimationRunning && this.mIsPinned)) {
                     actualHeight -= this.mClipBottomAmount;
                 }
-                boolean isAlignedToRight = isAlignedToRight();
-                int width = getWidth();
-                if ((!this.mExpandAnimationRunning || (i = this.mExpandAnimationWidth) <= -1) && (i = this.mActualWidth) <= -1) {
-                    i = getWidth();
+                boolean zIsAlignedToRight = isAlignedToRight();
+                int width2 = getWidth();
+                if ((!this.mExpandAnimationRunning || (width = this.mExpandAnimationWidth) <= -1) && (width = this.mActualWidth) <= -1) {
+                    width = getWidth();
                 }
-                int i3 = isAlignedToRight ? width - i : 0;
-                int i4 = isAlignedToRight ? width : i;
+                int i2 = zIsAlignedToRight ? width2 - width : 0;
+                int i3 = zIsAlignedToRight ? width2 : width;
                 if (this.mExpandAnimationRunning) {
-                    i3 = (int) ((width - i) / 2.0f);
-                    i4 = i3 + i;
+                    i2 = (int) ((width2 - width) / 2.0f);
+                    i3 = i2 + width;
                 }
                 if (this.mBgWidth != 0 && getWidth() - this.mBgWidth > 0) {
-                    int width2 = (getWidth() - this.mBgWidth) / 2;
-                    i3 += width2;
-                    i4 -= width2;
+                    int width3 = (getWidth() - this.mBgWidth) / 2;
+                    i2 += width3;
+                    i3 -= width3;
                 }
-                seslRecoilDrawable.setBounds(i3, 0, i4, actualHeight);
+                seslRecoilDrawable.setBounds(i2, 0, i3, actualHeight);
                 seslRecoilDrawable.draw(canvas);
             }
             canvas.restore();

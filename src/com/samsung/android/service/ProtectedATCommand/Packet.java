@@ -22,11 +22,11 @@ public class Packet {
     private byte[] mBuffer = new byte[512];
     private int mSize = 0;
 
-    public void readStream(InputStream inputStream) {
+    public void readStream(InputStream inputStream) throws IOException {
         try {
-            int read = inputStream.read(this.mBuffer);
-            this.mSize = read;
-            if (read < 0 || read > 512) {
+            int i = inputStream.read(this.mBuffer);
+            this.mSize = i;
+            if (i < 0 || i > 512) {
                 Slog.e(TAG, "Buffer size is abnormal : " + this.mSize);
                 this.mSize = 0;
             }
@@ -65,21 +65,21 @@ public class Packet {
     }
 
     public byte[] getItem(int i) {
-        ByteBuffer put = ByteBuffer.allocate(512).order(ByteOrder.LITTLE_ENDIAN).put(this.mBuffer);
-        put.position(3);
-        byte b = put.get(put.position());
-        put.position(put.position() + 1);
+        ByteBuffer byteBufferPut = ByteBuffer.allocate(512).order(ByteOrder.LITTLE_ENDIAN).put(this.mBuffer);
+        byteBufferPut.position(3);
+        byte b = byteBufferPut.get(byteBufferPut.position());
+        byteBufferPut.position(byteBufferPut.position() + 1);
         Slog.d(TAG, "The number of items : " + ((int) b));
         for (int i2 = 0; i2 < b; i2++) {
-            short s = put.getShort();
-            int i3 = put.getShort();
+            short s = byteBufferPut.getShort();
+            int i3 = byteBufferPut.getShort();
             Slog.d(TAG, "Item type : " + ((int) s) + ", Item size : " + i3);
             if (s == i) {
                 byte[] bArr = new byte[i3];
-                put.get(bArr, 0, i3);
+                byteBufferPut.get(bArr, 0, i3);
                 return bArr;
             }
-            put.position(put.position() + i3);
+            byteBufferPut.position(byteBufferPut.position() + i3);
         }
         return null;
     }
@@ -90,28 +90,28 @@ public class Packet {
     }
 
     private void initPacket(int i, int i2) {
-        ByteBuffer order = ByteBuffer.allocate(512).order(ByteOrder.LITTLE_ENDIAN);
-        order.put((byte) i);
-        order.putShort((short) i2);
-        order.position(0);
-        order.get(this.mBuffer, 0, 512);
+        ByteBuffer byteBufferOrder = ByteBuffer.allocate(512).order(ByteOrder.LITTLE_ENDIAN);
+        byteBufferOrder.put((byte) i);
+        byteBufferOrder.putShort((short) i2);
+        byteBufferOrder.position(0);
+        byteBufferOrder.get(this.mBuffer, 0, 512);
         this.mSize = 4;
     }
 
     private <T> byte[] putItem(T t, int i) {
-        ByteBuffer put = ByteBuffer.allocate(512).order(ByteOrder.LITTLE_ENDIAN).put(this.mBuffer);
-        put.position(this.mSize);
+        ByteBuffer byteBufferPut = ByteBuffer.allocate(512).order(ByteOrder.LITTLE_ENDIAN).put(this.mBuffer);
+        byteBufferPut.position(this.mSize);
         if (i == 3) {
-            if (put.position() + 8 >= 512) {
+            if (byteBufferPut.position() + 8 >= 512) {
                 Slog.e(TAG, "Packet is full, Can't put item to packet");
                 return null;
             }
-            put.putShort((short) i);
-            put.putShort((short) 4);
-            put.putInt(Integer.parseInt(t.toString()));
+            byteBufferPut.putShort((short) i);
+            byteBufferPut.putShort((short) 4);
+            byteBufferPut.putInt(Integer.parseInt(t.toString()));
             this.mSize += 8;
-            put.rewind();
-            put.get(this.mBuffer, 0, this.mSize);
+            byteBufferPut.rewind();
+            byteBufferPut.get(this.mBuffer, 0, this.mSize);
             byte[] bArr = this.mBuffer;
             bArr[3] = (byte) (bArr[3] + 1);
             return buffer();

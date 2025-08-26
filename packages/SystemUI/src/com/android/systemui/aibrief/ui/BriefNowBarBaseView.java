@@ -17,7 +17,6 @@ import java.io.ByteArrayOutputStream;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class BriefNowBarBaseView extends LinearLayout {
     public static final int $stable = 0;
@@ -27,7 +26,6 @@ public abstract class BriefNowBarBaseView extends LinearLayout {
     public static final Companion Companion = new Companion(null);
     private static final PathInterpolator TRANSLATION_INTERPOLATOR = new PathInterpolator(0.22f, 0.25f, 0.0f, 1.0f);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -41,28 +39,29 @@ public abstract class BriefNowBarBaseView extends LinearLayout {
         }
     }
 
+    /* JADX WARN: Multi-variable type inference failed */
     public BriefNowBarBaseView(Context context) {
         this(context, null, 2, 0 == true ? 1 : 0);
     }
 
     public final void dismissAnimation(final LottieAnimationView lottieAnimationView, final Function1 function1) {
-        final ValueAnimator ofFloat = ValueAnimator.ofFloat(1.0f, 0.0f);
-        ofFloat.setDuration(150L);
-        ofFloat.setInterpolator(new LinearInterpolator());
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.aibrief.ui.BriefNowBarBaseView$dismissAnimation$1$1
+        final ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(1.0f, 0.0f);
+        valueAnimatorOfFloat.setDuration(150L);
+        valueAnimatorOfFloat.setInterpolator(new LinearInterpolator());
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.aibrief.ui.BriefNowBarBaseView$dismissAnimation$1$1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                LottieAnimationView.this.setAlpha(((Float) ofFloat.getAnimatedValue()).floatValue());
-                function1.mo779invoke((Float) ofFloat.getAnimatedValue());
+                lottieAnimationView.setAlpha(((Float) valueAnimatorOfFloat.getAnimatedValue()).floatValue());
+                function1.mo781invoke((Float) valueAnimatorOfFloat.getAnimatedValue());
             }
         });
-        ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.aibrief.ui.BriefNowBarBaseView$dismissAnimation$1$2
+        valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.aibrief.ui.BriefNowBarBaseView$dismissAnimation$1$2
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public void onAnimationEnd(Animator animator) {
-                LottieAnimationView.this.setAlpha(0.0f);
+                lottieAnimationView.setAlpha(0.0f);
             }
         });
-        ofFloat.start();
+        valueAnimatorOfFloat.start();
     }
 
     public abstract void initAnimatedViews();
@@ -70,24 +69,24 @@ public abstract class BriefNowBarBaseView extends LinearLayout {
     public abstract void resetViews();
 
     public final void showAnimation(final LottieAnimationView lottieAnimationView) {
-        final ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-        ofFloat.setDuration(150L);
-        ofFloat.setInterpolator(new LinearInterpolator());
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.aibrief.ui.BriefNowBarBaseView$showAnimation$1$1
+        final ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+        valueAnimatorOfFloat.setDuration(150L);
+        valueAnimatorOfFloat.setInterpolator(new LinearInterpolator());
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.aibrief.ui.BriefNowBarBaseView$showAnimation$1$1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                LottieAnimationView.this.setAlpha(((Float) ofFloat.getAnimatedValue()).floatValue());
+                lottieAnimationView.setAlpha(((Float) valueAnimatorOfFloat.getAnimatedValue()).floatValue());
             }
         });
-        ofFloat.start();
+        valueAnimatorOfFloat.start();
     }
 
     public abstract void startFourStarAnimation();
 
     public final Bitmap toBitmap(byte[] bArr) {
-        Bitmap decodeByteArray = BitmapFactory.decodeByteArray(bArr, 0, bArr.length);
-        decodeByteArray.compress(Bitmap.CompressFormat.PNG, 100, new ByteArrayOutputStream());
-        return decodeByteArray;
+        Bitmap bitmapDecodeByteArray = BitmapFactory.decodeByteArray(bArr, 0, bArr.length);
+        bitmapDecodeByteArray.compress(Bitmap.CompressFormat.PNG, 100, new ByteArrayOutputStream());
+        return bitmapDecodeByteArray;
     }
 
     public abstract void updateNowBarData(NowBarData nowBarData, GradientDrawable gradientDrawable);

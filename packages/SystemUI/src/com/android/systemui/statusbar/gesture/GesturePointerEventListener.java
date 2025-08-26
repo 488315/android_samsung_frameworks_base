@@ -15,10 +15,11 @@ import android.view.MotionEvent;
 import android.view.ViewRootImpl;
 import android.widget.OverScroller;
 import com.android.systemui.CoreStartable;
+import com.android.systemui.statusbar.gesture.GesturePointerEventListener;
+import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class GesturePointerEventListener implements CoreStartable {
     public static final Companion Companion = new Companion(null);
@@ -30,7 +31,7 @@ public final class GesturePointerEventListener implements CoreStartable {
     public final long[] mDownTime;
     public final float[] mDownX;
     public final float[] mDownY;
-    public GesturePointerEventListener$start$2 mFlingGestureDetector;
+    public AnonymousClass2 mFlingGestureDetector;
     public final GesturePointerEventDetector mGestureDetector;
     public final Handler mHandler = new Handler(Looper.getMainLooper());
     public long mLastFlingTime;
@@ -42,7 +43,6 @@ public final class GesturePointerEventListener implements CoreStartable {
     public boolean mSwipeFireable;
     public final Rect mSwipeStartThreshold;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -59,7 +59,6 @@ public final class GesturePointerEventListener implements CoreStartable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class FlingGestureDetector extends GestureDetector.SimpleOnGestureListener {
         public final OverScroller mOverscroller;
 
@@ -70,15 +69,15 @@ public final class GesturePointerEventListener implements CoreStartable {
         @Override // android.view.GestureDetector.SimpleOnGestureListener, android.view.GestureDetector.OnGestureListener
         public final boolean onFling(MotionEvent motionEvent, MotionEvent motionEvent2, float f, float f2) {
             this.mOverscroller.computeScrollOffset();
-            long uptimeMillis = SystemClock.uptimeMillis();
+            long jUptimeMillis = SystemClock.uptimeMillis();
             long j = GesturePointerEventListener.this.mLastFlingTime;
-            if (j != 0 && uptimeMillis > j + 5000) {
+            if (j != 0 && jUptimeMillis > j + 5000) {
                 this.mOverscroller.forceFinished(true);
             }
             this.mOverscroller.fling(0, 0, (int) f, (int) f2, Integer.MIN_VALUE, Integer.MAX_VALUE, Integer.MIN_VALUE, Integer.MAX_VALUE);
             this.mOverscroller.getDuration();
             GesturePointerEventListener gesturePointerEventListener = GesturePointerEventListener.this;
-            gesturePointerEventListener.mLastFlingTime = uptimeMillis;
+            gesturePointerEventListener.mLastFlingTime = jUptimeMillis;
             gesturePointerEventListener.getClass();
             return true;
         }
@@ -92,7 +91,7 @@ public final class GesturePointerEventListener implements CoreStartable {
         }
     }
 
-    public GesturePointerEventListener(Context context, GesturePointerEventDetector gesturePointerEventDetector) {
+    public GesturePointerEventListener(Context context, GesturePointerEventDetector gesturePointerEventDetector) throws Resources.NotFoundException {
         Rect rect = new Rect();
         this.mSwipeStartThreshold = rect;
         this.mDownPointerId = new int[32];
@@ -106,13 +105,13 @@ public final class GesturePointerEventListener implements CoreStartable {
         this.mGestureDetector = gesturePointerEventDetector;
         if (ViewRootImpl.CLIENT_TRANSIENT) {
             Resources resources = context.getResources();
-            int dimensionPixelSize = resources.getDimensionPixelSize(17106392);
+            int dimensionPixelSize = resources.getDimensionPixelSize(17106393);
             rect.set(dimensionPixelSize, dimensionPixelSize, dimensionPixelSize, dimensionPixelSize);
-            this.mSwipeDistanceThreshold = resources.getDimensionPixelSize(17106391);
+            this.mSwipeDistanceThreshold = resources.getDimensionPixelSize(17106392);
             Display realDisplay = DisplayManagerGlobal.getInstance().getRealDisplay(context.getDisplayId());
             DisplayCutout cutout = realDisplay != null ? realDisplay.getCutout() : null;
             if (cutout != null) {
-                this.mDisplayCutoutTouchableRegionSize = resources.getDimensionPixelSize(R.dimen.indeterminate_progress_alpha_22);
+                this.mDisplayCutoutTouchableRegionSize = resources.getDimensionPixelSize(R.dimen.indeterminate_progress_alpha_23);
                 Rect[] boundingRectsAll = cutout.getBoundingRectsAll();
                 Rect rect2 = boundingRectsAll[0];
                 if (rect2 != null) {
@@ -135,11 +134,11 @@ public final class GesturePointerEventListener implements CoreStartable {
     }
 
     public final void captureDown(MotionEvent motionEvent, int i) {
-        int findIndex = findIndex(motionEvent.getPointerId(i));
-        if (findIndex != -1) {
-            this.mDownX[findIndex] = motionEvent.getX(i);
-            this.mDownY[findIndex] = motionEvent.getY(i);
-            this.mDownTime[findIndex] = motionEvent.getEventTime();
+        int iFindIndex = findIndex(motionEvent.getPointerId(i));
+        if (iFindIndex != -1) {
+            this.mDownX[iFindIndex] = motionEvent.getX(i);
+            this.mDownY[iFindIndex] = motionEvent.getY(i);
+            this.mDownTime[iFindIndex] = motionEvent.getEventTime();
         }
     }
 
@@ -186,28 +185,137 @@ public final class GesturePointerEventListener implements CoreStartable {
     public final void start() {
         if (ViewRootImpl.CLIENT_TRANSIENT) {
             Function1 function1 = new Function1() { // from class: com.android.systemui.statusbar.gesture.GesturePointerEventListener$$ExternalSyntheticLambda0
-                /* JADX WARN: Removed duplicated region for block: B:76:0x0103  */
+                /* JADX WARN: Removed duplicated region for block: B:104:0x014d  */
+                /* JADX WARN: Removed duplicated region for block: B:81:0x00fc  */
+                /* JADX WARN: Removed duplicated region for block: B:85:0x0103  */
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object mo779invoke(java.lang.Object r13) {
-                    /*
-                        Method dump skipped, instructions count: 374
-                        To view this dump change 'Code comments level' option to 'DEBUG'
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.gesture.GesturePointerEventListener$$ExternalSyntheticLambda0.mo779invoke(java.lang.Object):java.lang.Object");
+                public final Object mo781invoke(Object obj) {
+                    boolean z;
+                    int iDetectSwipe;
+                    GesturePointerEventListener.AnonymousClass2 anonymousClass2;
+                    MotionEvent motionEvent = (MotionEvent) obj;
+                    GesturePointerEventListener.Companion companion = GesturePointerEventListener.Companion;
+                    GesturePointerEventListener gesturePointerEventListener = this.f$0;
+                    gesturePointerEventListener.getClass();
+                    if (motionEvent != null) {
+                        if (motionEvent.isTouchEvent() && (anonymousClass2 = gesturePointerEventListener.mFlingGestureDetector) != null) {
+                            anonymousClass2.onTouchEvent(motionEvent);
+                        }
+                        int actionMasked = motionEvent.getActionMasked();
+                        if (actionMasked == 0) {
+                            gesturePointerEventListener.mSwipeFireable = true;
+                            gesturePointerEventListener.mDebugFireable = true;
+                            gesturePointerEventListener.mDownPointers = 0;
+                            gesturePointerEventListener.captureDown(motionEvent, 0);
+                            if (gesturePointerEventListener.mMouseHoveringAtLeft) {
+                                gesturePointerEventListener.mMouseHoveringAtLeft = false;
+                            }
+                            if (gesturePointerEventListener.mMouseHoveringAtTop) {
+                                gesturePointerEventListener.mMouseHoveringAtTop = false;
+                            }
+                            if (gesturePointerEventListener.mMouseHoveringAtRight) {
+                                gesturePointerEventListener.mMouseHoveringAtRight = false;
+                            }
+                            if (gesturePointerEventListener.mMouseHoveringAtBottom) {
+                                gesturePointerEventListener.mMouseHoveringAtBottom = false;
+                            }
+                        } else if (actionMasked == 1) {
+                            gesturePointerEventListener.mSwipeFireable = false;
+                            gesturePointerEventListener.mDebugFireable = false;
+                        } else if (actionMasked != 2) {
+                            if (actionMasked != 3) {
+                                if (actionMasked == 5) {
+                                    gesturePointerEventListener.captureDown(motionEvent, motionEvent.getActionIndex());
+                                    if (gesturePointerEventListener.mDebugFireable) {
+                                        gesturePointerEventListener.mDebugFireable = motionEvent.getPointerCount() < 5;
+                                    }
+                                } else if (actionMasked == 7 && motionEvent.isFromSource(8194)) {
+                                    float x = motionEvent.getX();
+                                    float y = motionEvent.getY();
+                                    boolean z2 = gesturePointerEventListener.mMouseHoveringAtLeft;
+                                    if (!z2 && x == 0.0f) {
+                                        gesturePointerEventListener.mMouseHoveringAtLeft = true;
+                                    } else if (z2 && x > 0.0f) {
+                                        gesturePointerEventListener.mMouseHoveringAtLeft = false;
+                                    }
+                                    boolean z3 = gesturePointerEventListener.mMouseHoveringAtTop;
+                                    if (!z3 && y == 0.0f) {
+                                        gesturePointerEventListener.mMouseHoveringAtTop = true;
+                                    } else if (z3 && y > 0.0f) {
+                                        gesturePointerEventListener.mMouseHoveringAtTop = false;
+                                    }
+                                    boolean z4 = gesturePointerEventListener.mMouseHoveringAtRight;
+                                    if (!z4 && x >= -1) {
+                                        gesturePointerEventListener.mMouseHoveringAtRight = true;
+                                    } else if (z4 && x < -1) {
+                                        gesturePointerEventListener.mMouseHoveringAtRight = false;
+                                    }
+                                    boolean z5 = gesturePointerEventListener.mMouseHoveringAtBottom;
+                                    if (!z5 && y >= -1) {
+                                        gesturePointerEventListener.mMouseHoveringAtBottom = true;
+                                    } else if (z5 && y < -1) {
+                                        gesturePointerEventListener.mMouseHoveringAtBottom = false;
+                                    }
+                                }
+                            }
+                        } else if (gesturePointerEventListener.mSwipeFireable) {
+                            if (motionEvent.getClassification() == 4 && motionEvent.getAxisValue(53) == 3.0f) {
+                                float x2 = motionEvent.getX() - gesturePointerEventListener.mDownX[0];
+                                float y2 = motionEvent.getY() - gesturePointerEventListener.mDownY[0];
+                                if (Math.abs(x2) >= Math.abs(y2) ? Math.abs(x2) > gesturePointerEventListener.mSwipeDistanceThreshold : Math.abs(y2) > gesturePointerEventListener.mSwipeDistanceThreshold) {
+                                    z = false;
+                                }
+                                gesturePointerEventListener.mSwipeFireable = z;
+                                if (z) {
+                                }
+                            } else {
+                                z = true;
+                                gesturePointerEventListener.mSwipeFireable = z;
+                                if (z) {
+                                    int historySize = motionEvent.getHistorySize();
+                                    int pointerCount = motionEvent.getPointerCount();
+                                    int i = 0;
+                                    loop0: while (true) {
+                                        if (i >= pointerCount) {
+                                            iDetectSwipe = 0;
+                                            break;
+                                        }
+                                        int iFindIndex = gesturePointerEventListener.findIndex(motionEvent.getPointerId(i));
+                                        if (iFindIndex != -1) {
+                                            int i2 = 0;
+                                            while (true) {
+                                                if (i2 < historySize) {
+                                                    iDetectSwipe = gesturePointerEventListener.detectSwipe(motionEvent.getHistoricalX(i, i2), motionEvent.getHistoricalY(i, i2), motionEvent.getHistoricalEventTime(i2), iFindIndex);
+                                                    if (iDetectSwipe != 0) {
+                                                        break loop0;
+                                                    }
+                                                    i2++;
+                                                } else {
+                                                    iDetectSwipe = gesturePointerEventListener.detectSwipe(motionEvent.getX(i), motionEvent.getY(i), motionEvent.getEventTime(), iFindIndex);
+                                                    if (iDetectSwipe != 0) {
+                                                        break;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        i++;
+                                    }
+                                    gesturePointerEventListener.mSwipeFireable = iDetectSwipe == 0;
+                                }
+                            }
+                        }
+                    }
+                    return Unit.INSTANCE;
                 }
             };
             GesturePointerEventDetector gesturePointerEventDetector = this.mGestureDetector;
             gesturePointerEventDetector.addOnGestureDetectedCallback("GesturePointerEventHandler", function1);
             gesturePointerEventDetector.startGestureListening$frameworks__base__packages__SystemUI__android_common__SystemUI_core();
-            final Context context = this.mContext;
-            final FlingGestureDetector flingGestureDetector = new FlingGestureDetector();
-            final Handler handler = this.mHandler;
-            this.mFlingGestureDetector = new GestureDetector(context, flingGestureDetector, handler) { // from class: com.android.systemui.statusbar.gesture.GesturePointerEventListener$start$2
+            this.mFlingGestureDetector = new GestureDetector(this.mContext, new FlingGestureDetector(), this.mHandler) { // from class: com.android.systemui.statusbar.gesture.GesturePointerEventListener.start.2
             };
         }
     }

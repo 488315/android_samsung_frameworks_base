@@ -1,13 +1,17 @@
 package com.android.systemui.statusbar.pipeline.wifi.domain.interactor;
 
 import com.android.systemui.statusbar.pipeline.wifi.shared.model.WifiNetworkModel;
+import com.android.systemui.statusbar.pipeline.wifi.shared.model.WifiScanEntry;
+import java.util.Iterator;
 import java.util.List;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function3;
+import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class WifiInteractorImpl$areNetworksAvailable$1 extends SuspendLambda implements Function3 {
     /* synthetic */ Object L$0;
@@ -29,68 +33,42 @@ final class WifiInteractorImpl$areNetworksAvailable$1 extends SuspendLambda impl
         return wifiInteractorImpl$areNetworksAvailable$1.invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:14:0x0046, code lost:
-    
-        if (r0 != null) goto L9;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:9:0x001e  */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object invokeSuspend(java.lang.Object r6) {
-        /*
-            r5 = this;
-            kotlin.coroutines.intrinsics.CoroutineSingletons r0 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r0 = r5.label
-            if (r0 != 0) goto L4e
-            kotlin.ResultKt.throwOnFailure(r6)
-            java.lang.Object r6 = r5.L$0
-            com.android.systemui.statusbar.pipeline.wifi.shared.model.WifiNetworkModel r6 = (com.android.systemui.statusbar.pipeline.wifi.shared.model.WifiNetworkModel) r6
-            java.lang.Object r0 = r5.L$1
-            java.util.List r0 = (java.util.List) r0
-            boolean r1 = r0.isEmpty()
-            r2 = 0
-            if (r1 == 0) goto L19
-            goto L49
-        L19:
-            boolean r1 = r6 instanceof com.android.systemui.statusbar.pipeline.wifi.shared.model.WifiNetworkModel.Active
-            r3 = 1
-            if (r1 != 0) goto L20
-        L1e:
-            r2 = r3
-            goto L49
-        L20:
-            com.android.systemui.statusbar.pipeline.wifi.domain.interactor.WifiInteractorImpl r5 = r5.this$0
-            com.android.systemui.statusbar.pipeline.wifi.shared.model.WifiNetworkModel$Active r6 = (com.android.systemui.statusbar.pipeline.wifi.shared.model.WifiNetworkModel.Active) r6
-            r5.getClass()
-            java.lang.Iterable r0 = (java.lang.Iterable) r0
-            java.util.Iterator r5 = r0.iterator()
-        L2d:
-            boolean r0 = r5.hasNext()
-            if (r0 == 0) goto L45
-            java.lang.Object r0 = r5.next()
-            r1 = r0
-            com.android.systemui.statusbar.pipeline.wifi.shared.model.WifiScanEntry r1 = (com.android.systemui.statusbar.pipeline.wifi.shared.model.WifiScanEntry) r1
-            java.lang.String r1 = r1.ssid
-            java.lang.String r4 = r6.ssid
-            boolean r1 = kotlin.jvm.internal.Intrinsics.areEqual(r1, r4)
-            if (r1 != 0) goto L2d
-            goto L46
-        L45:
-            r0 = 0
-        L46:
-            if (r0 == 0) goto L49
-            goto L1e
-        L49:
-            java.lang.Boolean r5 = java.lang.Boolean.valueOf(r2)
-            return r5
-        L4e:
-            java.lang.IllegalStateException r5 = new java.lang.IllegalStateException
-            java.lang.String r6 = "call to 'resume' before 'invoke' with coroutine"
-            r5.<init>(r6)
-            throw r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.pipeline.wifi.domain.interactor.WifiInteractorImpl$areNetworksAvailable$1.invokeSuspend(java.lang.Object):java.lang.Object");
+    public final Object invokeSuspend(Object obj) {
+        Object next;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        if (this.label != 0) {
+            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+        }
+        ResultKt.throwOnFailure(obj);
+        WifiNetworkModel wifiNetworkModel = (WifiNetworkModel) this.L$0;
+        List list = (List) this.L$1;
+        boolean z = false;
+        if (!list.isEmpty()) {
+            if (wifiNetworkModel instanceof WifiNetworkModel.Active) {
+                WifiNetworkModel.Active active = (WifiNetworkModel.Active) wifiNetworkModel;
+                this.this$0.getClass();
+                Iterator it = list.iterator();
+                while (true) {
+                    if (!it.hasNext()) {
+                        next = null;
+                        break;
+                    }
+                    next = it.next();
+                    if (!Intrinsics.areEqual(((WifiScanEntry) next).ssid, active.ssid)) {
+                        break;
+                    }
+                }
+                if (next != null) {
+                }
+            } else {
+                z = true;
+            }
+        }
+        return Boolean.valueOf(z);
     }
 }

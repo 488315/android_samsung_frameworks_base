@@ -5,7 +5,6 @@ import androidx.compose.ui.text.TextStyle;
 import androidx.compose.ui.text.style.LineHeightStyle;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class TypographyTokensKt {
     public static final TextStyle DefaultTextStyle;
@@ -16,6 +15,6 @@ public abstract class TypographyTokensKt {
         LineHeightStyle.Trim.Companion.getClass();
         LineHeightStyle lineHeightStyle = new LineHeightStyle(f, 0, (DefaultConstructorMarker) null);
         TextStyle.Companion.getClass();
-        DefaultTextStyle = TextStyle.m754copyp1EtxEg$default(TextStyle.Default, 0L, 0L, null, null, 0L, 0, 0L, DefaultPlatformTextStyle_androidKt.DefaultPlatformTextStyle, lineHeightStyle, 0, 15204351);
+        DefaultTextStyle = TextStyle.m756copyp1EtxEg$default(TextStyle.Default, 0L, 0L, null, null, 0L, 0, 0L, DefaultPlatformTextStyle_androidKt.DefaultPlatformTextStyle, lineHeightStyle, 0, 15204351);
     }
 }

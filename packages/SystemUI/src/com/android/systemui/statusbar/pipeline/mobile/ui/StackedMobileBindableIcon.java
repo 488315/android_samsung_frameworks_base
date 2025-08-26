@@ -15,7 +15,6 @@ import com.android.systemui.statusbar.pipeline.shared.ui.view.ModernStatusBarVie
 import com.android.systemui.statusbar.pipeline.shared.ui.view.SingleBindableStatusBarComposeIconView;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class StackedMobileBindableIcon implements BindableIcon {
     public final StackedMobileBindableIcon$initializer$1 initializer;
@@ -23,13 +22,13 @@ public final class StackedMobileBindableIcon implements BindableIcon {
 
     /* JADX WARN: Type inference failed for: r0v1, types: [com.android.systemui.statusbar.pipeline.mobile.ui.StackedMobileBindableIcon$initializer$1] */
     public StackedMobileBindableIcon(Context context, final MobileIconsViewModel mobileIconsViewModel, final StackedMobileIconViewModelImpl.Factory factory, final StackedMobileIconViewModelKairos.Factory factory2, final KairosNetwork kairosNetwork) {
-        this.slot = context.getString(17043299);
+        this.slot = context.getString(17043303);
         this.initializer = new ModernStatusBarViewCreator() { // from class: com.android.systemui.statusbar.pipeline.mobile.ui.StackedMobileBindableIcon$initializer$1
             @Override // com.android.systemui.statusbar.pipeline.icons.shared.model.ModernStatusBarViewCreator
             public final ModernStatusBarView createAndBind(Context context2) {
                 SingleBindableStatusBarComposeIconView.Companion.getClass();
                 final SingleBindableStatusBarComposeIconView singleBindableStatusBarComposeIconView = (SingleBindableStatusBarComposeIconView) LayoutInflater.from(context2).inflate(R.layout.bindable_status_bar_compose_icon, (ViewGroup) null);
-                String str = StackedMobileBindableIcon.this.slot;
+                String str = this.this$0.slot;
                 final StackedMobileIconViewModelKairos.Factory factory3 = factory2;
                 final KairosNetwork kairosNetwork2 = kairosNetwork;
                 final MobileIconsViewModel mobileIconsViewModel2 = mobileIconsViewModel;
@@ -38,7 +37,7 @@ public final class StackedMobileBindableIcon implements BindableIcon {
                     @Override // kotlin.jvm.functions.Function0
                     public final Object invoke() {
                         StackedMobileIconBinder.INSTANCE.getClass();
-                        return StackedMobileIconBinder.bind(SingleBindableStatusBarComposeIconView.this, mobileIconsViewModel2, factory4, factory3, kairosNetwork2);
+                        return StackedMobileIconBinder.bind(singleBindableStatusBarComposeIconView, mobileIconsViewModel2, factory4, factory3, kairosNetwork2);
                     }
                 });
                 return singleBindableStatusBarComposeIconView;

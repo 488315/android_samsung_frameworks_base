@@ -344,9 +344,9 @@ public abstract class SemDvfsManager {
         resourceHash.put(31, Integer.valueOf(TYPE_RESOURCE_CPU_DELAYED_LOW_POWER_MODE));
         resourceHash.put(32, Integer.valueOf(TYPE_RESOURCE_CPU_MIN_LITTLE_CORE));
         resourceHash.put(26, 1610612736);
-        int myUid = Process.myUid();
-        mUid = myUid;
-        isSystemUid = myUid == 1000;
+        int iMyUid = Process.myUid();
+        mUid = iMyUid;
+        isSystemUid = iMyUid == 1000;
     }
 
     public static SemDvfsManager createInstance(Context context, String str) {
@@ -548,9 +548,9 @@ public abstract class SemDvfsManager {
         if (this.mDvfsRequester == null || !checkHyPerConnected()) {
             return false;
         }
-        boolean checkHintExist = this.mDvfsRequester.checkHintExist(i);
-        hintSupportHash.put(Integer.valueOf(i), Boolean.valueOf(checkHintExist));
-        return checkHintExist;
+        boolean zCheckHintExist = this.mDvfsRequester.checkHintExist(i);
+        hintSupportHash.put(Integer.valueOf(i), Boolean.valueOf(zCheckHintExist));
+        return zCheckHintExist;
     }
 
     public boolean checkResourceSupported(int i) {
@@ -603,6 +603,14 @@ public abstract class SemDvfsManager {
             return -999;
         }
         return getApproximateFrequency((int) (supportedFrequency[0] * d), i, i2, supportedFrequency);
+    }
+
+    public int getApproximateFrequencyByPercent(double d) {
+        return getApproximateFrequencyByPercent(d, this.mType, 1);
+    }
+
+    public int getApproximateFrequencyByPercentForSsrm(double d) {
+        return getApproximateFrequencyByPercent(d, this.mType, 0);
     }
 
     public void addResourceValue(int i, int i2) {
@@ -674,7 +682,7 @@ public abstract class SemDvfsManager {
     }
 
     private void triggerAppStart(String str) {
-        ISamsungDeviceHealthManager asInterface;
+        ISamsungDeviceHealthManager iSamsungDeviceHealthManagerAsInterface;
         if (str == null || str.isEmpty()) {
             return;
         }
@@ -683,11 +691,11 @@ public abstract class SemDvfsManager {
             str = str + "/" + this.acquirePkg;
         }
         IBinder service = ServiceManager.getService("sdhms");
-        if (service == null || (asInterface = ISamsungDeviceHealthManager.Stub.asInterface(service)) == null) {
+        if (service == null || (iSamsungDeviceHealthManagerAsInterface = ISamsungDeviceHealthManager.Stub.asInterface(service)) == null) {
             return;
         }
         try {
-            asInterface.sendCommand("APP_START", str);
+            iSamsungDeviceHealthManagerAsInterface.sendCommand("APP_START", str);
         } catch (RemoteException e) {
             e.printStackTrace();
         }

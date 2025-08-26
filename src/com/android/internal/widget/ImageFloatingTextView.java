@@ -71,16 +71,16 @@ public class ImageFloatingTextView extends TextView {
             text = "";
         }
         StaticLayout.Builder hyphenationFrequency = StaticLayout.Builder.obtain(text, 0, text.length(), getPaint(), i).setAlignment(alignment).setTextDirection(getTextDirectionHeuristic()).setLineSpacing(getLineSpacingExtra(), getLineSpacingMultiplier()).setIncludePad(getIncludeFontPadding()).setUseLineSpacingFromFallbacks(true).setBreakStrategy(getBreakStrategy()).setHyphenationFrequency(getHyphenationFrequency());
-        int i4 = this.mMaxLinesForHeight;
-        if (i4 <= 0) {
-            i4 = getMaxLines() >= 0 ? getMaxLines() : Integer.MAX_VALUE;
+        int iMin = this.mMaxLinesForHeight;
+        if (iMin <= 0) {
+            iMin = getMaxLines() >= 0 ? getMaxLines() : Integer.MAX_VALUE;
         }
-        int i5 = this.mMaxLineUpperLimit;
-        if (i5 > 0) {
-            i4 = Math.min(i4, i5);
+        int i4 = this.mMaxLineUpperLimit;
+        if (i4 > 0) {
+            iMin = Math.min(iMin, i4);
         }
-        hyphenationFrequency.setMaxLines(i4);
-        this.mLayoutMaxLines = i4;
+        hyphenationFrequency.setMaxLines(iMin);
+        this.mLayoutMaxLines = iMin;
         if (z) {
             hyphenationFrequency.setEllipsize(truncateAt).setEllipsizedWidth(i2);
         }
@@ -88,8 +88,8 @@ public class ImageFloatingTextView extends TextView {
             iArr = null;
         } else {
             iArr = new int[i3 + 1];
-            for (int i6 = 0; i6 < this.mIndentLines; i6++) {
-                iArr[i6] = this.mImageEndMargin;
+            for (int i5 = 0; i5 < this.mIndentLines; i5++) {
+                iArr[i5] = this.mImageEndMargin;
             }
         }
         if (this.mResolvedDirection == 1) {
@@ -97,12 +97,12 @@ public class ImageFloatingTextView extends TextView {
         } else {
             hyphenationFrequency.setIndents(null, iArr);
         }
-        StaticLayout build = hyphenationFrequency.build();
+        StaticLayout staticLayoutBuild = hyphenationFrequency.build();
         if (TRACE_ONMEASURE) {
             trackMaxLines();
             Trace.endSection();
         }
-        return build;
+        return staticLayoutBuild;
     }
 
     @RemotableViewMethod

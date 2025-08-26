@@ -25,10 +25,10 @@ public class DexObserver {
     private final BlockingDeque<DexConnectionListener> mListeners = new LinkedBlockingDeque();
     private boolean mTestModeOn = false;
 
-    public DexObserver() {
+    public DexObserver() throws InterruptedException {
         UEventObserver uEventObserver = new UEventObserver() { // from class: android.util.sysfwutil.DexObserver.1
             @Override // android.os.UEventObserver
-            public void onUEvent(UEventObserver.UEvent uEvent) {
+            public void onUEvent(UEventObserver.UEvent uEvent) throws InterruptedException {
                 try {
                     Slog.d(DexObserver.TAG, "UEventObserver, event : " + uEvent);
                     DexObserver.this.setDexState(Integer.parseInt(uEvent.get("SWITCH_STATE")), uEvent);
@@ -44,46 +44,48 @@ public class DexObserver {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void setDexState(int i, UEventObserver.UEvent uEvent) {
+    /* JADX WARN: Removed duplicated region for block: B:13:0x0039  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public void setDexState(int i, UEventObserver.UEvent uEvent) throws InterruptedException {
         Slog.d(TAG, "setDockState() : " + i);
-        if (i != 114) {
-            if (i == 200) {
-                String str = uEvent.get("USBPD_IDS");
-                if (str != null && str.equals("04e8:a027")) {
-                    this.mSemiDexMode = true;
-                }
-            } else {
-                switch (i) {
-                    case 109:
-                    case 110:
-                    case 111:
-                        break;
-                    default:
-                        this.mDexMode = false;
-                        this.mSemiDexMode = false;
-                        break;
-                }
+        if (i == 114) {
+            this.mDexMode = true;
+        } else if (i == 200) {
+            String str = uEvent.get("USBPD_IDS");
+            if (str != null && str.equals("04e8:a027")) {
+                this.mSemiDexMode = true;
             }
-            onUpdateDexMode();
+        } else {
+            switch (i) {
+                case 109:
+                case 110:
+                case 111:
+                    break;
+                default:
+                    this.mDexMode = false;
+                    this.mSemiDexMode = false;
+                    break;
+            }
         }
-        this.mDexMode = true;
         onUpdateDexMode();
     }
 
-    private void checkDexStatebySysfs() {
-        String str;
+    private void checkDexStatebySysfs() throws InterruptedException {
+        String line;
         FileReader fileReader;
         BufferedReader bufferedReader;
         try {
             File file = new File(USBPD_IDS_PATH);
             File file2 = new File(USBPD_TYPE_PATH);
-            String str2 = null;
+            String line2 = null;
             if (file.exists()) {
                 fileReader = new FileReader(USBPD_IDS_PATH);
                 try {
                     bufferedReader = new BufferedReader(fileReader);
                     try {
-                        str = bufferedReader.readLine();
+                        line = bufferedReader.readLine();
                         bufferedReader.close();
                         fileReader.close();
                     } finally {
@@ -97,14 +99,14 @@ public class DexObserver {
                 }
             } else {
                 Slog.e(TAG, "USBPD IDS File does not exist");
-                str = null;
+                line = null;
             }
             if (file2.exists()) {
                 fileReader = new FileReader(USBPD_TYPE_PATH);
                 try {
                     bufferedReader = new BufferedReader(fileReader);
                     try {
-                        str2 = bufferedReader.readLine();
+                        line2 = bufferedReader.readLine();
                         bufferedReader.close();
                         fileReader.close();
                     } finally {
@@ -114,17 +116,17 @@ public class DexObserver {
             } else {
                 Slog.e(TAG, "USBPD TYPE File does not exist");
             }
-            if (str == null || str2 == null) {
+            if (line == null || line2 == null) {
                 Slog.d(TAG, "checkDexStatebySysfs() USBPD_IDS or USBPD_TYPE is NULL!!");
             } else if (this.mTestModeOn) {
-                Slog.d(TAG, "checkDexStatebySysfs() USBPD_IDS[" + str + "], USBPD_TYPE[" + str2 + NavigationBarInflaterView.SIZE_MOD_END);
+                Slog.d(TAG, "checkDexStatebySysfs() USBPD_IDS[" + line + "], USBPD_TYPE[" + line2 + NavigationBarInflaterView.SIZE_MOD_END);
             }
-            if ("200".equals(str2) && "04e8:a027".equals(str)) {
+            if ("200".equals(line2) && "04e8:a027".equals(line)) {
                 if (this.mTestModeOn) {
                     Slog.d(TAG, "checkDexStatebySysfs() : SEMI DEX MODE is ON");
                 }
                 this.mSemiDexMode = true;
-            } else if ("114".equals(str2)) {
+            } else if ("114".equals(line2)) {
                 if (this.mTestModeOn) {
                     Slog.d(TAG, "checkDexStatebySysfs() : DEX MODE is ON");
                 }
@@ -147,7 +149,7 @@ public class DexObserver {
     }
 
     /* JADX WARN: Type inference failed for: r0v6, types: [android.util.sysfwutil.DexObserver$2] */
-    private void onUpdateDexMode() {
+    private void onUpdateDexMode() throws InterruptedException {
         if (this.mTestModeOn) {
             Slog.d(TAG, "setDexMode() : delay ++");
             try {

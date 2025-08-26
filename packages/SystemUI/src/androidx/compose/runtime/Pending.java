@@ -10,7 +10,6 @@ import kotlin.Lazy;
 import kotlin.LazyKt__LazyJVMKt;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class Pending {
     public int groupIndex;
@@ -45,18 +44,18 @@ final class Pending {
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                int size2 = Pending.this.keyInfos.size();
+                int size2 = this.this$0.keyInfos.size();
                 EnableCommand$enableCompositionTracing$1 enableCommand$enableCompositionTracing$1 = ComposerKt.compositionTracer;
                 MutableScatterMap mutableScatterMap = new MutableScatterMap(size2);
-                Pending pending = Pending.this;
+                Pending pending = this.this$0;
                 int size3 = pending.keyInfos.size();
                 for (int i6 = 0; i6 < size3; i6++) {
                     KeyInfo keyInfo2 = (KeyInfo) pending.keyInfos.get(i6);
                     Object obj = keyInfo2.objectKey;
                     int i7 = keyInfo2.key;
-                    MultiValueMap.m341addimpl(mutableScatterMap, obj != null ? new JoinedKey(Integer.valueOf(i7), keyInfo2.objectKey) : Integer.valueOf(i7), keyInfo2);
+                    MultiValueMap.m342addimpl(mutableScatterMap, obj != null ? new JoinedKey(Integer.valueOf(i7), keyInfo2.objectKey) : Integer.valueOf(i7), keyInfo2);
                 }
-                return MultiValueMap.m342boximpl(mutableScatterMap);
+                return MultiValueMap.m343boximpl(mutableScatterMap);
             }
         });
     }

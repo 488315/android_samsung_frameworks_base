@@ -39,9 +39,7 @@ public class ProxyOnBackInvokedDispatcher implements OnBackInvokedDispatcher {
             this.mCallbacks.removeIf(new Predicate() { // from class: android.window.ProxyOnBackInvokedDispatcher$$ExternalSyntheticLambda0
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
-                    boolean equals;
-                    equals = ((OnBackInvokedCallback) ((Pair) obj).first).equals(OnBackInvokedCallback.this);
-                    return equals;
+                    return ((OnBackInvokedCallback) ((Pair) obj).first).equals(onBackInvokedCallback);
                 }
             });
             OnBackInvokedDispatcher onBackInvokedDispatcher = this.mActualDispatcher;
@@ -75,15 +73,15 @@ public class ProxyOnBackInvokedDispatcher implements OnBackInvokedDispatcher {
             onBackInvokedDispatcher.setImeOnBackInvokedDispatcher(imeOnBackInvokedDispatcher);
         }
         for (Pair<OnBackInvokedCallback, Integer> pair : this.mCallbacks) {
-            int intValue = pair.second.intValue();
+            int iIntValue = pair.second.intValue();
             if (Flags.predictiveBackPrioritySystemNavigationObserver()) {
-                if (intValue >= 0 || intValue == -2) {
-                    this.mActualDispatcher.registerOnBackInvokedCallback(intValue, pair.first);
+                if (iIntValue >= 0 || iIntValue == -2) {
+                    this.mActualDispatcher.registerOnBackInvokedCallback(iIntValue, pair.first);
                 } else {
                     this.mActualDispatcher.registerSystemOnBackInvokedCallback(pair.first);
                 }
-            } else if (intValue >= 0) {
-                this.mActualDispatcher.registerOnBackInvokedCallback(intValue, pair.first);
+            } else if (iIntValue >= 0) {
+                this.mActualDispatcher.registerOnBackInvokedCallback(iIntValue, pair.first);
             } else {
                 this.mActualDispatcher.registerSystemOnBackInvokedCallback(pair.first);
             }

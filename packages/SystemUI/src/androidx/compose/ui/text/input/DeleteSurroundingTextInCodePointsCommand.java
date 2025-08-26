@@ -3,7 +3,6 @@ package androidx.compose.ui.text.input;
 import androidx.activity.BackEventCompat$$ExternalSyntheticOutline0;
 import androidx.compose.ui.text.internal.InlineClassHelperKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class DeleteSurroundingTextInCodePointsCommand implements EditCommand {
     public final int lengthAfterCursor;
@@ -38,26 +37,26 @@ public final class DeleteSurroundingTextInCodePointsCommand implements EditComma
                 break;
             }
         }
-        int i6 = 0;
+        int length = 0;
         while (true) {
             if (i >= this.lengthAfterCursor) {
                 break;
             }
-            int i7 = i6 + 1;
-            int i8 = editingBuffer.selectionEnd + i7;
+            int i6 = length + 1;
+            int i7 = editingBuffer.selectionEnd + i6;
             PartialGapBuffer partialGapBuffer = editingBuffer.gapBuffer;
-            if (i8 >= partialGapBuffer.getLength()) {
-                i6 = partialGapBuffer.getLength() - editingBuffer.selectionEnd;
+            if (i7 >= partialGapBuffer.getLength()) {
+                length = partialGapBuffer.getLength() - editingBuffer.selectionEnd;
                 break;
             } else {
-                i6 = (Character.isHighSurrogate(editingBuffer.get$ui_text_release((editingBuffer.selectionEnd + i7) + (-1))) && Character.isLowSurrogate(editingBuffer.get$ui_text_release(editingBuffer.selectionEnd + i7))) ? i6 + 2 : i7;
+                length = (Character.isHighSurrogate(editingBuffer.get$ui_text_release((editingBuffer.selectionEnd + i6) + (-1))) && Character.isLowSurrogate(editingBuffer.get$ui_text_release(editingBuffer.selectionEnd + i6))) ? length + 2 : i6;
                 i++;
             }
         }
-        int i9 = editingBuffer.selectionEnd;
-        editingBuffer.delete$ui_text_release(i9, i6 + i9);
-        int i10 = editingBuffer.selectionStart;
-        editingBuffer.delete$ui_text_release(i10 - i3, i10);
+        int i8 = editingBuffer.selectionEnd;
+        editingBuffer.delete$ui_text_release(i8, length + i8);
+        int i9 = editingBuffer.selectionStart;
+        editingBuffer.delete$ui_text_release(i9 - i3, i9);
     }
 
     public final boolean equals(Object obj) {

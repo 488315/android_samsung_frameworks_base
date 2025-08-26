@@ -166,9 +166,9 @@ public interface IEuiccService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IEuiccService)) {
-                return (IEuiccService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IEuiccService)) {
+                return (IEuiccService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -228,117 +228,117 @@ public interface IEuiccService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int readInt = parcel.readInt();
-                    int readInt2 = parcel.readInt();
+                    int i3 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     DownloadableSubscription downloadableSubscription = (DownloadableSubscription) parcel.readTypedObject(DownloadableSubscription.CREATOR);
-                    boolean readBoolean = parcel.readBoolean();
-                    boolean readBoolean2 = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
+                    boolean z2 = parcel.readBoolean();
                     Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                    IDownloadSubscriptionCallback asInterface = IDownloadSubscriptionCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IDownloadSubscriptionCallback iDownloadSubscriptionCallbackAsInterface = IDownloadSubscriptionCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    downloadSubscription(readInt, readInt2, downloadableSubscription, readBoolean, readBoolean2, bundle, asInterface);
+                    downloadSubscription(i3, i4, downloadableSubscription, z, z2, bundle, iDownloadSubscriptionCallbackAsInterface);
                     return true;
                 case 2:
-                    int readInt3 = parcel.readInt();
-                    int readInt4 = parcel.readInt();
+                    int i5 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     DownloadableSubscription downloadableSubscription2 = (DownloadableSubscription) parcel.readTypedObject(DownloadableSubscription.CREATOR);
-                    boolean readBoolean3 = parcel.readBoolean();
-                    boolean readBoolean4 = parcel.readBoolean();
-                    IGetDownloadableSubscriptionMetadataCallback asInterface2 = IGetDownloadableSubscriptionMetadataCallback.Stub.asInterface(parcel.readStrongBinder());
+                    boolean z3 = parcel.readBoolean();
+                    boolean z4 = parcel.readBoolean();
+                    IGetDownloadableSubscriptionMetadataCallback iGetDownloadableSubscriptionMetadataCallbackAsInterface = IGetDownloadableSubscriptionMetadataCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    getDownloadableSubscriptionMetadata(readInt3, readInt4, downloadableSubscription2, readBoolean3, readBoolean4, asInterface2);
+                    getDownloadableSubscriptionMetadata(i5, i6, downloadableSubscription2, z3, z4, iGetDownloadableSubscriptionMetadataCallbackAsInterface);
                     return true;
                 case 3:
-                    int readInt5 = parcel.readInt();
-                    IGetEidCallback asInterface3 = IGetEidCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i7 = parcel.readInt();
+                    IGetEidCallback iGetEidCallbackAsInterface = IGetEidCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    getEid(readInt5, asInterface3);
+                    getEid(i7, iGetEidCallbackAsInterface);
                     return true;
                 case 4:
-                    int readInt6 = parcel.readInt();
-                    IGetOtaStatusCallback asInterface4 = IGetOtaStatusCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i8 = parcel.readInt();
+                    IGetOtaStatusCallback iGetOtaStatusCallbackAsInterface = IGetOtaStatusCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    getOtaStatus(readInt6, asInterface4);
+                    getOtaStatus(i8, iGetOtaStatusCallbackAsInterface);
                     return true;
                 case 5:
-                    int readInt7 = parcel.readInt();
-                    IOtaStatusChangedCallback asInterface5 = IOtaStatusChangedCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i9 = parcel.readInt();
+                    IOtaStatusChangedCallback iOtaStatusChangedCallbackAsInterface = IOtaStatusChangedCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    startOtaIfNecessary(readInt7, asInterface5);
+                    startOtaIfNecessary(i9, iOtaStatusChangedCallbackAsInterface);
                     return true;
                 case 6:
-                    int readInt8 = parcel.readInt();
-                    IGetEuiccProfileInfoListCallback asInterface6 = IGetEuiccProfileInfoListCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i10 = parcel.readInt();
+                    IGetEuiccProfileInfoListCallback iGetEuiccProfileInfoListCallbackAsInterface = IGetEuiccProfileInfoListCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    getEuiccProfileInfoList(readInt8, asInterface6);
+                    getEuiccProfileInfoList(i10, iGetEuiccProfileInfoListCallbackAsInterface);
                     return true;
                 case 7:
-                    int readInt9 = parcel.readInt();
-                    boolean readBoolean5 = parcel.readBoolean();
-                    IGetDefaultDownloadableSubscriptionListCallback asInterface7 = IGetDefaultDownloadableSubscriptionListCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i11 = parcel.readInt();
+                    boolean z5 = parcel.readBoolean();
+                    IGetDefaultDownloadableSubscriptionListCallback iGetDefaultDownloadableSubscriptionListCallbackAsInterface = IGetDefaultDownloadableSubscriptionListCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    getDefaultDownloadableSubscriptionList(readInt9, readBoolean5, asInterface7);
+                    getDefaultDownloadableSubscriptionList(i11, z5, iGetDefaultDownloadableSubscriptionListCallbackAsInterface);
                     return true;
                 case 8:
-                    int readInt10 = parcel.readInt();
-                    IGetEuiccInfoCallback asInterface8 = IGetEuiccInfoCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i12 = parcel.readInt();
+                    IGetEuiccInfoCallback iGetEuiccInfoCallbackAsInterface = IGetEuiccInfoCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    getEuiccInfo(readInt10, asInterface8);
+                    getEuiccInfo(i12, iGetEuiccInfoCallbackAsInterface);
                     return true;
                 case 9:
-                    int readInt11 = parcel.readInt();
-                    String readString = parcel.readString();
-                    IDeleteSubscriptionCallback asInterface9 = IDeleteSubscriptionCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i13 = parcel.readInt();
+                    String string = parcel.readString();
+                    IDeleteSubscriptionCallback iDeleteSubscriptionCallbackAsInterface = IDeleteSubscriptionCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    deleteSubscription(readInt11, readString, asInterface9);
+                    deleteSubscription(i13, string, iDeleteSubscriptionCallbackAsInterface);
                     return true;
                 case 10:
-                    int readInt12 = parcel.readInt();
-                    int readInt13 = parcel.readInt();
-                    String readString2 = parcel.readString();
-                    boolean readBoolean6 = parcel.readBoolean();
-                    ISwitchToSubscriptionCallback asInterface10 = ISwitchToSubscriptionCallback.Stub.asInterface(parcel.readStrongBinder());
-                    boolean readBoolean7 = parcel.readBoolean();
+                    int i14 = parcel.readInt();
+                    int i15 = parcel.readInt();
+                    String string2 = parcel.readString();
+                    boolean z6 = parcel.readBoolean();
+                    ISwitchToSubscriptionCallback iSwitchToSubscriptionCallbackAsInterface = ISwitchToSubscriptionCallback.Stub.asInterface(parcel.readStrongBinder());
+                    boolean z7 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    switchToSubscription(readInt12, readInt13, readString2, readBoolean6, asInterface10, readBoolean7);
+                    switchToSubscription(i14, i15, string2, z6, iSwitchToSubscriptionCallbackAsInterface, z7);
                     return true;
                 case 11:
-                    int readInt14 = parcel.readInt();
-                    String readString3 = parcel.readString();
-                    String readString4 = parcel.readString();
-                    IUpdateSubscriptionNicknameCallback asInterface11 = IUpdateSubscriptionNicknameCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i16 = parcel.readInt();
+                    String string3 = parcel.readString();
+                    String string4 = parcel.readString();
+                    IUpdateSubscriptionNicknameCallback iUpdateSubscriptionNicknameCallbackAsInterface = IUpdateSubscriptionNicknameCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    updateSubscriptionNickname(readInt14, readString3, readString4, asInterface11);
+                    updateSubscriptionNickname(i16, string3, string4, iUpdateSubscriptionNicknameCallbackAsInterface);
                     return true;
                 case 12:
-                    int readInt15 = parcel.readInt();
-                    IEraseSubscriptionsCallback asInterface12 = IEraseSubscriptionsCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i17 = parcel.readInt();
+                    IEraseSubscriptionsCallback iEraseSubscriptionsCallbackAsInterface = IEraseSubscriptionsCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    eraseSubscriptions(readInt15, asInterface12);
+                    eraseSubscriptions(i17, iEraseSubscriptionsCallbackAsInterface);
                     return true;
                 case 13:
-                    int readInt16 = parcel.readInt();
-                    int readInt17 = parcel.readInt();
-                    IEraseSubscriptionsCallback asInterface13 = IEraseSubscriptionsCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i18 = parcel.readInt();
+                    int i19 = parcel.readInt();
+                    IEraseSubscriptionsCallback iEraseSubscriptionsCallbackAsInterface2 = IEraseSubscriptionsCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    eraseSubscriptionsWithOptions(readInt16, readInt17, asInterface13);
+                    eraseSubscriptionsWithOptions(i18, i19, iEraseSubscriptionsCallbackAsInterface2);
                     return true;
                 case 14:
-                    int readInt18 = parcel.readInt();
-                    IRetainSubscriptionsForFactoryResetCallback asInterface14 = IRetainSubscriptionsForFactoryResetCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i20 = parcel.readInt();
+                    IRetainSubscriptionsForFactoryResetCallback iRetainSubscriptionsForFactoryResetCallbackAsInterface = IRetainSubscriptionsForFactoryResetCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    retainSubscriptionsForFactoryReset(readInt18, asInterface14);
+                    retainSubscriptionsForFactoryReset(i20, iRetainSubscriptionsForFactoryResetCallbackAsInterface);
                     return true;
                 case 15:
-                    IEuiccServiceDumpResultCallback asInterface15 = IEuiccServiceDumpResultCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IEuiccServiceDumpResultCallback iEuiccServiceDumpResultCallbackAsInterface = IEuiccServiceDumpResultCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    dump(asInterface15);
+                    dump(iEuiccServiceDumpResultCallbackAsInterface);
                     return true;
                 case 16:
-                    int readInt19 = parcel.readInt();
-                    IGetAvailableMemoryInBytesCallback asInterface16 = IGetAvailableMemoryInBytesCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i21 = parcel.readInt();
+                    IGetAvailableMemoryInBytesCallback iGetAvailableMemoryInBytesCallbackAsInterface = IGetAvailableMemoryInBytesCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    getAvailableMemoryInBytes(readInt19, asInterface16);
+                    getAvailableMemoryInBytes(i21, iGetAvailableMemoryInBytesCallbackAsInterface);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -363,226 +363,226 @@ public interface IEuiccService extends IInterface {
 
             @Override // android.service.euicc.IEuiccService
             public void downloadSubscription(int i, int i2, DownloadableSubscription downloadableSubscription, boolean z, boolean z2, Bundle bundle, IDownloadSubscriptionCallback iDownloadSubscriptionCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(downloadableSubscription, 0);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeStrongInterface(iDownloadSubscriptionCallback);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(downloadableSubscription, 0);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeStrongInterface(iDownloadSubscriptionCallback);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.euicc.IEuiccService
             public void getDownloadableSubscriptionMetadata(int i, int i2, DownloadableSubscription downloadableSubscription, boolean z, boolean z2, IGetDownloadableSubscriptionMetadataCallback iGetDownloadableSubscriptionMetadataCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(downloadableSubscription, 0);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    obtain.writeStrongInterface(iGetDownloadableSubscriptionMetadataCallback);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(downloadableSubscription, 0);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    parcelObtain.writeStrongInterface(iGetDownloadableSubscriptionMetadataCallback);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.euicc.IEuiccService
             public void getEid(int i, IGetEidCallback iGetEidCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iGetEidCallback);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iGetEidCallback);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.euicc.IEuiccService
             public void getOtaStatus(int i, IGetOtaStatusCallback iGetOtaStatusCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iGetOtaStatusCallback);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iGetOtaStatusCallback);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.euicc.IEuiccService
             public void startOtaIfNecessary(int i, IOtaStatusChangedCallback iOtaStatusChangedCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iOtaStatusChangedCallback);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iOtaStatusChangedCallback);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.euicc.IEuiccService
             public void getEuiccProfileInfoList(int i, IGetEuiccProfileInfoListCallback iGetEuiccProfileInfoListCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iGetEuiccProfileInfoListCallback);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iGetEuiccProfileInfoListCallback);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.euicc.IEuiccService
             public void getDefaultDownloadableSubscriptionList(int i, boolean z, IGetDefaultDownloadableSubscriptionListCallback iGetDefaultDownloadableSubscriptionListCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    obtain.writeStrongInterface(iGetDefaultDownloadableSubscriptionListCallback);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeStrongInterface(iGetDefaultDownloadableSubscriptionListCallback);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.euicc.IEuiccService
             public void getEuiccInfo(int i, IGetEuiccInfoCallback iGetEuiccInfoCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iGetEuiccInfoCallback);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iGetEuiccInfoCallback);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.euicc.IEuiccService
             public void deleteSubscription(int i, String str, IDeleteSubscriptionCallback iDeleteSubscriptionCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iDeleteSubscriptionCallback);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iDeleteSubscriptionCallback);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.euicc.IEuiccService
             public void switchToSubscription(int i, int i2, String str, boolean z, ISwitchToSubscriptionCallback iSwitchToSubscriptionCallback, boolean z2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    obtain.writeStrongInterface(iSwitchToSubscriptionCallback);
-                    obtain.writeBoolean(z2);
-                    this.mRemote.transact(10, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeStrongInterface(iSwitchToSubscriptionCallback);
+                    parcelObtain.writeBoolean(z2);
+                    this.mRemote.transact(10, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.euicc.IEuiccService
             public void updateSubscriptionNickname(int i, String str, String str2, IUpdateSubscriptionNicknameCallback iUpdateSubscriptionNicknameCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeStrongInterface(iUpdateSubscriptionNicknameCallback);
-                    this.mRemote.transact(11, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeStrongInterface(iUpdateSubscriptionNicknameCallback);
+                    this.mRemote.transact(11, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.euicc.IEuiccService
             public void eraseSubscriptions(int i, IEraseSubscriptionsCallback iEraseSubscriptionsCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iEraseSubscriptionsCallback);
-                    this.mRemote.transact(12, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iEraseSubscriptionsCallback);
+                    this.mRemote.transact(12, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.euicc.IEuiccService
             public void eraseSubscriptionsWithOptions(int i, int i2, IEraseSubscriptionsCallback iEraseSubscriptionsCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeStrongInterface(iEraseSubscriptionsCallback);
-                    this.mRemote.transact(13, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeStrongInterface(iEraseSubscriptionsCallback);
+                    this.mRemote.transact(13, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.euicc.IEuiccService
             public void retainSubscriptionsForFactoryReset(int i, IRetainSubscriptionsForFactoryResetCallback iRetainSubscriptionsForFactoryResetCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iRetainSubscriptionsForFactoryResetCallback);
-                    this.mRemote.transact(14, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iRetainSubscriptionsForFactoryResetCallback);
+                    this.mRemote.transact(14, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.euicc.IEuiccService
             public void dump(IEuiccServiceDumpResultCallback iEuiccServiceDumpResultCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iEuiccServiceDumpResultCallback);
-                    this.mRemote.transact(15, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iEuiccServiceDumpResultCallback);
+                    this.mRemote.transact(15, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.euicc.IEuiccService
             public void getAvailableMemoryInBytes(int i, IGetAvailableMemoryInBytesCallback iGetAvailableMemoryInBytesCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iGetAvailableMemoryInBytesCallback);
-                    this.mRemote.transact(16, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iGetAvailableMemoryInBytesCallback);
+                    this.mRemote.transact(16, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

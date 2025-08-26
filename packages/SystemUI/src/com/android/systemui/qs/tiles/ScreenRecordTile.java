@@ -1,5 +1,6 @@
 package com.android.systemui.qs.tiles;
 
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
@@ -30,7 +31,6 @@ import com.android.systemui.statusbar.phone.KeyguardDismissUtil;
 import com.android.systemui.statusbar.policy.KeyguardStateController;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class ScreenRecordTile extends QSTileImpl implements RecordingController.RecordingStateChangeCallback {
     public final RecordingController mController;
@@ -42,7 +42,6 @@ public class ScreenRecordTile extends QSTileImpl implements RecordingController.
     public final PanelInteractor mPanelInteractor;
     public final UserContextProvider mUserContextProvider;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Callback implements RecordingController.RecordingStateChangeCallback {
         public /* synthetic */ Callback(ScreenRecordTile screenRecordTile, int i) {
             this();
@@ -90,7 +89,7 @@ public class ScreenRecordTile extends QSTileImpl implements RecordingController.
     }
 
     @Override // com.android.systemui.plugins.qs.QSTile
-    public final boolean getDetailsViewModel(Consumer consumer) {
+    public final boolean getDetailsViewModel(Consumer consumer) throws PendingIntent.CanceledException {
         handleClick(new ScreenRecordTile$$ExternalSyntheticLambda0(this, consumer, 0));
         return true;
     }
@@ -111,7 +110,7 @@ public class ScreenRecordTile extends QSTileImpl implements RecordingController.
     }
 
     @Override // com.android.systemui.qs.tileimpl.QSTileImpl
-    public final void handleClick(Expandable expandable) {
+    public final void handleClick(Expandable expandable) throws PendingIntent.CanceledException {
         handleClick(new ScreenRecordTile$$ExternalSyntheticLambda0(this, expandable, 2));
     }
 
@@ -120,16 +119,16 @@ public class ScreenRecordTile extends QSTileImpl implements RecordingController.
         QSTile.BooleanState booleanState = (QSTile.BooleanState) state;
         RecordingController recordingController = this.mController;
         boolean z = recordingController.mIsStarting;
-        boolean isRecording = recordingController.isRecording();
-        booleanState.value = isRecording || z;
-        booleanState.state = (isRecording || z) ? 2 : 1;
+        boolean zIsRecording = recordingController.isRecording();
+        booleanState.value = zIsRecording || z;
+        booleanState.state = (zIsRecording || z) ? 2 : 1;
         booleanState.label = this.mContext.getString(R.string.quick_settings_screen_record_label);
         int i = booleanState.value ? R.drawable.qs_screen_record_icon_on : R.drawable.qs_screen_record_icon_off;
         int i2 = QsInCompose.$r8$clinit;
         booleanState.icon = QSTileImpl.ResourceIcon.get(i);
         booleanState.forceExpandIcon = booleanState.state == 1;
         booleanState.expandedAccessibilityClassName = Button.class.getName();
-        if (isRecording) {
+        if (zIsRecording) {
             booleanState.secondaryLabel = this.mContext.getString(R.string.quick_settings_screen_record_stop);
             booleanState.expandedAccessibilityClassName = Switch.class.getName();
         } else if (z) {
@@ -151,7 +150,7 @@ public class ScreenRecordTile extends QSTileImpl implements RecordingController.
         return booleanState;
     }
 
-    public final void handleClick(Runnable runnable) {
+    public final void handleClick(Runnable runnable) throws PendingIntent.CanceledException {
         RecordingController recordingController = this.mController;
         if (recordingController.mIsStarting) {
             Log.d("ScreenRecordTile", "Cancelling countdown");

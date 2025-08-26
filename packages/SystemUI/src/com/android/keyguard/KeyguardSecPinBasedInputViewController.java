@@ -48,7 +48,6 @@ import com.android.systemui.wallpaper.WallpaperEventNotifier;
 import com.android.systemui.wallpaper.WallpaperUtils;
 import com.android.systemui.widget.SystemUITextView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardSecPinBasedInputViewController extends KeyguardPinBasedInputViewController implements TextView.OnEditorActionListener, TextWatcher {
     public final AnonymousClass1 mAccessibilityDelegate;
@@ -112,12 +111,12 @@ public class KeyguardSecPinBasedInputViewController extends KeyguardPinBasedInpu
         this.mOnKeyListener = new View.OnKeyListener() { // from class: com.android.keyguard.KeyguardSecPinBasedInputViewController$$ExternalSyntheticLambda7
             @Override // android.view.View.OnKeyListener
             public final boolean onKey(View view, int i, KeyEvent keyEvent) {
-                return KeyguardSecPinBasedInputViewController.$r8$lambda$KEYW3irDfvhoAKb9FW_owagURSw(KeyguardSecPinBasedInputViewController.this, i, keyEvent);
+                return KeyguardSecPinBasedInputViewController.$r8$lambda$KEYW3irDfvhoAKb9FW_owagURSw(this.f$0, i, keyEvent);
             }
         };
         this.mConfigurationListener = new ConfigurationController.ConfigurationListener() { // from class: com.android.keyguard.KeyguardSecPinBasedInputViewController.2
             @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
-            public final void onConfigChanged(Configuration configuration) {
+            public final void onConfigChanged(Configuration configuration) throws Resources.NotFoundException {
                 boolean z = (configuration.uiMode & 32) != 0;
                 KeyguardSecPinBasedInputViewController keyguardSecPinBasedInputViewController = KeyguardSecPinBasedInputViewController.this;
                 if (keyguardSecPinBasedInputViewController.mIsNightModeOn != z) {
@@ -246,7 +245,7 @@ public class KeyguardSecPinBasedInputViewController extends KeyguardPinBasedInpu
                 }
 
                 @Override // android.view.View.OnClickListener
-                public final void onClick(View view3) {
+                public final void onClick(View view3) throws Resources.NotFoundException {
                     int i3 = i2;
                     KeyguardSecPinBasedInputViewController keyguardSecPinBasedInputViewController = this.f$0;
                     switch (i3) {
@@ -298,10 +297,10 @@ public class KeyguardSecPinBasedInputViewController extends KeyguardPinBasedInpu
                 ((ImageButton) this.mOkButton).setScaleType(ImageView.ScaleType.FIT_CENTER);
             }
         }
-        View findViewById = ((KeyguardSecPinBasedInputView) this.mView).findViewById(R.id.delete_button);
-        this.mDeleteButton = findViewById;
-        if (findViewById != null) {
-            findViewById.setVisibility(0);
+        View viewFindViewById = ((KeyguardSecPinBasedInputView) this.mView).findViewById(R.id.delete_button);
+        this.mDeleteButton = viewFindViewById;
+        if (viewFindViewById != null) {
+            viewFindViewById.setVisibility(0);
             this.mDeleteButton.setOnTouchListener(this.mActionButtonTouchListener);
             final int i4 = 1;
             this.mDeleteButton.setOnClickListener(new View.OnClickListener(this) { // from class: com.android.keyguard.KeyguardSecPinBasedInputViewController$$ExternalSyntheticLambda1
@@ -312,7 +311,7 @@ public class KeyguardSecPinBasedInputViewController extends KeyguardPinBasedInpu
                 }
 
                 @Override // android.view.View.OnClickListener
-                public final void onClick(View view3) {
+                public final void onClick(View view3) throws Resources.NotFoundException {
                     int i32 = i4;
                     KeyguardSecPinBasedInputViewController keyguardSecPinBasedInputViewController = this.f$0;
                     switch (i32) {
@@ -361,7 +360,7 @@ public class KeyguardSecPinBasedInputViewController extends KeyguardPinBasedInpu
             this.mDeleteButton.setOnLongClickListener(new View.OnLongClickListener() { // from class: com.android.keyguard.KeyguardSecPinBasedInputViewController$$ExternalSyntheticLambda5
                 @Override // android.view.View.OnLongClickListener
                 public final boolean onLongClick(View view3) {
-                    KeyguardSecPinBasedInputViewController.$r8$lambda$uU6id3dFiGU_1NwKYrhseXInPYo(KeyguardSecPinBasedInputViewController.this);
+                    KeyguardSecPinBasedInputViewController.$r8$lambda$uU6id3dFiGU_1NwKYrhseXInPYo(this.f$0);
                     return true;
                 }
             });
@@ -369,11 +368,11 @@ public class KeyguardSecPinBasedInputViewController extends KeyguardPinBasedInpu
             String string = resources.getString(R.string.kg_keycode_delete);
             View view3 = this.mDeleteButton;
             if (this.mAccessibilityManager.isTouchExplorationEnabled()) {
-                StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(string, ", ");
-                m.append(String.format(resources.getString(R.string.kg_keycode_delete_help_text_to), resources.getString(R.string.kg_keycode_delete_help_text_double_tap), resources.getString(R.string.kg_keycode_delete)));
-                m.append(", ");
-                m.append(String.format(resources.getString(R.string.kg_keycode_delete_help_text_and_hold_to), resources.getString(R.string.kg_keycode_delete_help_text_double_tap), resources.getString(R.string.kg_keycode_delete_all)));
-                string = m.toString();
+                StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(string, ", ");
+                sbM.append(String.format(resources.getString(R.string.kg_keycode_delete_help_text_to), resources.getString(R.string.kg_keycode_delete_help_text_double_tap), resources.getString(R.string.kg_keycode_delete)));
+                sbM.append(", ");
+                sbM.append(String.format(resources.getString(R.string.kg_keycode_delete_help_text_and_hold_to), resources.getString(R.string.kg_keycode_delete_help_text_double_tap), resources.getString(R.string.kg_keycode_delete_all)));
+                string = sbM.toString();
             }
             view3.setContentDescription(string);
             this.mDeleteButton.setOnHoverListener(null);
@@ -405,20 +404,20 @@ public class KeyguardSecPinBasedInputViewController extends KeyguardPinBasedInpu
         boolean z = LsRune.SECURITY_SUB_DISPLAY_LOCK;
         boolean z2 = z && this.mIsMainDisplay && !DeviceState.isSmartViewFitToActiveDisplay();
         Resources resources2 = getResources();
-        int width = z2 ? this.mWindowRect.width() : Math.min(this.mWindowRect.width(), this.mWindowRect.height());
-        int height = this.mWindowRect.height();
+        int iWidth = z2 ? this.mWindowRect.width() : Math.min(this.mWindowRect.width(), this.mWindowRect.height());
+        int iHeight = this.mWindowRect.height();
         float f = resources2.getFloat(DeviceType.isTablet() ? R.dimen.tablet_num_pad_key_size_ratio : !z2 ? !this.mIsMainDisplay ? R.dimen.fold_sub_num_pad_key_size_ratio : R.dimen.num_pad_key_size_ratio : R.dimen.fold_num_pad_key_size_ratio);
         if (z) {
-            StringBuilder m2 = RowView$$ExternalSyntheticOutline0.m("getNumPadKeySize isDualDisplayPolicyAllowed : ", " isFolderClosed : ", z2);
-            m2.append(isFolderClosed());
-            m2.append(" mIsMainDisplay : ");
-            m2.append(this.mIsMainDisplay);
-            m2.append(" ratio : ");
-            m2.append(f);
-            m2.append(" isMultiFoldClosed : true displayWidth : ");
-            KeyguardSecPinBasedInputViewController$$ExternalSyntheticOutline0.m(m2, width, " displayHeight : ", height, "KeyguardSecPinBasedInputViewController");
+            StringBuilder sbM2 = RowView$$ExternalSyntheticOutline0.m("getNumPadKeySize isDualDisplayPolicyAllowed : ", " isFolderClosed : ", z2);
+            sbM2.append(isFolderClosed());
+            sbM2.append(" mIsMainDisplay : ");
+            sbM2.append(this.mIsMainDisplay);
+            sbM2.append(" ratio : ");
+            sbM2.append(f);
+            sbM2.append(" isMultiFoldClosed : true displayWidth : ");
+            KeyguardSecPinBasedInputViewController$$ExternalSyntheticOutline0.m(sbM2, iWidth, " displayHeight : ", iHeight, "KeyguardSecPinBasedInputViewController");
         }
-        int i7 = (int) ((z2 ? height : width) * f);
+        int i7 = (int) ((z2 ? iHeight : iWidth) * f);
         int i8 = (int) (getResources().getFloat(DeviceType.isTablet() ? R.dimen.tablet_num_pad_key_side_margin_ratio : !z2 ? !this.mIsMainDisplay ? R.dimen.fold_sub_num_pad_key_side_margin_ratio : R.dimen.num_pad_key_side_margin_ratio : R.dimen.fold_num_pad_key_side_margin_ratio) * ((DeviceType.isTablet() || z2) ? this.mWindowRect.width() : Math.min(this.mWindowRect.width(), this.mWindowRect.height())));
         for (int i9 = 0; i9 < 10; i9++) {
             View view7 = this.mButtons[i9];
@@ -482,14 +481,14 @@ public class KeyguardSecPinBasedInputViewController extends KeyguardPinBasedInpu
         }
         if (((KeyguardAbsKeyInputViewController) this).mKeyguardUpdateMonitor.isForgotPasswordView()) {
             this.mOriginPinEntryId = this.mPasswordEntry.getId();
-            int generateViewId = View.generateViewId();
-            this.mPasswordEntry.setId(generateViewId);
+            int iGenerateViewId = View.generateViewId();
+            this.mPasswordEntry.setId(iGenerateViewId);
             while (i < 10) {
                 View view12 = this.mButtons[i];
                 if (!(view12 instanceof SecNumPadKey)) {
                     return;
                 }
-                ((SecNumPadKey) view12).mTextViewResId = generateViewId;
+                ((SecNumPadKey) view12).mTextViewResId = iGenerateViewId;
                 i++;
             }
             return;
@@ -511,7 +510,7 @@ public class KeyguardSecPinBasedInputViewController extends KeyguardPinBasedInpu
     }
 
     @Override // android.widget.TextView.OnEditorActionListener
-    public final boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+    public final boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) throws Resources.NotFoundException {
         if (i != 0 && i != 6 && i != 5) {
             return false;
         }
@@ -554,7 +553,7 @@ public class KeyguardSecPinBasedInputViewController extends KeyguardPinBasedInpu
         passwordTextView.mUserActivityListener = new BaseSecPasswordTextView.UserActivityListener() { // from class: com.android.keyguard.KeyguardSecPinBasedInputViewController$$ExternalSyntheticLambda10
             @Override // com.android.keyguard.BaseSecPasswordTextView.UserActivityListener
             public final void onUserActivity() {
-                KeyguardSecPinBasedInputViewController keyguardSecPinBasedInputViewController = KeyguardSecPinBasedInputViewController.this;
+                KeyguardSecPinBasedInputViewController keyguardSecPinBasedInputViewController = this.f$0;
                 keyguardSecPinBasedInputViewController.onUserInput();
                 keyguardSecPinBasedInputViewController.setOkButtonEnabled(true);
             }
@@ -577,8 +576,9 @@ public class KeyguardSecPinBasedInputViewController extends KeyguardPinBasedInpu
 
     @Override // com.android.keyguard.KeyguardPinBasedInputViewController, com.android.keyguard.KeyguardAbsKeyInputViewController
     public void resetState() {
-        super.resetState();
-        ((KeyguardSecPinBasedInputView) this.mView).setPasswordEntryEnabled(true);
+        if (((KeyguardSecPinBasedInputView) this.mView).getVisibility() == 0) {
+            ((KeyguardSecPinBasedInputView) this.mView).setPasswordEntryEnabled(true);
+        }
         PasswordTextView passwordTextView = this.mPasswordEntry;
         if ((passwordTextView instanceof SecPasswordTextView) && ((SecPasswordTextView) passwordTextView).mText.isEmpty()) {
             setOkButtonEnabled(false);
@@ -599,23 +599,23 @@ public class KeyguardSecPinBasedInputViewController extends KeyguardPinBasedInpu
         }
     }
 
-    public final void setOkButtonContentDescription(boolean z, boolean z2) {
+    public final void setOkButtonContentDescription(boolean z, boolean z2) throws Resources.NotFoundException {
         if (this.mOkButton != null) {
             String string = getResources().getString(R.string.kg_keycode_ok);
             if (z2) {
                 this.mOkButton.setContentDescription(string);
                 return;
             }
-            StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(string, ", ");
-            m.append(getResources().getString(R.string.accessibility_button));
-            String sb = m.toString();
+            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(string, ", ");
+            sbM.append(getResources().getString(R.string.accessibility_button));
+            String string2 = sbM.toString();
             View view = this.mOkButton;
             if (!z) {
-                StringBuilder m2 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(sb, ", ");
-                m2.append(getResources().getString(R.string.kg_keycode_ok_disabled));
-                sb = m2.toString();
+                StringBuilder sbM2 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(string2, ", ");
+                sbM2.append(getResources().getString(R.string.kg_keycode_ok_disabled));
+                string2 = sbM2.toString();
             }
-            view.setContentDescription(sb);
+            view.setContentDescription(string2);
         }
     }
 
@@ -643,7 +643,7 @@ public class KeyguardSecPinBasedInputViewController extends KeyguardPinBasedInpu
     }
 
     @Override // com.android.keyguard.KeyguardSecAbsKeyInputViewController
-    public void verifyPasswordAndUnlock() {
+    public void verifyPasswordAndUnlock() throws Resources.NotFoundException {
         super.verifyPasswordAndUnlock();
         setOkButtonEnabled(false);
         setOkButtonContentDescription(false, true);

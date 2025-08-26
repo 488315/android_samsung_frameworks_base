@@ -6,17 +6,23 @@ import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.pm.ServiceInfo;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.metrics.LogMaker;
 import android.net.Uri;
+import android.os.Binder;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Looper;
 import android.os.RemoteException;
 import android.service.quicksettings.IQSTileService;
 import android.service.quicksettings.Tile;
@@ -24,6 +30,7 @@ import android.util.Log;
 import android.view.IWindowManager;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManagerGlobal;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.RemoteViews;
@@ -31,6 +38,7 @@ import android.widget.Switch;
 import androidx.compose.animation.core.TransitionKt$$ExternalSyntheticOutline0;
 import androidx.exifinterface.media.ExifInterface$$ExternalSyntheticOutline0;
 import androidx.slice.widget.RowView$$ExternalSyntheticOutline0;
+import com.android.internal.logging.MetricsLogger;
 import com.android.keyguard.SecurityUtils$$ExternalSyntheticOutline0;
 import com.android.systemui.Dependency;
 import com.android.systemui.QpRune;
@@ -42,12 +50,17 @@ import com.android.systemui.knox.EdmMonitor;
 import com.android.systemui.knox.KnoxStateMonitor;
 import com.android.systemui.knox.KnoxStateMonitorImpl;
 import com.android.systemui.plugins.ActivityStarter;
+import com.android.systemui.plugins.FalsingManager;
 import com.android.systemui.plugins.qs.DetailAdapter;
 import com.android.systemui.plugins.qs.QSTile;
+import com.android.systemui.plugins.statusbar.StatusBarStateController;
 import com.android.systemui.qp.flashlight.SubscreenFlashLightController;
 import com.android.systemui.qp.util.SubscreenUtil;
+import com.android.systemui.qs.QSHost;
+import com.android.systemui.qs.QsEventLogger;
 import com.android.systemui.qs.SecQSPanelResourcePicker;
 import com.android.systemui.qs.external.CustomTile;
+import com.android.systemui.qs.logging.QSLogger;
 import com.android.systemui.qs.pipeline.data.repository.TileNameConverter;
 import com.android.systemui.qs.tileimpl.QSTileImpl;
 import com.android.systemui.qs.tileimpl.SQSTileImpl;
@@ -59,6 +72,7 @@ import com.android.systemui.statusbar.policy.KeyguardStateController;
 import com.android.systemui.statusbar.policy.KeyguardStateControllerImpl;
 import com.android.systemui.util.SettingsHelper;
 import com.android.systemui.util.SystemUIAnalytics;
+import dagger.Lazy;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -66,8 +80,8 @@ import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import org.json.JSONException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class CustomTile extends SQSTileImpl implements CustomTileInterface {
     public final BroadcastDispatcher mBroadcastDispatcher;
@@ -118,15 +132,14 @@ public class CustomTile extends SQSTileImpl implements CustomTileInterface {
     public UserTracker mUserTracker;
     public final IWindowManager mWindowManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CustomDetailAdapter implements DetailAdapter {
         public static final /* synthetic */ int $r8$clinit = 0;
         public final AnonymousClass1 mInteractionHandler = new RemoteViews.InteractionHandler() { // from class: com.android.systemui.qs.external.CustomTile.CustomDetailAdapter.1
             public final boolean onInteraction(View view, PendingIntent pendingIntent, RemoteViews.RemoteResponse remoteResponse) {
-                boolean isActivity = pendingIntent.isActivity();
+                boolean zIsActivity = pendingIntent.isActivity();
                 CustomTile customTile = CustomTile.this;
                 String str = customTile.TAG;
-                if (!isActivity) {
+                if (!zIsActivity) {
                     return RemoteViews.startPendingIntent(view, pendingIntent, remoteResponse.getLaunchOptions(view));
                 }
                 customTile.showDetail$1(false);
@@ -143,29 +156,29 @@ public class CustomTile extends SQSTileImpl implements CustomTileInterface {
 
         @Override // com.android.systemui.plugins.qs.DetailAdapter
         public final View createDetailView(Context context, View view, ViewGroup viewGroup) {
-            RemoteViews semGetDetailView;
+            RemoteViews remoteViewsSemGetDetailView;
             if (this.mService != null) {
                 CustomTile customTile = CustomTile.this;
                 if (customTile.mIsSupportDetailView) {
                     try {
-                        boolean shouldUseArchivedDetailInfo = customTile.shouldUseArchivedDetailInfo();
+                        boolean zShouldUseArchivedDetailInfo = customTile.shouldUseArchivedDetailInfo();
                         TileServiceManager tileServiceManager = customTile.mServiceManager;
-                        if (shouldUseArchivedDetailInfo) {
+                        if (zShouldUseArchivedDetailInfo) {
                             tileServiceManager.setBindRequested(true);
                             this.mService.onStartListening();
-                            semGetDetailView = customTile.mDetailView;
+                            remoteViewsSemGetDetailView = customTile.mDetailView;
                         } else {
-                            semGetDetailView = this.mService.semGetDetailView();
+                            remoteViewsSemGetDetailView = this.mService.semGetDetailView();
                             if (customTile.mIsSecActiveTile) {
-                                customTile.mDetailView = semGetDetailView;
+                                customTile.mDetailView = remoteViewsSemGetDetailView;
                                 tileServiceManager.setBindRequested(true);
                                 this.mService.onStartListening();
                             }
                         }
-                        Log.d(customTile.TAG, "getDetailView remoteViews = " + semGetDetailView);
-                        if (semGetDetailView != null) {
+                        Log.d(customTile.TAG, "getDetailView remoteViews = " + remoteViewsSemGetDetailView);
+                        if (remoteViewsSemGetDetailView != null) {
                             FrameLayout frameLayout = new FrameLayout(context);
-                            frameLayout.addView(semGetDetailView.apply(context, frameLayout, this.mInteractionHandler, null));
+                            frameLayout.addView(remoteViewsSemGetDetailView.apply(context, frameLayout, this.mInteractionHandler, null));
                             return frameLayout;
                         }
                     } catch (RemoteException unused) {
@@ -190,11 +203,11 @@ public class CustomTile extends SQSTileImpl implements CustomTileInterface {
                 return customTile.mSettingsIntent;
             }
             try {
-                Intent semGetSettingsIntent = this.mService.semGetSettingsIntent();
+                Intent intentSemGetSettingsIntent = this.mService.semGetSettingsIntent();
                 if (customTile.mIsSecActiveTile) {
-                    customTile.mSettingsIntent = semGetSettingsIntent;
+                    customTile.mSettingsIntent = intentSemGetSettingsIntent;
                 }
-                return semGetSettingsIntent;
+                return intentSemGetSettingsIntent;
             } catch (RemoteException unused) {
                 return null;
             }
@@ -210,11 +223,11 @@ public class CustomTile extends SQSTileImpl implements CustomTileInterface {
                 return customTile.mDetailViewTitle;
             }
             try {
-                CharSequence semGetDetailViewTitle = this.mService.semGetDetailViewTitle();
+                CharSequence charSequenceSemGetDetailViewTitle = this.mService.semGetDetailViewTitle();
                 if (customTile.mIsSecActiveTile) {
-                    customTile.mDetailViewTitle = semGetDetailViewTitle;
+                    customTile.mDetailViewTitle = charSequenceSemGetDetailViewTitle;
                 }
-                return semGetDetailViewTitle;
+                return charSequenceSemGetDetailViewTitle;
             } catch (RemoteException unused) {
                 return null;
             }
@@ -233,11 +246,11 @@ public class CustomTile extends SQSTileImpl implements CustomTileInterface {
             CustomTile customTile = CustomTile.this;
             if (!customTile.shouldUseArchivedDetailInfo()) {
                 try {
-                    boolean semIsToggleButtonExists = this.mService.semIsToggleButtonExists();
+                    boolean zSemIsToggleButtonExists = this.mService.semIsToggleButtonExists();
                     if (customTile.mIsSecActiveTile) {
-                        customTile.mIsToggleButtonExist = semIsToggleButtonExists;
+                        customTile.mIsToggleButtonExist = zSemIsToggleButtonExists;
                     }
-                    if (semIsToggleButtonExists) {
+                    if (zSemIsToggleButtonExists) {
                         return Boolean.valueOf(this.mService.semIsToggleButtonChecked());
                     }
                 } catch (RemoteException unused) {
@@ -284,7 +297,6 @@ public class CustomTile extends SQSTileImpl implements CustomTileInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SubscreenCustomTileReceiver extends BroadcastReceiver {
         public SubscreenCustomTileReceiver() {
         }
@@ -304,7 +316,6 @@ public class CustomTile extends SQSTileImpl implements CustomTileInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     enum SubscreenSALog {
         /* JADX INFO: Fake field, exist only in values array */
         SUBSCREEN_SCREENRECORDER_TILE("com.samsung.android.app.smartcapture", SystemUIAnalytics.EID_QP_SCREENRECORDER_COVER),
@@ -328,37 +339,99 @@ public class CustomTile extends SQSTileImpl implements CustomTileInterface {
         }
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(19:0|1|2|3|(14:5|6|7|8|9|(1:11)|12|(1:14)(1:32)|15|(1:17)|18|(1:20)|21|(2:23|(1:29)(2:26|27))(1:31))|36|6|7|8|9|(0)|12|(0)(0)|15|(0)|18|(0)|21|(0)(0)) */
-    /* JADX WARN: Code restructure failed: missing block: B:34:0x00d0, code lost:
-    
-        r0 = null;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:11:0x00dd  */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0105  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x0117  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0123  */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x012f  */
-    /* JADX WARN: Removed duplicated region for block: B:31:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x010d  */
     /* JADX WARN: Type inference failed for: r14v4, types: [com.android.systemui.qs.external.CustomTile$2] */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public CustomTile(dagger.Lazy r14, com.android.systemui.qs.QsEventLogger r15, android.os.Looper r16, android.os.Handler r17, com.android.systemui.plugins.FalsingManager r18, com.android.internal.logging.MetricsLogger r19, com.android.systemui.plugins.statusbar.StatusBarStateController r20, com.android.systemui.plugins.ActivityStarter r21, com.android.systemui.qs.logging.QSLogger r22, java.lang.String r23, android.content.Context r24, com.android.systemui.qs.external.CustomTileStatePersister r25, com.android.systemui.qs.external.TileServices r26, com.android.systemui.settings.DisplayTracker r27, android.app.IUriGrantsManager r28, com.android.systemui.settings.UserTracker r29, com.android.systemui.broadcast.BroadcastDispatcher r30, com.android.systemui.keyguard.DisplayLifecycle r31) {
-        /*
-            Method dump skipped, instructions count: 368
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.external.CustomTile.<init>(dagger.Lazy, com.android.systemui.qs.QsEventLogger, android.os.Looper, android.os.Handler, com.android.systemui.plugins.FalsingManager, com.android.internal.logging.MetricsLogger, com.android.systemui.plugins.statusbar.StatusBarStateController, com.android.systemui.plugins.ActivityStarter, com.android.systemui.qs.logging.QSLogger, java.lang.String, android.content.Context, com.android.systemui.qs.external.CustomTileStatePersister, com.android.systemui.qs.external.TileServices, com.android.systemui.settings.DisplayTracker, android.app.IUriGrantsManager, com.android.systemui.settings.UserTracker, com.android.systemui.broadcast.BroadcastDispatcher, com.android.systemui.keyguard.DisplayLifecycle):void");
+    public CustomTile(Lazy lazy, QsEventLogger qsEventLogger, Looper looper, Handler handler, FalsingManager falsingManager, MetricsLogger metricsLogger, StatusBarStateController statusBarStateController, ActivityStarter activityStarter, QSLogger qSLogger, String str, Context context, CustomTileStatePersister customTileStatePersister, TileServices tileServices, DisplayTracker displayTracker, IUriGrantsManager iUriGrantsManager, UserTracker userTracker, BroadcastDispatcher broadcastDispatcher, DisplayLifecycle displayLifecycle) throws PackageManager.NameNotFoundException {
+        Bundle bundle;
+        ApplicationInfo applicationInfo;
+        super((QSHost) lazy.get(), qsEventLogger, looper, handler, falsingManager, metricsLogger, statusBarStateController, activityStarter, qSLogger);
+        this.mToken = new Binder();
+        this.mTileState = -1;
+        this.mUnlockPolicy = "";
+        this.mUserPolicy = "";
+        this.mToggleEnabled = true;
+        this.mInitialDefaultIconFetched = new AtomicBoolean(false);
+        this.mServiceUid = -1;
+        this.mStopUnlockAndRun = new Runnable() { // from class: com.android.systemui.qs.external.CustomTile.2
+            @Override // java.lang.Runnable
+            public final void run() {
+                CustomTile customTile = CustomTile.this;
+                customTile.mIsUnlockAndRun = false;
+                Log.d(customTile.TAG, "mStopUnlockAndRun");
+            }
+        };
+        this.mTileServices = tileServices;
+        this.mWindowManager = WindowManagerGlobal.getWindowManagerService();
+        ComponentName componentNameUnflattenFromString = ComponentName.unflattenFromString(str);
+        this.mComponent = componentNameUnflattenFromString;
+        this.mTile = new Tile();
+        this.mUserContext = context;
+        int userId = context.getUserId();
+        this.mUser = userId;
+        this.mKey = new TileServiceKey(componentNameUnflattenFromString, userId);
+        this.mResourcePicker = (SecQSPanelResourcePicker) Dependency.sDependency.getDependencyInner(SecQSPanelResourcePicker.class);
+        this.mUserTracker = userTracker;
+        PackageManager packageManager = this.mContext.getPackageManager();
+        String str2 = this.TAG;
+        try {
+            applicationInfo = packageManager.getApplicationInfo(componentNameUnflattenFromString.getPackageName(), 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.d(str2, "isSystemApp NameNotFoundException : " + e);
+        } catch (RuntimeException e2) {
+            Log.d(str2, "isSystemApp RuntimeException : " + e2);
+        }
+        boolean zIsSystemApp = applicationInfo != null ? applicationInfo.isSystemApp() : false;
+        this.mIsSystemApp = zIsSystemApp;
+        try {
+            bundle = this.mContext.getPackageManager().getServiceInfo(this.mComponent, 787072).metaData;
+        } catch (PackageManager.NameNotFoundException unused) {
+            bundle = null;
+        }
+        this.mMetaData = bundle;
+        this.mIsSecCustomTile = isSecCustomTile();
+        Bundle bundle2 = this.mMetaData;
+        this.mIsSupportDetailView = bundle2 != null ? bundle2.getBoolean("android.service.quicksettings.SEM_SUPPORT_DETAIL_VIEW", false) : false;
+        this.mIsSecActiveTile = isSecActiveTile();
+        TileServiceManager tileWrapper = tileServices.getTileWrapper(this);
+        this.mServiceManager = tileWrapper;
+        TileLifecycleManager tileLifecycleManager = tileWrapper.mStateManager;
+        this.mService = tileLifecycleManager;
+        this.mCustomTileStatePersister = customTileStatePersister;
+        this.mDisplayTracker = displayTracker;
+        this.mIUriGrantsManager = iUriGrantsManager;
+        if (this.mIsSupportDetailView) {
+            this.mDetailAdapter = new CustomDetailAdapter(tileLifecycleManager);
+        } else {
+            this.mDetailAdapter = null;
+        }
+        tileWrapper.mIsSecCustomTile = this.mIsSecCustomTile;
+        Bundle bundle3 = this.mMetaData;
+        if (bundle3 != null) {
+            this.mUnlockPolicy = bundle3.getString("android.service.quicksettings.SEM_DEFAULT_TILE_UNLOCK_POLICY", "");
+        }
+        Bundle bundle4 = this.mMetaData;
+        if (bundle4 != null) {
+            this.mUserPolicy = bundle4.getString("android.service.quicksettings.SEM_DEFAULT_TILE_USER_POLICY", "");
+        }
+        if (QpRune.QUICK_SUBSCREEN_PANEL) {
+            this.mDisplayLifecycle = displayLifecycle;
+            this.mBroadcastDispatcher = broadcastDispatcher;
+            if (this.mSubscreenCustomTileReceiver != null || broadcastDispatcher == null) {
+                return;
+            }
+            String str3 = "com.android.systemui.qs.external.customTile.unlock." + this.mComponent.getShortClassName();
+            this.mIntentAction = str3;
+            SubscreenCustomTileReceiver subscreenCustomTileReceiver = new SubscreenCustomTileReceiver();
+            this.mSubscreenCustomTileReceiver = subscreenCustomTileReceiver;
+            broadcastDispatcher.registerReceiver(subscreenCustomTileReceiver, new IntentFilter(str3), null, null, 2, null);
+        }
     }
 
     public static ComponentName getComponentFromSpec(String str) {
-        String substring = str.substring(7, str.length() - 1);
-        if (substring.isEmpty()) {
+        String strSubstring = str.substring(7, str.length() - 1);
+        if (strSubstring.isEmpty()) {
             throw new IllegalArgumentException("Empty custom tile spec action");
         }
-        return ComponentName.unflattenFromString(substring);
+        return ComponentName.unflattenFromString(strSubstring);
     }
 
     public static String toSpec(ComponentName componentName) {
@@ -382,10 +455,18 @@ public class CustomTile extends SQSTileImpl implements CustomTileInterface {
             this.mTile.setStateDescription(tile.getStateDescription());
         }
         this.mTile.setActivityLaunchForClick(tile.getActivityLaunchForClick());
-        boolean isSecCustomTile = isSecCustomTile();
+        boolean zIsSecCustomTile = isSecCustomTile();
+        TileLifecycleManager tileLifecycleManager = this.mService;
         String str = this.TAG;
-        if (!isSecCustomTile || isSecActiveTile()) {
+        if (!zIsSecCustomTile || isSecActiveTile()) {
             this.mTile.setState(tile.getState());
+            boolean zContains = this.mContext.getResources().getString(R.string.quick_settings_allow_settings_intent_updates).contains(this.mComponent.flattenToShortString());
+            if (isSecActiveTile() && zContains && tileLifecycleManager != null) {
+                try {
+                    this.mSettingsIntent = tileLifecycleManager.semGetSettingsIntent();
+                } catch (RemoteException unused) {
+                }
+            }
         } else {
             StringBuilder sb = new StringBuilder("NonActiveTile ");
             sb.append((Object) tile.getLabel());
@@ -407,7 +488,6 @@ public class CustomTile extends SQSTileImpl implements CustomTileInterface {
             if (!this.mListening) {
                 try {
                     this.mListening = false;
-                    TileLifecycleManager tileLifecycleManager = this.mService;
                     if (tileLifecycleManager != null) {
                         tileLifecycleManager.onStopListening();
                     }
@@ -415,7 +495,7 @@ public class CustomTile extends SQSTileImpl implements CustomTileInterface {
                     if (tileServiceManager != null) {
                         tileServiceManager.setBindRequested(false);
                     }
-                } catch (RemoteException unused) {
+                } catch (RemoteException unused2) {
                 }
             }
             if (this.mTileState != this.mTile.getState()) {
@@ -470,47 +550,47 @@ public class CustomTile extends SQSTileImpl implements CustomTileInterface {
 
     @Override // com.android.systemui.qs.tileimpl.QSTileImpl
     public final Intent getLongClickIntent() {
-        Intent intent;
-        Intent intent2;
+        Intent intentSemGetSettingsIntent;
+        Intent className;
         if (!this.mIsSupportDetailView) {
             TileLifecycleManager tileLifecycleManager = this.mService;
             if (tileLifecycleManager != null) {
                 try {
                     if (shouldUseArchivedDetailInfo()) {
-                        intent = this.mSettingsIntent;
+                        intentSemGetSettingsIntent = this.mSettingsIntent;
                     } else {
-                        intent = tileLifecycleManager.semGetSettingsIntent();
+                        intentSemGetSettingsIntent = tileLifecycleManager.semGetSettingsIntent();
                         try {
                             if (this.mIsSecActiveTile) {
-                                this.mSettingsIntent = intent;
+                                this.mSettingsIntent = intentSemGetSettingsIntent;
                             }
                         } catch (RemoteException unused) {
                         }
                     }
                 } catch (RemoteException unused2) {
-                    intent = null;
+                    intentSemGetSettingsIntent = null;
                 }
-                if (intent != null) {
-                    return intent;
+                if (intentSemGetSettingsIntent != null) {
+                    return intentSemGetSettingsIntent;
                 }
             }
             if (!this.mIsSecCustomTile) {
-                Intent intent3 = new Intent("android.service.quicksettings.action.QS_TILE_PREFERENCES");
-                intent3.setPackage(this.mComponent.getPackageName());
-                ResolveInfo resolveActivityAsUser = this.mContext.getPackageManager().resolveActivityAsUser(intent3, 0, this.mUser);
-                if (resolveActivityAsUser != null) {
-                    Intent intent4 = new Intent("android.service.quicksettings.action.QS_TILE_PREFERENCES");
-                    ActivityInfo activityInfo = resolveActivityAsUser.activityInfo;
-                    intent2 = intent4.setClassName(activityInfo.packageName, activityInfo.name);
+                Intent intent = new Intent("android.service.quicksettings.action.QS_TILE_PREFERENCES");
+                intent.setPackage(this.mComponent.getPackageName());
+                ResolveInfo resolveInfoResolveActivityAsUser = this.mContext.getPackageManager().resolveActivityAsUser(intent, 0, this.mUser);
+                if (resolveInfoResolveActivityAsUser != null) {
+                    Intent intent2 = new Intent("android.service.quicksettings.action.QS_TILE_PREFERENCES");
+                    ActivityInfo activityInfo = resolveInfoResolveActivityAsUser.activityInfo;
+                    className = intent2.setClassName(activityInfo.packageName, activityInfo.name);
                 } else {
-                    intent2 = null;
+                    className = null;
                 }
-                if (intent2 == null) {
+                if (className == null) {
                     return new Intent("android.settings.APPLICATION_DETAILS_SETTINGS").setData(Uri.fromParts("package", this.mComponent.getPackageName(), null));
                 }
-                intent2.putExtra("android.intent.extra.COMPONENT_NAME", this.mComponent);
-                intent2.putExtra("state", this.mTile.getState());
-                return intent2;
+                className.putExtra("android.intent.extra.COMPONENT_NAME", this.mComponent);
+                className.putExtra("state", this.mTile.getState());
+                return className;
             }
         }
         return null;
@@ -527,7 +607,7 @@ public class CustomTile extends SQSTileImpl implements CustomTileInterface {
     }
 
     @Override // com.android.systemui.qs.external.CustomTileInterface
-    public final Tile getQsTile() {
+    public final Tile getQsTile() throws PackageManager.NameNotFoundException {
         updateDefaultTileAndIcon();
         return this.mTile;
     }
@@ -626,9 +706,9 @@ public class CustomTile extends SQSTileImpl implements CustomTileInterface {
         } catch (RemoteException unused) {
         }
         try {
-            boolean isActiveTile = tileServiceManager.mStateManager.isActiveTile();
+            boolean zIsActiveTile = tileServiceManager.mStateManager.isActiveTile();
             TileLifecycleManager tileLifecycleManager = this.mService;
-            if (isActiveTile) {
+            if (zIsActiveTile) {
                 tileServiceManager.setBindRequested(true);
                 tileLifecycleManager.onStartListening();
             }
@@ -688,107 +768,69 @@ public class CustomTile extends SQSTileImpl implements CustomTileInterface {
         this.mSubscreenCustomTileReceiver = null;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x007e  */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x008a  */
-    /* JADX WARN: Removed duplicated region for block: B:21:? A[RETURN, SYNTHETIC] */
     @Override // com.android.systemui.qs.tileimpl.SQSTileImpl, com.android.systemui.qs.tileimpl.QSTileImpl
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public final void handleInitialize() {
-        /*
-            r7 = this;
-            r7.updateDefaultTileAndIcon()
-            java.util.concurrent.atomic.AtomicBoolean r0 = r7.mInitialDefaultIconFetched
-            r1 = 0
-            r2 = 1
-            boolean r0 = r0.compareAndSet(r1, r2)
-            com.android.systemui.qs.tileimpl.SQSTileImpl$SHandler r2 = r7.mHandler
-            if (r0 == 0) goto L31
-            android.graphics.drawable.Icon r0 = r7.mDefaultIcon
-            if (r0 != 0) goto L31
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder
-            java.lang.String r3 = "No default icon for "
-            r0.<init>(r3)
-            java.lang.String r3 = r7.mTileSpec
-            java.lang.String r4 = ", destroying tile"
-            java.lang.String r0 = androidx.compose.animation.core.TransitionKt$$ExternalSyntheticOutline0.m(r0, r3, r4)
-            java.lang.String r3 = r7.TAG
-            android.util.Log.w(r3, r0)
-            com.android.systemui.qs.external.CustomTile$1 r0 = new com.android.systemui.qs.external.CustomTile$1
-            r0.<init>()
-            r3 = 1000(0x3e8, double:4.94E-321)
-            r2.postDelayed(r0, r3)
-        L31:
-            com.android.systemui.qs.external.TileServiceManager r0 = r7.mServiceManager
-            boolean r3 = r0.isToggleableTile()
-            if (r3 == 0) goto L4d
-            com.android.systemui.plugins.qs.QSTile$State r3 = r7.newTileState()
-            r7.mState = r3
-            com.android.systemui.plugins.qs.QSTile$State r3 = r7.newTileState()
-            r7.mTmpState = r3
-            com.android.systemui.plugins.qs.QSTile$State r4 = r7.mState
-            java.lang.String r5 = r7.mTileSpec
-            r4.spec = r5
-            r3.spec = r5
-        L4d:
-            com.android.systemui.qs.external.TileLifecycleManager r3 = r0.mStateManager
-            r3.mChangeListener = r7
-            boolean r3 = r3.isActiveTile()
-            if (r3 == 0) goto L93
-            com.android.systemui.qs.external.CustomTileStatePersister r3 = r7.mCustomTileStatePersister
-            com.android.systemui.qs.external.CustomTileStatePersisterImpl r3 = (com.android.systemui.qs.external.CustomTileStatePersisterImpl) r3
-            android.content.SharedPreferences r3 = r3.sharedPreferences
-            com.android.systemui.qs.external.TileServiceKey r4 = r7.mKey
-            java.lang.String r4 = r4.string
-            r5 = 0
-            java.lang.String r3 = r3.getString(r4, r5)
-            if (r3 != 0) goto L6a
-        L68:
-            r3 = r5
-            goto L7c
-        L6a:
-            android.service.quicksettings.Tile r3 = com.android.systemui.qs.external.CustomTileStatePersisterKt.readTileFromString(r3)     // Catch: org.json.JSONException -> L6f
-            goto L7c
-        L6f:
-            r4 = move-exception
-            java.lang.String r6 = "Bad saved state: "
-            java.lang.String r3 = r6.concat(r3)
-            java.lang.String r6 = "TileServicePersistence"
-            android.util.Log.e(r6, r3, r4)
-            goto L68
-        L7c:
-            if (r3 == 0) goto L86
-            r7.applyTileState(r3, r1)
-            r0.mPendingBind = r1
-            r7.refreshState(r5)
-        L86:
-            boolean r0 = r7.mIsSecActiveTile
-            if (r0 == 0) goto L93
-            com.android.systemui.qs.external.CustomTile$$ExternalSyntheticLambda1 r0 = new com.android.systemui.qs.external.CustomTile$$ExternalSyntheticLambda1
-            r1 = 3
-            r0.<init>(r7, r1)
-            r2.post(r0)
-        L93:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.external.CustomTile.handleInitialize():void");
+    public final void handleInitialize() throws PackageManager.NameNotFoundException {
+        Tile tileFromString;
+        updateDefaultTileAndIcon();
+        boolean zCompareAndSet = this.mInitialDefaultIconFetched.compareAndSet(false, true);
+        SQSTileImpl.SHandler sHandler = ((SQSTileImpl) this).mHandler;
+        if (zCompareAndSet && this.mDefaultIcon == null) {
+            Log.w(this.TAG, TransitionKt$$ExternalSyntheticOutline0.m(new StringBuilder("No default icon for "), this.mTileSpec, ", destroying tile"));
+            sHandler.postDelayed(new Runnable() { // from class: com.android.systemui.qs.external.CustomTile.1
+                @Override // java.lang.Runnable
+                public final void run() {
+                    CustomTile customTile = CustomTile.this;
+                    customTile.mHost.removeTile(customTile.mTileSpec);
+                }
+            }, 1000L);
+        }
+        TileServiceManager tileServiceManager = this.mServiceManager;
+        if (tileServiceManager.isToggleableTile()) {
+            this.mState = newTileState();
+            QSTile.State stateNewTileState = newTileState();
+            this.mTmpState = stateNewTileState;
+            QSTile.State state = this.mState;
+            String str = this.mTileSpec;
+            state.spec = str;
+            stateNewTileState.spec = str;
+        }
+        TileLifecycleManager tileLifecycleManager = tileServiceManager.mStateManager;
+        tileLifecycleManager.mChangeListener = this;
+        if (tileLifecycleManager.isActiveTile()) {
+            String string = ((CustomTileStatePersisterImpl) this.mCustomTileStatePersister).sharedPreferences.getString(this.mKey.string, null);
+            if (string == null) {
+                tileFromString = null;
+            } else {
+                try {
+                    tileFromString = CustomTileStatePersisterKt.readTileFromString(string);
+                } catch (JSONException e) {
+                    Log.e("TileServicePersistence", "Bad saved state: ".concat(string), e);
+                }
+            }
+            if (tileFromString != null) {
+                applyTileState(tileFromString, false);
+                tileServiceManager.mPendingBind = false;
+                refreshState(null);
+            }
+            if (this.mIsSecActiveTile) {
+                sHandler.post(new CustomTile$$ExternalSyntheticLambda1(this, 3));
+            }
+        }
     }
 
     @Override // com.android.systemui.qs.tileimpl.QSTileImpl
-    public final void handleSetListening(boolean z) {
+    public final void handleSetListening(boolean z) throws PackageManager.NameNotFoundException {
         super.handleSetListening(z);
         if (this.mListening == z) {
             return;
         }
-        StringBuilder m = RowView$$ExternalSyntheticOutline0.m("handleSetListening  ", "  initialized=", z);
-        m.append(this.mInitialized);
-        m.append("  isTileReady=");
-        m.append(isTileReady());
-        m.append("  getTileSpec() = ");
-        m.append(this.mTileSpec);
-        Log.d(this.TAG, m.toString());
+        StringBuilder sbM = RowView$$ExternalSyntheticOutline0.m("handleSetListening  ", "  initialized=", z);
+        sbM.append(this.mInitialized);
+        sbM.append("  isTileReady=");
+        sbM.append(isTileReady());
+        sbM.append("  getTileSpec() = ");
+        sbM.append(this.mTileSpec);
+        Log.d(this.TAG, sbM.toString());
         this.mListening = z;
         boolean z2 = this.mIsSecActiveTile;
         TileServiceManager tileServiceManager = this.mServiceManager;
@@ -831,11 +873,11 @@ public class CustomTile extends SQSTileImpl implements CustomTileInterface {
 
     @Override // com.android.systemui.qs.tileimpl.QSTileImpl
     public final void handleUpdateState(QSTile.State state, Object obj) {
-        final Drawable drawable;
+        final Drawable drawableLoadDrawable;
         int state2 = this.mTile.getState();
-        boolean hasPendingBind = this.mServiceManager.hasPendingBind();
+        boolean zHasPendingBind = this.mServiceManager.hasPendingBind();
         String str = this.TAG;
-        if (hasPendingBind) {
+        if (zHasPendingBind) {
             Log.w(str, "handleUpdateState : hasPendingBind " + ((Object) state.label));
         }
         state.state = state2;
@@ -850,30 +892,30 @@ public class CustomTile extends SQSTileImpl implements CustomTileInterface {
         state.tileClassName = this.mTileClassName;
         state.isCustomTile = true;
         try {
-            drawable = this.mTile.getIcon().loadDrawableCheckingUriGrant(this.mUserContext, this.mIUriGrantsManager, this.mServiceUid, this.mComponent.getPackageName());
+            drawableLoadDrawable = this.mTile.getIcon().loadDrawableCheckingUriGrant(this.mUserContext, this.mIUriGrantsManager, this.mServiceUid, this.mComponent.getPackageName());
         } catch (Exception unused) {
             Log.w(str, "Invalid icon, forcing into unavailable state");
             state.state = 0;
-            drawable = null;
+            drawableLoadDrawable = null;
         }
-        if (drawable == null) {
+        if (drawableLoadDrawable == null) {
             Icon icon = this.mDefaultIcon;
-            drawable = icon != null ? icon.loadDrawable(this.mUserContext) : null;
+            drawableLoadDrawable = icon != null ? icon.loadDrawable(this.mUserContext) : null;
         }
         state.iconSupplier = new Supplier() { // from class: com.android.systemui.qs.external.CustomTile$$ExternalSyntheticLambda3
             @Override // java.util.function.Supplier
             public final Object get() {
                 Drawable.ConstantState constantState;
-                CustomTile customTile = CustomTile.this;
-                Drawable drawable2 = drawable;
+                CustomTile customTile = this.f$0;
+                Drawable drawable = drawableLoadDrawable;
                 customTile.getClass();
-                if (drawable2 == null || (constantState = drawable2.getConstantState()) == null) {
+                if (drawable == null || (constantState = drawable.getConstantState()) == null) {
                     return null;
                 }
                 if (customTile.mIsSecCustomTile) {
                     return new QSTileImpl.DrawableIcon(constantState.newDrawable());
                 }
-                ScalingDrawableWrapper scalingDrawableWrapper = new ScalingDrawableWrapper(drawable2, SecurityUtils$$ExternalSyntheticOutline0.m(customTile.mContext, R.dimen.qs_non_sec_customtile_icon_resize_ratio, customTile.mResourcePicker.getTileIconSize(customTile.mContext) / drawable2.getIntrinsicWidth()));
+                ScalingDrawableWrapper scalingDrawableWrapper = new ScalingDrawableWrapper(drawable, SecurityUtils$$ExternalSyntheticOutline0.m(customTile.mContext, R.dimen.qs_non_sec_customtile_icon_resize_ratio, customTile.mResourcePicker.getTileIconSize(customTile.mContext) / drawable.getIntrinsicWidth()));
                 scalingDrawableWrapper.mCloneDrawable = constantState.newDrawable();
                 return new QSTileImpl.DrawableIcon(scalingDrawableWrapper, customTile.mContext);
             }
@@ -1043,9 +1085,9 @@ public class CustomTile extends SQSTileImpl implements CustomTileInterface {
 
     @Override // com.android.systemui.qs.external.CustomTileInterface
     public final void startActivityAndCollapse(PendingIntent pendingIntent) {
-        boolean isActivity = pendingIntent.isActivity();
+        boolean zIsActivity = pendingIntent.isActivity();
         String str = this.TAG;
-        if (!isActivity) {
+        if (!zIsActivity) {
             Log.i(str, "Intent not for activity.");
             return;
         }
@@ -1073,119 +1115,37 @@ public class CustomTile extends SQSTileImpl implements CustomTileInterface {
         this.mActivityStarter.postQSRunnableDismissingKeyguard(new CustomTile$$ExternalSyntheticLambda1(this, 0));
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0020  */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x002e A[Catch: NameNotFoundException -> 0x00a0, TryCatch #0 {NameNotFoundException -> 0x00a0, blocks: (B:3:0x0001, B:5:0x000b, B:9:0x0016, B:12:0x0025, B:14:0x002e, B:23:0x0040, B:25:0x0047, B:28:0x004e, B:30:0x005a, B:35:0x006f, B:36:0x007b, B:38:0x007f, B:39:0x0084, B:41:0x0097, B:47:0x0021), top: B:2:0x0001 }] */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x006b  */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x006c  */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x006f A[Catch: NameNotFoundException -> 0x00a0, TryCatch #0 {NameNotFoundException -> 0x00a0, blocks: (B:3:0x0001, B:5:0x000b, B:9:0x0016, B:12:0x0025, B:14:0x002e, B:23:0x0040, B:25:0x0047, B:28:0x004e, B:30:0x005a, B:35:0x006f, B:36:0x007b, B:38:0x007f, B:39:0x0084, B:41:0x0097, B:47:0x0021), top: B:2:0x0001 }] */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x007f A[Catch: NameNotFoundException -> 0x00a0, TryCatch #0 {NameNotFoundException -> 0x00a0, blocks: (B:3:0x0001, B:5:0x000b, B:9:0x0016, B:12:0x0025, B:14:0x002e, B:23:0x0040, B:25:0x0047, B:28:0x004e, B:30:0x005a, B:35:0x006f, B:36:0x007b, B:38:0x007f, B:39:0x0084, B:41:0x0097, B:47:0x0021), top: B:2:0x0001 }] */
-    /* JADX WARN: Removed duplicated region for block: B:41:0x0097 A[Catch: NameNotFoundException -> 0x00a0, TRY_LEAVE, TryCatch #0 {NameNotFoundException -> 0x00a0, blocks: (B:3:0x0001, B:5:0x000b, B:9:0x0016, B:12:0x0025, B:14:0x002e, B:23:0x0040, B:25:0x0047, B:28:0x004e, B:30:0x005a, B:35:0x006f, B:36:0x007b, B:38:0x007f, B:39:0x0084, B:41:0x0097, B:47:0x0021), top: B:2:0x0001 }] */
-    /* JADX WARN: Removed duplicated region for block: B:45:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:46:0x007a  */
-    /* JADX WARN: Removed duplicated region for block: B:47:0x0021 A[Catch: NameNotFoundException -> 0x00a0, TryCatch #0 {NameNotFoundException -> 0x00a0, blocks: (B:3:0x0001, B:5:0x000b, B:9:0x0016, B:12:0x0025, B:14:0x002e, B:23:0x0040, B:25:0x0047, B:28:0x004e, B:30:0x005a, B:35:0x006f, B:36:0x007b, B:38:0x007f, B:39:0x0084, B:41:0x0097, B:47:0x0021), top: B:2:0x0001 }] */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public final void updateDefaultTileAndIcon() {
-        /*
-            r10 = this;
-            r0 = 0
-            android.content.Context r1 = r10.mUserContext     // Catch: android.content.pm.PackageManager.NameNotFoundException -> La0
-            android.content.pm.PackageManager r1 = r1.getPackageManager()     // Catch: android.content.pm.PackageManager.NameNotFoundException -> La0
-            boolean r2 = r10.mIsSystemApp     // Catch: android.content.pm.PackageManager.NameNotFoundException -> La0
-            if (r2 != 0) goto L13
-            boolean r2 = r10.mIsSecCustomTile     // Catch: android.content.pm.PackageManager.NameNotFoundException -> La0
-            if (r2 == 0) goto L10
-            goto L13
-        L10:
-            r2 = 4980736(0x4c0000, float:6.979498E-39)
-            goto L16
-        L13:
-            r2 = 4981248(0x4c0200, float:6.980215E-39)
-        L16:
-            android.content.ComponentName r3 = r10.mComponent     // Catch: android.content.pm.PackageManager.NameNotFoundException -> La0
-            android.content.pm.ServiceInfo r2 = r1.getServiceInfo(r3, r2)     // Catch: android.content.pm.PackageManager.NameNotFoundException -> La0
-            int r3 = r2.icon     // Catch: android.content.pm.PackageManager.NameNotFoundException -> La0
-            if (r3 == 0) goto L21
-            goto L25
-        L21:
-            android.content.pm.ApplicationInfo r3 = r2.applicationInfo     // Catch: android.content.pm.PackageManager.NameNotFoundException -> La0
-            int r3 = r3.icon     // Catch: android.content.pm.PackageManager.NameNotFoundException -> La0
-        L25:
-            android.service.quicksettings.Tile r4 = r10.mTile     // Catch: android.content.pm.PackageManager.NameNotFoundException -> La0
-            android.graphics.drawable.Icon r4 = r4.getIcon()     // Catch: android.content.pm.PackageManager.NameNotFoundException -> La0
-            r5 = 1
-            if (r4 == 0) goto L6d
-            android.service.quicksettings.Tile r4 = r10.mTile     // Catch: android.content.pm.PackageManager.NameNotFoundException -> La0
-            android.graphics.drawable.Icon r4 = r4.getIcon()     // Catch: android.content.pm.PackageManager.NameNotFoundException -> La0
-            android.graphics.drawable.Icon r6 = r10.mDefaultIcon     // Catch: android.content.pm.PackageManager.NameNotFoundException -> La0
-            r7 = 0
-            if (r4 != r6) goto L3b
-        L39:
-            r4 = r5
-            goto L69
-        L3b:
-            if (r4 == 0) goto L58
-            if (r6 != 0) goto L40
-            goto L58
-        L40:
-            int r8 = r4.getType()     // Catch: android.content.pm.PackageManager.NameNotFoundException -> La0
-            r9 = 2
-            if (r8 != r9) goto L58
-            int r8 = r6.getType()     // Catch: android.content.pm.PackageManager.NameNotFoundException -> La0
-            if (r8 == r9) goto L4e
-            goto L58
-        L4e:
-            int r8 = r4.getResId()     // Catch: android.content.pm.PackageManager.NameNotFoundException -> La0
-            int r9 = r6.getResId()     // Catch: android.content.pm.PackageManager.NameNotFoundException -> La0
-            if (r8 == r9) goto L5a
-        L58:
-            r4 = r7
-            goto L69
-        L5a:
-            java.lang.String r4 = r4.getResPackage()     // Catch: android.content.pm.PackageManager.NameNotFoundException -> La0
-            java.lang.String r6 = r6.getResPackage()     // Catch: android.content.pm.PackageManager.NameNotFoundException -> La0
-            boolean r4 = java.util.Objects.equals(r4, r6)     // Catch: android.content.pm.PackageManager.NameNotFoundException -> La0
-            if (r4 != 0) goto L39
-            goto L58
-        L69:
-            if (r4 == 0) goto L6c
-            goto L6d
-        L6c:
-            r5 = r7
-        L6d:
-            if (r3 == 0) goto L7a
-            android.content.ComponentName r4 = r10.mComponent     // Catch: android.content.pm.PackageManager.NameNotFoundException -> La0
-            java.lang.String r4 = r4.getPackageName()     // Catch: android.content.pm.PackageManager.NameNotFoundException -> La0
-            android.graphics.drawable.Icon r3 = android.graphics.drawable.Icon.createWithResource(r4, r3)     // Catch: android.content.pm.PackageManager.NameNotFoundException -> La0
-            goto L7b
-        L7a:
-            r3 = r0
-        L7b:
-            r10.mDefaultIcon = r3     // Catch: android.content.pm.PackageManager.NameNotFoundException -> La0
-            if (r5 == 0) goto L84
-            android.service.quicksettings.Tile r4 = r10.mTile     // Catch: android.content.pm.PackageManager.NameNotFoundException -> La0
-            r4.setIcon(r3)     // Catch: android.content.pm.PackageManager.NameNotFoundException -> La0
-        L84:
-            java.lang.CharSequence r1 = r2.loadLabel(r1)     // Catch: android.content.pm.PackageManager.NameNotFoundException -> La0
-            r10.mDefaultLabel = r1     // Catch: android.content.pm.PackageManager.NameNotFoundException -> La0
-            android.service.quicksettings.Tile r2 = r10.mTile     // Catch: android.content.pm.PackageManager.NameNotFoundException -> La0
-            r2.setDefaultLabel(r1)     // Catch: android.content.pm.PackageManager.NameNotFoundException -> La0
-            android.service.quicksettings.Tile r1 = r10.mTile     // Catch: android.content.pm.PackageManager.NameNotFoundException -> La0
-            java.lang.CharSequence r1 = r1.getLabel()     // Catch: android.content.pm.PackageManager.NameNotFoundException -> La0
-            if (r1 == 0) goto La4
-            java.lang.CharSequence r1 = r10.mDefaultLabel     // Catch: android.content.pm.PackageManager.NameNotFoundException -> La0
-            java.lang.String r1 = r1.toString()     // Catch: android.content.pm.PackageManager.NameNotFoundException -> La0
-            r10.mSearchTitle = r1     // Catch: android.content.pm.PackageManager.NameNotFoundException -> La0
-            return
-        La0:
-            r10.mDefaultIcon = r0
-            r10.mDefaultLabel = r0
-        La4:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.external.CustomTile.updateDefaultTileAndIcon():void");
+    public final void updateDefaultTileAndIcon() throws PackageManager.NameNotFoundException {
+        try {
+            PackageManager packageManager = this.mUserContext.getPackageManager();
+            ServiceInfo serviceInfo = packageManager.getServiceInfo(this.mComponent, (this.mIsSystemApp || this.mIsSecCustomTile) ? 4981248 : 4980736);
+            int i = serviceInfo.icon;
+            if (i == 0) {
+                i = serviceInfo.applicationInfo.icon;
+            }
+            boolean z = true;
+            if (this.mTile.getIcon() != null) {
+                Icon icon = this.mTile.getIcon();
+                Icon icon2 = this.mDefaultIcon;
+                if (!(icon == icon2 || (icon != null && icon2 != null && icon.getType() == 2 && icon2.getType() == 2 && icon.getResId() == icon2.getResId() && Objects.equals(icon.getResPackage(), icon2.getResPackage())))) {
+                    z = false;
+                }
+            }
+            Icon iconCreateWithResource = i != 0 ? Icon.createWithResource(this.mComponent.getPackageName(), i) : null;
+            this.mDefaultIcon = iconCreateWithResource;
+            if (z) {
+                this.mTile.setIcon(iconCreateWithResource);
+            }
+            CharSequence charSequenceLoadLabel = serviceInfo.loadLabel(packageManager);
+            this.mDefaultLabel = charSequenceLoadLabel;
+            this.mTile.setDefaultLabel(charSequenceLoadLabel);
+            if (this.mTile.getLabel() != null) {
+                this.mSearchTitle = this.mDefaultLabel.toString();
+            }
+        } catch (PackageManager.NameNotFoundException unused) {
+            this.mDefaultIcon = null;
+            this.mDefaultLabel = null;
+        }
     }
 
     @Override // com.android.systemui.qs.external.CustomTileInterface

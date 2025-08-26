@@ -3,11 +3,16 @@ package com.android.systemui.kairos;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import kotlin.KotlinNothingValueException;
+import kotlin.ResultKt;
+import kotlin.Unit;
 import kotlin.collections.CollectionsKt__IterablesKt;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.MutableStateFlow;
 import kotlinx.coroutines.flow.StateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class BuildScope$toStateFlow$2 implements StateFlow {
     public final /* synthetic */ MutableStateFlow $innerStateFlow;
@@ -16,59 +21,45 @@ public final class BuildScope$toStateFlow$2 implements StateFlow {
         this.$innerStateFlow = mutableStateFlow;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     @Override // kotlinx.coroutines.flow.Flow
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object collect(final kotlinx.coroutines.flow.FlowCollector r5, kotlin.coroutines.Continuation r6) {
-        /*
-            r4 = this;
-            boolean r0 = r6 instanceof com.android.systemui.kairos.BuildScope$toStateFlow$2$collect$1
-            if (r0 == 0) goto L13
-            r0 = r6
-            com.android.systemui.kairos.BuildScope$toStateFlow$2$collect$1 r0 = (com.android.systemui.kairos.BuildScope$toStateFlow$2$collect$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.systemui.kairos.BuildScope$toStateFlow$2$collect$1 r0 = new com.android.systemui.kairos.BuildScope$toStateFlow$2$collect$1
-            r0.<init>(r4, r6)
-        L18:
-            java.lang.Object r6 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L2f
-            if (r2 == r3) goto L2b
-            java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-            java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-            r4.<init>(r5)
-            throw r4
-        L2b:
-            kotlin.ResultKt.throwOnFailure(r6)
-            goto L42
-        L2f:
-            kotlin.ResultKt.throwOnFailure(r6)
-            com.android.systemui.kairos.BuildScope$toStateFlow$2$collect$2 r6 = new com.android.systemui.kairos.BuildScope$toStateFlow$2$collect$2
-            r6.<init>()
-            r0.label = r3
-            kotlinx.coroutines.flow.MutableStateFlow r4 = r4.$innerStateFlow
-            java.lang.Object r4 = r4.collect(r6, r0)
-            if (r4 != r1) goto L42
-            return r1
-        L42:
-            kotlin.KotlinNothingValueException r4 = new kotlin.KotlinNothingValueException
-            r4.<init>()
-            throw r4
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.kairos.BuildScope$toStateFlow$2.collect(kotlinx.coroutines.flow.FlowCollector, kotlin.coroutines.Continuation):java.lang.Object");
+    public final Object collect(final FlowCollector flowCollector, Continuation continuation) {
+        BuildScope$toStateFlow$2$collect$1 buildScope$toStateFlow$2$collect$1;
+        if (continuation instanceof BuildScope$toStateFlow$2$collect$1) {
+            buildScope$toStateFlow$2$collect$1 = (BuildScope$toStateFlow$2$collect$1) continuation;
+            int i = buildScope$toStateFlow$2$collect$1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                buildScope$toStateFlow$2$collect$1.label = i - Integer.MIN_VALUE;
+            } else {
+                buildScope$toStateFlow$2$collect$1 = new BuildScope$toStateFlow$2$collect$1(this, continuation);
+            }
+        }
+        Object obj = buildScope$toStateFlow$2$collect$1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = buildScope$toStateFlow$2$collect$1.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(obj);
+            FlowCollector flowCollector2 = new FlowCollector() { // from class: com.android.systemui.kairos.BuildScope$toStateFlow$2$collect$2
+                @Override // kotlinx.coroutines.flow.FlowCollector
+                public final Object emit(Object obj2, Continuation continuation2) {
+                    Object objEmit = flowCollector.emit(((DeferredValue) obj2).unwrapped.getValue(), continuation2);
+                    return objEmit == CoroutineSingletons.COROUTINE_SUSPENDED ? objEmit : Unit.INSTANCE;
+                }
+            };
+            buildScope$toStateFlow$2$collect$1.label = 1;
+            if (this.$innerStateFlow.collect(flowCollector2, buildScope$toStateFlow$2$collect$1) == coroutineSingletons) {
+                return coroutineSingletons;
+            }
+        } else {
+            if (i2 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+        }
+        throw new KotlinNothingValueException();
     }
 
     @Override // kotlinx.coroutines.flow.SharedFlow

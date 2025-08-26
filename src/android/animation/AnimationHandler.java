@@ -38,7 +38,7 @@ public class AnimationHandler {
     private Choreographer.FrameCallback mPauser = new Choreographer.FrameCallback() { // from class: android.animation.AnimationHandler$$ExternalSyntheticLambda0
         @Override // android.view.Choreographer.FrameCallback
         public final void doFrame(long j) {
-            AnimationHandler.this.lambda$new$0(j);
+            this.f$0.lambda$new$0(j);
         }
     };
 
@@ -116,7 +116,7 @@ public class AnimationHandler {
     }
 
     private void requestAnimatorsEnabledImpl(boolean z, Object obj) {
-        boolean isEmpty = this.mAnimatorRequestors.isEmpty();
+        boolean zIsEmpty = this.mAnimatorRequestors.isEmpty();
         setAnimatorPausingEnabled(isPauseBgAnimationsEnabledInSystemProperties());
         synchronized (this.mAnimatorRequestors) {
             if (z) {
@@ -146,9 +146,9 @@ public class AnimationHandler {
             resumeAnimators();
             return;
         }
-        boolean isEmpty2 = this.mAnimatorRequestors.isEmpty();
-        if (isEmpty != isEmpty2) {
-            if (!isEmpty2) {
+        boolean zIsEmpty2 = this.mAnimatorRequestors.isEmpty();
+        if (zIsEmpty != zIsEmpty2) {
+            if (!zIsEmpty2) {
                 resumeAnimators();
             } else {
                 Choreographer.getInstance().postFrameCallbackDelayed(this.mPauser, Animator.getBackgroundPauseDelay());
@@ -219,9 +219,9 @@ public class AnimationHandler {
     public void removeCallback(AnimationFrameCallback animationFrameCallback) {
         this.mCommitCallbacks.remove(animationFrameCallback);
         this.mDelayedCallbackStartTime.remove(animationFrameCallback);
-        int indexOf = this.mAnimationCallbacks.indexOf(animationFrameCallback);
-        if (indexOf >= 0) {
-            this.mAnimationCallbacks.set(indexOf, null);
+        int iIndexOf = this.mAnimationCallbacks.indexOf(animationFrameCallback);
+        if (iIndexOf >= 0) {
+            this.mAnimationCallbacks.set(iIndexOf, null);
             this.mListDirty = true;
         }
     }
@@ -249,7 +249,7 @@ public class AnimationHandler {
         getProvider().postFrameCallback(new Choreographer.FrameCallback() { // from class: android.animation.AnimationHandler$$ExternalSyntheticLambda1
             @Override // android.view.Choreographer.FrameCallback
             public final void doFrame(long j) {
-                AnimationHandler.this.lambda$postEndAnimationCallback$1(choreographer, j);
+                this.f$0.lambda$postEndAnimationCallback$1(choreographer, j);
             }
         });
     }
@@ -273,11 +273,11 @@ public class AnimationHandler {
 
     /* JADX INFO: Access modifiers changed from: private */
     public void doAnimationFrame(long j) {
-        long uptimeMillis = SystemClock.uptimeMillis();
+        long jUptimeMillis = SystemClock.uptimeMillis();
         int size = this.mAnimationCallbacks.size();
         for (int i = 0; i < size; i++) {
             final AnimationFrameCallback animationFrameCallback = this.mAnimationCallbacks.get(i);
-            if (animationFrameCallback != null && isCallbackDue(animationFrameCallback, uptimeMillis)) {
+            if (animationFrameCallback != null && isCallbackDue(animationFrameCallback, jUptimeMillis)) {
                 animationFrameCallback.doAnimationFrame(j);
                 if (this.mCommitCallbacks.contains(animationFrameCallback)) {
                     getProvider().postCommitCallback(new Runnable() { // from class: android.animation.AnimationHandler.2

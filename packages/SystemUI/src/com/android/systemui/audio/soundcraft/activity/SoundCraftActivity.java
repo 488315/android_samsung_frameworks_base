@@ -14,12 +14,17 @@ import com.android.systemui.audio.soundcraft.SoundCraftCoverView;
 import com.android.systemui.audio.soundcraft.utils.SoundCraftSALogging;
 import javax.inject.Provider;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SoundCraftActivity extends Activity {
     public static final /* synthetic */ int $r8$clinit = 0;
-    public SoundCraftActivity$onCreate$3 actionScreenReceiver;
+    public AnonymousClass3 actionScreenReceiver;
     public final Provider controller;
+
+    /* renamed from: com.android.systemui.audio.soundcraft.activity.SoundCraftActivity$onCreate$5, reason: invalid class name */
+    public final class AnonymousClass5 {
+        public AnonymousClass5() {
+        }
+    }
 
     public SoundCraftActivity(Provider provider) {
         this.controller = provider;
@@ -35,9 +40,9 @@ public final class SoundCraftActivity extends Activity {
             display = null;
         }
         if (display == null) {
-            SoundCraftActivity$onCreate$3 soundCraftActivity$onCreate$3 = this.actionScreenReceiver;
-            if (soundCraftActivity$onCreate$3 != null) {
-                unregisterReceiver(soundCraftActivity$onCreate$3);
+            AnonymousClass3 anonymousClass3 = this.actionScreenReceiver;
+            if (anonymousClass3 != null) {
+                unregisterReceiver(anonymousClass3);
                 this.actionScreenReceiver = null;
             }
             finish();
@@ -51,14 +56,14 @@ public final class SoundCraftActivity extends Activity {
         ((SoundCraftCoverView) obj).getClass();
         setContentView((View) obj);
         setShowWhenLocked(true);
-        ?? r0 = new BroadcastReceiver() { // from class: com.android.systemui.audio.soundcraft.activity.SoundCraftActivity$onCreate$3
+        ?? r0 = new BroadcastReceiver() { // from class: com.android.systemui.audio.soundcraft.activity.SoundCraftActivity.onCreate.3
             @Override // android.content.BroadcastReceiver
             public final void onReceive(Context context, Intent intent) {
                 SoundCraftActivity soundCraftActivity = SoundCraftActivity.this;
                 int i = SoundCraftActivity.$r8$clinit;
-                SoundCraftActivity$onCreate$3 soundCraftActivity$onCreate$32 = soundCraftActivity.actionScreenReceiver;
-                if (soundCraftActivity$onCreate$32 != null) {
-                    soundCraftActivity.unregisterReceiver(soundCraftActivity$onCreate$32);
+                AnonymousClass3 anonymousClass32 = soundCraftActivity.actionScreenReceiver;
+                if (anonymousClass32 != null) {
+                    soundCraftActivity.unregisterReceiver(anonymousClass32);
                     soundCraftActivity.actionScreenReceiver = null;
                 }
                 SoundCraftActivity.this.finish();
@@ -66,7 +71,7 @@ public final class SoundCraftActivity extends Activity {
         };
         registerReceiver(r0, new IntentFilter("android.intent.action.SCREEN_OFF"));
         this.actionScreenReceiver = r0;
-        ((SoundCraftCoverController) provider.get()).listener = new SoundCraftActivity$onCreate$5(this);
+        ((SoundCraftCoverController) provider.get()).listener = new AnonymousClass5();
         WindowManager.LayoutParams attributes = getWindow().getAttributes();
         if (attributes != null) {
             attributes.semSetScreenTimeout(6000L);

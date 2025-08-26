@@ -5,11 +5,9 @@ import android.text.Layout;
 import androidx.compose.ui.text.android.TextAndroidCanvas;
 import androidx.compose.ui.text.android.TextLayout_androidKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class IndentationFixSpan_androidKt {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -24,23 +22,23 @@ public abstract class IndentationFixSpan_androidKt {
     }
 
     public static final float getEllipsizedLeftPadding(Layout layout, int i, Paint paint) {
-        float abs;
+        float fAbs;
         float width;
         float lineLeft = layout.getLineLeft(i);
         TextAndroidCanvas textAndroidCanvas = TextLayout_androidKt.SharedTextAndroidCanvas;
         if (layout.getEllipsisCount(i) <= 0 || layout.getParagraphDirection(i) != 1 || lineLeft >= 0.0f) {
             return 0.0f;
         }
-        float measureText = paint.measureText("…") + (layout.getPrimaryHorizontal(layout.getEllipsisStart(i) + layout.getLineStart(i)) - lineLeft);
+        float fMeasureText = paint.measureText("…") + (layout.getPrimaryHorizontal(layout.getEllipsisStart(i) + layout.getLineStart(i)) - lineLeft);
         Layout.Alignment paragraphAlignment = layout.getParagraphAlignment(i);
         if ((paragraphAlignment == null ? -1 : WhenMappings.$EnumSwitchMapping$0[paragraphAlignment.ordinal()]) == 1) {
-            abs = Math.abs(lineLeft);
-            width = (layout.getWidth() - measureText) / 2.0f;
+            fAbs = Math.abs(lineLeft);
+            width = (layout.getWidth() - fMeasureText) / 2.0f;
         } else {
-            abs = Math.abs(lineLeft);
-            width = layout.getWidth() - measureText;
+            fAbs = Math.abs(lineLeft);
+            width = layout.getWidth() - fMeasureText;
         }
-        return width + abs;
+        return width + fAbs;
     }
 
     public static final float getEllipsizedRightPadding(Layout layout, int i, Paint paint) {
@@ -53,14 +51,14 @@ public abstract class IndentationFixSpan_androidKt {
         if (layout.getParagraphDirection(i) != -1 || layout.getWidth() >= layout.getLineRight(i)) {
             return 0.0f;
         }
-        float measureText = paint.measureText("…") + (layout.getLineRight(i) - layout.getPrimaryHorizontal(layout.getEllipsisStart(i) + layout.getLineStart(i)));
+        float fMeasureText = paint.measureText("…") + (layout.getLineRight(i) - layout.getPrimaryHorizontal(layout.getEllipsisStart(i) + layout.getLineStart(i)));
         Layout.Alignment paragraphAlignment = layout.getParagraphAlignment(i);
         if ((paragraphAlignment != null ? WhenMappings.$EnumSwitchMapping$0[paragraphAlignment.ordinal()] : -1) == 1) {
             width = layout.getWidth() - layout.getLineRight(i);
-            width2 = (layout.getWidth() - measureText) / 2.0f;
+            width2 = (layout.getWidth() - fMeasureText) / 2.0f;
         } else {
             width = layout.getWidth() - layout.getLineRight(i);
-            width2 = layout.getWidth() - measureText;
+            width2 = layout.getWidth() - fMeasureText;
         }
         return width - width2;
     }

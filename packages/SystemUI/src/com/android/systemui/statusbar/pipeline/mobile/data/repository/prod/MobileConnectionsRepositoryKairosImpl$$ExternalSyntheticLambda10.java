@@ -24,7 +24,6 @@ import kotlin.collections.CollectionsKt__IterablesKt;
 import kotlin.collections.MapsKt__MapsJVMKt;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class MobileConnectionsRepositoryKairosImpl$$ExternalSyntheticLambda10 implements Function2 {
     public final /* synthetic */ int $r8$classId;
@@ -52,11 +51,11 @@ public final /* synthetic */ class MobileConnectionsRepositoryKairosImpl$$Extern
             case 4:
                 int i5 = MobileConnectionsRepositoryKairosImpl.$r8$clinit;
                 List list = (List) obj2;
-                int mapCapacity = MapsKt__MapsJVMKt.mapCapacity(CollectionsKt__IterablesKt.collectionSizeOrDefault(list, 10));
-                if (mapCapacity < 16) {
-                    mapCapacity = 16;
+                int iMapCapacity = MapsKt__MapsJVMKt.mapCapacity(CollectionsKt__IterablesKt.collectionSizeOrDefault(list, 10));
+                if (iMapCapacity < 16) {
+                    iMapCapacity = 16;
                 }
-                LinkedHashMap linkedHashMap = new LinkedHashMap(mapCapacity);
+                LinkedHashMap linkedHashMap = new LinkedHashMap(iMapCapacity);
                 for (Object obj3 : list) {
                     linkedHashMap.put(Integer.valueOf(((SubscriptionModel) obj3).subscriptionId), obj3);
                 }
@@ -67,9 +66,9 @@ public final /* synthetic */ class MobileConnectionsRepositoryKairosImpl$$Extern
             case 6:
                 int i7 = MobileConnectionsRepositoryKairosImpl.$r8$clinit;
                 int intExtra = ((Intent) obj).getIntExtra("subscription", -1);
-                Integer valueOf = Integer.valueOf(intExtra);
+                Integer numValueOf = Integer.valueOf(intExtra);
                 if (intExtra != -1) {
-                    return valueOf;
+                    return numValueOf;
                 }
                 return null;
             case 7:
@@ -95,9 +94,9 @@ public final /* synthetic */ class MobileConnectionsRepositoryKairosImpl$$Extern
                 for (Map.Entry entry : map.entrySet()) {
                     linkedHashMap2.put(entry.getKey(), ((MobileConnectionRepositoryKairos) entry.getValue()).isInEcmMode());
                 }
-                Set<Map.Entry> entrySet = linkedHashMap2.entrySet();
-                ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(entrySet, 10));
-                for (Map.Entry entry2 : entrySet) {
+                Set<Map.Entry> setEntrySet = linkedHashMap2.entrySet();
+                ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(setEntrySet, 10));
+                for (Map.Entry entry2 : setEntrySet) {
                     final Object key = entry2.getKey();
                     arrayList.add(StateKt.map((State) entry2.getValue(), new Function2() { // from class: com.android.systemui.kairos.CombineKt$$ExternalSyntheticLambda7
                         @Override // kotlin.jvm.functions.Function2
@@ -109,18 +108,18 @@ public final /* synthetic */ class MobileConnectionsRepositoryKairosImpl$$Extern
                 return StateKt.map(StateKt.map(new StateInit(new Init("combine", new CombineKt$$ExternalSyntheticLambda3((Iterable) arrayList))), new CombineKt$$ExternalSyntheticLambda8()), new MobileConnectionsRepositoryKairosImpl$$ExternalSyntheticLambda10(11));
             default:
                 int i12 = MobileConnectionsRepositoryKairosImpl.$r8$clinit;
-                Collection values = ((Map) obj2).values();
-                if (!(values instanceof Collection) || !values.isEmpty()) {
-                    Iterator it = values.iterator();
+                Collection collectionValues = ((Map) obj2).values();
+                if (!(collectionValues instanceof Collection) || !collectionValues.isEmpty()) {
+                    Iterator it = collectionValues.iterator();
                     while (true) {
                         if (it.hasNext()) {
                             if (((Boolean) it.next()).booleanValue()) {
-                                r3 = true;
+                                z = true;
                             }
                         }
                     }
                 }
-                return Boolean.valueOf(r3);
+                return Boolean.valueOf(z);
         }
     }
 }

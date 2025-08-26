@@ -17,7 +17,6 @@ import com.sec.ims.configuration.DATA;
 import java.util.HashMap;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class EnhancedAttestationPolicy {
     public static final String EA_BIND_ACTION = "com.samsung.android.knox.intent.action.BIND_KNOX_EA_SERVICE";
@@ -48,7 +47,6 @@ public class EnhancedAttestationPolicy {
     public IEnhancedAttestation mEnhancedAttestation = null;
     public boolean mProcessPendingRequest = false;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class RequestInfo {
         public String mAuk;
         public EnhancedAttestationPolicyCallback mCb;
@@ -68,16 +66,14 @@ public class EnhancedAttestationPolicy {
     }
 
     public static synchronized EnhancedAttestationPolicy getInstance(Context context) {
-        synchronized (EnhancedAttestationPolicy.class) {
-            if (context == null) {
-                Log.e(TAG, "context is null");
-                return null;
-            }
-            if (mEaPolicy == null) {
-                mEaPolicy = new EnhancedAttestationPolicy(context);
-            }
-            return mEaPolicy;
+        if (context == null) {
+            Log.e(TAG, "context is null");
+            return null;
         }
+        if (mEaPolicy == null) {
+            mEaPolicy = new EnhancedAttestationPolicy(context);
+        }
+        return mEaPolicy;
     }
 
     public static int getKnoxVersion() {
@@ -111,9 +107,9 @@ public class EnhancedAttestationPolicy {
                 Intent intent = new Intent();
                 intent.setClassName(EA_PACKAGE_NAME, EA_PACKAGE_CLASS);
                 intent.setAction(EA_BIND_ACTION);
-                boolean bindServiceAsUser = this.mContext.bindServiceAsUser(intent, this.conn, 1, Process.myUserHandle());
-                AODAmbientWallpaperHelper$initAODAmbientWallpaperHelper$1$$ExternalSyntheticOutline0.m("bind service:", TAG, bindServiceAsUser);
-                return bindServiceAsUser;
+                boolean zBindServiceAsUser = this.mContext.bindServiceAsUser(intent, this.conn, 1, Process.myUserHandle());
+                AODAmbientWallpaperHelper$initAODAmbientWallpaperHelper$1$$ExternalSyntheticOutline0.m("bind service:", TAG, zBindServiceAsUser);
+                return zBindServiceAsUser;
             } catch (Throwable th) {
                 throw th;
             }
@@ -138,16 +134,16 @@ public class EnhancedAttestationPolicy {
     }
 
     public final void handlePendingRequest() {
-        HashMap hashMap;
+        HashMap map;
         if (getTrackMapSize() < 1) {
             return;
         }
         synchronized (EnhancedAttestationPolicy.class) {
-            hashMap = new HashMap(this.mTrackOpsHash);
+            map = new HashMap(this.mTrackOpsHash);
             clearTrackMap();
             this.mProcessPendingRequest = true;
         }
-        for (Map.Entry entry : hashMap.entrySet()) {
+        for (Map.Entry entry : map.entrySet()) {
             String str = (String) entry.getKey();
             RequestInfo requestInfo = (RequestInfo) entry.getValue();
             Log.d(TAG, "process pending request: nonce len: " + str.length());
@@ -221,11 +217,7 @@ public class EnhancedAttestationPolicy {
     }
 
     public static synchronized EnhancedAttestationPolicy getInstance() {
-        EnhancedAttestationPolicy enhancedAttestationPolicy;
-        synchronized (EnhancedAttestationPolicy.class) {
-            enhancedAttestationPolicy = mEaPolicy;
-        }
-        return enhancedAttestationPolicy;
+        return mEaPolicy;
     }
 
     public final void startAttestation(String str, String str2, EnhancedAttestationPolicyCallback enhancedAttestationPolicyCallback, boolean z) {

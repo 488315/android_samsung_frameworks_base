@@ -2,11 +2,9 @@ package com.android.systemui.volume.dialog.sliders.domain.model;
 
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public interface VolumeDialogSliderType {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AudioSharingStream implements VolumeDialogSliderType {
         public final int audioStream;
 
@@ -35,7 +33,6 @@ public interface VolumeDialogSliderType {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class RemoteMediaStream implements VolumeDialogSliderType {
         public final int audioStream;
 
@@ -64,7 +61,6 @@ public interface VolumeDialogSliderType {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Stream implements VolumeDialogSliderType {
         public final int audioStream;
 

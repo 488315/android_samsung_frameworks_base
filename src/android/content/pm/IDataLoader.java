@@ -73,9 +73,9 @@ public interface IDataLoader extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IDataLoader.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IDataLoader)) {
-                return (IDataLoader) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IDataLoader.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IDataLoader)) {
+                return (IDataLoader) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -114,30 +114,30 @@ public interface IDataLoader extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 DataLoaderParamsParcel dataLoaderParamsParcel = (DataLoaderParamsParcel) parcel.readTypedObject(DataLoaderParamsParcel.CREATOR);
                 FileSystemControlParcel fileSystemControlParcel = (FileSystemControlParcel) parcel.readTypedObject(FileSystemControlParcel.CREATOR);
-                IDataLoaderStatusListener asInterface = IDataLoaderStatusListener.Stub.asInterface(parcel.readStrongBinder());
+                IDataLoaderStatusListener iDataLoaderStatusListenerAsInterface = IDataLoaderStatusListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                create(readInt, dataLoaderParamsParcel, fileSystemControlParcel, asInterface);
+                create(i3, dataLoaderParamsParcel, fileSystemControlParcel, iDataLoaderStatusListenerAsInterface);
             } else if (i == 2) {
-                int readInt2 = parcel.readInt();
+                int i4 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                start(readInt2);
+                start(i4);
             } else if (i == 3) {
-                int readInt3 = parcel.readInt();
+                int i5 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                stop(readInt3);
+                stop(i5);
             } else if (i == 4) {
-                int readInt4 = parcel.readInt();
+                int i6 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                destroy(readInt4);
+                destroy(i6);
             } else if (i == 5) {
-                int readInt5 = parcel.readInt();
+                int i7 = parcel.readInt();
                 InstallationFileParcel[] installationFileParcelArr = (InstallationFileParcel[]) parcel.createTypedArray(InstallationFileParcel.CREATOR);
-                String[] createStringArray = parcel.createStringArray();
+                String[] strArrCreateStringArray = parcel.createStringArray();
                 parcel.enforceNoDataAvail();
-                prepareImage(readInt5, installationFileParcelArr, createStringArray);
+                prepareImage(i7, installationFileParcelArr, strArrCreateStringArray);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -162,66 +162,66 @@ public interface IDataLoader extends IInterface {
 
             @Override // android.content.pm.IDataLoader
             public void create(int i, DataLoaderParamsParcel dataLoaderParamsParcel, FileSystemControlParcel fileSystemControlParcel, IDataLoaderStatusListener iDataLoaderStatusListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDataLoader.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(dataLoaderParamsParcel, 0);
-                    obtain.writeTypedObject(fileSystemControlParcel, 0);
-                    obtain.writeStrongInterface(iDataLoaderStatusListener);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDataLoader.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(dataLoaderParamsParcel, 0);
+                    parcelObtain.writeTypedObject(fileSystemControlParcel, 0);
+                    parcelObtain.writeStrongInterface(iDataLoaderStatusListener);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IDataLoader
             public void start(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDataLoader.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDataLoader.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IDataLoader
             public void stop(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDataLoader.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDataLoader.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IDataLoader
             public void destroy(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDataLoader.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDataLoader.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IDataLoader
             public void prepareImage(int i, InstallationFileParcel[] installationFileParcelArr, String[] strArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDataLoader.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedArray(installationFileParcelArr, 0);
-                    obtain.writeStringArray(strArr);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDataLoader.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedArray(installationFileParcelArr, 0);
+                    parcelObtain.writeStringArray(strArr);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

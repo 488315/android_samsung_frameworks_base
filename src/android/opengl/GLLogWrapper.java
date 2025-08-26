@@ -124,30 +124,30 @@ class GLLogWrapper extends GLWrapperBase {
         this.mLogArgumentNames = z;
     }
 
-    private void checkError() {
-        int glGetError = this.mgl.glGetError();
-        if (glGetError != 0) {
-            logLine("glError: " + Integer.toString(glGetError));
+    private void checkError() throws IOException {
+        int iGlGetError = this.mgl.glGetError();
+        if (iGlGetError != 0) {
+            logLine("glError: " + Integer.toString(iGlGetError));
         }
     }
 
-    private void logLine(String str) {
+    private void logLine(String str) throws IOException {
         log(str + '\n');
     }
 
-    private void log(String str) {
+    private void log(String str) throws IOException {
         try {
             this.mLog.write(str);
         } catch (IOException unused) {
         }
     }
 
-    private void begin(String str) {
+    private void begin(String str) throws IOException {
         log(str + '(');
         this.mArgCount = 0;
     }
 
-    private void arg(String str, String str2) {
+    private void arg(String str, String str2) throws IOException {
         int i = this.mArgCount;
         this.mArgCount = i + 1;
         if (i > 0) {
@@ -159,12 +159,12 @@ class GLLogWrapper extends GLWrapperBase {
         log(str2);
     }
 
-    private void end() {
+    private void end() throws IOException {
         log(");\n");
         flush();
     }
 
-    private void flush() {
+    private void flush() throws IOException {
         try {
             this.mLog.flush();
         } catch (IOException unused) {
@@ -172,36 +172,36 @@ class GLLogWrapper extends GLWrapperBase {
         }
     }
 
-    private void arg(String str, boolean z) {
+    private void arg(String str, boolean z) throws IOException {
         arg(str, Boolean.toString(z));
     }
 
-    private void arg(String str, int i) {
+    private void arg(String str, int i) throws IOException {
         arg(str, Integer.toString(i));
     }
 
-    private void arg(String str, float f) {
+    private void arg(String str, float f) throws IOException {
         arg(str, Float.toString(f));
     }
 
-    private void returns(String str) {
+    private void returns(String str) throws IOException {
         log(") returns " + str + ";\n");
         flush();
     }
 
-    private void returns(int i) {
+    private void returns(int i) throws IOException {
         returns(Integer.toString(i));
     }
 
-    private void arg(String str, int i, int[] iArr, int i2) {
+    private void arg(String str, int i, int[] iArr, int i2) throws IOException {
         arg(str, toString(i, 0, iArr, i2));
     }
 
-    private void arg(String str, int i, short[] sArr, int i2) {
+    private void arg(String str, int i, short[] sArr, int i2) throws IOException {
         arg(str, toString(i, sArr, i2));
     }
 
-    private void arg(String str, int i, float[] fArr, int i2) {
+    private void arg(String str, int i, float[] fArr, int i2) throws IOException {
         arg(str, toString(i, fArr, i2));
     }
 
@@ -300,19 +300,19 @@ class GLLogWrapper extends GLWrapperBase {
         return sb.toString();
     }
 
-    private void arg(String str, int i, FloatBuffer floatBuffer) {
+    private void arg(String str, int i, FloatBuffer floatBuffer) throws IOException {
         arg(str, toString(i, floatBuffer));
     }
 
-    private void arg(String str, int i, IntBuffer intBuffer) {
+    private void arg(String str, int i, IntBuffer intBuffer) throws IOException {
         arg(str, toString(i, 0, intBuffer));
     }
 
-    private void arg(String str, int i, ShortBuffer shortBuffer) {
+    private void arg(String str, int i, ShortBuffer shortBuffer) throws IOException {
         arg(str, toString(i, shortBuffer));
     }
 
-    private void argPointer(int i, int i2, int i3, Buffer buffer) {
+    private void argPointer(int i, int i2, int i3, Buffer buffer) throws IOException {
         arg(Contract.DatabaseSize.PATH, i);
         arg("type", getPointerTypeName(i2));
         arg("stride", i3);
@@ -900,127 +900,127 @@ class GLLogWrapper extends GLWrapperBase {
 
     /* JADX INFO: Access modifiers changed from: private */
     public ByteBuffer toByteBuffer(int i, Buffer buffer) {
-        ByteBuffer order;
+        ByteBuffer byteBufferOrder;
         int i2 = 0;
         boolean z = i < 0;
         if (buffer instanceof ByteBuffer) {
             ByteBuffer byteBuffer = (ByteBuffer) buffer;
-            int position = byteBuffer.position();
+            int iPosition = byteBuffer.position();
             if (z) {
-                i = byteBuffer.limit() - position;
+                i = byteBuffer.limit() - iPosition;
             }
-            order = ByteBuffer.allocate(i).order(byteBuffer.order());
+            byteBufferOrder = ByteBuffer.allocate(i).order(byteBuffer.order());
             while (i2 < i) {
-                order.put(byteBuffer.get());
+                byteBufferOrder.put(byteBuffer.get());
                 i2++;
             }
-            byteBuffer.position(position);
+            byteBuffer.position(iPosition);
         } else if (buffer instanceof CharBuffer) {
             CharBuffer charBuffer = (CharBuffer) buffer;
-            int position2 = charBuffer.position();
+            int iPosition2 = charBuffer.position();
             if (z) {
-                i = (charBuffer.limit() - position2) * 2;
+                i = (charBuffer.limit() - iPosition2) * 2;
             }
-            order = ByteBuffer.allocate(i).order(charBuffer.order());
-            CharBuffer asCharBuffer = order.asCharBuffer();
+            byteBufferOrder = ByteBuffer.allocate(i).order(charBuffer.order());
+            CharBuffer charBufferAsCharBuffer = byteBufferOrder.asCharBuffer();
             while (i2 < i / 2) {
-                asCharBuffer.put(charBuffer.get());
+                charBufferAsCharBuffer.put(charBuffer.get());
                 i2++;
             }
-            charBuffer.position(position2);
+            charBuffer.position(iPosition2);
         } else if (buffer instanceof ShortBuffer) {
             ShortBuffer shortBuffer = (ShortBuffer) buffer;
-            int position3 = shortBuffer.position();
+            int iPosition3 = shortBuffer.position();
             if (z) {
-                i = (shortBuffer.limit() - position3) * 2;
+                i = (shortBuffer.limit() - iPosition3) * 2;
             }
-            order = ByteBuffer.allocate(i).order(shortBuffer.order());
-            ShortBuffer asShortBuffer = order.asShortBuffer();
+            byteBufferOrder = ByteBuffer.allocate(i).order(shortBuffer.order());
+            ShortBuffer shortBufferAsShortBuffer = byteBufferOrder.asShortBuffer();
             while (i2 < i / 2) {
-                asShortBuffer.put(shortBuffer.get());
+                shortBufferAsShortBuffer.put(shortBuffer.get());
                 i2++;
             }
-            shortBuffer.position(position3);
+            shortBuffer.position(iPosition3);
         } else if (buffer instanceof IntBuffer) {
             IntBuffer intBuffer = (IntBuffer) buffer;
-            int position4 = intBuffer.position();
+            int iPosition4 = intBuffer.position();
             if (z) {
-                i = (intBuffer.limit() - position4) * 4;
+                i = (intBuffer.limit() - iPosition4) * 4;
             }
-            order = ByteBuffer.allocate(i).order(intBuffer.order());
-            IntBuffer asIntBuffer = order.asIntBuffer();
+            byteBufferOrder = ByteBuffer.allocate(i).order(intBuffer.order());
+            IntBuffer intBufferAsIntBuffer = byteBufferOrder.asIntBuffer();
             while (i2 < i / 4) {
-                asIntBuffer.put(intBuffer.get());
+                intBufferAsIntBuffer.put(intBuffer.get());
                 i2++;
             }
-            intBuffer.position(position4);
+            intBuffer.position(iPosition4);
         } else if (buffer instanceof FloatBuffer) {
             FloatBuffer floatBuffer = (FloatBuffer) buffer;
-            int position5 = floatBuffer.position();
+            int iPosition5 = floatBuffer.position();
             if (z) {
-                i = (floatBuffer.limit() - position5) * 4;
+                i = (floatBuffer.limit() - iPosition5) * 4;
             }
-            order = ByteBuffer.allocate(i).order(floatBuffer.order());
-            FloatBuffer asFloatBuffer = order.asFloatBuffer();
+            byteBufferOrder = ByteBuffer.allocate(i).order(floatBuffer.order());
+            FloatBuffer floatBufferAsFloatBuffer = byteBufferOrder.asFloatBuffer();
             while (i2 < i / 4) {
-                asFloatBuffer.put(floatBuffer.get());
+                floatBufferAsFloatBuffer.put(floatBuffer.get());
                 i2++;
             }
-            floatBuffer.position(position5);
+            floatBuffer.position(iPosition5);
         } else if (buffer instanceof DoubleBuffer) {
             DoubleBuffer doubleBuffer = (DoubleBuffer) buffer;
-            int position6 = doubleBuffer.position();
+            int iPosition6 = doubleBuffer.position();
             if (z) {
-                i = (doubleBuffer.limit() - position6) * 8;
+                i = (doubleBuffer.limit() - iPosition6) * 8;
             }
-            order = ByteBuffer.allocate(i).order(doubleBuffer.order());
-            DoubleBuffer asDoubleBuffer = order.asDoubleBuffer();
+            byteBufferOrder = ByteBuffer.allocate(i).order(doubleBuffer.order());
+            DoubleBuffer doubleBufferAsDoubleBuffer = byteBufferOrder.asDoubleBuffer();
             while (i2 < i / 8) {
-                asDoubleBuffer.put(doubleBuffer.get());
+                doubleBufferAsDoubleBuffer.put(doubleBuffer.get());
                 i2++;
             }
-            doubleBuffer.position(position6);
+            doubleBuffer.position(iPosition6);
         } else if (buffer instanceof LongBuffer) {
             LongBuffer longBuffer = (LongBuffer) buffer;
-            int position7 = longBuffer.position();
+            int iPosition7 = longBuffer.position();
             if (z) {
-                i = (longBuffer.limit() - position7) * 8;
+                i = (longBuffer.limit() - iPosition7) * 8;
             }
-            order = ByteBuffer.allocate(i).order(longBuffer.order());
-            LongBuffer asLongBuffer = order.asLongBuffer();
+            byteBufferOrder = ByteBuffer.allocate(i).order(longBuffer.order());
+            LongBuffer longBufferAsLongBuffer = byteBufferOrder.asLongBuffer();
             while (i2 < i / 8) {
-                asLongBuffer.put(longBuffer.get());
+                longBufferAsLongBuffer.put(longBuffer.get());
                 i2++;
             }
-            longBuffer.position(position7);
+            longBuffer.position(iPosition7);
         } else {
             throw new RuntimeException("Unimplemented Buffer subclass.");
         }
-        order.rewind();
-        order.order(ByteOrder.nativeOrder());
-        return order;
+        byteBufferOrder.rewind();
+        byteBufferOrder.order(ByteOrder.nativeOrder());
+        return byteBufferOrder;
     }
 
     private char[] toCharIndices(int i, int i2, Buffer buffer) {
-        CharBuffer asCharBuffer;
+        CharBuffer charBufferAsCharBuffer;
         char[] cArr = new char[i];
         if (i2 == 5121) {
             ByteBuffer byteBuffer = toByteBuffer(i, buffer);
-            byte[] array = byteBuffer.array();
-            int arrayOffset = byteBuffer.arrayOffset();
+            byte[] bArrArray = byteBuffer.array();
+            int iArrayOffset = byteBuffer.arrayOffset();
             for (int i3 = 0; i3 < i; i3++) {
-                cArr[i3] = (char) (array[arrayOffset + i3] & 255);
+                cArr[i3] = (char) (bArrArray[iArrayOffset + i3] & 255);
             }
         } else if (i2 == 5123) {
             if (buffer instanceof CharBuffer) {
-                asCharBuffer = (CharBuffer) buffer;
+                charBufferAsCharBuffer = (CharBuffer) buffer;
             } else {
-                asCharBuffer = toByteBuffer(i * 2, buffer).asCharBuffer();
+                charBufferAsCharBuffer = toByteBuffer(i * 2, buffer).asCharBuffer();
             }
-            int position = asCharBuffer.position();
-            asCharBuffer.position(0);
-            asCharBuffer.get(cArr);
-            asCharBuffer.position(position);
+            int iPosition = charBufferAsCharBuffer.position();
+            charBufferAsCharBuffer.position(0);
+            charBufferAsCharBuffer.get(cArr);
+            charBufferAsCharBuffer.position(iPosition);
             return cArr;
         }
         return cArr;
@@ -1042,7 +1042,7 @@ class GLLogWrapper extends GLWrapperBase {
             ByteBuffer byteBuffer = pointerInfo.mTempByteBuffer;
             int i2 = pointerInfo.mSize;
             int i3 = pointerInfo.mType;
-            int sizeof = pointerInfo.sizeof(i3);
+            int iSizeof = pointerInfo.sizeof(i3);
             int i4 = stride * i;
             for (int i5 = 0; i5 < i2; i5++) {
                 if (i5 > 0) {
@@ -1068,7 +1068,7 @@ class GLLogWrapper extends GLWrapperBase {
                 } else {
                     sb.append(Integer.toString(byteBuffer.asIntBuffer().get(i4 / 4)));
                 }
-                i4 += sizeof;
+                i4 += iSizeof;
             }
             sb.append("}");
         }
@@ -1120,13 +1120,13 @@ class GLLogWrapper extends GLWrapperBase {
         bindArrays();
     }
 
-    private void endLogIndices() {
+    private void endLogIndices() throws IOException {
         log(this.mStringBuilder.toString());
         unbindArrays();
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glActiveTexture(int i) {
+    public void glActiveTexture(int i) throws IOException {
         begin("glActiveTexture");
         arg("texture", i);
         end();
@@ -1135,7 +1135,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glAlphaFunc(int i, float f) {
+    public void glAlphaFunc(int i, float f) throws IOException {
         begin("glAlphaFunc");
         arg("func", i);
         arg("ref", f);
@@ -1145,7 +1145,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glAlphaFuncx(int i, int i2) {
+    public void glAlphaFuncx(int i, int i2) throws IOException {
         begin("glAlphaFuncx");
         arg("func", i);
         arg("ref", i2);
@@ -1155,7 +1155,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10, javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glBindTexture(int i, int i2) {
+    public void glBindTexture(int i, int i2) throws IOException {
         begin("glBindTexture");
         arg("target", getTextureTarget(i));
         arg("texture", i2);
@@ -1165,7 +1165,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glBlendFunc(int i, int i2) {
+    public void glBlendFunc(int i, int i2) throws IOException {
         begin("glBlendFunc");
         arg("sfactor", getFactor(i));
         arg("dfactor", getFactor(i2));
@@ -1175,7 +1175,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glClear(int i) {
+    public void glClear(int i) throws IOException {
         begin("glClear");
         arg("mask", getClearBufferMask(i));
         end();
@@ -1184,7 +1184,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glClearColor(float f, float f2, float f3, float f4) {
+    public void glClearColor(float f, float f2, float f3, float f4) throws IOException {
         begin("glClearColor");
         arg("red", f);
         arg("green", f2);
@@ -1196,7 +1196,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glClearColorx(int i, int i2, int i3, int i4) {
+    public void glClearColorx(int i, int i2, int i3, int i4) throws IOException {
         begin("glClearColor");
         arg("red", i);
         arg("green", i2);
@@ -1208,7 +1208,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glClearDepthf(float f) {
+    public void glClearDepthf(float f) throws IOException {
         begin("glClearDepthf");
         arg("depth", f);
         end();
@@ -1217,7 +1217,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glClearDepthx(int i) {
+    public void glClearDepthx(int i) throws IOException {
         begin("glClearDepthx");
         arg("depth", i);
         end();
@@ -1226,7 +1226,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glClearStencil(int i) {
+    public void glClearStencil(int i) throws IOException {
         begin("glClearStencil");
         arg(XmlTags.TAG_SESSION, i);
         end();
@@ -1235,7 +1235,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glClientActiveTexture(int i) {
+    public void glClientActiveTexture(int i) throws IOException {
         begin("glClientActiveTexture");
         arg("texture", i);
         end();
@@ -1244,7 +1244,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glColor4f(float f, float f2, float f3, float f4) {
+    public void glColor4f(float f, float f2, float f3, float f4) throws IOException {
         begin("glColor4f");
         arg("red", f);
         arg("green", f2);
@@ -1256,7 +1256,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glColor4x(int i, int i2, int i3, int i4) {
+    public void glColor4x(int i, int i2, int i3, int i4) throws IOException {
         begin("glColor4x");
         arg("red", i);
         arg("green", i2);
@@ -1268,7 +1268,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glColorMask(boolean z, boolean z2, boolean z3, boolean z4) {
+    public void glColorMask(boolean z, boolean z2, boolean z3, boolean z4) throws IOException {
         begin("glColorMask");
         arg("red", z);
         arg("green", z2);
@@ -1280,7 +1280,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glColorPointer(int i, int i2, int i3, Buffer buffer) {
+    public void glColorPointer(int i, int i2, int i3, Buffer buffer) throws IOException {
         begin("glColorPointer");
         argPointer(i, i2, i3, buffer);
         end();
@@ -1290,7 +1290,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10, javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glCompressedTexImage2D(int i, int i2, int i3, int i4, int i5, int i6, int i7, Buffer buffer) {
+    public void glCompressedTexImage2D(int i, int i2, int i3, int i4, int i5, int i6, int i7, Buffer buffer) throws IOException {
         begin("glCompressedTexImage2D");
         arg("target", getTextureTarget(i));
         arg("level", i2);
@@ -1306,7 +1306,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glCompressedTexSubImage2D(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, Buffer buffer) {
+    public void glCompressedTexSubImage2D(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, Buffer buffer) throws IOException {
         begin("glCompressedTexSubImage2D");
         arg("target", getTextureTarget(i));
         arg("level", i2);
@@ -1323,7 +1323,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10, javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glCopyTexImage2D(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8) {
+    public void glCopyTexImage2D(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8) throws IOException {
         begin("glCopyTexImage2D");
         arg("target", getTextureTarget(i));
         arg("level", i2);
@@ -1339,7 +1339,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glCopyTexSubImage2D(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8) {
+    public void glCopyTexSubImage2D(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8) throws IOException {
         begin("glCopyTexSubImage2D");
         arg("target", getTextureTarget(i));
         arg("level", i2);
@@ -1355,7 +1355,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glCullFace(int i) {
+    public void glCullFace(int i) throws IOException {
         begin("glCullFace");
         arg("mode", i);
         end();
@@ -1364,7 +1364,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glDeleteTextures(int i, int[] iArr, int i2) {
+    public void glDeleteTextures(int i, int[] iArr, int i2) throws IOException {
         begin("glDeleteTextures");
         arg("n", i);
         arg("textures", i, iArr, i2);
@@ -1375,7 +1375,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glDeleteTextures(int i, IntBuffer intBuffer) {
+    public void glDeleteTextures(int i, IntBuffer intBuffer) throws IOException {
         begin("glDeleteTextures");
         arg("n", i);
         arg("textures", i, intBuffer);
@@ -1385,7 +1385,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glDepthFunc(int i) {
+    public void glDepthFunc(int i) throws IOException {
         begin("glDepthFunc");
         arg("func", i);
         end();
@@ -1394,7 +1394,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glDepthMask(boolean z) {
+    public void glDepthMask(boolean z) throws IOException {
         begin("glDepthMask");
         arg(SemEmergencyConstants.EXTRA_EMERGENCY_START_SERVICE_FLAG, z);
         end();
@@ -1403,7 +1403,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glDepthRangef(float f, float f2) {
+    public void glDepthRangef(float f, float f2) throws IOException {
         begin("glDepthRangef");
         arg("near", f);
         arg("far", f2);
@@ -1413,7 +1413,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glDepthRangex(int i, int i2) {
+    public void glDepthRangex(int i, int i2) throws IOException {
         begin("glDepthRangex");
         arg("near", i);
         arg("far", i2);
@@ -1423,7 +1423,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glDisable(int i) {
+    public void glDisable(int i) throws IOException {
         begin("glDisable");
         arg("cap", getCap(i));
         end();
@@ -1432,7 +1432,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glDisableClientState(int i) {
+    public void glDisableClientState(int i) throws IOException {
         begin("glDisableClientState");
         arg("array", getClientState(i));
         end();
@@ -1455,7 +1455,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glDrawArrays(int i, int i2, int i3) {
+    public void glDrawArrays(int i, int i2, int i3) throws IOException {
         begin("glDrawArrays");
         arg("mode", i);
         arg("first", i2);
@@ -1471,7 +1471,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glDrawElements(int i, int i2, int i3, Buffer buffer) {
+    public void glDrawElements(int i, int i2, int i3, Buffer buffer) throws IOException {
         begin("glDrawElements");
         arg("mode", getBeginMode(i));
         arg(Contract.Events.Projection.COUNT_ONLY, i2);
@@ -1489,7 +1489,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10, javax.microedition.khronos.opengles.GL11Ext, javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glEnable(int i) {
+    public void glEnable(int i) throws IOException {
         begin("glEnable");
         arg("cap", getCap(i));
         end();
@@ -1498,7 +1498,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10, javax.microedition.khronos.opengles.GL11Ext
-    public void glEnableClientState(int i) {
+    public void glEnableClientState(int i) throws IOException {
         begin("glEnableClientState");
         arg("array", getClientState(i));
         end();
@@ -1521,7 +1521,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glFinish() {
+    public void glFinish() throws IOException {
         begin("glFinish");
         end();
         this.mgl.glFinish();
@@ -1529,7 +1529,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glFlush() {
+    public void glFlush() throws IOException {
         begin("glFlush");
         end();
         this.mgl.glFlush();
@@ -1537,7 +1537,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glFogf(int i, float f) {
+    public void glFogf(int i, float f) throws IOException {
         begin("glFogf");
         arg("pname", i);
         arg("param", f);
@@ -1547,7 +1547,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glFogfv(int i, float[] fArr, int i2) {
+    public void glFogfv(int i, float[] fArr, int i2) throws IOException {
         begin("glFogfv");
         arg("pname", getFogPName(i));
         arg(KnoxZtInternalConst.Event.LogKeys.PARAMS, getFogParamCount(i), fArr, i2);
@@ -1558,7 +1558,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glFogfv(int i, FloatBuffer floatBuffer) {
+    public void glFogfv(int i, FloatBuffer floatBuffer) throws IOException {
         begin("glFogfv");
         arg("pname", getFogPName(i));
         arg(KnoxZtInternalConst.Event.LogKeys.PARAMS, getFogParamCount(i), floatBuffer);
@@ -1568,7 +1568,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glFogx(int i, int i2) {
+    public void glFogx(int i, int i2) throws IOException {
         begin("glFogx");
         arg("pname", getFogPName(i));
         arg("param", i2);
@@ -1578,7 +1578,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glFogxv(int i, int[] iArr, int i2) {
+    public void glFogxv(int i, int[] iArr, int i2) throws IOException {
         begin("glFogxv");
         arg("pname", getFogPName(i));
         arg(KnoxZtInternalConst.Event.LogKeys.PARAMS, getFogParamCount(i), iArr, i2);
@@ -1589,7 +1589,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glFogxv(int i, IntBuffer intBuffer) {
+    public void glFogxv(int i, IntBuffer intBuffer) throws IOException {
         begin("glFogxv");
         arg("pname", getFogPName(i));
         arg(KnoxZtInternalConst.Event.LogKeys.PARAMS, getFogParamCount(i), intBuffer);
@@ -1599,7 +1599,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glFrontFace(int i) {
+    public void glFrontFace(int i) throws IOException {
         begin("glFrontFace");
         arg("mode", i);
         end();
@@ -1608,7 +1608,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glFrustumf(float f, float f2, float f3, float f4, float f5, float f6) {
+    public void glFrustumf(float f, float f2, float f3, float f4, float f5, float f6) throws IOException {
         begin("glFrustumf");
         arg("left", f);
         arg("right", f2);
@@ -1622,7 +1622,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glFrustumx(int i, int i2, int i3, int i4, int i5, int i6) {
+    public void glFrustumx(int i, int i2, int i3, int i4, int i5, int i6) throws IOException {
         begin("glFrustumx");
         arg("left", i);
         arg("right", i2);
@@ -1636,7 +1636,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glGenTextures(int i, int[] iArr, int i2) {
+    public void glGenTextures(int i, int[] iArr, int i2) throws IOException {
         begin("glGenTextures");
         arg("n", i);
         arg("textures", Arrays.toString(iArr));
@@ -1647,7 +1647,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glGenTextures(int i, IntBuffer intBuffer) {
+    public void glGenTextures(int i, IntBuffer intBuffer) throws IOException {
         begin("glGenTextures");
         arg("n", i);
         arg("textures", intBuffer.toString());
@@ -1657,15 +1657,15 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public int glGetError() {
+    public int glGetError() throws IOException {
         begin("glGetError");
-        int glGetError = this.mgl.glGetError();
-        returns(glGetError);
-        return glGetError;
+        int iGlGetError = this.mgl.glGetError();
+        returns(iGlGetError);
+        return iGlGetError;
     }
 
     @Override // javax.microedition.khronos.opengles.GL10, javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glGetIntegerv(int i, int[] iArr, int i2) {
+    public void glGetIntegerv(int i, int[] iArr, int i2) throws IOException {
         begin("glGetIntegerv");
         arg("pname", getIntegerStateName(i));
         arg(KnoxZtInternalConst.Event.LogKeys.PARAMS, Arrays.toString(iArr));
@@ -1676,7 +1676,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10, javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glGetIntegerv(int i, IntBuffer intBuffer) {
+    public void glGetIntegerv(int i, IntBuffer intBuffer) throws IOException {
         begin("glGetIntegerv");
         arg("pname", getIntegerStateName(i));
         arg(KnoxZtInternalConst.Event.LogKeys.PARAMS, intBuffer.toString());
@@ -1686,17 +1686,17 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public String glGetString(int i) {
+    public String glGetString(int i) throws IOException {
         begin("glGetString");
         arg("name", i);
-        String glGetString = this.mgl.glGetString(i);
-        returns(glGetString);
+        String strGlGetString = this.mgl.glGetString(i);
+        returns(strGlGetString);
         checkError();
-        return glGetString;
+        return strGlGetString;
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glHint(int i, int i2) {
+    public void glHint(int i, int i2) throws IOException {
         begin("glHint");
         arg("target", getHintTarget(i));
         arg("mode", getHintMode(i2));
@@ -1706,7 +1706,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glLightModelf(int i, float f) {
+    public void glLightModelf(int i, float f) throws IOException {
         begin("glLightModelf");
         arg("pname", getLightModelPName(i));
         arg("param", f);
@@ -1716,7 +1716,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glLightModelfv(int i, float[] fArr, int i2) {
+    public void glLightModelfv(int i, float[] fArr, int i2) throws IOException {
         begin("glLightModelfv");
         arg("pname", getLightModelPName(i));
         arg(KnoxZtInternalConst.Event.LogKeys.PARAMS, getLightModelParamCount(i), fArr, i2);
@@ -1727,7 +1727,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glLightModelfv(int i, FloatBuffer floatBuffer) {
+    public void glLightModelfv(int i, FloatBuffer floatBuffer) throws IOException {
         begin("glLightModelfv");
         arg("pname", getLightModelPName(i));
         arg(KnoxZtInternalConst.Event.LogKeys.PARAMS, getLightModelParamCount(i), floatBuffer);
@@ -1737,7 +1737,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glLightModelx(int i, int i2) {
+    public void glLightModelx(int i, int i2) throws IOException {
         begin("glLightModelx");
         arg("pname", getLightModelPName(i));
         arg("param", i2);
@@ -1747,7 +1747,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glLightModelxv(int i, int[] iArr, int i2) {
+    public void glLightModelxv(int i, int[] iArr, int i2) throws IOException {
         begin("glLightModelxv");
         arg("pname", getLightModelPName(i));
         arg(KnoxZtInternalConst.Event.LogKeys.PARAMS, getLightModelParamCount(i), iArr, i2);
@@ -1758,7 +1758,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glLightModelxv(int i, IntBuffer intBuffer) {
+    public void glLightModelxv(int i, IntBuffer intBuffer) throws IOException {
         begin("glLightModelfv");
         arg("pname", getLightModelPName(i));
         arg(KnoxZtInternalConst.Event.LogKeys.PARAMS, getLightModelParamCount(i), intBuffer);
@@ -1768,7 +1768,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glLightf(int i, int i2, float f) {
+    public void glLightf(int i, int i2, float f) throws IOException {
         begin("glLightf");
         arg("light", getLightName(i));
         arg("pname", getLightPName(i2));
@@ -1779,7 +1779,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glLightfv(int i, int i2, float[] fArr, int i3) {
+    public void glLightfv(int i, int i2, float[] fArr, int i3) throws IOException {
         begin("glLightfv");
         arg("light", getLightName(i));
         arg("pname", getLightPName(i2));
@@ -1791,7 +1791,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glLightfv(int i, int i2, FloatBuffer floatBuffer) {
+    public void glLightfv(int i, int i2, FloatBuffer floatBuffer) throws IOException {
         begin("glLightfv");
         arg("light", getLightName(i));
         arg("pname", getLightPName(i2));
@@ -1802,7 +1802,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glLightx(int i, int i2, int i3) {
+    public void glLightx(int i, int i2, int i3) throws IOException {
         begin("glLightx");
         arg("light", getLightName(i));
         arg("pname", getLightPName(i2));
@@ -1813,7 +1813,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glLightxv(int i, int i2, int[] iArr, int i3) {
+    public void glLightxv(int i, int i2, int[] iArr, int i3) throws IOException {
         begin("glLightxv");
         arg("light", getLightName(i));
         arg("pname", getLightPName(i2));
@@ -1825,7 +1825,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glLightxv(int i, int i2, IntBuffer intBuffer) {
+    public void glLightxv(int i, int i2, IntBuffer intBuffer) throws IOException {
         begin("glLightxv");
         arg("light", getLightName(i));
         arg("pname", getLightPName(i2));
@@ -1836,7 +1836,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glLineWidth(float f) {
+    public void glLineWidth(float f) throws IOException {
         begin("glLineWidth");
         arg("width", f);
         end();
@@ -1845,7 +1845,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glLineWidthx(int i) {
+    public void glLineWidthx(int i) throws IOException {
         begin("glLineWidthx");
         arg("width", i);
         end();
@@ -1854,7 +1854,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glLoadIdentity() {
+    public void glLoadIdentity() throws IOException {
         begin("glLoadIdentity");
         end();
         this.mgl.glLoadIdentity();
@@ -1862,7 +1862,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glLoadMatrixf(float[] fArr, int i) {
+    public void glLoadMatrixf(float[] fArr, int i) throws IOException {
         begin("glLoadMatrixf");
         arg("m", 16, fArr, i);
         arg(CallLog.Calls.OFFSET_PARAM_KEY, i);
@@ -1872,7 +1872,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glLoadMatrixf(FloatBuffer floatBuffer) {
+    public void glLoadMatrixf(FloatBuffer floatBuffer) throws IOException {
         begin("glLoadMatrixf");
         arg("m", 16, floatBuffer);
         end();
@@ -1881,7 +1881,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glLoadMatrixx(int[] iArr, int i) {
+    public void glLoadMatrixx(int[] iArr, int i) throws IOException {
         begin("glLoadMatrixx");
         arg("m", 16, iArr, i);
         arg(CallLog.Calls.OFFSET_PARAM_KEY, i);
@@ -1891,7 +1891,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glLoadMatrixx(IntBuffer intBuffer) {
+    public void glLoadMatrixx(IntBuffer intBuffer) throws IOException {
         begin("glLoadMatrixx");
         arg("m", 16, intBuffer);
         end();
@@ -1900,7 +1900,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glLogicOp(int i) {
+    public void glLogicOp(int i) throws IOException {
         begin("glLogicOp");
         arg("opcode", i);
         end();
@@ -1909,7 +1909,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glMaterialf(int i, int i2, float f) {
+    public void glMaterialf(int i, int i2, float f) throws IOException {
         begin("glMaterialf");
         arg(Context.FACE_SERVICE, getFaceName(i));
         arg("pname", getMaterialPName(i2));
@@ -1920,7 +1920,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glMaterialfv(int i, int i2, float[] fArr, int i3) {
+    public void glMaterialfv(int i, int i2, float[] fArr, int i3) throws IOException {
         begin("glMaterialfv");
         arg(Context.FACE_SERVICE, getFaceName(i));
         arg("pname", getMaterialPName(i2));
@@ -1932,7 +1932,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glMaterialfv(int i, int i2, FloatBuffer floatBuffer) {
+    public void glMaterialfv(int i, int i2, FloatBuffer floatBuffer) throws IOException {
         begin("glMaterialfv");
         arg(Context.FACE_SERVICE, getFaceName(i));
         arg("pname", getMaterialPName(i2));
@@ -1943,7 +1943,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glMaterialx(int i, int i2, int i3) {
+    public void glMaterialx(int i, int i2, int i3) throws IOException {
         begin("glMaterialx");
         arg(Context.FACE_SERVICE, getFaceName(i));
         arg("pname", getMaterialPName(i2));
@@ -1954,7 +1954,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glMaterialxv(int i, int i2, int[] iArr, int i3) {
+    public void glMaterialxv(int i, int i2, int[] iArr, int i3) throws IOException {
         begin("glMaterialxv");
         arg(Context.FACE_SERVICE, getFaceName(i));
         arg("pname", getMaterialPName(i2));
@@ -1966,7 +1966,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glMaterialxv(int i, int i2, IntBuffer intBuffer) {
+    public void glMaterialxv(int i, int i2, IntBuffer intBuffer) throws IOException {
         begin("glMaterialxv");
         arg(Context.FACE_SERVICE, getFaceName(i));
         arg("pname", getMaterialPName(i2));
@@ -1977,7 +1977,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glMatrixMode(int i) {
+    public void glMatrixMode(int i) throws IOException {
         begin("glMatrixMode");
         arg("mode", getMatrixMode(i));
         end();
@@ -1986,7 +1986,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glMultMatrixf(float[] fArr, int i) {
+    public void glMultMatrixf(float[] fArr, int i) throws IOException {
         begin("glMultMatrixf");
         arg("m", 16, fArr, i);
         arg(CallLog.Calls.OFFSET_PARAM_KEY, i);
@@ -1996,7 +1996,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glMultMatrixf(FloatBuffer floatBuffer) {
+    public void glMultMatrixf(FloatBuffer floatBuffer) throws IOException {
         begin("glMultMatrixf");
         arg("m", 16, floatBuffer);
         end();
@@ -2005,7 +2005,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glMultMatrixx(int[] iArr, int i) {
+    public void glMultMatrixx(int[] iArr, int i) throws IOException {
         begin("glMultMatrixx");
         arg("m", 16, iArr, i);
         arg(CallLog.Calls.OFFSET_PARAM_KEY, i);
@@ -2015,7 +2015,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glMultMatrixx(IntBuffer intBuffer) {
+    public void glMultMatrixx(IntBuffer intBuffer) throws IOException {
         begin("glMultMatrixx");
         arg("m", 16, intBuffer);
         end();
@@ -2024,7 +2024,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glMultiTexCoord4f(int i, float f, float f2, float f3, float f4) {
+    public void glMultiTexCoord4f(int i, float f, float f2, float f3, float f4) throws IOException {
         begin("glMultiTexCoord4f");
         arg("target", i);
         arg(XmlTags.TAG_SESSION, f);
@@ -2037,7 +2037,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glMultiTexCoord4x(int i, int i2, int i3, int i4, int i5) {
+    public void glMultiTexCoord4x(int i, int i2, int i3, int i4, int i5) throws IOException {
         begin("glMultiTexCoord4x");
         arg("target", i);
         arg(XmlTags.TAG_SESSION, i2);
@@ -2050,7 +2050,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glNormal3f(float f, float f2, float f3) {
+    public void glNormal3f(float f, float f2, float f3) throws IOException {
         begin("glNormal3f");
         arg("nx", f);
         arg("ny", f2);
@@ -2061,7 +2061,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glNormal3x(int i, int i2, int i3) {
+    public void glNormal3x(int i, int i2, int i3) throws IOException {
         begin("glNormal3x");
         arg("nx", i);
         arg("ny", i2);
@@ -2072,7 +2072,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glNormalPointer(int i, int i2, Buffer buffer) {
+    public void glNormalPointer(int i, int i2, Buffer buffer) throws IOException {
         begin("glNormalPointer");
         arg("type", i);
         arg("stride", i2);
@@ -2084,7 +2084,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glOrthof(float f, float f2, float f3, float f4, float f5, float f6) {
+    public void glOrthof(float f, float f2, float f3, float f4, float f5, float f6) throws IOException {
         begin("glOrthof");
         arg("left", f);
         arg("right", f2);
@@ -2098,7 +2098,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glOrthox(int i, int i2, int i3, int i4, int i5, int i6) {
+    public void glOrthox(int i, int i2, int i3, int i4, int i5, int i6) throws IOException {
         begin("glOrthox");
         arg("left", i);
         arg("right", i2);
@@ -2112,7 +2112,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glPixelStorei(int i, int i2) {
+    public void glPixelStorei(int i, int i2) throws IOException {
         begin("glPixelStorei");
         arg("pname", i);
         arg("param", i2);
@@ -2122,7 +2122,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glPointSize(float f) {
+    public void glPointSize(float f) throws IOException {
         begin("glPointSize");
         arg(Contract.DatabaseSize.PATH, f);
         end();
@@ -2131,7 +2131,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glPointSizex(int i) {
+    public void glPointSizex(int i) throws IOException {
         begin("glPointSizex");
         arg(Contract.DatabaseSize.PATH, i);
         end();
@@ -2140,7 +2140,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glPolygonOffset(float f, float f2) {
+    public void glPolygonOffset(float f, float f2) throws IOException {
         begin("glPolygonOffset");
         arg("factor", f);
         arg("units", f2);
@@ -2150,7 +2150,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glPolygonOffsetx(int i, int i2) {
+    public void glPolygonOffsetx(int i, int i2) throws IOException {
         begin("glPolygonOffsetx");
         arg("factor", i);
         arg("units", i2);
@@ -2160,7 +2160,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glPopMatrix() {
+    public void glPopMatrix() throws IOException {
         begin("glPopMatrix");
         end();
         this.mgl.glPopMatrix();
@@ -2168,7 +2168,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glPushMatrix() {
+    public void glPushMatrix() throws IOException {
         begin("glPushMatrix");
         end();
         this.mgl.glPushMatrix();
@@ -2176,7 +2176,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glReadPixels(int i, int i2, int i3, int i4, int i5, int i6, Buffer buffer) {
+    public void glReadPixels(int i, int i2, int i3, int i4, int i5, int i6, Buffer buffer) throws IOException {
         begin("glReadPixels");
         arg("x", i);
         arg("y", i2);
@@ -2191,7 +2191,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glRotatef(float f, float f2, float f3, float f4) {
+    public void glRotatef(float f, float f2, float f3, float f4) throws IOException {
         begin("glRotatef");
         arg("angle", f);
         arg("x", f2);
@@ -2203,7 +2203,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glRotatex(int i, int i2, int i3, int i4) {
+    public void glRotatex(int i, int i2, int i3, int i4) throws IOException {
         begin("glRotatex");
         arg("angle", i);
         arg("x", i2);
@@ -2215,7 +2215,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glSampleCoverage(float f, boolean z) {
+    public void glSampleCoverage(float f, boolean z) throws IOException {
         begin("glSampleCoveragex");
         arg("value", f);
         arg("invert", z);
@@ -2225,7 +2225,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glSampleCoveragex(int i, boolean z) {
+    public void glSampleCoveragex(int i, boolean z) throws IOException {
         begin("glSampleCoveragex");
         arg("value", i);
         arg("invert", z);
@@ -2235,7 +2235,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glScalef(float f, float f2, float f3) {
+    public void glScalef(float f, float f2, float f3) throws IOException {
         begin("glScalef");
         arg("x", f);
         arg("y", f2);
@@ -2246,7 +2246,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glScalex(int i, int i2, int i3) {
+    public void glScalex(int i, int i2, int i3) throws IOException {
         begin("glScalex");
         arg("x", i);
         arg("y", i2);
@@ -2257,7 +2257,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glScissor(int i, int i2, int i3, int i4) {
+    public void glScissor(int i, int i2, int i3, int i4) throws IOException {
         begin("glScissor");
         arg("x", i);
         arg("y", i2);
@@ -2269,7 +2269,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glShadeModel(int i) {
+    public void glShadeModel(int i) throws IOException {
         begin("glShadeModel");
         arg("mode", getShadeModel(i));
         end();
@@ -2278,7 +2278,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glStencilFunc(int i, int i2, int i3) {
+    public void glStencilFunc(int i, int i2, int i3) throws IOException {
         begin("glStencilFunc");
         arg("func", i);
         arg("ref", i2);
@@ -2289,7 +2289,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glStencilMask(int i) {
+    public void glStencilMask(int i) throws IOException {
         begin("glStencilMask");
         arg("mask", i);
         end();
@@ -2298,7 +2298,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10, javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glStencilOp(int i, int i2, int i3) {
+    public void glStencilOp(int i, int i2, int i3) throws IOException {
         begin("glStencilOp");
         arg("fail", i);
         arg("zfail", i2);
@@ -2309,7 +2309,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glTexCoordPointer(int i, int i2, int i3, Buffer buffer) {
+    public void glTexCoordPointer(int i, int i2, int i3, Buffer buffer) throws IOException {
         begin("glTexCoordPointer");
         argPointer(i, i2, i3, buffer);
         end();
@@ -2319,7 +2319,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10, javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glTexEnvf(int i, int i2, float f) {
+    public void glTexEnvf(int i, int i2, float f) throws IOException {
         begin("glTexEnvf");
         arg("target", getTextureEnvTarget(i));
         arg("pname", getTextureEnvPName(i2));
@@ -2330,7 +2330,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10, javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glTexEnvfv(int i, int i2, float[] fArr, int i3) {
+    public void glTexEnvfv(int i, int i2, float[] fArr, int i3) throws IOException {
         begin("glTexEnvfv");
         arg("target", getTextureEnvTarget(i));
         arg("pname", getTextureEnvPName(i2));
@@ -2342,7 +2342,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10, javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glTexEnvfv(int i, int i2, FloatBuffer floatBuffer) {
+    public void glTexEnvfv(int i, int i2, FloatBuffer floatBuffer) throws IOException {
         begin("glTexEnvfv");
         arg("target", getTextureEnvTarget(i));
         arg("pname", getTextureEnvPName(i2));
@@ -2353,7 +2353,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10, javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glTexEnvx(int i, int i2, int i3) {
+    public void glTexEnvx(int i, int i2, int i3) throws IOException {
         begin("glTexEnvx");
         arg("target", getTextureEnvTarget(i));
         arg("pname", getTextureEnvPName(i2));
@@ -2364,7 +2364,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10, javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glTexEnvxv(int i, int i2, int[] iArr, int i3) {
+    public void glTexEnvxv(int i, int i2, int[] iArr, int i3) throws IOException {
         begin("glTexEnvxv");
         arg("target", getTextureEnvTarget(i));
         arg("pname", getTextureEnvPName(i2));
@@ -2376,7 +2376,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10, javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glTexEnvxv(int i, int i2, IntBuffer intBuffer) {
+    public void glTexEnvxv(int i, int i2, IntBuffer intBuffer) throws IOException {
         begin("glTexEnvxv");
         arg("target", getTextureEnvTarget(i));
         arg("pname", getTextureEnvPName(i2));
@@ -2387,7 +2387,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glTexImage2D(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, Buffer buffer) {
+    public void glTexImage2D(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, Buffer buffer) throws IOException {
         begin("glTexImage2D");
         arg("target", i);
         arg("level", i2);
@@ -2404,7 +2404,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10, javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glTexParameterf(int i, int i2, float f) {
+    public void glTexParameterf(int i, int i2, float f) throws IOException {
         begin("glTexParameterf");
         arg("target", getTextureTarget(i));
         arg("pname", getTexturePName(i2));
@@ -2415,7 +2415,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glTexParameterx(int i, int i2, int i3) {
+    public void glTexParameterx(int i, int i2, int i3) throws IOException {
         begin("glTexParameterx");
         arg("target", getTextureTarget(i));
         arg("pname", getTexturePName(i2));
@@ -2426,7 +2426,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glTexParameteriv(int i, int i2, int[] iArr, int i3) {
+    public void glTexParameteriv(int i, int i2, int[] iArr, int i3) throws IOException {
         begin("glTexParameteriv");
         arg("target", getTextureTarget(i));
         arg("pname", getTexturePName(i2));
@@ -2437,7 +2437,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glTexParameteriv(int i, int i2, IntBuffer intBuffer) {
+    public void glTexParameteriv(int i, int i2, IntBuffer intBuffer) throws IOException {
         begin("glTexParameteriv");
         arg("target", getTextureTarget(i));
         arg("pname", getTexturePName(i2));
@@ -2448,7 +2448,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glTexSubImage2D(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, Buffer buffer) {
+    public void glTexSubImage2D(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, Buffer buffer) throws IOException {
         begin("glTexSubImage2D");
         arg("target", getTextureTarget(i));
         arg("level", i2);
@@ -2465,7 +2465,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glTranslatef(float f, float f2, float f3) {
+    public void glTranslatef(float f, float f2, float f3) throws IOException {
         begin("glTranslatef");
         arg("x", f);
         arg("y", f2);
@@ -2476,7 +2476,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glTranslatex(int i, int i2, int i3) {
+    public void glTranslatex(int i, int i2, int i3) throws IOException {
         begin("glTranslatex");
         arg("x", i);
         arg("y", i2);
@@ -2487,7 +2487,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glVertexPointer(int i, int i2, int i3, Buffer buffer) {
+    public void glVertexPointer(int i, int i2, int i3, Buffer buffer) throws IOException {
         begin("glVertexPointer");
         argPointer(i, i2, i3, buffer);
         end();
@@ -2497,7 +2497,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glViewport(int i, int i2, int i3, int i4) {
+    public void glViewport(int i, int i2, int i3, int i4) throws IOException {
         begin("glViewport");
         arg("x", i);
         arg("y", i2);
@@ -2509,7 +2509,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glClipPlanef(int i, float[] fArr, int i2) {
+    public void glClipPlanef(int i, float[] fArr, int i2) throws IOException {
         begin("glClipPlanef");
         arg("plane", i);
         arg("equation", 4, fArr, i2);
@@ -2520,7 +2520,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glClipPlanef(int i, FloatBuffer floatBuffer) {
+    public void glClipPlanef(int i, FloatBuffer floatBuffer) throws IOException {
         begin("glClipPlanef");
         arg("plane", i);
         arg("equation", 4, floatBuffer);
@@ -2530,7 +2530,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glClipPlanex(int i, int[] iArr, int i2) {
+    public void glClipPlanex(int i, int[] iArr, int i2) throws IOException {
         begin("glClipPlanex");
         arg("plane", i);
         arg("equation", 4, iArr, i2);
@@ -2541,7 +2541,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glClipPlanex(int i, IntBuffer intBuffer) {
+    public void glClipPlanex(int i, IntBuffer intBuffer) throws IOException {
         begin("glClipPlanef");
         arg("plane", i);
         arg("equation", 4, intBuffer);
@@ -2551,7 +2551,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11Ext
-    public void glDrawTexfOES(float f, float f2, float f3, float f4, float f5) {
+    public void glDrawTexfOES(float f, float f2, float f3, float f4, float f5) throws IOException {
         begin("glDrawTexfOES");
         arg("x", f);
         arg("y", f2);
@@ -2564,7 +2564,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11Ext
-    public void glDrawTexfvOES(float[] fArr, int i) {
+    public void glDrawTexfvOES(float[] fArr, int i) throws IOException {
         begin("glDrawTexfvOES");
         arg("coords", 5, fArr, i);
         arg(CallLog.Calls.OFFSET_PARAM_KEY, i);
@@ -2574,7 +2574,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11Ext
-    public void glDrawTexfvOES(FloatBuffer floatBuffer) {
+    public void glDrawTexfvOES(FloatBuffer floatBuffer) throws IOException {
         begin("glDrawTexfvOES");
         arg("coords", 5, floatBuffer);
         end();
@@ -2583,7 +2583,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11Ext
-    public void glDrawTexiOES(int i, int i2, int i3, int i4, int i5) {
+    public void glDrawTexiOES(int i, int i2, int i3, int i4, int i5) throws IOException {
         begin("glDrawTexiOES");
         arg("x", i);
         arg("y", i2);
@@ -2596,7 +2596,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11Ext
-    public void glDrawTexivOES(int[] iArr, int i) {
+    public void glDrawTexivOES(int[] iArr, int i) throws IOException {
         begin("glDrawTexivOES");
         arg("coords", 5, iArr, i);
         arg(CallLog.Calls.OFFSET_PARAM_KEY, i);
@@ -2606,7 +2606,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11Ext
-    public void glDrawTexivOES(IntBuffer intBuffer) {
+    public void glDrawTexivOES(IntBuffer intBuffer) throws IOException {
         begin("glDrawTexivOES");
         arg("coords", 5, intBuffer);
         end();
@@ -2615,7 +2615,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11Ext
-    public void glDrawTexsOES(short s, short s2, short s3, short s4, short s5) {
+    public void glDrawTexsOES(short s, short s2, short s3, short s4, short s5) throws IOException {
         begin("glDrawTexsOES");
         arg("x", (int) s);
         arg("y", (int) s2);
@@ -2628,7 +2628,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11Ext
-    public void glDrawTexsvOES(short[] sArr, int i) {
+    public void glDrawTexsvOES(short[] sArr, int i) throws IOException {
         begin("glDrawTexsvOES");
         arg("coords", 5, sArr, i);
         arg(CallLog.Calls.OFFSET_PARAM_KEY, i);
@@ -2638,7 +2638,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11Ext
-    public void glDrawTexsvOES(ShortBuffer shortBuffer) {
+    public void glDrawTexsvOES(ShortBuffer shortBuffer) throws IOException {
         begin("glDrawTexsvOES");
         arg("coords", 5, shortBuffer);
         end();
@@ -2647,7 +2647,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11Ext
-    public void glDrawTexxOES(int i, int i2, int i3, int i4, int i5) {
+    public void glDrawTexxOES(int i, int i2, int i3, int i4, int i5) throws IOException {
         begin("glDrawTexxOES");
         arg("x", i);
         arg("y", i2);
@@ -2660,7 +2660,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11Ext
-    public void glDrawTexxvOES(int[] iArr, int i) {
+    public void glDrawTexxvOES(int[] iArr, int i) throws IOException {
         begin("glDrawTexxvOES");
         arg("coords", 5, iArr, i);
         arg(CallLog.Calls.OFFSET_PARAM_KEY, i);
@@ -2670,7 +2670,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11Ext
-    public void glDrawTexxvOES(IntBuffer intBuffer) {
+    public void glDrawTexxvOES(IntBuffer intBuffer) throws IOException {
         begin("glDrawTexxvOES");
         arg("coords", 5, intBuffer);
         end();
@@ -2679,33 +2679,33 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10Ext
-    public int glQueryMatrixxOES(int[] iArr, int i, int[] iArr2, int i2) {
+    public int glQueryMatrixxOES(int[] iArr, int i, int[] iArr2, int i2) throws IOException {
         begin("glQueryMatrixxOES");
         arg("mantissa", Arrays.toString(iArr));
         arg("exponent", Arrays.toString(iArr2));
         end();
-        int glQueryMatrixxOES = this.mgl10Ext.glQueryMatrixxOES(iArr, i, iArr2, i2);
+        int iGlQueryMatrixxOES = this.mgl10Ext.glQueryMatrixxOES(iArr, i, iArr2, i2);
         returns(toString(16, 2, iArr, i));
         returns(toString(16, 0, iArr2, i2));
         checkError();
-        return glQueryMatrixxOES;
+        return iGlQueryMatrixxOES;
     }
 
     @Override // javax.microedition.khronos.opengles.GL10Ext
-    public int glQueryMatrixxOES(IntBuffer intBuffer, IntBuffer intBuffer2) {
+    public int glQueryMatrixxOES(IntBuffer intBuffer, IntBuffer intBuffer2) throws IOException {
         begin("glQueryMatrixxOES");
         arg("mantissa", intBuffer.toString());
         arg("exponent", intBuffer2.toString());
         end();
-        int glQueryMatrixxOES = this.mgl10Ext.glQueryMatrixxOES(intBuffer, intBuffer2);
+        int iGlQueryMatrixxOES = this.mgl10Ext.glQueryMatrixxOES(intBuffer, intBuffer2);
         returns(toString(16, 2, intBuffer));
         returns(toString(16, 0, intBuffer2));
         checkError();
-        return glQueryMatrixxOES;
+        return iGlQueryMatrixxOES;
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glBindBuffer(int i, int i2) {
+    public void glBindBuffer(int i, int i2) throws IOException {
         begin("glBindBuffer");
         arg("target", i);
         arg("buffer", i2);
@@ -2715,7 +2715,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glBufferData(int i, int i2, Buffer buffer, int i3) {
+    public void glBufferData(int i, int i2, Buffer buffer, int i3) throws IOException {
         begin("glBufferData");
         arg("target", i);
         arg(Contract.DatabaseSize.PATH, i2);
@@ -2727,7 +2727,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glBufferSubData(int i, int i2, int i3, Buffer buffer) {
+    public void glBufferSubData(int i, int i2, int i3, Buffer buffer) throws IOException {
         begin("glBufferSubData");
         arg("target", i);
         arg(CallLog.Calls.OFFSET_PARAM_KEY, i2);
@@ -2739,7 +2739,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glColor4ub(byte b, byte b2, byte b3, byte b4) {
+    public void glColor4ub(byte b, byte b2, byte b3, byte b4) throws IOException {
         begin("glColor4ub");
         arg("red", (int) b);
         arg("green", (int) b2);
@@ -2751,7 +2751,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glDeleteBuffers(int i, int[] iArr, int i2) {
+    public void glDeleteBuffers(int i, int[] iArr, int i2) throws IOException {
         begin("glDeleteBuffers");
         arg("n", i);
         arg("buffers", Arrays.toString(iArr));
@@ -2762,7 +2762,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glDeleteBuffers(int i, IntBuffer intBuffer) {
+    public void glDeleteBuffers(int i, IntBuffer intBuffer) throws IOException {
         begin("glDeleteBuffers");
         arg("n", i);
         arg("buffers", intBuffer.toString());
@@ -2772,7 +2772,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glGenBuffers(int i, int[] iArr, int i2) {
+    public void glGenBuffers(int i, int[] iArr, int i2) throws IOException {
         begin("glGenBuffers");
         arg("n", i);
         arg("buffers", Arrays.toString(iArr));
@@ -2783,7 +2783,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glGenBuffers(int i, IntBuffer intBuffer) {
+    public void glGenBuffers(int i, IntBuffer intBuffer) throws IOException {
         begin("glGenBuffers");
         arg("n", i);
         arg("buffers", intBuffer.toString());
@@ -2793,7 +2793,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glGetBooleanv(int i, boolean[] zArr, int i2) {
+    public void glGetBooleanv(int i, boolean[] zArr, int i2) throws IOException {
         begin("glGetBooleanv");
         arg("pname", i);
         arg(KnoxZtInternalConst.Event.LogKeys.PARAMS, Arrays.toString(zArr));
@@ -2804,7 +2804,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glGetBooleanv(int i, IntBuffer intBuffer) {
+    public void glGetBooleanv(int i, IntBuffer intBuffer) throws IOException {
         begin("glGetBooleanv");
         arg("pname", i);
         arg(KnoxZtInternalConst.Event.LogKeys.PARAMS, intBuffer.toString());
@@ -2814,7 +2814,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glGetBufferParameteriv(int i, int i2, int[] iArr, int i3) {
+    public void glGetBufferParameteriv(int i, int i2, int[] iArr, int i3) throws IOException {
         begin("glGetBufferParameteriv");
         arg("target", i);
         arg("pname", i2);
@@ -2826,7 +2826,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glGetBufferParameteriv(int i, int i2, IntBuffer intBuffer) {
+    public void glGetBufferParameteriv(int i, int i2, IntBuffer intBuffer) throws IOException {
         begin("glGetBufferParameteriv");
         arg("target", i);
         arg("pname", i2);
@@ -2837,7 +2837,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glGetClipPlanef(int i, float[] fArr, int i2) {
+    public void glGetClipPlanef(int i, float[] fArr, int i2) throws IOException {
         begin("glGetClipPlanef");
         arg("pname", i);
         arg("eqn", Arrays.toString(fArr));
@@ -2848,7 +2848,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glGetClipPlanef(int i, FloatBuffer floatBuffer) {
+    public void glGetClipPlanef(int i, FloatBuffer floatBuffer) throws IOException {
         begin("glGetClipPlanef");
         arg("pname", i);
         arg("eqn", floatBuffer.toString());
@@ -2858,7 +2858,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glGetClipPlanex(int i, int[] iArr, int i2) {
+    public void glGetClipPlanex(int i, int[] iArr, int i2) throws IOException {
         begin("glGetClipPlanex");
         arg("pname", i);
         arg("eqn", Arrays.toString(iArr));
@@ -2868,7 +2868,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glGetClipPlanex(int i, IntBuffer intBuffer) {
+    public void glGetClipPlanex(int i, IntBuffer intBuffer) throws IOException {
         begin("glGetClipPlanex");
         arg("pname", i);
         arg("eqn", intBuffer.toString());
@@ -2878,7 +2878,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glGetFixedv(int i, int[] iArr, int i2) {
+    public void glGetFixedv(int i, int[] iArr, int i2) throws IOException {
         begin("glGetFixedv");
         arg("pname", i);
         arg(KnoxZtInternalConst.Event.LogKeys.PARAMS, Arrays.toString(iArr));
@@ -2888,7 +2888,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glGetFixedv(int i, IntBuffer intBuffer) {
+    public void glGetFixedv(int i, IntBuffer intBuffer) throws IOException {
         begin("glGetFixedv");
         arg("pname", i);
         arg(KnoxZtInternalConst.Event.LogKeys.PARAMS, intBuffer.toString());
@@ -2898,7 +2898,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glGetFloatv(int i, float[] fArr, int i2) {
+    public void glGetFloatv(int i, float[] fArr, int i2) throws IOException {
         begin("glGetFloatv");
         arg("pname", i);
         arg(KnoxZtInternalConst.Event.LogKeys.PARAMS, Arrays.toString(fArr));
@@ -2908,7 +2908,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glGetFloatv(int i, FloatBuffer floatBuffer) {
+    public void glGetFloatv(int i, FloatBuffer floatBuffer) throws IOException {
         begin("glGetFloatv");
         arg("pname", i);
         arg(KnoxZtInternalConst.Event.LogKeys.PARAMS, floatBuffer.toString());
@@ -2918,7 +2918,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glGetLightfv(int i, int i2, float[] fArr, int i3) {
+    public void glGetLightfv(int i, int i2, float[] fArr, int i3) throws IOException {
         begin("glGetLightfv");
         arg("light", i);
         arg("pname", i2);
@@ -2930,7 +2930,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glGetLightfv(int i, int i2, FloatBuffer floatBuffer) {
+    public void glGetLightfv(int i, int i2, FloatBuffer floatBuffer) throws IOException {
         begin("glGetLightfv");
         arg("light", i);
         arg("pname", i2);
@@ -2941,7 +2941,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glGetLightxv(int i, int i2, int[] iArr, int i3) {
+    public void glGetLightxv(int i, int i2, int[] iArr, int i3) throws IOException {
         begin("glGetLightxv");
         arg("light", i);
         arg("pname", i2);
@@ -2953,7 +2953,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glGetLightxv(int i, int i2, IntBuffer intBuffer) {
+    public void glGetLightxv(int i, int i2, IntBuffer intBuffer) throws IOException {
         begin("glGetLightxv");
         arg("light", i);
         arg("pname", i2);
@@ -2964,7 +2964,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glGetMaterialfv(int i, int i2, float[] fArr, int i3) {
+    public void glGetMaterialfv(int i, int i2, float[] fArr, int i3) throws IOException {
         begin("glGetMaterialfv");
         arg(Context.FACE_SERVICE, i);
         arg("pname", i2);
@@ -2976,7 +2976,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glGetMaterialfv(int i, int i2, FloatBuffer floatBuffer) {
+    public void glGetMaterialfv(int i, int i2, FloatBuffer floatBuffer) throws IOException {
         begin("glGetMaterialfv");
         arg(Context.FACE_SERVICE, i);
         arg("pname", i2);
@@ -2987,7 +2987,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glGetMaterialxv(int i, int i2, int[] iArr, int i3) {
+    public void glGetMaterialxv(int i, int i2, int[] iArr, int i3) throws IOException {
         begin("glGetMaterialxv");
         arg(Context.FACE_SERVICE, i);
         arg("pname", i2);
@@ -2999,7 +2999,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glGetMaterialxv(int i, int i2, IntBuffer intBuffer) {
+    public void glGetMaterialxv(int i, int i2, IntBuffer intBuffer) throws IOException {
         begin("glGetMaterialxv");
         arg(Context.FACE_SERVICE, i);
         arg("pname", i2);
@@ -3010,7 +3010,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glGetTexEnviv(int i, int i2, int[] iArr, int i3) {
+    public void glGetTexEnviv(int i, int i2, int[] iArr, int i3) throws IOException {
         begin("glGetTexEnviv");
         arg("env", i);
         arg("pname", i2);
@@ -3022,7 +3022,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glGetTexEnviv(int i, int i2, IntBuffer intBuffer) {
+    public void glGetTexEnviv(int i, int i2, IntBuffer intBuffer) throws IOException {
         begin("glGetTexEnviv");
         arg("env", i);
         arg("pname", i2);
@@ -3033,7 +3033,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glGetTexEnvxv(int i, int i2, int[] iArr, int i3) {
+    public void glGetTexEnvxv(int i, int i2, int[] iArr, int i3) throws IOException {
         begin("glGetTexEnviv");
         arg("env", i);
         arg("pname", i2);
@@ -3045,7 +3045,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glGetTexEnvxv(int i, int i2, IntBuffer intBuffer) {
+    public void glGetTexEnvxv(int i, int i2, IntBuffer intBuffer) throws IOException {
         begin("glGetTexEnviv");
         arg("env", i);
         arg("pname", i2);
@@ -3056,7 +3056,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glGetTexParameterfv(int i, int i2, float[] fArr, int i3) {
+    public void glGetTexParameterfv(int i, int i2, float[] fArr, int i3) throws IOException {
         begin("glGetTexParameterfv");
         arg("target", i);
         arg("pname", i2);
@@ -3068,7 +3068,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glGetTexParameterfv(int i, int i2, FloatBuffer floatBuffer) {
+    public void glGetTexParameterfv(int i, int i2, FloatBuffer floatBuffer) throws IOException {
         begin("glGetTexParameterfv");
         arg("target", i);
         arg("pname", i2);
@@ -3079,7 +3079,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glGetTexParameteriv(int i, int i2, int[] iArr, int i3) {
+    public void glGetTexParameteriv(int i, int i2, int[] iArr, int i3) throws IOException {
         begin("glGetTexParameteriv");
         arg("target", i);
         arg("pname", i2);
@@ -3091,7 +3091,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glGetTexParameteriv(int i, int i2, IntBuffer intBuffer) {
+    public void glGetTexParameteriv(int i, int i2, IntBuffer intBuffer) throws IOException {
         begin("glGetTexParameteriv");
         arg("target", i);
         arg("pname", i2);
@@ -3102,7 +3102,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glGetTexParameterxv(int i, int i2, int[] iArr, int i3) {
+    public void glGetTexParameterxv(int i, int i2, int[] iArr, int i3) throws IOException {
         begin("glGetTexParameterxv");
         arg("target", i);
         arg("pname", i2);
@@ -3114,7 +3114,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glGetTexParameterxv(int i, int i2, IntBuffer intBuffer) {
+    public void glGetTexParameterxv(int i, int i2, IntBuffer intBuffer) throws IOException {
         begin("glGetTexParameterxv");
         arg("target", i);
         arg("pname", i2);
@@ -3125,37 +3125,37 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public boolean glIsBuffer(int i) {
+    public boolean glIsBuffer(int i) throws IOException {
         begin("glIsBuffer");
         arg("buffer", i);
         end();
-        boolean glIsBuffer = this.mgl11.glIsBuffer(i);
+        boolean zGlIsBuffer = this.mgl11.glIsBuffer(i);
         checkError();
-        return glIsBuffer;
+        return zGlIsBuffer;
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public boolean glIsEnabled(int i) {
+    public boolean glIsEnabled(int i) throws IOException {
         begin("glIsEnabled");
         arg("cap", i);
         end();
-        boolean glIsEnabled = this.mgl11.glIsEnabled(i);
+        boolean zGlIsEnabled = this.mgl11.glIsEnabled(i);
         checkError();
-        return glIsEnabled;
+        return zGlIsEnabled;
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public boolean glIsTexture(int i) {
+    public boolean glIsTexture(int i) throws IOException {
         begin("glIsTexture");
         arg("texture", i);
         end();
-        boolean glIsTexture = this.mgl11.glIsTexture(i);
+        boolean zGlIsTexture = this.mgl11.glIsTexture(i);
         checkError();
-        return glIsTexture;
+        return zGlIsTexture;
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glPointParameterf(int i, float f) {
+    public void glPointParameterf(int i, float f) throws IOException {
         begin("glPointParameterf");
         arg("pname", i);
         arg("param", f);
@@ -3165,7 +3165,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glPointParameterfv(int i, float[] fArr, int i2) {
+    public void glPointParameterfv(int i, float[] fArr, int i2) throws IOException {
         begin("glPointParameterfv");
         arg("pname", i);
         arg(KnoxZtInternalConst.Event.LogKeys.PARAMS, Arrays.toString(fArr));
@@ -3176,7 +3176,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glPointParameterfv(int i, FloatBuffer floatBuffer) {
+    public void glPointParameterfv(int i, FloatBuffer floatBuffer) throws IOException {
         begin("glPointParameterfv");
         arg("pname", i);
         arg(KnoxZtInternalConst.Event.LogKeys.PARAMS, floatBuffer.toString());
@@ -3186,7 +3186,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glPointParameterx(int i, int i2) {
+    public void glPointParameterx(int i, int i2) throws IOException {
         begin("glPointParameterfv");
         arg("pname", i);
         arg("param", i2);
@@ -3196,7 +3196,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glPointParameterxv(int i, int[] iArr, int i2) {
+    public void glPointParameterxv(int i, int[] iArr, int i2) throws IOException {
         begin("glPointParameterxv");
         arg("pname", i);
         arg(KnoxZtInternalConst.Event.LogKeys.PARAMS, Arrays.toString(iArr));
@@ -3207,7 +3207,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glPointParameterxv(int i, IntBuffer intBuffer) {
+    public void glPointParameterxv(int i, IntBuffer intBuffer) throws IOException {
         begin("glPointParameterxv");
         arg("pname", i);
         arg(KnoxZtInternalConst.Event.LogKeys.PARAMS, intBuffer.toString());
@@ -3217,7 +3217,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glPointSizePointerOES(int i, int i2, Buffer buffer) {
+    public void glPointSizePointerOES(int i, int i2, Buffer buffer) throws IOException {
         begin("glPointSizePointerOES");
         arg("type", i);
         arg("stride", i2);
@@ -3228,7 +3228,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glTexEnvi(int i, int i2, int i3) {
+    public void glTexEnvi(int i, int i2, int i3) throws IOException {
         begin("glTexEnvi");
         arg("target", i);
         arg("pname", i2);
@@ -3239,7 +3239,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glTexEnviv(int i, int i2, int[] iArr, int i3) {
+    public void glTexEnviv(int i, int i2, int[] iArr, int i3) throws IOException {
         begin("glTexEnviv");
         arg("target", i);
         arg("pname", i2);
@@ -3251,7 +3251,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glTexEnviv(int i, int i2, IntBuffer intBuffer) {
+    public void glTexEnviv(int i, int i2, IntBuffer intBuffer) throws IOException {
         begin("glTexEnviv");
         arg("target", i);
         arg("pname", i2);
@@ -3262,7 +3262,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11, javax.microedition.khronos.opengles.GL11Ext
-    public void glTexParameterfv(int i, int i2, float[] fArr, int i3) {
+    public void glTexParameterfv(int i, int i2, float[] fArr, int i3) throws IOException {
         begin("glTexParameterfv");
         arg("target", i);
         arg("pname", i2);
@@ -3274,7 +3274,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glTexParameterfv(int i, int i2, FloatBuffer floatBuffer) {
+    public void glTexParameterfv(int i, int i2, FloatBuffer floatBuffer) throws IOException {
         begin("glTexParameterfv");
         arg("target", i);
         arg("pname", i2);
@@ -3285,7 +3285,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glTexParameteri(int i, int i2, int i3) {
+    public void glTexParameteri(int i, int i2, int i3) throws IOException {
         begin("glTexParameterxv");
         arg("target", i);
         arg("pname", i2);
@@ -3296,7 +3296,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glTexParameterxv(int i, int i2, int[] iArr, int i3) {
+    public void glTexParameterxv(int i, int i2, int[] iArr, int i3) throws IOException {
         begin("glTexParameterxv");
         arg("target", i);
         arg("pname", i2);
@@ -3308,7 +3308,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glTexParameterxv(int i, int i2, IntBuffer intBuffer) {
+    public void glTexParameterxv(int i, int i2, IntBuffer intBuffer) throws IOException {
         begin("glTexParameterxv");
         arg("target", i);
         arg("pname", i2);
@@ -3319,7 +3319,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glColorPointer(int i, int i2, int i3, int i4) {
+    public void glColorPointer(int i, int i2, int i3, int i4) throws IOException {
         begin("glColorPointer");
         arg(Contract.DatabaseSize.PATH, i);
         arg("type", i2);
@@ -3331,7 +3331,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glDrawElements(int i, int i2, int i3, int i4) {
+    public void glDrawElements(int i, int i2, int i3, int i4) throws IOException {
         begin("glDrawElements");
         arg("mode", i);
         arg(Contract.Events.Projection.COUNT_ONLY, i2);
@@ -3343,7 +3343,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glGetPointerv(int i, Buffer[] bufferArr) {
+    public void glGetPointerv(int i, Buffer[] bufferArr) throws IOException {
         begin("glGetPointerv");
         arg("pname", i);
         arg(KnoxZtInternalConst.Event.LogKeys.PARAMS, Arrays.toString(bufferArr));
@@ -3353,7 +3353,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glNormalPointer(int i, int i2, int i3) {
+    public void glNormalPointer(int i, int i2, int i3) throws IOException {
         begin("glNormalPointer");
         arg("type", i);
         arg("stride", i2);
@@ -3363,7 +3363,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glTexCoordPointer(int i, int i2, int i3, int i4) {
+    public void glTexCoordPointer(int i, int i2, int i3, int i4) throws IOException {
         begin("glTexCoordPointer");
         arg(Contract.DatabaseSize.PATH, i);
         arg("type", i2);
@@ -3374,7 +3374,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11
-    public void glVertexPointer(int i, int i2, int i3, int i4) {
+    public void glVertexPointer(int i, int i2, int i3, int i4) throws IOException {
         begin("glVertexPointer");
         arg(Contract.DatabaseSize.PATH, i);
         arg("type", i2);
@@ -3385,7 +3385,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11Ext
-    public void glCurrentPaletteMatrixOES(int i) {
+    public void glCurrentPaletteMatrixOES(int i) throws IOException {
         begin("glCurrentPaletteMatrixOES");
         arg("matrixpaletteindex", i);
         end();
@@ -3394,7 +3394,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11Ext
-    public void glLoadPaletteFromModelViewMatrixOES() {
+    public void glLoadPaletteFromModelViewMatrixOES() throws IOException {
         begin("glLoadPaletteFromModelViewMatrixOES");
         end();
         this.mgl11Ext.glLoadPaletteFromModelViewMatrixOES();
@@ -3402,7 +3402,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11Ext
-    public void glMatrixIndexPointerOES(int i, int i2, int i3, Buffer buffer) {
+    public void glMatrixIndexPointerOES(int i, int i2, int i3, Buffer buffer) throws IOException {
         begin("glMatrixIndexPointerOES");
         argPointer(i, i2, i3, buffer);
         end();
@@ -3411,7 +3411,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11Ext
-    public void glMatrixIndexPointerOES(int i, int i2, int i3, int i4) {
+    public void glMatrixIndexPointerOES(int i, int i2, int i3, int i4) throws IOException {
         begin("glMatrixIndexPointerOES");
         arg(Contract.DatabaseSize.PATH, i);
         arg("type", i2);
@@ -3423,7 +3423,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11Ext
-    public void glWeightPointerOES(int i, int i2, int i3, Buffer buffer) {
+    public void glWeightPointerOES(int i, int i2, int i3, Buffer buffer) throws IOException {
         begin("glWeightPointerOES");
         argPointer(i, i2, i3, buffer);
         end();
@@ -3432,7 +3432,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11Ext
-    public void glWeightPointerOES(int i, int i2, int i3, int i4) {
+    public void glWeightPointerOES(int i, int i2, int i3, int i4) throws IOException {
         begin("glWeightPointerOES");
         arg(Contract.DatabaseSize.PATH, i);
         arg("type", i2);
@@ -3444,7 +3444,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glBindFramebufferOES(int i, int i2) {
+    public void glBindFramebufferOES(int i, int i2) throws IOException {
         begin("glBindFramebufferOES");
         arg("target", i);
         arg("framebuffer", i2);
@@ -3454,7 +3454,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glBindRenderbufferOES(int i, int i2) {
+    public void glBindRenderbufferOES(int i, int i2) throws IOException {
         begin("glBindRenderbufferOES");
         arg("target", i);
         arg("renderbuffer", i2);
@@ -3464,7 +3464,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glBlendEquation(int i) {
+    public void glBlendEquation(int i) throws IOException {
         begin("glBlendEquation");
         arg("mode", i);
         end();
@@ -3473,7 +3473,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glBlendEquationSeparate(int i, int i2) {
+    public void glBlendEquationSeparate(int i, int i2) throws IOException {
         begin("glBlendEquationSeparate");
         arg("modeRGB", i);
         arg("modeAlpha", i2);
@@ -3483,7 +3483,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glBlendFuncSeparate(int i, int i2, int i3, int i4) {
+    public void glBlendFuncSeparate(int i, int i2, int i3, int i4) throws IOException {
         begin("glBlendFuncSeparate");
         arg("srcRGB", i);
         arg("dstRGB", i2);
@@ -3495,17 +3495,17 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
-    public int glCheckFramebufferStatusOES(int i) {
+    public int glCheckFramebufferStatusOES(int i) throws IOException {
         begin("glCheckFramebufferStatusOES");
         arg("target", i);
         end();
-        int glCheckFramebufferStatusOES = this.mgl11ExtensionPack.glCheckFramebufferStatusOES(i);
+        int iGlCheckFramebufferStatusOES = this.mgl11ExtensionPack.glCheckFramebufferStatusOES(i);
         checkError();
-        return glCheckFramebufferStatusOES;
+        return iGlCheckFramebufferStatusOES;
     }
 
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glDeleteFramebuffersOES(int i, int[] iArr, int i2) {
+    public void glDeleteFramebuffersOES(int i, int[] iArr, int i2) throws IOException {
         begin("glDeleteFramebuffersOES");
         arg("n", i);
         arg("framebuffers", Arrays.toString(iArr));
@@ -3516,7 +3516,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glDeleteFramebuffersOES(int i, IntBuffer intBuffer) {
+    public void glDeleteFramebuffersOES(int i, IntBuffer intBuffer) throws IOException {
         begin("glDeleteFramebuffersOES");
         arg("n", i);
         arg("framebuffers", intBuffer.toString());
@@ -3526,7 +3526,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glDeleteRenderbuffersOES(int i, int[] iArr, int i2) {
+    public void glDeleteRenderbuffersOES(int i, int[] iArr, int i2) throws IOException {
         begin("glDeleteRenderbuffersOES");
         arg("n", i);
         arg("renderbuffers", Arrays.toString(iArr));
@@ -3537,7 +3537,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glDeleteRenderbuffersOES(int i, IntBuffer intBuffer) {
+    public void glDeleteRenderbuffersOES(int i, IntBuffer intBuffer) throws IOException {
         begin("glDeleteRenderbuffersOES");
         arg("n", i);
         arg("renderbuffers", intBuffer.toString());
@@ -3547,7 +3547,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glFramebufferRenderbufferOES(int i, int i2, int i3, int i4) {
+    public void glFramebufferRenderbufferOES(int i, int i2, int i3, int i4) throws IOException {
         begin("glFramebufferRenderbufferOES");
         arg("target", i);
         arg("attachment", i2);
@@ -3559,7 +3559,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glFramebufferTexture2DOES(int i, int i2, int i3, int i4, int i5) {
+    public void glFramebufferTexture2DOES(int i, int i2, int i3, int i4, int i5) throws IOException {
         begin("glFramebufferTexture2DOES");
         arg("target", i);
         arg("attachment", i2);
@@ -3572,7 +3572,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glGenerateMipmapOES(int i) {
+    public void glGenerateMipmapOES(int i) throws IOException {
         begin("glGenerateMipmapOES");
         arg("target", i);
         end();
@@ -3581,7 +3581,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glGenFramebuffersOES(int i, int[] iArr, int i2) {
+    public void glGenFramebuffersOES(int i, int[] iArr, int i2) throws IOException {
         begin("glGenFramebuffersOES");
         arg("n", i);
         arg("framebuffers", Arrays.toString(iArr));
@@ -3592,7 +3592,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glGenFramebuffersOES(int i, IntBuffer intBuffer) {
+    public void glGenFramebuffersOES(int i, IntBuffer intBuffer) throws IOException {
         begin("glGenFramebuffersOES");
         arg("n", i);
         arg("framebuffers", intBuffer.toString());
@@ -3602,7 +3602,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glGenRenderbuffersOES(int i, int[] iArr, int i2) {
+    public void glGenRenderbuffersOES(int i, int[] iArr, int i2) throws IOException {
         begin("glGenRenderbuffersOES");
         arg("n", i);
         arg("renderbuffers", Arrays.toString(iArr));
@@ -3613,7 +3613,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glGenRenderbuffersOES(int i, IntBuffer intBuffer) {
+    public void glGenRenderbuffersOES(int i, IntBuffer intBuffer) throws IOException {
         begin("glGenRenderbuffersOES");
         arg("n", i);
         arg("renderbuffers", intBuffer.toString());
@@ -3623,7 +3623,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glGetFramebufferAttachmentParameterivOES(int i, int i2, int i3, int[] iArr, int i4) {
+    public void glGetFramebufferAttachmentParameterivOES(int i, int i2, int i3, int[] iArr, int i4) throws IOException {
         begin("glGetFramebufferAttachmentParameterivOES");
         arg("target", i);
         arg("attachment", i2);
@@ -3636,7 +3636,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glGetFramebufferAttachmentParameterivOES(int i, int i2, int i3, IntBuffer intBuffer) {
+    public void glGetFramebufferAttachmentParameterivOES(int i, int i2, int i3, IntBuffer intBuffer) throws IOException {
         begin("glGetFramebufferAttachmentParameterivOES");
         arg("target", i);
         arg("attachment", i2);
@@ -3648,7 +3648,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glGetRenderbufferParameterivOES(int i, int i2, int[] iArr, int i3) {
+    public void glGetRenderbufferParameterivOES(int i, int i2, int[] iArr, int i3) throws IOException {
         begin("glGetRenderbufferParameterivOES");
         arg("target", i);
         arg("pname", i2);
@@ -3660,7 +3660,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glGetRenderbufferParameterivOES(int i, int i2, IntBuffer intBuffer) {
+    public void glGetRenderbufferParameterivOES(int i, int i2, IntBuffer intBuffer) throws IOException {
         begin("glGetRenderbufferParameterivOES");
         arg("target", i);
         arg("pname", i2);
@@ -3671,7 +3671,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glGetTexGenfv(int i, int i2, float[] fArr, int i3) {
+    public void glGetTexGenfv(int i, int i2, float[] fArr, int i3) throws IOException {
         begin("glGetTexGenfv");
         arg("coord", i);
         arg("pname", i2);
@@ -3683,7 +3683,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glGetTexGenfv(int i, int i2, FloatBuffer floatBuffer) {
+    public void glGetTexGenfv(int i, int i2, FloatBuffer floatBuffer) throws IOException {
         begin("glGetTexGenfv");
         arg("coord", i);
         arg("pname", i2);
@@ -3694,7 +3694,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glGetTexGeniv(int i, int i2, int[] iArr, int i3) {
+    public void glGetTexGeniv(int i, int i2, int[] iArr, int i3) throws IOException {
         begin("glGetTexGeniv");
         arg("coord", i);
         arg("pname", i2);
@@ -3706,7 +3706,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glGetTexGeniv(int i, int i2, IntBuffer intBuffer) {
+    public void glGetTexGeniv(int i, int i2, IntBuffer intBuffer) throws IOException {
         begin("glGetTexGeniv");
         arg("coord", i);
         arg("pname", i2);
@@ -3717,7 +3717,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glGetTexGenxv(int i, int i2, int[] iArr, int i3) {
+    public void glGetTexGenxv(int i, int i2, int[] iArr, int i3) throws IOException {
         begin("glGetTexGenxv");
         arg("coord", i);
         arg("pname", i2);
@@ -3729,7 +3729,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glGetTexGenxv(int i, int i2, IntBuffer intBuffer) {
+    public void glGetTexGenxv(int i, int i2, IntBuffer intBuffer) throws IOException {
         begin("glGetTexGenxv");
         arg("coord", i);
         arg("pname", i2);
@@ -3740,17 +3740,17 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
-    public boolean glIsFramebufferOES(int i) {
+    public boolean glIsFramebufferOES(int i) throws IOException {
         begin("glIsFramebufferOES");
         arg("framebuffer", i);
         end();
-        boolean glIsFramebufferOES = this.mgl11ExtensionPack.glIsFramebufferOES(i);
+        boolean zGlIsFramebufferOES = this.mgl11ExtensionPack.glIsFramebufferOES(i);
         checkError();
-        return glIsFramebufferOES;
+        return zGlIsFramebufferOES;
     }
 
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
-    public boolean glIsRenderbufferOES(int i) {
+    public boolean glIsRenderbufferOES(int i) throws IOException {
         begin("glIsRenderbufferOES");
         arg("renderbuffer", i);
         end();
@@ -3760,7 +3760,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glRenderbufferStorageOES(int i, int i2, int i3, int i4) {
+    public void glRenderbufferStorageOES(int i, int i2, int i3, int i4) throws IOException {
         begin("glRenderbufferStorageOES");
         arg("target", i);
         arg("internalformat", i2);
@@ -3772,7 +3772,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glTexGenf(int i, int i2, float f) {
+    public void glTexGenf(int i, int i2, float f) throws IOException {
         begin("glTexGenf");
         arg("coord", i);
         arg("pname", i2);
@@ -3783,7 +3783,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glTexGenfv(int i, int i2, float[] fArr, int i3) {
+    public void glTexGenfv(int i, int i2, float[] fArr, int i3) throws IOException {
         begin("glTexGenfv");
         arg("coord", i);
         arg("pname", i2);
@@ -3795,7 +3795,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glTexGenfv(int i, int i2, FloatBuffer floatBuffer) {
+    public void glTexGenfv(int i, int i2, FloatBuffer floatBuffer) throws IOException {
         begin("glTexGenfv");
         arg("coord", i);
         arg("pname", i2);
@@ -3806,7 +3806,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glTexGeni(int i, int i2, int i3) {
+    public void glTexGeni(int i, int i2, int i3) throws IOException {
         begin("glTexGeni");
         arg("coord", i);
         arg("pname", i2);
@@ -3817,7 +3817,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glTexGeniv(int i, int i2, int[] iArr, int i3) {
+    public void glTexGeniv(int i, int i2, int[] iArr, int i3) throws IOException {
         begin("glTexGeniv");
         arg("coord", i);
         arg("pname", i2);
@@ -3829,7 +3829,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glTexGeniv(int i, int i2, IntBuffer intBuffer) {
+    public void glTexGeniv(int i, int i2, IntBuffer intBuffer) throws IOException {
         begin("glTexGeniv");
         arg("coord", i);
         arg("pname", i2);
@@ -3840,7 +3840,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glTexGenx(int i, int i2, int i3) {
+    public void glTexGenx(int i, int i2, int i3) throws IOException {
         begin("glTexGenx");
         arg("coord", i);
         arg("pname", i2);
@@ -3851,7 +3851,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glTexGenxv(int i, int i2, int[] iArr, int i3) {
+    public void glTexGenxv(int i, int i2, int[] iArr, int i3) throws IOException {
         begin("glTexGenxv");
         arg("coord", i);
         arg("pname", i2);
@@ -3863,7 +3863,7 @@ class GLLogWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glTexGenxv(int i, int i2, IntBuffer intBuffer) {
+    public void glTexGenxv(int i, int i2, IntBuffer intBuffer) throws IOException {
         begin("glTexGenxv");
         arg("coord", i);
         arg("pname", i2);

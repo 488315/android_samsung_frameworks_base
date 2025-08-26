@@ -11,7 +11,6 @@ import com.google.android.setupcompat.internal.TemplateLayout;
 import com.google.android.setupcompat.partnerconfig.PartnerConfig;
 import com.google.android.setupcompat.partnerconfig.PartnerConfigHelper;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SystemNavBarMixin implements Mixin {
     final boolean applyPartnerResources;
@@ -33,14 +32,14 @@ public class SystemNavBarMixin implements Mixin {
 
     public final void applyPartnerCustomizations(AttributeSet attributeSet, int i) {
         TemplateLayout templateLayout = this.templateLayout;
-        TypedArray obtainStyledAttributes = templateLayout.getContext().obtainStyledAttributes(attributeSet, R$styleable.SucSystemNavBarMixin, i, 0);
+        TypedArray typedArrayObtainStyledAttributes = templateLayout.getContext().obtainStyledAttributes(attributeSet, R$styleable.SucSystemNavBarMixin, i, 0);
         boolean z = true;
-        setSystemNavBarBackground(obtainStyledAttributes.getColor(1, 0));
+        setSystemNavBarBackground(typedArrayObtainStyledAttributes.getColor(1, 0));
         Window window = this.windowOfActivity;
         if (window != null && (window.getDecorView().getSystemUiVisibility() & 16) != 16) {
             z = false;
         }
-        boolean z2 = obtainStyledAttributes.getBoolean(0, z);
+        boolean z2 = typedArrayObtainStyledAttributes.getBoolean(0, z);
         if (this.windowOfActivity != null) {
             if (this.applyPartnerResources) {
                 Context context = templateLayout.getContext();
@@ -52,8 +51,8 @@ public class SystemNavBarMixin implements Mixin {
                 this.windowOfActivity.getDecorView().setSystemUiVisibility(this.windowOfActivity.getDecorView().getSystemUiVisibility() & (-17));
             }
         }
-        TypedArray obtainStyledAttributes2 = templateLayout.getContext().obtainStyledAttributes(new int[]{R.attr.navigationBarDividerColor});
-        int color = obtainStyledAttributes.getColor(2, obtainStyledAttributes2.getColor(0, 0));
+        TypedArray typedArrayObtainStyledAttributes2 = templateLayout.getContext().obtainStyledAttributes(new int[]{R.attr.navigationBarDividerColor});
+        int color = typedArrayObtainStyledAttributes.getColor(2, typedArrayObtainStyledAttributes2.getColor(0, 0));
         if (this.windowOfActivity != null) {
             if (this.applyPartnerResources) {
                 Context context2 = templateLayout.getContext();
@@ -65,8 +64,8 @@ public class SystemNavBarMixin implements Mixin {
             }
             this.windowOfActivity.setNavigationBarDividerColor(color);
         }
-        obtainStyledAttributes2.recycle();
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes2.recycle();
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     public final void setSystemNavBarBackground(int i) {

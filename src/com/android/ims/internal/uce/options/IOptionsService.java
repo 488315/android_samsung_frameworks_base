@@ -105,9 +105,9 @@ public interface IOptionsService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IOptionsService)) {
-                return (IOptionsService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IOptionsService)) {
+                return (IOptionsService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -151,76 +151,76 @@ public interface IOptionsService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    StatusCode version = getVersion(readInt);
+                    StatusCode version = getVersion(i3);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(version, 1);
                     return true;
                 case 2:
-                    int readInt2 = parcel.readInt();
-                    IOptionsListener asInterface = IOptionsListener.Stub.asInterface(parcel.readStrongBinder());
+                    int i4 = parcel.readInt();
+                    IOptionsListener iOptionsListenerAsInterface = IOptionsListener.Stub.asInterface(parcel.readStrongBinder());
                     UceLong uceLong = (UceLong) parcel.readTypedObject(UceLong.CREATOR);
                     parcel.enforceNoDataAvail();
-                    StatusCode addListener = addListener(readInt2, asInterface, uceLong);
+                    StatusCode statusCodeAddListener = addListener(i4, iOptionsListenerAsInterface, uceLong);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(addListener, 1);
+                    parcel2.writeTypedObject(statusCodeAddListener, 1);
                     parcel2.writeTypedObject(uceLong, 1);
                     return true;
                 case 3:
-                    int readInt3 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     UceLong uceLong2 = (UceLong) parcel.readTypedObject(UceLong.CREATOR);
                     parcel.enforceNoDataAvail();
-                    StatusCode removeListener = removeListener(readInt3, uceLong2);
+                    StatusCode statusCodeRemoveListener = removeListener(i5, uceLong2);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(removeListener, 1);
+                    parcel2.writeTypedObject(statusCodeRemoveListener, 1);
                     return true;
                 case 4:
-                    int readInt4 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     CapInfo capInfo = (CapInfo) parcel.readTypedObject(CapInfo.CREATOR);
-                    int readInt5 = parcel.readInt();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    StatusCode myInfo = setMyInfo(readInt4, capInfo, readInt5);
+                    StatusCode myInfo = setMyInfo(i6, capInfo, i7);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(myInfo, 1);
                     return true;
                 case 5:
-                    int readInt6 = parcel.readInt();
-                    int readInt7 = parcel.readInt();
+                    int i8 = parcel.readInt();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    StatusCode myInfo2 = getMyInfo(readInt6, readInt7);
+                    StatusCode myInfo2 = getMyInfo(i8, i9);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(myInfo2, 1);
                     return true;
                 case 6:
-                    int readInt8 = parcel.readInt();
-                    String readString = parcel.readString();
-                    int readInt9 = parcel.readInt();
+                    int i10 = parcel.readInt();
+                    String string = parcel.readString();
+                    int i11 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    StatusCode contactCap = getContactCap(readInt8, readString, readInt9);
+                    StatusCode contactCap = getContactCap(i10, string, i11);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(contactCap, 1);
                     return true;
                 case 7:
-                    int readInt10 = parcel.readInt();
-                    String[] createStringArray = parcel.createStringArray();
-                    int readInt11 = parcel.readInt();
+                    int i12 = parcel.readInt();
+                    String[] strArrCreateStringArray = parcel.createStringArray();
+                    int i13 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    StatusCode contactListCap = getContactListCap(readInt10, createStringArray, readInt11);
+                    StatusCode contactListCap = getContactListCap(i12, strArrCreateStringArray, i13);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(contactListCap, 1);
                     return true;
                 case 8:
-                    int readInt12 = parcel.readInt();
-                    int readInt13 = parcel.readInt();
-                    int readInt14 = parcel.readInt();
-                    String readString2 = parcel.readString();
+                    int i14 = parcel.readInt();
+                    int i15 = parcel.readInt();
+                    int i16 = parcel.readInt();
+                    String string2 = parcel.readString();
                     OptionsCapInfo optionsCapInfo = (OptionsCapInfo) parcel.readTypedObject(OptionsCapInfo.CREATOR);
-                    boolean readBoolean = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    StatusCode responseIncomingOptions = responseIncomingOptions(readInt12, readInt13, readInt14, readString2, optionsCapInfo, readBoolean);
+                    StatusCode statusCodeResponseIncomingOptions = responseIncomingOptions(i14, i15, i16, string2, optionsCapInfo, z);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(responseIncomingOptions, 1);
+                    parcel2.writeTypedObject(statusCodeResponseIncomingOptions, 1);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -245,148 +245,148 @@ public interface IOptionsService extends IInterface {
 
             @Override // com.android.ims.internal.uce.options.IOptionsService
             public StatusCode getVersion(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (StatusCode) obtain2.readTypedObject(StatusCode.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (StatusCode) parcelObtain2.readTypedObject(StatusCode.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.uce.options.IOptionsService
             public StatusCode addListener(int i, IOptionsListener iOptionsListener, UceLong uceLong) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iOptionsListener);
-                    obtain.writeTypedObject(uceLong, 0);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    StatusCode statusCode = (StatusCode) obtain2.readTypedObject(StatusCode.CREATOR);
-                    if (obtain2.readInt() != 0) {
-                        uceLong.readFromParcel(obtain2);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iOptionsListener);
+                    parcelObtain.writeTypedObject(uceLong, 0);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    StatusCode statusCode = (StatusCode) parcelObtain2.readTypedObject(StatusCode.CREATOR);
+                    if (parcelObtain2.readInt() != 0) {
+                        uceLong.readFromParcel(parcelObtain2);
                     }
                     return statusCode;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.uce.options.IOptionsService
             public StatusCode removeListener(int i, UceLong uceLong) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(uceLong, 0);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (StatusCode) obtain2.readTypedObject(StatusCode.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(uceLong, 0);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (StatusCode) parcelObtain2.readTypedObject(StatusCode.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.uce.options.IOptionsService
             public StatusCode setMyInfo(int i, CapInfo capInfo, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(capInfo, 0);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (StatusCode) obtain2.readTypedObject(StatusCode.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(capInfo, 0);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (StatusCode) parcelObtain2.readTypedObject(StatusCode.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.uce.options.IOptionsService
             public StatusCode getMyInfo(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (StatusCode) obtain2.readTypedObject(StatusCode.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (StatusCode) parcelObtain2.readTypedObject(StatusCode.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.uce.options.IOptionsService
             public StatusCode getContactCap(int i, String str, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (StatusCode) obtain2.readTypedObject(StatusCode.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (StatusCode) parcelObtain2.readTypedObject(StatusCode.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.uce.options.IOptionsService
             public StatusCode getContactListCap(int i, String[] strArr, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (StatusCode) obtain2.readTypedObject(StatusCode.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (StatusCode) parcelObtain2.readTypedObject(StatusCode.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.ims.internal.uce.options.IOptionsService
             public StatusCode responseIncomingOptions(int i, int i2, int i3, String str, OptionsCapInfo optionsCapInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(optionsCapInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (StatusCode) obtain2.readTypedObject(StatusCode.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(optionsCapInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (StatusCode) parcelObtain2.readTypedObject(StatusCode.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

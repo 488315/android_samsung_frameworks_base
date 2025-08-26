@@ -14,7 +14,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class PhysicsAnimator$configureDynamicAnimation$2 implements DynamicAnimation.OnAnimationEndListener {
     public final /* synthetic */ DynamicAnimation $anim;
@@ -36,12 +35,12 @@ public final class PhysicsAnimator$configureDynamicAnimation$2 implements Dynami
         CollectionsKt__MutableCollectionsKt.removeAll(arrayList, new Function1() { // from class: com.android.wm.shell.shared.animation.PhysicsAnimator$configureDynamicAnimation$2$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 boolean z2;
                 PhysicsAnimator.InternalListener internalListener = (PhysicsAnimator.InternalListener) obj;
                 boolean z3 = dynamicAnimation2 instanceof FlingAnimation;
                 Set set = internalListener.properties;
-                FloatPropertyCompat floatPropertyCompat2 = FloatPropertyCompat.this;
+                FloatPropertyCompat floatPropertyCompat2 = floatPropertyCompat;
                 if (set.contains(floatPropertyCompat2)) {
                     internalListener.numPropertiesAnimating--;
                     internalListener.maybeDispatchUpdates();
@@ -55,25 +54,25 @@ public final class PhysicsAnimator$configureDynamicAnimation$2 implements Dynami
                     }
                     Set set2 = internalListener.properties;
                     PhysicsAnimator physicsAnimator2 = PhysicsAnimator.this;
-                    boolean arePropertiesAnimating = physicsAnimator2.arePropertiesAnimating(set2);
-                    z2 = !arePropertiesAnimating;
+                    boolean zArePropertiesAnimating = physicsAnimator2.arePropertiesAnimating(set2);
+                    z2 = !zArePropertiesAnimating;
                     Iterator it = internalListener.endListeners.iterator();
                     do {
-                        boolean hasNext = it.hasNext();
+                        boolean zHasNext = it.hasNext();
                         boolean z4 = z;
-                        if (!hasNext) {
-                            if (!arePropertiesAnimating && !z4) {
-                                Iterator it2 = internalListener.endActions.iterator();
-                                while (it2.hasNext()) {
-                                    ((Function0) it2.next()).invoke();
-                                }
+                        if (zHasNext) {
+                            ((PhysicsAnimator.EndListener) it.next()).onAnimationEnd(internalListener.target, floatPropertyCompat2, z3, z4, f, f2);
+                        } else if (!zArePropertiesAnimating && !z4) {
+                            Iterator it2 = internalListener.endActions.iterator();
+                            while (it2.hasNext()) {
+                                ((Function0) it2.next()).invoke();
                             }
-                            return Boolean.valueOf(z2);
                         }
-                        ((PhysicsAnimator.EndListener) it.next()).onAnimationEnd(internalListener.target, floatPropertyCompat2, z3, z4, f, f2);
                     } while (!physicsAnimator2.isPropertyAnimating(floatPropertyCompat2));
+                    z2 = false;
+                } else {
+                    z2 = false;
                 }
-                z2 = false;
                 return Boolean.valueOf(z2);
             }
         });

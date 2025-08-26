@@ -20,7 +20,6 @@ import kotlinx.coroutines.internal.DispatchedContinuationKt;
 import kotlinx.coroutines.internal.Segment;
 import kotlinx.coroutines.internal.Symbol;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class CancellableContinuationImpl extends DispatchedTask implements CancellableContinuation, CoroutineStackFrame, Waiter {
     public final AtomicInt _decisionAndIndex;
@@ -250,7 +249,7 @@ public class CancellableContinuationImpl extends DispatchedTask implements Cance
         int i;
         Job job;
         Job job2;
-        boolean isReusable = isReusable();
+        boolean zIsReusable = isReusable();
         AtomicInt atomicInt = this._decisionAndIndex;
         do {
             i = atomicInt.value;
@@ -259,7 +258,7 @@ public class CancellableContinuationImpl extends DispatchedTask implements Cance
                 if (i2 != 2) {
                     throw new IllegalStateException("Already suspended");
                 }
-                if (isReusable) {
+                if (zIsReusable) {
                     releaseClaimedReusableContinuation$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host();
                 }
                 Object obj = this._state.value;
@@ -278,7 +277,7 @@ public class CancellableContinuationImpl extends DispatchedTask implements Cance
         if (((DisposableHandle) this._parentHandle.value) == null && (job2 = (Job) this.context.get(Job.Key)) != null) {
             this._parentHandle.compareAndSet(null, JobKt.invokeOnCompletion$default(job2, new ChildContinuation(this)));
         }
-        if (isReusable) {
+        if (zIsReusable) {
             releaseClaimedReusableContinuation$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host();
         }
         return CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -293,9 +292,9 @@ public class CancellableContinuationImpl extends DispatchedTask implements Cance
         Job job = (Job) this.context.get(Job.Key);
         DisposableHandle disposableHandle = null;
         if (job != null) {
-            DisposableHandle invokeOnCompletion$default = JobKt.invokeOnCompletion$default(job, new ChildContinuation(this));
-            this._parentHandle.compareAndSet(null, invokeOnCompletion$default);
-            disposableHandle = invokeOnCompletion$default;
+            DisposableHandle disposableHandleInvokeOnCompletion$default = JobKt.invokeOnCompletion$default(job, new ChildContinuation(this));
+            this._parentHandle.compareAndSet(null, disposableHandleInvokeOnCompletion$default);
+            disposableHandle = disposableHandleInvokeOnCompletion$default;
         }
         if (disposableHandle != null && isCompleted()) {
             disposableHandle.dispose();
@@ -316,117 +315,77 @@ public class CancellableContinuationImpl extends DispatchedTask implements Cance
         invokeOnCancellationImpl(segment);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:65:0x0096, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:54:0x0096, code lost:
     
         multipleHandlersError(r10, r2);
      */
-    /* JADX WARN: Code restructure failed: missing block: B:66:0x0099, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:55:0x0099, code lost:
     
         throw null;
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void invokeOnCancellationImpl(kotlinx.coroutines.NotCompleted r10) {
-        /*
-            r9 = this;
-            kotlinx.atomicfu.AtomicRef r0 = r9._state
-        L2:
-            java.lang.Object r2 = r0.value
-            boolean r1 = r2 instanceof kotlinx.coroutines.Active
-            if (r1 == 0) goto L12
-            kotlinx.atomicfu.AtomicRef r1 = r9._state
-            boolean r1 = r1.compareAndSet(r2, r10)
-            if (r1 == 0) goto L2
-            goto L95
-        L12:
-            boolean r1 = r2 instanceof kotlinx.coroutines.CancelHandler
-            r3 = 0
-            if (r1 != 0) goto L96
-            boolean r1 = r2 instanceof kotlinx.coroutines.internal.Segment
-            if (r1 != 0) goto L96
-            boolean r1 = r2 instanceof kotlinx.coroutines.CompletedExceptionally
-            if (r1 == 0) goto L4c
-            r0 = r2
-            kotlinx.coroutines.CompletedExceptionally r0 = (kotlinx.coroutines.CompletedExceptionally) r0
-            kotlinx.atomicfu.AtomicBoolean r1 = r0._handled
-            boolean r1 = r1.compareAndSet()
-            if (r1 == 0) goto L48
-            boolean r1 = r2 instanceof kotlinx.coroutines.CancelledContinuation
-            if (r1 == 0) goto L95
-            boolean r1 = r2 instanceof kotlinx.coroutines.CompletedExceptionally
-            if (r1 == 0) goto L33
-            goto L34
-        L33:
-            r0 = r3
-        L34:
-            if (r0 == 0) goto L38
-            java.lang.Throwable r3 = r0.cause
-        L38:
-            boolean r0 = r10 instanceof kotlinx.coroutines.CancelHandler
-            if (r0 == 0) goto L42
-            kotlinx.coroutines.CancelHandler r10 = (kotlinx.coroutines.CancelHandler) r10
-            r9.callCancelHandler(r10, r3)
-            return
-        L42:
-            kotlinx.coroutines.internal.Segment r10 = (kotlinx.coroutines.internal.Segment) r10
-            r9.callSegmentOnCancellation(r10, r3)
-            return
-        L48:
-            multipleHandlersError(r10, r2)
-            throw r3
-        L4c:
-            boolean r1 = r2 instanceof kotlinx.coroutines.CompletedContinuation
-            if (r1 == 0) goto L7a
-            r1 = r2
-            kotlinx.coroutines.CompletedContinuation r1 = (kotlinx.coroutines.CompletedContinuation) r1
-            kotlinx.coroutines.CancelHandler r4 = r1.cancelHandler
-            if (r4 != 0) goto L76
-            boolean r4 = r10 instanceof kotlinx.coroutines.internal.Segment
-            if (r4 == 0) goto L5c
-            return
-        L5c:
-            r4 = r10
-            kotlinx.coroutines.CancelHandler r4 = (kotlinx.coroutines.CancelHandler) r4
-            java.lang.Throwable r5 = r1.cancelCause
-            if (r5 == 0) goto L67
-            r9.callCancelHandler(r4, r5)
-            return
-        L67:
-            r5 = 29
-            kotlinx.coroutines.CompletedContinuation r1 = kotlinx.coroutines.CompletedContinuation.copy$default(r1, r4, r3, r5)
-            kotlinx.atomicfu.AtomicRef r3 = r9._state
-            boolean r1 = r3.compareAndSet(r2, r1)
-            if (r1 == 0) goto L2
-            goto L95
-        L76:
-            multipleHandlersError(r10, r2)
-            throw r3
-        L7a:
-            boolean r1 = r10 instanceof kotlinx.coroutines.internal.Segment
-            if (r1 == 0) goto L7f
-            return
-        L7f:
-            r3 = r10
-            kotlinx.coroutines.CancelHandler r3 = (kotlinx.coroutines.CancelHandler) r3
-            kotlinx.coroutines.CompletedContinuation r1 = new kotlinx.coroutines.CompletedContinuation
-            r5 = 0
-            r6 = 0
-            r4 = 0
-            r7 = 28
-            r8 = 0
-            r1.<init>(r2, r3, r4, r5, r6, r7, r8)
-            kotlinx.atomicfu.AtomicRef r3 = r9._state
-            boolean r1 = r3.compareAndSet(r2, r1)
-            if (r1 == 0) goto L2
-        L95:
-            return
-        L96:
-            multipleHandlersError(r10, r2)
-            throw r3
-        */
-        throw new UnsupportedOperationException("Method not decompiled: kotlinx.coroutines.CancellableContinuationImpl.invokeOnCancellationImpl(kotlinx.coroutines.NotCompleted):void");
+    public final void invokeOnCancellationImpl(NotCompleted notCompleted) {
+        AtomicRef atomicRef = this._state;
+        while (true) {
+            Object obj = atomicRef.value;
+            if (!(obj instanceof Active)) {
+                if ((obj instanceof CancelHandler) || (obj instanceof Segment)) {
+                    break;
+                }
+                if (obj instanceof CompletedExceptionally) {
+                    CompletedExceptionally completedExceptionally = (CompletedExceptionally) obj;
+                    if (!completedExceptionally._handled.compareAndSet()) {
+                        multipleHandlersError(notCompleted, obj);
+                        throw null;
+                    }
+                    if (obj instanceof CancelledContinuation) {
+                        if (!(obj instanceof CompletedExceptionally)) {
+                            completedExceptionally = null;
+                        }
+                        Throwable th = completedExceptionally != null ? completedExceptionally.cause : null;
+                        if (notCompleted instanceof CancelHandler) {
+                            callCancelHandler((CancelHandler) notCompleted, th);
+                            return;
+                        } else {
+                            callSegmentOnCancellation((Segment) notCompleted, th);
+                            return;
+                        }
+                    }
+                    return;
+                }
+                if (obj instanceof CompletedContinuation) {
+                    CompletedContinuation completedContinuation = (CompletedContinuation) obj;
+                    if (completedContinuation.cancelHandler != null) {
+                        multipleHandlersError(notCompleted, obj);
+                        throw null;
+                    }
+                    if (notCompleted instanceof Segment) {
+                        return;
+                    }
+                    CancelHandler cancelHandler = (CancelHandler) notCompleted;
+                    Throwable th2 = completedContinuation.cancelCause;
+                    if (th2 != null) {
+                        callCancelHandler(cancelHandler, th2);
+                        return;
+                    } else {
+                        if (this._state.compareAndSet(obj, CompletedContinuation.copy$default(completedContinuation, cancelHandler, null, 29))) {
+                            return;
+                        }
+                    }
+                } else {
+                    if (notCompleted instanceof Segment) {
+                        return;
+                    }
+                    if (this._state.compareAndSet(obj, new CompletedContinuation(obj, (CancelHandler) notCompleted, null, null, null, 28, null))) {
+                        return;
+                    }
+                }
+            } else if (this._state.compareAndSet(obj, notCompleted)) {
+                return;
+            }
+        }
     }
 
     @Override // kotlinx.coroutines.CancellableContinuation
@@ -488,7 +447,7 @@ public class CancellableContinuationImpl extends DispatchedTask implements Cance
         resumeImpl$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host(unit, this.resumeMode, function1 != null ? new Function3() { // from class: kotlinx.coroutines.CancellableContinuationImpl$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function3
             public final Object invoke(Object obj, Object obj2, Object obj3) {
-                Function1.this.mo779invoke((Throwable) obj);
+                function1.mo781invoke((Throwable) obj);
                 return Unit.INSTANCE;
             }
         } : null);
@@ -526,9 +485,9 @@ public class CancellableContinuationImpl extends DispatchedTask implements Cance
 
     @Override // kotlin.coroutines.Continuation
     public final void resumeWith(Object obj) {
-        Throwable m3422exceptionOrNullimpl = Result.m3422exceptionOrNullimpl(obj);
-        if (m3422exceptionOrNullimpl != null) {
-            obj = new CompletedExceptionally(m3422exceptionOrNullimpl, false, 2, null);
+        Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(obj);
+        if (thM3442exceptionOrNullimpl != null) {
+            obj = new CompletedExceptionally(thM3442exceptionOrNullimpl, false, 2, null);
         }
         resumeImpl$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host(obj, this.resumeMode, null);
     }
@@ -539,13 +498,13 @@ public class CancellableContinuationImpl extends DispatchedTask implements Cance
     }
 
     public final String toString() {
-        String nameString = nameString();
+        String strNameString = nameString();
         String debugString = DebugStringsKt.toDebugString(this.delegate);
         Object obj = this._state.value;
         String str = obj instanceof NotCompleted ? "Active" : obj instanceof CancelledContinuation ? "Cancelled" : "Completed";
         String hexAddress = DebugStringsKt.getHexAddress(this);
         StringBuilder sb = new StringBuilder();
-        sb.append(nameString);
+        sb.append(strNameString);
         sb.append("(");
         sb.append(debugString);
         sb.append("){");

@@ -26,7 +26,6 @@ import kotlin.ranges.IntProgressionIterator;
 import kotlin.ranges.IntRange;
 import kotlin.ranges.RangesKt___RangesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class KeyboardBacklightDialog extends Dialog {
     public static final int BACKLIGHT_ICON_ID;
@@ -48,7 +47,6 @@ public final class KeyboardBacklightDialog extends Dialog {
     public LinearLayout rootView;
     public StepViewProperties stepProperties;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class BacklightIconProperties {
         public final int height;
         public final int padding;
@@ -85,7 +83,6 @@ public final class KeyboardBacklightDialog extends Dialog {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -95,7 +92,6 @@ public final class KeyboardBacklightDialog extends Dialog {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class RootProperties {
         public final float cornerRadius;
         public final int horizontalPadding;
@@ -132,7 +128,6 @@ public final class KeyboardBacklightDialog extends Dialog {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class StepViewProperties {
         public final int height;
         public final int horizontalMargin;
@@ -297,7 +292,7 @@ public final class KeyboardBacklightDialog extends Dialog {
             ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(intRange, 10));
             IntProgressionIterator it = intRange.iterator();
             while (it.hasNext) {
-                int nextInt = it.nextInt();
+                int iNextInt = it.nextInt();
                 FrameLayout frameLayout = new FrameLayout(getContext());
                 StepViewProperties stepViewProperties3 = this.stepProperties;
                 int i7 = (stepViewProperties3 == null ? null : stepViewProperties3).width;
@@ -323,12 +318,12 @@ public final class KeyboardBacklightDialog extends Dialog {
                 for (int i10 = 0; i10 < 8; i10++) {
                     fArr[i10] = f;
                 }
-                if (nextInt == 1) {
+                if (iNextInt == 1) {
                     for (int i11 : LEFT_CORNERS_INDICES) {
                         fArr[i11] = f2;
                     }
                 }
-                if (nextInt == i9) {
+                if (iNextInt == i9) {
                     for (int i12 : RIGHT_CORNERS_INDICES) {
                         fArr[i12] = f2;
                     }
@@ -370,12 +365,12 @@ public final class KeyboardBacklightDialog extends Dialog {
         }
         IntProgressionIterator it2 = RangesKt___RangesKt.until(1, linearLayout5.getChildCount()).iterator();
         while (it2.hasNext) {
-            int nextInt2 = it2.nextInt();
+            int iNextInt2 = it2.nextInt();
             LinearLayout linearLayout6 = this.rootView;
             if (linearLayout6 == null) {
                 linearLayout6 = null;
             }
-            updateColor((ShapeDrawable) linearLayout6.getChildAt(nextInt2).getBackground(), nextInt2 <= this.currentLevel ? this.filledRectangleColor : this.emptyRectangleColor);
+            updateColor((ShapeDrawable) linearLayout6.getChildAt(iNextInt2).getBackground(), iNextInt2 <= this.currentLevel ? this.filledRectangleColor : this.emptyRectangleColor);
         }
         LinearLayout linearLayout7 = this.rootView;
         if (linearLayout7 == null) {

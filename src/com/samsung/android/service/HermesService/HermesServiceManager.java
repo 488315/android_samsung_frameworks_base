@@ -47,11 +47,11 @@ public final class HermesServiceManager {
         } else {
             Log.e(TAG, "hermesSelftest start mWakeLock is null.");
         }
-        IHermesService bindHermesService = bindHermesService();
-        byte[] bArr = null;
-        if (bindHermesService != null) {
+        IHermesService iHermesServiceBindHermesService = bindHermesService();
+        byte[] bArrHermesSelftest2 = null;
+        if (iHermesServiceBindHermesService != null) {
             try {
-                bArr = bindHermesService.hermesSelftest2(str);
+                bArrHermesSelftest2 = iHermesServiceBindHermesService.hermesSelftest2(str);
             } catch (NullPointerException e) {
                 Log.e(TAG, "Failed to hermesSelftest service.");
                 e.printStackTrace();
@@ -72,7 +72,7 @@ public final class HermesServiceManager {
         } else {
             Log.e(TAG, "hermesSelftest end mWakeLock is null.");
         }
-        return bArr;
+        return bArrHermesSelftest2;
     }
 
     public byte[] hermesSelftest() {
@@ -88,11 +88,11 @@ public final class HermesServiceManager {
         } else {
             Log.e(TAG, "hermesSelftest start mWakeLock is null.");
         }
-        IHermesService bindHermesService = bindHermesService();
-        byte[] bArr = null;
-        if (bindHermesService != null) {
+        IHermesService iHermesServiceBindHermesService = bindHermesService();
+        byte[] bArrHermesSelftest = null;
+        if (iHermesServiceBindHermesService != null) {
             try {
-                bArr = bindHermesService.hermesSelftest();
+                bArrHermesSelftest = iHermesServiceBindHermesService.hermesSelftest();
             } catch (NullPointerException e) {
                 Log.e(TAG, "Failed to hermesSelftest service.");
                 e.printStackTrace();
@@ -113,15 +113,15 @@ public final class HermesServiceManager {
         } else {
             Log.e(TAG, "hermesSelftest end mWakeLock is null.");
         }
-        return bArr;
+        return bArrHermesSelftest;
     }
 
     public int hermesProvisioning() {
         Log.i(TAG, "hermesProvisioning() is called.");
-        IHermesService bindHermesService = bindHermesService();
-        if (bindHermesService != null) {
+        IHermesService iHermesServiceBindHermesService = bindHermesService();
+        if (iHermesServiceBindHermesService != null) {
             try {
-                return bindHermesService.hermesProvisioning();
+                return iHermesServiceBindHermesService.hermesProvisioning();
             } catch (NullPointerException e) {
                 Log.e(TAG, "Failed to connect service.");
                 e.printStackTrace();
@@ -137,10 +137,10 @@ public final class HermesServiceManager {
 
     public int hermesVerifyProvisioning() {
         Log.i(TAG, "hermesVerifyProvisioning() is called.");
-        IHermesService bindHermesService = bindHermesService();
-        if (bindHermesService != null) {
+        IHermesService iHermesServiceBindHermesService = bindHermesService();
+        if (iHermesServiceBindHermesService != null) {
             try {
-                return bindHermesService.hermesVerifyProvisioning();
+                return iHermesServiceBindHermesService.hermesVerifyProvisioning();
             } catch (NullPointerException e) {
                 Log.e(TAG, "Failed to connect service.");
                 e.printStackTrace();
@@ -156,10 +156,10 @@ public final class HermesServiceManager {
 
     public byte[] hermesGetSecureHWInfo() {
         Log.i(TAG, "hermesGetSecureHWInfo() is called.");
-        IHermesService bindHermesService = bindHermesService();
-        if (bindHermesService != null) {
+        IHermesService iHermesServiceBindHermesService = bindHermesService();
+        if (iHermesServiceBindHermesService != null) {
             try {
-                return bindHermesService.hermesGetSecureHWInfo();
+                return iHermesServiceBindHermesService.hermesGetSecureHWInfo();
             } catch (NullPointerException e) {
                 Log.e(TAG, "Failed to connect service.");
                 e.printStackTrace();
@@ -175,10 +175,10 @@ public final class HermesServiceManager {
 
     public byte[] hermesUpdateCryptoFW() {
         Log.i(TAG, "hermesUpdateCryptoFW() is called.");
-        IHermesService bindHermesService = bindHermesService();
-        if (bindHermesService != null) {
+        IHermesService iHermesServiceBindHermesService = bindHermesService();
+        if (iHermesServiceBindHermesService != null) {
             try {
-                return bindHermesService.hermesUpdateCryptoFW();
+                return iHermesServiceBindHermesService.hermesUpdateCryptoFW();
             } catch (NullPointerException e) {
                 Log.e(TAG, "Failed to connect service.");
                 e.printStackTrace();
@@ -194,10 +194,10 @@ public final class HermesServiceManager {
 
     public byte[] hermesUpdateApplet() {
         Log.i(TAG, "hermesUpdateApplet() is called.");
-        IHermesService bindHermesService = bindHermesService();
-        if (bindHermesService != null) {
+        IHermesService iHermesServiceBindHermesService = bindHermesService();
+        if (iHermesServiceBindHermesService != null) {
             try {
-                return bindHermesService.hermesUpdateApplet();
+                return iHermesServiceBindHermesService.hermesUpdateApplet();
             } catch (NullPointerException e) {
                 Log.e(TAG, "Failed to connect service.");
                 e.printStackTrace();
@@ -213,10 +213,10 @@ public final class HermesServiceManager {
 
     public int open() {
         Log.i(TAG, "open() is called.");
-        IHermesService bindHermesService = bindHermesService();
-        if (bindHermesService != null) {
+        IHermesService iHermesServiceBindHermesService = bindHermesService();
+        if (iHermesServiceBindHermesService != null) {
             try {
-                return bindHermesService.hermesSecureHwPowerOn();
+                return iHermesServiceBindHermesService.hermesSecureHwPowerOn();
             } catch (NullPointerException e) {
                 Log.e(TAG, "Failed to connect service.");
                 e.printStackTrace();
@@ -232,10 +232,10 @@ public final class HermesServiceManager {
 
     public int close() {
         Log.i(TAG, "close() is called.");
-        IHermesService bindHermesService = bindHermesService();
-        if (bindHermesService != null) {
+        IHermesService iHermesServiceBindHermesService = bindHermesService();
+        if (iHermesServiceBindHermesService != null) {
             try {
-                return bindHermesService.hermesSecureHwPowerOff();
+                return iHermesServiceBindHermesService.hermesSecureHwPowerOff();
             } catch (NullPointerException e) {
                 Log.e(TAG, "Failed to connect service.");
                 e.printStackTrace();
@@ -251,10 +251,10 @@ public final class HermesServiceManager {
 
     public byte[] send(byte[] bArr) {
         Log.i(TAG, "send() is called.");
-        IHermesService bindHermesService = bindHermesService();
-        if (bindHermesService != null) {
+        IHermesService iHermesServiceBindHermesService = bindHermesService();
+        if (iHermesServiceBindHermesService != null) {
             try {
-                return bindHermesService.hermesSendApdu(bArr);
+                return iHermesServiceBindHermesService.hermesSendApdu(bArr);
             } catch (NullPointerException e) {
                 Log.e(TAG, "Failed to connect service.");
                 e.printStackTrace();
@@ -270,10 +270,10 @@ public final class HermesServiceManager {
 
     public byte[] cosPatchTest(byte[] bArr) {
         Log.i(TAG, "cosPatchTest() is called.");
-        IHermesService bindHermesService = bindHermesService();
-        if (bindHermesService != null) {
+        IHermesService iHermesServiceBindHermesService = bindHermesService();
+        if (iHermesServiceBindHermesService != null) {
             try {
-                return bindHermesService.hermesCosPatchTest(bArr);
+                return iHermesServiceBindHermesService.hermesCosPatchTest(bArr);
             } catch (NullPointerException e) {
                 Log.e(TAG, "Failed to connect service.");
                 e.printStackTrace();
@@ -289,10 +289,10 @@ public final class HermesServiceManager {
 
     public byte[] getSeId() {
         Log.i(TAG, "getSeId() is called.");
-        IHermesService bindHermesService = bindHermesService();
-        if (bindHermesService != null) {
+        IHermesService iHermesServiceBindHermesService = bindHermesService();
+        if (iHermesServiceBindHermesService != null) {
             try {
-                return bindHermesService.hermesGetSeId();
+                return iHermesServiceBindHermesService.hermesGetSeId();
             } catch (NullPointerException e) {
                 Log.e(TAG, "Failed to connect service.");
                 e.printStackTrace();
@@ -308,10 +308,10 @@ public final class HermesServiceManager {
 
     public byte[] cosUnitTest(String str) {
         Log.i(TAG, "cosUnitTest() is called.");
-        IHermesService bindHermesService = bindHermesService();
-        if (bindHermesService != null) {
+        IHermesService iHermesServiceBindHermesService = bindHermesService();
+        if (iHermesServiceBindHermesService != null) {
             try {
-                return bindHermesService.hermesCosUnitTest(str);
+                return iHermesServiceBindHermesService.hermesCosUnitTest(str);
             } catch (NullPointerException e) {
                 Log.e(TAG, "Failed to connect service.");
                 e.printStackTrace();
@@ -327,10 +327,10 @@ public final class HermesServiceManager {
 
     public byte[] hermesGetAppletVersion() {
         Log.i(TAG, "getAppletVersion() is called.");
-        IHermesService bindHermesService = bindHermesService();
-        if (bindHermesService != null) {
+        IHermesService iHermesServiceBindHermesService = bindHermesService();
+        if (iHermesServiceBindHermesService != null) {
             try {
-                return bindHermesService.hermesGetAppletVersion();
+                return iHermesServiceBindHermesService.hermesGetAppletVersion();
             } catch (NullPointerException e) {
                 Log.e(TAG, "Failed to connect service.");
                 e.printStackTrace();

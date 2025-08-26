@@ -28,7 +28,6 @@ import java.util.stream.Stream;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.flow.Flow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class ComplicationHostViewController extends ViewController {
     public static final boolean DEBUG = Log.isLoggable("ComplicationHostVwCtrl", 3);
@@ -105,7 +104,7 @@ public class ComplicationHostViewController extends ViewController {
 
     public final List getViewsAtPosition(final int i) {
         final int i2 = 0;
-        Stream flatMap = this.mLayoutEngine.mPositions.entrySet().stream().filter(new Predicate() { // from class: com.android.systemui.complication.ComplicationLayoutEngine$$ExternalSyntheticLambda0
+        Stream streamFlatMap = this.mLayoutEngine.mPositions.entrySet().stream().filter(new Predicate() { // from class: com.android.systemui.complication.ComplicationLayoutEngine$$ExternalSyntheticLambda0
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 int i3 = i;
@@ -130,7 +129,7 @@ public class ComplicationHostViewController extends ViewController {
             }
         });
         final int i3 = 1;
-        return (List) flatMap.map(new Function() { // from class: com.android.systemui.complication.ComplicationLayoutEngine$$ExternalSyntheticLambda1
+        return (List) streamFlatMap.map(new Function() { // from class: com.android.systemui.complication.ComplicationLayoutEngine$$ExternalSyntheticLambda1
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
                 switch (i3) {

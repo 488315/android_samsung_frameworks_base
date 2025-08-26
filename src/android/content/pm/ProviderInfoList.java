@@ -39,9 +39,9 @@ public final class ProviderInfoList implements Parcelable {
 
     @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int i) {
-        boolean allowSquashing = parcel.allowSquashing();
+        boolean zAllowSquashing = parcel.allowSquashing();
         parcel.writeTypedList(this.mList, i);
-        parcel.restoreAllowSquashing(allowSquashing);
+        parcel.restoreAllowSquashing(zAllowSquashing);
     }
 
     public List<ProviderInfo> getList() {

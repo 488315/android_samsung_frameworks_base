@@ -32,27 +32,27 @@ import java.util.Map;
 public class ApkSignatureSchemeV4Verifier {
     static final int APK_SIGNATURE_SCHEME_DEFAULT = -1;
 
-    public static VerifiedSigner extractCertificates(String str) throws SignatureNotFoundException, SignatureException, SecurityException {
-        Pair<V4Signature.HashingInfo, V4Signature.SigningInfos> extractSignature = extractSignature(str);
-        return verify(str, extractSignature.first, extractSignature.second, -1);
+    public static VerifiedSigner extractCertificates(String str) throws SignatureNotFoundException, SignatureException, IOException, SecurityException {
+        Pair<V4Signature.HashingInfo, V4Signature.SigningInfos> pairExtractSignature = extractSignature(str);
+        return verify(str, pairExtractSignature.first, pairExtractSignature.second, -1);
     }
 
-    public static Pair<V4Signature.HashingInfo, V4Signature.SigningInfos> extractSignature(String str) throws SignatureNotFoundException, SignatureException {
-        V4Signature readFrom;
+    public static Pair<V4Signature.HashingInfo, V4Signature.SigningInfos> extractSignature(String str) throws SignatureNotFoundException, SignatureException, IOException {
+        V4Signature from;
         boolean z;
         try {
             try {
                 try {
                     File file = new File(str);
-                    byte[] unsafeGetFileSignature = IncrementalManager.unsafeGetFileSignature(file.getAbsolutePath());
-                    if (unsafeGetFileSignature != null && unsafeGetFileSignature.length > 0) {
-                        readFrom = V4Signature.readFrom(unsafeGetFileSignature);
+                    byte[] bArrUnsafeGetFileSignature = IncrementalManager.unsafeGetFileSignature(file.getAbsolutePath());
+                    if (bArrUnsafeGetFileSignature != null && bArrUnsafeGetFileSignature.length > 0) {
+                        from = V4Signature.readFrom(bArrUnsafeGetFileSignature);
                         z = false;
                     } else {
                         try {
                             FileInputStream fileInputStream = new FileInputStream(new File(file.getAbsolutePath() + V4Signature.EXT).getAbsolutePath());
                             try {
-                                readFrom = V4Signature.readFrom(fileInputStream);
+                                from = V4Signature.readFrom(fileInputStream);
                                 fileInputStream.close();
                                 z = true;
                             } catch (Throwable th) {
@@ -67,38 +67,38 @@ public class ApkSignatureSchemeV4Verifier {
                             throw new SignatureNotFoundException("Failed to obtain signature bytes from .idsig");
                         }
                     }
-                    if (!readFrom.isVersionSupported()) {
-                        throw new SecurityException("v4 signature version " + readFrom.version + " is not supported");
+                    if (!from.isVersionSupported()) {
+                        throw new SecurityException("v4 signature version " + from.version + " is not supported");
                     }
-                    V4Signature.HashingInfo fromByteArray = V4Signature.HashingInfo.fromByteArray(readFrom.hashingInfo);
-                    V4Signature.SigningInfos fromByteArray2 = V4Signature.SigningInfos.fromByteArray(readFrom.signingInfos);
+                    V4Signature.HashingInfo hashingInfoFromByteArray = V4Signature.HashingInfo.fromByteArray(from.hashingInfo);
+                    V4Signature.SigningInfos signingInfosFromByteArray = V4Signature.SigningInfos.fromByteArray(from.signingInfos);
                     if (z) {
                         byte[] fsverityDigest = VerityUtils.getFsverityDigest(file.getAbsolutePath());
                         if (fsverityDigest == null) {
                             throw new SecurityException("The APK does not have fs-verity");
                         }
-                        if (!Arrays.equals(VerityUtils.generateFsVerityDigest(file.length(), fromByteArray), fsverityDigest)) {
+                        if (!Arrays.equals(VerityUtils.generateFsVerityDigest(file.length(), hashingInfoFromByteArray), fsverityDigest)) {
                             throw new SignatureException("Actual digest does not match the v4 signature");
                         }
                     }
-                    return Pair.create(fromByteArray, fromByteArray2);
-                } catch (IOException e) {
-                    throw new SignatureNotFoundException("Failed to read V4 signature.", e);
+                    return Pair.create(hashingInfoFromByteArray, signingInfosFromByteArray);
+                } catch (DigestException | NoSuchAlgorithmException e) {
+                    throw new SecurityException("Failed to calculate the digest", e);
                 }
             } catch (EOFException e2) {
                 throw new SignatureException("V4 signature is invalid.", e2);
             }
-        } catch (DigestException | NoSuchAlgorithmException e3) {
-            throw new SecurityException("Failed to calculate the digest", e3);
+        } catch (IOException e3) {
+            throw new SignatureNotFoundException("Failed to read V4 signature.", e3);
         }
     }
 
-    public static VerifiedSigner verify(String str, V4Signature.HashingInfo hashingInfo, V4Signature.SigningInfos signingInfos, int i) throws SignatureNotFoundException, SecurityException {
-        V4Signature.SigningInfo findSigningInfoForBlockId = findSigningInfoForBlockId(signingInfos, i);
-        Pair<Certificate, byte[]> verifySigner = verifySigner(findSigningInfoForBlockId, V4Signature.getSignedData(new File(str).length(), hashingInfo, findSigningInfoForBlockId));
+    public static VerifiedSigner verify(String str, V4Signature.HashingInfo hashingInfo, V4Signature.SigningInfos signingInfos, int i) throws SignatureNotFoundException, InvalidKeySpecException, NoSuchAlgorithmException, SignatureException, InvalidKeyException, SecurityException, CertificateException, InvalidAlgorithmParameterException {
+        V4Signature.SigningInfo signingInfoFindSigningInfoForBlockId = findSigningInfoForBlockId(signingInfos, i);
+        Pair<Certificate, byte[]> pairVerifySigner = verifySigner(signingInfoFindSigningInfoForBlockId, V4Signature.getSignedData(new File(str).length(), hashingInfo, signingInfoFindSigningInfoForBlockId));
         ArrayMap arrayMap = new ArrayMap();
         arrayMap.put(Integer.valueOf(convertToContentDigestType(hashingInfo.hashAlgorithm)), hashingInfo.rawRootHash);
-        return new VerifiedSigner(new Certificate[]{verifySigner.first}, verifySigner.second, arrayMap);
+        return new VerifiedSigner(new Certificate[]{pairVerifySigner.first}, pairVerifySigner.second, arrayMap);
     }
 
     private static V4Signature.SigningInfo findSigningInfoForBlockId(V4Signature.SigningInfos signingInfos, int i) throws SignatureNotFoundException {
@@ -117,7 +117,7 @@ public class ApkSignatureSchemeV4Verifier {
         throw new SecurityException("Failed to find V4 signature block corresponding to V3 blockId: " + i);
     }
 
-    private static Pair<Certificate, byte[]> verifySigner(V4Signature.SigningInfo signingInfo, byte[] bArr) throws SecurityException {
+    private static Pair<Certificate, byte[]> verifySigner(V4Signature.SigningInfo signingInfo, byte[] bArr) throws InvalidKeySpecException, NoSuchAlgorithmException, SignatureException, InvalidKeyException, SecurityException, CertificateException, InvalidAlgorithmParameterException {
         if (!ApkSigningBlockUtils.isSupportedSignatureAlgorithm(signingInfo.signatureAlgorithmId)) {
             throw new SecurityException("No supported signatures found");
         }
@@ -130,9 +130,9 @@ public class ApkSignatureSchemeV4Verifier {
         String str = signatureAlgorithmJcaSignatureAlgorithm.first;
         AlgorithmParameterSpec algorithmParameterSpec = (AlgorithmParameterSpec) signatureAlgorithmJcaSignatureAlgorithm.second;
         try {
-            PublicKey generatePublic = KeyFactory.getInstance(signatureAlgorithmJcaKeyAlgorithm).generatePublic(new X509EncodedKeySpec(bArr3));
+            PublicKey publicKeyGeneratePublic = KeyFactory.getInstance(signatureAlgorithmJcaKeyAlgorithm).generatePublic(new X509EncodedKeySpec(bArr3));
             Signature signature = Signature.getInstance(str);
-            signature.initVerify(generatePublic);
+            signature.initVerify(publicKeyGeneratePublic);
             if (algorithmParameterSpec != null) {
                 signature.setParameter(algorithmParameterSpec);
             }

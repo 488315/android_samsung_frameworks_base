@@ -75,16 +75,16 @@ public class RssiCurve implements Parcelable {
         if (z) {
             i += this.activeNetworkRssiBoost;
         }
-        int i2 = (i - this.start) / this.bucketWidth;
-        if (i2 < 0) {
-            i2 = 0;
+        int length = (i - this.start) / this.bucketWidth;
+        if (length < 0) {
+            length = 0;
         } else {
             byte[] bArr = this.rssiBuckets;
-            if (i2 > bArr.length - 1) {
-                i2 = bArr.length - 1;
+            if (length > bArr.length - 1) {
+                length = bArr.length - 1;
             }
         }
-        return this.rssiBuckets[i2];
+        return this.rssiBuckets[length];
     }
 
     public boolean equals(Object obj) {

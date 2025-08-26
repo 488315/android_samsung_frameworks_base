@@ -27,8 +27,8 @@ public class ThemeChecker {
 
     public void setThemeState() {
         float[] colorHSV;
-        Bitmap takeScreenShot = this.mScreenCaptureUtil.takeScreenShot();
-        if (takeScreenShot == null || (colorHSV = getColorHSV(takeScreenShot, new Rect(0, 0, takeScreenShot.getWidth(), takeScreenShot.getHeight()))) == null) {
+        Bitmap bitmapTakeScreenShot = this.mScreenCaptureUtil.takeScreenShot();
+        if (bitmapTakeScreenShot == null || (colorHSV = getColorHSV(bitmapTakeScreenShot, new Rect(0, 0, bitmapTakeScreenShot.getWidth(), bitmapTakeScreenShot.getHeight()))) == null) {
             return;
         }
         this.mLogWrapper.v(TAG, "Whole Area Hue=" + colorHSV[0] + ", Saturation=" + colorHSV[1] + ", Brightness=" + colorHSV[2]);

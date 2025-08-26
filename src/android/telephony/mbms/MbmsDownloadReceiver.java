@@ -61,7 +61,7 @@ public class MbmsDownloadReceiver extends BroadcastReceiver {
     private String mMiddlewarePackageNameCache = null;
 
     @Override // android.content.BroadcastReceiver
-    public void onReceive(Context context, Intent intent) {
+    public void onReceive(Context context, Intent intent) throws IOException {
         verifyPermissionIntegrity(context);
         if (!verifyIntentContents(context, intent)) {
             setResultCode(2);
@@ -196,7 +196,7 @@ public class MbmsDownloadReceiver extends BroadcastReceiver {
         }
     }
 
-    private void generateTempFiles(Context context, Intent intent) {
+    private void generateTempFiles(Context context, Intent intent) throws IOException {
         String stringExtra = intent.getStringExtra(VendorUtils.EXTRA_SERVICE_ID);
         if (stringExtra == null) {
             Log.w(LOG_TAG, "Temp file request did not include the associated service id. Ignoring.");
@@ -211,31 +211,31 @@ public class MbmsDownloadReceiver extends BroadcastReceiver {
             setResultExtras(Bundle.EMPTY);
             return;
         }
-        ArrayList<UriPathPair> generateFreshTempFiles = generateFreshTempFiles(context, stringExtra, intExtra);
-        ArrayList<UriPathPair> generateUrisForPausedFiles = generateUrisForPausedFiles(context, stringExtra, parcelableArrayListExtra);
+        ArrayList<UriPathPair> arrayListGenerateFreshTempFiles = generateFreshTempFiles(context, stringExtra, intExtra);
+        ArrayList<UriPathPair> arrayListGenerateUrisForPausedFiles = generateUrisForPausedFiles(context, stringExtra, parcelableArrayListExtra);
         Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList(VendorUtils.EXTRA_FREE_URI_LIST, generateFreshTempFiles);
-        bundle.putParcelableArrayList(VendorUtils.EXTRA_PAUSED_URI_LIST, generateUrisForPausedFiles);
+        bundle.putParcelableArrayList(VendorUtils.EXTRA_FREE_URI_LIST, arrayListGenerateFreshTempFiles);
+        bundle.putParcelableArrayList(VendorUtils.EXTRA_PAUSED_URI_LIST, arrayListGenerateUrisForPausedFiles);
         setResultCode(0);
         setResultExtras(bundle);
     }
 
-    private ArrayList<UriPathPair> generateFreshTempFiles(Context context, String str, int i) {
+    private ArrayList<UriPathPair> generateFreshTempFiles(Context context, String str, int i) throws IOException {
         File embmsTempFileDirForService = MbmsUtils.getEmbmsTempFileDirForService(context, str);
         if (!embmsTempFileDirForService.exists()) {
             embmsTempFileDirForService.mkdirs();
         }
         ArrayList<UriPathPair> arrayList = new ArrayList<>(i);
         for (int i2 = 0; i2 < i; i2++) {
-            File generateSingleTempFile = generateSingleTempFile(embmsTempFileDirForService);
-            if (generateSingleTempFile == null) {
+            File fileGenerateSingleTempFile = generateSingleTempFile(embmsTempFileDirForService);
+            if (fileGenerateSingleTempFile == null) {
                 setResultCode(5);
                 Log.w(LOG_TAG, "Failed to generate a temp file. Moving on.");
             } else {
-                Uri fromFile = Uri.fromFile(generateSingleTempFile);
-                Uri uriForFile = MbmsTempFileProvider.getUriForFile(context, getFileProviderAuthorityCached(context), generateSingleTempFile);
+                Uri uriFromFile = Uri.fromFile(fileGenerateSingleTempFile);
+                Uri uriForFile = MbmsTempFileProvider.getUriForFile(context, getFileProviderAuthorityCached(context), fileGenerateSingleTempFile);
                 context.grantUriPermission(getMiddlewarePackageCached(context), uriForFile, 3);
-                arrayList.add(new UriPathPair(fromFile, uriForFile));
+                arrayList.add(new UriPathPair(uriFromFile, uriForFile));
             }
         }
         return arrayList;
@@ -254,7 +254,7 @@ public class MbmsDownloadReceiver extends BroadcastReceiver {
         return null;
     }
 
-    private ArrayList<UriPathPair> generateUrisForPausedFiles(Context context, String str, List<Uri> list) {
+    private ArrayList<UriPathPair> generateUrisForPausedFiles(Context context, String str, List<Uri> list) throws IOException {
         if (list == null) {
             return new ArrayList<>(0);
         }
@@ -281,9 +281,9 @@ public class MbmsDownloadReceiver extends BroadcastReceiver {
     private void cleanupTempFiles(Context context, Intent intent) {
         File embmsTempFileDirForService = MbmsUtils.getEmbmsTempFileDirForService(context, intent.getStringExtra(VendorUtils.EXTRA_SERVICE_ID));
         final ArrayList parcelableArrayListExtra = intent.getParcelableArrayListExtra(VendorUtils.EXTRA_TEMP_FILES_IN_USE, Uri.class);
-        File[] listFiles = embmsTempFileDirForService.listFiles(new FileFilter(this) { // from class: android.telephony.mbms.MbmsDownloadReceiver.1
+        File[] fileArrListFiles = embmsTempFileDirForService.listFiles(new FileFilter(this) { // from class: android.telephony.mbms.MbmsDownloadReceiver.1
             @Override // java.io.FileFilter
-            public boolean accept(File file) {
+            public boolean accept(File file) throws IOException {
                 try {
                     if (!file.getCanonicalFile().getName().endsWith(MbmsDownloadReceiver.TEMP_FILE_SUFFIX)) {
                         return false;
@@ -295,7 +295,7 @@ public class MbmsDownloadReceiver extends BroadcastReceiver {
                 }
             }
         });
-        for (File file : listFiles) {
+        for (File file : fileArrListFiles) {
             file.delete();
         }
     }
@@ -306,11 +306,11 @@ public class MbmsDownloadReceiver extends BroadcastReceiver {
             return null;
         }
         Path path2 = FileSystems.getDefault().getPath(uri.getPath(), new String[0]);
-        Path resolve = path.resolve(str);
-        if (!Files.isDirectory(resolve.getParent(), new LinkOption[0])) {
-            Files.createDirectories(resolve.getParent(), new FileAttribute[0]);
+        Path pathResolve = path.resolve(str);
+        if (!Files.isDirectory(pathResolve.getParent(), new LinkOption[0])) {
+            Files.createDirectories(pathResolve.getParent(), new FileAttribute[0]);
         }
-        return Uri.fromFile(Files.move(path2, resolve, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.ATOMIC_MOVE).toFile());
+        return Uri.fromFile(Files.move(path2, pathResolve, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.ATOMIC_MOVE).toFile());
     }
 
     public static String getFileRelativePath(String str, String str2) {
@@ -324,8 +324,8 @@ public class MbmsDownloadReceiver extends BroadcastReceiver {
         if (str2.length() == str.length()) {
             return str.substring(str.lastIndexOf(47) + 1);
         }
-        String substring = str2.substring(str.length());
-        return substring.startsWith("/") ? substring.substring(1) : substring;
+        String strSubstring = str2.substring(str.length());
+        return strSubstring.startsWith("/") ? strSubstring.substring(1) : strSubstring;
     }
 
     private static boolean verifyTempFilePath(Context context, String str, Uri uri) {
@@ -380,11 +380,11 @@ public class MbmsDownloadReceiver extends BroadcastReceiver {
     }
 
     private void verifyPermissionIntegrity(Context context) {
-        List<ResolveInfo> queryBroadcastReceivers = context.getPackageManager().queryBroadcastReceivers(new Intent(context, (Class<?>) MbmsDownloadReceiver.class), 0);
-        if (queryBroadcastReceivers.size() != 1) {
+        List<ResolveInfo> listQueryBroadcastReceivers = context.getPackageManager().queryBroadcastReceivers(new Intent(context, (Class<?>) MbmsDownloadReceiver.class), 0);
+        if (listQueryBroadcastReceivers.size() != 1) {
             throw new IllegalStateException("Non-unique download receiver in your app");
         }
-        ActivityInfo activityInfo = queryBroadcastReceivers.get(0).activityInfo;
+        ActivityInfo activityInfo = listQueryBroadcastReceivers.get(0).activityInfo;
         if (activityInfo == null) {
             throw new IllegalStateException("Queried ResolveInfo does not contain a receiver");
         }

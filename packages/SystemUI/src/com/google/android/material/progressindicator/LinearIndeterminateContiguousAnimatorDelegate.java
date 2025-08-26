@@ -9,7 +9,6 @@ import com.google.android.material.progressindicator.BaseProgressIndicator;
 import com.google.android.material.progressindicator.DrawingDelegate;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class LinearIndeterminateContiguousAnimatorDelegate extends IndeterminateAnimatorDelegate {
     public static final AnonymousClass2 ANIMATION_FRACTION = new Property(Float.class, "animationFraction") { // from class: com.google.android.material.progressindicator.LinearIndeterminateContiguousAnimatorDelegate.2
@@ -91,9 +90,9 @@ public final class LinearIndeterminateContiguousAnimatorDelegate extends Indeter
     @Override // com.google.android.material.progressindicator.IndeterminateAnimatorDelegate
     public final void startAnimator() {
         if (this.animator == null) {
-            ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this, ANIMATION_FRACTION, 0.0f, 1.0f);
-            this.animator = ofFloat;
-            ofFloat.setDuration(333L);
+            ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this, ANIMATION_FRACTION, 0.0f, 1.0f);
+            this.animator = objectAnimatorOfFloat;
+            objectAnimatorOfFloat.setDuration(333L);
             this.animator.setInterpolator(null);
             this.animator.setRepeatCount(-1);
             this.animator.addListener(new AnimatorListenerAdapter() { // from class: com.google.android.material.progressindicator.LinearIndeterminateContiguousAnimatorDelegate.1

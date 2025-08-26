@@ -42,13 +42,13 @@ public final class SehSimPhonebookResponse {
 
     public static final ArrayList<SehSimPhonebookResponse> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<SehSimPhonebookResponse> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 104, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 104, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             SehSimPhonebookResponse sehSimPhonebookResponse = new SehSimPhonebookResponse();
-            sehSimPhonebookResponse.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 104);
+            sehSimPhonebookResponse.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 104);
             arrayList.add(sehSimPhonebookResponse);
         }
         return arrayList;
@@ -56,47 +56,47 @@ public final class SehSimPhonebookResponse {
 
     public final void readEmbeddedFromParcel(HwParcel hwParcel, HwBlob hwBlob, long j) {
         int int32 = hwBlob.getInt32(j + 8);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 4, hwBlob.handle(), j, true);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 4, hwBlob.handle(), j, true);
         this.lengthAlphas.clear();
         for (int i = 0; i < int32; i++) {
-            this.lengthAlphas.add(Integer.valueOf(readEmbeddedBuffer.getInt32(i * 4)));
+            this.lengthAlphas.add(Integer.valueOf(embeddedBuffer.getInt32(i * 4)));
         }
         int int322 = hwBlob.getInt32(j + 24);
-        HwBlob readEmbeddedBuffer2 = hwParcel.readEmbeddedBuffer(int322 * 4, hwBlob.handle(), j + 16, true);
+        HwBlob embeddedBuffer2 = hwParcel.readEmbeddedBuffer(int322 * 4, hwBlob.handle(), j + 16, true);
         this.dataTypeAlphas.clear();
         for (int i2 = 0; i2 < int322; i2++) {
-            this.dataTypeAlphas.add(Integer.valueOf(readEmbeddedBuffer2.getInt32(i2 * 4)));
+            this.dataTypeAlphas.add(Integer.valueOf(embeddedBuffer2.getInt32(i2 * 4)));
         }
         int int323 = hwBlob.getInt32(j + 40);
-        HwBlob readEmbeddedBuffer3 = hwParcel.readEmbeddedBuffer(int323 * 16, hwBlob.handle(), j + 32, true);
+        HwBlob embeddedBuffer3 = hwParcel.readEmbeddedBuffer(int323 * 16, hwBlob.handle(), j + 32, true);
         this.alphaTags.clear();
         for (int i3 = 0; i3 < int323; i3++) {
             new String();
             int i4 = i3 * 16;
-            String string = readEmbeddedBuffer3.getString(i4);
-            hwParcel.readEmbeddedBuffer(string.getBytes().length + 1, readEmbeddedBuffer3.handle(), i4, false);
+            String string = embeddedBuffer3.getString(i4);
+            hwParcel.readEmbeddedBuffer(string.getBytes().length + 1, embeddedBuffer3.handle(), i4, false);
             this.alphaTags.add(string);
         }
         int int324 = hwBlob.getInt32(j + 56);
-        HwBlob readEmbeddedBuffer4 = hwParcel.readEmbeddedBuffer(int324 * 4, hwBlob.handle(), j + 48, true);
+        HwBlob embeddedBuffer4 = hwParcel.readEmbeddedBuffer(int324 * 4, hwBlob.handle(), j + 48, true);
         this.lengthNumbers.clear();
         for (int i5 = 0; i5 < int324; i5++) {
-            this.lengthNumbers.add(Integer.valueOf(readEmbeddedBuffer4.getInt32(i5 * 4)));
+            this.lengthNumbers.add(Integer.valueOf(embeddedBuffer4.getInt32(i5 * 4)));
         }
         int int325 = hwBlob.getInt32(j + 72);
-        HwBlob readEmbeddedBuffer5 = hwParcel.readEmbeddedBuffer(int325 * 4, hwBlob.handle(), j + 64, true);
+        HwBlob embeddedBuffer5 = hwParcel.readEmbeddedBuffer(int325 * 4, hwBlob.handle(), j + 64, true);
         this.dataTypeNumbers.clear();
         for (int i6 = 0; i6 < int325; i6++) {
-            this.dataTypeNumbers.add(Integer.valueOf(readEmbeddedBuffer5.getInt32(i6 * 4)));
+            this.dataTypeNumbers.add(Integer.valueOf(embeddedBuffer5.getInt32(i6 * 4)));
         }
         int int326 = hwBlob.getInt32(j + 88);
-        HwBlob readEmbeddedBuffer6 = hwParcel.readEmbeddedBuffer(int326 * 16, hwBlob.handle(), j + 80, true);
+        HwBlob embeddedBuffer6 = hwParcel.readEmbeddedBuffer(int326 * 16, hwBlob.handle(), j + 80, true);
         this.numbers.clear();
         for (int i7 = 0; i7 < int326; i7++) {
             new String();
             int i8 = i7 * 16;
-            String string2 = readEmbeddedBuffer6.getString(i8);
-            hwParcel.readEmbeddedBuffer(string2.getBytes().length + 1, readEmbeddedBuffer6.handle(), i8, false);
+            String string2 = embeddedBuffer6.getString(i8);
+            hwParcel.readEmbeddedBuffer(string2.getBytes().length + 1, embeddedBuffer6.handle(), i8, false);
             this.numbers.add(string2);
         }
         this.recordIndex = hwBlob.getInt32(j + 96);

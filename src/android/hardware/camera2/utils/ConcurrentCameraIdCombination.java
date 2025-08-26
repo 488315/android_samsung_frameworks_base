@@ -44,16 +44,16 @@ public class ConcurrentCameraIdCombination implements Parcelable {
 
     public void readFromParcel(Parcel parcel) {
         this.mConcurrentCameraIdDeviceIdPairs.clear();
-        int readInt = parcel.readInt();
-        if (readInt < 0) {
-            throw new RuntimeException("cameraCombinationSize " + readInt + " should not be negative");
+        int i = parcel.readInt();
+        if (i < 0) {
+            throw new RuntimeException("cameraCombinationSize " + i + " should not be negative");
         }
-        for (int i = 0; i < readInt; i++) {
-            String readString = parcel.readString();
-            if (readString == null) {
+        for (int i2 = 0; i2 < i; i2++) {
+            String string = parcel.readString();
+            if (string == null) {
                 throw new RuntimeException("Failed to read camera id from Parcel");
             }
-            this.mConcurrentCameraIdDeviceIdPairs.add(new Pair<>(readString, Integer.valueOf(parcel.readInt())));
+            this.mConcurrentCameraIdDeviceIdPairs.add(new Pair<>(string, Integer.valueOf(parcel.readInt())));
         }
     }
 

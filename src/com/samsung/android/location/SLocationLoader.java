@@ -29,13 +29,13 @@ public class SLocationLoader {
 
     public static void systemReady(Context context, IBinder iBinder) throws Throwable {
         Class classFromLib = getClassFromLib(context, CLASS_SLocationService);
-        ISLocationManager asInterface = ISLocationManager.Stub.asInterface(iBinder);
+        ISLocationManager iSLocationManagerAsInterface = ISLocationManager.Stub.asInterface(iBinder);
         if (classFromLib == null) {
             Log.e(TAG, "sLocationService is null");
             return;
         }
         Class[] clsArr = new Class[0];
-        classFromLib.getDeclaredMethod(METHOD_systemReady, null).invoke(asInterface, null);
+        classFromLib.getDeclaredMethod(METHOD_systemReady, null).invoke(iSLocationManagerAsInterface, null);
         Log.w(TAG, "invoke systemReady");
     }
 }

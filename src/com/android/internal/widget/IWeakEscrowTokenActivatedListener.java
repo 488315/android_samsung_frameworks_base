@@ -44,9 +44,9 @@ public interface IWeakEscrowTokenActivatedListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IWeakEscrowTokenActivatedListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IWeakEscrowTokenActivatedListener)) {
-                return (IWeakEscrowTokenActivatedListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IWeakEscrowTokenActivatedListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IWeakEscrowTokenActivatedListener)) {
+                return (IWeakEscrowTokenActivatedListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,10 +73,10 @@ public interface IWeakEscrowTokenActivatedListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                long readLong = parcel.readLong();
-                int readInt = parcel.readInt();
+                long j = parcel.readLong();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onWeakEscrowTokenActivated(readLong, readInt);
+                onWeakEscrowTokenActivated(j, i3);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -100,14 +100,14 @@ public interface IWeakEscrowTokenActivatedListener extends IInterface {
 
             @Override // com.android.internal.widget.IWeakEscrowTokenActivatedListener
             public void onWeakEscrowTokenActivated(long j, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IWeakEscrowTokenActivatedListener.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IWeakEscrowTokenActivatedListener.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

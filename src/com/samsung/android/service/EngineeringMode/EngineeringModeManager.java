@@ -1434,7 +1434,7 @@ public final class EngineeringModeManager {
                 return -1;
             }
             int i5 = getInt(bArr, i4);
-            int i6 = i + 12;
+            int modeData = i + 12;
             if (i5 < 0) {
                 Log.e(EngineeringModeManager.TAG, "Error modeDB numOfData");
                 return -1;
@@ -1445,10 +1445,10 @@ public final class EngineeringModeManager {
             Log.d(EngineeringModeManager.TAG, "sizeOfInfo : " + i3);
             Log.d(EngineeringModeManager.TAG, "numOfdata : " + i5);
             Log.d(EngineeringModeManager.TAG, "");
-            for (int i7 = 0; i7 < i5; i7++) {
-                i6 = parseModeData(bArr, i6);
-                if (i6 < 0) {
-                    Log.e(EngineeringModeManager.TAG, "Error parseModeData : " + i7);
+            for (int i6 = 0; i6 < i5; i6++) {
+                modeData = parseModeData(bArr, modeData);
+                if (modeData < 0) {
+                    Log.e(EngineeringModeManager.TAG, "Error parseModeData : " + i6);
                     return -1;
                 }
             }
@@ -1530,7 +1530,7 @@ public final class EngineeringModeManager {
                     return -1;
                 }
                 int i5 = getInt(bArr, i4);
-                int i6 = i + 12;
+                int groupData = i + 12;
                 if (i5 < 0) {
                     Log.e(EngineeringModeManager.TAG, "Error groupDB numOfData");
                     return -1;
@@ -1541,10 +1541,10 @@ public final class EngineeringModeManager {
                 Log.d(EngineeringModeManager.TAG, "sizeOfInfo : " + i3);
                 Log.d(EngineeringModeManager.TAG, "numOfdata : " + i5);
                 Log.d(EngineeringModeManager.TAG, "");
-                for (int i7 = 0; i7 < i5; i7++) {
-                    i6 = parseGroupData(bArr, i6);
-                    if (i6 < 0) {
-                        Log.e(EngineeringModeManager.TAG, "Error parseGroupData : " + i7);
+                for (int i6 = 0; i6 < i5; i6++) {
+                    groupData = parseGroupData(bArr, groupData);
+                    if (groupData < 0) {
+                        Log.e(EngineeringModeManager.TAG, "Error parseGroupData : " + i6);
                         return -1;
                     }
                 }

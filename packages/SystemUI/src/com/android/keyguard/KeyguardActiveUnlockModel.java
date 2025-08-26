@@ -12,7 +12,6 @@ import kotlin.LazyKt__LazyJVMKt;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class KeyguardActiveUnlockModel extends KeyguardListenModel {
     public static final List TABLE_HEADERS;
@@ -28,12 +27,10 @@ public final class KeyguardActiveUnlockModel extends KeyguardListenModel {
     public boolean userCanDismissLockScreen;
     public int userId;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Buffer {
         public final RingBuffer buffer = new RingBuffer(20, new KeyguardActiveUnlockModel$Buffer$$ExternalSyntheticLambda1());
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -92,7 +89,7 @@ public final class KeyguardActiveUnlockModel extends KeyguardListenModel {
             public final Object invoke() {
                 List list = KeyguardActiveUnlockModel.TABLE_HEADERS;
                 SimpleDateFormat simpleDateFormat = KeyguardListenModelKt.DATE_FORMAT;
-                KeyguardActiveUnlockModel keyguardActiveUnlockModel = KeyguardActiveUnlockModel.this;
+                KeyguardActiveUnlockModel keyguardActiveUnlockModel = this.f$0;
                 return Arrays.asList(simpleDateFormat.format(Long.valueOf(keyguardActiveUnlockModel.timeMillis)), String.valueOf(keyguardActiveUnlockModel.timeMillis), String.valueOf(keyguardActiveUnlockModel.userId), String.valueOf(keyguardActiveUnlockModel.listening), String.valueOf(keyguardActiveUnlockModel.awakeKeyguard), String.valueOf(keyguardActiveUnlockModel.authInterruptActive), String.valueOf(keyguardActiveUnlockModel.fpLockedOut), String.valueOf(keyguardActiveUnlockModel.primaryAuthRequired), String.valueOf(keyguardActiveUnlockModel.switchingUser), String.valueOf(keyguardActiveUnlockModel.triggerActiveUnlockForAssistant), String.valueOf(keyguardActiveUnlockModel.userCanDismissLockScreen));
             }
         });

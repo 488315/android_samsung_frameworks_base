@@ -6,7 +6,6 @@ import androidx.compose.animation.AndroidFlingSpline$FlingResult$$ExternalSynthe
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class DividerAttributes {
     public static final Companion Companion = new Companion(null);
@@ -19,7 +18,6 @@ public abstract class DividerAttributes {
     public final int color;
     public final int widthDp;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -44,11 +42,9 @@ public abstract class DividerAttributes {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class DragRange {
         public static final DividerAttributes$DragRange$Companion$DRAG_RANGE_SYSTEM_DEFAULT$1 DRAG_RANGE_SYSTEM_DEFAULT;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -58,7 +54,6 @@ public abstract class DividerAttributes {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class SplitRatioDragRange extends DragRange {
             public final float maxRatio;
             public final float minRatio;
@@ -119,7 +114,6 @@ public abstract class DividerAttributes {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DraggableDividerAttributes extends DividerAttributes {
         public final DragRange dragRange;
 
@@ -156,7 +150,6 @@ public abstract class DividerAttributes {
             this((i3 & 1) != 0 ? -1 : i, (i3 & 2) != 0 ? -16777216 : i2, (i3 & 4) != 0 ? DragRange.DRAG_RANGE_SYSTEM_DEFAULT : dragRange);
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Builder {
             public int color;
             public DragRange dragRange;
@@ -182,7 +175,6 @@ public abstract class DividerAttributes {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class FixedDividerAttributes extends DividerAttributes {
         public /* synthetic */ FixedDividerAttributes(int i, int i2, DefaultConstructorMarker defaultConstructorMarker) {
             this(i, i2);
@@ -212,7 +204,6 @@ public abstract class DividerAttributes {
             this((i3 & 1) != 0 ? -1 : i, (i3 & 2) != 0 ? -16777216 : i2);
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Builder {
             public int color;
             public int widthDp;

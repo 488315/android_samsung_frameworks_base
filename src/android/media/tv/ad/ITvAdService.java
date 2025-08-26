@@ -69,9 +69,9 @@ public interface ITvAdService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ITvAdService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ITvAdService)) {
-                return (ITvAdService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ITvAdService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ITvAdService)) {
+                return (ITvAdService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -107,20 +107,20 @@ public interface ITvAdService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                ITvAdServiceCallback asInterface = ITvAdServiceCallback.Stub.asInterface(parcel.readStrongBinder());
+                ITvAdServiceCallback iTvAdServiceCallbackAsInterface = ITvAdServiceCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                registerCallback(asInterface);
+                registerCallback(iTvAdServiceCallbackAsInterface);
             } else if (i == 2) {
-                ITvAdServiceCallback asInterface2 = ITvAdServiceCallback.Stub.asInterface(parcel.readStrongBinder());
+                ITvAdServiceCallback iTvAdServiceCallbackAsInterface2 = ITvAdServiceCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                unregisterCallback(asInterface2);
+                unregisterCallback(iTvAdServiceCallbackAsInterface2);
             } else if (i == 3) {
                 InputChannel inputChannel = (InputChannel) parcel.readTypedObject(InputChannel.CREATOR);
-                ITvAdSessionCallback asInterface3 = ITvAdSessionCallback.Stub.asInterface(parcel.readStrongBinder());
-                String readString = parcel.readString();
-                String readString2 = parcel.readString();
+                ITvAdSessionCallback iTvAdSessionCallbackAsInterface = ITvAdSessionCallback.Stub.asInterface(parcel.readStrongBinder());
+                String string = parcel.readString();
+                String string2 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                createSession(inputChannel, asInterface3, readString, readString2);
+                createSession(inputChannel, iTvAdSessionCallbackAsInterface, string, string2);
             } else if (i == 4) {
                 Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                 parcel.enforceNoDataAvail();
@@ -149,52 +149,52 @@ public interface ITvAdService extends IInterface {
 
             @Override // android.media.tv.ad.ITvAdService
             public void registerCallback(ITvAdServiceCallback iTvAdServiceCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvAdService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iTvAdServiceCallback);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvAdService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iTvAdServiceCallback);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.ad.ITvAdService
             public void unregisterCallback(ITvAdServiceCallback iTvAdServiceCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvAdService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iTvAdServiceCallback);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvAdService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iTvAdServiceCallback);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.ad.ITvAdService
             public void createSession(InputChannel inputChannel, ITvAdSessionCallback iTvAdSessionCallback, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvAdService.DESCRIPTOR);
-                    obtain.writeTypedObject(inputChannel, 0);
-                    obtain.writeStrongInterface(iTvAdSessionCallback);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvAdService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(inputChannel, 0);
+                    parcelObtain.writeStrongInterface(iTvAdSessionCallback);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.ad.ITvAdService
             public void sendAppLinkCommand(Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ITvAdService.DESCRIPTOR);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ITvAdService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

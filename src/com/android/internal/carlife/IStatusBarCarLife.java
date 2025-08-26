@@ -59,9 +59,9 @@ public interface IStatusBarCarLife extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IStatusBarCarLife.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IStatusBarCarLife)) {
-                return (IStatusBarCarLife) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IStatusBarCarLife.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IStatusBarCarLife)) {
+                return (IStatusBarCarLife) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -94,26 +94,26 @@ public interface IStatusBarCarLife extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                int readInt2 = parcel.readInt();
+                int i3 = parcel.readInt();
+                int i4 = parcel.readInt();
                 AppearanceRegion[] appearanceRegionArr = (AppearanceRegion[]) parcel.createTypedArray(AppearanceRegion.CREATOR);
-                boolean readBoolean = parcel.readBoolean();
-                int readInt3 = parcel.readInt();
-                int readInt4 = parcel.readInt();
-                String readString = parcel.readString();
+                boolean z = parcel.readBoolean();
+                int i5 = parcel.readInt();
+                int i6 = parcel.readInt();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                onSystemBarAttributesChanged(readInt, readInt2, appearanceRegionArr, readBoolean, readInt3, readInt4, readString);
+                onSystemBarAttributesChanged(i3, i4, appearanceRegionArr, z, i5, i6, string);
             } else if (i == 2) {
-                int readInt5 = parcel.readInt();
-                int readInt6 = parcel.readInt();
-                boolean readBoolean2 = parcel.readBoolean();
+                int i7 = parcel.readInt();
+                int i8 = parcel.readInt();
+                boolean z2 = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                showTransient(readInt5, readInt6, readBoolean2);
+                showTransient(i7, i8, z2);
             } else if (i == 3) {
-                int readInt7 = parcel.readInt();
-                int readInt8 = parcel.readInt();
+                int i9 = parcel.readInt();
+                int i10 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                abortTransient(readInt7, readInt8);
+                abortTransient(i9, i10);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -138,46 +138,46 @@ public interface IStatusBarCarLife extends IInterface {
 
             @Override // com.android.internal.carlife.IStatusBarCarLife
             public void onSystemBarAttributesChanged(int i, int i2, AppearanceRegion[] appearanceRegionArr, boolean z, int i3, int i4, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IStatusBarCarLife.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedArray(appearanceRegionArr, 0);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i3);
-                    obtain.writeInt(i4);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IStatusBarCarLife.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedArray(appearanceRegionArr, 0);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeInt(i4);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.carlife.IStatusBarCarLife
             public void showTransient(int i, int i2, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IStatusBarCarLife.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IStatusBarCarLife.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.carlife.IStatusBarCarLife
             public void abortTransient(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IStatusBarCarLife.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IStatusBarCarLife.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.content.pm.UserInfo;
+import android.content.res.Resources;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.Debug;
@@ -38,6 +39,7 @@ import com.android.internal.policy.IKeyguardExitCallback;
 import com.android.internal.policy.IKeyguardService;
 import com.android.internal.policy.IKeyguardStateCallback;
 import com.android.keyguard.ActiveUnlockConfig$$ExternalSyntheticOutline0;
+import com.android.keyguard.KeyguardKnoxGuardViewController$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.keyguard.mediator.ScreenOnCoordinator;
 import com.android.systemui.BootAnimationFinishedCacheImpl;
@@ -98,7 +100,6 @@ import kotlin.Unit;
 import kotlin.jvm.internal.StringCompanionObject;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class KeyguardService extends Service {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -193,7 +194,7 @@ public class KeyguardService extends Service {
             Handler.getMain().post(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl$onFinishedBootAnimation$1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ((BootAnimationFinishedCacheImpl) KeyguardViewMediatorHelperImpl.this.bootAnimationFinishedTrigger).setBootAnimationFinished();
+                    ((BootAnimationFinishedCacheImpl) keyguardViewMediatorHelperImpl.bootAnimationFinishedTrigger).setBootAnimationFinished();
                 }
             });
             keyguardViewMediatorHelperImpl.firstKeyguardShown = false;
@@ -248,15 +249,15 @@ public class KeyguardService extends Service {
                 foldAodAnimationController.mainExecutor.execute(new Runnable() { // from class: com.android.systemui.unfold.FoldAodAnimationController$onScreenTurnedOn$1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        FoldAodAnimationController foldAodAnimationController2 = FoldAodAnimationController.this;
+                        FoldAodAnimationController foldAodAnimationController2 = foldAodAnimationController;
                         if (foldAodAnimationController2.shouldPlayAnimation) {
                             Runnable runnable = foldAodAnimationController2.cancelAnimation;
                             if (runnable != null) {
                                 runnable.run();
                             }
-                            FoldAodAnimationController foldAodAnimationController3 = FoldAodAnimationController.this;
+                            FoldAodAnimationController foldAodAnimationController3 = foldAodAnimationController;
                             foldAodAnimationController3.cancelAnimation = foldAodAnimationController3.mainExecutor.executeDelayed(foldAodAnimationController3.startAnimationRunnable, 0L);
-                            FoldAodAnimationController.this.shouldPlayAnimation = false;
+                            foldAodAnimationController.shouldPlayAnimation = false;
                         }
                     }
                 });
@@ -284,8 +285,8 @@ public class KeyguardService extends Service {
                     keyguardLifecyclesDispatcher.generateWakefulnessOrScreenStateByLastMsg(0, -1);
                 }
                 KeyguardService.this.mKeyguardUpdateMonitor.mHandler.sendEmptyMessage(301);
-                final int identityHashCode = System.identityHashCode(iKeyguardDrawnCallback);
-                Trace.beginAsyncSection("Waiting for KeyguardDrawnCallback#onDrawn", identityHashCode);
+                final int iIdentityHashCode = System.identityHashCode(iKeyguardDrawnCallback);
+                Trace.beginAsyncSection("Waiting for KeyguardDrawnCallback#onDrawn", iIdentityHashCode);
                 final ScreenOnCoordinator screenOnCoordinator = KeyguardService.this.mScreenOnCoordinator;
                 final Runnable runnable = new Runnable(this) { // from class: com.android.systemui.keyguard.KeyguardService.3.1
                     public boolean mInvoked;
@@ -301,7 +302,7 @@ public class KeyguardService extends Service {
                         }
                         this.mInvoked = true;
                         try {
-                            Trace.endAsyncSection("Waiting for KeyguardDrawnCallback#onDrawn", identityHashCode);
+                            Trace.endAsyncSection("Waiting for KeyguardDrawnCallback#onDrawn", iIdentityHashCode);
                             iKeyguardDrawnCallback.onDrawn();
                         } catch (RemoteException e) {
                             android.util.Log.w("KeyguardService", "Exception calling onDrawn():", e);
@@ -314,20 +315,20 @@ public class KeyguardService extends Service {
                 pendingTasksContainer.reset();
                 final FoldAodAnimationController foldAodAnimationController = screenOnCoordinator.foldAodAnimationController;
                 if (foldAodAnimationController != null) {
-                    final Runnable registerTask = pendingTasksContainer.registerTask("fold-to-aod");
+                    final Runnable runnableRegisterTask = pendingTasksContainer.registerTask("fold-to-aod");
                     foldAodAnimationController.mainExecutor.execute(new Runnable() { // from class: com.android.systemui.unfold.FoldAodAnimationController$onScreenTurningOn$1
                         @Override // java.lang.Runnable
-                        public final void run() {
-                            FoldAodAnimationController foldAodAnimationController2 = FoldAodAnimationController.this;
+                        public final void run() throws Resources.NotFoundException {
+                            FoldAodAnimationController foldAodAnimationController2 = foldAodAnimationController;
                             if (foldAodAnimationController2.shouldPlayAnimation) {
                                 if (foldAodAnimationController2.isScrimOpaque) {
-                                    registerTask.run();
+                                    runnableRegisterTask.run();
                                 } else {
-                                    foldAodAnimationController2.pendingScrimReadyCallback = registerTask;
+                                    foldAodAnimationController2.pendingScrimReadyCallback = runnableRegisterTask;
                                 }
                             } else if (foldAodAnimationController2.isFolded && !foldAodAnimationController2.isFoldHandled && foldAodAnimationController2.alwaysOnEnabled && ((Boolean) ((KeyguardInteractor) foldAodAnimationController2.keyguardInteractor.get()).isDozing.$$delegate_0.getValue()).booleanValue()) {
-                                FoldAodAnimationController.this.setAnimationState(true);
-                                NotificationPanelViewController.ShadeFoldAnimatorImpl shadeFoldAnimatorImpl = ((ToAodFoldTransitionInteractor) FoldAodAnimationController.this.foldTransitionInteractor.get()).foldAnimator.this$0.parentAnimator;
+                                foldAodAnimationController.setAnimationState(true);
+                                NotificationPanelViewController.ShadeFoldAnimatorImpl shadeFoldAnimatorImpl = ((ToAodFoldTransitionInteractor) foldAodAnimationController.foldTransitionInteractor.get()).foldAnimator.this$0.parentAnimator;
                                 if (shadeFoldAnimatorImpl != null) {
                                     NotificationPanelViewController notificationPanelViewController = NotificationPanelViewController.this;
                                     notificationPanelViewController.setDozing(true, false);
@@ -335,11 +336,11 @@ public class KeyguardService extends Service {
                                     notificationPanelView.setTranslationX(-notificationPanelView.getResources().getDimensionPixelSize(R.dimen.below_clock_padding_start));
                                     notificationPanelView.setAlpha(0.0f);
                                 }
-                                registerTask.run();
+                                runnableRegisterTask.run();
                             } else {
-                                registerTask.run();
+                                runnableRegisterTask.run();
                             }
-                            FoldAodAnimationController foldAodAnimationController3 = FoldAodAnimationController.this;
+                            FoldAodAnimationController foldAodAnimationController3 = foldAodAnimationController;
                             if (foldAodAnimationController3.isFolded) {
                                 foldAodAnimationController3.isFoldHandled = true;
                             }
@@ -372,13 +373,13 @@ public class KeyguardService extends Service {
                     }
                     iKeyguardDrawnCallback = null;
                 }
-                Message obtainMessage = keyguardViewMediatorHelperImpl.getHandler$1().obtainMessage(1002, iKeyguardDrawnCallback);
+                Message messageObtainMessage = keyguardViewMediatorHelperImpl.getHandler$1().obtainMessage(1002, iKeyguardDrawnCallback);
                 boolean z = LsRune.KEYGUARD_SUB_DISPLAY_LOCK;
                 KeyguardFoldControllerImpl keyguardFoldControllerImpl = keyguardViewMediatorHelperImpl.foldControllerImpl;
                 if ((z && keyguardFoldControllerImpl.isUnlockOnFoldOpened()) || ((z || LsRune.KEYGUARD_SUB_DISPLAY_COVER) && keyguardViewMediatorHelperImpl.getHandler$1().hasMessages(1003) && keyguardFoldControllerImpl.isFoldOpened())) {
-                    keyguardViewMediatorHelperImpl.getHandler$1().sendMessageAtFrontOfQueue(obtainMessage);
+                    keyguardViewMediatorHelperImpl.getHandler$1().sendMessageAtFrontOfQueue(messageObtainMessage);
                 } else {
-                    keyguardViewMediatorHelperImpl.getHandler$1().sendMessage(obtainMessage);
+                    keyguardViewMediatorHelperImpl.getHandler$1().sendMessage(messageObtainMessage);
                 }
                 if (LsRune.SUBSCREEN_LARGE_FRONT_SUB_DISPLAY) {
                     keyguardViewMediatorHelperImpl.isScreenOnByFoldOpen = keyguardViewMediatorHelperImpl.handleFoldOpenMsg && keyguardViewMediatorHelperImpl.foldControllerImpl.isFoldOpened();
@@ -410,9 +411,9 @@ public class KeyguardService extends Service {
             WakeSleepReason.Companion.getClass();
             PowerRepository.updateWakefulness$default(powerInteractor.repository, wakefulnessState, null, i != 2 ? i != 4 ? i != 6 ? i != 13 ? WakeSleepReason.OTHER : WakeSleepReason.FOLD : WakeSleepReason.SLEEP_BUTTON : WakeSleepReason.POWER_BUTTON : WakeSleepReason.TIMEOUT, false, 2);
             KeyguardLifecyclesDispatcher keyguardLifecyclesDispatcher = KeyguardService.this.mKeyguardLifecyclesDispatcher;
-            Message obtainMessage = keyguardLifecyclesDispatcher.mHandler.obtainMessage(6);
-            obtainMessage.arg1 = i;
-            obtainMessage.sendToTarget();
+            Message messageObtainMessage = keyguardLifecyclesDispatcher.mHandler.obtainMessage(6);
+            messageObtainMessage.arg1 = i;
+            messageObtainMessage.sendToTarget();
             if (LsRune.KEYGUARD_SUB_DISPLAY_LOCK || LsRune.KEYGUARD_SUB_DISPLAY_LARGE_FRONT) {
                 keyguardLifecyclesDispatcher.generateWakefulnessOrScreenStateByLastMsg(6, i);
             }
@@ -429,9 +430,9 @@ public class KeyguardService extends Service {
             WakeSleepReason.Companion.getClass();
             PowerRepository.updateWakefulness$default(powerInteractor.repository, wakefulnessState, WakeSleepReason.Companion.fromPowerManagerWakeReason(i), null, z2, 4);
             KeyguardLifecyclesDispatcher keyguardLifecyclesDispatcher = KeyguardService.this.mKeyguardLifecyclesDispatcher;
-            Message obtainMessage = keyguardLifecyclesDispatcher.mHandler.obtainMessage(4);
-            obtainMessage.arg1 = i;
-            obtainMessage.sendToTarget();
+            Message messageObtainMessage = keyguardLifecyclesDispatcher.mHandler.obtainMessage(4);
+            messageObtainMessage.arg1 = i;
+            messageObtainMessage.sendToTarget();
             if (LsRune.KEYGUARD_SUB_DISPLAY_LOCK || LsRune.KEYGUARD_SUB_DISPLAY_LARGE_FRONT) {
                 keyguardLifecyclesDispatcher.generateWakefulnessOrScreenStateByLastMsg(4, i);
             }
@@ -510,14 +511,14 @@ public class KeyguardService extends Service {
             if (viewMediatorProvider == null) {
                 viewMediatorProvider = null;
             }
-            boolean booleanValue = ((Boolean) viewMediatorProvider.isExternallyEnabled.invoke()).booleanValue();
-            if (keyguardViewMediatorHelperImpl.isShowing$1() || !booleanValue || booleanExtra) {
-                Message obtainMessage = keyguardViewMediatorHelperImpl.getHandler$1().obtainMessage(1001);
+            boolean zBooleanValue = ((Boolean) viewMediatorProvider.isExternallyEnabled.invoke()).booleanValue();
+            if (keyguardViewMediatorHelperImpl.isShowing$1() || !zBooleanValue || booleanExtra) {
+                Message messageObtainMessage = keyguardViewMediatorHelperImpl.getHandler$1().obtainMessage(1001);
                 Bundle bundle = new Bundle();
                 bundle.putParcelable("PI", pendingIntent);
                 bundle.putParcelable("FI", intent);
-                obtainMessage.setData(bundle);
-                keyguardViewMediatorHelperImpl.getHandler$1().sendMessage(obtainMessage);
+                messageObtainMessage.setData(bundle);
+                keyguardViewMediatorHelperImpl.getHandler$1().sendMessage(messageObtainMessage);
             }
         }
 
@@ -554,9 +555,9 @@ public class KeyguardService extends Service {
         }
 
         public final void startKeyguardExitAnimation(long j, long j2) {
-            StringBuilder m = SnapshotStateObserver$$ExternalSyntheticOutline0.m("startKeyguardExitAnimation startTime=", j, " fadeoutDuration=");
-            m.append(j2);
-            trace(m.toString());
+            StringBuilder sbM = SnapshotStateObserver$$ExternalSyntheticOutline0.m("startKeyguardExitAnimation startTime=", j, " fadeoutDuration=");
+            sbM.append(j2);
+            trace(sbM.toString());
             Trace.beginSection("KeyguardService.mBinder#startKeyguardExitAnimation");
             KeyguardService.this.checkPermission();
             KeyguardService.this.mKeyguardViewMediator.startKeyguardExitAnimation(j, j2);
@@ -592,7 +593,6 @@ public class KeyguardService extends Service {
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.keyguard.KeyguardService$1, reason: invalid class name */
     public class AnonymousClass1 extends RemoteTransitionStub {
         public static final /* synthetic */ int $r8$clinit = 0;
@@ -649,51 +649,62 @@ public class KeyguardService extends Service {
         }
 
         public final void startAnimation(final IBinder iBinder, TransitionInfo transitionInfo, SurfaceControl.Transaction transaction, IRemoteTransitionFinishedCallback iRemoteTransitionFinishedCallback) {
-            RemoteAnimationTarget[] m2585$$Nest$smwrap;
-            RemoteAnimationTarget[] m2585$$Nest$smwrap2;
+            RemoteAnimationTarget[] remoteAnimationTargetArrM2602$$Nest$smwrap;
+            RemoteAnimationTarget[] remoteAnimationTargetArrM2602$$Nest$smwrap2;
             ActivityManager.RunningTaskInfo runningTaskInfo;
             Slog.d("KeyguardService", "Starts IRemoteAnimationRunner: info=" + transitionInfo);
             int i = 0;
             RemoteAnimationTarget[] remoteAnimationTargetArr = new RemoteAnimationTarget[0];
             synchronized (this.mLeashMap) {
-                m2585$$Nest$smwrap = KeyguardService.m2585$$Nest$smwrap(transitionInfo, false, transaction, this.mLeashMap);
-                m2585$$Nest$smwrap2 = KeyguardService.m2585$$Nest$smwrap(transitionInfo, true, transaction, this.mLeashMap);
+                remoteAnimationTargetArrM2602$$Nest$smwrap = KeyguardService.m2602$$Nest$smwrap(transitionInfo, false, transaction, this.mLeashMap);
+                remoteAnimationTargetArrM2602$$Nest$smwrap2 = KeyguardService.m2602$$Nest$smwrap(transitionInfo, true, transaction, this.mLeashMap);
                 ((WeakHashMap) this.mFinishCallbacks).put(iBinder, iRemoteTransitionFinishedCallback);
             }
+            boolean z = false;
             for (TransitionInfo.Change change : transitionInfo.getChanges()) {
                 if (TransitionInfo.isIndependent(change, transitionInfo)) {
                     transaction.setAlpha(change.getLeash(), 1.0f);
                 }
+                if (!z && TransitionUtil.isOpeningMode(change.getMode())) {
+                    boolean z2 = change.hasFlags(512) && !change.hasFlags(1024);
+                    boolean zHasFlags = change.hasFlags(NetworkAnalyticsConstants.DataPoints.FLAG_SOURCE_PORT);
+                    if (z2 || zHasFlags) {
+                        KeyguardKnoxGuardViewController$$ExternalSyntheticOutline0.m("startAnimation: isTaskWithEmbeddedActivity=", " isBehindStartingWindow=", "KeyguardService", z2, zHasFlags);
+                        z = true;
+                    }
+                }
             }
-            if (!this.val$keyguardViewMediator.mHelper.initAlphaForAnimationTargets(this.val$runner, transaction, m2585$$Nest$smwrap, m2585$$Nest$smwrap2)) {
-                for (RemoteAnimationTarget remoteAnimationTarget : m2585$$Nest$smwrap) {
+            KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl = this.val$keyguardViewMediator.mHelper;
+            keyguardViewMediatorHelperImpl.isTaskWithEmbeddedOrStartingWindow = z;
+            if (!keyguardViewMediatorHelperImpl.initAlphaForAnimationTargets(this.val$runner, transaction, remoteAnimationTargetArrM2602$$Nest$smwrap, remoteAnimationTargetArrM2602$$Nest$smwrap2)) {
+                for (RemoteAnimationTarget remoteAnimationTarget : remoteAnimationTargetArrM2602$$Nest$smwrap) {
                     if (remoteAnimationTarget.mode == 0) {
                         transaction.setAlpha(remoteAnimationTarget.leash, 0.0f);
                     }
                 }
-                for (RemoteAnimationTarget remoteAnimationTarget2 : m2585$$Nest$smwrap2) {
+                for (RemoteAnimationTarget remoteAnimationTarget2 : remoteAnimationTargetArrM2602$$Nest$smwrap2) {
                     if (remoteAnimationTarget2.mode == 0) {
                         transaction.setAlpha(remoteAnimationTarget2.leash, 0.0f);
                     }
                 }
             }
-            boolean z = (transitionInfo.getFlags() & 2048) != 0;
-            boolean z2 = (transitionInfo.getFlags() & NetworkAnalyticsConstants.DataPoints.FLAG_UID) != 0;
-            if (z && !z2) {
-                for (RemoteAnimationTarget remoteAnimationTarget3 : m2585$$Nest$smwrap) {
+            boolean z3 = (transitionInfo.getFlags() & 2048) != 0;
+            boolean z4 = (transitionInfo.getFlags() & NetworkAnalyticsConstants.DataPoints.FLAG_UID) != 0;
+            if (z3 && !z4) {
+                for (RemoteAnimationTarget remoteAnimationTarget3 : remoteAnimationTargetArrM2602$$Nest$smwrap) {
                     if (remoteAnimationTarget3.mode == 1) {
                         transaction.setAlpha(remoteAnimationTarget3.leash, 0.0f);
                     }
                 }
             }
             if ((transitionInfo.getFlags() & 256) != 0) {
-                int length = m2585$$Nest$smwrap.length;
+                int length = remoteAnimationTargetArrM2602$$Nest$smwrap.length;
                 int i2 = 0;
                 while (true) {
                     if (i2 >= length) {
                         break;
                     }
-                    RemoteAnimationTarget remoteAnimationTarget4 = m2585$$Nest$smwrap[i2];
+                    RemoteAnimationTarget remoteAnimationTarget4 = remoteAnimationTargetArrM2602$$Nest$smwrap[i2];
                     ActivityManager.RunningTaskInfo runningTaskInfo2 = remoteAnimationTarget4.taskInfo;
                     if (runningTaskInfo2 != null && runningTaskInfo2.getActivityType() == 5 && remoteAnimationTarget4.mode == 1) {
                         transaction.hide(remoteAnimationTarget4.leash);
@@ -707,15 +718,15 @@ public class KeyguardService extends Service {
             int type = transitionInfo.getType();
             int flags = transitionInfo.getFlags();
             if (type == 7 || (flags & 256) != 0) {
-                i = m2585$$Nest$smwrap.length == 0 ? 21 : 20;
+                i = remoteAnimationTargetArrM2602$$Nest$smwrap.length == 0 ? 21 : 20;
             } else if (type == 8) {
-                i = (m2585$$Nest$smwrap.length <= 0 || (runningTaskInfo = m2585$$Nest$smwrap[0].taskInfo) == null || runningTaskInfo.topActivityType != 5) ? 22 : 33;
+                i = (remoteAnimationTargetArrM2602$$Nest$smwrap.length <= 0 || (runningTaskInfo = remoteAnimationTargetArrM2602$$Nest$smwrap[0].taskInfo) == null || runningTaskInfo.topActivityType != 5) ? 22 : 33;
             } else if (type == 9) {
                 i = 23;
             } else {
                 Slog.d("KeyguardService", "Unexpected transit type: " + type);
             }
-            iRemoteAnimationRunner.onAnimationStart(i, m2585$$Nest$smwrap, m2585$$Nest$smwrap2, remoteAnimationTargetArr, new IRemoteAnimationFinishedCallback.Stub() { // from class: com.android.systemui.keyguard.KeyguardService.1.1
+            iRemoteAnimationRunner.onAnimationStart(i, remoteAnimationTargetArrM2602$$Nest$smwrap, remoteAnimationTargetArrM2602$$Nest$smwrap2, remoteAnimationTargetArr, new IRemoteAnimationFinishedCallback.Stub() { // from class: com.android.systemui.keyguard.KeyguardService.1.1
                 public final void onAnimationFinished() {
                     Slog.d("KeyguardService", "Finish IRemoteAnimationRunner.");
                     AnonymousClass1 anonymousClass1 = AnonymousClass1.this;
@@ -727,8 +738,12 @@ public class KeyguardService extends Service {
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:10:0x0029  */
     /* renamed from: -$$Nest$smwrap, reason: not valid java name */
-    public static RemoteAnimationTarget[] m2585$$Nest$smwrap(TransitionInfo transitionInfo, boolean z, SurfaceControl.Transaction transaction, ArrayMap arrayMap) {
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public static RemoteAnimationTarget[] m2602$$Nest$smwrap(TransitionInfo transitionInfo, boolean z, SurfaceControl.Transaction transaction, ArrayMap arrayMap) {
         TransitionInfo transitionInfo2;
         SurfaceControl.Transaction transaction2;
         ArrayMap arrayMap2;
@@ -736,7 +751,11 @@ public class KeyguardService extends Service {
         ArrayList arrayList = new ArrayList();
         int i = 0;
         while (i < transitionInfo.getChanges().size()) {
-            if (z == ((((TransitionInfo.Change) transitionInfo.getChanges().get(i)).getFlags() & 2) != 0)) {
+            if (z != ((((TransitionInfo.Change) transitionInfo.getChanges().get(i)).getFlags() & 2) != 0)) {
+                transitionInfo2 = transitionInfo;
+                transaction2 = transaction;
+                arrayMap2 = arrayMap;
+            } else {
                 TransitionInfo.Change change2 = (TransitionInfo.Change) transitionInfo.getChanges().get(i);
                 int i2 = change2.getTaskInfo() != null ? change2.getTaskInfo().taskId : -1;
                 if ((i2 == -1 || change2.getParent() == null || (change = transitionInfo.getChange(change2.getParent())) == null || change.getTaskInfo() == null) && (i2 >= 0 || z)) {
@@ -744,15 +763,8 @@ public class KeyguardService extends Service {
                     transaction2 = transaction;
                     arrayMap2 = arrayMap;
                     arrayList.add(TransitionUtil.newTarget(change2, RemoteAnimationRunnerCompat$1$$ExternalSyntheticOutline0.m(transitionInfo, i), (change2.getFlags() & 1) != 0, transitionInfo2, transaction2, arrayMap2));
-                    i++;
-                    transitionInfo = transitionInfo2;
-                    transaction = transaction2;
-                    arrayMap = arrayMap2;
                 }
             }
-            transitionInfo2 = transitionInfo;
-            transaction2 = transaction;
-            arrayMap2 = arrayMap;
             i++;
             transitionInfo = transitionInfo2;
             transaction = transaction2;
@@ -789,7 +801,7 @@ public class KeyguardService extends Service {
 
     @Override // android.app.Service
     public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
-        String sb;
+        String string;
         KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl = this.mKeyguardViewMediator.mHelper;
         keyguardViewMediatorHelperImpl.getClass();
         KeyguardUnlockInfo keyguardUnlockInfo = KeyguardUnlockInfo.INSTANCE;
@@ -819,34 +831,34 @@ public class KeyguardService extends Service {
             int identifier = ((UserInfo) it2.next()).getUserHandle().getIdentifier();
             printWriter.println(LogUtil.getMsg("User " + identifier + (userId == identifier ? '*' : ' '), new Object[0]));
             ViewMediatorProvider viewMediatorProvider = keyguardViewMediatorHelperImpl.viewMediatorProvider;
-            DeviceEntryFaceAuthRepositoryImpl$$ExternalSyntheticOutline0.m("  lockTimeout: ", (viewMediatorProvider != null ? viewMediatorProvider : null).getLockTimeout.mo779invoke(Integer.valueOf(identifier)), printWriter);
+            DeviceEntryFaceAuthRepositoryImpl$$ExternalSyntheticOutline0.m("  lockTimeout: ", (viewMediatorProvider != null ? viewMediatorProvider : null).getLockTimeout.mo781invoke(Integer.valueOf(identifier)), printWriter);
             ActiveUnlockConfig$$ExternalSyntheticOutline0.m(printWriter, "  lockInstantlyWithPowerKey: ", keyguardViewMediatorHelperImpl.lockPatternUtils.getPowerButtonInstantlyLocks(identifier) || !keyguardViewMediatorHelperImpl.lockPatternUtils.isSecure(identifier));
             if (keyguardViewMediatorHelperImpl.lockPatternUtils.isSecure(identifier)) {
-                StringBuilder sb2 = new StringBuilder();
+                StringBuilder sb = new StringBuilder();
                 int keyguardStoredPasswordQuality = keyguardViewMediatorHelperImpl.lockPatternUtils.getKeyguardStoredPasswordQuality(identifier);
                 if (keyguardStoredPasswordQuality == 65536) {
-                    sb2.append("pattern");
+                    sb.append("pattern");
                 } else if (keyguardStoredPasswordQuality == 131072 || keyguardStoredPasswordQuality == 196608) {
-                    sb2.append("pin");
+                    sb.append("pin");
                 } else if (keyguardStoredPasswordQuality == 262144 || keyguardStoredPasswordQuality == 327680 || keyguardStoredPasswordQuality == 393216 || keyguardStoredPasswordQuality == 524288) {
-                    sb2.append(HostAuth.PASSWORD);
+                    sb.append(HostAuth.PASSWORD);
                 } else {
                     int i = StringCompanionObject.$r8$clinit;
-                    sb2.append(String.format("0x%x", Arrays.copyOf(new Object[]{Integer.valueOf(keyguardStoredPasswordQuality)}, 1)));
+                    sb.append(String.format("0x%x", Arrays.copyOf(new Object[]{Integer.valueOf(keyguardStoredPasswordQuality)}, 1)));
                 }
                 int[] iArr = {1, 256};
                 String[] strArr2 = {"fingerprints", "face"};
                 for (int i2 = 0; i2 < 2; i2++) {
                     if (keyguardViewMediatorHelperImpl.lockPatternUtils.getBiometricState(iArr[i2], identifier) != 0) {
-                        sb2.append(", ");
-                        sb2.append(strArr2[i2]);
+                        sb.append(", ");
+                        sb.append(strArr2[i2]);
                     }
                 }
-                sb = sb2.toString();
+                string = sb.toString();
             } else {
-                sb = keyguardViewMediatorHelperImpl.lockPatternUtils.isLockScreenDisabled(identifier) ? SignalSeverity.NONE : "swipe";
+                string = keyguardViewMediatorHelperImpl.lockPatternUtils.isLockScreenDisabled(identifier) ? SignalSeverity.NONE : "swipe";
             }
-            String msg = LogUtil.getMsg(AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("  lockTypeSummary=", sb), new Object[0]);
+            String msg = LogUtil.getMsg(AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("  lockTypeSummary=", string), new Object[0]);
             if (keyguardViewMediatorHelperImpl.updateMonitor.getUserCanSkipBouncer(identifier)) {
                 msg = ((Object) msg) + " / canSkipBouncer=true";
             }

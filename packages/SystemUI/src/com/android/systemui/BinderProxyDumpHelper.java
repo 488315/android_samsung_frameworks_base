@@ -7,7 +7,6 @@ import com.android.internal.os.BinderInternal;
 import com.android.systemui.dump.DumpManager;
 import java.io.PrintWriter;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class BinderProxyDumpHelper implements Dumpable {
     public BinderProxyDumpHelper(DumpManager dumpManager) {
@@ -17,18 +16,18 @@ public class BinderProxyDumpHelper implements Dumpable {
 
     public static String dumpPerUidProxyCounts() {
         StringBuilder sb = new StringBuilder();
-        SparseIntArray nGetBinderProxyPerUidCounts = BinderInternal.nGetBinderProxyPerUidCounts();
-        if (nGetBinderProxyPerUidCounts.size() == 0) {
+        SparseIntArray sparseIntArrayNGetBinderProxyPerUidCounts = BinderInternal.nGetBinderProxyPerUidCounts();
+        if (sparseIntArrayNGetBinderProxyPerUidCounts.size() == 0) {
             return sb.toString();
         }
         sb.append("    Per Uid Binder Proxy Counts:\n");
-        for (int i = 0; i < nGetBinderProxyPerUidCounts.size(); i++) {
-            int keyAt = nGetBinderProxyPerUidCounts.keyAt(i);
-            int valueAt = nGetBinderProxyPerUidCounts.valueAt(i);
+        for (int i = 0; i < sparseIntArrayNGetBinderProxyPerUidCounts.size(); i++) {
+            int iKeyAt = sparseIntArrayNGetBinderProxyPerUidCounts.keyAt(i);
+            int iValueAt = sparseIntArrayNGetBinderProxyPerUidCounts.valueAt(i);
             sb.append("    UID : ");
-            sb.append(keyAt);
+            sb.append(iKeyAt);
             sb.append("  count = ");
-            sb.append(valueAt);
+            sb.append(iValueAt);
             sb.append("\n");
         }
         return sb.toString();

@@ -3,7 +3,7 @@
   xmlns:android="http://schemas.android.com/apk/res/android" xmlns:settings="http://schemas.android.com/apk/res-auto">
     <TextView android:id="@id/bar_chart_title" style="@style/SettingsBarChartTitle" />
     <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@id/bar_views_container" android:layout_width="fill_parent" android:layout_height="wrap_content">
-        <LinearLayout android:gravity="bottom|center" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="20.0dip">
+        <LinearLayout android:gravity="center|bottom" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="20.0dip">
             <com.android.settingslib.widget.BarView android:id="@id/bar_view1" settings:barColor="@color/settings_bar_view_1_color" style="@style/SettingsBarViewStyle" />
             <com.android.settingslib.widget.BarView android:id="@id/bar_view2" settings:barColor="@color/settings_bar_view_2_color" style="@style/SettingsBarViewStyle" />
             <com.android.settingslib.widget.BarView android:id="@id/bar_view3" settings:barColor="@color/settings_bar_view_3_color" style="@style/SettingsBarViewStyle" />

@@ -7,7 +7,6 @@ import androidx.compose.ui.node.LayoutNode;
 import androidx.compose.ui.node.ModifierNodeElement;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class OffsetPxElement extends ModifierNodeElement<OffsetPxNode> {
     public final Function1 offset;
@@ -49,9 +48,9 @@ final class OffsetPxElement extends ModifierNodeElement<OffsetPxNode> {
         Function1 function12 = this.offset;
         boolean z = this.rtlAware;
         if (function1 != function12 || offsetPxNode.rtlAware != z) {
-            LayoutNode requireLayoutNode = DelegatableNodeKt.requireLayoutNode(offsetPxNode);
+            LayoutNode layoutNodeRequireLayoutNode = DelegatableNodeKt.requireLayoutNode(offsetPxNode);
             LayoutNode.Companion companion = LayoutNode.Companion;
-            requireLayoutNode.requestRelayout$ui_release(false);
+            layoutNodeRequireLayoutNode.requestRelayout$ui_release(false);
         }
         offsetPxNode.offset = function12;
         offsetPxNode.rtlAware = z;

@@ -17,7 +17,6 @@ import android.util.Slog;
 import android.window.WindowContainerToken;
 import com.android.wm.shell.draganddrop.SplitDragPolicy;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class FreeformStarter implements SplitDragPolicy.Starter {
     public final Context mContext;
@@ -30,11 +29,11 @@ public class FreeformStarter implements SplitDragPolicy.Starter {
         if (bundle == null) {
             bundle = new Bundle();
         }
-        ActivityOptions fromBundle = ActivityOptions.fromBundle(bundle);
-        fromBundle.setLaunchWindowingMode(5);
-        fromBundle.setPendingIntentBackgroundActivityStartMode(1);
-        fromBundle.setLaunchedFromDnD(true);
-        return fromBundle;
+        ActivityOptions activityOptionsFromBundle = ActivityOptions.fromBundle(bundle);
+        activityOptionsFromBundle.setLaunchWindowingMode(5);
+        activityOptionsFromBundle.setPendingIntentBackgroundActivityStartMode(1);
+        activityOptionsFromBundle.setLaunchedFromDnD(true);
+        return activityOptionsFromBundle;
     }
 
     @Override // com.android.wm.shell.draganddrop.SplitDragPolicy.Starter
@@ -47,7 +46,7 @@ public class FreeformStarter implements SplitDragPolicy.Starter {
     }
 
     @Override // com.android.wm.shell.draganddrop.SplitDragPolicy.Starter
-    public final void startIntent(PendingIntent pendingIntent, int i, int i2, Bundle bundle, WindowContainerToken windowContainerToken, int i3) {
+    public final void startIntent(PendingIntent pendingIntent, int i, int i2, Bundle bundle, WindowContainerToken windowContainerToken, int i3) throws PendingIntent.CanceledException {
         try {
             pendingIntent.send(this.mContext, 0, null, null, null, null, overrideFreeformWindowingMode(bundle).toBundle());
         } catch (PendingIntent.CanceledException e) {

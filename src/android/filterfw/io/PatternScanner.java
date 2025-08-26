@@ -22,7 +22,7 @@ public class PatternScanner {
     }
 
     public String tryEat(Pattern pattern) {
-        String str;
+        String strSubstring;
         Pattern pattern2;
         Pattern pattern3 = this.mIgnorePattern;
         if (pattern3 != null) {
@@ -33,20 +33,20 @@ public class PatternScanner {
         if (matcher.lookingAt()) {
             updateLineCount(this.mOffset, matcher.end());
             this.mOffset = matcher.end();
-            str = this.mInput.substring(matcher.start(), matcher.end());
+            strSubstring = this.mInput.substring(matcher.start(), matcher.end());
         } else {
-            str = null;
+            strSubstring = null;
         }
-        if (str != null && (pattern2 = this.mIgnorePattern) != null) {
+        if (strSubstring != null && (pattern2 = this.mIgnorePattern) != null) {
             skip(pattern2);
         }
-        return str;
+        return strSubstring;
     }
 
     public String eat(Pattern pattern, String str) {
-        String tryEat = tryEat(pattern);
-        if (tryEat != null) {
-            return tryEat;
+        String strTryEat = tryEat(pattern);
+        if (strTryEat != null) {
+            return strTryEat;
         }
         throw new RuntimeException(unexpectedTokenMessage(str));
     }

@@ -4,7 +4,6 @@ import android.app.PendingIntent;
 import android.graphics.drawable.Drawable;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MediaNotificationAction {
     public final PendingIntent actionIntent;
@@ -31,13 +30,13 @@ public final class MediaNotificationAction {
     }
 
     public final int hashCode() {
-        int hashCode = Boolean.hashCode(this.isAuthenticationRequired) * 31;
+        int iHashCode = Boolean.hashCode(this.isAuthenticationRequired) * 31;
         PendingIntent pendingIntent = this.actionIntent;
-        int hashCode2 = (hashCode + (pendingIntent == null ? 0 : pendingIntent.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (pendingIntent == null ? 0 : pendingIntent.hashCode())) * 31;
         Drawable drawable = this.icon;
-        int hashCode3 = (hashCode2 + (drawable == null ? 0 : drawable.hashCode())) * 31;
+        int iHashCode3 = (iHashCode2 + (drawable == null ? 0 : drawable.hashCode())) * 31;
         CharSequence charSequence = this.contentDescription;
-        return hashCode3 + (charSequence != null ? charSequence.hashCode() : 0);
+        return iHashCode3 + (charSequence != null ? charSequence.hashCode() : 0);
     }
 
     public final String toString() {

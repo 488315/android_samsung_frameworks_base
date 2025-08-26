@@ -6,7 +6,6 @@ import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.FunctionReferenceImpl;
 import kotlinx.coroutines.DelayKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 final /* synthetic */ class OnTimeout$selectClause$1 extends FunctionReferenceImpl implements Function3 {
     public static final OnTimeout$selectClause$1 INSTANCE = new OnTimeout$selectClause$1();
@@ -26,7 +25,7 @@ final /* synthetic */ class OnTimeout$selectClause$1 extends FunctionReferenceIm
             Runnable runnable = new Runnable() { // from class: kotlinx.coroutines.selects.OnTimeout$register$action$1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ((SelectImplementation) SelectInstance.this).trySelectInternal(onTimeout, Unit.INSTANCE);
+                    ((SelectImplementation) selectInstance).trySelectInternal(onTimeout, Unit.INSTANCE);
                 }
             };
             SelectImplementation selectImplementation = (SelectImplementation) selectInstance;

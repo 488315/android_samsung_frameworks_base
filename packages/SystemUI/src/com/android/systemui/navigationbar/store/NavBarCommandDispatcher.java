@@ -15,7 +15,6 @@ import java.util.HashMap;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class NavBarCommandDispatcher implements PlankCommandDispatcher {
     public final boolean enabled;
@@ -23,7 +22,6 @@ public final class NavBarCommandDispatcher implements PlankCommandDispatcher {
     public final HashMap originNavState = new HashMap();
     public final Handler handler = new Handler(Looper.getMainLooper());
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -77,9 +75,9 @@ public final class NavBarCommandDispatcher implements PlankCommandDispatcher {
             return bundle;
         }
         if (string != null) {
-            int hashCode = string.hashCode();
+            int iHashCode = string.hashCode();
             NavBarStore navBarStore = this.navBarStore;
-            switch (hashCode) {
+            switch (iHashCode) {
                 case -1833374131:
                     if (!string.equals("FAKE_HANDLE_EVENT")) {
                         break;
@@ -87,14 +85,15 @@ public final class NavBarCommandDispatcher implements PlankCommandDispatcher {
                         if (string2 != null && string2.length() != 0) {
                             copyPrevStatesIfNeeded(i);
                             string3.getClass();
-                            EventTypeFactory.EventType createFakeHandleEvent = NavBarReflectUtil.createFakeHandleEvent(string2, string3);
-                            if (createFakeHandleEvent != null) {
-                                Log.d("NaBarCommandDispatcher", "Execute fake handle event " + createFakeHandleEvent + "..");
-                                navBarStore.handleEvent(NavBarReflectUtil.class, createFakeHandleEvent, i);
+                            EventTypeFactory.EventType eventTypeCreateFakeHandleEvent = NavBarReflectUtil.createFakeHandleEvent(string2, string3);
+                            if (eventTypeCreateFakeHandleEvent != null) {
+                                Log.d("NaBarCommandDispatcher", "Execute fake handle event " + eventTypeCreateFakeHandleEvent + "..");
+                                navBarStore.handleEvent(NavBarReflectUtil.class, eventTypeCreateFakeHandleEvent, i);
                                 break;
                             }
                         }
                         Log.d("NaBarCommandDispatcher", "Failed to get eventName: " + string2);
+                        break;
                     }
                     break;
                 case 77866287:
@@ -122,6 +121,7 @@ public final class NavBarCommandDispatcher implements PlankCommandDispatcher {
                             break;
                         }
                         Log.d("NaBarCommandDispatcher", "Failed to get eventName: " + string2);
+                        break;
                     }
                     break;
                 case 1622997020:
@@ -135,13 +135,13 @@ public final class NavBarCommandDispatcher implements PlankCommandDispatcher {
                             break;
                         }
                         Log.d("NaBarCommandDispatcher", "Failed to get params: " + string3);
+                        break;
                     }
-                    break;
             }
             return bundle;
         }
         if (z) {
-            this.handler.post(new Runnable() { // from class: com.android.systemui.navigationbar.store.NavBarCommandDispatcher$dispatch$3
+            this.handler.post(new Runnable() { // from class: com.android.systemui.navigationbar.store.NavBarCommandDispatcher.dispatch.3
                 @Override // java.lang.Runnable
                 public final void run() {
                     NavigationBar navigationBar = (NavigationBar) ((NavBarStoreImpl) NavBarCommandDispatcher.this.navBarStore).getModule(NavigationBar.class, i);

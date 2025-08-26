@@ -24,7 +24,6 @@ import com.google.android.material.shape.OffsetEdgeTreatment;
 import com.google.android.material.shape.ShapeAppearanceModel;
 import com.samsung.android.knox.custom.IKnoxCustomManager;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class TooltipDrawable extends MaterialShapeDrawable implements TextDrawableHelper.TextDrawableDelegate {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -77,9 +76,9 @@ public class TooltipDrawable extends MaterialShapeDrawable implements TextDrawab
     public static TooltipDrawable createFromAttributes(int i, Context context) {
         int resourceId;
         TooltipDrawable tooltipDrawable = new TooltipDrawable(context, null, 0, i);
-        TypedArray obtainStyledAttributes = ThemeEnforcement.obtainStyledAttributes(tooltipDrawable.context, null, R$styleable.Tooltip, 0, i, new int[0]);
+        TypedArray typedArrayObtainStyledAttributes = ThemeEnforcement.obtainStyledAttributes(tooltipDrawable.context, null, R$styleable.Tooltip, 0, i, new int[0]);
         tooltipDrawable.arrowSize = tooltipDrawable.context.getResources().getDimensionPixelSize(R.dimen.mtrl_tooltip_arrowSize);
-        boolean z = obtainStyledAttributes.getBoolean(8, true);
+        boolean z = typedArrayObtainStyledAttributes.getBoolean(8, true);
         tooltipDrawable.showMarker = z;
         if (z) {
             ShapeAppearanceModel shapeAppearanceModel = tooltipDrawable.drawableState.shapeAppearanceModel;
@@ -90,34 +89,34 @@ public class TooltipDrawable extends MaterialShapeDrawable implements TextDrawab
         } else {
             tooltipDrawable.arrowSize = 0;
         }
-        CharSequence text = obtainStyledAttributes.getText(6);
+        CharSequence text = typedArrayObtainStyledAttributes.getText(6);
         if (!TextUtils.equals(tooltipDrawable.text, text)) {
             tooltipDrawable.text = text;
             tooltipDrawable.textDrawableHelper.textSizeDirty = true;
             tooltipDrawable.invalidateSelf();
         }
-        TextAppearance textAppearance = (!obtainStyledAttributes.hasValue(0) || (resourceId = obtainStyledAttributes.getResourceId(0, 0)) == 0) ? null : new TextAppearance(tooltipDrawable.context, resourceId);
-        if (textAppearance != null && obtainStyledAttributes.hasValue(1)) {
-            textAppearance.textColor = MaterialResources.getColorStateList(tooltipDrawable.context, obtainStyledAttributes, 1);
+        TextAppearance textAppearance = (!typedArrayObtainStyledAttributes.hasValue(0) || (resourceId = typedArrayObtainStyledAttributes.getResourceId(0, 0)) == 0) ? null : new TextAppearance(tooltipDrawable.context, resourceId);
+        if (textAppearance != null && typedArrayObtainStyledAttributes.hasValue(1)) {
+            textAppearance.textColor = MaterialResources.getColorStateList(tooltipDrawable.context, typedArrayObtainStyledAttributes, 1);
         }
         tooltipDrawable.textDrawableHelper.setTextAppearance(textAppearance, tooltipDrawable.context);
         Context context2 = tooltipDrawable.context;
-        TypedValue resolveTypedValueOrThrow = MaterialAttributes.resolveTypedValueOrThrow(context2, TooltipDrawable.class.getCanonicalName(), R.attr.colorOnBackground);
-        int i2 = resolveTypedValueOrThrow.resourceId;
-        int color = i2 != 0 ? context2.getColor(i2) : resolveTypedValueOrThrow.data;
+        TypedValue typedValueResolveTypedValueOrThrow = MaterialAttributes.resolveTypedValueOrThrow(context2, TooltipDrawable.class.getCanonicalName(), R.attr.colorOnBackground);
+        int i2 = typedValueResolveTypedValueOrThrow.resourceId;
+        int color = i2 != 0 ? context2.getColor(i2) : typedValueResolveTypedValueOrThrow.data;
         Context context3 = tooltipDrawable.context;
-        TypedValue resolveTypedValueOrThrow2 = MaterialAttributes.resolveTypedValueOrThrow(context3, TooltipDrawable.class.getCanonicalName(), android.R.attr.colorBackground);
-        int i3 = resolveTypedValueOrThrow2.resourceId;
-        tooltipDrawable.setFillColor(ColorStateList.valueOf(obtainStyledAttributes.getColor(7, ColorUtils.compositeColors(ColorUtils.setAlphaComponent(color, 153), ColorUtils.setAlphaComponent(i3 != 0 ? context3.getColor(i3) : resolveTypedValueOrThrow2.data, IKnoxCustomManager.Stub.TRANSACTION_setBrightness)))));
+        TypedValue typedValueResolveTypedValueOrThrow2 = MaterialAttributes.resolveTypedValueOrThrow(context3, TooltipDrawable.class.getCanonicalName(), android.R.attr.colorBackground);
+        int i3 = typedValueResolveTypedValueOrThrow2.resourceId;
+        tooltipDrawable.setFillColor(ColorStateList.valueOf(typedArrayObtainStyledAttributes.getColor(7, ColorUtils.compositeColors(ColorUtils.setAlphaComponent(color, 153), ColorUtils.setAlphaComponent(i3 != 0 ? context3.getColor(i3) : typedValueResolveTypedValueOrThrow2.data, IKnoxCustomManager.Stub.TRANSACTION_setBrightness)))));
         Context context4 = tooltipDrawable.context;
-        TypedValue resolveTypedValueOrThrow3 = MaterialAttributes.resolveTypedValueOrThrow(context4, TooltipDrawable.class.getCanonicalName(), R.attr.colorSurface);
-        int i4 = resolveTypedValueOrThrow3.resourceId;
-        tooltipDrawable.setStrokeColor(ColorStateList.valueOf(i4 != 0 ? context4.getColor(i4) : resolveTypedValueOrThrow3.data));
-        tooltipDrawable.padding = obtainStyledAttributes.getDimensionPixelSize(2, 0);
-        tooltipDrawable.minWidth = obtainStyledAttributes.getDimensionPixelSize(4, 0);
-        tooltipDrawable.minHeight = obtainStyledAttributes.getDimensionPixelSize(5, 0);
-        tooltipDrawable.layoutMargin = obtainStyledAttributes.getDimensionPixelSize(3, 0);
-        obtainStyledAttributes.recycle();
+        TypedValue typedValueResolveTypedValueOrThrow3 = MaterialAttributes.resolveTypedValueOrThrow(context4, TooltipDrawable.class.getCanonicalName(), R.attr.colorSurface);
+        int i4 = typedValueResolveTypedValueOrThrow3.resourceId;
+        tooltipDrawable.setStrokeColor(ColorStateList.valueOf(i4 != 0 ? context4.getColor(i4) : typedValueResolveTypedValueOrThrow3.data));
+        tooltipDrawable.padding = typedArrayObtainStyledAttributes.getDimensionPixelSize(2, 0);
+        tooltipDrawable.minWidth = typedArrayObtainStyledAttributes.getDimensionPixelSize(4, 0);
+        tooltipDrawable.minHeight = typedArrayObtainStyledAttributes.getDimensionPixelSize(5, 0);
+        tooltipDrawable.layoutMargin = typedArrayObtainStyledAttributes.getDimensionPixelSize(3, 0);
+        typedArrayObtainStyledAttributes.recycle();
         return tooltipDrawable;
     }
 
@@ -136,26 +135,26 @@ public class TooltipDrawable extends MaterialShapeDrawable implements TextDrawab
 
     public final OffsetEdgeTreatment createMarkerEdge() {
         float f = -calculatePointerOffset();
-        float width = ((float) (getBounds().width() - (Math.sqrt(2.0d) * this.arrowSize))) / 2.0f;
-        return new OffsetEdgeTreatment(new MarkerEdgeTreatment(this.arrowSize), Math.min(Math.max(f, -width), width));
+        float fWidth = ((float) (getBounds().width() - (Math.sqrt(2.0d) * this.arrowSize))) / 2.0f;
+        return new OffsetEdgeTreatment(new MarkerEdgeTreatment(this.arrowSize), Math.min(Math.max(f, -fWidth), fWidth));
     }
 
     @Override // com.google.android.material.shape.MaterialShapeDrawable, android.graphics.drawable.Drawable
     public final void draw(Canvas canvas) {
         Canvas canvas2;
         canvas.save();
-        float calculatePointerOffset = calculatePointerOffset();
+        float fCalculatePointerOffset = calculatePointerOffset();
         float f = (float) (-((Math.sqrt(2.0d) * this.arrowSize) - this.arrowSize));
         canvas.scale(this.tooltipScaleX, this.tooltipScaleY, (getBounds().width() * 0.5f) + getBounds().left, (getBounds().height() * this.tooltipPivotY) + getBounds().top);
-        canvas.translate(calculatePointerOffset, f);
+        canvas.translate(fCalculatePointerOffset, f);
         super.draw(canvas);
         if (this.text == null) {
             canvas2 = canvas;
         } else {
-            float centerY = getBounds().centerY();
+            float fCenterY = getBounds().centerY();
             this.textDrawableHelper.textPaint.getFontMetrics(this.fontMetrics);
             Paint.FontMetrics fontMetrics = this.fontMetrics;
-            int i = (int) (centerY - ((fontMetrics.descent + fontMetrics.ascent) / 2.0f));
+            int i = (int) (fCenterY - ((fontMetrics.descent + fontMetrics.ascent) / 2.0f));
             TextDrawableHelper textDrawableHelper = this.textDrawableHelper;
             if (textDrawableHelper.textAppearance != null) {
                 textDrawableHelper.textPaint.drawableState = getState();

@@ -8,7 +8,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class ApproachLayoutModifierNodeImpl extends Modifier.Node implements ApproachLayoutModifierNode {
     public Function1 isMeasurementApproachInProgress;
@@ -23,14 +22,14 @@ final class ApproachLayoutModifierNodeImpl extends Modifier.Node implements Appr
 
     @Override // androidx.compose.ui.layout.ApproachLayoutModifierNode
     /* renamed from: approachMeasure-3p2s80s */
-    public final MeasureResult mo603approachMeasure3p2s80s(ApproachMeasureScope approachMeasureScope, Measurable measurable, long j) {
-        return (MeasureResult) this.measureBlock.invoke(approachMeasureScope, measurable, Constraints.m813boximpl(j));
+    public final MeasureResult mo605approachMeasure3p2s80s(ApproachMeasureScope approachMeasureScope, Measurable measurable, long j) {
+        return (MeasureResult) this.measureBlock.invoke(approachMeasureScope, measurable, Constraints.m815boximpl(j));
     }
 
     @Override // androidx.compose.ui.layout.ApproachLayoutModifierNode
     /* renamed from: isMeasurementApproachInProgress-ozmzZPI */
-    public final boolean mo604isMeasurementApproachInProgressozmzZPI(long j) {
-        return ((Boolean) this.isMeasurementApproachInProgress.mo779invoke(IntSize.m859boximpl(j))).booleanValue();
+    public final boolean mo606isMeasurementApproachInProgressozmzZPI(long j) {
+        return ((Boolean) this.isMeasurementApproachInProgress.mo781invoke(IntSize.m861boximpl(j))).booleanValue();
     }
 
     @Override // androidx.compose.ui.layout.ApproachLayoutModifierNode

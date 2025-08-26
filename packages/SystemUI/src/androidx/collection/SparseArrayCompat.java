@@ -5,7 +5,6 @@ import java.util.Arrays;
 import kotlin.collections.ArraysKt___ArraysJvmKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SparseArrayCompat implements Cloneable {
     public /* synthetic */ boolean garbage;
@@ -19,8 +18,8 @@ public class SparseArrayCompat implements Cloneable {
 
     public final Object get(int i) {
         Object obj;
-        int binarySearch = ContainerHelpersKt.binarySearch(this.size, i, this.keys);
-        if (binarySearch < 0 || (obj = this.values[binarySearch]) == SparseArrayCompatKt.DELETED) {
+        int iBinarySearch = ContainerHelpersKt.binarySearch(this.size, i, this.keys);
+        if (iBinarySearch < 0 || (obj = this.values[iBinarySearch]) == SparseArrayCompatKt.DELETED) {
             return null;
         }
         return obj;
@@ -34,12 +33,12 @@ public class SparseArrayCompat implements Cloneable {
     }
 
     public final void put(int i, Object obj) {
-        int binarySearch = ContainerHelpersKt.binarySearch(this.size, i, this.keys);
-        if (binarySearch >= 0) {
-            this.values[binarySearch] = obj;
+        int iBinarySearch = ContainerHelpersKt.binarySearch(this.size, i, this.keys);
+        if (iBinarySearch >= 0) {
+            this.values[iBinarySearch] = obj;
             return;
         }
-        int i2 = ~binarySearch;
+        int i2 = ~iBinarySearch;
         int i3 = this.size;
         if (i2 < i3) {
             Object[] objArr = this.values;
@@ -105,9 +104,9 @@ public class SparseArrayCompat implements Cloneable {
             }
             sb.append(keyAt(i2));
             sb.append('=');
-            Object valueAt = valueAt(i2);
-            if (valueAt != this) {
-                sb.append(valueAt);
+            Object objValueAt = valueAt(i2);
+            if (objValueAt != this) {
+                sb.append(objValueAt);
             } else {
                 sb.append("(this Map)");
             }

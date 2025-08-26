@@ -32,7 +32,6 @@ import java.util.List;
 import kotlin.NoWhenBranchMatchedException;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ClockSection extends KeyguardSection {
     public static final Companion Companion = new Companion(null);
@@ -45,7 +44,6 @@ public final class ClockSection extends KeyguardSection {
     public final Lazy largeScreenHeaderHelperLazy;
     public final KeyguardRootViewModel rootViewModel;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -105,11 +103,11 @@ public final class ClockSection extends KeyguardSection {
             constraintSet.setGuidelineBegin(R.id.small_clock_guideline_top, smallClockTopMargin);
             constraintSet.connect(i3, 3, R.id.small_clock_guideline_top, 4);
             constraintSet.setTransformPivot(i2, Float.NaN, Float.NaN);
-            int m = StrongAuthPopup$$ExternalSyntheticOutline0.m(this.context, i4, keyguardClockViewModel.getSmallClockTopMargin());
+            int iM = StrongAuthPopup$$ExternalSyntheticOutline0.m(this.context, i4, keyguardClockViewModel.getSmallClockTopMargin());
             int dimensionPixelSize3 = this.context.getResources().getDimensionPixelSize(R.dimen.keyguard_status_view_bottom_margin) + (this.context.getResources().getBoolean(R.bool.config_use_large_screen_shade_header) ? ((LargeScreenHeaderHelper) this.largeScreenHeaderHelperLazy.get()).getLargeScreenHeaderHeight() : 0);
             Context context3 = this.context;
             companion2.getClass();
-            ((WallpaperFocalAreaRepositoryImpl) this.clockInteractor.wallpaperFocalAreaInteractor.wallpaperFocalAreaRepository)._notificationDefaultTop.updateState(null, Float.valueOf(m + (context3.getPackageManager().getResourcesForApplication(context3.getPackageName()).getIdentifier("date_weather_view_height", "dimen", context3.getPackageName()) == 0 ? 0 : r5.getDimensionPixelSize(r4)) + dimensionPixelSize3));
+            ((WallpaperFocalAreaRepositoryImpl) this.clockInteractor.wallpaperFocalAreaInteractor.wallpaperFocalAreaRepository)._notificationDefaultTop.updateState(null, Float.valueOf(iM + (context3.getPackageManager().getResourcesForApplication(context3.getPackageName()).getIdentifier("date_weather_view_height", "dimen", context3.getPackageName()) == 0 ? 0 : r5.getDimensionPixelSize(r4)) + dimensionPixelSize3));
             Context context4 = this.context;
             companion2.getClass();
             Resources resourcesForApplication3 = context4.getPackageManager().getResourcesForApplication(context4.getPackageName());

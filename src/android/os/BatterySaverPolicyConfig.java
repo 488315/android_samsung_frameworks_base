@@ -76,13 +76,13 @@ public final class BatterySaverPolicyConfig implements Parcelable {
         this.mAdvertiseIsEnabled = parcel.readBoolean();
         this.mDeferFullBackup = parcel.readBoolean();
         this.mDeferKeyValueBackup = parcel.readBoolean();
-        int readInt = parcel.readInt();
-        ArrayMap arrayMap = new ArrayMap(readInt);
-        for (int i = 0; i < readInt; i++) {
-            String emptyIfNull = TextUtils.emptyIfNull(parcel.readString());
-            String emptyIfNull2 = TextUtils.emptyIfNull(parcel.readString());
-            if (!emptyIfNull.trim().isEmpty()) {
-                arrayMap.put(emptyIfNull, emptyIfNull2);
+        int i = parcel.readInt();
+        ArrayMap arrayMap = new ArrayMap(i);
+        for (int i2 = 0; i2 < i; i2++) {
+            String strEmptyIfNull = TextUtils.emptyIfNull(parcel.readString());
+            String strEmptyIfNull2 = TextUtils.emptyIfNull(parcel.readString());
+            if (!strEmptyIfNull.trim().isEmpty()) {
+                arrayMap.put(strEmptyIfNull, strEmptyIfNull2);
             }
         }
         this.mDeviceSpecificSettings = Collections.unmodifiableMap(arrayMap);
@@ -108,9 +108,9 @@ public final class BatterySaverPolicyConfig implements Parcelable {
         parcel.writeBoolean(this.mAdvertiseIsEnabled);
         parcel.writeBoolean(this.mDeferFullBackup);
         parcel.writeBoolean(this.mDeferKeyValueBackup);
-        Set<Map.Entry<String, String>> entrySet = this.mDeviceSpecificSettings.entrySet();
-        parcel.writeInt(entrySet.size());
-        for (Map.Entry<String, String> entry : entrySet) {
+        Set<Map.Entry<String, String>> setEntrySet = this.mDeviceSpecificSettings.entrySet();
+        parcel.writeInt(setEntrySet.size());
+        for (Map.Entry<String, String> entry : setEntrySet) {
             parcel.writeString(entry.getKey());
             parcel.writeString(entry.getValue());
         }
@@ -370,11 +370,11 @@ public final class BatterySaverPolicyConfig implements Parcelable {
             if (str == null) {
                 throw new IllegalArgumentException("Key cannot be null");
             }
-            String trim = str.trim();
-            if (TextUtils.isEmpty(trim)) {
+            String strTrim = str.trim();
+            if (TextUtils.isEmpty(strTrim)) {
                 throw new IllegalArgumentException("Key cannot be empty");
             }
-            this.mDeviceSpecificSettings.put(trim, TextUtils.emptyIfNull(str2));
+            this.mDeviceSpecificSettings.put(strTrim, TextUtils.emptyIfNull(str2));
             return this;
         }
 

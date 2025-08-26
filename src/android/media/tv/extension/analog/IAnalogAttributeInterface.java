@@ -60,9 +60,9 @@ public interface IAnalogAttributeInterface extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.analog.IAnalogAttributeInterface");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IAnalogAttributeInterface)) {
-                return (IAnalogAttributeInterface) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.analog.IAnalogAttributeInterface");
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IAnalogAttributeInterface)) {
+                return (IAnalogAttributeInterface) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -99,9 +99,9 @@ public interface IAnalogAttributeInterface extends IInterface {
                 parcel2.writeNoException();
                 parcel2.writeInt(version);
             } else if (i == 2) {
-                String[] createStringArray = parcel.createStringArray();
+                String[] strArrCreateStringArray = parcel.createStringArray();
                 parcel.enforceNoDataAvail();
-                setColorSystemCapability(createStringArray);
+                setColorSystemCapability(strArrCreateStringArray);
                 parcel2.writeNoException();
             } else if (i == 3) {
                 String[] colorSystemCapability = getColorSystemCapability();
@@ -131,46 +131,46 @@ public interface IAnalogAttributeInterface extends IInterface {
 
             @Override // android.media.tv.extension.analog.IAnalogAttributeInterface
             public int getVersion() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.analog.IAnalogAttributeInterface");
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.analog.IAnalogAttributeInterface");
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.analog.IAnalogAttributeInterface
             public void setColorSystemCapability(String[] strArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.analog.IAnalogAttributeInterface");
-                    obtain.writeStringArray(strArr);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.analog.IAnalogAttributeInterface");
+                    parcelObtain.writeStringArray(strArr);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.analog.IAnalogAttributeInterface
             public String[] getColorSystemCapability() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.analog.IAnalogAttributeInterface");
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArray();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.analog.IAnalogAttributeInterface");
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

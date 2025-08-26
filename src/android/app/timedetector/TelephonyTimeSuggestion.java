@@ -42,44 +42,44 @@ public final class TelephonyTimeSuggestion implements Parcelable {
 
     /* JADX INFO: Access modifiers changed from: private */
     public static TelephonyTimeSuggestion createFromParcel(Parcel parcel) {
-        int readInt = parcel.readInt();
-        TelephonyTimeSuggestion build = new Builder(readInt).setUnixEpochTime((UnixEpochTime) parcel.readParcelable(null, UnixEpochTime.class)).build();
-        ArrayList readArrayList = parcel.readArrayList(null, String.class);
-        if (readArrayList != null) {
-            build.addDebugInfo(readArrayList);
+        int i = parcel.readInt();
+        TelephonyTimeSuggestion telephonyTimeSuggestionBuild = new Builder(i).setUnixEpochTime((UnixEpochTime) parcel.readParcelable(null, UnixEpochTime.class)).build();
+        ArrayList arrayList = parcel.readArrayList(null, String.class);
+        if (arrayList != null) {
+            telephonyTimeSuggestionBuild.addDebugInfo(arrayList);
         }
-        return build;
+        return telephonyTimeSuggestionBuild;
     }
 
     public static TelephonyTimeSuggestion parseCommandLineArg(ShellCommand shellCommand) throws IllegalArgumentException {
-        Integer num = null;
-        Long l = null;
-        Long l2 = null;
+        Integer numValueOf = null;
+        Long lValueOf = null;
+        Long lValueOf2 = null;
         while (true) {
             String nextArg = shellCommand.getNextArg();
             if (nextArg == null) {
-                if (num == null) {
+                if (numValueOf == null) {
                     throw new IllegalArgumentException("No slotIndex specified.");
                 }
-                if (l == null) {
+                if (lValueOf == null) {
                     throw new IllegalArgumentException("No elapsedRealtimeMillis specified.");
                 }
-                if (l2 == null) {
+                if (lValueOf2 == null) {
                     throw new IllegalArgumentException("No unixEpochTimeMillis specified.");
                 }
-                return new Builder(num.intValue()).setUnixEpochTime(new UnixEpochTime(l.longValue(), l2.longValue())).addDebugInfo("Command line injection").build();
+                return new Builder(numValueOf.intValue()).setUnixEpochTime(new UnixEpochTime(lValueOf.longValue(), lValueOf2.longValue())).addDebugInfo("Command line injection").build();
             }
             nextArg.hashCode();
             switch (nextArg) {
                 case "--reference_time":
                 case "--elapsed_realtime":
-                    l = Long.valueOf(Long.parseLong(shellCommand.getNextArgRequired()));
+                    lValueOf = Long.valueOf(Long.parseLong(shellCommand.getNextArgRequired()));
                     break;
                 case "--unix_epoch_time":
-                    l2 = Long.valueOf(Long.parseLong(shellCommand.getNextArgRequired()));
+                    lValueOf2 = Long.valueOf(Long.parseLong(shellCommand.getNextArgRequired()));
                     break;
                 case "--slot_index":
-                    num = Integer.valueOf(Integer.parseInt(shellCommand.getNextArgRequired()));
+                    numValueOf = Integer.valueOf(Integer.parseInt(shellCommand.getNextArgRequired()));
                     break;
                 default:
                     throw new IllegalArgumentException("Unknown option: " + nextArg);

@@ -10,7 +10,6 @@ import com.android.systemui.Dependency;
 import com.android.systemui.res.R$styleable;
 import com.android.systemui.tuner.TunerService;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class TunerSwitch extends SwitchPreference implements TunerService.Tunable {
     public final int mAction;
@@ -18,10 +17,10 @@ public class TunerSwitch extends SwitchPreference implements TunerService.Tunabl
 
     public TunerSwitch(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.TunerSwitch);
-        this.mDefault = obtainStyledAttributes.getBoolean(0, false);
-        this.mAction = obtainStyledAttributes.getInt(1, -1);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.TunerSwitch);
+        this.mDefault = typedArrayObtainStyledAttributes.getBoolean(0, false);
+        this.mAction = typedArrayObtainStyledAttributes.getInt(1, -1);
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     @Override // androidx.preference.Preference

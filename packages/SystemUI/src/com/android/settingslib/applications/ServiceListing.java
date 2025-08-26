@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.function.Predicate;
 import kotlin.collections.CollectionsKt__IterablesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ServiceListing {
     public final boolean mAddDeviceLockedFlags;
@@ -46,7 +45,6 @@ public class ServiceListing {
     public final String mTag;
     public final Predicate mValidator;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Builder {
         public final Context mContext;
 
@@ -66,9 +64,9 @@ public class ServiceListing {
         int i = 0;
         if (string != null && !"".equals(string)) {
             for (String str : string.split(":")) {
-                ComponentName unflattenFromString = ComponentName.unflattenFromString(str);
-                if (unflattenFromString != null) {
-                    this.mEnabledServices.add(unflattenFromString);
+                ComponentName componentNameUnflattenFromString = ComponentName.unflattenFromString(str);
+                if (componentNameUnflattenFromString != null) {
+                    this.mEnabledServices.add(componentNameUnflattenFromString);
                 }
             }
         }
@@ -112,9 +110,9 @@ public class ServiceListing {
             final ArrayList arrayList3 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(arrayList2, 10));
             Iterator it4 = arrayList2.iterator();
             while (true) {
-                boolean hasNext = it4.hasNext();
+                boolean zHasNext = it4.hasNext();
                 controlsListingControllerImpl = controlsListingControllerImpl$serviceListingCallback$1.this$0;
-                if (hasNext) {
+                if (zHasNext) {
                     ServiceInfo serviceInfo2 = (ServiceInfo) it4.next();
                     Context userContext = ((UserTrackerImpl) controlsListingControllerImpl.userTracker).getUserContext();
                     serviceInfo2.getClass();
@@ -125,15 +123,15 @@ public class ServiceListing {
                 public final /* synthetic */ List $newServices;
 
                 public AnonymousClass1(final List<? extends ControlsServiceInfo> arrayList32) {
-                    r2 = arrayList32;
+                    list = arrayList32;
                 }
 
                 @Override // java.lang.Runnable
                 public final void run() {
-                    if (ControlsListingControllerImpl.this.userChangeInProgress.get() > 0) {
+                    if (controlsListingControllerImpl.userChangeInProgress.get() > 0) {
                         return;
                     }
-                    ControlsListingControllerImpl.this.updateServices(r2);
+                    controlsListingControllerImpl.updateServices(list);
                 }
             });
         }

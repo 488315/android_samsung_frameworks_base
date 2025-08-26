@@ -6,7 +6,6 @@ import com.android.systemui.statusbar.pipeline.battery.data.repository.BatteryRe
 import java.util.ArrayList;
 import kotlin.Result;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class BatteryControllerImpl$$ExternalSyntheticLambda0 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -21,7 +20,7 @@ public final /* synthetic */ class BatteryControllerImpl$$ExternalSyntheticLambd
     public final void run() {
         int i = 1;
         int i2 = 0;
-        String str = null;
+        String batteryRemainingShortStringFormatted = null;
         int i3 = this.$r8$classId;
         BatteryControllerImpl batteryControllerImpl = this.f$0;
         switch (i3) {
@@ -40,7 +39,7 @@ public final /* synthetic */ class BatteryControllerImpl$$ExternalSyntheticLambd
                             try {
                                 Estimate estimate = batteryControllerImpl.mEstimate;
                                 if (estimate != null) {
-                                    str = PowerUtil.getBatteryRemainingShortStringFormatted(batteryControllerImpl.mContext, estimate.estimateMillis);
+                                    batteryRemainingShortStringFormatted = PowerUtil.getBatteryRemainingShortStringFormatted(batteryControllerImpl.mContext, estimate.estimateMillis);
                                 }
                             } finally {
                             }
@@ -53,7 +52,7 @@ public final /* synthetic */ class BatteryControllerImpl$$ExternalSyntheticLambd
                             BatteryRepository$fetchEstimate$2$callback$1 batteryRepository$fetchEstimate$2$callback$1 = (BatteryRepository$fetchEstimate$2$callback$1) obj;
                             batteryRepository$fetchEstimate$2$callback$1.getClass();
                             int i4 = Result.$r8$clinit;
-                            batteryRepository$fetchEstimate$2$callback$1.$continuation.resumeWith(str);
+                            batteryRepository$fetchEstimate$2$callback$1.$continuation.resumeWith(batteryRemainingShortStringFormatted);
                         }
                         batteryControllerImpl.mFetchCallbacks.clear();
                     } catch (Throwable th) {

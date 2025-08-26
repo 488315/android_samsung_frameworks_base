@@ -45,7 +45,6 @@ import java.util.function.DoubleConsumer;
 import java.util.function.DoubleSupplier;
 import java.util.function.Supplier;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SubScreenQSEventHandler implements PanelScreenShotLogger.LogProvider {
     private static final int CUTOUT_HEIGHT = 66;
@@ -210,7 +209,7 @@ public class SubScreenQSEventHandler implements PanelScreenShotLogger.LogProvide
         this.mCoverPanelIntentReceiver = new CoverPanelIntentReceiver(new Runnable() { // from class: com.android.systemui.subscreen.SubScreenQSEventHandler$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                SubScreenQSEventHandler.this.onPocketModeChanged();
+                this.f$0.onPocketModeChanged();
             }
         }, runnable2, supplier.get());
         SubScreenTimeOutHelper subScreenTimeOutHelper = new SubScreenTimeOutHelper(supplier2, supplier3, supplier4);
@@ -219,9 +218,9 @@ public class SubScreenQSEventHandler implements PanelScreenShotLogger.LogProvide
         ContentResolver contentResolver = supplier.get().getContentResolver();
         contentResolver.registerContentObserver(Settings.System.getUriFor(SettingsHelper.COVER_SCREEN_TIME_OUT), false, subScreenTimeOutHelper.contentObserver);
         subScreenTimeOutHelper.contentResolver = contentResolver;
-        int readScreenTimeOut = subScreenTimeOutHelper.readScreenTimeOut();
-        Log.d("SubScreenTimeOutHelper", "init: " + readScreenTimeOut);
-        subScreenTimeOutHelper.screenTimeOut = readScreenTimeOut;
+        int screenTimeOut = subScreenTimeOutHelper.readScreenTimeOut();
+        Log.d("SubScreenTimeOutHelper", "init: " + screenTimeOut);
+        subScreenTimeOutHelper.screenTimeOut = screenTimeOut;
     }
 
     private float calculateDraggingHeight(boolean z, boolean z2) {
@@ -289,10 +288,10 @@ public class SubScreenQSEventHandler implements PanelScreenShotLogger.LogProvide
 
     private boolean needToBlockTouchEvent(MotionEvent motionEvent) {
         boolean asBoolean = this.mDisabledSupplier.getAsBoolean();
-        boolean isRunningFactoryApp = FactoryTest.isRunningFactoryApp();
+        boolean zIsRunningFactoryApp = FactoryTest.isRunningFactoryApp();
         boolean z = motionEvent.getPalm() > 0.0f;
         boolean z2 = this.mInSleep;
-        boolean z3 = asBoolean || isRunningFactoryApp || z || z2;
+        boolean z3 = asBoolean || zIsRunningFactoryApp || z || z2;
         if (this.mBlockPolicy != z3) {
             if (z3 && (z || z2)) {
                 this.mCancelAnimator.run();
@@ -306,75 +305,35 @@ public class SubScreenQSEventHandler implements PanelScreenShotLogger.LogProvide
         return z3;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:12:0x0028, code lost:
-    
-        if (r7 != 3) goto L31;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:29:0x005b  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private boolean onCommonTouchEvent(android.view.MotionEvent r7) {
-        /*
-            r6 = this;
-            boolean r0 = r6.needToBlockTouchEvent(r7)
-            r1 = 0
-            if (r0 == 0) goto L8
-            return r1
-        L8:
-            float r0 = r7.getX()
-            float r2 = r7.getY()
-            java.util.function.BooleanSupplier r3 = r6.mPanelExpandedSupplier
-            boolean r3 = r3.getAsBoolean()
-            android.view.VelocityTracker r4 = r6.mVelocityTracker
-            r4.addMovement(r7)
-            int r7 = r7.getAction()
-            if (r7 == 0) goto L65
-            r4 = 1
-            if (r7 == r4) goto L5b
-            r4 = 2
-            if (r7 == r4) goto L2b
-            r0 = 3
-            if (r7 == r0) goto L5b
-            goto L68
-        L2b:
-            float r7 = r6.mInitialTouchX
-            float r0 = r0 - r7
-            float r7 = r6.mInitialTouchY
-            float r2 = r2 - r7
-            float r7 = java.lang.Math.abs(r0)
-            float r0 = java.lang.Math.abs(r2)
-            com.android.systemui.subscreen.CoverPanelIntentReceiver r4 = r6.mCoverPanelIntentReceiver
-            boolean r4 = r4.mIsInPocket
-            if (r4 == 0) goto L42
-            float r4 = r6.mTouchBlockDistance
-            goto L44
-        L42:
-            float r4 = r6.mTouchSlop
-        L44:
-            boolean r5 = r6.mTracking
-            if (r5 != 0) goto L56
-            if (r3 == 0) goto L68
-            int r3 = (r0 > r4 ? 1 : (r0 == r4 ? 0 : -1))
-            if (r3 <= 0) goto L68
-            int r7 = (r0 > r7 ? 1 : (r0 == r7 ? 0 : -1))
-            if (r7 <= 0) goto L68
-            boolean r7 = r6.mIsBlockedByPalmTouch
-            if (r7 != 0) goto L68
-        L56:
-            boolean r6 = r6.handleMoveEvent(r2, r1)
-            return r6
-        L5b:
-            java.util.function.BooleanSupplier r7 = r6.mPanelFullyExpandedSupplier
-            boolean r7 = r7.getAsBoolean()
-            r6.handleUpEvent(r3, r7)
-            goto L68
-        L65:
-            r6.handleDownEvent(r0, r2)
-        L68:
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.subscreen.SubScreenQSEventHandler.onCommonTouchEvent(android.view.MotionEvent):boolean");
+    private boolean onCommonTouchEvent(MotionEvent motionEvent) {
+        if (needToBlockTouchEvent(motionEvent)) {
+            return false;
+        }
+        float x = motionEvent.getX();
+        float y = motionEvent.getY();
+        boolean asBoolean = this.mPanelExpandedSupplier.getAsBoolean();
+        this.mVelocityTracker.addMovement(motionEvent);
+        int action = motionEvent.getAction();
+        if (action == 0) {
+            handleDownEvent(x, y);
+        } else if (action == 1) {
+            handleUpEvent(asBoolean, this.mPanelFullyExpandedSupplier.getAsBoolean());
+        } else if (action == 2) {
+            float f = x - this.mInitialTouchX;
+            float f2 = y - this.mInitialTouchY;
+            float fAbs = Math.abs(f);
+            float fAbs2 = Math.abs(f2);
+            float f3 = this.mCoverPanelIntentReceiver.mIsInPocket ? this.mTouchBlockDistance : this.mTouchSlop;
+            if (this.mTracking || (asBoolean && fAbs2 > f3 && fAbs2 > fAbs && !this.mIsBlockedByPalmTouch)) {
+                return handleMoveEvent(f2, false);
+            }
+        } else if (action == 3) {
+        }
+        return false;
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -496,126 +455,64 @@ public class SubScreenQSEventHandler implements PanelScreenShotLogger.LogProvide
         return this.mSubScreenTimeOutHelper.screenTimeOut;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:54:0x0096, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:56:0x0096, code lost:
     
         if (r7.mIsBlockedByPalmTouch == false) goto L57;
      */
+    /* JADX WARN: Removed duplicated region for block: B:59:0x009d  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public boolean handleTouchEvent(android.view.MotionEvent r8) {
-        /*
-            r7 = this;
-            boolean r0 = r7.needToBlockTouchEvent(r8)
-            r1 = 0
-            if (r0 == 0) goto L8
-            return r1
-        L8:
-            float r0 = r8.getX()
-            float r2 = r8.getY()
-            java.util.function.BooleanSupplier r3 = r7.mPanelExpandedSupplier
-            boolean r3 = r3.getAsBoolean()
-            android.view.VelocityTracker r4 = r7.mVelocityTracker
-            r4.addMovement(r8)
-            int r8 = r8.getAction()
-            if (r8 == 0) goto Lac
-            r4 = 1
-            if (r8 == r4) goto L9d
-            r5 = 2
-            if (r8 == r5) goto L40
-            r0 = 3
-            if (r8 == r0) goto L9d
-            r0 = 261(0x105, float:3.66E-43)
-            if (r8 == r0) goto L3c
-            r0 = 262(0x106, float:3.67E-43)
-            if (r8 == r0) goto L3c
-            r0 = 517(0x205, float:7.24E-43)
-            if (r8 == r0) goto L3c
-            r0 = 518(0x206, float:7.26E-43)
-            if (r8 == r0) goto L3c
-            goto Lb6
-        L3c:
-            r7.mIsMultiTouch = r4
-            goto Lb6
-        L40:
-            boolean r8 = r7.mShouldBeHandledByInputMonitor
-            if (r8 != 0) goto L45
-            return r1
-        L45:
-            float r8 = r7.mInitialTouchX
-            float r0 = r0 - r8
-            float r8 = r7.mInitialTouchY
-            float r2 = r2 - r8
-            float r8 = java.lang.Math.abs(r0)
-            float r0 = java.lang.Math.abs(r2)
-            r5 = 1073741824(0x40000000, float:2.0)
-            float r5 = r5 * r0
-            int r5 = (r8 > r5 ? 1 : (r8 == r5 ? 0 : -1))
-            if (r5 <= 0) goto L62
-            float r5 = r7.mTouchSlop
-            int r5 = (r8 > r5 ? 1 : (r8 == r5 ? 0 : -1))
-            if (r5 <= 0) goto L62
-            r7.mIsHorizontalGesture = r4
-        L62:
-            com.android.systemui.subscreen.CoverPanelIntentReceiver r5 = r7.mCoverPanelIntentReceiver
-            boolean r5 = r5.mIsInPocket
-            if (r5 == 0) goto L6b
-            float r5 = r7.mTouchBlockDistance
-            goto L6d
-        L6b:
-            float r5 = r7.mTouchSlop
-        L6d:
-            boolean r6 = r7.mTracking
-            if (r6 != 0) goto L98
-            boolean r6 = r7.mIsMultiTouch
-            if (r6 != 0) goto Lb6
-            boolean r6 = r7.mIsRotation0
-            if (r6 != 0) goto L7d
-            boolean r6 = r7.mIsFlexMode
-            if (r6 == 0) goto Lb6
-        L7d:
-            boolean r6 = r7.mIsHorizontalGesture
-            if (r6 != 0) goto Lb6
-            if (r3 != 0) goto L87
-            boolean r6 = r7.mIsInDraggingArea
-            if (r6 == 0) goto Lb6
-        L87:
-            if (r3 == 0) goto L8b
-            r3 = r0
-            goto L8c
-        L8b:
-            r3 = r2
-        L8c:
-            int r3 = (r3 > r5 ? 1 : (r3 == r5 ? 0 : -1))
-            if (r3 <= 0) goto Lb6
-            int r8 = (r0 > r8 ? 1 : (r0 == r8 ? 0 : -1))
-            if (r8 <= 0) goto Lb6
-            boolean r8 = r7.mIsBlockedByPalmTouch
-            if (r8 != 0) goto Lb6
-        L98:
-            boolean r7 = r7.handleMoveEvent(r2, r4)
-            return r7
-        L9d:
-            boolean r8 = r7.mShouldBeHandledByInputMonitor
-            if (r8 != 0) goto La2
-            return r1
-        La2:
-            java.util.function.BooleanSupplier r8 = r7.mPanelFullyExpandedSupplier
-            boolean r8 = r8.getAsBoolean()
-            r7.handleUpEvent(r3, r8)
-            goto Lb6
-        Lac:
-            r8 = r3 ^ 1
-            r7.mShouldBeHandledByInputMonitor = r8
-            if (r3 == 0) goto Lb3
-            return r1
-        Lb3:
-            r7.handleDownEvent(r0, r2)
-        Lb6:
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.subscreen.SubScreenQSEventHandler.handleTouchEvent(android.view.MotionEvent):boolean");
+    public boolean handleTouchEvent(MotionEvent motionEvent) {
+        if (needToBlockTouchEvent(motionEvent)) {
+            return false;
+        }
+        float x = motionEvent.getX();
+        float y = motionEvent.getY();
+        boolean asBoolean = this.mPanelExpandedSupplier.getAsBoolean();
+        this.mVelocityTracker.addMovement(motionEvent);
+        int action = motionEvent.getAction();
+        if (action == 0) {
+            this.mShouldBeHandledByInputMonitor = !asBoolean;
+            if (asBoolean) {
+                return false;
+            }
+            handleDownEvent(x, y);
+        } else if (action == 1) {
+            if (!this.mShouldBeHandledByInputMonitor) {
+                return false;
+            }
+            handleUpEvent(asBoolean, this.mPanelFullyExpandedSupplier.getAsBoolean());
+        } else {
+            if (action == 2) {
+                if (!this.mShouldBeHandledByInputMonitor) {
+                    return false;
+                }
+                float f = x - this.mInitialTouchX;
+                float f2 = y - this.mInitialTouchY;
+                float fAbs = Math.abs(f);
+                float fAbs2 = Math.abs(f2);
+                if (fAbs > 2.0f * fAbs2 && fAbs > this.mTouchSlop) {
+                    this.mIsHorizontalGesture = true;
+                }
+                float f3 = this.mCoverPanelIntentReceiver.mIsInPocket ? this.mTouchBlockDistance : this.mTouchSlop;
+                if (!this.mTracking) {
+                    if (!this.mIsMultiTouch && ((this.mIsRotation0 || this.mIsFlexMode) && !this.mIsHorizontalGesture && (asBoolean || this.mIsInDraggingArea))) {
+                        if ((asBoolean ? fAbs2 : f2) > f3) {
+                            if (fAbs2 > fAbs) {
+                            }
+                        }
+                    }
+                }
+                return handleMoveEvent(f2, true);
+            }
+            if (action != 3) {
+                if (action == 261 || action == 262 || action == 517 || action == 518) {
+                    this.mIsMultiTouch = true;
+                }
+            }
+        }
+        return false;
     }
 
     public void init() {

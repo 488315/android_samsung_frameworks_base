@@ -21,17 +21,17 @@ public class StringSource extends Filter {
 
     @Override // android.filterfw.core.Filter
     public void setupPorts() {
-        MutableFrameFormat fromClass = ObjectFormat.fromClass(String.class, 1);
-        this.mOutputFormat = fromClass;
-        addOutputPort("string", fromClass);
+        MutableFrameFormat mutableFrameFormatFromClass = ObjectFormat.fromClass(String.class, 1);
+        this.mOutputFormat = mutableFrameFormatFromClass;
+        addOutputPort("string", mutableFrameFormatFromClass);
     }
 
     @Override // android.filterfw.core.Filter
     public void process(FilterContext filterContext) {
-        Frame newFrame = filterContext.getFrameManager().newFrame(this.mOutputFormat);
-        newFrame.setObjectValue(this.mString);
-        newFrame.setTimestamp(-1L);
-        pushOutput("string", newFrame);
+        Frame frameNewFrame = filterContext.getFrameManager().newFrame(this.mOutputFormat);
+        frameNewFrame.setObjectValue(this.mString);
+        frameNewFrame.setTimestamp(-1L);
+        pushOutput("string", frameNewFrame);
         closeOutputPort("string");
     }
 }

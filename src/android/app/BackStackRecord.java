@@ -3,6 +3,7 @@ package android.app;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentManagerImpl;
+import android.content.res.Resources;
 import android.util.Log;
 import android.util.LogWriter;
 import android.view.View;
@@ -494,13 +495,13 @@ final class BackStackRecord extends FragmentTransaction implements FragmentManag
     }
 
     @Override // android.app.FragmentTransaction
-    public void commitNow() {
+    public void commitNow() throws Resources.NotFoundException {
         disallowAddToBackStack();
         this.mManager.execSingleAction(this, false);
     }
 
     @Override // android.app.FragmentTransaction
-    public void commitNowAllowingStateLoss() {
+    public void commitNowAllowingStateLoss() throws Resources.NotFoundException {
         disallowAddToBackStack();
         this.mManager.execSingleAction(this, true);
     }
@@ -690,79 +691,84 @@ final class BackStackRecord extends FragmentTransaction implements FragmentManag
         fragmentManagerImpl.moveToState(fragmentManagerImpl.mCurState, true);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:34:0x00b4  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     Fragment expandOps(ArrayList<Fragment> arrayList, Fragment fragment) {
         Fragment fragment2 = fragment;
         int i = 0;
         while (i < this.mOps.size()) {
             Op op = this.mOps.get(i);
             int i2 = op.cmd;
-            if (i2 != 1) {
-                if (i2 == 2) {
-                    Fragment fragment3 = op.fragment;
-                    int i3 = fragment3.mContainerId;
-                    boolean z = false;
-                    for (int size = arrayList.size() - 1; size >= 0; size--) {
-                        Fragment fragment4 = arrayList.get(size);
-                        if (fragment4.mContainerId == i3) {
-                            if (fragment4 == fragment3) {
-                                z = true;
-                            } else {
-                                if (fragment4 == fragment2) {
-                                    this.mOps.add(i, new Op(9, fragment4));
-                                    i++;
-                                    fragment2 = null;
-                                }
-                                Op op2 = new Op(3, fragment4);
-                                op2.enterAnim = op.enterAnim;
-                                op2.popEnterAnim = op.popEnterAnim;
-                                op2.exitAnim = op.exitAnim;
-                                op2.popExitAnim = op.popExitAnim;
-                                this.mOps.add(i, op2);
-                                arrayList.remove(fragment4);
+            if (i2 == 1) {
+                arrayList.add(op.fragment);
+            } else if (i2 == 2) {
+                Fragment fragment3 = op.fragment;
+                int i3 = fragment3.mContainerId;
+                boolean z = false;
+                for (int size = arrayList.size() - 1; size >= 0; size--) {
+                    Fragment fragment4 = arrayList.get(size);
+                    if (fragment4.mContainerId == i3) {
+                        if (fragment4 == fragment3) {
+                            z = true;
+                        } else {
+                            if (fragment4 == fragment2) {
+                                this.mOps.add(i, new Op(9, fragment4));
                                 i++;
+                                fragment2 = null;
                             }
+                            Op op2 = new Op(3, fragment4);
+                            op2.enterAnim = op.enterAnim;
+                            op2.popEnterAnim = op.popEnterAnim;
+                            op2.exitAnim = op.exitAnim;
+                            op2.popExitAnim = op.popExitAnim;
+                            this.mOps.add(i, op2);
+                            arrayList.remove(fragment4);
+                            i++;
                         }
                     }
-                    if (z) {
-                        this.mOps.remove(i);
-                        i--;
-                    } else {
-                        op.cmd = 1;
-                        arrayList.add(fragment3);
-                    }
-                } else if (i2 == 3 || i2 == 6) {
-                    arrayList.remove(op.fragment);
-                    if (op.fragment == fragment2) {
-                        this.mOps.add(i, new Op(9, op.fragment));
-                        i++;
-                        fragment2 = null;
-                    }
-                } else if (i2 != 7) {
-                    if (i2 == 8) {
-                        this.mOps.add(i, new Op(9, fragment2));
-                        i++;
-                        fragment2 = op.fragment;
-                    }
                 }
-                i++;
+                if (z) {
+                    this.mOps.remove(i);
+                    i--;
+                } else {
+                    op.cmd = 1;
+                    arrayList.add(fragment3);
+                }
+            } else if (i2 == 3 || i2 == 6) {
+                arrayList.remove(op.fragment);
+                if (op.fragment == fragment2) {
+                    this.mOps.add(i, new Op(9, op.fragment));
+                    i++;
+                    fragment2 = null;
+                }
+            } else if (i2 != 7) {
+                if (i2 == 8) {
+                    this.mOps.add(i, new Op(9, fragment2));
+                    i++;
+                    fragment2 = op.fragment;
+                }
             }
-            arrayList.add(op.fragment);
             i++;
         }
         return fragment2;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:15:0x0026  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     void trackAddedFragmentsInPop(ArrayList<Fragment> arrayList) {
         for (int i = 0; i < this.mOps.size(); i++) {
             Op op = this.mOps.get(i);
             int i2 = op.cmd;
-            if (i2 != 1) {
-                if (i2 == 3 || i2 == 6) {
-                    arrayList.add(op.fragment);
-                } else if (i2 != 7) {
-                }
+            if (i2 == 1) {
+                arrayList.remove(op.fragment);
+            } else if (i2 == 3 || i2 == 6) {
+                arrayList.add(op.fragment);
+            } else if (i2 != 7) {
             }
-            arrayList.remove(op.fragment);
         }
     }
 

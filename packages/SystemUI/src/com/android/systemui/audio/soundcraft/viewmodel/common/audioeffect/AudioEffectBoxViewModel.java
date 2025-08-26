@@ -1,19 +1,22 @@
 package com.android.systemui.audio.soundcraft.viewmodel.common.audioeffect;
 
 import android.content.Context;
+import android.util.Log;
 import androidx.lifecycle.MutableLiveData;
+import com.android.keyguard.KeyguardKnoxGuardViewController$$ExternalSyntheticOutline0;
+import com.android.systemui.R;
 import com.android.systemui.audio.soundcraft.SoundCraftCoverController;
 import com.android.systemui.audio.soundcraft.feature.SoundCraftFeatures;
 import com.android.systemui.audio.soundcraft.interfaces.settings.SoundCraftSettings;
 import com.android.systemui.audio.soundcraft.interfaces.wearable.setting.BudsSettingIntentFactory;
 import com.android.systemui.audio.soundcraft.model.EffectOutDeviceType;
 import com.android.systemui.audio.soundcraft.model.ModelProvider;
+import com.android.systemui.audio.soundcraft.model.common.EffectModel;
 import com.android.systemui.audio.soundcraft.model.phone.PhoneEffectModel;
 import com.android.systemui.audio.soundcraft.viewmodel.common.base.BaseViewModel;
 import com.android.systemui.qs.bar.ColoredBGHelper;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AudioEffectBoxViewModel extends BaseViewModel {
     public final ColoredBGHelper coloredBGHelper;
@@ -37,7 +40,6 @@ public final class AudioEffectBoxViewModel extends BaseViewModel {
     public final SoundCraftSettings settings;
     public final SoundCraftCoverController soundCraftCoverController;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -75,25 +77,56 @@ public final class AudioEffectBoxViewModel extends BaseViewModel {
         this.isCoverScreen = new MutableLiveData(bool);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0065  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x0079  */
-    /* JADX WARN: Removed duplicated region for block: B:44:0x00e9  */
-    /* JADX WARN: Removed duplicated region for block: B:47:0x00fc  */
-    /* JADX WARN: Removed duplicated region for block: B:63:0x0110  */
-    /* JADX WARN: Removed duplicated region for block: B:64:0x00f3  */
-    /* JADX WARN: Removed duplicated region for block: B:68:0x007b  */
-    /* JADX WARN: Removed duplicated region for block: B:69:0x0067  */
+    /* JADX WARN: Removed duplicated region for block: B:19:0x0033  */
     @Override // com.android.systemui.audio.soundcraft.viewmodel.common.base.BaseViewModel
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final void notifyChange() {
-        /*
-            Method dump skipped, instructions count: 331
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.audio.soundcraft.viewmodel.common.audioeffect.AudioEffectBoxViewModel.notifyChange():void");
+        boolean z;
+        Boolean boolValueOf;
+        int i;
+        ModelProvider modelProvider = this.modelProvider;
+        EffectModel effectModel = modelProvider.effectModel;
+        boolean z2 = false;
+        boolean z3 = this.settings.isAppSettingEnabled && modelProvider.appSettingModel.readyToUpdateRoutine;
+        boolean z4 = modelProvider.effectOutDeviceType == EffectOutDeviceType.BUDS;
+        if (z4) {
+            if (modelProvider.budsModel.getConnectionState() != null ? !r6.booleanValue() : true) {
+                z = true;
+            }
+        } else {
+            z = false;
+        }
+        KeyguardKnoxGuardViewController$$ExternalSyntheticOutline0.m("isBudsManagerNotAvailable=", ", readyToUpdateRoutine=", "SoundCraft.AudioEffectBoxViewModel", z, z3);
+        this.isHeaderVisible.setValue(Boolean.valueOf(z3));
+        MutableLiveData mutableLiveData = this.isDolbyVisible;
+        SoundCraftFeatures.INSTANCE.getClass();
+        boolean z5 = SoundCraftFeatures.supportDolby;
+        mutableLiveData.setValue(Boolean.valueOf(z5 && effectModel.dolbyList != null));
+        this.isSpatialAudioVisible.setValue(Boolean.valueOf(effectModel.spatialAudio != null));
+        this.isHeadTrackingVisible.setValue(Boolean.valueOf(modelProvider.budsModel.getHeadTracking() != null));
+        this.isEqualizerVisible.setValue(Boolean.valueOf(SoundCraftFeatures.supportEQ));
+        this.isVoiceBoostVisible.setValue(Boolean.valueOf(SoundCraftFeatures.supportVoiceBoost && effectModel.voiceBoost != null));
+        this.isVolumeNormalizationVisible.setValue(Boolean.valueOf(z5 && effectModel.volumeNormalization != null));
+        this.isFallbackTextVisible.setValue(Boolean.valueOf(z));
+        this.isCoverScreen.setValue(Boolean.valueOf(modelProvider.isFromCover));
+        this.isShowBoxBg.setValue(Boolean.valueOf(z4));
+        this.isDetailJumpButtonVisible.setValue(Boolean.valueOf((!z4 || z || modelProvider.isFromCover) ? false : true));
+        this.fallbackMessage.setValue(z ? this.context.getString(R.string.soundcraft_buds_manager_not_available) : "");
+        MutableLiveData mutableLiveData2 = this.isVoiceBoostEnable;
+        if (z4) {
+            boolValueOf = Boolean.valueOf(modelProvider.budsModel.getUhq() != null ? !r2.booleanValue() : true);
+        } else {
+            boolValueOf = Boolean.valueOf(!modelProvider.phoneModel.uhqUpscaler);
+        }
+        mutableLiveData2.setValue(boolValueOf);
+        MutableLiveData mutableLiveData3 = this.isDolbyEnable;
+        if (!modelProvider.phoneModel.spatialAudio && (SoundCraftFeatures.dolbyEnabled || ((i = modelProvider.volumeModel.device) != 2 && i != 0))) {
+            z2 = true;
+        }
+        mutableLiveData3.setValue(Boolean.valueOf(z2));
+        Log.d("SoundCraft.AudioEffectBoxViewModel", "notifyChange=" + this);
     }
 
     public final String toString() {

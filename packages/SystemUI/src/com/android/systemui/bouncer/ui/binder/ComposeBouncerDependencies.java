@@ -11,7 +11,6 @@ import com.android.systemui.user.domain.interactor.SelectedUserInteractor;
 import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ComposeBouncerDependencies {
     public final CoroutineScope applicationScope;
@@ -48,9 +47,9 @@ public final class ComposeBouncerDependencies {
     }
 
     public final int hashCode() {
-        int hashCode = (this.authenticationInteractor.hashCode() + ((this.bouncerContainerViewModelFactory.hashCode() + ((this.dialogFactory.hashCode() + ((this.viewModelFactory.hashCode() + ((this.legacyInteractor.hashCode() + ((this.selectedUserInteractor.hashCode() + ((this.keyguardInteractor.hashCode() + (this.applicationScope.hashCode() * 31)) * 31)) * 31)) * 31)) * 31)) * 31)) * 31)) * 31;
+        int iHashCode = (this.authenticationInteractor.hashCode() + ((this.bouncerContainerViewModelFactory.hashCode() + ((this.dialogFactory.hashCode() + ((this.viewModelFactory.hashCode() + ((this.legacyInteractor.hashCode() + ((this.selectedUserInteractor.hashCode() + ((this.keyguardInteractor.hashCode() + (this.applicationScope.hashCode() * 31)) * 31)) * 31)) * 31)) * 31)) * 31)) * 31)) * 31;
         ViewMediatorCallback viewMediatorCallback = this.viewMediatorCallback;
-        return hashCode + (viewMediatorCallback == null ? 0 : viewMediatorCallback.hashCode());
+        return iHashCode + (viewMediatorCallback == null ? 0 : viewMediatorCallback.hashCode());
     }
 
     public final String toString() {

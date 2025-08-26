@@ -61,9 +61,9 @@ public interface ITAController extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ITAController.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ITAController)) {
-                return (ITAController) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ITAController.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ITAController)) {
+                return (ITAController) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -97,21 +97,21 @@ public interface ITAController extends IInterface {
             }
             if (i == 1) {
                 ParcelFileDescriptor parcelFileDescriptor = (ParcelFileDescriptor) parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
-                long readLong = parcel.readLong();
-                long readLong2 = parcel.readLong();
+                long j = parcel.readLong();
+                long j2 = parcel.readLong();
                 parcel.enforceNoDataAvail();
-                boolean loadTA = loadTA(parcelFileDescriptor, readLong, readLong2);
+                boolean zLoadTA = loadTA(parcelFileDescriptor, j, j2);
                 parcel2.writeNoException();
-                parcel2.writeBoolean(loadTA);
+                parcel2.writeBoolean(zLoadTA);
             } else if (i == 2) {
                 unloadTA();
                 parcel2.writeNoException();
             } else if (i == 3) {
                 TACommandRequest tACommandRequest = (TACommandRequest) parcel.readTypedObject(TACommandRequest.CREATOR);
                 parcel.enforceNoDataAvail();
-                TACommandResponse processTACommand = processTACommand(tACommandRequest);
+                TACommandResponse tACommandResponseProcessTACommand = processTACommand(tACommandRequest);
                 parcel2.writeNoException();
-                parcel2.writeTypedObject(processTACommand, 1);
+                parcel2.writeTypedObject(tACommandResponseProcessTACommand, 1);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -136,49 +136,49 @@ public interface ITAController extends IInterface {
 
             @Override // android.blockchain.ITAController
             public boolean loadTA(ParcelFileDescriptor parcelFileDescriptor, long j, long j2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITAController.DESCRIPTOR);
-                    obtain.writeTypedObject(parcelFileDescriptor, 0);
-                    obtain.writeLong(j);
-                    obtain.writeLong(j2);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ITAController.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor, 0);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeLong(j2);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.blockchain.ITAController
             public void unloadTA() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITAController.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ITAController.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.blockchain.ITAController
             public TACommandResponse processTACommand(TACommandRequest tACommandRequest) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITAController.DESCRIPTOR);
-                    obtain.writeTypedObject(tACommandRequest, 0);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (TACommandResponse) obtain2.readTypedObject(TACommandResponse.CREATOR);
+                    parcelObtain.writeInterfaceToken(ITAController.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(tACommandRequest, 0);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (TACommandResponse) parcelObtain2.readTypedObject(TACommandResponse.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -4,7 +4,6 @@ import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SecAnimatingColorTransition implements ValueAnimator.AnimatorUpdateListener {
     public final Function1 applyColor;
@@ -23,20 +22,20 @@ public class SecAnimatingColorTransition implements ValueAnimator.AnimatorUpdate
         this.sourceColor = i;
         this.currentColor = i;
         this.targetColor = i;
-        function12.mo779invoke(Integer.valueOf(i));
+        function12.mo781invoke(Integer.valueOf(i));
     }
 
     public ValueAnimator buildAnimator() {
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-        ofFloat.setDuration(333L);
-        ofFloat.addUpdateListener(this);
-        return ofFloat;
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+        valueAnimatorOfFloat.setDuration(333L);
+        valueAnimatorOfFloat.addUpdateListener(this);
+        return valueAnimatorOfFloat;
     }
 
     @Override // android.animation.ValueAnimator.AnimatorUpdateListener
     public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-        int intValue = ((Integer) this.argbEvaluator.evaluate(valueAnimator.getAnimatedFraction(), Integer.valueOf(this.sourceColor), Integer.valueOf(this.targetColor))).intValue();
-        this.currentColor = intValue;
-        this.applyColor.mo779invoke(Integer.valueOf(intValue));
+        int iIntValue = ((Integer) this.argbEvaluator.evaluate(valueAnimator.getAnimatedFraction(), Integer.valueOf(this.sourceColor), Integer.valueOf(this.targetColor))).intValue();
+        this.currentColor = iIntValue;
+        this.applyColor.mo781invoke(Integer.valueOf(iIntValue));
     }
 }

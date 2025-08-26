@@ -32,9 +32,9 @@ public class ListenerGroup<T> {
     }
 
     public void removeListener(Consumer<T> consumer) {
-        int computeIndex = computeIndex(consumer);
-        if (computeIndex > -1) {
-            this.mListeners.remove(computeIndex);
+        int iComputeIndex = computeIndex(consumer);
+        if (iComputeIndex > -1) {
+            this.mListeners.remove(iComputeIndex);
         }
     }
 

@@ -230,20 +230,20 @@ public class MediaSessionLegacyHelper {
             if (width > i || height > i2) {
                 float f = width;
                 float f2 = height;
-                float min = Math.min(i / f, i2 / f2);
-                int round = Math.round(f * min);
-                int round2 = Math.round(min * f2);
+                float fMin = Math.min(i / f, i2 / f2);
+                int iRound = Math.round(f * fMin);
+                int iRound2 = Math.round(fMin * f2);
                 Bitmap.Config config = bitmap.getConfig();
                 if (config == null) {
                     config = Bitmap.Config.ARGB_8888;
                 }
-                Bitmap createBitmap = Bitmap.createBitmap(round, round2, config);
-                Canvas canvas = new Canvas(createBitmap);
+                Bitmap bitmapCreateBitmap = Bitmap.createBitmap(iRound, iRound2, config);
+                Canvas canvas = new Canvas(bitmapCreateBitmap);
                 Paint paint = new Paint();
                 paint.setAntiAlias(true);
                 paint.setFilterBitmap(true);
-                canvas.drawBitmap(bitmap, (Rect) null, new RectF(0.0f, 0.0f, createBitmap.getWidth(), createBitmap.getHeight()), paint);
-                return createBitmap;
+                canvas.drawBitmap(bitmap, (Rect) null, new RectF(0.0f, 0.0f, bitmapCreateBitmap.getWidth(), bitmapCreateBitmap.getHeight()), paint);
+                return bitmapCreateBitmap;
             }
         }
         return bitmap;

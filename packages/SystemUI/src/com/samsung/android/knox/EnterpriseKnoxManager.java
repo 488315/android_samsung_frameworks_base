@@ -27,7 +27,6 @@ import com.samsung.android.knox.zt.networktrust.filter.NetworkFilterManager;
 import java.util.HashMap;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class EnterpriseKnoxManager {
     public static final int DEVICE_KNOXIFIED = 1;
@@ -61,7 +60,6 @@ public class EnterpriseKnoxManager {
     public TimaKeystore mTimaKeystorePolicy;
     public boolean mTimaKeystorePolicyCreated;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum EnterpriseKnoxSdkVersion {
         KNOX_ENTERPRISE_SDK_VERSION_NONE,
         KNOX_ENTERPRISE_SDK_VERSION_1_0,
@@ -395,17 +393,17 @@ public class EnterpriseKnoxManager {
         }
         try {
             knoxContainerManager = new KnoxContainerManager(context, contextInfo);
-            try {
-                this.mKnoxContainerMgrMap.put(Integer.valueOf(i), new Pair<>(Integer.valueOf(contextInfo.mCallerUid), knoxContainerManager));
-            } catch (NoSuchFieldException e) {
-                e = e;
-                knoxContainerManager2 = knoxContainerManager;
-                Log.e(TAG, "Failed at KnoxContainerManager API getKnoxContainerManager ", e);
-                knoxContainerManager = knoxContainerManager2;
-                return knoxContainerManager;
-            }
+        } catch (NoSuchFieldException e) {
+            e = e;
+        }
+        try {
+            this.mKnoxContainerMgrMap.put(Integer.valueOf(i), new Pair<>(Integer.valueOf(contextInfo.mCallerUid), knoxContainerManager));
         } catch (NoSuchFieldException e2) {
             e = e2;
+            knoxContainerManager2 = knoxContainerManager;
+            Log.e(TAG, "Failed at KnoxContainerManager API getKnoxContainerManager ", e);
+            knoxContainerManager = knoxContainerManager2;
+            return knoxContainerManager;
         }
         return knoxContainerManager;
     }

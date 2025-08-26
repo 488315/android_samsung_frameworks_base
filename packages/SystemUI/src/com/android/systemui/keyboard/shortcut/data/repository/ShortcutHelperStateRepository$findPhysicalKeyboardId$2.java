@@ -11,11 +11,11 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlin.sequences.EmptySequence;
-import kotlin.sequences.FilteringSequence$iterator$1;
+import kotlin.sequences.FilteringSequence;
+import kotlin.sequences.FilteringSequence.AnonymousClass1;
 import kotlin.sequences.SequencesKt___SequencesKt;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class ShortcutHelperStateRepository$findPhysicalKeyboardId$2 extends SuspendLambda implements Function2 {
     int label;
@@ -39,7 +39,7 @@ final class ShortcutHelperStateRepository$findPhysicalKeyboardId$2 extends Suspe
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
-        Object obj2;
+        Object next;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         if (this.label != 0) {
             throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
@@ -47,19 +47,19 @@ final class ShortcutHelperStateRepository$findPhysicalKeyboardId$2 extends Suspe
         ResultKt.throwOnFailure(obj);
         InputManager inputManager = this.this$0.inputManager;
         int[] inputDeviceIds = inputManager.getInputDeviceIds();
-        FilteringSequence$iterator$1 filteringSequence$iterator$1 = new FilteringSequence$iterator$1(SequencesKt___SequencesKt.mapNotNull(inputDeviceIds.length == 0 ? EmptySequence.INSTANCE : new ArraysKt___ArraysKt$asSequence$$inlined$Sequence$4(inputDeviceIds), new InputManagerKt$$ExternalSyntheticLambda0(inputManager)));
+        FilteringSequence.AnonymousClass1 anonymousClass1 = SequencesKt___SequencesKt.mapNotNull(inputDeviceIds.length == 0 ? EmptySequence.INSTANCE : new ArraysKt___ArraysKt$asSequence$$inlined$Sequence$4(inputDeviceIds), new InputManagerKt$$ExternalSyntheticLambda0(inputManager)).new AnonymousClass1();
         while (true) {
-            if (!filteringSequence$iterator$1.hasNext()) {
-                obj2 = null;
+            if (!anonymousClass1.hasNext()) {
+                next = null;
                 break;
             }
-            obj2 = filteringSequence$iterator$1.next();
-            InputDevice inputDevice = (InputDevice) obj2;
+            next = anonymousClass1.next();
+            InputDevice inputDevice = (InputDevice) next;
             if (inputDevice.isEnabled() && inputDevice.isFullKeyboard() && !inputDevice.isVirtual()) {
                 break;
             }
         }
-        InputDevice inputDevice2 = (InputDevice) obj2;
+        InputDevice inputDevice2 = (InputDevice) next;
         return new Integer(inputDevice2 != null ? inputDevice2.getId() : -1);
     }
 }

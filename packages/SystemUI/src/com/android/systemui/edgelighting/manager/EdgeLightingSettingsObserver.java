@@ -9,14 +9,12 @@ import com.android.systemui.util.SettingsHelper;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class EdgeLightingSettingsObserver {
     public static EdgeLightingSettingsObserver sInstance;
     public final HashMap mGlobalObservers = new HashMap();
     public final HashMap mSystemObservers = new HashMap();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ContentObserverWrapper extends ContentObserver {
         public final ArrayList mObservers;
 
@@ -51,7 +49,6 @@ public class EdgeLightingSettingsObserver {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface EdgeLightingObserver {
         Handler getHandler();
 
@@ -59,37 +56,33 @@ public class EdgeLightingSettingsObserver {
     }
 
     public static synchronized EdgeLightingSettingsObserver getInstance() {
-        EdgeLightingSettingsObserver edgeLightingSettingsObserver;
-        synchronized (EdgeLightingSettingsObserver.class) {
-            try {
-                if (sInstance == null) {
-                    sInstance = new EdgeLightingSettingsObserver();
-                }
-                edgeLightingSettingsObserver = sInstance;
-            } catch (Throwable th) {
-                throw th;
+        try {
+            if (sInstance == null) {
+                sInstance = new EdgeLightingSettingsObserver();
             }
+        } catch (Throwable th) {
+            throw th;
         }
-        return edgeLightingSettingsObserver;
+        return sInstance;
     }
 
     public final void unregisterContentObserver(ContentResolver contentResolver, Class cls, EdgeLightingObserver edgeLightingObserver) {
-        HashMap hashMap;
+        HashMap map;
         if (cls == Settings.System.class) {
-            hashMap = this.mSystemObservers;
+            map = this.mSystemObservers;
         } else {
             if (cls != Settings.Global.class) {
                 Slog.e("EdgeLightingSettingsObserver", "unregisterContentObserver : wrong table");
                 return;
             }
-            hashMap = this.mGlobalObservers;
+            map = this.mGlobalObservers;
         }
-        ContentObserverWrapper contentObserverWrapper = (ContentObserverWrapper) hashMap.get(SettingsHelper.INDEX_EDGE_LIGHTING_ON);
+        ContentObserverWrapper contentObserverWrapper = (ContentObserverWrapper) map.get(SettingsHelper.INDEX_EDGE_LIGHTING_ON);
         if (contentObserverWrapper != null) {
             contentObserverWrapper.mObservers.remove(edgeLightingObserver);
             if (contentObserverWrapper.mObservers.size() == 0) {
                 contentResolver.unregisterContentObserver(contentObserverWrapper);
-                hashMap.remove(SettingsHelper.INDEX_EDGE_LIGHTING_ON);
+                map.remove(SettingsHelper.INDEX_EDGE_LIGHTING_ON);
             }
         }
     }

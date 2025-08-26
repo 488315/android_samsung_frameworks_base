@@ -12,7 +12,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function6;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class PromptSelectorInteractorImpl$prompt$1 extends SuspendLambda implements Function6 {
     /* synthetic */ Object L$0;
@@ -55,8 +54,8 @@ final class PromptSelectorInteractorImpl$prompt$1 extends SuspendLambda implemen
         if (promptInfo == null || num == null || l == null || str == null || !(promptKind instanceof PromptKind.Biometric)) {
             return null;
         }
-        int intValue = num.intValue();
+        int iIntValue = num.intValue();
         CredentialInteractor credentialInteractor = this.this$0.credentialInteractor;
-        return new BiometricPromptRequest.Biometric(promptInfo, new BiometricUserInfo(intValue, ((CredentialInteractorImpl) credentialInteractor).userManager.getCredentialOwnerProfile(num.intValue()), 0, 4, null), new BiometricOperationInfo(l.longValue()), ((PromptKind.Biometric) promptKind).activeModalities, str);
+        return new BiometricPromptRequest.Biometric(promptInfo, new BiometricUserInfo(iIntValue, ((CredentialInteractorImpl) credentialInteractor).userManager.getCredentialOwnerProfile(num.intValue()), 0, 4, null), new BiometricOperationInfo(l.longValue()), ((PromptKind.Biometric) promptKind).activeModalities, str);
     }
 }

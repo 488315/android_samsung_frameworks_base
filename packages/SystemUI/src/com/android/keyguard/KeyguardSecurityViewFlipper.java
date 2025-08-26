@@ -13,12 +13,10 @@ import android.widget.FrameLayout;
 import android.widget.ViewFlipper;
 import com.android.systemui.res.R$styleable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardSecurityViewFlipper extends ViewFlipper {
     public final Rect mTempRect;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class LayoutParams extends FrameLayout.LayoutParams {
         public final int maxHeight;
         public final int maxWidth;
@@ -41,10 +39,10 @@ public class KeyguardSecurityViewFlipper extends ViewFlipper {
 
         public LayoutParams(Context context, AttributeSet attributeSet) {
             super(context, attributeSet);
-            TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.KeyguardSecurityViewFlipper_Layout, 0, 0);
-            this.maxWidth = obtainStyledAttributes.getDimensionPixelSize(1, 0);
-            this.maxHeight = obtainStyledAttributes.getDimensionPixelSize(0, 0);
-            obtainStyledAttributes.recycle();
+            TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.KeyguardSecurityViewFlipper_Layout, 0, 0);
+            this.maxWidth = typedArrayObtainStyledAttributes.getDimensionPixelSize(1, 0);
+            this.maxHeight = typedArrayObtainStyledAttributes.getDimensionPixelSize(0, 0);
+            typedArrayObtainStyledAttributes.recycle();
         }
     }
 
@@ -72,10 +70,10 @@ public class KeyguardSecurityViewFlipper extends ViewFlipper {
 
     @Override // android.widget.FrameLayout, android.view.View
     public final void onMeasure(int i, int i2) {
+        int iMin;
         int i3;
+        int iMin2;
         int i4;
-        int i5;
-        int i6;
         int mode = View.MeasureSpec.getMode(i);
         int mode2 = View.MeasureSpec.getMode(i2);
         if (mode != Integer.MIN_VALUE) {
@@ -87,58 +85,58 @@ public class KeyguardSecurityViewFlipper extends ViewFlipper {
         int size = View.MeasureSpec.getSize(i);
         int size2 = View.MeasureSpec.getSize(i2);
         int childCount = getChildCount();
-        int i7 = size;
-        int i8 = size2;
-        for (int i9 = 0; i9 < childCount; i9++) {
-            View childAt = getChildAt(i9);
+        int i5 = size;
+        int i6 = size2;
+        for (int i7 = 0; i7 < childCount; i7++) {
+            View childAt = getChildAt(i7);
             if (childAt.getVisibility() == 0) {
                 LayoutParams layoutParams = (LayoutParams) childAt.getLayoutParams();
-                int i10 = layoutParams.maxWidth;
-                if (i10 > 0 && i10 < i7) {
-                    i7 = i10;
+                int i8 = layoutParams.maxWidth;
+                if (i8 > 0 && i8 < i5) {
+                    i5 = i8;
                 }
-                int i11 = layoutParams.maxHeight;
-                if (i11 > 0 && i11 < i8) {
-                    i8 = i11;
+                int i9 = layoutParams.maxHeight;
+                if (i9 > 0 && i9 < i6) {
+                    i6 = i9;
                 }
             }
         }
         int paddingRight = getPaddingRight() + getPaddingLeft();
         int paddingBottom = getPaddingBottom() + getPaddingTop();
-        int max = Math.max(0, i7 - paddingRight);
-        int max2 = Math.max(0, i8 - paddingBottom);
-        int i12 = mode == 1073741824 ? size : 0;
-        int i13 = mode2 == 1073741824 ? size2 : 0;
-        for (int i14 = 0; i14 < childCount; i14++) {
-            View childAt2 = getChildAt(i14);
+        int iMax = Math.max(0, i5 - paddingRight);
+        int iMax2 = Math.max(0, i6 - paddingBottom);
+        int iMax3 = mode == 1073741824 ? size : 0;
+        int iMax4 = mode2 == 1073741824 ? size2 : 0;
+        for (int i10 = 0; i10 < childCount; i10++) {
+            View childAt2 = getChildAt(i10);
             LayoutParams layoutParams2 = (LayoutParams) childAt2.getLayoutParams();
-            int i15 = ((FrameLayout.LayoutParams) layoutParams2).width;
-            if (i15 != -2) {
-                i3 = i15 != -1 ? Math.min(max, i15) : max;
+            int i11 = ((FrameLayout.LayoutParams) layoutParams2).width;
+            if (i11 != -2) {
+                iMin = i11 != -1 ? Math.min(iMax, i11) : iMax;
+                i3 = 1073741824;
+            } else {
+                iMin = iMax;
+                i3 = Integer.MIN_VALUE;
+            }
+            int iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(iMin, i3);
+            int i12 = ((FrameLayout.LayoutParams) layoutParams2).height;
+            if (i12 != -2) {
+                iMin2 = i12 != -1 ? Math.min(iMax2, i12) : iMax2;
                 i4 = 1073741824;
             } else {
-                i3 = max;
+                iMin2 = iMax2;
                 i4 = Integer.MIN_VALUE;
             }
-            int makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(i3, i4);
-            int i16 = ((FrameLayout.LayoutParams) layoutParams2).height;
-            if (i16 != -2) {
-                i5 = i16 != -1 ? Math.min(max2, i16) : max2;
-                i6 = 1073741824;
-            } else {
-                i5 = max2;
-                i6 = Integer.MIN_VALUE;
-            }
-            childAt2.measure(makeMeasureSpec, View.MeasureSpec.makeMeasureSpec(i5, i6));
-            i12 = Math.max(i12, Math.min(childAt2.getMeasuredWidth(), size - paddingRight));
-            i13 = Math.max(i13, Math.min(childAt2.getMeasuredHeight(), size2 - paddingBottom));
+            childAt2.measure(iMakeMeasureSpec, View.MeasureSpec.makeMeasureSpec(iMin2, i4));
+            iMax3 = Math.max(iMax3, Math.min(childAt2.getMeasuredWidth(), size - paddingRight));
+            iMax4 = Math.max(iMax4, Math.min(childAt2.getMeasuredHeight(), size2 - paddingBottom));
         }
-        setMeasuredDimension(i12 + paddingRight, i13 + paddingBottom);
+        setMeasuredDimension(iMax3 + paddingRight, iMax4 + paddingBottom);
     }
 
     @Override // android.view.View
     public final boolean onTouchEvent(MotionEvent motionEvent) {
-        boolean onTouchEvent = super.onTouchEvent(motionEvent);
+        boolean zOnTouchEvent = super.onTouchEvent(motionEvent);
         this.mTempRect.set(0, 0, 0, 0);
         for (int i = 0; i < getChildCount(); i++) {
             View childAt = getChildAt(i);
@@ -146,12 +144,12 @@ public class KeyguardSecurityViewFlipper extends ViewFlipper {
                 offsetRectIntoDescendantCoords(childAt, this.mTempRect);
                 Rect rect = this.mTempRect;
                 motionEvent.offsetLocation(rect.left, rect.top);
-                onTouchEvent = childAt.dispatchTouchEvent(motionEvent) || onTouchEvent;
+                zOnTouchEvent = childAt.dispatchTouchEvent(motionEvent) || zOnTouchEvent;
                 Rect rect2 = this.mTempRect;
                 motionEvent.offsetLocation(-rect2.left, -rect2.top);
             }
         }
-        return onTouchEvent;
+        return zOnTouchEvent;
     }
 
     public KeyguardSecurityViewFlipper(Context context, AttributeSet attributeSet) {

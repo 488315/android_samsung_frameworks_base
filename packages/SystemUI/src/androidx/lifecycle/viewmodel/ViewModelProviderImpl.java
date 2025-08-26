@@ -10,7 +10,6 @@ import java.util.LinkedHashMap;
 import kotlin.jvm.internal.ClassReference;
 import kotlin.reflect.KClass;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ViewModelProviderImpl {
     public final CreationExtras extras;
@@ -25,13 +24,13 @@ public final class ViewModelProviderImpl {
 
     /* JADX WARN: Multi-variable type inference failed */
     public final ViewModel getViewModel$lifecycle_viewmodel_release(KClass kClass, String str) {
-        ViewModel create;
+        ViewModel viewModelCreate;
         ViewModelStore viewModelStore = this.store;
         ViewModel viewModel = (ViewModel) ((LinkedHashMap) viewModelStore.map).get(str);
         ClassReference classReference = (ClassReference) kClass;
-        boolean isInstance = classReference.isInstance(viewModel);
+        boolean zIsInstance = classReference.isInstance(viewModel);
         ViewModelProvider.Factory factory = this.factory;
-        if (isInstance) {
+        if (zIsInstance) {
             if (factory instanceof ViewModelProvider.OnRequeryFactory) {
                 viewModel.getClass();
                 ((ViewModelProvider.OnRequeryFactory) factory).onRequery(viewModel);
@@ -41,15 +40,15 @@ public final class ViewModelProviderImpl {
         MutableCreationExtras mutableCreationExtras = new MutableCreationExtras(this.extras);
         mutableCreationExtras.set(ViewModelProviders.ViewModelKey.INSTANCE, str);
         try {
-            create = factory.create(classReference, mutableCreationExtras);
+            viewModelCreate = factory.create(classReference, mutableCreationExtras);
         } catch (Error unused) {
-            create = factory.create(classReference, CreationExtras.Empty.INSTANCE);
+            viewModelCreate = factory.create(classReference, CreationExtras.Empty.INSTANCE);
         }
-        ViewModel viewModel2 = (ViewModel) viewModelStore.map.put(str, create);
+        ViewModel viewModel2 = (ViewModel) viewModelStore.map.put(str, viewModelCreate);
         if (viewModel2 != null) {
             viewModel2.clear$lifecycle_viewmodel_release();
         }
-        return create;
+        return viewModelCreate;
     }
 
     public ViewModelProviderImpl(ViewModelStoreOwner viewModelStoreOwner, ViewModelProvider.Factory factory, CreationExtras creationExtras) {

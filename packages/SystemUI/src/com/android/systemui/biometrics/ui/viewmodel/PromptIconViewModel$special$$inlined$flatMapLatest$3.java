@@ -15,7 +15,6 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.StateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class PromptIconViewModel$special$$inlined$flatMapLatest$3 extends SuspendLambda implements Function3 {
     final /* synthetic */ PromptSelectorInteractor $promptSelectorInteractor$inlined;
@@ -43,7 +42,7 @@ public final class PromptIconViewModel$special$$inlined$flatMapLatest$3 extends 
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
-        Flow combine;
+        Flow flowCombine;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i == 0) {
@@ -53,20 +52,20 @@ public final class PromptIconViewModel$special$$inlined$flatMapLatest$3 extends 
             if (i2 == 1) {
                 StateFlow stateFlow = ((PromptSelectorInteractorImpl) this.$promptSelectorInteractor$inlined).fingerprintSensorType;
                 PromptViewModel promptViewModel = this.$promptViewModel$inlined;
-                combine = FlowKt.combine(stateFlow, promptViewModel.isAuthenticated, promptViewModel.isAuthenticating, promptViewModel.showingError, new PromptIconViewModel$shouldAnimateIconView$1$1(this.this$0, null));
+                flowCombine = FlowKt.combine(stateFlow, promptViewModel.isAuthenticated, promptViewModel.isAuthenticating, promptViewModel.showingError, new PromptIconViewModel$shouldAnimateIconView$1$1(this.this$0, null));
             } else if (i2 == 2) {
                 PromptViewModel promptViewModel2 = this.$promptViewModel$inlined;
-                combine = FlowKt.combine(promptViewModel2.isAuthenticated, promptViewModel2.isAuthenticating, promptViewModel2.showingError, new PromptIconViewModel$shouldAnimateIconView$1$2(this.this$0, null));
+                flowCombine = FlowKt.combine(promptViewModel2.isAuthenticated, promptViewModel2.isAuthenticating, promptViewModel2.showingError, new PromptIconViewModel$shouldAnimateIconView$1$2(this.this$0, null));
             } else {
                 if (i2 != 3) {
                     throw new NoWhenBranchMatchedException();
                 }
                 StateFlow stateFlow2 = ((PromptSelectorInteractorImpl) this.$promptSelectorInteractor$inlined).fingerprintSensorType;
                 PromptViewModel promptViewModel3 = this.$promptViewModel$inlined;
-                combine = FlowKt.combine(stateFlow2, promptViewModel3.isAuthenticated, promptViewModel3.isAuthenticating, promptViewModel3.isPendingConfirmation, promptViewModel3.showingError, new PromptIconViewModel$shouldAnimateIconView$1$3(this.this$0, null));
+                flowCombine = FlowKt.combine(stateFlow2, promptViewModel3.isAuthenticated, promptViewModel3.isAuthenticating, promptViewModel3.isPendingConfirmation, promptViewModel3.showingError, new PromptIconViewModel$shouldAnimateIconView$1$3(this.this$0, null));
             }
             this.label = 1;
-            if (FlowKt.emitAll(flowCollector, combine, this) == coroutineSingletons) {
+            if (FlowKt.emitAll(flowCollector, flowCombine, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

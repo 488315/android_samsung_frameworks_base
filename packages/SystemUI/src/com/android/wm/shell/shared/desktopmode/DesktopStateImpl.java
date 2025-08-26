@@ -1,17 +1,26 @@
 package com.android.wm.shell.shared.desktopmode;
 
+import android.R;
+import android.app.TaskInfo;
 import android.content.Context;
+import android.content.res.Resources;
 import android.hardware.display.DisplayManager;
 import android.os.Debug;
-import android.util.Slog;
+import android.os.SystemProperties;
+import android.provider.Settings;
+import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
+import android.window.DesktopExperienceFlags;
+import android.window.DesktopModeFlags;
+import androidx.collection.MutableObjectList$$ExternalSyntheticOutline0;
+import androidx.exifinterface.media.ExifInterface$$ExternalSyntheticOutline0;
 import com.samsung.android.multiwindow.MultiWindowManager;
 import com.samsung.android.rune.CoreRune;
+import java.util.ArrayList;
 import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DesktopStateImpl implements DesktopState {
     public static final Companion Companion = new Companion(null);
@@ -26,7 +35,6 @@ public final class DesktopStateImpl implements DesktopState {
     public final boolean isFreeformEnabled;
     public WindowManager windowManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -40,11 +48,23 @@ public final class DesktopStateImpl implements DesktopState {
             return (i == 0 && DesktopStateImpl.inDesktopWindowing) || i == DesktopStateImpl.desktopExternalDisplayId;
         }
 
+        public static boolean inNonResizableDesktopWindowing(TaskInfo taskInfo) {
+            return !taskInfo.isResizeable && inDesktopWindowing(taskInfo.displayId);
+        }
+
+        public static void setDesktopExternalDisplayId(int i) {
+            int i2 = DesktopStateImpl.desktopExternalDisplayId;
+            if (i2 != i) {
+                ExifInterface$$ExternalSyntheticOutline0.m(MutableObjectList$$ExternalSyntheticOutline0.m(i2, i, "setDesktopExternalDisplayId: ", " -> ", ", caller="), Debug.getCaller(), "DesktopState");
+                DesktopStateImpl.desktopExternalDisplayId = i;
+            }
+        }
+
         public static void setInDesktopWindowing(boolean z) {
             if (DesktopStateImpl.inDesktopWindowing != z) {
                 DesktopStateImpl.inDesktopWindowing = z;
+                Log.d("DesktopState", "setInDesktopWindowing: " + z + ", caller=" + Debug.getCallers(5));
                 MultiWindowManager.getInstance().setInDesktopWindowing(z);
-                Slog.d("DesktopState", "setInDesktopWindowing called" + Debug.getCallers(5));
             }
         }
 
@@ -60,7 +80,6 @@ public final class DesktopStateImpl implements DesktopState {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DWExternalDisplayMode {
         public static final /* synthetic */ DWExternalDisplayMode[] $VALUES;
         public static final DWExternalDisplayMode DW_EXTERNAL_DISPLAY_EXTENDED;
@@ -94,19 +113,56 @@ public final class DesktopStateImpl implements DesktopState {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:21:0x00b9  */
-    /* JADX WARN: Removed duplicated region for block: B:41:0x010a  */
-    /* JADX WARN: Removed duplicated region for block: B:48:0x010c  */
+    /* JADX WARN: Removed duplicated region for block: B:17:0x0061  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public DesktopStateImpl(android.content.Context r10) {
-        /*
-            Method dump skipped, instructions count: 278
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.shared.desktopmode.DesktopStateImpl.<init>(android.content.Context):void");
+    public DesktopStateImpl(Context context) throws Resources.NotFoundException {
+        boolean z;
+        this.context = context;
+        this.windowManager = (WindowManager) context.getSystemService(WindowManager.class);
+        DisplayManager displayManager = (DisplayManager) context.getSystemService(DisplayManager.class);
+        this.displayManager = displayManager;
+        boolean z2 = true;
+        boolean z3 = SystemProperties.getBoolean("persist.wm.debug.desktop_mode_enforce_device_restrictions", true);
+        this.enforceDeviceRestrictions = z3;
+        boolean z4 = context.getResources().getBoolean(R.bool.config_mms_content_disposition_support);
+        boolean z5 = context.getResources().getBoolean(R.bool.config_mobile_data_capable);
+        boolean z6 = context.getResources().getBoolean(R.bool.config_cbrs_supported);
+        this.canInternalDisplayHostDesktops = z6;
+        boolean z7 = DesktopModeFlags.isDesktopModeForcedEnabled() && (!z3 || ((z5 && z6) || z4));
+        if (z3) {
+            z = (DesktopExperienceFlags.ENABLE_PROJECTED_DISPLAY_DESKTOP_MODE.isTrue() ? z5 : z5 && z6) || z4;
+        }
+        this.canEnterDesktopMode = (z && DesktopModeFlags.ENABLE_DESKTOP_WINDOWING_MODE.isTrue()) || z7;
+        this.enterDesktopByDefaultOnFreeformDisplay = DesktopExperienceFlags.ENTER_DESKTOP_BY_DEFAULT_ON_FREEFORM_DISPLAYS.isTrue() && SystemProperties.getBoolean("persist.wm.debug.enter_desktop_by_default_on_freeform_display", context.getResources().getBoolean(R.bool.config_intrusiveNotificationLed));
+        DesktopExperienceFlags.ENABLE_MULTIPLE_DESKTOPS_BACKEND.isTrue();
+        Display[] displays = displayManager.getDisplays("android.hardware.display.category.ALL_INCLUDING_DISABLED");
+        if (displays != null) {
+            ArrayList arrayList = new ArrayList();
+            for (Display display : displays) {
+                if (display.getType() == 1) {
+                    arrayList.add(display);
+                }
+            }
+            if (!arrayList.isEmpty()) {
+                int size = arrayList.size();
+                int i = 0;
+                while (i < size) {
+                    Object obj = arrayList.get(i);
+                    i++;
+                    if (((Display) obj).getMinSizeDimensionDp() >= 600.0f) {
+                        break;
+                    }
+                }
+            }
+        }
+        boolean zHasSystemFeature = this.context.getPackageManager().hasSystemFeature("android.software.freeform_window_management");
+        boolean z8 = Settings.Global.getInt(this.context.getContentResolver(), "enable_freeform_support", 0) != 0;
+        if (!zHasSystemFeature && !z8) {
+            z2 = false;
+        }
+        this.isFreeformEnabled = z2;
     }
 
     public final boolean isDesktopModeSupportedOnDisplay(int i) {
@@ -124,7 +180,7 @@ public final class DesktopStateImpl implements DesktopState {
         if (!this.enforceDeviceRestrictions) {
             return true;
         }
-        if (CoreRune.DW_MULTI_FOLD_POLICY && display.getType() == 1 && display.getDisplayId() == 1) {
+        if (CoreRune.DW_MULTI_FOLD_POLICY && display.getType() == 1 && this.context.getResources().getConfiguration().semDisplayDeviceType == 5) {
             return false;
         }
         if (display.getType() == 1) {

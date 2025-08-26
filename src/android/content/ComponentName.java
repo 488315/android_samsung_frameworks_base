@@ -73,7 +73,7 @@ public final class ComponentName implements Parcelable, Cloneable, Comparable<Co
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public ComponentName m926clone() {
+    public ComponentName m930clone() {
         return new ComponentName(this.mPackage, this.mClass);
     }
 
@@ -149,16 +149,16 @@ public final class ComponentName implements Parcelable, Cloneable, Comparable<Co
 
     public static ComponentName unflattenFromString(String str) {
         int i;
-        int indexOf = str.indexOf(47);
-        if (indexOf < 0 || (i = indexOf + 1) >= str.length()) {
+        int iIndexOf = str.indexOf(47);
+        if (iIndexOf < 0 || (i = iIndexOf + 1) >= str.length()) {
             return null;
         }
-        String substring = str.substring(0, indexOf);
-        String substring2 = str.substring(i);
-        if (substring2.length() > 0 && substring2.charAt(0) == '.') {
-            substring2 = substring + substring2;
+        String strSubstring = str.substring(0, iIndexOf);
+        String strSubstring2 = str.substring(i);
+        if (strSubstring2.length() > 0 && strSubstring2.charAt(0) == '.') {
+            strSubstring2 = strSubstring + strSubstring2;
         }
-        return new ComponentName(substring, substring2);
+        return new ComponentName(strSubstring, strSubstring2);
     }
 
     public String toShortString() {
@@ -170,10 +170,10 @@ public final class ComponentName implements Parcelable, Cloneable, Comparable<Co
     }
 
     public void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         protoOutputStream.write(1138166333441L, this.mPackage);
         protoOutputStream.write(1138166333442L, this.mClass);
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 
     public boolean equals(Object obj) {
@@ -192,8 +192,8 @@ public final class ComponentName implements Parcelable, Cloneable, Comparable<Co
 
     @Override // java.lang.Comparable
     public int compareTo(ComponentName componentName) {
-        int compareTo = this.mPackage.compareTo(componentName.mPackage);
-        return compareTo != 0 ? compareTo : this.mClass.compareTo(componentName.mClass);
+        int iCompareTo = this.mPackage.compareTo(componentName.mPackage);
+        return iCompareTo != 0 ? iCompareTo : this.mClass.compareTo(componentName.mClass);
     }
 
     @Override // android.os.Parcelable
@@ -211,22 +211,22 @@ public final class ComponentName implements Parcelable, Cloneable, Comparable<Co
     }
 
     public static ComponentName readFromParcel(Parcel parcel) {
-        String readString = parcel.readString();
-        if (readString != null) {
-            return new ComponentName(readString, parcel);
+        String string = parcel.readString();
+        if (string != null) {
+            return new ComponentName(string, parcel);
         }
         return null;
     }
 
     public ComponentName(Parcel parcel) {
-        String readString = parcel.readString();
-        this.mPackage = readString;
-        if (readString == null) {
+        String string = parcel.readString();
+        this.mPackage = string;
+        if (string == null) {
             throw new NullPointerException("package name is null");
         }
-        String readString2 = parcel.readString();
-        this.mClass = readString2;
-        if (readString2 == null) {
+        String string2 = parcel.readString();
+        this.mClass = string2;
+        if (string2 == null) {
             throw new NullPointerException("class name is null");
         }
     }

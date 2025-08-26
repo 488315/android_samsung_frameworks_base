@@ -9,7 +9,6 @@ import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class LinearGradient extends ShaderBrush {
     public final List colors;
@@ -24,34 +23,34 @@ public final class LinearGradient extends ShaderBrush {
 
     @Override // androidx.compose.ui.graphics.ShaderBrush
     /* renamed from: createShader-uvyYCjk */
-    public final Shader mo451createShaderuvyYCjk(long j) {
+    public final Shader mo453createShaderuvyYCjk(long j) {
         long j2 = this.start;
         int i = (int) (j2 >> 32);
         if (Float.intBitsToFloat(i) == Float.POSITIVE_INFINITY) {
             i = (int) (j >> 32);
         }
-        float intBitsToFloat = Float.intBitsToFloat(i);
+        float fIntBitsToFloat = Float.intBitsToFloat(i);
         int i2 = (int) (j2 & 4294967295L);
         if (Float.intBitsToFloat(i2) == Float.POSITIVE_INFINITY) {
             i2 = (int) (j & 4294967295L);
         }
-        float intBitsToFloat2 = Float.intBitsToFloat(i2);
+        float fIntBitsToFloat2 = Float.intBitsToFloat(i2);
         long j3 = this.end;
         int i3 = (int) (j3 >> 32);
         if (Float.intBitsToFloat(i3) == Float.POSITIVE_INFINITY) {
             i3 = (int) (j >> 32);
         }
-        float intBitsToFloat3 = Float.intBitsToFloat(i3);
+        float fIntBitsToFloat3 = Float.intBitsToFloat(i3);
         int i4 = (int) (j3 & 4294967295L);
         if (Float.intBitsToFloat(i4) == Float.POSITIVE_INFINITY) {
             i4 = (int) (j & 4294967295L);
         }
-        float intBitsToFloat4 = Float.intBitsToFloat(i4);
+        float fIntBitsToFloat4 = Float.intBitsToFloat(i4);
         List list = this.colors;
         List list2 = this.stops;
-        long floatToRawIntBits = (Float.floatToRawIntBits(intBitsToFloat) << 32) | (Float.floatToRawIntBits(intBitsToFloat2) & 4294967295L);
+        long jFloatToRawIntBits = (Float.floatToRawIntBits(fIntBitsToFloat) << 32) | (Float.floatToRawIntBits(fIntBitsToFloat2) & 4294967295L);
         Offset.Companion companion = Offset.Companion;
-        long floatToRawIntBits2 = (Float.floatToRawIntBits(intBitsToFloat3) << 32) | (Float.floatToRawIntBits(intBitsToFloat4) & 4294967295L);
+        long jFloatToRawIntBits2 = (Float.floatToRawIntBits(fIntBitsToFloat3) << 32) | (Float.floatToRawIntBits(fIntBitsToFloat4) & 4294967295L);
         AndroidShader_androidKt.validateColorStops(list, list2);
         GradientColorLongVerifier gradientColorLongVerifier = GradientColorLongVerifier.INSTANCE;
         int size = list.size();
@@ -59,7 +58,7 @@ public final class LinearGradient extends ShaderBrush {
         for (int i5 = 0; i5 < size; i5++) {
             jArr[i5] = ((Color) list.get(i5)).value;
         }
-        return gradientColorLongVerifier.m473createLinearGradientColorLongVjE6UOU(floatToRawIntBits, floatToRawIntBits2, jArr, list2 != null ? CollectionsKt___CollectionsKt.toFloatArray(list2) : null, this.tileMode);
+        return gradientColorLongVerifier.m475createLinearGradientColorLongVjE6UOU(jFloatToRawIntBits, jFloatToRawIntBits2, jArr, list2 != null ? CollectionsKt___CollectionsKt.toFloatArray(list2) : null, this.tileMode);
     }
 
     public final boolean equals(Object obj) {
@@ -70,7 +69,7 @@ public final class LinearGradient extends ShaderBrush {
             return false;
         }
         LinearGradient linearGradient = (LinearGradient) obj;
-        if (!Intrinsics.areEqual(this.colors, linearGradient.colors) || !Intrinsics.areEqual(this.stops, linearGradient.stops) || !Offset.m396equalsimpl0(this.start, linearGradient.start) || !Offset.m396equalsimpl0(this.end, linearGradient.end)) {
+        if (!Intrinsics.areEqual(this.colors, linearGradient.colors) || !Intrinsics.areEqual(this.stops, linearGradient.stops) || !Offset.m398equalsimpl0(this.start, linearGradient.start) || !Offset.m398equalsimpl0(this.end, linearGradient.end)) {
             return false;
         }
         int i = linearGradient.tileMode;
@@ -79,13 +78,13 @@ public final class LinearGradient extends ShaderBrush {
     }
 
     public final int hashCode() {
-        int hashCode = this.colors.hashCode() * 31;
+        int iHashCode = this.colors.hashCode() * 31;
         List list = this.stops;
-        int hashCode2 = (hashCode + (list != null ? list.hashCode() : 0)) * 31;
+        int iHashCode2 = (iHashCode + (list != null ? list.hashCode() : 0)) * 31;
         Offset.Companion companion = Offset.Companion;
-        int m = MoveResult$$ExternalSyntheticOutline0.m(MoveResult$$ExternalSyntheticOutline0.m(hashCode2, 31, this.start), 31, this.end);
+        int iM = MoveResult$$ExternalSyntheticOutline0.m(MoveResult$$ExternalSyntheticOutline0.m(iHashCode2, 31, this.start), 31, this.end);
         TileMode.Companion companion2 = TileMode.Companion;
-        return Integer.hashCode(this.tileMode) + m;
+        return Integer.hashCode(this.tileMode) + iM;
     }
 
     public final String toString() {
@@ -93,49 +92,28 @@ public final class LinearGradient extends ShaderBrush {
         long j = this.start;
         String str2 = "";
         if (((((j & 9187343241974906880L) ^ 9187343241974906880L) - 4294967297L) & (-9223372034707292160L)) == 0) {
-            str = "start=" + ((Object) Offset.m403toStringimpl(j)) + ", ";
+            str = "start=" + ((Object) Offset.m405toStringimpl(j)) + ", ";
         } else {
             str = "";
         }
         long j2 = this.end;
         if (((((j2 & 9187343241974906880L) ^ 9187343241974906880L) - 4294967297L) & (-9223372034707292160L)) == 0) {
-            str2 = "end=" + ((Object) Offset.m403toStringimpl(j2)) + ", ";
+            str2 = "end=" + ((Object) Offset.m405toStringimpl(j2)) + ", ";
         }
-        return "LinearGradient(colors=" + this.colors + ", stops=" + this.stops + ", " + str + str2 + "tileMode=" + ((Object) TileMode.m500toStringimpl(this.tileMode)) + ')';
+        return "LinearGradient(colors=" + this.colors + ", stops=" + this.stops + ", " + str + str2 + "tileMode=" + ((Object) TileMode.m502toStringimpl(this.tileMode)) + ')';
     }
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public LinearGradient(java.util.List r10, java.util.List r11, long r12, long r14, int r16, int r17, kotlin.jvm.internal.DefaultConstructorMarker r18) {
-        /*
-            r9 = this;
-            r0 = r17 & 2
-            if (r0 == 0) goto L5
-            r11 = 0
-        L5:
-            r2 = r11
-            r11 = r17 & 16
-            if (r11 == 0) goto L12
-            androidx.compose.ui.graphics.TileMode$Companion r11 = androidx.compose.ui.graphics.TileMode.Companion
-            r11.getClass()
-            r11 = 0
-            r7 = r11
-            goto L14
-        L12:
-            r7 = r16
-        L14:
-            r8 = 0
-            r0 = r9
-            r1 = r10
-            r3 = r12
-            r5 = r14
-            r0.<init>(r1, r2, r3, r5, r7, r8)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.graphics.LinearGradient.<init>(java.util.List, java.util.List, long, long, int, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+    public LinearGradient(List list, List list2, long j, long j2, int i, int i2, DefaultConstructorMarker defaultConstructorMarker) {
+        int i3;
+        List list3 = (i2 & 2) != 0 ? null : list2;
+        if ((i2 & 16) != 0) {
+            TileMode.Companion.getClass();
+            i3 = 0;
+        } else {
+            i3 = i;
+        }
+        this(list, list3, j, j2, i3, null);
     }
 
     private LinearGradient(List<Color> list, List<Float> list2, long j, long j2, int i) {

@@ -113,12 +113,12 @@ class StapleMutableMediaFormat implements MutableMediaFormat {
                 } else if (obj instanceof Shape) {
                     this.shape = ((Shape) obj).toMutableShape();
                 } else if (obj instanceof Integer) {
-                    int intValue = ((Integer) obj).intValue();
-                    if (intValue == 1) {
+                    int iIntValue = ((Integer) obj).intValue();
+                    if (iIntValue == 1) {
                         set("exif", true);
-                    } else if (intValue == 2) {
+                    } else if (iIntValue == 2) {
                         set("icc", true);
-                    } else if (intValue == 3) {
+                    } else if (iIntValue == 3) {
                         set("gain-map", true);
                     } else {
                         Log.w(TAG, "not supported metadata-key " + obj);
@@ -172,13 +172,13 @@ class StapleMutableMediaFormat implements MutableMediaFormat {
         final ArrayList arrayList = new ArrayList();
         if (getColorFormat().isPlanar()) {
             if (getColorFormat().isYuv()) {
-                final DataType depth = getDataType().depth();
+                final DataType dataTypeDepth = getDataType().depth();
                 final Shape shape = getShape().toMutableShape().setRows(getRows() >> 1).setCols(getCols() >> 1).setChannels(getColorFormat().numberOfChromaChannels()).toShape();
-                arrayList.add(MediaFormat.mutableImageOf(DataType.of(depth, 1), getShape()));
+                arrayList.add(MediaFormat.mutableImageOf(DataType.of(dataTypeDepth, 1), getShape()));
                 IntStream.range(1, getColorFormat().numberOfPlanes()).forEach(new IntConsumer() { // from class: com.samsung.android.sume.core.format.StapleMutableMediaFormat$$ExternalSyntheticLambda13
                     @Override // java.util.function.IntConsumer
                     public final void accept(int i) {
-                        arrayList.add(MediaFormat.mutableImageOf(depth, shape));
+                        arrayList.add(MediaFormat.mutableImageOf(dataTypeDepth, shape));
                     }
                 });
                 return arrayList;
@@ -297,17 +297,13 @@ class StapleMutableMediaFormat implements MutableMediaFormat {
         return ((Float) Optional.ofNullable((ColorFormat) get(android.media.MediaFormat.KEY_COLOR_FORMAT)).map(new Function() { // from class: com.samsung.android.sume.core.format.StapleMutableMediaFormat$$ExternalSyntheticLambda14
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                Float valueOf;
-                valueOf = Float.valueOf(r1.isPlanar() ? ((ColorFormat) obj).bytePerPixel() : 1.0f);
-                return valueOf;
+                ColorFormat colorFormat = (ColorFormat) obj;
+                return Float.valueOf(colorFormat.isPlanar() ? colorFormat.bytePerPixel() : 1.0f);
             }
         }).orElse(Float.valueOf(1.0f))).floatValue() * ((Float) Optional.ofNullable(getDataType()).map(new Function() { // from class: com.samsung.android.sume.core.format.StapleMutableMediaFormat$$ExternalSyntheticLambda15
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                Float valueOf;
-                DataType dataType = (DataType) obj;
-                valueOf = Float.valueOf(dataType.size() * dataType.channels());
-                return valueOf;
+                return Float.valueOf(((DataType) obj).size() * r1.channels());
             }
         }).orElse(Float.valueOf(0.0f))).floatValue();
     }
@@ -317,16 +313,13 @@ class StapleMutableMediaFormat implements MutableMediaFormat {
         return ((Float) Optional.ofNullable((ColorFormat) get(android.media.MediaFormat.KEY_COLOR_FORMAT)).map(new Function() { // from class: com.samsung.android.sume.core.format.StapleMutableMediaFormat$$ExternalSyntheticLambda16
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                Float valueOf;
-                valueOf = Float.valueOf(r1.isPlanar() ? ((ColorFormat) obj).bytePerPixel() : 1.0f);
-                return valueOf;
+                ColorFormat colorFormat = (ColorFormat) obj;
+                return Float.valueOf(colorFormat.isPlanar() ? colorFormat.bytePerPixel() : 1.0f);
             }
         }).orElse(Float.valueOf(1.0f))).floatValue() * ((Float) Optional.ofNullable(getDataType()).map(new Function() { // from class: com.samsung.android.sume.core.format.StapleMutableMediaFormat$$ExternalSyntheticLambda17
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                Float valueOf;
-                valueOf = Float.valueOf(((DataType) obj).size());
-                return valueOf;
+                return Float.valueOf(((DataType) obj).size());
             }
         }).orElse(Float.valueOf(0.0f))).floatValue();
     }
@@ -351,13 +344,13 @@ class StapleMutableMediaFormat implements MutableMediaFormat {
         return Arrays.stream(strArr).anyMatch(new Predicate() { // from class: com.samsung.android.sume.core.format.StapleMutableMediaFormat$$ExternalSyntheticLambda11
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                return StapleMutableMediaFormat.this.m9568x64af6031((String) obj);
+                return this.f$0.m9581x64af6031((String) obj);
             }
         });
     }
 
     /* renamed from: lambda$containsAnyOf$6$com-samsung-android-sume-core-format-StapleMutableMediaFormat, reason: not valid java name */
-    /* synthetic */ boolean m9568x64af6031(String str) {
+    /* synthetic */ boolean m9581x64af6031(String str) {
         Stream<String> stream = this.attributes.keySet().stream();
         Objects.requireNonNull(str);
         return stream.anyMatch(new OverlayManagerExt$$ExternalSyntheticLambda4(str));
@@ -368,13 +361,13 @@ class StapleMutableMediaFormat implements MutableMediaFormat {
         return Arrays.stream(strArr).allMatch(new Predicate() { // from class: com.samsung.android.sume.core.format.StapleMutableMediaFormat$$ExternalSyntheticLambda4
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                return StapleMutableMediaFormat.this.m9567xf68fa2e7((String) obj);
+                return this.f$0.m9580xf68fa2e7((String) obj);
             }
         });
     }
 
     /* renamed from: lambda$containsAllOf$7$com-samsung-android-sume-core-format-StapleMutableMediaFormat, reason: not valid java name */
-    /* synthetic */ boolean m9567xf68fa2e7(String str) {
+    /* synthetic */ boolean m9580xf68fa2e7(String str) {
         Stream<String> stream = this.attributes.keySet().stream();
         Objects.requireNonNull(str);
         return stream.anyMatch(new OverlayManagerExt$$ExternalSyntheticLambda4(str));
@@ -470,10 +463,10 @@ class StapleMutableMediaFormat implements MutableMediaFormat {
     }
 
     public void adjustChannels(Class<?>... clsArr) {
-        int intValue = ((Integer) Stream.of((Object[]) clsArr).map(new Function() { // from class: com.samsung.android.sume.core.format.StapleMutableMediaFormat$$ExternalSyntheticLambda6
+        int iIntValue = ((Integer) Stream.of((Object[]) clsArr).map(new Function() { // from class: com.samsung.android.sume.core.format.StapleMutableMediaFormat$$ExternalSyntheticLambda6
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                return StapleMutableMediaFormat.this.m9566x676c63c8((Class) obj);
+                return this.f$0.m9579x676c63c8((Class) obj);
             }
         }).filter(new Predicate() { // from class: com.samsung.android.sume.core.format.StapleMutableMediaFormat$$ExternalSyntheticLambda7
             @Override // java.util.function.Predicate
@@ -481,14 +474,14 @@ class StapleMutableMediaFormat implements MutableMediaFormat {
                 return StapleMutableMediaFormat.lambda$adjustChannels$9((Integer) obj);
             }
         }).findFirst().orElse(-1)).intValue();
-        if (intValue != -1) {
+        if (iIntValue != -1) {
             DataType dataType = this.dataType;
-            if (dataType != null && intValue != dataType.channels()) {
-                this.dataType = DataType.of(this.dataType.depth(), intValue);
+            if (dataType != null && iIntValue != dataType.channels()) {
+                this.dataType = DataType.of(this.dataType.depth(), iIntValue);
             }
             MutableShape mutableShape = this.shape;
-            if (mutableShape != null && intValue != mutableShape.getChannels()) {
-                this.shape.setChannels(intValue);
+            if (mutableShape != null && iIntValue != mutableShape.getChannels()) {
+                this.shape.setChannels(iIntValue);
             }
         }
         MutableShape mutableShape2 = this.shape;
@@ -499,7 +492,7 @@ class StapleMutableMediaFormat implements MutableMediaFormat {
     }
 
     /* renamed from: lambda$adjustChannels$8$com-samsung-android-sume-core-format-StapleMutableMediaFormat, reason: not valid java name */
-    /* synthetic */ Integer m9566x676c63c8(Class cls) {
+    /* synthetic */ Integer m9579x676c63c8(Class cls) {
         if (cls == MutableShape.class || cls == Shape.class) {
             return (Integer) Optional.ofNullable(this.shape).map(new StapleMutableMediaFormat$$ExternalSyntheticLambda2()).orElse(-1);
         }

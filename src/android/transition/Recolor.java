@@ -59,12 +59,12 @@ public class Recolor extends Transition {
             return null;
         }
         TextView textView = (TextView) view;
-        int intValue = ((Integer) transitionValues.values.get(PROPNAME_TEXT_COLOR)).intValue();
-        int intValue2 = ((Integer) transitionValues2.values.get(PROPNAME_TEXT_COLOR)).intValue();
-        if (intValue == intValue2) {
+        int iIntValue = ((Integer) transitionValues.values.get(PROPNAME_TEXT_COLOR)).intValue();
+        int iIntValue2 = ((Integer) transitionValues2.values.get(PROPNAME_TEXT_COLOR)).intValue();
+        if (iIntValue == iIntValue2) {
             return null;
         }
-        textView.setTextColor(intValue2);
-        return ObjectAnimator.ofArgb(textView, "textColor", intValue, intValue2);
+        textView.setTextColor(iIntValue2);
+        return ObjectAnimator.ofArgb(textView, "textColor", iIntValue, iIntValue2);
     }
 }

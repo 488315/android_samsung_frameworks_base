@@ -39,10 +39,10 @@ public class SemAudioSystem {
 
     public static int makeDeviceBit(Set<Integer> set) {
         Iterator<Integer> it = set.iterator();
-        int i = 0;
+        int iIntValue = 0;
         while (it.hasNext()) {
-            i |= it.next().intValue();
+            iIntValue |= it.next().intValue();
         }
-        return i;
+        return iIntValue;
     }
 }

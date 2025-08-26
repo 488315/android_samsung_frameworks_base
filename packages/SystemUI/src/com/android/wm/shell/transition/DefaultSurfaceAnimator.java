@@ -17,11 +17,9 @@ import com.android.wm.shell.transition.TransitionAnimationHelper;
 import java.util.ArrayList;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class DefaultSurfaceAnimator {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class AnimationAdapter implements ValueAnimator.AnimatorUpdateListener {
         public Choreographer mChoreographer;
         public final SurfaceControl mLeash;
@@ -44,7 +42,6 @@ public class DefaultSurfaceAnimator {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DefaultAnimationAdapter extends AnimationAdapter {
         public final Animation mAnim;
         public final Rect mAnimClipRect;
@@ -104,9 +101,9 @@ public class DefaultSurfaceAnimator {
                 }
                 Insets insets = transformation.getInsets();
                 Insets insets2 = Insets.NONE;
-                Insets min = Insets.min(insets, insets2);
-                if (!min.equals(insets2)) {
-                    this.mAnimClipRect.inset(min);
+                Insets insetsMin = Insets.min(insets, insets2);
+                if (!insetsMin.equals(insets2)) {
+                    this.mAnimClipRect.inset(insetsMin);
                     z = true;
                 }
                 if (this.mCornerRadius <= 0.0f || !this.mAnim.hasRoundedCorners()) {
@@ -126,16 +123,16 @@ public class DefaultSurfaceAnimator {
     }
 
     public static void buildSurfaceAnimation(final ArrayList arrayList, Animation animation, final Runnable runnable, final TransactionPool transactionPool, final ShellExecutor shellExecutor, AnimationAdapter animationAdapter) {
-        final SurfaceControl.Transaction acquire = transactionPool.acquire();
-        animationAdapter.mTransaction = acquire;
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-        ofFloat.overrideDurationScale(1.0f);
-        ofFloat.setDuration(animation.computeDurationHint());
+        final SurfaceControl.Transaction transactionAcquire = transactionPool.acquire();
+        animationAdapter.mTransaction = transactionAcquire;
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+        valueAnimatorOfFloat.overrideDurationScale(1.0f);
+        valueAnimatorOfFloat.setDuration(animation.computeDurationHint());
         Consumer consumer = new Consumer() { // from class: com.android.wm.shell.transition.DefaultSurfaceAnimator$$ExternalSyntheticLambda0
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                TransactionPool transactionPool2 = TransactionPool.this;
-                SurfaceControl.Transaction transaction = acquire;
+                TransactionPool transactionPool2 = transactionPool;
+                SurfaceControl.Transaction transaction = transactionAcquire;
                 ShellExecutor shellExecutor2 = shellExecutor;
                 final ArrayList arrayList2 = arrayList;
                 final Runnable runnable2 = runnable;
@@ -153,12 +150,11 @@ public class DefaultSurfaceAnimator {
                 });
             }
         };
-        ofFloat.addUpdateListener(animationAdapter);
-        ofFloat.addListener(new AnonymousClass1(ofFloat, consumer, animationAdapter));
-        arrayList.add(ofFloat);
+        valueAnimatorOfFloat.addUpdateListener(animationAdapter);
+        valueAnimatorOfFloat.addListener(new AnonymousClass1(valueAnimatorOfFloat, consumer, animationAdapter));
+        arrayList.add(valueAnimatorOfFloat);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.transition.DefaultSurfaceAnimator$1, reason: invalid class name */
     public class AnonymousClass1 extends AnimatorListenerAdapter {
         public boolean mFinished;

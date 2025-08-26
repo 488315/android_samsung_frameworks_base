@@ -12,7 +12,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.markers.KMappedMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SemanticsConfiguration implements SemanticsPropertyReceiver, Iterable<Map.Entry<? extends SemanticsPropertyKey<?>, ? extends Object>>, KMappedMarker {
     public boolean isClearingSemantics;
@@ -80,6 +79,11 @@ public final class SemanticsConfiguration implements SemanticsPropertyReceiver, 
         mutableScatterMap.set(semanticsPropertyKey, new AccessibilityAction(str, function));
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:21:0x0078 A[PHI: r2
+      0x0078: PHI (r2v6 java.lang.String) = (r2v5 java.lang.String), (r2v7 java.lang.String) binds: [B:13:0x003f, B:20:0x0076] A[DONT_GENERATE, DONT_INLINE]] */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final String toString() {
         String str;
         StringBuilder sb = new StringBuilder();
@@ -121,11 +125,11 @@ public final class SemanticsConfiguration implements SemanticsPropertyReceiver, 
                     if (i2 != 8) {
                         break;
                     }
+                    if (i == length) {
+                        break;
+                    }
+                    i++;
                 }
-                if (i == length) {
-                    break;
-                }
-                i++;
             }
         }
         return JvmActuals_jvmKt.simpleIdentityToString(this) + "{ " + ((Object) sb) + " }";

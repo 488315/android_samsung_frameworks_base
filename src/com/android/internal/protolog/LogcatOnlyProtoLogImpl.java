@@ -9,7 +9,7 @@ import com.android.internal.protolog.common.LogLevel;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: classes3.dex */
+/* loaded from: classes4.dex */
 public class LogcatOnlyProtoLogImpl implements IProtoLog {
     private static final String LOG_TAG = "com.android.internal.protolog.LogcatOnlyProtoLogImpl";
 
@@ -44,25 +44,25 @@ public class LogcatOnlyProtoLogImpl implements IProtoLog {
             Log.w(LOG_TAG, "ProtoLog message not processed. Failed to log it to proto. Logging it below to logcat instead.");
         }
         if (iProtoLogGroup.isLogToLogcat() || iProtoLogGroup.isLogToProto()) {
-            String formatSimple = TextUtils.formatSimple(str, objArr);
+            String simple = TextUtils.formatSimple(str, objArr);
             switch (AnonymousClass1.$SwitchMap$com$android$internal$protolog$common$LogLevel[logLevel.ordinal()]) {
                 case 1:
-                    Log.v(iProtoLogGroup.getTag(), formatSimple);
+                    Log.v(iProtoLogGroup.getTag(), simple);
                     break;
                 case 2:
-                    Log.i(iProtoLogGroup.getTag(), formatSimple);
+                    Log.i(iProtoLogGroup.getTag(), simple);
                     break;
                 case 3:
-                    Log.d(iProtoLogGroup.getTag(), formatSimple);
+                    Log.d(iProtoLogGroup.getTag(), simple);
                     break;
                 case 4:
-                    Log.w(iProtoLogGroup.getTag(), formatSimple);
+                    Log.w(iProtoLogGroup.getTag(), simple);
                     break;
                 case 5:
-                    Log.e(iProtoLogGroup.getTag(), formatSimple);
+                    Log.e(iProtoLogGroup.getTag(), simple);
                     break;
                 case 6:
-                    Log.wtf(iProtoLogGroup.getTag(), formatSimple);
+                    Log.wtf(iProtoLogGroup.getTag(), simple);
                     break;
             }
         }

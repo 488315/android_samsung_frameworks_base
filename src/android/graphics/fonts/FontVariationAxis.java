@@ -53,11 +53,11 @@ public final class FontVariationAxis {
     }
 
     public static FontVariationAxis[] fromFontVariationSettings(String str) {
-        List<FontVariationAxis> fromFontVariationSettingsForList = fromFontVariationSettingsForList(str);
-        if (fromFontVariationSettingsForList.isEmpty()) {
+        List<FontVariationAxis> listFromFontVariationSettingsForList = fromFontVariationSettingsForList(str);
+        if (listFromFontVariationSettingsForList.isEmpty()) {
             return null;
         }
-        return (FontVariationAxis[]) fromFontVariationSettingsForList.toArray(new FontVariationAxis[0]);
+        return (FontVariationAxis[]) listFromFontVariationSettingsForList.toArray(new FontVariationAxis[0]);
     }
 
     public static List<FontVariationAxis> fromFontVariationSettingsForList(String str) {
@@ -69,19 +69,19 @@ public final class FontVariationAxis {
         int length = str.length();
         int i2 = 0;
         while (i2 < length) {
-            char charAt = str.charAt(i2);
-            if (!Character.isWhitespace(charAt)) {
-                if ((charAt == '\'' || charAt == '\"') && length >= (i = i2 + 6)) {
+            char cCharAt = str.charAt(i2);
+            if (!Character.isWhitespace(cCharAt)) {
+                if ((cCharAt == '\'' || cCharAt == '\"') && length >= (i = i2 + 6)) {
                     int i3 = i2 + 5;
-                    if (str.charAt(i3) == charAt) {
-                        String substring = str.substring(i2 + 1, i3);
-                        int indexOf = str.indexOf(44, i);
-                        if (indexOf == -1) {
-                            indexOf = length;
+                    if (str.charAt(i3) == cCharAt) {
+                        String strSubstring = str.substring(i2 + 1, i3);
+                        int iIndexOf = str.indexOf(44, i);
+                        if (iIndexOf == -1) {
+                            iIndexOf = length;
                         }
                         try {
-                            arrayList.add(new FontVariationAxis(substring, Float.parseFloat(str.substring(i, indexOf))));
-                            i2 = indexOf;
+                            arrayList.add(new FontVariationAxis(strSubstring, Float.parseFloat(str.substring(i, iIndexOf))));
+                            i2 = iIndexOf;
                         } catch (NumberFormatException e) {
                             throw new IllegalArgumentException("Failed to parse float string: " + e.getMessage());
                         }

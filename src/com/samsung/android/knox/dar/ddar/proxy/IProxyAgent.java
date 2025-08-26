@@ -69,9 +69,9 @@ public interface IProxyAgent extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IProxyAgent.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IProxyAgent)) {
-                return (IProxyAgent) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IProxyAgent.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IProxyAgent)) {
+                return (IProxyAgent) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -107,31 +107,31 @@ public interface IProxyAgent extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                String readString = parcel.readString();
-                String readString2 = parcel.readString();
+                int i3 = parcel.readInt();
+                String string = parcel.readString();
+                String string2 = parcel.readString();
                 Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                 parcel.enforceNoDataAvail();
-                Bundle onMessage = onMessage(readInt, readString, readString2, bundle);
+                Bundle bundleOnMessage = onMessage(i3, string, string2, bundle);
                 parcel2.writeNoException();
-                parcel2.writeTypedObject(onMessage, 1);
+                parcel2.writeTypedObject(bundleOnMessage, 1);
             } else if (i == 2) {
-                int readInt2 = parcel.readInt();
-                String readString3 = parcel.readString();
-                String readString4 = parcel.readString();
-                String readString5 = parcel.readString();
+                int i4 = parcel.readInt();
+                String string3 = parcel.readString();
+                String string4 = parcel.readString();
+                String string5 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                String initializeSecureSession = initializeSecureSession(readInt2, readString3, readString4, readString5);
+                String strInitializeSecureSession = initializeSecureSession(i4, string3, string4, string5);
                 parcel2.writeNoException();
-                parcel2.writeString(initializeSecureSession);
+                parcel2.writeString(strInitializeSecureSession);
             } else if (i == 3) {
-                int readInt3 = parcel.readInt();
-                String readString6 = parcel.readString();
-                String readString7 = parcel.readString();
+                int i5 = parcel.readInt();
+                String string6 = parcel.readString();
+                String string7 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                boolean terminateSecureSession = terminateSecureSession(readInt3, readString6, readString7);
+                boolean zTerminateSecureSession = terminateSecureSession(i5, string6, string7);
                 parcel2.writeNoException();
-                parcel2.writeBoolean(terminateSecureSession);
+                parcel2.writeBoolean(zTerminateSecureSession);
             } else if (i == 4) {
                 onAgentReconnected();
                 parcel2.writeNoException();
@@ -159,71 +159,71 @@ public interface IProxyAgent extends IInterface {
 
             @Override // com.samsung.android.knox.dar.ddar.proxy.IProxyAgent
             public Bundle onMessage(int i, String str, String str2, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IProxyAgent.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IProxyAgent.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.ddar.proxy.IProxyAgent
             public String initializeSecureSession(int i, String str, String str2, String str3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IProxyAgent.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IProxyAgent.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.ddar.proxy.IProxyAgent
             public boolean terminateSecureSession(int i, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IProxyAgent.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IProxyAgent.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.ddar.proxy.IProxyAgent
             public void onAgentReconnected() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IProxyAgent.DESCRIPTOR);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IProxyAgent.DESCRIPTOR);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

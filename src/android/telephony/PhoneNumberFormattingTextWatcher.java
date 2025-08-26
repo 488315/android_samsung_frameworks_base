@@ -44,7 +44,7 @@ public class PhoneNumberFormattingTextWatcher implements TextWatcher {
 
     @Override // android.text.TextWatcher
     public synchronized void afterTextChanged(Editable editable) {
-        String str;
+        String strReformat;
         Editable editable2;
         boolean z = true;
         if (this.mStopFormatting) {
@@ -58,18 +58,18 @@ public class PhoneNumberFormattingTextWatcher implements TextWatcher {
             return;
         }
         try {
-            str = reformat(editable, Selection.getSelectionEnd(editable));
+            strReformat = reformat(editable, Selection.getSelectionEnd(editable));
         } catch (IndexOutOfBoundsException e) {
             e.printStackTrace();
-            str = null;
+            strReformat = null;
         }
-        String str2 = str;
-        if (str2 != null) {
+        String str = strReformat;
+        if (str != null) {
             int rememberedPosition = this.mFormatter.getRememberedPosition();
             this.mSelfChange = true;
             editable2 = editable;
-            editable2.replace(0, editable.length(), str2, 0, str2.length());
-            if (str2.equals(editable2.toString())) {
+            editable2.replace(0, editable.length(), str, 0, str.length());
+            if (str.equals(editable2.toString())) {
                 Selection.setSelection(editable2, rememberedPosition);
             }
             this.mSelfChange = false;
@@ -86,23 +86,23 @@ public class PhoneNumberFormattingTextWatcher implements TextWatcher {
         int i2 = i - 1;
         this.mFormatter.clear();
         int length = charSequence.length();
-        String str = null;
+        String formattedNumber = null;
         char c = 0;
         boolean z = false;
         for (int i3 = 0; i3 < length; i3++) {
-            char charAt = charSequence.charAt(i3);
-            if (PhoneNumberUtils.isNonSeparator(charAt)) {
+            char cCharAt = charSequence.charAt(i3);
+            if (PhoneNumberUtils.isNonSeparator(cCharAt)) {
                 if (c != 0) {
-                    str = getFormattedNumber(c, z);
+                    formattedNumber = getFormattedNumber(c, z);
                     z = false;
                 }
-                c = charAt;
+                c = cCharAt;
             }
             if (i3 == i2) {
                 z = true;
             }
         }
-        return c != 0 ? getFormattedNumber(c, z) : str;
+        return c != 0 ? getFormattedNumber(c, z) : formattedNumber;
     }
 
     private String getFormattedNumber(char c, boolean z) {

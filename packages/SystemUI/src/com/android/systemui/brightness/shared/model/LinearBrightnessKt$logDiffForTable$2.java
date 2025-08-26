@@ -9,7 +9,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class LinearBrightnessKt$logDiffForTable$2 extends SuspendLambda implements Function3 {
     final /* synthetic */ String $columnName;
@@ -49,10 +48,10 @@ final class LinearBrightnessKt$logDiffForTable$2 extends SuspendLambda implement
             TableLogBuffer tableLogBuffer = this.$tableLogBuffer;
             String str = this.$columnPrefix;
             String str2 = this.$columnName;
-            String formatBrightness = LinearBrightnessKt.formatBrightness(f);
+            String brightness = LinearBrightnessKt.formatBrightness(f);
             tableLogBuffer.getClass();
-            TableLogBufferBase.DefaultImpls.logChange(tableLogBuffer, str, str2, formatBrightness);
+            TableLogBufferBase.DefaultImpls.logChange(tableLogBuffer, str, str2, brightness);
         }
-        return LinearBrightness.m1067boximpl(f);
+        return LinearBrightness.m1069boximpl(f);
     }
 }

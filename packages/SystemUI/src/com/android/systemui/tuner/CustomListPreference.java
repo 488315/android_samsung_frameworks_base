@@ -9,15 +9,12 @@ import android.util.AttributeSet;
 import androidx.preference.ListPreference;
 import androidx.preference.ListPreferenceDialogFragment;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class CustomListPreference extends ListPreference {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CustomListPreferenceDialogFragment extends ListPreferenceDialogFragment {
         public int mClickedDialogEntryIndex;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.tuner.CustomListPreference$CustomListPreferenceDialogFragment$2, reason: invalid class name */
         public class AnonymousClass2 implements DialogInterface.OnClickListener {
             public AnonymousClass2() {
@@ -43,11 +40,11 @@ public class CustomListPreference extends ListPreference {
 
         @Override // androidx.preference.PreferenceDialogFragment, android.app.DialogFragment
         public final Dialog onCreateDialog(Bundle bundle) {
-            Dialog onCreateDialog = super.onCreateDialog(bundle);
+            Dialog dialogOnCreateDialog = super.onCreateDialog(bundle);
             if (bundle != null) {
                 this.mClickedDialogEntryIndex = bundle.getInt("settings.CustomListPrefDialog.KEY_CLICKED_ENTRY_INDEX", this.mClickedDialogEntryIndex);
             }
-            return ((CustomListPreference) getPreference()).onDialogCreated(onCreateDialog);
+            return ((CustomListPreference) getPreference()).onDialogCreated(dialogOnCreateDialog);
         }
 
         @Override // androidx.preference.ListPreferenceDialogFragment, androidx.preference.PreferenceDialogFragment
@@ -57,9 +54,9 @@ public class CustomListPreference extends ListPreference {
             CustomListPreference customListPreference = (CustomListPreference) getPreference();
             CustomListPreference customListPreference2 = (CustomListPreference) getPreference();
             int i = this.mClickedDialogEntryIndex;
-            String charSequence = (i < 0 || (charSequenceArr = customListPreference2.mEntryValues) == null) ? null : charSequenceArr[i].toString();
-            if (z && charSequence != null && customListPreference.callChangeListener(charSequence)) {
-                customListPreference.setValue(charSequence);
+            String string = (i < 0 || (charSequenceArr = customListPreference2.mEntryValues) == null) ? null : charSequenceArr[i].toString();
+            if (z && string != null && customListPreference.callChangeListener(string)) {
+                customListPreference.setValue(string);
             }
         }
 

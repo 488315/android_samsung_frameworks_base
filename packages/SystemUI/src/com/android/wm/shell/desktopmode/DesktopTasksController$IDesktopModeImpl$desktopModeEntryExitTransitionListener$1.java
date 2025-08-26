@@ -6,7 +6,6 @@ import com.android.wm.shell.common.SingleInstanceRemoteListener;
 import com.android.wm.shell.desktopmode.DesktopTasksController;
 import com.android.wm.shell.protolog.ShellProtoLogGroup;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DesktopTasksController$IDesktopModeImpl$desktopModeEntryExitTransitionListener$1 {
     public final /* synthetic */ DesktopTasksController.IDesktopModeImpl this$0;
@@ -27,13 +26,13 @@ public final class DesktopTasksController$IDesktopModeImpl$desktopModeEntryExitT
             public final void accept(Object obj) {
                 int i2 = i;
                 IDesktopTaskListener$Stub$Proxy iDesktopTaskListener$Stub$Proxy = (IDesktopTaskListener$Stub$Proxy) ((IDesktopTaskListener) obj);
-                Parcel obtain = Parcel.obtain(iDesktopTaskListener$Stub$Proxy.mRemote);
+                Parcel parcelObtain = Parcel.obtain(iDesktopTaskListener$Stub$Proxy.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.wm.shell.desktopmode.IDesktopTaskListener");
-                    obtain.writeInt(i2);
-                    iDesktopTaskListener$Stub$Proxy.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.wm.shell.desktopmode.IDesktopTaskListener");
+                    parcelObtain.writeInt(i2);
+                    iDesktopTaskListener$Stub$Proxy.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         });
@@ -51,13 +50,13 @@ public final class DesktopTasksController$IDesktopModeImpl$desktopModeEntryExitT
             public final void accept(Object obj) {
                 int i2 = i;
                 IDesktopTaskListener$Stub$Proxy iDesktopTaskListener$Stub$Proxy = (IDesktopTaskListener$Stub$Proxy) ((IDesktopTaskListener) obj);
-                Parcel obtain = Parcel.obtain(iDesktopTaskListener$Stub$Proxy.mRemote);
+                Parcel parcelObtain = Parcel.obtain(iDesktopTaskListener$Stub$Proxy.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.wm.shell.desktopmode.IDesktopTaskListener");
-                    obtain.writeInt(i2);
-                    iDesktopTaskListener$Stub$Proxy.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.wm.shell.desktopmode.IDesktopTaskListener");
+                    parcelObtain.writeInt(i2);
+                    iDesktopTaskListener$Stub$Proxy.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         });

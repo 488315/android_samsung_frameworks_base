@@ -13,7 +13,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class GlanceableHubWidgetManagerService$addWidgetsListenerInternal$job$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ IGlanceableHubWidgetManagerService.IGlanceableHubWidgetsListener $listener;
@@ -52,9 +51,9 @@ final class GlanceableHubWidgetManagerService$addWidgetsListenerInternal$job$1 e
         } catch (RemoteException e) {
             Logger logger = this.this$0.logger;
             GlanceableHubWidgetManagerService$$ExternalSyntheticLambda0 glanceableHubWidgetManagerService$$ExternalSyntheticLambda0 = new GlanceableHubWidgetManagerService$$ExternalSyntheticLambda0(2);
-            LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.ERROR, glanceableHubWidgetManagerService$$ExternalSyntheticLambda0, null);
-            obtain.setStr1(e.getLocalizedMessage());
-            logger.getBuffer().commit(obtain);
+            LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.ERROR, glanceableHubWidgetManagerService$$ExternalSyntheticLambda0, null);
+            logMessageObtain.setStr1(e.getLocalizedMessage());
+            logger.getBuffer().commit(logMessageObtain);
         }
         return Unit.INSTANCE;
     }

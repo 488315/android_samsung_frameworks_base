@@ -47,9 +47,9 @@ public interface IInjectRecognitionEvent extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IInjectRecognitionEvent.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IInjectRecognitionEvent)) {
-                return (IInjectRecognitionEvent) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IInjectRecognitionEvent.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IInjectRecognitionEvent)) {
+                return (IInjectRecognitionEvent) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -64,10 +64,10 @@ public interface IInjectRecognitionEvent extends IInterface {
                 return true;
             }
             if (i == 1) {
-                byte[] createByteArray = parcel.createByteArray();
+                byte[] bArrCreateByteArray = parcel.createByteArray();
                 PhraseRecognitionExtra[] phraseRecognitionExtraArr = (PhraseRecognitionExtra[]) parcel.createTypedArray(PhraseRecognitionExtra.CREATOR);
                 parcel.enforceNoDataAvail();
-                triggerRecognitionEvent(createByteArray, phraseRecognitionExtraArr);
+                triggerRecognitionEvent(bArrCreateByteArray, phraseRecognitionExtraArr);
             } else if (i == 2) {
                 triggerAbortRecognition();
             } else {
@@ -94,25 +94,25 @@ public interface IInjectRecognitionEvent extends IInterface {
 
             @Override // android.media.soundtrigger_middleware.IInjectRecognitionEvent
             public void triggerRecognitionEvent(byte[] bArr, PhraseRecognitionExtra[] phraseRecognitionExtraArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInjectRecognitionEvent.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeTypedArray(phraseRecognitionExtraArr, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInjectRecognitionEvent.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeTypedArray(phraseRecognitionExtraArr, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.soundtrigger_middleware.IInjectRecognitionEvent
             public void triggerAbortRecognition() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInjectRecognitionEvent.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInjectRecognitionEvent.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

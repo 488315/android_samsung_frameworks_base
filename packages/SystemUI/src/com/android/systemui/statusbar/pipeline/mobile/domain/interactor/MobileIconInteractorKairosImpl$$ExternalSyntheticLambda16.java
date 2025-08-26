@@ -6,7 +6,6 @@ import com.android.systemui.kairos.TransactionScope;
 import com.android.systemui.statusbar.pipeline.mobile.domain.model.NetworkTypeIconModel;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class MobileIconInteractorKairosImpl$$ExternalSyntheticLambda16 implements Function3 {
     public final /* synthetic */ MobileIconInteractorKairosImpl f$0;

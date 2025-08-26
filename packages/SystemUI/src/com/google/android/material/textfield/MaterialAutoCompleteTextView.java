@@ -4,6 +4,7 @@ import android.R;
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
@@ -31,7 +32,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class MaterialAutoCompleteTextView extends AppCompatAutoCompleteTextView {
     public final AccessibilityManager accessibilityManager;
@@ -42,15 +42,14 @@ public class MaterialAutoCompleteTextView extends AppCompatAutoCompleteTextView 
     public final ColorStateList simpleItemSelectedRippleColor;
     public final Rect tempRect;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class MaterialArrayAdapter extends ArrayAdapter {
         public final ColorStateList pressedRippleColor;
         public final ColorStateList selectedItemRippleOverlaidColor;
 
         public MaterialArrayAdapter(Context context, int i, String[] strArr) {
-            super(context, i, strArr);
             ColorStateList colorStateList;
             ColorStateList colorStateList2;
+            super(context, i, strArr);
             ColorStateList colorStateList3 = MaterialAutoCompleteTextView.this.simpleItemSelectedRippleColor;
             ColorStateList colorStateList4 = null;
             if (colorStateList3 != null) {
@@ -73,18 +72,18 @@ public class MaterialAutoCompleteTextView extends AppCompatAutoCompleteTextView 
             View view2 = super.getView(i, view, viewGroup);
             if (view2 instanceof TextView) {
                 TextView textView = (TextView) view2;
-                Drawable drawable = null;
+                Drawable rippleDrawable = null;
                 if (MaterialAutoCompleteTextView.this.getText().toString().contentEquals(textView.getText()) && MaterialAutoCompleteTextView.this.simpleItemSelectedColor != 0) {
                     ColorDrawable colorDrawable = new ColorDrawable(MaterialAutoCompleteTextView.this.simpleItemSelectedColor);
                     if (this.pressedRippleColor != null) {
                         colorDrawable.setTintList(this.selectedItemRippleOverlaidColor);
-                        drawable = new RippleDrawable(this.pressedRippleColor, colorDrawable, null);
+                        rippleDrawable = new RippleDrawable(this.pressedRippleColor, colorDrawable, null);
                     } else {
-                        drawable = colorDrawable;
+                        rippleDrawable = colorDrawable;
                     }
                 }
                 WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-                textView.setBackground(drawable);
+                textView.setBackground(rippleDrawable);
             }
             return view2;
         }
@@ -118,12 +117,12 @@ public class MaterialAutoCompleteTextView extends AppCompatAutoCompleteTextView 
 
     @Override // android.widget.TextView
     public final CharSequence getHint() {
-        TextInputLayout findTextInputLayoutAncestor = findTextInputLayoutAncestor();
-        if (findTextInputLayoutAncestor == null || !findTextInputLayoutAncestor.isProvidingHint) {
+        TextInputLayout textInputLayoutFindTextInputLayoutAncestor = findTextInputLayoutAncestor();
+        if (textInputLayoutFindTextInputLayoutAncestor == null || !textInputLayoutFindTextInputLayoutAncestor.isProvidingHint) {
             return super.getHint();
         }
-        if (findTextInputLayoutAncestor.hintEnabled) {
-            return findTextInputLayoutAncestor.hint;
+        if (textInputLayoutFindTextInputLayoutAncestor.hintEnabled) {
+            return textInputLayoutFindTextInputLayoutAncestor.hint;
         }
         return null;
     }
@@ -149,8 +148,8 @@ public class MaterialAutoCompleteTextView extends AppCompatAutoCompleteTextView 
     @Override // android.widget.AutoCompleteTextView, android.widget.TextView, android.view.View
     public final void onAttachedToWindow() {
         super.onAttachedToWindow();
-        TextInputLayout findTextInputLayoutAncestor = findTextInputLayoutAncestor();
-        if (findTextInputLayoutAncestor != null && findTextInputLayoutAncestor.isProvidingHint && super.getHint() == null) {
+        TextInputLayout textInputLayoutFindTextInputLayoutAncestor = findTextInputLayoutAncestor();
+        if (textInputLayoutFindTextInputLayoutAncestor != null && textInputLayoutFindTextInputLayoutAncestor.isProvidingHint && super.getHint() == null) {
             String str = Build.MANUFACTURER;
             if ((str != null ? str.toLowerCase(Locale.ENGLISH) : "").equals("meizu")) {
                 setHint("");
@@ -170,37 +169,37 @@ public class MaterialAutoCompleteTextView extends AppCompatAutoCompleteTextView 
         if (View.MeasureSpec.getMode(i) == Integer.MIN_VALUE) {
             int measuredWidth = getMeasuredWidth();
             ListAdapter adapter = getAdapter();
-            TextInputLayout findTextInputLayoutAncestor = findTextInputLayoutAncestor();
-            int i3 = 0;
-            if (adapter != null && findTextInputLayoutAncestor != null) {
-                int makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(getMeasuredWidth(), 0);
-                int makeMeasureSpec2 = View.MeasureSpec.makeMeasureSpec(getMeasuredHeight(), 0);
+            TextInputLayout textInputLayoutFindTextInputLayoutAncestor = findTextInputLayoutAncestor();
+            int measuredWidth2 = 0;
+            if (adapter != null && textInputLayoutFindTextInputLayoutAncestor != null) {
+                int iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(getMeasuredWidth(), 0);
+                int iMakeMeasureSpec2 = View.MeasureSpec.makeMeasureSpec(getMeasuredHeight(), 0);
                 ListPopupWindow listPopupWindow = this.modalListPopup;
-                int min = Math.min(adapter.getCount(), Math.max(0, !listPopupWindow.mPopup.isShowing() ? -1 : listPopupWindow.mDropDownList.getSelectedItemPosition()) + 15);
+                int iMin = Math.min(adapter.getCount(), Math.max(0, !listPopupWindow.mPopup.isShowing() ? -1 : listPopupWindow.mDropDownList.getSelectedItemPosition()) + 15);
                 View view = null;
-                int i4 = 0;
-                for (int max = Math.max(0, min - 15); max < min; max++) {
-                    int itemViewType = adapter.getItemViewType(max);
-                    if (itemViewType != i3) {
+                int iMax = 0;
+                for (int iMax2 = Math.max(0, iMin - 15); iMax2 < iMin; iMax2++) {
+                    int itemViewType = adapter.getItemViewType(iMax2);
+                    if (itemViewType != measuredWidth2) {
                         view = null;
-                        i3 = itemViewType;
+                        measuredWidth2 = itemViewType;
                     }
-                    view = adapter.getView(max, view, findTextInputLayoutAncestor);
+                    view = adapter.getView(iMax2, view, textInputLayoutFindTextInputLayoutAncestor);
                     if (view.getLayoutParams() == null) {
                         view.setLayoutParams(new ViewGroup.LayoutParams(-2, -2));
                     }
-                    view.measure(makeMeasureSpec, makeMeasureSpec2);
-                    i4 = Math.max(i4, view.getMeasuredWidth());
+                    view.measure(iMakeMeasureSpec, iMakeMeasureSpec2);
+                    iMax = Math.max(iMax, view.getMeasuredWidth());
                 }
                 Drawable background = this.modalListPopup.mPopup.getBackground();
                 if (background != null) {
                     background.getPadding(this.tempRect);
                     Rect rect = this.tempRect;
-                    i4 += rect.left + rect.right;
+                    iMax += rect.left + rect.right;
                 }
-                i3 = findTextInputLayoutAncestor.endLayout.endIconView.getMeasuredWidth() + i4;
+                measuredWidth2 = textInputLayoutFindTextInputLayoutAncestor.endLayout.endIconView.getMeasuredWidth() + iMax;
             }
-            setMeasuredDimension(Math.min(Math.max(measuredWidth, i3), View.MeasureSpec.getSize(i)), getMeasuredHeight());
+            setMeasuredDimension(Math.min(Math.max(measuredWidth, measuredWidth2), View.MeasureSpec.getSize(i)), getMeasuredHeight());
         }
     }
 
@@ -236,14 +235,14 @@ public class MaterialAutoCompleteTextView extends AppCompatAutoCompleteTextView 
     @Override // android.widget.TextView
     public final void setRawInputType(int i) {
         super.setRawInputType(i);
-        TextInputLayout findTextInputLayoutAncestor = findTextInputLayoutAncestor();
-        if (findTextInputLayoutAncestor != null) {
-            findTextInputLayoutAncestor.updateEditTextBoxBackgroundIfNeeded();
+        TextInputLayout textInputLayoutFindTextInputLayoutAncestor = findTextInputLayoutAncestor();
+        if (textInputLayoutFindTextInputLayoutAncestor != null) {
+            textInputLayoutFindTextInputLayoutAncestor.updateEditTextBoxBackgroundIfNeeded();
         }
     }
 
     @Override // android.widget.AutoCompleteTextView
-    public final void showDropDown() {
+    public final void showDropDown() throws Resources.NotFoundException {
         if (isPopupRequired()) {
             this.modalListPopup.show();
         } else {
@@ -255,21 +254,21 @@ public class MaterialAutoCompleteTextView extends AppCompatAutoCompleteTextView 
         this(context, attributeSet, com.android.systemui.R.attr.autoCompleteTextViewStyle);
     }
 
-    public MaterialAutoCompleteTextView(Context context, AttributeSet attributeSet, int i) {
+    public MaterialAutoCompleteTextView(Context context, AttributeSet attributeSet, int i) throws Resources.NotFoundException {
         super(MaterialThemeOverlay.wrap(context, attributeSet, i, 0), attributeSet, i);
         this.tempRect = new Rect();
         Context context2 = getContext();
-        TypedArray obtainStyledAttributes = ThemeEnforcement.obtainStyledAttributes(context2, attributeSet, R$styleable.MaterialAutoCompleteTextView, i, 2132019140, new int[0]);
-        if (obtainStyledAttributes.hasValue(0) && obtainStyledAttributes.getInt(0, 0) == 0) {
+        TypedArray typedArrayObtainStyledAttributes = ThemeEnforcement.obtainStyledAttributes(context2, attributeSet, R$styleable.MaterialAutoCompleteTextView, i, 2132019142, new int[0]);
+        if (typedArrayObtainStyledAttributes.hasValue(0) && typedArrayObtainStyledAttributes.getInt(0, 0) == 0) {
             setKeyListener(null);
         }
-        int resourceId = obtainStyledAttributes.getResourceId(3, com.android.systemui.R.layout.mtrl_auto_complete_simple_item);
-        this.popupElevation = obtainStyledAttributes.getDimensionPixelOffset(1, com.android.systemui.R.dimen.mtrl_exposed_dropdown_menu_popup_elevation);
-        if (obtainStyledAttributes.hasValue(2)) {
-            this.dropDownBackgroundTint = ColorStateList.valueOf(obtainStyledAttributes.getColor(2, 0));
+        int resourceId = typedArrayObtainStyledAttributes.getResourceId(3, com.android.systemui.R.layout.mtrl_auto_complete_simple_item);
+        this.popupElevation = typedArrayObtainStyledAttributes.getDimensionPixelOffset(1, com.android.systemui.R.dimen.mtrl_exposed_dropdown_menu_popup_elevation);
+        if (typedArrayObtainStyledAttributes.hasValue(2)) {
+            this.dropDownBackgroundTint = ColorStateList.valueOf(typedArrayObtainStyledAttributes.getColor(2, 0));
         }
-        this.simpleItemSelectedColor = obtainStyledAttributes.getColor(4, 0);
-        this.simpleItemSelectedRippleColor = MaterialResources.getColorStateList(context2, obtainStyledAttributes, 5);
+        this.simpleItemSelectedColor = typedArrayObtainStyledAttributes.getColor(4, 0);
+        this.simpleItemSelectedRippleColor = MaterialResources.getColorStateList(context2, typedArrayObtainStyledAttributes, 5);
         this.accessibilityManager = (AccessibilityManager) context2.getSystemService("accessibility");
         ListPopupWindow listPopupWindow = new ListPopupWindow(context2);
         this.modalListPopup = listPopupWindow;
@@ -305,9 +304,9 @@ public class MaterialAutoCompleteTextView extends AppCompatAutoCompleteTextView 
                 MaterialAutoCompleteTextView.this.modalListPopup.dismiss();
             }
         };
-        if (obtainStyledAttributes.hasValue(6)) {
-            setAdapter(new MaterialArrayAdapter(getContext(), resourceId, getResources().getStringArray(obtainStyledAttributes.getResourceId(6, 0))));
+        if (typedArrayObtainStyledAttributes.hasValue(6)) {
+            setAdapter(new MaterialArrayAdapter(getContext(), resourceId, getResources().getStringArray(typedArrayObtainStyledAttributes.getResourceId(6, 0))));
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
     }
 }

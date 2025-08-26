@@ -7,18 +7,15 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import com.sec.ims.mdmi.IMdmiEventListener;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface IMdmiService extends IInterface {
     public static final String DESCRIPTOR = "com.sec.ims.mdmi.IMdmiService";
 
     void registerMdmiEventListener(IMdmiEventListener iMdmiEventListener) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IMdmiService {
         static final int TRANSACTION_registerMdmiEventListener = 1;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements IMdmiService {
             private IBinder mRemote;
 
@@ -37,16 +34,16 @@ public interface IMdmiService extends IInterface {
 
             @Override // com.sec.ims.mdmi.IMdmiService
             public void registerMdmiEventListener(IMdmiEventListener iMdmiEventListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMdmiService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iMdmiEventListener);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMdmiService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iMdmiEventListener);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -59,8 +56,8 @@ public interface IMdmiService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IMdmiService.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IMdmiService)) ? new Proxy(iBinder) : (IMdmiService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IMdmiService.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IMdmiService)) ? new Proxy(iBinder) : (IMdmiService) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder
@@ -75,9 +72,9 @@ public interface IMdmiService extends IInterface {
             if (i != 1) {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
-            IMdmiEventListener asInterface = IMdmiEventListener.Stub.asInterface(parcel.readStrongBinder());
+            IMdmiEventListener iMdmiEventListenerAsInterface = IMdmiEventListener.Stub.asInterface(parcel.readStrongBinder());
             parcel.enforceNoDataAvail();
-            registerMdmiEventListener(asInterface);
+            registerMdmiEventListener(iMdmiEventListenerAsInterface);
             parcel2.writeNoException();
             return true;
         }
@@ -88,7 +85,6 @@ public interface IMdmiService extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements IMdmiService {
         @Override // android.os.IInterface
         public IBinder asBinder() {

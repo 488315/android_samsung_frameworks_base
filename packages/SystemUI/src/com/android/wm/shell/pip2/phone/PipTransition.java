@@ -7,12 +7,16 @@ import android.app.TaskInfo;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
+import android.content.res.Resources;
+import android.graphics.Matrix;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.os.Debug;
 import android.os.IBinder;
 import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
+import android.util.Log;
 import android.util.Slog;
 import android.view.SurfaceControl;
 import android.window.DesktopExperienceFlags;
@@ -36,13 +40,16 @@ import com.android.wm.shell.desktopmode.DesktopDisplayEventHandler$$ExternalSynt
 import com.android.wm.shell.desktopmode.DesktopPipTransitionController;
 import com.android.wm.shell.desktopmode.DesktopRepository;
 import com.android.wm.shell.desktopmode.DesktopTasksController;
-import com.android.wm.shell.desktopmode.DesktopTasksController$$ExternalSyntheticLambda5;
+import com.android.wm.shell.desktopmode.DesktopTasksController$$ExternalSyntheticLambda3;
 import com.android.wm.shell.pip.PipTransitionController;
 import com.android.wm.shell.pip2.PipSurfaceTransactionHelper;
+import com.android.wm.shell.pip2.animation.PipAlphaAnimator;
+import com.android.wm.shell.pip2.animation.PipEnterAnimator;
 import com.android.wm.shell.pip2.phone.PipTransitionState;
 import com.android.wm.shell.pip2.phone.transition.PipExpandHandler;
 import com.android.wm.shell.pip2.phone.transition.PipTransitionUtils;
 import com.android.wm.shell.protolog.ShellProtoLogGroup;
+import com.android.wm.shell.shared.TransitionUtil;
 import com.android.wm.shell.splitscreen.SplitScreenController;
 import com.android.wm.shell.sysui.ShellInit;
 import com.android.wm.shell.transition.Transitions;
@@ -52,7 +59,6 @@ import java.util.function.Predicate;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.SpreadBuilder;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PipTransition extends PipTransitionController implements PipTransitionState.PipTransitionStateChangedListener {
     public int mBoundsChangeDuration;
@@ -104,10 +110,10 @@ public class PipTransition extends PipTransitionController implements PipTransit
             sourceRectHint = new Rect(startAbsBounds);
             sourceRectHint.offsetTo(0, 0);
         }
-        float width = endAbsBounds.width() / sourceRectHint.width();
-        float height = endAbsBounds.height() / sourceRectHint.height();
-        pointF.set(width, height);
-        pointF2.set((endAbsBounds.left - endAbsBounds2.left) - (sourceRectHint.left * width), (endAbsBounds.top - endAbsBounds2.top) - (sourceRectHint.top * height));
+        float fWidth = endAbsBounds.width() / sourceRectHint.width();
+        float fHeight = endAbsBounds.height() / sourceRectHint.height();
+        pointF.set(fWidth, fHeight);
+        pointF2.set((endAbsBounds.left - endAbsBounds2.left) - (sourceRectHint.left * fWidth), (endAbsBounds.top - endAbsBounds2.top) - (sourceRectHint.top * fHeight));
         if (change2.getLeash() != null) {
             transaction.setCrop(change2.getLeash(), null);
             transaction.setScale(change2.getLeash(), pointF.x, pointF.y);
@@ -147,8 +153,12 @@ public class PipTransition extends PipTransitionController implements PipTransit
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:26:0x007f  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final Rect getAdjustedSourceRectHint(TransitionInfo transitionInfo, TransitionInfo.Change change, TransitionInfo.Change change2) {
-        float f;
+        float aspectRatioFloat;
         Rect startAbsBounds = change.getStartAbsBounds();
         Rect endAbsBounds = change.getEndAbsBounds();
         PictureInPictureParams pictureInPictureParams = change.getTaskInfo().pictureInPictureParams;
@@ -157,29 +167,24 @@ public class PipTransition extends PipTransitionController implements PipTransit
             validSourceHintRect = null;
         }
         Rect rect = new Rect();
-        if (validSourceHintRect != null) {
-            rect.set(validSourceHintRect);
-            TransitionInfo.Change changeByToken = change2.getLastParent() != null ? PipTransitionUtils.getChangeByToken(transitionInfo, change2.getLastParent()) : null;
-            Rect rect2 = changeByToken != null ? changeByToken.getTaskInfo().displayCutoutInsets : change.getTaskInfo().displayCutoutInsets;
-            if (rect2 != null && PipTransitionUtils.getFixedRotationDelta(transitionInfo, change, this.mPipDisplayLayoutState) == 1) {
-                rect.offset(rect2.left, rect2.top);
+        if (validSourceHintRect == null) {
+            PipBoundsAlgorithm pipBoundsAlgorithm = this.mPipBoundsAlgorithm;
+            if (pictureInPictureParams != null) {
+                pipBoundsAlgorithm.getClass();
+                aspectRatioFloat = pictureInPictureParams.hasSetAspectRatio() ? pictureInPictureParams.getAspectRatioFloat() : pipBoundsAlgorithm.mDefaultAspectRatio;
             }
-            if (this.mPipDesktopState.isDesktopWindowingPipEnabled()) {
-                rect.offset(-change2.getStartAbsBounds().left, -change2.getStartAbsBounds().top);
-            }
+            rect.set(PipUtils.getEnterPipWithOverlaySrcRectHint(startAbsBounds, aspectRatioFloat));
             return rect;
         }
-        PipBoundsAlgorithm pipBoundsAlgorithm = this.mPipBoundsAlgorithm;
-        if (pictureInPictureParams != null) {
-            pipBoundsAlgorithm.getClass();
-            if (pictureInPictureParams.hasSetAspectRatio()) {
-                f = pictureInPictureParams.getAspectRatioFloat();
-                rect.set(PipUtils.getEnterPipWithOverlaySrcRectHint(startAbsBounds, f));
-                return rect;
-            }
+        rect.set(validSourceHintRect);
+        TransitionInfo.Change changeByToken = change2.getLastParent() != null ? PipTransitionUtils.getChangeByToken(transitionInfo, change2.getLastParent()) : null;
+        Rect rect2 = changeByToken != null ? changeByToken.getTaskInfo().displayCutoutInsets : change.getTaskInfo().displayCutoutInsets;
+        if (rect2 != null && PipTransitionUtils.getFixedRotationDelta(transitionInfo, change, this.mPipDisplayLayoutState) == 1) {
+            rect.offset(rect2.left, rect2.top);
         }
-        f = pipBoundsAlgorithm.mDefaultAspectRatio;
-        rect.set(PipUtils.getEnterPipWithOverlaySrcRectHint(startAbsBounds, f));
+        if (this.mPipDesktopState.isDesktopWindowingPipEnabled()) {
+            rect.offset(-change2.getStartAbsBounds().left, -change2.getStartAbsBounds().top);
+        }
         return rect;
     }
 
@@ -215,8 +220,8 @@ public class PipTransition extends PipTransitionController implements PipTransit
         final WindowContainerTransaction enterPipTransaction = getEnterPipTransaction(transitionRequestInfo.getPipChange());
         this.mDesktopPipTransitionController.ifPresent(new Consumer() { // from class: com.android.wm.shell.pip2.phone.PipTransition$$ExternalSyntheticLambda0
             @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                int intValue;
+            public final void accept(Object obj) throws Resources.NotFoundException {
+                int iIntValue;
                 WindowContainerTransaction windowContainerTransaction = enterPipTransaction;
                 IBinder iBinder2 = iBinder;
                 DesktopPipTransitionController desktopPipTransitionController = (DesktopPipTransitionController) obj;
@@ -235,28 +240,28 @@ public class PipTransition extends PipTransitionController implements PipTransit
                     }
                     Integer activeDeskId = profile.getActiveDeskId(i2);
                     if (activeDeskId != null) {
-                        intValue = activeDeskId.intValue();
+                        iIntValue = activeDeskId.intValue();
                     } else {
                         if (DesktopExperienceFlags.ENABLE_MULTIPLE_DESKTOPS_BACKEND.isTrue()) {
                             Object[] objArr = {Integer.valueOf(i2)};
                             ShellProtoLogGroup shellProtoLogGroup = ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE;
-                            SpreadBuilder m = DesktopDisplayEventHandler$$ExternalSyntheticOutline0.m(2, "DesktopPipTransitionController", objArr);
-                            ProtoLog.w(shellProtoLogGroup, "%s: handlePipTransitionIfInDesktop: Active desk not found for display id %d", m.list.toArray(new Object[m.list.size()]));
+                            SpreadBuilder spreadBuilderM = DesktopDisplayEventHandler$$ExternalSyntheticOutline0.m(2, "DesktopPipTransitionController", objArr);
+                            ProtoLog.w(shellProtoLogGroup, "%s: handlePipTransitionIfInDesktop: Active desk not found for display id %d", spreadBuilderM.list.toArray(new Object[spreadBuilderM.list.size()]));
                             return;
                         }
                         Integer defaultDeskId = profile.getDefaultDeskId(i2);
                         if (defaultDeskId == null) {
                             throw new IllegalStateException(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i2, "DesktopPipTransitionController: handlePipTransitionIfInDesktop: Expected a default desk to exist in display with id ").toString());
                         }
-                        intValue = defaultDeskId.intValue();
+                        iIntValue = defaultDeskId.intValue();
                     }
-                    if (!profile.isOnlyVisibleNonClosingTaskInDesk(i, intValue)) {
+                    if (!profile.isOnlyVisibleNonClosingTaskInDesk(i, iIntValue)) {
                         DesktopPipTransitionController.logD("handlePipTransitionIfInDesktop: PiP task is not last visible task in Desk", new Object[0]);
                         return;
                     }
-                    DesktopTasksController$$ExternalSyntheticLambda5 performDesktopExitCleanUp$default = DesktopTasksController.performDesktopExitCleanUp$default(desktopPipTransitionController.desktopTasksController, windowContainerTransaction, Integer.valueOf(intValue), i2, true, false, 48);
-                    if (performDesktopExitCleanUp$default != null) {
-                        performDesktopExitCleanUp$default.mo779invoke(iBinder2);
+                    DesktopTasksController$$ExternalSyntheticLambda3 desktopTasksController$$ExternalSyntheticLambda3PerformDesktopExitCleanUp$default = DesktopTasksController.performDesktopExitCleanUp$default(desktopPipTransitionController.desktopTasksController, windowContainerTransaction, Integer.valueOf(iIntValue), i2, true, false, 48);
+                    if (desktopTasksController$$ExternalSyntheticLambda3PerformDesktopExitCleanUp$default != null) {
+                        desktopTasksController$$ExternalSyntheticLambda3PerformDesktopExitCleanUp$default.mo781invoke(iBinder2);
                     }
                 }
             }
@@ -300,7 +305,7 @@ public class PipTransition extends PipTransitionController implements PipTransit
             TransitionInfo.Change change2 = (TransitionInfo.Change) transitionInfo.getChanges().stream().filter(new Predicate() { // from class: com.android.wm.shell.pip2.phone.PipTransition$$ExternalSyntheticLambda3
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
-                    PipTransition pipTransition = PipTransition.this;
+                    PipTransition pipTransition = this.f$0;
                     TransitionInfo.Change change3 = (TransitionInfo.Change) obj;
                     pipTransition.getClass();
                     return change3.getTaskInfo() == null && change3.getParent() != null && change3.getParent() == pipTransition.mPipTransitionState.getPipTaskToken();
@@ -357,21 +362,198 @@ public class PipTransition extends PipTransitionController implements PipTransit
         this.mEnterAnimationType = i;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:113:0x0275, code lost:
-    
-        if (com.android.wm.shell.pip2.phone.transition.PipTransitionUtils.getDeferConfigActivityChange(r24, r12.getContainer()) == null) goto L100;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:115:0x02f3  */
     @Override // com.android.wm.shell.transition.Transitions.TransitionHandler
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean startAnimation(android.os.IBinder r23, android.window.TransitionInfo r24, android.view.SurfaceControl.Transaction r25, android.view.SurfaceControl.Transaction r26, com.android.wm.shell.transition.Transitions.TransitionFinishCallback r27) {
-        /*
-            Method dump skipped, instructions count: 959
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.pip2.phone.PipTransition.startAnimation(android.os.IBinder, android.window.TransitionInfo, android.view.SurfaceControl$Transaction, android.view.SurfaceControl$Transaction, com.android.wm.shell.transition.Transitions$TransitionFinishCallback):boolean");
+    public final boolean startAnimation(IBinder iBinder, TransitionInfo transitionInfo, SurfaceControl.Transaction transaction, SurfaceControl.Transaction transaction2, Transitions.TransitionFinishCallback transitionFinishCallback) throws Resources.NotFoundException {
+        TransitionInfo.Change deferConfigActivityChange;
+        PipEnterAnimator pipEnterAnimator;
+        PictureInPictureParams pictureInPictureParams;
+        TransitionInfo.Change deferConfigActivityChange2;
+        TransitionInfo.Change change;
+        IBinder iBinder2 = this.mEnterTransition;
+        PipBoundsState pipBoundsState = this.mPipBoundsState;
+        PipTransitionState pipTransitionState = this.mPipTransitionState;
+        if (iBinder == iBinder2 || transitionInfo.getType() == 10) {
+            this.mEnterTransition = null;
+            TransitionInfo.Change pipChange = PipTransitionUtils.getPipChange(transitionInfo);
+            if (pipChange != null) {
+                if (TransitionUtil.isOpeningType(transitionInfo.getType())) {
+                    for (TransitionInfo.Change change2 : transitionInfo.getChanges()) {
+                        if (change2.getLeash() != null && TransitionUtil.isOpeningMode(change2.getMode())) {
+                            transaction.setAlpha(change2.getLeash(), 1.0f);
+                        }
+                    }
+                }
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("pip_task_leash", pipChange.getLeash());
+                bundle.putParcelable("pip_task_info", pipChange.getTaskInfo());
+                pipTransitionState.setState(2, bundle);
+                boolean z = pipTransitionState.mInSwipePipToHomeTransition;
+                PipDisplayLayoutState pipDisplayLayoutState = this.mPipDisplayLayoutState;
+                if (z) {
+                    TransitionInfo.Change pipChange2 = PipTransitionUtils.getPipChange(transitionInfo);
+                    if (pipChange2 != null && (deferConfigActivityChange2 = PipTransitionUtils.getDeferConfigActivityChange(transitionInfo, pipChange2.getTaskInfo().getToken())) != null) {
+                        this.mFinishCallback = transitionFinishCallback;
+                        SurfaceControl leash = PipTransitionUtils.getLeash(pipChange2);
+                        Rect endAbsBounds = pipChange2.getEndAbsBounds();
+                        SurfaceControl surfaceControl = pipTransitionState.mSwipePipToHomeOverlay;
+                        if (surfaceControl != null) {
+                            Rect rect = pipTransitionState.mSwipePipToHomeAppBounds;
+                            String str = PipAppIconOverlay.TAG;
+                            int iMax = Math.max(Math.max(rect.width(), rect.height()), Math.max(endAbsBounds.width(), endAbsBounds.height())) + 1;
+                            transaction.reparent(surfaceControl, leash).setLayer(surfaceControl, Integer.MAX_VALUE).setScale(surfaceControl, 1.0f, 1.0f).setPosition(surfaceControl, (endAbsBounds.width() - iMax) / 2.0f, (endAbsBounds.height() - iMax) / 2.0f);
+                        }
+                        int fixedRotationDelta = PipTransitionUtils.getFixedRotationDelta(transitionInfo, pipChange2, pipDisplayLayoutState);
+                        if (fixedRotationDelta != 0) {
+                            updatePipChangesForFixedRotation(transitionInfo, pipChange2, deferConfigActivityChange2);
+                        }
+                        PipTransitionUtils.getPipParams(pipChange2).copyOnlySet(new PictureInPictureParams.Builder().setSourceRectHint(getAdjustedSourceRectHint(transitionInfo, pipChange2, deferConfigActivityChange2)).build());
+                        prepareConfigAtEndActivity(transaction, transaction2, pipChange2, deferConfigActivityChange2);
+                        transaction.merge(transaction2);
+                        PipEnterAnimator pipEnterAnimator2 = new PipEnterAnimator(this.mContext, leash, transaction, transaction2, endAbsBounds, fixedRotationDelta);
+                        pipEnterAnimator2.setEnterStartState(pipChange2);
+                        pipEnterAnimator2.onEnterAnimationUpdate(1.0f, transaction);
+                        transaction.apply();
+                        if (surfaceControl != null) {
+                            this.mPipScheduler.startOverlayFadeoutAnimation(surfaceControl, true, new PipTransition$$ExternalSyntheticLambda1(surfaceControl, 1));
+                        }
+                        finishTransition();
+                        return true;
+                    }
+                } else {
+                    TransitionInfo.Change pipChange3 = PipTransitionUtils.getPipChange(transitionInfo);
+                    if (pipChange3 != null) {
+                        if (this.mEnterAnimationType == 1) {
+                            this.mEnterAnimationType = 0;
+                        } else if (!TransitionUtil.isOpeningMode(pipChange3.getMode()) || PipTransitionUtils.getDeferConfigActivityChange(transitionInfo, pipChange3.getContainer()) != null) {
+                        }
+                        TransitionInfo.Change pipChange4 = PipTransitionUtils.getPipChange(transitionInfo);
+                        if (pipChange4 != null) {
+                            this.mFinishCallback = transitionFinishCallback;
+                            Rect endAbsBounds2 = pipChange4.getEndAbsBounds();
+                            SurfaceControl surfaceControl2 = pipTransitionState.mPinnedTaskLeash;
+                            Preconditions.checkNotNull(surfaceControl2, "Leash is null for alpha transition.");
+                            int fixedRotationDelta2 = PipTransitionUtils.getFixedRotationDelta(transitionInfo, pipChange4, pipDisplayLayoutState);
+                            if (fixedRotationDelta2 != 0) {
+                                updatePipChangesForFixedRotation(transitionInfo, pipChange4, new TransitionInfo.Change((WindowContainerToken) null, new SurfaceControl()));
+                            }
+                            transaction.setWindowCrop(surfaceControl2, endAbsBounds2.width(), endAbsBounds2.height());
+                            if (fixedRotationDelta2 != 0) {
+                                if (fixedRotationDelta2 == 3) {
+                                    fixedRotationDelta2 = -1;
+                                }
+                                Matrix matrix = new Matrix();
+                                float[] fArr = new float[9];
+                                matrix.setTranslate(endAbsBounds2.left, endAbsBounds2.top);
+                                matrix.postRotate((-fixedRotationDelta2) * 90.0f);
+                                transaction.setMatrix(surfaceControl2, matrix, fArr);
+                                transaction2.setMatrix(surfaceControl2, matrix, fArr);
+                            } else {
+                                transaction.setPosition(surfaceControl2, endAbsBounds2.left, endAbsBounds2.top);
+                            }
+                            PipAlphaAnimator pipAlphaAnimator = new PipAlphaAnimator(this.mContext, surfaceControl2, transaction, transaction2, 0);
+                            pipAlphaAnimator.mAnimationEndCallback = new PipTransition$$ExternalSyntheticLambda1(this, 0);
+                            this.mTransitionAnimator = pipAlphaAnimator;
+                            pipAlphaAnimator.start();
+                            return true;
+                        }
+                    } else {
+                        if (PipTransitionUtils.getDeferConfigActivityChange(transitionInfo, pipChange.getTaskInfo().getToken()) == null) {
+                            Log.wtf("PipTransition", "PipTransition.startAnimation didn't handle a scheduled PiP entry\ntransitionInfo=" + transitionInfo + ",\ncallers=" + Debug.getCallers(4));
+                            return false;
+                        }
+                        TransitionInfo.Change pipChange5 = PipTransitionUtils.getPipChange(transitionInfo);
+                        if (pipChange5 != null && (deferConfigActivityChange = PipTransitionUtils.getDeferConfigActivityChange(transitionInfo, pipChange5.getTaskInfo().getToken())) != null) {
+                            this.mFinishCallback = transitionFinishCallback;
+                            SurfaceControl leash2 = PipTransitionUtils.getLeash(pipChange5);
+                            Rect startAbsBounds = pipChange5.getStartAbsBounds();
+                            Rect endAbsBounds3 = pipChange5.getEndAbsBounds();
+                            PictureInPictureParams pipParams = PipTransitionUtils.getPipParams(pipChange5);
+                            Rect adjustedSourceRectHint = getAdjustedSourceRectHint(transitionInfo, pipChange5, deferConfigActivityChange);
+                            int fixedRotationDelta3 = PipTransitionUtils.getFixedRotationDelta(transitionInfo, pipChange5, pipDisplayLayoutState);
+                            if (fixedRotationDelta3 != 0) {
+                                updatePipChangesForFixedRotation(transitionInfo, pipChange5, deferConfigActivityChange);
+                            }
+                            PipEnterAnimator pipEnterAnimator3 = new PipEnterAnimator(this.mContext, leash2, transaction, transaction2, endAbsBounds3, fixedRotationDelta3);
+                            Rect validSourceHintRect = PipBoundsAlgorithm.getValidSourceHintRect(pipParams, startAbsBounds);
+                            if ((PipBoundsAlgorithm.isSourceRectHintValidForEnterPip(validSourceHintRect, endAbsBounds3) ? validSourceHintRect : null) == null) {
+                                pipEnterAnimator = pipEnterAnimator3;
+                                pictureInPictureParams = pipParams;
+                                pipEnterAnimator.setAppIconContentOverlay(this.mContext, startAbsBounds, endAbsBounds3, pipChange5.getTaskInfo().topActivityInfo, pipBoundsState.mLauncherState.mAppIconSizePx);
+                            } else {
+                                pipEnterAnimator = pipEnterAnimator3;
+                                pictureInPictureParams = pipParams;
+                            }
+                            pictureInPictureParams.copyOnlySet(new PictureInPictureParams.Builder().setSourceRectHint(adjustedSourceRectHint).build());
+                            prepareConfigAtEndActivity(transaction, transaction2, pipChange5, deferConfigActivityChange);
+                            pipEnterAnimator.mAnimationStartCallback = new PipTransition$$ExternalSyntheticLambda4(pipEnterAnimator, pipChange5);
+                            pipEnterAnimator.mAnimationEndCallback = new PipTransition$$ExternalSyntheticLambda4(this, pipEnterAnimator);
+                            this.mTransitionAnimator = pipEnterAnimator;
+                            pipEnterAnimator.start();
+                            return true;
+                        }
+                    }
+                }
+            }
+        } else {
+            if (iBinder == this.mExitViaExpandTransition) {
+                this.mExitViaExpandTransition = null;
+                return this.mExpandHandler.startAnimation(iBinder, transitionInfo, transaction, transaction2, transitionFinishCallback);
+            }
+            if (iBinder != this.mResizeTransition) {
+                if (pipTransitionState.getPipTaskToken() != null && (change = transitionInfo.getChange(pipTransitionState.getPipTaskToken())) != null) {
+                    boolean z2 = transitionInfo.getType() == 4 && change.getMode() == 4;
+                    boolean z3 = transitionInfo.getType() == 1003 && change.getMode() == 4;
+                    if (z2 || isPipClosing(transitionInfo) || z3) {
+                        pipTransitionState.setState(7, null);
+                        TransitionInfo.Change changeByToken = PipTransitionUtils.getChangeByToken(transitionInfo, pipTransitionState.getPipTaskToken());
+                        this.mFinishCallback = transitionFinishCallback;
+                        if (isPipClosing(transitionInfo)) {
+                            pipBoundsState.setLastPipComponentName(null);
+                        }
+                        transaction2.setAlpha(changeByToken.getLeash(), 0.0f);
+                        if (this.mPendingRemoveWithFadeout) {
+                            PipAlphaAnimator pipAlphaAnimator2 = new PipAlphaAnimator(this.mContext, changeByToken.getLeash(), transaction, transaction2, 1);
+                            pipAlphaAnimator2.mAnimationEndCallback = new PipTransition$$ExternalSyntheticLambda1(this, 0);
+                            pipAlphaAnimator2.start();
+                            return true;
+                        }
+                        transaction.setAlpha(changeByToken.getLeash(), 0.0f);
+                        transaction.apply();
+                        finishTransition();
+                        return true;
+                    }
+                }
+                syncPipSurfaceState(transitionInfo, transaction, transaction2);
+                return false;
+            }
+            this.mResizeTransition = null;
+            TransitionInfo.Change pipChange6 = PipTransitionUtils.getPipChange(transitionInfo);
+            if (pipChange6 != null) {
+                this.mFinishCallback = transitionFinishCallback;
+                TransitionInfo.Change deferConfigActivityChange3 = PipTransitionUtils.getDeferConfigActivityChange(transitionInfo, pipChange6.getTaskInfo().getToken());
+                if (deferConfigActivityChange3 != null) {
+                    pipChange6.getTaskInfo().pictureInPictureParams = null;
+                    prepareConfigAtEndActivity(transaction, transaction2, pipChange6, deferConfigActivityChange3);
+                }
+                transaction.setWindowCrop(pipChange6.getLeash(), pipChange6.getEndAbsBounds().width(), pipChange6.getEndAbsBounds().height());
+                Bundle bundle2 = new Bundle();
+                bundle2.putParcelable("pip_start_tx", transaction);
+                bundle2.putParcelable("pip_finish_tx", transaction2);
+                bundle2.putParcelable("pip_dest_bounds", pipChange6.getEndAbsBounds());
+                int i = this.mBoundsChangeDuration;
+                if (i > 0) {
+                    bundle2.putInt("animating_bounds_change_duration", i);
+                    this.mBoundsChangeDuration = 0;
+                }
+                pipTransitionState.setState(5, bundle2);
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override // com.android.wm.shell.pip.PipTransitionController
@@ -382,9 +564,9 @@ public class PipTransition extends PipTransitionController implements PipTransit
             return;
         }
         SurfaceControl leash = pipChange.getLeash();
-        boolean isInPip = this.mPipTransitionState.isInPip();
+        boolean zIsInPip = this.mPipTransitionState.isInPip();
         PipSurfaceTransactionHelper pipSurfaceTransactionHelper = this.mPipSurfaceTransactionHelper;
-        if (isInPip) {
+        if (zIsInPip) {
             f = pipSurfaceTransactionHelper.mCornerRadius;
         } else {
             pipSurfaceTransactionHelper.getClass();
@@ -392,18 +574,18 @@ public class PipTransition extends PipTransitionController implements PipTransit
         }
         transaction.setCornerRadius(leash, f);
         int i = pipSurfaceTransactionHelper.mShadowRadius;
-        transaction.setShadowRadius(leash, isInPip ? i : 0.0f);
-        transaction2.setCornerRadius(leash, isInPip ? pipSurfaceTransactionHelper.mCornerRadius : 0.0f);
-        transaction2.setShadowRadius(leash, isInPip ? i : 0.0f);
+        transaction.setShadowRadius(leash, zIsInPip ? i : 0.0f);
+        transaction2.setCornerRadius(leash, zIsInPip ? pipSurfaceTransactionHelper.mCornerRadius : 0.0f);
+        transaction2.setShadowRadius(leash, zIsInPip ? i : 0.0f);
     }
 
-    public final void updatePipChangesForFixedRotation(TransitionInfo transitionInfo, TransitionInfo.Change change, TransitionInfo.Change change2) {
-        TransitionInfo.Change findFixedRotationChange = PipTransitionController.findFixedRotationChange(transitionInfo);
+    public final void updatePipChangesForFixedRotation(TransitionInfo transitionInfo, TransitionInfo.Change change, TransitionInfo.Change change2) throws Resources.NotFoundException {
+        TransitionInfo.Change changeFindFixedRotationChange = PipTransitionController.findFixedRotationChange(transitionInfo);
         Rect endAbsBounds = change.getEndAbsBounds();
         Rect endAbsBounds2 = change2.getEndAbsBounds();
         int startRotation = change.getStartRotation();
         PipDisplayLayoutState pipDisplayLayoutState = this.mPipDisplayLayoutState;
-        int endFixedRotation = findFixedRotationChange != null ? findFixedRotationChange.getEndFixedRotation() : pipDisplayLayoutState.mDisplayLayout.mRotation;
+        int endFixedRotation = changeFindFixedRotationChange != null ? changeFindFixedRotationChange.getEndFixedRotation() : pipDisplayLayoutState.mDisplayLayout.mRotation;
         if (startRotation == endFixedRotation) {
             return;
         }

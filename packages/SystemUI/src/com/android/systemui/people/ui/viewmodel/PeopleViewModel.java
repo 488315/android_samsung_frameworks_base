@@ -15,7 +15,6 @@ import kotlinx.coroutines.flow.StateFlow;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class PeopleViewModel extends ViewModel {
     public final Function0 clearResult;
@@ -27,7 +26,6 @@ public final class PeopleViewModel extends ViewModel {
     public final StateFlow recentTiles;
     public final StateFlow result;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Factory implements ViewModelProvider.Factory {
         public final Context context;
         public final PeopleTileRepository tileRepository;
@@ -46,18 +44,16 @@ public final class PeopleViewModel extends ViewModel {
             }
             Context context = this.context;
             PeopleTileRepository peopleTileRepository = this.tileRepository;
-            StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(PeopleViewModelKt.PeopleViewModel$priorityTiles(peopleTileRepository, context));
-            StateFlowImpl MutableStateFlow2 = StateFlowKt.MutableStateFlow(PeopleViewModelKt.PeopleViewModel$recentTiles(peopleTileRepository, context));
-            StateFlowImpl MutableStateFlow3 = StateFlowKt.MutableStateFlow(0);
-            StateFlowImpl MutableStateFlow4 = StateFlowKt.MutableStateFlow(null);
-            return new PeopleViewModel(FlowKt.asStateFlow(MutableStateFlow), FlowKt.asStateFlow(MutableStateFlow2), FlowKt.asStateFlow(MutableStateFlow3), FlowKt.asStateFlow(MutableStateFlow4), new PeopleViewModelKt$PeopleViewModel$1(MutableStateFlow, MutableStateFlow2, peopleTileRepository, context), new PeopleViewModelKt$PeopleViewModel$2(MutableStateFlow3), new PeopleViewModelKt$PeopleViewModel$3(MutableStateFlow4), new PeopleViewModelKt$PeopleViewModel$4(MutableStateFlow3, this.widgetRepository, MutableStateFlow4), new PeopleViewModelKt$PeopleViewModel$5(MutableStateFlow4));
+            StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(PeopleViewModelKt.PeopleViewModel$priorityTiles(peopleTileRepository, context));
+            StateFlowImpl stateFlowImplMutableStateFlow2 = StateFlowKt.MutableStateFlow(PeopleViewModelKt.PeopleViewModel$recentTiles(peopleTileRepository, context));
+            StateFlowImpl stateFlowImplMutableStateFlow3 = StateFlowKt.MutableStateFlow(0);
+            StateFlowImpl stateFlowImplMutableStateFlow4 = StateFlowKt.MutableStateFlow(null);
+            return new PeopleViewModel(FlowKt.asStateFlow(stateFlowImplMutableStateFlow), FlowKt.asStateFlow(stateFlowImplMutableStateFlow2), FlowKt.asStateFlow(stateFlowImplMutableStateFlow3), FlowKt.asStateFlow(stateFlowImplMutableStateFlow4), new PeopleViewModelKt$PeopleViewModel$1(stateFlowImplMutableStateFlow, stateFlowImplMutableStateFlow2, peopleTileRepository, context), new PeopleViewModelKt$PeopleViewModel$2(stateFlowImplMutableStateFlow3), new PeopleViewModelKt$PeopleViewModel$3(stateFlowImplMutableStateFlow4), new PeopleViewModelKt$PeopleViewModel$4(stateFlowImplMutableStateFlow3, this.widgetRepository, stateFlowImplMutableStateFlow4), new PeopleViewModelKt$PeopleViewModel$5(stateFlowImplMutableStateFlow4));
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Result {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Cancelled extends Result {
             public static final Cancelled INSTANCE = new Cancelled();
 
@@ -66,7 +62,6 @@ public final class PeopleViewModel extends ViewModel {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Success extends Result {
             public final Intent data;
 

@@ -18,7 +18,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ConfigurationManager {
     public static final String FEATURE_SECURE_LOG = "secureLog";
@@ -34,7 +33,6 @@ public class ConfigurationManager {
     public final Context mContext;
     public final HashMap<ITrustEventListener, IEventListener> mListeners = new HashMap<>();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     @Retention(RetentionPolicy.RUNTIME)
     public @interface KnoxZtFeature {
     }
@@ -60,11 +58,11 @@ public class ConfigurationManager {
     public int check(final ITrustResultListener iTrustResultListener) {
         String str = TAG;
         Log.i(str, "Enter check()");
-        int i = 1;
+        int iCheck = 1;
         try {
             IKnoxZtCoreService service = getService();
             if (service != null) {
-                i = service.check(new IResultListener.Stub() { // from class: com.samsung.android.knox.zt.config.ConfigurationManager.1
+                iCheck = service.check(new IResultListener.Stub() { // from class: com.samsung.android.knox.zt.config.ConfigurationManager.1
                     @Override // com.samsung.android.knox.zt.config.IResultListener
                     public void onFail(String str2) {
                         iTrustResultListener.onFail(str2);
@@ -81,62 +79,62 @@ public class ConfigurationManager {
         } catch (Exception e) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "Leave check() with ", TAG);
-        return i;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(iCheck, "Leave check() with ", TAG);
+        return iCheck;
     }
 
     public String configFeature(@KnoxZtFeature String str, String str2) {
         String str3 = TAG;
         Log.i(str3, "Enter configFeature()");
-        String str4 = "{\"resultCode\":3}";
+        String strConfigFeature = "{\"resultCode\":3}";
         try {
             IKnoxZtCoreService service = getService();
             if (service != null) {
-                str4 = service.configFeature(str, str2);
+                strConfigFeature = service.configFeature(str, str2);
             } else {
                 Log.e(str3, "check getService failed!");
             }
         } catch (Exception e) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception: "), TAG);
         }
-        KeyguardPluginControllerImpl$$ExternalSyntheticOutline0.m("Leave configFeature() with ", str4, TAG);
-        return str4;
+        KeyguardPluginControllerImpl$$ExternalSyntheticOutline0.m("Leave configFeature() with ", strConfigFeature, TAG);
+        return strConfigFeature;
     }
 
     public int disable() {
         String str = TAG;
         Log.i(str, "Enter disable()");
-        int i = 1;
+        int iDisable = 1;
         try {
             IKnoxZtCoreService service = getService();
             if (service != null) {
-                i = service.disable();
+                iDisable = service.disable();
             } else {
                 Log.e(str, "disable getService failed!");
             }
         } catch (Exception e) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "Leave disable() with ", TAG);
-        return i;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(iDisable, "Leave disable() with ", TAG);
+        return iDisable;
     }
 
     public int disableFeature(@KnoxZtFeature String str) {
         String str2 = TAG;
         Log.i(str2, "Enter disableFeature()");
-        int i = 1;
+        int iDisableFeature = 1;
         try {
             IKnoxZtCoreService service = getService();
             if (service != null) {
-                i = service.disableFeature(str);
+                iDisableFeature = service.disableFeature(str);
             } else {
                 Log.e(str2, "check getService failed!");
             }
         } catch (Exception e) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "Leave disableFeature() with ", TAG);
-        return i;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(iDisableFeature, "Leave disableFeature() with ", TAG);
+        return iDisableFeature;
     }
 
     public int enable(String str) {
@@ -146,37 +144,37 @@ public class ConfigurationManager {
     public int enableFeature(@KnoxZtFeature String str) {
         String str2 = TAG;
         Log.i(str2, "Enter enableFeature()");
-        int i = 1;
+        int iEnableFeature = 1;
         try {
             IKnoxZtCoreService service = getService();
             if (service != null) {
-                i = service.enableFeature(str);
+                iEnableFeature = service.enableFeature(str);
             } else {
                 Log.e(str2, "check getService failed!");
             }
         } catch (Exception e) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "Leave enableFeature() with ", TAG);
-        return i;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(iEnableFeature, "Leave enableFeature() with ", TAG);
+        return iEnableFeature;
     }
 
     public String getConfiguration(@KnoxZtFeature String str) {
         String str2 = TAG;
         Log.i(str2, "Enter getConfiguration()");
-        String str3 = "{\"resultCode\":1}";
+        String configuration = "{\"resultCode\":1}";
         try {
             IKnoxZtCoreService service = getService();
             if (service != null) {
-                str3 = service.getConfiguration(str);
+                configuration = service.getConfiguration(str);
             } else {
                 Log.e(str2, "check getService failed!");
             }
         } catch (Exception e) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception: "), TAG);
         }
-        KeyguardPluginControllerImpl$$ExternalSyntheticOutline0.m("Leave getConfiguration() with ", str3, TAG);
-        return str3;
+        KeyguardPluginControllerImpl$$ExternalSyntheticOutline0.m("Leave getConfiguration() with ", configuration, TAG);
+        return configuration;
     }
 
     public List<TrustFactorType> getFactorsToSetup() {
@@ -200,9 +198,9 @@ public class ConfigurationManager {
     public final IKnoxZtCoreService getService() {
         try {
             Class<?> cls = Class.forName("android.os.ServiceManager");
-            Object invoke = cls.getMethod("getService", String.class).invoke(cls, SERVICE_NAME_KNOXZT_CORE);
-            if (invoke != null) {
-                return IKnoxZtCoreService.Stub.asInterface((IBinder) invoke);
+            Object objInvoke = cls.getMethod("getService", String.class).invoke(cls, SERVICE_NAME_KNOXZT_CORE);
+            if (objInvoke != null) {
+                return IKnoxZtCoreService.Stub.asInterface((IBinder) objInvoke);
             }
             throw new RuntimeException("failed to find knoxztcore service");
         } catch (Throwable th) {
@@ -232,61 +230,61 @@ public class ConfigurationManager {
     public boolean isEnabled() {
         String str = TAG;
         Log.i(str, "Enter isEnabled()");
-        boolean z = false;
+        boolean zIsEnabled = false;
         try {
             IKnoxZtCoreService service = getService();
             if (service != null) {
-                z = service.isEnabled();
+                zIsEnabled = service.isEnabled();
             } else {
                 Log.e(str, "isEnabled getService failed!");
             }
         } catch (Exception e) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception: "), TAG);
         }
-        AODAmbientWallpaperHelper$initAODAmbientWallpaperHelper$1$$ExternalSyntheticOutline0.m("Leave isEnabled() with ", TAG, z);
-        return z;
+        AODAmbientWallpaperHelper$initAODAmbientWallpaperHelper$1$$ExternalSyntheticOutline0.m("Leave isEnabled() with ", TAG, zIsEnabled);
+        return zIsEnabled;
     }
 
     public boolean isStarted() {
         String str = TAG;
         Log.i(str, "Enter isStarted()");
-        boolean z = false;
+        boolean zIsStarted = false;
         try {
             IKnoxZtCoreService service = getService();
             if (service != null) {
-                z = service.isStarted();
+                zIsStarted = service.isStarted();
             } else {
                 Log.e(str, "isStarted getService failed!");
             }
         } catch (Exception e) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception: "), TAG);
         }
-        AODAmbientWallpaperHelper$initAODAmbientWallpaperHelper$1$$ExternalSyntheticOutline0.m("Leave isStarted() with ", TAG, z);
-        return z;
+        AODAmbientWallpaperHelper$initAODAmbientWallpaperHelper$1$$ExternalSyntheticOutline0.m("Leave isStarted() with ", TAG, zIsStarted);
+        return zIsStarted;
     }
 
     public int notifyTestFactorScoreChange(String str, long j, boolean z) {
         String str2 = TAG;
         Log.i(str2, "Enter notifyTestFactorScoreChange()");
-        int i = 1;
+        int iNotifyTestFactorScoreChange = 1;
         try {
             IKnoxZtCoreService service = getService();
             if (service != null) {
-                i = service.notifyTestFactorScoreChange(str, j, z);
+                iNotifyTestFactorScoreChange = service.notifyTestFactorScoreChange(str, j, z);
             } else {
                 Log.e(str2, "notifyTestFactorScoreChange getService failed!");
             }
         } catch (Exception e) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "Leave notifyTestFactorScoreChange() with ", TAG);
-        return i;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(iNotifyTestFactorScoreChange, "Leave notifyTestFactorScoreChange() with ", TAG);
+        return iNotifyTestFactorScoreChange;
     }
 
     public int registerListener(final ITrustEventListener iTrustEventListener) {
         String str = TAG;
         Log.i(str, "Enter registerListener()");
-        int i = 1;
+        int iRegisterListener = 1;
         try {
             IKnoxZtCoreService service = getService();
             if (service != null) {
@@ -306,25 +304,25 @@ public class ConfigurationManager {
                         iTrustEventListener.onSuccess();
                     }
                 });
-                i = service.registerListener(this.mListeners.get(iTrustEventListener));
+                iRegisterListener = service.registerListener(this.mListeners.get(iTrustEventListener));
             } else {
                 Log.e(str, "registerListener getService failed!");
             }
         } catch (Exception e) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "Leave registerListener() with ", TAG);
-        return i;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(iRegisterListener, "Leave registerListener() with ", TAG);
+        return iRegisterListener;
     }
 
     public int start(final ITrustResultListener iTrustResultListener) {
         String str = TAG;
         Log.i(str, "Enter start()");
-        int i = 1;
+        int iStart = 1;
         try {
             IKnoxZtCoreService service = getService();
             if (service != null) {
-                i = service.start(new IResultListener.Stub() { // from class: com.samsung.android.knox.zt.config.ConfigurationManager.2
+                iStart = service.start(new IResultListener.Stub() { // from class: com.samsung.android.knox.zt.config.ConfigurationManager.2
                     @Override // com.samsung.android.knox.zt.config.IResultListener
                     public void onFail(String str2) {
                         iTrustResultListener.onFail(str2);
@@ -341,18 +339,18 @@ public class ConfigurationManager {
         } catch (Exception e) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "Leave start() with ", TAG);
-        return i;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(iStart, "Leave start() with ", TAG);
+        return iStart;
     }
 
     public int stop(final ITrustResultListener iTrustResultListener) {
         String str = TAG;
         Log.i(str, "Enter stop()");
-        int i = 1;
+        int iStop = 1;
         try {
             IKnoxZtCoreService service = getService();
             if (service != null) {
-                i = service.stop(new IResultListener.Stub() { // from class: com.samsung.android.knox.zt.config.ConfigurationManager.3
+                iStop = service.stop(new IResultListener.Stub() { // from class: com.samsung.android.knox.zt.config.ConfigurationManager.3
                     @Override // com.samsung.android.knox.zt.config.IResultListener
                     public void onFail(String str2) {
                         iTrustResultListener.onFail(str2);
@@ -369,18 +367,18 @@ public class ConfigurationManager {
         } catch (Exception e) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "Leave stop() with ", TAG);
-        return i;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(iStop, "Leave stop() with ", TAG);
+        return iStop;
     }
 
     public int unregisterListener(ITrustEventListener iTrustEventListener) {
         String str = TAG;
         Log.i(str, "Enter unregisterListener()");
-        int i = 1;
+        int iUnregisterListener = 1;
         try {
             IKnoxZtCoreService service = getService();
             if (service != null) {
-                i = service.unregisterListener(this.mListeners.get(iTrustEventListener));
+                iUnregisterListener = service.unregisterListener(this.mListeners.get(iTrustEventListener));
                 this.mListeners.remove(iTrustEventListener);
             } else {
                 Log.e(str, "unregisterListener getService failed!");
@@ -388,25 +386,25 @@ public class ConfigurationManager {
         } catch (Exception e) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "Leave unregisterListener() with ", TAG);
-        return i;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(iUnregisterListener, "Leave unregisterListener() with ", TAG);
+        return iUnregisterListener;
     }
 
     public int enable(String str, boolean z) {
         String str2 = TAG;
         Log.i(str2, "Enter enable()");
-        int i = 1;
+        int iEnable = 1;
         try {
             IKnoxZtCoreService service = getService();
             if (service != null) {
-                i = service.enable(str, z);
+                iEnable = service.enable(str, z);
             } else {
                 Log.e(str2, "enable getService failed!");
             }
         } catch (Exception e) {
             KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception: "), TAG);
         }
-        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "Leave enable() with ", TAG);
-        return i;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(iEnable, "Leave enable() with ", TAG);
+        return iEnable;
     }
 }

@@ -4,7 +4,6 @@ import android.opengl.GLES30;
 import com.samsung.android.sesl.transparentvideo.renderer.gl.Debugger;
 import java.nio.IntBuffer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class Program implements IGLObject {
     public final Shader fShader;
@@ -37,14 +36,14 @@ public final class Program implements IGLObject {
             this.isAlive = false;
             return;
         }
-        int glCreateProgram = GLES30.glCreateProgram();
-        this.id = glCreateProgram;
-        GLES30.glAttachShader(glCreateProgram, shader.id);
+        int iGlCreateProgram = GLES30.glCreateProgram();
+        this.id = iGlCreateProgram;
+        GLES30.glAttachShader(iGlCreateProgram, shader.id);
         GLES30.glAttachShader(this.id, shader2.id);
         GLES30.glLinkProgram(this.id);
-        IntBuffer allocate = IntBuffer.allocate(1);
-        GLES30.glGetProgramiv(this.id, 35714, allocate);
-        if (allocate.get(0) == 0) {
+        IntBuffer intBufferAllocate = IntBuffer.allocate(1);
+        GLES30.glGetProgramiv(this.id, 35714, intBufferAllocate);
+        if (intBufferAllocate.get(0) == 0) {
             Debugger.Companion companion = Debugger.Companion;
             GLES30.glGetProgramInfoLog(this.id);
             companion.getClass();

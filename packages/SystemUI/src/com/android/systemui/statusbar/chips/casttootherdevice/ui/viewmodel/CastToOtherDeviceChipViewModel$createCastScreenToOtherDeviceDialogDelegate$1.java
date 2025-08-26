@@ -7,7 +7,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.FunctionReferenceImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final /* synthetic */ class CastToOtherDeviceChipViewModel$createCastScreenToOtherDeviceDialogDelegate$1 extends FunctionReferenceImpl implements Function0 {
     public CastToOtherDeviceChipViewModel$createCastScreenToOtherDeviceDialogDelegate$1(Object obj) {

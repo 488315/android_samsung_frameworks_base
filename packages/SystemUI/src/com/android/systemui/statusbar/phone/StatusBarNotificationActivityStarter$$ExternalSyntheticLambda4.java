@@ -13,7 +13,6 @@ import com.android.wm.shell.bubbles.BubbleController$BubblesImpl$$ExternalSynthe
 import com.android.wm.shell.bubbles.BubbleEntry;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class StatusBarNotificationActivityStarter$$ExternalSyntheticLambda4 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -35,10 +34,10 @@ public final /* synthetic */ class StatusBarNotificationActivityStarter$$Externa
                 statusBarNotificationActivityStarter.mBubblesManagerOptional.ifPresent(new Consumer() { // from class: com.android.systemui.statusbar.phone.StatusBarNotificationActivityStarter$$ExternalSyntheticLambda8
                     @Override // java.util.function.Consumer
                     public final void accept(Object obj) {
-                        NotificationEntry notificationEntry2 = NotificationEntry.this;
+                        NotificationEntry notificationEntry2 = notificationEntry;
                         BubblesManager bubblesManager = (BubblesManager) obj;
-                        boolean isBubble = notificationEntry2.isBubble();
-                        boolean z = !isBubble;
+                        boolean zIsBubble = notificationEntry2.isBubble();
+                        boolean z = !zIsBubble;
                         bubblesManager.getClass();
                         NotificationChannel channel = notificationEntry2.mRanking.getChannel();
                         String packageName = notificationEntry2.mSbn.getPackageName();
@@ -47,7 +46,7 @@ public final /* synthetic */ class StatusBarNotificationActivityStarter$$Externa
                             return;
                         }
                         notificationEntry2.isBubble();
-                        if (isBubble) {
+                        if (zIsBubble) {
                             notificationEntry2.mSbn.getNotification().flags &= -4097;
                         } else if (notificationEntry2.mBubbleMetadata != null && notificationEntry2.mRanking.canBubble()) {
                             notificationEntry2.mSbn.getNotification().flags |= 4096;
@@ -57,18 +56,18 @@ public final /* synthetic */ class StatusBarNotificationActivityStarter$$Externa
                             bubblesManager.mBarService.onNotificationBubbleChanged(notificationEntry2.mKey, z, 3);
                         } catch (RemoteException unused) {
                         }
-                        NotificationChannel createConversationChannelIfNeeded = NotificationChannelHelper.createConversationChannelIfNeeded(bubblesManager.mContext, bubblesManager.mNotificationManager, notificationEntry2, channel);
-                        createConversationChannelIfNeeded.setAllowBubbles(z);
+                        NotificationChannel notificationChannelCreateConversationChannelIfNeeded = NotificationChannelHelper.createConversationChannelIfNeeded(bubblesManager.mContext, bubblesManager.mNotificationManager, notificationEntry2, channel);
+                        notificationChannelCreateConversationChannelIfNeeded.setAllowBubbles(z);
                         try {
                             int bubblePreferenceForPackage = bubblesManager.mNotificationManager.getBubblePreferenceForPackage(packageName, uid);
-                            if (!isBubble && bubblePreferenceForPackage == 0) {
+                            if (!zIsBubble && bubblePreferenceForPackage == 0) {
                                 bubblesManager.mNotificationManager.setBubblesAllowed(packageName, uid, 2);
                             }
-                            bubblesManager.mNotificationManager.updateNotificationChannelForPackage(packageName, uid, createConversationChannelIfNeeded);
+                            bubblesManager.mNotificationManager.updateNotificationChannelForPackage(packageName, uid, notificationChannelCreateConversationChannelIfNeeded);
                         } catch (RemoteException e) {
                             Log.e("Bubbles", e.getMessage());
                         }
-                        if (isBubble) {
+                        if (zIsBubble) {
                             return;
                         }
                         bubblesManager.mShadeController.collapseShade(true);
@@ -84,9 +83,9 @@ public final /* synthetic */ class StatusBarNotificationActivityStarter$$Externa
                 StatusBarNotificationActivityStarter statusBarNotificationActivityStarter2 = this.f$0;
                 NotificationEntry notificationEntry2 = this.f$1;
                 BubblesManager bubblesManager = (BubblesManager) statusBarNotificationActivityStarter2.mBubblesManagerOptional.get();
-                BubbleEntry notifToBubbleEntry = bubblesManager.notifToBubbleEntry(notificationEntry2);
+                BubbleEntry bubbleEntryNotifToBubbleEntry = bubblesManager.notifToBubbleEntry(notificationEntry2);
                 BubbleController.BubblesImpl bubblesImpl = (BubbleController.BubblesImpl) bubblesManager.mBubbles;
-                BubbleController.this.mMainExecutor.execute(new BubbleController$BubblesImpl$$ExternalSyntheticLambda4(bubblesImpl, notifToBubbleEntry, 1));
+                BubbleController.this.mMainExecutor.execute(new BubbleController$BubblesImpl$$ExternalSyntheticLambda4(bubblesImpl, bubbleEntryNotifToBubbleEntry, 1));
                 statusBarNotificationActivityStarter2.mShadeController.collapseShade();
                 break;
         }

@@ -14,7 +14,6 @@ import com.android.systemui.R;
 import com.android.systemui.power.SecBatterySnapshot;
 import com.android.systemui.util.DeviceType;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class WaterProtectionDialog extends PowerUiDialog {
     public boolean mIsHiccupState;
@@ -31,10 +30,10 @@ public class WaterProtectionDialog extends PowerUiDialog {
 
     @Override // com.android.systemui.power.dialog.PowerUiDialog
     public final AlertDialog getDialog() {
-        View inflate = LayoutInflater.from(new ContextThemeWrapper(this.mContext, R.style.power_ui_dialog_theme)).inflate(R.layout.power_ui_dialog, (ViewGroup) null);
-        ((TextView) inflate.findViewById(R.id.notice_text)).setText(DeviceType.isTablet() ? this.mContext.getString(R.string.water_protection_notification_body_tablet) : PowerUiRune.WIRELESS_CHARGING ? this.mContext.getString(R.string.water_protection_notification_body_support_wireless_charging) : this.mContext.getString(R.string.water_protection_notification_body));
+        View viewInflate = LayoutInflater.from(new ContextThemeWrapper(this.mContext, R.style.power_ui_dialog_theme)).inflate(R.layout.power_ui_dialog, (ViewGroup) null);
+        ((TextView) viewInflate.findViewById(R.id.notice_text)).setText(DeviceType.isTablet() ? this.mContext.getString(R.string.water_protection_notification_body_tablet) : PowerUiRune.WIRELESS_CHARGING ? this.mContext.getString(R.string.water_protection_notification_body_support_wireless_charging) : this.mContext.getString(R.string.water_protection_notification_body));
         AlertDialog.Builder builder = new AlertDialog.Builder(this.mContext, R.style.power_ui_dialog_theme);
-        ImageView imageView = (ImageView) inflate.findViewById(R.id.guide_image);
+        ImageView imageView = (ImageView) viewInflate.findViewById(R.id.guide_image);
         imageView.setImageResource(R.drawable.image_popup_remove);
         imageView.setVisibility(0);
         String string = this.mContext.getString(R.string.water_protection_notification_title);
@@ -44,11 +43,11 @@ public class WaterProtectionDialog extends PowerUiDialog {
         if (this.mIsHiccupState) {
             builder.setPositiveButton(this.mContext.getString(R.string.dialog_button_text_ok), null);
         }
-        builder.setView(inflate);
-        AlertDialog create = builder.create();
-        create.getWindow().setType(2009);
-        create.getWindow().setGravity(80);
-        return create;
+        builder.setView(viewInflate);
+        AlertDialog alertDialogCreate = builder.create();
+        alertDialogCreate.getWindow().setType(2009);
+        alertDialogCreate.getWindow().setGravity(80);
+        return alertDialogCreate;
     }
 
     @Override // com.android.systemui.power.dialog.PowerUiDialog

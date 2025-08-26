@@ -1,12 +1,18 @@
 package com.android.systemui.keyguard.domain.interactor;
 
+import com.android.systemui.keyguard.shared.model.DozeStateModel;
+import com.android.systemui.keyguard.shared.model.DozeTransitionModel;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function3;
+import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
+import kotlinx.coroutines.flow.FlowKt;
+import kotlinx.coroutines.flow.FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class KeyguardInteractor$special$$inlined$flatMapLatest$2 extends SuspendLambda implements Function3 {
     private /* synthetic */ Object L$0;
@@ -28,89 +34,55 @@ public final class KeyguardInteractor$special$$inlined$flatMapLatest$2 extends S
         return keyguardInteractor$special$$inlined$flatMapLatest$2.invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:14:0x0064, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:17:0x004e, code lost:
+    
+        if (kotlinx.coroutines.DelayKt.delay(500, r5) == r0) goto L22;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:21:0x0064, code lost:
     
         if (kotlinx.coroutines.flow.FlowKt.emitAll(r1, r3, r5) != r0) goto L23;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:15:0x0066, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:22:0x0066, code lost:
     
         return r0;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:22:0x004e, code lost:
-    
-        if (kotlinx.coroutines.DelayKt.delay(500, r5) == r0) goto L22;
      */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object invokeSuspend(java.lang.Object r6) {
-        /*
-            r5 = this;
-            kotlin.coroutines.intrinsics.CoroutineSingletons r0 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r1 = r5.label
-            r2 = 2
-            r3 = 1
-            if (r1 == 0) goto L20
-            if (r1 == r3) goto L18
-            if (r1 != r2) goto L10
-            kotlin.ResultKt.throwOnFailure(r6)
-            goto L67
-        L10:
-            java.lang.IllegalStateException r5 = new java.lang.IllegalStateException
-            java.lang.String r6 = "call to 'resume' before 'invoke' with coroutine"
-            r5.<init>(r6)
-            throw r5
-        L18:
-            java.lang.Object r1 = r5.L$0
-            kotlinx.coroutines.flow.FlowCollector r1 = (kotlinx.coroutines.flow.FlowCollector) r1
-            kotlin.ResultKt.throwOnFailure(r6)
-            goto L51
-        L20:
-            kotlin.ResultKt.throwOnFailure(r6)
-            java.lang.Object r6 = r5.L$0
-            r1 = r6
-            kotlinx.coroutines.flow.FlowCollector r1 = (kotlinx.coroutines.flow.FlowCollector) r1
-            java.lang.Object r6 = r5.L$1
-            com.android.systemui.keyguard.shared.model.DozeTransitionModel r6 = (com.android.systemui.keyguard.shared.model.DozeTransitionModel) r6
-            com.android.systemui.keyguard.shared.model.DozeStateModel$Companion r4 = com.android.systemui.keyguard.shared.model.DozeStateModel.Companion
-            com.android.systemui.keyguard.shared.model.DozeStateModel r6 = r6.to
-            r4.getClass()
-            com.android.systemui.keyguard.shared.model.DozeStateModel r4 = com.android.systemui.keyguard.shared.model.DozeStateModel.UNINITIALIZED
-            if (r6 == r4) goto L44
-            com.android.systemui.keyguard.shared.model.DozeStateModel r4 = com.android.systemui.keyguard.shared.model.DozeStateModel.FINISH
-            if (r6 != r4) goto L3c
-            goto L44
-        L3c:
-            java.lang.Boolean r6 = java.lang.Boolean.FALSE
-            kotlinx.coroutines.flow.FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 r3 = new kotlinx.coroutines.flow.FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2
-            r3.<init>(r6)
-            goto L5b
-        L44:
-            r5.L$0 = r1
-            r5.label = r3
-            r3 = 500(0x1f4, double:2.47E-321)
-            java.lang.Object r6 = kotlinx.coroutines.DelayKt.delay(r3, r5)
-            if (r6 != r0) goto L51
-            goto L66
-        L51:
-            com.android.systemui.keyguard.domain.interactor.KeyguardInteractor r6 = r5.this$0
-            kotlinx.coroutines.flow.ReadonlyStateFlow r6 = r6.isDreaming
-            r3 = 50
-            kotlinx.coroutines.flow.Flow r3 = kotlinx.coroutines.flow.FlowKt.debounce(r6, r3)
-        L5b:
-            r6 = 0
-            r5.L$0 = r6
-            r5.label = r2
-            java.lang.Object r5 = kotlinx.coroutines.flow.FlowKt.emitAll(r1, r3, r5)
-            if (r5 != r0) goto L67
-        L66:
-            return r0
-        L67:
-            kotlin.Unit r5 = kotlin.Unit.INSTANCE
-            return r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyguard.domain.interactor.KeyguardInteractor$special$$inlined$flatMapLatest$2.invokeSuspend(java.lang.Object):java.lang.Object");
+    public final Object invokeSuspend(Object obj) {
+        FlowCollector flowCollector;
+        Flow flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i = this.label;
+        if (i == 0) {
+            ResultKt.throwOnFailure(obj);
+            flowCollector = (FlowCollector) this.L$0;
+            DozeTransitionModel dozeTransitionModel = (DozeTransitionModel) this.L$1;
+            DozeStateModel.Companion companion = DozeStateModel.Companion;
+            DozeStateModel dozeStateModel = dozeTransitionModel.to;
+            companion.getClass();
+            if (dozeStateModel == DozeStateModel.UNINITIALIZED || dozeStateModel == DozeStateModel.FINISH) {
+                this.L$0 = flowCollector;
+                this.label = 1;
+            } else {
+                flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(Boolean.FALSE);
+                this.L$0 = null;
+                this.label = 2;
+            }
+        } else {
+            if (i != 1) {
+                if (i != 2) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+                return Unit.INSTANCE;
+            }
+            flowCollector = (FlowCollector) this.L$0;
+            ResultKt.throwOnFailure(obj);
+        }
+        flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 = FlowKt.debounce(this.this$0.isDreaming, 50L);
+        this.L$0 = null;
+        this.label = 2;
     }
 }

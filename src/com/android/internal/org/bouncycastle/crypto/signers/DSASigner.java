@@ -26,24 +26,28 @@ public class DSASigner implements DSAExt {
         this.kCalculator = dSAKCalculator;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:14:0x0036  */
     @Override // com.android.internal.org.bouncycastle.crypto.DSA
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public void init(boolean z, CipherParameters cipherParameters) {
-        SecureRandom secureRandom;
+        SecureRandom random;
         if (z) {
             if (cipherParameters instanceof ParametersWithRandom) {
                 ParametersWithRandom parametersWithRandom = (ParametersWithRandom) cipherParameters;
                 this.key = (DSAPrivateKeyParameters) parametersWithRandom.getParameters();
-                secureRandom = parametersWithRandom.getRandom();
+                random = parametersWithRandom.getRandom();
                 CryptoServicesRegistrar.checkConstraints(Utils.getDefaultProperties("DSA", this.key, z));
-                this.random = initSecureRandom((z || this.kCalculator.isDeterministic()) ? false : true, secureRandom);
+                this.random = initSecureRandom((z || this.kCalculator.isDeterministic()) ? false : true, random);
             }
             this.key = (DSAPrivateKeyParameters) cipherParameters;
         } else {
             this.key = (DSAPublicKeyParameters) cipherParameters;
         }
-        secureRandom = null;
+        random = null;
         CryptoServicesRegistrar.checkConstraints(Utils.getDefaultProperties("DSA", this.key, z));
-        this.random = initSecureRandom((z || this.kCalculator.isDeterministic()) ? false : true, secureRandom);
+        this.random = initSecureRandom((z || this.kCalculator.isDeterministic()) ? false : true, random);
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.DSAExt
@@ -55,41 +59,41 @@ public class DSASigner implements DSAExt {
     public BigInteger[] generateSignature(byte[] bArr) {
         DSAParameters parameters = this.key.getParameters();
         BigInteger q = parameters.getQ();
-        BigInteger calculateE = calculateE(q, bArr);
+        BigInteger bigIntegerCalculateE = calculateE(q, bArr);
         BigInteger x = ((DSAPrivateKeyParameters) this.key).getX();
         if (this.kCalculator.isDeterministic()) {
             this.kCalculator.init(q, x, bArr);
         } else {
             this.kCalculator.init(q, this.random);
         }
-        BigInteger nextK = this.kCalculator.nextK();
-        BigInteger mod = parameters.getG().modPow(nextK.add(getRandomizer(q, this.random)), parameters.getP()).mod(q);
-        return new BigInteger[]{mod, BigIntegers.modOddInverse(q, nextK).multiply(calculateE.add(x.multiply(mod))).mod(q)};
+        BigInteger bigIntegerNextK = this.kCalculator.nextK();
+        BigInteger bigIntegerMod = parameters.getG().modPow(bigIntegerNextK.add(getRandomizer(q, this.random)), parameters.getP()).mod(q);
+        return new BigInteger[]{bigIntegerMod, BigIntegers.modOddInverse(q, bigIntegerNextK).multiply(bigIntegerCalculateE.add(x.multiply(bigIntegerMod))).mod(q)};
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.DSA
     public boolean verifySignature(byte[] bArr, BigInteger bigInteger, BigInteger bigInteger2) {
         DSAParameters parameters = this.key.getParameters();
         BigInteger q = parameters.getQ();
-        BigInteger calculateE = calculateE(q, bArr);
-        BigInteger valueOf = BigInteger.valueOf(0L);
-        if (valueOf.compareTo(bigInteger) >= 0 || q.compareTo(bigInteger) <= 0 || valueOf.compareTo(bigInteger2) >= 0 || q.compareTo(bigInteger2) <= 0) {
+        BigInteger bigIntegerCalculateE = calculateE(q, bArr);
+        BigInteger bigIntegerValueOf = BigInteger.valueOf(0L);
+        if (bigIntegerValueOf.compareTo(bigInteger) >= 0 || q.compareTo(bigInteger) <= 0 || bigIntegerValueOf.compareTo(bigInteger2) >= 0 || q.compareTo(bigInteger2) <= 0) {
             return false;
         }
-        BigInteger modOddInverseVar = BigIntegers.modOddInverseVar(q, bigInteger2);
-        BigInteger mod = calculateE.multiply(modOddInverseVar).mod(q);
-        BigInteger mod2 = bigInteger.multiply(modOddInverseVar).mod(q);
+        BigInteger bigIntegerModOddInverseVar = BigIntegers.modOddInverseVar(q, bigInteger2);
+        BigInteger bigIntegerMod = bigIntegerCalculateE.multiply(bigIntegerModOddInverseVar).mod(q);
+        BigInteger bigIntegerMod2 = bigInteger.multiply(bigIntegerModOddInverseVar).mod(q);
         BigInteger p = parameters.getP();
-        return parameters.getG().modPow(mod, p).multiply(((DSAPublicKeyParameters) this.key).getY().modPow(mod2, p)).mod(p).mod(q).equals(bigInteger);
+        return parameters.getG().modPow(bigIntegerMod, p).multiply(((DSAPublicKeyParameters) this.key).getY().modPow(bigIntegerMod2, p)).mod(p).mod(q).equals(bigInteger);
     }
 
     private BigInteger calculateE(BigInteger bigInteger, byte[] bArr) {
         if (bigInteger.bitLength() >= bArr.length * 8) {
             return new BigInteger(1, bArr);
         }
-        int bitLength = bigInteger.bitLength() / 8;
-        byte[] bArr2 = new byte[bitLength];
-        System.arraycopy(bArr, 0, bArr2, 0, bitLength);
+        int iBitLength = bigInteger.bitLength() / 8;
+        byte[] bArr2 = new byte[iBitLength];
+        System.arraycopy(bArr, 0, bArr2, 0, iBitLength);
         return new BigInteger(1, bArr2);
     }
 

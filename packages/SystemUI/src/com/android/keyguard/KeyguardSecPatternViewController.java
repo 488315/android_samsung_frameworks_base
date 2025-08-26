@@ -63,12 +63,14 @@ import com.android.systemui.util.DeviceType;
 import com.android.systemui.vibrate.VibrationUtil;
 import com.android.systemui.wallpaper.WallpaperEventNotifier;
 import com.samsung.android.graphics.spr.animation.interpolator.SineInOut90;
+import com.samsung.android.knox.ContainerProxy;
+import com.samsung.android.knox.SemPersonaManager;
 import com.samsung.android.knox.custom.IKnoxCustomManager;
 import com.samsung.android.knox.zt.internal.IKnoxZtInternalService;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardSecPatternViewController extends KeyguardPatternViewController {
     public final Executor mBackgroundExecutor;
@@ -100,7 +102,6 @@ public class KeyguardSecPatternViewController extends KeyguardPatternViewControl
     public final KeyguardSecPatternViewController$$ExternalSyntheticLambda1 mUpdateLayoutRunnable;
     public final VibrationUtil mVibrationUtil;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.keyguard.KeyguardSecPatternViewController$6, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass6 {
         public static final /* synthetic */ int[] $SwitchMap$android$hardware$biometrics$BiometricSourceType;
@@ -119,14 +120,13 @@ public class KeyguardSecPatternViewController extends KeyguardPatternViewControl
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SecUnlockPatternListener extends KeyguardPatternViewController.UnlockPatternListener {
         public SecUnlockPatternListener() {
             super();
         }
 
         @Override // com.android.keyguard.KeyguardPatternViewController.UnlockPatternListener
-        public final void onPatternChecked(int i, int i2, boolean z, boolean z2) {
+        public final void onPatternChecked(int i, int i2, boolean z, boolean z2) throws Resources.NotFoundException {
             boolean z3 = KeyguardSecPatternViewController.this.mSelectedUserInteractor.getSelectedUserId() == i;
             Log.d("KeyguardSecPatternViewController", "!@onPatternChecked matched=%b timeoutMs=%d userId=%d", Boolean.valueOf(z), Integer.valueOf(i2), Integer.valueOf(i));
             KeyguardSecurityCallback keyguardSecurityCallback = KeyguardSecPatternViewController.this.getKeyguardSecurityCallback();
@@ -156,9 +156,9 @@ public class KeyguardSecPatternViewController extends KeyguardPatternViewControl
                     AuditLog.logEventAsUser(i, IKnoxCustomManager.Stub.TRANSACTION_getLoadingLogoPath, new Object[]{Integer.valueOf(i)});
                     KeyguardSecPatternViewController.this.getClass();
                     try {
-                        IKnoxZtInternalService asInterface = IKnoxZtInternalService.Stub.asInterface(ServiceManager.getService("knoxztinternal"));
-                        if (asInterface != null) {
-                            asInterface.notifyFrameworkEvent(5, 0, (Bundle) null);
+                        IKnoxZtInternalService iKnoxZtInternalServiceAsInterface = IKnoxZtInternalService.Stub.asInterface(ServiceManager.getService("knoxztinternal"));
+                        if (iKnoxZtInternalServiceAsInterface != null) {
+                            iKnoxZtInternalServiceAsInterface.notifyFrameworkEvent(5, 0, (Bundle) null);
                         }
                     } catch (Throwable th) {
                         th.printStackTrace();
@@ -196,7 +196,7 @@ public class KeyguardSecPatternViewController extends KeyguardPatternViewControl
         }
 
         @Override // com.android.keyguard.KeyguardPatternViewController.UnlockPatternListener
-        public final void onPatternDetected(List list) {
+        public final void onPatternDetected(List list) throws Resources.NotFoundException {
             Log.d("KeyguardSecPatternViewController", "onPatternDetected");
             KeyguardSecPatternViewController keyguardSecPatternViewController = KeyguardSecPatternViewController.this;
             KnoxStateMonitor knoxStateMonitor = keyguardSecPatternViewController.mKnoxStateMonitor;
@@ -229,7 +229,7 @@ public class KeyguardSecPatternViewController extends KeyguardPatternViewControl
                                 KeyguardSecPatternViewController.this.mLatencyTracker.onActionEnd(4);
                             }
 
-                            public final void onChecked(boolean z, int i) {
+                            public final void onChecked(boolean z, int i) throws Resources.NotFoundException {
                                 KeyguardSecPatternViewController.this.mLatencyTracker.onActionEnd(3);
                                 StringBuilder sb = new StringBuilder("onPatternDetected - onChecked - matched : ");
                                 sb.append(z);
@@ -289,8 +289,8 @@ public class KeyguardSecPatternViewController extends KeyguardPatternViewControl
         this.mSecondsRemaining = -1;
         this.mUpdateLayoutRunnable = new Runnable() { // from class: com.android.keyguard.KeyguardSecPatternViewController$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
-            public final void run() {
-                KeyguardSecPatternViewController keyguardSecPatternViewController = KeyguardSecPatternViewController.this;
+            public final void run() throws Resources.NotFoundException {
+                KeyguardSecPatternViewController keyguardSecPatternViewController = this.f$0;
                 keyguardSecPatternViewController.mSecondsRemaining = -1;
                 keyguardSecPatternViewController.updateLayout$2();
             }
@@ -314,7 +314,7 @@ public class KeyguardSecPatternViewController extends KeyguardPatternViewControl
             }
 
             @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
-            public final void onOrientationChanged(int i) {
+            public final void onOrientationChanged(int i) throws Resources.NotFoundException {
                 KeyguardSecPatternViewController keyguardSecPatternViewController = KeyguardSecPatternViewController.this;
                 if (keyguardSecPatternViewController.mCurrentOrientation == i || !DeviceState.shouldEnableKeyguardScreenRotation(keyguardSecPatternViewController.getContext())) {
                     return;
@@ -325,7 +325,7 @@ public class KeyguardSecPatternViewController extends KeyguardPatternViewControl
         };
         this.mKeyguardUpdateMonitorCallback = new KeyguardUpdateMonitorCallback() { // from class: com.android.keyguard.KeyguardSecPatternViewController.3
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
-            public final void onBiometricAuthenticated(int i, BiometricSourceType biometricSourceType, boolean z) {
+            public final void onBiometricAuthenticated(int i, BiometricSourceType biometricSourceType, boolean z) throws Resources.NotFoundException {
                 if (biometricSourceType == BiometricSourceType.FINGERPRINT) {
                     KeyguardSecPatternViewController keyguardSecPatternViewController = KeyguardSecPatternViewController.this;
                     if (((KeyguardPatternViewController) keyguardSecPatternViewController).mKeyguardUpdateMonitor.is2StepVerification()) {
@@ -363,7 +363,7 @@ public class KeyguardSecPatternViewController extends KeyguardPatternViewControl
             }
 
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
-            public final void onLockModeChanged() {
+            public final void onLockModeChanged() throws Resources.NotFoundException {
                 KeyguardSecPatternViewController keyguardSecPatternViewController = KeyguardSecPatternViewController.this;
                 if (((KeyguardPatternViewController) keyguardSecPatternViewController).mKeyguardUpdateMonitor.getLockoutAttemptDeadline() == 0) {
                     keyguardSecPatternViewController.mSecondsRemaining = -1;
@@ -380,7 +380,7 @@ public class KeyguardSecPatternViewController extends KeyguardPatternViewControl
             }
 
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
-            public final void onSimulationFailToUnlock(int i) {
+            public final void onSimulationFailToUnlock(int i) throws Resources.NotFoundException {
                 KeyguardSecPatternViewController keyguardSecPatternViewController = KeyguardSecPatternViewController.this;
                 keyguardSecPatternViewController.mVibrationUtil.playVibration(114);
                 keyguardSecPatternViewController.mLockPatternView.setDisplayMode(LockPatternView.DisplayMode.Wrong);
@@ -422,7 +422,7 @@ public class KeyguardSecPatternViewController extends KeyguardPatternViewControl
             }
 
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
-            public final void onStartedWakingUp() {
+            public final void onStartedWakingUp() throws Resources.NotFoundException {
                 KeyguardSecPatternViewController keyguardSecPatternViewController = KeyguardSecPatternViewController.this;
                 if (keyguardSecPatternViewController.mSecondsRemaining > 0 && ((KeyguardPatternViewController) keyguardSecPatternViewController).mKeyguardUpdateMonitor.getLockoutAttemptDeadline() == 0) {
                     keyguardSecPatternViewController.mSecondsRemaining = -1;
@@ -434,7 +434,7 @@ public class KeyguardSecPatternViewController extends KeyguardPatternViewControl
             }
 
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
-            public final void onTableModeChanged(boolean z) {
+            public final void onTableModeChanged(boolean z) throws Resources.NotFoundException {
                 KeyguardSecPatternViewController.this.updateLayout$2();
             }
 
@@ -461,68 +461,51 @@ public class KeyguardSecPatternViewController extends KeyguardPatternViewControl
                 keyguardSecPatternViewController.disableDevicePermanently$1();
             }
 
-            /* JADX WARN: Removed duplicated region for block: B:10:0x0047 A[SYNTHETIC] */
-            /* JADX WARN: Removed duplicated region for block: B:14:0x001d A[SYNTHETIC] */
+            /* JADX WARN: Removed duplicated region for block: B:19:0x0047 A[SYNTHETIC] */
+            /* JADX WARN: Removed duplicated region for block: B:22:0x001d A[SYNTHETIC] */
+            /* JADX WARN: Removed duplicated region for block: B:8:0x0037  */
             @Override // com.android.systemui.knox.KnoxStateMonitorCallback
             /*
                 Code decompiled incorrectly, please refer to instructions dump.
-                To view partially-correct code enable 'Show inconsistent code' option in preferences
             */
             public final void onDisableProfileWhenReachMaxFailed() {
-                /*
-                    r7 = this;
-                    com.android.keyguard.KeyguardSecPatternViewController r7 = com.android.keyguard.KeyguardSecPatternViewController.this
-                    r7.getClass()
-                    java.lang.String r0 = "KeyguardSecPatternViewController"
-                    java.lang.String r1 = "disableProfilePermanently"
-                    android.util.Log.d(r0, r1)
-                    com.android.systemui.knox.KnoxStateMonitor r7 = r7.mKnoxStateMonitor
-                    com.android.systemui.knox.KnoxStateMonitorImpl r7 = (com.android.systemui.knox.KnoxStateMonitorImpl) r7
-                    java.util.List r0 = r7.getContainerIds()
-                    java.util.ArrayList r0 = (java.util.ArrayList) r0
-                    int r1 = r0.size()
-                    r2 = 0
-                    r3 = -1
-                    r4 = r2
-                L1d:
-                    if (r4 >= r1) goto L49
-                    java.lang.Object r5 = r0.get(r4)
-                    int r4 = r4 + 1
-                    java.lang.Integer r5 = (java.lang.Integer) r5
-                    int r5 = r5.intValue()
-                    boolean r6 = r7.isPersona(r5)
-                    if (r6 == 0) goto L1d
-                    boolean r6 = com.android.systemui.util.DeviceState.isTesting()
-                    if (r6 == 0) goto L39
-                L37:
-                    r6 = r2
-                    goto L45
-                L39:
-                    com.android.systemui.knox.ContainerMonitor r6 = r7.mContainerMonitor
-                    r6.getClass()
-                    if (r5 != 0) goto L41
-                    goto L37
-                L41:
-                    boolean r6 = com.samsung.android.knox.SemPersonaManager.isSecureFolderId(r5)
-                L45:
-                    if (r6 != 0) goto L1d
-                    r3 = r5
-                    goto L1d
-                L49:
-                    android.os.Bundle r7 = new android.os.Bundle
-                    r7.<init>()
-                    java.lang.String r0 = "android.intent.extra.user_handle"
-                    r7.putInt(r0, r3)
-                    java.lang.String r0 = "knox.container.proxy.POLICY_ADMIN_LOCK"
-                    com.samsung.android.knox.ContainerProxy.sendPolicyUpdate(r0, r7)
-                    return
-                */
-                throw new UnsupportedOperationException("Method not decompiled: com.android.keyguard.KeyguardSecPatternViewController.AnonymousClass4.onDisableProfileWhenReachMaxFailed():void");
+                boolean zIsSecureFolderId;
+                KeyguardSecPatternViewController keyguardSecPatternViewController = KeyguardSecPatternViewController.this;
+                keyguardSecPatternViewController.getClass();
+                android.util.Log.d("KeyguardSecPatternViewController", "disableProfilePermanently");
+                KnoxStateMonitorImpl knoxStateMonitorImpl = (KnoxStateMonitorImpl) keyguardSecPatternViewController.mKnoxStateMonitor;
+                ArrayList arrayList = (ArrayList) knoxStateMonitorImpl.getContainerIds();
+                int size = arrayList.size();
+                int i = -1;
+                int i2 = 0;
+                while (i2 < size) {
+                    Object obj = arrayList.get(i2);
+                    i2++;
+                    int iIntValue = ((Integer) obj).intValue();
+                    if (knoxStateMonitorImpl.isPersona(iIntValue)) {
+                        if (DeviceState.isTesting()) {
+                            zIsSecureFolderId = false;
+                            if (zIsSecureFolderId) {
+                                i = iIntValue;
+                            }
+                        } else {
+                            knoxStateMonitorImpl.mContainerMonitor.getClass();
+                            if (iIntValue != 0) {
+                                zIsSecureFolderId = SemPersonaManager.isSecureFolderId(iIntValue);
+                            }
+                            if (zIsSecureFolderId) {
+                            }
+                        }
+                    }
+                }
+                Bundle bundle = new Bundle();
+                bundle.putInt("android.intent.extra.user_handle", i);
+                ContainerProxy.sendPolicyUpdate("knox.container.proxy.POLICY_ADMIN_LOCK", bundle);
             }
         };
         this.mDisplayListener = new DisplayLifecycle.Observer() { // from class: com.android.keyguard.KeyguardSecPatternViewController.5
             @Override // com.android.systemui.keyguard.DisplayLifecycle.Observer
-            public final void onFolderStateChanged(boolean z) {
+            public final void onFolderStateChanged(boolean z) throws Resources.NotFoundException {
                 KeyguardSecPatternViewController.this.reset$1();
             }
         };
@@ -604,7 +587,7 @@ public class KeyguardSecPatternViewController extends KeyguardPatternViewControl
 
     /* JADX WARN: Type inference failed for: r2v0, types: [android.os.CountDownTimer, com.android.keyguard.KeyguardSecPatternViewController$2] */
     @Override // com.android.keyguard.KeyguardPatternViewController
-    public final void handleAttemptLockout(long j) {
+    public final void handleAttemptLockout(long j) throws Resources.NotFoundException {
         this.mLockPatternView.clearPattern();
         this.mLockPatternView.setEnabled(false);
         this.mLockPatternView.setVisibility(4);
@@ -626,7 +609,7 @@ public class KeyguardSecPatternViewController extends KeyguardPatternViewControl
         }
         ?? r2 = new SecCountDownTimer(j - SystemClock.elapsedRealtime(), 1000L, getContext(), this.mSelectedUserInteractor, ((KeyguardPatternViewController) this).mKeyguardUpdateMonitor, this.mKeyguardTextBuilder, true) { // from class: com.android.keyguard.KeyguardSecPatternViewController.2
             @Override // com.android.keyguard.SecCountDownTimer, android.os.CountDownTimer
-            public final void onFinish() {
+            public final void onFinish() throws Resources.NotFoundException {
                 android.util.Log.d("KeyguardSecPatternViewController", "handleAttemptLockout onFinish");
                 int selectedUserId = KeyguardSecPatternViewController.this.mSelectedUserInteractor.getSelectedUserId();
                 if (KeyguardSecPatternViewController.this.isHintText$1()) {
@@ -651,10 +634,10 @@ public class KeyguardSecPatternViewController extends KeyguardPatternViewControl
             }
 
             @Override // com.android.keyguard.SecCountDownTimer, android.os.CountDownTimer
-            public final void onTick(long j2) {
-                int round = (int) Math.round(j2 / 1000.0d);
+            public final void onTick(long j2) throws Resources.NotFoundException {
+                int iRound = (int) Math.round(j2 / 1000.0d);
                 if (((KeyguardPatternViewController) KeyguardSecPatternViewController.this).mKeyguardUpdateMonitor.isHiddenInputContainer()) {
-                    KeyguardSecPatternViewController.this.mSecondsRemaining = round;
+                    KeyguardSecPatternViewController.this.mSecondsRemaining = iRound;
                 }
                 super.onTick(j2);
                 String str = this.mTimerText;
@@ -679,7 +662,7 @@ public class KeyguardSecPatternViewController extends KeyguardPatternViewControl
     }
 
     @Override // com.android.keyguard.KeyguardPatternViewController, com.android.keyguard.KeyguardInputViewController
-    public final void onResume(int i) {
+    public final void onResume(int i) throws Resources.NotFoundException {
         this.mPaused = false;
         if (DeviceState.isTesting()) {
             return;
@@ -688,7 +671,7 @@ public class KeyguardSecPatternViewController extends KeyguardPatternViewControl
     }
 
     @Override // com.android.keyguard.KeyguardPatternViewController, com.android.keyguard.KeyguardInputViewController, com.android.systemui.util.ViewController
-    public final void onViewAttached() {
+    public final void onViewAttached() throws Resources.NotFoundException {
         super.onViewAttached();
         this.mCurrentOrientation = getContext().getResources().getConfiguration().orientation;
         ((ConfigurationControllerImpl) this.mConfigurationController).addCallback(this.mConfigurationListener);
@@ -715,7 +698,7 @@ public class KeyguardSecPatternViewController extends KeyguardPatternViewControl
     }
 
     @Override // com.android.keyguard.KeyguardPatternViewController, com.android.keyguard.KeyguardInputViewController
-    public final void reset$1() {
+    public final void reset$1() throws Resources.NotFoundException {
         SelectedUserInteractor selectedUserInteractor = this.mSelectedUserInteractor;
         this.mLockPatternView.setInStealthMode(!this.mLockPatternUtils.isVisiblePatternEnabled(selectedUserInteractor.getSelectedUserId()));
         this.mLockPatternView.enableInput();
@@ -724,14 +707,14 @@ public class KeyguardSecPatternViewController extends KeyguardPatternViewControl
         updateLayout$2();
         KeyguardUpdateMonitor keyguardUpdateMonitor = ((KeyguardPatternViewController) this).mKeyguardUpdateMonitor;
         long lockoutAttemptDeadline = keyguardUpdateMonitor.getLockoutAttemptDeadline();
-        boolean isDualDarInnerAuthRequired = keyguardUpdateMonitor.isDualDarInnerAuthRequired(selectedUserInteractor.getSelectedUserId());
+        boolean zIsDualDarInnerAuthRequired = keyguardUpdateMonitor.isDualDarInnerAuthRequired(selectedUserInteractor.getSelectedUserId());
         KnoxStateMonitor knoxStateMonitor = this.mKnoxStateMonitor;
-        if (isDualDarInnerAuthRequired) {
+        if (zIsDualDarInnerAuthRequired) {
             long dualDarInnerLockoutAttemptDeadline$1 = ((KnoxStateMonitorImpl) knoxStateMonitor).getDualDarInnerLockoutAttemptDeadline$1();
             if (dualDarInnerLockoutAttemptDeadline$1 != 0 && dualDarInnerLockoutAttemptDeadline$1 > lockoutAttemptDeadline) {
-                StringBuilder m = SnapshotStateObserver$$ExternalSyntheticOutline0.m("reset() switch to inner deadline. deadline = ", lockoutAttemptDeadline, ", innerDeadline = ");
-                m.append(dualDarInnerLockoutAttemptDeadline$1);
-                android.util.Log.d("KeyguardSecPatternViewController", m.toString());
+                StringBuilder sbM = SnapshotStateObserver$$ExternalSyntheticOutline0.m("reset() switch to inner deadline. deadline = ", lockoutAttemptDeadline, ", innerDeadline = ");
+                sbM.append(dualDarInnerLockoutAttemptDeadline$1);
+                android.util.Log.d("KeyguardSecPatternViewController", sbM.toString());
                 lockoutAttemptDeadline = dualDarInnerLockoutAttemptDeadline$1;
             }
         }
@@ -741,9 +724,9 @@ public class KeyguardSecPatternViewController extends KeyguardPatternViewControl
             return;
         }
         knoxStateMonitorImpl.isDisableDeviceByMultifactor();
-        boolean shouldLockout = shouldLockout(lockoutAttemptDeadline);
+        boolean zShouldLockout = shouldLockout(lockoutAttemptDeadline);
         KeyguardHintTextArea keyguardHintTextArea = this.mHintText;
-        if (shouldLockout) {
+        if (zShouldLockout) {
             if (isHintText$1()) {
                 keyguardHintTextArea.setVisibility(8);
             }
@@ -825,9 +808,9 @@ public class KeyguardSecPatternViewController extends KeyguardPatternViewControl
             if (keyguardUpdateMonitor.isDualDarInnerAuthRequired(this.mSelectedUserInteractor.getSelectedUserId())) {
                 long dualDarInnerLockoutAttemptDeadline$1 = ((KnoxStateMonitorImpl) this.mKnoxStateMonitor).getDualDarInnerLockoutAttemptDeadline$1();
                 if (dualDarInnerLockoutAttemptDeadline$1 != 0 && dualDarInnerLockoutAttemptDeadline$1 > lockoutAttemptDeadline) {
-                    StringBuilder m = SnapshotStateObserver$$ExternalSyntheticOutline0.m("showPromptReason() switch to inner deadline. deadline = ", lockoutAttemptDeadline, ", innerDeadline = ");
-                    m.append(dualDarInnerLockoutAttemptDeadline$1);
-                    android.util.Log.d("KeyguardSecPatternViewController", m.toString());
+                    StringBuilder sbM = SnapshotStateObserver$$ExternalSyntheticOutline0.m("showPromptReason() switch to inner deadline. deadline = ", lockoutAttemptDeadline, ", innerDeadline = ");
+                    sbM.append(dualDarInnerLockoutAttemptDeadline$1);
+                    android.util.Log.d("KeyguardSecPatternViewController", sbM.toString());
                     lockoutAttemptDeadline = dualDarInnerLockoutAttemptDeadline$1;
                 }
             }
@@ -873,10 +856,10 @@ public class KeyguardSecPatternViewController extends KeyguardPatternViewControl
         springAnimation2.mValue = 0.7f;
         springAnimation2.mStartValueIsSet = true;
         springAnimation2.start();
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this.mBottomView, (Property<LinearLayout, Float>) View.ALPHA, 0.0f, 1.0f);
-        KeyguardSecPatternViewController$$ExternalSyntheticOutline0.m(0.17f, 0.17f, 0.4f, 1.0f, ofFloat);
-        ofFloat.setDuration(300L);
-        ofFloat.start();
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this.mBottomView, (Property<LinearLayout, Float>) View.ALPHA, 0.0f, 1.0f);
+        KeyguardSecPatternViewController$$ExternalSyntheticOutline0.m(0.17f, 0.17f, 0.4f, 1.0f, objectAnimatorOfFloat);
+        objectAnimatorOfFloat.setDuration(300L);
+        objectAnimatorOfFloat.start();
     }
 
     @Override // com.android.keyguard.KeyguardPatternViewController, com.android.keyguard.KeyguardInputViewController
@@ -887,13 +870,13 @@ public class KeyguardSecPatternViewController extends KeyguardPatternViewControl
         return true;
     }
 
-    public final void updateLayout$2() {
+    public final void updateLayout$2() throws Resources.NotFoundException {
         KeyguardSecMessageAreaController keyguardSecMessageAreaController;
         int rotation = DeviceState.shouldEnableKeyguardScreenRotation(getContext()) ? DeviceState.getRotation(getResources().getConfiguration().windowConfiguration.getRotation()) : 0;
         this.mCurrentRotation = rotation;
-        boolean isTablet = DeviceType.isTablet();
+        boolean zIsTablet = DeviceType.isTablet();
         KeyguardSecMessageAreaController keyguardSecMessageAreaController2 = this.mMessageAreaController;
-        if (isTablet) {
+        if (zIsTablet) {
             Resources resources = getResources();
             LinearLayout linearLayout = this.mBottomView;
             if (linearLayout != null) {
@@ -939,16 +922,14 @@ public class KeyguardSecPatternViewController extends KeyguardPatternViewControl
             }
         } else {
             KeyguardUpdateMonitor keyguardUpdateMonitor = ((KeyguardPatternViewController) this).mKeyguardUpdateMonitor;
-            if (keyguardUpdateMonitor.isDualDisplayPolicyAllowed()) {
-                updatePortraitLayout();
-            } else if (rotation == 0 || rotation == 2) {
+            if (keyguardUpdateMonitor.isDualDisplayPolicyAllowed() || rotation == 0 || rotation == 2) {
                 updatePortraitLayout();
             } else {
                 Resources resources2 = getResources();
                 Rect bounds = resources2.getConfiguration().windowConfiguration.getBounds();
-                int max = Math.max(bounds.width(), bounds.height());
-                int min = Math.min(bounds.width(), bounds.height());
-                int calculateLandscapeViewWidth = SecurityUtils.calculateLandscapeViewWidth(max, getContext());
+                int iMax = Math.max(bounds.width(), bounds.height());
+                int iMin = Math.min(bounds.width(), bounds.height());
+                int iCalculateLandscapeViewWidth = SecurityUtils.calculateLandscapeViewWidth(iMax, getContext());
                 int dimensionPixelSize = resources2.getDimensionPixelSize(R.dimen.kg_message_area_padding_side);
                 LinearLayout linearLayout4 = this.mSplitTouchView;
                 if (linearLayout4 != null) {
@@ -961,7 +942,7 @@ public class KeyguardSecPatternViewController extends KeyguardPatternViewControl
                 LockPatternView lockPatternView2 = this.mLockPatternView;
                 if (lockPatternView2 != null && this.mSecurityView != null) {
                     FrameLayout.LayoutParams layoutParams6 = (FrameLayout.LayoutParams) lockPatternView2.getLayoutParams();
-                    int dimensionPixelSize2 = ((min - resources2.getDimensionPixelSize(R.dimen.kg_pattern_lock_pattern_view_margin_bottom)) - resources2.getDimensionPixelSize(R.dimen.keyguard_bottom_area_emergency_button_area_min_height)) - (dimensionPixelSize * 2);
+                    int dimensionPixelSize2 = ((iMin - resources2.getDimensionPixelSize(R.dimen.kg_pattern_lock_pattern_view_margin_bottom)) - resources2.getDimensionPixelSize(R.dimen.keyguard_bottom_area_emergency_button_area_min_height)) - (dimensionPixelSize * 2);
                     layoutParams6.height = dimensionPixelSize2;
                     layoutParams6.width = dimensionPixelSize2;
                     layoutParams6.bottomMargin = resources2.getDimensionPixelSize(R.dimen.kg_pattern_lock_pattern_view_margin_bottom);
@@ -980,10 +961,10 @@ public class KeyguardSecPatternViewController extends KeyguardPatternViewControl
                     LinearLayout.LayoutParams layoutParams8 = (LinearLayout.LayoutParams) this.mContainer.getLayoutParams();
                     this.mMessageArea.setPadding(0, dimensionPixelSize, dimensionPixelSize, dimensionPixelSize);
                     this.mContainer.setPadding(0, dimensionPixelSize, 0, dimensionPixelSize);
-                    layoutParams7.width = calculateLandscapeViewWidth;
+                    layoutParams7.width = iCalculateLandscapeViewWidth;
                     layoutParams7.height = -1;
                     layoutParams7.bottomMargin = 0;
-                    layoutParams8.width = calculateLandscapeViewWidth;
+                    layoutParams8.width = iCalculateLandscapeViewWidth;
                     layoutParams8.height = -1;
                     this.mContainer.setGravity(17);
                     this.mContainer.setVisibility(0);
@@ -1026,7 +1007,7 @@ public class KeyguardSecPatternViewController extends KeyguardPatternViewControl
         }
     }
 
-    public final void updateLayoutForAttemptRemainingBeforeWipe$1() {
+    public final void updateLayoutForAttemptRemainingBeforeWipe$1() throws Resources.NotFoundException {
         int dimensionPixelSize;
         int dimensionPixelSize2;
         int i = this.mSecondsRemaining;
@@ -1046,9 +1027,9 @@ public class KeyguardSecPatternViewController extends KeyguardPatternViewControl
                 Rect bounds = resources.getConfiguration().windowConfiguration.getBounds();
                 int i2 = this.mCurrentRotation;
                 boolean z = i2 == 0 || i2 == 2;
-                int width = bounds.width();
-                int height = bounds.height();
-                int max = z ? Math.max(width, height) : Math.min(width, height);
+                int iWidth = bounds.width();
+                int iHeight = bounds.height();
+                int iMax = z ? Math.max(iWidth, iHeight) : Math.min(iWidth, iHeight);
                 if (DeviceType.isTablet()) {
                     dimensionPixelSize = resources.getDimensionPixelSize(R.dimen.keyguard_bottom_area_emergency_button_area_min_height_tablet);
                     dimensionPixelSize2 = resources.getDimensionPixelSize(R.dimen.kg_pattern_eca_margin_bottom_tablet);
@@ -1057,10 +1038,10 @@ public class KeyguardSecPatternViewController extends KeyguardPatternViewControl
                     dimensionPixelSize2 = resources.getDimensionPixelSize(R.dimen.kg_pattern_eca_margin_bottom);
                 }
                 int i3 = dimensionPixelSize2 + dimensionPixelSize;
-                int dimensionPixelSize3 = getResources().getDimensionPixelSize(android.R.dimen.secondary_waterfall_display_left_edge_size);
+                int dimensionPixelSize3 = getResources().getDimensionPixelSize(android.R.dimen.secondary_waterfall_display_right_edge_size);
                 LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) this.mMessageArea.getLayoutParams();
                 layoutParams.width = -1;
-                layoutParams.height = (max - i3) - dimensionPixelSize3;
+                layoutParams.height = (iMax - i3) - dimensionPixelSize3;
                 if (z) {
                     dimensionPixelSize3 = resources.getDimensionPixelSize(R.dimen.kg_message_area_padding_side);
                 }
@@ -1090,7 +1071,7 @@ public class KeyguardSecPatternViewController extends KeyguardPatternViewControl
         }
     }
 
-    public final void updatePortraitLayout() {
+    public final void updatePortraitLayout() throws Resources.NotFoundException {
         KeyguardSecMessageAreaController keyguardSecMessageAreaController;
         int dimensionPixelSize;
         Resources resources = getResources();
@@ -1111,7 +1092,7 @@ public class KeyguardSecPatternViewController extends KeyguardPatternViewControl
             layoutParams2.width = resources.getDimensionPixelSize(R.dimen.kg_pattern_lock_pattern_view_width);
             layoutParams2.height = resources.getDimensionPixelSize(R.dimen.kg_pattern_lock_pattern_view_height);
             if (keyguardUpdateMonitor.isInDisplayFingerprintMarginAccepted() && DeviceState.isInDisplayFpSensorPositionHigh() && this.mSecondsRemaining == -1) {
-                int dimensionPixelSize2 = ((resources.getDimensionPixelSize(R.dimen.kg_pattern_lock_pattern_view_margin_bottom) + DeviceState.getInDisplayFingerprintHeight()) - resources.getDimensionPixelSize(R.dimen.kg_pattern_eca_margin_bottom)) - resources.getDimensionPixelSize(android.R.dimen.secondary_waterfall_display_left_edge_size);
+                int dimensionPixelSize2 = ((resources.getDimensionPixelSize(R.dimen.kg_pattern_lock_pattern_view_margin_bottom) + DeviceState.getInDisplayFingerprintHeight()) - resources.getDimensionPixelSize(R.dimen.kg_pattern_eca_margin_bottom)) - resources.getDimensionPixelSize(android.R.dimen.secondary_waterfall_display_right_edge_size);
                 View view = this.mEcaView;
                 dimensionPixelSize = dimensionPixelSize2 - ((view == null || view.findViewById(R.id.emergency_call_button).getVisibility() != 0) ? 0 : resources.getDimensionPixelSize(R.dimen.keyguard_bottom_area_emergency_button_area_min_height));
             } else {
@@ -1150,7 +1131,7 @@ public class KeyguardSecPatternViewController extends KeyguardPatternViewControl
         View view2 = this.mEcaView;
         if (view2 != null) {
             ViewGroup.MarginLayoutParams marginLayoutParams2 = (ViewGroup.MarginLayoutParams) view2.getLayoutParams();
-            marginLayoutParams2.setMargins(marginLayoutParams2.leftMargin, marginLayoutParams2.topMargin, marginLayoutParams2.rightMargin, resources.getDimensionPixelSize(R.dimen.kg_pattern_eca_margin_bottom));
+            marginLayoutParams2.setMargins(marginLayoutParams2.leftMargin, marginLayoutParams2.topMargin, marginLayoutParams2.rightMargin, this.mCurrentOrientation == 1 ? resources.getDimensionPixelSize(R.dimen.kg_pattern_eca_margin_bottom) : 0);
             this.mEcaView.setLayoutParams(marginLayoutParams2);
             this.mEcaView.setVisibility(0);
             this.mEmergencyButtonController.setEmergencyView(this.mEcaView.findViewById(R.id.emergency_call_button));
@@ -1174,7 +1155,7 @@ public class KeyguardSecPatternViewController extends KeyguardPatternViewControl
             this.mBackgroundExecutor.execute(new Runnable() { // from class: com.android.keyguard.KeyguardSecPatternViewController$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    final KeyguardSecPatternViewController keyguardSecPatternViewController = KeyguardSecPatternViewController.this;
+                    final KeyguardSecPatternViewController keyguardSecPatternViewController = this.f$0;
                     SemWallpaperColors semWallpaperColors2 = semWallpaperColors;
                     final long j2 = j;
                     keyguardSecPatternViewController.getClass();
@@ -1184,7 +1165,7 @@ public class KeyguardSecPatternViewController extends KeyguardPatternViewControl
                         keyguardSecPatternViewController.getContext().getMainExecutor().execute(new Runnable() { // from class: com.android.keyguard.KeyguardSecPatternViewController$$ExternalSyntheticLambda3
                             @Override // java.lang.Runnable
                             public final void run() {
-                                KeyguardSecPatternViewController keyguardSecPatternViewController2 = KeyguardSecPatternViewController.this;
+                                KeyguardSecPatternViewController keyguardSecPatternViewController2 = keyguardSecPatternViewController;
                                 long j3 = j2;
                                 ((SecLockPatternView) keyguardSecPatternViewController2.mLockPatternView).updateViewStyle(colorThemeColor, j3);
                             }

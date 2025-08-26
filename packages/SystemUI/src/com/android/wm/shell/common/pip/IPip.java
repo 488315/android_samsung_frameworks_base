@@ -10,7 +10,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.view.SurfaceControl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public interface IPip extends IInterface {
     void abortSwipePipToHome(int i, ComponentName componentName);
@@ -29,7 +28,6 @@ public interface IPip extends IInterface {
 
     void stopSwipePipToHome(int i, ComponentName componentName, Rect rect, SurfaceControl surfaceControl, Rect rect2, Rect rect3);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IPip {
         public Stub() {
             attachInterface(this, "com.android.wm.shell.common.pip.IPip");
@@ -48,15 +46,15 @@ public interface IPip extends IInterface {
             switch (i) {
                 case 2:
                     ActivityManager.RunningTaskInfo runningTaskInfo = (ActivityManager.RunningTaskInfo) parcel.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     Rect rect = (Rect) parcel.readTypedObject(Rect.CREATOR);
                     parcel.enforceNoDataAvail();
-                    Rect startSwipePipToHome = startSwipePipToHome(runningTaskInfo, readInt, rect);
+                    Rect rectStartSwipePipToHome = startSwipePipToHome(runningTaskInfo, i3, rect);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(startSwipePipToHome, 1);
+                    parcel2.writeTypedObject(rectStartSwipePipToHome, 1);
                     return true;
                 case 3:
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     ComponentName componentName = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
                     Parcelable.Creator creator = Rect.CREATOR;
                     Rect rect2 = (Rect) parcel.readTypedObject(creator);
@@ -64,44 +62,44 @@ public interface IPip extends IInterface {
                     Rect rect3 = (Rect) parcel.readTypedObject(creator);
                     Rect rect4 = (Rect) parcel.readTypedObject(creator);
                     parcel.enforceNoDataAvail();
-                    stopSwipePipToHome(readInt2, componentName, rect2, surfaceControl, rect3, rect4);
+                    stopSwipePipToHome(i4, componentName, rect2, surfaceControl, rect3, rect4);
                     return true;
                 case 4:
-                    int readInt3 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     ComponentName componentName2 = (ComponentName) parcel.readTypedObject(ComponentName.CREATOR);
                     parcel.enforceNoDataAvail();
-                    abortSwipePipToHome(readInt3, componentName2);
+                    abortSwipePipToHome(i5, componentName2);
                     return true;
                 case 5:
-                    IBinder readStrongBinder = parcel.readStrongBinder();
-                    if (readStrongBinder == null) {
+                    IBinder strongBinder = parcel.readStrongBinder();
+                    if (strongBinder == null) {
                         iPipAnimationListener$Stub$Proxy = null;
                     } else {
-                        IInterface queryLocalInterface = readStrongBinder.queryLocalInterface("com.android.wm.shell.common.pip.IPipAnimationListener");
-                        iPipAnimationListener$Stub$Proxy = (queryLocalInterface == null || !(queryLocalInterface instanceof IPipAnimationListener$Stub$Proxy)) ? new IPipAnimationListener$Stub$Proxy(readStrongBinder) : (IPipAnimationListener$Stub$Proxy) queryLocalInterface;
+                        IInterface iInterfaceQueryLocalInterface = strongBinder.queryLocalInterface("com.android.wm.shell.common.pip.IPipAnimationListener");
+                        iPipAnimationListener$Stub$Proxy = (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IPipAnimationListener$Stub$Proxy)) ? new IPipAnimationListener$Stub$Proxy(strongBinder) : (IPipAnimationListener$Stub$Proxy) iInterfaceQueryLocalInterface;
                     }
                     parcel.enforceNoDataAvail();
                     setPipAnimationListener(iPipAnimationListener$Stub$Proxy);
                     return true;
                 case 6:
-                    boolean readBoolean = parcel.readBoolean();
-                    int readInt4 = parcel.readInt();
+                    boolean z = parcel.readBoolean();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setShelfHeight(readInt4, readBoolean);
+                    setShelfHeight(i6, z);
                     return true;
                 case 7:
                     setPipAnimationTypeToAlpha();
                     return true;
                 case 8:
-                    boolean readBoolean2 = parcel.readBoolean();
-                    int readInt5 = parcel.readInt();
+                    boolean z2 = parcel.readBoolean();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setLauncherKeepClearAreaHeight(readInt5, readBoolean2);
+                    setLauncherKeepClearAreaHeight(i7, z2);
                     return true;
                 case 9:
-                    int readInt6 = parcel.readInt();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setLauncherAppIconSize(readInt6);
+                    setLauncherAppIconSize(i8);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);

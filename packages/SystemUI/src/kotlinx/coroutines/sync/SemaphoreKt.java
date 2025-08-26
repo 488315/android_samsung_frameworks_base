@@ -3,7 +3,6 @@ package kotlinx.coroutines.sync;
 import kotlinx.coroutines.internal.Symbol;
 import kotlinx.coroutines.internal.SystemPropsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class SemaphoreKt {
     public static final int MAX_SPIN_CYCLES = SystemPropsKt.systemProp$default(100, 12, "kotlinx.coroutines.semaphore.maxSpinCycles");

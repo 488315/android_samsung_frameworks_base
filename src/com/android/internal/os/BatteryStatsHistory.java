@@ -24,6 +24,7 @@ import com.android.internal.os.PowerStats;
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayDeque;
@@ -196,12 +197,12 @@ public class BatteryStatsHistory {
             if (this.mParcelReadyForReading) {
                 return this.mParcel;
             }
-            Parcel obtain = Parcel.obtain();
-            if (BatteryStatsHistory.this.readFragmentToParcel(obtain, this.mFragment)) {
-                obtain.readInt();
-                this.mParcel = obtain;
+            Parcel parcelObtain = Parcel.obtain();
+            if (BatteryStatsHistory.this.readFragmentToParcel(parcelObtain, this.mFragment)) {
+                parcelObtain.readInt();
+                this.mParcel = parcelObtain;
             } else {
-                obtain.recycle();
+                parcelObtain.recycle();
             }
             this.mParcelReadyForReading = true;
             return this.mParcel;
@@ -326,10 +327,10 @@ public class BatteryStatsHistory {
         this.mEventLogger = new EventLogger();
         this.mWritableHistory = null;
         this.mMutable = false;
-        byte[] readBlob = parcel.readBlob();
-        Parcel obtain = Parcel.obtain();
-        this.mHistoryBuffer = obtain;
-        obtain.unmarshall(readBlob, 0, readBlob.length);
+        byte[] blob = parcel.readBlob();
+        Parcel parcelObtain = Parcel.obtain();
+        this.mHistoryBuffer = parcelObtain;
+        parcelObtain.unmarshall(blob, 0, blob.length);
         this.mMonotonicClock = null;
         readFromParcel(parcel, true);
     }
@@ -355,18 +356,18 @@ public class BatteryStatsHistory {
     }
 
     public int getEstimatedItemCount() {
-        int dataSize = this.mHistoryBuffer.dataSize();
+        int iDataSize = this.mHistoryBuffer.dataSize();
         BatteryHistoryStore batteryHistoryStore = this.mStore;
         if (batteryHistoryStore != null) {
-            dataSize += batteryHistoryStore.getMaxHistorySize() * 10;
+            iDataSize += batteryHistoryStore.getMaxHistorySize() * 10;
         }
         List<Parcel> list = this.mHistoryParcels;
         if (list != null) {
             for (int size = list.size() - 1; size >= 0; size--) {
-                dataSize += this.mHistoryParcels.get(size).dataSize();
+                iDataSize += this.mHistoryParcels.get(size).dataSize();
             }
         }
-        return dataSize / 4;
+        return iDataSize / 4;
     }
 
     public BatteryStatsHistory copy() {
@@ -375,20 +376,20 @@ public class BatteryStatsHistory {
             try {
                 synchronized (this) {
                     try {
-                        Parcel obtain = Parcel.obtain();
+                        Parcel parcelObtain = Parcel.obtain();
                         Parcel parcel = this.mHistoryBuffer;
-                        obtain.appendFrom(parcel, 0, parcel.dataSize());
-                        return new BatteryStatsHistory(obtain, 0, this.mStore, null, null, null, this.mEventLogger, this);
+                        parcelObtain.appendFrom(parcel, 0, parcel.dataSize());
+                        return new BatteryStatsHistory(parcelObtain, 0, this.mStore, null, null, null, this.mEventLogger, this);
                     } catch (Throwable th) {
                         th = th;
                         throw th;
                     }
                 }
-            } catch (Throwable th2) {
-                th = th2;
+            } finally {
+                Trace.traceEnd(524288L);
             }
-        } finally {
-            Trace.traceEnd(524288L);
+        } catch (Throwable th2) {
+            th = th2;
         }
     }
 
@@ -409,9 +410,9 @@ public class BatteryStatsHistory {
     private void startNextFragmentLocked(long j) {
         SystemClock.uptimeMillis();
         writeHistory(true);
-        long monotonicTime = this.mMonotonicClock.monotonicTime(j);
-        setActiveFragment(this.mStore.createFragment(monotonicTime));
-        this.mHistoryBufferStartTime = monotonicTime;
+        long jMonotonicTime = this.mMonotonicClock.monotonicTime(j);
+        setActiveFragment(this.mStore.createFragment(jMonotonicTime));
+        this.mHistoryBufferStartTime = jMonotonicTime;
         this.mHistoryBuffer.setDataSize(0);
         this.mHistoryBuffer.setDataPosition(0);
         this.mHistoryBuffer.setDataCapacity(this.mMaxHistoryBufferSize / 2);
@@ -463,9 +464,9 @@ public class BatteryStatsHistory {
             batteryHistoryStore.lock();
         }
         BatteryStatsHistoryIterator batteryStatsHistoryIterator = new BatteryStatsHistoryIterator(this, j, j2);
-        int identityHashCode = System.identityHashCode(batteryStatsHistoryIterator);
-        this.mIteratorCookie = identityHashCode;
-        Trace.asyncTraceBegin(524288L, "BatteryStatsHistory.iterate", identityHashCode);
+        int iIdentityHashCode = System.identityHashCode(batteryStatsHistoryIterator);
+        this.mIteratorCookie = iIdentityHashCode;
+        Trace.asyncTraceBegin(524288L, "BatteryStatsHistory.iterate", iIdentityHashCode);
         return batteryStatsHistoryIterator;
     }
 
@@ -505,11 +506,11 @@ public class BatteryStatsHistory {
             for (int i2 = 0; i2 < this.mHistoryParcels.size(); i2++) {
                 Parcel parcel = this.mHistoryParcels.get(i2);
                 if (verifyVersion(parcel)) {
-                    long readLong = parcel.readLong();
-                    if (readLong < j2 && parcel.readLong() >= j) {
+                    long j3 = parcel.readLong();
+                    if (j3 < j2 && parcel.readLong() >= j) {
                         parcel.readLong();
                         parcel.readInt();
-                        arrayDeque.add(new BatteryHistoryParcelContainer(parcel, readLong));
+                        arrayDeque.add(new BatteryHistoryParcelContainer(parcel, j3));
                     }
                 }
             }
@@ -522,11 +523,11 @@ public class BatteryStatsHistory {
     }
 
     public boolean readFragmentToParcel(Parcel parcel, BatteryHistoryFragment batteryHistoryFragment) {
-        byte[] readFragment = this.mStore.readFragment(batteryHistoryFragment);
-        if (readFragment == null || readFragment.length == 0) {
+        byte[] fragment = this.mStore.readFragment(batteryHistoryFragment);
+        if (fragment == null || fragment.length == 0) {
             return false;
         }
-        parcel.unmarshall(readFragment, 0, readFragment.length);
+        parcel.unmarshall(fragment, 0, fragment.length);
         parcel.setDataPosition(0);
         if (!verifyVersion(parcel)) {
             return false;
@@ -556,25 +557,25 @@ public class BatteryStatsHistory {
         }
     }
 
-    public void readSummaryFromParcel(Parcel parcel) {
+    public void readSummaryFromParcel(Parcel parcel) throws ParcelFormatException {
         if (parcel.readBoolean()) {
             readFromParcel(parcel);
         }
         this.mHistoryTagPool.clear();
         this.mNextHistoryTagIdx = 0;
         this.mNumHistoryTagChars = 0;
-        int readInt = parcel.readInt();
-        for (int i = 0; i < readInt; i++) {
-            int readInt2 = parcel.readInt();
-            String readString = parcel.readString();
-            int readInt3 = parcel.readInt();
+        int i = parcel.readInt();
+        for (int i2 = 0; i2 < i; i2++) {
+            int i3 = parcel.readInt();
+            String string = parcel.readString();
+            int i4 = parcel.readInt();
             BatteryStats.HistoryTag historyTag = new BatteryStats.HistoryTag();
-            historyTag.string = readString;
-            historyTag.uid = readInt3;
-            historyTag.poolIdx = readInt2;
-            this.mHistoryTagPool.put(historyTag, Integer.valueOf(readInt2));
-            if (readInt2 >= this.mNextHistoryTagIdx) {
-                this.mNextHistoryTagIdx = readInt2 + 1;
+            historyTag.string = string;
+            historyTag.uid = i4;
+            historyTag.poolIdx = i3;
+            this.mHistoryTagPool.put(historyTag, Integer.valueOf(i3));
+            if (i3 >= this.mNextHistoryTagIdx) {
+                this.mNextHistoryTagIdx = i3 + 1;
             }
             this.mNumHistoryTagChars += historyTag.string.length() + 1;
         }
@@ -607,15 +608,15 @@ public class BatteryStatsHistory {
             int i = 0;
             while (i < fragments.size() - 1) {
                 if ((i < fragments.size() - 1 ? fragments.get(i + 1).monotonicTimeMs : Long.MAX_VALUE) >= j) {
-                    byte[] readFragment = this.mStore.readFragment(fragments.get(i));
-                    if (readFragment == null) {
+                    byte[] fragment = this.mStore.readFragment(fragments.get(i));
+                    if (fragment == null) {
                         Slog.e(TAG, "Error reading history fragment " + fragments.get(i));
-                    } else if (readFragment.length != 0) {
+                    } else if (fragment.length != 0) {
                         parcel.writeBoolean(true);
                         if (z) {
-                            parcel.writeBlob(readFragment, 0, readFragment.length);
+                            parcel.writeBlob(fragment, 0, fragment.length);
                         } else {
-                            parcel.writeByteArray(readFragment, 0, readFragment.length);
+                            parcel.writeByteArray(fragment, 0, fragment.length);
                         }
                     }
                 }
@@ -637,29 +638,29 @@ public class BatteryStatsHistory {
             Slog.w(TAG, "readSummary: no history file associated with this instance");
             return false;
         }
-        Parcel obtain = Parcel.obtain();
+        Parcel parcelObtain = Parcel.obtain();
         try {
-            byte[] readFragment = this.mStore.readFragment(this.mActiveFragment);
-            if (readFragment == null) {
+            byte[] fragment = this.mStore.readFragment(this.mActiveFragment);
+            if (fragment == null) {
                 return false;
             }
-            if (readFragment.length > 0) {
-                obtain.unmarshall(readFragment, 0, readFragment.length);
-                obtain.setDataPosition(0);
-                readHistoryBuffer(obtain);
+            if (fragment.length > 0) {
+                parcelObtain.unmarshall(fragment, 0, fragment.length);
+                parcelObtain.setDataPosition(0);
+                readHistoryBuffer(parcelObtain);
             }
-            obtain.recycle();
+            parcelObtain.recycle();
             return true;
         } catch (Exception e) {
             Slog.e(TAG, "Error reading battery history", e);
             reset();
             return false;
         } finally {
-            obtain.recycle();
+            parcelObtain.recycle();
         }
     }
 
-    public void readFromParcel(Parcel parcel) {
+    public void readFromParcel(Parcel parcel) throws ParcelFormatException {
         readHistoryBuffer(parcel);
         readFromParcel(parcel, false);
     }
@@ -668,12 +669,12 @@ public class BatteryStatsHistory {
         SystemClock.uptimeMillis();
         this.mHistoryParcels = new ArrayList();
         while (parcel.readBoolean()) {
-            byte[] readBlob = z ? parcel.readBlob() : parcel.createByteArray();
-            if (readBlob != null && readBlob.length != 0) {
-                Parcel obtain = Parcel.obtain();
-                obtain.unmarshall(readBlob, 0, readBlob.length);
-                obtain.setDataPosition(0);
-                this.mHistoryParcels.add(obtain);
+            byte[] blob = z ? parcel.readBlob() : parcel.createByteArray();
+            if (blob != null && blob.length != 0) {
+                Parcel parcelObtain = Parcel.obtain();
+                parcelObtain.unmarshall(blob, 0, blob.length);
+                parcelObtain.setDataPosition(0);
+                this.mHistoryParcels.add(parcelObtain);
             }
         }
     }
@@ -717,34 +718,34 @@ public class BatteryStatsHistory {
         }
     }
 
-    public void startRecordingHistory(long j, long j2, boolean z) {
+    public void startRecordingHistory(long j, long j2, boolean z) throws Throwable {
         synchronized (this) {
             try {
-            } catch (Throwable th) {
-                th = th;
-            }
-            try {
-                this.mRecordingHistory = true;
-                this.mHistoryCur.currentTime = this.mClock.currentTimeMillis();
-                writeHistoryItem(j, j2, this.mHistoryCur, z ? (byte) 7 : (byte) 5);
-                this.mHistoryCur.currentTime = 0L;
+                try {
+                    this.mRecordingHistory = true;
+                    this.mHistoryCur.currentTime = this.mClock.currentTimeMillis();
+                    writeHistoryItem(j, j2, this.mHistoryCur, z ? (byte) 7 : (byte) 5);
+                    this.mHistoryCur.currentTime = 0L;
+                } catch (Throwable th) {
+                    th = th;
+                    throw th;
+                }
             } catch (Throwable th2) {
                 th = th2;
-                throw th;
             }
         }
     }
 
-    public void continueRecordingHistory() {
+    public void continueRecordingHistory() throws Throwable {
         synchronized (this) {
             try {
                 try {
                     if (this.mHistoryBuffer.dataPosition() > 0 || this.mStore.hasCompletedFragments()) {
                         this.mRecordingHistory = true;
-                        long elapsedRealtime = this.mClock.elapsedRealtime();
-                        long uptimeMillis = this.mClock.uptimeMillis();
-                        writeHistoryItem(elapsedRealtime, uptimeMillis, this.mHistoryCur, (byte) 4);
-                        startRecordingHistory(elapsedRealtime, uptimeMillis, false);
+                        long jElapsedRealtime = this.mClock.elapsedRealtime();
+                        long jUptimeMillis = this.mClock.uptimeMillis();
+                        writeHistoryItem(jElapsedRealtime, jUptimeMillis, this.mHistoryCur, (byte) 4);
+                        startRecordingHistory(jElapsedRealtime, jUptimeMillis, false);
                     }
                 } catch (Throwable th) {
                     th = th;
@@ -933,7 +934,7 @@ public class BatteryStatsHistory {
         }
     }
 
-    public void recordWakelockStartEvent(long j, long j2, String str, int i) {
+    public void recordWakelockStartEvent(long j, long j2, String str, int i) throws Throwable {
         synchronized (this) {
             try {
                 try {
@@ -970,25 +971,25 @@ public class BatteryStatsHistory {
         }
     }
 
-    public void recordWakelockStopEvent(long j, long j2, String str, int i) {
+    public void recordWakelockStopEvent(long j, long j2, String str, int i) throws Throwable {
         synchronized (this) {
             try {
-            } catch (Throwable th) {
-                th = th;
-            }
-            try {
-                BatteryStats.HistoryItem historyItem = this.mHistoryCur;
-                historyItem.wakelockTag = historyItem.localWakelockTag;
-                BatteryStats.HistoryTag historyTag = this.mHistoryCur.wakelockTag;
-                if (str == null) {
-                    str = "";
+                try {
+                    BatteryStats.HistoryItem historyItem = this.mHistoryCur;
+                    historyItem.wakelockTag = historyItem.localWakelockTag;
+                    BatteryStats.HistoryTag historyTag = this.mHistoryCur.wakelockTag;
+                    if (str == null) {
+                        str = "";
+                    }
+                    historyTag.string = str;
+                    this.mHistoryCur.wakelockTag.uid = i;
+                    recordStateStopEvent(j, j2, 1073741824);
+                } catch (Throwable th) {
+                    th = th;
+                    throw th;
                 }
-                historyTag.string = str;
-                this.mHistoryCur.wakelockTag.uid = i;
-                recordStateStopEvent(j, j2, 1073741824);
             } catch (Throwable th2) {
                 th = th2;
-                throw th;
             }
         }
     }
@@ -1267,20 +1268,20 @@ public class BatteryStatsHistory {
         if (!this.mMutable) {
             throw new ConcurrentModificationException("Battery history is not writable");
         }
-        long monotonicTime = this.mMonotonicClock.monotonicTime(j) - this.mHistoryLastWritten.time;
+        long jMonotonicTime = this.mMonotonicClock.monotonicTime(j) - this.mHistoryLastWritten.time;
         int i = this.mHistoryLastWritten.states ^ historyItem.states;
         int i2 = this.mHistoryLastWritten.states2 ^ historyItem.states2;
         int i3 = this.mHistoryLastWritten.states ^ this.mHistoryLastLastWritten.states;
         int i4 = this.mHistoryLastWritten.states2 ^ this.mHistoryLastLastWritten.states2;
-        if (this.mHistoryBufferLastPos >= 0 && this.mHistoryLastWritten.cmd == 0 && monotonicTime < 1000 && (i & i3) == 0 && (i2 & i4) == 0 && !this.mHistoryLastWritten.tagsFirstOccurrence && !historyItem.tagsFirstOccurrence && ((this.mHistoryLastWritten.wakelockTag == null || historyItem.wakelockTag == null) && ((this.mHistoryLastWritten.wakeReasonTag == null || historyItem.wakeReasonTag == null) && this.mHistoryLastWritten.stepDetails == null && ((this.mHistoryLastWritten.eventCode == 0 || historyItem.eventCode == 0) && this.mHistoryLastWritten.batteryLevel == historyItem.batteryLevel && this.mHistoryLastWritten.batteryStatus == historyItem.batteryStatus && this.mHistoryLastWritten.batteryHealth == historyItem.batteryHealth && this.mHistoryLastWritten.batteryPlugType == historyItem.batteryPlugType && this.mHistoryLastWritten.batteryTemperature == historyItem.batteryTemperature && this.mHistoryLastWritten.batteryVoltage == historyItem.batteryVoltage && this.mHistoryLastWritten.current == historyItem.current && this.mHistoryLastWritten.ap_temp == historyItem.ap_temp && this.mHistoryLastWritten.pa_temp == historyItem.pa_temp && this.mHistoryLastWritten.sub_batt_temp == historyItem.sub_batt_temp && this.mHistoryLastWritten.skin_temp == historyItem.skin_temp && this.mHistoryLastWritten.wifi_ap == historyItem.wifi_ap && this.mHistoryLastWritten.otgOnline == historyItem.otgOnline && this.mHistoryLastWritten.highSpeakerVolume == historyItem.highSpeakerVolume && this.mHistoryLastWritten.subScreenOn == historyItem.subScreenOn && this.mHistoryLastWritten.subScreenDoze == historyItem.subScreenDoze && this.mHistoryLastWritten.batterySecTxShareEvent == historyItem.batterySecTxShareEvent && this.mHistoryLastWritten.batterySecOnline == historyItem.batterySecOnline && this.mHistoryLastWritten.batterySecCurrentEvent == historyItem.batterySecCurrentEvent && this.mHistoryLastWritten.batterySecEvent == historyItem.batterySecEvent && this.mHistoryLastWritten.protectBatteryMode == historyItem.protectBatteryMode && this.mHistoryLastWritten.powerStats == null && this.mHistoryLastWritten.processStateChange == null)))) {
+        if (this.mHistoryBufferLastPos >= 0 && this.mHistoryLastWritten.cmd == 0 && jMonotonicTime < 1000 && (i & i3) == 0 && (i2 & i4) == 0 && !this.mHistoryLastWritten.tagsFirstOccurrence && !historyItem.tagsFirstOccurrence && ((this.mHistoryLastWritten.wakelockTag == null || historyItem.wakelockTag == null) && ((this.mHistoryLastWritten.wakeReasonTag == null || historyItem.wakeReasonTag == null) && this.mHistoryLastWritten.stepDetails == null && ((this.mHistoryLastWritten.eventCode == 0 || historyItem.eventCode == 0) && this.mHistoryLastWritten.batteryLevel == historyItem.batteryLevel && this.mHistoryLastWritten.batteryStatus == historyItem.batteryStatus && this.mHistoryLastWritten.batteryHealth == historyItem.batteryHealth && this.mHistoryLastWritten.batteryPlugType == historyItem.batteryPlugType && this.mHistoryLastWritten.batteryTemperature == historyItem.batteryTemperature && this.mHistoryLastWritten.batteryVoltage == historyItem.batteryVoltage && this.mHistoryLastWritten.current == historyItem.current && this.mHistoryLastWritten.ap_temp == historyItem.ap_temp && this.mHistoryLastWritten.pa_temp == historyItem.pa_temp && this.mHistoryLastWritten.sub_batt_temp == historyItem.sub_batt_temp && this.mHistoryLastWritten.skin_temp == historyItem.skin_temp && this.mHistoryLastWritten.wifi_ap == historyItem.wifi_ap && this.mHistoryLastWritten.otgOnline == historyItem.otgOnline && this.mHistoryLastWritten.highSpeakerVolume == historyItem.highSpeakerVolume && this.mHistoryLastWritten.subScreenOn == historyItem.subScreenOn && this.mHistoryLastWritten.subScreenDoze == historyItem.subScreenDoze && this.mHistoryLastWritten.batterySecTxShareEvent == historyItem.batterySecTxShareEvent && this.mHistoryLastWritten.batterySecOnline == historyItem.batterySecOnline && this.mHistoryLastWritten.batterySecCurrentEvent == historyItem.batterySecCurrentEvent && this.mHistoryLastWritten.batterySecEvent == historyItem.batterySecEvent && this.mHistoryLastWritten.protectBatteryMode == historyItem.protectBatteryMode && this.mHistoryLastWritten.powerStats == null && this.mHistoryLastWritten.processStateChange == null)))) {
             long j3 = this.mMonotonicHistorySize;
-            int dataSize = this.mHistoryBuffer.dataSize();
+            int iDataSize = this.mHistoryBuffer.dataSize();
             int i5 = this.mHistoryBufferLastPos;
-            this.mMonotonicHistorySize = j3 - (dataSize - i5);
+            this.mMonotonicHistorySize = j3 - (iDataSize - i5);
             this.mHistoryBuffer.setDataSize(i5);
             this.mHistoryBuffer.setDataPosition(this.mHistoryBufferLastPos);
             this.mHistoryBufferLastPos = -1;
-            j -= monotonicTime;
+            j -= jMonotonicTime;
             if (this.mHistoryLastWritten.wakelockTag != null) {
                 historyItem.wakelockTag = historyItem.localWakelockTag;
                 historyItem.wakelockTag.setTo(this.mHistoryLastWritten.wakelockTag);
@@ -1316,19 +1317,19 @@ public class BatteryStatsHistory {
         writeHistoryItem(j4, j2, historyItem, (byte) 0);
     }
 
-    private boolean maybeFlushBufferAndWriteHistoryItem(BatteryStats.HistoryItem historyItem, long j, long j2) {
-        int dataSize = this.mHistoryBuffer.dataSize();
+    private boolean maybeFlushBufferAndWriteHistoryItem(BatteryStats.HistoryItem historyItem, long j, long j2) throws Throwable {
+        int iDataSize = this.mHistoryBuffer.dataSize();
         int i = this.mMaxHistoryBufferSize;
-        if (dataSize < i) {
+        if (iDataSize < i) {
             return false;
         }
         if (i == 0) {
             Slog.wtf(TAG, "mMaxHistoryBufferSize should not be zero when writing history");
             this.mMaxHistoryBufferSize = 1024;
         }
-        boolean tryLock = this.mStore.tryLock();
-        if (!tryLock) {
-            if (dataSize < this.mMaxHistoryBufferSize + 100000) {
+        boolean zTryLock = this.mStore.tryLock();
+        if (!zTryLock) {
+            if (iDataSize < this.mMaxHistoryBufferSize + 100000) {
                 return false;
             }
             Slog.wtf(TAG, "History buffer overflow exceeds 100000 bytes");
@@ -1341,7 +1342,7 @@ public class BatteryStatsHistory {
             writeHistoryItem(j, j2, historyItem2, (byte) 0);
             return true;
         } finally {
-            if (tryLock) {
+            if (zTryLock) {
                 this.mStore.unlock();
             }
         }
@@ -1382,32 +1383,32 @@ public class BatteryStatsHistory {
             return;
         }
         long j = historyItem.time - historyItem2.time;
-        int buildBatteryLevelInt = buildBatteryLevelInt(historyItem, historyItem2);
-        int buildStateInt = buildStateInt(historyItem2);
-        int buildCurrentNTemperature = buildCurrentNTemperature(historyItem2);
-        int buildTemperature2 = buildTemperature2(historyItem2);
-        int buildBatterySecInfo = buildBatterySecInfo(historyItem2);
+        int iBuildBatteryLevelInt = buildBatteryLevelInt(historyItem, historyItem2);
+        int iBuildStateInt = buildStateInt(historyItem2);
+        int iBuildCurrentNTemperature = buildCurrentNTemperature(historyItem2);
+        int iBuildTemperature2 = buildTemperature2(historyItem2);
+        int iBuildBatterySecInfo = buildBatterySecInfo(historyItem2);
         int i3 = (j < 0 || j > 2147483647L) ? AudioChannelLayout.INDEX_MASK_17 : j >= 131069 ? DELTA_TIME_INT : (int) j;
         int i4 = (historyItem.states & DELTA_STATE_MASK) | i3;
         if (historyItem.stepDetails != null) {
-            buildBatteryLevelInt |= 1;
+            iBuildBatteryLevelInt |= 1;
         }
-        boolean z3 = buildBatteryLevelInt != 0;
+        boolean z3 = iBuildBatteryLevelInt != 0;
         if (z3) {
             i4 |= 524288;
         }
-        int buildCurrentNTemperature2 = buildCurrentNTemperature(historyItem);
-        boolean z4 = buildCurrentNTemperature2 != buildCurrentNTemperature;
+        int iBuildCurrentNTemperature2 = buildCurrentNTemperature(historyItem);
+        boolean z4 = iBuildCurrentNTemperature2 != iBuildCurrentNTemperature;
         if (z4) {
             i4 |= 262144;
         }
-        int buildTemperature22 = buildTemperature2(historyItem);
-        boolean z5 = buildTemperature22 != buildTemperature2;
+        int iBuildTemperature22 = buildTemperature2(historyItem);
+        boolean z5 = iBuildTemperature22 != iBuildTemperature2;
         if (z5) {
             i4 |= 262144;
         }
-        int buildBatterySecInfo2 = buildBatterySecInfo(historyItem);
-        boolean z6 = buildBatterySecInfo2 != buildBatterySecInfo;
+        int iBuildBatterySecInfo2 = buildBatterySecInfo(historyItem);
+        boolean z6 = iBuildBatterySecInfo2 != iBuildBatterySecInfo;
         if (z6) {
             i4 |= 131072;
         }
@@ -1427,8 +1428,8 @@ public class BatteryStatsHistory {
         if (z13) {
             i4 |= 131072;
         }
-        int buildStateInt2 = buildStateInt(historyItem);
-        boolean z14 = buildStateInt2 != buildStateInt;
+        int iBuildStateInt2 = buildStateInt(historyItem);
+        boolean z14 = iBuildStateInt2 != iBuildStateInt;
         if (z14) {
             i4 |= 1048576;
         }
@@ -1472,34 +1473,34 @@ public class BatteryStatsHistory {
             }
         }
         if (z3) {
-            boolean z19 = (buildBatteryLevelInt & 2) != 0;
-            parcel.writeInt(buildBatteryLevelInt);
+            boolean z19 = (iBuildBatteryLevelInt & 2) != 0;
+            parcel.writeInt(iBuildBatteryLevelInt);
             if (z19) {
                 parcel.writeInt(buildExtendedBatteryLevelInt(historyItem));
             }
         }
         if (z7 || z8) {
-            parcel.writeInt(buildCurrentNTemperature2);
-            parcel.writeInt(buildTemperature22);
+            parcel.writeInt(iBuildCurrentNTemperature2);
+            parcel.writeInt(iBuildTemperature22);
         }
         if (z16 || z10 || z12 || z) {
             parcel.writeInt(historyItem.batterySecCurrentEvent);
-            parcel.writeInt(buildBatterySecInfo2);
+            parcel.writeInt(iBuildBatterySecInfo2);
             parcel.writeInt(historyItem.batterySecEvent);
             parcel.writeInt(historyItem.protectBatteryMode);
         }
         if (z15) {
-            parcel.writeInt(buildStateInt2);
+            parcel.writeInt(iBuildStateInt2);
         }
         if (z17) {
             parcel.writeInt(historyItem.states2);
         }
         historyItem.tagsFirstOccurrence = false;
         if (historyItem.wakelockTag != null || historyItem.wakeReasonTag != null) {
-            int writeHistoryTag = historyItem.wakelockTag != null ? writeHistoryTag(historyItem.wakelockTag) : 65535;
-            int writeHistoryTag2 = historyItem.wakeReasonTag != null ? writeHistoryTag(historyItem.wakeReasonTag) : 65535;
-            parcel.writeInt((writeHistoryTag2 << 16) | writeHistoryTag);
-            if (historyItem.wakelockTag == null || (writeHistoryTag & 32768) == 0) {
+            int iWriteHistoryTag = historyItem.wakelockTag != null ? writeHistoryTag(historyItem.wakelockTag) : 65535;
+            int iWriteHistoryTag2 = historyItem.wakeReasonTag != null ? writeHistoryTag(historyItem.wakeReasonTag) : 65535;
+            parcel.writeInt((iWriteHistoryTag2 << 16) | iWriteHistoryTag);
+            if (historyItem.wakelockTag == null || (iWriteHistoryTag & 32768) == 0) {
                 z2 = true;
                 i2 = 0;
             } else {
@@ -1508,15 +1509,15 @@ public class BatteryStatsHistory {
                 z2 = true;
                 historyItem.tagsFirstOccurrence = true;
             }
-            if (historyItem.wakeReasonTag != null && (writeHistoryTag2 & 32768) != 0) {
+            if (historyItem.wakeReasonTag != null && (iWriteHistoryTag2 & 32768) != 0) {
                 historyItem.wakeReasonTag.writeToParcel(parcel, i2);
                 historyItem.tagsFirstOccurrence = z2;
             }
         }
         if (historyItem.eventCode != 0) {
-            int writeHistoryTag3 = writeHistoryTag(historyItem.eventTag);
-            parcel.writeInt(setBitField(65535 & historyItem.eventCode, writeHistoryTag3, 16, -65536));
-            if ((writeHistoryTag3 & 32768) != 0) {
+            int iWriteHistoryTag3 = writeHistoryTag(historyItem.eventTag);
+            parcel.writeInt(setBitField(65535 & historyItem.eventCode, iWriteHistoryTag3, 16, -65536));
+            if ((iWriteHistoryTag3 & 32768) != 0) {
                 historyItem.eventTag.writeToParcel(parcel, 0);
                 historyItem.tagsFirstOccurrence = true;
             }
@@ -1591,11 +1592,11 @@ public class BatteryStatsHistory {
         }
         Integer num = this.mHistoryTagPool.get(historyTag);
         if (num != null) {
-            int intValue = num.intValue();
-            if ((intValue & 32768) != 0) {
-                this.mHistoryTagPool.put(historyTag, Integer.valueOf((-32769) & intValue));
+            int iIntValue = num.intValue();
+            if ((iIntValue & 32768) != 0) {
+                this.mHistoryTagPool.put(historyTag, Integer.valueOf((-32769) & iIntValue));
             }
-            return intValue;
+            return iIntValue;
         }
         int i = this.mNextHistoryTagIdx;
         if (i < 32766) {
@@ -1632,22 +1633,22 @@ public class BatteryStatsHistory {
                 return;
             }
             this.mMonotonicClock.write();
-            Parcel obtain = Parcel.obtain();
+            Parcel parcelObtain = Parcel.obtain();
             try {
                 SystemClock.uptimeMillis();
-                writeHistoryBuffer(obtain);
-                writeParcelLocked(obtain, this.mActiveFragment, z);
+                writeHistoryBuffer(parcelObtain);
+                writeParcelLocked(parcelObtain, this.mActiveFragment, z);
             } finally {
-                obtain.recycle();
+                parcelObtain.recycle();
             }
         }
     }
 
     public void readHistoryBuffer(Parcel parcel) throws ParcelFormatException {
         synchronized (this) {
-            int readInt = parcel.readInt();
-            if (readInt != VERSION) {
-                Slog.w("BatteryStats", "readHistoryBuffer: version got " + readInt + ", expected 917718; erasing old stats");
+            int i = parcel.readInt();
+            if (i != VERSION) {
+                Slog.w("BatteryStats", "readHistoryBuffer: version got " + i + ", expected 917718; erasing old stats");
                 return;
             }
             this.mHistoryBufferStartTime = parcel.readLong();
@@ -1655,16 +1656,16 @@ public class BatteryStatsHistory {
             this.mMonotonicHistorySize = parcel.readLong();
             this.mHistoryBuffer.setDataSize(0);
             this.mHistoryBuffer.setDataPosition(0);
-            int readInt2 = parcel.readInt();
-            int dataPosition = parcel.dataPosition();
-            if (readInt2 >= this.mMaxHistoryBufferSize * 100) {
-                throw new ParcelFormatException("File corrupt: history data buffer too large " + readInt2);
+            int i2 = parcel.readInt();
+            int iDataPosition = parcel.dataPosition();
+            if (i2 >= this.mMaxHistoryBufferSize * 100) {
+                throw new ParcelFormatException("File corrupt: history data buffer too large " + i2);
             }
-            if ((readInt2 & (-4)) != readInt2) {
-                throw new ParcelFormatException("File corrupt: history data buffer not aligned " + readInt2);
+            if ((i2 & (-4)) != i2) {
+                throw new ParcelFormatException("File corrupt: history data buffer not aligned " + i2);
             }
-            this.mHistoryBuffer.appendFrom(parcel, dataPosition, readInt2);
-            parcel.setDataPosition(dataPosition + readInt2);
+            this.mHistoryBuffer.appendFrom(parcel, iDataPosition, i2);
+            parcel.setDataPosition(iDataPosition + i2);
         }
     }
 
@@ -1681,9 +1682,9 @@ public class BatteryStatsHistory {
     private void writeParcelLocked(Parcel parcel, BatteryHistoryFragment batteryHistoryFragment, boolean z) {
         this.mWriteLock.lock();
         try {
-            long uptimeMillis = SystemClock.uptimeMillis();
+            long jUptimeMillis = SystemClock.uptimeMillis();
             this.mStore.writeFragment(batteryHistoryFragment, parcel.marshall(), z);
-            this.mEventLogger.writeCommitSysConfigFile(uptimeMillis);
+            this.mEventLogger.writeCommitSysConfigFile(jUptimeMillis);
         } finally {
             this.mWriteLock.unlock();
         }
@@ -1741,18 +1742,18 @@ public class BatteryStatsHistory {
 
     public void dump(PrintWriter printWriter, long j, long j2) {
         BatteryStats.HistoryPrinter historyPrinter = new BatteryStats.HistoryPrinter();
-        BatteryStatsHistoryIterator iterate = iterate(j, j2);
-        while (iterate.hasNext()) {
+        BatteryStatsHistoryIterator batteryStatsHistoryIteratorIterate = iterate(j, j2);
+        while (batteryStatsHistoryIteratorIterate.hasNext()) {
             try {
                 PrintWriter printWriter2 = printWriter;
-                historyPrinter.printNextItem(printWriter2, iterate.next(), 0L, false, true);
+                historyPrinter.printNextItem(printWriter2, batteryStatsHistoryIteratorIterate.next(), 0L, false, true);
                 printWriter = printWriter2;
             } finally {
             }
         }
         PrintWriter printWriter3 = printWriter;
-        if (iterate != null) {
-            iterate.close();
+        if (batteryStatsHistoryIteratorIterate != null) {
+            batteryStatsHistoryIteratorIterate.close();
         }
         printWriter3.flush();
     }
@@ -1793,30 +1794,30 @@ public class BatteryStatsHistory {
             if (jArr.length == 0) {
                 return;
             }
-            int readInt = parcel.readInt();
-            int i = 4;
-            for (int i2 = 0; i2 < jArr.length; i2++) {
+            int i = parcel.readInt();
+            int i2 = 4;
+            for (int i3 = 0; i3 < jArr.length; i3++) {
                 long j = 0;
-                int i3 = 0;
+                int i4 = 0;
                 while (true) {
-                    if (i3 >= 64) {
+                    if (i4 >= 64) {
                         break;
                     }
-                    if (i == 0) {
-                        readInt = parcel.readInt();
-                        i = 4;
+                    if (i2 == 0) {
+                        i = parcel.readInt();
+                        i2 = 4;
                     }
-                    byte b = (byte) readInt;
-                    readInt >>= 8;
-                    i--;
-                    j |= (b & Byte.MAX_VALUE) << i3;
+                    byte b = (byte) i;
+                    i >>= 8;
+                    i2--;
+                    j |= (b & Byte.MAX_VALUE) << i4;
                     if ((b & 128) == 0) {
-                        jArr[i2] = j;
+                        jArr[i3] = j;
                         break;
                     }
-                    i3 += 7;
+                    i4 += 7;
                 }
-                if (i3 >= 64) {
+                if (i4 >= 64) {
                     throw new ParcelFormatException("Invalid varint format");
                 }
             }
@@ -1828,7 +1829,7 @@ public class BatteryStatsHistory {
         return statFs.getAvailableBlocksLong() * statFs.getBlockSizeLong() > 209715200;
     }
 
-    void makeBackupData() {
+    void makeBackupData() throws IOException {
         int i;
         try {
             FileOutputStream fileOutputStream = new FileOutputStream("/data/log/batterystats/newbatterystats" + new SimpleDateFormat("yyMMddHHmmss").format(new Date(this.mClock.currentTimeMillis())));
@@ -1844,20 +1845,20 @@ public class BatteryStatsHistory {
                             dump(printWriter, -1L, -1L);
                             Slog.i(TAG, "**** History dump finished");
                             FileUtils.setPermissions(fileOutputStream.getFD(), 416, 1000, 1007);
-                            File[] listFiles = file.listFiles();
-                            if (listFiles != null) {
-                                Arrays.sort(listFiles);
-                                int length = listFiles.length - 1;
-                                long j = 0;
+                            File[] fileArrListFiles = file.listFiles();
+                            if (fileArrListFiles != null) {
+                                Arrays.sort(fileArrListFiles);
+                                int length = fileArrListFiles.length - 1;
+                                long length2 = 0;
                                 while (true) {
                                     if (length < 0) {
                                         length = -1;
                                         break;
                                     }
-                                    File file2 = listFiles[length];
+                                    File file2 = fileArrListFiles[length];
                                     if (file2 != null) {
-                                        j += file2.length();
-                                        if (j <= 52428800) {
+                                        length2 += file2.length();
+                                        if (length2 <= 52428800) {
                                             if (length >= 40) {
                                                 length = Math.max(length - 40, 0);
                                                 break;
@@ -1868,12 +1869,12 @@ public class BatteryStatsHistory {
                                     }
                                     length--;
                                 }
-                                Slog.i(TAG, "******** Number of files:" + listFiles.length + " / size:" + j + " / index:" + length);
+                                Slog.i(TAG, "******** Number of files:" + fileArrListFiles.length + " / size:" + length2 + " / index:" + length);
                                 if (length != -1) {
                                     for (i = 0; i <= length; i++) {
-                                        File file3 = listFiles[i];
+                                        File file3 = fileArrListFiles[i];
                                         if (file3 != null) {
-                                            Slog.i(TAG, "     " + file3.getName() + " being removed from disk (" + listFiles[i].delete() + NavigationBarInflaterView.KEY_CODE_END);
+                                            Slog.i(TAG, "     " + file3.getName() + " being removed from disk (" + fileArrListFiles[i].delete() + NavigationBarInflaterView.KEY_CODE_END);
                                         }
                                     }
                                 }

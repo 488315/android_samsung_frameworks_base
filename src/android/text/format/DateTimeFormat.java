@@ -21,20 +21,20 @@ class DateTimeFormat {
     }
 
     public static String format(ULocale uLocale, Calendar calendar, int i, DisplayContext displayContext) {
-        String format;
+        String str;
         String skeleton = DateUtilsBridge.toSkeleton(calendar, i);
-        String str = skeleton + "\t" + uLocale + "\t" + calendar.getTimeZone();
+        String str2 = skeleton + "\t" + uLocale + "\t" + calendar.getTimeZone();
         FormatterCache formatterCache = CACHED_FORMATTERS;
         synchronized (formatterCache) {
-            android.icu.text.DateFormat dateFormat = formatterCache.get(str);
+            android.icu.text.DateFormat dateFormat = formatterCache.get(str2);
             if (dateFormat == null) {
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DateTimePatternGenerator.getInstance(uLocale).getBestPattern(skeleton), uLocale);
-                formatterCache.put(str, simpleDateFormat);
+                formatterCache.put(str2, simpleDateFormat);
                 dateFormat = simpleDateFormat;
             }
             dateFormat.setContext(displayContext);
-            format = dateFormat.format(calendar);
+            str = dateFormat.format(calendar);
         }
-        return format;
+        return str;
     }
 }

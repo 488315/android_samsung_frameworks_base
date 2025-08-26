@@ -8,12 +8,10 @@ import android.widget.TextView;
 import androidx.core.util.Preconditions;
 import androidx.emoji2.text.EmojiCompat;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class EmojiTextViewHelper {
     public final HelperInternal mHelper;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class HelperInternal19 extends HelperInternal {
         public final EmojiInputFilter mEmojiInputFilter;
         public boolean mEnabled = true;
@@ -86,11 +84,10 @@ public final class EmojiTextViewHelper {
 
         @Override // androidx.emoji2.viewsintegration.EmojiTextViewHelper.HelperInternal
         public final TransformationMethod wrapTransformationMethod(TransformationMethod transformationMethod) {
-            return this.mEnabled ? transformationMethod instanceof EmojiTransformationMethod ? transformationMethod : transformationMethod instanceof PasswordTransformationMethod ? transformationMethod : new EmojiTransformationMethod(transformationMethod) : transformationMethod instanceof EmojiTransformationMethod ? ((EmojiTransformationMethod) transformationMethod).mTransformationMethod : transformationMethod;
+            return this.mEnabled ? ((transformationMethod instanceof EmojiTransformationMethod) || (transformationMethod instanceof PasswordTransformationMethod)) ? transformationMethod : new EmojiTransformationMethod(transformationMethod) : transformationMethod instanceof EmojiTransformationMethod ? ((EmojiTransformationMethod) transformationMethod).mTransformationMethod : transformationMethod;
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SkippingHelper19 extends HelperInternal {
         public final HelperInternal19 mHelperDelegate;
 
@@ -117,9 +114,9 @@ public final class EmojiTextViewHelper {
 
         @Override // androidx.emoji2.viewsintegration.EmojiTextViewHelper.HelperInternal
         public final void setEnabled(boolean z) {
-            boolean isConfigured = EmojiCompat.isConfigured();
+            boolean zIsConfigured = EmojiCompat.isConfigured();
             HelperInternal19 helperInternal19 = this.mHelperDelegate;
-            if (isConfigured) {
+            if (zIsConfigured) {
                 helperInternal19.setEnabled(z);
             } else {
                 helperInternal19.mEnabled = z;
@@ -145,7 +142,6 @@ public final class EmojiTextViewHelper {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class HelperInternal {
         public boolean isEnabled() {
             return false;

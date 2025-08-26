@@ -38,7 +38,6 @@ public class ParamsUtils {
     }
 
     public static Rational createRational(float f) {
-        int i;
         float f2;
         if (Float.isNaN(f)) {
             return Rational.NaN;
@@ -52,9 +51,13 @@ public class ParamsUtils {
         if (f == 0.0f) {
             return Rational.ZERO;
         }
+        int i = 1000000;
         while (true) {
             f2 = i * f;
-            i = ((f2 <= -2.1474836E9f || f2 >= 2.1474836E9f) && i != 1) ? i / 10 : 1000000;
+            if ((f2 > -2.1474836E9f && f2 < 2.1474836E9f) || i == 1) {
+                break;
+            }
+            i /= 10;
         }
         return new Rational((int) f2, i);
     }

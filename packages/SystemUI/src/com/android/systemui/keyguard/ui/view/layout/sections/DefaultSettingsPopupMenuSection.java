@@ -13,11 +13,10 @@ import com.android.systemui.keyguard.ui.binder.KeyguardSettingsViewBinder;
 import com.android.systemui.keyguard.ui.viewmodel.KeyguardRootViewModel;
 import com.android.systemui.keyguard.ui.viewmodel.KeyguardSettingsMenuViewModel;
 import com.android.systemui.keyguard.ui.viewmodel.KeyguardTouchHandlingViewModel;
-import com.android.systemui.lifecycle.RepeatWhenAttachedKt$repeatWhenAttached$1;
+import com.android.systemui.lifecycle.RepeatWhenAttachedKt;
 import com.android.systemui.plugins.ActivityStarter;
 import com.android.systemui.statusbar.VibratorHelper;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class DefaultSettingsPopupMenuSection extends KeyguardSection {
     public final ActivityStarter activityStarter;
@@ -25,7 +24,7 @@ public final class DefaultSettingsPopupMenuSection extends KeyguardSection {
     public final KeyguardSettingsMenuViewModel keyguardSettingsMenuViewModel;
     public final KeyguardTouchHandlingViewModel keyguardTouchHandlingViewModel;
     public final Resources resources;
-    public RepeatWhenAttachedKt$repeatWhenAttached$1 settingsPopupMenuHandle;
+    public RepeatWhenAttachedKt.C09181 settingsPopupMenuHandle;
     public final VibratorHelper vibratorHelper;
 
     public DefaultSettingsPopupMenuSection(Resources resources, KeyguardSettingsMenuViewModel keyguardSettingsMenuViewModel, KeyguardTouchHandlingViewModel keyguardTouchHandlingViewModel, KeyguardRootViewModel keyguardRootViewModel, VibratorHelper vibratorHelper, ActivityStarter activityStarter) {
@@ -39,15 +38,15 @@ public final class DefaultSettingsPopupMenuSection extends KeyguardSection {
 
     @Override // com.android.systemui.keyguard.shared.model.KeyguardSection
     public final void addViews(ConstraintLayout constraintLayout) {
-        View inflate = LayoutInflater.from(constraintLayout.getContext()).inflate(R.layout.keyguard_settings_popup_menu, (ViewGroup) constraintLayout, false);
-        inflate.setId(R.id.keyguard_settings_button);
-        inflate.setVisibility(8);
-        inflate.setAlpha(0.0f);
-        constraintLayout.addView((LaunchableLinearLayout) inflate);
+        View viewInflate = LayoutInflater.from(constraintLayout.getContext()).inflate(R.layout.keyguard_settings_popup_menu, (ViewGroup) constraintLayout, false);
+        viewInflate.setId(R.id.keyguard_settings_button);
+        viewInflate.setVisibility(8);
+        viewInflate.setAlpha(0.0f);
+        constraintLayout.addView((LaunchableLinearLayout) viewInflate);
     }
 
     @Override // com.android.systemui.keyguard.shared.model.KeyguardSection
-    public final void applyConstraints(ConstraintSet constraintSet) {
+    public final void applyConstraints(ConstraintSet constraintSet) throws Resources.NotFoundException {
         int dimensionPixelSize = this.resources.getDimensionPixelSize(R.dimen.keyguard_affordance_horizontal_offset);
         constraintSet.constrainWidth(R.id.keyguard_settings_button, -2);
         constraintSet.constrainHeight(R.id.keyguard_settings_button, -2);
@@ -61,16 +60,16 @@ public final class DefaultSettingsPopupMenuSection extends KeyguardSection {
     @Override // com.android.systemui.keyguard.shared.model.KeyguardSection
     public final void bindData(ConstraintLayout constraintLayout) {
         KeyguardSettingsViewBinder keyguardSettingsViewBinder = KeyguardSettingsViewBinder.INSTANCE;
-        View requireViewById = constraintLayout.requireViewById(R.id.keyguard_settings_button);
+        View viewRequireViewById = constraintLayout.requireViewById(R.id.keyguard_settings_button);
         keyguardSettingsViewBinder.getClass();
-        this.settingsPopupMenuHandle = KeyguardSettingsViewBinder.bind(requireViewById, this.keyguardSettingsMenuViewModel, this.keyguardTouchHandlingViewModel, this.keyguardRootViewModel, this.vibratorHelper, this.activityStarter);
+        this.settingsPopupMenuHandle = KeyguardSettingsViewBinder.bind(viewRequireViewById, this.keyguardSettingsMenuViewModel, this.keyguardTouchHandlingViewModel, this.keyguardRootViewModel, this.vibratorHelper, this.activityStarter);
     }
 
     @Override // com.android.systemui.keyguard.shared.model.KeyguardSection
     public final void removeViews(ConstraintLayout constraintLayout) {
-        RepeatWhenAttachedKt$repeatWhenAttached$1 repeatWhenAttachedKt$repeatWhenAttached$1 = this.settingsPopupMenuHandle;
-        if (repeatWhenAttachedKt$repeatWhenAttached$1 != null) {
-            repeatWhenAttachedKt$repeatWhenAttached$1.dispose();
+        RepeatWhenAttachedKt.C09181 c09181 = this.settingsPopupMenuHandle;
+        if (c09181 != null) {
+            c09181.dispose();
         }
         ExtensionsKt.removeView(constraintLayout, R.id.keyguard_settings_button);
     }

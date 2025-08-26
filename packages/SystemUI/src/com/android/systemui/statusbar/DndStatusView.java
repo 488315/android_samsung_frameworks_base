@@ -1,6 +1,7 @@
 package com.android.systemui.statusbar;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
@@ -10,7 +11,6 @@ import com.android.systemui.R;
 import com.android.systemui.statusbar.notification.row.StackScrollerDecorView;
 import com.android.systemui.statusbar.notification.stack.ExpandableViewState;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class DndStatusView extends StackScrollerDecorView {
     public ImageView mDndStatusIcon;
@@ -18,7 +18,6 @@ public class DndStatusView extends StackScrollerDecorView {
     public int mIcon;
     public final int mSize;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DndStatusViewState extends ExpandableViewState {
         public DndStatusViewState(DndStatusView dndStatusView) {
         }
@@ -61,7 +60,7 @@ public class DndStatusView extends StackScrollerDecorView {
         this.mDndStatusIcon = (ImageView) findViewById(R.id.notification_dnd_status_icon);
     }
 
-    public final void setDndTextAndIcon(String str) {
+    public final void setDndTextAndIcon(String str) throws Resources.NotFoundException {
         Drawable drawable;
         this.mDndStatusText.setText(str);
         int i = this.mIcon;

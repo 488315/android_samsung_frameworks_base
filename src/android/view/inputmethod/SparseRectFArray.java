@@ -196,19 +196,19 @@ public final class SparseRectFArray implements Parcelable {
     }
 
     public RectF get(int i) {
-        int binarySearch;
+        int iBinarySearch;
         int[] iArr = this.mKeys;
-        if (iArr == null || i < 0 || (binarySearch = Arrays.binarySearch(iArr, i)) < 0) {
+        if (iArr == null || i < 0 || (iBinarySearch = Arrays.binarySearch(iArr, i)) < 0) {
             return null;
         }
-        int i2 = binarySearch * 4;
+        int i2 = iBinarySearch * 4;
         float[] fArr = this.mCoordinates;
         return new RectF(fArr[i2], fArr[i2 + 1], fArr[i2 + 2], fArr[i2 + 3]);
     }
 
     public int getFlags(int i, int i2) {
-        int binarySearch;
+        int iBinarySearch;
         int[] iArr = this.mKeys;
-        return (iArr != null && i >= 0 && (binarySearch = Arrays.binarySearch(iArr, i)) >= 0) ? this.mFlagsArray[binarySearch] : i2;
+        return (iArr != null && i >= 0 && (iBinarySearch = Arrays.binarySearch(iArr, i)) >= 0) ? this.mFlagsArray[iBinarySearch] : i2;
     }
 }

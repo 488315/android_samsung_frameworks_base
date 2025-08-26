@@ -83,8 +83,8 @@ public final class DumpUtils {
         String[] packagesForUid = context.getPackageManager().getPackagesForUid(callingUid);
         if (packagesForUid != null) {
             for (String str2 : packagesForUid) {
-                int noteOpNoThrow = appOpsManager.noteOpNoThrow(43, callingUid, str2);
-                if (noteOpNoThrow == 0 || noteOpNoThrow == 3) {
+                int iNoteOpNoThrow = appOpsManager.noteOpNoThrow(43, callingUid, str2);
+                if (iNoteOpNoThrow == 0 || iNoteOpNoThrow == 3) {
                     return true;
                 }
             }
@@ -128,16 +128,29 @@ public final class DumpUtils {
         return withComponentName != null && isSecMediaPackage(withComponentName.getComponentName());
     }
 
+    private static boolean isRoutinePackage(String str) {
+        return str != null && AsPackageName.ROUTINE.equals(str);
+    }
+
+    private static boolean isRoutinePackage(ComponentName componentName) {
+        return componentName != null && isRoutinePackage(componentName.getPackageName());
+    }
+
+    /* JADX INFO: Access modifiers changed from: private */
+    public static boolean isRoutinePackage(ComponentName.WithComponentName withComponentName) {
+        return withComponentName != null && isRoutinePackage(withComponentName.getComponentName());
+    }
+
     public static boolean isNonPlatformPackage(String str) {
-        return (str == null || isPlatformPackage(str) || isSecMediaPackage(str)) ? false : true;
+        return (str == null || isPlatformPackage(str) || isSecMediaPackage(str) || isRoutinePackage(str)) ? false : true;
     }
 
     public static boolean isNonPlatformPackage(ComponentName componentName) {
-        return (componentName == null || !isNonPlatformPackage(componentName.getPackageName()) || isSecMediaPackage(componentName.getPackageName())) ? false : true;
+        return (componentName == null || !isNonPlatformPackage(componentName.getPackageName()) || isSecMediaPackage(componentName.getPackageName()) || isRoutinePackage(componentName.getPackageName())) ? false : true;
     }
 
     public static boolean isNonPlatformPackage(ComponentName.WithComponentName withComponentName) {
-        return (withComponentName == null || isPlatformPackage(withComponentName.getComponentName()) || isSecMediaPackage(withComponentName.getComponentName())) ? false : true;
+        return (withComponentName == null || isPlatformPackage(withComponentName.getComponentName()) || isSecMediaPackage(withComponentName.getComponentName()) || isRoutinePackage(withComponentName.getComponentName())) ? false : true;
     }
 
     private static boolean isCriticalPackage(ComponentName componentName) {
@@ -218,26 +231,32 @@ public final class DumpUtils {
             return new Predicate() { // from class: com.android.internal.util.DumpUtils$$ExternalSyntheticLambda6
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
-                    boolean isSecMediaPackage;
-                    isSecMediaPackage = DumpUtils.isSecMediaPackage((ComponentName.WithComponentName) obj);
-                    return isSecMediaPackage;
+                    return DumpUtils.isSecMediaPackage((ComponentName.WithComponentName) obj);
                 }
             };
         }
-        final ComponentName unflattenFromString = ComponentName.unflattenFromString(str);
-        if (unflattenFromString != null) {
+        if ("routine-dump".equals(str)) {
             return new Predicate() { // from class: com.android.internal.util.DumpUtils$$ExternalSyntheticLambda7
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
-                    return DumpUtils.lambda$filterRecord$1(ComponentName.this, (ComponentName.WithComponentName) obj);
+                    return DumpUtils.isRoutinePackage((ComponentName.WithComponentName) obj);
                 }
             };
         }
-        final int parseIntWithBase = ParseUtils.parseIntWithBase(str, 16, -1);
-        return new Predicate() { // from class: com.android.internal.util.DumpUtils$$ExternalSyntheticLambda8
+        final ComponentName componentNameUnflattenFromString = ComponentName.unflattenFromString(str);
+        if (componentNameUnflattenFromString != null) {
+            return new Predicate() { // from class: com.android.internal.util.DumpUtils$$ExternalSyntheticLambda8
+                @Override // java.util.function.Predicate
+                public final boolean test(Object obj) {
+                    return DumpUtils.lambda$filterRecord$1(componentNameUnflattenFromString, (ComponentName.WithComponentName) obj);
+                }
+            };
+        }
+        final int intWithBase = ParseUtils.parseIntWithBase(str, 16, -1);
+        return new Predicate() { // from class: com.android.internal.util.DumpUtils$$ExternalSyntheticLambda9
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                return DumpUtils.lambda$filterRecord$2(parseIntWithBase, str, (ComponentName.WithComponentName) obj);
+                return DumpUtils.lambda$filterRecord$2(intWithBase, str, (ComponentName.WithComponentName) obj);
             }
         };
     }
@@ -255,10 +274,12 @@ public final class DumpUtils {
     }
 
     public static <T> void dumpSparseArrayValues(final PrintWriter printWriter, final String str, SparseArray<T> sparseArray, String str2) {
-        dumpSparseArray(printWriter, str, sparseArray, str2, new KeyDumper() { // from class: com.android.internal.util.DumpUtils$$ExternalSyntheticLambda9
+        dumpSparseArray(printWriter, str, sparseArray, str2, new KeyDumper() { // from class: com.android.internal.util.DumpUtils$$ExternalSyntheticLambda10
             @Override // com.android.internal.util.DumpUtils.KeyDumper
             public final void dump(int i, int i2) {
-                printWriter.printf("%s%s", str, r1);
+                PrintWriter printWriter2 = printWriter;
+                String str3 = str;
+                printWriter2.printf("%s%s", str3, str3);
             }
         }, null);
     }
@@ -279,23 +300,23 @@ public final class DumpUtils {
         printWriter.println("(s):");
         String str3 = str + str;
         for (int i = 0; i < size; i++) {
-            int keyAt = sparseArray.keyAt(i);
-            T valueAt = sparseArray.valueAt(i);
+            int iKeyAt = sparseArray.keyAt(i);
+            T tValueAt = sparseArray.valueAt(i);
             if (keyDumper != null) {
-                keyDumper.dump(i, keyAt);
+                keyDumper.dump(i, iKeyAt);
             } else {
                 printWriter.print(str3);
                 printWriter.print(i);
                 printWriter.print(": ");
-                printWriter.print(keyAt);
+                printWriter.print(iKeyAt);
                 printWriter.print(Session.SUBSESSION_SEPARATION_CHAR);
             }
-            if (valueAt == null) {
+            if (tValueAt == null) {
                 printWriter.print("(null)");
             } else if (valueDumper != null) {
-                valueDumper.dump(valueAt);
+                valueDumper.dump(tValueAt);
             } else {
-                printWriter.print(valueAt);
+                printWriter.print(tValueAt);
             }
             printWriter.println();
         }

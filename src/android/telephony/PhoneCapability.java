@@ -4,6 +4,7 @@ import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
 import com.android.internal.telephony.TelephonyFeatures;
+import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -86,14 +87,14 @@ public final class PhoneCapability implements Parcelable {
         return "mMaxActiveVoiceSubscriptions=" + this.mMaxActiveVoiceSubscriptions + " mMaxActiveDataSubscriptions=" + this.mMaxActiveDataSubscriptions + " mNetworkValidationBeforeSwitchSupported=" + this.mNetworkValidationBeforeSwitchSupported + " mDeviceNrCapability " + Arrays.toString(this.mDeviceNrCapabilities);
     }
 
-    private PhoneCapability(Parcel parcel) {
+    private PhoneCapability(Parcel parcel) throws ClassNotFoundException, IOException {
         this.mMaxActiveVoiceSubscriptions = parcel.readInt();
         this.mMaxActiveDataSubscriptions = parcel.readInt();
-        boolean readBoolean = parcel.readBoolean();
+        boolean z = parcel.readBoolean();
         if (TelephonyFeatures.isSubOperatorSpecific(1, "XMO")) {
             this.mNetworkValidationBeforeSwitchSupported = true;
         } else {
-            this.mNetworkValidationBeforeSwitchSupported = readBoolean;
+            this.mNetworkValidationBeforeSwitchSupported = z;
         }
         ArrayList arrayList = new ArrayList();
         this.mLogicalModemList = arrayList;

@@ -9,7 +9,6 @@ import kotlin.Unit;
 import kotlinx.coroutines.CoroutineScopeKt;
 import kotlinx.coroutines.ExceptionsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class DisplayComponentInstanceProvider implements PerDisplayInstanceProviderWithTeardown {
     public final SystemUIDisplaySubcomponent.Factory componentFactory;
@@ -37,15 +36,15 @@ public final class DisplayComponentInstanceProvider implements PerDisplayInstanc
     @Override // com.android.app.displaylib.PerDisplayInstanceProviderWithTeardown
     public final void destroyInstance(Object obj) {
         SystemUIDisplaySubcomponent systemUIDisplaySubcomponent = (SystemUIDisplaySubcomponent) obj;
-        boolean isEnabled = Trace.isEnabled();
-        if (isEnabled) {
+        boolean zIsEnabled = Trace.isEnabled();
+        if (zIsEnabled) {
             TraceUtilsKt.beginSlice("Destroying a display component instance");
         }
         try {
             CoroutineScopeKt.cancel(systemUIDisplaySubcomponent.getDisplayCoroutineScope(), ExceptionsKt.CancellationException("Cancelling scope associated to the display.", null));
             Unit unit = Unit.INSTANCE;
         } finally {
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
         }

@@ -5,6 +5,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.ArraySet;
 import com.android.internal.util.AnnotationValidations;
+import java.io.IOException;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.Set;
@@ -91,7 +92,7 @@ public final class KeyphraseMetadata implements Parcelable {
     }
 
     @Override // android.os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
         parcel.writeInt(this.mId);
         parcel.writeString(this.mKeyphrase);
         parcel.writeArraySet(this.mSupportedLocales);
@@ -99,15 +100,15 @@ public final class KeyphraseMetadata implements Parcelable {
     }
 
     KeyphraseMetadata(Parcel parcel) {
-        int readInt = parcel.readInt();
-        String readString = parcel.readString();
-        ArraySet readArraySet = parcel.readArraySet(null);
-        int readInt2 = parcel.readInt();
-        this.mId = readInt;
-        this.mKeyphrase = readString;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString);
-        this.mSupportedLocales = readArraySet;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readArraySet);
-        this.mRecognitionModeFlags = readInt2;
+        int i = parcel.readInt();
+        String string = parcel.readString();
+        ArraySet arraySet = parcel.readArraySet(null);
+        int i2 = parcel.readInt();
+        this.mId = i;
+        this.mKeyphrase = string;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string);
+        this.mSupportedLocales = arraySet;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) arraySet);
+        this.mRecognitionModeFlags = i2;
     }
 }

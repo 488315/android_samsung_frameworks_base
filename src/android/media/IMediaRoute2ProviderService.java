@@ -109,9 +109,9 @@ public interface IMediaRoute2ProviderService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IMediaRoute2ProviderService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IMediaRoute2ProviderService)) {
-                return (IMediaRoute2ProviderService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IMediaRoute2ProviderService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IMediaRoute2ProviderService)) {
+                return (IMediaRoute2ProviderService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -159,9 +159,9 @@ public interface IMediaRoute2ProviderService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    IMediaRoute2ProviderServiceCallback asInterface = IMediaRoute2ProviderServiceCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IMediaRoute2ProviderServiceCallback iMediaRoute2ProviderServiceCallbackAsInterface = IMediaRoute2ProviderServiceCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    setCallback(asInterface);
+                    setCallback(iMediaRoute2ProviderServiceCallbackAsInterface);
                     return true;
                 case 2:
                     RouteDiscoveryPreference routeDiscoveryPreference = (RouteDiscoveryPreference) parcel.readTypedObject(RouteDiscoveryPreference.CREATOR);
@@ -169,62 +169,62 @@ public interface IMediaRoute2ProviderService extends IInterface {
                     updateDiscoveryPreference(routeDiscoveryPreference);
                     return true;
                 case 3:
-                    long readLong = parcel.readLong();
-                    String readString = parcel.readString();
-                    int readInt = parcel.readInt();
+                    long j = parcel.readLong();
+                    String string = parcel.readString();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setRouteVolume(readLong, readString, readInt);
+                    setRouteVolume(j, string, i3);
                     return true;
                 case 4:
-                    long readLong2 = parcel.readLong();
-                    String readString2 = parcel.readString();
-                    String readString3 = parcel.readString();
+                    long j2 = parcel.readLong();
+                    String string2 = parcel.readString();
+                    String string3 = parcel.readString();
                     Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    requestCreateSession(readLong2, readString2, readString3, bundle);
+                    requestCreateSession(j2, string2, string3, bundle);
                     return true;
                 case 5:
-                    long readLong3 = parcel.readLong();
-                    int readInt2 = parcel.readInt();
-                    String readString4 = parcel.readString();
-                    String readString5 = parcel.readString();
+                    long j3 = parcel.readLong();
+                    int i4 = parcel.readInt();
+                    String string4 = parcel.readString();
+                    String string5 = parcel.readString();
                     Bundle bundle2 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    requestCreateSystemMediaSession(readLong3, readInt2, readString4, readString5, bundle2);
+                    requestCreateSystemMediaSession(j3, i4, string4, string5, bundle2);
                     return true;
                 case 6:
-                    long readLong4 = parcel.readLong();
-                    String readString6 = parcel.readString();
-                    String readString7 = parcel.readString();
+                    long j4 = parcel.readLong();
+                    String string6 = parcel.readString();
+                    String string7 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    selectRoute(readLong4, readString6, readString7);
+                    selectRoute(j4, string6, string7);
                     return true;
                 case 7:
-                    long readLong5 = parcel.readLong();
-                    String readString8 = parcel.readString();
-                    String readString9 = parcel.readString();
+                    long j5 = parcel.readLong();
+                    String string8 = parcel.readString();
+                    String string9 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    deselectRoute(readLong5, readString8, readString9);
+                    deselectRoute(j5, string8, string9);
                     return true;
                 case 8:
-                    long readLong6 = parcel.readLong();
-                    String readString10 = parcel.readString();
-                    String readString11 = parcel.readString();
+                    long j6 = parcel.readLong();
+                    String string10 = parcel.readString();
+                    String string11 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    transferToRoute(readLong6, readString10, readString11);
+                    transferToRoute(j6, string10, string11);
                     return true;
                 case 9:
-                    long readLong7 = parcel.readLong();
-                    String readString12 = parcel.readString();
-                    int readInt3 = parcel.readInt();
+                    long j7 = parcel.readLong();
+                    String string12 = parcel.readString();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setSessionVolume(readLong7, readString12, readInt3);
+                    setSessionVolume(j7, string12, i5);
                     return true;
                 case 10:
-                    long readLong8 = parcel.readLong();
-                    String readString13 = parcel.readString();
+                    long j8 = parcel.readLong();
+                    String string13 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    releaseSession(readLong8, readString13);
+                    releaseSession(j8, string13);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -249,139 +249,139 @@ public interface IMediaRoute2ProviderService extends IInterface {
 
             @Override // android.media.IMediaRoute2ProviderService
             public void setCallback(IMediaRoute2ProviderServiceCallback iMediaRoute2ProviderServiceCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMediaRoute2ProviderService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iMediaRoute2ProviderServiceCallback);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMediaRoute2ProviderService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iMediaRoute2ProviderServiceCallback);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IMediaRoute2ProviderService
             public void updateDiscoveryPreference(RouteDiscoveryPreference routeDiscoveryPreference) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMediaRoute2ProviderService.DESCRIPTOR);
-                    obtain.writeTypedObject(routeDiscoveryPreference, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMediaRoute2ProviderService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(routeDiscoveryPreference, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IMediaRoute2ProviderService
             public void setRouteVolume(long j, String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMediaRoute2ProviderService.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMediaRoute2ProviderService.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IMediaRoute2ProviderService
             public void requestCreateSession(long j, String str, String str2, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMediaRoute2ProviderService.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMediaRoute2ProviderService.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IMediaRoute2ProviderService
             public void requestCreateSystemMediaSession(long j, int i, String str, String str2, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMediaRoute2ProviderService.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMediaRoute2ProviderService.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IMediaRoute2ProviderService
             public void selectRoute(long j, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMediaRoute2ProviderService.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMediaRoute2ProviderService.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IMediaRoute2ProviderService
             public void deselectRoute(long j, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMediaRoute2ProviderService.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMediaRoute2ProviderService.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IMediaRoute2ProviderService
             public void transferToRoute(long j, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMediaRoute2ProviderService.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMediaRoute2ProviderService.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IMediaRoute2ProviderService
             public void setSessionVolume(long j, String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMediaRoute2ProviderService.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMediaRoute2ProviderService.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IMediaRoute2ProviderService
             public void releaseSession(long j, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IMediaRoute2ProviderService.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeString(str);
-                    this.mRemote.transact(10, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IMediaRoute2ProviderService.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(10, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

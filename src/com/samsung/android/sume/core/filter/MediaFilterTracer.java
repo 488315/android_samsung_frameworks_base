@@ -51,9 +51,9 @@ public class MediaFilterTracer extends DecorateFilter {
     public MutableMediaBuffer run(MediaBuffer mediaBuffer, MutableMediaBuffer mutableMediaBuffer) {
         Log.d(TAG, "run: successor=" + this.successor);
         makeReport(513, mediaBuffer);
-        MutableMediaBuffer run = super.run(mediaBuffer, mutableMediaBuffer);
-        makeReport(514, run);
-        return run;
+        MutableMediaBuffer mutableMediaBufferRun = super.run(mediaBuffer, mutableMediaBuffer);
+        makeReport(514, mutableMediaBufferRun);
+        return mutableMediaBufferRun;
     }
 
     @Override // com.samsung.android.sume.core.filter.DecorateFilter, com.samsung.android.sume.core.filter.MediaFilter
@@ -70,44 +70,44 @@ public class MediaFilterTracer extends DecorateFilter {
 
     private void makeReport(int i, MediaBuffer mediaBuffer) {
         Log.d(TAG, "makeReport: code=" + i + ", buffer=" + mediaBuffer);
-        long currentTimeMillis = System.currentTimeMillis();
-        final Message newMessage = this.messageProducer.newMessage(i);
-        newMessage.put(Message.KEY_UNIT_ID, Integer.valueOf(this.successor.hashCode()));
+        long jCurrentTimeMillis = System.currentTimeMillis();
+        final Message messageNewMessage = this.messageProducer.newMessage(i);
+        messageNewMessage.put(Message.KEY_UNIT_ID, Integer.valueOf(this.successor.hashCode()));
         if (mediaBuffer != null) {
             Integer num = (Integer) mediaBuffer.getExtra(Message.KEY_CONTENTS_ID, Integer.valueOf(this.contentId));
             num.intValue();
-            newMessage.put(Message.KEY_CONTENTS_ID, num);
+            messageNewMessage.put(Message.KEY_CONTENTS_ID, num);
             Integer num2 = (Integer) mediaBuffer.getExtra(Message.KEY_BLOCK_ID, -1);
             if (num2.intValue() != -1) {
-                newMessage.put(Message.KEY_BLOCK_ID, num2);
-                newMessage.put(Message.KEY_NUM_BLOCKS, mediaBuffer.getExtra(Message.KEY_NUM_BLOCKS, Integer.valueOf(this.numBlocks)));
+                messageNewMessage.put(Message.KEY_BLOCK_ID, num2);
+                messageNewMessage.put(Message.KEY_NUM_BLOCKS, mediaBuffer.getExtra(Message.KEY_NUM_BLOCKS, Integer.valueOf(this.numBlocks)));
             }
             if (mediaBuffer.containsExtra(Message.KEY_IN_FILE)) {
-                newMessage.put(Message.KEY_IN_FILE, mediaBuffer.getExtra(Message.KEY_IN_FILE));
+                messageNewMessage.put(Message.KEY_IN_FILE, mediaBuffer.getExtra(Message.KEY_IN_FILE));
             }
         }
         switch (i) {
             case 511:
-                newMessage.put(Message.KEY_START_TIME_MS, Long.valueOf(currentTimeMillis));
+                messageNewMessage.put(Message.KEY_START_TIME_MS, Long.valueOf(jCurrentTimeMillis));
                 Map<String, Object> shortDescription = getShortDescription(getDescriptor());
                 if (!shortDescription.isEmpty()) {
-                    newMessage.put(Message.KEY_UNIT_DESCRIPTION, shortDescription);
+                    messageNewMessage.put(Message.KEY_UNIT_DESCRIPTION, shortDescription);
                     break;
                 }
                 break;
             case 512:
-                newMessage.put(Message.KEY_END_TIME_MS, Long.valueOf(currentTimeMillis));
+                messageNewMessage.put(Message.KEY_END_TIME_MS, Long.valueOf(jCurrentTimeMillis));
                 break;
             case 513:
-                newMessage.put(Message.KEY_START_TIME_MS, Long.valueOf(currentTimeMillis));
+                messageNewMessage.put(Message.KEY_START_TIME_MS, Long.valueOf(jCurrentTimeMillis));
                 break;
             case 514:
-                newMessage.put(Message.KEY_END_TIME_MS, Long.valueOf(currentTimeMillis));
+                messageNewMessage.put(Message.KEY_END_TIME_MS, Long.valueOf(jCurrentTimeMillis));
                 if (this.instantRun) {
                     this.messageHandlers.add(new Consumer() { // from class: com.samsung.android.sume.core.filter.MediaFilterTracer$$ExternalSyntheticLambda0
                         @Override // java.util.function.Consumer
                         public final void accept(Object obj) {
-                            MediaFilterTracer.this.m9541x3bc8565(newMessage, (Message) obj);
+                            this.f$0.m9554x3bc8565(messageNewMessage, (Message) obj);
                         }
                     });
                     break;
@@ -118,49 +118,49 @@ public class MediaFilterTracer extends DecorateFilter {
                     this.messageHandlers.forEach(new Consumer() { // from class: com.samsung.android.sume.core.filter.MediaFilterTracer$$ExternalSyntheticLambda1
                         @Override // java.util.function.Consumer
                         public final void accept(Object obj) {
-                            ((Consumer) obj).accept(Message.this);
+                            ((Consumer) obj).accept(messageNewMessage);
                         }
                     });
                 }
-                newMessage.put(Message.KEY_START_TIME_MS, Long.valueOf(currentTimeMillis));
+                messageNewMessage.put(Message.KEY_START_TIME_MS, Long.valueOf(jCurrentTimeMillis));
                 break;
             case 516:
                 if (this.instantRun) {
                     this.messageHandlers.forEach(new Consumer() { // from class: com.samsung.android.sume.core.filter.MediaFilterTracer$$ExternalSyntheticLambda2
                         @Override // java.util.function.Consumer
                         public final void accept(Object obj) {
-                            ((Consumer) obj).accept(Message.this);
+                            ((Consumer) obj).accept(messageNewMessage);
                         }
                     });
                 }
-                newMessage.put(Message.KEY_END_TIME_MS, Long.valueOf(currentTimeMillis));
+                messageNewMessage.put(Message.KEY_END_TIME_MS, Long.valueOf(jCurrentTimeMillis));
                 break;
         }
-        newMessage.post();
+        messageNewMessage.post();
     }
 
     /* renamed from: lambda$makeReport$0$com-samsung-android-sume-core-filter-MediaFilterTracer, reason: not valid java name */
-    /* synthetic */ void m9541x3bc8565(Message message, Message message2) {
+    /* synthetic */ void m9554x3bc8565(Message message, Message message2) {
         message2.put(Message.KEY_CONTENTS_ID, message.get(Message.KEY_CONTENTS_ID, Integer.valueOf(this.contentId)));
     }
 
     private Map<String, Object> getShortDescription(MFDescriptor mFDescriptor) {
         Log.d(TAG, "getShortDescription: descriptor=" + mFDescriptor);
-        HashMap hashMap = new HashMap();
+        HashMap map = new HashMap();
         if (mFDescriptor instanceof NNFWDescriptor) {
             NNFWDescriptor nNFWDescriptor = (NNFWDescriptor) mFDescriptor;
-            hashMap.put("type", "NNFWDescriptor");
-            hashMap.put("model", nNFWDescriptor.getNNDescriptor().getModelId());
-            hashMap.put("fw", nNFWDescriptor.getFw());
-            hashMap.put("hw", nNFWDescriptor.getHw());
-            hashMap.put("input-data-type", nNFWDescriptor.getInputFormat().getDataType());
-            hashMap.put("input-color-format", nNFWDescriptor.getInputFormat().getColorFormat());
-            hashMap.put("input-shape", nNFWDescriptor.getInputFormat().getShape());
-            hashMap.put("output-data-type", nNFWDescriptor.getOutputFormat().getDataType());
-            hashMap.put("output-color-format", nNFWDescriptor.getOutputFormat().getColorFormat());
-            hashMap.put("output-shape", nNFWDescriptor.getOutputFormat().getShape());
+            map.put("type", "NNFWDescriptor");
+            map.put("model", nNFWDescriptor.getNNDescriptor().getModelId());
+            map.put("fw", nNFWDescriptor.getFw());
+            map.put("hw", nNFWDescriptor.getHw());
+            map.put("input-data-type", nNFWDescriptor.getInputFormat().getDataType());
+            map.put("input-color-format", nNFWDescriptor.getInputFormat().getColorFormat());
+            map.put("input-shape", nNFWDescriptor.getInputFormat().getShape());
+            map.put("output-data-type", nNFWDescriptor.getOutputFormat().getDataType());
+            map.put("output-color-format", nNFWDescriptor.getOutputFormat().getColorFormat());
+            map.put("output-shape", nNFWDescriptor.getOutputFormat().getShape());
         }
-        return hashMap;
+        return map;
     }
 
     @Override // com.samsung.android.sume.core.message.MessageConsumer

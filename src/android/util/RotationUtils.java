@@ -149,18 +149,18 @@ public class RotationUtils {
         if (rect2 == null || rect2.isEmpty() || rect2.contains(rect)) {
             return;
         }
-        int min = Math.min(i, rect.width());
+        int iMin = Math.min(i, rect.width());
         int i4 = 0;
-        if (rect.right < rect2.left + min) {
-            i3 = min - (rect.right - rect2.left);
+        if (rect.right < rect2.left + iMin) {
+            i3 = iMin - (rect.right - rect2.left);
         } else {
-            i3 = rect.left > rect2.right - min ? -(min - (rect2.right - rect.left)) : 0;
+            i3 = rect.left > rect2.right - iMin ? -(iMin - (rect2.right - rect.left)) : 0;
         }
-        int min2 = Math.min(i2, rect.width());
-        if (rect.bottom < rect2.top + min2) {
-            i4 = min2 - (rect.bottom - rect2.top);
-        } else if (rect.top > rect2.bottom - min2) {
-            i4 = -(min2 - (rect2.bottom - rect.top));
+        int iMin2 = Math.min(i2, rect.width());
+        if (rect.bottom < rect2.top + iMin2) {
+            i4 = iMin2 - (rect.bottom - rect2.top);
+        } else if (rect.top > rect2.bottom - iMin2) {
+            i4 = -(iMin2 - (rect2.bottom - rect.top));
         }
         rect.offset(i3, i4);
     }

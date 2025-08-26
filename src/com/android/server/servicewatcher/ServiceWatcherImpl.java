@@ -21,7 +21,6 @@ import com.android.internal.hidden_from_bootclasspath.android.location.flags.Fla
 import com.android.internal.util.Preconditions;
 import com.android.server.servicewatcher.ServiceWatcher;
 import com.android.server.servicewatcher.ServiceWatcher.BoundServiceInfo;
-import com.android.server.servicewatcher.ServiceWatcherImpl;
 import java.io.PrintWriter;
 import java.util.Objects;
 
@@ -135,13 +134,13 @@ class ServiceWatcherImpl<TBoundServiceInfo extends ServiceWatcher.BoundServiceIn
         this.mHandler.post(new Runnable() { // from class: com.android.server.servicewatcher.ServiceWatcherImpl$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
-                ServiceWatcherImpl.MyServiceConnection.this.runOnBinder(binderOperation);
+                myServiceConnection.runOnBinder(binderOperation);
             }
         });
     }
 
     synchronized void onServiceChanged(boolean z) {
-        TBoundServiceInfo serviceInfo = this.mRegistered ? this.mServiceSupplier.getServiceInfo() : null;
+        ServiceWatcher.BoundServiceInfo serviceInfo = this.mRegistered ? this.mServiceSupplier.getServiceInfo() : null;
         if ((z | (!this.mServiceConnection.isConnected())) || !Objects.equals(this.mServiceConnection.getBoundServiceInfo(), serviceInfo)) {
             Log.i(TAG, NavigationBarInflaterView.SIZE_MOD_START + this.mTag + "] chose new implementation " + serviceInfo);
             final ServiceWatcherImpl<TBoundServiceInfo>.MyServiceConnection myServiceConnection = this.mServiceConnection;
@@ -150,7 +149,7 @@ class ServiceWatcherImpl<TBoundServiceInfo extends ServiceWatcher.BoundServiceIn
             this.mHandler.post(new Runnable() { // from class: com.android.server.servicewatcher.ServiceWatcherImpl$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ServiceWatcherImpl.lambda$onServiceChanged$1(ServiceWatcherImpl.MyServiceConnection.this, myServiceConnection2);
+                    ServiceWatcherImpl.lambda$onServiceChanged$1(myServiceConnection, myServiceConnection2);
                 }
             });
         }
@@ -161,7 +160,6 @@ class ServiceWatcherImpl<TBoundServiceInfo extends ServiceWatcher.BoundServiceIn
         myServiceConnection2.bind();
     }
 
-    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.server.servicewatcher.ServiceWatcher$BoundServiceInfo] */
     public String toString() {
         ServiceWatcherImpl<TBoundServiceInfo>.MyServiceConnection myServiceConnection;
         synchronized (this) {
@@ -211,25 +209,25 @@ class ServiceWatcherImpl<TBoundServiceInfo extends ServiceWatcher.BoundServiceIn
             this.mRebinder = null;
             try {
                 myServiceConnection = this;
-            } catch (SecurityException e) {
-                e = e;
-                myServiceConnection = this;
-            }
-            try {
-                if (ServiceWatcherImpl.this.mContext.bindServiceAsUser(new Intent(this.mBoundServiceInfo.getAction()).setComponent(this.mBoundServiceInfo.getComponentName()), myServiceConnection, this.mBoundServiceInfo.getFlags(), ServiceWatcherImpl.this.mHandler, UserHandle.of(this.mBoundServiceInfo.getUserId()))) {
-                    return;
-                }
-                Log.e(ServiceWatcherImpl.TAG, NavigationBarInflaterView.SIZE_MOD_START + ServiceWatcherImpl.this.mTag + "] unexpected bind failure - retrying later");
-                myServiceConnection.mRebinder = new Runnable() { // from class: com.android.server.servicewatcher.ServiceWatcherImpl$MyServiceConnection$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        ServiceWatcherImpl.MyServiceConnection.this.bind();
+                try {
+                    if (ServiceWatcherImpl.this.mContext.bindServiceAsUser(new Intent(this.mBoundServiceInfo.getAction()).setComponent(this.mBoundServiceInfo.getComponentName()), myServiceConnection, this.mBoundServiceInfo.getFlags(), ServiceWatcherImpl.this.mHandler, UserHandle.of(this.mBoundServiceInfo.getUserId()))) {
+                        return;
                     }
-                };
-                ServiceWatcherImpl.this.mHandler.postDelayed(myServiceConnection.mRebinder, ServiceWatcherImpl.RETRY_DELAY_MS);
+                    Log.e(ServiceWatcherImpl.TAG, NavigationBarInflaterView.SIZE_MOD_START + ServiceWatcherImpl.this.mTag + "] unexpected bind failure - retrying later");
+                    myServiceConnection.mRebinder = new Runnable() { // from class: com.android.server.servicewatcher.ServiceWatcherImpl$MyServiceConnection$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            this.f$0.bind();
+                        }
+                    };
+                    ServiceWatcherImpl.this.mHandler.postDelayed(myServiceConnection.mRebinder, ServiceWatcherImpl.RETRY_DELAY_MS);
+                } catch (SecurityException e) {
+                    e = e;
+                    Log.e(ServiceWatcherImpl.TAG, NavigationBarInflaterView.SIZE_MOD_START + ServiceWatcherImpl.this.mTag + "] " + myServiceConnection.mBoundServiceInfo + " bind failed", e);
+                }
             } catch (SecurityException e2) {
                 e = e2;
-                Log.e(ServiceWatcherImpl.TAG, NavigationBarInflaterView.SIZE_MOD_START + ServiceWatcherImpl.this.mTag + "] " + myServiceConnection.mBoundServiceInfo + " bind failed", e);
+                myServiceConnection = this;
             }
         }
 
@@ -308,15 +306,15 @@ class ServiceWatcherImpl<TBoundServiceInfo extends ServiceWatcher.BoundServiceIn
             if (!ServiceWatcherImpl.this.mUnstableFallbackEnabled || (tboundserviceinfo = this.mBoundServiceInfo) == null || tboundserviceinfo.toString() == null) {
                 return;
             }
-            String boundServiceInfo = this.mBoundServiceInfo.toString();
-            if (Objects.equals(ServiceWatcherImpl.this.mDisconnectedService, boundServiceInfo) && ServiceWatcherImpl.this.mDisconnectedStartTime > 0 && SystemClock.elapsedRealtime() - ServiceWatcherImpl.this.mDisconnectedStartTime <= 60000) {
+            String string = this.mBoundServiceInfo.toString();
+            if (Objects.equals(ServiceWatcherImpl.this.mDisconnectedService, string) && ServiceWatcherImpl.this.mDisconnectedStartTime > 0 && SystemClock.elapsedRealtime() - ServiceWatcherImpl.this.mDisconnectedStartTime <= 60000) {
                 ServiceWatcherImpl.this.mDisconnectedCount++;
             } else {
-                ServiceWatcherImpl.this.mDisconnectedService = boundServiceInfo;
+                ServiceWatcherImpl.this.mDisconnectedService = string;
                 ServiceWatcherImpl.this.mDisconnectedStartTime = SystemClock.elapsedRealtime();
                 ServiceWatcherImpl.this.mDisconnectedCount = 1;
             }
-            Log.d(ServiceWatcherImpl.TAG, NavigationBarInflaterView.SIZE_MOD_START + ServiceWatcherImpl.this.mTag + "] Service disconnected : " + boundServiceInfo + " Count = " + ServiceWatcherImpl.this.mDisconnectedCount);
+            Log.d(ServiceWatcherImpl.TAG, NavigationBarInflaterView.SIZE_MOD_START + ServiceWatcherImpl.this.mTag + "] Service disconnected : " + string + " Count = " + ServiceWatcherImpl.this.mDisconnectedCount);
             if (ServiceWatcherImpl.this.mDisconnectedCount >= 10) {
                 Log.i(ServiceWatcherImpl.TAG, NavigationBarInflaterView.SIZE_MOD_START + ServiceWatcherImpl.this.mTag + "] Service disconnected too many times, set as unstable : " + ServiceWatcherImpl.this.mDisconnectedService);
                 ServiceWatcherImpl.this.mServiceSupplier.alertUnstableService(ServiceWatcherImpl.this.mDisconnectedService);
@@ -350,7 +348,7 @@ class ServiceWatcherImpl<TBoundServiceInfo extends ServiceWatcher.BoundServiceIn
             ServiceWatcherImpl.this.mHandler.postDelayed(new Runnable() { // from class: com.android.server.servicewatcher.ServiceWatcherImpl$MyServiceConnection$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ServiceWatcherImpl.MyServiceConnection.this.lambda$onBindingDied$0();
+                    this.f$0.lambda$onBindingDied$0();
                 }
             }, 500L);
         }
@@ -379,11 +377,11 @@ class ServiceWatcherImpl<TBoundServiceInfo extends ServiceWatcher.BoundServiceIn
         bundle.putLong("disconnectedTime", this.mDisconnectedTime);
         bundle.putInt("disconnectionCount", this.mDisconnectionCount);
         bundle.putLong("bindingDiedTime", this.mBindingDiedTime);
-        Message obtain = Message.obtain();
-        obtain.what = i;
-        obtain.obj = bundle;
+        Message messageObtain = Message.obtain();
+        messageObtain.what = i;
+        messageObtain.obj = bundle;
         try {
-            ((LocationManager) this.mContext.getSystemService("location")).notifyNSFLP(obtain);
+            ((LocationManager) this.mContext.getSystemService("location")).notifyNSFLP(messageObtain);
         } catch (Exception e) {
             e.printStackTrace();
         }

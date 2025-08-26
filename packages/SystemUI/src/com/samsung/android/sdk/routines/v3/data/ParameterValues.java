@@ -10,12 +10,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ParameterValues {
     public final HashMap a;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.samsung.android.sdk.routines.v3.data.ParameterValues$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] a;
@@ -50,7 +48,6 @@ public class ParameterValues {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class ParameterValue {
 
         @SerializedName("VALUE")
@@ -59,7 +56,6 @@ public class ParameterValues {
         @SerializedName("TYPE")
         private ValueType b;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         enum ValueType {
             UNKNOWN("UNKNOWN"),
             BOOLEAN("BOOLEAN"),
@@ -85,7 +81,7 @@ public class ParameterValues {
             return this.a;
         }
 
-        public final String b() {
+        public final String b() throws JSONException {
             JSONObject jSONObject = new JSONObject();
             try {
                 jSONObject.put("TYPE", this.b.a);
@@ -139,14 +135,14 @@ public class ParameterValues {
             return jSONObject.toString();
         }
 
-        public static ParameterValue a(String str) {
+        public static ParameterValue a(String str) throws JSONException {
             ValueType valueType;
             ParameterValue parameterValue = new ParameterValue();
             try {
                 JSONObject jSONObject = new JSONObject(str);
                 String string = jSONObject.getString("TYPE");
-                ValueType[] values = ValueType.values();
-                int length = values.length;
+                ValueType[] valueTypeArrValues = ValueType.values();
+                int length = valueTypeArrValues.length;
                 int i = 0;
                 int i2 = 0;
                 while (true) {
@@ -154,7 +150,7 @@ public class ParameterValues {
                         valueType = ValueType.UNKNOWN;
                         break;
                     }
-                    valueType = values[i2];
+                    valueType = valueTypeArrValues[i2];
                     if (valueType.a.equalsIgnoreCase(string)) {
                         break;
                     }
@@ -244,21 +240,21 @@ public class ParameterValues {
     }
 
     public static ParameterValues fromJsonString(String str) {
-        HashMap hashMap = new HashMap();
+        HashMap map = new HashMap();
         if (str == null || str.isEmpty()) {
-            return new ParameterValues(hashMap);
+            return new ParameterValues(map);
         }
         try {
             JSONObject jSONObject = new JSONObject(str);
-            Iterator<String> keys = jSONObject.keys();
-            while (keys.hasNext()) {
-                String next = keys.next();
-                hashMap.put(next, ParameterValue.a(jSONObject.getString(next)));
+            Iterator<String> itKeys = jSONObject.keys();
+            while (itKeys.hasNext()) {
+                String next = itKeys.next();
+                map.put(next, ParameterValue.a(jSONObject.getString(next)));
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return new ParameterValues(hashMap);
+        return new ParameterValues(map);
     }
 
     public final Boolean getBoolean() {
@@ -277,20 +273,20 @@ public class ParameterValues {
     }
 
     public final String toJsonString() {
-        final HashMap hashMap = new HashMap();
+        final HashMap map = new HashMap();
         this.a.entrySet().forEach(new Consumer() { // from class: com.samsung.android.sdk.routines.v3.data.ParameterValues$$ExternalSyntheticLambda0
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
                 Map.Entry entry = (Map.Entry) obj;
-                ((HashMap) hashMap).put((String) entry.getKey(), ((ParameterValues.ParameterValue) entry.getValue()).b());
+                ((HashMap) map).put((String) entry.getKey(), ((ParameterValues.ParameterValue) entry.getValue()).b());
             }
         });
-        return new JSONObject(hashMap).toString();
+        return new JSONObject(map).toString();
     }
 
-    public ParameterValues(HashMap hashMap) {
-        HashMap hashMap2 = new HashMap();
-        this.a = hashMap2;
-        hashMap2.putAll(hashMap);
+    public ParameterValues(HashMap map) {
+        HashMap map2 = new HashMap();
+        this.a = map2;
+        map2.putAll(map);
     }
 }

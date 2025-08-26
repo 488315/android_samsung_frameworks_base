@@ -6,7 +6,6 @@ import androidx.compose.ui.node.ModifierNodeElement;
 import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class BounceableElement extends ModifierNodeElement<BounceableNode> {
     public final boolean bounceEnd;
@@ -40,11 +39,11 @@ final class BounceableElement extends ModifierNodeElement<BounceableNode> {
     }
 
     public final int hashCode() {
-        int hashCode = this.bounceable.hashCode() * 31;
+        int iHashCode = this.bounceable.hashCode() * 31;
         Bounceable bounceable = this.previousBounceable;
-        int hashCode2 = (hashCode + (bounceable == null ? 0 : bounceable.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (bounceable == null ? 0 : bounceable.hashCode())) * 31;
         Bounceable bounceable2 = this.nextBounceable;
-        return Boolean.hashCode(this.bounceEnd) + ((this.orientation.hashCode() + ((hashCode2 + (bounceable2 != null ? bounceable2.hashCode() : 0)) * 31)) * 31);
+        return Boolean.hashCode(this.bounceEnd) + ((this.orientation.hashCode() + ((iHashCode2 + (bounceable2 != null ? bounceable2.hashCode() : 0)) * 31)) * 31);
     }
 
     public final String toString() {

@@ -102,9 +102,9 @@ public interface IDeviceStateManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IDeviceStateManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IDeviceStateManager)) {
-                return (IDeviceStateManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IDeviceStateManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IDeviceStateManager)) {
+                return (IDeviceStateManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -151,18 +151,18 @@ public interface IDeviceStateManager extends IInterface {
                     parcel2.writeTypedObject(deviceStateInfo, 1);
                     return true;
                 case 2:
-                    IDeviceStateManagerCallback asInterface = IDeviceStateManagerCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IDeviceStateManagerCallback iDeviceStateManagerCallbackAsInterface = IDeviceStateManagerCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    DeviceStateInfo registerCallback = registerCallback(asInterface);
+                    DeviceStateInfo deviceStateInfoRegisterCallback = registerCallback(iDeviceStateManagerCallbackAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(registerCallback, 1);
+                    parcel2.writeTypedObject(deviceStateInfoRegisterCallback, 1);
                     return true;
                 case 3:
-                    IBinder readStrongBinder = parcel.readStrongBinder();
-                    int readInt = parcel.readInt();
-                    int readInt2 = parcel.readInt();
+                    IBinder strongBinder = parcel.readStrongBinder();
+                    int i3 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    requestState(readStrongBinder, readInt, readInt2);
+                    requestState(strongBinder, i3, i4);
                     parcel2.writeNoException();
                     return true;
                 case 4:
@@ -170,11 +170,11 @@ public interface IDeviceStateManager extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    IBinder readStrongBinder2 = parcel.readStrongBinder();
-                    int readInt3 = parcel.readInt();
-                    int readInt4 = parcel.readInt();
+                    IBinder strongBinder2 = parcel.readStrongBinder();
+                    int i5 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    requestBaseStateOverride(readStrongBinder2, readInt3, readInt4);
+                    requestBaseStateOverride(strongBinder2, i5, i6);
                     parcel2.writeNoException();
                     return true;
                 case 6:
@@ -182,9 +182,9 @@ public interface IDeviceStateManager extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 7:
-                    boolean readBoolean = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    onStateRequestOverlayDismissed(readBoolean);
+                    onStateRequestOverlayDismissed(z);
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -210,109 +210,109 @@ public interface IDeviceStateManager extends IInterface {
 
             @Override // android.hardware.devicestate.IDeviceStateManager
             public DeviceStateInfo getDeviceStateInfo() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceStateManager.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (DeviceStateInfo) obtain2.readTypedObject(DeviceStateInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(IDeviceStateManager.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (DeviceStateInfo) parcelObtain2.readTypedObject(DeviceStateInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.devicestate.IDeviceStateManager
             public DeviceStateInfo registerCallback(IDeviceStateManagerCallback iDeviceStateManagerCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceStateManager.DESCRIPTOR);
-                    obtain.writeStrongInterface(iDeviceStateManagerCallback);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (DeviceStateInfo) obtain2.readTypedObject(DeviceStateInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(IDeviceStateManager.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iDeviceStateManagerCallback);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (DeviceStateInfo) parcelObtain2.readTypedObject(DeviceStateInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.devicestate.IDeviceStateManager
             public void requestState(IBinder iBinder, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceStateManager.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IDeviceStateManager.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.devicestate.IDeviceStateManager
             public void cancelStateRequest() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceStateManager.DESCRIPTOR);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IDeviceStateManager.DESCRIPTOR);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.devicestate.IDeviceStateManager
             public void requestBaseStateOverride(IBinder iBinder, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceStateManager.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IDeviceStateManager.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.devicestate.IDeviceStateManager
             public void cancelBaseStateOverride() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceStateManager.DESCRIPTOR);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IDeviceStateManager.DESCRIPTOR);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.devicestate.IDeviceStateManager
             public void onStateRequestOverlayDismissed(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDeviceStateManager.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IDeviceStateManager.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

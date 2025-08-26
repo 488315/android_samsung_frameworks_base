@@ -98,23 +98,23 @@ public final class PhoneNumberRange implements Parcelable {
         }
     }
 
-    public boolean matches(String str) {
-        String substring;
-        String replaceAll = str.replaceAll("[^0-9]", "");
+    public boolean matches(String str) throws NumberFormatException {
+        String strSubstring;
+        String strReplaceAll = str.replaceAll("[^0-9]", "");
         String str2 = this.mCountryCode + this.mPrefix;
-        if (replaceAll.startsWith(str2)) {
-            substring = replaceAll.substring(str2.length());
+        if (strReplaceAll.startsWith(str2)) {
+            strSubstring = strReplaceAll.substring(str2.length());
         } else {
-            if (replaceAll.startsWith(this.mPrefix)) {
-                substring = replaceAll.substring(this.mPrefix.length());
+            if (strReplaceAll.startsWith(this.mPrefix)) {
+                strSubstring = strReplaceAll.substring(this.mPrefix.length());
             }
             return false;
         }
         try {
-            int parseInt = Integer.parseInt(this.mLowerBound);
-            int parseInt2 = Integer.parseInt(this.mUpperBound);
-            int parseInt3 = Integer.parseInt(substring);
-            return parseInt3 <= parseInt2 && parseInt3 >= parseInt;
+            int i = Integer.parseInt(this.mLowerBound);
+            int i2 = Integer.parseInt(this.mUpperBound);
+            int i3 = Integer.parseInt(strSubstring);
+            return i3 <= i2 && i3 >= i;
         } catch (NumberFormatException e) {
             Log.e("PhoneNumberRange", "Invalid bounds or number.", e);
         }

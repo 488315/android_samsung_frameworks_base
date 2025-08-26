@@ -51,7 +51,7 @@ public class SprObjectShapePath extends SprObjectBase {
 
         /* JADX INFO: Access modifiers changed from: protected */
         /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-        public PathInfo m9225clone() throws CloneNotSupportedException {
+        public PathInfo m9237clone() throws CloneNotSupportedException {
             return (PathInfo) super.clone();
         }
     }
@@ -74,7 +74,7 @@ public class SprObjectShapePath extends SprObjectBase {
         fromSPR(sprInputStream);
     }
 
-    public SprObjectShapePath(XmlPullParser xmlPullParser) throws IOException, XmlPullParserException {
+    public SprObjectShapePath(XmlPullParser xmlPullParser) throws XmlPullParserException, IOException {
         super((byte) 4);
         this.mPathInfoList = null;
         this.path = null;
@@ -209,10 +209,10 @@ public class SprObjectShapePath extends SprObjectBase {
 
     @Override // com.samsung.android.graphics.spr.document.shape.SprObjectBase
     public void fromSPR(SprInputStream sprInputStream) throws IOException {
-        int readInt = sprInputStream.readInt();
-        for (int i = 0; i < readInt; i++) {
-            byte readByte = sprInputStream.readByte();
-            switch (readByte) {
+        int i = sprInputStream.readInt();
+        for (int i2 = 0; i2 < i; i2++) {
+            byte b = sprInputStream.readByte();
+            switch (b) {
                 case 1:
                     moveTo(sprInputStream.readFloat(), sprInputStream.readFloat());
                     break;
@@ -226,15 +226,15 @@ public class SprObjectShapePath extends SprObjectBase {
                     cubicTo(sprInputStream.readFloat(), sprInputStream.readFloat(), sprInputStream.readFloat(), sprInputStream.readFloat(), sprInputStream.readFloat(), sprInputStream.readFloat());
                     break;
                 case 5:
-                    float readFloat = sprInputStream.readFloat();
-                    float readFloat2 = sprInputStream.readFloat();
-                    arcTo(readFloat, readFloat2, sprInputStream.readFloat() + readFloat, sprInputStream.readFloat() + readFloat2, sprInputStream.readFloat(), sprInputStream.readFloat());
+                    float f = sprInputStream.readFloat();
+                    float f2 = sprInputStream.readFloat();
+                    arcTo(f, f2, sprInputStream.readFloat() + f, sprInputStream.readFloat() + f2, sprInputStream.readFloat(), sprInputStream.readFloat());
                     break;
                 case 6:
                     close();
                     break;
                 default:
-                    throw new RuntimeException("unsupported command type:" + ((int) readByte));
+                    throw new RuntimeException("unsupported command type:" + ((int) b));
             }
         }
         super.fromSPR(sprInputStream);
@@ -432,13 +432,13 @@ public class SprObjectShapePath extends SprObjectBase {
 
     @Override // com.samsung.android.graphics.spr.document.shape.SprObjectBase
     /* renamed from: clone */
-    public SprObjectBase mo9224clone() throws CloneNotSupportedException {
-        SprObjectShapePath sprObjectShapePath = (SprObjectShapePath) super.mo9224clone();
+    public SprObjectBase mo9236clone() throws CloneNotSupportedException {
+        SprObjectShapePath sprObjectShapePath = (SprObjectShapePath) super.mo9236clone();
         if (this.mPathInfoList != null) {
             sprObjectShapePath.mPathInfoList = new ArrayList<>();
             Iterator<PathInfo> it = this.mPathInfoList.iterator();
             while (it.hasNext()) {
-                sprObjectShapePath.mPathInfoList.add(it.next().m9225clone());
+                sprObjectShapePath.mPathInfoList.add(it.next().m9237clone());
             }
         }
         sprObjectShapePath.path = new Path(this.path);
@@ -459,29 +459,29 @@ public class SprObjectShapePath extends SprObjectBase {
             return;
         }
         float[] fArr = new float[4];
-        char c = DateFormat.MINUTE;
+        char cCharAt = DateFormat.MINUTE;
         int i = 1;
         int i2 = 0;
         while (i < str.length()) {
-            int nextStart = nextStart(str, i);
-            String trim = str.substring(i2, nextStart).trim();
-            if (trim.length() > 0) {
-                addCommand(fArr, c, trim.charAt(0), getFloats(trim));
-                c = trim.charAt(0);
+            int iNextStart = nextStart(str, i);
+            String strTrim = str.substring(i2, iNextStart).trim();
+            if (strTrim.length() > 0) {
+                addCommand(fArr, cCharAt, strTrim.charAt(0), getFloats(strTrim));
+                cCharAt = strTrim.charAt(0);
             }
-            i2 = nextStart;
-            i = nextStart + 1;
+            i2 = iNextStart;
+            i = iNextStart + 1;
         }
         if (i - i2 != 1 || i2 >= str.length()) {
             return;
         }
-        addCommand(fArr, c, str.charAt(i2), new float[0]);
+        addCommand(fArr, cCharAt, str.charAt(i2), new float[0]);
     }
 
     private int nextStart(String str, int i) {
         while (i < str.length()) {
-            char charAt = str.charAt(i);
-            if ((charAt - 'A') * (charAt - 'Z') <= 0 || (charAt - 'a') * (charAt - 'z') <= 0) {
+            char cCharAt = str.charAt(i);
+            if ((cCharAt - 'A') * (cCharAt - 'Z') <= 0 || (cCharAt - 'a') * (cCharAt - 'z') <= 0) {
                 break;
             }
             i++;
@@ -518,76 +518,411 @@ public class SprObjectShapePath extends SprObjectBase {
         return Arrays.copyOf(fArr, i);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0024 A[LOOP:0: B:2:0x0004->B:13:0x0024, LOOP_END] */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x0027 A[EDGE_INSN: B:14:0x0027->B:15:0x0027 BREAK  A[LOOP:0: B:2:0x0004->B:13:0x0024], SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:17:0x0024 A[LOOP:0: B:3:0x0004->B:17:0x0024, LOOP_END] */
+    /* JADX WARN: Removed duplicated region for block: B:21:0x0027 A[EDGE_INSN: B:21:0x0027->B:18:0x0027 BREAK  A[LOOP:0: B:3:0x0004->B:17:0x0024], SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private void extract(java.lang.String r5, int r6, com.samsung.android.graphics.spr.document.shape.SprObjectShapePath.ExtractFloatResult r7) {
-        /*
-            r4 = this;
-            r4 = 0
-            r7.mEndWithNegSign = r4
-            r0 = r6
-        L4:
-            int r1 = r5.length()
-            if (r0 >= r1) goto L27
-            char r1 = r5.charAt(r0)
-            r2 = 32
-            r3 = 1
-            if (r1 == r2) goto L20
-            r2 = 44
-            if (r1 == r2) goto L20
-            r2 = 45
-            if (r1 == r2) goto L1c
-            goto L21
-        L1c:
-            if (r0 == r6) goto L21
-            r7.mEndWithNegSign = r3
-        L20:
-            r4 = r3
-        L21:
-            if (r4 == 0) goto L24
-            goto L27
-        L24:
-            int r0 = r0 + 1
-            goto L4
-        L27:
-            r7.mEndPosition = r0
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.graphics.spr.document.shape.SprObjectShapePath.extract(java.lang.String, int, com.samsung.android.graphics.spr.document.shape.SprObjectShapePath$ExtractFloatResult):void");
+    private void extract(String str, int i, ExtractFloatResult extractFloatResult) {
+        boolean z = false;
+        extractFloatResult.mEndWithNegSign = false;
+        int i2 = i;
+        while (i2 < str.length()) {
+            char cCharAt = str.charAt(i2);
+            if (cCharAt == ' ' || cCharAt == ',') {
+                z = true;
+                if (!z) {
+                    break;
+                } else {
+                    i2++;
+                }
+            } else {
+                if (cCharAt == '-' && i2 != i) {
+                    extractFloatResult.mEndWithNegSign = true;
+                    z = true;
+                }
+                if (!z) {
+                }
+            }
+        }
+        extractFloatResult.mEndPosition = i2;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:7:0x002e  */
+    /* JADX WARN: Removed duplicated region for block: B:15:0x002e  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private void addCommand(float[] r24, char r25, char r26, float[] r27) {
-        /*
-            Method dump skipped, instructions count: 888
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.graphics.spr.document.shape.SprObjectShapePath.addCommand(float[], char, char, float[]):void");
+    private void addCommand(float[] fArr, char c, char c2, float[] fArr2) {
+        int i;
+        int i2;
+        int i3;
+        boolean z;
+        boolean z2;
+        char c3;
+        char c4;
+        int i4;
+        float f;
+        float f2;
+        float f3;
+        float f4;
+        float f5;
+        float f6;
+        float f7;
+        float f8;
+        float f9;
+        float f10;
+        float f11;
+        float f12;
+        SprObjectShapePath sprObjectShapePath = this;
+        boolean z3 = false;
+        float f13 = fArr[0];
+        boolean z4 = true;
+        float f14 = fArr[1];
+        char c5 = 2;
+        float f15 = fArr[2];
+        char c6 = 3;
+        float f16 = fArr[3];
+        switch (c2) {
+            case 'A':
+            case 'a':
+                i = 7;
+                i2 = i;
+                float f17 = f13;
+                float f18 = f14;
+                i3 = 0;
+                char c7 = c;
+                while (i3 < fArr2.length) {
+                    if (c2 == 'A') {
+                        z = z3;
+                        z2 = z4;
+                        c3 = c5;
+                        c4 = c6;
+                        i4 = i3;
+                        int i5 = i4 + 5;
+                        int i6 = i4 + 6;
+                        drawArc(f17, f18, fArr2[i5], fArr2[i6], fArr2[i4], fArr2[i4 + 1], fArr2[i4 + 2], fArr2[i4 + 3] != 0.0f ? z2 : z, fArr2[i4 + 4] != 0.0f ? z2 : z);
+                        f15 = fArr2[i5];
+                        f17 = f15;
+                        f16 = fArr2[i6];
+                        f18 = f16;
+                    } else if (c2 == 'C') {
+                        z = z3;
+                        z2 = z4;
+                        c3 = c5;
+                        c4 = c6;
+                        i4 = i3;
+                        int i7 = i4 + 2;
+                        int i8 = i4 + 3;
+                        int i9 = i4 + 4;
+                        int i10 = i4 + 5;
+                        sprObjectShapePath.cubicTo(fArr2[i4], fArr2[i4 + 1], fArr2[i7], fArr2[i8], fArr2[i9], fArr2[i10]);
+                        float f19 = fArr2[i9];
+                        float f20 = fArr2[i10];
+                        float f21 = fArr2[i7];
+                        float f22 = fArr2[i8];
+                        f17 = f19;
+                        f18 = f20;
+                        f16 = f22;
+                        f15 = f21;
+                    } else if (c2 != 'H') {
+                        if (c2 != 'Q') {
+                            if (c2 == 'V') {
+                                z = z3;
+                                z2 = z4;
+                                c3 = c5;
+                                c4 = c6;
+                                i4 = i3;
+                                f3 = fArr2[i4];
+                                sprObjectShapePath.lineTo(f17, f3);
+                            } else if (c2 != 'a') {
+                                if (c2 != 'c') {
+                                    z = z3;
+                                    if (c2 != 'h') {
+                                        if (c2 != 'q') {
+                                            z2 = z4;
+                                            if (c2 != 'v') {
+                                                if (c2 == 'L') {
+                                                    c3 = c5;
+                                                    c4 = c6;
+                                                    f7 = fArr2[i3];
+                                                    f8 = fArr2[i3 + 1];
+                                                    sprObjectShapePath.lineTo(f7, f8);
+                                                } else if (c2 != 'M') {
+                                                    c3 = c5;
+                                                    if (c2 != 'S') {
+                                                        c4 = c6;
+                                                        if (c2 == 'T') {
+                                                            if (c7 == 'q' || c7 == 't' || c7 == 'Q' || c7 == 'T') {
+                                                                f17 = (f17 * 2.0f) - f15;
+                                                                f18 = (f18 * 2.0f) - f16;
+                                                            }
+                                                            int i11 = i3 + 1;
+                                                            sprObjectShapePath.quadTo(f17, f18, fArr2[i3], fArr2[i11]);
+                                                            float f23 = fArr2[i3];
+                                                            f3 = fArr2[i11];
+                                                            f15 = f17;
+                                                            f16 = f18;
+                                                            i4 = i3;
+                                                            f17 = f23;
+                                                        } else if (c2 == 'l') {
+                                                            f17 += fArr2[i3];
+                                                            f18 += fArr2[i3 + 1];
+                                                            sprObjectShapePath.lineTo(f17, f18);
+                                                        } else if (c2 == 'm') {
+                                                            f17 += fArr2[i3];
+                                                            f18 += fArr2[i3 + 1];
+                                                            sprObjectShapePath.moveTo(f17, f18);
+                                                        } else if (c2 == 's') {
+                                                            if (c7 == 'c' || c7 == 's' || c7 == 'C' || c7 == 'S') {
+                                                                f9 = f17 - f15;
+                                                                f10 = f18 - f16;
+                                                            } else {
+                                                                f10 = 0.0f;
+                                                                f9 = 0.0f;
+                                                            }
+                                                            int i12 = i3 + 1;
+                                                            int i13 = i3 + 2;
+                                                            int i14 = i3 + 3;
+                                                            sprObjectShapePath.cubicTo(f9 + f17, f18 + f10, f17 + fArr2[i3], f18 + fArr2[i12], fArr2[i13] + f17, fArr2[i14] + f18);
+                                                            f4 = fArr2[i3] + f17;
+                                                            f5 = fArr2[i12] + f18;
+                                                            f17 += fArr2[i13];
+                                                            f6 = fArr2[i14];
+                                                        } else if (c2 == 't') {
+                                                            if (c7 == 'q' || c7 == 't' || c7 == 'Q' || c7 == 'T') {
+                                                                f11 = f17 - f15;
+                                                                f12 = f18 - f16;
+                                                            } else {
+                                                                f12 = 0.0f;
+                                                                f11 = 0.0f;
+                                                            }
+                                                            float f24 = f11 + f17;
+                                                            float f25 = f12 + f18;
+                                                            int i15 = i3 + 1;
+                                                            sprObjectShapePath.quadTo(f24, f25, fArr2[i3] + f17, fArr2[i15] + f18);
+                                                            f17 += fArr2[i3];
+                                                            f18 += fArr2[i15];
+                                                            f16 = f25;
+                                                            f15 = f24;
+                                                        }
+                                                    } else {
+                                                        c4 = c6;
+                                                        if (c7 == 'c' || c7 == 's' || c7 == 'C' || c7 == 'S') {
+                                                            f17 = (f17 * 2.0f) - f15;
+                                                            f18 = (f18 * 2.0f) - f16;
+                                                        }
+                                                        int i16 = i3 + 1;
+                                                        int i17 = i3 + 2;
+                                                        int i18 = i3 + 3;
+                                                        sprObjectShapePath.cubicTo(f17, f18, fArr2[i3], fArr2[i16], fArr2[i17], fArr2[i18]);
+                                                        f = fArr2[i3];
+                                                        f2 = fArr2[i16];
+                                                        f17 = fArr2[i17];
+                                                        f18 = fArr2[i18];
+                                                        i4 = i3;
+                                                    }
+                                                } else {
+                                                    c3 = c5;
+                                                    c4 = c6;
+                                                    f7 = fArr2[i3];
+                                                    f8 = fArr2[i3 + 1];
+                                                    sprObjectShapePath.moveTo(f7, f8);
+                                                }
+                                                f17 = f7;
+                                                f18 = f8;
+                                            } else {
+                                                c3 = c5;
+                                                c4 = c6;
+                                                f18 += fArr2[i3];
+                                                sprObjectShapePath.lineTo(f17, f18);
+                                            }
+                                        } else {
+                                            z2 = z4;
+                                            c3 = c5;
+                                            c4 = c6;
+                                            int i19 = i3 + 1;
+                                            int i20 = i3 + 2;
+                                            int i21 = i3 + 3;
+                                            sprObjectShapePath.quadTo(fArr2[i3] + f17, fArr2[i19] + f18, fArr2[i20] + f17, fArr2[i21] + f18);
+                                            f4 = fArr2[i3] + f17;
+                                            f5 = fArr2[i19] + f18;
+                                            f17 += fArr2[i20];
+                                            f6 = fArr2[i21];
+                                        }
+                                        f18 += f6;
+                                        f15 = f4;
+                                        f16 = f5;
+                                    } else {
+                                        z2 = z4;
+                                        c3 = c5;
+                                        c4 = c6;
+                                        f17 += fArr2[i3];
+                                        sprObjectShapePath.lineTo(f17, f18);
+                                    }
+                                } else {
+                                    z = z3;
+                                    z2 = z4;
+                                    c3 = c5;
+                                    c4 = c6;
+                                    int i22 = i3 + 2;
+                                    int i23 = i3 + 3;
+                                    int i24 = i3 + 4;
+                                    int i25 = i3 + 5;
+                                    sprObjectShapePath.cubicTo(fArr2[i3] + f17, fArr2[i3 + 1] + f18, fArr2[i22] + f17, fArr2[i23] + f18, fArr2[i24] + f17, fArr2[i25] + f18);
+                                    float f26 = fArr2[i22] + f17;
+                                    float f27 = fArr2[i23] + f18;
+                                    f17 += fArr2[i24];
+                                    f18 += fArr2[i25];
+                                    f15 = f26;
+                                    f16 = f27;
+                                }
+                                i4 = i3;
+                            } else {
+                                z = z3;
+                                z2 = z4;
+                                c3 = c5;
+                                c4 = c6;
+                                int i26 = i3 + 5;
+                                int i27 = i3 + 6;
+                                float f28 = f18;
+                                i4 = i3;
+                                float f29 = f17;
+                                drawArc(f29, f28, fArr2[i26] + f17, fArr2[i27] + f18, fArr2[i3], fArr2[i3 + 1], fArr2[i3 + 2], fArr2[i3 + 3] != 0.0f ? z2 : z, fArr2[i3 + 4] != 0.0f ? z2 : z);
+                                f17 = f29 + fArr2[i26];
+                                f18 = f28 + fArr2[i27];
+                                f15 = f17;
+                                f16 = f18;
+                            }
+                            f18 = f3;
+                        } else {
+                            z = z3;
+                            z2 = z4;
+                            c3 = c5;
+                            c4 = c6;
+                            i4 = i3;
+                            int i28 = i4 + 1;
+                            int i29 = i4 + 2;
+                            int i30 = i4 + 3;
+                            sprObjectShapePath.quadTo(fArr2[i4], fArr2[i28], fArr2[i29], fArr2[i30]);
+                            f = fArr2[i4];
+                            f2 = fArr2[i28];
+                            f17 = fArr2[i29];
+                            f18 = fArr2[i30];
+                        }
+                        f15 = f;
+                        f16 = f2;
+                    } else {
+                        z = z3;
+                        z2 = z4;
+                        c3 = c5;
+                        c4 = c6;
+                        i4 = i3;
+                        float f30 = fArr2[i4];
+                        sprObjectShapePath.lineTo(f30, f18);
+                        f17 = f30;
+                    }
+                    i3 = i4 + i2;
+                    sprObjectShapePath = this;
+                    c7 = c2;
+                    z3 = z;
+                    z4 = z2;
+                    c5 = c3;
+                    c6 = c4;
+                }
+                fArr[z3 ? 1 : 0] = f17;
+                fArr[z4 ? 1 : 0] = f18;
+                fArr[c5] = f15;
+                fArr[c6] = f16;
+                break;
+            case 'C':
+            case 'c':
+                i = 6;
+                i2 = i;
+                float f172 = f13;
+                float f182 = f14;
+                i3 = 0;
+                char c72 = c;
+                while (i3 < fArr2.length) {
+                }
+                fArr[z3 ? 1 : 0] = f172;
+                fArr[z4 ? 1 : 0] = f182;
+                fArr[c5] = f15;
+                fArr[c6] = f16;
+                break;
+            case 'H':
+            case 'V':
+            case 'h':
+            case 'v':
+                i2 = 1;
+                float f1722 = f13;
+                float f1822 = f14;
+                i3 = 0;
+                char c722 = c;
+                while (i3 < fArr2.length) {
+                }
+                fArr[z3 ? 1 : 0] = f1722;
+                fArr[z4 ? 1 : 0] = f1822;
+                fArr[c5] = f15;
+                fArr[c6] = f16;
+                break;
+            case 'L':
+            case 'M':
+            case 'T':
+            case 'l':
+            case 'm':
+            case 't':
+            default:
+                i2 = 2;
+                float f17222 = f13;
+                float f18222 = f14;
+                i3 = 0;
+                char c7222 = c;
+                while (i3 < fArr2.length) {
+                }
+                fArr[z3 ? 1 : 0] = f17222;
+                fArr[z4 ? 1 : 0] = f18222;
+                fArr[c5] = f15;
+                fArr[c6] = f16;
+                break;
+            case 'Q':
+            case 'S':
+            case 'q':
+            case 's':
+                i = 4;
+                i2 = i;
+                float f172222 = f13;
+                float f182222 = f14;
+                i3 = 0;
+                char c72222 = c;
+                while (i3 < fArr2.length) {
+                }
+                fArr[z3 ? 1 : 0] = f172222;
+                fArr[z4 ? 1 : 0] = f182222;
+                fArr[c5] = f15;
+                fArr[c6] = f16;
+                break;
+            case 'Z':
+            case 'z':
+                sprObjectShapePath.close();
+                break;
+        }
     }
 
     private void drawArc(float f, float f2, float f3, float f4, float f5, float f6, float f7, boolean z, boolean z2) {
         double d;
         double d2;
         double radians = Math.toRadians(f7);
-        double cos = Math.cos(radians);
-        double sin = Math.sin(radians);
+        double dCos = Math.cos(radians);
+        double dSin = Math.sin(radians);
         double d3 = f;
         double d4 = f2;
         double d5 = f5;
-        double d6 = ((d3 * cos) + (d4 * sin)) / d5;
+        double d6 = ((d3 * dCos) + (d4 * dSin)) / d5;
         double d7 = f6;
-        double d8 = (((-f) * sin) + (d4 * cos)) / d7;
+        double d8 = (((-f) * dSin) + (d4 * dCos)) / d7;
         double d9 = f4;
-        double d10 = ((f3 * cos) + (d9 * sin)) / d5;
-        double d11 = (((-f3) * sin) + (d9 * cos)) / d7;
+        double d10 = ((f3 * dCos) + (d9 * dSin)) / d5;
+        double d11 = (((-f3) * dSin) + (d9 * dCos)) / d7;
         double d12 = d6 - d10;
         double d13 = d8 - d11;
         double d14 = (d6 + d10) / 2.0d;
@@ -598,13 +933,13 @@ public class SprObjectShapePath extends SprObjectBase {
         }
         double d17 = (1.0d / d16) - 0.25d;
         if (d17 < SContextConstants.ENVIRONMENT_VALUE_UNKNOWN) {
-            float sqrt = (float) (Math.sqrt(d16) / 1.99999d);
-            drawArc(f, f2, f3, f4, f5 * sqrt, sqrt * f6, f7, z, z2);
+            float fSqrt = (float) (Math.sqrt(d16) / 1.99999d);
+            drawArc(f, f2, f3, f4, f5 * fSqrt, fSqrt * f6, f7, z, z2);
             return;
         }
-        double sqrt2 = Math.sqrt(d17);
-        double d18 = d12 * sqrt2;
-        double d19 = sqrt2 * d13;
+        double dSqrt = Math.sqrt(d17);
+        double d18 = d12 * dSqrt;
+        double d19 = dSqrt * d13;
         if (z == z2) {
             d = d14 - d19;
             d2 = d15 + d18;
@@ -612,60 +947,60 @@ public class SprObjectShapePath extends SprObjectBase {
             d = d14 + d19;
             d2 = d15 - d18;
         }
-        double atan2 = Math.atan2(d8 - d2, d6 - d);
-        double atan22 = Math.atan2(d11 - d2, d10 - d) - atan2;
-        if (z2 != (atan22 >= SContextConstants.ENVIRONMENT_VALUE_UNKNOWN)) {
-            atan22 = atan22 > SContextConstants.ENVIRONMENT_VALUE_UNKNOWN ? atan22 - 6.283185307179586d : atan22 + 6.283185307179586d;
+        double dAtan2 = Math.atan2(d8 - d2, d6 - d);
+        double dAtan22 = Math.atan2(d11 - d2, d10 - d) - dAtan2;
+        if (z2 != (dAtan22 >= SContextConstants.ENVIRONMENT_VALUE_UNKNOWN)) {
+            dAtan22 = dAtan22 > SContextConstants.ENVIRONMENT_VALUE_UNKNOWN ? dAtan22 - 6.283185307179586d : dAtan22 + 6.283185307179586d;
         }
         double d20 = d * d5;
         double d21 = d2 * d7;
-        arcToBezier((d20 * cos) - (d21 * sin), (d20 * sin) + (d21 * cos), d5, d7, d3, d4, radians, atan2, atan22);
+        arcToBezier((d20 * dCos) - (d21 * dSin), (d20 * dSin) + (d21 * dCos), d5, d7, d3, d4, radians, dAtan2, dAtan22);
     }
 
     private void arcToBezier(double d, double d2, double d3, double d4, double d5, double d6, double d7, double d8, double d9) {
         double d10 = d3;
-        int abs = Math.abs((int) Math.ceil((d9 * 4.0d) / 3.141592653589793d));
-        double cos = Math.cos(d7);
-        double sin = Math.sin(d7);
-        double cos2 = Math.cos(d8);
-        double sin2 = Math.sin(d8);
+        int iAbs = Math.abs((int) Math.ceil((d9 * 4.0d) / 3.141592653589793d));
+        double dCos = Math.cos(d7);
+        double dSin = Math.sin(d7);
+        double dCos2 = Math.cos(d8);
+        double dSin2 = Math.sin(d8);
         double d11 = -d10;
-        double d12 = d11 * cos;
-        double d13 = d4 * sin;
-        double d14 = (d12 * sin2) - (d13 * cos2);
-        double d15 = d11 * sin;
-        double d16 = d4 * cos;
-        double d17 = (sin2 * d15) + (cos2 * d16);
-        double d18 = d9 / abs;
+        double d12 = d11 * dCos;
+        double d13 = d4 * dSin;
+        double d14 = (d12 * dSin2) - (d13 * dCos2);
+        double d15 = d11 * dSin;
+        double d16 = d4 * dCos;
+        double d17 = (dSin2 * d15) + (dCos2 * d16);
+        double d18 = d9 / iAbs;
         double d19 = d17;
         double d20 = d14;
         int i = 0;
         double d21 = d5;
         double d22 = d6;
         double d23 = d8;
-        while (i < abs) {
+        while (i < iAbs) {
             double d24 = d23 + d18;
-            double sin3 = Math.sin(d24);
-            double cos3 = Math.cos(d24);
-            double d25 = (d + ((d10 * cos) * cos3)) - (d13 * sin3);
+            double dSin3 = Math.sin(d24);
+            double dCos3 = Math.cos(d24);
+            double d25 = (d + ((d10 * dCos) * dCos3)) - (d13 * dSin3);
             int i2 = i;
-            double d26 = d2 + (d3 * sin * cos3) + (d16 * sin3);
-            double d27 = (d12 * sin3) - (d13 * cos3);
-            double d28 = (sin3 * d15) + (cos3 * d16);
+            double d26 = d2 + (d3 * dSin * dCos3) + (d16 * dSin3);
+            double d27 = (d12 * dSin3) - (d13 * dCos3);
+            double d28 = (dSin3 * d15) + (dCos3 * d16);
             double d29 = d24 - d23;
-            double tan = Math.tan(d29 / 2.0d);
-            double sin4 = (Math.sin(d29) * (Math.sqrt(((tan * 3.0d) * tan) + 4.0d) - 1.0d)) / 3.0d;
-            double d30 = d21 + (d20 * sin4);
-            cubicTo((float) d30, (float) (d22 + (d19 * sin4)), (float) (d25 - (sin4 * d27)), (float) (d26 - (sin4 * d28)), (float) d25, (float) d26);
-            sin = sin;
+            double dTan = Math.tan(d29 / 2.0d);
+            double dSin4 = (Math.sin(d29) * (Math.sqrt(((dTan * 3.0d) * dTan) + 4.0d) - 1.0d)) / 3.0d;
+            double d30 = d21 + (d20 * dSin4);
+            cubicTo((float) d30, (float) (d22 + (d19 * dSin4)), (float) (d25 - (dSin4 * d27)), (float) (d26 - (dSin4 * d28)), (float) d25, (float) d26);
+            dSin = dSin;
             d18 = d18;
             d21 = d25;
             d22 = d26;
             i = i2 + 1;
-            abs = abs;
+            iAbs = iAbs;
             d23 = d24;
             d19 = d28;
-            cos = cos;
+            dCos = dCos;
             d20 = d27;
             d10 = d3;
         }

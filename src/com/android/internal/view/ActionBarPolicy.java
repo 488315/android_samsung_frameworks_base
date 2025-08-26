@@ -65,13 +65,13 @@ public class ActionBarPolicy {
     }
 
     public int getTabContainerHeight() {
-        TypedArray obtainStyledAttributes = this.mContext.obtainStyledAttributes(null, R.styleable.ActionBar, 16843470, 0);
-        int layoutDimension = obtainStyledAttributes.getLayoutDimension(4, 0);
+        TypedArray typedArrayObtainStyledAttributes = this.mContext.obtainStyledAttributes(null, R.styleable.ActionBar, 16843470, 0);
+        int layoutDimension = typedArrayObtainStyledAttributes.getLayoutDimension(4, 0);
         Resources resources = this.mContext.getResources();
         if (!hasEmbeddedTabs()) {
             layoutDimension = Math.min(layoutDimension, resources.getDimensionPixelSize(R.dimen.action_bar_stacked_max_height));
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
         return layoutDimension;
     }
 

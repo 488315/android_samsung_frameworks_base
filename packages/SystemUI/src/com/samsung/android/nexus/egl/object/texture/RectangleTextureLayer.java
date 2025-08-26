@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.opengl.Matrix;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class RectangleTextureLayer extends TextureLayer {
     public final Rect mObjectRect;
@@ -31,14 +30,14 @@ public class RectangleTextureLayer extends TextureLayer {
         super.init();
         Matrix.setIdentityM(this.mRotationMatrix, 0);
         Matrix.rotateM(this.mRotationMatrix, 0, 0.0f, 0.0f, 0.0f, 0.0f);
-        float abs = Math.abs(this.mObjectRect.width()) / 2.0f;
-        float abs2 = Math.abs(this.mObjectRect.height()) / 2.0f;
-        float f = -abs;
-        float[] fArr = {f, abs2, 0.0f, 0.0f};
-        float[] fArr2 = {abs, abs2, 0.0f, 0.0f};
-        float f2 = -abs2;
+        float fAbs = Math.abs(this.mObjectRect.width()) / 2.0f;
+        float fAbs2 = Math.abs(this.mObjectRect.height()) / 2.0f;
+        float f = -fAbs;
+        float[] fArr = {f, fAbs2, 0.0f, 0.0f};
+        float[] fArr2 = {fAbs, fAbs2, 0.0f, 0.0f};
+        float f2 = -fAbs2;
         float[] fArr3 = {f, f2, 0.0f, 0.0f};
-        float[] fArr4 = {abs, f2, 0.0f, 0.0f};
+        float[] fArr4 = {fAbs, f2, 0.0f, 0.0f};
         Rect rect = this.mObjectRect;
         float f3 = ((rect.left + rect.right) / 2.0f) + 0.0f;
         float f4 = ((rect.top + rect.bottom) / 2.0f) + 0.0f;

@@ -4,7 +4,6 @@ import androidx.compose.ui.geometry.Offset;
 import androidx.compose.ui.semantics.SemanticsPropertyKey;
 import androidx.compose.ui.unit.Dp;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class SelectionHandlesKt {
     public static final float HandleHeight;
@@ -20,11 +19,11 @@ public abstract class SelectionHandlesKt {
     }
 
     /* renamed from: getAdjustedCoordinates-k-4lQ0M, reason: not valid java name */
-    public static final long m234getAdjustedCoordinatesk4lQ0M(long j) {
-        float intBitsToFloat = Float.intBitsToFloat((int) (j >> 32));
-        float intBitsToFloat2 = Float.intBitsToFloat((int) (j & 4294967295L)) - 1.0f;
-        long floatToRawIntBits = (Float.floatToRawIntBits(intBitsToFloat2) & 4294967295L) | (Float.floatToRawIntBits(intBitsToFloat) << 32);
+    public static final long m235getAdjustedCoordinatesk4lQ0M(long j) {
+        float fIntBitsToFloat = Float.intBitsToFloat((int) (j >> 32));
+        float fIntBitsToFloat2 = Float.intBitsToFloat((int) (j & 4294967295L)) - 1.0f;
+        long jFloatToRawIntBits = (Float.floatToRawIntBits(fIntBitsToFloat2) & 4294967295L) | (Float.floatToRawIntBits(fIntBitsToFloat) << 32);
         Offset.Companion companion = Offset.Companion;
-        return floatToRawIntBits;
+        return jFloatToRawIntBits;
     }
 }

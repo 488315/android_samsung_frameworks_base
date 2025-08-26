@@ -59,9 +59,9 @@ public interface ICoverService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ICoverService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ICoverService)) {
-                return (ICoverService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ICoverService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ICoverService)) {
+                return (ICoverService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -100,11 +100,11 @@ public interface ICoverService extends IInterface {
                 parcel.enforceNoDataAvail();
                 onUpdateCoverState(coverState);
             } else if (i == 3) {
-                boolean readBoolean = parcel.readBoolean();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                int onCoverAppCovered = onCoverAppCovered(readBoolean);
+                int iOnCoverAppCovered = onCoverAppCovered(z);
                 parcel2.writeNoException();
-                parcel2.writeInt(onCoverAppCovered);
+                parcel2.writeInt(iOnCoverAppCovered);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -129,40 +129,40 @@ public interface ICoverService extends IInterface {
 
             @Override // com.samsung.android.cover.ICoverService
             public void onSystemReady() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICoverService.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICoverService.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.cover.ICoverService
             public void onUpdateCoverState(CoverState coverState) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICoverService.DESCRIPTOR);
-                    obtain.writeTypedObject(coverState, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICoverService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(coverState, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.cover.ICoverService
             public int onCoverAppCovered(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICoverService.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ICoverService.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

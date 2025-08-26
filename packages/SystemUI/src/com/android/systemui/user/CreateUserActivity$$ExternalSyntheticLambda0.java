@@ -18,7 +18,6 @@ import com.sec.ims.volte2.data.VolteConstants;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class CreateUserActivity$$ExternalSyntheticLambda0 implements ActivityStarter, NewUserData {
     public final /* synthetic */ CreateUserActivity f$0;
@@ -34,7 +33,7 @@ public final /* synthetic */ class CreateUserActivity$$ExternalSyntheticLambda0 
         final Consumer consumer = new Consumer() { // from class: com.android.systemui.user.CreateUserActivity$$ExternalSyntheticLambda5
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                CreateUserActivity createUserActivity2 = CreateUserActivity.this;
+                CreateUserActivity createUserActivity2 = createUserActivity;
                 Boolean bool2 = bool;
                 UserInfo userInfo = (UserInfo) obj;
                 int i = CreateUserActivity.$r8$clinit;
@@ -60,8 +59,8 @@ public final /* synthetic */ class CreateUserActivity$$ExternalSyntheticLambda0 
         userCreator.bgExecutor.execute(new Runnable() { // from class: com.android.systemui.user.UserCreator$createUser$1
             @Override // java.lang.Runnable
             public final void run() {
-                final UserInfo createUser = UserCreator.this.userManager.createUser(str3, "android.os.usertype.full.SECONDARY", 0);
-                final UserCreator userCreator2 = UserCreator.this;
+                final UserInfo userInfoCreateUser = userCreator.userManager.createUser(str3, "android.os.usertype.full.SECONDARY", 0);
+                final UserCreator userCreator2 = userCreator;
                 Executor executor = userCreator2.mainExecutor;
                 final Dialog dialog = userCreatingDialog;
                 final Runnable runnable = createUserActivity$$ExternalSyntheticLambda2;
@@ -70,37 +69,37 @@ public final /* synthetic */ class CreateUserActivity$$ExternalSyntheticLambda0 
                 executor.execute(new Runnable() { // from class: com.android.systemui.user.UserCreator$createUser$1.1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        if (createUser == null) {
+                        if (userInfoCreateUser == null) {
                             dialog.dismiss();
                             runnable.run();
                             return;
                         }
                         if (UserManager.supportsMultipleUsers()) {
                             Resources resources = userCreator2.context.getResources();
-                            Drawable drawable3 = drawable2;
-                            if (drawable3 == null) {
-                                drawable3 = UserIcons.getDefaultUserIcon(resources, createUser.id, false);
+                            Drawable defaultUserIcon = drawable2;
+                            if (defaultUserIcon == null) {
+                                defaultUserIcon = UserIcons.getDefaultUserIcon(resources, userInfoCreateUser.id, false);
                             }
-                            userCreator2.userManager.setUserIcon(createUser.id, drawable2 == null ? UserIcons.convertToBitmapAtUserIconSize(resources, drawable3) : UserIcons.convertToBitmap(drawable3));
+                            userCreator2.userManager.setUserIcon(userInfoCreateUser.id, drawable2 == null ? UserIcons.convertToBitmapAtUserIconSize(resources, defaultUserIcon) : UserIcons.convertToBitmap(defaultUserIcon));
                         } else {
                             final UserCreator userCreator3 = userCreator2;
                             Executor executor2 = userCreator3.bgExecutor;
-                            final Drawable drawable4 = drawable2;
-                            final UserInfo userInfo = createUser;
+                            final Drawable drawable3 = drawable2;
+                            final UserInfo userInfo = userInfoCreateUser;
                             executor2.execute(new Runnable() { // from class: com.android.systemui.user.UserCreator.createUser.1.1.1
                                 @Override // java.lang.Runnable
                                 public final void run() {
-                                    Drawable drawable5 = drawable4;
+                                    Drawable defaultUserIcon2 = drawable3;
                                     Resources resources2 = userCreator3.context.getResources();
-                                    if (drawable5 == null) {
-                                        drawable5 = UserIcons.getDefaultUserIcon(resources2, userInfo.id, false);
+                                    if (defaultUserIcon2 == null) {
+                                        defaultUserIcon2 = UserIcons.getDefaultUserIcon(resources2, userInfo.id, false);
                                     }
-                                    userCreator3.userManager.setUserIcon(userInfo.id, UserIcons.convertToBitmapAtUserIconSize(resources2, drawable5));
+                                    userCreator3.userManager.setUserIcon(userInfo.id, UserIcons.convertToBitmapAtUserIconSize(resources2, defaultUserIcon2));
                                 }
                             });
                         }
                         dialog.dismiss();
-                        consumer2.accept(createUser);
+                        consumer2.accept(userInfoCreateUser);
                     }
                 });
             }
@@ -115,7 +114,7 @@ public final /* synthetic */ class CreateUserActivity$$ExternalSyntheticLambda0 
             @Override // com.android.systemui.plugins.ActivityStarter.OnDismissAction
             public final boolean onDismiss() {
                 Intent intent2 = intent;
-                CreateUserActivity createUserActivity2 = CreateUserActivity.this;
+                CreateUserActivity createUserActivity2 = createUserActivity;
                 createUserActivity2.mCreateUserDialogController.mWaitingForActivityResult = true;
                 createUserActivity2.startActivityForResult(intent2, VolteConstants.ErrorCode.CLIENT_ERROR_NOT_ALLOWED_URI);
                 return true;

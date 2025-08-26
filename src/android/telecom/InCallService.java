@@ -278,10 +278,10 @@ public abstract class InCallService extends Service {
 
         @Override // com.android.internal.telecom.IInCallService
         public void setPostDialWait(String str, String str2) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = str;
-            obtain.arg2 = str2;
-            InCallService.this.mHandler.obtainMessage(4, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = str;
+            someArgsObtain.arg2 = str2;
+            InCallService.this.mHandler.obtainMessage(4, someArgsObtain).sendToTarget();
         }
 
         @Override // com.android.internal.telecom.IInCallService
@@ -321,11 +321,11 @@ public abstract class InCallService extends Service {
 
         @Override // com.android.internal.telecom.IInCallService
         public void onConnectionEvent(String str, String str2, Bundle bundle) {
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = str;
-            obtain.arg2 = str2;
-            obtain.arg3 = bundle;
-            InCallService.this.mHandler.obtainMessage(9, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = str;
+            someArgsObtain.arg2 = str2;
+            someArgsObtain.arg3 = bundle;
+            InCallService.this.mHandler.obtainMessage(9, someArgsObtain).sendToTarget();
         }
 
         @Override // com.android.internal.telecom.IInCallService

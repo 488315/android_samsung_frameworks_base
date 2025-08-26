@@ -10,7 +10,7 @@ import org.xmlpull.v1.XmlSerializer;
 
 /* loaded from: classes.dex */
 public interface XmlSerializerAndParser<T> {
-    T createFromXml(TypedXmlPullParser typedXmlPullParser) throws IOException, XmlPullParserException;
+    T createFromXml(TypedXmlPullParser typedXmlPullParser) throws XmlPullParserException, IOException;
 
     void writeAsXml(T t, TypedXmlSerializer typedXmlSerializer) throws IOException;
 
@@ -18,7 +18,7 @@ public interface XmlSerializerAndParser<T> {
         writeAsXml((XmlSerializerAndParser<T>) t, XmlUtils.makeTyped(xmlSerializer));
     }
 
-    default T createFromXml(XmlPullParser xmlPullParser) throws IOException, XmlPullParserException {
+    default T createFromXml(XmlPullParser xmlPullParser) throws XmlPullParserException, IOException {
         return createFromXml(XmlUtils.makeTyped(xmlPullParser));
     }
 }

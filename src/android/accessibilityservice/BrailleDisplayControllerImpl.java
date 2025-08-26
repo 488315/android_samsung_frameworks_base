@@ -1,7 +1,6 @@
 package android.accessibilityservice;
 
 import android.accessibilityservice.BrailleDisplayController;
-import android.accessibilityservice.BrailleDisplayControllerImpl;
 import android.accessibilityservice.IBrailleDisplayController;
 import android.bluetooth.BluetoothDevice;
 import android.hardware.usb.UsbDevice;
@@ -47,8 +46,8 @@ public final class BrailleDisplayControllerImpl implements BrailleDisplayControl
         Objects.requireNonNull(brailleDisplayCallback);
         connect(new FunctionalUtils.RemoteExceptionIgnoringConsumer() { // from class: android.accessibilityservice.BrailleDisplayControllerImpl$$ExternalSyntheticLambda1
             @Override // com.android.internal.util.FunctionalUtils.RemoteExceptionIgnoringConsumer
-            public final void acceptOrThrow(Object obj) {
-                BrailleDisplayControllerImpl.this.lambda$connect$0(bluetoothDevice, (IAccessibilityServiceConnection) obj);
+            public final void acceptOrThrow(Object obj) throws RemoteException {
+                this.f$0.lambda$connect$0(bluetoothDevice, (IAccessibilityServiceConnection) obj);
             }
         }, executor, brailleDisplayCallback);
     }
@@ -70,8 +69,8 @@ public final class BrailleDisplayControllerImpl implements BrailleDisplayControl
         Objects.requireNonNull(brailleDisplayCallback);
         connect(new FunctionalUtils.RemoteExceptionIgnoringConsumer() { // from class: android.accessibilityservice.BrailleDisplayControllerImpl$$ExternalSyntheticLambda2
             @Override // com.android.internal.util.FunctionalUtils.RemoteExceptionIgnoringConsumer
-            public final void acceptOrThrow(Object obj) {
-                BrailleDisplayControllerImpl.this.lambda$connect$1(usbDevice, (IAccessibilityServiceConnection) obj);
+            public final void acceptOrThrow(Object obj) throws RemoteException {
+                this.f$0.lambda$connect$1(usbDevice, (IAccessibilityServiceConnection) obj);
             }
         }, executor, brailleDisplayCallback);
     }
@@ -87,7 +86,7 @@ public final class BrailleDisplayControllerImpl implements BrailleDisplayControl
             executor.execute(new Runnable() { // from class: android.accessibilityservice.BrailleDisplayControllerImpl$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    BrailleDisplayController.BrailleDisplayCallback.this.onConnectionFailed(1);
+                    brailleDisplayCallback.onConnectionFailed(1);
                 }
             });
             return;
@@ -163,19 +162,19 @@ public final class BrailleDisplayControllerImpl implements BrailleDisplayControl
         @Override // android.accessibilityservice.IBrailleDisplayController
         public void onConnected(IBrailleDisplayConnection iBrailleDisplayConnection, final byte[] bArr) {
             BrailleDisplayController.checkApiFlagIsEnabled();
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 synchronized (BrailleDisplayControllerImpl.this.mLock) {
                     BrailleDisplayControllerImpl.this.mBrailleDisplayConnection = iBrailleDisplayConnection;
                     BrailleDisplayControllerImpl.this.mCallbackExecutor.execute(new Runnable() { // from class: android.accessibilityservice.BrailleDisplayControllerImpl$IBrailleDisplayControllerWrapper$$ExternalSyntheticLambda3
                         @Override // java.lang.Runnable
                         public final void run() {
-                            BrailleDisplayControllerImpl.IBrailleDisplayControllerWrapper.this.lambda$onConnected$0(bArr);
+                            this.f$0.lambda$onConnected$0(bArr);
                         }
                     });
                 }
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
@@ -187,18 +186,18 @@ public final class BrailleDisplayControllerImpl implements BrailleDisplayControl
         @Override // android.accessibilityservice.IBrailleDisplayController
         public void onConnectionFailed(final int i) {
             BrailleDisplayController.checkApiFlagIsEnabled();
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 synchronized (BrailleDisplayControllerImpl.this.mLock) {
                     BrailleDisplayControllerImpl.this.mCallbackExecutor.execute(new Runnable() { // from class: android.accessibilityservice.BrailleDisplayControllerImpl$IBrailleDisplayControllerWrapper$$ExternalSyntheticLambda0
                         @Override // java.lang.Runnable
                         public final void run() {
-                            BrailleDisplayControllerImpl.IBrailleDisplayControllerWrapper.this.lambda$onConnectionFailed$1(i);
+                            this.f$0.lambda$onConnectionFailed$1(i);
                         }
                     });
                 }
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
@@ -210,20 +209,20 @@ public final class BrailleDisplayControllerImpl implements BrailleDisplayControl
         @Override // android.accessibilityservice.IBrailleDisplayController
         public void onInput(final byte[] bArr) {
             BrailleDisplayController.checkApiFlagIsEnabled();
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 synchronized (BrailleDisplayControllerImpl.this.mLock) {
                     if (BrailleDisplayControllerImpl.this.mBrailleDisplayConnection != null) {
                         BrailleDisplayControllerImpl.this.mCallbackExecutor.execute(new Runnable() { // from class: android.accessibilityservice.BrailleDisplayControllerImpl$IBrailleDisplayControllerWrapper$$ExternalSyntheticLambda2
                             @Override // java.lang.Runnable
                             public final void run() {
-                                BrailleDisplayControllerImpl.IBrailleDisplayControllerWrapper.this.lambda$onInput$2(bArr);
+                                this.f$0.lambda$onInput$2(bArr);
                             }
                         });
                     }
                 }
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
@@ -235,7 +234,7 @@ public final class BrailleDisplayControllerImpl implements BrailleDisplayControl
         @Override // android.accessibilityservice.IBrailleDisplayController
         public void onDisconnected() {
             BrailleDisplayController.checkApiFlagIsEnabled();
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 synchronized (BrailleDisplayControllerImpl.this.mLock) {
                     Executor executor = BrailleDisplayControllerImpl.this.mCallbackExecutor;
@@ -244,13 +243,13 @@ public final class BrailleDisplayControllerImpl implements BrailleDisplayControl
                     executor.execute(new Runnable() { // from class: android.accessibilityservice.BrailleDisplayControllerImpl$IBrailleDisplayControllerWrapper$$ExternalSyntheticLambda1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            BrailleDisplayController.BrailleDisplayCallback.this.onDisconnected();
+                            brailleDisplayCallback.onDisconnected();
                         }
                     });
                     BrailleDisplayControllerImpl.this.clearConnectionLocked();
                 }
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }

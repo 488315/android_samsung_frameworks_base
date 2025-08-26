@@ -21,8 +21,8 @@ public class ElasticEaseInOut implements Interpolator {
     }
 
     private float inout(float f, float f2, float f3) {
-        float f4;
-        double pow;
+        float fAsin;
+        double dPow;
         if (f == 0.0f) {
             return 0.0f;
         }
@@ -33,19 +33,19 @@ public class ElasticEaseInOut implements Interpolator {
             f3 = 0.45000002f;
         }
         if (f2 == 0.0f || f2 < 1.0f) {
-            f4 = f3 / 4.0f;
+            fAsin = f3 / 4.0f;
             f2 = 1.0f;
         } else {
-            f4 = (float) ((f3 / 6.283185307179586d) * Math.asin(1.0f / f2));
+            fAsin = (float) ((f3 / 6.283185307179586d) * Math.asin(1.0f / f2));
         }
-        float f5 = f * 2.0f;
-        if (f5 < 1.0f) {
-            float f6 = f5 - 1.0f;
-            pow = f2 * Math.pow(2.0d, 10.0f * f6) * Math.sin(((f6 - f4) * 6.283185307179586d) / f3) * (-0.5d);
+        float f4 = f * 2.0f;
+        if (f4 < 1.0f) {
+            float f5 = f4 - 1.0f;
+            dPow = f2 * Math.pow(2.0d, 10.0f * f5) * Math.sin(((f5 - fAsin) * 6.283185307179586d) / f3) * (-0.5d);
         } else {
-            float f7 = f5 - 1.0f;
-            pow = (f2 * Math.pow(2.0d, (-10.0f) * f7) * Math.sin(((f7 - f4) * 6.283185307179586d) / f3) * 0.5d) + 1.0d;
+            float f6 = f4 - 1.0f;
+            dPow = (f2 * Math.pow(2.0d, (-10.0f) * f6) * Math.sin(((f6 - fAsin) * 6.283185307179586d) / f3) * 0.5d) + 1.0d;
         }
-        return (float) pow;
+        return (float) dPow;
     }
 }

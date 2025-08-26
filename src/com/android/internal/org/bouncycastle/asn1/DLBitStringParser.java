@@ -46,13 +46,13 @@ public class DLBitStringParser implements ASN1BitStringParser {
         if (remaining < 1) {
             throw new IllegalStateException("content octets cannot be empty");
         }
-        int read = this.stream.read();
-        this.padBits = read;
-        if (read > 0) {
+        int i = this.stream.read();
+        this.padBits = i;
+        if (i > 0) {
             if (remaining < 2) {
                 throw new IllegalStateException("zero length data with non-zero pad bits");
             }
-            if (read > 7) {
+            if (i > 7) {
                 throw new IllegalStateException("pad bits cannot be greater than 7 or less than 0");
             }
             if (z) {

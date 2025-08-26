@@ -13,7 +13,6 @@ import com.android.systemui.R;
 import com.android.systemui.plugins.subscreen.SubRoom;
 import com.android.systemui.util.SystemUIAnalytics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SubscreenParentDetailItemViewHolder extends RecyclerView.ViewHolder {
     public SubscreenNotificationDetailAdapter mAdapter;
@@ -59,8 +58,8 @@ public class SubscreenParentDetailItemViewHolder extends RecyclerView.ViewHolder
         this.mContentLayout = (LinearLayout) view.findViewById(R.id.content_layout);
         this.mTitle = (TextView) view.findViewById(R.id.name_title);
         this.mEditButton = (TextView) view.findViewById(R.id.edit_button);
-        View findViewById = view.findViewById(R.id.clear_button);
-        this.mClearButton = findViewById;
+        View viewFindViewById = view.findViewById(R.id.clear_button);
+        this.mClearButton = viewFindViewById;
         this.mOpenAppButton = view.findViewById(R.id.app_open_button);
         this.mBodyLayout = (LinearLayout) view.findViewById(R.id.body_layout);
         this.mTwoPhoneIcon = (ImageView) view.findViewById(R.id.two_phone_icon);
@@ -77,7 +76,7 @@ public class SubscreenParentDetailItemViewHolder extends RecyclerView.ViewHolder
         this.mReplyVoiceButton = (ImageView) view.findViewById(R.id.reply_voice_button);
         this.mReplyEmojiButton = (ImageView) view.findViewById(R.id.reply_emoji_button);
         this.mBackButton = ((SubscreenNotificationController) Dependency.sDependency.getDependencyInner(SubscreenNotificationController.class)).mDeviceModel.initDetailAdapterBackButton(view);
-        findViewById.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.statusbar.notification.SubscreenParentDetailItemViewHolder.1
+        viewFindViewById.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.statusbar.notification.SubscreenParentDetailItemViewHolder.1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view2) {
                 SubscreenParentDetailItemViewHolder subscreenParentDetailItemViewHolder = SubscreenParentDetailItemViewHolder.this;
@@ -126,9 +125,9 @@ public class SubscreenParentDetailItemViewHolder extends RecyclerView.ViewHolder
     }
 
     public final void updateClearButtonVisibility() {
-        boolean canViewBeDismissed$1 = this.mInfo.mRow.canViewBeDismissed$1();
-        this.mClearButton.setVisibility(canViewBeDismissed$1 ? 0 : 8);
-        Log.d("SubscreenParentDetailItemViewHolder", "updateClearButtonVisibility - " + canViewBeDismissed$1);
+        boolean zCanViewBeDismissed$1 = this.mInfo.mRow.canViewBeDismissed$1();
+        this.mClearButton.setVisibility(zCanViewBeDismissed$1 ? 0 : 8);
+        Log.d("SubscreenParentDetailItemViewHolder", "updateClearButtonVisibility - " + zCanViewBeDismissed$1);
     }
 
     public final void updateShowInAppButtonVisibility() {

@@ -31,20 +31,20 @@ public class CursorLoader extends AsyncTaskLoader<Cursor> {
             this.mCancellationSignal = new CancellationSignal();
         }
         try {
-            Cursor query = getContext().getContentResolver().query(this.mUri, this.mProjection, this.mSelection, this.mSelectionArgs, this.mSortOrder, this.mCancellationSignal);
-            if (query != null) {
+            Cursor cursorQuery = getContext().getContentResolver().query(this.mUri, this.mProjection, this.mSelection, this.mSelectionArgs, this.mSortOrder, this.mCancellationSignal);
+            if (cursorQuery != null) {
                 try {
-                    query.getCount();
-                    query.registerContentObserver(this.mObserver);
+                    cursorQuery.getCount();
+                    cursorQuery.registerContentObserver(this.mObserver);
                 } catch (RuntimeException e) {
-                    query.close();
+                    cursorQuery.close();
                     throw e;
                 }
             }
             synchronized (this) {
                 this.mCancellationSignal = null;
             }
-            return query;
+            return cursorQuery;
         } catch (Throwable th) {
             synchronized (this) {
                 this.mCancellationSignal = null;

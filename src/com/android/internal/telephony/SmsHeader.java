@@ -326,9 +326,9 @@ public class SmsHeader {
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bArr);
         SmsHeader smsHeader = new SmsHeader();
         while (byteArrayInputStream.available() > 0) {
-            int read = byteArrayInputStream.read();
-            int read2 = byteArrayInputStream.read();
-            if (read == 0) {
+            int i2 = byteArrayInputStream.read();
+            int i3 = byteArrayInputStream.read();
+            if (i2 == 0) {
                 ConcatRef concatRef = new ConcatRef();
                 concatRef.refNumber = byteArrayInputStream.read();
                 concatRef.msgCount = byteArrayInputStream.read();
@@ -337,20 +337,20 @@ public class SmsHeader {
                 if (concatRef.msgCount != 0 && concatRef.seqNumber != 0 && concatRef.seqNumber <= concatRef.msgCount) {
                     smsHeader.concatRef = concatRef;
                 }
-            } else if (read != 1) {
-                if (read == 4) {
+            } else if (i2 != 1) {
+                if (i2 == 4) {
                     PortAddrs portAddrs = new PortAddrs();
                     portAddrs.destPort = byteArrayInputStream.read();
                     portAddrs.origPort = byteArrayInputStream.read();
                     portAddrs.areEightBits = true;
                     smsHeader.portAddrs = portAddrs;
-                } else if (read == 5) {
+                } else if (i2 == 5) {
                     PortAddrs portAddrs2 = new PortAddrs();
                     portAddrs2.destPort = (byteArrayInputStream.read() << 8) | byteArrayInputStream.read();
                     portAddrs2.origPort = (byteArrayInputStream.read() << 8) | byteArrayInputStream.read();
                     portAddrs2.areEightBits = false;
                     smsHeader.portAddrs = portAddrs2;
-                } else if (read == 8) {
+                } else if (i2 == 8) {
                     ConcatRef concatRef2 = new ConcatRef();
                     concatRef2.refNumber = (byteArrayInputStream.read() << 8) | byteArrayInputStream.read();
                     concatRef2.msgCount = byteArrayInputStream.read();
@@ -359,59 +359,59 @@ public class SmsHeader {
                     if (concatRef2.msgCount != 0 && concatRef2.seqNumber != 0 && concatRef2.seqNumber <= concatRef2.msgCount) {
                         smsHeader.concatRef = concatRef2;
                     }
-                } else if (read == 68) {
+                } else if (i2 == 68) {
                     KTReadConfirm kTReadConfirm = new KTReadConfirm();
-                    kTReadConfirm.id = read;
+                    kTReadConfirm.id = i2;
                     kTReadConfirm.readConfirmID = byteArrayInputStream.read();
                     smsHeader.ktReadConfirm = kTReadConfirm;
                     Rlog.i("SmsHeader", "id:" + kTReadConfirm.id + "readConfirmID" + kTReadConfirm.readConfirmID);
-                } else if (read != 192) {
-                    if (read == 36) {
+                } else if (i2 != 192) {
+                    if (i2 == 36) {
                         smsHeader.languageShiftTable = byteArrayInputStream.read();
-                    } else if (read == 37) {
+                    } else if (i2 == 37) {
                         smsHeader.languageTable = byteArrayInputStream.read();
                     } else {
                         MiscElt miscElt = new MiscElt();
-                        miscElt.id = read;
-                        miscElt.data = new byte[read2];
-                        byteArrayInputStream.read(miscElt.data, 0, read2);
+                        miscElt.id = i2;
+                        miscElt.data = new byte[i3];
+                        byteArrayInputStream.read(miscElt.data, 0, i3);
                         smsHeader.miscEltList.add(miscElt);
                     }
                 } else if (upperCase.contains("SKT_KR") || upperCase.contains("KT_KR") || upperCase.contains("LGU+_KR")) {
-                    int read3 = byteArrayInputStream.read();
+                    int i4 = byteArrayInputStream.read();
                     String telephonyProperty = SemTelephonyUtils.getTelephonyProperty(SubscriptionManager.getPhoneId(i), "ril.simtype", "0");
                     if (SmsManager.getSmsManagerForContextAndSubscriptionId(null, i).getSmsSetting(SmsConstants.SMS_SAFE_MESSAGE_INDICATION)) {
-                        if ((telephonyProperty.equals("4") || telephonyProperty.equals("3")) && read3 == 1) {
+                        if ((telephonyProperty.equals("4") || telephonyProperty.equals("3")) && i4 == 1) {
                             smsHeader.safeMessageIndication = true;
-                        } else if (telephonyProperty.equals("2") && (read3 & 2) == 2) {
+                        } else if (telephonyProperty.equals("2") && (i4 & 2) == 2) {
                             smsHeader.safeMessageIndication = true;
                         }
                         Rlog.i("SafeMessageIndication", "Received smsHeader.safeMessageIndication: " + smsHeader.safeMessageIndication + " simType: " + telephonyProperty);
                     }
                     if (SmsManager.getSmsManagerForContextAndSubscriptionId(null, i).getSmsSetting(SmsConstants.SMS_LINK_WARNING_INDICATION)) {
-                        if (telephonyProperty.equals("2") && (read3 & 4) == 4) {
+                        if (telephonyProperty.equals("2") && (i4 & 4) == 4) {
                             smsHeader.linkWarningIndication = true;
                         }
                         Rlog.i("LinkWarningIndication", "Received smsHeader.linkWarningIndication: " + smsHeader.linkWarningIndication + " simType: " + telephonyProperty);
                     }
                     if (SemCscFeature.getInstance().getBoolean("CscFeature_Common_SupportTwoPhoneService")) {
-                        if ((read3 & 1) == 1) {
+                        if ((i4 & 1) == 1) {
                             smsHeader.twoPhoneIndication = true;
                         }
                         Rlog.i("TwoPhoneIndication", "Received smsHeader.twoPhoneIndication: " + smsHeader.twoPhoneIndication);
                     }
                 } else {
                     MiscElt miscElt2 = new MiscElt();
-                    miscElt2.id = read;
-                    miscElt2.data = new byte[read2];
-                    byteArrayInputStream.read(miscElt2.data, 0, read2);
+                    miscElt2.id = i2;
+                    miscElt2.data = new byte[i3];
+                    byteArrayInputStream.read(miscElt2.data, 0, i3);
                     smsHeader.miscEltList.add(miscElt2);
                 }
             } else if (TelephonyFeatures.isCountrySpecific(SubscriptionManager.getPhoneId(i), "KOR")) {
                 MiscElt miscElt3 = new MiscElt();
-                miscElt3.id = read;
-                miscElt3.data = new byte[read2];
-                byteArrayInputStream.read(miscElt3.data, 0, read2);
+                miscElt3.id = i2;
+                miscElt3.data = new byte[i3];
+                byteArrayInputStream.read(miscElt3.data, 0, i3);
                 smsHeader.miscEltList.add(miscElt3);
             } else {
                 SpecialSmsMsg specialSmsMsg = new SpecialSmsMsg();

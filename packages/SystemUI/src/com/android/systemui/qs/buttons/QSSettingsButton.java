@@ -3,6 +3,7 @@ package com.android.systemui.qs.buttons;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import com.android.settingslib.applications.InterestingConfigChanges;
 import com.android.systemui.Dependency;
 import com.android.systemui.R;
 import com.android.systemui.plugins.ActivityStarter;
@@ -19,23 +21,24 @@ import com.android.systemui.statusbar.policy.DeviceProvisionedController;
 import com.android.systemui.statusbar.policy.DeviceProvisionedControllerImpl;
 import com.android.systemui.util.ShadowDelegateUtil;
 import com.android.systemui.util.SystemUIAnalytics;
+import com.android.systemui.util.ViewUtil;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class QSSettingsButton extends RelativeLayout implements QSButtonsContainer.CloseTooltipWindow {
-    public static final /* synthetic */ int $r8$clinit = 0;
+    public static final InterestingConfigChanges configChanges = new InterestingConfigChanges(268435456);
     public final ActivityStarter mActivityStarter;
     public final Context mContext;
     public final DeviceProvisionedController mDeviceProvisionedController;
     public final SecQSPanelResourcePicker mResourcePicker;
     public ImageButton mSettingsButton;
     public View mSettingsContainer;
-    public final QSTooltipWindow mTipWindow;
+    public QSTooltipWindow mTipWindow;
     public final int mToolTipString;
 
     public QSSettingsButton(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.mContext = context;
+        configChanges.applyNewConfig(context.getResources());
         this.mResourcePicker = (SecQSPanelResourcePicker) Dependency.sDependency.getDependencyInner(SecQSPanelResourcePicker.class);
         this.mTipWindow = QSTooltipWindow.getInstance(context);
         this.mToolTipString = R.string.tooltip_quick_settings_settings;
@@ -51,6 +54,9 @@ public class QSSettingsButton extends RelativeLayout implements QSButtonsContain
     @Override // android.view.View
     public final void onConfigurationChanged(Configuration configuration) {
         super.onConfigurationChanged(configuration);
+        if (configChanges.applyNewConfig(this.mContext.getResources())) {
+            this.mTipWindow = QSTooltipWindow.getInstance(this.mContext);
+        }
         updateTouchTargetArea$4();
     }
 
@@ -66,7 +72,7 @@ public class QSSettingsButton extends RelativeLayout implements QSButtonsContain
         this.mSettingsButton.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qs.buttons.QSSettingsButton$$ExternalSyntheticLambda1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                QSSettingsButton qSSettingsButton = QSSettingsButton.this;
+                QSSettingsButton qSSettingsButton = this.f$0;
                 if (!((DeviceProvisionedControllerImpl) qSSettingsButton.mDeviceProvisionedController).isCurrentUserSetup()) {
                     qSSettingsButton.mActivityStarter.postQSRunnableDismissingKeyguard(new QSSettingsButton$$ExternalSyntheticLambda4());
                     return;
@@ -79,18 +85,22 @@ public class QSSettingsButton extends RelativeLayout implements QSButtonsContain
         this.mSettingsContainer.setOnTouchListener(new View.OnTouchListener() { // from class: com.android.systemui.qs.buttons.QSSettingsButton$$ExternalSyntheticLambda2
             @Override // android.view.View.OnTouchListener
             public final boolean onTouch(View view, MotionEvent motionEvent) {
-                return QSSettingsButton.this.mSettingsButton.onTouchEvent(motionEvent);
+                return this.f$0.mSettingsButton.onTouchEvent(motionEvent);
             }
         });
         this.mSettingsButton.setOnLongClickListener(new View.OnLongClickListener() { // from class: com.android.systemui.qs.buttons.QSSettingsButton$$ExternalSyntheticLambda3
             @Override // android.view.View.OnLongClickListener
-            public final boolean onLongClick(View view) {
-                QSSettingsButton qSSettingsButton = QSSettingsButton.this;
+            public final boolean onLongClick(View view) throws Resources.NotFoundException {
+                QSSettingsButton qSSettingsButton = this.f$0;
                 if (qSSettingsButton.mTipWindow.isTooltipShown()) {
                     return true;
                 }
                 qSSettingsButton.mTipWindow.showToolTip(view, qSSettingsButton.mToolTipString);
-                ((QSButtonsContainer) qSSettingsButton.getParent()).mCloseTooltipWindow = qSSettingsButton;
+                QSButtonsContainer qSButtonsContainer = (QSButtonsContainer) ViewUtil.findParentOfType(qSSettingsButton, QSButtonsContainer.class);
+                if (qSButtonsContainer == null) {
+                    return true;
+                }
+                qSButtonsContainer.mCloseTooltipWindow = qSSettingsButton;
                 return true;
             }
         });

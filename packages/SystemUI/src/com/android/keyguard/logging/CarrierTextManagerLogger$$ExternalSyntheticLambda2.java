@@ -8,14 +8,13 @@ import com.android.systemui.log.core.LogMessage;
 import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final /* synthetic */ class CarrierTextManagerLogger$$ExternalSyntheticLambda2 implements Function1 {
     public final /* synthetic */ int $r8$classId;
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
         LogMessage logMessage = (LogMessage) obj;
         switch (this.$r8$classId) {
             case 0:
@@ -43,9 +42,9 @@ public final /* synthetic */ class CarrierTextManagerLogger$$ExternalSyntheticLa
                 int int1 = logMessage.getInt1();
                 int int2 = logMessage.getInt2();
                 String str13 = logMessage.getStr1();
-                StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(int1, int2, "┣ updateCarrierText: updating sub=", " simState=", " carrierName=");
-                m.append(str13);
-                return m.toString();
+                StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(int1, int2, "┣ updateCarrierText: updating sub=", " simState=", " carrierName=");
+                sbM.append(str13);
+                return sbM.toString();
             case 7:
                 CarrierTextManagerLogger.Companion companion8 = CarrierTextManagerLogger.Companion;
                 return AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("┣ updateCarrierText: using satellite text. text=", logMessage.getStr1());

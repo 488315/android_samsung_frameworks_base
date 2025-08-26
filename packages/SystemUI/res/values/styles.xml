@@ -11,12 +11,12 @@
     </style>
     <style name="AlertDialog.AppCompat" parent="@style/Base.AlertDialog.AppCompat" />
     <style name="AlertDialog.AppCompat.Light" parent="@style/Base.AlertDialog.AppCompat.Light" />
-    <style name="AlertDialogStyle" parent="@android:style/AlertDialogEmergencyButtonStyle">
+    <style name="AlertDialogStyle" parent="@android:style/AlertDialog.Leanback">
         <item name="android:layout">@layout/alert_dialog_systemui</item>
     </style>
     <style name="AllowLogAccess">
         <item name="android:textSize">24.0sp</item>
-        <item name="android:fontFamily">@android:string/emailTypeOther</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest</item>
     </style>
     <style name="Animation" />
     <style name="Animation.AppCompat.Dialog" parent="@style/Base.Animation.AppCompat.Dialog" />
@@ -93,12 +93,12 @@
     </style>
     <style name="AppEntitiesHeader.Text" parent="@android:style/TextAppearance.Material.Subhead">
         <item name="android:textColor">?android:textColorPrimary</item>
-        <item name="android:fontFamily">@android:string/emailTypeWork</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest_future</item>
     </style>
     <style name="AppEntitiesHeader.Text.HeaderTitle" parent="@style/AppEntitiesHeader.Text">
         <item name="android:textSize">14.0sp</item>
     </style>
-    <style name="AppEntitiesHeader.Text.Summary" parent="@android:style/TextAppearance.Holo.Light.Widget.ActionMode.Subtitle">
+    <style name="AppEntitiesHeader.Text.Summary" parent="@android:style/TextAppearance.Holo.Light.Medium.Inverse">
         <item name="android:textSize">14.0sp</item>
         <item name="android:textColor">?android:textColorSecondary</item>
     </style>
@@ -113,7 +113,7 @@
         <item name="colorPrimaryDark">@color/colorPrimary</item>
     </style>
     <style name="AuthCredentialContentViewMoreOptionsButtonStyle" parent="@style/TextAppearance.Material3.LabelLarge">
-        <item name="android:textColor">@android:color/secondary_material_settings_light</item>
+        <item name="android:textColor">@android:color/notification_action_list_background_color</item>
         <item name="android:gravity">start</item>
         <item name="android:background">@color/transparent</item>
         <item name="android:paddingLeft">0.0dip</item>
@@ -121,7 +121,7 @@
         <item name="android:maxWidth">@dimen/m3_btn_max_width</item>
         <item name="android:minWidth">48.0dip</item>
         <item name="android:height">40.0dip</item>
-        <item name="android:fontFamily">@android:string/data_saver_description</item>
+        <item name="android:fontFamily">@android:string/confirm_battery_saver</item>
         <item name="enforceTextAppearance">false</item>
     </style>
     <style name="AuthCredentialContentViewStyle">
@@ -129,9 +129,9 @@
         <item name="android:orientation">vertical</item>
     </style>
     <style name="AuthCredentialNegativeButtonStyle" parent="@style/TextAppearance.Material3.LabelLarge">
-        <item name="android:textColor">@android:color/secondary_material_settings_light</item>
+        <item name="android:textColor">@android:color/notification_action_list_background_color</item>
         <item name="android:background">@color/transparent</item>
-        <item name="android:fontFamily">@android:string/data_saver_description</item>
+        <item name="android:fontFamily">@android:string/confirm_battery_saver</item>
     </style>
     <style name="AuthCredentialPanelStyle" parent="@style/AuthNonCredentialPanelStyle">
         <item name="android:visibility">visible</item>
@@ -182,10 +182,9 @@
         <item name="android:minHeight">48.0dip</item>
     </style>
     <style name="AuthNonBioCredentialStyle">
-        <item name="android:customColorOnShadeInactive">?android:textColorSecondary</item>
-        <item name="android:dayHighlightColor">?android:colorError</item>
-        <item name="android:preferenceListStyle">?android:colorForeground</item>
-        <item name="android:toastFrameBackground">?android:colorForeground</item>
+        <item name="android:dotColor">?android:textColorSecondary</item>
+        <item name="android:errorColor">?android:colorError</item>
+        <item name="android:toTop">?android:colorForeground</item>
         <item name="descriptionTextAppearance">@style/TextAppearance.AuthNonBioCredential.Description</item>
         <item name="errorTextAppearance">@style/TextAppearance.AuthNonBioCredential.Error</item>
         <item name="errorTextAppearanceLand">@style/TextAppearance.AuthNonBioCredential.ErrorLand</item>
@@ -196,7 +195,7 @@
         <item name="titleTextAppearance">@style/TextAppearance.AuthNonBioCredential.Title</item>
     </style>
     <style name="AuthNonCredentialPanelStyle">
-        <item name="android:background">@android:color/secondary_text_nofocus</item>
+        <item name="android:background">@android:color/notification_secondary_text_color_current</item>
     </style>
     <style name="AutoSizingList">
         <item name="enableAutoSizing">false</item>
@@ -4149,7 +4148,7 @@
         <item name="android:drawableTint">@color/audio_sharing_btn_text_color</item>
     </style>
     <style name="BluetoothTileDialog.Device" parent="@style/BluetoothTileDialog">
-        <item name="android:textColor">@android:color/ripple_material_light</item>
+        <item name="android:textColor">@android:color/material_grey_50</item>
         <item name="android:layout_gravity">start|center</item>
         <item name="android:orientation">horizontal</item>
         <item name="android:focusable">true</item>
@@ -4163,7 +4162,7 @@
     </style>
     <style name="BorderlessButton">
         <item name="android:gravity">center</item>
-        <item name="android:background">@android:drawable/btn_check_on_pressed_holo_light</item>
+        <item name="android:background">@android:drawable/btn_cab_done_pressed_holo_light</item>
         <item name="android:padding">12.0dip</item>
     </style>
     <style name="Bouncer.UserSwitcher.Spinner" parent="@android:style/Widget.DeviceDefault.TextView">
@@ -4219,7 +4218,7 @@
         <item name="android:clickable">true</item>
         <item name="android:layout_width">@dimen/media_output_broadcast_info_edit</item>
         <item name="android:layout_height">@dimen/media_output_broadcast_info_edit</item>
-        <item name="android:src">@android:drawable/ic_text_dot</item>
+        <item name="android:src">@android:drawable/ic_print_error</item>
         <item name="android:tint">?android:textColorPrimary</item>
     </style>
     <style name="BroadcastDialog.InfoItem.Summary" parent="@style/BroadcastDialog.InfoItem">
@@ -4281,7 +4280,7 @@
         <item name="chargingAnimColor">?wallpaperTextColor</item>
     </style>
     <style name="Chipbar" />
-    <style name="Chipbar.Text" parent="@android:style/TextAppearance.Material.Menu.Inverse">
+    <style name="Chipbar.Text" parent="@android:style/TextAppearance.Leanback.FormWizard.Small">
         <item name="android:textSize">16.0sp</item>
     </style>
     <style name="CollapsingToolbarLayoutStyle.SettingsLib" parent="@style/Base.CollapsingToolbarLayoutStyle.SettingsLib">
@@ -4308,13 +4307,13 @@
         <item name="android:gravity">center_vertical</item>
         <item name="android:minHeight">@dimen/control_menu_item_height</item>
         <item name="android:singleLine">true</item>
-        <item name="android:fontFamily">@android:string/emailTypeOther</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest</item>
     </style>
     <style name="Control.Spinner" parent="@style/Control">
         <item name="android:textColor">@color/control_primary_text</item>
         <item name="android:ellipsize">end</item>
         <item name="android:singleLine">true</item>
-        <item name="android:fontFamily">@android:string/emailTypeWork</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest_future</item>
     </style>
     <style name="Control.Spinner.Header" parent="@style/Control.Spinner">
         <item name="android:textSize">@dimen/control_header_text_size</item>
@@ -4322,7 +4321,7 @@
     </style>
     <style name="Control.Spinner.Item" parent="@style/Control.Spinner">
         <item name="android:textSize">@dimen/control_item_text_size</item>
-        <item name="android:fontFamily">@android:string/emailTypeOther</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest</item>
     </style>
     <style name="ControlContainedButton">
         <item name="android:gravity">center</item>
@@ -4376,7 +4375,7 @@
         <item name="android:layout_marginEnd">10.0dip</item>
     </style>
     <style name="DesktopModeHandleMenuActionButton">
-        <item name="android:textColor">@android:color/ripple_material_light</item>
+        <item name="android:textColor">@android:color/material_grey_50</item>
         <item name="android:gravity">start|center</item>
         <item name="android:orientation">horizontal</item>
         <item name="android:focusable">true</item>
@@ -4384,7 +4383,7 @@
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">52.0dip</item>
         <item name="android:importantForAccessibility">yes</item>
-        <item name="android:drawableTint">@android:color/ripple_material_light</item>
+        <item name="android:drawableTint">@android:color/material_grey_50</item>
         <item name="android:paddingHorizontal">16.0dip</item>
     </style>
     <style name="DesktopModeHandleMenuActionButtonImage">
@@ -4394,7 +4393,7 @@
     </style>
     <style name="DesktopModeHandleMenuActionButtonTextView">
         <item name="android:textSize">14.0sp</item>
-        <item name="android:textColor">@android:color/ripple_material_light</item>
+        <item name="android:textColor">@android:color/material_grey_50</item>
         <item name="android:ellipsize">marquee</item>
         <item name="android:layout_width">0.0dip</item>
         <item name="android:layout_height">wrap_content</item>
@@ -4431,7 +4430,7 @@
         <item name="android:textColor">?android:textColorPrimary</item>
         <item name="android:background">@drawable/dialog_btn_outline</item>
         <item name="android:minWidth">0.0dip</item>
-        <item name="android:fontFamily">@android:string/data_saver_description</item>
+        <item name="android:fontFamily">@android:string/confirm_battery_saver</item>
         <item name="android:stateListAnimator">@null</item>
         <item name="android:lineHeight">20.0sp</item>
     </style>
@@ -4440,7 +4439,7 @@
         <item name="android:textColor">?android:textColorPrimaryInverse</item>
         <item name="android:background">@drawable/dialog_btn_filled</item>
         <item name="android:minWidth">0.0dip</item>
-        <item name="android:fontFamily">@android:string/data_saver_description</item>
+        <item name="android:fontFamily">@android:string/confirm_battery_saver</item>
         <item name="android:stateListAnimator">@null</item>
         <item name="android:lineHeight">20.0sp</item>
     </style>
@@ -4580,7 +4579,7 @@
     </style>
     <style name="FgsManagerDialogTitle">
         <item name="android:textStyle">bold</item>
-        <item name="android:fontFamily">@android:string/csd_momentary_exposure_warning</item>
+        <item name="android:fontFamily">@android:string/config_wwan_network_service_package</item>
         <item name="android:textDirection">locale</item>
     </style>
     <style name="FlexPanelActivityTheme" parent="@style/Theme.AppCompat.DayNight.NoActionBar">
@@ -4657,7 +4656,7 @@
     </style>
     <style name="InternetDialog.NetworkSummary.Active" parent="@style/InternetDialog.NetworkSummary">
         <item name="android:textAppearance">@style/TextAppearance.InternetDialog.Secondary.Active</item>
-        <item name="android:textColor">@android:color/red</item>
+        <item name="android:textColor">@android:color/material_deep_teal_100</item>
     </style>
     <style name="InternetDialog.NetworkTitle" parent="@style/InternetDialog">
         <item name="android:textAppearance">@style/TextAppearance.InternetDialog</item>
@@ -4666,14 +4665,14 @@
     </style>
     <style name="InternetDialog.NetworkTitle.Active" parent="@style/InternetDialog.NetworkTitle">
         <item name="android:textAppearance">@style/TextAppearance.InternetDialog.Active</item>
-        <item name="android:textColor">@android:color/red</item>
+        <item name="android:textColor">@android:color/material_deep_teal_100</item>
     </style>
     <style name="KeyboardShortcutHelper" parent="@android:style/Theme.DeviceDefault.Settings">
         <item name="android:windowActionBar">false</item>
         <item name="bottomSheetDragHandleStyle">@style/KeyboardShortcutHelper.BottomSheet.DragHandle</item>
     </style>
     <style name="KeyboardShortcutHelper.BottomSheet.DragHandle" parent="@style/Widget.Material3.BottomSheet.DragHandle">
-        <item name="tint">@android:color/search_url_text_pressed</item>
+        <item name="tint">@android:color/micro_text_light</item>
     </style>
     <style name="KeyboardShortcutHelper.BottomSheetDialogAnimation" parent="@style/KeyboardShortcutHelper">
         <item name="android:windowEnterAnimation">@anim/slide_in_up</item>
@@ -4681,20 +4680,20 @@
     </style>
     <style name="Keyguard.Bouncer.PrimaryMessage" parent="@style/Theme.SystemUI">
         <item name="android:textSize">18.0sp</item>
-        <item name="android:textColor">@android:color/ripple_material_light</item>
+        <item name="android:textColor">@android:color/material_grey_50</item>
         <item name="android:ellipsize">marquee</item>
         <item name="android:singleLine">true</item>
-        <item name="android:fontFamily">@android:string/emailTypeOther</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest</item>
         <item name="android:textAlignment">center</item>
         <item name="android:lineHeight">24.0dip</item>
     </style>
     <style name="Keyguard.Bouncer.SecondaryMessage" parent="@style/Theme.SystemUI">
         <item name="android:textSize">14.0sp</item>
-        <item name="android:textColor">@android:color/safe_mode_text</item>
+        <item name="android:textColor">@android:color/material_grey_600</item>
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">@integer/bouncer_secondary_message_lines</item>
         <item name="android:lines">@integer/bouncer_secondary_message_lines</item>
-        <item name="android:fontFamily">@android:string/csd_momentary_exposure_warning</item>
+        <item name="android:fontFamily">@android:string/config_wwan_network_service_package</item>
         <item name="android:textAlignment">center</item>
     </style>
     <style name="Keyguard.KnoxGuard" parent="@android:style/Widget.DeviceDefault.TextView" />
@@ -4747,16 +4746,16 @@
     </style>
     <style name="Keyguard.TextView" parent="@android:style/Widget.DeviceDefault.TextView">
         <item name="android:textSize">@dimen/kg_status_line_font_size</item>
-        <item name="android:textColor">@android:color/ripple_material_light</item>
-        <item name="android:fontFamily">@android:string/csd_momentary_exposure_warning</item>
+        <item name="android:textColor">@android:color/material_grey_50</item>
+        <item name="android:fontFamily">@android:string/config_wwan_network_service_package</item>
     </style>
     <style name="Keyguard.TextView.EmergencyButton" parent="@style/Theme.SystemUI">
         <item name="android:textSize">16.0sp</item>
-        <item name="android:textColor">@android:color/search_url_text_material_dark</item>
+        <item name="android:textColor">@android:color/material_grey_900</item>
         <item name="android:background">@drawable/kg_emergency_button_background</item>
         <item name="android:paddingLeft">26.0dip</item>
         <item name="android:paddingRight">26.0dip</item>
-        <item name="android:fontFamily">@android:string/emailTypeOther</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest</item>
         <item name="android:stateListAnimator">@null</item>
     </style>
     <style name="LeanbackPreference">
@@ -4833,10 +4832,9 @@
         <item name="containerStyle">@style/AuthNonBioCredentialPatternContainerStyle</item>
     </style>
     <style name="LockPatternViewStyle">
-        <item name="android:customColorOnShadeInactive">?android:textColorSecondary</item>
-        <item name="android:dayHighlightColor">?android:colorError</item>
-        <item name="android:preferenceListStyle">?android:colorAccent</item>
-        <item name="android:toastFrameBackground">?android:textColorPrimary</item>
+        <item name="android:dotColor">?android:textColorSecondary</item>
+        <item name="android:errorColor">?android:colorError</item>
+        <item name="android:toTop">?android:colorAccent</item>
     </style>
     <style name="LockPinPasswordContainerStyle" parent="@style/AuthNonBioCredentialStyle">
         <item name="containerStyle">@style/AuthNonBioCredentialPinPasswordContainerStyle</item>
@@ -4850,10 +4848,10 @@
         <item name="android:windowExitAnimation">@anim/long_press_lock_screen_popup_exit</item>
     </style>
     <style name="LongScreenshotActivity" parent="@android:style/Theme.DeviceDefault.DayNight">
-        <item name="android:colorBackground">@android:color/seekbar_track_progress_material</item>
+        <item name="android:colorBackground">@android:color/notification_secondary_text_color_dark</item>
         <item name="android:windowNoTitle">true</item>
-        <item name="android:statusBarColor">@android:color/seekbar_track_progress_material</item>
-        <item name="android:navigationBarColor">@android:color/side_fps_button_color</item>
+        <item name="android:statusBarColor">@android:color/notification_secondary_text_color_dark</item>
+        <item name="android:navigationBarColor">@android:color/overview_background</item>
         <item name="android:windowActivityTransitions">true</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:windowLightNavigationBar">true</item>
@@ -5009,7 +5007,7 @@
         <item name="android:layout_gravity">center</item>
         <item name="android:background">@drawable/qs_media_outline_button</item>
         <item name="android:singleLine">true</item>
-        <item name="android:fontFamily">@android:string/emailTypeWork</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest_future</item>
         <item name="android:backgroundTint">@android:color/system_primary_dark</item>
     </style>
     <style name="MediaPlayer.ProgressBar" parent="@android:style/Widget.ProgressBar.Horizontal">
@@ -5023,7 +5021,7 @@
     <style name="MediaPlayer.ScrubbingTime" parent="@style/MediaPlayer">
         <item name="android:textSize">12.0sp</item>
         <item name="android:gravity">center</item>
-        <item name="android:fontFamily">@android:string/emailTypeOther</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest</item>
     </style>
     <style name="MediaPlayer.SessionAction" parent="@android:style/Widget.Material.Button.Borderless.Small">
         <item name="android:background">@drawable/qs_media_light_source</item>
@@ -5111,7 +5109,7 @@
     <style name="PermissionGrantButtonTextAppearance">
         <item name="android:textSize">14.0sp</item>
         <item name="android:textColor">@android:color/system_neutral1_900</item>
-        <item name="android:fontFamily">@android:string/emailTypeWork</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest_future</item>
     </style>
     <style name="PermissionGrantButtonTop" parent="@android:style/Widget.DeviceDefault.Button.Borderless.Colored">
         <item name="android:background">@drawable/grant_permissions_buttons_top</item>
@@ -5471,7 +5469,7 @@
     </style>
     <style name="PrimaryAllowLogAccess">
         <item name="android:textSize">14.0sp</item>
-        <item name="android:fontFamily">@android:string/emailTypeOther</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest</item>
     </style>
     <style name="PrivacyDialog" parent="@style/Theme.SystemUI.QuickSettings.Dialog">
         <item name="android:windowBackground">@android:color/transparent</item>
@@ -5486,7 +5484,7 @@
         <item name="android:background">@drawable/sec_qs_btn_borderless_rect</item>
         <item name="android:padding">12.0dip</item>
     </style>
-    <style name="QSCustomizeToolbar" parent="@android:style/Widget.Material.Light.QuickContactBadge.WindowMedium">
+    <style name="QSCustomizeToolbar" parent="@android:style/Widget.Material.Light.ExpandableListView.White">
         <item name="android:textColor">?onSurface</item>
         <item name="android:elevation">10.0dip</item>
     </style>
@@ -5578,7 +5576,7 @@
         <item name="android:backgroundTint">@color/sec_fgs_content_button_background_color</item>
     </style>
     <style name="ReachabilityEduHandLayout" parent="@style/Theme.AppCompat.Light">
-        <item name="android:textAppearance">@android:style/TextAppearance.Holo.Light.Widget.ActionMode.Title</item>
+        <item name="android:textAppearance">@android:style/TextAppearance.Holo.Light.SearchResult</item>
         <item name="android:textSize">12.0sp</item>
         <item name="android:textColor">?android:textColorPrimaryInverse</item>
         <item name="android:background">@android:color/transparent</item>
@@ -5601,30 +5599,30 @@
     </style>
     <style name="RestartDialogBodyStyle">
         <item name="android:textSize">14.0sp</item>
-        <item name="android:fontFamily">@android:string/csd_momentary_exposure_warning</item>
+        <item name="android:fontFamily">@android:string/config_wwan_network_service_package</item>
     </style>
     <style name="RestartDialogBodyText" parent="@style/RestartDialogBodyStyle">
-        <item name="android:textColor">@android:color/safe_mode_text</item>
+        <item name="android:textColor">@android:color/material_grey_600</item>
         <item name="android:lineSpacingExtra">6.0sp</item>
         <item name="android:letterSpacing">0.02</item>
     </style>
     <style name="RestartDialogCheckboxText" parent="@style/RestartDialogBodyStyle">
-        <item name="android:textColor">@android:color/ripple_material_light</item>
+        <item name="android:textColor">@android:color/material_grey_50</item>
         <item name="android:lineSpacingExtra">6.0sp</item>
     </style>
     <style name="RestartDialogConfirmButton" parent="@style/RestartDialogBodyStyle">
-        <item name="android:textColor">@android:color/ratingbar_background_material</item>
+        <item name="android:textColor">@android:color/material_blue_grey_950</item>
         <item name="android:lineSpacingExtra">2.0sp</item>
     </style>
     <style name="RestartDialogDismissButton" parent="@style/RestartDialogBodyStyle">
-        <item name="android:textColor">@android:color/secondary_material_settings_light</item>
+        <item name="android:textColor">@android:color/notification_action_list_background_color</item>
         <item name="android:lineSpacingExtra">2.0sp</item>
     </style>
     <style name="RestartDialogTitleText">
         <item name="android:textSize">24.0sp</item>
-        <item name="android:textColor">@android:color/ripple_material_light</item>
+        <item name="android:textColor">@android:color/material_grey_50</item>
         <item name="android:lineSpacingExtra">8.0sp</item>
-        <item name="android:fontFamily">@android:string/emailTypeOther</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest</item>
     </style>
     <style name="ReverseFoldingFadeAnimation">
         <item name="android:windowEnterAnimation">@anim/reverse_folding_enter</item>
@@ -5641,7 +5639,7 @@
     <style name="RtlOverlay.DialogWindowTitle.AppCompat" parent="@style/Base.DialogWindowTitle.AppCompat" />
     <style name="RtlOverlay.DialogWindowTitle.AppCompat.Light" parent="@style/Base.DialogWindowTitle.AppCompat.Light" />
     <style name="RtlOverlay.Widget.AppCompat.ActionBar.TitleItem" parent="@android:style/Widget">
-        <item name="android:layout_gravity">center|left</item>
+        <item name="android:layout_gravity">left|center</item>
         <item name="android:paddingRight">8.0dip</item>
     </style>
     <style name="RtlOverlay.Widget.AppCompat.DialogTitle.Icon" parent="@android:style/Widget">
@@ -5734,7 +5732,7 @@
         <item name="rotateButtonEndAngle">0.0</item>
         <item name="rotateButtonStartAngle">-90.0</item>
     </style>
-    <style name="ScreenPinningRequestTheme" parent="@android:style/Widget.Holo.ButtonBar.Button">
+    <style name="ScreenPinningRequestTheme" parent="@android:style/Widget.DeviceDefault.TimePicker">
         <item name="singleToneColor">@color/light_mode_icon_color_single_tone</item>
     </style>
     <style name="ScreenRecord" parent="@android:style/Theme.DeviceDefault.DayNight">
@@ -5751,9 +5749,9 @@
         <item name="android:thumb">@drawable/settingslib_switch_thumb</item>
         <item name="android:track">@drawable/settingslib_switch_track</item>
         <item name="android:switchMinWidth">52.0dip</item>
-        <item name="android:fontFamily">@android:string/emailTypeOther</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest</item>
     </style>
-    <style name="ScrollableAlertDialogStyle" parent="@android:style/AlertDialogEmergencyButtonStyle">
+    <style name="ScrollableAlertDialogStyle" parent="@android:style/AlertDialog.Leanback">
         <item name="android:layout">@layout/scrollable_alert_dialog_systemui</item>
     </style>
     <style name="SecCustomizeButtonStyle" parent="@style/RecoilSmallAnimator">
@@ -5980,7 +5978,7 @@
         <item name="android:paddingTop">20.0dip</item>
         <item name="android:paddingBottom">20.0dip</item>
         <item name="android:drawablePadding">4.0dip</item>
-        <item name="android:drawableTint">@android:color/btn_material_filled_tonal_text_color</item>
+        <item name="android:drawableTint">@android:color/btn_material_filled_tonal_background_color_watch</item>
     </style>
     <style name="SettingsLibActionButton.Expressive" parent="@style/SettingsLibButtonStyle.Expressive.Tonal">
         <item name="android:textColor">@color/settingslib_expressive_actionbutton_content_color</item>
@@ -6482,7 +6480,7 @@
     </style>
     <style name="ShortCutButton" parent="@android:style/Widget.Material.Button">
         <item name="android:textSize">16.0sp</item>
-        <item name="android:textColor">@android:color/ripple_material_light</item>
+        <item name="android:textColor">@android:color/material_grey_50</item>
         <item name="android:background">@drawable/shortcut_button_colored</item>
         <item name="android:paddingLeft">24.0dip</item>
         <item name="android:paddingRight">24.0dip</item>
@@ -6611,7 +6609,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:singleLine">true</item>
-        <item name="android:fontFamily">@android:string/emailTypeOther</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest</item>
         <item name="android:paddingStart">@dimen/ongoing_activity_chip_icon_text_padding</item>
     </style>
     <style name="StatusBar.EventChip" parent="@style/StatusBar">
@@ -7303,7 +7301,7 @@
         <item name="sudPromoItemTitleStyle">@style/SudPromoItemTitle</item>
         <item name="sudQrFinishStyle">@style/SudExpressiveQrFinish</item>
         <item name="sudScrollBarThumb">@drawable/sud_scroll_bar_dark</item>
-        <item name="sudScrollIndicators">bottom|top</item>
+        <item name="sudScrollIndicators">top|bottom</item>
         <item name="sudSectionItemContainerStyle">@style/SudGlifExpressiveItemContainer.SectionItem</item>
         <item name="sudSectionItemTitleStyle">@style/SudExpressiveItemTitle.SectionHeader</item>
         <item name="sudSwitchBarThumbOffColor">@color/sud_switch_thumb_off_dark</item>
@@ -7474,7 +7472,7 @@
         <item name="sudPromoItemTitleStyle">@style/SudPromoItemTitle</item>
         <item name="sudQrFinishStyle">@style/SudExpressiveQrFinish</item>
         <item name="sudScrollBarThumb">@drawable/sud_scroll_bar_light</item>
-        <item name="sudScrollIndicators">bottom|top</item>
+        <item name="sudScrollIndicators">top|bottom</item>
         <item name="sudSectionItemContainerStyle">@style/SudGlifExpressiveItemContainer.SectionItem</item>
         <item name="sudSectionItemTitleStyle">@style/SudExpressiveItemTitle.SectionHeader</item>
         <item name="sudSwitchBarThumbOffColor">@color/sud_switch_thumb_off_light</item>
@@ -8476,7 +8474,7 @@
         <item name="sudGlifHeaderGravity">center_horizontal</item>
         <item name="sudGlifIconGravity">?sudGlifHeaderGravity</item>
         <item name="sudGlifSubtitleGravity">center_horizontal</item>
-        <item name="sudScrollIndicators">bottom|top</item>
+        <item name="sudScrollIndicators">top|bottom</item>
     </style>
     <style name="SudThemeGlifV2.DayNight" parent="@style/SudThemeGlifV2.Light" />
     <style name="SudThemeGlifV2.Light" parent="@style/SudThemeGlif.Light">
@@ -8495,7 +8493,7 @@
         <item name="sudGlifHeaderGravity">center_horizontal</item>
         <item name="sudGlifIconGravity">?sudGlifHeaderGravity</item>
         <item name="sudGlifSubtitleGravity">center_horizontal</item>
-        <item name="sudScrollIndicators">bottom|top</item>
+        <item name="sudScrollIndicators">top|bottom</item>
     </style>
     <style name="SudThemeGlifV3" parent="@style/SudBaseThemeGlifV3">
         <item name="android:textAppearance">@android:style/TextAppearance.DeviceDefault</item>
@@ -8937,15 +8935,15 @@
         <item name="android:accessibilityLiveRegion">polite</item>
     </style>
     <style name="TextAppearance.AuthCredential.ContentViewListItem" parent="@style/TextAppearance.Material3.BodySmall">
-        <item name="android:textColor">@android:color/safe_mode_text</item>
+        <item name="android:textColor">@android:color/material_grey_600</item>
         <item name="android:paddingTop">@dimen/biometric_prompt_content_list_item_padding_top</item>
-        <item name="android:fontFamily">@android:string/csd_momentary_exposure_warning</item>
+        <item name="android:fontFamily">@android:string/config_wwan_network_service_package</item>
         <item name="android:breakStrategy">high_quality</item>
     </style>
     <style name="TextAppearance.AuthCredential.ContentViewWithButtonDescription" parent="@style/TextAppearance.AuthCredential.Description" />
     <style name="TextAppearance.AuthCredential.Description" parent="@style/TextAppearance.Material3.BodyMedium">
-        <item name="android:textColor">@android:color/ripple_material_light</item>
-        <item name="android:fontFamily">@android:string/csd_momentary_exposure_warning</item>
+        <item name="android:textColor">@android:color/material_grey_50</item>
+        <item name="android:fontFamily">@android:string/config_wwan_network_service_package</item>
     </style>
     <style name="TextAppearance.AuthCredential.Error" parent="@style/TextAppearance.AuthCredential">
         <item name="android:textSize">14.0sp</item>
@@ -8954,30 +8952,30 @@
         <item name="android:paddingHorizontal">24.0dip</item>
     </style>
     <style name="TextAppearance.AuthCredential.Indicator" parent="@style/TextAppearance.Material3.BodyMedium">
-        <item name="android:textColor">@android:color/ripple_material_light</item>
+        <item name="android:textColor">@android:color/material_grey_50</item>
         <item name="android:ellipsize">marquee</item>
         <item name="android:singleLine">true</item>
         <item name="android:marqueeRepeatLimit">marquee_forever</item>
-        <item name="android:fontFamily">@android:string/csd_momentary_exposure_warning</item>
+        <item name="android:fontFamily">@android:string/config_wwan_network_service_package</item>
     </style>
     <style name="TextAppearance.AuthCredential.LogoDescription" parent="@style/TextAppearance.Material3.LabelLarge">
-        <item name="android:textColor">@android:color/safe_mode_text</item>
+        <item name="android:textColor">@android:color/material_grey_600</item>
         <item name="android:ellipsize">end</item>
         <item name="android:gravity">center_horizontal</item>
         <item name="android:maxLines">1</item>
-        <item name="android:fontFamily">@android:string/data_saver_description</item>
+        <item name="android:fontFamily">@android:string/confirm_battery_saver</item>
     </style>
     <style name="TextAppearance.AuthCredential.Subtitle" parent="@style/TextAppearance.Material3.BodyMedium">
-        <item name="android:textColor">@android:color/ripple_material_light</item>
-        <item name="android:fontFamily">@android:string/csd_momentary_exposure_warning</item>
+        <item name="android:textColor">@android:color/material_grey_50</item>
+        <item name="android:fontFamily">@android:string/config_wwan_network_service_package</item>
     </style>
     <style name="TextAppearance.AuthCredential.Title" parent="@style/TextAppearance.Material3.HeadlineSmall">
-        <item name="android:textColor">@android:color/ripple_material_light</item>
-        <item name="android:fontFamily">@android:string/emailTypeOther</item>
+        <item name="android:textColor">@android:color/material_grey_50</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest</item>
     </style>
     <style name="TextAppearance.AuthCredential.VerticalListContentViewDescription" parent="@style/TextAppearance.Material3.TitleSmall">
-        <item name="android:textColor">@android:color/ripple_material_light</item>
-        <item name="android:fontFamily">@android:string/data_saver_description</item>
+        <item name="android:textColor">@android:color/material_grey_50</item>
+        <item name="android:fontFamily">@android:string/confirm_battery_saver</item>
     </style>
     <style name="TextAppearance.AuthNonBioCredential" parent="@android:style/TextAppearance.DeviceDefault">
         <item name="android:textColor">?android:textColorPrimary</item>
@@ -8987,9 +8985,9 @@
     </style>
     <style name="TextAppearance.AuthNonBioCredential.Description" parent="@style/TextAppearance.AuthNonBioCredential">
         <item name="android:textSize">18.0sp</item>
-        <item name="android:textColor">@android:color/ripple_material_light</item>
+        <item name="android:textColor">@android:color/material_grey_50</item>
         <item name="android:layout_marginTop">20.0dip</item>
-        <item name="android:fontFamily">@android:string/emailTypeOther</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest</item>
     </style>
     <style name="TextAppearance.AuthNonBioCredential.Error" parent="@style/TextAppearance.AuthNonBioCredential">
         <item name="android:textSize">14.0sp</item>
@@ -9013,16 +9011,16 @@
     </style>
     <style name="TextAppearance.AuthNonBioCredential.Subtitle" parent="@style/TextAppearance.AuthNonBioCredential">
         <item name="android:textSize">18.0sp</item>
-        <item name="android:textColor">@android:color/ripple_material_light</item>
+        <item name="android:textColor">@android:color/material_grey_50</item>
         <item name="android:layout_marginTop">20.0dip</item>
-        <item name="android:fontFamily">@android:string/emailTypeOther</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest</item>
     </style>
     <style name="TextAppearance.AuthNonBioCredential.Title" parent="@style/TextAppearance.AuthNonBioCredential">
         <item name="android:textSize">36.0sp</item>
-        <item name="android:textColor">@android:color/ripple_material_light</item>
+        <item name="android:textColor">@android:color/material_grey_50</item>
         <item name="android:focusable">true</item>
         <item name="android:layout_marginTop">24.0dip</item>
-        <item name="android:fontFamily">@android:string/emailTypeOther</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest</item>
     </style>
     <style name="TextAppearance.Basic.No.Item" parent="@style/TextAppearance.Font.Regular">
         <item name="android:textSize">19.0sp</item>
@@ -9032,18 +9030,18 @@
         <item name="android:textSize">@dimen/status_bar_battery_chip_level_text_size</item>
     </style>
     <style name="TextAppearance.BluetoothTileDialog" parent="@style/TextAppearance">
-        <item name="android:textColor">@android:color/ripple_material_light</item>
-        <item name="android:fontFamily">@android:string/emailTypeOther</item>
+        <item name="android:textColor">@android:color/material_grey_50</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest</item>
         <item name="android:textDirection">locale</item>
         <item name="android:textAlignment">gravity</item>
     </style>
     <style name="TextAppearance.BluetoothTileDialog.Active" parent="@style/TextAppearance.BluetoothTileDialog">
-        <item name="android:textColor">@android:color/red</item>
+        <item name="android:textColor">@android:color/material_deep_teal_100</item>
     </style>
     <style name="TextAppearance.BroadcastDialog" parent="@style/TextAppearance">
         <item name="android:textSize">16.0sp</item>
         <item name="android:textColor">?android:textColorPrimary</item>
-        <item name="android:fontFamily">@android:string/emailTypeOther</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest</item>
         <item name="android:textDirection">locale</item>
     </style>
     <style name="TextAppearance.BroadcastDialog.Secondary" parent="@style/TextAppearance.BroadcastDialog">
@@ -9075,7 +9073,7 @@
         <item name="android:textColor">@color/settingslib_materialColorOnSecondaryContainer</item>
     </style>
     <style name="TextAppearance.CastItem" parent="@android:style/TextAppearance.DeviceDefault.Medium">
-        <item name="android:fontFamily">@android:string/emailTypeOther</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest</item>
     </style>
     <style name="TextAppearance.CategoryTitle.SettingsLib" parent="@android:style/TextAppearance.DeviceDefault.Medium">
         <item name="android:textSize">14.0sp</item>
@@ -9092,7 +9090,7 @@
     <style name="TextAppearance.Compat.Notification.Title" parent="@android:style/TextAppearance.Material.Notification.Title" />
     <style name="TextAppearance.Compat.Notification.Title.Media" parent="@style/TextAppearance.Compat.Notification.Title" />
     <style name="TextAppearance.Control" parent="@style/TextAppearance">
-        <item name="android:fontFamily">@android:string/csd_momentary_exposure_warning</item>
+        <item name="android:fontFamily">@android:string/config_wwan_network_service_package</item>
     </style>
     <style name="TextAppearance.Control.CollapsingToolbar" parent="@style/TextAppearance.Design.CollapsingToolbar.Expanded">
         <item name="android:textSize">34.0sp</item>
@@ -9115,11 +9113,11 @@
     </style>
     <style name="TextAppearance.Control.Management.Subtitle" parent="@style/TextAppearance.Control.Management">
         <item name="android:textSize">@dimen/controls_subtitle_size</item>
-        <item name="android:fontFamily">@android:string/emailTypeOther</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest</item>
     </style>
     <style name="TextAppearance.Control.Management.Title" parent="@style/TextAppearance.Control.Management">
         <item name="android:textSize">@dimen/controls_title_size</item>
-        <item name="android:fontFamily">@android:string/emailTypeWork</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest_future</item>
     </style>
     <style name="TextAppearance.Control.Sec.Status" parent="@style/TextAppearance.Font.SemiBold">
         <item name="android:textSize">@dimen/sec_control_text_size</item>
@@ -9128,22 +9126,22 @@
     <style name="TextAppearance.Control.Status" parent="@style/TextAppearance.Control">
         <item name="android:textSize">@dimen/control_status_normal</item>
         <item name="android:textColor">@color/control_primary_text</item>
-        <item name="android:fontFamily">@android:string/emailTypeWork</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest_future</item>
     </style>
     <style name="TextAppearance.Control.Subtitle" parent="@style/TextAppearance.Control">
         <item name="android:textSize">@dimen/control_text_size</item>
         <item name="android:textColor">@color/control_secondary_text</item>
-        <item name="android:fontFamily">@android:string/emailTypeWork</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest_future</item>
     </style>
     <style name="TextAppearance.Control.Title" parent="@style/TextAppearance.Control">
         <item name="android:textSize">@dimen/control_text_size</item>
         <item name="android:textColor">@color/control_primary_text</item>
         <item name="android:lineSpacingExtra">6.0sp</item>
-        <item name="android:fontFamily">@android:string/emailTypeWork</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest_future</item>
     </style>
     <style name="TextAppearance.ControlSetup" parent="@style/TextAppearance">
         <item name="android:textColor">@color/control_primary_text</item>
-        <item name="android:fontFamily">@android:string/emailTypeOther</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest</item>
     </style>
     <style name="TextAppearance.ControlSetup.Subtitle" parent="@style/TextAppearance.ControlSetup">
         <item name="android:textSize">@dimen/controls_setup_subtitle</item>
@@ -9280,8 +9278,8 @@
     <style name="TextAppearance.DeviceManagementDialog.Title" parent="@android:style/TextAppearance.DeviceDefault.DialogWindowTitle" />
     <style name="TextAppearance.Dialog.Body" parent="@android:style/TextAppearance.DeviceDefault.Medium">
         <item name="android:textSize">14.0sp</item>
-        <item name="android:textColor">@android:color/safe_mode_text</item>
-        <item name="android:fontFamily">@android:string/emailTypeOther</item>
+        <item name="android:textColor">@android:color/material_grey_600</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest</item>
         <item name="android:lineHeight">20.0sp</item>
     </style>
     <style name="TextAppearance.Dialog.Body.Message" parent="@style/TextAppearance.Dialog.Body">
@@ -9290,9 +9288,9 @@
     </style>
     <style name="TextAppearance.Dialog.Title" parent="@android:style/TextAppearance.DeviceDefault.Large">
         <item name="android:textSize">@dimen/dialog_title_text_size</item>
-        <item name="android:textColor">@android:color/ripple_material_light</item>
+        <item name="android:textColor">@android:color/material_grey_50</item>
         <item name="android:gravity">center</item>
-        <item name="android:fontFamily">@android:string/emailTypeOther</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest</item>
         <item name="android:textAlignment">center</item>
         <item name="android:hyphenationFrequency">full</item>
         <item name="android:lineHeight">32.0sp</item>
@@ -9307,7 +9305,7 @@
         <item name="android:textSize">20.0sp</item>
         <item name="android:textColor">?android:textColorPrimary</item>
     </style>
-    <style name="TextAppearance.ErrorText" parent="@android:style/TextAppearance.Holo.Light.Widget.ActionMode.Subtitle">
+    <style name="TextAppearance.ErrorText" parent="@android:style/TextAppearance.Holo.Light.Medium.Inverse">
         <item name="android:textColor">?android:colorError</item>
     </style>
     <style name="TextAppearance.Font" parent="@style/TextAppearance">
@@ -9323,24 +9321,24 @@
         <item name="android:textSize">14.0sp</item>
         <item name="android:textColor">?android:colorAccent</item>
     </style>
-    <style name="TextAppearance.HeadsUpStatusBarText" parent="@android:style/TextAppearance.Material.DatePicker.YearLabel">
+    <style name="TextAppearance.HeadsUpStatusBarText" parent="@android:style/TextAppearance.Leanback.FormWizard.Large">
         <item name="android:textSize">@dimen/heads_up_status_bar_text_size</item>
     </style>
     <style name="TextAppearance.InternetDialog" parent="@style/TextAppearance">
         <item name="android:textSize">16.0sp</item>
-        <item name="android:textColor">@android:color/ripple_material_light</item>
-        <item name="android:fontFamily">@android:string/emailTypeOther</item>
+        <item name="android:textColor">@android:color/material_grey_50</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest</item>
         <item name="android:textDirection">locale</item>
     </style>
     <style name="TextAppearance.InternetDialog.Active" parent="@style/TextAppearance.InternetDialog">
-        <item name="android:textColor">@android:color/red</item>
+        <item name="android:textColor">@android:color/material_deep_teal_100</item>
     </style>
     <style name="TextAppearance.InternetDialog.Secondary" parent="@style/TextAppearance.InternetDialog">
         <item name="android:textSize">14.0sp</item>
-        <item name="android:textColor">@android:color/safe_mode_text</item>
+        <item name="android:textColor">@android:color/material_grey_600</item>
     </style>
     <style name="TextAppearance.InternetDialog.Secondary.Active" parent="@style/TextAppearance.InternetDialog.Secondary">
-        <item name="android:textColor">@android:color/red</item>
+        <item name="android:textColor">@android:color/material_deep_teal_100</item>
     </style>
     <style name="TextAppearance.Keyguard" parent="@style/TextAppearance">
         <item name="android:textSize">@dimen/widget_title_font_size</item>
@@ -9349,7 +9347,7 @@
         <item name="android:maxLines">2</item>
         <item name="android:shadowColor">@color/keyguard_shadow_color</item>
         <item name="android:shadowRadius">?shadowRadius</item>
-        <item name="android:fontFamily">@android:string/emailTypeOther</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest</item>
         <item name="android:lineHeight">@dimen/widget_title_line_height</item>
     </style>
     <style name="TextAppearance.Keyguard.BottomArea" parent="@style/TextAppearance.Keyguard">
@@ -9852,16 +9850,16 @@
     </style>
     <style name="TextAppearance.NotificationFooterButton" parent="@android:style/Widget.DeviceDefault.Button.Borderless">
         <item name="android:textSize">14.0sp</item>
-        <item name="android:textColor">@android:color/ripple_material_light</item>
+        <item name="android:textColor">@android:color/material_grey_50</item>
         <item name="android:minWidth">0.0dip</item>
         <item name="android:textAllCaps">false</item>
     </style>
     <style name="TextAppearance.NotificationFooterButtonRedesign" parent="@android:style/Widget.DeviceDefault.Button.Borderless">
         <item name="android:textSize">16.0sp</item>
-        <item name="android:textColor">@android:color/ripple_material_light</item>
+        <item name="android:textColor">@android:color/material_grey_50</item>
         <item name="android:minWidth">0.0dip</item>
         <item name="android:textAllCaps">false</item>
-        <item name="android:drawableTint">@android:color/ripple_material_light</item>
+        <item name="android:drawableTint">@android:color/material_grey_50</item>
     </style>
     <style name="TextAppearance.NotificationGuts" parent="@style/TextAppearance">
         <item name="android:textColor">@color/notification_guts_common_text_color</item>
@@ -9924,38 +9922,38 @@
     </style>
     <style name="TextAppearance.NotificationImportanceApp" parent="@style/TextAppearance">
         <item name="android:textSize">@dimen/notification_importance_channel_group_text</item>
-        <item name="android:textColor">@android:color/safe_mode_text</item>
-        <item name="android:fontFamily">@android:string/emailTypeOther</item>
+        <item name="android:textColor">@android:color/material_grey_600</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest</item>
     </style>
     <style name="TextAppearance.NotificationImportanceButton" parent="@style/TextAppearance">
         <item name="android:textSize">@dimen/notification_importance_button_text</item>
         <item name="android:textColor">@color/notification_guts_priority_contents</item>
         <item name="android:gravity">center</item>
-        <item name="android:fontFamily">@android:string/emailTypeWork</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest_future</item>
     </style>
     <style name="TextAppearance.NotificationImportanceChannel" parent="@style/TextAppearance">
         <item name="android:textSize">@dimen/notification_importance_channel_text</item>
-        <item name="android:textColor">@android:color/ripple_material_light</item>
-        <item name="android:fontFamily">@android:string/emailTypeWork</item>
+        <item name="android:textColor">@android:color/material_grey_50</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest_future</item>
     </style>
     <style name="TextAppearance.NotificationImportanceChannelGroup" parent="@style/TextAppearance">
         <item name="android:textSize">@dimen/notification_importance_channel_group_text</item>
-        <item name="android:textColor">@android:color/ripple_material_light</item>
-        <item name="android:fontFamily">@android:string/emailTypeOther</item>
+        <item name="android:textColor">@android:color/material_grey_50</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest</item>
     </style>
     <style name="TextAppearance.NotificationImportanceDetail" parent="@style/TextAppearance">
         <item name="android:textSize">@dimen/notification_importance_description_text</item>
-        <item name="android:textColor">@android:color/safe_mode_text</item>
+        <item name="android:textColor">@android:color/material_grey_600</item>
         <item name="android:gravity">center</item>
-        <item name="android:fontFamily">@android:string/csd_momentary_exposure_warning</item>
+        <item name="android:fontFamily">@android:string/config_wwan_network_service_package</item>
     </style>
     <style name="TextAppearance.NotificationImportanceHeader" parent="@style/TextAppearance">
         <item name="android:textSize">@dimen/notification_importance_header_text</item>
-        <item name="android:textColor">@android:color/ripple_material_light</item>
-        <item name="android:fontFamily">@android:string/emailTypeOther</item>
+        <item name="android:textColor">@android:color/material_grey_50</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest</item>
     </style>
     <style name="TextAppearance.NotificationInfo" parent="@style/TextAppearance">
-        <item name="android:fontFamily">@android:string/emailTypeOther</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest</item>
     </style>
     <style name="TextAppearance.NotificationInfo.Button" parent="@style/TextAppearance.NotificationInfo">
         <item name="android:textSize">14.0sp</item>
@@ -9963,7 +9961,7 @@
         <item name="android:gravity">center_vertical</item>
         <item name="android:background">@drawable/btn_borderless_rect</item>
         <item name="android:focusable">true</item>
-        <item name="android:fontFamily">@android:string/emailTypeWork</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest_future</item>
     </style>
     <style name="TextAppearance.NotificationInfo.Confirmation" parent="@style/TextAppearance.NotificationInfo">
         <item name="android:textSize">14.0sp</item>
@@ -9971,9 +9969,9 @@
     </style>
     <style name="TextAppearance.NotificationMenuButtonText" parent="@style/TextAppearance">
         <item name="android:textSize">@dimen/notification_importance_header_text</item>
-        <item name="android:textColor">@android:color/ripple_material_light</item>
+        <item name="android:textColor">@android:color/material_grey_50</item>
         <item name="android:gravity">center</item>
-        <item name="android:fontFamily">@android:string/emailTypeOther</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest</item>
     </style>
     <style name="TextAppearance.NotificationSectionHeader" parent="@style/TextAppearance">
         <item name="android:textSize">14.0sp</item>
@@ -9983,13 +9981,13 @@
     </style>
     <style name="TextAppearance.NotificationSectionHeaderButton" parent="@android:style/Widget.DeviceDefault.Button.Borderless">
         <item name="android:textSize">14.0sp</item>
-        <item name="android:textColor">@android:color/ripple_material_light</item>
+        <item name="android:textColor">@android:color/material_grey_50</item>
         <item name="android:minWidth">0.0dip</item>
         <item name="android:textAllCaps">false</item>
     </style>
     <style name="TextAppearance.NotificationSectionHeaderLabel" parent="@android:style/Widget.DeviceDefault.Button.Borderless">
         <item name="android:textSize">14.0sp</item>
-        <item name="android:textColor">@android:color/ripple_material_light</item>
+        <item name="android:textColor">@android:color/material_grey_50</item>
         <item name="android:minWidth">0.0dip</item>
         <item name="android:textAllCaps">false</item>
     </style>
@@ -10023,22 +10021,22 @@
     <style name="TextAppearance.PrivacyDialog" parent="@style/TextAppearance">
         <item name="android:textSize">14.0sp</item>
         <item name="android:textColor">?android:textColorPrimary</item>
-        <item name="android:fontFamily">@android:string/emailTypeOther</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest</item>
     </style>
     <style name="TextAppearance.PrivacyDialog.Item.Summary" parent="@android:style/TextAppearance.DeviceDefault.Small">
         <item name="android:textSize">14.0sp</item>
-        <item name="android:textColor">@android:color/safe_mode_text</item>
+        <item name="android:textColor">@android:color/material_grey_600</item>
         <item name="android:lineHeight">20.0sp</item>
     </style>
     <style name="TextAppearance.PrivacyDialog.Item.Title" parent="@android:style/TextAppearance.DeviceDefault.Medium">
         <item name="android:textSize">14.0sp</item>
-        <item name="android:textColor">@android:color/ripple_material_light</item>
+        <item name="android:textColor">@android:color/material_grey_50</item>
         <item name="android:lineHeight">20.0sp</item>
     </style>
     <style name="TextAppearance.QS" parent="@style/TextAppearance">
         <item name="android:textStyle">normal</item>
         <item name="android:textColor">?onShadeInactive</item>
-        <item name="android:fontFamily">@android:string/csd_momentary_exposure_warning</item>
+        <item name="android:fontFamily">@android:string/config_wwan_network_service_package</item>
     </style>
     <style name="TextAppearance.QS.DataUsage" parent="@style/TextAppearance.QS">
         <item name="android:textSize">@dimen/qs_data_usage_text_size</item>
@@ -10125,16 +10123,16 @@
     </style>
     <style name="TextAppearance.QS.SecurityFooter" parent="@style/TextAppearance.QS.Status">
         <item name="android:textColor">?onSurface</item>
-        <item name="android:fontFamily">@android:string/csd_momentary_exposure_warning</item>
+        <item name="android:fontFamily">@android:string/config_wwan_network_service_package</item>
     </style>
     <style name="TextAppearance.QS.SegmentedButton" parent="@style/TextAppearance.QS">
         <item name="android:textSize">16.0sp</item>
-        <item name="android:fontFamily">@android:string/data_saver_description</item>
+        <item name="android:fontFamily">@android:string/confirm_battery_saver</item>
     </style>
     <style name="TextAppearance.QS.Status" parent="@style/TextAppearance.QS">
         <item name="android:textSize">14.0sp</item>
         <item name="android:textColor">@color/shade_header_text_color</item>
-        <item name="android:fontFamily">@android:string/emailTypeOther</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest</item>
         <item name="android:letterSpacing">0.01</item>
     </style>
     <style name="TextAppearance.QS.Status.Build" parent="@style/TextAppearance.QS.Status">
@@ -10145,7 +10143,7 @@
         <item name="android:textColor">?onSurfaceVariant</item>
     </style>
     <style name="TextAppearance.QS.Status.Clock" parent="@style/TextAppearance.QS.Status">
-        <item name="android:fontFamily">@android:string/emailTypeOther</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest</item>
     </style>
     <style name="TextAppearance.QS.Status.SamsungCarriers" parent="@style/TextAppearance.QS.Status">
         <item name="android:textSize">@dimen/shade_carrier_text_size</item>
@@ -10160,16 +10158,16 @@
     </style>
     <style name="TextAppearance.QS.TileLabel" parent="@style/TextAppearance.QS">
         <item name="android:textSize">@dimen/qs_tile_text_size</item>
-        <item name="android:fontFamily">@android:string/data_saver_description</item>
+        <item name="android:fontFamily">@android:string/confirm_battery_saver</item>
         <item name="android:letterSpacing">0.01</item>
         <item name="android:lineHeight">20.0sp</item>
     </style>
     <style name="TextAppearance.QS.TileLabel.Secondary" parent="@style/TextAppearance.QS.TileLabel">
-        <item name="android:fontFamily">@android:string/csd_momentary_exposure_warning</item>
+        <item name="android:fontFamily">@android:string/config_wwan_network_service_package</item>
     </style>
     <style name="TextAppearance.QS.UserSwitcher" parent="@style/TextAppearance.QS">
         <item name="android:textSize">@dimen/qs_tile_text_size</item>
-        <item name="android:textColor">@android:color/safe_mode_text</item>
+        <item name="android:textColor">@android:color/material_grey_600</item>
     </style>
     <style name="TextAppearance.QS.Warning" parent="@style/TextAppearance.QS">
         <item name="android:textSize">14.0sp</item>
@@ -10178,7 +10176,7 @@
     <style name="TextAppearance.QSEdit" parent="@style/TextAppearance">
         <item name="android:textSize">14.0sp</item>
         <item name="android:textColor">?onSurfaceVariant</item>
-        <item name="android:fontFamily">@android:string/emailTypeOther</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest</item>
         <item name="android:letterSpacing">0.01</item>
         <item name="android:lineHeight">20.0sp</item>
     </style>
@@ -10484,7 +10482,7 @@
     <style name="TextAppearance.StatusBar.Default.Clock" parent="@style/TextAppearance.StatusBar.Default">
         <item name="android:fontFeatureSettings">tnum</item>
     </style>
-    <style name="TextAppearance.StatusBar.Expanded" parent="@android:style/Theme.DeviceDefaultBase">
+    <style name="TextAppearance.StatusBar.Expanded" parent="@android:style/Theme.DeviceDefault.Settings.SearchBar">
         <item name="android:textColor">?android:textColorTertiary</item>
     </style>
     <style name="TextAppearance.StatusBar.Expanded.AboveDateTime" parent="@style/TextAppearance.StatusBar.Expanded">
@@ -10497,20 +10495,20 @@
         <item name="android:textSize">@dimen/qs_time_expanded_size</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textColor">?android:textColorPrimary</item>
-        <item name="android:fontFamily">@android:string/emailTypeWork</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest_future</item>
     </style>
     <style name="TextAppearance.StatusBar.Expanded.Date" parent="@style/TextAppearance.StatusBar.Expanded">
         <item name="android:textSize">@dimen/qs_time_expanded_size</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textColor">?android:textColorPrimary</item>
-        <item name="android:fontFamily">@android:string/csd_momentary_exposure_warning</item>
+        <item name="android:fontFamily">@android:string/config_wwan_network_service_package</item>
     </style>
     <style name="TextAppearance.StatusBar.Expanded.EmergencyCallsOnly" parent="@style/TextAppearance.StatusBar.Expanded.AboveDateTime" />
     <style name="TextAppearance.StatusBar.Expanded.UserSwitcher" parent="@style/TextAppearance.StatusBar.Expanded">
         <item name="android:textSize">@dimen/kg_user_switcher_text_size</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textColor">?wallpaperTextColor</item>
-        <item name="android:fontFamily">@android:string/emailTypeOther</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest</item>
     </style>
     <style name="TextAppearance.StatusBar.Expanded.UserSwitcher.Activated" parent="@style/TextAppearance.StatusBar.Expanded.UserSwitcher">
         <item name="android:fontWeight">700</item>
@@ -10518,7 +10516,7 @@
     <style name="TextAppearance.StatusBar.UserChip" parent="@android:style/TextAppearance.StatusBar.Icon">
         <item name="android:textSize">@dimen/status_bar_user_chip_text_size</item>
         <item name="android:textColor">@color/status_bar_clock_color</item>
-        <item name="android:fontFamily">@android:string/emailTypeWork</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest_future</item>
     </style>
     <style name="TextAppearance.SubscreenNotificationDetail" parent="@style/TextAppearance">
         <item name="android:textColor">#fffafafa</item>
@@ -10582,7 +10580,7 @@
     <style name="TextAppearance.Volume" parent="@style/TextAppearance">
         <item name="android:textStyle">normal</item>
         <item name="android:textColor">?android:textColorPrimary</item>
-        <item name="android:fontFamily">@android:string/csd_momentary_exposure_warning</item>
+        <item name="android:fontFamily">@android:string/config_wwan_network_service_package</item>
     </style>
     <style name="TextAppearance.Volume.Header" parent="@style/TextAppearance.Volume">
         <item name="android:textSize">12.0sp</item>
@@ -10618,7 +10616,7 @@
     </style>
     <style name="TextAppearanceBroadcastDialogButton" parent="@android:style/TextAppearance.DeviceDefault.Headline">
         <item name="android:textSize">@dimen/broadcast_dialog_btn_text_size</item>
-        <item name="android:textColor">?android:^attr-private/tooltipHorizontalPadding</item>
+        <item name="android:textColor">@null</item>
     </style>
     <style name="TextAppearanceBroadcastDialogSubTitle" parent="@android:style/TextAppearance.DeviceDefault.Headline">
         <item name="android:textSize">@dimen/broadcast_dialog_subtitle_text_size</item>
@@ -10902,7 +10900,7 @@
         <item name="android:statusBarColor">@android:color/black</item>
         <item name="android:windowActivityTransitions">true</item>
         <item name="android:windowSplashScreenAnimatedIcon">@drawable/ic_blank</item>
-        <item name="wallpaperTextColor">@null</item>
+        <item name="wallpaperTextColor">@android:color/surface_highlight_dark</item>
     </style>
     <style name="Theme.ControlsManagement" parent="@android:style/Theme.DeviceDefault.NoActionBar">
         <item name="android:colorBackground">@android:color/black</item>
@@ -10912,7 +10910,7 @@
         <item name="android:windowContentTransitions">false</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowActivityTransitions">true</item>
-        <item name="wallpaperTextColor">@null</item>
+        <item name="wallpaperTextColor">@android:color/surface_highlight_dark</item>
     </style>
     <style name="Theme.ControlsRequestDialog" parent="@android:style/Theme.DeviceDefault.Dialog.Alert" />
     <style name="Theme.ControlsSettingActivity" parent="@style/Theme.SecControlsSubActivity">
@@ -11427,7 +11425,7 @@
         <item name="android:windowOptOutEdgeToEdgeEnforcement">true</item>
     </style>
     <style name="Theme.PrivacyDialog" parent="@style/Theme.SystemUI.Dialog">
-        <item name="android:colorBackground">@android:color/seekbar_track_progress_material</item>
+        <item name="android:colorBackground">@android:color/notification_secondary_text_color_dark</item>
     </style>
     <style name="Theme.SecControlsActivity" parent="@style/Theme.AppCompat.DayNight.NoActionBar">
         <item name="android:colorBackground">@color/control_activity_base_color</item>
@@ -11566,11 +11564,11 @@
         <item name="android:navigationBarColor">@color/transparent</item>
         <item name="android:enforceNavigationBarContrast">false</item>
     </style>
-    <style name="Theme.SystemUI" parent="@android:style/ThemeOverlay.DeviceDefault.Popup.Light">
+    <style name="Theme.SystemUI" parent="@android:style/Theme.Toast">
         <item name="android:homeAsUpIndicator">@drawable/ic_arrow_back</item>
-        <item name="android:colorError">@android:color/kg_multi_user_text_inactive</item>
+        <item name="android:colorError">@android:color/holo_control_activated</item>
         <item name="android:isLightTheme">false</item>
-        <item name="android:keyboardViewStyle">@style/LockPatternViewStyle</item>
+        <item name="android:magnifierStyle">@style/LockPatternViewStyle</item>
         <item name="backgroundProtectedStyle">@style/BackgroundProtectedStyle</item>
         <item name="colorPrimary">#ff387aff</item>
         <item name="darkIconTheme">@style/DualToneDarkTheme</item>
@@ -11580,9 +11578,9 @@
         <item name="numPadKeyStyle">@style/NumPadKey</item>
         <item name="passwordStyle">@style/PasswordTheme</item>
         <item name="shadowRadius">@dimen/keyguard_shadow_radius</item>
-        <item name="wallpaperTextColor">@null</item>
+        <item name="wallpaperTextColor">@android:color/surface_highlight_dark</item>
         <item name="wallpaperTextColorAccent">@color/material_dynamic_primary90</item>
-        <item name="wallpaperTextColorSecondary">@null</item>
+        <item name="wallpaperTextColorSecondary">@android:color/system_shade_active_light</item>
     </style>
     <style name="Theme.SystemUI.BottomSheet" parent="@style/Theme.SystemUI.Dialog">
         <item name="android:windowBackground">@android:color/transparent</item>
@@ -11590,7 +11588,7 @@
     </style>
     <style name="Theme.SystemUI.DayNightDialog" parent="@android:style/Theme.DeviceDefault.Light.Dialog" />
     <style name="Theme.SystemUI.Dialog" parent="@style/Theme.SystemUI.DayNightDialog">
-        <item name="android:colorBackground">@android:color/secondary_text_nofocus</item>
+        <item name="android:colorBackground">@android:color/notification_secondary_text_color_current</item>
         <item name="android:alertDialogStyle">@style/ScrollableAlertDialogStyle</item>
         <item name="android:buttonBarStyle">@style/ButtonBarStyle</item>
         <item name="android:buttonBarButtonStyle">@style/Widget.Dialog.Button.Large</item>
@@ -11617,7 +11615,7 @@
     </style>
     <style name="Theme.SystemUI.Dialog.GlobalActions" parent="@android:style/Theme.DeviceDefault.Light.NoActionBar.Fullscreen">
         <item name="android:windowIsFloating">true</item>
-        <item name="android:colorError">@android:color/kg_multi_user_text_inactive</item>
+        <item name="android:colorError">@android:color/holo_control_activated</item>
     </style>
     <style name="Theme.SystemUI.Dialog.GlobalActionsLite" parent="@style/Theme.SystemUI.Dialog">
         <item name="android:windowBackground">@android:color/transparent</item>
@@ -11649,7 +11647,7 @@
         <item name="android:windowIsFloating">true</item>
     </style>
     <style name="Theme.SystemUI.Dnd.Dialog" parent="@android:style/Theme.DeviceDefault.Settings">
-        <item name="android:colorBackground">@android:color/secondary_text_nofocus</item>
+        <item name="android:colorBackground">@android:color/notification_secondary_text_color_current</item>
         <item name="android:alertDialogStyle">@style/ScrollableAlertDialogStyle</item>
         <item name="android:buttonBarStyle">@style/ButtonBarStyle</item>
         <item name="android:buttonBarButtonStyle">@style/Widget.Dialog.Button.Large</item>
@@ -11666,12 +11664,12 @@
         <item name="android:windowActionBar">false</item>
     </style>
     <style name="Theme.SystemUI.LightWallpaper" parent="@style/Theme.SystemUI">
-        <item name="android:colorError">@android:color/kg_widget_pager_gradient</item>
+        <item name="android:colorError">@android:color/holo_control_normal</item>
         <item name="android:isLightTheme">true</item>
         <item name="shadowRadius">0.0</item>
-        <item name="wallpaperTextColor">@null</item>
+        <item name="wallpaperTextColor">@android:color/surface_highlight_light</item>
         <item name="wallpaperTextColorAccent">@color/material_dynamic_secondary40</item>
-        <item name="wallpaperTextColorSecondary">@null</item>
+        <item name="wallpaperTextColorSecondary">@android:color/system_shade_disabled_dark</item>
     </style>
     <style name="Theme.SystemUI.MediaProjectionAlertDialog" parent="@style/Theme.SystemUI">
         <item name="android:windowBackground">@android:color/transparent</item>
@@ -11682,8 +11680,8 @@
         <item name="android:backgroundDimEnabled">true</item>
         <item name="android:alertDialogTheme">@style/Theme.SystemUI.Dialog.Alert</item>
     </style>
-    <style name="Theme.SystemUI.MediaProjectionAppSelector" parent="@android:style/Theme.Leanback.Dialog.Confirmation">
-        <item name="android:colorBackground">@android:color/seekbar_track_progress_material</item>
+    <style name="Theme.SystemUI.MediaProjectionAppSelector" parent="@android:style/Theme.Holo.Light.Dialog.Presentation">
+        <item name="android:colorBackground">@android:color/notification_secondary_text_color_dark</item>
     </style>
     <style name="Theme.SystemUI.POPUPUI" parent="@style/Theme.AppCompat.DayNight.Dialog.Alert">
         <item name="android:fontFamily">sec</item>
@@ -11694,25 +11692,25 @@
         <item name="android:windowIsFloating">true</item>
         <item name="android:itemTextAppearance">@style/Control.MenuItem</item>
         <item name="android:homeAsUpIndicator">@drawable/ic_arrow_back</item>
-        <item name="android:colorError">@android:color/kg_multi_user_text_inactive</item>
+        <item name="android:colorError">@android:color/holo_control_activated</item>
         <item name="darkIconTheme">@style/QSIconTheme</item>
         <item name="isQsTheme">true</item>
         <item name="lightIconTheme">@style/QSIconTheme</item>
-        <item name="onShadeActive">@android:color/dim_foreground_light_inverse_disabled</item>
-        <item name="onShadeActiveVariant">@android:color/edge_effect_device_default_dark</item>
-        <item name="onShadeInactive">@android:color/edge_effect_device_default_light</item>
-        <item name="onShadeInactiveVariant">@android:color/error_color_device_default_dark</item>
-        <item name="onSurface">@android:color/ripple_material_light</item>
-        <item name="onSurfaceVariant">@android:color/safe_mode_text</item>
-        <item name="outline">@android:color/search_url_text_normal</item>
-        <item name="primary">@android:color/secondary_material_settings_light</item>
-        <item name="scHigh">@android:color/shadow</item>
-        <item name="shadeActive">@android:color/error_color_material_light</item>
-        <item name="shadeDisabled">@android:color/facelock_spotlight_mask</item>
-        <item name="shadeInactive">@android:color/floating_popup_divider_dark</item>
-        <item name="surfaceBright">@android:color/secondary_text_nofocus</item>
-        <item name="tertiary">@android:color/surface_dark</item>
-        <item name="underSurface">@android:color/foreground_material_dark</item>
+        <item name="onShadeActive">@android:color/datepicker_default_selected_text_color_material_dark</item>
+        <item name="onShadeActiveVariant">@android:color/datepicker_default_selected_text_color_material_light</item>
+        <item name="onShadeInactive">@android:color/datepicker_default_view_animator_color_material_dark</item>
+        <item name="onShadeInactiveVariant">@android:color/datepicker_default_view_animator_color_material_light</item>
+        <item name="onSurface">@android:color/material_grey_50</item>
+        <item name="onSurfaceVariant">@android:color/material_grey_600</item>
+        <item name="outline">@android:color/material_red_A700</item>
+        <item name="primary">@android:color/notification_action_list_background_color</item>
+        <item name="scHigh">@android:color/notification_secondary_text_color_light</item>
+        <item name="shadeActive">@android:color/decor_view_status_guard</item>
+        <item name="shadeDisabled">@android:color/decor_view_status_guard_light</item>
+        <item name="shadeInactive">@android:color/default_magnifier_color_overlay</item>
+        <item name="surfaceBright">@android:color/notification_secondary_text_color_current</item>
+        <item name="tertiary">@android:color/primary_dark_device_default_light</item>
+        <item name="underSurface">@android:color/dim_foreground_dark_inverse_disabled</item>
     </style>
     <style name="Theme.SystemUI.QuickSettings.Dialog" parent="@style/Theme.SystemUI.Dialog.QuickSettings" />
     <style name="Theme.SystemUI.QuickSettings.Header" parent="@style/Theme.SystemUI.QuickSettings">
@@ -11745,7 +11743,7 @@
         <item name="android:navigationBarColor">@color/user_switcher_fullscreen_bg</item>
     </style>
     <style name="Theme.VolumePanel.Popup" parent="@style/Theme.SystemUI.Dialog">
-        <item name="android:colorBackground">@android:color/shadow</item>
+        <item name="android:colorBackground">@android:color/notification_secondary_text_color_light</item>
         <item name="android:dialogCornerRadius">44.0dip</item>
     </style>
     <style name="ThemeOverlay.AppCompat" parent="@style/Base.ThemeOverlay.AppCompat" />
@@ -12505,7 +12503,7 @@
         <item name="android:layout_marginEnd">@dimen/touchpad_popup_bottom_button_end_margin</item>
     </style>
     <style name="TouchpadSPenIconPhoneStyle">
-        <item name="android:layout_gravity">end|bottom|center</item>
+        <item name="android:layout_gravity">end|bottom</item>
         <item name="android:layout_width">@dimen/touchpad_icon_image_size</item>
         <item name="android:layout_height">@dimen/touchpad_icon_image_size</item>
         <item name="android:layout_marginBottom">@dimen/touchpad_spen_icon_layout_bottom_margin</item>
@@ -12513,7 +12511,7 @@
         <item name="android:layout_marginEnd">@dimen/touchpad_spen_icon_layout_right_margin</item>
     </style>
     <style name="TouchpadSPenIconTabletStyle">
-        <item name="android:layout_gravity">end|bottom|center</item>
+        <item name="android:layout_gravity">end|bottom</item>
         <item name="android:layout_width">@dimen/touchpad_icon_image_size</item>
         <item name="android:layout_height">@dimen/touchpad_icon_image_size</item>
         <item name="android:layout_marginBottom">@dimen/touchpad_spen_icon_layout_margin_tablet</item>
@@ -12647,6 +12645,29 @@
     <style name="UserDetailView">
         <item name="numColumns">3</item>
     </style>
+    <style name="VisualIndicatorLabel">
+        <item name="android:textSize">15.0sp</item>
+        <item name="android:textColor">#ffffffff</item>
+        <item name="android:ellipsize">none</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minWidth">83.0dip</item>
+        <item name="android:minHeight">20.0dip</item>
+    </style>
+    <style name="VisualIndicatorLabelContainer">
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:background">@drawable/desktop_label_bg</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">80.0dip</item>
+        <item name="android:minWidth">115.0dip</item>
+        <item name="android:minHeight">44.0dip</item>
+        <item name="android:alpha">0.0</item>
+        <item name="android:paddingHorizontal">16.0dip</item>
+        <item name="android:paddingVertical">12.0dip</item>
+    </style>
     <style name="VolumeButtons" parent="@android:style/Widget.Material.Button.Borderless">
         <item name="android:background">@drawable/btn_borderless_rect</item>
     </style>
@@ -12658,7 +12679,7 @@
         <item name="android:textSize">14.0sp</item>
         <item name="android:textColor">?android:textColorPrimary</item>
         <item name="android:singleLine">true</item>
-        <item name="android:fontFamily">@android:string/emailTypeOther</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest</item>
     </style>
     <style name="Wallet.Theme" parent="@android:style/Theme.DeviceDefault">
         <item name="android:colorBackground">@color/material_dynamic_neutral10</item>
@@ -13006,6 +13027,7 @@
         <item name="counterOverflowTextColor">@null</item>
         <item name="counterTextAppearance">@style/TextAppearance.Design.Counter</item>
         <item name="counterTextColor">@null</item>
+        <item name="cursorColor">?colorPrimary</item>
         <item name="endIconTint">@color/design_icon_tint</item>
         <item name="enforceMaterialTheme">false</item>
         <item name="enforceTextAppearance">false</item>
@@ -13036,7 +13058,7 @@
         <item name="android:textColor">@color/qs_dialog_btn_filled_text_color</item>
         <item name="android:background">@drawable/qs_dialog_btn_filled</item>
         <item name="android:minWidth">0.0dip</item>
-        <item name="android:fontFamily">@android:string/data_saver_description</item>
+        <item name="android:fontFamily">@android:string/confirm_battery_saver</item>
         <item name="android:stateListAnimator">@null</item>
         <item name="android:buttonCornerRadius">28.0dip</item>
         <item name="android:lineHeight">20.0sp</item>
@@ -13346,7 +13368,7 @@
         <item name="cardType">infoUnder</item>
         <item name="infoAreaBackground">@null</item>
         <item name="infoVisibility">activated</item>
-        <item name="lbImageCardViewType">Content|IconOnRight|Title</item>
+        <item name="lbImageCardViewType">Title|Content|IconOnRight</item>
     </style>
     <style name="Widget.Leanback.OnboardingDescriptionStyle" parent="@style/Widget.Leanback">
         <item name="android:textSize">14.0sp</item>
@@ -13482,7 +13504,7 @@
     </style>
     <style name="Widget.Leanback.PlaybackMediaItemDurationStyle" parent="@style/Widget.Leanback">
         <item name="android:textAppearance">@style/TextAppearance.Leanback.PlaybackMediaItemDuration</item>
-        <item name="android:gravity">center|right</item>
+        <item name="android:gravity">right|center</item>
         <item name="android:visibility">gone</item>
         <item name="android:layout_width">56.0dip</item>
         <item name="android:layout_height">fill_parent</item>
@@ -15135,7 +15157,7 @@
         <item name="android:textAppearance">?textAppearanceHeadline4</item>
         <item name="android:textColor">?colorOnPrimary</item>
         <item name="android:ellipsize">end</item>
-        <item name="android:layout_gravity">start|center|top</item>
+        <item name="android:layout_gravity">start|top</item>
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:maxLines">@integer/mtrl_calendar_selection_text_lines</item>
@@ -15158,7 +15180,7 @@
         <item name="autoSizeTextType">uniform</item>
     </style>
     <style name="Widget.MaterialComponents.MaterialCalendar.HeaderToggleButton" parent="@style/Base.Widget.MaterialComponents.MaterialCalendar.HeaderToggleButton">
-        <item name="android:layout_gravity">end|bottom|center</item>
+        <item name="android:layout_gravity">end|bottom</item>
     </style>
     <style name="Widget.MaterialComponents.MaterialCalendar.Item" parent="">
         <item name="itemFillColor">@android:color/transparent</item>
@@ -15559,20 +15581,20 @@
         <item name="android:background">@null</item>
         <item name="android:paddingBottom">-16.0dip</item>
         <item name="android:singleLine">true</item>
-        <item name="android:fontFamily">@android:string/csd_momentary_exposure_warning</item>
+        <item name="android:fontFamily">@android:string/config_wwan_network_service_package</item>
     </style>
     <style name="Widget.TextView.NumPadKey.Klondike" parent="@android:style/Widget.DeviceDefault.TextView">
         <item name="android:textSize">12.0sp</item>
         <item name="android:textColor">?android:textColorSecondary</item>
         <item name="android:background">@null</item>
         <item name="android:paddingBottom">0.0dip</item>
-        <item name="android:fontFamily">@android:string/csd_momentary_exposure_warning</item>
+        <item name="android:fontFamily">@android:string/config_wwan_network_service_package</item>
     </style>
     <style name="Widget.TextView.Password" parent="@android:style/Widget.TextView">
         <item name="android:textColor">?android:textColorPrimary</item>
         <item name="android:gravity">center</item>
         <item name="android:background">@drawable/bouncer_pin_view_focused_background</item>
-        <item name="android:fontFamily">@android:string/emailTypeOther</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest</item>
     </style>
     <style name="Widget.Theme.AppCompat.CompoundButton.Switch" parent="@style/Base.Widget.Theme.AppCompat.CompoundButton.Switch" />
     <style name="Widget.Theme.AppCompat.Light.CompoundButton.Switch" parent="@style/Base.Widget.Theme.AppCompat.Light.CompoundButton.Switch" />
@@ -15653,7 +15675,7 @@
         <item name="android:gravity">center_horizontal</item>
         <item name="android:shadowColor">@color/keyguard_shadow_color</item>
         <item name="android:shadowRadius">?shadowRadius</item>
-        <item name="android:fontFamily">@android:string/emailTypeOther</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest</item>
         <item name="android:paddingHorizontal">@dimen/dream_overlay_complication_shadow_padding</item>
     </style>
     <style name="dndTile_checkbox_style">
@@ -15668,7 +15690,7 @@
     <style name="edit_text_style" parent="@android:style/Widget.EditText">
         <item name="android:textAppearance">@style/TextAppearance.passwordEntry</item>
     </style>
-    <style name="hybrid_notification_text" parent="@android:style/Widget.Leanback.TimePicker">
+    <style name="hybrid_notification_text" parent="@android:style/Widget.Holo.TextView.ListSeparator">
         <item name="android:textDirection">locale</item>
         <item name="android:paddingEnd">4.0dip</item>
     </style>
@@ -15730,7 +15752,7 @@
     <style name="keyguard_indication_text_style">
         <item name="android:textSize">@dimen/keyguard_indication_text_default_size</item>
         <item name="android:textColor">@color/origin_keyguard_indication_area_text_color</item>
-        <item name="android:shadowColor">@android:color/material_blue_grey_950</item>
+        <item name="android:shadowColor">@android:color/link_text_dark</item>
         <item name="android:shadowDy">@dimen/kg_text_shadowDy</item>
         <item name="android:shadowRadius">@dimen/kg_text_shadowRadius</item>
         <item name="android:fontFamily">sec</item>
@@ -15749,7 +15771,7 @@
         <item name="android:windowAnimationStyle">@null</item>
     </style>
     <style name="keyguard_pattern_view_style" parent="@android:style/Theme.DeviceDefault.Light">
-        <item name="android:preferenceListStyle">@color/keyguard_pattern_dot_color</item>
+        <item name="android:toTop">@color/keyguard_pattern_dot_color</item>
     </style>
     <style name="keyguard_prev_help_text_style" parent="@style/keyguard_message_area_style">
         <item name="android:textSize">@dimen/kg_prev_help_text_font_size</item>
@@ -15798,7 +15820,6 @@
     <style name="power_ui_dialog_theme" parent="@style/Theme.AppCompat.DayNight.Dialog.Alert" />
     <style name="sec_widget_bottom_bar_button">
         <item name="android:textSize">@dimen/sec_widget_bottom_bar_button_text_size</item>
-        <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/sec_widget_bottom_bar_button_text_color</item>
         <item name="android:ellipsize">marquee</item>
         <item name="android:gravity">center</item>
@@ -15808,7 +15829,8 @@
         <item name="android:singleLine">true</item>
         <item name="android:layout_weight">1.0</item>
         <item name="android:textAllCaps">false</item>
-        <item name="android:fontFamily">sec-roboto-light</item>
+        <item name="android:fontFamily">sec</item>
+        <item name="android:textFontWeight">600</item>
     </style>
     <style name="sec_widget_bottom_bar_container">
         <item name="android:background">@drawable/sec_widget_bottom_button_divider</item>
@@ -15877,8 +15899,8 @@
         <item name="android:paddingBottom">@dimen/bottom_text_spacing_digital</item>
         <item name="android:shadowColor">@color/keyguard_shadow_color</item>
         <item name="android:shadowRadius">?shadowRadius</item>
-        <item name="android:fontFamily">@android:string/emailTypeOther</item>
-        <item name="android:fontFeatureSettings">@android:string/emergency_call_dialog_number_for_display</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest</item>
+        <item name="android:fontFeatureSettings">@android:string/duration_days_shortest_past</item>
     </style>
     <style name="widget_small_bold">
         <item name="android:textSize">@dimen/widget_small_font_size</item>
@@ -15887,6 +15909,6 @@
         <item name="android:paddingBottom">@dimen/bottom_text_spacing_digital</item>
         <item name="android:shadowColor">@color/keyguard_shadow_color</item>
         <item name="android:shadowRadius">?shadowRadius</item>
-        <item name="android:fontFamily">@android:string/emailTypeOther</item>
+        <item name="android:fontFamily">@android:string/duration_days_shortest</item>
     </style>
 </resources>

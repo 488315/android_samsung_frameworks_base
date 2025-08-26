@@ -132,9 +132,9 @@ public interface IHintManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IHintManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IHintManager)) {
-                return (IHintManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IHintManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IHintManager)) {
+                return (IHintManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -186,34 +186,34 @@ public interface IHintManager extends IInterface {
             }
             switch (i) {
                 case 1:
-                    IBinder readStrongBinder = parcel.readStrongBinder();
-                    int readInt = parcel.readInt();
+                    IBinder strongBinder = parcel.readStrongBinder();
+                    int i3 = parcel.readInt();
                     SessionCreationConfig sessionCreationConfig = (SessionCreationConfig) parcel.readTypedObject(SessionCreationConfig.CREATOR);
                     SessionConfig sessionConfig = new SessionConfig();
                     parcel.enforceNoDataAvail();
-                    SessionCreationReturn createHintSessionWithConfig = createHintSessionWithConfig(readStrongBinder, readInt, sessionCreationConfig, sessionConfig);
+                    SessionCreationReturn sessionCreationReturnCreateHintSessionWithConfig = createHintSessionWithConfig(strongBinder, i3, sessionCreationConfig, sessionConfig);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(createHintSessionWithConfig, 1);
+                    parcel2.writeTypedObject(sessionCreationReturnCreateHintSessionWithConfig, 1);
                     parcel2.writeTypedObject(sessionConfig, 1);
                     return true;
                 case 2:
-                    IHintSession asInterface = IHintSession.Stub.asInterface(parcel.readStrongBinder());
-                    int[] createIntArray = parcel.createIntArray();
+                    IHintSession iHintSessionAsInterface = IHintSession.Stub.asInterface(parcel.readStrongBinder());
+                    int[] iArrCreateIntArray = parcel.createIntArray();
                     parcel.enforceNoDataAvail();
-                    setHintSessionThreads(asInterface, createIntArray);
+                    setHintSessionThreads(iHintSessionAsInterface, iArrCreateIntArray);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    IHintSession asInterface2 = IHintSession.Stub.asInterface(parcel.readStrongBinder());
+                    IHintSession iHintSessionAsInterface2 = IHintSession.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int[] hintSessionThreadIds = getHintSessionThreadIds(asInterface2);
+                    int[] hintSessionThreadIds = getHintSessionThreadIds(iHintSessionAsInterface2);
                     parcel2.writeNoException();
                     parcel2.writeIntArray(hintSessionThreadIds);
                     return true;
                 case 4:
-                    IBinder readStrongBinder2 = parcel.readStrongBinder();
+                    IBinder strongBinder2 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    ChannelConfig sessionChannel = getSessionChannel(readStrongBinder2);
+                    ChannelConfig sessionChannel = getSessionChannel(strongBinder2);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(sessionChannel, 1);
                     return true;
@@ -245,16 +245,16 @@ public interface IHintManager extends IInterface {
                     parcel2.writeLong(gpuHeadroomMinIntervalMillis);
                     return true;
                 case 10:
-                    IBinder readStrongBinder3 = parcel.readStrongBinder();
+                    IBinder strongBinder3 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    passSessionManagerBinder(readStrongBinder3);
+                    passSessionManagerBinder(strongBinder3);
                     return true;
                 case 11:
-                    IHintManagerClient asInterface3 = IHintManagerClient.Stub.asInterface(parcel.readStrongBinder());
+                    IHintManagerClient iHintManagerClientAsInterface = IHintManagerClient.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    HintManagerClientData registerClient = registerClient(asInterface3);
+                    HintManagerClientData hintManagerClientDataRegisterClient = registerClient(iHintManagerClientAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(registerClient, 1);
+                    parcel2.writeTypedObject(hintManagerClientDataRegisterClient, 1);
                     return true;
                 case 12:
                     HintManagerClientData clientData = getClientData();
@@ -284,187 +284,187 @@ public interface IHintManager extends IInterface {
 
             @Override // android.os.IHintManager
             public SessionCreationReturn createHintSessionWithConfig(IBinder iBinder, int i, SessionCreationConfig sessionCreationConfig, SessionConfig sessionConfig) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IHintManager.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(sessionCreationConfig, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    SessionCreationReturn sessionCreationReturn = (SessionCreationReturn) obtain2.readTypedObject(SessionCreationReturn.CREATOR);
-                    if (obtain2.readInt() != 0) {
-                        sessionConfig.readFromParcel(obtain2);
+                    parcelObtain.writeInterfaceToken(IHintManager.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(sessionCreationConfig, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    SessionCreationReturn sessionCreationReturn = (SessionCreationReturn) parcelObtain2.readTypedObject(SessionCreationReturn.CREATOR);
+                    if (parcelObtain2.readInt() != 0) {
+                        sessionConfig.readFromParcel(parcelObtain2);
                     }
                     return sessionCreationReturn;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IHintManager
             public void setHintSessionThreads(IHintSession iHintSession, int[] iArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IHintManager.DESCRIPTOR);
-                    obtain.writeStrongInterface(iHintSession);
-                    obtain.writeIntArray(iArr);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IHintManager.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iHintSession);
+                    parcelObtain.writeIntArray(iArr);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IHintManager
             public int[] getHintSessionThreadIds(IHintSession iHintSession) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IHintManager.DESCRIPTOR);
-                    obtain.writeStrongInterface(iHintSession);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createIntArray();
+                    parcelObtain.writeInterfaceToken(IHintManager.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iHintSession);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createIntArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IHintManager
             public ChannelConfig getSessionChannel(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IHintManager.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ChannelConfig) obtain2.readTypedObject(ChannelConfig.CREATOR);
+                    parcelObtain.writeInterfaceToken(IHintManager.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ChannelConfig) parcelObtain2.readTypedObject(ChannelConfig.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IHintManager
             public void closeSessionChannel() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IHintManager.DESCRIPTOR);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IHintManager.DESCRIPTOR);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IHintManager
             public CpuHeadroomResult getCpuHeadroom(CpuHeadroomParamsInternal cpuHeadroomParamsInternal) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IHintManager.DESCRIPTOR);
-                    obtain.writeTypedObject(cpuHeadroomParamsInternal, 0);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (CpuHeadroomResult) obtain2.readTypedObject(CpuHeadroomResult.CREATOR);
+                    parcelObtain.writeInterfaceToken(IHintManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(cpuHeadroomParamsInternal, 0);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (CpuHeadroomResult) parcelObtain2.readTypedObject(CpuHeadroomResult.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IHintManager
             public long getCpuHeadroomMinIntervalMillis() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IHintManager.DESCRIPTOR);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(IHintManager.DESCRIPTOR);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IHintManager
             public GpuHeadroomResult getGpuHeadroom(GpuHeadroomParamsInternal gpuHeadroomParamsInternal) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IHintManager.DESCRIPTOR);
-                    obtain.writeTypedObject(gpuHeadroomParamsInternal, 0);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (GpuHeadroomResult) obtain2.readTypedObject(GpuHeadroomResult.CREATOR);
+                    parcelObtain.writeInterfaceToken(IHintManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(gpuHeadroomParamsInternal, 0);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (GpuHeadroomResult) parcelObtain2.readTypedObject(GpuHeadroomResult.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IHintManager
             public long getGpuHeadroomMinIntervalMillis() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IHintManager.DESCRIPTOR);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(IHintManager.DESCRIPTOR);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IHintManager
             public void passSessionManagerBinder(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IHintManager.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(10, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IHintManager.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(10, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IHintManager
             public HintManagerClientData registerClient(IHintManagerClient iHintManagerClient) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IHintManager.DESCRIPTOR);
-                    obtain.writeStrongInterface(iHintManagerClient);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (HintManagerClientData) obtain2.readTypedObject(HintManagerClientData.CREATOR);
+                    parcelObtain.writeInterfaceToken(IHintManager.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iHintManagerClient);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (HintManagerClientData) parcelObtain2.readTypedObject(HintManagerClientData.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IHintManager
             public HintManagerClientData getClientData() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IHintManager.DESCRIPTOR);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (HintManagerClientData) obtain2.readTypedObject(HintManagerClientData.CREATOR);
+                    parcelObtain.writeInterfaceToken(IHintManager.DESCRIPTOR);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (HintManagerClientData) parcelObtain2.readTypedObject(HintManagerClientData.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -496,42 +496,42 @@ public interface IHintManager extends IInterface {
 
         @Override // android.os.Parcelable
         public final void writeToParcel(Parcel parcel, int i) {
-            int dataPosition = parcel.dataPosition();
+            int iDataPosition = parcel.dataPosition();
             parcel.writeInt(0);
             parcel.writeStrongInterface(this.session);
             parcel.writeBoolean(this.pipelineThreadLimitExceeded);
-            int dataPosition2 = parcel.dataPosition();
-            parcel.setDataPosition(dataPosition);
-            parcel.writeInt(dataPosition2 - dataPosition);
-            parcel.setDataPosition(dataPosition2);
+            int iDataPosition2 = parcel.dataPosition();
+            parcel.setDataPosition(iDataPosition);
+            parcel.writeInt(iDataPosition2 - iDataPosition);
+            parcel.setDataPosition(iDataPosition2);
         }
 
         public final void readFromParcel(Parcel parcel) {
-            int dataPosition = parcel.dataPosition();
-            int readInt = parcel.readInt();
+            int iDataPosition = parcel.dataPosition();
+            int i = parcel.readInt();
             try {
-                if (readInt < 4) {
+                if (i < 4) {
                     throw new BadParcelableException("Parcelable too small");
                 }
-                if (parcel.dataPosition() - dataPosition < readInt) {
+                if (parcel.dataPosition() - iDataPosition < i) {
                     this.session = IHintSession.Stub.asInterface(parcel.readStrongBinder());
-                    if (parcel.dataPosition() - dataPosition < readInt) {
+                    if (parcel.dataPosition() - iDataPosition < i) {
                         this.pipelineThreadLimitExceeded = parcel.readBoolean();
-                        if (dataPosition > Integer.MAX_VALUE - readInt) {
+                        if (iDataPosition > Integer.MAX_VALUE - i) {
                             throw new BadParcelableException("Overflow in the size of parcelable");
                         }
-                    } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                    } else if (iDataPosition > Integer.MAX_VALUE - i) {
                         throw new BadParcelableException("Overflow in the size of parcelable");
                     }
-                } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                } else if (iDataPosition > Integer.MAX_VALUE - i) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
-                parcel.setDataPosition(dataPosition + readInt);
+                parcel.setDataPosition(iDataPosition + i);
             } catch (Throwable th) {
-                if (dataPosition > Integer.MAX_VALUE - readInt) {
+                if (iDataPosition > Integer.MAX_VALUE - i) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
-                parcel.setDataPosition(dataPosition + readInt);
+                parcel.setDataPosition(iDataPosition + i);
                 throw th;
             }
         }
@@ -561,60 +561,60 @@ public interface IHintManager extends IInterface {
 
         @Override // android.os.Parcelable
         public final void writeToParcel(Parcel parcel, int i) {
-            int dataPosition = parcel.dataPosition();
+            int iDataPosition = parcel.dataPosition();
             parcel.writeInt(0);
             parcel.writeInt(this.powerHalVersion);
             parcel.writeInt(this.maxGraphicsPipelineThreads);
             parcel.writeInt(this.maxCpuHeadroomThreads);
             parcel.writeLong(this.preferredRateNanos);
             parcel.writeTypedObject(this.supportInfo, i);
-            int dataPosition2 = parcel.dataPosition();
-            parcel.setDataPosition(dataPosition);
-            parcel.writeInt(dataPosition2 - dataPosition);
-            parcel.setDataPosition(dataPosition2);
+            int iDataPosition2 = parcel.dataPosition();
+            parcel.setDataPosition(iDataPosition);
+            parcel.writeInt(iDataPosition2 - iDataPosition);
+            parcel.setDataPosition(iDataPosition2);
         }
 
         public final void readFromParcel(Parcel parcel) {
-            int dataPosition = parcel.dataPosition();
-            int readInt = parcel.readInt();
+            int iDataPosition = parcel.dataPosition();
+            int i = parcel.readInt();
             try {
-                if (readInt < 4) {
+                if (i < 4) {
                     throw new BadParcelableException("Parcelable too small");
                 }
-                if (parcel.dataPosition() - dataPosition < readInt) {
+                if (parcel.dataPosition() - iDataPosition < i) {
                     this.powerHalVersion = parcel.readInt();
-                    if (parcel.dataPosition() - dataPosition < readInt) {
+                    if (parcel.dataPosition() - iDataPosition < i) {
                         this.maxGraphicsPipelineThreads = parcel.readInt();
-                        if (parcel.dataPosition() - dataPosition < readInt) {
+                        if (parcel.dataPosition() - iDataPosition < i) {
                             this.maxCpuHeadroomThreads = parcel.readInt();
-                            if (parcel.dataPosition() - dataPosition < readInt) {
+                            if (parcel.dataPosition() - iDataPosition < i) {
                                 this.preferredRateNanos = parcel.readLong();
-                                if (parcel.dataPosition() - dataPosition < readInt) {
+                                if (parcel.dataPosition() - iDataPosition < i) {
                                     this.supportInfo = (SupportInfo) parcel.readTypedObject(SupportInfo.CREATOR);
-                                    if (dataPosition > Integer.MAX_VALUE - readInt) {
+                                    if (iDataPosition > Integer.MAX_VALUE - i) {
                                         throw new BadParcelableException("Overflow in the size of parcelable");
                                     }
-                                } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                                } else if (iDataPosition > Integer.MAX_VALUE - i) {
                                     throw new BadParcelableException("Overflow in the size of parcelable");
                                 }
-                            } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                            } else if (iDataPosition > Integer.MAX_VALUE - i) {
                                 throw new BadParcelableException("Overflow in the size of parcelable");
                             }
-                        } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                        } else if (iDataPosition > Integer.MAX_VALUE - i) {
                             throw new BadParcelableException("Overflow in the size of parcelable");
                         }
-                    } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                    } else if (iDataPosition > Integer.MAX_VALUE - i) {
                         throw new BadParcelableException("Overflow in the size of parcelable");
                     }
-                } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                } else if (iDataPosition > Integer.MAX_VALUE - i) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
-                parcel.setDataPosition(dataPosition + readInt);
+                parcel.setDataPosition(iDataPosition + i);
             } catch (Throwable th) {
-                if (dataPosition > Integer.MAX_VALUE - readInt) {
+                if (iDataPosition > Integer.MAX_VALUE - i) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
-                parcel.setDataPosition(dataPosition + readInt);
+                parcel.setDataPosition(iDataPosition + i);
                 throw th;
             }
         }
@@ -669,9 +669,9 @@ public interface IHintManager extends IInterface {
                 if (iBinder == null) {
                     return null;
                 }
-                IInterface queryLocalInterface = iBinder.queryLocalInterface(IHintManagerClient.DESCRIPTOR);
-                if (queryLocalInterface != null && (queryLocalInterface instanceof IHintManagerClient)) {
-                    return (IHintManagerClient) queryLocalInterface;
+                IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IHintManagerClient.DESCRIPTOR);
+                if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IHintManagerClient)) {
+                    return (IHintManagerClient) iInterfaceQueryLocalInterface;
                 }
                 return new Proxy(iBinder);
             }
@@ -724,13 +724,13 @@ public interface IHintManager extends IInterface {
 
                 @Override // android.os.IHintManager.IHintManagerClient
                 public void receiveChannelConfig(ChannelConfig channelConfig) throws RemoteException {
-                    Parcel obtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
                     try {
-                        obtain.writeInterfaceToken(IHintManagerClient.DESCRIPTOR);
-                        obtain.writeTypedObject(channelConfig, 0);
-                        this.mRemote.transact(1, obtain, null, 1);
+                        parcelObtain.writeInterfaceToken(IHintManagerClient.DESCRIPTOR);
+                        parcelObtain.writeTypedObject(channelConfig, 0);
+                        this.mRemote.transact(1, parcelObtain, null, 1);
                     } finally {
-                        obtain.recycle();
+                        parcelObtain.recycle();
                     }
                 }
             }

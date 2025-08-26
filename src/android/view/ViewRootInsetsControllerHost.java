@@ -192,7 +192,7 @@ public class ViewRootInsetsControllerHost implements InsetsController.Host {
             this.mViewRoot.registerRtFrameCallback(new HardwareRenderer.FrameDrawingCallback() { // from class: android.view.ViewRootInsetsControllerHost$$ExternalSyntheticLambda0
                 @Override // android.graphics.HardwareRenderer.FrameDrawingCallback
                 public final void onFrameDraw(long j) {
-                    SurfaceControl.this.release();
+                    surfaceControl.release();
                 }
             });
             this.mViewRoot.mView.invalidate();
@@ -264,6 +264,11 @@ public class ViewRootInsetsControllerHost implements InsetsController.Host {
     @Override // android.view.InsetsController.Host
     public void applyInsetsHintSandboxingIfNeeded(InsetsSourceControl[] insetsSourceControlArr) {
         this.mViewRoot.applyInsetsHintSandboxingIfNeeded(insetsSourceControlArr);
+    }
+
+    @Override // android.view.InsetsController.Host
+    public boolean isRelaunchingRemoved() {
+        return this.mViewRoot.isRelaunchingRemoved();
     }
 
     @Override // android.view.InsetsController.Host

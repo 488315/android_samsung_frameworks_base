@@ -31,7 +31,6 @@ import kotlin.jvm.functions.Function4;
 import kotlin.jvm.functions.Function5;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class MobileIconInteractorKairosImpl implements MobileIconInteractorKairos, KairosBuilder {
     public final /* synthetic */ KairosBuilderImpl $$delegate_0;
@@ -88,9 +87,9 @@ public final class MobileIconInteractorKairosImpl implements MobileIconInteracto
                         MobileIconCarrierIdOverridesImpl.Companion.getClass();
                         return Boolean.valueOf(map.containsKey(num));
                     default:
-                        boolean booleanValue = ((Boolean) obj2).booleanValue();
+                        boolean zBooleanValue = ((Boolean) obj2).booleanValue();
                         MobileIconInteractorKairosImpl mobileIconInteractorKairosImpl = this.f$0;
-                        return booleanValue ? mobileIconInteractorKairosImpl.satelliteIcon : mobileIconInteractorKairosImpl.cellularIcon;
+                        return zBooleanValue ? mobileIconInteractorKairosImpl.satelliteIcon : mobileIconInteractorKairosImpl.cellularIcon;
                 }
             }
         });
@@ -138,15 +137,15 @@ public final class MobileIconInteractorKairosImpl implements MobileIconInteracto
                     case 0:
                         return Boolean.valueOf((((Boolean) obj2).booleanValue() && !((Boolean) obj3).booleanValue() && ((Boolean) obj4).booleanValue()) ? false : true);
                     case 1:
-                        int intValue = ((Integer) obj2).intValue();
-                        boolean booleanValue = ((Boolean) obj3).booleanValue();
-                        boolean booleanValue2 = ((Boolean) obj4).booleanValue();
-                        if (!booleanValue) {
-                            intValue = 0;
-                        } else if (booleanValue2) {
-                            intValue++;
+                        int iIntValue = ((Integer) obj2).intValue();
+                        boolean zBooleanValue = ((Boolean) obj3).booleanValue();
+                        boolean zBooleanValue2 = ((Boolean) obj4).booleanValue();
+                        if (!zBooleanValue) {
+                            iIntValue = 0;
+                        } else if (zBooleanValue2) {
+                            iIntValue++;
                         }
-                        return Integer.valueOf(intValue);
+                        return Integer.valueOf(iIntValue);
                     default:
                         ResolvedNetworkType resolvedNetworkType = (ResolvedNetworkType) obj2;
                         Map map = (Map) obj3;
@@ -163,27 +162,27 @@ public final class MobileIconInteractorKairosImpl implements MobileIconInteracto
         this.networkTypeIconGroup = kairosBuilderImpl.buildState(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorKairosImpl$$ExternalSyntheticLambda10
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BuildScope buildScope = (BuildScope) obj;
-                MobileIconInteractorKairosImpl mobileIconInteractorKairosImpl = MobileIconInteractorKairosImpl.this;
+                MobileIconInteractorKairosImpl mobileIconInteractorKairosImpl = this.f$0;
                 final MobileIconInteractorKairosImpl$$ExternalSyntheticLambda16 mobileIconInteractorKairosImpl$$ExternalSyntheticLambda16 = new MobileIconInteractorKairosImpl$$ExternalSyntheticLambda16(mobileIconInteractorKairosImpl);
                 StateScopeImpl stateScopeImpl = ((BuildScopeImpl) buildScope).stateScope;
                 stateScopeImpl.getClass();
-                StateInit sampleTransactionals = stateScopeImpl.sampleTransactionals(CombineKt.combine(mobileIconInteractorKairosImpl.defaultNetworkType, mobileIconInteractorKairosImpl.carrierIdIconOverrideExists, new Function3() { // from class: com.android.systemui.kairos.StateScope$DefaultImpls$$ExternalSyntheticLambda12
+                StateInit stateInitSampleTransactionals = stateScopeImpl.sampleTransactionals(CombineKt.combine(mobileIconInteractorKairosImpl.defaultNetworkType, mobileIconInteractorKairosImpl.carrierIdIconOverrideExists, new Function3() { // from class: com.android.systemui.kairos.StateScope$DefaultImpls$$ExternalSyntheticLambda12
                     @Override // kotlin.jvm.functions.Function3
                     public final Object invoke(Object obj2, final Object obj3, final Object obj4) {
-                        final MobileIconInteractorKairosImpl$$ExternalSyntheticLambda16 mobileIconInteractorKairosImpl$$ExternalSyntheticLambda162 = MobileIconInteractorKairosImpl$$ExternalSyntheticLambda16.this;
+                        final MobileIconInteractorKairosImpl$$ExternalSyntheticLambda16 mobileIconInteractorKairosImpl$$ExternalSyntheticLambda162 = mobileIconInteractorKairosImpl$$ExternalSyntheticLambda16;
                         return TransactionalKt.transactionally(new Function1() { // from class: com.android.systemui.kairos.StateScope$DefaultImpls$$ExternalSyntheticLambda13
                             @Override // kotlin.jvm.functions.Function1
                             /* renamed from: invoke */
-                            public final Object mo779invoke(Object obj5) {
-                                return MobileIconInteractorKairosImpl$$ExternalSyntheticLambda16.this.invoke((TransactionScope) obj5, obj3, obj4);
+                            public final Object mo781invoke(Object obj5) {
+                                return mobileIconInteractorKairosImpl$$ExternalSyntheticLambda162.invoke((TransactionScope) obj5, obj3, obj4);
                             }
                         });
                     }
                 }));
-                DiffableKt.logDiffsForTable(buildScope, sampleTransactionals, mobileIconInteractorKairosImpl.connectionRepository.getTableLogBuffer(), "");
-                return sampleTransactionals;
+                DiffableKt.logDiffsForTable(buildScope, stateInitSampleTransactionals, mobileIconInteractorKairosImpl.connectionRepository.getTableLogBuffer(), "");
+                return stateInitSampleTransactionals;
             }
         });
         final int i5 = 1;
@@ -212,73 +211,73 @@ public final class MobileIconInteractorKairosImpl implements MobileIconInteracto
                     case 0:
                         return new SignalIconModel.Cellular(((Integer) obj2).intValue(), ((Integer) obj3).intValue(), ((Boolean) obj4).booleanValue(), ((Boolean) obj5).booleanValue(), 0, 16, null);
                     case 1:
-                        boolean booleanValue = ((Boolean) obj2).booleanValue();
-                        boolean booleanValue2 = ((Boolean) obj3).booleanValue();
-                        boolean booleanValue3 = ((Boolean) obj4).booleanValue();
-                        boolean booleanValue4 = ((Boolean) obj5).booleanValue();
-                        if (booleanValue) {
-                            booleanValue3 = false;
-                        } else if (!booleanValue2) {
-                            booleanValue3 = booleanValue4;
+                        boolean zBooleanValue = ((Boolean) obj2).booleanValue();
+                        boolean zBooleanValue2 = ((Boolean) obj3).booleanValue();
+                        boolean zBooleanValue3 = ((Boolean) obj4).booleanValue();
+                        boolean zBooleanValue4 = ((Boolean) obj5).booleanValue();
+                        if (zBooleanValue) {
+                            zBooleanValue3 = false;
+                        } else if (!zBooleanValue2) {
+                            zBooleanValue3 = zBooleanValue4;
                         }
-                        return Boolean.valueOf(booleanValue3);
+                        return Boolean.valueOf(zBooleanValue3);
                     default:
-                        boolean booleanValue5 = ((Boolean) obj2).booleanValue();
-                        int intValue = ((Integer) obj3).intValue();
-                        int intValue2 = ((Integer) obj4).intValue();
-                        boolean booleanValue6 = ((Boolean) obj5).booleanValue();
-                        if (!booleanValue5 && booleanValue6) {
-                            intValue = intValue2;
+                        boolean zBooleanValue5 = ((Boolean) obj2).booleanValue();
+                        int iIntValue = ((Integer) obj3).intValue();
+                        int iIntValue2 = ((Integer) obj4).intValue();
+                        boolean zBooleanValue6 = ((Boolean) obj5).booleanValue();
+                        if (!zBooleanValue5 && zBooleanValue6) {
+                            iIntValue = iIntValue2;
                         }
-                        return Integer.valueOf(intValue);
+                        return Integer.valueOf(iIntValue);
                 }
             }
         });
         final int i7 = 2;
-        StateInit combine = CombineKt.combine(mobileConnectionRepositoryKairos.isGsm(), mobileConnectionRepositoryKairos.getPrimaryLevel(), mobileConnectionRepositoryKairos.getCdmaLevel(), state3, new Function5() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorKairosImpl$$ExternalSyntheticLambda3
+        StateInit stateInitCombine = CombineKt.combine(mobileConnectionRepositoryKairos.isGsm(), mobileConnectionRepositoryKairos.getPrimaryLevel(), mobileConnectionRepositoryKairos.getCdmaLevel(), state3, new Function5() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorKairosImpl$$ExternalSyntheticLambda3
             @Override // kotlin.jvm.functions.Function5
             public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4, Object obj5) {
                 switch (i7) {
                     case 0:
                         return new SignalIconModel.Cellular(((Integer) obj2).intValue(), ((Integer) obj3).intValue(), ((Boolean) obj4).booleanValue(), ((Boolean) obj5).booleanValue(), 0, 16, null);
                     case 1:
-                        boolean booleanValue = ((Boolean) obj2).booleanValue();
-                        boolean booleanValue2 = ((Boolean) obj3).booleanValue();
-                        boolean booleanValue3 = ((Boolean) obj4).booleanValue();
-                        boolean booleanValue4 = ((Boolean) obj5).booleanValue();
-                        if (booleanValue) {
-                            booleanValue3 = false;
-                        } else if (!booleanValue2) {
-                            booleanValue3 = booleanValue4;
+                        boolean zBooleanValue = ((Boolean) obj2).booleanValue();
+                        boolean zBooleanValue2 = ((Boolean) obj3).booleanValue();
+                        boolean zBooleanValue3 = ((Boolean) obj4).booleanValue();
+                        boolean zBooleanValue4 = ((Boolean) obj5).booleanValue();
+                        if (zBooleanValue) {
+                            zBooleanValue3 = false;
+                        } else if (!zBooleanValue2) {
+                            zBooleanValue3 = zBooleanValue4;
                         }
-                        return Boolean.valueOf(booleanValue3);
+                        return Boolean.valueOf(zBooleanValue3);
                     default:
-                        boolean booleanValue5 = ((Boolean) obj2).booleanValue();
-                        int intValue = ((Integer) obj3).intValue();
-                        int intValue2 = ((Integer) obj4).intValue();
-                        boolean booleanValue6 = ((Boolean) obj5).booleanValue();
-                        if (!booleanValue5 && booleanValue6) {
-                            intValue = intValue2;
+                        boolean zBooleanValue5 = ((Boolean) obj2).booleanValue();
+                        int iIntValue = ((Integer) obj3).intValue();
+                        int iIntValue2 = ((Integer) obj4).intValue();
+                        boolean zBooleanValue6 = ((Boolean) obj5).booleanValue();
+                        if (!zBooleanValue5 && zBooleanValue6) {
+                            iIntValue = iIntValue2;
                         }
-                        return Integer.valueOf(intValue);
+                        return Integer.valueOf(iIntValue);
                 }
             }
         });
-        this.level = combine;
+        this.level = stateInitCombine;
         final int i8 = 1;
         final StateInit map = StateKt.map(mobileConnectionRepositoryKairos.getDataConnectionState(), new Function2() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorKairosImpl$$ExternalSyntheticLambda4
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 switch (i8) {
                     case 0:
-                        int intValue = ((Integer) obj2).intValue();
+                        int iIntValue = ((Integer) obj2).intValue();
                         SatelliteIconModel.INSTANCE.getClass();
-                        Icon.Resource fromSignalStrength = SatelliteIconModel.fromSignalStrength(intValue);
-                        if (fromSignalStrength == null) {
-                            fromSignalStrength = SatelliteIconModel.fromSignalStrength(0);
-                            fromSignalStrength.getClass();
+                        Icon.Resource resourceFromSignalStrength = SatelliteIconModel.fromSignalStrength(iIntValue);
+                        if (resourceFromSignalStrength == null) {
+                            resourceFromSignalStrength = SatelliteIconModel.fromSignalStrength(0);
+                            resourceFromSignalStrength.getClass();
                         }
-                        return new SignalIconModel.Satellite(intValue, fromSignalStrength);
+                        return new SignalIconModel.Satellite(iIntValue, resourceFromSignalStrength);
                     default:
                         return Boolean.valueOf(((DataConnectionState) obj2) == DataConnectionState.Connected);
                 }
@@ -288,7 +287,7 @@ public final class MobileIconInteractorKairosImpl implements MobileIconInteracto
         onActivated(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorKairosImpl$$ExternalSyntheticLambda6
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i9) {
                     case 0:
@@ -303,22 +302,22 @@ public final class MobileIconInteractorKairosImpl implements MobileIconInteracto
         });
         this.isDataConnected = map;
         final int i10 = 0;
-        StateInit combine2 = CombineKt.combine(state, state8, mobileConnectionRepositoryKairos.isInService(), new Function4() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorKairosImpl$$ExternalSyntheticLambda1
+        StateInit stateInitCombine2 = CombineKt.combine(state, state8, mobileConnectionRepositoryKairos.isInService(), new Function4() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorKairosImpl$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function4
             public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4) {
                 switch (i10) {
                     case 0:
                         return Boolean.valueOf((((Boolean) obj2).booleanValue() && !((Boolean) obj3).booleanValue() && ((Boolean) obj4).booleanValue()) ? false : true);
                     case 1:
-                        int intValue = ((Integer) obj2).intValue();
-                        boolean booleanValue = ((Boolean) obj3).booleanValue();
-                        boolean booleanValue2 = ((Boolean) obj4).booleanValue();
-                        if (!booleanValue) {
-                            intValue = 0;
-                        } else if (booleanValue2) {
-                            intValue++;
+                        int iIntValue = ((Integer) obj2).intValue();
+                        boolean zBooleanValue = ((Boolean) obj3).booleanValue();
+                        boolean zBooleanValue2 = ((Boolean) obj4).booleanValue();
+                        if (!zBooleanValue) {
+                            iIntValue = 0;
+                        } else if (zBooleanValue2) {
+                            iIntValue++;
                         }
-                        return Integer.valueOf(intValue);
+                        return Integer.valueOf(iIntValue);
                     default:
                         ResolvedNetworkType resolvedNetworkType = (ResolvedNetworkType) obj2;
                         Map map2 = (Map) obj3;
@@ -332,24 +331,24 @@ public final class MobileIconInteractorKairosImpl implements MobileIconInteracto
                 }
             }
         });
-        this.showExclamationMark = combine2;
+        this.showExclamationMark = stateInitCombine2;
         final int i11 = 1;
-        StateInit combine3 = CombineKt.combine(combine, mobileConnectionRepositoryKairos.isInService(), mobileConnectionRepositoryKairos.getInflateSignalStrength(), new Function4() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorKairosImpl$$ExternalSyntheticLambda1
+        StateInit stateInitCombine3 = CombineKt.combine(stateInitCombine, mobileConnectionRepositoryKairos.isInService(), mobileConnectionRepositoryKairos.getInflateSignalStrength(), new Function4() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorKairosImpl$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function4
             public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4) {
                 switch (i11) {
                     case 0:
                         return Boolean.valueOf((((Boolean) obj2).booleanValue() && !((Boolean) obj3).booleanValue() && ((Boolean) obj4).booleanValue()) ? false : true);
                     case 1:
-                        int intValue = ((Integer) obj2).intValue();
-                        boolean booleanValue = ((Boolean) obj3).booleanValue();
-                        boolean booleanValue2 = ((Boolean) obj4).booleanValue();
-                        if (!booleanValue) {
-                            intValue = 0;
-                        } else if (booleanValue2) {
-                            intValue++;
+                        int iIntValue = ((Integer) obj2).intValue();
+                        boolean zBooleanValue = ((Boolean) obj3).booleanValue();
+                        boolean zBooleanValue2 = ((Boolean) obj4).booleanValue();
+                        if (!zBooleanValue) {
+                            iIntValue = 0;
+                        } else if (zBooleanValue2) {
+                            iIntValue++;
                         }
-                        return Integer.valueOf(intValue);
+                        return Integer.valueOf(iIntValue);
                     default:
                         ResolvedNetworkType resolvedNetworkType = (ResolvedNetworkType) obj2;
                         Map map2 = (Map) obj3;
@@ -363,35 +362,35 @@ public final class MobileIconInteractorKairosImpl implements MobileIconInteracto
                 }
             }
         });
-        this.cellularShownLevel = combine3;
+        this.cellularShownLevel = stateInitCombine3;
         State satelliteLevel = mobileConnectionRepositoryKairos.getSatelliteLevel();
         final int i12 = 0;
-        this.cellularIcon = CombineKt.combine(combine3, mobileConnectionRepositoryKairos.getNumberOfLevels(), combine2, mobileConnectionRepositoryKairos.getCarrierNetworkChangeActive(), new Function5() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorKairosImpl$$ExternalSyntheticLambda3
+        this.cellularIcon = CombineKt.combine(stateInitCombine3, mobileConnectionRepositoryKairos.getNumberOfLevels(), stateInitCombine2, mobileConnectionRepositoryKairos.getCarrierNetworkChangeActive(), new Function5() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorKairosImpl$$ExternalSyntheticLambda3
             @Override // kotlin.jvm.functions.Function5
             public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4, Object obj5) {
                 switch (i12) {
                     case 0:
                         return new SignalIconModel.Cellular(((Integer) obj2).intValue(), ((Integer) obj3).intValue(), ((Boolean) obj4).booleanValue(), ((Boolean) obj5).booleanValue(), 0, 16, null);
                     case 1:
-                        boolean booleanValue = ((Boolean) obj2).booleanValue();
-                        boolean booleanValue2 = ((Boolean) obj3).booleanValue();
-                        boolean booleanValue3 = ((Boolean) obj4).booleanValue();
-                        boolean booleanValue4 = ((Boolean) obj5).booleanValue();
-                        if (booleanValue) {
-                            booleanValue3 = false;
-                        } else if (!booleanValue2) {
-                            booleanValue3 = booleanValue4;
+                        boolean zBooleanValue = ((Boolean) obj2).booleanValue();
+                        boolean zBooleanValue2 = ((Boolean) obj3).booleanValue();
+                        boolean zBooleanValue3 = ((Boolean) obj4).booleanValue();
+                        boolean zBooleanValue4 = ((Boolean) obj5).booleanValue();
+                        if (zBooleanValue) {
+                            zBooleanValue3 = false;
+                        } else if (!zBooleanValue2) {
+                            zBooleanValue3 = zBooleanValue4;
                         }
-                        return Boolean.valueOf(booleanValue3);
+                        return Boolean.valueOf(zBooleanValue3);
                     default:
-                        boolean booleanValue5 = ((Boolean) obj2).booleanValue();
-                        int intValue = ((Integer) obj3).intValue();
-                        int intValue2 = ((Integer) obj4).intValue();
-                        boolean booleanValue6 = ((Boolean) obj5).booleanValue();
-                        if (!booleanValue5 && booleanValue6) {
-                            intValue = intValue2;
+                        boolean zBooleanValue5 = ((Boolean) obj2).booleanValue();
+                        int iIntValue = ((Integer) obj3).intValue();
+                        int iIntValue2 = ((Integer) obj4).intValue();
+                        boolean zBooleanValue6 = ((Boolean) obj5).booleanValue();
+                        if (!zBooleanValue5 && zBooleanValue6) {
+                            iIntValue = iIntValue2;
                         }
-                        return Integer.valueOf(intValue);
+                        return Integer.valueOf(iIntValue);
                 }
             }
         });
@@ -401,21 +400,21 @@ public final class MobileIconInteractorKairosImpl implements MobileIconInteracto
             public final Object invoke(Object obj, Object obj2) {
                 switch (i13) {
                     case 0:
-                        int intValue = ((Integer) obj2).intValue();
+                        int iIntValue = ((Integer) obj2).intValue();
                         SatelliteIconModel.INSTANCE.getClass();
-                        Icon.Resource fromSignalStrength = SatelliteIconModel.fromSignalStrength(intValue);
-                        if (fromSignalStrength == null) {
-                            fromSignalStrength = SatelliteIconModel.fromSignalStrength(0);
-                            fromSignalStrength.getClass();
+                        Icon.Resource resourceFromSignalStrength = SatelliteIconModel.fromSignalStrength(iIntValue);
+                        if (resourceFromSignalStrength == null) {
+                            resourceFromSignalStrength = SatelliteIconModel.fromSignalStrength(0);
+                            resourceFromSignalStrength.getClass();
                         }
-                        return new SignalIconModel.Satellite(intValue, fromSignalStrength);
+                        return new SignalIconModel.Satellite(iIntValue, resourceFromSignalStrength);
                     default:
                         return Boolean.valueOf(((DataConnectionState) obj2) == DataConnectionState.Connected);
                 }
             }
         });
         final int i14 = 1;
-        final StateInit flatMap = StateKt.flatMap(mobileConnectionRepositoryKairos.isNonTerrestrial(), new Function2(this) { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorKairosImpl$$ExternalSyntheticLambda0
+        final StateInit stateInitFlatMap = StateKt.flatMap(mobileConnectionRepositoryKairos.isNonTerrestrial(), new Function2(this) { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorKairosImpl$$ExternalSyntheticLambda0
             public final /* synthetic */ MobileIconInteractorKairosImpl f$0;
 
             {
@@ -433,9 +432,9 @@ public final class MobileIconInteractorKairosImpl implements MobileIconInteracto
                         MobileIconCarrierIdOverridesImpl.Companion.getClass();
                         return Boolean.valueOf(map2.containsKey(num));
                     default:
-                        boolean booleanValue = ((Boolean) obj2).booleanValue();
+                        boolean zBooleanValue = ((Boolean) obj2).booleanValue();
                         MobileIconInteractorKairosImpl mobileIconInteractorKairosImpl = this.f$0;
-                        return booleanValue ? mobileIconInteractorKairosImpl.satelliteIcon : mobileIconInteractorKairosImpl.cellularIcon;
+                        return zBooleanValue ? mobileIconInteractorKairosImpl.satelliteIcon : mobileIconInteractorKairosImpl.cellularIcon;
                 }
             }
         });
@@ -443,20 +442,20 @@ public final class MobileIconInteractorKairosImpl implements MobileIconInteracto
         onActivated(new Function1() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconInteractorKairosImpl$$ExternalSyntheticLambda6
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 BuildScope buildScope = (BuildScope) obj;
                 switch (i15) {
                     case 0:
-                        DiffableKt.logDiffsForTable(buildScope, flatMap, this.connectionRepository.getTableLogBuffer(), "icon");
+                        DiffableKt.logDiffsForTable(buildScope, stateInitFlatMap, this.connectionRepository.getTableLogBuffer(), "icon");
                         break;
                     default:
-                        DiffableKt.logBooleanDiffsForTable(buildScope, flatMap, this.connectionRepository.getTableLogBuffer(), "icon", "isDataConnected");
+                        DiffableKt.logBooleanDiffsForTable(buildScope, stateInitFlatMap, this.connectionRepository.getTableLogBuffer(), "icon", "isDataConnected");
                         break;
                 }
                 return Unit.INSTANCE;
             }
         });
-        this.signalLevelIcon = flatMap;
+        this.signalLevelIcon = stateInitFlatMap;
     }
 
     @Override // com.android.systemui.KairosActivatable

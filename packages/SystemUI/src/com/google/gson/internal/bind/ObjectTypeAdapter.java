@@ -13,14 +13,12 @@ import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class ObjectTypeAdapter extends TypeAdapter<Object> {
     private static final TypeAdapterFactory DOUBLE_FACTORY = newFactory(ToNumberPolicy.DOUBLE);
     private final Gson gson;
     private final ToNumberStrategy toNumberStrategy;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.google.gson.internal.bind.ObjectTypeAdapter$2, reason: invalid class name */
     /* synthetic */ class AnonymousClass2 {
         static final /* synthetic */ int[] $SwitchMap$com$google$gson$stream$JsonToken;
@@ -64,7 +62,7 @@ public final class ObjectTypeAdapter extends TypeAdapter<Object> {
             @Override // com.google.gson.TypeAdapterFactory
             public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> typeToken) {
                 if (typeToken.getRawType() == Object.class) {
-                    return new ObjectTypeAdapter(gson, ToNumberStrategy.this);
+                    return new ObjectTypeAdapter(gson, toNumberStrategy);
                 }
                 return null;
             }

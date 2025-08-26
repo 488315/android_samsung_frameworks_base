@@ -1,6 +1,7 @@
 package com.android.systemui.qs;
 
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Trace;
@@ -19,7 +20,6 @@ import com.android.systemui.util.LifecycleFragment;
 import java.util.function.Consumer;
 import javax.inject.Provider;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class QSFragmentLegacy extends LifecycleFragment implements QS {
     public final QSFragmentComponent.Factory mQsComponentFactory;
@@ -40,7 +40,7 @@ public class QSFragmentLegacy extends LifecycleFragment implements QS {
     }
 
     @Override // com.android.systemui.plugins.qs.QS
-    public final void closeCustomizer() {
+    public final void closeCustomizer() throws Resources.NotFoundException {
         QSImpl qSImpl = this.mQsImpl;
         if (qSImpl != null) {
             qSImpl.closeDetail();
@@ -48,7 +48,7 @@ public class QSFragmentLegacy extends LifecycleFragment implements QS {
     }
 
     @Override // com.android.systemui.plugins.qs.QS
-    public final void closeDetail() {
+    public final void closeDetail() throws Resources.NotFoundException {
         QSImpl qSImpl = this.mQsImpl;
         if (qSImpl != null) {
             qSImpl.closeDetail();
@@ -183,7 +183,7 @@ public class QSFragmentLegacy extends LifecycleFragment implements QS {
     }
 
     @Override // android.app.Fragment, android.content.ComponentCallbacks
-    public final void onConfigurationChanged(Configuration configuration) {
+    public final void onConfigurationChanged(Configuration configuration) throws Resources.NotFoundException {
         super.onConfigurationChanged(configuration);
         QSImpl qSImpl = this.mQsImpl;
         if (qSImpl != null) {
@@ -221,15 +221,15 @@ public class QSFragmentLegacy extends LifecycleFragment implements QS {
     }
 
     @Override // android.app.Fragment
-    public final void onViewCreated(View view, Bundle bundle) {
-        QSFragmentComponent create = this.mQsComponentFactory.create(getView());
+    public final void onViewCreated(View view, Bundle bundle) throws Resources.NotFoundException {
+        QSFragmentComponent qSFragmentComponentCreate = this.mQsComponentFactory.create(getView());
         QSImpl qSImpl = (QSImpl) this.mQsImplProvider.get();
         this.mQsImpl = qSImpl;
         String simpleName = qSImpl.getClass().getSimpleName();
         DumpManager dumpManager = qSImpl.mDumpManager;
         dumpManager.getClass();
         DumpManager.registerDumpable$default(dumpManager, simpleName, qSImpl);
-        this.mQsImpl.onComponentCreated(create, bundle);
+        this.mQsImpl.onComponentCreated(qSFragmentComponentCreate, bundle);
     }
 
     @Override // com.android.systemui.plugins.qs.QS
@@ -257,7 +257,7 @@ public class QSFragmentLegacy extends LifecycleFragment implements QS {
     }
 
     @Override // com.android.systemui.plugins.qs.QS
-    public final void setExpanded(boolean z) {
+    public final void setExpanded(boolean z) throws Resources.NotFoundException {
         QSImpl qSImpl = this.mQsImpl;
         if (qSImpl != null) {
             qSImpl.setExpanded(z);
@@ -305,7 +305,7 @@ public class QSFragmentLegacy extends LifecycleFragment implements QS {
     }
 
     @Override // com.android.systemui.plugins.qs.QS
-    public final void setInSplitShade(boolean z) {
+    public final void setInSplitShade(boolean z) throws Resources.NotFoundException {
         QSImpl qSImpl = this.mQsImpl;
         if (qSImpl != null) {
             qSImpl.setInSplitShade(z);
@@ -337,7 +337,7 @@ public class QSFragmentLegacy extends LifecycleFragment implements QS {
     }
 
     @Override // com.android.systemui.plugins.qs.QS
-    public final void setOverscrolling(boolean z) {
+    public final void setOverscrolling(boolean z) throws Resources.NotFoundException {
         QSImpl qSImpl = this.mQsImpl;
         if (qSImpl != null) {
             qSImpl.setOverscrolling(z);
@@ -385,7 +385,7 @@ public class QSFragmentLegacy extends LifecycleFragment implements QS {
     }
 
     @Override // com.android.systemui.plugins.qs.QS
-    public final void setTransitionToFullShadeProgress(boolean z, float f, float f2) {
+    public final void setTransitionToFullShadeProgress(boolean z, float f, float f2) throws Resources.NotFoundException {
         QSImpl qSImpl = this.mQsImpl;
         if (qSImpl != null) {
             qSImpl.setTransitionToFullShadeProgress(z, f, f2);

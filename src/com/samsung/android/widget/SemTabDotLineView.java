@@ -1,6 +1,7 @@
 package com.samsung.android.widget;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
@@ -27,7 +28,7 @@ public class SemTabDotLineView extends View {
         this(context, null);
     }
 
-    public SemTabDotLineView(Context context, AttributeSet attributeSet) {
+    public SemTabDotLineView(Context context, AttributeSet attributeSet) throws Resources.NotFoundException {
         super(context, attributeSet);
         this.mDiameter = 1;
         this.mDrawDot = true;

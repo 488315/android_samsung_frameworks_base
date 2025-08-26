@@ -18,7 +18,6 @@ import java.io.InputStream;
 import java.util.concurrent.Callable;
 import libcore.io.Streams;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final /* synthetic */ class AvatarPhotoController$$ExternalSyntheticLambda0 implements Callable {
     public final /* synthetic */ int $r8$classId;
@@ -32,7 +31,7 @@ public final /* synthetic */ class AvatarPhotoController$$ExternalSyntheticLambd
     }
 
     @Override // java.util.concurrent.Callable
-    public final Object call() {
+    public final Object call() throws IOException {
         switch (this.$r8$classId) {
             case 0:
                 Uri uri = this.f$1;
@@ -51,49 +50,49 @@ public final /* synthetic */ class AvatarPhotoController$$ExternalSyntheticLambd
                 avatarPhotoController2.getClass();
                 Bitmap.Config config = Bitmap.Config.ARGB_8888;
                 int i = avatarPhotoController2.mPhotoSize;
-                Bitmap createBitmap = Bitmap.createBitmap(i, i, config);
-                Canvas canvas = new Canvas(createBitmap);
+                Bitmap bitmapCreateBitmap = Bitmap.createBitmap(i, i, config);
+                Canvas canvas = new Canvas(bitmapCreateBitmap);
                 AvatarPhotoController.ContextInjector contextInjector = avatarPhotoController2.mContextInjector;
-                InputStream openInputStream = ((AvatarPhotoController.ContextInjectorImpl) contextInjector).mContext.getContentResolver().openInputStream(uri2);
+                InputStream inputStreamOpenInputStream = ((AvatarPhotoController.ContextInjectorImpl) contextInjector).mContext.getContentResolver().openInputStream(uri2);
                 try {
-                    Bitmap decodeStream = BitmapFactory.decodeStream(openInputStream);
-                    if (openInputStream != null) {
-                        openInputStream.close();
+                    Bitmap bitmapDecodeStream = BitmapFactory.decodeStream(inputStreamOpenInputStream);
+                    if (inputStreamOpenInputStream != null) {
+                        inputStreamOpenInputStream.close();
                     }
-                    if (decodeStream == null) {
+                    if (bitmapDecodeStream == null) {
                         Log.e("AvatarPhotoController", "Image data could not be decoded");
                         return null;
                     }
-                    int i2 = -1;
+                    int attributeInt = -1;
                     try {
-                        i2 = new ExifInterface(((AvatarPhotoController.ContextInjectorImpl) contextInjector).mContext.getContentResolver().openInputStream(uri2)).getAttributeInt("Orientation", -1);
+                        attributeInt = new ExifInterface(((AvatarPhotoController.ContextInjectorImpl) contextInjector).mContext.getContentResolver().openInputStream(uri2)).getAttributeInt("Orientation", -1);
                     } catch (IOException e2) {
                         Log.e("AvatarPhotoController", "Error while getting rotation", e2);
                     }
-                    int i3 = i2 != 3 ? i2 != 6 ? i2 != 8 ? 0 : 270 : 90 : 180;
-                    int min = Math.min(decodeStream.getWidth(), decodeStream.getHeight());
-                    int width = (decodeStream.getWidth() - min) / 2;
-                    int height = (decodeStream.getHeight() - min) / 2;
+                    int i2 = attributeInt != 3 ? attributeInt != 6 ? attributeInt != 8 ? 0 : 270 : 90 : 180;
+                    int iMin = Math.min(bitmapDecodeStream.getWidth(), bitmapDecodeStream.getHeight());
+                    int width = (bitmapDecodeStream.getWidth() - iMin) / 2;
+                    int height = (bitmapDecodeStream.getHeight() - iMin) / 2;
                     Matrix matrix = new Matrix();
                     float f = i;
-                    matrix.setRectToRect(new RectF(width, height, width + min, height + min), new RectF(0.0f, 0.0f, f, f), Matrix.ScaleToFit.CENTER);
+                    matrix.setRectToRect(new RectF(width, height, width + iMin, height + iMin), new RectF(0.0f, 0.0f, f, f), Matrix.ScaleToFit.CENTER);
                     float f2 = f / 2.0f;
-                    matrix.postRotate(i3, f2, f2);
-                    canvas.drawBitmap(decodeStream, matrix, new Paint());
+                    matrix.postRotate(i2, f2, f2);
+                    canvas.drawBitmap(bitmapDecodeStream, matrix, new Paint());
                     try {
                         FileOutputStream fileOutputStream = new FileOutputStream(new File(avatarPhotoController2.mImagesDir, "CropEditUserPhoto.jpg"));
-                        createBitmap.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream);
+                        bitmapCreateBitmap.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream);
                         fileOutputStream.flush();
                         fileOutputStream.close();
-                        return createBitmap;
+                        return bitmapCreateBitmap;
                     } catch (IOException e3) {
                         Log.e("AvatarPhotoController", "Cannot create temp file", e3);
-                        return createBitmap;
+                        return bitmapCreateBitmap;
                     }
                 } catch (Throwable th) {
-                    if (openInputStream != null) {
+                    if (inputStreamOpenInputStream != null) {
                         try {
-                            openInputStream.close();
+                            inputStreamOpenInputStream.close();
                         } catch (Throwable th2) {
                             th.addSuppressed(th2);
                         }

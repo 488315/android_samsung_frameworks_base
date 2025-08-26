@@ -327,55 +327,55 @@ public final class KeyParameterValue implements Parcelable {
     }
 
     public void readFromParcel(Parcel parcel) {
-        int readInt = parcel.readInt();
-        switch (readInt) {
+        int i = parcel.readInt();
+        switch (i) {
             case 0:
-                _set(readInt, Integer.valueOf(parcel.readInt()));
+                _set(i, Integer.valueOf(parcel.readInt()));
                 return;
             case 1:
-                _set(readInt, Integer.valueOf(parcel.readInt()));
+                _set(i, Integer.valueOf(parcel.readInt()));
                 return;
             case 2:
-                _set(readInt, Integer.valueOf(parcel.readInt()));
+                _set(i, Integer.valueOf(parcel.readInt()));
                 return;
             case 3:
-                _set(readInt, Integer.valueOf(parcel.readInt()));
+                _set(i, Integer.valueOf(parcel.readInt()));
                 return;
             case 4:
-                _set(readInt, Integer.valueOf(parcel.readInt()));
+                _set(i, Integer.valueOf(parcel.readInt()));
                 return;
             case 5:
-                _set(readInt, Integer.valueOf(parcel.readInt()));
+                _set(i, Integer.valueOf(parcel.readInt()));
                 return;
             case 6:
-                _set(readInt, Integer.valueOf(parcel.readInt()));
+                _set(i, Integer.valueOf(parcel.readInt()));
                 return;
             case 7:
-                _set(readInt, Integer.valueOf(parcel.readInt()));
+                _set(i, Integer.valueOf(parcel.readInt()));
                 return;
             case 8:
-                _set(readInt, Integer.valueOf(parcel.readInt()));
+                _set(i, Integer.valueOf(parcel.readInt()));
                 return;
             case 9:
-                _set(readInt, Integer.valueOf(parcel.readInt()));
+                _set(i, Integer.valueOf(parcel.readInt()));
                 return;
             case 10:
-                _set(readInt, Boolean.valueOf(parcel.readBoolean()));
+                _set(i, Boolean.valueOf(parcel.readBoolean()));
                 return;
             case 11:
-                _set(readInt, Integer.valueOf(parcel.readInt()));
+                _set(i, Integer.valueOf(parcel.readInt()));
                 return;
             case 12:
-                _set(readInt, Long.valueOf(parcel.readLong()));
+                _set(i, Long.valueOf(parcel.readLong()));
                 return;
             case 13:
-                _set(readInt, Long.valueOf(parcel.readLong()));
+                _set(i, Long.valueOf(parcel.readLong()));
                 return;
             case 14:
-                _set(readInt, parcel.createByteArray());
+                _set(i, parcel.createByteArray());
                 return;
             default:
-                throw new IllegalArgumentException("union: unknown tag: " + readInt);
+                throw new IllegalArgumentException("union: unknown tag: " + i);
         }
     }
 

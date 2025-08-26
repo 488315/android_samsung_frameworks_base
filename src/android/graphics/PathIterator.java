@@ -53,8 +53,8 @@ public class PathIterator implements Iterator<Segment> {
 
     PathIterator(Path path) {
         this.mPath = path;
-        long nCreate = nCreate(path.mNativePath);
-        this.mNativeIterator = nCreate;
+        long jNCreate = nCreate(path.mNativePath);
+        this.mNativeIterator = jNCreate;
         this.mPathGenerationId = path.getGenerationId();
         if (IS_DALVIK) {
             VMRuntime runtime = VMRuntime.getRuntime();
@@ -65,7 +65,7 @@ public class PathIterator implements Iterator<Segment> {
             this.mPointsArray = new float[8];
             this.mPointsAddress = 0L;
         }
-        NoImagePreloadHolder.sRegistry.registerNativeAllocation(this, nCreate);
+        NoImagePreloadHolder.sRegistry.registerNativeAllocation(this, jNCreate);
     }
 
     public int next(float[] fArr, int i) {
@@ -103,11 +103,11 @@ public class PathIterator implements Iterator<Segment> {
         if (this.mPathGenerationId != this.mPath.getGenerationId()) {
             throw new ConcurrentModificationException("Iterator cannot be used on modified Path");
         }
-        int nNext = IS_DALVIK ? nNext(this.mNativeIterator, this.mPointsAddress) : nNextHost(this.mNativeIterator, this.mPointsArray);
-        if (nNext == 6) {
+        int iNNext = IS_DALVIK ? nNext(this.mNativeIterator, this.mPointsAddress) : nNextHost(this.mNativeIterator, this.mPointsArray);
+        if (iNNext == 6) {
             this.mDone = true;
         }
-        return nNext;
+        return iNNext;
     }
 
     /* JADX WARN: Can't rename method to resolve collision */

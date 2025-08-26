@@ -1,6 +1,7 @@
 package com.android.systemui.qs.bar;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,6 @@ import com.android.systemui.tuner.TunerService;
 import com.android.systemui.util.SecQsUiDisplayModeInteractor;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SmartViewLargeTileBar extends LargeTileBar implements TunerService.Tunable {
     public final TunerService tunerService;
@@ -46,7 +46,7 @@ public final class SmartViewLargeTileBar extends LargeTileBar implements TunerSe
     }
 
     @Override // com.android.systemui.tuner.TunerService.Tunable
-    public final void onTuningChanged(String str, String str2) {
+    public final void onTuningChanged(String str, String str2) throws Resources.NotFoundException {
         if (str2 == null || !Intrinsics.areEqual(str, "hide_smart_view_large_tile_on_panel")) {
             return;
         }
@@ -63,16 +63,16 @@ public final class SmartViewLargeTileBar extends LargeTileBar implements TunerSe
     }
 
     @Override // com.android.systemui.qs.bar.LargeTileBar, com.android.systemui.qs.bar.BarItemImpl
-    public final void updateHeightMargins() {
+    public final void updateHeightMargins() throws Resources.NotFoundException {
         updateLayout(this.mBarRootView, this.mTileContainer);
     }
 
     @Override // com.android.systemui.qs.bar.LargeTileBar
-    public final void updateLayout(View view, LinearLayout linearLayout) {
+    public final void updateLayout(View view, LinearLayout linearLayout) throws Resources.NotFoundException {
         updateLayout(linearLayout);
         LinearLayout.LayoutParams layoutParams = view.getLayoutParams() != null ? (LinearLayout.LayoutParams) view.getLayoutParams() : new LinearLayout.LayoutParams(-1, this.mContext.getResources().getDimensionPixelSize(R.dimen.large_tile_height));
         SecQsUiDisplayModeInteractor secQsUiDisplayModeInteractor = this.mSecQsUiDisplayModeInteractor;
-        int i = 0;
+        int dimensionPixelSize = 0;
         if (secQsUiDisplayModeInteractor.isTablet() || this.mOrientation != 2) {
             layoutParams.weight = 2.0f;
             layoutParams.width = -1;
@@ -86,9 +86,9 @@ public final class SmartViewLargeTileBar extends LargeTileBar implements TunerSe
         view.setLayoutParams(layoutParams);
         LinearLayout.LayoutParams layoutParams2 = (LinearLayout.LayoutParams) linearLayout.getLayoutParams();
         if (!secQsUiDisplayModeInteractor.isTablet() && this.mContext.getResources().getConfiguration().orientation == 2) {
-            i = this.mContext.getResources().getDimensionPixelSize(R.dimen.large_tile_between_margin);
+            dimensionPixelSize = this.mContext.getResources().getDimensionPixelSize(R.dimen.large_tile_between_margin);
         }
-        layoutParams2.setMarginEnd(i);
+        layoutParams2.setMarginEnd(dimensionPixelSize);
         linearLayout.setLayoutParams(layoutParams2);
     }
 }

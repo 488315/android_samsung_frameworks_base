@@ -3,6 +3,7 @@ package com.android.internal.app;
 import android.app.ListFragment;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.LocaleList;
 import android.text.TextUtils;
@@ -195,7 +196,7 @@ public class LocalePickerWithRegion extends ListFragment implements SearchView.O
     }
 
     @Override // android.app.Fragment
-    public void onActivityCreated(Bundle bundle) {
+    public void onActivityCreated(Bundle bundle) throws Resources.NotFoundException {
         super.onActivityCreated(bundle);
         TypedValue typedValue = new TypedValue();
         getContext().getTheme().resolveAttribute(16844176, typedValue, true);
@@ -206,10 +207,10 @@ public class LocalePickerWithRegion extends ListFragment implements SearchView.O
             this.mSubheaderColor = getResources().getColor(R.color.sem_round_and_bgcolor_dark);
             this.mIsLight = false;
         }
-        LayoutInflater from = LayoutInflater.from(getContext());
+        LayoutInflater layoutInflaterFrom = LayoutInflater.from(getContext());
         SuggestedLocaleAdapter suggestedLocaleAdapter = this.mAdapter;
         if (suggestedLocaleAdapter != null) {
-            suggestedLocaleAdapter.updateTheme(from, this.mSubheaderColor);
+            suggestedLocaleAdapter.updateTheme(layoutInflaterFrom, this.mSubheaderColor);
             this.mAdapter.notifyDataSetChanged();
         }
         ListView listView = getListView();
@@ -226,9 +227,9 @@ public class LocalePickerWithRegion extends ListFragment implements SearchView.O
             } else {
                 listView.semSetGoToTopEnabled(true);
             }
-            View inflate = from.inflate(R.layout.sem_language_picker_footer, (ViewGroup) null, false);
-            inflate.setBackgroundColor(this.mSubheaderColor);
-            listView.addFooterView(inflate, null, false);
+            View viewInflate = layoutInflaterFrom.inflate(R.layout.sem_language_picker_footer, (ViewGroup) null, false);
+            viewInflate.setBackgroundColor(this.mSubheaderColor);
+            listView.addFooterView(viewInflate, null, false);
         }
     }
 
@@ -275,16 +276,16 @@ public class LocalePickerWithRegion extends ListFragment implements SearchView.O
 
     @Override // android.app.ListFragment
     public void onListItemClick(ListView listView, View view, int i, long j) {
-        LocalePickerWithRegion createCountryPicker;
+        LocalePickerWithRegion localePickerWithRegionCreateCountryPicker;
         LocaleStore.LocaleInfo localeInfo = (LocaleStore.LocaleInfo) listView.getAdapter().getItem(i);
         if (localeInfo == null) {
             Log.d(TAG, "Can not get the locale.");
             return;
         }
-        boolean isSystemLocale = localeInfo.isSystemLocale();
+        boolean zIsSystemLocale = localeInfo.isSystemLocale();
         boolean z = localeInfo.getParent() != null;
-        boolean hasNumberingSystems = localeInfo.hasNumberingSystems();
-        if (isSystemLocale || ((z && !hasNumberingSystems) || this.mIsNumberingSystem)) {
+        boolean zHasNumberingSystems = localeInfo.hasNumberingSystems();
+        if (zIsSystemLocale || ((z && !zHasNumberingSystems) || this.mIsNumberingSystem)) {
             LocaleSelectedListener localeSelectedListener = this.mListener;
             if (localeSelectedListener != null) {
                 localeSelectedListener.onLocaleSelected(localeInfo);
@@ -294,18 +295,18 @@ public class LocalePickerWithRegion extends ListFragment implements SearchView.O
                 return;
             }
         }
-        if (hasNumberingSystems) {
-            createCountryPicker = createNumberingSystemPicker(this.mListener, localeInfo, this.mTranslatedOnly, this.mOnActionExpandListener, this.mLocalePickerCollector);
+        if (zHasNumberingSystems) {
+            localePickerWithRegionCreateCountryPicker = createNumberingSystemPicker(this.mListener, localeInfo, this.mTranslatedOnly, this.mOnActionExpandListener, this.mLocalePickerCollector);
         } else {
-            createCountryPicker = createCountryPicker(this.mListener, localeInfo, this.mTranslatedOnly, this.mOnActionExpandListener, this.mLocalePickerCollector, this.mChangeDisplayName);
+            localePickerWithRegionCreateCountryPicker = createCountryPicker(this.mListener, localeInfo, this.mTranslatedOnly, this.mOnActionExpandListener, this.mLocalePickerCollector, this.mChangeDisplayName);
             SearchView searchView = this.mSearchView;
             if (searchView != null) {
                 searchView.clearFocus();
             }
         }
         this.mListener.onParentLocaleSelected(localeInfo);
-        if (createCountryPicker != null) {
-            getFragmentManager().beginTransaction().replace(getId(), createCountryPicker).addToBackStack(null).commit();
+        if (localePickerWithRegionCreateCountryPicker != null) {
+            getFragmentManager().beginTransaction().replace(getId(), localePickerWithRegionCreateCountryPicker).addToBackStack(null).commit();
         } else {
             returnToParentFrame();
         }
@@ -322,25 +323,25 @@ public class LocalePickerWithRegion extends ListFragment implements SearchView.O
     public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater) {
         if ((!this.mLocalePickerCollector.hasSpecificPackageName() || this.mOnActionExpandListener == null) && this.mParentLocale == null) {
             menuInflater.inflate(R.menu.language_selection_list, menu);
-            MenuItem findItem = menu.findItem(R.id.locale_search_menu);
+            MenuItem menuItemFindItem = menu.findItem(R.id.locale_search_menu);
             SearchView searchView = new SearchView(getContext());
             this.mSearchView = searchView;
-            findItem.setActionView(searchView);
+            menuItemFindItem.setActionView(searchView);
             LinearLayout linearLayout = (LinearLayout) this.mSearchView.findViewById(getResources().getIdentifier("android:id/search_plate", null, null));
             if (linearLayout != null) {
                 linearLayout.setPadding(0, linearLayout.getPaddingTop(), linearLayout.getPaddingRight(), linearLayout.getPaddingBottom());
             }
-            findItem.setShowAsAction(2);
+            menuItemFindItem.setShowAsAction(2);
             MenuItem.OnActionExpandListener onActionExpandListener = this.mOnActionExpandListener;
             if (onActionExpandListener != null) {
-                findItem.setOnActionExpandListener(onActionExpandListener);
+                menuItemFindItem.setOnActionExpandListener(onActionExpandListener);
             }
             SearchView searchView2 = this.mSearchView;
             if (searchView2 != null) {
                 searchView2.setQueryHint(getText(R.string.search_language_hint));
                 this.mSearchView.setOnQueryTextListener(this);
                 if (!TextUtils.isEmpty(this.mPreviousSearch)) {
-                    findItem.expandActionView();
+                    menuItemFindItem.expandActionView();
                     this.mSearchView.setIconified(false);
                     this.mSearchView.setActivated(true);
                     if (this.mPreviousSearchHadFocus) {
@@ -370,7 +371,7 @@ public class LocalePickerWithRegion extends ListFragment implements SearchView.O
     }
 
     @Override // android.app.Fragment, android.content.ComponentCallbacks
-    public void onConfigurationChanged(Configuration configuration) {
+    public void onConfigurationChanged(Configuration configuration) throws Resources.NotFoundException {
         LinearLayout linearLayout;
         super.onConfigurationChanged(configuration);
         int dimensionPixelSize = getResources().getDimensionPixelSize(R.dimen.sem_locale_picker_action_bar_margin_top);

@@ -23,7 +23,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class TextLayoutResult {
     public final float firstBaseline;
@@ -45,7 +44,7 @@ public final class TextLayoutResult {
             return false;
         }
         TextLayoutResult textLayoutResult = (TextLayoutResult) obj;
-        return Intrinsics.areEqual(this.layoutInput, textLayoutResult.layoutInput) && Intrinsics.areEqual(this.multiParagraph, textLayoutResult.multiParagraph) && IntSize.m861equalsimpl0(this.size, textLayoutResult.size) && this.firstBaseline == textLayoutResult.firstBaseline && this.lastBaseline == textLayoutResult.lastBaseline && Intrinsics.areEqual(this.placeholderRects, textLayoutResult.placeholderRects);
+        return Intrinsics.areEqual(this.layoutInput, textLayoutResult.layoutInput) && Intrinsics.areEqual(this.multiParagraph, textLayoutResult.multiParagraph) && IntSize.m863equalsimpl0(this.size, textLayoutResult.size) && this.firstBaseline == textLayoutResult.firstBaseline && this.lastBaseline == textLayoutResult.lastBaseline && Intrinsics.areEqual(this.placeholderRects, textLayoutResult.placeholderRects);
     }
 
     public final ResolvedTextDirection getBidiRunDirection(int i) {
@@ -75,12 +74,12 @@ public final class TextLayoutResult {
         float lineTop = textLayout.getLineTop(lineForOffset);
         float lineBottom = textLayout.getLineBottom(lineForOffset);
         boolean z = textLayout.layout.getParagraphDirection(lineForOffset) == 1;
-        boolean isRtlCharAt = textLayout.layout.isRtlCharAt(localIndex);
-        if (!z || isRtlCharAt) {
-            if (z && isRtlCharAt) {
+        boolean zIsRtlCharAt = textLayout.layout.isRtlCharAt(localIndex);
+        if (!z || zIsRtlCharAt) {
+            if (z && zIsRtlCharAt) {
                 primaryHorizontal = textLayout.getSecondaryHorizontal(localIndex, false);
                 primaryHorizontal2 = textLayout.getSecondaryHorizontal(localIndex + 1, true);
-            } else if (isRtlCharAt) {
+            } else if (zIsRtlCharAt) {
                 primaryHorizontal = textLayout.getPrimaryHorizontal(localIndex, false);
                 primaryHorizontal2 = textLayout.getPrimaryHorizontal(localIndex + 1, true);
             } else {
@@ -166,16 +165,16 @@ public final class TextLayoutResult {
         MultiParagraph multiParagraph = this.multiParagraph;
         MultiParagraphIntrinsics multiParagraphIntrinsics = multiParagraph.intrinsics;
         if (i < 0 || i > i2 || i2 > multiParagraphIntrinsics.annotatedString.text.length()) {
-            StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "Start(", ") or End(", ") is out of range [0..");
-            m.append(multiParagraphIntrinsics.annotatedString.text.length());
-            m.append("), or start > end!");
-            InlineClassHelperKt.throwIllegalArgumentException(m.toString());
+            StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "Start(", ") or End(", ") is out of range [0..");
+            sbM.append(multiParagraphIntrinsics.annotatedString.text.length());
+            sbM.append("), or start > end!");
+            InlineClassHelperKt.throwIllegalArgumentException(sbM.toString());
         }
         if (i == i2) {
             return AndroidPath_androidKt.Path();
         }
-        final AndroidPath Path = AndroidPath_androidKt.Path();
-        MultiParagraphKt.m736findParagraphsByRangeSbBc2M(multiParagraph.paragraphInfoList, TextRangeKt.TextRange(i, i2), new Function1() { // from class: androidx.compose.ui.text.MultiParagraph$getPathForRange$2
+        final AndroidPath androidPathPath = AndroidPath_androidKt.Path();
+        MultiParagraphKt.m738findParagraphsByRangeSbBc2M(multiParagraph.paragraphInfoList, TextRangeKt.TextRange(i, i2), new Function1() { // from class: androidx.compose.ui.text.MultiParagraph$getPathForRange$2
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
@@ -183,9 +182,9 @@ public final class TextLayoutResult {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 ParagraphInfo paragraphInfo = (ParagraphInfo) obj;
-                Path path = Path.this;
+                Path path = androidPathPath;
                 int i3 = i;
                 int i4 = i2;
                 Paragraph paragraph = paragraphInfo.paragraph;
@@ -194,10 +193,10 @@ public final class TextLayoutResult {
                 AndroidParagraph androidParagraph = (AndroidParagraph) paragraph;
                 androidParagraph.getClass();
                 if (localIndex < 0 || localIndex > localIndex2 || localIndex2 > androidParagraph.charSequence.length()) {
-                    StringBuilder m2 = MutableObjectList$$ExternalSyntheticOutline0.m(localIndex, localIndex2, "start(", ") or end(", ") is out of range [0..");
-                    m2.append(androidParagraph.charSequence.length());
-                    m2.append("], or start > end!");
-                    InlineClassHelperKt.throwIllegalArgumentException(m2.toString());
+                    StringBuilder sbM2 = MutableObjectList$$ExternalSyntheticOutline0.m(localIndex, localIndex2, "start(", ") or end(", ") is out of range [0..");
+                    sbM2.append(androidParagraph.charSequence.length());
+                    sbM2.append("], or start > end!");
+                    InlineClassHelperKt.throwIllegalArgumentException(sbM2.toString());
                 }
                 android.graphics.Path path2 = new android.graphics.Path();
                 TextLayout textLayout = androidParagraph.layout;
@@ -207,21 +206,21 @@ public final class TextLayoutResult {
                     path2.offset(0.0f, i5);
                 }
                 AndroidPath androidPath = new AndroidPath(path2);
-                long floatToRawIntBits = (Float.floatToRawIntBits(paragraphInfo.top) & 4294967295L) | (Float.floatToRawIntBits(0.0f) << 32);
+                long jFloatToRawIntBits = (Float.floatToRawIntBits(paragraphInfo.top) & 4294967295L) | (Float.floatToRawIntBits(0.0f) << 32);
                 Offset.Companion companion = Offset.Companion;
-                androidPath.m446translatek4lQ0M(floatToRawIntBits);
-                Path.m491addPathUv8p0NA$default(path, androidPath);
+                androidPath.m448translatek4lQ0M(jFloatToRawIntBits);
+                Path.m493addPathUv8p0NA$default(path, androidPath);
                 return Unit.INSTANCE;
             }
         });
-        return Path;
+        return androidPathPath;
     }
 
     /* renamed from: getWordBoundary--jx7JFs, reason: not valid java name */
-    public final long m744getWordBoundaryjx7JFs(int i) {
-        int prevBoundary;
-        int i2;
-        int nextBoundary;
+    public final long m746getWordBoundaryjx7JFs(int i) {
+        int iPrevBoundary;
+        int iNextBoundary;
+        int iNextBoundary2;
         MultiParagraph multiParagraph = this.multiParagraph;
         multiParagraph.requireIndexInRangeInclusiveEnd(i);
         ParagraphInfo paragraphInfo = (ParagraphInfo) ((ArrayList) multiParagraph.paragraphInfoList).get(i == multiParagraph.intrinsics.annotatedString.text.length() ? CollectionsKt__CollectionsKt.getLastIndex(multiParagraph.paragraphInfoList) : MultiParagraphKt.findParagraphByIndex(i, multiParagraph.paragraphInfoList));
@@ -230,66 +229,66 @@ public final class TextLayoutResult {
         WordIterator wordIterator = ((AndroidParagraph) paragraph).layout.getWordIterator();
         if (wordIterator.isOnPunctuation(wordIterator.prevBoundary(localIndex))) {
             wordIterator.checkOffsetIsValid(localIndex);
-            prevBoundary = localIndex;
-            while (prevBoundary != -1 && (!wordIterator.isOnPunctuation(prevBoundary) || wordIterator.isAfterPunctuation(prevBoundary))) {
-                prevBoundary = wordIterator.prevBoundary(prevBoundary);
+            iPrevBoundary = localIndex;
+            while (iPrevBoundary != -1 && (!wordIterator.isOnPunctuation(iPrevBoundary) || wordIterator.isAfterPunctuation(iPrevBoundary))) {
+                iPrevBoundary = wordIterator.prevBoundary(iPrevBoundary);
             }
         } else {
             wordIterator.checkOffsetIsValid(localIndex);
-            prevBoundary = wordIterator.isOnLetterOrDigitOrEmoji(localIndex) ? (!wordIterator.isBoundary(localIndex) || wordIterator.isAfterLetterOrDigitOrEmoji(localIndex)) ? wordIterator.prevBoundary(localIndex) : localIndex : wordIterator.isAfterLetterOrDigitOrEmoji(localIndex) ? wordIterator.prevBoundary(localIndex) : -1;
+            iPrevBoundary = wordIterator.isOnLetterOrDigitOrEmoji(localIndex) ? (!wordIterator.isBoundary(localIndex) || wordIterator.isAfterLetterOrDigitOrEmoji(localIndex)) ? wordIterator.prevBoundary(localIndex) : localIndex : wordIterator.isAfterLetterOrDigitOrEmoji(localIndex) ? wordIterator.prevBoundary(localIndex) : -1;
         }
-        if (prevBoundary == -1) {
-            prevBoundary = localIndex;
+        if (iPrevBoundary == -1) {
+            iPrevBoundary = localIndex;
         }
         if (wordIterator.isAfterPunctuation(wordIterator.nextBoundary(localIndex))) {
             wordIterator.checkOffsetIsValid(localIndex);
-            i2 = localIndex;
-            while (i2 != -1 && (wordIterator.isOnPunctuation(i2) || !wordIterator.isAfterPunctuation(i2))) {
-                i2 = wordIterator.nextBoundary(i2);
+            iNextBoundary = localIndex;
+            while (iNextBoundary != -1 && (wordIterator.isOnPunctuation(iNextBoundary) || !wordIterator.isAfterPunctuation(iNextBoundary))) {
+                iNextBoundary = wordIterator.nextBoundary(iNextBoundary);
             }
         } else {
             wordIterator.checkOffsetIsValid(localIndex);
             if (wordIterator.isAfterLetterOrDigitOrEmoji(localIndex)) {
                 if (!wordIterator.isBoundary(localIndex) || wordIterator.isOnLetterOrDigitOrEmoji(localIndex)) {
-                    nextBoundary = wordIterator.nextBoundary(localIndex);
-                    i2 = nextBoundary;
+                    iNextBoundary2 = wordIterator.nextBoundary(localIndex);
+                    iNextBoundary = iNextBoundary2;
                 } else {
-                    i2 = localIndex;
+                    iNextBoundary = localIndex;
                 }
             } else if (wordIterator.isOnLetterOrDigitOrEmoji(localIndex)) {
-                nextBoundary = wordIterator.nextBoundary(localIndex);
-                i2 = nextBoundary;
+                iNextBoundary2 = wordIterator.nextBoundary(localIndex);
+                iNextBoundary = iNextBoundary2;
             } else {
-                i2 = -1;
+                iNextBoundary = -1;
             }
         }
-        if (i2 != -1) {
-            localIndex = i2;
+        if (iNextBoundary != -1) {
+            localIndex = iNextBoundary;
         }
-        return paragraphInfo.m737toGlobalxdX6G0(TextRangeKt.TextRange(prevBoundary, localIndex), false);
+        return paragraphInfo.m739toGlobalxdX6G0(TextRangeKt.TextRange(iPrevBoundary, localIndex), false);
     }
 
     public final int hashCode() {
-        int hashCode = (this.multiParagraph.hashCode() + (this.layoutInput.hashCode() * 31)) * 31;
+        int iHashCode = (this.multiParagraph.hashCode() + (this.layoutInput.hashCode() * 31)) * 31;
         IntSize.Companion companion = IntSize.Companion;
-        return this.placeholderRects.hashCode() + FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.lastBaseline, FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.firstBaseline, MoveResult$$ExternalSyntheticOutline0.m(hashCode, 31, this.size), 31), 31);
+        return this.placeholderRects.hashCode() + FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.lastBaseline, FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.firstBaseline, MoveResult$$ExternalSyntheticOutline0.m(iHashCode, 31, this.size), 31), 31);
     }
 
     public final String toString() {
-        return "TextLayoutResult(layoutInput=" + this.layoutInput + ", multiParagraph=" + this.multiParagraph + ", size=" + ((Object) IntSize.m862toStringimpl(this.size)) + ", firstBaseline=" + this.firstBaseline + ", lastBaseline=" + this.lastBaseline + ", placeholderRects=" + this.placeholderRects + ')';
+        return "TextLayoutResult(layoutInput=" + this.layoutInput + ", multiParagraph=" + this.multiParagraph + ", size=" + ((Object) IntSize.m864toStringimpl(this.size)) + ", firstBaseline=" + this.firstBaseline + ", lastBaseline=" + this.lastBaseline + ", placeholderRects=" + this.placeholderRects + ')';
     }
 
     private TextLayoutResult(TextLayoutInput textLayoutInput, MultiParagraph multiParagraph, long j) {
         this.layoutInput = textLayoutInput;
         this.multiParagraph = multiParagraph;
         this.size = j;
-        float f = 0.0f;
+        float lineBaseline = 0.0f;
         this.firstBaseline = ((ArrayList) multiParagraph.paragraphInfoList).isEmpty() ? 0.0f : ((AndroidParagraph) ((ParagraphInfo) ((ArrayList) multiParagraph.paragraphInfoList).get(0)).paragraph).layout.getLineBaseline(0);
         if (!((ArrayList) multiParagraph.paragraphInfoList).isEmpty()) {
             ParagraphInfo paragraphInfo = (ParagraphInfo) CollectionsKt___CollectionsKt.last(multiParagraph.paragraphInfoList);
-            f = ((AndroidParagraph) paragraphInfo.paragraph).layout.getLineBaseline(r3.lineCount - 1) + paragraphInfo.top;
+            lineBaseline = ((AndroidParagraph) paragraphInfo.paragraph).layout.getLineBaseline(r3.lineCount - 1) + paragraphInfo.top;
         }
-        this.lastBaseline = f;
+        this.lastBaseline = lineBaseline;
         this.placeholderRects = multiParagraph.placeholderRects;
     }
 }

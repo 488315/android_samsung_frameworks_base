@@ -1,6 +1,8 @@
 package com.samsung.android.smartthingsmediasdk.mediasdk.manager.mediasdkoperations.mediaoutputselection;
 
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.util.Log;
 import com.android.systemui.media.mediaoutput.viewmodel.DeviceAudioPathViewModel$Companion$mediaoutputChanged$1$mediaOutputSelectedCallback$1;
 import com.samsung.android.oneconnect.mediaoutput.IMediaOutputService;
@@ -8,22 +10,22 @@ import com.samsung.android.oneconnect.mediaoutput.entity.MediaOutputDevice;
 import com.samsung.android.oneconnect.mediaoutput.entity.MediaOutputDeviceV2;
 import com.samsung.android.oneconnect.mediaoutput.mediadeviceoperations.IMediaOutputSelectedCallback;
 import com.samsung.android.smartthingsmediasdk.mediasdk.base.debug.DLog;
+import com.samsung.android.smartthingsmediasdk.mediasdk.base.utils.PackageUtil;
 import com.samsung.android.smartthingsmediasdk.mediasdk.manager.AbstractMediaSdkManager;
 import com.samsung.android.smartthingsmediasdk.mediasdk.service.MediaSdkSupportServiceClient;
 import java.util.ArrayList;
 import java.util.List;
+import kotlin.Result;
 import kotlin.Unit;
 import kotlin.collections.CollectionsKt__IterablesKt;
 import kotlin.collections.EmptyList;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class MediaOutputSelectedOperationImpl extends AbstractMediaSdkManager {
     public final Context context;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -42,103 +44,71 @@ public final class MediaOutputSelectedOperationImpl extends AbstractMediaSdkMana
         this.context = context;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0034  */
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0039 A[Catch: all -> 0x005b, TryCatch #1 {all -> 0x005b, blocks: (B:3:0x0005, B:8:0x0030, B:11:0x0035, B:13:0x0039, B:16:0x003f, B:19:0x0056, B:35:0x0026, B:28:0x0014, B:30:0x001a, B:32:0x0020), top: B:2:0x0005, inners: #0 }] */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x003d  */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0055  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x006a  */
+    /* JADX WARN: Removed duplicated region for block: B:14:0x002e  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static final boolean access$isSTAppVersionMediaOutputDeviceV2Supported(com.samsung.android.smartthingsmediasdk.mediasdk.manager.mediasdkoperations.mediaoutputselection.MediaOutputSelectedOperationImpl r5) {
-        /*
-            r5.getClass()
-            java.lang.String r0 = "ST App version: "
-            int r1 = kotlin.Result.$r8$clinit     // Catch: java.lang.Throwable -> L5b
-            com.samsung.android.smartthingsmediasdk.mediasdk.base.utils.PackageUtil r1 = com.samsung.android.smartthingsmediasdk.mediasdk.base.utils.PackageUtil.INSTANCE     // Catch: java.lang.Throwable -> L5b
-            android.content.Context r5 = r5.context     // Catch: java.lang.Throwable -> L5b
-            java.lang.String r2 = "com.samsung.android.oneconnect"
-            r1.getClass()     // Catch: java.lang.Throwable -> L5b
-            r1 = 0
-            r3 = 0
-            if (r5 == 0) goto L2e
-            android.content.Context r5 = r5.getApplicationContext()     // Catch: java.lang.Throwable -> L25
-            if (r5 == 0) goto L2e
-            android.content.pm.PackageManager r5 = r5.getPackageManager()     // Catch: java.lang.Throwable -> L25
-            if (r5 == 0) goto L2e
-            android.content.pm.PackageInfo r5 = r5.getPackageInfo(r2, r1)     // Catch: java.lang.Throwable -> L25
-            goto L2f
-        L25:
-            r5 = move-exception
-            int r2 = kotlin.Result.$r8$clinit     // Catch: java.lang.Throwable -> L5b
-            kotlin.Result$Failure r2 = new kotlin.Result$Failure     // Catch: java.lang.Throwable -> L5b
-            r2.<init>(r5)     // Catch: java.lang.Throwable -> L5b
-            goto L30
-        L2e:
-            r5 = r3
-        L2f:
-            r2 = r5
-        L30:
-            boolean r5 = r2 instanceof kotlin.Result.Failure     // Catch: java.lang.Throwable -> L5b
-            if (r5 == 0) goto L35
-            r2 = r3
-        L35:
-            android.content.pm.PackageInfo r2 = (android.content.pm.PackageInfo) r2     // Catch: java.lang.Throwable -> L5b
-            if (r2 == 0) goto L3b
-            java.lang.String r3 = r2.versionName     // Catch: java.lang.Throwable -> L5b
-        L3b:
-            if (r3 != 0) goto L3f
-            java.lang.String r3 = ""
-        L3f:
-            com.samsung.android.smartthingsmediasdk.mediasdk.base.debug.DLog$Companion r5 = com.samsung.android.smartthingsmediasdk.mediasdk.base.debug.DLog.Companion     // Catch: java.lang.Throwable -> L5b
-            java.lang.String r2 = "MediaOutputSelectedOperationImpl"
-            java.lang.String r4 = "isSTAppVersionMediaOutputDeviceV2Supported"
-            java.lang.String r0 = r0.concat(r3)     // Catch: java.lang.Throwable -> L5b
-            r5.getClass()     // Catch: java.lang.Throwable -> L5b
-            com.samsung.android.smartthingsmediasdk.mediasdk.base.debug.DLog.Companion.i(r2, r4, r0)     // Catch: java.lang.Throwable -> L5b
-            int r5 = com.samsung.android.smartthingsmediasdk.mediasdk.base.utils.PackageUtil.compareVersion(r3)     // Catch: java.lang.Throwable -> L5b
-            if (r5 <= 0) goto L56
-            r1 = 1
-        L56:
-            java.lang.Boolean r5 = java.lang.Boolean.valueOf(r1)     // Catch: java.lang.Throwable -> L5b
-            goto L64
-        L5b:
-            r5 = move-exception
-            int r0 = kotlin.Result.$r8$clinit
-            kotlin.Result$Failure r0 = new kotlin.Result$Failure
-            r0.<init>(r5)
-            r5 = r0
-        L64:
-            java.lang.Boolean r0 = java.lang.Boolean.FALSE
-            boolean r1 = r5 instanceof kotlin.Result.Failure
-            if (r1 == 0) goto L6b
-            r5 = r0
-        L6b:
-            java.lang.Boolean r5 = (java.lang.Boolean) r5
-            boolean r5 = r5.booleanValue()
-            return r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.smartthingsmediasdk.mediasdk.manager.mediasdkoperations.mediaoutputselection.MediaOutputSelectedOperationImpl.access$isSTAppVersionMediaOutputDeviceV2Supported(com.samsung.android.smartthingsmediasdk.mediasdk.manager.mediasdkoperations.mediaoutputselection.MediaOutputSelectedOperationImpl):boolean");
+    public static final boolean access$isSTAppVersionMediaOutputDeviceV2Supported(MediaOutputSelectedOperationImpl mediaOutputSelectedOperationImpl) {
+        Object failure;
+        Object failure2;
+        PackageManager packageManager;
+        mediaOutputSelectedOperationImpl.getClass();
+        try {
+            int i = Result.$r8$clinit;
+            PackageUtil packageUtil = PackageUtil.INSTANCE;
+            Context context = mediaOutputSelectedOperationImpl.context;
+            packageUtil.getClass();
+            if (context != null) {
+                try {
+                    Context applicationContext = context.getApplicationContext();
+                    Object packageInfo = (applicationContext == null || (packageManager = applicationContext.getPackageManager()) == null) ? null : packageManager.getPackageInfo("com.samsung.android.oneconnect", 0);
+                    failure2 = packageInfo;
+                } catch (Throwable th) {
+                    int i2 = Result.$r8$clinit;
+                    failure2 = new Result.Failure(th);
+                }
+                if (failure2 instanceof Result.Failure) {
+                    failure2 = null;
+                }
+                PackageInfo packageInfo2 = (PackageInfo) failure2;
+                String str = packageInfo2 != null ? packageInfo2.versionName : null;
+                if (str == null) {
+                    str = "";
+                }
+                DLog.Companion companion = DLog.Companion;
+                String strConcat = "ST App version: ".concat(str);
+                companion.getClass();
+                DLog.Companion.i("MediaOutputSelectedOperationImpl", "isSTAppVersionMediaOutputDeviceV2Supported", strConcat);
+                failure = Boolean.valueOf(PackageUtil.compareVersion(str) > 0);
+            }
+        } catch (Throwable th2) {
+            int i3 = Result.$r8$clinit;
+            failure = new Result.Failure(th2);
+        }
+        Object obj = Boolean.FALSE;
+        if (failure instanceof Result.Failure) {
+            failure = obj;
+        }
+        return ((Boolean) failure).booleanValue();
     }
 
     public final void addMediaOutputSelectedCallback(final DeviceAudioPathViewModel$Companion$mediaoutputChanged$1$mediaOutputSelectedCallback$1 deviceAudioPathViewModel$Companion$mediaoutputChanged$1$mediaOutputSelectedCallback$1) {
-        useSafeMediaSdkSupportService(Unit.INSTANCE, new Function1() { // from class: com.samsung.android.smartthingsmediasdk.mediasdk.manager.mediasdkoperations.mediaoutputselection.MediaOutputSelectedOperationImpl$addMediaOutputSelectedCallback$1
+        useSafeMediaSdkSupportService(Unit.INSTANCE, new Function1() { // from class: com.samsung.android.smartthingsmediasdk.mediasdk.manager.mediasdkoperations.mediaoutputselection.MediaOutputSelectedOperationImpl.addMediaOutputSelectedCallback.1
             {
                 super(1);
             }
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                ((IMediaOutputService.Stub.Proxy) ((IMediaOutputService) obj)).addMediaOutputSelectedCallback(IMediaOutputSelectedCallback.this);
+            public final Object mo781invoke(Object obj) {
+                ((IMediaOutputService.Stub.Proxy) ((IMediaOutputService) obj)).addMediaOutputSelectedCallback(deviceAudioPathViewModel$Companion$mediaoutputChanged$1$mediaOutputSelectedCallback$1);
                 return Unit.INSTANCE;
             }
         });
     }
 
     public final MediaOutputDeviceDomain getCurrentMediaOutput(final String str) {
-        MediaOutputDeviceDomain mediaOutputDeviceDomain = (MediaOutputDeviceDomain) useSafeMediaSdkSupportService(null, new Function1() { // from class: com.samsung.android.smartthingsmediasdk.mediasdk.manager.mediasdkoperations.mediaoutputselection.MediaOutputSelectedOperationImpl$getCurrentMediaOutput$1
+        MediaOutputDeviceDomain mediaOutputDeviceDomain = (MediaOutputDeviceDomain) useSafeMediaSdkSupportService(null, new Function1() { // from class: com.samsung.android.smartthingsmediasdk.mediasdk.manager.mediasdkoperations.mediaoutputselection.MediaOutputSelectedOperationImpl.getCurrentMediaOutput.1
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
@@ -146,7 +116,7 @@ public final class MediaOutputSelectedOperationImpl extends AbstractMediaSdkMana
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 IMediaOutputService iMediaOutputService = (IMediaOutputService) obj;
                 if (MediaOutputSelectedOperationImpl.access$isSTAppVersionMediaOutputDeviceV2Supported(MediaOutputSelectedOperationImpl.this)) {
                     MediaOutputDeviceV2 currentMediaOutputV2 = ((IMediaOutputService.Stub.Proxy) iMediaOutputService).getCurrentMediaOutputV2(str);
@@ -162,7 +132,7 @@ public final class MediaOutputSelectedOperationImpl extends AbstractMediaSdkMana
     }
 
     public final List getMediaOutputDevice(final String str) {
-        List list = (List) useSafeMediaSdkSupportService(EmptyList.INSTANCE, new Function1() { // from class: com.samsung.android.smartthingsmediasdk.mediasdk.manager.mediasdkoperations.mediaoutputselection.MediaOutputSelectedOperationImpl$getMediaOutputDevice$1
+        List list = (List) useSafeMediaSdkSupportService(EmptyList.INSTANCE, new Function1() { // from class: com.samsung.android.smartthingsmediasdk.mediasdk.manager.mediasdkoperations.mediaoutputselection.MediaOutputSelectedOperationImpl.getMediaOutputDevice.1
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
@@ -170,7 +140,7 @@ public final class MediaOutputSelectedOperationImpl extends AbstractMediaSdkMana
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 IMediaOutputService iMediaOutputService = (IMediaOutputService) obj;
                 if (MediaOutputSelectedOperationImpl.access$isSTAppVersionMediaOutputDeviceV2Supported(MediaOutputSelectedOperationImpl.this)) {
                     List<MediaOutputDeviceV2> mediaOutputDevicesV2 = ((IMediaOutputService.Stub.Proxy) iMediaOutputService).getMediaOutputDevicesV2(str);
@@ -199,22 +169,22 @@ public final class MediaOutputSelectedOperationImpl extends AbstractMediaSdkMana
     }
 
     public final void removeMediaOutputSelectedCallback(final IMediaOutputSelectedCallback iMediaOutputSelectedCallback) {
-        useSafeMediaSdkSupportService(Unit.INSTANCE, new Function1() { // from class: com.samsung.android.smartthingsmediasdk.mediasdk.manager.mediasdkoperations.mediaoutputselection.MediaOutputSelectedOperationImpl$removeMediaOutputSelectedCallback$1
+        useSafeMediaSdkSupportService(Unit.INSTANCE, new Function1() { // from class: com.samsung.android.smartthingsmediasdk.mediasdk.manager.mediasdkoperations.mediaoutputselection.MediaOutputSelectedOperationImpl.removeMediaOutputSelectedCallback.1
             {
                 super(1);
             }
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                ((IMediaOutputService.Stub.Proxy) ((IMediaOutputService) obj)).removeMediaOutputSelectedCallback(IMediaOutputSelectedCallback.this);
+            public final Object mo781invoke(Object obj) {
+                ((IMediaOutputService.Stub.Proxy) ((IMediaOutputService) obj)).removeMediaOutputSelectedCallback(iMediaOutputSelectedCallback);
                 return Unit.INSTANCE;
             }
         });
     }
 
     public final void selectMediaOutput(final String str, final String str2) {
-        useSafeMediaSdkSupportService(Unit.INSTANCE, new Function1() { // from class: com.samsung.android.smartthingsmediasdk.mediasdk.manager.mediasdkoperations.mediaoutputselection.MediaOutputSelectedOperationImpl$selectMediaOutput$1
+        useSafeMediaSdkSupportService(Unit.INSTANCE, new Function1() { // from class: com.samsung.android.smartthingsmediasdk.mediasdk.manager.mediasdkoperations.mediaoutputselection.MediaOutputSelectedOperationImpl.selectMediaOutput.1
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
@@ -222,7 +192,7 @@ public final class MediaOutputSelectedOperationImpl extends AbstractMediaSdkMana
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 ((IMediaOutputService.Stub.Proxy) ((IMediaOutputService) obj)).selectMediaOutput(str, str2);
                 return Unit.INSTANCE;
             }

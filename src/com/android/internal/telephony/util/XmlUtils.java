@@ -36,7 +36,7 @@ public final class XmlUtils {
         } while (next != 1);
     }
 
-    public static boolean nextElementWithin(XmlPullParser xmlPullParser, int i) throws IOException, XmlPullParserException {
+    public static boolean nextElementWithin(XmlPullParser xmlPullParser, int i) throws XmlPullParserException, IOException {
         while (true) {
             int next = xmlPullParser.next();
             if (next == 1) {

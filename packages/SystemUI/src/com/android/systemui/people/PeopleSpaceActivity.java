@@ -9,28 +9,112 @@ import androidx.compose.runtime.ComposerImpl;
 import androidx.compose.runtime.ComposerKt;
 import androidx.compose.runtime.internal.ComposableLambdaImpl;
 import androidx.compose.runtime.internal.ComposableLambdaKt;
+import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleKt;
+import androidx.lifecycle.RepeatOnLifecycleKt;
 import androidx.lifecycle.ViewModelProvider;
 import com.android.app.tracing.coroutines.CoroutineTracingKt;
 import com.android.compose.theme.PlatformThemeKt;
+import com.android.systemui.people.ui.compose.PeopleScreenKt;
 import com.android.systemui.people.ui.viewmodel.PeopleViewModel;
+import kotlin.ResultKt;
 import kotlin.Unit;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
+import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
+import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class PeopleSpaceActivity extends ComponentActivity {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final PeopleViewModel.Factory viewModelFactory;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
         }
 
         private Companion() {
+        }
+    }
+
+    /* renamed from: com.android.systemui.people.PeopleSpaceActivity$onCreate$1, reason: invalid class name */
+    final class AnonymousClass1 extends SuspendLambda implements Function2 {
+        final /* synthetic */ PeopleViewModel $viewModel;
+        int label;
+
+        /* renamed from: com.android.systemui.people.PeopleSpaceActivity$onCreate$1$1, reason: invalid class name and collision with other inner class name */
+        final class C03771 extends SuspendLambda implements Function2 {
+            final /* synthetic */ PeopleViewModel $viewModel;
+            int label;
+
+            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+            public C03771(PeopleViewModel peopleViewModel, Continuation continuation) {
+                super(2, continuation);
+                this.$viewModel = peopleViewModel;
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Continuation create(Object obj, Continuation continuation) {
+                return new C03771(this.$viewModel, continuation);
+            }
+
+            @Override // kotlin.jvm.functions.Function2
+            public final Object invoke(Object obj, Object obj2) {
+                return ((C03771) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) {
+                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                if (this.label != 0) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+                this.$viewModel.onTileRefreshRequested.invoke();
+                return Unit.INSTANCE;
+            }
+        }
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public AnonymousClass1(PeopleViewModel peopleViewModel, Continuation continuation) {
+            super(2, continuation);
+            this.$viewModel = peopleViewModel;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return PeopleSpaceActivity.this.new AnonymousClass1(this.$viewModel, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((AnonymousClass1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                PeopleSpaceActivity peopleSpaceActivity = PeopleSpaceActivity.this;
+                Lifecycle.State state = Lifecycle.State.RESUMED;
+                C03771 c03771 = new C03771(this.$viewModel, null);
+                this.label = 1;
+                if (RepeatOnLifecycleKt.repeatOnLifecycle(peopleSpaceActivity, state, c03771, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            return Unit.INSTANCE;
         }
     }
 
@@ -48,91 +132,85 @@ public final class PeopleSpaceActivity extends ComponentActivity {
         EdgeToEdge.enable$default(this);
         setResult(0);
         final PeopleViewModel peopleViewModel = (PeopleViewModel) new ViewModelProvider(this, this.viewModelFactory).get(PeopleViewModel.class);
-        peopleViewModel.onWidgetIdChanged.mo779invoke(Integer.valueOf(getIntent().getIntExtra("appWidgetId", 0)));
-        CoroutineTracingKt.launchTraced$default(LifecycleKt.getCoroutineScope(this.lifecycleRegistry), null, null, new PeopleSpaceActivity$onCreate$1(this, peopleViewModel, null), 7);
-        ComponentActivityKt.setContent$default(this, new ComposableLambdaImpl(1140881722, true, new Function2() { // from class: com.android.systemui.people.PeopleSpaceActivity$onCreate$2
+        peopleViewModel.onWidgetIdChanged.mo781invoke(Integer.valueOf(getIntent().getIntExtra("appWidgetId", 0)));
+        CoroutineTracingKt.launchTraced$default(LifecycleKt.getCoroutineScope(this.lifecycleRegistry), null, null, new AnonymousClass1(peopleViewModel, null), 7);
+        ComponentActivityKt.setContent$default(this, new ComposableLambdaImpl(1140881722, true, new Function2() { // from class: com.android.systemui.people.PeopleSpaceActivity.onCreate.2
+            /* JADX WARN: Removed duplicated region for block: B:8:0x001b  */
             @Override // kotlin.jvm.functions.Function2
+            /*
+                Code decompiled incorrectly, please refer to instructions dump.
+            */
             public final Object invoke(Object obj, Object obj2) {
                 Composer composer = (Composer) obj;
                 if ((((Number) obj2).intValue() & 3) == 2) {
                     ComposerImpl composerImpl = (ComposerImpl) composer;
                     if (composerImpl.getSkipping()) {
                         composerImpl.skipToGroupEnd();
-                        return Unit.INSTANCE;
+                    } else {
+                        if (ComposerKt.isTraceInProgress()) {
+                            ComposerKt.traceEventStart("com.android.systemui.people.PeopleSpaceActivity.onCreate.<anonymous> (PeopleSpaceActivity.kt:64)");
+                        }
+                        final PeopleViewModel peopleViewModel2 = peopleViewModel;
+                        final PeopleSpaceActivity peopleSpaceActivity = this;
+                        PlatformThemeKt.PlatformTheme(false, ComposableLambdaKt.rememberComposableLambda(-566938192, new Function2() { // from class: com.android.systemui.people.PeopleSpaceActivity.onCreate.2.1
+                            /* JADX WARN: Removed duplicated region for block: B:15:0x0043  */
+                            /* JADX WARN: Removed duplicated region for block: B:8:0x001b  */
+                            @Override // kotlin.jvm.functions.Function2
+                            /*
+                                Code decompiled incorrectly, please refer to instructions dump.
+                            */
+                            public final Object invoke(Object obj3, Object obj4) {
+                                Composer composer2 = (Composer) obj3;
+                                if ((((Number) obj4).intValue() & 3) == 2) {
+                                    ComposerImpl composerImpl2 = (ComposerImpl) composer2;
+                                    if (composerImpl2.getSkipping()) {
+                                        composerImpl2.skipToGroupEnd();
+                                    } else {
+                                        if (ComposerKt.isTraceInProgress()) {
+                                            ComposerKt.traceEventStart("com.android.systemui.people.PeopleSpaceActivity.onCreate.<anonymous>.<anonymous> (PeopleSpaceActivity.kt:64)");
+                                        }
+                                        ComposerImpl composerImpl3 = (ComposerImpl) composer2;
+                                        composerImpl3.startReplaceGroup(-620053449);
+                                        final PeopleSpaceActivity peopleSpaceActivity2 = peopleSpaceActivity;
+                                        boolean zChangedInstance = composerImpl3.changedInstance(peopleSpaceActivity2);
+                                        Object objRememberedValue = composerImpl3.rememberedValue();
+                                        if (!zChangedInstance) {
+                                            Composer.Companion.getClass();
+                                            if (objRememberedValue == Composer.Companion.Empty) {
+                                                objRememberedValue = new Function1() { // from class: com.android.systemui.people.PeopleSpaceActivity$onCreate$2$1$$ExternalSyntheticLambda0
+                                                    @Override // kotlin.jvm.functions.Function1
+                                                    /* renamed from: invoke */
+                                                    public final Object mo781invoke(Object obj5) {
+                                                        PeopleViewModel.Result result = (PeopleViewModel.Result) obj5;
+                                                        int i = PeopleSpaceActivity.$r8$clinit;
+                                                        PeopleSpaceActivity peopleSpaceActivity3 = peopleSpaceActivity2;
+                                                        peopleSpaceActivity3.getClass();
+                                                        if (result instanceof PeopleViewModel.Result.Success) {
+                                                            peopleSpaceActivity3.setResult(-1, ((PeopleViewModel.Result.Success) result).data);
+                                                        } else {
+                                                            peopleSpaceActivity3.setResult(0);
+                                                        }
+                                                        peopleSpaceActivity3.finish();
+                                                        return Unit.INSTANCE;
+                                                    }
+                                                };
+                                                composerImpl3.updateRememberedValue(objRememberedValue);
+                                            }
+                                            composerImpl3.end(false);
+                                            PeopleScreenKt.PeopleScreen(peopleViewModel2, (Function1) objRememberedValue, null, composerImpl3, 0);
+                                            if (ComposerKt.isTraceInProgress()) {
+                                                ComposerKt.traceEventEnd();
+                                            }
+                                        }
+                                    }
+                                }
+                                return Unit.INSTANCE;
+                            }
+                        }, composer), composer, 48, 1);
+                        if (ComposerKt.isTraceInProgress()) {
+                            ComposerKt.traceEventEnd();
+                        }
                     }
-                }
-                if (ComposerKt.isTraceInProgress()) {
-                    ComposerKt.traceEventStart("com.android.systemui.people.PeopleSpaceActivity.onCreate.<anonymous> (PeopleSpaceActivity.kt:64)");
-                }
-                final PeopleViewModel peopleViewModel2 = PeopleViewModel.this;
-                final PeopleSpaceActivity peopleSpaceActivity = this;
-                PlatformThemeKt.PlatformTheme(false, ComposableLambdaKt.rememberComposableLambda(-566938192, new Function2() { // from class: com.android.systemui.people.PeopleSpaceActivity$onCreate$2.1
-                    /* JADX WARN: Code restructure failed: missing block: B:15:0x0041, code lost:
-                    
-                        if (r1 == androidx.compose.runtime.Composer.Companion.Empty) goto L15;
-                     */
-                    @Override // kotlin.jvm.functions.Function2
-                    /*
-                        Code decompiled incorrectly, please refer to instructions dump.
-                        To view partially-correct code enable 'Show inconsistent code' option in preferences
-                    */
-                    public final java.lang.Object invoke(java.lang.Object r3, java.lang.Object r4) {
-                        /*
-                            r2 = this;
-                            androidx.compose.runtime.Composer r3 = (androidx.compose.runtime.Composer) r3
-                            java.lang.Number r4 = (java.lang.Number) r4
-                            int r4 = r4.intValue()
-                            r4 = r4 & 3
-                            r0 = 2
-                            if (r4 != r0) goto L1b
-                            r4 = r3
-                            androidx.compose.runtime.ComposerImpl r4 = (androidx.compose.runtime.ComposerImpl) r4
-                            boolean r0 = r4.getSkipping()
-                            if (r0 != 0) goto L17
-                            goto L1b
-                        L17:
-                            r4.skipToGroupEnd()
-                            goto L60
-                        L1b:
-                            boolean r4 = androidx.compose.runtime.ComposerKt.isTraceInProgress()
-                            if (r4 == 0) goto L26
-                            java.lang.String r4 = "com.android.systemui.people.PeopleSpaceActivity.onCreate.<anonymous>.<anonymous> (PeopleSpaceActivity.kt:64)"
-                            androidx.compose.runtime.ComposerKt.traceEventStart(r4)
-                        L26:
-                            androidx.compose.runtime.ComposerImpl r3 = (androidx.compose.runtime.ComposerImpl) r3
-                            r4 = -620053449(0xffffffffdb0abc37, float:-3.905049E16)
-                            r3.startReplaceGroup(r4)
-                            com.android.systemui.people.PeopleSpaceActivity r4 = r2
-                            boolean r0 = r3.changedInstance(r4)
-                            java.lang.Object r1 = r3.rememberedValue()
-                            if (r0 != 0) goto L43
-                            androidx.compose.runtime.Composer$Companion r0 = androidx.compose.runtime.Composer.Companion
-                            r0.getClass()
-                            androidx.compose.runtime.Composer$Companion$Empty$1 r0 = androidx.compose.runtime.Composer.Companion.Empty
-                            if (r1 != r0) goto L4b
-                        L43:
-                            com.android.systemui.people.PeopleSpaceActivity$onCreate$2$1$$ExternalSyntheticLambda0 r1 = new com.android.systemui.people.PeopleSpaceActivity$onCreate$2$1$$ExternalSyntheticLambda0
-                            r1.<init>()
-                            r3.updateRememberedValue(r1)
-                        L4b:
-                            kotlin.jvm.functions.Function1 r1 = (kotlin.jvm.functions.Function1) r1
-                            r4 = 0
-                            r3.end(r4)
-                            com.android.systemui.people.ui.viewmodel.PeopleViewModel r2 = com.android.systemui.people.ui.viewmodel.PeopleViewModel.this
-                            r0 = 0
-                            com.android.systemui.people.ui.compose.PeopleScreenKt.PeopleScreen(r2, r1, r0, r3, r4)
-                            boolean r2 = androidx.compose.runtime.ComposerKt.isTraceInProgress()
-                            if (r2 == 0) goto L60
-                            androidx.compose.runtime.ComposerKt.traceEventEnd()
-                        L60:
-                            kotlin.Unit r2 = kotlin.Unit.INSTANCE
-                            return r2
-                        */
-                        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.people.PeopleSpaceActivity$onCreate$2.AnonymousClass1.invoke(java.lang.Object, java.lang.Object):java.lang.Object");
-                    }
-                }, composer), composer, 48, 1);
-                if (ComposerKt.isTraceInProgress()) {
-                    ComposerKt.traceEventEnd();
                 }
                 return Unit.INSTANCE;
             }

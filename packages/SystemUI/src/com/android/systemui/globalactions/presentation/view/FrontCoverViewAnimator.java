@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +24,6 @@ import com.samsung.android.globalactions.util.ConditionChecker;
 import com.samsung.android.globalactions.util.HandlerUtil;
 import com.samsung.android.globalactions.util.LogWrapper;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class FrontCoverViewAnimator implements GlobalActionsAnimator {
     public FrontCoverContentView.AnonymousClass2 mCallback;
@@ -74,7 +74,7 @@ public class FrontCoverViewAnimator implements GlobalActionsAnimator {
             this.mSelectedActionView.getLocationOnScreen(iArr);
             f = iArr[1];
         }
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(viewGroup, "y", y, f);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(viewGroup, "y", y, f);
         ViewGroup viewGroup2 = this.mConfirmIconLabelView;
         float x = viewGroup2.getX();
         if (z) {
@@ -84,16 +84,16 @@ public class FrontCoverViewAnimator implements GlobalActionsAnimator {
             ((ViewGroup) this.mSelectedActionView.findViewById(FrontCoverContentView.this.mResourceFactory.get(ResourceType.ID_COVER_BTN_BACKGROUND))).getLocationOnScreen(iArr2);
             paddingLeft = iArr2[0] - this.mRootView.getPaddingLeft();
         }
-        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(viewGroup2, "x", x, paddingLeft);
-        ObjectAnimator ofFloat3 = ObjectAnimator.ofFloat(this.mConfirmDescriptionView, "alpha", z ? 0.0f : 1.0f, z ? 1.0f : 0.0f);
-        ofFloat3.setDuration(200L);
+        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(viewGroup2, "x", x, paddingLeft);
+        ObjectAnimator objectAnimatorOfFloat3 = ObjectAnimator.ofFloat(this.mConfirmDescriptionView, "alpha", z ? 0.0f : 1.0f, z ? 1.0f : 0.0f);
+        objectAnimatorOfFloat3.setDuration(200L);
         if (FrontCoverContentView.this.mIsIconOnly) {
             ViewGroup viewGroup3 = this.mConfirmIconLabelView;
-            ObjectAnimator ofFloat4 = ObjectAnimator.ofFloat(viewGroup3, "scaleX", viewGroup3.getScaleX(), z ? 0.75f : 1.0f);
+            ObjectAnimator objectAnimatorOfFloat4 = ObjectAnimator.ofFloat(viewGroup3, "scaleX", viewGroup3.getScaleX(), z ? 0.75f : 1.0f);
             ViewGroup viewGroup4 = this.mConfirmIconLabelView;
-            animatorSet.playTogether(ofFloat, ofFloat2, ofFloat3, ofFloat4, ObjectAnimator.ofFloat(viewGroup4, "scaleY", viewGroup4.getScaleY(), z ? 0.75f : 1.0f));
+            animatorSet.playTogether(objectAnimatorOfFloat, objectAnimatorOfFloat2, objectAnimatorOfFloat3, objectAnimatorOfFloat4, ObjectAnimator.ofFloat(viewGroup4, "scaleY", viewGroup4.getScaleY(), z ? 0.75f : 1.0f));
         } else {
-            animatorSet.playTogether(ofFloat, ofFloat2, ofFloat3);
+            animatorSet.playTogether(objectAnimatorOfFloat, objectAnimatorOfFloat2, objectAnimatorOfFloat3);
         }
         animatorSet.setInterpolator(new DecelerateInterpolator());
         animatorSet.setDuration(200L);
@@ -157,7 +157,7 @@ public class FrontCoverViewAnimator implements GlobalActionsAnimator {
         return false;
     }
 
-    public final void startDismissAnimation(boolean z) {
+    public final void startDismissAnimation(boolean z) throws Resources.NotFoundException {
         this.mViewStateController.setState(ViewAnimationState.DISMISS_ANIMATE);
         FrontCoverContentView frontCoverContentView = FrontCoverContentView.this;
         frontCoverContentView.mAdapter.mIsConfirmView = false;
@@ -189,12 +189,12 @@ public class FrontCoverViewAnimator implements GlobalActionsAnimator {
             this.mConfirmDescriptionView.setTextSize(this.mContext.getResources().getDimensionPixelOffset(R.dimen.global_actions_camera_view_cover_noti_font_size));
             this.mConfirmDescriptionView.setTextColor(this.mContext.getResources().getColor(R.color.sec_global_actions_camera_view_cover_noti_text));
             if (FrontCoverContentView.this.mSelectedViewModel.getActionInfo().getName() == "power") {
-                this.mConfirmDescriptionView.setText(this.mContext.getResources().getString(android.R.string.minute));
+                this.mConfirmDescriptionView.setText(this.mContext.getResources().getString(android.R.string.minutes));
             } else {
-                this.mConfirmDescriptionView.setText(this.mContext.getResources().getString(android.R.string.minute_picker_description));
+                this.mConfirmDescriptionView.setText(this.mContext.getResources().getString(android.R.string.mismatchPin));
             }
         } else {
-            this.mConfirmDescriptionView.setText(this.mContext.getResources().getString(android.R.string.minutes));
+            this.mConfirmDescriptionView.setText(this.mContext.getResources().getString(android.R.string.mmcc_authentication_reject));
             if (!FrontCoverContentView.this.mIsIconOnly) {
                 this.mConfirmView.findViewById(this.mResourceFactory.get(ResourceType.ID_COVER_ANIM)).setVisibility(0);
                 ((TextView) this.mConfirmView.findViewById(this.mResourceFactory.get(resourceType))).setTextSize(0, 30.0f);
@@ -204,7 +204,7 @@ public class FrontCoverViewAnimator implements GlobalActionsAnimator {
         this.mHandler.postDelayed(new Runnable() { // from class: com.android.systemui.globalactions.presentation.view.FrontCoverViewAnimator$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
-                FrontCoverViewAnimator.this.mViewStateController.setState(ViewAnimationState.IDLE);
+                this.f$0.mViewStateController.setState(ViewAnimationState.IDLE);
             }
         }, 200L);
     }
@@ -232,14 +232,14 @@ public class FrontCoverViewAnimator implements GlobalActionsAnimator {
         FrontCoverContentItemView frontCoverContentItemView = new FrontCoverContentItemView(frontCoverContentView.mDialog.getContext(), frontCoverContentView.mSelectedViewModel, frontCoverContentView.mConfirmView, frontCoverContentView.mIsIconOnly, frontCoverContentView.mIsCameraViewCover, frontCoverContentView.mResourceFactory);
         frontCoverContentView.mConfirmView.removeAllViews();
         ViewGroup viewGroup = frontCoverContentView.mConfirmView;
-        View inflate = LayoutInflater.from(frontCoverContentItemView.mContext).inflate(frontCoverContentItemView.mResourceFactory.get(ResourceType.LAYOUT_FRONT_COVER_ITEM), frontCoverContentItemView.mParent, false);
-        frontCoverContentItemView.setViewAttrs(inflate, true);
-        inflate.setOnClickListener(new FrontCoverContentItemView$$ExternalSyntheticLambda1());
-        inflate.setClickable(false);
+        View viewInflate = LayoutInflater.from(frontCoverContentItemView.mContext).inflate(frontCoverContentItemView.mResourceFactory.get(ResourceType.LAYOUT_FRONT_COVER_ITEM), frontCoverContentItemView.mParent, false);
+        frontCoverContentItemView.setViewAttrs(viewInflate, true);
+        viewInflate.setOnClickListener(new FrontCoverContentItemView$$ExternalSyntheticLambda1());
+        viewInflate.setClickable(false);
         ResourceFactory resourceFactory = frontCoverContentItemView.mResourceFactory;
         ResourceType resourceType = ResourceType.ID_COVER_TEXT;
-        ((TextView) inflate.findViewById(resourceFactory.get(resourceType))).setVisibility(0);
-        viewGroup.addView(inflate);
+        ((TextView) viewInflate.findViewById(resourceFactory.get(resourceType))).setVisibility(0);
+        viewGroup.addView(viewInflate);
         frontCoverContentView.mConfirmView.setVisibility(0);
         FrontCoverContentView frontCoverContentView2 = FrontCoverContentView.this;
         ViewGroup viewGroup2 = frontCoverContentView2.mConfirmView;
@@ -252,7 +252,7 @@ public class FrontCoverViewAnimator implements GlobalActionsAnimator {
         this.mViewTreeObserverListener = new ViewTreeObserver.OnGlobalLayoutListener() { // from class: com.android.systemui.globalactions.presentation.view.FrontCoverViewAnimator$$ExternalSyntheticLambda0
             @Override // android.view.ViewTreeObserver.OnGlobalLayoutListener
             public final void onGlobalLayout() {
-                FrontCoverViewAnimator frontCoverViewAnimator = FrontCoverViewAnimator.this;
+                FrontCoverViewAnimator frontCoverViewAnimator = this.f$0;
                 frontCoverViewAnimator.mConfirmView.getViewTreeObserver().removeOnGlobalLayoutListener(frontCoverViewAnimator.mViewTreeObserverListener);
                 frontCoverViewAnimator.mConfirmIconLabelView.getLocationOnScreen(new int[2]);
                 frontCoverViewAnimator.mOriginalConfirmLocationX = r2[0];

@@ -37,13 +37,13 @@ public final class CellIdentityTdscdma {
 
     public static final ArrayList<CellIdentityTdscdma> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<CellIdentityTdscdma> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 144, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 144, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             CellIdentityTdscdma cellIdentityTdscdma = new CellIdentityTdscdma();
-            cellIdentityTdscdma.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 144);
+            cellIdentityTdscdma.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 144);
             arrayList.add(cellIdentityTdscdma);
         }
         return arrayList;
@@ -52,13 +52,13 @@ public final class CellIdentityTdscdma {
     public final void readEmbeddedFromParcel(HwParcel hwParcel, HwBlob hwBlob, long j) {
         this.base.readEmbeddedFromParcel(hwParcel, hwBlob, j);
         int int32 = hwBlob.getInt32(96 + j);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 16, hwBlob.handle(), j + 88, true);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 16, hwBlob.handle(), j + 88, true);
         this.additionalPlmns.clear();
         for (int i = 0; i < int32; i++) {
             new String();
             int i2 = i * 16;
-            String string = readEmbeddedBuffer.getString(i2);
-            hwParcel.readEmbeddedBuffer(string.getBytes().length + 1, readEmbeddedBuffer.handle(), i2, false);
+            String string = embeddedBuffer.getString(i2);
+            hwParcel.readEmbeddedBuffer(string.getBytes().length + 1, embeddedBuffer.handle(), i2, false);
             this.additionalPlmns.add(string);
         }
         this.optionalCsgInfo.readEmbeddedFromParcel(hwParcel, hwBlob, j + 104);

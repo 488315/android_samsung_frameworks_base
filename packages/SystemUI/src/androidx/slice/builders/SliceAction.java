@@ -8,7 +8,6 @@ import androidx.slice.Slice;
 import androidx.slice.core.SliceActionImpl;
 import com.samsung.android.knox.ucm.core.UniversalCredentialUtil;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SliceAction implements androidx.slice.core.SliceAction {
     public final SliceActionImpl mSliceAction;
@@ -29,13 +28,13 @@ public class SliceAction implements androidx.slice.core.SliceAction {
 
     public final void setPrimaryAction(Slice.Builder builder) {
         SliceActionImpl sliceActionImpl = this.mSliceAction;
-        PendingIntent pendingIntent = sliceActionImpl.mAction;
-        if (pendingIntent == null) {
-            pendingIntent = sliceActionImpl.mActionItem.getAction();
+        PendingIntent action = sliceActionImpl.mAction;
+        if (action == null) {
+            action = sliceActionImpl.mActionItem.getAction();
         }
-        Slice.Builder buildSliceContent = sliceActionImpl.buildSliceContent(builder);
-        buildSliceContent.addHints("shortcut", UniversalCredentialUtil.AGENT_TITLE);
-        builder.addAction(pendingIntent, buildSliceContent.build(), sliceActionImpl.getSubtype());
+        Slice.Builder builderBuildSliceContent = sliceActionImpl.buildSliceContent(builder);
+        builderBuildSliceContent.addHints("shortcut", UniversalCredentialUtil.AGENT_TITLE);
+        builder.addAction(action, builderBuildSliceContent.build(), sliceActionImpl.getSubtype());
     }
 
     /* JADX WARN: 'this' call moved to the top of the method (can break code semantics) */

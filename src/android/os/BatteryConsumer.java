@@ -376,17 +376,17 @@ public abstract class BatteryConsumer {
     }
 
     private boolean writeStatsProtoImpl(ProtoOutputStream protoOutputStream, long j) {
-        long convertMahToDeciCoulombs = convertMahToDeciCoulombs(getConsumedPower());
-        if (convertMahToDeciCoulombs == 0) {
+        long jConvertMahToDeciCoulombs = convertMahToDeciCoulombs(getConsumedPower());
+        if (jConvertMahToDeciCoulombs == 0) {
             return false;
         }
         if (protoOutputStream == null) {
             return true;
         }
-        long start = protoOutputStream.start(j);
-        protoOutputStream.write(1112396529665L, convertMahToDeciCoulombs);
+        long jStart = protoOutputStream.start(j);
+        protoOutputStream.write(1112396529665L, jConvertMahToDeciCoulombs);
         this.mPowerComponents.writeStatsProto(protoOutputStream);
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
         return true;
     }
 
@@ -526,17 +526,17 @@ public abstract class BatteryConsumer {
                     int i8 = 0;
                     while (i8 < 3) {
                         if (z3 || i8 == 0) {
-                            int i9 = i6;
-                            int i10 = 0;
+                            int iAddKeys = i6;
+                            int i9 = 0;
                             while (true) {
                                 int[] iArr = this.powerComponentIds;
-                                if (i10 >= iArr.length) {
+                                if (i9 >= iArr.length) {
                                     break;
                                 }
-                                i9 = this.addKeys(arrayList, z, iArr[i10], i7, i8, i9);
-                                i10++;
+                                iAddKeys = this.addKeys(arrayList, z, iArr[i9], i7, i8, iAddKeys);
+                                i9++;
                             }
-                            i6 = i9;
+                            i6 = iAddKeys;
                         }
                         i8++;
                         this = this;
@@ -654,7 +654,7 @@ public abstract class BatteryConsumer {
 
         @Deprecated
         public T setConsumedPower(int i, double d) {
-            return setConsumedPower(i, d, 1);
+            return (T) setConsumedPower(i, d, 1);
         }
 
         /* JADX WARN: Multi-variable type inference failed */

@@ -32,35 +32,34 @@ public class DefaultDialerManager {
 
     public static boolean setDefaultDialerApplication(Context context, String str, int i) {
         String str2;
-        final CompletableFuture completableFuture;
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
-                completableFuture = new CompletableFuture();
+                final CompletableFuture completableFuture = new CompletableFuture();
                 str2 = str;
-            } catch (InterruptedException | ExecutionException | TimeoutException e) {
-                e = e;
-                str2 = str;
+                try {
+                    ((RoleManager) context.getSystemService(RoleManager.class)).addRoleHolderAsUser("android.app.role.DIALER", str2, 0, UserHandle.of(i), AsyncTask.THREAD_POOL_EXECUTOR, new Consumer() { // from class: android.telecom.DefaultDialerManager$$ExternalSyntheticLambda0
+                        @Override // java.util.function.Consumer
+                        public final void accept(Object obj) {
+                            DefaultDialerManager.lambda$setDefaultDialerApplication$0(completableFuture, (Boolean) obj);
+                        }
+                    });
+                    completableFuture.get(5L, TimeUnit.SECONDS);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
+                    return true;
+                } catch (InterruptedException | ExecutionException | TimeoutException e) {
+                    e = e;
+                    Slog.e(TAG, "Failed to set default dialer to " + str2 + " for user " + i, e);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
+                    return false;
+                }
+            } catch (Throwable th) {
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
+                throw th;
             }
-            try {
-                ((RoleManager) context.getSystemService(RoleManager.class)).addRoleHolderAsUser("android.app.role.DIALER", str2, 0, UserHandle.of(i), AsyncTask.THREAD_POOL_EXECUTOR, new Consumer() { // from class: android.telecom.DefaultDialerManager$$ExternalSyntheticLambda0
-                    @Override // java.util.function.Consumer
-                    public final void accept(Object obj) {
-                        DefaultDialerManager.lambda$setDefaultDialerApplication$0(completableFuture, (Boolean) obj);
-                    }
-                });
-                completableFuture.get(5L, TimeUnit.SECONDS);
-                Binder.restoreCallingIdentity(clearCallingIdentity);
-                return true;
-            } catch (InterruptedException | ExecutionException | TimeoutException e2) {
-                e = e2;
-                Slog.e(TAG, "Failed to set default dialer to " + str2 + " for user " + i, e);
-                Binder.restoreCallingIdentity(clearCallingIdentity);
-                return false;
-            }
-        } catch (Throwable th) {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
-            throw th;
+        } catch (InterruptedException | ExecutionException | TimeoutException e2) {
+            e = e2;
+            str2 = str;
         }
     }
 
@@ -77,18 +76,18 @@ public class DefaultDialerManager {
     }
 
     public static String getDefaultDialerApplication(Context context, int i) {
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             return (String) CollectionUtils.firstOrNull(((RoleManager) context.getSystemService(RoleManager.class)).getRoleHoldersAsUser("android.app.role.DIALER", UserHandle.of(i)));
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
     public static List<String> getInstalledDialerApplications(Context context, int i) {
-        List<ResolveInfo> queryIntentActivitiesAsUser = context.getPackageManager().queryIntentActivitiesAsUser(new Intent(Intent.ACTION_DIAL), 0, i);
+        List<ResolveInfo> listQueryIntentActivitiesAsUser = context.getPackageManager().queryIntentActivitiesAsUser(new Intent(Intent.ACTION_DIAL), 0, i);
         ArrayList arrayList = new ArrayList();
-        for (ResolveInfo resolveInfo : queryIntentActivitiesAsUser) {
+        for (ResolveInfo resolveInfo : listQueryIntentActivitiesAsUser) {
             ActivityInfo activityInfo = resolveInfo.activityInfo;
             if (activityInfo != null && !arrayList.contains(activityInfo.packageName) && resolveInfo.targetUserId == -2) {
                 arrayList.add(activityInfo.packageName);
@@ -116,10 +115,10 @@ public class DefaultDialerManager {
             return new ArrayList();
         }
         ArrayList arrayList = new ArrayList();
-        List<ResolveInfo> queryIntentActivitiesAsUser = context.getPackageManager().queryIntentActivitiesAsUser(intent, 0, i);
-        int size = queryIntentActivitiesAsUser.size();
+        List<ResolveInfo> listQueryIntentActivitiesAsUser = context.getPackageManager().queryIntentActivitiesAsUser(intent, 0, i);
+        int size = listQueryIntentActivitiesAsUser.size();
         for (int i2 = 0; i2 < size; i2++) {
-            ActivityInfo activityInfo = queryIntentActivitiesAsUser.get(i2).activityInfo;
+            ActivityInfo activityInfo = listQueryIntentActivitiesAsUser.get(i2).activityInfo;
             if (activityInfo != null && list.contains(activityInfo.packageName) && !arrayList.contains(activityInfo.packageName)) {
                 arrayList.add(activityInfo.packageName);
             }

@@ -70,9 +70,9 @@ public interface ICapabilityExchangeEventListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ICapabilityExchangeEventListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ICapabilityExchangeEventListener)) {
-                return (ICapabilityExchangeEventListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ICapabilityExchangeEventListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ICapabilityExchangeEventListener)) {
+                return (ICapabilityExchangeEventListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -108,9 +108,9 @@ public interface ICapabilityExchangeEventListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onRequestPublishCapabilities(readInt);
+                onRequestPublishCapabilities(i3);
             } else if (i == 2) {
                 onUnpublish();
             } else if (i == 3) {
@@ -119,10 +119,10 @@ public interface ICapabilityExchangeEventListener extends IInterface {
                 onPublishUpdated(sipDetails);
             } else if (i == 4) {
                 Uri uri = (Uri) parcel.readTypedObject(Uri.CREATOR);
-                ArrayList<String> createStringArrayList = parcel.createStringArrayList();
-                IOptionsRequestCallback asInterface = IOptionsRequestCallback.Stub.asInterface(parcel.readStrongBinder());
+                ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
+                IOptionsRequestCallback iOptionsRequestCallbackAsInterface = IOptionsRequestCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                onRemoteCapabilityRequest(uri, createStringArrayList, asInterface);
+                onRemoteCapabilityRequest(uri, arrayListCreateStringArrayList, iOptionsRequestCallbackAsInterface);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -147,50 +147,50 @@ public interface ICapabilityExchangeEventListener extends IInterface {
 
             @Override // android.telephony.ims.aidl.ICapabilityExchangeEventListener
             public void onRequestPublishCapabilities(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICapabilityExchangeEventListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICapabilityExchangeEventListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.ICapabilityExchangeEventListener
             public void onUnpublish() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICapabilityExchangeEventListener.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICapabilityExchangeEventListener.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.ICapabilityExchangeEventListener
             public void onPublishUpdated(SipDetails sipDetails) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICapabilityExchangeEventListener.DESCRIPTOR);
-                    obtain.writeTypedObject(sipDetails, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICapabilityExchangeEventListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(sipDetails, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ims.aidl.ICapabilityExchangeEventListener
             public void onRemoteCapabilityRequest(Uri uri, List<String> list, IOptionsRequestCallback iOptionsRequestCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICapabilityExchangeEventListener.DESCRIPTOR);
-                    obtain.writeTypedObject(uri, 0);
-                    obtain.writeStringList(list);
-                    obtain.writeStrongInterface(iOptionsRequestCallback);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICapabilityExchangeEventListener.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(uri, 0);
+                    parcelObtain.writeStringList(list);
+                    parcelObtain.writeStrongInterface(iOptionsRequestCallback);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

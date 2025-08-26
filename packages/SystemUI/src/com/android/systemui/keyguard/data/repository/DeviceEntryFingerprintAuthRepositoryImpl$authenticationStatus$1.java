@@ -19,7 +19,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class DeviceEntryFingerprintAuthRepositoryImpl$authenticationStatus$1 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -82,7 +81,7 @@ final class DeviceEntryFingerprintAuthRepositoryImpl$authenticationStatus$1 exte
                         return;
                     }
                     ChannelExt.INSTANCE.getClass();
-                    ChannelExt.trySendWithFailureLogging(ProducerScope.this, fingerprintAuthenticationStatus, "DeviceEntryFingerprintAuthRepositoryImpl", "new fingerprint authentication status");
+                    ChannelExt.trySendWithFailureLogging(producerScope, fingerprintAuthenticationStatus, "DeviceEntryFingerprintAuthRepositoryImpl", "new fingerprint authentication status");
                 }
             };
             this.this$0.keyguardUpdateMonitor.registerCallback(keyguardUpdateMonitorCallback);

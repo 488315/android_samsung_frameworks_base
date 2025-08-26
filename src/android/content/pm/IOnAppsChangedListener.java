@@ -109,9 +109,9 @@ public interface IOnAppsChangedListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IOnAppsChangedListener)) {
-                return (IOnAppsChangedListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IOnAppsChangedListener)) {
+                return (IOnAppsChangedListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -160,62 +160,62 @@ public interface IOnAppsChangedListener extends IInterface {
             switch (i) {
                 case 1:
                     UserHandle userHandle = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    onPackageRemoved(userHandle, readString);
+                    onPackageRemoved(userHandle, string);
                     return true;
                 case 2:
                     UserHandle userHandle2 = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
-                    String readString2 = parcel.readString();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    onPackageAdded(userHandle2, readString2);
+                    onPackageAdded(userHandle2, string2);
                     return true;
                 case 3:
                     UserHandle userHandle3 = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
-                    String readString3 = parcel.readString();
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    onPackageChanged(userHandle3, readString3);
+                    onPackageChanged(userHandle3, string3);
                     return true;
                 case 4:
                     UserHandle userHandle4 = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
-                    String[] createStringArray = parcel.createStringArray();
-                    boolean readBoolean = parcel.readBoolean();
+                    String[] strArrCreateStringArray = parcel.createStringArray();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    onPackagesAvailable(userHandle4, createStringArray, readBoolean);
+                    onPackagesAvailable(userHandle4, strArrCreateStringArray, z);
                     return true;
                 case 5:
                     UserHandle userHandle5 = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
-                    String[] createStringArray2 = parcel.createStringArray();
-                    boolean readBoolean2 = parcel.readBoolean();
+                    String[] strArrCreateStringArray2 = parcel.createStringArray();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    onPackagesUnavailable(userHandle5, createStringArray2, readBoolean2);
+                    onPackagesUnavailable(userHandle5, strArrCreateStringArray2, z2);
                     return true;
                 case 6:
                     UserHandle userHandle6 = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
-                    String[] createStringArray3 = parcel.createStringArray();
+                    String[] strArrCreateStringArray3 = parcel.createStringArray();
                     Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onPackagesSuspended(userHandle6, createStringArray3, bundle);
+                    onPackagesSuspended(userHandle6, strArrCreateStringArray3, bundle);
                     return true;
                 case 7:
                     UserHandle userHandle7 = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
-                    String[] createStringArray4 = parcel.createStringArray();
+                    String[] strArrCreateStringArray4 = parcel.createStringArray();
                     parcel.enforceNoDataAvail();
-                    onPackagesUnsuspended(userHandle7, createStringArray4);
+                    onPackagesUnsuspended(userHandle7, strArrCreateStringArray4);
                     return true;
                 case 8:
                     UserHandle userHandle8 = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
-                    String readString4 = parcel.readString();
+                    String string4 = parcel.readString();
                     ParceledListSlice parceledListSlice = (ParceledListSlice) parcel.readTypedObject(ParceledListSlice.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onShortcutChanged(userHandle8, readString4, parceledListSlice);
+                    onShortcutChanged(userHandle8, string4, parceledListSlice);
                     return true;
                 case 9:
                     UserHandle userHandle9 = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
-                    String readString5 = parcel.readString();
-                    float readFloat = parcel.readFloat();
+                    String string5 = parcel.readString();
+                    float f = parcel.readFloat();
                     parcel.enforceNoDataAvail();
-                    onPackageLoadingProgressChanged(userHandle9, readString5, readFloat);
+                    onPackageLoadingProgressChanged(userHandle9, string5, f);
                     return true;
                 case 10:
                     LauncherUserInfo launcherUserInfo = (LauncherUserInfo) parcel.readTypedObject(LauncherUserInfo.CREATOR);
@@ -245,135 +245,135 @@ public interface IOnAppsChangedListener extends IInterface {
 
             @Override // android.content.pm.IOnAppsChangedListener
             public void onPackageRemoved(UserHandle userHandle, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(userHandle, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IOnAppsChangedListener
             public void onPackageAdded(UserHandle userHandle, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(userHandle, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IOnAppsChangedListener
             public void onPackageChanged(UserHandle userHandle, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(userHandle, 0);
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IOnAppsChangedListener
             public void onPackagesAvailable(UserHandle userHandle, String[] strArr, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(userHandle, 0);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IOnAppsChangedListener
             public void onPackagesUnavailable(UserHandle userHandle, String[] strArr, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(userHandle, 0);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IOnAppsChangedListener
             public void onPackagesSuspended(UserHandle userHandle, String[] strArr, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(userHandle, 0);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IOnAppsChangedListener
             public void onPackagesUnsuspended(UserHandle userHandle, String[] strArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(userHandle, 0);
-                    obtain.writeStringArray(strArr);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    parcelObtain.writeStringArray(strArr);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IOnAppsChangedListener
             public void onShortcutChanged(UserHandle userHandle, String str, ParceledListSlice parceledListSlice) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(userHandle, 0);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(parceledListSlice, 0);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(parceledListSlice, 0);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IOnAppsChangedListener
             public void onPackageLoadingProgressChanged(UserHandle userHandle, String str, float f) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(userHandle, 0);
-                    obtain.writeString(str);
-                    obtain.writeFloat(f);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeFloat(f);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IOnAppsChangedListener
             public void onUserConfigChanged(LauncherUserInfo launcherUserInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(launcherUserInfo, 0);
-                    this.mRemote.transact(10, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(launcherUserInfo, 0);
+                    this.mRemote.transact(10, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

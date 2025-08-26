@@ -16,7 +16,6 @@ import com.android.internal.app.AlertController;
 import com.android.keyguard.EmergencyButtonController$$ExternalSyntheticOutline0;
 import com.samsung.android.knox.net.nap.NetworkAnalyticsConstants;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class UsbDialogActivity extends AlertActivity implements DialogInterface.OnClickListener, CompoundButton.OnCheckedChangeListener {
     public CheckBox mAlwaysUse;
@@ -26,10 +25,10 @@ public abstract class UsbDialogActivity extends AlertActivity implements DialogI
 
     public final void addAlwaysUseCheckbox() {
         AlertController.AlertParams alertParams = ((AlertActivity) this).mAlertParams;
-        View inflate = ((LayoutInflater) getSystemService(LayoutInflater.class)).inflate(R.layout.web_text_view_dropdown, (ViewGroup) null);
-        alertParams.mView = inflate;
-        this.mAlwaysUse = (CheckBox) inflate.findViewById(R.id.to_org);
-        TextView textView = (TextView) alertParams.mView.findViewById(R.id.to_org_header);
+        View viewInflate = ((LayoutInflater) getSystemService(LayoutInflater.class)).inflate(R.layout.web_text_view_dropdown, (ViewGroup) null);
+        alertParams.mView = viewInflate;
+        this.mAlwaysUse = (CheckBox) viewInflate.findViewById(R.id.to_org_header);
+        TextView textView = (TextView) alertParams.mView.findViewById(R.id.to_org_unit);
         this.mCheckBoxText = textView;
         UsbDialogHelper usbDialogHelper = this.mDialogHelper;
         if (usbDialogHelper.mIsUsbDevice) {
@@ -44,7 +43,7 @@ public abstract class UsbDialogActivity extends AlertActivity implements DialogI
             }
         });
         this.mAlwaysUse.setOnCheckedChangeListener(this);
-        TextView textView2 = (TextView) alertParams.mView.findViewById(R.id.to_org_unit);
+        TextView textView2 = (TextView) alertParams.mView.findViewById(R.id.to_org_unit_header);
         this.mClearDefaultHint = textView2;
         textView2.setVisibility(8);
     }

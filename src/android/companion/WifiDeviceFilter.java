@@ -114,11 +114,11 @@ public final class WifiDeviceFilter implements DeviceFilter<ScanResult> {
     }
 
     WifiDeviceFilter(Parcel parcel) {
-        byte readByte = parcel.readByte();
-        Pattern unparcel = sParcellingForNamePattern.unparcel(parcel);
-        MacAddress macAddress = (readByte & 2) == 0 ? null : (MacAddress) parcel.readTypedObject(MacAddress.CREATOR);
+        byte b = parcel.readByte();
+        Pattern patternUnparcel = sParcellingForNamePattern.unparcel(parcel);
+        MacAddress macAddress = (b & 2) == 0 ? null : (MacAddress) parcel.readTypedObject(MacAddress.CREATOR);
         MacAddress macAddress2 = (MacAddress) parcel.readTypedObject(MacAddress.CREATOR);
-        this.mNamePattern = unparcel;
+        this.mNamePattern = patternUnparcel;
         this.mBssid = macAddress;
         this.mBssidMask = macAddress2;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) macAddress2);

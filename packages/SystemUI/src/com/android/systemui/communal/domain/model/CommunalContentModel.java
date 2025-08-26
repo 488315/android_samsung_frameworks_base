@@ -11,11 +11,9 @@ import java.util.UUID;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public interface CommunalContentModel {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class CtaTileInViewMode implements CommunalContentModel {
         @Override // com.android.systemui.communal.domain.model.CommunalContentModel
         public final String getKey() {
@@ -28,11 +26,9 @@ public interface CommunalContentModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class KEY {
         public static final Companion Companion = new Companion(null);
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -43,7 +39,6 @@ public interface CommunalContentModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Ongoing extends CommunalContentModel {
         long getCreatedTimestampMillis();
 
@@ -54,7 +49,6 @@ public interface CommunalContentModel {
         void setSize(CommunalContentSize communalContentSize);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Spacer implements CommunalContentModel {
         public final String key;
         public final CommunalContentSize size;
@@ -91,7 +85,6 @@ public interface CommunalContentModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Tutorial implements CommunalContentModel {
         public final String key;
         public final CommunalContentSize size;
@@ -113,7 +106,6 @@ public interface CommunalContentModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class WidgetPlaceholder implements CommunalContentModel {
         public final String key;
 
@@ -137,7 +129,6 @@ public interface CommunalContentModel {
 
     CommunalContentSize getSize();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Umo implements Ongoing {
         public final long createdTimestampMillis;
         public final String key;
@@ -182,7 +173,6 @@ public interface CommunalContentModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Smartspace implements Ongoing {
         public final long createdTimestampMillis;
         public final String key;
@@ -222,10 +212,8 @@ public interface CommunalContentModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface WidgetContent extends CommunalContentModel {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class DisabledWidget implements WidgetContent {
             public final int appWidgetId;
             public final ComponentName componentName;
@@ -289,7 +277,6 @@ public interface CommunalContentModel {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Widget implements WidgetContent {
             public final int appWidgetId;
             public final ComponentName componentName;
@@ -361,7 +348,6 @@ public interface CommunalContentModel {
 
         int getRank();
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class PendingWidget implements WidgetContent {
             public final int appWidgetId;
             public final ComponentName componentName;
@@ -417,9 +403,9 @@ public interface CommunalContentModel {
             }
 
             public final int hashCode() {
-                int hashCode = (this.size.hashCode() + ((this.componentName.hashCode() + ReorderTile$$ExternalSyntheticOutline0.m(this.rank, Integer.hashCode(this.appWidgetId) * 31, 31)) * 31)) * 31;
+                int iHashCode = (this.size.hashCode() + ((this.componentName.hashCode() + ReorderTile$$ExternalSyntheticOutline0.m(this.rank, Integer.hashCode(this.appWidgetId) * 31, 31)) * 31)) * 31;
                 Bitmap bitmap = this.icon;
-                return hashCode + (bitmap == null ? 0 : bitmap.hashCode());
+                return iHashCode + (bitmap == null ? 0 : bitmap.hashCode());
             }
 
             public final String toString() {

@@ -7,7 +7,6 @@ import android.util.AttributeSet;
 import android.widget.ImageView;
 import com.android.systemui.shared.navigationbar.KeyButtonRipple;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class FloatingRotationButtonView extends ImageView {
     public int mDiameter;
@@ -22,8 +21,8 @@ public class FloatingRotationButtonView extends ImageView {
     @Override // android.view.View
     public final void onConfigurationChanged(Configuration configuration) {
         KeyButtonRipple keyButtonRipple;
-        int updateFrom = this.mLastConfiguration.updateFrom(configuration);
-        if (((updateFrom & 1024) == 0 && (updateFrom & 4096) == 0) || (keyButtonRipple = this.mRipple) == null) {
+        int iUpdateFrom = this.mLastConfiguration.updateFrom(configuration);
+        if (((iUpdateFrom & 1024) == 0 && (iUpdateFrom & 4096) == 0) || (keyButtonRipple = this.mRipple) == null) {
             return;
         }
         keyButtonRipple.mMaxWidth = keyButtonRipple.mTargetView.getContext().getResources().getDimensionPixelSize(keyButtonRipple.mMaxWidthResource);

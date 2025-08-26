@@ -19,7 +19,6 @@ import com.android.systemui.statusbar.notification.promoted.domain.interactor.Pa
 import com.android.systemui.statusbar.notification.row.icon.AppIconProvider;
 import com.android.systemui.statusbar.notification.row.icon.NotificationIconStyleProvider;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PromotedNotificationInfo extends NotificationInfo {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -36,11 +35,11 @@ public class PromotedNotificationInfo extends NotificationInfo {
         super.bindNotification(packageManager, iNotificationManager, appIconProvider, notificationIconStyleProvider, onUserInteractionCallback, channelEditorDialogController, packageDemotionInteractor, str, ranking, statusBarNotification, notificationEntry, notificationGutsManager$$ExternalSyntheticLambda1, notificationGutsManager$$ExternalSyntheticLambda2, viewCompat$$ExternalSyntheticLambda0, uiEventLogger, z, z3, z2, z4, assistantFeedbackController, metricsLogger, expandableNotificationRow$$ExternalSyntheticLambda6);
         this.mNotificationManager = iNotificationManager;
         this.mPackageDemotionInteractor = packageDemotionInteractor;
-        View findViewById = findViewById(R.id.promoted_demote);
-        findViewById.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.statusbar.notification.row.PromotedNotificationInfo$$ExternalSyntheticLambda0
+        View viewFindViewById = findViewById(R.id.promoted_demote);
+        viewFindViewById.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.statusbar.notification.row.PromotedNotificationInfo$$ExternalSyntheticLambda0
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                PromotedNotificationInfo promotedNotificationInfo = PromotedNotificationInfo.this;
+                PromotedNotificationInfo promotedNotificationInfo = this.f$0;
                 String str2 = str;
                 StatusBarNotification statusBarNotification2 = statusBarNotification;
                 int i = PromotedNotificationInfo.$r8$clinit;
@@ -56,7 +55,7 @@ public class PromotedNotificationInfo extends NotificationInfo {
                 }
             }
         });
-        findViewById.setVisibility(findViewById.hasOnClickListeners() ? 0 : 8);
+        viewFindViewById.setVisibility(viewFindViewById.hasOnClickListeners() ? 0 : 8);
     }
 
     @Override // com.android.systemui.statusbar.notification.row.NotificationInfo, com.android.systemui.statusbar.notification.row.NotificationGuts.GutsContent

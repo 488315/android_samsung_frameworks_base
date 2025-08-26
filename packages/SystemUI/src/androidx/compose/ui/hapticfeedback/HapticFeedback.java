@@ -1,8 +1,7 @@
 package androidx.compose.ui.hapticfeedback;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public interface HapticFeedback {
     /* renamed from: performHapticFeedback-CdsT49E, reason: not valid java name */
-    void mo570performHapticFeedbackCdsT49E(int i);
+    void mo572performHapticFeedbackCdsT49E(int i);
 }

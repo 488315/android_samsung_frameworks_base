@@ -16,7 +16,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class InfiniteTransition {
     public final MutableVector _animations = new MutableVector(new TransitionAnimationState[16], 0);
@@ -24,7 +23,6 @@ public final class InfiniteTransition {
     public long startTimeNanos = Long.MIN_VALUE;
     public final MutableState isRunning$delegate = SnapshotStateKt.mutableStateOf$default(Boolean.TRUE);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TransitionAnimationState<T, V extends AnimationVector> implements State<T> {
         public TargetBasedAnimation animation;
         public Object initialValue;
@@ -65,23 +63,23 @@ public final class InfiniteTransition {
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventStart("androidx.compose.animation.core.InfiniteTransition.run (InfiniteTransition.kt:164)");
             }
-            Object rememberedValue = composerImpl.rememberedValue();
+            Object objRememberedValue = composerImpl.rememberedValue();
             Composer.Companion.getClass();
             Composer$Companion$Empty$1 composer$Companion$Empty$1 = Composer.Companion.Empty;
-            if (rememberedValue == composer$Companion$Empty$1) {
-                rememberedValue = SnapshotStateKt.mutableStateOf$default(null);
-                composerImpl.updateRememberedValue(rememberedValue);
+            if (objRememberedValue == composer$Companion$Empty$1) {
+                objRememberedValue = SnapshotStateKt.mutableStateOf$default(null);
+                composerImpl.updateRememberedValue(objRememberedValue);
             }
-            MutableState mutableState = (MutableState) rememberedValue;
+            MutableState mutableState = (MutableState) objRememberedValue;
             if (((Boolean) ((SnapshotMutableStateImpl) this.isRunning$delegate).getValue()).booleanValue() || ((Boolean) ((SnapshotMutableStateImpl) this.refreshChildNeeded$delegate).getValue()).booleanValue()) {
                 composerImpl.startReplaceGroup(1719883733);
-                boolean changedInstance = composerImpl.changedInstance(this);
-                Object rememberedValue2 = composerImpl.rememberedValue();
-                if (changedInstance || rememberedValue2 == composer$Companion$Empty$1) {
-                    rememberedValue2 = new InfiniteTransition$run$1$1(mutableState, this, null);
-                    composerImpl.updateRememberedValue(rememberedValue2);
+                boolean zChangedInstance = composerImpl.changedInstance(this);
+                Object objRememberedValue2 = composerImpl.rememberedValue();
+                if (zChangedInstance || objRememberedValue2 == composer$Companion$Empty$1) {
+                    objRememberedValue2 = new InfiniteTransition$run$1$1(mutableState, this, null);
+                    composerImpl.updateRememberedValue(objRememberedValue2);
                 }
-                EffectsKt.LaunchedEffect(composerImpl, this, (Function2) rememberedValue2);
+                EffectsKt.LaunchedEffect(composerImpl, this, (Function2) objRememberedValue2);
                 composerImpl.end(false);
             } else {
                 composerImpl.startReplaceGroup(1721270456);
@@ -93,9 +91,9 @@ public final class InfiniteTransition {
         } else {
             composerImpl.skipToGroupEnd();
         }
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
-            endRestartGroup.block = new Function2() { // from class: androidx.compose.animation.core.InfiniteTransition$run$2
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new Function2() { // from class: androidx.compose.animation.core.InfiniteTransition$run$2
                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 {
                     super(2);
@@ -104,7 +102,7 @@ public final class InfiniteTransition {
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj, Object obj2) {
                     ((Number) obj2).intValue();
-                    InfiniteTransition.this.run$animation_core(RecomposeScopeImplKt.updateChangedFlags(i | 1), (Composer) obj);
+                    this.$tmp2_rcvr.run$animation_core(RecomposeScopeImplKt.updateChangedFlags(i | 1), (Composer) obj);
                     return Unit.INSTANCE;
                 }
             };

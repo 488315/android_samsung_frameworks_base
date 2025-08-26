@@ -9,7 +9,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.flow.SafeFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final /* synthetic */ class ObservableTransitionStateKt$$ExternalSyntheticLambda1 implements Function0 {
     public final /* synthetic */ int $r8$classId;
@@ -44,9 +43,9 @@ public final /* synthetic */ class ObservableTransitionStateKt$$ExternalSyntheti
                     TransitionState.Transition.ChangeScene changeScene = (TransitionState.Transition.ChangeScene) transitionState;
                     SceneKey sceneKey = changeScene.fromScene;
                     TransitionState.Transition.ChangeScene changeScene2 = (TransitionState.Transition.ChangeScene) transitionState;
-                    SafeFlow snapshotFlow = SnapshotStateKt.snapshotFlow(new ObservableTransitionStateKt$$ExternalSyntheticLambda1(changeScene2, 0));
+                    SafeFlow safeFlowSnapshotFlow = SnapshotStateKt.snapshotFlow(new ObservableTransitionStateKt$$ExternalSyntheticLambda1(changeScene2, 0));
                     Set set = changeScene.currentOverlaysWhenTransitionStarted;
-                    replaceOverlay = new ObservableTransitionState.Transition.ChangeScene(sceneKey, changeScene.toScene, snapshotFlow, set != null ? set : null, SnapshotStateKt.snapshotFlow(new ObservableTransitionStateKt$$ExternalSyntheticLambda1(changeScene2, 2)), changeScene.isInitiatedByUserInput(), SnapshotStateKt.snapshotFlow(new ObservableTransitionStateKt$$ExternalSyntheticLambda1(changeScene2, 3)), SnapshotStateKt.snapshotFlow(new ObservableTransitionStateKt$$ExternalSyntheticLambda1(changeScene2, 4)), SnapshotStateKt.snapshotFlow(new ObservableTransitionStateKt$$ExternalSyntheticLambda1(changeScene2, 1)));
+                    replaceOverlay = new ObservableTransitionState.Transition.ChangeScene(sceneKey, changeScene.toScene, safeFlowSnapshotFlow, set != null ? set : null, SnapshotStateKt.snapshotFlow(new ObservableTransitionStateKt$$ExternalSyntheticLambda1(changeScene2, 2)), changeScene.isInitiatedByUserInput(), SnapshotStateKt.snapshotFlow(new ObservableTransitionStateKt$$ExternalSyntheticLambda1(changeScene2, 3)), SnapshotStateKt.snapshotFlow(new ObservableTransitionStateKt$$ExternalSyntheticLambda1(changeScene2, 4)), SnapshotStateKt.snapshotFlow(new ObservableTransitionStateKt$$ExternalSyntheticLambda1(changeScene2, 1)));
                 } else {
                     if (transitionState instanceof TransitionState.Transition.ShowOrHideOverlay) {
                         TransitionState.Transition.ShowOrHideOverlay showOrHideOverlay = (TransitionState.Transition.ShowOrHideOverlay) transitionState;
@@ -62,7 +61,7 @@ public final /* synthetic */ class ObservableTransitionStateKt$$ExternalSyntheti
                         SceneKey sceneKey5 = sceneKey4 != null ? sceneKey4 : null;
                         final TransitionState.Transition.ShowOrHideOverlay showOrHideOverlay2 = (TransitionState.Transition.ShowOrHideOverlay) transitionState;
                         final int i = 0;
-                        SafeFlow snapshotFlow2 = SnapshotStateKt.snapshotFlow(new Function0() { // from class: com.android.compose.animation.scene.ObservableTransitionStateKt$$ExternalSyntheticLambda11
+                        SafeFlow safeFlowSnapshotFlow2 = SnapshotStateKt.snapshotFlow(new Function0() { // from class: com.android.compose.animation.scene.ObservableTransitionStateKt$$ExternalSyntheticLambda11
                             @Override // kotlin.jvm.functions.Function0
                             public final Object invoke() {
                                 switch (i) {
@@ -80,7 +79,7 @@ public final /* synthetic */ class ObservableTransitionStateKt$$ExternalSyntheti
                             }
                         });
                         final int i2 = 1;
-                        SafeFlow snapshotFlow3 = SnapshotStateKt.snapshotFlow(new Function0() { // from class: com.android.compose.animation.scene.ObservableTransitionStateKt$$ExternalSyntheticLambda11
+                        SafeFlow safeFlowSnapshotFlow3 = SnapshotStateKt.snapshotFlow(new Function0() { // from class: com.android.compose.animation.scene.ObservableTransitionStateKt$$ExternalSyntheticLambda11
                             @Override // kotlin.jvm.functions.Function0
                             public final Object invoke() {
                                 switch (i2) {
@@ -97,9 +96,9 @@ public final /* synthetic */ class ObservableTransitionStateKt$$ExternalSyntheti
                                 }
                             }
                         });
-                        boolean isInitiatedByUserInput = showOrHideOverlay.isInitiatedByUserInput();
+                        boolean zIsInitiatedByUserInput = showOrHideOverlay.isInitiatedByUserInput();
                         final int i3 = 2;
-                        SafeFlow snapshotFlow4 = SnapshotStateKt.snapshotFlow(new Function0() { // from class: com.android.compose.animation.scene.ObservableTransitionStateKt$$ExternalSyntheticLambda11
+                        SafeFlow safeFlowSnapshotFlow4 = SnapshotStateKt.snapshotFlow(new Function0() { // from class: com.android.compose.animation.scene.ObservableTransitionStateKt$$ExternalSyntheticLambda11
                             @Override // kotlin.jvm.functions.Function0
                             public final Object invoke() {
                                 switch (i3) {
@@ -117,7 +116,7 @@ public final /* synthetic */ class ObservableTransitionStateKt$$ExternalSyntheti
                             }
                         });
                         final int i4 = 3;
-                        SafeFlow snapshotFlow5 = SnapshotStateKt.snapshotFlow(new Function0() { // from class: com.android.compose.animation.scene.ObservableTransitionStateKt$$ExternalSyntheticLambda11
+                        SafeFlow safeFlowSnapshotFlow5 = SnapshotStateKt.snapshotFlow(new Function0() { // from class: com.android.compose.animation.scene.ObservableTransitionStateKt$$ExternalSyntheticLambda11
                             @Override // kotlin.jvm.functions.Function0
                             public final Object invoke() {
                                 switch (i4) {
@@ -135,7 +134,7 @@ public final /* synthetic */ class ObservableTransitionStateKt$$ExternalSyntheti
                             }
                         });
                         final int i5 = 4;
-                        return new ObservableTransitionState.Transition.ShowOrHideOverlay(showOrHideOverlay.overlay, showOrHideOverlay.fromContent, showOrHideOverlay.toContent, sceneKey5, snapshotFlow2, snapshotFlow3, isInitiatedByUserInput, snapshotFlow4, snapshotFlow5, SnapshotStateKt.snapshotFlow(new Function0() { // from class: com.android.compose.animation.scene.ObservableTransitionStateKt$$ExternalSyntheticLambda11
+                        return new ObservableTransitionState.Transition.ShowOrHideOverlay(showOrHideOverlay.overlay, showOrHideOverlay.fromContent, showOrHideOverlay.toContent, sceneKey5, safeFlowSnapshotFlow2, safeFlowSnapshotFlow3, zIsInitiatedByUserInput, safeFlowSnapshotFlow4, safeFlowSnapshotFlow5, SnapshotStateKt.snapshotFlow(new Function0() { // from class: com.android.compose.animation.scene.ObservableTransitionStateKt$$ExternalSyntheticLambda11
                             @Override // kotlin.jvm.functions.Function0
                             public final Object invoke() {
                                 switch (i5) {
@@ -162,7 +161,7 @@ public final /* synthetic */ class ObservableTransitionStateKt$$ExternalSyntheti
                     SceneKey sceneKey7 = sceneKey6 != null ? sceneKey6 : null;
                     final TransitionState.Transition.ReplaceOverlay replaceOverlay3 = (TransitionState.Transition.ReplaceOverlay) transitionState;
                     final int i6 = 0;
-                    SafeFlow snapshotFlow6 = SnapshotStateKt.snapshotFlow(new Function0() { // from class: com.android.compose.animation.scene.ObservableTransitionStateKt$$ExternalSyntheticLambda2
+                    SafeFlow safeFlowSnapshotFlow6 = SnapshotStateKt.snapshotFlow(new Function0() { // from class: com.android.compose.animation.scene.ObservableTransitionStateKt$$ExternalSyntheticLambda2
                         @Override // kotlin.jvm.functions.Function0
                         public final Object invoke() {
                             switch (i6) {
@@ -180,7 +179,7 @@ public final /* synthetic */ class ObservableTransitionStateKt$$ExternalSyntheti
                         }
                     });
                     final int i7 = 1;
-                    SafeFlow snapshotFlow7 = SnapshotStateKt.snapshotFlow(new Function0() { // from class: com.android.compose.animation.scene.ObservableTransitionStateKt$$ExternalSyntheticLambda2
+                    SafeFlow safeFlowSnapshotFlow7 = SnapshotStateKt.snapshotFlow(new Function0() { // from class: com.android.compose.animation.scene.ObservableTransitionStateKt$$ExternalSyntheticLambda2
                         @Override // kotlin.jvm.functions.Function0
                         public final Object invoke() {
                             switch (i7) {
@@ -197,9 +196,9 @@ public final /* synthetic */ class ObservableTransitionStateKt$$ExternalSyntheti
                             }
                         }
                     });
-                    boolean isInitiatedByUserInput2 = replaceOverlay2.isInitiatedByUserInput();
+                    boolean zIsInitiatedByUserInput2 = replaceOverlay2.isInitiatedByUserInput();
                     final int i8 = 2;
-                    SafeFlow snapshotFlow8 = SnapshotStateKt.snapshotFlow(new Function0() { // from class: com.android.compose.animation.scene.ObservableTransitionStateKt$$ExternalSyntheticLambda2
+                    SafeFlow safeFlowSnapshotFlow8 = SnapshotStateKt.snapshotFlow(new Function0() { // from class: com.android.compose.animation.scene.ObservableTransitionStateKt$$ExternalSyntheticLambda2
                         @Override // kotlin.jvm.functions.Function0
                         public final Object invoke() {
                             switch (i8) {
@@ -217,7 +216,7 @@ public final /* synthetic */ class ObservableTransitionStateKt$$ExternalSyntheti
                         }
                     });
                     final int i9 = 3;
-                    SafeFlow snapshotFlow9 = SnapshotStateKt.snapshotFlow(new Function0() { // from class: com.android.compose.animation.scene.ObservableTransitionStateKt$$ExternalSyntheticLambda2
+                    SafeFlow safeFlowSnapshotFlow9 = SnapshotStateKt.snapshotFlow(new Function0() { // from class: com.android.compose.animation.scene.ObservableTransitionStateKt$$ExternalSyntheticLambda2
                         @Override // kotlin.jvm.functions.Function0
                         public final Object invoke() {
                             switch (i9) {
@@ -235,7 +234,7 @@ public final /* synthetic */ class ObservableTransitionStateKt$$ExternalSyntheti
                         }
                     });
                     final int i10 = 4;
-                    replaceOverlay = new ObservableTransitionState.Transition.ReplaceOverlay(overlayKey, replaceOverlay2.toOverlay, sceneKey7, snapshotFlow6, snapshotFlow7, isInitiatedByUserInput2, snapshotFlow8, snapshotFlow9, SnapshotStateKt.snapshotFlow(new Function0() { // from class: com.android.compose.animation.scene.ObservableTransitionStateKt$$ExternalSyntheticLambda2
+                    replaceOverlay = new ObservableTransitionState.Transition.ReplaceOverlay(overlayKey, replaceOverlay2.toOverlay, sceneKey7, safeFlowSnapshotFlow6, safeFlowSnapshotFlow7, zIsInitiatedByUserInput2, safeFlowSnapshotFlow8, safeFlowSnapshotFlow9, SnapshotStateKt.snapshotFlow(new Function0() { // from class: com.android.compose.animation.scene.ObservableTransitionStateKt$$ExternalSyntheticLambda2
                         @Override // kotlin.jvm.functions.Function0
                         public final Object invoke() {
                             switch (i10) {

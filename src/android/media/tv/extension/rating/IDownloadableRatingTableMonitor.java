@@ -46,9 +46,9 @@ public interface IDownloadableRatingTableMonitor extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.rating.IDownloadableRatingTableMonitor");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IDownloadableRatingTableMonitor)) {
-                return (IDownloadableRatingTableMonitor) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.rating.IDownloadableRatingTableMonitor");
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IDownloadableRatingTableMonitor)) {
+                return (IDownloadableRatingTableMonitor) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -101,16 +101,16 @@ public interface IDownloadableRatingTableMonitor extends IInterface {
 
             @Override // android.media.tv.extension.rating.IDownloadableRatingTableMonitor
             public Bundle[] getTable() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.rating.IDownloadableRatingTableMonitor");
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle[]) obtain2.createTypedArray(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.rating.IDownloadableRatingTableMonitor");
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle[]) parcelObtain2.createTypedArray(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

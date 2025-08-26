@@ -3,7 +3,6 @@ package com.android.systemui.kairos.internal.util;
 import java.util.Map;
 import kotlin.jvm.internal.markers.KMutableMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ConcurrentNullableHashMap$entries$1$iterator$1$next$1 implements Map.Entry, KMutableMap.Entry {
     public final /* synthetic */ Map.Entry $element;

@@ -190,9 +190,9 @@ public class CoverManager {
 
     private synchronized ICoverManager getService() {
         if (this.mService == null) {
-            ICoverManager asInterface = ICoverManager.Stub.asInterface(ServiceManager.getService(UnionConstants.SERVICE_COVER));
-            this.mService = asInterface;
-            if (asInterface == null) {
+            ICoverManager iCoverManagerAsInterface = ICoverManager.Stub.asInterface(ServiceManager.getService(UnionConstants.SERVICE_COVER));
+            this.mService = iCoverManagerAsInterface;
+            if (iCoverManagerAsInterface == null) {
                 Slog.w(TAG, "warning: no COVER_MANAGER_SERVICE");
             }
         }
@@ -313,7 +313,7 @@ public class CoverManager {
     }
 
     public void unregisterListener(StateListener stateListener) {
-        CoverListenerDelegate coverListenerDelegate;
+        CoverListenerDelegate next;
         Log.d(TAG, "unregisterListener");
         if (!isSupportCover()) {
             Log.w(TAG, "unregisterListener : This device is not supported cover");
@@ -329,31 +329,31 @@ public class CoverManager {
         Iterator<CoverListenerDelegate> it = this.mListenerDelegates.iterator();
         while (true) {
             if (!it.hasNext()) {
-                coverListenerDelegate = null;
+                next = null;
                 break;
             } else {
-                coverListenerDelegate = it.next();
-                if (coverListenerDelegate.getListener().equals(stateListener)) {
+                next = it.next();
+                if (next.getListener().equals(stateListener)) {
                     break;
                 }
             }
         }
-        if (coverListenerDelegate == null) {
+        if (next == null) {
             return;
         }
         try {
             ICoverManager service = getService();
-            if (service == null || !service.unregisterCallback(coverListenerDelegate)) {
+            if (service == null || !service.unregisterCallback(next)) {
                 return;
             }
-            this.mListenerDelegates.remove(coverListenerDelegate);
+            this.mListenerDelegates.remove(next);
         } catch (RemoteException e) {
             Log.e(TAG, "RemoteException in unregisterListener: ", e);
         }
     }
 
     public void unregisterListener(CoverStateListener coverStateListener) {
-        CoverStateListenerDelegate coverStateListenerDelegate;
+        CoverStateListenerDelegate next;
         Log.d(TAG, "unregisterListener");
         if (!isSupportCover()) {
             Log.w(TAG, "unregisterListener : This device is not supported cover");
@@ -369,24 +369,24 @@ public class CoverManager {
         Iterator<CoverStateListenerDelegate> it = this.mCoverStateListenerDelegates.iterator();
         while (true) {
             if (!it.hasNext()) {
-                coverStateListenerDelegate = null;
+                next = null;
                 break;
             } else {
-                coverStateListenerDelegate = it.next();
-                if (coverStateListenerDelegate.getListener().equals(coverStateListener)) {
+                next = it.next();
+                if (next.getListener().equals(coverStateListener)) {
                     break;
                 }
             }
         }
-        if (coverStateListenerDelegate == null) {
+        if (next == null) {
             return;
         }
         try {
             ICoverManager service = getService();
-            if (service == null || !service.unregisterCallback(coverStateListenerDelegate)) {
+            if (service == null || !service.unregisterCallback(next)) {
                 return;
             }
-            this.mCoverStateListenerDelegates.remove(coverStateListenerDelegate);
+            this.mCoverStateListenerDelegates.remove(next);
         } catch (RemoteException e) {
             Log.e(TAG, "RemoteException in unregisterListener: ", e);
         }
@@ -522,7 +522,7 @@ public class CoverManager {
     }
 
     public void unregisterNfcTouchListener(NfcLedCoverTouchListener nfcLedCoverTouchListener) {
-        NfcLedCoverTouchListenerDelegate nfcLedCoverTouchListenerDelegate;
+        NfcLedCoverTouchListenerDelegate next;
         Log.d(TAG, "unregisterNfcTouchListener");
         if (!isSupportNfcLedCover()) {
             Log.w(TAG, "unregisterNfcTouchListener : This device does not support NFC Led cover");
@@ -538,24 +538,24 @@ public class CoverManager {
         Iterator<NfcLedCoverTouchListenerDelegate> it = this.mNfcLedCoverTouchListenerDelegates.iterator();
         while (true) {
             if (!it.hasNext()) {
-                nfcLedCoverTouchListenerDelegate = null;
+                next = null;
                 break;
             } else {
-                nfcLedCoverTouchListenerDelegate = it.next();
-                if (nfcLedCoverTouchListenerDelegate.getListener().equals(nfcLedCoverTouchListener)) {
+                next = it.next();
+                if (next.getListener().equals(nfcLedCoverTouchListener)) {
                     break;
                 }
             }
         }
-        if (nfcLedCoverTouchListenerDelegate == null) {
+        if (next == null) {
             return;
         }
         try {
             ICoverManager service = getService();
-            if (service == null || !service.unregisterNfcTouchListenerCallback(nfcLedCoverTouchListenerDelegate)) {
+            if (service == null || !service.unregisterNfcTouchListenerCallback(next)) {
                 return;
             }
-            this.mNfcLedCoverTouchListenerDelegates.remove(nfcLedCoverTouchListenerDelegate);
+            this.mNfcLedCoverTouchListenerDelegates.remove(next);
         } catch (RemoteException e) {
             Log.e(TAG, "RemoteException in unregisterNfcTouchListener: ", e);
         }
@@ -681,7 +681,7 @@ public class CoverManager {
     }
 
     public void unregisterLedSystemEventListener(LedSystemEventListener ledSystemEventListener) {
-        LedSystemEventListenerDelegate ledSystemEventListenerDelegate;
+        LedSystemEventListenerDelegate next;
         Log.d(TAG, "unregisterLedSystemEventListener");
         if (!isSupportCover()) {
             Log.w(TAG, "unregisterLedSystemEventListener : This device does not support cover");
@@ -698,24 +698,24 @@ public class CoverManager {
         Iterator<LedSystemEventListenerDelegate> it = this.mLedSystemEventListenerDelegates.iterator();
         while (true) {
             if (!it.hasNext()) {
-                ledSystemEventListenerDelegate = null;
+                next = null;
                 break;
             } else {
-                ledSystemEventListenerDelegate = it.next();
-                if (ledSystemEventListenerDelegate.getListener().equals(ledSystemEventListener)) {
+                next = it.next();
+                if (next.getListener().equals(ledSystemEventListener)) {
                     break;
                 }
             }
         }
-        if (ledSystemEventListenerDelegate == null) {
+        if (next == null) {
             return;
         }
         try {
             ICoverManager service = getService();
-            if (service == null || !service.unregisterNfcTouchListenerCallback(ledSystemEventListenerDelegate)) {
+            if (service == null || !service.unregisterNfcTouchListenerCallback(next)) {
                 return;
             }
-            this.mLedSystemEventListenerDelegates.remove(ledSystemEventListenerDelegate);
+            this.mLedSystemEventListenerDelegates.remove(next);
         } catch (RemoteException e) {
             Log.e(TAG, "RemoteException in unregisterLedSystemEventListener: ", e);
         }
@@ -772,7 +772,7 @@ public class CoverManager {
     }
 
     public void unregisterCoverPowerKeyListener(CoverPowerKeyListener coverPowerKeyListener) {
-        CoverPowerKeyListenerDelegate coverPowerKeyListenerDelegate;
+        CoverPowerKeyListenerDelegate next;
         Log.d(TAG, "unregisterCoverPowerKeyListener");
         if (!isSupportCover()) {
             Log.w(TAG, "unregisterCoverPowerKeyListener : This device does not support cover");
@@ -790,24 +790,24 @@ public class CoverManager {
         Iterator<CoverPowerKeyListenerDelegate> it = this.mCoverPowerKeyListenerDelegates.iterator();
         while (true) {
             if (!it.hasNext()) {
-                coverPowerKeyListenerDelegate = null;
+                next = null;
                 break;
             } else {
-                coverPowerKeyListenerDelegate = it.next();
-                if (coverPowerKeyListenerDelegate.getListener().equals(coverPowerKeyListener)) {
+                next = it.next();
+                if (next.getListener().equals(coverPowerKeyListener)) {
                     break;
                 }
             }
         }
-        if (coverPowerKeyListenerDelegate == null) {
+        if (next == null) {
             return;
         }
         try {
             ICoverManager service = getService();
-            if (service == null || !service.unregisterNfcTouchListenerCallback(coverPowerKeyListenerDelegate)) {
+            if (service == null || !service.unregisterNfcTouchListenerCallback(next)) {
                 return;
             }
-            this.mCoverPowerKeyListenerDelegates.remove(coverPowerKeyListenerDelegate);
+            this.mCoverPowerKeyListenerDelegates.remove(next);
         } catch (RemoteException e) {
             Log.e(TAG, "RemoteException in unregisterCoverPowerKeyListener: ", e);
         }
@@ -851,7 +851,7 @@ public class CoverManager {
     }
 
     public boolean enableLcdOffByCover(StateListener stateListener) {
-        CoverListenerDelegate coverListenerDelegate;
+        CoverListenerDelegate next;
         if (!isSupportCover()) {
             Log.w(TAG, "enableLcdOffByCover : This device does not support cover");
             return false;
@@ -864,22 +864,22 @@ public class CoverManager {
         Iterator<CoverListenerDelegate> it = this.mLcdOffDisableDelegates.iterator();
         while (true) {
             if (!it.hasNext()) {
-                coverListenerDelegate = null;
+                next = null;
                 break;
             }
-            coverListenerDelegate = it.next();
-            if (coverListenerDelegate.getListener().equals(stateListener)) {
+            next = it.next();
+            if (next.getListener().equals(stateListener)) {
                 break;
             }
         }
-        if (coverListenerDelegate == null) {
+        if (next == null) {
             Log.e(TAG, "enableLcdOffByCover: Matching listener not found, cannot enable");
             return false;
         }
         try {
             ICoverManager service = getService();
-            if (service != null && service.enableLcdOffByCover(coverListenerDelegate, new ComponentName(this.mContext.getPackageName(), getClass().getCanonicalName()))) {
-                this.mLcdOffDisableDelegates.remove(coverListenerDelegate);
+            if (service != null && service.enableLcdOffByCover(next, new ComponentName(this.mContext.getPackageName(), getClass().getCanonicalName()))) {
+                this.mLcdOffDisableDelegates.remove(next);
                 return true;
             }
         } catch (RemoteException e) {

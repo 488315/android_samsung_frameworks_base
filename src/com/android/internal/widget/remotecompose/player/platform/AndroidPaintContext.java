@@ -19,6 +19,10 @@ import android.graphics.RuntimeShader;
 import android.graphics.Shader;
 import android.graphics.SweepGradient;
 import android.graphics.Typeface;
+import android.text.Layout;
+import android.text.StaticLayout;
+import android.text.TextPaint;
+import android.text.TextUtils;
 import com.android.internal.widget.remotecompose.core.PaintContext;
 import com.android.internal.widget.remotecompose.core.Platform;
 import com.android.internal.widget.remotecompose.core.RemoteContext;
@@ -198,9 +202,9 @@ public class AndroidPaintContext extends PaintContext {
 
             @Override // com.android.internal.widget.remotecompose.core.operations.paint.PaintChanges
             public void setColorFilter(int i, int i2) {
-                PorterDuff.Mode origamiToPorterDuffMode = AndroidPaintContext.origamiToPorterDuffMode(i2);
-                if (origamiToPorterDuffMode != null) {
-                    AndroidPaintContext.this.mPaint.setColorFilter(new PorterDuffColorFilter(i, origamiToPorterDuffMode));
+                PorterDuff.Mode modeOrigamiToPorterDuffMode = AndroidPaintContext.origamiToPorterDuffMode(i2);
+                if (modeOrigamiToPorterDuffMode != null) {
+                    AndroidPaintContext.this.mPaint.setColorFilter(new PorterDuffColorFilter(i, modeOrigamiToPorterDuffMode));
                 }
             }
         };
@@ -253,14 +257,14 @@ public class AndroidPaintContext extends PaintContext {
     }
 
     @Override // com.android.internal.widget.remotecompose.core.PaintContext
-    public void setGraphicsLayer(HashMap<Integer, Object> hashMap) {
+    public void setGraphicsLayer(HashMap<Integer, Object> map) {
         if (this.mNode == null) {
             return;
         }
         boolean z = false;
         boolean z2 = false;
-        for (Integer num : hashMap.keySet()) {
-            Object obj = hashMap.get(num);
+        for (Integer num : map.keySet()) {
+            Object obj = map.get(num);
             switch (num.intValue()) {
                 case 0:
                     this.mNode.setScaleX(((Float) obj).floatValue());
@@ -323,42 +327,42 @@ public class AndroidPaintContext extends PaintContext {
         if (z) {
             Outline outline = new Outline();
             outline.setAlpha(1.0f);
-            Object obj2 = hashMap.get(20);
+            Object obj2 = map.get(20);
             if (obj2 != null) {
-                Object obj3 = hashMap.get(21);
-                int intValue = ((Integer) obj2).intValue();
-                if (intValue == 0) {
+                Object obj3 = map.get(21);
+                int iIntValue = ((Integer) obj2).intValue();
+                if (iIntValue == 0) {
                     outline.setRect(0, 0, this.mNode.getWidth(), this.mNode.getHeight());
-                } else if (intValue == 1) {
+                } else if (iIntValue == 1) {
                     if (obj3 != null) {
                         outline.setRoundRect(new Rect(0, 0, this.mNode.getWidth(), this.mNode.getHeight()), ((Float) obj3).floatValue());
                     } else {
                         outline.setRect(0, 0, this.mNode.getWidth(), this.mNode.getHeight());
                     }
-                } else if (intValue == 2) {
+                } else if (iIntValue == 2) {
                     outline.setRoundRect(new Rect(0, 0, this.mNode.getWidth(), this.mNode.getHeight()), Math.min(this.mNode.getWidth(), this.mNode.getHeight()) / 2.0f);
                 }
             }
             this.mNode.setOutline(outline);
         }
         if (z2) {
-            Object obj4 = hashMap.get(17);
-            float floatValue = obj4 != null ? ((Float) obj4).floatValue() : 0.0f;
-            Object obj5 = hashMap.get(18);
-            float floatValue2 = obj5 != null ? ((Float) obj5).floatValue() : 0.0f;
-            Object obj6 = hashMap.get(19);
-            int intValue2 = obj6 != null ? ((Integer) obj6).intValue() : 0;
+            Object obj4 = map.get(17);
+            float fFloatValue = obj4 != null ? ((Float) obj4).floatValue() : 0.0f;
+            Object obj5 = map.get(18);
+            float fFloatValue2 = obj5 != null ? ((Float) obj5).floatValue() : 0.0f;
+            Object obj6 = map.get(19);
+            int iIntValue2 = obj6 != null ? ((Integer) obj6).intValue() : 0;
             Shader.TileMode tileMode = Shader.TileMode.CLAMP;
-            if (intValue2 == 0) {
+            if (iIntValue2 == 0) {
                 tileMode = Shader.TileMode.CLAMP;
-            } else if (intValue2 == 1) {
+            } else if (iIntValue2 == 1) {
                 tileMode = Shader.TileMode.REPEAT;
-            } else if (intValue2 == 2) {
+            } else if (iIntValue2 == 2) {
                 tileMode = Shader.TileMode.MIRROR;
-            } else if (intValue2 == 3) {
+            } else if (iIntValue2 == 3) {
                 tileMode = Shader.TileMode.DECAL;
             }
-            this.mNode.setRenderEffect(RenderEffect.createBlurEffect(floatValue, floatValue2, tileMode));
+            this.mNode.setRenderEffect(RenderEffect.createBlurEffect(fFloatValue, fFloatValue2, tileMode));
         }
     }
 
@@ -481,82 +485,39 @@ public class AndroidPaintContext extends PaintContext {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0040  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x0053  */
+    /* JADX WARN: Removed duplicated region for block: B:18:0x0039  */
     @Override // com.android.internal.widget.remotecompose.core.PaintContext
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public com.android.internal.widget.remotecompose.core.Platform.ComputedTextLayout layoutComplexText(int r1, int r2, int r3, int r4, int r5, int r6, float r7, int r8) {
-        /*
-            r0 = this;
-            java.lang.String r1 = r0.getText(r1)
-            if (r1 != 0) goto L8
-            r0 = 0
-            return r0
-        L8:
-            r8 = -1
-            if (r3 == r8) goto L11
-            int r8 = r1.length()
-            if (r3 <= r8) goto L15
-        L11:
-            int r3 = r1.length()
-        L15:
-            android.text.TextPaint r8 = new android.text.TextPaint
-            r8.<init>()
-            android.graphics.Paint r0 = r0.mPaint
-            r8.set(r0)
-            int r0 = (int) r7
-            android.text.StaticLayout$Builder r0 = android.text.StaticLayout.Builder.obtain(r1, r2, r3, r8, r0)
-            r1 = 2
-            r2 = 3
-            if (r4 == r1) goto L39
-            if (r4 == r2) goto L33
-            r1 = 6
-            if (r4 == r1) goto L39
-            android.text.Layout$Alignment r1 = android.text.Layout.Alignment.ALIGN_NORMAL
-            r0.setAlignment(r1)
-            goto L3e
-        L33:
-            android.text.Layout$Alignment r1 = android.text.Layout.Alignment.ALIGN_CENTER
-            r0.setAlignment(r1)
-            goto L3e
-        L39:
-            android.text.Layout$Alignment r1 = android.text.Layout.Alignment.ALIGN_OPPOSITE
-            r0.setAlignment(r1)
-        L3e:
-            if (r5 == r2) goto L53
-            r1 = 4
-            if (r5 == r1) goto L4d
-            r1 = 5
-            if (r5 == r1) goto L47
-            goto L58
-        L47:
-            android.text.TextUtils$TruncateAt r1 = android.text.TextUtils.TruncateAt.MIDDLE
-            r0.setEllipsize(r1)
-            goto L58
-        L4d:
-            android.text.TextUtils$TruncateAt r1 = android.text.TextUtils.TruncateAt.START
-            r0.setEllipsize(r1)
-            goto L58
-        L53:
-            android.text.TextUtils$TruncateAt r1 = android.text.TextUtils.TruncateAt.END
-            r0.setEllipsize(r1)
-        L58:
-            r0.setMaxLines(r6)
-            r1 = 0
-            r0.setIncludePad(r1)
-            android.text.StaticLayout r0 = r0.build()
-            com.android.internal.widget.remotecompose.player.platform.AndroidComputedTextLayout r1 = new com.android.internal.widget.remotecompose.player.platform.AndroidComputedTextLayout
-            int r2 = r0.getWidth()
-            float r2 = (float) r2
-            int r3 = r0.getHeight()
-            float r3 = (float) r3
-            r1.<init>(r0, r2, r3)
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.widget.remotecompose.player.platform.AndroidPaintContext.layoutComplexText(int, int, int, int, int, int, float, int):com.android.internal.widget.remotecompose.core.Platform$ComputedTextLayout");
+    public Platform.ComputedTextLayout layoutComplexText(int i, int i2, int i3, int i4, int i5, int i6, float f, int i7) {
+        String text = getText(i);
+        if (text == null) {
+            return null;
+        }
+        if (i3 == -1 || i3 > text.length()) {
+            i3 = text.length();
+        }
+        TextPaint textPaint = new TextPaint();
+        textPaint.set(this.mPaint);
+        StaticLayout.Builder builderObtain = StaticLayout.Builder.obtain(text, i2, i3, textPaint, (int) f);
+        if (i4 == 2) {
+            builderObtain.setAlignment(Layout.Alignment.ALIGN_OPPOSITE);
+        } else if (i4 == 3) {
+            builderObtain.setAlignment(Layout.Alignment.ALIGN_CENTER);
+        } else if (i4 != 6) {
+            builderObtain.setAlignment(Layout.Alignment.ALIGN_NORMAL);
+        }
+        if (i5 == 3) {
+            builderObtain.setEllipsize(TextUtils.TruncateAt.END);
+        } else if (i5 == 4) {
+            builderObtain.setEllipsize(TextUtils.TruncateAt.START);
+        } else if (i5 == 5) {
+            builderObtain.setEllipsize(TextUtils.TruncateAt.MIDDLE);
+        }
+        builderObtain.setMaxLines(i6);
+        builderObtain.setIncludePad(false);
+        return new AndroidComputedTextLayout(builderObtain.build(), r0.getWidth(), r0.getHeight());
     }
 
     @Override // com.android.internal.widget.remotecompose.core.PaintContext

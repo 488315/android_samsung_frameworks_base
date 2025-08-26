@@ -10,7 +10,6 @@ import com.android.systemui.volume.panel.shared.VolumePanelLogger$$ExternalSynth
 import com.android.systemui.volume.panel.shared.model.VolumePanelGlobalState;
 import kotlinx.coroutines.flow.StateFlowImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class VolumePanelGlobalStateInteractor {
     public final VolumePanelGlobalStateRepository repository;
@@ -33,8 +32,8 @@ public final class VolumePanelGlobalStateInteractor {
         LogLevel logLevel = LogLevel.DEBUG;
         VolumePanelLogger$$ExternalSyntheticLambda0 volumePanelLogger$$ExternalSyntheticLambda0 = new VolumePanelLogger$$ExternalSyntheticLambda0(7);
         LogBuffer logBuffer = volumePanelLogger.logBuffer;
-        LogMessage obtain = logBuffer.obtain("SysUI_VolumePanel", logLevel, volumePanelLogger$$ExternalSyntheticLambda0, null);
-        ((LogMessageImpl) obtain).bool1 = volumePanelGlobalState.isVisible;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("SysUI_VolumePanel", logLevel, volumePanelLogger$$ExternalSyntheticLambda0, null);
+        ((LogMessageImpl) logMessageObtain).bool1 = volumePanelGlobalState.isVisible;
+        logBuffer.commit(logMessageObtain);
     }
 }

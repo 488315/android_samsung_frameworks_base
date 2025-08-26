@@ -2,12 +2,10 @@ package com.android.systemui.media.mediaoutput.analytics;
 
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class SaEvent {
     public final String id;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ActiveOutputDevice extends SaEvent {
         public static final ActiveOutputDevice INSTANCE = new ActiveOutputDevice();
 
@@ -28,7 +26,6 @@ public abstract class SaEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AppIcon extends SaEvent {
         public static final AppIcon INSTANCE = new AppIcon();
 
@@ -49,7 +46,6 @@ public abstract class SaEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Casting extends SaEvent {
         public static final Casting INSTANCE = new Casting();
 
@@ -70,7 +66,6 @@ public abstract class SaEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ChangeAudioOutput extends SaEvent {
         public static final ChangeAudioOutput INSTANCE = new ChangeAudioOutput();
 
@@ -91,7 +86,6 @@ public abstract class SaEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ChangeAudioOutputOnTv extends SaEvent {
         public static final ChangeAudioOutputOnTv INSTANCE = new ChangeAudioOutputOnTv();
 
@@ -112,7 +106,6 @@ public abstract class SaEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ChooseADeviceAction extends SaEvent {
         public static final ChooseADeviceAction INSTANCE = new ChooseADeviceAction();
 
@@ -133,7 +126,6 @@ public abstract class SaEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ChooseADevicePage extends SaEvent {
         public static final ChooseADevicePage INSTANCE = new ChooseADevicePage();
 
@@ -154,7 +146,6 @@ public abstract class SaEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ConnectedBt extends SaEvent {
         public static final ConnectedBt INSTANCE = new ConnectedBt();
 
@@ -175,7 +166,6 @@ public abstract class SaEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ConnectedBuds extends SaEvent {
         public static final ConnectedBuds INSTANCE = new ConnectedBuds();
 
@@ -196,7 +186,6 @@ public abstract class SaEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DisconnectedBt extends SaEvent {
         public static final DisconnectedBt INSTANCE = new DisconnectedBt();
 
@@ -217,7 +206,6 @@ public abstract class SaEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DisplayedSuggestedDevice extends SaEvent {
         public static final DisplayedSuggestedDevice INSTANCE = new DisplayedSuggestedDevice();
 
@@ -238,7 +226,6 @@ public abstract class SaEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class EndMusicShareClient extends SaEvent {
         public static final EndMusicShareClient INSTANCE = new EndMusicShareClient();
 
@@ -259,7 +246,6 @@ public abstract class SaEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class EndMusicShareHost extends SaEvent {
         public static final EndMusicShareHost INSTANCE = new EndMusicShareHost();
 
@@ -280,7 +266,6 @@ public abstract class SaEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class GroupWifiSpeaker extends SaEvent {
         public static final GroupWifiSpeaker INSTANCE = new GroupWifiSpeaker();
 
@@ -301,7 +286,6 @@ public abstract class SaEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class LaunchMediaOutput extends SaEvent {
         public static final LaunchMediaOutput INSTANCE = new LaunchMediaOutput();
 
@@ -322,7 +306,6 @@ public abstract class SaEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class LaunchTvCard extends SaEvent {
         public static final LaunchTvCard INSTANCE = new LaunchTvCard();
 
@@ -343,7 +326,6 @@ public abstract class SaEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class MediaControlCustomButton1 extends SaEvent {
         public static final MediaControlCustomButton1 INSTANCE = new MediaControlCustomButton1();
 
@@ -364,7 +346,6 @@ public abstract class SaEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class MediaControlCustomButton2 extends SaEvent {
         public static final MediaControlCustomButton2 INSTANCE = new MediaControlCustomButton2();
 
@@ -385,7 +366,6 @@ public abstract class SaEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class MediaNext extends SaEvent {
         public static final MediaNext INSTANCE = new MediaNext();
 
@@ -406,7 +386,6 @@ public abstract class SaEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class MediaPlayPause extends SaEvent {
         public static final MediaPlayPause INSTANCE = new MediaPlayPause();
 
@@ -427,7 +406,6 @@ public abstract class SaEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class MediaPrevious extends SaEvent {
         public static final MediaPrevious INSTANCE = new MediaPrevious();
 
@@ -448,7 +426,6 @@ public abstract class SaEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Mirroring extends SaEvent {
         public static final Mirroring INSTANCE = new Mirroring();
 
@@ -469,7 +446,6 @@ public abstract class SaEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class MusicShareOnMyDevice extends SaEvent {
         public static final MusicShareOnMyDevice INSTANCE = new MusicShareOnMyDevice();
 
@@ -490,7 +466,6 @@ public abstract class SaEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Mute extends SaEvent {
         public static final Mute INSTANCE = new Mute();
 
@@ -511,7 +486,6 @@ public abstract class SaEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class NumberOfApps extends SaEvent {
         public static final NumberOfApps INSTANCE = new NumberOfApps();
 
@@ -532,7 +506,6 @@ public abstract class SaEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class NumberOfMusicShareDevice extends SaEvent {
         public static final NumberOfMusicShareDevice INSTANCE = new NumberOfMusicShareDevice();
 
@@ -553,7 +526,6 @@ public abstract class SaEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class OutputDevice extends SaEvent {
         public static final OutputDevice INSTANCE = new OutputDevice();
 
@@ -574,7 +546,6 @@ public abstract class SaEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class PhoneSpeaker extends SaEvent {
         public static final PhoneSpeaker INSTANCE = new PhoneSpeaker();
 
@@ -595,7 +566,6 @@ public abstract class SaEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class PlayMusicShare extends SaEvent {
         public static final PlayMusicShare INSTANCE = new PlayMusicShare();
 
@@ -616,7 +586,6 @@ public abstract class SaEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class PlayPause extends SaEvent {
         public static final PlayPause INSTANCE = new PlayPause();
 
@@ -637,7 +606,6 @@ public abstract class SaEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class RemoteControl extends SaEvent {
         public static final RemoteControl INSTANCE = new RemoteControl();
 
@@ -658,7 +626,6 @@ public abstract class SaEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SearchMusicShare extends SaEvent {
         public static final SearchMusicShare INSTANCE = new SearchMusicShare();
 
@@ -679,7 +646,6 @@ public abstract class SaEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SelectedSuggestedDevice extends SaEvent {
         public static final SelectedSuggestedDevice INSTANCE = new SelectedSuggestedDevice();
 
@@ -700,7 +666,6 @@ public abstract class SaEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Setting extends SaEvent {
         public static final Setting INSTANCE = new Setting();
 
@@ -721,7 +686,6 @@ public abstract class SaEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SharedDevicesWithMusicShare extends SaEvent {
         public static final SharedDevicesWithMusicShare INSTANCE = new SharedDevicesWithMusicShare();
 
@@ -742,7 +706,6 @@ public abstract class SaEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ShowMusicShare extends SaEvent {
         public static final ShowMusicShare INSTANCE = new ShowMusicShare();
 
@@ -763,7 +726,6 @@ public abstract class SaEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SpotifyPlaybackPreference extends SaEvent {
         public static final SpotifyPlaybackPreference INSTANCE = new SpotifyPlaybackPreference();
 
@@ -784,7 +746,6 @@ public abstract class SaEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class StreamExpansionAdd extends SaEvent {
         public static final StreamExpansionAdd INSTANCE = new StreamExpansionAdd();
 
@@ -805,7 +766,6 @@ public abstract class SaEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class StreamExpansionRemove extends SaEvent {
         public static final StreamExpansionRemove INSTANCE = new StreamExpansionRemove();
 
@@ -826,7 +786,6 @@ public abstract class SaEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TypeOfSuggestion extends SaEvent {
         public static final TypeOfSuggestion INSTANCE = new TypeOfSuggestion();
 
@@ -847,7 +806,6 @@ public abstract class SaEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class VolumeDown extends SaEvent {
         public static final VolumeDown INSTANCE = new VolumeDown();
 
@@ -868,7 +826,6 @@ public abstract class SaEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class VolumeUp extends SaEvent {
         public static final VolumeUp INSTANCE = new VolumeUp();
 
@@ -889,7 +846,6 @@ public abstract class SaEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class WifiSpeaker extends SaEvent {
         public static final WifiSpeaker INSTANCE = new WifiSpeaker();
 
@@ -910,7 +866,6 @@ public abstract class SaEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class WifiSpeakerCheckBox extends SaEvent {
         public static final WifiSpeakerCheckBox INSTANCE = new WifiSpeakerCheckBox();
 
@@ -931,7 +886,6 @@ public abstract class SaEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class WifiSpeakerPlaybackPreference extends SaEvent {
         public static final WifiSpeakerPlaybackPreference INSTANCE = new WifiSpeakerPlaybackPreference();
 

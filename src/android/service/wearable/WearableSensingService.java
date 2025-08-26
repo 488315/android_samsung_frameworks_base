@@ -110,17 +110,17 @@ public abstract class WearableSensingService extends Service {
 
         @Override // android.service.wearable.IWearableSensingService
         public void registerDataRequestObserver(int i, RemoteCallback remoteCallback, int i2, String str, RemoteCallback remoteCallback2) {
-            WearableSensingDataRequester wearableSensingDataRequester;
+            WearableSensingDataRequester wearableSensingDataRequesterCreateDataRequester;
             Objects.requireNonNull(remoteCallback);
             Objects.requireNonNull(remoteCallback2);
             synchronized (WearableSensingService.this.mDataRequestObserverIdToRequesterMap) {
-                wearableSensingDataRequester = (WearableSensingDataRequester) WearableSensingService.this.mDataRequestObserverIdToRequesterMap.get(i2);
-                if (wearableSensingDataRequester == null) {
-                    wearableSensingDataRequester = WearableSensingService.createDataRequester(remoteCallback);
-                    WearableSensingService.this.mDataRequestObserverIdToRequesterMap.put(i2, wearableSensingDataRequester);
+                wearableSensingDataRequesterCreateDataRequester = (WearableSensingDataRequester) WearableSensingService.this.mDataRequestObserverIdToRequesterMap.get(i2);
+                if (wearableSensingDataRequesterCreateDataRequester == null) {
+                    wearableSensingDataRequesterCreateDataRequester = WearableSensingService.createDataRequester(remoteCallback);
+                    WearableSensingService.this.mDataRequestObserverIdToRequesterMap.put(i2, wearableSensingDataRequesterCreateDataRequester);
                 }
             }
-            WearableSensingService.this.onDataRequestObserverRegistered(i, str, wearableSensingDataRequester, WearableSensingService.createWearableStatusConsumer(remoteCallback2));
+            WearableSensingService.this.onDataRequestObserverRegistered(i, str, wearableSensingDataRequesterCreateDataRequester, WearableSensingService.createWearableStatusConsumer(remoteCallback2));
         }
 
         @Override // android.service.wearable.IWearableSensingService
@@ -141,12 +141,12 @@ public abstract class WearableSensingService extends Service {
             WearableSensingService.this.onStartHotwordRecognition(new Consumer() { // from class: android.service.wearable.WearableSensingService$1$$ExternalSyntheticLambda2
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    WearableSensingService.AnonymousClass1.lambda$startHotwordRecognition$0(RemoteCallback.this, (HotwordAudioStream) obj);
+                    WearableSensingService.AnonymousClass1.lambda$startHotwordRecognition$0(remoteCallback, (HotwordAudioStream) obj);
                 }
             }, new Consumer() { // from class: android.service.wearable.WearableSensingService$1$$ExternalSyntheticLambda3
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    WearableSensingService.AnonymousClass1.lambda$startHotwordRecognition$1(RemoteCallback.this, (Integer) obj);
+                    WearableSensingService.AnonymousClass1.lambda$startHotwordRecognition$1(remoteCallback2, (Integer) obj);
                 }
             });
         }
@@ -168,7 +168,7 @@ public abstract class WearableSensingService extends Service {
             WearableSensingService.this.onStopHotwordRecognition(new Consumer() { // from class: android.service.wearable.WearableSensingService$1$$ExternalSyntheticLambda4
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    WearableSensingService.AnonymousClass1.lambda$stopHotwordRecognition$2(RemoteCallback.this, (Integer) obj);
+                    WearableSensingService.AnonymousClass1.lambda$stopHotwordRecognition$2(remoteCallback, (Integer) obj);
                 }
             });
         }
@@ -198,12 +198,12 @@ public abstract class WearableSensingService extends Service {
             WearableSensingService.this.onStartDetection(ambientContextEventRequest, str, new Consumer() { // from class: android.service.wearable.WearableSensingService$1$$ExternalSyntheticLambda1
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    WearableSensingService.AnonymousClass1.lambda$startDetection$4(RemoteCallback.this, (AmbientContextDetectionServiceStatus) obj);
+                    WearableSensingService.AnonymousClass1.lambda$startDetection$4(remoteCallback2, (AmbientContextDetectionServiceStatus) obj);
                 }
             }, new Consumer() { // from class: android.service.wearable.WearableSensingService$1$$ExternalSyntheticLambda0
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    WearableSensingService.AnonymousClass1.lambda$startDetection$3(RemoteCallback.this, (AmbientContextDetectionResult) obj);
+                    WearableSensingService.AnonymousClass1.lambda$startDetection$3(remoteCallback, (AmbientContextDetectionResult) obj);
                 }
             });
             Slog.d(WearableSensingService.TAG, "startDetection " + ambientContextEventRequest);
@@ -235,7 +235,7 @@ public abstract class WearableSensingService extends Service {
             WearableSensingService.this.onQueryServiceStatus(new HashSet(Arrays.asList(WearableSensingService.intArrayToIntegerArray(iArr))), str, new Consumer() { // from class: android.service.wearable.WearableSensingService$1$$ExternalSyntheticLambda5
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    WearableSensingService.AnonymousClass1.lambda$queryServiceStatus$5(RemoteCallback.this, (AmbientContextDetectionServiceStatus) obj);
+                    WearableSensingService.AnonymousClass1.lambda$queryServiceStatus$5(remoteCallback, (AmbientContextDetectionServiceStatus) obj);
                 }
             });
         }
@@ -338,7 +338,7 @@ public abstract class WearableSensingService extends Service {
         return new WearableSensingDataRequester() { // from class: android.service.wearable.WearableSensingService$$ExternalSyntheticLambda2
             @Override // android.service.wearable.WearableSensingDataRequester
             public final void requestData(WearableSensingDataRequest wearableSensingDataRequest, Consumer consumer) {
-                WearableSensingService.lambda$createDataRequester$1(RemoteCallback.this, wearableSensingDataRequest, consumer);
+                WearableSensingService.lambda$createDataRequester$1(remoteCallback, wearableSensingDataRequest, consumer);
             }
         };
     }
@@ -360,7 +360,7 @@ public abstract class WearableSensingService extends Service {
         return new Consumer() { // from class: android.service.wearable.WearableSensingService$$ExternalSyntheticLambda1
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                WearableSensingService.lambda$createWearableStatusConsumer$2(RemoteCallback.this, (Integer) obj);
+                WearableSensingService.lambda$createWearableStatusConsumer$2(remoteCallback, (Integer) obj);
             }
         };
     }

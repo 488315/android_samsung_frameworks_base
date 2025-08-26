@@ -113,96 +113,84 @@ public abstract class ColorSpace {
         BT2020_HLG_TRANSFER_PARAMETERS = transferParameters3;
         Rgb.TransferParameters transferParameters4 = new Rgb.TransferParameters(-1.555223d, 1.860454d, 0.012683313515655966d, 18.8515625d, -18.6875d, 6.277394636015326d, -2.0d);
         BT2020_PQ_TRANSFER_PARAMETERS = transferParameters4;
-        HashMap<Integer, ColorSpace> hashMap = new HashMap<>();
-        sNamedColorSpaceMap = hashMap;
+        HashMap<Integer, ColorSpace> map = new HashMap<>();
+        sNamedColorSpaceMap = map;
         SparseIntArray sparseIntArray = new SparseIntArray();
         sDataToColorSpaces = sparseIntArray;
         float[] fArr9 = null;
-        hashMap.put(Integer.valueOf(Named.SRGB.ordinal()), new Rgb("sRGB IEC61966-2.1", fArr5, fArr4, fArr9, transferParameters, Named.SRGB.ordinal()));
+        map.put(Integer.valueOf(Named.SRGB.ordinal()), new Rgb("sRGB IEC61966-2.1", fArr5, fArr4, fArr9, transferParameters, Named.SRGB.ordinal()));
         sparseIntArray.put(142671872, Named.SRGB.ordinal());
-        hashMap.put(Integer.valueOf(Named.LINEAR_SRGB.ordinal()), new Rgb("sRGB IEC61966-2.1 (Linear)", fArr5, fArr4, 1.0d, 0.0f, 1.0f, Named.LINEAR_SRGB.ordinal()));
+        map.put(Integer.valueOf(Named.LINEAR_SRGB.ordinal()), new Rgb("sRGB IEC61966-2.1 (Linear)", fArr5, fArr4, 1.0d, 0.0f, 1.0f, Named.LINEAR_SRGB.ordinal()));
         sparseIntArray.put(138477568, Named.LINEAR_SRGB.ordinal());
-        hashMap.put(Integer.valueOf(Named.EXTENDED_SRGB.ordinal()), new Rgb("scRGB-nl IEC 61966-2-2:2003", fArr5, fArr4, null, new DoubleUnaryOperator() { // from class: android.graphics.ColorSpace$$ExternalSyntheticLambda0
+        map.put(Integer.valueOf(Named.EXTENDED_SRGB.ordinal()), new Rgb("scRGB-nl IEC 61966-2-2:2003", fArr5, fArr4, null, new DoubleUnaryOperator() { // from class: android.graphics.ColorSpace$$ExternalSyntheticLambda0
             @Override // java.util.function.DoubleUnaryOperator
             public final double applyAsDouble(double d) {
-                double absRcpResponse;
-                absRcpResponse = ColorSpace.absRcpResponse(d, 0.9478672985781991d, 0.05213270142180095d, 0.07739938080495357d, 0.04045d, 2.4d);
-                return absRcpResponse;
+                return ColorSpace.absRcpResponse(d, 0.9478672985781991d, 0.05213270142180095d, 0.07739938080495357d, 0.04045d, 2.4d);
             }
         }, new DoubleUnaryOperator() { // from class: android.graphics.ColorSpace$$ExternalSyntheticLambda1
             @Override // java.util.function.DoubleUnaryOperator
             public final double applyAsDouble(double d) {
-                double absResponse;
-                absResponse = ColorSpace.absResponse(d, 0.9478672985781991d, 0.05213270142180095d, 0.07739938080495357d, 0.04045d, 2.4d);
-                return absResponse;
+                return ColorSpace.absResponse(d, 0.9478672985781991d, 0.05213270142180095d, 0.07739938080495357d, 0.04045d, 2.4d);
             }
         }, -0.799f, 2.399f, transferParameters, Named.EXTENDED_SRGB.ordinal()));
         sparseIntArray.put(411107328, Named.EXTENDED_SRGB.ordinal());
-        hashMap.put(Integer.valueOf(Named.LINEAR_EXTENDED_SRGB.ordinal()), new Rgb("scRGB IEC 61966-2-2:2003", fArr5, fArr4, 1.0d, -0.5f, 7.499f, Named.LINEAR_EXTENDED_SRGB.ordinal()));
+        map.put(Integer.valueOf(Named.LINEAR_EXTENDED_SRGB.ordinal()), new Rgb("scRGB IEC 61966-2-2:2003", fArr5, fArr4, 1.0d, -0.5f, 7.499f, Named.LINEAR_EXTENDED_SRGB.ordinal()));
         sparseIntArray.put(406913024, Named.LINEAR_EXTENDED_SRGB.ordinal());
-        hashMap.put(Integer.valueOf(Named.BT709.ordinal()), new Rgb("Rec. ITU-R BT.709-5", fArr5, fArr4, fArr9, transferParameters2, Named.BT709.ordinal()));
+        map.put(Integer.valueOf(Named.BT709.ordinal()), new Rgb("Rec. ITU-R BT.709-5", fArr5, fArr4, fArr9, transferParameters2, Named.BT709.ordinal()));
         sparseIntArray.put(281083904, Named.BT709.ordinal());
-        hashMap.put(Integer.valueOf(Named.BT2020.ordinal()), new Rgb("Rec. ITU-R BT.2020-1", fArr8, fArr4, fArr9, new Rgb.TransferParameters(0.9096697898662786d, 0.09033021013372146d, 0.2222222222222222d, 0.08145d, 2.2222222222222223d), Named.BT2020.ordinal()));
+        map.put(Integer.valueOf(Named.BT2020.ordinal()), new Rgb("Rec. ITU-R BT.2020-1", fArr8, fArr4, fArr9, new Rgb.TransferParameters(0.9096697898662786d, 0.09033021013372146d, 0.2222222222222222d, 0.08145d, 2.2222222222222223d), Named.BT2020.ordinal()));
         sparseIntArray.put(147193856, Named.BT2020.ordinal());
         float f = 0.0f;
         float f2 = 1.0f;
-        hashMap.put(Integer.valueOf(Named.DCI_P3.ordinal()), new Rgb("SMPTE RP 431-2-2007 DCI (P3)", fArr7, new float[]{0.314f, 0.351f}, 2.6d, f, f2, Named.DCI_P3.ordinal()));
+        map.put(Integer.valueOf(Named.DCI_P3.ordinal()), new Rgb("SMPTE RP 431-2-2007 DCI (P3)", fArr7, new float[]{0.314f, 0.351f}, 2.6d, f, f2, Named.DCI_P3.ordinal()));
         sparseIntArray.put(155844608, Named.DCI_P3.ordinal());
-        hashMap.put(Integer.valueOf(Named.DISPLAY_P3.ordinal()), new Rgb("Display P3", fArr7, fArr4, fArr9, transferParameters, Named.DISPLAY_P3.ordinal()));
+        map.put(Integer.valueOf(Named.DISPLAY_P3.ordinal()), new Rgb("Display P3", fArr7, fArr4, fArr9, transferParameters, Named.DISPLAY_P3.ordinal()));
         sparseIntArray.put(143261696, Named.DISPLAY_P3.ordinal());
-        hashMap.put(Integer.valueOf(Named.NTSC_1953.ordinal()), new Rgb("NTSC (1953)", fArr6, fArr, (float[]) null, transferParameters2, Named.NTSC_1953.ordinal()));
+        map.put(Integer.valueOf(Named.NTSC_1953.ordinal()), new Rgb("NTSC (1953)", fArr6, fArr, (float[]) null, transferParameters2, Named.NTSC_1953.ordinal()));
         float[] fArr10 = null;
-        hashMap.put(Integer.valueOf(Named.SMPTE_C.ordinal()), new Rgb("SMPTE-C RGB", new float[]{0.63f, 0.34f, 0.31f, 0.595f, 0.155f, 0.07f}, fArr4, fArr10, transferParameters2, Named.SMPTE_C.ordinal()));
-        hashMap.put(Integer.valueOf(Named.ADOBE_RGB.ordinal()), new Rgb("Adobe RGB (1998)", new float[]{0.64f, 0.33f, 0.21f, 0.71f, 0.15f, 0.06f}, fArr4, 2.2d, f, f2, Named.ADOBE_RGB.ordinal()));
+        map.put(Integer.valueOf(Named.SMPTE_C.ordinal()), new Rgb("SMPTE-C RGB", new float[]{0.63f, 0.34f, 0.31f, 0.595f, 0.155f, 0.07f}, fArr4, fArr10, transferParameters2, Named.SMPTE_C.ordinal()));
+        map.put(Integer.valueOf(Named.ADOBE_RGB.ordinal()), new Rgb("Adobe RGB (1998)", new float[]{0.64f, 0.33f, 0.21f, 0.71f, 0.15f, 0.06f}, fArr4, 2.2d, f, f2, Named.ADOBE_RGB.ordinal()));
         sparseIntArray.put(151715840, Named.ADOBE_RGB.ordinal());
-        hashMap.put(Integer.valueOf(Named.PRO_PHOTO_RGB.ordinal()), new Rgb("ROMM RGB ISO 22028-2:2013", new float[]{0.7347f, 0.2653f, 0.1596f, 0.8404f, 0.0366f, 1.0E-4f}, fArr2, fArr10, new Rgb.TransferParameters(1.0d, SContextConstants.ENVIRONMENT_VALUE_UNKNOWN, 0.0625d, 0.031248d, 1.8d), Named.PRO_PHOTO_RGB.ordinal()));
+        map.put(Integer.valueOf(Named.PRO_PHOTO_RGB.ordinal()), new Rgb("ROMM RGB ISO 22028-2:2013", new float[]{0.7347f, 0.2653f, 0.1596f, 0.8404f, 0.0366f, 1.0E-4f}, fArr2, fArr10, new Rgb.TransferParameters(1.0d, SContextConstants.ENVIRONMENT_VALUE_UNKNOWN, 0.0625d, 0.031248d, 1.8d), Named.PRO_PHOTO_RGB.ordinal()));
         double d = 1.0d;
         float f3 = -65504.0f;
         float f4 = 65504.0f;
-        hashMap.put(Integer.valueOf(Named.ACES.ordinal()), new Rgb("SMPTE ST 2065-1:2012 ACES", new float[]{0.7347f, 0.2653f, 0.0f, 1.0f, 1.0E-4f, -0.077f}, fArr3, d, f3, f4, Named.ACES.ordinal()));
-        hashMap.put(Integer.valueOf(Named.ACESCG.ordinal()), new Rgb("Academy S-2014-004 ACEScg", new float[]{0.713f, 0.293f, 0.165f, 0.83f, 0.128f, 0.044f}, fArr3, d, f3, f4, Named.ACESCG.ordinal()));
-        hashMap.put(Integer.valueOf(Named.CIE_XYZ.ordinal()), new Xyz("Generic XYZ", Named.CIE_XYZ.ordinal()));
-        hashMap.put(Integer.valueOf(Named.CIE_LAB.ordinal()), new Lab("Generic L*a*b*", Named.CIE_LAB.ordinal()));
+        map.put(Integer.valueOf(Named.ACES.ordinal()), new Rgb("SMPTE ST 2065-1:2012 ACES", new float[]{0.7347f, 0.2653f, 0.0f, 1.0f, 1.0E-4f, -0.077f}, fArr3, d, f3, f4, Named.ACES.ordinal()));
+        map.put(Integer.valueOf(Named.ACESCG.ordinal()), new Rgb("Academy S-2014-004 ACEScg", new float[]{0.713f, 0.293f, 0.165f, 0.83f, 0.128f, 0.044f}, fArr3, d, f3, f4, Named.ACESCG.ordinal()));
+        map.put(Integer.valueOf(Named.CIE_XYZ.ordinal()), new Xyz("Generic XYZ", Named.CIE_XYZ.ordinal()));
+        map.put(Integer.valueOf(Named.CIE_LAB.ordinal()), new Lab("Generic L*a*b*", Named.CIE_LAB.ordinal()));
         float[] fArr11 = null;
         float f5 = 0.0f;
         float f6 = 1.0f;
-        hashMap.put(Integer.valueOf(Named.BT2020_HLG.ordinal()), new Rgb("Hybrid Log Gamma encoding", fArr8, fArr4, fArr11, new DoubleUnaryOperator() { // from class: android.graphics.ColorSpace$$ExternalSyntheticLambda2
+        map.put(Integer.valueOf(Named.BT2020_HLG.ordinal()), new Rgb("Hybrid Log Gamma encoding", fArr8, fArr4, fArr11, new DoubleUnaryOperator() { // from class: android.graphics.ColorSpace$$ExternalSyntheticLambda2
             @Override // java.util.function.DoubleUnaryOperator
             public final double applyAsDouble(double d2) {
-                double transferHLGOETF;
-                transferHLGOETF = ColorSpace.transferHLGOETF(ColorSpace.BT2020_HLG_TRANSFER_PARAMETERS, d2);
-                return transferHLGOETF;
+                return ColorSpace.transferHLGOETF(ColorSpace.BT2020_HLG_TRANSFER_PARAMETERS, d2);
             }
         }, new DoubleUnaryOperator() { // from class: android.graphics.ColorSpace$$ExternalSyntheticLambda3
             @Override // java.util.function.DoubleUnaryOperator
             public final double applyAsDouble(double d2) {
-                double transferHLGEOTF;
-                transferHLGEOTF = ColorSpace.transferHLGEOTF(ColorSpace.BT2020_HLG_TRANSFER_PARAMETERS, d2);
-                return transferHLGEOTF;
+                return ColorSpace.transferHLGEOTF(ColorSpace.BT2020_HLG_TRANSFER_PARAMETERS, d2);
             }
         }, f5, f6, transferParameters3, Named.BT2020_HLG.ordinal()));
         sparseIntArray.put(168165376, Named.BT2020_HLG.ordinal());
-        hashMap.put(Integer.valueOf(Named.BT2020_PQ.ordinal()), new Rgb("Perceptual Quantizer encoding", fArr8, fArr4, fArr11, new DoubleUnaryOperator() { // from class: android.graphics.ColorSpace$$ExternalSyntheticLambda4
+        map.put(Integer.valueOf(Named.BT2020_PQ.ordinal()), new Rgb("Perceptual Quantizer encoding", fArr8, fArr4, fArr11, new DoubleUnaryOperator() { // from class: android.graphics.ColorSpace$$ExternalSyntheticLambda4
             @Override // java.util.function.DoubleUnaryOperator
             public final double applyAsDouble(double d2) {
-                double transferST2048OETF;
-                transferST2048OETF = ColorSpace.transferST2048OETF(ColorSpace.BT2020_PQ_TRANSFER_PARAMETERS, d2);
-                return transferST2048OETF;
+                return ColorSpace.transferST2048OETF(ColorSpace.BT2020_PQ_TRANSFER_PARAMETERS, d2);
             }
         }, new DoubleUnaryOperator() { // from class: android.graphics.ColorSpace$$ExternalSyntheticLambda5
             @Override // java.util.function.DoubleUnaryOperator
             public final double applyAsDouble(double d2) {
-                double transferST2048EOTF;
-                transferST2048EOTF = ColorSpace.transferST2048EOTF(ColorSpace.BT2020_PQ_TRANSFER_PARAMETERS, d2);
-                return transferST2048EOTF;
+                return ColorSpace.transferST2048EOTF(ColorSpace.BT2020_PQ_TRANSFER_PARAMETERS, d2);
             }
         }, f5, f6, transferParameters4, Named.BT2020_PQ.ordinal()));
         sparseIntArray.put(163971072, Named.BT2020_PQ.ordinal());
         if (Flags.okLabColorspace()) {
-            hashMap.put(Integer.valueOf(Named.OK_LAB.ordinal()), new OkLab("Oklab", Named.OK_LAB.ordinal()));
+            map.put(Integer.valueOf(Named.OK_LAB.ordinal()), new OkLab("Oklab", Named.OK_LAB.ordinal()));
         }
         if (Flags.displayBt2020Colorspace()) {
-            hashMap.put(Integer.valueOf(Named.DISPLAY_BT2020.ordinal()), new Rgb("Display BT. 2020", fArr8, fArr4, (float[]) null, transferParameters, Named.DISPLAY_BT2020.ordinal()));
+            map.put(Integer.valueOf(Named.DISPLAY_BT2020.ordinal()), new Rgb("Display BT. 2020", fArr8, fArr4, (float[]) null, transferParameters, Named.DISPLAY_BT2020.ordinal()));
             sparseIntArray.put(142999552, Named.DISPLAY_BT2020.ordinal());
         }
     }
@@ -369,17 +357,17 @@ public abstract class ColorSpace {
 
     public int getDataSpace() {
         SparseIntArray sparseIntArray = sDataToColorSpaces;
-        int indexOfValue = sparseIntArray.indexOfValue(getId());
-        if (indexOfValue != -1) {
-            return sparseIntArray.keyAt(indexOfValue);
+        int iIndexOfValue = sparseIntArray.indexOfValue(getId());
+        if (iIndexOfValue != -1) {
+            return sparseIntArray.keyAt(iIndexOfValue);
         }
         return 0;
     }
 
     public static ColorSpace get(Named named) {
-        HashMap<Integer, ColorSpace> hashMap = sNamedColorSpaceMap;
-        ColorSpace colorSpace = hashMap.get(Integer.valueOf(named.ordinal()));
-        return colorSpace == null ? hashMap.get(Integer.valueOf(Named.SRGB.ordinal())) : colorSpace;
+        HashMap<Integer, ColorSpace> map = sNamedColorSpaceMap;
+        ColorSpace colorSpace = map.get(Integer.valueOf(named.ordinal()));
+        return colorSpace == null ? map.get(Integer.valueOf(Named.SRGB.ordinal())) : colorSpace;
     }
 
     public static ColorSpace match(float[] fArr, Rgb.TransferParameters transferParameters) {
@@ -572,9 +560,9 @@ public abstract class ColorSpace {
 
     /* JADX INFO: Access modifiers changed from: private */
     public static float[] chromaticAdaptation(float[] fArr, float[] fArr2, float[] fArr3) {
-        float[] mul3x3Float3 = mul3x3Float3(fArr, fArr2);
-        float[] mul3x3Float32 = mul3x3Float3(fArr, fArr3);
-        return mul3x3(inverse3x3(fArr), mul3x3Diag(new float[]{mul3x3Float32[0] / mul3x3Float3[0], mul3x3Float32[1] / mul3x3Float3[1], mul3x3Float32[2] / mul3x3Float3[2]}, fArr));
+        float[] fArrMul3x3Float3 = mul3x3Float3(fArr, fArr2);
+        float[] fArrMul3x3Float32 = mul3x3Float3(fArr, fArr3);
+        return mul3x3(inverse3x3(fArr), mul3x3Diag(new float[]{fArrMul3x3Float32[0] / fArrMul3x3Float3[0], fArrMul3x3Float32[1] / fArrMul3x3Float3[1], fArrMul3x3Float32[2] / fArrMul3x3Float3[2]}, fArr));
     }
 
     public static float[] cctToXyz(int i) {
@@ -617,12 +605,12 @@ public abstract class ColorSpace {
         if ((fArr.length != 2 && fArr.length != 3) || (fArr2.length != 2 && fArr2.length != 3)) {
             throw new IllegalArgumentException("A white point array must have 2 or 3 floats");
         }
-        float[] copyOf = fArr.length == 3 ? Arrays.copyOf(fArr, 3) : xyYToXyz(fArr);
-        float[] copyOf2 = fArr2.length == 3 ? Arrays.copyOf(fArr2, 3) : xyYToXyz(fArr2);
-        if (compare(copyOf, copyOf2)) {
+        float[] fArrCopyOf = fArr.length == 3 ? Arrays.copyOf(fArr, 3) : xyYToXyz(fArr);
+        float[] fArrCopyOf2 = fArr2.length == 3 ? Arrays.copyOf(fArr2, 3) : xyYToXyz(fArr2);
+        if (compare(fArrCopyOf, fArrCopyOf2)) {
             return new float[]{1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f};
         }
-        return chromaticAdaptation(adaptation.mTransform, copyOf, copyOf2);
+        return chromaticAdaptation(adaptation.mTransform, fArrCopyOf, fArrCopyOf2);
     }
 
     private static final class Xyz extends ColorSpace {
@@ -701,11 +689,11 @@ public abstract class ColorSpace {
         public float[] toXyz(float[] fArr) {
             fArr[0] = ColorSpace.clamp(fArr[0], 0.0f, 100.0f);
             fArr[1] = ColorSpace.clamp(fArr[1], -128.0f, 128.0f);
-            float clamp = ColorSpace.clamp(fArr[2], -128.0f, 128.0f);
-            fArr[2] = clamp;
+            float fClamp = ColorSpace.clamp(fArr[2], -128.0f, 128.0f);
+            fArr[2] = fClamp;
             float f = (fArr[0] + 16.0f) / 116.0f;
             float f2 = (fArr[1] * 0.002f) + f;
-            float f3 = f - (clamp * 0.005f);
+            float f3 = f - (fClamp * 0.005f);
             float f4 = f2 > D ? f2 * f2 * f2 : (f2 - C) * 0.12841855f;
             float f5 = f > D ? f * f * f : (f - C) * 0.12841855f;
             float f6 = f3 > D ? f3 * f3 * f3 : (f3 - C) * 0.12841855f;
@@ -720,14 +708,14 @@ public abstract class ColorSpace {
             float f = fArr[0] / ColorSpace.ILLUMINANT_D50_XYZ[0];
             float f2 = fArr[1] / ColorSpace.ILLUMINANT_D50_XYZ[1];
             float f3 = fArr[2] / ColorSpace.ILLUMINANT_D50_XYZ[2];
-            float pow = f > A ? (float) Math.pow(f, 0.3333333333333333d) : (f * B) + C;
-            float pow2 = f2 > A ? (float) Math.pow(f2, 0.3333333333333333d) : (f2 * B) + C;
-            float f4 = (116.0f * pow2) - 16.0f;
-            float f5 = (pow - pow2) * 500.0f;
-            float pow3 = (pow2 - (f3 > A ? (float) Math.pow(f3, 0.3333333333333333d) : (f3 * B) + C)) * 200.0f;
+            float fPow = f > A ? (float) Math.pow(f, 0.3333333333333333d) : (f * B) + C;
+            float fPow2 = f2 > A ? (float) Math.pow(f2, 0.3333333333333333d) : (f2 * B) + C;
+            float f4 = (116.0f * fPow2) - 16.0f;
+            float f5 = (fPow - fPow2) * 500.0f;
+            float fPow3 = (fPow2 - (f3 > A ? (float) Math.pow(f3, 0.3333333333333333d) : (f3 * B) + C)) * 200.0f;
             fArr[0] = ColorSpace.clamp(f4, 0.0f, 100.0f);
             fArr[1] = ColorSpace.clamp(f5, -128.0f, 128.0f);
-            fArr[2] = ColorSpace.clamp(pow3, -128.0f, 128.0f);
+            fArr[2] = ColorSpace.clamp(fPow3, -128.0f, 128.0f);
             return fArr;
         }
     }
@@ -787,11 +775,11 @@ public abstract class ColorSpace {
         static {
             float[] fArr = {0.818933f, 0.032984544f, 0.0482003f, 0.36186674f, 0.9293119f, 0.26436627f, -0.12885971f, 0.03614564f, 0.6338517f};
             M1TMP = fArr;
-            float[] mul3x3 = ColorSpace.mul3x3(fArr, chromaticAdaptation(Adaptation.BRADFORD, ILLUMINANT_D50, ILLUMINANT_D65));
-            M1 = mul3x3;
+            float[] fArrMul3x3 = ColorSpace.mul3x3(fArr, chromaticAdaptation(Adaptation.BRADFORD, ILLUMINANT_D50, ILLUMINANT_D65));
+            M1 = fArrMul3x3;
             float[] fArr2 = {0.21045426f, 1.9779985f, 0.025904037f, 0.7936178f, -2.4285922f, 0.78277177f, -0.004072047f, 0.4505937f, -0.80867577f};
             M2 = fArr2;
-            INVERSE_M1 = ColorSpace.inverse3x3(mul3x3);
+            INVERSE_M1 = ColorSpace.inverse3x3(fArrMul3x3);
             INVERSE_M2 = ColorSpace.inverse3x3(fArr2);
         }
     }
@@ -886,19 +874,19 @@ public abstract class ColorSpace {
             }
 
             public int hashCode() {
-                long doubleToLongBits = Double.doubleToLongBits(this.a);
-                long doubleToLongBits2 = Double.doubleToLongBits(this.b);
-                int i = (((int) (doubleToLongBits ^ (doubleToLongBits >>> 32))) * 31) + ((int) (doubleToLongBits2 ^ (doubleToLongBits2 >>> 32)));
-                long doubleToLongBits3 = Double.doubleToLongBits(this.c);
-                int i2 = (i * 31) + ((int) (doubleToLongBits3 ^ (doubleToLongBits3 >>> 32)));
-                long doubleToLongBits4 = Double.doubleToLongBits(this.d);
-                int i3 = (i2 * 31) + ((int) (doubleToLongBits4 ^ (doubleToLongBits4 >>> 32)));
-                long doubleToLongBits5 = Double.doubleToLongBits(this.e);
-                int i4 = (i3 * 31) + ((int) (doubleToLongBits5 ^ (doubleToLongBits5 >>> 32)));
-                long doubleToLongBits6 = Double.doubleToLongBits(this.f);
-                int i5 = (i4 * 31) + ((int) (doubleToLongBits6 ^ (doubleToLongBits6 >>> 32)));
-                long doubleToLongBits7 = Double.doubleToLongBits(this.g);
-                return (i5 * 31) + ((int) ((doubleToLongBits7 >>> 32) ^ doubleToLongBits7));
+                long jDoubleToLongBits = Double.doubleToLongBits(this.a);
+                long jDoubleToLongBits2 = Double.doubleToLongBits(this.b);
+                int i = (((int) (jDoubleToLongBits ^ (jDoubleToLongBits >>> 32))) * 31) + ((int) (jDoubleToLongBits2 ^ (jDoubleToLongBits2 >>> 32)));
+                long jDoubleToLongBits3 = Double.doubleToLongBits(this.c);
+                int i2 = (i * 31) + ((int) (jDoubleToLongBits3 ^ (jDoubleToLongBits3 >>> 32)));
+                long jDoubleToLongBits4 = Double.doubleToLongBits(this.d);
+                int i3 = (i2 * 31) + ((int) (jDoubleToLongBits4 ^ (jDoubleToLongBits4 >>> 32)));
+                long jDoubleToLongBits5 = Double.doubleToLongBits(this.e);
+                int i4 = (i3 * 31) + ((int) (jDoubleToLongBits5 ^ (jDoubleToLongBits5 >>> 32)));
+                long jDoubleToLongBits6 = Double.doubleToLongBits(this.f);
+                int i5 = (i4 * 31) + ((int) (jDoubleToLongBits6 ^ (jDoubleToLongBits6 >>> 32)));
+                long jDoubleToLongBits7 = Double.doubleToLongBits(this.g);
+                return (i5 * 31) + ((int) ((jDoubleToLongBits7 >>> 32) ^ jDoubleToLongBits7));
             }
 
             /* JADX INFO: Access modifiers changed from: private */
@@ -935,9 +923,7 @@ public abstract class ColorSpace {
                 return new DoubleUnaryOperator() { // from class: android.graphics.ColorSpace$Rgb$$ExternalSyntheticLambda2
                     @Override // java.util.function.DoubleUnaryOperator
                     public final double applyAsDouble(double d) {
-                        double transferHLGOETF;
-                        transferHLGOETF = ColorSpace.transferHLGOETF(ColorSpace.Rgb.TransferParameters.this, d);
-                        return transferHLGOETF;
+                        return ColorSpace.transferHLGOETF(transferParameters, d);
                     }
                 };
             }
@@ -945,9 +931,7 @@ public abstract class ColorSpace {
                 return new DoubleUnaryOperator() { // from class: android.graphics.ColorSpace$Rgb$$ExternalSyntheticLambda3
                     @Override // java.util.function.DoubleUnaryOperator
                     public final double applyAsDouble(double d) {
-                        double transferST2048OETF;
-                        transferST2048OETF = ColorSpace.transferST2048OETF(ColorSpace.Rgb.TransferParameters.this, d);
-                        return transferST2048OETF;
+                        return ColorSpace.transferST2048OETF(transferParameters, d);
                     }
                 };
             }
@@ -955,18 +939,16 @@ public abstract class ColorSpace {
                 return new DoubleUnaryOperator() { // from class: android.graphics.ColorSpace$Rgb$$ExternalSyntheticLambda4
                     @Override // java.util.function.DoubleUnaryOperator
                     public final double applyAsDouble(double d) {
-                        double rcpResponse;
-                        rcpResponse = ColorSpace.rcpResponse(d, r0.a, r0.b, r0.c, r0.d, ColorSpace.Rgb.TransferParameters.this.g);
-                        return rcpResponse;
+                        ColorSpace.Rgb.TransferParameters transferParameters2 = transferParameters;
+                        return ColorSpace.rcpResponse(d, transferParameters2.a, transferParameters2.b, transferParameters2.c, transferParameters2.d, transferParameters2.g);
                     }
                 };
             }
             return new DoubleUnaryOperator() { // from class: android.graphics.ColorSpace$Rgb$$ExternalSyntheticLambda5
                 @Override // java.util.function.DoubleUnaryOperator
                 public final double applyAsDouble(double d) {
-                    double rcpResponse;
-                    rcpResponse = ColorSpace.rcpResponse(d, r0.a, r0.b, r0.c, r0.d, r0.e, r0.f, ColorSpace.Rgb.TransferParameters.this.g);
-                    return rcpResponse;
+                    ColorSpace.Rgb.TransferParameters transferParameters2 = transferParameters;
+                    return ColorSpace.rcpResponse(d, transferParameters2.a, transferParameters2.b, transferParameters2.c, transferParameters2.d, transferParameters2.e, transferParameters2.f, transferParameters2.g);
                 }
             };
         }
@@ -976,9 +958,7 @@ public abstract class ColorSpace {
                 return new DoubleUnaryOperator() { // from class: android.graphics.ColorSpace$Rgb$$ExternalSyntheticLambda7
                     @Override // java.util.function.DoubleUnaryOperator
                     public final double applyAsDouble(double d) {
-                        double transferHLGEOTF;
-                        transferHLGEOTF = ColorSpace.transferHLGEOTF(ColorSpace.Rgb.TransferParameters.this, d);
-                        return transferHLGEOTF;
+                        return ColorSpace.transferHLGEOTF(transferParameters, d);
                     }
                 };
             }
@@ -986,9 +966,7 @@ public abstract class ColorSpace {
                 return new DoubleUnaryOperator() { // from class: android.graphics.ColorSpace$Rgb$$ExternalSyntheticLambda8
                     @Override // java.util.function.DoubleUnaryOperator
                     public final double applyAsDouble(double d) {
-                        double transferST2048OETF;
-                        transferST2048OETF = ColorSpace.transferST2048OETF(ColorSpace.Rgb.TransferParameters.this, d);
-                        return transferST2048OETF;
+                        return ColorSpace.transferST2048OETF(transferParameters, d);
                     }
                 };
             }
@@ -996,18 +974,16 @@ public abstract class ColorSpace {
                 return new DoubleUnaryOperator() { // from class: android.graphics.ColorSpace$Rgb$$ExternalSyntheticLambda9
                     @Override // java.util.function.DoubleUnaryOperator
                     public final double applyAsDouble(double d) {
-                        double response;
-                        response = ColorSpace.response(d, r0.a, r0.b, r0.c, r0.d, ColorSpace.Rgb.TransferParameters.this.g);
-                        return response;
+                        ColorSpace.Rgb.TransferParameters transferParameters2 = transferParameters;
+                        return ColorSpace.response(d, transferParameters2.a, transferParameters2.b, transferParameters2.c, transferParameters2.d, transferParameters2.g);
                     }
                 };
             }
             return new DoubleUnaryOperator() { // from class: android.graphics.ColorSpace$Rgb$$ExternalSyntheticLambda10
                 @Override // java.util.function.DoubleUnaryOperator
                 public final double applyAsDouble(double d) {
-                    double response;
-                    response = ColorSpace.response(d, r0.a, r0.b, r0.c, r0.d, r0.e, r0.f, ColorSpace.Rgb.TransferParameters.this.g);
-                    return response;
+                    ColorSpace.Rgb.TransferParameters transferParameters2 = transferParameters;
+                    return ColorSpace.response(d, transferParameters2.a, transferParameters2.b, transferParameters2.c, transferParameters2.d, transferParameters2.e, transferParameters2.f, transferParameters2.g);
                 }
             };
         }
@@ -1041,53 +1017,31 @@ public abstract class ColorSpace {
         }
 
         /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        private Rgb(java.lang.String r14, float[] r15, float[] r16, final double r17, float r19, float r20, int r21) {
-            /*
-                r13 = this;
-                r9 = r17
-                r0 = 4607182418800017408(0x3ff0000000000000, double:1.0)
-                int r0 = (r9 > r0 ? 1 : (r9 == r0 ? 0 : -1))
-                if (r0 != 0) goto Ld
-                java.util.function.DoubleUnaryOperator r1 = java.util.function.DoubleUnaryOperator.identity()
-                goto L12
-            Ld:
-                android.graphics.ColorSpace$Rgb$$ExternalSyntheticLambda0 r1 = new android.graphics.ColorSpace$Rgb$$ExternalSyntheticLambda0
-                r1.<init>()
-            L12:
-                r11 = r1
-                if (r0 != 0) goto L1a
-                java.util.function.DoubleUnaryOperator r0 = java.util.function.DoubleUnaryOperator.identity()
-                goto L1f
-            L1a:
-                android.graphics.ColorSpace$Rgb$$ExternalSyntheticLambda1 r0 = new android.graphics.ColorSpace$Rgb$$ExternalSyntheticLambda1
-                r0.<init>()
-            L1f:
-                r12 = r0
-                android.graphics.ColorSpace$Rgb$TransferParameters r0 = new android.graphics.ColorSpace$Rgb$TransferParameters
-                r5 = 0
-                r7 = 0
-                r1 = 4607182418800017408(0x3ff0000000000000, double:1.0)
-                r3 = 0
-                r0.<init>(r1, r3, r5, r7, r9)
-                r6 = 0
-                r2 = r13
-                r3 = r14
-                r4 = r15
-                r5 = r16
-                r9 = r19
-                r10 = r20
-                r7 = r11
-                r8 = r12
-                r12 = r21
-                r11 = r0
-                r2.<init>(r3, r4, r5, r6, r7, r8, r9, r10, r11, r12)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: android.graphics.ColorSpace.Rgb.<init>(java.lang.String, float[], float[], double, float, float, int):void");
+        private Rgb(String str, float[] fArr, float[] fArr2, final double d, float f, float f2, int i) {
+            DoubleUnaryOperator doubleUnaryOperatorIdentity;
+            DoubleUnaryOperator doubleUnaryOperatorIdentity2;
+            if (d == 1.0d) {
+                doubleUnaryOperatorIdentity = DoubleUnaryOperator.identity();
+            } else {
+                doubleUnaryOperatorIdentity = new DoubleUnaryOperator() { // from class: android.graphics.ColorSpace$Rgb$$ExternalSyntheticLambda0
+                    @Override // java.util.function.DoubleUnaryOperator
+                    public final double applyAsDouble(double d2) {
+                        return ColorSpace.Rgb.lambda$new$8(d, d2);
+                    }
+                };
+            }
+            DoubleUnaryOperator doubleUnaryOperator = doubleUnaryOperatorIdentity;
+            if (d == 1.0d) {
+                doubleUnaryOperatorIdentity2 = DoubleUnaryOperator.identity();
+            } else {
+                doubleUnaryOperatorIdentity2 = new DoubleUnaryOperator() { // from class: android.graphics.ColorSpace$Rgb$$ExternalSyntheticLambda1
+                    @Override // java.util.function.DoubleUnaryOperator
+                    public final double applyAsDouble(double d2) {
+                        return ColorSpace.Rgb.lambda$new$9(d, d2);
+                    }
+                };
+            }
+            this(str, fArr, fArr2, null, doubleUnaryOperator, doubleUnaryOperatorIdentity2, f, f2, new TransferParameters(1.0d, SContextConstants.ENVIRONMENT_VALUE_UNKNOWN, SContextConstants.ENVIRONMENT_VALUE_UNKNOWN, SContextConstants.ENVIRONMENT_VALUE_UNKNOWN, d), i);
         }
 
         static /* synthetic */ double lambda$new$8(double d, double d2) {
@@ -1105,8 +1059,8 @@ public abstract class ColorSpace {
         }
 
         private Rgb(String str, float[] fArr, float[] fArr2, float[] fArr3, DoubleUnaryOperator doubleUnaryOperator, DoubleUnaryOperator doubleUnaryOperator2, float f, float f2, TransferParameters transferParameters, int i) {
-            super(str, Model.RGB, i);
             float[] fArr4;
+            super(str, Model.RGB, i);
             if (fArr == null || (fArr.length != 6 && fArr.length != 9)) {
                 throw new IllegalArgumentException("The color space's primaries must be defined as an array of 6 floats in xyY or 9 floats in XYZ");
             }
@@ -1119,12 +1073,12 @@ public abstract class ColorSpace {
             if (f >= f2) {
                 throw new IllegalArgumentException("Invalid range: min=" + f + ", max=" + f2 + "; min must be strictly < max");
             }
-            float[] xyWhitePoint = xyWhitePoint(fArr2);
-            this.mWhitePoint = xyWhitePoint;
-            float[] xyPrimaries = xyPrimaries(fArr);
-            this.mPrimaries = xyPrimaries;
+            float[] fArrXyWhitePoint = xyWhitePoint(fArr2);
+            this.mWhitePoint = fArrXyWhitePoint;
+            float[] fArrXyPrimaries = xyPrimaries(fArr);
+            this.mPrimaries = fArrXyPrimaries;
             if (fArr3 == null) {
-                this.mTransform = computeXYZMatrix(xyPrimaries, xyWhitePoint);
+                this.mTransform = computeXYZMatrix(fArrXyPrimaries, fArrXyWhitePoint);
             } else {
                 if (fArr3.length != 9) {
                     throw new IllegalArgumentException("Transform must have 9 entries! Has " + fArr3.length);
@@ -1139,26 +1093,24 @@ public abstract class ColorSpace {
             DoubleUnaryOperator doubleUnaryOperator3 = new DoubleUnaryOperator() { // from class: android.graphics.ColorSpace$Rgb$$ExternalSyntheticLambda6
                 @Override // java.util.function.DoubleUnaryOperator
                 public final double applyAsDouble(double d) {
-                    double clamp;
-                    clamp = ColorSpace.Rgb.this.clamp(d);
-                    return clamp;
+                    return this.f$0.clamp(d);
                 }
             };
             this.mClampedOetf = doubleUnaryOperator.andThen(doubleUnaryOperator3);
             this.mClampedEotf = doubleUnaryOperator3.andThen(doubleUnaryOperator2);
             this.mTransferParameters = transferParameters;
-            this.mIsWideGamut = isWideGamut(xyPrimaries, f, f2);
-            this.mIsSrgb = isSrgb(xyPrimaries, xyWhitePoint, doubleUnaryOperator, doubleUnaryOperator2, f, f2, i);
+            this.mIsWideGamut = isWideGamut(fArrXyPrimaries, f, f2);
+            this.mIsSrgb = isSrgb(fArrXyPrimaries, fArrXyWhitePoint, doubleUnaryOperator, doubleUnaryOperator2, f, f2, i);
             if (transferParameters == null) {
                 this.mNativePtr = 0L;
                 return;
             }
-            if (xyWhitePoint == null || (fArr4 = this.mTransform) == null) {
-                throw new IllegalStateException("ColorSpace (" + this + ") cannot create native object! mWhitePoint: " + Arrays.toString(xyWhitePoint) + " mTransform: " + Arrays.toString(this.mTransform));
+            if (fArrXyWhitePoint == null || (fArr4 = this.mTransform) == null) {
+                throw new IllegalStateException("ColorSpace (" + this + ") cannot create native object! mWhitePoint: " + Arrays.toString(fArrXyWhitePoint) + " mTransform: " + Arrays.toString(this.mTransform));
             }
-            long nativeCreate = Native.nativeCreate((float) transferParameters.a, (float) transferParameters.b, (float) transferParameters.c, (float) transferParameters.d, (float) transferParameters.e, (float) transferParameters.f, (float) transferParameters.g, ColorSpace.adaptToIlluminantD50(xyWhitePoint, fArr4));
-            this.mNativePtr = nativeCreate;
-            NoImagePreloadHolder.sRegistry.registerNativeAllocation(this, nativeCreate);
+            long jNativeCreate = Native.nativeCreate((float) transferParameters.a, (float) transferParameters.b, (float) transferParameters.c, (float) transferParameters.d, (float) transferParameters.e, (float) transferParameters.f, (float) transferParameters.g, ColorSpace.adaptToIlluminantD50(fArrXyWhitePoint, fArr4));
+            this.mNativePtr = jNativeCreate;
+            NoImagePreloadHolder.sRegistry.registerNativeAllocation(this, jNativeCreate);
         }
 
         private static class NoImagePreloadHolder {
@@ -1329,14 +1281,14 @@ public abstract class ColorSpace {
 
         @Override // android.graphics.ColorSpace
         public int hashCode() {
-            int hashCode = ((((super.hashCode() * 31) + Arrays.hashCode(this.mWhitePoint)) * 31) + Arrays.hashCode(this.mPrimaries)) * 31;
+            int iHashCode = ((((super.hashCode() * 31) + Arrays.hashCode(this.mWhitePoint)) * 31) + Arrays.hashCode(this.mPrimaries)) * 31;
             float f = this.mMin;
-            int floatToIntBits = (hashCode + (f != 0.0f ? Float.floatToIntBits(f) : 0)) * 31;
+            int iFloatToIntBits = (iHashCode + (f != 0.0f ? Float.floatToIntBits(f) : 0)) * 31;
             float f2 = this.mMax;
-            int floatToIntBits2 = (floatToIntBits + (f2 != 0.0f ? Float.floatToIntBits(f2) : 0)) * 31;
+            int iFloatToIntBits2 = (iFloatToIntBits + (f2 != 0.0f ? Float.floatToIntBits(f2) : 0)) * 31;
             TransferParameters transferParameters = this.mTransferParameters;
-            int hashCode2 = floatToIntBits2 + (transferParameters != null ? transferParameters.hashCode() : 0);
-            return this.mTransferParameters == null ? (((hashCode2 * 31) + this.mOetf.hashCode()) * 31) + this.mEotf.hashCode() : hashCode2;
+            int iHashCode2 = iFloatToIntBits2 + (transferParameters != null ? transferParameters.hashCode() : 0);
+            return this.mTransferParameters == null ? (((iHashCode2 * 31) + this.mOetf.hashCode()) * 31) + this.mEotf.hashCode() : iHashCode2;
         }
 
         private static boolean isSrgb(float[] fArr, float[] fArr2, DoubleUnaryOperator doubleUnaryOperator, DoubleUnaryOperator doubleUnaryOperator2, float f, float f2, int i) {
@@ -1397,26 +1349,26 @@ public abstract class ColorSpace {
         }
 
         private static float[] computePrimaries(float[] fArr) {
-            float[] mul3x3Float3 = ColorSpace.mul3x3Float3(fArr, new float[]{1.0f, 0.0f, 0.0f});
-            float[] mul3x3Float32 = ColorSpace.mul3x3Float3(fArr, new float[]{0.0f, 1.0f, 0.0f});
-            float[] mul3x3Float33 = ColorSpace.mul3x3Float3(fArr, new float[]{0.0f, 0.0f, 1.0f});
-            float f = mul3x3Float3[0];
-            float f2 = mul3x3Float3[1];
-            float f3 = f + f2 + mul3x3Float3[2];
-            float f4 = mul3x3Float32[0];
-            float f5 = mul3x3Float32[1];
-            float f6 = f4 + f5 + mul3x3Float32[2];
-            float f7 = mul3x3Float33[0];
-            float f8 = mul3x3Float33[1];
-            float f9 = f7 + f8 + mul3x3Float33[2];
+            float[] fArrMul3x3Float3 = ColorSpace.mul3x3Float3(fArr, new float[]{1.0f, 0.0f, 0.0f});
+            float[] fArrMul3x3Float32 = ColorSpace.mul3x3Float3(fArr, new float[]{0.0f, 1.0f, 0.0f});
+            float[] fArrMul3x3Float33 = ColorSpace.mul3x3Float3(fArr, new float[]{0.0f, 0.0f, 1.0f});
+            float f = fArrMul3x3Float3[0];
+            float f2 = fArrMul3x3Float3[1];
+            float f3 = f + f2 + fArrMul3x3Float3[2];
+            float f4 = fArrMul3x3Float32[0];
+            float f5 = fArrMul3x3Float32[1];
+            float f6 = f4 + f5 + fArrMul3x3Float32[2];
+            float f7 = fArrMul3x3Float33[0];
+            float f8 = fArrMul3x3Float33[1];
+            float f9 = f7 + f8 + fArrMul3x3Float33[2];
             return new float[]{f / f3, f2 / f3, f4 / f6, f5 / f6, f7 / f9, f8 / f9};
         }
 
         private static float[] computeWhitePoint(float[] fArr) {
-            float[] mul3x3Float3 = ColorSpace.mul3x3Float3(fArr, new float[]{1.0f, 1.0f, 1.0f});
-            float f = mul3x3Float3[0];
-            float f2 = mul3x3Float3[1];
-            float f3 = f + f2 + mul3x3Float3[2];
+            float[] fArrMul3x3Float3 = ColorSpace.mul3x3Float3(fArr, new float[]{1.0f, 1.0f, 1.0f});
+            float f = fArrMul3x3Float3[0];
+            float f2 = fArrMul3x3Float3[1];
+            float f3 = f + f2 + fArrMul3x3Float3[2];
             return new float[]{f / f3, f2 / f3};
         }
 
@@ -1524,9 +1476,9 @@ public abstract class ColorSpace {
                 colorSpace = colorSpace2;
             }
             Rgb rgb = (Rgb) colorSpace;
-            float[] xyYToXyz = z ? ColorSpace.xyYToXyz(rgb.mWhitePoint) : ColorSpace.ILLUMINANT_D50_XYZ;
-            float[] xyYToXyz2 = z2 ? ColorSpace.xyYToXyz(rgb.mWhitePoint) : ColorSpace.ILLUMINANT_D50_XYZ;
-            return new float[]{xyYToXyz[0] / xyYToXyz2[0], xyYToXyz[1] / xyYToXyz2[1], xyYToXyz[2] / xyYToXyz2[2]};
+            float[] fArrXyYToXyz = z ? ColorSpace.xyYToXyz(rgb.mWhitePoint) : ColorSpace.ILLUMINANT_D50_XYZ;
+            float[] fArrXyYToXyz2 = z2 ? ColorSpace.xyYToXyz(rgb.mWhitePoint) : ColorSpace.ILLUMINANT_D50_XYZ;
+            return new float[]{fArrXyYToXyz[0] / fArrXyYToXyz2[0], fArrXyYToXyz[1] / fArrXyYToXyz2[1], fArrXyYToXyz[2] / fArrXyYToXyz2[2]};
         }
 
         public ColorSpace getSource() {
@@ -1584,20 +1536,20 @@ public abstract class ColorSpace {
                 if (ColorSpace.compare(rgb.mWhitePoint, rgb2.mWhitePoint)) {
                     return ColorSpace.mul3x3(rgb2.mInverseTransform, rgb.mTransform);
                 }
-                float[] fArr = rgb.mTransform;
-                float[] fArr2 = rgb2.mInverseTransform;
-                float[] xyYToXyz = ColorSpace.xyYToXyz(rgb.mWhitePoint);
-                float[] xyYToXyz2 = ColorSpace.xyYToXyz(rgb2.mWhitePoint);
+                float[] fArrMul3x3Diag = rgb.mTransform;
+                float[] fArrInverse3x3 = rgb2.mInverseTransform;
+                float[] fArrXyYToXyz = ColorSpace.xyYToXyz(rgb.mWhitePoint);
+                float[] fArrXyYToXyz2 = ColorSpace.xyYToXyz(rgb2.mWhitePoint);
                 if (!ColorSpace.compare(rgb.mWhitePoint, ColorSpace.ILLUMINANT_D50)) {
-                    fArr = ColorSpace.mul3x3(ColorSpace.chromaticAdaptation(Adaptation.BRADFORD.mTransform, xyYToXyz, Arrays.copyOf(ColorSpace.ILLUMINANT_D50_XYZ, 3)), rgb.mTransform);
+                    fArrMul3x3Diag = ColorSpace.mul3x3(ColorSpace.chromaticAdaptation(Adaptation.BRADFORD.mTransform, fArrXyYToXyz, Arrays.copyOf(ColorSpace.ILLUMINANT_D50_XYZ, 3)), rgb.mTransform);
                 }
                 if (!ColorSpace.compare(rgb2.mWhitePoint, ColorSpace.ILLUMINANT_D50)) {
-                    fArr2 = ColorSpace.inverse3x3(ColorSpace.mul3x3(ColorSpace.chromaticAdaptation(Adaptation.BRADFORD.mTransform, xyYToXyz2, Arrays.copyOf(ColorSpace.ILLUMINANT_D50_XYZ, 3)), rgb2.mTransform));
+                    fArrInverse3x3 = ColorSpace.inverse3x3(ColorSpace.mul3x3(ColorSpace.chromaticAdaptation(Adaptation.BRADFORD.mTransform, fArrXyYToXyz2, Arrays.copyOf(ColorSpace.ILLUMINANT_D50_XYZ, 3)), rgb2.mTransform));
                 }
                 if (renderIntent == RenderIntent.ABSOLUTE) {
-                    fArr = ColorSpace.mul3x3Diag(new float[]{xyYToXyz[0] / xyYToXyz2[0], xyYToXyz[1] / xyYToXyz2[1], xyYToXyz[2] / xyYToXyz2[2]}, fArr);
+                    fArrMul3x3Diag = ColorSpace.mul3x3Diag(new float[]{fArrXyYToXyz[0] / fArrXyYToXyz2[0], fArrXyYToXyz[1] / fArrXyYToXyz2[1], fArrXyYToXyz[2] / fArrXyYToXyz2[2]}, fArrMul3x3Diag);
                 }
-                return ColorSpace.mul3x3(fArr2, fArr);
+                return ColorSpace.mul3x3(fArrInverse3x3, fArrMul3x3Diag);
             }
         }
 

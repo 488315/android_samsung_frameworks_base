@@ -61,7 +61,6 @@ import com.android.systemui.util.SettingsHelper;
 import com.samsung.android.aod.AODManager;
 import com.samsung.android.view.SemWindowManager;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class NotificationEffect extends AbsEdgeLightingView {
     public static final boolean mBlockNotiTouch_for_NA = "US".equals(SystemProperties.get("ro.csc.countryiso_code", ""));
@@ -92,14 +91,12 @@ public class NotificationEffect extends AbsEdgeLightingView {
     public final Rect mTouchableRec;
     public boolean mUsingBlackBG;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.edgelighting.effect.container.NotificationEffect$1, reason: invalid class name */
     public class AnonymousClass1 {
         public AnonymousClass1() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AODBroadcastReceiver extends BroadcastReceiver {
         public /* synthetic */ AODBroadcastReceiver(NotificationEffect notificationEffect, int i) {
             this();
@@ -134,7 +131,6 @@ public class NotificationEffect extends AbsEdgeLightingView {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class GestureListener extends GestureDetector.SimpleOnGestureListener {
         public /* synthetic */ GestureListener(NotificationEffect notificationEffect, int i) {
             this();
@@ -172,61 +168,53 @@ public class NotificationEffect extends AbsEdgeLightingView {
             KeyguardManager keyguardManager;
             PowerManager powerManager = NotificationEffect.this.mPm;
             if (powerManager != null && powerManager.isInteractive() && NotificationEffect.this.mIsActionEnable) {
-                float abs = Math.abs(motionEvent2.getX() - motionEvent.getX());
+                float fAbs = Math.abs(motionEvent2.getX() - motionEvent.getX());
                 float y = motionEvent2.getY() - motionEvent.getY();
-                if (y > 150.0f && abs < 400.0f) {
+                if (y > 150.0f && fAbs < 400.0f) {
                     Slog.i(NotificationEffect.this.TAG, "Fling down ");
                     Slog.i(NotificationEffect.this.TAG, "*****mSwipeDownDisabledForEdgeLightingPlus = " + NotificationEffect.this.mIsSwipeDownDisabledForEdgeLightingPlus);
                     NotificationEffect notificationEffect = NotificationEffect.this;
                     if (!notificationEffect.mIsSwipeDownDisabledForEdgeLightingPlus && (keyguardManager = notificationEffect.mKgm) != null && !keyguardManager.isKeyguardLocked() && !Utils.isLargeCoverFlipFolded()) {
-                        NotificationEffect notificationEffect2 = NotificationEffect.this;
-                        if (notificationEffect2.isTouchable()) {
-                            Rect rect = notificationEffect2.mMorphView.mTouchRect;
-                            rect.bottom = rect.top;
-                        }
+                        NotificationEffect.this.removeTouchArea();
                         if (!Utils.MODEL_NAME.contains("SM-F90") ? false : Utils.isFolded()) {
                             NotificationEffect.this.launchPendingIntent();
                             return true;
                         }
-                        final NotificationEffect notificationEffect3 = NotificationEffect.this;
-                        notificationEffect3.getClass();
+                        final NotificationEffect notificationEffect2 = NotificationEffect.this;
+                        notificationEffect2.getClass();
                         AnimatorSet animatorSet = new AnimatorSet();
-                        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(notificationEffect3.mMorphView, "translationY", -(r11.getHeight() / 2.0f));
-                        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(notificationEffect3.mMorphView, "translationY", r2.getHeight() / 2.0f);
-                        ObjectAnimator ofFloat3 = ObjectAnimator.ofFloat(notificationEffect3.mMorphView, "alpha", 1.0f);
-                        ObjectAnimator ofFloat4 = ObjectAnimator.ofFloat(notificationEffect3.mMorphView, "alpha", 0.0f);
-                        KeyguardSecPatternViewController$$ExternalSyntheticOutline0.m(0.33f, 0.0f, 0.4f, 1.0f, ofFloat);
-                        ofFloat.setDuration(200L);
-                        KeyguardSecPatternViewController$$ExternalSyntheticOutline0.m(0.33f, 0.0f, 0.4f, 1.0f, ofFloat);
-                        ofFloat.setDuration(200L);
-                        ofFloat3.setDuration(100L);
-                        KeyguardSecPatternViewController$$ExternalSyntheticOutline0.m(0.33f, 0.0f, 0.4f, 1.0f, ofFloat2);
-                        ofFloat2.setDuration(300L);
-                        KeyguardSecPatternViewController$$ExternalSyntheticOutline0.m(0.33f, 0.0f, 0.4f, 1.0f, ofFloat4);
-                        ofFloat4.setDuration(300L);
-                        animatorSet.playTogether(ofFloat2, ofFloat4);
+                        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(notificationEffect2.mMorphView, "translationY", -(r11.getHeight() / 2.0f));
+                        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(notificationEffect2.mMorphView, "translationY", r2.getHeight() / 2.0f);
+                        ObjectAnimator objectAnimatorOfFloat3 = ObjectAnimator.ofFloat(notificationEffect2.mMorphView, "alpha", 1.0f);
+                        ObjectAnimator objectAnimatorOfFloat4 = ObjectAnimator.ofFloat(notificationEffect2.mMorphView, "alpha", 0.0f);
+                        KeyguardSecPatternViewController$$ExternalSyntheticOutline0.m(0.33f, 0.0f, 0.4f, 1.0f, objectAnimatorOfFloat);
+                        objectAnimatorOfFloat.setDuration(200L);
+                        KeyguardSecPatternViewController$$ExternalSyntheticOutline0.m(0.33f, 0.0f, 0.4f, 1.0f, objectAnimatorOfFloat);
+                        objectAnimatorOfFloat.setDuration(200L);
+                        objectAnimatorOfFloat3.setDuration(100L);
+                        KeyguardSecPatternViewController$$ExternalSyntheticOutline0.m(0.33f, 0.0f, 0.4f, 1.0f, objectAnimatorOfFloat2);
+                        objectAnimatorOfFloat2.setDuration(300L);
+                        KeyguardSecPatternViewController$$ExternalSyntheticOutline0.m(0.33f, 0.0f, 0.4f, 1.0f, objectAnimatorOfFloat4);
+                        objectAnimatorOfFloat4.setDuration(300L);
+                        animatorSet.playTogether(objectAnimatorOfFloat2, objectAnimatorOfFloat4);
                         animatorSet.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.edgelighting.effect.container.NotificationEffect.5
                             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                            public final void onAnimationEnd(Animator animator) {
+                            public final void onAnimationEnd(Animator animator) throws PendingIntent.CanceledException {
                                 super.onAnimationEnd(animator);
-                                NotificationEffect.m2557$$Nest$mlaunchPopupWindow(NotificationEffect.this, true);
+                                NotificationEffect.m2574$$Nest$mlaunchPopupWindow(NotificationEffect.this, true);
                             }
                         });
                         animatorSet.start();
                         return true;
                     }
                 } else {
-                    if (abs > 150.0f && y < 400.0f) {
+                    if (fAbs > 150.0f && y < 400.0f) {
                         Slog.i(NotificationEffect.this.TAG, "Fling Side ");
                         boolean z = motionEvent2.getX() - motionEvent.getX() < 0.0f;
-                        NotificationEffect notificationEffect4 = NotificationEffect.this;
-                        if (notificationEffect4.isTouchable()) {
-                            Rect rect2 = notificationEffect4.mMorphView.mTouchRect;
-                            rect2.bottom = rect2.top;
-                        }
-                        NotificationEffect notificationEffect5 = NotificationEffect.this;
-                        float left = z ? -notificationEffect5.mMorphView.getRight() : notificationEffect5.mScreenWidth - notificationEffect5.mMorphView.getLeft();
-                        final MorphView morphView = notificationEffect5.mMorphView;
+                        NotificationEffect.this.removeTouchArea();
+                        NotificationEffect notificationEffect3 = NotificationEffect.this;
+                        float left = z ? -notificationEffect3.mMorphView.getRight() : notificationEffect3.mScreenWidth - notificationEffect3.mMorphView.getLeft();
+                        final MorphView morphView = notificationEffect3.mMorphView;
                         if (morphView.mIsHiding) {
                             Slog.i("MorphView", "Morph animation is running. So ignore hide action.");
                         } else {
@@ -234,10 +222,10 @@ public class NotificationEffect extends AbsEdgeLightingView {
                             if (!morphView.isEmptyTickerText() && (anonymousClass1 = morphView.mPopupListener) != null) {
                                 NotificationEffect.this.dismissToastPopup();
                             }
-                            ObjectAnimator ofFloat5 = ObjectAnimator.ofFloat(morphView, "translationX", left);
-                            KeyguardSecPatternViewController$$ExternalSyntheticOutline0.m(0.17f, 0.67f, 0.52f, 1.47f, ofFloat5);
-                            ofFloat5.setDuration(600L);
-                            ofFloat5.addListener(new Animator.AnimatorListener() { // from class: com.android.systemui.edgelighting.effect.view.MorphView.7
+                            ObjectAnimator objectAnimatorOfFloat5 = ObjectAnimator.ofFloat(morphView, "translationX", left);
+                            KeyguardSecPatternViewController$$ExternalSyntheticOutline0.m(0.17f, 0.67f, 0.52f, 1.47f, objectAnimatorOfFloat5);
+                            objectAnimatorOfFloat5.setDuration(600L);
+                            objectAnimatorOfFloat5.addListener(new Animator.AnimatorListener() { // from class: com.android.systemui.edgelighting.effect.view.MorphView.7
                                 @Override // android.animation.Animator.AnimatorListener
                                 public final void onAnimationCancel(Animator animator) {
                                     MorphView.this.mIsHiding = false;
@@ -257,9 +245,9 @@ public class NotificationEffect extends AbsEdgeLightingView {
                                 public final void onAnimationStart(Animator animator) {
                                 }
                             });
-                            ofFloat5.start();
+                            objectAnimatorOfFloat5.start();
                         }
-                        EdgeLightingDialog.AnonymousClass4 anonymousClass4 = notificationEffect5.mEdgeListener;
+                        EdgeLightingDialog.AnonymousClass4 anonymousClass4 = notificationEffect3.mEdgeListener;
                         if (anonymousClass4 != null && (iEdgeLightingWindowCallback = EdgeLightingDialog.this.mWindowCallback) != null) {
                             iEdgeLightingWindowCallback.onSwipeToastInWindow();
                         }
@@ -267,19 +255,15 @@ public class NotificationEffect extends AbsEdgeLightingView {
                     }
                     if (y < -70.0f) {
                         Slog.d(NotificationEffect.this.TAG, "Fling up ");
-                        NotificationEffect notificationEffect6 = NotificationEffect.this;
-                        if (notificationEffect6.isTouchable()) {
-                            Rect rect3 = notificationEffect6.mMorphView.mTouchRect;
-                            rect3.bottom = rect3.top;
-                        }
+                        NotificationEffect.this.removeTouchArea();
                         NotificationEffect.this.mMorphView.hide();
                     } else {
                         String str = NotificationEffect.this.TAG;
-                        StringBuilder m = CubicBezierEasing$$ExternalSyntheticOutline0.m("onFling dx : ", abs, " dy : ", y, "velocityX ");
-                        m.append(f);
-                        m.append(" velocityY : ");
-                        m.append(f2);
-                        Slog.i(str, m.toString());
+                        StringBuilder sbM = CubicBezierEasing$$ExternalSyntheticOutline0.m("onFling dx : ", fAbs, " dy : ", y, "velocityX ");
+                        sbM.append(f);
+                        sbM.append(" velocityY : ");
+                        sbM.append(f2);
+                        Slog.i(str, sbM.toString());
                     }
                 }
             }
@@ -287,7 +271,7 @@ public class NotificationEffect extends AbsEdgeLightingView {
         }
 
         @Override // android.view.GestureDetector.SimpleOnGestureListener, android.view.GestureDetector.OnGestureListener
-        public final void onLongPress(MotionEvent motionEvent) {
+        public final void onLongPress(MotionEvent motionEvent) throws PendingIntent.CanceledException {
             Rect rect;
             KeyguardManager keyguardManager;
             Slog.d(NotificationEffect.this.TAG, "onLongPress");
@@ -299,7 +283,7 @@ public class NotificationEffect extends AbsEdgeLightingView {
             if (!notificationEffect.mIsActionEnable || (keyguardManager = notificationEffect.mKgm) == null || keyguardManager.isKeyguardLocked() || Utils.isLargeCoverFlipFolded()) {
                 return;
             }
-            NotificationEffect.m2557$$Nest$mlaunchPopupWindow(NotificationEffect.this, false);
+            NotificationEffect.m2574$$Nest$mlaunchPopupWindow(NotificationEffect.this, false);
         }
 
         @Override // android.view.GestureDetector.SimpleOnGestureListener, android.view.GestureDetector.OnDoubleTapListener
@@ -328,6 +312,10 @@ public class NotificationEffect extends AbsEdgeLightingView {
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:11:0x003e  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public static void $r8$lambda$ysN2dLK9OINhN2ykIKVWaylfnNA(NotificationEffect notificationEffect, ViewTreeObserver.InternalInsetsInfo internalInsetsInfo) {
         Region region = internalInsetsInfo.touchableRegion;
         if (region == null) {
@@ -339,21 +327,18 @@ public class NotificationEffect extends AbsEdgeLightingView {
             String str = Utils.MODEL_NAME;
             if (Settings.System.getInt(context.getContentResolver(), SettingsHelper.INDEX_AOD_SHOW_STATE, 0) != 1) {
                 notificationEffect.mTouchableRec.set(notificationEffect.getLeft(), notificationEffect.getTop(), notificationEffect.getRight(), notificationEffect.getBottom());
-                region.union(notificationEffect.mTouchableRec);
-                internalInsetsInfo.setTouchableInsets(3);
+            } else if (notificationEffect.getAlpha() > 0.0f) {
+                notificationEffect.mTouchableRec.set(notificationEffect.mMorphView.mTouchRect);
+            } else {
+                region.set(0, 0, 0, 0);
             }
-        }
-        if (notificationEffect.getAlpha() > 0.0f) {
-            notificationEffect.mTouchableRec.set(notificationEffect.mMorphView.mTouchRect);
-        } else {
-            region.set(0, 0, 0, 0);
         }
         region.union(notificationEffect.mTouchableRec);
         internalInsetsInfo.setTouchableInsets(3);
     }
 
     /* renamed from: -$$Nest$mfreeformLaunchBounds, reason: not valid java name */
-    public static Rect m2556$$Nest$mfreeformLaunchBounds(NotificationEffect notificationEffect) {
+    public static Rect m2573$$Nest$mfreeformLaunchBounds(NotificationEffect notificationEffect) {
         notificationEffect.getClass();
         if (Feature.FEATURE_IS_TABLET_DEVICE) {
             notificationEffect.FREEFORM_WIDTH_RATIO = 0.5f;
@@ -378,7 +363,7 @@ public class NotificationEffect extends AbsEdgeLightingView {
     }
 
     /* renamed from: -$$Nest$mlaunchPopupWindow, reason: not valid java name */
-    public static void m2557$$Nest$mlaunchPopupWindow(NotificationEffect notificationEffect, boolean z) {
+    public static void m2574$$Nest$mlaunchPopupWindow(NotificationEffect notificationEffect, boolean z) throws PendingIntent.CanceledException {
         if (!z) {
             notificationEffect.getClass();
             if (Build.VERSION.SEM_PLATFORM_INT >= 120000) {
@@ -406,12 +391,12 @@ public class NotificationEffect extends AbsEdgeLightingView {
         notificationEffect.resetScreenSize();
         new Runnable() { // from class: com.android.systemui.edgelighting.effect.container.NotificationEffect.2
             @Override // java.lang.Runnable
-            public final void run() {
+            public final void run() throws PendingIntent.CanceledException {
                 try {
-                    ActivityOptions makeBasic = ActivityOptions.makeBasic();
-                    makeBasic.setPendingIntentBackgroundActivityStartMode(1);
-                    Rect m2556$$Nest$mfreeformLaunchBounds = NotificationEffect.m2556$$Nest$mfreeformLaunchBounds(NotificationEffect.this);
-                    Slog.i(NotificationEffect.this.TAG, "launchPopupWindow: bounds=" + m2556$$Nest$mfreeformLaunchBounds);
+                    ActivityOptions activityOptionsMakeBasic = ActivityOptions.makeBasic();
+                    activityOptionsMakeBasic.setPendingIntentBackgroundActivityStartMode(1);
+                    Rect rectM2573$$Nest$mfreeformLaunchBounds = NotificationEffect.m2573$$Nest$mfreeformLaunchBounds(NotificationEffect.this);
+                    Slog.i(NotificationEffect.this.TAG, "launchPopupWindow: bounds=" + rectM2573$$Nest$mfreeformLaunchBounds);
                     NotificationEffect notificationEffect2 = NotificationEffect.this;
                     notificationEffect2.mIsActivity = false;
                     PendingIntent pendingIntent2 = notificationEffect2.mPendingIntent;
@@ -421,9 +406,9 @@ public class NotificationEffect extends AbsEdgeLightingView {
                         } else {
                             Slog.i(NotificationEffect.this.TAG, "isActivity: false " + NotificationEffect.this.mPendingIntent.getCreatorPackage());
                         }
-                        if (!m2556$$Nest$mfreeformLaunchBounds.isEmpty()) {
-                            makeBasic.setLaunchBounds(m2556$$Nest$mfreeformLaunchBounds);
-                            NotificationEffect.this.mPendingIntent.send(null, 0, null, null, null, null, makeBasic.toBundle());
+                        if (!rectM2573$$Nest$mfreeformLaunchBounds.isEmpty()) {
+                            activityOptionsMakeBasic.setLaunchBounds(rectM2573$$Nest$mfreeformLaunchBounds);
+                            NotificationEffect.this.mPendingIntent.send(null, 0, null, null, null, null, activityOptionsMakeBasic.toBundle());
                         }
                     }
                     NotificationEffect notificationEffect3 = NotificationEffect.this;
@@ -465,37 +450,37 @@ public class NotificationEffect extends AbsEdgeLightingView {
             public final void dispatchMessage(Message message) {
                 int i = message.what;
                 NotificationEffect notificationEffect = NotificationEffect.this;
-                if (i != 1) {
-                    if (i == 2) {
-                        notificationEffect.mMorphView.hide();
+                if (i == 1) {
+                    notificationEffect.mMorphView.show();
+                    if (notificationEffect.mTouchableRec != null) {
+                        Slog.i(notificationEffect.TAG, "EdgeLightingTouchableRect=" + notificationEffect.mTouchableRec.left + "," + notificationEffect.mTouchableRec.top + "," + notificationEffect.mTouchableRec.right + "," + notificationEffect.mTouchableRec.bottom);
                         return;
                     }
-                    if (i != 3) {
-                        if (i != 4) {
-                            return;
-                        }
-                        notificationEffect.requestHideEffectView();
-                        return;
-                    } else {
-                        notificationEffect.setVisibility(4);
-                        EdgeLightingDialog.AnonymousClass4 anonymousClass4 = notificationEffect.mEdgeListener;
-                        if (anonymousClass4 != null) {
-                            anonymousClass4.onFinishAnimation();
-                            return;
-                        }
-                        return;
-                    }
+                    return;
                 }
-                notificationEffect.mMorphView.show();
-                if (notificationEffect.mTouchableRec != null) {
-                    Slog.i(notificationEffect.TAG, "EdgeLightingTouchableRect=" + notificationEffect.mTouchableRec.left + "," + notificationEffect.mTouchableRec.top + "," + notificationEffect.mTouchableRec.right + "," + notificationEffect.mTouchableRec.bottom);
+                if (i == 2) {
+                    notificationEffect.mMorphView.hide();
+                    return;
+                }
+                if (i != 3) {
+                    if (i != 4) {
+                        return;
+                    }
+                    notificationEffect.removeTouchArea();
+                    notificationEffect.requestHideEffectView();
+                    return;
+                }
+                notificationEffect.setVisibility(4);
+                EdgeLightingDialog.AnonymousClass4 anonymousClass4 = notificationEffect.mEdgeListener;
+                if (anonymousClass4 != null) {
+                    anonymousClass4.onFinishAnimation();
                 }
             }
         };
         this.mTouchableRec = new Rect();
         this.mOnComputeInternalInsetsListener = new ViewTreeObserver.OnComputeInternalInsetsListener() { // from class: com.android.systemui.edgelighting.effect.container.NotificationEffect$$ExternalSyntheticLambda0
             public final void onComputeInternalInsets(ViewTreeObserver.InternalInsetsInfo internalInsetsInfo) {
-                NotificationEffect.$r8$lambda$ysN2dLK9OINhN2ykIKVWaylfnNA(NotificationEffect.this, internalInsetsInfo);
+                NotificationEffect.$r8$lambda$ysN2dLK9OINhN2ykIKVWaylfnNA(this.f$0, internalInsetsInfo);
             }
         };
         init();
@@ -526,12 +511,12 @@ public class NotificationEffect extends AbsEdgeLightingView {
         float f;
         Resources resources = getContext().getResources();
         if (resources != null) {
-            float min = Math.min(resources.getConfiguration().windowConfiguration.getBounds().width(), resources.getConfiguration().windowConfiguration.getBounds().height());
+            float fMin = Math.min(resources.getConfiguration().windowConfiguration.getBounds().width(), resources.getConfiguration().windowConfiguration.getBounds().height());
             Point point = new Point();
             SemWindowManager.getInstance().getInitialDisplaySize(point);
             float f2 = point.x;
-            f = f2 >= min ? f2 / min : 1.0f;
-            Slog.d(this.TAG, "pWidth - " + f2 + " width : " + min);
+            f = f2 >= fMin ? f2 / fMin : 1.0f;
+            Slog.d(this.TAG, "pWidth - " + f2 + " width : " + fMin);
         } else {
             f = 1.0f;
         }
@@ -664,20 +649,21 @@ public class NotificationEffect extends AbsEdgeLightingView {
                 }
                 intent.putExtra("ignoreKeyguardState", true);
                 try {
-                    if (this.mPm.isInteractive() && this.dreamManager.isDreaming()) {
-                        this.dreamManager.awaken();
-                        postDelayed(new Runnable() { // from class: com.android.systemui.edgelighting.effect.container.NotificationEffect$$ExternalSyntheticLambda1
-                            @Override // java.lang.Runnable
-                            public final void run() {
-                                NotificationEffect notificationEffect = NotificationEffect.this;
-                                notificationEffect.mKgm.semSetPendingIntentAfterUnlock(notificationEffect.mPendingIntent, intent);
-                            }
-                        }, 50L);
-                    }
                 } catch (RemoteException e) {
                     e.printStackTrace();
                 }
-                this.mKgm.semSetPendingIntentAfterUnlock(this.mPendingIntent, intent);
+                if (this.mPm.isInteractive() && this.dreamManager.isDreaming()) {
+                    this.dreamManager.awaken();
+                    postDelayed(new Runnable() { // from class: com.android.systemui.edgelighting.effect.container.NotificationEffect$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            NotificationEffect notificationEffect = this.f$0;
+                            notificationEffect.mKgm.semSetPendingIntentAfterUnlock(notificationEffect.mPendingIntent, intent);
+                        }
+                    }, 50L);
+                } else {
+                    this.mKgm.semSetPendingIntentAfterUnlock(this.mPendingIntent, intent);
+                }
             }
             EdgeLightingDialog.AnonymousClass4 anonymousClass42 = this.mEdgeListener;
             if (anonymousClass42 == null || (iEdgeLightingWindowCallback = EdgeLightingDialog.this.mWindowCallback) == null) {
@@ -735,18 +721,18 @@ public class NotificationEffect extends AbsEdgeLightingView {
             return;
         }
         String str = this.TAG;
-        StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, " onSizeChanged w : ", " h : ", " oldW : ");
-        m.append(i3);
-        m.append(" oldH : ");
-        m.append(i4);
-        Slog.d(str, m.toString());
+        StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, " onSizeChanged w : ", " h : ", " oldW : ");
+        sbM.append(i3);
+        sbM.append(" oldH : ");
+        sbM.append(i4);
+        Slog.d(str, sbM.toString());
         this.mMorphView.disappear();
         postDelayed(new Runnable(i, i2) { // from class: com.android.systemui.edgelighting.effect.container.NotificationEffect$$ExternalSyntheticLambda2
             public final /* synthetic */ int f$1;
 
             @Override // java.lang.Runnable
-            public final void run() {
-                NotificationEffect notificationEffect = NotificationEffect.this;
+            public final void run() throws Resources.NotFoundException {
+                NotificationEffect notificationEffect = this.f$0;
                 int i5 = this.f$1;
                 final MorphView morphView = notificationEffect.mMorphView;
                 morphView.mScreenWidth = i5;
@@ -754,7 +740,7 @@ public class NotificationEffect extends AbsEdgeLightingView {
                 morphView.postDelayed(new Runnable() { // from class: com.android.systemui.edgelighting.effect.view.MorphView$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        MorphView morphView2 = MorphView.this;
+                        MorphView morphView2 = morphView;
                         int i6 = MorphView.$r8$clinit;
                         morphView2.show();
                     }
@@ -776,6 +762,13 @@ public class NotificationEffect extends AbsEdgeLightingView {
         return gestureDetector != null ? gestureDetector.onTouchEvent(motionEvent) : super.onTouchEvent(motionEvent);
     }
 
+    public final void removeTouchArea() {
+        if (isTouchable()) {
+            Rect rect = this.mMorphView.mTouchRect;
+            rect.bottom = rect.top;
+        }
+    }
+
     public void setEdgeEffectInfo(EdgeEffectInfo edgeEffectInfo) {
         int i;
         int i2;
@@ -795,7 +788,7 @@ public class NotificationEffect extends AbsEdgeLightingView {
             this.mIsShowMorphView = false;
         } else {
             MorphView morphView = this.mMorphView;
-            boolean isInteractive = this.mPm.isInteractive();
+            boolean zIsInteractive = this.mPm.isInteractive();
             morphView.getClass();
             String str2 = strArr[0];
             if (str2 != null && !str2.isEmpty()) {
@@ -804,35 +797,36 @@ public class NotificationEffect extends AbsEdgeLightingView {
             String str3 = strArr[1];
             if (str3 == null || str3.isEmpty()) {
                 i = 0;
-                if (isInteractive) {
-                    if (VerificationCodeUtils.isVerificationCode(morphView.getContext(), strArr[0])) {
-                        Slog.i("MorphView", "Verification code start : " + VerificationCodeUtils.code_startIndex + " , end " + VerificationCodeUtils.code_endIndex + " code length : " + VerificationCodeUtils.getVerifyCode().length());
-                        if (VerificationCodeUtils.code_startIndex > 15) {
-                            StringBuilder sb = new StringBuilder();
-                            i = 0;
-                            String str4 = strArr[0];
-                            int i3 = VerificationCodeUtils.code_startIndex;
-                            sb.append(str4.substring(i3 - 15, i3));
-                            sb.append("...");
-                            strArr[0] = sb.toString();
-                        } else {
-                            i = 0;
-                            strArr[0] = strArr[0].substring(0, VerificationCodeUtils.code_startIndex) + "...";
-                        }
-                        morphView.mMainText.setText(strArr[i]);
-                        morphView.mCodeText.setVisibility(i);
-                        SpannableString spannableString = new SpannableString(VerificationCodeUtils.getVerifyCode());
-                        spannableString.setSpan(new UnderlineSpan(), i, spannableString.length(), i);
-                        morphView.mCodeText.setText(spannableString);
-                        i2 = 1;
+                if (!zIsInteractive) {
+                    morphView.mCodeText.setVisibility(8);
+                    i2 = i;
+                } else if (VerificationCodeUtils.isVerificationCode(morphView.getContext(), strArr[0])) {
+                    Slog.i("MorphView", "Verification code start : " + VerificationCodeUtils.code_startIndex + " , end " + VerificationCodeUtils.code_endIndex + " code length : " + VerificationCodeUtils.getVerifyCode().length());
+                    if (VerificationCodeUtils.code_startIndex > 15) {
+                        StringBuilder sb = new StringBuilder();
+                        i = 0;
+                        String str4 = strArr[0];
+                        int i3 = VerificationCodeUtils.code_startIndex;
+                        sb.append(str4.substring(i3 - 15, i3));
+                        sb.append("...");
+                        strArr[0] = sb.toString();
                     } else {
                         i = 0;
+                        strArr[0] = strArr[0].substring(0, VerificationCodeUtils.code_startIndex) + "...";
                     }
+                    morphView.mMainText.setText(strArr[i]);
+                    morphView.mCodeText.setVisibility(i);
+                    SpannableString spannableString = new SpannableString(VerificationCodeUtils.getVerifyCode());
+                    spannableString.setSpan(new UnderlineSpan(), i, spannableString.length(), i);
+                    morphView.mCodeText.setText(spannableString);
+                    i2 = 1;
+                } else {
+                    i = 0;
+                    morphView.mCodeText.setVisibility(8);
+                    i2 = i;
                 }
-                morphView.mCodeText.setVisibility(8);
-                i2 = i;
             } else {
-                if (isInteractive && VerificationCodeUtils.isVerificationCode(morphView.getContext(), strArr[1])) {
+                if (zIsInteractive && VerificationCodeUtils.isVerificationCode(morphView.getContext(), strArr[1])) {
                     Slog.i("MorphView", "Verification code start : " + VerificationCodeUtils.code_startIndex + " , end " + VerificationCodeUtils.code_endIndex + " code length : " + VerificationCodeUtils.getVerifyCode().length());
                     int i4 = VerificationCodeUtils.code_endIndex;
                     String str5 = VerificationCodeUtils.Verify_Code;
@@ -893,9 +887,7 @@ public class NotificationEffect extends AbsEdgeLightingView {
         }
         if (this.mIsShowMorphView && !this.mIsHideBriefPopupForEdgeLightingPlus) {
             try {
-                if (!this.mPm.isInteractive() || !edgeEffectInfo.mHasActionButton || this.dreamManager.isDreaming()) {
-                    this.mMorphView.showExpandButton(false);
-                } else if (Utils.isLargeCoverFlipFolded()) {
+                if (!this.mPm.isInteractive() || !edgeEffectInfo.mHasActionButton || this.dreamManager.isDreaming() || Utils.isLargeCoverFlipFolded()) {
                     this.mMorphView.showExpandButton(false);
                 } else {
                     this.mMorphView.showExpandButton(true);
@@ -944,7 +936,7 @@ public class NotificationEffect extends AbsEdgeLightingView {
                     if (iEdgeLightingWindowCallback2 != null) {
                         iEdgeLightingWindowCallback2.onClickExpandButton(str8);
                     }
-                    EdgeLightingDialog.m2554$$Nest$mdismissInternal(edgeLightingDialog);
+                    EdgeLightingDialog.m2571$$Nest$mdismissInternal(edgeLightingDialog);
                 }
                 NotificationEffect notificationEffect2 = NotificationEffect.this;
                 boolean z6 = NotificationEffect.mBlockNotiTouch_for_NA;
@@ -1086,37 +1078,37 @@ public class NotificationEffect extends AbsEdgeLightingView {
             public final void dispatchMessage(Message message) {
                 int i = message.what;
                 NotificationEffect notificationEffect = NotificationEffect.this;
-                if (i != 1) {
-                    if (i == 2) {
-                        notificationEffect.mMorphView.hide();
+                if (i == 1) {
+                    notificationEffect.mMorphView.show();
+                    if (notificationEffect.mTouchableRec != null) {
+                        Slog.i(notificationEffect.TAG, "EdgeLightingTouchableRect=" + notificationEffect.mTouchableRec.left + "," + notificationEffect.mTouchableRec.top + "," + notificationEffect.mTouchableRec.right + "," + notificationEffect.mTouchableRec.bottom);
                         return;
                     }
-                    if (i != 3) {
-                        if (i != 4) {
-                            return;
-                        }
-                        notificationEffect.requestHideEffectView();
-                        return;
-                    } else {
-                        notificationEffect.setVisibility(4);
-                        EdgeLightingDialog.AnonymousClass4 anonymousClass4 = notificationEffect.mEdgeListener;
-                        if (anonymousClass4 != null) {
-                            anonymousClass4.onFinishAnimation();
-                            return;
-                        }
-                        return;
-                    }
+                    return;
                 }
-                notificationEffect.mMorphView.show();
-                if (notificationEffect.mTouchableRec != null) {
-                    Slog.i(notificationEffect.TAG, "EdgeLightingTouchableRect=" + notificationEffect.mTouchableRec.left + "," + notificationEffect.mTouchableRec.top + "," + notificationEffect.mTouchableRec.right + "," + notificationEffect.mTouchableRec.bottom);
+                if (i == 2) {
+                    notificationEffect.mMorphView.hide();
+                    return;
+                }
+                if (i != 3) {
+                    if (i != 4) {
+                        return;
+                    }
+                    notificationEffect.removeTouchArea();
+                    notificationEffect.requestHideEffectView();
+                    return;
+                }
+                notificationEffect.setVisibility(4);
+                EdgeLightingDialog.AnonymousClass4 anonymousClass4 = notificationEffect.mEdgeListener;
+                if (anonymousClass4 != null) {
+                    anonymousClass4.onFinishAnimation();
                 }
             }
         };
         this.mTouchableRec = new Rect();
         this.mOnComputeInternalInsetsListener = new ViewTreeObserver.OnComputeInternalInsetsListener() { // from class: com.android.systemui.edgelighting.effect.container.NotificationEffect$$ExternalSyntheticLambda0
             public final void onComputeInternalInsets(ViewTreeObserver.InternalInsetsInfo internalInsetsInfo) {
-                NotificationEffect.$r8$lambda$ysN2dLK9OINhN2ykIKVWaylfnNA(NotificationEffect.this, internalInsetsInfo);
+                NotificationEffect.$r8$lambda$ysN2dLK9OINhN2ykIKVWaylfnNA(this.f$0, internalInsetsInfo);
             }
         };
         init();

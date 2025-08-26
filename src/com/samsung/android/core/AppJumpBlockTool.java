@@ -52,7 +52,6 @@ public class AppJumpBlockTool {
 
     public static Intent createAppBlockIntent(Context context, String str, int i, int i2, int i3, List<Intent> list, int i4, Bundle bundle) {
         Intent intent;
-        AppInfo appInfo;
         if (TextUtils.isEmpty(str) || context == null || list == null || list.isEmpty()) {
             Log.e("AppJumpBlockTool", "skip for error params!");
             return null;
@@ -87,40 +86,40 @@ public class AppJumpBlockTool {
         sb2.append(",userId=");
         sb2.append(i);
         Log.i("AppJumpBlockTool", sb2.toString());
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            appInfo = AppInfo.get(context, str);
+            AppInfo appInfo = AppInfo.get(context, str);
             intent = null;
-        } catch (Throwable th) {
-            th = th;
-            intent = null;
-        }
-        try {
-            Log.i("AppJumpBlockTool", "sourceAppInfo=" + appInfo);
-            if (appInfo != null && !appInfo.packageName.equals("android") && !appInfo.isSystemApp) {
-                if (isPlatformOrSamsungSignature(context, appInfo.packageName)) {
-                    Log.e("AppJumpBlockTool", "skip for source platform or samsung signature!");
-                    return null;
+            try {
+                Log.i("AppJumpBlockTool", "sourceAppInfo=" + appInfo);
+                if (appInfo != null && !appInfo.packageName.equals("android") && !appInfo.isSystemApp) {
+                    if (isPlatformOrSamsungSignature(context, appInfo.packageName)) {
+                        Log.e("AppJumpBlockTool", "skip for source platform or samsung signature!");
+                        return null;
+                    }
+                    List<AppInfo> blockedAppList = getBlockedAppList(context, appInfo, list, getAlwaysAllowList(context, str));
+                    Log.i("AppJumpBlockTool", "blockedAppList:" + Arrays.toString(blockedAppList.toArray()));
+                    if (blockedAppList.isEmpty()) {
+                        Log.i("AppJumpBlockTool", "skip for empty blockedAppList!");
+                        return null;
+                    }
+                    Log.i("AppJumpBlockTool", "startShowConfirmDialog");
+                    return buildInterceptIntent(context, i, i2, i3, appInfo, blockedAppList, list, i4, bundle);
                 }
-                List<AppInfo> blockedAppList = getBlockedAppList(context, appInfo, list, getAlwaysAllowList(context, str));
-                Log.i("AppJumpBlockTool", "blockedAppList:" + Arrays.toString(blockedAppList.toArray()));
-                if (blockedAppList.isEmpty()) {
-                    Log.i("AppJumpBlockTool", "skip for empty blockedAppList!");
-                    return null;
+                Log.i("AppJumpBlockTool", "skip for android process or system app or samsung app,sourceAppInfo=" + appInfo);
+                return null;
+            } catch (Throwable th) {
+                th = th;
+                try {
+                    Log.e("AppJumpBlockTool", "get error!", th);
+                    return intent;
+                } finally {
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                 }
-                Log.i("AppJumpBlockTool", "startShowConfirmDialog");
-                return buildInterceptIntent(context, i, i2, i3, appInfo, blockedAppList, list, i4, bundle);
             }
-            Log.i("AppJumpBlockTool", "skip for android process or system app or samsung app,sourceAppInfo=" + appInfo);
-            return null;
         } catch (Throwable th2) {
             th = th2;
-            try {
-                Log.e("AppJumpBlockTool", "get error!", th);
-                return intent;
-            } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
-            }
+            intent = null;
         }
     }
 
@@ -158,9 +157,9 @@ public class AppJumpBlockTool {
         }
         List<String> alwaysAllowList = getAlwaysAllowList(context, str);
         alwaysAllowList.addAll(list);
-        String join = String.join(NavigationBarInflaterView.GRAVITY_SEPARATOR, alwaysAllowList);
-        Log.i("AppJumpBlockTool", "newAllowList:" + join);
-        Settings.System.putString(context.getContentResolver(), SHARE_KEY + str, join);
+        String strJoin = String.join(NavigationBarInflaterView.GRAVITY_SEPARATOR, alwaysAllowList);
+        Log.i("AppJumpBlockTool", "newAllowList:" + strJoin);
+        Settings.System.putString(context.getContentResolver(), SHARE_KEY + str, strJoin);
     }
 
     private static Intent buildInterceptIntent(Context context, int i, int i2, int i3, AppInfo appInfo, List<AppInfo> list, List<Intent> list2, int i4, Bundle bundle) {
@@ -200,9 +199,9 @@ public class AppJumpBlockTool {
         } catch (Throwable th) {
             Log.e("AppJumpBlockTool", "getBlockedAppList fail!", th);
         }
-        List<AppInfo> removeRepeatData = removeRepeatData(arrayList);
-        Log.i("AppJumpBlockTool", "getBlockedAppList=" + Arrays.toString(removeRepeatData.toArray()));
-        return removeRepeatData;
+        List<AppInfo> listRemoveRepeatData = removeRepeatData(arrayList);
+        Log.i("AppJumpBlockTool", "getBlockedAppList=" + Arrays.toString(listRemoveRepeatData.toArray()));
+        return listRemoveRepeatData;
     }
 
     private static List<AppInfo> removeRepeatData(List<AppInfo> list) {
@@ -222,30 +221,31 @@ public class AppJumpBlockTool {
 
     private static ArrayList<AppInfo> getTargetAppInfo(Context context, AppInfo appInfo, Intent intent) {
         ArrayList<AppInfo> arrayList = new ArrayList<>();
-        List<ResolveInfo> queryIntentActivities = context.getPackageManager().queryIntentActivities(intent, 131072);
-        Log.e("AppJumpBlockTool", "resolveInfoList：" + queryIntentActivities.size());
+        List<ResolveInfo> listQueryIntentActivities = context.getPackageManager().queryIntentActivities(intent, 131072);
+        Log.e("AppJumpBlockTool", "resolveInfoList：" + listQueryIntentActivities.size());
         ArrayList arrayList2 = new ArrayList();
         Log.i("AppJumpBlockTool", "last launch:" + sLastFromPackage + " >> " + sLastToPackage);
-        Iterator<ResolveInfo> it = queryIntentActivities.iterator();
+        Iterator<ResolveInfo> it = listQueryIntentActivities.iterator();
         boolean z = true;
         while (it.hasNext()) {
-            AppInfo parse = AppInfo.parse(context, it.next());
-            if (parse != null) {
-                Log.i("AppJumpBlockTool", appInfo + " want launcher:" + parse);
-                if (!arrayList2.contains(parse.packageName)) {
-                    arrayList2.add(parse.packageName);
+            AppInfo appInfo2 = AppInfo.parse(context, it.next());
+            if (appInfo2 != null) {
+                Log.i("AppJumpBlockTool", appInfo + " want launcher:" + appInfo2);
+                if (!arrayList2.contains(appInfo2.packageName)) {
+                    arrayList2.add(appInfo2.packageName);
                 }
-                if (TextUtils.equals(appInfo.packageName, sLastToPackage) && TextUtils.equals(parse.packageName, sLastFromPackage)) {
+                if (TextUtils.equals(appInfo.packageName, sLastToPackage) && TextUtils.equals(appInfo2.packageName, sLastFromPackage)) {
                     Log.i("AppJumpBlockTool", "skip for app A>B>A ");
-                } else if (!isInAllowList(appInfo.packageName, parse.packageName)) {
-                    if (appInfo.packageName.equals(parse.packageName) || parse.isSystemApp) {
+                } else if (!isInAllowList(appInfo.packageName, appInfo2.packageName)) {
+                    if (appInfo.packageName.equals(appInfo2.packageName) || appInfo2.isSystemApp) {
                         Log.e("AppJumpBlockTool", "skip for jump self or target app is system app!");
-                    } else if (isPlatformOrSamsungSignature(context, parse.packageName)) {
+                        z = false;
+                    } else if (isPlatformOrSamsungSignature(context, appInfo2.packageName)) {
                         Log.e("AppJumpBlockTool", "skip for target platform or samsung signature!");
+                        z = false;
                     } else {
-                        arrayList.add(parse);
+                        arrayList.add(appInfo2);
                     }
-                    z = false;
                 }
             }
         }
@@ -261,10 +261,10 @@ public class AppJumpBlockTool {
     }
 
     private static boolean isInAllowList(String str, String str2) {
-        String[] split = APP_JUMP_BLOCK_ALLOW_LIST.split(NavigationBarInflaterView.GRAVITY_SEPARATOR);
+        String[] strArrSplit = APP_JUMP_BLOCK_ALLOW_LIST.split(NavigationBarInflaterView.GRAVITY_SEPARATOR);
         ArrayList arrayList = new ArrayList();
         ArrayList arrayList2 = new ArrayList();
-        for (String str3 : split) {
+        for (String str3 : strArrSplit) {
             if (!str3.isEmpty()) {
                 if (str3.startsWith(NativeLibraryHelper.CLEAR_ABI_OVERRIDE)) {
                     arrayList2.add(str3.replaceFirst(NativeLibraryHelper.CLEAR_ABI_OVERRIDE, ""));
@@ -351,25 +351,23 @@ public class AppJumpBlockTool {
         }
 
         public static AppInfo get(Context context, String str) {
-            ApplicationInfo applicationInfo;
-            AppInfo appInfo;
-            AppInfo appInfo2 = null;
+            AppInfo appInfo = null;
             try {
-                applicationInfo = context.getPackageManager().getPackageInfo(str, 0).applicationInfo;
-                appInfo = new AppInfo();
-            } catch (Throwable th) {
-                th = th;
-            }
-            try {
-                appInfo.appName = ((Object) applicationInfo.loadLabel(context.getPackageManager())) + "";
-                appInfo.packageName = applicationInfo.packageName;
-                appInfo.isSystemApp = ((applicationInfo.flags & 1) == 1) || ((applicationInfo.flags & 128) == 1);
-                return appInfo;
+                ApplicationInfo applicationInfo = context.getPackageManager().getPackageInfo(str, 0).applicationInfo;
+                AppInfo appInfo2 = new AppInfo();
+                try {
+                    appInfo2.appName = ((Object) applicationInfo.loadLabel(context.getPackageManager())) + "";
+                    appInfo2.packageName = applicationInfo.packageName;
+                    appInfo2.isSystemApp = ((applicationInfo.flags & 1) == 1) || ((applicationInfo.flags & 128) == 1);
+                    return appInfo2;
+                } catch (Throwable th) {
+                    th = th;
+                    appInfo = appInfo2;
+                    Log.e("AppJumpBlockTool", "get app info fail![" + str + NavigationBarInflaterView.SIZE_MOD_END, th);
+                    return appInfo;
+                }
             } catch (Throwable th2) {
                 th = th2;
-                appInfo2 = appInfo;
-                Log.e("AppJumpBlockTool", "get app info fail![" + str + NavigationBarInflaterView.SIZE_MOD_END, th);
-                return appInfo2;
             }
         }
 

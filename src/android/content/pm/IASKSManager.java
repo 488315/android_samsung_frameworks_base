@@ -222,9 +222,9 @@ public interface IASKSManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IASKSManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IASKSManager)) {
-                return (IASKSManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IASKSManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IASKSManager)) {
+                return (IASKSManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -302,44 +302,44 @@ public interface IASKSManager extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 2:
-                    String readString = parcel.readString();
-                    String readString2 = parcel.readString();
-                    long readLong = parcel.readLong();
+                    String string = parcel.readString();
+                    String string2 = parcel.readString();
+                    long j = parcel.readLong();
                     Signature[] signatureArr = (Signature[]) parcel.createTypedArray(Signature.CREATOR);
-                    String readString3 = parcel.readString();
-                    String readString4 = parcel.readString();
-                    boolean readBoolean = parcel.readBoolean();
+                    String string3 = parcel.readString();
+                    String string4 = parcel.readString();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    int verifyASKStokenForPackage = verifyASKStokenForPackage(readString, readString2, readLong, signatureArr, readString3, readString4, readBoolean);
+                    int iVerifyASKStokenForPackage = verifyASKStokenForPackage(string, string2, j, signatureArr, string3, string4, z);
                     parcel2.writeNoException();
-                    parcel2.writeInt(verifyASKStokenForPackage);
+                    parcel2.writeInt(iVerifyASKStokenForPackage);
                     return true;
                 case 3:
-                    String readString5 = parcel.readString();
-                    String readString6 = parcel.readString();
-                    int readInt = parcel.readInt();
+                    String string5 = parcel.readString();
+                    String string6 = parcel.readString();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    postASKSsetup(readString5, readString6, readInt);
+                    postASKSsetup(string5, string6, i3);
                     parcel2.writeNoException();
                     return true;
                 case 4:
-                    String readString7 = parcel.readString();
+                    String string7 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    clearASKSruleForRemovedPackage(readString7);
+                    clearASKSruleForRemovedPackage(string7);
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    String readString8 = parcel.readString();
-                    String readString9 = parcel.readString();
+                    String string8 = parcel.readString();
+                    String string9 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int checkRestrictedPermission = checkRestrictedPermission(readString8, readString9);
+                    int iCheckRestrictedPermission = checkRestrictedPermission(string8, string9);
                     parcel2.writeNoException();
-                    parcel2.writeInt(checkRestrictedPermission);
+                    parcel2.writeInt(iCheckRestrictedPermission);
                     return true;
                 case 6:
-                    String readString10 = parcel.readString();
+                    String string10 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    byte[] sEInfo = getSEInfo(readString10);
+                    byte[] sEInfo = getSEInfo(string10);
                     parcel2.writeNoException();
                     parcel2.writeByteArray(sEInfo);
                     return true;
@@ -349,12 +349,12 @@ public interface IASKSManager extends IInterface {
                     parcel2.writeStringList(iMEIList);
                     return true;
                 case 8:
-                    String readString11 = parcel.readString();
-                    int readInt2 = parcel.readInt();
+                    String string11 = parcel.readString();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean checkFollowingLegitimateWay = checkFollowingLegitimateWay(readString11, readInt2);
+                    boolean zCheckFollowingLegitimateWay = checkFollowingLegitimateWay(string11, i4);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(checkFollowingLegitimateWay);
+                    parcel2.writeBoolean(zCheckFollowingLegitimateWay);
                     return true;
                 case 9:
                     checkDeletableListForASKS();
@@ -370,38 +370,38 @@ public interface IASKSManager extends IInterface {
                     parcel2.writeString(uNvalueForASKS);
                     return true;
                 case 12:
-                    int readInt3 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    String[] checkASKSTarget = checkASKSTarget(readInt3);
+                    String[] strArrCheckASKSTarget = checkASKSTarget(i5);
                     parcel2.writeNoException();
-                    parcel2.writeStringArray(checkASKSTarget);
+                    parcel2.writeStringArray(strArrCheckASKSTarget);
                     return true;
                 case 13:
-                    String readString12 = parcel.readString();
-                    String[] createStringArray = parcel.createStringArray();
-                    String[] createStringArray2 = parcel.createStringArray();
-                    String readString13 = parcel.readString();
+                    String string12 = parcel.readString();
+                    String[] strArrCreateStringArray = parcel.createStringArray();
+                    String[] strArrCreateStringArray2 = parcel.createStringArray();
+                    String string13 = parcel.readString();
                     Signature[] signatureArr2 = (Signature[]) parcel.createTypedArray(Signature.CREATOR);
-                    String readString14 = parcel.readString();
-                    String readString15 = parcel.readString();
-                    String readString16 = parcel.readString();
-                    int readInt4 = parcel.readInt();
-                    String readString17 = parcel.readString();
-                    String readString18 = parcel.readString();
-                    int readInt5 = parcel.readInt();
+                    String string14 = parcel.readString();
+                    String string15 = parcel.readString();
+                    String string16 = parcel.readString();
+                    int i6 = parcel.readInt();
+                    String string17 = parcel.readString();
+                    String string18 = parcel.readString();
+                    int i7 = parcel.readInt();
                     AsksParcel asksParcel = (AsksParcel) parcel.readTypedObject(AsksParcel.CREATOR);
                     parcel.enforceNoDataAvail();
-                    int checkUnknownSourcePackage = checkUnknownSourcePackage(readString12, createStringArray, createStringArray2, readString13, signatureArr2, readString14, readString15, readString16, readInt4, readString17, readString18, readInt5, asksParcel);
+                    int iCheckUnknownSourcePackage = checkUnknownSourcePackage(string12, strArrCreateStringArray, strArrCreateStringArray2, string13, signatureArr2, string14, string15, string16, i6, string17, string18, i7, asksParcel);
                     parcel2.writeNoException();
-                    parcel2.writeInt(checkUnknownSourcePackage);
+                    parcel2.writeInt(iCheckUnknownSourcePackage);
                     return true;
                 case 14:
-                    String readString19 = parcel.readString();
+                    String string19 = parcel.readString();
                     Signature[] signatureArr3 = (Signature[]) parcel.createTypedArray(Signature.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean isUnknownApps = isUnknownApps(readString19, signatureArr3);
+                    boolean zIsUnknownApps = isUnknownApps(string19, signatureArr3);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isUnknownApps);
+                    parcel2.writeBoolean(zIsUnknownApps);
                     break;
                 case 15:
                     List<String> unknownAppList = getUnknownAppList();
@@ -409,80 +409,81 @@ public interface IASKSManager extends IInterface {
                     parcel2.writeStringList(unknownAppList);
                     break;
                 case 16:
-                    String readString20 = parcel.readString();
-                    String readString21 = parcel.readString();
-                    boolean readBoolean2 = parcel.readBoolean();
-                    int readInt6 = parcel.readInt();
-                    final HashMap hashMap = readInt6 < 0 ? null : new HashMap();
-                    IntStream.range(0, readInt6).forEach(new IntConsumer() { // from class: android.content.pm.IASKSManager$Stub$$ExternalSyntheticLambda0
+                    String string20 = parcel.readString();
+                    String string21 = parcel.readString();
+                    boolean z2 = parcel.readBoolean();
+                    int i8 = parcel.readInt();
+                    final HashMap map = i8 < 0 ? null : new HashMap();
+                    IntStream.range(0, i8).forEach(new IntConsumer() { // from class: android.content.pm.IASKSManager$Stub$$ExternalSyntheticLambda0
                         @Override // java.util.function.IntConsumer
-                        public final void accept(int i3) {
-                            hashMap.put(r0.readString(), Parcel.this.readString());
+                        public final void accept(int i9) {
+                            Parcel parcel3 = parcel;
+                            map.put(parcel3.readString(), parcel3.readString());
                         }
                     });
                     parcel.enforceNoDataAvail();
-                    String checkIfSuspiciousValue = checkIfSuspiciousValue(readString20, readString21, readBoolean2, hashMap);
+                    String strCheckIfSuspiciousValue = checkIfSuspiciousValue(string20, string21, z2, map);
                     parcel2.writeNoException();
-                    parcel2.writeString(checkIfSuspiciousValue);
-                    if (hashMap == null) {
+                    parcel2.writeString(strCheckIfSuspiciousValue);
+                    if (map == null) {
                         parcel2.writeInt(-1);
                         break;
                     } else {
-                        parcel2.writeInt(hashMap.size());
-                        hashMap.forEach(new BiConsumer() { // from class: android.content.pm.IASKSManager$Stub$$ExternalSyntheticLambda1
+                        parcel2.writeInt(map.size());
+                        map.forEach(new BiConsumer() { // from class: android.content.pm.IASKSManager$Stub$$ExternalSyntheticLambda1
                             @Override // java.util.function.BiConsumer
                             public final void accept(Object obj, Object obj2) {
-                                IASKSManager.Stub.lambda$onTransact$1(Parcel.this, (String) obj, (String) obj2);
+                                IASKSManager.Stub.lambda$onTransact$1(parcel2, (String) obj, (String) obj2);
                             }
                         });
                         break;
                     }
                 case 17:
-                    String readString22 = parcel.readString();
+                    String string22 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String policyVersion = getPolicyVersion(readString22);
+                    String policyVersion = getPolicyVersion(string22);
                     parcel2.writeNoException();
                     parcel2.writeString(policyVersion);
                     break;
                 case 18:
-                    String readString23 = parcel.readString();
+                    String string23 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isSuspiciousMsgTarget = isSuspiciousMsgTarget(readString23);
+                    boolean zIsSuspiciousMsgTarget = isSuspiciousMsgTarget(string23);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSuspiciousMsgTarget);
+                    parcel2.writeBoolean(zIsSuspiciousMsgTarget);
                     break;
                 case 19:
-                    String readString24 = parcel.readString();
+                    String string24 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean applyScpmPolicyFromService = applyScpmPolicyFromService(readString24);
+                    boolean zApplyScpmPolicyFromService = applyScpmPolicyFromService(string24);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(applyScpmPolicyFromService);
+                    parcel2.writeBoolean(zApplyScpmPolicyFromService);
                     break;
                 case 20:
-                    String readString25 = parcel.readString();
-                    String readString26 = parcel.readString();
+                    String string25 = parcel.readString();
+                    String string26 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String readASKSFiles = readASKSFiles(readString25, readString26);
+                    String aSKSFiles = readASKSFiles(string25, string26);
                     parcel2.writeNoException();
-                    parcel2.writeString(readASKSFiles);
+                    parcel2.writeString(aSKSFiles);
                     break;
                 case 21:
-                    String readString27 = parcel.readString();
-                    int readInt7 = parcel.readInt();
+                    String string27 = parcel.readString();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isTrustedStore = isTrustedStore(readString27, readInt7);
+                    boolean zIsTrustedStore = isTrustedStore(string27, i9);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isTrustedStore);
+                    parcel2.writeBoolean(zIsTrustedStore);
                     break;
                 case 22:
-                    int checkSecurityEnabled = checkSecurityEnabled();
+                    int iCheckSecurityEnabled = checkSecurityEnabled();
                     parcel2.writeNoException();
-                    parcel2.writeInt(checkSecurityEnabled);
+                    parcel2.writeInt(iCheckSecurityEnabled);
                     break;
                 case 23:
-                    String readString28 = parcel.readString();
+                    String string28 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    setASKSPolicyVersion(readString28);
+                    setASKSPolicyVersion(string28);
                     parcel2.writeNoException();
                     break;
                 default:
@@ -515,292 +516,293 @@ public interface IASKSManager extends IInterface {
 
             @Override // android.content.pm.IASKSManager
             public void systemReady() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IASKSManager.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IASKSManager.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IASKSManager
             public int verifyASKStokenForPackage(String str, String str2, long j, Signature[] signatureArr, String str3, String str4, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IASKSManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeLong(j);
-                    obtain.writeTypedArray(signatureArr, 0);
-                    obtain.writeString(str3);
-                    obtain.writeString(str4);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IASKSManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeTypedArray(signatureArr, 0);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeString(str4);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IASKSManager
             public void postASKSsetup(String str, String str2, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IASKSManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IASKSManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IASKSManager
             public void clearASKSruleForRemovedPackage(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IASKSManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IASKSManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IASKSManager
             public int checkRestrictedPermission(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IASKSManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IASKSManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IASKSManager
             public byte[] getSEInfo(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IASKSManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(IASKSManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IASKSManager
             public List<String> getIMEIList() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IASKSManager.DESCRIPTOR);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IASKSManager.DESCRIPTOR);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IASKSManager
             public boolean checkFollowingLegitimateWay(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IASKSManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IASKSManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IASKSManager
             public void checkDeletableListForASKS() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IASKSManager.DESCRIPTOR);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IASKSManager.DESCRIPTOR);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IASKSManager
             public void setTrustTimebyStatusChanged() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IASKSManager.DESCRIPTOR);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IASKSManager.DESCRIPTOR);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IASKSManager
             public String getUNvalueForASKS() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IASKSManager.DESCRIPTOR);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IASKSManager.DESCRIPTOR);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IASKSManager
             public String[] checkASKSTarget(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IASKSManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArray();
+                    parcelObtain.writeInterfaceToken(IASKSManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IASKSManager
             public int checkUnknownSourcePackage(String str, String[] strArr, String[] strArr2, String str2, Signature[] signatureArr, String str3, String str4, String str5, int i, String str6, String str7, int i2, AsksParcel asksParcel) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IASKSManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeStringArray(strArr2);
-                    obtain.writeString(str2);
-                    obtain.writeTypedArray(signatureArr, 0);
-                    obtain.writeString(str3);
-                    obtain.writeString(str4);
-                    obtain.writeString(str5);
-                    obtain.writeInt(i);
-                    obtain.writeString(str6);
-                    obtain.writeString(str7);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(asksParcel, 0);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IASKSManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeStringArray(strArr2);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeTypedArray(signatureArr, 0);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeString(str4);
+                    parcelObtain.writeString(str5);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str6);
+                    parcelObtain.writeString(str7);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(asksParcel, 0);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IASKSManager
             public boolean isUnknownApps(String str, Signature[] signatureArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IASKSManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedArray(signatureArr, 0);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IASKSManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedArray(signatureArr, 0);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IASKSManager
             public List<String> getUnknownAppList() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IASKSManager.DESCRIPTOR);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IASKSManager.DESCRIPTOR);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IASKSManager
             public String checkIfSuspiciousValue(String str, String str2, boolean z, final Map<String, String> map) throws RemoteException {
-                final Parcel obtain = Parcel.obtain(asBinder());
-                final Parcel obtain2 = Parcel.obtain();
+                final Parcel parcelObtain = Parcel.obtain(asBinder());
+                final Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IASKSManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeBoolean(z);
+                    parcelObtain.writeInterfaceToken(IASKSManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeBoolean(z);
                     if (map == null) {
-                        obtain.writeInt(-1);
+                        parcelObtain.writeInt(-1);
                     } else {
-                        obtain.writeInt(map.size());
+                        parcelObtain.writeInt(map.size());
                         map.forEach(new BiConsumer() { // from class: android.content.pm.IASKSManager$Stub$Proxy$$ExternalSyntheticLambda0
                             @Override // java.util.function.BiConsumer
                             public final void accept(Object obj, Object obj2) {
-                                IASKSManager.Stub.Proxy.lambda$checkIfSuspiciousValue$0(Parcel.this, (String) obj, (String) obj2);
+                                IASKSManager.Stub.Proxy.lambda$checkIfSuspiciousValue$0(parcelObtain, (String) obj, (String) obj2);
                             }
                         });
                     }
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
-                    String readString = obtain2.readString();
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    String string = parcelObtain2.readString();
                     if (map != null) {
                         map.clear();
                     }
-                    IntStream.range(0, obtain2.readInt()).forEach(new IntConsumer() { // from class: android.content.pm.IASKSManager$Stub$Proxy$$ExternalSyntheticLambda1
+                    IntStream.range(0, parcelObtain2.readInt()).forEach(new IntConsumer() { // from class: android.content.pm.IASKSManager$Stub$Proxy$$ExternalSyntheticLambda1
                         @Override // java.util.function.IntConsumer
                         public final void accept(int i) {
-                            map.put(r0.readString(), Parcel.this.readString());
+                            Parcel parcel = parcelObtain2;
+                            map.put(parcel.readString(), parcel.readString());
                         }
                     });
-                    return readString;
+                    return string;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -811,113 +813,113 @@ public interface IASKSManager extends IInterface {
 
             @Override // android.content.pm.IASKSManager
             public String getPolicyVersion(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IASKSManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IASKSManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IASKSManager
             public boolean isSuspiciousMsgTarget(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IASKSManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IASKSManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IASKSManager
             public boolean applyScpmPolicyFromService(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IASKSManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IASKSManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IASKSManager
             public String readASKSFiles(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IASKSManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IASKSManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IASKSManager
             public boolean isTrustedStore(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IASKSManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IASKSManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IASKSManager
             public int checkSecurityEnabled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IASKSManager.DESCRIPTOR);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IASKSManager.DESCRIPTOR);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IASKSManager
             public void setASKSPolicyVersion(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IASKSManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IASKSManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

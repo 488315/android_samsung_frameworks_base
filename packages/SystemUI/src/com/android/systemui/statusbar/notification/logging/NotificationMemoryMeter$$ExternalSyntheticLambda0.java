@@ -20,7 +20,6 @@ import kotlin.collections.EmptyList;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class NotificationMemoryMeter$$ExternalSyntheticLambda0 implements Function1 {
     /* JADX WARN: Multi-variable type inference failed */
@@ -28,12 +27,12 @@ public final /* synthetic */ class NotificationMemoryMeter$$ExternalSyntheticLam
     /* JADX WARN: Type inference failed for: r6v11, types: [android.view.View[]] */
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
+        int iComputeIconUse;
         int i;
         int i2;
-        int i3;
         boolean z;
-        List filterNotNull;
+        List listFilterNotNull;
         Iterator it;
         Icon icon;
         NotificationEntry notificationEntry = (NotificationEntry) obj;
@@ -44,39 +43,39 @@ public final /* synthetic */ class NotificationMemoryMeter$$ExternalSyntheticLam
         HashSet hashSet = new HashSet();
         NotificationMemoryMeter.INSTANCE.getClass();
         Bundle bundle = notification2.extras;
-        int computeIconUse = NotificationMemoryMeter.computeIconUse(notification2.getSmallIcon(), hashSet);
-        int computeIconUse2 = NotificationMemoryMeter.computeIconUse(notification2.getLargeIcon(), hashSet);
-        int computeParcelableUse = NotificationMemoryMeter.computeParcelableUse(bundle, "android.largeIcon.big", hashSet);
-        int computeParcelableUse2 = NotificationMemoryMeter.computeParcelableUse(bundle, "android.pictureIcon", hashSet) + NotificationMemoryMeter.computeParcelableUse(bundle, "android.picture", hashSet);
+        int iComputeIconUse2 = NotificationMemoryMeter.computeIconUse(notification2.getSmallIcon(), hashSet);
+        int iComputeIconUse3 = NotificationMemoryMeter.computeIconUse(notification2.getLargeIcon(), hashSet);
+        int iComputeParcelableUse = NotificationMemoryMeter.computeParcelableUse(bundle, "android.largeIcon.big", hashSet);
+        int iComputeParcelableUse2 = NotificationMemoryMeter.computeParcelableUse(bundle, "android.pictureIcon", hashSet) + NotificationMemoryMeter.computeParcelableUse(bundle, "android.picture", hashSet);
         ArrayList parcelableArrayList = bundle.getParcelableArrayList("android.people.list");
         if (parcelableArrayList != null) {
             int size = parcelableArrayList.size();
-            i = 0;
-            int i4 = 0;
-            while (i4 < size) {
-                Object obj2 = parcelableArrayList.get(i4);
-                i4++;
-                i += NotificationMemoryMeter.computeIconUse(((Person) obj2).getIcon(), hashSet);
+            iComputeIconUse = 0;
+            int i3 = 0;
+            while (i3 < size) {
+                Object obj2 = parcelableArrayList.get(i3);
+                i3++;
+                iComputeIconUse += NotificationMemoryMeter.computeIconUse(((Person) obj2).getIcon(), hashSet);
             }
         } else {
-            i = 0;
+            iComputeIconUse = 0;
         }
-        int computeParcelableUse3 = NotificationMemoryMeter.computeParcelableUse(bundle, "android.callPerson", hashSet);
-        int computeParcelableUse4 = NotificationMemoryMeter.computeParcelableUse(bundle, "android.verificationIcon", hashSet);
+        int iComputeParcelableUse3 = NotificationMemoryMeter.computeParcelableUse(bundle, "android.callPerson", hashSet);
+        int iComputeParcelableUse4 = NotificationMemoryMeter.computeParcelableUse(bundle, "android.verificationIcon", hashSet);
         Iterator it2 = Notification.MessagingStyle.Message.getMessagesFromBundleArray(bundle.getParcelableArray("android.messages")).iterator();
-        int i5 = 0;
+        int iComputeIconUse4 = 0;
         while (true) {
             if (!it2.hasNext()) {
                 break;
             }
             Person senderPerson = ((Notification.MessagingStyle.Message) it2.next()).getSenderPerson();
             if (senderPerson != null) {
-                r18 = senderPerson.getIcon();
+                icon = senderPerson.getIcon();
             }
-            i5 += NotificationMemoryMeter.computeIconUse(r18, hashSet);
+            iComputeIconUse4 += NotificationMemoryMeter.computeIconUse(icon, hashSet);
         }
         Iterator it3 = Notification.MessagingStyle.Message.getMessagesFromBundleArray(bundle.getParcelableArray("android.messages.historic")).iterator();
-        int i6 = 0;
+        int iComputeIconUse5 = 0;
         while (it3.hasNext()) {
             Person senderPerson2 = ((Notification.MessagingStyle.Message) it3.next()).getSenderPerson();
             if (senderPerson2 != null) {
@@ -86,38 +85,38 @@ public final /* synthetic */ class NotificationMemoryMeter$$ExternalSyntheticLam
                 it = it3;
                 icon = null;
             }
-            i6 += NotificationMemoryMeter.computeIconUse(icon, hashSet);
+            iComputeIconUse5 += NotificationMemoryMeter.computeIconUse(icon, hashSet);
             it3 = it;
         }
         Bundle bundle2 = bundle.getBundle("android.car.EXTENSIONS");
-        int computeBundleSize = bundle2 != null ? NotificationMemoryMeter.computeBundleSize(bundle2) : 0;
-        int computeParcelableUse5 = NotificationMemoryMeter.computeParcelableUse(bundle2, "large_icon", hashSet);
+        int iComputeBundleSize = bundle2 != null ? NotificationMemoryMeter.computeBundleSize(bundle2) : 0;
+        int iComputeParcelableUse5 = NotificationMemoryMeter.computeParcelableUse(bundle2, "large_icon", hashSet);
         Bundle bundle3 = bundle.getBundle("android.tv.EXTENSIONS");
-        int computeBundleSize2 = bundle3 != null ? NotificationMemoryMeter.computeBundleSize(bundle3) : 0;
+        int iComputeBundleSize2 = bundle3 != null ? NotificationMemoryMeter.computeBundleSize(bundle3) : 0;
         Bundle bundle4 = bundle.getBundle("android.wearable.EXTENSIONS");
-        int computeBundleSize3 = bundle4 != null ? NotificationMemoryMeter.computeBundleSize(bundle4) : 0;
-        int i7 = computeBundleSize2;
-        int computeParcelableUse6 = NotificationMemoryMeter.computeParcelableUse(bundle4, BriefViewController.SUGGESTION_BACKGROUND_KEY, hashSet);
+        int iComputeBundleSize3 = bundle4 != null ? NotificationMemoryMeter.computeBundleSize(bundle4) : 0;
+        int i4 = iComputeBundleSize2;
+        int iComputeParcelableUse6 = NotificationMemoryMeter.computeParcelableUse(bundle4, BriefViewController.SUGGESTION_BACKGROUND_KEY, hashSet);
         if (Intrinsics.areEqual(notification2.getGroup(), "ranker_group")) {
-            i2 = 8;
+            i = 8;
         } else {
             Class notificationStyle = notification2.getNotificationStyle();
             String name = notificationStyle != null ? notificationStyle.getName() : null;
-            i2 = name == null ? 0 : name.equals(Notification.BigTextStyle.class.getName()) ? 2 : name.equals(Notification.BigPictureStyle.class.getName()) ? 1 : name.equals(Notification.InboxStyle.class.getName()) ? 5 : name.equals(Notification.MediaStyle.class.getName()) ? 6 : name.equals(Notification.DecoratedCustomViewStyle.class.getName()) ? 4 : name.equals(Notification.MessagingStyle.class.getName()) ? 7 : name.equals(Notification.CallStyle.class.getName()) ? 3 : -1000;
+            i = name == null ? 0 : name.equals(Notification.BigTextStyle.class.getName()) ? 2 : name.equals(Notification.BigPictureStyle.class.getName()) ? 1 : name.equals(Notification.InboxStyle.class.getName()) ? 5 : name.equals(Notification.MediaStyle.class.getName()) ? 6 : name.equals(Notification.DecoratedCustomViewStyle.class.getName()) ? 4 : name.equals(Notification.MessagingStyle.class.getName()) ? 7 : name.equals(Notification.CallStyle.class.getName()) ? 3 : -1000;
         }
         if (notification2.contentView == null && notification2.bigContentView == null) {
-            i3 = computeBundleSize;
+            i2 = iComputeBundleSize;
             z = false;
         } else {
-            i3 = computeBundleSize;
+            i2 = iComputeBundleSize;
             z = true;
         }
-        NotificationObjectUsage notificationObjectUsage = new NotificationObjectUsage(computeIconUse, computeIconUse2, NotificationMemoryMeter.computeBundleSize(bundle), i2, i6 + computeParcelableUse + i + computeParcelableUse3 + computeParcelableUse4 + i5, computeParcelableUse2, i3 + computeParcelableUse5 + i7 + computeBundleSize3 + computeParcelableUse6, z);
+        NotificationObjectUsage notificationObjectUsage = new NotificationObjectUsage(iComputeIconUse2, iComputeIconUse3, NotificationMemoryMeter.computeBundleSize(bundle), i, iComputeIconUse5 + iComputeParcelableUse + iComputeIconUse + iComputeParcelableUse3 + iComputeParcelableUse4 + iComputeIconUse4, iComputeParcelableUse2, i2 + iComputeParcelableUse5 + i4 + iComputeBundleSize3 + iComputeParcelableUse6, z);
         NotificationMemoryViewWalker notificationMemoryViewWalker = NotificationMemoryViewWalker.INSTANCE;
         ExpandableNotificationRow expandableNotificationRow = notificationEntry.row;
         notificationMemoryViewWalker.getClass();
         if (expandableNotificationRow == null) {
-            filterNotNull = EmptyList.INSTANCE;
+            listFilterNotNull = EmptyList.INSTANCE;
         } else {
             ViewType viewType = ViewType.PRIVATE_EXPANDED_VIEW;
             View[] viewArr = new View[1];
@@ -140,9 +139,9 @@ public final /* synthetic */ class NotificationMemoryMeter$$ExternalSyntheticLam
             viewArr4[0] = notificationContentView4 != null ? notificationContentView4.mExpandedChild : null;
             viewArr4[1] = notificationContentView4 != null ? notificationContentView4.mContractedChild : null;
             viewArr4[2] = notificationContentView4 != null ? notificationContentView4.mHeadsUpChild : null;
-            filterNotNull = CollectionsKt___CollectionsKt.filterNotNull(Arrays.asList(viewUsage$default, viewUsage$default2, viewUsage$default3, NotificationMemoryViewWalker.getViewUsage$default(notificationMemoryViewWalker, viewType4, viewArr4)));
-            if (((ArrayList) filterNotNull).isEmpty()) {
-                filterNotNull = EmptyList.INSTANCE;
+            listFilterNotNull = CollectionsKt___CollectionsKt.filterNotNull(Arrays.asList(viewUsage$default, viewUsage$default2, viewUsage$default3, NotificationMemoryViewWalker.getViewUsage$default(notificationMemoryViewWalker, viewType4, viewArr4)));
+            if (((ArrayList) listFilterNotNull).isEmpty()) {
+                listFilterNotNull = EmptyList.INSTANCE;
             } else {
                 HashSet hashSet2 = new HashSet();
                 ViewType viewType5 = ViewType.TOTAL;
@@ -157,11 +156,11 @@ public final /* synthetic */ class NotificationMemoryMeter$$ExternalSyntheticLam
                 r6[5] = notificationContentView6 != null ? notificationContentView6.mHeadsUpChild : null;
                 NotificationViewUsage viewUsage = NotificationMemoryViewWalker.getViewUsage(viewType5, r6, hashSet2);
                 if (viewUsage != null) {
-                    filterNotNull = CollectionsKt___CollectionsKt.plus(filterNotNull, viewUsage);
+                    listFilterNotNull = CollectionsKt___CollectionsKt.plus(listFilterNotNull, viewUsage);
                 }
             }
         }
-        List list = filterNotNull;
+        List list = listFilterNotNull;
         packageName.getClass();
         return new NotificationMemoryUsage(packageName, uid, NotificationUtils.logKey(notificationEntry.mSbn.getKey()), notificationEntry.mSbn.getNotification(), notificationObjectUsage, list);
     }

@@ -59,9 +59,9 @@ public interface IDisplayAreaOrganizer extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IDisplayAreaOrganizer.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IDisplayAreaOrganizer)) {
-                return (IDisplayAreaOrganizer) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IDisplayAreaOrganizer.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IDisplayAreaOrganizer)) {
+                return (IDisplayAreaOrganizer) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -130,38 +130,38 @@ public interface IDisplayAreaOrganizer extends IInterface {
 
             @Override // android.window.IDisplayAreaOrganizer
             public void onDisplayAreaAppeared(DisplayAreaInfo displayAreaInfo, SurfaceControl surfaceControl) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDisplayAreaOrganizer.DESCRIPTOR);
-                    obtain.writeTypedObject(displayAreaInfo, 0);
-                    obtain.writeTypedObject(surfaceControl, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDisplayAreaOrganizer.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(displayAreaInfo, 0);
+                    parcelObtain.writeTypedObject(surfaceControl, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.IDisplayAreaOrganizer
             public void onDisplayAreaVanished(DisplayAreaInfo displayAreaInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDisplayAreaOrganizer.DESCRIPTOR);
-                    obtain.writeTypedObject(displayAreaInfo, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDisplayAreaOrganizer.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(displayAreaInfo, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.IDisplayAreaOrganizer
             public void onDisplayAreaInfoChanged(DisplayAreaInfo displayAreaInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDisplayAreaOrganizer.DESCRIPTOR);
-                    obtain.writeTypedObject(displayAreaInfo, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDisplayAreaOrganizer.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(displayAreaInfo, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

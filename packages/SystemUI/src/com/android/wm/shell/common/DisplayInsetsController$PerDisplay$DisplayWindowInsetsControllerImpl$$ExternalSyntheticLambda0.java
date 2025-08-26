@@ -9,7 +9,6 @@ import com.android.wm.shell.common.DisplayInsetsController;
 import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class DisplayInsetsController$PerDisplay$DisplayWindowInsetsControllerImpl$$ExternalSyntheticLambda0 implements Runnable {
     public final /* synthetic */ int $r8$classId = 0;
@@ -22,7 +21,7 @@ public final /* synthetic */ class DisplayInsetsController$PerDisplay$DisplayWin
     }
 
     @Override // java.lang.Runnable
-    public final void run() {
+    public final void run() throws Resources.NotFoundException {
         switch (this.$r8$classId) {
             case 0:
                 DisplayInsetsController.PerDisplay perDisplay = DisplayInsetsController.PerDisplay.this;

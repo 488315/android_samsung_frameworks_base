@@ -31,7 +31,7 @@ final class MessageLiteToString {
     private MessageLiteToString() {
     }
 
-    static String toString(MessageLite messageLite, String str) {
+    static String toString(MessageLite messageLite, String str) throws SecurityException {
         StringBuilder sb = new StringBuilder();
         sb.append("# ");
         sb.append(str);
@@ -39,14 +39,18 @@ final class MessageLiteToString {
         return sb.toString();
     }
 
-    private static void reflectivePrintWithIndent(MessageLite messageLite, StringBuilder sb, int i) {
+    /* JADX WARN: Removed duplicated region for block: B:63:0x0170  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    private static void reflectivePrintWithIndent(MessageLite messageLite, StringBuilder sb, int i) throws SecurityException {
         int i2;
         int i3;
-        boolean booleanValue;
+        boolean zBooleanValue;
         Method method;
         Method method2;
         HashSet hashSet = new HashSet();
-        HashMap hashMap = new HashMap();
+        HashMap map = new HashMap();
         TreeMap treeMap = new TreeMap();
         Method[] declaredMethods = messageLite.getClass().getDeclaredMethods();
         int length = declaredMethods.length;
@@ -62,7 +66,7 @@ final class MessageLiteToString {
                     hashSet.add(method3.getName());
                 } else if (Modifier.isPublic(method3.getModifiers()) && method3.getParameterTypes().length == 0) {
                     if (method3.getName().startsWith("has")) {
-                        hashMap.put(method3.getName(), method3);
+                        map.put(method3.getName(), method3);
                     } else if (method3.getName().startsWith("get")) {
                         treeMap.put(method3.getName(), method3);
                     }
@@ -71,35 +75,35 @@ final class MessageLiteToString {
             i4++;
         }
         for (Map.Entry entry : treeMap.entrySet()) {
-            String substring = ((String) entry.getKey()).substring(i2);
-            if (!substring.endsWith(LIST_SUFFIX) || substring.endsWith(BUILDER_LIST_SUFFIX) || substring.equals(LIST_SUFFIX) || (method2 = (Method) entry.getValue()) == null) {
+            String strSubstring = ((String) entry.getKey()).substring(i2);
+            if (!strSubstring.endsWith(LIST_SUFFIX) || strSubstring.endsWith(BUILDER_LIST_SUFFIX) || strSubstring.equals(LIST_SUFFIX) || (method2 = (Method) entry.getValue()) == null) {
                 i3 = i2;
             } else {
                 i3 = i2;
                 if (method2.getReturnType().equals(List.class)) {
-                    printField(sb, i, substring.substring(0, substring.length() - 4), GeneratedMessageLite.invokeOrDie(method2, messageLite, new Object[0]));
-                    i2 = i3;
+                    printField(sb, i, strSubstring.substring(0, strSubstring.length() - 4), GeneratedMessageLite.invokeOrDie(method2, messageLite, new Object[0]));
                 }
+                i2 = i3;
             }
-            if (substring.endsWith(MAP_SUFFIX) && !substring.equals(MAP_SUFFIX) && (method = (Method) entry.getValue()) != null && method.getReturnType().equals(Map.class) && !method.isAnnotationPresent(Deprecated.class) && Modifier.isPublic(method.getModifiers())) {
-                printField(sb, i, substring.substring(0, substring.length() - 3), GeneratedMessageLite.invokeOrDie(method, messageLite, new Object[0]));
+            if (strSubstring.endsWith(MAP_SUFFIX) && !strSubstring.equals(MAP_SUFFIX) && (method = (Method) entry.getValue()) != null && method.getReturnType().equals(Map.class) && !method.isAnnotationPresent(Deprecated.class) && Modifier.isPublic(method.getModifiers())) {
+                printField(sb, i, strSubstring.substring(0, strSubstring.length() - 3), GeneratedMessageLite.invokeOrDie(method, messageLite, new Object[0]));
             } else {
-                if (hashSet.contains("set" + substring)) {
-                    if (substring.endsWith(BYTES_SUFFIX)) {
-                        if (treeMap.containsKey("get" + substring.substring(0, substring.length() - 5))) {
-                        }
-                    }
-                    Method method4 = (Method) entry.getValue();
-                    Method method5 = (Method) hashMap.get("has" + substring);
-                    if (method4 != null) {
-                        Object invokeOrDie = GeneratedMessageLite.invokeOrDie(method4, messageLite, new Object[0]);
-                        if (method5 == null) {
-                            booleanValue = !isDefaultValue(invokeOrDie);
-                        } else {
-                            booleanValue = ((Boolean) GeneratedMessageLite.invokeOrDie(method5, messageLite, new Object[0])).booleanValue();
-                        }
-                        if (booleanValue) {
-                            printField(sb, i, substring, invokeOrDie);
+                if (hashSet.contains("set" + strSubstring)) {
+                    if (strSubstring.endsWith(BYTES_SUFFIX)) {
+                        if (!treeMap.containsKey("get" + strSubstring.substring(0, strSubstring.length() - 5))) {
+                            Method method4 = (Method) entry.getValue();
+                            Method method5 = (Method) map.get("has" + strSubstring);
+                            if (method4 != null) {
+                                Object objInvokeOrDie = GeneratedMessageLite.invokeOrDie(method4, messageLite, new Object[0]);
+                                if (method5 == null) {
+                                    zBooleanValue = !isDefaultValue(objInvokeOrDie);
+                                } else {
+                                    zBooleanValue = ((Boolean) GeneratedMessageLite.invokeOrDie(method5, messageLite, new Object[0])).booleanValue();
+                                }
+                                if (zBooleanValue) {
+                                    printField(sb, i, strSubstring, objInvokeOrDie);
+                                }
+                            }
                         }
                     }
                 }
@@ -107,10 +111,10 @@ final class MessageLiteToString {
             i2 = i3;
         }
         if (messageLite instanceof GeneratedMessageLite.ExtendableMessage) {
-            Iterator<Map.Entry<GeneratedMessageLite.ExtensionDescriptor, Object>> it = ((GeneratedMessageLite.ExtendableMessage) messageLite).extensions.iterator();
+            Iterator<Map.Entry<T, Object>> it = ((GeneratedMessageLite.ExtendableMessage) messageLite).extensions.iterator();
             while (it.hasNext()) {
-                Map.Entry<GeneratedMessageLite.ExtensionDescriptor, Object> next = it.next();
-                printField(sb, i, NavigationBarInflaterView.SIZE_MOD_START + next.getKey().getNumber() + NavigationBarInflaterView.SIZE_MOD_END, next.getValue());
+                Map.Entry entry2 = (Map.Entry) it.next();
+                printField(sb, i, NavigationBarInflaterView.SIZE_MOD_START + ((GeneratedMessageLite.ExtensionDescriptor) entry2.getKey()).getNumber() + NavigationBarInflaterView.SIZE_MOD_END, entry2.getValue());
             }
         }
         GeneratedMessageLite generatedMessageLite = (GeneratedMessageLite) messageLite;
@@ -141,7 +145,7 @@ final class MessageLiteToString {
         return obj instanceof MessageLite ? obj == ((MessageLite) obj).getDefaultInstanceForType() : (obj instanceof Enum) && ((Enum) obj).ordinal() == 0;
     }
 
-    static void printField(StringBuilder sb, int i, String str, Object obj) {
+    static void printField(StringBuilder sb, int i, String str, Object obj) throws SecurityException {
         if (obj instanceof List) {
             Iterator it = ((List) obj).iterator();
             while (it.hasNext()) {
@@ -210,11 +214,11 @@ final class MessageLiteToString {
         StringBuilder sb = new StringBuilder();
         sb.append(Character.toLowerCase(str.charAt(0)));
         for (int i = 1; i < str.length(); i++) {
-            char charAt = str.charAt(i);
-            if (Character.isUpperCase(charAt)) {
+            char cCharAt = str.charAt(i);
+            if (Character.isUpperCase(cCharAt)) {
                 sb.append(Session.SESSION_SEPARATION_CHAR_CHILD);
             }
-            sb.append(Character.toLowerCase(charAt));
+            sb.append(Character.toLowerCase(cCharAt));
         }
         return sb.toString();
     }

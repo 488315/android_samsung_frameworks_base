@@ -60,9 +60,9 @@ public interface IIccInfService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IIccInfService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IIccInfService)) {
-                return (IIccInfService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IIccInfService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IIccInfService)) {
+                return (IIccInfService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -95,22 +95,22 @@ public interface IIccInfService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
-                int readInt = parcel.readInt();
-                String readString2 = parcel.readString();
-                float[] createFloatArray = parcel.createFloatArray();
+                String string = parcel.readString();
+                int i3 = parcel.readInt();
+                String string2 = parcel.readString();
+                float[] fArrCreateFloatArray = parcel.createFloatArray();
                 parcel.enforceNoDataAvail();
-                iccInfResult(readString, readInt, readString2, createFloatArray);
+                iccInfResult(string, i3, string2, fArrCreateFloatArray);
             } else if (i == 2) {
-                String readString3 = parcel.readString();
-                ArrayList<String> createStringArrayList = parcel.createStringArrayList();
+                String string3 = parcel.readString();
+                ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
                 parcel.enforceNoDataAvail();
-                inferenceKey(readString3, createStringArrayList);
+                inferenceKey(string3, arrayListCreateStringArrayList);
             } else if (i == 3) {
-                ArrayList<String> createStringArrayList2 = parcel.createStringArrayList();
-                ArrayList<String> createStringArrayList3 = parcel.createStringArrayList();
+                ArrayList<String> arrayListCreateStringArrayList2 = parcel.createStringArrayList();
+                ArrayList<String> arrayListCreateStringArrayList3 = parcel.createStringArrayList();
                 parcel.enforceNoDataAvail();
-                inferenceList(createStringArrayList2, createStringArrayList3);
+                inferenceList(arrayListCreateStringArrayList2, arrayListCreateStringArrayList3);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -135,42 +135,42 @@ public interface IIccInfService extends IInterface {
 
             @Override // com.samsung.android.wifi.intelligence.icc.IIccInfService
             public void iccInfResult(String str, int i, String str2, float[] fArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IIccInfService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeString(str2);
-                    obtain.writeFloatArray(fArr);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IIccInfService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeFloatArray(fArr);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.intelligence.icc.IIccInfService
             public void inferenceKey(String str, List<String> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IIccInfService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStringList(list);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IIccInfService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStringList(list);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.intelligence.icc.IIccInfService
             public void inferenceList(List<String> list, List<String> list2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IIccInfService.DESCRIPTOR);
-                    obtain.writeStringList(list);
-                    obtain.writeStringList(list2);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IIccInfService.DESCRIPTOR);
+                    parcelObtain.writeStringList(list);
+                    parcelObtain.writeStringList(list2);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

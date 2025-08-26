@@ -13,7 +13,6 @@ import com.android.systemui.qp.util.SubscreenUtil;
 import com.android.systemui.statusbar.policy.FlashlightController;
 import com.android.systemui.statusbar.policy.FlashlightControllerImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SubscreenFlashLightController implements SubscreenQSControllerContract$Presenter {
     public static Context mContext;

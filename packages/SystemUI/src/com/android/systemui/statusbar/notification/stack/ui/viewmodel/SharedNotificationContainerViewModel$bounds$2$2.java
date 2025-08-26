@@ -9,7 +9,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function5;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class SharedNotificationContainerViewModel$bounds$2$2 extends SuspendLambda implements Function5 {
     /* synthetic */ int I$0;
@@ -27,12 +26,12 @@ final class SharedNotificationContainerViewModel$bounds$2$2 extends SuspendLambd
 
     @Override // kotlin.jvm.functions.Function5
     public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4, Object obj5) {
-        boolean booleanValue = ((Boolean) obj).booleanValue();
-        int intValue = ((Number) obj3).intValue();
+        boolean zBooleanValue = ((Boolean) obj).booleanValue();
+        int iIntValue = ((Number) obj3).intValue();
         SharedNotificationContainerViewModel$bounds$2$2 sharedNotificationContainerViewModel$bounds$2$2 = new SharedNotificationContainerViewModel$bounds$2$2(this.this$0, (Continuation) obj5);
-        sharedNotificationContainerViewModel$bounds$2$2.Z$0 = booleanValue;
+        sharedNotificationContainerViewModel$bounds$2$2.Z$0 = zBooleanValue;
         sharedNotificationContainerViewModel$bounds$2$2.L$0 = (NotificationContainerBounds) obj2;
-        sharedNotificationContainerViewModel$bounds$2$2.I$0 = intValue;
+        sharedNotificationContainerViewModel$bounds$2$2.I$0 = iIntValue;
         sharedNotificationContainerViewModel$bounds$2$2.L$1 = (Triple) obj4;
         return sharedNotificationContainerViewModel$bounds$2$2.invokeSuspend(Unit.INSTANCE);
     }
@@ -48,16 +47,16 @@ final class SharedNotificationContainerViewModel$bounds$2$2 extends SuspendLambd
         NotificationContainerBounds notificationContainerBounds = (NotificationContainerBounds) this.L$0;
         int i = this.I$0;
         Triple triple = (Triple) this.L$1;
-        float floatValue = ((Number) triple.component1()).floatValue();
-        boolean booleanValue = ((Boolean) triple.component2()).booleanValue();
-        float floatValue2 = ((Number) triple.component3()).floatValue();
-        float floatValue3 = ((Number) this.this$0.interactor.bottomPosition.$$delegate_0.getValue()).floatValue();
+        float fFloatValue = ((Number) triple.component1()).floatValue();
+        boolean zBooleanValue = ((Boolean) triple.component2()).booleanValue();
+        float fFloatValue2 = ((Number) triple.component3()).floatValue();
+        float fFloatValue3 = ((Number) this.this$0.interactor.bottomPosition.$$delegate_0.getValue()).floatValue();
         if (z) {
-            return new NotificationContainerBounds(floatValue - i, notificationContainerBounds.bottom - floatValue3, floatValue3 == -1.0f);
+            return new NotificationContainerBounds(fFloatValue - i, notificationContainerBounds.bottom - fFloatValue3, fFloatValue3 == -1.0f);
         }
-        if (floatValue2 == 0.0f && !booleanValue) {
-            r5 = true;
+        if (fFloatValue2 == 0.0f && !zBooleanValue) {
+            z = true;
         }
-        return new NotificationContainerBounds(floatValue, notificationContainerBounds.bottom - floatValue3, r5);
+        return new NotificationContainerBounds(fFloatValue, notificationContainerBounds.bottom - fFloatValue3, z);
     }
 }

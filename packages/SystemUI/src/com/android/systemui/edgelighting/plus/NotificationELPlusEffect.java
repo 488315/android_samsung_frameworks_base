@@ -11,7 +11,6 @@ import com.android.systemui.edgelighting.effect.data.EdgeEffectInfo;
 import com.android.systemui.edgelighting.manager.EdgeLightingPolicyManager;
 import com.android.systemui.edgelighting.utils.EdgeLightingSettingUtils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class NotificationELPlusEffect extends NotificationEffect {
     public final EdgeEffectInfo mEdgeEffectInfo;
@@ -40,15 +39,15 @@ public class NotificationELPlusEffect extends NotificationEffect {
     }
 
     public final void fadeOutAnimator() {
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this.mParticleView, "alpha", 1.0f, 0.0f);
-        ofFloat.setDuration(500L);
-        ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.edgelighting.plus.NotificationELPlusEffect.1
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this.mParticleView, "alpha", 1.0f, 0.0f);
+        objectAnimatorOfFloat.setDuration(500L);
+        objectAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.edgelighting.plus.NotificationELPlusEffect.1
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
                 NotificationELPlusEffect.this.mParticleView.setVisibility(8);
             }
         });
-        ofFloat.start();
+        objectAnimatorOfFloat.start();
     }
 
     @Override // com.android.systemui.edgelighting.effect.container.NotificationEffect
@@ -73,11 +72,11 @@ public class NotificationELPlusEffect extends NotificationEffect {
         super.setEdgeEffectInfo(edgeEffectInfo);
         int[] iArr = {this.mEmitterItemInfo.getInt("color")};
         if (this.mEmitterItemInfo.getBoolean("isUsedAutoColor")) {
-            int loadAppCustomColor = EdgeLightingSettingUtils.loadAppCustomColor(getContext(), this.mPackageName);
-            if (loadAppCustomColor == 0) {
-                loadAppCustomColor = EdgeLightingPolicyManager.getInstance(getContext(), false).getEdgeLightingColor(getContext(), this.mPackageName);
+            int iLoadAppCustomColor = EdgeLightingSettingUtils.loadAppCustomColor(getContext(), this.mPackageName);
+            if (iLoadAppCustomColor == 0) {
+                iLoadAppCustomColor = EdgeLightingPolicyManager.getInstance(getContext(), false).getEdgeLightingColor(getContext(), this.mPackageName);
             }
-            int i = loadAppCustomColor | (-16777216);
+            int i = iLoadAppCustomColor | (-16777216);
             iArr[0] = i;
             this.mEmitterItemInfo.putInt("color", i);
         }

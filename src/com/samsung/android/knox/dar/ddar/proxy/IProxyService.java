@@ -77,9 +77,9 @@ public interface IProxyService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IProxyService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IProxyService)) {
-                return (IProxyService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IProxyService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IProxyService)) {
+                return (IProxyService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -118,46 +118,46 @@ public interface IProxyService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
-                int readInt = parcel.readInt();
-                String readString2 = parcel.readString();
-                String readString3 = parcel.readString();
+                String string = parcel.readString();
+                int i3 = parcel.readInt();
+                String string2 = parcel.readString();
+                String string3 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                boolean registerAgentByAction = registerAgentByAction(readString, readInt, readString2, readString3);
+                boolean zRegisterAgentByAction = registerAgentByAction(string, i3, string2, string3);
                 parcel2.writeNoException();
-                parcel2.writeBoolean(registerAgentByAction);
+                parcel2.writeBoolean(zRegisterAgentByAction);
             } else if (i == 2) {
-                String readString4 = parcel.readString();
-                int readInt2 = parcel.readInt();
-                String readString5 = parcel.readString();
-                String readString6 = parcel.readString();
+                String string4 = parcel.readString();
+                int i4 = parcel.readInt();
+                String string5 = parcel.readString();
+                String string6 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                boolean registerAgentByMetadata = registerAgentByMetadata(readString4, readInt2, readString5, readString6);
+                boolean zRegisterAgentByMetadata = registerAgentByMetadata(string4, i4, string5, string6);
                 parcel2.writeNoException();
-                parcel2.writeBoolean(registerAgentByMetadata);
+                parcel2.writeBoolean(zRegisterAgentByMetadata);
             } else if (i == 3) {
-                String readString7 = parcel.readString();
+                String string7 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                deregisterAgent(readString7);
+                deregisterAgent(string7);
                 parcel2.writeNoException();
             } else if (i == 4) {
-                String readString8 = parcel.readString();
-                String readString9 = parcel.readString();
-                String readString10 = parcel.readString();
+                String string8 = parcel.readString();
+                String string9 = parcel.readString();
+                String string10 = parcel.readString();
                 Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                 parcel.enforceNoDataAvail();
-                Bundle relay = relay(readString8, readString9, readString10, bundle);
+                Bundle bundleRelay = relay(string8, string9, string10, bundle);
                 parcel2.writeNoException();
-                parcel2.writeTypedObject(relay, 1);
+                parcel2.writeTypedObject(bundleRelay, 1);
             } else if (i == 5) {
-                String readString11 = parcel.readString();
-                String readString12 = parcel.readString();
-                String readString13 = parcel.readString();
+                String string11 = parcel.readString();
+                String string12 = parcel.readString();
+                String string13 = parcel.readString();
                 Bundle bundle2 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                 parcel.enforceNoDataAvail();
-                Bundle relayAsync = relayAsync(readString11, readString12, readString13, bundle2);
+                Bundle bundleRelayAsync = relayAsync(string11, string12, string13, bundle2);
                 parcel2.writeNoException();
-                parcel2.writeTypedObject(relayAsync, 1);
+                parcel2.writeTypedObject(bundleRelayAsync, 1);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -182,92 +182,92 @@ public interface IProxyService extends IInterface {
 
             @Override // com.samsung.android.knox.dar.ddar.proxy.IProxyService
             public boolean registerAgentByAction(String str, int i, String str2, String str3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IProxyService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IProxyService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.ddar.proxy.IProxyService
             public boolean registerAgentByMetadata(String str, int i, String str2, String str3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IProxyService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IProxyService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.ddar.proxy.IProxyService
             public void deregisterAgent(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IProxyService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IProxyService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.ddar.proxy.IProxyService
             public Bundle relay(String str, String str2, String str3, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IProxyService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IProxyService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.dar.ddar.proxy.IProxyService
             public Bundle relayAsync(String str, String str2, String str3, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IProxyService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IProxyService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

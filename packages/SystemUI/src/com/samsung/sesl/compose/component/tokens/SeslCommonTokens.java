@@ -8,7 +8,6 @@ import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import kotlin.ULong;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class SeslCommonTokens {
     public static final Companion Companion = new Companion(null);
@@ -22,7 +21,6 @@ public final class SeslCommonTokens {
     public final long subTextColor;
     public final long windowBackgroundColor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -32,7 +30,6 @@ public final class SeslCommonTokens {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -71,17 +68,15 @@ public final class SeslCommonTokens {
     }
 
     static {
-        long Color;
-        long Color2;
         SeslPaletteTokens.INSTANCE.getClass();
         long j = SeslPaletteTokens.Primary_Blue;
         long j2 = SeslPaletteTokens.GRAYSCALE_L1;
         Color.Companion.getClass();
-        Color = ColorKt.Color(Color.m461getRedimpl(r0), Color.m460getGreenimpl(r0), Color.m458getBlueimpl(r0), 0.1f, Color.m459getColorSpaceimpl(Color.Black));
-        lightCommonTokens = new SeslCommonTokens(j, j2, Color, SeslPaletteTokens.GRAYSCALE_L3, SeslPaletteTokens.GRAY_TEXT_L1, SeslPaletteTokens.GRAY_TEXT_L5, SeslPaletteTokens.Primary_Blue_Point_Light, null);
-        long j3 = SeslPaletteTokens.GRAYSCALE_D3;
-        Color2 = ColorKt.Color(Color.m461getRedimpl(r0), Color.m460getGreenimpl(r0), Color.m458getBlueimpl(r0), 0.2f, Color.m459getColorSpaceimpl(Color.White));
-        darkCommonTokens = new SeslCommonTokens(j, j3, Color2, SeslPaletteTokens.GRAYSCALE_D1, SeslPaletteTokens.Common_White, SeslPaletteTokens.GRAY_TEXT_D6, SeslPaletteTokens.Primary_Blue_Point_Dark, null);
+        long j3 = Color.Black;
+        lightCommonTokens = new SeslCommonTokens(j, j2, ColorKt.Color(Color.m463getRedimpl(j3), Color.m462getGreenimpl(j3), Color.m460getBlueimpl(j3), 0.1f, Color.m461getColorSpaceimpl(j3)), SeslPaletteTokens.GRAYSCALE_L3, SeslPaletteTokens.GRAY_TEXT_L1, SeslPaletteTokens.GRAY_TEXT_L5, SeslPaletteTokens.Primary_Blue_Point_Light, null);
+        long j4 = SeslPaletteTokens.GRAYSCALE_D3;
+        long j5 = Color.White;
+        darkCommonTokens = new SeslCommonTokens(j, j4, ColorKt.Color(Color.m463getRedimpl(j5), Color.m462getGreenimpl(j5), Color.m460getBlueimpl(j5), 0.2f, Color.m461getColorSpaceimpl(j5)), SeslPaletteTokens.GRAYSCALE_D1, SeslPaletteTokens.Common_White, SeslPaletteTokens.GRAY_TEXT_D6, SeslPaletteTokens.Primary_Blue_Point_Dark, null);
     }
 
     public /* synthetic */ SeslCommonTokens(long j, long j2, long j3, long j4, long j5, long j6, long j7, DefaultConstructorMarker defaultConstructorMarker) {
@@ -98,7 +93,7 @@ public final class SeslCommonTokens {
         SeslCommonTokens seslCommonTokens = (SeslCommonTokens) obj;
         long j = seslCommonTokens.primaryColor;
         Color.Companion companion = Color.Companion;
-        return ULong.m3427equalsimpl0(this.primaryColor, j) && ULong.m3427equalsimpl0(this.windowBackgroundColor, seslCommonTokens.windowBackgroundColor) && ULong.m3427equalsimpl0(this.rippleColor, seslCommonTokens.rippleColor) && ULong.m3427equalsimpl0(this.roundedCornerColor, seslCommonTokens.roundedCornerColor) && ULong.m3427equalsimpl0(this.mainTextColor, seslCommonTokens.mainTextColor) && ULong.m3427equalsimpl0(this.subTextColor, seslCommonTokens.subTextColor) && ULong.m3427equalsimpl0(this.pointTextColor, seslCommonTokens.pointTextColor);
+        return ULong.m3447equalsimpl0(this.primaryColor, j) && ULong.m3447equalsimpl0(this.windowBackgroundColor, seslCommonTokens.windowBackgroundColor) && ULong.m3447equalsimpl0(this.rippleColor, seslCommonTokens.rippleColor) && ULong.m3447equalsimpl0(this.roundedCornerColor, seslCommonTokens.roundedCornerColor) && ULong.m3447equalsimpl0(this.mainTextColor, seslCommonTokens.mainTextColor) && ULong.m3447equalsimpl0(this.subTextColor, seslCommonTokens.subTextColor) && ULong.m3447equalsimpl0(this.pointTextColor, seslCommonTokens.pointTextColor);
     }
 
     public final int hashCode() {
@@ -108,17 +103,17 @@ public final class SeslCommonTokens {
     }
 
     public final String toString() {
-        String m462toStringimpl = Color.m462toStringimpl(this.primaryColor);
-        String m462toStringimpl2 = Color.m462toStringimpl(this.windowBackgroundColor);
-        String m462toStringimpl3 = Color.m462toStringimpl(this.rippleColor);
-        String m462toStringimpl4 = Color.m462toStringimpl(this.roundedCornerColor);
-        String m462toStringimpl5 = Color.m462toStringimpl(this.mainTextColor);
-        String m462toStringimpl6 = Color.m462toStringimpl(this.subTextColor);
-        String m462toStringimpl7 = Color.m462toStringimpl(this.pointTextColor);
-        StringBuilder m = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("SeslCommonTokens(primaryColor=", m462toStringimpl, ", windowBackgroundColor=", m462toStringimpl2, ", rippleColor=");
-        MoveResult$$ExternalSyntheticOutline0.m(m, m462toStringimpl3, ", roundedCornerColor=", m462toStringimpl4, ", mainTextColor=");
-        MoveResult$$ExternalSyntheticOutline0.m(m, m462toStringimpl5, ", subTextColor=", m462toStringimpl6, ", pointTextColor=");
-        return TransitionKt$$ExternalSyntheticOutline0.m(m, m462toStringimpl7, ")");
+        String strM464toStringimpl = Color.m464toStringimpl(this.primaryColor);
+        String strM464toStringimpl2 = Color.m464toStringimpl(this.windowBackgroundColor);
+        String strM464toStringimpl3 = Color.m464toStringimpl(this.rippleColor);
+        String strM464toStringimpl4 = Color.m464toStringimpl(this.roundedCornerColor);
+        String strM464toStringimpl5 = Color.m464toStringimpl(this.mainTextColor);
+        String strM464toStringimpl6 = Color.m464toStringimpl(this.subTextColor);
+        String strM464toStringimpl7 = Color.m464toStringimpl(this.pointTextColor);
+        StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("SeslCommonTokens(primaryColor=", strM464toStringimpl, ", windowBackgroundColor=", strM464toStringimpl2, ", rippleColor=");
+        MoveResult$$ExternalSyntheticOutline0.m(sbM, strM464toStringimpl3, ", roundedCornerColor=", strM464toStringimpl4, ", mainTextColor=");
+        MoveResult$$ExternalSyntheticOutline0.m(sbM, strM464toStringimpl5, ", subTextColor=", strM464toStringimpl6, ", pointTextColor=");
+        return TransitionKt$$ExternalSyntheticOutline0.m(sbM, strM464toStringimpl7, ")");
     }
 
     private SeslCommonTokens(long j, long j2, long j3, long j4, long j5, long j6, long j7) {

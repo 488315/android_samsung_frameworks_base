@@ -5,11 +5,9 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.util.Slog;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class ExtractAppIconUtils {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ColorBucket {
         public int bestColor;
         public int bestMatchingColor;
@@ -25,12 +23,12 @@ public class ExtractAppIconUtils {
             Slog.w("ExtractAppIconUtils", "The bitmap provided to processDominantColorInImage() is null. using default color.");
             return 0;
         }
-        Bitmap drawableToBitmap = DrawableUtils.drawableToBitmap(drawable);
+        Bitmap bitmapDrawableToBitmap = DrawableUtils.drawableToBitmap(drawable);
         char c2 = 20;
         float f2 = 255.0f / 20;
         ColorBucket colorBucket = new ColorBucket();
-        int width = drawableToBitmap.getWidth();
-        int height = drawableToBitmap.getHeight();
+        int width = bitmapDrawableToBitmap.getWidth();
+        int height = bitmapDrawableToBitmap.getHeight();
         int i3 = (width * height) / 2;
         int[] iArr = new int[(int) Math.pow(20, 3.0d)];
         int i4 = 0;
@@ -44,50 +42,50 @@ public class ExtractAppIconUtils {
             int i7 = i2;
             while (true) {
                 if (i7 >= height) {
-                    bitmap = drawableToBitmap;
+                    bitmap = bitmapDrawableToBitmap;
                     f = f2;
                     c = c2;
                     i = width;
                     break;
                 }
-                int pixel = drawableToBitmap.getPixel(i4, i7);
+                int pixel = bitmapDrawableToBitmap.getPixel(i4, i7);
                 if (Color.alpha(pixel) < 250) {
-                    bitmap = drawableToBitmap;
+                    bitmap = bitmapDrawableToBitmap;
                     f = f2;
                     c = c2;
                 } else {
-                    int red = Color.red(pixel);
-                    int green = Color.green(pixel);
-                    int blue = Color.blue(pixel);
+                    int iRed = Color.red(pixel);
+                    int iGreen = Color.green(pixel);
+                    int iBlue = Color.blue(pixel);
                     c = c2;
                     int i8 = (int) f2;
-                    int i9 = (i8 * blue) + (red / i8) + green;
-                    bitmap = drawableToBitmap;
+                    int i9 = (i8 * iBlue) + (iRed / i8) + iGreen;
+                    bitmap = bitmapDrawableToBitmap;
                     int i10 = iArr[i9] + 1;
                     iArr[i9] = i10;
                     if (i10 > i6) {
-                        colorBucket.bestColor = Color.rgb(red, green, blue);
+                        colorBucket.bestColor = Color.rgb(iRed, iGreen, iBlue);
                         i6 = i10;
                     }
                     if (i10 > i5) {
                         f = f2;
                         if (Color.red(pixel) != Color.blue(pixel) || Color.blue(pixel) != Color.green(pixel)) {
-                            int red2 = Color.red(pixel) - Color.green(pixel);
-                            int red3 = Color.red(pixel) - Color.blue(pixel);
+                            int iRed2 = Color.red(pixel) - Color.green(pixel);
+                            int iRed3 = Color.red(pixel) - Color.blue(pixel);
                             i = width;
-                            if (red2 > 5 || ((red2 < -5 && red3 > 5) || red3 < -5)) {
-                                colorBucket.bestMatchingColor = Color.rgb(red, green, blue);
+                            if (iRed2 > 5 || ((iRed2 < -5 && iRed3 > 5) || iRed3 < -5)) {
+                                colorBucket.bestMatchingColor = Color.rgb(iRed, iGreen, iBlue);
                                 i5 = i10;
                                 if (i10 > i3) {
                                     break;
                                 }
                             }
-                            i7 += 20;
-                            c2 = c;
-                            f2 = f;
-                            drawableToBitmap = bitmap;
-                            width = i;
                         }
+                        i7 += 20;
+                        c2 = c;
+                        f2 = f;
+                        bitmapDrawableToBitmap = bitmap;
+                        width = i;
                     } else {
                         f = f2;
                     }
@@ -96,7 +94,7 @@ public class ExtractAppIconUtils {
                 i7 += 20;
                 c2 = c;
                 f2 = f;
-                drawableToBitmap = bitmap;
+                bitmapDrawableToBitmap = bitmap;
                 width = i;
             }
             if (i6 > i3) {
@@ -105,7 +103,7 @@ public class ExtractAppIconUtils {
             i4 += 20;
             c2 = c;
             f2 = f;
-            drawableToBitmap = bitmap;
+            bitmapDrawableToBitmap = bitmap;
             width = i;
             i2 = 0;
         }

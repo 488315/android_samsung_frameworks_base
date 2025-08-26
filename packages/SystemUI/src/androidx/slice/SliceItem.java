@@ -23,7 +23,6 @@ import com.android.systemui.util.SystemUIAnalytics;
 import java.util.Calendar;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SliceItem extends CustomVersionedParcelable {
     public String mFormat;
@@ -33,7 +32,6 @@ public final class SliceItem extends CustomVersionedParcelable {
     public CharSequence mSanitizedText;
     public String mSubType;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface ActionHandler {
     }
 
@@ -123,215 +121,120 @@ public final class SliceItem extends CustomVersionedParcelable {
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
+    /* JADX WARN: Removed duplicated region for block: B:10:0x0059  */
+    /* JADX WARN: Removed duplicated region for block: B:38:0x009f  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final String toString(String str) {
-        char c;
-        char c2;
+        StringBuilder sbM;
+        String strM;
         String str2;
-        StringBuilder m = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str);
-        m.append(this.mFormat);
+        String strConcat;
+        sbM = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(str);
+        sbM.append(this.mFormat);
         if (this.mSubType != null) {
-            m.append('<');
-            m.append(this.mSubType);
-            m.append('>');
+            sbM.append('<');
+            sbM.append(this.mSubType);
+            sbM.append('>');
         }
-        m.append(' ');
+        sbM.append(' ');
         String[] strArr = this.mHints;
         if (strArr.length > 0) {
-            Slice.appendHints(m, strArr);
-            m.append(' ');
+            Slice.appendHints(sbM, strArr);
+            sbM.append(' ');
         }
-        String m2 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, "  ");
+        strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, "  ");
         String str3 = this.mFormat;
         str3.getClass();
-        switch (str3.hashCode()) {
-            case -1422950858:
-                if (str3.equals("action")) {
-                    c = 0;
-                    break;
-                }
-                c = 65535;
-                break;
-            case 104431:
-                if (str3.equals("int")) {
-                    c = 1;
-                    break;
-                }
-                c = 65535;
-                break;
-            case 3327612:
-                if (str3.equals("long")) {
-                    c = 2;
-                    break;
-                }
-                c = 65535;
-                break;
-            case 3556653:
-                if (str3.equals("text")) {
-                    c = 3;
-                    break;
-                }
-                c = 65535;
-                break;
-            case 100313435:
-                if (str3.equals("image")) {
-                    c = 4;
-                    break;
-                }
-                c = 65535;
-                break;
-            case 109526418:
-                if (str3.equals("slice")) {
-                    c = 5;
-                    break;
-                }
-                c = 65535;
-                break;
-            default:
-                c = 65535;
-                break;
-        }
-        switch (c) {
-            case 0:
+        switch (str3) {
+            case "action":
                 Object obj = ((Pair) this.mObj).first;
-                m.append('[');
-                m.append(obj);
-                m.append("] ");
-                m.append("{\n");
-                m.append(getSlice().toString(m2));
-                m.append('\n');
-                m.append(str);
-                m.append('}');
+                sbM.append('[');
+                sbM.append(obj);
+                sbM.append("] ");
+                sbM.append("{\n");
+                sbM.append(getSlice().toString(strM));
+                sbM.append('\n');
+                sbM.append(str);
+                sbM.append('}');
                 break;
-            case 1:
+            case "int":
                 if (!"color".equals(this.mSubType)) {
                     if (!"layout_direction".equals(this.mSubType)) {
-                        m.append(getInt());
+                        sbM.append(getInt());
                         break;
                     } else {
                         int i = getInt();
-                        m.append(i != 0 ? i != 1 ? i != 2 ? i != 3 ? Integer.toString(i) : "LOCALE" : "INHERIT" : "RTL" : "LTR");
+                        sbM.append(i != 0 ? i != 1 ? i != 2 ? i != 3 ? Integer.toString(i) : "LOCALE" : "INHERIT" : "RTL" : "LTR");
                         break;
                     }
                 } else {
                     int i2 = getInt();
-                    m.append(String.format("a=0x%02x r=0x%02x g=0x%02x b=0x%02x", Integer.valueOf(Color.alpha(i2)), Integer.valueOf(Color.red(i2)), Integer.valueOf(Color.green(i2)), Integer.valueOf(Color.blue(i2))));
+                    sbM.append(String.format("a=0x%02x r=0x%02x g=0x%02x b=0x%02x", Integer.valueOf(Color.alpha(i2)), Integer.valueOf(Color.red(i2)), Integer.valueOf(Color.green(i2)), Integer.valueOf(Color.blue(i2))));
                     break;
                 }
-            case 2:
+            case "long":
                 if (!"millis".equals(this.mSubType)) {
-                    m.append(getLong());
-                    m.append('L');
+                    sbM.append(getLong());
+                    sbM.append('L');
                     break;
                 } else if (getLong() != -1) {
-                    m.append(DateUtils.getRelativeTimeSpanString(getLong(), Calendar.getInstance().getTimeInMillis(), 1000L, 262144));
+                    sbM.append(DateUtils.getRelativeTimeSpanString(getLong(), Calendar.getInstance().getTimeInMillis(), 1000L, 262144));
                     break;
                 } else {
-                    m.append("INFINITY");
+                    sbM.append("INFINITY");
                     break;
                 }
-            case 3:
-                m.append('\"');
-                m.append((CharSequence) this.mObj);
-                m.append('\"');
+            case "text":
+                sbM.append('\"');
+                sbM.append((CharSequence) this.mObj);
+                sbM.append('\"');
                 break;
-            case 4:
-                m.append((IconCompat) this.mObj);
+            case "image":
+                sbM.append((IconCompat) this.mObj);
                 break;
-            case 5:
-                m.append("{\n");
-                m.append(getSlice().toString(m2));
-                m.append('\n');
-                m.append(str);
-                m.append('}');
+            case "slice":
+                sbM.append("{\n");
+                sbM.append(getSlice().toString(strM));
+                sbM.append('\n');
+                sbM.append(str);
+                sbM.append('}');
                 break;
             default:
-                String str4 = this.mFormat;
-                str4.getClass();
-                switch (str4.hashCode()) {
-                    case -1422950858:
-                        if (str4.equals("action")) {
-                            c2 = 0;
-                            break;
-                        }
-                        c2 = 65535;
+                str2 = this.mFormat;
+                str2.getClass();
+                switch (str2) {
+                    case "action":
+                        strConcat = "Action";
                         break;
-                    case 104431:
-                        if (str4.equals("int")) {
-                            c2 = 1;
-                            break;
-                        }
-                        c2 = 65535;
+                    case "int":
+                        strConcat = "Int";
                         break;
-                    case 3327612:
-                        if (str4.equals("long")) {
-                            c2 = 2;
-                            break;
-                        }
-                        c2 = 65535;
+                    case "long":
+                        strConcat = "Long";
                         break;
-                    case 3556653:
-                        if (str4.equals("text")) {
-                            c2 = 3;
-                            break;
-                        }
-                        c2 = 65535;
+                    case "text":
+                        strConcat = "Text";
                         break;
-                    case 100313435:
-                        if (str4.equals("image")) {
-                            c2 = 4;
-                            break;
-                        }
-                        c2 = 65535;
+                    case "image":
+                        strConcat = SystemUIAnalytics.DT_WALLPAPER_STATUS_TYPE_IMAGE;
                         break;
-                    case 100358090:
-                        if (str4.equals("input")) {
-                            c2 = 5;
-                            break;
-                        }
-                        c2 = 65535;
+                    case "input":
+                        strConcat = "RemoteInput";
                         break;
-                    case 109526418:
-                        if (str4.equals("slice")) {
-                            c2 = 6;
-                            break;
-                        }
-                        c2 = 65535;
+                    case "slice":
+                        strConcat = "Slice";
                         break;
                     default:
-                        c2 = 65535;
+                        strConcat = "Unrecognized format: ".concat(str2);
                         break;
                 }
-                switch (c2) {
-                    case 0:
-                        str2 = "Action";
-                        break;
-                    case 1:
-                        str2 = "Int";
-                        break;
-                    case 2:
-                        str2 = "Long";
-                        break;
-                    case 3:
-                        str2 = "Text";
-                        break;
-                    case 4:
-                        str2 = SystemUIAnalytics.DT_WALLPAPER_STATUS_TYPE_IMAGE;
-                        break;
-                    case 5:
-                        str2 = "RemoteInput";
-                        break;
-                    case 6:
-                        str2 = "Slice";
-                        break;
-                    default:
-                        str2 = "Unrecognized format: ".concat(str4);
-                        break;
-                }
-                m.append(str2);
+                sbM.append(strConcat);
                 break;
         }
-        m.append("\n");
-        return m.toString();
+        sbM.append("\n");
+        return sbM.toString();
     }
 
     public SliceItem(Object obj, String str, String str2, List<String> list) {

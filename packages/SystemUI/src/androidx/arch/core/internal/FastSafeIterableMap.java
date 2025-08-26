@@ -3,7 +3,6 @@ package androidx.arch.core.internal;
 import androidx.arch.core.internal.SafeIterableMap;
 import java.util.HashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class FastSafeIterableMap extends SafeIterableMap {
     public final HashMap mHashMap = new HashMap();
@@ -19,7 +18,7 @@ public class FastSafeIterableMap extends SafeIterableMap {
         if (entry != null) {
             return entry.mValue;
         }
-        HashMap hashMap = this.mHashMap;
+        HashMap map = this.mHashMap;
         SafeIterableMap.Entry entry2 = new SafeIterableMap.Entry(obj, obj2);
         this.mSize++;
         SafeIterableMap.Entry entry3 = this.mEnd;
@@ -31,14 +30,14 @@ public class FastSafeIterableMap extends SafeIterableMap {
             entry2.mPrevious = entry3;
             this.mEnd = entry2;
         }
-        hashMap.put(obj, entry2);
+        map.put(obj, entry2);
         return null;
     }
 
     @Override // androidx.arch.core.internal.SafeIterableMap
     public final Object remove(Object obj) {
-        Object remove = super.remove(obj);
+        Object objRemove = super.remove(obj);
         this.mHashMap.remove(obj);
-        return remove;
+        return objRemove;
     }
 }

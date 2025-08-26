@@ -96,14 +96,14 @@ public class X500Name extends ASN1Object implements ASN1Choice {
 
     public ASN1ObjectIdentifier[] getAttributeTypes() {
         int length = this.rdns.length;
-        int i = 0;
-        for (int i2 = 0; i2 < length; i2++) {
-            i += this.rdns[i2].size();
+        int size = 0;
+        for (int i = 0; i < length; i++) {
+            size += this.rdns[i].size();
         }
-        ASN1ObjectIdentifier[] aSN1ObjectIdentifierArr = new ASN1ObjectIdentifier[i];
-        int i3 = 0;
-        for (int i4 = 0; i4 < length; i4++) {
-            i3 += this.rdns[i4].collectAttributeTypes(aSN1ObjectIdentifierArr, i3);
+        ASN1ObjectIdentifier[] aSN1ObjectIdentifierArr = new ASN1ObjectIdentifier[size];
+        int iCollectAttributeTypes = 0;
+        for (int i2 = 0; i2 < length; i2++) {
+            iCollectAttributeTypes += this.rdns[i2].collectAttributeTypes(aSN1ObjectIdentifierArr, iCollectAttributeTypes);
         }
         return aSN1ObjectIdentifierArr;
     }
@@ -148,9 +148,9 @@ public class X500Name extends ASN1Object implements ASN1Choice {
             return this.hashCodeValue;
         }
         this.isHashCodeCalculated = true;
-        int calculateHashCode = this.style.calculateHashCode(this);
-        this.hashCodeValue = calculateHashCode;
-        return calculateHashCode;
+        int iCalculateHashCode = this.style.calculateHashCode(this);
+        this.hashCodeValue = iCalculateHashCode;
+        return iCalculateHashCode;
     }
 
     @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object

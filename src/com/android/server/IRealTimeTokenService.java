@@ -69,9 +69,9 @@ public interface IRealTimeTokenService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IRealTimeTokenService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IRealTimeTokenService)) {
-                return (IRealTimeTokenService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IRealTimeTokenService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IRealTimeTokenService)) {
+                return (IRealTimeTokenService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -107,28 +107,28 @@ public interface IRealTimeTokenService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                long readLong = parcel.readLong();
-                long readLong2 = parcel.readLong();
+                long j = parcel.readLong();
+                long j2 = parcel.readLong();
                 parcel.enforceNoDataAvail();
-                int registerTokenInfo = registerTokenInfo(readLong, readLong2);
+                int iRegisterTokenInfo = registerTokenInfo(j, j2);
                 parcel2.writeNoException();
-                parcel2.writeInt(registerTokenInfo);
+                parcel2.writeInt(iRegisterTokenInfo);
             } else if (i == 2) {
-                long readLong3 = parcel.readLong();
+                long j3 = parcel.readLong();
                 parcel.enforceNoDataAvail();
-                int checkTokenInfoExpiry = checkTokenInfoExpiry(readLong3);
+                int iCheckTokenInfoExpiry = checkTokenInfoExpiry(j3);
                 parcel2.writeNoException();
-                parcel2.writeInt(checkTokenInfoExpiry);
+                parcel2.writeInt(iCheckTokenInfoExpiry);
             } else if (i == 3) {
-                long readLong4 = parcel.readLong();
+                long j4 = parcel.readLong();
                 parcel.enforceNoDataAvail();
-                int unregisterTokenInfo = unregisterTokenInfo(readLong4);
+                int iUnregisterTokenInfo = unregisterTokenInfo(j4);
                 parcel2.writeNoException();
-                parcel2.writeInt(unregisterTokenInfo);
+                parcel2.writeInt(iUnregisterTokenInfo);
             } else if (i == 4) {
-                int unregisterAllTokenInfo = unregisterAllTokenInfo();
+                int iUnregisterAllTokenInfo = unregisterAllTokenInfo();
                 parcel2.writeNoException();
-                parcel2.writeInt(unregisterAllTokenInfo);
+                parcel2.writeInt(iUnregisterAllTokenInfo);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -153,65 +153,65 @@ public interface IRealTimeTokenService extends IInterface {
 
             @Override // com.android.server.IRealTimeTokenService
             public int registerTokenInfo(long j, long j2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRealTimeTokenService.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeLong(j2);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IRealTimeTokenService.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeLong(j2);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.server.IRealTimeTokenService
             public int checkTokenInfoExpiry(long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRealTimeTokenService.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IRealTimeTokenService.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.server.IRealTimeTokenService
             public int unregisterTokenInfo(long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRealTimeTokenService.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IRealTimeTokenService.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.server.IRealTimeTokenService
             public int unregisterAllTokenInfo() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IRealTimeTokenService.DESCRIPTOR);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IRealTimeTokenService.DESCRIPTOR);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -7,16 +7,15 @@ import com.airbnb.lottie.value.Keyframe;
 import java.util.Arrays;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AnimatableGradientColorValue extends BaseAnimatableValue {
     /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public AnimatableGradientColorValue(List<Keyframe> list) {
         super(list);
         for (int i = 0; i < list.size(); i++) {
-            Keyframe keyframe = list.get(i);
-            GradientColor gradientColor = (GradientColor) keyframe.startValue;
-            GradientColor gradientColor2 = (GradientColor) keyframe.endValue;
+            Keyframe keyframeCopyWith = list.get(i);
+            GradientColor gradientColor = (GradientColor) keyframeCopyWith.startValue;
+            GradientColor gradientColor2 = (GradientColor) keyframeCopyWith.endValue;
             if (gradientColor != null && gradientColor2 != null) {
                 float[] fArr = gradientColor.positions;
                 int length = fArr.length;
@@ -37,11 +36,11 @@ public class AnimatableGradientColorValue extends BaseAnimatableValue {
                             f = fArr3[i3];
                         }
                     }
-                    float[] copyOfRange = Arrays.copyOfRange(fArr3, 0, i2);
-                    keyframe = Keyframe.copyWith(gradientColor.copyWithPositions(copyOfRange), gradientColor2.copyWithPositions(copyOfRange));
+                    float[] fArrCopyOfRange = Arrays.copyOfRange(fArr3, 0, i2);
+                    keyframeCopyWith = Keyframe.copyWith(gradientColor.copyWithPositions(fArrCopyOfRange), gradientColor2.copyWithPositions(fArrCopyOfRange));
                 }
             }
-            list.set(i, keyframe);
+            list.set(i, keyframeCopyWith);
         }
     }
 

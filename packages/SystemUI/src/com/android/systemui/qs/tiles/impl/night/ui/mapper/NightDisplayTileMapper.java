@@ -25,7 +25,6 @@ import kotlin.collections.ArraysKt___ArraysKt;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class NightDisplayTileMapper implements QSTileDataToStateMapper {
     public static final DateTimeFormatter formatter12Hour;
@@ -35,7 +34,6 @@ public final class NightDisplayTileMapper implements QSTileDataToStateMapper {
     public final Resources resources;
     public final Resources.Theme theme;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -67,14 +65,19 @@ public final class NightDisplayTileMapper implements QSTileDataToStateMapper {
         Resources.Theme theme = this.theme;
         QSTileUIConfig qSTileUIConfig = qSTileConfig.uiConfig;
         Function1 function1 = new Function1() { // from class: com.android.systemui.qs.tiles.impl.night.ui.mapper.NightDisplayTileMapper$$ExternalSyntheticLambda0
+            /* JADX WARN: Removed duplicated region for block: B:37:0x00a6 A[Catch: DateTimeException -> 0x00a9, TryCatch #0 {DateTimeException -> 0x00a9, blocks: (B:35:0x00a0, B:37:0x00a6, B:41:0x00ad, B:40:0x00ab), top: B:52:0x00a0 }] */
+            /* JADX WARN: Removed duplicated region for block: B:40:0x00ab A[Catch: DateTimeException -> 0x00a9, TryCatch #0 {DateTimeException -> 0x00a9, blocks: (B:35:0x00a0, B:37:0x00a6, B:41:0x00ad, B:40:0x00ab), top: B:52:0x00a0 }] */
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj2) {
+            /*
+                Code decompiled incorrectly, please refer to instructions dump.
+            */
+            public final Object mo781invoke(Object obj2) throws Resources.NotFoundException {
                 int i;
                 LocalTime localTime;
                 int i2;
                 QSTileState.Builder builder = (QSTileState.Builder) obj2;
-                NightDisplayTileMapper nightDisplayTileMapper = NightDisplayTileMapper.this;
+                NightDisplayTileMapper nightDisplayTileMapper = this.f$0;
                 builder.label = nightDisplayTileMapper.resources.getString(R.string.quick_settings_night_display_label);
                 builder.supportedActions = ArraysKt___ArraysKt.toSet(new QSTileState.UserAction[]{QSTileState.UserAction.CLICK, QSTileState.UserAction.LONG_CLICK});
                 builder.sideViewIcon = QSTileState.SideViewIcon.None.INSTANCE;
@@ -86,16 +89,16 @@ public final class NightDisplayTileMapper implements QSTileDataToStateMapper {
                     builder.activationState = QSTileState.ActivationState.INACTIVE;
                     i = R.drawable.qs_nightlight_icon_off;
                 }
-                String str = null;
+                String string = null;
                 builder.icon = new Icon.Loaded(nightDisplayTileMapper.resources.getDrawable(i, nightDisplayTileMapper.theme), null, Integer.valueOf(i));
                 Resources resources2 = nightDisplayTileMapper.resources;
                 if (nightDisplayTileModel2 instanceof NightDisplayTileModel.AutoModeTwilight) {
                     NightDisplayTileModel.AutoModeTwilight autoModeTwilight = (NightDisplayTileModel.AutoModeTwilight) nightDisplayTileModel2;
                     if (autoModeTwilight.isLocationEnabled) {
-                        str = resources2.getString(autoModeTwilight.isActivated ? R.string.quick_settings_night_secondary_label_until_sunrise : R.string.quick_settings_night_secondary_label_on_at_sunset);
+                        string = resources2.getString(autoModeTwilight.isActivated ? R.string.quick_settings_night_secondary_label_until_sunrise : R.string.quick_settings_night_secondary_label_on_at_sunset);
                     }
                 } else if (nightDisplayTileModel2 instanceof NightDisplayTileModel.AutoModeOff) {
-                    str = resources2.getStringArray(R.array.tile_states_night)[((NightDisplayTileModel.AutoModeOff) nightDisplayTileModel2).isActivated ? (char) 2 : (char) 1];
+                    string = resources2.getStringArray(R.array.tile_states_night)[((NightDisplayTileModel.AutoModeOff) nightDisplayTileModel2).isActivated ? (char) 2 : (char) 1];
                 } else {
                     if (!(nightDisplayTileModel2 instanceof NightDisplayTileModel.AutoModeCustom)) {
                         throw new NoWhenBranchMatchedException();
@@ -105,26 +108,27 @@ public final class NightDisplayTileMapper implements QSTileDataToStateMapper {
                         localTime = autoModeCustom.endTime;
                         if (localTime != null) {
                             i2 = R.string.quick_settings_secondary_label_until;
+                            try {
+                                string = resources2.getString(i2, (!((NightDisplayTileModel.AutoModeCustom) nightDisplayTileModel2).is24HourFormat ? NightDisplayTileMapper.formatter24Hour : NightDisplayTileMapper.formatter12Hour).format(localTime));
+                            } catch (DateTimeException e) {
+                                String strValueOf = String.valueOf(e.getMessage());
+                                TileSpec tileSpec = NightDisplayTileMapper.spec;
+                                LogBuffer logBuffer = nightDisplayTileMapper.logger.getLogBuffer(tileSpec);
+                                LogMessage logMessageObtain = logBuffer.obtain(QSTileLogger.getLogTag(tileSpec), LogLevel.WARNING, new QSTileLogger$$ExternalSyntheticLambda0(1), null);
+                                ((LogMessageImpl) logMessageObtain).str1 = strValueOf;
+                                logBuffer.commit(logMessageObtain);
+                            }
                         }
                     } else {
                         localTime = autoModeCustom.startTime;
                         if (localTime != null) {
                             i2 = R.string.quick_settings_night_secondary_label_on_at;
+                            string = resources2.getString(i2, (!((NightDisplayTileModel.AutoModeCustom) nightDisplayTileModel2).is24HourFormat ? NightDisplayTileMapper.formatter24Hour : NightDisplayTileMapper.formatter12Hour).format(localTime));
                         }
                     }
-                    try {
-                        str = resources2.getString(i2, (((NightDisplayTileModel.AutoModeCustom) nightDisplayTileModel2).is24HourFormat ? NightDisplayTileMapper.formatter24Hour : NightDisplayTileMapper.formatter12Hour).format(localTime));
-                    } catch (DateTimeException e) {
-                        String valueOf = String.valueOf(e.getMessage());
-                        TileSpec tileSpec = NightDisplayTileMapper.spec;
-                        LogBuffer logBuffer = nightDisplayTileMapper.logger.getLogBuffer(tileSpec);
-                        LogMessage obtain = logBuffer.obtain(QSTileLogger.getLogTag(tileSpec), LogLevel.WARNING, new QSTileLogger$$ExternalSyntheticLambda0(1), null);
-                        ((LogMessageImpl) obtain).str1 = valueOf;
-                        logBuffer.commit(obtain);
-                    }
                 }
-                builder.secondaryLabel = str;
-                builder.contentDescription = TextUtils.isEmpty(str) ? builder.label : TextUtils.concat(builder.label, ", ", builder.secondaryLabel);
+                builder.secondaryLabel = string;
+                builder.contentDescription = TextUtils.isEmpty(string) ? builder.label : TextUtils.concat(builder.label, ", ", builder.secondaryLabel);
                 return Unit.INSTANCE;
             }
         };

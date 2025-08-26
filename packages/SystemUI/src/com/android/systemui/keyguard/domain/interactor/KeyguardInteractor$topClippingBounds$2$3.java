@@ -8,7 +8,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function4;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class KeyguardInteractor$topClippingBounds$2$3 extends SuspendLambda implements Function4 {
     private /* synthetic */ Object L$0;
@@ -22,10 +21,10 @@ final class KeyguardInteractor$topClippingBounds$2$3 extends SuspendLambda imple
 
     @Override // kotlin.jvm.functions.Function4
     public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4) {
-        boolean booleanValue = ((Boolean) obj2).booleanValue();
+        boolean zBooleanValue = ((Boolean) obj2).booleanValue();
         KeyguardInteractor$topClippingBounds$2$3 keyguardInteractor$topClippingBounds$2$3 = new KeyguardInteractor$topClippingBounds$2$3((Continuation) obj4);
         keyguardInteractor$topClippingBounds$2$3.L$0 = (FlowCollector) obj;
-        keyguardInteractor$topClippingBounds$2$3.Z$0 = booleanValue;
+        keyguardInteractor$topClippingBounds$2$3.Z$0 = zBooleanValue;
         keyguardInteractor$topClippingBounds$2$3.L$1 = (Integer) obj3;
         return keyguardInteractor$topClippingBounds$2$3.invokeSuspend(Unit.INSTANCE);
     }

@@ -2,11 +2,10 @@ package androidx.compose.ui.graphics;
 
 import androidx.compose.ui.graphics.BlendMode;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class AndroidBlendMode_androidKt {
     /* renamed from: toAndroidBlendMode-s9anfk8, reason: not valid java name */
-    public static final android.graphics.BlendMode m422toAndroidBlendModes9anfk8(int i) {
+    public static final android.graphics.BlendMode m424toAndroidBlendModes9anfk8(int i) {
         BlendMode.Companion companion = BlendMode.Companion;
         companion.getClass();
         if (i == 0) {

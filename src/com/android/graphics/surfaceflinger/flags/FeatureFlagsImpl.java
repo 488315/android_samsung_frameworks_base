@@ -268,8 +268,13 @@ public final class FeatureFlagsImpl implements FeatureFlags {
     }
 
     @Override // com.android.graphics.surfaceflinger.flags.FeatureFlags
-    public boolean syncedResolutionSwitch() {
+    public boolean stopLayer() {
         return false;
+    }
+
+    @Override // com.android.graphics.surfaceflinger.flags.FeatureFlags
+    public boolean syncedResolutionSwitch() {
+        return true;
     }
 
     @Override // com.android.graphics.surfaceflinger.flags.FeatureFlags

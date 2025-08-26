@@ -47,37 +47,37 @@ public class NotificationRankingUpdate implements Parcelable {
         this.mRankingMapFd = null;
         this.mSharedMemoryName = "NotificationRankingUpdatedSharedMemory";
         if (Flags.rankingUpdateAshmem()) {
-            Parcel obtain = Parcel.obtain();
+            Parcel parcelObtain = Parcel.obtain();
             try {
                 try {
                     this.mRankingMapFd = (SharedMemory) parcel.readParcelable(getClass().getClassLoader(), SharedMemory.class);
-                    Bundle readBundle = parcel.readBundle(getClass().getClassLoader());
+                    Bundle bundle = parcel.readBundle(getClass().getClassLoader());
                     SharedMemory sharedMemory = this.mRankingMapFd;
                     if (sharedMemory == null) {
                         this.mRankingMap = null;
-                        obtain.recycle();
+                        parcelObtain.recycle();
                         return;
                     }
-                    ByteBuffer mapReadOnly = sharedMemory.mapReadOnly();
-                    int remaining = mapReadOnly.remaining();
-                    byte[] bArr = new byte[remaining];
-                    mapReadOnly.get(bArr);
-                    obtain.unmarshall(bArr, 0, remaining);
-                    obtain.setDataPosition(0);
-                    this.mRankingMap = (NotificationListenerService.RankingMap) obtain.readParcelable(getClass().getClassLoader(), NotificationListenerService.RankingMap.class);
-                    addSmartActionsFromBundleToRankingMap(readBundle);
-                    obtain.recycle();
-                    if (mapReadOnly == null || this.mRankingMapFd == null) {
+                    ByteBuffer byteBufferMapReadOnly = sharedMemory.mapReadOnly();
+                    int iRemaining = byteBufferMapReadOnly.remaining();
+                    byte[] bArr = new byte[iRemaining];
+                    byteBufferMapReadOnly.get(bArr);
+                    parcelObtain.unmarshall(bArr, 0, iRemaining);
+                    parcelObtain.setDataPosition(0);
+                    this.mRankingMap = (NotificationListenerService.RankingMap) parcelObtain.readParcelable(getClass().getClassLoader(), NotificationListenerService.RankingMap.class);
+                    addSmartActionsFromBundleToRankingMap(bundle);
+                    parcelObtain.recycle();
+                    if (byteBufferMapReadOnly == null || this.mRankingMapFd == null) {
                         return;
                     }
-                    SharedMemory.unmap(mapReadOnly);
+                    SharedMemory.unmap(byteBufferMapReadOnly);
                     this.mRankingMapFd.close();
                     return;
                 } catch (ErrnoException e) {
                     throw new RuntimeException(e);
                 }
             } catch (Throwable th) {
-                obtain.recycle();
+                parcelObtain.recycle();
                 if (0 != 0 && this.mRankingMapFd != null) {
                     SharedMemory.unmap(null);
                     this.mRankingMapFd.close();
@@ -118,16 +118,16 @@ public class NotificationRankingUpdate implements Parcelable {
 
     @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int i) {
-        ByteBuffer byteBuffer;
+        ByteBuffer byteBufferMapReadWrite;
         SharedMemory sharedMemory;
         if (Flags.rankingUpdateAshmem()) {
-            Parcel obtain = Parcel.obtain();
+            Parcel parcelObtain = Parcel.obtain();
             ArrayList arrayList = new ArrayList();
             Bundle bundle = new Bundle();
             String[] orderedKeys = this.mRankingMap.getOrderedKeys();
             int i2 = 0;
             while (true) {
-                byteBuffer = null;
+                byteBufferMapReadWrite = null;
                 if (i2 >= orderedKeys.length) {
                     break;
                 }
@@ -145,15 +145,15 @@ public class NotificationRankingUpdate implements Parcelable {
             }
             try {
                 try {
-                    obtain.writeParcelable(new NotificationListenerService.RankingMap((NotificationListenerService.Ranking[]) arrayList.toArray(new NotificationListenerService.Ranking[0])), i);
-                    SharedMemory create = SharedMemory.create("NotificationRankingUpdatedSharedMemory", obtain.dataSize());
-                    this.mRankingMapFd = create;
-                    byteBuffer = create.mapReadWrite();
-                    obtain.marshall(byteBuffer);
+                    parcelObtain.writeParcelable(new NotificationListenerService.RankingMap((NotificationListenerService.Ranking[]) arrayList.toArray(new NotificationListenerService.Ranking[0])), i);
+                    SharedMemory sharedMemoryCreate = SharedMemory.create("NotificationRankingUpdatedSharedMemory", parcelObtain.dataSize());
+                    this.mRankingMapFd = sharedMemoryCreate;
+                    byteBufferMapReadWrite = sharedMemoryCreate.mapReadWrite();
+                    parcelObtain.marshall(byteBufferMapReadWrite);
                     this.mRankingMapFd.setProtect(OsConstants.PROT_READ);
                     parcel.writeParcelable(this.mRankingMapFd, i);
                     parcel.writeBundle(bundle);
-                    if (byteBuffer != null) {
+                    if (byteBufferMapReadWrite != null) {
                         if (sharedMemory != null) {
                             return;
                         } else {
@@ -165,9 +165,9 @@ public class NotificationRankingUpdate implements Parcelable {
                     throw new RuntimeException(e);
                 }
             } finally {
-                obtain.recycle();
-                if (byteBuffer != null && this.mRankingMapFd != null) {
-                    SharedMemory.unmap(byteBuffer);
+                parcelObtain.recycle();
+                if (byteBufferMapReadWrite != null && this.mRankingMapFd != null) {
+                    SharedMemory.unmap(byteBufferMapReadWrite);
                     this.mRankingMapFd.close();
                 }
             }

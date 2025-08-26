@@ -15,7 +15,6 @@ import com.android.systemui.statusbar.pipeline.mobile.data.MobileInputLogger$$Ex
 import com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.CallbackEvent;
 import java.time.Duration;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class MobileConnectionRepositoryKairosImpl$callbackEvents$1$2$callback$1 extends TelephonyCallback implements TelephonyCallback.CarrierNetworkListener, TelephonyCallback.CarrierRoamingNtnListener, TelephonyCallback.DataActivityListener, TelephonyCallback.DataConnectionStateListener, TelephonyCallback.DataEnabledListener, TelephonyCallback.DisplayInfoListener, TelephonyCallback.ServiceStateListener, TelephonyCallback.SignalStrengthsListener, TelephonyCallback.EmergencyCallbackModeListener {
     public final /* synthetic */ CoalescingEventProducerScope $$this$coalescingEvents;
@@ -40,11 +39,11 @@ public final class MobileConnectionRepositoryKairosImpl$callbackEvents$1$2$callb
         LogLevel logLevel = LogLevel.INFO;
         MobileInputLogger$$ExternalSyntheticLambda0 mobileInputLogger$$ExternalSyntheticLambda0 = new MobileInputLogger$$ExternalSyntheticLambda0(22);
         LogBuffer logBuffer = mobileInputLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("MobileInputLog", logLevel, mobileInputLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("MobileInputLog", logLevel, mobileInputLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.int1 = i;
         logMessageImpl.bool1 = z;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         ((BuildScopeImpl$coalescingEvents$1$1) this.$$this$coalescingEvents).emit(new CallbackEvent.OnCarrierNetworkChange(z));
     }
 
@@ -55,11 +54,11 @@ public final class MobileConnectionRepositoryKairosImpl$callbackEvents$1$2$callb
         LogLevel logLevel = LogLevel.INFO;
         MobileInputLogger$$ExternalSyntheticLambda0 mobileInputLogger$$ExternalSyntheticLambda0 = new MobileInputLogger$$ExternalSyntheticLambda0(23);
         LogBuffer logBuffer = mobileInputLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("MobileInputLog", logLevel, mobileInputLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("MobileInputLog", logLevel, mobileInputLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.int1 = i;
         logMessageImpl.bool1 = z;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         ((BuildScopeImpl$coalescingEvents$1$1) this.$$this$coalescingEvents).emit(new CallbackEvent.OnCarrierRoamingNtnModeChanged(z));
     }
 
@@ -71,11 +70,11 @@ public final class MobileConnectionRepositoryKairosImpl$callbackEvents$1$2$callb
         LogLevel logLevel = LogLevel.INFO;
         MobileInputLogger$$ExternalSyntheticLambda0 mobileInputLogger$$ExternalSyntheticLambda0 = new MobileInputLogger$$ExternalSyntheticLambda0(7);
         LogBuffer logBuffer = mobileInputLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("MobileInputLog", logLevel, mobileInputLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("MobileInputLog", logLevel, mobileInputLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.int1 = i2;
         logMessageImpl.int2 = i;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         ((BuildScopeImpl$coalescingEvents$1$1) this.$$this$coalescingEvents).emit(new CallbackEvent.OnDataActivity(i));
     }
 
@@ -92,11 +91,11 @@ public final class MobileConnectionRepositoryKairosImpl$callbackEvents$1$2$callb
         LogLevel logLevel = LogLevel.INFO;
         MobileInputLogger$$ExternalSyntheticLambda0 mobileInputLogger$$ExternalSyntheticLambda0 = new MobileInputLogger$$ExternalSyntheticLambda0(1);
         LogBuffer logBuffer = mobileInputLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("MobileInputLog", logLevel, mobileInputLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("MobileInputLog", logLevel, mobileInputLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.int1 = i2;
         logMessageImpl.bool1 = z;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         ((BuildScopeImpl$coalescingEvents$1$1) this.$$this$coalescingEvents).emit(new CallbackEvent.OnDataEnabledChanged(z));
     }
 

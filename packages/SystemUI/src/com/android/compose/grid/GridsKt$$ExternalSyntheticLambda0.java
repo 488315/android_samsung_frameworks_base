@@ -7,7 +7,6 @@ import androidx.compose.ui.Modifier;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final /* synthetic */ class GridsKt$$ExternalSyntheticLambda0 implements Function2 {
     public final /* synthetic */ int $r8$classId;
@@ -33,15 +32,15 @@ public final /* synthetic */ class GridsKt$$ExternalSyntheticLambda0 implements 
         switch (this.$r8$classId) {
             case 0:
                 ((Integer) obj2).getClass();
-                int updateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(this.f$5 | 1);
+                int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(this.f$5 | 1);
                 ComposableLambdaImpl composableLambdaImpl = this.f$4;
-                GridsKt.m937VerticalGridvz2T9sI(this.f$0, this.f$1, this.f$2, this.f$3, composableLambdaImpl, (Composer) obj, updateChangedFlags);
+                GridsKt.m939VerticalGridvz2T9sI(this.f$0, this.f$1, this.f$2, this.f$3, composableLambdaImpl, (Composer) obj, iUpdateChangedFlags);
                 break;
             default:
                 ((Integer) obj2).getClass();
-                int updateChangedFlags2 = RecomposeScopeImplKt.updateChangedFlags(this.f$5 | 1);
+                int iUpdateChangedFlags2 = RecomposeScopeImplKt.updateChangedFlags(this.f$5 | 1);
                 ComposableLambdaImpl composableLambdaImpl2 = this.f$4;
-                GridsKt.m936GridnSlTg7c(this.f$0, this.f$1, this.f$2, this.f$3, composableLambdaImpl2, (Composer) obj, updateChangedFlags2);
+                GridsKt.m938GridnSlTg7c(this.f$0, this.f$1, this.f$2, this.f$3, composableLambdaImpl2, (Composer) obj, iUpdateChangedFlags2);
                 break;
         }
         return Unit.INSTANCE;

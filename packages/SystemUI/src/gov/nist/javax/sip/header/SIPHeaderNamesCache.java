@@ -4,7 +4,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.HashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class SIPHeaderNamesCache {
     public static final HashMap lowercaseMap = new HashMap();
@@ -15,9 +14,9 @@ public abstract class SIPHeaderNamesCache {
                 try {
                     String str = (String) field.get(null);
                     String lowerCase = str.toLowerCase();
-                    HashMap hashMap = lowercaseMap;
-                    hashMap.put(str, lowerCase);
-                    hashMap.put(lowerCase, lowerCase);
+                    HashMap map = lowercaseMap;
+                    map.put(str, lowerCase);
+                    map.put(lowerCase, lowerCase);
                 } catch (IllegalAccessException unused) {
                 }
             }

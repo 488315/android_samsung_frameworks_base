@@ -25,14 +25,14 @@ public final class MacAddressUtils {
     }
 
     public static MacAddress createRandomUnicastAddress(MacAddress macAddress, Random random) {
-        long longAddrFromByteAddr;
+        long jLongAddrFromByteAddr;
         if (macAddress == null) {
-            longAddrFromByteAddr = random.nextLong() & VALID_LONG_MASK;
+            jLongAddrFromByteAddr = random.nextLong() & VALID_LONG_MASK;
         } else {
-            longAddrFromByteAddr = (longAddrFromByteAddr(macAddress.toByteArray()) & OUI_MASK) | (NIC_MASK & random.nextLong());
+            jLongAddrFromByteAddr = (longAddrFromByteAddr(macAddress.toByteArray()) & OUI_MASK) | (NIC_MASK & random.nextLong());
         }
-        MacAddress fromBytes = MacAddress.fromBytes(byteAddrFromLongAddr((longAddrFromByteAddr | LOCALLY_ASSIGNED_MASK) & (~MULTICAST_MASK)));
-        return fromBytes.equals(DEFAULT_MAC_ADDRESS) ? createRandomUnicastAddress(macAddress, random) : fromBytes;
+        MacAddress macAddressFromBytes = MacAddress.fromBytes(byteAddrFromLongAddr((jLongAddrFromByteAddr | LOCALLY_ASSIGNED_MASK) & (~MULTICAST_MASK)));
+        return macAddressFromBytes.equals(DEFAULT_MAC_ADDRESS) ? createRandomUnicastAddress(macAddress, random) : macAddressFromBytes;
     }
 
     public static long longAddrFromByteAddr(byte[] bArr) {

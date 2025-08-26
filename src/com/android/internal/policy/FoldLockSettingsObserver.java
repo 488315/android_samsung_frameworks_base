@@ -36,11 +36,11 @@ public class FoldLockSettingsObserver extends ContentObserver {
     }
 
     void requestAndCacheFoldLockSetting() {
-        String request = request();
-        if (request == null || !SETTING_VALUES.contains(request)) {
-            request = "selective_stay_awake_key";
+        String strRequest = request();
+        if (strRequest == null || !SETTING_VALUES.contains(strRequest)) {
+            strRequest = "selective_stay_awake_key";
         }
-        setCurrentFoldSetting(request);
+        setCurrentFoldSetting(strRequest);
     }
 
     String request() {

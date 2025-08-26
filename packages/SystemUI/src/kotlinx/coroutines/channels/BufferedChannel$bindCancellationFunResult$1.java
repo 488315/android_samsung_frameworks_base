@@ -7,7 +7,6 @@ import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.FunctionReferenceImpl;
 import kotlinx.coroutines.internal.OnUndeliveredElementKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 final /* synthetic */ class BufferedChannel$bindCancellationFunResult$1 extends FunctionReferenceImpl implements Function3 {
     public BufferedChannel$bindCancellationFunResult$1(Object obj) {
@@ -19,9 +18,9 @@ final /* synthetic */ class BufferedChannel$bindCancellationFunResult$1 extends 
         Object obj4 = ((ChannelResult) obj2).holder;
         Function1 function1 = ((BufferedChannel) this.receiver).onUndeliveredElement;
         function1.getClass();
-        Object m3459getOrNullimpl = ChannelResult.m3459getOrNullimpl(obj4);
-        m3459getOrNullimpl.getClass();
-        OnUndeliveredElementKt.callUndeliveredElement(function1, m3459getOrNullimpl, (CoroutineContext) obj3);
+        Object objM3479getOrNullimpl = ChannelResult.m3479getOrNullimpl(obj4);
+        objM3479getOrNullimpl.getClass();
+        OnUndeliveredElementKt.callUndeliveredElement(function1, objM3479getOrNullimpl, (CoroutineContext) obj3);
         return Unit.INSTANCE;
     }
 }

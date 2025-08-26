@@ -33,6 +33,11 @@ public class TraceBuffer<P, S extends P, T extends P> {
         }
 
         @Override // com.android.internal.util.TraceBuffer.ProtoProvider
+        public /* bridge */ /* synthetic */ void write(Object obj, Queue queue, OutputStream outputStream) throws IOException {
+            write((ProtoOutputStream) obj, (Queue<ProtoOutputStream>) queue, outputStream);
+        }
+
+        @Override // com.android.internal.util.TraceBuffer.ProtoProvider
         public int getItemSize(ProtoOutputStream protoOutputStream) {
             return protoOutputStream.getRawSize();
         }
@@ -42,7 +47,6 @@ public class TraceBuffer<P, S extends P, T extends P> {
             return protoOutputStream.getBytes();
         }
 
-        @Override // com.android.internal.util.TraceBuffer.ProtoProvider
         public void write(ProtoOutputStream protoOutputStream, Queue<ProtoOutputStream> queue, OutputStream outputStream) throws IOException {
             outputStream.write(protoOutputStream.getBytes());
             Iterator<ProtoOutputStream> it = queue.iterator();
@@ -94,9 +98,7 @@ public class TraceBuffer<P, S extends P, T extends P> {
         return this.mBuffer.stream().anyMatch(new Predicate() { // from class: com.android.internal.util.TraceBuffer$$ExternalSyntheticLambda0
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                boolean lambda$contains$0;
-                lambda$contains$0 = TraceBuffer.this.lambda$contains$0(bArr, obj);
-                return lambda$contains$0;
+                return this.f$0.lambda$contains$0(bArr, obj);
             }
         });
     }
@@ -121,15 +123,15 @@ public class TraceBuffer<P, S extends P, T extends P> {
     private void discardOldest(int i) {
         long availableSpace = getAvailableSpace();
         while (availableSpace < i) {
-            T poll = this.mBuffer.poll();
-            if (poll == null) {
+            T tPoll = this.mBuffer.poll();
+            if (tPoll == null) {
                 throw new IllegalStateException("No element to discard from buffer");
             }
-            this.mBufferUsedSize -= this.mProtoProvider.getItemSize(poll);
+            this.mBufferUsedSize -= this.mProtoProvider.getItemSize(tPoll);
             long availableSpace2 = getAvailableSpace();
             Consumer consumer = this.mProtoDequeuedCallback;
             if (consumer != null) {
-                consumer.accept(poll);
+                consumer.accept(tPoll);
             }
             availableSpace = availableSpace2;
         }

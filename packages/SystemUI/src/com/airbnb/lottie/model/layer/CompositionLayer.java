@@ -20,7 +20,6 @@ import com.airbnb.lottie.value.LottieValueCallback;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class CompositionLayer extends BaseLayer {
     public boolean clipToCompositionBounds;
@@ -33,7 +32,6 @@ public class CompositionLayer extends BaseLayer {
     public final RectF rect;
     public BaseKeyframeAnimation timeRemapping;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.airbnb.lottie.model.layer.CompositionLayer$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$com$airbnb$lottie$model$layer$Layer$MatteType;
@@ -53,9 +51,9 @@ public class CompositionLayer extends BaseLayer {
     }
 
     public CompositionLayer(LottieDrawable lottieDrawable, Layer layer, List<Layer> list, LottieComposition lottieComposition) {
-        super(lottieDrawable, layer);
         BaseLayer baseLayer;
         BaseLayer shapeLayer;
+        super(lottieDrawable, layer);
         this.layers = new ArrayList();
         this.rect = new RectF();
         this.newClipRect = new RectF();
@@ -63,9 +61,9 @@ public class CompositionLayer extends BaseLayer {
         this.clipToCompositionBounds = true;
         AnimatableFloatValue animatableFloatValue = layer.timeRemapping;
         if (animatableFloatValue != null) {
-            BaseKeyframeAnimation createAnimation = animatableFloatValue.createAnimation();
-            this.timeRemapping = createAnimation;
-            addAnimation(createAnimation);
+            BaseKeyframeAnimation baseKeyframeAnimationCreateAnimation = animatableFloatValue.createAnimation();
+            this.timeRemapping = baseKeyframeAnimationCreateAnimation;
+            addAnimation(baseKeyframeAnimationCreateAnimation);
             this.timeRemapping.addUpdateListener(this);
         } else {
             this.timeRemapping = null;

@@ -21,7 +21,6 @@ import com.android.wm.shell.shared.desktopmode.DesktopState;
 import com.android.wm.shell.shared.desktopmode.DesktopStateImpl;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class CompatUIWindowManager extends CompatUIWindowManagerAbstract {
     public final Consumer mCallback;
@@ -51,9 +50,9 @@ public class CompatUIWindowManager extends CompatUIWindowManagerAbstract {
 
     @Override // com.android.wm.shell.compatui.CompatUIWindowManagerAbstract
     public final View createLayout() {
-        CompatUILayout inflateLayout = inflateLayout();
-        this.mLayout = inflateLayout;
-        inflateLayout.mWindowManager = this;
+        CompatUILayout compatUILayoutInflateLayout = inflateLayout();
+        this.mLayout = compatUILayoutInflateLayout;
+        compatUILayoutInflateLayout.mWindowManager = this;
         updateVisibilityOfViews$1();
         if (this.mHasSizeCompat) {
             this.mCallback.accept(new CompatUIEvents.SizeCompatRestartButtonAppeared(this.mTaskId));
@@ -94,18 +93,18 @@ public class CompatUIWindowManager extends CompatUIWindowManagerAbstract {
         int i = appCompatTaskInfo.topActivityLetterboxWidth;
         int i2 = appCompatTaskInfo.topActivityLetterboxHeight;
         Rect taskStableBounds = getTaskStableBounds();
-        int width = taskStableBounds.width();
-        int height = taskStableBounds.height();
-        if (width > i && height > i2) {
+        int iWidth = taskStableBounds.width();
+        int iHeight = taskStableBounds.height();
+        if (iWidth > i && iHeight > i2) {
             return true;
         }
         float f = this.mHideScmTolerance;
         this.mCompatUIConfiguration.getClass();
-        if (f != 100 && width == i) {
+        if (f != 100 && iWidth == i) {
             return false;
         }
         int i3 = i * i2;
-        int i4 = width * height;
+        int i4 = iWidth * iHeight;
         return (i3 == 0 || i4 == 0 || (((float) i3) / ((float) i4)) * 100.0f >= this.mHideScmTolerance) ? false : true;
     }
 
@@ -160,23 +159,23 @@ public class CompatUIWindowManager extends CompatUIWindowManagerAbstract {
             return;
         }
         boolean z = this.mHasSizeCompat;
-        View findViewById = compatUILayout.findViewById(R.id.size_compat_restart_button);
+        View viewFindViewById = compatUILayout.findViewById(R.id.size_compat_restart_button);
         int i = z ? 0 : 8;
-        if (findViewById.getVisibility() != i) {
-            findViewById.setVisibility(i);
+        if (viewFindViewById.getVisibility() != i) {
+            viewFindViewById.setVisibility(i);
         }
         if (!z) {
-            View findViewById2 = compatUILayout.findViewById(R.id.size_compat_hint);
-            if (findViewById2.getVisibility() != 8) {
-                findViewById2.setVisibility(8);
+            View viewFindViewById2 = compatUILayout.findViewById(R.id.size_compat_hint);
+            if (viewFindViewById2.getVisibility() != 8) {
+                viewFindViewById2.setVisibility(8);
             }
         }
         if (!this.mHasSizeCompat || this.mCompatUIHintsState.mHasShownSizeCompatHint) {
             return;
         }
-        View findViewById3 = this.mLayout.findViewById(R.id.size_compat_hint);
-        if (findViewById3.getVisibility() != 0) {
-            findViewById3.setVisibility(0);
+        View viewFindViewById3 = this.mLayout.findViewById(R.id.size_compat_hint);
+        if (viewFindViewById3.getVisibility() != 0) {
+            viewFindViewById3.setVisibility(0);
         }
         this.mCompatUIHintsState.mHasShownSizeCompatHint = true;
     }

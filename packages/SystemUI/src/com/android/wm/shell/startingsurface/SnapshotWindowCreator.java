@@ -6,13 +6,11 @@ import com.android.wm.shell.common.ShellExecutor;
 import com.android.wm.shell.protolog.ShellProtoLogGroup;
 import com.android.wm.shell.startingsurface.StartingSurfaceDrawer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SnapshotWindowCreator {
     public final ShellExecutor mMainExecutor;
     public final StartingSurfaceDrawer.StartingWindowRecordManager mStartingWindowRecordManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SnapshotWindowRecord extends StartingSurfaceDrawer.SnapshotRecord {
         public final TaskSnapshotWindow mTaskSnapshotWindow;
 

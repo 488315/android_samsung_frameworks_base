@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class CalendarConstraints implements Parcelable {
     public static final Parcelable.Creator<CalendarConstraints> CREATOR = new Parcelable.Creator() { // from class: com.google.android.material.datepicker.CalendarConstraints.1
@@ -28,7 +27,6 @@ public final class CalendarConstraints implements Parcelable {
     public final DateValidator validator;
     public final int yearSpan;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface DateValidator extends Parcelable {
     }
 
@@ -83,7 +81,6 @@ public final class CalendarConstraints implements Parcelable {
         this.yearSpan = (month2.year - month.year) + 1;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Builder {
         public static final long DEFAULT_END;
         public static final long DEFAULT_START;

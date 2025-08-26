@@ -15,7 +15,6 @@ import java.io.InputStream;
 import java.util.Collections;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DesktopPersistentRepositories extends GeneratedMessageLite implements MessageLiteOrBuilder {
     private static final DesktopPersistentRepositories DEFAULT_INSTANCE;
@@ -23,7 +22,6 @@ public final class DesktopPersistentRepositories extends GeneratedMessageLite im
     private static volatile Parser PARSER;
     private MapFieldLite<Integer, DesktopRepositoryState> desktopRepoByUser_ = MapFieldLite.EMPTY_MAP_FIELD;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.desktopmode.persistence.DesktopPersistentRepositories$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$com$google$protobuf$GeneratedMessageLite$MethodToInvoke;
@@ -62,7 +60,6 @@ public final class DesktopPersistentRepositories extends GeneratedMessageLite im
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Builder extends GeneratedMessageLite.Builder {
         public /* synthetic */ Builder(int i) {
             this();
@@ -73,7 +70,6 @@ public final class DesktopPersistentRepositories extends GeneratedMessageLite im
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DesktopRepoByUserDefaultEntryHolder {
         public static final MapEntryLite defaultEntry = MapEntryLite.newDefaultInstance(WireFormat$FieldType.INT32, 0, WireFormat$FieldType.MESSAGE, DesktopRepositoryState.getDefaultInstance());
 
@@ -82,7 +78,7 @@ public final class DesktopPersistentRepositories extends GeneratedMessageLite im
     }
 
     /* renamed from: -$$Nest$mgetMutableDesktopRepoByUserMap, reason: not valid java name */
-    public static MapFieldLite m3240$$Nest$mgetMutableDesktopRepoByUserMap(DesktopPersistentRepositories desktopPersistentRepositories) {
+    public static MapFieldLite m3257$$Nest$mgetMutableDesktopRepoByUserMap(DesktopPersistentRepositories desktopPersistentRepositories) {
         if (!desktopPersistentRepositories.desktopRepoByUser_.isMutable()) {
             desktopPersistentRepositories.desktopRepoByUser_ = desktopPersistentRepositories.desktopRepoByUser_.mutableCopy();
         }
@@ -102,19 +98,19 @@ public final class DesktopPersistentRepositories extends GeneratedMessageLite im
         return DEFAULT_INSTANCE;
     }
 
-    public static DesktopPersistentRepositories parseFrom(InputStream inputStream) {
-        GeneratedMessageLite parsePartialFrom = GeneratedMessageLite.parsePartialFrom(DEFAULT_INSTANCE, new CodedInputStream.StreamDecoder(inputStream, 4096), ExtensionRegistryLite.getEmptyRegistry());
-        if (GeneratedMessageLite.isInitialized(parsePartialFrom, true)) {
-            return (DesktopPersistentRepositories) parsePartialFrom;
+    public static DesktopPersistentRepositories parseFrom(InputStream inputStream) throws InvalidProtocolBufferException {
+        GeneratedMessageLite partialFrom = GeneratedMessageLite.parsePartialFrom(DEFAULT_INSTANCE, new CodedInputStream.StreamDecoder(inputStream, 4096), ExtensionRegistryLite.getEmptyRegistry());
+        if (GeneratedMessageLite.isInitialized(partialFrom, true)) {
+            return (DesktopPersistentRepositories) partialFrom;
         }
-        InvalidProtocolBufferException invalidProtocolBufferException = new InvalidProtocolBufferException(new UninitializedMessageException(parsePartialFrom).getMessage());
-        invalidProtocolBufferException.setUnfinishedMessage(parsePartialFrom);
+        InvalidProtocolBufferException invalidProtocolBufferException = new InvalidProtocolBufferException(new UninitializedMessageException(partialFrom).getMessage());
+        invalidProtocolBufferException.setUnfinishedMessage(partialFrom);
         throw invalidProtocolBufferException;
     }
 
     @Override // com.google.protobuf.GeneratedMessageLite
     public final Object dynamicMethod(GeneratedMessageLite.MethodToInvoke methodToInvoke) {
-        Parser parser;
+        Parser defaultInstanceBasedParser;
         switch (AnonymousClass1.$SwitchMap$com$google$protobuf$GeneratedMessageLite$MethodToInvoke[methodToInvoke.ordinal()]) {
             case 1:
                 return new DesktopPersistentRepositories();
@@ -125,22 +121,22 @@ public final class DesktopPersistentRepositories extends GeneratedMessageLite im
             case 4:
                 return DEFAULT_INSTANCE;
             case 5:
-                Parser parser2 = PARSER;
-                if (parser2 != null) {
-                    return parser2;
+                Parser parser = PARSER;
+                if (parser != null) {
+                    return parser;
                 }
                 synchronized (DesktopPersistentRepositories.class) {
                     try {
-                        parser = PARSER;
-                        if (parser == null) {
-                            parser = new GeneratedMessageLite.DefaultInstanceBasedParser(DEFAULT_INSTANCE);
-                            PARSER = parser;
+                        defaultInstanceBasedParser = PARSER;
+                        if (defaultInstanceBasedParser == null) {
+                            defaultInstanceBasedParser = new GeneratedMessageLite.DefaultInstanceBasedParser(DEFAULT_INSTANCE);
+                            PARSER = defaultInstanceBasedParser;
                         }
                     } catch (Throwable th) {
                         throw th;
                     }
                 }
-                return parser;
+                return defaultInstanceBasedParser;
             case 6:
                 return (byte) 1;
             case 7:

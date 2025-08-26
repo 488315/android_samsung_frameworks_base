@@ -27,7 +27,6 @@ import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.CoroutineScopeKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class LocationTileUserActionInteractor implements QSTileUserActionInteractor {
     public final ActivityStarter activityStarter;
@@ -47,7 +46,7 @@ public final class LocationTileUserActionInteractor implements QSTileUserActionI
     }
 
     @Override // com.android.systemui.qs.tiles.base.domain.interactor.QSTileUserActionInteractor
-    public final Object handleInput(QSTileInput qSTileInput, Continuation continuation) {
+    public final Object handleInput(QSTileInput qSTileInput, Continuation continuation) throws Throwable {
         QSTileUserAction qSTileUserAction = qSTileInput.action;
         if (qSTileUserAction instanceof QSTileUserAction.Click) {
             final boolean z = ((LocationTileModel) qSTileInput.data).isEnabled;
@@ -55,7 +54,6 @@ public final class LocationTileUserActionInteractor implements QSTileUserActionI
             if (keyguardStateControllerImpl.mSecure && keyguardStateControllerImpl.mShowing) {
                 this.activityStarter.postQSRunnableDismissingKeyguard(new Runnable() { // from class: com.android.systemui.qs.tiles.impl.location.domain.interactor.LocationTileUserActionInteractor$handleInput$2$1
 
-                    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
                     /* renamed from: com.android.systemui.qs.tiles.impl.location.domain.interactor.LocationTileUserActionInteractor$handleInput$2$1$1, reason: invalid class name */
                     final class AnonymousClass1 extends SuspendLambda implements Function2 {
                         final /* synthetic */ boolean $wasEnabled;
@@ -93,15 +91,15 @@ public final class LocationTileUserActionInteractor implements QSTileUserActionI
 
                     @Override // java.lang.Runnable
                     public final void run() {
-                        CoroutineContext coroutineContext = LocationTileUserActionInteractor.this.applicationScope.getCoroutineContext();
+                        CoroutineContext coroutineContext = this.this$0.applicationScope.getCoroutineContext();
                         TraceDataThreadLocal traceDataThreadLocal = TraceContextElementKt.traceThreadLocal;
-                        CoroutineTracingKt.launchTraced$default(CoroutineScopeKt.CoroutineScope(coroutineContext.plus(EmptyCoroutineContext.INSTANCE)), null, null, new AnonymousClass1(LocationTileUserActionInteractor.this, z, null), 7);
+                        CoroutineTracingKt.launchTraced$default(CoroutineScopeKt.CoroutineScope(coroutineContext.plus(EmptyCoroutineContext.INSTANCE)), null, null, new AnonymousClass1(this.this$0, z, null), 7);
                     }
                 });
             } else {
-                Object withContext = BuildersKt.withContext(this.coroutineContext, new LocationTileUserActionInteractor$handleInput$2$2(this, z, null), continuation);
-                if (withContext == CoroutineSingletons.COROUTINE_SUSPENDED) {
-                    return withContext;
+                Object objWithContext = BuildersKt.withContext(this.coroutineContext, new LocationTileUserActionInteractor$handleInput$2$2(this, z, null), continuation);
+                if (objWithContext == CoroutineSingletons.COROUTINE_SUSPENDED) {
+                    return objWithContext;
                 }
             }
         } else if (qSTileUserAction instanceof QSTileUserAction.LongClick) {

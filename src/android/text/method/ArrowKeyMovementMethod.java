@@ -98,11 +98,11 @@ public class ArrowKeyMovementMethod extends BaseMovementMethod implements Moveme
             return false;
         }
         Layout layout = textView.getLayout();
-        boolean isSelecting = isSelecting(spannable);
+        boolean zIsSelecting = isSelecting(spannable);
         int currentLineTop = getCurrentLineTop(spannable, layout) - getPageHeight(textView);
         do {
             int selectionEnd = Selection.getSelectionEnd(spannable);
-            if (isSelecting) {
+            if (zIsSelecting) {
                 Selection.extendUp(spannable, layout);
             } else {
                 Selection.moveUp(spannable, layout);
@@ -122,11 +122,11 @@ public class ArrowKeyMovementMethod extends BaseMovementMethod implements Moveme
             return false;
         }
         Layout layout = textView.getLayout();
-        boolean isSelecting = isSelecting(spannable);
+        boolean zIsSelecting = isSelecting(spannable);
         int currentLineTop = getCurrentLineTop(spannable, layout) + getPageHeight(textView);
         do {
             int selectionEnd = Selection.getSelectionEnd(spannable);
-            if (isSelecting) {
+            if (zIsSelecting) {
                 Selection.extendDown(spannable, layout);
             } else {
                 Selection.moveDown(spannable, layout);
@@ -235,18 +235,18 @@ public class ArrowKeyMovementMethod extends BaseMovementMethod implements Moveme
 
     @Override // android.text.method.BaseMovementMethod, android.text.method.MovementMethod
     public boolean onTouchEvent(TextView textView, Spannable spannable, MotionEvent motionEvent) {
-        int i;
-        int i2;
+        int initialScrollX;
+        int initialScrollY;
         int action = motionEvent.getAction();
         if (action == 1) {
-            i = Touch.getInitialScrollX(textView, spannable);
-            i2 = Touch.getInitialScrollY(textView, spannable);
+            initialScrollX = Touch.getInitialScrollX(textView, spannable);
+            initialScrollY = Touch.getInitialScrollY(textView, spannable);
         } else {
-            i = -1;
-            i2 = -1;
+            initialScrollX = -1;
+            initialScrollY = -1;
         }
-        boolean isSelecting = isSelecting(spannable);
-        boolean onTouchEvent = Touch.onTouchEvent(textView, spannable, motionEvent);
+        boolean zIsSelecting = isSelecting(spannable);
+        boolean zOnTouchEvent = Touch.onTouchEvent(textView, spannable, motionEvent);
         if (!textView.didTouchFocusSelect()) {
             if (action == 0) {
                 if (isSelecting(spannable) && (textView.isFocused() || textView.requestFocus())) {
@@ -254,11 +254,11 @@ public class ArrowKeyMovementMethod extends BaseMovementMethod implements Moveme
                     spannable.setSpan(LAST_TAP_DOWN, offsetForPosition, offsetForPosition, 34);
                     this.mIsSpanSet = true;
                     textView.getParent().requestDisallowInterceptTouchEvent(true);
-                    return onTouchEvent;
+                    return zOnTouchEvent;
                 }
             } else if (textView.isFocused()) {
                 if (action == 2) {
-                    if (isSelecting(spannable) && onTouchEvent && this.mIsSpanSet) {
+                    if (isSelecting(spannable) && zOnTouchEvent && this.mIsSpanSet) {
                         int spanStart = spannable.getSpanStart(LAST_TAP_DOWN);
                         textView.cancelLongPress();
                         int offsetForPosition2 = textView.getOffsetForPosition(motionEvent.getX(), motionEvent.getY());
@@ -266,11 +266,11 @@ public class ArrowKeyMovementMethod extends BaseMovementMethod implements Moveme
                         return true;
                     }
                 } else if (action == 1) {
-                    if ((i2 >= 0 && i2 != textView.getScrollY()) || (i >= 0 && i != textView.getScrollX())) {
+                    if ((initialScrollY >= 0 && initialScrollY != textView.getScrollY()) || (initialScrollX >= 0 && initialScrollX != textView.getScrollX())) {
                         textView.moveCursorToVisibleOffset();
                         return true;
                     }
-                    if (isSelecting && this.mIsSpanSet) {
+                    if (zIsSelecting && this.mIsSpanSet) {
                         Object obj = LAST_TAP_DOWN;
                         int spanStart2 = spannable.getSpanStart(obj);
                         int offsetForPosition3 = textView.getOffsetForPosition(motionEvent.getX(), motionEvent.getY());
@@ -284,7 +284,7 @@ public class ArrowKeyMovementMethod extends BaseMovementMethod implements Moveme
                 }
             }
         }
-        return onTouchEvent;
+        return zOnTouchEvent;
     }
 
     @Override // android.text.method.BaseMovementMethod, android.text.method.MovementMethod

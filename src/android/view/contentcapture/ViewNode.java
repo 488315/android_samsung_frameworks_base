@@ -113,12 +113,12 @@ public final class ViewNode extends AssistStructure.ViewNode {
             this.mClassName = parcel.readString();
         }
         if ((128 & j) != 0) {
-            int readInt = parcel.readInt();
-            this.mId = readInt;
-            if (readInt != -1) {
-                String readString = parcel.readString();
-                this.mIdEntry = readString;
-                if (readString != null) {
+            int i = parcel.readInt();
+            this.mId = i;
+            if (i != -1) {
+                String string = parcel.readString();
+                this.mIdEntry = string;
+                if (string != null) {
                     this.mIdType = parcel.readString();
                     this.mIdPackage = parcel.readString();
                 }
@@ -130,12 +130,12 @@ public final class ViewNode extends AssistStructure.ViewNode {
             this.mWidth = parcel.readInt();
             this.mHeight = parcel.readInt();
         } else {
-            int readInt2 = parcel.readInt();
-            this.mX = readInt2 & 32767;
-            this.mY = (readInt2 >> 16) & 32767;
-            int readInt3 = parcel.readInt();
-            this.mWidth = readInt3 & 32767;
-            this.mHeight = (readInt3 >> 16) & 32767;
+            int i2 = parcel.readInt();
+            this.mX = i2 & 32767;
+            this.mY = (i2 >> 16) & 32767;
+            int i3 = parcel.readInt();
+            this.mWidth = i3 & 32767;
+            this.mHeight = (i3 >> 16) & 32767;
         }
         if ((512 & j) != 0) {
             this.mScrollX = parcel.readInt();
@@ -483,20 +483,272 @@ public final class ViewNode extends AssistStructure.ViewNode {
         this.mTextIdEntry = str;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:30:0x005e, code lost:
-    
-        if ((((r44.mWidth & (-32768)) != 0) | ((r44.mHeight & (-32768)) != 0)) != false) goto L36;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:102:0x013a  */
+    /* JADX WARN: Removed duplicated region for block: B:109:0x015c  */
+    /* JADX WARN: Removed duplicated region for block: B:110:0x0171  */
+    /* JADX WARN: Removed duplicated region for block: B:113:0x018b  */
+    /* JADX WARN: Removed duplicated region for block: B:116:0x019b  */
+    /* JADX WARN: Removed duplicated region for block: B:119:0x01a6  */
+    /* JADX WARN: Removed duplicated region for block: B:122:0x01b1  */
+    /* JADX WARN: Removed duplicated region for block: B:125:0x01bc  */
+    /* JADX WARN: Removed duplicated region for block: B:128:0x01c7  */
+    /* JADX WARN: Removed duplicated region for block: B:131:0x01d2  */
+    /* JADX WARN: Removed duplicated region for block: B:134:0x01dd  */
+    /* JADX WARN: Removed duplicated region for block: B:137:0x01e8  */
+    /* JADX WARN: Removed duplicated region for block: B:140:0x01f3  */
+    /* JADX WARN: Removed duplicated region for block: B:143:0x0202  */
+    /* JADX WARN: Removed duplicated region for block: B:146:0x0211  */
+    /* JADX WARN: Removed duplicated region for block: B:149:0x021c  */
+    /* JADX WARN: Removed duplicated region for block: B:152:0x022b  */
+    /* JADX WARN: Removed duplicated region for block: B:155:0x023b  */
+    /* JADX WARN: Removed duplicated region for block: B:157:? A[RETURN, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:41:0x006f  */
+    /* JADX WARN: Removed duplicated region for block: B:44:0x0077  */
+    /* JADX WARN: Removed duplicated region for block: B:47:0x0080  */
+    /* JADX WARN: Removed duplicated region for block: B:50:0x0089  */
+    /* JADX WARN: Removed duplicated region for block: B:53:0x0094  */
+    /* JADX WARN: Removed duplicated region for block: B:56:0x009d  */
+    /* JADX WARN: Removed duplicated region for block: B:59:0x00a6  */
+    /* JADX WARN: Removed duplicated region for block: B:62:0x00af  */
+    /* JADX WARN: Removed duplicated region for block: B:65:0x00b8  */
+    /* JADX WARN: Removed duplicated region for block: B:68:0x00c1  */
+    /* JADX WARN: Removed duplicated region for block: B:71:0x00cc  */
+    /* JADX WARN: Removed duplicated region for block: B:74:0x00d2  */
+    /* JADX WARN: Removed duplicated region for block: B:77:0x00dd  */
+    /* JADX WARN: Removed duplicated region for block: B:80:0x00e8  */
+    /* JADX WARN: Removed duplicated region for block: B:83:0x00f3  */
+    /* JADX WARN: Removed duplicated region for block: B:86:0x0105  */
+    /* JADX WARN: Removed duplicated region for block: B:89:0x0110  */
+    /* JADX WARN: Removed duplicated region for block: B:92:0x011a  */
+    /* JADX WARN: Removed duplicated region for block: B:99:0x012f  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private void writeSelfToParcel(android.os.Parcel r45, int r46) {
-        /*
-            Method dump skipped, instructions count: 577
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.view.contentcapture.ViewNode.writeSelfToParcel(android.os.Parcel, int):void");
+    private void writeSelfToParcel(Parcel parcel, int i) {
+        long j;
+        long j2 = this.mFlags;
+        if (this.mAutofillId != null) {
+            j2 |= 32;
+        }
+        if (this.mParentAutofillId != null) {
+            j2 |= 64;
+        }
+        ViewNodeText viewNodeText = this.mText;
+        if (viewNodeText != null) {
+            j2 = !viewNodeText.isSimple() ? j2 | 3 : j2 | 1;
+        }
+        if (this.mClassName != null) {
+            j2 |= 16;
+        }
+        if (this.mId != -1) {
+            j2 |= 128;
+        }
+        if ((this.mX & (-32768)) == 0 && (this.mY & (-32768)) == 0) {
+            j = 64;
+            if (((this.mWidth & (-32768)) != 0) | ((this.mHeight & (-32768)) != 0)) {
+            }
+            if (this.mScrollX == 0 || this.mScrollY != 0) {
+                j2 |= 512;
+            }
+            if (this.mContentDescription != null) {
+                j2 |= 8388608;
+            }
+            if (this.mExtras != null) {
+                j2 |= 16777216;
+            }
+            if (this.mLocaleList != null) {
+                j2 |= 33554432;
+            }
+            if (this.mReceiveContentMimeTypes != null) {
+                j2 |= 68719476736L;
+            }
+            if (this.mInputType != 0) {
+                j2 |= 67108864;
+            }
+            if (this.mMinEms > -1) {
+                j2 |= 134217728;
+            }
+            if (this.mMaxEms > -1) {
+                j2 |= 268435456;
+            }
+            if (this.mMaxLength > -1) {
+                j2 |= 536870912;
+            }
+            if (this.mTextIdEntry != null) {
+                j2 |= 1073741824;
+            }
+            if (this.mAutofillValue != null) {
+                j2 |= 4294967296L;
+            }
+            if (this.mAutofillType != 0) {
+                j2 |= 2147483648L;
+            }
+            if (this.mAutofillHints != null) {
+                j2 |= 8589934592L;
+            }
+            if (this.mAutofillOptions != null) {
+                j2 |= 17179869184L;
+            }
+            if (this.mHintIdEntry != null) {
+                j2 |= 34359738368L;
+            }
+            parcel.writeLong(j2);
+            if ((j2 & 32) != 0) {
+                parcel.writeParcelable(this.mAutofillId, i);
+            }
+            if ((j2 & j) != 0) {
+                parcel.writeParcelable(this.mParentAutofillId, i);
+            }
+            if ((1 & j2) != 0) {
+                this.mText.writeToParcel(parcel, (2 & j2) == 0);
+            }
+            if ((j2 & 16) != 0) {
+                parcel.writeString(this.mClassName);
+            }
+            if ((j2 & 128) != 0) {
+                parcel.writeInt(this.mId);
+                if (this.mId != -1) {
+                    parcel.writeString(this.mIdEntry);
+                    if (this.mIdEntry != null) {
+                        parcel.writeString(this.mIdType);
+                        parcel.writeString(this.mIdPackage);
+                    }
+                }
+            }
+            if ((j2 & 256) == 0) {
+                parcel.writeInt(this.mX);
+                parcel.writeInt(this.mY);
+                parcel.writeInt(this.mWidth);
+                parcel.writeInt(this.mHeight);
+            } else {
+                parcel.writeInt((this.mY << 16) | this.mX);
+                parcel.writeInt((this.mHeight << 16) | this.mWidth);
+            }
+            if ((j2 & 512) != 0) {
+                parcel.writeInt(this.mScrollX);
+                parcel.writeInt(this.mScrollY);
+            }
+            if ((j2 & 8388608) != 0) {
+                TextUtils.writeToParcel(this.mContentDescription, parcel, 0);
+            }
+            if ((j2 & 16777216) != 0) {
+                parcel.writeBundle(this.mExtras);
+            }
+            if ((j2 & 33554432) != 0) {
+                parcel.writeParcelable(this.mLocaleList, 0);
+            }
+            if ((j2 & 68719476736L) != 0) {
+                parcel.writeStringArray(this.mReceiveContentMimeTypes);
+            }
+            if ((j2 & 67108864) != 0) {
+                parcel.writeInt(this.mInputType);
+            }
+            if ((j2 & 134217728) != 0) {
+                parcel.writeInt(this.mMinEms);
+            }
+            if ((j2 & 268435456) != 0) {
+                parcel.writeInt(this.mMaxEms);
+            }
+            if ((j2 & 536870912) != 0) {
+                parcel.writeInt(this.mMaxLength);
+            }
+            if ((j2 & 1073741824) != 0) {
+                parcel.writeString(this.mTextIdEntry);
+            }
+            if ((2147483648L & j2) != 0) {
+                parcel.writeInt(this.mAutofillType);
+            }
+            if ((8589934592L & j2) != 0) {
+                parcel.writeStringArray(this.mAutofillHints);
+            }
+            if ((j2 & 4294967296L) != 0) {
+                parcel.writeParcelable(this.mAutofillValue, 0);
+            }
+            if ((17179869184L & j2) != 0) {
+                parcel.writeCharSequenceArray(this.mAutofillOptions);
+            }
+            if ((j2 & 34359738368L) == 0) {
+                parcel.writeString(this.mHintIdEntry);
+                return;
+            }
+            return;
+        }
+        j = 64;
+        j2 |= 256;
+        if (this.mScrollX == 0) {
+            j2 |= 512;
+        }
+        if (this.mContentDescription != null) {
+        }
+        if (this.mExtras != null) {
+        }
+        if (this.mLocaleList != null) {
+        }
+        if (this.mReceiveContentMimeTypes != null) {
+        }
+        if (this.mInputType != 0) {
+        }
+        if (this.mMinEms > -1) {
+        }
+        if (this.mMaxEms > -1) {
+        }
+        if (this.mMaxLength > -1) {
+        }
+        if (this.mTextIdEntry != null) {
+        }
+        if (this.mAutofillValue != null) {
+        }
+        if (this.mAutofillType != 0) {
+        }
+        if (this.mAutofillHints != null) {
+        }
+        if (this.mAutofillOptions != null) {
+        }
+        if (this.mHintIdEntry != null) {
+        }
+        parcel.writeLong(j2);
+        if ((j2 & 32) != 0) {
+        }
+        if ((j2 & j) != 0) {
+        }
+        if ((1 & j2) != 0) {
+        }
+        if ((j2 & 16) != 0) {
+        }
+        if ((j2 & 128) != 0) {
+        }
+        if ((j2 & 256) == 0) {
+        }
+        if ((j2 & 512) != 0) {
+        }
+        if ((j2 & 8388608) != 0) {
+        }
+        if ((j2 & 16777216) != 0) {
+        }
+        if ((j2 & 33554432) != 0) {
+        }
+        if ((j2 & 68719476736L) != 0) {
+        }
+        if ((j2 & 67108864) != 0) {
+        }
+        if ((j2 & 134217728) != 0) {
+        }
+        if ((j2 & 268435456) != 0) {
+        }
+        if ((j2 & 536870912) != 0) {
+        }
+        if ((j2 & 1073741824) != 0) {
+        }
+        if ((2147483648L & j2) != 0) {
+        }
+        if ((8589934592L & j2) != 0) {
+        }
+        if ((j2 & 4294967296L) != 0) {
+        }
+        if ((17179869184L & j2) != 0) {
+        }
+        if ((j2 & 34359738368L) == 0) {
+        }
     }
 
     public static void writeToParcel(Parcel parcel, ViewNode viewNode, int i) {
@@ -508,11 +760,11 @@ public final class ViewNode extends AssistStructure.ViewNode {
     }
 
     public static ViewNode readFromParcel(Parcel parcel) {
-        long readLong = parcel.readLong();
-        if (readLong == 0) {
+        long j = parcel.readLong();
+        if (j == 0) {
             return null;
         }
-        return new ViewNode(readLong, parcel);
+        return new ViewNode(j, parcel);
     }
 
     public static final class ViewStructureImpl extends ViewStructure {
@@ -923,29 +1175,29 @@ public final class ViewNode extends AssistStructure.ViewNode {
         }
 
         void writeToParcel(Parcel parcel, boolean z) {
-            int i;
-            int i2;
-            CharSequence trimToParcelableSize = TextUtils.trimToParcelableSize(this.mText);
-            TextUtils.writeToParcel(trimToParcelableSize, parcel, 0);
+            int iMin;
+            int iMin2;
+            CharSequence charSequenceTrimToParcelableSize = TextUtils.trimToParcelableSize(this.mText);
+            TextUtils.writeToParcel(charSequenceTrimToParcelableSize, parcel, 0);
             parcel.writeFloat(this.mTextSize);
             parcel.writeInt(this.mTextStyle);
             parcel.writeInt(this.mTextColor);
             if (z) {
                 return;
             }
-            if (trimToParcelableSize != null) {
-                i = Math.min(this.mTextSelectionStart, trimToParcelableSize.length());
+            if (charSequenceTrimToParcelableSize != null) {
+                iMin = Math.min(this.mTextSelectionStart, charSequenceTrimToParcelableSize.length());
             } else {
-                i = this.mTextSelectionStart;
+                iMin = this.mTextSelectionStart;
             }
-            if (trimToParcelableSize != null) {
-                i2 = Math.min(this.mTextSelectionEnd, trimToParcelableSize.length());
+            if (charSequenceTrimToParcelableSize != null) {
+                iMin2 = Math.min(this.mTextSelectionEnd, charSequenceTrimToParcelableSize.length());
             } else {
-                i2 = this.mTextSelectionEnd;
+                iMin2 = this.mTextSelectionEnd;
             }
             parcel.writeInt(this.mTextBackgroundColor);
-            parcel.writeInt(i);
-            parcel.writeInt(i2);
+            parcel.writeInt(iMin);
+            parcel.writeInt(iMin2);
             parcel.writeIntArray(this.mLineCharOffsets);
             parcel.writeIntArray(this.mLineBaselines);
             parcel.writeString(this.mHint);

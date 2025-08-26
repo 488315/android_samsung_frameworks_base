@@ -7,13 +7,11 @@ import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.UiEventLogger;
 import com.android.systemui.EventLogConstants;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class LockscreenGestureLogger {
     public final ArrayMap mLegacyMap = new ArrayMap(11);
     public final MetricsLogger mMetricsLogger;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum LockscreenUiEvent implements UiEventLogger.UiEventEnum {
         LOCKSCREEN_PULL_SHADE_OPEN(539),
         /* JADX INFO: Fake field, exist only in values array */

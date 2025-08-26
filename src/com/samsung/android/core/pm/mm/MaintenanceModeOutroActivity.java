@@ -75,7 +75,7 @@ public class MaintenanceModeOutroActivity extends Activity {
         this.mExitButton.setOnClickListener(new View.OnClickListener() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeOutroActivity$$ExternalSyntheticLambda3
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                MaintenanceModeOutroActivity.this.lambda$setContentView$0(view);
+                this.f$0.lambda$setContentView$0(view);
             }
         });
     }
@@ -118,10 +118,10 @@ public class MaintenanceModeOutroActivity extends Activity {
     }
 
     private void showDialog() {
-        AlertDialog create = new AlertDialog.Builder(this).setMessage(this.mIsTablet ? R.string.maintenance_mode_outro_dialog_message_tablet : R.string.maintenance_mode_outro_dialog_message_phone).setPositiveButton(R.string.maintenance_mode_dialog_button_text_restart, new DialogInterface.OnClickListener() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeOutroActivity$$ExternalSyntheticLambda0
+        AlertDialog alertDialogCreate = new AlertDialog.Builder(this).setMessage(this.mIsTablet ? R.string.maintenance_mode_outro_dialog_message_tablet : R.string.maintenance_mode_outro_dialog_message_phone).setPositiveButton(R.string.maintenance_mode_dialog_button_text_restart, new DialogInterface.OnClickListener() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeOutroActivity$$ExternalSyntheticLambda0
             @Override // android.content.DialogInterface.OnClickListener
             public final void onClick(DialogInterface dialogInterface, int i) {
-                MaintenanceModeOutroActivity.this.lambda$showDialog$4(dialogInterface, i);
+                this.f$0.lambda$showDialog$4(dialogInterface, i);
             }
         }).setNegativeButton(R.string.maintenance_mode_dialog_button_text_cancel, new DialogInterface.OnClickListener() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeOutroActivity$$ExternalSyntheticLambda1
             @Override // android.content.DialogInterface.OnClickListener
@@ -129,8 +129,8 @@ public class MaintenanceModeOutroActivity extends Activity {
                 MaintenanceModeOutroActivity.lambda$showDialog$5(dialogInterface, i);
             }
         }).create();
-        create.getWindow().setGravity(80);
-        create.show();
+        alertDialogCreate.getWindow().setGravity(80);
+        alertDialogCreate.show();
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -138,7 +138,7 @@ public class MaintenanceModeOutroActivity extends Activity {
         MaintenanceModeUtils.confirmSecureLock(this, new Runnable() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeOutroActivity$$ExternalSyntheticLambda2
             @Override // java.lang.Runnable
             public final void run() {
-                MaintenanceModeOutroActivity.this.lambda$showDialog$3();
+                this.f$0.lambda$showDialog$3();
             }
         });
     }
@@ -150,13 +150,13 @@ public class MaintenanceModeOutroActivity extends Activity {
         new Thread(new Runnable() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeOutroActivity$$ExternalSyntheticLambda4
             @Override // java.lang.Runnable
             public final void run() {
-                MaintenanceModeOutroActivity.this.lambda$showDialog$1();
+                this.f$0.lambda$showDialog$1();
             }
         }).start();
         this.mRootView.postDelayed(new Runnable() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeOutroActivity$$ExternalSyntheticLambda5
             @Override // java.lang.Runnable
             public final void run() {
-                MaintenanceModeOutroActivity.this.lambda$showDialog$2();
+                this.f$0.lambda$showDialog$2();
             }
         }, 120000L);
     }

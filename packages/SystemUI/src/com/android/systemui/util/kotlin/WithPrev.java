@@ -2,7 +2,6 @@ package com.android.systemui.util.kotlin;
 
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class WithPrev<S, T extends S> {
     public static final int $stable = 0;
@@ -58,9 +57,9 @@ public final class WithPrev<S, T extends S> {
 
     public int hashCode() {
         S s = this.previousValue;
-        int hashCode = (s == null ? 0 : s.hashCode()) * 31;
+        int iHashCode = (s == null ? 0 : s.hashCode()) * 31;
         T t = this.newValue;
-        return hashCode + (t != null ? t.hashCode() : 0);
+        return iHashCode + (t != null ? t.hashCode() : 0);
     }
 
     public String toString() {

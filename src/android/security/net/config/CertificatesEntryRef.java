@@ -35,19 +35,19 @@ public final class CertificatesEntryRef {
     }
 
     public TrustAnchor findBySubjectAndPublicKey(X509Certificate x509Certificate) {
-        X509Certificate findBySubjectAndPublicKey = this.mSource.findBySubjectAndPublicKey(x509Certificate);
-        if (findBySubjectAndPublicKey == null) {
+        X509Certificate x509CertificateFindBySubjectAndPublicKey = this.mSource.findBySubjectAndPublicKey(x509Certificate);
+        if (x509CertificateFindBySubjectAndPublicKey == null) {
             return null;
         }
-        return new TrustAnchor(findBySubjectAndPublicKey, this.mOverridesPins);
+        return new TrustAnchor(x509CertificateFindBySubjectAndPublicKey, this.mOverridesPins);
     }
 
     public TrustAnchor findByIssuerAndSignature(X509Certificate x509Certificate) {
-        X509Certificate findByIssuerAndSignature = this.mSource.findByIssuerAndSignature(x509Certificate);
-        if (findByIssuerAndSignature == null) {
+        X509Certificate x509CertificateFindByIssuerAndSignature = this.mSource.findByIssuerAndSignature(x509Certificate);
+        if (x509CertificateFindByIssuerAndSignature == null) {
             return null;
         }
-        return new TrustAnchor(findByIssuerAndSignature, this.mOverridesPins);
+        return new TrustAnchor(x509CertificateFindByIssuerAndSignature, this.mOverridesPins);
     }
 
     public Set<X509Certificate> findAllCertificatesByIssuerAndSignature(X509Certificate x509Certificate) {

@@ -11,6 +11,8 @@ import android.telecom.Logging.Session;
 import android.util.Log;
 import com.samsung.android.gesture.IMotionRecognitionCallback;
 import com.samsung.android.gesture.IMotionRecognitionService;
+import com.samsung.android.hardware.context.SemContext;
+import com.samsung.android.hardware.context.SemContextEvent;
 import com.samsung.android.hardware.context.SemContextListener;
 import com.samsung.android.hardware.context.SemContextManager;
 import java.util.ArrayList;
@@ -64,83 +66,43 @@ public class SemMotionRecognitionManager {
     private IMotionRecognitionService motionService;
     private final ArrayList<MRListenerDelegate> sListenerDelegates = new ArrayList<>();
     private final SemContextListener mySemContextMotionListener = new SemContextListener() { // from class: com.samsung.android.gesture.SemMotionRecognitionManager.1
-        /* JADX WARN: Removed duplicated region for block: B:11:0x0046  */
-        /* JADX WARN: Removed duplicated region for block: B:26:? A[RETURN, SYNTHETIC] */
+        /* JADX WARN: Removed duplicated region for block: B:17:0x0046  */
+        /* JADX WARN: Removed duplicated region for block: B:35:? A[RETURN, SYNTHETIC] */
         @Override // com.samsung.android.hardware.context.SemContextListener
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public void onSemContextChanged(com.samsung.android.hardware.context.SemContextEvent r6) {
-            /*
-                r5 = this;
-                java.lang.String r0 = "  >> check setting smart alert enabled : "
-                com.samsung.android.hardware.context.SemContext r1 = r6.semContext
-                com.samsung.android.gesture.SemMotionRecognitionEvent r2 = new com.samsung.android.gesture.SemMotionRecognitionEvent
-                r2.<init>()
-                int r1 = r1.getType()
-                r3 = 5
-                if (r1 == r3) goto L11
-                goto L7d
-            L11:
-                com.samsung.android.hardware.context.SemContextMovement r6 = r6.getMovementContext()
-                int r6 = r6.getAction()
-                r1 = 1
-                if (r6 != r1) goto L7d
-                r6 = 0
-                com.samsung.android.gesture.SemMotionRecognitionManager r1 = com.samsung.android.gesture.SemMotionRecognitionManager.this     // Catch: android.os.RemoteException -> L3b
-                com.samsung.android.gesture.IMotionRecognitionService r1 = com.samsung.android.gesture.SemMotionRecognitionManager.m9120$$Nest$fgetmotionService(r1)     // Catch: android.os.RemoteException -> L3b
-                boolean r1 = r1.getPickUpMotionStatus()     // Catch: android.os.RemoteException -> L3b
-                java.lang.String r3 = "MotionRecognitionManager"
-                java.lang.StringBuilder r4 = new java.lang.StringBuilder     // Catch: android.os.RemoteException -> L39
-                r4.<init>(r0)     // Catch: android.os.RemoteException -> L39
-                r4.append(r1)     // Catch: android.os.RemoteException -> L39
-                java.lang.String r0 = r4.toString()     // Catch: android.os.RemoteException -> L39
-                android.util.Log.d(r3, r0)     // Catch: android.os.RemoteException -> L39
-                goto L44
-            L39:
-                r0 = move-exception
-                goto L3d
-            L3b:
-                r0 = move-exception
-                r1 = r6
-            L3d:
-                java.lang.String r3 = "MotionRecognitionManager"
-                java.lang.String r4 = "RemoteException in getPickUpMotionStatus: "
-                android.util.Log.e(r3, r4, r0)
-            L44:
-                if (r1 == 0) goto L7d
-                r0 = 67
-                r2.setMotion(r0)
-                java.lang.String r0 = "MotionRecognitionManager"
-                java.lang.String r1 = "mySemContextMotionListener : Send Smart alert event"
-                android.util.Log.d(r0, r1)
-                com.samsung.android.gesture.SemMotionRecognitionManager r0 = com.samsung.android.gesture.SemMotionRecognitionManager.this
-                java.util.ArrayList r0 = com.samsung.android.gesture.SemMotionRecognitionManager.m9121$$Nest$fgetsListenerDelegates(r0)
-                monitor-enter(r0)
-                com.samsung.android.gesture.SemMotionRecognitionManager r1 = com.samsung.android.gesture.SemMotionRecognitionManager.this     // Catch: java.lang.Throwable -> L7a
-                java.util.ArrayList r1 = com.samsung.android.gesture.SemMotionRecognitionManager.m9121$$Nest$fgetsListenerDelegates(r1)     // Catch: java.lang.Throwable -> L7a
-                int r1 = r1.size()     // Catch: java.lang.Throwable -> L7a
-            L64:
-                if (r6 >= r1) goto L78
-                com.samsung.android.gesture.SemMotionRecognitionManager r3 = com.samsung.android.gesture.SemMotionRecognitionManager.this     // Catch: java.lang.Throwable -> L7a
-                java.util.ArrayList r3 = com.samsung.android.gesture.SemMotionRecognitionManager.m9121$$Nest$fgetsListenerDelegates(r3)     // Catch: java.lang.Throwable -> L7a
-                java.lang.Object r3 = r3.get(r6)     // Catch: java.lang.Throwable -> L7a
-                com.samsung.android.gesture.SemMotionRecognitionManager$MRListenerDelegate r3 = (com.samsung.android.gesture.SemMotionRecognitionManager.MRListenerDelegate) r3     // Catch: java.lang.Throwable -> L7a
-                r3.motionCallback(r2)     // Catch: java.lang.Throwable -> L7a
-                int r6 = r6 + 1
-                goto L64
-            L78:
-                monitor-exit(r0)     // Catch: java.lang.Throwable -> L7a
-                goto L7d
-            L7a:
-                r5 = move-exception
-                monitor-exit(r0)     // Catch: java.lang.Throwable -> L7a
-                throw r5
-            L7d:
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.gesture.SemMotionRecognitionManager.AnonymousClass1.onSemContextChanged(com.samsung.android.hardware.context.SemContextEvent):void");
+        public void onSemContextChanged(SemContextEvent semContextEvent) {
+            boolean pickUpMotionStatus;
+            SemContext semContext = semContextEvent.semContext;
+            SemMotionRecognitionEvent semMotionRecognitionEvent = new SemMotionRecognitionEvent();
+            if (semContext.getType() == 5 && semContextEvent.getMovementContext().getAction() == 1) {
+                try {
+                    pickUpMotionStatus = SemMotionRecognitionManager.this.motionService.getPickUpMotionStatus();
+                    try {
+                        Log.d(SemMotionRecognitionManager.TAG, "  >> check setting smart alert enabled : " + pickUpMotionStatus);
+                    } catch (RemoteException e) {
+                        e = e;
+                        Log.e(SemMotionRecognitionManager.TAG, "RemoteException in getPickUpMotionStatus: ", e);
+                        if (pickUpMotionStatus) {
+                        }
+                    }
+                } catch (RemoteException e2) {
+                    e = e2;
+                    pickUpMotionStatus = false;
+                }
+                if (pickUpMotionStatus) {
+                    return;
+                }
+                semMotionRecognitionEvent.setMotion(67);
+                Log.d(SemMotionRecognitionManager.TAG, "mySemContextMotionListener : Send Smart alert event");
+                synchronized (SemMotionRecognitionManager.this.sListenerDelegates) {
+                    int size = SemMotionRecognitionManager.this.sListenerDelegates.size();
+                    for (int i = 0; i < size; i++) {
+                        ((MRListenerDelegate) SemMotionRecognitionManager.this.sListenerDelegates.get(i)).motionCallback(semMotionRecognitionEvent);
+                    }
+                }
+            }
         }
     };
     private int mMovementCnt = 0;
@@ -217,135 +179,76 @@ public class SemMotionRecognitionManager {
         }
         synchronized (this.sListenerDelegates) {
             int size = this.sListenerDelegates.size();
+            int motionEvents = 0;
             int i2 = 0;
-            int i3 = 0;
             while (true) {
-                if (i3 >= size) {
+                if (i2 >= size) {
                     break;
                 }
-                MRListenerDelegate mRListenerDelegate = this.sListenerDelegates.get(i3);
+                MRListenerDelegate mRListenerDelegate = this.sListenerDelegates.get(i2);
                 if (mRListenerDelegate.getListener() == semMotionEventListener) {
-                    i2 = mRListenerDelegate.getMotionEvents() & (~i);
-                    Log.d(TAG, "update listener " + i3 + " = name :" + semMotionEventListener + ",  motionevents = " + i2);
+                    motionEvents = mRListenerDelegate.getMotionEvents() & (~i);
+                    Log.d(TAG, "update listener " + i2 + " = name :" + semMotionEventListener + ",  motionevents = " + motionEvents);
                     break;
                 }
-                i3++;
+                i2++;
             }
             unregisterListener(semMotionEventListener);
-            if (i2 != 0) {
-                registerListener(semMotionEventListener, i2);
+            if (motionEvents != 0) {
+                registerListener(semMotionEventListener, motionEvents);
             }
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:15:0x0054, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:13:0x0054, code lost:
     
         r8.sListenerDelegates.remove(r2);
      */
-    /* JADX WARN: Code restructure failed: missing block: B:18:0x005d, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:15:0x005d, code lost:
     
         if (r3.getMotionEvents() == 0) goto L20;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:19:0x005f, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:16:0x005f, code lost:
     
         r8.motionService.unregisterCallback(r3);
      */
-    /* JADX WARN: Code restructure failed: missing block: B:27:0x0065, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:18:0x0065, code lost:
     
         r2 = move-exception;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:28:0x0066, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:19:0x0066, code lost:
     
         android.util.Log.e(com.samsung.android.gesture.SemMotionRecognitionManager.TAG, "RemoteException in unregisterListener: ", r2);
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void unregisterListener(com.samsung.android.gesture.SemMotionEventListener r9) {
-        /*
-            r8 = this;
-            com.samsung.android.gesture.IMotionRecognitionService r0 = r8.motionService
-            if (r0 != 0) goto L6
-            goto La1
-        L6:
-            java.util.ArrayList<com.samsung.android.gesture.SemMotionRecognitionManager$MRListenerDelegate> r0 = r8.sListenerDelegates
-            monitor-enter(r0)
-            java.util.ArrayList<com.samsung.android.gesture.SemMotionRecognitionManager$MRListenerDelegate> r1 = r8.sListenerDelegates     // Catch: java.lang.Throwable -> La2
-            int r1 = r1.size()     // Catch: java.lang.Throwable -> La2
-            r2 = 0
-            r3 = r2
-        L11:
-            if (r3 >= r1) goto L44
-            java.util.ArrayList<com.samsung.android.gesture.SemMotionRecognitionManager$MRListenerDelegate> r4 = r8.sListenerDelegates     // Catch: java.lang.Throwable -> La2
-            java.lang.Object r4 = r4.get(r3)     // Catch: java.lang.Throwable -> La2
-            com.samsung.android.gesture.SemMotionRecognitionManager$MRListenerDelegate r4 = (com.samsung.android.gesture.SemMotionRecognitionManager.MRListenerDelegate) r4     // Catch: java.lang.Throwable -> La2
-            com.samsung.android.gesture.SemMotionEventListener r4 = r4.getListener()     // Catch: java.lang.Throwable -> La2
-            java.lang.String r4 = r4.toString()     // Catch: java.lang.Throwable -> La2
-            java.lang.String r5 = "MotionRecognitionManager"
-            java.lang.StringBuilder r6 = new java.lang.StringBuilder     // Catch: java.lang.Throwable -> La2
-            r6.<init>()     // Catch: java.lang.Throwable -> La2
-            java.lang.String r7 = "@ member "
-            r6.append(r7)     // Catch: java.lang.Throwable -> La2
-            r6.append(r3)     // Catch: java.lang.Throwable -> La2
-            java.lang.String r7 = " = "
-            r6.append(r7)     // Catch: java.lang.Throwable -> La2
-            r6.append(r4)     // Catch: java.lang.Throwable -> La2
-            java.lang.String r4 = r6.toString()     // Catch: java.lang.Throwable -> La2
-            android.util.Log.d(r5, r4)     // Catch: java.lang.Throwable -> La2
-            int r3 = r3 + 1
-            goto L11
-        L44:
-            if (r2 >= r1) goto L74
-            java.util.ArrayList<com.samsung.android.gesture.SemMotionRecognitionManager$MRListenerDelegate> r3 = r8.sListenerDelegates     // Catch: java.lang.Throwable -> La2
-            java.lang.Object r3 = r3.get(r2)     // Catch: java.lang.Throwable -> La2
-            com.samsung.android.gesture.SemMotionRecognitionManager$MRListenerDelegate r3 = (com.samsung.android.gesture.SemMotionRecognitionManager.MRListenerDelegate) r3     // Catch: java.lang.Throwable -> La2
-            com.samsung.android.gesture.SemMotionEventListener r4 = r3.getListener()     // Catch: java.lang.Throwable -> La2
-            if (r4 != r9) goto L71
-            java.util.ArrayList<com.samsung.android.gesture.SemMotionRecognitionManager$MRListenerDelegate> r4 = r8.sListenerDelegates     // Catch: java.lang.Throwable -> La2
-            r4.remove(r2)     // Catch: java.lang.Throwable -> La2
-            int r2 = r3.getMotionEvents()     // Catch: android.os.RemoteException -> L65 java.lang.Throwable -> La2
-            if (r2 == 0) goto L6d
-            com.samsung.android.gesture.IMotionRecognitionService r2 = r8.motionService     // Catch: android.os.RemoteException -> L65 java.lang.Throwable -> La2
-            r2.unregisterCallback(r3)     // Catch: android.os.RemoteException -> L65 java.lang.Throwable -> La2
-            goto L6d
-        L65:
-            r2 = move-exception
-            java.lang.String r4 = "MotionRecognitionManager"
-            java.lang.String r5 = "RemoteException in unregisterListener: "
-            android.util.Log.e(r4, r5, r2)     // Catch: java.lang.Throwable -> La2
-        L6d:
-            r3.resetListener()     // Catch: java.lang.Throwable -> La2
-            goto L74
-        L71:
-            int r2 = r2 + 1
-            goto L44
-        L74:
-            java.lang.String r2 = "MotionRecognitionManager"
-            java.lang.StringBuilder r3 = new java.lang.StringBuilder     // Catch: java.lang.Throwable -> La2
-            r3.<init>()     // Catch: java.lang.Throwable -> La2
-            java.lang.String r4 = "  .unregisterListener : / listener count = "
-            r3.append(r4)     // Catch: java.lang.Throwable -> La2
-            r3.append(r1)     // Catch: java.lang.Throwable -> La2
-            java.lang.String r1 = "->"
-            r3.append(r1)     // Catch: java.lang.Throwable -> La2
-            java.util.ArrayList<com.samsung.android.gesture.SemMotionRecognitionManager$MRListenerDelegate> r8 = r8.sListenerDelegates     // Catch: java.lang.Throwable -> La2
-            int r8 = r8.size()     // Catch: java.lang.Throwable -> La2
-            r3.append(r8)     // Catch: java.lang.Throwable -> La2
-            java.lang.String r8 = ", name :"
-            r3.append(r8)     // Catch: java.lang.Throwable -> La2
-            r3.append(r9)     // Catch: java.lang.Throwable -> La2
-            java.lang.String r8 = r3.toString()     // Catch: java.lang.Throwable -> La2
-            android.util.Log.i(r2, r8)     // Catch: java.lang.Throwable -> La2
-            monitor-exit(r0)     // Catch: java.lang.Throwable -> La2
-        La1:
-            return
-        La2:
-            r8 = move-exception
-            monitor-exit(r0)     // Catch: java.lang.Throwable -> La2
-            throw r8
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.gesture.SemMotionRecognitionManager.unregisterListener(com.samsung.android.gesture.SemMotionEventListener):void");
+    public void unregisterListener(SemMotionEventListener semMotionEventListener) {
+        MRListenerDelegate mRListenerDelegate;
+        if (this.motionService == null) {
+            return;
+        }
+        synchronized (this.sListenerDelegates) {
+            int size = this.sListenerDelegates.size();
+            int i = 0;
+            for (int i2 = 0; i2 < size; i2++) {
+                Log.d(TAG, "@ member " + i2 + " = " + this.sListenerDelegates.get(i2).getListener().toString());
+            }
+            while (true) {
+                if (i >= size) {
+                    break;
+                }
+                mRListenerDelegate = this.sListenerDelegates.get(i);
+                if (mRListenerDelegate.getListener() == semMotionEventListener) {
+                    break;
+                } else {
+                    i++;
+                }
+            }
+            Log.i(TAG, "  .unregisterListener : / listener count = " + size + Session.SUBSESSION_SEPARATION_CHAR + this.sListenerDelegates.size() + ", name :" + semMotionEventListener);
+        }
+        mRListenerDelegate.resetListener();
+        Log.i(TAG, "  .unregisterListener : / listener count = " + size + Session.SUBSESSION_SEPARATION_CHAR + this.sListenerDelegates.size() + ", name :" + semMotionEventListener);
     }
 
     public void setSmartMotionAngle(SemMotionEventListener semMotionEventListener, int i) {
@@ -480,11 +383,11 @@ public class SemMotionRecognitionManager {
                 public void handleMessage(Message message) {
                     synchronized (SemMotionRecognitionManager.this.sListenerDelegates) {
                         try {
-                            if (MRListenerDelegate.this.mListener != null && message != null && message.what == 53) {
-                                MRListenerDelegate.this.mListener.onMotionEvent((SemMotionRecognitionEvent) message.obj);
-                            }
                         } catch (ClassCastException e) {
                             Log.e(SemMotionRecognitionManager.TAG, "ClassCastException in handleMessage: msg.obj = " + message.obj, e);
+                        }
+                        if (MRListenerDelegate.this.mListener != null && message != null && message.what == 53) {
+                            MRListenerDelegate.this.mListener.onMotionEvent((SemMotionRecognitionEvent) message.obj);
                         }
                     }
                 }
@@ -505,10 +408,10 @@ public class SemMotionRecognitionManager {
 
         @Override // com.samsung.android.gesture.IMotionRecognitionCallback
         public void motionCallback(SemMotionRecognitionEvent semMotionRecognitionEvent) {
-            Message obtain = Message.obtain();
-            obtain.what = 53;
-            obtain.obj = semMotionRecognitionEvent;
-            this.mHandler.sendMessage(obtain);
+            Message messageObtain = Message.obtain();
+            messageObtain.what = 53;
+            messageObtain.obj = semMotionRecognitionEvent;
+            this.mHandler.sendMessage(messageObtain);
         }
 
         @Override // com.samsung.android.gesture.IMotionRecognitionCallback

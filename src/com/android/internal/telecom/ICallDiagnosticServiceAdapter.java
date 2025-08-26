@@ -66,9 +66,9 @@ public interface ICallDiagnosticServiceAdapter extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ICallDiagnosticServiceAdapter.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ICallDiagnosticServiceAdapter)) {
-                return (ICallDiagnosticServiceAdapter) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ICallDiagnosticServiceAdapter.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ICallDiagnosticServiceAdapter)) {
+                return (ICallDiagnosticServiceAdapter) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -104,27 +104,27 @@ public interface ICallDiagnosticServiceAdapter extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
-                int readInt = parcel.readInt();
+                String string = parcel.readString();
+                int i3 = parcel.readInt();
                 CharSequence charSequence = (CharSequence) parcel.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                 parcel.enforceNoDataAvail();
-                displayDiagnosticMessage(readString, readInt, charSequence);
+                displayDiagnosticMessage(string, i3, charSequence);
             } else if (i == 2) {
-                String readString2 = parcel.readString();
-                int readInt2 = parcel.readInt();
+                String string2 = parcel.readString();
+                int i4 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                clearDiagnosticMessage(readString2, readInt2);
+                clearDiagnosticMessage(string2, i4);
             } else if (i == 3) {
-                String readString3 = parcel.readString();
-                int readInt3 = parcel.readInt();
-                int readInt4 = parcel.readInt();
+                String string3 = parcel.readString();
+                int i5 = parcel.readInt();
+                int i6 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                sendDeviceToDeviceMessage(readString3, readInt3, readInt4);
+                sendDeviceToDeviceMessage(string3, i5, i6);
             } else if (i == 4) {
-                String readString4 = parcel.readString();
+                String string4 = parcel.readString();
                 CharSequence charSequence2 = (CharSequence) parcel.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                 parcel.enforceNoDataAvail();
-                overrideDisconnectMessage(readString4, charSequence2);
+                overrideDisconnectMessage(string4, charSequence2);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -149,65 +149,65 @@ public interface ICallDiagnosticServiceAdapter extends IInterface {
 
             @Override // com.android.internal.telecom.ICallDiagnosticServiceAdapter
             public void displayDiagnosticMessage(String str, int i, CharSequence charSequence) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICallDiagnosticServiceAdapter.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
+                    parcelObtain.writeInterfaceToken(ICallDiagnosticServiceAdapter.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
                     if (charSequence != null) {
-                        obtain.writeInt(1);
-                        TextUtils.writeToParcel(charSequence, obtain, 0);
+                        parcelObtain.writeInt(1);
+                        TextUtils.writeToParcel(charSequence, parcelObtain, 0);
                     } else {
-                        obtain.writeInt(0);
+                        parcelObtain.writeInt(0);
                     }
-                    this.mRemote.transact(1, obtain, null, 1);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.ICallDiagnosticServiceAdapter
             public void clearDiagnosticMessage(String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICallDiagnosticServiceAdapter.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICallDiagnosticServiceAdapter.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.ICallDiagnosticServiceAdapter
             public void sendDeviceToDeviceMessage(String str, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICallDiagnosticServiceAdapter.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICallDiagnosticServiceAdapter.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.ICallDiagnosticServiceAdapter
             public void overrideDisconnectMessage(String str, CharSequence charSequence) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICallDiagnosticServiceAdapter.DESCRIPTOR);
-                    obtain.writeString(str);
+                    parcelObtain.writeInterfaceToken(ICallDiagnosticServiceAdapter.DESCRIPTOR);
+                    parcelObtain.writeString(str);
                     if (charSequence != null) {
-                        obtain.writeInt(1);
-                        TextUtils.writeToParcel(charSequence, obtain, 0);
+                        parcelObtain.writeInt(1);
+                        TextUtils.writeToParcel(charSequence, parcelObtain, 0);
                     } else {
-                        obtain.writeInt(0);
+                        parcelObtain.writeInt(0);
                     }
-                    this.mRemote.transact(4, obtain, null, 1);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

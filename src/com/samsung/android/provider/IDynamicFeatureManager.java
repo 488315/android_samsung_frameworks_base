@@ -70,9 +70,9 @@ public interface IDynamicFeatureManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IDynamicFeatureManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IDynamicFeatureManager)) {
-                return (IDynamicFeatureManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IDynamicFeatureManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IDynamicFeatureManager)) {
+                return (IDynamicFeatureManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -108,24 +108,24 @@ public interface IDynamicFeatureManager extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
-                String[] createStringArray = parcel.createStringArray();
+                String string = parcel.readString();
+                String[] strArrCreateStringArray = parcel.createStringArray();
                 parcel.enforceNoDataAvail();
-                SemDynamicFeature.Properties properties = getProperties(readString, createStringArray);
+                SemDynamicFeature.Properties properties = getProperties(string, strArrCreateStringArray);
                 parcel2.writeNoException();
                 parcel2.writeTypedObject(properties, 1);
             } else if (i == 2) {
-                String readString2 = parcel.readString();
-                String readString3 = parcel.readString();
-                String readString4 = parcel.readString();
+                String string2 = parcel.readString();
+                String string3 = parcel.readString();
+                String string4 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                boolean sendAbTestResult = sendAbTestResult(readString2, readString3, readString4);
+                boolean zSendAbTestResult = sendAbTestResult(string2, string3, string4);
                 parcel2.writeNoException();
-                parcel2.writeBoolean(sendAbTestResult);
+                parcel2.writeBoolean(zSendAbTestResult);
             } else if (i == 3) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                int endpoint = setEndpoint(readInt);
+                int endpoint = setEndpoint(i3);
                 parcel2.writeNoException();
                 parcel2.writeInt(endpoint);
             } else if (i == 4) {
@@ -156,67 +156,67 @@ public interface IDynamicFeatureManager extends IInterface {
 
             @Override // com.samsung.android.provider.IDynamicFeatureManager
             public SemDynamicFeature.Properties getProperties(String str, String[] strArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDynamicFeatureManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStringArray(strArr);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (SemDynamicFeature.Properties) obtain2.readTypedObject(SemDynamicFeature.Properties.CREATOR);
+                    parcelObtain.writeInterfaceToken(IDynamicFeatureManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStringArray(strArr);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (SemDynamicFeature.Properties) parcelObtain2.readTypedObject(SemDynamicFeature.Properties.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.provider.IDynamicFeatureManager
             public boolean sendAbTestResult(String str, String str2, String str3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDynamicFeatureManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IDynamicFeatureManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.provider.IDynamicFeatureManager
             public int setEndpoint(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDynamicFeatureManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IDynamicFeatureManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.provider.IDynamicFeatureManager
             public String getVid() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDynamicFeatureManager.DESCRIPTOR);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(IDynamicFeatureManager.DESCRIPTOR);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

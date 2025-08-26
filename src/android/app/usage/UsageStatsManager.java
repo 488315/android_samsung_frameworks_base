@@ -117,9 +117,9 @@ public final class UsageStatsManager {
 
     public List<UsageStats> queryUsageStats(int i, long j, long j2) {
         try {
-            ParceledListSlice queryUsageStats = this.mService.queryUsageStats(i, j, j2, this.mContext.getOpPackageName(), this.mContext.getUserId());
-            if (queryUsageStats != null) {
-                return queryUsageStats.getList();
+            ParceledListSlice parceledListSliceQueryUsageStats = this.mService.queryUsageStats(i, j, j2, this.mContext.getOpPackageName(), this.mContext.getUserId());
+            if (parceledListSliceQueryUsageStats != null) {
+                return parceledListSliceQueryUsageStats.getList();
             }
         } catch (RemoteException unused) {
         }
@@ -128,9 +128,9 @@ public final class UsageStatsManager {
 
     public List<ConfigurationStats> queryConfigurations(int i, long j, long j2) {
         try {
-            ParceledListSlice queryConfigurationStats = this.mService.queryConfigurationStats(i, j, j2, this.mContext.getOpPackageName());
-            if (queryConfigurationStats != null) {
-                return queryConfigurationStats.getList();
+            ParceledListSlice parceledListSliceQueryConfigurationStats = this.mService.queryConfigurationStats(i, j, j2, this.mContext.getOpPackageName());
+            if (parceledListSliceQueryConfigurationStats != null) {
+                return parceledListSliceQueryConfigurationStats.getList();
             }
         } catch (RemoteException unused) {
         }
@@ -139,9 +139,9 @@ public final class UsageStatsManager {
 
     public List<EventStats> queryEventStats(int i, long j, long j2) {
         try {
-            ParceledListSlice queryEventStats = this.mService.queryEventStats(i, j, j2, this.mContext.getOpPackageName());
-            if (queryEventStats != null) {
-                return queryEventStats.getList();
+            ParceledListSlice parceledListSliceQueryEventStats = this.mService.queryEventStats(i, j, j2, this.mContext.getOpPackageName());
+            if (parceledListSliceQueryEventStats != null) {
+                return parceledListSliceQueryEventStats.getList();
             }
         } catch (RemoteException unused) {
         }
@@ -150,9 +150,9 @@ public final class UsageStatsManager {
 
     public UsageEvents queryEvents(long j, long j2) {
         try {
-            UsageEvents queryEvents = this.mService.queryEvents(j, j2, this.mContext.getOpPackageName());
-            if (queryEvents != null) {
-                return queryEvents;
+            UsageEvents usageEventsQueryEvents = this.mService.queryEvents(j, j2, this.mContext.getOpPackageName());
+            if (usageEventsQueryEvents != null) {
+                return usageEventsQueryEvents;
             }
         } catch (RemoteException unused) {
         }
@@ -161,9 +161,9 @@ public final class UsageStatsManager {
 
     public UsageEvents queryEvents(UsageEventsQuery usageEventsQuery) {
         try {
-            UsageEvents queryEventsWithFilter = this.mService.queryEventsWithFilter(usageEventsQuery, this.mContext.getOpPackageName());
-            if (queryEventsWithFilter != null) {
-                return queryEventsWithFilter;
+            UsageEvents usageEventsQueryEventsWithFilter = this.mService.queryEventsWithFilter(usageEventsQuery, this.mContext.getOpPackageName());
+            if (usageEventsQueryEventsWithFilter != null) {
+                return usageEventsQueryEventsWithFilter;
             }
         } catch (RemoteException unused) {
         }
@@ -172,9 +172,9 @@ public final class UsageStatsManager {
 
     public UsageEvents queryEventsForSelf(long j, long j2) {
         try {
-            UsageEvents queryEventsForPackage = this.mService.queryEventsForPackage(j, j2, this.mContext.getOpPackageName());
-            if (queryEventsForPackage != null) {
-                return queryEventsForPackage;
+            UsageEvents usageEventsQueryEventsForPackage = this.mService.queryEventsForPackage(j, j2, this.mContext.getOpPackageName());
+            if (usageEventsQueryEventsForPackage != null) {
+                return usageEventsQueryEventsForPackage;
             }
         } catch (RemoteException unused) {
         }
@@ -182,14 +182,14 @@ public final class UsageStatsManager {
     }
 
     public Map<String, UsageStats> queryAndAggregateUsageStats(long j, long j2) {
-        List<UsageStats> queryUsageStats = queryUsageStats(4, j, j2);
-        if (queryUsageStats.isEmpty()) {
+        List<UsageStats> listQueryUsageStats = queryUsageStats(4, j, j2);
+        if (listQueryUsageStats.isEmpty()) {
             return Collections.EMPTY_MAP;
         }
         ArrayMap arrayMap = new ArrayMap();
-        int size = queryUsageStats.size();
+        int size = listQueryUsageStats.size();
         for (int i = 0; i < size; i++) {
-            UsageStats usageStats = queryUsageStats.get(i);
+            UsageStats usageStats = listQueryUsageStats.get(i);
             UsageStats usageStats2 = (UsageStats) arrayMap.get(usageStats.getPackageName());
             if (usageStats2 == null) {
                 arrayMap.put(usageStats.mPackageName, usageStats);

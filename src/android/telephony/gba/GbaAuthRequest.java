@@ -21,13 +21,13 @@ public final class GbaAuthRequest implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public GbaAuthRequest createFromParcel(Parcel parcel) {
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
-            int readInt3 = parcel.readInt();
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
+            int i3 = parcel.readInt();
             Uri uri = (Uri) parcel.readParcelable(GbaAuthRequest.class.getClassLoader(), Uri.class);
             byte[] bArr = new byte[parcel.readInt()];
             parcel.readByteArray(bArr);
-            return new GbaAuthRequest(readInt, readInt2, readInt3, uri, bArr, parcel.readBoolean(), IBootstrapAuthenticationCallback.Stub.asInterface(parcel.readStrongBinder()));
+            return new GbaAuthRequest(i, i2, i3, uri, bArr, parcel.readBoolean(), IBootstrapAuthenticationCallback.Stub.asInterface(parcel.readStrongBinder()));
         }
 
         /* JADX WARN: Can't rename method to resolve collision */

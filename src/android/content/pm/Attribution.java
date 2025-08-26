@@ -56,11 +56,11 @@ public final class Attribution implements Parcelable {
     }
 
     Attribution(Parcel parcel) {
-        String readString = parcel.readString();
-        int readInt = parcel.readInt();
-        this.mTag = readString;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString);
-        this.mLabel = readInt;
-        AnnotationValidations.validate((Class<? extends Annotation>) IdRes.class, (Annotation) null, readInt);
+        String string = parcel.readString();
+        int i = parcel.readInt();
+        this.mTag = string;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string);
+        this.mLabel = i;
+        AnnotationValidations.validate((Class<? extends Annotation>) IdRes.class, (Annotation) null, i);
     }
 }

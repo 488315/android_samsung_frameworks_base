@@ -16,7 +16,9 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 import com.android.internal.telephony.euicc.IEuiccController;
+import com.samsung.android.feature.SemCscFeature;
 import com.samsung.android.feature.SemFloatingFeature;
+import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Collections;
@@ -186,8 +188,11 @@ public class EuiccManager {
     }
 
     public boolean isEnabled() {
-        if (this.mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_TELEPHONY_EUICC)) {
-            return getIEuiccController() != null && (refreshCardIdIfUninitialized() || !TextUtils.isEmpty(SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_COMMON_CONFIG_EMBEDDED_SIM_SLOTSWITCH")));
+        if (this.mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_TELEPHONY_EUICC) && !SemCscFeature.getInstance().getBoolean("CscFeature_RIL_SupportForceEsimDeactivate")) {
+            String string = SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_COMMON_CONFIG_EMBEDDED_SIM_SLOTSWITCH");
+            if (getIEuiccController() != null && (refreshCardIdIfUninitialized() || !TextUtils.isEmpty(string))) {
+                return true;
+            }
         }
         return false;
     }
@@ -238,7 +243,7 @@ public class EuiccManager {
         }
     }
 
-    public void startResolutionActivity(Activity activity, int i, Intent intent, PendingIntent pendingIntent) throws IntentSender.SendIntentException {
+    public void startResolutionActivity(Activity activity, int i, Intent intent, PendingIntent pendingIntent) throws IntentSender.SendIntentException, IOException {
         PendingIntent pendingIntent2 = (PendingIntent) intent.getParcelableExtra(EXTRA_EMBEDDED_SUBSCRIPTION_RESOLUTION_INTENT, PendingIntent.class);
         if (pendingIntent2 == null) {
             throw new IllegalArgumentException("Invalid result intent");

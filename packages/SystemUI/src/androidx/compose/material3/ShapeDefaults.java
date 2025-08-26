@@ -7,7 +7,6 @@ import androidx.compose.foundation.shape.RoundedCornerShapeKt;
 import androidx.compose.material3.tokens.ShapeTokens;
 import androidx.compose.ui.unit.Dp;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ShapeDefaults {
     public static final CornerSize CornerNone;
@@ -29,21 +28,21 @@ public final class ShapeDefaults {
         Large = ShapeTokens.CornerLarge;
         float f = 20;
         Dp.Companion companion = Dp.Companion;
-        LargeIncreased = RoundedCornerShapeKt.m186RoundedCornerShape0680j_4(f);
+        LargeIncreased = RoundedCornerShapeKt.m187RoundedCornerShape0680j_4(f);
         ExtraLarge = ShapeTokens.CornerExtraLarge;
         float f2 = 32;
-        ExtraLargeIncreased = RoundedCornerShapeKt.m186RoundedCornerShape0680j_4(f2);
+        ExtraLargeIncreased = RoundedCornerShapeKt.m187RoundedCornerShape0680j_4(f2);
         float f3 = 48;
-        ExtraExtraLarge = RoundedCornerShapeKt.m186RoundedCornerShape0680j_4(f3);
-        CornerNone = CornerSizeKt.m185CornerSize0680j_4(0);
-        CornerSizeKt.m185CornerSize0680j_4(4);
-        CornerSizeKt.m185CornerSize0680j_4(8);
-        CornerSizeKt.m185CornerSize0680j_4(12);
-        CornerSizeKt.m185CornerSize0680j_4(16);
-        CornerSizeKt.m185CornerSize0680j_4(f);
-        CornerSizeKt.m185CornerSize0680j_4(28);
-        CornerSizeKt.m185CornerSize0680j_4(f2);
-        CornerSizeKt.m185CornerSize0680j_4(f3);
+        ExtraExtraLarge = RoundedCornerShapeKt.m187RoundedCornerShape0680j_4(f3);
+        CornerNone = CornerSizeKt.m186CornerSize0680j_4(0);
+        CornerSizeKt.m186CornerSize0680j_4(4);
+        CornerSizeKt.m186CornerSize0680j_4(8);
+        CornerSizeKt.m186CornerSize0680j_4(12);
+        CornerSizeKt.m186CornerSize0680j_4(16);
+        CornerSizeKt.m186CornerSize0680j_4(f);
+        CornerSizeKt.m186CornerSize0680j_4(28);
+        CornerSizeKt.m186CornerSize0680j_4(f2);
+        CornerSizeKt.m186CornerSize0680j_4(f3);
         CornerSizeKt.CornerSize(100);
     }
 

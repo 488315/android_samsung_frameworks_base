@@ -23,7 +23,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.StateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class StatusBarHideIconsForBouncerManager implements Dumpable {
     public boolean bouncerShowing;
@@ -38,7 +37,6 @@ public final class StatusBarHideIconsForBouncerManager implements Dumpable {
     public boolean topAppHidesStatusBar;
     public boolean wereIconsJustHidden;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.phone.StatusBarHideIconsForBouncerManager$2, reason: invalid class name */
     final class AnonymousClass2 extends SuspendLambda implements Function2 {
         int label;
@@ -63,18 +61,18 @@ public final class StatusBarHideIconsForBouncerManager implements Dumpable {
             int i = this.label;
             if (i == 0) {
                 ResultKt.throwOnFailure(obj);
-                StateFlow isAnyExpanded = ((ShadeInteractorImpl) StatusBarHideIconsForBouncerManager.this.shadeInteractor).baseShadeInteractor.isAnyExpanded();
+                StateFlow stateFlowIsAnyExpanded = ((ShadeInteractorImpl) StatusBarHideIconsForBouncerManager.this.shadeInteractor).baseShadeInteractor.isAnyExpanded();
                 final StatusBarHideIconsForBouncerManager statusBarHideIconsForBouncerManager = StatusBarHideIconsForBouncerManager.this;
                 FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.statusbar.phone.StatusBarHideIconsForBouncerManager.2.1
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     public final Object emit(Object obj2, Continuation continuation) {
                         ((Boolean) obj2).booleanValue();
-                        StatusBarHideIconsForBouncerManager.this.updateHideIconsForBouncer(false);
+                        statusBarHideIconsForBouncerManager.updateHideIconsForBouncer(false);
                         return Unit.INSTANCE;
                     }
                 };
                 this.label = 1;
-                if (isAnyExpanded.collect(flowCollector, this) == coroutineSingletons) {
+                if (stateFlowIsAnyExpanded.collect(flowCollector, this) == coroutineSingletons) {
                     return coroutineSingletons;
                 }
             } else {
@@ -127,7 +125,7 @@ public final class StatusBarHideIconsForBouncerManager implements Dumpable {
                 this.commandQueue.recomputeDisableFlags(this.displayId, z);
             } else {
                 this.wereIconsJustHidden = true;
-                this.mainExecutor.executeDelayed(new Runnable() { // from class: com.android.systemui.statusbar.phone.StatusBarHideIconsForBouncerManager$updateHideIconsForBouncer$1
+                this.mainExecutor.executeDelayed(new Runnable() { // from class: com.android.systemui.statusbar.phone.StatusBarHideIconsForBouncerManager.updateHideIconsForBouncer.1
                     @Override // java.lang.Runnable
                     public final void run() {
                         StatusBarHideIconsForBouncerManager statusBarHideIconsForBouncerManager = StatusBarHideIconsForBouncerManager.this;

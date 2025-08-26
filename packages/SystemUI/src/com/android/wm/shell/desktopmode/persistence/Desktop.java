@@ -14,7 +14,6 @@ import com.google.protobuf.WireFormat$FieldType;
 import java.util.Collections;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class Desktop extends GeneratedMessageLite implements MessageLiteOrBuilder {
     private static final Desktop DEFAULT_INSTANCE;
@@ -31,7 +30,6 @@ public final class Desktop extends GeneratedMessageLite implements MessageLiteOr
     private MapFieldLite<Integer, DesktopTask> tasksByTaskId_ = MapFieldLite.EMPTY_MAP_FIELD;
     private Internal.IntList zOrderedTasks_ = IntArrayList.EMPTY_LIST;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.desktopmode.persistence.Desktop$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$com$google$protobuf$GeneratedMessageLite$MethodToInvoke;
@@ -70,7 +68,6 @@ public final class Desktop extends GeneratedMessageLite implements MessageLiteOr
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Builder extends GeneratedMessageLite.Builder {
         public /* synthetic */ Builder(int i) {
             this();
@@ -81,7 +78,6 @@ public final class Desktop extends GeneratedMessageLite implements MessageLiteOr
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TasksByTaskIdDefaultEntryHolder {
         public static final MapEntryLite defaultEntry = MapEntryLite.newDefaultInstance(WireFormat$FieldType.INT32, 0, WireFormat$FieldType.MESSAGE, DesktopTask.getDefaultInstance());
 
@@ -90,7 +86,7 @@ public final class Desktop extends GeneratedMessageLite implements MessageLiteOr
     }
 
     /* renamed from: -$$Nest$maddAllZOrderedTasks, reason: not valid java name */
-    public static void m3233$$Nest$maddAllZOrderedTasks(Desktop desktop, Iterable iterable) {
+    public static void m3250$$Nest$maddAllZOrderedTasks(Desktop desktop, Iterable iterable) {
         Internal.ProtobufList protobufList = desktop.zOrderedTasks_;
         if (!((AbstractProtobufList) protobufList).isMutable) {
             int size = protobufList.size();
@@ -100,13 +96,13 @@ public final class Desktop extends GeneratedMessageLite implements MessageLiteOr
     }
 
     /* renamed from: -$$Nest$mclearZOrderedTasks, reason: not valid java name */
-    public static void m3234$$Nest$mclearZOrderedTasks(Desktop desktop) {
+    public static void m3251$$Nest$mclearZOrderedTasks(Desktop desktop) {
         desktop.getClass();
         desktop.zOrderedTasks_ = IntArrayList.EMPTY_LIST;
     }
 
     /* renamed from: -$$Nest$mgetMutableTasksByTaskIdMap, reason: not valid java name */
-    public static MapFieldLite m3235$$Nest$mgetMutableTasksByTaskIdMap(Desktop desktop) {
+    public static MapFieldLite m3252$$Nest$mgetMutableTasksByTaskIdMap(Desktop desktop) {
         if (!desktop.tasksByTaskId_.isMutable()) {
             desktop.tasksByTaskId_ = desktop.tasksByTaskId_.mutableCopy();
         }
@@ -114,19 +110,19 @@ public final class Desktop extends GeneratedMessageLite implements MessageLiteOr
     }
 
     /* renamed from: -$$Nest$msetDesktopId, reason: not valid java name */
-    public static void m3236$$Nest$msetDesktopId(int i, Desktop desktop) {
+    public static void m3253$$Nest$msetDesktopId(int i, Desktop desktop) {
         desktop.bitField0_ |= 2;
         desktop.desktopId_ = i;
     }
 
     /* renamed from: -$$Nest$msetDisplayId, reason: not valid java name */
-    public static void m3237$$Nest$msetDisplayId(int i, Desktop desktop) {
+    public static void m3254$$Nest$msetDisplayId(int i, Desktop desktop) {
         desktop.bitField0_ |= 1;
         desktop.displayId_ = i;
     }
 
     /* renamed from: -$$Nest$msetUsed, reason: not valid java name */
-    public static void m3238$$Nest$msetUsed(int i, Desktop desktop) {
+    public static void m3255$$Nest$msetUsed(int i, Desktop desktop) {
         desktop.bitField0_ |= 4;
         desktop.used_ = i;
     }
@@ -150,7 +146,7 @@ public final class Desktop extends GeneratedMessageLite implements MessageLiteOr
 
     @Override // com.google.protobuf.GeneratedMessageLite
     public final Object dynamicMethod(GeneratedMessageLite.MethodToInvoke methodToInvoke) {
-        Parser parser;
+        Parser defaultInstanceBasedParser;
         switch (AnonymousClass1.$SwitchMap$com$google$protobuf$GeneratedMessageLite$MethodToInvoke[methodToInvoke.ordinal()]) {
             case 1:
                 return new Desktop();
@@ -161,22 +157,22 @@ public final class Desktop extends GeneratedMessageLite implements MessageLiteOr
             case 4:
                 return DEFAULT_INSTANCE;
             case 5:
-                Parser parser2 = PARSER;
-                if (parser2 != null) {
-                    return parser2;
+                Parser parser = PARSER;
+                if (parser != null) {
+                    return parser;
                 }
                 synchronized (Desktop.class) {
                     try {
-                        parser = PARSER;
-                        if (parser == null) {
-                            parser = new GeneratedMessageLite.DefaultInstanceBasedParser(DEFAULT_INSTANCE);
-                            PARSER = parser;
+                        defaultInstanceBasedParser = PARSER;
+                        if (defaultInstanceBasedParser == null) {
+                            defaultInstanceBasedParser = new GeneratedMessageLite.DefaultInstanceBasedParser(DEFAULT_INSTANCE);
+                            PARSER = defaultInstanceBasedParser;
                         }
                     } catch (Throwable th) {
                         throw th;
                     }
                 }
-                return parser;
+                return defaultInstanceBasedParser;
             case 6:
                 return (byte) 1;
             case 7:

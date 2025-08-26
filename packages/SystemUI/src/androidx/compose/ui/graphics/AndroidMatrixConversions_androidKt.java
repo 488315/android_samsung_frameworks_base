@@ -1,10 +1,9 @@
 package androidx.compose.ui.graphics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class AndroidMatrixConversions_androidKt {
     /* renamed from: setFrom-EL8BTi8, reason: not valid java name */
-    public static final void m432setFromEL8BTi8(android.graphics.Matrix matrix, float[] fArr) {
+    public static final void m434setFromEL8BTi8(android.graphics.Matrix matrix, float[] fArr) {
         float f = fArr[0];
         float f2 = fArr[1];
         float f3 = fArr[2];
@@ -39,7 +38,7 @@ public abstract class AndroidMatrixConversions_androidKt {
     }
 
     /* renamed from: setFrom-tU-YjHk, reason: not valid java name */
-    public static final void m433setFromtUYjHk(android.graphics.Matrix matrix, float[] fArr) {
+    public static final void m435setFromtUYjHk(android.graphics.Matrix matrix, float[] fArr) {
         matrix.getValues(fArr);
         float f = fArr[0];
         float f2 = fArr[1];

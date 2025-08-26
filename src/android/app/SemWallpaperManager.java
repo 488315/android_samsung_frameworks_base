@@ -271,10 +271,10 @@ public interface SemWallpaperManager {
     default void semSetSmartCropRect(int i, Rect rect, Rect rect2) {
     }
 
-    default void semSetUri(Uri uri, boolean z, int i) throws IOException, PackageManager.NameNotFoundException {
+    default void semSetUri(Uri uri, boolean z, int i) throws PackageManager.NameNotFoundException, IOException {
     }
 
-    default void semSetUri(Uri uri, boolean z, int i, int i2) throws IOException, PackageManager.NameNotFoundException {
+    default void semSetUri(Uri uri, boolean z, int i, int i2) throws PackageManager.NameNotFoundException, IOException {
     }
 
     default void setAnimatedLockscreenWallpaper(String str) throws IOException {
@@ -330,7 +330,7 @@ public interface SemWallpaperManager {
     default void setVideoLockscreenWallpaper(String str, String str2, String str3, int i, boolean z) {
     }
 
-    default void setWallpaperUri(String str, boolean z, int i) throws IOException, PackageManager.NameNotFoundException {
+    default void setWallpaperUri(String str, boolean z, int i) throws PackageManager.NameNotFoundException, IOException {
     }
 
     default boolean wallpaperSupportsWcg(Bitmap bitmap) {

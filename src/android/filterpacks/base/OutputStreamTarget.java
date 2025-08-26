@@ -24,13 +24,13 @@ public class OutputStreamTarget extends Filter {
     }
 
     @Override // android.filterfw.core.Filter
-    public void process(FilterContext filterContext) {
+    public void process(FilterContext filterContext) throws IOException {
         ByteBuffer data;
-        Frame pullInput = pullInput("data");
-        if (pullInput.getFormat().getObjectClass() == String.class) {
-            data = ByteBuffer.wrap(((String) pullInput.getObjectValue()).getBytes());
+        Frame framePullInput = pullInput("data");
+        if (framePullInput.getFormat().getObjectClass() == String.class) {
+            data = ByteBuffer.wrap(((String) framePullInput.getObjectValue()).getBytes());
         } else {
-            data = pullInput.getData();
+            data = framePullInput.getData();
         }
         try {
             this.mOutputStream.write(data.array(), 0, data.limit());

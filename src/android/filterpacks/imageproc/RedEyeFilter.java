@@ -71,9 +71,9 @@ public class RedEyeFilter extends Filter {
 
     @Override // android.filterfw.core.Filter
     public void process(FilterContext filterContext) {
-        Frame pullInput = pullInput("image");
-        FrameFormat format = pullInput.getFormat();
-        Frame newFrame = filterContext.getFrameManager().newFrame(format);
+        Frame framePullInput = pullInput("image");
+        FrameFormat format = framePullInput.getFormat();
+        Frame frameNewFrame = filterContext.getFrameManager().newFrame(format);
         if (this.mProgram == null || format.getTarget() != this.mTarget) {
             initProgram(filterContext, format.getTarget());
         }
@@ -82,9 +82,9 @@ public class RedEyeFilter extends Filter {
             this.mHeight = format.getHeight();
         }
         createRedEyeFrame(filterContext);
-        this.mProgram.process(new Frame[]{pullInput, this.mRedEyeFrame}, newFrame);
-        pushOutput("image", newFrame);
-        newFrame.release();
+        this.mProgram.process(new Frame[]{framePullInput, this.mRedEyeFrame}, frameNewFrame);
+        pushOutput("image", frameNewFrame);
+        frameNewFrame.release();
         this.mRedEyeFrame.release();
         this.mRedEyeFrame = null;
     }
@@ -99,8 +99,8 @@ public class RedEyeFilter extends Filter {
     private void createRedEyeFrame(FilterContext filterContext) {
         int i = this.mWidth / 2;
         int i2 = this.mHeight / 2;
-        Bitmap createBitmap = Bitmap.createBitmap(i, i2, Bitmap.Config.ARGB_8888);
-        this.mCanvas.setBitmap(createBitmap);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(i, i2, Bitmap.Config.ARGB_8888);
+        this.mCanvas.setBitmap(bitmapCreateBitmap);
         this.mPaint.setColor(-1);
         this.mRadius = Math.max(MIN_RADIUS, Math.min(i, i2) * RADIUS_RATIO);
         int i3 = 0;
@@ -110,10 +110,10 @@ public class RedEyeFilter extends Filter {
                 this.mCanvas.drawCircle(fArr[i3] * i, fArr[i3 + 1] * i2, this.mRadius, this.mPaint);
                 i3 += 2;
             } else {
-                Frame newFrame = filterContext.getFrameManager().newFrame(ImageFormat.create(i, i2, 3, 3));
-                this.mRedEyeFrame = newFrame;
-                newFrame.setBitmap(createBitmap);
-                createBitmap.recycle();
+                Frame frameNewFrame = filterContext.getFrameManager().newFrame(ImageFormat.create(i, i2, 3, 3));
+                this.mRedEyeFrame = frameNewFrame;
+                frameNewFrame.setBitmap(bitmapCreateBitmap);
+                bitmapCreateBitmap.recycle();
                 return;
             }
         }

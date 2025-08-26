@@ -13,7 +13,6 @@ import android.os.RemoteCallback;
 import android.os.RemoteException;
 import android.service.autofill.IInlineSuggestionRenderService;
 import android.service.autofill.IInlineSuggestionUi;
-import android.service.autofill.InlineSuggestionRenderService;
 import android.util.Log;
 import android.util.LruCache;
 import android.util.Size;
@@ -47,22 +46,22 @@ public abstract class InlineSuggestionRenderService extends Service {
     };
 
     private Size measuredSize(View view, int i, int i2, Size size, Size size2) {
-        int makeMeasureSpec;
-        int makeMeasureSpec2;
+        int iMakeMeasureSpec;
+        int iMakeMeasureSpec2;
         if (i != -2 && i2 != -2) {
             return new Size(i, i2);
         }
         if (i == -2) {
-            makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(size2.getWidth(), Integer.MIN_VALUE);
+            iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(size2.getWidth(), Integer.MIN_VALUE);
         } else {
-            makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(i, 1073741824);
+            iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(i, 1073741824);
         }
         if (i2 == -2) {
-            makeMeasureSpec2 = View.MeasureSpec.makeMeasureSpec(size2.getHeight(), Integer.MIN_VALUE);
+            iMakeMeasureSpec2 = View.MeasureSpec.makeMeasureSpec(size2.getHeight(), Integer.MIN_VALUE);
         } else {
-            makeMeasureSpec2 = View.MeasureSpec.makeMeasureSpec(i2, 1073741824);
+            iMakeMeasureSpec2 = View.MeasureSpec.makeMeasureSpec(i2, 1073741824);
         }
-        view.measure(makeMeasureSpec, makeMeasureSpec2);
+        view.measure(iMakeMeasureSpec, iMakeMeasureSpec2);
         return new Size(Math.max(view.getMeasuredWidth(), size.getWidth()), Math.max(view.getMeasuredHeight(), size.getHeight()));
     }
 
@@ -79,8 +78,8 @@ public abstract class InlineSuggestionRenderService extends Service {
         }
         updateDisplay(i3);
         try {
-            View onRenderSuggestion = onRenderSuggestion(inlinePresentation, i, i2);
-            if (onRenderSuggestion == null) {
+            View viewOnRenderSuggestion = onRenderSuggestion(inlinePresentation, i, i2);
+            if (viewOnRenderSuggestion == null) {
                 Log.w(TAG, "ExtServices failed to render the inline suggestion view.");
                 try {
                     iInlineSuggestionUiCallback.onError();
@@ -90,25 +89,25 @@ public abstract class InlineSuggestionRenderService extends Service {
                 return;
             }
             this.mCallback = iInlineSuggestionUiCallback;
-            final Size measuredSize = measuredSize(onRenderSuggestion, i, i2, inlinePresentation.getInlinePresentationSpec().getMinSize(), inlinePresentation.getInlinePresentationSpec().getMaxSize());
-            Log.v(TAG, "width=" + i + ", height=" + i2 + ", measuredSize=" + measuredSize);
+            final Size sizeMeasuredSize = measuredSize(viewOnRenderSuggestion, i, i2, inlinePresentation.getInlinePresentationSpec().getMinSize(), inlinePresentation.getInlinePresentationSpec().getMaxSize());
+            Log.v(TAG, "width=" + i + ", height=" + i2 + ", measuredSize=" + sizeMeasuredSize);
             InlineSuggestionRoot inlineSuggestionRoot = new InlineSuggestionRoot(this, iInlineSuggestionUiCallback);
-            inlineSuggestionRoot.addView(onRenderSuggestion);
-            WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams(measuredSize.getWidth(), measuredSize.getHeight(), 2, 0, -2);
+            inlineSuggestionRoot.addView(viewOnRenderSuggestion);
+            WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams(sizeMeasuredSize.getWidth(), sizeMeasuredSize.getHeight(), 2, 0, -2);
             final SurfaceControlViewHost surfaceControlViewHost = new SurfaceControlViewHost(this, getDisplay(), new InputTransferToken(iBinder), TAG);
             surfaceControlViewHost.setView(inlineSuggestionRoot, layoutParams);
-            onRenderSuggestion.setFocusable(false);
-            onRenderSuggestion.setOnClickListener(new View.OnClickListener() { // from class: android.service.autofill.InlineSuggestionRenderService$$ExternalSyntheticLambda0
+            viewOnRenderSuggestion.setFocusable(false);
+            viewOnRenderSuggestion.setOnClickListener(new View.OnClickListener() { // from class: android.service.autofill.InlineSuggestionRenderService$$ExternalSyntheticLambda0
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
-                    InlineSuggestionRenderService.lambda$handleRenderSuggestion$0(IInlineSuggestionUiCallback.this, view);
+                    InlineSuggestionRenderService.lambda$handleRenderSuggestion$0(iInlineSuggestionUiCallback, view);
                 }
             });
-            final View.OnLongClickListener onLongClickListener = onRenderSuggestion.getOnLongClickListener();
-            onRenderSuggestion.setOnLongClickListener(new View.OnLongClickListener() { // from class: android.service.autofill.InlineSuggestionRenderService$$ExternalSyntheticLambda1
+            final View.OnLongClickListener onLongClickListener = viewOnRenderSuggestion.getOnLongClickListener();
+            viewOnRenderSuggestion.setOnLongClickListener(new View.OnLongClickListener() { // from class: android.service.autofill.InlineSuggestionRenderService$$ExternalSyntheticLambda1
                 @Override // android.view.View.OnLongClickListener
                 public final boolean onLongClick(View view) {
-                    return InlineSuggestionRenderService.lambda$handleRenderSuggestion$1(View.OnLongClickListener.this, iInlineSuggestionUiCallback, view);
+                    return InlineSuggestionRenderService.lambda$handleRenderSuggestion$1(onLongClickListener, iInlineSuggestionUiCallback, view);
                 }
             });
             final InlineSuggestionUiImpl inlineSuggestionUiImpl = new InlineSuggestionUiImpl(surfaceControlViewHost, this.mMainHandler, i4, i5);
@@ -116,7 +115,7 @@ public abstract class InlineSuggestionRenderService extends Service {
             this.mMainHandler.post(new Runnable() { // from class: android.service.autofill.InlineSuggestionRenderService$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    InlineSuggestionRenderService.lambda$handleRenderSuggestion$2(IInlineSuggestionUiCallback.this, inlineSuggestionUiImpl, surfaceControlViewHost, measuredSize);
+                    InlineSuggestionRenderService.lambda$handleRenderSuggestion$2(iInlineSuggestionUiCallback, inlineSuggestionUiImpl, surfaceControlViewHost, sizeMeasuredSize);
                 }
             });
         } finally {
@@ -212,7 +211,7 @@ public abstract class InlineSuggestionRenderService extends Service {
             this.mHandler.post(new Runnable() { // from class: android.service.autofill.InlineSuggestionRenderService$InlineSuggestionUiImpl$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    InlineSuggestionRenderService.InlineSuggestionUiImpl.this.lambda$releaseSurfaceControlViewHost$0();
+                    this.f$0.lambda$releaseSurfaceControlViewHost$0();
                 }
             });
         }
@@ -234,7 +233,7 @@ public abstract class InlineSuggestionRenderService extends Service {
             this.mHandler.post(new Runnable() { // from class: android.service.autofill.InlineSuggestionRenderService$InlineSuggestionUiImpl$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    InlineSuggestionRenderService.InlineSuggestionUiImpl.this.lambda$getSurfacePackage$1(iSurfacePackageResultCallback);
+                    this.f$0.lambda$getSurfacePackage$1(iSurfacePackageResultCallback);
                 }
             });
         }

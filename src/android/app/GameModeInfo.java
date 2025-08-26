@@ -4,6 +4,7 @@ import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.ArrayMap;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Map;
 
@@ -92,7 +93,7 @@ public final class GameModeInfo implements Parcelable {
         this.mConfigMap = map;
     }
 
-    public GameModeInfo(Parcel parcel) {
+    public GameModeInfo(Parcel parcel) throws ClassNotFoundException, IOException {
         this.mActiveGameMode = parcel.readInt();
         this.mAvailableGameModes = parcel.createIntArray();
         this.mOverriddenGameModes = parcel.createIntArray();

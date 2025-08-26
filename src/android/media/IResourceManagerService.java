@@ -195,9 +195,9 @@ public interface IResourceManagerService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IResourceManagerService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IResourceManagerService)) {
-                return (IResourceManagerService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IResourceManagerService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IResourceManagerService)) {
+                return (IResourceManagerService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -274,10 +274,10 @@ public interface IResourceManagerService extends IInterface {
                     return true;
                 case 2:
                     ClientInfoParcel clientInfoParcel = (ClientInfoParcel) parcel.readTypedObject(ClientInfoParcel.CREATOR);
-                    IResourceManagerClient asInterface = IResourceManagerClient.Stub.asInterface(parcel.readStrongBinder());
+                    IResourceManagerClient iResourceManagerClientAsInterface = IResourceManagerClient.Stub.asInterface(parcel.readStrongBinder());
                     MediaResourceParcel[] mediaResourceParcelArr = (MediaResourceParcel[]) parcel.createTypedArray(MediaResourceParcel.CREATOR);
                     parcel.enforceNoDataAvail();
-                    addResource(clientInfoParcel, asInterface, mediaResourceParcelArr);
+                    addResource(clientInfoParcel, iResourceManagerClientAsInterface, mediaResourceParcelArr);
                     parcel2.writeNoException();
                     return true;
                 case 3:
@@ -304,24 +304,24 @@ public interface IResourceManagerService extends IInterface {
                     ClientInfoParcel clientInfoParcel5 = (ClientInfoParcel) parcel.readTypedObject(ClientInfoParcel.CREATOR);
                     MediaResourceParcel[] mediaResourceParcelArr4 = (MediaResourceParcel[]) parcel.createTypedArray(MediaResourceParcel.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean reclaimResource = reclaimResource(clientInfoParcel5, mediaResourceParcelArr4);
+                    boolean zReclaimResource = reclaimResource(clientInfoParcel5, mediaResourceParcelArr4);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(reclaimResource);
+                    parcel2.writeBoolean(zReclaimResource);
                     return true;
                 case 7:
-                    int readInt = parcel.readInt();
-                    int readInt2 = parcel.readInt();
+                    int i3 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    overridePid(readInt, readInt2);
+                    overridePid(i3, i4);
                     parcel2.writeNoException();
                     return true;
                 case 8:
-                    IResourceManagerClient asInterface2 = IResourceManagerClient.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt3 = parcel.readInt();
-                    int readInt4 = parcel.readInt();
-                    int readInt5 = parcel.readInt();
+                    IResourceManagerClient iResourceManagerClientAsInterface2 = IResourceManagerClient.Stub.asInterface(parcel.readStrongBinder());
+                    int i5 = parcel.readInt();
+                    int i6 = parcel.readInt();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    overrideProcessInfo(asInterface2, readInt3, readInt4, readInt5);
+                    overrideProcessInfo(iResourceManagerClientAsInterface2, i5, i6, i7);
                     parcel2.writeNoException();
                     return true;
                 case 9:
@@ -331,9 +331,9 @@ public interface IResourceManagerService extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 10:
-                    int readInt6 = parcel.readInt();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    reclaimResourcesFromClientsPendingRemoval(readInt6);
+                    reclaimResourcesFromClientsPendingRemoval(i8);
                     parcel2.writeNoException();
                     return true;
                 case 11:
@@ -361,68 +361,68 @@ public interface IResourceManagerService extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 15:
-                    int readInt7 = parcel.readInt();
-                    if (readInt7 > 1000000) {
-                        throw new BadParcelableException("Array too large: " + readInt7);
+                    int i9 = parcel.readInt();
+                    if (i9 > 1000000) {
+                        throw new BadParcelableException("Array too large: " + i9);
                     }
-                    MediaResourceParcel[] mediaResourceParcelArr5 = readInt7 < 0 ? null : new MediaResourceParcel[readInt7];
+                    MediaResourceParcel[] mediaResourceParcelArr5 = i9 < 0 ? null : new MediaResourceParcel[i9];
                     parcel.enforceNoDataAvail();
                     getMediaResourceUsageReport(mediaResourceParcelArr5);
                     parcel2.writeNoException();
                     parcel2.writeTypedArray(mediaResourceParcelArr5, 1);
                     return true;
                 case 16:
-                    IResourceManagerObserverClient asInterface3 = IResourceManagerObserverClient.Stub.asInterface(parcel.readStrongBinder());
+                    IResourceManagerObserverClient iResourceManagerObserverClientAsInterface = IResourceManagerObserverClient.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    IResourceManagerObserver createResourceObserver = createResourceObserver(asInterface3);
+                    IResourceManagerObserver iResourceManagerObserverCreateResourceObserver = createResourceObserver(iResourceManagerObserverClientAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(createResourceObserver);
+                    parcel2.writeStrongInterface(iResourceManagerObserverCreateResourceObserver);
                     return true;
                 case 17:
-                    int readInt8 = parcel.readInt();
-                    int readInt9 = parcel.readInt();
-                    long readLong = parcel.readLong();
-                    IResourceManagerClient asInterface4 = IResourceManagerClient.Stub.asInterface(parcel.readStrongBinder());
+                    int i10 = parcel.readInt();
+                    int i11 = parcel.readInt();
+                    long j = parcel.readLong();
+                    IResourceManagerClient iResourceManagerClientAsInterface3 = IResourceManagerClient.Stub.asInterface(parcel.readStrongBinder());
                     MediaInfoParcel[] mediaInfoParcelArr = (MediaInfoParcel[]) parcel.createTypedArray(MediaInfoParcel.CREATOR);
                     parcel.enforceNoDataAvail();
-                    addMediaInfo(readInt8, readInt9, readLong, asInterface4, mediaInfoParcelArr);
+                    addMediaInfo(i10, i11, j, iResourceManagerClientAsInterface3, mediaInfoParcelArr);
                     parcel2.writeNoException();
                     return true;
                 case 18:
-                    int readInt10 = parcel.readInt();
-                    int readInt11 = parcel.readInt();
-                    long readLong2 = parcel.readLong();
-                    IResourceManagerClient asInterface5 = IResourceManagerClient.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt12 = parcel.readInt();
+                    int i12 = parcel.readInt();
+                    int i13 = parcel.readInt();
+                    long j2 = parcel.readLong();
+                    IResourceManagerClient iResourceManagerClientAsInterface4 = IResourceManagerClient.Stub.asInterface(parcel.readStrongBinder());
+                    int i14 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setCodecState(readInt10, readInt11, readLong2, asInterface5, readInt12);
+                    setCodecState(i12, i13, j2, iResourceManagerClientAsInterface4, i14);
                     parcel2.writeNoException();
                     return true;
                 case 19:
-                    int readInt13 = parcel.readInt();
-                    int readInt14 = parcel.readInt();
-                    long readLong3 = parcel.readLong();
-                    IResourceManagerClient asInterface6 = IResourceManagerClient.Stub.asInterface(parcel.readStrongBinder());
+                    int i15 = parcel.readInt();
+                    int i16 = parcel.readInt();
+                    long j3 = parcel.readLong();
+                    IResourceManagerClient iResourceManagerClientAsInterface5 = IResourceManagerClient.Stub.asInterface(parcel.readStrongBinder());
                     MediaInfoParcel[] mediaInfoParcelArr2 = (MediaInfoParcel[]) parcel.createTypedArray(MediaInfoParcel.CREATOR);
                     parcel.enforceNoDataAvail();
-                    sendCapacityError(readInt13, readInt14, readLong3, asInterface6, mediaInfoParcelArr2);
+                    sendCapacityError(i15, i16, j3, iResourceManagerClientAsInterface5, mediaInfoParcelArr2);
                     parcel2.writeNoException();
                     return true;
                 case 20:
-                    String readString = parcel.readString();
-                    int readInt15 = parcel.readInt();
-                    int readInt16 = parcel.readInt();
+                    String string = parcel.readString();
+                    int i17 = parcel.readInt();
+                    int i18 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    float supportedFrameRateFor = getSupportedFrameRateFor(readString, readInt15, readInt16);
+                    float supportedFrameRateFor = getSupportedFrameRateFor(string, i17, i18);
                     parcel2.writeNoException();
                     parcel2.writeFloat(supportedFrameRateFor);
                     return true;
                 case 21:
-                    String readString2 = parcel.readString();
-                    int readInt17 = parcel.readInt();
-                    int readInt18 = parcel.readInt();
+                    String string2 = parcel.readString();
+                    int i19 = parcel.readInt();
+                    int i20 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    float remainedFrameRateFor = getRemainedFrameRateFor(readString2, readInt17, readInt18);
+                    float remainedFrameRateFor = getRemainedFrameRateFor(string2, i19, i20);
                     parcel2.writeNoException();
                     parcel2.writeFloat(remainedFrameRateFor);
                     return true;
@@ -449,346 +449,346 @@ public interface IResourceManagerService extends IInterface {
 
             @Override // android.media.IResourceManagerService
             public void config(MediaResourcePolicyParcel[] mediaResourcePolicyParcelArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IResourceManagerService.DESCRIPTOR);
-                    obtain.writeTypedArray(mediaResourcePolicyParcelArr, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IResourceManagerService.DESCRIPTOR);
+                    parcelObtain.writeTypedArray(mediaResourcePolicyParcelArr, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IResourceManagerService
             public void addResource(ClientInfoParcel clientInfoParcel, IResourceManagerClient iResourceManagerClient, MediaResourceParcel[] mediaResourceParcelArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IResourceManagerService.DESCRIPTOR);
-                    obtain.writeTypedObject(clientInfoParcel, 0);
-                    obtain.writeStrongInterface(iResourceManagerClient);
-                    obtain.writeTypedArray(mediaResourceParcelArr, 0);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IResourceManagerService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(clientInfoParcel, 0);
+                    parcelObtain.writeStrongInterface(iResourceManagerClient);
+                    parcelObtain.writeTypedArray(mediaResourceParcelArr, 0);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IResourceManagerService
             public void updateResource(ClientInfoParcel clientInfoParcel, MediaResourceParcel[] mediaResourceParcelArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IResourceManagerService.DESCRIPTOR);
-                    obtain.writeTypedObject(clientInfoParcel, 0);
-                    obtain.writeTypedArray(mediaResourceParcelArr, 0);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IResourceManagerService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(clientInfoParcel, 0);
+                    parcelObtain.writeTypedArray(mediaResourceParcelArr, 0);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IResourceManagerService
             public void removeResource(ClientInfoParcel clientInfoParcel, MediaResourceParcel[] mediaResourceParcelArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IResourceManagerService.DESCRIPTOR);
-                    obtain.writeTypedObject(clientInfoParcel, 0);
-                    obtain.writeTypedArray(mediaResourceParcelArr, 0);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IResourceManagerService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(clientInfoParcel, 0);
+                    parcelObtain.writeTypedArray(mediaResourceParcelArr, 0);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IResourceManagerService
             public void removeClient(ClientInfoParcel clientInfoParcel) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IResourceManagerService.DESCRIPTOR);
-                    obtain.writeTypedObject(clientInfoParcel, 0);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IResourceManagerService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(clientInfoParcel, 0);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IResourceManagerService
             public boolean reclaimResource(ClientInfoParcel clientInfoParcel, MediaResourceParcel[] mediaResourceParcelArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IResourceManagerService.DESCRIPTOR);
-                    obtain.writeTypedObject(clientInfoParcel, 0);
-                    obtain.writeTypedArray(mediaResourceParcelArr, 0);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IResourceManagerService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(clientInfoParcel, 0);
+                    parcelObtain.writeTypedArray(mediaResourceParcelArr, 0);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IResourceManagerService
             public void overridePid(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IResourceManagerService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IResourceManagerService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IResourceManagerService
             public void overrideProcessInfo(IResourceManagerClient iResourceManagerClient, int i, int i2, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IResourceManagerService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iResourceManagerClient);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IResourceManagerService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iResourceManagerClient);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IResourceManagerService
             public void markClientForPendingRemoval(ClientInfoParcel clientInfoParcel) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IResourceManagerService.DESCRIPTOR);
-                    obtain.writeTypedObject(clientInfoParcel, 0);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IResourceManagerService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(clientInfoParcel, 0);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IResourceManagerService
             public void reclaimResourcesFromClientsPendingRemoval(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IResourceManagerService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IResourceManagerService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IResourceManagerService
             public void notifyClientCreated(ClientInfoParcel clientInfoParcel) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IResourceManagerService.DESCRIPTOR);
-                    obtain.writeTypedObject(clientInfoParcel, 0);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IResourceManagerService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(clientInfoParcel, 0);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IResourceManagerService
             public void notifyClientStarted(ClientConfigParcel clientConfigParcel) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IResourceManagerService.DESCRIPTOR);
-                    obtain.writeTypedObject(clientConfigParcel, 0);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IResourceManagerService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(clientConfigParcel, 0);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IResourceManagerService
             public void notifyClientStopped(ClientConfigParcel clientConfigParcel) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IResourceManagerService.DESCRIPTOR);
-                    obtain.writeTypedObject(clientConfigParcel, 0);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IResourceManagerService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(clientConfigParcel, 0);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IResourceManagerService
             public void notifyClientConfigChanged(ClientConfigParcel clientConfigParcel) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IResourceManagerService.DESCRIPTOR);
-                    obtain.writeTypedObject(clientConfigParcel, 0);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IResourceManagerService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(clientConfigParcel, 0);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IResourceManagerService
             public void getMediaResourceUsageReport(MediaResourceParcel[] mediaResourceParcelArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IResourceManagerService.DESCRIPTOR);
-                    obtain.writeInt(mediaResourceParcelArr.length);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
-                    obtain2.readTypedArray(mediaResourceParcelArr, MediaResourceParcel.CREATOR);
+                    parcelObtain.writeInterfaceToken(IResourceManagerService.DESCRIPTOR);
+                    parcelObtain.writeInt(mediaResourceParcelArr.length);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    parcelObtain2.readTypedArray(mediaResourceParcelArr, MediaResourceParcel.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IResourceManagerService
             public IResourceManagerObserver createResourceObserver(IResourceManagerObserverClient iResourceManagerObserverClient) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IResourceManagerService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iResourceManagerObserverClient);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IResourceManagerObserver.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(IResourceManagerService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iResourceManagerObserverClient);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IResourceManagerObserver.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IResourceManagerService
             public void addMediaInfo(int i, int i2, long j, IResourceManagerClient iResourceManagerClient, MediaInfoParcel[] mediaInfoParcelArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IResourceManagerService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeLong(j);
-                    obtain.writeStrongInterface(iResourceManagerClient);
-                    obtain.writeTypedArray(mediaInfoParcelArr, 0);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IResourceManagerService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeStrongInterface(iResourceManagerClient);
+                    parcelObtain.writeTypedArray(mediaInfoParcelArr, 0);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IResourceManagerService
             public void setCodecState(int i, int i2, long j, IResourceManagerClient iResourceManagerClient, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IResourceManagerService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeLong(j);
-                    obtain.writeStrongInterface(iResourceManagerClient);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IResourceManagerService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeStrongInterface(iResourceManagerClient);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IResourceManagerService
             public void sendCapacityError(int i, int i2, long j, IResourceManagerClient iResourceManagerClient, MediaInfoParcel[] mediaInfoParcelArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IResourceManagerService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeLong(j);
-                    obtain.writeStrongInterface(iResourceManagerClient);
-                    obtain.writeTypedArray(mediaInfoParcelArr, 0);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IResourceManagerService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeStrongInterface(iResourceManagerClient);
+                    parcelObtain.writeTypedArray(mediaInfoParcelArr, 0);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IResourceManagerService
             public float getSupportedFrameRateFor(String str, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IResourceManagerService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readFloat();
+                    parcelObtain.writeInterfaceToken(IResourceManagerService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readFloat();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IResourceManagerService
             public float getRemainedFrameRateFor(String str, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IResourceManagerService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readFloat();
+                    parcelObtain.writeInterfaceToken(IResourceManagerService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readFloat();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

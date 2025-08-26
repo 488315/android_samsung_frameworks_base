@@ -36,7 +36,6 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class VolumePanelDialog extends SystemUIDialog implements LifecycleOwner {
     public final ActivityStarter mActivityStarter;
@@ -79,10 +78,10 @@ public class VolumePanelDialog extends SystemUIDialog implements LifecycleOwner 
         super.onCreate(bundle);
         Log.d("VolumePanelDialog", "onCreate");
         Uri uri = null;
-        View inflate = LayoutInflater.from(getContext()).inflate(R.layout.volume_panel_dialog, (ViewGroup) null);
-        getWindow().setContentView(inflate);
+        View viewInflate = LayoutInflater.from(getContext()).inflate(R.layout.volume_panel_dialog, (ViewGroup) null);
+        getWindow().setContentView(viewInflate);
         final int i = 0;
-        ((Button) inflate.findViewById(R.id.done_button)).setOnClickListener(new View.OnClickListener(this) { // from class: com.android.systemui.volume.VolumePanelDialog$$ExternalSyntheticLambda0
+        ((Button) viewInflate.findViewById(R.id.done_button)).setOnClickListener(new View.OnClickListener(this) { // from class: com.android.systemui.volume.VolumePanelDialog$$ExternalSyntheticLambda0
             public final /* synthetic */ VolumePanelDialog f$0;
 
             {
@@ -109,7 +108,7 @@ public class VolumePanelDialog extends SystemUIDialog implements LifecycleOwner 
             }
         });
         final int i2 = 1;
-        ((Button) inflate.findViewById(R.id.settings_button)).setOnClickListener(new View.OnClickListener(this) { // from class: com.android.systemui.volume.VolumePanelDialog$$ExternalSyntheticLambda0
+        ((Button) viewInflate.findViewById(R.id.settings_button)).setOnClickListener(new View.OnClickListener(this) { // from class: com.android.systemui.volume.VolumePanelDialog$$ExternalSyntheticLambda0
             public final /* synthetic */ VolumePanelDialog f$0;
 
             {
@@ -139,7 +138,7 @@ public class VolumePanelDialog extends SystemUIDialog implements LifecycleOwner 
         if (localBluetoothManager != null) {
             this.mProfileManager = localBluetoothManager.mProfileManager;
         }
-        RecyclerView recyclerView = (RecyclerView) inflate.findViewById(R.id.volume_panel_parent_layout);
+        RecyclerView recyclerView = (RecyclerView) viewInflate.findViewById(R.id.volume_panel_parent_layout);
         this.mVolumePanelSlices = recyclerView;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         ((LinkedHashMap) this.mSliceLiveData).clear();
@@ -150,11 +149,11 @@ public class VolumePanelDialog extends SystemUIDialog implements LifecycleOwner 
         LocalBluetoothProfileManager localBluetoothProfileManager = this.mProfileManager;
         BluetoothDevice activeDevice = (localBluetoothProfileManager == null || (a2dpProfile = localBluetoothProfileManager.mA2dpProfile) == null) ? null : a2dpProfile.getActiveDevice();
         if (activeDevice != null) {
-            int width = getWindow().getWindowManager().getCurrentWindowMetrics().getBounds().width() - (getContext().getResources().getDimensionPixelSize(R.dimen.volume_panel_slice_horizontal_padding) * 2);
+            int iWidth = getWindow().getWindowManager().getCurrentWindowMetrics().getBounds().width() - (getContext().getResources().getDimensionPixelSize(R.dimen.volume_panel_slice_horizontal_padding) * 2);
             String fastPairCustomizedField = BluetoothUtils.getFastPairCustomizedField(activeDevice, "HEARABLE_CONTROL_SLICE_WITH_WIDTH");
             if (!TextUtils.isEmpty(fastPairCustomizedField)) {
                 try {
-                    uri = Uri.parse(fastPairCustomizedField + width);
+                    uri = Uri.parse(fastPairCustomizedField + iWidth);
                 } catch (NullPointerException unused) {
                     Log.d("VolumePanelDialog", "unable to parse extra control uri");
                 }
@@ -183,25 +182,25 @@ public class VolumePanelDialog extends SystemUIDialog implements LifecycleOwner 
                 public final void onChanged(Object obj2) {
                     final Uri uri3 = uri2;
                     Slice slice = (Slice) obj2;
-                    final VolumePanelDialog volumePanelDialog = VolumePanelDialog.this;
+                    final VolumePanelDialog volumePanelDialog = this.f$0;
                     if (volumePanelDialog.mLoadedSlices.contains(uri3)) {
                         return;
                     }
                     StringBuilder sb = new StringBuilder("received slice: ");
                     sb.append(slice == null ? null : Uri.parse(slice.mUri));
                     Log.d("VolumePanelDialog", sb.toString());
-                    SliceMetadata from = SliceMetadata.from(volumePanelDialog.getContext(), slice);
-                    if (slice == null || ArrayUtils.contains(from.mSlice.mHints, "error")) {
+                    SliceMetadata sliceMetadataFrom = SliceMetadata.from(volumePanelDialog.getContext(), slice);
+                    if (slice == null || ArrayUtils.contains(sliceMetadataFrom.mSlice.mHints, "error")) {
                         if (!volumePanelDialog.removeSliceLiveData(uri3)) {
                             volumePanelDialog.mLoadedSlices.add(uri3);
                         }
-                    } else if (from.getLoadingState() == 2) {
+                    } else if (sliceMetadataFrom.getLoadingState() == 2) {
                         volumePanelDialog.mLoadedSlices.add(uri3);
                     } else {
                         volumePanelDialog.mHandler.postDelayed(new Runnable() { // from class: com.android.systemui.volume.VolumePanelDialog$$ExternalSyntheticLambda4
                             @Override // java.lang.Runnable
                             public final void run() {
-                                VolumePanelDialog volumePanelDialog2 = VolumePanelDialog.this;
+                                VolumePanelDialog volumePanelDialog2 = volumePanelDialog;
                                 volumePanelDialog2.mLoadedSlices.add(uri3);
                                 volumePanelDialog2.setupAdapterWhenReady();
                             }
@@ -217,7 +216,7 @@ public class VolumePanelDialog extends SystemUIDialog implements LifecycleOwner 
     public final boolean removeSliceLiveData(Uri uri) {
         if (!uri.equals(MEDIA_OUTPUT_INDICATOR_SLICE_URI)) {
             Log.d("VolumePanelDialog", "remove uri: " + uri);
-            r1 = this.mSliceLiveData.remove(uri) != null;
+            z = this.mSliceLiveData.remove(uri) != null;
             VolumePanelSlicesAdapter volumePanelSlicesAdapter = this.mVolumePanelSlicesAdapter;
             if (volumePanelSlicesAdapter != null) {
                 ArrayList arrayList = new ArrayList(((LinkedHashMap) this.mSliceLiveData).values());
@@ -226,7 +225,7 @@ public class VolumePanelDialog extends SystemUIDialog implements LifecycleOwner 
                 volumePanelSlicesAdapter.notifyDataSetChanged();
             }
         }
-        return r1;
+        return z;
     }
 
     public final void setupAdapterWhenReady() {

@@ -10,16 +10,14 @@ import java.util.Collection;
 import java.util.List;
 import java.util.logging.Logger;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class AbstractMessageLite implements MessageLite {
     protected int memoizedHashCode = 0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Builder implements MessageLiteOrBuilder, Cloneable {
         @Override // 
         /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-        public abstract GeneratedMessageLite.Builder mo3269clone();
+        public abstract GeneratedMessageLite.Builder mo3287clone();
     }
 
     public static void addAll(Iterable iterable, List list) {
@@ -103,7 +101,7 @@ public abstract class AbstractMessageLite implements MessageLite {
         }
     }
 
-    public final void writeTo(OutputStream outputStream) {
+    public final void writeTo(OutputStream outputStream) throws IOException {
         GeneratedMessageLite generatedMessageLite = (GeneratedMessageLite) this;
         int serializedSize = generatedMessageLite.getSerializedSize(null);
         Logger logger = CodedOutputStream.logger;

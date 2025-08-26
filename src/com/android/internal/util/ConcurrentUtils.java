@@ -27,7 +27,7 @@ public class ConcurrentUtils {
             public Thread newThread(final Runnable runnable) {
                 return new Thread(str + this.threadNum.incrementAndGet()) { // from class: com.android.internal.util.ConcurrentUtils.1.1
                     @Override // java.lang.Thread, java.lang.Runnable
-                    public void run() {
+                    public void run() throws SecurityException, IllegalArgumentException {
                         Process.setThreadPriority(i2);
                         runnable.run();
                     }

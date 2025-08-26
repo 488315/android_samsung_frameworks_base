@@ -41,7 +41,7 @@ public class SprObjectShapeGroup extends SprObjectBase {
         fromSPR(sprInputStream);
     }
 
-    public SprObjectShapeGroup(boolean z, XmlPullParser xmlPullParser) throws IOException, XmlPullParserException {
+    public SprObjectShapeGroup(boolean z, XmlPullParser xmlPullParser) throws XmlPullParserException, IOException {
         super((byte) 16);
         this.mIsInitialized = false;
         this.mObjectList = null;
@@ -60,32 +60,32 @@ public class SprObjectShapeGroup extends SprObjectBase {
 
     @Override // com.samsung.android.graphics.spr.document.shape.SprObjectBase
     public void fromSPR(SprInputStream sprInputStream) throws IOException {
-        int readInt = sprInputStream.readInt();
-        for (int i = 0; i < readInt; i++) {
-            byte readByte = sprInputStream.readByte();
-            int readInt2 = (sprInputStream.mMajorVersion < 12336 || sprInputStream.mMinorVersion < 12338) ? 0 : sprInputStream.readInt();
+        int i = sprInputStream.readInt();
+        for (int i2 = 0; i2 < i; i2++) {
+            byte b = sprInputStream.readByte();
+            int i3 = (sprInputStream.mMajorVersion < 12336 || sprInputStream.mMinorVersion < 12338) ? 0 : sprInputStream.readInt();
             long position = sprInputStream.getPosition();
-            if (readByte == 1) {
+            if (b == 1) {
                 this.mObjectList.add(new SprObjectShapeCircle(sprInputStream));
-            } else if (readByte == 2) {
+            } else if (b == 2) {
                 this.mObjectList.add(new SprObjectShapeEllipse(sprInputStream));
-            } else if (readByte == 3) {
+            } else if (b == 3) {
                 this.mObjectList.add(new SprObjectShapeLine(sprInputStream));
-            } else if (readByte == 4) {
+            } else if (b == 4) {
                 this.mObjectList.add(new SprObjectShapePath(sprInputStream));
-            } else if (readByte == 5) {
+            } else if (b == 5) {
                 this.mObjectList.add(new SprObjectShapeRectangle(sprInputStream));
-            } else if (readByte == 16) {
+            } else if (b == 16) {
                 this.mObjectList.add(new SprObjectShapeGroup(false, sprInputStream));
-            } else if (readByte == 17) {
+            } else if (b == 17) {
                 this.mObjectList.add(new SprObjectShapeUse(sprInputStream));
             } else {
-                Log.e(TAG, "unknown element type:" + ((int) readByte));
-                sprInputStream.skip((long) readInt2);
+                Log.e(TAG, "unknown element type:" + ((int) b));
+                sprInputStream.skip((long) i3);
             }
             if (sprInputStream.mMajorVersion >= 12336 && sprInputStream.mMinorVersion >= 12338) {
                 long position2 = sprInputStream.getPosition() - position;
-                if (position2 != readInt2) {
+                if (position2 != i3) {
                     throw new RuntimeException("Wrong skip size : " + position2);
                 }
             }
@@ -115,11 +115,11 @@ public class SprObjectShapeGroup extends SprObjectBase {
     @Override // com.samsung.android.graphics.spr.document.shape.SprObjectBase
     public int getSPRSize() {
         Iterator<SprAttributeBase> it = this.mAttributeList.iterator();
-        int i = 4;
+        int sPRSize = 4;
         while (it.hasNext()) {
-            i += it.next().getSPRSize() + 5;
+            sPRSize += it.next().getSPRSize() + 5;
         }
-        return !this.mIsRoot ? i + super.getSPRSize() : i;
+        return !this.mIsRoot ? sPRSize + super.getSPRSize() : sPRSize;
     }
 
     public void fromXml(XmlPullParser xmlPullParser) throws XmlPullParserException, IOException {
@@ -205,12 +205,12 @@ public class SprObjectShapeGroup extends SprObjectBase {
 
     @Override // com.samsung.android.graphics.spr.document.shape.SprObjectBase
     /* renamed from: clone */
-    public SprObjectShapeGroup mo9224clone() throws CloneNotSupportedException {
-        SprObjectShapeGroup sprObjectShapeGroup = (SprObjectShapeGroup) super.mo9224clone();
+    public SprObjectShapeGroup mo9236clone() throws CloneNotSupportedException {
+        SprObjectShapeGroup sprObjectShapeGroup = (SprObjectShapeGroup) super.mo9236clone();
         sprObjectShapeGroup.mObjectList = new ArrayList<>();
         Iterator<SprObjectBase> it = this.mObjectList.iterator();
         while (it.hasNext()) {
-            sprObjectShapeGroup.mObjectList.add(it.next().mo9224clone());
+            sprObjectShapeGroup.mObjectList.add(it.next().mo9236clone());
         }
         return sprObjectShapeGroup;
     }
@@ -218,31 +218,31 @@ public class SprObjectShapeGroup extends SprObjectBase {
     @Override // com.samsung.android.graphics.spr.document.shape.SprObjectBase
     public int getTotalSegmentCount() {
         Iterator<SprObjectBase> it = this.mObjectList.iterator();
-        int i = 0;
+        int totalSegmentCount = 0;
         while (it.hasNext()) {
-            i += it.next().getTotalSegmentCount();
+            totalSegmentCount += it.next().getTotalSegmentCount();
         }
-        return i;
+        return totalSegmentCount;
     }
 
     @Override // com.samsung.android.graphics.spr.document.shape.SprObjectBase
     public int getTotalElementCount() {
         Iterator<SprObjectBase> it = this.mObjectList.iterator();
-        int i = 0;
+        int totalElementCount = 0;
         while (it.hasNext()) {
-            i += it.next().getTotalElementCount();
+            totalElementCount += it.next().getTotalElementCount();
         }
-        return i;
+        return totalElementCount;
     }
 
     @Override // com.samsung.android.graphics.spr.document.shape.SprObjectBase
     public int getTotalAttributeCount() {
         Iterator<SprObjectBase> it = this.mObjectList.iterator();
-        int i = 0;
+        int totalAttributeCount = 0;
         while (it.hasNext()) {
-            i += it.next().getTotalAttributeCount();
+            totalAttributeCount += it.next().getTotalAttributeCount();
         }
-        return i + this.mAttributeList.size();
+        return totalAttributeCount + this.mAttributeList.size();
     }
 
     @Override // com.samsung.android.graphics.spr.document.shape.SprObjectBase

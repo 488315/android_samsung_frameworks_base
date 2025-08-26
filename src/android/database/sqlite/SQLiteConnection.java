@@ -18,6 +18,7 @@ import android.telephony.ims.RcsContactPresenceTuple;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.LruCache;
+import android.util.NtpTrustedTime;
 import android.util.Pair;
 import android.util.Printer;
 import com.android.internal.protolog.PerfettoProtoLogImpl;
@@ -183,7 +184,7 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
         }
     }
 
-    static SQLiteConnection open(SQLiteConnectionPool sQLiteConnectionPool, SQLiteDatabaseConfiguration sQLiteDatabaseConfiguration, int i, boolean z) {
+    static SQLiteConnection open(SQLiteConnectionPool sQLiteConnectionPool, SQLiteDatabaseConfiguration sQLiteDatabaseConfiguration, int i, boolean z) throws IOException {
         SQLiteConnection sQLiteConnection = new SQLiteConnection(sQLiteConnectionPool, sQLiteDatabaseConfiguration, i, z);
         try {
             sQLiteConnection.open();
@@ -197,7 +198,7 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
         }
     }
 
-    static SQLiteConnection openSecure(SQLiteConnectionPool sQLiteConnectionPool, SQLiteDatabaseConfiguration sQLiteDatabaseConfiguration, int i, boolean z, byte[] bArr) {
+    static SQLiteConnection openSecure(SQLiteConnectionPool sQLiteConnectionPool, SQLiteDatabaseConfiguration sQLiteDatabaseConfiguration, int i, boolean z, byte[] bArr) throws IOException {
         SQLiteConnection sQLiteConnection = new SQLiteConnection(sQLiteConnectionPool, sQLiteDatabaseConfiguration, i, z);
         try {
             sQLiteConnection.open(bArr);
@@ -215,13 +216,13 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
         dispose(false);
     }
 
-    private void open(byte[] bArr) {
+    private void open(byte[] bArr) throws IOException {
         String str = this.mConfiguration.path;
-        int beginOperation = this.mRecentOperations.beginOperation(RcsContactPresenceTuple.TUPLE_BASIC_STATUS_OPEN, null, null);
+        int iBeginOperation = this.mRecentOperations.beginOperation(RcsContactPresenceTuple.TUPLE_BASIC_STATUS_OPEN, null, null);
         try {
             try {
                 this.mConnectionPtr = nativeOpen(str, this.mConfiguration.openFlags, this.mConfiguration.label, SQLiteDebug.NoPreloadHolder.DEBUG_SQL_STATEMENTS, SQLiteDebug.NoPreloadHolder.DEBUG_SQL_TIME, this.mConfiguration.lookasideSlotSize, this.mConfiguration.lookasideSlotCount);
-                this.mRecentOperations.endOperation(beginOperation);
+                this.mRecentOperations.endOperation(iBeginOperation);
                 if (this.mConnectionPtr == 0) {
                     return;
                 }
@@ -288,18 +289,18 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
                 throw new SQLiteCantOpenDatabaseException(sb.toString(), e2);
             }
         } catch (Throwable th) {
-            this.mRecentOperations.endOperation(beginOperation);
+            this.mRecentOperations.endOperation(iBeginOperation);
             throw th;
         }
     }
 
-    private void open() {
+    private void open() throws IOException {
         String str = this.mConfiguration.path;
-        int beginOperation = this.mRecentOperations.beginOperation(RcsContactPresenceTuple.TUPLE_BASIC_STATUS_OPEN, null, null);
+        int iBeginOperation = this.mRecentOperations.beginOperation(RcsContactPresenceTuple.TUPLE_BASIC_STATUS_OPEN, null, null);
         try {
             try {
                 this.mConnectionPtr = nativeOpen(str, this.mConfiguration.openFlags, this.mConfiguration.label, SQLiteDebug.NoPreloadHolder.DEBUG_SQL_STATEMENTS, SQLiteDebug.NoPreloadHolder.DEBUG_SQL_TIME, this.mConfiguration.lookasideSlotSize, this.mConfiguration.lookasideSlotCount);
-                this.mRecentOperations.endOperation(beginOperation);
+                this.mRecentOperations.endOperation(iBeginOperation);
                 if (this.mConnectionPtr == 0) {
                     return;
                 }
@@ -327,45 +328,45 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
                     }
                 }
                 this.mIsOpen = true;
-            } catch (Throwable th) {
-                this.mRecentOperations.endOperation(beginOperation);
-                throw th;
-            }
-        } catch (SQLiteCantOpenDatabaseException e2) {
-            StringBuilder sb = new StringBuilder("Cannot open database [");
-            sb.append(e2.getMessage());
-            sb.append("] '");
-            sb.append(str);
-            sb.append("' with flags 0x");
-            sb.append(Integer.toHexString(this.mConfiguration.openFlags));
-            try {
-                Path path = FileSystems.getDefault().getPath(str, new String[0]);
-                Path parent = path.getParent();
-                if (parent == null) {
-                    sb.append(": Directory not specified in the file path");
-                } else if (!Files.isDirectory(parent, new LinkOption[0])) {
-                    sb.append(": Directory ");
-                    sb.append(parent);
-                    sb.append(" doesn't exist");
-                } else if (!Files.exists(path, new LinkOption[0])) {
-                    sb.append(": File ");
-                    sb.append(path);
-                    sb.append(" doesn't exist");
-                    if ((this.mConfiguration.openFlags & 268435456) != 0) {
-                        sb.append(" and CREATE_IF_NECESSARY is set, check directory permissions");
+            } catch (SQLiteCantOpenDatabaseException e2) {
+                StringBuilder sb = new StringBuilder("Cannot open database [");
+                sb.append(e2.getMessage());
+                sb.append("] '");
+                sb.append(str);
+                sb.append("' with flags 0x");
+                sb.append(Integer.toHexString(this.mConfiguration.openFlags));
+                try {
+                    Path path = FileSystems.getDefault().getPath(str, new String[0]);
+                    Path parent = path.getParent();
+                    if (parent == null) {
+                        sb.append(": Directory not specified in the file path");
+                    } else if (!Files.isDirectory(parent, new LinkOption[0])) {
+                        sb.append(": Directory ");
+                        sb.append(parent);
+                        sb.append(" doesn't exist");
+                    } else if (!Files.exists(path, new LinkOption[0])) {
+                        sb.append(": File ");
+                        sb.append(path);
+                        sb.append(" doesn't exist");
+                        if ((this.mConfiguration.openFlags & 268435456) != 0) {
+                            sb.append(" and CREATE_IF_NECESSARY is set, check directory permissions");
+                        }
+                    } else if (!Files.isReadable(path)) {
+                        sb.append(": File ");
+                        sb.append(path);
+                        sb.append(" is not readable");
+                    } else if (Files.isDirectory(path, new LinkOption[0])) {
+                        sb.append(": Path ");
+                        sb.append(path);
+                        sb.append(" is a directory");
                     }
-                } else if (!Files.isReadable(path)) {
-                    sb.append(": File ");
-                    sb.append(path);
-                    sb.append(" is not readable");
-                } else if (Files.isDirectory(path, new LinkOption[0])) {
-                    sb.append(": Path ");
-                    sb.append(path);
-                    sb.append(" is a directory");
+                } catch (Throwable unused) {
                 }
-            } catch (Throwable unused) {
+                throw new SQLiteCantOpenDatabaseException(sb.toString(), e2);
             }
-            throw new SQLiteCantOpenDatabaseException(sb.toString(), e2);
+        } catch (Throwable th) {
+            this.mRecentOperations.endOperation(iBeginOperation);
+            throw th;
         }
     }
 
@@ -378,7 +379,7 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
             this.mCloseGuard.close();
         }
         if (this.mConnectionPtr != 0) {
-            int beginOperation = this.mRecentOperations.beginOperation("close", null, null);
+            int iBeginOperation = this.mRecentOperations.beginOperation("close", null, null);
             try {
                 this.mPreparedStatementCache.evictAll();
                 nativeClose(this.mConnectionPtr, z && Flags.noCheckpointOnFinalize());
@@ -388,8 +389,8 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
                     destroyExpert();
                 }
             } finally {
-                if (this.mRecentOperations.endOperationDeferLog(beginOperation)) {
-                    this.mRecentOperations.logOperation(beginOperation, "window='" + this.mConfiguration.path + "'");
+                if (this.mRecentOperations.endOperationDeferLog(iBeginOperation)) {
+                    this.mRecentOperations.logOperation(iBeginOperation, "window='" + this.mConfiguration.path + "'");
                 }
             }
         }
@@ -441,30 +442,30 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
     }
 
     private void setCaseSensitiveLikeFromConfiguration() {
-        long j;
-        long j2 = this.mConfiguration.caseSensitiveLikeEnabled ? 1L : 0L;
+        long jExecuteForLong;
+        long j = this.mConfiguration.caseSensitiveLikeEnabled ? 1L : 0L;
         try {
-            j = executeForLong("PRAGMA case_sensitive_like", null, null);
+            jExecuteForLong = executeForLong("PRAGMA case_sensitive_like", null, null);
         } catch (SQLiteException unused) {
-            j = -1;
+            jExecuteForLong = -1;
         }
-        if (j != j2) {
-            execute("PRAGMA case_sensitive_like=" + j2, null, null);
+        if (jExecuteForLong != j) {
+            execute("PRAGMA case_sensitive_like=" + j, null, null);
         }
     }
 
     private void setBusyTimeoutFromConfiguration() {
-        long j;
-        long j2 = this.mConfiguration.busyTimeout;
+        long jExecuteForLong;
+        long j = this.mConfiguration.busyTimeout;
         try {
-            j = executeForLong("PRAGMA busy_timeout", null, null);
+            jExecuteForLong = executeForLong("PRAGMA busy_timeout", null, null);
         } catch (SQLiteException e) {
             Log.e(TAG, "Error getting busy_timeout", e);
-            j = 2500;
+            jExecuteForLong = 2500;
         }
-        if (j != j2) {
+        if (jExecuteForLong != j) {
             try {
-                executeForLong("PRAGMA busy_timeout=" + j2, null, null);
+                executeForLong("PRAGMA busy_timeout=" + j, null, null);
             } catch (SQLiteException e2) {
                 Log.e(TAG, "Error setting busy_timeout", e2);
             }
@@ -586,8 +587,8 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
         if (TextUtils.isEmpty(str)) {
             return;
         }
-        String executeForString = executeForString("PRAGMA journal_mode", null, null);
-        if (executeForString.equalsIgnoreCase(str)) {
+        String strExecuteForString = executeForString("PRAGMA journal_mode", null, null);
+        if (strExecuteForString.equalsIgnoreCase(str)) {
             return;
         }
         try {
@@ -596,15 +597,15 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
             }
         } catch (SQLiteDatabaseLockedException unused) {
         }
-        Log.w(TAG, "Could not change the database journal mode of '" + this.mConfiguration.label + "' from '" + executeForString + "' to '" + str + "' because the database is locked.  This usually means that there are other open connections to the database which prevents the database from enabling or disabling write-ahead logging mode.  Proceeding without changing the journal mode.");
+        Log.w(TAG, "Could not change the database journal mode of '" + this.mConfiguration.label + "' from '" + strExecuteForString + "' to '" + str + "' because the database is locked.  This usually means that there are other open connections to the database which prevents the database from enabling or disabling write-ahead logging mode.  Proceeding without changing the journal mode.");
     }
 
-    private void setLocaleFromConfiguration() {
+    private void setLocaleFromConfiguration() throws IOException {
         if ((this.mConfiguration.openFlags & 16) != 0) {
             return;
         }
-        String locale = this.mConfiguration.locale.toString();
-        nativeRegisterLocalizedCollators(this.mConnectionPtr, locale);
+        String string = this.mConfiguration.locale.toString();
+        nativeRegisterLocalizedCollators(this.mConnectionPtr, string);
         if (!this.mConfiguration.isInMemoryDb()) {
             checkDatabaseWiped();
         }
@@ -614,12 +615,12 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
         try {
             try {
                 execute("CREATE TABLE IF NOT EXISTS android_metadata (locale TEXT)", null, null);
-                String executeForString = executeForString("SELECT locale FROM android_metadata UNION SELECT NULL ORDER BY locale DESC LIMIT 1", null, null);
-                if (executeForString == null || !executeForString.equals(locale)) {
+                String strExecuteForString = executeForString("SELECT locale FROM android_metadata UNION SELECT NULL ORDER BY locale DESC LIMIT 1", null, null);
+                if (strExecuteForString == null || !strExecuteForString.equals(string)) {
                     execute("BEGIN", null, null);
                     try {
                         execute("DELETE FROM android_metadata", null, null);
-                        execute("INSERT INTO android_metadata (locale) VALUES(?)", new Object[]{locale}, null);
+                        execute("INSERT INTO android_metadata (locale) VALUES(?)", new Object[]{string}, null);
                         execute("REINDEX LOCALIZED", null, null);
                         execute("COMMIT", null, null);
                     } catch (Throwable th) {
@@ -627,12 +628,12 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
                         throw th;
                     }
                 }
-            } catch (RuntimeException e) {
-                throw new SQLiteException("Failed to change locale for db '" + this.mConfiguration.label + "' to '" + locale + "'.", e);
+            } catch (SQLiteDatabaseCorruptException | SQLiteFullException | SQLiteReadOnlyDatabaseException e) {
+                Log.e(TAG, "Failed to change locale for db'" + this.mConfiguration.label + "' to '" + string + "'.");
+                throw e;
             }
-        } catch (SQLiteDatabaseCorruptException | SQLiteFullException | SQLiteReadOnlyDatabaseException e2) {
-            Log.e(TAG, "Failed to change locale for db'" + this.mConfiguration.label + "' to '" + locale + "'.");
-            throw e2;
+        } catch (RuntimeException e2) {
+            throw new SQLiteException("Failed to change locale for db '" + this.mConfiguration.label + "' to '" + string + "'.", e2);
         }
     }
 
@@ -667,16 +668,16 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
         }
     }
 
-    private void checkDatabaseWiped() {
+    private void checkDatabaseWiped() throws IOException {
         if (SQLiteGlobal.checkDbWipe()) {
             try {
                 File file = new File(this.mConfiguration.path + "-wipecheck");
                 boolean z = executeForLong("SELECT count(*) FROM sqlite_master WHERE type='table' AND name='android_metadata'", null, null) > 0;
-                boolean exists = file.exists();
-                if (!this.mIsReadOnlyConnection && !exists) {
+                boolean zExists = file.exists();
+                if (!this.mIsReadOnlyConnection && !zExists) {
                     file.createNewFile();
                 }
-                if (z || !exists) {
+                if (z || !zExists) {
                     return;
                 }
                 SQLiteDatabase.wipeDetected(this.mConfiguration.path, "unknown");
@@ -686,16 +687,16 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
         }
     }
 
-    void reconfigure(SQLiteDatabaseConfiguration sQLiteDatabaseConfiguration) {
+    void reconfigure(SQLiteDatabaseConfiguration sQLiteDatabaseConfiguration) throws IOException {
         this.mOnlyAllowReadOnlyOperations = false;
         boolean z = sQLiteDatabaseConfiguration.foreignKeyConstraintsEnabled != this.mConfiguration.foreignKeyConstraintsEnabled;
-        boolean equals = sQLiteDatabaseConfiguration.locale.equals(this.mConfiguration.locale);
+        boolean zEquals = sQLiteDatabaseConfiguration.locale.equals(this.mConfiguration.locale);
         boolean z2 = sQLiteDatabaseConfiguration.automaticIndexEnabled != this.mConfiguration.automaticIndexEnabled;
         boolean z3 = sQLiteDatabaseConfiguration.busyTimeout != this.mConfiguration.busyTimeout;
         boolean z4 = sQLiteDatabaseConfiguration.cacheSize != this.mConfiguration.cacheSize;
         boolean z5 = sQLiteDatabaseConfiguration.caseSensitiveLikeEnabled != this.mConfiguration.caseSensitiveLikeEnabled;
-        boolean equals2 = sQLiteDatabaseConfiguration.customScalarFunctions.equals(this.mConfiguration.customScalarFunctions);
-        boolean equals3 = sQLiteDatabaseConfiguration.customAggregateFunctions.equals(this.mConfiguration.customAggregateFunctions);
+        boolean zEquals2 = sQLiteDatabaseConfiguration.customScalarFunctions.equals(this.mConfiguration.customScalarFunctions);
+        boolean zEquals3 = sQLiteDatabaseConfiguration.customAggregateFunctions.equals(this.mConfiguration.customAggregateFunctions);
         int size = this.mConfiguration.perConnectionSql.size();
         boolean z6 = sQLiteDatabaseConfiguration.perConnectionSql.size() > size;
         this.mConfiguration.updateParametersFrom(sQLiteDatabaseConfiguration);
@@ -709,7 +710,7 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
         if (!sQLiteDatabaseConfiguration.resolveSyncMode().equalsIgnoreCase(this.mConfiguration.resolveSyncMode())) {
             setSyncModeFromConfiguration();
         }
-        if (!equals) {
+        if (!zEquals) {
             setLocaleFromConfiguration();
         }
         if (z2) {
@@ -724,7 +725,7 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
         if (z5) {
             setCaseSensitiveLikeFromConfiguration();
         }
-        if (!equals2 || !equals3) {
+        if (!zEquals2 || !zEquals3) {
             setCustomFunctionsFromConfiguration();
         }
         if (z6) {
@@ -759,34 +760,34 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
         if (str == null) {
             throw new IllegalArgumentException("sql must not be null.");
         }
-        int beginOperation = this.mRecentOperations.beginOperation("prepare", str, null);
+        int iBeginOperation = this.mRecentOperations.beginOperation("prepare", str, null);
         try {
             try {
-                PreparedStatement acquirePreparedStatement = acquirePreparedStatement(str);
+                PreparedStatement preparedStatementAcquirePreparedStatement = acquirePreparedStatement(str);
                 if (sQLiteStatementInfo != null) {
                     try {
-                        sQLiteStatementInfo.numParameters = acquirePreparedStatement.mNumParameters;
-                        sQLiteStatementInfo.readOnly = acquirePreparedStatement.mReadOnly;
-                        int nativeGetColumnCount = nativeGetColumnCount(this.mConnectionPtr, acquirePreparedStatement.mStatementPtr);
-                        if (nativeGetColumnCount == 0) {
+                        sQLiteStatementInfo.numParameters = preparedStatementAcquirePreparedStatement.mNumParameters;
+                        sQLiteStatementInfo.readOnly = preparedStatementAcquirePreparedStatement.mReadOnly;
+                        int iNativeGetColumnCount = nativeGetColumnCount(this.mConnectionPtr, preparedStatementAcquirePreparedStatement.mStatementPtr);
+                        if (iNativeGetColumnCount == 0) {
                             sQLiteStatementInfo.columnNames = EMPTY_STRING_ARRAY;
                         } else {
-                            sQLiteStatementInfo.columnNames = new String[nativeGetColumnCount];
-                            for (int i = 0; i < nativeGetColumnCount; i++) {
-                                sQLiteStatementInfo.columnNames[i] = nativeGetColumnName(this.mConnectionPtr, acquirePreparedStatement.mStatementPtr, i);
+                            sQLiteStatementInfo.columnNames = new String[iNativeGetColumnCount];
+                            for (int i = 0; i < iNativeGetColumnCount; i++) {
+                                sQLiteStatementInfo.columnNames[i] = nativeGetColumnName(this.mConnectionPtr, preparedStatementAcquirePreparedStatement.mStatementPtr, i);
                             }
                         }
                     } finally {
-                        releasePreparedStatement(acquirePreparedStatement);
+                        releasePreparedStatement(preparedStatementAcquirePreparedStatement);
                     }
                 }
             } catch (RuntimeException e) {
-                this.mRecentOperations.failOperation(beginOperation, e);
+                this.mRecentOperations.failOperation(iBeginOperation, e);
                 try {
                     if (e.getMessage() != null && (e.getMessage().contains("no such table") || e.getMessage().contains("no such column"))) {
-                        long executeForLong = executeForLong("PRAGMA user_version", null, null);
-                        if (executeForLong != -1) {
-                            Log.e(TAG, "DB version: " + executeForLong);
+                        long jExecuteForLong = executeForLong("PRAGMA user_version", null, null);
+                        if (jExecuteForLong != -1) {
+                            Log.e(TAG, "DB version: " + jExecuteForLong);
                         }
                     }
                 } catch (Exception unused) {
@@ -795,8 +796,8 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
                 throw e;
             }
         } finally {
-            if (this.mRecentOperations.endOperationDeferLog(beginOperation)) {
-                this.mRecentOperations.logOperation(beginOperation, "window='" + this.mConfiguration.path + "'");
+            if (this.mRecentOperations.endOperationDeferLog(iBeginOperation)) {
+                this.mRecentOperations.logOperation(iBeginOperation, "window='" + this.mConfiguration.path + "'");
             }
         }
     }
@@ -805,32 +806,32 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
         if (str == null) {
             throw new IllegalArgumentException("sql must not be null.");
         }
-        int beginOperation = this.mRecentOperations.beginOperation("execute", str, objArr);
+        int iBeginOperation = this.mRecentOperations.beginOperation("execute", str, objArr);
         try {
             try {
                 boolean z = DatabaseUtils.getSqlStatementType(str) == 7;
-                PreparedStatement acquirePreparedStatement = acquirePreparedStatement(str);
+                PreparedStatement preparedStatementAcquirePreparedStatement = acquirePreparedStatement(str);
                 try {
-                    throwIfStatementForbidden(acquirePreparedStatement);
-                    bindArguments(acquirePreparedStatement, objArr);
-                    applyBlockGuardPolicy(acquirePreparedStatement);
+                    throwIfStatementForbidden(preparedStatementAcquirePreparedStatement);
+                    bindArguments(preparedStatementAcquirePreparedStatement, objArr);
+                    applyBlockGuardPolicy(preparedStatementAcquirePreparedStatement);
                     attachCancellationSignal(cancellationSignal);
                     try {
-                        nativeExecute(this.mConnectionPtr, acquirePreparedStatement.mStatementPtr, z);
+                        nativeExecute(this.mConnectionPtr, preparedStatementAcquirePreparedStatement.mStatementPtr, z);
                     } finally {
                         detachCancellationSignal(cancellationSignal);
                     }
                 } finally {
-                    releasePreparedStatement(acquirePreparedStatement);
+                    releasePreparedStatement(preparedStatementAcquirePreparedStatement);
                 }
-            } catch (RuntimeException e) {
-                this.mRecentOperations.failOperation(beginOperation, e);
-                throw e;
+            } finally {
+                if (this.mRecentOperations.endOperationDeferLog(iBeginOperation)) {
+                    this.mRecentOperations.logOperation(iBeginOperation, "window='" + this.mConfiguration.path + "'");
+                }
             }
-        } finally {
-            if (this.mRecentOperations.endOperationDeferLog(beginOperation)) {
-                this.mRecentOperations.logOperation(beginOperation, "window='" + this.mConfiguration.path + "'");
-            }
+        } catch (RuntimeException e) {
+            this.mRecentOperations.failOperation(iBeginOperation, e);
+            throw e;
         }
     }
 
@@ -838,32 +839,32 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
         if (str == null) {
             throw new IllegalArgumentException("sql must not be null.");
         }
-        int beginOperation = this.mRecentOperations.beginOperation("executeForLong", str, objArr);
+        int iBeginOperation = this.mRecentOperations.beginOperation("executeForLong", str, objArr);
         try {
             try {
-                PreparedStatement acquirePreparedStatement = acquirePreparedStatement(str);
+                PreparedStatement preparedStatementAcquirePreparedStatement = acquirePreparedStatement(str);
                 try {
-                    throwIfStatementForbidden(acquirePreparedStatement);
-                    bindArguments(acquirePreparedStatement, objArr);
-                    applyBlockGuardPolicy(acquirePreparedStatement);
+                    throwIfStatementForbidden(preparedStatementAcquirePreparedStatement);
+                    bindArguments(preparedStatementAcquirePreparedStatement, objArr);
+                    applyBlockGuardPolicy(preparedStatementAcquirePreparedStatement);
                     attachCancellationSignal(cancellationSignal);
                     try {
-                        long nativeExecuteForLong = nativeExecuteForLong(this.mConnectionPtr, acquirePreparedStatement.mStatementPtr);
-                        this.mRecentOperations.setResult(nativeExecuteForLong);
-                        return nativeExecuteForLong;
+                        long jNativeExecuteForLong = nativeExecuteForLong(this.mConnectionPtr, preparedStatementAcquirePreparedStatement.mStatementPtr);
+                        this.mRecentOperations.setResult(jNativeExecuteForLong);
+                        return jNativeExecuteForLong;
                     } finally {
                         detachCancellationSignal(cancellationSignal);
                     }
                 } finally {
-                    releasePreparedStatement(acquirePreparedStatement);
+                    releasePreparedStatement(preparedStatementAcquirePreparedStatement);
                 }
             } catch (RuntimeException e) {
-                this.mRecentOperations.failOperation(beginOperation, e);
+                this.mRecentOperations.failOperation(iBeginOperation, e);
                 throw e;
             }
         } finally {
-            if (this.mRecentOperations.endOperationDeferLog(beginOperation)) {
-                this.mRecentOperations.logOperation(beginOperation, "window='" + this.mConfiguration.path + "'");
+            if (this.mRecentOperations.endOperationDeferLog(iBeginOperation)) {
+                this.mRecentOperations.logOperation(iBeginOperation, "window='" + this.mConfiguration.path + "'");
             }
         }
     }
@@ -872,32 +873,32 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
         if (str == null) {
             throw new IllegalArgumentException("sql must not be null.");
         }
-        int beginOperation = this.mRecentOperations.beginOperation("executeForString", str, objArr);
+        int iBeginOperation = this.mRecentOperations.beginOperation("executeForString", str, objArr);
         try {
             try {
-                PreparedStatement acquirePreparedStatement = acquirePreparedStatement(str);
+                PreparedStatement preparedStatementAcquirePreparedStatement = acquirePreparedStatement(str);
                 try {
-                    throwIfStatementForbidden(acquirePreparedStatement);
-                    bindArguments(acquirePreparedStatement, objArr);
-                    applyBlockGuardPolicy(acquirePreparedStatement);
+                    throwIfStatementForbidden(preparedStatementAcquirePreparedStatement);
+                    bindArguments(preparedStatementAcquirePreparedStatement, objArr);
+                    applyBlockGuardPolicy(preparedStatementAcquirePreparedStatement);
                     attachCancellationSignal(cancellationSignal);
                     try {
-                        String nativeExecuteForString = nativeExecuteForString(this.mConnectionPtr, acquirePreparedStatement.mStatementPtr);
-                        this.mRecentOperations.setResult(nativeExecuteForString);
-                        return nativeExecuteForString;
+                        String strNativeExecuteForString = nativeExecuteForString(this.mConnectionPtr, preparedStatementAcquirePreparedStatement.mStatementPtr);
+                        this.mRecentOperations.setResult(strNativeExecuteForString);
+                        return strNativeExecuteForString;
                     } finally {
                         detachCancellationSignal(cancellationSignal);
                     }
                 } finally {
-                    releasePreparedStatement(acquirePreparedStatement);
+                    releasePreparedStatement(preparedStatementAcquirePreparedStatement);
                 }
             } catch (RuntimeException e) {
-                this.mRecentOperations.failOperation(beginOperation, e);
+                this.mRecentOperations.failOperation(iBeginOperation, e);
                 throw e;
             }
         } finally {
-            if (this.mRecentOperations.endOperationDeferLog(beginOperation)) {
-                this.mRecentOperations.logOperation(beginOperation, "window='" + this.mConfiguration.path + "'");
+            if (this.mRecentOperations.endOperationDeferLog(iBeginOperation)) {
+                this.mRecentOperations.logOperation(iBeginOperation, "window='" + this.mConfiguration.path + "'");
             }
         }
     }
@@ -906,31 +907,31 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
         if (str == null) {
             throw new IllegalArgumentException("sql must not be null.");
         }
-        int beginOperation = this.mRecentOperations.beginOperation("executeForBlobFileDescriptor", str, objArr);
+        int iBeginOperation = this.mRecentOperations.beginOperation("executeForBlobFileDescriptor", str, objArr);
         try {
             try {
-                PreparedStatement acquirePreparedStatement = acquirePreparedStatement(str);
+                PreparedStatement preparedStatementAcquirePreparedStatement = acquirePreparedStatement(str);
                 try {
-                    throwIfStatementForbidden(acquirePreparedStatement);
-                    bindArguments(acquirePreparedStatement, objArr);
-                    applyBlockGuardPolicy(acquirePreparedStatement);
+                    throwIfStatementForbidden(preparedStatementAcquirePreparedStatement);
+                    bindArguments(preparedStatementAcquirePreparedStatement, objArr);
+                    applyBlockGuardPolicy(preparedStatementAcquirePreparedStatement);
                     attachCancellationSignal(cancellationSignal);
                     try {
-                        int nativeExecuteForBlobFileDescriptor = nativeExecuteForBlobFileDescriptor(this.mConnectionPtr, acquirePreparedStatement.mStatementPtr);
-                        return nativeExecuteForBlobFileDescriptor >= 0 ? ParcelFileDescriptor.adoptFd(nativeExecuteForBlobFileDescriptor) : null;
+                        int iNativeExecuteForBlobFileDescriptor = nativeExecuteForBlobFileDescriptor(this.mConnectionPtr, preparedStatementAcquirePreparedStatement.mStatementPtr);
+                        return iNativeExecuteForBlobFileDescriptor >= 0 ? ParcelFileDescriptor.adoptFd(iNativeExecuteForBlobFileDescriptor) : null;
                     } finally {
                         detachCancellationSignal(cancellationSignal);
                     }
                 } finally {
-                    releasePreparedStatement(acquirePreparedStatement);
+                    releasePreparedStatement(preparedStatementAcquirePreparedStatement);
                 }
             } catch (RuntimeException e) {
-                this.mRecentOperations.failOperation(beginOperation, e);
+                this.mRecentOperations.failOperation(iBeginOperation, e);
                 throw e;
             }
         } finally {
-            if (this.mRecentOperations.endOperationDeferLog(beginOperation)) {
-                this.mRecentOperations.logOperation(beginOperation, "window='" + this.mConfiguration.path + "'");
+            if (this.mRecentOperations.endOperationDeferLog(iBeginOperation)) {
+                this.mRecentOperations.logOperation(iBeginOperation, "window='" + this.mConfiguration.path + "'");
             }
         }
     }
@@ -939,34 +940,34 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
         if (str == null) {
             throw new IllegalArgumentException("sql must not be null.");
         }
-        int beginOperation = this.mRecentOperations.beginOperation("executeForChangedRowCount", str, objArr);
+        int iBeginOperation = this.mRecentOperations.beginOperation("executeForChangedRowCount", str, objArr);
         try {
             try {
-                PreparedStatement acquirePreparedStatement = acquirePreparedStatement(str);
+                PreparedStatement preparedStatementAcquirePreparedStatement = acquirePreparedStatement(str);
                 try {
-                    throwIfStatementForbidden(acquirePreparedStatement);
-                    bindArguments(acquirePreparedStatement, objArr);
-                    applyBlockGuardPolicy(acquirePreparedStatement);
+                    throwIfStatementForbidden(preparedStatementAcquirePreparedStatement);
+                    bindArguments(preparedStatementAcquirePreparedStatement, objArr);
+                    applyBlockGuardPolicy(preparedStatementAcquirePreparedStatement);
                     attachCancellationSignal(cancellationSignal);
                     try {
-                        int nativeExecuteForChangedRowCount = nativeExecuteForChangedRowCount(this.mConnectionPtr, acquirePreparedStatement.mStatementPtr);
-                        if (this.mRecentOperations.endOperationDeferLog(beginOperation)) {
-                            this.mRecentOperations.logOperation(beginOperation, "window='" + this.mConfiguration.path + "', changedRows=" + nativeExecuteForChangedRowCount);
+                        int iNativeExecuteForChangedRowCount = nativeExecuteForChangedRowCount(this.mConnectionPtr, preparedStatementAcquirePreparedStatement.mStatementPtr);
+                        if (this.mRecentOperations.endOperationDeferLog(iBeginOperation)) {
+                            this.mRecentOperations.logOperation(iBeginOperation, "window='" + this.mConfiguration.path + "', changedRows=" + iNativeExecuteForChangedRowCount);
                         }
-                        return nativeExecuteForChangedRowCount;
+                        return iNativeExecuteForChangedRowCount;
                     } finally {
                         detachCancellationSignal(cancellationSignal);
                     }
                 } finally {
-                    releasePreparedStatement(acquirePreparedStatement);
+                    releasePreparedStatement(preparedStatementAcquirePreparedStatement);
                 }
             } catch (RuntimeException e) {
-                this.mRecentOperations.failOperation(beginOperation, e);
+                this.mRecentOperations.failOperation(iBeginOperation, e);
                 throw e;
             }
         } catch (Throwable th) {
-            if (this.mRecentOperations.endOperationDeferLog(beginOperation)) {
-                this.mRecentOperations.logOperation(beginOperation, "window='" + this.mConfiguration.path + "', changedRows=0");
+            if (this.mRecentOperations.endOperationDeferLog(iBeginOperation)) {
+                this.mRecentOperations.logOperation(iBeginOperation, "window='" + this.mConfiguration.path + "', changedRows=0");
             }
             throw th;
         }
@@ -976,30 +977,30 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
         if (str == null) {
             throw new IllegalArgumentException("sql must not be null.");
         }
-        int beginOperation = this.mRecentOperations.beginOperation("executeForLastInsertedRowId", str, objArr);
+        int iBeginOperation = this.mRecentOperations.beginOperation("executeForLastInsertedRowId", str, objArr);
         try {
             try {
-                PreparedStatement acquirePreparedStatement = acquirePreparedStatement(str);
+                PreparedStatement preparedStatementAcquirePreparedStatement = acquirePreparedStatement(str);
                 try {
-                    throwIfStatementForbidden(acquirePreparedStatement);
-                    bindArguments(acquirePreparedStatement, objArr);
-                    applyBlockGuardPolicy(acquirePreparedStatement);
+                    throwIfStatementForbidden(preparedStatementAcquirePreparedStatement);
+                    bindArguments(preparedStatementAcquirePreparedStatement, objArr);
+                    applyBlockGuardPolicy(preparedStatementAcquirePreparedStatement);
                     attachCancellationSignal(cancellationSignal);
                     try {
-                        return nativeExecuteForLastInsertedRowId(this.mConnectionPtr, acquirePreparedStatement.mStatementPtr);
+                        return nativeExecuteForLastInsertedRowId(this.mConnectionPtr, preparedStatementAcquirePreparedStatement.mStatementPtr);
                     } finally {
                         detachCancellationSignal(cancellationSignal);
                     }
                 } finally {
-                    releasePreparedStatement(acquirePreparedStatement);
+                    releasePreparedStatement(preparedStatementAcquirePreparedStatement);
                 }
             } catch (RuntimeException e) {
-                this.mRecentOperations.failOperation(beginOperation, e);
+                this.mRecentOperations.failOperation(iBeginOperation, e);
                 throw e;
             }
         } finally {
-            if (this.mRecentOperations.endOperationDeferLog(beginOperation)) {
-                this.mRecentOperations.logOperation(beginOperation, "window='" + this.mConfiguration.path + "'");
+            if (this.mRecentOperations.endOperationDeferLog(iBeginOperation)) {
+                this.mRecentOperations.logOperation(iBeginOperation, "window='" + this.mConfiguration.path + "'");
             }
         }
     }
@@ -1028,10 +1029,9 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
         int i5;
         int i6;
         int i7;
+        PreparedStatement preparedStatementAcquirePreparedStatement;
         PreparedStatement preparedStatement;
         int i8;
-        int i9;
-        int numRows;
         Object[] objArr2 = objArr;
         String str4 = ", filledRows=";
         ?? r5 = "', startPos=";
@@ -1045,40 +1045,65 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
         cursorWindow.acquireReference();
         try {
             String str5 = "executeForCursorWindow";
-            int beginOperation = this.mRecentOperations.beginOperation("executeForCursorWindow", str, objArr2);
+            int iBeginOperation = this.mRecentOperations.beginOperation("executeForCursorWindow", str, objArr2);
             try {
                 try {
-                    PreparedStatement acquirePreparedStatement = acquirePreparedStatement(str);
+                    preparedStatementAcquirePreparedStatement = acquirePreparedStatement(str);
+                } catch (Throwable th) {
+                    th = th;
+                    i4 = -1;
+                    r2 = objArr2;
+                    i5 = r5;
+                    i6 = r6;
+                    r7 = iBeginOperation;
+                }
+                try {
+                    throwIfStatementForbidden(preparedStatementAcquirePreparedStatement);
+                    bindArguments(preparedStatementAcquirePreparedStatement, objArr2);
+                    applyBlockGuardPolicy(preparedStatementAcquirePreparedStatement);
+                    attachCancellationSignal(cancellationSignal);
                     try {
-                        throwIfStatementForbidden(acquirePreparedStatement);
-                        bindArguments(acquirePreparedStatement, objArr2);
-                        applyBlockGuardPolicy(acquirePreparedStatement);
-                        attachCancellationSignal(cancellationSignal);
                         try {
                             try {
-                                try {
-                                    i7 = beginOperation;
-                                    i3 = i;
-                                    str4 = "window='";
-                                    preparedStatement = acquirePreparedStatement;
+                                i7 = iBeginOperation;
+                                i3 = i;
+                                str4 = "window='";
+                                preparedStatement = preparedStatementAcquirePreparedStatement;
+                            } catch (Throwable th2) {
+                                th = th2;
+                                i8 = iBeginOperation;
+                                preparedStatement = preparedStatementAcquirePreparedStatement;
+                            }
+                        } catch (Throwable th3) {
+                            th = th3;
+                            preparedStatement = preparedStatementAcquirePreparedStatement;
+                            i8 = iBeginOperation;
+                        }
+                    } catch (Throwable th4) {
+                        th = th4;
+                        i8 = iBeginOperation;
+                        preparedStatement = preparedStatementAcquirePreparedStatement;
+                    }
+                    try {
+                        long jNativeExecuteForCursorWindow = nativeExecuteForCursorWindow(this.mConnectionPtr, preparedStatementAcquirePreparedStatement.mStatementPtr, cursorWindow.mWindowPtr, i3, i2, z);
+                        int i9 = (int) (jNativeExecuteForCursorWindow >> 32);
+                        i4 = (int) jNativeExecuteForCursorWindow;
+                        try {
+                            int numRows = cursorWindow.getNumRows();
+                            try {
+                                cursorWindow.setStartPosition(i9);
+                                cursorWindow.setFilledRows(numRows);
+                                if (z) {
                                     try {
-                                        long nativeExecuteForCursorWindow = nativeExecuteForCursorWindow(this.mConnectionPtr, acquirePreparedStatement.mStatementPtr, cursorWindow.mWindowPtr, i3, i2, z);
-                                        i9 = (int) (nativeExecuteForCursorWindow >> 32);
-                                        i4 = (int) nativeExecuteForCursorWindow;
-                                        try {
-                                            numRows = cursorWindow.getNumRows();
-                                        } catch (Throwable th) {
-                                            th = th;
-                                        }
-                                    } catch (Throwable th2) {
-                                        th = th2;
-                                        i8 = i7;
-                                        i7 = i8;
+                                        cursorWindow.setTotalRows(i4);
+                                    } catch (Throwable th5) {
+                                        th = th5;
+                                        i7 = i7;
                                         try {
                                             detachCancellationSignal(cancellationSignal);
                                             throw th;
-                                        } catch (Throwable th3) {
-                                            th = th3;
+                                        } catch (Throwable th6) {
+                                            th = th6;
                                             try {
                                                 releasePreparedStatement(preparedStatement);
                                                 throw th;
@@ -1088,28 +1113,6 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
                                                 throw e;
                                             }
                                         }
-                                    }
-                                } catch (Throwable th4) {
-                                    th = th4;
-                                    i8 = beginOperation;
-                                    preparedStatement = acquirePreparedStatement;
-                                }
-                            } catch (Throwable th5) {
-                                th = th5;
-                                preparedStatement = acquirePreparedStatement;
-                                i8 = beginOperation;
-                            }
-                            try {
-                                cursorWindow.setStartPosition(i9);
-                                cursorWindow.setFilledRows(numRows);
-                                if (z) {
-                                    try {
-                                        cursorWindow.setTotalRows(i4);
-                                    } catch (Throwable th6) {
-                                        th = th6;
-                                        i7 = i7;
-                                        detachCancellationSignal(cancellationSignal);
-                                        throw th;
                                     }
                                 }
                                 try {
@@ -1151,37 +1154,34 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
                             }
                         } catch (Throwable th10) {
                             th = th10;
-                            i8 = beginOperation;
-                            preparedStatement = acquirePreparedStatement;
                         }
                     } catch (Throwable th11) {
                         th = th11;
-                        i7 = beginOperation;
-                        preparedStatement = acquirePreparedStatement;
+                        i8 = i7;
+                        i7 = i8;
+                        detachCancellationSignal(cancellationSignal);
+                        throw th;
                     }
-                } catch (RuntimeException e3) {
-                    e = e3;
-                    i7 = beginOperation;
                 } catch (Throwable th12) {
                     th = th12;
-                    i3 = i;
-                    str2 = ", actualPos=";
-                    r2 = beginOperation;
-                    str3 = ", countedRows=";
-                    str5 = ", filledRows=";
-                    r7 = "', startPos=";
-                    str4 = "window='";
-                    i4 = -1;
-                    i5 = -1;
-                    i6 = -1;
+                    i7 = iBeginOperation;
+                    preparedStatement = preparedStatementAcquirePreparedStatement;
                 }
+            } catch (RuntimeException e3) {
+                e = e3;
+                i7 = iBeginOperation;
             } catch (Throwable th13) {
                 th = th13;
+                i3 = i;
+                str2 = ", actualPos=";
+                r2 = iBeginOperation;
+                str3 = ", countedRows=";
+                str5 = ", filledRows=";
+                r7 = "', startPos=";
+                str4 = "window='";
                 i4 = -1;
-                r2 = objArr2;
-                i5 = r5;
-                i6 = r6;
-                r7 = beginOperation;
+                i5 = -1;
+                i6 = -1;
             }
         } finally {
             cursorWindow.releaseReference();
@@ -1201,21 +1201,125 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x0156  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x015d  */
-    /* JADX WARN: Removed duplicated region for block: B:36:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x0166  */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x016d  */
+    /* JADX WARN: Removed duplicated region for block: B:47:0x0156  */
+    /* JADX WARN: Removed duplicated region for block: B:50:0x015d  */
+    /* JADX WARN: Removed duplicated region for block: B:54:0x0166  */
+    /* JADX WARN: Removed duplicated region for block: B:57:0x016d  */
+    /* JADX WARN: Removed duplicated region for block: B:72:? A[RETURN, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void printQueryPlan(java.lang.String r21) {
-        /*
-            Method dump skipped, instructions count: 371
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.database.sqlite.SQLiteConnection.printQueryPlan(java.lang.String):void");
+    public void printQueryPlan(String str) throws Throwable {
+        long j;
+        long jNativePrepareStatement;
+        CursorWindow cursorWindow;
+        if (!this.mIsOpen) {
+            return;
+        }
+        long j2 = 0;
+        CursorWindow cursorWindow2 = null;
+        try {
+            cursorWindow = new CursorWindow("QueryPlan-" + Thread.currentThread().getId());
+        } catch (RuntimeException e) {
+            e = e;
+            j = 0;
+        } catch (Throwable th) {
+            th = th;
+            j = 0;
+        }
+        try {
+            jNativePrepareStatement = nativePrepareStatement(this.mConnectionPtr, "EXPLAIN QUERY PLAN " + str);
+            try {
+                long jNativeExecuteForCursorWindow = nativeExecuteForCursorWindow(this.mConnectionPtr, jNativePrepareStatement, cursorWindow.mWindowPtr, 0, 0, true);
+                if (jNativeExecuteForCursorWindow == 0) {
+                    cursorWindow.close();
+                    if (jNativePrepareStatement == 0) {
+                        return;
+                    }
+                } else {
+                    StringBuilder sb = new StringBuilder();
+                    sb.append("plan=\"");
+                    int i = 0;
+                    while (i < jNativeExecuteForCursorWindow) {
+                        int i2 = cursorWindow.getInt(i, 0);
+                        int i3 = cursorWindow.getInt(i, 1);
+                        int i4 = cursorWindow.getInt(i, 2);
+                        j = j2;
+                        try {
+                            sb.append(i2 + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER + i3 + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER + i4 + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER + cursorWindow.getString(i, 3) + " * ");
+                            i++;
+                            j2 = j;
+                        } catch (RuntimeException e2) {
+                            e = e2;
+                            cursorWindow2 = cursorWindow;
+                            try {
+                                Log.e(TAG, "Failed to explain query plan : " + str + " - " + e.getMessage());
+                                e.printStackTrace();
+                                if (cursorWindow2 != null) {
+                                    cursorWindow2.close();
+                                }
+                                if (jNativePrepareStatement == j) {
+                                    nativeFinalizeStatement(this.mConnectionPtr, jNativePrepareStatement);
+                                    return;
+                                }
+                                return;
+                            } catch (Throwable th2) {
+                                th = th2;
+                                if (cursorWindow2 != null) {
+                                    cursorWindow2.close();
+                                }
+                                if (jNativePrepareStatement != j) {
+                                    nativeFinalizeStatement(this.mConnectionPtr, jNativePrepareStatement);
+                                }
+                                throw th;
+                            }
+                        } catch (Throwable th3) {
+                            th = th3;
+                            cursorWindow2 = cursorWindow;
+                            if (cursorWindow2 != null) {
+                            }
+                            if (jNativePrepareStatement != j) {
+                            }
+                            throw th;
+                        }
+                    }
+                    j = j2;
+                    Log.d("SQLiteQueryPlan", sb.toString() + "\", sql=\"" + trimSqlForDisplay(str) + "\", window='" + this.mConfiguration.path + "', hash=" + Integer.toHexString((str + this.mConfiguration.path).hashCode()));
+                    cursorWindow.close();
+                    if (jNativePrepareStatement == j) {
+                        return;
+                    }
+                }
+                nativeFinalizeStatement(this.mConnectionPtr, jNativePrepareStatement);
+            } catch (RuntimeException e3) {
+                e = e3;
+                j = j2;
+            } catch (Throwable th4) {
+                th = th4;
+                j = j2;
+            }
+        } catch (RuntimeException e4) {
+            e = e4;
+            j = 0;
+            cursorWindow2 = cursorWindow;
+            jNativePrepareStatement = j;
+            Log.e(TAG, "Failed to explain query plan : " + str + " - " + e.getMessage());
+            e.printStackTrace();
+            if (cursorWindow2 != null) {
+            }
+            if (jNativePrepareStatement == j) {
+            }
+        } catch (Throwable th5) {
+            th = th5;
+            j = 0;
+            cursorWindow2 = cursorWindow;
+            jNativePrepareStatement = j;
+            if (cursorWindow2 != null) {
+            }
+            if (jNativePrepareStatement != j) {
+            }
+            throw th;
+        }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -1252,68 +1356,58 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
     }
 
     private PreparedStatement acquirePreparedStatementLI(String str) {
-        PreparedStatement preparedStatement;
+        PreparedStatement preparedStatementObtainPreparedStatement;
         boolean z;
-        long createStatement;
         SQLiteConnection sQLiteConnection;
+        int iNativeGetParameterCount;
+        int sqlStatementTypeExtended;
         this.mPool.mTotalPrepareStatements++;
         PreparedStatement statement = this.mPreparedStatementCache.getStatement(str);
         long lastSeqNum = this.mPreparedStatementCache.getLastSeqNum();
-        try {
-            try {
-                if (statement != null) {
-                    if (statement.mInUse) {
-                        preparedStatement = statement;
-                        z = true;
-                        this.mPool.mTotalPrepareStatementCacheMiss++;
-                        createStatement = this.mPreparedStatementCache.createStatement(str);
-                        long lastSeqNum2 = this.mPreparedStatementCache.getLastSeqNum();
-                        int nativeGetParameterCount = nativeGetParameterCount(this.mConnectionPtr, createStatement);
-                        int sqlStatementTypeExtended = DatabaseUtils.getSqlStatementTypeExtended(str);
-                        sQLiteConnection = this;
-                        preparedStatement = sQLiteConnection.obtainPreparedStatement(str, createStatement, nativeGetParameterCount, sqlStatementTypeExtended, nativeIsReadOnly(this.mConnectionPtr, createStatement), lastSeqNum2);
-                        if (!z && isCacheable(sqlStatementTypeExtended)) {
-                            sQLiteConnection.mPreparedStatementCache.put(str, preparedStatement);
-                            preparedStatement.mInCache = true;
-                        }
-                        preparedStatement.mInUse = true;
-                        return preparedStatement;
-                    }
-                    if (statement.mSeqNum == lastSeqNum) {
-                        statement.mInUse = true;
-                        return statement;
-                    }
-                    this.mPreparedStatementCache.remove(str);
-                    statement = null;
-                }
-                preparedStatement = sQLiteConnection.obtainPreparedStatement(str, createStatement, nativeGetParameterCount, sqlStatementTypeExtended, nativeIsReadOnly(this.mConnectionPtr, createStatement), lastSeqNum2);
-                if (!z) {
-                    sQLiteConnection.mPreparedStatementCache.put(str, preparedStatement);
-                    preparedStatement.mInCache = true;
-                }
-                preparedStatement.mInUse = true;
-                return preparedStatement;
-            } catch (RuntimeException e) {
-                e = e;
-                RuntimeException runtimeException = e;
-                if (preparedStatement == null || !preparedStatement.mInCache) {
-                    nativeFinalizeStatement(sQLiteConnection.mConnectionPtr, createStatement);
-                    throw runtimeException;
-                }
-                throw runtimeException;
+        if (statement == null) {
+            preparedStatementObtainPreparedStatement = statement;
+            z = false;
+        } else if (statement.mInUse) {
+            preparedStatementObtainPreparedStatement = statement;
+            z = true;
+        } else {
+            if (statement.mSeqNum == lastSeqNum) {
+                statement.mInUse = true;
+                return statement;
             }
-            int nativeGetParameterCount2 = nativeGetParameterCount(this.mConnectionPtr, createStatement);
-            int sqlStatementTypeExtended2 = DatabaseUtils.getSqlStatementTypeExtended(str);
+            this.mPreparedStatementCache.remove(str);
+            statement = null;
+            preparedStatementObtainPreparedStatement = statement;
+            z = false;
+        }
+        this.mPool.mTotalPrepareStatementCacheMiss++;
+        long jCreateStatement = this.mPreparedStatementCache.createStatement(str);
+        long lastSeqNum2 = this.mPreparedStatementCache.getLastSeqNum();
+        try {
+            iNativeGetParameterCount = nativeGetParameterCount(this.mConnectionPtr, jCreateStatement);
+            sqlStatementTypeExtended = DatabaseUtils.getSqlStatementTypeExtended(str);
             sQLiteConnection = this;
-        } catch (RuntimeException e2) {
-            e = e2;
+        } catch (RuntimeException e) {
+            e = e;
             sQLiteConnection = this;
         }
-        preparedStatement = statement;
-        z = false;
-        this.mPool.mTotalPrepareStatementCacheMiss++;
-        createStatement = this.mPreparedStatementCache.createStatement(str);
-        long lastSeqNum22 = this.mPreparedStatementCache.getLastSeqNum();
+        try {
+            preparedStatementObtainPreparedStatement = sQLiteConnection.obtainPreparedStatement(str, jCreateStatement, iNativeGetParameterCount, sqlStatementTypeExtended, nativeIsReadOnly(this.mConnectionPtr, jCreateStatement), lastSeqNum2);
+            if (!z && isCacheable(sqlStatementTypeExtended)) {
+                sQLiteConnection.mPreparedStatementCache.put(str, preparedStatementObtainPreparedStatement);
+                preparedStatementObtainPreparedStatement.mInCache = true;
+            }
+            preparedStatementObtainPreparedStatement.mInUse = true;
+            return preparedStatementObtainPreparedStatement;
+        } catch (RuntimeException e2) {
+            e = e2;
+            RuntimeException runtimeException = e;
+            if (preparedStatementObtainPreparedStatement == null || !preparedStatementObtainPreparedStatement.mInCache) {
+                nativeFinalizeStatement(sQLiteConnection.mConnectionPtr, jCreateStatement);
+                throw runtimeException;
+            }
+            throw runtimeException;
+        }
     }
 
     PreparedStatement acquirePreparedStatement(String str) {
@@ -1345,18 +1439,18 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
     }
 
     PreparedStatement acquirePersistentStatement(String str) {
-        int beginOperation = this.mRecentOperations.beginOperation("prepare", str, null);
+        int iBeginOperation = this.mRecentOperations.beginOperation("prepare", str, null);
         try {
             try {
-                PreparedStatement acquirePreparedStatement = acquirePreparedStatement(str);
-                throwIfStatementForbidden(acquirePreparedStatement);
-                return acquirePreparedStatement;
+                PreparedStatement preparedStatementAcquirePreparedStatement = acquirePreparedStatement(str);
+                throwIfStatementForbidden(preparedStatementAcquirePreparedStatement);
+                return preparedStatementAcquirePreparedStatement;
             } catch (RuntimeException e) {
-                this.mRecentOperations.failOperation(beginOperation, e);
+                this.mRecentOperations.failOperation(iBeginOperation, e);
                 throw e;
             }
         } finally {
-            this.mRecentOperations.endOperation(beginOperation);
+            this.mRecentOperations.endOperation(iBeginOperation);
         }
     }
 
@@ -1486,107 +1580,72 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
         arrayList.add(getMainDbStatsUnsafe(0, getPageCountFromDb(this.mConfiguration.path, 4096L), 4096L));
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0040 A[Catch: all -> 0x00b1, SQLiteException -> 0x00b6, TRY_LEAVE, TryCatch #0 {all -> 0x00b1, blocks: (B:9:0x002c, B:10:0x003a, B:12:0x0040, B:14:0x0049, B:17:0x0061, B:20:0x0080, B:22:0x0090, B:23:0x0098), top: B:8:0x002c }] */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0090 A[Catch: all -> 0x00b1, SQLiteException -> 0x00b6, TryCatch #0 {all -> 0x00b1, blocks: (B:9:0x002c, B:10:0x003a, B:12:0x0040, B:14:0x0049, B:17:0x0061, B:20:0x0080, B:22:0x0090, B:23:0x0098), top: B:8:0x002c }] */
+    /* JADX WARN: Can't wrap try/catch for region: R(12:0|2|(2:36|3)|(2:40|4)|8|32|9|(12:12|34|13|38|14|15|18|19|(1:21)|22|23|10)|42|27|28|(1:(0))) */
+    /* JADX WARN: Removed duplicated region for block: B:12:0x0040 A[Catch: all -> 0x00b1, SQLiteException -> 0x00b6, TRY_LEAVE, TryCatch #0 {all -> 0x00b1, blocks: (B:9:0x002c, B:10:0x003a, B:12:0x0040, B:13:0x0049, B:14:0x0061, B:19:0x0080, B:21:0x0090, B:22:0x0098), top: B:32:0x002c }] */
+    /* JADX WARN: Removed duplicated region for block: B:21:0x0090 A[Catch: all -> 0x00b1, SQLiteException -> 0x00b6, TryCatch #0 {all -> 0x00b1, blocks: (B:9:0x002c, B:10:0x003a, B:12:0x0040, B:13:0x0049, B:14:0x0061, B:19:0x0080, B:21:0x0090, B:22:0x0098), top: B:32:0x002c }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    void collectDbStats(java.util.ArrayList<android.database.sqlite.SQLiteDebug.DbStats> r25) {
-        /*
-            r24 = this;
-            r0 = r24
-            r8 = r25
-            java.lang.String r9 = "PRAGMA "
-            long r1 = r0.mConnectionPtr
-            int r1 = nativeGetDbLookaside(r1)
-            r10 = 0
-            r11 = 0
-            java.lang.String r2 = "PRAGMA page_count;"
-            long r2 = r0.executeForLong(r2, r10, r10)     // Catch: android.database.sqlite.SQLiteException -> L1c
-            java.lang.String r4 = "PRAGMA page_size;"
-            long r4 = r0.executeForLong(r4, r10, r10)     // Catch: android.database.sqlite.SQLiteException -> L1d
-            goto L1e
-        L1c:
-            r2 = r11
-        L1d:
-            r4 = r11
-        L1e:
-            android.database.sqlite.SQLiteDebug$DbStats r1 = r0.getMainDbStatsUnsafe(r1, r2, r4)
-            r8.add(r1)
-            android.database.CursorWindow r3 = new android.database.CursorWindow
-            java.lang.String r0 = "collectDbStats"
-            r3.<init>(r0)
-            java.lang.String r1 = "PRAGMA database_list;"
-            r6 = 0
-            r7 = 0
-            r2 = 0
-            r4 = 0
-            r5 = 0
-            r0 = r24
-            r0.executeForCursorWindow(r1, r2, r3, r4, r5, r6, r7)     // Catch: java.lang.Throwable -> Lb1 android.database.sqlite.SQLiteException -> Lb6
-            r1 = 1
-            r2 = r1
-        L3a:
-            int r4 = r3.getNumRows()     // Catch: java.lang.Throwable -> Lb1 android.database.sqlite.SQLiteException -> Lb6
-            if (r2 >= r4) goto Lb6
-            java.lang.String r4 = r3.getString(r2, r1)     // Catch: java.lang.Throwable -> Lb1 android.database.sqlite.SQLiteException -> Lb6
-            r5 = 2
-            java.lang.String r5 = r3.getString(r2, r5)     // Catch: java.lang.Throwable -> Lb1 android.database.sqlite.SQLiteException -> Lb6
-            java.lang.StringBuilder r6 = new java.lang.StringBuilder     // Catch: android.database.sqlite.SQLiteException -> L7c java.lang.Throwable -> Lb1
-            r6.<init>()     // Catch: android.database.sqlite.SQLiteException -> L7c java.lang.Throwable -> Lb1
-            r6.append(r9)     // Catch: android.database.sqlite.SQLiteException -> L7c java.lang.Throwable -> Lb1
-            r6.append(r4)     // Catch: android.database.sqlite.SQLiteException -> L7c java.lang.Throwable -> Lb1
-            java.lang.String r7 = ".page_count;"
-            r6.append(r7)     // Catch: android.database.sqlite.SQLiteException -> L7c java.lang.Throwable -> Lb1
-            java.lang.String r6 = r6.toString()     // Catch: android.database.sqlite.SQLiteException -> L7c java.lang.Throwable -> Lb1
-            long r6 = r0.executeForLong(r6, r10, r10)     // Catch: android.database.sqlite.SQLiteException -> L7c java.lang.Throwable -> Lb1
-            java.lang.StringBuilder r13 = new java.lang.StringBuilder     // Catch: android.database.sqlite.SQLiteException -> L7d java.lang.Throwable -> Lb1
-            r13.<init>()     // Catch: android.database.sqlite.SQLiteException -> L7d java.lang.Throwable -> Lb1
-            r13.append(r9)     // Catch: android.database.sqlite.SQLiteException -> L7d java.lang.Throwable -> Lb1
-            r13.append(r4)     // Catch: android.database.sqlite.SQLiteException -> L7d java.lang.Throwable -> Lb1
-            java.lang.String r14 = ".page_size;"
-            r13.append(r14)     // Catch: android.database.sqlite.SQLiteException -> L7d java.lang.Throwable -> Lb1
-            java.lang.String r13 = r13.toString()     // Catch: android.database.sqlite.SQLiteException -> L7d java.lang.Throwable -> Lb1
-            long r13 = r0.executeForLong(r13, r10, r10)     // Catch: android.database.sqlite.SQLiteException -> L7d java.lang.Throwable -> Lb1
-            r17 = r13
-            goto L7f
-        L7c:
-            r6 = r11
-        L7d:
-            r17 = r11
-        L7f:
-            r15 = r6
-            java.lang.StringBuilder r6 = new java.lang.StringBuilder     // Catch: java.lang.Throwable -> Lb1 android.database.sqlite.SQLiteException -> Lb6
-            java.lang.String r7 = "  (attached) "
-            r6.<init>(r7)     // Catch: java.lang.Throwable -> Lb1 android.database.sqlite.SQLiteException -> Lb6
-            r6.append(r4)     // Catch: java.lang.Throwable -> Lb1 android.database.sqlite.SQLiteException -> Lb6
-            boolean r4 = r5.isEmpty()     // Catch: java.lang.Throwable -> Lb1 android.database.sqlite.SQLiteException -> Lb6
-            if (r4 != 0) goto L98
-            java.lang.String r4 = ": "
-            r6.append(r4)     // Catch: java.lang.Throwable -> Lb1 android.database.sqlite.SQLiteException -> Lb6
-            r6.append(r5)     // Catch: java.lang.Throwable -> Lb1 android.database.sqlite.SQLiteException -> Lb6
-        L98:
-            android.database.sqlite.SQLiteDebug$DbStats r13 = new android.database.sqlite.SQLiteDebug$DbStats     // Catch: java.lang.Throwable -> Lb1 android.database.sqlite.SQLiteException -> Lb6
-            java.lang.String r14 = r6.toString()     // Catch: java.lang.Throwable -> Lb1 android.database.sqlite.SQLiteException -> Lb6
-            r22 = 0
-            r23 = 0
-            r19 = 0
-            r20 = 0
-            r21 = 0
-            r13.<init>(r14, r15, r17, r19, r20, r21, r22, r23)     // Catch: java.lang.Throwable -> Lb1 android.database.sqlite.SQLiteException -> Lb6
-            r8.add(r13)     // Catch: java.lang.Throwable -> Lb1 android.database.sqlite.SQLiteException -> Lb6
-            int r2 = r2 + 1
-            goto L3a
-        Lb1:
-            r0 = move-exception
-            r3.close()
-            throw r0
-        Lb6:
-            r3.close()
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.database.sqlite.SQLiteConnection.collectDbStats(java.util.ArrayList):void");
+    void collectDbStats(ArrayList<SQLiteDebug.DbStats> arrayList) {
+        long jExecuteForLong;
+        long jExecuteForLong2;
+        CursorWindow cursorWindow;
+        int i;
+        long jExecuteForLong3;
+        long jExecuteForLong4;
+        int iNativeGetDbLookaside = nativeGetDbLookaside(this.mConnectionPtr);
+        try {
+            jExecuteForLong = executeForLong("PRAGMA page_count;", null, null);
+        } catch (SQLiteException unused) {
+            jExecuteForLong = 0;
+        }
+        try {
+            try {
+                jExecuteForLong2 = executeForLong("PRAGMA page_size;", null, null);
+            } catch (SQLiteException unused2) {
+                jExecuteForLong2 = 0;
+                arrayList.add(getMainDbStatsUnsafe(iNativeGetDbLookaside, jExecuteForLong, jExecuteForLong2));
+                cursorWindow = new CursorWindow("collectDbStats");
+                executeForCursorWindow("PRAGMA database_list;", null, cursorWindow, 0, 0, false, null);
+                while (i < cursorWindow.getNumRows()) {
+                }
+                return;
+            }
+            executeForCursorWindow("PRAGMA database_list;", null, cursorWindow, 0, 0, false, null);
+            for (i = 1; i < cursorWindow.getNumRows(); i++) {
+                String string = cursorWindow.getString(i, 1);
+                String string2 = cursorWindow.getString(i, 2);
+                try {
+                    jExecuteForLong3 = executeForLong("PRAGMA " + string + ".page_count;", null, null);
+                } catch (SQLiteException unused3) {
+                    jExecuteForLong3 = 0;
+                }
+                try {
+                    jExecuteForLong4 = executeForLong("PRAGMA " + string + ".page_size;", null, null);
+                } catch (SQLiteException unused4) {
+                    jExecuteForLong4 = 0;
+                    long j = jExecuteForLong3;
+                    StringBuilder sb = new StringBuilder("  (attached) ");
+                    sb.append(string);
+                    if (!string2.isEmpty()) {
+                    }
+                    arrayList.add(new SQLiteDebug.DbStats(sb.toString(), j, jExecuteForLong4, 0, 0, 0, 0, false));
+                }
+                long j2 = jExecuteForLong3;
+                StringBuilder sb2 = new StringBuilder("  (attached) ");
+                sb2.append(string);
+                if (!string2.isEmpty()) {
+                    sb2.append(": ");
+                    sb2.append(string2);
+                }
+                arrayList.add(new SQLiteDebug.DbStats(sb2.toString(), j2, jExecuteForLong4, 0, 0, 0, 0, false));
+            }
+            return;
+        } finally {
+            cursorWindow.close();
+        }
+        arrayList.add(getMainDbStatsUnsafe(iNativeGetDbLookaside, jExecuteForLong, jExecuteForLong2));
+        cursorWindow = new CursorWindow("collectDbStats");
     }
 
     void collectDbStatsUnsafe(ArrayList<SQLiteDebug.DbStats> arrayList) {
@@ -1695,10 +1754,10 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
 
         public void dump(Printer printer) {
             printer.println("  Prepared statement cache:");
-            Map<String, PreparedStatement> snapshot = snapshot();
-            if (!snapshot.isEmpty()) {
+            Map<String, PreparedStatement> mapSnapshot = snapshot();
+            if (!mapSnapshot.isEmpty()) {
                 int i = 0;
-                for (Map.Entry<String, PreparedStatement> entry : snapshot.entrySet()) {
+                for (Map.Entry<String, PreparedStatement> entry : mapSnapshot.entrySet()) {
                     PreparedStatement value = entry.getValue();
                     if (value.mInCache) {
                         printer.println("    " + i + ": statementPtr=0x" + Long.toHexString(value.mStatementPtr) + ", numParameters=" + value.mNumParameters + ", type=" + value.mType + ", readOnly=" + value.mReadOnly + ", sql=\"" + SQLiteConnection.trimSqlForDisplay(entry.getKey()) + "\"");
@@ -1724,14 +1783,14 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
         }
 
         boolean tryAcquire() {
-            long uptimeMillis = (SystemClock.uptimeMillis() - this.mCreationUptimeMs) / this.mMsPerCredit;
+            long jUptimeMillis = (SystemClock.uptimeMillis() - this.mCreationUptimeMs) / this.mMsPerCredit;
             long j = this.mSpent;
-            long j2 = uptimeMillis - j;
+            long j2 = jUptimeMillis - j;
             int i = this.mMaxCredits;
             if (j2 > i) {
                 long j3 = j + (j2 - i);
                 this.mSpent = j3;
-                j2 = uptimeMillis - j3;
+                j2 = jUptimeMillis - j3;
             }
             if (j2 <= 0) {
                 return false;
@@ -1759,9 +1818,7 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
         private final RingBuffer<Operation> mLongOperations = new RingBuffer<>(new Supplier() { // from class: android.database.sqlite.SQLiteConnection$OperationLog$$ExternalSyntheticLambda0
             @Override // java.util.function.Supplier
             public final Object get() {
-                SQLiteConnection.Operation lambda$new$0;
-                lambda$new$0 = SQLiteConnection.OperationLog.this.lambda$new$0();
-                return lambda$new$0;
+                return this.f$0.lambda$new$0();
             }
         }, new IntFunction() { // from class: android.database.sqlite.SQLiteConnection$OperationLog$$ExternalSyntheticLambda1
             @Override // java.util.function.IntFunction
@@ -1792,40 +1849,40 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
             this.mResultLong = Long.MIN_VALUE;
             this.mResultString = null;
             synchronized (this.mOperations) {
-                Operation newOperationLocked = newOperationLocked();
-                newOperationLocked.mExecutionTime = 0L;
-                newOperationLocked.mKind = str;
-                newOperationLocked.mSql = str2;
-                newOperationLocked.mCallingPid = Binder.getCallingPid();
-                newOperationLocked.mConnectionId = this.mConnection.mConnectionId;
+                Operation operationNewOperationLocked = newOperationLocked();
+                operationNewOperationLocked.mExecutionTime = 0L;
+                operationNewOperationLocked.mKind = str;
+                operationNewOperationLocked.mSql = str2;
+                operationNewOperationLocked.mCallingPid = Binder.getCallingPid();
+                operationNewOperationLocked.mConnectionId = this.mConnection.mConnectionId;
                 if (objArr != null) {
-                    if (newOperationLocked.mBindArgs == null) {
-                        newOperationLocked.mBindArgs = new ArrayList<>();
+                    if (operationNewOperationLocked.mBindArgs == null) {
+                        operationNewOperationLocked.mBindArgs = new ArrayList<>();
                     }
                     for (Object obj : objArr) {
                         if (!SQLiteDebug.NoPreloadHolder.DEBUG_ENABLE && obj != null && (obj instanceof byte[])) {
-                            newOperationLocked.mBindArgs.add(SQLiteConnection.EMPTY_BYTE_ARRAY);
+                            operationNewOperationLocked.mBindArgs.add(SQLiteConnection.EMPTY_BYTE_ARRAY);
                         } else {
-                            newOperationLocked.mBindArgs.add(obj);
+                            operationNewOperationLocked.mBindArgs.add(obj);
                         }
                     }
                 }
-                newOperationLocked.mTraced = Trace.isTagEnabled(1048576L);
-                if (newOperationLocked.mTraced) {
-                    Trace.asyncTraceBegin(1048576L, newOperationLocked.getTraceMethodName(), newOperationLocked.mCookie);
+                operationNewOperationLocked.mTraced = Trace.isTagEnabled(1048576L);
+                if (operationNewOperationLocked.mTraced) {
+                    Trace.asyncTraceBegin(1048576L, operationNewOperationLocked.getTraceMethodName(), operationNewOperationLocked.mCookie);
                 }
-                i = newOperationLocked.mCookie;
+                i = operationNewOperationLocked.mCookie;
             }
             return i;
         }
 
         public void beginTransaction(String str) {
             synchronized (this.mOperations) {
-                Operation newOperationLocked = newOperationLocked();
-                newOperationLocked.mKind = str;
-                this.mTransaction.copyFrom(newOperationLocked);
-                if (newOperationLocked.mTraced) {
-                    Trace.asyncTraceBegin(1048576L, newOperationLocked.getTraceMethodName(), newOperationLocked.mCookie);
+                Operation operationNewOperationLocked = newOperationLocked();
+                operationNewOperationLocked.mKind = str;
+                this.mTransaction.copyFrom(operationNewOperationLocked);
+                if (operationNewOperationLocked.mTraced) {
+                    Trace.asyncTraceBegin(1048576L, operationNewOperationLocked.getTraceMethodName(), operationNewOperationLocked.mCookie);
                 }
             }
         }
@@ -1865,32 +1922,32 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
         }
 
         public boolean endOperationDeferLog(int i) {
-            boolean endOperationDeferLogLocked;
+            boolean zEndOperationDeferLogLocked;
             synchronized (this.mOperations) {
-                endOperationDeferLogLocked = endOperationDeferLogLocked(i, -1, -1, -1);
+                zEndOperationDeferLogLocked = endOperationDeferLogLocked(i, -1, -1, -1);
             }
-            return endOperationDeferLogLocked;
+            return zEndOperationDeferLogLocked;
         }
 
         public boolean endOperationDeferLog(int i, int i2, int i3, int i4) {
-            boolean endOperationDeferLogLocked;
+            boolean zEndOperationDeferLogLocked;
             synchronized (this.mOperations) {
-                endOperationDeferLogLocked = endOperationDeferLogLocked(i, i2, i3, i4);
+                zEndOperationDeferLogLocked = endOperationDeferLogLocked(i, i2, i3, i4);
             }
-            return endOperationDeferLogLocked;
+            return zEndOperationDeferLogLocked;
         }
 
         public boolean endTransaction(boolean z) {
             boolean z2;
             synchronized (this.mOperations) {
                 this.mTransaction.mResultLong = z ? 1L : 0L;
-                long finishOperationLocked = finishOperationLocked(this.mTransaction);
+                long jFinishOperationLocked = finishOperationLocked(this.mTransaction);
                 Operation operationLocked = getOperationLocked(this.mTransaction.mCookie);
                 if (operationLocked != null) {
                     operationLocked.copyFrom(this.mTransaction);
                 }
                 this.mTransaction.setEmpty();
-                z2 = SQLiteDebug.NoPreloadHolder.DEBUG_LOG_SLOW_QUERIES && SQLiteDebug.shouldLogSlowQuery(finishOperationLocked);
+                z2 = SQLiteDebug.NoPreloadHolder.DEBUG_LOG_SLOW_QUERIES && SQLiteDebug.shouldLogSlowQuery(jFinishOperationLocked);
             }
             return z2;
         }
@@ -1931,7 +1988,7 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
             return false;
         }
 
-        private void logOperationLocked(int i, String str) {
+        private void logOperationLocked(int i, String str) throws Throwable {
             Operation operationLocked = getOperationLocked(i);
             operationLocked.mResultLong = this.mResultLong;
             operationLocked.mResultString = this.mResultString;
@@ -2205,11 +2262,11 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
 
         public String describe(int i) {
             StringBuilder sb = new StringBuilder();
-            String timeString = timeString(this.mStartWallTime);
+            String strTimeString = timeString(this.mStartWallTime);
             sb.append("    ");
             sb.append(i);
             sb.append(": [");
-            sb.append(timeString);
+            sb.append(strTimeString);
             sb.append("] ");
             sb.append("[Pid:(" + this.mCallingPid + ")]");
             describe(sb, false);
@@ -2268,10 +2325,10 @@ public final class SQLiteConnection implements CancellationSignal.OnCancelListen
 
         @Override // java.lang.Thread, java.lang.Runnable
         public void run() {
-            String analyzeSql = this.mConnection.analyzeSql(this.mSql);
-            if (analyzeSql != null) {
+            String strAnalyzeSql = this.mConnection.analyzeSql(this.mSql);
+            if (strAnalyzeSql != null) {
                 StringBuilder sb = new StringBuilder("newIndex=\"");
-                sb.append(analyzeSql);
+                sb.append(strAnalyzeSql);
                 sb.append("\", sql=\"");
                 sb.append(SQLiteConnection.trimSqlForDisplay(this.mSql));
                 sb.append("\", window='");

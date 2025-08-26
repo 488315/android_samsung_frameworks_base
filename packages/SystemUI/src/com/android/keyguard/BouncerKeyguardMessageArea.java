@@ -7,6 +7,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.util.Property;
@@ -14,7 +15,6 @@ import android.view.View;
 import com.android.app.animation.Interpolators;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class BouncerKeyguardMessageArea extends KeyguardMessageArea {
     public final long HIDE_DURATION_MILLIS;
@@ -31,22 +31,22 @@ public class BouncerKeyguardMessageArea extends KeyguardMessageArea {
     }
 
     @Override // com.android.systemui.widget.SystemUITextView, android.view.View
-    public final void onFinishInflate() {
+    public final void onFinishInflate() throws Resources.NotFoundException {
         super.onFinishInflate();
-        TypedArray obtainStyledAttributes = getContext().obtainStyledAttributes(this.mStyleResId, new int[]{R.attr.textColor});
-        obtainStyledAttributes.getColorStateList(0);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = getContext().obtainStyledAttributes(this.mStyleResId, new int[]{R.attr.textColor});
+        typedArrayObtainStyledAttributes.getColorStateList(0);
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     @Override // com.android.keyguard.KeyguardMessageArea
-    public final void onThemeChanged() {
-        TypedArray obtainStyledAttributes = getContext().obtainStyledAttributes(this.mStyleResId, new int[]{R.attr.textColor});
-        ColorStateList colorStateList = obtainStyledAttributes.getColorStateList(0);
-        obtainStyledAttributes.recycle();
+    public final void onThemeChanged() throws Resources.NotFoundException {
+        TypedArray typedArrayObtainStyledAttributes = getContext().obtainStyledAttributes(this.mStyleResId, new int[]{R.attr.textColor});
+        ColorStateList colorStateList = typedArrayObtainStyledAttributes.getColorStateList(0);
+        typedArrayObtainStyledAttributes.recycle();
         if (colorStateList == null) {
             ColorStateList.valueOf(getContext().getColor(R.color.search_url_text_material_light));
         }
-        update$8();
+        update$1$1();
     }
 
     @Override // com.android.keyguard.KeyguardMessageArea
@@ -62,25 +62,25 @@ public class BouncerKeyguardMessageArea extends KeyguardMessageArea {
                 this.textAboutToShow = null;
             }
             Property property = View.ALPHA;
-            ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this, (Property<BouncerKeyguardMessageArea, Float>) property, 1.0f, 0.0f);
-            ofFloat.setDuration(this.HIDE_DURATION_MILLIS);
-            ofFloat.setInterpolator(Interpolators.STANDARD_ACCELERATE);
-            ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.keyguard.BouncerKeyguardMessageArea$setMessage$1
+            ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this, (Property<BouncerKeyguardMessageArea, Float>) property, 1.0f, 0.0f);
+            objectAnimatorOfFloat.setDuration(this.HIDE_DURATION_MILLIS);
+            objectAnimatorOfFloat.setInterpolator(Interpolators.STANDARD_ACCELERATE);
+            objectAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.keyguard.BouncerKeyguardMessageArea.setMessage.1
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public final void onAnimationEnd(Animator animator) {
-                    super/*com.android.keyguard.KeyguardMessageArea*/.setMessage(charSequence, z);
+                    BouncerKeyguardMessageArea.super.setMessage(charSequence, z);
                 }
             });
-            ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(this, (Property<BouncerKeyguardMessageArea, Float>) property, 0.0f, 1.0f);
-            ofFloat2.setDuration(this.SHOW_DURATION_MILLIS);
-            ofFloat2.setInterpolator(Interpolators.STANDARD_DECELERATE);
-            ofFloat2.addListener(new AnimatorListenerAdapter() { // from class: com.android.keyguard.BouncerKeyguardMessageArea$setMessage$2
+            ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(this, (Property<BouncerKeyguardMessageArea, Float>) property, 0.0f, 1.0f);
+            objectAnimatorOfFloat2.setDuration(this.SHOW_DURATION_MILLIS);
+            objectAnimatorOfFloat2.setInterpolator(Interpolators.STANDARD_DECELERATE);
+            objectAnimatorOfFloat2.addListener(new AnimatorListenerAdapter() { // from class: com.android.keyguard.BouncerKeyguardMessageArea.setMessage.2
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public final void onAnimationEnd(Animator animator) {
                     BouncerKeyguardMessageArea.this.textAboutToShow = null;
                 }
             });
-            this.animatorSet.playSequentially(ofFloat, ofFloat2);
+            this.animatorSet.playSequentially(objectAnimatorOfFloat, objectAnimatorOfFloat2);
             this.animatorSet.start();
         }
     }

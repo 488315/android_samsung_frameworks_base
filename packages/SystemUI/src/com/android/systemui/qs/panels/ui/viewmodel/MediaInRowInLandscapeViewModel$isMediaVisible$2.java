@@ -13,7 +13,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class MediaInRowInLandscapeViewModel$isMediaVisible$2 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -50,8 +49,8 @@ final class MediaInRowInLandscapeViewModel$isMediaVisible$2 extends SuspendLambd
             final ?? r1 = new MediaHostStatesManager.Callback() { // from class: com.android.systemui.qs.panels.ui.viewmodel.MediaInRowInLandscapeViewModel$isMediaVisible$2$callback$1
                 @Override // com.android.systemui.media.controls.ui.controller.MediaHostStatesManager.Callback
                 public final void onHostStateChanged(int i2, MediaHostState mediaHostState) {
-                    if (i2 == MediaInRowInLandscapeViewModel.this.inLocation) {
-                        ((ChannelCoroutine) producerScope).mo3456trySendJP2dKIU(Boolean.valueOf(mediaHostState.getVisible()));
+                    if (i2 == mediaInRowInLandscapeViewModel.inLocation) {
+                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(mediaHostState.getVisible()));
                     }
                 }
             };
@@ -60,7 +59,7 @@ final class MediaInRowInLandscapeViewModel$isMediaVisible$2 extends SuspendLambd
             Function0 function0 = new Function0() { // from class: com.android.systemui.qs.panels.ui.viewmodel.MediaInRowInLandscapeViewModel$isMediaVisible$2$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    MediaInRowInLandscapeViewModel.this.mediaHostStatesManager.callbacks.remove(r1);
+                    mediaInRowInLandscapeViewModel2.mediaHostStatesManager.callbacks.remove(r1);
                     return Unit.INSTANCE;
                 }
             };

@@ -8,7 +8,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
 /* JADX INFO: Access modifiers changed from: package-private */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SizeElement extends ModifierNodeElement<SizeNode> {
     public final boolean enforceIncoming;
@@ -34,7 +33,7 @@ public final class SizeElement extends ModifierNodeElement<SizeNode> {
             return false;
         }
         SizeElement sizeElement = (SizeElement) obj;
-        return Dp.m836equalsimpl0(this.minWidth, sizeElement.minWidth) && Dp.m836equalsimpl0(this.minHeight, sizeElement.minHeight) && Dp.m836equalsimpl0(this.maxWidth, sizeElement.maxWidth) && Dp.m836equalsimpl0(this.maxHeight, sizeElement.maxHeight) && this.enforceIncoming == sizeElement.enforceIncoming;
+        return Dp.m838equalsimpl0(this.minWidth, sizeElement.minWidth) && Dp.m838equalsimpl0(this.minHeight, sizeElement.minHeight) && Dp.m838equalsimpl0(this.maxWidth, sizeElement.maxWidth) && Dp.m838equalsimpl0(this.maxHeight, sizeElement.maxHeight) && this.enforceIncoming == sizeElement.enforceIncoming;
     }
 
     public final int hashCode() {
@@ -53,49 +52,27 @@ public final class SizeElement extends ModifierNodeElement<SizeNode> {
     }
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public SizeElement(float r9, float r10, float r11, float r12, boolean r13, kotlin.jvm.functions.Function1 r14, int r15, kotlin.jvm.internal.DefaultConstructorMarker r16) {
-        /*
-            r8 = this;
-            r0 = r15 & 1
-            if (r0 == 0) goto Lb
-            androidx.compose.ui.unit.Dp$Companion r9 = androidx.compose.ui.unit.Dp.Companion
-            r9.getClass()
-            float r9 = androidx.compose.ui.unit.Dp.Unspecified
-        Lb:
-            r1 = r9
-            r9 = r15 & 2
-            if (r9 == 0) goto L17
-            androidx.compose.ui.unit.Dp$Companion r9 = androidx.compose.ui.unit.Dp.Companion
-            r9.getClass()
-            float r10 = androidx.compose.ui.unit.Dp.Unspecified
-        L17:
-            r2 = r10
-            r9 = r15 & 4
-            if (r9 == 0) goto L23
-            androidx.compose.ui.unit.Dp$Companion r9 = androidx.compose.ui.unit.Dp.Companion
-            r9.getClass()
-            float r11 = androidx.compose.ui.unit.Dp.Unspecified
-        L23:
-            r3 = r11
-            r9 = r15 & 8
-            if (r9 == 0) goto L2f
-            androidx.compose.ui.unit.Dp$Companion r9 = androidx.compose.ui.unit.Dp.Companion
-            r9.getClass()
-            float r12 = androidx.compose.ui.unit.Dp.Unspecified
-        L2f:
-            r4 = r12
-            r7 = 0
-            r0 = r8
-            r5 = r13
-            r6 = r14
-            r0.<init>(r1, r2, r3, r4, r5, r6, r7)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.foundation.layout.SizeElement.<init>(float, float, float, float, boolean, kotlin.jvm.functions.Function1, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+    public SizeElement(float f, float f2, float f3, float f4, boolean z, Function1 function1, int i, DefaultConstructorMarker defaultConstructorMarker) {
+        if ((i & 1) != 0) {
+            Dp.Companion.getClass();
+            f = Dp.Unspecified;
+        }
+        float f5 = f;
+        if ((i & 2) != 0) {
+            Dp.Companion.getClass();
+            f2 = Dp.Unspecified;
+        }
+        float f6 = f2;
+        if ((i & 4) != 0) {
+            Dp.Companion.getClass();
+            f3 = Dp.Unspecified;
+        }
+        float f7 = f3;
+        if ((i & 8) != 0) {
+            Dp.Companion.getClass();
+            f4 = Dp.Unspecified;
+        }
+        this(f5, f6, f7, f4, z, function1, null);
     }
 
     private SizeElement(float f, float f2, float f3, float f4, boolean z, Function1 function1) {

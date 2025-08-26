@@ -136,18 +136,18 @@ public final class UsbPort {
     }
 
     public void resetUsbPort(Executor executor, Consumer<Integer> consumer) {
-        int incrementAndGet = sUsbOperationCount.incrementAndGet() + Binder.getCallingUid();
-        Log.i(TAG, "resetUsbPort opId:" + incrementAndGet);
-        this.mUsbManager.resetUsbPort(this, incrementAndGet, new UsbOperationInternal(incrementAndGet, this.mId, executor, consumer));
+        int iIncrementAndGet = sUsbOperationCount.incrementAndGet() + Binder.getCallingUid();
+        Log.i(TAG, "resetUsbPort opId:" + iIncrementAndGet);
+        this.mUsbManager.resetUsbPort(this, iIncrementAndGet, new UsbOperationInternal(iIncrementAndGet, this.mId, executor, consumer));
     }
 
     public int enableUsbData(boolean z) {
-        int incrementAndGet = sUsbOperationCount.incrementAndGet() + Binder.getCallingUid();
-        Log.i(TAG, "enableUsbData opId:" + incrementAndGet + " callingUid:" + Binder.getCallingUid());
-        UsbOperationInternal usbOperationInternal = new UsbOperationInternal(incrementAndGet, this.mId);
-        boolean enableUsbData = this.mUsbManager.enableUsbData(this, z, incrementAndGet, usbOperationInternal);
+        int iIncrementAndGet = sUsbOperationCount.incrementAndGet() + Binder.getCallingUid();
+        Log.i(TAG, "enableUsbData opId:" + iIncrementAndGet + " callingUid:" + Binder.getCallingUid());
+        UsbOperationInternal usbOperationInternal = new UsbOperationInternal(iIncrementAndGet, this.mId);
+        boolean zEnableUsbData = this.mUsbManager.enableUsbData(this, z, iIncrementAndGet, usbOperationInternal);
         int i = 1;
-        if (enableUsbData) {
+        if (zEnableUsbData) {
             usbOperationInternal.waitForOperationComplete();
         }
         int status = usbOperationInternal.getStatus();
@@ -167,14 +167,14 @@ public final class UsbPort {
     }
 
     public int enableUsbDataWhileDocked() {
-        int incrementAndGet = sUsbOperationCount.incrementAndGet() + Binder.getCallingUid();
-        Log.i(TAG, "enableUsbData opId:" + incrementAndGet + " callingUid:" + Binder.getCallingUid());
+        int iIncrementAndGet = sUsbOperationCount.incrementAndGet() + Binder.getCallingUid();
+        Log.i(TAG, "enableUsbData opId:" + iIncrementAndGet + " callingUid:" + Binder.getCallingUid());
         UsbPortStatus status = getStatus();
         if (status != null && (status.getUsbDataStatus() & 8) != 8) {
             return 4;
         }
-        UsbOperationInternal usbOperationInternal = new UsbOperationInternal(incrementAndGet, this.mId);
-        this.mUsbManager.enableUsbDataWhileDocked(this, incrementAndGet, usbOperationInternal);
+        UsbOperationInternal usbOperationInternal = new UsbOperationInternal(iIncrementAndGet, this.mId);
+        this.mUsbManager.enableUsbDataWhileDocked(this, iIncrementAndGet, usbOperationInternal);
         usbOperationInternal.waitForOperationComplete();
         int status2 = usbOperationInternal.getStatus();
         if (status2 == 0) {
@@ -194,10 +194,10 @@ public final class UsbPort {
     }
 
     public int enableLimitPowerTransfer(boolean z) {
-        int incrementAndGet = sUsbOperationCount.incrementAndGet() + Binder.getCallingUid();
-        Log.i(TAG, "enableLimitPowerTransfer opId:" + incrementAndGet + " callingUid:" + Binder.getCallingUid());
-        UsbOperationInternal usbOperationInternal = new UsbOperationInternal(incrementAndGet, this.mId);
-        this.mUsbManager.enableLimitPowerTransfer(this, z, incrementAndGet, usbOperationInternal);
+        int iIncrementAndGet = sUsbOperationCount.incrementAndGet() + Binder.getCallingUid();
+        Log.i(TAG, "enableLimitPowerTransfer opId:" + iIncrementAndGet + " callingUid:" + Binder.getCallingUid());
+        UsbOperationInternal usbOperationInternal = new UsbOperationInternal(iIncrementAndGet, this.mId);
+        this.mUsbManager.enableLimitPowerTransfer(this, z, iIncrementAndGet, usbOperationInternal);
         usbOperationInternal.waitForOperationComplete();
         int status = usbOperationInternal.getStatus();
         if (status == 0) {
@@ -340,10 +340,10 @@ public final class UsbPort {
         StringBuilder sb = new StringBuilder(NavigationBarInflaterView.SIZE_MOD_START);
         boolean z = true;
         while (i != 0) {
-            int numberOfTrailingZeros = Integer.numberOfTrailingZeros(i);
-            i &= ~(1 << numberOfTrailingZeros);
-            int i2 = numberOfTrailingZeros / 3;
-            int i3 = numberOfTrailingZeros % 3;
+            int iNumberOfTrailingZeros = Integer.numberOfTrailingZeros(i);
+            i &= ~(1 << iNumberOfTrailingZeros);
+            int i2 = iNumberOfTrailingZeros / 3;
+            int i3 = iNumberOfTrailingZeros % 3;
             if (z) {
                 z = false;
             } else {

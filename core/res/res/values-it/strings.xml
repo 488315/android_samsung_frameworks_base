@@ -592,6 +592,7 @@ Se scegliete di installarla comunque, esaminate attentamente la Comunicazione su
     <string name="call_notification_screening_text">Applicazione filtro a chiamata in arrivo</string>
     <string name="camera_restrict">"I criteri di protezione non consentono l'uso della fotocamera."</string>
     <string name="can_not_install_app">"Impossibile installare l'applicazione. Applicazione non ottimizzata per l'uso con %s."</string>
+    <string name="can_not_open_searcle_on_the_external_display">Impossibile aprire Cerchia e cerca su uno schermo connesso.</string>
     <string name="can_not_open_searcle_on_the_lockscreen">Impossibile aprire Cerchia e cerca sulla schermata di blocco.</string>
     <string name="cannot_open_app_concentration_mode">Impossibile aprire l’applicazione</string>
     <string name="capability_desc_canCaptureFingerprintGestures">È in grado di rilevare i gesti compiuti con il sensore di impronte dei dispositivi.</string>
@@ -673,6 +674,7 @@ Se scegliete di installarla comunque, esaminate attentamente la Comunicazione su
     <string name="common_secure_boot_nwlock_notification_text">Questa scheda SIM non è supportata.</string>
     <string name="common_secure_boot_nwlock_notification_title">Scheda SIM inserita non valida</string>
     <string name="compat_restart_education_text">Se l’applicazione non viene visualizzata correttamente, provate a chiuderla e a riaprirla.</string>
+    <string name="compat_restart_menu_education_text">Se l’applicazione non viene visualizzata correttamente, riavviatela dal menu Altro.</string>
     <string name="concurrent_display_notification_active_content">%1$s sta usando entrambi i display per mostrare contenuti</string>
     <string name="concurrent_display_notification_active_title">Doppio schermo attivo</string>
     <string name="concurrent_display_notification_name">Doppio schermo</string>
@@ -2919,7 +2921,7 @@ L'ascolto ad alto volume per lunghi periodi di tempo potrebbe danneggiare l'udit
     <string name="satellite_notification_manual_title">Utilizzare i messaggi via satellite?</string>
     <string name="satellite_notification_open_message">Apri Messaggi</string>
     <string name="satellite_notification_summary">Puoi inviare e ricevere messaggi senza una rete mobile o Wi-Fi</string>
-    <string name="satellite_notification_summary_with_data">Puoi inviare e ricevere messaggi e utilizzare dati limitati via satellite</string>
+    <string name="satellite_notification_summary_with_data">Puoi inviare e ricevere messaggi e utilizzare alcune app via satellite</string>
     <string name="satellite_notification_title">Connessione automatica al satellite</string>
     <string name="satellite_sos_available_notification_summary">"Puoi inviare messaggi ai servizi di emergenza se non disponi di una rete mobile o Wi-Fi. Google Messaggi deve essere l'app di messaggistica predefinita."</string>
     <string name="satellite_sos_available_notification_title">SOS satellitare è disponibile</string>

@@ -20,7 +20,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.Ref$BooleanRef;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class MobileIconsInteractorKairosImpl$$ExternalSyntheticLambda11 implements Function1 {
     public final /* synthetic */ int $r8$classId;
@@ -35,7 +34,7 @@ public final /* synthetic */ class MobileIconsInteractorKairosImpl$$ExternalSynt
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
         Object obj2 = this.f$1;
         final MobileIconsInteractorKairosImpl mobileIconsInteractorKairosImpl = this.f$0;
         switch (this.$r8$classId) {
@@ -44,7 +43,7 @@ public final /* synthetic */ class MobileIconsInteractorKairosImpl$$ExternalSynt
                 ReadonlyStateFlow readonlyStateFlow = ((ConnectivityRepositoryImpl) ((ConnectivityRepository) obj2)).vcnSubId;
                 BuildScopeImpl buildScopeImpl = (BuildScopeImpl) ((BuildScope) obj);
                 buildScopeImpl.getClass();
-                StateInit combine = CombineKt.combine(mobileIconsInteractorKairosImpl.subscriptionsBasedFilteredSubs, activeMobileDataSubscriptionId, BuildScope.DefaultImpls.toState(buildScopeImpl, readonlyStateFlow), new Function4() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconsInteractorKairosImpl$$ExternalSyntheticLambda22
+                StateInit stateInitCombine = CombineKt.combine(mobileIconsInteractorKairosImpl.subscriptionsBasedFilteredSubs, activeMobileDataSubscriptionId, BuildScope.DefaultImpls.toState(buildScopeImpl, readonlyStateFlow), new Function4() { // from class: com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconsInteractorKairosImpl$$ExternalSyntheticLambda22
                     @Override // kotlin.jvm.functions.Function4
                     public final Object invoke(Object obj3, Object obj4, Object obj5, Object obj6) {
                         boolean z;
@@ -52,7 +51,7 @@ public final /* synthetic */ class MobileIconsInteractorKairosImpl$$ExternalSynt
                         Integer num = (Integer) obj5;
                         Integer num2 = (Integer) obj6;
                         int i = MobileIconsInteractorKairosImpl.$r8$clinit;
-                        MobileIconsInteractorKairosImpl mobileIconsInteractorKairosImpl2 = MobileIconsInteractorKairosImpl.this;
+                        MobileIconsInteractorKairosImpl mobileIconsInteractorKairosImpl2 = mobileIconsInteractorKairosImpl;
                         mobileIconsInteractorKairosImpl2.getClass();
                         if (list.size() == 2) {
                             SubscriptionModel subscriptionModel = (SubscriptionModel) list.get(0);
@@ -78,8 +77,8 @@ public final /* synthetic */ class MobileIconsInteractorKairosImpl$$ExternalSynt
                 });
                 Ref$BooleanRef ref$BooleanRef = new Ref$BooleanRef();
                 ref$BooleanRef.element = true;
-                buildScopeImpl.observe(combine, new DiffableKt$$ExternalSyntheticLambda5(mobileIconsInteractorKairosImpl.tableLogger, "Intr", "filteredSubscriptions", ref$BooleanRef, 2));
-                return combine;
+                buildScopeImpl.observe(stateInitCombine, new DiffableKt$$ExternalSyntheticLambda5(mobileIconsInteractorKairosImpl.tableLogger, "Intr", "filteredSubscriptions", ref$BooleanRef, 2));
+                return stateInitCombine;
             default:
                 int i = MobileIconsInteractorKairosImpl.$r8$clinit;
                 MobileIconsInteractorKairosImpl$mobileConnection$1 mobileIconsInteractorKairosImpl$mobileConnection$1 = new MobileIconsInteractorKairosImpl$mobileConnection$1(mobileIconsInteractorKairosImpl, (MobileConnectionRepositoryKairos) obj2);

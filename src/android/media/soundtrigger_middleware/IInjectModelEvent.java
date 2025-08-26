@@ -39,9 +39,9 @@ public interface IInjectModelEvent extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IInjectModelEvent.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IInjectModelEvent)) {
-                return (IInjectModelEvent) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IInjectModelEvent.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IInjectModelEvent)) {
+                return (IInjectModelEvent) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -80,12 +80,12 @@ public interface IInjectModelEvent extends IInterface {
 
             @Override // android.media.soundtrigger_middleware.IInjectModelEvent
             public void triggerUnloadModel() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInjectModelEvent.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInjectModelEvent.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

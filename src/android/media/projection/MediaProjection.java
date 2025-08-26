@@ -6,7 +6,6 @@ import android.hardware.display.DisplayManager;
 import android.hardware.display.VirtualDisplay;
 import android.hardware.display.VirtualDisplayConfig;
 import android.media.projection.IMediaProjectionCallback;
-import android.media.projection.MediaProjection;
 import android.os.Handler;
 import android.os.RemoteException;
 import android.os.UserManager;
@@ -114,9 +113,9 @@ public final class MediaProjection {
 
     public VirtualDisplay createVirtualDisplay(VirtualDisplayConfig.Builder builder, VirtualDisplay.Callback callback, Handler handler) {
         builder.setWindowManagerMirroringEnabled(true);
-        VirtualDisplay createVirtualDisplay = this.mDisplayManager.createVirtualDisplay(this, builder.build(), callback, handler);
-        if (createVirtualDisplay != null) {
-            return createVirtualDisplay;
+        VirtualDisplay virtualDisplayCreateVirtualDisplay = this.mDisplayManager.createVirtualDisplay(this, builder.build(), callback, handler);
+        if (virtualDisplayCreateVirtualDisplay != null) {
+            return virtualDisplayCreateVirtualDisplay;
         }
         Slog.w(TAG, "Failed to create virtual display.");
         return null;
@@ -208,7 +207,7 @@ public final class MediaProjection {
             this.mHandler.post(new Runnable() { // from class: android.media.projection.MediaProjection$CallbackRecord$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    MediaProjection.CallbackRecord.this.lambda$onCapturedContentResize$0(i, i2);
+                    this.f$0.lambda$onCapturedContentResize$0(i, i2);
                 }
             });
         }
@@ -223,7 +222,7 @@ public final class MediaProjection {
             this.mHandler.post(new Runnable() { // from class: android.media.projection.MediaProjection$CallbackRecord$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    MediaProjection.CallbackRecord.this.lambda$onCapturedContentVisibilityChanged$1(z);
+                    this.f$0.lambda$onCapturedContentVisibilityChanged$1(z);
                 }
             });
         }

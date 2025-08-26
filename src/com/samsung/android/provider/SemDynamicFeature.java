@@ -47,23 +47,23 @@ public final class SemDynamicFeature {
     }
 
     private static boolean isBetaBinaryType() {
-        String trim = Build.DISPLAY.replace("test-keys", "").trim();
-        return GnssSignalType.CODE_TYPE_Z.equals(GnssSignalType.CODE_TYPE_Z.equals(trim.substring(trim.length() + (-4), trim.length() + (-3))) ? GnssSignalType.CODE_TYPE_Z : GnssSignalType.CODE_TYPE_C);
+        String strTrim = Build.DISPLAY.replace("test-keys", "").trim();
+        return GnssSignalType.CODE_TYPE_Z.equals(GnssSignalType.CODE_TYPE_Z.equals(strTrim.substring(strTrim.length() + (-4), strTrim.length() + (-3))) ? GnssSignalType.CODE_TYPE_Z : GnssSignalType.CODE_TYPE_C);
     }
 
     public static boolean isTestBinary() {
         String str = "";
         try {
             str = SystemProperties.get("ro.build.type", "UNKNOWN");
-            r2 = "eng".equals(str) || "userdebug".equals(str);
+            z = "eng".equals(str) || "userdebug".equals(str);
             StringBuilder sb = new StringBuilder();
-            sb.append(r2 ? "This is a test binary " : "This is not a test binary ");
+            sb.append(z ? "This is a test binary " : "This is not a test binary ");
             sb.append(str);
             Slog.d(TAG, sb.toString());
-            return r2;
+            return z;
         } catch (Exception unused) {
             Slog.e(TAG, "Fail to read binary type " + str);
-            return r2;
+            return z;
         }
     }
 
@@ -77,19 +77,19 @@ public final class SemDynamicFeature {
     }
 
     private static boolean isAllowedCSCCountry() {
-        boolean z = false;
+        boolean zContains = false;
         try {
             String str = SystemProperties.get("ro.csc.country_code");
             if (str != null && !str.isEmpty()) {
-                z = ALLOWED_COUNTRY_LIST.contains(str);
+                zContains = ALLOWED_COUNTRY_LIST.contains(str);
             }
-            if (!z) {
+            if (!zContains) {
                 Slog.e(TAG, "locale is not allowed " + str);
             }
-            return z;
+            return zContains;
         } catch (Exception e) {
             Slog.e(TAG, "isAllowedCountry : " + e.getMessage());
-            return z;
+            return zContains;
         }
     }
 

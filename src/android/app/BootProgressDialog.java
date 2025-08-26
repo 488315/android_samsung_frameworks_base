@@ -21,18 +21,18 @@ public class BootProgressDialog extends ProgressDialog {
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         View decorView = getWindow().getDecorView();
-        View findViewById = decorView.findViewById(R.id.progress_animation);
-        if (findViewById instanceof ImageView) {
-            findViewById.setBackgroundResource(R.drawable.boot_progress_animation);
-            ((AnimationDrawable) findViewById.getBackground()).start();
+        View viewFindViewById = decorView.findViewById(R.id.progress_animation);
+        if (viewFindViewById instanceof ImageView) {
+            viewFindViewById.setBackgroundResource(R.drawable.boot_progress_animation);
+            ((AnimationDrawable) viewFindViewById.getBackground()).start();
         }
         TextView textView = (TextView) decorView.findViewById(R.id.text_optimizing_apps);
         if (textView != null) {
             textView.lambda$setTextAsync$0(this.mContext.getString(R.string.boot_progress_dialog_optimizing_apps_ing));
         }
-        View findViewById2 = decorView.findViewById(R.id.body);
-        if (findViewById2 != null) {
-            clearMarginAndSetMatchParentAncestor(findViewById2);
+        View viewFindViewById2 = decorView.findViewById(R.id.body);
+        if (viewFindViewById2 != null) {
+            clearMarginAndSetMatchParentAncestor(viewFindViewById2);
         }
         WindowInsetsController windowInsetsController = decorView.getWindowInsetsController();
         if (windowInsetsController != null) {

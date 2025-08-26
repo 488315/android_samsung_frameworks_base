@@ -1,14 +1,14 @@
 package com.android.systemui.qs;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.util.AttributeSet;
 import android.view.accessibility.AccessibilityNodeInfo;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class QuickQSPanel extends QSPanel {
-    public QuickQSPanel(Context context, AttributeSet attributeSet) {
+    public QuickQSPanel(Context context, AttributeSet attributeSet) throws Resources.NotFoundException {
         super(context, attributeSet);
         getResources().getInteger(R.integer.quick_qs_panel_max_tiles);
     }

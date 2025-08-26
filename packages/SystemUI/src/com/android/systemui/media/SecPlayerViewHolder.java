@@ -26,7 +26,6 @@ import kotlin.collections.CollectionsKt__CollectionsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Reflection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SecPlayerViewHolder {
     public static final boolean DEBUG;
@@ -58,7 +57,6 @@ public final class SecPlayerViewHolder {
     public final TextView titleText;
     public final TextView totalTimeView;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -79,66 +77,66 @@ public final class SecPlayerViewHolder {
         ColorPresetProvider.INSTANCE.getClass();
         this.progressBarPrimaryColor = ColorPresetProvider.uxPrimaryColor;
         this.progressBarSecondaryColor = ColorPresetProvider.uxSecondaryColor;
-        ArrayList arrayListOf = CollectionsKt__CollectionsKt.arrayListOf(Integer.valueOf(R.id.sec_action0), Integer.valueOf(R.id.sec_action1), Integer.valueOf(R.id.sec_action2), Integer.valueOf(R.id.sec_action3), Integer.valueOf(R.id.sec_action4));
+        ArrayList arrayListArrayListOf = CollectionsKt__CollectionsKt.arrayListOf(Integer.valueOf(R.id.sec_action0), Integer.valueOf(R.id.sec_action1), Integer.valueOf(R.id.sec_action2), Integer.valueOf(R.id.sec_action3), Integer.valueOf(R.id.sec_action4));
         this.expandedActionButtons$delegate = LazyKt__LazyJVMKt.lazy(new SecPlayerViewHolder$$ExternalSyntheticLambda0());
         String str = TAG;
         boolean z2 = DEBUG;
         if (z2) {
             Log.d(str, "init SecPlayerViewHolder");
         }
-        View inflate = LayoutInflater.from(context).inflate(mediaType.getLayout(), viewGroup, z);
-        inflate.getClass();
-        this.playerView = inflate.requireViewById(R.id.sec_qs_media_controls);
-        this.albumView = (ImageView) inflate.requireViewById(R.id.sec_album_art);
-        this.appIcon = (ImageView) inflate.requireViewById(R.id.sec_icon);
-        this.artistText = (TextView) inflate.requireViewById(R.id.sec_header_artist);
-        this.header = (LinearLayout) inflate.requireViewById(R.id.media_header);
-        this.titleText = (TextView) inflate.requireViewById(R.id.sec_header_title);
-        this.mediaOutputText = (TextView) inflate.requireViewById(R.id.sec_media_output_text);
-        this.seamlessText = (TextView) inflate.requireViewById(R.id.sec_device_name);
-        this.elapsedTimeView = (TextView) inflate.requireViewById(R.id.sec_media_elapsed_time);
-        this.seekBar = (SeekBar) inflate.requireViewById(R.id.sec_media_progress_bar);
-        this.totalTimeView = (TextView) inflate.requireViewById(R.id.sec_media_total_time);
-        LinearLayout linearLayout = (LinearLayout) inflate.requireViewById(R.id.action_buttons_expanded);
+        View viewInflate = LayoutInflater.from(context).inflate(mediaType.getLayout(), viewGroup, z);
+        viewInflate.getClass();
+        this.playerView = viewInflate.requireViewById(R.id.sec_qs_media_controls);
+        this.albumView = (ImageView) viewInflate.requireViewById(R.id.sec_album_art);
+        this.appIcon = (ImageView) viewInflate.requireViewById(R.id.sec_icon);
+        this.artistText = (TextView) viewInflate.requireViewById(R.id.sec_header_artist);
+        this.header = (LinearLayout) viewInflate.requireViewById(R.id.media_header);
+        this.titleText = (TextView) viewInflate.requireViewById(R.id.sec_header_title);
+        this.mediaOutputText = (TextView) viewInflate.requireViewById(R.id.sec_media_output_text);
+        this.seamlessText = (TextView) viewInflate.requireViewById(R.id.sec_device_name);
+        this.elapsedTimeView = (TextView) viewInflate.requireViewById(R.id.sec_media_elapsed_time);
+        this.seekBar = (SeekBar) viewInflate.requireViewById(R.id.sec_media_progress_bar);
+        this.totalTimeView = (TextView) viewInflate.requireViewById(R.id.sec_media_total_time);
+        LinearLayout linearLayout = (LinearLayout) viewInflate.requireViewById(R.id.action_buttons_expanded);
         this.expandedActionButtonsContainer = linearLayout;
         this.budsButtonExpanded = (ImageButton) (linearLayout == null ? null : linearLayout).requireViewById(R.id.buds_action);
-        int size = arrayListOf.size();
+        int size = arrayListArrayListOf.size();
         int i = 0;
         while (i < size) {
-            Object obj = arrayListOf.get(i);
+            Object obj = arrayListArrayListOf.get(i);
             i++;
-            int intValue = ((Number) obj).intValue();
+            int iIntValue = ((Number) obj).intValue();
             SparseArray sparseArray = (SparseArray) this.expandedActionButtons$delegate.getValue();
             LinearLayout linearLayout2 = this.expandedActionButtonsContainer;
             if (linearLayout2 == null) {
                 linearLayout2 = null;
             }
-            sparseArray.set(intValue, linearLayout2.requireViewById(intValue));
+            sparseArray.set(iIntValue, linearLayout2.requireViewById(iIntValue));
         }
         if (mediaType.getSupportSquiggly() || mediaType.getSupportCoverQuickPanelMedia()) {
-            int color = inflate.getContext().getColor(R.color.sec_cover_media_player_seekbar_thumb_background_color);
+            int color = viewInflate.getContext().getColor(R.color.sec_cover_media_player_seekbar_thumb_background_color);
             SparseArray sparseArray2 = (SparseArray) this.expandedActionButtons$delegate.getValue();
             int size2 = sparseArray2.size();
             for (int i2 = 0; i2 < size2; i2++) {
                 sparseArray2.keyAt(i2);
                 ImageButton imageButton = (ImageButton) sparseArray2.valueAt(i2);
                 imageButton.setColorFilter(color);
-                imageButton.setStateListAnimator(RecoilEffectUtil.getSecRecoilSmallAnimator(inflate.getContext()));
+                imageButton.setStateListAnimator(RecoilEffectUtil.getSecRecoilSmallAnimator(viewInflate.getContext()));
             }
             ImageButton imageButton2 = this.budsButtonExpanded;
             (imageButton2 == null ? null : imageButton2).setColorFilter(color);
         }
         if (mediaType.getSupportExpandable()) {
-            this.player = (LinearLayout) inflate.requireViewById(R.id.sec_qs_media_player);
+            this.player = (LinearLayout) viewInflate.requireViewById(R.id.sec_qs_media_player);
         }
         if (mediaType.getSupportSettings()) {
-            this.cancelText = (TextView) inflate.requireViewById(R.id.sec_cancel_text);
-            this.options = inflate.requireViewById(R.id.qs_media_controls_options);
-            this.optionsAppIcon = (ImageView) inflate.requireViewById(R.id.sec_option_app_icon);
-            this.optionsAppTitle = (TextView) inflate.requireViewById(R.id.sec_option_app_text);
-            this.optionButtons = inflate.requireViewById(R.id.sec_option_buttons);
-            this.remove = inflate.requireViewById(R.id.sec_option_remove_button);
-            TextView textView = (TextView) inflate.requireViewById(R.id.sec_remove_text);
+            this.cancelText = (TextView) viewInflate.requireViewById(R.id.sec_cancel_text);
+            this.options = viewInflate.requireViewById(R.id.qs_media_controls_options);
+            this.optionsAppIcon = (ImageView) viewInflate.requireViewById(R.id.sec_option_app_icon);
+            this.optionsAppTitle = (TextView) viewInflate.requireViewById(R.id.sec_option_app_text);
+            this.optionButtons = viewInflate.requireViewById(R.id.sec_option_buttons);
+            this.remove = viewInflate.requireViewById(R.id.sec_option_remove_button);
+            TextView textView = (TextView) viewInflate.requireViewById(R.id.sec_remove_text);
             if (textView != null) {
                 textView.setTypeface(Typeface.create(Typeface.create("sec", 0), VolteConstants.ErrorCode.BUSY_EVERYWHERE, false));
                 textView.setStateListAnimator(RecoilEffectUtil.getSecRecoilSmallAnimator(textView.getContext()));

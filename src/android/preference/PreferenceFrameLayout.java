@@ -34,13 +34,13 @@ public class PreferenceFrameLayout extends FrameLayout {
 
     public PreferenceFrameLayout(Context context, AttributeSet attributeSet, int i, int i2) {
         super(context, attributeSet, i, i2);
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.PreferenceFrameLayout, i, i2);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.PreferenceFrameLayout, i, i2);
         int i3 = (int) ((context.getResources().getDisplayMetrics().density * 0.0f) + 0.5f);
-        this.mBorderTop = obtainStyledAttributes.getDimensionPixelSize(3, i3);
-        this.mBorderBottom = obtainStyledAttributes.getDimensionPixelSize(0, i3);
-        this.mBorderLeft = obtainStyledAttributes.getDimensionPixelSize(1, i3);
-        this.mBorderRight = obtainStyledAttributes.getDimensionPixelSize(2, i3);
-        obtainStyledAttributes.recycle();
+        this.mBorderTop = typedArrayObtainStyledAttributes.getDimensionPixelSize(3, i3);
+        this.mBorderBottom = typedArrayObtainStyledAttributes.getDimensionPixelSize(0, i3);
+        this.mBorderLeft = typedArrayObtainStyledAttributes.getDimensionPixelSize(1, i3);
+        this.mBorderRight = typedArrayObtainStyledAttributes.getDimensionPixelSize(2, i3);
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     @Override // android.widget.FrameLayout, android.view.ViewGroup
@@ -86,9 +86,9 @@ public class PreferenceFrameLayout extends FrameLayout {
         public LayoutParams(Context context, AttributeSet attributeSet) {
             super(context, attributeSet);
             this.removeBorders = false;
-            TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.PreferenceFrameLayout_Layout);
-            this.removeBorders = obtainStyledAttributes.getBoolean(0, false);
-            obtainStyledAttributes.recycle();
+            TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.PreferenceFrameLayout_Layout);
+            this.removeBorders = typedArrayObtainStyledAttributes.getBoolean(0, false);
+            typedArrayObtainStyledAttributes.recycle();
         }
 
         public LayoutParams(int i, int i2) {

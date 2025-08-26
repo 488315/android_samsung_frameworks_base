@@ -54,9 +54,9 @@ public interface RemoteServiceCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof RemoteServiceCallback)) {
-                return (RemoteServiceCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof RemoteServiceCallback)) {
+                return (RemoteServiceCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -88,10 +88,10 @@ public interface RemoteServiceCallback extends IInterface {
             if (i == 1) {
                 onError();
             } else if (i == 2) {
-                ArrayList createTypedArrayList = parcel.createTypedArrayList(ComponentName.CREATOR);
-                ArrayList<IBinder> createBinderArrayList = parcel.createBinderArrayList();
+                ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(ComponentName.CREATOR);
+                ArrayList<IBinder> arrayListCreateBinderArrayList = parcel.createBinderArrayList();
                 parcel.enforceNoDataAvail();
-                onResult(createTypedArrayList, createBinderArrayList);
+                onResult(arrayListCreateTypedArrayList, arrayListCreateBinderArrayList);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -116,25 +116,25 @@ public interface RemoteServiceCallback extends IInterface {
 
             @Override // com.android.internal.telecom.RemoteServiceCallback
             public void onError() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.telecom.RemoteServiceCallback
             public void onResult(List<ComponentName> list, List<IBinder> list2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    obtain.writeBinderList(list2);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    parcelObtain.writeBinderList(list2);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

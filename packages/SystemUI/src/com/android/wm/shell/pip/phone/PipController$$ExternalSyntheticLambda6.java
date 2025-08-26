@@ -12,7 +12,6 @@ import com.android.wm.shell.protolog.ShellProtoLogGroup;
 import java.util.ArrayList;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class PipController$$ExternalSyntheticLambda6 implements Consumer {
     public final /* synthetic */ int $r8$classId;
@@ -59,6 +58,7 @@ public final /* synthetic */ class PipController$$ExternalSyntheticLambda6 imple
                         ProtoLogImpl_1771455215.d(ShellProtoLogGroup.WM_SHELL_PICTURE_IN_PICTURE, -308783681684358284L, 0, String.valueOf(componentName));
                     }
                     pipTaskOrganizer.mPipTransitionController.sendOnPipTransitionCancelled$1(2);
+                    pipTaskOrganizer.mTransitionDirection = 2;
                     pipTransitionState.mInSwipePipToHomeTransition = false;
                     pipTaskOrganizer.mPictureInPictureParams = null;
                     pipTransitionState.setTransitionState(0);

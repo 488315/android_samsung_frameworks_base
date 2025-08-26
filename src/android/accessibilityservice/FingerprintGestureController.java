@@ -1,6 +1,5 @@
 package android.accessibilityservice;
 
-import android.accessibilityservice.FingerprintGestureController;
 import android.os.Handler;
 import android.os.RemoteException;
 import android.util.ArrayMap;
@@ -64,7 +63,7 @@ public final class FingerprintGestureController {
                 handler.post(new Runnable() { // from class: android.accessibilityservice.FingerprintGestureController$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        FingerprintGestureController.FingerprintGestureCallback.this.onGestureDetectionAvailabilityChanged(z);
+                        fingerprintGestureCallback.onGestureDetectionAvailabilityChanged(z);
                     }
                 });
             } else {
@@ -86,7 +85,7 @@ public final class FingerprintGestureController {
                 handler.post(new Runnable() { // from class: android.accessibilityservice.FingerprintGestureController$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        FingerprintGestureController.FingerprintGestureCallback.this.onGestureDetected(i);
+                        fingerprintGestureCallback.onGestureDetected(i);
                     }
                 });
             } else {

@@ -8,7 +8,9 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.SystemProperties;
 import android.util.Log;
+import com.android.keyguard.KeyguardKnoxGuardViewController$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardUpdateMonitor;
+import com.android.systemui.LsRune;
 import com.android.systemui.pluginlock.utils.DumpUtils;
 import com.android.systemui.user.domain.interactor.SelectedUserInteractor;
 import com.android.systemui.util.Assert;
@@ -16,7 +18,6 @@ import com.android.systemui.util.SafeUIState;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class PluginLockUtils {
     private static final int LEVEL_SYSUI_SAFEMODE_S = 2;
@@ -30,7 +31,6 @@ public class PluginLockUtils {
     private HandlerExecutor mHandlerExecutor = null;
     private ExecutorService mExecutors = null;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class HandlerExecutor {
         private final Handler mHandler;
 
@@ -98,7 +98,7 @@ public class PluginLockUtils {
         getExecutor().execute(new Runnable() { // from class: com.android.systemui.pluginlock.PluginLockUtils$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                PluginLockUtils.this.lambda$addDump$0(str, str2);
+                this.f$0.lambda$addDump$0(str, str2);
             }
         });
     }
@@ -110,48 +110,29 @@ public class PluginLockUtils {
                 Log.w(TAG, "callProvider, user isn't unlocked yet");
                 return null;
             }
-            Bundle call = this.mContext.getContentResolver().call(Uri.parse("content://com.samsung.android.dynamiclock.provider"), str, str2, bundle);
-            Log.d(TAG, "callProvider, result:" + call);
-            return call;
+            Bundle bundleCall = this.mContext.getContentResolver().call(Uri.parse("content://com.samsung.android.dynamiclock.provider"), str, str2, bundle);
+            Log.d(TAG, "callProvider, result:" + bundleCall);
+            return bundleCall;
         } catch (Throwable th) {
             th.printStackTrace();
             return null;
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:4:0x000d, code lost:
-    
-        if (r5.mUpdateMonitor.mUserManager.isUserUnlocked(0) != false) goto L6;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:6:0x000f  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public void checkSafeMode() {
-        /*
-            r5 = this;
-            boolean r0 = com.android.systemui.LsRune.KEYGUARD_FBE
-            if (r0 == 0) goto Lf
-            com.android.keyguard.KeyguardUpdateMonitor r0 = r5.mUpdateMonitor
-            android.os.UserManager r0 = r0.mUserManager
-            r1 = 0
-            boolean r0 = r0.isUserUnlocked(r1)
-            if (r0 == 0) goto L10
-        Lf:
-            r1 = 1
-        L10:
-            boolean r0 = r5.isGoingToRescueParty()
-            java.lang.String r2 = "checkSafeMode, userUnlocked="
-            java.lang.String r3 = ", safeMode="
-            java.lang.String r4 = "PluginLockUtils"
-            com.android.keyguard.KeyguardKnoxGuardViewController$$ExternalSyntheticOutline0.m(r2, r3, r4, r1, r0)
-            if (r0 == 0) goto L24
-            if (r1 == 0) goto L24
-            r5.requestSafeMode()
-        L24:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.pluginlock.PluginLockUtils.checkSafeMode():void");
+        boolean z;
+        if (LsRune.KEYGUARD_FBE) {
+            z = this.mUpdateMonitor.mUserManager.isUserUnlocked(0);
+        }
+        boolean zIsGoingToRescueParty = isGoingToRescueParty();
+        KeyguardKnoxGuardViewController$$ExternalSyntheticOutline0.m("checkSafeMode, userUnlocked=", ", safeMode=", TAG, z, zIsGoingToRescueParty);
+        if (zIsGoingToRescueParty && z) {
+            requestSafeMode();
+        }
     }
 
     public String getDump() {
@@ -200,7 +181,7 @@ public class PluginLockUtils {
         getExecutor().execute(new Runnable() { // from class: com.android.systemui.pluginlock.PluginLockUtils$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
-                PluginLockUtils.this.lambda$requestSafeMode$2();
+                this.f$0.lambda$requestSafeMode$2();
             }
         });
     }

@@ -5,7 +5,6 @@ import androidx.compose.animation.core.ArcMode;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class VectorizedKeyframeSpecElementInfo<V extends AnimationVector> {
     public final int arcMode;
@@ -32,9 +31,9 @@ public final class VectorizedKeyframeSpecElementInfo<V extends AnimationVector> 
     }
 
     public final int hashCode() {
-        int hashCode = (this.easing.hashCode() + (this.vectorValue.hashCode() * 31)) * 31;
+        int iHashCode = (this.easing.hashCode() + (this.vectorValue.hashCode() * 31)) * 31;
         ArcMode.Companion companion = ArcMode.Companion;
-        return Integer.hashCode(this.arcMode) + hashCode;
+        return Integer.hashCode(this.arcMode) + iHashCode;
     }
 
     public final String toString() {

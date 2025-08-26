@@ -52,9 +52,9 @@ public interface IRemoteAnimationRunner extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IRemoteAnimationRunner)) {
-                return (IRemoteAnimationRunner) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IRemoteAnimationRunner)) {
+                return (IRemoteAnimationRunner) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -84,13 +84,13 @@ public interface IRemoteAnimationRunner extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 RemoteAnimationTarget[] remoteAnimationTargetArr = (RemoteAnimationTarget[]) parcel.createTypedArray(RemoteAnimationTarget.CREATOR);
                 RemoteAnimationTarget[] remoteAnimationTargetArr2 = (RemoteAnimationTarget[]) parcel.createTypedArray(RemoteAnimationTarget.CREATOR);
                 RemoteAnimationTarget[] remoteAnimationTargetArr3 = (RemoteAnimationTarget[]) parcel.createTypedArray(RemoteAnimationTarget.CREATOR);
-                IRemoteAnimationFinishedCallback asInterface = IRemoteAnimationFinishedCallback.Stub.asInterface(parcel.readStrongBinder());
+                IRemoteAnimationFinishedCallback iRemoteAnimationFinishedCallbackAsInterface = IRemoteAnimationFinishedCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                onAnimationStart(readInt, remoteAnimationTargetArr, remoteAnimationTargetArr2, remoteAnimationTargetArr3, asInterface);
+                onAnimationStart(i3, remoteAnimationTargetArr, remoteAnimationTargetArr2, remoteAnimationTargetArr3, iRemoteAnimationFinishedCallbackAsInterface);
             } else if (i == 2) {
                 onAnimationCancelled();
             } else {
@@ -117,28 +117,28 @@ public interface IRemoteAnimationRunner extends IInterface {
 
             @Override // android.view.IRemoteAnimationRunner
             public void onAnimationStart(int i, RemoteAnimationTarget[] remoteAnimationTargetArr, RemoteAnimationTarget[] remoteAnimationTargetArr2, RemoteAnimationTarget[] remoteAnimationTargetArr3, IRemoteAnimationFinishedCallback iRemoteAnimationFinishedCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedArray(remoteAnimationTargetArr, 0);
-                    obtain.writeTypedArray(remoteAnimationTargetArr2, 0);
-                    obtain.writeTypedArray(remoteAnimationTargetArr3, 0);
-                    obtain.writeStrongInterface(iRemoteAnimationFinishedCallback);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedArray(remoteAnimationTargetArr, 0);
+                    parcelObtain.writeTypedArray(remoteAnimationTargetArr2, 0);
+                    parcelObtain.writeTypedArray(remoteAnimationTargetArr3, 0);
+                    parcelObtain.writeStrongInterface(iRemoteAnimationFinishedCallback);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.IRemoteAnimationRunner
             public void onAnimationCancelled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

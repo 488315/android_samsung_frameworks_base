@@ -57,12 +57,13 @@ import com.android.systemui.util.DeviceState;
 import com.android.systemui.util.DeviceType;
 import com.android.systemui.util.ViewController;
 import com.android.systemui.vibrate.VibrationUtil;
+import com.samsung.android.knox.ContainerProxy;
 import com.samsung.android.knox.SemPersonaManager;
 import com.samsung.android.knox.custom.IKnoxCustomManager;
 import com.samsung.android.knox.zt.internal.IKnoxZtInternalService;
 import com.samsung.android.security.mdf.MdfUtils;
+import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class KeyguardSecAbsKeyInputViewController extends KeyguardAbsKeyInputViewController {
     public final AccessibilityManager mAccessibilityManager;
@@ -100,14 +101,13 @@ public abstract class KeyguardSecAbsKeyInputViewController extends KeyguardAbsKe
     public final KeyguardUpdateMonitorCallback mUpdateMonitorCallbacks;
     public final VibrationUtil mVibrationUtil;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class OnApplyWindowInsetsListener implements View.OnApplyWindowInsetsListener {
         public /* synthetic */ OnApplyWindowInsetsListener(KeyguardSecAbsKeyInputViewController keyguardSecAbsKeyInputViewController, int i) {
             this();
         }
 
         @Override // android.view.View.OnApplyWindowInsetsListener
-        public final WindowInsets onApplyWindowInsets(View view, WindowInsets windowInsets) {
+        public final WindowInsets onApplyWindowInsets(View view, WindowInsets windowInsets) throws Resources.NotFoundException {
             int i = view.getRootView().getRootWindowInsets().getInsets(WindowInsets.Type.ime()).bottom;
             KeyguardSecAbsKeyInputViewController keyguardSecAbsKeyInputViewController = KeyguardSecAbsKeyInputViewController.this;
             if (keyguardSecAbsKeyInputViewController.mImeBottom != i) {
@@ -126,7 +126,7 @@ public abstract class KeyguardSecAbsKeyInputViewController extends KeyguardAbsKe
     /* JADX WARN: Type inference failed for: r2v2, types: [com.android.keyguard.KeyguardSecAbsKeyInputViewController$1] */
     /* JADX WARN: Type inference failed for: r2v4, types: [com.android.keyguard.KeyguardSecAbsKeyInputViewController$3] */
     /* JADX WARN: Type inference failed for: r2v5, types: [com.android.keyguard.KeyguardSecAbsKeyInputViewController$6] */
-    public KeyguardSecAbsKeyInputViewController(KeyguardSecAbsKeyInputView keyguardSecAbsKeyInputView, ConfigurationController configurationController, VibrationUtil vibrationUtil, AccessibilityManager accessibilityManager, KeyguardUpdateMonitor keyguardUpdateMonitor, KeyguardSecurityModel.SecurityMode securityMode, LockPatternUtils lockPatternUtils, KeyguardSecurityCallback keyguardSecurityCallback, KeyguardMessageAreaController.Factory factory, LatencyTracker latencyTracker, FalsingCollector falsingCollector, EmergencyButtonController emergencyButtonController, FeatureFlags featureFlags, SelectedUserInteractor selectedUserInteractor, BouncerHapticPlayer bouncerHapticPlayer, UserActivityNotifier userActivityNotifier) {
+    public KeyguardSecAbsKeyInputViewController(KeyguardSecAbsKeyInputView keyguardSecAbsKeyInputView, ConfigurationController configurationController, VibrationUtil vibrationUtil, AccessibilityManager accessibilityManager, KeyguardUpdateMonitor keyguardUpdateMonitor, KeyguardSecurityModel.SecurityMode securityMode, LockPatternUtils lockPatternUtils, KeyguardSecurityCallback keyguardSecurityCallback, KeyguardMessageAreaController.Factory factory, LatencyTracker latencyTracker, FalsingCollector falsingCollector, EmergencyButtonController emergencyButtonController, FeatureFlags featureFlags, SelectedUserInteractor selectedUserInteractor, BouncerHapticPlayer bouncerHapticPlayer, UserActivityNotifier userActivityNotifier) throws Resources.NotFoundException {
         super(keyguardSecAbsKeyInputView, keyguardUpdateMonitor, securityMode, lockPatternUtils, keyguardSecurityCallback, factory, latencyTracker, falsingCollector, emergencyButtonController, featureFlags, selectedUserInteractor, bouncerHapticPlayer, userActivityNotifier);
         this.mInterpolator = new PathInterpolator(0.17f, 0.17f, 0.4f, 1.0f);
         this.mHandler = new Handler(Looper.getMainLooper());
@@ -138,8 +138,8 @@ public abstract class KeyguardSecAbsKeyInputViewController extends KeyguardAbsKe
         this.mIsFaceRunning = false;
         this.mUpdateLayoutRunnable = new Runnable() { // from class: com.android.keyguard.KeyguardSecAbsKeyInputViewController$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
-            public final void run() {
-                KeyguardSecAbsKeyInputViewController keyguardSecAbsKeyInputViewController = KeyguardSecAbsKeyInputViewController.this;
+            public final void run() throws Resources.NotFoundException {
+                KeyguardSecAbsKeyInputViewController keyguardSecAbsKeyInputViewController = this.f$0;
                 keyguardSecAbsKeyInputViewController.mSecondsRemaining = -1;
                 keyguardSecAbsKeyInputViewController.updateLayout$1();
             }
@@ -152,7 +152,7 @@ public abstract class KeyguardSecAbsKeyInputViewController extends KeyguardAbsKe
             }
 
             @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
-            public final void onOrientationChanged(int i2) {
+            public final void onOrientationChanged(int i2) throws Resources.NotFoundException {
                 KeyguardSecAbsKeyInputViewController keyguardSecAbsKeyInputViewController = KeyguardSecAbsKeyInputViewController.this;
                 if (keyguardSecAbsKeyInputViewController.mCurrentOrientation != i2) {
                     keyguardSecAbsKeyInputViewController.mCurrentOrientation = i2;
@@ -163,7 +163,7 @@ public abstract class KeyguardSecAbsKeyInputViewController extends KeyguardAbsKe
         };
         this.mUpdateMonitorCallbacks = new KeyguardUpdateMonitorCallback() { // from class: com.android.keyguard.KeyguardSecAbsKeyInputViewController.2
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
-            public final void onBiometricAuthenticated(int i2, BiometricSourceType biometricSourceType, boolean z) {
+            public final void onBiometricAuthenticated(int i2, BiometricSourceType biometricSourceType, boolean z) throws Resources.NotFoundException {
                 if (biometricSourceType == BiometricSourceType.FINGERPRINT) {
                     KeyguardSecAbsKeyInputViewController keyguardSecAbsKeyInputViewController = KeyguardSecAbsKeyInputViewController.this;
                     if (((KeyguardAbsKeyInputViewController) keyguardSecAbsKeyInputViewController).mKeyguardUpdateMonitor.is2StepVerification()) {
@@ -219,7 +219,7 @@ public abstract class KeyguardSecAbsKeyInputViewController extends KeyguardAbsKe
             }
 
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
-            public final void onLockModeChanged() {
+            public final void onLockModeChanged() throws Resources.NotFoundException {
                 KeyguardSecAbsKeyInputViewController keyguardSecAbsKeyInputViewController = KeyguardSecAbsKeyInputViewController.this;
                 if (((KeyguardAbsKeyInputViewController) keyguardSecAbsKeyInputViewController).mKeyguardUpdateMonitor.getLockoutAttemptDeadline() == 0) {
                     keyguardSecAbsKeyInputViewController.mSecondsRemaining = -1;
@@ -245,9 +245,9 @@ public abstract class KeyguardSecAbsKeyInputViewController extends KeyguardAbsKe
                 SuggestionsAdapter$$ExternalSyntheticOutline0.m(failedUnlockAttempts, i3, "onSimulationFailToUnlock failedAttempts : ", " timeoutMs : ", "KeyguardSecAbsKeyInputViewController");
                 keyguardSecAbsKeyInputViewController.getKeyguardSecurityCallback().reportUnlockAttempt(i2, i3, false);
                 if (i3 == 0) {
-                    boolean isHintText = keyguardSecAbsKeyInputViewController.isHintText();
+                    boolean zIsHintText = keyguardSecAbsKeyInputViewController.isHintText();
                     KeyguardHintTextArea keyguardHintTextArea = keyguardSecAbsKeyInputViewController.mHintText;
-                    if (isHintText && keyguardHintTextArea.getVisibility() == 8) {
+                    if (zIsHintText && keyguardHintTextArea.getVisibility() == 8) {
                         keyguardHintTextArea.setVisibility(0);
                     }
                     if (keyguardSecAbsKeyInputViewController.isHintText()) {
@@ -270,7 +270,7 @@ public abstract class KeyguardSecAbsKeyInputViewController extends KeyguardAbsKe
             }
 
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
-            public final void onStartedWakingUp() {
+            public final void onStartedWakingUp() throws Resources.NotFoundException {
                 KeyguardSecAbsKeyInputViewController keyguardSecAbsKeyInputViewController = KeyguardSecAbsKeyInputViewController.this;
                 if (keyguardSecAbsKeyInputViewController.mSecondsRemaining > 0 && ((KeyguardAbsKeyInputViewController) keyguardSecAbsKeyInputViewController).mKeyguardUpdateMonitor.getLockoutAttemptDeadline() == 0) {
                     keyguardSecAbsKeyInputViewController.mSecondsRemaining = -1;
@@ -282,7 +282,7 @@ public abstract class KeyguardSecAbsKeyInputViewController extends KeyguardAbsKe
             }
 
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
-            public final void onTableModeChanged(boolean z) {
+            public final void onTableModeChanged(boolean z) throws Resources.NotFoundException {
                 boolean z2 = LsRune.SECURITY_SUB_DISPLAY_LOCK;
                 KeyguardSecAbsKeyInputViewController keyguardSecAbsKeyInputViewController = KeyguardSecAbsKeyInputViewController.this;
                 if (!z2 || keyguardSecAbsKeyInputViewController.isLandscapeDisplay()) {
@@ -314,68 +314,51 @@ public abstract class KeyguardSecAbsKeyInputViewController extends KeyguardAbsKe
                 keyguardSecAbsKeyInputViewController.disableDevicePermanently();
             }
 
-            /* JADX WARN: Removed duplicated region for block: B:10:0x0047 A[SYNTHETIC] */
-            /* JADX WARN: Removed duplicated region for block: B:14:0x001d A[SYNTHETIC] */
+            /* JADX WARN: Removed duplicated region for block: B:19:0x0047 A[SYNTHETIC] */
+            /* JADX WARN: Removed duplicated region for block: B:22:0x001d A[SYNTHETIC] */
+            /* JADX WARN: Removed duplicated region for block: B:8:0x0037  */
             @Override // com.android.systemui.knox.KnoxStateMonitorCallback
             /*
                 Code decompiled incorrectly, please refer to instructions dump.
-                To view partially-correct code enable 'Show inconsistent code' option in preferences
             */
             public final void onDisableProfileWhenReachMaxFailed() {
-                /*
-                    r7 = this;
-                    com.android.keyguard.KeyguardSecAbsKeyInputViewController r7 = com.android.keyguard.KeyguardSecAbsKeyInputViewController.this
-                    r7.getClass()
-                    java.lang.String r0 = "KeyguardSecAbsKeyInputViewController"
-                    java.lang.String r1 = "disableProfilePermanently"
-                    android.util.Log.d(r0, r1)
-                    com.android.systemui.knox.KnoxStateMonitor r7 = r7.mKnoxStateMonitor
-                    com.android.systemui.knox.KnoxStateMonitorImpl r7 = (com.android.systemui.knox.KnoxStateMonitorImpl) r7
-                    java.util.List r0 = r7.getContainerIds()
-                    java.util.ArrayList r0 = (java.util.ArrayList) r0
-                    int r1 = r0.size()
-                    r2 = 0
-                    r3 = -1
-                    r4 = r2
-                L1d:
-                    if (r4 >= r1) goto L49
-                    java.lang.Object r5 = r0.get(r4)
-                    int r4 = r4 + 1
-                    java.lang.Integer r5 = (java.lang.Integer) r5
-                    int r5 = r5.intValue()
-                    boolean r6 = r7.isPersona(r5)
-                    if (r6 == 0) goto L1d
-                    boolean r6 = com.android.systemui.util.DeviceState.isTesting()
-                    if (r6 == 0) goto L39
-                L37:
-                    r6 = r2
-                    goto L45
-                L39:
-                    com.android.systemui.knox.ContainerMonitor r6 = r7.mContainerMonitor
-                    r6.getClass()
-                    if (r5 != 0) goto L41
-                    goto L37
-                L41:
-                    boolean r6 = com.samsung.android.knox.SemPersonaManager.isSecureFolderId(r5)
-                L45:
-                    if (r6 != 0) goto L1d
-                    r3 = r5
-                    goto L1d
-                L49:
-                    android.os.Bundle r7 = new android.os.Bundle
-                    r7.<init>()
-                    java.lang.String r0 = "android.intent.extra.user_handle"
-                    r7.putInt(r0, r3)
-                    java.lang.String r0 = "knox.container.proxy.POLICY_ADMIN_LOCK"
-                    com.samsung.android.knox.ContainerProxy.sendPolicyUpdate(r0, r7)
-                    return
-                */
-                throw new UnsupportedOperationException("Method not decompiled: com.android.keyguard.KeyguardSecAbsKeyInputViewController.AnonymousClass3.onDisableProfileWhenReachMaxFailed():void");
+                boolean zIsSecureFolderId;
+                KeyguardSecAbsKeyInputViewController keyguardSecAbsKeyInputViewController = KeyguardSecAbsKeyInputViewController.this;
+                keyguardSecAbsKeyInputViewController.getClass();
+                Log.d("KeyguardSecAbsKeyInputViewController", "disableProfilePermanently");
+                KnoxStateMonitorImpl knoxStateMonitorImpl = (KnoxStateMonitorImpl) keyguardSecAbsKeyInputViewController.mKnoxStateMonitor;
+                ArrayList arrayList = (ArrayList) knoxStateMonitorImpl.getContainerIds();
+                int size = arrayList.size();
+                int i2 = -1;
+                int i3 = 0;
+                while (i3 < size) {
+                    Object obj = arrayList.get(i3);
+                    i3++;
+                    int iIntValue = ((Integer) obj).intValue();
+                    if (knoxStateMonitorImpl.isPersona(iIntValue)) {
+                        if (DeviceState.isTesting()) {
+                            zIsSecureFolderId = false;
+                            if (zIsSecureFolderId) {
+                                i2 = iIntValue;
+                            }
+                        } else {
+                            knoxStateMonitorImpl.mContainerMonitor.getClass();
+                            if (iIntValue != 0) {
+                                zIsSecureFolderId = SemPersonaManager.isSecureFolderId(iIntValue);
+                            }
+                            if (zIsSecureFolderId) {
+                            }
+                        }
+                    }
+                }
+                Bundle bundle = new Bundle();
+                bundle.putInt("android.intent.extra.user_handle", i2);
+                ContainerProxy.sendPolicyUpdate("knox.container.proxy.POLICY_ADMIN_LOCK", bundle);
             }
         };
         this.mDisplayListener = new DisplayLifecycle.Observer() { // from class: com.android.keyguard.KeyguardSecAbsKeyInputViewController.6
             @Override // com.android.systemui.keyguard.DisplayLifecycle.Observer
-            public final void onFolderStateChanged(boolean z) {
+            public final void onFolderStateChanged(boolean z) throws Resources.NotFoundException {
                 KeyguardSecAbsKeyInputViewController.this.reset$1();
             }
         };
@@ -441,7 +424,7 @@ public abstract class KeyguardSecAbsKeyInputViewController extends KeyguardAbsKe
         Resources resources = getResources();
         int dimensionPixelSize = resources.getDimensionPixelSize(z ? R.dimen.kg_password_container_margin_bottom : R.dimen.kg_pin_container_margin_bottom) + DeviceState.getInDisplayFingerprintHeight();
         View view = this.mEcaView;
-        return ((dimensionPixelSize - ((view == null || view.findViewById(R.id.emergency_call_button).getVisibility() != 0) ? 0 : resources.getDimensionPixelSize(R.dimen.keyguard_bottom_area_emergency_button_area_min_height))) - resources.getDimensionPixelSize(z ? R.dimen.kg_password_eca_margin_bottom : R.dimen.kg_pin_eca_margin_bottom)) - resources.getDimensionPixelSize(android.R.dimen.secondary_waterfall_display_left_edge_size);
+        return ((dimensionPixelSize - ((view == null || view.findViewById(R.id.emergency_call_button).getVisibility() != 0) ? 0 : resources.getDimensionPixelSize(R.dimen.keyguard_bottom_area_emergency_button_area_min_height))) - resources.getDimensionPixelSize(z ? R.dimen.kg_password_eca_margin_bottom : R.dimen.kg_pin_eca_margin_bottom)) - resources.getDimensionPixelSize(android.R.dimen.secondary_waterfall_display_right_edge_size);
     }
 
     public int getSecurityViewId() {
@@ -473,7 +456,7 @@ public abstract class KeyguardSecAbsKeyInputViewController extends KeyguardAbsKe
         }
         ?? r2 = new SecCountDownTimer(j - SystemClock.elapsedRealtime(), 1000L, getContext(), this.mSelectedUserInteractor, ((KeyguardAbsKeyInputViewController) this).mKeyguardUpdateMonitor, this.mKeyguardTextBuilder, true) { // from class: com.android.keyguard.KeyguardSecAbsKeyInputViewController.4
             @Override // com.android.keyguard.SecCountDownTimer, android.os.CountDownTimer
-            public final void onFinish() {
+            public final void onFinish() throws Resources.NotFoundException {
                 int selectedUserId = KeyguardSecAbsKeyInputViewController.this.mSelectedUserInteractor.getSelectedUserId();
                 if (KeyguardSecAbsKeyInputViewController.this.isHintText()) {
                     KeyguardSecAbsKeyInputViewController.this.mHintText.setVisibility(0);
@@ -499,11 +482,11 @@ public abstract class KeyguardSecAbsKeyInputViewController extends KeyguardAbsKe
             }
 
             @Override // com.android.keyguard.SecCountDownTimer, android.os.CountDownTimer
-            public final void onTick(long j2) {
-                int round = (int) Math.round(j2 / 1000.0d);
+            public final void onTick(long j2) throws Resources.NotFoundException {
+                int iRound = (int) Math.round(j2 / 1000.0d);
                 if (((KeyguardAbsKeyInputViewController) KeyguardSecAbsKeyInputViewController.this).mKeyguardUpdateMonitor.isHiddenInputContainer()) {
                     KeyguardSecAbsKeyInputViewController keyguardSecAbsKeyInputViewController = KeyguardSecAbsKeyInputViewController.this;
-                    keyguardSecAbsKeyInputViewController.mSecondsRemaining = round;
+                    keyguardSecAbsKeyInputViewController.mSecondsRemaining = iRound;
                     keyguardSecAbsKeyInputViewController.mPasswordEntryBoxLayout.setVisibility(8);
                 }
                 super.onTick(j2);
@@ -535,10 +518,10 @@ public abstract class KeyguardSecAbsKeyInputViewController extends KeyguardAbsKe
 
     public final boolean isAllowedToAdjustSecurityView() {
         Context context = getContext();
-        boolean isFingerprintOptionEnabled = ((KeyguardAbsKeyInputViewController) this).mKeyguardUpdateMonitor.isFingerprintOptionEnabled();
+        boolean zIsFingerprintOptionEnabled = ((KeyguardAbsKeyInputViewController) this).mKeyguardUpdateMonitor.isFingerprintOptionEnabled();
         int i = SecurityUtils.sPINContainerBottomMargin;
         Resources resources = context.getResources();
-        return Math.max(resources.getConfiguration().windowConfiguration.getBounds().width(), resources.getConfiguration().windowConfiguration.getBounds().height()) < ((resources.getDimensionPixelSize(R.dimen.kg_biometric_view_min_height) + (resources.getDimensionPixelSize(R.dimen.kg_lock_icon_top_margin) + resources.getDimensionPixelSize(R.dimen.status_bar_header_height_keyguard))) + (resources.getDimensionPixelSize(R.dimen.kg_pin_eca_margin_bottom) + (resources.getDimensionPixelSize(R.dimen.keyguard_bottom_area_emergency_button_area_min_height) + (resources.getDimensionPixelSize(R.dimen.kg_pin_container_margin_bottom) + ((resources.getDimensionPixelSize(R.dimen.kg_security_input_box_height) + (resources.getDimensionPixelSize(R.dimen.kg_sub_help_text_font_size) + (resources.getDimensionPixelSize(R.dimen.kg_message_area_font_size) + (resources.getDimensionPixelSize(R.dimen.keyguard_hint_text) + (resources.getDimensionPixelSize(R.dimen.kg_message_area_font_size) * 3))))) + ((!LsRune.SECURITY_SUB_DISPLAY_LOCK || !((DisplayLifecycle) Dependency.sDependency.getDependencyInner(DisplayLifecycle.class)).mIsFolderOpened) ? SecurityUtils.getPINContainerHeight(context) : SecurityUtils.getFoldPINContainerHeight(context))))))) + (isFingerprintOptionEnabled ? DeviceState.getInDisplayFingerprintHeight() : 0);
+        return Math.max(resources.getConfiguration().windowConfiguration.getBounds().width(), resources.getConfiguration().windowConfiguration.getBounds().height()) < ((resources.getDimensionPixelSize(R.dimen.kg_biometric_view_min_height) + (resources.getDimensionPixelSize(R.dimen.kg_lock_icon_top_margin) + resources.getDimensionPixelSize(R.dimen.status_bar_header_height_keyguard))) + (resources.getDimensionPixelSize(R.dimen.kg_pin_eca_margin_bottom) + (resources.getDimensionPixelSize(R.dimen.keyguard_bottom_area_emergency_button_area_min_height) + (resources.getDimensionPixelSize(R.dimen.kg_pin_container_margin_bottom) + ((resources.getDimensionPixelSize(R.dimen.kg_security_input_box_height) + (resources.getDimensionPixelSize(R.dimen.kg_sub_help_text_font_size) + (resources.getDimensionPixelSize(R.dimen.kg_message_area_font_size) + (resources.getDimensionPixelSize(R.dimen.keyguard_hint_text) + (resources.getDimensionPixelSize(R.dimen.kg_message_area_font_size) * 3))))) + ((!LsRune.SECURITY_SUB_DISPLAY_LOCK || !((DisplayLifecycle) Dependency.sDependency.getDependencyInner(DisplayLifecycle.class)).mIsFolderOpened) ? SecurityUtils.getPINContainerHeight(context) : SecurityUtils.getFoldPINContainerHeight(context))))))) + (zIsFingerprintOptionEnabled ? DeviceState.getInDisplayFingerprintHeight() : 0);
     }
 
     public final boolean isBiometricLockoutLandscape() {
@@ -600,9 +583,9 @@ public abstract class KeyguardSecAbsKeyInputViewController extends KeyguardAbsKe
                 if (knoxStateMonitorImpl.isDeviceDisabledForMaxFailedAttempt()) {
                     AuditLog.logEventAsUser(i, IKnoxCustomManager.Stub.TRANSACTION_setShuttingDownAnimationSub, new Object[]{Integer.valueOf(i)});
                     try {
-                        IKnoxZtInternalService asInterface = IKnoxZtInternalService.Stub.asInterface(ServiceManager.getService("knoxztinternal"));
-                        if (asInterface != null) {
-                            asInterface.notifyFrameworkEvent(5, 0, (Bundle) null);
+                        IKnoxZtInternalService iKnoxZtInternalServiceAsInterface = IKnoxZtInternalService.Stub.asInterface(ServiceManager.getService("knoxztinternal"));
+                        if (iKnoxZtInternalServiceAsInterface != null) {
+                            iKnoxZtInternalServiceAsInterface.notifyFrameworkEvent(5, 0, (Bundle) null);
                         }
                     } catch (Throwable th) {
                         th.printStackTrace();
@@ -687,19 +670,19 @@ public abstract class KeyguardSecAbsKeyInputViewController extends KeyguardAbsKe
     }
 
     @Override // com.android.keyguard.KeyguardAbsKeyInputViewController, com.android.keyguard.KeyguardInputViewController
-    public void reset$1() {
+    public void reset$1() throws Resources.NotFoundException {
         this.mDismissing = false;
         ((KeyguardSecAbsKeyInputView) this.mView).resetPasswordText(false, false);
         KeyguardUpdateMonitor keyguardUpdateMonitor = ((KeyguardAbsKeyInputViewController) this).mKeyguardUpdateMonitor;
         long lockoutAttemptDeadline = keyguardUpdateMonitor.getLockoutAttemptDeadline();
-        boolean isDualDarInnerAuthRequired = keyguardUpdateMonitor.isDualDarInnerAuthRequired(this.mSelectedUserInteractor.getSelectedUserId());
+        boolean zIsDualDarInnerAuthRequired = keyguardUpdateMonitor.isDualDarInnerAuthRequired(this.mSelectedUserInteractor.getSelectedUserId());
         KnoxStateMonitor knoxStateMonitor = this.mKnoxStateMonitor;
-        if (isDualDarInnerAuthRequired) {
+        if (zIsDualDarInnerAuthRequired) {
             long dualDarInnerLockoutAttemptDeadline$1 = ((KnoxStateMonitorImpl) knoxStateMonitor).getDualDarInnerLockoutAttemptDeadline$1();
             if (dualDarInnerLockoutAttemptDeadline$1 != 0 && dualDarInnerLockoutAttemptDeadline$1 > lockoutAttemptDeadline) {
-                StringBuilder m = SnapshotStateObserver$$ExternalSyntheticOutline0.m("reset() switch to inner deadline. deadline = ", lockoutAttemptDeadline, ", innerDeadline = ");
-                m.append(dualDarInnerLockoutAttemptDeadline$1);
-                Log.d("KeyguardSecAbsKeyInputViewController", m.toString());
+                StringBuilder sbM = SnapshotStateObserver$$ExternalSyntheticOutline0.m("reset() switch to inner deadline. deadline = ", lockoutAttemptDeadline, ", innerDeadline = ");
+                sbM.append(dualDarInnerLockoutAttemptDeadline$1);
+                Log.d("KeyguardSecAbsKeyInputViewController", sbM.toString());
                 ((KeyguardSecAbsKeyInputView) this.mView).enableTouch();
                 lockoutAttemptDeadline = dualDarInnerLockoutAttemptDeadline$1;
             }
@@ -711,9 +694,9 @@ public abstract class KeyguardSecAbsKeyInputViewController extends KeyguardAbsKe
             return;
         }
         knoxStateMonitorImpl.isDisableDeviceByMultifactor();
-        boolean shouldLockout = shouldLockout(lockoutAttemptDeadline);
+        boolean zShouldLockout = shouldLockout(lockoutAttemptDeadline);
         KeyguardHintTextArea keyguardHintTextArea = this.mHintText;
-        if (shouldLockout) {
+        if (zShouldLockout) {
             if (isHintText()) {
                 keyguardHintTextArea.setVisibility(8);
             }
@@ -738,11 +721,11 @@ public abstract class KeyguardSecAbsKeyInputViewController extends KeyguardAbsKe
     }
 
     public final void resetFor2StepVerification() {
-        boolean isPasswordView = isPasswordView(getSecurityViewId());
+        boolean zIsPasswordView = isPasswordView(getSecurityViewId());
         KeyguardUpdateMonitor keyguardUpdateMonitor = ((KeyguardAbsKeyInputViewController) this).mKeyguardUpdateMonitor;
         if (!keyguardUpdateMonitor.is2StepVerification() || keyguardUpdateMonitor.getUserUnlockedWithBiometric(this.mSelectedUserInteractor.getSelectedUserId())) {
             ((KeyguardSecAbsKeyInputView) this.mView).setPasswordEntryEnabled(true);
-            if (isPasswordView) {
+            if (zIsPasswordView) {
                 ((KeyguardSecAbsKeyInputView) this.mView).setPasswordEntryInputEnabled(true);
                 return;
             }
@@ -750,26 +733,26 @@ public abstract class KeyguardSecAbsKeyInputViewController extends KeyguardAbsKe
         }
         Log.d("KeyguardSecAbsKeyInputViewController", "reset() - 2 step verification");
         ((KeyguardSecAbsKeyInputView) this.mView).setPasswordEntryEnabled(false);
-        if (isPasswordView) {
+        if (zIsPasswordView) {
             ((KeyguardSecAbsKeyInputView) this.mView).setPasswordEntryInputEnabled(false);
         }
     }
 
     public final void setEmergencyButtonCallback(boolean z) {
-        View view;
+        View viewFindViewById;
         if (CscRune.SECURITY_DIRECT_CALL_TO_ECC) {
             KeyguardSecAbsKeyInputView keyguardSecAbsKeyInputView = (KeyguardSecAbsKeyInputView) this.mView;
-            view = keyguardSecAbsKeyInputView.findViewById(keyguardSecAbsKeyInputView.getPasswordTextViewId());
+            viewFindViewById = keyguardSecAbsKeyInputView.findViewById(keyguardSecAbsKeyInputView.getPasswordTextViewId());
         } else {
-            view = null;
+            viewFindViewById = null;
         }
         KeyguardAbsKeyInputViewController.AnonymousClass1 anonymousClass1 = z ? this.mEmergencyButtonCallback : null;
         EmergencyButtonController emergencyButtonController = this.mEmergencyButtonController;
         emergencyButtonController.mEmergencyButtonCallback = anonymousClass1;
-        emergencyButtonController.mPasswordEntry = view;
+        emergencyButtonController.mPasswordEntry = viewFindViewById;
     }
 
-    public final void setLandscapeLayoutPadding(LinearLayout linearLayout, boolean z) {
+    public final void setLandscapeLayoutPadding(LinearLayout linearLayout, boolean z) throws Resources.NotFoundException {
         int dimensionPixelSize = getResources().getDimensionPixelSize(R.dimen.kg_message_area_padding_side);
         linearLayout.setPadding(0, 0, z ? dimensionPixelSize : 0, 0);
         if (((KeyguardAbsKeyInputViewController) this).mKeyguardUpdateMonitor.isInDisplayFingerprintMarginAccepted()) {
@@ -841,9 +824,9 @@ public abstract class KeyguardSecAbsKeyInputViewController extends KeyguardAbsKe
             if (keyguardUpdateMonitor.isDualDarInnerAuthRequired(this.mSelectedUserInteractor.getSelectedUserId())) {
                 long dualDarInnerLockoutAttemptDeadline$1 = ((KnoxStateMonitorImpl) this.mKnoxStateMonitor).getDualDarInnerLockoutAttemptDeadline$1();
                 if (dualDarInnerLockoutAttemptDeadline$1 != 0 && dualDarInnerLockoutAttemptDeadline$1 > lockoutAttemptDeadline) {
-                    StringBuilder m = SnapshotStateObserver$$ExternalSyntheticOutline0.m("showPromptReason() switch to inner deadline. deadline = ", lockoutAttemptDeadline, ", innerDeadline = ");
-                    m.append(dualDarInnerLockoutAttemptDeadline$1);
-                    Log.d("KeyguardSecAbsKeyInputViewController", m.toString());
+                    StringBuilder sbM = SnapshotStateObserver$$ExternalSyntheticOutline0.m("showPromptReason() switch to inner deadline. deadline = ", lockoutAttemptDeadline, ", innerDeadline = ");
+                    sbM.append(dualDarInnerLockoutAttemptDeadline$1);
+                    Log.d("KeyguardSecAbsKeyInputViewController", sbM.toString());
                     lockoutAttemptDeadline = dualDarInnerLockoutAttemptDeadline$1;
                 }
             }
@@ -862,16 +845,16 @@ public abstract class KeyguardSecAbsKeyInputViewController extends KeyguardAbsKe
         return keyguardUpdateMonitor.mGoingToSleep || !keyguardUpdateMonitor.mDeviceInteractive;
     }
 
-    public void updateLayout$1() {
+    public void updateLayout$1() throws Resources.NotFoundException {
         Space space;
         int currentRotation = SecurityUtils.getCurrentRotation(getContext());
         int securityViewId = getSecurityViewId();
-        boolean isTablet = DeviceType.isTablet();
+        boolean zIsTablet = DeviceType.isTablet();
         KeyguardSecMessageAreaController keyguardSecMessageAreaController = this.mSubMessageAreaController;
-        if (isTablet) {
+        if (zIsTablet) {
             int securityViewId2 = getSecurityViewId();
-            boolean isPINSecurityView = isPINSecurityView(securityViewId2);
-            boolean isPasswordView = isPasswordView(securityViewId2);
+            boolean zIsPINSecurityView = isPINSecurityView(securityViewId2);
+            boolean zIsPasswordView = isPasswordView(securityViewId2);
             Resources resources = getResources();
             LinearLayout linearLayout = this.mBottomView;
             if (linearLayout != null) {
@@ -889,7 +872,7 @@ public abstract class KeyguardSecAbsKeyInputViewController extends KeyguardAbsKe
                 this.mMessageArea.setLayoutParams(layoutParams2);
             }
             LinearLayout linearLayout3 = this.mMessageContainer;
-            if (linearLayout3 != null && isPINSecurityView) {
+            if (linearLayout3 != null && zIsPINSecurityView) {
                 ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) linearLayout3.getLayoutParams();
                 marginLayoutParams.bottomMargin = resources.getDimensionPixelSize(R.dimen.kg_security_pin_input_box_margin_bottom_tablet);
                 this.mMessageContainer.setLayoutParams(marginLayoutParams);
@@ -904,16 +887,16 @@ public abstract class KeyguardSecAbsKeyInputViewController extends KeyguardAbsKe
             LinearLayout linearLayout5 = this.mContainer;
             if (linearLayout5 != null) {
                 LinearLayout.LayoutParams layoutParams3 = (LinearLayout.LayoutParams) linearLayout5.getLayoutParams();
-                if (isPINSecurityView) {
+                if (zIsPINSecurityView) {
                     layoutParams3.bottomMargin = resources.getDimensionPixelSize(R.dimen.kg_pin_container_margin_bottom_tablet);
-                } else if (isPasswordView) {
+                } else if (zIsPasswordView) {
                     layoutParams3.topMargin = resources.getDimensionPixelSize(R.dimen.kg_security_input_box_margin_top_tablet);
                     layoutParams3.bottomMargin = 0;
                 }
                 this.mContainer.setLayoutParams(layoutParams3);
             }
             ViewGroup viewGroup = this.mPasswordEntryBoxLayout;
-            if (viewGroup != null && isPasswordView) {
+            if (viewGroup != null && zIsPasswordView) {
                 LinearLayout.LayoutParams layoutParams4 = (LinearLayout.LayoutParams) viewGroup.getLayoutParams();
                 layoutParams4.width = resources.getDimensionPixelSize(R.dimen.kg_security_input_box_width_tablet);
                 layoutParams4.height = resources.getDimensionPixelSize(R.dimen.kg_security_input_box_height_tablet);
@@ -923,7 +906,7 @@ public abstract class KeyguardSecAbsKeyInputViewController extends KeyguardAbsKe
             View view = this.mEcaView;
             if (view != null) {
                 ViewGroup.MarginLayoutParams marginLayoutParams2 = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
-                marginLayoutParams2.setMargins(marginLayoutParams2.leftMargin, marginLayoutParams2.topMargin, marginLayoutParams2.rightMargin, isPasswordView ? resources.getDimensionPixelSize(R.dimen.kg_password_eca_margin_bottom_tablet) : resources.getDimensionPixelSize(R.dimen.kg_pin_eca_margin_bottom_tablet));
+                marginLayoutParams2.setMargins(marginLayoutParams2.leftMargin, marginLayoutParams2.topMargin, marginLayoutParams2.rightMargin, zIsPasswordView ? resources.getDimensionPixelSize(R.dimen.kg_password_eca_margin_bottom_tablet) : resources.getDimensionPixelSize(R.dimen.kg_pin_eca_margin_bottom_tablet));
                 this.mEcaView.setLayoutParams(marginLayoutParams2);
                 EmergencyButton emergencyButton = (EmergencyButton) this.mEcaView.findViewById(R.id.emergency_call_button);
                 if (emergencyButton != null) {
@@ -935,7 +918,7 @@ public abstract class KeyguardSecAbsKeyInputViewController extends KeyguardAbsKe
         } else {
             KeyguardUpdateMonitor keyguardUpdateMonitor = ((KeyguardAbsKeyInputViewController) this).mKeyguardUpdateMonitor;
             if (keyguardUpdateMonitor.isDualDisplayPolicyAllowed()) {
-                boolean isAllowedToAdjustSecurityView = isAllowedToAdjustSecurityView();
+                boolean zIsAllowedToAdjustSecurityView = isAllowedToAdjustSecurityView();
                 updatePortraitLayout(securityViewId);
                 LinearLayout linearLayout6 = this.mBottomView;
                 if (linearLayout6 != null && (linearLayout6.getLayoutParams() instanceof FrameLayout.LayoutParams)) {
@@ -944,7 +927,7 @@ public abstract class KeyguardSecAbsKeyInputViewController extends KeyguardAbsKe
                     this.mBottomView.setLayoutParams(layoutParams6);
                 }
                 if (keyguardSecMessageAreaController != null) {
-                    if (isBiometricLockoutLandscape() || (!this.mIsFaceRunning && isAllowedToAdjustSecurityView && isLandscapeDisplay())) {
+                    if (isBiometricLockoutLandscape() || (!this.mIsFaceRunning && zIsAllowedToAdjustSecurityView && isLandscapeDisplay())) {
                         keyguardSecMessageAreaController.setVisibility(8);
                     } else {
                         keyguardSecMessageAreaController.setVisibility(0);
@@ -955,9 +938,9 @@ public abstract class KeyguardSecAbsKeyInputViewController extends KeyguardAbsKe
             } else {
                 Resources resources2 = getResources();
                 Rect bounds = resources2.getConfiguration().windowConfiguration.getBounds();
-                int calculateLandscapeViewWidth = SecurityUtils.calculateLandscapeViewWidth(Math.max(bounds.width(), bounds.height()), getContext());
+                int iCalculateLandscapeViewWidth = SecurityUtils.calculateLandscapeViewWidth(Math.max(bounds.width(), bounds.height()), getContext());
                 int dimensionPixelSize = resources2.getDimensionPixelSize(R.dimen.kg_message_area_padding_side);
-                boolean isPasswordView2 = isPasswordView(getSecurityViewId());
+                boolean zIsPasswordView2 = isPasswordView(getSecurityViewId());
                 LinearLayout linearLayout7 = this.mBottomView;
                 if (linearLayout7 != null) {
                     linearLayout7.setGravity(8388691);
@@ -984,16 +967,16 @@ public abstract class KeyguardSecAbsKeyInputViewController extends KeyguardAbsKe
                 if (linearLayout9 != null && this.mInputContainer != null) {
                     LinearLayout.LayoutParams layoutParams9 = (LinearLayout.LayoutParams) linearLayout9.getLayoutParams();
                     LinearLayout.LayoutParams layoutParams10 = (LinearLayout.LayoutParams) this.mInputContainer.getLayoutParams();
-                    layoutParams9.width = calculateLandscapeViewWidth;
+                    layoutParams9.width = iCalculateLandscapeViewWidth;
                     layoutParams9.height = -1;
                     layoutParams9.bottomMargin = 0;
                     this.mMessageArea.setLayoutParams(layoutParams9);
-                    layoutParams10.width = calculateLandscapeViewWidth;
+                    layoutParams10.width = iCalculateLandscapeViewWidth;
                     layoutParams10.height = -1;
                     layoutParams10.topMargin = 0;
                     this.mInputContainer.setLayoutParams(layoutParams10);
                     this.mInputContainer.setVisibility(0);
-                    if (isPasswordView2) {
+                    if (zIsPasswordView2) {
                         setLandscapeLayoutPadding(this.mMessageArea, true);
                         setLandscapeLayoutPadding(this.mInputContainer, false);
                         this.mInputContainer.setGravity(17);
@@ -1005,7 +988,7 @@ public abstract class KeyguardSecAbsKeyInputViewController extends KeyguardAbsKe
                         LinearLayout.LayoutParams layoutParams11 = (LinearLayout.LayoutParams) linearLayout10.getLayoutParams();
                         layoutParams11.width = -2;
                         layoutParams11.height = -2;
-                        if (isPasswordView2) {
+                        if (zIsPasswordView2) {
                             layoutParams11.leftMargin = 0;
                             layoutParams11.rightMargin = 0;
                             layoutParams11.topMargin = 0;
@@ -1031,7 +1014,7 @@ public abstract class KeyguardSecAbsKeyInputViewController extends KeyguardAbsKe
                     this.mEcaView.setLayoutParams(marginLayoutParams4);
                     this.mEcaView.setVisibility(0);
                     this.mEmergencyButtonController.setEmergencyView(this.mEcaView.findViewById(R.id.emergency_call_button));
-                    if (isPasswordView2 && (space = this.mDummyEcaSpace) != null) {
+                    if (zIsPasswordView2 && (space = this.mDummyEcaSpace) != null) {
                         ViewGroup.MarginLayoutParams marginLayoutParams5 = (ViewGroup.MarginLayoutParams) space.getLayoutParams();
                         marginLayoutParams5.setMargins(0, 0, 0, resources2.getDimensionPixelSize(R.dimen.kg_password_container_margin_bottom));
                         this.mDummyEcaSpace.setLayoutParams(marginLayoutParams5);
@@ -1059,7 +1042,7 @@ public abstract class KeyguardSecAbsKeyInputViewController extends KeyguardAbsKe
         }
     }
 
-    public final void updateLayoutForAttemptRemainingBeforeWipe() {
+    public final void updateLayoutForAttemptRemainingBeforeWipe() throws Resources.NotFoundException {
         int dimensionPixelSize;
         Space space;
         int dimensionPixelSize2;
@@ -1072,7 +1055,7 @@ public abstract class KeyguardSecAbsKeyInputViewController extends KeyguardAbsKe
         }
         Resources resources = getResources();
         if (this.mSecondsRemaining >= 0) {
-            boolean isTablet = DeviceType.isTablet();
+            boolean zIsTablet = DeviceType.isTablet();
             keyguardUpdateMonitor.getClass();
             LinearLayout linearLayout = this.mMessageArea;
             KeyguardSecMessageAreaController keyguardSecMessageAreaController = this.mSubMessageAreaController;
@@ -1083,10 +1066,10 @@ public abstract class KeyguardSecAbsKeyInputViewController extends KeyguardAbsKe
                 Rect bounds = resources.getConfiguration().windowConfiguration.getBounds();
                 int currentRotation = SecurityUtils.getCurrentRotation(getContext());
                 boolean z = currentRotation == 0 || currentRotation == 2;
-                int width = bounds.width();
-                int height = bounds.height();
-                int max = z ? Math.max(width, height) : Math.min(width, height);
-                if (isTablet) {
+                int iWidth = bounds.width();
+                int iHeight = bounds.height();
+                int iMax = z ? Math.max(iWidth, iHeight) : Math.min(iWidth, iHeight);
+                if (zIsTablet) {
                     dimensionPixelSize2 = resources.getDimensionPixelSize(R.dimen.keyguard_bottom_area_emergency_button_area_min_height_tablet);
                     dimensionPixelSize3 = resources.getDimensionPixelSize(R.dimen.kg_pattern_eca_margin_bottom_tablet);
                 } else {
@@ -1094,10 +1077,10 @@ public abstract class KeyguardSecAbsKeyInputViewController extends KeyguardAbsKe
                     dimensionPixelSize3 = resources.getDimensionPixelSize(R.dimen.kg_pattern_eca_margin_bottom);
                 }
                 int i2 = dimensionPixelSize3 + dimensionPixelSize2;
-                int dimensionPixelSize4 = getResources().getDimensionPixelSize(android.R.dimen.secondary_waterfall_display_left_edge_size);
+                int dimensionPixelSize4 = getResources().getDimensionPixelSize(android.R.dimen.secondary_waterfall_display_right_edge_size);
                 LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) this.mMessageArea.getLayoutParams();
                 layoutParams.width = -1;
-                layoutParams.height = (max - i2) - dimensionPixelSize4;
+                layoutParams.height = (iMax - i2) - dimensionPixelSize4;
                 if (z) {
                     dimensionPixelSize4 = resources.getDimensionPixelSize(R.dimen.kg_message_area_padding_side);
                 }
@@ -1123,15 +1106,15 @@ public abstract class KeyguardSecAbsKeyInputViewController extends KeyguardAbsKe
             View view = this.mEcaView;
             if (view != null) {
                 ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
-                boolean isPasswordView = isPasswordView(getSecurityViewId());
-                if (isPasswordView) {
-                    dimensionPixelSize = resources.getDimensionPixelSize(isTablet ? R.dimen.kg_password_eca_margin_bottom_tablet : R.dimen.kg_password_eca_margin_bottom);
+                boolean zIsPasswordView = isPasswordView(getSecurityViewId());
+                if (zIsPasswordView) {
+                    dimensionPixelSize = resources.getDimensionPixelSize(zIsTablet ? R.dimen.kg_password_eca_margin_bottom_tablet : R.dimen.kg_password_eca_margin_bottom);
                 } else {
-                    dimensionPixelSize = resources.getDimensionPixelSize(isTablet ? R.dimen.kg_pin_eca_margin_bottom_tablet : R.dimen.kg_pin_eca_margin_bottom);
+                    dimensionPixelSize = resources.getDimensionPixelSize(zIsTablet ? R.dimen.kg_pin_eca_margin_bottom_tablet : R.dimen.kg_pin_eca_margin_bottom);
                 }
                 marginLayoutParams.setMargins(0, 0, 0, dimensionPixelSize);
                 this.mEcaView.setLayoutParams(marginLayoutParams);
-                if (isPasswordView && (space = this.mDummyEcaSpace) != null) {
+                if (zIsPasswordView && (space = this.mDummyEcaSpace) != null) {
                     space.setVisibility(8);
                 }
             }
@@ -1143,12 +1126,12 @@ public abstract class KeyguardSecAbsKeyInputViewController extends KeyguardAbsKe
         }
     }
 
-    public final void updatePortraitLayout(int i) {
+    public final void updatePortraitLayout(int i) throws Resources.NotFoundException {
         int i2;
         int i3;
         Space space;
         Resources resources = getResources();
-        boolean isPasswordView = isPasswordView(i);
+        boolean zIsPasswordView = isPasswordView(i);
         boolean z = LsRune.SECURITY_SUB_DISPLAY_LOCK;
         boolean z2 = z && ((DisplayLifecycle) Dependency.sDependency.getDependencyInner(DisplayLifecycle.class)).mIsFolderOpened;
         LinearLayout linearLayout = this.mBottomView;
@@ -1195,7 +1178,7 @@ public abstract class KeyguardSecAbsKeyInputViewController extends KeyguardAbsKe
             if (linearLayout4 != null) {
                 LinearLayout.LayoutParams layoutParams5 = (LinearLayout.LayoutParams) linearLayout4.getLayoutParams();
                 KeyguardUpdateMonitor keyguardUpdateMonitor = ((KeyguardAbsKeyInputViewController) this).mKeyguardUpdateMonitor;
-                if (isPasswordView) {
+                if (zIsPasswordView) {
                     layoutParams5.width = -1;
                     layoutParams5.height = -2;
                     layoutParams5.setMarginStart(z2 ? 0 : dimensionPixelSize);
@@ -1218,9 +1201,9 @@ public abstract class KeyguardSecAbsKeyInputViewController extends KeyguardAbsKe
                     } else if (!z) {
                         layoutParams5.bottomMargin = resources.getDimensionPixelSize(R.dimen.kg_pin_container_margin_bottom);
                     } else if (z2) {
-                        boolean isLandscapeDisplay = isLandscapeDisplay();
+                        boolean zIsLandscapeDisplay = isLandscapeDisplay();
                         int i4 = R.dimen.kg_fold_pin_container_margin_bottom;
-                        if (isLandscapeDisplay) {
+                        if (zIsLandscapeDisplay) {
                             if (resources.getDimensionPixelSize(R.dimen.kg_fold_pin_container_margin_bottom) != resources.getDimensionPixelSize(R.dimen.kg_fold_pin_container_margin_bottom_small)) {
                                 i4 = R.dimen.kg_fold_pin_container_margin_bottom_small;
                             }
@@ -1249,7 +1232,7 @@ public abstract class KeyguardSecAbsKeyInputViewController extends KeyguardAbsKe
             LinearLayout.LayoutParams layoutParams6 = (LinearLayout.LayoutParams) view.getLayoutParams();
             layoutParams6.width = -1;
             layoutParams6.height = -2;
-            if (isPasswordView) {
+            if (zIsPasswordView) {
                 i3 = R.dimen.kg_password_eca_margin_bottom;
                 i2 = i;
             } else {
@@ -1264,7 +1247,7 @@ public abstract class KeyguardSecAbsKeyInputViewController extends KeyguardAbsKe
             }
             this.mEcaView.setVisibility(0);
             this.mEmergencyButtonController.setEmergencyView(this.mEcaView.findViewById(R.id.emergency_call_button));
-            if (isPasswordView && (space = this.mDummyEcaSpace) != null) {
+            if (zIsPasswordView && (space = this.mDummyEcaSpace) != null) {
                 space.setVisibility(8);
             }
         } else {
@@ -1360,8 +1343,8 @@ public abstract class KeyguardSecAbsKeyInputViewController extends KeyguardAbsKe
             return;
         }
         final LockscreenCredential enteredCredential2 = ((KeyguardAbsKeyInputView) this.mView).getEnteredCredential();
-        boolean isForgotPasswordView = keyguardUpdateMonitor.isForgotPasswordView();
-        if (isForgotPasswordView) {
+        boolean zIsForgotPasswordView = keyguardUpdateMonitor.isForgotPasswordView();
+        if (zIsForgotPasswordView) {
             this.mPrevCredential = enteredCredential2;
         }
         ((KeyguardAbsKeyInputView) this.mView).setPasswordEntryInputEnabled(false);
@@ -1369,7 +1352,7 @@ public abstract class KeyguardSecAbsKeyInputViewController extends KeyguardAbsKe
         if (asyncTask2 != null) {
             asyncTask2.cancel(false);
         }
-        final int selectedUserId2 = isForgotPasswordView ? -9899 : selectedUserInteractor.getSelectedUserId();
+        final int selectedUserId2 = zIsForgotPasswordView ? -9899 : selectedUserInteractor.getSelectedUserId();
         if (LsRune.SECURITY_UNPACK) {
             Log.i("KeyguardAbsKeyInputViewController", "just for UNPACK device. Always match success");
         } else if (enteredCredential2.size() <= 3) {
@@ -1381,18 +1364,18 @@ public abstract class KeyguardSecAbsKeyInputViewController extends KeyguardAbsKe
         this.mLatencyTracker.onActionStart(3);
         this.mLatencyTracker.onActionStart(4);
         keyguardUpdateMonitor.setCredentialAttempted();
-        this.mPendingLockCheck = LockPatternChecker.checkCredential(this.mLockPatternUtils, isForgotPasswordView ? this.mPrevCredential : enteredCredential2, selectedUserId2, new LockPatternChecker.OnCheckCallback() { // from class: com.android.keyguard.KeyguardAbsKeyInputViewController.3
+        this.mPendingLockCheck = LockPatternChecker.checkCredential(this.mLockPatternUtils, zIsForgotPasswordView ? this.mPrevCredential : enteredCredential2, selectedUserId2, new LockPatternChecker.OnCheckCallback() { // from class: com.android.keyguard.KeyguardAbsKeyInputViewController.3
             public final /* synthetic */ LockscreenCredential val$password;
             public final /* synthetic */ int val$userId;
 
             public AnonymousClass3(final int selectedUserId22, final LockscreenCredential enteredCredential22) {
-                r2 = selectedUserId22;
-                r3 = enteredCredential22;
+                i = selectedUserId22;
+                lockscreenCredential = enteredCredential22;
             }
 
             public final void onCancelled() {
                 KeyguardAbsKeyInputViewController.this.mLatencyTracker.onActionEnd(4);
-                r3.zeroize();
+                lockscreenCredential.zeroize();
             }
 
             public final void onChecked(boolean z, int i) {
@@ -1402,15 +1385,15 @@ public abstract class KeyguardSecAbsKeyInputViewController extends KeyguardAbsKe
                 KeyguardAbsKeyInputViewController keyguardAbsKeyInputViewController = KeyguardAbsKeyInputViewController.this;
                 keyguardAbsKeyInputViewController.mPendingLockCheck = null;
                 if (!z) {
-                    keyguardAbsKeyInputViewController.onPasswordChecked(r2, i, false, true);
+                    keyguardAbsKeyInputViewController.onPasswordChecked(i, i, false, true);
                 }
-                r3.zeroize();
+                lockscreenCredential.zeroize();
             }
 
             public final void onEarlyMatched() {
                 KeyguardAbsKeyInputViewController.this.mLatencyTracker.onActionEnd(3);
-                KeyguardAbsKeyInputViewController.this.onPasswordChecked(r2, 0, true, true);
-                r3.zeroize();
+                KeyguardAbsKeyInputViewController.this.onPasswordChecked(i, 0, true, true);
+                lockscreenCredential.zeroize();
             }
         });
     }

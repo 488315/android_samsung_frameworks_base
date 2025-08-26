@@ -9,7 +9,6 @@ import com.sec.ims.util.ImsUri;
 import java.util.HashMap;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class CallProfile implements Parcelable {
     public static final Parcelable.Creator<CallProfile> CREATOR = new Parcelable.Creator<CallProfile>() { // from class: com.sec.ims.volte2.data.CallProfile.1
@@ -548,8 +547,8 @@ public class CallProfile implements Parcelable {
         return this.mIsVideoCrbtValid;
     }
 
-    public void setAdditionalSipHeaders(HashMap<String, String> hashMap) {
-        this.mAdditionalSipHeaders = hashMap;
+    public void setAdditionalSipHeaders(HashMap<String, String> map) {
+        this.mAdditionalSipHeaders = map;
     }
 
     public void setAlertInfo(String str) {
@@ -872,42 +871,42 @@ public class CallProfile implements Parcelable {
 
     public String toString() {
         int i = this.mCallType;
-        String m = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(i != 1 ? i != 2 ? "callType: [UNKNOWN" : "callType: [CALL_TYPE_VIDEO" : "callType: [CALL_TYPE_VOICE", "], direction: [");
+        String strM = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(i != 1 ? i != 2 ? "callType: [UNKNOWN" : "callType: [CALL_TYPE_VIDEO" : "callType: [CALL_TYPE_VOICE", "], direction: [");
         int i2 = this.mDirection;
-        String m2 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(i2 != 0 ? i2 != 1 ? i2 != 2 ? i2 != 3 ? AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m, "UNKNOWN") : AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m, "PULLED_MT") : AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m, "PULLED_MO") : AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m, "MT") : AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m, "MO"), "], networkType: [");
+        String strM2 = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(i2 != 0 ? i2 != 1 ? i2 != 2 ? i2 != 3 ? AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strM, "UNKNOWN") : AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strM, "PULLED_MT") : AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strM, "PULLED_MO") : AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strM, "MT") : AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strM, "MO"), "], networkType: [");
         int i3 = this.mNetworkType;
-        StringBuilder m3 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i3 != -1 ? i3 != 0 ? i3 != 1 ? i3 != 11 ? AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m2, "UNKNOWN") : AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m2, "IMS") : AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m2, "WIFI") : AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m2, "MOBILE") : AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m2, "NONE (emergency)"), "], mIsVideoCrbt: [");
-        m3.append(this.mIsVideoCrbt);
-        StringBuilder m4 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(m3.toString(), "], mIsVideoCrbtValid: [");
-        m4.append(this.mIsVideoCrbtValid);
-        StringBuilder m5 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(m4.toString(), "], mP2p: [");
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i3 != -1 ? i3 != 0 ? i3 != 1 ? i3 != 11 ? AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strM2, "UNKNOWN") : AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strM2, "IMS") : AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strM2, "WIFI") : AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strM2, "MOBILE") : AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strM2, "NONE (emergency)"), "], mIsVideoCrbt: [");
+        sbM.append(this.mIsVideoCrbt);
+        StringBuilder sbM2 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(sbM.toString(), "], mIsVideoCrbtValid: [");
+        sbM2.append(this.mIsVideoCrbtValid);
+        StringBuilder sbM3 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(sbM2.toString(), "], mP2p: [");
         List<String> list = this.mP2p;
-        m5.append(list != null ? list.toString() : "null");
-        StringBuilder m6 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(m5.toString(), "], mCmcBoundSessionId: [");
-        m6.append(this.mCmcBoundSessionId);
-        StringBuilder m7 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(m6.toString(), "], mRejectProtocol: [");
-        m7.append(this.mRejectProtocol);
-        StringBuilder m8 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(m7.toString(), "], mRejectCode: [");
-        m8.append(this.mRejectCode);
-        StringBuilder m9 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(m8.toString(), "], mRejectText: [");
-        m9.append(this.mRejectText);
-        StringBuilder m10 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(m9.toString(), "], mIsRemoteHeld: [");
-        m10.append(this.mIsRemoteHeld);
-        StringBuilder m11 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(m10.toString(), "], mCmcEdCallSlot: [");
-        m11.append(this.mCmcEdCallSlot);
-        StringBuilder m12 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(m11.toString(), "], mQuantumSecurityInfo: [");
-        m12.append(this.mQuantumSecurityInfo);
-        StringBuilder m13 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(m12.toString(), "], mConfSessionId: [");
-        m13.append(this.mConfSessionId);
-        StringBuilder m14 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(m13.toString(), "], mTouchScreenEnabled: [");
-        m14.append(this.mTouchScreenEnabled);
-        StringBuilder m15 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(m14.toString(), "], mIdcScreenShareRunning: [");
-        m15.append(this.mIdcScreenShareRunning);
-        StringBuilder m16 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(m15.toString(), "], mIdcArCallRunning: [");
-        m16.append(this.mIdcArCallRunning);
-        StringBuilder m17 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(m16.toString(), "], mPulledDialogId: [");
-        m17.append(this.mPulledDialogId);
-        return AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m17.toString(), "]");
+        sbM3.append(list != null ? list.toString() : "null");
+        StringBuilder sbM4 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(sbM3.toString(), "], mCmcBoundSessionId: [");
+        sbM4.append(this.mCmcBoundSessionId);
+        StringBuilder sbM5 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(sbM4.toString(), "], mRejectProtocol: [");
+        sbM5.append(this.mRejectProtocol);
+        StringBuilder sbM6 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(sbM5.toString(), "], mRejectCode: [");
+        sbM6.append(this.mRejectCode);
+        StringBuilder sbM7 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(sbM6.toString(), "], mRejectText: [");
+        sbM7.append(this.mRejectText);
+        StringBuilder sbM8 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(sbM7.toString(), "], mIsRemoteHeld: [");
+        sbM8.append(this.mIsRemoteHeld);
+        StringBuilder sbM9 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(sbM8.toString(), "], mCmcEdCallSlot: [");
+        sbM9.append(this.mCmcEdCallSlot);
+        StringBuilder sbM10 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(sbM9.toString(), "], mQuantumSecurityInfo: [");
+        sbM10.append(this.mQuantumSecurityInfo);
+        StringBuilder sbM11 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(sbM10.toString(), "], mConfSessionId: [");
+        sbM11.append(this.mConfSessionId);
+        StringBuilder sbM12 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(sbM11.toString(), "], mTouchScreenEnabled: [");
+        sbM12.append(this.mTouchScreenEnabled);
+        StringBuilder sbM13 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(sbM12.toString(), "], mIdcScreenShareRunning: [");
+        sbM13.append(this.mIdcScreenShareRunning);
+        StringBuilder sbM14 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(sbM13.toString(), "], mIdcArCallRunning: [");
+        sbM14.append(this.mIdcArCallRunning);
+        StringBuilder sbM15 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(sbM14.toString(), "], mPulledDialogId: [");
+        sbM15.append(this.mPulledDialogId);
+        return AbstractResolvableFuture$$ExternalSyntheticOutline0.m(sbM15.toString(), "]");
     }
 
     @Override // android.os.Parcelable

@@ -74,9 +74,9 @@ public class CameraExtensionForwardProcessor {
             this.mOutputWriter = null;
         }
         if (this.mIntermediateReader == null) {
-            ImageReader newInstance = ImageReader.newInstance(this.mResolution.getWidth(), this.mResolution.getHeight(), 35, 3, this.mOutputSurfaceUsage);
-            this.mIntermediateReader = newInstance;
-            this.mIntermediateSurface = newInstance.getSurface();
+            ImageReader imageReaderNewInstance = ImageReader.newInstance(this.mResolution.getWidth(), this.mResolution.getHeight(), 35, 3, this.mOutputSurfaceUsage);
+            this.mIntermediateReader = imageReaderNewInstance;
+            this.mIntermediateSurface = imageReaderNewInstance.getSurface();
             this.mIntermediateReader.setOnImageAvailableListener(new ForwardCallback(), this.mHandler);
             this.mProcessor.onOutputSurface(this.mIntermediateSurface, this.mOutputSurfaceFormat);
             this.mProcessor.onImageFormatUpdate(35);
@@ -102,27 +102,27 @@ public class CameraExtensionForwardProcessor {
         @Override // android.media.ImageReader.OnImageAvailableListener
         public void onImageAvailable(ImageReader imageReader) {
             try {
-                Image acquireNextImage = imageReader.acquireNextImage();
-                if (acquireNextImage == null) {
+                Image imageAcquireNextImage = imageReader.acquireNextImage();
+                if (imageAcquireNextImage == null) {
                     Log.e(CameraExtensionForwardProcessor.TAG, "Invalid image");
                     return;
                 }
                 if (CameraExtensionForwardProcessor.this.mOutputSurface != null && CameraExtensionForwardProcessor.this.mOutputSurface.isValid() && !CameraExtensionForwardProcessor.this.mOutputAbandoned) {
                     if (CameraExtensionForwardProcessor.this.mOutputWriter == null) {
                         CameraExtensionForwardProcessor cameraExtensionForwardProcessor = CameraExtensionForwardProcessor.this;
-                        cameraExtensionForwardProcessor.mOutputWriter = ImageWriter.newInstance(cameraExtensionForwardProcessor.mOutputSurface, 3, acquireNextImage.getFormat());
+                        cameraExtensionForwardProcessor.mOutputWriter = ImageWriter.newInstance(cameraExtensionForwardProcessor.mOutputSurface, 3, imageAcquireNextImage.getFormat());
                     }
                     try {
-                        CameraExtensionForwardProcessor.this.mOutputWriter.queueInputImage(acquireNextImage);
+                        CameraExtensionForwardProcessor.this.mOutputWriter.queueInputImage(imageAcquireNextImage);
                         return;
                     } catch (IllegalStateException unused) {
                         Log.e(CameraExtensionForwardProcessor.TAG, "Failed to queue processed buffer!");
-                        acquireNextImage.close();
+                        imageAcquireNextImage.close();
                         CameraExtensionForwardProcessor.this.mOutputAbandoned = true;
                         return;
                     }
                 }
-                acquireNextImage.close();
+                imageAcquireNextImage.close();
             } catch (IllegalStateException unused2) {
                 Log.e(CameraExtensionForwardProcessor.TAG, "Failed to acquire processed image!");
             }

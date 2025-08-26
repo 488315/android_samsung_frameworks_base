@@ -4,7 +4,6 @@ import com.android.systemui.statusbar.notification.row.ui.viewmodel.SingleLineVi
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class NotificationContentModel {
     public final HeadsUpStatusBarModel headsUpStatusBarModel;
@@ -29,11 +28,11 @@ public final class NotificationContentModel {
     }
 
     public final int hashCode() {
-        int hashCode = this.headsUpStatusBarModel.hashCode() * 31;
+        int iHashCode = this.headsUpStatusBarModel.hashCode() * 31;
         SingleLineViewModel singleLineViewModel = this.singleLineViewModel;
-        int hashCode2 = (hashCode + (singleLineViewModel == null ? 0 : singleLineViewModel.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (singleLineViewModel == null ? 0 : singleLineViewModel.hashCode())) * 31;
         SingleLineViewModel singleLineViewModel2 = this.publicSingleLineViewModel;
-        return hashCode2 + (singleLineViewModel2 != null ? singleLineViewModel2.hashCode() : 0);
+        return iHashCode2 + (singleLineViewModel2 != null ? singleLineViewModel2.hashCode() : 0);
     }
 
     public final String toString() {

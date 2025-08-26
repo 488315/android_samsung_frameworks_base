@@ -46,9 +46,9 @@ public interface ICallScreeningService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ICallScreeningService)) {
-                return (ICallScreeningService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ICallScreeningService)) {
+                return (ICallScreeningService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -75,10 +75,10 @@ public interface ICallScreeningService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                ICallScreeningAdapter asInterface = ICallScreeningAdapter.Stub.asInterface(parcel.readStrongBinder());
+                ICallScreeningAdapter iCallScreeningAdapterAsInterface = ICallScreeningAdapter.Stub.asInterface(parcel.readStrongBinder());
                 ParcelableCall parcelableCall = (ParcelableCall) parcel.readTypedObject(ParcelableCall.CREATOR);
                 parcel.enforceNoDataAvail();
-                screenCall(asInterface, parcelableCall);
+                screenCall(iCallScreeningAdapterAsInterface, parcelableCall);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -102,14 +102,14 @@ public interface ICallScreeningService extends IInterface {
 
             @Override // com.android.internal.telecom.ICallScreeningService
             public void screenCall(ICallScreeningAdapter iCallScreeningAdapter, ParcelableCall parcelableCall) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iCallScreeningAdapter);
-                    obtain.writeTypedObject(parcelableCall, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iCallScreeningAdapter);
+                    parcelObtain.writeTypedObject(parcelableCall, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

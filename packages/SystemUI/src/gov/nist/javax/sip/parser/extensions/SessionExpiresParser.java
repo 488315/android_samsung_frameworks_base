@@ -4,9 +4,9 @@ import gov.nist.javax.sip.header.SIPHeader;
 import gov.nist.javax.sip.header.extensions.SessionExpires;
 import gov.nist.javax.sip.parser.Lexer;
 import gov.nist.javax.sip.parser.ParametersParser;
+import java.text.ParseException;
 import javax.sip.InvalidArgumentException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SessionExpiresParser extends ParametersParser {
     public SessionExpiresParser(String str) {
@@ -14,7 +14,7 @@ public class SessionExpiresParser extends ParametersParser {
     }
 
     @Override // gov.nist.javax.sip.parser.HeaderParser
-    public final SIPHeader parse() {
+    public final SIPHeader parse() throws ParseException {
         SessionExpires sessionExpires = new SessionExpires();
         headerName(2133);
         try {

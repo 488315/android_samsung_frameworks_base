@@ -4,7 +4,6 @@ import io.reactivex.internal.fuseable.SimpleQueue;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReferenceArray;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class SpscLinkedArrayQueue implements SimpleQueue {
     public AtomicReferenceArray consumerBuffer;
@@ -22,15 +21,15 @@ public final class SpscLinkedArrayQueue implements SimpleQueue {
         AtomicLong atomicLong = new AtomicLong();
         this.producerIndex = atomicLong;
         this.consumerIndex = new AtomicLong();
-        int numberOfLeadingZeros = 1 << (32 - Integer.numberOfLeadingZeros(Math.max(8, i) - 1));
-        int i2 = numberOfLeadingZeros - 1;
-        AtomicReferenceArray atomicReferenceArray = new AtomicReferenceArray(numberOfLeadingZeros + 1);
+        int iNumberOfLeadingZeros = 1 << (32 - Integer.numberOfLeadingZeros(Math.max(8, i) - 1));
+        int i2 = iNumberOfLeadingZeros - 1;
+        AtomicReferenceArray atomicReferenceArray = new AtomicReferenceArray(iNumberOfLeadingZeros + 1);
         this.producerBuffer = atomicReferenceArray;
         this.producerMask = i2;
-        this.producerLookAheadStep = Math.min(numberOfLeadingZeros / 4, MAX_LOOK_AHEAD_STEP);
+        this.producerLookAheadStep = Math.min(iNumberOfLeadingZeros / 4, MAX_LOOK_AHEAD_STEP);
         this.consumerBuffer = atomicReferenceArray;
         this.consumerMask = i2;
-        this.producerLookAhead = numberOfLeadingZeros - 2;
+        this.producerLookAhead = iNumberOfLeadingZeros - 2;
         atomicLong.lazySet(0L);
     }
 

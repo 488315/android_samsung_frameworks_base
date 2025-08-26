@@ -22,12 +22,12 @@ import kotlin.collections.ArraysKt___ArraysKt;
 import kotlin.collections.CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1;
 import kotlin.jvm.functions.Function1;
 import kotlin.sequences.EmptySequence;
-import kotlin.sequences.FilteringSequence$iterator$1;
+import kotlin.sequences.FilteringSequence;
+import kotlin.sequences.FilteringSequence.AnonymousClass1;
 import kotlin.sequences.FlatteningSequence;
 import kotlin.sequences.Sequence;
 import kotlin.sequences.SequencesKt___SequencesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class AnimatedImageNotificationManager {
     public final BindEventManager bindEventManager;
@@ -44,7 +44,7 @@ public final class AnimatedImageNotificationManager {
     }
 
     public static final void access$updateAnimatedImageDrawables(AnimatedImageNotificationManager animatedImageNotificationManager, NotificationEntry notificationEntry) {
-        Sequence sequence;
+        Sequence sequenceAsSequence;
         final int i = 1;
         final int i2 = 0;
         animatedImageNotificationManager.getClass();
@@ -53,13 +53,13 @@ public final class AnimatedImageNotificationManager {
             boolean z = expandableNotificationRow.mIsHeadsUp || animatedImageNotificationManager.isStatusBarExpanded;
             NotificationContentView[] notificationContentViewArr = expandableNotificationRow.mLayouts;
             NotificationContentView[] notificationContentViewArr2 = (NotificationContentView[]) Arrays.copyOf(notificationContentViewArr, notificationContentViewArr.length);
-            if (notificationContentViewArr2 == null || (sequence = ArraysKt___ArraysKt.asSequence(notificationContentViewArr2)) == null) {
-                sequence = EmptySequence.INSTANCE;
+            if (notificationContentViewArr2 == null || (sequenceAsSequence = ArraysKt___ArraysKt.asSequence(notificationContentViewArr2)) == null) {
+                sequenceAsSequence = EmptySequence.INSTANCE;
             }
-            FlatteningSequence flatMap = SequencesKt___SequencesKt.flatMap(SequencesKt___SequencesKt.flatMap(sequence, new Function1() { // from class: com.android.systemui.statusbar.notification.AnimatedImageNotificationManager$$ExternalSyntheticLambda0
+            FlatteningSequence flatteningSequenceFlatMap = SequencesKt___SequencesKt.flatMap(SequencesKt___SequencesKt.flatMap(sequenceAsSequence, new Function1() { // from class: com.android.systemui.statusbar.notification.AnimatedImageNotificationManager$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
+                public final Object mo781invoke(Object obj) {
                     ArrayList messagingGroups;
                     ArrayList messagingGroups2;
                     switch (i2) {
@@ -91,7 +91,7 @@ public final class AnimatedImageNotificationManager {
             }), new Function1() { // from class: com.android.systemui.statusbar.notification.AnimatedImageNotificationManager$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
+                public final Object mo781invoke(Object obj) {
                     ArrayList messagingGroups;
                     ArrayList messagingGroups2;
                     switch (i) {
@@ -122,10 +122,10 @@ public final class AnimatedImageNotificationManager {
                 }
             });
             final int i3 = 2;
-            FlatteningSequence flatMap2 = SequencesKt___SequencesKt.flatMap(flatMap, new Function1() { // from class: com.android.systemui.statusbar.notification.AnimatedImageNotificationManager$$ExternalSyntheticLambda0
+            FlatteningSequence flatteningSequenceFlatMap2 = SequencesKt___SequencesKt.flatMap(flatteningSequenceFlatMap, new Function1() { // from class: com.android.systemui.statusbar.notification.AnimatedImageNotificationManager$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
+                public final Object mo781invoke(Object obj) {
                     ArrayList messagingGroups;
                     ArrayList messagingGroups2;
                     switch (i3) {
@@ -156,10 +156,10 @@ public final class AnimatedImageNotificationManager {
                 }
             });
             final int i4 = 3;
-            FilteringSequence$iterator$1 filteringSequence$iterator$1 = new FilteringSequence$iterator$1(SequencesKt___SequencesKt.mapNotNull(flatMap2, new Function1() { // from class: com.android.systemui.statusbar.notification.AnimatedImageNotificationManager$$ExternalSyntheticLambda0
+            FilteringSequence.AnonymousClass1 anonymousClass1 = SequencesKt___SequencesKt.mapNotNull(flatteningSequenceFlatMap2, new Function1() { // from class: com.android.systemui.statusbar.notification.AnimatedImageNotificationManager$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
+                public final Object mo781invoke(Object obj) {
                     ArrayList messagingGroups;
                     ArrayList messagingGroups2;
                     switch (i4) {
@@ -188,9 +188,9 @@ public final class AnimatedImageNotificationManager {
                             return null;
                     }
                 }
-            }));
-            while (filteringSequence$iterator$1.hasNext()) {
-                AnimatedImageDrawable animatedImageDrawable = (AnimatedImageDrawable) filteringSequence$iterator$1.next();
+            }).new AnonymousClass1();
+            while (anonymousClass1.hasNext()) {
+                AnimatedImageDrawable animatedImageDrawable = (AnimatedImageDrawable) anonymousClass1.next();
                 if (z) {
                     animatedImageDrawable.start();
                 } else {

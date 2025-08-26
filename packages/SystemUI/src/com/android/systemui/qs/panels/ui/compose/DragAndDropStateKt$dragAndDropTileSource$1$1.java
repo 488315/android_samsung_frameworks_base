@@ -20,7 +20,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class DragAndDropStateKt$dragAndDropTileSource$1$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ State<DragAndDropState> $dragState$delegate;
@@ -55,7 +54,6 @@ final class DragAndDropStateKt$dragAndDropTileSource$1$1 extends SuspendLambda i
     /* JADX WARN: Type inference failed for: r3v0, types: [com.android.systemui.qs.panels.ui.compose.DragAndDropStateKt$dragAndDropTileSource$1$1$$ExternalSyntheticLambda0] */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
-        Object detectDragGesturesAfterLongPress;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i == 0) {
@@ -68,33 +66,22 @@ final class DragAndDropStateKt$dragAndDropTileSource$1$1 extends SuspendLambda i
             ?? r3 = new Function1() { // from class: com.android.systemui.qs.panels.ui.compose.DragAndDropStateKt$dragAndDropTileSource$1$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj2) {
+                public final Object mo781invoke(Object obj2) {
                     EditTileListState editTileListState = (EditTileListState) ((DragAndDropState) state.getValue());
                     SnapshotMutableStateImpl snapshotMutableStateImpl = (SnapshotMutableStateImpl) editTileListState.draggedCell$delegate;
-                    SizedTile sizedTile2 = SizedTile.this;
+                    SizedTile sizedTile2 = sizedTile;
                     snapshotMutableStateImpl.setValue(sizedTile2);
                     ((SnapshotMutableStateImpl) editTileListState.dragType$delegate).setValue(dragType);
                     function0.invoke();
                     DragAndDropTransferData dragAndDropTransferData = new DragAndDropTransferData(new ClipData("tilespec", new String[]{"qstile/tilespec"}, new ClipData.Item(((EditTileViewModel) sizedTile2.getTile()).tileSpec.getSpec())), null, 0, 6, null);
-                    LegacyDragAndDropSourceNode.AnonymousClass1.C00021 c00021 = (LegacyDragAndDropSourceNode.AnonymousClass1.C00021) dragAndDropSourceScope;
-                    ((DragAndDropNode) c00021.$dragAndDropModifierNode).m356drag12SF9DM(dragAndDropTransferData, IntSizeKt.m864toSizeozmzZPI(c00021.$$delegate_0.mo50getSizeYbymL2g()), c00021.this$0.drawDragDecoration);
+                    LegacyDragAndDropSourceNode.AnonymousClass1.C00041 c00041 = (LegacyDragAndDropSourceNode.AnonymousClass1.C00041) dragAndDropSourceScope;
+                    ((DragAndDropNode) c00041.$dragAndDropModifierNode).m357drag12SF9DM(dragAndDropTransferData, IntSizeKt.m866toSizeozmzZPI(c00041.$$delegate_0.mo51getSizeYbymL2g()), c00041.this$0.drawDragDecoration);
                     return Unit.INSTANCE;
                 }
             };
             DragAndDropStateKt$dragAndDropTileSource$1$1$$ExternalSyntheticLambda1 dragAndDropStateKt$dragAndDropTileSource$1$1$$ExternalSyntheticLambda1 = new DragAndDropStateKt$dragAndDropTileSource$1$1$$ExternalSyntheticLambda1();
             this.label = 1;
-            detectDragGesturesAfterLongPress = DragGestureDetectorKt.detectDragGesturesAfterLongPress(dragAndDropSourceScope, r3, new Function0() { // from class: androidx.compose.foundation.gestures.DragGestureDetectorKt$detectDragGesturesAfterLongPress$3
-                @Override // kotlin.jvm.functions.Function0
-                public final /* bridge */ /* synthetic */ Object invoke() {
-                    return Unit.INSTANCE;
-                }
-            }, new Function0() { // from class: androidx.compose.foundation.gestures.DragGestureDetectorKt$detectDragGesturesAfterLongPress$4
-                @Override // kotlin.jvm.functions.Function0
-                public final /* bridge */ /* synthetic */ Object invoke() {
-                    return Unit.INSTANCE;
-                }
-            }, dragAndDropStateKt$dragAndDropTileSource$1$1$$ExternalSyntheticLambda1, this);
-            if (detectDragGesturesAfterLongPress == coroutineSingletons) {
+            if (DragGestureDetectorKt.detectDragGesturesAfterLongPress(dragAndDropSourceScope, r3, DragGestureDetectorKt.C06893.INSTANCE, DragGestureDetectorKt.C06904.INSTANCE, dragAndDropStateKt$dragAndDropTileSource$1$1$$ExternalSyntheticLambda1, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

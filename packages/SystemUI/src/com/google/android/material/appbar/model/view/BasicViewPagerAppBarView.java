@@ -6,6 +6,7 @@ import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.res.Resources;
 import android.util.AttributeSet;
 import android.util.Property;
 import android.view.View;
@@ -23,7 +24,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class BasicViewPagerAppBarView extends ViewPagerAppBarView {
     private final ValueAnimator deleteAlphaAnimator;
@@ -36,6 +36,7 @@ public abstract class BasicViewPagerAppBarView extends ViewPagerAppBarView {
     private boolean isDeleteAnimatorRunning;
     private final BasicViewPagerAppBarView$pageChangeCallback$1 pageChangeCallback;
 
+    /* JADX WARN: Multi-variable type inference failed */
     public BasicViewPagerAppBarView(Context context) {
         this(context, null, 2, 0 == true ? 1 : 0);
     }
@@ -63,7 +64,7 @@ public abstract class BasicViewPagerAppBarView extends ViewPagerAppBarView {
         viewPager2.postDelayed(new Runnable() { // from class: com.google.android.material.appbar.model.view.BasicViewPagerAppBarView$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                BasicViewPagerAppBarView.moveNextAndRemove$lambda$11$lambda$10(BasicViewPagerAppBarView.this, i);
+                BasicViewPagerAppBarView.moveNextAndRemove$lambda$11$lambda$10(this.f$0, i);
             }
         }, 250L);
     }
@@ -74,7 +75,7 @@ public abstract class BasicViewPagerAppBarView extends ViewPagerAppBarView {
         basicViewPagerAppBarView.removeItem(i);
     }
 
-    public final void addIndicator() {
+    public final void addIndicator() throws Resources.NotFoundException {
         final SeslIndicator indicator = getIndicator();
         if (indicator != null) {
             final SeslIndicator.PageIndicatorMarker pageIndicatorMarker = new SeslIndicator.PageIndicatorMarker(indicator.getContext(), null, 2, null);
@@ -85,14 +86,14 @@ public abstract class BasicViewPagerAppBarView extends ViewPagerAppBarView {
             pageIndicatorMarker.setOnClickListener(new View.OnClickListener() { // from class: androidx.appcompat.widget.SeslIndicator$$ExternalSyntheticLambda1
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
-                    SeslIndicator seslIndicator = SeslIndicator.this;
+                    SeslIndicator seslIndicator = indicator;
                     ViewPagerAppBarView$inflate$1$1 viewPagerAppBarView$inflate$1$1 = seslIndicator.itemClickListener;
                     if (viewPagerAppBarView$inflate$1$1 != null) {
-                        int indexOf = ((ArrayList) seslIndicator.indicator).indexOf(view);
+                        int iIndexOf = ((ArrayList) seslIndicator.indicator).indexOf(view);
                         ViewPager2 viewpager = viewPagerAppBarView$inflate$1$1.this$0.getViewpager();
                         if (viewpager != null) {
                             viewpager.mFakeDragger.mScrollEventAdapter.getClass();
-                            viewpager.setCurrentItemInternal(indexOf);
+                            viewpager.setCurrentItemInternal(iIndexOf);
                         }
                     }
                 }
@@ -102,7 +103,7 @@ public abstract class BasicViewPagerAppBarView extends ViewPagerAppBarView {
                 @Override // android.view.View.AccessibilityDelegate
                 public final void onInitializeAccessibilityNodeInfo(View view, AccessibilityNodeInfo accessibilityNodeInfo) {
                     super.onInitializeAccessibilityNodeInfo(view, accessibilityNodeInfo);
-                    AccessibilityNodeInfoCompat.wrap(accessibilityNodeInfo).setContentDescription(SeslIndicator.this.getResources().getString(R.string.sesl_appbar_suggest_pagination, Integer.valueOf(((ArrayList) SeslIndicator.this.indicator).indexOf(pageIndicatorMarker) + 1), Integer.valueOf(((ArrayList) SeslIndicator.this.indicator).size())));
+                    AccessibilityNodeInfoCompat.wrap(accessibilityNodeInfo).setContentDescription(indicator.getResources().getString(R.string.sesl_appbar_suggest_pagination, Integer.valueOf(((ArrayList) indicator.indicator).indexOf(pageIndicatorMarker) + 1), Integer.valueOf(((ArrayList) indicator.indicator).size())));
                 }
             });
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(-2, -2);
@@ -115,7 +116,7 @@ public abstract class BasicViewPagerAppBarView extends ViewPagerAppBarView {
         }
     }
 
-    public final void initIndicator(int i) {
+    public final void initIndicator(int i) throws Resources.NotFoundException {
         if (i > 1) {
             for (int i2 = 0; i2 < i; i2++) {
                 addIndicator();
@@ -144,7 +145,7 @@ public abstract class BasicViewPagerAppBarView extends ViewPagerAppBarView {
 
     public final void removeItem(final int i, boolean z) {
         RecyclerView.Adapter adapter;
-        RecyclerView.ViewHolder findViewHolderForAdapterPosition;
+        RecyclerView.ViewHolder viewHolderFindViewHolderForAdapterPosition;
         if (!z) {
             internalRemoveItem(i);
             return;
@@ -155,17 +156,17 @@ public abstract class BasicViewPagerAppBarView extends ViewPagerAppBarView {
         }
         View view = ViewGroupKt.get(viewpager, 0);
         RecyclerView recyclerView = view instanceof RecyclerView ? (RecyclerView) view : null;
-        if (recyclerView == null || (findViewHolderForAdapterPosition = recyclerView.findViewHolderForAdapterPosition(i)) == null) {
+        if (recyclerView == null || (viewHolderFindViewHolderForAdapterPosition = recyclerView.findViewHolderForAdapterPosition(i)) == null) {
             internalRemoveItem(i);
             return;
         }
-        View view2 = findViewHolderForAdapterPosition.itemView;
+        View view2 = viewHolderFindViewHolderForAdapterPosition.itemView;
         if (this.deleteAnimator == null) {
             if (this.deleteScaleAnimator == null) {
-                ObjectAnimator ofPropertyValuesHolder = ObjectAnimator.ofPropertyValuesHolder(view2, this.deleteScaleX, this.deleteScaleY);
-                ofPropertyValuesHolder.setDuration(this.deleteScaleDuration);
-                ofPropertyValuesHolder.setInterpolator(AnimationUtils.loadInterpolator(getContext(), R.interpolator.sesl_interpolator_22_25_0_1));
-                this.deleteScaleAnimator = ofPropertyValuesHolder;
+                ObjectAnimator objectAnimatorOfPropertyValuesHolder = ObjectAnimator.ofPropertyValuesHolder(view2, this.deleteScaleX, this.deleteScaleY);
+                objectAnimatorOfPropertyValuesHolder.setDuration(this.deleteScaleDuration);
+                objectAnimatorOfPropertyValuesHolder.setInterpolator(AnimationUtils.loadInterpolator(getContext(), R.interpolator.sesl_interpolator_22_25_0_1));
+                this.deleteScaleAnimator = objectAnimatorOfPropertyValuesHolder;
             }
             AnimatorSet animatorSet = new AnimatorSet();
             ValueAnimator[] valueAnimatorArr = new ValueAnimator[2];
@@ -183,8 +184,8 @@ public abstract class BasicViewPagerAppBarView extends ViewPagerAppBarView {
         valueAnimator2.addListener(new Animator.AnimatorListener() { // from class: com.google.android.material.appbar.model.view.BasicViewPagerAppBarView$removeItem$1$1$3$1
             @Override // android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
-                BasicViewPagerAppBarView.this.moveNextAndRemove(viewpager, i);
-                BasicViewPagerAppBarView.this.removeIndicator(i);
+                this.this$0.moveNextAndRemove(viewpager, i);
+                this.this$0.removeIndicator(i);
             }
 
             @Override // android.animation.Animator.AnimatorListener
@@ -216,18 +217,16 @@ public abstract class BasicViewPagerAppBarView extends ViewPagerAppBarView {
         this.deleteAlphaDuration = 150L;
         this.deleteScaleX = PropertyValuesHolder.ofFloat((Property<?, Float>) View.SCALE_X, 1.0f, 0.9f);
         this.deleteScaleY = PropertyValuesHolder.ofFloat((Property<?, Float>) View.SCALE_Y, 1.0f, 0.9f);
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat((Object) null, (Property<Object, Float>) View.ALPHA, 0.0f);
-        ofFloat.setDuration(150L);
-        ofFloat.setInterpolator(AnimationUtils.loadInterpolator(context, R.interpolator.sesl_interpolator_0_0_1_1));
-        this.deleteAlphaAnimator = ofFloat;
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat((Object) null, (Property<Object, Float>) View.ALPHA, 0.0f);
+        objectAnimatorOfFloat.setDuration(150L);
+        objectAnimatorOfFloat.setInterpolator(AnimationUtils.loadInterpolator(context, R.interpolator.sesl_interpolator_0_0_1_1));
+        this.deleteAlphaAnimator = objectAnimatorOfFloat;
         this.pageChangeCallback = new ViewPager2.OnPageChangeCallback() { // from class: com.google.android.material.appbar.model.view.BasicViewPagerAppBarView$pageChangeCallback$1
             @Override // androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
             public final void onPageSelected(int i) {
-                boolean z;
                 SeslIndicator indicator;
-                BasicViewPagerAppBarView basicViewPagerAppBarView = BasicViewPagerAppBarView.this;
-                z = basicViewPagerAppBarView.isDeleteAnimatorRunning;
-                if (z || (indicator = basicViewPagerAppBarView.getIndicator()) == null) {
+                BasicViewPagerAppBarView basicViewPagerAppBarView = this.this$0;
+                if (basicViewPagerAppBarView.isDeleteAnimatorRunning || (indicator = basicViewPagerAppBarView.getIndicator()) == null) {
                     return;
                 }
                 indicator.setSelectedPosition(i);

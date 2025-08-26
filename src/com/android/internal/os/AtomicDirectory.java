@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.SyncFailedException;
 import java.util.Arrays;
 
 /* loaded from: classes5.dex */
@@ -33,13 +34,13 @@ public final class AtomicDirectory {
         return this.mBackupDirectory;
     }
 
-    public File startRead() throws IOException {
+    public File startRead() throws IOException, ErrnoException {
         restore();
         ensureBaseDirectory();
         return this.mBaseDirectory;
     }
 
-    public File startWrite() throws IOException {
+    public File startWrite() throws IOException, ErrnoException {
         backup();
         ensureBaseDirectory();
         return this.mBaseDirectory;
@@ -57,26 +58,26 @@ public final class AtomicDirectory {
         return fileOutputStream;
     }
 
-    public void closeWrite(FileOutputStream fileOutputStream) {
-        int indexOfValue = this.mOpenFiles.indexOfValue(fileOutputStream);
-        if (indexOfValue < 0) {
+    public void closeWrite(FileOutputStream fileOutputStream) throws SyncFailedException {
+        int iIndexOfValue = this.mOpenFiles.indexOfValue(fileOutputStream);
+        if (iIndexOfValue < 0) {
             throw new IllegalArgumentException("Unknown file stream " + fileOutputStream);
         }
-        this.mOpenFiles.removeAt(indexOfValue);
+        this.mOpenFiles.removeAt(iIndexOfValue);
         FileUtils.sync(fileOutputStream);
         FileUtils.closeQuietly(fileOutputStream);
     }
 
     public void failWrite(FileOutputStream fileOutputStream) {
-        int indexOfValue = this.mOpenFiles.indexOfValue(fileOutputStream);
-        if (indexOfValue < 0) {
+        int iIndexOfValue = this.mOpenFiles.indexOfValue(fileOutputStream);
+        if (iIndexOfValue < 0) {
             throw new IllegalArgumentException("Unknown file stream " + fileOutputStream);
         }
-        this.mOpenFiles.removeAt(indexOfValue);
+        this.mOpenFiles.removeAt(iIndexOfValue);
         FileUtils.closeQuietly(fileOutputStream);
     }
 
-    public void finishWrite() {
+    public void finishWrite() throws ErrnoException {
         throwIfSomeFilesOpen();
         syncDirectory(this.mBaseDirectory);
         syncParentDirectory();
@@ -84,7 +85,7 @@ public final class AtomicDirectory {
         syncParentDirectory();
     }
 
-    public void failWrite() {
+    public void failWrite() throws ErrnoException {
         throwIfSomeFilesOpen();
         try {
             restore();
@@ -97,17 +98,17 @@ public final class AtomicDirectory {
         return this.mBaseDirectory.exists() || this.mBackupDirectory.exists();
     }
 
-    public void delete() {
-        boolean deleteDirectory = this.mBaseDirectory.exists() ? deleteDirectory(this.mBaseDirectory) : false;
+    public void delete() throws ErrnoException {
+        boolean zDeleteDirectory = this.mBaseDirectory.exists() ? deleteDirectory(this.mBaseDirectory) : false;
         if (this.mBackupDirectory.exists()) {
-            deleteDirectory |= deleteDirectory(this.mBackupDirectory);
+            zDeleteDirectory |= deleteDirectory(this.mBackupDirectory);
         }
-        if (deleteDirectory) {
+        if (zDeleteDirectory) {
             syncParentDirectory();
         }
     }
 
-    private void ensureBaseDirectory() throws IOException {
+    private void ensureBaseDirectory() throws IOException, ErrnoException {
         if (this.mBaseDirectory.exists()) {
             return;
         }
@@ -124,7 +125,7 @@ public final class AtomicDirectory {
         throw new IllegalStateException("Unclosed files: " + Arrays.toString(this.mOpenFiles.keySet().toArray()));
     }
 
-    private void backup() throws IOException {
+    private void backup() throws IOException, ErrnoException {
         if (this.mBaseDirectory.exists()) {
             if (this.mBackupDirectory.exists()) {
                 deleteDirectory(this.mBackupDirectory);
@@ -136,7 +137,7 @@ public final class AtomicDirectory {
         }
     }
 
-    private void restore() throws IOException {
+    private void restore() throws IOException, ErrnoException {
         if (this.mBackupDirectory.exists()) {
             if (this.mBaseDirectory.exists()) {
                 deleteDirectory(this.mBaseDirectory);
@@ -152,24 +153,24 @@ public final class AtomicDirectory {
         return FileUtils.deleteContentsAndDir(file);
     }
 
-    private void syncParentDirectory() {
+    private void syncParentDirectory() throws ErrnoException {
         syncDirectory(this.mBaseDirectory.getParentFile());
     }
 
-    private static void syncDirectory(File file) {
-        FileDescriptor open;
+    private static void syncDirectory(File file) throws ErrnoException {
+        FileDescriptor fileDescriptorOpen;
         String absolutePath = file.getAbsolutePath();
         try {
             try {
-                open = Os.open(absolutePath, OsConstants.O_RDONLY, 0);
-                Os.fsync(open);
+                fileDescriptorOpen = Os.open(absolutePath, OsConstants.O_RDONLY, 0);
+                Os.fsync(fileDescriptorOpen);
             } catch (ErrnoException e) {
-                Log.e(LOG_TAG, "Failed to fsync " + absolutePath, e);
-            } finally {
-                FileUtils.closeQuietly(open);
+                Log.e(LOG_TAG, "Failed to open " + absolutePath, e);
             }
         } catch (ErrnoException e2) {
-            Log.e(LOG_TAG, "Failed to open " + absolutePath, e2);
+            Log.e(LOG_TAG, "Failed to fsync " + absolutePath, e2);
+        } finally {
+            FileUtils.closeQuietly(fileDescriptorOpen);
         }
     }
 }

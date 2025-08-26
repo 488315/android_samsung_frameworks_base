@@ -6,7 +6,6 @@ import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class CertificateControlInfo implements Parcelable {
     public static final Parcelable.Creator<CertificateControlInfo> CREATOR = new Parcelable.Creator<CertificateControlInfo>() { // from class: com.samsung.android.knox.keystore.CertificateControlInfo.1
@@ -36,9 +35,9 @@ public class CertificateControlInfo implements Parcelable {
 
     public void readFromParcel(Parcel parcel) {
         this.adminPackageName = parcel.readString();
-        int readInt = parcel.readInt();
+        int i = parcel.readInt();
         this.entries = new ArrayList();
-        for (int i = 0; i < readInt; i++) {
+        for (int i2 = 0; i2 < i; i2++) {
             this.entries.add((X509Certificate) parcel.readSerializable());
         }
     }

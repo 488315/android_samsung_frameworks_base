@@ -14,7 +14,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class MobileConnectionRepositoryImpl$mobileDataEnabledChanged$1 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -41,7 +40,6 @@ final class MobileConnectionRepositoryImpl$mobileDataEnabledChanged$1 extends Su
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
-        SettingsHelper settingsHelper;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i == 0) {
@@ -51,14 +49,11 @@ final class MobileConnectionRepositoryImpl$mobileDataEnabledChanged$1 extends Su
             SettingsHelper.OnChangedCallback onChangedCallback = new SettingsHelper.OnChangedCallback() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionRepositoryImpl$mobileDataEnabledChanged$1$callback$1
                 @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
                 public final void onChanged(Uri uri) {
-                    SettingsHelper settingsHelper2;
                     Log.d("MobileConnectionRepositoryImpl", "onChange: MOBILE_DATA");
-                    settingsHelper2 = MobileConnectionRepositoryImpl.this.settingsHelper;
-                    ((ChannelCoroutine) producerScope).mo3456trySendJP2dKIU(Boolean.valueOf(settingsHelper2.isMobileDataEnabled()));
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(mobileConnectionRepositoryImpl.settingsHelper.isMobileDataEnabled()));
                 }
             };
-            settingsHelper = this.this$0.settingsHelper;
-            settingsHelper.registerCallback(onChangedCallback, Settings.Global.getUriFor(SettingsHelper.INDEX_MOBILE_DATA));
+            this.this$0.settingsHelper.registerCallback(onChangedCallback, Settings.Global.getUriFor(SettingsHelper.INDEX_MOBILE_DATA));
             MobileConnectionRepositoryImpl$imsRegState$1$$ExternalSyntheticLambda0 mobileConnectionRepositoryImpl$imsRegState$1$$ExternalSyntheticLambda0 = new MobileConnectionRepositoryImpl$imsRegState$1$$ExternalSyntheticLambda0(3, this.this$0, onChangedCallback);
             this.label = 1;
             if (ProduceKt.awaitClose(producerScope, mobileConnectionRepositoryImpl$imsRegState$1$$ExternalSyntheticLambda0, this) == coroutineSingletons) {

@@ -122,7 +122,7 @@ public class HapticPlayer implements AutoCloseable {
         }
         new Thread(new Runnable() { // from class: android.os.HapticPlayer.1
             @Override // java.lang.Runnable
-            public void run() {
+            public void run() throws JSONException {
                 HapticPlayer.this.stop();
                 if (HapticPlayer.this.mStepParameters == null) {
                     HapticPlayer.this.mStepParameters = new ArrayList();
@@ -130,12 +130,15 @@ public class HapticPlayer implements AutoCloseable {
                 if (z) {
                     HapticPlayer.this.mStepParameters.clear();
                     HapticPlayer hapticPlayer = HapticPlayer.this;
-                    List parseRamp = hapticPlayer.parseRamp(hapticPlayer.mEffect.getEffectInfo());
-                    if (parseRamp != null) {
-                        Iterator it = parseRamp.iterator();
+                    List ramp = hapticPlayer.parseRamp(hapticPlayer.mEffect.getEffectInfo());
+                    if (ramp != null) {
+                        Iterator it = ramp.iterator();
                         while (it.hasNext()) {
                             HapticPlayer.this.mStepParameters.addAll(HapticPlayer.this.rampToStepParameter((RampParameter) it.next()));
                         }
+                    } else {
+                        Log.w(HapticPlayer.TAG, "Failed to parse effect.");
+                        return;
                     }
                 }
                 VibrationAttributes.Builder usage = new VibrationAttributes.Builder().setUsage(18);
@@ -143,8 +146,12 @@ public class HapticPlayer implements AutoCloseable {
                     usage.semAddTag(VibrationTag.ALLOWED_IN_BACKGROUND_PROCESS);
                 }
                 HapticPlayer hapticPlayer2 = HapticPlayer.this;
+                VibrationEffect vibrationEffectCreateStepEffect = hapticPlayer2.createStepEffect(hapticPlayer2.mStepParameters, i2, i3, i4);
+                if (vibrationEffectCreateStepEffect == null) {
+                    return;
+                }
                 try {
-                    HapticPlayer.mService.vibrate(Process.myUid(), 0, ActivityThread.currentPackageName(), CombinedVibration.createParallel(hapticPlayer2.createStepEffect(hapticPlayer2.mStepParameters, i2, i3, i4)), usage.build(), "DynamicEffect_" + HapticPlayer.this.mLoop, HapticPlayer.this.mToken);
+                    HapticPlayer.mService.vibrate(Process.myUid(), 0, ActivityThread.currentPackageName(), CombinedVibration.createParallel(vibrationEffectCreateStepEffect), usage.build(), "DynamicEffect_" + HapticPlayer.this.mLoop, HapticPlayer.this.mToken);
                 } catch (RemoteException e) {
                     Log.w(HapticPlayer.TAG, "Failed to start vibrate.", e);
                 }
@@ -191,7 +198,8 @@ public class HapticPlayer implements AutoCloseable {
 
     /* JADX INFO: Access modifiers changed from: private */
     public VibrationEffect createStepEffect(List<StepParameter> list, int i, int i2, int i3) {
-        if (list == null) {
+        if (list == null || list.isEmpty()) {
+            Log.w(TAG, "createStepEffect: parameters is null or empty.");
             return null;
         }
         int size = list.size();
@@ -212,7 +220,8 @@ public class HapticPlayer implements AutoCloseable {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public List<RampParameter> parseRamp(String str) {
+    public List<RampParameter> parseRamp(String str) throws JSONException {
+        List<RampParameter> list;
         int i;
         if (str == null || str.isEmpty()) {
             Log.w(TAG, "parseRamp: invalid JsonString.");
@@ -242,22 +251,27 @@ public class HapticPlayer implements AutoCloseable {
                     int i9 = 0;
                     int i10 = 0;
                     while (i7 < length) {
-                        JSONObject jSONObject3 = (JSONObject) jSONArray2.get(i7);
-                        i8 = jSONObject3.getInt("Time");
-                        int i11 = i2;
-                        JSONArray jSONArray3 = jSONArray2;
-                        float f2 = (float) jSONObject3.getDouble("Intensity");
-                        int i12 = jSONObject3.getInt("Frequency");
-                        if (i7 > 0) {
-                            float f3 = i5;
-                            arrayList.add(new RampParameter((f * f3) / 100.0f, (f3 * f2) / 100.0f, (i9 + i6) / 25.0f, (i12 + i6) / 25.0f, i8 - i10));
+                        list = null;
+                        try {
+                            JSONObject jSONObject3 = (JSONObject) jSONArray2.get(i7);
+                            i8 = jSONObject3.getInt("Time");
+                            int i11 = i2;
+                            float f2 = (float) jSONObject3.getDouble("Intensity");
+                            int i12 = jSONObject3.getInt("Frequency");
+                            if (i7 > 0) {
+                                float f3 = i5;
+                                arrayList.add(new RampParameter((f * f3) / 100.0f, (f3 * f2) / 100.0f, (i9 + i6) / 25.0f, (i12 + i6) / 25.0f, i8 - i10));
+                            }
+                            i7++;
+                            i9 = i12;
+                            f = f2;
+                            i10 = i8;
+                            i2 = i11;
+                        } catch (JSONException e) {
+                            e = e;
+                            Log.w(TAG, "parseRamp: Failed to parse json string.", e);
+                            return list;
                         }
-                        i7++;
-                        i9 = i12;
-                        f = f2;
-                        i2 = i11;
-                        i10 = i8;
-                        jSONArray2 = jSONArray3;
                     }
                     i = i2;
                     i3 = i4 + i8;
@@ -272,11 +286,12 @@ public class HapticPlayer implements AutoCloseable {
                 }
                 i2 = i + 1;
             }
+            list = null;
             arrayList.add(new RampParameter(0.0f, 0.0f, 0.0f, 0.0f, 50));
             return arrayList;
-        } catch (JSONException e) {
-            Log.w(TAG, "parseRamp: Failed to parse json string.", e);
-            return arrayList;
+        } catch (JSONException e2) {
+            e = e2;
+            list = null;
         }
     }
 
@@ -290,14 +305,14 @@ public class HapticPlayer implements AutoCloseable {
         if (Float.compare(startAmplitude, endAmplitude) == 0) {
             return Collections.singletonList(new StepParameter(endAmplitude, endFrequency, duration));
         }
-        int max = Math.max(Math.min(this.mStepCount, duration / 5), 1);
-        int i = duration / max;
+        int iMax = Math.max(Math.min(this.mStepCount, duration / 5), 1);
+        int i = duration / iMax;
         ArrayList arrayList = new ArrayList();
-        for (int i2 = 1; i2 < max; i2++) {
-            float f = i2 / max;
+        for (int i2 = 1; i2 < iMax; i2++) {
+            float f = i2 / iMax;
             arrayList.add(new StepParameter(interpolate(startAmplitude, endAmplitude, f), interpolate(startFrequency, endFrequency, f), i));
         }
-        arrayList.add(new StepParameter(endAmplitude, endFrequency, duration - (i * (max - 1))));
+        arrayList.add(new StepParameter(endAmplitude, endFrequency, duration - (i * (iMax - 1))));
         return arrayList;
     }
 

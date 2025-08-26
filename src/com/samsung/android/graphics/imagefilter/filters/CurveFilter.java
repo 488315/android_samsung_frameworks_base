@@ -196,11 +196,11 @@ public final class CurveFilter extends FilterEffect {
         boolean z;
         if (!this.bitmapCache.contains(this.minX, this.minY, this.maxX, this.maxY, this.curveLevel)) {
             Bitmap.Config config = CURVE_CONFIG;
-            Bitmap createCurveBitmap = createCurveBitmap(256, 1, config);
-            if (isValidBitmap(createCurveBitmap, 256, 1, config)) {
-                this.bitmapCache.put(this.minX, this.minY, this.maxX, this.maxY, this.curveLevel, createCurveBitmap);
-            } else if (createCurveBitmap != null) {
-                createCurveBitmap.recycle();
+            Bitmap bitmapCreateCurveBitmap = createCurveBitmap(256, 1, config);
+            if (isValidBitmap(bitmapCreateCurveBitmap, 256, 1, config)) {
+                this.bitmapCache.put(this.minX, this.minY, this.maxX, this.maxY, this.curveLevel, bitmapCreateCurveBitmap);
+            } else if (bitmapCreateCurveBitmap != null) {
+                bitmapCreateCurveBitmap.recycle();
             }
         }
         BitmapEntry bitmapEntry = this.bitmapCache.get(this.minX, this.minY, this.maxX, this.maxY, this.curveLevel);
@@ -241,8 +241,8 @@ public final class CurveFilter extends FilterEffect {
             for (int i = 0; i < value.intValue() * 2; i++) {
                 fArr[i] = key[i];
             }
-            for (int intValue = value.intValue() - 1; intValue > 0; intValue--) {
-                for (int i2 = 0; i2 < intValue; i2++) {
+            for (int iIntValue = value.intValue() - 1; iIntValue > 0; iIntValue--) {
+                for (int i2 = 0; i2 < iIntValue; i2++) {
                     int i3 = i2 * 2;
                     float f4 = fArr[i3];
                     fArr[i3] = f4 + ((fArr[i3 + 2] - f4) * f3);
@@ -261,12 +261,12 @@ public final class CurveFilter extends FilterEffect {
             if (f6 == 0.0f) {
                 f6 += 0.001f;
             }
-            int findLowerIndex = findLowerIndex(arrayList, f6);
-            Point point = arrayList.get(findLowerIndex);
-            Point point2 = arrayList.get(findLowerIndex + 1);
+            int iFindLowerIndex = findLowerIndex(arrayList, f6);
+            Point point = arrayList.get(iFindLowerIndex);
+            Point point2 = arrayList.get(iFindLowerIndex + 1);
             float f7 = point2.x - point.x;
-            int max = Math.max(0, Math.min(255, Math.round((point.y + ((point2.y - point.y) * (f7 > 0.0f ? (f6 - point.x) / f7 : 0.0f))) * 255.0f))) & 255;
-            this.bezierBuffer[i5] = max | (max << 16) | (-16777216) | (max << 8);
+            int iMax = Math.max(0, Math.min(255, Math.round((point.y + ((point2.y - point.y) * (f7 > 0.0f ? (f6 - point.x) / f7 : 0.0f))) * 255.0f))) & 255;
+            this.bezierBuffer[i5] = iMax | (iMax << 16) | (-16777216) | (iMax << 8);
         }
     }
 
@@ -300,10 +300,10 @@ public final class CurveFilter extends FilterEffect {
         }
         float f = this.maxX - this.minX;
         float f2 = f / 120.0f;
-        float min = Math.min(f, this.maxY - this.minY);
-        float max = Math.max((min < 30.0f ? min / 10.0f : (min / 30.0f) + 2.0f) - 1.0f, 0.0f);
+        float fMin = Math.min(f, this.maxY - this.minY);
+        float fMax = Math.max((fMin < 30.0f ? fMin / 10.0f : (fMin / 30.0f) + 2.0f) - 1.0f, 0.0f);
         float f3 = this.curveLevel;
-        float f4 = (((max * (f3 > 0.0f ? f3 : -f3)) * 2.0f) / 120.0f) + 1.0f;
+        float f4 = (((fMax * (f3 > 0.0f ? f3 : -f3)) * 2.0f) / 120.0f) + 1.0f;
         float[] fArr = new float[12];
         float f5 = this.minX;
         fArr[0] = f5;
@@ -325,14 +325,14 @@ public final class CurveFilter extends FilterEffect {
                 float f10 = (f9 - ((f9 - f5) / 3.0f)) - f4;
                 fArr[4] = f10;
                 fArr[5] = (f8 - ((f8 - f6) / 3.0f)) + f4;
-                float f11 = (min / 255.0f) * f4;
+                float f11 = (fMin / 255.0f) * f4;
                 fArr[6] = f10 + (((f9 - f10) * f3) / 120.0f) + (2.0f * f11 * Math.min((-(f3 - 70.0f)) / 25.0f, f3 / 45.0f));
                 float f12 = fArr[5];
                 float f13 = fArr[9] - f12;
                 float f14 = this.curveLevel;
                 fArr[7] = (f12 + (((f13 * f14) * 1.25f) / 120.0f)) - (f11 * Float.max((100.0f / f14) * (-1.0f), Math.min((-(f14 - 70.0f)) / 15.0f, f14 / 55.0f)));
                 float f15 = fArr[0];
-                fArr[2] = ((f15 + ((fArr[8] - f15) / 3.0f)) - f4) - ((min / 50.0f) * Float.max(-1.2f, Math.min((-(this.curveLevel - 70.0f)) / 20.0f, 1.0f)));
+                fArr[2] = ((f15 + ((fArr[8] - f15) / 3.0f)) - f4) - ((fMin / 50.0f) * Float.max(-1.2f, Math.min((-(this.curveLevel - 70.0f)) / 20.0f, 1.0f)));
                 float f16 = fArr[1];
                 fArr[3] = f16 + ((fArr[9] - f16) / 3.0f) + (f4 / ((this.curveLevel + 100.0f) / 64.0f));
             } else {
@@ -342,14 +342,14 @@ public final class CurveFilter extends FilterEffect {
                 float f18 = ((f7 - f17) / 3.0f) + f17 + f4;
                 fArr[6] = f18;
                 fArr[7] = (f6 + ((f8 - f6) / 3.0f)) - f4;
-                float f19 = (min / 255.0f) * f4;
+                float f19 = (fMin / 255.0f) * f4;
                 fArr[4] = (f18 + (((f18 - f17) * f3) / 120.0f)) - ((2.0f * f19) * Math.min((-((-f3) - 70.0f)) / 25.0f, (-f3) / 45.0f));
                 float f20 = fArr[7];
                 float f21 = f20 - fArr[3];
                 float f22 = this.curveLevel;
                 fArr[5] = f20 + (((f21 * f22) * 1.25f) / 120.0f) + (f19 * Float.max((100.0f / (-f22)) * (-1.0f), Math.min((-((-f22) - 70.0f)) / 15.0f, (-f22) / 55.0f)));
                 float f23 = fArr[10];
-                fArr[8] = (f23 - ((f23 - fArr[2]) / 3.0f)) + f4 + ((min / 50.0f) * Float.max(-1.2f, Math.min((-((-this.curveLevel) - 70.0f)) / 20.0f, 1.0f)));
+                fArr[8] = (f23 - ((f23 - fArr[2]) / 3.0f)) + f4 + ((fMin / 50.0f) * Float.max(-1.2f, Math.min((-((-this.curveLevel) - 70.0f)) / 20.0f, 1.0f)));
                 float f24 = fArr[11];
                 fArr[9] = (f24 - ((f24 - fArr[3]) / 3.0f)) - (f4 / (((-this.curveLevel) + 100.0f) / 64.0f));
             }
@@ -371,19 +371,19 @@ public final class CurveFilter extends FilterEffect {
     }
 
     private void PrintPath(Path path) {
-        float[] approximate = path.approximate(0.002f);
-        int length = approximate.length / 3;
+        float[] fArrApproximate = path.approximate(0.002f);
+        int length = fArrApproximate.length / 3;
         float[] fArr = new float[length];
         float[] fArr2 = new float[length];
         int i = 0;
         boolean z = false;
         int i2 = 0;
         for (int i3 = 0; i3 < length; i3++) {
-            float f = approximate[i2];
+            float f = fArrApproximate[i2];
             int i4 = i2 + 2;
-            float f2 = approximate[i2 + 1];
+            float f2 = fArrApproximate[i2 + 1];
             i2 += 3;
-            float f3 = approximate[i4];
+            float f3 = fArrApproximate[i4];
             fArr[i3] = f2;
             fArr2[i3] = f3;
             if (f == 0.0f && f2 != f2) {

@@ -5,14 +5,12 @@ import androidx.constraintlayout.core.widgets.ConstraintWidget;
 import androidx.constraintlayout.core.widgets.ConstraintWidgetContainer;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class BasicMeasure {
     public final ConstraintWidgetContainer mConstraintWidgetContainer;
     public final ArrayList mVariableDimensionsWidgets = new ArrayList();
     public final Measure mMeasure = new Measure();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Measure {
         public ConstraintWidget.DimensionBehaviour horizontalBehavior;
         public int horizontalDimension;
@@ -26,7 +24,6 @@ public class BasicMeasure {
         public int verticalDimension;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Measurer {
         void didMeasures();
 
@@ -70,7 +67,7 @@ public class BasicMeasure {
     }
 
     public final void solveLinearSystem(ConstraintWidgetContainer constraintWidgetContainer, int i, int i2, int i3) {
-        long nanoTime = constraintWidgetContainer.mMetrics != null ? System.nanoTime() : 0L;
+        long jNanoTime = constraintWidgetContainer.mMetrics != null ? System.nanoTime() : 0L;
         int i4 = constraintWidgetContainer.mMinWidth;
         int i5 = constraintWidgetContainer.mMinHeight;
         constraintWidgetContainer.mMinWidth = 0;
@@ -91,10 +88,10 @@ public class BasicMeasure {
         constraintWidgetContainer2.mPass = i;
         constraintWidgetContainer2.layout();
         if (constraintWidgetContainer.mMetrics != null) {
-            long nanoTime2 = System.nanoTime();
+            long jNanoTime2 = System.nanoTime();
             Metrics metrics = constraintWidgetContainer.mMetrics;
             metrics.getClass();
-            metrics.measuresLayoutDuration = (nanoTime2 - nanoTime) + metrics.measuresLayoutDuration;
+            metrics.measuresLayoutDuration = (jNanoTime2 - jNanoTime) + metrics.measuresLayoutDuration;
         }
     }
 

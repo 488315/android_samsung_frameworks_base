@@ -9,26 +9,42 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
 import android.os.RemoteException;
+import android.text.SpannableStringBuilder;
+import android.text.style.BulletSpan;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.WindowManagerGlobal;
 import android.view.accessibility.AccessibilityManager;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import androidx.appcompat.widget.MenuPopupWindow$MenuDropDownListView$$ExternalSyntheticOutline0;
 import com.android.systemui.CoreStartable;
 import com.android.systemui.R;
 import com.android.systemui.broadcast.BroadcastDispatcher;
+import com.android.systemui.navigationbar.NavigationBarController;
+import com.android.systemui.navigationbar.NavigationBarControllerImpl;
 import com.android.systemui.navigationbar.NavigationModeController;
+import com.android.systemui.navigationbar.views.NavigationBarView;
+import com.android.systemui.navigationbar.views.buttons.KeyButtonDrawable;
 import com.android.systemui.settings.UserTracker;
 import com.android.systemui.settings.UserTrackerImpl;
+import com.android.systemui.shared.recents.utilities.Utilities;
+import com.android.systemui.shared.system.QuickStepContract;
 import com.android.systemui.statusbar.policy.ConfigurationController;
 import com.android.systemui.util.leak.RotationUtils;
 import dagger.Lazy;
+import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class ScreenPinningRequest implements View.OnClickListener, NavigationModeController.ModeChangedListener, CoreStartable, ConfigurationController.ConfigurationListener {
     public final AccessibilityManager mAccessibilityService;
@@ -47,7 +63,6 @@ public class ScreenPinningRequest implements View.OnClickListener, NavigationMod
     public final WindowManager mWindowManager;
     public int taskId;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class RequestWindowView extends FrameLayout {
         public final ColorDrawable mColor;
         public ViewGroup mLayout;
@@ -66,30 +81,99 @@ public class ScreenPinningRequest implements View.OnClickListener, NavigationMod
             return RotationUtils.getRotation(context);
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:26:0x00c1  */
-        /* JADX WARN: Removed duplicated region for block: B:29:0x00f2  */
-        /* JADX WARN: Removed duplicated region for block: B:32:0x011e  */
-        /* JADX WARN: Removed duplicated region for block: B:35:0x0188  */
-        /* JADX WARN: Removed duplicated region for block: B:42:0x0228  */
-        /* JADX WARN: Removed duplicated region for block: B:45:0x024c  */
-        /* JADX WARN: Removed duplicated region for block: B:49:0x024f  */
-        /* JADX WARN: Removed duplicated region for block: B:52:0x0122  */
-        /* JADX WARN: Removed duplicated region for block: B:62:0x00f7  */
-        /* JADX WARN: Removed duplicated region for block: B:66:0x00cf  */
+        /* JADX WARN: Removed duplicated region for block: B:29:0x00a4  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final void inflateView(int r11) {
-            /*
-                Method dump skipped, instructions count: 606
-                To view this dump change 'Code comments level' option to 'DEBUG'
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.recents.ScreenPinningRequest.RequestWindowView.inflateView(int):void");
+        public final void inflateView(int i) throws Resources.NotFoundException {
+            int i2;
+            boolean zHasNavigationBar;
+            ViewGroup viewGroup = (ViewGroup) View.inflate(getContext(), i == 3 ? R.layout.screen_pinning_request_sea_phone : i == 1 ? R.layout.screen_pinning_request_land_phone : R.layout.screen_pinning_request, null);
+            this.mLayout = viewGroup;
+            viewGroup.setClickable(true);
+            this.mLayout.setLayoutDirection(0);
+            this.mLayout.findViewById(R.id.screen_pinning_text_area).setLayoutDirection(3);
+            View viewFindViewById = this.mLayout.findViewById(R.id.screen_pinning_buttons);
+            if (!QuickStepContract.isGesturalMode(ScreenPinningRequest.this.mNavBarMode)) {
+                try {
+                    zHasNavigationBar = WindowManagerGlobal.getWindowManagerService().hasNavigationBar(((FrameLayout) this).mContext.getDisplayId());
+                } catch (RemoteException e) {
+                    Log.e("ScreenPinningRequest", "Failed to check soft navigation bar", e);
+                    zHasNavigationBar = false;
+                }
+                if (!zHasNavigationBar || Utilities.isLargeScreen(((FrameLayout) this).mContext)) {
+                    viewFindViewById.setVisibility(8);
+                } else {
+                    viewFindViewById.setLayoutDirection(3);
+                    if (MenuPopupWindow$MenuDropDownListView$$ExternalSyntheticOutline0.m(((FrameLayout) this).mContext) == 1) {
+                        LinearLayout linearLayout = (LinearLayout) viewFindViewById;
+                        if (linearLayout.getOrientation() == 1) {
+                            int childCount = linearLayout.getChildCount();
+                            ArrayList arrayList = new ArrayList(childCount);
+                            for (int i3 = 0; i3 < childCount; i3++) {
+                                arrayList.add(linearLayout.getChildAt(i3));
+                            }
+                            linearLayout.removeAllViews();
+                            for (int i4 = childCount - 1; i4 >= 0; i4--) {
+                                linearLayout.addView((View) arrayList.get(i4));
+                            }
+                        }
+                    }
+                }
+            }
+            ((Button) this.mLayout.findViewById(R.id.screen_pinning_ok_button)).setOnClickListener(ScreenPinningRequest.this);
+            if (this.mShowCancel) {
+                ((Button) this.mLayout.findViewById(R.id.screen_pinning_cancel_button)).setOnClickListener(ScreenPinningRequest.this);
+            } else {
+                ((Button) this.mLayout.findViewById(R.id.screen_pinning_cancel_button)).setVisibility(4);
+            }
+            int displayId = ((FrameLayout) this).mContext.getDisplayId();
+            NavigationBarControllerImpl navigationBarControllerImpl = (NavigationBarControllerImpl) ((NavigationBarController) ScreenPinningRequest.this.mNavigationBarControllerLazy.get());
+            NavigationBarView navigationBarView = navigationBarControllerImpl.getNavigationBarView(displayId);
+            boolean zIsOverviewEnabled = navigationBarView != null ? navigationBarView.isOverviewEnabled() : (navigationBarControllerImpl.mTaskbarDelegate.mSysUiState.getFlags() & 16777216) == 0;
+            boolean zIsTouchExplorationEnabled = ScreenPinningRequest.this.mAccessibilityService.isTouchExplorationEnabled();
+            if (QuickStepContract.isGesturalMode(ScreenPinningRequest.this.mNavBarMode)) {
+                i2 = R.string.screen_pinning_description_gestural;
+            } else if (zIsOverviewEnabled) {
+                this.mLayout.findViewById(R.id.screen_pinning_recents_group).setVisibility(0);
+                this.mLayout.findViewById(R.id.screen_pinning_home_bg_light).setVisibility(4);
+                this.mLayout.findViewById(R.id.screen_pinning_home_bg).setVisibility(4);
+                i2 = zIsTouchExplorationEnabled ? R.string.screen_pinning_description_accessible : R.string.screen_pinning_description;
+            } else {
+                this.mLayout.findViewById(R.id.screen_pinning_recents_group).setVisibility(4);
+                this.mLayout.findViewById(R.id.screen_pinning_home_bg_light).setVisibility(0);
+                this.mLayout.findViewById(R.id.screen_pinning_home_bg).setVisibility(0);
+                i2 = zIsTouchExplorationEnabled ? R.string.screen_pinning_description_recents_invisible_accessible : R.string.screen_pinning_description_recents_invisible;
+            }
+            NavigationBarView navigationBarView2 = ((NavigationBarControllerImpl) ((NavigationBarController) ScreenPinningRequest.this.mNavigationBarControllerLazy.get())).getNavigationBarView(displayId);
+            if (navigationBarView2 != null) {
+                ImageView imageView = (ImageView) this.mLayout.findViewById(R.id.screen_pinning_back_icon);
+                KeyButtonDrawable drawable = navigationBarView2.getDrawable(R.drawable.ic_sysbar_back);
+                navigationBarView2.orientBackButton(drawable);
+                imageView.setImageDrawable(drawable);
+                ImageView imageView2 = (ImageView) this.mLayout.findViewById(R.id.screen_pinning_home_icon);
+                KeyButtonDrawable drawable2 = navigationBarView2.mShowSwipeUpUi ? navigationBarView2.getDrawable(R.drawable.ic_sysbar_home_quick_step) : navigationBarView2.getDrawable(R.drawable.ic_sysbar_home);
+                navigationBarView2.orientHomeButton(drawable2);
+                imageView2.setImageDrawable(drawable2);
+            }
+            int dimensionPixelSize = getResources().getDimensionPixelSize(R.dimen.screen_pinning_description_bullet_gap_width);
+            SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder();
+            spannableStringBuilder.append(getContext().getText(i2), new BulletSpan(dimensionPixelSize), 0);
+            spannableStringBuilder.append((CharSequence) System.lineSeparator());
+            spannableStringBuilder.append(getContext().getText(R.string.screen_pinning_exposes_personal_data), new BulletSpan(dimensionPixelSize), 0);
+            spannableStringBuilder.append((CharSequence) System.lineSeparator());
+            spannableStringBuilder.append(getContext().getText(R.string.screen_pinning_can_open_other_apps), new BulletSpan(dimensionPixelSize), 0);
+            ((TextView) this.mLayout.findViewById(R.id.screen_pinning_description)).setText(spannableStringBuilder);
+            int i5 = zIsTouchExplorationEnabled ? 4 : 0;
+            this.mLayout.findViewById(R.id.screen_pinning_back_bg).setVisibility(i5);
+            this.mLayout.findViewById(R.id.screen_pinning_back_bg_light).setVisibility(i5);
+            ViewGroup viewGroup2 = this.mLayout;
+            ScreenPinningRequest.this.getClass();
+            addView(viewGroup2, new FrameLayout.LayoutParams(-2, -2, i == 3 ? 19 : i == 1 ? 21 : 81));
         }
 
         @Override // android.view.ViewGroup, android.view.View
-        public final void onAttachedToWindow() {
+        public final void onAttachedToWindow() throws Resources.NotFoundException {
             DisplayMetrics displayMetrics = new DisplayMetrics();
             ScreenPinningRequest.this.mWindowManager.getDefaultDisplay().getMetrics(displayMetrics);
             float f = displayMetrics.density;
@@ -106,15 +190,15 @@ public class ScreenPinningRequest implements View.OnClickListener, NavigationMod
                     this.mLayout.setTranslationY(f * 96.0f);
                 }
                 this.mLayout.animate().alpha(1.0f).translationX(0.0f).translationY(0.0f).setDuration(300L).setInterpolator(new DecelerateInterpolator()).start();
-                ValueAnimator ofObject = ValueAnimator.ofObject(new ArgbEvaluator(), 0, Integer.valueOf(color));
-                ofObject.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.recents.ScreenPinningRequest.RequestWindowView.1
+                ValueAnimator valueAnimatorOfObject = ValueAnimator.ofObject(new ArgbEvaluator(), 0, Integer.valueOf(color));
+                valueAnimatorOfObject.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.recents.ScreenPinningRequest.RequestWindowView.1
                     @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                     public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                         RequestWindowView.this.mColor.setColor(((Integer) valueAnimator.getAnimatedValue()).intValue());
                     }
                 });
-                ofObject.setDuration(1000L);
-                ofObject.start();
+                valueAnimatorOfObject.setDuration(1000L);
+                valueAnimatorOfObject.start();
             } else {
                 this.mColor.setColor(color);
             }
@@ -125,7 +209,7 @@ public class ScreenPinningRequest implements View.OnClickListener, NavigationMod
             ((UserTrackerImpl) screenPinningRequest.mUserTracker).addCallback(screenPinningRequest.mUserChangedCallback, ((FrameLayout) this).mContext.getMainExecutor());
         }
 
-        public final void onConfigurationChanged() {
+        public final void onConfigurationChanged() throws Resources.NotFoundException {
             removeAllViews();
             inflateView(getRotation(((FrameLayout) this).mContext));
         }
@@ -206,7 +290,7 @@ public class ScreenPinningRequest implements View.OnClickListener, NavigationMod
     }
 
     @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
-    public final void onConfigChanged(Configuration configuration) {
+    public final void onConfigChanged(Configuration configuration) throws Resources.NotFoundException {
         RequestWindowView requestWindowView = this.mRequestWindow;
         if (requestWindowView != null) {
             requestWindowView.onConfigurationChanged();

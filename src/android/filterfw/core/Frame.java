@@ -172,12 +172,12 @@ public abstract class Frame {
         if (bitmap.getConfig() == Bitmap.Config.ARGB_8888) {
             return bitmap;
         }
-        Bitmap copy = bitmap.copy(Bitmap.Config.ARGB_8888, false);
-        if (copy == null) {
+        Bitmap bitmapCopy = bitmap.copy(Bitmap.Config.ARGB_8888, false);
+        if (bitmapCopy == null) {
             throw new RuntimeException("Error converting bitmap to RGBA!");
         }
-        if (copy.getRowBytes() == copy.getWidth() * 4) {
-            return copy;
+        if (bitmapCopy.getRowBytes() == bitmapCopy.getWidth() * 4) {
+            return bitmapCopy;
         }
         throw new RuntimeException("Unsupported row byte count in bitmap!");
     }

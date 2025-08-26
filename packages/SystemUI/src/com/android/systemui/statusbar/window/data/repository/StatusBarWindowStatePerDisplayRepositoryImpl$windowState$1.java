@@ -13,7 +13,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class StatusBarWindowStatePerDisplayRepositoryImpl$windowState$1 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -51,10 +50,10 @@ final class StatusBarWindowStatePerDisplayRepositoryImpl$windowState$1 extends S
             final ?? r1 = new CommandQueue.Callbacks() { // from class: com.android.systemui.statusbar.window.data.repository.StatusBarWindowStatePerDisplayRepositoryImpl$windowState$1$callback$1
                 @Override // com.android.systemui.statusbar.CommandQueue.Callbacks
                 public final void setWindowState(int i2, int i3, int i4) {
-                    StatusBarWindowStatePerDisplayRepositoryImpl statusBarWindowStatePerDisplayRepositoryImpl2 = StatusBarWindowStatePerDisplayRepositoryImpl.this;
+                    StatusBarWindowStatePerDisplayRepositoryImpl statusBarWindowStatePerDisplayRepositoryImpl2 = statusBarWindowStatePerDisplayRepositoryImpl;
                     if (i2 == statusBarWindowStatePerDisplayRepositoryImpl2.thisDisplayId && i3 == 1) {
                         statusBarWindowStatePerDisplayRepositoryImpl2.getClass();
-                        ((ChannelCoroutine) producerScope).mo3456trySendJP2dKIU(i4 != 0 ? i4 != 1 ? i4 != 2 ? StatusBarWindowState.Hidden : StatusBarWindowState.Hidden : StatusBarWindowState.Hiding : StatusBarWindowState.Showing);
+                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(i4 != 0 ? i4 != 1 ? i4 != 2 ? StatusBarWindowState.Hidden : StatusBarWindowState.Hidden : StatusBarWindowState.Hiding : StatusBarWindowState.Showing);
                     }
                 }
             };
@@ -63,7 +62,7 @@ final class StatusBarWindowStatePerDisplayRepositoryImpl$windowState$1 extends S
             Function0 function0 = new Function0() { // from class: com.android.systemui.statusbar.window.data.repository.StatusBarWindowStatePerDisplayRepositoryImpl$windowState$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    StatusBarWindowStatePerDisplayRepositoryImpl.this.commandQueue.removeCallback((CommandQueue.Callbacks) r1);
+                    statusBarWindowStatePerDisplayRepositoryImpl2.commandQueue.removeCallback((CommandQueue.Callbacks) r1);
                     return Unit.INSTANCE;
                 }
             };

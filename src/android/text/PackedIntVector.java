@@ -113,15 +113,15 @@ public class PackedIntVector {
 
     private final void growBuffer() {
         int i = this.mColumns;
-        int[] newUnpaddedIntArray = ArrayUtils.newUnpaddedIntArray(GrowingArrayUtils.growSize(size()) * i);
-        int length = newUnpaddedIntArray.length / i;
+        int[] iArrNewUnpaddedIntArray = ArrayUtils.newUnpaddedIntArray(GrowingArrayUtils.growSize(size()) * i);
+        int length = iArrNewUnpaddedIntArray.length / i;
         int[] iArr = this.mValueGap;
         int i2 = this.mRowGapStart;
         int i3 = this.mRows - (this.mRowGapLength + i2);
         int[] iArr2 = this.mValues;
         if (iArr2 != null) {
-            System.arraycopy(iArr2, 0, newUnpaddedIntArray, 0, i * i2);
-            System.arraycopy(this.mValues, (this.mRows - i3) * i, newUnpaddedIntArray, (length - i3) * i, i3 * i);
+            System.arraycopy(iArr2, 0, iArrNewUnpaddedIntArray, 0, i * i2);
+            System.arraycopy(this.mValues, (this.mRows - i3) * i, iArrNewUnpaddedIntArray, (length - i3) * i, i3 * i);
         }
         for (int i4 = 0; i4 < i; i4++) {
             int i5 = iArr[i4];
@@ -135,7 +135,7 @@ public class PackedIntVector {
         }
         this.mRowGapLength += length - this.mRows;
         this.mRows = length;
-        this.mValues = newUnpaddedIntArray;
+        this.mValues = iArrNewUnpaddedIntArray;
     }
 
     private final void moveValueGapTo(int i, int i2) {

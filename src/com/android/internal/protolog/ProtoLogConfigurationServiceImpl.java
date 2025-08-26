@@ -22,7 +22,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-/* loaded from: classes3.dex */
+/* loaded from: classes4.dex */
 public class ProtoLogConfigurationServiceImpl extends IProtoLogConfigurationService.Stub implements ProtoLogConfigurationService {
     private static final String LOG_TAG = "ProtoLogConfigurationService";
     private final Map<IProtoLogClient, String> mClientConfigFiles;
@@ -72,19 +72,19 @@ public class ProtoLogConfigurationServiceImpl extends IProtoLogConfigurationServ
         protoLogDataSource.registerOnStartCallback(new ProtoLogDataSource.Instance.TracingInstanceStartCallback() { // from class: com.android.internal.protolog.ProtoLogConfigurationServiceImpl$$ExternalSyntheticLambda3
             @Override // com.android.internal.protolog.ProtoLogDataSource.Instance.TracingInstanceStartCallback
             public final void run(int i, ProtoLogDataSource.ProtoLogConfig protoLogConfig) {
-                ProtoLogConfigurationServiceImpl.this.onTracingInstanceStart(i, protoLogConfig);
+                this.f$0.onTracingInstanceStart(i, protoLogConfig);
             }
         });
         protoLogDataSource.registerOnFlushCallback(new Runnable() { // from class: com.android.internal.protolog.ProtoLogConfigurationServiceImpl$$ExternalSyntheticLambda4
             @Override // java.lang.Runnable
             public final void run() {
-                ProtoLogConfigurationServiceImpl.this.onTracingInstanceFlush();
+                this.f$0.onTracingInstanceFlush();
             }
         });
         protoLogDataSource.registerOnStopCallback(new ProtoLogDataSource.Instance.TracingInstanceStopCallback() { // from class: com.android.internal.protolog.ProtoLogConfigurationServiceImpl$$ExternalSyntheticLambda5
             @Override // com.android.internal.protolog.ProtoLogDataSource.Instance.TracingInstanceStopCallback
             public final void run(int i, ProtoLogDataSource.ProtoLogConfig protoLogConfig) {
-                ProtoLogConfigurationServiceImpl.this.onTracingInstanceStop(i, protoLogConfig);
+                this.f$0.onTracingInstanceStop(i, protoLogConfig);
             }
         });
         this.mDataSource = protoLogDataSource;
@@ -95,7 +95,7 @@ public class ProtoLogConfigurationServiceImpl extends IProtoLogConfigurationServ
         iProtoLogClient.asBinder().linkToDeath(new IBinder.DeathRecipient() { // from class: com.android.internal.protolog.ProtoLogConfigurationServiceImpl$$ExternalSyntheticLambda0
             @Override // android.os.IBinder.DeathRecipient
             public final void binderDied() {
-                ProtoLogConfigurationServiceImpl.this.lambda$registerClient$0(iProtoLogClient);
+                this.f$0.lambda$registerClient$0(iProtoLogClient);
             }
         }, 0);
         String str = registerClientArgs.viewerConfigFile;
@@ -152,15 +152,15 @@ public class ProtoLogConfigurationServiceImpl extends IProtoLogConfigurationServ
             if (!this.mLogGroupToLogcatStatus.containsKey(str)) {
                 this.mLogGroupToLogcatStatus.put(str, Boolean.valueOf(z));
             }
-            boolean booleanValue = this.mLogGroupToLogcatStatus.get(str).booleanValue();
-            if (booleanValue != z) {
-                iProtoLogClient.toggleLogcat(booleanValue, new String[]{str});
+            boolean zBooleanValue = this.mLogGroupToLogcatStatus.get(str).booleanValue();
+            if (zBooleanValue != z) {
+                iProtoLogClient.toggleLogcat(zBooleanValue, new String[]{str});
             }
         }
     }
 
     private void toggleProtoLogToLogcat(PrintWriter printWriter, boolean z, String[] strArr) {
-        HashMap hashMap = new HashMap();
+        HashMap map = new HashMap();
         for (String str : strArr) {
             Set<IProtoLogClient> set = this.mGroupToClients.get(str);
             if (set == null) {
@@ -169,14 +169,14 @@ public class ProtoLogConfigurationServiceImpl extends IProtoLogConfigurationServ
                 printWriter.println("WARNING: " + str2);
             } else {
                 for (IProtoLogClient iProtoLogClient : set) {
-                    hashMap.putIfAbsent(iProtoLogClient, new HashSet());
-                    ((Set) hashMap.get(iProtoLogClient)).add(str);
+                    map.putIfAbsent(iProtoLogClient, new HashSet());
+                    ((Set) map.get(iProtoLogClient)).add(str);
                 }
             }
         }
-        for (IProtoLogClient iProtoLogClient2 : hashMap.keySet()) {
+        for (IProtoLogClient iProtoLogClient2 : map.keySet()) {
             try {
-                String[] strArr2 = (String[]) ((Set) hashMap.get(iProtoLogClient2)).toArray(new String[0]);
+                String[] strArr2 = (String[]) ((Set) map.get(iProtoLogClient2)).toArray(new String[0]);
                 printWriter.println("Toggling logcat logging for client " + iProtoLogClient2.toString() + " to " + z + " for groups: [" + String.join(", ", strArr2) + NavigationBarInflaterView.SIZE_MOD_END);
                 iProtoLogClient2.toggleLogcat(z, strArr2);
                 printWriter.println("- Done");
@@ -231,17 +231,17 @@ public class ProtoLogConfigurationServiceImpl extends IProtoLogConfigurationServ
     public void lambda$registerClient$0(IProtoLogClient iProtoLogClient) {
         String str = this.mClientConfigFiles.get(iProtoLogClient);
         if (str != null) {
-            int intValue = this.mConfigFileCounts.get(str).intValue() - 1;
-            this.mConfigFileCounts.put(str, Integer.valueOf(intValue));
-            if (intValue == 0) {
+            int iIntValue = this.mConfigFileCounts.get(str).intValue() - 1;
+            this.mConfigFileCounts.put(str, Integer.valueOf(iIntValue));
+            if (iIntValue == 0) {
                 this.mViewerConfigFileTracer.trace(this.mDataSource, str);
             }
         }
     }
 
     private static void writeViewerConfigGroup(ProtoInputStream protoInputStream, ProtoOutputStream protoOutputStream) throws IOException {
-        long start = protoInputStream.start(2246267895810L);
-        long start2 = protoOutputStream.start(2246267895810L);
+        long jStart = protoInputStream.start(2246267895810L);
+        long jStart2 = protoOutputStream.start(2246267895810L);
         while (protoInputStream.nextField() != -1) {
             int fieldNumber = protoInputStream.getFieldNumber();
             if (fieldNumber == 1) {
@@ -254,13 +254,13 @@ public class ProtoLogConfigurationServiceImpl extends IProtoLogConfigurationServ
                 throw new RuntimeException("Unexpected field id " + protoInputStream.getFieldNumber());
             }
         }
-        protoInputStream.end(start);
-        protoOutputStream.end(start2);
+        protoInputStream.end(jStart);
+        protoOutputStream.end(jStart2);
     }
 
     private static void writeViewerConfigMessage(ProtoInputStream protoInputStream, ProtoOutputStream protoOutputStream) throws IOException {
-        long start = protoInputStream.start(2246267895809L);
-        long start2 = protoOutputStream.start(2246267895809L);
+        long jStart = protoInputStream.start(2246267895809L);
+        long jStart2 = protoOutputStream.start(2246267895809L);
         while (protoInputStream.nextField() != -1) {
             int fieldNumber = protoInputStream.getFieldNumber();
             if (fieldNumber == 1) {
@@ -277,7 +277,7 @@ public class ProtoLogConfigurationServiceImpl extends IProtoLogConfigurationServ
                 throw new RuntimeException("Unexpected field id " + protoInputStream.getFieldNumber());
             }
         }
-        protoInputStream.end(start);
-        protoOutputStream.end(start2);
+        protoInputStream.end(jStart);
+        protoOutputStream.end(jStart2);
     }
 }

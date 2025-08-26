@@ -52,19 +52,19 @@ public abstract class SimpleCursorTreeAdapter extends ResourceCursorTreeAdapter 
     private void bindView(View view, Context context, Cursor cursor, int[] iArr, int[] iArr2) {
         ViewBinder viewBinder = this.mViewBinder;
         for (int i = 0; i < iArr2.length; i++) {
-            View findViewById = view.findViewById(iArr2[i]);
-            if (findViewById != null) {
-                if (viewBinder != null ? viewBinder.setViewValue(findViewById, cursor, iArr[i]) : false) {
+            View viewFindViewById = view.findViewById(iArr2[i]);
+            if (viewFindViewById != null) {
+                if (viewBinder != null ? viewBinder.setViewValue(viewFindViewById, cursor, iArr[i]) : false) {
                     continue;
                 } else {
                     String string = cursor.getString(iArr[i]);
                     if (string == null) {
                         string = "";
                     }
-                    if (findViewById instanceof TextView) {
-                        setViewText((TextView) findViewById, string);
-                    } else if (findViewById instanceof ImageView) {
-                        setViewImage((ImageView) findViewById, string);
+                    if (viewFindViewById instanceof TextView) {
+                        setViewText((TextView) viewFindViewById, string);
+                    } else if (viewFindViewById instanceof ImageView) {
+                        setViewImage((ImageView) viewFindViewById, string);
                     } else {
                         throw new IllegalStateException("SimpleCursorTreeAdapter can bind values only to TextView and ImageView!");
                     }

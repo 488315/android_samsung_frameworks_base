@@ -7,7 +7,6 @@ import android.view.View;
 import com.samsung.android.core.CoreSaLogger;
 import com.samsung.android.rune.CoreRune;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class OffscreenTouchZone {
     public final boolean mIsTopLeft;
@@ -15,7 +14,6 @@ public class OffscreenTouchZone {
     public final Runnable mOnClickRunnable;
     public SurfaceControlViewHost mViewHost;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class OffscreenTouchListener implements View.OnTouchListener {
         public /* synthetic */ OffscreenTouchListener(OffscreenTouchZone offscreenTouchZone, int i) {
             this();

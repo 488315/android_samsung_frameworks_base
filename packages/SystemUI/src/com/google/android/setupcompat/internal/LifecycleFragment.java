@@ -18,7 +18,6 @@ import com.google.android.setupcompat.util.Logger;
 import com.google.android.setupcompat.util.WizardManagerHelper;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class LifecycleFragment extends Fragment {
     public static final Logger LOG = new Logger("LifecycleFragment");
@@ -76,11 +75,11 @@ public class LifecycleFragment extends Fragment {
     @Override // android.app.Fragment
     public final void onStop() {
         super.onStop();
-        long nanoTime = System.nanoTime();
-        LOG.atDebug("onStop host=" + getActivity().getClass().getSimpleName() + ", onStopTimestamp=" + nanoTime);
+        long jNanoTime = System.nanoTime();
+        LOG.atDebug("onStop host=" + getActivity().getClass().getSimpleName() + ", onStopTimestamp=" + jNanoTime);
         if (this.lifecycleChangeListener != null) {
             PersistableBundle persistableBundle = new PersistableBundle();
-            persistableBundle.putLong("onScreenStop", nanoTime);
+            persistableBundle.putLong("onScreenStop", jNanoTime);
             PartnerCustomizationLayout partnerCustomizationLayout = this.lifecycleChangeListener.f$0;
             Activity activity = partnerCustomizationLayout.activity;
             if (activity != null && WizardManagerHelper.isAnySetupWizard(activity.getIntent()) && PartnerConfigHelper.isEnhancedSetupDesignMetricsEnabled(partnerCustomizationLayout.getContext())) {
@@ -90,10 +89,10 @@ public class LifecycleFragment extends Fragment {
                     return;
                 }
                 FooterBarMixinMetrics footerBarMixinMetrics = footerBarMixin.metrics;
-                boolean isPrimaryButtonVisible = footerBarMixin.isPrimaryButtonVisible();
-                boolean isSecondaryButtonVisible = footerBarMixin.isSecondaryButtonVisible();
-                footerBarMixinMetrics.primaryButtonVisibility = FooterBarMixinMetrics.updateButtonVisibilityState(footerBarMixinMetrics.primaryButtonVisibility, isPrimaryButtonVisible);
-                footerBarMixinMetrics.secondaryButtonVisibility = FooterBarMixinMetrics.updateButtonVisibilityState(footerBarMixinMetrics.secondaryButtonVisibility, isSecondaryButtonVisible);
+                boolean zIsPrimaryButtonVisible = footerBarMixin.isPrimaryButtonVisible();
+                boolean zIsSecondaryButtonVisible = footerBarMixin.isSecondaryButtonVisible();
+                footerBarMixinMetrics.primaryButtonVisibility = FooterBarMixinMetrics.updateButtonVisibilityState(footerBarMixinMetrics.primaryButtonVisibility, zIsPrimaryButtonVisible);
+                footerBarMixinMetrics.secondaryButtonVisibility = FooterBarMixinMetrics.updateButtonVisibilityState(footerBarMixinMetrics.secondaryButtonVisibility, zIsSecondaryButtonVisible);
                 FooterButton footerButton = footerBarMixin.primaryButton;
                 FooterButton footerButton2 = footerBarMixin.secondaryButton;
                 SetupMetricsLogger.logCustomEvent(partnerCustomizationLayout.getContext(), CustomEvent.create(MetricKey.get("FooterButtonMetrics", partnerCustomizationLayout.activity), PersistableBundles.mergeBundles(footerBarMixin.getLoggingMetrics(), footerButton != null ? footerButton.getMetrics("PrimaryFooterButton") : PersistableBundle.EMPTY, footerButton2 != null ? footerButton2.getMetrics("SecondaryFooterButton") : PersistableBundle.EMPTY, persistableBundle)));

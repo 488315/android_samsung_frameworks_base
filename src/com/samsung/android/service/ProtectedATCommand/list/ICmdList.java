@@ -16,8 +16,8 @@ public abstract class ICmdList {
 
     protected final void putAtCommands(String str, int i, boolean z) {
         ATCommands aTCommands;
-        String trim = str.trim();
-        String upperCase = trim.toUpperCase();
+        String strTrim = str.trim();
+        String upperCase = strTrim.toUpperCase();
         String[] strArr = {"+", "$", "^", "#"};
         int i2 = 0;
         while (true) {
@@ -36,10 +36,10 @@ public abstract class ICmdList {
         }
         String str3 = upperCase;
         try {
-            if (trim.contains(NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER)) {
-                aTCommands = new ATCommands(str3, trim.toUpperCase().getBytes("UTF-8"), z, i, true);
+            if (strTrim.contains(NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER)) {
+                aTCommands = new ATCommands(str3, strTrim.toUpperCase().getBytes("UTF-8"), z, i, true);
             } else {
-                aTCommands = new ATCommands(str3, trim.toUpperCase().getBytes("UTF-8"), z, i);
+                aTCommands = new ATCommands(str3, strTrim.toUpperCase().getBytes("UTF-8"), z, i);
             }
             this.mCmdList.add(aTCommands);
         } catch (Exception e) {

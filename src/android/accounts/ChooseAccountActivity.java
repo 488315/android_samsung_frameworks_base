@@ -101,9 +101,9 @@ public class ChooseAccountActivity extends Activity {
         Account account = (Account) this.mAccounts[i];
         AccountManager accountManager = AccountManager.get(this);
         int accountVisibility = accountManager.getAccountVisibility(account, this.mCallingPackage);
-        Integer valueOf = Integer.valueOf(accountVisibility);
-        if (valueOf != null) {
-            valueOf.getClass();
+        Integer numValueOf = Integer.valueOf(accountVisibility);
+        if (numValueOf != null) {
+            numValueOf.getClass();
             if (accountVisibility == 4) {
                 accountManager.setAccountVisibility(account, this.mCallingPackage, 2);
             }

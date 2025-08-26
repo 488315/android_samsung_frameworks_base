@@ -13,7 +13,6 @@ import com.android.systemui.util.SettingsHelper;
 import com.android.systemui.util.settings.SecureSettings;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class ReduceBrightColorsControllerImpl implements ReduceBrightColorsController {
     public final AnonymousClass1 mContentObserver;
@@ -38,14 +37,14 @@ public class ReduceBrightColorsControllerImpl implements ReduceBrightColorsContr
                         try {
                             if (ReduceBrightColorsControllerImpl.this.mListeners.size() != 0 && lastPathSegment.equals(SettingsHelper.INDEX_ACCESSIBILITY_REDUCE_BRIGHT_COLORS_ACTIVATED)) {
                                 ReduceBrightColorsControllerImpl reduceBrightColorsControllerImpl = ReduceBrightColorsControllerImpl.this;
-                                boolean isReduceBrightColorsActivated = reduceBrightColorsControllerImpl.mManager.isReduceBrightColorsActivated();
+                                boolean zIsReduceBrightColorsActivated = reduceBrightColorsControllerImpl.mManager.isReduceBrightColorsActivated();
                                 ArrayList arrayList = new ArrayList(reduceBrightColorsControllerImpl.mListeners);
                                 int size = arrayList.size();
                                 int i = 0;
                                 while (i < size) {
                                     Object obj = arrayList.get(i);
                                     i++;
-                                    ((ReduceBrightColorsController.Listener) obj).onActivated(isReduceBrightColorsActivated);
+                                    ((ReduceBrightColorsController.Listener) obj).onActivated(zIsReduceBrightColorsActivated);
                                 }
                             }
                         } catch (Throwable th) {

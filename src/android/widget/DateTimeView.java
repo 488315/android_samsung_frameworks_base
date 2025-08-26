@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.database.ContentObserver;
 import android.os.Handler;
@@ -88,23 +89,23 @@ public class DateTimeView extends TextView {
         this(context, null);
     }
 
-    public DateTimeView(Context context, AttributeSet attributeSet) {
+    public DateTimeView(Context context, AttributeSet attributeSet) throws Resources.NotFoundException {
         super(context, attributeSet);
-        boolean dateTimeViewRelativeTimeDisplayConfigs = Flags.dateTimeViewRelativeTimeDisplayConfigs();
-        this.mCanUseRelativeTimeDisplayConfigs = dateTimeViewRelativeTimeDisplayConfigs;
+        boolean zDateTimeViewRelativeTimeDisplayConfigs = Flags.dateTimeViewRelativeTimeDisplayConfigs();
+        this.mCanUseRelativeTimeDisplayConfigs = zDateTimeViewRelativeTimeDisplayConfigs;
         this.mLastDisplay = -1;
         this.mRelativeTimeUnitDisplayLength = 0;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.DateTimeView, 0, 0);
-        setShowRelativeTime(obtainStyledAttributes.getBoolean(2, false));
-        if (dateTimeViewRelativeTimeDisplayConfigs) {
-            setRelativeTimeDisambiguationTextMask(obtainStyledAttributes.getInt(0, 2));
-            setRelativeTimeUnitDisplayLength(obtainStyledAttributes.getInt(1, 0));
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.DateTimeView, 0, 0);
+        setShowRelativeTime(typedArrayObtainStyledAttributes.getBoolean(2, false));
+        if (zDateTimeViewRelativeTimeDisplayConfigs) {
+            setRelativeTimeDisambiguationTextMask(typedArrayObtainStyledAttributes.getInt(0, 2));
+            setRelativeTimeUnitDisplayLength(typedArrayObtainStyledAttributes.getInt(1, 0));
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     @Override // android.widget.TextView, android.view.View
-    protected void onAttachedToWindow() {
+    protected void onAttachedToWindow() throws Resources.NotFoundException {
         super.onAttachedToWindow();
         ThreadLocal<ReceiverInfo> threadLocal = sReceiverInfo;
         ReceiverInfo receiverInfo = threadLocal.get();
@@ -128,21 +129,21 @@ public class DateTimeView extends TextView {
     }
 
     @RemotableViewMethod
-    public void setTime(long j) {
+    public void setTime(long j) throws Resources.NotFoundException {
         this.mTimeMillis = j;
         this.mLocalTime = toLocalDateTime(j, ZoneId.systemDefault()).withSecond(0);
         update();
     }
 
     @RemotableViewMethod
-    public void setShowRelativeTime(boolean z) {
+    public void setShowRelativeTime(boolean z) throws Resources.NotFoundException {
         this.mShowRelativeTime = z;
         updateNowText();
         update();
     }
 
     @RemotableViewMethod
-    public void setRelativeTimeDisambiguationTextMask(int i) {
+    public void setRelativeTimeDisambiguationTextMask(int i) throws Resources.NotFoundException {
         if (this.mCanUseRelativeTimeDisplayConfigs) {
             this.mRelativeTimeDisambiguationTextMask = i;
             updateNowText();
@@ -151,7 +152,7 @@ public class DateTimeView extends TextView {
     }
 
     @RemotableViewMethod
-    public void setRelativeTimeUnitDisplayLength(int i) {
+    public void setRelativeTimeUnitDisplayLength(int i) throws Resources.NotFoundException {
         if (this.mCanUseRelativeTimeDisplayConfigs) {
             this.mRelativeTimeUnitDisplayLength = i;
             updateNowText();
@@ -165,7 +166,7 @@ public class DateTimeView extends TextView {
 
     @Override // android.view.View
     @RemotableViewMethod
-    public void setVisibility(int i) {
+    public void setVisibility(int i) throws Resources.NotFoundException {
         boolean z = i != 8 && getVisibility() == 8;
         super.setVisibility(i);
         if (z) {
@@ -173,8 +174,8 @@ public class DateTimeView extends TextView {
         }
     }
 
-    void update() {
-        DateFormat dateFormat;
+    void update() throws Resources.NotFoundException {
+        DateFormat timeFormat;
         if (this.mLocalTime == null || getVisibility() == 8) {
             return;
         }
@@ -182,35 +183,35 @@ public class DateTimeView extends TextView {
             updateRelativeTime();
             return;
         }
-        ZoneId systemDefault = ZoneId.systemDefault();
+        ZoneId zoneIdSystemDefault = ZoneId.systemDefault();
         LocalDateTime localDateTime = this.mLocalTime;
-        LocalDateTime of = LocalDateTime.of(localDateTime.toLocalDate(), LocalTime.MIDNIGHT);
-        LocalDateTime plusDays = of.plusDays(1L);
+        LocalDateTime localDateTimeOf = LocalDateTime.of(localDateTime.toLocalDate(), LocalTime.MIDNIGHT);
+        LocalDateTime localDateTimePlusDays = localDateTimeOf.plusDays(1L);
         int i = 0;
-        LocalDateTime withSecond = LocalDateTime.now(systemDefault).withSecond(0);
-        long epochMillis = toEpochMillis(localDateTime.minusHours(12L), systemDefault);
-        long epochMillis2 = toEpochMillis(localDateTime.plusHours(12L), systemDefault);
-        long epochMillis3 = toEpochMillis(of, systemDefault);
-        long epochMillis4 = toEpochMillis(plusDays, systemDefault);
-        long epochMillis5 = toEpochMillis(localDateTime, systemDefault);
-        long epochMillis6 = toEpochMillis(withSecond, systemDefault);
+        LocalDateTime localDateTimeWithSecond = LocalDateTime.now(zoneIdSystemDefault).withSecond(0);
+        long epochMillis = toEpochMillis(localDateTime.minusHours(12L), zoneIdSystemDefault);
+        long epochMillis2 = toEpochMillis(localDateTime.plusHours(12L), zoneIdSystemDefault);
+        long epochMillis3 = toEpochMillis(localDateTimeOf, zoneIdSystemDefault);
+        long epochMillis4 = toEpochMillis(localDateTimePlusDays, zoneIdSystemDefault);
+        long epochMillis5 = toEpochMillis(localDateTime, zoneIdSystemDefault);
+        long epochMillis6 = toEpochMillis(localDateTimeWithSecond, zoneIdSystemDefault);
         if ((epochMillis6 < epochMillis3 || epochMillis6 >= epochMillis4) && (epochMillis6 < epochMillis || epochMillis6 >= epochMillis2)) {
             i = 1;
         }
-        if (i != this.mLastDisplay || (dateFormat = this.mLastFormat) == null) {
+        if (i != this.mLastDisplay || (timeFormat = this.mLastFormat) == null) {
             if (i == 0) {
-                dateFormat = sTimeFormat;
-                if (dateFormat == null) {
-                    dateFormat = getTimeFormat();
+                timeFormat = sTimeFormat;
+                if (timeFormat == null) {
+                    timeFormat = getTimeFormat();
                 }
             } else if (i == 1) {
-                dateFormat = DateFormat.getDateInstance(3);
+                timeFormat = DateFormat.getDateInstance(3);
             } else {
                 throw new RuntimeException("unknown display value: " + i);
             }
-            this.mLastFormat = dateFormat;
+            this.mLastFormat = timeFormat;
         }
-        maybeSetText(dateFormat.format(new Date(epochMillis5)));
+        maybeSetText(timeFormat.format(new Date(epochMillis5)));
         if (i == 0) {
             if (epochMillis2 <= epochMillis4) {
                 epochMillis2 = epochMillis4;
@@ -228,43 +229,43 @@ public class DateTimeView extends TextView {
         }
     }
 
-    private void updateRelativeTime() {
+    private void updateRelativeTime() throws Resources.NotFoundException {
         int i;
         String string;
-        long currentTimeMillis = System.currentTimeMillis();
-        long abs = Math.abs(currentTimeMillis - this.mTimeMillis);
-        boolean z = currentTimeMillis >= this.mTimeMillis;
+        long jCurrentTimeMillis = System.currentTimeMillis();
+        long jAbs = Math.abs(jCurrentTimeMillis - this.mTimeMillis);
+        boolean z = jCurrentTimeMillis >= this.mTimeMillis;
         long j = 60000;
-        if (abs < 60000) {
+        if (jAbs < 60000) {
             maybeSetText(this.mNowText);
             this.mUpdateTimeMillis = this.mTimeMillis + 60001;
             return;
         }
         long j2 = 3600000;
-        if (abs < 3600000) {
-            i = (int) (abs / 60000);
+        if (jAbs < 3600000) {
+            i = (int) (jAbs / 60000);
             string = getContext().getResources().getString(getMinutesStringId(z), Integer.valueOf(i));
         } else {
             j = 86400000;
-            if (abs < 86400000) {
-                i = (int) (abs / 3600000);
+            if (jAbs < 86400000) {
+                i = (int) (jAbs / 3600000);
                 string = getContext().getResources().getString(getHoursStringId(z), Integer.valueOf(i));
             } else {
                 j2 = 31449600000L;
-                if (abs < 31449600000L) {
+                if (jAbs < 31449600000L) {
                     LocalDateTime localDateTime = this.mLocalTime;
-                    ZoneId systemDefault = ZoneId.systemDefault();
-                    LocalDateTime localDateTime2 = toLocalDateTime(currentTimeMillis, systemDefault);
-                    int max = Math.max(Math.abs(dayDistance(localDateTime, localDateTime2)), 1);
-                    String string2 = getContext().getResources().getString(getDaysStringId(z), Integer.valueOf(max));
-                    if (z || max != 1) {
-                        this.mUpdateTimeMillis = computeNextMidnight(localDateTime2, systemDefault);
+                    ZoneId zoneIdSystemDefault = ZoneId.systemDefault();
+                    LocalDateTime localDateTime2 = toLocalDateTime(jCurrentTimeMillis, zoneIdSystemDefault);
+                    int iMax = Math.max(Math.abs(dayDistance(localDateTime, localDateTime2)), 1);
+                    String string2 = getContext().getResources().getString(getDaysStringId(z), Integer.valueOf(iMax));
+                    if (z || iMax != 1) {
+                        this.mUpdateTimeMillis = computeNextMidnight(localDateTime2, zoneIdSystemDefault);
                         j = -1;
                     }
-                    i = max;
+                    i = iMax;
                     string = string2;
                 } else {
-                    i = (int) (abs / 31449600000L);
+                    i = (int) (jAbs / 31449600000L);
                     string = getContext().getResources().getString(getYearsStringId(z), Integer.valueOf(i));
                 }
             }
@@ -308,7 +309,7 @@ public class DateTimeView extends TextView {
     }
 
     @Override // android.widget.TextView, android.view.View
-    protected void onConfigurationChanged(Configuration configuration) {
+    protected void onConfigurationChanged(Configuration configuration) throws Resources.NotFoundException {
         super.onConfigurationChanged(configuration);
         updateNowText();
         update();
@@ -330,36 +331,36 @@ public class DateTimeView extends TextView {
     }
 
     /* JADX INFO: Access modifiers changed from: package-private */
-    public void clearFormatAndUpdate() {
+    public void clearFormatAndUpdate() throws Resources.NotFoundException {
         this.mLastFormat = null;
         update();
     }
 
     @Override // android.widget.TextView, android.view.View
-    public void onInitializeAccessibilityNodeInfoInternal(AccessibilityNodeInfo accessibilityNodeInfo) {
-        String format;
+    public void onInitializeAccessibilityNodeInfoInternal(AccessibilityNodeInfo accessibilityNodeInfo) throws Resources.NotFoundException {
+        String str;
         super.onInitializeAccessibilityNodeInfoInternal(accessibilityNodeInfo);
         if (this.mShowRelativeTime) {
-            long currentTimeMillis = System.currentTimeMillis();
-            long abs = Math.abs(currentTimeMillis - this.mTimeMillis);
-            boolean z = currentTimeMillis >= this.mTimeMillis;
-            HashMap hashMap = new HashMap();
-            if (abs < 60000) {
-                format = this.mNowText;
-            } else if (abs < 3600000) {
-                hashMap.put(Contract.Events.Projection.COUNT_ONLY, Integer.valueOf((int) (abs / 60000)));
-                format = PluralsMessageFormatter.format(getContext().getResources(), hashMap, z ? R.string.duration_minutes_relative : R.string.duration_minutes_relative_future);
-            } else if (abs < 86400000) {
-                hashMap.put(Contract.Events.Projection.COUNT_ONLY, Integer.valueOf((int) (abs / 3600000)));
-                format = PluralsMessageFormatter.format(getContext().getResources(), hashMap, z ? R.string.duration_hours_relative : R.string.duration_hours_relative_future);
-            } else if (abs < 31449600000L) {
-                hashMap.put(Contract.Events.Projection.COUNT_ONLY, Integer.valueOf(Math.max(Math.abs(dayDistance(this.mLocalTime, toLocalDateTime(currentTimeMillis, ZoneId.systemDefault()))), 1)));
-                format = PluralsMessageFormatter.format(getContext().getResources(), hashMap, z ? R.string.duration_days_relative : R.string.duration_days_relative_future);
+            long jCurrentTimeMillis = System.currentTimeMillis();
+            long jAbs = Math.abs(jCurrentTimeMillis - this.mTimeMillis);
+            boolean z = jCurrentTimeMillis >= this.mTimeMillis;
+            HashMap map = new HashMap();
+            if (jAbs < 60000) {
+                str = this.mNowText;
+            } else if (jAbs < 3600000) {
+                map.put(Contract.Events.Projection.COUNT_ONLY, Integer.valueOf((int) (jAbs / 60000)));
+                str = PluralsMessageFormatter.format(getContext().getResources(), map, z ? R.string.duration_minutes_relative : R.string.duration_minutes_relative_future);
+            } else if (jAbs < 86400000) {
+                map.put(Contract.Events.Projection.COUNT_ONLY, Integer.valueOf((int) (jAbs / 3600000)));
+                str = PluralsMessageFormatter.format(getContext().getResources(), map, z ? R.string.duration_hours_relative : R.string.duration_hours_relative_future);
+            } else if (jAbs < 31449600000L) {
+                map.put(Contract.Events.Projection.COUNT_ONLY, Integer.valueOf(Math.max(Math.abs(dayDistance(this.mLocalTime, toLocalDateTime(jCurrentTimeMillis, ZoneId.systemDefault()))), 1)));
+                str = PluralsMessageFormatter.format(getContext().getResources(), map, z ? R.string.duration_days_relative : R.string.duration_days_relative_future);
             } else {
-                hashMap.put(Contract.Events.Projection.COUNT_ONLY, Integer.valueOf((int) (abs / 31449600000L)));
-                format = PluralsMessageFormatter.format(getContext().getResources(), hashMap, z ? R.string.duration_years_relative : R.string.duration_years_relative_future);
+                map.put(Contract.Events.Projection.COUNT_ONLY, Integer.valueOf((int) (jAbs / 31449600000L)));
+                str = PluralsMessageFormatter.format(getContext().getResources(), map, z ? R.string.duration_years_relative : R.string.duration_years_relative_future);
             }
-            accessibilityNodeInfo.setText(format);
+            accessibilityNodeInfo.setText(str);
         }
     }
 
@@ -401,9 +402,9 @@ public class DateTimeView extends TextView {
 
         public void addView(DateTimeView dateTimeView) {
             synchronized (this.mAttachedViews) {
-                boolean isEmpty = this.mAttachedViews.isEmpty();
+                boolean zIsEmpty = this.mAttachedViews.isEmpty();
                 this.mAttachedViews.add(dateTimeView);
-                if (isEmpty) {
+                if (zIsEmpty) {
                     register(getApplicationContextIfAvailable(dateTimeView.getContext()));
                 }
             }
@@ -428,8 +429,8 @@ public class DateTimeView extends TextView {
                     final DateTimeView dateTimeView = this.mAttachedViews.get(i);
                     dateTimeView.post(new Runnable() { // from class: android.widget.DateTimeView$ReceiverInfo$$ExternalSyntheticLambda0
                         @Override // java.lang.Runnable
-                        public final void run() {
-                            DateTimeView.this.clearFormatAndUpdate();
+                        public final void run() throws Resources.NotFoundException {
+                            dateTimeView.clearFormatAndUpdate();
                         }
                     });
                 }

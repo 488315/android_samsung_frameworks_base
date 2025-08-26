@@ -26,7 +26,6 @@ import java.util.concurrent.Executor;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.text.StringsKt__IndentKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DeviceFoldStateProvider implements FoldStateProvider {
     public final CurrentActivityTypeProvider activityTypeProvider;
@@ -51,7 +50,7 @@ public final class DeviceFoldStateProvider implements FoldStateProvider {
     public final DeviceFoldStateProvider$timeoutRunnable$1 timeoutRunnable = new Runnable() { // from class: com.android.systemui.unfold.updates.DeviceFoldStateProvider$timeoutRunnable$1
         @Override // java.lang.Runnable
         public final void run() {
-            DeviceFoldStateProvider deviceFoldStateProvider = DeviceFoldStateProvider.this;
+            DeviceFoldStateProvider deviceFoldStateProvider = this.this$0;
             deviceFoldStateProvider.notifyFoldUpdate(deviceFoldStateProvider.lastHingeAngle, 2);
         }
     };
@@ -59,12 +58,11 @@ public final class DeviceFoldStateProvider implements FoldStateProvider {
     public final DeviceFoldStateProvider$progressExecutor$1 progressExecutor = new Executor() { // from class: com.android.systemui.unfold.updates.DeviceFoldStateProvider$progressExecutor$1
         @Override // java.util.concurrent.Executor
         public final void execute(Runnable runnable) {
-            DeviceFoldStateProvider.this.progressHandler.post(runnable);
+            this.this$0.progressHandler.post(runnable);
         }
     };
     public boolean isUnfoldHandled = true;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class FoldRotationListener implements RotationChangeProvider.RotationListener {
         public FoldRotationListener() {
         }
@@ -79,7 +77,6 @@ public final class DeviceFoldStateProvider implements FoldStateProvider {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class FoldStateListener implements FoldProvider.FoldCallback {
         public FoldStateListener() {
         }
@@ -109,7 +106,6 @@ public final class DeviceFoldStateProvider implements FoldStateProvider {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class HingeAngleListener implements Consumer {
         public HingeAngleListener() {
         }
@@ -117,28 +113,28 @@ public final class DeviceFoldStateProvider implements FoldStateProvider {
         @Override // androidx.core.util.Consumer
         public final void accept(Object obj) {
             Integer num;
-            float floatValue = ((Number) obj).floatValue();
+            float fFloatValue = ((Number) obj).floatValue();
             DeviceFoldStateProvider.this.assertInProgressThread$2();
             DeviceFoldStateProvider deviceFoldStateProvider = DeviceFoldStateProvider.this;
             deviceFoldStateProvider.assertInProgressThread$2();
             boolean z = DeviceFoldStateProviderKt.DEBUG;
             if (z) {
                 StringBuilder sb = new StringBuilder("Hinge angle: ");
-                sb.append(floatValue);
+                sb.append(fFloatValue);
                 sb.append(", lastHingeAngle: ");
                 sb.append(deviceFoldStateProvider.lastHingeAngle);
                 sb.append(", lastHingeAngleBeforeTransition: ");
                 SeslColorSpectrumView$$ExternalSyntheticOutline0.m(deviceFoldStateProvider.lastHingeAngleBeforeTransition, "DeviceFoldProvider", sb);
             }
-            boolean z2 = deviceFoldStateProvider.isTransitionInProgress() && ((num = deviceFoldStateProvider.lastFoldUpdate) == null || ((floatValue > deviceFoldStateProvider.lastHingeAngle ? 1 : (floatValue == deviceFoldStateProvider.lastHingeAngle ? 0 : -1)) < 0 ? 1 : 0) != num.intValue());
-            boolean z3 = floatValue - deviceFoldStateProvider.lastHingeAngleBeforeTransition > 7.5f;
+            boolean z2 = deviceFoldStateProvider.isTransitionInProgress() && ((num = deviceFoldStateProvider.lastFoldUpdate) == null || ((fFloatValue > deviceFoldStateProvider.lastHingeAngle ? 1 : (fFloatValue == deviceFoldStateProvider.lastHingeAngle ? 0 : -1)) < 0 ? 1 : 0) != num.intValue());
+            boolean z3 = fFloatValue - deviceFoldStateProvider.lastHingeAngleBeforeTransition > 7.5f;
             if (z2 || z3) {
                 deviceFoldStateProvider.lastHingeAngleBeforeTransition = deviceFoldStateProvider.lastHingeAngle;
             }
             float f = deviceFoldStateProvider.lastHingeAngleBeforeTransition;
-            int i = floatValue < f ? 1 : 0;
-            boolean z4 = Math.abs(floatValue - f) > 7.5f;
-            boolean z5 = 180.0f - floatValue < 15.0f;
+            int i = fFloatValue < f ? 1 : 0;
+            boolean z4 = Math.abs(fFloatValue - f) > 7.5f;
+            boolean z5 = 180.0f - fFloatValue < 15.0f;
             Integer num2 = deviceFoldStateProvider.lastFoldUpdate;
             boolean z6 = num2 == null || num2.intValue() != i;
             boolean z7 = deviceFoldStateProvider.isUnfoldHandled;
@@ -147,42 +143,41 @@ public final class DeviceFoldStateProvider implements FoldStateProvider {
                 Boolean bool = ((ActivityManagerActivityTypeProvider) deviceFoldStateProvider.activityTypeProvider)._isHomeActivity;
                 Integer num3 = null;
                 if (bool != null) {
-                    boolean booleanValue = bool.booleanValue();
+                    boolean zBooleanValue = bool.booleanValue();
                     deviceFoldStateProvider.unfoldKeyguardVisibilityProvider.getClass();
                     if (z) {
-                        Log.d("DeviceFoldProvider", "isHomeActivity=" + booleanValue + ", isOnKeyguard=false");
+                        Log.d("DeviceFoldProvider", "isHomeActivity=" + zBooleanValue + ", isOnKeyguard=false");
                     }
-                    if (!booleanValue) {
+                    if (!zBooleanValue) {
                         num3 = 60;
                     }
                 }
-                if ((num3 == null || floatValue < num3.intValue()) && z8) {
-                    deviceFoldStateProvider.notifyFoldUpdate(floatValue, i);
+                if ((num3 == null || fFloatValue < num3.intValue()) && z8) {
+                    deviceFoldStateProvider.notifyFoldUpdate(fFloatValue, i);
                 }
             }
             if (deviceFoldStateProvider.isTransitionInProgress()) {
                 if (z5) {
-                    deviceFoldStateProvider.notifyFoldUpdate(floatValue, 3);
+                    deviceFoldStateProvider.notifyFoldUpdate(fFloatValue, 3);
                     deviceFoldStateProvider.progressHandler.removeCallbacks(deviceFoldStateProvider.timeoutRunnable);
                 } else {
-                    boolean isTransitionInProgress = deviceFoldStateProvider.isTransitionInProgress();
+                    boolean zIsTransitionInProgress = deviceFoldStateProvider.isTransitionInProgress();
                     DeviceFoldStateProvider$timeoutRunnable$1 deviceFoldStateProvider$timeoutRunnable$1 = deviceFoldStateProvider.timeoutRunnable;
                     Handler handler = deviceFoldStateProvider.progressHandler;
-                    if (isTransitionInProgress) {
+                    if (zIsTransitionInProgress) {
                         handler.removeCallbacks(deviceFoldStateProvider$timeoutRunnable$1);
                     }
                     handler.postDelayed(deviceFoldStateProvider$timeoutRunnable$1, deviceFoldStateProvider.halfOpenedTimeoutMillis);
                 }
             }
-            deviceFoldStateProvider.lastHingeAngle = floatValue;
+            deviceFoldStateProvider.lastHingeAngle = fFloatValue;
             Iterator it = deviceFoldStateProvider.outputListeners.iterator();
             while (it.hasNext()) {
-                ((FoldStateProvider.FoldUpdatesListener) it.next()).onHingeAngleUpdate(floatValue);
+                ((FoldStateProvider.FoldUpdatesListener) it.next()).onHingeAngleUpdate(fFloatValue);
             }
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ScreenStatusListener implements ScreenStatusProvider.ScreenListener {
         public ScreenStatusListener() {
         }
@@ -231,8 +226,8 @@ public final class DeviceFoldStateProvider implements FoldStateProvider {
             return;
         }
         Thread thread = handler.getLooper().getThread();
-        Thread currentThread = Thread.currentThread();
-        throw new IllegalStateException(StringsKt__IndentKt.trimMargin$default("should be called from the progress thread.\n                progressThread=" + thread + " tid=" + thread.getId() + "\n                Thread.currentThread()=" + currentThread + " tid=" + currentThread.getId()).toString());
+        Thread threadCurrentThread = Thread.currentThread();
+        throw new IllegalStateException(StringsKt__IndentKt.trimMargin$default("should be called from the progress thread.\n                progressThread=" + thread + " tid=" + thread.getId() + "\n                Thread.currentThread()=" + threadCurrentThread + " tid=" + threadCurrentThread.getId()).toString());
     }
 
     public final boolean isTransitionInProgress() {
@@ -245,13 +240,13 @@ public final class DeviceFoldStateProvider implements FoldStateProvider {
         if (DeviceFoldStateProviderKt.DEBUG) {
             Log.d("DeviceFoldProvider", DeviceFoldStateProviderKt.name(i));
         }
-        boolean isTransitionInProgress = isTransitionInProgress();
+        boolean zIsTransitionInProgress = isTransitionInProgress();
         Iterator it = this.outputListeners.iterator();
         while (it.hasNext()) {
             ((FoldStateProvider.FoldUpdatesListener) it.next()).onFoldUpdate(i);
         }
         this.lastFoldUpdate = Integer.valueOf(i);
-        if (isTransitionInProgress != isTransitionInProgress()) {
+        if (zIsTransitionInProgress != isTransitionInProgress()) {
             this.lastHingeAngleBeforeTransition = f;
         }
     }
@@ -262,7 +257,7 @@ public final class DeviceFoldStateProvider implements FoldStateProvider {
     }
 
     public final void start() {
-        Boolean bool;
+        Boolean boolValueOf;
         ActivityManager.RunningTaskInfo runningTaskInfo;
         if (this.isStarted) {
             return;
@@ -280,12 +275,12 @@ public final class DeviceFoldStateProvider implements FoldStateProvider {
             Trace.beginSection("isOnHomeActivity");
             List<ActivityManager.RunningTaskInfo> runningTasks = activityManager.getRunningTasks(1);
             if (runningTasks == null || (runningTaskInfo = (ActivityManager.RunningTaskInfo) CollectionsKt___CollectionsKt.firstOrNull((List) runningTasks)) == null) {
-                bool = null;
+                boolValueOf = null;
             } else {
-                bool = Boolean.valueOf(runningTaskInfo.topActivityType == 2);
+                boolValueOf = Boolean.valueOf(runningTaskInfo.topActivityType == 2);
             }
             Trace.endSection();
-            activityManagerActivityTypeProvider._isHomeActivity = bool;
+            activityManagerActivityTypeProvider._isHomeActivity = boolValueOf;
             TaskStackChangeListeners.INSTANCE.registerTaskStackListener(activityManagerActivityTypeProvider.taskStackChangeListener);
             this.isStarted = true;
         } catch (Throwable th) {

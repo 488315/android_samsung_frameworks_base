@@ -178,21 +178,21 @@ public class ImageReader implements AutoCloseable {
     }
 
     public Image acquireLatestImage() {
-        Image acquireNextImage = acquireNextImage();
-        if (acquireNextImage == null) {
+        Image imageAcquireNextImage = acquireNextImage();
+        if (imageAcquireNextImage == null) {
             return null;
         }
         while (true) {
             try {
-                Image acquireNextImageNoThrowISE = acquireNextImageNoThrowISE();
-                if (acquireNextImageNoThrowISE == null) {
+                Image imageAcquireNextImageNoThrowISE = acquireNextImageNoThrowISE();
+                if (imageAcquireNextImageNoThrowISE == null) {
                     break;
                 }
-                acquireNextImage.close();
-                acquireNextImage = acquireNextImageNoThrowISE;
+                imageAcquireNextImage.close();
+                imageAcquireNextImage = imageAcquireNextImageNoThrowISE;
             } catch (Throwable th) {
-                if (acquireNextImage != null) {
-                    acquireNextImage.close();
+                if (imageAcquireNextImage != null) {
+                    imageAcquireNextImage.close();
                 }
                 MultiResolutionImageReader multiResolutionImageReader = this.mParent;
                 if (multiResolutionImageReader != null) {
@@ -205,7 +205,7 @@ public class ImageReader implements AutoCloseable {
         if (multiResolutionImageReader2 != null) {
             multiResolutionImageReader2.flushOther(this);
         }
-        return acquireNextImage;
+        return imageAcquireNextImage;
     }
 
     public Image acquireNextImageNoThrowISE() {
@@ -216,71 +216,35 @@ public class ImageReader implements AutoCloseable {
         return null;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:16:0x002e, code lost:
-    
-        r4.mAcquiredImages.add(r5);
-     */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    private int acquireNextSurfaceImage(android.media.ImageReader.SurfaceImage r5) {
-        /*
-            r4 = this;
-            java.lang.String r0 = "Unknown nativeImageSetup return code "
-            java.lang.Object r1 = r4.mCloseLock
-            monitor-enter(r1)
-            boolean r2 = r4.mIsReaderValid     // Catch: java.lang.Throwable -> L35
-            r3 = 1
-            if (r2 == 0) goto Lf
-            int r2 = r4.nativeImageSetup(r5)     // Catch: java.lang.Throwable -> L35
-            goto L10
-        Lf:
-            r2 = r3
-        L10:
-            if (r2 == 0) goto L2a
-            if (r2 == r3) goto L2c
-            r3 = 2
-            if (r2 != r3) goto L18
-            goto L2c
-        L18:
-            java.lang.AssertionError r4 = new java.lang.AssertionError     // Catch: java.lang.Throwable -> L35
-            java.lang.StringBuilder r5 = new java.lang.StringBuilder     // Catch: java.lang.Throwable -> L35
-            r5.<init>(r0)     // Catch: java.lang.Throwable -> L35
-            r5.append(r2)     // Catch: java.lang.Throwable -> L35
-            java.lang.String r5 = r5.toString()     // Catch: java.lang.Throwable -> L35
-            r4.<init>(r5)     // Catch: java.lang.Throwable -> L35
-            throw r4     // Catch: java.lang.Throwable -> L35
-        L2a:
-            r5.mIsImageValid = r3     // Catch: java.lang.Throwable -> L35
-        L2c:
-            if (r2 != 0) goto L33
-            java.util.List<android.media.Image> r4 = r4.mAcquiredImages     // Catch: java.lang.Throwable -> L35
-            r4.add(r5)     // Catch: java.lang.Throwable -> L35
-        L33:
-            monitor-exit(r1)     // Catch: java.lang.Throwable -> L35
-            return r2
-        L35:
-            r4 = move-exception
-            monitor-exit(r1)     // Catch: java.lang.Throwable -> L35
-            throw r4
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.media.ImageReader.acquireNextSurfaceImage(android.media.ImageReader$SurfaceImage):int");
+    private int acquireNextSurfaceImage(SurfaceImage surfaceImage) {
+        int iNativeImageSetup;
+        synchronized (this.mCloseLock) {
+            iNativeImageSetup = this.mIsReaderValid ? nativeImageSetup(surfaceImage) : 1;
+            if (iNativeImageSetup == 0) {
+                surfaceImage.mIsImageValid = true;
+            } else if (iNativeImageSetup != 1 && iNativeImageSetup != 2) {
+                throw new AssertionError("Unknown nativeImageSetup return code " + iNativeImageSetup);
+            }
+            if (iNativeImageSetup == 0) {
+                this.mAcquiredImages.add(surfaceImage);
+            }
+        }
+        return iNativeImageSetup;
     }
 
     public Image acquireNextImage() {
         SurfaceImage surfaceImage = new SurfaceImage(this.mFormat);
-        int acquireNextSurfaceImage = acquireNextSurfaceImage(surfaceImage);
-        if (acquireNextSurfaceImage == 0) {
+        int iAcquireNextSurfaceImage = acquireNextSurfaceImage(surfaceImage);
+        if (iAcquireNextSurfaceImage == 0) {
             return surfaceImage;
         }
-        if (acquireNextSurfaceImage == 1) {
+        if (iAcquireNextSurfaceImage == 1) {
             return null;
         }
-        if (acquireNextSurfaceImage == 2) {
+        if (iAcquireNextSurfaceImage == 2) {
             throw new IllegalStateException(String.format("maxImages (%d) has already been acquired, call #close before acquiring more.", Integer.valueOf(this.mMaxImages)));
         }
-        throw new AssertionError("Unknown nativeImageSetup return code " + acquireNextSurfaceImage);
+        throw new AssertionError("Unknown nativeImageSetup return code " + iAcquireNextSurfaceImage);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -408,7 +372,7 @@ public class ImageReader implements AutoCloseable {
             executor.execute(new Runnable() { // from class: android.media.ImageReader.1
                 @Override // java.lang.Runnable
                 public void run() {
-                    OnImageAvailableListener.this.onImageAvailable(imageReader);
+                    onImageAvailableListener.onImageAvailable(imageReader);
                 }
             });
         }

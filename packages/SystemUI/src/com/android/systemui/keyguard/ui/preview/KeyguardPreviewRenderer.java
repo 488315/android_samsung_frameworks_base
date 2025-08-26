@@ -2,10 +2,12 @@ package com.android.systemui.keyguard.ui.preview;
 
 import android.app.WallpaperColors;
 import android.content.Context;
+import android.content.res.Resources;
 import android.hardware.display.DisplayManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
+import android.util.Log;
 import android.view.Display;
 import android.view.SurfaceControlViewHost;
 import android.view.View;
@@ -14,12 +16,17 @@ import android.window.InputTransferToken;
 import com.android.keyguard.ClockEventController;
 import com.android.systemui.biometrics.domain.interactor.UdfpsOverlayInteractor;
 import com.android.systemui.broadcast.BroadcastDispatcher;
+import com.android.systemui.customization.R$dimen;
 import com.android.systemui.keyguard.ui.binder.KeyguardQuickAffordanceViewBinder;
 import com.android.systemui.keyguard.ui.view.layout.sections.DefaultShortcutsSection;
 import com.android.systemui.keyguard.ui.viewmodel.KeyguardPreviewClockViewModel;
 import com.android.systemui.keyguard.ui.viewmodel.KeyguardPreviewSmartspaceViewModel;
 import com.android.systemui.keyguard.ui.viewmodel.KeyguardQuickAffordancesCombinedViewModel;
+import com.android.systemui.monet.ColorScheme;
+import com.android.systemui.monet.Style;
 import com.android.systemui.plugins.clocks.ClockController;
+import com.android.systemui.plugins.clocks.ClockSettings;
+import com.android.systemui.plugins.clocks.ThemeConfig;
 import com.android.systemui.plugins.clocks.WeatherData;
 import com.android.systemui.shade.domain.interactor.ShadeModeInteractor;
 import com.android.systemui.shade.domain.interactor.ShadeModeInteractorImpl;
@@ -36,6 +43,7 @@ import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
@@ -44,8 +52,9 @@ import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.DisposableHandle;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class KeyguardPreviewRenderer {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -81,7 +90,6 @@ public final class KeyguardPreviewRenderer {
     public final int width;
     public final WindowManager windowManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.keyguard.ui.preview.KeyguardPreviewRenderer$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ DisplayManager $displayManager;
@@ -115,14 +123,13 @@ public final class KeyguardPreviewRenderer {
             keyguardPreviewRenderer.disposables.plusAssign(new DisposableHandle() { // from class: com.android.systemui.keyguard.ui.preview.KeyguardPreviewRenderer.1.1
                 @Override // kotlinx.coroutines.DisposableHandle
                 public final void dispose() {
-                    KeyguardPreviewRenderer.this.host.release();
+                    keyguardPreviewRenderer.host.release();
                 }
             });
             return Unit.INSTANCE;
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -132,11 +139,30 @@ public final class KeyguardPreviewRenderer {
         }
     }
 
+    /* renamed from: com.android.systemui.keyguard.ui.preview.KeyguardPreviewRenderer$fetchThemeStyleFromSetting$1, reason: invalid class name and case insensitive filesystem */
+    final class C09171 extends ContinuationImpl {
+        int label;
+        /* synthetic */ Object result;
+
+        public C09171(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            KeyguardPreviewRenderer keyguardPreviewRenderer = KeyguardPreviewRenderer.this;
+            int i = KeyguardPreviewRenderer.$r8$clinit;
+            return keyguardPreviewRenderer.fetchThemeStyleFromSetting(this);
+        }
+    }
+
     static {
         new Companion(null);
     }
 
-    public KeyguardPreviewRenderer(Context context, CoroutineDispatcher coroutineDispatcher, Handler handler, CoroutineDispatcher coroutineDispatcher2, KeyguardPreviewClockViewModel keyguardPreviewClockViewModel, KeyguardPreviewSmartspaceViewModel keyguardPreviewSmartspaceViewModel, KeyguardQuickAffordancesCombinedViewModel keyguardQuickAffordancesCombinedViewModel, DisplayManager displayManager, WindowManager windowManager, ClockEventController clockEventController, ClockRegistry clockRegistry, BroadcastDispatcher broadcastDispatcher, LockscreenSmartspaceController lockscreenSmartspaceController, UdfpsOverlayInteractor udfpsOverlayInteractor, KeyguardIndicationController keyguardIndicationController, Bundle bundle, ShadeModeInteractor shadeModeInteractor, SecureSettings secureSettings, DefaultShortcutsSection defaultShortcutsSection, KeyguardQuickAffordanceViewBinder keyguardQuickAffordanceViewBinder, WallpaperFocalAreaInteractor wallpaperFocalAreaInteractor) {
+    public KeyguardPreviewRenderer(Context context, CoroutineDispatcher coroutineDispatcher, Handler handler, CoroutineDispatcher coroutineDispatcher2, KeyguardPreviewClockViewModel keyguardPreviewClockViewModel, KeyguardPreviewSmartspaceViewModel keyguardPreviewSmartspaceViewModel, KeyguardQuickAffordancesCombinedViewModel keyguardQuickAffordancesCombinedViewModel, DisplayManager displayManager, WindowManager windowManager, ClockEventController clockEventController, ClockRegistry clockRegistry, BroadcastDispatcher broadcastDispatcher, LockscreenSmartspaceController lockscreenSmartspaceController, UdfpsOverlayInteractor udfpsOverlayInteractor, KeyguardIndicationController keyguardIndicationController, Bundle bundle, ShadeModeInteractor shadeModeInteractor, SecureSettings secureSettings, DefaultShortcutsSection defaultShortcutsSection, KeyguardQuickAffordanceViewBinder keyguardQuickAffordanceViewBinder, WallpaperFocalAreaInteractor wallpaperFocalAreaInteractor) throws Throwable {
         this.context = context;
         this.mainHandler = handler;
         this.backgroundDispatcher = coroutineDispatcher2;
@@ -181,101 +207,138 @@ public final class KeyguardPreviewRenderer {
         BuildersKt.runBlocking(coroutineDispatcher, new AnonymousClass1(displayManager, null));
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x00ab  */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x00b1  */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x0047  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0024  */
+    /* JADX WARN: Removed duplicated region for block: B:30:0x00ab  */
+    /* JADX WARN: Removed duplicated region for block: B:34:0x00b1  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0016  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static final java.lang.Object access$updateClockAppearance(com.android.systemui.keyguard.ui.preview.KeyguardPreviewRenderer r6, com.android.systemui.plugins.clocks.ClockController r7, android.content.res.Resources r8, kotlin.coroutines.Continuation r9) {
-        /*
-            Method dump skipped, instructions count: 234
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyguard.ui.preview.KeyguardPreviewRenderer.access$updateClockAppearance(com.android.systemui.keyguard.ui.preview.KeyguardPreviewRenderer, com.android.systemui.plugins.clocks.ClockController, android.content.res.Resources, kotlin.coroutines.Continuation):java.lang.Object");
+    public static final Object access$updateClockAppearance(KeyguardPreviewRenderer keyguardPreviewRenderer, ClockController clockController, Resources resources, Continuation continuation) throws Throwable {
+        KeyguardPreviewRenderer$updateClockAppearance$1 keyguardPreviewRenderer$updateClockAppearance$1;
+        WallpaperColors wallpaperColors;
+        Object objFetchThemeStyleFromSetting;
+        int iIntValue;
+        boolean z;
+        keyguardPreviewRenderer.getClass();
+        if (continuation instanceof KeyguardPreviewRenderer$updateClockAppearance$1) {
+            keyguardPreviewRenderer$updateClockAppearance$1 = (KeyguardPreviewRenderer$updateClockAppearance$1) continuation;
+            int i = keyguardPreviewRenderer$updateClockAppearance$1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                keyguardPreviewRenderer$updateClockAppearance$1.label = i - Integer.MIN_VALUE;
+            } else {
+                keyguardPreviewRenderer$updateClockAppearance$1 = new KeyguardPreviewRenderer$updateClockAppearance$1(keyguardPreviewRenderer, continuation);
+            }
+        }
+        Object obj = keyguardPreviewRenderer$updateClockAppearance$1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = keyguardPreviewRenderer$updateClockAppearance$1.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(obj);
+            wallpaperColors = keyguardPreviewRenderer.wallpaperColors;
+            ClockSettings clockSettings = keyguardPreviewRenderer.clockRegistry.settings;
+            if ((clockSettings != null ? clockSettings.getSeedColor() : null) == null && wallpaperColors != null) {
+                Integer num = keyguardPreviewRenderer.themeStyle;
+                if (num != null) {
+                    iIntValue = num.intValue();
+                    ColorScheme colorScheme = new ColorScheme(wallpaperColors, false, iIntValue);
+                    int s100 = colorScheme.mAccent1.getS100();
+                    int iIntValue2 = ((Integer) colorScheme.mAccent2.allShades.get(8)).intValue();
+                    z = (wallpaperColors.getColorHints() & 1) == 0;
+                    if (!z) {
+                        s100 = iIntValue2;
+                    }
+                    ThemeConfig themeConfig = new ThemeConfig(z, new Integer(s100));
+                    clockController.getSmallClock().getEvents().onThemeChanged(themeConfig);
+                    clockController.getLargeClock().getEvents().onThemeChanged(themeConfig);
+                } else {
+                    keyguardPreviewRenderer$updateClockAppearance$1.L$0 = keyguardPreviewRenderer;
+                    keyguardPreviewRenderer$updateClockAppearance$1.L$1 = clockController;
+                    keyguardPreviewRenderer$updateClockAppearance$1.L$2 = resources;
+                    keyguardPreviewRenderer$updateClockAppearance$1.L$3 = wallpaperColors;
+                    keyguardPreviewRenderer$updateClockAppearance$1.label = 1;
+                    objFetchThemeStyleFromSetting = keyguardPreviewRenderer.fetchThemeStyleFromSetting(keyguardPreviewRenderer$updateClockAppearance$1);
+                    if (objFetchThemeStyleFromSetting == coroutineSingletons) {
+                        return coroutineSingletons;
+                    }
+                }
+            }
+            keyguardPreviewRenderer.clockController.setClock(clockController);
+            clockController.getLargeClock().getEvents().onFontSettingChanged(resources.getDimensionPixelSize(R$dimen.large_clock_text_size));
+            return Unit.INSTANCE;
+        }
+        if (i2 != 1) {
+            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+        }
+        WallpaperColors wallpaperColors2 = (WallpaperColors) keyguardPreviewRenderer$updateClockAppearance$1.L$3;
+        resources = (Resources) keyguardPreviewRenderer$updateClockAppearance$1.L$2;
+        clockController = (ClockController) keyguardPreviewRenderer$updateClockAppearance$1.L$1;
+        KeyguardPreviewRenderer keyguardPreviewRenderer2 = (KeyguardPreviewRenderer) keyguardPreviewRenderer$updateClockAppearance$1.L$0;
+        ResultKt.throwOnFailure(obj);
+        wallpaperColors = wallpaperColors2;
+        keyguardPreviewRenderer = keyguardPreviewRenderer2;
+        objFetchThemeStyleFromSetting = obj;
+        Number number = (Number) objFetchThemeStyleFromSetting;
+        keyguardPreviewRenderer.themeStyle = new Integer(number.intValue());
+        iIntValue = number.intValue();
+        ColorScheme colorScheme2 = new ColorScheme(wallpaperColors, false, iIntValue);
+        int s1002 = colorScheme2.mAccent1.getS100();
+        int iIntValue22 = ((Integer) colorScheme2.mAccent2.allShades.get(8)).intValue();
+        if ((wallpaperColors.getColorHints() & 1) == 0) {
+        }
+        if (!z) {
+        }
+        ThemeConfig themeConfig2 = new ThemeConfig(z, new Integer(s1002));
+        clockController.getSmallClock().getEvents().onThemeChanged(themeConfig2);
+        clockController.getLargeClock().getEvents().onThemeChanged(themeConfig2);
+        keyguardPreviewRenderer.clockController.setClock(clockController);
+        clockController.getLargeClock().getEvents().onFontSettingChanged(resources.getDimensionPixelSize(R$dimen.large_clock_text_size));
+        return Unit.INSTANCE;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0033  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0025  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0017  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object fetchThemeStyleFromSetting(kotlin.coroutines.jvm.internal.ContinuationImpl r7) {
-        /*
-            r6 = this;
-            java.lang.String r0 = "Failed to parse THEME_CUSTOMIZATION_OVERLAY_PACKAGES."
-            java.lang.String r1 = "KeyguardPreviewRenderer"
-            boolean r2 = r7 instanceof com.android.systemui.keyguard.ui.preview.KeyguardPreviewRenderer$fetchThemeStyleFromSetting$1
-            if (r2 == 0) goto L17
-            r2 = r7
-            com.android.systemui.keyguard.ui.preview.KeyguardPreviewRenderer$fetchThemeStyleFromSetting$1 r2 = (com.android.systemui.keyguard.ui.preview.KeyguardPreviewRenderer$fetchThemeStyleFromSetting$1) r2
-            int r3 = r2.label
-            r4 = -2147483648(0xffffffff80000000, float:-0.0)
-            r5 = r3 & r4
-            if (r5 == 0) goto L17
-            int r3 = r3 - r4
-            r2.label = r3
-            goto L1c
-        L17:
-            com.android.systemui.keyguard.ui.preview.KeyguardPreviewRenderer$fetchThemeStyleFromSetting$1 r2 = new com.android.systemui.keyguard.ui.preview.KeyguardPreviewRenderer$fetchThemeStyleFromSetting$1
-            r2.<init>(r6, r7)
-        L1c:
-            java.lang.Object r7 = r2.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r3 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r4 = r2.label
-            r5 = 1
-            if (r4 == 0) goto L33
-            if (r4 != r5) goto L2b
-            kotlin.ResultKt.throwOnFailure(r7)
-            goto L47
-        L2b:
-            java.lang.IllegalStateException r6 = new java.lang.IllegalStateException
-            java.lang.String r7 = "call to 'resume' before 'invoke' with coroutine"
-            r6.<init>(r7)
-            throw r6
-        L33:
-            kotlin.ResultKt.throwOnFailure(r7)
-            com.android.systemui.keyguard.ui.preview.KeyguardPreviewRenderer$fetchThemeStyleFromSetting$overlayPackageJson$1 r7 = new com.android.systemui.keyguard.ui.preview.KeyguardPreviewRenderer$fetchThemeStyleFromSetting$overlayPackageJson$1
-            r4 = 0
-            r7.<init>(r6, r4)
-            r2.label = r5
-            kotlinx.coroutines.CoroutineDispatcher r6 = r6.backgroundDispatcher
-            java.lang.Object r7 = kotlinx.coroutines.BuildersKt.withContext(r6, r7, r2)
-            if (r7 != r3) goto L47
-            return r3
-        L47:
-            java.lang.String r7 = (java.lang.String) r7
-            if (r7 == 0) goto L6d
-            int r6 = r7.length()
-            if (r6 != 0) goto L52
-            goto L6d
-        L52:
-            org.json.JSONObject r6 = new org.json.JSONObject     // Catch: java.lang.IllegalArgumentException -> L62 org.json.JSONException -> L64
-            r6.<init>(r7)     // Catch: java.lang.IllegalArgumentException -> L62 org.json.JSONException -> L64
-            java.lang.String r7 = "android.theme.customization.theme_style"
-            java.lang.String r6 = r6.getString(r7)     // Catch: java.lang.IllegalArgumentException -> L62 org.json.JSONException -> L64
-            int r5 = com.android.systemui.monet.Style.valueOf(r6)     // Catch: java.lang.IllegalArgumentException -> L62 org.json.JSONException -> L64
-            goto L6d
-        L62:
-            r6 = move-exception
-            goto L66
-        L64:
-            r6 = move-exception
-            goto L6a
-        L66:
-            android.util.Log.i(r1, r0, r6)
-            goto L6d
-        L6a:
-            android.util.Log.i(r1, r0, r6)
-        L6d:
-            java.lang.Integer r6 = new java.lang.Integer
-            r6.<init>(r5)
-            return r6
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyguard.ui.preview.KeyguardPreviewRenderer.fetchThemeStyleFromSetting(kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object fetchThemeStyleFromSetting(ContinuationImpl continuationImpl) throws Throwable {
+        C09171 c09171;
+        if (continuationImpl instanceof C09171) {
+            c09171 = (C09171) continuationImpl;
+            int i = c09171.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                c09171.label = i - Integer.MIN_VALUE;
+            } else {
+                c09171 = new C09171(continuationImpl);
+            }
+        }
+        Object objWithContext = c09171.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = c09171.label;
+        int iValueOf = 1;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(objWithContext);
+            KeyguardPreviewRenderer$fetchThemeStyleFromSetting$overlayPackageJson$1 keyguardPreviewRenderer$fetchThemeStyleFromSetting$overlayPackageJson$1 = new KeyguardPreviewRenderer$fetchThemeStyleFromSetting$overlayPackageJson$1(this, null);
+            c09171.label = 1;
+            objWithContext = BuildersKt.withContext(this.backgroundDispatcher, keyguardPreviewRenderer$fetchThemeStyleFromSetting$overlayPackageJson$1, c09171);
+            if (objWithContext == coroutineSingletons) {
+                return coroutineSingletons;
+            }
+        } else {
+            if (i2 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(objWithContext);
+        }
+        String str = (String) objWithContext;
+        if (str != null && str.length() != 0) {
+            try {
+                iValueOf = Style.valueOf(new JSONObject(str).getString("android.theme.customization.theme_style"));
+            } catch (IllegalArgumentException e) {
+                Log.i("KeyguardPreviewRenderer", "Failed to parse THEME_CUSTOMIZATION_OVERLAY_PACKAGES.", e);
+            } catch (JSONException e2) {
+                Log.i("KeyguardPreviewRenderer", "Failed to parse THEME_CUSTOMIZATION_OVERLAY_PACKAGES.", e2);
+            }
+        }
+        return new Integer(iValueOf);
     }
 
     public final boolean getPreviewShadeLayoutWide(Display display) {

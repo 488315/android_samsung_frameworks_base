@@ -8,7 +8,9 @@ import android.graphics.SweepGradient;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Xml;
+import com.android.ims.ImsConfig;
 import com.android.internal.R;
+import com.android.internal.util.GrowingArrayUtils;
 import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -159,7 +161,7 @@ public class GradientColor extends ComplexColor {
 
     public static GradientColor createFromXml(Resources resources, XmlResourceParser xmlResourceParser, Resources.Theme theme) throws XmlPullParserException, IOException {
         int next;
-        AttributeSet asAttributeSet = Xml.asAttributeSet(xmlResourceParser);
+        AttributeSet attributeSetAsAttributeSet = Xml.asAttributeSet(xmlResourceParser);
         do {
             next = xmlResourceParser.next();
             if (next == 2) {
@@ -169,7 +171,7 @@ public class GradientColor extends ComplexColor {
         if (next != 2) {
             throw new XmlPullParserException("No start tag found");
         }
-        return createFromXmlInner(resources, xmlResourceParser, asAttributeSet, theme);
+        return createFromXmlInner(resources, xmlResourceParser, attributeSetAsAttributeSet, theme);
     }
 
     static GradientColor createFromXmlInner(Resources resources, XmlPullParser xmlPullParser, AttributeSet attributeSet, Resources.Theme theme) throws XmlPullParserException, IOException {
@@ -183,124 +185,89 @@ public class GradientColor extends ComplexColor {
     }
 
     private void inflate(Resources resources, XmlPullParser xmlPullParser, AttributeSet attributeSet, Resources.Theme theme) throws XmlPullParserException, IOException {
-        TypedArray obtainAttributes = Resources.obtainAttributes(resources, theme, attributeSet, R.styleable.GradientColor);
-        updateRootElementState(obtainAttributes);
-        this.mChangingConfigurations |= obtainAttributes.getChangingConfigurations();
-        obtainAttributes.recycle();
+        TypedArray typedArrayObtainAttributes = Resources.obtainAttributes(resources, theme, attributeSet, R.styleable.GradientColor);
+        updateRootElementState(typedArrayObtainAttributes);
+        this.mChangingConfigurations |= typedArrayObtainAttributes.getChangingConfigurations();
+        typedArrayObtainAttributes.recycle();
         validateXmlContent();
         inflateChildElements(resources, xmlPullParser, attributeSet, theme);
         onColorsChange();
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:33:0x0097, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:27:0x00a1, code lost:
     
-        throw new org.xmlpull.v1.XmlPullParserException(r19.getPositionDescription() + ": <item> tag requires a 'color' attribute and a 'offset' attribute!");
+        if (r7 <= 0) goto L39;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:28:0x00a3, code lost:
+    
+        if (r8 == false) goto L30;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:29:0x00a5, code lost:
+    
+        r1 = new int[r7][];
+        r17.mItemsThemeAttrs = r1;
+        java.lang.System.arraycopy(r3, 0, r1, 0, r7);
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:30:0x00ad, code lost:
+    
+        r17.mItemsThemeAttrs = null;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:31:0x00b0, code lost:
+    
+        r1 = new int[r7];
+        r17.mItemColors = r1;
+        r17.mItemOffsets = new float[r7];
+        java.lang.System.arraycopy(r5, 0, r1, 0, r7);
+        java.lang.System.arraycopy(r4, 0, r17.mItemOffsets, 0, r7);
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:32:0x00c0, code lost:
+    
+        return;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:39:?, code lost:
+    
+        return;
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private void inflateChildElements(android.content.res.Resources r18, org.xmlpull.v1.XmlPullParser r19, android.util.AttributeSet r20, android.content.res.Resources.Theme r21) throws org.xmlpull.v1.XmlPullParserException, java.io.IOException {
-        /*
-            r17 = this;
-            r0 = r17
-            int r1 = r19.getDepth()
-            r2 = 1
-            int r1 = r1 + r2
-            r3 = 20
-            float[] r4 = new float[r3]
-            int[] r5 = new int[r3]
-            int[][] r3 = new int[r3][]
-            r6 = 0
-            r7 = r6
-            r8 = r7
-        L13:
-            int r9 = r19.next()
-            if (r9 == r2) goto La1
-            int r10 = r19.getDepth()
-            if (r10 >= r1) goto L22
-            r11 = 3
-            if (r9 == r11) goto La1
-        L22:
-            r11 = 2
-            if (r9 == r11) goto L27
-            goto L98
-        L27:
-            if (r10 > r1) goto L98
-            java.lang.String r9 = r19.getName()
-            java.lang.String r10 = "item"
-            boolean r9 = r9.equals(r10)
-            if (r9 != 0) goto L36
-            goto L98
-        L36:
-            int[] r9 = com.android.internal.R.styleable.GradientColorItem
-            r10 = r18
-            r11 = r20
-            r12 = r21
-            android.content.res.TypedArray r9 = android.content.res.Resources.obtainAttributes(r10, r12, r11, r9)
-            boolean r13 = r9.hasValue(r6)
-            boolean r14 = r9.hasValue(r2)
-            if (r13 == 0) goto L7d
-            if (r14 == 0) goto L7d
-            int[] r13 = r9.extractThemeAttrs()
-            int r14 = r9.getColor(r6, r6)
-            r15 = 0
-            float r15 = r9.getFloat(r2, r15)
-            int r2 = r0.mChangingConfigurations
-            int r16 = r9.getChangingConfigurations()
-            r2 = r2 | r16
-            r0.mChangingConfigurations = r2
-            r9.recycle()
-            if (r13 == 0) goto L6b
-            r8 = 1
-        L6b:
-            int[] r5 = com.android.internal.util.GrowingArrayUtils.append(r5, r7, r14)
-            float[] r4 = com.android.internal.util.GrowingArrayUtils.append(r4, r7, r15)
-            java.lang.Object[] r2 = com.android.internal.util.GrowingArrayUtils.append(r3, r7, r13)
-            r3 = r2
-            int[][] r3 = (int[][]) r3
-            int r7 = r7 + 1
-            goto L9e
-        L7d:
-            org.xmlpull.v1.XmlPullParserException r0 = new org.xmlpull.v1.XmlPullParserException
-            java.lang.StringBuilder r1 = new java.lang.StringBuilder
-            r1.<init>()
-            java.lang.String r2 = r19.getPositionDescription()
-            r1.append(r2)
-            java.lang.String r2 = ": <item> tag requires a 'color' attribute and a 'offset' attribute!"
-            r1.append(r2)
-            java.lang.String r1 = r1.toString()
-            r0.<init>(r1)
-            throw r0
-        L98:
-            r10 = r18
-            r11 = r20
-            r12 = r21
-        L9e:
-            r2 = 1
-            goto L13
-        La1:
-            if (r7 <= 0) goto Lc0
-            if (r8 == 0) goto Lad
-            int[][] r1 = new int[r7][]
-            r0.mItemsThemeAttrs = r1
-            java.lang.System.arraycopy(r3, r6, r1, r6, r7)
-            goto Lb0
-        Lad:
-            r1 = 0
-            r0.mItemsThemeAttrs = r1
-        Lb0:
-            int[] r1 = new int[r7]
-            r0.mItemColors = r1
-            float[] r2 = new float[r7]
-            r0.mItemOffsets = r2
-            java.lang.System.arraycopy(r5, r6, r1, r6, r7)
-            float[] r0 = r0.mItemOffsets
-            java.lang.System.arraycopy(r4, r6, r0, r6, r7)
-        Lc0:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.content.res.GradientColor.inflateChildElements(android.content.res.Resources, org.xmlpull.v1.XmlPullParser, android.util.AttributeSet, android.content.res.Resources$Theme):void");
+    private void inflateChildElements(Resources resources, XmlPullParser xmlPullParser, AttributeSet attributeSet, Resources.Theme theme) throws XmlPullParserException, IOException {
+        int depth;
+        int i = 1;
+        int depth2 = xmlPullParser.getDepth() + 1;
+        float[] fArrAppend = new float[20];
+        int[] iArrAppend = new int[20];
+        int[][] iArr = new int[20][];
+        int i2 = 0;
+        boolean z = false;
+        while (true) {
+            int next = xmlPullParser.next();
+            if (next == i || ((depth = xmlPullParser.getDepth()) < depth2 && next == 3)) {
+                break;
+            }
+            if (next == 2 && depth <= depth2 && xmlPullParser.getName().equals(ImsConfig.EXTRA_CHANGED_ITEM)) {
+                TypedArray typedArrayObtainAttributes = Resources.obtainAttributes(resources, theme, attributeSet, R.styleable.GradientColorItem);
+                boolean zHasValue = typedArrayObtainAttributes.hasValue(0);
+                boolean zHasValue2 = typedArrayObtainAttributes.hasValue(i);
+                if (!zHasValue || !zHasValue2) {
+                    break;
+                }
+                int[] iArrExtractThemeAttrs = typedArrayObtainAttributes.extractThemeAttrs();
+                int color = typedArrayObtainAttributes.getColor(0, 0);
+                float f = typedArrayObtainAttributes.getFloat(i, 0.0f);
+                this.mChangingConfigurations |= typedArrayObtainAttributes.getChangingConfigurations();
+                typedArrayObtainAttributes.recycle();
+                if (iArrExtractThemeAttrs != null) {
+                    z = true;
+                }
+                iArrAppend = GrowingArrayUtils.append(iArrAppend, i2, color);
+                fArrAppend = GrowingArrayUtils.append(fArrAppend, i2, f);
+                iArr = (int[][]) GrowingArrayUtils.append(iArr, i2, iArrExtractThemeAttrs);
+                i2++;
+            }
+            i = 1;
+        }
+        throw new XmlPullParserException(xmlPullParser.getPositionDescription() + ": <item> tag requires a 'color' attribute and a 'offset' attribute!");
     }
 
     private void applyItemsAttrsTheme(Resources.Theme theme) {
@@ -313,18 +280,18 @@ public class GradientColor extends ComplexColor {
         for (int i = 0; i < length; i++) {
             int[] iArr2 = iArr[i];
             if (iArr2 != null) {
-                TypedArray resolveAttributes = theme.resolveAttributes(iArr2, R.styleable.GradientColorItem);
-                int[] extractThemeAttrs = resolveAttributes.extractThemeAttrs(iArr[i]);
-                iArr[i] = extractThemeAttrs;
-                if (extractThemeAttrs != null) {
+                TypedArray typedArrayResolveAttributes = theme.resolveAttributes(iArr2, R.styleable.GradientColorItem);
+                int[] iArrExtractThemeAttrs = typedArrayResolveAttributes.extractThemeAttrs(iArr[i]);
+                iArr[i] = iArrExtractThemeAttrs;
+                if (iArrExtractThemeAttrs != null) {
                     z = true;
                 }
                 int[] iArr3 = this.mItemColors;
-                iArr3[i] = resolveAttributes.getColor(0, iArr3[i]);
+                iArr3[i] = typedArrayResolveAttributes.getColor(0, iArr3[i]);
                 float[] fArr = this.mItemOffsets;
-                fArr[i] = resolveAttributes.getFloat(1, fArr[i]);
-                this.mChangingConfigurations |= resolveAttributes.getChangingConfigurations();
-                resolveAttributes.recycle();
+                fArr[i] = typedArrayResolveAttributes.getFloat(1, fArr[i]);
+                this.mChangingConfigurations |= typedArrayResolveAttributes.getChangingConfigurations();
+                typedArrayResolveAttributes.recycle();
             }
         }
         if (z) {
@@ -439,11 +406,11 @@ public class GradientColor extends ComplexColor {
     }
 
     private void applyRootAttrsTheme(Resources.Theme theme) {
-        TypedArray resolveAttributes = theme.resolveAttributes(this.mThemeAttrs, R.styleable.GradientColor);
-        this.mThemeAttrs = resolveAttributes.extractThemeAttrs(this.mThemeAttrs);
-        updateRootElementState(resolveAttributes);
-        this.mChangingConfigurations |= resolveAttributes.getChangingConfigurations();
-        resolveAttributes.recycle();
+        TypedArray typedArrayResolveAttributes = theme.resolveAttributes(this.mThemeAttrs, R.styleable.GradientColor);
+        this.mThemeAttrs = typedArrayResolveAttributes.extractThemeAttrs(this.mThemeAttrs);
+        updateRootElementState(typedArrayResolveAttributes);
+        this.mChangingConfigurations |= typedArrayResolveAttributes.getChangingConfigurations();
+        typedArrayResolveAttributes.recycle();
     }
 
     @Override // android.content.res.ComplexColor

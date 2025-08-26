@@ -66,11 +66,11 @@ public final class CellIdentityCdma extends CellIdentity {
         this.mNetworkId = inRangeOrUnavailable(i, 0, 65535);
         this.mSystemId = inRangeOrUnavailable(i2, 0, 32767);
         this.mBasestationId = inRangeOrUnavailable(i3, 0, 65535);
-        int inRangeOrUnavailable = inRangeOrUnavailable(i5, LATITUDE_MIN, LATITUDE_MAX);
-        int inRangeOrUnavailable2 = inRangeOrUnavailable(i4, LONGITUDE_MIN, LONGITUDE_MAX);
-        if (!isNullIsland(inRangeOrUnavailable, inRangeOrUnavailable2)) {
-            this.mLongitude = inRangeOrUnavailable2;
-            this.mLatitude = inRangeOrUnavailable;
+        int iInRangeOrUnavailable = inRangeOrUnavailable(i5, LATITUDE_MIN, LATITUDE_MAX);
+        int iInRangeOrUnavailable2 = inRangeOrUnavailable(i4, LONGITUDE_MIN, LONGITUDE_MAX);
+        if (!isNullIsland(iInRangeOrUnavailable, iInRangeOrUnavailable2)) {
+            this.mLongitude = iInRangeOrUnavailable2;
+            this.mLatitude = iInRangeOrUnavailable;
         } else {
             this.mLatitude = Integer.MAX_VALUE;
             this.mLongitude = Integer.MAX_VALUE;

@@ -15,7 +15,6 @@ import com.samsung.android.globalactions.util.ResourcesWrapper;
 import com.samsung.android.globalactions.util.SamsungGlobalActionsAnalytics;
 import com.samsung.android.globalactions.util.SystemController;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class ProKioskActionViewModel implements ActionViewModel {
     public final AlertDialogFactory mAlertDialogFactory;
@@ -58,21 +57,21 @@ public class ProKioskActionViewModel implements ActionViewModel {
 
                 @Override // java.lang.Runnable
                 public final void run() {
-                    int i3;
-                    int i4 = i;
+                    int iStopProKioskMode;
+                    int i3 = i;
                     ProKioskActionViewModel proKioskActionViewModel = this.f$0;
-                    switch (i4) {
+                    switch (i3) {
                         case 0:
                             String proKioskPasswordText = proKioskActionViewModel.mAlertDialogFactory.getProKioskPasswordText();
                             ProKioskManagerWrapper proKioskManagerWrapper = proKioskActionViewModel.mProKioskManagerWrapper;
                             try {
-                                i3 = proKioskManagerWrapper.mProKioskManager.stopProKioskMode(proKioskPasswordText);
+                                iStopProKioskMode = proKioskManagerWrapper.mProKioskManager.stopProKioskMode(proKioskPasswordText);
                             } catch (Exception e) {
                                 proKioskManagerWrapper.mLogWrapper.e("ProKioskManagerWrapper", "setProKioskState() : Exception = " + e);
-                                i3 = -1;
+                                iStopProKioskMode = -1;
                             }
                             proKioskActionViewModel.mInputMethodManagerWrapper.hideSoftInputFromWindow(proKioskActionViewModel.mAlertDialogFactory.getProKioskPasswordWindowToken());
-                            if (i3 == 0) {
+                            if (iStopProKioskMode == 0) {
                                 proKioskActionViewModel.mSystemController.goToHome();
                                 break;
                             }
@@ -91,21 +90,21 @@ public class ProKioskActionViewModel implements ActionViewModel {
 
                 @Override // java.lang.Runnable
                 public final void run() {
-                    int i3;
-                    int i4 = i2;
+                    int iStopProKioskMode;
+                    int i3 = i2;
                     ProKioskActionViewModel proKioskActionViewModel = this.f$0;
-                    switch (i4) {
+                    switch (i3) {
                         case 0:
                             String proKioskPasswordText = proKioskActionViewModel.mAlertDialogFactory.getProKioskPasswordText();
                             ProKioskManagerWrapper proKioskManagerWrapper = proKioskActionViewModel.mProKioskManagerWrapper;
                             try {
-                                i3 = proKioskManagerWrapper.mProKioskManager.stopProKioskMode(proKioskPasswordText);
+                                iStopProKioskMode = proKioskManagerWrapper.mProKioskManager.stopProKioskMode(proKioskPasswordText);
                             } catch (Exception e) {
                                 proKioskManagerWrapper.mLogWrapper.e("ProKioskManagerWrapper", "setProKioskState() : Exception = " + e);
-                                i3 = -1;
+                                iStopProKioskMode = -1;
                             }
                             proKioskActionViewModel.mInputMethodManagerWrapper.hideSoftInputFromWindow(proKioskActionViewModel.mAlertDialogFactory.getProKioskPasswordWindowToken());
-                            if (i3 == 0) {
+                            if (iStopProKioskMode == 0) {
                                 proKioskActionViewModel.mSystemController.goToHome();
                                 break;
                             }
@@ -151,21 +150,21 @@ public class ProKioskActionViewModel implements ActionViewModel {
         if (proKioskString != null) {
             this.mInfo.setLabel(proKioskString);
         } else {
-            this.mInfo.setLabel(this.mResourcesWrapper.getString(R.string.miniresolver_open_in_work));
+            this.mInfo.setLabel(this.mResourcesWrapper.getString(R.string.miniresolver_private_space_messages_information));
         }
         if (this.mConditionChecker.isEnabled(SystemUIConditions.GET_PROKIOSK_STATE)) {
             if (proKioskString2 != null) {
                 this.mInfo.setStateLabel(proKioskString2);
                 return;
             } else {
-                this.mInfo.setStateLabel(this.mResourcesWrapper.getString(R.string.mime_type_folder));
+                this.mInfo.setStateLabel(this.mResourcesWrapper.getString(R.string.mime_type_generic_ext));
                 return;
             }
         }
         if (proKioskString3 != null) {
             this.mInfo.setStateLabel(proKioskString3);
         } else {
-            this.mInfo.setStateLabel(this.mResourcesWrapper.getString(R.string.mime_type_document_ext));
+            this.mInfo.setStateLabel(this.mResourcesWrapper.getString(R.string.mime_type_generic));
         }
     }
 

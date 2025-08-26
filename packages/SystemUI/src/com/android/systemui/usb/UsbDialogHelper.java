@@ -16,7 +16,6 @@ import android.os.UserHandle;
 import android.util.Log;
 import androidx.concurrent.futures.AbstractResolvableFuture$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class UsbDialogHelper {
     public final UsbAccessory mAccessory;
@@ -100,14 +99,14 @@ public class UsbDialogHelper {
     }
 
     public final void setDefaultPackage() {
-        int myUserId = UserHandle.myUserId();
+        int iMyUserId = UserHandle.myUserId();
         try {
             boolean z = this.mIsUsbDevice;
             String str = this.mPackageName;
             if (z) {
-                this.mUsbService.setDevicePackage(this.mDevice, str, myUserId);
+                this.mUsbService.setDevicePackage(this.mDevice, str, iMyUserId);
             } else {
-                this.mUsbService.setAccessoryPackage(this.mAccessory, str, myUserId);
+                this.mUsbService.setAccessoryPackage(this.mAccessory, str, iMyUserId);
             }
         } catch (RemoteException e) {
             Log.e("UsbDialogHelper", "IUsbService connection failed", e);

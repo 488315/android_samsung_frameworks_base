@@ -15,7 +15,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.markers.KMappedMarker;
 import kotlin.jvm.internal.markers.KMutableMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class MapBuilder<K, V> implements Map<K, V>, Serializable, KMutableMap {
     public static final Companion Companion = new Companion(null);
@@ -34,7 +33,6 @@ public final class MapBuilder<K, V> implements Map<K, V>, Serializable, KMutable
     private V[] valuesArray;
     private MapBuilderValues valuesView;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -44,7 +42,6 @@ public final class MapBuilder<K, V> implements Map<K, V>, Serializable, KMutable
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class EntriesItr extends Itr implements Iterator, KMappedMarker {
         public EntriesItr(MapBuilder<Object, Object> mapBuilder) {
             super(mapBuilder);
@@ -67,7 +64,6 @@ public final class MapBuilder<K, V> implements Map<K, V>, Serializable, KMutable
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class EntryRef implements Map.Entry, KMutableMap.Entry {
         public final int expectedModCount;
         public final int index;
@@ -111,19 +107,19 @@ public final class MapBuilder<K, V> implements Map<K, V>, Serializable, KMutable
         @Override // java.util.Map.Entry
         public final int hashCode() {
             Object key = getKey();
-            int hashCode = key != null ? key.hashCode() : 0;
+            int iHashCode = key != null ? key.hashCode() : 0;
             Object value = getValue();
-            return hashCode ^ (value != null ? value.hashCode() : 0);
+            return iHashCode ^ (value != null ? value.hashCode() : 0);
         }
 
         @Override // java.util.Map.Entry
         public final Object setValue(Object obj) {
             checkForComodification$5();
             this.map.checkIsMutable$kotlin_stdlib();
-            Object[] allocateValuesArray = this.map.allocateValuesArray();
+            Object[] objArrAllocateValuesArray = this.map.allocateValuesArray();
             int i = this.index;
-            Object obj2 = allocateValuesArray[i];
-            allocateValuesArray[i] = obj;
+            Object obj2 = objArrAllocateValuesArray[i];
+            objArrAllocateValuesArray[i] = obj;
             return obj2;
         }
 
@@ -136,7 +132,6 @@ public final class MapBuilder<K, V> implements Map<K, V>, Serializable, KMutable
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Itr {
         public int expectedModCount;
         public int index;
@@ -189,7 +184,6 @@ public final class MapBuilder<K, V> implements Map<K, V>, Serializable, KMutable
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class KeysItr extends Itr implements Iterator, KMappedMarker {
         public KeysItr(MapBuilder<Object, Object> mapBuilder) {
             super(mapBuilder);
@@ -212,7 +206,6 @@ public final class MapBuilder<K, V> implements Map<K, V>, Serializable, KMutable
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ValuesItr extends Itr implements Iterator, KMappedMarker {
         public ValuesItr(MapBuilder<Object, Object> mapBuilder) {
             super(mapBuilder);
@@ -256,7 +249,7 @@ public final class MapBuilder<K, V> implements Map<K, V>, Serializable, KMutable
         this.hashShift = Integer.numberOfLeadingZeros(length) + 1;
     }
 
-    private final Object writeReplace() {
+    private final Object writeReplace() throws NotSerializableException {
         if (this.isReadOnly) {
             return new SerializedMap(this);
         }
@@ -266,7 +259,7 @@ public final class MapBuilder<K, V> implements Map<K, V>, Serializable, KMutable
     public final int addKey$kotlin_stdlib(Object obj) {
         checkIsMutable$kotlin_stdlib();
         while (true) {
-            int hash = hash(obj);
+            int iHash = hash(obj);
             int i = this.maxProbeDistance * 2;
             int length = this.hashArray.length / 2;
             if (i > length) {
@@ -275,7 +268,7 @@ public final class MapBuilder<K, V> implements Map<K, V>, Serializable, KMutable
             int i2 = 0;
             while (true) {
                 int[] iArr = this.hashArray;
-                int i3 = iArr[hash];
+                int i3 = iArr[iHash];
                 if (i3 <= 0) {
                     int i4 = this.length;
                     Object[] objArr = (K[]) this.keysArray;
@@ -283,8 +276,8 @@ public final class MapBuilder<K, V> implements Map<K, V>, Serializable, KMutable
                         int i5 = i4 + 1;
                         this.length = i5;
                         objArr[i4] = obj;
-                        this.presenceArray[i4] = hash;
-                        iArr[hash] = i5;
+                        this.presenceArray[i4] = iHash;
+                        iArr[iHash] = i5;
                         this.size++;
                         this.modCount++;
                         if (i2 > this.maxProbeDistance) {
@@ -302,7 +295,7 @@ public final class MapBuilder<K, V> implements Map<K, V>, Serializable, KMutable
                         rehash(this.hashArray.length * 2);
                         break;
                     }
-                    hash = hash == 0 ? this.hashArray.length - 1 : hash - 1;
+                    iHash = iHash == 0 ? this.hashArray.length - 1 : iHash - 1;
                 }
             }
         }
@@ -412,13 +405,13 @@ public final class MapBuilder<K, V> implements Map<K, V>, Serializable, KMutable
     }
 
     public final boolean containsEntry$kotlin_stdlib(Map.Entry entry) {
-        int findKey = findKey(entry.getKey());
-        if (findKey < 0) {
+        int iFindKey = findKey(entry.getKey());
+        if (iFindKey < 0) {
             return false;
         }
         V[] vArr = this.valuesArray;
         vArr.getClass();
-        return Intrinsics.areEqual(vArr[findKey], entry.getValue());
+        return Intrinsics.areEqual(vArr[iFindKey], entry.getValue());
     }
 
     @Override // java.util.Map
@@ -449,15 +442,15 @@ public final class MapBuilder<K, V> implements Map<K, V>, Serializable, KMutable
             AbstractList.Companion companion = AbstractList.Companion;
             int length2 = kArr.length;
             companion.getClass();
-            int newCapacity$kotlin_stdlib = AbstractList.Companion.newCapacity$kotlin_stdlib(length2, i5);
-            this.keysArray = (K[]) Arrays.copyOf(this.keysArray, newCapacity$kotlin_stdlib);
+            int iNewCapacity$kotlin_stdlib = AbstractList.Companion.newCapacity$kotlin_stdlib(length2, i5);
+            this.keysArray = (K[]) Arrays.copyOf(this.keysArray, iNewCapacity$kotlin_stdlib);
             V[] vArr = this.valuesArray;
-            this.valuesArray = vArr != null ? (V[]) Arrays.copyOf(vArr, newCapacity$kotlin_stdlib) : null;
-            this.presenceArray = Arrays.copyOf(this.presenceArray, newCapacity$kotlin_stdlib);
+            this.valuesArray = vArr != null ? (V[]) Arrays.copyOf(vArr, iNewCapacity$kotlin_stdlib) : null;
+            this.presenceArray = Arrays.copyOf(this.presenceArray, iNewCapacity$kotlin_stdlib);
             Companion.getClass();
-            int highestOneBit = Integer.highestOneBit((newCapacity$kotlin_stdlib >= 1 ? newCapacity$kotlin_stdlib : 1) * 3);
-            if (highestOneBit > this.hashArray.length) {
-                rehash(highestOneBit);
+            int iHighestOneBit = Integer.highestOneBit((iNewCapacity$kotlin_stdlib >= 1 ? iNewCapacity$kotlin_stdlib : 1) * 3);
+            if (iHighestOneBit > this.hashArray.length) {
+                rehash(iHighestOneBit);
             }
         }
     }
@@ -486,10 +479,10 @@ public final class MapBuilder<K, V> implements Map<K, V>, Serializable, KMutable
     }
 
     public final int findKey(Object obj) {
-        int hash = hash(obj);
+        int iHash = hash(obj);
         int i = this.maxProbeDistance;
         while (true) {
-            int i2 = this.hashArray[hash];
+            int i2 = this.hashArray[iHash];
             if (i2 == 0) {
                 return -1;
             }
@@ -503,7 +496,7 @@ public final class MapBuilder<K, V> implements Map<K, V>, Serializable, KMutable
             if (i < 0) {
                 return -1;
             }
-            hash = hash == 0 ? this.hashArray.length - 1 : hash - 1;
+            iHash = iHash == 0 ? this.hashArray.length - 1 : iHash - 1;
         }
     }
 
@@ -526,13 +519,13 @@ public final class MapBuilder<K, V> implements Map<K, V>, Serializable, KMutable
 
     @Override // java.util.Map
     public final Object get(Object obj) {
-        int findKey = findKey(obj);
-        if (findKey < 0) {
+        int iFindKey = findKey(obj);
+        if (iFindKey < 0) {
             return null;
         }
         V[] vArr = this.valuesArray;
         vArr.getClass();
-        return vArr[findKey];
+        return vArr[iFindKey];
     }
 
     public final int hash(Object obj) {
@@ -553,13 +546,13 @@ public final class MapBuilder<K, V> implements Map<K, V>, Serializable, KMutable
             entriesItr.index = i3 + 1;
             entriesItr.lastIndex = i3;
             Object obj = mapBuilder.keysArray[entriesItr.lastIndex];
-            int hashCode = obj != null ? obj.hashCode() : 0;
+            int iHashCode = obj != null ? obj.hashCode() : 0;
             Object[] objArr = mapBuilder.valuesArray;
             objArr.getClass();
             Object obj2 = objArr[entriesItr.lastIndex];
-            int hashCode2 = obj2 != null ? obj2.hashCode() : 0;
+            int iHashCode2 = obj2 != null ? obj2.hashCode() : 0;
             entriesItr.initNext$kotlin_stdlib();
-            i += hashCode ^ hashCode2;
+            i += iHashCode ^ iHashCode2;
         }
         return i;
     }
@@ -587,41 +580,41 @@ public final class MapBuilder<K, V> implements Map<K, V>, Serializable, KMutable
     @Override // java.util.Map
     public final Object put(Object obj, Object obj2) {
         checkIsMutable$kotlin_stdlib();
-        int addKey$kotlin_stdlib = addKey$kotlin_stdlib(obj);
-        Object[] allocateValuesArray = allocateValuesArray();
-        if (addKey$kotlin_stdlib >= 0) {
-            allocateValuesArray[addKey$kotlin_stdlib] = obj2;
+        int iAddKey$kotlin_stdlib = addKey$kotlin_stdlib(obj);
+        Object[] objArrAllocateValuesArray = allocateValuesArray();
+        if (iAddKey$kotlin_stdlib >= 0) {
+            objArrAllocateValuesArray[iAddKey$kotlin_stdlib] = obj2;
             return null;
         }
-        int i = (-addKey$kotlin_stdlib) - 1;
-        Object obj3 = allocateValuesArray[i];
-        allocateValuesArray[i] = obj2;
+        int i = (-iAddKey$kotlin_stdlib) - 1;
+        Object obj3 = objArrAllocateValuesArray[i];
+        objArrAllocateValuesArray[i] = obj2;
         return obj3;
     }
 
     @Override // java.util.Map
     public final void putAll(Map map) {
         checkIsMutable$kotlin_stdlib();
-        Set<Map.Entry<K, V>> entrySet = map.entrySet();
-        if (entrySet.isEmpty()) {
+        Set<Map.Entry<K, V>> setEntrySet = map.entrySet();
+        if (setEntrySet.isEmpty()) {
             return;
         }
-        ensureExtraCapacity$1(entrySet.size());
-        for (Map.Entry<K, V> entry : entrySet) {
-            int addKey$kotlin_stdlib = addKey$kotlin_stdlib(entry.getKey());
-            Object[] allocateValuesArray = allocateValuesArray();
-            if (addKey$kotlin_stdlib >= 0) {
-                allocateValuesArray[addKey$kotlin_stdlib] = entry.getValue();
+        ensureExtraCapacity$1(setEntrySet.size());
+        for (Map.Entry<K, V> entry : setEntrySet) {
+            int iAddKey$kotlin_stdlib = addKey$kotlin_stdlib(entry.getKey());
+            Object[] objArrAllocateValuesArray = allocateValuesArray();
+            if (iAddKey$kotlin_stdlib >= 0) {
+                objArrAllocateValuesArray[iAddKey$kotlin_stdlib] = entry.getValue();
             } else {
-                int i = (-addKey$kotlin_stdlib) - 1;
-                if (!Intrinsics.areEqual(entry.getValue(), allocateValuesArray[i])) {
-                    allocateValuesArray[i] = entry.getValue();
+                int i = (-iAddKey$kotlin_stdlib) - 1;
+                if (!Intrinsics.areEqual(entry.getValue(), objArrAllocateValuesArray[i])) {
+                    objArrAllocateValuesArray[i] = entry.getValue();
                 }
             }
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:26:0x0037, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:11:0x0037, code lost:
     
         r3[r0] = r6;
         r5.presenceArray[r2] = r0;
@@ -629,187 +622,121 @@ public final class MapBuilder<K, V> implements Map<K, V>, Serializable, KMutable
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void rehash(int r6) {
-        /*
-            r5 = this;
-            int r0 = r5.modCount
-            int r0 = r0 + 1
-            r5.modCount = r0
-            int r0 = r5.length
-            int r1 = r5.size
-            r2 = 0
-            if (r0 <= r1) goto L10
-            r5.compact(r2)
-        L10:
-            int[] r0 = new int[r6]
-            r5.hashArray = r0
-            kotlin.collections.builders.MapBuilder$Companion r0 = kotlin.collections.builders.MapBuilder.Companion
-            r0.getClass()
-            int r6 = java.lang.Integer.numberOfLeadingZeros(r6)
-            int r6 = r6 + 1
-            r5.hashShift = r6
-        L21:
-            int r6 = r5.length
-            if (r2 >= r6) goto L55
-            int r6 = r2 + 1
-            K[] r0 = r5.keysArray
-            r0 = r0[r2]
-            int r0 = r5.hash(r0)
-            int r1 = r5.maxProbeDistance
-        L31:
-            int[] r3 = r5.hashArray
-            r4 = r3[r0]
-            if (r4 != 0) goto L3f
-            r3[r0] = r6
-            int[] r1 = r5.presenceArray
-            r1[r2] = r0
-            r2 = r6
-            goto L21
-        L3f:
-            int r1 = r1 + (-1)
-            if (r1 < 0) goto L4d
-            int r4 = r0 + (-1)
-            if (r0 != 0) goto L4b
-            int r0 = r3.length
-            int r0 = r0 + (-1)
-            goto L31
-        L4b:
-            r0 = r4
-            goto L31
-        L4d:
-            java.lang.IllegalStateException r5 = new java.lang.IllegalStateException
-            java.lang.String r6 = "This cannot happen with fixed magic multiplier and grow-only hash array. Have object hashCodes changed?"
-            r5.<init>(r6)
-            throw r5
-        L55:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: kotlin.collections.builders.MapBuilder.rehash(int):void");
+    public final void rehash(int i) {
+        this.modCount++;
+        int i2 = 0;
+        if (this.length > this.size) {
+            compact(false);
+        }
+        this.hashArray = new int[i];
+        Companion.getClass();
+        this.hashShift = Integer.numberOfLeadingZeros(i) + 1;
+        while (i2 < this.length) {
+            int i3 = i2 + 1;
+            int iHash = hash(this.keysArray[i2]);
+            int i4 = this.maxProbeDistance;
+            while (true) {
+                int[] iArr = this.hashArray;
+                if (iArr[iHash] == 0) {
+                    break;
+                }
+                i4--;
+                if (i4 < 0) {
+                    throw new IllegalStateException("This cannot happen with fixed magic multiplier and grow-only hash array. Have object hashCodes changed?");
+                }
+                iHash = iHash == 0 ? iArr.length - 1 : iHash - 1;
+            }
+        }
     }
 
     @Override // java.util.Map
     public final Object remove(Object obj) {
         checkIsMutable$kotlin_stdlib();
-        int findKey = findKey(obj);
-        if (findKey < 0) {
+        int iFindKey = findKey(obj);
+        if (iFindKey < 0) {
             return null;
         }
         V[] vArr = this.valuesArray;
         vArr.getClass();
-        V v = vArr[findKey];
-        removeEntryAt(findKey);
+        V v = vArr[iFindKey];
+        removeEntryAt(iFindKey);
         return v;
     }
 
     public final boolean removeEntry$kotlin_stdlib(Map.Entry entry) {
         checkIsMutable$kotlin_stdlib();
-        int findKey = findKey(entry.getKey());
-        if (findKey < 0) {
+        int iFindKey = findKey(entry.getKey());
+        if (iFindKey < 0) {
             return false;
         }
         V[] vArr = this.valuesArray;
         vArr.getClass();
-        if (!Intrinsics.areEqual(vArr[findKey], entry.getValue())) {
+        if (!Intrinsics.areEqual(vArr[iFindKey], entry.getValue())) {
             return false;
         }
-        removeEntryAt(findKey);
+        removeEntryAt(iFindKey);
         return true;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0063 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:25:? A[LOOP:0: B:8:0x001f->B:25:?, LOOP_END, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:32:0x0063 A[SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:33:? A[LOOP:0: B:9:0x001f->B:33:?, LOOP_END, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void removeEntryAt(int r12) {
-        /*
-            r11 = this;
-            K[] r0 = r11.keysArray
-            r1 = 0
-            r0[r12] = r1
-            V[] r0 = r11.valuesArray
-            if (r0 == 0) goto Lb
-            r0[r12] = r1
-        Lb:
-            int[] r0 = r11.presenceArray
-            r0 = r0[r12]
-            int r1 = r11.maxProbeDistance
-            int r1 = r1 * 2
-            int[] r2 = r11.hashArray
-            int r2 = r2.length
-            int r2 = r2 / 2
-            if (r1 <= r2) goto L1b
-            r1 = r2
-        L1b:
-            r2 = 0
-            r3 = r1
-            r4 = r2
-            r1 = r0
-        L1f:
-            int r5 = r0 + (-1)
-            if (r0 != 0) goto L29
-            int[] r0 = r11.hashArray
-            int r0 = r0.length
-            int r0 = r0 + (-1)
-            goto L2a
-        L29:
-            r0 = r5
-        L2a:
-            int r4 = r4 + 1
-            int r5 = r11.maxProbeDistance
-            r6 = -1
-            if (r4 <= r5) goto L36
-            int[] r0 = r11.hashArray
-            r0[r1] = r2
-            goto L67
-        L36:
-            int[] r5 = r11.hashArray
-            r7 = r5[r0]
-            if (r7 != 0) goto L3f
-            r5[r1] = r2
-            goto L67
-        L3f:
-            if (r7 >= 0) goto L46
-            r5[r1] = r6
-        L43:
-            r1 = r0
-            r4 = r2
-            goto L60
-        L46:
-            K[] r5 = r11.keysArray
-            int r8 = r7 + (-1)
-            r5 = r5[r8]
-            int r5 = r11.hash(r5)
-            int r5 = r5 - r0
-            int[] r9 = r11.hashArray
-            int r10 = r9.length
-            int r10 = r10 + (-1)
-            r5 = r5 & r10
-            if (r5 < r4) goto L60
-            r9[r1] = r7
-            int[] r4 = r11.presenceArray
-            r4[r8] = r1
-            goto L43
-        L60:
-            int r3 = r3 + r6
-            if (r3 >= 0) goto L1f
-            int[] r0 = r11.hashArray
-            r0[r1] = r6
-        L67:
-            int[] r0 = r11.presenceArray
-            r0[r12] = r6
-            int r12 = r11.size
-            int r12 = r12 + r6
-            r11.size = r12
-            int r12 = r11.modCount
-            int r12 = r12 + 1
-            r11.modCount = r12
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: kotlin.collections.builders.MapBuilder.removeEntryAt(int):void");
+    public final void removeEntryAt(int i) {
+        this.keysArray[i] = null;
+        V[] vArr = this.valuesArray;
+        if (vArr != null) {
+            vArr[i] = null;
+        }
+        int length = this.presenceArray[i];
+        int i2 = this.maxProbeDistance * 2;
+        int length2 = this.hashArray.length / 2;
+        if (i2 > length2) {
+            i2 = length2;
+        }
+        int i3 = i2;
+        int i4 = 0;
+        int i5 = length;
+        while (true) {
+            length = length == 0 ? this.hashArray.length - 1 : length - 1;
+            i4++;
+            if (i4 > this.maxProbeDistance) {
+                this.hashArray[i5] = 0;
+                break;
+            }
+            int[] iArr = this.hashArray;
+            int i6 = iArr[length];
+            if (i6 == 0) {
+                iArr[i5] = 0;
+                break;
+            }
+            if (i6 < 0) {
+                iArr[i5] = -1;
+            } else {
+                int i7 = i6 - 1;
+                int iHash = hash(this.keysArray[i7]) - length;
+                int[] iArr2 = this.hashArray;
+                if ((iHash & (iArr2.length - 1)) >= i4) {
+                    iArr2[i5] = i6;
+                    this.presenceArray[i7] = i5;
+                }
+                i3--;
+                if (i3 >= 0) {
+                    this.hashArray[i5] = -1;
+                    break;
+                }
+            }
+            i5 = length;
+            i4 = 0;
+            i3--;
+            if (i3 >= 0) {
+            }
+        }
+        this.presenceArray[i] = -1;
+        this.size--;
+        this.modCount++;
     }
 
     @Override // java.util.Map
@@ -872,37 +799,14 @@ public final class MapBuilder<K, V> implements Map<K, V>, Serializable, KMutable
     }
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public MapBuilder(int r8) {
-        /*
-            r7 = this;
-            if (r8 < 0) goto L1f
-            java.lang.Object[] r1 = new java.lang.Object[r8]
-            int[] r3 = new int[r8]
-            kotlin.collections.builders.MapBuilder$Companion r0 = kotlin.collections.builders.MapBuilder.Companion
-            r0.getClass()
-            r0 = 1
-            if (r8 >= r0) goto Lf
-            r8 = r0
-        Lf:
-            int r8 = r8 * 3
-            int r8 = java.lang.Integer.highestOneBit(r8)
-            int[] r4 = new int[r8]
-            r6 = 0
-            r2 = 0
-            r5 = 2
-            r0 = r7
-            r0.<init>(r1, r2, r3, r4, r5, r6)
-            return
-        L1f:
-            java.lang.IllegalArgumentException r7 = new java.lang.IllegalArgumentException
-            java.lang.String r8 = "capacity must be non-negative."
-            r7.<init>(r8)
-            throw r7
-        */
-        throw new UnsupportedOperationException("Method not decompiled: kotlin.collections.builders.MapBuilder.<init>(int):void");
+    public MapBuilder(int i) {
+        if (i >= 0) {
+            Object[] objArr = new Object[i];
+            int[] iArr = new int[i];
+            Companion.getClass();
+            this(objArr, null, iArr, new int[Integer.highestOneBit((i < 1 ? 1 : i) * 3)], 2, 0);
+            return;
+        }
+        throw new IllegalArgumentException("capacity must be non-negative.");
     }
 }

@@ -14,7 +14,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class BatteryRepository$batteryState$1 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -51,10 +50,10 @@ final class BatteryRepository$batteryState$1 extends SuspendLambda implements Fu
             final ?? r1 = new BatteryController.BatteryStateChangeCallback() { // from class: com.android.systemui.statusbar.pipeline.battery.data.repository.BatteryRepository$batteryState$1$callback$1
                 @Override // com.android.systemui.statusbar.policy.BatteryController.BatteryStateChangeCallback
                 public final void onBatteryLevelChanged(final int i2, final boolean z, boolean z2) {
-                    ((ChannelCoroutine) ProducerScope.this).mo3456trySendJP2dKIU(new Function1() { // from class: com.android.systemui.statusbar.pipeline.battery.data.repository.BatteryRepository$batteryState$1$callback$1$$ExternalSyntheticLambda2
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(new Function1() { // from class: com.android.systemui.statusbar.pipeline.battery.data.repository.BatteryRepository$batteryState$1$callback$1$$ExternalSyntheticLambda2
                         @Override // kotlin.jvm.functions.Function1
                         /* renamed from: invoke */
-                        public final Object mo779invoke(Object obj2) {
+                        public final Object mo781invoke(Object obj2) {
                             return BatteryCallbackState.copy$default((BatteryCallbackState) obj2, Integer.valueOf(i2), z, false, false, 28);
                         }
                     });
@@ -62,17 +61,17 @@ final class BatteryRepository$batteryState$1 extends SuspendLambda implements Fu
 
                 @Override // com.android.systemui.statusbar.policy.BatteryController.BatteryStateChangeCallback
                 public final void onBatteryUnknownStateChanged(boolean z) {
-                    ((ChannelCoroutine) ProducerScope.this).mo3456trySendJP2dKIU(new BatteryRepository$batteryState$1$callback$1$$ExternalSyntheticLambda0(z, 1));
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(new BatteryRepository$batteryState$1$callback$1$$ExternalSyntheticLambda0(z, 1));
                 }
 
                 @Override // com.android.systemui.statusbar.policy.BatteryController.BatteryStateChangeCallback
                 public final void onIsBatteryDefenderChanged(boolean z) {
-                    ((ChannelCoroutine) ProducerScope.this).mo3456trySendJP2dKIU(new BatteryRepository$batteryState$1$callback$1$$ExternalSyntheticLambda0(z, 2));
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(new BatteryRepository$batteryState$1$callback$1$$ExternalSyntheticLambda0(z, 2));
                 }
 
                 @Override // com.android.systemui.statusbar.policy.BatteryController.BatteryStateChangeCallback
                 public final void onPowerSaveChanged(boolean z) {
-                    ((ChannelCoroutine) ProducerScope.this).mo3456trySendJP2dKIU(new BatteryRepository$batteryState$1$callback$1$$ExternalSyntheticLambda0(z, 0));
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(new BatteryRepository$batteryState$1$callback$1$$ExternalSyntheticLambda0(z, 0));
                 }
             };
             ((BatteryControllerImpl) this.this$0.controller).addCallback(r1);
@@ -80,7 +79,7 @@ final class BatteryRepository$batteryState$1 extends SuspendLambda implements Fu
             Function0 function0 = new Function0() { // from class: com.android.systemui.statusbar.pipeline.battery.data.repository.BatteryRepository$batteryState$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    ((BatteryControllerImpl) BatteryRepository.this.controller).removeCallback(r1);
+                    ((BatteryControllerImpl) batteryRepository.controller).removeCallback(r1);
                     return Unit.INSTANCE;
                 }
             };

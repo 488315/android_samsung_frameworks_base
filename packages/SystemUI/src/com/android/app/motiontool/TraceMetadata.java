@@ -8,7 +8,6 @@ import java.util.Iterator;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class TraceMetadata {
     public long lastPolledTime;
@@ -46,14 +45,14 @@ public final class TraceMetadata {
         if (frameDataList != null) {
             Iterator<E> it = frameDataList.iterator();
             if (it.hasNext()) {
-                Long valueOf = Long.valueOf(((FrameData) it.next()).getTimestamp());
+                Long lValueOf = Long.valueOf(((FrameData) it.next()).getTimestamp());
                 while (it.hasNext()) {
-                    Long valueOf2 = Long.valueOf(((FrameData) it.next()).getTimestamp());
-                    if (valueOf.compareTo(valueOf2) < 0) {
-                        valueOf = valueOf2;
+                    Long lValueOf2 = Long.valueOf(((FrameData) it.next()).getTimestamp());
+                    if (lValueOf.compareTo(lValueOf2) < 0) {
+                        lValueOf = lValueOf2;
                     }
                 }
-                l = valueOf;
+                l = lValueOf;
             } else {
                 l = null;
             }

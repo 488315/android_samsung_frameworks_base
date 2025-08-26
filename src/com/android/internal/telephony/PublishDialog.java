@@ -253,75 +253,75 @@ public class PublishDialog implements Parcelable {
 
     public void readFromParcel(Parcel parcel) {
         this.mCallCount = parcel.readInt();
-        int readInt = parcel.readInt();
-        if (readInt > 0) {
-            int[] iArr = new int[readInt];
+        int i = parcel.readInt();
+        if (i > 0) {
+            int[] iArr = new int[i];
             parcel.readIntArray(iArr);
             this.mCallId = intArrayToArrayList(iArr);
         }
-        int readInt2 = parcel.readInt();
-        if (readInt2 > 0) {
-            int[] iArr2 = new int[readInt2];
+        int i2 = parcel.readInt();
+        if (i2 > 0) {
+            int[] iArr2 = new int[i2];
             parcel.readIntArray(iArr2);
             this.mCallDomain = intArrayToArrayList(iArr2);
         }
-        int readInt3 = parcel.readInt();
-        if (readInt3 > 0) {
-            int[] iArr3 = new int[readInt3];
+        int i3 = parcel.readInt();
+        if (i3 > 0) {
+            int[] iArr3 = new int[i3];
             parcel.readIntArray(iArr3);
             this.mCallStatus = intArrayToArrayList(iArr3);
         }
-        int readInt4 = parcel.readInt();
-        if (readInt4 > 0) {
-            int[] iArr4 = new int[readInt4];
+        int i4 = parcel.readInt();
+        if (i4 > 0) {
+            int[] iArr4 = new int[i4];
             parcel.readIntArray(iArr4);
             this.mCallType = intArrayToArrayList(iArr4);
         }
-        int readInt5 = parcel.readInt();
-        if (readInt5 > 0) {
-            int[] iArr5 = new int[readInt5];
+        int i5 = parcel.readInt();
+        if (i5 > 0) {
+            int[] iArr5 = new int[i5];
             parcel.readIntArray(iArr5);
             this.mCallDirection = intArrayToArrayList(iArr5);
         }
-        int readInt6 = parcel.readInt();
-        if (readInt6 > 0) {
-            String[] strArr = new String[readInt6];
+        int i6 = parcel.readInt();
+        if (i6 > 0) {
+            String[] strArr = new String[i6];
             parcel.readStringArray(strArr);
             this.mCallRemoteUri = stringArrayToArrayList(strArr);
         }
-        int readInt7 = parcel.readInt();
-        if (readInt7 > 0) {
-            boolean[] zArr = new boolean[readInt7];
+        int i7 = parcel.readInt();
+        if (i7 > 0) {
+            boolean[] zArr = new boolean[i7];
             parcel.readBooleanArray(zArr);
             this.mCallPullable = booleanArrayToArrayList(zArr);
         }
-        int readInt8 = parcel.readInt();
-        if (readInt8 > 0) {
-            int[] iArr6 = new int[readInt8];
+        int i8 = parcel.readInt();
+        if (i8 > 0) {
+            int[] iArr6 = new int[i8];
             parcel.readIntArray(iArr6);
             this.mCallNumberPresentation = intArrayToArrayList(iArr6);
         }
-        int readInt9 = parcel.readInt();
-        if (readInt9 > 0) {
-            int[] iArr7 = new int[readInt9];
+        int i9 = parcel.readInt();
+        if (i9 > 0) {
+            int[] iArr7 = new int[i9];
             parcel.readIntArray(iArr7);
             this.mCallCnapNamePresentation = intArrayToArrayList(iArr7);
         }
-        int readInt10 = parcel.readInt();
-        if (readInt10 > 0) {
-            String[] strArr2 = new String[readInt10];
+        int i10 = parcel.readInt();
+        if (i10 > 0) {
+            String[] strArr2 = new String[i10];
             parcel.readStringArray(strArr2);
             this.mCallCnapName = stringArrayToArrayList(strArr2);
         }
-        int readInt11 = parcel.readInt();
-        if (readInt11 > 0) {
-            boolean[] zArr2 = new boolean[readInt11];
+        int i11 = parcel.readInt();
+        if (i11 > 0) {
+            boolean[] zArr2 = new boolean[i11];
             parcel.readBooleanArray(zArr2);
             this.mCallMptyCall = booleanArrayToArrayList(zArr2);
         }
-        int readInt12 = parcel.readInt();
-        if (readInt12 > 0) {
-            long[] jArr = new long[readInt12];
+        int i12 = parcel.readInt();
+        if (i12 > 0) {
+            long[] jArr = new long[i12];
             parcel.readLongArray(jArr);
             this.mConnectedTime = longArrayToArrayList(jArr);
         }

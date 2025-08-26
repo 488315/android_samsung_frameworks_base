@@ -5,6 +5,7 @@ import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.exceptions.Exceptions;
 import io.reactivex.internal.disposables.DisposableHelper;
 import io.reactivex.internal.fuseable.QueueDisposable;
 import io.reactivex.internal.fuseable.SimpleQueue;
@@ -13,14 +14,12 @@ import io.reactivex.internal.queue.SpscLinkedArrayQueue;
 import io.reactivex.internal.schedulers.TrampolineScheduler;
 import io.reactivex.plugins.RxJavaPlugins;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class ObservableObserveOn extends AbstractObservableWithUpstream {
     public final int bufferSize;
     public final boolean delayError;
     public final Scheduler scheduler;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class ObserveOnObserver<T> extends BasicIntQueueDisposable<T> implements Observer, Runnable {
         private static final long serialVersionUID = 6576896619930983584L;
         final int bufferSize;
@@ -146,9 +145,9 @@ public final class ObservableObserveOn extends AbstractObservableWithUpstream {
                 this.upstream = disposable;
                 if (disposable instanceof QueueDisposable) {
                     QueueDisposable queueDisposable = (QueueDisposable) disposable;
-                    int requestFusion = queueDisposable.requestFusion();
-                    if (requestFusion == 1) {
-                        this.sourceMode = requestFusion;
+                    int iRequestFusion = queueDisposable.requestFusion();
+                    if (iRequestFusion == 1) {
+                        this.sourceMode = iRequestFusion;
                         this.queue = queueDisposable;
                         this.done = true;
                         this.downstream.onSubscribe(this);
@@ -158,8 +157,8 @@ public final class ObservableObserveOn extends AbstractObservableWithUpstream {
                         }
                         return;
                     }
-                    if (requestFusion == 2) {
-                        this.sourceMode = requestFusion;
+                    if (iRequestFusion == 2) {
+                        this.sourceMode = iRequestFusion;
                         this.queue = queueDisposable;
                         this.downstream.onSubscribe(this);
                         return;
@@ -181,116 +180,81 @@ public final class ObservableObserveOn extends AbstractObservableWithUpstream {
             return 2;
         }
 
-        /* JADX WARN: Code restructure failed: missing block: B:43:0x0074, code lost:
+        /* JADX WARN: Code restructure failed: missing block: B:38:0x0074, code lost:
         
             r3 = addAndGet(-r3);
          */
-        /* JADX WARN: Code restructure failed: missing block: B:44:0x0079, code lost:
+        /* JADX WARN: Code restructure failed: missing block: B:39:0x0079, code lost:
         
             if (r3 != 0) goto L55;
          */
-        /* JADX WARN: Code restructure failed: missing block: B:46:?, code lost:
+        /* JADX WARN: Code restructure failed: missing block: B:60:?, code lost:
         
             return;
          */
         @Override // java.lang.Runnable
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
         public final void run() {
-            /*
-                r7 = this;
-                boolean r0 = r7.outputFused
-                r1 = 1
-                if (r0 == 0) goto L4e
-                r0 = r1
-            L6:
-                boolean r2 = r7.disposed
-                if (r2 == 0) goto Lc
-                goto L96
-            Lc:
-                boolean r2 = r7.done
-                java.lang.Throwable r3 = r7.error
-                boolean r4 = r7.delayError
-                if (r4 != 0) goto L27
-                if (r2 == 0) goto L27
-                if (r3 == 0) goto L27
-                r7.disposed = r1
-                io.reactivex.Observer r0 = r7.downstream
-                java.lang.Throwable r1 = r7.error
-                r0.onError(r1)
-                io.reactivex.Scheduler$Worker r7 = r7.worker
-                r7.dispose()
-                return
-            L27:
-                io.reactivex.Observer r3 = r7.downstream
-                r4 = 0
-                r3.onNext(r4)
-                if (r2 == 0) goto L46
-                r7.disposed = r1
-                java.lang.Throwable r0 = r7.error
-                if (r0 == 0) goto L3b
-                io.reactivex.Observer r1 = r7.downstream
-                r1.onError(r0)
-                goto L40
-            L3b:
-                io.reactivex.Observer r0 = r7.downstream
-                r0.onComplete()
-            L40:
-                io.reactivex.Scheduler$Worker r7 = r7.worker
-                r7.dispose()
-                return
-            L46:
-                int r0 = -r0
-                int r0 = r7.addAndGet(r0)
-                if (r0 != 0) goto L6
-                goto L96
-            L4e:
-                io.reactivex.internal.fuseable.SimpleQueue r0 = r7.queue
-                io.reactivex.Observer r2 = r7.downstream
-                r3 = r1
-            L53:
-                boolean r4 = r7.done
-                boolean r5 = r0.isEmpty()
-                boolean r4 = r7.checkTerminated(r4, r5, r2)
-                if (r4 == 0) goto L60
-                goto L96
-            L60:
-                boolean r4 = r7.done
-                java.lang.Object r5 = r0.poll()     // Catch: java.lang.Throwable -> L80
-                if (r5 != 0) goto L6a
-                r6 = r1
-                goto L6b
-            L6a:
-                r6 = 0
-            L6b:
-                boolean r4 = r7.checkTerminated(r4, r6, r2)
-                if (r4 == 0) goto L72
-                goto L96
-            L72:
-                if (r6 == 0) goto L7c
-                int r3 = -r3
-                int r3 = r7.addAndGet(r3)
-                if (r3 != 0) goto L53
-                goto L96
-            L7c:
-                r2.onNext(r5)
-                goto L60
-            L80:
-                r3 = move-exception
-                io.reactivex.exceptions.Exceptions.throwIfFatal(r3)
-                r7.disposed = r1
-                io.reactivex.disposables.Disposable r1 = r7.upstream
-                r1.dispose()
-                r0.clear()
-                r2.onError(r3)
-                io.reactivex.Scheduler$Worker r7 = r7.worker
-                r7.dispose()
-            L96:
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: io.reactivex.internal.operators.observable.ObservableObserveOn.ObserveOnObserver.run():void");
+            if (!this.outputFused) {
+                SimpleQueue simpleQueue = this.queue;
+                Observer observer = this.downstream;
+                int iAddAndGet = 1;
+                while (!checkTerminated(this.done, simpleQueue.isEmpty(), observer)) {
+                    while (true) {
+                        boolean z = this.done;
+                        try {
+                            Object objPoll = simpleQueue.poll();
+                            boolean z2 = objPoll == null;
+                            if (checkTerminated(z, z2, observer)) {
+                                return;
+                            }
+                            if (z2) {
+                                break;
+                            } else {
+                                observer.onNext(objPoll);
+                            }
+                        } catch (Throwable th) {
+                            Exceptions.throwIfFatal(th);
+                            this.disposed = true;
+                            this.upstream.dispose();
+                            simpleQueue.clear();
+                            observer.onError(th);
+                            this.worker.dispose();
+                            return;
+                        }
+                    }
+                }
+                return;
+            }
+            int iAddAndGet2 = 1;
+            while (!this.disposed) {
+                boolean z3 = this.done;
+                Throwable th2 = this.error;
+                if (!this.delayError && z3 && th2 != null) {
+                    this.disposed = true;
+                    this.downstream.onError(this.error);
+                    this.worker.dispose();
+                    return;
+                }
+                this.downstream.onNext(null);
+                if (z3) {
+                    this.disposed = true;
+                    Throwable th3 = this.error;
+                    if (th3 != null) {
+                        this.downstream.onError(th3);
+                    } else {
+                        this.downstream.onComplete();
+                    }
+                    this.worker.dispose();
+                    return;
+                }
+                iAddAndGet2 = addAndGet(-iAddAndGet2);
+                if (iAddAndGet2 == 0) {
+                    return;
+                }
+            }
         }
     }
 

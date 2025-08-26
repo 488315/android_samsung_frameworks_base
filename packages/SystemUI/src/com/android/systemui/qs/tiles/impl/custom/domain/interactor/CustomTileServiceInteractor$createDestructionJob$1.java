@@ -11,14 +11,12 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class CustomTileServiceInteractor$createDestructionJob$1 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
     int label;
     final /* synthetic */ CustomTileServiceInteractor this$0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.qs.tiles.impl.custom.domain.interactor.CustomTileServiceInteractor$createDestructionJob$1$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         private /* synthetic */ Object L$0;
@@ -54,7 +52,7 @@ final class CustomTileServiceInteractor$createDestructionJob$1 extends SuspendLa
                 Function0 function0 = new Function0() { // from class: com.android.systemui.qs.tiles.impl.custom.domain.interactor.CustomTileServiceInteractor$createDestructionJob$1$1$$ExternalSyntheticLambda0
                     @Override // kotlin.jvm.functions.Function0
                     public final Object invoke() {
-                        CustomTileServiceInteractor customTileServiceInteractor2 = CustomTileServiceInteractor.this;
+                        CustomTileServiceInteractor customTileServiceInteractor2 = customTileServiceInteractor;
                         ((CustomTileUserActionInteractor) customTileServiceInteractor2.userActionInteractor.get()).revokeToken(true);
                         customTileServiceInteractor2.tileServices.freeService(customTileServiceInteractor2.tileReceivingInterface, customTileServiceInteractor2.getTileServiceManager());
                         customTileServiceInteractor2.destructionJob = null;

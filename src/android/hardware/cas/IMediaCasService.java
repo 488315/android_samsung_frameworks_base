@@ -94,9 +94,9 @@ public interface IMediaCasService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IMediaCasService)) {
-                return (IMediaCasService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IMediaCasService)) {
+                return (IMediaCasService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -122,34 +122,34 @@ public interface IMediaCasService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                IDescrambler createDescrambler = createDescrambler(readInt);
+                IDescrambler iDescramblerCreateDescrambler = createDescrambler(i3);
                 parcel2.writeNoException();
-                parcel2.writeStrongInterface(createDescrambler);
+                parcel2.writeStrongInterface(iDescramblerCreateDescrambler);
             } else if (i == 2) {
-                int readInt2 = parcel.readInt();
-                ICasListener asInterface = ICasListener.Stub.asInterface(parcel.readStrongBinder());
+                int i4 = parcel.readInt();
+                ICasListener iCasListenerAsInterface = ICasListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                ICas createPlugin = createPlugin(readInt2, asInterface);
+                ICas iCasCreatePlugin = createPlugin(i4, iCasListenerAsInterface);
                 parcel2.writeNoException();
-                parcel2.writeStrongInterface(createPlugin);
+                parcel2.writeStrongInterface(iCasCreatePlugin);
             } else if (i == 3) {
-                AidlCasPluginDescriptor[] enumeratePlugins = enumeratePlugins();
+                AidlCasPluginDescriptor[] aidlCasPluginDescriptorArrEnumeratePlugins = enumeratePlugins();
                 parcel2.writeNoException();
-                parcel2.writeTypedArray(enumeratePlugins, 1);
+                parcel2.writeTypedArray(aidlCasPluginDescriptorArrEnumeratePlugins, 1);
             } else if (i == 4) {
-                int readInt3 = parcel.readInt();
+                int i5 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                boolean isDescramblerSupported = isDescramblerSupported(readInt3);
+                boolean zIsDescramblerSupported = isDescramblerSupported(i5);
                 parcel2.writeNoException();
-                parcel2.writeBoolean(isDescramblerSupported);
+                parcel2.writeBoolean(zIsDescramblerSupported);
             } else if (i == 5) {
-                int readInt4 = parcel.readInt();
+                int i6 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                boolean isSystemIdSupported = isSystemIdSupported(readInt4);
+                boolean zIsSystemIdSupported = isSystemIdSupported(i6);
                 parcel2.writeNoException();
-                parcel2.writeBoolean(isSystemIdSupported);
+                parcel2.writeBoolean(zIsSystemIdSupported);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -176,107 +176,107 @@ public interface IMediaCasService extends IInterface {
 
             @Override // android.hardware.cas.IMediaCasService
             public IDescrambler createDescrambler(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (!this.mRemote.transact(1, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (!this.mRemote.transact(1, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method createDescrambler is unimplemented.");
                     }
-                    obtain2.readException();
-                    return IDescrambler.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain2.readException();
+                    return IDescrambler.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.cas.IMediaCasService
             public ICas createPlugin(int i, ICasListener iCasListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iCasListener);
-                    if (!this.mRemote.transact(2, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iCasListener);
+                    if (!this.mRemote.transact(2, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method createPlugin is unimplemented.");
                     }
-                    obtain2.readException();
-                    return ICas.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain2.readException();
+                    return ICas.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.cas.IMediaCasService
             public AidlCasPluginDescriptor[] enumeratePlugins() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    if (!this.mRemote.transact(3, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    if (!this.mRemote.transact(3, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method enumeratePlugins is unimplemented.");
                     }
-                    obtain2.readException();
-                    return (AidlCasPluginDescriptor[]) obtain2.createTypedArray(AidlCasPluginDescriptor.CREATOR);
+                    parcelObtain2.readException();
+                    return (AidlCasPluginDescriptor[]) parcelObtain2.createTypedArray(AidlCasPluginDescriptor.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.cas.IMediaCasService
             public boolean isDescramblerSupported(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (!this.mRemote.transact(4, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (!this.mRemote.transact(4, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method isDescramblerSupported is unimplemented.");
                     }
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.cas.IMediaCasService
             public boolean isSystemIdSupported(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(DESCRIPTOR);
-                    obtain.writeInt(i);
-                    if (!this.mRemote.transact(5, obtain, obtain2, 0)) {
+                    parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    if (!this.mRemote.transact(5, parcelObtain, parcelObtain2, 0)) {
                         throw new RemoteException("Method isSystemIdSupported is unimplemented.");
                     }
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.cas.IMediaCasService
             public int getInterfaceVersion() throws RemoteException {
                 if (this.mCachedVersion == -1) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777215, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedVersion = obtain2.readInt();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777215, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedVersion = parcelObtain2.readInt();
                     } finally {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     }
                 }
                 return this.mCachedVersion;
@@ -285,18 +285,18 @@ public interface IMediaCasService extends IInterface {
             @Override // android.hardware.cas.IMediaCasService
             public synchronized String getInterfaceHash() throws RemoteException {
                 if ("-1".equals(this.mCachedHash)) {
-                    Parcel obtain = Parcel.obtain(asBinder());
-                    Parcel obtain2 = Parcel.obtain();
+                    Parcel parcelObtain = Parcel.obtain(asBinder());
+                    Parcel parcelObtain2 = Parcel.obtain();
                     try {
-                        obtain.writeInterfaceToken(DESCRIPTOR);
-                        this.mRemote.transact(16777214, obtain, obtain2, 0);
-                        obtain2.readException();
-                        this.mCachedHash = obtain2.readString();
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain.writeInterfaceToken(DESCRIPTOR);
+                        this.mRemote.transact(16777214, parcelObtain, parcelObtain2, 0);
+                        parcelObtain2.readException();
+                        this.mCachedHash = parcelObtain2.readString();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                     } catch (Throwable th) {
-                        obtain2.recycle();
-                        obtain.recycle();
+                        parcelObtain2.recycle();
+                        parcelObtain.recycle();
                         throw th;
                     }
                 }

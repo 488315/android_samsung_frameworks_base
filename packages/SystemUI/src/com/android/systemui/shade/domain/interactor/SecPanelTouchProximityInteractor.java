@@ -11,7 +11,6 @@ import kotlin.Unit;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SecPanelTouchProximityInteractor {
     public final BroadcastDispatcher broadcastDispatcher;
@@ -20,8 +19,8 @@ public final class SecPanelTouchProximityInteractor {
         public final void onReceive(Context context, Intent intent) {
             if (Intrinsics.areEqual(intent != null ? intent.getAction() : null, "android.intent.action.ACTION_SCREEN_OFF_BY_PROXIMITY")) {
                 Log.d("SecPanelTouchProximityInteractor", "onReceive(): ACTION_SCREEN_OFF_BY_PROXIMITY");
-                if (SecPanelTouchProximityInteractor.this.statusBarStateController.getState() == 0 && ((Boolean) ((ShadeInteractorImpl) SecPanelTouchProximityInteractor.this.shadeInteractor).baseShadeInteractor.isAnyExpanded().getValue()).booleanValue()) {
-                    ShadeControllerImpl$$ExternalSyntheticLambda0 shadeControllerImpl$$ExternalSyntheticLambda0 = SecPanelTouchProximityInteractor.this.postAnimateForceCollapseShadeRunnable;
+                if (this.this$0.statusBarStateController.getState() == 0 && ((Boolean) ((ShadeInteractorImpl) this.this$0.shadeInteractor).baseShadeInteractor.isAnyExpanded().getValue()).booleanValue()) {
+                    ShadeControllerImpl$$ExternalSyntheticLambda0 shadeControllerImpl$$ExternalSyntheticLambda0 = this.this$0.postAnimateForceCollapseShadeRunnable;
                     if (shadeControllerImpl$$ExternalSyntheticLambda0 != null) {
                         shadeControllerImpl$$ExternalSyntheticLambda0.run();
                         Unit unit = Unit.INSTANCE;
@@ -36,7 +35,6 @@ public final class SecPanelTouchProximityInteractor {
     public final ShadeInteractor shadeInteractor;
     public final StatusBarStateController statusBarStateController;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();

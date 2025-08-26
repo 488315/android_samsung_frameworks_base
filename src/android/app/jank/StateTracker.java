@@ -37,14 +37,14 @@ public class StateTracker {
     }
 
     public void removeState(String str, String str2, String str3) {
-        StateData remove = this.mActiveStates.remove(getStateKey(str, str2, str3));
-        if (remove == null) {
+        StateData stateDataRemove = this.mActiveStates.remove(getStateKey(str, str2, str3));
+        if (stateDataRemove == null) {
             return;
         }
         synchronized (this.mLock) {
-            remove.mVsyncIdEnd = this.mChoreographer.getVsyncId();
+            stateDataRemove.mVsyncIdEnd = this.mChoreographer.getVsyncId();
             if (this.mPreviousStates.size() < 1000) {
-                this.mPreviousStates.add(remove);
+                this.mPreviousStates.add(stateDataRemove);
             }
         }
     }
@@ -57,17 +57,17 @@ public class StateTracker {
         if (this.mActiveStates.containsKey(stateKey)) {
             return;
         }
-        StateData acquire = this.mStateDataObjectPool.acquire();
-        if (acquire == null) {
-            acquire = new StateData();
+        StateData stateDataAcquire = this.mStateDataObjectPool.acquire();
+        if (stateDataAcquire == null) {
+            stateDataAcquire = new StateData();
         }
-        acquire.mVsyncIdStart = this.mChoreographer.getVsyncId();
-        acquire.mStateDataKey = stateKey;
-        acquire.mWidgetState = str3;
-        acquire.mWidgetCategory = str;
-        acquire.mWidgetId = str2;
-        acquire.mVsyncIdEnd = Long.MAX_VALUE;
-        this.mActiveStates.put(stateKey, acquire);
+        stateDataAcquire.mVsyncIdStart = this.mChoreographer.getVsyncId();
+        stateDataAcquire.mStateDataKey = stateKey;
+        stateDataAcquire.mWidgetState = str3;
+        stateDataAcquire.mWidgetCategory = str;
+        stateDataAcquire.mWidgetId = str2;
+        stateDataAcquire.mVsyncIdEnd = Long.MAX_VALUE;
+        this.mActiveStates.put(stateKey, stateDataAcquire);
     }
 
     public void retrieveAllStates(ArrayList<StateData> arrayList) {

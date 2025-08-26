@@ -9,7 +9,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class KeyCycleOscillator {
     public CycleOscillator mCycleOscillator;
@@ -19,7 +18,6 @@ public abstract class KeyCycleOscillator {
     public int mVariesBy = 0;
     public final ArrayList mWavePoints = new ArrayList();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CycleOscillator {
         public CurveFit mCurveFit;
         public final float[] mOffsetArr;
@@ -37,27 +35,27 @@ public abstract class KeyCycleOscillator {
             oscillator.mType = i;
             if (str != null) {
                 double[] dArr = new double[str.length() / 2];
-                int indexOf = str.indexOf(40) + 1;
-                int indexOf2 = str.indexOf(44, indexOf);
+                int iIndexOf = str.indexOf(40) + 1;
+                int iIndexOf2 = str.indexOf(44, iIndexOf);
                 char c = 0;
                 int i4 = 0;
-                while (indexOf2 != -1) {
-                    dArr[i4] = Double.parseDouble(str.substring(indexOf, indexOf2).trim());
-                    indexOf = indexOf2 + 1;
-                    indexOf2 = str.indexOf(44, indexOf);
+                while (iIndexOf2 != -1) {
+                    dArr[i4] = Double.parseDouble(str.substring(iIndexOf, iIndexOf2).trim());
+                    iIndexOf = iIndexOf2 + 1;
+                    iIndexOf2 = str.indexOf(44, iIndexOf);
                     i4++;
                 }
-                dArr[i4] = Double.parseDouble(str.substring(indexOf, str.indexOf(41, indexOf)).trim());
-                double[] copyOf = Arrays.copyOf(dArr, i4 + 1);
-                int length = (copyOf.length * 3) - 2;
-                int length2 = copyOf.length - 1;
+                dArr[i4] = Double.parseDouble(str.substring(iIndexOf, str.indexOf(41, iIndexOf)).trim());
+                double[] dArrCopyOf = Arrays.copyOf(dArr, i4 + 1);
+                int length = (dArrCopyOf.length * 3) - 2;
+                int length2 = dArrCopyOf.length - 1;
                 double d = 1.0d;
                 double d2 = 1.0d / length2;
                 double[][] dArr2 = (double[][]) Array.newInstance((Class<?>) Double.TYPE, length, 1);
                 double[] dArr3 = new double[length];
                 int i5 = 0;
-                while (i5 < copyOf.length) {
-                    double d3 = copyOf[i5];
+                while (i5 < dArrCopyOf.length) {
+                    double d3 = dArrCopyOf[i5];
                     int i6 = i5 + length2;
                     dArr2[i6][c] = d3;
                     char c2 = c;
@@ -87,7 +85,6 @@ public abstract class KeyCycleOscillator {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class WavePoint {
         public final float mOffset;
         public final float mPeriod;
@@ -122,92 +119,92 @@ public abstract class KeyCycleOscillator {
     public final float getSlope(float f) {
         char c;
         char c2;
+        double slope;
         double d;
-        double d2;
-        double signum;
-        double d3;
+        double dSignum;
+        double dSin;
         CycleOscillator cycleOscillator = this.mCycleOscillator;
         CurveFit curveFit = cycleOscillator.mCurveFit;
-        double d4 = 0.0d;
+        double d2 = 0.0d;
         if (curveFit != null) {
-            double d5 = f;
-            curveFit.getSlope(d5, cycleOscillator.mSplineSlopeCache);
-            cycleOscillator.mCurveFit.getPos(d5, cycleOscillator.mSplineValueCache);
+            double d3 = f;
+            curveFit.getSlope(d3, cycleOscillator.mSplineSlopeCache);
+            cycleOscillator.mCurveFit.getPos(d3, cycleOscillator.mSplineValueCache);
         } else {
             double[] dArr = cycleOscillator.mSplineSlopeCache;
             dArr[0] = 0.0d;
             dArr[1] = 0.0d;
             dArr[2] = 0.0d;
         }
-        double d6 = f;
-        double d7 = cycleOscillator.mSplineValueCache[1];
+        double d4 = f;
+        double d5 = cycleOscillator.mSplineValueCache[1];
         Oscillator oscillator = cycleOscillator.mOscillator;
-        double value = oscillator.getValue(d6, d7);
-        double d8 = cycleOscillator.mSplineValueCache[1];
-        double d9 = cycleOscillator.mSplineSlopeCache[1];
-        double p = oscillator.getP(d6) + d8;
-        if (d6 <= 0.0d) {
+        double value = oscillator.getValue(d4, d5);
+        double d6 = cycleOscillator.mSplineValueCache[1];
+        double d7 = cycleOscillator.mSplineSlopeCache[1];
+        double p = oscillator.getP(d4) + d6;
+        if (d4 <= 0.0d) {
             c = 2;
             c2 = 0;
-        } else if (d6 >= 1.0d) {
+        } else if (d4 >= 1.0d) {
             c = 2;
             c2 = 0;
-            d4 = 1.0d;
+            d2 = 1.0d;
         } else {
-            int binarySearch = Arrays.binarySearch(oscillator.mPosition, d6);
-            if (binarySearch < 0) {
-                binarySearch = (-binarySearch) - 1;
+            int iBinarySearch = Arrays.binarySearch(oscillator.mPosition, d4);
+            if (iBinarySearch < 0) {
+                iBinarySearch = (-iBinarySearch) - 1;
             }
             float[] fArr = oscillator.mPeriod;
-            float f2 = fArr[binarySearch];
-            int i = binarySearch - 1;
+            float f2 = fArr[iBinarySearch];
+            int i = iBinarySearch - 1;
             float f3 = fArr[i];
             c = 2;
             c2 = 0;
-            double d10 = f2 - f3;
+            double d8 = f2 - f3;
             double[] dArr2 = oscillator.mPosition;
-            double d11 = dArr2[binarySearch];
-            double d12 = dArr2[i];
-            double d13 = d10 / (d11 - d12);
-            d4 = (f3 - (d13 * d12)) + (d6 * d13);
+            double d9 = dArr2[iBinarySearch];
+            double d10 = dArr2[i];
+            double d11 = d8 / (d9 - d10);
+            d2 = (f3 - (d11 * d10)) + (d4 * d11);
         }
-        double d14 = d4 + d9;
-        double d15 = 2.0d;
+        double d12 = d2 + d7;
+        double d13 = 2.0d;
         switch (oscillator.mType) {
             case 1:
-                d = 0.0d;
+                slope = 0.0d;
                 break;
             case 2:
-                d2 = d14 * 4.0d;
-                signum = Math.signum((((p * 4.0d) + 3.0d) % 4.0d) - 2.0d);
-                d = d2 * signum;
+                d = d12 * 4.0d;
+                dSignum = Math.signum((((p * 4.0d) + 3.0d) % 4.0d) - 2.0d);
+                slope = d * dSignum;
                 break;
             case 3:
-                d = d14 * 2.0d;
+                slope = d12 * 2.0d;
                 break;
             case 4:
-                d3 = -d14;
-                d = d3 * d15;
+                dSin = -d12;
+                slope = dSin * d13;
                 break;
             case 5:
-                d15 = (-6.283185307179586d) * d14;
-                d3 = Math.sin(6.283185307179586d * p);
-                d = d3 * d15;
+                d13 = (-6.283185307179586d) * d12;
+                dSin = Math.sin(6.283185307179586d * p);
+                slope = dSin * d13;
                 break;
             case 6:
-                d = d14 * 4.0d * ((((p * 4.0d) + 2.0d) % 4.0d) - 2.0d);
+                slope = d12 * 4.0d * ((((p * 4.0d) + 2.0d) % 4.0d) - 2.0d);
                 break;
             case 7:
-                d = oscillator.mCustomCurve.getSlope(p % 1.0d);
+                slope = oscillator.mCustomCurve.getSlope(p % 1.0d);
                 break;
             default:
-                d2 = d14 * 6.283185307179586d;
-                signum = Math.cos(6.283185307179586d * p);
-                d = d2 * signum;
+                d = d12 * 6.283185307179586d;
+                dSignum = Math.cos(6.283185307179586d * p);
+                slope = d * dSignum;
                 break;
         }
         double[] dArr3 = cycleOscillator.mSplineSlopeCache;
-        return (float) ((d * cycleOscillator.mSplineValueCache[c]) + (value * dArr3[c]) + dArr3[c2]);
+        return (float) ((slope * cycleOscillator.mSplineValueCache[c]) + (value * dArr3[c]) + dArr3[c2]);
     }
 
     public final void setup() {
@@ -355,7 +352,7 @@ public abstract class KeyCycleOscillator {
     }
 
     public final String toString() {
-        String str = this.mType;
+        String string = this.mType;
         DecimalFormat decimalFormat = new DecimalFormat("##.##");
         ArrayList arrayList = this.mWavePoints;
         int size = arrayList.size();
@@ -363,14 +360,14 @@ public abstract class KeyCycleOscillator {
         while (i < size) {
             Object obj = arrayList.get(i);
             i++;
-            StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(str, "[");
-            m.append(((WavePoint) obj).mPosition);
-            m.append(" , ");
-            m.append(decimalFormat.format(r4.mValue));
-            m.append("] ");
-            str = m.toString();
+            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(string, "[");
+            sbM.append(((WavePoint) obj).mPosition);
+            sbM.append(" , ");
+            sbM.append(decimalFormat.format(r4.mValue));
+            sbM.append("] ");
+            string = sbM.toString();
         }
-        return str;
+        return string;
     }
 
     public void setCustom(ConstraintAttribute constraintAttribute) {

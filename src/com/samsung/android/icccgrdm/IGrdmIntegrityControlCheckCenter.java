@@ -45,9 +45,9 @@ public interface IGrdmIntegrityControlCheckCenter extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IGrdmIntegrityControlCheckCenter.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IGrdmIntegrityControlCheckCenter)) {
-                return (IGrdmIntegrityControlCheckCenter) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IGrdmIntegrityControlCheckCenter.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IGrdmIntegrityControlCheckCenter)) {
+                return (IGrdmIntegrityControlCheckCenter) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,11 +74,11 @@ public interface IGrdmIntegrityControlCheckCenter extends IInterface {
                 return true;
             }
             if (i == 1) {
-                byte[] createByteArray = parcel.createByteArray();
+                byte[] bArrCreateByteArray = parcel.createByteArray();
                 parcel.enforceNoDataAvail();
-                byte[] grdmSetAttestationData = grdmSetAttestationData(createByteArray);
+                byte[] bArrGrdmSetAttestationData = grdmSetAttestationData(bArrCreateByteArray);
                 parcel2.writeNoException();
-                parcel2.writeByteArray(grdmSetAttestationData);
+                parcel2.writeByteArray(bArrGrdmSetAttestationData);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -102,17 +102,17 @@ public interface IGrdmIntegrityControlCheckCenter extends IInterface {
 
             @Override // com.samsung.android.icccgrdm.IGrdmIntegrityControlCheckCenter
             public byte[] grdmSetAttestationData(byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IGrdmIntegrityControlCheckCenter.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(IGrdmIntegrityControlCheckCenter.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

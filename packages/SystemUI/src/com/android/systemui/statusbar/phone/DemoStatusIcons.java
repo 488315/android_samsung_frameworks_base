@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import java.util.List;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class DemoStatusIcons extends StatusIconContainer implements DemoMode, DarkIconDispatcher.DarkReceiver {
     public int mColor;
@@ -69,7 +68,7 @@ public class DemoStatusIcons extends StatusIconContainer implements DemoMode, Da
 
     public final void addModernWifiView(LocationBasedWifiViewModel locationBasedWifiViewModel) {
         Log.d("DemoStatusIcons", "addModernDemoWifiView: ");
-        ModernStatusBarWifiView constructAndBind = ModernStatusBarWifiView.constructAndBind(((LinearLayout) this).mContext, ImsProfile.PDN_WIFI, locationBasedWifiViewModel);
+        ModernStatusBarWifiView modernStatusBarWifiViewConstructAndBind = ModernStatusBarWifiView.constructAndBind(((LinearLayout) this).mContext, ImsProfile.PDN_WIFI, locationBasedWifiViewModel);
         int childCount = getChildCount();
         int i = 0;
         while (true) {
@@ -82,9 +81,9 @@ public class DemoStatusIcons extends StatusIconContainer implements DemoMode, Da
             }
             i++;
         }
-        this.mModernWifiView = constructAndBind;
-        constructAndBind.setStaticDrawableColor(this.mColor, this.mContrastColor);
-        addView(constructAndBind, childCount, new LinearLayout.LayoutParams(-2, this.mIconSize));
+        this.mModernWifiView = modernStatusBarWifiViewConstructAndBind;
+        modernStatusBarWifiViewConstructAndBind.setStaticDrawableColor(this.mColor, this.mContrastColor);
+        addView(modernStatusBarWifiViewConstructAndBind, childCount, new LinearLayout.LayoutParams(-2, this.mIconSize));
     }
 
     @Override // com.android.systemui.demomode.DemoMode

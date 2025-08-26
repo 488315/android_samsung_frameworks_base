@@ -8,14 +8,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ClassesInfoCache {
     public static final ClassesInfoCache sInstance = new ClassesInfoCache();
     public final Map mCallbackMap = new HashMap();
     public final Map mHasLifecycleMethods = new HashMap();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CallbackInfo {
         public final Map mEventToHandlers = new HashMap();
         public final Map mHandlerToEvent;
@@ -24,16 +22,16 @@ public final class ClassesInfoCache {
             this.mHandlerToEvent = map;
             for (Map.Entry<MethodReference, Lifecycle.Event> entry : map.entrySet()) {
                 Lifecycle.Event value = entry.getValue();
-                List list = (List) this.mEventToHandlers.get(value);
-                if (list == null) {
-                    list = new ArrayList();
-                    this.mEventToHandlers.put(value, list);
+                List arrayList = (List) this.mEventToHandlers.get(value);
+                if (arrayList == null) {
+                    arrayList = new ArrayList();
+                    this.mEventToHandlers.put(value, arrayList);
                 }
-                list.add(entry.getKey());
+                arrayList.add(entry.getKey());
             }
         }
 
-        public static void invokeMethodsForEvent(List list, LifecycleOwner lifecycleOwner, Lifecycle.Event event, Object obj) {
+        public static void invokeMethodsForEvent(List list, LifecycleOwner lifecycleOwner, Lifecycle.Event event, Object obj) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
             if (list != null) {
                 for (int size = list.size() - 1; size >= 0; size--) {
                     MethodReference methodReference = (MethodReference) list.get(size);
@@ -57,7 +55,6 @@ public final class ClassesInfoCache {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class MethodReference {
         public final int mCallType;
         public final Method mMethod;
@@ -85,11 +82,11 @@ public final class ClassesInfoCache {
     }
 
     public static void verifyAndPutHandler(Map map, MethodReference methodReference, Lifecycle.Event event, Class cls) {
-        HashMap hashMap = (HashMap) map;
-        Lifecycle.Event event2 = (Lifecycle.Event) hashMap.get(methodReference);
+        HashMap map2 = (HashMap) map;
+        Lifecycle.Event event2 = (Lifecycle.Event) map2.get(methodReference);
         if (event2 == null || event == event2) {
             if (event2 == null) {
-                hashMap.put(methodReference, event);
+                map2.put(methodReference, event);
                 return;
             }
             return;
@@ -97,16 +94,16 @@ public final class ClassesInfoCache {
         throw new IllegalArgumentException("Method " + methodReference.mMethod.getName() + " in " + cls.getName() + " already declared with different @OnLifecycleEvent value: previous value " + event2 + ", new value " + event);
     }
 
-    public final CallbackInfo createInfo(Class cls, Method[] methodArr) {
+    public final CallbackInfo createInfo(Class cls, Method[] methodArr) throws SecurityException {
         int i;
         Class superclass = cls.getSuperclass();
-        HashMap hashMap = new HashMap();
+        HashMap map = new HashMap();
         if (superclass != null) {
-            hashMap.putAll(getInfo(superclass).mHandlerToEvent);
+            map.putAll(getInfo(superclass).mHandlerToEvent);
         }
         for (Class<?> cls2 : cls.getInterfaces()) {
             for (Map.Entry entry : getInfo(cls2).mHandlerToEvent.entrySet()) {
-                verifyAndPutHandler(hashMap, (MethodReference) entry.getKey(), (Lifecycle.Event) entry.getValue(), cls);
+                verifyAndPutHandler(map, (MethodReference) entry.getKey(), (Lifecycle.Event) entry.getValue(), cls);
             }
         }
         if (methodArr == null) {
@@ -129,12 +126,12 @@ public final class ClassesInfoCache {
                     }
                     i = 1;
                 }
-                Lifecycle.Event value = onLifecycleEvent.value();
+                Lifecycle.Event eventValue = onLifecycleEvent.value();
                 if (parameterTypes.length > 1) {
                     if (!Lifecycle.Event.class.isAssignableFrom(parameterTypes[1])) {
                         throw new IllegalArgumentException("invalid parameter type. second arg must be an event");
                     }
-                    if (value != Lifecycle.Event.ON_ANY) {
+                    if (eventValue != Lifecycle.Event.ON_ANY) {
                         throw new IllegalArgumentException("Second arg is supported only for ON_ANY value");
                     }
                     i = 2;
@@ -142,11 +139,11 @@ public final class ClassesInfoCache {
                 if (parameterTypes.length > 2) {
                     throw new IllegalArgumentException("cannot have more than 2 params");
                 }
-                verifyAndPutHandler(hashMap, new MethodReference(i, method), value, cls);
+                verifyAndPutHandler(map, new MethodReference(i, method), eventValue, cls);
                 z = true;
             }
         }
-        CallbackInfo callbackInfo = new CallbackInfo(hashMap);
+        CallbackInfo callbackInfo = new CallbackInfo(map);
         ((HashMap) this.mCallbackMap).put(cls, callbackInfo);
         ((HashMap) this.mHasLifecycleMethods).put(cls, Boolean.valueOf(z));
         return callbackInfo;

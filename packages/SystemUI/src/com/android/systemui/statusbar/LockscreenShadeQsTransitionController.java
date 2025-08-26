@@ -10,7 +10,6 @@ import com.android.systemui.statusbar.policy.SplitShadeStateController;
 import kotlin.jvm.functions.Function0;
 import kotlin.text.StringsKt__IndentKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class LockscreenShadeQsTransitionController extends AbstractLockscreenShadeTransitionController {
     public boolean isTransitioningToFullShade;
@@ -23,7 +22,6 @@ public final class LockscreenShadeQsTransitionController extends AbstractLockscr
     public float qsTransitionFraction;
     public int qsTransitionStartDelay;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         LockscreenShadeQsTransitionController create(Function0 function0);
     }
@@ -44,22 +42,22 @@ public final class LockscreenShadeQsTransitionController extends AbstractLockscr
         float f4 = this.qsTransitionFraction;
         float f5 = this.qsSquishTransitionFraction;
         boolean z = this.isTransitioningToFullShade;
-        StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "\n            Resources:\n              qsTransitionDistance: ", "\n              qsTransitionStartDelay: ", "\n              qsSquishTransitionDistance: ");
-        m.append(i3);
-        m.append("\n              qsSquishStartFraction: ");
-        m.append(f);
-        m.append("\n            State:\n              dragDownAmount: ");
-        m.append(f2);
-        m.append("\n              qsDragDownAmount: ");
-        m.append(f3);
-        m.append("\n              qsDragFraction: ");
-        m.append(f4);
-        m.append("\n              qsSquishFraction: ");
-        m.append(f5);
-        m.append("\n              isTransitioningToFullShade: ");
-        m.append(z);
-        m.append("\n        ");
-        indentingPrintWriter.println(StringsKt__IndentKt.trimIndent(m.toString()));
+        StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "\n            Resources:\n              qsTransitionDistance: ", "\n              qsTransitionStartDelay: ", "\n              qsSquishTransitionDistance: ");
+        sbM.append(i3);
+        sbM.append("\n              qsSquishStartFraction: ");
+        sbM.append(f);
+        sbM.append("\n            State:\n              dragDownAmount: ");
+        sbM.append(f2);
+        sbM.append("\n              qsDragDownAmount: ");
+        sbM.append(f3);
+        sbM.append("\n              qsDragFraction: ");
+        sbM.append(f4);
+        sbM.append("\n              qsSquishFraction: ");
+        sbM.append(f5);
+        sbM.append("\n              isTransitioningToFullShade: ");
+        sbM.append(z);
+        sbM.append("\n        ");
+        indentingPrintWriter.println(StringsKt__IndentKt.trimIndent(sbM.toString()));
     }
 
     @Override // com.android.systemui.statusbar.AbstractLockscreenShadeTransitionController

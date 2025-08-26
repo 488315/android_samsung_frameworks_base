@@ -45,7 +45,6 @@ import java.util.Iterator;
 import java.util.Objects;
 import javax.inject.Provider;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class NotificationRowBinderImpl {
     public final Context mContext;
@@ -118,15 +117,15 @@ public class NotificationRowBinderImpl {
         LogLevel logLevel = LogLevel.DEBUG;
         NotificationRowBinderLogger$$ExternalSyntheticLambda0 notificationRowBinderLogger$$ExternalSyntheticLambda0 = new NotificationRowBinderLogger$$ExternalSyntheticLambda0(6);
         LogBuffer logBuffer = notificationRowBinderLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("NotificationRowBinder", logLevel, notificationRowBinderLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("NotificationRowBinder", logLevel, notificationRowBinderLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         String str2 = notificationEntry.mKey;
         logMessageImpl.str1 = str2;
         logMessageImpl.str2 = params.reason;
-        logBuffer.commit(obtain);
-        LogMessage obtain2 = logBuffer.obtain("NotificationRowBinder", logLevel, new NotificationRowBinderLogger$$ExternalSyntheticLambda0(7), null);
-        ((LogMessageImpl) obtain2).str1 = str2;
-        logBuffer.commit(obtain2);
+        logBuffer.commit(logMessageObtain);
+        LogMessage logMessageObtain2 = logBuffer.obtain("NotificationRowBinder", logLevel, new NotificationRowBinderLogger$$ExternalSyntheticLambda0(7), null);
+        ((LogMessageImpl) logMessageObtain2).str1 = str2;
+        logBuffer.commit(logMessageObtain2);
         boolean z4 = expandableNotificationRow.isInsignificantSummary() ? true : z2;
         expandableNotificationRow.mIsMinimized = z4;
         expandableNotificationRow.mPrivateLayout.getClass();
@@ -145,7 +144,7 @@ public class NotificationRowBinderImpl {
         rowContentBindStage.requestRebind(notificationEntry, new NotifBindPipeline.BindCallback() { // from class: com.android.systemui.statusbar.notification.collection.inflation.NotificationRowBinderImpl$$ExternalSyntheticLambda1
             @Override // com.android.systemui.statusbar.notification.row.NotifBindPipeline.BindCallback
             public final void onBindFinished(NotificationEntry notificationEntry2) {
-                ExpandableNotificationRow.this.mRedactionType = i;
+                expandableNotificationRow.mRedactionType = i;
                 anonymousClass1.onAsyncInflationFinished();
             }
         });
@@ -154,24 +153,24 @@ public class NotificationRowBinderImpl {
     public final void inflateViews(NotificationEntry notificationEntry, NotifInflater.Params params, NotifInflaterImpl.AnonymousClass1 anonymousClass1) {
         NotificationStackScrollLayout notificationStackScrollLayout = NotificationStackScrollLayoutController.this.mView;
         notificationStackScrollLayout.getClass();
-        boolean rowExists = notificationEntry.rowExists();
+        boolean zRowExists = notificationEntry.rowExists();
         String str = params.reason;
         IconManager iconManager = this.mIconManager;
         NotificationRowBinderLogger notificationRowBinderLogger = this.mLogger;
-        if (!rowExists) {
+        if (!zRowExists) {
             notificationRowBinderLogger.getClass();
             LogLevel logLevel = LogLevel.DEBUG;
             NotificationRowBinderLogger$$ExternalSyntheticLambda0 notificationRowBinderLogger$$ExternalSyntheticLambda0 = new NotificationRowBinderLogger$$ExternalSyntheticLambda0(4);
             LogBuffer logBuffer = notificationRowBinderLogger.buffer;
-            LogMessage obtain = logBuffer.obtain("NotificationRowBinder", logLevel, notificationRowBinderLogger$$ExternalSyntheticLambda0, null);
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+            LogMessage logMessageObtain = logBuffer.obtain("NotificationRowBinder", logLevel, notificationRowBinderLogger$$ExternalSyntheticLambda0, null);
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
             logMessageImpl.str1 = NotificationUtils.logKey(notificationEntry);
             logMessageImpl.str2 = str;
-            logBuffer.commit(obtain);
+            logBuffer.commit(logMessageObtain);
             iconManager.createIcons(notificationEntry);
-            LogMessage obtain2 = logBuffer.obtain("NotificationRowBinder", logLevel, new NotificationRowBinderLogger$$ExternalSyntheticLambda0(2), null);
-            ((LogMessageImpl) obtain2).str1 = NotificationUtils.logKey(notificationEntry);
-            logBuffer.commit(obtain2);
+            LogMessage logMessageObtain2 = logBuffer.obtain("NotificationRowBinder", logLevel, new NotificationRowBinderLogger$$ExternalSyntheticLambda0(2), null);
+            ((LogMessageImpl) logMessageObtain2).str1 = NotificationUtils.logKey(notificationEntry);
+            logBuffer.commit(logMessageObtain2);
             ((RowInflaterTask) this.mRowInflaterTaskProvider.get()).inflate(this.mContext, notificationStackScrollLayout, notificationEntry, null, new NotificationRowBinderImpl$$ExternalSyntheticLambda0(this, notificationEntry, params, anonymousClass1));
             return;
         }
@@ -179,11 +178,11 @@ public class NotificationRowBinderImpl {
         LogLevel logLevel2 = LogLevel.DEBUG;
         NotificationRowBinderLogger$$ExternalSyntheticLambda0 notificationRowBinderLogger$$ExternalSyntheticLambda02 = new NotificationRowBinderLogger$$ExternalSyntheticLambda0(3);
         LogBuffer logBuffer2 = notificationRowBinderLogger.buffer;
-        LogMessage obtain3 = logBuffer2.obtain("NotificationRowBinder", logLevel2, notificationRowBinderLogger$$ExternalSyntheticLambda02, null);
-        LogMessageImpl logMessageImpl2 = (LogMessageImpl) obtain3;
+        LogMessage logMessageObtain3 = logBuffer2.obtain("NotificationRowBinder", logLevel2, notificationRowBinderLogger$$ExternalSyntheticLambda02, null);
+        LogMessageImpl logMessageImpl2 = (LogMessageImpl) logMessageObtain3;
         logMessageImpl2.str1 = NotificationUtils.logKey(notificationEntry);
         logMessageImpl2.str2 = str;
-        logBuffer2.commit(obtain3);
+        logBuffer2.commit(logMessageObtain3);
         boolean z = false;
         iconManager.updateIcons(notificationEntry, false);
         ExpandableNotificationRow expandableNotificationRow = notificationEntry.row;
@@ -246,7 +245,7 @@ public class NotificationRowBinderImpl {
         expandableNotificationRow.mBubbleClickListener = new View.OnClickListener() { // from class: com.android.systemui.statusbar.notification.NotificationClicker$$ExternalSyntheticLambda0
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                NotificationClicker notificationClicker2 = NotificationClicker.this;
+                NotificationClicker notificationClicker2 = notificationClicker;
                 ExpandableNotificationRow expandableNotificationRow2 = expandableNotificationRow;
                 NotificationActivityStarter notificationActivityStarter = notificationClicker2.mNotificationActivityStarter;
                 NotificationEntry notificationEntry2 = expandableNotificationRow2.mEntry;
@@ -260,7 +259,7 @@ public class NotificationRowBinderImpl {
                     statusBarNotificationActivityStarter.performActionAfterKeyguardDismissed(notificationEntry2, new StatusBarNotificationActivityStarter.OnKeyguardDismissedAction() { // from class: com.android.systemui.statusbar.phone.StatusBarNotificationActivityStarter$$ExternalSyntheticLambda5
                         @Override // com.android.systemui.statusbar.phone.StatusBarNotificationActivityStarter.OnKeyguardDismissedAction
                         public final void onDismiss(PendingIntent pendingIntent, boolean z2, boolean z3, boolean z4) {
-                            StatusBarNotificationActivityStarter$$ExternalSyntheticLambda4.this.run();
+                            statusBarNotificationActivityStarter$$ExternalSyntheticLambda4.run();
                         }
                     });
                 }

@@ -11,7 +11,6 @@ import com.android.systemui.dump.DumpManager;
 import com.android.systemui.media.controls.ui.view.MediaHost;
 import com.android.systemui.qs.SecQSPanel;
 import com.android.systemui.qs.animator.QsAnimatorState;
-import com.android.systemui.qs.animator.QsTransitionAnimator;
 import com.android.systemui.qs.animator.SecQSImplAnimatorManager;
 import com.android.systemui.qs.bar.BarController;
 import com.android.systemui.qs.bar.domain.interactor.BarOrderInteractor;
@@ -27,7 +26,6 @@ import java.util.Arrays;
 import java.util.function.IntSupplier;
 import javax.inject.Provider;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SecQSPanelController extends SecQSPanelControllerBase {
     public final BarOrderInteractor mBarOrderInteractor;
@@ -39,7 +37,6 @@ public class SecQSPanelController extends SecQSPanelControllerBase {
     public SecQSImplAnimatorManager mSecAnimatorManager;
     public final SecQsUiDisplayModeInteractor mSecQsUiDisplayModeInteractor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class HideRemovableTileHelper implements TunerService.Tunable {
         public /* synthetic */ HideRemovableTileHelper(SecQSPanelController secQSPanelController, int i) {
             this();
@@ -75,7 +72,7 @@ public class SecQSPanelController extends SecQSPanelControllerBase {
         this.mQsPanelHost.mOrientationSupplier = new IntSupplier() { // from class: com.android.systemui.qs.SecQSPanelController$$ExternalSyntheticLambda2
             @Override // java.util.function.IntSupplier
             public final int getAsInt() {
-                SecQSPanelController secQSPanelController = SecQSPanelController.this;
+                SecQSPanelController secQSPanelController = this.f$0;
                 int i = secQSPanelController.mOrientation;
                 return i != 0 ? i : secQSPanelController.getContext().getResources().getConfiguration().orientation;
             }
@@ -109,14 +106,14 @@ public class SecQSPanelController extends SecQSPanelControllerBase {
         super.onConfigurationChanged(configuration);
         int i = getContext().getResources().getConfiguration().orientation;
         ConfigurationState configurationState = this.mLastConfigurationState;
-        boolean needToUpdate = configurationState.needToUpdate(configuration);
-        StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "onConfigurationChanged currentOrientation = ", ", newConfig.orientation = ");
-        m.append(configuration.orientation);
-        m.append(", mOrientation = ");
-        m.append(this.mOrientation);
-        m.append(", needToUpdate = ");
-        m.append(needToUpdate);
-        Log.d("SecQSPanelController", m.toString());
+        boolean zNeedToUpdate = configurationState.needToUpdate(configuration);
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "onConfigurationChanged currentOrientation = ", ", newConfig.orientation = ");
+        sbM.append(configuration.orientation);
+        sbM.append(", mOrientation = ");
+        sbM.append(this.mOrientation);
+        sbM.append(", needToUpdate = ");
+        sbM.append(zNeedToUpdate);
+        Log.d("SecQSPanelController", sbM.toString());
         Log.d("SecQSPanelController", "onConfigurationChanged diff = " + configurationState.toCompareString(configuration));
         if (this.mOrientation != i) {
             addBarItems();
@@ -189,23 +186,17 @@ public class SecQSPanelController extends SecQSPanelControllerBase {
     public final void showEdit() {
         if (QsAnimatorState.isDetailOpening || QsAnimatorState.isDetailShowing || QsAnimatorState.isDetailClosing || QsAnimatorState.isDetailPopupShowing || QsAnimatorState.isSliding) {
             Log.d("SecQSPanelController", (QsAnimatorState.isSliding ? "while sliding animation" : "detail is showing").concat(", ignore customizer show request"));
-            return;
+        } else {
+            this.mQSCMainViewController.prepareForShowing(true);
+            ((SecQSPanel) this.mView).post(new SecQSPanelController$$ExternalSyntheticLambda1(this, 1));
         }
-        QsTransitionAnimator qsTransitionAnimator = this.mQSCMainViewController.transitionAnimator;
-        if (qsTransitionAnimator == null) {
-            qsTransitionAnimator = null;
-        }
-        if (!qsTransitionAnimator.isThereNoView() && qsTransitionAnimator.mAnimatorsInitialiezed && qsTransitionAnimator.animStateCallback != null) {
-            SecQSImplAnimatorManager.AnonymousClass2.setCustomizerShowing(true);
-        }
-        ((SecQSPanel) this.mView).post(new SecQSPanelController$$ExternalSyntheticLambda1(this, 1));
     }
 
     @Override // com.android.systemui.qs.SecQSPanelControllerBase
     public final void updatePaddingAndMargins() {
         super.updatePaddingAndMargins();
         if (this.mSecQsUiDisplayModeInteractor.isTablet()) {
-            int popOverMargin = this.mResourcePicker.resourcePickHelper.getTargetPicker().getPopOverMargin(getContext());
+            int popOverMargin = this.mResourcePicker.getPopOverMargin(getContext());
             ((SecQSPanel) this.mView).setPadding(popOverMargin, 0, popOverMargin, popOverMargin);
         }
     }

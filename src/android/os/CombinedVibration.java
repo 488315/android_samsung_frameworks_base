@@ -1,7 +1,6 @@
 package android.os;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.os.CombinedVibration;
 import android.os.Parcelable;
 import android.os.VibrationEffect;
 import android.os.vibrator.Flags;
@@ -20,14 +19,14 @@ public abstract class CombinedVibration implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public CombinedVibration createFromParcel(Parcel parcel) {
-            int readInt = parcel.readInt();
-            if (readInt == 1) {
+            int i = parcel.readInt();
+            if (i == 1) {
                 return new Mono(parcel);
             }
-            if (readInt == 2) {
+            if (i == 2) {
                 return new Stereo(parcel);
             }
-            if (readInt == 3) {
+            if (i == 3) {
                 return new Sequential(parcel);
             }
             throw new IllegalStateException("Unexpected combined vibration event type token in parcel.");
@@ -205,15 +204,15 @@ public abstract class CombinedVibration implements Parcelable {
             if (sparseArray == null) {
                 return getDuration();
             }
-            long j = 0;
+            long jMax = 0;
             for (int i = 0; i < sparseArray.size(); i++) {
                 long duration = this.mEffect.getDuration(sparseArray.valueAt(i));
                 if (duration == Long.MAX_VALUE || duration < 0) {
                     return duration;
                 }
-                j = Math.max(j, duration);
+                jMax = Math.max(jMax, duration);
             }
-            return j;
+            return jMax;
         }
 
         @Override // android.os.CombinedVibration
@@ -228,23 +227,23 @@ public abstract class CombinedVibration implements Parcelable {
 
         @Override // android.os.CombinedVibration
         public <ParamT> CombinedVibration transform(VibrationEffect.Transformation<ParamT> transformation, ParamT paramt) {
-            VibrationEffect transform = transformation.transform(this.mEffect, paramt);
-            return this.mEffect.equals(transform) ? this : CombinedVibration.createParallel(transform);
+            VibrationEffect vibrationEffectTransform = transformation.transform(this.mEffect, paramt);
+            return this.mEffect.equals(vibrationEffectTransform) ? this : CombinedVibration.createParallel(vibrationEffectTransform);
         }
 
         @Override // android.os.CombinedVibration
         public CombinedVibration adapt(VibratorAdapter vibratorAdapter) {
-            ParallelCombination startParallel = CombinedVibration.startParallel();
-            boolean z = true;
+            ParallelCombination parallelCombinationStartParallel = CombinedVibration.startParallel();
+            boolean zEquals = true;
             for (int i : vibratorAdapter.getAvailableVibratorIds()) {
-                VibrationEffect adaptToVibrator = vibratorAdapter.adaptToVibrator(i, this.mEffect);
-                if (adaptToVibrator == null) {
+                VibrationEffect vibrationEffectAdaptToVibrator = vibratorAdapter.adaptToVibrator(i, this.mEffect);
+                if (vibrationEffectAdaptToVibrator == null) {
                     return null;
                 }
-                startParallel.addVibrator(i, adaptToVibrator);
-                z &= this.mEffect.equals(adaptToVibrator);
+                parallelCombinationStartParallel.addVibrator(i, vibrationEffectAdaptToVibrator);
+                zEquals &= this.mEffect.equals(vibrationEffectAdaptToVibrator);
             }
-            return z ? this : startParallel.combine();
+            return zEquals ? this : parallelCombinationStartParallel.combine();
         }
 
         @Override // android.os.CombinedVibration
@@ -308,9 +307,9 @@ public abstract class CombinedVibration implements Parcelable {
         }
 
         Stereo(Parcel parcel) {
-            int readInt = parcel.readInt();
-            this.mEffects = new SparseArray<>(readInt);
-            for (int i = 0; i < readInt; i++) {
+            int i = parcel.readInt();
+            this.mEffects = new SparseArray<>(i);
+            for (int i2 = 0; i2 < i; i2++) {
                 this.mEffects.put(parcel.readInt(), VibrationEffect.CREATOR.createFromParcel(parcel));
             }
         }
@@ -336,9 +335,7 @@ public abstract class CombinedVibration implements Parcelable {
             return getDuration(new Function() { // from class: android.os.CombinedVibration$Stereo$$ExternalSyntheticLambda0
                 @Override // java.util.function.Function
                 public final Object apply(Object obj) {
-                    Long lambda$getDuration$0;
-                    lambda$getDuration$0 = CombinedVibration.Stereo.this.lambda$getDuration$0((Integer) obj);
-                    return lambda$getDuration$0;
+                    return this.f$0.lambda$getDuration$0((Integer) obj);
                 }
             });
         }
@@ -351,9 +348,7 @@ public abstract class CombinedVibration implements Parcelable {
             return getDuration(new Function() { // from class: android.os.CombinedVibration$Stereo$$ExternalSyntheticLambda1
                 @Override // java.util.function.Function
                 public final Object apply(Object obj) {
-                    Long lambda$getDuration$1;
-                    lambda$getDuration$1 = CombinedVibration.Stereo.this.lambda$getDuration$1(sparseArray, (Integer) obj);
-                    return lambda$getDuration$1;
+                    return this.f$0.lambda$getDuration$1(sparseArray, (Integer) obj);
                 }
             });
         }
@@ -364,20 +359,20 @@ public abstract class CombinedVibration implements Parcelable {
         }
 
         private long getDuration(Function<Integer, Long> function) {
-            long j = Long.MIN_VALUE;
+            long jMax = Long.MIN_VALUE;
             boolean z = false;
             for (int i = 0; i < this.mEffects.size(); i++) {
-                long longValue = function.apply(Integer.valueOf(i)).longValue();
-                if (longValue == Long.MAX_VALUE) {
-                    return longValue;
+                long jLongValue = function.apply(Integer.valueOf(i)).longValue();
+                if (jLongValue == Long.MAX_VALUE) {
+                    return jLongValue;
                 }
-                j = Math.max(j, longValue);
-                z |= longValue < 0;
+                jMax = Math.max(jMax, jLongValue);
+                z |= jLongValue < 0;
             }
             if (z) {
                 return -1L;
             }
-            return j;
+            return jMax;
         }
 
         @Override // android.os.CombinedVibration
@@ -400,33 +395,33 @@ public abstract class CombinedVibration implements Parcelable {
 
         @Override // android.os.CombinedVibration
         public <ParamT> CombinedVibration transform(VibrationEffect.Transformation<ParamT> transformation, ParamT paramt) {
-            ParallelCombination startParallel = CombinedVibration.startParallel();
-            boolean z = true;
+            ParallelCombination parallelCombinationStartParallel = CombinedVibration.startParallel();
+            boolean zEquals = true;
             for (int i = 0; i < this.mEffects.size(); i++) {
-                int keyAt = this.mEffects.keyAt(i);
-                VibrationEffect valueAt = this.mEffects.valueAt(i);
-                VibrationEffect transform = transformation.transform(valueAt, paramt);
-                startParallel.addVibrator(keyAt, transform);
-                z &= valueAt.equals(transform);
+                int iKeyAt = this.mEffects.keyAt(i);
+                VibrationEffect vibrationEffectValueAt = this.mEffects.valueAt(i);
+                VibrationEffect vibrationEffectTransform = transformation.transform(vibrationEffectValueAt, paramt);
+                parallelCombinationStartParallel.addVibrator(iKeyAt, vibrationEffectTransform);
+                zEquals &= vibrationEffectValueAt.equals(vibrationEffectTransform);
             }
-            return z ? this : startParallel.combine();
+            return zEquals ? this : parallelCombinationStartParallel.combine();
         }
 
         @Override // android.os.CombinedVibration
         public CombinedVibration adapt(VibratorAdapter vibratorAdapter) {
-            ParallelCombination startParallel = CombinedVibration.startParallel();
-            boolean z = true;
+            ParallelCombination parallelCombinationStartParallel = CombinedVibration.startParallel();
+            boolean zEquals = true;
             for (int i = 0; i < this.mEffects.size(); i++) {
-                int keyAt = this.mEffects.keyAt(i);
-                VibrationEffect valueAt = this.mEffects.valueAt(i);
-                VibrationEffect adaptToVibrator = vibratorAdapter.adaptToVibrator(keyAt, valueAt);
-                if (adaptToVibrator == null) {
+                int iKeyAt = this.mEffects.keyAt(i);
+                VibrationEffect vibrationEffectValueAt = this.mEffects.valueAt(i);
+                VibrationEffect vibrationEffectAdaptToVibrator = vibratorAdapter.adaptToVibrator(iKeyAt, vibrationEffectValueAt);
+                if (vibrationEffectAdaptToVibrator == null) {
                     return null;
                 }
-                startParallel.addVibrator(keyAt, adaptToVibrator);
-                z &= valueAt.equals(adaptToVibrator);
+                parallelCombinationStartParallel.addVibrator(iKeyAt, vibrationEffectAdaptToVibrator);
+                zEquals &= vibrationEffectValueAt.equals(vibrationEffectAdaptToVibrator);
             }
-            return z ? this : startParallel.combine();
+            return zEquals ? this : parallelCombinationStartParallel.combine();
         }
 
         @Override // android.os.CombinedVibration
@@ -519,10 +514,10 @@ public abstract class CombinedVibration implements Parcelable {
         }
 
         Sequential(Parcel parcel) {
-            int readInt = parcel.readInt();
-            this.mEffects = new ArrayList(readInt);
-            this.mDelays = new ArrayList(readInt);
-            for (int i = 0; i < readInt; i++) {
+            int i = parcel.readInt();
+            this.mEffects = new ArrayList(i);
+            this.mDelays = new ArrayList(i);
+            for (int i2 = 0; i2 < i; i2++) {
                 this.mDelays.add(Integer.valueOf(parcel.readInt()));
                 this.mEffects.add(CombinedVibration.CREATOR.createFromParcel(parcel));
             }
@@ -556,33 +551,31 @@ public abstract class CombinedVibration implements Parcelable {
             return getDuration(new Function() { // from class: android.os.CombinedVibration$Sequential$$ExternalSyntheticLambda1
                 @Override // java.util.function.Function
                 public final Object apply(Object obj) {
-                    Long valueOf;
-                    valueOf = Long.valueOf(((CombinedVibration) obj).getDuration(SparseArray.this));
-                    return valueOf;
+                    return Long.valueOf(((CombinedVibration) obj).getDuration(sparseArray));
                 }
             });
         }
 
         private long getDuration(Function<CombinedVibration, Long> function) {
             int size = this.mEffects.size();
-            long j = 0;
+            long jIntValue = 0;
             boolean z = false;
-            long j2 = 0;
+            long j = 0;
             for (int i = 0; i < size; i++) {
-                long longValue = function.apply(this.mEffects.get(i)).longValue();
-                if (longValue == Long.MAX_VALUE) {
-                    return longValue;
+                long jLongValue = function.apply(this.mEffects.get(i)).longValue();
+                if (jLongValue == Long.MAX_VALUE) {
+                    return jLongValue;
                 }
-                j2 += longValue;
-                z |= longValue < 0;
+                j += jLongValue;
+                z |= jLongValue < 0;
             }
             if (z) {
                 return -1L;
             }
             for (int i2 = 0; i2 < size; i2++) {
-                j += this.mDelays.get(i2).intValue();
+                jIntValue += this.mDelays.get(i2).intValue();
             }
-            return j2 + j;
+            return j + jIntValue;
         }
 
         @Override // android.os.CombinedVibration
@@ -620,28 +613,28 @@ public abstract class CombinedVibration implements Parcelable {
 
         @Override // android.os.CombinedVibration
         public <ParamT> CombinedVibration transform(VibrationEffect.Transformation<ParamT> transformation, ParamT paramt) {
-            SequentialCombination startSequential = CombinedVibration.startSequential();
-            boolean z = true;
+            SequentialCombination sequentialCombinationStartSequential = CombinedVibration.startSequential();
+            boolean zEquals = true;
             for (int i = 0; i < this.mEffects.size(); i++) {
                 CombinedVibration combinedVibration = this.mEffects.get(i);
-                CombinedVibration transform = combinedVibration.transform(transformation, paramt);
-                startSequential.addNext(transform, this.mDelays.get(i).intValue());
-                z &= combinedVibration.equals(transform);
+                CombinedVibration combinedVibrationTransform = combinedVibration.transform(transformation, paramt);
+                sequentialCombinationStartSequential.addNext(combinedVibrationTransform, this.mDelays.get(i).intValue());
+                zEquals &= combinedVibration.equals(combinedVibrationTransform);
             }
-            return z ? this : startSequential.combine();
+            return zEquals ? this : sequentialCombinationStartSequential.combine();
         }
 
         @Override // android.os.CombinedVibration
         public CombinedVibration adapt(VibratorAdapter vibratorAdapter) {
-            SequentialCombination startSequential = CombinedVibration.startSequential();
-            boolean z = true;
+            SequentialCombination sequentialCombinationStartSequential = CombinedVibration.startSequential();
+            boolean zEquals = true;
             for (int i = 0; i < this.mEffects.size(); i++) {
                 CombinedVibration combinedVibration = this.mEffects.get(i);
-                CombinedVibration adapt = combinedVibration.adapt(vibratorAdapter);
-                startSequential.addNext(adapt, this.mDelays.get(i).intValue());
-                z &= combinedVibration.equals(adapt);
+                CombinedVibration combinedVibrationAdapt = combinedVibration.adapt(vibratorAdapter);
+                sequentialCombinationStartSequential.addNext(combinedVibrationAdapt, this.mDelays.get(i).intValue());
+                zEquals &= combinedVibration.equals(combinedVibrationAdapt);
             }
-            return z ? this : startSequential.combine();
+            return zEquals ? this : sequentialCombinationStartSequential.combine();
         }
 
         @Override // android.os.CombinedVibration

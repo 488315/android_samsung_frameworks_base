@@ -22,7 +22,6 @@ import com.samsung.systemui.splugins.volume.VolumePanelAction;
 import com.samsung.systemui.splugins.volume.VolumePanelState;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class VolumePanelImpl implements VolumeObserver, ExtendableVolumePanel {
     public VolumeObserver actionObserver;
@@ -39,7 +38,6 @@ public final class VolumePanelImpl implements VolumeObserver, ExtendableVolumePa
     public final VolumeDependencyBase volDeps;
     public VolumePanelWindow window;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -49,7 +47,6 @@ public final class VolumePanelImpl implements VolumeObserver, ExtendableVolumePa
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -172,13 +169,13 @@ public final class VolumePanelImpl implements VolumeObserver, ExtendableVolumePa
         this.timeOutCallback = new Runnable() { // from class: com.android.systemui.volume.VolumePanelImpl$timeOutCallback$1
             @Override // java.lang.Runnable
             public final void run() {
-                VolumePanelImpl.this.dispatch(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_TIME_OUT).build(), false);
+                this.this$0.dispatch(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_TIME_OUT).build(), false);
             }
         };
         this.safetyVolumeCallback = new Runnable() { // from class: com.android.systemui.volume.VolumePanelImpl$safetyVolumeCallback$1
             @Override // java.lang.Runnable
             public final void run() {
-                VolumePanelImpl.this.dispatch(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_VOLUME_CSD_100_WARNING_DIALOG_TIMEOUT).build(), false);
+                this.this$0.dispatch(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_VOLUME_CSD_100_WARNING_DIALOG_TIMEOUT).build(), false);
             }
         };
     }
@@ -187,7 +184,7 @@ public final class VolumePanelImpl implements VolumeObserver, ExtendableVolumePa
         if (!z) {
             this.actionObserver.onChanged(volumePanelAction);
         } else {
-            this.handlerWrapper.post(new Runnable() { // from class: com.android.systemui.volume.VolumePanelImpl$dispatch$1
+            this.handlerWrapper.post(new Runnable() { // from class: com.android.systemui.volume.VolumePanelImpl.dispatch.1
                 @Override // java.lang.Runnable
                 public final void run() {
                     VolumePanelImpl.this.actionObserver.onChanged(volumePanelAction);

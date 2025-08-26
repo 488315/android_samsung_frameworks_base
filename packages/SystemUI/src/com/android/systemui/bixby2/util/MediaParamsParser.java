@@ -6,7 +6,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class MediaParamsParser {
     private static final String FOCUSED_APP = "focusedApp";
@@ -15,49 +14,53 @@ public class MediaParamsParser {
     private static final String TAG = "MediaParamsParser";
     private static final String TIME_INFO = "time";
 
+    /* JADX WARN: Removed duplicated region for block: B:31:0x009c  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public static MediaModeInfoBixby getMediaInfoFromJson(String str) {
-        boolean z;
-        boolean z2;
-        String str2 = "";
+        boolean zEquals;
+        boolean zEquals2;
+        String string = "";
         long j = -1;
         try {
             JSONArray jSONArray = new JSONArray(String.valueOf(str));
             int length = jSONArray.length();
-            z = false;
-            z2 = false;
+            zEquals = false;
+            zEquals2 = false;
             for (int i = 0; i < length; i++) {
                 try {
-                    JSONObject optJSONObject = jSONArray.optJSONObject(i);
-                    if (optJSONObject.has(MUSIC_ACTIVE)) {
-                        z = optJSONObject.get(MUSIC_ACTIVE).toString().equals("true");
-                    } else if (optJSONObject.has(MEDIA_ACTIVE)) {
-                        z2 = optJSONObject.get(MEDIA_ACTIVE).toString().equals("true");
-                    } else if (optJSONObject.has(FOCUSED_APP)) {
-                        str2 = optJSONObject.get(FOCUSED_APP).toString();
-                    } else if (optJSONObject.has(TIME_INFO)) {
-                        j = Long.parseLong(optJSONObject.get(TIME_INFO).toString()) * 1000;
+                    JSONObject jSONObjectOptJSONObject = jSONArray.optJSONObject(i);
+                    if (jSONObjectOptJSONObject.has(MUSIC_ACTIVE)) {
+                        zEquals = jSONObjectOptJSONObject.get(MUSIC_ACTIVE).toString().equals("true");
+                    } else if (jSONObjectOptJSONObject.has(MEDIA_ACTIVE)) {
+                        zEquals2 = jSONObjectOptJSONObject.get(MEDIA_ACTIVE).toString().equals("true");
+                    } else if (jSONObjectOptJSONObject.has(FOCUSED_APP)) {
+                        string = jSONObjectOptJSONObject.get(FOCUSED_APP).toString();
+                    } else if (jSONObjectOptJSONObject.has(TIME_INFO)) {
+                        j = Long.parseLong(jSONObjectOptJSONObject.get(TIME_INFO).toString()) * 1000;
                     }
                 } catch (JSONException e) {
                     e = e;
                     Log.e(TAG, "JSONException: " + e.toString());
                     MediaModeInfoBixby mediaModeInfoBixby = new MediaModeInfoBixby();
-                    mediaModeInfoBixby.isMediaActive = !z2 || z;
-                    mediaModeInfoBixby.focusedApp = str2;
+                    mediaModeInfoBixby.isMediaActive = !zEquals2 || zEquals;
+                    mediaModeInfoBixby.focusedApp = string;
                     mediaModeInfoBixby.time = j;
-                    EmergencyButtonController$$ExternalSyntheticOutline0.m("isMediaActive ", TAG, z2);
+                    EmergencyButtonController$$ExternalSyntheticOutline0.m("isMediaActive ", TAG, zEquals2);
                     return mediaModeInfoBixby;
                 }
             }
         } catch (JSONException e2) {
             e = e2;
-            z = false;
-            z2 = false;
+            zEquals = false;
+            zEquals2 = false;
         }
         MediaModeInfoBixby mediaModeInfoBixby2 = new MediaModeInfoBixby();
-        mediaModeInfoBixby2.isMediaActive = !z2 || z;
-        mediaModeInfoBixby2.focusedApp = str2;
+        mediaModeInfoBixby2.isMediaActive = !zEquals2 || zEquals;
+        mediaModeInfoBixby2.focusedApp = string;
         mediaModeInfoBixby2.time = j;
-        EmergencyButtonController$$ExternalSyntheticOutline0.m("isMediaActive ", TAG, z2);
+        EmergencyButtonController$$ExternalSyntheticOutline0.m("isMediaActive ", TAG, zEquals2);
         return mediaModeInfoBixby2;
     }
 }

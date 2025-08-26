@@ -12,7 +12,6 @@ import com.android.systemui.plugins.clocks.ClockLogger;
 import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class ClockSizeTransition$ClockFaceTransition$$ExternalSyntheticLambda0 implements Function1 {
     public final /* synthetic */ int $r8$classId;
@@ -23,7 +22,7 @@ public final /* synthetic */ class ClockSizeTransition$ClockFaceTransition$$Exte
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
         LogMessage logMessage = (LogMessage) obj;
         switch (this.$r8$classId) {
             case 0:
@@ -46,9 +45,9 @@ public final /* synthetic */ class ClockSizeTransition$ClockFaceTransition$$Exte
                 String visText2 = companion.getVisText(logMessage.getInt2());
                 String str2 = logMessage.getStr2();
                 String str3 = logMessage.getStr3();
-                StringBuilder m = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("Skipping no-op transition: ", str1, "; vis: ", visText, " -> ");
-                MoveResult$$ExternalSyntheticOutline0.m(m, visText2, "; alpha: ", str2, "; bounds: ");
-                return TransitionKt$$ExternalSyntheticOutline0.m(m, str3, "; ");
+                StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("Skipping no-op transition: ", str1, "; vis: ", visText, " -> ");
+                MoveResult$$ExternalSyntheticOutline0.m(sbM, visText2, "; alpha: ", str2, "; bounds: ");
+                return TransitionKt$$ExternalSyntheticOutline0.m(sbM, str3, "; ");
             case 5:
                 String[] strArr4 = ClockSizeTransition.VisibilityBoundsTransition.TRANSITION_PROPERTIES;
                 String str12 = logMessage.getStr1();
@@ -57,9 +56,9 @@ public final /* synthetic */ class ClockSizeTransition$ClockFaceTransition$$Exte
                 String visText4 = companion2.getVisText(logMessage.getInt2());
                 String str22 = logMessage.getStr2();
                 String str32 = logMessage.getStr3();
-                StringBuilder m2 = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("transitioning: ", str12, "; vis: ", visText3, " -> ");
-                MoveResult$$ExternalSyntheticOutline0.m(m2, visText4, "; alpha: ", str22, "; bounds: ");
-                return TransitionKt$$ExternalSyntheticOutline0.m(m2, str32, ";");
+                StringBuilder sbM2 = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("transitioning: ", str12, "; vis: ", visText3, " -> ");
+                MoveResult$$ExternalSyntheticOutline0.m(sbM2, visText4, "; alpha: ", str22, "; bounds: ");
+                return TransitionKt$$ExternalSyntheticOutline0.m(sbM2, str32, ";");
             default:
                 String[] strArr5 = ClockSizeTransition.VisibilityBoundsTransition.TRANSITION_PROPERTIES;
                 String str13 = logMessage.getStr1();

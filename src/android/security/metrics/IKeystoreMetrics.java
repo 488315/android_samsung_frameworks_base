@@ -45,9 +45,9 @@ public interface IKeystoreMetrics extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IKeystoreMetrics.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IKeystoreMetrics)) {
-                return (IKeystoreMetrics) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IKeystoreMetrics.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IKeystoreMetrics)) {
+                return (IKeystoreMetrics) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,11 +74,11 @@ public interface IKeystoreMetrics extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                KeystoreAtom[] pullMetrics = pullMetrics(readInt);
+                KeystoreAtom[] keystoreAtomArrPullMetrics = pullMetrics(i3);
                 parcel2.writeNoException();
-                parcel2.writeTypedArray(pullMetrics, 1);
+                parcel2.writeTypedArray(keystoreAtomArrPullMetrics, 1);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -102,17 +102,17 @@ public interface IKeystoreMetrics extends IInterface {
 
             @Override // android.security.metrics.IKeystoreMetrics
             public KeystoreAtom[] pullMetrics(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKeystoreMetrics.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (KeystoreAtom[]) obtain2.createTypedArray(KeystoreAtom.CREATOR);
+                    parcelObtain.writeInterfaceToken(IKeystoreMetrics.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (KeystoreAtom[]) parcelObtain2.createTypedArray(KeystoreAtom.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

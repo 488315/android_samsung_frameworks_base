@@ -125,14 +125,14 @@ public class WallpaperColorOverrideAreas {
         }
         for (String str2 : str.split(";")) {
             if (!TextUtils.isEmpty(str2)) {
-                String[] split = str2.split("-");
-                if (split.length == 2 && !TextUtils.isEmpty(split[0]) && !TextUtils.isEmpty(split[1])) {
-                    String[] split2 = split[1].split(":");
-                    if (split2.length == 4) {
+                String[] strArrSplit = str2.split("-");
+                if (strArrSplit.length == 2 && !TextUtils.isEmpty(strArrSplit[0]) && !TextUtils.isEmpty(strArrSplit[1])) {
+                    String[] strArrSplit2 = strArrSplit[1].split(":");
+                    if (strArrSplit2.length == 4) {
                         try {
-                            this.mAreaMap.put(split[0], new RectF(Float.parseFloat(split2[0]), Float.parseFloat(split2[1]), Float.parseFloat(split2[2]), Float.parseFloat(split2[3])));
+                            this.mAreaMap.put(strArrSplit[0], new RectF(Float.parseFloat(strArrSplit2[0]), Float.parseFloat(strArrSplit2[1]), Float.parseFloat(strArrSplit2[2]), Float.parseFloat(strArrSplit2[3])));
                         } catch (RuntimeException unused) {
-                            Log.e(TAG, "Cannot parsing area rect : " + split[1]);
+                            Log.e(TAG, "Cannot parsing area rect : " + strArrSplit[1]);
                         }
                     }
                 }
@@ -148,13 +148,13 @@ public class WallpaperColorOverrideAreas {
         Settings.System.putString(this.mContext.getContentResolver(), this.mSettingsKey, toString());
     }
 
-    private void fill(HashMap<String, RectF> hashMap) {
-        if (hashMap == null) {
+    private void fill(HashMap<String, RectF> map) {
+        if (map == null) {
             return;
         }
         for (Map.Entry<String, RectF> entry : this.mAreaMap.entrySet()) {
             if (entry != null) {
-                hashMap.put(entry.getKey(), new RectF(entry.getValue()));
+                map.put(entry.getKey(), new RectF(entry.getValue()));
             }
         }
     }

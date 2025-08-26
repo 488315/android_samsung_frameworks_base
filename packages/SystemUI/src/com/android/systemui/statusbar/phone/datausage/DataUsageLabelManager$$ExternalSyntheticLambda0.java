@@ -5,7 +5,6 @@ import androidx.appcompat.widget.ListPopupWindow$$ExternalSyntheticOutline0;
 import com.android.keyguard.StrongAuthPopup$$ExternalSyntheticOutline0;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class DataUsageLabelManager$$ExternalSyntheticLambda0 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -30,15 +29,15 @@ public final /* synthetic */ class DataUsageLabelManager$$ExternalSyntheticLambd
                 boolean z = DataUsageLabelManager.DEBUG;
                 dataUsageLabelManager.getClass();
                 ViewGroup.LayoutParams layoutParams = viewGroup.getLayoutParams();
-                int i = dataUsageLabelManager.mInsetNavigationBarBottomHeight;
+                int iM = dataUsageLabelManager.mInsetNavigationBarBottomHeight;
                 DataUsageLabelView dataUsageLabelView = dataUsageLabelManager.mLabelView;
                 if (dataUsageLabelView != null) {
-                    i = StrongAuthPopup$$ExternalSyntheticOutline0.m(dataUsageLabelView.mViewContext, R.dimen.notification_panel_carrier_label_height, i);
+                    iM = StrongAuthPopup$$ExternalSyntheticOutline0.m(dataUsageLabelView.mViewContext, R.dimen.notification_panel_carrier_label_height, iM);
                 }
-                if (layoutParams.height != i) {
-                    layoutParams.height = i;
+                if (layoutParams.height != iM) {
+                    layoutParams.height = iM;
                     if (DataUsageLabelManager.DEBUG) {
-                        ListPopupWindow$$ExternalSyntheticOutline0.m(i, "updateLayoutParamHeight() newHeight:", "DataUsageLabelManager");
+                        ListPopupWindow$$ExternalSyntheticOutline0.m(iM, "updateLayoutParamHeight() newHeight:", "DataUsageLabelManager");
                     }
                     viewGroup.setLayoutParams(layoutParams);
                     break;

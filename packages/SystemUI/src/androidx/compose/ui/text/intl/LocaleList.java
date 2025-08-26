@@ -1,5 +1,6 @@
 package androidx.compose.ui.text.intl;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -10,8 +11,8 @@ import kotlin.jvm.internal.CollectionToArray;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.markers.KMappedMarker;
+import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class LocaleList implements Collection<Locale>, KMappedMarker {
     public static final Companion Companion = new Companion(null);
@@ -19,7 +20,6 @@ public final class LocaleList implements Collection<Locale>, KMappedMarker {
     public final List localeList;
     public final int size;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -124,54 +124,19 @@ public final class LocaleList implements Collection<Locale>, KMappedMarker {
         return CollectionToArray.toArray(this, objArr);
     }
 
-    /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public LocaleList(java.lang.String r6) {
-        /*
-            r5 = this;
-            java.lang.String r0 = ","
-            java.lang.String[] r0 = new java.lang.String[]{r0}
-            r1 = 0
-            r2 = 6
-            java.util.List r6 = kotlin.text.StringsKt__StringsKt.split$default(r6, r0, r1, r2)
-            java.util.ArrayList r0 = new java.util.ArrayList
-            int r2 = r6.size()
-            r0.<init>(r2)
-            r2 = r6
-            java.util.Collection r2 = (java.util.Collection) r2
-            int r2 = r2.size()
-            r3 = r1
-        L1d:
-            if (r3 >= r2) goto L33
-            java.lang.Object r4 = r6.get(r3)
-            java.lang.String r4 = (java.lang.String) r4
-            java.lang.CharSequence r4 = kotlin.text.StringsKt__StringsKt.trim(r4)
-            java.lang.String r4 = r4.toString()
-            r0.add(r4)
-            int r3 = r3 + 1
-            goto L1d
-        L33:
-            java.util.ArrayList r6 = new java.util.ArrayList
-            int r2 = r0.size()
-            r6.<init>(r2)
-            int r2 = r0.size()
-        L40:
-            if (r1 >= r2) goto L53
-            java.lang.Object r3 = r0.get(r1)
-            java.lang.String r3 = (java.lang.String) r3
-            androidx.compose.ui.text.intl.Locale r4 = new androidx.compose.ui.text.intl.Locale
-            r4.<init>(r3)
-            r6.add(r4)
-            int r1 = r1 + 1
-            goto L40
-        L53:
-            r5.<init>(r6)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.text.intl.LocaleList.<init>(java.lang.String):void");
+    public LocaleList(String str) {
+        List listSplit$default = StringsKt__StringsKt.split$default(str, new String[]{","}, 0, 6);
+        ArrayList arrayList = new ArrayList(listSplit$default.size());
+        int size = listSplit$default.size();
+        for (int i = 0; i < size; i++) {
+            arrayList.add(StringsKt__StringsKt.trim((String) listSplit$default.get(i)).toString());
+        }
+        ArrayList arrayList2 = new ArrayList(arrayList.size());
+        int size2 = arrayList.size();
+        for (int i2 = 0; i2 < size2; i2++) {
+            arrayList2.add(new Locale((String) arrayList.get(i2)));
+        }
+        this(arrayList2);
     }
 
     public LocaleList(Locale... localeArr) {

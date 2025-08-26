@@ -15,7 +15,6 @@ import com.android.compose.animation.scene.MutableSceneTransitionLayoutStateImpl
 import com.android.compose.animation.scene.SceneTransitionLayoutImpl;
 import com.android.compose.gesture.NestedScrollControlState;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ContentScopeImpl implements ContentScope {
     public final /* synthetic */ ElementStateScopeImpl $$delegate_0;

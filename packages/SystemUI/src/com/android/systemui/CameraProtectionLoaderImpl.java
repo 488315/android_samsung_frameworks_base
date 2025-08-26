@@ -10,12 +10,10 @@ import java.util.List;
 import kotlin.math.MathKt__MathJVMKt;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class CameraProtectionLoaderImpl implements CameraProtectionLoader {
     public final Context context;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         CameraProtectionLoaderImpl create(Context context);
     }
@@ -31,11 +29,11 @@ public final class CameraProtectionLoaderImpl implements CameraProtectionLoader 
         }
         String string2 = this.context.getString(i2);
         try {
-            Path createPathFromPathData = PathParser.createPathFromPathData(StringsKt__StringsKt.trim(this.context.getString(i3)).toString());
-            createPathFromPathData.getClass();
+            Path pathCreatePathFromPathData = PathParser.createPathFromPathData(StringsKt__StringsKt.trim(this.context.getString(i3)).toString());
+            pathCreatePathFromPathData.getClass();
             RectF rectF = new RectF();
-            createPathFromPathData.computeBounds(rectF);
-            return new CameraProtectionInfo(string, string2, createPathFromPathData, new Rect(MathKt__MathJVMKt.roundToInt(rectF.left), MathKt__MathJVMKt.roundToInt(rectF.top), MathKt__MathJVMKt.roundToInt(rectF.right), MathKt__MathJVMKt.roundToInt(rectF.bottom)), this.context.getString(i4));
+            pathCreatePathFromPathData.computeBounds(rectF);
+            return new CameraProtectionInfo(string, string2, pathCreatePathFromPathData, new Rect(MathKt__MathJVMKt.roundToInt(rectF.left), MathKt__MathJVMKt.roundToInt(rectF.top), MathKt__MathJVMKt.roundToInt(rectF.right), MathKt__MathJVMKt.roundToInt(rectF.bottom)), this.context.getString(i4));
         } catch (Throwable th) {
             throw new IllegalArgumentException("Invalid protection path", th);
         }
@@ -43,13 +41,13 @@ public final class CameraProtectionLoaderImpl implements CameraProtectionLoader 
 
     public final List loadCameraProtectionInfoList() {
         ArrayList arrayList = new ArrayList();
-        CameraProtectionInfo loadCameraProtectionInfo = loadCameraProtectionInfo(R.string.config_protectedCameraId, R.string.config_protectedPhysicalCameraId, R.string.config_frontBuiltInDisplayCutoutProtection, R.string.config_protectedScreenUniqueId);
-        if (loadCameraProtectionInfo != null) {
-            arrayList.add(loadCameraProtectionInfo);
+        CameraProtectionInfo cameraProtectionInfoLoadCameraProtectionInfo = loadCameraProtectionInfo(R.string.config_protectedCameraId, R.string.config_protectedPhysicalCameraId, R.string.config_frontBuiltInDisplayCutoutProtection, R.string.config_protectedScreenUniqueId);
+        if (cameraProtectionInfoLoadCameraProtectionInfo != null) {
+            arrayList.add(cameraProtectionInfoLoadCameraProtectionInfo);
         }
-        CameraProtectionInfo loadCameraProtectionInfo2 = loadCameraProtectionInfo(R.string.config_protectedInnerCameraId, R.string.config_protectedInnerPhysicalCameraId, R.string.config_innerBuiltInDisplayCutoutProtection, R.string.config_protectedInnerScreenUniqueId);
-        if (loadCameraProtectionInfo2 != null) {
-            arrayList.add(loadCameraProtectionInfo2);
+        CameraProtectionInfo cameraProtectionInfoLoadCameraProtectionInfo2 = loadCameraProtectionInfo(R.string.config_protectedInnerCameraId, R.string.config_protectedInnerPhysicalCameraId, R.string.config_innerBuiltInDisplayCutoutProtection, R.string.config_protectedInnerScreenUniqueId);
+        if (cameraProtectionInfoLoadCameraProtectionInfo2 != null) {
+            arrayList.add(cameraProtectionInfoLoadCameraProtectionInfo2);
         }
         return arrayList;
     }

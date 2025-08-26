@@ -157,33 +157,33 @@ public class LazyStringArrayList extends AbstractProtobufList<String> implements
         if (collection instanceof LazyStringList) {
             collection = ((LazyStringList) collection).getUnderlyingElements();
         }
-        boolean addAll = this.list.addAll(i, collection);
+        boolean zAddAll = this.list.addAll(i, collection);
         this.modCount++;
-        return addAll;
+        return zAddAll;
     }
 
     @Override // com.android.framework.protobuf.LazyStringList
     public boolean addAllByteString(Collection<? extends ByteString> collection) {
         ensureIsMutable();
-        boolean addAll = this.list.addAll(collection);
+        boolean zAddAll = this.list.addAll(collection);
         this.modCount++;
-        return addAll;
+        return zAddAll;
     }
 
     @Override // com.android.framework.protobuf.LazyStringList
     public boolean addAllByteArray(Collection<byte[]> collection) {
         ensureIsMutable();
-        boolean addAll = this.list.addAll(collection);
+        boolean zAddAll = this.list.addAll(collection);
         this.modCount++;
-        return addAll;
+        return zAddAll;
     }
 
     @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractList, java.util.List
     public String remove(int i) {
         ensureIsMutable();
-        Object remove = this.list.remove(i);
+        Object objRemove = this.list.remove(i);
         this.modCount++;
-        return asString(remove);
+        return asString(objRemove);
     }
 
     @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractList, java.util.AbstractCollection, java.util.Collection, java.util.List
@@ -215,22 +215,22 @@ public class LazyStringArrayList extends AbstractProtobufList<String> implements
     @Override // com.android.framework.protobuf.LazyStringList
     public ByteString getByteString(int i) {
         Object obj = this.list.get(i);
-        ByteString asByteString = asByteString(obj);
-        if (asByteString != obj) {
-            this.list.set(i, asByteString);
+        ByteString byteStringAsByteString = asByteString(obj);
+        if (byteStringAsByteString != obj) {
+            this.list.set(i, byteStringAsByteString);
         }
-        return asByteString;
+        return byteStringAsByteString;
     }
 
     /* JADX WARN: Multi-variable type inference failed */
     @Override // com.android.framework.protobuf.LazyStringList
     public byte[] getByteArray(int i) {
         Object obj = this.list.get(i);
-        byte[] asByteArray = asByteArray(obj);
-        if (asByteArray != obj) {
-            this.list.set(i, asByteArray);
+        byte[] bArrAsByteArray = asByteArray(obj);
+        if (bArrAsByteArray != obj) {
+            this.list.set(i, bArrAsByteArray);
         }
-        return asByteArray;
+        return bArrAsByteArray;
     }
 
     @Override // com.android.framework.protobuf.LazyStringList
@@ -337,9 +337,9 @@ public class LazyStringArrayList extends AbstractProtobufList<String> implements
 
         @Override // java.util.AbstractList, java.util.List
         public byte[] remove(int i) {
-            String remove = this.list.remove(i);
+            String strRemove = this.list.remove(i);
             this.modCount++;
-            return LazyStringArrayList.asByteArray(remove);
+            return LazyStringArrayList.asByteArray(strRemove);
         }
     }
 
@@ -380,9 +380,9 @@ public class LazyStringArrayList extends AbstractProtobufList<String> implements
 
         @Override // java.util.AbstractList, java.util.List
         public ByteString remove(int i) {
-            String remove = this.list.remove(i);
+            String strRemove = this.list.remove(i);
             this.modCount++;
-            return LazyStringArrayList.asByteString(remove);
+            return LazyStringArrayList.asByteString(strRemove);
         }
     }
 

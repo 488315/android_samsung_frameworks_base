@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final /* synthetic */ class FalsingDataProvider$$ExternalSyntheticLambda0 implements Consumer {
     public final /* synthetic */ int $r8$classId;
@@ -40,10 +39,10 @@ public final /* synthetic */ class FalsingDataProvider$$ExternalSyntheticLambda0
                     historyTracker.addResults(Collections.singleton(FalsingClassifier.Result.falsed(brightLineFalsingManager.mSingleTapClassifier.isTap(falsingDataProvider.getRecentMotionEvents(), 0.0d).mFalsed ? 0.7d : 0.8d, anonymousClass3.getClass().getSimpleName(), "unclassified")), eventTime);
                     break;
                 } else {
-                    boolean anyMatch = collection.stream().anyMatch(new BrightLineFalsingManager$3$$ExternalSyntheticLambda0());
+                    boolean zAnyMatch = collection.stream().anyMatch(new BrightLineFalsingManager$3$$ExternalSyntheticLambda0());
                     brightLineFalsingManager.mPriorResults.forEach(new BrightLineFalsingManager$$ExternalSyntheticLambda0(4));
                     if (Build.IS_ENG || Build.IS_USERDEBUG) {
-                        ((ArrayDeque) BrightLineFalsingManager.RECENT_SWIPES).add(new BrightLineFalsingManager.DebugSwipeRecord(anyMatch, brightLineFalsingManager.mPriorInteractionType, (List) falsingDataProvider.getRecentMotionEvents().stream().map(new BrightLineFalsingManager$3$$ExternalSyntheticLambda2()).collect(Collectors.toList())));
+                        ((ArrayDeque) BrightLineFalsingManager.RECENT_SWIPES).add(new BrightLineFalsingManager.DebugSwipeRecord(zAnyMatch, brightLineFalsingManager.mPriorInteractionType, (List) falsingDataProvider.getRecentMotionEvents().stream().map(new BrightLineFalsingManager$3$$ExternalSyntheticLambda2()).collect(Collectors.toList())));
                         while (true) {
                             ArrayDeque arrayDeque = (ArrayDeque) BrightLineFalsingManager.RECENT_SWIPES;
                             if (arrayDeque.size() > 40) {

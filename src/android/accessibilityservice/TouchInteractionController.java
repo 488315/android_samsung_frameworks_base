@@ -1,6 +1,5 @@
 package android.accessibilityservice;
 
-import android.accessibilityservice.TouchInteractionController;
 import android.os.RemoteException;
 import android.util.ArrayMap;
 import android.view.MotionEvent;
@@ -104,7 +103,7 @@ public final class TouchInteractionController {
                 executor.execute(new Runnable() { // from class: android.accessibilityservice.TouchInteractionController$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        TouchInteractionController.Callback.this.onMotionEvent(motionEvent);
+                        callback.onMotionEvent(motionEvent);
                     }
                 });
             } else {
@@ -127,7 +126,7 @@ public final class TouchInteractionController {
                 executor.execute(new Runnable() { // from class: android.accessibilityservice.TouchInteractionController$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        TouchInteractionController.Callback.this.onStateChanged(i);
+                        callback.onStateChanged(i);
                     }
                 });
             } else {

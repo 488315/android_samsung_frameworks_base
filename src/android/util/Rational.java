@@ -37,9 +37,9 @@ public final class Rational extends Number implements Comparable<Rational> {
             this.mNumerator = 0;
             this.mDenominator = 1;
         } else {
-            int gcd = gcd(i, i2);
-            this.mNumerator = i / gcd;
-            this.mDenominator = i2 / gcd;
+            int iGcd = gcd(i, i2);
+            this.mNumerator = i / iGcd;
+            this.mDenominator = i2 / iGcd;
         }
     }
 
@@ -188,7 +188,7 @@ public final class Rational extends Number implements Comparable<Rational> {
         return j > j2 ? 1 : 0;
     }
 
-    private void readObject(ObjectInputStream objectInputStream) throws IOException, ClassNotFoundException {
+    private void readObject(ObjectInputStream objectInputStream) throws ClassNotFoundException, IOException {
         objectInputStream.defaultReadObject();
         int i = this.mNumerator;
         if (i == 0) {
@@ -223,15 +223,15 @@ public final class Rational extends Number implements Comparable<Rational> {
         if (str.equals("-Infinity")) {
             return NEGATIVE_INFINITY;
         }
-        int indexOf = str.indexOf(58);
-        if (indexOf < 0) {
-            indexOf = str.indexOf(47);
+        int iIndexOf = str.indexOf(58);
+        if (iIndexOf < 0) {
+            iIndexOf = str.indexOf(47);
         }
-        if (indexOf < 0) {
+        if (iIndexOf < 0) {
             throw invalidRational(str);
         }
         try {
-            return new Rational(Integer.parseInt(str.substring(0, indexOf)), Integer.parseInt(str.substring(indexOf + 1)));
+            return new Rational(Integer.parseInt(str.substring(0, iIndexOf)), Integer.parseInt(str.substring(iIndexOf + 1)));
         } catch (NumberFormatException unused) {
             throw invalidRational(str);
         }

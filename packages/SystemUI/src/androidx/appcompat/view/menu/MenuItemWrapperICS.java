@@ -17,13 +17,11 @@ import androidx.core.internal.view.SupportMenuItem;
 import androidx.core.view.ActionProvider;
 import java.lang.reflect.Method;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class MenuItemWrapperICS extends BaseMenuWrapper implements MenuItem {
     public Method mSetExclusiveCheckableMethod;
     public final SupportMenuItem mWrappedObject;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ActionProviderWrapper extends ActionProvider implements ActionProvider.VisibilityListener {
         public final android.view.ActionProvider mInner;
         public MenuItemImpl.AnonymousClass1 mListener;
@@ -87,7 +85,6 @@ public class MenuItemWrapperICS extends BaseMenuWrapper implements MenuItem {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CollapsibleActionViewWrapper extends FrameLayout implements CollapsibleActionView {
         public final android.view.CollapsibleActionView mWrappedView;
 
@@ -109,7 +106,6 @@ public class MenuItemWrapperICS extends BaseMenuWrapper implements MenuItem {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class OnActionExpandListenerWrapper implements MenuItem.OnActionExpandListener {
         public final MenuItem.OnActionExpandListener mObject;
 
@@ -128,7 +124,6 @@ public class MenuItemWrapperICS extends BaseMenuWrapper implements MenuItem {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class OnMenuItemClickListenerWrapper implements MenuItem.OnMenuItemClickListener {
         public final MenuItem.OnMenuItemClickListener mObject;
 

@@ -11,7 +11,6 @@ import com.android.wm.shell.common.HandlerExecutor;
 import com.samsung.android.rune.CoreRune;
 import dagger.internal.Provider;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class WMShellConcurrencyModule_ProvideSplashScreenExecutorFactory implements Provider {
     public static HandlerExecutor provideSplashScreenExecutor() {
@@ -22,18 +21,18 @@ public final class WMShellConcurrencyModule_ProvideSplashScreenExecutorFactory i
                 public final /* synthetic */ HandlerThread val$shellSplashscreenThread;
 
                 public AnonymousClass3(HandlerThread handlerThread2) {
-                    r1 = handlerThread2;
+                    handlerThread = handlerThread2;
                 }
 
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ICustomFrequencyManager asInterface;
+                    ICustomFrequencyManager iCustomFrequencyManagerAsInterface;
                     IBinder service = ServiceManager.getService("CustomFrequencyManagerService");
-                    if (service == null || (asInterface = ICustomFrequencyManager.Stub.asInterface(service)) == null) {
+                    if (service == null || (iCustomFrequencyManagerAsInterface = ICustomFrequencyManager.Stub.asInterface(service)) == null) {
                         return;
                     }
                     try {
-                        asInterface.sendTid(Process.myPid(), r1.getThreadId(), 4);
+                        iCustomFrequencyManagerAsInterface.sendTid(Process.myPid(), handlerThread.getThreadId(), 4);
                     } catch (RemoteException e) {
                         e.printStackTrace();
                     }

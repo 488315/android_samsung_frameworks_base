@@ -2,7 +2,9 @@ package android.app;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import com.android.internal.R;
 import java.io.FileDescriptor;
@@ -48,17 +50,17 @@ public class DialogFragment extends Fragment implements DialogInterface.OnCancel
     public void show(FragmentManager fragmentManager, String str) {
         this.mDismissed = false;
         this.mShownByMe = true;
-        FragmentTransaction beginTransaction = fragmentManager.beginTransaction();
-        beginTransaction.add(this, str);
-        beginTransaction.commit();
+        FragmentTransaction fragmentTransactionBeginTransaction = fragmentManager.beginTransaction();
+        fragmentTransactionBeginTransaction.add(this, str);
+        fragmentTransactionBeginTransaction.commit();
     }
 
     public void showAllowingStateLoss(FragmentManager fragmentManager, String str) {
         this.mDismissed = false;
         this.mShownByMe = true;
-        FragmentTransaction beginTransaction = fragmentManager.beginTransaction();
-        beginTransaction.add(this, str);
-        beginTransaction.commitAllowingStateLoss();
+        FragmentTransaction fragmentTransactionBeginTransaction = fragmentManager.beginTransaction();
+        fragmentTransactionBeginTransaction.add(this, str);
+        fragmentTransactionBeginTransaction.commitAllowingStateLoss();
     }
 
     public int show(FragmentTransaction fragmentTransaction, String str) {
@@ -66,9 +68,9 @@ public class DialogFragment extends Fragment implements DialogInterface.OnCancel
         this.mShownByMe = true;
         fragmentTransaction.add(this, str);
         this.mViewDestroyed = false;
-        int commit = fragmentTransaction.commit();
-        this.mBackStackId = commit;
-        return commit;
+        int iCommit = fragmentTransaction.commit();
+        this.mBackStackId = iCommit;
+        return iCommit;
     }
 
     public void dismiss() {
@@ -96,12 +98,12 @@ public class DialogFragment extends Fragment implements DialogInterface.OnCancel
             this.mBackStackId = -1;
             return;
         }
-        FragmentTransaction beginTransaction = getFragmentManager().beginTransaction();
-        beginTransaction.remove(this);
+        FragmentTransaction fragmentTransactionBeginTransaction = getFragmentManager().beginTransaction();
+        fragmentTransactionBeginTransaction.remove(this);
         if (z) {
-            beginTransaction.commitAllowingStateLoss();
+            fragmentTransactionBeginTransaction.commitAllowingStateLoss();
         } else {
-            beginTransaction.commit();
+            fragmentTransactionBeginTransaction.commit();
         }
     }
 
@@ -152,7 +154,7 @@ public class DialogFragment extends Fragment implements DialogInterface.OnCancel
     }
 
     @Override // android.app.Fragment
-    public void onCreate(Bundle bundle) {
+    public void onCreate(Bundle bundle) throws Resources.NotFoundException {
         super.onCreate(bundle);
         this.mShowsDialog = this.mContainerId == 0;
         if (bundle != null) {
@@ -164,54 +166,25 @@ public class DialogFragment extends Fragment implements DialogInterface.OnCancel
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x003a  */
     @Override // android.app.Fragment
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public android.view.LayoutInflater onGetLayoutInflater(android.os.Bundle r4) {
-        /*
-            r3 = this;
-            boolean r0 = r3.mShowsDialog
-            if (r0 != 0) goto L9
-            android.view.LayoutInflater r3 = super.onGetLayoutInflater(r4)
-            return r3
-        L9:
-            android.app.Dialog r4 = r3.onCreateDialog(r4)
-            r3.mDialog = r4
-            int r0 = r3.mStyle
-            r1 = 1
-            if (r0 == r1) goto L24
-            r2 = 2
-            if (r0 == r2) goto L24
-            r2 = 3
-            if (r0 == r2) goto L1b
-            goto L29
-        L1b:
-            android.view.Window r4 = r4.getWindow()
-            r0 = 24
-            r4.addFlags(r0)
-        L24:
-            android.app.Dialog r4 = r3.mDialog
-            r4.requestWindowFeature(r1)
-        L29:
-            android.app.Dialog r4 = r3.mDialog
-            java.lang.String r0 = "layout_inflater"
-            if (r4 == 0) goto L3a
-            android.content.Context r3 = r4.getContext()
-            java.lang.Object r3 = r3.getSystemService(r0)
-            android.view.LayoutInflater r3 = (android.view.LayoutInflater) r3
-            return r3
-        L3a:
-            android.app.FragmentHostCallback r3 = r3.mHost
-            android.content.Context r3 = r3.getContext()
-            java.lang.Object r3 = r3.getSystemService(r0)
-            android.view.LayoutInflater r3 = (android.view.LayoutInflater) r3
-            return r3
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.app.DialogFragment.onGetLayoutInflater(android.os.Bundle):android.view.LayoutInflater");
+    public LayoutInflater onGetLayoutInflater(Bundle bundle) {
+        if (!this.mShowsDialog) {
+            return super.onGetLayoutInflater(bundle);
+        }
+        Dialog dialogOnCreateDialog = onCreateDialog(bundle);
+        this.mDialog = dialogOnCreateDialog;
+        int i = this.mStyle;
+        if (i == 1 || i == 2) {
+            this.mDialog.requestWindowFeature(1);
+        } else if (i == 3) {
+            dialogOnCreateDialog.getWindow().addFlags(24);
+            this.mDialog.requestWindowFeature(1);
+        }
+        Dialog dialog = this.mDialog;
+        if (dialog != null) {
+            return (LayoutInflater) dialog.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        }
+        return (LayoutInflater) this.mHost.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     public Dialog onCreateDialog(Bundle bundle) {
@@ -265,11 +238,11 @@ public class DialogFragment extends Fragment implements DialogInterface.OnCancel
 
     @Override // android.app.Fragment
     public void onSaveInstanceState(Bundle bundle) {
-        Bundle onSaveInstanceState;
+        Bundle bundleOnSaveInstanceState;
         super.onSaveInstanceState(bundle);
         Dialog dialog = this.mDialog;
-        if (dialog != null && (onSaveInstanceState = dialog.onSaveInstanceState()) != null) {
-            bundle.putBundle(SAVED_DIALOG_STATE_TAG, onSaveInstanceState);
+        if (dialog != null && (bundleOnSaveInstanceState = dialog.onSaveInstanceState()) != null) {
+            bundle.putBundle(SAVED_DIALOG_STATE_TAG, bundleOnSaveInstanceState);
         }
         int i = this.mStyle;
         if (i != 0) {

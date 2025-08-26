@@ -35,7 +35,6 @@ import com.samsung.android.knox.ucm.plugin.agent.UcmAgentService;
 import com.samsung.android.knox.zt.config.securelog.SignalSeverity;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardUCMViewController extends KeyguardSecPinBasedInputViewController {
     public static final Object syncObj = new Object();
@@ -63,7 +62,6 @@ public class KeyguardUCMViewController extends KeyguardSecPinBasedInputViewContr
     public ProgressDialog mUnlockProgressDialog;
     public final String mVendorName;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.keyguard.KeyguardUCMViewController$1, reason: invalid class name */
     public class AnonymousClass1 extends CheckUcmPin {
         public AnonymousClass1(String str) {
@@ -76,7 +74,6 @@ public class KeyguardUCMViewController extends KeyguardSecPinBasedInputViewContr
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.keyguard.KeyguardUCMViewController$2, reason: invalid class name */
     public class AnonymousClass2 extends CheckUcmPuk {
         public AnonymousClass2(String str, String str2) {
@@ -89,7 +86,6 @@ public class KeyguardUCMViewController extends KeyguardSecPinBasedInputViewContr
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class CheckUcmPin extends Thread {
         public static final /* synthetic */ int $r8$clinit = 0;
         public final String mPin;
@@ -104,18 +100,18 @@ public class KeyguardUCMViewController extends KeyguardSecPinBasedInputViewContr
         @Override // java.lang.Thread, java.lang.Runnable
         public final void run() {
             try {
-                int[] m967$$Nest$mverifyPIN = KeyguardUCMViewController.m967$$Nest$mverifyPIN(KeyguardUCMViewController.this, this.mPin);
-                int i = m967$$Nest$mverifyPIN[0];
+                int[] iArrM969$$Nest$mverifyPIN = KeyguardUCMViewController.m969$$Nest$mverifyPIN(KeyguardUCMViewController.this, this.mPin);
+                int i = iArrM969$$Nest$mverifyPIN[0];
                 KeyguardUCMViewController keyguardUCMViewController = KeyguardUCMViewController.this;
                 if (!keyguardUCMViewController.mUnlockOngoing) {
                     Log.d("KeyguardUCMPinView", "In race condition, stop unlock operation");
                     KeyguardUCMViewController.this.mCheckUcmPinThread = null;
                     return;
                 }
-                Bundle m962$$Nest$mgeneratePassword = KeyguardUCMViewController.m962$$Nest$mgeneratePassword(keyguardUCMViewController, i);
+                Bundle bundleM964$$Nest$mgeneratePassword = KeyguardUCMViewController.m964$$Nest$mgeneratePassword(keyguardUCMViewController, i);
                 KeyguardUCMViewController keyguardUCMViewController2 = KeyguardUCMViewController.this;
                 if (keyguardUCMViewController2.mUnlockOngoing) {
-                    ((KeyguardUCMView) ((ViewController) keyguardUCMViewController2).mView).post(new KeyguardUCMViewController$CheckUcmPin$$ExternalSyntheticLambda0(this, m967$$Nest$mverifyPIN, m962$$Nest$mgeneratePassword));
+                    ((KeyguardUCMView) ((ViewController) keyguardUCMViewController2).mView).post(new KeyguardUCMViewController$CheckUcmPin$$ExternalSyntheticLambda0(this, iArrM969$$Nest$mverifyPIN, bundleM964$$Nest$mgeneratePassword));
                 } else {
                     Log.d("KeyguardUCMPinView", "In race condition, stop unlock operation");
                     KeyguardUCMViewController.this.mCheckUcmPinThread = null;
@@ -127,7 +123,6 @@ public class KeyguardUCMViewController extends KeyguardSecPinBasedInputViewContr
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class CheckUcmPuk extends Thread {
         public static final /* synthetic */ int $r8$clinit = 0;
         public final String mPin;
@@ -143,18 +138,18 @@ public class KeyguardUCMViewController extends KeyguardSecPinBasedInputViewContr
         @Override // java.lang.Thread, java.lang.Runnable
         public final void run() {
             try {
-                int[] m968$$Nest$mverifyPUK = KeyguardUCMViewController.m968$$Nest$mverifyPUK(KeyguardUCMViewController.this, this.mPuk, this.mPin);
-                int i = m968$$Nest$mverifyPUK[0];
+                int[] iArrM970$$Nest$mverifyPUK = KeyguardUCMViewController.m970$$Nest$mverifyPUK(KeyguardUCMViewController.this, this.mPuk, this.mPin);
+                int i = iArrM970$$Nest$mverifyPUK[0];
                 KeyguardUCMViewController keyguardUCMViewController = KeyguardUCMViewController.this;
                 if (!keyguardUCMViewController.mUnlockOngoing) {
                     Log.d("KeyguardUCMPinView", "In race condition, stop unlock operation");
                     KeyguardUCMViewController.this.mCheckUcmPukThread = null;
                     return;
                 }
-                Bundle m962$$Nest$mgeneratePassword = KeyguardUCMViewController.m962$$Nest$mgeneratePassword(keyguardUCMViewController, i);
+                Bundle bundleM964$$Nest$mgeneratePassword = KeyguardUCMViewController.m964$$Nest$mgeneratePassword(keyguardUCMViewController, i);
                 KeyguardUCMViewController keyguardUCMViewController2 = KeyguardUCMViewController.this;
                 if (keyguardUCMViewController2.mUnlockOngoing) {
-                    ((KeyguardUCMView) ((ViewController) keyguardUCMViewController2).mView).post(new KeyguardUCMViewController$CheckUcmPin$$ExternalSyntheticLambda0(this, m968$$Nest$mverifyPUK, m962$$Nest$mgeneratePassword));
+                    ((KeyguardUCMView) ((ViewController) keyguardUCMViewController2).mView).post(new KeyguardUCMViewController$CheckUcmPin$$ExternalSyntheticLambda0(this, iArrM970$$Nest$mverifyPUK, bundleM964$$Nest$mgeneratePassword));
                 } else {
                     Log.d("KeyguardUCMPinView", "In race condition, stop unlock operation");
                     KeyguardUCMViewController.this.mCheckUcmPukThread = null;
@@ -166,7 +161,6 @@ public class KeyguardUCMViewController extends KeyguardSecPinBasedInputViewContr
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class StateMachine {
         public int mRound;
         public int mState;
@@ -177,7 +171,7 @@ public class KeyguardUCMViewController extends KeyguardSecPinBasedInputViewContr
 
         public final String getDetailErrorMessage(int i) {
             ListPopupWindow$$ExternalSyntheticOutline0.m(i, "getDetailErrorMessage errorCode : ", "KeyguardUCMPinView");
-            String str = "";
+            String detailErrorMessage = "";
             KeyguardUCMViewController keyguardUCMViewController = KeyguardUCMViewController.this;
             if (i == 0) {
                 return keyguardUCMViewController.getContext().getString(R.string.kg_ucm_unknown_error_occurred);
@@ -185,19 +179,19 @@ public class KeyguardUCMViewController extends KeyguardSecPinBasedInputViewContr
             try {
                 keyguardUCMViewController.getClass();
                 IUcmService uCMService = KeyguardUCMViewController.getUCMService();
-                if (uCMService != null && (str = uCMService.getDetailErrorMessage(keyguardUCMViewController.getCSUri(), i)) == null) {
-                    str = KeyguardUCMViewController.m963$$Nest$mgetErrorMessage(keyguardUCMViewController, i);
+                if (uCMService != null && (detailErrorMessage = uCMService.getDetailErrorMessage(keyguardUCMViewController.getCSUri(), i)) == null) {
+                    detailErrorMessage = KeyguardUCMViewController.m965$$Nest$mgetErrorMessage(keyguardUCMViewController, i);
                 }
             } catch (Exception e) {
                 KeyguardUCMViewController$StateMachine$$ExternalSyntheticOutline0.m(e, new StringBuilder("exception in getDetailErrorMessage : "), "KeyguardUCMPinView");
             }
-            return str == null ? KeyguardUCMViewController.m963$$Nest$mgetErrorMessage(keyguardUCMViewController, i) : str;
+            return detailErrorMessage == null ? KeyguardUCMViewController.m965$$Nest$mgetErrorMessage(keyguardUCMViewController, i) : detailErrorMessage;
         }
 
         public final void setStateAndRefreshUIIfNeeded(int i, int i2, boolean z, Bundle bundle) {
             SuggestionsAdapter$$ExternalSyntheticOutline0.m(i, i2, "StateMachine.setStateAndRefreshUIIfNeeded called : ", " Error : ", "KeyguardUCMPinView");
             final KeyguardUCMViewController keyguardUCMViewController = KeyguardUCMViewController.this;
-            String m963$$Nest$mgetErrorMessage = KeyguardUCMViewController.m963$$Nest$mgetErrorMessage(keyguardUCMViewController, i2);
+            String strM965$$Nest$mgetErrorMessage = KeyguardUCMViewController.m965$$Nest$mgetErrorMessage(keyguardUCMViewController, i2);
             this.mState = i;
             if (i == -1) {
                 Log.d("KeyguardUCMPinView", "setStateAndRefreshUIIfNeeded called : STATE_UNKNOWN");
@@ -214,7 +208,7 @@ public class KeyguardUCMViewController extends KeyguardSecPinBasedInputViewContr
                         keyguardUCMViewController.mUCMMiscTagValue.setVisibility(8);
                         this.mRound = 0;
                         if (i2 != 0) {
-                            keyguardUCMViewController.setMessageSecurityMessageDisplay(m963$$Nest$mgetErrorMessage);
+                            keyguardUCMViewController.setMessageSecurityMessageDisplay(strM965$$Nest$mgetErrorMessage);
                             break;
                         } else if (bundle != null) {
                             byte[] byteArray = bundle.getByteArray(UcmAgentService.PLUGIN_BYTEARRAY_RESPONSE);
@@ -227,7 +221,7 @@ public class KeyguardUCMViewController extends KeyguardSecPinBasedInputViewContr
                                 }
                                 keyguardUCMViewController.mPendingLockCheck = LockPatternChecker.checkCredential(keyguardUCMViewController.mLockPatternUtils, LockscreenCredential.createSmartcardPassword(byteArray), selectedUserId, new LockPatternChecker.OnCheckCallback() { // from class: com.android.keyguard.KeyguardUCMViewController$$ExternalSyntheticLambda0
                                     public final void onChecked(boolean z2, int i4) {
-                                        KeyguardUCMViewController keyguardUCMViewController2 = KeyguardUCMViewController.this;
+                                        KeyguardUCMViewController keyguardUCMViewController2 = keyguardUCMViewController;
                                         int i5 = selectedUserId;
                                         keyguardUCMViewController2.mPendingLockCheck = null;
                                         keyguardUCMViewController2.onPasswordChecked(i5, i4, z2, true);
@@ -245,14 +239,13 @@ public class KeyguardUCMViewController extends KeyguardSecPinBasedInputViewContr
                         }
                     } else {
                         if (i2 == 0) {
-                            StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(keyguardUCMViewController.getContext().getString(R.string.kg_none_pin_none_instructions), "\n");
-                            m.append(KeyguardUCMViewController.m964$$Nest$mgetRemainingCount(keyguardUCMViewController, keyguardUCMViewController.mRemainingAttempts));
-                            m963$$Nest$mgetErrorMessage = m.toString();
+                            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(keyguardUCMViewController.getContext().getString(R.string.kg_none_pin_none_instructions), "\n");
+                            sbM.append(KeyguardUCMViewController.m966$$Nest$mgetRemainingCount(keyguardUCMViewController, keyguardUCMViewController.mRemainingAttempts));
+                            strM965$$Nest$mgetErrorMessage = sbM.toString();
                         }
-                        keyguardUCMViewController.setMessageSecurityMessageDisplay(m963$$Nest$mgetErrorMessage);
+                        keyguardUCMViewController.setMessageSecurityMessageDisplay(strM965$$Nest$mgetErrorMessage);
                         break;
                     }
-                    break;
                 case 132:
                     Log.d("KeyguardUCMPinView", "setStateAndRefreshUIIfNeeded called : STATE_LOCKED");
                     String str = keyguardUCMViewController.mChildSafeMsg;
@@ -260,17 +253,17 @@ public class KeyguardUCMViewController extends KeyguardSecPinBasedInputViewContr
                         if (keyguardUCMViewController.mIsSupportBiometricForUCM) {
                             keyguardUCMViewController.mLockPatternUtils.requireStrongAuth(2, selectedUserInteractor.getSelectedUserId());
                         }
-                        m963$$Nest$mgetErrorMessage = keyguardUCMViewController.mChildSafeMsg;
+                        strM965$$Nest$mgetErrorMessage = keyguardUCMViewController.mChildSafeMsg;
                     } else if (i2 == 32) {
-                        StringBuilder m2 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(keyguardUCMViewController.getContext().getString(R.string.kg_wrong_pin), "\n");
-                        m2.append(KeyguardUCMViewController.m964$$Nest$mgetRemainingCount(keyguardUCMViewController, keyguardUCMViewController.mRemainingAttempts));
-                        m963$$Nest$mgetErrorMessage = m2.toString();
+                        StringBuilder sbM2 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(keyguardUCMViewController.getContext().getString(R.string.kg_wrong_pin), "\n");
+                        sbM2.append(KeyguardUCMViewController.m966$$Nest$mgetRemainingCount(keyguardUCMViewController, keyguardUCMViewController.mRemainingAttempts));
+                        strM965$$Nest$mgetErrorMessage = sbM2.toString();
                     } else if (i2 == 0) {
-                        StringBuilder m3 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(keyguardUCMViewController.getContext().getString(R.string.kg_none_pin_none_instructions), "\n");
-                        m3.append(KeyguardUCMViewController.m964$$Nest$mgetRemainingCount(keyguardUCMViewController, keyguardUCMViewController.mRemainingAttempts));
-                        m963$$Nest$mgetErrorMessage = m3.toString();
+                        StringBuilder sbM3 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(keyguardUCMViewController.getContext().getString(R.string.kg_none_pin_none_instructions), "\n");
+                        sbM3.append(KeyguardUCMViewController.m966$$Nest$mgetRemainingCount(keyguardUCMViewController, keyguardUCMViewController.mRemainingAttempts));
+                        strM965$$Nest$mgetErrorMessage = sbM3.toString();
                     }
-                    keyguardUCMViewController.setMessageSecurityMessageDisplay(m963$$Nest$mgetErrorMessage);
+                    keyguardUCMViewController.setMessageSecurityMessageDisplay(strM965$$Nest$mgetErrorMessage);
                     keyguardUCMViewController.mUCMMiscTagValue.setVisibility(8);
                     this.mRound = 0;
                     break;
@@ -281,23 +274,23 @@ public class KeyguardUCMViewController extends KeyguardSecPinBasedInputViewContr
                     }
                     if (keyguardUCMViewController.mPukSupported) {
                         if (i2 == 33 && keyguardUCMViewController.mRemainingAttempts <= 0) {
-                            m963$$Nest$mgetErrorMessage = keyguardUCMViewController.getContext().getString(R.string.kg_ucm_puk_limit_exceeded);
+                            strM965$$Nest$mgetErrorMessage = keyguardUCMViewController.getContext().getString(R.string.kg_ucm_puk_limit_exceeded);
                         } else if (i2 == 33) {
-                            StringBuilder m4 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(keyguardUCMViewController.getContext().getString(R.string.kg_ucm_password_wrong_puk_code), "\n");
-                            m4.append(KeyguardUCMViewController.m964$$Nest$mgetRemainingCount(keyguardUCMViewController, keyguardUCMViewController.mRemainingAttempts));
-                            m963$$Nest$mgetErrorMessage = m4.toString();
+                            StringBuilder sbM4 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(keyguardUCMViewController.getContext().getString(R.string.kg_ucm_password_wrong_puk_code), "\n");
+                            sbM4.append(KeyguardUCMViewController.m966$$Nest$mgetRemainingCount(keyguardUCMViewController, keyguardUCMViewController.mRemainingAttempts));
+                            strM965$$Nest$mgetErrorMessage = sbM4.toString();
                         } else if (i2 == 0) {
-                            StringBuilder m5 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(keyguardUCMViewController.getContext().getString(R.string.kg_puk_locked_message), "\n");
-                            m5.append(KeyguardUCMViewController.m964$$Nest$mgetRemainingCount(keyguardUCMViewController, keyguardUCMViewController.mRemainingAttempts));
-                            m963$$Nest$mgetErrorMessage = m5.toString();
+                            StringBuilder sbM5 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(keyguardUCMViewController.getContext().getString(R.string.kg_puk_locked_message), "\n");
+                            sbM5.append(KeyguardUCMViewController.m966$$Nest$mgetRemainingCount(keyguardUCMViewController, keyguardUCMViewController.mRemainingAttempts));
+                            strM965$$Nest$mgetErrorMessage = sbM5.toString();
                         } else if (i2 == 32) {
-                            StringBuilder m6 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(keyguardUCMViewController.getContext().getString(R.string.kg_puk_locked_message), "\n");
-                            m6.append(KeyguardUCMViewController.m964$$Nest$mgetRemainingCount(keyguardUCMViewController, keyguardUCMViewController.mRemainingAttempts));
-                            m963$$Nest$mgetErrorMessage = m6.toString();
+                            StringBuilder sbM6 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(keyguardUCMViewController.getContext().getString(R.string.kg_puk_locked_message), "\n");
+                            sbM6.append(KeyguardUCMViewController.m966$$Nest$mgetRemainingCount(keyguardUCMViewController, keyguardUCMViewController.mRemainingAttempts));
+                            strM965$$Nest$mgetErrorMessage = sbM6.toString();
                         }
                         this.mRound = 1;
                     } else {
-                        m963$$Nest$mgetErrorMessage = keyguardUCMViewController.getContext().getString(R.string.lockscreen_smartcard_expired);
+                        strM965$$Nest$mgetErrorMessage = keyguardUCMViewController.getContext().getString(R.string.lockscreen_smartcard_expired);
                         Log.d("KeyguardUCMPinView", "pinExpireMessage");
                         this.mRound = 5;
                     }
@@ -306,7 +299,7 @@ public class KeyguardUCMViewController extends KeyguardSecPinBasedInputViewContr
                         keyguardUCMViewController.mUCMMiscTagValue.setVisibility(0);
                         keyguardUCMViewController.mUCMMiscTagValue.setText(keyguardUCMViewController.mMISCInfo);
                     }
-                    keyguardUCMViewController.setMessageSecurityMessageDisplay(m963$$Nest$mgetErrorMessage);
+                    keyguardUCMViewController.setMessageSecurityMessageDisplay(strM965$$Nest$mgetErrorMessage);
                     break;
                 default:
                     Log.d("KeyguardUCMPinView", "unknown status nothing to do");
@@ -320,7 +313,6 @@ public class KeyguardUCMViewController extends KeyguardSecPinBasedInputViewContr
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class UCMAsyncTask extends AsyncTask {
         public final int opCode = 1;
 
@@ -328,7 +320,7 @@ public class KeyguardUCMViewController extends KeyguardSecPinBasedInputViewContr
         }
 
         @Override // android.os.AsyncTask
-        public final Object doInBackground(Object[] objArr) {
+        public final Object doInBackground(Object[] objArr) throws InterruptedException {
             String cSUri;
             Bundle status;
             if (this.opCode == 1) {
@@ -417,17 +409,17 @@ public class KeyguardUCMViewController extends KeyguardSecPinBasedInputViewContr
         public final void onPostExecute(Object obj) {
             KeyguardUCMViewController keyguardUCMViewController = KeyguardUCMViewController.this;
             keyguardUCMViewController.mStateMachine.setStateAndRefreshUIIfNeeded(keyguardUCMViewController.mStatus, keyguardUCMViewController.mError, true, null);
-            KeyguardUCMViewController.m966$$Nest$mstopProgress(KeyguardUCMViewController.this);
+            KeyguardUCMViewController.m968$$Nest$mstopProgress(KeyguardUCMViewController.this);
         }
 
         @Override // android.os.AsyncTask
         public final void onPreExecute() {
-            KeyguardUCMViewController.m965$$Nest$mstartProgress(KeyguardUCMViewController.this, 1 == this.opCode);
+            KeyguardUCMViewController.m967$$Nest$mstartProgress(KeyguardUCMViewController.this, 1 == this.opCode);
         }
     }
 
     /* renamed from: -$$Nest$mgeneratePassword, reason: not valid java name */
-    public static Bundle m962$$Nest$mgeneratePassword(KeyguardUCMViewController keyguardUCMViewController, int i) {
+    public static Bundle m964$$Nest$mgeneratePassword(KeyguardUCMViewController keyguardUCMViewController, int i) {
         keyguardUCMViewController.getClass();
         Log.d("KeyguardUCMPinView", "generatePassword called");
         if (i != 131) {
@@ -448,7 +440,7 @@ public class KeyguardUCMViewController extends KeyguardSecPinBasedInputViewContr
     }
 
     /* renamed from: -$$Nest$mgetErrorMessage, reason: not valid java name */
-    public static String m963$$Nest$mgetErrorMessage(KeyguardUCMViewController keyguardUCMViewController, int i) {
+    public static String m965$$Nest$mgetErrorMessage(KeyguardUCMViewController keyguardUCMViewController, int i) {
         keyguardUCMViewController.getClass();
         String str = "\n(" + String.format("0x%08X", Integer.valueOf(i)) + ")";
         switch (i) {
@@ -552,8 +544,8 @@ public class KeyguardUCMViewController extends KeyguardSecPinBasedInputViewContr
                                                                         if (134217728 >= i || 134283264 <= i) {
                                                                             return keyguardUCMViewController.getResources().getString(R.string.kg_ucm_unknown_error) + str;
                                                                         }
-                                                                        String format = String.format("0x%08X", Integer.valueOf(i));
-                                                                        return keyguardUCMViewController.getResources().getString(R.string.kg_ucm_smartcard_error) + "\n(" + format.substring(format.length() - 4, format.length()) + ")";
+                                                                        String str2 = String.format("0x%08X", Integer.valueOf(i));
+                                                                        return keyguardUCMViewController.getResources().getString(R.string.kg_ucm_smartcard_error) + "\n(" + str2.substring(str2.length() - 4, str2.length()) + ")";
                                                                 }
                                                         }
                                                 }
@@ -567,18 +559,18 @@ public class KeyguardUCMViewController extends KeyguardSecPinBasedInputViewContr
     }
 
     /* renamed from: -$$Nest$mgetRemainingCount, reason: not valid java name */
-    public static String m964$$Nest$mgetRemainingCount(KeyguardUCMViewController keyguardUCMViewController, int i) {
+    public static String m966$$Nest$mgetRemainingCount(KeyguardUCMViewController keyguardUCMViewController, int i) {
         return keyguardUCMViewController.getResources().getQuantityString(R.plurals.kg_ucm_attempt_left, i, Integer.valueOf(i));
     }
 
     /* renamed from: -$$Nest$mstartProgress, reason: not valid java name */
-    public static void m965$$Nest$mstartProgress(KeyguardUCMViewController keyguardUCMViewController, boolean z) {
+    public static void m967$$Nest$mstartProgress(KeyguardUCMViewController keyguardUCMViewController, boolean z) {
         keyguardUCMViewController.getUnlockProgressDialog(z).show();
         ((KeyguardUCMView) keyguardUCMViewController.mView).setKeepScreenOn(true);
     }
 
     /* renamed from: -$$Nest$mstopProgress, reason: not valid java name */
-    public static void m966$$Nest$mstopProgress(KeyguardUCMViewController keyguardUCMViewController) {
+    public static void m968$$Nest$mstopProgress(KeyguardUCMViewController keyguardUCMViewController) {
         ProgressDialog progressDialog = keyguardUCMViewController.mUnlockProgressDialog;
         if (progressDialog != null) {
             progressDialog.cancel();
@@ -588,7 +580,7 @@ public class KeyguardUCMViewController extends KeyguardSecPinBasedInputViewContr
     }
 
     /* renamed from: -$$Nest$mverifyPIN, reason: not valid java name */
-    public static int[] m967$$Nest$mverifyPIN(KeyguardUCMViewController keyguardUCMViewController, String str) {
+    public static int[] m969$$Nest$mverifyPIN(KeyguardUCMViewController keyguardUCMViewController, String str) {
         keyguardUCMViewController.getClass();
         Log.d("KeyguardUCMPinView", "verifyPIN called");
         int[] iArr = {-1, -1, -1};
@@ -598,12 +590,12 @@ public class KeyguardUCMViewController extends KeyguardSecPinBasedInputViewContr
             return iArr;
         }
         try {
-            Bundle verifyPin = uCMService.verifyPin(0, keyguardUCMViewController.getCSUri(), str, null);
-            keyguardUCMViewController.mChildSafeMsg = verifyPin.getString(UcmAgentService.LOCKSCREEN_MESSAGE, "");
-            keyguardUCMViewController.mStatus = verifyPin.getInt("state", -1);
-            keyguardUCMViewController.mRemainingAttempts = verifyPin.getInt("remainCnt", -1);
-            keyguardUCMViewController.mMISCInfo = verifyPin.getString(UcmAgentService.MISC_INFO, "");
-            int i = verifyPin.getInt(UcmAgentService.PLUGIN_ERROR_CODE, -1);
+            Bundle bundleVerifyPin = uCMService.verifyPin(0, keyguardUCMViewController.getCSUri(), str, null);
+            keyguardUCMViewController.mChildSafeMsg = bundleVerifyPin.getString(UcmAgentService.LOCKSCREEN_MESSAGE, "");
+            keyguardUCMViewController.mStatus = bundleVerifyPin.getInt("state", -1);
+            keyguardUCMViewController.mRemainingAttempts = bundleVerifyPin.getInt("remainCnt", -1);
+            keyguardUCMViewController.mMISCInfo = bundleVerifyPin.getString(UcmAgentService.MISC_INFO, "");
+            int i = bundleVerifyPin.getInt(UcmAgentService.PLUGIN_ERROR_CODE, -1);
             Log.d("KeyguardUCMPinView", "state : " + keyguardUCMViewController.mStatus);
             Log.d("KeyguardUCMPinView", "remainCnt : " + keyguardUCMViewController.mRemainingAttempts);
             Log.d("KeyguardUCMPinView", "errorCode : " + i);
@@ -622,131 +614,70 @@ public class KeyguardUCMViewController extends KeyguardSecPinBasedInputViewContr
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:4:0x002f, code lost:
-    
-        if (r10.trim().length() > 0) goto L9;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:8:0x0032  */
     /* renamed from: -$$Nest$mverifyPUK, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static int[] m968$$Nest$mverifyPUK(com.android.keyguard.KeyguardUCMViewController r13, java.lang.String r14, java.lang.String r15) {
-        /*
-            r13.getClass()
-            java.lang.String r0 = "errorCode : "
-            java.lang.String r1 = "remainCnt : "
-            java.lang.String r2 = "state : "
-            java.lang.String r3 = "verifyPUK called"
-            java.lang.String r4 = "KeyguardUCMPinView"
-            android.util.Log.d(r4, r3)
-            r3 = 3
-            int[] r3 = new int[r3]
-            r5 = 0
-            r6 = -1
-            r3[r5] = r6
-            r7 = 1
-            r3[r7] = r6
-            r8 = 2
-            r3[r8] = r6
-            r9 = 0
-            if (r14 != 0) goto L23
-            goto L32
-        L23:
-            java.lang.String r10 = r14.trim()
-            java.lang.String r11 = r10.trim()
-            int r11 = r11.length()
-            if (r11 <= 0) goto L32
-            goto L33
-        L32:
-            r10 = r9
-        L33:
-            if (r15 != 0) goto L36
-            goto L45
-        L36:
-            java.lang.String r11 = r15.trim()
-            java.lang.String r12 = r11.trim()
-            int r12 = r12.length()
-            if (r12 <= 0) goto L45
-            r9 = r11
-        L45:
-            if (r10 == 0) goto Ld5
-            if (r9 != 0) goto L4b
-            goto Ld5
-        L4b:
-            com.samsung.android.knox.ucm.core.IUcmService r9 = getUCMService()
-            if (r9 != 0) goto L59
-            java.lang.String r13 = "failed to get UCM service"
-            android.util.Log.d(r4, r13)
-            r3[r5] = r6
-            return r3
-        L59:
-            java.lang.String r10 = r13.getCSUri()     // Catch: android.os.RemoteException -> Lb9
-            android.os.Bundle r14 = r9.verifyPuk(r10, r14, r15)     // Catch: android.os.RemoteException -> Lb9
-            java.lang.String r15 = "state"
-            int r15 = r14.getInt(r15, r6)     // Catch: android.os.RemoteException -> Lb9
-            r13.mStatus = r15     // Catch: android.os.RemoteException -> Lb9
-            java.lang.String r15 = "remainCnt"
-            int r15 = r14.getInt(r15, r6)     // Catch: android.os.RemoteException -> Lb9
-            r13.mRemainingAttempts = r15     // Catch: android.os.RemoteException -> Lb9
-            java.lang.String r15 = "errorresponse"
-            int r14 = r14.getInt(r15, r6)     // Catch: android.os.RemoteException -> Lb9
-            java.lang.StringBuilder r15 = new java.lang.StringBuilder     // Catch: android.os.RemoteException -> Lb9
-            r15.<init>(r2)     // Catch: android.os.RemoteException -> Lb9
-            int r2 = r13.mStatus     // Catch: android.os.RemoteException -> Lb9
-            r15.append(r2)     // Catch: android.os.RemoteException -> Lb9
-            java.lang.String r15 = r15.toString()     // Catch: android.os.RemoteException -> Lb9
-            android.util.Log.d(r4, r15)     // Catch: android.os.RemoteException -> Lb9
-            java.lang.StringBuilder r15 = new java.lang.StringBuilder     // Catch: android.os.RemoteException -> Lb9
-            r15.<init>(r1)     // Catch: android.os.RemoteException -> Lb9
-            int r1 = r13.mRemainingAttempts     // Catch: android.os.RemoteException -> Lb9
-            r15.append(r1)     // Catch: android.os.RemoteException -> Lb9
-            java.lang.String r15 = r15.toString()     // Catch: android.os.RemoteException -> Lb9
-            android.util.Log.d(r4, r15)     // Catch: android.os.RemoteException -> Lb9
-            java.lang.StringBuilder r15 = new java.lang.StringBuilder     // Catch: android.os.RemoteException -> Lb9
-            r15.<init>(r0)     // Catch: android.os.RemoteException -> Lb9
-            r15.append(r14)     // Catch: android.os.RemoteException -> Lb9
-            java.lang.String r15 = r15.toString()     // Catch: android.os.RemoteException -> Lb9
-            android.util.Log.d(r4, r15)     // Catch: android.os.RemoteException -> Lb9
-            int r15 = r13.mStatus     // Catch: android.os.RemoteException -> Lb9
-            r0 = 131(0x83, float:1.84E-43)
-            if (r15 == r0) goto Lc1
-            r0 = 132(0x84, float:1.85E-43)
-            if (r15 == r0) goto Lbb
-            java.lang.String r15 = "PUK verification failed : BLOCKED"
-            android.util.Log.d(r4, r15)     // Catch: android.os.RemoteException -> Lb9
-            goto Lc6
-        Lb9:
-            r13 = move-exception
-            goto Ld1
-        Lbb:
-            java.lang.String r15 = "PUK verification succeed : LOCKED"
-            android.util.Log.d(r4, r15)     // Catch: android.os.RemoteException -> Lb9
-            goto Lc6
-        Lc1:
-            java.lang.String r15 = "PUK verification succeed : UNLOCKED"
-            android.util.Log.d(r4, r15)     // Catch: android.os.RemoteException -> Lb9
-        Lc6:
-            int r15 = r13.mStatus     // Catch: android.os.RemoteException -> Lb9
-            r3[r5] = r15     // Catch: android.os.RemoteException -> Lb9
-            int r13 = r13.mRemainingAttempts     // Catch: android.os.RemoteException -> Lb9
-            r3[r7] = r13     // Catch: android.os.RemoteException -> Lb9
-            r3[r8] = r14     // Catch: android.os.RemoteException -> Lb9
-            return r3
-        Ld1:
-            r13.printStackTrace()
-            return r3
-        Ld5:
-            r3[r5] = r6
-            return r3
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.keyguard.KeyguardUCMViewController.m968$$Nest$mverifyPUK(com.android.keyguard.KeyguardUCMViewController, java.lang.String, java.lang.String):int[]");
+    public static int[] m970$$Nest$mverifyPUK(KeyguardUCMViewController keyguardUCMViewController, String str, String str2) {
+        String strTrim;
+        keyguardUCMViewController.getClass();
+        Log.d("KeyguardUCMPinView", "verifyPUK called");
+        int[] iArr = {-1, -1, -1};
+        String str3 = null;
+        if (str == null) {
+            strTrim = null;
+        } else {
+            strTrim = str.trim();
+            if (strTrim.trim().length() <= 0) {
+            }
+        }
+        if (str2 != null) {
+            String strTrim2 = str2.trim();
+            if (strTrim2.trim().length() > 0) {
+                str3 = strTrim2;
+            }
+        }
+        if (strTrim == null || str3 == null) {
+            iArr[0] = -1;
+            return iArr;
+        }
+        IUcmService uCMService = getUCMService();
+        if (uCMService == null) {
+            Log.d("KeyguardUCMPinView", "failed to get UCM service");
+            iArr[0] = -1;
+            return iArr;
+        }
+        try {
+            Bundle bundleVerifyPuk = uCMService.verifyPuk(keyguardUCMViewController.getCSUri(), str, str2);
+            keyguardUCMViewController.mStatus = bundleVerifyPuk.getInt("state", -1);
+            keyguardUCMViewController.mRemainingAttempts = bundleVerifyPuk.getInt("remainCnt", -1);
+            int i = bundleVerifyPuk.getInt(UcmAgentService.PLUGIN_ERROR_CODE, -1);
+            Log.d("KeyguardUCMPinView", "state : " + keyguardUCMViewController.mStatus);
+            Log.d("KeyguardUCMPinView", "remainCnt : " + keyguardUCMViewController.mRemainingAttempts);
+            Log.d("KeyguardUCMPinView", "errorCode : " + i);
+            int i2 = keyguardUCMViewController.mStatus;
+            if (i2 == 131) {
+                Log.d("KeyguardUCMPinView", "PUK verification succeed : UNLOCKED");
+            } else if (i2 != 132) {
+                Log.d("KeyguardUCMPinView", "PUK verification failed : BLOCKED");
+            } else {
+                Log.d("KeyguardUCMPinView", "PUK verification succeed : LOCKED");
+            }
+            iArr[0] = keyguardUCMViewController.mStatus;
+            iArr[1] = keyguardUCMViewController.mRemainingAttempts;
+            iArr[2] = i;
+            return iArr;
+        } catch (RemoteException e) {
+            e.printStackTrace();
+            return iArr;
+        }
     }
 
     public KeyguardUCMViewController(KeyguardUCMView keyguardUCMView, KeyguardUpdateMonitor keyguardUpdateMonitor, KeyguardSecurityModel.SecurityMode securityMode, LockPatternUtils lockPatternUtils, KeyguardSecurityCallback keyguardSecurityCallback, KeyguardMessageAreaController.Factory factory, LatencyTracker latencyTracker, EmergencyButtonController emergencyButtonController, FalsingCollector falsingCollector, FeatureFlags featureFlags, VibrationUtil vibrationUtil, AccessibilityManager accessibilityManager, ConfigurationController configurationController, SelectedUserInteractor selectedUserInteractor, KeyguardKeyboardInteractor keyguardKeyboardInteractor, BouncerHapticPlayer bouncerHapticPlayer, UserActivityNotifier userActivityNotifier, InputManager inputManager) {
+        String keyguardStorageForCurrentUser;
         super(keyguardUCMView, configurationController, vibrationUtil, accessibilityManager, keyguardUpdateMonitor, securityMode, lockPatternUtils, keyguardSecurityCallback, factory, latencyTracker, emergencyButtonController, falsingCollector, featureFlags, selectedUserInteractor, keyguardKeyboardInteractor, bouncerHapticPlayer, userActivityNotifier, inputManager);
-        String str;
-        String str2 = null;
+        String str = null;
         this.mUnlockProgressDialog = null;
         this.mAgentID = null;
         this.mPukSupported = false;
@@ -767,34 +698,34 @@ public class KeyguardUCMViewController extends KeyguardSecPinBasedInputViewContr
             Log.d("KeyguardUCMPinView", "failed to get UCM service");
         } else {
             try {
-                str = uCMService.getKeyguardStorageForCurrentUser(this.mSelectedUserInteractor.getSelectedUserId());
+                keyguardStorageForCurrentUser = uCMService.getKeyguardStorageForCurrentUser(this.mSelectedUserInteractor.getSelectedUserId());
             } catch (RemoteException e) {
                 e.printStackTrace();
-                str = null;
+                keyguardStorageForCurrentUser = null;
             }
-            if (str != null && !str.equals("") && !str.equals(SignalSeverity.NONE)) {
-                str2 = str;
+            if (keyguardStorageForCurrentUser != null && !keyguardStorageForCurrentUser.equals("") && !keyguardStorageForCurrentUser.equals(SignalSeverity.NONE)) {
+                str = keyguardStorageForCurrentUser;
             }
         }
-        this.mVendorName = str2;
+        this.mVendorName = str;
         getVendorID();
         this.mUCMMiscTagValue = (TextView) ((KeyguardUCMView) this.mView).findViewById(R.id.ucm_misctag);
         TextView textView = (TextView) ((KeyguardUCMView) this.mView).findViewById(R.id.ucm_csname);
         this.mUCMAgent = textView;
-        String str3 = this.mAgentID;
-        if (str3 != null) {
-            textView.setText(str3);
+        String str2 = this.mAgentID;
+        if (str2 != null) {
+            textView.setText(str2);
         } else {
             textView.setVisibility(8);
         }
     }
 
     public static IUcmService getUCMService() {
-        IUcmService asInterface = IUcmService.Stub.asInterface(ServiceManager.getService("com.samsung.ucs.ucsservice"));
-        if (asInterface == null) {
+        IUcmService iUcmServiceAsInterface = IUcmService.Stub.asInterface(ServiceManager.getService("com.samsung.ucs.ucsservice"));
+        if (iUcmServiceAsInterface == null) {
             Log.d("KeyguardUCMPinView", "failed to get UCM service");
         }
-        return asInterface;
+        return iUcmServiceAsInterface;
     }
 
     public final String getCSUri() {
@@ -856,11 +787,11 @@ public class KeyguardUCMViewController extends KeyguardSecPinBasedInputViewContr
 
     @Override // com.android.keyguard.KeyguardSecAbsKeyInputViewController, com.android.keyguard.KeyguardAbsKeyInputViewController
     public final void onPasswordChecked(int i, int i2, boolean z, boolean z2) {
-        StringBuilder m = KeyguardFMMViewController$$ExternalSyntheticOutline0.m("onPasswordChecked ", i2, " / ", z, " / ");
-        m.append(z2);
-        m.append(" / ");
-        m.append(i);
-        Log.e("KeyguardUCMPinView", m.toString());
+        StringBuilder sbM = KeyguardFMMViewController$$ExternalSyntheticOutline0.m("onPasswordChecked ", i2, " / ", z, " / ");
+        sbM.append(z2);
+        sbM.append(" / ");
+        sbM.append(i);
+        Log.e("KeyguardUCMPinView", sbM.toString());
         if (!z) {
             setMessageSecurityMessageDisplay(getContext().getString(R.string.kg_ucm_password_not_matching));
         } else {

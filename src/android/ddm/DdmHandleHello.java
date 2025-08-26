@@ -53,30 +53,30 @@ public class DdmHandleHello extends DdmHandle {
         String pkgName = names.getPkgName();
         VMRuntime runtime = VMRuntime.getRuntime();
         String str2 = runtime.is64Bit() ? "64-bit" : "32-bit";
-        String vmInstructionSet = runtime.vmInstructionSet();
-        if (vmInstructionSet != null && vmInstructionSet.length() > 0) {
-            str2 = str2 + " (" + vmInstructionSet + NavigationBarInflaterView.KEY_CODE_END;
+        String strVmInstructionSet = runtime.vmInstructionSet();
+        if (strVmInstructionSet != null && strVmInstructionSet.length() > 0) {
+            str2 = str2 + " (" + strVmInstructionSet + NavigationBarInflaterView.KEY_CODE_END;
         }
-        String concat = "CheckJNI=".concat(runtime.isCheckJniEnabled() ? "true" : "false");
-        boolean isNativeDebuggable = runtime.isNativeDebuggable();
-        ByteBuffer allocate = ByteBuffer.allocate((str.length() * 2) + 32 + (appName.length() * 2) + (str2.length() * 2) + (concat.length() * 2) + 1 + (pkgName.length() * 2) + 4);
-        allocate.order(ChunkHandler.CHUNK_ORDER);
-        allocate.putInt(1);
-        allocate.putInt(Process.myPid());
-        allocate.putInt(str.length());
-        allocate.putInt(appName.length());
-        putString(allocate, str);
-        putString(allocate, appName);
-        allocate.putInt(UserHandle.myUserId());
-        allocate.putInt(str2.length());
-        putString(allocate, str2);
-        allocate.putInt(concat.length());
-        putString(allocate, concat);
-        allocate.put(isNativeDebuggable ? (byte) 1 : (byte) 0);
-        allocate.putInt(pkgName.length());
-        putString(allocate, pkgName);
-        allocate.putInt(DdmSyncState.getStage().toInt());
-        Chunk chunk2 = new Chunk(CHUNK_HELO, allocate);
+        String strConcat = "CheckJNI=".concat(runtime.isCheckJniEnabled() ? "true" : "false");
+        boolean zIsNativeDebuggable = runtime.isNativeDebuggable();
+        ByteBuffer byteBufferAllocate = ByteBuffer.allocate((str.length() * 2) + 32 + (appName.length() * 2) + (str2.length() * 2) + (strConcat.length() * 2) + 1 + (pkgName.length() * 2) + 4);
+        byteBufferAllocate.order(ChunkHandler.CHUNK_ORDER);
+        byteBufferAllocate.putInt(1);
+        byteBufferAllocate.putInt(Process.myPid());
+        byteBufferAllocate.putInt(str.length());
+        byteBufferAllocate.putInt(appName.length());
+        putString(byteBufferAllocate, str);
+        putString(byteBufferAllocate, appName);
+        byteBufferAllocate.putInt(UserHandle.myUserId());
+        byteBufferAllocate.putInt(str2.length());
+        putString(byteBufferAllocate, str2);
+        byteBufferAllocate.putInt(strConcat.length());
+        putString(byteBufferAllocate, strConcat);
+        byteBufferAllocate.put(zIsNativeDebuggable ? (byte) 1 : (byte) 0);
+        byteBufferAllocate.putInt(pkgName.length());
+        putString(byteBufferAllocate, pkgName);
+        byteBufferAllocate.putInt(DdmSyncState.getStage().toInt());
+        Chunk chunk2 = new Chunk(CHUNK_HELO, byteBufferAllocate);
         if (Debug.waitingForDebugger()) {
             sendWAIT(0);
         }
@@ -93,18 +93,18 @@ public class DdmHandleHello extends DdmHandle {
         for (int length3 = featureList.length - 1; length3 >= 0; length3--) {
             length += featureList[length3].length() * 2;
         }
-        ByteBuffer allocate = ByteBuffer.allocate(length);
-        allocate.order(ChunkHandler.CHUNK_ORDER);
-        allocate.putInt(vmFeatureList.length + featureList.length);
+        ByteBuffer byteBufferAllocate = ByteBuffer.allocate(length);
+        byteBufferAllocate.order(ChunkHandler.CHUNK_ORDER);
+        byteBufferAllocate.putInt(vmFeatureList.length + featureList.length);
         for (int length4 = vmFeatureList.length - 1; length4 >= 0; length4--) {
-            allocate.putInt(vmFeatureList[length4].length());
-            putString(allocate, vmFeatureList[length4]);
+            byteBufferAllocate.putInt(vmFeatureList[length4].length());
+            putString(byteBufferAllocate, vmFeatureList[length4]);
         }
         for (int length5 = featureList.length - 1; length5 >= 0; length5--) {
-            allocate.putInt(featureList[length5].length());
-            putString(allocate, featureList[length5]);
+            byteBufferAllocate.putInt(featureList[length5].length());
+            putString(byteBufferAllocate, featureList[length5]);
         }
-        return new Chunk(CHUNK_FEAT, allocate);
+        return new Chunk(CHUNK_FEAT, byteBufferAllocate);
     }
 
     public static void sendWAIT(int i) {

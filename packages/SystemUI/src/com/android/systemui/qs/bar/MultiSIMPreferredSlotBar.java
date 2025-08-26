@@ -30,7 +30,6 @@ import com.android.systemui.util.SettingsHelper;
 import com.samsung.android.knox.EnterpriseDeviceManager;
 import com.samsung.android.knox.appconfig.ApplicationRestrictionsManager;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class MultiSIMPreferredSlotBar extends BarItemImpl implements TunerService.Tunable, Bar {
     public final BroadcastDispatcher mBroadcastDispatcher;
@@ -117,9 +116,9 @@ public class MultiSIMPreferredSlotBar extends BarItemImpl implements TunerServic
 
     @Override // com.android.systemui.qs.bar.BarItemImpl
     public final void inflateViews(ViewGroup viewGroup) {
-        View inflate = LayoutInflater.from(this.mContext).inflate(R.layout.qs_panel_multi_sim_preffered_slot, viewGroup, false);
-        this.mBarRootView = inflate;
-        LinearLayout linearLayout = (LinearLayout) inflate.findViewById(R.id.slot_button_group);
+        View viewInflate = LayoutInflater.from(this.mContext).inflate(R.layout.qs_panel_multi_sim_preffered_slot, viewGroup, false);
+        this.mBarRootView = viewInflate;
+        LinearLayout linearLayout = (LinearLayout) viewInflate.findViewById(R.id.slot_button_group);
         linearLayout.setBackground(this.mContext.getDrawable(R.drawable.sec_large_button_ripple_background));
         ColoredBGHelper coloredBGHelper = this.mBGColorHelper;
         if (coloredBGHelper != null) {
@@ -132,9 +131,9 @@ public class MultiSIMPreferredSlotBar extends BarItemImpl implements TunerServic
 
     @Override // com.android.systemui.qs.bar.BarItemImpl
     public final void makeCloneBar() {
-        View inflate = LayoutInflater.from(this.mContext).inflate(R.layout.qs_panel_multi_sim_preffered_slot, (ViewGroup) null);
-        this.mClonedBarView = inflate;
-        LinearLayout linearLayout = (LinearLayout) inflate.findViewById(R.id.slot_button_group);
+        View viewInflate = LayoutInflater.from(this.mContext).inflate(R.layout.qs_panel_multi_sim_preffered_slot, (ViewGroup) null);
+        this.mClonedBarView = viewInflate;
+        LinearLayout linearLayout = (LinearLayout) viewInflate.findViewById(R.id.slot_button_group);
         linearLayout.setBackground(this.mContext.getDrawable(R.drawable.sec_large_button_ripple_background));
         ColoredBGHelper coloredBGHelper = this.mBGColorHelper;
         if (coloredBGHelper != null) {
@@ -185,18 +184,24 @@ public class MultiSIMPreferredSlotBar extends BarItemImpl implements TunerServic
 
     @Override // com.android.systemui.qs.bar.BarItemImpl
     public final void removeCloneTileBG() {
-        View findViewById = this.mClonedBarView.findViewById(R.id.slot_button_group);
+        View viewFindViewById = this.mClonedBarView.findViewById(R.id.slot_button_group);
         ColoredBGHelper coloredBGHelper = this.mBGColorHelper;
-        if (coloredBGHelper == null || findViewById == null) {
+        if (coloredBGHelper == null || viewFindViewById == null) {
             return;
         }
-        coloredBGHelper.removeFromBarBackground(findViewById);
+        coloredBGHelper.removeFromBarBackground(viewFindViewById);
     }
 
     @Override // com.android.systemui.qs.bar.BarItemImpl
     public final void setExpanded(boolean z) {
+        boolean z2 = this.mQsExpanded ^ z;
         this.mQsExpanded = z;
-        ActionBarContextView$$ExternalSyntheticOutline0.m(RowView$$ExternalSyntheticOutline0.m("setExpanded : ", " mShowing : ", z), this.mShowing, "MultiSIMPreferredSlotBar");
+        if (z2) {
+            ActionBarContextView$$ExternalSyntheticOutline0.m(RowView$$ExternalSyntheticOutline0.m("setExpanded : ", " mShowing : ", z), this.mShowing, "MultiSIMPreferredSlotBar");
+            MultiSIMViewModelImpl multiSIMViewModelImpl = (MultiSIMViewModelImpl) this.mController.mMultiSIMViewModel;
+            multiSIMViewModelImpl.isQpExpanded = z;
+            multiSIMViewModelImpl.startUpdating(z);
+        }
     }
 
     @Override // com.android.systemui.qs.bar.BarItemImpl

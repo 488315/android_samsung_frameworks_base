@@ -73,10 +73,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
+import java.util.function.Consumer;
 import java.util.function.IntSupplier;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnComputeInternalInsetsListener {
     static final int FLYOUT_HIDE_AFTER = 5000;
@@ -162,13 +163,12 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
     public static final PhysicsAnimator.SpringConfig FLYOUT_IME_ANIMATION_SPRING_CONFIG = new PhysicsAnimator.SpringConfig(200.0f, 0.9f);
     public static final AnonymousClass1 DEFAULT_SURFACE_SYNCHRONIZER = new SurfaceSynchronizer() { // from class: com.android.wm.shell.bubbles.BubbleStackView.1
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.wm.shell.bubbles.BubbleStackView$1$1, reason: invalid class name and collision with other inner class name */
-        public class ChoreographerFrameCallbackC04251 implements Choreographer.FrameCallback {
+        public class ChoreographerFrameCallbackC06551 implements Choreographer.FrameCallback {
             public int mFrameWait = 2;
             public final /* synthetic */ Runnable val$callback;
 
-            public ChoreographerFrameCallbackC04251(AnonymousClass1 anonymousClass1, Runnable runnable) {
+            public ChoreographerFrameCallbackC06551(AnonymousClass1 anonymousClass1, Runnable runnable) {
                 this.val$callback = runnable;
             }
 
@@ -185,7 +185,6 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.bubbles.BubbleStackView$4, reason: invalid class name */
     public class AnonymousClass4 implements MagnetizedObject.MagnetListener {
         public AnonymousClass4() {
@@ -204,13 +203,13 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
                 if (view == null) {
                     expandedAnimationController.getClass();
                 } else {
-                    PhysicsAnimationLayout.PhysicsPropertyAnimator animationForChild = expandedAnimationController.animationForChild(view);
-                    animationForChild.mStiffness = 10000.0f;
-                    animationForChild.property(DynamicAnimation.SCALE_X, 0.0f, new Runnable[0]);
-                    animationForChild.property(DynamicAnimation.SCALE_Y, 0.0f, new Runnable[0]);
-                    animationForChild.translationY(view.getTranslationY() + height, new Runnable[0]);
-                    animationForChild.property(DynamicAnimation.ALPHA, 0.0f, bubbleStackView$$ExternalSyntheticLambda1);
-                    animationForChild.start(new Runnable[0]);
+                    PhysicsAnimationLayout.PhysicsPropertyAnimator physicsPropertyAnimatorAnimationForChild = expandedAnimationController.animationForChild(view);
+                    physicsPropertyAnimatorAnimationForChild.mStiffness = 10000.0f;
+                    physicsPropertyAnimatorAnimationForChild.property(DynamicAnimation.SCALE_X, 0.0f, new Runnable[0]);
+                    physicsPropertyAnimatorAnimationForChild.property(DynamicAnimation.SCALE_Y, 0.0f, new Runnable[0]);
+                    physicsPropertyAnimatorAnimationForChild.translationY(view.getTranslationY() + height, new Runnable[0]);
+                    physicsPropertyAnimatorAnimationForChild.property(DynamicAnimation.ALPHA, 0.0f, bubbleStackView$$ExternalSyntheticLambda1);
+                    physicsPropertyAnimatorAnimationForChild.start(new Runnable[0]);
                     expandedAnimationController.updateBubblePositions();
                 }
             }
@@ -244,7 +243,6 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.bubbles.BubbleStackView$5, reason: invalid class name */
     public class AnonymousClass5 implements MagnetizedObject.MagnetListener {
         public AnonymousClass5() {
@@ -260,7 +258,7 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
             stackAnimationController.animationsForChildrenFromIndex(false, new PhysicsAnimationLayout.PhysicsAnimationController.ChildAnimationConfigurator() { // from class: com.android.wm.shell.bubbles.animation.StackAnimationController$$ExternalSyntheticLambda7
                 @Override // com.android.wm.shell.bubbles.animation.PhysicsAnimationLayout.PhysicsAnimationController.ChildAnimationConfigurator
                 public final void configureAnimationForChildAtIndex(int i, PhysicsAnimationLayout.PhysicsPropertyAnimator physicsPropertyAnimator) {
-                    StackAnimationController stackAnimationController2 = StackAnimationController.this;
+                    StackAnimationController stackAnimationController2 = stackAnimationController;
                     stackAnimationController2.getClass();
                     physicsPropertyAnimator.property(DynamicAnimation.SCALE_X, 0.0f, new Runnable[0]);
                     physicsPropertyAnimator.property(DynamicAnimation.SCALE_Y, 0.0f, new Runnable[0]);
@@ -292,104 +290,67 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.bubbles.BubbleStackView$6, reason: invalid class name */
     public class AnonymousClass6 implements View.OnClickListener {
         public AnonymousClass6() {
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:14:0x0041  */
+        /* JADX WARN: Removed duplicated region for block: B:15:0x003a  */
         @Override // android.view.View.OnClickListener
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final void onClick(android.view.View r7) {
-            /*
-                r6 = this;
-                com.android.wm.shell.bubbles.BubbleStackView r0 = com.android.wm.shell.bubbles.BubbleStackView.this
-                com.android.wm.shell.shared.animation.PhysicsAnimator$SpringConfig r1 = com.android.wm.shell.bubbles.BubbleStackView.FLYOUT_IME_ANIMATION_SPRING_CONFIG
-                r1 = 0
-                r0.mIsDraggingStack = r1
-                r2 = 0
-                r0.mMagnetizedObject = r2
-                boolean r3 = r0.mIsExpansionAnimating
-                if (r3 != 0) goto L7f
-                boolean r3 = r0.mIsBubbleSwitchAnimating
-                if (r3 == 0) goto L14
-                goto L7f
-            L14:
-                com.android.wm.shell.bubbles.BubbleData r0 = r0.mBubbleData
-                java.util.List r0 = r0.mBubbles
-                com.android.wm.shell.bubbles.BubbleData$$ExternalSyntheticLambda7 r3 = new com.android.wm.shell.bubbles.BubbleData$$ExternalSyntheticLambda7
-                r4 = 2
-                r3.<init>(r7, r4)
-                com.android.wm.shell.bubbles.Bubble r7 = com.android.wm.shell.bubbles.BubbleData.getBubbleWithPredicate(r0, r3)
-                if (r7 != 0) goto L25
-                goto L7f
-            L25:
-                com.android.wm.shell.bubbles.BubbleStackView r0 = com.android.wm.shell.bubbles.BubbleStackView.this
-                com.android.wm.shell.bubbles.BubbleViewProvider r0 = r0.mExpandedBubble
-                r3 = 1
-                if (r0 == 0) goto L3a
-                java.lang.String r0 = r0.getKey()
-                java.lang.String r4 = r7.mKey
-                boolean r0 = r4.equals(r0)
-                if (r0 == 0) goto L3a
-                r0 = r3
-                goto L3b
-            L3a:
-                r0 = r1
-            L3b:
-                com.android.wm.shell.bubbles.BubbleStackView r4 = com.android.wm.shell.bubbles.BubbleStackView.this
-                boolean r5 = r4.mIsExpanded
-                if (r5 == 0) goto L4a
-                com.android.wm.shell.bubbles.animation.ExpandedAnimationController r4 = r4.mExpandedAnimationController
-                r4.mBubbleDraggedOutEnough = r1
-                r4.mMagnetizedBubbleDraggingOut = r2
-                r4.updateBubblePositions()
-            L4a:
-                com.android.wm.shell.bubbles.BubbleStackView r1 = com.android.wm.shell.bubbles.BubbleStackView.this
-                boolean r2 = r1.mIsExpanded
-                if (r2 == 0) goto L63
-                if (r0 != 0) goto L63
-                com.android.wm.shell.bubbles.BubbleData r0 = r1.mBubbleData
-                com.android.wm.shell.bubbles.BubbleViewProvider r2 = r0.mSelectedBubble
-                if (r7 == r2) goto L5f
-                r0.setSelectedBubbleInternal(r7)
-                r0.dispatchPendingChanges()
-                goto L73
-            L5f:
-                r1.setSelectedBubble(r7)
-                goto L73
-            L63:
-                r1.getClass()
-                com.android.wm.shell.bubbles.BubbleData r0 = r1.mBubbleData
-                boolean r1 = r0.mExpanded
-                r1 = r1 ^ r3
-                r0.setExpanded(r1)
-                com.android.wm.shell.bubbles.BubbleStackView r0 = com.android.wm.shell.bubbles.BubbleStackView.this
-                r0.getClass()
-            L73:
-                java.util.Optional r0 = java.util.Optional.ofNullable(r7)
-                com.android.wm.shell.bubbles.BubbleStackView$6$$ExternalSyntheticLambda0 r1 = new com.android.wm.shell.bubbles.BubbleStackView$6$$ExternalSyntheticLambda0
-                r1.<init>()
-                r0.ifPresent(r1)
-            L7f:
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.bubbles.BubbleStackView.AnonymousClass6.onClick(android.view.View):void");
+        public final void onClick(View view) {
+            final Bubble bubbleWithPredicate;
+            boolean z;
+            BubbleStackView bubbleStackView = BubbleStackView.this;
+            PhysicsAnimator.SpringConfig springConfig = BubbleStackView.FLYOUT_IME_ANIMATION_SPRING_CONFIG;
+            bubbleStackView.mIsDraggingStack = false;
+            bubbleStackView.mMagnetizedObject = null;
+            if (bubbleStackView.mIsExpansionAnimating || bubbleStackView.mIsBubbleSwitchAnimating || (bubbleWithPredicate = BubbleData.getBubbleWithPredicate(bubbleStackView.mBubbleData.mBubbles, new BubbleData$$ExternalSyntheticLambda7(view, 2))) == null) {
+                return;
+            }
+            BubbleViewProvider bubbleViewProvider = BubbleStackView.this.mExpandedBubble;
+            if (bubbleViewProvider != null) {
+                z = bubbleWithPredicate.mKey.equals(bubbleViewProvider.getKey());
+            }
+            BubbleStackView bubbleStackView2 = BubbleStackView.this;
+            if (bubbleStackView2.mIsExpanded) {
+                ExpandedAnimationController expandedAnimationController = bubbleStackView2.mExpandedAnimationController;
+                expandedAnimationController.mBubbleDraggedOutEnough = false;
+                expandedAnimationController.mMagnetizedBubbleDraggingOut = null;
+                expandedAnimationController.updateBubblePositions();
+            }
+            BubbleStackView bubbleStackView3 = BubbleStackView.this;
+            if (!bubbleStackView3.mIsExpanded || z) {
+                bubbleStackView3.getClass();
+                bubbleStackView3.mBubbleData.setExpanded(!r0.mExpanded);
+                BubbleStackView.this.getClass();
+            } else {
+                BubbleData bubbleData = bubbleStackView3.mBubbleData;
+                if (bubbleWithPredicate != bubbleData.mSelectedBubble) {
+                    bubbleData.setSelectedBubbleInternal(bubbleWithPredicate);
+                    bubbleData.dispatchPendingChanges();
+                } else {
+                    bubbleStackView3.setSelectedBubble(bubbleWithPredicate);
+                }
+            }
+            Optional.ofNullable(bubbleWithPredicate).ifPresent(new Consumer() { // from class: com.android.wm.shell.bubbles.BubbleStackView$6$$ExternalSyntheticLambda0
+                @Override // java.util.function.Consumer
+                public final void accept(Object obj) {
+                    BubbleStackView.this.mBubbleSALogger.sendEventCDLog("QPNE0100", SystemUIAnalytics.QPNE_KEY_APP, bubbleWithPredicate.mPackageName);
+                }
+            });
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.bubbles.BubbleStackView$9, reason: invalid class name */
     public class AnonymousClass9 implements BubblesNavBarMotionEventHandler.MotionEventListener {
         public AnonymousClass9() {
         }
 
         public final void onMove(float f) {
-            int round;
+            int iRound;
             BubbleExpandedView bubbleExpandedView;
             BubbleStackView bubbleStackView = BubbleStackView.this;
             if (bubbleStackView.isManageEduVisible() || bubbleStackView.isStackEduVisible()) {
@@ -402,21 +363,21 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
             if (bubbleExpandedView2 != null) {
                 int contentHeight = bubbleExpandedView2.getContentHeight();
                 if (Float.compare(f3, 0.0f) == 0) {
-                    round = 0;
+                    iRound = 0;
                 } else {
                     float f4 = contentHeight;
                     float f5 = f3 / f4;
-                    float abs = f5 / Math.abs(f5);
-                    float abs2 = Math.abs(f5) - 1.0f;
-                    float f6 = ((abs2 * abs2 * abs2) + 1.0f) * abs;
-                    if (Math.abs(f6) >= 1.0f) {
-                        f6 /= Math.abs(f6);
+                    float fAbs = f5 / Math.abs(f5);
+                    float fAbs2 = Math.abs(f5) - 1.0f;
+                    float fAbs3 = ((fAbs2 * fAbs2 * fAbs2) + 1.0f) * fAbs;
+                    if (Math.abs(fAbs3) >= 1.0f) {
+                        fAbs3 /= Math.abs(fAbs3);
                     }
-                    round = Math.round(f6 * 0.07f * f4);
+                    iRound = Math.round(fAbs3 * 0.07f * f4);
                 }
-                expandedViewAnimationControllerImpl.mDraggedAmount = round;
+                expandedViewAnimationControllerImpl.mDraggedAmount = iRound;
                 if (ProtoLogImpl_1771455215.Cache.WM_SHELL_BUBBLES_enabled[0]) {
-                    ProtoLogImpl_1771455215.d(ShellProtoLogGroup.WM_SHELL_BUBBLES, -8974127699338313944L, 6, Double.valueOf(f3), Long.valueOf(round));
+                    ProtoLogImpl_1771455215.d(ShellProtoLogGroup.WM_SHELL_BUBBLES, -8974127699338313944L, 6, Double.valueOf(f3), Long.valueOf(iRound));
                 }
                 expandedViewAnimationControllerImpl.setCollapsedAmount(expandedViewAnimationControllerImpl.mDraggedAmount);
                 if (!expandedViewAnimationControllerImpl.mNotifiedAboutThreshold && (bubbleExpandedView = expandedViewAnimationControllerImpl.mExpandedView) != null && expandedViewAnimationControllerImpl.mDraggedAmount > bubbleExpandedView.getContentHeight() * 0.02f) {
@@ -478,19 +439,17 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class StackViewState {
         public int numberOfBubbles;
         public boolean onLeft;
         public int selectedIndex;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface SurfaceSynchronizer {
     }
 
     /* renamed from: $r8$lambda$H8d4Ep0eU-hn88VAHYBVbgvu58M, reason: not valid java name */
-    public static void m3215$r8$lambda$H8d4Ep0eUhn88VAHYBVbgvu58M(BubbleStackView bubbleStackView) {
+    public static void m3232$r8$lambda$H8d4Ep0eUhn88VAHYBVbgvu58M(BubbleStackView bubbleStackView) {
         BubbleData bubbleData = bubbleStackView.mBubbleData;
         BubbleViewProvider bubbleViewProvider = bubbleData.mSelectedBubble;
         if (bubbleViewProvider == null || !bubbleData.hasBubbleInStackWithKey(bubbleViewProvider.getKey())) {
@@ -504,11 +463,11 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
         bubbleStackView.mBubbleSALogger.sendEventCDLog("QPNE0102", SystemUIAnalytics.QPNE_KEY_APP, bubble.mPackageName);
     }
 
-    public static void $r8$lambda$ecS6BCO608AQvEBSbEaZ37rK_08(BubbleStackView bubbleStackView) {
+    public static void $r8$lambda$ecS6BCO608AQvEBSbEaZ37rK_08(BubbleStackView bubbleStackView) throws Resources.NotFoundException {
         RelativeStackPosition relativeStackPosition;
         BubblePositioner bubblePositioner = bubbleStackView.mPositioner;
         Context context = ((FrameLayout) bubbleStackView).mContext;
-        bubblePositioner.update(DeviceConfig.create(context, (WindowManager) context.getSystemService(WindowManager.class)));
+        bubblePositioner.update(DeviceConfig.create(context, (WindowManager) context.getSystemService(WindowManager.class), bubbleStackView.mPositioner.mDeviceConfig.displayCutout));
         bubbleStackView.onDisplaySizeChanged();
         bubbleStackView.mExpandedAnimationController.updateResources();
         ExpandedAnimationController expandedAnimationController = bubbleStackView.mExpandedAnimationController;
@@ -542,7 +501,7 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
     }
 
     /* renamed from: -$$Nest$mshowExpandedViewIfNeeded, reason: not valid java name */
-    public static void m3216$$Nest$mshowExpandedViewIfNeeded(BubbleStackView bubbleStackView) {
+    public static void m3233$$Nest$mshowExpandedViewIfNeeded(BubbleStackView bubbleStackView) {
         if (bubbleStackView.mExpandedViewTemporarilyHidden) {
             bubbleStackView.mExpandedViewTemporarilyHidden = false;
             AnimatableScaleMatrix animatableScaleMatrix = bubbleStackView.mExpandedViewContainerMatrix;
@@ -566,16 +525,16 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
     /* JADX WARN: Type inference failed for: r5v4, types: [com.android.wm.shell.bubbles.BubbleStackView$8] */
     /* JADX WARN: Type inference failed for: r5v6, types: [com.android.wm.shell.bubbles.BubbleStackView$10] */
     /* JADX WARN: Type inference failed for: r5v7, types: [com.android.wm.shell.bubbles.BubbleStackView$11] */
-    public BubbleStackView(Context context, BubbleController bubbleController, BubbleStackViewManager bubbleStackViewManager, BubblePositioner bubblePositioner, BubbleData bubbleData, SurfaceSynchronizer surfaceSynchronizer, FloatingContentCoordinator floatingContentCoordinator, Bubbles$SysuiProxy$Provider bubbles$SysuiProxy$Provider, ShellExecutor shellExecutor) {
-        super(context);
+    public BubbleStackView(Context context, BubbleController bubbleController, BubbleStackViewManager bubbleStackViewManager, BubblePositioner bubblePositioner, BubbleData bubbleData, SurfaceSynchronizer surfaceSynchronizer, FloatingContentCoordinator floatingContentCoordinator, Bubbles$SysuiProxy$Provider bubbles$SysuiProxy$Provider, ShellExecutor shellExecutor) throws Resources.NotFoundException {
         PhysicsAnimationLayout physicsAnimationLayout;
+        super(context);
         this.mScaleInSpringConfig = new PhysicsAnimator.SpringConfig(300.0f, 0.9f);
         this.mScaleOutSpringConfig = new PhysicsAnimator.SpringConfig(900.0f, 1.0f);
         new PhysicsAnimator.SpringConfig(50.0f, 1.0f);
         this.mStackViewState = new StackViewState();
         this.mExpandedViewContainerMatrix = new AnimatableScaleMatrix();
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-        this.mAnimatingOutSurfaceAlphaAnimator = ofFloat;
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+        this.mAnimatingOutSurfaceAlphaAnimator = valueAnimatorOfFloat;
         int i = 0;
         this.mHideFlyout = new BubbleStackView$$ExternalSyntheticLambda5(this, i);
         this.mBubbleToExpandAfterFlyoutCollapse = null;
@@ -587,8 +546,8 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
         this.mExpandedViewTemporarilyHidden = false;
         this.mRemovingLastBubbleWhileExpanded = false;
         this.mSensitiveNotificationProtectionActive = false;
-        ValueAnimator ofFloat2 = ValueAnimator.ofFloat(0.0f, 1.0f);
-        this.mExpandedViewAlphaAnimator = ofFloat2;
+        ValueAnimator valueAnimatorOfFloat2 = ValueAnimator.ofFloat(0.0f, 1.0f);
+        this.mExpandedViewAlphaAnimator = valueAnimatorOfFloat2;
         this.mPointerIndexDown = -1;
         this.mShouldReorderBubblesAfterGestureCompletes = false;
         this.mViewUpdatedRequested = false;
@@ -608,7 +567,7 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
         this.mSystemGestureExcludeUpdater = new ViewTreeObserver.OnDrawListener() { // from class: com.android.wm.shell.bubbles.BubbleStackView$$ExternalSyntheticLambda9
             @Override // android.view.ViewTreeObserver.OnDrawListener
             public final void onDraw() {
-                BubbleStackView bubbleStackView = BubbleStackView.this;
+                BubbleStackView bubbleStackView = this.f$0;
                 Rect rect = (Rect) bubbleStackView.mSystemGestureExclusionRects.get(0);
                 if (bubbleStackView.getBubbleCount() <= 0) {
                     rect.setEmpty();
@@ -639,7 +598,7 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
         ?? r32 = new DynamicAnimation.OnAnimationEndListener() { // from class: com.android.wm.shell.bubbles.BubbleStackView$$ExternalSyntheticLambda10
             @Override // androidx.dynamicanimation.animation.DynamicAnimation.OnAnimationEndListener
             public final void onAnimationEnd(DynamicAnimation dynamicAnimation, boolean z, float f, float f2) {
-                BubbleStackView bubbleStackView = BubbleStackView.this;
+                BubbleStackView bubbleStackView = this.f$0;
                 if (bubbleStackView.mFlyoutDragDeltaX == 0.0f) {
                     bubbleStackView.mFlyout.postDelayed(bubbleStackView.mHideFlyout, 5000L);
                     return;
@@ -844,12 +803,12 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
                     return;
                 }
                 if (expandedAnimationController.mSpringToTouchOnNextMotionEvent) {
-                    PhysicsAnimationLayout.PhysicsPropertyAnimator animationForChild = expandedAnimationController.animationForChild((View) anonymousClass1.underlyingObject);
-                    animationForChild.mPathAnimator = null;
-                    animationForChild.property(DynamicAnimation.TRANSLATION_X, f7, new Runnable[0]);
-                    animationForChild.translationY(f8, new Runnable[0]);
-                    animationForChild.mStiffness = 10000.0f;
-                    animationForChild.start(new Runnable[0]);
+                    PhysicsAnimationLayout.PhysicsPropertyAnimator physicsPropertyAnimatorAnimationForChild = expandedAnimationController.animationForChild((View) anonymousClass1.underlyingObject);
+                    physicsPropertyAnimatorAnimationForChild.mPathAnimator = null;
+                    physicsPropertyAnimatorAnimationForChild.property(DynamicAnimation.TRANSLATION_X, f7, new Runnable[0]);
+                    physicsPropertyAnimatorAnimationForChild.translationY(f8, new Runnable[0]);
+                    physicsPropertyAnimatorAnimationForChild.mStiffness = 10000.0f;
+                    physicsPropertyAnimatorAnimationForChild.start(new Runnable[0]);
                     expandedAnimationController.mSpringToTouchOnNextMotionEvent = false;
                     expandedAnimationController.mSpringingBubbleToTouch = true;
                 } else if (expandedAnimationController.mSpringingBubbleToTouch) {
@@ -858,12 +817,12 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
                     DynamicAnimation.ViewProperty[] viewPropertyArr = {anonymousClass12, DynamicAnimation.TRANSLATION_Y};
                     physicsAnimationLayout2.getClass();
                     if (PhysicsAnimationLayout.arePropertiesAnimatingOnView(view, viewPropertyArr)) {
-                        PhysicsAnimationLayout.PhysicsPropertyAnimator animationForChild2 = expandedAnimationController.animationForChild((View) expandedAnimationController.mMagnetizedBubbleDraggingOut.underlyingObject);
-                        animationForChild2.mPathAnimator = null;
-                        animationForChild2.property(anonymousClass12, f7, new Runnable[0]);
-                        animationForChild2.translationY(f8, new Runnable[0]);
-                        animationForChild2.mStiffness = 10000.0f;
-                        animationForChild2.start(new Runnable[0]);
+                        PhysicsAnimationLayout.PhysicsPropertyAnimator physicsPropertyAnimatorAnimationForChild2 = expandedAnimationController.animationForChild((View) expandedAnimationController.mMagnetizedBubbleDraggingOut.underlyingObject);
+                        physicsPropertyAnimatorAnimationForChild2.mPathAnimator = null;
+                        physicsPropertyAnimatorAnimationForChild2.property(anonymousClass12, f7, new Runnable[0]);
+                        physicsPropertyAnimatorAnimationForChild2.translationY(f8, new Runnable[0]);
+                        physicsPropertyAnimatorAnimationForChild2.mStiffness = 10000.0f;
+                        physicsPropertyAnimatorAnimationForChild2.start(new Runnable[0]);
                     } else {
                         expandedAnimationController.mSpringingBubbleToTouch = false;
                     }
@@ -902,12 +861,12 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
                         return;
                     }
                 }
-                BubbleStackView.m3216$$Nest$mshowExpandedViewIfNeeded(BubbleStackView.this);
+                BubbleStackView.m3233$$Nest$mshowExpandedViewIfNeeded(BubbleStackView.this);
                 BubbleStackView.this.getClass();
                 BubbleStackView bubbleStackView2 = BubbleStackView.this;
                 if (bubbleStackView2.mBubbleData.mExpanded) {
                     bubbleStackView2.mExpandedAnimationController.snapBubbleBack(view, f3, f4);
-                    BubbleStackView.m3216$$Nest$mshowExpandedViewIfNeeded(BubbleStackView.this);
+                    BubbleStackView.m3233$$Nest$mshowExpandedViewIfNeeded(BubbleStackView.this);
                 } else {
                     boolean z = bubbleStackView2.mStackOnLeftOrWillBe;
                     bubbleStackView2.mStackOnLeftOrWillBe = bubbleStackView2.mStackAnimationController.flingStackThenSpringToEdge(f + f2, f3, f4) <= ((float) (BubbleStackView.this.getWidth() / 2));
@@ -971,11 +930,11 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
 
             @Override // com.android.wm.shell.shared.bubbles.RelativeTouchListener
             public final void onUp(View view, float f, float f2, float f3, float f4) {
-                boolean isStackOnLeftSide = BubbleStackView.this.mStackAnimationController.isStackOnLeftSide();
+                boolean zIsStackOnLeftSide = BubbleStackView.this.mStackAnimationController.isStackOnLeftSide();
                 boolean z = false;
-                boolean z2 = !isStackOnLeftSide ? f3 <= 2000.0f : f3 >= -2000.0f;
-                boolean z3 = !isStackOnLeftSide ? f2 <= ((float) BubbleStackView.this.mFlyout.getWidth()) * 0.25f : f2 >= ((float) (-BubbleStackView.this.mFlyout.getWidth())) * 0.25f;
-                boolean z4 = !isStackOnLeftSide ? f3 >= 0.0f : f3 <= 0.0f;
+                boolean z2 = !zIsStackOnLeftSide ? f3 <= 2000.0f : f3 >= -2000.0f;
+                boolean z3 = !zIsStackOnLeftSide ? f2 <= ((float) BubbleStackView.this.mFlyout.getWidth()) * 0.25f : f2 >= ((float) (-BubbleStackView.this.mFlyout.getWidth())) * 0.25f;
+                boolean z4 = !zIsStackOnLeftSide ? f3 >= 0.0f : f3 <= 0.0f;
                 if (z2 || (z3 && !z4)) {
                     z = true;
                 }
@@ -999,14 +958,14 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
         this.mBubbleElevation = i3;
         this.mBubbleTouchPadding = resources.getDimensionPixelSize(R.dimen.bubble_touch_padding);
         this.mExpandedViewPadding = resources.getDimensionPixelSize(R.dimen.bubble_expanded_view_padding);
-        TypedArray obtainStyledAttributes = ((FrameLayout) this).mContext.obtainStyledAttributes(new int[]{android.R.attr.dialogCornerRadius});
+        TypedArray typedArrayObtainStyledAttributes = ((FrameLayout) this).mContext.obtainStyledAttributes(new int[]{android.R.attr.dialogCornerRadius});
         int dimensionPixelSize = getContext().getResources().getDimensionPixelSize(R.dimen.sec_noti_bubble_expand_view_radius);
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
         BubbleStackView$$ExternalSyntheticLambda5 bubbleStackView$$ExternalSyntheticLambda5 = new BubbleStackView$$ExternalSyntheticLambda5(this, 3);
         StackAnimationController stackAnimationController = new StackAnimationController(floatingContentCoordinator, new IntSupplier() { // from class: com.android.wm.shell.bubbles.BubbleStackView$$ExternalSyntheticLambda14
             @Override // java.util.function.IntSupplier
             public final int getAsInt() {
-                return BubbleStackView.this.getBubbleCount();
+                return this.f$0.getBubbleCount();
             }
         }, bubbleStackView$$ExternalSyntheticLambda5, new BubbleStackView$$ExternalSyntheticLambda5(this, 4), bubblePositioner);
         this.mStackAnimationController = stackAnimationController;
@@ -1071,15 +1030,15 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
         BubblesManager$$ExternalSyntheticLambda1 bubblesManager$$ExternalSyntheticLambda1 = bubbleController.mBubbleSALogger;
         this.mBubbleSALogger = bubblesManager$$ExternalSyntheticLambda1;
         this.mShowingOverflow = true;
-        BadgedImageView iconView$1 = bubbleOverflow.getIconView$1();
-        if (iconView$1 != null && (physicsAnimationLayout = (PhysicsAnimationLayout) iconView$1.getParent()) != null) {
-            physicsAnimationLayout.removeViewNoAnimation(iconView$1);
+        BadgedImageView iconView = bubbleOverflow.getIconView$1();
+        if (iconView != null && (physicsAnimationLayout = (PhysicsAnimationLayout) iconView.getParent()) != null) {
+            physicsAnimationLayout.removeViewNoAnimation(iconView);
         }
         PhysicsAnimationLayout physicsAnimationLayout3 = this.mBubbleContainer;
-        BadgedImageView iconView$12 = this.mBubbleOverflow.getIconView$1();
+        BadgedImageView iconView2 = this.mBubbleOverflow.getIconView$1();
         int childCount = this.mBubbleContainer.getChildCount();
         int i4 = this.mBubbleSize;
-        physicsAnimationLayout3.addViewInternal(iconView$12, childCount, new FrameLayout.LayoutParams(i4, i4), false);
+        physicsAnimationLayout3.addViewInternal(iconView2, childCount, new FrameLayout.LayoutParams(i4, i4), false);
         updateOverflow();
         this.mBubbleOverflow.getIconView$1().setOnClickListener(new BubbleStackView$$ExternalSyntheticLambda6(this, i2));
         bubblesManager$$ExternalSyntheticLambda1.sendEventCDLog("QPNE0100", SystemUIAnalytics.QPNE_KEY_APP, "overflow bubble");
@@ -1098,20 +1057,20 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
         view2.setVisibility(4);
         this.mOrientationChangedListener = new View.OnLayoutChangeListener() { // from class: com.android.wm.shell.bubbles.BubbleStackView$$ExternalSyntheticLambda16
             @Override // android.view.View.OnLayoutChangeListener
-            public final void onLayoutChange(View view3, int i5, int i6, int i7, int i8, int i9, int i10, int i11, int i12) {
-                BubbleStackView.$r8$lambda$ecS6BCO608AQvEBSbEaZ37rK_08(BubbleStackView.this);
+            public final void onLayoutChange(View view3, int i5, int i6, int i7, int i8, int i9, int i10, int i11, int i12) throws Resources.NotFoundException {
+                BubbleStackView.$r8$lambda$ecS6BCO608AQvEBSbEaZ37rK_08(this.f$0);
             }
         };
-        ValueAnimator ofFloat3 = ValueAnimator.ofFloat(1.0f, 0.0f);
-        this.mDismissBubbleAnimator = ofFloat3;
-        ofFloat3.addUpdateListener(new BubbleStackView$$ExternalSyntheticLambda7(this, getResources().getDimensionPixelSize(R.dimen.dismiss_circle_small) / getResources().getDimensionPixelSize(R.dimen.dismiss_circle_size)));
+        ValueAnimator valueAnimatorOfFloat3 = ValueAnimator.ofFloat(1.0f, 0.0f);
+        this.mDismissBubbleAnimator = valueAnimatorOfFloat3;
+        valueAnimatorOfFloat3.addUpdateListener(new BubbleStackView$$ExternalSyntheticLambda7(this, getResources().getDimensionPixelSize(R.dimen.dismiss_circle_small) / getResources().getDimensionPixelSize(R.dimen.dismiss_circle_size)));
         setOnClickListener(new BubbleStackView$$ExternalSyntheticLambda6(this, i));
-        ViewPropertyAnimator animate = animate();
+        ViewPropertyAnimator viewPropertyAnimatorAnimate = animate();
         TimeInterpolator timeInterpolator = Interpolators.PANEL_CLOSE_ACCELERATED;
-        animate.setInterpolator(timeInterpolator).setDuration(320L);
-        ofFloat2.setDuration(150L);
-        ofFloat2.setInterpolator(timeInterpolator);
-        ofFloat2.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.bubbles.BubbleStackView.13
+        viewPropertyAnimatorAnimate.setInterpolator(timeInterpolator).setDuration(320L);
+        valueAnimatorOfFloat2.setDuration(150L);
+        valueAnimatorOfFloat2.setInterpolator(timeInterpolator);
+        valueAnimatorOfFloat2.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.bubbles.BubbleStackView.13
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
                 BubbleStackView bubbleStackView = BubbleStackView.this;
@@ -1144,11 +1103,11 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
                 }
             }
         });
-        ofFloat2.addUpdateListener(new BubbleStackView$$ExternalSyntheticLambda7(this, i));
-        ofFloat.setDuration(150L);
-        ofFloat.setInterpolator(timeInterpolator);
-        ofFloat.addUpdateListener(new BubbleStackView$$ExternalSyntheticLambda7(this, 2));
-        ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.bubbles.BubbleStackView.14
+        valueAnimatorOfFloat2.addUpdateListener(new BubbleStackView$$ExternalSyntheticLambda7(this, i));
+        valueAnimatorOfFloat.setDuration(150L);
+        valueAnimatorOfFloat.setInterpolator(timeInterpolator);
+        valueAnimatorOfFloat.addUpdateListener(new BubbleStackView$$ExternalSyntheticLambda7(this, 2));
+        valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.bubbles.BubbleStackView.14
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
                 BubbleStackView bubbleStackView = BubbleStackView.this;
@@ -1158,17 +1117,63 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
         });
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0074  */
+    /* JADX WARN: Removed duplicated region for block: B:27:0x0074  */
+    /* JADX WARN: Removed duplicated region for block: B:42:0x00b9  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void addBubble(com.android.wm.shell.bubbles.Bubble r10) {
-        /*
-            Method dump skipped, instructions count: 256
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.bubbles.BubbleStackView.addBubble(com.android.wm.shell.bubbles.Bubble):void");
+    public final void addBubble(Bubble bubble) {
+        boolean z;
+        boolean z2 = getBubbleCount() == 0;
+        if (z2) {
+            BubbleViewProvider bubbleViewProvider = this.mBubbleData.mSelectedBubble;
+            if ((bubbleViewProvider instanceof Bubble) && ((Bubble) bubbleViewProvider).isChat()) {
+                Context context = ((FrameLayout) this).mContext;
+                z = (context.getSharedPreferences(context.getPackageName(), 0).getBoolean("HasSeenBubblesOnboarding", false) && Settings.Secure.getInt(((FrameLayout) this).mContext.getContentResolver(), "force_show_bubbles_user_education", 0) == 0) ? false : true;
+                if (ProtoLogImpl_1771455215.Cache.WM_SHELL_BUBBLES_enabled[0]) {
+                    ProtoLogImpl_1771455215.d(ShellProtoLogGroup.WM_SHELL_BUBBLES, -2015221824233916174L, 3, Boolean.valueOf(z));
+                }
+                if (z && Settings.Secure.getInt(((FrameLayout) this).mContext.getContentResolver(), "force_hide_bubbles_user_education", 0) != 0) {
+                    Log.w("Bubbles", "Want to show stack edu, but it is forced hidden");
+                    z = false;
+                }
+                if (z) {
+                }
+            } else {
+                z = false;
+                if (z) {
+                    this.mStackAnimationController.setStackPosition(this.mPositioner.getRestingPosition());
+                }
+            }
+        }
+        if (bubble.mIconView == null) {
+            return;
+        }
+        if (z2 && bubble.isNote()) {
+            BubblePositioner bubblePositioner = this.mPositioner;
+            PointF defaultStartPosition = bubblePositioner.getDefaultStartPosition(false);
+            PointF pointF = bubblePositioner.mRestingStackPosition;
+            if (!((pointF == null || pointF.equals(defaultStartPosition)) ? false : true)) {
+                PointF defaultStartPosition2 = this.mPositioner.getDefaultStartPosition(true);
+                this.mStackOnLeftOrWillBe = this.mPositioner.isStackOnLeft(defaultStartPosition2);
+                this.mStackAnimationController.setStackPosition(defaultStartPosition2);
+                this.mExpandedAnimationController.mCollapsePoint = defaultStartPosition2;
+            }
+        } else if (z2) {
+            this.mStackOnLeftOrWillBe = this.mStackAnimationController.isStackOnLeftSide();
+        }
+        bubble.mIconView.setTranslationX(this.mStackAnimationController.mStackPosition.x);
+        PhysicsAnimationLayout physicsAnimationLayout = this.mBubbleContainer;
+        BadgedImageView badgedImageView = bubble.mIconView;
+        int i = this.mPositioner.mBubbleSize;
+        physicsAnimationLayout.addViewInternal(badgedImageView, 0, new FrameLayout.LayoutParams(i, i), false);
+        bubble.mIconView.getClass();
+        bubble.mIconView.setOnClickListener(this.mBubbleClickListener);
+        bubble.mIconView.setOnTouchListener(this.mBubbleTouchListener);
+        updateBubbleShadows(this.mIsExpanded);
+        animateInFlyoutForBubble(bubble);
+        requestUpdate();
+        logBubbleEvent(bubble, 1);
     }
 
     public final void animateDismissBubble(View view, boolean z) {
@@ -1183,7 +1188,7 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
             this.mDismissBubbleAnimator.removeAllListeners();
             this.mDismissBubbleAnimator.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.bubbles.BubbleStackView.19
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                public final void onAnimationCancel(Animator animator) {
+                public final void onAnimationCancel(Animator animator) throws Resources.NotFoundException {
                     super.onAnimationCancel(animator);
                     BubbleStackView bubbleStackView = BubbleStackView.this;
                     PhysicsAnimator.SpringConfig springConfig = BubbleStackView.FLYOUT_IME_ANIMATION_SPRING_CONFIG;
@@ -1191,7 +1196,7 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
                 }
 
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                public final void onAnimationEnd(Animator animator) {
+                public final void onAnimationEnd(Animator animator) throws Resources.NotFoundException {
                     super.onAnimationEnd(animator);
                     BubbleStackView bubbleStackView = BubbleStackView.this;
                     PhysicsAnimator.SpringConfig springConfig = BubbleStackView.FLYOUT_IME_ANIMATION_SPRING_CONFIG;
@@ -1204,7 +1209,7 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
 
     public final void animateFlyoutCollapsed(float f, boolean z) {
         float f2;
-        boolean isStackOnLeftSide = this.mStackAnimationController.isStackOnLeftSide();
+        boolean zIsStackOnLeftSide = this.mStackAnimationController.isStackOnLeftSide();
         this.mFlyoutTransitionSpring.mSpring.setStiffness(this.mBubbleToExpandAfterFlyoutCollapse != null ? 1500.0f : 200.0f);
         SpringAnimation springAnimation = this.mFlyoutTransitionSpring;
         springAnimation.mValue = this.mFlyoutDragDeltaX;
@@ -1212,7 +1217,7 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
         springAnimation.mVelocity = f;
         if (z) {
             int width = this.mFlyout.getWidth();
-            if (isStackOnLeftSide) {
+            if (zIsStackOnLeftSide) {
                 width = -width;
             }
             f2 = width;
@@ -1274,9 +1279,9 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
         } else if (motionEvent.getAction() == 1 || motionEvent.getAction() == 3) {
             this.mPointerIndexDown = -1;
         }
-        boolean dispatchTouchEvent = super.dispatchTouchEvent(motionEvent);
-        if (!dispatchTouchEvent && !this.mIsExpanded && this.mIsGestureInProgress) {
-            dispatchTouchEvent = onTouch(this, motionEvent);
+        boolean zDispatchTouchEvent = super.dispatchTouchEvent(motionEvent);
+        if (!zDispatchTouchEvent && !this.mIsExpanded && this.mIsGestureInProgress) {
+            zDispatchTouchEvent = onTouch(this, motionEvent);
         }
         boolean z = (motionEvent.getAction() == 1 || motionEvent.getAction() == 3) ? false : true;
         this.mIsGestureInProgress = z;
@@ -1284,7 +1289,7 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
             this.mShouldReorderBubblesAfterGestureCompletes = false;
             updateBubbleOrderInternal(Collections.unmodifiableList(this.mBubbleData.mBubbles), false);
         }
-        return dispatchTouchEvent;
+        return zDispatchTouchEvent;
     }
 
     public final int getBubbleCount() {
@@ -1363,12 +1368,12 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
         BigDecimal bigDecimal = new BigDecimal(this.mPositioner.mPositionRect.width() > 0 ? this.mStackAnimationController.mStackPosition.x / r1 : 0.0f);
         RoundingMode roundingMode = RoundingMode.CEILING;
         RoundingMode roundingMode2 = RoundingMode.HALF_UP;
-        float floatValue = bigDecimal.setScale(4, roundingMode2).floatValue();
-        float floatValue2 = new BigDecimal(this.mPositioner.mPositionRect.height() > 0 ? this.mStackAnimationController.mStackPosition.y / r1 : 0.0f).setScale(4, roundingMode2).floatValue();
+        float fFloatValue = bigDecimal.setScale(4, roundingMode2).floatValue();
+        float fFloatValue2 = new BigDecimal(this.mPositioner.mPositionRect.height() > 0 ? this.mStackAnimationController.mStackPosition.y / r1 : 0.0f).setScale(4, roundingMode2).floatValue();
         BubbleLogger bubbleLogger = bubbleData.mLogger;
         if (bubbleViewProvider == null) {
             bubbleLogger.getClass();
-            FrameworkStatsLog.write(149, str, (String) null, 0, 0, bubbleCount, i, floatValue, floatValue2, false, false, false);
+            FrameworkStatsLog.write(149, str, (String) null, 0, 0, bubbleCount, i, fFloatValue, fFloatValue2, false, false, false);
         } else if (bubbleViewProvider.getKey().equals("Overflow")) {
             if (i == 3) {
                 bubbleLogger.mUiEventLogger.log(BubbleLogger.Event.BUBBLE_OVERFLOW_SELECTED, bubbleData.mCurrentUserId, str);
@@ -1376,100 +1381,57 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
         } else {
             Bubble bubble = (Bubble) bubbleViewProvider;
             bubbleLogger.getClass();
-            FrameworkStatsLog.write(149, str, bubble.mChannelId, bubble.mNotificationId, bubbleIndex, bubbleCount, i, floatValue, floatValue2, bubble.showInShade(), false, false);
+            FrameworkStatsLog.write(149, str, bubble.mChannelId, bubble.mNotificationId, bubbleIndex, bubbleCount, i, fFloatValue, fFloatValue2, bubble.showInShade(), false, false);
         }
     }
 
     @Override // android.view.ViewGroup, android.view.View
-    public final void onAttachedToWindow() {
+    public final void onAttachedToWindow() throws Resources.NotFoundException {
         super.onAttachedToWindow();
         WindowManager windowManager = (WindowManager) ((FrameLayout) this).mContext.getSystemService(WindowManager.class);
         BubblePositioner bubblePositioner = this.mPositioner;
         Context context = ((FrameLayout) this).mContext;
         Objects.requireNonNull(windowManager);
-        bubblePositioner.update(DeviceConfig.create(context, windowManager));
+        bubblePositioner.update(DeviceConfig.create(context, windowManager, this.mPositioner.mDeviceConfig.displayCutout));
         getViewTreeObserver().addOnComputeInternalInsetsListener(this);
         getViewTreeObserver().addOnDrawListener(this.mSystemGestureExcludeUpdater);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:14:0x0030, code lost:
-    
-        if (r1.mExpanded != false) goto L13;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:13:0x0032  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void onComputeInternalInsets(android.view.ViewTreeObserver.InternalInsetsInfo r6) {
-        /*
-            r5 = this;
-            r0 = 3
-            r6.setTouchableInsets(r0)
-            android.graphics.Rect r0 = r5.mTempRect
-            r0.setEmpty()
-            android.graphics.Rect r0 = r5.mTempRect
-            boolean r1 = r5.isStackEduVisible()
-            r2 = 0
-            if (r1 == 0) goto L1e
-            int r1 = r5.getWidth()
-            int r3 = r5.getHeight()
-            r0.set(r2, r2, r1, r3)
-            goto L79
-        L1e:
-            boolean r1 = r5.mIsExpanded
-            if (r1 != 0) goto L52
-            int r1 = r5.getBubbleCount()
-            if (r1 > 0) goto L32
-            com.android.wm.shell.bubbles.BubbleData r1 = r5.mBubbleData
-            boolean r3 = r1.mShowingOverflow
-            if (r3 == 0) goto L64
-            boolean r1 = r1.mExpanded
-            if (r1 == 0) goto L64
-        L32:
-            com.android.wm.shell.bubbles.animation.PhysicsAnimationLayout r1 = r5.mBubbleContainer
-            android.view.View r1 = r1.getChildAt(r2)
-            r1.getBoundsOnScreen(r0)
-            int r1 = r0.top
-            int r2 = r5.mBubbleTouchPadding
-            int r1 = r1 - r2
-            r0.top = r1
-            int r1 = r0.left
-            int r1 = r1 - r2
-            r0.left = r1
-            int r1 = r0.right
-            int r1 = r1 + r2
-            r0.right = r1
-            int r1 = r0.bottom
-            int r1 = r1 + r2
-            r0.bottom = r1
-            goto L64
-        L52:
-            com.android.wm.shell.bubbles.animation.PhysicsAnimationLayout r1 = r5.mBubbleContainer
-            r1.getBoundsOnScreen(r0)
-            int r1 = r0.bottom
-            com.android.wm.shell.bubbles.BubblePositioner r3 = r5.mPositioner
-            boolean r4 = r3.mImeVisible
-            if (r4 == 0) goto L61
-            int r2 = r3.mImeHeight
-        L61:
-            int r1 = r1 - r2
-            r0.bottom = r1
-        L64:
-            com.android.wm.shell.bubbles.BubbleFlyoutView r1 = r5.mFlyout
-            int r1 = r1.getVisibility()
-            if (r1 != 0) goto L79
-            android.graphics.Rect r1 = new android.graphics.Rect
-            r1.<init>()
-            com.android.wm.shell.bubbles.BubbleFlyoutView r2 = r5.mFlyout
-            r2.getBoundsOnScreen(r1)
-            r0.union(r1)
-        L79:
-            android.graphics.Region r6 = r6.touchableRegion
-            android.graphics.Rect r5 = r5.mTempRect
-            r6.set(r5)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.bubbles.BubbleStackView.onComputeInternalInsets(android.view.ViewTreeObserver$InternalInsetsInfo):void");
+    public final void onComputeInternalInsets(ViewTreeObserver.InternalInsetsInfo internalInsetsInfo) {
+        internalInsetsInfo.setTouchableInsets(3);
+        this.mTempRect.setEmpty();
+        Rect rect = this.mTempRect;
+        if (isStackEduVisible()) {
+            rect.set(0, 0, getWidth(), getHeight());
+        } else {
+            if (this.mIsExpanded) {
+                this.mBubbleContainer.getBoundsOnScreen(rect);
+                int i = rect.bottom;
+                BubblePositioner bubblePositioner = this.mPositioner;
+                rect.bottom = i - (bubblePositioner.mImeVisible ? bubblePositioner.mImeHeight : 0);
+            } else if (getBubbleCount() <= 0) {
+                BubbleData bubbleData = this.mBubbleData;
+                if (bubbleData.mShowingOverflow && bubbleData.mExpanded) {
+                    this.mBubbleContainer.getChildAt(0).getBoundsOnScreen(rect);
+                    int i2 = rect.top;
+                    int i3 = this.mBubbleTouchPadding;
+                    rect.top = i2 - i3;
+                    rect.left -= i3;
+                    rect.right += i3;
+                    rect.bottom += i3;
+                }
+            }
+            if (this.mFlyout.getVisibility() == 0) {
+                Rect rect2 = new Rect();
+                this.mFlyout.getBoundsOnScreen(rect2);
+                rect.union(rect2);
+            }
+        }
+        internalInsetsInfo.touchableRegion.set(this.mTempRect);
     }
 
     @Override // android.view.ViewGroup, android.view.View
@@ -1483,7 +1445,7 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
         removeOnLayoutChangeListener(this.mOrientationChangedListener);
     }
 
-    public final void onDisplaySizeChanged() {
+    public final void onDisplaySizeChanged() throws Resources.NotFoundException {
         updateOverflow();
         setUpFlyout();
         setUpDismissView();
@@ -1499,9 +1461,9 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
             }
         }
         if (this.mShowingOverflow) {
-            BadgedImageView iconView$1 = this.mBubbleOverflow.getIconView$1();
+            BadgedImageView iconView = this.mBubbleOverflow.getIconView$1();
             int i2 = this.mBubbleSize;
-            iconView$1.setLayoutParams(new FrameLayout.LayoutParams(i2, i2));
+            iconView.setLayoutParams(new FrameLayout.LayoutParams(i2, i2));
         }
         this.mExpandedAnimationController.updateResources();
         this.mStackAnimationController.updateResources();
@@ -1573,7 +1535,7 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
         invalidate();
     }
 
-    public final void resetCircle() {
+    public final void resetCircle() throws Resources.NotFoundException {
         if ((Resources.getSystem().getConfiguration().uiMode & 48) == 32) {
             this.mDismissView.circle.setup(R.drawable.dismiss_circle_background, R.drawable.bubble_delete_ic_d, R.dimen.sec_noti_bubble_dismiss_button_width);
         } else {
@@ -1581,7 +1543,7 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
         }
     }
 
-    public final void resetDismissAnimator() {
+    public final void resetDismissAnimator() throws Resources.NotFoundException {
         this.mDismissBubbleAnimator.removeAllListeners();
         this.mDismissBubbleAnimator.cancel();
         View view = this.mViewBeingDismissed;
@@ -1601,27 +1563,27 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
         if (this.mFlyout.getWidth() <= 0) {
             return;
         }
-        boolean isStackOnLeftSide = this.mStackAnimationController.isStackOnLeftSide();
+        boolean zIsStackOnLeftSide = this.mStackAnimationController.isStackOnLeftSide();
         this.mFlyoutDragDeltaX = f;
-        if (isStackOnLeftSide) {
+        if (zIsStackOnLeftSide) {
             f = -f;
         }
         float width = f / this.mFlyout.getWidth();
-        float f2 = 0.0f;
+        float width2 = 0.0f;
         this.mFlyout.setCollapsePercent(Math.min(1.0f, Math.max(0.0f, width)));
         if (width < 0.0f || width > 1.0f) {
             boolean z = false;
             boolean z2 = width > 1.0f;
-            if ((isStackOnLeftSide && width > 1.0f) || (!isStackOnLeftSide && width < 0.0f)) {
+            if ((zIsStackOnLeftSide && width > 1.0f) || (!zIsStackOnLeftSide && width < 0.0f)) {
                 z = true;
             }
-            f2 = (this.mFlyout.getWidth() / (8.0f / (z2 ? 2 : 1))) * (z2 ? width - 1.0f : width * (-1.0f)) * (z ? -1 : 1);
+            width2 = (this.mFlyout.getWidth() / (8.0f / (z2 ? 2 : 1))) * (z2 ? width - 1.0f : width * (-1.0f)) * (z ? -1 : 1);
         }
         BubbleFlyoutView bubbleFlyoutView = this.mFlyout;
-        bubbleFlyoutView.setTranslationX(bubbleFlyoutView.mRestingTranslationX + f2);
+        bubbleFlyoutView.setTranslationX(bubbleFlyoutView.mRestingTranslationX + width2);
     }
 
-    public final void setImeVisible(boolean z) {
+    public final void setImeVisible(boolean z) throws Resources.NotFoundException {
         float f;
         int i = 0;
         if ((this.mIsExpansionAnimating || this.mIsBubbleSwitchAnimating) && this.mIsExpanded) {
@@ -1748,7 +1710,7 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
         }
     }
 
-    public final void setUpDismissView() {
+    public final void setUpDismissView() throws Resources.NotFoundException {
         DismissView dismissView = this.mDismissView;
         if (dismissView != null) {
             removeView(dismissView);
@@ -1806,13 +1768,13 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
             viewPropertyAnimator.cancel();
         }
         if (z) {
-            ViewPropertyAnimator animate = this.mScrim.animate();
-            this.mScrimAnimation = animate;
-            animate.setInterpolator(Interpolators.ALPHA_IN).alpha(0.32f).setListener(animatorListenerAdapter).start();
+            ViewPropertyAnimator viewPropertyAnimatorAnimate = this.mScrim.animate();
+            this.mScrimAnimation = viewPropertyAnimatorAnimate;
+            viewPropertyAnimatorAnimate.setInterpolator(Interpolators.ALPHA_IN).alpha(0.32f).setListener(animatorListenerAdapter).start();
         } else {
-            ViewPropertyAnimator animate2 = this.mScrim.animate();
-            this.mScrimAnimation = animate2;
-            animate2.alpha(0.0f).setInterpolator(Interpolators.ALPHA_OUT).setListener(animatorListenerAdapter).start();
+            ViewPropertyAnimator viewPropertyAnimatorAnimate2 = this.mScrim.animate();
+            this.mScrimAnimation = viewPropertyAnimatorAnimate2;
+            viewPropertyAnimatorAnimate2.alpha(0.0f).setInterpolator(Interpolators.ALPHA_OUT).setListener(animatorListenerAdapter).start();
         }
     }
 
@@ -1837,12 +1799,12 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
                 inputMonitor.dispose();
                 bubblesNavBarGestureTracker.mInputMonitor = null;
             }
-            InputMonitor monitorGestureInput = ((InputManager) bubblesNavBarGestureTracker.mContext.getSystemService(InputManager.class)).monitorGestureInput("bubbles-gesture", bubblesNavBarGestureTracker.mContext.getDisplayId());
-            bubblesNavBarGestureTracker.mInputMonitor = monitorGestureInput;
-            bubblesNavBarGestureTracker.mInputEventReceiver = new BubblesNavBarInputEventReceiver(monitorGestureInput.getInputChannel(), Choreographer.getInstance(), new BubblesNavBarMotionEventHandler(bubblesNavBarGestureTracker.mContext, bubblesNavBarGestureTracker.mPositioner, new Runnable() { // from class: com.android.wm.shell.bubbles.BubblesNavBarGestureTracker$$ExternalSyntheticLambda0
+            InputMonitor inputMonitorMonitorGestureInput = ((InputManager) bubblesNavBarGestureTracker.mContext.getSystemService(InputManager.class)).monitorGestureInput("bubbles-gesture", bubblesNavBarGestureTracker.mContext.getDisplayId());
+            bubblesNavBarGestureTracker.mInputMonitor = inputMonitorMonitorGestureInput;
+            bubblesNavBarGestureTracker.mInputEventReceiver = new BubblesNavBarInputEventReceiver(inputMonitorMonitorGestureInput.getInputChannel(), Choreographer.getInstance(), new BubblesNavBarMotionEventHandler(bubblesNavBarGestureTracker.mContext, bubblesNavBarGestureTracker.mPositioner, new Runnable() { // from class: com.android.wm.shell.bubbles.BubblesNavBarGestureTracker$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    BubblesNavBarGestureTracker bubblesNavBarGestureTracker2 = BubblesNavBarGestureTracker.this;
+                    BubblesNavBarGestureTracker bubblesNavBarGestureTracker2 = bubblesNavBarGestureTracker;
                     bubblesNavBarGestureTracker2.getClass();
                     if (ProtoLogImpl_1771455215.Cache.WM_SHELL_BUBBLES_enabled[0]) {
                         ProtoLogImpl_1771455215.d(ShellProtoLogGroup.WM_SHELL_BUBBLES, -4230696345096735024L, 0, null);
@@ -1922,7 +1884,7 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
                             view.setTag(R.id.reorder_animator_tag, view.animate().translationY(stackAnimationController.mStackPosition.y - stackAnimationController.mSwapAnimationOffset).setDuration(300L).withEndAction(new Runnable() { // from class: com.android.wm.shell.bubbles.animation.StackAnimationController$$ExternalSyntheticLambda5
                                 @Override // java.lang.Runnable
                                 public final void run() {
-                                    StackAnimationController stackAnimationController2 = StackAnimationController.this;
+                                    StackAnimationController stackAnimationController2 = stackAnimationController;
                                     StackAnimationController$$ExternalSyntheticLambda3 stackAnimationController$$ExternalSyntheticLambda32 = stackAnimationController$$ExternalSyntheticLambda3;
                                     View view2 = view;
                                     BubbleStackView$$ExternalSyntheticLambda1 bubbleStackView$$ExternalSyntheticLambda12 = bubbleStackView$$ExternalSyntheticLambda1;
@@ -1955,22 +1917,27 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
         for (int i2 = 0; i2 < childCount; i2++) {
             BadgedImageView badgedImageView = (BadgedImageView) this.mBubbleContainer.getChildAt(i2);
             BubbleViewProvider bubbleViewProvider = badgedImageView.mBubble;
-            boolean equals = "Overflow".equals(bubbleViewProvider != null ? bubbleViewProvider.getKey() : null);
+            boolean zEquals = "Overflow".equals(bubbleViewProvider != null ? bubbleViewProvider.getKey() : null);
             MagnetizedObject magnetizedObject = this.mMagnetizedObject;
             if (magnetizedObject == null || !magnetizedObject.underlyingObject.equals(badgedImageView)) {
                 BubblePositioner bubblePositioner = this.mPositioner;
                 bubblePositioner.getClass();
-                if (!equals) {
+                if (zEquals) {
+                    f = 0.0f;
+                    badgedImageView.setZ(f);
+                } else {
                     if (z) {
                         i = bubblePositioner.mMaxBubbles;
-                    } else if (i2 < 2) {
-                        i = bubblePositioner.mMaxBubbles * bubblePositioner.mBubbleElevation;
+                    } else {
+                        if (i2 < 2) {
+                            i = bubblePositioner.mMaxBubbles * bubblePositioner.mBubbleElevation;
+                        }
+                        f = 0.0f;
+                        badgedImageView.setZ(f);
                     }
                     f = i - i2;
                     badgedImageView.setZ(f);
                 }
-                f = 0.0f;
-                badgedImageView.setZ(f);
             } else {
                 badgedImageView.setZ((this.mPositioner.mMaxBubbles * this.mBubbleElevation) + 1);
             }
@@ -2003,7 +1970,7 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
         BubbleStackView$$ExternalSyntheticLambda5 bubbleStackView$$ExternalSyntheticLambda5 = new BubbleStackView$$ExternalSyntheticLambda5(this, 9);
         AnonymousClass1 anonymousClass1 = (AnonymousClass1) surfaceSynchronizer;
         anonymousClass1.getClass();
-        Choreographer.getInstance().postFrameCallback(new AnonymousClass1.ChoreographerFrameCallbackC04251(anonymousClass1, bubbleStackView$$ExternalSyntheticLambda5));
+        Choreographer.getInstance().postFrameCallback(new AnonymousClass1.ChoreographerFrameCallbackC06551(anonymousClass1, bubbleStackView$$ExternalSyntheticLambda5));
     }
 
     public final void updateExpandedView() {
@@ -2018,9 +1985,9 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
             frameLayout.setTranslationY(bubblePositioner.getExpandedViewY(this.mExpandedBubble, bubblePositioner.showBubblesVertically() ? expandedBubbleXY.y : expandedBubbleXY.x));
             this.mExpandedViewContainer.setTranslationX(0.0f);
             if (expandedView.mTaskView != null) {
-                boolean isStackOnLeft = expandedView.mPositioner.isStackOnLeft(expandedView.mStackView.mStackAnimationController.mStackPosition);
+                boolean zIsStackOnLeft = expandedView.mPositioner.isStackOnLeft(expandedView.mStackView.mStackAnimationController.mStackPosition);
                 BubblePositioner bubblePositioner2 = expandedView.mPositioner;
-                int[] expandedViewContainerPadding2 = bubblePositioner2.getExpandedViewContainerPadding(isStackOnLeft, false);
+                int[] expandedViewContainerPadding2 = bubblePositioner2.getExpandedViewContainerPadding(zIsStackOnLeft, false);
                 if (expandedView.mTaskView.getWidth() != ((bubblePositioner2.mScreenRect.width() - expandedViewContainerPadding2[0]) - expandedViewContainerPadding2[2]) - (bubblePositioner2.showBubblesVertically() ? bubblePositioner2.mPointerHeight - bubblePositioner2.mPointerOverlap : 0)) {
                     expandedView.mTaskView.setLayoutParams(new FrameLayout.LayoutParams(-1, -1));
                 }
@@ -2051,9 +2018,9 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
         if (bubbleBarExpandedView != null) {
             bubbleBarExpandedView.applyThemeAttrs();
         }
-        BadgedImageView iconView$1 = bubbleOverflow.getIconView$1();
-        if (iconView$1 != null) {
-            iconView$1.mBubbleIcon.setImageResource(R.drawable.sec_bubble_tw_ic_fad_add_mtrl);
+        BadgedImageView iconView = bubbleOverflow.getIconView$1();
+        if (iconView != null) {
+            iconView.mBubbleIcon.setImageResource(R.drawable.sec_bubble_tw_ic_fad_add_mtrl);
         }
         bubbleOverflow.updateBtnTheme();
         if (this.mShowingOverflow) {
@@ -2071,42 +2038,26 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:8:0x0010, code lost:
-    
-        if (r0.mExpanded != false) goto L10;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:12:0x001c  */
-    /* JADX WARN: Removed duplicated region for block: B:15:? A[RETURN, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:11:0x0014  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final void updateOverflowVisibility() {
-        /*
-            r2 = this;
-            boolean r0 = r2.mShowingOverflow
-            if (r0 == 0) goto L14
-            boolean r0 = r2.mIsExpanded
-            if (r0 != 0) goto L12
-            com.android.wm.shell.bubbles.BubbleData r0 = r2.mBubbleData
-            boolean r1 = r0.mShowingOverflow
-            if (r1 == 0) goto L14
-            boolean r0 = r0.mExpanded
-            if (r0 == 0) goto L14
-        L12:
-            r0 = 0
-            goto L16
-        L14:
-            r0 = 8
-        L16:
-            com.android.wm.shell.bubbles.BubbleOverflow r2 = r2.mBubbleOverflow
-            com.android.wm.shell.bubbles.BadgedImageView r2 = r2.overflowBtn
-            if (r2 == 0) goto L1f
-            r2.setVisibility(r0)
-        L1f:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.bubbles.BubbleStackView.updateOverflowVisibility():void");
+        int i;
+        if (this.mShowingOverflow) {
+            if (!this.mIsExpanded) {
+                BubbleData bubbleData = this.mBubbleData;
+                if (!bubbleData.mShowingOverflow || !bubbleData.mExpanded) {
+                }
+            }
+            i = 0;
+        } else {
+            i = 8;
+        }
+        BadgedImageView badgedImageView = this.mBubbleOverflow.overflowBtn;
+        if (badgedImageView != null) {
+            badgedImageView.setVisibility(i);
+        }
     }
 
     public final void updatePointerPosition(boolean z) {
@@ -2128,7 +2079,7 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
         postDelayed(this.mAnimateTemporarilyInvisibleImmediate, (!(this.mTemporarilyInvisible && this.mFlyout.getVisibility() != 0) || z) ? 0L : 1000L);
     }
 
-    public final void updateUserEdu() {
+    public final void updateUserEdu() throws Resources.NotFoundException {
         if (isStackEduVisible()) {
             StackEducationView stackEducationView = this.mStackEduView;
             if (!stackEducationView.isHiding) {
@@ -2149,25 +2100,25 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
                     ViewGroup.LayoutParams layoutParams = stackEducationView3.getLayoutParams();
                     DeviceConfig deviceConfig = stackEducationView3.positioner.mDeviceConfig;
                     layoutParams.width = (deviceConfig.isLargeScreen || deviceConfig.isLandscape) ? stackEducationView3.getContext().getResources().getDimensionPixelSize(R.dimen.bubbles_user_education_width) : -1;
-                    final boolean isStackOnLeft = stackEducationView3.positioner.isStackOnLeft(startPosition);
+                    final boolean zIsStackOnLeft = stackEducationView3.positioner.isStackOnLeft(startPosition);
                     ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) ((View) stackEducationView3.view$delegate.getValue()).getLayoutParams();
                     int dimensionPixelSize = stackEducationView3.getResources().getDimensionPixelSize(R.dimen.bubble_user_education_margin_horizontal);
-                    marginLayoutParams.leftMargin = isStackOnLeft ? 0 : dimensionPixelSize;
-                    if (!isStackOnLeft) {
+                    marginLayoutParams.leftMargin = zIsStackOnLeft ? 0 : dimensionPixelSize;
+                    if (!zIsStackOnLeft) {
                         dimensionPixelSize = 0;
                     }
                     marginLayoutParams.rightMargin = dimensionPixelSize;
                     final int dimensionPixelSize2 = stackEducationView3.getContext().getResources().getDimensionPixelSize(R.dimen.bubble_user_education_stack_padding);
                     stackEducationView3.setAlpha(0.0f);
                     stackEducationView3.setVisibility(0);
-                    ((View) stackEducationView3.view$delegate.getValue()).setBackgroundResource(isStackOnLeft ? R.drawable.bubble_stack_user_education_bg : R.drawable.bubble_stack_user_education_bg_rtl);
+                    ((View) stackEducationView3.view$delegate.getValue()).setBackgroundResource(zIsStackOnLeft ? R.drawable.bubble_stack_user_education_bg : R.drawable.bubble_stack_user_education_bg_rtl);
                     stackEducationView3.post(new Runnable() { // from class: com.android.wm.shell.bubbles.StackEducationView$show$2
                         @Override // java.lang.Runnable
                         public final void run() {
-                            StackEducationView.this.requestFocus();
-                            View view = (View) StackEducationView.this.view$delegate.getValue();
-                            boolean z = isStackOnLeft;
-                            StackEducationView stackEducationView4 = StackEducationView.this;
+                            stackEducationView3.requestFocus();
+                            View view = (View) stackEducationView3.view$delegate.getValue();
+                            boolean z = zIsStackOnLeft;
+                            StackEducationView stackEducationView4 = stackEducationView3;
                             int i = dimensionPixelSize2;
                             PointF pointF = startPosition;
                             if (z) {
@@ -2178,7 +2129,7 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
                                 view.setTranslationX((stackEducationView4.positioner.mScreenRect.right - view.getWidth()) - i);
                             }
                             view.setTranslationY((pointF.y + (stackEducationView4.positioner.mBubbleSize / 2)) - (view.getHeight() / 2));
-                            StackEducationView.this.animate().setDuration(200L).setInterpolator(Interpolators.FAST_OUT_SLOW_IN).alpha(1.0f);
+                            stackEducationView3.animate().setDuration(200L).setInterpolator(Interpolators.FAST_OUT_SLOW_IN).alpha(1.0f);
                         }
                     });
                     stackEducationView3.getContext().getSharedPreferences(stackEducationView3.getContext().getPackageName(), 0).edit().putBoolean("HasSeenBubblesOnboarding", true).apply();
@@ -2198,7 +2149,6 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class RelativeStackPosition {
         public final boolean mOnLeft;
         public final float mVerticalOffsetPercent;

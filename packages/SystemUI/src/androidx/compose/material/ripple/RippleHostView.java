@@ -16,7 +16,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Lambda;
 import kotlin.math.MathKt__MathJVMKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class RippleHostView extends View {
     public static final int[] PressedState;
@@ -27,7 +26,6 @@ public final class RippleHostView extends View {
     public RippleHostView$$ExternalSyntheticLambda0 resetRippleRunnable;
     public UnprojectedRipple ripple;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -84,15 +82,15 @@ public final class RippleHostView extends View {
     }
 
     public final void setRippleState(boolean z) {
-        long currentAnimationTimeMillis = AnimationUtils.currentAnimationTimeMillis();
+        long jCurrentAnimationTimeMillis = AnimationUtils.currentAnimationTimeMillis();
         Runnable runnable = this.resetRippleRunnable;
         if (runnable != null) {
             removeCallbacks(runnable);
             runnable.run();
         }
         Long l = this.lastRippleStateChangeTimeMillis;
-        long longValue = currentAnimationTimeMillis - (l != null ? l.longValue() : 0L);
-        if (z || longValue >= 5) {
+        long jLongValue = jCurrentAnimationTimeMillis - (l != null ? l.longValue() : 0L);
+        if (z || jLongValue >= 5) {
             int[] iArr = z ? PressedState : RestingState;
             UnprojectedRipple unprojectedRipple = this.ripple;
             if (unprojectedRipple != null) {
@@ -103,12 +101,11 @@ public final class RippleHostView extends View {
             this.resetRippleRunnable = rippleHostView$$ExternalSyntheticLambda0;
             postDelayed(rippleHostView$$ExternalSyntheticLambda0, 50L);
         }
-        this.lastRippleStateChangeTimeMillis = Long.valueOf(currentAnimationTimeMillis);
+        this.lastRippleStateChangeTimeMillis = Long.valueOf(jCurrentAnimationTimeMillis);
     }
 
     /* renamed from: updateRippleProperties-biQXAtU, reason: not valid java name */
-    public final void m244updateRipplePropertiesbiQXAtU(long j, long j2, int i, float f) {
-        long Color;
+    public final void m245updateRipplePropertiesbiQXAtU(long j, long j2, int i, float f) {
         UnprojectedRipple unprojectedRipple = this.ripple;
         if (unprojectedRipple == null) {
             return;
@@ -121,13 +118,13 @@ public final class RippleHostView extends View {
         if (f > 1.0f) {
             f = 1.0f;
         }
-        Color = ColorKt.Color(Color.m461getRedimpl(j2), Color.m460getGreenimpl(j2), Color.m458getBlueimpl(j2), f, Color.m459getColorSpaceimpl(j2));
+        long jColor = ColorKt.Color(Color.m463getRedimpl(j2), Color.m462getGreenimpl(j2), Color.m460getBlueimpl(j2), f, Color.m461getColorSpaceimpl(j2));
         Color color = unprojectedRipple.rippleColor;
-        if (!(color == null ? false : ULong.m3427equalsimpl0(color.value, Color))) {
-            unprojectedRipple.rippleColor = Color.m454boximpl(Color);
-            unprojectedRipple.setColor(ColorStateList.valueOf(ColorKt.m467toArgb8_81llA(Color)));
+        if (!(color == null ? false : ULong.m3447equalsimpl0(color.value, jColor))) {
+            unprojectedRipple.rippleColor = Color.m456boximpl(jColor);
+            unprojectedRipple.setColor(ColorStateList.valueOf(ColorKt.m469toArgb8_81llA(jColor)));
         }
-        Rect rect = new Rect(0, 0, MathKt__MathJVMKt.roundToInt(Size.m417getWidthimpl(j)), MathKt__MathJVMKt.roundToInt(Size.m415getHeightimpl(j)));
+        Rect rect = new Rect(0, 0, MathKt__MathJVMKt.roundToInt(Size.m419getWidthimpl(j)), MathKt__MathJVMKt.roundToInt(Size.m417getHeightimpl(j)));
         setLeft(rect.left);
         setTop(rect.top);
         setRight(rect.right);

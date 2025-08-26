@@ -18,7 +18,6 @@ import com.android.settingslib.animation.AppearAnimationUtils;
 import com.android.settingslib.animation.DisappearAnimationUtils;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardPatternView extends KeyguardInputView implements AppearAnimationCreator {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -89,16 +88,16 @@ public class KeyguardPatternView extends KeyguardInputView implements AppearAnim
 
     @Override // android.view.View
     public final boolean onTouchEvent(MotionEvent motionEvent) {
-        boolean onTouchEvent = super.onTouchEvent(motionEvent);
-        long elapsedRealtime = SystemClock.elapsedRealtime() - this.mLastPokeTime;
-        if (onTouchEvent && elapsedRealtime > 6900) {
+        boolean zOnTouchEvent = super.onTouchEvent(motionEvent);
+        long jElapsedRealtime = SystemClock.elapsedRealtime() - this.mLastPokeTime;
+        if (zOnTouchEvent && jElapsedRealtime > 6900) {
             this.mLastPokeTime = SystemClock.elapsedRealtime();
         }
         this.mTempRect.set(0, 0, 0, 0);
         offsetRectIntoDescendantCoords(this.mLockPatternView, this.mTempRect);
         Rect rect = this.mTempRect;
         motionEvent.offsetLocation(rect.left, rect.top);
-        boolean z = this.mLockPatternView.dispatchTouchEvent(motionEvent) || onTouchEvent;
+        boolean z = this.mLockPatternView.dispatchTouchEvent(motionEvent) || zOnTouchEvent;
         Rect rect2 = this.mTempRect;
         motionEvent.offsetLocation(-rect2.left, -rect2.top);
         return z;

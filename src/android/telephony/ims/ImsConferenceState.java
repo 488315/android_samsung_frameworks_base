@@ -62,20 +62,20 @@ public final class ImsConferenceState implements Parcelable {
 
     @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int i) {
-        Set<Map.Entry<String, Bundle>> entrySet;
+        Set<Map.Entry<String, Bundle>> setEntrySet;
         parcel.writeInt(this.mParticipants.size());
-        if (this.mParticipants.size() <= 0 || (entrySet = this.mParticipants.entrySet()) == null) {
+        if (this.mParticipants.size() <= 0 || (setEntrySet = this.mParticipants.entrySet()) == null) {
             return;
         }
-        for (Map.Entry<String, Bundle> entry : entrySet) {
+        for (Map.Entry<String, Bundle> entry : setEntrySet) {
             parcel.writeString(entry.getKey());
             parcel.writeParcelable(entry.getValue(), 0);
         }
     }
 
     private void readFromParcel(Parcel parcel) {
-        int readInt = parcel.readInt();
-        for (int i = 0; i < readInt; i++) {
+        int i = parcel.readInt();
+        for (int i2 = 0; i2 < i; i2++) {
             this.mParticipants.put(parcel.readString(), (Bundle) parcel.readParcelable(null, Bundle.class));
         }
     }
@@ -97,11 +97,11 @@ public final class ImsConferenceState implements Parcelable {
     }
 
     public String toString() {
-        Set<Map.Entry<String, Bundle>> entrySet;
+        Set<Map.Entry<String, Bundle>> setEntrySet;
         StringBuilder sb = new StringBuilder("[ImsConferenceState ");
-        if (this.mParticipants.size() > 0 && (entrySet = this.mParticipants.entrySet()) != null) {
+        if (this.mParticipants.size() > 0 && (setEntrySet = this.mParticipants.entrySet()) != null) {
             sb.append("<");
-            for (Map.Entry<String, Bundle> entry : entrySet) {
+            for (Map.Entry<String, Bundle> entry : setEntrySet) {
                 sb.append(Rlog.pii(TAG, entry.getKey()));
                 sb.append(": ");
                 Bundle value = entry.getValue();

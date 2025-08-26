@@ -212,16 +212,16 @@ public class SoundTrigger {
             boolean z;
             int i;
             boolean z2;
-            int readInt = parcel.readInt();
-            String readString = parcel.readString();
-            String readString2 = parcel.readString();
-            String readString3 = parcel.readString();
-            int readInt2 = parcel.readInt();
-            String readString4 = parcel.readString();
-            int readInt3 = parcel.readInt();
-            int readInt4 = parcel.readInt();
-            int readInt5 = parcel.readInt();
-            int readInt6 = parcel.readInt();
+            int i2 = parcel.readInt();
+            String string = parcel.readString();
+            String string2 = parcel.readString();
+            String string3 = parcel.readString();
+            int i3 = parcel.readInt();
+            String string4 = parcel.readString();
+            int i4 = parcel.readInt();
+            int i5 = parcel.readInt();
+            int i6 = parcel.readInt();
+            int i7 = parcel.readInt();
             boolean z3 = false;
             if (parcel.readByte() == 1) {
                 z = false;
@@ -229,15 +229,15 @@ public class SoundTrigger {
             } else {
                 z = false;
             }
-            int readInt7 = parcel.readInt();
+            int i8 = parcel.readInt();
             if (parcel.readByte() == 1) {
-                i = readInt7;
+                i = i8;
                 z2 = true;
             } else {
-                i = readInt7;
+                i = i8;
                 z2 = z;
             }
-            return new ModuleProperties(readInt, readString, readString2, readString3, readInt2, readString4, readInt3, readInt4, readInt5, readInt6, z3, i, z2, parcel.readInt(), parcel.readByte() == 1, parcel.readInt());
+            return new ModuleProperties(i2, string, string2, string3, i3, string4, i4, i5, i6, i7, z3, i, z2, parcel.readInt(), parcel.readByte() == 1, parcel.readInt());
         }
 
         @Override // android.os.Parcelable
@@ -410,18 +410,18 @@ public class SoundTrigger {
 
         public static Keyphrase readFromParcel(Parcel parcel) {
             int[] iArr;
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
-            Locale forLanguageTag = Locale.forLanguageTag(parcel.readString());
-            String readString = parcel.readString();
-            int readInt3 = parcel.readInt();
-            if (readInt3 >= 0) {
-                iArr = new int[readInt3];
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
+            Locale localeForLanguageTag = Locale.forLanguageTag(parcel.readString());
+            String string = parcel.readString();
+            int i3 = parcel.readInt();
+            if (i3 >= 0) {
+                iArr = new int[i3];
                 parcel.readIntArray(iArr);
             } else {
                 iArr = null;
             }
-            return new Keyphrase(readInt, readInt2, forLanguageTag, readString, iArr);
+            return new Keyphrase(i, i2, localeForLanguageTag, string, iArr);
         }
 
         @Override // android.os.Parcelable
@@ -764,9 +764,9 @@ public class SoundTrigger {
         protected static RecognitionEvent fromParcel(Parcel parcel) {
             byte b;
             byte b2;
-            AudioFormat audioFormat;
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
+            AudioFormat audioFormatBuild;
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
             boolean z = false;
             if (parcel.readByte() == 1) {
                 b = 0;
@@ -776,19 +776,19 @@ public class SoundTrigger {
                 b = 0;
                 b2 = 1;
             }
-            int readInt3 = parcel.readInt();
+            int i3 = parcel.readInt();
             byte b3 = b2;
-            int readInt4 = parcel.readInt();
-            int readInt5 = parcel.readInt();
+            int i4 = parcel.readInt();
+            int i5 = parcel.readInt();
             if (parcel.readByte() == b3) {
                 b = b3;
             }
             if (parcel.readByte() == b3) {
-                audioFormat = new AudioFormat.Builder().setChannelMask(parcel.readInt()).setEncoding(parcel.readInt()).setSampleRate(parcel.readInt()).build();
+                audioFormatBuild = new AudioFormat.Builder().setChannelMask(parcel.readInt()).setEncoding(parcel.readInt()).setSampleRate(parcel.readInt()).build();
             } else {
-                audioFormat = null;
+                audioFormatBuild = null;
             }
-            return new RecognitionEvent(readInt, readInt2, z, readInt3, readInt4, readInt5, b, audioFormat, parcel.readBlob(), parcel.readBoolean(), parcel.readLong(), parcel.readStrongBinder());
+            return new RecognitionEvent(i, i2, z, i3, i4, i5, b, audioFormatBuild, parcel.readBlob(), parcel.readBoolean(), parcel.readLong(), parcel.readStrongBinder());
         }
 
         public void writeToParcel(Parcel parcel, int i) {
@@ -820,12 +820,12 @@ public class SoundTrigger {
             if (!this.triggerInData) {
                 i = 1237;
             }
-            int i3 = i2 + i;
+            int sampleRate = i2 + i;
             AudioFormat audioFormat = this.captureFormat;
             if (audioFormat != null) {
-                i3 = (((((i3 * 31) + audioFormat.getSampleRate()) * 31) + this.captureFormat.getEncoding()) * 31) + this.captureFormat.getChannelMask();
+                sampleRate = (((((sampleRate * 31) + audioFormat.getSampleRate()) * 31) + this.captureFormat.getEncoding()) * 31) + this.captureFormat.getChannelMask();
             }
-            return (((((((((i3 * 31) + Arrays.hashCode(this.data)) * 31) + this.soundModelHandle) * 31) + this.status + (this.recognitionStillActive ? MetricsProto.MetricsEvent.AUTOFILL_INVALID_PERMISSION : 1291)) * 31) + Long.hashCode(this.halEventReceivedMillis)) * 31) + Objects.hashCode(this.token);
+            return (((((((((sampleRate * 31) + Arrays.hashCode(this.data)) * 31) + this.soundModelHandle) * 31) + this.status + (this.recognitionStillActive ? MetricsProto.MetricsEvent.AUTOFILL_INVALID_PERMISSION : 1291)) * 31) + Long.hashCode(this.halEventReceivedMillis)) * 31) + Objects.hashCode(this.token);
         }
 
         public boolean equals(Object obj) {
@@ -1204,9 +1204,9 @@ public class SoundTrigger {
         public static KeyphraseRecognitionEvent fromParcelForKeyphrase(Parcel parcel) {
             byte b;
             byte b2;
-            AudioFormat audioFormat;
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
+            AudioFormat audioFormatBuild;
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
             boolean z = false;
             if (parcel.readByte() == 1) {
                 b = 0;
@@ -1216,19 +1216,19 @@ public class SoundTrigger {
                 b = 0;
                 b2 = 1;
             }
-            int readInt3 = parcel.readInt();
+            int i3 = parcel.readInt();
             byte b3 = b2;
-            int readInt4 = parcel.readInt();
-            int readInt5 = parcel.readInt();
+            int i4 = parcel.readInt();
+            int i5 = parcel.readInt();
             if (parcel.readByte() == b3) {
                 b = b3;
             }
             if (parcel.readByte() == b3) {
-                audioFormat = new AudioFormat.Builder().setChannelMask(parcel.readInt()).setEncoding(parcel.readInt()).setSampleRate(parcel.readInt()).build();
+                audioFormatBuild = new AudioFormat.Builder().setChannelMask(parcel.readInt()).setEncoding(parcel.readInt()).setSampleRate(parcel.readInt()).build();
             } else {
-                audioFormat = null;
+                audioFormatBuild = null;
             }
-            return new KeyphraseRecognitionEvent(readInt, readInt2, z, readInt3, readInt4, readInt5, b, audioFormat, parcel.readBlob(), (KeyphraseRecognitionExtra[]) parcel.createTypedArray(KeyphraseRecognitionExtra.CREATOR), parcel.readBoolean(), parcel.readLong(), parcel.readStrongBinder());
+            return new KeyphraseRecognitionEvent(i, i2, z, i3, i4, i5, b, audioFormatBuild, parcel.readBlob(), (KeyphraseRecognitionExtra[]) parcel.createTypedArray(KeyphraseRecognitionExtra.CREATOR), parcel.readBoolean(), parcel.readLong(), parcel.readStrongBinder());
         }
 
         @Override // android.hardware.soundtrigger.SoundTrigger.RecognitionEvent, android.os.Parcelable
@@ -1343,8 +1343,8 @@ public class SoundTrigger {
 
         /* JADX INFO: Access modifiers changed from: private */
         public static GenericRecognitionEvent fromParcelForGeneric(Parcel parcel) {
-            RecognitionEvent fromParcel = RecognitionEvent.fromParcel(parcel);
-            return new GenericRecognitionEvent(fromParcel.status, fromParcel.soundModelHandle, fromParcel.captureAvailable, fromParcel.captureSession, fromParcel.captureDelayMs, fromParcel.capturePreambleMs, fromParcel.triggerInData, fromParcel.captureFormat, fromParcel.data, fromParcel.recognitionStillActive, fromParcel.halEventReceivedMillis, fromParcel.token);
+            RecognitionEvent recognitionEventFromParcel = RecognitionEvent.fromParcel(parcel);
+            return new GenericRecognitionEvent(recognitionEventFromParcel.status, recognitionEventFromParcel.soundModelHandle, recognitionEventFromParcel.captureAvailable, recognitionEventFromParcel.captureSession, recognitionEventFromParcel.captureDelayMs, recognitionEventFromParcel.capturePreambleMs, recognitionEventFromParcel.triggerInData, recognitionEventFromParcel.captureFormat, recognitionEventFromParcel.data, recognitionEventFromParcel.recognitionStillActive, recognitionEventFromParcel.halEventReceivedMillis, recognitionEventFromParcel.token);
         }
 
         @Override // android.hardware.soundtrigger.SoundTrigger.RecognitionEvent
@@ -1446,12 +1446,12 @@ public class SoundTrigger {
     }
 
     private static ISoundTriggerMiddlewareService getService() {
-        ISoundTriggerMiddlewareService asInterface;
+        ISoundTriggerMiddlewareService iSoundTriggerMiddlewareServiceAsInterface;
         synchronized (mServiceLock) {
             while (true) {
                 try {
                     try {
-                        asInterface = ISoundTriggerMiddlewareService.Stub.asInterface(ServiceManager.getServiceOrThrow(Context.SOUND_TRIGGER_MIDDLEWARE_SERVICE));
+                        iSoundTriggerMiddlewareServiceAsInterface = ISoundTriggerMiddlewareService.Stub.asInterface(ServiceManager.getServiceOrThrow(Context.SOUND_TRIGGER_MIDDLEWARE_SERVICE));
                     } catch (Exception e) {
                         Log.e(TAG, "Failed to bind to soundtrigger service", e);
                     }
@@ -1460,6 +1460,6 @@ public class SoundTrigger {
                 }
             }
         }
-        return asInterface;
+        return iSoundTriggerMiddlewareServiceAsInterface;
     }
 }

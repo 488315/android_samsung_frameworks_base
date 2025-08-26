@@ -52,9 +52,9 @@ public interface IEphemeralResolver extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IEphemeralResolver)) {
-                return (IEphemeralResolver) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IEphemeralResolver)) {
+                return (IEphemeralResolver) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -84,17 +84,17 @@ public interface IEphemeralResolver extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IRemoteCallback asInterface = IRemoteCallback.Stub.asInterface(parcel.readStrongBinder());
-                int[] createIntArray = parcel.createIntArray();
-                int readInt = parcel.readInt();
+                IRemoteCallback iRemoteCallbackAsInterface = IRemoteCallback.Stub.asInterface(parcel.readStrongBinder());
+                int[] iArrCreateIntArray = parcel.createIntArray();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                getEphemeralResolveInfoList(asInterface, createIntArray, readInt);
+                getEphemeralResolveInfoList(iRemoteCallbackAsInterface, iArrCreateIntArray, i3);
             } else if (i == 2) {
-                IRemoteCallback asInterface2 = IRemoteCallback.Stub.asInterface(parcel.readStrongBinder());
-                String readString = parcel.readString();
-                int readInt2 = parcel.readInt();
+                IRemoteCallback iRemoteCallbackAsInterface2 = IRemoteCallback.Stub.asInterface(parcel.readStrongBinder());
+                String string = parcel.readString();
+                int i4 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                getEphemeralIntentFilterList(asInterface2, readString, readInt2);
+                getEphemeralIntentFilterList(iRemoteCallbackAsInterface2, string, i4);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -119,29 +119,29 @@ public interface IEphemeralResolver extends IInterface {
 
             @Override // android.app.IEphemeralResolver
             public void getEphemeralResolveInfoList(IRemoteCallback iRemoteCallback, int[] iArr, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iRemoteCallback);
-                    obtain.writeIntArray(iArr);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iRemoteCallback);
+                    parcelObtain.writeIntArray(iArr);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.IEphemeralResolver
             public void getEphemeralIntentFilterList(IRemoteCallback iRemoteCallback, String str, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iRemoteCallback);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iRemoteCallback);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

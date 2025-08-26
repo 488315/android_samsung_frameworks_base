@@ -16,20 +16,20 @@ public class BinderUtils {
     }
 
     public static final <T extends Exception> void withCleanCallingIdentity(ThrowingRunnable<T> throwingRunnable) throws Exception {
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             throwingRunnable.run();
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 
     public static final <T, E extends Exception> T withCleanCallingIdentity(ThrowingSupplier<T, E> throwingSupplier) throws Exception {
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             return throwingSupplier.get();
         } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
         }
     }
 }

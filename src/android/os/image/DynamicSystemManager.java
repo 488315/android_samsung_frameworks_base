@@ -62,11 +62,11 @@ public class DynamicSystemManager {
 
     public Pair<Integer, Session> createPartition(String str, long j, boolean z) {
         try {
-            int createPartition = this.mService.createPartition(str, j, z);
-            if (createPartition == 0) {
-                return new Pair<>(Integer.valueOf(createPartition), new Session());
+            int iCreatePartition = this.mService.createPartition(str, j, z);
+            if (iCreatePartition == 0) {
+                return new Pair<>(Integer.valueOf(iCreatePartition), new Session());
             }
-            return new Pair<>(Integer.valueOf(createPartition), null);
+            return new Pair<>(Integer.valueOf(iCreatePartition), null);
         } catch (RemoteException e) {
             throw new RuntimeException(e.toString());
         }

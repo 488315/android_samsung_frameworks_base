@@ -9,13 +9,13 @@ import org.xmlpull.v1.XmlPullParserFactory;
 
 /* loaded from: classes5.dex */
 public class XmlParser {
-    public static ApexInfoList readApexInfoList(InputStream inputStream) throws XmlPullParserException, IOException, DatatypeConfigurationException {
-        XmlPullParser newPullParser = XmlPullParserFactory.newInstance().newPullParser();
-        newPullParser.setFeature("http://xmlpull.org/v1/doc/features.html#process-namespaces", true);
-        newPullParser.setInput(inputStream, null);
-        newPullParser.nextTag();
-        if (newPullParser.getName().equals("apex-info-list")) {
-            return ApexInfoList.read(newPullParser);
+    public static ApexInfoList readApexInfoList(InputStream inputStream) throws XmlPullParserException, DatatypeConfigurationException, IOException {
+        XmlPullParser xmlPullParserNewPullParser = XmlPullParserFactory.newInstance().newPullParser();
+        xmlPullParserNewPullParser.setFeature("http://xmlpull.org/v1/doc/features.html#process-namespaces", true);
+        xmlPullParserNewPullParser.setInput(inputStream, null);
+        xmlPullParserNewPullParser.nextTag();
+        if (xmlPullParserNewPullParser.getName().equals("apex-info-list")) {
+            return ApexInfoList.read(xmlPullParserNewPullParser);
         }
         return null;
     }

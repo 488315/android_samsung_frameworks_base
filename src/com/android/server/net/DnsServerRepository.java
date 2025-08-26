@@ -24,15 +24,15 @@ class DnsServerRepository {
     }
 
     public synchronized boolean addServers(long j, String[] strArr) {
-        long currentTimeMillis = System.currentTimeMillis();
-        long j2 = (j * 1000) + currentTimeMillis;
+        long jCurrentTimeMillis = System.currentTimeMillis();
+        long j2 = (j * 1000) + jCurrentTimeMillis;
         for (String str : strArr) {
             try {
-                InetAddress parseNumericAddress = InetAddress.parseNumericAddress(str);
-                if (!updateExistingEntry(parseNumericAddress, j2) && j2 > currentTimeMillis) {
-                    DnsServerEntry dnsServerEntry = new DnsServerEntry(parseNumericAddress, j2);
+                InetAddress numericAddress = InetAddress.parseNumericAddress(str);
+                if (!updateExistingEntry(numericAddress, j2) && j2 > jCurrentTimeMillis) {
+                    DnsServerEntry dnsServerEntry = new DnsServerEntry(numericAddress, j2);
                     this.mAllServers.add(dnsServerEntry);
-                    this.mIndex.put(parseNumericAddress, dnsServerEntry);
+                    this.mIndex.put(numericAddress, dnsServerEntry);
                 }
             } catch (IllegalArgumentException unused) {
             }
@@ -51,13 +51,13 @@ class DnsServerRepository {
     }
 
     private synchronized boolean updateCurrentServers() {
-        boolean z;
-        long currentTimeMillis = System.currentTimeMillis();
-        z = false;
-        for (int size = this.mAllServers.size() - 1; size >= 0 && (size >= 12 || this.mAllServers.get(size).expiry < currentTimeMillis); size--) {
-            DnsServerEntry remove = this.mAllServers.remove(size);
-            this.mIndex.remove(remove.address);
-            z |= this.mCurrentServers.remove(remove.address);
+        boolean zAdd;
+        long jCurrentTimeMillis = System.currentTimeMillis();
+        zAdd = false;
+        for (int size = this.mAllServers.size() - 1; size >= 0 && (size >= 12 || this.mAllServers.get(size).expiry < jCurrentTimeMillis); size--) {
+            DnsServerEntry dnsServerEntryRemove = this.mAllServers.remove(size);
+            this.mIndex.remove(dnsServerEntryRemove.address);
+            zAdd |= this.mCurrentServers.remove(dnsServerEntryRemove.address);
         }
         Iterator<DnsServerEntry> it = this.mAllServers.iterator();
         while (it.hasNext()) {
@@ -65,8 +65,8 @@ class DnsServerRepository {
             if (this.mCurrentServers.size() >= 3) {
                 break;
             }
-            z |= this.mCurrentServers.add(next.address);
+            zAdd |= this.mCurrentServers.add(next.address);
         }
-        return z;
+        return zAdd;
     }
 }

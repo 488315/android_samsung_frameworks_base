@@ -13,7 +13,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class BubbleEducationViewController {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -26,7 +25,6 @@ public final class BubbleEducationViewController {
     public final Lazy scrimView$delegate = LazyKt__LazyJVMKt.lazy(new BubbleEducationViewController$$ExternalSyntheticLambda2(this, 0));
     public final Lazy controller$delegate = LazyKt__LazyJVMKt.lazy(new BubbleEducationViewController$$ExternalSyntheticLambda2(this, 1));
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -36,7 +34,6 @@ public final class BubbleEducationViewController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Listener {
     }
 
@@ -59,7 +56,7 @@ public final class BubbleEducationViewController {
                 public final Object invoke() {
                     TaskView taskView2;
                     int i = BubbleEducationViewController.$r8$clinit;
-                    BubbleEducationViewController bubbleEducationViewController2 = BubbleEducationViewController.this;
+                    BubbleEducationViewController bubbleEducationViewController2 = this.f$0;
                     ViewGroup viewGroup = bubbleEducationViewController2.rootView;
                     if (viewGroup != null) {
                         viewGroup.removeView(bubbleEducationViewController2.educationView);

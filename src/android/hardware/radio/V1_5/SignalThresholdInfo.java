@@ -39,13 +39,13 @@ public final class SignalThresholdInfo {
 
     public static final ArrayList<SignalThresholdInfo> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<SignalThresholdInfo> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 40, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 40, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             SignalThresholdInfo signalThresholdInfo = new SignalThresholdInfo();
-            signalThresholdInfo.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 40);
+            signalThresholdInfo.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 40);
             arrayList.add(signalThresholdInfo);
         }
         return arrayList;
@@ -56,10 +56,10 @@ public final class SignalThresholdInfo {
         this.hysteresisMs = hwBlob.getInt32(4 + j);
         this.hysteresisDb = hwBlob.getInt32(8 + j);
         int int32 = hwBlob.getInt32(24 + j);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 4, hwBlob.handle(), j + 16, true);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 4, hwBlob.handle(), j + 16, true);
         this.thresholds.clear();
         for (int i = 0; i < int32; i++) {
-            this.thresholds.add(Integer.valueOf(readEmbeddedBuffer.getInt32(i * 4)));
+            this.thresholds.add(Integer.valueOf(embeddedBuffer.getInt32(i * 4)));
         }
         this.isEnabled = hwBlob.getBool(j + 32);
     }

@@ -8,7 +8,6 @@ import android.view.IRemoteAnimationRunner;
 import android.view.RemoteAnimationTarget;
 import com.android.systemui.settings.DisplayTracker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ClipboardTransitionExecutor {
     public final ClipboardTransitionExecutor$NULL_ACTIVITY_TRANSITION$1 NULL_ACTIVITY_TRANSITION = new IRemoteAnimationRunner.Stub() { // from class: com.android.systemui.clipboardoverlay.ClipboardTransitionExecutor$NULL_ACTIVITY_TRANSITION$1
@@ -16,7 +15,7 @@ public final class ClipboardTransitionExecutor {
             try {
                 iRemoteAnimationFinishedCallback.onAnimationFinished();
             } catch (RemoteException e) {
-                ClipboardTransitionExecutor.this.getClass();
+                this.this$0.getClass();
                 Log.e("ClipboardTransitionExec", "Error finishing screenshot remote animation", e);
             }
         }

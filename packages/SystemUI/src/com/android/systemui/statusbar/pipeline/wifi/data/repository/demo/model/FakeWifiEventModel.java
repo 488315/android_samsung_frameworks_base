@@ -5,11 +5,9 @@ import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public interface FakeWifiEventModel {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class CarrierMerged implements FakeWifiEventModel {
         public final int activity;
         public final int level;
@@ -50,7 +48,6 @@ public interface FakeWifiEventModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class WifiDisabled implements FakeWifiEventModel {
         public static final WifiDisabled INSTANCE = new WifiDisabled();
 
@@ -58,7 +55,6 @@ public interface FakeWifiEventModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Wifi implements FakeWifiEventModel {
         public final int activity;
         public final WifiNetworkModel.HotspotDeviceType hotspotDeviceType;
@@ -87,11 +83,11 @@ public interface FakeWifiEventModel {
 
         public final int hashCode() {
             Integer num = this.level;
-            int m = ReorderTile$$ExternalSyntheticOutline0.m(this.activity, (num == null ? 0 : num.hashCode()) * 31, 31);
+            int iM = ReorderTile$$ExternalSyntheticOutline0.m(this.activity, (num == null ? 0 : num.hashCode()) * 31, 31);
             String str = this.ssid;
-            int hashCode = (m + (str == null ? 0 : str.hashCode())) * 31;
+            int iHashCode = (iM + (str == null ? 0 : str.hashCode())) * 31;
             Boolean bool = this.validated;
-            return this.hotspotDeviceType.hashCode() + ((hashCode + (bool != null ? bool.hashCode() : 0)) * 31);
+            return this.hotspotDeviceType.hashCode() + ((iHashCode + (bool != null ? bool.hashCode() : 0)) * 31);
         }
 
         public final String toString() {

@@ -39,9 +39,9 @@ public interface ICaptureStateListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ICaptureStateListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ICaptureStateListener)) {
-                return (ICaptureStateListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ICaptureStateListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ICaptureStateListener)) {
+                return (ICaptureStateListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -56,9 +56,9 @@ public interface ICaptureStateListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                boolean readBoolean = parcel.readBoolean();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                setCaptureState(readBoolean);
+                setCaptureState(z);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -82,13 +82,13 @@ public interface ICaptureStateListener extends IInterface {
 
             @Override // android.media.ICaptureStateListener
             public void setCaptureState(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICaptureStateListener.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICaptureStateListener.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -4,12 +4,43 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Set;
 import kotlin.collections.CollectionsKt___CollectionsKt;
+import kotlin.jvm.internal.markers.KMappedMarker;
 import kotlin.jvm.internal.markers.KMutableSet;
+import kotlin.sequences.SequenceBuilderIterator;
+import kotlin.sequences.SequencesKt__SequenceBuilderKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class MutableSetWrapper extends SetWrapper implements Set, KMutableSet {
     public final MutableScatterSet parent;
+
+    /* renamed from: androidx.collection.MutableSetWrapper$iterator$1, reason: invalid class name */
+    public final class AnonymousClass1 implements Iterator, KMappedMarker {
+        public int current = -1;
+        public final SequenceBuilderIterator iterator;
+
+        public AnonymousClass1() {
+            this.iterator = SequencesKt__SequenceBuilderKt.iterator(new MutableSetWrapper$iterator$1$iterator$1(MutableSetWrapper.this, this, null));
+        }
+
+        @Override // java.util.Iterator
+        public final boolean hasNext() {
+            return this.iterator.hasNext();
+        }
+
+        @Override // java.util.Iterator
+        public final Object next() {
+            return this.iterator.next();
+        }
+
+        @Override // java.util.Iterator
+        public final void remove() {
+            int i = this.current;
+            if (i != -1) {
+                MutableSetWrapper.this.parent.removeElementAt(i);
+                this.current = -1;
+            }
+        }
+    }
 
     public MutableSetWrapper(MutableScatterSet mutableScatterSet) {
         super(mutableScatterSet);
@@ -39,7 +70,7 @@ public final class MutableSetWrapper extends SetWrapper implements Set, KMutable
 
     @Override // androidx.collection.SetWrapper, java.util.Set, java.util.Collection, java.lang.Iterable
     public final Iterator iterator() {
-        return new MutableSetWrapper$iterator$1(this);
+        return new AnonymousClass1();
     }
 
     @Override // androidx.collection.SetWrapper, java.util.Set, java.util.Collection
@@ -58,7 +89,11 @@ public final class MutableSetWrapper extends SetWrapper implements Set, KMutable
         return i != mutableScatterSet._size;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:16:0x004e  */
     @Override // androidx.collection.SetWrapper, java.util.Set, java.util.Collection
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final boolean retainAll(Collection collection) {
         MutableScatterSet mutableScatterSet = this.parent;
         Object[] objArr = mutableScatterSet.elements;
@@ -83,11 +118,11 @@ public final class MutableSetWrapper extends SetWrapper implements Set, KMutable
                     if (i3 != 8) {
                         break;
                     }
+                    if (i2 == length) {
+                        break;
+                    }
+                    i2++;
                 }
-                if (i2 == length) {
-                    break;
-                }
-                i2++;
             }
         }
         return i != mutableScatterSet._size;

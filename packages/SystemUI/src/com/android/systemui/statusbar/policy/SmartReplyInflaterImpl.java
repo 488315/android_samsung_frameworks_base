@@ -13,7 +13,6 @@ import com.android.systemui.statusbar.SmartReplyController;
 import com.android.systemui.statusbar.phone.KeyguardDismissUtil;
 import com.android.systemui.statusbar.policy.SmartReplyView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SmartReplyInflaterImpl implements SmartReplyInflater {
     public final SmartReplyConstants constants;
@@ -35,9 +34,9 @@ public final class SmartReplyInflaterImpl implements SmartReplyInflater {
     public static Intent createRemoteInputIntent(SmartReplyView.SmartReplies smartReplies, CharSequence charSequence) {
         Bundle bundle = new Bundle();
         bundle.putString(smartReplies.remoteInput.getResultKey(), charSequence.toString());
-        Intent addFlags = new Intent().addFlags(268435456);
-        RemoteInput.addResultsToIntent(new RemoteInput[]{smartReplies.remoteInput}, addFlags, bundle);
-        RemoteInput.setResultsSource(addFlags, 1);
-        return addFlags;
+        Intent intentAddFlags = new Intent().addFlags(268435456);
+        RemoteInput.addResultsToIntent(new RemoteInput[]{smartReplies.remoteInput}, intentAddFlags, bundle);
+        RemoteInput.setResultsSource(intentAddFlags, 1);
+        return intentAddFlags;
     }
 }

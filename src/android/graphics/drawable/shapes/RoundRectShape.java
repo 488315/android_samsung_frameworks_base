@@ -55,24 +55,24 @@ public class RoundRectShape extends RectShape {
         } else {
             f = 0.0f;
         }
-        RectF rect = rect();
-        outline.setRoundRect((int) Math.ceil(rect.left), (int) Math.ceil(rect.top), (int) Math.floor(rect.right), (int) Math.floor(rect.bottom), f);
+        RectF rectFRect = rect();
+        outline.setRoundRect((int) Math.ceil(rectFRect.left), (int) Math.ceil(rectFRect.top), (int) Math.floor(rectFRect.right), (int) Math.floor(rectFRect.bottom), f);
     }
 
     @Override // android.graphics.drawable.shapes.RectShape, android.graphics.drawable.shapes.Shape
     protected void onResize(float f, float f2) {
         super.onResize(f, f2);
-        RectF rect = rect();
+        RectF rectFRect = rect();
         this.mPath.reset();
         float[] fArr = this.mOuterRadii;
         if (fArr != null) {
-            this.mPath.addRoundRect(rect, fArr, Path.Direction.CW);
+            this.mPath.addRoundRect(rectFRect, fArr, Path.Direction.CW);
         } else {
-            this.mPath.addRect(rect, Path.Direction.CW);
+            this.mPath.addRect(rectFRect, Path.Direction.CW);
         }
         RectF rectF = this.mInnerRect;
         if (rectF != null) {
-            rectF.set(rect.left + this.mInset.left, rect.top + this.mInset.top, rect.right - this.mInset.right, rect.bottom - this.mInset.bottom);
+            rectF.set(rectFRect.left + this.mInset.left, rectFRect.top + this.mInset.top, rectFRect.right - this.mInset.right, rectFRect.bottom - this.mInset.bottom);
             if (this.mInnerRect.width() >= f || this.mInnerRect.height() >= f2) {
                 return;
             }
@@ -87,8 +87,8 @@ public class RoundRectShape extends RectShape {
 
     @Override // android.graphics.drawable.shapes.RectShape, android.graphics.drawable.shapes.Shape
     /* renamed from: clone */
-    public RoundRectShape mo1487clone() throws CloneNotSupportedException {
-        RoundRectShape roundRectShape = (RoundRectShape) super.mo1487clone();
+    public RoundRectShape mo1491clone() throws CloneNotSupportedException {
+        RoundRectShape roundRectShape = (RoundRectShape) super.mo1491clone();
         float[] fArr = this.mOuterRadii;
         roundRectShape.mOuterRadii = fArr != null ? (float[]) fArr.clone() : null;
         float[] fArr2 = this.mInnerRadii;

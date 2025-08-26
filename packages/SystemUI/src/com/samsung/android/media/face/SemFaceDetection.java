@@ -5,12 +5,10 @@ import android.graphics.Rect;
 import android.util.Log;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SemFaceDetection {
     public final long[] mFdPointer = {0};
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum ProcessingMode {
         /* JADX INFO: Fake field, exist only in values array */
         HIGH_DETECTION_RATE_MODE(0),
@@ -24,7 +22,6 @@ public class SemFaceDetection {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Settings {
         public Settings() {
             ProcessingMode[] processingModeArr = ProcessingMode.$VALUES;
@@ -83,12 +80,12 @@ public class SemFaceDetection {
             throw new IllegalArgumentException("Invalid dimension of image [" + bitmap.getWidth() + "x" + bitmap.getHeight() + "]");
         }
         arrayList.clear();
-        int detectionFindFaceOnBitmapSupportMultiInstance = detectionFindFaceOnBitmapSupportMultiInstance(jArr, bitmap);
-        if (detectionFindFaceOnBitmapSupportMultiInstance > 0) {
-            for (int i = 0; i < detectionFindFaceOnBitmapSupportMultiInstance; i++) {
+        int iDetectionFindFaceOnBitmapSupportMultiInstance = detectionFindFaceOnBitmapSupportMultiInstance(jArr, bitmap);
+        if (iDetectionFindFaceOnBitmapSupportMultiInstance > 0) {
+            for (int i = 0; i < iDetectionFindFaceOnBitmapSupportMultiInstance; i++) {
                 arrayList.add(new SemFace(detectionGetFaceRectSupportMultiInstance(jArr, i), detectionGetFacePoseSupportMultiInstance(jArr, i)));
             }
         }
-        return detectionFindFaceOnBitmapSupportMultiInstance;
+        return iDetectionFindFaceOnBitmapSupportMultiInstance;
     }
 }

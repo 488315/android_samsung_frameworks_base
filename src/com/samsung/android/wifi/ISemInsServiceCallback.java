@@ -87,9 +87,9 @@ public interface ISemInsServiceCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISemInsServiceCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISemInsServiceCallback)) {
-                return (ISemInsServiceCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISemInsServiceCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISemInsServiceCallback)) {
+                return (ISemInsServiceCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -131,19 +131,19 @@ public interface ISemInsServiceCallback extends IInterface {
             }
             switch (i) {
                 case 1:
-                    String readString = parcel.readString();
-                    double readDouble = parcel.readDouble();
-                    double readDouble2 = parcel.readDouble();
-                    int readInt = parcel.readInt();
-                    boolean readBoolean = parcel.readBoolean();
-                    String readString2 = parcel.readString();
+                    String string = parcel.readString();
+                    double d = parcel.readDouble();
+                    double d2 = parcel.readDouble();
+                    int i3 = parcel.readInt();
+                    boolean z = parcel.readBoolean();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    onOutageCountChanged(readString, readDouble, readDouble2, readInt, readBoolean, readString2);
+                    onOutageCountChanged(string, d, d2, i3, z, string2);
                     return true;
                 case 2:
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onServiceStateChange(readInt2);
+                    onServiceStateChange(i4);
                     return true;
                 case 3:
                     ModelMetrics modelMetrics = (ModelMetrics) parcel.readTypedObject(ModelMetrics.CREATOR);
@@ -156,15 +156,15 @@ public interface ISemInsServiceCallback extends IInterface {
                     onNsmMetricsUpdate(modelMetrics2);
                     return true;
                 case 5:
-                    String readString3 = parcel.readString();
-                    String[] createStringArray = parcel.createStringArray();
+                    String string3 = parcel.readString();
+                    String[] strArrCreateStringArray = parcel.createStringArray();
                     parcel.enforceNoDataAvail();
-                    onInferResult(readString3, createStringArray);
+                    onInferResult(string3, strArrCreateStringArray);
                     return true;
                 case 6:
-                    String[] createStringArray2 = parcel.createStringArray();
+                    String[] strArrCreateStringArray2 = parcel.createStringArray();
                     parcel.enforceNoDataAvail();
-                    onTrainingStarted(createStringArray2);
+                    onTrainingStarted(strArrCreateStringArray2);
                     return true;
                 case 7:
                     onTrainingStopped();
@@ -192,90 +192,90 @@ public interface ISemInsServiceCallback extends IInterface {
 
             @Override // com.samsung.android.wifi.ISemInsServiceCallback
             public void onOutageCountChanged(String str, double d, double d2, int i, boolean z, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISemInsServiceCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeDouble(d);
-                    obtain.writeDouble(d2);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISemInsServiceCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeDouble(d);
+                    parcelObtain.writeDouble(d2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.ISemInsServiceCallback
             public void onServiceStateChange(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISemInsServiceCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISemInsServiceCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.ISemInsServiceCallback
             public void onPathMetricsUpdate(ModelMetrics modelMetrics) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISemInsServiceCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(modelMetrics, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISemInsServiceCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(modelMetrics, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.ISemInsServiceCallback
             public void onNsmMetricsUpdate(ModelMetrics modelMetrics) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISemInsServiceCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(modelMetrics, 0);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISemInsServiceCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(modelMetrics, 0);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.ISemInsServiceCallback
             public void onInferResult(String str, String[] strArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISemInsServiceCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStringArray(strArr);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISemInsServiceCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStringArray(strArr);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.ISemInsServiceCallback
             public void onTrainingStarted(String[] strArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISemInsServiceCallback.DESCRIPTOR);
-                    obtain.writeStringArray(strArr);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISemInsServiceCallback.DESCRIPTOR);
+                    parcelObtain.writeStringArray(strArr);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.ISemInsServiceCallback
             public void onTrainingStopped() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISemInsServiceCallback.DESCRIPTOR);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISemInsServiceCallback.DESCRIPTOR);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

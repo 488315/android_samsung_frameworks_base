@@ -23,9 +23,9 @@ public class TimingLogger {
     }
 
     public void reset() {
-        boolean isLoggable = Log.isLoggable(this.mTag, 2);
-        this.mDisabled = !isLoggable;
-        if (isLoggable) {
+        boolean zIsLoggable = Log.isLoggable(this.mTag, 2);
+        this.mDisabled = !zIsLoggable;
+        if (zIsLoggable) {
             ArrayList<Long> arrayList = this.mSplits;
             if (arrayList == null) {
                 this.mSplits = new ArrayList<>();
@@ -51,14 +51,14 @@ public class TimingLogger {
             return;
         }
         Log.d(this.mTag, this.mLabel + ": begin");
-        long longValue = this.mSplits.get(0).longValue();
-        long j = longValue;
+        long jLongValue = this.mSplits.get(0).longValue();
+        long jLongValue2 = jLongValue;
         for (int i = 1; i < this.mSplits.size(); i++) {
-            j = this.mSplits.get(i).longValue();
+            jLongValue2 = this.mSplits.get(i).longValue();
             String str = this.mSplitLabels.get(i);
-            long longValue2 = this.mSplits.get(i - 1).longValue();
-            Log.d(this.mTag, this.mLabel + ":      " + (j - longValue2) + " ms, " + str);
+            long jLongValue3 = this.mSplits.get(i - 1).longValue();
+            Log.d(this.mTag, this.mLabel + ":      " + (jLongValue2 - jLongValue3) + " ms, " + str);
         }
-        Log.d(this.mTag, this.mLabel + ": end, " + (j - longValue) + " ms");
+        Log.d(this.mTag, this.mLabel + ": end, " + (jLongValue2 - jLongValue) + " ms");
     }
 }

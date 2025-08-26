@@ -1,16 +1,15 @@
 package okio.internal;
 
-import okio.C0436SegmentedByteString;
+import okio.C1238SegmentedByteString;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* renamed from: okio.internal.-SegmentedByteString, reason: invalid class name */
 /* loaded from: classes4.dex */
 public abstract class SegmentedByteString {
-    public static final int segment(C0436SegmentedByteString c0436SegmentedByteString, int i) {
+    public static final int segment(C1238SegmentedByteString c1238SegmentedByteString, int i) {
         int i2;
-        int[] iArr = c0436SegmentedByteString.directory;
+        int[] iArr = c1238SegmentedByteString.directory;
         int i3 = i + 1;
-        int length = c0436SegmentedByteString.segments.length - 1;
+        int length = c1238SegmentedByteString.segments.length - 1;
         int i4 = 0;
         while (true) {
             if (i4 <= length) {

@@ -9,7 +9,6 @@ import com.android.systemui.util.DeviceState;
 import com.android.systemui.util.condition.ConditionalCoreStartable;
 import com.android.systemui.util.settings.SecureSettings;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class DreamMonitor extends ConditionalCoreStartable {
     public static final boolean IS_ENABLED = DeviceState.isAlreadyBooted();
@@ -37,9 +36,9 @@ public class DreamMonitor extends ConditionalCoreStartable {
         }
         Monitor.Subscription.Builder builder = new Monitor.Subscription.Builder(this.mCallback);
         builder.mConditions.add(this.mDreamCondition);
-        Monitor.Subscription build = builder.build();
+        Monitor.Subscription subscriptionBuild = builder.build();
         Monitor monitor = this.mConditionMonitor;
-        monitor.addSubscription(build, monitor.mPreconditions);
+        monitor.addSubscription(subscriptionBuild, monitor.mPreconditions);
         final RestartDozeListener restartDozeListener = this.mRestartDozeListener;
         if (!restartDozeListener.inited) {
             restartDozeListener.inited = true;
@@ -48,18 +47,18 @@ public class DreamMonitor extends ConditionalCoreStartable {
         restartDozeListener.bgExecutor.executeDelayed(new Runnable() { // from class: com.android.systemui.flags.RestartDozeListener$maybeRestartSleep$1
             @Override // java.lang.Runnable
             public final void run() {
-                SecureSettings secureSettings = RestartDozeListener.this.settings;
+                SecureSettings secureSettings = restartDozeListener.settings;
                 RestartDozeListener.Companion.getClass();
                 if (secureSettings.getBool(RestartDozeListener.RESTART_SLEEP_KEY, false)) {
                     Log.d("RestartDozeListener", "Restarting sleep state");
-                    RestartDozeListener restartDozeListener2 = RestartDozeListener.this;
+                    RestartDozeListener restartDozeListener2 = restartDozeListener;
                     restartDozeListener2.powerManager.wakeUp(restartDozeListener2.systemClock.uptimeMillis(), 2, "RestartDozeListener");
-                    final RestartDozeListener restartDozeListener3 = RestartDozeListener.this;
+                    final RestartDozeListener restartDozeListener3 = restartDozeListener;
                     restartDozeListener3.bgExecutor.executeDelayed(new Runnable() { // from class: com.android.systemui.flags.RestartDozeListener$maybeRestartSleep$1.1
                         @Override // java.lang.Runnable
                         public final void run() {
                             Log.d("RestartDozeListener", "Restarting goToSleep");
-                            RestartDozeListener restartDozeListener4 = RestartDozeListener.this;
+                            RestartDozeListener restartDozeListener4 = restartDozeListener3;
                             restartDozeListener4.powerManager.goToSleep(restartDozeListener4.systemClock.uptimeMillis());
                         }
                     }, 100L);

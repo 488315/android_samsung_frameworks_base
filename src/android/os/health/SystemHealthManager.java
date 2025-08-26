@@ -38,9 +38,7 @@ public class SystemHealthManager {
     private static final Comparator<PowerMonitor> POWER_MONITOR_COMPARATOR = Comparator.comparingInt(new ToIntFunction() { // from class: android.os.health.SystemHealthManager$$ExternalSyntheticLambda1
         @Override // java.util.function.ToIntFunction
         public final int applyAsInt(Object obj) {
-            int i;
-            i = ((PowerMonitor) obj).index;
-            return i;
+            return ((PowerMonitor) obj).index;
         }
     });
     private static final String TAG = "SystemHealthManager";
@@ -71,20 +69,20 @@ public class SystemHealthManager {
     /* JADX WARN: Type inference failed for: r1v5 */
     public SystemHealthManager(IBatteryStats iBatteryStats, IPowerStatsService iPowerStatsService, IHintManager iHintManager) {
         this.mPowerMonitorsLock = new Object();
-        IHintManager.HintManagerClientData hintManagerClientData = 0;
-        hintManagerClientData = 0;
+        IHintManager.HintManagerClientData clientData = 0;
+        clientData = 0;
         this.mPendingUidSnapshots = new PendingUidSnapshots();
         this.mBatteryStats = iBatteryStats;
         this.mPowerStats = iPowerStatsService;
         this.mHintManager = iHintManager;
         if (iHintManager != null) {
             try {
-                hintManagerClientData = iHintManager.getClientData();
+                clientData = iHintManager.getClientData();
             } catch (RemoteException e) {
                 Slog.e(TAG, "Failed to get hint manager client data", e);
             }
         }
-        this.mHintManagerClientData = hintManagerClientData;
+        this.mHintManagerClientData = clientData;
     }
 
     public float getCpuHeadroom(CpuHeadroomParams cpuHeadroomParams) {
@@ -182,11 +180,11 @@ public class SystemHealthManager {
                 throw e.rethrowFromSystemServer();
             }
         }
-        HealthStats[] takeUidSnapshots = takeUidSnapshots(new int[]{i});
-        if (takeUidSnapshots == null || takeUidSnapshots.length < 1) {
+        HealthStats[] healthStatsArrTakeUidSnapshots = takeUidSnapshots(new int[]{i});
+        if (healthStatsArrTakeUidSnapshots == null || healthStatsArrTakeUidSnapshots.length < 1) {
             return null;
         }
-        return takeUidSnapshots[0];
+        return healthStatsArrTakeUidSnapshots[0];
     }
 
     public HealthStats takeMyUidSnapshot() {
@@ -199,11 +197,11 @@ public class SystemHealthManager {
         int i = 0;
         if (!Flags.onewayBatteryStatsService()) {
             try {
-                HealthStatsParceler[] takeUidSnapshots = this.mBatteryStats.takeUidSnapshots(iArr);
+                HealthStatsParceler[] healthStatsParcelerArrTakeUidSnapshots = this.mBatteryStats.takeUidSnapshots(iArr);
                 int length = iArr.length;
                 HealthStats[] healthStatsArr = new HealthStats[length];
                 while (i < length) {
-                    healthStatsArr[i] = takeUidSnapshots[i].getHealthStats();
+                    healthStatsArr[i] = healthStatsParcelerArrTakeUidSnapshots[i].getHealthStats();
                     i++;
                 }
                 return healthStatsArr;
@@ -229,25 +227,25 @@ public class SystemHealthManager {
         }
         try {
             try {
-                SynchronousResultReceiver.Result awaitResult = synchronousResultReceiver.awaitResult(10000L);
+                SynchronousResultReceiver.Result resultAwaitResult = synchronousResultReceiver.awaitResult(10000L);
                 synchronized (this.mPendingUidSnapshots) {
                     if (this.mPendingUidSnapshots.resultReceiver == synchronousResultReceiver) {
                         this.mPendingUidSnapshots.uids = null;
                         this.mPendingUidSnapshots.resultReceiver = null;
                     }
                 }
-                int i2 = awaitResult.resultCode;
+                int i2 = resultAwaitResult.resultCode;
                 if (i2 != 0) {
                     if (i2 == 1) {
-                        throw new RuntimeException(awaitResult.bundle != null ? awaitResult.bundle.getString("exception") : null);
+                        throw new RuntimeException(resultAwaitResult.bundle != null ? resultAwaitResult.bundle.getString("exception") : null);
                     }
                     if (i2 == 2) {
-                        throw new SecurityException(awaitResult.bundle != null ? awaitResult.bundle.getString("exception") : null);
+                        throw new SecurityException(resultAwaitResult.bundle != null ? resultAwaitResult.bundle.getString("exception") : null);
                     }
-                    throw new RuntimeException("Error code: " + awaitResult.resultCode);
+                    throw new RuntimeException("Error code: " + resultAwaitResult.resultCode);
                 }
                 HealthStats[] healthStatsArr2 = new HealthStats[iArr.length];
-                if (awaitResult.bundle != null && (healthStatsParcelerArr = (HealthStatsParceler[]) awaitResult.bundle.getParcelableArray(IBatteryStats.KEY_UID_SNAPSHOTS, HealthStatsParceler.class)) != null && healthStatsParcelerArr.length == iArr.length) {
+                if (resultAwaitResult.bundle != null && (healthStatsParcelerArr = (HealthStatsParceler[]) resultAwaitResult.bundle.getParcelableArray(IBatteryStats.KEY_UID_SNAPSHOTS, HealthStatsParceler.class)) != null && healthStatsParcelerArr.length == iArr.length) {
                     while (i < healthStatsParcelerArr.length) {
                         healthStatsArr2[i] = healthStatsParcelerArr[i].getHealthStats();
                         i++;
@@ -314,9 +312,9 @@ public class SystemHealthManager {
         @Override // android.os.ResultReceiver
         protected void onReceiveResult(int i, Bundle bundle) {
             PowerMonitor[] powerMonitorArr = (PowerMonitor[]) bundle.getParcelableArray(IPowerStatsService.KEY_MONITORS, PowerMonitor.class);
-            final List asList = powerMonitorArr != null ? Arrays.asList(powerMonitorArr) : Collections.EMPTY_LIST;
+            final List listAsList = powerMonitorArr != null ? Arrays.asList(powerMonitorArr) : Collections.EMPTY_LIST;
             synchronized (SystemHealthManager.this.mPowerMonitorsLock) {
-                SystemHealthManager.this.mPowerMonitorsInfo = asList;
+                SystemHealthManager.this.mPowerMonitorsInfo = listAsList;
             }
             Executor executor = this.val$executor;
             if (executor != null) {
@@ -324,11 +322,11 @@ public class SystemHealthManager {
                 executor.execute(new Runnable() { // from class: android.os.health.SystemHealthManager$1$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        consumer.accept(asList);
+                        consumer.accept(listAsList);
                     }
                 });
             } else {
-                this.val$onResult.accept(asList);
+                this.val$onResult.accept(listAsList);
             }
         }
     }
@@ -340,7 +338,7 @@ public class SystemHealthManager {
                 executor.execute(new Runnable() { // from class: android.os.health.SystemHealthManager$$ExternalSyntheticLambda2
                     @Override // java.lang.Runnable
                     public final void run() {
-                        OutcomeReceiver.this.onError(illegalArgumentException);
+                        outcomeReceiver.onError(illegalArgumentException);
                     }
                 });
                 return;
@@ -387,7 +385,7 @@ public class SystemHealthManager {
                     executor.execute(new Runnable() { // from class: android.os.health.SystemHealthManager$2$$ExternalSyntheticLambda0
                         @Override // java.lang.Runnable
                         public final void run() {
-                            OutcomeReceiver.this.onResult(powerMonitorReadings);
+                            outcomeReceiver.onResult(powerMonitorReadings);
                         }
                     });
                     return;
@@ -407,7 +405,7 @@ public class SystemHealthManager {
                 executor2.execute(new Runnable() { // from class: android.os.health.SystemHealthManager$2$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        OutcomeReceiver.this.onError(illegalStateException);
+                        outcomeReceiver2.onError(illegalStateException);
                     }
                 });
             } else {

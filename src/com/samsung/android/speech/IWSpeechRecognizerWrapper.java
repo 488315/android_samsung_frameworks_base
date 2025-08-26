@@ -11,20 +11,18 @@ public class IWSpeechRecognizerWrapper {
     }
 
     public static synchronized MMUIRecognizer getInstance() {
-        synchronized (IWSpeechRecognizerWrapper.class) {
-            if (uniqueInstance == null) {
-                String str = TAG;
-                Log.i(str, "getInstance() : make new MMUIRecognizer");
-                if (MMUIRecognizer.init() == 0) {
-                    uniqueInstance = new MMUIRecognizer();
-                } else {
-                    Log.e(str, "cannot load libsasr-jni.so");
-                    return null;
-                }
+        if (uniqueInstance == null) {
+            String str = TAG;
+            Log.i(str, "getInstance() : make new MMUIRecognizer");
+            if (MMUIRecognizer.init() == 0) {
+                uniqueInstance = new MMUIRecognizer();
             } else {
-                Log.i(TAG, "getInstance() : get existed MMUIRecognizer");
+                Log.e(str, "cannot load libsasr-jni.so");
+                return null;
             }
-            return uniqueInstance;
+        } else {
+            Log.i(TAG, "getInstance() : get existed MMUIRecognizer");
         }
+        return uniqueInstance;
     }
 }

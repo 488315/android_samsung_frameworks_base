@@ -51,35 +51,35 @@ final class HeifConverterNativeImpl implements SemHeifConverter {
         AMessageJNI aMessageJNI = new AMessageJNI();
         aMessageJNI.setByteBuffer(Message.KEY_OUT_BUFFER, byteBuffer);
         aMessageJNI.setInt("output-buffer-capacity", byteBuffer.capacity());
-        int convert = convert(list, aMessageJNI);
-        if (convert > 0) {
-            byteBuffer.limit(convert);
+        int iConvert = convert(list, aMessageJNI);
+        if (iConvert > 0) {
+            byteBuffer.limit(iConvert);
             byteBuffer.position(0);
         }
-        return convert;
+        return iConvert;
     }
 
     private int convert(List<SemHeifConfig> list, AMessageJNI aMessageJNI) {
         aMessageJNI.setInt("cover-count", list.size());
         int i = 1;
         for (SemHeifConfig semHeifConfig : list) {
-            CaptureSourceInternal makeInternalSource = CaptureSourceInternal.Parser.makeInternalSource(semHeifConfig.getMasterImage());
-            makeInternalSource.setImageRole(0);
+            CaptureSourceInternal captureSourceInternalMakeInternalSource = CaptureSourceInternal.Parser.makeInternalSource(semHeifConfig.getMasterImage());
+            captureSourceInternalMakeInternalSource.setImageRole(0);
             if (semHeifConfig.getExifData() != null) {
-                makeInternalSource.setExifData(semHeifConfig.getExifData());
+                captureSourceInternalMakeInternalSource.setExifData(semHeifConfig.getExifData());
             }
             if (semHeifConfig.getCameraInfo() != null) {
-                makeInternalSource.setCameraInfo(semHeifConfig.getCameraInfo());
+                captureSourceInternalMakeInternalSource.setCameraInfo(semHeifConfig.getCameraInfo());
             }
-            aMessageJNI.setMessage(String.format(Locale.US, "cover%02d", Integer.valueOf(i)), makeInternalSource.getMsg());
+            aMessageJNI.setMessage(String.format(Locale.US, "cover%02d", Integer.valueOf(i)), captureSourceInternalMakeInternalSource.getMsg());
             int i2 = i + 1;
-            makeInternalSource.setId(i);
+            captureSourceInternalMakeInternalSource.setId(i);
             if (semHeifConfig.getThumbnailImage() != null) {
-                CaptureSourceInternal makeInternalSource2 = CaptureSourceInternal.Parser.makeInternalSource(semHeifConfig.getThumbnailImage());
-                makeInternalSource2.setImageRole(1);
+                CaptureSourceInternal captureSourceInternalMakeInternalSource2 = CaptureSourceInternal.Parser.makeInternalSource(semHeifConfig.getThumbnailImage());
+                captureSourceInternalMakeInternalSource2.setImageRole(1);
                 i += 2;
-                makeInternalSource2.setId(i2);
-                makeInternalSource.setThumbnail(makeInternalSource2);
+                captureSourceInternalMakeInternalSource2.setId(i2);
+                captureSourceInternalMakeInternalSource.setThumbnail(captureSourceInternalMakeInternalSource2);
             } else {
                 i = i2;
             }

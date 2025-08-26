@@ -12,7 +12,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class LazyListItemProviderImpl implements LazyListItemProvider {
     public final LazyListIntervalContent intervalContent;
@@ -33,7 +32,7 @@ final class LazyListItemProviderImpl implements LazyListItemProvider {
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventStart("androidx.compose.foundation.lazy.LazyListItemProviderImpl.Item (LazyListItemProvider.kt:80)");
         }
-        LazyLayoutPinnableItemKt.LazyLayoutPinnableItem(obj, i, this.state.pinnedItems, ComposableLambdaKt.rememberComposableLambda(-824725566, new Function2() { // from class: androidx.compose.foundation.lazy.LazyListItemProviderImpl$Item$1
+        LazyLayoutPinnableItemKt.LazyLayoutPinnableItem(obj, i, this.state.pinnedItems, ComposableLambdaKt.rememberComposableLambda(-824725566, new Function2() { // from class: androidx.compose.foundation.lazy.LazyListItemProviderImpl.Item.1
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(2);
@@ -42,9 +41,9 @@ final class LazyListItemProviderImpl implements LazyListItemProvider {
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj2, Object obj3) {
                 Composer composer = (Composer) obj2;
-                int intValue = ((Number) obj3).intValue();
+                int iIntValue = ((Number) obj3).intValue();
                 ComposerImpl composerImpl2 = (ComposerImpl) composer;
-                if (composerImpl2.shouldExecute(intValue & 1, (intValue & 3) != 2)) {
+                if (composerImpl2.shouldExecute(iIntValue & 1, (iIntValue & 3) != 2)) {
                     if (ComposerKt.isTraceInProgress()) {
                         ComposerKt.traceEventStart("androidx.compose.foundation.lazy.LazyListItemProviderImpl.Item.<anonymous> (LazyListItemProvider.kt:82)");
                     }

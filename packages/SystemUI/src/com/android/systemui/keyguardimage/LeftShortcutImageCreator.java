@@ -11,7 +11,6 @@ import com.android.systemui.keyguardimage.ImageOptionCreator;
 import com.android.systemui.statusbar.KeyguardSecAffordanceView;
 import com.android.systemui.statusbar.KeyguardShortcutManager;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class LeftShortcutImageCreator extends AbsShortcutImageCreator {
     public LeftShortcutImageCreator(Context context) {
@@ -20,9 +19,9 @@ public class LeftShortcutImageCreator extends AbsShortcutImageCreator {
 
     @Override // com.android.systemui.keyguardimage.ImageCreator
     public final Bitmap createImage(ImageOptionCreator.ImageOption imageOption, Point point) {
-        View inflate = ((LayoutInflater) this.mContext.getSystemService("layout_inflater")).inflate(R.layout.keyguard_sec_affordance_view_left, (ViewGroup) null);
-        updateCustomShortcutIcon((KeyguardSecAffordanceView) inflate.findViewById(R.id.start_button), 0, getShortcutManager().hasShortcut(0));
-        Bitmap viewImage = ImageCreator.getViewImage(inflate, imageOption, getShortcutManager().isMonotoneIcon(0));
+        View viewInflate = ((LayoutInflater) this.mContext.getSystemService("layout_inflater")).inflate(R.layout.keyguard_sec_affordance_view_left, (ViewGroup) null);
+        updateCustomShortcutIcon((KeyguardSecAffordanceView) viewInflate.findViewById(R.id.start_button), 0, getShortcutManager().hasShortcut(0));
+        Bitmap viewImage = ImageCreator.getViewImage(viewInflate, imageOption, getShortcutManager().isMonotoneIcon(0));
         if (viewImage != null) {
             point.x = this.mShortcutManager.getShortcutSideMargin();
             int height = imageOption.height - viewImage.getHeight();

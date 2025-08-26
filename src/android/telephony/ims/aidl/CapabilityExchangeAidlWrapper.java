@@ -88,21 +88,21 @@ public class CapabilityExchangeAidlWrapper implements CapabilityExchangeEventLis
             iCapabilityExchangeEventListener.onRemoteCapabilityRequest(uri, new ArrayList(set), new IOptionsRequestCallback.Stub(this) { // from class: android.telephony.ims.aidl.CapabilityExchangeAidlWrapper.1
                 @Override // android.telephony.ims.aidl.IOptionsRequestCallback
                 public void respondToCapabilityRequest(RcsContactUceCapability rcsContactUceCapability, boolean z) {
-                    long clearCallingIdentity = Binder.clearCallingIdentity();
+                    long jClearCallingIdentity = Binder.clearCallingIdentity();
                     try {
                         optionsRequestCallback.onRespondToCapabilityRequest(rcsContactUceCapability, z);
                     } finally {
-                        restoreCallingIdentity(clearCallingIdentity);
+                        restoreCallingIdentity(jClearCallingIdentity);
                     }
                 }
 
                 @Override // android.telephony.ims.aidl.IOptionsRequestCallback
                 public void respondToCapabilityRequestWithError(int i, String str) {
-                    long clearCallingIdentity = Binder.clearCallingIdentity();
+                    long jClearCallingIdentity = Binder.clearCallingIdentity();
                     try {
                         optionsRequestCallback.onRespondToCapabilityRequestWithError(i, str);
                     } finally {
-                        restoreCallingIdentity(clearCallingIdentity);
+                        restoreCallingIdentity(jClearCallingIdentity);
                     }
                 }
             });

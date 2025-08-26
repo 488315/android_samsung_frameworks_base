@@ -15,14 +15,12 @@ import kotlin.coroutines.Continuation;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.flow.Flow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class FlashlightQuickAffordanceConfig implements KeyguardQuickAffordanceConfig {
     public final Context context;
     public final FlashlightController flashlightController;
     public final Flow lockScreenState = FlowConflatedKt.conflatedCallbackFlow(new FlashlightQuickAffordanceConfig$lockScreenState$1(this, null));
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -32,10 +30,8 @@ public final class FlashlightQuickAffordanceConfig implements KeyguardQuickAffor
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class FlashlightState {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class OffAvailable extends FlashlightState {
             public static final OffAvailable INSTANCE = new OffAvailable();
 
@@ -48,7 +44,6 @@ public final class FlashlightQuickAffordanceConfig implements KeyguardQuickAffor
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class On extends FlashlightState {
             public static final On INSTANCE = new On();
 
@@ -57,7 +52,6 @@ public final class FlashlightQuickAffordanceConfig implements KeyguardQuickAffor
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Unavailable extends FlashlightState {
             public static final Unavailable INSTANCE = new Unavailable();
 

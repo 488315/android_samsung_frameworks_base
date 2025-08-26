@@ -19,17 +19,17 @@ public abstract class TextClassifierEvent implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public TextClassifierEvent createFromParcel(Parcel parcel) {
-            int readInt = parcel.readInt();
-            if (readInt == 1) {
+            int i = parcel.readInt();
+            if (i == 1) {
                 return new TextSelectionEvent(parcel);
             }
-            if (readInt == 2) {
+            if (i == 2) {
                 return new TextLinkifyEvent(parcel);
             }
-            if (readInt == 4) {
+            if (i == 4) {
                 return new LanguageDetectionEvent(parcel);
             }
-            if (readInt == 3) {
+            if (i == 3) {
                 return new ConversationActionsEvent(parcel);
             }
             throw new IllegalStateException("Unexpected input event type token in parcel.");
@@ -122,8 +122,8 @@ public abstract class TextClassifierEvent implements Parcelable {
         parcel.readFloatArray(fArr);
         this.mModelName = parcel.readString();
         this.mActionIndices = parcel.createIntArray();
-        String readString = parcel.readString();
-        this.mLocale = readString != null ? ULocale.forLanguageTag(readString) : null;
+        String string = parcel.readString();
+        this.mLocale = string != null ? ULocale.forLanguageTag(string) : null;
         this.mExtras = parcel.readBundle();
     }
 
@@ -351,22 +351,22 @@ public abstract class TextClassifierEvent implements Parcelable {
             String[] strArr2 = new String[strArr.length];
             this.mEntityTypes = strArr2;
             System.arraycopy(strArr, 0, strArr2, 0, strArr.length);
-            return self();
+            return (T) self();
         }
 
         public T setEventContext(TextClassificationContext textClassificationContext) {
             this.mEventContext = textClassificationContext;
-            return self();
+            return (T) self();
         }
 
         public T setResultId(String str) {
             this.mResultId = str;
-            return self();
+            return (T) self();
         }
 
         public T setEventIndex(int i) {
             this.mEventIndex = i;
-            return self();
+            return (T) self();
         }
 
         public T setScores(float... fArr) {
@@ -374,29 +374,29 @@ public abstract class TextClassifierEvent implements Parcelable {
             float[] fArr2 = new float[fArr.length];
             this.mScores = fArr2;
             System.arraycopy(fArr, 0, fArr2, 0, fArr.length);
-            return self();
+            return (T) self();
         }
 
         public T setModelName(String str) {
             this.mModelName = str;
-            return self();
+            return (T) self();
         }
 
         public T setActionIndices(int... iArr) {
             int[] iArr2 = new int[iArr.length];
             this.mActionIndices = iArr2;
             System.arraycopy(iArr, 0, iArr2, 0, iArr.length);
-            return self();
+            return (T) self();
         }
 
         public T setLocale(ULocale uLocale) {
             this.mLocale = uLocale;
-            return self();
+            return (T) self();
         }
 
         public T setExtras(Bundle bundle) {
             this.mExtras = (Bundle) Objects.requireNonNull(bundle);
-            return self();
+            return (T) self();
         }
     }
 

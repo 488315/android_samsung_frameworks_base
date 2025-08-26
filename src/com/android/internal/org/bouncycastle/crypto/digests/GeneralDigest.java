@@ -64,11 +64,11 @@ public abstract class GeneralDigest implements ExtendedDigest, Memoable {
     @Override // com.android.internal.org.bouncycastle.crypto.Digest
     public void update(byte[] bArr, int i, int i2) {
         int i3 = 0;
-        int max = Math.max(0, i2);
+        int iMax = Math.max(0, i2);
         if (this.xBufOff != 0) {
             int i4 = 0;
             while (true) {
-                if (i4 >= max) {
+                if (i4 >= iMax) {
                     i3 = i4;
                     break;
                 }
@@ -87,19 +87,19 @@ public abstract class GeneralDigest implements ExtendedDigest, Memoable {
                 i4 = i7;
             }
         }
-        int i8 = ((max - i3) & (-4)) + i3;
+        int i8 = ((iMax - i3) & (-4)) + i3;
         while (i3 < i8) {
             processWord(bArr, i + i3);
             i3 += 4;
         }
-        while (i3 < max) {
+        while (i3 < iMax) {
             byte[] bArr3 = this.xBuf;
             int i9 = this.xBufOff;
             this.xBufOff = i9 + 1;
             bArr3[i9] = bArr[i3 + i];
             i3++;
         }
-        this.byteCount += max;
+        this.byteCount += iMax;
     }
 
     public void finish() {

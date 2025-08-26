@@ -7,7 +7,6 @@ import android.content.Intent;
 import com.samsung.android.core.CoreSaLogger;
 import java.util.HashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class Utils {
     public static int mDesktopDisplayId = -1;
@@ -31,8 +30,8 @@ public class Utils {
     }
 
     public static void sendSALogging(String str, String str2, String str3) {
-        HashMap hashMap = new HashMap();
-        hashMap.put("det", str3);
-        CoreSaLogger.logForDexWithScreenId(str, str2, hashMap);
+        HashMap map = new HashMap();
+        map.put("det", str3);
+        CoreSaLogger.logForDexWithScreenId(str, str2, map);
     }
 }

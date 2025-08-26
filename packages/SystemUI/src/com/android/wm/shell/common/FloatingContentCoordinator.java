@@ -20,21 +20,19 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.Ref$ObjectRef;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class FloatingContentCoordinator {
     public static final Companion Companion = new Companion(null);
     public final Map allContentBounds = new HashMap();
     public boolean currentlyResolvingConflicts;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
         }
 
         public static Rect findAreaForContentAboveOrBelow(Rect rect, Collection collection, final boolean z) {
-            List<Rect> sortedWith = CollectionsKt___CollectionsKt.sortedWith(collection, new Comparator() { // from class: com.android.wm.shell.common.FloatingContentCoordinator$Companion$findAreaForContentAboveOrBelow$$inlined$sortedBy$1
+            List<Rect> listSortedWith = CollectionsKt___CollectionsKt.sortedWith(collection, new Comparator() { // from class: com.android.wm.shell.common.FloatingContentCoordinator$Companion$findAreaForContentAboveOrBelow$$inlined$sortedBy$1
                 @Override // java.util.Comparator
                 public final int compare(Object obj, Object obj2) {
                     boolean z2 = z;
@@ -47,7 +45,7 @@ public final class FloatingContentCoordinator {
                 }
             });
             Rect rect2 = new Rect(rect);
-            for (Rect rect3 : sortedWith) {
+            for (Rect rect3 : listSortedWith) {
                 if (!Rect.intersects(rect2, rect3)) {
                     break;
                 }
@@ -60,7 +58,6 @@ public final class FloatingContentCoordinator {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface FloatingContent {
         Rect getAllowedFloatingBoundsRegion();
 
@@ -89,14 +86,14 @@ public final class FloatingContentCoordinator {
         }
         for (Map.Entry entry2 : linkedHashMap.entrySet()) {
             FloatingContent floatingContent3 = (FloatingContent) entry2.getKey();
-            List minus = CollectionsKt___CollectionsKt.minus(CollectionsKt___CollectionsKt.minus(((HashMap) this.allContentBounds).values(), (Rect) entry2.getValue()), rect);
+            List listMinus = CollectionsKt___CollectionsKt.minus(CollectionsKt___CollectionsKt.minus(((HashMap) this.allContentBounds).values(), (Rect) entry2.getValue()), rect);
             floatingContent3.getClass();
             final Rect floatingBoundsOnScreen = floatingContent3.getFloatingBoundsOnScreen();
             final Rect allowedFloatingBoundsRegion = floatingContent3.getAllowedFloatingBoundsRegion();
             Companion.getClass();
             boolean z2 = rect.centerY() < floatingBoundsOnScreen.centerY() ? z : false;
             ArrayList arrayList = new ArrayList();
-            ArrayList arrayList2 = (ArrayList) minus;
+            ArrayList arrayList2 = (ArrayList) listMinus;
             int size = arrayList2.size();
             int i2 = 0;
             while (i2 < size) {
@@ -136,16 +133,16 @@ public final class FloatingContentCoordinator {
                             Rect rect4 = floatingBoundsOnScreen;
                             Rect rect5 = rect;
                             FloatingContentCoordinator.Companion companion = FloatingContentCoordinator.Companion;
-                            List plus = CollectionsKt___CollectionsKt.plus((Collection) ref$ObjectRef.element, rect5);
+                            List listPlus = CollectionsKt___CollectionsKt.plus((Collection) ref$ObjectRef.element, rect5);
                             companion.getClass();
-                            return FloatingContentCoordinator.Companion.findAreaForContentAboveOrBelow(rect4, plus, true);
+                            return FloatingContentCoordinator.Companion.findAreaForContentAboveOrBelow(rect4, listPlus, true);
                         default:
                             Rect rect6 = floatingBoundsOnScreen;
                             Rect rect7 = rect;
                             FloatingContentCoordinator.Companion companion2 = FloatingContentCoordinator.Companion;
-                            List plus2 = CollectionsKt___CollectionsKt.plus((Collection) ref$ObjectRef.element, rect7);
+                            List listPlus2 = CollectionsKt___CollectionsKt.plus((Collection) ref$ObjectRef.element, rect7);
                             companion2.getClass();
-                            return FloatingContentCoordinator.Companion.findAreaForContentAboveOrBelow(rect6, plus2, false);
+                            return FloatingContentCoordinator.Companion.findAreaForContentAboveOrBelow(rect6, listPlus2, false);
                     }
                 }
             });
@@ -158,16 +155,16 @@ public final class FloatingContentCoordinator {
                             Rect rect4 = floatingBoundsOnScreen;
                             Rect rect5 = rect;
                             FloatingContentCoordinator.Companion companion = FloatingContentCoordinator.Companion;
-                            List plus = CollectionsKt___CollectionsKt.plus((Collection) ref$ObjectRef2.element, rect5);
+                            List listPlus = CollectionsKt___CollectionsKt.plus((Collection) ref$ObjectRef2.element, rect5);
                             companion.getClass();
-                            return FloatingContentCoordinator.Companion.findAreaForContentAboveOrBelow(rect4, plus, true);
+                            return FloatingContentCoordinator.Companion.findAreaForContentAboveOrBelow(rect4, listPlus, true);
                         default:
                             Rect rect6 = floatingBoundsOnScreen;
                             Rect rect7 = rect;
                             FloatingContentCoordinator.Companion companion2 = FloatingContentCoordinator.Companion;
-                            List plus2 = CollectionsKt___CollectionsKt.plus((Collection) ref$ObjectRef2.element, rect7);
+                            List listPlus2 = CollectionsKt___CollectionsKt.plus((Collection) ref$ObjectRef2.element, rect7);
                             companion2.getClass();
-                            return FloatingContentCoordinator.Companion.findAreaForContentAboveOrBelow(rect6, plus2, false);
+                            return FloatingContentCoordinator.Companion.findAreaForContentAboveOrBelow(rect6, listPlus2, false);
                     }
                 }
             });

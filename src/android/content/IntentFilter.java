@@ -170,16 +170,16 @@ public class IntentFilter implements Parcelable {
     }
 
     private static String[] removeStringFromSet(String[] strArr, String str, int[] iArr, int i) {
-        int findStringInSet = findStringInSet(strArr, str, iArr, i);
-        if (findStringInSet < 0) {
+        int iFindStringInSet = findStringInSet(strArr, str, iArr, i);
+        if (iFindStringInSet < 0) {
             return strArr;
         }
         int i2 = iArr[i];
         if (i2 > strArr.length / 4) {
-            int i3 = findStringInSet + 1;
+            int i3 = iFindStringInSet + 1;
             int i4 = i2 - i3;
             if (i4 > 0) {
-                System.arraycopy(strArr, i3, strArr, findStringInSet, i4);
+                System.arraycopy(strArr, i3, strArr, iFindStringInSet, i4);
             }
             int i5 = i2 - 1;
             strArr[i5] = null;
@@ -187,12 +187,12 @@ public class IntentFilter implements Parcelable {
             return strArr;
         }
         String[] strArr2 = new String[strArr.length / 3];
-        if (findStringInSet > 0) {
-            System.arraycopy(strArr, 0, strArr2, 0, findStringInSet);
+        if (iFindStringInSet > 0) {
+            System.arraycopy(strArr, 0, strArr2, 0, iFindStringInSet);
         }
-        int i6 = findStringInSet + 1;
+        int i6 = iFindStringInSet + 1;
         if (i6 < i2) {
-            System.arraycopy(strArr, i6, strArr2, findStringInSet, i2 - i6);
+            System.arraycopy(strArr, i6, strArr2, iFindStringInSet, i2 - i6);
         }
         return strArr2;
     }
@@ -504,7 +504,7 @@ public class IntentFilter implements Parcelable {
         processMimeType(str, new BiConsumer() { // from class: android.content.IntentFilter$$ExternalSyntheticLambda2
             @Override // java.util.function.BiConsumer
             public final void accept(Object obj, Object obj2) {
-                IntentFilter.this.lambda$addDataType$0((String) obj, (Boolean) obj2);
+                this.f$0.lambda$addDataType$0((String) obj, (Boolean) obj2);
             }
         });
     }
@@ -529,7 +529,7 @@ public class IntentFilter implements Parcelable {
         processMimeType(str, new BiConsumer() { // from class: android.content.IntentFilter$$ExternalSyntheticLambda0
             @Override // java.util.function.BiConsumer
             public final void accept(Object obj, Object obj2) {
-                IntentFilter.this.lambda$addDynamicDataType$1((String) obj, (Boolean) obj2);
+                this.f$0.lambda$addDynamicDataType$1((String) obj, (Boolean) obj2);
             }
         });
     }
@@ -548,14 +548,14 @@ public class IntentFilter implements Parcelable {
 
     private void processMimeType(String str, BiConsumer<String, Boolean> biConsumer) throws MalformedMimeTypeException {
         int i;
-        int indexOf = str.indexOf(47);
+        int iIndexOf = str.indexOf(47);
         int length = str.length();
-        if (indexOf <= 0 || length < (i = indexOf + 2)) {
+        if (iIndexOf <= 0 || length < (i = iIndexOf + 2)) {
             throw new MalformedMimeTypeException(str);
         }
         boolean z = false;
-        if (length == i && str.charAt(indexOf + 1) == '*') {
-            str = str.substring(0, indexOf);
+        if (length == i && str.charAt(iIndexOf + 1) == '*') {
+            str = str.substring(0, iIndexOf);
             z = true;
         }
         biConsumer.accept(str, Boolean.valueOf(z));
@@ -730,11 +730,11 @@ public class IntentFilter implements Parcelable {
         }
 
         void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
-            long start = protoOutputStream.start(j);
+            long jStart = protoOutputStream.start(j);
             protoOutputStream.write(1138166333441L, this.mHost);
             protoOutputStream.write(1133871366146L, this.mWild);
             protoOutputStream.write(1120986464259L, this.mPort);
-            protoOutputStream.end(start);
+            protoOutputStream.end(jStart);
         }
 
         public String getHost() {
@@ -1001,9 +1001,9 @@ public class IntentFilter implements Parcelable {
         if (uri != null && (arrayList = this.mDataAuthorities) != null) {
             int size = arrayList.size();
             for (int i = 0; i < size; i++) {
-                int match = this.mDataAuthorities.get(i).match(uri, z);
-                if (match >= 0) {
-                    return match;
+                int iMatch = this.mDataAuthorities.get(i).match(uri, z);
+                if (iMatch >= 0) {
+                    return iMatch;
                 }
             }
         }
@@ -1014,144 +1014,68 @@ public class IntentFilter implements Parcelable {
         return matchData(str, str2, uri, false);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:47:0x008a, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:54:0x008a, code lost:
     
         if (hasDataPath(r10.getPath(), r11) != false) goto L55;
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private int matchData(java.lang.String r8, java.lang.String r9, android.net.Uri r10, boolean r11) {
-        /*
-            r7 = this;
-            if (r11 == 0) goto La
-            int r0 = r7.countMimeGroups()
-            if (r0 == 0) goto La
-            r0 = 1
-            goto Lb
-        La:
-            r0 = 0
-        Lb:
-            java.util.ArrayList<java.lang.String> r1 = r7.mDataTypes
-            java.util.ArrayList<java.lang.String> r2 = r7.mDataSchemes
-            r3 = -2
-            if (r0 != 0) goto L1f
-            if (r1 != 0) goto L1f
-            if (r2 != 0) goto L1f
-            if (r8 != 0) goto L1e
-            if (r10 != 0) goto L1e
-            r7 = 1081344(0x108000, float:1.515286E-39)
-            return r7
-        L1e:
-            return r3
-        L1f:
-            java.lang.String r4 = "*"
-            java.lang.String r5 = ""
-            if (r2 == 0) goto L92
-            if (r9 == 0) goto L28
-            r5 = r9
-        L28:
-            boolean r2 = r2.contains(r5)
-            if (r2 != 0) goto L38
-            if (r11 == 0) goto L37
-            boolean r9 = r4.equals(r9)
-            if (r9 == 0) goto L37
-            goto L38
-        L37:
-            return r3
-        L38:
-            java.util.ArrayList<android.os.PatternMatcher> r9 = r7.mDataSchemeSpecificParts
-            r2 = 5767168(0x580000, float:8.081524E-39)
-            if (r9 == 0) goto L4e
-            if (r10 == 0) goto L4e
-            java.lang.String r9 = r10.getSchemeSpecificPart()
-            boolean r9 = r7.hasDataSchemeSpecificPart(r9, r11)
-            if (r9 == 0) goto L4c
-            r9 = r2
-            goto L50
-        L4c:
-            r9 = r3
-            goto L50
-        L4e:
-            r9 = 2097152(0x200000, float:2.938736E-39)
-        L50:
-            if (r9 == r2) goto L8f
-            java.util.ArrayList<android.content.IntentFilter$AuthorityEntry> r2 = r7.mDataAuthorities
-            if (r2 == 0) goto L8f
-            int r9 = r7.matchDataAuthority(r10, r11)
-            if (r9 < 0) goto L8e
-            java.util.ArrayList<android.os.PatternMatcher> r2 = r7.mDataPaths
-            java.util.ArrayList<android.content.UriRelativeFilterGroup> r4 = r7.mUriRelativeFilterGroups
-            boolean r5 = com.android.internal.hidden_from_bootclasspath.android.content.pm.Flags.relativeReferenceIntentFilters()
-            r6 = 5242880(0x500000, float:7.34684E-39)
-            if (r5 == 0) goto L7f
-            if (r2 != 0) goto L6d
-            if (r4 != 0) goto L6d
-            goto L8f
-        L6d:
-            java.lang.String r9 = r10.getPath()
-            boolean r9 = r7.hasDataPath(r9, r11)
-            if (r9 != 0) goto L8c
-            boolean r9 = r7.matchRelRefGroups(r10)
-            if (r9 == 0) goto L7e
-            goto L8c
-        L7e:
-            return r3
-        L7f:
-            if (r2 != 0) goto L82
-            goto L8f
-        L82:
-            java.lang.String r9 = r10.getPath()
-            boolean r9 = r7.hasDataPath(r9, r11)
-            if (r9 == 0) goto L8e
-        L8c:
-            r9 = r6
-            goto L8f
-        L8e:
-            return r3
-        L8f:
-            if (r9 != r3) goto Lb5
-            return r3
-        L92:
-            if (r9 == 0) goto Lb3
-            boolean r10 = r5.equals(r9)
-            if (r10 != 0) goto Lb3
-            java.lang.String r10 = "content"
-            boolean r10 = r10.equals(r9)
-            if (r10 != 0) goto Lb3
-            java.lang.String r10 = "file"
-            boolean r10 = r10.equals(r9)
-            if (r10 != 0) goto Lb3
-            if (r11 == 0) goto Lb2
-            boolean r9 = r4.equals(r9)
-            if (r9 != 0) goto Lb3
-        Lb2:
-            return r3
-        Lb3:
-            r9 = 1048576(0x100000, float:1.469368E-39)
-        Lb5:
-            r10 = 6291456(0x600000, float:8.816208E-39)
-            if (r0 == 0) goto Lba
-            return r10
-        Lba:
-            r11 = -1
-            if (r1 == 0) goto Lc6
-            boolean r7 = r7.findMimeType(r8)
-            if (r7 == 0) goto Lc5
-            r9 = r10
-            goto Lc9
-        Lc5:
-            return r11
-        Lc6:
-            if (r8 == 0) goto Lc9
-            return r11
-        Lc9:
-            r7 = 32768(0x8000, float:4.5918E-41)
-            int r9 = r9 + r7
-            return r9
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.content.IntentFilter.matchData(java.lang.String, java.lang.String, android.net.Uri, boolean):int");
+    private int matchData(String str, String str2, Uri uri, boolean z) {
+        int iMatchDataAuthority;
+        boolean z2 = z && countMimeGroups() != 0;
+        ArrayList<String> arrayList = this.mDataTypes;
+        ArrayList<String> arrayList2 = this.mDataSchemes;
+        if (!z2 && arrayList == null && arrayList2 == null) {
+            return (str == null && uri == null) ? 1081344 : -2;
+        }
+        if (arrayList2 != null) {
+            if (!arrayList2.contains(str2 != null ? str2 : "") && (!z || !"*".equals(str2))) {
+                return -2;
+            }
+            if (this.mDataSchemeSpecificParts == null || uri == null) {
+                iMatchDataAuthority = 2097152;
+            } else {
+                iMatchDataAuthority = hasDataSchemeSpecificPart(uri.getSchemeSpecificPart(), z) ? 5767168 : -2;
+            }
+            if (iMatchDataAuthority != 5767168 && this.mDataAuthorities != null) {
+                iMatchDataAuthority = matchDataAuthority(uri, z);
+                if (iMatchDataAuthority >= 0) {
+                    ArrayList<PatternMatcher> arrayList3 = this.mDataPaths;
+                    ArrayList<UriRelativeFilterGroup> arrayList4 = this.mUriRelativeFilterGroups;
+                    if (Flags.relativeReferenceIntentFilters()) {
+                        if (arrayList3 != null || arrayList4 != null) {
+                            if (!hasDataPath(uri.getPath(), z) && !matchRelRefGroups(uri)) {
+                                return -2;
+                            }
+                            iMatchDataAuthority = 5242880;
+                        }
+                    } else if (arrayList3 != null) {
+                    }
+                }
+                return -2;
+            }
+            if (iMatchDataAuthority == -2) {
+                return -2;
+            }
+        } else {
+            if (str2 != null && !"".equals(str2) && !"content".equals(str2) && !"file".equals(str2) && (!z || !"*".equals(str2))) {
+                return -2;
+            }
+            iMatchDataAuthority = 1048576;
+        }
+        if (z2) {
+            return 6291456;
+        }
+        if (arrayList != null) {
+            if (!findMimeType(str)) {
+                return -1;
+            }
+            iMatchDataAuthority = 6291456;
+        } else if (str != null) {
+            return -1;
+        }
+        return iMatchDataAuthority + 32768;
     }
 
     private boolean matchRelRefGroups(Uri uri) {
@@ -1226,7 +1150,7 @@ public class IntentFilter implements Parcelable {
             if (bundle != null) {
                 Object obj = this.mExtras.get(str);
                 Object obj2 = bundle.get(str);
-                if (obj2 != null && obj.getClass() == obj2.getClass() && Objects.deepEquals(obj, obj2)) {
+                if (obj2 == null || obj.getClass() != obj2.getClass() || !Objects.deepEquals(obj, obj2)) {
                 }
             }
             return str;
@@ -1419,9 +1343,7 @@ public class IntentFilter implements Parcelable {
         return new Predicate() { // from class: android.content.IntentFilter$$ExternalSyntheticLambda1
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                boolean lambda$asPredicate$2;
-                lambda$asPredicate$2 = IntentFilter.this.lambda$asPredicate$2((Intent) obj);
-                return lambda$asPredicate$2;
+                return this.f$0.lambda$asPredicate$2((Intent) obj);
             }
         };
     }
@@ -1431,9 +1353,7 @@ public class IntentFilter implements Parcelable {
         return new Predicate() { // from class: android.content.IntentFilter$$ExternalSyntheticLambda3
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                boolean lambda$asPredicateWithTypeResolution$3;
-                lambda$asPredicateWithTypeResolution$3 = IntentFilter.this.lambda$asPredicateWithTypeResolution$3(contentResolver, (Intent) obj);
-                return lambda$asPredicateWithTypeResolution$3;
+                return this.f$0.lambda$asPredicateWithTypeResolution$3(contentResolver, (Intent) obj);
             }
         };
     }
@@ -1459,8 +1379,8 @@ public class IntentFilter implements Parcelable {
         if (str != null && !matchAction(str, z, collection)) {
             return -3;
         }
-        int matchData = matchData(str2, str3, uri, z);
-        if (matchData >= 0) {
+        int iMatchData = matchData(str2, str3, uri, z);
+        if (iMatchData >= 0) {
             if (matchCategories(set) != null) {
                 return -4;
             }
@@ -1468,44 +1388,44 @@ public class IntentFilter implements Parcelable {
                 return -5;
             }
         }
-        return matchData;
+        return iMatchData;
     }
 
-    public void writeToXml(XmlSerializer xmlSerializer) throws IOException {
+    public void writeToXml(XmlSerializer xmlSerializer) throws IllegalStateException, IOException, IllegalArgumentException {
         String str;
         String str2;
         String str3 = null;
         if (getAutoVerify()) {
             xmlSerializer.attribute(null, AUTO_VERIFY_STR, Boolean.toString(true));
         }
-        int countActions = countActions();
-        for (int i = 0; i < countActions; i++) {
+        int iCountActions = countActions();
+        for (int i = 0; i < iCountActions; i++) {
             xmlSerializer.startTag(null, "action");
             xmlSerializer.attribute(null, "name", this.mActions.valueAt(i));
             xmlSerializer.endTag(null, "action");
         }
-        int countCategories = countCategories();
-        for (int i2 = 0; i2 < countCategories; i2++) {
+        int iCountCategories = countCategories();
+        for (int i2 = 0; i2 < iCountCategories; i2++) {
             xmlSerializer.startTag(null, CAT_STR);
             xmlSerializer.attribute(null, "name", this.mCategories.get(i2));
             xmlSerializer.endTag(null, CAT_STR);
         }
         writeDataTypesToXml(xmlSerializer);
-        int countMimeGroups = countMimeGroups();
-        for (int i3 = 0; i3 < countMimeGroups; i3++) {
+        int iCountMimeGroups = countMimeGroups();
+        for (int i3 = 0; i3 < iCountMimeGroups; i3++) {
             xmlSerializer.startTag(null, GROUP_STR);
             xmlSerializer.attribute(null, "name", this.mMimeGroups.get(i3));
             xmlSerializer.endTag(null, GROUP_STR);
         }
-        int countDataSchemes = countDataSchemes();
-        for (int i4 = 0; i4 < countDataSchemes; i4++) {
+        int iCountDataSchemes = countDataSchemes();
+        for (int i4 = 0; i4 < iCountDataSchemes; i4++) {
             xmlSerializer.startTag(null, SCHEME_STR);
             xmlSerializer.attribute(null, "name", this.mDataSchemes.get(i4));
             xmlSerializer.endTag(null, SCHEME_STR);
         }
-        int countDataSchemeSpecificParts = countDataSchemeSpecificParts();
+        int iCountDataSchemeSpecificParts = countDataSchemeSpecificParts();
         int i5 = 0;
-        while (i5 < countDataSchemeSpecificParts) {
+        while (i5 < iCountDataSchemeSpecificParts) {
             xmlSerializer.startTag(str3, SSP_STR);
             PatternMatcher patternMatcher = this.mDataSchemeSpecificParts.get(i5);
             int type = patternMatcher.getType();
@@ -1531,8 +1451,8 @@ public class IntentFilter implements Parcelable {
             i5++;
             str3 = str2;
         }
-        int countDataAuthorities = countDataAuthorities();
-        for (int i6 = 0; i6 < countDataAuthorities; i6++) {
+        int iCountDataAuthorities = countDataAuthorities();
+        for (int i6 = 0; i6 < iCountDataAuthorities; i6++) {
             xmlSerializer.startTag(str3, "auth");
             AuthorityEntry authorityEntry = this.mDataAuthorities.get(i6);
             xmlSerializer.attribute(str3, HOST_STR, authorityEntry.getHost());
@@ -1541,9 +1461,9 @@ public class IntentFilter implements Parcelable {
             }
             xmlSerializer.endTag(str3, "auth");
         }
-        int countDataPaths = countDataPaths();
+        int iCountDataPaths = countDataPaths();
         int i7 = 0;
-        while (i7 < countDataPaths) {
+        while (i7 < iCountDataPaths) {
             xmlSerializer.startTag(str3, "path");
             PatternMatcher patternMatcher2 = this.mDataPaths.get(i7);
             int type2 = patternMatcher2.getType();
@@ -1580,14 +1500,14 @@ public class IntentFilter implements Parcelable {
             }
         }
         if (Flags.relativeReferenceIntentFilters()) {
-            int countUriRelativeFilterGroups = countUriRelativeFilterGroups();
-            for (int i8 = 0; i8 < countUriRelativeFilterGroups; i8++) {
+            int iCountUriRelativeFilterGroups = countUriRelativeFilterGroups();
+            for (int i8 = 0; i8 < iCountUriRelativeFilterGroups; i8++) {
                 this.mUriRelativeFilterGroups.get(i8).writeToXml(xmlSerializer);
             }
         }
     }
 
-    private void writeDataTypesToXml(XmlSerializer xmlSerializer) throws IOException {
+    private void writeDataTypesToXml(XmlSerializer xmlSerializer) throws IllegalStateException, IOException, IllegalArgumentException {
         ArrayList<String> arrayList = this.mStaticDataTypes;
         if (arrayList == null) {
             return;
@@ -1609,7 +1529,7 @@ public class IntentFilter implements Parcelable {
         }
     }
 
-    private void writeDataTypeToXml(XmlSerializer xmlSerializer, String str, String str2) throws IOException {
+    private void writeDataTypeToXml(XmlSerializer xmlSerializer, String str, String str2) throws IllegalStateException, IOException, IllegalArgumentException {
         xmlSerializer.startTag(null, str2);
         if (str.indexOf(47) < 0) {
             str = str + WILDCARD_PATH;
@@ -1735,7 +1655,7 @@ public class IntentFilter implements Parcelable {
 
     public void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
         ArrayList<UriRelativeFilterGroup> arrayList;
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         if (this.mActions.size() > 0) {
             Iterator<String> it = this.mActions.iterator();
             while (it.hasNext()) {
@@ -1806,7 +1726,7 @@ public class IntentFilter implements Parcelable {
                 it9.next().dumpDebug(protoOutputStream, 2246267895821L);
             }
         }
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 
     public void dump(Printer printer, String str) {
@@ -2116,24 +2036,24 @@ public class IntentFilter implements Parcelable {
             this.mMimeGroups = arrayList6;
             parcel.readStringList(arrayList6);
         }
-        int readInt = parcel.readInt();
-        if (readInt > 0) {
-            this.mDataSchemeSpecificParts = new ArrayList<>(readInt);
-            for (int i = 0; i < readInt; i++) {
+        int i = parcel.readInt();
+        if (i > 0) {
+            this.mDataSchemeSpecificParts = new ArrayList<>(i);
+            for (int i2 = 0; i2 < i; i2++) {
                 this.mDataSchemeSpecificParts.add(new PatternMatcher(parcel));
             }
         }
-        int readInt2 = parcel.readInt();
-        if (readInt2 > 0) {
-            this.mDataAuthorities = new ArrayList<>(readInt2);
-            for (int i2 = 0; i2 < readInt2; i2++) {
+        int i3 = parcel.readInt();
+        if (i3 > 0) {
+            this.mDataAuthorities = new ArrayList<>(i3);
+            for (int i4 = 0; i4 < i3; i4++) {
                 this.mDataAuthorities.add(new AuthorityEntry(parcel));
             }
         }
-        int readInt3 = parcel.readInt();
-        if (readInt3 > 0) {
-            this.mDataPaths = new ArrayList<>(readInt3);
-            for (int i3 = 0; i3 < readInt3; i3++) {
+        int i5 = parcel.readInt();
+        if (i5 > 0) {
+            this.mDataPaths = new ArrayList<>(i5);
+            for (int i6 = 0; i6 < i5; i6++) {
                 this.mDataPaths.add(new PatternMatcher(parcel));
             }
         }
@@ -2146,12 +2066,12 @@ public class IntentFilter implements Parcelable {
         if (parcel.readInt() != 0) {
             this.mExtras = PersistableBundle.CREATOR.createFromParcel(parcel);
         }
-        int readInt4 = parcel.readInt();
-        if (!Flags.relativeReferenceIntentFilters() || readInt4 <= 0) {
+        int i7 = parcel.readInt();
+        if (!Flags.relativeReferenceIntentFilters() || i7 <= 0) {
             return;
         }
-        this.mUriRelativeFilterGroups = new ArrayList<>(readInt4);
-        for (int i4 = 0; i4 < readInt4; i4++) {
+        this.mUriRelativeFilterGroups = new ArrayList<>(i7);
+        for (int i8 = 0; i8 < i7; i8++) {
             this.mUriRelativeFilterGroups.add(new UriRelativeFilterGroup(parcel));
         }
     }
@@ -2175,13 +2095,13 @@ public class IntentFilter implements Parcelable {
         if (hasPartialTypes() && arrayList.contains("*")) {
             return true;
         }
-        int indexOf = str.indexOf(47);
-        if (indexOf > 0) {
-            if (hasPartialTypes() && arrayList.contains(str.substring(0, indexOf))) {
+        int iIndexOf = str.indexOf(47);
+        if (iIndexOf > 0) {
+            if (hasPartialTypes() && arrayList.contains(str.substring(0, iIndexOf))) {
                 return true;
             }
-            if (length == indexOf + 2) {
-                int i = indexOf + 1;
+            if (length == iIndexOf + 2) {
+                int i = iIndexOf + 1;
                 if (str.charAt(i) == '*') {
                     int size = arrayList.size();
                     for (int i2 = 0; i2 < size; i2++) {
@@ -2197,10 +2117,10 @@ public class IntentFilter implements Parcelable {
 
     public ArrayList<String> getHostsList() {
         ArrayList<String> arrayList = new ArrayList<>();
-        Iterator<AuthorityEntry> authoritiesIterator = authoritiesIterator();
-        if (authoritiesIterator != null) {
-            while (authoritiesIterator.hasNext()) {
-                arrayList.add(authoritiesIterator.next().getHost());
+        Iterator<AuthorityEntry> itAuthoritiesIterator = authoritiesIterator();
+        if (itAuthoritiesIterator != null) {
+            while (itAuthoritiesIterator.hasNext()) {
+                arrayList.add(itAuthoritiesIterator.next().getHost());
             }
         }
         return arrayList;
@@ -2212,65 +2132,65 @@ public class IntentFilter implements Parcelable {
     }
 
     public static boolean filterEquals(IntentFilter intentFilter, IntentFilter intentFilter2) {
-        int countActions = intentFilter.countActions();
-        if (countActions != intentFilter2.countActions()) {
+        int iCountActions = intentFilter.countActions();
+        if (iCountActions != intentFilter2.countActions()) {
             return false;
         }
-        for (int i = 0; i < countActions; i++) {
+        for (int i = 0; i < iCountActions; i++) {
             if (!intentFilter2.hasAction(intentFilter.getAction(i))) {
                 return false;
             }
         }
-        int countCategories = intentFilter.countCategories();
-        if (countCategories != intentFilter2.countCategories()) {
+        int iCountCategories = intentFilter.countCategories();
+        if (iCountCategories != intentFilter2.countCategories()) {
             return false;
         }
-        for (int i2 = 0; i2 < countCategories; i2++) {
+        for (int i2 = 0; i2 < iCountCategories; i2++) {
             if (!intentFilter2.hasCategory(intentFilter.getCategory(i2))) {
                 return false;
             }
         }
-        int countDataTypes = intentFilter.countDataTypes();
-        if (countDataTypes != intentFilter2.countDataTypes()) {
+        int iCountDataTypes = intentFilter.countDataTypes();
+        if (iCountDataTypes != intentFilter2.countDataTypes()) {
             return false;
         }
-        for (int i3 = 0; i3 < countDataTypes; i3++) {
+        for (int i3 = 0; i3 < iCountDataTypes; i3++) {
             if (!intentFilter2.hasExactDataType(intentFilter.getDataType(i3))) {
                 return false;
             }
         }
-        int countDataSchemes = intentFilter.countDataSchemes();
-        if (countDataSchemes != intentFilter2.countDataSchemes()) {
+        int iCountDataSchemes = intentFilter.countDataSchemes();
+        if (iCountDataSchemes != intentFilter2.countDataSchemes()) {
             return false;
         }
-        for (int i4 = 0; i4 < countDataSchemes; i4++) {
+        for (int i4 = 0; i4 < iCountDataSchemes; i4++) {
             if (!intentFilter2.hasDataScheme(intentFilter.getDataScheme(i4))) {
                 return false;
             }
         }
-        int countDataAuthorities = intentFilter.countDataAuthorities();
-        if (countDataAuthorities != intentFilter2.countDataAuthorities()) {
+        int iCountDataAuthorities = intentFilter.countDataAuthorities();
+        if (iCountDataAuthorities != intentFilter2.countDataAuthorities()) {
             return false;
         }
-        for (int i5 = 0; i5 < countDataAuthorities; i5++) {
+        for (int i5 = 0; i5 < iCountDataAuthorities; i5++) {
             if (!intentFilter2.hasDataAuthority(intentFilter.getDataAuthority(i5))) {
                 return false;
             }
         }
-        int countDataPaths = intentFilter.countDataPaths();
-        if (countDataPaths != intentFilter2.countDataPaths()) {
+        int iCountDataPaths = intentFilter.countDataPaths();
+        if (iCountDataPaths != intentFilter2.countDataPaths()) {
             return false;
         }
-        for (int i6 = 0; i6 < countDataPaths; i6++) {
+        for (int i6 = 0; i6 < iCountDataPaths; i6++) {
             if (!intentFilter2.hasDataPath(intentFilter.getDataPath(i6))) {
                 return false;
             }
         }
-        int countDataSchemeSpecificParts = intentFilter.countDataSchemeSpecificParts();
-        if (countDataSchemeSpecificParts != intentFilter2.countDataSchemeSpecificParts()) {
+        int iCountDataSchemeSpecificParts = intentFilter.countDataSchemeSpecificParts();
+        if (iCountDataSchemeSpecificParts != intentFilter2.countDataSchemeSpecificParts()) {
             return false;
         }
-        for (int i7 = 0; i7 < countDataSchemeSpecificParts; i7++) {
+        for (int i7 = 0; i7 < iCountDataSchemeSpecificParts; i7++) {
             if (!intentFilter2.hasDataSchemeSpecificPart(intentFilter.getDataSchemeSpecificPart(i7))) {
                 return false;
             }

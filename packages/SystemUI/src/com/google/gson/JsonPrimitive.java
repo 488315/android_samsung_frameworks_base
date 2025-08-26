@@ -5,7 +5,6 @@ import com.google.gson.internal.LazilyParsedNumber;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class JsonPrimitive extends JsonElement {
     private final Object value;
@@ -46,9 +45,9 @@ public final class JsonPrimitive extends JsonElement {
         if (!(obj2 instanceof Number) || !(jsonPrimitive.value instanceof Number)) {
             return obj2.equals(jsonPrimitive.value);
         }
-        double doubleValue = getAsNumber().doubleValue();
-        double doubleValue2 = jsonPrimitive.getAsNumber().doubleValue();
-        return doubleValue == doubleValue2 || (Double.isNaN(doubleValue) && Double.isNaN(doubleValue2));
+        double dDoubleValue = getAsNumber().doubleValue();
+        double dDoubleValue2 = jsonPrimitive.getAsNumber().doubleValue();
+        return dDoubleValue == dDoubleValue2 || (Double.isNaN(dDoubleValue) && Double.isNaN(dDoubleValue2));
     }
 
     @Override // com.google.gson.JsonElement
@@ -79,7 +78,7 @@ public final class JsonPrimitive extends JsonElement {
     }
 
     @Override // com.google.gson.JsonElement
-    public double getAsDouble() {
+    public double getAsDouble() throws NumberFormatException {
         return isNumber() ? getAsNumber().doubleValue() : Double.parseDouble(getAsString());
     }
 
@@ -89,12 +88,12 @@ public final class JsonPrimitive extends JsonElement {
     }
 
     @Override // com.google.gson.JsonElement
-    public int getAsInt() {
+    public int getAsInt() throws NumberFormatException {
         return isNumber() ? getAsNumber().intValue() : Integer.parseInt(getAsString());
     }
 
     @Override // com.google.gson.JsonElement
-    public long getAsLong() {
+    public long getAsLong() throws NumberFormatException {
         return isNumber() ? getAsNumber().longValue() : Long.parseLong(getAsString());
     }
 
@@ -115,20 +114,20 @@ public final class JsonPrimitive extends JsonElement {
     }
 
     public int hashCode() {
-        long doubleToLongBits;
+        long jDoubleToLongBits;
         if (this.value == null) {
             return 31;
         }
         if (isIntegral(this)) {
-            doubleToLongBits = getAsNumber().longValue();
+            jDoubleToLongBits = getAsNumber().longValue();
         } else {
             Object obj = this.value;
             if (!(obj instanceof Number)) {
                 return obj.hashCode();
             }
-            doubleToLongBits = Double.doubleToLongBits(getAsNumber().doubleValue());
+            jDoubleToLongBits = Double.doubleToLongBits(getAsNumber().doubleValue());
         }
-        return (int) ((doubleToLongBits >>> 32) ^ doubleToLongBits);
+        return (int) ((jDoubleToLongBits >>> 32) ^ jDoubleToLongBits);
     }
 
     public boolean isBoolean() {

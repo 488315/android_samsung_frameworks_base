@@ -1,6 +1,5 @@
 package android.app;
 
-import android.app.SharedPreferencesImpl;
 import android.compat.Compatibility;
 import android.content.SharedPreferences;
 import android.os.FileUtils;
@@ -13,10 +12,13 @@ import android.util.Log;
 import com.android.internal.util.ExponentiallyBucketedHistogram;
 import com.android.internal.util.XmlUtils;
 import dalvik.system.BlockGuard;
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -29,6 +31,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+import libcore.io.IoUtils;
 import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes.dex */
@@ -72,24 +75,115 @@ final class SharedPreferencesImpl implements SharedPreferences {
         sLoadExecutor.execute(new Runnable() { // from class: android.app.SharedPreferencesImpl$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                SharedPreferencesImpl.this.lambda$startLoadFromDisk$0();
+                this.f$0.lambda$startLoadFromDisk$0();
             }
         });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x00ad  */
+    /* JADX WARN: Removed duplicated region for block: B:46:0x00ad  */
     /* renamed from: loadFromDisk, reason: merged with bridge method [inline-methods] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public void lambda$startLoadFromDisk$0() {
-        /*
-            Method dump skipped, instructions count: 228
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.app.SharedPreferencesImpl.lambda$startLoadFromDisk$0():void");
+        StructStat structStatStat;
+        HashMap<String, ?> mapXml;
+        Object obj;
+        BufferedInputStream bufferedInputStream;
+        synchronized (this.mLock) {
+            if (this.mLoaded) {
+                return;
+            }
+            if (this.mBackupFile.exists()) {
+                this.mFile.delete();
+                this.mBackupFile.renameTo(this.mFile);
+            }
+            if (this.mFile.exists() && !this.mFile.canRead()) {
+                Log.w(TAG, "Attempt to read preferences file " + this.mFile + " without permission");
+            }
+            Throwable th = null;
+            try {
+                structStatStat = Os.stat(this.mFile.getPath());
+                try {
+                } catch (ErrnoException unused) {
+                } catch (Throwable th2) {
+                    th = th2;
+                    mapXml = null;
+                }
+                if (this.mFile.canRead()) {
+                    try {
+                        bufferedInputStream = new BufferedInputStream(new FileInputStream(this.mFile), 16384);
+                        try {
+                            try {
+                                mapXml = XmlUtils.readMapXml(bufferedInputStream);
+                                try {
+                                    IoUtils.closeQuietly(bufferedInputStream);
+                                } catch (ErrnoException unused2) {
+                                } catch (Throwable th3) {
+                                    th = th3;
+                                }
+                            } catch (Exception e) {
+                                e = e;
+                                Log.w(TAG, "Cannot read " + this.mFile.getAbsolutePath(), e);
+                                IoUtils.closeQuietly(bufferedInputStream);
+                                mapXml = null;
+                                synchronized (this.mLock) {
+                                }
+                            }
+                        } catch (Throwable th4) {
+                            th = th4;
+                            IoUtils.closeQuietly(bufferedInputStream);
+                            throw th;
+                        }
+                    } catch (Exception e2) {
+                        e = e2;
+                        bufferedInputStream = null;
+                    } catch (Throwable th5) {
+                        th = th5;
+                        bufferedInputStream = null;
+                        IoUtils.closeQuietly(bufferedInputStream);
+                        throw th;
+                    }
+                } else {
+                    mapXml = null;
+                }
+            } catch (ErrnoException unused3) {
+                mapXml = null;
+                structStatStat = null;
+            } catch (Throwable th6) {
+                structStatStat = null;
+                th = th6;
+                mapXml = null;
+            }
+            synchronized (this.mLock) {
+                this.mLoaded = true;
+                this.mThrowable = th;
+                if (th == null) {
+                    try {
+                        if (mapXml != null) {
+                            this.mMap = mapXml;
+                            this.mStatTimestamp = structStatStat.st_mtim;
+                            this.mStatSize = structStatStat.st_size;
+                        } else {
+                            this.mMap = new HashMap();
+                        }
+                        obj = this.mLock;
+                    } catch (Throwable th7) {
+                        try {
+                            this.mThrowable = th7;
+                            obj = this.mLock;
+                        } catch (Throwable th8) {
+                            this.mLock.notifyAll();
+                            throw th8;
+                        }
+                    }
+                } else {
+                    obj = this.mLock;
+                }
+                obj.notifyAll();
+            }
+        }
     }
 
     static File makeBackupFile(File file) {
@@ -104,7 +198,7 @@ final class SharedPreferencesImpl implements SharedPreferences {
         }
     }
 
-    private boolean hasFileChangedUnexpectedly() {
+    private boolean hasFileChangedUnexpectedly() throws ErrnoException {
         boolean z;
         synchronized (this.mLock) {
             if (this.mDiskWritesInFlight > 0) {
@@ -112,9 +206,9 @@ final class SharedPreferencesImpl implements SharedPreferences {
             }
             try {
                 BlockGuard.getThreadPolicy().onReadFromDisk();
-                StructStat stat = Os.stat(this.mFile.getPath());
+                StructStat structStatStat = Os.stat(this.mFile.getPath());
                 synchronized (this.mLock) {
-                    z = (stat.st_mtim.equals(this.mStatTimestamp) && this.mStatSize == stat.st_size) ? false : true;
+                    z = (structStatStat.st_mtim.equals(this.mStatTimestamp) && this.mStatSize == structStatStat.st_size) ? false : true;
                 }
                 return z;
             } catch (ErrnoException unused) {
@@ -137,7 +231,7 @@ final class SharedPreferencesImpl implements SharedPreferences {
         }
     }
 
-    private void awaitLoadedLocked() {
+    private void awaitLoadedLocked() throws InterruptedException {
         if (!this.mLoaded) {
             BlockGuard.getThreadPolicy().onReadFromDisk();
         }
@@ -154,12 +248,12 @@ final class SharedPreferencesImpl implements SharedPreferences {
 
     @Override // android.content.SharedPreferences
     public Map<String, ?> getAll() {
-        HashMap hashMap;
+        HashMap map;
         synchronized (this.mLock) {
             awaitLoadedLocked();
-            hashMap = new HashMap(this.mMap);
+            map = new HashMap(this.mMap);
         }
-        return hashMap;
+        return map;
     }
 
     @Override // android.content.SharedPreferences
@@ -236,12 +330,12 @@ final class SharedPreferencesImpl implements SharedPreferences {
 
     @Override // android.content.SharedPreferences
     public boolean contains(String str) {
-        boolean containsKey;
+        boolean zContainsKey;
         synchronized (this.mLock) {
             awaitLoadedLocked();
-            containsKey = this.mMap.containsKey(str);
+            zContainsKey = this.mMap.containsKey(str);
         }
-        return containsKey;
+        return zContainsKey;
     }
 
     @Override // android.content.SharedPreferences
@@ -355,49 +449,105 @@ final class SharedPreferencesImpl implements SharedPreferences {
 
         @Override // android.content.SharedPreferences.Editor
         public void apply() {
-            final long currentTimeMillis = System.currentTimeMillis();
-            final MemoryCommitResult commitToMemory = commitToMemory();
+            final long jCurrentTimeMillis = System.currentTimeMillis();
+            final MemoryCommitResult memoryCommitResultCommitToMemory = commitToMemory();
             final Runnable runnable = new Runnable(this) { // from class: android.app.SharedPreferencesImpl.EditorImpl.1
                 @Override // java.lang.Runnable
-                public void run() {
+                public void run() throws InterruptedException {
                     try {
-                        commitToMemory.writtenToDiskLatch.await();
+                        memoryCommitResultCommitToMemory.writtenToDiskLatch.await();
                     } catch (InterruptedException unused) {
                     }
                 }
             };
             QueuedWork.addFinisher(runnable);
-            SharedPreferencesImpl.this.enqueueDiskWrite(commitToMemory, new Runnable(this) { // from class: android.app.SharedPreferencesImpl.EditorImpl.2
+            SharedPreferencesImpl.this.enqueueDiskWrite(memoryCommitResultCommitToMemory, new Runnable(this) { // from class: android.app.SharedPreferencesImpl.EditorImpl.2
                 @Override // java.lang.Runnable
                 public void run() {
                     runnable.run();
                     QueuedWork.removeFinisher(runnable);
                 }
             });
-            lambda$notifyListeners$0(commitToMemory);
+            lambda$notifyListeners$0(memoryCommitResultCommitToMemory);
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:38:0x00bd A[Catch: all -> 0x00e5, TryCatch #0 {, blocks: (B:15:0x005f, B:17:0x0063, B:19:0x0069, B:20:0x006f, B:21:0x0075, B:22:0x007f, B:24:0x0085, B:42:0x009a, B:44:0x00a0, B:46:0x00a6, B:49:0x00ad, B:38:0x00bd, B:29:0x00b1, B:36:0x00b8, B:57:0x00c2, B:59:0x00c9, B:60:0x00d5, B:61:0x00db), top: B:14:0x005f, outer: #1 }] */
+        /* JADX WARN: Removed duplicated region for block: B:44:0x00bd A[Catch: all -> 0x00e5, TryCatch #0 {, blocks: (B:16:0x005f, B:18:0x0063, B:20:0x0069, B:22:0x006f, B:24:0x0075, B:25:0x007f, B:27:0x0085, B:31:0x009a, B:33:0x00a0, B:35:0x00a6, B:38:0x00ad, B:44:0x00bd, B:39:0x00b1, B:42:0x00b8, B:46:0x00c2, B:48:0x00c9, B:49:0x00d5, B:50:0x00db), top: B:62:0x005f, outer: #1 }] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        private android.app.SharedPreferencesImpl.MemoryCommitResult commitToMemory() {
-            /*
-                Method dump skipped, instructions count: 237
-                To view this dump change 'Code comments level' option to 'DEBUG'
-            */
-            throw new UnsupportedOperationException("Method not decompiled: android.app.SharedPreferencesImpl.EditorImpl.commitToMemory():android.app.SharedPreferencesImpl$MemoryCommitResult");
+        private MemoryCommitResult commitToMemory() {
+            Map map;
+            ArrayList arrayList;
+            HashSet hashSet;
+            boolean z;
+            long j;
+            Object obj;
+            boolean z2;
+            synchronized (SharedPreferencesImpl.this.mLock) {
+                if (SharedPreferencesImpl.this.mDiskWritesInFlight > 0) {
+                    SharedPreferencesImpl.this.mMap = new HashMap(SharedPreferencesImpl.this.mMap);
+                }
+                map = SharedPreferencesImpl.this.mMap;
+                SharedPreferencesImpl.this.mDiskWritesInFlight++;
+                boolean z3 = false;
+                boolean z4 = SharedPreferencesImpl.this.mListeners.size() > 0;
+                if (z4) {
+                    arrayList = new ArrayList();
+                    hashSet = new HashSet(SharedPreferencesImpl.this.mListeners.keySet());
+                } else {
+                    arrayList = null;
+                    hashSet = null;
+                }
+                synchronized (this.mEditorLock) {
+                    if (this.mClear) {
+                        if (map.isEmpty()) {
+                            z2 = false;
+                        } else {
+                            map.clear();
+                            z2 = true;
+                        }
+                        this.mClear = false;
+                        z3 = z2;
+                        z = true;
+                    } else {
+                        z = false;
+                    }
+                    for (Map.Entry<String, Object> entry : this.mModified.entrySet()) {
+                        String key = entry.getKey();
+                        Object value = entry.getValue();
+                        if (value == this || value == null) {
+                            if (map.containsKey(key)) {
+                                map.remove(key);
+                                if (z4) {
+                                    arrayList.add(key);
+                                }
+                                z3 = true;
+                            }
+                        } else if (!map.containsKey(key) || (obj = map.get(key)) == null || !obj.equals(value)) {
+                            map.put(key, value);
+                            if (z4) {
+                            }
+                            z3 = true;
+                        }
+                    }
+                    this.mModified.clear();
+                    if (z3) {
+                        SharedPreferencesImpl.this.mCurrentMemoryStateGeneration++;
+                    }
+                    j = SharedPreferencesImpl.this.mCurrentMemoryStateGeneration;
+                }
+            }
+            return new MemoryCommitResult(j, z, arrayList, hashSet, map);
         }
 
         @Override // android.content.SharedPreferences.Editor
         public boolean commit() {
-            MemoryCommitResult commitToMemory = commitToMemory();
-            SharedPreferencesImpl.this.enqueueDiskWrite(commitToMemory, null);
+            MemoryCommitResult memoryCommitResultCommitToMemory = commitToMemory();
+            SharedPreferencesImpl.this.enqueueDiskWrite(memoryCommitResultCommitToMemory, null);
             try {
-                commitToMemory.writtenToDiskLatch.await();
-                lambda$notifyListeners$0(commitToMemory);
-                return commitToMemory.writeToDiskResult;
+                memoryCommitResultCommitToMemory.writtenToDiskLatch.await();
+                lambda$notifyListeners$0(memoryCommitResultCommitToMemory);
+                return memoryCommitResultCommitToMemory.writeToDiskResult;
             } catch (InterruptedException unused) {
                 return false;
             }
@@ -429,7 +579,7 @@ final class SharedPreferencesImpl implements SharedPreferences {
                     ActivityThread.sMainThreadHandler.post(new Runnable() { // from class: android.app.SharedPreferencesImpl$EditorImpl$$ExternalSyntheticLambda0
                         @Override // java.lang.Runnable
                         public final void run() {
-                            SharedPreferencesImpl.EditorImpl.this.lambda$notifyListeners$0(memoryCommitResult);
+                            this.f$0.lambda$notifyListeners$0(memoryCommitResult);
                         }
                     });
                 }
@@ -469,7 +619,7 @@ final class SharedPreferencesImpl implements SharedPreferences {
         QueuedWork.queue(runnable2, !z2);
     }
 
-    private static FileOutputStream createFileOutputStream(File file) {
+    private static FileOutputStream createFileOutputStream(File file) throws ErrnoException {
         try {
             return new FileOutputStream(file);
         } catch (FileNotFoundException unused) {
@@ -489,7 +639,7 @@ final class SharedPreferencesImpl implements SharedPreferences {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void writeToFile(MemoryCommitResult memoryCommitResult, boolean z) {
+    public void writeToFile(MemoryCommitResult memoryCommitResult, boolean z) throws IOException, ErrnoException {
         boolean z2;
         if (this.mFile.exists()) {
             if (this.mDiskStateGeneration >= memoryCommitResult.memoryStateGeneration) {
@@ -516,29 +666,29 @@ final class SharedPreferencesImpl implements SharedPreferences {
             }
         }
         try {
-            FileOutputStream createFileOutputStream = createFileOutputStream(this.mFile);
-            if (createFileOutputStream == null) {
+            FileOutputStream fileOutputStreamCreateFileOutputStream = createFileOutputStream(this.mFile);
+            if (fileOutputStreamCreateFileOutputStream == null) {
                 memoryCommitResult.setDiskWriteResult(false, false);
                 return;
             }
-            XmlUtils.writeMapXml(memoryCommitResult.mapToWriteToDisk, createFileOutputStream);
-            long currentTimeMillis = System.currentTimeMillis();
-            FileUtils.sync(createFileOutputStream);
-            long currentTimeMillis2 = System.currentTimeMillis();
-            createFileOutputStream.close();
+            XmlUtils.writeMapXml(memoryCommitResult.mapToWriteToDisk, fileOutputStreamCreateFileOutputStream);
+            long jCurrentTimeMillis = System.currentTimeMillis();
+            FileUtils.sync(fileOutputStreamCreateFileOutputStream);
+            long jCurrentTimeMillis2 = System.currentTimeMillis();
+            fileOutputStreamCreateFileOutputStream.close();
             ContextImpl.setFilePermissionsFromMode(this.mFile.getPath(), this.mMode, 0);
             try {
-                StructStat stat = Os.stat(this.mFile.getPath());
+                StructStat structStatStat = Os.stat(this.mFile.getPath());
                 synchronized (this.mLock) {
-                    this.mStatTimestamp = stat.st_mtim;
-                    this.mStatSize = stat.st_size;
+                    this.mStatTimestamp = structStatStat.st_mtim;
+                    this.mStatSize = structStatStat.st_size;
                 }
             } catch (ErrnoException unused) {
             }
             this.mBackupFile.delete();
             this.mDiskStateGeneration = memoryCommitResult.memoryStateGeneration;
             memoryCommitResult.setDiskWriteResult(true, true);
-            long j = currentTimeMillis2 - currentTimeMillis;
+            long j = jCurrentTimeMillis2 - jCurrentTimeMillis;
             this.mSyncTimes.add((int) j);
             int i = this.mNumSync + 1;
             this.mNumSync = i;
@@ -566,9 +716,9 @@ final class SharedPreferencesImpl implements SharedPreferences {
 
         @Override // java.util.concurrent.ThreadFactory
         public Thread newThread(Runnable runnable) {
-            Thread newThread = Executors.defaultThreadFactory().newThread(runnable);
-            newThread.setName("SharedPreferences");
-            return newThread;
+            Thread threadNewThread = Executors.defaultThreadFactory().newThread(runnable);
+            threadNewThread.setName("SharedPreferences");
+            return threadNewThread;
         }
     }
 }

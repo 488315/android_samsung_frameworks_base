@@ -3,7 +3,6 @@ package androidx.datastore.preferences.protobuf;
 import androidx.datastore.preferences.protobuf.Internal;
 import java.lang.reflect.Field;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class FieldInfo implements Comparable {
     public final Field cachedSizeField;
@@ -19,7 +18,6 @@ public final class FieldInfo implements Comparable {
     public final boolean required;
     public final FieldType type;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.datastore.preferences.protobuf.FieldInfo$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$com$google$protobuf$FieldType;

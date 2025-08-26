@@ -13,7 +13,7 @@ public class PerfettoTrigger {
     private static final SparseLongArray sLastInvocationPerTrigger = new SparseLongArray(100);
     private static final Object sLock = new Object();
 
-    public static void trigger(String str) {
+    public static void trigger(String str) throws IOException {
         synchronized (sLock) {
             SparseLongArray sparseLongArray = sLastInvocationPerTrigger;
             if (SystemClock.elapsedRealtime() - sparseLongArray.get(str.hashCode()) < 300000) {

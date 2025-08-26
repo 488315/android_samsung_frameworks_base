@@ -18,17 +18,17 @@ public class ToUpperCase extends Filter {
 
     @Override // android.filterfw.core.Filter
     public void setupPorts() {
-        MutableFrameFormat fromClass = ObjectFormat.fromClass(String.class, 1);
-        this.mOutputFormat = fromClass;
-        addMaskedInputPort("mixedcase", fromClass);
+        MutableFrameFormat mutableFrameFormatFromClass = ObjectFormat.fromClass(String.class, 1);
+        this.mOutputFormat = mutableFrameFormatFromClass;
+        addMaskedInputPort("mixedcase", mutableFrameFormatFromClass);
         addOutputPort("uppercase", this.mOutputFormat);
     }
 
     @Override // android.filterfw.core.Filter
     public void process(FilterContext filterContext) {
         String str = (String) pullInput("mixedcase").getObjectValue();
-        Frame newFrame = filterContext.getFrameManager().newFrame(this.mOutputFormat);
-        newFrame.setObjectValue(str.toUpperCase(Locale.getDefault()));
-        pushOutput("uppercase", newFrame);
+        Frame frameNewFrame = filterContext.getFrameManager().newFrame(this.mOutputFormat);
+        frameNewFrame.setObjectValue(str.toUpperCase(Locale.getDefault()));
+        pushOutput("uppercase", frameNewFrame);
     }
 }

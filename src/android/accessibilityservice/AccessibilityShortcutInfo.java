@@ -35,33 +35,33 @@ public final class AccessibilityShortcutInfo {
         ComponentName componentName = activityInfo.getComponentName();
         this.mComponentName = componentName;
         this.mActivityInfo = activityInfo;
-        long elapsedRealtime = SystemClock.elapsedRealtime();
+        long jElapsedRealtime = SystemClock.elapsedRealtime();
         try {
-            XmlResourceParser loadXmlMetaData = activityInfo.loadXmlMetaData(packageManager, META_DATA);
+            XmlResourceParser xmlResourceParserLoadXmlMetaData = activityInfo.loadXmlMetaData(packageManager, META_DATA);
             try {
-                long elapsedRealtime2 = SystemClock.elapsedRealtime() - elapsedRealtime;
-                if (elapsedRealtime2 > 100) {
-                    Log.i("AccessibilityShortcutInfo", "took more than 100ms mComponentName : " + componentName + ", elapsedTime : " + elapsedRealtime2);
+                long jElapsedRealtime2 = SystemClock.elapsedRealtime() - jElapsedRealtime;
+                if (jElapsedRealtime2 > 100) {
+                    Log.i("AccessibilityShortcutInfo", "took more than 100ms mComponentName : " + componentName + ", elapsedTime : " + jElapsedRealtime2);
                 }
-                if (loadXmlMetaData == null) {
+                if (xmlResourceParserLoadXmlMetaData == null) {
                     throw new XmlPullParserException("Meta-data accessibility-shortcut-target does not exist");
                 }
-                for (int i = 0; i != 1 && i != 2; i = loadXmlMetaData.next()) {
+                for (int next = 0; next != 1 && next != 2; next = xmlResourceParserLoadXmlMetaData.next()) {
                 }
-                if (!TAG_ACCESSIBILITY_SHORTCUT.equals(loadXmlMetaData.getName())) {
+                if (!TAG_ACCESSIBILITY_SHORTCUT.equals(xmlResourceParserLoadXmlMetaData.getName())) {
                     throw new XmlPullParserException("Meta-data does not start withaccessibility-shortcut-target tag");
                 }
-                TypedArray obtainAttributes = packageManager.getResourcesForApplication(this.mActivityInfo.applicationInfo).obtainAttributes(Xml.asAttributeSet(loadXmlMetaData), R.styleable.AccessibilityShortcutTarget);
-                this.mDescriptionResId = obtainAttributes.getResourceId(0, 0);
-                this.mSummaryResId = obtainAttributes.getResourceId(1, 0);
-                this.mAnimatedImageRes = obtainAttributes.getResourceId(3, 0);
-                this.mHtmlDescriptionRes = obtainAttributes.getResourceId(4, 0);
-                this.mSettingsActivityName = obtainAttributes.getString(2);
-                this.mTileServiceName = obtainAttributes.getString(5);
-                this.mIntroResId = obtainAttributes.getResourceId(6, 0);
-                obtainAttributes.recycle();
-                if (loadXmlMetaData != null) {
-                    loadXmlMetaData.close();
+                TypedArray typedArrayObtainAttributes = packageManager.getResourcesForApplication(this.mActivityInfo.applicationInfo).obtainAttributes(Xml.asAttributeSet(xmlResourceParserLoadXmlMetaData), R.styleable.AccessibilityShortcutTarget);
+                this.mDescriptionResId = typedArrayObtainAttributes.getResourceId(0, 0);
+                this.mSummaryResId = typedArrayObtainAttributes.getResourceId(1, 0);
+                this.mAnimatedImageRes = typedArrayObtainAttributes.getResourceId(3, 0);
+                this.mHtmlDescriptionRes = typedArrayObtainAttributes.getResourceId(4, 0);
+                this.mSettingsActivityName = typedArrayObtainAttributes.getString(2);
+                this.mTileServiceName = typedArrayObtainAttributes.getString(5);
+                this.mIntroResId = typedArrayObtainAttributes.getResourceId(6, 0);
+                typedArrayObtainAttributes.recycle();
+                if (xmlResourceParserLoadXmlMetaData != null) {
+                    xmlResourceParserLoadXmlMetaData.close();
                 }
             } finally {
             }
@@ -102,9 +102,9 @@ public final class AccessibilityShortcutInfo {
     }
 
     public String loadHtmlDescription(PackageManager packageManager) {
-        String loadResourceString = loadResourceString(packageManager, this.mActivityInfo, this.mHtmlDescriptionRes);
-        if (loadResourceString != null) {
-            return AccessibilityUtils.getFilteredHtmlText(loadResourceString);
+        String strLoadResourceString = loadResourceString(packageManager, this.mActivityInfo, this.mHtmlDescriptionRes);
+        if (strLoadResourceString != null) {
+            return AccessibilityUtils.getFilteredHtmlText(strLoadResourceString);
         }
         return null;
     }

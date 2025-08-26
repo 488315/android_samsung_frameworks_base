@@ -35,7 +35,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class LockscreenNotificationIconsOnlyController implements LockscreenNotificationManager.Callback, PluginLockListener.State {
     public final Context mContext;
@@ -95,7 +94,11 @@ public class LockscreenNotificationIconsOnlyController implements LockscreenNoti
         return null;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:77:0x020d  */
     @Override // com.android.systemui.statusbar.LockscreenNotificationManager.Callback
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void onNotificationInfoUpdated(ArrayList arrayList) {
         boolean z;
         Log.i("LockscreenNotificationIconsOnlyController", "onNotificationInfoUpdated " + arrayList.size());
@@ -192,18 +195,19 @@ public class LockscreenNotificationIconsOnlyController implements LockscreenNoti
                     }
                     if (z) {
                         ExifInterface$$ExternalSyntheticOutline0.m(new StringBuilder("skip to show. all child is read notification when dot type. key = "), ((LockscreenNotificationInfo) arrayList.get(i3)).mKey, "LockscreenNotificationIconsOnlyController");
+                    } else {
+                        StatusBarIconView statusBarIconView2 = ((LockscreenNotificationInfo) arrayList.get(i3)).mStatusBarIcon;
+                        StatusBarNotification statusBarNotification2 = ((LockscreenNotificationInfo) arrayList.get(i3)).mSbn;
+                        String str2 = ((LockscreenNotificationInfo) arrayList.get(i3)).mKey;
+                        this.mNotificationIconData.getClass();
+                        LockscreenNotificationManager.NotificationIconData notificationIconData4 = this.mNotificationIconData;
+                        ImageView.ScaleType scaleType2 = ImageView.ScaleType.FIT_CENTER;
+                        notificationIconData4.createImageViewIcon(statusBarIconView2, statusBarNotification2);
                     }
                 } else if (((LockscreenNotificationInfo) arrayList.get(i3)).mRow.mEntry.mIsReaded) {
                     ExifInterface$$ExternalSyntheticOutline0.m(new StringBuilder("skip to show. read notification when dot type. key = "), ((LockscreenNotificationInfo) arrayList.get(i3)).mKey, "LockscreenNotificationIconsOnlyController");
                 }
             }
-            StatusBarIconView statusBarIconView2 = ((LockscreenNotificationInfo) arrayList.get(i3)).mStatusBarIcon;
-            StatusBarNotification statusBarNotification2 = ((LockscreenNotificationInfo) arrayList.get(i3)).mSbn;
-            String str2 = ((LockscreenNotificationInfo) arrayList.get(i3)).mKey;
-            this.mNotificationIconData.getClass();
-            LockscreenNotificationManager.NotificationIconData notificationIconData4 = this.mNotificationIconData;
-            ImageView.ScaleType scaleType2 = ImageView.ScaleType.FIT_CENTER;
-            notificationIconData4.createImageViewIcon(statusBarIconView2, statusBarNotification2);
         }
         while (i < this.mNotificationIconData.mIconArray.size()) {
             ImageView imageView2 = new ImageView(this.mContext);
@@ -220,7 +224,7 @@ public class LockscreenNotificationIconsOnlyController implements LockscreenNoti
         keyguardStatusBarNioLayoutModel.updateValues(new Runnable() { // from class: com.android.systemui.statusbar.phone.nio.KeyguardStatusBarNioLayoutRepository$updateKeyguardNioSize$1$1
             @Override // java.lang.Runnable
             public final void run() {
-                KeyguardStatusBarNioLayoutModel keyguardStatusBarNioLayoutModel2 = KeyguardStatusBarNioLayoutModel.this;
+                KeyguardStatusBarNioLayoutModel keyguardStatusBarNioLayoutModel2 = keyguardStatusBarNioLayoutModel;
                 int i6 = size2;
                 if (keyguardStatusBarNioLayoutModel2.numberOfNio != i6) {
                     keyguardStatusBarNioLayoutModel2.numberOfNio = i6;

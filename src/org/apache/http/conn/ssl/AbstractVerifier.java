@@ -71,7 +71,7 @@ public abstract class AbstractVerifier implements X509HostnameVerifier {
         StringBuffer stringBuffer = new StringBuffer();
         String lowerCase = str.trim().toLowerCase(Locale.ENGLISH);
         Iterator it = linkedList.iterator();
-        boolean z2 = false;
+        boolean zEquals = false;
         while (it.hasNext()) {
             String lowerCase2 = ((String) it.next()).toLowerCase(Locale.ENGLISH);
             stringBuffer.append(" <");
@@ -81,20 +81,20 @@ public abstract class AbstractVerifier implements X509HostnameVerifier {
                 stringBuffer.append(" OR");
             }
             if (lowerCase2.startsWith("*.") && lowerCase2.indexOf(46, 2) != -1 && acceptableCountryWildcard(lowerCase2) && !isIPv4Address(str)) {
-                boolean endsWith = lowerCase.endsWith(lowerCase2.substring(1));
-                if (endsWith && z) {
-                    z2 = countDots(lowerCase) == countDots(lowerCase2);
+                boolean zEndsWith = lowerCase.endsWith(lowerCase2.substring(1));
+                if (zEndsWith && z) {
+                    zEquals = countDots(lowerCase) == countDots(lowerCase2);
                 } else {
-                    z2 = endsWith;
+                    zEquals = zEndsWith;
                 }
             } else {
-                z2 = lowerCase.equals(lowerCase2);
+                zEquals = lowerCase.equals(lowerCase2);
             }
-            if (z2) {
+            if (zEquals) {
                 break;
             }
         }
-        if (z2) {
+        if (zEquals) {
             return;
         }
         throw new SSLException("hostname in certificate didn't match: <" + str + "> !=" + ((Object) stringBuffer));
@@ -121,17 +121,17 @@ public abstract class AbstractVerifier implements X509HostnameVerifier {
         return strArr;
     }
 
-    public static String[] getDNSSubjectAlts(X509Certificate x509Certificate) {
-        Collection<List<?>> collection;
+    public static String[] getDNSSubjectAlts(X509Certificate x509Certificate) throws CertificateParsingException {
+        Collection<List<?>> subjectAlternativeNames;
         LinkedList linkedList = new LinkedList();
         try {
-            collection = x509Certificate.getSubjectAlternativeNames();
+            subjectAlternativeNames = x509Certificate.getSubjectAlternativeNames();
         } catch (CertificateParsingException e) {
             Logger.getLogger(AbstractVerifier.class.getName()).log(Level.FINE, "Error parsing certificate.", (Throwable) e);
-            collection = null;
+            subjectAlternativeNames = null;
         }
-        if (collection != null) {
-            for (List<?> list : collection) {
+        if (subjectAlternativeNames != null) {
+            for (List<?> list : subjectAlternativeNames) {
                 if (((Integer) list.get(0)).intValue() == 2) {
                     linkedList.add((String) list.get(1));
                 }

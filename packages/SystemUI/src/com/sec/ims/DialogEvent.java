@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class DialogEvent implements Parcelable {
     public static final Parcelable.Creator<DialogEvent> CREATOR = new Parcelable.Creator<DialogEvent>() { // from class: com.sec.ims.DialogEvent.1
@@ -72,13 +71,13 @@ public class DialogEvent implements Parcelable {
     }
 
     public String toXmlString() {
-        String m = TransitionKt$$ExternalSyntheticOutline0.m(new StringBuilder("<?xml version=\"1.0\"?>\n\t<dialog-info xmlns=\"urn:ietf:params:xml:ns:dialog-info\"\n\t\tversion=\"0\" state=\"full\" entity=\""), this.mMSISDN, "\">\n");
+        String strM = TransitionKt$$ExternalSyntheticOutline0.m(new StringBuilder("<?xml version=\"1.0\"?>\n\t<dialog-info xmlns=\"urn:ietf:params:xml:ns:dialog-info\"\n\t\tversion=\"0\" state=\"full\" entity=\""), this.mMSISDN, "\">\n");
         for (Dialog dialog : this.mDialogList) {
-            StringBuilder m2 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(m);
-            m2.append(dialog.toXmlString());
-            m = m2.toString();
+            StringBuilder sbM = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(strM);
+            sbM.append(dialog.toXmlString());
+            strM = sbM.toString();
         }
-        return AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m, "</dialog-info>");
+        return AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strM, "</dialog-info>");
     }
 
     @Override // android.os.Parcelable

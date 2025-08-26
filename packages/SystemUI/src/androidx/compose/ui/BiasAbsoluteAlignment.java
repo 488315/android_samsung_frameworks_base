@@ -6,13 +6,11 @@ import androidx.compose.ui.unit.IntOffset;
 import androidx.compose.ui.unit.IntSize;
 import androidx.compose.ui.unit.LayoutDirection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class BiasAbsoluteAlignment implements Alignment {
     public final float horizontalBias;
     public final float verticalBias;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Horizontal implements Alignment.Horizontal {
         public final float bias;
 
@@ -48,16 +46,16 @@ public final class BiasAbsoluteAlignment implements Alignment {
 
     @Override // androidx.compose.ui.Alignment
     /* renamed from: align-KFBX0sM */
-    public final long mo352alignKFBX0sM(long j, long j2, LayoutDirection layoutDirection) {
+    public final long mo353alignKFBX0sM(long j, long j2, LayoutDirection layoutDirection) {
         long j3 = ((((int) (j2 >> 32)) - ((int) (j >> 32))) << 32) | ((((int) (j2 & 4294967295L)) - ((int) (j & 4294967295L))) & 4294967295L);
         IntSize.Companion companion = IntSize.Companion;
         float f = 1;
         float f2 = (this.horizontalBias + f) * (((int) (j3 >> 32)) / 2.0f);
         float f3 = f + this.verticalBias;
-        int round = Math.round(f2);
-        long round2 = (Math.round(f3 * (((int) (j3 & 4294967295L)) / 2.0f)) & 4294967295L) | (round << 32);
+        int iRound = Math.round(f2);
+        long jRound = (Math.round(f3 * (((int) (j3 & 4294967295L)) / 2.0f)) & 4294967295L) | (iRound << 32);
         IntOffset.Companion companion2 = IntOffset.Companion;
-        return round2;
+        return jRound;
     }
 
     public final boolean equals(Object obj) {

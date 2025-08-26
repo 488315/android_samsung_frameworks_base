@@ -47,9 +47,9 @@ public interface ISrvccStartedCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISrvccStartedCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISrvccStartedCallback)) {
-                return (ISrvccStartedCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISrvccStartedCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISrvccStartedCallback)) {
+                return (ISrvccStartedCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -76,9 +76,9 @@ public interface ISrvccStartedCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                ArrayList createTypedArrayList = parcel.createTypedArrayList(SrvccCall.CREATOR);
+                ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(SrvccCall.CREATOR);
                 parcel.enforceNoDataAvail();
-                onSrvccCallNotified(createTypedArrayList);
+                onSrvccCallNotified(arrayListCreateTypedArrayList);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -102,13 +102,13 @@ public interface ISrvccStartedCallback extends IInterface {
 
             @Override // android.telephony.ims.aidl.ISrvccStartedCallback
             public void onSrvccCallNotified(List<SrvccCall> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISrvccStartedCallback.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISrvccStartedCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

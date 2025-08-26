@@ -15,7 +15,7 @@ public class ShutdownActivity extends Activity {
     private boolean mReboot;
 
     @Override // android.app.Activity
-    protected void onCreate(Bundle bundle) {
+    protected void onCreate(Bundle bundle) throws InterruptedException {
         super.onCreate(bundle);
         Intent intent = getIntent();
         this.mReboot = Intent.ACTION_REBOOT.equals(intent.getAction());
@@ -26,12 +26,12 @@ public class ShutdownActivity extends Activity {
         Thread thread = new Thread(str) { // from class: com.android.internal.app.ShutdownActivity.1
             @Override // java.lang.Thread, java.lang.Runnable
             public void run() {
-                IPowerManager asInterface = IPowerManager.Stub.asInterface(ServiceManager.getService("power"));
+                IPowerManager iPowerManagerAsInterface = IPowerManager.Stub.asInterface(ServiceManager.getService("power"));
                 try {
                     if (ShutdownActivity.this.mReboot) {
-                        asInterface.reboot(ShutdownActivity.this.mConfirm, stringExtra, false);
+                        iPowerManagerAsInterface.reboot(ShutdownActivity.this.mConfirm, stringExtra, false);
                     } else {
-                        asInterface.shutdown(ShutdownActivity.this.mConfirm, stringExtra, false);
+                        iPowerManagerAsInterface.shutdown(ShutdownActivity.this.mConfirm, stringExtra, false);
                     }
                 } catch (RemoteException unused) {
                 }

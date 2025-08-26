@@ -38,7 +38,6 @@ import java.util.List;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SamsungPluginTaskBar implements ExtendableBar {
     public final TaskBarButtonDispatcherProxy buttonDispatcherProxy;
@@ -69,7 +68,7 @@ public final class SamsungPluginTaskBar implements ExtendableBar {
         this.keyguardCallback = new KeyguardStateController.Callback() { // from class: com.android.systemui.navigationbar.plugin.SamsungPluginTaskBar$keyguardCallback$1
             @Override // com.android.systemui.statusbar.policy.KeyguardStateController.Callback
             public final void onKeyguardShowingChanged() {
-                SamsungPluginTaskBar samsungPluginTaskBar = SamsungPluginTaskBar.this;
+                SamsungPluginTaskBar samsungPluginTaskBar = this.this$0;
                 KeyguardStateController keyguardStateController = samsungPluginTaskBar.keyguardStateController;
                 if (keyguardStateController != null) {
                     samsungPluginTaskBar.isKeyguardShowing = ((KeyguardStateControllerImpl) keyguardStateController).mShowing;
@@ -174,16 +173,16 @@ public final class SamsungPluginTaskBar implements ExtendableBar {
 
     public final void parseAndUpdateBundle() {
         NavBarStateManagerImpl navBarStateManagerImpl = (NavBarStateManagerImpl) this.navBarStateManager;
-        List split$default = StringsKt__StringsKt.split$default(navBarStateManagerImpl.isGestureMode() ? navBarStateManagerImpl.getGesturalLayout(navBarStateManagerImpl.isBottomGestureMode(false)) : navBarStateManagerImpl.getDefaultLayout(), new String[]{";"}, 3, 2);
-        if (split$default.size() != 3) {
+        List listSplit$default = StringsKt__StringsKt.split$default(navBarStateManagerImpl.isGestureMode() ? navBarStateManagerImpl.getGesturalLayout(navBarStateManagerImpl.isBottomGestureMode(false)) : navBarStateManagerImpl.getDefaultLayout(), new String[]{";"}, 3, 2);
+        if (listSplit$default.size() != 3) {
             return;
         }
-        List split$default2 = StringsKt__StringsKt.split$default((CharSequence) split$default.get(0), new String[]{","}, 0, 6);
-        List split$default3 = StringsKt__StringsKt.split$default((CharSequence) split$default.get(1), new String[]{","}, 0, 6);
-        List split$default4 = StringsKt__StringsKt.split$default((CharSequence) split$default.get(2), new String[]{","}, 0, 6);
+        List listSplit$default2 = StringsKt__StringsKt.split$default((CharSequence) listSplit$default.get(0), new String[]{","}, 0, 6);
+        List listSplit$default3 = StringsKt__StringsKt.split$default((CharSequence) listSplit$default.get(1), new String[]{","}, 0, 6);
+        List listSplit$default4 = StringsKt__StringsKt.split$default((CharSequence) listSplit$default.get(2), new String[]{","}, 0, 6);
         this.pluginBundle.putStringArrayList("order", new ArrayList<>());
         this.pluginBundle.putBoolean("pin", false);
-        ArrayList arrayList = (ArrayList) CollectionsKt___CollectionsKt.plus((Iterable) split$default4, (Collection) CollectionsKt___CollectionsKt.plus((Iterable) split$default3, (Collection) split$default2));
+        ArrayList arrayList = (ArrayList) CollectionsKt___CollectionsKt.plus((Iterable) listSplit$default4, (Collection) CollectionsKt___CollectionsKt.plus((Iterable) listSplit$default3, (Collection) listSplit$default2));
         int size = arrayList.size();
         int i = 0;
         int i2 = 0;
@@ -196,19 +195,20 @@ public final class SamsungPluginTaskBar implements ExtendableBar {
                 if (stringArrayList != null) {
                     stringArrayList.add(i, str);
                 }
+                i++;
             } else {
                 SamsungNavigationBarInflaterView.Companion.getClass();
                 if (str.startsWith(SamsungNavigationBarInflaterView.navkey)) {
-                    String substring = !StringsKt__StringsKt.contains(str, "(", false) ? "1" : str.substring(StringsKt__StringsKt.indexOf$default(str, "(", 0, false, 6) + 1, StringsKt__StringsKt.indexOf$default(str, ":", 0, false, 6));
+                    String strSubstring = !StringsKt__StringsKt.contains(str, "(", false) ? "1" : str.substring(StringsKt__StringsKt.indexOf$default(str, "(", 0, false, 6) + 1, StringsKt__StringsKt.indexOf$default(str, ":", 0, false, 6));
                     ArrayList<String> stringArrayList2 = this.pluginBundle.getStringArrayList("order");
                     if (stringArrayList2 != null) {
-                        stringArrayList2.add(i, substring);
+                        stringArrayList2.add(i, strSubstring);
                     }
+                    i++;
                 } else if (str.equals(SamsungNavigationBarInflaterView.pin)) {
                     this.pluginBundle.putBoolean("pin", true);
                 }
             }
-            i++;
         }
     }
 

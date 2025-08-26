@@ -8,11 +8,9 @@ import java.util.List;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public interface ShortcutsUiState {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Inactive implements ShortcutsUiState {
         public static final Inactive INSTANCE = new Inactive();
 
@@ -32,7 +30,6 @@ public interface ShortcutsUiState {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Active implements ShortcutsUiState {
         public final ShortcutCategoryType defaultSelectedCategory;
         public final boolean isCustomizationModeEnabled;
@@ -62,9 +59,9 @@ public interface ShortcutsUiState {
         }
 
         public final int hashCode() {
-            int m = PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.shortcutCategories, this.searchQuery.hashCode() * 31, 31);
+            int iM = PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.shortcutCategories, this.searchQuery.hashCode() * 31, 31);
             ShortcutCategoryType shortcutCategoryType = this.defaultSelectedCategory;
-            return Boolean.hashCode(this.isCustomizationModeEnabled) + TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m((m + (shortcutCategoryType == null ? 0 : shortcutCategoryType.hashCode())) * 31, 31, this.isShortcutCustomizerFlagEnabled), 31, this.shouldShowResetButton);
+            return Boolean.hashCode(this.isCustomizationModeEnabled) + TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m((iM + (shortcutCategoryType == null ? 0 : shortcutCategoryType.hashCode())) * 31, 31, this.isShortcutCustomizerFlagEnabled), 31, this.shouldShowResetButton);
         }
 
         public final String toString() {

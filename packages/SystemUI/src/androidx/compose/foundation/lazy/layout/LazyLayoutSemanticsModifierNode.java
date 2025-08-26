@@ -26,7 +26,6 @@ import kotlin.reflect.KProperty;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class LazyLayoutSemanticsModifierNode extends Modifier.Node implements SemanticsModifierNode {
     public final Function1 indexForKeyMapping = new Function1() { // from class: androidx.compose.foundation.lazy.layout.LazyLayoutSemanticsModifierNode$indexForKeyMapping$1
@@ -36,8 +35,8 @@ final class LazyLayoutSemanticsModifierNode extends Modifier.Node implements Sem
 
         @Override // kotlin.jvm.functions.Function1
         /* renamed from: invoke */
-        public final Object mo779invoke(Object obj) {
-            LazyLayoutItemProvider lazyLayoutItemProvider = (LazyLayoutItemProvider) LazyLayoutSemanticsModifierNode.this.itemProviderLambda.invoke();
+        public final Object mo781invoke(Object obj) {
+            LazyLayoutItemProvider lazyLayoutItemProvider = (LazyLayoutItemProvider) this.this$0.itemProviderLambda.invoke();
             int itemCount = lazyLayoutItemProvider.getItemCount();
             int i = 0;
             while (true) {
@@ -102,11 +101,7 @@ final class LazyLayoutSemanticsModifierNode extends Modifier.Node implements Sem
             SemanticsActions.INSTANCE.getClass();
             semanticsConfiguration.set(SemanticsActions.ScrollToIndex, new AccessibilityAction(null, function12));
         }
-        SemanticsPropertiesKt.getScrollViewportLength$default(semanticsPropertyReceiver, new Function0() { // from class: androidx.compose.foundation.lazy.layout.LazyLayoutSemanticsModifierNode$applySemantics$2
-            {
-                super(0);
-            }
-
+        SemanticsPropertiesKt.getScrollViewportLength$default(semanticsPropertyReceiver, new Function0() { // from class: androidx.compose.foundation.lazy.layout.LazyLayoutSemanticsModifierNode.applySemantics.2
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
                 return Float.valueOf(LazyLayoutSemanticsModifierNode.this.state.getViewport() - LazyLayoutSemanticsModifierNode.this.state.getContentPadding());
@@ -125,28 +120,19 @@ final class LazyLayoutSemanticsModifierNode extends Modifier.Node implements Sem
     }
 
     public final void updateCachedSemanticsValues() {
-        this.scrollAxisRange = new ScrollAxisRange(new Function0() { // from class: androidx.compose.foundation.lazy.layout.LazyLayoutSemanticsModifierNode$updateCachedSemanticsValues$1
-            {
-                super(0);
-            }
-
+        this.scrollAxisRange = new ScrollAxisRange(new Function0() { // from class: androidx.compose.foundation.lazy.layout.LazyLayoutSemanticsModifierNode.updateCachedSemanticsValues.1
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
                 return Float.valueOf(LazyLayoutSemanticsModifierNode.this.state.getScrollOffset());
             }
-        }, new Function0() { // from class: androidx.compose.foundation.lazy.layout.LazyLayoutSemanticsModifierNode$updateCachedSemanticsValues$2
-            {
-                super(0);
-            }
-
+        }, new Function0() { // from class: androidx.compose.foundation.lazy.layout.LazyLayoutSemanticsModifierNode.updateCachedSemanticsValues.2
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
                 return Float.valueOf(LazyLayoutSemanticsModifierNode.this.state.getMaxScrollOffset());
             }
         }, this.reverseScrolling);
-        this.scrollToIndexAction = this.userScrollEnabled ? new Function1() { // from class: androidx.compose.foundation.lazy.layout.LazyLayoutSemanticsModifierNode$updateCachedSemanticsValues$3
+        this.scrollToIndexAction = this.userScrollEnabled ? new Function1() { // from class: androidx.compose.foundation.lazy.layout.LazyLayoutSemanticsModifierNode.updateCachedSemanticsValues.3
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: androidx.compose.foundation.lazy.layout.LazyLayoutSemanticsModifierNode$updateCachedSemanticsValues$3$2, reason: invalid class name */
             final class AnonymousClass2 extends SuspendLambda implements Function2 {
                 final /* synthetic */ int $index;
@@ -192,22 +178,18 @@ final class LazyLayoutSemanticsModifierNode extends Modifier.Node implements Sem
                 }
             }
 
-            {
-                super(1);
-            }
-
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                int intValue = ((Number) obj).intValue();
+            public final Object mo781invoke(Object obj) {
+                int iIntValue = ((Number) obj).intValue();
                 LazyLayoutItemProvider lazyLayoutItemProvider = (LazyLayoutItemProvider) LazyLayoutSemanticsModifierNode.this.itemProviderLambda.invoke();
-                if (intValue < 0 || intValue >= lazyLayoutItemProvider.getItemCount()) {
-                    StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(intValue, "Can't scroll to index ", ", it is out of bounds [0, ");
-                    m.append(lazyLayoutItemProvider.getItemCount());
-                    m.append(')');
-                    InlineClassHelperKt.throwIllegalArgumentException(m.toString());
+                if (iIntValue < 0 || iIntValue >= lazyLayoutItemProvider.getItemCount()) {
+                    StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(iIntValue, "Can't scroll to index ", ", it is out of bounds [0, ");
+                    sbM.append(lazyLayoutItemProvider.getItemCount());
+                    sbM.append(')');
+                    InlineClassHelperKt.throwIllegalArgumentException(sbM.toString());
                 }
-                BuildersKt.launch$default(LazyLayoutSemanticsModifierNode.this.getCoroutineScope(), null, null, new AnonymousClass2(LazyLayoutSemanticsModifierNode.this, intValue, null), 3);
+                BuildersKt.launch$default(LazyLayoutSemanticsModifierNode.this.getCoroutineScope(), null, null, new AnonymousClass2(LazyLayoutSemanticsModifierNode.this, iIntValue, null), 3);
                 return Boolean.TRUE;
             }
         } : null;

@@ -7,7 +7,6 @@ import android.media.session.MediaSession;
 import android.media.session.MediaSessionManager;
 import android.util.Log;
 import com.android.systemui.media.controls.domain.pipeline.MediaDataManager;
-import com.android.systemui.media.controls.domain.pipeline.MediaSessionBasedFilter;
 import com.android.systemui.media.controls.shared.model.MediaData;
 import com.android.systemui.statusbar.phone.NotificationListenerWithPlugins;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
@@ -24,7 +23,6 @@ import kotlin.collections.CollectionsKt__IterablesKt;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MediaSessionBasedFilter implements MediaDataManager.Listener {
     public final Executor backgroundExecutor;
@@ -37,11 +35,10 @@ public final class MediaSessionBasedFilter implements MediaDataManager.Listener 
     public final MediaSessionBasedFilter$sessionListener$1 sessionListener = new MediaSessionManager.OnActiveSessionsChangedListener() { // from class: com.android.systemui.media.controls.domain.pipeline.MediaSessionBasedFilter$sessionListener$1
         @Override // android.media.session.MediaSessionManager.OnActiveSessionsChangedListener
         public final void onActiveSessionsChanged(List list) {
-            MediaSessionBasedFilter.access$handleControllersChanged(MediaSessionBasedFilter.this, list);
+            MediaSessionBasedFilter.access$handleControllersChanged(this.this$0, list);
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TokenId {
         public final int id;
 
@@ -113,26 +110,26 @@ public final class MediaSessionBasedFilter implements MediaDataManager.Listener 
 
     @Override // com.android.systemui.media.controls.domain.pipeline.MediaDataManager.Listener
     public final void onMediaDataLoaded(final String str, final String str2, final MediaData mediaData, final boolean z) {
-        this.backgroundExecutor.execute(new Runnable() { // from class: com.android.systemui.media.controls.domain.pipeline.MediaSessionBasedFilter$onMediaDataLoaded$1
+        this.backgroundExecutor.execute(new Runnable() { // from class: com.android.systemui.media.controls.domain.pipeline.MediaSessionBasedFilter.onMediaDataLoaded.1
             @Override // java.lang.Runnable
             public final void run() {
                 ArrayList arrayList;
                 Set set;
-                MediaSession.Token token = MediaData.this.token;
+                MediaSession.Token token = mediaData.token;
                 if (token != null) {
-                    this.tokensWithNotifications.add(new MediaSessionBasedFilter.TokenId(token));
+                    this.tokensWithNotifications.add(new TokenId(token));
                 }
                 String str3 = str2;
                 boolean z2 = (str3 == null || Intrinsics.areEqual(str, str3)) ? false : true;
                 if (z2 && (set = (Set) this.keyedTokens.remove(str2)) != null) {
                 }
-                if (MediaData.this.token != null) {
+                if (mediaData.token != null) {
                     Set set2 = (Set) ((LinkedHashMap) this.keyedTokens).get(str);
                     if (set2 != null) {
-                        set2.add(new MediaSessionBasedFilter.TokenId(MediaData.this.token));
+                        set2.add(new TokenId(mediaData.token));
                     }
                 }
-                List list = (List) this.packageControllers.get(MediaData.this.packageName);
+                List list = (List) this.packageControllers.get(mediaData.packageName);
                 MediaController mediaController = null;
                 if (list != null) {
                     arrayList = new ArrayList();
@@ -148,16 +145,16 @@ public final class MediaSessionBasedFilter implements MediaDataManager.Listener 
                 if (arrayList != null && arrayList.size() == 1) {
                     mediaController = (MediaController) CollectionsKt___CollectionsKt.firstOrNull((List) arrayList);
                 }
-                if (z2 || mediaController == null || Intrinsics.areEqual(mediaController.getSessionToken(), MediaData.this.token) || !this.tokensWithNotifications.contains(new MediaSessionBasedFilter.TokenId(mediaController.getSessionToken()))) {
+                if (z2 || mediaController == null || Intrinsics.areEqual(mediaController.getSessionToken(), mediaData.token) || !this.tokensWithNotifications.contains(new TokenId(mediaController.getSessionToken()))) {
                     final MediaSessionBasedFilter mediaSessionBasedFilter = this;
                     final String str4 = str;
                     final String str5 = str2;
-                    final MediaData mediaData2 = MediaData.this;
+                    final MediaData mediaData2 = mediaData;
                     final boolean z3 = z;
                     mediaSessionBasedFilter.foregroundExecutor.execute(new Runnable() { // from class: com.android.systemui.media.controls.domain.pipeline.MediaSessionBasedFilter$dispatchMediaDataLoaded$1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            Set set3 = CollectionsKt___CollectionsKt.toSet(MediaSessionBasedFilter.this.listeners);
+                            Set set3 = CollectionsKt___CollectionsKt.toSet(mediaSessionBasedFilter.listeners);
                             String str6 = str4;
                             String str7 = str5;
                             MediaData mediaData3 = mediaData2;
@@ -170,10 +167,10 @@ public final class MediaSessionBasedFilter implements MediaDataManager.Listener 
                     });
                     return;
                 }
-                Log.d("MediaSessionBasedFilter", "filtering key=" + str + " local=" + MediaData.this.token + " remote=" + mediaController.getSessionToken());
+                Log.d("MediaSessionBasedFilter", "filtering key=" + str + " local=" + mediaData.token + " remote=" + mediaController.getSessionToken());
                 Object obj2 = ((LinkedHashMap) this.keyedTokens).get(str);
                 obj2.getClass();
-                if (((Set) obj2).contains(new MediaSessionBasedFilter.TokenId(mediaController.getSessionToken()))) {
+                if (((Set) obj2).contains(new TokenId(mediaController.getSessionToken()))) {
                     return;
                 }
                 MediaSessionBasedFilter mediaSessionBasedFilter2 = this;
@@ -184,7 +181,7 @@ public final class MediaSessionBasedFilter implements MediaDataManager.Listener 
 
     @Override // com.android.systemui.media.controls.domain.pipeline.MediaDataManager.Listener
     public final void onMediaDataRemoved(final String str, final boolean z) {
-        this.backgroundExecutor.execute(new Runnable() { // from class: com.android.systemui.media.controls.domain.pipeline.MediaSessionBasedFilter$onMediaDataRemoved$1
+        this.backgroundExecutor.execute(new Runnable() { // from class: com.android.systemui.media.controls.domain.pipeline.MediaSessionBasedFilter.onMediaDataRemoved.1
             @Override // java.lang.Runnable
             public final void run() {
                 MediaSessionBasedFilter.this.keyedTokens.remove(str);

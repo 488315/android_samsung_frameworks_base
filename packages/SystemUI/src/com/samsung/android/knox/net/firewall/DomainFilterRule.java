@@ -6,7 +6,6 @@ import com.samsung.android.knox.AppIdentity;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class DomainFilterRule implements Parcelable {
     public static final List<DomainFilterRule> CLEAR_ALL = null;
@@ -165,16 +164,16 @@ public class DomainFilterRule implements Parcelable {
     private DomainFilterRule(Parcel parcel) {
         this();
         this.mAppIdentity = (AppIdentity) parcel.readParcelable(AppIdentity.class.getClassLoader());
-        int readInt = parcel.readInt();
-        this.mNullCheck = readInt;
-        if (readInt == 1) {
+        int i = parcel.readInt();
+        this.mNullCheck = i;
+        if (i == 1) {
             parcel.readStringList(this.mDenyDomains);
         } else {
             this.mDenyDomains = null;
         }
-        int readInt2 = parcel.readInt();
-        this.mNullCheck = readInt2;
-        if (readInt2 == 1) {
+        int i2 = parcel.readInt();
+        this.mNullCheck = i2;
+        if (i2 == 1) {
             parcel.readStringList(this.mAllowDomains);
         } else {
             this.mAllowDomains = null;

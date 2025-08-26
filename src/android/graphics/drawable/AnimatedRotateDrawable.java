@@ -34,10 +34,10 @@ public class AnimatedRotateDrawable extends DrawableWrapper implements Animatabl
         AnimatedRotateState animatedRotateState = this.mState;
         float f = animatedRotateState.mPivotXRel ? i * animatedRotateState.mPivotX : animatedRotateState.mPivotX;
         float f2 = animatedRotateState.mPivotYRel ? i2 * animatedRotateState.mPivotY : animatedRotateState.mPivotY;
-        int save = canvas.save();
+        int iSave = canvas.save();
         canvas.rotate(this.mCurrentDegrees, f + bounds.left, f2 + bounds.top);
         drawable.draw(canvas);
-        canvas.restoreToCount(save);
+        canvas.restoreToCount(iSave);
     }
 
     @Override // android.graphics.drawable.Animatable
@@ -83,11 +83,11 @@ public class AnimatedRotateDrawable extends DrawableWrapper implements Animatabl
 
     @Override // android.graphics.drawable.DrawableWrapper, android.graphics.drawable.Drawable
     public void inflate(Resources resources, XmlPullParser xmlPullParser, AttributeSet attributeSet, Resources.Theme theme) throws XmlPullParserException, IOException {
-        TypedArray obtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.AnimatedRotateDrawable);
+        TypedArray typedArrayObtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.AnimatedRotateDrawable);
         super.inflate(resources, xmlPullParser, attributeSet, theme);
-        updateStateFromTypedArray(obtainAttributes);
-        verifyRequiredAttributes(obtainAttributes);
-        obtainAttributes.recycle();
+        updateStateFromTypedArray(typedArrayObtainAttributes);
+        verifyRequiredAttributes(typedArrayObtainAttributes);
+        typedArrayObtainAttributes.recycle();
         updateLocalState();
     }
 
@@ -99,16 +99,16 @@ public class AnimatedRotateDrawable extends DrawableWrapper implements Animatabl
             return;
         }
         if (animatedRotateState.mThemeAttrs != null) {
-            TypedArray resolveAttributes = theme.resolveAttributes(animatedRotateState.mThemeAttrs, R.styleable.AnimatedRotateDrawable);
+            TypedArray typedArrayResolveAttributes = theme.resolveAttributes(animatedRotateState.mThemeAttrs, R.styleable.AnimatedRotateDrawable);
             try {
                 try {
-                    updateStateFromTypedArray(resolveAttributes);
-                    verifyRequiredAttributes(resolveAttributes);
+                    updateStateFromTypedArray(typedArrayResolveAttributes);
+                    verifyRequiredAttributes(typedArrayResolveAttributes);
                 } catch (XmlPullParserException e) {
                     rethrowAsRuntimeException(e);
                 }
             } finally {
-                resolveAttributes.recycle();
+                typedArrayResolveAttributes.recycle();
             }
         }
         updateLocalState();
@@ -130,14 +130,14 @@ public class AnimatedRotateDrawable extends DrawableWrapper implements Animatabl
         animatedRotateState.mChangingConfigurations |= typedArray.getChangingConfigurations();
         animatedRotateState.mThemeAttrs = typedArray.extractThemeAttrs();
         if (typedArray.hasValue(2)) {
-            TypedValue peekValue = typedArray.peekValue(2);
-            animatedRotateState.mPivotXRel = peekValue.type == 6;
-            animatedRotateState.mPivotX = animatedRotateState.mPivotXRel ? peekValue.getFraction(1.0f, 1.0f) : peekValue.getFloat();
+            TypedValue typedValuePeekValue = typedArray.peekValue(2);
+            animatedRotateState.mPivotXRel = typedValuePeekValue.type == 6;
+            animatedRotateState.mPivotX = animatedRotateState.mPivotXRel ? typedValuePeekValue.getFraction(1.0f, 1.0f) : typedValuePeekValue.getFloat();
         }
         if (typedArray.hasValue(3)) {
-            TypedValue peekValue2 = typedArray.peekValue(3);
-            animatedRotateState.mPivotYRel = peekValue2.type == 6;
-            animatedRotateState.mPivotY = animatedRotateState.mPivotYRel ? peekValue2.getFraction(1.0f, 1.0f) : peekValue2.getFloat();
+            TypedValue typedValuePeekValue2 = typedArray.peekValue(3);
+            animatedRotateState.mPivotYRel = typedValuePeekValue2.type == 6;
+            animatedRotateState.mPivotY = animatedRotateState.mPivotYRel ? typedValuePeekValue2.getFraction(1.0f, 1.0f) : typedValuePeekValue2.getFloat();
         }
         setFramesCount(typedArray.getInt(5, animatedRotateState.mFramesCount));
         setFramesDuration(typedArray.getInt(4, animatedRotateState.mFrameDuration));

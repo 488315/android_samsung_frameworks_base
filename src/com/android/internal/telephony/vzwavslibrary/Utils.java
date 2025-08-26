@@ -18,24 +18,24 @@ import java.util.Locale;
 public class Utils {
     protected static final String TAG = "VZWAVSLibrary";
 
-    public static String getCertFingerprint(Signature signature) {
+    public static String getCertFingerprint(Signature signature) throws IOException {
         if (signature == null) {
             return null;
         }
         try {
             ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(signature.toByteArray());
             try {
-                byte[] digest = MessageDigest.getInstance("SHA1").digest(((X509Certificate) CertificateFactory.getInstance("X509").generateCertificate(byteArrayInputStream)).getEncoded());
+                byte[] bArrDigest = MessageDigest.getInstance("SHA1").digest(((X509Certificate) CertificateFactory.getInstance("X509").generateCertificate(byteArrayInputStream)).getEncoded());
                 StringBuilder sb = new StringBuilder();
-                for (byte b : digest) {
+                for (byte b : bArrDigest) {
                     if (sb.length() > 0) {
                         sb.append(":");
                     }
                     sb.append(String.format(Locale.ENGLISH, "%02X", Byte.valueOf(b)));
                 }
-                String sb2 = sb.toString();
+                String string = sb.toString();
                 byteArrayInputStream.close();
-                return sb2;
+                return string;
             } catch (Throwable th) {
                 try {
                     byteArrayInputStream.close();

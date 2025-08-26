@@ -2,7 +2,6 @@ package android.database.sqlite.trace;
 
 import android.database.sqlite.SQLiteConnection;
 import android.database.sqlite.SQLiteDebug;
-import android.database.sqlite.trace.SQLiteTrace;
 import android.os.Process;
 import android.os.SystemProperties;
 import java.io.File;
@@ -41,13 +40,11 @@ public class SQLiteTrace {
 
     private static synchronized SQLiteTraceSession startSession(String str) {
         SQLiteTraceSession sQLiteTraceSession;
-        synchronized (SQLiteTrace.class) {
-            sQLiteTraceSession = mCurrentSessions.get(str);
-            if (sQLiteTraceSession == null || !sQLiteTraceSession.isAlive()) {
-                sQLiteTraceSession = new SQLiteTraceSession();
-                sQLiteTraceSession.start(str);
-                mCurrentSessions.put(str, sQLiteTraceSession);
-            }
+        sQLiteTraceSession = mCurrentSessions.get(str);
+        if (sQLiteTraceSession == null || !sQLiteTraceSession.isAlive()) {
+            sQLiteTraceSession = new SQLiteTraceSession();
+            sQLiteTraceSession.start(str);
+            mCurrentSessions.put(str, sQLiteTraceSession);
         }
         return sQLiteTraceSession;
     }
@@ -64,7 +61,7 @@ public class SQLiteTrace {
             new Thread(new Runnable() { // from class: android.database.sqlite.trace.SQLiteTrace$SQLiteTraceSession$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SQLiteTrace.SQLiteTraceSession.this.lambda$start$0(str);
+                    this.f$0.lambda$start$0(str);
                 }
             }).start();
         }
@@ -86,11 +83,11 @@ public class SQLiteTrace {
                             this.mExporter.writeOperations(clearAndGetOperations());
                         }
                     }
-                } catch (Exception e2) {
-                    e2.printStackTrace();
+                } finally {
+                    end();
                 }
-            } finally {
-                end();
+            } catch (Exception e2) {
+                e2.printStackTrace();
             }
         }
 

@@ -15,7 +15,6 @@ import com.google.android.material.animation.MotionTiming;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @Deprecated
 /* loaded from: classes4.dex */
 public class FabTransformationScrimBehavior extends ExpandableTransformationBehavior {
@@ -34,7 +33,7 @@ public class FabTransformationScrimBehavior extends ExpandableTransformationBeha
 
     @Override // com.google.android.material.transformation.ExpandableTransformationBehavior
     public final AnimatorSet onCreateExpandedStateChangeAnimation(View view, final View view2, final boolean z, boolean z2) {
-        ObjectAnimator ofFloat;
+        ObjectAnimator objectAnimatorOfFloat;
         ArrayList arrayList = new ArrayList();
         new ArrayList();
         MotionTiming motionTiming = z ? this.expandTiming : this.collapseTiming;
@@ -42,12 +41,12 @@ public class FabTransformationScrimBehavior extends ExpandableTransformationBeha
             if (!z2) {
                 view2.setAlpha(0.0f);
             }
-            ofFloat = ObjectAnimator.ofFloat(view2, (Property<View, Float>) View.ALPHA, 1.0f);
+            objectAnimatorOfFloat = ObjectAnimator.ofFloat(view2, (Property<View, Float>) View.ALPHA, 1.0f);
         } else {
-            ofFloat = ObjectAnimator.ofFloat(view2, (Property<View, Float>) View.ALPHA, 0.0f);
+            objectAnimatorOfFloat = ObjectAnimator.ofFloat(view2, (Property<View, Float>) View.ALPHA, 0.0f);
         }
-        motionTiming.apply(ofFloat);
-        arrayList.add(ofFloat);
+        motionTiming.apply(objectAnimatorOfFloat);
+        arrayList.add(objectAnimatorOfFloat);
         AnimatorSet animatorSet = new AnimatorSet();
         AnimatorSetCompat.playTogether(animatorSet, arrayList);
         animatorSet.addListener(new AnimatorListenerAdapter(this) { // from class: com.google.android.material.transformation.FabTransformationScrimBehavior.1

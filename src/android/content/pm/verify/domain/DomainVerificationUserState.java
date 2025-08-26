@@ -148,19 +148,19 @@ public final class DomainVerificationUserState implements Parcelable {
 
     DomainVerificationUserState(Parcel parcel) {
         boolean z = (parcel.readByte() & 8) != 0;
-        UUID unparcel = sParcellingForIdentifier.unparcel(parcel);
-        String readString = parcel.readString();
+        UUID uuidUnparcel = sParcellingForIdentifier.unparcel(parcel);
+        String string = parcel.readString();
         UserHandle userHandle = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
-        Map<String, Integer> unparcelHostToStateMap = unparcelHostToStateMap(parcel);
-        this.mIdentifier = unparcel;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) unparcel);
-        this.mPackageName = readString;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString);
+        Map<String, Integer> mapUnparcelHostToStateMap = unparcelHostToStateMap(parcel);
+        this.mIdentifier = uuidUnparcel;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) uuidUnparcel);
+        this.mPackageName = string;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string);
         this.mUser = userHandle;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) userHandle);
         this.mLinkHandlingAllowed = z;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) Boolean.valueOf(z));
-        this.mHostToStateMap = unparcelHostToStateMap;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) unparcelHostToStateMap);
+        this.mHostToStateMap = mapUnparcelHostToStateMap;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) mapUnparcelHostToStateMap);
     }
 }

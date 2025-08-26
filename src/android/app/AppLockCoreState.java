@@ -59,45 +59,45 @@ public class AppLockCoreState {
     public void setSsecureHiddenAppsPackages(String str) {
         SharedPreferences sharedPreferences = mPref;
         if (sharedPreferences != null) {
-            SharedPreferences.Editor edit = sharedPreferences.edit();
-            edit.putString("ssecure_hidden_apps_packages", str);
-            edit.apply();
+            SharedPreferences.Editor editorEdit = sharedPreferences.edit();
+            editorEdit.putString("ssecure_hidden_apps_packages", str);
+            editorEdit.apply();
         }
     }
 
     public void setApplockLockedAppsPackage(String str) {
         SharedPreferences sharedPreferences = mPref;
         if (sharedPreferences != null) {
-            SharedPreferences.Editor edit = sharedPreferences.edit();
-            edit.putString("applock_locked_packages", str);
-            edit.apply();
+            SharedPreferences.Editor editorEdit = sharedPreferences.edit();
+            editorEdit.putString("applock_locked_packages", str);
+            editorEdit.apply();
         }
     }
 
     public void setApplockLockedAppsClass(String str) {
         SharedPreferences sharedPreferences = mPref;
         if (sharedPreferences != null) {
-            SharedPreferences.Editor edit = sharedPreferences.edit();
-            edit.putString(APPLOCK_LOCKED_APPS_CLASSS, str);
-            edit.apply();
+            SharedPreferences.Editor editorEdit = sharedPreferences.edit();
+            editorEdit.putString(APPLOCK_LOCKED_APPS_CLASSS, str);
+            editorEdit.apply();
         }
     }
 
     public void setApplockType(int i) {
         SharedPreferences sharedPreferences = mPref;
         if (sharedPreferences != null) {
-            SharedPreferences.Editor edit = sharedPreferences.edit();
-            edit.putInt(APPLOCK_TYPE, i);
-            edit.apply();
+            SharedPreferences.Editor editorEdit = sharedPreferences.edit();
+            editorEdit.putInt(APPLOCK_TYPE, i);
+            editorEdit.apply();
         }
     }
 
     public void setApplockEnabled(boolean z) {
         SharedPreferences sharedPreferences = mPref;
         if (sharedPreferences != null) {
-            SharedPreferences.Editor edit = sharedPreferences.edit();
-            edit.putBoolean(APPLOCK_ENABLED, z);
-            edit.apply();
+            SharedPreferences.Editor editorEdit = sharedPreferences.edit();
+            editorEdit.putBoolean(APPLOCK_ENABLED, z);
+            editorEdit.apply();
         }
     }
 }

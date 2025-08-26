@@ -11,7 +11,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class WallpaperLocalColorExtractor$$ExternalSyntheticLambda0 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -32,7 +31,7 @@ public final /* synthetic */ class WallpaperLocalColorExtractor$$ExternalSynthet
                 List list = (List) this.f$1;
                 synchronized (wallpaperLocalColorExtractor.mLock) {
                     try {
-                        boolean isActive = wallpaperLocalColorExtractor.isActive();
+                        boolean zIsActive = wallpaperLocalColorExtractor.isActive();
                         ((ArrayList) wallpaperLocalColorExtractor.mPendingRegions).removeAll(list);
                         final Set set = wallpaperLocalColorExtractor.mProcessedRegions;
                         Objects.requireNonNull(set);
@@ -42,7 +41,7 @@ public final /* synthetic */ class WallpaperLocalColorExtractor$$ExternalSynthet
                                 set.remove((RectF) obj);
                             }
                         });
-                        if (isActive && !wallpaperLocalColorExtractor.isActive()) {
+                        if (zIsActive && !wallpaperLocalColorExtractor.isActive()) {
                             wallpaperLocalColorExtractor.mWallpaperLocalColorExtractorCallback.onDeactivated();
                         }
                     } finally {
@@ -54,9 +53,9 @@ public final /* synthetic */ class WallpaperLocalColorExtractor$$ExternalSynthet
                 List list2 = (List) this.f$1;
                 synchronized (wallpaperLocalColorExtractor2.mLock) {
                     try {
-                        boolean isActive2 = wallpaperLocalColorExtractor2.isActive();
+                        boolean zIsActive2 = wallpaperLocalColorExtractor2.isActive();
                         ((ArrayList) wallpaperLocalColorExtractor2.mPendingRegions).addAll(list2);
-                        if (!isActive2 && wallpaperLocalColorExtractor2.isActive()) {
+                        if (!zIsActive2 && wallpaperLocalColorExtractor2.isActive()) {
                             wallpaperLocalColorExtractor2.mWallpaperLocalColorExtractorCallback.onActivated();
                         }
                         wallpaperLocalColorExtractor2.processLocalColorsInternal();
@@ -77,10 +76,10 @@ public final /* synthetic */ class WallpaperLocalColorExtractor$$ExternalSynthet
                             wallpaperLocalColorExtractor3.mBitmapWidth = bitmap.getWidth();
                             wallpaperLocalColorExtractor3.mBitmapHeight = bitmap.getHeight();
                             Trace.beginSection("WallpaperLocalColorExtractor#createMiniBitmap");
-                            double min = Math.min(1.0d, Math.sqrt(12544.0d / (bitmap.getHeight() * bitmap.getWidth())));
-                            Bitmap createMiniBitmap = wallpaperLocalColorExtractor3.createMiniBitmap(bitmap, Math.max(1, (int) (bitmap.getWidth() * min)), Math.max(1, (int) (min * bitmap.getHeight())));
+                            double dMin = Math.min(1.0d, Math.sqrt(12544.0d / (bitmap.getHeight() * bitmap.getWidth())));
+                            Bitmap bitmapCreateMiniBitmap = wallpaperLocalColorExtractor3.createMiniBitmap(bitmap, Math.max(1, (int) (bitmap.getWidth() * dMin)), Math.max(1, (int) (dMin * bitmap.getHeight())));
                             Trace.endSection();
-                            wallpaperLocalColorExtractor3.mMiniBitmap = createMiniBitmap;
+                            wallpaperLocalColorExtractor3.mMiniBitmap = bitmapCreateMiniBitmap;
                             wallpaperLocalColorExtractor3.mWallpaperLocalColorExtractorCallback.onMiniBitmapUpdated();
                             ((ArrayList) wallpaperLocalColorExtractor3.mPendingRegions).addAll(wallpaperLocalColorExtractor3.mProcessedRegions);
                             ((ArraySet) wallpaperLocalColorExtractor3.mProcessedRegions).clear();

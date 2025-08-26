@@ -96,9 +96,9 @@ public final class ServiceManager {
         if (iServiceManager != null) {
             return iServiceManager;
         }
-        IServiceManager asInterface = ServiceManagerNative.asInterface(Binder.allowBlocking(BinderInternal.getContextObject()));
-        sServiceManager = asInterface;
-        return asInterface;
+        IServiceManager iServiceManagerAsInterface = ServiceManagerNative.asInterface(Binder.allowBlocking(BinderInternal.getContextObject()));
+        sServiceManager = iServiceManagerAsInterface;
+        return iServiceManagerAsInterface;
     }
 
     public static IBinder getService(String str) {
@@ -231,24 +231,24 @@ public final class ServiceManager {
         StatLogger statLogger = sStatLogger;
         long time = statLogger.getTime();
         IBinder iBinder = getIServiceManager().getService2(str).getServiceWithMetadata().service;
-        int logDurationStat = (int) statLogger.logDurationStat(0, time);
-        boolean isCore = UserHandle.isCore(Process.myUid());
-        if (isCore) {
+        int iLogDurationStat = (int) statLogger.logDurationStat(0, time);
+        boolean zIsCore = UserHandle.isCore(Process.myUid());
+        if (zIsCore) {
             j = GET_SERVICE_SLOW_THRESHOLD_US_CORE;
         } else {
             j = GET_SERVICE_SLOW_THRESHOLD_US_NON_CORE;
         }
         synchronized (sLock) {
-            sGetServiceAccumulatedUs += logDurationStat;
+            sGetServiceAccumulatedUs += iLogDurationStat;
             sGetServiceAccumulatedCallCount++;
-            long uptimeMillis = SystemClock.uptimeMillis();
-            long j2 = logDurationStat;
-            if (j2 >= j && (uptimeMillis > sLastSlowLogUptime + 5000 || sLastSlowLogActualTime < j2)) {
-                EventLogTags.writeServiceManagerSlow(logDurationStat / 1000, str);
-                sLastSlowLogUptime = uptimeMillis;
+            long jUptimeMillis = SystemClock.uptimeMillis();
+            long j2 = iLogDurationStat;
+            if (j2 >= j && (jUptimeMillis > sLastSlowLogUptime + 5000 || sLastSlowLogActualTime < j2)) {
+                EventLogTags.writeServiceManagerSlow(iLogDurationStat / 1000, str);
+                sLastSlowLogUptime = jUptimeMillis;
                 sLastSlowLogActualTime = j2;
             }
-            if (isCore) {
+            if (zIsCore) {
                 i = GET_SERVICE_LOG_EVERY_CALLS_CORE;
             } else {
                 i = GET_SERVICE_LOG_EVERY_CALLS_NON_CORE;
@@ -256,11 +256,11 @@ public final class ServiceManager {
             int i2 = sGetServiceAccumulatedCallCount;
             if (i2 >= i) {
                 long j3 = sLastStatsLogUptime;
-                if (uptimeMillis >= 5000 + j3) {
-                    EventLogTags.writeServiceManagerStats(i2, sGetServiceAccumulatedUs / 1000, (int) (uptimeMillis - j3));
+                if (jUptimeMillis >= 5000 + j3) {
+                    EventLogTags.writeServiceManagerStats(i2, sGetServiceAccumulatedUs / 1000, (int) (jUptimeMillis - j3));
                     sGetServiceAccumulatedCallCount = 0;
                     sGetServiceAccumulatedUs = 0;
-                    sLastStatsLogUptime = uptimeMillis;
+                    sLastStatsLogUptime = jUptimeMillis;
                 }
             }
         }

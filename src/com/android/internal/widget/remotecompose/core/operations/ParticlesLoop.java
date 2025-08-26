@@ -166,37 +166,37 @@ public class ParticlesLoop extends PaintOperation implements VariableSupport, Co
 
     public static void read(WireBuffer wireBuffer, List<Operation> list) {
         float[] fArr;
-        int readInt = wireBuffer.readInt();
-        int readInt2 = wireBuffer.readInt();
-        if (readInt2 > 0) {
-            fArr = new float[readInt2];
-            for (int i = 0; i < readInt2; i++) {
-                fArr[i] = wireBuffer.readFloat();
+        int i = wireBuffer.readInt();
+        int i2 = wireBuffer.readInt();
+        if (i2 > 0) {
+            fArr = new float[i2];
+            for (int i3 = 0; i3 < i2; i3++) {
+                fArr[i3] = wireBuffer.readFloat();
             }
         } else {
             fArr = null;
         }
-        int readInt3 = wireBuffer.readInt();
-        if (readInt3 > 2000) {
-            throw new RuntimeException(readInt3 + " map entries more than max = 2000");
+        int i4 = wireBuffer.readInt();
+        if (i4 > 2000) {
+            throw new RuntimeException(i4 + " map entries more than max = 2000");
         }
-        float[][] fArr2 = new float[readInt3][];
-        for (int i2 = 0; i2 < readInt3; i2++) {
-            int readInt4 = wireBuffer.readInt();
-            if (readInt4 > 32) {
-                throw new RuntimeException(readInt4 + " map entries more than max = 2000");
+        float[][] fArr2 = new float[i4][];
+        for (int i5 = 0; i5 < i4; i5++) {
+            int i6 = wireBuffer.readInt();
+            if (i6 > 32) {
+                throw new RuntimeException(i6 + " map entries more than max = 2000");
             }
-            fArr2[i2] = new float[readInt4];
-            int i3 = 0;
+            fArr2[i5] = new float[i6];
+            int i7 = 0;
             while (true) {
-                float[] fArr3 = fArr2[i2];
-                if (i3 < fArr3.length) {
-                    fArr3[i3] = wireBuffer.readFloat();
-                    i3++;
+                float[] fArr3 = fArr2[i5];
+                if (i7 < fArr3.length) {
+                    fArr3[i7] = wireBuffer.readFloat();
+                    i7++;
                 }
             }
         }
-        list.add(new ParticlesLoop(readInt, fArr, fArr2));
+        list.add(new ParticlesLoop(i, fArr, fArr2));
     }
 
     public static void documentation(DocumentationBuilder documentationBuilder) {

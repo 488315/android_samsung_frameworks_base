@@ -11,7 +11,6 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.Optional;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class UriResolver extends BaseResolver {
     public boolean mIsClipDataFromSBrowser;
@@ -81,8 +80,8 @@ public class UriResolver extends BaseResolver {
         if (this.mIsClipDataFromSBrowser) {
             intent2.putExtra("terrace-image-or-link-drag-label", true);
         }
-        String calculateContentType = BaseResolver.calculateContentType(intent2);
-        if (this.mMimeTypeBlockList.mBlockList.contains(calculateContentType)) {
+        String strCalculateContentType = BaseResolver.calculateContentType(intent2);
+        if (this.mMimeTypeBlockList.mBlockList.contains(strCalculateContentType)) {
             return Optional.empty();
         }
         int callingUserId = clipData.getCallingUserId();
@@ -91,6 +90,6 @@ public class UriResolver extends BaseResolver {
         } else {
             resolveActivities(intent2, callingUserId, this.mTempList, resultExtra);
         }
-        return this.mTempList.isEmpty() ? Optional.empty() : Optional.of(new SingleIntentAppResult(intent2, this.mTempList, this.mMultiInstanceBlockList, this.mMultiInstanceAllowList, calculateContentType, true));
+        return this.mTempList.isEmpty() ? Optional.empty() : Optional.of(new SingleIntentAppResult(intent2, this.mTempList, this.mMultiInstanceBlockList, this.mMultiInstanceAllowList, strCalculateContentType, true));
     }
 }

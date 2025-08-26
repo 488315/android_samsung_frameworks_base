@@ -63,32 +63,34 @@ public class PduComposer {
         this.mPosition = 0;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:17:0x0028  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public byte[] make() {
         int messageType = this.mPdu.getMessageType();
-        if (messageType != 128) {
-            if (messageType != 135) {
-                switch (messageType) {
-                    case 131:
-                        if (makeNotifyResp() != 0) {
-                            return null;
-                        }
-                        break;
-                    case 132:
-                        break;
-                    case 133:
-                        if (makeAckInd() != 0) {
-                            return null;
-                        }
-                        break;
-                    default:
-                        return null;
-                }
-            } else if (makeReadRecInd() != 0) {
+        if (messageType == 128) {
+            if (makeSendRetrievePdu(messageType) != 0) {
                 return null;
             }
-            return this.mMessage.toByteArray();
-        }
-        if (makeSendRetrievePdu(messageType) != 0) {
+        } else if (messageType != 135) {
+            switch (messageType) {
+                case 131:
+                    if (makeNotifyResp() != 0) {
+                        return null;
+                    }
+                    break;
+                case 132:
+                    break;
+                case 133:
+                    if (makeAckInd() != 0) {
+                        return null;
+                    }
+                    break;
+                default:
+                    return null;
+            }
+        } else if (makeReadRecInd() != 0) {
             return null;
         }
         return this.mMessage.toByteArray();
@@ -150,10 +152,10 @@ public class PduComposer {
             return;
         }
         this.mStack.newbuf();
-        PositionMarker mark = this.mStack.mark();
+        PositionMarker positionMarkerMark = this.mStack.mark();
         appendShortInteger(characterSet);
         appendTextString(textString);
-        int length = mark.getLength();
+        int length = positionMarkerMark.getLength();
         this.mStack.pop();
         appendValueLength(length);
         this.mStack.copy();
@@ -198,20 +200,20 @@ public class PduComposer {
 
     private EncodedStringValue appendAddressType(EncodedStringValue encodedStringValue) {
         try {
-            int checkAddressType = checkAddressType(encodedStringValue.getString());
-            EncodedStringValue copy = EncodedStringValue.copy(encodedStringValue);
-            if (1 == checkAddressType) {
-                copy.appendTextString(STRING_PHONE_NUMBER_ADDRESS_TYPE.getBytes());
-                return copy;
+            int iCheckAddressType = checkAddressType(encodedStringValue.getString());
+            EncodedStringValue encodedStringValueCopy = EncodedStringValue.copy(encodedStringValue);
+            if (1 == iCheckAddressType) {
+                encodedStringValueCopy.appendTextString(STRING_PHONE_NUMBER_ADDRESS_TYPE.getBytes());
+                return encodedStringValueCopy;
             }
-            if (3 == checkAddressType) {
-                copy.appendTextString(STRING_IPV4_ADDRESS_TYPE.getBytes());
-                return copy;
+            if (3 == iCheckAddressType) {
+                encodedStringValueCopy.appendTextString(STRING_IPV4_ADDRESS_TYPE.getBytes());
+                return encodedStringValueCopy;
             }
-            if (4 == checkAddressType) {
-                copy.appendTextString(STRING_IPV6_ADDRESS_TYPE.getBytes());
+            if (4 == iCheckAddressType) {
+                encodedStringValueCopy.appendTextString(STRING_IPV6_ADDRESS_TYPE.getBytes());
             }
-            return copy;
+            return encodedStringValueCopy;
         } catch (NullPointerException unused) {
             return null;
         }
@@ -227,12 +229,12 @@ public class PduComposer {
                     return 2;
                 }
                 for (EncodedStringValue encodedStringValue : encodedStringValues) {
-                    EncodedStringValue appendAddressType = appendAddressType(encodedStringValue);
-                    if (appendAddressType == null) {
+                    EncodedStringValue encodedStringValueAppendAddressType = appendAddressType(encodedStringValue);
+                    if (encodedStringValueAppendAddressType == null) {
                         return 1;
                     }
                     appendOctet(i);
-                    appendEncodedString(appendAddressType);
+                    appendEncodedString(encodedStringValueAppendAddressType);
                 }
                 return 0;
             case 131:
@@ -273,10 +275,10 @@ public class PduComposer {
                 }
                 appendOctet(i);
                 this.mStack.newbuf();
-                PositionMarker mark = this.mStack.mark();
+                PositionMarker positionMarkerMark = this.mStack.mark();
                 append(129);
                 appendLongInteger(longInteger2);
-                int length = mark.getLength();
+                int length = positionMarkerMark.getLength();
                 this.mStack.pop();
                 appendValueLength(length);
                 this.mStack.copy();
@@ -288,10 +290,10 @@ public class PduComposer {
                 }
                 appendOctet(i);
                 this.mStack.newbuf();
-                PositionMarker mark2 = this.mStack.mark();
+                PositionMarker positionMarkerMark2 = this.mStack.mark();
                 append(129);
                 appendLongInteger(longInteger3);
-                int length2 = mark2.getLength();
+                int length2 = positionMarkerMark2.getLength();
                 this.mStack.pop();
                 appendValueLength(length2);
                 this.mStack.copy();
@@ -304,14 +306,14 @@ public class PduComposer {
                     append(129);
                 } else {
                     this.mStack.newbuf();
-                    PositionMarker mark3 = this.mStack.mark();
+                    PositionMarker positionMarkerMark3 = this.mStack.mark();
                     append(128);
-                    EncodedStringValue appendAddressType2 = appendAddressType(encodedStringValue2);
-                    if (appendAddressType2 == null) {
+                    EncodedStringValue encodedStringValueAppendAddressType2 = appendAddressType(encodedStringValue2);
+                    if (encodedStringValueAppendAddressType2 == null) {
                         return 1;
                     }
-                    appendEncodedString(appendAddressType2);
-                    int length3 = mark3.getLength();
+                    appendEncodedString(encodedStringValueAppendAddressType2);
+                    int length3 = positionMarkerMark3.getLength();
                     this.mStack.pop();
                     appendValueLength(length3);
                     this.mStack.copy();
@@ -444,13 +446,13 @@ public class PduComposer {
         return makeMessageBody(i);
     }
 
-    private int makeMessageBody(int i) {
+    private int makeMessageBody(int i) throws IOException {
         int i2;
-        int i3;
+        int length;
         this.mStack.newbuf();
-        PositionMarker mark = this.mStack.mark();
+        PositionMarker positionMarkerMark = this.mStack.mark();
         Integer num = mContentTypeMap.get(new String(this.mPduHeader.getTextString(132)));
-        int i4 = 1;
+        int i3 = 1;
         if (num == null) {
             return 1;
         }
@@ -478,22 +480,22 @@ public class PduComposer {
         } catch (ArrayIndexOutOfBoundsException e) {
             e.printStackTrace();
         }
-        int length = mark.getLength();
+        int length2 = positionMarkerMark.getLength();
         this.mStack.pop();
-        appendValueLength(length);
+        appendValueLength(length2);
         this.mStack.copy();
         int partsNum = body.getPartsNum();
         appendUintvarInteger(partsNum);
-        int i5 = 0;
-        while (i5 < partsNum) {
-            PduPart part2 = body.getPart(i5);
+        int i4 = 0;
+        while (i4 < partsNum) {
+            PduPart part2 = body.getPart(i4);
             this.mStack.newbuf();
-            PositionMarker mark2 = this.mStack.mark();
+            PositionMarker positionMarkerMark2 = this.mStack.mark();
             this.mStack.newbuf();
-            PositionMarker mark3 = this.mStack.mark();
+            PositionMarker positionMarkerMark3 = this.mStack.mark();
             byte[] contentType = part2.getContentType();
             if (contentType == null) {
-                return i4;
+                return i3;
             }
             Integer num2 = mContentTypeMap.get(new String(contentType));
             if (num2 == null) {
@@ -503,7 +505,7 @@ public class PduComposer {
             }
             byte[] name = part2.getName();
             if (name == null && (name = part2.getFilename()) == null && (name = part2.getContentLocation()) == null && (name = part2.getContentId()) == null) {
-                return i4;
+                return i3;
             }
             appendOctet(133);
             appendTextString(name);
@@ -512,14 +514,14 @@ public class PduComposer {
                 appendOctet(129);
                 appendShortInteger(charset);
             }
-            int length2 = mark3.getLength();
+            int length3 = positionMarkerMark3.getLength();
             this.mStack.pop();
-            appendValueLength(length2);
+            appendValueLength(length3);
             this.mStack.copy();
             byte[] contentId2 = part2.getContentId();
             if (contentId2 != null) {
                 appendOctet(192);
-                if (60 == contentId2[0] && 62 == contentId2[contentId2.length - i4]) {
+                if (60 == contentId2[0] && 62 == contentId2[contentId2.length - i3]) {
                     appendQuotedString(contentId2);
                 } else {
                     appendQuotedString("<" + new String(contentId2) + ">");
@@ -530,52 +532,52 @@ public class PduComposer {
                 appendOctet(142);
                 appendTextString(contentLocation);
             }
-            int length3 = mark2.getLength();
+            int length4 = positionMarkerMark2.getLength();
             byte[] data = part2.getData();
             if (data != null) {
                 arraycopy(data, 0, data.length);
-                i3 = data.length;
-                i2 = i4;
+                length = data.length;
+                i2 = i3;
             } else {
-                InputStream inputStream = null;
+                InputStream inputStreamOpenInputStream = null;
                 try {
                     try {
                         byte[] bArr = new byte[1024];
-                        inputStream = this.mResolver.openInputStream(part2.getDataUri());
-                        int i6 = 0;
+                        inputStreamOpenInputStream = this.mResolver.openInputStream(part2.getDataUri());
+                        int i5 = 0;
                         while (true) {
-                            int read = inputStream.read(bArr);
-                            i2 = i4;
-                            if (read == -1) {
+                            int i6 = inputStreamOpenInputStream.read(bArr);
+                            i2 = i3;
+                            if (i6 == -1) {
                                 break;
                             }
                             try {
-                                this.mMessage.write(bArr, 0, read);
-                                this.mPosition += read;
-                                i6 += read;
-                                i4 = i2;
+                                this.mMessage.write(bArr, 0, i6);
+                                this.mPosition += i6;
+                                i5 += i6;
+                                i3 = i2;
                             } catch (FileNotFoundException unused) {
-                                if (inputStream != null) {
+                                if (inputStreamOpenInputStream != null) {
                                     try {
-                                        inputStream.close();
+                                        inputStreamOpenInputStream.close();
                                     } catch (IOException e2) {
                                         e2.printStackTrace();
                                     }
                                 }
                                 return i2;
                             } catch (IOException unused2) {
-                                if (inputStream != null) {
+                                if (inputStreamOpenInputStream != null) {
                                     try {
-                                        inputStream.close();
+                                        inputStreamOpenInputStream.close();
                                     } catch (IOException e3) {
                                         e3.printStackTrace();
                                     }
                                 }
                                 return i2;
                             } catch (RuntimeException unused3) {
-                                if (inputStream != null) {
+                                if (inputStreamOpenInputStream != null) {
                                     try {
-                                        inputStream.close();
+                                        inputStreamOpenInputStream.close();
                                     } catch (IOException e4) {
                                         e4.printStackTrace();
                                     }
@@ -583,33 +585,33 @@ public class PduComposer {
                                 return i2;
                             }
                         }
-                        if (inputStream != null) {
+                        if (inputStreamOpenInputStream != null) {
                             try {
-                                inputStream.close();
+                                inputStreamOpenInputStream.close();
                             } catch (IOException e5) {
                                 e5.printStackTrace();
                             }
                         }
-                        i3 = i6;
-                    } catch (FileNotFoundException unused4) {
-                        i2 = i4;
-                    } catch (IOException unused5) {
-                        i2 = i4;
-                    } catch (RuntimeException unused6) {
-                        i2 = i4;
+                        length = i5;
+                    } finally {
                     }
-                } finally {
+                } catch (FileNotFoundException unused4) {
+                    i2 = i3;
+                } catch (IOException unused5) {
+                    i2 = i3;
+                } catch (RuntimeException unused6) {
+                    i2 = i3;
                 }
             }
-            if (i3 != mark2.getLength() - length3) {
+            if (length != positionMarkerMark2.getLength() - length4) {
                 throw new RuntimeException("BUG: Length correctness check failed");
             }
             this.mStack.pop();
-            appendUintvarInteger(length3);
-            appendUintvarInteger(i3);
+            appendUintvarInteger(length4);
+            appendUintvarInteger(length);
             this.mStack.copy();
-            i5++;
-            i4 = i2;
+            i4++;
+            i3 = i2;
         }
         return 0;
     }

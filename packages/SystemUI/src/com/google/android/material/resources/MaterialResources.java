@@ -9,7 +9,6 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.TintTypedArray;
 import androidx.core.content.ContextCompat;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class MaterialResources {
     private MaterialResources() {
@@ -26,9 +25,9 @@ public class MaterialResources {
         if (!typedArray.getValue(i, typedValue) || typedValue.type != 2) {
             return typedArray.getDimensionPixelSize(i, i2);
         }
-        TypedArray obtainStyledAttributes = context.getTheme().obtainStyledAttributes(new int[]{typedValue.data});
-        int dimensionPixelSize = obtainStyledAttributes.getDimensionPixelSize(0, i2);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.getTheme().obtainStyledAttributes(new int[]{typedValue.data});
+        int dimensionPixelSize = typedArrayObtainStyledAttributes.getDimensionPixelSize(0, i2);
+        typedArrayObtainStyledAttributes.recycle();
         return dimensionPixelSize;
     }
 

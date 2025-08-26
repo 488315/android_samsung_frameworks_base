@@ -537,29 +537,29 @@ public class Paint {
     }
 
     public synchronized long getNativeInstance() {
-        boolean isFilterBitmap = isFilterBitmap();
+        boolean zIsFilterBitmap = isFilterBitmap();
         Shader shader = this.mShader;
-        long j = 0;
-        long nativeInstance = shader == null ? 0L : shader.getNativeInstance(isFilterBitmap);
-        if (nativeInstance != this.mNativeShader) {
-            this.mNativeShader = nativeInstance;
-            nSetShader(this.mNativePaint, nativeInstance);
+        long nativeInstance = 0;
+        long nativeInstance2 = shader == null ? 0L : shader.getNativeInstance(zIsFilterBitmap);
+        if (nativeInstance2 != this.mNativeShader) {
+            this.mNativeShader = nativeInstance2;
+            nSetShader(this.mNativePaint, nativeInstance2);
         }
         ColorFilter colorFilter = this.mColorFilter;
         if (colorFilter != null) {
-            j = colorFilter.getNativeInstance();
+            nativeInstance = colorFilter.getNativeInstance();
         }
-        if (j != this.mNativeColorFilter) {
-            this.mNativeColorFilter = j;
-            nSetColorFilter(this.mNativePaint, j);
+        if (nativeInstance != this.mNativeColorFilter) {
+            this.mNativeColorFilter = nativeInstance;
+            nSetColorFilter(this.mNativePaint, nativeInstance);
         }
         if (Flags.runtimeColorFiltersBlenders()) {
             Xfermode xfermode = this.mXfermode;
             if (xfermode instanceof RuntimeXfermode) {
-                long createNativeInstance = ((RuntimeXfermode) xfermode).createNativeInstance();
-                if (createNativeInstance != this.mNativeXfermode) {
-                    this.mNativeXfermode = createNativeInstance;
-                    nSetXfermode(this.mNativePaint, createNativeInstance);
+                long jCreateNativeInstance = ((RuntimeXfermode) xfermode).createNativeInstance();
+                if (jCreateNativeInstance != this.mNativeXfermode) {
+                    this.mNativeXfermode = jCreateNativeInstance;
+                    nSetXfermode(this.mNativePaint, jCreateNativeInstance);
                 }
             }
         }
@@ -969,10 +969,10 @@ public class Paint {
     private void syncTextLocalesWithMinikin() {
         String languageTags = this.mLocales.toLanguageTags();
         synchronized (sCacheLock) {
-            HashMap<String, Integer> hashMap = sMinikinLocaleListIdCache;
-            Integer num = hashMap.get(languageTags);
+            HashMap<String, Integer> map = sMinikinLocaleListIdCache;
+            Integer num = map.get(languageTags);
             if (num == null) {
-                hashMap.put(languageTags, Integer.valueOf(nSetTextLocales(this.mNativePaint, languageTags)));
+                map.put(languageTags, Integer.valueOf(nSetTextLocales(this.mNativePaint, languageTags)));
             } else {
                 nSetTextLocalesByMinikinLocaleListId(this.mNativePaint, num.intValue());
             }
@@ -1066,10 +1066,10 @@ public class Paint {
     }
 
     public boolean setFontVariationSettings(String str) {
-        String nullIfEmpty = TextUtils.nullIfEmpty(str);
+        String strNullIfEmpty = TextUtils.nullIfEmpty(str);
         String str2 = this.mFontVariationSettings;
-        if (nullIfEmpty != str2 && (nullIfEmpty == null || !nullIfEmpty.equals(str2))) {
-            if (nullIfEmpty == null || nullIfEmpty.length() == 0) {
+        if (strNullIfEmpty != str2 && (strNullIfEmpty == null || !strNullIfEmpty.equals(str2))) {
+            if (strNullIfEmpty == null || strNullIfEmpty.length() == 0) {
                 this.mFontVariationSettings = null;
                 setTypefaceWithoutWarning(Typeface.createFromTypefaceWithVariation(this.mTypeface, Collections.EMPTY_LIST));
             } else {
@@ -1077,9 +1077,9 @@ public class Paint {
                 if (typeface == null) {
                     typeface = Typeface.DEFAULT;
                 }
-                FontVariationAxis[] fromFontVariationSettings = FontVariationAxis.fromFontVariationSettings(nullIfEmpty);
+                FontVariationAxis[] fontVariationAxisArrFromFontVariationSettings = FontVariationAxis.fromFontVariationSettings(strNullIfEmpty);
                 ArrayList arrayList = new ArrayList();
-                for (FontVariationAxis fontVariationAxis : fromFontVariationSettings) {
+                for (FontVariationAxis fontVariationAxis : fontVariationAxisArrFromFontVariationSettings) {
                     if (typeface.isSupportedAxes(fontVariationAxis.getOpenTypeTagValue())) {
                         arrayList.add(fontVariationAxis);
                     }
@@ -1087,7 +1087,7 @@ public class Paint {
                 if (arrayList.isEmpty()) {
                     return false;
                 }
-                this.mFontVariationSettings = nullIfEmpty;
+                this.mFontVariationSettings = strNullIfEmpty;
                 setTypefaceWithoutWarning(Typeface.createFromTypefaceWithVariation(typeface, arrayList));
                 return true;
             }
@@ -1099,13 +1099,13 @@ public class Paint {
         if (Objects.equals(str, this.mFontVariationOverride)) {
             return;
         }
-        List<FontVariationAxis> fromFontVariationSettingsForList = FontVariationAxis.fromFontVariationSettingsForList(str);
-        long nCreateFontVariationBuilder = nCreateFontVariationBuilder(fromFontVariationSettingsForList.size());
-        for (int i = 0; i < fromFontVariationSettingsForList.size(); i++) {
-            FontVariationAxis fontVariationAxis = fromFontVariationSettingsForList.get(i);
-            nAddFontVariationToBuilder(nCreateFontVariationBuilder, fontVariationAxis.getOpenTypeTagValue(), fontVariationAxis.getStyleValue());
+        List<FontVariationAxis> listFromFontVariationSettingsForList = FontVariationAxis.fromFontVariationSettingsForList(str);
+        long jNCreateFontVariationBuilder = nCreateFontVariationBuilder(listFromFontVariationSettingsForList.size());
+        for (int i = 0; i < listFromFontVariationSettingsForList.size(); i++) {
+            FontVariationAxis fontVariationAxis = listFromFontVariationSettingsForList.get(i);
+            nAddFontVariationToBuilder(jNCreateFontVariationBuilder, fontVariationAxis.getOpenTypeTagValue(), fontVariationAxis.getStyleValue());
         }
-        nSetFontVariationOverride(this.mNativePaint, nCreateFontVariationBuilder);
+        nSetFontVariationOverride(this.mNativePaint, jNCreateFontVariationBuilder);
         this.mFontVariationOverride = str;
     }
 
@@ -1208,12 +1208,12 @@ public class Paint {
             nGetFontMetricsIntForText(this.mNativePaint, (String) charSequence, i, i2, i3, i4, z, fontMetricsInt);
             return;
         }
-        char[] obtain = TemporaryBuffer.obtain(i4);
+        char[] cArrObtain = TemporaryBuffer.obtain(i4);
         try {
-            TextUtils.getChars(charSequence, i3, i5, obtain, 0);
-            nGetFontMetricsIntForText(this.mNativePaint, obtain, i - i3, i2, 0, i4, z, fontMetricsInt);
+            TextUtils.getChars(charSequence, i3, i5, cArrObtain, 0);
+            nGetFontMetricsIntForText(this.mNativePaint, cArrObtain, i - i3, i2, 0, i4, z, fontMetricsInt);
         } finally {
-            TemporaryBuffer.recycle(obtain);
+            TemporaryBuffer.recycle(cArrObtain);
         }
     }
 
@@ -1317,7 +1317,7 @@ public class Paint {
     }
 
     public float measureText(char[] cArr, int i, int i2) {
-        double ceil;
+        double dCeil;
         if (cArr == null) {
             throw new IllegalArgumentException("text cannot be null");
         }
@@ -1331,22 +1331,22 @@ public class Paint {
         setFlags(getFlags() | 24576);
         try {
             if (!this.mHasCompatScaling) {
-                ceil = Math.ceil(nGetTextAdvances(this.mNativePaint, cArr, i, i2, i, i2, this.mBidiFlags, (float[]) null, 0));
+                dCeil = Math.ceil(nGetTextAdvances(this.mNativePaint, cArr, i, i2, i, i2, this.mBidiFlags, (float[]) null, 0));
             } else {
                 float textSize = getTextSize();
                 setTextSize(this.mCompatScaling * textSize);
-                float nGetTextAdvances = nGetTextAdvances(this.mNativePaint, cArr, i, i2, i, i2, this.mBidiFlags, (float[]) null, 0);
+                float fNGetTextAdvances = nGetTextAdvances(this.mNativePaint, cArr, i, i2, i, i2, this.mBidiFlags, (float[]) null, 0);
                 setTextSize(textSize);
-                ceil = Math.ceil(nGetTextAdvances * this.mInvCompatScaling);
+                dCeil = Math.ceil(fNGetTextAdvances * this.mInvCompatScaling);
             }
-            return (float) ceil;
+            return (float) dCeil;
         } finally {
             setFlags(flags);
         }
     }
 
     public float measureText(String str, int i, int i2) {
-        double ceil;
+        double dCeil;
         if (str == null) {
             throw new IllegalArgumentException("text cannot be null");
         }
@@ -1360,15 +1360,15 @@ public class Paint {
         setFlags(getFlags() | 24576);
         try {
             if (!this.mHasCompatScaling) {
-                ceil = Math.ceil(nGetTextAdvances(this.mNativePaint, str, i, i2, i, i2, this.mBidiFlags, (float[]) null, 0));
+                dCeil = Math.ceil(nGetTextAdvances(this.mNativePaint, str, i, i2, i, i2, this.mBidiFlags, (float[]) null, 0));
             } else {
                 float textSize = getTextSize();
                 setTextSize(this.mCompatScaling * textSize);
-                float nGetTextAdvances = nGetTextAdvances(this.mNativePaint, str, i, i2, i, i2, this.mBidiFlags, (float[]) null, 0);
+                float fNGetTextAdvances = nGetTextAdvances(this.mNativePaint, str, i, i2, i, i2, this.mBidiFlags, (float[]) null, 0);
                 setTextSize(textSize);
-                ceil = Math.ceil(nGetTextAdvances * this.mInvCompatScaling);
+                dCeil = Math.ceil(fNGetTextAdvances * this.mInvCompatScaling);
             }
-            return (float) ceil;
+            return (float) dCeil;
         } finally {
             setFlags(flags);
         }
@@ -1401,11 +1401,11 @@ public class Paint {
         if (charSequence instanceof GraphicsOperations) {
             return ((GraphicsOperations) charSequence).measureText(i, i2, this);
         }
-        char[] obtain = TemporaryBuffer.obtain(i3);
-        TextUtils.getChars(charSequence, i, i2, obtain, 0);
-        float measureText = measureText(obtain, 0, i3);
-        TemporaryBuffer.recycle(obtain);
-        return measureText;
+        char[] cArrObtain = TemporaryBuffer.obtain(i3);
+        TextUtils.getChars(charSequence, i, i2, cArrObtain, 0);
+        float fMeasureText = measureText(cArrObtain, 0, i3);
+        TemporaryBuffer.recycle(cArrObtain);
+        return fMeasureText;
     }
 
     public int breakText(char[] cArr, int i, int i2, float f, float[] fArr) {
@@ -1423,16 +1423,16 @@ public class Paint {
         }
         float textSize = getTextSize();
         setTextSize(this.mCompatScaling * textSize);
-        int nBreakText = nBreakText(this.mNativePaint, cArr, i, i2, f * this.mCompatScaling, this.mBidiFlags, fArr);
+        int iNBreakText = nBreakText(this.mNativePaint, cArr, i, i2, f * this.mCompatScaling, this.mBidiFlags, fArr);
         setTextSize(textSize);
         if (fArr != null) {
             fArr[0] = fArr[0] * this.mInvCompatScaling;
         }
-        return nBreakText;
+        return iNBreakText;
     }
 
     public int breakText(CharSequence charSequence, int i, int i2, boolean z, float f, float[] fArr) {
-        int breakText;
+        int iBreakText;
         if (charSequence == null) {
             throw new IllegalArgumentException("text cannot be null");
         }
@@ -1447,16 +1447,16 @@ public class Paint {
         if (i == 0 && (charSequence instanceof String) && i2 == charSequence.length()) {
             return breakText((String) charSequence, z, f, fArr);
         }
-        char[] obtain = TemporaryBuffer.obtain(i4);
-        TextUtils.getChars(charSequence, i, i2, obtain, 0);
+        char[] cArrObtain = TemporaryBuffer.obtain(i4);
+        TextUtils.getChars(charSequence, i, i2, cArrObtain, 0);
         if (z) {
-            breakText = breakText(obtain, 0, i4, f, fArr);
+            iBreakText = breakText(cArrObtain, 0, i4, f, fArr);
         } else {
-            breakText = breakText(obtain, 0, -i4, f, fArr);
-            obtain = obtain;
+            iBreakText = breakText(cArrObtain, 0, -i4, f, fArr);
+            cArrObtain = cArrObtain;
         }
-        TemporaryBuffer.recycle(obtain);
-        return breakText;
+        TemporaryBuffer.recycle(cArrObtain);
+        return iBreakText;
     }
 
     public int breakText(String str, boolean z, float f, float[] fArr) {
@@ -1471,12 +1471,12 @@ public class Paint {
         }
         float textSize = getTextSize();
         setTextSize(this.mCompatScaling * textSize);
-        int nBreakText = nBreakText(this.mNativePaint, str, z, f * this.mCompatScaling, this.mBidiFlags, fArr);
+        int iNBreakText = nBreakText(this.mNativePaint, str, z, f * this.mCompatScaling, this.mBidiFlags, fArr);
         setTextSize(textSize);
         if (fArr != null) {
             fArr[0] = fArr[0] * this.mInvCompatScaling;
         }
-        return nBreakText;
+        return iNBreakText;
     }
 
     public int getTextWidths(char[] cArr, int i, int i2, float[] fArr) {
@@ -1532,10 +1532,10 @@ public class Paint {
         if (charSequence instanceof GraphicsOperations) {
             return ((GraphicsOperations) charSequence).getTextWidths(i, i2, fArr, this);
         }
-        char[] obtain = TemporaryBuffer.obtain(i3);
-        TextUtils.getChars(charSequence, i, i2, obtain, 0);
-        int textWidths = getTextWidths(obtain, 0, i3, fArr);
-        TemporaryBuffer.recycle(obtain);
+        char[] cArrObtain = TemporaryBuffer.obtain(i3);
+        TextUtils.getChars(charSequence, i, i2, cArrObtain, 0);
+        int textWidths = getTextWidths(cArrObtain, 0, i3, fArr);
+        TemporaryBuffer.recycle(cArrObtain);
         return textWidths;
     }
 
@@ -1646,7 +1646,7 @@ public class Paint {
             i11 = i5;
             cArr2 = cArr;
         }
-        float nGetTextAdvances = nGetTextAdvances(j2, cArr2, i7, i8, i9, i10, i6, fArr2, i11);
+        float fNGetTextAdvances = nGetTextAdvances(j2, cArr2, i7, i8, i9, i10, i6, fArr2, i11);
         setTextSize(textSize);
         if (fArr != null) {
             int i19 = i5 + i2;
@@ -1654,7 +1654,7 @@ public class Paint {
                 fArr[i20] = fArr[i20] * this.mInvCompatScaling;
             }
         }
-        return nGetTextAdvances * this.mInvCompatScaling;
+        return fNGetTextAdvances * this.mInvCompatScaling;
     }
 
     public int getTextRunCursor(char[] cArr, int i, int i2, boolean z, int i3, int i4) {
@@ -1673,10 +1673,10 @@ public class Paint {
             return ((GraphicsOperations) charSequence).getTextRunCursor(i, i2, z, i3, i4, this);
         }
         int i5 = i2 - i;
-        char[] obtain = TemporaryBuffer.obtain(i5);
-        TextUtils.getChars(charSequence, i, i2, obtain, 0);
-        int textRunCursor = getTextRunCursor(obtain, 0, i5, z, i3 - i, i4);
-        TemporaryBuffer.recycle(obtain);
+        char[] cArrObtain = TemporaryBuffer.obtain(i5);
+        TextUtils.getChars(charSequence, i, i2, cArrObtain, 0);
+        int textRunCursor = getTextRunCursor(cArrObtain, 0, i5, z, i3 - i, i4);
+        TemporaryBuffer.recycle(cArrObtain);
         if (textRunCursor == -1) {
             return -1;
         }
@@ -1722,10 +1722,10 @@ public class Paint {
         if (rect == null) {
             throw new NullPointerException("need bounds Rect");
         }
-        char[] obtain = TemporaryBuffer.obtain(i3);
-        TextUtils.getChars(charSequence, i, i2, obtain, 0);
-        getTextBounds(obtain, 0, i3, rect);
-        TemporaryBuffer.recycle(obtain);
+        char[] cArrObtain = TemporaryBuffer.obtain(i3);
+        TextUtils.getChars(charSequence, i, i2, cArrObtain, 0);
+        getTextBounds(cArrObtain, 0, i3, rect);
+        TemporaryBuffer.recycle(cArrObtain);
     }
 
     public void getTextBounds(char[] cArr, int i, int i2, Rect rect) {
@@ -1768,10 +1768,10 @@ public class Paint {
             return 0.0f;
         }
         int i8 = i4 - i3;
-        char[] obtain = TemporaryBuffer.obtain(i8);
-        TextUtils.getChars(charSequence, i3, i4, obtain, 0);
-        float runAdvance = getRunAdvance(obtain, i7, i2 - i3, 0, i8, z, i5 - i3);
-        TemporaryBuffer.recycle(obtain);
+        char[] cArrObtain = TemporaryBuffer.obtain(i8);
+        TextUtils.getChars(charSequence, i3, i4, cArrObtain, 0);
+        float runAdvance = getRunAdvance(cArrObtain, i7, i2 - i3, 0, i8, z, i5 - i3);
+        TemporaryBuffer.recycle(cArrObtain);
         return runAdvance;
     }
 
@@ -1829,10 +1829,10 @@ public class Paint {
             return 0.0f;
         }
         int i7 = i4 - i3;
-        char[] obtain = TemporaryBuffer.obtain(i7);
-        TextUtils.getChars(charSequence, i3, i4, obtain, 0);
-        float runCharacterAdvance = getRunCharacterAdvance(obtain, i - i3, i2 - i3, 0, i7, z, i5 - i3, fArr, i6, rectF, runInfo);
-        TemporaryBuffer.recycle(obtain);
+        char[] cArrObtain = TemporaryBuffer.obtain(i7);
+        TextUtils.getChars(charSequence, i3, i4, cArrObtain, 0);
+        float runCharacterAdvance = getRunCharacterAdvance(cArrObtain, i - i3, i2 - i3, 0, i7, z, i5 - i3, fArr, i6, rectF, runInfo);
+        TemporaryBuffer.recycle(cArrObtain);
         return runCharacterAdvance;
     }
 
@@ -1855,10 +1855,10 @@ public class Paint {
             throw new IndexOutOfBoundsException();
         }
         int i6 = i4 - i3;
-        char[] obtain = TemporaryBuffer.obtain(i6);
-        TextUtils.getChars(charSequence, i3, i4, obtain, 0);
-        int offsetForAdvance = getOffsetForAdvance(obtain, i5, i2 - i3, 0, i6, z, f) + i3;
-        TemporaryBuffer.recycle(obtain);
+        char[] cArrObtain = TemporaryBuffer.obtain(i6);
+        TextUtils.getChars(charSequence, i3, i4, cArrObtain, 0);
+        int offsetForAdvance = getOffsetForAdvance(cArrObtain, i5, i2 - i3, 0, i6, z, f) + i3;
+        TemporaryBuffer.recycle(cArrObtain);
         return offsetForAdvance;
     }
 

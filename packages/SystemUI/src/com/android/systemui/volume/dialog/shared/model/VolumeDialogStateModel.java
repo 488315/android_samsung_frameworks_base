@@ -12,7 +12,6 @@ import kotlin.collections.MapsKt__MapsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class VolumeDialogStateModel {
     public final int activeStream;
@@ -31,7 +30,6 @@ public final class VolumeDialogStateModel {
     public final Map streamModels;
     public final int zenMode;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -81,11 +79,11 @@ public final class VolumeDialogStateModel {
     }
 
     public final int hashCode() {
-        int m = ReorderTile$$ExternalSyntheticOutline0.m(this.zenMode, ReorderTile$$ExternalSyntheticOutline0.m(this.ringerModeExternal, ReorderTile$$ExternalSyntheticOutline0.m(this.ringerModeInternal, (this.streamModels.hashCode() + TransitionData$$ExternalSyntheticOutline0.m((this.isShowingCsdWarning.hashCode() + ((this.isShowingSafetyWarning.hashCode() + (Boolean.hashCode(this.shouldShowA11ySlider) * 31)) * 31)) * 31, 31, this.isHovering)) * 31, 31), 31), 31);
+        int iM = ReorderTile$$ExternalSyntheticOutline0.m(this.zenMode, ReorderTile$$ExternalSyntheticOutline0.m(this.ringerModeExternal, ReorderTile$$ExternalSyntheticOutline0.m(this.ringerModeInternal, (this.streamModels.hashCode() + TransitionData$$ExternalSyntheticOutline0.m((this.isShowingCsdWarning.hashCode() + ((this.isShowingSafetyWarning.hashCode() + (Boolean.hashCode(this.shouldShowA11ySlider) * 31)) * 31)) * 31, 31, this.isHovering)) * 31, 31), 31), 31);
         ComponentName componentName = this.effectsSuppressor;
-        int hashCode = (m + (componentName == null ? 0 : componentName.hashCode())) * 31;
+        int iHashCode = (iM + (componentName == null ? 0 : componentName.hashCode())) * 31;
         String str = this.effectsSuppressorName;
-        return Boolean.hashCode(this.disallowRinger) + TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.activeStream, (hashCode + (str != null ? str.hashCode() : 0)) * 31, 31), 31, this.disallowAlarms), 31, this.disallowMedia), 31, this.disallowSystem);
+        return Boolean.hashCode(this.disallowRinger) + TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.activeStream, (iHashCode + (str != null ? str.hashCode() : 0)) * 31, 31), 31, this.disallowAlarms), 31, this.disallowMedia), 31, this.disallowSystem);
     }
 
     public final String toString() {

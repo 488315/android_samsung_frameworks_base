@@ -11,7 +11,6 @@ import com.android.systemui.R;
 import com.android.systemui.SysUIToast;
 import com.android.systemui.keyguard.DisplayLifecycle;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class ScreenPinningNotify {
     public final Context mContext;
@@ -24,8 +23,8 @@ public class ScreenPinningNotify {
     }
 
     public final void showEscapeToast(boolean z, boolean z2) {
-        long elapsedRealtime = SystemClock.elapsedRealtime();
-        if (elapsedRealtime - this.mLastShowToastTime < 1000) {
+        long jElapsedRealtime = SystemClock.elapsedRealtime();
+        if (jElapsedRealtime - this.mLastShowToastTime < 1000) {
             Slog.i("ScreenPinningNotify", "Ignore toast since it is requested in very short interval.");
             return;
         }
@@ -39,9 +38,9 @@ public class ScreenPinningNotify {
         if (BasicRune.POPUPUI_FOLDERBLE_TYPE_FLIP && !((DisplayLifecycle) Dependency.sDependency.getDependencyInner(DisplayLifecycle.class)).mIsFolderOpened) {
             z3 = true;
         }
-        Toast makeText = SysUIToast.makeText(this.mContext, z ? z3 ? R.string.sec_screen_pinning_toast_gesture_nav_sub_screen : R.string.sec_screen_pinning_toast_gesture_nav : z2 ? this.mTouchExplorationEnabled ? R.string.sec_screen_pinning_toast_accessibility : z3 ? R.string.sec_screen_pinning_toast_sub_screen : R.string.sec_screen_pinning_toast : R.string.screen_pinning_toast_recents_invisible, 1);
-        makeText.show();
-        this.mLastToast = makeText;
-        this.mLastShowToastTime = elapsedRealtime;
+        Toast toastMakeText = SysUIToast.makeText(this.mContext, z ? z3 ? R.string.sec_screen_pinning_toast_gesture_nav_sub_screen : R.string.sec_screen_pinning_toast_gesture_nav : z2 ? this.mTouchExplorationEnabled ? R.string.sec_screen_pinning_toast_accessibility : z3 ? R.string.sec_screen_pinning_toast_sub_screen : R.string.sec_screen_pinning_toast : R.string.screen_pinning_toast_recents_invisible, 1);
+        toastMakeText.show();
+        this.mLastToast = toastMakeText;
+        this.mLastShowToastTime = jElapsedRealtime;
     }
 }

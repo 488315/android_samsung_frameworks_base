@@ -16,7 +16,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 final class SeslCheckboxDefaults$RightCheck$PathDataTransition$animatePathData$1$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ float $fraction;
@@ -52,10 +51,10 @@ final class SeslCheckboxDefaults$RightCheck$PathDataTransition$animatePathData$1
         seslCheckboxDefaults$RightCheck$PathDataTransition.getClass();
         List list = (List) SeslCheckboxDefaults$RightCheck$PathDataTransition.pathStartNodes$delegate.getValue();
         seslCheckboxDefaults$RightCheck$PathDataTransition.getClass();
-        List<Pair> zip = CollectionsKt___CollectionsKt.zip(list, (List) SeslCheckboxDefaults$RightCheck$PathDataTransition.pathEndNodes$delegate.getValue());
+        List<Pair> listZip = CollectionsKt___CollectionsKt.zip(list, (List) SeslCheckboxDefaults$RightCheck$PathDataTransition.pathEndNodes$delegate.getValue());
         float f = this.$fraction;
-        ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(zip, 10));
-        for (Pair pair : zip) {
+        ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(listZip, 10));
+        for (Pair pair : listZip) {
             arrayList.add(PathNodeExtKt.transition((PathNode) pair.component1(), (PathNode) pair.component2(), f));
         }
         mutableState.setValue(arrayList);

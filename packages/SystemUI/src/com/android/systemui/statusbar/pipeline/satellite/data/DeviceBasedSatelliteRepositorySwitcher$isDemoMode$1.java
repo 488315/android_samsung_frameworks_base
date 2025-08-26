@@ -14,7 +14,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class DeviceBasedSatelliteRepositorySwitcher$isDemoMode$1 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -52,11 +51,11 @@ final class DeviceBasedSatelliteRepositorySwitcher$isDemoMode$1 extends SuspendL
             final ?? r1 = new DemoMode() { // from class: com.android.systemui.statusbar.pipeline.satellite.data.DeviceBasedSatelliteRepositorySwitcher$isDemoMode$1$callback$1
                 @Override // com.android.systemui.demomode.DemoModeCommandReceiver
                 public final void onDemoModeFinished() {
-                    StandaloneCoroutine standaloneCoroutine = DeviceBasedSatelliteRepositorySwitcher.this.demoImpl.demoCommandJob;
+                    StandaloneCoroutine standaloneCoroutine = deviceBasedSatelliteRepositorySwitcher.demoImpl.demoCommandJob;
                     if (standaloneCoroutine != null) {
                         standaloneCoroutine.cancel(null);
                     }
-                    ((ChannelCoroutine) producerScope).mo3456trySendJP2dKIU(Boolean.FALSE);
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.FALSE);
                 }
 
                 @Override // com.android.systemui.demomode.DemoModeCommandReceiver
@@ -68,7 +67,7 @@ final class DeviceBasedSatelliteRepositorySwitcher$isDemoMode$1 extends SuspendL
             Function0 function0 = new Function0() { // from class: com.android.systemui.statusbar.pipeline.satellite.data.DeviceBasedSatelliteRepositorySwitcher$isDemoMode$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    DeviceBasedSatelliteRepositorySwitcher.this.demoModeController.removeCallback((DemoMode) r1);
+                    deviceBasedSatelliteRepositorySwitcher2.demoModeController.removeCallback((DemoMode) r1);
                     return Unit.INSTANCE;
                 }
             };

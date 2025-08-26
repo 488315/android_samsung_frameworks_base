@@ -26,7 +26,6 @@ import java.util.HashMap;
 import java.util.Set;
 import java.util.function.IntSupplier;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class StackAnimationController extends PhysicsAnimationLayout.PhysicsAnimationController {
     public final IntSupplier mBubbleCountSupplier;
@@ -52,7 +51,6 @@ public class StackAnimationController extends PhysicsAnimationLayout.PhysicsAnim
     public boolean mSpringToTouchOnNextMotionEvent = false;
     public final AnonymousClass1 mStackFloatingContent = new AnonymousClass1();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.bubbles.animation.StackAnimationController$1, reason: invalid class name */
     public class AnonymousClass1 implements FloatingContentCoordinator.FloatingContent {
         public final Rect mFloatingBoundsOnScreen = new Rect();
@@ -96,7 +94,6 @@ public class StackAnimationController extends PhysicsAnimationLayout.PhysicsAnim
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class StackPositionProperty extends FloatPropertyCompat {
         public final DynamicAnimation.ViewProperty mProperty;
 
@@ -149,12 +146,12 @@ public class StackAnimationController extends PhysicsAnimationLayout.PhysicsAnim
             view.setScaleX(0.5f);
             view.setScaleY(0.5f);
             view.setAlpha(0.0f);
-            ViewPropertyAnimator withEndAction = view.animate().scaleX(1.0f).scaleY(1.0f).alpha(1.0f).setDuration(300L).withEndAction(new StackAnimationController$$ExternalSyntheticLambda0(view, 1));
-            view.setTag(R.id.reorder_animator_tag, withEndAction);
+            ViewPropertyAnimator viewPropertyAnimatorWithEndAction = view.animate().scaleX(1.0f).scaleY(1.0f).alpha(1.0f).setDuration(300L).withEndAction(new StackAnimationController$$ExternalSyntheticLambda0(view, 1));
+            view.setTag(R.id.reorder_animator_tag, viewPropertyAnimatorWithEndAction);
             if (bubblePositioner.showBubblesVertically()) {
-                withEndAction.translationX(f2);
+                viewPropertyAnimatorWithEndAction.translationX(f2);
             } else {
-                withEndAction.translationY(f);
+                viewPropertyAnimatorWithEndAction.translationY(f);
             }
         }
     }
@@ -208,8 +205,8 @@ public class StackAnimationController extends PhysicsAnimationLayout.PhysicsAnim
             flingAnimation.addEndListener(new DynamicAnimation.OnAnimationEndListener() { // from class: com.android.wm.shell.bubbles.animation.StackAnimationController$$ExternalSyntheticLambda4
                 @Override // androidx.dynamicanimation.animation.DynamicAnimation.OnAnimationEndListener
                 public final void onAnimationEnd(DynamicAnimation dynamicAnimation, boolean z, float f8, float f9) {
-                    float max;
-                    StackAnimationController stackAnimationController2 = StackAnimationController.this;
+                    float fMax;
+                    StackAnimationController stackAnimationController2 = this.f$0;
                     if (z) {
                         stackAnimationController2.getClass();
                         return;
@@ -217,11 +214,11 @@ public class StackAnimationController extends PhysicsAnimationLayout.PhysicsAnim
                     stackAnimationController2.mPositioner.setRestingPosition(stackAnimationController2.mStackPosition);
                     Float f10 = f3;
                     if (f10 != null) {
-                        max = f10.floatValue();
+                        fMax = f10.floatValue();
                     } else {
-                        max = Math.max(f7, Math.min(f6, f8));
+                        fMax = Math.max(f7, Math.min(f6, f8));
                     }
-                    float f11 = max;
+                    float f11 = fMax;
                     SpringForce springForce2 = springForce;
                     stackAnimationController2.springFirstBubbleWithStackFollowing(viewProperty, springForce2, f9, f11, new Runnable[0]);
                 }
@@ -281,9 +278,9 @@ public class StackAnimationController extends PhysicsAnimationLayout.PhysicsAnim
             viewProperty.setValue(this.mLayout.getChildAt(0), f);
             if (this.mLayout.getChildCount() > 1) {
                 float offsetForChainedPropertyAnimation = getOffsetForChainedPropertyAnimation(viewProperty, 0) + f;
-                PhysicsAnimationLayout.PhysicsPropertyAnimator animationForChild = animationForChild(this.mLayout.getChildAt(1));
-                animationForChild.property(viewProperty, offsetForChainedPropertyAnimation, new Runnable[0]);
-                animationForChild.start(new Runnable[0]);
+                PhysicsAnimationLayout.PhysicsPropertyAnimator physicsPropertyAnimatorAnimationForChild = animationForChild(this.mLayout.getChildAt(1));
+                physicsPropertyAnimatorAnimationForChild.property(viewProperty, offsetForChainedPropertyAnimation, new Runnable[0]);
+                physicsPropertyAnimatorAnimationForChild.start(new Runnable[0]);
             }
         }
     }
@@ -347,10 +344,10 @@ public class StackAnimationController extends PhysicsAnimationLayout.PhysicsAnim
             bubblePositioner.setRestingPosition(bubblePositioner.getRestingPosition());
             ((HashMap) this.mFloatingContentCoordinator.allContentBounds).remove(this.mStackFloatingContent);
         } else {
-            PhysicsAnimationLayout.PhysicsPropertyAnimator animationForChild = animationForChild(this.mLayout.getChildAt(0));
-            animationForChild.mPathAnimator = null;
-            animationForChild.property(DynamicAnimation.TRANSLATION_X, this.mStackPosition.x, new Runnable[0]);
-            animationForChild.start(new Runnable[0]);
+            PhysicsAnimationLayout.PhysicsPropertyAnimator physicsPropertyAnimatorAnimationForChild = animationForChild(this.mLayout.getChildAt(0));
+            physicsPropertyAnimatorAnimationForChild.mPathAnimator = null;
+            physicsPropertyAnimatorAnimationForChild.property(DynamicAnimation.TRANSLATION_X, this.mStackPosition.x, new Runnable[0]);
+            physicsPropertyAnimatorAnimationForChild.start(new Runnable[0]);
         }
     }
 
@@ -370,9 +367,9 @@ public class StackAnimationController extends PhysicsAnimationLayout.PhysicsAnim
             float offsetForChainedPropertyAnimation = getOffsetForChainedPropertyAnimation(anonymousClass1, 0);
             float offsetForChainedPropertyAnimation2 = getOffsetForChainedPropertyAnimation(anonymousClass2, 0);
             for (int i = 0; i < this.mLayout.getChildCount(); i++) {
-                float min = Math.min(i, 1);
-                this.mLayout.getChildAt(i).setTranslationX((min * offsetForChainedPropertyAnimation) + pointF.x);
-                this.mLayout.getChildAt(i).setTranslationY((min * offsetForChainedPropertyAnimation2) + pointF.y);
+                float fMin = Math.min(i, 1);
+                this.mLayout.getChildAt(i).setTranslationX((fMin * offsetForChainedPropertyAnimation) + pointF.x);
+                this.mLayout.getChildAt(i).setTranslationY((fMin * offsetForChainedPropertyAnimation2) + pointF.y);
             }
         }
     }
@@ -390,7 +387,7 @@ public class StackAnimationController extends PhysicsAnimationLayout.PhysicsAnim
             public final void onAnimationEnd(DynamicAnimation dynamicAnimation, boolean z2, float f3, float f4) {
                 Runnable[] runnableArr2 = runnableArr;
                 boolean z3 = z;
-                StackAnimationController stackAnimationController = StackAnimationController.this;
+                StackAnimationController stackAnimationController = this.f$0;
                 if (!z3) {
                     stackAnimationController.mPositioner.setRestingPosition(stackAnimationController.mStackPosition);
                 }

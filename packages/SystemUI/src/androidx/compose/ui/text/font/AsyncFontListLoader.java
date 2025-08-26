@@ -4,10 +4,20 @@ import androidx.compose.runtime.MutableState;
 import androidx.compose.runtime.SnapshotMutableStateImpl;
 import androidx.compose.runtime.SnapshotStateKt;
 import androidx.compose.runtime.State;
+import androidx.compose.ui.text.font.TypefaceResult;
 import java.util.List;
+import java.util.concurrent.CancellationException;
+import kotlin.ResultKt;
+import kotlin.Unit;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
 import kotlin.jvm.functions.Function1;
+import kotlinx.coroutines.CoroutineExceptionHandler;
+import kotlinx.coroutines.JobKt;
+import kotlinx.coroutines.TimeoutKt;
+import kotlinx.coroutines.YieldKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AsyncFontListLoader implements State<Object> {
     public final AsyncTypefaceCache asyncTypefaceCache;
@@ -17,6 +27,28 @@ public final class AsyncFontListLoader implements State<Object> {
     public final PlatformFontLoader platformFontLoader;
     public final TypefaceRequest typefaceRequest;
     public final MutableState value$delegate;
+
+    /* renamed from: androidx.compose.ui.text.font.AsyncFontListLoader$load$1, reason: invalid class name */
+    final class AnonymousClass1 extends ContinuationImpl {
+        int I$0;
+        int I$1;
+        Object L$0;
+        Object L$1;
+        Object L$2;
+        int label;
+        /* synthetic */ Object result;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return AsyncFontListLoader.this.load(this);
+        }
+    }
 
     public AsyncFontListLoader(List<? extends Font> list, Object obj, TypefaceRequest typefaceRequest, AsyncTypefaceCache asyncTypefaceCache, Function1 function1, PlatformFontLoader platformFontLoader) {
         this.fontList = list;
@@ -32,110 +64,195 @@ public final class AsyncFontListLoader implements State<Object> {
         return ((SnapshotMutableStateImpl) this.value$delegate).getValue();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0070 A[Catch: all -> 0x00d6, TryCatch #0 {all -> 0x00d6, blocks: (B:16:0x0070, B:18:0x0083, B:25:0x00a5, B:27:0x00b3, B:35:0x00da, B:53:0x0064), top: B:52:0x0064 }] */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x00a5 A[Catch: all -> 0x00d6, TRY_LEAVE, TryCatch #0 {all -> 0x00d6, blocks: (B:16:0x0070, B:18:0x0083, B:25:0x00a5, B:27:0x00b3, B:35:0x00da, B:53:0x0064), top: B:52:0x0064 }] */
-    /* JADX WARN: Removed duplicated region for block: B:35:0x00da A[Catch: all -> 0x00d6, TRY_ENTER, TRY_LEAVE, TryCatch #0 {all -> 0x00d6, blocks: (B:16:0x0070, B:18:0x0083, B:25:0x00a5, B:27:0x00b3, B:35:0x00da, B:53:0x0064), top: B:52:0x0064 }] */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x00f9  */
-    /* JADX WARN: Removed duplicated region for block: B:51:0x0061  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0024  */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:17:0x0081 -> B:14:0x00f6). Please report as a decompilation issue!!! */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:37:0x00ed -> B:13:0x00f2). Please report as a decompilation issue!!! */
+    /* JADX WARN: Removed duplicated region for block: B:27:0x0070 A[Catch: all -> 0x00d6, TryCatch #0 {all -> 0x00d6, blocks: (B:27:0x0070, B:29:0x0083, B:34:0x00a5, B:36:0x00b3, B:41:0x00da, B:25:0x0064), top: B:51:0x0064 }] */
+    /* JADX WARN: Removed duplicated region for block: B:34:0x00a5 A[Catch: all -> 0x00d6, TRY_LEAVE, TryCatch #0 {all -> 0x00d6, blocks: (B:27:0x0070, B:29:0x0083, B:34:0x00a5, B:36:0x00b3, B:41:0x00da, B:25:0x0064), top: B:51:0x0064 }] */
+    /* JADX WARN: Removed duplicated region for block: B:41:0x00da A[Catch: all -> 0x00d6, TRY_ENTER, TRY_LEAVE, TryCatch #0 {all -> 0x00d6, blocks: (B:27:0x0070, B:29:0x0083, B:34:0x00a5, B:36:0x00b3, B:41:0x00da, B:25:0x0064), top: B:51:0x0064 }] */
+    /* JADX WARN: Removed duplicated region for block: B:47:0x00f9  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
+    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:28:0x0081 -> B:46:0x00f6). Please report as a decompilation issue!!! */
+    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:44:0x00ed -> B:45:0x00f2). Please report as a decompilation issue!!! */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object load(kotlin.coroutines.jvm.internal.ContinuationImpl r14) {
-        /*
-            Method dump skipped, instructions count: 309
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.text.font.AsyncFontListLoader.load(kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object load(ContinuationImpl continuationImpl) throws Throwable {
+        AnonymousClass1 anonymousClass1;
+        List list;
+        int size;
+        int i;
+        Throwable th;
+        AsyncFontListLoader asyncFontListLoader;
+        Font font;
+        List list2;
+        if (continuationImpl instanceof AnonymousClass1) {
+            anonymousClass1 = (AnonymousClass1) continuationImpl;
+            int i2 = anonymousClass1.label;
+            if ((i2 & Integer.MIN_VALUE) != 0) {
+                anonymousClass1.label = i2 - Integer.MIN_VALUE;
+            } else {
+                anonymousClass1 = new AnonymousClass1(continuationImpl);
+            }
+        }
+        Object obj = anonymousClass1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i3 = anonymousClass1.label;
+        if (i3 != 0) {
+            if (i3 == 1) {
+                int i4 = anonymousClass1.I$1;
+                int i5 = anonymousClass1.I$0;
+                Font font2 = (Font) anonymousClass1.L$2;
+                list2 = (List) anonymousClass1.L$1;
+                AsyncFontListLoader asyncFontListLoader2 = (AsyncFontListLoader) anonymousClass1.L$0;
+                try {
+                    ResultKt.throwOnFailure(obj);
+                    size = i4;
+                    this = asyncFontListLoader2;
+                    font = font2;
+                    i = i5;
+                    if (obj == null) {
+                    }
+                } catch (Throwable th2) {
+                    th = th2;
+                    asyncFontListLoader = asyncFontListLoader2;
+                }
+            } else {
+                if (i3 != 2) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                int i6 = anonymousClass1.I$1;
+                int i7 = anonymousClass1.I$0;
+                List list3 = (List) anonymousClass1.L$1;
+                asyncFontListLoader = (AsyncFontListLoader) anonymousClass1.L$0;
+                try {
+                    ResultKt.throwOnFailure(obj);
+                    list = list3;
+                    i = i7;
+                    size = i6;
+                    this = asyncFontListLoader;
+                    i++;
+                    if (i < size) {
+                        Font font3 = (Font) list.get(i);
+                        int iMo759getLoadingStrategyPKNRLFQ = font3.mo759getLoadingStrategyPKNRLFQ();
+                        FontLoadingStrategy.Companion.getClass();
+                        if (iMo759getLoadingStrategyPKNRLFQ == FontLoadingStrategy.Async) {
+                            AsyncTypefaceCache asyncTypefaceCache = this.asyncTypefaceCache;
+                            PlatformFontLoader platformFontLoader = this.platformFontLoader;
+                            AsyncFontListLoader$load$2$typeface$1 asyncFontListLoader$load$2$typeface$1 = new AsyncFontListLoader$load$2$typeface$1(this, font3, null);
+                            anonymousClass1.L$0 = this;
+                            anonymousClass1.L$1 = list;
+                            anonymousClass1.L$2 = font3;
+                            anonymousClass1.I$0 = i;
+                            anonymousClass1.I$1 = size;
+                            anonymousClass1.label = 1;
+                            Object objRunCached = asyncTypefaceCache.runCached(font3, platformFontLoader, asyncFontListLoader$load$2$typeface$1, anonymousClass1);
+                            if (objRunCached == coroutineSingletons) {
+                                return coroutineSingletons;
+                            }
+                            list2 = list;
+                            obj = objRunCached;
+                            font = font3;
+                            if (obj == null) {
+                                TypefaceRequest typefaceRequest = this.typefaceRequest;
+                                Object objM770synthesizeTypefaceFxwP2eA = FontSynthesis_androidKt.m770synthesizeTypefaceFxwP2eA(typefaceRequest.fontSynthesis, obj, font, typefaceRequest.fontWeight, typefaceRequest.fontStyle);
+                                MutableState mutableState = this.value$delegate;
+                                ((SnapshotMutableStateImpl) mutableState).setValue(objM770synthesizeTypefaceFxwP2eA);
+                                Unit unit = Unit.INSTANCE;
+                                boolean zIsActive = JobKt.isActive(anonymousClass1.getContext());
+                                this.cacheable = false;
+                                this.onCompletion.mo781invoke(new TypefaceResult.Immutable(((SnapshotMutableStateImpl) mutableState).getValue(), zIsActive));
+                                return unit;
+                            }
+                            anonymousClass1.L$0 = this;
+                            anonymousClass1.L$1 = list2;
+                            anonymousClass1.L$2 = null;
+                            anonymousClass1.I$0 = i;
+                            anonymousClass1.I$1 = size;
+                            anonymousClass1.label = 2;
+                            if (YieldKt.yield(anonymousClass1) != coroutineSingletons) {
+                                List list4 = list2;
+                                asyncFontListLoader = this;
+                                i6 = size;
+                                i7 = i;
+                                list3 = list4;
+                                list = list3;
+                                i = i7;
+                                size = i6;
+                                this = asyncFontListLoader;
+                            }
+                            return coroutineSingletons;
+                        }
+                        i++;
+                        if (i < size) {
+                            boolean zIsActive2 = JobKt.isActive(anonymousClass1.getContext());
+                            this.cacheable = false;
+                            this.onCompletion.mo781invoke(new TypefaceResult.Immutable(((SnapshotMutableStateImpl) this.value$delegate).getValue(), zIsActive2));
+                            return Unit.INSTANCE;
+                        }
+                    }
+                } catch (Throwable th3) {
+                    th = th3;
+                }
+            }
+            boolean zIsActive3 = JobKt.isActive(anonymousClass1.getContext());
+            asyncFontListLoader.cacheable = false;
+            asyncFontListLoader.onCompletion.mo781invoke(new TypefaceResult.Immutable(((SnapshotMutableStateImpl) asyncFontListLoader.value$delegate).getValue(), zIsActive3));
+            throw th;
+        }
+        ResultKt.throwOnFailure(obj);
+        try {
+            list = this.fontList;
+            size = list.size();
+            i = 0;
+            if (i < size) {
+            }
+        } catch (Throwable th4) {
+            asyncFontListLoader = this;
+            th = th4;
+        }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0039  */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0022  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object loadWithTimeoutOrNull$ui_text_release(androidx.compose.ui.text.font.Font r6, kotlin.coroutines.jvm.internal.ContinuationImpl r7) {
-        /*
-            r5 = this;
-            boolean r0 = r7 instanceof androidx.compose.ui.text.font.AsyncFontListLoader$loadWithTimeoutOrNull$1
-            if (r0 == 0) goto L13
-            r0 = r7
-            androidx.compose.ui.text.font.AsyncFontListLoader$loadWithTimeoutOrNull$1 r0 = (androidx.compose.ui.text.font.AsyncFontListLoader$loadWithTimeoutOrNull$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            androidx.compose.ui.text.font.AsyncFontListLoader$loadWithTimeoutOrNull$1 r0 = new androidx.compose.ui.text.font.AsyncFontListLoader$loadWithTimeoutOrNull$1
-            r0.<init>(r5, r7)
-        L18:
-            java.lang.Object r7 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            r4 = 0
-            if (r2 == 0) goto L39
-            if (r2 != r3) goto L31
-            java.lang.Object r5 = r0.L$0
-            r6 = r5
-            androidx.compose.ui.text.font.Font r6 = (androidx.compose.ui.text.font.Font) r6
-            kotlin.ResultKt.throwOnFailure(r7)     // Catch: java.lang.Exception -> L2d java.util.concurrent.CancellationException -> L2f
-            return r7
-        L2d:
-            r5 = move-exception
-            goto L4f
-        L2f:
-            r5 = move-exception
-            goto L78
-        L31:
-            java.lang.IllegalStateException r5 = new java.lang.IllegalStateException
-            java.lang.String r6 = "call to 'resume' before 'invoke' with coroutine"
-            r5.<init>(r6)
-            throw r5
-        L39:
-            kotlin.ResultKt.throwOnFailure(r7)
-            androidx.compose.ui.text.font.AsyncFontListLoader$loadWithTimeoutOrNull$2 r7 = new androidx.compose.ui.text.font.AsyncFontListLoader$loadWithTimeoutOrNull$2     // Catch: java.lang.Exception -> L2d java.util.concurrent.CancellationException -> L2f
-            r7.<init>(r5, r6, r4)     // Catch: java.lang.Exception -> L2d java.util.concurrent.CancellationException -> L2f
-            r0.L$0 = r6     // Catch: java.lang.Exception -> L2d java.util.concurrent.CancellationException -> L2f
-            r0.label = r3     // Catch: java.lang.Exception -> L2d java.util.concurrent.CancellationException -> L2f
-            r2 = 15000(0x3a98, double:7.411E-320)
-            java.lang.Object r5 = kotlinx.coroutines.TimeoutKt.withTimeoutOrNull(r2, r7, r0)     // Catch: java.lang.Exception -> L2d java.util.concurrent.CancellationException -> L2f
-            if (r5 != r1) goto L4e
-            return r1
-        L4e:
-            return r5
-        L4f:
-            kotlin.coroutines.CoroutineContext r7 = r0.getContext()
-            kotlinx.coroutines.CoroutineExceptionHandler$Key r1 = kotlinx.coroutines.CoroutineExceptionHandler.Key
-            kotlin.coroutines.CoroutineContext$Element r7 = r7.get(r1)
-            kotlinx.coroutines.CoroutineExceptionHandler r7 = (kotlinx.coroutines.CoroutineExceptionHandler) r7
-            if (r7 == 0) goto L82
-            kotlin.coroutines.CoroutineContext r0 = r0.getContext()
-            java.lang.IllegalStateException r1 = new java.lang.IllegalStateException
-            java.lang.StringBuilder r2 = new java.lang.StringBuilder
-            java.lang.String r3 = "Unable to load font "
-            r2.<init>(r3)
-            r2.append(r6)
-            java.lang.String r6 = r2.toString()
-            r1.<init>(r6, r5)
-            r7.handleException(r1, r0)
-            goto L82
-        L78:
-            kotlin.coroutines.CoroutineContext r6 = r0.getContext()
-            boolean r6 = kotlinx.coroutines.JobKt.isActive(r6)
-            if (r6 == 0) goto L83
-        L82:
-            return r4
-        L83:
-            throw r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.text.font.AsyncFontListLoader.loadWithTimeoutOrNull$ui_text_release(androidx.compose.ui.text.font.Font, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object loadWithTimeoutOrNull$ui_text_release(Font font, ContinuationImpl continuationImpl) {
+        AsyncFontListLoader$loadWithTimeoutOrNull$1 asyncFontListLoader$loadWithTimeoutOrNull$1;
+        if (continuationImpl instanceof AsyncFontListLoader$loadWithTimeoutOrNull$1) {
+            asyncFontListLoader$loadWithTimeoutOrNull$1 = (AsyncFontListLoader$loadWithTimeoutOrNull$1) continuationImpl;
+            int i = asyncFontListLoader$loadWithTimeoutOrNull$1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                asyncFontListLoader$loadWithTimeoutOrNull$1.label = i - Integer.MIN_VALUE;
+            } else {
+                asyncFontListLoader$loadWithTimeoutOrNull$1 = new AsyncFontListLoader$loadWithTimeoutOrNull$1(this, continuationImpl);
+            }
+        }
+        Object obj = asyncFontListLoader$loadWithTimeoutOrNull$1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = asyncFontListLoader$loadWithTimeoutOrNull$1.label;
+        try {
+            if (i2 != 0) {
+                if (i2 != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+                return obj;
+            }
+            ResultKt.throwOnFailure(obj);
+            AsyncFontListLoader$loadWithTimeoutOrNull$2 asyncFontListLoader$loadWithTimeoutOrNull$2 = new AsyncFontListLoader$loadWithTimeoutOrNull$2(this, font, null);
+            asyncFontListLoader$loadWithTimeoutOrNull$1.L$0 = font;
+            asyncFontListLoader$loadWithTimeoutOrNull$1.label = 1;
+            Object objWithTimeoutOrNull = TimeoutKt.withTimeoutOrNull(15000L, asyncFontListLoader$loadWithTimeoutOrNull$2, asyncFontListLoader$loadWithTimeoutOrNull$1);
+            return objWithTimeoutOrNull == coroutineSingletons ? coroutineSingletons : objWithTimeoutOrNull;
+        } catch (CancellationException e) {
+            if (!JobKt.isActive(asyncFontListLoader$loadWithTimeoutOrNull$1.getContext())) {
+                throw e;
+            }
+            return null;
+        } catch (Exception e2) {
+            CoroutineExceptionHandler coroutineExceptionHandler = (CoroutineExceptionHandler) asyncFontListLoader$loadWithTimeoutOrNull$1.getContext().get(CoroutineExceptionHandler.Key);
+            if (coroutineExceptionHandler != null) {
+                coroutineExceptionHandler.handleException(new IllegalStateException("Unable to load font " + font, e2), asyncFontListLoader$loadWithTimeoutOrNull$1.getContext());
+            }
+            return null;
+        }
     }
 }

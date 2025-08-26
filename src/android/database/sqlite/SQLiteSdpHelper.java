@@ -1,6 +1,7 @@
 package android.database.sqlite;
 
 import android.database.DatabaseUtils;
+import android.database.SQLException;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.util.Log;
@@ -34,7 +35,7 @@ public class SQLiteSdpHelper {
         }
 
         @Override // com.samsung.android.knox.dar.sdp.ISdpListener
-        public void onStateChange(int i) throws RemoteException {
+        public void onStateChange(int i) throws RemoteException, SQLException {
             if (i == 1) {
                 SQLiteSdpHelper.this.mDatabase.execSQL("PRAGMA sdp_locked");
             } else {
@@ -47,27 +48,23 @@ public class SQLiteSdpHelper {
     }
 
     private static synchronized IDarManagerService getDarService() {
-        IDarManagerService iDarManagerService;
-        synchronized (SQLiteSdpHelper.class) {
-            if (sService == null) {
-                sService = IDarManagerService.Stub.asInterface(ServiceManager.getService("dar"));
-            }
-            iDarManagerService = sService;
+        if (sService == null) {
+            sService = IDarManagerService.Stub.asInterface(ServiceManager.getService("dar"));
         }
-        return iDarManagerService;
+        return sService;
     }
 
     private int getEngineId() {
-        long j = -1;
+        long jIntValue = -1;
         try {
             SQLiteDatabase sQLiteDatabase = this.mDatabase;
             if (sQLiteDatabase != null) {
-                j = Long.valueOf(DatabaseUtils.longForQuery(sQLiteDatabase, "PRAGMA sdp_get_engine_id;", null)).intValue();
+                jIntValue = Long.valueOf(DatabaseUtils.longForQuery(sQLiteDatabase, "PRAGMA sdp_get_engine_id;", null)).intValue();
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return (int) j;
+        return (int) jIntValue;
     }
 
     public void registerListener() {

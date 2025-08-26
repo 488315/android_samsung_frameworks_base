@@ -3,7 +3,6 @@ package com.android.wm.shell.pip.phone;
 import com.android.wm.shell.pip.PipTaskOrganizer;
 import java.util.function.IntConsumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class PipController$$ExternalSyntheticLambda8 implements IntConsumer {
     public final /* synthetic */ int $r8$classId;

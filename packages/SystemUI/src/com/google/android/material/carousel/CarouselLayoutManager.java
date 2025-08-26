@@ -1,6 +1,7 @@
 package com.google.android.material.carousel;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -10,6 +11,7 @@ import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$Externa
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.accessibility.AccessibilityEvent;
+import androidx.appcompat.widget.ListPopupWindow$$ExternalSyntheticOutline0;
 import androidx.core.graphics.ColorUtils;
 import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,7 +23,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class CarouselLayoutManager extends RecyclerView.LayoutManager implements RecyclerView.SmoothScroller.ScrollVectorProvider {
     public final CarouselStrategy carouselStrategy;
@@ -33,7 +34,6 @@ public class CarouselLayoutManager extends RecyclerView.LayoutManager implements
     public final View.OnLayoutChangeListener recyclerViewSizeChangeListener;
     int scrollOffset;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DebugItemDecoration extends RecyclerView.ItemDecoration {
         public final List keylines;
         public final Paint linePaint;
@@ -69,7 +69,6 @@ public class CarouselLayoutManager extends RecyclerView.LayoutManager implements
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class KeylineRange {
         public final KeylineState.Keyline leftOrTop;
         public final KeylineState.Keyline rightOrBottom;
@@ -142,9 +141,9 @@ public class CarouselLayoutManager extends RecyclerView.LayoutManager implements
     @Override // androidx.recyclerview.widget.RecyclerView.LayoutManager
     public final void getDecoratedBoundsWithMargins(Rect rect, View view) {
         RecyclerView.getDecoratedBoundsWithMarginsInt(rect, view);
-        float centerY = rect.centerY();
+        float fCenterY = rect.centerY();
         if (isHorizontal()) {
-            centerY = rect.centerX();
+            fCenterY = rect.centerX();
         }
         List list = this.currentKeylineState.keylines;
         float f = Float.MAX_VALUE;
@@ -157,14 +156,14 @@ public class CarouselLayoutManager extends RecyclerView.LayoutManager implements
         float f4 = Float.MAX_VALUE;
         for (int i5 = 0; i5 < list.size(); i5++) {
             float f5 = ((KeylineState.Keyline) list.get(i5)).locOffset;
-            float abs = Math.abs(f5 - centerY);
-            if (f5 <= centerY && abs <= f) {
+            float fAbs = Math.abs(f5 - fCenterY);
+            if (f5 <= fCenterY && fAbs <= f) {
                 i = i5;
-                f = abs;
+                f = fAbs;
             }
-            if (f5 > centerY && abs <= f3) {
+            if (f5 > fCenterY && fAbs <= f3) {
                 i3 = i5;
-                f3 = abs;
+                f3 = fAbs;
             }
             if (f5 <= f4) {
                 i2 = i5;
@@ -185,10 +184,10 @@ public class CarouselLayoutManager extends RecyclerView.LayoutManager implements
         KeylineState.Keyline keyline = keylineRange.leftOrTop;
         float f6 = keyline.maskedItemSize;
         KeylineState.Keyline keyline2 = keylineRange.rightOrBottom;
-        float lerp = AnimationUtils.lerp(f6, keyline2.maskedItemSize, keyline.locOffset, keyline2.locOffset, centerY);
-        float width = isHorizontal() ? (rect.width() - lerp) / 2.0f : 0.0f;
-        float height = isHorizontal() ? 0.0f : (rect.height() - lerp) / 2.0f;
-        rect.set((int) (rect.left + width), (int) (rect.top + height), (int) (rect.right - width), (int) (rect.bottom - height));
+        float fLerp = AnimationUtils.lerp(f6, keyline2.maskedItemSize, keyline.locOffset, keyline2.locOffset, fCenterY);
+        float fWidth = isHorizontal() ? (rect.width() - fLerp) / 2.0f : 0.0f;
+        float fHeight = isHorizontal() ? 0.0f : (rect.height() - fLerp) / 2.0f;
+        rect.set((int) (rect.left + fWidth), (int) (rect.top + fHeight), (int) (rect.right - fWidth), (int) (rect.bottom - fHeight));
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.LayoutManager
@@ -205,19 +204,19 @@ public class CarouselLayoutManager extends RecyclerView.LayoutManager implements
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.LayoutManager
-    public final void onAttachedToWindow(RecyclerView recyclerView) {
+    public final void onAttachedToWindow(RecyclerView recyclerView) throws Resources.NotFoundException {
         CarouselStrategy carouselStrategy = this.carouselStrategy;
         Context context = recyclerView.getContext();
-        float f = carouselStrategy.smallSizeMin;
-        if (f <= 0.0f) {
-            f = context.getResources().getDimension(R.dimen.m3_carousel_small_item_size_min);
+        float dimension = carouselStrategy.smallSizeMin;
+        if (dimension <= 0.0f) {
+            dimension = context.getResources().getDimension(R.dimen.m3_carousel_small_item_size_min);
         }
-        carouselStrategy.smallSizeMin = f;
-        float f2 = carouselStrategy.smallSizeMax;
-        if (f2 <= 0.0f) {
-            f2 = context.getResources().getDimension(R.dimen.m3_carousel_small_item_size_max);
+        carouselStrategy.smallSizeMin = dimension;
+        float dimension2 = carouselStrategy.smallSizeMax;
+        if (dimension2 <= 0.0f) {
+            dimension2 = context.getResources().getDimension(R.dimen.m3_carousel_small_item_size_max);
         }
-        carouselStrategy.smallSizeMax = f2;
+        carouselStrategy.smallSizeMax = dimension2;
         requestLayout();
         recyclerView.addOnLayoutChangeListener(this.recyclerViewSizeChangeListener);
     }
@@ -227,154 +226,74 @@ public class CarouselLayoutManager extends RecyclerView.LayoutManager implements
         recyclerView.removeOnLayoutChangeListener(this.recyclerViewSizeChangeListener);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:50:0x002e, code lost:
-    
-        if (r8 == 1) goto L20;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:53:0x0038, code lost:
-    
-        if (isLayoutRtl() != false) goto L24;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:54:0x003c, code lost:
-    
-        if (r8 == 1) goto L24;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:57:0x0045, code lost:
-    
-        if (isLayoutRtl() != false) goto L20;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x004b  */
-    /* JADX WARN: Removed duplicated region for block: B:49:? A[RETURN, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:20:0x0030  */
+    /* JADX WARN: Removed duplicated region for block: B:24:0x003a  */
     @Override // androidx.recyclerview.widget.RecyclerView.LayoutManager
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final android.view.View onFocusSearchFailed(android.view.View r5, int r6, androidx.recyclerview.widget.RecyclerView.Recycler r7, androidx.recyclerview.widget.RecyclerView.State r8) {
-        /*
-            r4 = this;
-            int r8 = r4.getChildCount()
-            if (r8 != 0) goto L8
-            goto L9a
-        L8:
-            com.google.android.material.carousel.CarouselOrientationHelper r8 = r4.orientationHelper
-            int r8 = r8.orientation
-            r0 = -2147483648(0xffffffff80000000, float:-0.0)
-            r1 = -1
-            r2 = 1
-            if (r6 == r2) goto L3a
-            r3 = 2
-            if (r6 == r3) goto L30
-            r3 = 17
-            if (r6 == r3) goto L3f
-            r3 = 33
-            if (r6 == r3) goto L3c
-            r3 = 66
-            if (r6 == r3) goto L32
-            r3 = 130(0x82, float:1.82E-43)
-            if (r6 == r3) goto L2e
-            java.lang.String r8 = "Unknown focus request:"
-            java.lang.String r3 = "CarouselLayoutManager"
-            androidx.appcompat.widget.ListPopupWindow$$ExternalSyntheticOutline0.m(r6, r8, r3)
-        L2c:
-            r6 = r0
-            goto L48
-        L2e:
-            if (r8 != r2) goto L2c
-        L30:
-            r6 = r2
-            goto L48
-        L32:
-            if (r8 != 0) goto L2c
-            boolean r6 = r4.isLayoutRtl()
-            if (r6 == 0) goto L30
-        L3a:
-            r6 = r1
-            goto L48
-        L3c:
-            if (r8 != r2) goto L2c
-            goto L3a
-        L3f:
-            if (r8 != 0) goto L2c
-            boolean r6 = r4.isLayoutRtl()
-            if (r6 == 0) goto L3a
-            goto L30
-        L48:
-            if (r6 != r0) goto L4b
-            goto L9a
-        L4b:
-            java.lang.String r8 = "All children of a RecyclerView using CarouselLayoutManager must use MaskableFrameLayout as their root ViewGroup."
-            r0 = 0
-            if (r6 != r1) goto L8f
-            int r5 = androidx.recyclerview.widget.RecyclerView.LayoutManager.getPosition(r5)
-            if (r5 != 0) goto L57
-            goto L9a
-        L57:
-            android.view.View r5 = r4.getChildAt(r0)
-            int r5 = androidx.recyclerview.widget.RecyclerView.LayoutManager.getPosition(r5)
-            int r5 = r5 - r2
-            if (r5 < 0) goto L7e
-            int r6 = r4.getItemCount()
-            if (r5 < r6) goto L69
-            goto L7e
-        L69:
-            com.google.android.material.carousel.CarouselOrientationHelper r6 = r4.orientationHelper
-            r6.getParentStart()
-            com.google.android.material.carousel.KeylineState r6 = r4.currentKeylineState
-            float r6 = r6.itemSize
-            r4.isLayoutRtl()
-            r7.getViewForPosition(r5)
-            java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-            r4.<init>(r8)
-            throw r4
-        L7e:
-            boolean r5 = r4.isLayoutRtl()
-            if (r5 == 0) goto L8a
-            int r5 = r4.getChildCount()
-            int r0 = r5 + (-1)
-        L8a:
-            android.view.View r4 = r4.getChildAt(r0)
-            return r4
-        L8f:
-            int r5 = androidx.recyclerview.widget.RecyclerView.LayoutManager.getPosition(r5)
-            int r6 = r4.getItemCount()
-            int r6 = r6 - r2
-            if (r5 != r6) goto L9c
-        L9a:
-            r4 = 0
-            return r4
-        L9c:
-            int r5 = r4.getChildCount()
-            int r5 = r5 - r2
-            android.view.View r5 = r4.getChildAt(r5)
-            int r5 = androidx.recyclerview.widget.RecyclerView.LayoutManager.getPosition(r5)
-            int r5 = r5 + r2
-            if (r5 < 0) goto Lc8
-            int r6 = r4.getItemCount()
-            if (r5 < r6) goto Lb3
-            goto Lc8
-        Lb3:
-            com.google.android.material.carousel.CarouselOrientationHelper r6 = r4.orientationHelper
-            r6.getParentStart()
-            com.google.android.material.carousel.KeylineState r6 = r4.currentKeylineState
-            float r6 = r6.itemSize
-            r4.isLayoutRtl()
-            r7.getViewForPosition(r5)
-            java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-            r4.<init>(r8)
-            throw r4
-        Lc8:
-            boolean r5 = r4.isLayoutRtl()
-            if (r5 == 0) goto Lcf
-            goto Ld5
-        Lcf:
-            int r5 = r4.getChildCount()
-            int r0 = r5 + (-1)
-        Ld5:
-            android.view.View r4 = r4.getChildAt(r0)
-            return r4
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.google.android.material.carousel.CarouselLayoutManager.onFocusSearchFailed(android.view.View, int, androidx.recyclerview.widget.RecyclerView$Recycler, androidx.recyclerview.widget.RecyclerView$State):android.view.View");
+    public final View onFocusSearchFailed(View view, int i, RecyclerView.Recycler recycler, RecyclerView.State state) {
+        char c;
+        if (getChildCount() == 0) {
+            return null;
+        }
+        int i2 = this.orientationHelper.orientation;
+        if (i == 1) {
+            c = 65535;
+        } else if (i == 2) {
+            c = 1;
+        } else if (i == 17) {
+            if (i2 == 0) {
+                if (isLayoutRtl()) {
+                }
+            }
+            c = 0;
+        } else if (i != 33) {
+            if (i != 66) {
+                if (i != 130) {
+                    ListPopupWindow$$ExternalSyntheticOutline0.m(i, "Unknown focus request:", "CarouselLayoutManager");
+                } else if (i2 == 1) {
+                }
+                c = 0;
+            } else {
+                if (i2 == 0) {
+                    if (isLayoutRtl()) {
+                    }
+                }
+                c = 0;
+            }
+        } else if (i2 != 1) {
+            c = 0;
+        }
+        if (c == 0) {
+            return null;
+        }
+        if (c == 65535) {
+            if (RecyclerView.LayoutManager.getPosition(view) == 0) {
+                return null;
+            }
+            int position = RecyclerView.LayoutManager.getPosition(getChildAt(0)) - 1;
+            if (position < 0 || position >= getItemCount()) {
+                return getChildAt(isLayoutRtl() ? getChildCount() - 1 : 0);
+            }
+            this.orientationHelper.getParentStart();
+            float f = this.currentKeylineState.itemSize;
+            isLayoutRtl();
+            recycler.getViewForPosition(position);
+            throw new IllegalStateException("All children of a RecyclerView using CarouselLayoutManager must use MaskableFrameLayout as their root ViewGroup.");
+        }
+        if (RecyclerView.LayoutManager.getPosition(view) == getItemCount() - 1) {
+            return null;
+        }
+        int position2 = RecyclerView.LayoutManager.getPosition(getChildAt(getChildCount() - 1)) + 1;
+        if (position2 < 0 || position2 >= getItemCount()) {
+            return getChildAt(isLayoutRtl() ? 0 : getChildCount() - 1);
+        }
+        this.orientationHelper.getParentStart();
+        float f2 = this.currentKeylineState.itemSize;
+        isLayoutRtl();
+        recycler.getViewForPosition(position2);
+        throw new IllegalStateException("All children of a RecyclerView using CarouselLayoutManager must use MaskableFrameLayout as their root ViewGroup.");
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.LayoutManager
@@ -551,14 +470,14 @@ public class CarouselLayoutManager extends RecyclerView.LayoutManager implements
         this.recyclerViewSizeChangeListener = new View.OnLayoutChangeListener() { // from class: com.google.android.material.carousel.CarouselLayoutManager$$ExternalSyntheticLambda0
             @Override // android.view.View.OnLayoutChangeListener
             public final void onLayoutChange(View view, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9) {
-                final CarouselLayoutManager carouselLayoutManager = CarouselLayoutManager.this;
+                final CarouselLayoutManager carouselLayoutManager = this.f$0;
                 if (i2 == i6 && i3 == i7 && i4 == i8 && i5 == i9) {
                     return;
                 }
                 view.post(new Runnable() { // from class: com.google.android.material.carousel.CarouselLayoutManager$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        CarouselLayoutManager.this.requestLayout();
+                        carouselLayoutManager.requestLayout();
                     }
                 });
             }
@@ -573,14 +492,14 @@ public class CarouselLayoutManager extends RecyclerView.LayoutManager implements
         this.recyclerViewSizeChangeListener = new View.OnLayoutChangeListener() { // from class: com.google.android.material.carousel.CarouselLayoutManager$$ExternalSyntheticLambda0
             @Override // android.view.View.OnLayoutChangeListener
             public final void onLayoutChange(View view, int i22, int i3, int i4, int i5, int i6, int i7, int i8, int i9) {
-                final CarouselLayoutManager carouselLayoutManager = CarouselLayoutManager.this;
+                final CarouselLayoutManager carouselLayoutManager = this.f$0;
                 if (i22 == i6 && i3 == i7 && i4 == i8 && i5 == i9) {
                     return;
                 }
                 view.post(new Runnable() { // from class: com.google.android.material.carousel.CarouselLayoutManager$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        CarouselLayoutManager.this.requestLayout();
+                        carouselLayoutManager.requestLayout();
                     }
                 });
             }
@@ -588,11 +507,11 @@ public class CarouselLayoutManager extends RecyclerView.LayoutManager implements
         this.carouselStrategy = new MultiBrowseCarouselStrategy();
         requestLayout();
         if (attributeSet != null) {
-            TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.Carousel);
-            obtainStyledAttributes.getInt(0, 0);
+            TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.Carousel);
+            typedArrayObtainStyledAttributes.getInt(0, 0);
             requestLayout();
-            setOrientation(obtainStyledAttributes.getInt(0, 0));
-            obtainStyledAttributes.recycle();
+            setOrientation(typedArrayObtainStyledAttributes.getInt(0, 0));
+            typedArrayObtainStyledAttributes.recycle();
         }
     }
 

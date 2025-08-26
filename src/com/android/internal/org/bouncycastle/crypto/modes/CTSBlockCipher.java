@@ -35,13 +35,13 @@ public class CTSBlockCipher extends DefaultBufferedBlockCipher {
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.DefaultBufferedBlockCipher, com.android.internal.org.bouncycastle.crypto.BufferedBlockCipher
-    public int processByte(byte b, byte[] bArr, int i) throws DataLengthException, IllegalStateException {
+    public int processByte(byte b, byte[] bArr, int i) throws IllegalStateException, DataLengthException {
         int i2 = 0;
         if (this.bufOff == this.buf.length) {
-            int processBlock = this.cipher.processBlock(this.buf, 0, bArr, i);
+            int iProcessBlock = this.cipher.processBlock(this.buf, 0, bArr, i);
             System.arraycopy(this.buf, this.blockSize, this.buf, 0, this.blockSize);
             this.bufOff = this.blockSize;
-            i2 = processBlock;
+            i2 = iProcessBlock;
         }
         byte[] bArr2 = this.buf;
         int i3 = this.bufOff;
@@ -51,7 +51,7 @@ public class CTSBlockCipher extends DefaultBufferedBlockCipher {
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.DefaultBufferedBlockCipher, com.android.internal.org.bouncycastle.crypto.BufferedBlockCipher
-    public int processBytes(byte[] bArr, int i, int i2, byte[] bArr2, int i3) throws DataLengthException, IllegalStateException {
+    public int processBytes(byte[] bArr, int i, int i2, byte[] bArr2, int i3) throws IllegalStateException, DataLengthException {
         if (i2 < 0) {
             throw new IllegalArgumentException("Can't have a negative input length!");
         }
@@ -64,19 +64,19 @@ public class CTSBlockCipher extends DefaultBufferedBlockCipher {
         int i4 = 0;
         if (i2 > length) {
             System.arraycopy(bArr, i, this.buf, this.bufOff, length);
-            int processBlock = this.cipher.processBlock(this.buf, 0, bArr2, i3);
+            int iProcessBlock = this.cipher.processBlock(this.buf, 0, bArr2, i3);
             System.arraycopy(this.buf, blockSize, this.buf, 0, blockSize);
             this.bufOff = blockSize;
             i2 -= length;
             i += length;
             while (i2 > blockSize) {
                 System.arraycopy(bArr, i, this.buf, this.bufOff, blockSize);
-                processBlock += this.cipher.processBlock(this.buf, 0, bArr2, i3 + processBlock);
+                iProcessBlock += this.cipher.processBlock(this.buf, 0, bArr2, i3 + iProcessBlock);
                 System.arraycopy(this.buf, blockSize, this.buf, 0, blockSize);
                 i2 -= blockSize;
                 i += blockSize;
             }
-            i4 = processBlock;
+            i4 = iProcessBlock;
         }
         System.arraycopy(bArr, i, this.buf, this.bufOff, i2);
         this.bufOff += i2;
@@ -84,7 +84,7 @@ public class CTSBlockCipher extends DefaultBufferedBlockCipher {
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.DefaultBufferedBlockCipher, com.android.internal.org.bouncycastle.crypto.BufferedBlockCipher
-    public int doFinal(byte[] bArr, int i) throws DataLengthException, IllegalStateException, InvalidCipherTextException {
+    public int doFinal(byte[] bArr, int i) throws IllegalStateException, DataLengthException, InvalidCipherTextException {
         if (this.bufOff + i > bArr.length) {
             throw new OutputLengthException("output buffer to small in doFinal");
         }

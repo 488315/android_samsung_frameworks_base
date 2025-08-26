@@ -44,9 +44,9 @@ public class FilterContext {
     }
 
     public synchronized void storeFrame(String str, Frame frame) {
-        Frame fetchFrame = fetchFrame(str);
-        if (fetchFrame != null) {
-            fetchFrame.release();
+        Frame frameFetchFrame = fetchFrame(str);
+        if (frameFetchFrame != null) {
+            frameFetchFrame.release();
         }
         frame.onFrameStore();
         this.mStoredFrames.put(str, frame.retain());

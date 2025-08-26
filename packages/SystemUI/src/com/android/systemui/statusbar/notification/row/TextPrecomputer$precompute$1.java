@@ -4,7 +4,6 @@ import android.text.Spannable;
 import android.util.Log;
 import android.widget.TextView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class TextPrecomputer$precompute$1 implements Runnable {
     public final /* synthetic */ boolean $logException;

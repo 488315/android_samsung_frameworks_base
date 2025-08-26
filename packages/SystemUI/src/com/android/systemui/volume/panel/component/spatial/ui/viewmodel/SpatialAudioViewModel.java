@@ -8,13 +8,17 @@ import com.android.systemui.common.shared.model.Icon;
 import com.android.systemui.volume.panel.component.button.ui.viewmodel.ButtonViewModel;
 import com.android.systemui.volume.panel.component.spatial.domain.SpatialAudioAvailabilityCriteria;
 import com.android.systemui.volume.panel.component.spatial.domain.interactor.SpatialAudioComponentInteractor;
+import com.android.systemui.volume.panel.component.spatial.domain.model.SpatialAudioAvailabilityModel;
 import com.android.systemui.volume.panel.component.spatial.domain.model.SpatialAudioEnabledModel;
 import com.android.systemui.volume.panel.ui.VolumePanelUiEvent;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.collections.EmptyList;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
+import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.Flow;
@@ -25,7 +29,6 @@ import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.SharingStarted;
 import kotlinx.coroutines.flow.StartedEagerly;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SpatialAudioViewModel {
     public final Context context;
@@ -37,6 +40,49 @@ public final class SpatialAudioViewModel {
     public final ReadonlyStateFlow spatialAudioButtons;
     public final Icon.Resource spatialSpeakerIcon = new Icon.Resource(R.drawable.ic_spatial_speaker, null);
     public final UiEventLogger uiEventLogger;
+
+    /* renamed from: com.android.systemui.volume.panel.component.spatial.ui.viewmodel.SpatialAudioViewModel$setEnabled$1, reason: invalid class name */
+    final class AnonymousClass1 extends SuspendLambda implements Function2 {
+        final /* synthetic */ SpatialAudioEnabledModel $model;
+        int label;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public AnonymousClass1(SpatialAudioEnabledModel spatialAudioEnabledModel, Continuation continuation) {
+            super(2, continuation);
+            this.$model = spatialAudioEnabledModel;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return SpatialAudioViewModel.this.new AnonymousClass1(this.$model, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((AnonymousClass1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                SpatialAudioComponentInteractor spatialAudioComponentInteractor = SpatialAudioViewModel.this.interactor;
+                SpatialAudioEnabledModel spatialAudioEnabledModel = this.$model;
+                this.label = 1;
+                if (spatialAudioComponentInteractor.setEnabled(spatialAudioEnabledModel, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            return Unit.INSTANCE;
+        }
+    }
 
     public SpatialAudioViewModel(Context context, CoroutineScope coroutineScope, SpatialAudioAvailabilityCriteria spatialAudioAvailabilityCriteria, SpatialAudioComponentInteractor spatialAudioComponentInteractor, UiEventLogger uiEventLogger) {
         this.context = context;
@@ -52,7 +98,6 @@ public final class SpatialAudioViewModel {
         this.spatialAudioButton = FlowKt.stateIn(flowKt__ZipKt$combine$$inlined$unsafeFlow$1, coroutineScope, startedEagerly, null);
         this.shouldUsePopup = FlowKt.stateIn(new Flow() { // from class: com.android.systemui.volume.panel.component.spatial.ui.viewmodel.SpatialAudioViewModel$special$$inlined$map$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.volume.panel.component.spatial.ui.viewmodel.SpatialAudioViewModel$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -79,66 +124,46 @@ public final class SpatialAudioViewModel {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.volume.panel.component.spatial.ui.viewmodel.SpatialAudioViewModel$special$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.volume.panel.component.spatial.ui.viewmodel.SpatialAudioViewModel$special$$inlined$map$1$2$1 r0 = (com.android.systemui.volume.panel.component.spatial.ui.viewmodel.SpatialAudioViewModel$special$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.volume.panel.component.spatial.ui.viewmodel.SpatialAudioViewModel$special$$inlined$map$1$2$1 r0 = new com.android.systemui.volume.panel.component.spatial.ui.viewmodel.SpatialAudioViewModel$special$$inlined$map$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L45
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        com.android.systemui.volume.panel.component.spatial.domain.model.SpatialAudioAvailabilityModel r5 = (com.android.systemui.volume.panel.component.spatial.domain.model.SpatialAudioAvailabilityModel) r5
-                        boolean r5 = r5 instanceof com.android.systemui.volume.panel.component.spatial.domain.model.SpatialAudioAvailabilityModel.HeadTracking
-                        java.lang.Boolean r5 = java.lang.Boolean.valueOf(r5)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L45
-                        return r1
-                    L45:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.volume.panel.component.spatial.ui.viewmodel.SpatialAudioViewModel$special$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        Boolean boolValueOf = Boolean.valueOf(((SpatialAudioAvailabilityModel) obj) instanceof SpatialAudioAvailabilityModel.HeadTracking);
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(boolValueOf, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = readonlyStateFlow2.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         }, coroutineScope, startedEagerly, Boolean.FALSE);
         this.isAvailable = FlowKt.stateIn(spatialAudioAvailabilityCriteria.isAvailable(), coroutineScope, startedEagerly, Boolean.TRUE);
@@ -172,6 +197,6 @@ public final class SpatialAudioViewModel {
 
     public final void setEnabled(SpatialAudioEnabledModel spatialAudioEnabledModel) {
         this.uiEventLogger.logWithPosition(VolumePanelUiEvent.VOLUME_PANEL_SPATIAL_AUDIO_TOGGLE_CLICKED, 0, (String) null, Intrinsics.areEqual(spatialAudioEnabledModel, SpatialAudioEnabledModel.Disabled.INSTANCE) ? 0 : Intrinsics.areEqual(spatialAudioEnabledModel, SpatialAudioEnabledModel.SpatialAudioEnabled.Companion) ? 1 : Intrinsics.areEqual(spatialAudioEnabledModel, SpatialAudioEnabledModel.HeadTrackingEnabled.INSTANCE) ? 2 : -1);
-        CoroutineTracingKt.launchTraced$default(this.scope, null, null, new SpatialAudioViewModel$setEnabled$1(this, spatialAudioEnabledModel, null), 7);
+        CoroutineTracingKt.launchTraced$default(this.scope, null, null, new AnonymousClass1(spatialAudioEnabledModel, null), 7);
     }
 }

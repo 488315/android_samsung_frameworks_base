@@ -36,13 +36,13 @@ public class ConfirmUserCreationActivity extends AlertActivity implements Dialog
         this.mAccountType = intent.getStringExtra(UserManager.EXTRA_USER_ACCOUNT_TYPE);
         this.mAccountOptions = (PersistableBundle) intent.getParcelableExtra(UserManager.EXTRA_USER_ACCOUNT_OPTIONS, PersistableBundle.class);
         this.mUserManager = (UserManager) getSystemService(UserManager.class);
-        String checkUserCreationRequirements = checkUserCreationRequirements();
-        if (checkUserCreationRequirements == null) {
+        String strCheckUserCreationRequirements = checkUserCreationRequirements();
+        if (strCheckUserCreationRequirements == null) {
             finish();
             return;
         }
         AlertController.AlertParams alertParams = this.mAlertParams;
-        alertParams.mMessage = checkUserCreationRequirements;
+        alertParams.mMessage = strCheckUserCreationRequirements;
         alertParams.mPositiveButtonText = getString(17039370);
         alertParams.mPositiveButtonListener = this;
         if (this.mCanProceed) {
@@ -63,13 +63,13 @@ public class ConfirmUserCreationActivity extends AlertActivity implements Dialog
             boolean z = false;
             ApplicationInfo applicationInfo = getPackageManager().getApplicationInfo(callingPackage, 0);
             boolean z2 = this.mUserManager.hasUserRestriction(UserManager.DISALLOW_ADD_USER) || !this.mUserManager.isAdminUser();
-            boolean canAddMoreUsers = this.mUserManager.canAddMoreUsers("android.os.usertype.full.SECONDARY");
+            boolean zCanAddMoreUsers = this.mUserManager.canAddMoreUsers("android.os.usertype.full.SECONDARY");
             Account account = new Account(this.mAccountName, this.mAccountType);
             if (this.mAccountName != null && this.mAccountType != null && (AccountManager.get(this).someUserHasAccount(account) | this.mUserManager.someUserHasSeedAccount(this.mAccountName, this.mAccountType))) {
                 z = true;
             }
             this.mCanProceed = true;
-            String charSequence = applicationInfo.loadLabel(getPackageManager()).toString();
+            String string = applicationInfo.loadLabel(getPackageManager()).toString();
             if (z2) {
                 setResult(1);
                 return null;
@@ -79,14 +79,14 @@ public class ConfirmUserCreationActivity extends AlertActivity implements Dialog
                 Log.i(TAG, "User properties must not exceed their character limits");
                 return null;
             }
-            if (!canAddMoreUsers) {
+            if (!zCanAddMoreUsers) {
                 setResult(2);
                 return null;
             }
             if (z) {
-                return getString(R.string.user_creation_account_exists, charSequence, this.mAccountName);
+                return getString(R.string.user_creation_account_exists, string, this.mAccountName);
             }
-            return getString(R.string.user_creation_adding, charSequence, this.mAccountName);
+            return getString(R.string.user_creation_adding, string, this.mAccountName);
         } catch (PackageManager.NameNotFoundException unused) {
             throw new SecurityException("Cannot find the calling package");
         }
@@ -98,13 +98,13 @@ public class ConfirmUserCreationActivity extends AlertActivity implements Dialog
         if (i == -1 && this.mCanProceed && this.mIsFirstClick) {
             this.mIsFirstClick = false;
             Log.i(TAG, "Ok, creating user");
-            UserInfo createUser = this.mUserManager.createUser(this.mUserName, "android.os.usertype.full.SECONDARY", 0);
-            if (createUser == null) {
+            UserInfo userInfoCreateUser = this.mUserManager.createUser(this.mUserName, "android.os.usertype.full.SECONDARY", 0);
+            if (userInfoCreateUser == null) {
                 Log.e(TAG, "Couldn't create user");
                 finish();
                 return;
             } else {
-                this.mUserManager.setSeedAccountData(createUser.id, this.mAccountName, this.mAccountType, this.mAccountOptions);
+                this.mUserManager.setSeedAccountData(userInfoCreateUser.id, this.mAccountName, this.mAccountType, this.mAccountOptions);
                 setResult(-1);
             }
         }

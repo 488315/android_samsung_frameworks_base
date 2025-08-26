@@ -2,7 +2,6 @@ package androidx.constraintlayout.core;
 
 import java.util.Arrays;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SolverVariable implements Comparable {
     public float computedValue;
@@ -19,7 +18,6 @@ public class SolverVariable implements Comparable {
     public int strength;
     public int usageInRowCount;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum Type {
         UNRESTRICTED,
         /* JADX INFO: Fake field, exist only in values array */

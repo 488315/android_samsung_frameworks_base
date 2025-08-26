@@ -93,9 +93,9 @@ public interface ISuspendControlServiceInternal extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISuspendControlServiceInternal.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISuspendControlServiceInternal)) {
-                return (ISuspendControlServiceInternal) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISuspendControlServiceInternal.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISuspendControlServiceInternal)) {
+                return (ISuspendControlServiceInternal) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -111,14 +111,14 @@ public interface ISuspendControlServiceInternal extends IInterface {
             }
             switch (i) {
                 case 1:
-                    boolean enableAutosuspend = enableAutosuspend(parcel.readStrongBinder());
+                    boolean zEnableAutosuspend = enableAutosuspend(parcel.readStrongBinder());
                     parcel2.writeNoException();
-                    parcel2.writeInt(enableAutosuspend ? 1 : 0);
+                    parcel2.writeInt(zEnableAutosuspend ? 1 : 0);
                     return true;
                 case 2:
-                    boolean forceSuspend = forceSuspend();
+                    boolean zForceSuspend = forceSuspend();
                     parcel2.writeNoException();
-                    parcel2.writeInt(forceSuspend ? 1 : 0);
+                    parcel2.writeInt(zForceSuspend ? 1 : 0);
                     return true;
                 case 3:
                     WakeLockInfo[] wakeLockStats = getWakeLockStats();
@@ -163,93 +163,93 @@ public interface ISuspendControlServiceInternal extends IInterface {
 
             @Override // android.system.suspend.internal.ISuspendControlServiceInternal
             public boolean enableAutosuspend(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISuspendControlServiceInternal.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt() != 0;
+                    parcelObtain.writeInterfaceToken(ISuspendControlServiceInternal.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt() != 0;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.system.suspend.internal.ISuspendControlServiceInternal
             public boolean forceSuspend() throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISuspendControlServiceInternal.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt() != 0;
+                    parcelObtain.writeInterfaceToken(ISuspendControlServiceInternal.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt() != 0;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.system.suspend.internal.ISuspendControlServiceInternal
             public WakeLockInfo[] getWakeLockStats() throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISuspendControlServiceInternal.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (WakeLockInfo[]) obtain2.createTypedArray(WakeLockInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(ISuspendControlServiceInternal.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (WakeLockInfo[]) parcelObtain2.createTypedArray(WakeLockInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.system.suspend.internal.ISuspendControlServiceInternal
             public WakeLockInfo[] getWakeLockStatsFiltered(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISuspendControlServiceInternal.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (WakeLockInfo[]) obtain2.createTypedArray(WakeLockInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(ISuspendControlServiceInternal.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (WakeLockInfo[]) parcelObtain2.createTypedArray(WakeLockInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.system.suspend.internal.ISuspendControlServiceInternal
             public WakeupInfo[] getWakeupStats() throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISuspendControlServiceInternal.DESCRIPTOR);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (WakeupInfo[]) obtain2.createTypedArray(WakeupInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(ISuspendControlServiceInternal.DESCRIPTOR);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (WakeupInfo[]) parcelObtain2.createTypedArray(WakeupInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.system.suspend.internal.ISuspendControlServiceInternal
             public SuspendInfo getSuspendStats() throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISuspendControlServiceInternal.DESCRIPTOR);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (SuspendInfo) obtain2.readTypedObject(SuspendInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(ISuspendControlServiceInternal.DESCRIPTOR);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (SuspendInfo) parcelObtain2.readTypedObject(SuspendInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

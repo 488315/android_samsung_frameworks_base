@@ -22,7 +22,6 @@ import kotlin.time.DurationUnit;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class FromOccludedTransitionInteractor extends TransitionInteractor {
     public static final Companion Companion = new Companion(null);
@@ -39,7 +38,6 @@ public final class FromOccludedTransitionInteractor extends TransitionInteractor
     public final CoroutineScope scope;
     public final KeyguardTransitionRepository transitionRepository;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -49,7 +47,6 @@ public final class FromOccludedTransitionInteractor extends TransitionInteractor
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -96,8 +93,8 @@ public final class FromOccludedTransitionInteractor extends TransitionInteractor
     public static final Object access$startTransitionToLockscreenOrHub(FromOccludedTransitionInteractor fromOccludedTransitionInteractor, boolean z, boolean z2, Continuation continuation) {
         fromOccludedTransitionInteractor.getClass();
         if (!z && !z2) {
-            Object startTransitionTo$default = TransitionInteractor.startTransitionTo$default(fromOccludedTransitionInteractor, KeyguardState.LOCKSCREEN, null, null, null, continuation, 14);
-            return startTransitionTo$default == CoroutineSingletons.COROUTINE_SUSPENDED ? startTransitionTo$default : Unit.INSTANCE;
+            Object objStartTransitionTo$default = TransitionInteractor.startTransitionTo$default(fromOccludedTransitionInteractor, KeyguardState.LOCKSCREEN, null, null, null, continuation, 14);
+            return objStartTransitionTo$default == CoroutineSingletons.COROUTINE_SUSPENDED ? objStartTransitionTo$default : Unit.INSTANCE;
         }
         SceneKey sceneKey = CommunalScenes.Communal;
         CommunalTransitionKeys.INSTANCE.getClass();
@@ -107,22 +104,22 @@ public final class FromOccludedTransitionInteractor extends TransitionInteractor
 
     @Override // com.android.systemui.keyguard.domain.interactor.TransitionInteractor
     public final ValueAnimator getDefaultAnimatorForTransitionsToState(KeyguardState keyguardState) {
-        long j;
+        long duration;
         ValueAnimator valueAnimator = new ValueAnimator();
         int[] iArr = WhenMappings.$EnumSwitchMapping$0;
         valueAnimator.setInterpolator(iArr[keyguardState.ordinal()] == 1 ? Interpolators.FAST_OUT_SLOW_IN : Interpolators.LINEAR);
         int i = iArr[keyguardState.ordinal()];
         if (i == 1) {
-            j = TO_ALTERNATE_BOUNCER_DURATION;
+            duration = TO_ALTERNATE_BOUNCER_DURATION;
         } else if (i == 2) {
-            j = TO_GLANCEABLE_HUB_DURATION;
+            duration = TO_GLANCEABLE_HUB_DURATION;
         } else if (i != 3) {
-            j = DEFAULT_DURATION;
+            duration = DEFAULT_DURATION;
         } else {
             Duration.Companion companion = Duration.Companion;
-            j = DurationKt.toDuration(0, DurationUnit.MILLISECONDS);
+            duration = DurationKt.toDuration(0, DurationUnit.MILLISECONDS);
         }
-        valueAnimator.setDuration(Duration.m3437getInWholeMillisecondsimpl(j));
+        valueAnimator.setDuration(Duration.m3457getInWholeMillisecondsimpl(duration));
         return valueAnimator;
     }
 

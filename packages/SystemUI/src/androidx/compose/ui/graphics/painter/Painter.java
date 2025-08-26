@@ -13,7 +13,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class Painter {
     public ColorFilter colorFilter;
@@ -30,8 +29,8 @@ public abstract class Painter {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                Painter.this.onDraw((DrawScope) obj);
+            public final Object mo781invoke(Object obj) {
+                this.this$0.onDraw((DrawScope) obj);
                 return Unit.INSTANCE;
             }
         };
@@ -46,7 +45,7 @@ public abstract class Painter {
     }
 
     /* renamed from: draw-x_KDEd0, reason: not valid java name */
-    public final void m562drawx_KDEd0(DrawScope drawScope, long j, float f, ColorFilter colorFilter) {
+    public final void m564drawx_KDEd0(DrawScope drawScope, long j, float f, ColorFilter colorFilter) {
         if (this.alpha != f) {
             if (!applyAlpha(f)) {
                 if (f == 1.0f) {
@@ -93,20 +92,20 @@ public abstract class Painter {
             this.layoutDirection = layoutDirection;
         }
         int i = (int) (j >> 32);
-        float intBitsToFloat = Float.intBitsToFloat((int) (drawScope.mo545getSizeNHjbRc() >> 32)) - Float.intBitsToFloat(i);
+        float fIntBitsToFloat = Float.intBitsToFloat((int) (drawScope.mo547getSizeNHjbRc() >> 32)) - Float.intBitsToFloat(i);
         int i2 = (int) (j & 4294967295L);
-        float intBitsToFloat2 = Float.intBitsToFloat((int) (drawScope.mo545getSizeNHjbRc() & 4294967295L)) - Float.intBitsToFloat(i2);
-        drawScope.getDrawContext().transform.inset(0.0f, 0.0f, intBitsToFloat, intBitsToFloat2);
+        float fIntBitsToFloat2 = Float.intBitsToFloat((int) (drawScope.mo547getSizeNHjbRc() & 4294967295L)) - Float.intBitsToFloat(i2);
+        drawScope.getDrawContext().transform.inset(0.0f, 0.0f, fIntBitsToFloat, fIntBitsToFloat2);
         if (f > 0.0f) {
             try {
                 if (Float.intBitsToFloat(i) > 0.0f && Float.intBitsToFloat(i2) > 0.0f) {
                     if (this.useLayer) {
                         Offset.Companion.getClass();
-                        float intBitsToFloat3 = Float.intBitsToFloat(i);
-                        float intBitsToFloat4 = Float.intBitsToFloat(i2);
-                        long floatToRawIntBits = Float.floatToRawIntBits(intBitsToFloat3);
+                        float fIntBitsToFloat3 = Float.intBitsToFloat(i);
+                        float fIntBitsToFloat4 = Float.intBitsToFloat(i2);
+                        long jFloatToRawIntBits = Float.floatToRawIntBits(fIntBitsToFloat3);
                         Size.Companion companion = Size.Companion;
-                        Rect m411Recttz77jQw = RectKt.m411Recttz77jQw(0L, (Float.floatToRawIntBits(intBitsToFloat4) & 4294967295L) | (floatToRawIntBits << 32));
+                        Rect rectM413Recttz77jQw = RectKt.m413Recttz77jQw(0L, (Float.floatToRawIntBits(fIntBitsToFloat4) & 4294967295L) | (jFloatToRawIntBits << 32));
                         Canvas canvas = drawScope.getDrawContext().getCanvas();
                         AndroidPaint androidPaint5 = this.layerPaint;
                         if (androidPaint5 == null) {
@@ -114,7 +113,7 @@ public abstract class Painter {
                             this.layerPaint = androidPaint5;
                         }
                         try {
-                            canvas.saveLayer(m411Recttz77jQw, androidPaint5);
+                            canvas.saveLayer(rectM413Recttz77jQw, androidPaint5);
                             onDraw(drawScope);
                             canvas.restore();
                         } catch (Throwable th) {
@@ -126,15 +125,15 @@ public abstract class Painter {
                     }
                 }
             } catch (Throwable th2) {
-                drawScope.getDrawContext().transform.inset(-0.0f, -0.0f, -intBitsToFloat, -intBitsToFloat2);
+                drawScope.getDrawContext().transform.inset(-0.0f, -0.0f, -fIntBitsToFloat, -fIntBitsToFloat2);
                 throw th2;
             }
         }
-        drawScope.getDrawContext().transform.inset(-0.0f, -0.0f, -intBitsToFloat, -intBitsToFloat2);
+        drawScope.getDrawContext().transform.inset(-0.0f, -0.0f, -fIntBitsToFloat, -fIntBitsToFloat2);
     }
 
     /* renamed from: getIntrinsicSize-NH-jbRc */
-    public abstract long mo561getIntrinsicSizeNHjbRc();
+    public abstract long mo563getIntrinsicSizeNHjbRc();
 
     public abstract void onDraw(DrawScope drawScope);
 

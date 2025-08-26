@@ -51,9 +51,9 @@ public interface IDspHotwordDetectionCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IDspHotwordDetectionCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IDspHotwordDetectionCallback)) {
-                return (IDspHotwordDetectionCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IDspHotwordDetectionCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IDspHotwordDetectionCallback)) {
+                return (IDspHotwordDetectionCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -114,25 +114,25 @@ public interface IDspHotwordDetectionCallback extends IInterface {
 
             @Override // android.service.voice.IDspHotwordDetectionCallback
             public void onDetected(HotwordDetectedResult hotwordDetectedResult) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDspHotwordDetectionCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(hotwordDetectedResult, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDspHotwordDetectionCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(hotwordDetectedResult, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.voice.IDspHotwordDetectionCallback
             public void onRejected(HotwordRejectedResult hotwordRejectedResult) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDspHotwordDetectionCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(hotwordRejectedResult, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDspHotwordDetectionCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(hotwordRejectedResult, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

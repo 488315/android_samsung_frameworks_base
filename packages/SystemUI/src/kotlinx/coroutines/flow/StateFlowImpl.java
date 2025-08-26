@@ -4,13 +4,18 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 import kotlin.Result;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.CoroutineContext;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.intrinsics.IntrinsicsKt__IntrinsicsJvmKt;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
 import kotlin.jvm.internal.Intrinsics;
 import kotlinx.atomicfu.AtomicFU;
 import kotlinx.atomicfu.AtomicRef;
 import kotlinx.coroutines.CancellableContinuationImpl;
+import kotlinx.coroutines.Job;
 import kotlinx.coroutines.channels.BufferOverflow;
 import kotlinx.coroutines.flow.internal.AbstractSharedFlow;
 import kotlinx.coroutines.flow.internal.AbstractSharedFlowSlot;
@@ -18,42 +23,47 @@ import kotlinx.coroutines.flow.internal.FusibleFlow;
 import kotlinx.coroutines.flow.internal.NullSurrogateKt;
 import kotlinx.coroutines.internal.Symbol;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class StateFlowImpl extends AbstractSharedFlow implements MutableStateFlow, CancellableFlow, FusibleFlow {
     public final AtomicRef _state;
     public int sequence;
 
+    /* renamed from: kotlinx.coroutines.flow.StateFlowImpl$collect$1, reason: invalid class name */
+    final class AnonymousClass1 extends ContinuationImpl {
+        Object L$0;
+        Object L$1;
+        Object L$2;
+        Object L$3;
+        Object L$4;
+        int label;
+        /* synthetic */ Object result;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return StateFlowImpl.this.collect(null, this);
+        }
+    }
+
     public StateFlowImpl(Object obj) {
         this._state = AtomicFU.atomic(obj);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:23:0x00bf, code lost:
-    
-        r2 = r2;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:24:0x00c3, code lost:
-    
-        if (r14.equals(r8) != false) goto L54;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:34:0x0126, code lost:
-    
-        if (r8 == r1) goto L65;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:37:0x00ab, code lost:
-    
-        if (kotlin.Unit.INSTANCE == r1) goto L65;
-     */
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x00b1 A[Catch: all -> 0x0076, TryCatch #1 {all -> 0x0076, blocks: (B:13:0x00ab, B:15:0x00b1, B:18:0x00b8, B:19:0x00bc, B:23:0x00bf, B:25:0x00e4, B:28:0x00f4, B:30:0x0114, B:31:0x011b, B:36:0x0124, B:38:0x00c5, B:41:0x00cc, B:11:0x0072, B:12:0x009c, B:61:0x0085, B:63:0x0089), top: B:7:0x0022 }] */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x00f3  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x00f4 A[Catch: all -> 0x0076, TryCatch #1 {all -> 0x0076, blocks: (B:13:0x00ab, B:15:0x00b1, B:18:0x00b8, B:19:0x00bc, B:23:0x00bf, B:25:0x00e4, B:28:0x00f4, B:30:0x0114, B:31:0x011b, B:36:0x0124, B:38:0x00c5, B:41:0x00cc, B:11:0x0072, B:12:0x009c, B:61:0x0085, B:63:0x0089), top: B:7:0x0022 }] */
-    /* JADX WARN: Removed duplicated region for block: B:40:0x00c9  */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x00de  */
-    /* JADX WARN: Removed duplicated region for block: B:44:0x00df  */
-    /* JADX WARN: Removed duplicated region for block: B:46:0x00cb  */
-    /* JADX WARN: Removed duplicated region for block: B:60:0x007b  */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0024  */
+    /* JADX WARN: Removed duplicated region for block: B:37:0x00b1 A[Catch: all -> 0x0076, TryCatch #1 {all -> 0x0076, blocks: (B:35:0x00ab, B:37:0x00b1, B:40:0x00b8, B:41:0x00bc, B:43:0x00bf, B:54:0x00e4, B:57:0x00f4, B:59:0x0114, B:60:0x011b, B:63:0x0124, B:45:0x00c5, B:49:0x00cc, B:24:0x0072, B:34:0x009c, B:29:0x0085, B:31:0x0089), top: B:69:0x0022 }] */
+    /* JADX WARN: Removed duplicated region for block: B:43:0x00bf A[Catch: all -> 0x0076, TryCatch #1 {all -> 0x0076, blocks: (B:35:0x00ab, B:37:0x00b1, B:40:0x00b8, B:41:0x00bc, B:43:0x00bf, B:54:0x00e4, B:57:0x00f4, B:59:0x0114, B:60:0x011b, B:63:0x0124, B:45:0x00c5, B:49:0x00cc, B:24:0x0072, B:34:0x009c, B:29:0x0085, B:31:0x0089), top: B:69:0x0022 }] */
+    /* JADX WARN: Removed duplicated region for block: B:47:0x00c9  */
+    /* JADX WARN: Removed duplicated region for block: B:48:0x00cb  */
+    /* JADX WARN: Removed duplicated region for block: B:51:0x00de  */
+    /* JADX WARN: Removed duplicated region for block: B:52:0x00df  */
+    /* JADX WARN: Removed duplicated region for block: B:56:0x00f3  */
+    /* JADX WARN: Removed duplicated region for block: B:57:0x00f4 A[Catch: all -> 0x0076, TryCatch #1 {all -> 0x0076, blocks: (B:35:0x00ab, B:37:0x00b1, B:40:0x00b8, B:41:0x00bc, B:43:0x00bf, B:54:0x00e4, B:57:0x00f4, B:59:0x0114, B:60:0x011b, B:63:0x0124, B:45:0x00c5, B:49:0x00cc, B:24:0x0072, B:34:0x009c, B:29:0x0085, B:31:0x0089), top: B:69:0x0022 }] */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /* JADX WARN: Type inference failed for: r2v0, types: [int] */
     /* JADX WARN: Type inference failed for: r2v1 */
     /* JADX WARN: Type inference failed for: r2v12, types: [kotlinx.coroutines.flow.StateFlowSlot] */
@@ -67,18 +77,208 @@ public final class StateFlowImpl extends AbstractSharedFlow implements MutableSt
     /* JADX WARN: Type inference failed for: r2v7, types: [java.lang.Object] */
     /* JADX WARN: Type inference failed for: r2v8 */
     /* JADX WARN: Type inference failed for: r8v0, types: [kotlinx.coroutines.flow.internal.AbstractSharedFlow] */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:27:0x00f3 -> B:13:0x00ab). Please report as a decompilation issue!!! */
+    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:56:0x00f3 -> B:35:0x00ab). Please report as a decompilation issue!!! */
     @Override // kotlinx.coroutines.flow.Flow
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object collect(kotlinx.coroutines.flow.FlowCollector r13, kotlin.coroutines.Continuation r14) {
-        /*
-            Method dump skipped, instructions count: 301
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: kotlinx.coroutines.flow.StateFlowImpl.collect(kotlinx.coroutines.flow.FlowCollector, kotlin.coroutines.Continuation):java.lang.Object");
+    public final Object collect(FlowCollector flowCollector, Continuation continuation) throws Throwable {
+        AnonymousClass1 anonymousClass1;
+        ?? r8;
+        Throwable th;
+        Job job;
+        Object obj;
+        StateFlowImpl stateFlowImpl;
+        FlowCollector flowCollector2;
+        StateFlowSlot stateFlowSlot;
+        Object obj2;
+        Object andSet;
+        Object obj3;
+        if (continuation instanceof AnonymousClass1) {
+            anonymousClass1 = (AnonymousClass1) continuation;
+            int i = anonymousClass1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                anonymousClass1.label = i - Integer.MIN_VALUE;
+            } else {
+                anonymousClass1 = new AnonymousClass1(continuation);
+            }
+        }
+        Object obj4 = anonymousClass1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        ?? r2 = anonymousClass1.label;
+        try {
+            if (r2 == 0) {
+                ResultKt.throwOnFailure(obj4);
+                StateFlowSlot stateFlowSlot2 = (StateFlowSlot) allocateSlot();
+                r2 = stateFlowSlot2;
+                if (flowCollector instanceof SubscribedFlowCollector) {
+                    anonymousClass1.L$0 = this;
+                    anonymousClass1.L$1 = flowCollector;
+                    anonymousClass1.L$2 = stateFlowSlot2;
+                    anonymousClass1.label = 1;
+                    r2 = stateFlowSlot2;
+                    if (((SubscribedFlowCollector) flowCollector).onSubscription(anonymousClass1) == coroutineSingletons) {
+                        return coroutineSingletons;
+                    }
+                }
+            } else if (r2 != 1) {
+                try {
+                    if (r2 == 2) {
+                        obj = anonymousClass1.L$4;
+                        job = (Job) anonymousClass1.L$3;
+                        StateFlowSlot stateFlowSlot3 = (StateFlowSlot) anonymousClass1.L$2;
+                        flowCollector2 = (FlowCollector) anonymousClass1.L$1;
+                        stateFlowImpl = (StateFlowImpl) anonymousClass1.L$0;
+                        ResultKt.throwOnFailure(obj4);
+                        stateFlowSlot = stateFlowSlot3;
+                        obj2 = obj;
+                        this = stateFlowImpl;
+                        r2 = stateFlowSlot;
+                        AtomicReference atomicReference = r2._state;
+                        Symbol symbol = StateFlowKt.NONE;
+                        andSet = atomicReference.getAndSet(symbol);
+                        andSet.getClass();
+                        if (andSet != StateFlowKt.PENDING) {
+                        }
+                        Object obj5 = this._state.value;
+                        if (job != null) {
+                        }
+                        if (obj2 != null) {
+                        }
+                        if (obj5 != NullSurrogateKt.NULL) {
+                        }
+                        anonymousClass1.L$0 = this;
+                        anonymousClass1.L$1 = flowCollector2;
+                        anonymousClass1.L$2 = r2;
+                        anonymousClass1.L$3 = job;
+                        anonymousClass1.L$4 = obj5;
+                        anonymousClass1.label = 2;
+                        if (flowCollector2.emit(obj3, anonymousClass1) != coroutineSingletons) {
+                        }
+                    } else {
+                        if (r2 != 3) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        Object obj6 = anonymousClass1.L$4;
+                        job = (Job) anonymousClass1.L$3;
+                        r2 = (StateFlowSlot) anonymousClass1.L$2;
+                        flowCollector2 = (FlowCollector) anonymousClass1.L$1;
+                        StateFlowImpl stateFlowImpl2 = (StateFlowImpl) anonymousClass1.L$0;
+                        ResultKt.throwOnFailure(obj4);
+                        obj2 = obj6;
+                        this = stateFlowImpl2;
+                        Object obj52 = this._state.value;
+                        if (job != null && !job.isActive()) {
+                            throw job.getCancellationException();
+                        }
+                        if (obj2 != null) {
+                            r2 = r2;
+                            if (obj2.equals(obj52)) {
+                                AtomicReference atomicReference2 = r2._state;
+                                Symbol symbol2 = StateFlowKt.NONE;
+                                andSet = atomicReference2.getAndSet(symbol2);
+                                andSet.getClass();
+                                if (andSet != StateFlowKt.PENDING) {
+                                    anonymousClass1.L$0 = this;
+                                    anonymousClass1.L$1 = flowCollector2;
+                                    anonymousClass1.L$2 = r2;
+                                    anonymousClass1.L$3 = job;
+                                    anonymousClass1.L$4 = obj2;
+                                    anonymousClass1.label = 3;
+                                    CancellableContinuationImpl cancellableContinuationImpl = new CancellableContinuationImpl(IntrinsicsKt__IntrinsicsJvmKt.intercepted(anonymousClass1), 1);
+                                    cancellableContinuationImpl.initCancellability();
+                                    if (!r2._state.compareAndSet(symbol2, cancellableContinuationImpl)) {
+                                        int i2 = Result.$r8$clinit;
+                                        cancellableContinuationImpl.resumeWith(Unit.INSTANCE);
+                                    }
+                                    Object result = cancellableContinuationImpl.getResult();
+                                    if (result != CoroutineSingletons.COROUTINE_SUSPENDED) {
+                                        if (Unit.INSTANCE != coroutineSingletons) {
+                                        }
+                                    } else if (result != coroutineSingletons) {
+                                    }
+                                }
+                                Object obj522 = this._state.value;
+                                if (job != null) {
+                                    throw job.getCancellationException();
+                                }
+                                if (obj2 != null) {
+                                }
+                            }
+                            return coroutineSingletons;
+                        }
+                        obj3 = obj522 != NullSurrogateKt.NULL ? null : obj522;
+                        anonymousClass1.L$0 = this;
+                        anonymousClass1.L$1 = flowCollector2;
+                        anonymousClass1.L$2 = r2;
+                        anonymousClass1.L$3 = job;
+                        anonymousClass1.L$4 = obj522;
+                        anonymousClass1.label = 2;
+                        if (flowCollector2.emit(obj3, anonymousClass1) != coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                        stateFlowImpl = this;
+                        obj = obj522;
+                        stateFlowSlot = r2;
+                        obj2 = obj;
+                        this = stateFlowImpl;
+                        r2 = stateFlowSlot;
+                        AtomicReference atomicReference22 = r2._state;
+                        Symbol symbol22 = StateFlowKt.NONE;
+                        andSet = atomicReference22.getAndSet(symbol22);
+                        andSet.getClass();
+                        if (andSet != StateFlowKt.PENDING) {
+                        }
+                        Object obj5222 = this._state.value;
+                        if (job != null) {
+                        }
+                        if (obj2 != null) {
+                        }
+                        if (obj5222 != NullSurrogateKt.NULL) {
+                        }
+                        anonymousClass1.L$0 = this;
+                        anonymousClass1.L$1 = flowCollector2;
+                        anonymousClass1.L$2 = r2;
+                        anonymousClass1.L$3 = job;
+                        anonymousClass1.L$4 = obj5222;
+                        anonymousClass1.label = 2;
+                        if (flowCollector2.emit(obj3, anonymousClass1) != coroutineSingletons) {
+                        }
+                    }
+                } catch (Throwable th2) {
+                    th = th2;
+                    r8.freeSlot(r2);
+                    throw th;
+                }
+            } else {
+                StateFlowSlot stateFlowSlot4 = (StateFlowSlot) anonymousClass1.L$2;
+                flowCollector = (FlowCollector) anonymousClass1.L$1;
+                this = (StateFlowImpl) anonymousClass1.L$0;
+                ResultKt.throwOnFailure(obj4);
+                r2 = stateFlowSlot4;
+            }
+            flowCollector2 = flowCollector;
+            job = (Job) anonymousClass1.getContext().get(Job.Key);
+            obj2 = null;
+            Object obj52222 = this._state.value;
+            if (job != null) {
+            }
+            if (obj2 != null) {
+            }
+            if (obj52222 != NullSurrogateKt.NULL) {
+            }
+            anonymousClass1.L$0 = this;
+            anonymousClass1.L$1 = flowCollector2;
+            anonymousClass1.L$2 = r2;
+            anonymousClass1.L$3 = job;
+            anonymousClass1.L$4 = obj52222;
+            anonymousClass1.label = 2;
+            if (flowCollector2.emit(obj3, anonymousClass1) != coroutineSingletons) {
+            }
+        } catch (Throwable th3) {
+            r8 = this;
+            th = th3;
+        }
     }
 
     @Override // kotlinx.coroutines.flow.MutableStateFlow

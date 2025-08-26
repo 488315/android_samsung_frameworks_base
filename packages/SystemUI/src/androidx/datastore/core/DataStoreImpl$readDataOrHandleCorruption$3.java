@@ -9,7 +9,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Ref$IntRef;
 import kotlin.jvm.internal.Ref$ObjectRef;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class DataStoreImpl$readDataOrHandleCorruption$3 extends SuspendLambda implements Function1 {
     final /* synthetic */ Ref$ObjectRef<Object> $newData;
@@ -33,7 +32,7 @@ final class DataStoreImpl$readDataOrHandleCorruption$3 extends SuspendLambda imp
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
         return ((DataStoreImpl$readDataOrHandleCorruption$3) create((Continuation) obj)).invokeSuspend(Unit.INSTANCE);
     }
 
@@ -55,9 +54,9 @@ final class DataStoreImpl$readDataOrHandleCorruption$3 extends SuspendLambda imp
             Object obj4 = this.$newData.element;
             this.L$0 = ref$IntRef3;
             this.label = 3;
-            Object writeData$datastore_core_release = dataStoreImpl.writeData$datastore_core_release(obj4, true, this);
-            if (writeData$datastore_core_release != coroutineSingletons) {
-                obj2 = writeData$datastore_core_release;
+            Object objWriteData$datastore_core_release = dataStoreImpl.writeData$datastore_core_release(obj4, true, this);
+            if (objWriteData$datastore_core_release != coroutineSingletons) {
+                obj2 = objWriteData$datastore_core_release;
                 ref$IntRef = ref$IntRef3;
             }
         }
@@ -68,33 +67,32 @@ final class DataStoreImpl$readDataOrHandleCorruption$3 extends SuspendLambda imp
             this.L$0 = ref$ObjectRef;
             this.label = 1;
             int i2 = DataStoreImpl.$r8$clinit;
-            Object readDataFromFileOrDefault = dataStoreImpl2.readDataFromFileOrDefault(this);
-            t = readDataFromFileOrDefault;
-            if (readDataFromFileOrDefault == coroutineSingletons) {
-                return coroutineSingletons;
+            Object dataFromFileOrDefault = dataStoreImpl2.readDataFromFileOrDefault(this);
+            t = dataFromFileOrDefault;
+            if (dataFromFileOrDefault == coroutineSingletons) {
             }
-        } else {
-            if (i != 1) {
-                if (i == 2) {
-                    ref$IntRef2 = (Ref$IntRef) this.L$0;
-                    ResultKt.throwOnFailure(obj);
-                    obj3 = obj;
-                    ref$IntRef2.element = ((Number) obj3).intValue();
-                    return Unit.INSTANCE;
-                }
-                if (i != 3) {
-                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
-                }
-                ref$IntRef = (Ref$IntRef) this.L$0;
+            return coroutineSingletons;
+        }
+        if (i != 1) {
+            if (i == 2) {
+                ref$IntRef2 = (Ref$IntRef) this.L$0;
                 ResultKt.throwOnFailure(obj);
-                obj2 = obj;
-                ref$IntRef.element = ((Number) obj2).intValue();
+                obj3 = obj;
+                ref$IntRef2.element = ((Number) obj3).intValue();
                 return Unit.INSTANCE;
             }
-            ref$ObjectRef = (Ref$ObjectRef) this.L$0;
+            if (i != 3) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ref$IntRef = (Ref$IntRef) this.L$0;
             ResultKt.throwOnFailure(obj);
-            t = obj;
+            obj2 = obj;
+            ref$IntRef.element = ((Number) obj2).intValue();
+            return Unit.INSTANCE;
         }
+        ref$ObjectRef = (Ref$ObjectRef) this.L$0;
+        ResultKt.throwOnFailure(obj);
+        t = obj;
         ref$ObjectRef.element = t;
         ref$IntRef2 = this.$version;
         DataStoreImpl dataStoreImpl3 = this.this$0;

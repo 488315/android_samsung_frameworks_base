@@ -17,11 +17,11 @@ public final class Capability {
         Preconditions.checkArgumentNonnegative(size.getWidth(), "maxStreamingSize.getWidth() must be nonnegative");
         Preconditions.checkArgumentNonnegative(size.getHeight(), "maxStreamingSize.getHeight() must be nonnegative");
         this.mMaxStreamingSize = size;
-        if (range.getLower().floatValue() > range.getUpper().floatValue()) {
+        if (((Float) range.getLower()).floatValue() > ((Float) range.getUpper()).floatValue()) {
             throw new IllegalArgumentException("zoomRatioRange.getLower() " + range.getLower() + " is greater than zoomRatioRange.getUpper() " + range.getUpper());
         }
-        Preconditions.checkArgumentPositive(range.getLower().floatValue(), "zoomRatioRange.getLower() must be positive");
-        Preconditions.checkArgumentPositive(range.getUpper().floatValue(), "zoomRatioRange.getUpper() must be positive");
+        Preconditions.checkArgumentPositive(((Float) range.getLower()).floatValue(), "zoomRatioRange.getLower() must be positive");
+        Preconditions.checkArgumentPositive(((Float) range.getUpper()).floatValue(), "zoomRatioRange.getUpper() must be positive");
         this.mZoomRatioRange = range;
     }
 
@@ -54,7 +54,7 @@ public final class Capability {
     }
 
     public int hashCode() {
-        return HashCodeHelpers.hashCode(this.mMode, this.mMaxStreamingSize.getWidth(), this.mMaxStreamingSize.getHeight(), this.mZoomRatioRange.getLower().floatValue(), this.mZoomRatioRange.getUpper().floatValue());
+        return HashCodeHelpers.hashCode(this.mMode, this.mMaxStreamingSize.getWidth(), this.mMaxStreamingSize.getHeight(), ((Float) this.mZoomRatioRange.getLower()).floatValue(), ((Float) this.mZoomRatioRange.getUpper()).floatValue());
     }
 
     public String toString() {

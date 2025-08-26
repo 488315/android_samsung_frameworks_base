@@ -10,17 +10,15 @@ import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class RegionInterceptingFrameLayout extends FrameLayout {
     public final ViewTreeObserver.OnComputeInternalInsetsListener mInsetsListener;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface RegionInterceptableView {
     }
 
     /* renamed from: $r8$lambda$poBU2FDiEZ-WE5dImWPjK06PXco, reason: not valid java name */
-    public static void m996$r8$lambda$poBU2FDiEZWE5dImWPjK06PXco(RegionInterceptingFrameLayout regionInterceptingFrameLayout, ViewTreeObserver.InternalInsetsInfo internalInsetsInfo) {
+    public static void m998$r8$lambda$poBU2FDiEZWE5dImWPjK06PXco(RegionInterceptingFrameLayout regionInterceptingFrameLayout, ViewTreeObserver.InternalInsetsInfo internalInsetsInfo) {
         Region region;
         internalInsetsInfo.setTouchableInsets(3);
         internalInsetsInfo.touchableRegion.setEmpty();
@@ -34,19 +32,19 @@ public class RegionInterceptingFrameLayout extends FrameLayout {
                         region = null;
                     } else {
                         List<Rect> boundingRects = displayCutout.getBoundingRects();
-                        Region obtain = Region.obtain();
+                        Region regionObtain = Region.obtain();
                         if (boundingRects != null) {
                             for (Rect rect : boundingRects) {
                                 if (rect != null && !rect.isEmpty()) {
-                                    obtain.op(rect, Region.Op.UNION);
+                                    regionObtain.op(rect, Region.Op.UNION);
                                 }
                             }
                         }
                         displayCutoutBaseView.getRootView().getLocationOnScreen(displayCutoutBaseView.location);
                         int[] iArr = displayCutoutBaseView.location;
-                        obtain.translate(-iArr[0], -iArr[1]);
-                        obtain.op(displayCutoutBaseView.getRootView().getLeft(), displayCutoutBaseView.getRootView().getTop(), displayCutoutBaseView.getRootView().getRight(), displayCutoutBaseView.getRootView().getBottom(), Region.Op.INTERSECT);
-                        region = obtain;
+                        regionObtain.translate(-iArr[0], -iArr[1]);
+                        regionObtain.op(displayCutoutBaseView.getRootView().getLeft(), displayCutoutBaseView.getRootView().getTop(), displayCutoutBaseView.getRootView().getRight(), displayCutoutBaseView.getRootView().getBottom(), Region.Op.INTERSECT);
+                        region = regionObtain;
                     }
                     if (region != null) {
                         internalInsetsInfo.touchableRegion.op(region, Region.Op.UNION);
@@ -60,7 +58,7 @@ public class RegionInterceptingFrameLayout extends FrameLayout {
         super(context);
         this.mInsetsListener = new ViewTreeObserver.OnComputeInternalInsetsListener() { // from class: com.android.systemui.RegionInterceptingFrameLayout$$ExternalSyntheticLambda0
             public final void onComputeInternalInsets(ViewTreeObserver.InternalInsetsInfo internalInsetsInfo) {
-                RegionInterceptingFrameLayout.m996$r8$lambda$poBU2FDiEZWE5dImWPjK06PXco(RegionInterceptingFrameLayout.this, internalInsetsInfo);
+                RegionInterceptingFrameLayout.m998$r8$lambda$poBU2FDiEZWE5dImWPjK06PXco(this.f$0, internalInsetsInfo);
             }
         };
     }
@@ -81,7 +79,7 @@ public class RegionInterceptingFrameLayout extends FrameLayout {
         super(context, attributeSet);
         this.mInsetsListener = new ViewTreeObserver.OnComputeInternalInsetsListener() { // from class: com.android.systemui.RegionInterceptingFrameLayout$$ExternalSyntheticLambda0
             public final void onComputeInternalInsets(ViewTreeObserver.InternalInsetsInfo internalInsetsInfo) {
-                RegionInterceptingFrameLayout.m996$r8$lambda$poBU2FDiEZWE5dImWPjK06PXco(RegionInterceptingFrameLayout.this, internalInsetsInfo);
+                RegionInterceptingFrameLayout.m998$r8$lambda$poBU2FDiEZWE5dImWPjK06PXco(this.f$0, internalInsetsInfo);
             }
         };
     }
@@ -90,7 +88,7 @@ public class RegionInterceptingFrameLayout extends FrameLayout {
         super(context, attributeSet, i);
         this.mInsetsListener = new ViewTreeObserver.OnComputeInternalInsetsListener() { // from class: com.android.systemui.RegionInterceptingFrameLayout$$ExternalSyntheticLambda0
             public final void onComputeInternalInsets(ViewTreeObserver.InternalInsetsInfo internalInsetsInfo) {
-                RegionInterceptingFrameLayout.m996$r8$lambda$poBU2FDiEZWE5dImWPjK06PXco(RegionInterceptingFrameLayout.this, internalInsetsInfo);
+                RegionInterceptingFrameLayout.m998$r8$lambda$poBU2FDiEZWE5dImWPjK06PXco(this.f$0, internalInsetsInfo);
             }
         };
     }
@@ -99,7 +97,7 @@ public class RegionInterceptingFrameLayout extends FrameLayout {
         super(context, attributeSet, i, i2);
         this.mInsetsListener = new ViewTreeObserver.OnComputeInternalInsetsListener() { // from class: com.android.systemui.RegionInterceptingFrameLayout$$ExternalSyntheticLambda0
             public final void onComputeInternalInsets(ViewTreeObserver.InternalInsetsInfo internalInsetsInfo) {
-                RegionInterceptingFrameLayout.m996$r8$lambda$poBU2FDiEZWE5dImWPjK06PXco(RegionInterceptingFrameLayout.this, internalInsetsInfo);
+                RegionInterceptingFrameLayout.m998$r8$lambda$poBU2FDiEZWE5dImWPjK06PXco(this.f$0, internalInsetsInfo);
             }
         };
     }

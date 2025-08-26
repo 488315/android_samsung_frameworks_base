@@ -3,6 +3,8 @@ package com.android.systemui.keyguard.data.repository;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.IntentFilter;
+import android.content.pm.UserInfo;
+import android.content.res.Resources;
 import android.hardware.biometrics.BiometricManager;
 import android.os.UserHandle;
 import android.util.Log;
@@ -18,6 +20,7 @@ import com.android.systemui.biometrics.data.repository.FingerprintPropertyReposi
 import com.android.systemui.broadcast.BroadcastDispatcher;
 import com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryImpl$$ExternalSyntheticOutline0;
 import com.android.systemui.dump.DumpManager;
+import com.android.systemui.keyguard.shared.model.AuthenticationFlags;
 import com.android.systemui.keyguard.shared.model.DevicePosture;
 import com.android.systemui.statusbar.pipeline.mobile.data.repository.MobileConnectionsRepository;
 import com.android.systemui.user.data.repository.UserRepository;
@@ -48,7 +51,6 @@ import kotlinx.coroutines.flow.SharingStarted;
 import kotlinx.coroutines.flow.StartedEagerly;
 import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class BiometricSettingsRepositoryImpl implements BiometricSettingsRepository, Dumpable {
     public final ReadonlyStateFlow areBiometricsEnabledForDeviceEntryFromUserSetting;
@@ -73,7 +75,6 @@ public final class BiometricSettingsRepositoryImpl implements BiometricSettingsR
     public final ReadonlyStateFlow isStrongBiometricAllowed;
     public final UserRepository userRepository;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.keyguard.data.repository.BiometricSettingsRepositoryImpl$2, reason: invalid class name */
     final class AnonymousClass2 extends SuspendLambda implements Function2 {
         /* synthetic */ boolean Z$0;
@@ -110,8 +111,8 @@ public final class BiometricSettingsRepositoryImpl implements BiometricSettingsR
     }
 
     /* JADX WARN: Type inference failed for: r9v0, types: [com.android.systemui.keyguard.data.repository.BiometricSettingsRepositoryImpl$special$$inlined$map$1] */
-    public BiometricSettingsRepositoryImpl(Context context, LockPatternUtils lockPatternUtils, BroadcastDispatcher broadcastDispatcher, AuthController authController, UserRepository userRepository, DevicePolicyManager devicePolicyManager, CoroutineScope coroutineScope, CoroutineDispatcher coroutineDispatcher, BiometricManager biometricManager, DevicePostureRepository devicePostureRepository, FacePropertyRepository facePropertyRepository, FingerprintPropertyRepository fingerprintPropertyRepository, MobileConnectionsRepository mobileConnectionsRepository, DumpManager dumpManager) {
-        Flow flow;
+    public BiometricSettingsRepositoryImpl(Context context, LockPatternUtils lockPatternUtils, BroadcastDispatcher broadcastDispatcher, AuthController authController, UserRepository userRepository, DevicePolicyManager devicePolicyManager, CoroutineScope coroutineScope, CoroutineDispatcher coroutineDispatcher, BiometricManager biometricManager, DevicePostureRepository devicePostureRepository, FacePropertyRepository facePropertyRepository, FingerprintPropertyRepository fingerprintPropertyRepository, MobileConnectionsRepository mobileConnectionsRepository, DumpManager dumpManager) throws Resources.NotFoundException {
+        Flow flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2;
         this.userRepository = userRepository;
         new LinkedHashMap();
         new LinkedHashMap();
@@ -119,7 +120,6 @@ public final class BiometricSettingsRepositoryImpl implements BiometricSettingsR
         final ChannelFlowTransformLatest channelFlowTransformLatest = strongAuthTracker.currentUserAuthFlags;
         this.isCurrentUserInLockdown = new Flow() { // from class: com.android.systemui.keyguard.data.repository.BiometricSettingsRepositoryImpl$special$$inlined$map$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.keyguard.data.repository.BiometricSettingsRepositoryImpl$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -146,66 +146,46 @@ public final class BiometricSettingsRepositoryImpl implements BiometricSettingsR
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.keyguard.data.repository.BiometricSettingsRepositoryImpl$special$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.keyguard.data.repository.BiometricSettingsRepositoryImpl$special$$inlined$map$1$2$1 r0 = (com.android.systemui.keyguard.data.repository.BiometricSettingsRepositoryImpl$special$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.keyguard.data.repository.BiometricSettingsRepositoryImpl$special$$inlined$map$1$2$1 r0 = new com.android.systemui.keyguard.data.repository.BiometricSettingsRepositoryImpl$special$$inlined$map$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L45
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        com.android.systemui.keyguard.shared.model.AuthenticationFlags r5 = (com.android.systemui.keyguard.shared.model.AuthenticationFlags) r5
-                        boolean r5 = r5.isInUserLockdown
-                        java.lang.Boolean r5 = java.lang.Boolean.valueOf(r5)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L45
-                        return r1
-                    L45:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyguard.data.repository.BiometricSettingsRepositoryImpl$special$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        Boolean boolValueOf = Boolean.valueOf(((AuthenticationFlags) obj).isInUserLockdown);
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(boolValueOf, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = channelFlowTransformLatest.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         };
         this.authenticationFlags = strongAuthTracker.currentUserAuthFlags;
@@ -217,12 +197,11 @@ public final class BiometricSettingsRepositoryImpl implements BiometricSettingsR
         companion.getClass();
         final DevicePosture posture = DevicePosture.Companion.toPosture(integer);
         if (posture == DevicePosture.UNKNOWN) {
-            flow = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(Boolean.TRUE);
+            flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(Boolean.TRUE);
         } else {
             final Flow currentDevicePosture = ((DevicePostureRepositoryImpl) devicePostureRepository).getCurrentDevicePosture();
-            flow = new Flow() { // from class: com.android.systemui.keyguard.data.repository.BiometricSettingsRepositoryImpl$special$$inlined$map$2
+            flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 = new Flow() { // from class: com.android.systemui.keyguard.data.repository.BiometricSettingsRepositoryImpl$special$$inlined$map$2
 
-                /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
                 /* renamed from: com.android.systemui.keyguard.data.repository.BiometricSettingsRepositoryImpl$special$$inlined$map$2$2, reason: invalid class name */
                 public final class AnonymousClass2 implements FlowCollector {
                     public final /* synthetic */ DevicePosture $configFaceAuthSupportedPosture$inlined;
@@ -251,82 +230,55 @@ public final class BiometricSettingsRepositoryImpl implements BiometricSettingsR
                         this.$configFaceAuthSupportedPosture$inlined = devicePosture;
                     }
 
-                    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.
-                        To view partially-correct code enable 'Show inconsistent code' option in preferences
                     */
-                    public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                        /*
-                            r4 = this;
-                            boolean r0 = r6 instanceof com.android.systemui.keyguard.data.repository.BiometricSettingsRepositoryImpl$special$$inlined$map$2.AnonymousClass2.AnonymousClass1
-                            if (r0 == 0) goto L13
-                            r0 = r6
-                            com.android.systemui.keyguard.data.repository.BiometricSettingsRepositoryImpl$special$$inlined$map$2$2$1 r0 = (com.android.systemui.keyguard.data.repository.BiometricSettingsRepositoryImpl$special$$inlined$map$2.AnonymousClass2.AnonymousClass1) r0
-                            int r1 = r0.label
-                            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                            r3 = r1 & r2
-                            if (r3 == 0) goto L13
-                            int r1 = r1 - r2
-                            r0.label = r1
-                            goto L18
-                        L13:
-                            com.android.systemui.keyguard.data.repository.BiometricSettingsRepositoryImpl$special$$inlined$map$2$2$1 r0 = new com.android.systemui.keyguard.data.repository.BiometricSettingsRepositoryImpl$special$$inlined$map$2$2$1
-                            r0.<init>(r6)
-                        L18:
-                            java.lang.Object r6 = r0.result
-                            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                            int r2 = r0.label
-                            r3 = 1
-                            if (r2 == 0) goto L2f
-                            if (r2 != r3) goto L27
-                            kotlin.ResultKt.throwOnFailure(r6)
-                            goto L4a
-                        L27:
-                            java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                            java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                            r4.<init>(r5)
-                            throw r4
-                        L2f:
-                            kotlin.ResultKt.throwOnFailure(r6)
-                            com.android.systemui.keyguard.shared.model.DevicePosture r5 = (com.android.systemui.keyguard.shared.model.DevicePosture) r5
-                            com.android.systemui.keyguard.shared.model.DevicePosture r6 = r4.$configFaceAuthSupportedPosture$inlined
-                            if (r5 != r6) goto L3a
-                            r5 = r3
-                            goto L3b
-                        L3a:
-                            r5 = 0
-                        L3b:
-                            java.lang.Boolean r5 = java.lang.Boolean.valueOf(r5)
-                            r0.label = r3
-                            kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                            java.lang.Object r4 = r4.emit(r5, r0)
-                            if (r4 != r1) goto L4a
-                            return r1
-                        L4a:
-                            kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                            return r4
-                        */
-                        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyguard.data.repository.BiometricSettingsRepositoryImpl$special$$inlined$map$2.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                    public final Object emit(Object obj, Continuation continuation) {
+                        AnonymousClass1 anonymousClass1;
+                        if (continuation instanceof AnonymousClass1) {
+                            anonymousClass1 = (AnonymousClass1) continuation;
+                            int i = anonymousClass1.label;
+                            if ((i & Integer.MIN_VALUE) != 0) {
+                                anonymousClass1.label = i - Integer.MIN_VALUE;
+                            } else {
+                                anonymousClass1 = new AnonymousClass1(continuation);
+                            }
+                        }
+                        Object obj2 = anonymousClass1.result;
+                        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                        int i2 = anonymousClass1.label;
+                        if (i2 == 0) {
+                            ResultKt.throwOnFailure(obj2);
+                            Boolean boolValueOf = Boolean.valueOf(((DevicePosture) obj) == this.$configFaceAuthSupportedPosture$inlined);
+                            anonymousClass1.label = 1;
+                            if (this.$this_unsafeFlow.emit(boolValueOf, anonymousClass1) == coroutineSingletons) {
+                                return coroutineSingletons;
+                            }
+                        } else {
+                            if (i2 != 1) {
+                                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                            }
+                            ResultKt.throwOnFailure(obj2);
+                        }
+                        return Unit.INSTANCE;
                     }
                 }
 
                 @Override // kotlinx.coroutines.flow.Flow
                 public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                    Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, posture), continuation);
-                    return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                    Object objCollect = currentDevicePosture.collect(new AnonymousClass2(flowCollector, posture), continuation);
+                    return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
                 }
             };
         }
-        FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1 flowKt__TransformKt$onEach$$inlined$unsafeTransform$1 = new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(flow, new AnonymousClass2(null));
+        FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1 flowKt__TransformKt$onEach$$inlined$unsafeTransform$1 = new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2, new AnonymousClass2(null));
         this.isFaceAuthSupportedInCurrentPosture = flowKt__TransformKt$onEach$$inlined$unsafeTransform$1;
         UserRepositoryImpl userRepositoryImpl = (UserRepositoryImpl) userRepository;
         final UserRepositoryImpl$special$$inlined$map$2 userRepositoryImpl$special$$inlined$map$2 = userRepositoryImpl.selectedUserInfo;
-        Flow distinctUntilChanged = FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.keyguard.data.repository.BiometricSettingsRepositoryImpl$special$$inlined$map$3
+        Flow flowDistinctUntilChanged = FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.keyguard.data.repository.BiometricSettingsRepositoryImpl$special$$inlined$map$3
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.keyguard.data.repository.BiometricSettingsRepositoryImpl$special$$inlined$map$3$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -353,80 +305,59 @@ public final class BiometricSettingsRepositoryImpl implements BiometricSettingsR
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.keyguard.data.repository.BiometricSettingsRepositoryImpl$special$$inlined$map$3.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.keyguard.data.repository.BiometricSettingsRepositoryImpl$special$$inlined$map$3$2$1 r0 = (com.android.systemui.keyguard.data.repository.BiometricSettingsRepositoryImpl$special$$inlined$map$3.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.keyguard.data.repository.BiometricSettingsRepositoryImpl$special$$inlined$map$3$2$1 r0 = new com.android.systemui.keyguard.data.repository.BiometricSettingsRepositoryImpl$special$$inlined$map$3$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L46
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        android.content.pm.UserInfo r5 = (android.content.pm.UserInfo) r5
-                        int r5 = r5.id
-                        java.lang.Integer r6 = new java.lang.Integer
-                        r6.<init>(r5)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r6, r0)
-                        if (r4 != r1) goto L46
-                        return r1
-                    L46:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyguard.data.repository.BiometricSettingsRepositoryImpl$special$$inlined$map$3.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        Integer num = new Integer(((UserInfo) obj).id);
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(num, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = userRepositoryImpl$special$$inlined$map$2.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         });
-        Flow broadcastFlow$default = BroadcastDispatcher.broadcastFlow$default(broadcastDispatcher, new IntentFilter("android.app.action.DEVICE_POLICY_MANAGER_STATE_CHANGED"), UserHandle.ALL, 12);
-        this.devicePolicyChangedForAllUsers = broadcastFlow$default;
-        ChannelFlowTransformLatest transformLatest = FlowKt.transformLatest(distinctUntilChanged, new BiometricSettingsRepositoryImpl$special$$inlined$flatMapLatest$1(null, authController));
-        this.isFingerprintEnrolled = transformLatest;
-        ChannelFlowTransformLatest transformLatest2 = FlowKt.transformLatest(distinctUntilChanged, new BiometricSettingsRepositoryImpl$special$$inlined$flatMapLatest$2(null, authController));
-        this.isFaceEnrolled = transformLatest2;
-        ChannelFlowTransformLatest transformLatest3 = FlowKt.transformLatest(userRepositoryImpl.selectedUserInfo, new BiometricSettingsRepositoryImpl$special$$inlined$flatMapLatest$3(null, this));
-        this.isFingerprintEnabledForCurrentUser = transformLatest3;
-        ChannelFlowTransformLatest transformLatest4 = FlowKt.transformLatest(userRepositoryImpl.selectedUserInfo, new BiometricSettingsRepositoryImpl$special$$inlined$flatMapLatest$4(null, this));
-        this.isFaceEnabledForCurrentUser = transformLatest4;
-        FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 flowKt__ZipKt$combine$$inlined$unsafeFlow$1 = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(transformLatest4, FlowKt.distinctUntilChanged(FlowKt.flowOn(new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new BiometricSettingsRepositoryImpl$isFaceEnabledByDevicePolicy$2(devicePolicyManager, this, null), new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(distinctUntilChanged, broadcastFlow$default, new BiometricSettingsRepositoryImpl$isFaceEnabledByDevicePolicy$1(devicePolicyManager, null))), coroutineDispatcher)), new BiometricSettingsRepositoryImpl$isFaceAuthenticationEnabled$1(null));
+        Flow flowBroadcastFlow$default = BroadcastDispatcher.broadcastFlow$default(broadcastDispatcher, new IntentFilter("android.app.action.DEVICE_POLICY_MANAGER_STATE_CHANGED"), UserHandle.ALL, 12);
+        this.devicePolicyChangedForAllUsers = flowBroadcastFlow$default;
+        ChannelFlowTransformLatest channelFlowTransformLatestTransformLatest = FlowKt.transformLatest(flowDistinctUntilChanged, new BiometricSettingsRepositoryImpl$special$$inlined$flatMapLatest$1(null, authController));
+        this.isFingerprintEnrolled = channelFlowTransformLatestTransformLatest;
+        ChannelFlowTransformLatest channelFlowTransformLatestTransformLatest2 = FlowKt.transformLatest(flowDistinctUntilChanged, new BiometricSettingsRepositoryImpl$special$$inlined$flatMapLatest$2(null, authController));
+        this.isFaceEnrolled = channelFlowTransformLatestTransformLatest2;
+        ChannelFlowTransformLatest channelFlowTransformLatestTransformLatest3 = FlowKt.transformLatest(userRepositoryImpl.selectedUserInfo, new BiometricSettingsRepositoryImpl$special$$inlined$flatMapLatest$3(null, this));
+        this.isFingerprintEnabledForCurrentUser = channelFlowTransformLatestTransformLatest3;
+        ChannelFlowTransformLatest channelFlowTransformLatestTransformLatest4 = FlowKt.transformLatest(userRepositoryImpl.selectedUserInfo, new BiometricSettingsRepositoryImpl$special$$inlined$flatMapLatest$4(null, this));
+        this.isFaceEnabledForCurrentUser = channelFlowTransformLatestTransformLatest4;
+        FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 flowKt__ZipKt$combine$$inlined$unsafeFlow$1 = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(channelFlowTransformLatestTransformLatest4, FlowKt.distinctUntilChanged(FlowKt.flowOn(new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new BiometricSettingsRepositoryImpl$isFaceEnabledByDevicePolicy$2(devicePolicyManager, this, null), new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(flowDistinctUntilChanged, flowBroadcastFlow$default, new BiometricSettingsRepositoryImpl$isFaceEnabledByDevicePolicy$1(devicePolicyManager, null))), coroutineDispatcher)), new BiometricSettingsRepositoryImpl$isFaceAuthenticationEnabled$1(null));
         this.isFaceAuthenticationEnabled = flowKt__ZipKt$combine$$inlined$unsafeFlow$1;
         FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1 flowKt__TransformKt$onEach$$inlined$unsafeTransform$12 = new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(FlowKt.callbackFlow(new BiometricSettingsRepositoryImpl$areBiometricsEnabledForDeviceEntryFromUserSetting$1(biometricManager, null)), new BiometricSettingsRepositoryImpl$areBiometricsEnabledForDeviceEntryFromUserSetting$2(this, null));
         SharingStarted.Companion.getClass();
@@ -435,20 +366,19 @@ public final class BiometricSettingsRepositoryImpl implements BiometricSettingsR
         this.areBiometricsEnabledForDeviceEntryFromUserSetting = FlowKt.stateIn(flowKt__TransformKt$onEach$$inlined$unsafeTransform$12, coroutineScope, startedEagerly, new Triple(0, bool, 0));
         this.isStrongBiometricAllowed = FlowKt.stateIn(strongAuthTracker.isStrongBiometricAllowed, coroutineScope, startedEagerly, Boolean.valueOf(strongAuthTracker.isBiometricAllowedForUser(true, userRepositoryImpl.getSelectedUserInfo().id)));
         this.isNonStrongBiometricAllowed = FlowKt.stateIn(strongAuthTracker.isNonStrongBiometricAllowed, coroutineScope, startedEagerly, Boolean.valueOf(strongAuthTracker.isBiometricAllowedForUser(false, userRepositoryImpl.getSelectedUserInfo().id)));
-        ChannelFlowTransformLatest transformLatest5 = FlowKt.transformLatest(((FingerprintPropertyRepositoryImpl) fingerprintPropertyRepository).strength, new BiometricSettingsRepositoryImpl$special$$inlined$flatMapLatest$5(null, this));
-        this.isFingerprintBiometricAllowed = transformLatest5;
-        ChannelFlowTransformLatest transformLatest6 = FlowKt.transformLatest(((FacePropertyRepositoryImpl) facePropertyRepository).sensorInfo, new BiometricSettingsRepositoryImpl$special$$inlined$flatMapLatest$6(null, this));
-        this.isFaceBiometricsAllowed = transformLatest6;
-        ChannelFlowTransformLatest transformLatest7 = FlowKt.transformLatest(distinctUntilChanged, new BiometricSettingsRepositoryImpl$special$$inlined$flatMapLatest$7(null, this, coroutineDispatcher, devicePolicyManager));
-        this.isFingerprintEnabledByDevicePolicy = transformLatest7;
-        ReadonlyStateFlow stateIn = FlowKt.stateIn(BiometricSettingsRepositoryKt.access$and(BiometricSettingsRepositoryKt.access$and(transformLatest, transformLatest3), transformLatest7), coroutineScope, startedEagerly, bool);
-        this.isFingerprintEnrolledAndEnabled = stateIn;
-        this.isFingerprintAuthCurrentlyAllowed = FlowKt.stateIn(BiometricSettingsRepositoryKt.access$and(stateIn, transformLatest5), coroutineScope, startedEagerly, bool);
-        FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 access$and = BiometricSettingsRepositoryKt.access$and(flowKt__ZipKt$combine$$inlined$unsafeFlow$1, transformLatest2);
-        final Flow isAnySimSecure = mobileConnectionsRepository.isAnySimSecure();
-        ReadonlyStateFlow stateIn2 = FlowKt.stateIn(BiometricSettingsRepositoryKt.access$and(access$and, new Flow() { // from class: com.android.systemui.keyguard.data.repository.BiometricSettingsRepositoryKt$isFalse$$inlined$map$1
+        ChannelFlowTransformLatest channelFlowTransformLatestTransformLatest5 = FlowKt.transformLatest(((FingerprintPropertyRepositoryImpl) fingerprintPropertyRepository).strength, new BiometricSettingsRepositoryImpl$special$$inlined$flatMapLatest$5(null, this));
+        this.isFingerprintBiometricAllowed = channelFlowTransformLatestTransformLatest5;
+        ChannelFlowTransformLatest channelFlowTransformLatestTransformLatest6 = FlowKt.transformLatest(((FacePropertyRepositoryImpl) facePropertyRepository).sensorInfo, new BiometricSettingsRepositoryImpl$special$$inlined$flatMapLatest$6(null, this));
+        this.isFaceBiometricsAllowed = channelFlowTransformLatestTransformLatest6;
+        ChannelFlowTransformLatest channelFlowTransformLatestTransformLatest7 = FlowKt.transformLatest(flowDistinctUntilChanged, new BiometricSettingsRepositoryImpl$special$$inlined$flatMapLatest$7(null, this, coroutineDispatcher, devicePolicyManager));
+        this.isFingerprintEnabledByDevicePolicy = channelFlowTransformLatestTransformLatest7;
+        ReadonlyStateFlow readonlyStateFlowStateIn = FlowKt.stateIn(BiometricSettingsRepositoryKt.access$and(BiometricSettingsRepositoryKt.access$and(channelFlowTransformLatestTransformLatest, channelFlowTransformLatestTransformLatest3), channelFlowTransformLatestTransformLatest7), coroutineScope, startedEagerly, bool);
+        this.isFingerprintEnrolledAndEnabled = readonlyStateFlowStateIn;
+        this.isFingerprintAuthCurrentlyAllowed = FlowKt.stateIn(BiometricSettingsRepositoryKt.access$and(readonlyStateFlowStateIn, channelFlowTransformLatestTransformLatest5), coroutineScope, startedEagerly, bool);
+        FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 flowKt__ZipKt$combine$$inlined$unsafeFlow$1Access$and = BiometricSettingsRepositoryKt.access$and(flowKt__ZipKt$combine$$inlined$unsafeFlow$1, channelFlowTransformLatestTransformLatest2);
+        final Flow flowIsAnySimSecure = mobileConnectionsRepository.isAnySimSecure();
+        ReadonlyStateFlow readonlyStateFlowStateIn2 = FlowKt.stateIn(BiometricSettingsRepositoryKt.access$and(flowKt__ZipKt$combine$$inlined$unsafeFlow$1Access$and, new Flow() { // from class: com.android.systemui.keyguard.data.repository.BiometricSettingsRepositoryKt$isFalse$$inlined$map$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.keyguard.data.repository.BiometricSettingsRepositoryKt$isFalse$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -475,71 +405,50 @@ public final class BiometricSettingsRepositoryImpl implements BiometricSettingsR
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.keyguard.data.repository.BiometricSettingsRepositoryKt$isFalse$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.keyguard.data.repository.BiometricSettingsRepositoryKt$isFalse$$inlined$map$1$2$1 r0 = (com.android.systemui.keyguard.data.repository.BiometricSettingsRepositoryKt$isFalse$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.keyguard.data.repository.BiometricSettingsRepositoryKt$isFalse$$inlined$map$1$2$1 r0 = new com.android.systemui.keyguard.data.repository.BiometricSettingsRepositoryKt$isFalse$$inlined$map$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L48
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        java.lang.Boolean r5 = (java.lang.Boolean) r5
-                        boolean r5 = r5.booleanValue()
-                        r5 = r5 ^ r3
-                        java.lang.Boolean r5 = java.lang.Boolean.valueOf(r5)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L48
-                        return r1
-                    L48:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.keyguard.data.repository.BiometricSettingsRepositoryKt$isFalse$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        Boolean boolValueOf = Boolean.valueOf(!((Boolean) obj).booleanValue());
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(boolValueOf, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flowIsAnySimSecure.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         }), coroutineScope, startedEagerly, bool);
-        this.isFaceAuthEnrolledAndEnabled = stateIn2;
-        this.isFaceAuthCurrentlyAllowed = BiometricSettingsRepositoryKt.access$and(BiometricSettingsRepositoryKt.access$and(stateIn2, transformLatest6), flowKt__TransformKt$onEach$$inlined$unsafeTransform$1);
+        this.isFaceAuthEnrolledAndEnabled = readonlyStateFlowStateIn2;
+        this.isFaceAuthCurrentlyAllowed = BiometricSettingsRepositoryKt.access$and(BiometricSettingsRepositoryKt.access$and(readonlyStateFlowStateIn2, channelFlowTransformLatestTransformLatest6), flowKt__TransformKt$onEach$$inlined$unsafeTransform$1);
     }
 
     @Override // com.android.systemui.Dumpable

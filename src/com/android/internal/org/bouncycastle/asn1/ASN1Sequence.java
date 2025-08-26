@@ -156,13 +156,13 @@ public abstract class ASN1Sequence extends ASN1Primitive implements Iterable<ASN
     @Override // com.android.internal.org.bouncycastle.asn1.ASN1Primitive, com.android.internal.org.bouncycastle.asn1.ASN1Object
     public int hashCode() {
         int length = this.elements.length;
-        int i = length + 1;
+        int iHashCode = length + 1;
         while (true) {
             length--;
             if (length < 0) {
-                return i;
+                return iHashCode;
             }
-            i = (i * 257) ^ this.elements[length].toASN1Primitive().hashCode();
+            iHashCode = (iHashCode * 257) ^ this.elements[length].toASN1Primitive().hashCode();
         }
     }
 

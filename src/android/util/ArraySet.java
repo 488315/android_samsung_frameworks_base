@@ -40,18 +40,18 @@ public final class ArraySet<E> implements Collection<E>, Set<E> {
         if (i2 == 0) {
             return -1;
         }
-        int binarySearch = binarySearch(this.mHashes, i);
-        if (binarySearch < 0 || obj.equals(this.mArray[binarySearch])) {
-            return binarySearch;
+        int iBinarySearch = binarySearch(this.mHashes, i);
+        if (iBinarySearch < 0 || obj.equals(this.mArray[iBinarySearch])) {
+            return iBinarySearch;
         }
-        int i3 = binarySearch + 1;
+        int i3 = iBinarySearch + 1;
         while (i3 < i2 && this.mHashes[i3] == i) {
             if (obj.equals(this.mArray[i3])) {
                 return i3;
             }
             i3++;
         }
-        for (int i4 = binarySearch - 1; i4 >= 0 && this.mHashes[i4] == i; i4--) {
+        for (int i4 = iBinarySearch - 1; i4 >= 0 && this.mHashes[i4] == i; i4--) {
             if (obj.equals(this.mArray[i4])) {
                 return i4;
             }
@@ -64,18 +64,18 @@ public final class ArraySet<E> implements Collection<E>, Set<E> {
         if (i == 0) {
             return -1;
         }
-        int binarySearch = binarySearch(this.mHashes, 0);
-        if (binarySearch < 0 || this.mArray[binarySearch] == null) {
-            return binarySearch;
+        int iBinarySearch = binarySearch(this.mHashes, 0);
+        if (iBinarySearch < 0 || this.mArray[iBinarySearch] == null) {
+            return iBinarySearch;
         }
-        int i2 = binarySearch + 1;
+        int i2 = iBinarySearch + 1;
         while (i2 < i && this.mHashes[i2] == 0) {
             if (this.mArray[i2] == null) {
                 return i2;
             }
             i2++;
         }
-        for (int i3 = binarySearch - 1; i3 >= 0 && this.mHashes[i3] == 0; i3--) {
+        for (int i3 = iBinarySearch - 1; i3 >= 0 && this.mHashes[i3] == 0; i3--) {
             if (this.mArray[i3] == null) {
                 return i3;
             }
@@ -271,20 +271,20 @@ public final class ArraySet<E> implements Collection<E>, Set<E> {
     @Override // java.util.Collection, java.util.Set
     public boolean add(E e) {
         int i;
-        int indexOf;
+        int iIndexOf;
         int i2 = this.mSize;
         if (e == null) {
-            indexOf = indexOfNull();
+            iIndexOf = indexOfNull();
             i = 0;
         } else {
-            int identityHashCode = this.mIdentityHashCode ? System.identityHashCode(e) : e.hashCode();
-            i = identityHashCode;
-            indexOf = indexOf(e, identityHashCode);
+            int iIdentityHashCode = this.mIdentityHashCode ? System.identityHashCode(e) : e.hashCode();
+            i = iIdentityHashCode;
+            iIndexOf = indexOf(e, iIdentityHashCode);
         }
-        if (indexOf >= 0) {
+        if (iIndexOf >= 0) {
             return false;
         }
-        int i3 = ~indexOf;
+        int i3 = ~iIndexOf;
         int[] iArr = this.mHashes;
         if (i2 >= iArr.length) {
             int i4 = 8;
@@ -327,25 +327,25 @@ public final class ArraySet<E> implements Collection<E>, Set<E> {
     }
 
     public void append(E e) {
-        int identityHashCode;
+        int iIdentityHashCode;
         int i = this.mSize;
         if (e == null) {
-            identityHashCode = 0;
+            iIdentityHashCode = 0;
         } else {
-            identityHashCode = this.mIdentityHashCode ? System.identityHashCode(e) : e.hashCode();
+            iIdentityHashCode = this.mIdentityHashCode ? System.identityHashCode(e) : e.hashCode();
         }
         int[] iArr = this.mHashes;
         if (i >= iArr.length) {
             throw new IllegalStateException("Array is full");
         }
-        if (i > 0 && iArr[i - 1] > identityHashCode) {
+        if (i > 0 && iArr[i - 1] > iIdentityHashCode) {
             add(e);
         } else {
             if (i != this.mSize) {
                 throw new ConcurrentModificationException();
             }
             this.mSize = i + 1;
-            iArr[i] = identityHashCode;
+            iArr[i] = iIdentityHashCode;
             this.mArray[i] = e;
         }
     }
@@ -369,11 +369,11 @@ public final class ArraySet<E> implements Collection<E>, Set<E> {
 
     @Override // java.util.Collection, java.util.Set
     public boolean remove(Object obj) {
-        int indexOf = indexOf(obj);
-        if (indexOf < 0) {
+        int iIndexOf = indexOf(obj);
+        if (iIndexOf < 0) {
             return false;
         }
-        removeAt(indexOf);
+        removeAt(iIndexOf);
         return true;
     }
 
@@ -580,9 +580,9 @@ public final class ArraySet<E> implements Collection<E>, Set<E> {
             if (i > 0) {
                 sb.append(", ");
             }
-            E valueAt = valueAt(i);
-            if (valueAt != this) {
-                sb.append(valueAt);
+            E eValueAt = valueAt(i);
+            if (eValueAt != this) {
+                sb.append(eValueAt);
             } else {
                 sb.append("(this Set)");
             }
@@ -663,21 +663,21 @@ public final class ArraySet<E> implements Collection<E>, Set<E> {
     public boolean addAll(Collection<? extends E> collection) {
         ensureCapacity(this.mSize + collection.size());
         Iterator<? extends E> it = collection.iterator();
-        boolean z = false;
+        boolean zAdd = false;
         while (it.hasNext()) {
-            z |= add(it.next());
+            zAdd |= add(it.next());
         }
-        return z;
+        return zAdd;
     }
 
     @Override // java.util.Collection, java.util.Set
     public boolean removeAll(Collection<?> collection) {
         Iterator<?> it = collection.iterator();
-        boolean z = false;
+        boolean zRemove = false;
         while (it.hasNext()) {
-            z |= remove(it.next());
+            zRemove |= remove(it.next());
         }
-        return z;
+        return zRemove;
     }
 
     @Override // java.util.Collection, java.util.Set

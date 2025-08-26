@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.provider.Settings;
 import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
 import android.text.TextUtils;
 import android.util.ArrayMap;
@@ -26,13 +27,13 @@ import com.sec.ims.cmc.CmcCallInfo;
 import com.sec.ims.ft.IImsOngoingFtEventListener;
 import com.sec.ims.im.IImSessionListener;
 import com.sec.ims.settings.ImsProfile;
+import com.sec.ims.settings.RcsConfigurationReader;
 import com.sec.ims.util.IMSLog;
 import com.sec.ims.volte2.IImsVideoListener;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ImsManager {
     private static final int IMS_API_VERSION = 2;
@@ -64,14 +65,12 @@ public class ImsManager {
     private final ArrayMap<ISimMobilityStatusListener, String> mSimMobilityStatusListeners;
     private final ArrayMap<IImsVideoListener, String> mVideoListeners;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface ConnectionListener {
         void onConnected();
 
         void onDisconnected();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface DmConfigEventRelay {
         void onChangeDmValue(String str, boolean z);
     }
@@ -121,12 +120,12 @@ public class ImsManager {
         return IMS_PLATFORM_VERSION;
     }
 
-    private IBinder getSystemService(String str) {
+    private IBinder getSystemService(String str) throws IllegalAccessException, ClassNotFoundException, IllegalArgumentException, InvocationTargetException {
         try {
             Class<?> cls = Class.forName("android.os.ServiceManager");
-            Object invoke = cls.getMethod("getService", String.class).invoke(cls, str);
-            if (invoke != null) {
-                return (IBinder) invoke;
+            Object objInvoke = cls.getMethod("getService", String.class).invoke(cls, str);
+            if (objInvoke != null) {
+                return (IBinder) objInvoke;
             }
             Log.d(LOG_TAG, "Failed to getService " + str);
             return null;
@@ -160,51 +159,51 @@ public class ImsManager {
                 Log.d(LOG_TAG, "registerPreviousListeners:  mRegListeners:" + this.mRegListeners.size() + " mDialogListeners:" + this.mDialogListeners.size() + " mVideoListeners:" + this.mVideoListeners.size() + " mImSessionListeners:" + this.mImSessionListeners.size() + " mOngoingFtEventListeners:" + this.mOngoingFtEventListeners.size() + " mAutoConfigurationListener:" + this.mAutoConfigurationListener.size() + " mSimMobilityStatusListeners:" + this.mSimMobilityStatusListeners.size() + " mEpdgListeners:" + this.mEpdgListeners.size() + " mCmcRegListeners:" + this.mCmcRegListeners.size());
                 try {
                     for (IImsRegistrationListener iImsRegistrationListener : this.mRegListeners.keySet()) {
-                        String registerImsRegistrationListenerForSlot = iImsService.registerImsRegistrationListenerForSlot(iImsRegistrationListener, this.mPhoneId);
-                        if (!TextUtils.isEmpty(registerImsRegistrationListenerForSlot)) {
-                            this.mRegListeners.put(iImsRegistrationListener, registerImsRegistrationListenerForSlot);
+                        String strRegisterImsRegistrationListenerForSlot = iImsService.registerImsRegistrationListenerForSlot(iImsRegistrationListener, this.mPhoneId);
+                        if (!TextUtils.isEmpty(strRegisterImsRegistrationListenerForSlot)) {
+                            this.mRegListeners.put(iImsRegistrationListener, strRegisterImsRegistrationListenerForSlot);
                         }
                     }
                     for (IDialogEventListener iDialogEventListener : this.mDialogListeners.keySet()) {
-                        String registerDialogEventListenerByToken = iImsService.registerDialogEventListenerByToken(this.mPhoneId, iDialogEventListener);
-                        if (!TextUtils.isEmpty(registerDialogEventListenerByToken)) {
-                            this.mDialogListeners.put(iDialogEventListener, registerDialogEventListenerByToken);
+                        String strRegisterDialogEventListenerByToken = iImsService.registerDialogEventListenerByToken(this.mPhoneId, iDialogEventListener);
+                        if (!TextUtils.isEmpty(strRegisterDialogEventListenerByToken)) {
+                            this.mDialogListeners.put(iDialogEventListener, strRegisterDialogEventListenerByToken);
                         }
                     }
                     for (IImSessionListener iImSessionListener : this.mImSessionListeners.keySet()) {
-                        String registerImSessionListener = iImsService.registerImSessionListener(iImSessionListener);
-                        if (!TextUtils.isEmpty(registerImSessionListener)) {
-                            this.mImSessionListeners.put(iImSessionListener, registerImSessionListener);
+                        String strRegisterImSessionListener = iImsService.registerImSessionListener(iImSessionListener);
+                        if (!TextUtils.isEmpty(strRegisterImSessionListener)) {
+                            this.mImSessionListeners.put(iImSessionListener, strRegisterImSessionListener);
                         }
                     }
                     for (IImsOngoingFtEventListener iImsOngoingFtEventListener : this.mOngoingFtEventListeners.keySet()) {
-                        String registerImsOngoingFtListener = iImsService.registerImsOngoingFtListener(iImsOngoingFtEventListener);
-                        if (!TextUtils.isEmpty(registerImsOngoingFtListener)) {
-                            this.mOngoingFtEventListeners.put(iImsOngoingFtEventListener, registerImsOngoingFtListener);
+                        String strRegisterImsOngoingFtListener = iImsService.registerImsOngoingFtListener(iImsOngoingFtEventListener);
+                        if (!TextUtils.isEmpty(strRegisterImsOngoingFtListener)) {
+                            this.mOngoingFtEventListeners.put(iImsOngoingFtEventListener, strRegisterImsOngoingFtListener);
                         }
                     }
                     for (IAutoConfigurationListener iAutoConfigurationListener : this.mAutoConfigurationListener.keySet()) {
-                        String registerAutoConfigurationListener = iImsService.registerAutoConfigurationListener(iAutoConfigurationListener, this.mPhoneId);
-                        if (!TextUtils.isEmpty(registerAutoConfigurationListener)) {
-                            this.mAutoConfigurationListener.put(iAutoConfigurationListener, registerAutoConfigurationListener);
+                        String strRegisterAutoConfigurationListener = iImsService.registerAutoConfigurationListener(iAutoConfigurationListener, this.mPhoneId);
+                        if (!TextUtils.isEmpty(strRegisterAutoConfigurationListener)) {
+                            this.mAutoConfigurationListener.put(iAutoConfigurationListener, strRegisterAutoConfigurationListener);
                         }
                     }
                     for (ISimMobilityStatusListener iSimMobilityStatusListener : this.mSimMobilityStatusListeners.keySet()) {
-                        String registerSimMobilityStatusListenerByPhoneId = iImsService.registerSimMobilityStatusListenerByPhoneId(iSimMobilityStatusListener, this.mPhoneId);
-                        if (!TextUtils.isEmpty(registerSimMobilityStatusListenerByPhoneId)) {
-                            this.mSimMobilityStatusListeners.put(iSimMobilityStatusListener, registerSimMobilityStatusListenerByPhoneId);
+                        String strRegisterSimMobilityStatusListenerByPhoneId = iImsService.registerSimMobilityStatusListenerByPhoneId(iSimMobilityStatusListener, this.mPhoneId);
+                        if (!TextUtils.isEmpty(strRegisterSimMobilityStatusListenerByPhoneId)) {
+                            this.mSimMobilityStatusListeners.put(iSimMobilityStatusListener, strRegisterSimMobilityStatusListenerByPhoneId);
                         }
                     }
                     for (IEpdgListener iEpdgListener : this.mEpdgListeners.keySet()) {
-                        String registerEpdgListener = iImsService.registerEpdgListener(iEpdgListener);
-                        if (!TextUtils.isEmpty(registerEpdgListener)) {
-                            this.mEpdgListeners.put(iEpdgListener, registerEpdgListener);
+                        String strRegisterEpdgListener = iImsService.registerEpdgListener(iEpdgListener);
+                        if (!TextUtils.isEmpty(strRegisterEpdgListener)) {
+                            this.mEpdgListeners.put(iEpdgListener, strRegisterEpdgListener);
                         }
                     }
                     for (IImsRegistrationListener iImsRegistrationListener2 : this.mCmcRegListeners.keySet()) {
-                        String registerCmcRegistrationListenerForSlot = iImsService.registerCmcRegistrationListenerForSlot(iImsRegistrationListener2, this.mPhoneId);
-                        if (!TextUtils.isEmpty(registerCmcRegistrationListenerForSlot)) {
-                            this.mCmcRegListeners.put(iImsRegistrationListener2, registerCmcRegistrationListenerForSlot);
+                        String strRegisterCmcRegistrationListenerForSlot = iImsService.registerCmcRegistrationListenerForSlot(iImsRegistrationListener2, this.mPhoneId);
+                        if (!TextUtils.isEmpty(strRegisterCmcRegistrationListenerForSlot)) {
+                            this.mCmcRegListeners.put(iImsRegistrationListener2, strRegisterCmcRegistrationListenerForSlot);
                         }
                     }
                 } catch (RemoteException e) {
@@ -769,29 +768,29 @@ public class ImsManager {
     }
 
     public boolean isServiceEnabled(String str) {
-        Cursor query = this.mContext.getContentResolver().query(Uri.parse("content://com.sec.ims.settings/imsswitch").buildUpon().fragment("simslot" + this.mPhoneId).build(), new String[]{str}, null, null, null);
-        if (query != null) {
+        Cursor cursorQuery = this.mContext.getContentResolver().query(Uri.parse("content://com.sec.ims.settings/imsswitch").buildUpon().fragment("simslot" + this.mPhoneId).build(), new String[]{str}, null, null, null);
+        if (cursorQuery != null) {
             try {
-                if (query.getCount() != 0) {
+                if (cursorQuery.getCount() != 0) {
                     try {
-                        if (query.moveToFirst()) {
-                            String string = query.getString(query.getColumnIndexOrThrow("name"));
-                            int i = query.getInt(query.getColumnIndexOrThrow("enabled"));
-                            r1 = i == 1;
+                        if (cursorQuery.moveToFirst()) {
+                            String string = cursorQuery.getString(cursorQuery.getColumnIndexOrThrow("name"));
+                            int i = cursorQuery.getInt(cursorQuery.getColumnIndexOrThrow("enabled"));
+                            z = i == 1;
                             Log.d(LOG_TAG, "isServiceEnabled: " + string + " " + i);
                         }
                     } catch (IllegalArgumentException unused) {
                         Log.d(LOG_TAG, "isServiceEnabled: false due to IllegalArgumentException");
                     }
-                    query.close();
-                    return r1;
+                    cursorQuery.close();
+                    return z;
                 }
             } finally {
             }
         }
         Log.d(LOG_TAG, "isServiceEnabled: not found");
-        if (query != null) {
-            query.close();
+        if (cursorQuery != null) {
+            cursorQuery.close();
         }
         return false;
     }
@@ -812,29 +811,29 @@ public class ImsManager {
     }
 
     public boolean isVoLteEnabled() {
-        Cursor query = this.mContext.getContentResolver().query(Uri.parse("content://com.sec.ims.settings/imsswitch").buildUpon().fragment("simslot" + Integer.toString(this.mPhoneId)).build(), new String[]{"volte"}, null, null, null);
-        if (query != null) {
+        Cursor cursorQuery = this.mContext.getContentResolver().query(Uri.parse("content://com.sec.ims.settings/imsswitch").buildUpon().fragment("simslot" + Integer.toString(this.mPhoneId)).build(), new String[]{"volte"}, null, null, null);
+        if (cursorQuery != null) {
             try {
-                if (query.getCount() != 0) {
+                if (cursorQuery.getCount() != 0) {
                     try {
-                        if (query.moveToFirst()) {
-                            String string = query.getString(query.getColumnIndexOrThrow("name"));
-                            int i = query.getInt(query.getColumnIndexOrThrow("enabled"));
-                            r4 = i == 1;
+                        if (cursorQuery.moveToFirst()) {
+                            String string = cursorQuery.getString(cursorQuery.getColumnIndexOrThrow("name"));
+                            int i = cursorQuery.getInt(cursorQuery.getColumnIndexOrThrow("enabled"));
+                            z = i == 1;
                             Log.d("legacyImsManager[" + this.mPhoneId + "]", "isVoLteEnabled: " + string + " " + i);
                         }
                     } catch (IllegalArgumentException unused) {
                         Log.d("legacyImsManager[" + this.mPhoneId + "]", "isVoLteEnabled: false due to IllegalArgumentException");
                     }
-                    query.close();
-                    return r4;
+                    cursorQuery.close();
+                    return z;
                 }
             } finally {
             }
         }
         Log.d("legacyImsManager[" + this.mPhoneId + "]", "isVoLteEnabled: not found");
-        if (query != null) {
-            query.close();
+        if (cursorQuery != null) {
+            cursorQuery.close();
         }
         return false;
     }
@@ -906,11 +905,11 @@ public class ImsManager {
             return;
         }
         try {
-            String registerAutoConfigurationListener = imsService.registerAutoConfigurationListener(iAutoConfigurationListener, this.mPhoneId);
-            if (TextUtils.isEmpty(registerAutoConfigurationListener)) {
+            String strRegisterAutoConfigurationListener = imsService.registerAutoConfigurationListener(iAutoConfigurationListener, this.mPhoneId);
+            if (TextUtils.isEmpty(strRegisterAutoConfigurationListener)) {
                 return;
             }
-            this.mAutoConfigurationListener.put(iAutoConfigurationListener, registerAutoConfigurationListener);
+            this.mAutoConfigurationListener.put(iAutoConfigurationListener, strRegisterAutoConfigurationListener);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -929,9 +928,9 @@ public class ImsManager {
             return;
         }
         try {
-            String registerCmcRegistrationListenerForSlot = imsService.registerCmcRegistrationListenerForSlot(iImsRegistrationListener, this.mPhoneId);
-            if (!TextUtils.isEmpty(registerCmcRegistrationListenerForSlot)) {
-                this.mCmcRegListeners.put(iImsRegistrationListener, registerCmcRegistrationListenerForSlot);
+            String strRegisterCmcRegistrationListenerForSlot = imsService.registerCmcRegistrationListenerForSlot(iImsRegistrationListener, this.mPhoneId);
+            if (!TextUtils.isEmpty(strRegisterCmcRegistrationListenerForSlot)) {
+                this.mCmcRegListeners.put(iImsRegistrationListener, strRegisterCmcRegistrationListenerForSlot);
             }
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -951,9 +950,9 @@ public class ImsManager {
             return;
         }
         try {
-            String registerDialogEventListenerByToken = imsService.registerDialogEventListenerByToken(this.mPhoneId, iDialogEventListener);
-            if (!TextUtils.isEmpty(registerDialogEventListenerByToken)) {
-                this.mDialogListeners.put(iDialogEventListener, registerDialogEventListenerByToken);
+            String strRegisterDialogEventListenerByToken = imsService.registerDialogEventListenerByToken(this.mPhoneId, iDialogEventListener);
+            if (!TextUtils.isEmpty(strRegisterDialogEventListenerByToken)) {
+                this.mDialogListeners.put(iDialogEventListener, strRegisterDialogEventListenerByToken);
             }
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -991,9 +990,9 @@ public class ImsManager {
             return;
         }
         try {
-            String registerEpdgListener = imsService.registerEpdgListener(iEpdgListener);
-            if (!TextUtils.isEmpty(registerEpdgListener)) {
-                this.mEpdgListeners.put(iEpdgListener, registerEpdgListener);
+            String strRegisterEpdgListener = imsService.registerEpdgListener(iEpdgListener);
+            if (!TextUtils.isEmpty(strRegisterEpdgListener)) {
+                this.mEpdgListeners.put(iEpdgListener, strRegisterEpdgListener);
             }
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -1013,11 +1012,11 @@ public class ImsManager {
             return;
         }
         try {
-            String registerImSessionListener = imsService.registerImSessionListener(iImSessionListener);
-            if (TextUtils.isEmpty(registerImSessionListener)) {
+            String strRegisterImSessionListener = imsService.registerImSessionListener(iImSessionListener);
+            if (TextUtils.isEmpty(strRegisterImSessionListener)) {
                 return;
             }
-            this.mImSessionListeners.put(iImSessionListener, registerImSessionListener);
+            this.mImSessionListeners.put(iImSessionListener, strRegisterImSessionListener);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -1036,11 +1035,11 @@ public class ImsManager {
             return;
         }
         try {
-            String registerImsOngoingFtListener = imsService.registerImsOngoingFtListener(iImsOngoingFtEventListener);
-            if (TextUtils.isEmpty(registerImsOngoingFtListener)) {
+            String strRegisterImsOngoingFtListener = imsService.registerImsOngoingFtListener(iImsOngoingFtEventListener);
+            if (TextUtils.isEmpty(strRegisterImsOngoingFtListener)) {
                 return;
             }
-            this.mOngoingFtEventListeners.put(iImsOngoingFtEventListener, registerImsOngoingFtListener);
+            this.mOngoingFtEventListeners.put(iImsOngoingFtEventListener, strRegisterImsOngoingFtListener);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -1086,9 +1085,9 @@ public class ImsManager {
             return;
         }
         try {
-            String registerRttEventListener = imsService.registerRttEventListener(this.mPhoneId, iRttEventListener);
-            if (!TextUtils.isEmpty(registerRttEventListener)) {
-                this.mRttListeners.put(iRttEventListener, registerRttEventListener);
+            String strRegisterRttEventListener = imsService.registerRttEventListener(this.mPhoneId, iRttEventListener);
+            if (!TextUtils.isEmpty(strRegisterRttEventListener)) {
+                this.mRttListeners.put(iRttEventListener, strRegisterRttEventListener);
             }
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -1447,14 +1446,14 @@ public class ImsManager {
             Log.e("legacyImsManager[" + this.mPhoneId + "]", "listener is null.");
             return;
         }
-        String remove = this.mEpdgListeners.remove(iEpdgListener);
+        String strRemove = this.mEpdgListeners.remove(iEpdgListener);
         IImsService imsService = getImsService();
-        if (imsService == null || remove == null) {
+        if (imsService == null || strRemove == null) {
             Log.e(LOG_TAG, "Not initialized or token null.");
             return;
         }
         try {
-            imsService.unRegisterEpdgListener(remove);
+            imsService.unRegisterEpdgListener(strRemove);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -1466,18 +1465,18 @@ public class ImsManager {
             CmcManager$$ExternalSyntheticOutline0.m(new StringBuilder("legacyImsManager["), this.mPhoneId, "]", "listener is null.");
             return;
         }
-        String remove = this.mAutoConfigurationListener.remove(iAutoConfigurationListener);
+        String strRemove = this.mAutoConfigurationListener.remove(iAutoConfigurationListener);
         IImsService imsService = getImsService();
         if (imsService == null) {
             CmcManager$$ExternalSyntheticOutline0.m(new StringBuilder("legacyImsManager["), this.mPhoneId, "]", "Not initialized or token null.");
             return;
         }
-        if (remove == null) {
+        if (strRemove == null) {
             CmcManager$$ExternalSyntheticOutline0.m(new StringBuilder("legacyImsManager["), this.mPhoneId, "]", "listener is null.");
             return;
         }
         try {
-            imsService.unregisterAutoConfigurationListener(remove, this.mPhoneId);
+            imsService.unregisterAutoConfigurationListener(strRemove, this.mPhoneId);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -1489,11 +1488,11 @@ public class ImsManager {
             Log.e("legacyImsManager[" + this.mPhoneId + "]", "listener is null.");
             return;
         }
-        String remove = this.mCmcRegListeners.remove(iImsRegistrationListener);
+        String strRemove = this.mCmcRegListeners.remove(iImsRegistrationListener);
         IImsService imsService = getImsService();
-        if (imsService != null && remove != null) {
+        if (imsService != null && strRemove != null) {
             try {
-                imsService.unregisterCmcRegistrationListenerForSlot(remove, this.mPhoneId);
+                imsService.unregisterCmcRegistrationListenerForSlot(strRemove, this.mPhoneId);
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
@@ -1508,11 +1507,11 @@ public class ImsManager {
             Log.e("legacyImsManager[" + this.mPhoneId + "]", "listener is null.");
             return;
         }
-        String remove = this.mDialogListeners.remove(iDialogEventListener);
+        String strRemove = this.mDialogListeners.remove(iDialogEventListener);
         IImsService imsService = getImsService();
-        if (imsService != null && remove != null) {
+        if (imsService != null && strRemove != null) {
             try {
-                imsService.unregisterDialogEventListenerByToken(this.mPhoneId, remove);
+                imsService.unregisterDialogEventListenerByToken(this.mPhoneId, strRemove);
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
@@ -1541,14 +1540,14 @@ public class ImsManager {
             CmcManager$$ExternalSyntheticOutline0.m(new StringBuilder("legacyImsManager["), this.mPhoneId, "]", "listener is null.");
             return;
         }
-        String remove = this.mImSessionListeners.remove(iImSessionListener);
+        String strRemove = this.mImSessionListeners.remove(iImSessionListener);
         IImsService imsService = getImsService();
-        if (imsService == null || remove == null) {
+        if (imsService == null || strRemove == null) {
             CmcManager$$ExternalSyntheticOutline0.m(new StringBuilder("legacyImsManager["), this.mPhoneId, "]", "Not initialized or token null.");
             return;
         }
         try {
-            imsService.unregisterImSessionListener(remove);
+            imsService.unregisterImSessionListener(strRemove);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -1560,14 +1559,14 @@ public class ImsManager {
             CmcManager$$ExternalSyntheticOutline0.m(new StringBuilder("legacyImsManager["), this.mPhoneId, "]", "listener is null.");
             return;
         }
-        String remove = this.mOngoingFtEventListeners.remove(iImsOngoingFtEventListener);
+        String strRemove = this.mOngoingFtEventListeners.remove(iImsOngoingFtEventListener);
         IImsService imsService = getImsService();
-        if (imsService == null || remove == null) {
+        if (imsService == null || strRemove == null) {
             Log.e(LOG_TAG, "Not initialized or token null.");
             return;
         }
         try {
-            imsService.unregisterImsOngoingFtListener(remove);
+            imsService.unregisterImsOngoingFtListener(strRemove);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -1593,11 +1592,11 @@ public class ImsManager {
             Log.e("legacyImsManager[" + this.mPhoneId + "]", "listener is null.");
             return;
         }
-        String remove = this.mRttListeners.remove(iRttEventListener);
+        String strRemove = this.mRttListeners.remove(iRttEventListener);
         IImsService imsService = getImsService();
-        if (imsService != null && remove != null) {
+        if (imsService != null && strRemove != null) {
             try {
-                imsService.unregisterRttEventListener(this.mPhoneId, remove);
+                imsService.unregisterRttEventListener(this.mPhoneId, strRemove);
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
@@ -1650,101 +1649,43 @@ public class ImsManager {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:7:0x003c A[RETURN] */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x003d A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    @java.lang.Deprecated
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public boolean isRcsEnabled(boolean r10) {
-        /*
-            r9 = this;
-            java.lang.String r0 = "]"
-            java.lang.String r1 = "isRcsEnabled: version "
-            java.lang.String r2 = "legacyImsManager["
-            com.sec.ims.settings.RcsConfigurationReader r3 = new com.sec.ims.settings.RcsConfigurationReader
-            android.content.Context r4 = r9.mContext
-            r3.<init>(r4)
-            r4 = 1
-            r5 = 0
-            android.content.Context r6 = r9.mContext     // Catch: android.provider.Settings.SettingNotFoundException -> L1f
-            android.content.ContentResolver r6 = r6.getContentResolver()     // Catch: android.provider.Settings.SettingNotFoundException -> L1f
-            java.lang.String r7 = "rcs_user_setting"
-            int r6 = android.provider.Settings.System.getInt(r6, r7)     // Catch: android.provider.Settings.SettingNotFoundException -> L1f
-            if (r6 != r4) goto L39
-            r6 = r4
-            goto L3a
-        L1f:
-            r6 = move-exception
-            java.lang.StringBuilder r7 = new java.lang.StringBuilder
-            r7.<init>(r2)
-            int r8 = r9.mPhoneId
-            r7.append(r8)
-            r7.append(r0)
-            java.lang.String r7 = r7.toString()
-            java.lang.String r8 = "isRcsEnabled: rcs_user_setting is not exist."
-            android.util.Log.d(r7, r8)
-            r6.printStackTrace()
-        L39:
-            r6 = r5
-        L3a:
-            if (r10 != 0) goto L3d
-            return r6
-        L3d:
-            java.lang.String r10 = "root/vers/version"
-            int r10 = r3.getInt(r10)     // Catch: java.lang.IllegalStateException -> L7d
-            java.lang.String r7 = "true"
-            java.lang.String r8 = "info/completed"
-            java.lang.String r3 = r3.getString(r8)     // Catch: java.lang.IllegalStateException -> L7a
-            boolean r3 = r7.equals(r3)     // Catch: java.lang.IllegalStateException -> L7a
-            java.lang.StringBuilder r7 = new java.lang.StringBuilder     // Catch: java.lang.IllegalStateException -> L78
-            r7.<init>(r2)     // Catch: java.lang.IllegalStateException -> L78
-            int r8 = r9.mPhoneId     // Catch: java.lang.IllegalStateException -> L78
-            r7.append(r8)     // Catch: java.lang.IllegalStateException -> L78
-            r7.append(r0)     // Catch: java.lang.IllegalStateException -> L78
-            java.lang.String r7 = r7.toString()     // Catch: java.lang.IllegalStateException -> L78
-            java.lang.StringBuilder r8 = new java.lang.StringBuilder     // Catch: java.lang.IllegalStateException -> L78
-            r8.<init>(r1)     // Catch: java.lang.IllegalStateException -> L78
-            r8.append(r10)     // Catch: java.lang.IllegalStateException -> L78
-            java.lang.String r1 = " autoConfigComplete "
-            r8.append(r1)     // Catch: java.lang.IllegalStateException -> L78
-            r8.append(r3)     // Catch: java.lang.IllegalStateException -> L78
-            java.lang.String r1 = r8.toString()     // Catch: java.lang.IllegalStateException -> L78
-            android.util.Log.d(r7, r1)     // Catch: java.lang.IllegalStateException -> L78
-            goto L99
-        L78:
-            r1 = move-exception
-            goto L80
-        L7a:
-            r1 = move-exception
-            r3 = r5
-            goto L80
-        L7d:
-            r1 = move-exception
-            r10 = r5
-            r3 = r10
-        L80:
-            java.lang.StringBuilder r7 = new java.lang.StringBuilder
-            r7.<init>(r2)
-            int r9 = r9.mPhoneId
-            r7.append(r9)
-            r7.append(r0)
-            java.lang.String r9 = r7.toString()
-            java.lang.String r0 = "isRcsEnabled: AutoConfiguration is not completed."
-            android.util.Log.d(r9, r0)
-            r1.printStackTrace()
-        L99:
-            if (r6 == 0) goto La0
-            if (r3 == 0) goto La1
-            if (r10 <= 0) goto La0
-            goto La1
-        La0:
-            r4 = r5
-        La1:
-            return r4
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.sec.ims.ImsManager.isRcsEnabled(boolean):boolean");
+    @Deprecated
+    public boolean isRcsEnabled(boolean z) {
+        int i;
+        boolean zEquals;
+        RcsConfigurationReader rcsConfigurationReader = new RcsConfigurationReader(this.mContext);
+        try {
+        } catch (Settings.SettingNotFoundException e) {
+            Log.d("legacyImsManager[" + this.mPhoneId + "]", "isRcsEnabled: rcs_user_setting is not exist.");
+            e.printStackTrace();
+        }
+        boolean z2 = Settings.System.getInt(this.mContext.getContentResolver(), "rcs_user_setting") == 1;
+        if (!z) {
+            return z2;
+        }
+        try {
+            i = rcsConfigurationReader.getInt(RcsConfigurationReader.CONFIG_VERSION);
+            try {
+                zEquals = "true".equals(rcsConfigurationReader.getString(RcsConfigurationReader.AUTOCONFIG_COMPLETED));
+                try {
+                    Log.d("legacyImsManager[" + this.mPhoneId + "]", "isRcsEnabled: version " + i + " autoConfigComplete " + zEquals);
+                } catch (IllegalStateException e2) {
+                    e = e2;
+                    Log.d("legacyImsManager[" + this.mPhoneId + "]", "isRcsEnabled: AutoConfiguration is not completed.");
+                    e.printStackTrace();
+                    if (z2) {
+                    }
+                }
+            } catch (IllegalStateException e3) {
+                e = e3;
+                zEquals = false;
+            }
+        } catch (IllegalStateException e4) {
+            e = e4;
+            i = 0;
+            zEquals = false;
+        }
+        return !z2 && (!zEquals || i > 0);
     }
 
     public int[] getCallCount(int i) {
@@ -1774,9 +1715,9 @@ public class ImsManager {
             return;
         }
         try {
-            String registerImsRegistrationListenerForSlot = imsService.registerImsRegistrationListenerForSlot(iImsRegistrationListener, i);
-            if (!TextUtils.isEmpty(registerImsRegistrationListenerForSlot)) {
-                this.mRegListeners.put(iImsRegistrationListener, registerImsRegistrationListenerForSlot);
+            String strRegisterImsRegistrationListenerForSlot = imsService.registerImsRegistrationListenerForSlot(iImsRegistrationListener, i);
+            if (!TextUtils.isEmpty(strRegisterImsRegistrationListenerForSlot)) {
+                this.mRegListeners.put(iImsRegistrationListener, strRegisterImsRegistrationListenerForSlot);
             }
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -1796,9 +1737,9 @@ public class ImsManager {
             return;
         }
         try {
-            String registerSimMobilityStatusListenerByPhoneId = imsService.registerSimMobilityStatusListenerByPhoneId(iSimMobilityStatusListener, i);
-            if (!TextUtils.isEmpty(registerSimMobilityStatusListenerByPhoneId)) {
-                this.mSimMobilityStatusListeners.put(iSimMobilityStatusListener, registerSimMobilityStatusListenerByPhoneId);
+            String strRegisterSimMobilityStatusListenerByPhoneId = imsService.registerSimMobilityStatusListenerByPhoneId(iSimMobilityStatusListener, i);
+            if (!TextUtils.isEmpty(strRegisterSimMobilityStatusListenerByPhoneId)) {
+                this.mSimMobilityStatusListeners.put(iSimMobilityStatusListener, strRegisterSimMobilityStatusListenerByPhoneId);
             }
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -1810,11 +1751,11 @@ public class ImsManager {
             Log.e("legacyImsManager[" + i + "]", "listener is null.");
             return;
         }
-        String remove = this.mRegListeners.remove(iImsRegistrationListener);
+        String strRemove = this.mRegListeners.remove(iImsRegistrationListener);
         IImsService imsService = getImsService();
-        if (imsService != null && remove != null) {
+        if (imsService != null && strRemove != null) {
             try {
-                imsService.unregisterImsRegistrationListenerForSlot(remove, i);
+                imsService.unregisterImsRegistrationListenerForSlot(strRemove, i);
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
@@ -1828,11 +1769,11 @@ public class ImsManager {
             Log.e("legacyImsManager[" + i + "]", "listener is null.");
             return;
         }
-        String remove = this.mSimMobilityStatusListeners.remove(iSimMobilityStatusListener);
+        String strRemove = this.mSimMobilityStatusListeners.remove(iSimMobilityStatusListener);
         IImsService imsService = getImsService();
-        if (imsService != null && remove != null) {
+        if (imsService != null && strRemove != null) {
             try {
-                imsService.unregisterSimMobilityStatusListenerByPhoneId(remove, i);
+                imsService.unregisterSimMobilityStatusListenerByPhoneId(strRemove, i);
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
@@ -1917,7 +1858,6 @@ public class ImsManager {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class EpdgListener extends IEpdgListener.Stub {
         @Override // com.sec.ims.IEpdgListener
         public void onEpdgDeregister(int i) {

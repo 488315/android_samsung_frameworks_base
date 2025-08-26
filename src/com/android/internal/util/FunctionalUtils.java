@@ -2,7 +2,6 @@ package com.android.internal.util;
 
 import android.os.RemoteException;
 import android.util.ExceptionUtils;
-import com.android.internal.util.FunctionalUtils;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
@@ -14,7 +13,7 @@ public class FunctionalUtils {
 
     @FunctionalInterface
     public interface ThrowingChecked2Consumer<Input, ExceptionOne extends Exception, ExceptionTwo extends Exception> {
-        void accept(Input input) throws Exception, Exception;
+        void accept(Input input) throws Exception;
     }
 
     @FunctionalInterface
@@ -63,7 +62,7 @@ public class FunctionalUtils {
         return new Runnable() { // from class: com.android.internal.util.FunctionalUtils$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                FunctionalUtils.lambda$handleExceptions$0(FunctionalUtils.ThrowingRunnable.this, consumer);
+                FunctionalUtils.lambda$handleExceptions$0(throwingRunnable, consumer);
             }
         };
     }
@@ -174,17 +173,17 @@ public class FunctionalUtils {
     }
 
     public static String getLambdaName(Object obj) {
-        int indexOf;
-        String obj2 = obj.toString();
-        int indexOf2 = obj2.indexOf("-$$");
-        if (indexOf2 == -1 || (indexOf = obj2.indexOf(36, indexOf2 + 3)) == -1) {
-            return obj2;
+        int iIndexOf;
+        String string = obj.toString();
+        int iIndexOf2 = string.indexOf("-$$");
+        if (iIndexOf2 == -1 || (iIndexOf = string.indexOf(36, iIndexOf2 + 3)) == -1) {
+            return string;
         }
-        int i = indexOf + 1;
-        int indexOf3 = obj2.indexOf(36, i);
-        if (indexOf3 == -1) {
-            return obj2.substring(0, indexOf2 - 1) + "$Lambda";
+        int i = iIndexOf + 1;
+        int iIndexOf3 = string.indexOf(36, i);
+        if (iIndexOf3 == -1) {
+            return string.substring(0, iIndexOf2 - 1) + "$Lambda";
         }
-        return obj2.substring(0, indexOf2) + obj2.substring(i, indexOf3) + "$Lambda";
+        return string.substring(0, iIndexOf2) + string.substring(i, iIndexOf3) + "$Lambda";
     }
 }

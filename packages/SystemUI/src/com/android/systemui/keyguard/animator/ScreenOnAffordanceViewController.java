@@ -31,7 +31,6 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.FlowKt__LimitKt$drop$$inlined$unsafeFlow$1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ScreenOnAffordanceViewController extends ViewAnimationController {
     public boolean initPivot;
@@ -39,7 +38,6 @@ public final class ScreenOnAffordanceViewController extends ViewAnimationControl
     public final List screenONAffordanceViews;
     public final List screenOnSpringAnimationList;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.keyguard.animator.ScreenOnAffordanceViewController$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ DozeParameters $dozeParameters;
@@ -73,7 +71,7 @@ public final class ScreenOnAffordanceViewController extends ViewAnimationControl
             int i = this.label;
             if (i == 0) {
                 ResultKt.throwOnFailure(obj);
-                FlowKt__LimitKt$drop$$inlined$unsafeFlow$1 drop = FlowKt.drop(this.$powerInteractor.screenPowerState);
+                FlowKt__LimitKt$drop$$inlined$unsafeFlow$1 flowKt__LimitKt$drop$$inlined$unsafeFlow$1Drop = FlowKt.drop(this.$powerInteractor.screenPowerState);
                 final ScreenOnAffordanceViewController screenOnAffordanceViewController = this.this$0;
                 final KeyguardTouchAnimator keyguardTouchAnimator = this.$keyguardTouchAnimator;
                 final DozeParameters dozeParameters = this.$dozeParameters;
@@ -82,7 +80,7 @@ public final class ScreenOnAffordanceViewController extends ViewAnimationControl
                     public final Object emit(Object obj2, Continuation continuation) {
                         KeyguardTouchAnimator keyguardTouchAnimator2;
                         ScreenPowerState screenPowerState = (ScreenPowerState) obj2;
-                        final ScreenOnAffordanceViewController screenOnAffordanceViewController2 = ScreenOnAffordanceViewController.this;
+                        final ScreenOnAffordanceViewController screenOnAffordanceViewController2 = screenOnAffordanceViewController;
                         if (!screenOnAffordanceViewController2.initPivot) {
                             screenOnAffordanceViewController2.initPivot = true;
                             keyguardTouchAnimator.pivotViewController.setChildViewPivot$frameworks__base__packages__SystemUI__android_common__SystemUI_core();
@@ -101,9 +99,9 @@ public final class ScreenOnAffordanceViewController extends ViewAnimationControl
                             ArrayList arrayList = new ArrayList();
                             Iterator it = list.iterator();
                             while (true) {
-                                boolean hasNext = it.hasNext();
+                                boolean zHasNext = it.hasNext();
                                 keyguardTouchAnimator2 = screenOnAffordanceViewController2.keyguardTouchAnimator;
-                                if (!hasNext) {
+                                if (!zHasNext) {
                                     break;
                                 }
                                 Object next = it.next();
@@ -150,7 +148,7 @@ public final class ScreenOnAffordanceViewController extends ViewAnimationControl
                                 springAnimation2.addEndListener(new DynamicAnimation.OnAnimationEndListener() { // from class: com.android.systemui.keyguard.animator.ScreenOnAffordanceViewController$showScreenOnAffordanceAnimation$4$1
                                     @Override // androidx.dynamicanimation.animation.DynamicAnimation.OnAnimationEndListener
                                     public final void onAnimationEnd(DynamicAnimation dynamicAnimation, boolean z2, float f, float f2) {
-                                        NotificationPanelViewController.AnonymousClass4 anonymousClass4 = ScreenOnAffordanceViewController.this.keyguardTouchAnimator.callback;
+                                        NotificationPanelViewController.AnonymousClass4 anonymousClass4 = screenOnAffordanceViewController2.keyguardTouchAnimator.callback;
                                         if (anonymousClass4 == null) {
                                             anonymousClass4 = null;
                                         }
@@ -169,7 +167,7 @@ public final class ScreenOnAffordanceViewController extends ViewAnimationControl
                     }
                 };
                 this.label = 1;
-                if (drop.collect(flowCollector, this) == coroutineSingletons) {
+                if (flowKt__LimitKt$drop$$inlined$unsafeFlow$1Drop.collect(flowCollector, this) == coroutineSingletons) {
                     return coroutineSingletons;
                 }
             } else {
@@ -182,7 +180,6 @@ public final class ScreenOnAffordanceViewController extends ViewAnimationControl
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();

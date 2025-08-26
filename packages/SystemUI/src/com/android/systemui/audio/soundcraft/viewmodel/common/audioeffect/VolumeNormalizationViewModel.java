@@ -14,7 +14,6 @@ import com.android.systemui.audio.soundcraft.utils.SoundCraftSALogging;
 import com.android.systemui.audio.soundcraft.viewmodel.common.base.BaseToggleViewModel;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class VolumeNormalizationViewModel extends BaseToggleViewModel {
     public final Context context;
@@ -23,7 +22,6 @@ public final class VolumeNormalizationViewModel extends BaseToggleViewModel {
     public final SoundAliveManager soundAliveManager;
     public final WearableManager wearableManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -61,8 +59,8 @@ public final class VolumeNormalizationViewModel extends BaseToggleViewModel {
         ModelProvider modelProvider = this.modelProvider;
         Boolean bool = modelProvider.effectModel.volumeNormalization;
         if (bool != null) {
-            boolean booleanValue = bool.booleanValue();
-            boolean z = !booleanValue;
+            boolean zBooleanValue = bool.booleanValue();
+            boolean z = !zBooleanValue;
             modelProvider.effectModel.volumeNormalization = Boolean.valueOf(z);
             this.isSelected.setValue(Boolean.valueOf(z));
             AppSettingModel appSettingModel = modelProvider.appSettingModel;
@@ -89,7 +87,7 @@ public final class VolumeNormalizationViewModel extends BaseToggleViewModel {
             SoundCraftSALogging.ScreenId screenId = modelProvider.effectOutDeviceType == EffectOutDeviceType.PHONE ? SoundCraftSALogging.ScreenId.EID_PHONE_DETAIL_SETTING : SoundCraftSALogging.ScreenId.EID_BUDS_DETAIL_SETTING;
             SoundCraftSALogging.Event event = SoundCraftSALogging.Event.LOUDNESS_NORMALIZATION;
             soundCraftSALogging.getClass();
-            SoundCraftSALogging.sendEventLog$default(soundCraftSALogging, screenId, event, !booleanValue ? SoundCraftSALogging.ON : SoundCraftSALogging.OFF, 8);
+            SoundCraftSALogging.sendEventLog$default(soundCraftSALogging, screenId, event, !zBooleanValue ? SoundCraftSALogging.ON : SoundCraftSALogging.OFF, 8);
         }
         notifyChange();
     }

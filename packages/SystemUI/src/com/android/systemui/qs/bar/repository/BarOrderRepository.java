@@ -1,6 +1,7 @@
 package com.android.systemui.qs.bar.repository;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
 import android.text.TextUtils;
 import android.util.Log;
@@ -20,7 +21,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class BarOrderRepository {
     public final Context context;
@@ -32,7 +32,6 @@ public final class BarOrderRepository {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class BarClsName {
         public static final /* synthetic */ BarClsName[] $VALUES;
         public static final BarClsName DATAUSAGE_BAR;
@@ -69,7 +68,6 @@ public final class BarOrderRepository {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -89,13 +87,13 @@ public final class BarOrderRepository {
         this.userTracker = userTracker;
     }
 
-    public final String getDefaultBarOrderList() {
+    public final String getDefaultBarOrderList() throws Resources.NotFoundException {
         String string = this.context.getResources().getString(R.string.sec_qs_bar_order_list_default);
         MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("defaultBarOrderList result : ", string, "BarOrderRepository");
         return string;
     }
 
-    public final String loadBarOrder() {
+    public final String loadBarOrder() throws Resources.NotFoundException {
         TunerService tunerService = this.tunerService;
         String value = tunerService.getValue("sysui_quick_bar_order");
         if (value != null) {
@@ -104,9 +102,9 @@ public final class BarOrderRepository {
             }
             if (value != null) {
                 int i = 0;
-                List split$default = StringsKt__StringsKt.split$default(getDefaultBarOrderList(), new String[]{","}, 0, 6);
+                List listSplit$default = StringsKt__StringsKt.split$default(getDefaultBarOrderList(), new String[]{","}, 0, 6);
                 ArrayList arrayList = new ArrayList();
-                for (Object obj : split$default) {
+                for (Object obj : listSplit$default) {
                     if (!StringsKt__StringsKt.contains(value, (String) obj, false)) {
                         arrayList.add(obj);
                     }
@@ -132,21 +130,24 @@ public final class BarOrderRepository {
         return defaultBarOrderList;
     }
 
-    public final int loadCollapsedBarRow() {
+    /* JADX WARN: Removed duplicated region for block: B:9:0x001b  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public final int loadCollapsedBarRow() throws NumberFormatException {
         int i;
         String value = this.tunerService.getValue("sysui_quick_bar_collapsed_row");
-        if (value != null) {
+        if (value == null) {
+            Log.d("BarOrderRepository", "loadCollapsedBarRow() sysui_quick_bar_collapsed_row is null, load default value");
+            i = 2;
+        } else {
             if (value.length() == 0) {
                 value = null;
             }
             if (value != null) {
                 i = Integer.parseInt(value);
-                ListPopupWindow$$ExternalSyntheticOutline0.m(i, "loadCollapsedBarRow() result : ", "BarOrderRepository");
-                return i;
             }
         }
-        Log.d("BarOrderRepository", "loadCollapsedBarRow() sysui_quick_bar_collapsed_row is null, load default value");
-        i = 2;
         ListPopupWindow$$ExternalSyntheticOutline0.m(i, "loadCollapsedBarRow() result : ", "BarOrderRepository");
         return i;
     }

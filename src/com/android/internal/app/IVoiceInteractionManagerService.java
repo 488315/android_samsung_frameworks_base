@@ -473,9 +473,9 @@ public interface IVoiceInteractionManagerService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IVoiceInteractionManagerService)) {
-                return (IVoiceInteractionManagerService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IVoiceInteractionManagerService)) {
+                return (IVoiceInteractionManagerService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -612,82 +612,82 @@ public interface IVoiceInteractionManagerService extends IInterface {
             switch (i) {
                 case 1:
                     Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                    int readInt = parcel.readInt();
-                    String readString = parcel.readString();
+                    int i3 = parcel.readInt();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    showSession(bundle, readInt, readString);
+                    showSession(bundle, i3, string);
                     parcel2.writeNoException();
                     return true;
                 case 2:
-                    IBinder readStrongBinder = parcel.readStrongBinder();
-                    IVoiceInteractionSession asInterface = IVoiceInteractionSession.Stub.asInterface(parcel.readStrongBinder());
-                    IVoiceInteractor asInterface2 = IVoiceInteractor.Stub.asInterface(parcel.readStrongBinder());
+                    IBinder strongBinder = parcel.readStrongBinder();
+                    IVoiceInteractionSession iVoiceInteractionSessionAsInterface = IVoiceInteractionSession.Stub.asInterface(parcel.readStrongBinder());
+                    IVoiceInteractor iVoiceInteractorAsInterface = IVoiceInteractor.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    boolean deliverNewSession = deliverNewSession(readStrongBinder, asInterface, asInterface2);
+                    boolean zDeliverNewSession = deliverNewSession(strongBinder, iVoiceInteractionSessionAsInterface, iVoiceInteractorAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(deliverNewSession);
+                    parcel2.writeBoolean(zDeliverNewSession);
                     return true;
                 case 3:
-                    IBinder readStrongBinder2 = parcel.readStrongBinder();
+                    IBinder strongBinder2 = parcel.readStrongBinder();
                     Bundle bundle2 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                    int readInt2 = parcel.readInt();
-                    String readString2 = parcel.readString();
+                    int i4 = parcel.readInt();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean showSessionFromSession = showSessionFromSession(readStrongBinder2, bundle2, readInt2, readString2);
+                    boolean zShowSessionFromSession = showSessionFromSession(strongBinder2, bundle2, i4, string2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(showSessionFromSession);
+                    parcel2.writeBoolean(zShowSessionFromSession);
                     return true;
                 case 4:
-                    IBinder readStrongBinder3 = parcel.readStrongBinder();
+                    IBinder strongBinder3 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    boolean hideSessionFromSession = hideSessionFromSession(readStrongBinder3);
+                    boolean zHideSessionFromSession = hideSessionFromSession(strongBinder3);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(hideSessionFromSession);
+                    parcel2.writeBoolean(zHideSessionFromSession);
                     return true;
                 case 5:
-                    IBinder readStrongBinder4 = parcel.readStrongBinder();
+                    IBinder strongBinder4 = parcel.readStrongBinder();
                     Intent intent = (Intent) parcel.readTypedObject(Intent.CREATOR);
-                    String readString3 = parcel.readString();
-                    String readString4 = parcel.readString();
+                    String string3 = parcel.readString();
+                    String string4 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int startVoiceActivity = startVoiceActivity(readStrongBinder4, intent, readString3, readString4);
+                    int iStartVoiceActivity = startVoiceActivity(strongBinder4, intent, string3, string4);
                     parcel2.writeNoException();
-                    parcel2.writeInt(startVoiceActivity);
+                    parcel2.writeInt(iStartVoiceActivity);
                     return true;
                 case 6:
-                    IBinder readStrongBinder5 = parcel.readStrongBinder();
+                    IBinder strongBinder5 = parcel.readStrongBinder();
                     Intent intent2 = (Intent) parcel.readTypedObject(Intent.CREATOR);
-                    String readString5 = parcel.readString();
-                    String readString6 = parcel.readString();
+                    String string5 = parcel.readString();
+                    String string6 = parcel.readString();
                     Bundle bundle3 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    int startAssistantActivity = startAssistantActivity(readStrongBinder5, intent2, readString5, readString6, bundle3);
+                    int iStartAssistantActivity = startAssistantActivity(strongBinder5, intent2, string5, string6, bundle3);
                     parcel2.writeNoException();
-                    parcel2.writeInt(startAssistantActivity);
+                    parcel2.writeInt(iStartAssistantActivity);
                     return true;
                 case 7:
-                    IBinder readStrongBinder6 = parcel.readStrongBinder();
-                    boolean readBoolean = parcel.readBoolean();
+                    IBinder strongBinder6 = parcel.readStrongBinder();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setKeepAwake(readStrongBinder6, readBoolean);
+                    setKeepAwake(strongBinder6, z);
                     parcel2.writeNoException();
                     return true;
                 case 8:
-                    IBinder readStrongBinder7 = parcel.readStrongBinder();
+                    IBinder strongBinder7 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    closeSystemDialogs(readStrongBinder7);
+                    closeSystemDialogs(strongBinder7);
                     parcel2.writeNoException();
                     return true;
                 case 9:
-                    IBinder readStrongBinder8 = parcel.readStrongBinder();
+                    IBinder strongBinder8 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    finish(readStrongBinder8);
+                    finish(strongBinder8);
                     parcel2.writeNoException();
                     return true;
                 case 10:
-                    int readInt3 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setDisabledShowContext(readInt3);
+                    setDisabledShowContext(i5);
                     parcel2.writeNoException();
                     return true;
                 case 11:
@@ -701,48 +701,48 @@ public interface IVoiceInteractionManagerService extends IInterface {
                     parcel2.writeInt(userDisabledShowContext);
                     return true;
                 case 13:
-                    int readInt4 = parcel.readInt();
-                    String readString7 = parcel.readString();
+                    int i6 = parcel.readInt();
+                    String string7 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    SoundTrigger.KeyphraseSoundModel keyphraseSoundModel = getKeyphraseSoundModel(readInt4, readString7);
+                    SoundTrigger.KeyphraseSoundModel keyphraseSoundModel = getKeyphraseSoundModel(i6, string7);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(keyphraseSoundModel, 1);
                     return true;
                 case 14:
                     SoundTrigger.KeyphraseSoundModel keyphraseSoundModel2 = (SoundTrigger.KeyphraseSoundModel) parcel.readTypedObject(SoundTrigger.KeyphraseSoundModel.CREATOR);
                     parcel.enforceNoDataAvail();
-                    int updateKeyphraseSoundModel = updateKeyphraseSoundModel(keyphraseSoundModel2);
+                    int iUpdateKeyphraseSoundModel = updateKeyphraseSoundModel(keyphraseSoundModel2);
                     parcel2.writeNoException();
-                    parcel2.writeInt(updateKeyphraseSoundModel);
+                    parcel2.writeInt(iUpdateKeyphraseSoundModel);
                     return true;
                 case 15:
-                    int readInt5 = parcel.readInt();
-                    String readString8 = parcel.readString();
+                    int i7 = parcel.readInt();
+                    String string8 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int deleteKeyphraseSoundModel = deleteKeyphraseSoundModel(readInt5, readString8);
+                    int iDeleteKeyphraseSoundModel = deleteKeyphraseSoundModel(i7, string8);
                     parcel2.writeNoException();
-                    parcel2.writeInt(deleteKeyphraseSoundModel);
+                    parcel2.writeInt(iDeleteKeyphraseSoundModel);
                     return true;
                 case 16:
-                    boolean readBoolean2 = parcel.readBoolean();
-                    IBinder readStrongBinder9 = parcel.readStrongBinder();
+                    boolean z2 = parcel.readBoolean();
+                    IBinder strongBinder9 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    setModelDatabaseForTestEnabled(readBoolean2, readStrongBinder9);
+                    setModelDatabaseForTestEnabled(z2, strongBinder9);
                     parcel2.writeNoException();
                     return true;
                 case 17:
-                    int readInt6 = parcel.readInt();
-                    String readString9 = parcel.readString();
+                    int i8 = parcel.readInt();
+                    String string9 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isEnrolledForKeyphrase = isEnrolledForKeyphrase(readInt6, readString9);
+                    boolean zIsEnrolledForKeyphrase = isEnrolledForKeyphrase(i8, string9);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isEnrolledForKeyphrase);
+                    parcel2.writeBoolean(zIsEnrolledForKeyphrase);
                     return true;
                 case 18:
-                    String readString10 = parcel.readString();
-                    String readString11 = parcel.readString();
+                    String string10 = parcel.readString();
+                    String string11 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    KeyphraseMetadata enrolledKeyphraseMetadata = getEnrolledKeyphraseMetadata(readString10, readString11);
+                    KeyphraseMetadata enrolledKeyphraseMetadata = getEnrolledKeyphraseMetadata(string10, string11);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(enrolledKeyphraseMetadata, 1);
                     return true;
@@ -753,14 +753,14 @@ public interface IVoiceInteractionManagerService extends IInterface {
                     return true;
                 case 20:
                     Bundle bundle4 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                    int readInt7 = parcel.readInt();
-                    String readString12 = parcel.readString();
-                    IVoiceInteractionSessionShowCallback asInterface3 = IVoiceInteractionSessionShowCallback.Stub.asInterface(parcel.readStrongBinder());
-                    IBinder readStrongBinder10 = parcel.readStrongBinder();
+                    int i9 = parcel.readInt();
+                    String string12 = parcel.readString();
+                    IVoiceInteractionSessionShowCallback iVoiceInteractionSessionShowCallbackAsInterface = IVoiceInteractionSessionShowCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IBinder strongBinder10 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    boolean showSessionForActiveService = showSessionForActiveService(bundle4, readInt7, readString12, asInterface3, readStrongBinder10);
+                    boolean zShowSessionForActiveService = showSessionForActiveService(bundle4, i9, string12, iVoiceInteractionSessionShowCallbackAsInterface, strongBinder10);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(showSessionForActiveService);
+                    parcel2.writeBoolean(zShowSessionForActiveService);
                     return true;
                 case 21:
                     hideCurrentSession();
@@ -771,35 +771,35 @@ public interface IVoiceInteractionManagerService extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 23:
-                    boolean isSessionRunning = isSessionRunning();
+                    boolean zIsSessionRunning = isSessionRunning();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSessionRunning);
+                    parcel2.writeBoolean(zIsSessionRunning);
                     return true;
                 case 24:
-                    boolean activeServiceSupportsAssist = activeServiceSupportsAssist();
+                    boolean zActiveServiceSupportsAssist = activeServiceSupportsAssist();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(activeServiceSupportsAssist);
+                    parcel2.writeBoolean(zActiveServiceSupportsAssist);
                     return true;
                 case 25:
-                    boolean activeServiceSupportsLaunchFromKeyguard = activeServiceSupportsLaunchFromKeyguard();
+                    boolean zActiveServiceSupportsLaunchFromKeyguard = activeServiceSupportsLaunchFromKeyguard();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(activeServiceSupportsLaunchFromKeyguard);
+                    parcel2.writeBoolean(zActiveServiceSupportsLaunchFromKeyguard);
                     return true;
                 case 26:
                     onLockscreenShown();
                     parcel2.writeNoException();
                     return true;
                 case 27:
-                    IVoiceInteractionSessionListener asInterface4 = IVoiceInteractionSessionListener.Stub.asInterface(parcel.readStrongBinder());
+                    IVoiceInteractionSessionListener iVoiceInteractionSessionListenerAsInterface = IVoiceInteractionSessionListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerVoiceInteractionSessionListener(asInterface4);
+                    registerVoiceInteractionSessionListener(iVoiceInteractionSessionListenerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 28:
-                    ArrayList<String> createStringArrayList = parcel.createStringArrayList();
-                    IVoiceActionCheckCallback asInterface5 = IVoiceActionCheckCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
+                    IVoiceActionCheckCallback iVoiceActionCheckCallbackAsInterface = IVoiceActionCheckCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    getActiveServiceSupportedActions(createStringArrayList, asInterface5);
+                    getActiveServiceSupportedActions(arrayListCreateStringArrayList, iVoiceActionCheckCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 29:
@@ -809,72 +809,72 @@ public interface IVoiceInteractionManagerService extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 30:
-                    IBinder readStrongBinder11 = parcel.readStrongBinder();
-                    int readInt8 = parcel.readInt();
-                    IBinder readStrongBinder12 = parcel.readStrongBinder();
+                    IBinder strongBinder11 = parcel.readStrongBinder();
+                    int i10 = parcel.readInt();
+                    IBinder strongBinder12 = parcel.readStrongBinder();
                     RemoteCallback remoteCallback = (RemoteCallback) parcel.readTypedObject(RemoteCallback.CREATOR);
                     RemoteCallback remoteCallback2 = (RemoteCallback) parcel.readTypedObject(RemoteCallback.CREATOR);
                     parcel.enforceNoDataAvail();
-                    requestDirectActions(readStrongBinder11, readInt8, readStrongBinder12, remoteCallback, remoteCallback2);
+                    requestDirectActions(strongBinder11, i10, strongBinder12, remoteCallback, remoteCallback2);
                     parcel2.writeNoException();
                     return true;
                 case 31:
-                    IBinder readStrongBinder13 = parcel.readStrongBinder();
-                    String readString13 = parcel.readString();
+                    IBinder strongBinder13 = parcel.readStrongBinder();
+                    String string13 = parcel.readString();
                     Bundle bundle6 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
-                    int readInt9 = parcel.readInt();
-                    IBinder readStrongBinder14 = parcel.readStrongBinder();
+                    int i11 = parcel.readInt();
+                    IBinder strongBinder14 = parcel.readStrongBinder();
                     RemoteCallback remoteCallback3 = (RemoteCallback) parcel.readTypedObject(RemoteCallback.CREATOR);
                     RemoteCallback remoteCallback4 = (RemoteCallback) parcel.readTypedObject(RemoteCallback.CREATOR);
                     parcel.enforceNoDataAvail();
-                    performDirectAction(readStrongBinder13, readString13, bundle6, readInt9, readStrongBinder14, remoteCallback3, remoteCallback4);
+                    performDirectAction(strongBinder13, string13, bundle6, i11, strongBinder14, remoteCallback3, remoteCallback4);
                     parcel2.writeNoException();
                     return true;
                 case 32:
-                    boolean readBoolean3 = parcel.readBoolean();
+                    boolean z3 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setDisabled(readBoolean3);
+                    setDisabled(z3);
                     parcel2.writeNoException();
                     return true;
                 case 33:
                     Identity identity = (Identity) parcel.readTypedObject(Identity.CREATOR);
-                    IBinder readStrongBinder15 = parcel.readStrongBinder();
+                    IBinder strongBinder15 = parcel.readStrongBinder();
                     SoundTrigger.ModuleProperties moduleProperties = (SoundTrigger.ModuleProperties) parcel.readTypedObject(SoundTrigger.ModuleProperties.CREATOR);
                     parcel.enforceNoDataAvail();
-                    IVoiceInteractionSoundTriggerSession createSoundTriggerSessionAsOriginator = createSoundTriggerSessionAsOriginator(identity, readStrongBinder15, moduleProperties);
+                    IVoiceInteractionSoundTriggerSession iVoiceInteractionSoundTriggerSessionCreateSoundTriggerSessionAsOriginator = createSoundTriggerSessionAsOriginator(identity, strongBinder15, moduleProperties);
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(createSoundTriggerSessionAsOriginator);
+                    parcel2.writeStrongInterface(iVoiceInteractionSoundTriggerSessionCreateSoundTriggerSessionAsOriginator);
                     return true;
                 case 34:
                     Identity identity2 = (Identity) parcel.readTypedObject(Identity.CREATOR);
                     parcel.enforceNoDataAvail();
-                    List<SoundTrigger.ModuleProperties> listModuleProperties = listModuleProperties(identity2);
+                    List<SoundTrigger.ModuleProperties> listListModuleProperties = listModuleProperties(identity2);
                     parcel2.writeNoException();
-                    parcel2.writeTypedList(listModuleProperties, 1);
+                    parcel2.writeTypedList(listListModuleProperties, 1);
                     return true;
                 case 35:
                     PersistableBundle persistableBundle = (PersistableBundle) parcel.readTypedObject(PersistableBundle.CREATOR);
                     SharedMemory sharedMemory = (SharedMemory) parcel.readTypedObject(SharedMemory.CREATOR);
-                    IBinder readStrongBinder16 = parcel.readStrongBinder();
+                    IBinder strongBinder16 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    updateState(persistableBundle, sharedMemory, readStrongBinder16);
+                    updateState(persistableBundle, sharedMemory, strongBinder16);
                     parcel2.writeNoException();
                     return true;
                 case 36:
                     Identity identity3 = (Identity) parcel.readTypedObject(Identity.CREATOR);
                     PersistableBundle persistableBundle2 = (PersistableBundle) parcel.readTypedObject(PersistableBundle.CREATOR);
                     SharedMemory sharedMemory2 = (SharedMemory) parcel.readTypedObject(SharedMemory.CREATOR);
-                    IBinder readStrongBinder17 = parcel.readStrongBinder();
-                    IHotwordRecognitionStatusCallback asInterface6 = IHotwordRecognitionStatusCallback.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt10 = parcel.readInt();
+                    IBinder strongBinder17 = parcel.readStrongBinder();
+                    IHotwordRecognitionStatusCallback iHotwordRecognitionStatusCallbackAsInterface = IHotwordRecognitionStatusCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    initAndVerifyDetector(identity3, persistableBundle2, sharedMemory2, readStrongBinder17, asInterface6, readInt10);
+                    initAndVerifyDetector(identity3, persistableBundle2, sharedMemory2, strongBinder17, iHotwordRecognitionStatusCallbackAsInterface, i12);
                     parcel2.writeNoException();
                     return true;
                 case 37:
-                    IBinder readStrongBinder18 = parcel.readStrongBinder();
+                    IBinder strongBinder18 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    destroyDetector(readStrongBinder18);
+                    destroyDetector(strongBinder18);
                     parcel2.writeNoException();
                     return true;
                 case 38:
@@ -882,15 +882,15 @@ public interface IVoiceInteractionManagerService extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 39:
-                    IVisualQueryRecognitionStatusListener asInterface7 = IVisualQueryRecognitionStatusListener.Stub.asInterface(parcel.readStrongBinder());
+                    IVisualQueryRecognitionStatusListener iVisualQueryRecognitionStatusListenerAsInterface = IVisualQueryRecognitionStatusListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    subscribeVisualQueryRecognitionStatus(asInterface7);
+                    subscribeVisualQueryRecognitionStatus(iVisualQueryRecognitionStatusListenerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 40:
-                    IVisualQueryDetectionAttentionListener asInterface8 = IVisualQueryDetectionAttentionListener.Stub.asInterface(parcel.readStrongBinder());
+                    IVisualQueryDetectionAttentionListener iVisualQueryDetectionAttentionListenerAsInterface = IVisualQueryDetectionAttentionListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    enableVisualQueryDetection(asInterface8);
+                    enableVisualQueryDetection(iVisualQueryDetectionAttentionListenerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 41:
@@ -898,9 +898,9 @@ public interface IVoiceInteractionManagerService extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 42:
-                    IVisualQueryDetectionVoiceInteractionCallback asInterface9 = IVisualQueryDetectionVoiceInteractionCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IVisualQueryDetectionVoiceInteractionCallback iVisualQueryDetectionVoiceInteractionCallbackAsInterface = IVisualQueryDetectionVoiceInteractionCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    startPerceiving(asInterface9);
+                    startPerceiving(iVisualQueryDetectionVoiceInteractionCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 43:
@@ -909,9 +909,9 @@ public interface IVoiceInteractionManagerService extends IInterface {
                     return true;
                 case 44:
                     AudioFormat audioFormat = (AudioFormat) parcel.readTypedObject(AudioFormat.CREATOR);
-                    IMicrophoneHotwordDetectionVoiceInteractionCallback asInterface10 = IMicrophoneHotwordDetectionVoiceInteractionCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IMicrophoneHotwordDetectionVoiceInteractionCallback iMicrophoneHotwordDetectionVoiceInteractionCallbackAsInterface = IMicrophoneHotwordDetectionVoiceInteractionCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    startListeningFromMic(audioFormat, asInterface10);
+                    startListeningFromMic(audioFormat, iMicrophoneHotwordDetectionVoiceInteractionCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 45:
@@ -922,43 +922,43 @@ public interface IVoiceInteractionManagerService extends IInterface {
                     ParcelFileDescriptor parcelFileDescriptor = (ParcelFileDescriptor) parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
                     AudioFormat audioFormat2 = (AudioFormat) parcel.readTypedObject(AudioFormat.CREATOR);
                     PersistableBundle persistableBundle3 = (PersistableBundle) parcel.readTypedObject(PersistableBundle.CREATOR);
-                    IBinder readStrongBinder19 = parcel.readStrongBinder();
-                    IMicrophoneHotwordDetectionVoiceInteractionCallback asInterface11 = IMicrophoneHotwordDetectionVoiceInteractionCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IBinder strongBinder19 = parcel.readStrongBinder();
+                    IMicrophoneHotwordDetectionVoiceInteractionCallback iMicrophoneHotwordDetectionVoiceInteractionCallbackAsInterface2 = IMicrophoneHotwordDetectionVoiceInteractionCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    startListeningFromExternalSource(parcelFileDescriptor, audioFormat2, persistableBundle3, readStrongBinder19, asInterface11);
+                    startListeningFromExternalSource(parcelFileDescriptor, audioFormat2, persistableBundle3, strongBinder19, iMicrophoneHotwordDetectionVoiceInteractionCallbackAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 47:
                     SoundTrigger.KeyphraseRecognitionEvent keyphraseRecognitionEvent = (SoundTrigger.KeyphraseRecognitionEvent) parcel.readTypedObject(SoundTrigger.KeyphraseRecognitionEvent.CREATOR);
-                    IHotwordRecognitionStatusCallback asInterface12 = IHotwordRecognitionStatusCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IHotwordRecognitionStatusCallback iHotwordRecognitionStatusCallbackAsInterface2 = IHotwordRecognitionStatusCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    triggerHardwareRecognitionEventForTest(keyphraseRecognitionEvent, asInterface12);
+                    triggerHardwareRecognitionEventForTest(keyphraseRecognitionEvent, iHotwordRecognitionStatusCallbackAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 48:
-                    IBinder readStrongBinder20 = parcel.readStrongBinder();
+                    IBinder strongBinder20 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    startListeningVisibleActivityChanged(readStrongBinder20);
+                    startListeningVisibleActivityChanged(strongBinder20);
                     parcel2.writeNoException();
                     return true;
                 case 49:
-                    IBinder readStrongBinder21 = parcel.readStrongBinder();
+                    IBinder strongBinder21 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    stopListeningVisibleActivityChanged(readStrongBinder21);
+                    stopListeningVisibleActivityChanged(strongBinder21);
                     parcel2.writeNoException();
                     return true;
                 case 50:
-                    IBinder readStrongBinder22 = parcel.readStrongBinder();
-                    boolean readBoolean4 = parcel.readBoolean();
+                    IBinder strongBinder22 = parcel.readStrongBinder();
+                    boolean z4 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setSessionWindowVisible(readStrongBinder22, readBoolean4);
+                    setSessionWindowVisible(strongBinder22, z4);
                     parcel2.writeNoException();
                     return true;
                 case 51:
-                    IBinder readStrongBinder23 = parcel.readStrongBinder();
-                    int readInt11 = parcel.readInt();
+                    IBinder strongBinder23 = parcel.readStrongBinder();
+                    int i13 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    notifyActivityEventChanged(readStrongBinder23, readInt11);
+                    notifyActivityEventChanged(strongBinder23, i13);
                     return true;
                 case 52:
                     boolean accessibilityDetectionEnabled = getAccessibilityDetectionEnabled();
@@ -966,14 +966,14 @@ public interface IVoiceInteractionManagerService extends IInterface {
                     parcel2.writeBoolean(accessibilityDetectionEnabled);
                     return true;
                 case 53:
-                    IVoiceInteractionAccessibilitySettingsListener asInterface13 = IVoiceInteractionAccessibilitySettingsListener.Stub.asInterface(parcel.readStrongBinder());
+                    IVoiceInteractionAccessibilitySettingsListener iVoiceInteractionAccessibilitySettingsListenerAsInterface = IVoiceInteractionAccessibilitySettingsListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerAccessibilityDetectionSettingsListener(asInterface13);
+                    registerAccessibilityDetectionSettingsListener(iVoiceInteractionAccessibilitySettingsListenerAsInterface);
                     return true;
                 case 54:
-                    IVoiceInteractionAccessibilitySettingsListener asInterface14 = IVoiceInteractionAccessibilitySettingsListener.Stub.asInterface(parcel.readStrongBinder());
+                    IVoiceInteractionAccessibilitySettingsListener iVoiceInteractionAccessibilitySettingsListenerAsInterface2 = IVoiceInteractionAccessibilitySettingsListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterAccessibilityDetectionSettingsListener(asInterface14);
+                    unregisterAccessibilityDetectionSettingsListener(iVoiceInteractionAccessibilitySettingsListenerAsInterface2);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -998,860 +998,860 @@ public interface IVoiceInteractionManagerService extends IInterface {
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public void showSession(Bundle bundle, int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public boolean deliverNewSession(IBinder iBinder, IVoiceInteractionSession iVoiceInteractionSession, IVoiceInteractor iVoiceInteractor) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeStrongInterface(iVoiceInteractionSession);
-                    obtain.writeStrongInterface(iVoiceInteractor);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeStrongInterface(iVoiceInteractionSession);
+                    parcelObtain.writeStrongInterface(iVoiceInteractor);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public boolean showSessionFromSession(IBinder iBinder, Bundle bundle, int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public boolean hideSessionFromSession(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public int startVoiceActivity(IBinder iBinder, Intent intent, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(intent, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(intent, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public int startAssistantActivity(IBinder iBinder, Intent intent, String str, String str2, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(intent, 0);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(intent, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public void setKeepAwake(IBinder iBinder, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public void closeSystemDialogs(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public void finish(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public void setDisabledShowContext(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public int getDisabledShowContext() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public int getUserDisabledShowContext() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public SoundTrigger.KeyphraseSoundModel getKeyphraseSoundModel(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (SoundTrigger.KeyphraseSoundModel) obtain2.readTypedObject(SoundTrigger.KeyphraseSoundModel.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (SoundTrigger.KeyphraseSoundModel) parcelObtain2.readTypedObject(SoundTrigger.KeyphraseSoundModel.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public int updateKeyphraseSoundModel(SoundTrigger.KeyphraseSoundModel keyphraseSoundModel) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(keyphraseSoundModel, 0);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(keyphraseSoundModel, 0);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public int deleteKeyphraseSoundModel(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public void setModelDatabaseForTestEnabled(boolean z, IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public boolean isEnrolledForKeyphrase(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public KeyphraseMetadata getEnrolledKeyphraseMetadata(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (KeyphraseMetadata) obtain2.readTypedObject(KeyphraseMetadata.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (KeyphraseMetadata) parcelObtain2.readTypedObject(KeyphraseMetadata.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public ComponentName getActiveServiceComponentName() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ComponentName) obtain2.readTypedObject(ComponentName.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ComponentName) parcelObtain2.readTypedObject(ComponentName.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public boolean showSessionForActiveService(Bundle bundle, int i, String str, IVoiceInteractionSessionShowCallback iVoiceInteractionSessionShowCallback, IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iVoiceInteractionSessionShowCallback);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iVoiceInteractionSessionShowCallback);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public void hideCurrentSession() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public void launchVoiceAssistFromKeyguard() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public boolean isSessionRunning() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public boolean activeServiceSupportsAssist() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public boolean activeServiceSupportsLaunchFromKeyguard() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public void onLockscreenShown() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(26, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(26, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public void registerVoiceInteractionSessionListener(IVoiceInteractionSessionListener iVoiceInteractionSessionListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iVoiceInteractionSessionListener);
-                    this.mRemote.transact(27, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iVoiceInteractionSessionListener);
+                    this.mRemote.transact(27, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public void getActiveServiceSupportedActions(List<String> list, IVoiceActionCheckCallback iVoiceActionCheckCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStringList(list);
-                    obtain.writeStrongInterface(iVoiceActionCheckCallback);
-                    this.mRemote.transact(28, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStringList(list);
+                    parcelObtain.writeStrongInterface(iVoiceActionCheckCallback);
+                    this.mRemote.transact(28, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public void setUiHints(Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(29, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(29, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public void requestDirectActions(IBinder iBinder, int i, IBinder iBinder2, RemoteCallback remoteCallback, RemoteCallback remoteCallback2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    obtain.writeStrongBinder(iBinder2);
-                    obtain.writeTypedObject(remoteCallback, 0);
-                    obtain.writeTypedObject(remoteCallback2, 0);
-                    this.mRemote.transact(30, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongBinder(iBinder2);
+                    parcelObtain.writeTypedObject(remoteCallback, 0);
+                    parcelObtain.writeTypedObject(remoteCallback2, 0);
+                    this.mRemote.transact(30, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public void performDirectAction(IBinder iBinder, String str, Bundle bundle, int i, IBinder iBinder2, RemoteCallback remoteCallback, RemoteCallback remoteCallback2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(bundle, 0);
-                    obtain.writeInt(i);
-                    obtain.writeStrongBinder(iBinder2);
-                    obtain.writeTypedObject(remoteCallback, 0);
-                    obtain.writeTypedObject(remoteCallback2, 0);
-                    this.mRemote.transact(31, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongBinder(iBinder2);
+                    parcelObtain.writeTypedObject(remoteCallback, 0);
+                    parcelObtain.writeTypedObject(remoteCallback2, 0);
+                    this.mRemote.transact(31, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public void setDisabled(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(32, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(32, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public IVoiceInteractionSoundTriggerSession createSoundTriggerSessionAsOriginator(Identity identity, IBinder iBinder, SoundTrigger.ModuleProperties moduleProperties) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(identity, 0);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(moduleProperties, 0);
-                    this.mRemote.transact(33, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IVoiceInteractionSoundTriggerSession.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(identity, 0);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(moduleProperties, 0);
+                    this.mRemote.transact(33, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IVoiceInteractionSoundTriggerSession.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public List<SoundTrigger.ModuleProperties> listModuleProperties(Identity identity) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(identity, 0);
-                    this.mRemote.transact(34, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(SoundTrigger.ModuleProperties.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(identity, 0);
+                    this.mRemote.transact(34, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(SoundTrigger.ModuleProperties.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public void updateState(PersistableBundle persistableBundle, SharedMemory sharedMemory, IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(persistableBundle, 0);
-                    obtain.writeTypedObject(sharedMemory, 0);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(35, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(persistableBundle, 0);
+                    parcelObtain.writeTypedObject(sharedMemory, 0);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(35, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public void initAndVerifyDetector(Identity identity, PersistableBundle persistableBundle, SharedMemory sharedMemory, IBinder iBinder, IHotwordRecognitionStatusCallback iHotwordRecognitionStatusCallback, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(identity, 0);
-                    obtain.writeTypedObject(persistableBundle, 0);
-                    obtain.writeTypedObject(sharedMemory, 0);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeStrongInterface(iHotwordRecognitionStatusCallback);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(36, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(identity, 0);
+                    parcelObtain.writeTypedObject(persistableBundle, 0);
+                    parcelObtain.writeTypedObject(sharedMemory, 0);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeStrongInterface(iHotwordRecognitionStatusCallback);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(36, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public void destroyDetector(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(37, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(37, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public void shutdownHotwordDetectionService() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(38, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(38, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public void subscribeVisualQueryRecognitionStatus(IVisualQueryRecognitionStatusListener iVisualQueryRecognitionStatusListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iVisualQueryRecognitionStatusListener);
-                    this.mRemote.transact(39, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iVisualQueryRecognitionStatusListener);
+                    this.mRemote.transact(39, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public void enableVisualQueryDetection(IVisualQueryDetectionAttentionListener iVisualQueryDetectionAttentionListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iVisualQueryDetectionAttentionListener);
-                    this.mRemote.transact(40, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iVisualQueryDetectionAttentionListener);
+                    this.mRemote.transact(40, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public void disableVisualQueryDetection() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(41, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(41, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public void startPerceiving(IVisualQueryDetectionVoiceInteractionCallback iVisualQueryDetectionVoiceInteractionCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iVisualQueryDetectionVoiceInteractionCallback);
-                    this.mRemote.transact(42, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iVisualQueryDetectionVoiceInteractionCallback);
+                    this.mRemote.transact(42, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public void stopPerceiving() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(43, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(43, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public void startListeningFromMic(AudioFormat audioFormat, IMicrophoneHotwordDetectionVoiceInteractionCallback iMicrophoneHotwordDetectionVoiceInteractionCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(audioFormat, 0);
-                    obtain.writeStrongInterface(iMicrophoneHotwordDetectionVoiceInteractionCallback);
-                    this.mRemote.transact(44, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(audioFormat, 0);
+                    parcelObtain.writeStrongInterface(iMicrophoneHotwordDetectionVoiceInteractionCallback);
+                    this.mRemote.transact(44, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public void stopListeningFromMic() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(45, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(45, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public void startListeningFromExternalSource(ParcelFileDescriptor parcelFileDescriptor, AudioFormat audioFormat, PersistableBundle persistableBundle, IBinder iBinder, IMicrophoneHotwordDetectionVoiceInteractionCallback iMicrophoneHotwordDetectionVoiceInteractionCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(parcelFileDescriptor, 0);
-                    obtain.writeTypedObject(audioFormat, 0);
-                    obtain.writeTypedObject(persistableBundle, 0);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeStrongInterface(iMicrophoneHotwordDetectionVoiceInteractionCallback);
-                    this.mRemote.transact(46, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor, 0);
+                    parcelObtain.writeTypedObject(audioFormat, 0);
+                    parcelObtain.writeTypedObject(persistableBundle, 0);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeStrongInterface(iMicrophoneHotwordDetectionVoiceInteractionCallback);
+                    this.mRemote.transact(46, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public void triggerHardwareRecognitionEventForTest(SoundTrigger.KeyphraseRecognitionEvent keyphraseRecognitionEvent, IHotwordRecognitionStatusCallback iHotwordRecognitionStatusCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(keyphraseRecognitionEvent, 0);
-                    obtain.writeStrongInterface(iHotwordRecognitionStatusCallback);
-                    this.mRemote.transact(47, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(keyphraseRecognitionEvent, 0);
+                    parcelObtain.writeStrongInterface(iHotwordRecognitionStatusCallback);
+                    this.mRemote.transact(47, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public void startListeningVisibleActivityChanged(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(48, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(48, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public void stopListeningVisibleActivityChanged(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(49, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(49, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public void setSessionWindowVisible(IBinder iBinder, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(50, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(50, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public void notifyActivityEventChanged(IBinder iBinder, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(51, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(51, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public boolean getAccessibilityDetectionEnabled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(52, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(52, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public void registerAccessibilityDetectionSettingsListener(IVoiceInteractionAccessibilitySettingsListener iVoiceInteractionAccessibilitySettingsListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iVoiceInteractionAccessibilitySettingsListener);
-                    this.mRemote.transact(53, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iVoiceInteractionAccessibilitySettingsListener);
+                    this.mRemote.transact(53, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
             public void unregisterAccessibilityDetectionSettingsListener(IVoiceInteractionAccessibilitySettingsListener iVoiceInteractionAccessibilitySettingsListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iVoiceInteractionAccessibilitySettingsListener);
-                    this.mRemote.transact(54, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iVoiceInteractionAccessibilitySettingsListener);
+                    this.mRemote.transact(54, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

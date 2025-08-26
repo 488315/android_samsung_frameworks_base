@@ -19,7 +19,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class MobileConnectionRepositoryKairosImpl$hasPrioritizedNetworkCapabilities$1$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ ConnectivityManager $connectivityManager;
@@ -59,29 +58,29 @@ final class MobileConnectionRepositoryKairosImpl$hasPrioritizedNetworkCapabiliti
             ConnectivityManager.NetworkCallback networkCallback = new ConnectivityManager.NetworkCallback() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionRepositoryKairosImpl$hasPrioritizedNetworkCapabilities$1$1$callback$1
                 @Override // android.net.ConnectivityManager.NetworkCallback
                 public final void onAvailable(Network network) {
-                    MobileInputLogger mobileInputLogger2 = MobileInputLogger.this;
+                    MobileInputLogger mobileInputLogger2 = mobileInputLogger;
                     int netId = network.getNetId();
                     mobileInputLogger2.getClass();
                     LogLevel logLevel = LogLevel.INFO;
                     MobileInputLogger$$ExternalSyntheticLambda0 mobileInputLogger$$ExternalSyntheticLambda0 = new MobileInputLogger$$ExternalSyntheticLambda0(5);
                     LogBuffer logBuffer = mobileInputLogger2.buffer;
-                    LogMessage obtain = logBuffer.obtain("MobileInputLog", logLevel, mobileInputLogger$$ExternalSyntheticLambda0, null);
-                    ((LogMessageImpl) obtain).int1 = netId;
-                    logBuffer.commit(obtain);
+                    LogMessage logMessageObtain = logBuffer.obtain("MobileInputLog", logLevel, mobileInputLogger$$ExternalSyntheticLambda0, null);
+                    ((LogMessageImpl) logMessageObtain).int1 = netId;
+                    logBuffer.commit(logMessageObtain);
                     ((BuildScopeImpl$coalescingEvents$1$1) coalescingEventProducerScope).emit(Boolean.TRUE);
                 }
 
                 @Override // android.net.ConnectivityManager.NetworkCallback
                 public final void onLost(Network network) {
-                    MobileInputLogger mobileInputLogger2 = MobileInputLogger.this;
+                    MobileInputLogger mobileInputLogger2 = mobileInputLogger;
                     int netId = network.getNetId();
                     mobileInputLogger2.getClass();
                     LogLevel logLevel = LogLevel.INFO;
                     MobileInputLogger$$ExternalSyntheticLambda0 mobileInputLogger$$ExternalSyntheticLambda0 = new MobileInputLogger$$ExternalSyntheticLambda0(11);
                     LogBuffer logBuffer = mobileInputLogger2.buffer;
-                    LogMessage obtain = logBuffer.obtain("MobileInputLog", logLevel, mobileInputLogger$$ExternalSyntheticLambda0, null);
-                    ((LogMessageImpl) obtain).int1 = netId;
-                    logBuffer.commit(obtain);
+                    LogMessage logMessageObtain = logBuffer.obtain("MobileInputLog", logLevel, mobileInputLogger$$ExternalSyntheticLambda0, null);
+                    ((LogMessageImpl) logMessageObtain).int1 = netId;
+                    logBuffer.commit(logMessageObtain);
                     ((BuildScopeImpl$coalescingEvents$1$1) coalescingEventProducerScope).emit(Boolean.FALSE);
                 }
             };

@@ -18,14 +18,12 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class MobileViewLogger implements Dumpable {
     public static final Companion Companion = new Companion(null);
     public final LogBuffer buffer;
     public final Map collectionStatuses;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -61,7 +59,7 @@ public final class MobileViewLogger implements Dumpable {
         ((LinkedHashMap) map).forEach(new BiConsumer() { // from class: com.android.systemui.statusbar.pipeline.mobile.ui.MobileViewLoggerKt$sam$java_util_function_BiConsumer$0
             @Override // java.util.function.BiConsumer
             public final /* synthetic */ void accept(Object obj, Object obj2) {
-                Function2.this.invoke(obj, obj2);
+                function2.invoke(obj, obj2);
             }
         });
     }
@@ -73,12 +71,12 @@ public final class MobileViewLogger implements Dumpable {
         LogLevel logLevel = LogLevel.INFO;
         MobileViewLogger$$ExternalSyntheticLambda1 mobileViewLogger$$ExternalSyntheticLambda1 = new MobileViewLogger$$ExternalSyntheticLambda1(3);
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("MobileViewLogger", logLevel, mobileViewLogger$$ExternalSyntheticLambda1, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("MobileViewLogger", logLevel, mobileViewLogger$$ExternalSyntheticLambda1, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = Companion.getIdForLogging(view);
         logMessageImpl.str2 = Companion.getIdForLogging(locationBasedMobileViewModel);
         logMessageImpl.str3 = locationBasedMobileViewModel.location.name();
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void logCollectionStopped(View view, LocationBasedMobileViewModel locationBasedMobileViewModel) {
@@ -88,21 +86,21 @@ public final class MobileViewLogger implements Dumpable {
         LogLevel logLevel = LogLevel.INFO;
         MobileViewLogger$$ExternalSyntheticLambda1 mobileViewLogger$$ExternalSyntheticLambda1 = new MobileViewLogger$$ExternalSyntheticLambda1(0);
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("MobileViewLogger", logLevel, mobileViewLogger$$ExternalSyntheticLambda1, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("MobileViewLogger", logLevel, mobileViewLogger$$ExternalSyntheticLambda1, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = Companion.getIdForLogging(view);
         logMessageImpl.str2 = Companion.getIdForLogging(locationBasedMobileViewModel);
         logMessageImpl.str3 = locationBasedMobileViewModel.location.name();
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void logUiAdapterSubIdsSentToIconController(List list, boolean z) {
         LogLevel logLevel = LogLevel.INFO;
         MobileViewLogger$$ExternalSyntheticLambda1 mobileViewLogger$$ExternalSyntheticLambda1 = new MobileViewLogger$$ExternalSyntheticLambda1(2);
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("MobileViewLogger", logLevel, mobileViewLogger$$ExternalSyntheticLambda1, null);
-        ((LogMessageImpl) obtain).str1 = list.toString();
-        ((LogMessageImpl) obtain).bool1 = z;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("MobileViewLogger", logLevel, mobileViewLogger$$ExternalSyntheticLambda1, null);
+        ((LogMessageImpl) logMessageObtain).str1 = list.toString();
+        ((LogMessageImpl) logMessageObtain).bool1 = z;
+        logBuffer.commit(logMessageObtain);
     }
 }

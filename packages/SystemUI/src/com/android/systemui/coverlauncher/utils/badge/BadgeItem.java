@@ -5,14 +5,12 @@ import java.util.List;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class BadgeItem {
     public final String mInfo;
     public final List mNotificationItems;
     public int mTotalCount;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -34,14 +32,14 @@ public final class BadgeItem {
     }
 
     public final boolean addOrUpdateNotificationItem(NotificationItem notificationItem) {
-        int indexOf = ((ArrayList) this.mNotificationItems).indexOf(notificationItem);
-        NotificationItem notificationItem2 = indexOf == -1 ? null : (NotificationItem) ((ArrayList) this.mNotificationItems).get(indexOf);
+        int iIndexOf = ((ArrayList) this.mNotificationItems).indexOf(notificationItem);
+        NotificationItem notificationItem2 = iIndexOf == -1 ? null : (NotificationItem) ((ArrayList) this.mNotificationItems).get(iIndexOf);
         if (notificationItem2 == null) {
-            boolean add = ((ArrayList) this.mNotificationItems).add(notificationItem);
-            if (add) {
+            boolean zAdd = ((ArrayList) this.mNotificationItems).add(notificationItem);
+            if (zAdd) {
                 this.mTotalCount += notificationItem.count;
             }
-            return add;
+            return zAdd;
         }
         int i = notificationItem2.count;
         int i2 = notificationItem.count;

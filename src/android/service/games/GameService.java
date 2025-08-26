@@ -26,7 +26,7 @@ public class GameService extends Service {
     private final IBinder.DeathRecipient mGameManagerServiceDeathRecipient = new IBinder.DeathRecipient() { // from class: android.service.games.GameService$$ExternalSyntheticLambda1
         @Override // android.os.IBinder.DeathRecipient
         public final void binderDied() {
-            GameService.this.lambda$new$0();
+            this.f$0.lambda$new$0();
         }
     };
 
@@ -86,9 +86,9 @@ public class GameService extends Service {
 
     /* JADX INFO: Access modifiers changed from: private */
     public void doOnConnected(IGameServiceController iGameServiceController) {
-        IGameManagerService asInterface = IGameManagerService.Stub.asInterface(ServiceManager.getService("game"));
-        this.mGameManagerService = asInterface;
-        Objects.requireNonNull(asInterface);
+        IGameManagerService iGameManagerServiceAsInterface = IGameManagerService.Stub.asInterface(ServiceManager.getService("game"));
+        this.mGameManagerService = iGameManagerServiceAsInterface;
+        Objects.requireNonNull(iGameManagerServiceAsInterface);
         try {
             this.mGameManagerService.asBinder().linkToDeath(this.mGameManagerServiceDeathRecipient, 0);
         } catch (RemoteException unused) {

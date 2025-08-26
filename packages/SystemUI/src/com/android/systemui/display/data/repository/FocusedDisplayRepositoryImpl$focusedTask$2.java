@@ -11,7 +11,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class FocusedDisplayRepositoryImpl$focusedTask$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ LogBuffer $logBuffer;
@@ -45,9 +44,9 @@ final class FocusedDisplayRepositoryImpl$focusedTask$2 extends SuspendLambda imp
         ResultKt.throwOnFailure(obj);
         int i = this.I$0;
         LogBuffer logBuffer = this.$logBuffer;
-        LogMessage obtain = logBuffer.obtain("FocusedDisplayRepository", LogLevel.INFO, new FocusedDisplayRepositoryImpl$focusedTask$2$$ExternalSyntheticLambda0(), null);
-        ((LogMessageImpl) obtain).str1 = String.valueOf(i);
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("FocusedDisplayRepository", LogLevel.INFO, new FocusedDisplayRepositoryImpl$focusedTask$2$$ExternalSyntheticLambda0(), null);
+        ((LogMessageImpl) logMessageObtain).str1 = String.valueOf(i);
+        logBuffer.commit(logMessageObtain);
         return Unit.INSTANCE;
     }
 }

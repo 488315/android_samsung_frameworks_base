@@ -52,9 +52,9 @@ final class SemImsUtils {
         if (isHoneyboard(context.getPackageName())) {
             for (Display display : ((DisplayManager) context.getSystemService(Context.DISPLAY_SERVICE)).getDisplays(null)) {
                 if (display.getDisplayId() == curTokenDisplayId) {
-                    Context createDisplayContext = context.createDisplayContext(display);
-                    createDisplayContext.setTheme(i);
-                    return createDisplayContext;
+                    Context contextCreateDisplayContext = context.createDisplayContext(display);
+                    contextCreateDisplayContext.setTheme(i);
+                    return contextCreateDisplayContext;
                 }
             }
         }

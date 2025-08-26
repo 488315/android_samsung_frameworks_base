@@ -2,6 +2,7 @@ package com.google.android.material.appbar.model.view;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -14,7 +15,6 @@ import androidx.appcompat.util.theme.resource.SeslThemeResourceDrawable$OpenThem
 import androidx.appcompat.util.theme.resource.SeslThemeResourceDrawable$ThemeResourceDrawable;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SuggestAppBarItemWhiteCaseView extends SuggestAppBarItemView {
     public SuggestAppBarItemWhiteCaseView(Context context) {
@@ -51,7 +51,7 @@ public class SuggestAppBarItemWhiteCaseView extends SuggestAppBarItemView {
     }
 
     @Override // com.google.android.material.appbar.model.view.SuggestAppBarItemView, com.google.android.material.appbar.model.view.SuggestAppBarView, com.google.android.material.appbar.model.view.AppBarView
-    public void updateResource(Context context) {
+    public void updateResource(Context context) throws Resources.NotFoundException {
         super.updateResource(context);
         SeslMisc.isLightTheme(context);
         ViewGroup rootView = getRootView();

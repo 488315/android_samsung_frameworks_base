@@ -14,7 +14,6 @@ import java.lang.reflect.GenericArrayType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class ArrayTypeAdapter<E> extends TypeAdapter<Object> {
     public static final TypeAdapterFactory FACTORY = new TypeAdapterFactory() { // from class: com.google.gson.internal.bind.ArrayTypeAdapter.1
@@ -38,7 +37,7 @@ public final class ArrayTypeAdapter<E> extends TypeAdapter<Object> {
 
     @Override // com.google.gson.TypeAdapter
     /* renamed from: read */
-    public Object read2(JsonReader jsonReader) throws IOException {
+    public Object read2(JsonReader jsonReader) throws IOException, ArrayIndexOutOfBoundsException, IllegalArgumentException, NegativeArraySizeException {
         if (jsonReader.peek() == JsonToken.NULL) {
             jsonReader.nextNull();
             return null;
@@ -50,15 +49,15 @@ public final class ArrayTypeAdapter<E> extends TypeAdapter<Object> {
         }
         jsonReader.endArray();
         int size = arrayList.size();
-        Object newInstance = Array.newInstance((Class<?>) this.componentType, size);
+        Object objNewInstance = Array.newInstance((Class<?>) this.componentType, size);
         for (int i = 0; i < size; i++) {
-            Array.set(newInstance, i, arrayList.get(i));
+            Array.set(objNewInstance, i, arrayList.get(i));
         }
-        return newInstance;
+        return objNewInstance;
     }
 
     @Override // com.google.gson.TypeAdapter
-    public void write(JsonWriter jsonWriter, Object obj) throws IOException {
+    public void write(JsonWriter jsonWriter, Object obj) throws IOException, ArrayIndexOutOfBoundsException, IllegalArgumentException {
         if (obj == null) {
             jsonWriter.nullValue();
             return;

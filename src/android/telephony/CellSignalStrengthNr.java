@@ -79,9 +79,7 @@ public final class CellSignalStrengthNr extends CellSignalStrength implements Pa
         this.mCsiCqiReport = (List) list.stream().map(new Function() { // from class: android.telephony.CellSignalStrengthNr$$ExternalSyntheticLambda0
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                Integer valueOf;
-                valueOf = Integer.valueOf(CellSignalStrengthNr.inRangeOrUnavailable(Byte.toUnsignedInt(((Byte) obj).byteValue()), 0, 15));
-                return valueOf;
+                return Integer.valueOf(CellSignalStrengthNr.inRangeOrUnavailable(Byte.toUnsignedInt(((Byte) obj).byteValue()), 0, 15));
             }
         }).collect(Collectors.toList());
         this.mSsRsrp = inRangeOrUnavailable(i5, -156, -31);
@@ -187,7 +185,7 @@ public final class CellSignalStrengthNr extends CellSignalStrength implements Pa
 
     @Override // android.telephony.CellSignalStrength
     public void updateLevel(PersistableBundle persistableBundle, ServiceState serviceState) {
-        int i;
+        int iUpdateLevelWithMeasure;
         if (persistableBundle == null) {
             this.mParametersUseForLevel = 1;
         } else {
@@ -197,11 +195,11 @@ public final class CellSignalStrengthNr extends CellSignalStrength implements Pa
             this.mSsSinrThresholds = persistableBundle.getIntArray(CarrierConfigManager.KEY_5G_NR_SSSINR_THRESHOLDS_INT_ARRAY);
         }
         if (isLevelForParameter(1)) {
-            i = updateLevelWithMeasure(this.mSsRsrp + (serviceState != null ? serviceState.getArfcnRsrpBoost() : 0), this.mSsRsrpThresholds);
+            iUpdateLevelWithMeasure = updateLevelWithMeasure(this.mSsRsrp + (serviceState != null ? serviceState.getArfcnRsrpBoost() : 0), this.mSsRsrpThresholds);
         } else {
-            i = Integer.MAX_VALUE;
+            iUpdateLevelWithMeasure = Integer.MAX_VALUE;
         }
-        this.mLevel = Math.min(Math.min(i, isLevelForParameter(2) ? updateLevelWithMeasure(this.mSsRsrq, this.mSsRsrqThresholds) : Integer.MAX_VALUE), isLevelForParameter(4) ? updateLevelWithMeasure(this.mSsSinr, this.mSsSinrThresholds) : Integer.MAX_VALUE);
+        this.mLevel = Math.min(Math.min(iUpdateLevelWithMeasure, isLevelForParameter(2) ? updateLevelWithMeasure(this.mSsRsrq, this.mSsRsrqThresholds) : Integer.MAX_VALUE), isLevelForParameter(4) ? updateLevelWithMeasure(this.mSsSinr, this.mSsSinrThresholds) : Integer.MAX_VALUE);
     }
 
     private int updateLevelWithMeasure(int i, int[] iArr) {

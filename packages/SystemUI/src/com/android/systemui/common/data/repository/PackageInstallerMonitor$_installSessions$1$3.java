@@ -17,7 +17,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class PackageInstallerMonitor$_installSessions$1$3 extends SuspendLambda implements Function2 {
     /* synthetic */ boolean Z$0;
@@ -67,11 +66,11 @@ final class PackageInstallerMonitor$_installSessions$1$3 extends SuspendLambda i
                             arrayList.add(packageInstallSession);
                         }
                     }
-                    int mapCapacity = MapsKt__MapsJVMKt.mapCapacity(CollectionsKt__IterablesKt.collectionSizeOrDefault(arrayList, 10));
-                    if (mapCapacity < 16) {
-                        mapCapacity = 16;
+                    int iMapCapacity = MapsKt__MapsJVMKt.mapCapacity(CollectionsKt__IterablesKt.collectionSizeOrDefault(arrayList, 10));
+                    if (iMapCapacity < 16) {
+                        iMapCapacity = 16;
                     }
-                    LinkedHashMap linkedHashMap = new LinkedHashMap(mapCapacity);
+                    LinkedHashMap linkedHashMap = new LinkedHashMap(iMapCapacity);
                     int size = arrayList.size();
                     int i = 0;
                     while (i < size) {

@@ -6,13 +6,11 @@ import kotlin.coroutines.EmptyCoroutineContext;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class CoroutineTraceName implements CoroutineContext.Element {
     public static final Key Key = new Key(null);
     public final String name;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Key implements CoroutineContext.Key {
         public /* synthetic */ Key(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -44,14 +42,15 @@ public class CoroutineTraceName implements CoroutineContext.Element {
             return null;
         }
         AbstractCoroutineContextKey abstractCoroutineContextKey = (AbstractCoroutineContextKey) key;
-        if (key2 == abstractCoroutineContextKey) {
-            abstractCoroutineContextKey.getClass();
-        } else if (abstractCoroutineContextKey.topmostKey != key2) {
-            z = false;
-            if (!z && (element = (CoroutineContext.Element) abstractCoroutineContextKey.safeCast.mo779invoke(this)) != null) {
+        if (key2 != abstractCoroutineContextKey) {
+            if (abstractCoroutineContextKey.topmostKey != key2) {
+                z = false;
+            }
+            if (!z && (element = (CoroutineContext.Element) abstractCoroutineContextKey.safeCast.mo781invoke(this)) != null) {
                 return element;
             }
         }
+        abstractCoroutineContextKey.getClass();
         z = true;
         return !z ? null : null;
     }
@@ -70,12 +69,13 @@ public class CoroutineTraceName implements CoroutineContext.Element {
             return key2 == key ? EmptyCoroutineContext.INSTANCE : this;
         }
         AbstractCoroutineContextKey abstractCoroutineContextKey = (AbstractCoroutineContextKey) key;
-        if (key2 == abstractCoroutineContextKey) {
-            abstractCoroutineContextKey.getClass();
-        } else if (abstractCoroutineContextKey.topmostKey != key2) {
-            z = false;
-            return (!z || ((CoroutineContext.Element) abstractCoroutineContextKey.safeCast.mo779invoke(this)) == null) ? this : EmptyCoroutineContext.INSTANCE;
+        if (key2 != abstractCoroutineContextKey) {
+            if (abstractCoroutineContextKey.topmostKey != key2) {
+                z = false;
+            }
+            return (!z || ((CoroutineContext.Element) abstractCoroutineContextKey.safeCast.mo781invoke(this)) == null) ? this : EmptyCoroutineContext.INSTANCE;
         }
+        abstractCoroutineContextKey.getClass();
         z = true;
         if (z) {
             return this;

@@ -9,7 +9,6 @@ import androidx.preference.PreferenceViewHolder;
 import com.android.systemui.R;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class NumberButtonPreference extends Preference {
     public BannerMessagePreferenceGroup$onBindViewHolder$1$1 clickListener;
@@ -24,17 +23,17 @@ public final class NumberButtonPreference extends Preference {
         super.onBindViewHolder(preferenceViewHolder);
         preferenceViewHolder.mDividerAllowedAbove = false;
         preferenceViewHolder.mDividerAllowedBelow = false;
-        View findViewById = preferenceViewHolder.findViewById(R.id.settingslib_number_button);
-        if (findViewById != null) {
-            findViewById.setOnClickListener(this.clickListener);
+        View viewFindViewById = preferenceViewHolder.findViewById(R.id.settingslib_number_button);
+        if (viewFindViewById != null) {
+            viewFindViewById.setOnClickListener(this.clickListener);
         }
-        View findViewById2 = preferenceViewHolder.findViewById(R.id.settingslib_number_title);
-        TextView textView = findViewById2 instanceof TextView ? (TextView) findViewById2 : null;
+        View viewFindViewById2 = preferenceViewHolder.findViewById(R.id.settingslib_number_title);
+        TextView textView = viewFindViewById2 instanceof TextView ? (TextView) viewFindViewById2 : null;
         if (textView != null) {
             textView.setText(this.mTitle);
         }
-        View findViewById3 = preferenceViewHolder.findViewById(R.id.settingslib_number_count);
-        TextView textView2 = findViewById3 instanceof TextView ? (TextView) findViewById3 : null;
+        View viewFindViewById3 = preferenceViewHolder.findViewById(R.id.settingslib_number_count);
+        TextView textView2 = viewFindViewById3 instanceof TextView ? (TextView) viewFindViewById3 : null;
         if (textView2 != null) {
             textView2.setText(String.valueOf(this.count));
         }

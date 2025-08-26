@@ -3,12 +3,12 @@ package com.android.systemui.popup.view;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.view.WindowManager;
 import com.android.systemui.R;
 import com.android.systemui.basic.util.LogWrapper;
 import com.android.systemui.popup.data.MWOverheatWarningData;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class MWOverheatWarningDialog implements PopupUIAlertDialog {
     private static final String TAG = "MWOverheatWarningDialog";
@@ -21,7 +21,7 @@ public class MWOverheatWarningDialog implements PopupUIAlertDialog {
         this.mLogWrapper = logWrapper;
     }
 
-    private AlertDialog createDialog(MWOverheatWarningData mWOverheatWarningData) {
+    private AlertDialog createDialog(MWOverheatWarningData mWOverheatWarningData) throws Resources.NotFoundException {
         String string = this.mContext.getResources().getString(mWOverheatWarningData.getTitle());
         String string2 = this.mContext.getResources().getString(mWOverheatWarningData.getBody());
         String string3 = this.mContext.getResources().getString(mWOverheatWarningData.getPButton());
@@ -29,9 +29,9 @@ public class MWOverheatWarningDialog implements PopupUIAlertDialog {
         builder.setTitle(string);
         builder.setMessage(string2);
         builder.setPositiveButton(string3, (DialogInterface.OnClickListener) null);
-        AlertDialog create = builder.create();
-        this.mDialog = create;
-        create.getWindow().getAttributes().setTitle(TAG);
+        AlertDialog alertDialogCreate = builder.create();
+        this.mDialog = alertDialogCreate;
+        alertDialogCreate.getWindow().getAttributes().setTitle(TAG);
         this.mDialog.getWindow().setType(2008);
         return this.mDialog;
     }

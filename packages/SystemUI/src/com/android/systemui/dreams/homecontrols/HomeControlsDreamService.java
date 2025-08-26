@@ -23,7 +23,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 import kotlinx.coroutines.BuildersKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class HomeControlsDreamService extends DreamService implements LifecycleOwner {
     public final HomeControlsDreamServiceImpl.Factory factory;
@@ -31,7 +30,7 @@ public final class HomeControlsDreamService extends DreamService implements Life
     public final Lazy impl$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.dreams.homecontrols.HomeControlsDreamService$$ExternalSyntheticLambda0
         @Override // kotlin.jvm.functions.Function0
         public final Object invoke() {
-            HomeControlsDreamService homeControlsDreamService = HomeControlsDreamService.this;
+            HomeControlsDreamService homeControlsDreamService = this.f$0;
             return homeControlsDreamService.factory.create(homeControlsDreamService, homeControlsDreamService);
         }
     });
@@ -54,23 +53,23 @@ public final class HomeControlsDreamService extends DreamService implements Life
             homeControlsDreamServiceImpl.service.finish();
             return;
         }
-        TaskFragmentComponent create = homeControlsDreamServiceImpl.taskFragmentFactory.create(activity, new Function1() { // from class: com.android.systemui.dreams.homecontrols.HomeControlsDreamServiceImpl$$ExternalSyntheticLambda0
+        TaskFragmentComponent taskFragmentComponentCreate = homeControlsDreamServiceImpl.taskFragmentFactory.create(activity, new Function1() { // from class: com.android.systemui.dreams.homecontrols.HomeControlsDreamServiceImpl$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 HomeControlsDreamServiceImpl.Companion companion = HomeControlsDreamServiceImpl.Companion;
-                HomeControlsDreamServiceImpl homeControlsDreamServiceImpl2 = HomeControlsDreamServiceImpl.this;
+                HomeControlsDreamServiceImpl homeControlsDreamServiceImpl2 = homeControlsDreamServiceImpl;
                 BuildersKt.launch$default(LifecycleKt.getCoroutineScope(homeControlsDreamServiceImpl2.$$delegate_0.getLifecycle()), null, null, new HomeControlsDreamServiceImpl$launchActivity$1(homeControlsDreamServiceImpl2, null), 3);
                 return Unit.INSTANCE;
             }
         }, new HomeControlsDreamServiceImpl$onAttachedToWindow$2(homeControlsDreamServiceImpl), new HomeControlsDreamServiceImpl$$ExternalSyntheticLambda1(homeControlsDreamServiceImpl, 0));
-        TaskFragmentComponent.Organizer organizer = create.organizer;
+        TaskFragmentComponent.Organizer organizer = taskFragmentComponentCreate.organizer;
         TaskFragmentOrganizerToken organizerToken = organizer.getOrganizerToken();
-        Binder binder = create.fragmentToken;
-        IBinder activityToken = create.activity.getActivityToken();
+        Binder binder = taskFragmentComponentCreate.fragmentToken;
+        IBinder activityToken = taskFragmentComponentCreate.activity.getActivityToken();
         activityToken.getClass();
         organizer.applyTransaction(new WindowContainerTransaction().createTaskFragment(new TaskFragmentCreationParams.Builder(organizerToken, binder, activityToken).setInitialRelativeBounds(new Rect()).setWindowingMode(1).build()), 6, false);
-        homeControlsDreamServiceImpl.taskFragmentComponent = create;
+        homeControlsDreamServiceImpl.taskFragmentComponent = taskFragmentComponentCreate;
         ((WakeLock) homeControlsDreamServiceImpl.wakeLock$delegate.getValue()).acquire("HomeControlsDreamServiceImpl");
     }
 

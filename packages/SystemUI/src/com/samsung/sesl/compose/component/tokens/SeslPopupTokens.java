@@ -1,22 +1,23 @@
 package com.samsung.sesl.compose.component.tokens;
 
 import android.graphics.drawable.Drawable;
+import androidx.appcompat.util.SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0;
 import androidx.compose.ui.graphics.Color;
 import com.samsung.sesl.compose.component.tokens.SeslDrawableTokens;
+import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import kotlin.ULong;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class SeslPopupTokens {
-    public static final Companion Companion;
+    public static final Companion Companion = new Companion(null);
     public static final SeslPopupTokens darkPopupTokens;
     public static final SeslPopupTokens lightPopupTokens;
     public final long backgroundColor;
+    public final long borderColor;
     public final Drawable menuBackground;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -26,7 +27,6 @@ public final class SeslPopupTokens {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
         public static final /* synthetic */ int[] $EnumSwitchMapping$1;
@@ -37,34 +37,40 @@ public final class SeslPopupTokens {
                 iArr[SeslPopupColorSchemeKeyTokens.BackgroundColor.ordinal()] = 1;
             } catch (NoSuchFieldError unused) {
             }
+            try {
+                iArr[SeslPopupColorSchemeKeyTokens.BorderColor.ordinal()] = 2;
+            } catch (NoSuchFieldError unused2) {
+            }
             $EnumSwitchMapping$0 = iArr;
             int[] iArr2 = new int[SeslPopupDrawableSchemeKeyTokens.values().length];
             try {
                 iArr2[SeslPopupDrawableSchemeKeyTokens.MenuBackground.ordinal()] = 1;
-            } catch (NoSuchFieldError unused2) {
+            } catch (NoSuchFieldError unused3) {
             }
             $EnumSwitchMapping$1 = iArr2;
         }
     }
 
     static {
-        DefaultConstructorMarker defaultConstructorMarker = null;
-        Companion = new Companion(defaultConstructorMarker);
         SeslPaletteTokens seslPaletteTokens = SeslPaletteTokens.INSTANCE;
         seslPaletteTokens.getClass();
         long j = SeslPaletteTokens.GRAYSCALE_L1;
-        SeslDrawableTokens.Companion companion = SeslDrawableTokens.Companion;
+        Color.Companion companion = Color.Companion;
         companion.getClass();
+        long j2 = Color.Transparent;
+        SeslDrawableTokens.Companion companion2 = SeslDrawableTokens.Companion;
+        companion2.getClass();
         Drawable drawable = SeslDrawableTokens.emptyDrawable;
-        lightPopupTokens = new SeslPopupTokens(j, drawable, defaultConstructorMarker);
+        lightPopupTokens = new SeslPopupTokens(j, j2, drawable, null);
         seslPaletteTokens.getClass();
-        long j2 = SeslPaletteTokens.GRAYSCALE_D5;
+        long j3 = SeslPaletteTokens.GRAYSCALE_D5;
         companion.getClass();
-        darkPopupTokens = new SeslPopupTokens(j2, drawable, defaultConstructorMarker);
+        companion2.getClass();
+        darkPopupTokens = new SeslPopupTokens(j3, j2, drawable, null);
     }
 
-    public /* synthetic */ SeslPopupTokens(long j, Drawable drawable, DefaultConstructorMarker defaultConstructorMarker) {
-        this(j, drawable);
+    public /* synthetic */ SeslPopupTokens(long j, long j2, Drawable drawable, DefaultConstructorMarker defaultConstructorMarker) {
+        this(j, j2, drawable);
     }
 
     public final boolean equals(Object obj) {
@@ -77,21 +83,28 @@ public final class SeslPopupTokens {
         SeslPopupTokens seslPopupTokens = (SeslPopupTokens) obj;
         long j = seslPopupTokens.backgroundColor;
         Color.Companion companion = Color.Companion;
-        return ULong.m3427equalsimpl0(this.backgroundColor, j) && Intrinsics.areEqual(this.menuBackground, seslPopupTokens.menuBackground);
+        return ULong.m3447equalsimpl0(this.backgroundColor, j) && ULong.m3447equalsimpl0(this.borderColor, seslPopupTokens.borderColor) && Intrinsics.areEqual(this.menuBackground, seslPopupTokens.menuBackground);
     }
 
     public final int hashCode() {
         Color.Companion companion = Color.Companion;
         int i = ULong.$r8$clinit;
-        return this.menuBackground.hashCode() + (Long.hashCode(this.backgroundColor) * 31);
+        return this.menuBackground.hashCode() + MoveResult$$ExternalSyntheticOutline0.m(Long.hashCode(this.backgroundColor) * 31, 31, this.borderColor);
     }
 
     public final String toString() {
-        return "SeslPopupTokens(backgroundColor=" + Color.m462toStringimpl(this.backgroundColor) + ", menuBackground=" + this.menuBackground + ")";
+        String strM464toStringimpl = Color.m464toStringimpl(this.backgroundColor);
+        String strM464toStringimpl2 = Color.m464toStringimpl(this.borderColor);
+        Drawable drawable = this.menuBackground;
+        StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("SeslPopupTokens(backgroundColor=", strM464toStringimpl, ", borderColor=", strM464toStringimpl2, ", menuBackground=");
+        sbM.append(drawable);
+        sbM.append(")");
+        return sbM.toString();
     }
 
-    private SeslPopupTokens(long j, Drawable drawable) {
+    private SeslPopupTokens(long j, long j2, Drawable drawable) {
         this.backgroundColor = j;
+        this.borderColor = j2;
         this.menuBackground = drawable;
     }
 }

@@ -11,7 +11,6 @@ import com.android.systemui.bixby2.util.AudioManagerWrapper;
 import com.android.systemui.plugins.subscreen.SubRoom;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class VolumeType {
     public static final int $stable = 0;
@@ -26,7 +25,6 @@ public abstract class VolumeType {
     private final String statusCode = "success";
     private final String streamTypeToString = "";
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -72,13 +70,13 @@ public abstract class VolumeType {
 
     private final int loadVolume() {
         SharedPreferences sharedPreferences = preferences;
-        int i = sharedPreferences != null ? sharedPreferences.getInt(getStreamTypeToString(), 0) : 0;
-        if (i == 0) {
+        int maxVolume = sharedPreferences != null ? sharedPreferences.getInt(getStreamTypeToString(), 0) : 0;
+        if (maxVolume == 0) {
             getStreamTypeToString();
-            i = (int) (getMaxVolume() * 0.3f);
+            maxVolume = (int) (getMaxVolume() * 0.3f);
         }
         saveVolume(0);
-        return i;
+        return maxVolume;
     }
 
     private final void saveVolume(int i) {
@@ -190,14 +188,14 @@ public abstract class VolumeType {
         if (getStatus() != 1) {
             return new CommandActionResponse(2, getStatusCode());
         }
-        CommandActionResponse isVolumeStateValid = isVolumeStateValid(z);
-        if (isVolumeStateValid.responseCode == 1) {
+        CommandActionResponse commandActionResponseIsVolumeStateValid = isVolumeStateValid(z);
+        if (commandActionResponseIsVolumeStateValid.responseCode == 1) {
             if (getVolume() == i) {
                 return getAlreadySetResponse(i);
             }
             setStreamVolume(i, i2);
         }
-        return isVolumeStateValid;
+        return commandActionResponseIsVolumeStateValid;
     }
 
     public boolean volumeStreamAllowedByDnd(NotificationManager.Policy policy) {

@@ -55,12 +55,12 @@ public class TextKeyListener extends BaseKeyListener implements SpanWatcher {
     }
 
     public static TextKeyListener getInstance(boolean z, Capitalize capitalize) {
-        int ordinal = (capitalize.ordinal() * 2) + (z ? 1 : 0);
+        int iOrdinal = (capitalize.ordinal() * 2) + (z ? 1 : 0);
         TextKeyListener[] textKeyListenerArr = sInstance;
-        if (textKeyListenerArr[ordinal] == null) {
-            textKeyListenerArr[ordinal] = new TextKeyListener(capitalize, z);
+        if (textKeyListenerArr[iOrdinal] == null) {
+            textKeyListenerArr[iOrdinal] = new TextKeyListener(capitalize, z);
         }
-        return sInstance[ordinal];
+        return sInstance[iOrdinal];
     }
 
     public static TextKeyListener getInstance() {

@@ -6,7 +6,6 @@ import kotlin.collections.SetsKt___SetsKt;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class DemoMobileConnectionsRepositoryKairos$$ExternalSyntheticLambda3 implements Function3 {
     public final /* synthetic */ int $r8$classId;
@@ -30,7 +29,7 @@ public final /* synthetic */ class DemoMobileConnectionsRepositoryKairos$$Extern
                 return num2 != null ? SetsKt___SetsKt.plus(set, num2) : set;
             default:
                 int i3 = DemoMobileConnectionsRepositoryKairos.$r8$clinit;
-                return (Set) ((Function1) obj2).mo779invoke((Set) obj3);
+                return (Set) ((Function1) obj2).mo781invoke((Set) obj3);
         }
     }
 }

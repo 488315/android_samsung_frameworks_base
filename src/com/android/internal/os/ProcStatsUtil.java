@@ -15,15 +15,15 @@ public final class ProcStatsUtil {
     }
 
     public static String readNullSeparatedFile(String str) {
-        String readSingleLineProcFile = readSingleLineProcFile(str);
-        if (readSingleLineProcFile == null) {
+        String singleLineProcFile = readSingleLineProcFile(str);
+        if (singleLineProcFile == null) {
             return null;
         }
-        int indexOf = readSingleLineProcFile.indexOf("\u0000\u0000");
-        if (indexOf != -1) {
-            readSingleLineProcFile = readSingleLineProcFile.substring(0, indexOf);
+        int iIndexOf = singleLineProcFile.indexOf("\u0000\u0000");
+        if (iIndexOf != -1) {
+            singleLineProcFile = singleLineProcFile.substring(0, iIndexOf);
         }
-        return readSingleLineProcFile.replace("\u0000", " ");
+        return singleLineProcFile.replace("\u0000", " ");
     }
 
     public static String readSingleLineProcFile(String str) {
@@ -31,59 +31,59 @@ public final class ProcStatsUtil {
     }
 
     public static String readTerminatedProcFile(String str, byte b) {
-        int allowThreadDiskReadsMask = StrictMode.allowThreadDiskReadsMask();
+        int iAllowThreadDiskReadsMask = StrictMode.allowThreadDiskReadsMask();
         try {
             return readTerminatedProcFileInternal(str, b);
         } finally {
-            StrictMode.setThreadPolicyMask(allowThreadDiskReadsMask);
+            StrictMode.setThreadPolicyMask(iAllowThreadDiskReadsMask);
         }
     }
 
-    private static String readTerminatedProcFileInternal(String str, byte b) {
-        String byteArrayOutputStream;
+    private static String readTerminatedProcFileInternal(String str, byte b) throws IOException {
+        String string;
         boolean z;
         try {
             FileInputStream fileInputStream = new FileInputStream(str);
             try {
                 byte[] bArr = new byte[1024];
-                ByteArrayOutputStream byteArrayOutputStream2 = null;
+                ByteArrayOutputStream byteArrayOutputStream = null;
                 do {
-                    int read = fileInputStream.read(bArr);
-                    if (read > 0) {
-                        int i = 0;
+                    int i = fileInputStream.read(bArr);
+                    if (i > 0) {
+                        int i2 = 0;
                         while (true) {
-                            if (i >= read) {
-                                i = -1;
+                            if (i2 >= i) {
+                                i2 = -1;
                                 break;
                             }
-                            if (bArr[i] == b) {
+                            if (bArr[i2] == b) {
                                 break;
                             }
-                            i++;
+                            i2++;
                         }
-                        z = i != -1;
-                        if (z && byteArrayOutputStream2 == null) {
-                            byteArrayOutputStream = new String(bArr, 0, i);
+                        z = i2 != -1;
+                        if (z && byteArrayOutputStream == null) {
+                            string = new String(bArr, 0, i2);
                             break;
                         }
-                        if (byteArrayOutputStream2 == null) {
-                            byteArrayOutputStream2 = new ByteArrayOutputStream(1024);
+                        if (byteArrayOutputStream == null) {
+                            byteArrayOutputStream = new ByteArrayOutputStream(1024);
                         }
                         if (z) {
-                            read = i;
+                            i = i2;
                         }
-                        byteArrayOutputStream2.write(bArr, 0, read);
+                        byteArrayOutputStream.write(bArr, 0, i);
                     } else {
                         break;
                     }
                 } while (!z);
-                if (byteArrayOutputStream2 == null) {
-                    byteArrayOutputStream = "";
+                if (byteArrayOutputStream == null) {
+                    string = "";
                 } else {
-                    byteArrayOutputStream = byteArrayOutputStream2.toString();
+                    string = byteArrayOutputStream.toString();
                 }
                 fileInputStream.close();
-                return byteArrayOutputStream;
+                return string;
             } finally {
             }
         } catch (IOException unused) {

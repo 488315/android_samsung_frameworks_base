@@ -18,15 +18,15 @@ public class SparseBooleanArray implements Cloneable {
             this.mKeys = EmptyArray.INT;
             this.mValues = EmptyArray.BOOLEAN;
         } else {
-            int[] newUnpaddedIntArray = ArrayUtils.newUnpaddedIntArray(i);
-            this.mKeys = newUnpaddedIntArray;
-            this.mValues = new boolean[newUnpaddedIntArray.length];
+            int[] iArrNewUnpaddedIntArray = ArrayUtils.newUnpaddedIntArray(i);
+            this.mKeys = iArrNewUnpaddedIntArray;
+            this.mValues = new boolean[iArrNewUnpaddedIntArray.length];
         }
         this.mSize = 0;
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public SparseBooleanArray m5530clone() {
+    public SparseBooleanArray m5537clone() {
         try {
             SparseBooleanArray sparseBooleanArray = (SparseBooleanArray) super.clone();
             try {
@@ -46,18 +46,18 @@ public class SparseBooleanArray implements Cloneable {
     }
 
     public boolean get(int i, boolean z) {
-        int binarySearch = ContainerHelpers.binarySearch(this.mKeys, this.mSize, i);
-        return binarySearch < 0 ? z : this.mValues[binarySearch];
+        int iBinarySearch = ContainerHelpers.binarySearch(this.mKeys, this.mSize, i);
+        return iBinarySearch < 0 ? z : this.mValues[iBinarySearch];
     }
 
     public void delete(int i) {
-        int binarySearch = ContainerHelpers.binarySearch(this.mKeys, this.mSize, i);
-        if (binarySearch >= 0) {
+        int iBinarySearch = ContainerHelpers.binarySearch(this.mKeys, this.mSize, i);
+        if (iBinarySearch >= 0) {
             int[] iArr = this.mKeys;
-            int i2 = binarySearch + 1;
-            System.arraycopy(iArr, i2, iArr, binarySearch, this.mSize - i2);
+            int i2 = iBinarySearch + 1;
+            System.arraycopy(iArr, i2, iArr, iBinarySearch, this.mSize - i2);
             boolean[] zArr = this.mValues;
-            System.arraycopy(zArr, i2, zArr, binarySearch, this.mSize - i2);
+            System.arraycopy(zArr, i2, zArr, iBinarySearch, this.mSize - i2);
             this.mSize--;
         }
     }
@@ -72,12 +72,12 @@ public class SparseBooleanArray implements Cloneable {
     }
 
     public void put(int i, boolean z) {
-        int binarySearch = ContainerHelpers.binarySearch(this.mKeys, this.mSize, i);
-        if (binarySearch >= 0) {
-            this.mValues[binarySearch] = z;
+        int iBinarySearch = ContainerHelpers.binarySearch(this.mKeys, this.mSize, i);
+        if (iBinarySearch >= 0) {
+            this.mValues[iBinarySearch] = z;
             return;
         }
-        int i2 = ~binarySearch;
+        int i2 = ~iBinarySearch;
         this.mKeys = GrowingArrayUtils.insert(this.mKeys, this.mSize, i2, i);
         this.mValues = GrowingArrayUtils.insert(this.mValues, this.mSize, i2, z);
         this.mSize++;

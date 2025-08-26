@@ -4,7 +4,6 @@ import androidx.compose.animation.FlingCalculator$FlingInfo$$ExternalSyntheticOu
 import androidx.compose.animation.core.CubicBezierEasing$$ExternalSyntheticOutline0;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class QSLongPressProperties {
     public final int backgroundColor;
@@ -45,19 +44,19 @@ public final class QSLongPressProperties {
     }
 
     public final String toString() {
-        StringBuilder m = CubicBezierEasing$$ExternalSyntheticOutline0.m("QSLongPressProperties(height=", this.height, ", width=", this.width, ", cornerRadius=");
-        m.append(this.cornerRadius);
-        m.append(", backgroundColor=");
-        m.append(this.backgroundColor);
-        m.append(", labelColor=");
-        m.append(this.labelColor);
-        m.append(", secondaryLabelColor=");
-        m.append(this.secondaryLabelColor);
-        m.append(", chevronColor=");
-        m.append(this.chevronColor);
-        m.append(", overlayColor=");
-        m.append(this.overlayColor);
-        m.append(", iconColor=");
-        return ReorderTile$$ExternalSyntheticOutline0.m(this.iconColor, ")", m);
+        StringBuilder sbM = CubicBezierEasing$$ExternalSyntheticOutline0.m("QSLongPressProperties(height=", this.height, ", width=", this.width, ", cornerRadius=");
+        sbM.append(this.cornerRadius);
+        sbM.append(", backgroundColor=");
+        sbM.append(this.backgroundColor);
+        sbM.append(", labelColor=");
+        sbM.append(this.labelColor);
+        sbM.append(", secondaryLabelColor=");
+        sbM.append(this.secondaryLabelColor);
+        sbM.append(", chevronColor=");
+        sbM.append(this.chevronColor);
+        sbM.append(", overlayColor=");
+        sbM.append(this.overlayColor);
+        sbM.append(", iconColor=");
+        return ReorderTile$$ExternalSyntheticOutline0.m(this.iconColor, ")", sbM);
     }
 }

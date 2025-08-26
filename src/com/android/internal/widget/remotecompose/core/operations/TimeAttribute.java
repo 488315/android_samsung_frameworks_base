@@ -87,19 +87,19 @@ public class TimeAttribute extends PaintOperation {
 
     public static void read(WireBuffer wireBuffer, List<Operation> list) {
         int[] iArr;
-        int readInt = wireBuffer.readInt();
-        int readInt2 = wireBuffer.readInt();
-        short readShort = (short) wireBuffer.readShort();
-        int readShort2 = (short) wireBuffer.readShort();
-        if (readShort2 != 0) {
-            iArr = new int[readShort2];
-            for (int i = 0; i < readShort2; i++) {
-                iArr[i] = wireBuffer.readInt();
+        int i = wireBuffer.readInt();
+        int i2 = wireBuffer.readInt();
+        short s = (short) wireBuffer.readShort();
+        int i3 = (short) wireBuffer.readShort();
+        if (i3 != 0) {
+            iArr = new int[i3];
+            for (int i4 = 0; i4 < i3; i4++) {
+                iArr[i4] = wireBuffer.readInt();
             }
         } else {
             iArr = null;
         }
-        list.add(new TimeAttribute(readInt, readInt2, readShort, iArr));
+        list.add(new TimeAttribute(i, i2, s, iArr));
     }
 
     public static void documentation(DocumentationBuilder documentationBuilder) {
@@ -115,7 +115,7 @@ public class TimeAttribute extends PaintOperation {
     /* JADX WARN: Type inference failed for: r7v4, types: [java.time.LocalDateTime] */
     @Override // com.android.internal.widget.remotecompose.core.PaintOperation
     public void paint(PaintContext paintContext) {
-        long currentTimeMillis;
+        long jCurrentTimeMillis;
         int i = this.mType & 255;
         RemoteContext context = paintContext.getContext();
         long docLoadTime = context.getDocLoadTime();
@@ -127,14 +127,14 @@ public class TimeAttribute extends PaintOperation {
             case false:
             case true:
             case true:
-                currentTimeMillis = System.currentTimeMillis();
-                j = value - currentTimeMillis;
+                jCurrentTimeMillis = System.currentTimeMillis();
+                j = value - jCurrentTimeMillis;
                 break;
             case true:
             case true:
             case true:
-                currentTimeMillis = ((LongConstant) context.getObject(this.mArgs[0])).getValue();
-                j = value - currentTimeMillis;
+                jCurrentTimeMillis = ((LongConstant) context.getObject(this.mArgs[0])).getValue();
+                j = value - jCurrentTimeMillis;
                 break;
             case true:
             case true:

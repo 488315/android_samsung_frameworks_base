@@ -173,36 +173,46 @@ public class CoreDocument implements Serializable {
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
+    /* JADX WARN: Removed duplicated region for block: B:13:0x004e A[PHI: r2
+      0x004e: PHI (r2v1 float) = (r2v0 float), (r2v0 float), (r2v3 float), (r2v4 float), (r2v5 float), (r2v6 float), (r2v7 float) binds: [B:3:0x0005, B:5:0x0009, B:12:0x003e, B:11:0x0038, B:10:0x0032, B:9:0x0025, B:8:0x0018] A[DONT_GENERATE, DONT_INLINE]] */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public void computeScale(float f, float f2, float[] fArr) {
         float f3;
-        float f4 = 1.0f;
+        float fMin = 1.0f;
         if (this.mContentSizing == 2) {
             switch (this.mContentMode) {
                 case 1:
-                    f4 = Math.min(1.0f, Math.min(f / this.mWidth, f2 / this.mHeight));
+                    fMin = Math.min(1.0f, Math.min(f / this.mWidth, f2 / this.mHeight));
+                    f3 = fMin;
                     break;
                 case 2:
-                    f4 = f / this.mWidth;
+                    fMin = f / this.mWidth;
+                    f3 = fMin;
                     break;
                 case 3:
-                    f4 = f2 / this.mHeight;
+                    fMin = f2 / this.mHeight;
+                    f3 = fMin;
                     break;
                 case 4:
-                    f4 = Math.min(f / this.mWidth, f2 / this.mHeight);
+                    fMin = Math.min(f / this.mWidth, f2 / this.mHeight);
+                    f3 = fMin;
                     break;
                 case 5:
-                    f4 = Math.max(f / this.mWidth, f2 / this.mHeight);
+                    fMin = Math.max(f / this.mWidth, f2 / this.mHeight);
+                    f3 = fMin;
                     break;
                 case 6:
-                    f4 = f / this.mWidth;
+                    fMin = f / this.mWidth;
                     f3 = f2 / this.mHeight;
                     break;
+                default:
+                    f3 = fMin;
+                    break;
             }
-            fArr[0] = f4;
-            fArr[1] = f3;
         }
-        f3 = f4;
-        fArr[0] = f4;
+        fArr[0] = fMin;
         fArr[1] = f3;
     }
 
@@ -292,58 +302,58 @@ public class CoreDocument implements Serializable {
     }
 
     public void applyUpdate(CoreDocument coreDocument) {
-        final HashMap hashMap = new HashMap();
-        final HashMap hashMap2 = new HashMap();
-        final HashMap hashMap3 = new HashMap();
-        final HashMap hashMap4 = new HashMap();
-        final HashMap hashMap5 = new HashMap();
-        final HashMap hashMap6 = new HashMap();
+        final HashMap map = new HashMap();
+        final HashMap map2 = new HashMap();
+        final HashMap map3 = new HashMap();
+        final HashMap map4 = new HashMap();
+        final HashMap map5 = new HashMap();
+        final HashMap map6 = new HashMap();
         recursiveTraverse(this.mOperations, new Visitor() { // from class: com.android.internal.widget.remotecompose.core.CoreDocument$$ExternalSyntheticLambda0
             @Override // com.android.internal.widget.remotecompose.core.CoreDocument.Visitor
             public final void visit(Operation operation) {
-                CoreDocument.lambda$applyUpdate$0(hashMap, hashMap2, hashMap3, hashMap4, hashMap5, hashMap6, operation);
+                CoreDocument.lambda$applyUpdate$0(map, map2, map3, map4, map5, map6, operation);
             }
         });
         recursiveTraverse(coreDocument.mOperations, new Visitor() { // from class: com.android.internal.widget.remotecompose.core.CoreDocument$$ExternalSyntheticLambda1
             @Override // com.android.internal.widget.remotecompose.core.CoreDocument.Visitor
             public final void visit(Operation operation) {
-                CoreDocument.lambda$applyUpdate$1(hashMap, hashMap2, hashMap3, hashMap4, hashMap5, hashMap6, operation);
+                CoreDocument.lambda$applyUpdate$1(map, map2, map3, map4, map5, map6, operation);
             }
         });
     }
 
-    static /* synthetic */ void lambda$applyUpdate$0(HashMap hashMap, HashMap hashMap2, HashMap hashMap3, HashMap hashMap4, HashMap hashMap5, HashMap hashMap6, Operation operation) {
+    static /* synthetic */ void lambda$applyUpdate$0(HashMap map, HashMap map2, HashMap map3, HashMap map4, HashMap map5, HashMap map6, Operation operation) {
         if (operation instanceof TextData) {
             TextData textData = (TextData) operation;
-            hashMap.put(Integer.valueOf(textData.mTextId), textData);
+            map.put(Integer.valueOf(textData.mTextId), textData);
             return;
         }
         if (operation instanceof BitmapData) {
             BitmapData bitmapData = (BitmapData) operation;
-            hashMap2.put(Integer.valueOf(bitmapData.mImageId), bitmapData);
+            map2.put(Integer.valueOf(bitmapData.mImageId), bitmapData);
             return;
         }
         if (operation instanceof FloatConstant) {
             FloatConstant floatConstant = (FloatConstant) operation;
-            hashMap3.put(Integer.valueOf(floatConstant.mId), floatConstant);
+            map3.put(Integer.valueOf(floatConstant.mId), floatConstant);
             return;
         }
         if (operation instanceof IntegerConstant) {
             IntegerConstant integerConstant = (IntegerConstant) operation;
-            hashMap4.put(Integer.valueOf(integerConstant.mId), integerConstant);
+            map4.put(Integer.valueOf(integerConstant.mId), integerConstant);
         } else if (operation instanceof LongConstant) {
             LongConstant longConstant = (LongConstant) operation;
-            hashMap5.put(Integer.valueOf(longConstant.mId), longConstant);
+            map5.put(Integer.valueOf(longConstant.mId), longConstant);
         } else if (operation instanceof DataListFloat) {
             DataListFloat dataListFloat = (DataListFloat) operation;
-            hashMap6.put(Integer.valueOf(dataListFloat.mId), dataListFloat);
+            map6.put(Integer.valueOf(dataListFloat.mId), dataListFloat);
         }
     }
 
-    static /* synthetic */ void lambda$applyUpdate$1(HashMap hashMap, HashMap hashMap2, HashMap hashMap3, HashMap hashMap4, HashMap hashMap5, HashMap hashMap6, Operation operation) {
+    static /* synthetic */ void lambda$applyUpdate$1(HashMap map, HashMap map2, HashMap map3, HashMap map4, HashMap map5, HashMap map6, Operation operation) {
         if (operation instanceof TextData) {
             TextData textData = (TextData) operation;
-            TextData textData2 = (TextData) hashMap.get(Integer.valueOf(textData.mTextId));
+            TextData textData2 = (TextData) map.get(Integer.valueOf(textData.mTextId));
             if (textData2 != null) {
                 textData2.update(textData);
                 textData2.markDirty();
@@ -353,7 +363,7 @@ public class CoreDocument implements Serializable {
         }
         if (operation instanceof BitmapData) {
             BitmapData bitmapData = (BitmapData) operation;
-            BitmapData bitmapData2 = (BitmapData) hashMap2.get(Integer.valueOf(bitmapData.mImageId));
+            BitmapData bitmapData2 = (BitmapData) map2.get(Integer.valueOf(bitmapData.mImageId));
             if (bitmapData2 != null) {
                 bitmapData2.update(bitmapData);
                 bitmapData2.markDirty();
@@ -363,7 +373,7 @@ public class CoreDocument implements Serializable {
         }
         if (operation instanceof FloatConstant) {
             FloatConstant floatConstant = (FloatConstant) operation;
-            FloatConstant floatConstant2 = (FloatConstant) hashMap3.get(Integer.valueOf(floatConstant.mId));
+            FloatConstant floatConstant2 = (FloatConstant) map3.get(Integer.valueOf(floatConstant.mId));
             if (floatConstant2 != null) {
                 floatConstant2.update(floatConstant);
                 floatConstant2.markDirty();
@@ -373,7 +383,7 @@ public class CoreDocument implements Serializable {
         }
         if (operation instanceof IntegerConstant) {
             IntegerConstant integerConstant = (IntegerConstant) operation;
-            IntegerConstant integerConstant2 = (IntegerConstant) hashMap4.get(Integer.valueOf(integerConstant.mId));
+            IntegerConstant integerConstant2 = (IntegerConstant) map4.get(Integer.valueOf(integerConstant.mId));
             if (integerConstant2 != null) {
                 integerConstant2.update(integerConstant);
                 integerConstant2.markDirty();
@@ -383,7 +393,7 @@ public class CoreDocument implements Serializable {
         }
         if (operation instanceof LongConstant) {
             LongConstant longConstant = (LongConstant) operation;
-            LongConstant longConstant2 = (LongConstant) hashMap5.get(Integer.valueOf(longConstant.mId));
+            LongConstant longConstant2 = (LongConstant) map5.get(Integer.valueOf(longConstant.mId));
             if (longConstant2 != null) {
                 longConstant2.update(longConstant);
                 longConstant2.markDirty();
@@ -393,7 +403,7 @@ public class CoreDocument implements Serializable {
         }
         if (operation instanceof DataListFloat) {
             DataListFloat dataListFloat = (DataListFloat) operation;
-            DataListFloat dataListFloat2 = (DataListFloat) hashMap6.get(Integer.valueOf(dataListFloat.mId));
+            DataListFloat dataListFloat2 = (DataListFloat) map6.get(Integer.valueOf(dataListFloat.mId));
             if (dataListFloat2 != null) {
                 dataListFloat2.update(dataListFloat);
                 dataListFloat2.markDirty();
@@ -555,10 +565,10 @@ public class CoreDocument implements Serializable {
                 this.mFloatExpressions.put(Integer.valueOf(floatExpression.mId), floatExpression);
             }
         }
-        ArrayList<Operation> inflateComponents = inflateComponents(this.mOperations);
-        this.mOperations = inflateComponents;
+        ArrayList<Operation> arrayListInflateComponents = inflateComponents(this.mOperations);
+        this.mOperations = arrayListInflateComponents;
         this.mBuffer = remoteComposeBuffer;
-        Iterator<Operation> it2 = inflateComponents.iterator();
+        Iterator<Operation> it2 = arrayListInflateComponents.iterator();
         while (true) {
             if (!it2.hasNext()) {
                 break;
@@ -580,7 +590,7 @@ public class CoreDocument implements Serializable {
         ArrayList arrayList3 = new ArrayList();
         this.mLastId = -1;
         Iterator<Operation> it = arrayList.iterator();
-        ArrayList arrayList4 = arrayList2;
+        ArrayList list = arrayList2;
         LayoutComponent layoutComponent = null;
         while (it.hasNext()) {
             Object obj = (Operation) it.next();
@@ -602,29 +612,29 @@ public class CoreDocument implements Serializable {
                     }
                 }
                 arrayList3.add(container);
-                arrayList4 = container.getList();
+                list = container.getList();
             } else if (obj instanceof ContainerEnd) {
                 Container container3 = !arrayList3.isEmpty() ? (Container) arrayList3.remove(arrayList3.size() - 1) : null;
                 Container container4 = !arrayList3.isEmpty() ? (Container) arrayList3.get(arrayList3.size() - 1) : null;
-                ArrayList<Operation> list = container4 != null ? container4.getList() : arrayList2;
+                ArrayList<Operation> list2 = container4 != null ? container4.getList() : arrayList2;
                 if (container3 != null) {
                     if (container3 instanceof Component) {
                         ((Component) container3).inflate();
                     }
-                    list.add((Operation) container3);
+                    list2.add((Operation) container3);
                 }
                 if (container3 instanceof CanvasOperations) {
                     ((CanvasOperations) container3).setComponent(layoutComponent);
                 }
-                arrayList4 = list;
+                list = list2;
             } else {
                 if (obj instanceof DrawContent) {
                     ((DrawContent) obj).setComponent(layoutComponent);
                 }
-                arrayList4.add(obj);
+                list.add(obj);
             }
         }
-        return arrayList4;
+        return list;
     }
 
     private void registerVariables(RemoteContext remoteContext, ArrayList<Operation> arrayList) {
@@ -903,7 +913,7 @@ public class CoreDocument implements Serializable {
     public void paint(RemoteContext remoteContext, int i) {
         CoreDocument coreDocument;
         RootLayoutComponent rootLayoutComponent;
-        boolean isDirty;
+        boolean zIsDirty;
         int theme;
         remoteContext.clearLastOpCount();
         remoteContext.getPaintContext().clearNeedsRepaint();
@@ -949,8 +959,8 @@ public class CoreDocument implements Serializable {
         remoteContext.mMode = RemoteContext.ContextMode.PAINT;
         for (int i2 = 0; i2 < coreDocument.mOperations.size(); i2++) {
             Operation operation = coreDocument.mOperations.get(i2);
-            if ((i == -1 || (theme = remoteContext.getTheme()) == i || theme == -1 || (operation instanceof Theme)) && ((isDirty = operation.isDirty()) || (operation instanceof PaintOperation))) {
-                if (isDirty && (operation instanceof VariableSupport)) {
+            if ((i == -1 || (theme = remoteContext.getTheme()) == i || theme == -1 || (operation instanceof Theme)) && ((zIsDirty = operation.isDirty()) || (operation instanceof PaintOperation))) {
+                if (zIsDirty && (operation instanceof VariableSupport)) {
                     operation.markNotDirty();
                     ((VariableSupport) operation).updateVariables(remoteContext);
                 }
@@ -992,34 +1002,34 @@ public class CoreDocument implements Serializable {
     /* JADX WARN: Multi-variable type inference failed */
     public String[] getStats() {
         int[] iArr;
-        int addChildren;
+        int iAddChildren;
         ArrayList arrayList = new ArrayList();
         WireBuffer wireBuffer = new WireBuffer();
         int size = this.mOperations.size();
-        HashMap<String, int[]> hashMap = new HashMap<>();
+        HashMap<String, int[]> map = new HashMap<>();
         Iterator<Operation> it = this.mOperations.iterator();
         while (it.hasNext()) {
             Operation next = it.next();
             Class<?> cls = next.getClass();
-            if (hashMap.containsKey(cls.getSimpleName())) {
-                iArr = hashMap.get(cls.getSimpleName());
+            if (map.containsKey(cls.getSimpleName())) {
+                iArr = map.get(cls.getSimpleName());
             } else {
                 int[] iArr2 = new int[2];
-                hashMap.put(cls.getSimpleName(), iArr2);
+                map.put(cls.getSimpleName(), iArr2);
                 iArr = iArr2;
             }
             iArr[0] = iArr[0] + 1;
             iArr[1] = iArr[1] + sizeOfComponent(next, wireBuffer);
             if (next instanceof Container) {
-                addChildren = addChildren((Container) next, hashMap, wireBuffer);
+                iAddChildren = addChildren((Container) next, map, wireBuffer);
             } else if (next instanceof LoopOperation) {
-                addChildren = addChildren((LoopOperation) next, hashMap, wireBuffer);
+                iAddChildren = addChildren((LoopOperation) next, map, wireBuffer);
             }
-            size += addChildren;
+            size += iAddChildren;
         }
         arrayList.add(0, "number of operations : " + size);
-        for (String str : hashMap.keySet()) {
-            int[] iArr3 = hashMap.get(str);
+        for (String str : map.keySet()) {
+            int[] iArr3 = map.get(str);
             arrayList.add(str + " : " + iArr3[0] + ":" + iArr3[1]);
         }
         return (String[]) arrayList.toArray(new String[0]);
@@ -1034,24 +1044,24 @@ public class CoreDocument implements Serializable {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    private int addChildren(Container container, HashMap<String, int[]> hashMap, WireBuffer wireBuffer) {
+    private int addChildren(Container container, HashMap<String, int[]> map, WireBuffer wireBuffer) {
         int[] iArr;
         int size = container.getList().size();
         Iterator<Operation> it = container.getList().iterator();
         while (it.hasNext()) {
             Operation next = it.next();
             Class<?> cls = next.getClass();
-            if (hashMap.containsKey(cls.getSimpleName())) {
-                iArr = hashMap.get(cls.getSimpleName());
+            if (map.containsKey(cls.getSimpleName())) {
+                iArr = map.get(cls.getSimpleName());
             } else {
                 int[] iArr2 = new int[2];
-                hashMap.put(cls.getSimpleName(), iArr2);
+                map.put(cls.getSimpleName(), iArr2);
                 iArr = iArr2;
             }
             iArr[0] = iArr[0] + 1;
             iArr[1] = iArr[1] + sizeOfComponent(next, wireBuffer);
             if (next instanceof Container) {
-                size += addChildren((Container) next, hashMap, wireBuffer);
+                size += addChildren((Container) next, map, wireBuffer);
             }
         }
         return size;

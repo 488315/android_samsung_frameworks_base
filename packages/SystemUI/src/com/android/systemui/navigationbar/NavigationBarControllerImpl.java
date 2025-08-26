@@ -72,6 +72,7 @@ import com.android.systemui.statusbar.phone.ConfigurationControllerImpl;
 import com.android.systemui.statusbar.phone.LightBarController;
 import com.android.systemui.statusbar.phone.LightBarTransitionsController;
 import com.android.systemui.statusbar.policy.ConfigurationController;
+import com.android.systemui.util.SafeUIState;
 import com.android.systemui.util.SettingsHelper;
 import com.android.systemui.util.Utils;
 import com.android.systemui.util.settings.SecureSettings;
@@ -88,7 +89,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class NavigationBarControllerImpl implements ConfigurationController.ConfigurationListener, NavigationModeController.ModeChangedListener, LauncherProxyService.LauncherProxyListener, Dumpable, NavigationBarController {
     public final AutoHideControllerImpl.Factory mAutoHideControllerFactory;
@@ -116,7 +116,6 @@ public class NavigationBarControllerImpl implements ConfigurationController.Conf
     SparseArray<NavigationBar> mNavigationBars = new SparseArray<>();
     public final SparseBooleanArray mHasNavBar = new SparseBooleanArray();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.navigationbar.NavigationBarControllerImpl$1, reason: invalid class name */
     public class AnonymousClass1 implements CommandQueue.Callbacks {
         public AnonymousClass1() {
@@ -136,45 +135,46 @@ public class NavigationBarControllerImpl implements ConfigurationController.Conf
 
         @Override // com.android.systemui.statusbar.CommandQueue.Callbacks
         public final void onDisplayAddSystemDecorations(int i) {
-            boolean isTrue = DesktopExperienceFlags.ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT.isTrue();
+            boolean zIsTrue = DesktopExperienceFlags.ENABLE_DISPLAY_CONTENT_MODE_MANAGEMENT.isTrue();
             NavigationBarControllerImpl navigationBarControllerImpl = NavigationBarControllerImpl.this;
-            if (isTrue) {
+            if (zIsTrue) {
                 navigationBarControllerImpl.mHasNavBar.put(i, true);
             }
             Display display = navigationBarControllerImpl.mDisplayManager.getDisplay(i);
             navigationBarControllerImpl.mIsLargeScreen = BasicRune.NAVBAR_ENABLED ? NavigationBarLargeScreenUtil.isLargeScreen(navigationBarControllerImpl.mContext) : Utilities.isLargeScreen(navigationBarControllerImpl.mContext);
             navigationBarControllerImpl.createNavigationBar(display, null, null);
-            if (BasicRune.NAVBAR_DESKTOP) {
-                DisplayInfo displayInfo = new DisplayInfo();
-                display.getDisplayInfo(displayInfo);
-                if ((displayInfo.flags & 131072) != 0) {
-                    navigationBarControllerImpl.mDesktopDisplayIds.add(Integer.valueOf(i));
-                    Context createDisplayContext = navigationBarControllerImpl.mContext.createDisplayContext(display);
-                    int i2 = StatusBarConnectedDisplays.$r8$clinit;
-                    AutoHideControllerImpl.Factory factory = navigationBarControllerImpl.mAutoHideControllerFactory;
-                    AutoHideControllerImpl autoHideControllerImpl = new AutoHideControllerImpl(createDisplayContext, factory.mHandler, factory.mIWindowManager);
-                    AutoHideUiElementPerDisplay autoHideUiElementPerDisplay = navigationBarControllerImpl.new AutoHideUiElementPerDisplay(i);
-                    if (BasicRune.NAVBAR_POLICY_VISIBILITY) {
-                        autoHideControllerImpl.registerElementToObserver(autoHideUiElementPerDisplay);
-                    } else {
-                        autoHideControllerImpl.mNavigationBar = autoHideUiElementPerDisplay;
-                    }
-                    ((HashMap) navigationBarControllerImpl.mAutoHideUiElements).put(Integer.valueOf(i), autoHideUiElementPerDisplay);
-                    ((HashMap) navigationBarControllerImpl.mAutoHideControllers).put(Integer.valueOf(i), autoHideControllerImpl);
-                    ((HashMap) navigationBarControllerImpl.mTransientShowing).put(Integer.valueOf(i), Optional.of(Boolean.FALSE));
+            if (!BasicRune.NAVBAR_DESKTOP || display == null) {
+                return;
+            }
+            DisplayInfo displayInfo = new DisplayInfo();
+            display.getDisplayInfo(displayInfo);
+            if ((displayInfo.flags & 131072) != 0) {
+                navigationBarControllerImpl.mDesktopDisplayIds.add(Integer.valueOf(i));
+                Context contextCreateDisplayContext = navigationBarControllerImpl.mContext.createDisplayContext(display);
+                int i2 = StatusBarConnectedDisplays.$r8$clinit;
+                AutoHideControllerImpl.Factory factory = navigationBarControllerImpl.mAutoHideControllerFactory;
+                AutoHideControllerImpl autoHideControllerImpl = new AutoHideControllerImpl(contextCreateDisplayContext, factory.mHandler, factory.mIWindowManager);
+                AutoHideUiElementPerDisplay autoHideUiElementPerDisplay = navigationBarControllerImpl.new AutoHideUiElementPerDisplay(i);
+                if (BasicRune.NAVBAR_POLICY_VISIBILITY) {
+                    autoHideControllerImpl.registerElementToObserver(autoHideUiElementPerDisplay);
+                } else {
+                    autoHideControllerImpl.mNavigationBar = autoHideUiElementPerDisplay;
                 }
-                if (navigationBarControllerImpl.mTaskbarDelegate.mInitialized) {
-                    return;
+                ((HashMap) navigationBarControllerImpl.mAutoHideUiElements).put(Integer.valueOf(i), autoHideUiElementPerDisplay);
+                ((HashMap) navigationBarControllerImpl.mAutoHideControllers).put(Integer.valueOf(i), autoHideControllerImpl);
+                ((HashMap) navigationBarControllerImpl.mTransientShowing).put(Integer.valueOf(i), Optional.of(Boolean.FALSE));
+            }
+            if (navigationBarControllerImpl.mTaskbarDelegate.mInitialized) {
+                return;
+            }
+            ListPopupWindow$$ExternalSyntheticOutline0.m(i, "onDisplayAddSystemDecorations id=", "NavigationBarControllerImpl");
+            try {
+                ILauncherProxy iLauncherProxy = navigationBarControllerImpl.mLauncherProxyService.mLauncherProxy;
+                if (iLauncherProxy != null) {
+                    ((ILauncherProxy.Stub.Proxy) iLauncherProxy).onDisplayAddSystemDecorations(i);
                 }
-                ListPopupWindow$$ExternalSyntheticOutline0.m(i, "onDisplayAddSystemDecorations id=", "NavigationBarControllerImpl");
-                try {
-                    ILauncherProxy iLauncherProxy = navigationBarControllerImpl.mLauncherProxyService.mLauncherProxy;
-                    if (iLauncherProxy != null) {
-                        ((ILauncherProxy.Stub.Proxy) iLauncherProxy).onDisplayAddSystemDecorations(i);
-                    }
-                } catch (RemoteException e) {
-                    Log.e("NavigationBarControllerImpl", "onDisplayAddSystemDecorations() failed", e);
-                }
+            } catch (RemoteException e) {
+                Log.e("NavigationBarControllerImpl", "onDisplayAddSystemDecorations() failed", e);
             }
         }
 
@@ -241,10 +241,10 @@ public class NavigationBarControllerImpl implements ConfigurationController.Conf
                 if (i >= navigationBarControllerImpl.mNavigationBars.size()) {
                     return;
                 }
-                NavigationBar valueAt = navigationBarControllerImpl.mNavigationBars.valueAt(i);
-                valueAt.getClass();
+                NavigationBar navigationBarValueAt = navigationBarControllerImpl.mNavigationBars.valueAt(i);
+                navigationBarValueAt.getClass();
                 Log.d("NavigationBar", "resetAutoHide()");
-                valueAt.mAutoHideController.touchAutoHide();
+                navigationBarValueAt.mAutoHideController.touchAutoHide();
                 i++;
             }
         }
@@ -337,7 +337,6 @@ public class NavigationBarControllerImpl implements ConfigurationController.Conf
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AutoHideUiElementPerDisplay implements AutoHideUiElement {
         public final int displayId;
 
@@ -394,7 +393,7 @@ public class NavigationBarControllerImpl implements ConfigurationController.Conf
         this.mNavBarHelper = navBarHelper;
         this.mTaskbarDelegate = taskbarDelegate;
         AutoHideController autoHideController = (AutoHideController) autoHideControllerStore.forDisplay(context.getDisplayId());
-        BackAnimationController.BackAnimationImpl orElse = optional2.orElse(null);
+        BackAnimationController.BackAnimationImpl backAnimationImplOrElse = optional2.orElse(null);
         taskbarDelegate.mCommandQueue = commandQueue;
         taskbarDelegate.mLauncherProxyService = launcherProxyService;
         taskbarDelegate.mNavBarHelper = navBarHelper;
@@ -404,7 +403,7 @@ public class NavigationBarControllerImpl implements ConfigurationController.Conf
         taskbarDelegate.mAutoHideController = autoHideController;
         taskbarDelegate.mLightBarController = lightBarController;
         taskbarDelegate.mPipOptional = optional;
-        taskbarDelegate.mBackAnimation = orElse;
+        taskbarDelegate.mBackAnimation = backAnimationImplOrElse;
         taskbarDelegate.mLightBarTransitionsController = taskbarDelegate.mLightBarTransitionsControllerFactory.create(taskbarDelegate.new AnonymousClass4());
         taskbarDelegate.mTaskStackChangeListeners = taskStackChangeListeners;
         Context context2 = navBarHelper.mContext;
@@ -447,6 +446,11 @@ public class NavigationBarControllerImpl implements ConfigurationController.Conf
 
     public void createNavigationBar(final Display display, Bundle bundle, final RegisterStatusBarResult registerStatusBarResult) {
         if (display == null) {
+            Log.d("NavigationBarControllerImpl", "Skip createNavigationBar (display null)");
+            return;
+        }
+        if (SafeUIState.isSysUiSafeModeEnabled()) {
+            Log.i("NavigationBarControllerImpl", "Skip createNavigationBar in Safe SystemUI");
             return;
         }
         int displayId = display.getDisplayId();
@@ -470,12 +474,12 @@ public class NavigationBarControllerImpl implements ConfigurationController.Conf
             if (z && initializeTaskbarIfNecessary() && !BasicRune.NAVBAR_POLICY_VISIBILITY) {
                 return;
             }
-            Context createDisplayContext = z ? this.mContext : this.mContext.createDisplayContext(display);
+            Context contextCreateDisplayContext = z ? this.mContext : this.mContext.createDisplayContext(display);
             boolean z4 = BasicRune.NAVBAR_ENABLED;
             if (z4) {
-                ((NavBarStoreImpl) this.mNavBarStore).initDisplayDependenciesIfNeeded(displayId, createDisplayContext);
+                ((NavBarStoreImpl) this.mNavBarStore).initDisplayDependenciesIfNeeded(displayId, contextCreateDisplayContext);
             }
-            final NavigationBar navigationBar = ((DaggerReferenceGlobalRootComponent.NavigationBarComponentImpl) this.mNavigationBarComponentFactory.create(createDisplayContext, bundle)).getNavigationBar();
+            final NavigationBar navigationBar = ((DaggerReferenceGlobalRootComponent.NavigationBarComponentImpl) this.mNavigationBarComponentFactory.create(contextCreateDisplayContext, bundle)).getNavigationBar();
             navigationBar.init();
             this.mNavigationBars.put(displayId, navigationBar);
             navigationBar.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener(this) { // from class: com.android.systemui.navigationbar.NavigationBarControllerImpl.2
@@ -509,14 +513,14 @@ public class NavigationBarControllerImpl implements ConfigurationController.Conf
 
     @Override // com.android.systemui.Dumpable
     @NeverCompile
-    public final void dump(PrintWriter printWriter, String[] strArr) {
+    public final void dump(PrintWriter printWriter, String[] strArr) throws Resources.NotFoundException {
         if (BasicRune.NAVBAR_ADDITIONAL_LOG) {
-            StringBuilder m = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("isSimplifiedGesture="), BasicRune.NAVBAR_SIMPLIFIED_GESTURE, printWriter, "isSupportSearcle="), BasicRune.NAVBAR_SUPPORT_SEARCLE, printWriter, "isSupportLegacyGestureOptions=");
-            m.append(SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_FRAMEWORK_CONFIG_NAVIGATION_BAR_THEME").contains("SupportLegacyGestureOptions"));
-            printWriter.println(m.toString());
-            StringBuilder m2 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("isSupportLegacyGestureOptions(by NavStar)="), (Settings.Global.getInt(this.mContext.getContentResolver(), SettingsHelper.INDEX_NAVIGATIONBAR_SPLUGIN_FLAGS, 0) & 4) != 0, printWriter, "the number of connected displays=");
-            m2.append(this.mDesktopDisplayIds.size());
-            printWriter.println(m2.toString());
+            StringBuilder sbM = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("isSimplifiedGesture="), BasicRune.NAVBAR_SIMPLIFIED_GESTURE, printWriter, "isSupportSearcle="), BasicRune.NAVBAR_SUPPORT_SEARCLE, printWriter, "isSupportLegacyGestureOptions=");
+            sbM.append(SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_FRAMEWORK_CONFIG_NAVIGATION_BAR_THEME").contains("SupportLegacyGestureOptions"));
+            printWriter.println(sbM.toString());
+            StringBuilder sbM2 = KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(new StringBuilder("isSupportLegacyGestureOptions(by NavStar)="), (Settings.Global.getInt(this.mContext.getContentResolver(), SettingsHelper.INDEX_NAVIGATIONBAR_SPLUGIN_FLAGS, 0) & 4) != 0, printWriter, "the number of connected displays=");
+            sbM2.append(this.mDesktopDisplayIds.size());
+            printWriter.println(sbM2.toString());
             ArrayList arrayList = this.mDesktopDisplayIds;
             int size = arrayList.size();
             int i = 0;
@@ -584,6 +588,7 @@ public class NavigationBarControllerImpl implements ConfigurationController.Conf
 
     public final boolean initializeTaskbarIfNecessary() {
         boolean z;
+        LauncherProxyService launcherProxyService = this.mLauncherProxyService;
         boolean z2 = BasicRune.NAVBAR_ENABLED;
         TaskbarDelegate taskbarDelegate = this.mTaskbarDelegate;
         NavBarHelper navBarHelper = this.mNavBarHelper;
@@ -619,11 +624,13 @@ public class NavigationBarControllerImpl implements ConfigurationController.Conf
         }
         if (z3) {
             try {
-                ILauncherProxy iLauncherProxy = this.mLauncherProxyService.mLauncherProxy;
-                if (iLauncherProxy != null) {
-                    ((ILauncherProxy.Stub.Proxy) iLauncherProxy).isTaskbarEnabled(z);
+                if (launcherProxyService.mLauncherProxy == null) {
+                    Log.w("NavigationBarControllerImpl", "mLauncherProxyService is not connected. isTaskbarEnabled=" + z);
                     return z;
                 }
+                Log.w("NavigationBarControllerImpl", "initializeTaskbarIfNecessary. isTaskbarEnabled=" + z);
+                ((ILauncherProxy.Stub.Proxy) launcherProxyService.mLauncherProxy).isTaskbarEnabled(z);
+                return z;
             } catch (Exception e) {
                 Log.e("NavigationBarControllerImpl", "An error occurred in initializeTaskbarIfNecessary(): ");
                 e.printStackTrace();
@@ -653,7 +660,7 @@ public class NavigationBarControllerImpl implements ConfigurationController.Conf
         if (z) {
             sendConfigChangeEvent(configuration);
         }
-        boolean applyNewConfig = this.mConfigChanges.applyNewConfig(this.mContext.getResources());
+        boolean zApplyNewConfig = this.mConfigChanges.applyNewConfig(this.mContext.getResources());
         int i = 0;
         boolean z3 = this.mIsLargeScreen != z2;
         if (BasicRune.NAVBAR_ADDITIONAL_LOG && z3) {
@@ -663,7 +670,7 @@ public class NavigationBarControllerImpl implements ConfigurationController.Conf
         sb.append(configuration);
         sb.append(" mTaskbarDelegate initialized=");
         TaskbarDelegate taskbarDelegate = this.mTaskbarDelegate;
-        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sb, taskbarDelegate.mInitialized, " willApplyConfigToNavbars=", applyNewConfig, " navBarCount=");
+        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sb, taskbarDelegate.mInitialized, " willApplyConfigToNavbars=", zApplyNewConfig, " navBarCount=");
         sb.append(this.mNavigationBars.size());
         sb.append(" largeScreenChanged=");
         sb.append(z3);
@@ -680,7 +687,7 @@ public class NavigationBarControllerImpl implements ConfigurationController.Conf
         if (z3 && updateNavbarForTaskbar() && !BasicRune.NAVBAR_POLICY_VISIBILITY) {
             return;
         }
-        if (!applyNewConfig) {
+        if (!zApplyNewConfig) {
             while (i < this.mNavigationBars.size()) {
                 this.mNavigationBars.valueAt(i).onConfigurationChanged(configuration);
                 i++;
@@ -688,9 +695,9 @@ public class NavigationBarControllerImpl implements ConfigurationController.Conf
             return;
         }
         while (i < this.mNavigationBars.size()) {
-            int keyAt = this.mNavigationBars.keyAt(i);
+            int iKeyAt = this.mNavigationBars.keyAt(i);
             Bundle bundle = new Bundle();
-            NavigationBar navigationBar = this.mNavigationBars.get(keyAt);
+            NavigationBar navigationBar = this.mNavigationBars.get(iKeyAt);
             if (navigationBar != null) {
                 bundle.putInt("disabled_state", navigationBar.mDisabledFlags1);
                 bundle.putInt("disabled2_state", navigationBar.mDisabledFlags2);
@@ -704,8 +711,8 @@ public class NavigationBarControllerImpl implements ConfigurationController.Conf
                 ValueAnimator valueAnimator = lightBarTransitionsController.mTintAnimator;
                 bundle.putFloat("dark_intensity", (valueAnimator == null || !valueAnimator.isRunning()) ? lightBarTransitionsController.mDarkIntensity : lightBarTransitionsController.mNextDarkIntensity);
             }
-            removeNavigationBar(keyAt);
-            createNavigationBar(this.mDisplayManager.getDisplay(keyAt), bundle, null);
+            removeNavigationBar(iKeyAt);
+            createNavigationBar(this.mDisplayManager.getDisplay(iKeyAt), bundle, null);
             i++;
         }
     }
@@ -737,6 +744,26 @@ public class NavigationBarControllerImpl implements ConfigurationController.Conf
         }
     }
 
+    @Override // com.android.systemui.recents.LauncherProxyService.LauncherProxyListener
+    public final void onInitializedTaskbarNavigationBar() {
+        if (!BasicRune.NAVBAR_DESKTOP || this.mDesktopDisplayIds.isEmpty()) {
+            return;
+        }
+        TaskbarDelegate taskbarDelegate = this.mTaskbarDelegate;
+        if (taskbarDelegate.mInitialized) {
+            return;
+        }
+        NavBarEvents navBarEventsUpdateTaskbarButtonIconsAndHints = taskbarDelegate.updateTaskbarButtonIconsAndHints();
+        try {
+            ILauncherProxy iLauncherProxy = this.mLauncherProxyService.mLauncherProxy;
+            if (iLauncherProxy != null) {
+                ((ILauncherProxy.Stub.Proxy) iLauncherProxy).handleNavigationBarEvent(navBarEventsUpdateTaskbarButtonIconsAndHints);
+            }
+        } catch (RemoteException e) {
+            Log.e("NavigationBarControllerImpl", "Failed to call sendNavBarEvent()", e);
+        }
+    }
+
     @Override // com.android.systemui.navigationbar.NavigationModeController.ModeChangedListener
     public final void onNavigationModeChanged(int i) {
         final int i2 = this.mNavMode;
@@ -747,30 +774,46 @@ public class NavigationBarControllerImpl implements ConfigurationController.Conf
         this.mExecutor.execute(new Runnable() { // from class: com.android.systemui.navigationbar.NavigationBarControllerImpl$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                NavigationBarControllerImpl navigationBarControllerImpl = NavigationBarControllerImpl.this;
+                NavigationBarControllerImpl navigationBarControllerImpl = this.f$0;
                 if (i2 != navigationBarControllerImpl.mNavMode) {
                     navigationBarControllerImpl.updateNavbarForTaskbar();
                 }
                 for (int i3 = 0; i3 < navigationBarControllerImpl.mNavigationBars.size(); i3++) {
-                    NavigationBar valueAt = navigationBarControllerImpl.mNavigationBars.valueAt(i3);
-                    if (valueAt != null) {
-                        valueAt.getView().updateStates();
+                    NavigationBar navigationBarValueAt = navigationBarControllerImpl.mNavigationBars.valueAt(i3);
+                    if (navigationBarValueAt != null) {
+                        navigationBarValueAt.getView().updateStates();
                     }
                 }
             }
         });
     }
 
+    @Override // com.android.systemui.recents.LauncherProxyService.LauncherProxyListener
+    public final void onTaskbarAutohideSuspendForDisplay(int i, boolean z) {
+        if (BasicRune.NAVBAR_DESKTOP && this.mDesktopDisplayIds.contains(Integer.valueOf(i))) {
+            AutoHideController autoHideController = (AutoHideController) ((HashMap) this.mAutoHideControllers).get(Integer.valueOf(i));
+            if (autoHideController != null) {
+                AutoHideControllerImpl autoHideControllerImpl = (AutoHideControllerImpl) autoHideController;
+                autoHideControllerImpl.mTaskBarSuspend = z;
+                if (z) {
+                    autoHideControllerImpl.suspendAutoHide();
+                } else {
+                    autoHideControllerImpl.resumeSuspendedAutoHideImmediately();
+                }
+            }
+        }
+    }
+
     public final void onTransientStateChangedForDisplay(int i) {
         if (BasicRune.NAVBAR_DESKTOP) {
-            boolean isTransientShowingForDisplay = isTransientShowingForDisplay(i);
+            boolean zIsTransientShowingForDisplay = isTransientShowingForDisplay(i);
             AutoHideController autoHideController = (AutoHideController) ((HashMap) this.mAutoHideControllers).get(Integer.valueOf(i));
-            if (isTransientShowingForDisplay && autoHideController != null) {
+            if (zIsTransientShowingForDisplay && autoHideController != null) {
                 ((AutoHideControllerImpl) autoHideController).touchAutoHide();
             }
             NavBarEvents navBarEvents = new NavBarEvents();
             navBarEvents.eventType = NavBarEvents.EventType.ON_TRANSIENT_SHOWING_CHANGED;
-            navBarEvents.transientShowing = isTransientShowingForDisplay;
+            navBarEvents.transientShowing = zIsTransientShowingForDisplay;
             navBarEvents.displayId = i;
             try {
                 ILauncherProxy iLauncherProxy = this.mLauncherProxyService.mLauncherProxy;
@@ -836,9 +879,9 @@ public class NavigationBarControllerImpl implements ConfigurationController.Conf
             return this.mHasNavBar.get(i);
         }
         try {
-            boolean hasNavigationBar = WindowManagerGlobal.getWindowManagerService().hasNavigationBar(i);
-            this.mHasNavBar.put(i, hasNavigationBar);
-            return hasNavigationBar;
+            boolean zHasNavigationBar = WindowManagerGlobal.getWindowManagerService().hasNavigationBar(i);
+            this.mHasNavBar.put(i, zHasNavigationBar);
+            return zHasNavigationBar;
         } catch (RemoteException unused) {
             Log.w("NavigationBarControllerImpl", "Cannot get WindowManager.");
             return false;
@@ -897,15 +940,15 @@ public class NavigationBarControllerImpl implements ConfigurationController.Conf
     }
 
     public final boolean updateNavbarForTaskbar() {
-        boolean initializeTaskbarIfNecessary = initializeTaskbarIfNecessary();
-        if (initializeTaskbarIfNecessary || this.mNavigationBars.get(this.mContext.getDisplayId()) != null) {
-            if (BasicRune.NAVBAR_ENABLED_HARD_KEY && !initializeTaskbarIfNecessary && !QuickStepContract.isGesturalMode(this.mNavMode) && this.mNavigationBars.get(this.mContext.getDisplayId()) != null) {
+        boolean zInitializeTaskbarIfNecessary = initializeTaskbarIfNecessary();
+        if (zInitializeTaskbarIfNecessary || this.mNavigationBars.get(this.mContext.getDisplayId()) != null) {
+            if (BasicRune.NAVBAR_ENABLED_HARD_KEY && !zInitializeTaskbarIfNecessary && !QuickStepContract.isGesturalMode(this.mNavMode) && this.mNavigationBars.get(this.mContext.getDisplayId()) != null) {
                 removeNavigationBar(this.mContext.getDisplayId());
             }
         } else if (!BasicRune.NAVBAR_POLICY_VISIBILITY) {
             createNavigationBar(this.mContext.getDisplay(), null, null);
-            return initializeTaskbarIfNecessary;
+            return zInitializeTaskbarIfNecessary;
         }
-        return initializeTaskbarIfNecessary;
+        return zInitializeTaskbarIfNecessary;
     }
 }

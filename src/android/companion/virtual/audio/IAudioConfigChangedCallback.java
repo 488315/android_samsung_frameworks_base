@@ -55,9 +55,9 @@ public interface IAudioConfigChangedCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IAudioConfigChangedCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IAudioConfigChangedCallback)) {
-                return (IAudioConfigChangedCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IAudioConfigChangedCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IAudioConfigChangedCallback)) {
+                return (IAudioConfigChangedCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -87,13 +87,13 @@ public interface IAudioConfigChangedCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                ArrayList createTypedArrayList = parcel.createTypedArrayList(AudioPlaybackConfiguration.CREATOR);
+                ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(AudioPlaybackConfiguration.CREATOR);
                 parcel.enforceNoDataAvail();
-                onPlaybackConfigChanged(createTypedArrayList);
+                onPlaybackConfigChanged(arrayListCreateTypedArrayList);
             } else if (i == 2) {
-                ArrayList createTypedArrayList2 = parcel.createTypedArrayList(AudioRecordingConfiguration.CREATOR);
+                ArrayList arrayListCreateTypedArrayList2 = parcel.createTypedArrayList(AudioRecordingConfiguration.CREATOR);
                 parcel.enforceNoDataAvail();
-                onRecordingConfigChanged(createTypedArrayList2);
+                onRecordingConfigChanged(arrayListCreateTypedArrayList2);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -118,25 +118,25 @@ public interface IAudioConfigChangedCallback extends IInterface {
 
             @Override // android.companion.virtual.audio.IAudioConfigChangedCallback
             public void onPlaybackConfigChanged(List<AudioPlaybackConfiguration> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IAudioConfigChangedCallback.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IAudioConfigChangedCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.audio.IAudioConfigChangedCallback
             public void onRecordingConfigChanged(List<AudioRecordingConfiguration> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IAudioConfigChangedCallback.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IAudioConfigChangedCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

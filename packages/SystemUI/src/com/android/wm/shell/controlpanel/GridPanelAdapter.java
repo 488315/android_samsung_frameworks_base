@@ -12,7 +12,6 @@ import com.android.wm.shell.controlpanel.activity.FlexPanelActivity;
 import com.android.wm.shell.controlpanel.utils.ControlPanelUtils;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class GridPanelAdapter extends BaseAdapter {
     public final ArrayList items = new ArrayList();
@@ -49,9 +48,9 @@ public class GridPanelAdapter extends BaseAdapter {
         int resourceIdByActionValue = ControlPanelAction.getResourceIdByActionValue(action.getValue());
         ListPopupWindow$$ExternalSyntheticOutline0.m(value, "makeButton(), action : ", "GridPanelAdapter");
         RelativeLayout relativeLayout = (RelativeLayout) View.inflate(this.mContext, R.layout.assistantmenu_menubutton, null);
-        boolean makeGridButton = ControlPanelUtils.makeGridButton(this.mContext, relativeLayout, value, resourceIdByActionValue, true, this.mIsEditPanel);
+        boolean zMakeGridButton = ControlPanelUtils.makeGridButton(this.mContext, relativeLayout, value, resourceIdByActionValue, true, this.mIsEditPanel);
         FlexPanelActivity flexPanelActivity = this.mOnClickListener;
-        if (flexPanelActivity != null && makeGridButton) {
+        if (flexPanelActivity != null && zMakeGridButton) {
             relativeLayout.setOnClickListener(flexPanelActivity);
             FlexPanelActivity flexPanelActivity2 = this.mOnLongClickListener;
             if (flexPanelActivity2 != null && this.mOnDragListener != null) {

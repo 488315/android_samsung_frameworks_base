@@ -12,7 +12,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class EditTileKt$TileGridCell$1$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ TileGridCell $cell;
@@ -43,14 +42,14 @@ final class EditTileKt$TileGridCell$1$1 extends SuspendLambda implements Functio
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             ResizingState resizingState = this.$resizingState;
-            boolean isIcon = this.$cell.isIcon();
+            boolean zIsIcon = this.$cell.isIcon();
             this.label = 1;
             resizingState.getClass();
-            Object animateTo$default = AnchoredDraggableKt.animateTo$default(resizingState.anchoredDraggableState, isIcon ? QSDragAnchor.Icon : QSDragAnchor.Large, this);
-            if (animateTo$default != obj2) {
-                animateTo$default = Unit.INSTANCE;
+            Object objAnimateTo$default = AnchoredDraggableKt.animateTo$default(resizingState.anchoredDraggableState, zIsIcon ? QSDragAnchor.Icon : QSDragAnchor.Large, this);
+            if (objAnimateTo$default != obj2) {
+                objAnimateTo$default = Unit.INSTANCE;
             }
-            if (animateTo$default == obj2) {
+            if (objAnimateTo$default == obj2) {
                 return obj2;
             }
         } else {

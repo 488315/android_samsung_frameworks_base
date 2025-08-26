@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import com.sec.ims.util.IMSLog;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class CmcCallEventInfo implements Parcelable {
     public static final Parcelable.Creator<CmcCallEventInfo> CREATOR = new Parcelable.Creator<CmcCallEventInfo>() { // from class: com.sec.ims.cmc.CmcCallEventInfo.1
@@ -39,148 +38,6 @@ public class CmcCallEventInfo implements Parcelable {
     private int mNumberPresentation;
     private String mPeerUri;
     private String mPulledDialogId;
-
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
-    public class Builder {
-        protected int mCallId = -1;
-        protected String mPeerUri = "";
-        protected int mDirection = -1;
-        protected int mCallRadioTech = 0;
-        protected boolean mIsPulledCall = false;
-        protected int mNumberPresentation = 1;
-        protected String mCnapName = "";
-        protected int mCnapNamePresentation = 1;
-        protected int mExternalCallSlotAtPd = -1;
-        private String mPulledDialogId = "";
-        private String mDialogId = "";
-        protected int mErrorCode = 0;
-        protected String mErrorMessage = "";
-        protected int mDisconnectCause = -1;
-        protected String mCmcCallTime = "";
-        protected Bundle mCallExtras = new Bundle();
-
-        public Builder addCallExtraOem(String str, int i) {
-            Bundle bundle = this.mCallExtras;
-            if (bundle != null) {
-                Bundle bundle2 = bundle.getBundle(CmcConstants.EXTRA_OEM_EXTRAS);
-                if (bundle2 == null) {
-                    bundle2 = new Bundle();
-                }
-                bundle2.putInt(str, i);
-                this.mCallExtras.remove(CmcConstants.EXTRA_OEM_EXTRAS);
-                this.mCallExtras.putBundle(CmcConstants.EXTRA_OEM_EXTRAS, bundle2);
-            }
-            return this;
-        }
-
-        public CmcCallEventInfo build() {
-            return new CmcCallEventInfo(this);
-        }
-
-        public Builder setCallExtraBool(String str, boolean z) {
-            Bundle bundle = this.mCallExtras;
-            if (bundle != null) {
-                bundle.putBoolean(str, z);
-            }
-            return this;
-        }
-
-        public Builder setCallExtraInt(String str, int i) {
-            Bundle bundle = this.mCallExtras;
-            if (bundle != null) {
-                bundle.putInt(str, i);
-            }
-            return this;
-        }
-
-        public Builder setCallExtraString(String str, String str2) {
-            Bundle bundle = this.mCallExtras;
-            if (bundle != null) {
-                bundle.putString(str, str2);
-            }
-            return this;
-        }
-
-        public Builder setCallExtras(Bundle bundle) {
-            this.mCallExtras = bundle;
-            return this;
-        }
-
-        public Builder setCallId(int i) {
-            this.mCallId = i;
-            return this;
-        }
-
-        public Builder setCallRadioTech(int i) {
-            this.mCallRadioTech = i;
-            return this;
-        }
-
-        public Builder setCmcCallTime(String str) {
-            this.mCmcCallTime = str;
-            return this;
-        }
-
-        public Builder setCnapName(String str) {
-            this.mCnapName = str;
-            return this;
-        }
-
-        public Builder setCnapNamePresentation(int i) {
-            this.mCnapNamePresentation = i;
-            return this;
-        }
-
-        public Builder setDialogId(String str) {
-            this.mDialogId = str;
-            return this;
-        }
-
-        public Builder setDirection(int i) {
-            this.mDirection = i;
-            return this;
-        }
-
-        public Builder setDisconnectCause(int i) {
-            this.mDisconnectCause = i;
-            return this;
-        }
-
-        public Builder setErrorCode(int i) {
-            this.mErrorCode = i;
-            return this;
-        }
-
-        public Builder setErrorMessage(String str) {
-            this.mErrorMessage = str;
-            return this;
-        }
-
-        public Builder setExternalCallSlotAtPd(int i) {
-            this.mExternalCallSlotAtPd = i;
-            return this;
-        }
-
-        public Builder setIsPulledCall(boolean z) {
-            this.mIsPulledCall = z;
-            return this;
-        }
-
-        public Builder setNumberPresentation(int i) {
-            this.mNumberPresentation = i;
-            return this;
-        }
-
-        public Builder setPeerUri(String str) {
-            this.mPeerUri = str;
-            return this;
-        }
-
-        public Builder setPulledDialogId(String str) {
-            this.mPulledDialogId = str;
-            return this;
-        }
-    }
 
     public /* synthetic */ CmcCallEventInfo(Parcel parcel, int i) {
         this(parcel);
@@ -445,6 +302,161 @@ public class CmcCallEventInfo implements Parcelable {
         this.mDisconnectCause = parcel.readInt();
         this.mCmcCallTime = parcel.readString();
         this.mCallExtras = parcel.readBundle();
+    }
+
+    public class Builder {
+        protected int mCallId = -1;
+        protected String mPeerUri = "";
+        protected int mDirection = -1;
+        protected int mCallRadioTech = 0;
+        protected boolean mIsPulledCall = false;
+        protected int mNumberPresentation = 1;
+        protected String mCnapName = "";
+        protected int mCnapNamePresentation = 1;
+        protected int mExternalCallSlotAtPd = -1;
+        private String mPulledDialogId = "";
+        private String mDialogId = "";
+        protected int mErrorCode = 0;
+        protected String mErrorMessage = "";
+        protected int mDisconnectCause = -1;
+        protected String mCmcCallTime = "";
+        protected Bundle mCallExtras = new Bundle();
+
+        public Builder addCallExtraOem(String str, int i) {
+            Bundle bundle = this.mCallExtras;
+            if (bundle != null) {
+                Bundle bundle2 = bundle.getBundle(CmcConstants.EXTRA_OEM_EXTRAS);
+                if (bundle2 == null) {
+                    bundle2 = new Bundle();
+                }
+                bundle2.putInt(str, i);
+                this.mCallExtras.remove(CmcConstants.EXTRA_OEM_EXTRAS);
+                this.mCallExtras.putBundle(CmcConstants.EXTRA_OEM_EXTRAS, bundle2);
+            }
+            return this;
+        }
+
+        public CmcCallEventInfo build() {
+            return new CmcCallEventInfo(this);
+        }
+
+        public Builder setCallExtraBool(String str, boolean z) {
+            Bundle bundle = this.mCallExtras;
+            if (bundle != null) {
+                bundle.putBoolean(str, z);
+            }
+            return this;
+        }
+
+        public Builder setCallExtraInt(String str, int i) {
+            Bundle bundle = this.mCallExtras;
+            if (bundle != null) {
+                bundle.putInt(str, i);
+            }
+            return this;
+        }
+
+        public Builder setCallExtraString(String str, String str2) {
+            Bundle bundle = this.mCallExtras;
+            if (bundle != null) {
+                bundle.putString(str, str2);
+            }
+            return this;
+        }
+
+        public Builder setCallExtras(Bundle bundle) {
+            this.mCallExtras = bundle;
+            return this;
+        }
+
+        public Builder setCallId(int i) {
+            this.mCallId = i;
+            return this;
+        }
+
+        public Builder setCallRadioTech(int i) {
+            this.mCallRadioTech = i;
+            return this;
+        }
+
+        public Builder setCmcCallTime(String str) {
+            this.mCmcCallTime = str;
+            return this;
+        }
+
+        public Builder setCnapName(String str) {
+            this.mCnapName = str;
+            return this;
+        }
+
+        public Builder setCnapNamePresentation(int i) {
+            this.mCnapNamePresentation = i;
+            return this;
+        }
+
+        public Builder setDialogId(String str) {
+            this.mDialogId = str;
+            return this;
+        }
+
+        public Builder setDirection(int i) {
+            this.mDirection = i;
+            return this;
+        }
+
+        public Builder setDisconnectCause(int i) {
+            this.mDisconnectCause = i;
+            return this;
+        }
+
+        public Builder setErrorCode(int i) {
+            this.mErrorCode = i;
+            return this;
+        }
+
+        public Builder setErrorMessage(String str) {
+            this.mErrorMessage = str;
+            return this;
+        }
+
+        public Builder setExternalCallSlotAtPd(int i) {
+            this.mExternalCallSlotAtPd = i;
+            return this;
+        }
+
+        public Builder setIsPulledCall(boolean z) {
+            this.mIsPulledCall = z;
+            return this;
+        }
+
+        public Builder setNumberPresentation(int i) {
+            this.mNumberPresentation = i;
+            return this;
+        }
+
+        public Builder setPeerUri(String str) {
+            this.mPeerUri = str;
+            return this;
+        }
+
+        public Builder setPulledDialogId(String str) {
+            this.mPulledDialogId = str;
+            return this;
+        }
+
+        public Builder addCallExtraOem(String str, String str2) {
+            Bundle bundle = this.mCallExtras;
+            if (bundle != null) {
+                Bundle bundle2 = bundle.getBundle(CmcConstants.EXTRA_OEM_EXTRAS);
+                if (bundle2 == null) {
+                    bundle2 = new Bundle();
+                }
+                bundle2.putString(str, str2);
+                this.mCallExtras.remove(CmcConstants.EXTRA_OEM_EXTRAS);
+                this.mCallExtras.putBundle(CmcConstants.EXTRA_OEM_EXTRAS, bundle2);
+            }
+            return this;
+        }
     }
 
     public CmcCallEventInfo() {

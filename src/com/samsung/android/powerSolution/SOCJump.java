@@ -5,8 +5,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.text.format.DateFormat;
+import com.samsung.android.graphics.imagefilter.ShaderAssembler;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 
 /* loaded from: classes6.dex */
 public class SOCJump {
@@ -44,7 +53,7 @@ public class SOCJump {
         private static final String TAG = "powerSolution_SOCJump_";
 
         @Override // android.content.BroadcastReceiver
-        public void onReceive(Context context, Intent intent) {
+        public void onReceive(Context context, Intent intent) throws Throwable {
             try {
                 onEventRun(intent.getIntExtra("level", -1));
             } catch (IOException e) {
@@ -53,23 +62,268 @@ public class SOCJump {
         }
 
         /* JADX WARN: Multi-variable type inference failed */
-        /* JADX WARN: Removed duplicated region for block: B:39:0x017a  */
-        /* JADX WARN: Removed duplicated region for block: B:41:0x017f  */
-        /* JADX WARN: Removed duplicated region for block: B:43:0x0184  */
-        /* JADX WARN: Removed duplicated region for block: B:47:0x018b  */
-        /* JADX WARN: Removed duplicated region for block: B:49:0x0190  */
-        /* JADX WARN: Removed duplicated region for block: B:51:0x0195  */
-        /* JADX WARN: Type inference failed for: r3v9 */
+        /* JADX WARN: Removed duplicated region for block: B:74:0x017a  */
+        /* JADX WARN: Removed duplicated region for block: B:76:0x017f  */
+        /* JADX WARN: Removed duplicated region for block: B:78:0x0184  */
+        /* JADX WARN: Removed duplicated region for block: B:81:0x018b  */
+        /* JADX WARN: Removed duplicated region for block: B:83:0x0190  */
+        /* JADX WARN: Removed duplicated region for block: B:85:0x0195  */
+        /* JADX WARN: Type inference failed for: r12v10 */
+        /* JADX WARN: Type inference failed for: r12v11 */
+        /* JADX WARN: Type inference failed for: r12v12 */
+        /* JADX WARN: Type inference failed for: r12v13, types: [java.io.OutputStreamWriter, java.io.Writer] */
+        /* JADX WARN: Type inference failed for: r12v19 */
+        /* JADX WARN: Type inference failed for: r12v22 */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        private void onEventRun(int r12) throws java.io.IOException {
-            /*
-                Method dump skipped, instructions count: 414
-                To view this dump change 'Code comments level' option to 'DEBUG'
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.powerSolution.SOCJump.MyBroadcastReceiver.onEventRun(int):void");
+        private void onEventRun(int i) throws Throwable {
+            FileOutputStream fileOutputStream;
+            OutputStreamWriter outputStreamWriter;
+            BufferedWriter bufferedWriter;
+            SOCJump.mCurrentSoc = new SOC(i);
+            if (SOCJump.mPreviousSoc.battery != -1 && SOCJump.mCurrentSoc.socJumpcheck(SOCJump.mPreviousSoc)) {
+                long jCurrentTimeMillis = System.currentTimeMillis();
+                BufferedWriter bufferedWriter2 = null;
+                bufferedWriter = null;
+                bufferedWriter = null;
+                bufferedWriter2 = null;
+                ?? outputStreamWriter2 = 0;
+                bufferedWriter2 = null;
+                BufferedWriter bufferedWriter3 = null;
+                try {
+                    try {
+                        SOCJump.mFileObject = new File(SOCJump.mSocFilePath);
+                        if (!SOCJump.mFileObject.exists() || SOCJump.mFileObject.length() <= 1024) {
+                            outputStreamWriter = null;
+                            bufferedWriter = null;
+                        } else {
+                            fileOutputStream = new FileOutputStream(SOCJump.mSocFilePath, false);
+                            try {
+                                outputStreamWriter = new OutputStreamWriter(fileOutputStream, StandardCharsets.UTF_8);
+                                try {
+                                    bufferedWriter = new BufferedWriter(outputStreamWriter);
+                                } catch (Exception e) {
+                                    e = e;
+                                    System.out.println("An error occurred.");
+                                    e.printStackTrace();
+                                    if (bufferedWriter3 != null) {
+                                        bufferedWriter3.close();
+                                    }
+                                    if (outputStreamWriter != null) {
+                                        outputStreamWriter.close();
+                                    }
+                                    if (fileOutputStream != null) {
+                                        fileOutputStream.close();
+                                    }
+                                    SOCJump.mPreviousSoc = SOCJump.mCurrentSoc;
+                                }
+                            } catch (Exception e2) {
+                                e = e2;
+                                outputStreamWriter = null;
+                            } catch (Throwable th) {
+                                th = th;
+                                outputStreamWriter = null;
+                                if (bufferedWriter2 != null) {
+                                    bufferedWriter2.close();
+                                }
+                                if (outputStreamWriter != null) {
+                                    outputStreamWriter.close();
+                                }
+                                if (fileOutputStream != null) {
+                                    fileOutputStream.close();
+                                }
+                                throw th;
+                            }
+                            try {
+                                bufferedWriter.write("Time\t\t\t\t|SOC jump from\t|SOC jump to\n");
+                                bufferedWriter.close();
+                                outputStreamWriter.close();
+                                fileOutputStream.close();
+                                outputStreamWriter2 = fileOutputStream;
+                            } catch (Exception e3) {
+                                e = e3;
+                                bufferedWriter3 = bufferedWriter;
+                                System.out.println("An error occurred.");
+                                e.printStackTrace();
+                                if (bufferedWriter3 != null) {
+                                }
+                                if (outputStreamWriter != null) {
+                                }
+                                if (fileOutputStream != null) {
+                                }
+                                SOCJump.mPreviousSoc = SOCJump.mCurrentSoc;
+                            } catch (Throwable th2) {
+                                th = th2;
+                                bufferedWriter2 = bufferedWriter;
+                                if (bufferedWriter2 != null) {
+                                }
+                                if (outputStreamWriter != null) {
+                                }
+                                if (fileOutputStream != null) {
+                                }
+                                throw th;
+                            }
+                        }
+                        try {
+                            if (SOCJump.mFileObject.createNewFile()) {
+                                fileOutputStream = new FileOutputStream(SOCJump.mSocFilePath, true);
+                                OutputStreamWriter outputStreamWriter3 = new OutputStreamWriter(fileOutputStream, StandardCharsets.UTF_8);
+                                try {
+                                    BufferedWriter bufferedWriter4 = new BufferedWriter(outputStreamWriter3);
+                                    try {
+                                        System.out.println("powerSolution_SOCJump_ File created: " + SOCJump.mFileObject.getName());
+                                        bufferedWriter4.write("Time\t\t\t\t|SOC jump from\t|SOC jump to\n");
+                                        bufferedWriter4.write(SOCJump.dateFormat(jCurrentTimeMillis) + "\t|\t" + SOCJump.mPreviousSoc.battery + "\t\t\t|\t" + SOCJump.mCurrentSoc.battery + ShaderAssembler.NEWLINE);
+                                        SOCJump.mPreviousSoc = SOCJump.mCurrentSoc;
+                                        bufferedWriter4.close();
+                                        outputStreamWriter3.close();
+                                        fileOutputStream.close();
+                                        bufferedWriter4.close();
+                                        outputStreamWriter3.close();
+                                        fileOutputStream.close();
+                                        return;
+                                    } catch (Exception e4) {
+                                        outputStreamWriter = outputStreamWriter3;
+                                        bufferedWriter3 = bufferedWriter4;
+                                        e = e4;
+                                        System.out.println("An error occurred.");
+                                        e.printStackTrace();
+                                        if (bufferedWriter3 != null) {
+                                        }
+                                        if (outputStreamWriter != null) {
+                                        }
+                                        if (fileOutputStream != null) {
+                                        }
+                                        SOCJump.mPreviousSoc = SOCJump.mCurrentSoc;
+                                    } catch (Throwable th3) {
+                                        outputStreamWriter = outputStreamWriter3;
+                                        bufferedWriter2 = bufferedWriter4;
+                                        th = th3;
+                                        if (bufferedWriter2 != null) {
+                                        }
+                                        if (outputStreamWriter != null) {
+                                        }
+                                        if (fileOutputStream != null) {
+                                        }
+                                        throw th;
+                                    }
+                                } catch (Exception e5) {
+                                    e = e5;
+                                    outputStreamWriter = outputStreamWriter3;
+                                    bufferedWriter3 = bufferedWriter;
+                                    System.out.println("An error occurred.");
+                                    e.printStackTrace();
+                                    if (bufferedWriter3 != null) {
+                                    }
+                                    if (outputStreamWriter != null) {
+                                    }
+                                    if (fileOutputStream != null) {
+                                    }
+                                    SOCJump.mPreviousSoc = SOCJump.mCurrentSoc;
+                                } catch (Throwable th4) {
+                                    th = th4;
+                                    outputStreamWriter = outputStreamWriter3;
+                                    bufferedWriter2 = bufferedWriter;
+                                    if (bufferedWriter2 != null) {
+                                    }
+                                    if (outputStreamWriter != null) {
+                                    }
+                                    if (fileOutputStream != null) {
+                                    }
+                                    throw th;
+                                }
+                            }
+                            FileOutputStream fileOutputStream2 = new FileOutputStream(SOCJump.mSocFilePath, true);
+                            try {
+                                outputStreamWriter2 = new OutputStreamWriter(fileOutputStream2, StandardCharsets.UTF_8);
+                                try {
+                                    BufferedWriter bufferedWriter5 = new BufferedWriter(outputStreamWriter2);
+                                    try {
+                                        bufferedWriter5.write(SOCJump.dateFormat(jCurrentTimeMillis) + "\t|\t" + SOCJump.mPreviousSoc.battery + "\t\t\t|\t" + SOCJump.mCurrentSoc.battery + ShaderAssembler.NEWLINE);
+                                        bufferedWriter5.close();
+                                        outputStreamWriter2.close();
+                                        fileOutputStream2.close();
+                                    } catch (Exception e6) {
+                                        outputStreamWriter = outputStreamWriter2;
+                                        fileOutputStream = fileOutputStream2;
+                                        bufferedWriter3 = bufferedWriter5;
+                                        e = e6;
+                                        System.out.println("An error occurred.");
+                                        e.printStackTrace();
+                                        if (bufferedWriter3 != null) {
+                                        }
+                                        if (outputStreamWriter != null) {
+                                        }
+                                        if (fileOutputStream != null) {
+                                        }
+                                        SOCJump.mPreviousSoc = SOCJump.mCurrentSoc;
+                                    } catch (Throwable th5) {
+                                        outputStreamWriter = outputStreamWriter2;
+                                        fileOutputStream = fileOutputStream2;
+                                        bufferedWriter2 = bufferedWriter5;
+                                        th = th5;
+                                        if (bufferedWriter2 != null) {
+                                        }
+                                        if (outputStreamWriter != null) {
+                                        }
+                                        if (fileOutputStream != null) {
+                                        }
+                                        throw th;
+                                    }
+                                } catch (Exception e7) {
+                                    e = e7;
+                                    outputStreamWriter = outputStreamWriter2;
+                                    fileOutputStream = fileOutputStream2;
+                                    bufferedWriter3 = bufferedWriter;
+                                    System.out.println("An error occurred.");
+                                    e.printStackTrace();
+                                    if (bufferedWriter3 != null) {
+                                    }
+                                    if (outputStreamWriter != null) {
+                                    }
+                                    if (fileOutputStream != null) {
+                                    }
+                                    SOCJump.mPreviousSoc = SOCJump.mCurrentSoc;
+                                } catch (Throwable th6) {
+                                    th = th6;
+                                    outputStreamWriter = outputStreamWriter2;
+                                    fileOutputStream = fileOutputStream2;
+                                    bufferedWriter2 = bufferedWriter;
+                                    if (bufferedWriter2 != null) {
+                                    }
+                                    if (outputStreamWriter != null) {
+                                    }
+                                    if (fileOutputStream != null) {
+                                    }
+                                    throw th;
+                                }
+                            } catch (Exception e8) {
+                                e = e8;
+                            } catch (Throwable th7) {
+                                th = th7;
+                            }
+                        } catch (Exception e9) {
+                            e = e9;
+                            fileOutputStream = outputStreamWriter2;
+                        } catch (Throwable th8) {
+                            th = th8;
+                            fileOutputStream = outputStreamWriter2;
+                        }
+                    } catch (Throwable th9) {
+                        th = th9;
+                    }
+                } catch (Exception e10) {
+                    e = e10;
+                    fileOutputStream = null;
+                    outputStreamWriter = null;
+                } catch (Throwable th10) {
+                    th = th10;
+                    fileOutputStream = null;
+                    outputStreamWriter = null;
+                }
+            }
+            SOCJump.mPreviousSoc = SOCJump.mCurrentSoc;
         }
     }
 
@@ -89,13 +343,13 @@ public class SOCJump {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x004f  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x0054  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0059  */
-    /* JADX WARN: Removed duplicated region for block: B:28:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x0060  */
-    /* JADX WARN: Removed duplicated region for block: B:34:0x0065  */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x006a  */
+    /* JADX WARN: Removed duplicated region for block: B:32:0x004f  */
+    /* JADX WARN: Removed duplicated region for block: B:34:0x0054  */
+    /* JADX WARN: Removed duplicated region for block: B:36:0x0059  */
+    /* JADX WARN: Removed duplicated region for block: B:40:0x0060  */
+    /* JADX WARN: Removed duplicated region for block: B:42:0x0065  */
+    /* JADX WARN: Removed duplicated region for block: B:44:0x006a  */
+    /* JADX WARN: Removed duplicated region for block: B:57:? A[RETURN, SYNTHETIC] */
     /* JADX WARN: Type inference failed for: r1v0 */
     /* JADX WARN: Type inference failed for: r1v1 */
     /* JADX WARN: Type inference failed for: r1v10, types: [java.io.BufferedReader] */
@@ -108,95 +362,110 @@ public class SOCJump {
     /* JADX WARN: Type inference failed for: r1v9 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void dump(java.io.PrintWriter r3, java.lang.String[] r4) throws java.io.IOException {
-        /*
-            r2 = this;
-            java.lang.String r2 = "[SOCJump]"
-            r3.println(r2)
-            r2 = 0
-            java.io.FileInputStream r4 = new java.io.FileInputStream     // Catch: java.lang.Throwable -> L3f java.io.IOException -> L45
-            java.lang.String r0 = "/data/log/eSOC.txt"
-            r4.<init>(r0)     // Catch: java.lang.Throwable -> L3f java.io.IOException -> L45
-            java.io.InputStreamReader r0 = new java.io.InputStreamReader     // Catch: java.lang.Throwable -> L39 java.io.IOException -> L3c
-            java.nio.charset.Charset r1 = java.nio.charset.StandardCharsets.UTF_8     // Catch: java.lang.Throwable -> L39 java.io.IOException -> L3c
-            r0.<init>(r4, r1)     // Catch: java.lang.Throwable -> L39 java.io.IOException -> L3c
-            java.io.BufferedReader r1 = new java.io.BufferedReader     // Catch: java.lang.Throwable -> L33 java.io.IOException -> L36
-            r1.<init>(r0)     // Catch: java.lang.Throwable -> L33 java.io.IOException -> L36
-            java.lang.String r2 = r1.readLine()     // Catch: java.io.IOException -> L31 java.lang.Throwable -> L5d
-        L1d:
-            if (r2 == 0) goto L27
-            r3.println(r2)     // Catch: java.io.IOException -> L31 java.lang.Throwable -> L5d
-            java.lang.String r2 = r1.readLine()     // Catch: java.io.IOException -> L31 java.lang.Throwable -> L5d
-            goto L1d
-        L27:
-            r1.close()
-            r4.close()
-            r0.close()
-            return
-        L31:
-            r2 = move-exception
-            goto L4a
-        L33:
-            r3 = move-exception
-            r1 = r2
-            goto L43
-        L36:
-            r3 = move-exception
-            r1 = r2
-            goto L49
-        L39:
-            r3 = move-exception
-            r0 = r2
-            goto L42
-        L3c:
-            r3 = move-exception
-            r0 = r2
-            goto L48
-        L3f:
-            r3 = move-exception
-            r4 = r2
-            r0 = r4
-        L42:
-            r1 = r0
-        L43:
-            r2 = r3
-            goto L5e
-        L45:
-            r3 = move-exception
-            r4 = r2
-            r0 = r4
-        L48:
-            r1 = r0
-        L49:
-            r2 = r3
-        L4a:
-            r2.printStackTrace()     // Catch: java.lang.Throwable -> L5d
-            if (r1 == 0) goto L52
-            r1.close()
-        L52:
-            if (r4 == 0) goto L57
-            r4.close()
-        L57:
-            if (r0 == 0) goto L5c
-            r0.close()
-        L5c:
-            return
-        L5d:
-            r2 = move-exception
-        L5e:
-            if (r1 == 0) goto L63
-            r1.close()
-        L63:
-            if (r4 == 0) goto L68
-            r4.close()
-        L68:
-            if (r0 == 0) goto L6d
-            r0.close()
-        L6d:
-            throw r2
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.powerSolution.SOCJump.dump(java.io.PrintWriter, java.lang.String[]):void");
+    public void dump(PrintWriter printWriter, String[] strArr) throws Throwable {
+        FileInputStream fileInputStream;
+        InputStreamReader inputStreamReader;
+        ?? bufferedReader;
+        Throwable th;
+        IOException e;
+        printWriter.println("[SOCJump]");
+        try {
+            fileInputStream = new FileInputStream(mSocFilePath);
+        } catch (IOException e2) {
+            e = e2;
+            fileInputStream = null;
+            inputStreamReader = null;
+        } catch (Throwable th2) {
+            th = th2;
+            fileInputStream = null;
+            inputStreamReader = null;
+        }
+        try {
+            inputStreamReader = new InputStreamReader(fileInputStream, StandardCharsets.UTF_8);
+            try {
+                bufferedReader = new BufferedReader(inputStreamReader);
+                try {
+                    try {
+                        for (String line = bufferedReader.readLine(); line != null; line = bufferedReader.readLine()) {
+                            printWriter.println(line);
+                        }
+                        bufferedReader.close();
+                        fileInputStream.close();
+                        inputStreamReader.close();
+                    } catch (IOException e3) {
+                        e = e3;
+                        e.printStackTrace();
+                        if (bufferedReader != 0) {
+                            bufferedReader.close();
+                        }
+                        if (fileInputStream != null) {
+                            fileInputStream.close();
+                        }
+                        if (inputStreamReader != null) {
+                            inputStreamReader.close();
+                        }
+                    }
+                } catch (Throwable th3) {
+                    th = th3;
+                    if (bufferedReader != 0) {
+                        bufferedReader.close();
+                    }
+                    if (fileInputStream != null) {
+                        fileInputStream.close();
+                    }
+                    if (inputStreamReader != null) {
+                        inputStreamReader.close();
+                    }
+                    throw th;
+                }
+            } catch (IOException e4) {
+                e = e4;
+                bufferedReader = 0;
+                e = e;
+                e.printStackTrace();
+                if (bufferedReader != 0) {
+                }
+                if (fileInputStream != null) {
+                }
+                if (inputStreamReader != null) {
+                }
+            } catch (Throwable th4) {
+                th = th4;
+                bufferedReader = 0;
+                th = th;
+                if (bufferedReader != 0) {
+                }
+                if (fileInputStream != null) {
+                }
+                if (inputStreamReader != null) {
+                }
+                throw th;
+            }
+        } catch (IOException e5) {
+            e = e5;
+            inputStreamReader = null;
+            bufferedReader = inputStreamReader;
+            e = e;
+            e.printStackTrace();
+            if (bufferedReader != 0) {
+            }
+            if (fileInputStream != null) {
+            }
+            if (inputStreamReader != null) {
+            }
+        } catch (Throwable th5) {
+            th = th5;
+            inputStreamReader = null;
+            bufferedReader = inputStreamReader;
+            th = th;
+            if (bufferedReader != 0) {
+            }
+            if (fileInputStream != null) {
+            }
+            if (inputStreamReader != null) {
+            }
+            throw th;
+        }
     }
 }

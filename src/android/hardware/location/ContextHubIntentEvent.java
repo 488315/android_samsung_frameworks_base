@@ -133,85 +133,30 @@ public class ContextHubIntentEvent {
         return str + NavigationBarInflaterView.SIZE_MOD_END;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0037 A[Catch: UnsupportedOperationException -> 0x0066, TryCatch #0 {UnsupportedOperationException -> 0x0066, blocks: (B:12:0x001f, B:14:0x0024, B:18:0x0032, B:20:0x0037, B:23:0x0042, B:25:0x0043, B:27:0x0048, B:28:0x0053, B:30:0x0058), top: B:11:0x001f }] */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x0048 A[Catch: UnsupportedOperationException -> 0x0066, TryCatch #0 {UnsupportedOperationException -> 0x0066, blocks: (B:12:0x001f, B:14:0x0024, B:18:0x0032, B:20:0x0037, B:23:0x0042, B:25:0x0043, B:27:0x0048, B:28:0x0053, B:30:0x0058), top: B:11:0x001f }] */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x0058 A[Catch: UnsupportedOperationException -> 0x0066, TRY_LEAVE, TryCatch #0 {UnsupportedOperationException -> 0x0066, blocks: (B:12:0x001f, B:14:0x0024, B:18:0x0032, B:20:0x0037, B:23:0x0042, B:25:0x0043, B:27:0x0048, B:28:0x0053, B:30:0x0058), top: B:11:0x001f }] */
-    /* JADX WARN: Removed duplicated region for block: B:36:0x0065 A[RETURN] */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public boolean equals(java.lang.Object r8) {
-        /*
-            r7 = this;
-            r0 = 1
-            if (r8 != r7) goto L4
-            return r0
-        L4:
-            boolean r1 = r8 instanceof android.hardware.location.ContextHubIntentEvent
-            r2 = 0
-            if (r1 == 0) goto L66
-            android.hardware.location.ContextHubIntentEvent r8 = (android.hardware.location.ContextHubIntentEvent) r8
-            int r1 = r8.getEventType()
-            int r3 = r7.mEventType
-            if (r1 != r3) goto L66
-            android.hardware.location.ContextHubInfo r1 = r8.getContextHubInfo()
-            android.hardware.location.ContextHubInfo r3 = r7.mContextHubInfo
-            boolean r1 = r1.equals(r3)
-            if (r1 == 0) goto L66
-            int r1 = r7.mEventType     // Catch: java.lang.UnsupportedOperationException -> L66
-            r3 = 6
-            if (r1 == r3) goto L31
-            long r3 = r8.getNanoAppId()     // Catch: java.lang.UnsupportedOperationException -> L66
-            long r5 = r7.mNanoAppId     // Catch: java.lang.UnsupportedOperationException -> L66
-            int r1 = (r3 > r5 ? 1 : (r3 == r5 ? 0 : -1))
-            if (r1 != 0) goto L2f
-            goto L31
-        L2f:
-            r1 = r2
-            goto L32
-        L31:
-            r1 = r0
-        L32:
-            int r3 = r7.mEventType     // Catch: java.lang.UnsupportedOperationException -> L66
-            r4 = 4
-            if (r3 != r4) goto L43
-            int r3 = r8.getNanoAppAbortCode()     // Catch: java.lang.UnsupportedOperationException -> L66
-            int r4 = r7.mNanoAppAbortCode     // Catch: java.lang.UnsupportedOperationException -> L66
-            if (r3 != r4) goto L41
-            r3 = r0
-            goto L42
-        L41:
-            r3 = r2
-        L42:
-            r1 = r1 & r3
-        L43:
-            int r3 = r7.mEventType     // Catch: java.lang.UnsupportedOperationException -> L66
-            r4 = 5
-            if (r3 != r4) goto L53
-            android.hardware.location.NanoAppMessage r3 = r8.getNanoAppMessage()     // Catch: java.lang.UnsupportedOperationException -> L66
-            android.hardware.location.NanoAppMessage r4 = r7.mNanoAppMessage     // Catch: java.lang.UnsupportedOperationException -> L66
-            boolean r3 = r3.equals(r4)     // Catch: java.lang.UnsupportedOperationException -> L66
-            r1 = r1 & r3
-        L53:
-            int r3 = r7.mEventType     // Catch: java.lang.UnsupportedOperationException -> L66
-            r4 = 7
-            if (r3 != r4) goto L65
-            int r8 = r8.getClientAuthorizationState()     // Catch: java.lang.UnsupportedOperationException -> L66
-            int r7 = r7.mClientAuthorizationState     // Catch: java.lang.UnsupportedOperationException -> L66
-            if (r8 != r7) goto L61
-            goto L62
-        L61:
-            r0 = r2
-        L62:
-            r7 = r1 & r0
-            return r7
-        L65:
-            return r1
-        L66:
-            return r2
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.hardware.location.ContextHubIntentEvent.equals(java.lang.Object):boolean");
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (obj instanceof ContextHubIntentEvent) {
+            ContextHubIntentEvent contextHubIntentEvent = (ContextHubIntentEvent) obj;
+            if (contextHubIntentEvent.getEventType() == this.mEventType && contextHubIntentEvent.getContextHubInfo().equals(this.mContextHubInfo)) {
+                try {
+                    boolean zEquals = this.mEventType == 6 || contextHubIntentEvent.getNanoAppId() == this.mNanoAppId;
+                    if (this.mEventType == 4) {
+                        zEquals &= contextHubIntentEvent.getNanoAppAbortCode() == this.mNanoAppAbortCode;
+                    }
+                    if (this.mEventType == 5) {
+                        zEquals &= contextHubIntentEvent.getNanoAppMessage().equals(this.mNanoAppMessage);
+                    }
+                    if (this.mEventType == 7) {
+                        return zEquals & (contextHubIntentEvent.getClientAuthorizationState() == this.mClientAuthorizationState);
+                    }
+                    return zEquals;
+                } catch (UnsupportedOperationException unused) {
+                }
+            }
+        }
+        return false;
     }
 
     public int hashCode() {

@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ReflectionUtils {
     public static List<Field> getAllFields(Class<?> cls) {
@@ -26,7 +25,7 @@ public class ReflectionUtils {
         return (Class<T>) t.getClass();
     }
 
-    public static Field getField(Class<?> cls, String str) {
+    public static Field getField(Class<?> cls, String str) throws NoSuchFieldException {
         Class<? super Object> superclass = cls.getSuperclass();
         try {
             Field declaredField = cls.getDeclaredField(str);
@@ -64,7 +63,7 @@ public class ReflectionUtils {
         }
     }
 
-    public static void invoke(Method method, Object obj, Object... objArr) {
+    public static void invoke(Method method, Object obj, Object... objArr) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         if (method == null) {
             return;
         }
@@ -92,7 +91,7 @@ public class ReflectionUtils {
         }
     }
 
-    public static boolean setValueOf(Field field, Object obj, Object obj2) {
+    public static boolean setValueOf(Field field, Object obj, Object obj2) throws IllegalAccessException, IllegalArgumentException {
         try {
             if (!field.isAccessible()) {
                 field.setAccessible(true);
@@ -104,7 +103,7 @@ public class ReflectionUtils {
         }
     }
 
-    public static <T> T getValueOf(String str, Object obj) {
+    public static <T> T getValueOf(String str, Object obj) throws NoSuchFieldException {
         Field field = getField(obj.getClass(), str);
         if (field != null) {
             return (T) getValueOf(field, obj);
@@ -112,7 +111,7 @@ public class ReflectionUtils {
         return null;
     }
 
-    public static <T> T getValueOf(String str, Class<?> cls) {
+    public static <T> T getValueOf(String str, Class<?> cls) throws NoSuchFieldException {
         Field field = getField(cls, str);
         if (field != null) {
             return (T) getValueOf(field, (Object) null);

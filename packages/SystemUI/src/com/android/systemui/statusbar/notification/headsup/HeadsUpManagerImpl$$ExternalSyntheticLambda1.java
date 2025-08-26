@@ -14,7 +14,6 @@ import com.android.systemui.statusbar.notification.shared.NotificationBundleUi;
 import com.android.systemui.statusbar.notification.shared.NotificationThrottleHun;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class HeadsUpManagerImpl$$ExternalSyntheticLambda1 implements Runnable {
     public final /* synthetic */ int $r8$classId = 0;
@@ -46,11 +45,11 @@ public final /* synthetic */ class HeadsUpManagerImpl$$ExternalSyntheticLambda1 
                 LogLevel logLevel = LogLevel.INFO;
                 HeadsUpManagerLogger$$ExternalSyntheticLambda0 headsUpManagerLogger$$ExternalSyntheticLambda0 = new HeadsUpManagerLogger$$ExternalSyntheticLambda0(2);
                 LogBuffer logBuffer = headsUpManagerLogger.buffer;
-                LogMessage obtain = logBuffer.obtain("HeadsUpManager", logLevel, headsUpManagerLogger$$ExternalSyntheticLambda0, null);
-                LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+                LogMessage logMessageObtain = logBuffer.obtain("HeadsUpManager", logLevel, headsUpManagerLogger$$ExternalSyntheticLambda0, null);
+                LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
                 logMessageImpl.str1 = NotificationUtilsKt.getLogKey(notificationEntry);
                 logMessageImpl.bool1 = z;
-                logBuffer.commit(obtain);
+                logBuffer.commit(logMessageObtain);
                 HeadsUpManagerImpl.HeadsUpEntry headsUpEntry2 = headsUpManagerImpl.mHeadsUpEntryMap.get(notificationEntry.mKey);
                 if (headsUpEntry2 != null) {
                     headsUpEntry2.cancelAutoRemovalCallbacks("reset by edge");
@@ -79,12 +78,12 @@ public final /* synthetic */ class HeadsUpManagerImpl$$ExternalSyntheticLambda1 
                 LogLevel logLevel2 = LogLevel.INFO;
                 HeadsUpManagerLogger$$ExternalSyntheticLambda11 headsUpManagerLogger$$ExternalSyntheticLambda11 = new HeadsUpManagerLogger$$ExternalSyntheticLambda11(z2, 1);
                 LogBuffer logBuffer2 = headsUpManagerLogger2.buffer;
-                LogMessage obtain2 = logBuffer2.obtain("HeadsUpManager", logLevel2, headsUpManagerLogger$$ExternalSyntheticLambda11, null);
-                LogMessageImpl logMessageImpl2 = (LogMessageImpl) obtain2;
+                LogMessage logMessageObtain2 = logBuffer2.obtain("HeadsUpManager", logLevel2, headsUpManagerLogger$$ExternalSyntheticLambda11, null);
+                LogMessageImpl logMessageImpl2 = (LogMessageImpl) logMessageObtain2;
                 logMessageImpl2.str1 = NotificationUtils.logKey(str2);
                 logMessageImpl2.str2 = str3;
                 logMessageImpl2.bool1 = z2;
-                logBuffer2.commit(obtain2);
+                logBuffer2.commit(logMessageObtain2);
                 if (headsUpEntry3 != null) {
                     NotificationEntry notificationEntry2 = headsUpEntry3.mEntry;
                     Objects.requireNonNull(notificationEntry2);

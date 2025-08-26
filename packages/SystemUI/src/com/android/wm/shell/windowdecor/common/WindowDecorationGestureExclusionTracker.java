@@ -14,7 +14,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class WindowDecorationGestureExclusionTracker implements DisplayController.OnDisplaysChangedListener {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -26,7 +25,6 @@ public final class WindowDecorationGestureExclusionTracker implements DisplayCon
     public final ShellExecutor mainExecutor;
     public final IWindowManager windowManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -49,29 +47,29 @@ public final class WindowDecorationGestureExclusionTracker implements DisplayCon
         this.exclusionListener = new ISystemGestureExclusionListener.Stub() { // from class: com.android.wm.shell.windowdecor.common.WindowDecorationGestureExclusionTracker$exclusionListener$1
             public final void onSystemGestureExclusionChanged(final int i, final Region region, Region region2) {
                 if (DesktopExperienceFlags.ENABLE_BUG_FIXES_FOR_SECONDARY_DISPLAY.isTrue()) {
-                    final WindowDecorationGestureExclusionTracker windowDecorationGestureExclusionTracker = WindowDecorationGestureExclusionTracker.this;
+                    final WindowDecorationGestureExclusionTracker windowDecorationGestureExclusionTracker = this.this$0;
                     ShellExecutor shellExecutor2 = windowDecorationGestureExclusionTracker.mainExecutor;
                     final Function2 function22 = function2;
                     shellExecutor2.execute(new Runnable() { // from class: com.android.wm.shell.windowdecor.common.WindowDecorationGestureExclusionTracker$exclusionListener$1$onSystemGestureExclusionChanged$1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            ((Region) WindowDecorationGestureExclusionTracker.this.exclusionRegions.get(Integer.valueOf(i))).set(region);
-                            function22.invoke(Integer.valueOf(i), WindowDecorationGestureExclusionTracker.this.exclusionRegions.get(Integer.valueOf(i)));
+                            ((Region) windowDecorationGestureExclusionTracker.exclusionRegions.get(Integer.valueOf(i))).set(region);
+                            function22.invoke(Integer.valueOf(i), windowDecorationGestureExclusionTracker.exclusionRegions.get(Integer.valueOf(i)));
                         }
                     });
                     return;
                 }
-                if (WindowDecorationGestureExclusionTracker.this.context.getDisplayId() != i) {
+                if (this.this$0.context.getDisplayId() != i) {
                     return;
                 }
-                final WindowDecorationGestureExclusionTracker windowDecorationGestureExclusionTracker2 = WindowDecorationGestureExclusionTracker.this;
+                final WindowDecorationGestureExclusionTracker windowDecorationGestureExclusionTracker2 = this.this$0;
                 ShellExecutor shellExecutor3 = windowDecorationGestureExclusionTracker2.mainExecutor;
                 final Function2 function23 = function2;
                 shellExecutor3.execute(new Runnable() { // from class: com.android.wm.shell.windowdecor.common.WindowDecorationGestureExclusionTracker$exclusionListener$1$onSystemGestureExclusionChanged$2
                     @Override // java.lang.Runnable
                     public final void run() {
-                        WindowDecorationGestureExclusionTracker.this.exclusionRegion.set(region);
-                        function23.invoke(Integer.valueOf(i), WindowDecorationGestureExclusionTracker.this.exclusionRegion);
+                        windowDecorationGestureExclusionTracker2.exclusionRegion.set(region);
+                        function23.invoke(Integer.valueOf(i), windowDecorationGestureExclusionTracker2.exclusionRegion);
                     }
                 });
             }
@@ -107,7 +105,7 @@ public final class WindowDecorationGestureExclusionTracker implements DisplayCon
     }
 
     @Override // com.android.wm.shell.common.DisplayController.OnDisplaysChangedListener
-    public final void onDisplayRemoved(int i) {
+    public final void onDisplayRemoved(int i) throws Exception {
         try {
             this.windowManager.unregisterSystemGestureExclusionListener(this.exclusionListener, i);
         } catch (Exception e) {

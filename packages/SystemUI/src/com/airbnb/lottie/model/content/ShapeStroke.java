@@ -10,7 +10,6 @@ import com.airbnb.lottie.model.animatable.AnimatableIntegerValue;
 import com.airbnb.lottie.model.layer.BaseLayer;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ShapeStroke implements ContentModel {
     public final LineCapType capType;
@@ -24,7 +23,6 @@ public class ShapeStroke implements ContentModel {
     public final AnimatableIntegerValue opacity;
     public final AnimatableFloatValue width;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.airbnb.lottie.model.content.ShapeStroke$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$com$airbnb$lottie$model$content$ShapeStroke$LineCapType;
@@ -62,14 +60,12 @@ public class ShapeStroke implements ContentModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum LineCapType {
         BUTT,
         ROUND,
         UNKNOWN
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum LineJoinType {
         MITER,
         ROUND,

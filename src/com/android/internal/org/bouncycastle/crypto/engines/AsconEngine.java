@@ -64,20 +64,20 @@ public class AsconEngine implements AEADCipher {
 
     public AsconEngine(AsconParameters asconParameters) {
         this.asconParameters = asconParameters;
-        int ordinal = asconParameters.ordinal();
-        if (ordinal == 0) {
+        int iOrdinal = asconParameters.ordinal();
+        if (iOrdinal == 0) {
             this.CRYPTO_KEYBYTES = 20;
             this.CRYPTO_ABYTES = 16;
             this.ASCON_AEAD_RATE = 8;
             this.ASCON_IV = -6899501409222262784L;
             this.algorithmName = "Ascon-80pq AEAD";
-        } else if (ordinal == 1) {
+        } else if (iOrdinal == 1) {
             this.CRYPTO_KEYBYTES = 16;
             this.CRYPTO_ABYTES = 16;
             this.ASCON_AEAD_RATE = 16;
             this.ASCON_IV = -9187330011336540160L;
             this.algorithmName = "Ascon-128a AEAD";
-        } else if (ordinal == 2) {
+        } else if (iOrdinal == 2) {
             this.CRYPTO_KEYBYTES = 16;
             this.CRYPTO_ABYTES = 16;
             this.ASCON_AEAD_RATE = 8;
@@ -149,19 +149,19 @@ public class AsconEngine implements AEADCipher {
     }
 
     private void checkAAD() {
-        int ordinal = this.m_state.ordinal();
-        if (ordinal == 1) {
+        int iOrdinal = this.m_state.ordinal();
+        if (iOrdinal == 1) {
             this.m_state = State.EncAad;
             return;
         }
-        if (ordinal != 2) {
-            if (ordinal == 4) {
+        if (iOrdinal != 2) {
+            if (iOrdinal == 4) {
                 throw new IllegalStateException(getAlgorithmName() + " cannot be reused for encryption");
             }
-            if (ordinal == 5) {
+            if (iOrdinal == 5) {
                 this.m_state = State.DecAad;
             } else {
-                if (ordinal == 6) {
+                if (iOrdinal == 6) {
                     return;
                 }
                 throw new IllegalStateException(getAlgorithmName() + " needs to be initialized");
@@ -199,8 +199,8 @@ public class AsconEngine implements AEADCipher {
     }
 
     private void finishAAD(State state) {
-        int ordinal = this.m_state.ordinal();
-        if (ordinal == 2 || ordinal == 6) {
+        int iOrdinal = this.m_state.ordinal();
+        if (iOrdinal == 2 || iOrdinal == 6) {
             byte[] bArr = this.m_buf;
             int i = this.m_bufPos;
             bArr[i] = Byte.MIN_VALUE;
@@ -221,13 +221,13 @@ public class AsconEngine implements AEADCipher {
         if (this.ASCON_AEAD_RATE + i2 > bArr2.length) {
             throw new OutputLengthException("output buffer too short");
         }
-        long bigEndianToLong = Pack.bigEndianToLong(bArr, i);
-        Pack.longToBigEndian(this.x0 ^ bigEndianToLong, bArr2, i2);
-        this.x0 = bigEndianToLong;
+        long jBigEndianToLong = Pack.bigEndianToLong(bArr, i);
+        Pack.longToBigEndian(this.x0 ^ jBigEndianToLong, bArr2, i2);
+        this.x0 = jBigEndianToLong;
         if (this.ASCON_AEAD_RATE == 16) {
-            long bigEndianToLong2 = Pack.bigEndianToLong(bArr, i + 8);
-            Pack.longToBigEndian(this.x1 ^ bigEndianToLong2, bArr2, i2 + 8);
-            this.x1 = bigEndianToLong2;
+            long jBigEndianToLong2 = Pack.bigEndianToLong(bArr, i + 8);
+            Pack.longToBigEndian(this.x1 ^ jBigEndianToLong2, bArr2, i2 + 8);
+            this.x1 = jBigEndianToLong2;
         }
         P(this.nr);
     }
@@ -236,43 +236,43 @@ public class AsconEngine implements AEADCipher {
         if (this.ASCON_AEAD_RATE + i2 > bArr2.length) {
             throw new OutputLengthException("output buffer too short");
         }
-        long bigEndianToLong = this.x0 ^ Pack.bigEndianToLong(bArr, i);
-        this.x0 = bigEndianToLong;
-        Pack.longToBigEndian(bigEndianToLong, bArr2, i2);
+        long jBigEndianToLong = this.x0 ^ Pack.bigEndianToLong(bArr, i);
+        this.x0 = jBigEndianToLong;
+        Pack.longToBigEndian(jBigEndianToLong, bArr2, i2);
         if (this.ASCON_AEAD_RATE == 16) {
-            long bigEndianToLong2 = Pack.bigEndianToLong(bArr, i + 8) ^ this.x1;
-            this.x1 = bigEndianToLong2;
-            Pack.longToBigEndian(bigEndianToLong2, bArr2, i2 + 8);
+            long jBigEndianToLong2 = Pack.bigEndianToLong(bArr, i + 8) ^ this.x1;
+            this.x1 = jBigEndianToLong2;
+            Pack.longToBigEndian(jBigEndianToLong2, bArr2, i2 + 8);
         }
         P(this.nr);
     }
 
     private void processFinalDecrypt(byte[] bArr, int i, int i2, byte[] bArr2, int i3) {
         if (i2 >= 8) {
-            long bigEndianToLong = Pack.bigEndianToLong(bArr, i);
-            long j = this.x0 ^ bigEndianToLong;
+            long jBigEndianToLong = Pack.bigEndianToLong(bArr, i);
+            long j = this.x0 ^ jBigEndianToLong;
             this.x0 = j;
             Pack.longToBigEndian(j, bArr2, i3);
-            this.x0 = bigEndianToLong;
+            this.x0 = jBigEndianToLong;
             int i4 = i + 8;
             int i5 = i3 + 8;
             int i6 = i2 - 8;
             this.x1 ^= PAD(i6);
             if (i6 != 0) {
-                long littleEndianToLong_High = Pack.littleEndianToLong_High(bArr, i4, i6);
-                long j2 = this.x1 ^ littleEndianToLong_High;
+                long jLittleEndianToLong_High = Pack.littleEndianToLong_High(bArr, i4, i6);
+                long j2 = this.x1 ^ jLittleEndianToLong_High;
                 this.x1 = j2;
                 Pack.longToLittleEndian_High(j2, bArr2, i5, i6);
-                this.x1 = littleEndianToLong_High ^ (this.x1 & ((-1) >>> (i6 << 3)));
+                this.x1 = jLittleEndianToLong_High ^ (this.x1 & ((-1) >>> (i6 << 3)));
             }
         } else {
             this.x0 ^= PAD(i2);
             if (i2 != 0) {
-                long littleEndianToLong_High2 = Pack.littleEndianToLong_High(bArr, i, i2);
-                long j3 = this.x0 ^ littleEndianToLong_High2;
+                long jLittleEndianToLong_High2 = Pack.littleEndianToLong_High(bArr, i, i2);
+                long j3 = this.x0 ^ jLittleEndianToLong_High2;
                 this.x0 = j3;
                 Pack.longToLittleEndian_High(j3, bArr2, i3, i2);
-                this.x0 = littleEndianToLong_High2 ^ (this.x0 & ((-1) >>> (i2 << 3)));
+                this.x0 = jLittleEndianToLong_High2 ^ (this.x0 & ((-1) >>> (i2 << 3)));
             }
         }
         finishData(State.DecFinal);
@@ -280,34 +280,34 @@ public class AsconEngine implements AEADCipher {
 
     private void processFinalEncrypt(byte[] bArr, int i, int i2, byte[] bArr2, int i3) {
         if (i2 >= 8) {
-            long bigEndianToLong = this.x0 ^ Pack.bigEndianToLong(bArr, i);
-            this.x0 = bigEndianToLong;
-            Pack.longToBigEndian(bigEndianToLong, bArr2, i3);
+            long jBigEndianToLong = this.x0 ^ Pack.bigEndianToLong(bArr, i);
+            this.x0 = jBigEndianToLong;
+            Pack.longToBigEndian(jBigEndianToLong, bArr2, i3);
             int i4 = i + 8;
             int i5 = i3 + 8;
             int i6 = i2 - 8;
-            long PAD = this.x1 ^ PAD(i6);
-            this.x1 = PAD;
+            long jPAD = this.x1 ^ PAD(i6);
+            this.x1 = jPAD;
             if (i6 != 0) {
-                long littleEndianToLong_High = Pack.littleEndianToLong_High(bArr, i4, i6) ^ PAD;
-                this.x1 = littleEndianToLong_High;
-                Pack.longToLittleEndian_High(littleEndianToLong_High, bArr2, i5, i6);
+                long jLittleEndianToLong_High = Pack.littleEndianToLong_High(bArr, i4, i6) ^ jPAD;
+                this.x1 = jLittleEndianToLong_High;
+                Pack.longToLittleEndian_High(jLittleEndianToLong_High, bArr2, i5, i6);
             }
         } else {
-            long PAD2 = this.x0 ^ PAD(i2);
-            this.x0 = PAD2;
+            long jPAD2 = this.x0 ^ PAD(i2);
+            this.x0 = jPAD2;
             if (i2 != 0) {
-                long littleEndianToLong_High2 = Pack.littleEndianToLong_High(bArr, i, i2) ^ PAD2;
-                this.x0 = littleEndianToLong_High2;
-                Pack.longToLittleEndian_High(littleEndianToLong_High2, bArr2, i3, i2);
+                long jLittleEndianToLong_High2 = Pack.littleEndianToLong_High(bArr, i, i2) ^ jPAD2;
+                this.x0 = jLittleEndianToLong_High2;
+                Pack.longToLittleEndian_High(jLittleEndianToLong_High2, bArr2, i3, i2);
             }
         }
         finishData(State.EncFinal);
     }
 
     private void finishData(State state) {
-        int ordinal = this.asconParameters.ordinal();
-        if (ordinal == 0) {
+        int iOrdinal = this.asconParameters.ordinal();
+        if (iOrdinal == 0) {
             long j = this.x1;
             long j2 = this.K0 << 32;
             long j3 = this.K1;
@@ -317,10 +317,10 @@ public class AsconEngine implements AEADCipher {
             long j6 = this.K2;
             this.x2 = j4 ^ (j5 | (j6 >> 32));
             this.x3 ^= j6 << 32;
-        } else if (ordinal == 1) {
+        } else if (iOrdinal == 1) {
             this.x2 ^= this.K1;
             this.x3 ^= this.K2;
-        } else if (ordinal == 2) {
+        } else if (iOrdinal == 2) {
             this.x1 ^= this.K1;
             this.x2 ^= this.K2;
         } else {
@@ -334,11 +334,11 @@ public class AsconEngine implements AEADCipher {
 
     @Override // com.android.internal.org.bouncycastle.crypto.modes.AEADCipher
     public void init(boolean z, CipherParameters cipherParameters) throws IllegalArgumentException {
-        KeyParameter keyParameter;
+        KeyParameter key;
         byte[] iv;
         if (cipherParameters instanceof AEADParameters) {
             AEADParameters aEADParameters = (AEADParameters) cipherParameters;
-            keyParameter = aEADParameters.getKey();
+            key = aEADParameters.getKey();
             iv = aEADParameters.getNonce();
             this.initialAssociatedText = aEADParameters.getAssociatedText();
             int macSize = aEADParameters.getMacSize();
@@ -347,20 +347,20 @@ public class AsconEngine implements AEADCipher {
             }
         } else if (cipherParameters instanceof ParametersWithIV) {
             ParametersWithIV parametersWithIV = (ParametersWithIV) cipherParameters;
-            keyParameter = (KeyParameter) parametersWithIV.getParameters();
+            key = (KeyParameter) parametersWithIV.getParameters();
             iv = parametersWithIV.getIV();
             this.initialAssociatedText = null;
         } else {
             throw new IllegalArgumentException("invalid parameters passed to Ascon");
         }
-        if (keyParameter == null) {
+        if (key == null) {
             throw new IllegalArgumentException("Ascon Init parameters must include a key");
         }
         if (iv == null || iv.length != this.CRYPTO_ABYTES) {
             throw new IllegalArgumentException(this.asconParameters + " requires exactly " + this.CRYPTO_ABYTES + " bytes of IV");
         }
-        byte[] key = keyParameter.getKey();
-        if (key.length != this.CRYPTO_KEYBYTES) {
+        byte[] key2 = key.getKey();
+        if (key2.length != this.CRYPTO_KEYBYTES) {
             throw new IllegalArgumentException(this.asconParameters + " key must be " + this.CRYPTO_KEYBYTES + " bytes long");
         }
         CryptoServicesRegistrar.checkConstraints(new DefaultServiceProperties(getAlgorithmName(), 128, cipherParameters, Utils.getPurpose(z)));
@@ -368,12 +368,12 @@ public class AsconEngine implements AEADCipher {
         this.N1 = Pack.bigEndianToLong(iv, 8);
         int i = this.CRYPTO_KEYBYTES;
         if (i == 16) {
-            this.K1 = Pack.bigEndianToLong(key, 0);
-            this.K2 = Pack.bigEndianToLong(key, 8);
+            this.K1 = Pack.bigEndianToLong(key2, 0);
+            this.K2 = Pack.bigEndianToLong(key2, 8);
         } else if (i == 20) {
-            this.K0 = Pack.bigEndianToInt(key, 0);
-            this.K1 = Pack.bigEndianToLong(key, 4);
-            this.K2 = Pack.bigEndianToLong(key, 12);
+            this.K0 = Pack.bigEndianToInt(key2, 0);
+            this.K1 = Pack.bigEndianToLong(key2, 4);
+            this.K2 = Pack.bigEndianToLong(key2, 12);
         } else {
             throw new IllegalStateException();
         }
@@ -521,7 +521,7 @@ public class AsconEngine implements AEADCipher {
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.modes.AEADCipher
-    public int doFinal(byte[] bArr, int i) throws IllegalStateException, InvalidCipherTextException, DataLengthException {
+    public int doFinal(byte[] bArr, int i) throws IllegalStateException, DataLengthException, InvalidCipherTextException {
         if (checkData()) {
             int i2 = this.m_bufPos;
             int i3 = this.CRYPTO_ABYTES + i2;
@@ -549,9 +549,9 @@ public class AsconEngine implements AEADCipher {
         }
         processFinalDecrypt(this.m_buf, 0, i6, bArr, i);
         this.x3 ^= Pack.bigEndianToLong(this.m_buf, this.m_bufPos);
-        long bigEndianToLong = this.x4 ^ Pack.bigEndianToLong(this.m_buf, this.m_bufPos + 8);
-        this.x4 = bigEndianToLong;
-        if ((bigEndianToLong | this.x3) != 0) {
+        long jBigEndianToLong = this.x4 ^ Pack.bigEndianToLong(this.m_buf, this.m_bufPos + 8);
+        this.x4 = jBigEndianToLong;
+        if ((jBigEndianToLong | this.x3) != 0) {
             throw new InvalidCipherTextException("mac check in " + getAlgorithmName() + " failed");
         }
         reset(true);
@@ -565,45 +565,45 @@ public class AsconEngine implements AEADCipher {
 
     @Override // com.android.internal.org.bouncycastle.crypto.modes.AEADCipher
     public int getUpdateOutputSize(int i) {
-        int max = Math.max(0, i);
+        int iMax = Math.max(0, i);
         switch (this.m_state.ordinal()) {
             case 3:
             case 4:
-                max += this.m_bufPos;
+                iMax += this.m_bufPos;
                 break;
             case 5:
             case 6:
-                max = Math.max(0, max - this.CRYPTO_ABYTES);
+                iMax = Math.max(0, iMax - this.CRYPTO_ABYTES);
                 break;
             case 7:
             case 8:
-                max = Math.max(0, (max + this.m_bufPos) - this.CRYPTO_ABYTES);
+                iMax = Math.max(0, (iMax + this.m_bufPos) - this.CRYPTO_ABYTES);
                 break;
         }
-        return max - (max % this.ASCON_AEAD_RATE);
+        return iMax - (iMax % this.ASCON_AEAD_RATE);
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.modes.AEADCipher
     public int getOutputSize(int i) {
         int i2;
-        int max = Math.max(0, i);
+        int iMax = Math.max(0, i);
         switch (this.m_state.ordinal()) {
             case 3:
             case 4:
-                max += this.m_bufPos;
+                iMax += this.m_bufPos;
                 i2 = this.CRYPTO_ABYTES;
                 break;
             case 5:
             case 6:
-                return Math.max(0, max - this.CRYPTO_ABYTES);
+                return Math.max(0, iMax - this.CRYPTO_ABYTES);
             case 7:
             case 8:
-                return Math.max(0, (max + this.m_bufPos) - this.CRYPTO_ABYTES);
+                return Math.max(0, (iMax + this.m_bufPos) - this.CRYPTO_ABYTES);
             default:
                 i2 = this.CRYPTO_ABYTES;
                 break;
         }
-        return max + i2;
+        return iMax + i2;
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.modes.AEADCipher

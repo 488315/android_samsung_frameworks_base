@@ -47,11 +47,10 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function3;
 import kotlin.ranges.RangesKt___RangesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class TextFieldSelectionManager_androidKt {
     public static final Function1 contextMenuBuilder(final TextFieldSelectionManager textFieldSelectionManager, final ContextMenuState contextMenuState, final MutableState mutableState) {
-        return new Function1() { // from class: androidx.compose.foundation.text.selection.TextFieldSelectionManager_androidKt$contextMenuBuilder$1
+        return new Function1() { // from class: androidx.compose.foundation.text.selection.TextFieldSelectionManager_androidKt.contextMenuBuilder.1
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
@@ -64,7 +63,7 @@ public abstract class TextFieldSelectionManager_androidKt {
             /* JADX WARN: Type inference failed for: r3v15, types: [androidx.compose.foundation.text.ContextMenu_androidKt$TextItem$1] */
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 ContextMenuScope contextMenuScope = (ContextMenuScope) obj;
                 int i = ((MenuItemsAvailability) mutableState.getValue()).value;
                 final ContextMenuState contextMenuState2 = contextMenuState;
@@ -85,12 +84,12 @@ public abstract class TextFieldSelectionManager_androidKt {
                             if (ComposerKt.isTraceInProgress()) {
                                 ComposerKt.traceEventStart("androidx.compose.foundation.text.TextItem.<anonymous> (ContextMenu.android.kt:143)");
                             }
-                            String resolvedString = TextContextMenuItems.this.resolvedString(composerImpl);
+                            String strResolvedString = textContextMenuItems.resolvedString(composerImpl);
                             if (ComposerKt.isTraceInProgress()) {
                                 ComposerKt.traceEventEnd();
                             }
                             composerImpl.end(false);
-                            return resolvedString;
+                            return strResolvedString;
                         }
                     }, new Function0() { // from class: androidx.compose.foundation.text.selection.TextFieldSelectionManager_androidKt$contextMenuBuilder$1$invoke$$inlined$TextItem$1
                         /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
@@ -101,7 +100,7 @@ public abstract class TextFieldSelectionManager_androidKt {
                         @Override // kotlin.jvm.functions.Function0
                         public final Object invoke() {
                             textFieldSelectionManager2.cut$foundation_release();
-                            ContextMenuState_androidKt.close(ContextMenuState.this);
+                            ContextMenuState_androidKt.close(contextMenuState2);
                             return Unit.INSTANCE;
                         }
                     });
@@ -124,12 +123,12 @@ public abstract class TextFieldSelectionManager_androidKt {
                             if (ComposerKt.isTraceInProgress()) {
                                 ComposerKt.traceEventStart("androidx.compose.foundation.text.TextItem.<anonymous> (ContextMenu.android.kt:143)");
                             }
-                            String resolvedString = TextContextMenuItems.this.resolvedString(composerImpl);
+                            String strResolvedString = textContextMenuItems2.resolvedString(composerImpl);
                             if (ComposerKt.isTraceInProgress()) {
                                 ComposerKt.traceEventEnd();
                             }
                             composerImpl.end(false);
-                            return resolvedString;
+                            return strResolvedString;
                         }
                     }, new Function0() { // from class: androidx.compose.foundation.text.selection.TextFieldSelectionManager_androidKt$contextMenuBuilder$1$invoke$$inlined$TextItem$2
                         /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
@@ -140,7 +139,7 @@ public abstract class TextFieldSelectionManager_androidKt {
                         @Override // kotlin.jvm.functions.Function0
                         public final Object invoke() {
                             textFieldSelectionManager3.copy$foundation_release(false);
-                            ContextMenuState_androidKt.close(ContextMenuState.this);
+                            ContextMenuState_androidKt.close(contextMenuState3);
                             return Unit.INSTANCE;
                         }
                     });
@@ -163,12 +162,12 @@ public abstract class TextFieldSelectionManager_androidKt {
                             if (ComposerKt.isTraceInProgress()) {
                                 ComposerKt.traceEventStart("androidx.compose.foundation.text.TextItem.<anonymous> (ContextMenu.android.kt:143)");
                             }
-                            String resolvedString = TextContextMenuItems.this.resolvedString(composerImpl);
+                            String strResolvedString = textContextMenuItems3.resolvedString(composerImpl);
                             if (ComposerKt.isTraceInProgress()) {
                                 ComposerKt.traceEventEnd();
                             }
                             composerImpl.end(false);
-                            return resolvedString;
+                            return strResolvedString;
                         }
                     }, new Function0() { // from class: androidx.compose.foundation.text.selection.TextFieldSelectionManager_androidKt$contextMenuBuilder$1$invoke$$inlined$TextItem$3
                         /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
@@ -179,7 +178,7 @@ public abstract class TextFieldSelectionManager_androidKt {
                         @Override // kotlin.jvm.functions.Function0
                         public final Object invoke() {
                             textFieldSelectionManager4.paste$foundation_release();
-                            ContextMenuState_androidKt.close(ContextMenuState.this);
+                            ContextMenuState_androidKt.close(contextMenuState4);
                             return Unit.INSTANCE;
                         }
                     });
@@ -202,12 +201,12 @@ public abstract class TextFieldSelectionManager_androidKt {
                             if (ComposerKt.isTraceInProgress()) {
                                 ComposerKt.traceEventStart("androidx.compose.foundation.text.TextItem.<anonymous> (ContextMenu.android.kt:143)");
                             }
-                            String resolvedString = TextContextMenuItems.this.resolvedString(composerImpl);
+                            String strResolvedString = textContextMenuItems4.resolvedString(composerImpl);
                             if (ComposerKt.isTraceInProgress()) {
                                 ComposerKt.traceEventEnd();
                             }
                             composerImpl.end(false);
-                            return resolvedString;
+                            return strResolvedString;
                         }
                     }, new Function0() { // from class: androidx.compose.foundation.text.selection.TextFieldSelectionManager_androidKt$contextMenuBuilder$1$invoke$$inlined$TextItem$4
                         /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
@@ -218,14 +217,14 @@ public abstract class TextFieldSelectionManager_androidKt {
                         @Override // kotlin.jvm.functions.Function0
                         public final Object invoke() {
                             textFieldSelectionManager5.selectAll$foundation_release();
-                            ContextMenuState_androidKt.close(ContextMenuState.this);
+                            ContextMenuState_androidKt.close(contextMenuState5);
                             return Unit.INSTANCE;
                         }
                     });
                 }
                 final ContextMenuState contextMenuState6 = contextMenuState;
                 final TextContextMenuItems textContextMenuItems5 = TextContextMenuItems.Autofill;
-                boolean z5 = textFieldSelectionManager.getEditable() && TextRange.m747getCollapsedimpl(textFieldSelectionManager.getValue$foundation_release().selection);
+                boolean z5 = textFieldSelectionManager.getEditable() && TextRange.m749getCollapsedimpl(textFieldSelectionManager.getValue$foundation_release().selection);
                 final TextFieldSelectionManager textFieldSelectionManager6 = textFieldSelectionManager;
                 if (z5) {
                     ContextMenuScope.item$default(contextMenuScope, new Function2() { // from class: androidx.compose.foundation.text.ContextMenu_androidKt$TextItem$1
@@ -241,12 +240,12 @@ public abstract class TextFieldSelectionManager_androidKt {
                             if (ComposerKt.isTraceInProgress()) {
                                 ComposerKt.traceEventStart("androidx.compose.foundation.text.TextItem.<anonymous> (ContextMenu.android.kt:143)");
                             }
-                            String resolvedString = TextContextMenuItems.this.resolvedString(composerImpl);
+                            String strResolvedString = textContextMenuItems5.resolvedString(composerImpl);
                             if (ComposerKt.isTraceInProgress()) {
                                 ComposerKt.traceEventEnd();
                             }
                             composerImpl.end(false);
-                            return resolvedString;
+                            return strResolvedString;
                         }
                     }, new Function0() { // from class: androidx.compose.foundation.text.selection.TextFieldSelectionManager_androidKt$contextMenuBuilder$1$invoke$$inlined$TextItem$5
                         /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
@@ -261,7 +260,7 @@ public abstract class TextFieldSelectionManager_androidKt {
                             if (r0 != 0) {
                                 r0.invoke();
                             }
-                            ContextMenuState_androidKt.close(ContextMenuState.this);
+                            ContextMenuState_androidKt.close(contextMenuState6);
                             return Unit.INSTANCE;
                         }
                     });
@@ -273,7 +272,7 @@ public abstract class TextFieldSelectionManager_androidKt {
 
     public static final Modifier textFieldMagnifier(Modifier.Companion companion, final TextFieldSelectionManager textFieldSelectionManager) {
         SemanticsPropertyKey semanticsPropertyKey = Magnifier_androidKt.MagnifierPositionInRoot;
-        return ComposedModifierKt.composed(companion, InspectableValueKt.NoInspectorInfo, new Function3() { // from class: androidx.compose.foundation.text.selection.TextFieldSelectionManager_androidKt$textFieldMagnifier$1
+        return ComposedModifierKt.composed(companion, InspectableValueKt.NoInspectorInfo, new Function3() { // from class: androidx.compose.foundation.text.selection.TextFieldSelectionManager_androidKt.textFieldMagnifier.1
             {
                 super(3);
             }
@@ -288,20 +287,20 @@ public abstract class TextFieldSelectionManager_androidKt {
                     ComposerKt.traceEventStart("androidx.compose.foundation.text.selection.textFieldMagnifier.<anonymous> (TextFieldSelectionManager.android.kt:50)");
                 }
                 final Density density = (Density) composerImpl.consume(CompositionLocalsKt.LocalDensity);
-                Object rememberedValue = composerImpl.rememberedValue();
+                Object objRememberedValue = composerImpl.rememberedValue();
                 Composer.Companion.getClass();
                 Composer$Companion$Empty$1 composer$Companion$Empty$1 = Composer.Companion.Empty;
-                if (rememberedValue == composer$Companion$Empty$1) {
+                if (objRememberedValue == composer$Companion$Empty$1) {
                     IntSize.Companion.getClass();
-                    rememberedValue = SnapshotStateKt.mutableStateOf$default(IntSize.m859boximpl(0L));
-                    composerImpl.updateRememberedValue(rememberedValue);
+                    objRememberedValue = SnapshotStateKt.mutableStateOf$default(IntSize.m861boximpl(0L));
+                    composerImpl.updateRememberedValue(objRememberedValue);
                 }
-                final MutableState mutableState = (MutableState) rememberedValue;
-                boolean changedInstance = composerImpl.changedInstance(TextFieldSelectionManager.this);
-                final TextFieldSelectionManager textFieldSelectionManager2 = TextFieldSelectionManager.this;
-                Object rememberedValue2 = composerImpl.rememberedValue();
-                if (changedInstance || rememberedValue2 == composer$Companion$Empty$1) {
-                    rememberedValue2 = new Function0() { // from class: androidx.compose.foundation.text.selection.TextFieldSelectionManager_androidKt$textFieldMagnifier$1$1$1
+                final MutableState mutableState = (MutableState) objRememberedValue;
+                boolean zChangedInstance = composerImpl.changedInstance(textFieldSelectionManager);
+                final TextFieldSelectionManager textFieldSelectionManager2 = textFieldSelectionManager;
+                Object objRememberedValue2 = composerImpl.rememberedValue();
+                if (zChangedInstance || objRememberedValue2 == composer$Companion$Empty$1) {
+                    objRememberedValue2 = new Function0() { // from class: androidx.compose.foundation.text.selection.TextFieldSelectionManager_androidKt$textFieldMagnifier$1$1$1
                         /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                         {
                             super(0);
@@ -309,84 +308,79 @@ public abstract class TextFieldSelectionManager_androidKt {
 
                         @Override // kotlin.jvm.functions.Function0
                         public final Object invoke() {
+                            long jFloatToRawIntBits;
                             long j;
-                            long j2;
                             TextLayoutResultProxy layoutResult;
+                            LegacyTextFieldState legacyTextFieldState;
                             TextDelegate textDelegate;
                             AnnotatedString annotatedString;
                             TextDelegate textDelegate2;
-                            TextFieldSelectionManager textFieldSelectionManager3 = TextFieldSelectionManager.this;
-                            long j3 = ((IntSize) mutableState.getValue()).packedValue;
-                            Offset m239getCurrentDragPosition_m7T9E = textFieldSelectionManager3.m239getCurrentDragPosition_m7T9E();
-                            if (m239getCurrentDragPosition_m7T9E != null) {
-                                LegacyTextFieldState legacyTextFieldState = textFieldSelectionManager3.state;
-                                AnnotatedString annotatedString2 = (legacyTextFieldState == null || (textDelegate2 = legacyTextFieldState.textDelegate) == null) ? null : textDelegate2.text;
+                            TextFieldSelectionManager textFieldSelectionManager3 = textFieldSelectionManager2;
+                            long j2 = ((IntSize) mutableState.getValue()).packedValue;
+                            Offset offsetM240getCurrentDragPosition_m7T9E = textFieldSelectionManager3.m240getCurrentDragPosition_m7T9E();
+                            if (offsetM240getCurrentDragPosition_m7T9E != null) {
+                                LegacyTextFieldState legacyTextFieldState2 = textFieldSelectionManager3.state;
+                                AnnotatedString annotatedString2 = (legacyTextFieldState2 == null || (textDelegate2 = legacyTextFieldState2.textDelegate) == null) ? null : textDelegate2.text;
                                 if (annotatedString2 == null || annotatedString2.text.length() == 0) {
                                     Offset.Companion.getClass();
-                                    j = Offset.Unspecified;
+                                    jFloatToRawIntBits = Offset.Unspecified;
                                 } else {
                                     Handle handle = (Handle) ((SnapshotMutableStateImpl) textFieldSelectionManager3.draggingHandle$delegate).getValue();
                                     int i = handle == null ? -1 : TextFieldSelectionManagerKt.WhenMappings.$EnumSwitchMapping$0[handle.ordinal()];
                                     if (i != -1) {
                                         if (i == 1 || i == 2) {
-                                            long j4 = textFieldSelectionManager3.getValue$foundation_release().selection;
+                                            long j3 = textFieldSelectionManager3.getValue$foundation_release().selection;
                                             TextRange.Companion companion2 = TextRange.Companion;
-                                            j2 = j4 >> 32;
+                                            j = j3 >> 32;
                                         } else {
                                             if (i != 3) {
                                                 throw new NoWhenBranchMatchedException();
                                             }
-                                            long j5 = textFieldSelectionManager3.getValue$foundation_release().selection;
+                                            long j4 = textFieldSelectionManager3.getValue$foundation_release().selection;
                                             TextRange.Companion companion3 = TextRange.Companion;
-                                            j2 = j5 & 4294967295L;
+                                            j = j4 & 4294967295L;
                                         }
-                                        int i2 = (int) j2;
-                                        LegacyTextFieldState legacyTextFieldState2 = textFieldSelectionManager3.state;
-                                        if (legacyTextFieldState2 == null || (layoutResult = legacyTextFieldState2.getLayoutResult()) == null) {
+                                        int i2 = (int) j;
+                                        LegacyTextFieldState legacyTextFieldState3 = textFieldSelectionManager3.state;
+                                        if (legacyTextFieldState3 == null || (layoutResult = legacyTextFieldState3.getLayoutResult()) == null || (legacyTextFieldState = textFieldSelectionManager3.state) == null || (textDelegate = legacyTextFieldState.textDelegate) == null || (annotatedString = textDelegate.text) == null) {
                                             Offset.Companion.getClass();
-                                            j = Offset.Unspecified;
+                                            jFloatToRawIntBits = Offset.Unspecified;
                                         } else {
-                                            LegacyTextFieldState legacyTextFieldState3 = textFieldSelectionManager3.state;
-                                            if (legacyTextFieldState3 == null || (textDelegate = legacyTextFieldState3.textDelegate) == null || (annotatedString = textDelegate.text) == null) {
-                                                Offset.Companion.getClass();
-                                                j = Offset.Unspecified;
+                                            int iCoerceIn = RangesKt___RangesKt.coerceIn(textFieldSelectionManager3.offsetMapping.originalToTransformed(i2), 0, annotatedString.text.length());
+                                            float fIntBitsToFloat = Float.intBitsToFloat((int) (layoutResult.m211translateDecorationToInnerCoordinatesMKHz9U$foundation_release(offsetM240getCurrentDragPosition_m7T9E.packedValue) >> 32));
+                                            TextLayoutResult textLayoutResult = layoutResult.value;
+                                            int lineForOffset = textLayoutResult.multiParagraph.getLineForOffset(iCoerceIn);
+                                            float lineLeft = textLayoutResult.getLineLeft(lineForOffset);
+                                            float lineRight = textLayoutResult.getLineRight(lineForOffset);
+                                            float fCoerceIn = RangesKt___RangesKt.coerceIn(fIntBitsToFloat, Math.min(lineLeft, lineRight), Math.max(lineLeft, lineRight));
+                                            IntSize.Companion.getClass();
+                                            if (IntSize.m863equalsimpl0(j2, 0L) || Math.abs(fIntBitsToFloat - fCoerceIn) <= ((int) (j2 >> 32)) / 2) {
+                                                float lineTop = textLayoutResult.multiParagraph.getLineTop(lineForOffset);
+                                                jFloatToRawIntBits = (Float.floatToRawIntBits(fCoerceIn) << 32) | (Float.floatToRawIntBits(((r11.getLineBottom(lineForOffset) - lineTop) / 2) + lineTop) & 4294967295L);
                                             } else {
-                                                int coerceIn = RangesKt___RangesKt.coerceIn(textFieldSelectionManager3.offsetMapping.originalToTransformed(i2), 0, annotatedString.text.length());
-                                                float intBitsToFloat = Float.intBitsToFloat((int) (layoutResult.m210translateDecorationToInnerCoordinatesMKHz9U$foundation_release(m239getCurrentDragPosition_m7T9E.packedValue) >> 32));
-                                                TextLayoutResult textLayoutResult = layoutResult.value;
-                                                int lineForOffset = textLayoutResult.multiParagraph.getLineForOffset(coerceIn);
-                                                float lineLeft = textLayoutResult.getLineLeft(lineForOffset);
-                                                float lineRight = textLayoutResult.getLineRight(lineForOffset);
-                                                float coerceIn2 = RangesKt___RangesKt.coerceIn(intBitsToFloat, Math.min(lineLeft, lineRight), Math.max(lineLeft, lineRight));
-                                                IntSize.Companion.getClass();
-                                                if (IntSize.m861equalsimpl0(j3, 0L) || Math.abs(intBitsToFloat - coerceIn2) <= ((int) (j3 >> 32)) / 2) {
-                                                    float lineTop = textLayoutResult.multiParagraph.getLineTop(lineForOffset);
-                                                    j = (Float.floatToRawIntBits(coerceIn2) << 32) | (Float.floatToRawIntBits(((r11.getLineBottom(lineForOffset) - lineTop) / 2) + lineTop) & 4294967295L);
-                                                } else {
-                                                    Offset.Companion.getClass();
-                                                    j = Offset.Unspecified;
-                                                }
+                                                Offset.Companion.getClass();
+                                                jFloatToRawIntBits = Offset.Unspecified;
                                             }
                                         }
                                     } else {
                                         Offset.Companion.getClass();
-                                        j = Offset.Unspecified;
+                                        jFloatToRawIntBits = Offset.Unspecified;
                                     }
                                 }
                             } else {
                                 Offset.Companion.getClass();
-                                j = Offset.Unspecified;
+                                jFloatToRawIntBits = Offset.Unspecified;
                             }
-                            return Offset.m393boximpl(j);
+                            return Offset.m395boximpl(jFloatToRawIntBits);
                         }
                     };
-                    composerImpl.updateRememberedValue(rememberedValue2);
+                    composerImpl.updateRememberedValue(objRememberedValue2);
                 }
-                final Function0 function0 = (Function0) rememberedValue2;
-                boolean changed = composerImpl.changed(density);
-                Object rememberedValue3 = composerImpl.rememberedValue();
-                if (changed || rememberedValue3 == composer$Companion$Empty$1) {
-                    rememberedValue3 = new Function1() { // from class: androidx.compose.foundation.text.selection.TextFieldSelectionManager_androidKt$textFieldMagnifier$1$2$1
+                final Function0 function0 = (Function0) objRememberedValue2;
+                boolean zChanged = composerImpl.changed(density);
+                Object objRememberedValue3 = composerImpl.rememberedValue();
+                if (zChanged || objRememberedValue3 == composer$Companion$Empty$1) {
+                    objRememberedValue3 = new Function1() { // from class: androidx.compose.foundation.text.selection.TextFieldSelectionManager_androidKt$textFieldMagnifier$1$2$1
                         /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                         {
                             super(1);
@@ -394,7 +388,7 @@ public abstract class TextFieldSelectionManager_androidKt {
 
                         @Override // kotlin.jvm.functions.Function1
                         /* renamed from: invoke */
-                        public final Object mo779invoke(Object obj4) {
+                        public final Object mo781invoke(Object obj4) {
                             final Function0 function02 = (Function0) obj4;
                             Modifier.Companion companion2 = Modifier.Companion;
                             Function1 function1 = new Function1() { // from class: androidx.compose.foundation.text.selection.TextFieldSelectionManager_androidKt$textFieldMagnifier$1$2$1.1
@@ -404,11 +398,11 @@ public abstract class TextFieldSelectionManager_androidKt {
 
                                 @Override // kotlin.jvm.functions.Function1
                                 /* renamed from: invoke */
-                                public final Object mo779invoke(Object obj5) {
-                                    return Offset.m393boximpl(((Offset) Function0.this.invoke()).packedValue);
+                                public final Object mo781invoke(Object obj5) {
+                                    return Offset.m395boximpl(((Offset) function02.invoke()).packedValue);
                                 }
                             };
-                            final Density density2 = Density.this;
+                            final Density density2 = density;
                             final MutableState<IntSize> mutableState2 = mutableState;
                             Function1 function12 = new Function1() { // from class: androidx.compose.foundation.text.selection.TextFieldSelectionManager_androidKt$textFieldMagnifier$1$2$1.2
                                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
@@ -418,11 +412,11 @@ public abstract class TextFieldSelectionManager_androidKt {
 
                                 @Override // kotlin.jvm.functions.Function1
                                 /* renamed from: invoke */
-                                public final Object mo779invoke(Object obj5) {
+                                public final Object mo781invoke(Object obj5) {
                                     long j = ((DpSize) obj5).packedValue;
                                     MutableState<IntSize> mutableState3 = mutableState2;
-                                    Density density3 = Density.this;
-                                    mutableState3.setValue(IntSize.m859boximpl((density3.mo51roundToPx0680j_4(DpSize.m845getWidthD9Ej5fM(j)) << 32) | (density3.mo51roundToPx0680j_4(DpSize.m844getHeightD9Ej5fM(j)) & 4294967295L)));
+                                    Density density3 = density2;
+                                    mutableState3.setValue(IntSize.m861boximpl((density3.mo52roundToPx0680j_4(DpSize.m847getWidthD9Ej5fM(j)) << 32) | (density3.mo52roundToPx0680j_4(DpSize.m846getHeightD9Ej5fM(j)) & 4294967295L)));
                                     return Unit.INSTANCE;
                                 }
                             };
@@ -438,11 +432,11 @@ public abstract class TextFieldSelectionManager_androidKt {
                             return magnifierElement;
                         }
                     };
-                    composerImpl.updateRememberedValue(rememberedValue3);
+                    composerImpl.updateRememberedValue(objRememberedValue3);
                 }
-                final Function1 function1 = (Function1) rememberedValue3;
+                final Function1 function1 = (Function1) objRememberedValue3;
                 AnimationVector2D animationVector2D = SelectionMagnifierKt.UnspecifiedAnimationVector2D;
-                Modifier composed = ComposedModifierKt.composed(modifier, InspectableValueKt.NoInspectorInfo, new Function3() { // from class: androidx.compose.foundation.text.selection.SelectionMagnifierKt$animatedSelectionMagnifier$1
+                Modifier modifierComposed = ComposedModifierKt.composed(modifier, InspectableValueKt.NoInspectorInfo, new Function3() { // from class: androidx.compose.foundation.text.selection.SelectionMagnifierKt$animatedSelectionMagnifier$1
                     /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(3);
@@ -456,43 +450,43 @@ public abstract class TextFieldSelectionManager_androidKt {
                         if (ComposerKt.isTraceInProgress()) {
                             ComposerKt.traceEventStart("androidx.compose.foundation.text.selection.animatedSelectionMagnifier.<anonymous> (SelectionMagnifier.kt:64)");
                         }
-                        Function0 function02 = Function0.this;
+                        Function0 function02 = function0;
                         AnimationVector2D animationVector2D2 = SelectionMagnifierKt.UnspecifiedAnimationVector2D;
                         if (ComposerKt.isTraceInProgress()) {
                             ComposerKt.traceEventStart("androidx.compose.foundation.text.selection.rememberAnimatedMagnifierPosition (SelectionMagnifier.kt:75)");
                         }
-                        Object rememberedValue4 = composerImpl2.rememberedValue();
+                        Object objRememberedValue4 = composerImpl2.rememberedValue();
                         Composer.Companion.getClass();
                         Composer$Companion$Empty$1 composer$Companion$Empty$12 = Composer.Companion.Empty;
-                        if (rememberedValue4 == composer$Companion$Empty$12) {
-                            rememberedValue4 = SnapshotStateKt.derivedStateOf(function02);
-                            composerImpl2.updateRememberedValue(rememberedValue4);
+                        if (objRememberedValue4 == composer$Companion$Empty$12) {
+                            objRememberedValue4 = SnapshotStateKt.derivedStateOf(function02);
+                            composerImpl2.updateRememberedValue(objRememberedValue4);
                         }
-                        State state = (State) rememberedValue4;
-                        Object rememberedValue5 = composerImpl2.rememberedValue();
-                        if (rememberedValue5 == composer$Companion$Empty$12) {
-                            Animatable animatable = new Animatable(Offset.m393boximpl(((Offset) state.getValue()).packedValue), SelectionMagnifierKt.UnspecifiedSafeOffsetVectorConverter, Offset.m393boximpl(SelectionMagnifierKt.OffsetDisplacementThreshold), null, 8, null);
+                        State state = (State) objRememberedValue4;
+                        Object objRememberedValue5 = composerImpl2.rememberedValue();
+                        if (objRememberedValue5 == composer$Companion$Empty$12) {
+                            Animatable animatable = new Animatable(Offset.m395boximpl(((Offset) state.getValue()).packedValue), SelectionMagnifierKt.UnspecifiedSafeOffsetVectorConverter, Offset.m395boximpl(SelectionMagnifierKt.OffsetDisplacementThreshold), null, 8, null);
                             composerImpl2.updateRememberedValue(animatable);
-                            rememberedValue5 = animatable;
+                            objRememberedValue5 = animatable;
                         }
-                        Animatable animatable2 = (Animatable) rememberedValue5;
+                        Animatable animatable2 = (Animatable) objRememberedValue5;
                         Unit unit = Unit.INSTANCE;
-                        boolean changedInstance2 = composerImpl2.changedInstance(animatable2);
-                        Object rememberedValue6 = composerImpl2.rememberedValue();
-                        if (changedInstance2 || rememberedValue6 == composer$Companion$Empty$12) {
-                            rememberedValue6 = new SelectionMagnifierKt$rememberAnimatedMagnifierPosition$1$1(state, animatable2, null);
-                            composerImpl2.updateRememberedValue(rememberedValue6);
+                        boolean zChangedInstance2 = composerImpl2.changedInstance(animatable2);
+                        Object objRememberedValue6 = composerImpl2.rememberedValue();
+                        if (zChangedInstance2 || objRememberedValue6 == composer$Companion$Empty$12) {
+                            objRememberedValue6 = new SelectionMagnifierKt$rememberAnimatedMagnifierPosition$1$1(state, animatable2, null);
+                            composerImpl2.updateRememberedValue(objRememberedValue6);
                         }
-                        EffectsKt.LaunchedEffect(composerImpl2, unit, (Function2) rememberedValue6);
+                        EffectsKt.LaunchedEffect(composerImpl2, unit, (Function2) objRememberedValue6);
                         final AnimationState animationState = animatable2.internalState;
                         if (ComposerKt.isTraceInProgress()) {
                             ComposerKt.traceEventEnd();
                         }
                         Function1 function12 = function1;
-                        boolean changed2 = composerImpl2.changed(animationState);
-                        Object rememberedValue7 = composerImpl2.rememberedValue();
-                        if (changed2 || rememberedValue7 == composer$Companion$Empty$12) {
-                            rememberedValue7 = new Function0() { // from class: androidx.compose.foundation.text.selection.SelectionMagnifierKt$animatedSelectionMagnifier$1$1$1
+                        boolean zChanged2 = composerImpl2.changed(animationState);
+                        Object objRememberedValue7 = composerImpl2.rememberedValue();
+                        if (zChanged2 || objRememberedValue7 == composer$Companion$Empty$12) {
+                            objRememberedValue7 = new Function0() { // from class: androidx.compose.foundation.text.selection.SelectionMagnifierKt$animatedSelectionMagnifier$1$1$1
                                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                                 {
                                     super(0);
@@ -500,12 +494,12 @@ public abstract class TextFieldSelectionManager_androidKt {
 
                                 @Override // kotlin.jvm.functions.Function0
                                 public final Object invoke() {
-                                    return Offset.m393boximpl(((Offset) animationState.getValue()).packedValue);
+                                    return Offset.m395boximpl(((Offset) animationState.getValue()).packedValue);
                                 }
                             };
-                            composerImpl2.updateRememberedValue(rememberedValue7);
+                            composerImpl2.updateRememberedValue(objRememberedValue7);
                         }
-                        Modifier modifier2 = (Modifier) function12.mo779invoke((Function0) rememberedValue7);
+                        Modifier modifier2 = (Modifier) function12.mo781invoke((Function0) objRememberedValue7);
                         if (ComposerKt.isTraceInProgress()) {
                             ComposerKt.traceEventEnd();
                         }
@@ -517,7 +511,7 @@ public abstract class TextFieldSelectionManager_androidKt {
                     ComposerKt.traceEventEnd();
                 }
                 composerImpl.end(false);
-                return composed;
+                return modifierComposed;
             }
         });
     }

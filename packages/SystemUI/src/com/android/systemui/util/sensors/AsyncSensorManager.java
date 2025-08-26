@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class AsyncSensorManager extends SensorManager implements PluginListener<SensorManagerPlugin> {
     private static final String TAG = "AsyncSensorManager";
@@ -146,7 +145,7 @@ public class AsyncSensorManager extends SensorManager implements PluginListener<
         this.mExecutor.execute(new Runnable() { // from class: com.android.systemui.util.sensors.AsyncSensorManager$$ExternalSyntheticLambda2
             @Override // java.lang.Runnable
             public final void run() {
-                AsyncSensorManager.this.lambda$registerListenerImpl$0(sensorEventListener, sensor, i, i2, handler);
+                this.f$0.lambda$registerListenerImpl$0(sensorEventListener, sensor, i, i2, handler);
             }
         });
         return true;

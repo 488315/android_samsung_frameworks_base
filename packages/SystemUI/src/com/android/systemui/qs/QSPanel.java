@@ -2,6 +2,7 @@ package com.android.systemui.qs;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.ArrayMap;
@@ -22,7 +23,6 @@ import com.android.systemui.util.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class QSPanel extends LinearLayout implements TunerService.Tunable {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -34,12 +34,11 @@ public class QSPanel extends LinearLayout implements TunerService.Tunable {
     public final boolean mShouldMoveMediaOnExpansion;
     public SubscreenPagedTileLayout mTileLayout;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface QSTileLayout {
         int getHeight();
     }
 
-    public QSPanel(Context context, AttributeSet attributeSet) {
+    public QSPanel(Context context, AttributeSet attributeSet) throws Resources.NotFoundException {
         super(context, attributeSet);
         this.mOnConfigurationChangedListeners = new ArrayList();
         this.mChildrenLayoutTop = new ArrayMap();
@@ -127,7 +126,12 @@ public class QSPanel extends LinearLayout implements TunerService.Tunable {
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:26:0x0076  */
+    /* JADX WARN: Removed duplicated region for block: B:32:0x0077 A[SYNTHETIC] */
     @Override // android.widget.LinearLayout, android.view.ViewGroup, android.view.View
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void onLayout(boolean z, int i, int i2, int i3, int i4) {
         super.onLayout(z, i, i2, i3, i4);
         for (int i5 = 0; i5 < getChildCount(); i5++) {
@@ -143,11 +147,12 @@ public class QSPanel extends LinearLayout implements TunerService.Tunable {
                 int i7 = (childAt2 != null || this.mShouldMoveMediaOnExpansion) ? paddingBottom : 0;
                 Integer num = (Integer) this.mChildrenLayoutTop.get(childAt2);
                 if (num != null) {
-                    int intValue = num.intValue() + i7;
-                    childAt2.setLeftTopRightBottom(childAt2.getLeft(), intValue, childAt2.getRight(), childAt2.getHeight() + intValue);
+                    int iIntValue = num.intValue() + i7;
+                    childAt2.setLeftTopRightBottom(childAt2.getLeft(), iIntValue, childAt2.getRight(), childAt2.getHeight() + iIntValue);
+                    if (childAt2 != this.mTileLayout) {
+                    }
                 }
-            }
-            if (childAt2 == this.mTileLayout) {
+            } else if (childAt2 != this.mTileLayout) {
                 z2 = true;
             }
         }

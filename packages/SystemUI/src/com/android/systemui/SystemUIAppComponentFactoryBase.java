@@ -16,14 +16,12 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.ExecutionException;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class SystemUIAppComponentFactoryBase extends AppComponentFactory {
     public static final Companion Companion = new Companion(null);
     public static SystemUIInitializer systemUIInitializer;
     public ContextComponentHelper componentHelper;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -33,12 +31,10 @@ public abstract class SystemUIAppComponentFactoryBase extends AppComponentFactor
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface ContextAvailableCallback {
         SystemUIInitializer onContextAvailable(Context context);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface ContextInitializer {
         void setContextAvailableCallback(ContextAvailableCallback contextAvailableCallback);
     }
@@ -49,12 +45,12 @@ public abstract class SystemUIAppComponentFactoryBase extends AppComponentFactor
         if (systemUIInitializer2 != null) {
             return systemUIInitializer2;
         }
-        SystemUIInitializerImpl createSystemUIInitializer = systemUIAppComponentFactoryBase.createSystemUIInitializer(context.getApplicationContext());
+        SystemUIInitializerImpl systemUIInitializerImplCreateSystemUIInitializer = systemUIAppComponentFactoryBase.createSystemUIInitializer(context.getApplicationContext());
         try {
-            createSystemUIInitializer.init(false);
-            createSystemUIInitializer.getSysUIComponent().inject(systemUIAppComponentFactoryBase);
-            systemUIInitializer = createSystemUIInitializer;
-            return createSystemUIInitializer;
+            systemUIInitializerImplCreateSystemUIInitializer.init(false);
+            systemUIInitializerImplCreateSystemUIInitializer.getSysUIComponent().inject(systemUIAppComponentFactoryBase);
+            systemUIInitializer = systemUIInitializerImplCreateSystemUIInitializer;
+            return systemUIInitializerImplCreateSystemUIInitializer;
         } catch (InterruptedException e) {
             throw new RuntimeException("Failed to initialize SysUI", e);
         } catch (ExecutionException e2) {
@@ -82,46 +78,46 @@ public abstract class SystemUIAppComponentFactoryBase extends AppComponentFactor
     /* JADX WARN: Multi-variable type inference failed */
     @Override // androidx.core.app.AppComponentFactory
     public final Application instantiateApplicationCompat(ClassLoader classLoader, String str) {
-        Application instantiateApplicationCompat = super.instantiateApplicationCompat(classLoader, str);
-        if (!(instantiateApplicationCompat instanceof ContextInitializer)) {
+        Application applicationInstantiateApplicationCompat = super.instantiateApplicationCompat(classLoader, str);
+        if (!(applicationInstantiateApplicationCompat instanceof ContextInitializer)) {
             throw new RuntimeException("App must implement ContextInitializer");
         }
-        ((ContextInitializer) instantiateApplicationCompat).setContextAvailableCallback(new ContextAvailableCallback() { // from class: com.android.systemui.SystemUIAppComponentFactoryBase$instantiateApplicationCompat$1
+        ((ContextInitializer) applicationInstantiateApplicationCompat).setContextAvailableCallback(new ContextAvailableCallback() { // from class: com.android.systemui.SystemUIAppComponentFactoryBase.instantiateApplicationCompat.1
             @Override // com.android.systemui.SystemUIAppComponentFactoryBase.ContextAvailableCallback
             public final SystemUIInitializer onContextAvailable(Context context) {
                 return SystemUIAppComponentFactoryBase.access$createSystemUIInitializerInternal(SystemUIAppComponentFactoryBase.this, context);
             }
         });
-        return instantiateApplicationCompat;
+        return applicationInstantiateApplicationCompat;
     }
 
     /* JADX WARN: Multi-variable type inference failed */
     @Override // androidx.core.app.AppComponentFactory
     public final ContentProvider instantiateProviderCompat(ClassLoader classLoader, String str) {
-        final ContentProvider instantiateProviderCompat = super.instantiateProviderCompat(classLoader, str);
-        if (instantiateProviderCompat instanceof ContextInitializer) {
-            ((ContextInitializer) instantiateProviderCompat).setContextAvailableCallback(new ContextAvailableCallback() { // from class: com.android.systemui.SystemUIAppComponentFactoryBase$instantiateProviderCompat$1
+        final ContentProvider contentProviderInstantiateProviderCompat = super.instantiateProviderCompat(classLoader, str);
+        if (contentProviderInstantiateProviderCompat instanceof ContextInitializer) {
+            ((ContextInitializer) contentProviderInstantiateProviderCompat).setContextAvailableCallback(new ContextAvailableCallback() { // from class: com.android.systemui.SystemUIAppComponentFactoryBase.instantiateProviderCompat.1
                 @Override // com.android.systemui.SystemUIAppComponentFactoryBase.ContextAvailableCallback
-                public final SystemUIInitializer onContextAvailable(Context context) {
-                    SystemUIInitializer access$createSystemUIInitializerInternal = SystemUIAppComponentFactoryBase.access$createSystemUIInitializerInternal(SystemUIAppComponentFactoryBase.this, context);
-                    SysUIComponent sysUIComponent = access$createSystemUIInitializerInternal.getSysUIComponent();
+                public final SystemUIInitializer onContextAvailable(Context context) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+                    SystemUIInitializer systemUIInitializerAccess$createSystemUIInitializerInternal = SystemUIAppComponentFactoryBase.access$createSystemUIInitializerInternal(SystemUIAppComponentFactoryBase.this, context);
+                    SysUIComponent sysUIComponent = systemUIInitializerAccess$createSystemUIInitializerInternal.getSysUIComponent();
                     try {
-                        sysUIComponent.getClass().getMethod("inject", instantiateProviderCompat.getClass()).invoke(sysUIComponent, instantiateProviderCompat);
-                        return access$createSystemUIInitializerInternal;
+                        sysUIComponent.getClass().getMethod("inject", contentProviderInstantiateProviderCompat.getClass()).invoke(sysUIComponent, contentProviderInstantiateProviderCompat);
+                        return systemUIInitializerAccess$createSystemUIInitializerInternal;
                     } catch (IllegalAccessException e) {
-                        Log.w("AppComponentFactory", "No injector for class: " + instantiateProviderCompat.getClass(), e);
-                        return access$createSystemUIInitializerInternal;
+                        Log.w("AppComponentFactory", "No injector for class: " + contentProviderInstantiateProviderCompat.getClass(), e);
+                        return systemUIInitializerAccess$createSystemUIInitializerInternal;
                     } catch (NoSuchMethodException e2) {
-                        Log.w("AppComponentFactory", "No injector for class: " + instantiateProviderCompat.getClass(), e2);
-                        return access$createSystemUIInitializerInternal;
+                        Log.w("AppComponentFactory", "No injector for class: " + contentProviderInstantiateProviderCompat.getClass(), e2);
+                        return systemUIInitializerAccess$createSystemUIInitializerInternal;
                     } catch (InvocationTargetException e3) {
-                        Log.w("AppComponentFactory", "No injector for class: " + instantiateProviderCompat.getClass(), e3);
-                        return access$createSystemUIInitializerInternal;
+                        Log.w("AppComponentFactory", "No injector for class: " + contentProviderInstantiateProviderCompat.getClass(), e3);
+                        return systemUIInitializerAccess$createSystemUIInitializerInternal;
                     }
                 }
             });
         }
-        return instantiateProviderCompat;
+        return contentProviderInstantiateProviderCompat;
     }
 
     @Override // androidx.core.app.AppComponentFactory

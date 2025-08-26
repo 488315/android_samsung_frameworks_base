@@ -11,7 +11,6 @@ import android.view.animation.AnimationUtils;
 import com.android.systemui.R;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SeslRecoilAnimator {
     public static TimeInterpolator sPressInterpolator;
@@ -23,7 +22,6 @@ public class SeslRecoilAnimator {
     public float mScaleRatio;
     public View mTarget;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Holder {
         public final ArrayList mAnimators = new ArrayList();
         public final Context mContext;
@@ -81,12 +79,12 @@ public class SeslRecoilAnimator {
                 if (seslRecoilAnimator.mAnimator.isRunning()) {
                     seslRecoilAnimator.mAnimator.cancel();
                 }
-                float floatValue = ((Float) seslRecoilAnimator.mAnimator.getAnimatedValue()).floatValue();
+                float fFloatValue = ((Float) seslRecoilAnimator.mAnimator.getAnimatedValue()).floatValue();
                 ValueAnimator valueAnimator = seslRecoilAnimator.mAnimator;
-                if (floatValue == 0.0f) {
-                    floatValue = 1.0f;
+                if (fFloatValue == 0.0f) {
+                    fFloatValue = 1.0f;
                 }
-                valueAnimator.setFloatValues(floatValue, seslRecoilAnimator.mScaleRatio);
+                valueAnimator.setFloatValues(fFloatValue, seslRecoilAnimator.mScaleRatio);
                 seslRecoilAnimator.mAnimator.setDuration(100L);
                 seslRecoilAnimator.mAnimator.setInterpolator(SeslRecoilAnimator.sPressInterpolator);
                 seslRecoilAnimator.mAnimator.start();
@@ -107,23 +105,23 @@ public class SeslRecoilAnimator {
         } else {
             this.mIsScaleOnlyChildren = false;
         }
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(1.0f);
-        this.mAnimator = ofFloat;
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(1.0f);
+        this.mAnimator = valueAnimatorOfFloat;
         if (sPressInterpolator == null) {
             sPressInterpolator = AnimationUtils.loadInterpolator(context, R.anim.sesl_recoil_pressed);
         }
         if (sReleaseInterpolator == null) {
             sReleaseInterpolator = AnimationUtils.loadInterpolator(context, R.anim.sesl_recoil_released);
         }
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: androidx.appcompat.animation.SeslRecoilAnimator$$ExternalSyntheticLambda0
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: androidx.appcompat.animation.SeslRecoilAnimator$$ExternalSyntheticLambda0
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                SeslRecoilAnimator seslRecoilAnimator = SeslRecoilAnimator.this;
+                SeslRecoilAnimator seslRecoilAnimator = this.f$0;
                 seslRecoilAnimator.getClass();
                 seslRecoilAnimator.animateValue(((Float) valueAnimator.getAnimatedValue()).floatValue());
             }
         });
-        ofFloat.addListener(new Animator.AnimatorListener() { // from class: androidx.appcompat.animation.SeslRecoilAnimator.1
+        valueAnimatorOfFloat.addListener(new Animator.AnimatorListener() { // from class: androidx.appcompat.animation.SeslRecoilAnimator.1
             @Override // android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
                 SeslRecoilAnimator.this.animateValue(((Float) ((ValueAnimator) animator).getAnimatedValue()).floatValue());

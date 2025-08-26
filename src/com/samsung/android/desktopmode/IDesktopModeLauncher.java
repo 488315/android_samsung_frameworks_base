@@ -46,9 +46,9 @@ public interface IDesktopModeLauncher extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IDesktopModeLauncher.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IDesktopModeLauncher)) {
-                return (IDesktopModeLauncher) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IDesktopModeLauncher.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IDesktopModeLauncher)) {
+                return (IDesktopModeLauncher) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -77,9 +77,9 @@ public interface IDesktopModeLauncher extends IInterface {
             if (i == 1) {
                 Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                 parcel.enforceNoDataAvail();
-                Bundle sendMessage = sendMessage(bundle);
+                Bundle bundleSendMessage = sendMessage(bundle);
                 parcel2.writeNoException();
-                parcel2.writeTypedObject(sendMessage, 1);
+                parcel2.writeTypedObject(bundleSendMessage, 1);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -103,17 +103,17 @@ public interface IDesktopModeLauncher extends IInterface {
 
             @Override // com.samsung.android.desktopmode.IDesktopModeLauncher
             public Bundle sendMessage(Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDesktopModeLauncher.DESCRIPTOR);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken(IDesktopModeLauncher.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

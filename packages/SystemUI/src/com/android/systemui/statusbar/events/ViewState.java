@@ -10,7 +10,6 @@ import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ViewState {
     public final String contentDescription;
@@ -99,21 +98,21 @@ public final class ViewState {
     }
 
     public final int hashCode() {
-        int m = TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(Boolean.hashCode(this.viewInitialized) * 31, 31, this.systemPrivacyEventIsActive), 31, this.shadeExpanded), 31, this.qsExpanded);
+        int iM = TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(Boolean.hashCode(this.viewInitialized) * 31, 31, this.systemPrivacyEventIsActive), 31, this.shadeExpanded), 31, this.qsExpanded);
         Rect rect = this.portraitRect;
-        int hashCode = (m + (rect == null ? 0 : rect.hashCode())) * 31;
+        int iHashCode = (iM + (rect == null ? 0 : rect.hashCode())) * 31;
         Rect rect2 = this.landscapeRect;
-        int hashCode2 = (hashCode + (rect2 == null ? 0 : rect2.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (rect2 == null ? 0 : rect2.hashCode())) * 31;
         Rect rect3 = this.upsideDownRect;
-        int hashCode3 = (hashCode2 + (rect3 == null ? 0 : rect3.hashCode())) * 31;
+        int iHashCode3 = (iHashCode2 + (rect3 == null ? 0 : rect3.hashCode())) * 31;
         Rect rect4 = this.seascapeRect;
-        int m2 = ReorderTile$$ExternalSyntheticOutline0.m(this.paddingTop, ReorderTile$$ExternalSyntheticOutline0.m(this.rotation, TransitionData$$ExternalSyntheticOutline0.m((hashCode3 + (rect4 == null ? 0 : rect4.hashCode())) * 31, 31, this.layoutRtl), 31), 31);
+        int iM2 = ReorderTile$$ExternalSyntheticOutline0.m(this.paddingTop, ReorderTile$$ExternalSyntheticOutline0.m(this.rotation, TransitionData$$ExternalSyntheticOutline0.m((iHashCode3 + (rect4 == null ? 0 : rect4.hashCode())) * 31, 31, this.layoutRtl), 31), 31);
         PrivacyDotCorner privacyDotCorner = this.corner;
-        int hashCode4 = (m2 + (privacyDotCorner == null ? 0 : privacyDotCorner.hashCode())) * 31;
+        int iHashCode4 = (iM2 + (privacyDotCorner == null ? 0 : privacyDotCorner.hashCode())) * 31;
         View view = this.designatedCorner;
-        int hashCode5 = (hashCode4 + (view == null ? 0 : view.hashCode())) * 31;
+        int iHashCode5 = (iHashCode4 + (view == null ? 0 : view.hashCode())) * 31;
         String str = this.contentDescription;
-        return this.displaySize.hashCode() + TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.stableInsetRight, ReorderTile$$ExternalSyntheticOutline0.m(this.stableInsetLeft, ReorderTile$$ExternalSyntheticOutline0.m(this.statusBarPaddingRight, ReorderTile$$ExternalSyntheticOutline0.m(this.statusBarPaddingLeft, (hashCode5 + (str != null ? str.hashCode() : 0)) * 31, 31), 31), 31), 31), 31, this.isDotBlocked);
+        return this.displaySize.hashCode() + TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.stableInsetRight, ReorderTile$$ExternalSyntheticOutline0.m(this.stableInsetLeft, ReorderTile$$ExternalSyntheticOutline0.m(this.statusBarPaddingRight, ReorderTile$$ExternalSyntheticOutline0.m(this.statusBarPaddingLeft, (iHashCode5 + (str != null ? str.hashCode() : 0)) * 31, 31), 31), 31), 31), 31, this.isDotBlocked);
     }
 
     public final String toString() {

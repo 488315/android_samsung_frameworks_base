@@ -7,7 +7,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.markers.KMappedMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class LetterboxSurfaces implements Iterable, KMappedMarker {
     public final SurfaceControl bottomSurface;
@@ -32,13 +31,13 @@ public final class LetterboxSurfaces implements Iterable, KMappedMarker {
 
     public final int hashCode() {
         SurfaceControl surfaceControl = this.leftSurface;
-        int hashCode = (surfaceControl == null ? 0 : surfaceControl.hashCode()) * 31;
+        int iHashCode = (surfaceControl == null ? 0 : surfaceControl.hashCode()) * 31;
         SurfaceControl surfaceControl2 = this.topSurface;
-        int hashCode2 = (hashCode + (surfaceControl2 == null ? 0 : surfaceControl2.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (surfaceControl2 == null ? 0 : surfaceControl2.hashCode())) * 31;
         SurfaceControl surfaceControl3 = this.rightSurface;
-        int hashCode3 = (hashCode2 + (surfaceControl3 == null ? 0 : surfaceControl3.hashCode())) * 31;
+        int iHashCode3 = (iHashCode2 + (surfaceControl3 == null ? 0 : surfaceControl3.hashCode())) * 31;
         SurfaceControl surfaceControl4 = this.bottomSurface;
-        return hashCode3 + (surfaceControl4 != null ? surfaceControl4.hashCode() : 0);
+        return iHashCode3 + (surfaceControl4 != null ? surfaceControl4.hashCode() : 0);
     }
 
     @Override // java.lang.Iterable

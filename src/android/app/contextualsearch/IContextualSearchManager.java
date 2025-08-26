@@ -59,9 +59,9 @@ public interface IContextualSearchManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IContextualSearchManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IContextualSearchManager)) {
-                return (IContextualSearchManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IContextualSearchManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IContextualSearchManager)) {
+                return (IContextualSearchManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -97,14 +97,14 @@ public interface IContextualSearchManager extends IInterface {
                 startContextualSearchForForegroundApp();
                 parcel2.writeNoException();
             } else if (i == 2) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                startContextualSearch(readInt);
+                startContextualSearch(i3);
             } else if (i == 3) {
-                IBinder readStrongBinder = parcel.readStrongBinder();
-                IContextualSearchCallback asInterface = IContextualSearchCallback.Stub.asInterface(parcel.readStrongBinder());
+                IBinder strongBinder = parcel.readStrongBinder();
+                IContextualSearchCallback iContextualSearchCallbackAsInterface = IContextualSearchCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                getContextualSearchState(readStrongBinder, asInterface);
+                getContextualSearchState(strongBinder, iContextualSearchCallbackAsInterface);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -129,40 +129,40 @@ public interface IContextualSearchManager extends IInterface {
 
             @Override // android.app.contextualsearch.IContextualSearchManager
             public void startContextualSearchForForegroundApp() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IContextualSearchManager.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IContextualSearchManager.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.contextualsearch.IContextualSearchManager
             public void startContextualSearch(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IContextualSearchManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IContextualSearchManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.contextualsearch.IContextualSearchManager
             public void getContextualSearchState(IBinder iBinder, IContextualSearchCallback iContextualSearchCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IContextualSearchManager.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeStrongInterface(iContextualSearchCallback);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IContextualSearchManager.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeStrongInterface(iContextualSearchCallback);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

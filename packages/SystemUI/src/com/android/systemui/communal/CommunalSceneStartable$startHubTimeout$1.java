@@ -16,7 +16,6 @@ import kotlin.time.DurationUnit;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.DelayKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class CommunalSceneStartable$startHubTimeout$1 extends SuspendLambda implements Function2 {
     int label;
@@ -47,7 +46,7 @@ final class CommunalSceneStartable$startHubTimeout$1 extends SuspendLambda imple
             Duration.Companion companion = Duration.Companion;
             long duration = DurationKt.toDuration(this.this$0.screenTimeout, DurationUnit.MILLISECONDS);
             this.label = 1;
-            if (DelayKt.m3449delayVtjQ1oo(duration, this) == coroutineSingletons) {
+            if (DelayKt.m3469delayVtjQ1oo(duration, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

@@ -78,14 +78,14 @@ public final class InputBindResult implements Parcelable {
     private InputBindResult(Parcel parcel) {
         this.result = parcel.readInt();
         this.method = IInputMethodSession.Stub.asInterface(parcel.readStrongBinder());
-        int readInt = parcel.readInt();
-        if (readInt < 0) {
+        int i = parcel.readInt();
+        if (i < 0) {
             this.accessibilitySessions = null;
         } else {
-            this.accessibilitySessions = new SparseArray<>(readInt);
-            while (readInt > 0) {
+            this.accessibilitySessions = new SparseArray<>(i);
+            while (i > 0) {
                 this.accessibilitySessions.append(parcel.readInt(), IAccessibilityInputMethodSession.Stub.asInterface(parcel.readStrongBinder()));
-                readInt--;
+                i--;
             }
         }
         if (parcel.readInt() != 0) {

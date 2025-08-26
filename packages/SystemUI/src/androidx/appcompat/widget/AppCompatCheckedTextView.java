@@ -2,16 +2,20 @@ package androidx.appcompat.widget;
 
 import android.R;
 import android.content.Context;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.ActionMode;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
 import android.widget.CheckedTextView;
+import androidx.appcompat.R$styleable;
 import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.view.ViewCompat;
 import androidx.core.widget.TextViewCompat;
+import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class AppCompatCheckedTextView extends CheckedTextView {
     public AppCompatEmojiTextHelper mAppCompatEmojiTextHelper;
@@ -47,9 +51,9 @@ public class AppCompatCheckedTextView extends CheckedTextView {
 
     @Override // android.widget.TextView, android.view.View
     public final InputConnection onCreateInputConnection(EditorInfo editorInfo) {
-        InputConnection onCreateInputConnection = super.onCreateInputConnection(editorInfo);
-        AppCompatHintHelper.onCreateInputConnection(onCreateInputConnection, editorInfo, this);
-        return onCreateInputConnection;
+        InputConnection inputConnectionOnCreateInputConnection = super.onCreateInputConnection(editorInfo);
+        AppCompatHintHelper.onCreateInputConnection(inputConnectionOnCreateInputConnection, editorInfo, this);
+        return inputConnectionOnCreateInputConnection;
     }
 
     @Override // android.widget.TextView
@@ -125,109 +129,55 @@ public class AppCompatCheckedTextView extends CheckedTextView {
     }
 
     /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0091 A[Catch: all -> 0x0067, TryCatch #1 {all -> 0x0067, blocks: (B:3:0x0048, B:5:0x0051, B:8:0x0059, B:9:0x0088, B:11:0x0091, B:12:0x009a, B:14:0x00a3, B:24:0x006a, B:26:0x0073, B:28:0x007b), top: B:2:0x0048 }] */
-    /* JADX WARN: Removed duplicated region for block: B:14:0x00a3 A[Catch: all -> 0x0067, TRY_LEAVE, TryCatch #1 {all -> 0x0067, blocks: (B:3:0x0048, B:5:0x0051, B:8:0x0059, B:9:0x0088, B:11:0x0091, B:12:0x009a, B:14:0x00a3, B:24:0x006a, B:26:0x0073, B:28:0x007b), top: B:2:0x0048 }] */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x00bb  */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public AppCompatCheckedTextView(android.content.Context r11, android.util.AttributeSet r12, int r13) {
-        /*
-            r10 = this;
-            androidx.appcompat.widget.TintContextWrapper.wrap(r11)
-            r10.<init>(r11, r12, r13)
-            android.content.Context r11 = r10.getContext()
-            androidx.appcompat.widget.ThemeUtils.checkAppCompatTheme(r11, r10)
-            androidx.appcompat.widget.AppCompatTextHelper r11 = new androidx.appcompat.widget.AppCompatTextHelper
-            r11.<init>(r10)
-            r10.mTextHelper = r11
-            r11.loadFromAttributes(r12, r13)
-            r11.applyCompoundDrawablesTints()
-            androidx.appcompat.widget.AppCompatBackgroundHelper r11 = new androidx.appcompat.widget.AppCompatBackgroundHelper
-            r11.<init>(r10)
-            r10.mBackgroundTintHelper = r11
-            r11.loadFromAttributes(r12, r13)
-            androidx.appcompat.widget.AppCompatCheckedTextViewHelper r11 = new androidx.appcompat.widget.AppCompatCheckedTextViewHelper
-            r11.<init>(r10)
-            r10.mCheckedHelper = r11
-            android.widget.CheckedTextView r0 = r11.mView
-            android.content.Context r0 = r0.getContext()
-            int[] r3 = androidx.appcompat.R$styleable.CheckedTextView
-            r8 = 0
-            androidx.appcompat.widget.TintTypedArray r9 = androidx.appcompat.widget.TintTypedArray.obtainStyledAttributes(r0, r12, r3, r13, r8)
-            android.widget.CheckedTextView r1 = r11.mView
-            android.content.Context r2 = r1.getContext()
-            android.content.res.TypedArray r5 = r9.mWrapped
-            java.util.WeakHashMap r0 = androidx.core.view.ViewCompat.sViewPropertyAnimatorMap
-            r7 = 0
-            r4 = r12
-            r6 = r13
-            androidx.core.view.ViewCompat.Api29Impl.saveAttributeDataForStyleable(r1, r2, r3, r4, r5, r6, r7)
-            android.content.res.TypedArray r12 = r9.mWrapped     // Catch: java.lang.Throwable -> L67
-            r13 = 4
-            boolean r12 = r12.hasValue(r13)     // Catch: java.lang.Throwable -> L67
-            if (r12 == 0) goto L6a
-            android.content.res.TypedArray r12 = r9.mWrapped     // Catch: java.lang.Throwable -> L67
-            int r12 = r12.getResourceId(r13, r8)     // Catch: java.lang.Throwable -> L67
-            if (r12 == 0) goto L6a
-            android.widget.CheckedTextView r13 = r11.mView     // Catch: java.lang.Throwable -> L67 android.content.res.Resources.NotFoundException -> L6a
-            android.content.Context r0 = r13.getContext()     // Catch: java.lang.Throwable -> L67 android.content.res.Resources.NotFoundException -> L6a
-            android.graphics.drawable.Drawable r12 = androidx.appcompat.content.res.AppCompatResources.getDrawable(r12, r0)     // Catch: java.lang.Throwable -> L67 android.content.res.Resources.NotFoundException -> L6a
-            r13.setCheckMarkDrawable(r12)     // Catch: java.lang.Throwable -> L67 android.content.res.Resources.NotFoundException -> L6a
-            goto L88
-        L67:
-            r0 = move-exception
-            r10 = r0
-            goto Lc8
-        L6a:
-            android.content.res.TypedArray r12 = r9.mWrapped     // Catch: java.lang.Throwable -> L67
-            r13 = 1
-            boolean r12 = r12.hasValue(r13)     // Catch: java.lang.Throwable -> L67
-            if (r12 == 0) goto L88
-            android.content.res.TypedArray r12 = r9.mWrapped     // Catch: java.lang.Throwable -> L67
-            int r12 = r12.getResourceId(r13, r8)     // Catch: java.lang.Throwable -> L67
-            if (r12 == 0) goto L88
-            android.widget.CheckedTextView r13 = r11.mView     // Catch: java.lang.Throwable -> L67
-            android.content.Context r0 = r13.getContext()     // Catch: java.lang.Throwable -> L67
-            android.graphics.drawable.Drawable r12 = androidx.appcompat.content.res.AppCompatResources.getDrawable(r12, r0)     // Catch: java.lang.Throwable -> L67
-            r13.setCheckMarkDrawable(r12)     // Catch: java.lang.Throwable -> L67
-        L88:
-            android.content.res.TypedArray r12 = r9.mWrapped     // Catch: java.lang.Throwable -> L67
-            r13 = 6
-            boolean r12 = r12.hasValue(r13)     // Catch: java.lang.Throwable -> L67
-            if (r12 == 0) goto L9a
-            android.widget.CheckedTextView r12 = r11.mView     // Catch: java.lang.Throwable -> L67
-            android.content.res.ColorStateList r13 = r9.getColorStateList(r13)     // Catch: java.lang.Throwable -> L67
-            r12.setCheckMarkTintList(r13)     // Catch: java.lang.Throwable -> L67
-        L9a:
-            android.content.res.TypedArray r12 = r9.mWrapped     // Catch: java.lang.Throwable -> L67
-            r13 = 7
-            boolean r12 = r12.hasValue(r13)     // Catch: java.lang.Throwable -> L67
-            if (r12 == 0) goto Lb4
-            android.widget.CheckedTextView r11 = r11.mView     // Catch: java.lang.Throwable -> L67
-            android.content.res.TypedArray r12 = r9.mWrapped     // Catch: java.lang.Throwable -> L67
-            r0 = -1
-            int r12 = r12.getInt(r13, r0)     // Catch: java.lang.Throwable -> L67
-            r13 = 0
-            android.graphics.PorterDuff$Mode r12 = androidx.appcompat.widget.DrawableUtils.parseTintMode(r12, r13)     // Catch: java.lang.Throwable -> L67
-            r11.setCheckMarkTintMode(r12)     // Catch: java.lang.Throwable -> L67
-        Lb4:
-            r9.recycle()
-            androidx.appcompat.widget.AppCompatEmojiTextHelper r11 = r10.mAppCompatEmojiTextHelper
-            if (r11 != 0) goto Lc2
-            androidx.appcompat.widget.AppCompatEmojiTextHelper r11 = new androidx.appcompat.widget.AppCompatEmojiTextHelper
-            r11.<init>(r10)
-            r10.mAppCompatEmojiTextHelper = r11
-        Lc2:
-            androidx.appcompat.widget.AppCompatEmojiTextHelper r10 = r10.mAppCompatEmojiTextHelper
-            r10.loadFromAttributes(r4, r6)
-            return
-        Lc8:
-            r9.recycle()
-            throw r10
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.appcompat.widget.AppCompatCheckedTextView.<init>(android.content.Context, android.util.AttributeSet, int):void");
+    public AppCompatCheckedTextView(Context context, AttributeSet attributeSet, int i) {
+        int resourceId;
+        int resourceId2;
+        super(context, attributeSet, i);
+        TintContextWrapper.wrap(context);
+        ThemeUtils.checkAppCompatTheme(getContext(), this);
+        AppCompatTextHelper appCompatTextHelper = new AppCompatTextHelper(this);
+        this.mTextHelper = appCompatTextHelper;
+        appCompatTextHelper.loadFromAttributes(attributeSet, i);
+        appCompatTextHelper.applyCompoundDrawablesTints();
+        AppCompatBackgroundHelper appCompatBackgroundHelper = new AppCompatBackgroundHelper(this);
+        this.mBackgroundTintHelper = appCompatBackgroundHelper;
+        appCompatBackgroundHelper.loadFromAttributes(attributeSet, i);
+        AppCompatCheckedTextViewHelper appCompatCheckedTextViewHelper = new AppCompatCheckedTextViewHelper(this);
+        this.mCheckedHelper = appCompatCheckedTextViewHelper;
+        Context context2 = appCompatCheckedTextViewHelper.mView.getContext();
+        int[] iArr = R$styleable.CheckedTextView;
+        TintTypedArray tintTypedArrayObtainStyledAttributes = TintTypedArray.obtainStyledAttributes(context2, attributeSet, iArr, i, 0);
+        CheckedTextView checkedTextView = appCompatCheckedTextViewHelper.mView;
+        Context context3 = checkedTextView.getContext();
+        TypedArray typedArray = tintTypedArrayObtainStyledAttributes.mWrapped;
+        WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
+        ViewCompat.Api29Impl.saveAttributeDataForStyleable(checkedTextView, context3, iArr, attributeSet, typedArray, i, 0);
+        try {
+            if (tintTypedArrayObtainStyledAttributes.mWrapped.hasValue(4) && (resourceId2 = tintTypedArrayObtainStyledAttributes.mWrapped.getResourceId(4, 0)) != 0) {
+                try {
+                    CheckedTextView checkedTextView2 = appCompatCheckedTextViewHelper.mView;
+                    checkedTextView2.setCheckMarkDrawable(AppCompatResources.getDrawable(resourceId2, checkedTextView2.getContext()));
+                } catch (Resources.NotFoundException unused) {
+                }
+            } else if (tintTypedArrayObtainStyledAttributes.mWrapped.hasValue(1) && (resourceId = tintTypedArrayObtainStyledAttributes.mWrapped.getResourceId(1, 0)) != 0) {
+                CheckedTextView checkedTextView3 = appCompatCheckedTextViewHelper.mView;
+                checkedTextView3.setCheckMarkDrawable(AppCompatResources.getDrawable(resourceId, checkedTextView3.getContext()));
+            }
+            if (tintTypedArrayObtainStyledAttributes.mWrapped.hasValue(6)) {
+                appCompatCheckedTextViewHelper.mView.setCheckMarkTintList(tintTypedArrayObtainStyledAttributes.getColorStateList(6));
+            }
+            if (tintTypedArrayObtainStyledAttributes.mWrapped.hasValue(7)) {
+                appCompatCheckedTextViewHelper.mView.setCheckMarkTintMode(DrawableUtils.parseTintMode(tintTypedArrayObtainStyledAttributes.mWrapped.getInt(7, -1), null));
+            }
+            tintTypedArrayObtainStyledAttributes.recycle();
+            if (this.mAppCompatEmojiTextHelper == null) {
+                this.mAppCompatEmojiTextHelper = new AppCompatEmojiTextHelper(this);
+            }
+            this.mAppCompatEmojiTextHelper.loadFromAttributes(attributeSet, i);
+        } catch (Throwable th) {
+            tintTypedArrayObtainStyledAttributes.recycle();
+            throw th;
+        }
     }
 
     @Override // android.widget.CheckedTextView

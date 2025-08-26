@@ -3,13 +3,11 @@ package com.samsung.systemui.splugins;
 import android.text.TextUtils;
 import com.samsung.systemui.splugins.annotations.ProvidesInterface;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface SPluginManager {
     public static final String NOTIFICATION_CHANNEL_ID = "ALR";
     public static final String PLUGIN_CHANGED = "com.android.systemui.action.PLUGIN_CHANGED";
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Helper {
         public static <P> String getAction(Class<P> cls) {
             ProvidesInterface providesInterface = (ProvidesInterface) cls.getDeclaredAnnotation(ProvidesInterface.class);

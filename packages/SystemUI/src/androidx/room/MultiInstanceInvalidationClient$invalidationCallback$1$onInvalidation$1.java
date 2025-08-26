@@ -22,7 +22,6 @@ import kotlin.text.StringsKt__StringsJVMKt;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.SharedFlowImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class MultiInstanceInvalidationClient$invalidationCallback$1$onInvalidation$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ String[] $tables;
@@ -50,20 +49,20 @@ final class MultiInstanceInvalidationClient$invalidationCallback$1$onInvalidatio
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
         Set<String> set;
-        Set set2;
+        Set setBuild;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             String[] strArr = this.$tables;
-            Set set3 = ArraysKt___ArraysKt.toSet(Arrays.copyOf(strArr, strArr.length));
+            Set set2 = ArraysKt___ArraysKt.toSet(Arrays.copyOf(strArr, strArr.length));
             SharedFlowImpl sharedFlowImpl = this.this$0.invalidatedTables;
-            this.L$0 = set3;
+            this.L$0 = set2;
             this.label = 1;
-            if (sharedFlowImpl.emit(set3, this) == coroutineSingletons) {
+            if (sharedFlowImpl.emit(set2, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
-            set = set3;
+            set = set2;
         } else {
             if (i != 1) {
                 throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
@@ -84,7 +83,7 @@ final class MultiInstanceInvalidationClient$invalidationCallback$1$onInvalidatio
                     String[] strArr2 = observerWrapper.tableNames;
                     int length = strArr2.length;
                     if (length == 0) {
-                        set2 = EmptySet.INSTANCE;
+                        setBuild = EmptySet.INSTANCE;
                     } else if (length != 1) {
                         SetBuilder setBuilder = new SetBuilder();
                         for (String str : set) {
@@ -101,22 +100,24 @@ final class MultiInstanceInvalidationClient$invalidationCallback$1$onInvalidatio
                                 }
                             }
                         }
-                        set2 = setBuilder.build();
+                        setBuild = setBuilder.build();
                     } else {
-                        Set set4 = set;
-                        if (!(set4 instanceof Collection) || !set4.isEmpty()) {
-                            Iterator it = set4.iterator();
+                        Set set3 = set;
+                        if ((set3 instanceof Collection) && set3.isEmpty()) {
+                            setBuild = EmptySet.INSTANCE;
+                        } else {
+                            Iterator it = set3.iterator();
                             while (it.hasNext()) {
                                 if (StringsKt__StringsJVMKt.equals((String) it.next(), strArr2[0], true)) {
-                                    set2 = observerWrapper.singleTableSet;
+                                    setBuild = observerWrapper.singleTableSet;
                                     break;
                                 }
                             }
+                            setBuild = EmptySet.INSTANCE;
                         }
-                        set2 = EmptySet.INSTANCE;
                     }
-                    if (!set2.isEmpty()) {
-                        observerWrapper.observer.onInvalidated(set2);
+                    if (!setBuild.isEmpty()) {
+                        observerWrapper.observer.onInvalidated(setBuild);
                     }
                 }
             }

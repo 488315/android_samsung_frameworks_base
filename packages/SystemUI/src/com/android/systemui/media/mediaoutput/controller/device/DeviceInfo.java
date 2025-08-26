@@ -6,7 +6,6 @@ import java.util.Map;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class DeviceInfo {
     public final Map details;
@@ -15,7 +14,6 @@ public final class DeviceInfo {
     public final String name;
     public final int type;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -49,9 +47,9 @@ public final class DeviceInfo {
     }
 
     public final int hashCode() {
-        int m = ReorderTile$$ExternalSyntheticOutline0.m(this.icon, ReorderTile$$ExternalSyntheticOutline0.m(this.type, PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.name.hashCode() * 31, 31, this.key), 31), 31);
+        int iM = ReorderTile$$ExternalSyntheticOutline0.m(this.icon, ReorderTile$$ExternalSyntheticOutline0.m(this.type, PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.name.hashCode() * 31, 31, this.key), 31), 31);
         Map map = this.details;
-        return m + (map == null ? 0 : map.hashCode());
+        return iM + (map == null ? 0 : map.hashCode());
     }
 
     public final String toString() {

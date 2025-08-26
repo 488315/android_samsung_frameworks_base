@@ -149,20 +149,20 @@ public final class ApkAssets {
     }
 
     public String getAssetPath() {
-        String emptyIfNull;
+        String strEmptyIfNull;
         synchronized (this) {
-            emptyIfNull = TextUtils.emptyIfNull(nativeGetAssetPath(this.mNativePtr));
+            strEmptyIfNull = TextUtils.emptyIfNull(nativeGetAssetPath(this.mNativePtr));
         }
-        return emptyIfNull;
+        return strEmptyIfNull;
     }
 
     public String getDebugName() {
-        String nativeGetDebugName;
+        String strNativeGetDebugName;
         synchronized (this) {
             long j = this.mNativePtr;
-            nativeGetDebugName = j == 0 ? "<destroyed>" : nativeGetDebugName(j);
+            strNativeGetDebugName = j == 0 ? "<destroyed>" : nativeGetDebugName(j);
         }
-        return nativeGetDebugName;
+        return strNativeGetDebugName;
     }
 
     CharSequence getStringFromPool(int i) {
@@ -185,49 +185,49 @@ public final class ApkAssets {
     }
 
     public XmlResourceParser openXml(String str) throws IOException {
-        XmlResourceParser newParser;
+        XmlResourceParser xmlResourceParserNewParser;
         Objects.requireNonNull(str, "fileName");
         synchronized (this) {
             XmlBlock xmlBlock = new XmlBlock((AssetManager) null, nativeOpenXml(this.mNativePtr, str), true);
             try {
-                newParser = xmlBlock.newParser();
-                if (newParser == null) {
+                xmlResourceParserNewParser = xmlBlock.newParser();
+                if (xmlResourceParserNewParser == null) {
                     throw new AssertionError("block.newParser() returned a null parser");
                 }
                 xmlBlock.close();
             } finally {
             }
         }
-        return newParser;
+        return xmlResourceParserNewParser;
     }
 
     public OverlayableInfo getOverlayableInfo(String str) throws IOException {
-        OverlayableInfo nativeGetOverlayableInfo;
+        OverlayableInfo overlayableInfoNativeGetOverlayableInfo;
         synchronized (this) {
-            nativeGetOverlayableInfo = nativeGetOverlayableInfo(this.mNativePtr, str);
+            overlayableInfoNativeGetOverlayableInfo = nativeGetOverlayableInfo(this.mNativePtr, str);
         }
-        return nativeGetOverlayableInfo;
+        return overlayableInfoNativeGetOverlayableInfo;
     }
 
     public boolean definesOverlayable() throws IOException {
-        boolean nativeDefinesOverlayable;
+        boolean zNativeDefinesOverlayable;
         synchronized (this) {
-            nativeDefinesOverlayable = nativeDefinesOverlayable(this.mNativePtr);
+            zNativeDefinesOverlayable = nativeDefinesOverlayable(this.mNativePtr);
         }
-        return nativeDefinesOverlayable;
+        return zNativeDefinesOverlayable;
     }
 
     public boolean isUpToDate() {
-        int nativeIsUpToDate;
+        int iNativeIsUpToDate;
         int i = this.mPreviousUpToDateResult;
         if (i != 1) {
             return i == 2;
         }
         synchronized (this) {
-            nativeIsUpToDate = nativeIsUpToDate(this.mNativePtr);
+            iNativeIsUpToDate = nativeIsUpToDate(this.mNativePtr);
         }
-        this.mPreviousUpToDateResult = nativeIsUpToDate;
-        return nativeIsUpToDate != 0;
+        this.mPreviousUpToDateResult = iNativeIsUpToDate;
+        return iNativeIsUpToDate != 0;
     }
 
     public boolean isSystem() {

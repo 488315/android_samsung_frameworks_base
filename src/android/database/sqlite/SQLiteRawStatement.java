@@ -103,9 +103,9 @@ public final class SQLiteRawStatement implements Closeable {
         this.mSession = threadSession;
         threadSession.throwIfNoTransaction();
         this.mSql = str;
-        SQLiteConnection.PreparedStatement acquirePersistentStatement = threadSession.acquirePersistentStatement(str, this);
-        this.mPreparedStatement = acquirePersistentStatement;
-        this.mStatement = acquirePersistentStatement.mStatementPtr;
+        SQLiteConnection.PreparedStatement preparedStatementAcquirePersistentStatement = threadSession.acquirePersistentStatement(str, this);
+        this.mPreparedStatement = preparedStatementAcquirePersistentStatement;
+        this.mStatement = preparedStatementAcquirePersistentStatement.mStatementPtr;
     }
 
     private void throwIfInvalid() {
@@ -145,18 +145,18 @@ public final class SQLiteRawStatement implements Closeable {
     public boolean step() {
         throwIfInvalid();
         try {
-            int nativeStep = nativeStep(this.mStatement, true);
-            if (nativeStep == 5) {
+            int iNativeStep = nativeStep(this.mStatement, true);
+            if (iNativeStep == 5) {
                 throw new SQLiteDatabaseLockedException("database " + this.mDatabase + " busy");
             }
-            if (nativeStep == 6) {
+            if (iNativeStep == 6) {
                 throw new SQLiteDatabaseLockedException("database " + this.mDatabase + " locked");
             }
-            if (nativeStep == 100) {
+            if (iNativeStep == 100) {
                 return true;
             }
-            if (nativeStep != 101) {
-                throw new SQLiteException("unknown error " + nativeStep);
+            if (iNativeStep != 101) {
+                throw new SQLiteException("unknown error " + iNativeStep);
             }
             Reference.reachabilityFence(this);
             return false;
@@ -168,11 +168,11 @@ public final class SQLiteRawStatement implements Closeable {
     public int stepNoThrow() {
         throwIfInvalid();
         try {
-            int nativeStep = nativeStep(this.mStatement, false);
-            if (nativeStep != 100 && nativeStep != 101 && nativeStep != 0) {
-                Log.e(TAG, "stepNoThrow() got error " + nativeStep + " for SQL: " + this.mSql);
+            int iNativeStep = nativeStep(this.mStatement, false);
+            if (iNativeStep != 100 && iNativeStep != 101 && iNativeStep != 0) {
+                Log.e(TAG, "stepNoThrow() got error " + iNativeStep + " for SQL: " + this.mSql);
             }
-            return nativeStep;
+            return iNativeStep;
         } finally {
             Reference.reachabilityFence(this);
         }

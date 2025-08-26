@@ -10,13 +10,11 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class OverviewToDesktopTransitionObserver implements Transitions.TransitionObserver {
     public final Map transitionToCallback = new LinkedHashMap();
     public final Transitions transitions;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -47,17 +45,17 @@ public final class OverviewToDesktopTransitionObserver implements Transitions.Tr
             IMoveToDesktopCallback iMoveToDesktopCallback = (IMoveToDesktopCallback) ((LinkedHashMap) this.transitionToCallback).get(iBinder);
             if (iMoveToDesktopCallback != null) {
                 IMoveToDesktopCallback$Stub$Proxy iMoveToDesktopCallback$Stub$Proxy = (IMoveToDesktopCallback$Stub$Proxy) iMoveToDesktopCallback;
-                Parcel obtain = Parcel.obtain(iMoveToDesktopCallback$Stub$Proxy.mRemote);
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(iMoveToDesktopCallback$Stub$Proxy.mRemote);
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.android.wm.shell.desktopmode.IMoveToDesktopCallback");
-                    iMoveToDesktopCallback$Stub$Proxy.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain.writeInterfaceToken("com.android.wm.shell.desktopmode.IMoveToDesktopCallback");
+                    iMoveToDesktopCallback$Stub$Proxy.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 } catch (Throwable th) {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                     throw th;
                 }
             }

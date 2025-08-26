@@ -11,7 +11,6 @@ import androidx.slice.core.SliceActionImpl;
 import com.samsung.android.knox.ucm.core.UniversalCredentialUtil;
 import java.time.Duration;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ListBuilderBasicImpl extends TemplateBuilderImpl implements ListBuilder {
     public IconCompat mIconCompat;
@@ -60,9 +59,9 @@ public class ListBuilderBasicImpl extends TemplateBuilderImpl implements ListBui
         if (iconCompat2 != null) {
             builder.addIcon(iconCompat2, null, UniversalCredentialUtil.AGENT_TITLE);
         }
-        Slice build = builder2.build();
+        Slice sliceBuild = builder2.build();
         builder.getClass();
-        builder.addSubSlice(build, null);
+        builder.addSubSlice(sliceBuild, null);
     }
 
     @Override // androidx.slice.builders.impl.ListBuilder
@@ -75,12 +74,12 @@ public class ListBuilderBasicImpl extends TemplateBuilderImpl implements ListBui
 
     @Override // androidx.slice.builders.impl.ListBuilder
     public final void setTtl(long j) {
-        long j2 = -1;
+        long jCurrentTimeMillis = -1;
         if (j != -1) {
             ((SystemClock) this.mClock).getClass();
-            j2 = System.currentTimeMillis() + j;
+            jCurrentTimeMillis = System.currentTimeMillis() + j;
         }
-        this.mSliceBuilder.addTimestamp(j2, "millis", "ttl");
+        this.mSliceBuilder.addTimestamp(jCurrentTimeMillis, "millis", "ttl");
     }
 
     @Override // androidx.slice.builders.impl.ListBuilder

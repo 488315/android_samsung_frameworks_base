@@ -164,9 +164,9 @@ public interface IFMEventListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IFMEventListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IFMEventListener)) {
-                return (IFMEventListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IFMEventListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IFMEventListener)) {
+                return (IFMEventListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -234,44 +234,44 @@ public interface IFMEventListener extends IInterface {
                     onRadioEnabled();
                     return true;
                 case 2:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onRadioDisabled(readInt);
+                    onRadioDisabled(i3);
                     return true;
                 case 3:
-                    long readLong = parcel.readLong();
+                    long j = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    onChannelFound(readLong);
+                    onChannelFound(j);
                     return true;
                 case 4:
                     onScanStarted();
                     return true;
                 case 5:
-                    int readInt2 = parcel.readInt();
-                    if (readInt2 > 1000000) {
-                        throw new BadParcelableException("Array too large: " + readInt2);
+                    int i4 = parcel.readInt();
+                    if (i4 > 1000000) {
+                        throw new BadParcelableException("Array too large: " + i4);
                     }
-                    jArr = readInt2 >= 0 ? new long[readInt2] : null;
+                    jArr = i4 >= 0 ? new long[i4] : null;
                     parcel.enforceNoDataAvail();
                     onScanStopped(jArr);
                     parcel2.writeNoException();
                     parcel2.writeLongArray(jArr);
                     return true;
                 case 6:
-                    int readInt3 = parcel.readInt();
-                    if (readInt3 > 1000000) {
-                        throw new BadParcelableException("Array too large: " + readInt3);
+                    int i5 = parcel.readInt();
+                    if (i5 > 1000000) {
+                        throw new BadParcelableException("Array too large: " + i5);
                     }
-                    jArr = readInt3 >= 0 ? new long[readInt3] : null;
+                    jArr = i5 >= 0 ? new long[i5] : null;
                     parcel.enforceNoDataAvail();
                     onScanFinished(jArr);
                     parcel2.writeNoException();
                     parcel2.writeLongArray(jArr);
                     return true;
                 case 7:
-                    long readLong2 = parcel.readLong();
+                    long j2 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    onTuned(readLong2);
+                    onTuned(j2);
                     return true;
                 case 8:
                     onHeadsetConnected();
@@ -280,21 +280,21 @@ public interface IFMEventListener extends IInterface {
                     onHeadsetDisconnected();
                     return true;
                 case 10:
-                    long readLong3 = parcel.readLong();
-                    String readString = parcel.readString();
-                    String readString2 = parcel.readString();
+                    long j3 = parcel.readLong();
+                    String string = parcel.readString();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    onRadioDataSystemReceived(readLong3, readString, readString2);
+                    onRadioDataSystemReceived(j3, string, string2);
                     return true;
                 case 11:
-                    int readInt4 = parcel.readInt();
-                    int readInt5 = parcel.readInt();
-                    int readInt6 = parcel.readInt();
-                    int readInt7 = parcel.readInt();
-                    int readInt8 = parcel.readInt();
-                    int readInt9 = parcel.readInt();
+                    int i6 = parcel.readInt();
+                    int i7 = parcel.readInt();
+                    int i8 = parcel.readInt();
+                    int i9 = parcel.readInt();
+                    int i10 = parcel.readInt();
+                    int i11 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onRadioTextPlusReceived(readInt4, readInt5, readInt6, readInt7, readInt8, readInt9);
+                    onRadioTextPlusReceived(i6, i7, i8, i9, i10, i11);
                     return true;
                 case 12:
                     onRadioDataSystemEnabled();
@@ -306,9 +306,9 @@ public interface IFMEventListener extends IInterface {
                     onAlternateFrequencyStarted();
                     return true;
                 case 15:
-                    long readLong4 = parcel.readLong();
+                    long j4 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    onAlternateFrequencyReceived(readLong4);
+                    onAlternateFrequencyReceived(j4);
                     return true;
                 case 16:
                     onVolumeLocked();
@@ -317,10 +317,10 @@ public interface IFMEventListener extends IInterface {
                     onRecordingFinished();
                     return true;
                 case 18:
-                    int readInt10 = parcel.readInt();
-                    int readInt11 = parcel.readInt();
+                    int i12 = parcel.readInt();
+                    int i13 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onProgrammeIdentificationExtendedCountryCodesReceived(readInt10, readInt11);
+                    onProgrammeIdentificationExtendedCountryCodesReceived(i12, i13);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -345,224 +345,224 @@ public interface IFMEventListener extends IInterface {
 
             @Override // com.samsung.android.media.fmradio.internal.IFMEventListener
             public void onRadioEnabled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IFMEventListener.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IFMEventListener.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.media.fmradio.internal.IFMEventListener
             public void onRadioDisabled(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IFMEventListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IFMEventListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.media.fmradio.internal.IFMEventListener
             public void onChannelFound(long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IFMEventListener.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IFMEventListener.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.media.fmradio.internal.IFMEventListener
             public void onScanStarted() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IFMEventListener.DESCRIPTOR);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IFMEventListener.DESCRIPTOR);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.media.fmradio.internal.IFMEventListener
             public void onScanStopped(long[] jArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IFMEventListener.DESCRIPTOR);
-                    obtain.writeInt(jArr.length);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    obtain2.readLongArray(jArr);
+                    parcelObtain.writeInterfaceToken(IFMEventListener.DESCRIPTOR);
+                    parcelObtain.writeInt(jArr.length);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    parcelObtain2.readLongArray(jArr);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.media.fmradio.internal.IFMEventListener
             public void onScanFinished(long[] jArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IFMEventListener.DESCRIPTOR);
-                    obtain.writeInt(jArr.length);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    obtain2.readLongArray(jArr);
+                    parcelObtain.writeInterfaceToken(IFMEventListener.DESCRIPTOR);
+                    parcelObtain.writeInt(jArr.length);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    parcelObtain2.readLongArray(jArr);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.media.fmradio.internal.IFMEventListener
             public void onTuned(long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IFMEventListener.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IFMEventListener.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.media.fmradio.internal.IFMEventListener
             public void onHeadsetConnected() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IFMEventListener.DESCRIPTOR);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IFMEventListener.DESCRIPTOR);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.media.fmradio.internal.IFMEventListener
             public void onHeadsetDisconnected() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IFMEventListener.DESCRIPTOR);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IFMEventListener.DESCRIPTOR);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.media.fmradio.internal.IFMEventListener
             public void onRadioDataSystemReceived(long j, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IFMEventListener.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(10, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IFMEventListener.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(10, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.media.fmradio.internal.IFMEventListener
             public void onRadioTextPlusReceived(int i, int i2, int i3, int i4, int i5, int i6) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IFMEventListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeInt(i4);
-                    obtain.writeInt(i5);
-                    obtain.writeInt(i6);
-                    this.mRemote.transact(11, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IFMEventListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeInt(i4);
+                    parcelObtain.writeInt(i5);
+                    parcelObtain.writeInt(i6);
+                    this.mRemote.transact(11, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.media.fmradio.internal.IFMEventListener
             public void onRadioDataSystemEnabled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IFMEventListener.DESCRIPTOR);
-                    this.mRemote.transact(12, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IFMEventListener.DESCRIPTOR);
+                    this.mRemote.transact(12, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.media.fmradio.internal.IFMEventListener
             public void onRadioDataSystemDisabled() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IFMEventListener.DESCRIPTOR);
-                    this.mRemote.transact(13, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IFMEventListener.DESCRIPTOR);
+                    this.mRemote.transact(13, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.media.fmradio.internal.IFMEventListener
             public void onAlternateFrequencyStarted() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IFMEventListener.DESCRIPTOR);
-                    this.mRemote.transact(14, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IFMEventListener.DESCRIPTOR);
+                    this.mRemote.transact(14, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.media.fmradio.internal.IFMEventListener
             public void onAlternateFrequencyReceived(long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IFMEventListener.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(15, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IFMEventListener.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(15, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.media.fmradio.internal.IFMEventListener
             public void onVolumeLocked() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IFMEventListener.DESCRIPTOR);
-                    this.mRemote.transact(16, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IFMEventListener.DESCRIPTOR);
+                    this.mRemote.transact(16, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.media.fmradio.internal.IFMEventListener
             public void onRecordingFinished() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IFMEventListener.DESCRIPTOR);
-                    this.mRemote.transact(17, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IFMEventListener.DESCRIPTOR);
+                    this.mRemote.transact(17, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.media.fmradio.internal.IFMEventListener
             public void onProgrammeIdentificationExtendedCountryCodesReceived(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IFMEventListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(18, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IFMEventListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(18, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

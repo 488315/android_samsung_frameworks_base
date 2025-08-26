@@ -21,7 +21,6 @@ import dagger.Lazy;
 import kotlin.LazyKt__LazyJVMKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SecLightRevealScrimHelper {
     public static final Companion Companion = new Companion(null);
@@ -48,7 +47,6 @@ public final class SecLightRevealScrimHelper {
     public final Point physicalDisplaySize = new Point(1080, 2340);
     public final kotlin.Lazy semWindowManager$delegate = LazyKt__LazyJVMKt.lazy(new SecLightRevealScrimHelper$$ExternalSyntheticLambda0());
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -58,7 +56,6 @@ public final class SecLightRevealScrimHelper {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SecCircleReveal implements LightRevealEffect {
         public float centerX;
         public float centerY;
@@ -80,7 +77,7 @@ public final class SecLightRevealScrimHelper {
             float percentPastThreshold = LightRevealEffect.Companion.getPercentPastThreshold(interpolation, 0.5f);
             float f2 = this.endRadius;
             float f3 = this.startRadius;
-            float m$1 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(f2, f3, f, f3);
+            float fM$1 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(f2, f3, f, f3);
             lightRevealScrim.setRevealGradientEndColorAlpha(1.0f - percentPastThreshold);
             if (LsRune.AOD_LIGHT_REVEAL) {
                 float f4 = 1.0f - f;
@@ -91,7 +88,7 @@ public final class SecLightRevealScrimHelper {
             }
             float f5 = this.centerX;
             float f6 = this.centerY;
-            lightRevealScrim.setRevealGradientBounds(f5 - m$1, f6 - m$1, f5 + m$1, f6 + m$1);
+            lightRevealScrim.setRevealGradientBounds(f5 - fM$1, f6 - fM$1, f5 + fM$1, f6 + fM$1);
         }
     }
 

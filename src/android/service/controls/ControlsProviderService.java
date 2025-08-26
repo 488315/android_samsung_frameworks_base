@@ -13,7 +13,6 @@ import android.os.Message;
 import android.os.Parcelable;
 import android.os.RemoteException;
 import android.service.controls.Control;
-import android.service.controls.ControlsProviderService;
 import android.service.controls.IControlsProvider;
 import android.service.controls.IControlsSubscription;
 import android.service.controls.actions.ControlAction;
@@ -136,13 +135,13 @@ public abstract class ControlsProviderService extends Service {
                 ControlsProviderService.this.performControlAction(actionMessage.mControlId, actionMessage.mAction, consumerFor(actionMessage.mControlId, actionMessage.mCb));
             } else if (i == 4) {
                 SubscriberProxy subscriberProxy3 = new SubscriberProxy(true, ControlsProviderService.this.mToken, (IControlsSubscriber) message.obj);
-                Flow.Publisher<Control> createPublisherForSuggested = ControlsProviderService.this.createPublisherForSuggested();
-                if (createPublisherForSuggested == null) {
+                Flow.Publisher<Control> publisherCreatePublisherForSuggested = ControlsProviderService.this.createPublisherForSuggested();
+                if (publisherCreatePublisherForSuggested == null) {
                     Log.i(ControlsProviderService.TAG, "No publisher provided for suggested controls");
                     subscriberProxy3.onComplete();
                 } else {
                     Log.d(ControlsProviderService.TAG, "createPublisherForSuggested mToken:" + ControlsProviderService.this.mToken);
-                    createPublisherForSuggested.subscribe(subscriberProxy3);
+                    publisherCreatePublisherForSuggested.subscribe(subscriberProxy3);
                 }
             }
             if (message.what == 101) {
@@ -161,7 +160,7 @@ public abstract class ControlsProviderService extends Service {
             return new Consumer() { // from class: android.service.controls.ControlsProviderService$RequestHandler$$ExternalSyntheticLambda0
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    ControlsProviderService.RequestHandler.this.lambda$consumerFor$0(iControlsActionCallback, str, (Integer) obj);
+                    this.f$0.lambda$consumerFor$0(iControlsActionCallback, str, (Integer) obj);
                 }
             };
         }

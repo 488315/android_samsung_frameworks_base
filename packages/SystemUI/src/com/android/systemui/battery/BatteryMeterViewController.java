@@ -2,12 +2,12 @@ package com.android.systemui.battery;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.HandlerExecutor;
 import android.provider.Settings;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import com.android.systemui.BasicRune;
@@ -36,7 +36,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class BatteryMeterViewController extends ViewController {
     public float mAdditionalScaleFactorForSpecificBatteryView;
@@ -45,14 +44,12 @@ public class BatteryMeterViewController extends ViewController {
     public final AnonymousClass3 mBatteryStateChangeCallback;
     public final ConfigurationController mConfigurationController;
     public final AnonymousClass1 mConfigurationListener;
-    public final ContentResolver mContentResolver;
     public final FeatureFlags mFeatureFlags;
     public boolean mIgnoreTunerUpdates;
     public final IndicatorScaleGardener mIndicatorScaleGardener;
     public boolean mIsSubscribedForTunerUpdates;
     public final StatusBarLocation mLocation;
     public final Handler mMainHandler;
-    public final SettingObserver mSettingObserver;
     private SettingsHelper mSettingsHelper;
     private final SettingsHelper.OnChangedCallback mSettingsListener;
     public final SlimIndicatorViewMediator mSlimIndicatorViewMediator;
@@ -63,14 +60,13 @@ public class BatteryMeterViewController extends ViewController {
     public final UserTracker.Callback mUserChangedCallback;
     public final UserTracker mUserTracker;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.battery.BatteryMeterViewController$1, reason: invalid class name */
     public class AnonymousClass1 implements ConfigurationController.ConfigurationListener {
         public AnonymousClass1() {
         }
 
         @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
-        public final void onDensityOrFontScaleChanged() {
+        public final void onDensityOrFontScaleChanged() throws Resources.NotFoundException {
             BatteryMeterViewController batteryMeterViewController = BatteryMeterViewController.this;
             float f = batteryMeterViewController.mIndicatorScaleGardener.getLatestScaleModel(batteryMeterViewController.getContext()).ratio;
             StatusBarLocation statusBarLocation = batteryMeterViewController.mLocation;
@@ -109,14 +105,13 @@ public class BatteryMeterViewController extends ViewController {
         }
 
         @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
-        public final void onDisplayDeviceTypeChanged() {
+        public final void onDisplayDeviceTypeChanged() throws Resources.NotFoundException {
             if (BasicRune.BASIC_FOLDABLE_TYPE_FOLD) {
                 onDensityOrFontScaleChanged();
             }
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.battery.BatteryMeterViewController$4, reason: invalid class name */
     class AnonymousClass4 implements UserTracker.Callback {
         public AnonymousClass4() {
@@ -126,25 +121,18 @@ public class BatteryMeterViewController extends ViewController {
         public final void onUserChanged(int i, Context context) {
             BatteryMeterViewController.this.mMainHandler.postDelayed(new Runnable() { // from class: com.android.systemui.battery.BatteryMeterViewController$4$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
-                public final void run() {
-                    View view;
-                    SettingsHelper settingsHelper;
-                    View view2;
+                public final void run() throws Resources.NotFoundException {
                     BatteryMeterViewController batteryMeterViewController = BatteryMeterViewController.this;
-                    view = ((ViewController) batteryMeterViewController).mView;
-                    BatteryMeterView batteryMeterView = (BatteryMeterView) view;
-                    settingsHelper = batteryMeterViewController.mSettingsHelper;
-                    boolean isShowBatteryPercentInStatusBar = settingsHelper.isShowBatteryPercentInStatusBar();
-                    batteryMeterView.mShowPercentSamsungSetting = isShowBatteryPercentInStatusBar;
-                    batteryMeterView.mSamsungDrawable.setShowPercentSetting(isShowBatteryPercentInStatusBar);
-                    view2 = ((ViewController) batteryMeterViewController).mView;
-                    ((BatteryMeterView) view2).updateShowPercent();
+                    BatteryMeterView batteryMeterView = (BatteryMeterView) ((ViewController) batteryMeterViewController).mView;
+                    boolean zIsShowBatteryPercentInStatusBar = batteryMeterViewController.mSettingsHelper.isShowBatteryPercentInStatusBar();
+                    batteryMeterView.mShowPercentSamsungSetting = zIsShowBatteryPercentInStatusBar;
+                    batteryMeterView.mSamsungDrawable.setShowPercentSetting(zIsShowBatteryPercentInStatusBar);
+                    ((BatteryMeterView) ((ViewController) batteryMeterViewController).mView).updateShowPercent();
                 }
             }, 3000L);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Factory {
         public final BatteryController mBatteryController;
         public final ConfigurationController mConfigurationController;
@@ -175,23 +163,12 @@ public class BatteryMeterViewController extends ViewController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SettingObserver extends ContentObserver {
-        public SettingObserver(Handler handler) {
+        public SettingObserver(BatteryMeterViewController batteryMeterViewController, Handler handler) {
             super(handler);
-        }
-
-        @Override // android.database.ContentObserver
-        public final void onChange(boolean z, Uri uri) {
-            super.onChange(z, uri);
-            ((BatteryMeterView) ((ViewController) BatteryMeterViewController.this).mView).updateShowPercent();
-            if (TextUtils.equals(uri.getLastPathSegment(), "battery_estimates_last_update_time")) {
-                ((BatteryMeterView) ((ViewController) BatteryMeterViewController.this).mView).updatePercentText();
-            }
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SlimIndicatorVisibilityHelper implements SlimIndicatorViewSubscriber {
         public String mTicketName;
 
@@ -202,9 +179,9 @@ public class BatteryMeterViewController extends ViewController {
         @Override // com.android.systemui.slimindicator.SlimIndicatorViewSubscriber
         public final void updateQuickStarStyle() {
             BatteryMeterViewController batteryMeterViewController = BatteryMeterViewController.this;
-            boolean isHiddenBatteryIcon = ((SlimIndicatorViewMediatorImpl) batteryMeterViewController.mSlimIndicatorViewMediator).isHiddenBatteryIcon();
+            boolean zIsHiddenBatteryIcon = ((SlimIndicatorViewMediatorImpl) batteryMeterViewController.mSlimIndicatorViewMediator).isHiddenBatteryIcon();
             if (((BatteryMeterView) ((ViewController) batteryMeterViewController).mView).mBatteryIconView != null) {
-                ((BatteryMeterView) ((ViewController) batteryMeterViewController).mView).mBatteryIconView.setVisibility(isHiddenBatteryIcon ? 8 : 0);
+                ((BatteryMeterView) ((ViewController) batteryMeterViewController).mView).mBatteryIconView.setVisibility(zIsHiddenBatteryIcon ? 8 : 0);
             }
         }
 
@@ -214,11 +191,11 @@ public class BatteryMeterViewController extends ViewController {
     }
 
     /* renamed from: $r8$lambda$-WsMaTglXwEXTMBLRXrucn6xXKE, reason: not valid java name */
-    public static void m1015$r8$lambda$WsMaTglXwEXTMBLRXrucn6xXKE(BatteryMeterViewController batteryMeterViewController) {
+    public static void m1017$r8$lambda$WsMaTglXwEXTMBLRXrucn6xXKE(BatteryMeterViewController batteryMeterViewController) throws Resources.NotFoundException {
         BatteryMeterView batteryMeterView = (BatteryMeterView) batteryMeterViewController.mView;
-        boolean isShowBatteryPercentInStatusBar = batteryMeterViewController.mSettingsHelper.isShowBatteryPercentInStatusBar();
-        batteryMeterView.mShowPercentSamsungSetting = isShowBatteryPercentInStatusBar;
-        batteryMeterView.mSamsungDrawable.setShowPercentSetting(isShowBatteryPercentInStatusBar);
+        boolean zIsShowBatteryPercentInStatusBar = batteryMeterViewController.mSettingsHelper.isShowBatteryPercentInStatusBar();
+        batteryMeterView.mShowPercentSamsungSetting = zIsShowBatteryPercentInStatusBar;
+        batteryMeterView.mSamsungDrawable.setShowPercentSetting(zIsShowBatteryPercentInStatusBar);
         ((BatteryMeterView) batteryMeterViewController.mView).updateShowPercent();
     }
 
@@ -251,7 +228,7 @@ public class BatteryMeterViewController extends ViewController {
 
             /* JADX WARN: Type inference failed for: r10v2, types: [com.android.systemui.battery.BatteryMeterView$1] */
             @Override // com.android.systemui.statusbar.policy.BatteryController.BatteryStateChangeCallback
-            public final void onBatteryLevelChanged(int i, boolean z, boolean z2, int i2, int i3, int i4, boolean z3, int i5) {
+            public final void onBatteryLevelChanged(int i, boolean z, boolean z2, int i2, int i3, int i4, boolean z3, int i5) throws Resources.NotFoundException {
                 BatteryMeterViewController batteryMeterViewController = BatteryMeterViewController.this;
                 BatteryMeterView batteryMeterView2 = (BatteryMeterView) ((ViewController) batteryMeterViewController).mView;
                 if (batteryMeterView2.mIsDirectPowerMode != z3) {
@@ -266,7 +243,7 @@ public class BatteryMeterViewController extends ViewController {
                 }
                 batteryMeterView3.mInvalidateRunnable = new Runnable() { // from class: com.android.systemui.battery.BatteryMeterView.1
                     @Override // java.lang.Runnable
-                    public final void run() {
+                    public final void run() throws Resources.NotFoundException {
                         BatteryMeterView batteryMeterView4 = BatteryMeterView.this;
                         batteryMeterView4.mLevel = samsungBatteryState.level;
                         batteryMeterView4.updatePercentText();
@@ -291,7 +268,7 @@ public class BatteryMeterViewController extends ViewController {
             }
 
             @Override // com.android.systemui.statusbar.policy.BatteryController.BatteryStateChangeCallback
-            public final void onIsBatteryDefenderChanged(boolean z) {
+            public final void onIsBatteryDefenderChanged(boolean z) throws Resources.NotFoundException {
                 BatteryMeterView batteryMeterView2 = (BatteryMeterView) ((ViewController) BatteryMeterViewController.this).mView;
                 boolean z2 = batteryMeterView2.mIsBatteryDefender != z;
                 batteryMeterView2.mIsBatteryDefender = z;
@@ -316,7 +293,7 @@ public class BatteryMeterViewController extends ViewController {
             }
 
             @Override // com.android.systemui.statusbar.policy.BatteryController.BatteryStateChangeCallback
-            public final void onPowerSaveChanged(boolean z) {
+            public final void onPowerSaveChanged(boolean z) throws Resources.NotFoundException {
                 BatteryMeterView batteryMeterView2 = (BatteryMeterView) ((ViewController) BatteryMeterViewController.this).mView;
                 if (z == batteryMeterView2.mPowerSaveEnabled) {
                     return;
@@ -341,8 +318,8 @@ public class BatteryMeterViewController extends ViewController {
         this.mUserChangedCallback = new AnonymousClass4();
         this.mSettingsListener = new SettingsHelper.OnChangedCallback() { // from class: com.android.systemui.battery.BatteryMeterViewController$$ExternalSyntheticLambda0
             @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
-            public final void onChanged(Uri uri) {
-                BatteryMeterViewController.m1015$r8$lambda$WsMaTglXwEXTMBLRXrucn6xXKE(BatteryMeterViewController.this);
+            public final void onChanged(Uri uri) throws Resources.NotFoundException {
+                BatteryMeterViewController.m1017$r8$lambda$WsMaTglXwEXTMBLRXrucn6xXKE(this.f$0);
             }
         };
         this.mAodScaleFactor = 1.15f;
@@ -351,15 +328,14 @@ public class BatteryMeterViewController extends ViewController {
         this.mConfigurationController = configurationController;
         this.mTunerService = tunerService;
         this.mMainHandler = handler;
-        this.mContentResolver = contentResolver;
         this.mFeatureFlags = featureFlags;
         this.mBatteryController = batteryController;
         BatteryMeterView batteryMeterView2 = (BatteryMeterView) this.mView;
         Objects.requireNonNull(batteryController);
         batteryMeterView2.mBatteryEstimateFetcher = new Object() { // from class: com.android.systemui.battery.BatteryMeterViewController$$ExternalSyntheticLambda1
         };
-        this.mSlotBattery = getResources().getString(17043259);
-        this.mSettingObserver = new SettingObserver(handler);
+        this.mSlotBattery = getResources().getString(17043263);
+        new SettingObserver(this, handler);
         this.mSettingsHelper = settingsHelper;
         this.mIndicatorScaleGardener = indicatorScaleGardener;
         this.mSlimIndicatorViewMediator = slimIndicatorViewMediator;
@@ -370,7 +346,7 @@ public class BatteryMeterViewController extends ViewController {
     }
 
     @Override // com.android.systemui.util.ViewController
-    public final void onViewAttached() {
+    public final void onViewAttached() throws Resources.NotFoundException {
         ((ConfigurationControllerImpl) this.mConfigurationController).addCallback(this.mConfigurationListener);
         if (!this.mIsSubscribedForTunerUpdates && !this.mIgnoreTunerUpdates) {
             this.mTunerService.addTunable(this.mTunable, "icon_blacklist");
@@ -379,10 +355,9 @@ public class BatteryMeterViewController extends ViewController {
         ((BatteryControllerImpl) this.mBatteryController).addCallback(this.mBatteryStateChangeCallback);
         this.mSettingsHelper.registerCallback(this.mSettingsListener, Settings.System.getUriFor(SettingsHelper.INDEX_STATUS_BAR_BATTERY_PERCENT));
         BatteryMeterView batteryMeterView = (BatteryMeterView) this.mView;
-        boolean isShowBatteryPercentInStatusBar = this.mSettingsHelper.isShowBatteryPercentInStatusBar();
-        batteryMeterView.mShowPercentSamsungSetting = isShowBatteryPercentInStatusBar;
-        batteryMeterView.mSamsungDrawable.setShowPercentSetting(isShowBatteryPercentInStatusBar);
-        this.mContentResolver.registerContentObserver(Settings.Global.getUriFor("battery_estimates_last_update_time"), false, this.mSettingObserver);
+        boolean zIsShowBatteryPercentInStatusBar = this.mSettingsHelper.isShowBatteryPercentInStatusBar();
+        batteryMeterView.mShowPercentSamsungSetting = zIsShowBatteryPercentInStatusBar;
+        batteryMeterView.mSamsungDrawable.setShowPercentSetting(zIsShowBatteryPercentInStatusBar);
         ((UserTrackerImpl) this.mUserTracker).addCallback(this.mUserChangedCallback, new HandlerExecutor(this.mMainHandler));
         String str = "BatteryMeterViewController";
         if (((BatteryMeterView) this.mView).getTag() != null) {
@@ -407,7 +382,6 @@ public class BatteryMeterViewController extends ViewController {
         }
         ((BatteryControllerImpl) this.mBatteryController).removeCallback(this.mBatteryStateChangeCallback);
         ((UserTrackerImpl) this.mUserTracker).removeCallback(this.mUserChangedCallback);
-        this.mContentResolver.unregisterContentObserver(this.mSettingObserver);
         this.mSettingsHelper.unregisterCallback(this.mSettingsListener);
         SlimIndicatorVisibilityHelper slimIndicatorVisibilityHelper = this.mSlimIndicatorVisibilityHelper;
         String str = slimIndicatorVisibilityHelper.mTicketName;

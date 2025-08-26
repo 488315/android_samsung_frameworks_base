@@ -1,6 +1,7 @@
 package com.android.systemui.qp.util;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Handler;
 import android.os.Message;
@@ -11,7 +12,6 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SubscreenToolTipWindow {
     public final AnonymousClass1 handler = new Handler() { // from class: com.android.systemui.qp.util.SubscreenToolTipWindow.1
@@ -35,9 +35,9 @@ public class SubscreenToolTipWindow {
         this.mContext = context;
         PopupWindow popupWindow = new PopupWindow(context);
         this.mTipWindow = popupWindow;
-        View inflate = ((LayoutInflater) context.getSystemService("layout_inflater")).inflate(R.layout.sec_qs_tooltip_layout, (ViewGroup) null);
-        this.mContentView = inflate;
-        this.mTooltipText = (TextView) inflate.findViewById(R.id.tooltip_text);
+        View viewInflate = ((LayoutInflater) context.getSystemService("layout_inflater")).inflate(R.layout.sec_qs_tooltip_layout, (ViewGroup) null);
+        this.mContentView = viewInflate;
+        this.mTooltipText = (TextView) viewInflate.findViewById(R.id.tooltip_text);
         this.mToolTipString = i;
         popupWindow.setHeight(-2);
         popupWindow.setWidth(-2);
@@ -45,11 +45,11 @@ public class SubscreenToolTipWindow {
         popupWindow.setTouchable(true);
         popupWindow.setFocusable(false);
         popupWindow.setElevation(context.getResources().getDimension(R.dimen.qs_layout_detail_popup_menu_elevation));
-        popupWindow.setContentView(inflate);
+        popupWindow.setContentView(viewInflate);
         popupWindow.setSoftInputMode(3);
     }
 
-    public final void showToolTip(View view) {
+    public final void showToolTip(View view) throws Resources.NotFoundException {
         this.mTooltipText.setText(this.mContext.getResources().getString(this.mToolTipString));
         this.mTooltipText.setTextColor(this.mContext.getColor(R.color.tooltip_text_color));
         this.mTipWindow.setBackgroundDrawable(this.mContext.getResources().getDrawable(R.drawable.sec_qs_tooltip_frame_background));

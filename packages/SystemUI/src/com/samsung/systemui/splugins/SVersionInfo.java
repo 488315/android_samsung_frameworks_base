@@ -9,13 +9,11 @@ import com.samsung.systemui.splugins.annotations.Requirements;
 import com.samsung.systemui.splugins.annotations.Requires;
 import java.util.function.BiConsumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SVersionInfo {
     private Class<?> mDefault;
     private final ArrayMap<Class<?>, Version> mVersions = new ArrayMap<>();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class Version {
         private final boolean mRequired;
         private final int mVersion;
@@ -40,17 +38,17 @@ public class SVersionInfo {
 
     /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$checkVersion$0(ArrayMap arrayMap, Class cls, Version version) {
-        Version version2 = (Version) arrayMap.remove(cls);
-        if (version2 == null) {
-            version2 = createVersion(cls);
+        Version versionCreateVersion = (Version) arrayMap.remove(cls);
+        if (versionCreateVersion == null) {
+            versionCreateVersion = createVersion(cls);
         }
-        if (version2 == null) {
+        if (versionCreateVersion == null) {
             throw new InvalidVersionException(cls.getSimpleName().concat(" does not provide an interface"), false);
         }
-        if (version2.getMajorVersion() <= version.getMajorVersion()) {
+        if (versionCreateVersion.getMajorVersion() <= version.getMajorVersion()) {
             return;
         }
-        throw new InvalidVersionException(cls.getSimpleName() + " is not a supporting version. expected " + version2.mVersion + " but " + version.mVersion, false);
+        throw new InvalidVersionException(cls.getSimpleName() + " is not a supporting version. expected " + versionCreateVersion.mVersion + " but " + version.mVersion, false);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -73,7 +71,7 @@ public class SVersionInfo {
         sVersionInfo.mVersions.forEach(new BiConsumer() { // from class: com.samsung.systemui.splugins.SVersionInfo$$ExternalSyntheticLambda0
             @Override // java.util.function.BiConsumer
             public final void accept(Object obj, Object obj2) {
-                SVersionInfo.this.lambda$checkVersion$0(arrayMap, (Class) obj, (SVersionInfo.Version) obj2);
+                this.f$0.lambda$checkVersion$0(arrayMap, (Class) obj, (SVersionInfo.Version) obj2);
             }
         });
         arrayMap.forEach(new SVersionInfo$$ExternalSyntheticLambda1());
@@ -91,7 +89,6 @@ public class SVersionInfo {
         return !this.mVersions.isEmpty();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class InvalidVersionException extends RuntimeException {
         private final boolean mTooNew;
 

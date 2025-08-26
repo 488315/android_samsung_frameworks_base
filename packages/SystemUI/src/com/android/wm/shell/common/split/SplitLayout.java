@@ -14,9 +14,12 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.Handler;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.Slog;
 import android.util.TypedValue;
 import android.view.Display;
+import android.view.InsetsController;
+import android.view.InsetsSource;
 import android.view.InsetsSourceControl;
 import android.view.InsetsState;
 import android.view.RoundedCorner;
@@ -43,16 +46,17 @@ import com.android.wm.shell.protolog.ShellProtoLogGroup;
 import com.android.wm.shell.shared.animation.Interpolators;
 import com.android.wm.shell.shared.desktopmode.DesktopState;
 import com.android.wm.shell.splitscreen.StageCoordinator;
-import com.android.wm.shell.splitscreen.StageCoordinator$$ExternalSyntheticLambda28;
+import com.android.wm.shell.splitscreen.StageCoordinator$$ExternalSyntheticLambda31;
 import com.android.wm.shell.splitscreen.StageCoordinator$$ExternalSyntheticLambda6;
 import com.android.wm.shell.splitscreen.StageTaskListener;
 import com.samsung.android.multiwindow.MultiWindowCoreState;
+import com.samsung.android.multiwindow.MultiWindowUtils;
 import com.samsung.android.rune.CoreRune;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SplitLayout implements DisplayInsetsController.OnInsetsChangedListener {
     public final boolean mAllowLeftRightSplitInPortrait;
@@ -122,7 +126,6 @@ public final class SplitLayout implements DisplayInsetsController.OnInsetsChange
     public static final Interpolator SHRINK_INTERPOLATOR = new PathInterpolator(0.2f, 0.0f, 0.0f, 1.0f);
     public static final Interpolator GROW_INTERPOLATOR = new PathInterpolator(0.45f, 0.0f, 0.5f, 1.0f);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ImePositionProcessor implements DisplayImeController.ImePositionProcessor {
         public float mDimValue1;
         public float mDimValue2;
@@ -262,24 +265,78 @@ public final class SplitLayout implements DisplayInsetsController.OnInsetsChange
             ((StageCoordinator) SplitLayout.this.mSplitLayoutHandler).setExcludeImeInsets(true);
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:104:0x0149  */
-        /* JADX WARN: Removed duplicated region for block: B:45:0x00c2  */
-        /* JADX WARN: Removed duplicated region for block: B:61:0x0150  */
-        /* JADX WARN: Removed duplicated region for block: B:85:0x01c2  */
-        /* JADX WARN: Removed duplicated region for block: B:89:0x01c9  */
-        /* JADX WARN: Removed duplicated region for block: B:92:0x01d4 A[RETURN] */
-        /* JADX WARN: Removed duplicated region for block: B:95:0x017f  */
+        /* JADX WARN: Removed duplicated region for block: B:60:0x00bf  */
         @Override // com.android.wm.shell.common.DisplayImeController.ImePositionProcessor
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final int onImeStartPositioning(int r10, int r11, boolean r12, boolean r13, int r14) {
-            /*
-                Method dump skipped, instructions count: 470
-                To view this dump change 'Code comments level' option to 'DEBUG'
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.common.split.SplitLayout.ImePositionProcessor.onImeStartPositioning(int, int, boolean, boolean, int):int");
+        public final int onImeStartPositioning(int i, int i2, boolean z, boolean z2, int i3) {
+            int i4;
+            DividerView dividerView;
+            int i5 = this.mDisplayId;
+            if (i == i5) {
+                SplitLayout splitLayout = SplitLayout.this;
+                if (splitLayout.mInitialized) {
+                    boolean z3 = CoreRune.MW_MULTI_SPLIT_ADJUST_FOR_IME;
+                    ShellTaskOrganizer shellTaskOrganizer = splitLayout.mTaskOrganizer;
+                    SplitLayoutHandler splitLayoutHandler = splitLayout.mSplitLayoutHandler;
+                    int splitItemStagePosition = z3 ? ((StageCoordinator) splitLayoutHandler).getSplitItemStagePosition(shellTaskOrganizer.getImeTarget(i5)) : ((StageCoordinator) splitLayoutHandler).getSplitItemPosition(shellTaskOrganizer.getImeTarget(i5));
+                    boolean z4 = !z3 ? splitItemStagePosition == -1 : splitItemStagePosition == 0;
+                    this.mHasImeFocus = z4;
+                    if (z4 || !z) {
+                        this.mStartImeTop = z ? i2 : i3;
+                        if (z) {
+                            i2 = i3;
+                        }
+                        this.mEndImeTop = i2;
+                        this.mImeShown = z;
+                        this.mLastYOffset = this.mYOffsetForIme;
+                        boolean z5 = !z3 ? splitItemStagePosition != 1 || z2 || SplitLayout.isLandscape(splitLayout.mRootBounds) || !this.mImeShown : (splitItemStagePosition & 64) == 0 || z2 || !z || (CoreRune.MW_PARALLEL_MULTI_SPLIT && splitLayout.mParallelMultiSplit && SplitLayout.isLandscape(splitLayout.mRootBounds));
+                        if (splitLayout.mRootBounds.height() / splitLayout.mRootBounds.width() >= 2.0555556f) {
+                            boolean z6 = i3 - (getMinTopStackBottom() + splitLayout.mDividerSize) >= ((int) (((((float) splitLayout.mDensity) / 160.0f) * 132.0f) + 0.5f));
+                            if (z5) {
+                                int iAbs = Math.abs(this.mEndImeTop - this.mStartImeTop);
+                                int topStageBottom = z6 ? ((CoreRune.MW_MULTI_SPLIT_FREE_POSITION && splitLayout.mStageCoordinator.isMultiSplitActive()) ? splitLayout.mStageCoordinator.getTopStageBottom() : splitLayout.getTopLeftBounds().bottom) - getMinTopStackBottom() : z3 ? splitLayout.mStageCoordinator.getTopStageBottom() - ((int) ((r1 - splitLayout.getDisplayStableInsets(splitLayout.mContext).top) * 0.7f)) : (int) Math.max(splitLayout.getTopLeftBounds().bottom - (splitLayout.getTopLeftBounds().height() * 0.3f), 0.0f);
+                                i4 = -((CoreRune.MW_MULTI_SPLIT_BOUNDS_POLICY || CoreRune.MW_SPLIT_LARGE_SCREEN_BOUNDS_POLICY) ? Math.min(iAbs - (splitLayout.getDisplayLayout(splitLayout.mContext).stableInsets(true).bottom + MultiWindowUtils.getRoundedCornerRadius(splitLayout.mContext)), topStageBottom) : Math.min(iAbs, topStageBottom));
+                            } else {
+                                i4 = 0;
+                            }
+                            this.mTargetYOffset = i4;
+                            int i6 = this.mLastYOffset;
+                            if (i4 != i6) {
+                                if (ProtoLogImpl_1771455215.Cache.WM_SHELL_SPLIT_SCREEN_enabled[1]) {
+                                    ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_SPLIT_SCREEN, 506703508172978242L, 5, Long.valueOf(i6), Long.valueOf(i4));
+                                }
+                                int i7 = this.mTargetYOffset;
+                                this.mTaskBoundsAdjusted = i7 != 0;
+                                ((StageCoordinator) splitLayoutHandler).setLayoutOffsetTargetForEnsureDock(i7, splitLayout);
+                            } else if (this.mTaskBoundsAdjusted && i4 == 0) {
+                                Slog.d("SplitLayout", "onImeStartPositioning. y offset is 0 but task adjusted. reset task bounds.");
+                                this.mTaskBoundsAdjusted = false;
+                                ((StageCoordinator) splitLayoutHandler).setLayoutOffsetTargetForEnsureDock(0, splitLayout);
+                            }
+                            splitLayout.setDividerInteractive("onImeStartPositioning", (this.mImeShown && this.mHasImeFocus && !z2) ? false : true, true);
+                            if (z3 && splitLayout.mStageCoordinator.isMultiSplitActive()) {
+                                boolean z7 = (this.mImeShown && this.mHasImeFocus) ? false : true;
+                                DividerView dividerView2 = splitLayout.mCellSplitWindowManager.mDividerView;
+                                if (dividerView2 != null) {
+                                    dividerView2.setInteractive("onImeStartPositioning", z7, true);
+                                }
+                            }
+                            if (this.mImeShown) {
+                                ((StageCoordinator) splitLayoutHandler).setExcludeImeInsets(false);
+                            }
+                            if (this.mTargetYOffset != this.mLastYOffset) {
+                                return 1;
+                            }
+                        }
+                    } else if (!z && (dividerView = splitLayout.mSplitWindowManager.mDividerView) != null) {
+                        dividerView.setInteractive("onImeStartPositioning", true, false);
+                        return 0;
+                    }
+                }
+            }
+            return 0;
         }
 
         public final void onProgress(float f) {
@@ -305,7 +362,6 @@ public final class SplitLayout implements DisplayInsetsController.OnInsetsChange
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface SplitLayoutHandler {
     }
 
@@ -385,8 +441,8 @@ public final class SplitLayout implements DisplayInsetsController.OnInsetsChange
     }
 
     public final DividerSnapAlgorithm createCellSnapAlgorithm() {
-        int width;
-        int height;
+        int iWidth;
+        int iHeight;
         CellUtil.getCellAndHostArea(this.mCellStageWindowConfigPosition, getTopLeftBounds(), getBottomRightBounds(), this.mHostAndCellArea, isVerticalDivision());
         Rect rect = new Rect(this.mHostAndCellArea);
         Rect rect2 = new Rect(getDisplayStableInsets(this.mContext));
@@ -413,8 +469,8 @@ public final class SplitLayout implements DisplayInsetsController.OnInsetsChange
                 rect.right += rect2.right;
                 rect2.bottom = 0;
             }
-            width = rect.width();
-            height = rect.height();
+            iWidth = rect.width();
+            iHeight = rect.height();
         } else {
             if (isVerticalDivision()) {
                 rect2.left = rect.left;
@@ -427,10 +483,10 @@ public final class SplitLayout implements DisplayInsetsController.OnInsetsChange
                 rect.right += rect2.right;
                 rect.bottom += rect2.bottom;
             }
-            width = this.mRootBounds.width();
-            height = this.mRootBounds.height();
+            iWidth = this.mRootBounds.width();
+            iHeight = this.mRootBounds.height();
         }
-        return new DividerSnapAlgorithm(this.mContext.getResources(), width, height, this.mDividerSize, isVerticalDivision(), rect2, this.mPinnedTaskbarInsets.toRect(), -1, false, true, true, true);
+        return new DividerSnapAlgorithm(this.mContext.getResources(), iWidth, iHeight, this.mDividerSize, isVerticalDivision(), rect2, this.mPinnedTaskbarInsets.toRect(), -1, false, true, true, true);
     }
 
     public void flingDividerPosition(int i, int i2, int i3, Interpolator interpolator, Runnable runnable) {
@@ -443,7 +499,7 @@ public final class SplitLayout implements DisplayInsetsController.OnInsetsChange
         flingDividerPosition(this.mDividerPosition, i, 450, Interpolators.FAST_OUT_SLOW_IN, new Runnable() { // from class: com.android.wm.shell.common.split.SplitLayout$$ExternalSyntheticLambda10
             @Override // java.lang.Runnable
             public final void run() {
-                SplitLayout splitLayout = SplitLayout.this;
+                SplitLayout splitLayout = this.f$0;
                 int i2 = i;
                 DividerSnapAlgorithm.SnapTarget snapTarget2 = snapTarget;
                 StageCoordinator$$ExternalSyntheticLambda6 stageCoordinator$$ExternalSyntheticLambda62 = stageCoordinator$$ExternalSyntheticLambda6;
@@ -456,10 +512,10 @@ public final class SplitLayout implements DisplayInsetsController.OnInsetsChange
     }
 
     public final void flingDividerToDismiss(final int i, final boolean z) {
-        flingDividerPosition(this.mDividerPosition, z ? this.mDividerSnapAlgorithm.mDismissEndTarget.position : this.mDividerSnapAlgorithm.mDismissStartTarget.position, 450, Interpolators.FAST_OUT_SLOW_IN, new Runnable() { // from class: com.android.wm.shell.common.split.SplitLayout$$ExternalSyntheticLambda5
+        flingDividerPosition(this.mDividerPosition, z ? this.mDividerSnapAlgorithm.mDismissEndTarget.position : this.mDividerSnapAlgorithm.mDismissStartTarget.position, 450, Interpolators.FAST_OUT_SLOW_IN, new Runnable() { // from class: com.android.wm.shell.common.split.SplitLayout$$ExternalSyntheticLambda9
             @Override // java.lang.Runnable
             public final void run() {
-                SplitLayout splitLayout = SplitLayout.this;
+                SplitLayout splitLayout = this.f$0;
                 boolean z2 = z;
                 ((StageCoordinator) splitLayout.mSplitLayoutHandler).onSnappedToDismiss(i, z2, false);
             }
@@ -522,41 +578,41 @@ public final class SplitLayout implements DisplayInsetsController.OnInsetsChange
 
     public final Rect getDisplayStableInsets(Context context) {
         DisplayLayout displayLayout = getDisplayLayout(context);
-        int systemBars = WindowInsets.Type.systemBars() | WindowInsets.Type.displayCutout();
+        int iSystemBars = WindowInsets.Type.systemBars() | WindowInsets.Type.displayCutout();
         if (MultiWindowCoreState.MW_SPLIT_IMMERSIVE_MODE_ENABLED) {
             return Insets.NONE.toRect();
         }
         if (MultiWindowCoreState.MW_NAVISTAR_SPLIT_IMMERSIVE_MODE_ENABLED) {
-            systemBars &= ~WindowInsets.Type.navigationBars();
+            iSystemBars &= ~WindowInsets.Type.navigationBars();
         }
         if (CoreRune.MW_MULTI_SPLIT_BOUNDS_POLICY_IGNORING_CUTOUT) {
-            systemBars &= ~WindowInsets.Type.displayCutout();
+            iSystemBars &= ~WindowInsets.Type.displayCutout();
         }
         if (CoreRune.MW_MULTI_SPLIT_BOUNDS_POLICY) {
-            systemBars &= ~WindowInsets.Type.statusBars();
+            iSystemBars &= ~WindowInsets.Type.statusBars();
         }
-        return displayLayout != null ? displayLayout.stableInsets(true) : ((WindowManager) context.getSystemService(WindowManager.class)).getMaximumWindowMetrics().getWindowInsets().getInsetsIgnoringVisibility(systemBars).toRect();
+        return displayLayout != null ? displayLayout.stableInsets(true) : ((WindowManager) context.getSystemService(WindowManager.class)).getMaximumWindowMetrics().getWindowInsets().getInsetsIgnoringVisibility(iSystemBars).toRect();
     }
 
     public final int getDividePositionByRatio() {
         int i;
-        int height;
+        int iHeight;
         int i2;
-        boolean isVerticalDivision = CoreRune.MW_MULTI_SPLIT_FREE_POSITION ? isVerticalDivision() : isLandscape(this.mRootBounds);
+        boolean zIsVerticalDivision = CoreRune.MW_MULTI_SPLIT_FREE_POSITION ? isVerticalDivision() : isLandscape(this.mRootBounds);
         this.mTempRect.set(this.mRootBounds);
         this.mTempRect.inset(getDisplayStableInsets(this.mContext));
-        if (isVerticalDivision) {
+        if (zIsVerticalDivision) {
             Rect rect = this.mTempRect;
             i = rect.left;
-            height = rect.width();
+            iHeight = rect.width();
             i2 = this.mDividerSize;
         } else {
             Rect rect2 = this.mTempRect;
             i = rect2.top;
-            height = rect2.height();
+            iHeight = rect2.height();
             i2 = this.mDividerSize;
         }
-        return this.mDividerSnapAlgorithm.calculateNonDismissingSnapTarget(i + ((int) (((height - i2) * 0.5f) + 0.5f))).position;
+        return this.mDividerSnapAlgorithm.calculateNonDismissingSnapTarget(i + ((int) (((iHeight - i2) * 0.5f) + 0.5f))).position;
     }
 
     public final SurfaceControl getDividerLeash() {
@@ -593,7 +649,23 @@ public final class SplitLayout implements DisplayInsetsController.OnInsetsChange
     }
 
     public final Rect getNotAdjustedBounds(int i) {
-        return i == 4 ? this.mBounds3 : isVerticalDivision() ? this.mHostBounds : (this.mCellStageWindowConfigPosition & 64) != 0 ? this.mHostBounds : getBottomRightBounds();
+        if (i == 4) {
+            return this.mBounds3;
+        }
+        if (isVerticalDivision()) {
+            return this.mHostBounds;
+        }
+        if (!CoreRune.MW_PARALLEL_MULTI_SPLIT || !this.mParallelMultiSplit) {
+            return (this.mCellStageWindowConfigPosition & 64) != 0 ? this.mHostBounds : getBottomRightBounds();
+        }
+        StageCoordinator stageCoordinator = this.mStageCoordinator;
+        int i2 = 1;
+        if (i == 1) {
+            i2 = 0;
+        } else if (i != 2) {
+            i2 = i != 4 ? -1 : 5;
+        }
+        return stageCoordinator.getStageBounds(i2);
     }
 
     public final Rect getRefHostBounds() {
@@ -608,7 +680,7 @@ public final class SplitLayout implements DisplayInsetsController.OnInsetsChange
     }
 
     public final int getSmallestWidthDp(Rect rect) {
-        Insets calculateInsets;
+        Insets insetsCalculateInsets;
         this.mTempRect.set(rect);
         if (!CoreRune.MW_MULTI_SPLIT_BOUNDS_POLICY && !CoreRune.MW_SPLIT_LARGE_SCREEN_BOUNDS_POLICY) {
             Rect rect2 = new Rect();
@@ -617,16 +689,16 @@ public final class SplitLayout implements DisplayInsetsController.OnInsetsChange
                 this.mTempRect.inset(getDisplayStableInsets(this.mContext));
             } else {
                 rect2.set(0, 0, displayLayout.mWidth, displayLayout.mHeight);
-                int navigationBars = WindowInsets.Type.navigationBars() | WindowInsets.Type.displayCutout();
+                int iNavigationBars = WindowInsets.Type.navigationBars() | WindowInsets.Type.displayCutout();
                 if (MultiWindowCoreState.MW_SPLIT_IMMERSIVE_MODE_ENABLED) {
-                    calculateInsets = Insets.NONE;
+                    insetsCalculateInsets = Insets.NONE;
                 } else {
                     if (MultiWindowCoreState.MW_NAVISTAR_SPLIT_IMMERSIVE_MODE_ENABLED) {
-                        navigationBars &= ~WindowInsets.Type.navigationBars();
+                        iNavigationBars &= ~WindowInsets.Type.navigationBars();
                     }
-                    calculateInsets = this.mInsetsState.calculateInsets(rect2, navigationBars, false);
+                    insetsCalculateInsets = this.mInsetsState.calculateInsets(rect2, iNavigationBars, false);
                 }
-                rect2.inset(calculateInsets);
+                rect2.inset(insetsCalculateInsets);
                 this.mTempRect.intersect(rect2);
             }
         }
@@ -644,34 +716,145 @@ public final class SplitLayout implements DisplayInsetsController.OnInsetsChange
         return topLeftBounds;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:22:0x00c2  */
+    /* JADX WARN: Removed duplicated region for block: B:42:0x00b9  */
+    /* JADX WARN: Removed duplicated region for block: B:45:0x00c2  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void initDividerPosition(android.graphics.Rect r5, boolean r6, boolean r7) {
-        /*
-            Method dump skipped, instructions count: 302
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.common.split.SplitLayout.initDividerPosition(android.graphics.Rect, boolean, boolean):void");
+    public final void initDividerPosition(Rect rect, boolean z, boolean z2) {
+        float fWidth;
+        int iWidth;
+        float fWidth2;
+        int i;
+        float f;
+        int iHeight;
+        this.mTempRect2.set(this.mRootBounds);
+        this.mTempRect2.inset(getDisplayStableInsets(this.mContext));
+        boolean zEquals = rect.equals(this.mRootBounds);
+        boolean z3 = CoreRune.MW_MULTI_SPLIT_FREE_POSITION;
+        if (!z3) {
+            fWidth = this.mDividerPosition / (z ? rect.width() : rect.height());
+            iWidth = this.mIsLeftRightSplit ? this.mRootBounds.width() : this.mRootBounds.height();
+        } else {
+            if (zEquals) {
+                fWidth = (this.mDividerPosition - (z2 ? this.mTempRect2.left : this.mTempRect2.top)) / ((z2 ? this.mTempRect2.width() : this.mTempRect2.height()) - this.mDividerSize);
+                fWidth2 = (isVerticalDivision() ? this.mTempRect2.width() : this.mTempRect2.height()) - this.mDividerSize;
+                if (z3 || !zEquals) {
+                    i = (int) ((fWidth2 * fWidth) + 0.5f);
+                } else {
+                    i = ((int) (fWidth2 * fWidth)) + (isVerticalDivision() ? this.mTempRect2.left : this.mTempRect2.top);
+                }
+                if (CoreRune.MW_MULTI_SPLIT_CELL_DIVIDER) {
+                    boolean z4 = CoreRune.MW_PARALLEL_MULTI_SPLIT;
+                    if (z4 && this.mParallelMultiSplit) {
+                        f = this.mCellDividerPosition;
+                        iHeight = z2 ? rect.width() : rect.height();
+                    } else {
+                        f = this.mCellDividerPosition;
+                        iHeight = z2 ? rect.height() : rect.width();
+                    }
+                    setCellDividePosition((int) (((z4 && this.mParallelMultiSplit) ? isVerticalDivision() ? this.mRootBounds.width() : this.mRootBounds.height() : isVerticalDivision() ? this.mRootBounds.height() : this.mRootBounds.width()) * (f / iHeight)), null, false);
+                }
+                int i2 = this.mDividerSnapAlgorithm.calculateNonDismissingSnapTarget(i).position;
+                this.mDividerPosition = i2;
+                updateBounds(i2);
+            }
+            fWidth = this.mDividerPosition / (z2 ? rect.width() : rect.height());
+            iWidth = isVerticalDivision() ? this.mRootBounds.width() : this.mRootBounds.height();
+        }
+        fWidth2 = iWidth;
+        if (z3) {
+            i = (int) ((fWidth2 * fWidth) + 0.5f);
+        }
+        if (CoreRune.MW_MULTI_SPLIT_CELL_DIVIDER) {
+        }
+        int i22 = this.mDividerSnapAlgorithm.calculateNonDismissingSnapTarget(i).position;
+        this.mDividerPosition = i22;
+        updateBounds(i22);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0086  */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x00e0  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x00e5  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x007e  */
+    /* JADX WARN: Removed duplicated region for block: B:27:0x0072  */
+    /* JADX WARN: Removed duplicated region for block: B:56:0x00ed  */
     @Override // com.android.wm.shell.common.DisplayInsetsController.OnInsetsChangedListener
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void insetsChanged(android.view.InsetsState r13) {
-        /*
-            Method dump skipped, instructions count: 250
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.common.split.SplitLayout.insetsChanged(android.view.InsetsState):void");
+    public final void insetsChanged(InsetsState insetsState) {
+        boolean z;
+        Insets insetsCalculateVisibleInsets;
+        SplitLayout splitLayout;
+        SplitWindowManager splitWindowManager;
+        DividerView dividerView;
+        if ((!CoreRune.MW_MULTI_SPLIT_FOLDING_POLICY || !this.mStageCoordinator.isApplyFoldingPolicy(true)) && !MultiWindowCoreState.MW_SPLIT_IMMERSIVE_MODE_ENABLED && !MultiWindowCoreState.MW_NAVISTAR_SPLIT_IMMERSIVE_MODE_ENABLED && !this.mInsetsState.equals(insetsState)) {
+            Insets insetsCalculateInsets = insetsState.calculateInsets(insetsState.getDisplayFrame(), WindowInsets.Type.navigationBars(), false);
+            if (this.mNavigationBarRect.equals(insetsCalculateInsets.toRect())) {
+                z = false;
+            } else {
+                if ((this.mNavigationBarRect.isEmpty() || insetsCalculateInsets.toRect().isEmpty()) && this.mImePositionProcessor.mYOffsetForIme != 0) {
+                    this.mNavigationBarRect.set(insetsCalculateInsets.toRect());
+                } else {
+                    this.mNavigationBarRect.set(insetsCalculateInsets.toRect());
+                    if (insetsState.getDisplayFrame().equals(this.mRootBounds)) {
+                        z = true;
+                    }
+                }
+                z = false;
+            }
+        }
+        this.mInsetsState.set(insetsState);
+        boolean z2 = this.mInitialized;
+        SplitLayoutHandler splitLayoutHandler = this.mSplitLayoutHandler;
+        if (!z2) {
+            if (z) {
+                ((StageCoordinator) splitLayoutHandler).handleLayoutSizeChange(this, false);
+                return;
+            }
+            return;
+        }
+        if (this.mFreezeDividerWindow) {
+            return;
+        }
+        if (CoreRune.MW_MULTI_FOLD_SPLIT_FOLDING_POLICY && this.mStageCoordinator.isDeviceHalfClosed()) {
+            Slog.d("SplitLayout", "insetsChanged: skip updateSurface by half closed");
+            return;
+        }
+        int iSourceSize = insetsState.sourceSize() - 1;
+        while (true) {
+            if (iSourceSize < 0) {
+                insetsCalculateVisibleInsets = Insets.NONE;
+                break;
+            }
+            InsetsSource insetsSourceSourceAt = insetsState.sourceAt(iSourceSize);
+            if (insetsSourceSourceAt.getType() == WindowInsets.Type.navigationBars() && insetsSourceSourceAt.hasFlags(2)) {
+                insetsCalculateVisibleInsets = insetsSourceSourceAt.calculateVisibleInsets(this.mRootBounds);
+                break;
+            }
+            iSourceSize--;
+        }
+        if (!this.mPinnedTaskbarInsets.equals(insetsCalculateVisibleInsets)) {
+            this.mPinnedTaskbarInsets = insetsCalculateVisibleInsets;
+            updateLayouts();
+            DividerSnapAlgorithm.SnapTarget snapTargetCalculateSnapTarget = this.mDividerSnapAlgorithm.calculateSnapTarget(this.mDividerPosition, false);
+            int i = snapTargetCalculateSnapTarget.position;
+            int i2 = this.mDividerPosition;
+            if (i != i2) {
+                splitLayout = this;
+                splitLayout.snapToTarget(i2, snapTargetCalculateSnapTarget, 300, InsetsController.RESIZE_INTERPOLATOR, false);
+            } else {
+                splitLayout = this;
+            }
+        }
+        DividerView dividerView2 = splitLayout.mSplitWindowManager.mDividerView;
+        if (dividerView2 != null) {
+            dividerView2.onInsetsChanged(insetsState, true);
+        }
+        if (z) {
+            ((StageCoordinator) splitLayoutHandler).handleLayoutSizeChange(splitLayout, false);
+        }
+        if (!CoreRune.MW_MULTI_SPLIT_CELL_DIVIDER || (splitWindowManager = splitLayout.mCellSplitWindowManager) == null || (dividerView = splitWindowManager.mDividerView) == null) {
+            return;
+        }
+        dividerView.onInsetsChanged(insetsState, true);
     }
 
     @Override // com.android.wm.shell.common.DisplayInsetsController.OnInsetsChangedListener
@@ -709,20 +892,20 @@ public final class SplitLayout implements DisplayInsetsController.OnInsetsChange
         Rect rect4 = new Rect(rect2);
         final float f3 = rect4.left - rect3.left;
         final float f4 = rect4.top - rect3.top;
-        final float width = rect4.width() - rect3.width();
-        final float height = rect4.height() - rect3.height();
+        final float fWidth = rect4.width() - rect3.width();
+        final float fHeight = rect4.height() - rect3.height();
         float radius = this.mSplitWindowManager.mDividerView.getDisplay().getRoundedCorner(0) != null ? r0.getRadius() : 0.0f;
         DisplayMetrics displayMetrics = this.mContext.getResources().getDisplayMetrics();
         PipUtils pipUtils = PipUtils.INSTANCE;
-        final float applyDimension = ((int) TypedValue.applyDimension(1, 14.0f, displayMetrics)) * 2.0f;
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-        ofFloat.setInterpolator(Interpolators.LINEAR);
+        final float fApplyDimension = ((int) TypedValue.applyDimension(1, 14.0f, displayMetrics)) * 2.0f;
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+        valueAnimatorOfFloat.setInterpolator(Interpolators.LINEAR);
         final SurfaceControl surfaceControl = dividerLeash;
         final float f5 = radius;
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.common.split.SplitLayout$$ExternalSyntheticLambda9
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.common.split.SplitLayout$$ExternalSyntheticLambda8
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                SplitLayout splitLayout = SplitLayout.this;
+                SplitLayout splitLayout = this.f$0;
                 SurfaceControl surfaceControl2 = surfaceControl;
                 boolean z5 = z;
                 SurfaceControl.Transaction transaction2 = transaction;
@@ -730,10 +913,10 @@ public final class SplitLayout implements DisplayInsetsController.OnInsetsChange
                 Rect rect5 = rect3;
                 float f7 = f3;
                 float f8 = f4;
-                float f9 = width;
-                float f10 = height;
+                float f9 = fWidth;
+                float f10 = fHeight;
                 boolean z6 = z2;
-                float f11 = applyDimension;
+                float f11 = fApplyDimension;
                 ActivityManager.RunningTaskInfo runningTaskInfo2 = runningTaskInfo;
                 float f12 = f;
                 float f13 = f2;
@@ -747,26 +930,26 @@ public final class SplitLayout implements DisplayInsetsController.OnInsetsChange
                 if (z5) {
                     transaction2.setCornerRadius(surfaceControl2, f6);
                 }
-                float floatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
-                float interpolation = ((PathInterpolator) Interpolators.EMPHASIZED).getInterpolation(floatValue);
+                float fFloatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
+                float interpolation = ((PathInterpolator) Interpolators.EMPHASIZED).getInterpolation(fFloatValue);
                 float f14 = (f7 * interpolation) + rect5.left;
                 float f15 = (f8 * interpolation) + rect5.top;
-                int width2 = (int) ((f9 * interpolation) + rect5.width());
-                int height2 = (int) ((interpolation * f10) + rect5.height());
+                int iWidth = (int) ((f9 * interpolation) + rect5.width());
+                int iHeight = (int) ((interpolation * f10) + rect5.height());
                 if (z6) {
-                    float f16 = height2;
+                    float f16 = iHeight;
                     float f17 = f11 / f16;
-                    float f18 = width2;
+                    float f18 = iWidth;
                     float f19 = f11 / f18;
-                    float interpolation2 = floatValue <= 0.166f ? ((PathInterpolator) SplitLayout.SHRINK_INTERPOLATOR).getInterpolation(floatValue / 0.166f) : 1.0f - ((PathInterpolator) SplitLayout.GROW_INTERPOLATOR).getInterpolation((floatValue - 0.166f) / 0.834f);
+                    float interpolation2 = fFloatValue <= 0.166f ? ((PathInterpolator) SplitLayout.SHRINK_INTERPOLATOR).getInterpolation(fFloatValue / 0.166f) : 1.0f - ((PathInterpolator) SplitLayout.GROW_INTERPOLATOR).getInterpolation((fFloatValue - 0.166f) / 0.834f);
                     float f20 = f17 * interpolation2;
                     float f21 = 1.0f - f20;
                     float f22 = f19 * interpolation2;
                     float f23 = 1.0f - f22;
                     f14 += (f20 * f18) / 2.0f;
                     f15 += (f22 * f16) / 2.0f;
-                    width2 = (int) (f18 * f21);
-                    height2 = (int) (f16 * f23);
+                    iWidth = (int) (f18 * f21);
+                    iHeight = (int) (f16 * f23);
                     transaction2.setScale(surfaceControl2, f21, f23);
                 }
                 if (runningTaskInfo2 != null) {
@@ -776,8 +959,8 @@ public final class SplitLayout implements DisplayInsetsController.OnInsetsChange
                 }
                 if (f12 == 0.0f && f13 == 0.0f) {
                     transaction2.setPosition(surfaceControl2, f14, f15);
-                    splitLayout.mTempRect.set((int) f14, (int) f15, (int) (f14 + width2), (int) (f15 + height2));
-                    transaction2.setWindowCrop(surfaceControl2, width2, height2);
+                    splitLayout.mTempRect.set((int) f14, (int) f15, (int) (f14 + iWidth), (int) (f15 + iHeight));
+                    transaction2.setWindowCrop(surfaceControl2, iWidth, iHeight);
                     if (z7) {
                         splitDecorManager2.drawNextVeilFrameForSwapAnimation(runningTaskInfo2, splitLayout.mTempRect, transaction2, z6, surfaceControl2, 0.0f, 0.0f);
                     }
@@ -788,7 +971,7 @@ public final class SplitLayout implements DisplayInsetsController.OnInsetsChange
                     float f25 = i;
                     float f26 = i2;
                     transaction2.setPosition(surfaceControl2, f14 + f25, f24 + f26);
-                    splitLayout.mTempRect.set(0, 0, width2, height2);
+                    splitLayout.mTempRect.set(0, 0, iWidth, iHeight);
                     splitLayout.mTempRect.offsetTo(-i, -i2);
                     transaction2.setCrop(surfaceControl2, splitLayout.mTempRect);
                     if (z7) {
@@ -798,10 +981,10 @@ public final class SplitLayout implements DisplayInsetsController.OnInsetsChange
                 transaction2.apply();
             }
         });
-        return ofFloat;
+        return valueAnimatorOfFloat;
     }
 
-    public final void playSwapAnimation(SurfaceControl.Transaction transaction, StageTaskListener stageTaskListener, StageTaskListener stageTaskListener2, final StageCoordinator$$ExternalSyntheticLambda28 stageCoordinator$$ExternalSyntheticLambda28) {
+    public final void playSwapAnimation(SurfaceControl.Transaction transaction, StageTaskListener stageTaskListener, StageTaskListener stageTaskListener2, final StageCoordinator$$ExternalSyntheticLambda31 stageCoordinator$$ExternalSyntheticLambda31) {
         final Rect displayStableInsets = getDisplayStableInsets(this.mContext);
         boolean z = this.mIsLeftRightSplit;
         displayStableInsets.set(z ? displayStableInsets.left : 0, z ? 0 : displayStableInsets.top, z ? displayStableInsets.right : 0, z ? 0 : displayStableInsets.bottom);
@@ -817,15 +1000,15 @@ public final class SplitLayout implements DisplayInsetsController.OnInsetsChange
         rect2.offset(-rect5.left, -rect5.top);
         Rect rect6 = this.mRootBounds;
         rect3.offset(-rect6.left, -rect6.top);
-        ValueAnimator moveSurface = moveSurface(transaction, stageTaskListener, getTopLeftRefBounds(), rect, -displayStableInsets.left, -displayStableInsets.top, true, true, z2);
-        ValueAnimator moveSurface2 = moveSurface(transaction, stageTaskListener2, getBottomRightRefBounds(), rect2, displayStableInsets.left, displayStableInsets.top, true, false, z2);
+        ValueAnimator valueAnimatorMoveSurface = moveSurface(transaction, stageTaskListener, getTopLeftRefBounds(), rect, -displayStableInsets.left, -displayStableInsets.top, true, true, z2);
+        ValueAnimator valueAnimatorMoveSurface2 = moveSurface(transaction, stageTaskListener2, getBottomRightRefBounds(), rect2, displayStableInsets.left, displayStableInsets.top, true, false, z2);
         Rect rect7 = new Rect(this.mDividerBounds);
         Rect rect8 = this.mRootBounds;
         rect7.offset(-rect8.left, -rect8.top);
-        ValueAnimator moveSurface3 = moveSurface(transaction, null, rect7, rect3, 0.0f, 0.0f, false, false, false);
+        ValueAnimator valueAnimatorMoveSurface3 = moveSurface(transaction, null, rect7, rect3, 0.0f, 0.0f, false, false, false);
         AnimatorSet animatorSet = new AnimatorSet();
         this.mSwapAnimator = animatorSet;
-        animatorSet.playTogether(moveSurface, moveSurface2, moveSurface3);
+        animatorSet.playTogether(valueAnimatorMoveSurface, valueAnimatorMoveSurface2, valueAnimatorMoveSurface3);
         this.mSwapAnimator.setDuration(500L);
         this.mSwapAnimator.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.common.split.SplitLayout.2
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
@@ -839,7 +1022,7 @@ public final class SplitLayout implements DisplayInsetsController.OnInsetsChange
                 int i2 = i;
                 splitLayout.mDividerPosition = i2;
                 splitLayout.updateBounds(i2);
-                stageCoordinator$$ExternalSyntheticLambda28.accept(displayStableInsets);
+                stageCoordinator$$ExternalSyntheticLambda31.accept(displayStableInsets);
                 SplitLayout.this.mInteractionJankMonitor.end(82);
             }
 
@@ -855,86 +1038,84 @@ public final class SplitLayout implements DisplayInsetsController.OnInsetsChange
         this.mSwapAnimator.start();
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:18:0x004a, code lost:
-    
-        if (r1 != 15) goto L23;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:21:0x004d  */
+    /* JADX WARN: Removed duplicated region for block: B:22:0x0061  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final void populateTouchZones() {
-        /*
-            r5 = this;
-            java.util.List r0 = r5.mOffscreenTouchZones
-            java.util.ArrayList r0 = (java.util.ArrayList) r0
-            boolean r0 = r0.isEmpty()
-            if (r0 != 0) goto Ld
-            r5.removeTouchZones()
-        Ld:
-            com.android.wm.shell.common.split.SplitState r0 = r5.mSplitState
-            int r1 = r0.mState
-            int r2 = r5.calculateCurrentSnapPosition()
-            if (r1 == r2) goto L38
-            java.lang.StringBuilder r2 = new java.lang.StringBuilder
-            java.lang.String r3 = "SplitState is "
-            r2.<init>(r3)
-            int r0 = r0.mState
-            r2.append(r0)
-            java.lang.String r0 = ", expected "
-            r2.append(r0)
-            int r0 = r5.calculateCurrentSnapPosition()
-            r2.append(r0)
-            java.lang.String r0 = r2.toString()
-            java.lang.String r2 = "SplitLayout"
-            android.util.Log.wtf(r2, r0)
-        L38:
-            r0 = 3
-            if (r1 == r0) goto L61
-            r0 = 4
-            if (r1 == r0) goto L4d
-            r0 = 6
-            if (r1 == r0) goto L61
-            r0 = 7
-            if (r1 == r0) goto L4d
-            r0 = 14
-            if (r1 == r0) goto L4d
-            r0 = 15
-            if (r1 == r0) goto L61
-            goto L74
-        L4d:
-            java.util.List r0 = r5.mOffscreenTouchZones
-            com.android.wm.shell.common.split.OffscreenTouchZone r2 = new com.android.wm.shell.common.split.OffscreenTouchZone
-            com.android.wm.shell.common.split.SplitLayout$$ExternalSyntheticLambda0 r3 = new com.android.wm.shell.common.split.SplitLayout$$ExternalSyntheticLambda0
-            r4 = 0
-            r3.<init>(r5)
-            r1 = 1
-            r2.<init>(r1, r3)
-            java.util.ArrayList r0 = (java.util.ArrayList) r0
-            r0.add(r2)
-            goto L74
-        L61:
-            java.util.List r0 = r5.mOffscreenTouchZones
-            com.android.wm.shell.common.split.OffscreenTouchZone r2 = new com.android.wm.shell.common.split.OffscreenTouchZone
-            com.android.wm.shell.common.split.SplitLayout$$ExternalSyntheticLambda0 r3 = new com.android.wm.shell.common.split.SplitLayout$$ExternalSyntheticLambda0
-            r4 = 1
-            r3.<init>(r5)
-            r1 = 0
-            r2.<init>(r1, r3)
-            java.util.ArrayList r0 = (java.util.ArrayList) r0
-            r0.add(r2)
-        L74:
-            java.util.List r0 = r5.mOffscreenTouchZones
-            com.android.wm.shell.common.split.SplitWindowManager$ParentContainerCallbacks r5 = r5.mParentContainerCallbacks
-            java.util.Objects.requireNonNull(r5)
-            com.android.wm.shell.common.split.SplitLayout$$ExternalSyntheticLambda2 r1 = new com.android.wm.shell.common.split.SplitLayout$$ExternalSyntheticLambda2
-            r2 = 0
-            r1.<init>(r5, r2)
-            java.util.ArrayList r0 = (java.util.ArrayList) r0
-            r0.forEach(r1)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.common.split.SplitLayout.populateTouchZones():void");
+        if (!((ArrayList) this.mOffscreenTouchZones).isEmpty()) {
+            removeTouchZones();
+        }
+        SplitState splitState = this.mSplitState;
+        final int i = splitState.mState;
+        if (i != calculateCurrentSnapPosition()) {
+            Log.wtf("SplitLayout", "SplitState is " + splitState.mState + ", expected " + calculateCurrentSnapPosition());
+        }
+        if (i == 3) {
+            final int i2 = 1;
+            ((ArrayList) this.mOffscreenTouchZones).add(new OffscreenTouchZone(false, new Runnable(this) { // from class: com.android.wm.shell.common.split.SplitLayout$$ExternalSyntheticLambda0
+                public final /* synthetic */ SplitLayout f$0;
+
+                {
+                    this.f$0 = this;
+                }
+
+                @Override // java.lang.Runnable
+                public final void run() {
+                    switch (i2) {
+                        case 0:
+                            SplitLayout splitLayout = this.f$0;
+                            int i3 = i;
+                            Interpolator interpolator = SplitLayout.SHRINK_INTERPOLATOR;
+                            splitLayout.flingDividerToOtherSide(i3);
+                            break;
+                        default:
+                            SplitLayout splitLayout2 = this.f$0;
+                            int i4 = i;
+                            Interpolator interpolator2 = SplitLayout.SHRINK_INTERPOLATOR;
+                            splitLayout2.flingDividerToOtherSide(i4);
+                            break;
+                    }
+                }
+            }));
+        } else if (i == 4) {
+            final int i3 = 0;
+            ((ArrayList) this.mOffscreenTouchZones).add(new OffscreenTouchZone(true, new Runnable(this) { // from class: com.android.wm.shell.common.split.SplitLayout$$ExternalSyntheticLambda0
+                public final /* synthetic */ SplitLayout f$0;
+
+                {
+                    this.f$0 = this;
+                }
+
+                @Override // java.lang.Runnable
+                public final void run() {
+                    switch (i3) {
+                        case 0:
+                            SplitLayout splitLayout = this.f$0;
+                            int i32 = i;
+                            Interpolator interpolator = SplitLayout.SHRINK_INTERPOLATOR;
+                            splitLayout.flingDividerToOtherSide(i32);
+                            break;
+                        default:
+                            SplitLayout splitLayout2 = this.f$0;
+                            int i4 = i;
+                            Interpolator interpolator2 = SplitLayout.SHRINK_INTERPOLATOR;
+                            splitLayout2.flingDividerToOtherSide(i4);
+                            break;
+                    }
+                }
+            }));
+        } else if (i != 6) {
+            if (i != 7 && i != 14) {
+                if (i == 15) {
+                }
+            }
+        }
+        List list = this.mOffscreenTouchZones;
+        SplitWindowManager.ParentContainerCallbacks parentContainerCallbacks = this.mParentContainerCallbacks;
+        Objects.requireNonNull(parentContainerCallbacks);
+        ((ArrayList) list).forEach(new SplitLayout$$ExternalSyntheticLambda2(parentContainerCallbacks, 0));
     }
 
     public final void release(SurfaceControl.Transaction transaction) {
@@ -990,22 +1171,22 @@ public final class SplitLayout implements DisplayInsetsController.OnInsetsChange
 
     public final void setCellDividerRatio(float f, int i, boolean z, boolean z2) {
         int i2;
-        int height;
-        boolean isVerticalDivision = isVerticalDivision();
+        int iHeight;
+        boolean zIsVerticalDivision = isVerticalDivision();
         Rect rect = new Rect();
-        CellUtil.getCellAndHostArea(i, getTopLeftBounds(), getBottomRightBounds(), rect, isVerticalDivision);
+        CellUtil.getCellAndHostArea(i, getTopLeftBounds(), getBottomRightBounds(), rect, zIsVerticalDivision);
         int i3 = z ? this.mDividerSize : 0;
         if (z2) {
             f = 1.0f - f;
         }
-        if (!(CoreRune.MW_PARALLEL_MULTI_SPLIT && this.mParallelMultiSplit) ? isVerticalDivision : !isVerticalDivision) {
+        if (!(CoreRune.MW_PARALLEL_MULTI_SPLIT && this.mParallelMultiSplit) ? zIsVerticalDivision : !zIsVerticalDivision) {
             i2 = rect.left;
-            height = rect.width();
+            iHeight = rect.width();
         } else {
             i2 = rect.top;
-            height = rect.height();
+            iHeight = rect.height();
         }
-        int i4 = i2 + ((int) (((height - i3) * f) + 0.5f));
+        int i4 = i2 + ((int) (((iHeight - i3) * f) + 0.5f));
         if (z2) {
             i4 -= this.mDividerSize;
         }
@@ -1030,7 +1211,7 @@ public final class SplitLayout implements DisplayInsetsController.OnInsetsChange
 
     public final void setDivideRatio(float f, boolean z, boolean z2) {
         int i;
-        int height;
+        int iHeight;
         this.mTempRect.set(this.mRootBounds);
         if (z) {
             this.mTempRect.inset(getDisplayStableInsets(this.mContext));
@@ -1039,20 +1220,20 @@ public final class SplitLayout implements DisplayInsetsController.OnInsetsChange
         if (this.mIsLeftRightSplit) {
             Rect rect = this.mTempRect;
             i = rect.left;
-            height = rect.width();
+            iHeight = rect.width();
         } else {
             Rect rect2 = this.mTempRect;
             i = rect2.top;
-            height = rect2.height();
+            iHeight = rect2.height();
         }
-        DividerSnapAlgorithm.SnapTarget calculateNonDismissingSnapTarget = this.mDividerSnapAlgorithm.calculateNonDismissingSnapTarget(i + ((int) (((height - i2) * f) + 0.5f)));
+        DividerSnapAlgorithm.SnapTarget snapTargetCalculateNonDismissingSnapTarget = this.mDividerSnapAlgorithm.calculateNonDismissingSnapTarget(i + ((int) (((iHeight - i2) * f) + 0.5f)));
         SplitState splitState = this.mSplitState;
-        if (calculateNonDismissingSnapTarget != null) {
-            splitState.mState = this.mDividerSnapAlgorithm.snap(calculateNonDismissingSnapTarget.position, true).snapPosition;
+        if (snapTargetCalculateNonDismissingSnapTarget != null) {
+            splitState.mState = this.mDividerSnapAlgorithm.snap(snapTargetCalculateNonDismissingSnapTarget.position, true).snapPosition;
         } else {
             splitState.mState = 10;
         }
-        setDividePosition(calculateNonDismissingSnapTarget != null ? calculateNonDismissingSnapTarget.position : this.mDividerSnapAlgorithm.mMiddleTarget.position, null, false);
+        setDividePosition(snapTargetCalculateNonDismissingSnapTarget != null ? snapTargetCalculateNonDismissingSnapTarget.position : this.mDividerSnapAlgorithm.mMiddleTarget.position, null, false);
     }
 
     public final void setDividerAtBorder(boolean z) {
@@ -1071,7 +1252,7 @@ public final class SplitLayout implements DisplayInsetsController.OnInsetsChange
         int i3 = snapTarget.snapPosition;
         if (i3 == 11) {
             final int i4 = 0;
-            flingDividerPosition(i, snapTarget.position, i2, interpolator, new Runnable(this) { // from class: com.android.wm.shell.common.split.SplitLayout$$ExternalSyntheticLambda6
+            flingDividerPosition(i, snapTarget.position, i2, interpolator, new Runnable(this) { // from class: com.android.wm.shell.common.split.SplitLayout$$ExternalSyntheticLambda5
                 public final /* synthetic */ SplitLayout f$0;
 
                 {
@@ -1093,10 +1274,10 @@ public final class SplitLayout implements DisplayInsetsController.OnInsetsChange
                 }
             });
         } else if (i3 != 12) {
-            flingDividerPosition(i, snapTarget.position, i2, interpolator, new Runnable() { // from class: com.android.wm.shell.common.split.SplitLayout$$ExternalSyntheticLambda8
+            flingDividerPosition(i, snapTarget.position, i2, interpolator, new Runnable() { // from class: com.android.wm.shell.common.split.SplitLayout$$ExternalSyntheticLambda7
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SplitLayout splitLayout = SplitLayout.this;
+                    SplitLayout splitLayout = this.f$0;
                     DividerSnapAlgorithm.SnapTarget snapTarget2 = snapTarget;
                     Interpolator interpolator2 = SplitLayout.SHRINK_INTERPOLATOR;
                     splitLayout.getClass();
@@ -1107,7 +1288,7 @@ public final class SplitLayout implements DisplayInsetsController.OnInsetsChange
             }, z);
         } else {
             final int i5 = 1;
-            flingDividerPosition(i, snapTarget.position, i2, interpolator, new Runnable(this) { // from class: com.android.wm.shell.common.split.SplitLayout$$ExternalSyntheticLambda6
+            flingDividerPosition(i, snapTarget.position, i2, interpolator, new Runnable(this) { // from class: com.android.wm.shell.common.split.SplitLayout$$ExternalSyntheticLambda5
                 public final /* synthetic */ SplitLayout f$0;
 
                 {
@@ -1232,8 +1413,8 @@ public final class SplitLayout implements DisplayInsetsController.OnInsetsChange
                 rect9.bottom = i10 + i11;
                 rect9.top = (i10 - this.mDividerSize) - i11;
             }
-            int width = this.mCellDividerBounds.width();
-            int height = this.mCellDividerBounds.height();
+            int iWidth = this.mCellDividerBounds.width();
+            int iHeight = this.mCellDividerBounds.height();
             InsetsState insetsState = this.mInsetsState;
             SplitWindowManager splitWindowManager = this.mCellSplitWindowManager;
             splitWindowManager.getClass();
@@ -1241,8 +1422,8 @@ public final class SplitLayout implements DisplayInsetsController.OnInsetsChange
                 return;
             }
             WindowManager.LayoutParams layoutParams = (WindowManager.LayoutParams) dividerView.getLayoutParams();
-            layoutParams.width = width;
-            layoutParams.height = height;
+            layoutParams.width = iWidth;
+            layoutParams.height = iHeight;
             splitWindowManager.mViewHost.relayout(layoutParams);
             splitWindowManager.mDividerView.onInsetsChanged(insetsState, false);
         }
@@ -1251,9 +1432,9 @@ public final class SplitLayout implements DisplayInsetsController.OnInsetsChange
     public final void updateCellStageWindowConfigPosition(int i) {
         if (this.mCellStageWindowConfigPosition != i) {
             this.mCellStageWindowConfigPosition = i;
-            DividerSnapAlgorithm createCellSnapAlgorithm = createCellSnapAlgorithm();
-            this.mCellSnapAlgorithm = createCellSnapAlgorithm;
-            setCellDividePosition(createCellSnapAlgorithm.mMiddleTarget.position, null, false);
+            DividerSnapAlgorithm dividerSnapAlgorithmCreateCellSnapAlgorithm = createCellSnapAlgorithm();
+            this.mCellSnapAlgorithm = dividerSnapAlgorithmCreateCellSnapAlgorithm;
+            setCellDividePosition(dividerSnapAlgorithmCreateCellSnapAlgorithm.mMiddleTarget.position, null, false);
         }
     }
 
@@ -1272,11 +1453,11 @@ public final class SplitLayout implements DisplayInsetsController.OnInsetsChange
             return false;
         }
         if (CoreRune.MW_MULTI_SPLIT_ENSURE_APP_SIZE && !bounds.equals(this.mRootBounds) && configuration.semDisplayDeviceType != 5 && this.mSplitScreenFeasibleMode == 1) {
-            boolean isSplitScreenFeasible = isSplitScreenFeasible(true);
-            boolean isSplitScreenFeasible2 = isSplitScreenFeasible(false);
-            if (isSplitScreenFeasible) {
+            boolean zIsSplitScreenFeasible = isSplitScreenFeasible(true);
+            boolean zIsSplitScreenFeasible2 = isSplitScreenFeasible(false);
+            if (zIsSplitScreenFeasible) {
                 this.mPossibleSplitDivision = 1;
-            } else if (isSplitScreenFeasible2) {
+            } else if (zIsSplitScreenFeasible2) {
                 this.mPossibleSplitDivision = 0;
             }
             Slog.d("SplitLayout", "split feasible changed, splitDivision=" + this.mPossibleSplitDivision);
@@ -1298,14 +1479,14 @@ public final class SplitLayout implements DisplayInsetsController.OnInsetsChange
         if (CoreRune.MW_MULTI_SPLIT_CELL_DIVIDER && (splitWindowManager = this.mCellSplitWindowManager) != null) {
             splitWindowManager.setConfiguration(configuration);
         }
-        boolean isVerticalDivision = isVerticalDivision();
-        if (CoreRune.MW_MULTI_SPLIT_FREE_POSITION && configuration.semDisplayDeviceType == 5) {
+        boolean zIsVerticalDivision = isVerticalDivision();
+        if (CoreRune.MW_MULTI_SPLIT_FREE_POSITION && configuration.semDisplayDeviceType == 5 && (!CoreRune.MW_MULTI_FOLD_SPLIT_FOLDING_POLICY || !this.mStageCoordinator.isDeviceHalfClosed())) {
             this.mSplitDivision = !isLandscape(this.mRootBounds) ? 1 : 0;
             this.mIsLeftRightSplit = isVerticalDivision();
             this.mStageCoordinator.setSplitDivision(this.mSplitDivision, false, false);
         }
         updateDividerConfig(this.mContext);
-        initDividerPosition(this.mTempRect, z, isVerticalDivision);
+        initDividerPosition(this.mTempRect, z, zIsVerticalDivision);
         updateInvisibleRect();
         return true;
     }
@@ -1319,26 +1500,26 @@ public final class SplitLayout implements DisplayInsetsController.OnInsetsChange
     public final void updateDividerConfig(Context context) {
         Resources resources = context.getResources();
         Display display = context.getDisplay();
-        int dimensionPixelSize = CoreRune.MW_MULTI_SPLIT_DIVIDER ? CoreRune.MW_MULTI_SPLIT_DIVIDER_SIZE_FOLD ? resources.getDimensionPixelSize(R.dimen.secondary_rounded_corner_radius_adjustment) : resources.getDimensionPixelSize(R.dimen.secondary_rounded_corner_radius) : resources.getDimensionPixelSize(R.dimen.indeterminate_progress_alpha_23);
+        int dimensionPixelSize = CoreRune.MW_MULTI_SPLIT_DIVIDER ? CoreRune.MW_MULTI_SPLIT_DIVIDER_SIZE_FOLD ? resources.getDimensionPixelSize(R.dimen.secondary_rounded_corner_radius_bottom) : resources.getDimensionPixelSize(R.dimen.secondary_rounded_corner_radius_adjustment) : resources.getDimensionPixelSize(R.dimen.indeterminate_progress_alpha_24);
         RoundedCorner roundedCorner = display.getRoundedCorner(0);
-        int max = roundedCorner != null ? Math.max(0, roundedCorner.getRadius()) : 0;
+        int iMax = roundedCorner != null ? Math.max(0, roundedCorner.getRadius()) : 0;
         RoundedCorner roundedCorner2 = display.getRoundedCorner(1);
         if (roundedCorner2 != null) {
-            max = Math.max(max, roundedCorner2.getRadius());
+            iMax = Math.max(iMax, roundedCorner2.getRadius());
         }
         RoundedCorner roundedCorner3 = display.getRoundedCorner(2);
         if (roundedCorner3 != null) {
-            max = Math.max(max, roundedCorner3.getRadius());
+            iMax = Math.max(iMax, roundedCorner3.getRadius());
         }
         RoundedCorner roundedCorner4 = display.getRoundedCorner(3);
         if (roundedCorner4 != null) {
-            max = Math.max(max, roundedCorner4.getRadius());
+            iMax = Math.max(iMax, roundedCorner4.getRadius());
         }
         if (CoreRune.MW_MULTI_SPLIT_DIVIDER_SIZE_FOLD) {
             this.mDividerInsets = dimensionPixelSize;
             this.mDividerSize = resources.getDimensionPixelSize(com.android.systemui.R.dimen.split_divider_bar_width_fold);
         } else {
-            this.mDividerInsets = Math.max(dimensionPixelSize, max);
+            this.mDividerInsets = Math.max(dimensionPixelSize, iMax);
             this.mDividerSize = resources.getDimensionPixelSize(com.android.systemui.R.dimen.split_divider_bar_width);
         }
         this.mDividerWindowWidth = (this.mDividerInsets * 2) + this.mDividerSize;
@@ -1374,7 +1555,25 @@ public final class SplitLayout implements DisplayInsetsController.OnInsetsChange
         initDividerPosition(this.mTempRect, this.mIsLeftRightSplit, i == 0);
     }
 
-    public SplitLayout(String str, Context context, Configuration configuration, SplitLayoutHandler splitLayoutHandler, SplitWindowManager.ParentContainerCallbacks parentContainerCallbacks, DisplayController displayController, DisplayImeController displayImeController, ShellTaskOrganizer shellTaskOrganizer, int i, SplitState splitState, Handler handler, DesktopState desktopState, int i2) {
+    public final void updateSplitScreenFeasibleMode(int i) {
+        if (this.mSplitScreenFeasibleMode == 2 && i == 1 && getDisplayLayout(this.mContext) != null) {
+            Rect rect = new Rect();
+            getDisplayLayout(this.mContext).getStableBounds(rect, true);
+            if (this.mRootBounds.width() != rect.width() && this.mRootBounds.height() != rect.height()) {
+                boolean zIsSplitScreenFeasible = isSplitScreenFeasible(true);
+                boolean zIsSplitScreenFeasible2 = isSplitScreenFeasible(false);
+                if (zIsSplitScreenFeasible) {
+                    this.mPossibleSplitDivision = 1;
+                } else if (zIsSplitScreenFeasible2) {
+                    this.mPossibleSplitDivision = 0;
+                }
+                Slog.d("SplitLayout", "possibleSplitDivision=" + this.mPossibleSplitDivision);
+            }
+        }
+        this.mSplitScreenFeasibleMode = i;
+    }
+
+    public SplitLayout(String str, Context context, Configuration configuration, SplitLayoutHandler splitLayoutHandler, SplitWindowManager.ParentContainerCallbacks parentContainerCallbacks, DisplayController displayController, DisplayImeController displayImeController, ShellTaskOrganizer shellTaskOrganizer, int i, SplitState splitState, Handler handler, DesktopState desktopState, int i2) throws Resources.NotFoundException {
         this.mTempRect = new Rect();
         this.mTempRect2 = new Rect();
         Rect rect = new Rect();
@@ -1469,7 +1668,7 @@ public final class SplitLayout implements DisplayInsetsController.OnInsetsChange
         this.mDividerFlingAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.common.split.SplitLayout$$ExternalSyntheticLambda3
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator2) {
-                SplitLayout splitLayout = SplitLayout.this;
+                SplitLayout splitLayout = this.f$0;
                 boolean z3 = z2;
                 boolean z4 = z;
                 Interpolator interpolator2 = SplitLayout.SHRINK_INTERPOLATOR;
@@ -1577,9 +1776,9 @@ public final class SplitLayout implements DisplayInsetsController.OnInsetsChange
         }
         boolean z3 = this.mIsLeftRightSplit;
         DividerSnapAlgorithm dividerSnapAlgorithm = this.mDividerSnapAlgorithm;
-        boolean isSplitStashed = splitState.isSplitStashed();
+        boolean zIsSplitStashed = splitState.isSplitStashed();
         ResizingEffectPolicy resizingEffectPolicy = this.mSurfaceEffectPolicy;
-        if (!isSplitStashed) {
+        if (!zIsSplitStashed) {
             resizingEffectPolicy.mDimmingSide = -1;
             resizingEffectPolicy.mDimValue = 0.0f;
             return;
@@ -1595,7 +1794,7 @@ public final class SplitLayout implements DisplayInsetsController.OnInsetsChange
     public final boolean applyTaskChanges(WindowContainerTransaction windowContainerTransaction, ActivityManager.RunningTaskInfo runningTaskInfo, ActivityManager.RunningTaskInfo runningTaskInfo2, ActivityManager.RunningTaskInfo runningTaskInfo3) {
         boolean z;
         Rect topLeftBounds;
-        Rect rect;
+        Rect bottomRightBounds;
         if (this.mBounds3.equals(this.mWinBounds3) && runningTaskInfo3.token.equals(this.mWinToken3)) {
             z = false;
         } else {
@@ -1607,10 +1806,10 @@ public final class SplitLayout implements DisplayInsetsController.OnInsetsChange
         }
         if (CellUtil.isCellInLeftOrTopBounds(this.mCellStageWindowConfigPosition, isVerticalDivision())) {
             topLeftBounds = this.mHostBounds;
-            rect = getBottomRightBounds();
+            bottomRightBounds = getBottomRightBounds();
         } else {
             topLeftBounds = getTopLeftBounds();
-            rect = this.mHostBounds;
+            bottomRightBounds = this.mHostBounds;
         }
         if (!topLeftBounds.equals((Rect) this.mContentBounds.getFirst()) || !runningTaskInfo.token.equals(this.mWinToken1)) {
             windowContainerTransaction.setBounds(runningTaskInfo.token, topLeftBounds);
@@ -1619,12 +1818,12 @@ public final class SplitLayout implements DisplayInsetsController.OnInsetsChange
             this.mWinToken1 = runningTaskInfo.token;
             z = true;
         }
-        if (rect.equals((Rect) this.mContentBounds.getLast()) && runningTaskInfo2.token.equals(this.mWinToken2)) {
+        if (bottomRightBounds.equals((Rect) this.mContentBounds.getLast()) && runningTaskInfo2.token.equals(this.mWinToken2)) {
             return z;
         }
-        windowContainerTransaction.setBounds(runningTaskInfo2.token, rect);
-        windowContainerTransaction.setSmallestScreenWidthDp(runningTaskInfo2.token, getSmallestWidthDp(rect));
-        ((Rect) this.mContentBounds.getLast()).set(rect);
+        windowContainerTransaction.setBounds(runningTaskInfo2.token, bottomRightBounds);
+        windowContainerTransaction.setSmallestScreenWidthDp(runningTaskInfo2.token, getSmallestWidthDp(bottomRightBounds));
+        ((Rect) this.mContentBounds.getLast()).set(bottomRightBounds);
         this.mWinToken2 = runningTaskInfo2.token;
         return true;
     }

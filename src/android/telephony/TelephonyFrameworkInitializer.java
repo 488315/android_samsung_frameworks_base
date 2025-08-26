@@ -86,7 +86,7 @@ public class TelephonyFrameworkInitializer {
         SystemServiceRegistry.registerContextAwareService(Context.SMS_SERVICE, SmsManager.class, new SystemServiceRegistry.ContextAwareServiceProducerWithoutBinder() { // from class: android.telephony.TelephonyFrameworkInitializer$$ExternalSyntheticLambda8
             @Override // android.app.SystemServiceRegistry.ContextAwareServiceProducerWithoutBinder
             public final Object createService(Context context) {
-                return TelephonyFrameworkInitializer.lambda$registerServiceWrappers$8(context);
+                return SmsManager.getSmsManagerForContextAndSubscriptionId(context, Integer.MAX_VALUE);
             }
         });
         SystemServiceRegistry.registerContextAwareService("satellite", SatelliteManager.class, new SystemServiceRegistry.ContextAwareServiceProducerWithoutBinder() { // from class: android.telephony.TelephonyFrameworkInitializer$$ExternalSyntheticLambda9
@@ -138,13 +138,6 @@ public class TelephonyFrameworkInitializer {
     static /* synthetic */ ImsManager lambda$registerServiceWrappers$7(Context context) {
         if (hasSystemFeature(context, PackageManager.FEATURE_TELEPHONY_IMS)) {
             return new ImsManager(context);
-        }
-        return null;
-    }
-
-    static /* synthetic */ SmsManager lambda$registerServiceWrappers$8(Context context) {
-        if (hasSystemFeature(context, PackageManager.FEATURE_TELEPHONY_MESSAGING)) {
-            return SmsManager.getSmsManagerForContextAndSubscriptionId(context, Integer.MAX_VALUE);
         }
         return null;
     }

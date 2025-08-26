@@ -123,13 +123,13 @@ public final class NsmData extends BaseData implements Parcelable {
     }
 
     public static NsmData fromCsvString(String str) {
-        List asList = Arrays.asList(str.split(","));
-        if (asList.size() != 9 && asList.size() != 25) {
+        List listAsList = Arrays.asList(str.split(","));
+        if (listAsList.size() != 9 && listAsList.size() != 25) {
             Log.w(TAG, "Invalid CSV string: " + str);
             return null;
         }
         try {
-            return new NsmData((String) asList.get(0), Integer.parseInt((String) asList.get(7)), Integer.parseInt((String) asList.get(6)), Float.parseFloat((String) asList.get(1)), Float.parseFloat((String) asList.get(2)), Float.parseFloat((String) asList.get(3)), Float.parseFloat((String) asList.get(4)), (String) asList.get(5), (String) asList.get(8), null);
+            return new NsmData((String) listAsList.get(0), Integer.parseInt((String) listAsList.get(7)), Integer.parseInt((String) listAsList.get(6)), Float.parseFloat((String) listAsList.get(1)), Float.parseFloat((String) listAsList.get(2)), Float.parseFloat((String) listAsList.get(3)), Float.parseFloat((String) listAsList.get(4)), (String) listAsList.get(5), (String) listAsList.get(8), null);
         } catch (Exception e) {
             Log.w(TAG, "Invalid CSV string: " + str);
             e.printStackTrace();

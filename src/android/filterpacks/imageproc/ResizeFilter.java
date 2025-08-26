@@ -66,26 +66,26 @@ public class ResizeFilter extends Filter {
 
     @Override // android.filterfw.core.Filter
     public void process(FilterContext filterContext) {
-        Frame pullInput = pullInput("image");
-        createProgram(filterContext, pullInput.getFormat());
-        MutableFrameFormat mutableCopy = pullInput.getFormat().mutableCopy();
+        Frame framePullInput = pullInput("image");
+        createProgram(filterContext, framePullInput.getFormat());
+        MutableFrameFormat mutableFrameFormatMutableCopy = framePullInput.getFormat().mutableCopy();
         if (this.mKeepAspectRatio) {
-            FrameFormat format = pullInput.getFormat();
+            FrameFormat format = framePullInput.getFormat();
             this.mOHeight = (this.mOWidth * format.getHeight()) / format.getWidth();
         }
-        mutableCopy.setDimensions(this.mOWidth, this.mOHeight);
-        Frame newFrame = filterContext.getFrameManager().newFrame(mutableCopy);
+        mutableFrameFormatMutableCopy.setDimensions(this.mOWidth, this.mOHeight);
+        Frame frameNewFrame = filterContext.getFrameManager().newFrame(mutableFrameFormatMutableCopy);
         if (this.mGenerateMipMap) {
-            GLFrame gLFrame = (GLFrame) filterContext.getFrameManager().newFrame(pullInput.getFormat());
+            GLFrame gLFrame = (GLFrame) filterContext.getFrameManager().newFrame(framePullInput.getFormat());
             gLFrame.setTextureParameter(10241, 9985);
-            gLFrame.setDataFromFrame(pullInput);
+            gLFrame.setDataFromFrame(framePullInput);
             gLFrame.generateMipMap();
-            this.mProgram.process(gLFrame, newFrame);
+            this.mProgram.process(gLFrame, frameNewFrame);
             gLFrame.release();
         } else {
-            this.mProgram.process(pullInput, newFrame);
+            this.mProgram.process(framePullInput, frameNewFrame);
         }
-        pushOutput("image", newFrame);
-        newFrame.release();
+        pushOutput("image", frameNewFrame);
+        frameNewFrame.release();
     }
 }

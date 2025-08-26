@@ -86,13 +86,13 @@ public class RectF implements Parcelable {
 
     public int hashCode() {
         float f = this.left;
-        int floatToIntBits = (f != 0.0f ? Float.floatToIntBits(f) : 0) * 31;
+        int iFloatToIntBits = (f != 0.0f ? Float.floatToIntBits(f) : 0) * 31;
         float f2 = this.top;
-        int floatToIntBits2 = (floatToIntBits + (f2 != 0.0f ? Float.floatToIntBits(f2) : 0)) * 31;
+        int iFloatToIntBits2 = (iFloatToIntBits + (f2 != 0.0f ? Float.floatToIntBits(f2) : 0)) * 31;
         float f3 = this.right;
-        int floatToIntBits3 = (floatToIntBits2 + (f3 != 0.0f ? Float.floatToIntBits(f3) : 0)) * 31;
+        int iFloatToIntBits3 = (iFloatToIntBits2 + (f3 != 0.0f ? Float.floatToIntBits(f3) : 0)) * 31;
         float f4 = this.bottom;
-        return floatToIntBits3 + (f4 != 0.0f ? Float.floatToIntBits(f4) : 0);
+        return iFloatToIntBits3 + (f4 != 0.0f ? Float.floatToIntBits(f4) : 0);
     }
 
     public String toString() {

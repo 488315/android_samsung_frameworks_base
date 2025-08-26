@@ -50,30 +50,30 @@ public class ToastPresenter {
     private View mView;
 
     public static View getTextToastView(Context context, CharSequence charSequence) {
-        View inflate;
+        View viewInflate;
         TypedValue typedValue = new TypedValue();
         if (context.getTheme().resolveAttribute(R.attr.parentIsDeviceDefault, typedValue, true) && typedValue.data != 0) {
-            inflate = LayoutInflater.from(context).inflate(17367473, (ViewGroup) null);
+            viewInflate = LayoutInflater.from(context).inflate(17367473, (ViewGroup) null);
         } else {
-            inflate = LayoutInflater.from(context).inflate(17367518, (ViewGroup) null);
+            viewInflate = LayoutInflater.from(context).inflate(17367518, (ViewGroup) null);
         }
-        TextView textView = (TextView) inflate.findViewById(16908299);
+        TextView textView = (TextView) viewInflate.findViewById(16908299);
         textView.lambda$setTextAsync$0(charSequence);
         semCheckMaxFontScale(context, textView, context.getResources().getDimensionPixelSize(R.dimen.sem_toast_text_size));
-        return inflate;
+        return viewInflate;
     }
 
     public static View getTextToastViewWithIcon(Context context, CharSequence charSequence, Drawable drawable) {
         if (drawable == null) {
             return getTextToastView(context, charSequence);
         }
-        View inflate = LayoutInflater.from(context).inflate(17367519, (ViewGroup) null);
-        ((TextView) inflate.findViewById(16908299)).lambda$setTextAsync$0(charSequence);
-        ImageView imageView = (ImageView) inflate.findViewById(16908294);
+        View viewInflate = LayoutInflater.from(context).inflate(17367519, (ViewGroup) null);
+        ((TextView) viewInflate.findViewById(16908299)).lambda$setTextAsync$0(charSequence);
+        ImageView imageView = (ImageView) viewInflate.findViewById(16908294);
         if (imageView != null) {
             imageView.lambda$setImageURIAsync$0(drawable);
         }
-        return inflate;
+        return viewInflate;
     }
 
     public ToastPresenter(Context context, IAccessibilityManager iAccessibilityManager, INotificationManager iNotificationManager, String str) {
@@ -162,7 +162,7 @@ public class ToastPresenter {
         show(view, iBinder, iBinder2, i, i2, i3, i4, f, f2, iTransientNotificationCallback, false);
     }
 
-    public void show(View view, IBinder iBinder, IBinder iBinder2, int i, int i2, int i3, int i4, float f, float f2, ITransientNotificationCallback iTransientNotificationCallback, boolean z) {
+    public void show(View view, IBinder iBinder, IBinder iBinder2, int i, int i2, int i3, int i4, float f, float f2, ITransientNotificationCallback iTransientNotificationCallback, boolean z) throws Resources.NotFoundException {
         SemDesktopModeState desktopModeState;
         boolean z2 = false;
         Preconditions.checkState(this.mView == null, "Only one toast at a time is allowed, call hide() first.");
@@ -233,11 +233,11 @@ public class ToastPresenter {
             accessibilityManager.removeClient();
             return;
         }
-        AccessibilityEvent obtain = AccessibilityEvent.obtain(64);
-        obtain.setClassName(Toast.class.getName());
-        obtain.setPackageName(str);
-        view.dispatchPopulateAccessibilityEvent(obtain);
-        accessibilityManager.sendAccessibilityEvent(obtain);
+        AccessibilityEvent accessibilityEventObtain = AccessibilityEvent.obtain(64);
+        accessibilityEventObtain.setClassName(Toast.class.getName());
+        accessibilityEventObtain.setPackageName(str);
+        view.dispatchPopulateAccessibilityEvent(accessibilityEventObtain);
+        accessibilityManager.sendAccessibilityEvent(accessibilityEventObtain);
         accessibilityManager.removeClient();
     }
 
@@ -271,8 +271,8 @@ public class ToastPresenter {
         return 0;
     }
 
-    private int semGetAdjustedYoffset(int i, int i2) {
-        int i3;
+    private int semGetAdjustedYoffset(int i, int i2) throws Resources.NotFoundException {
+        int iSemGetIconBottomMargin;
         int integer = this.mResources.getInteger(R.integer.config_toastDefaultGravity);
         int dimensionPixelSize = this.mResources.getDimensionPixelSize(R.dimen.toast_y_offset);
         if (this.mResources.getConfiguration().orientation != 2) {
@@ -282,31 +282,31 @@ public class ToastPresenter {
             int dimensionPixelSize2 = this.mContext.get().getResources().getDimensionPixelSize(R.dimen.sem_toast_fingerPrint_y_offset);
             boolean z = false;
             if (fingerprintManager != null) {
-                i3 = fingerprintManager.semGetIconBottomMargin();
+                iSemGetIconBottomMargin = fingerprintManager.semGetIconBottomMargin();
                 if (FingerprintManager.semGetSensorPosition() == 2) {
                     z = true;
                 }
             } else {
-                i3 = 0;
+                iSemGetIconBottomMargin = 0;
             }
-            if (z && i3 > 0 && dimensionPixelSize == i2 && integer == i) {
-                return (i3 + dimensionPixelSize2) - semGetNavigationBarHeight();
+            if (z && iSemGetIconBottomMargin > 0 && dimensionPixelSize == i2 && integer == i) {
+                return (iSemGetIconBottomMargin + dimensionPixelSize2) - semGetNavigationBarHeight();
             }
         }
         return i2;
     }
 
     private void semPrintDebugMessage(View view) {
-        View findViewById = view.findViewById(16908299);
-        if (findViewById instanceof TextView) {
-            CharSequence text = ((TextView) findViewById).getText();
+        View viewFindViewById = view.findViewById(16908299);
+        if (viewFindViewById instanceof TextView) {
+            CharSequence text = ((TextView) viewFindViewById).getText();
             if (text.length() > 0) {
-                char charAt = (char) (text.charAt(0) + 1);
+                char cCharAt = (char) (text.charAt(0) + 1);
                 if (text.length() > 3) {
-                    Log.v(TAG, "Text: " + charAt + ((Object) text.subSequence(1, 4)) + " in " + this);
+                    Log.v(TAG, "Text: " + cCharAt + ((Object) text.subSequence(1, 4)) + " in " + this);
                     return;
                 }
-                Log.v(TAG, "Text: " + charAt + ((Object) text.subSequence(1, text.length())) + " in " + this);
+                Log.v(TAG, "Text: " + cCharAt + ((Object) text.subSequence(1, text.length())) + " in " + this);
             }
         }
     }

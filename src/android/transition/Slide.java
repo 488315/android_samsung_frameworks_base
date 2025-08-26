@@ -114,9 +114,9 @@ public class Slide extends Visibility {
         this.mSlideCalculator = sCalculateBottom;
         this.mSlideEdge = 80;
         this.mSlideFraction = 1.0f;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.Slide);
-        int i = obtainStyledAttributes.getInt(0, 80);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.Slide);
+        int i = typedArrayObtainStyledAttributes.getInt(0, 80);
+        typedArrayObtainStyledAttributes.recycle();
         setSlideEdge(i);
     }
 

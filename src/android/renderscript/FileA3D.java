@@ -52,26 +52,24 @@ public class FileA3D extends BaseObj {
         }
 
         static synchronized BaseObj internalCreate(RenderScript renderScript, IndexEntry indexEntry) {
-            synchronized (IndexEntry.class) {
-                BaseObj baseObj = indexEntry.mLoadedObj;
-                if (baseObj != null) {
-                    return baseObj;
-                }
-                if (indexEntry.mEntryType == EntryType.UNKNOWN) {
-                    return null;
-                }
-                long nFileA3DGetEntryByIndex = renderScript.nFileA3DGetEntryByIndex(indexEntry.mID, indexEntry.mIndex);
-                if (nFileA3DGetEntryByIndex == 0) {
-                    return null;
-                }
-                if (indexEntry.mEntryType.ordinal() == 1) {
-                    Mesh mesh = new Mesh(nFileA3DGetEntryByIndex, renderScript);
-                    indexEntry.mLoadedObj = mesh;
-                    mesh.updateFromNative();
-                    return indexEntry.mLoadedObj;
-                }
-                throw new RSRuntimeException("Unrecognized object type in file.");
+            BaseObj baseObj = indexEntry.mLoadedObj;
+            if (baseObj != null) {
+                return baseObj;
             }
+            if (indexEntry.mEntryType == EntryType.UNKNOWN) {
+                return null;
+            }
+            long jNFileA3DGetEntryByIndex = renderScript.nFileA3DGetEntryByIndex(indexEntry.mID, indexEntry.mIndex);
+            if (jNFileA3DGetEntryByIndex == 0) {
+                return null;
+            }
+            if (indexEntry.mEntryType.ordinal() == 1) {
+                Mesh mesh = new Mesh(jNFileA3DGetEntryByIndex, renderScript);
+                indexEntry.mLoadedObj = mesh;
+                mesh.updateFromNative();
+                return indexEntry.mLoadedObj;
+            }
+            throw new RSRuntimeException("Unrecognized object type in file.");
         }
 
         IndexEntry(RenderScript renderScript, int i, long j, String str, EntryType entryType) {
@@ -89,16 +87,16 @@ public class FileA3D extends BaseObj {
         this.guard.open("destroy");
     }
 
-    private void initEntries() {
-        int nFileA3DGetNumIndexEntries = this.mRS.nFileA3DGetNumIndexEntries(getID(this.mRS));
-        if (nFileA3DGetNumIndexEntries <= 0) {
+    private void initEntries() throws Throwable {
+        int iNFileA3DGetNumIndexEntries = this.mRS.nFileA3DGetNumIndexEntries(getID(this.mRS));
+        if (iNFileA3DGetNumIndexEntries <= 0) {
             return;
         }
-        this.mFileEntries = new IndexEntry[nFileA3DGetNumIndexEntries];
-        int[] iArr = new int[nFileA3DGetNumIndexEntries];
-        String[] strArr = new String[nFileA3DGetNumIndexEntries];
-        this.mRS.nFileA3DGetIndexEntries(getID(this.mRS), nFileA3DGetNumIndexEntries, iArr, strArr);
-        for (int i = 0; i < nFileA3DGetNumIndexEntries; i++) {
+        this.mFileEntries = new IndexEntry[iNFileA3DGetNumIndexEntries];
+        int[] iArr = new int[iNFileA3DGetNumIndexEntries];
+        String[] strArr = new String[iNFileA3DGetNumIndexEntries];
+        this.mRS.nFileA3DGetIndexEntries(getID(this.mRS), iNFileA3DGetNumIndexEntries, iArr, strArr);
+        for (int i = 0; i < iNFileA3DGetNumIndexEntries; i++) {
             this.mFileEntries[i] = new IndexEntry(this.mRS, i, getID(this.mRS), strArr[i], EntryType.toEntryType(iArr[i]));
         }
     }
@@ -122,23 +120,23 @@ public class FileA3D extends BaseObj {
         return indexEntryArr[i];
     }
 
-    public static FileA3D createFromAsset(RenderScript renderScript, AssetManager assetManager, String str) {
+    public static FileA3D createFromAsset(RenderScript renderScript, AssetManager assetManager, String str) throws Throwable {
         renderScript.validate();
-        long nFileA3DCreateFromAsset = renderScript.nFileA3DCreateFromAsset(assetManager, str);
-        if (nFileA3DCreateFromAsset == 0) {
+        long jNFileA3DCreateFromAsset = renderScript.nFileA3DCreateFromAsset(assetManager, str);
+        if (jNFileA3DCreateFromAsset == 0) {
             throw new RSRuntimeException("Unable to create a3d file from asset " + str);
         }
-        FileA3D fileA3D = new FileA3D(nFileA3DCreateFromAsset, renderScript, null);
+        FileA3D fileA3D = new FileA3D(jNFileA3DCreateFromAsset, renderScript, null);
         fileA3D.initEntries();
         return fileA3D;
     }
 
-    public static FileA3D createFromFile(RenderScript renderScript, String str) {
-        long nFileA3DCreateFromFile = renderScript.nFileA3DCreateFromFile(str);
-        if (nFileA3DCreateFromFile == 0) {
+    public static FileA3D createFromFile(RenderScript renderScript, String str) throws Throwable {
+        long jNFileA3DCreateFromFile = renderScript.nFileA3DCreateFromFile(str);
+        if (jNFileA3DCreateFromFile == 0) {
             throw new RSRuntimeException("Unable to create a3d file from " + str);
         }
-        FileA3D fileA3D = new FileA3D(nFileA3DCreateFromFile, renderScript, null);
+        FileA3D fileA3D = new FileA3D(jNFileA3DCreateFromFile, renderScript, null);
         fileA3D.initEntries();
         return fileA3D;
     }
@@ -147,16 +145,16 @@ public class FileA3D extends BaseObj {
         return createFromFile(renderScript, file.getAbsolutePath());
     }
 
-    public static FileA3D createFromResource(RenderScript renderScript, Resources resources, int i) {
+    public static FileA3D createFromResource(RenderScript renderScript, Resources resources, int i) throws Throwable {
         renderScript.validate();
         try {
-            InputStream openRawResource = resources.openRawResource(i);
-            if (openRawResource instanceof AssetManager.AssetInputStream) {
-                long nFileA3DCreateFromAssetStream = renderScript.nFileA3DCreateFromAssetStream(((AssetManager.AssetInputStream) openRawResource).getNativeAsset());
-                if (nFileA3DCreateFromAssetStream == 0) {
+            InputStream inputStreamOpenRawResource = resources.openRawResource(i);
+            if (inputStreamOpenRawResource instanceof AssetManager.AssetInputStream) {
+                long jNFileA3DCreateFromAssetStream = renderScript.nFileA3DCreateFromAssetStream(((AssetManager.AssetInputStream) inputStreamOpenRawResource).getNativeAsset());
+                if (jNFileA3DCreateFromAssetStream == 0) {
                     throw new RSRuntimeException("Unable to create a3d file from resource " + i);
                 }
-                FileA3D fileA3D = new FileA3D(nFileA3DCreateFromAssetStream, renderScript, openRawResource);
+                FileA3D fileA3D = new FileA3D(jNFileA3DCreateFromAssetStream, renderScript, inputStreamOpenRawResource);
                 fileA3D.initEntries();
                 return fileA3D;
             }

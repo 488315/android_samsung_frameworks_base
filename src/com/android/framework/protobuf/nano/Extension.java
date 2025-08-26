@@ -66,7 +66,7 @@ public class Extension<M extends ExtendableMessageNano<M>, T> {
         return this.repeated ? getRepeatedValueFrom(list) : getSingularValueFrom(list);
     }
 
-    private T getRepeatedValueFrom(List<UnknownFieldData> list) {
+    private T getRepeatedValueFrom(List<UnknownFieldData> list) throws ArrayIndexOutOfBoundsException, IllegalArgumentException {
         ArrayList arrayList = new ArrayList();
         for (int i = 0; i < list.size(); i++) {
             UnknownFieldData unknownFieldData = list.get(i);
@@ -79,11 +79,11 @@ public class Extension<M extends ExtendableMessageNano<M>, T> {
             return null;
         }
         Class<T> cls = this.clazz;
-        T cast = cls.cast(Array.newInstance(cls.getComponentType(), size));
+        T tCast = cls.cast(Array.newInstance(cls.getComponentType(), size));
         for (int i2 = 0; i2 < size; i2++) {
-            Array.set(cast, i2, arrayList.get(i2));
+            Array.set(tCast, i2, arrayList.get(i2));
         }
-        return cast;
+        return tCast;
     }
 
     private T getSingularValueFrom(List<UnknownFieldData> list) {
@@ -121,7 +121,7 @@ public class Extension<M extends ExtendableMessageNano<M>, T> {
         list.add(readData(CodedInputByteBufferNano.newInstance(unknownFieldData.bytes)));
     }
 
-    void writeTo(Object obj, CodedOutputByteBufferNano codedOutputByteBufferNano) throws IOException {
+    void writeTo(Object obj, CodedOutputByteBufferNano codedOutputByteBufferNano) throws IOException, ArrayIndexOutOfBoundsException, IllegalArgumentException {
         if (this.repeated) {
             writeRepeatedData(obj, codedOutputByteBufferNano);
         } else {
@@ -147,7 +147,7 @@ public class Extension<M extends ExtendableMessageNano<M>, T> {
         }
     }
 
-    protected void writeRepeatedData(Object obj, CodedOutputByteBufferNano codedOutputByteBufferNano) {
+    protected void writeRepeatedData(Object obj, CodedOutputByteBufferNano codedOutputByteBufferNano) throws ArrayIndexOutOfBoundsException, IllegalArgumentException {
         int length = Array.getLength(obj);
         for (int i = 0; i < length; i++) {
             Object obj2 = Array.get(obj, i);
@@ -166,13 +166,13 @@ public class Extension<M extends ExtendableMessageNano<M>, T> {
 
     protected int computeRepeatedSerializedSize(Object obj) {
         int length = Array.getLength(obj);
-        int i = 0;
-        for (int i2 = 0; i2 < length; i2++) {
-            if (Array.get(obj, i2) != null) {
-                i += computeSingularSerializedSize(Array.get(obj, i2));
+        int iComputeSingularSerializedSize = 0;
+        for (int i = 0; i < length; i++) {
+            if (Array.get(obj, i) != null) {
+                iComputeSingularSerializedSize += computeSingularSerializedSize(Array.get(obj, i));
             }
         }
-        return i;
+        return iComputeSingularSerializedSize;
     }
 
     protected int computeSingularSerializedSize(Object obj) {
@@ -212,11 +212,11 @@ public class Extension<M extends ExtendableMessageNano<M>, T> {
                 list.add(readData(CodedInputByteBufferNano.newInstance(unknownFieldData.bytes)));
                 return;
             }
-            CodedInputByteBufferNano newInstance = CodedInputByteBufferNano.newInstance(unknownFieldData.bytes);
+            CodedInputByteBufferNano codedInputByteBufferNanoNewInstance = CodedInputByteBufferNano.newInstance(unknownFieldData.bytes);
             try {
-                newInstance.pushLimit(newInstance.readRawVarint32());
-                while (!newInstance.isAtEnd()) {
-                    list.add(readData(newInstance));
+                codedInputByteBufferNanoNewInstance.pushLimit(codedInputByteBufferNanoNewInstance.readRawVarint32());
+                while (!codedInputByteBufferNanoNewInstance.isAtEnd()) {
+                    list.add(readData(codedInputByteBufferNanoNewInstance));
                 }
             } catch (IOException e) {
                 throw new IllegalArgumentException("Error reading extension field", e);
@@ -288,17 +288,17 @@ public class Extension<M extends ExtendableMessageNano<M>, T> {
 
         /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         @Override // com.android.framework.protobuf.nano.Extension
-        protected void writeRepeatedData(Object obj, CodedOutputByteBufferNano codedOutputByteBufferNano) {
+        protected void writeRepeatedData(Object obj, CodedOutputByteBufferNano codedOutputByteBufferNano) throws ArrayIndexOutOfBoundsException, IllegalArgumentException {
             if (this.tag == this.nonPackedTag) {
                 super.writeRepeatedData(obj, codedOutputByteBufferNano);
                 return;
             }
             if (this.tag == this.packedTag) {
                 int length = Array.getLength(obj);
-                int computePackedDataSize = computePackedDataSize(obj);
+                int iComputePackedDataSize = computePackedDataSize(obj);
                 try {
                     codedOutputByteBufferNano.writeRawVarint32(this.tag);
-                    codedOutputByteBufferNano.writeRawVarint32(computePackedDataSize);
+                    codedOutputByteBufferNano.writeRawVarint32(iComputePackedDataSize);
                     int i = 0;
                     switch (this.type) {
                         case 1:
@@ -412,26 +412,26 @@ public class Extension<M extends ExtendableMessageNano<M>, T> {
                 case 15:
                     return length * 4;
                 case 3:
-                    int i2 = 0;
+                    int iComputeInt64SizeNoTag = 0;
                     while (i < length) {
-                        i2 += CodedOutputByteBufferNano.computeInt64SizeNoTag(Array.getLong(obj, i));
+                        iComputeInt64SizeNoTag += CodedOutputByteBufferNano.computeInt64SizeNoTag(Array.getLong(obj, i));
                         i++;
                     }
-                    return i2;
+                    return iComputeInt64SizeNoTag;
                 case 4:
-                    int i3 = 0;
+                    int iComputeUInt64SizeNoTag = 0;
                     while (i < length) {
-                        i3 += CodedOutputByteBufferNano.computeUInt64SizeNoTag(Array.getLong(obj, i));
+                        iComputeUInt64SizeNoTag += CodedOutputByteBufferNano.computeUInt64SizeNoTag(Array.getLong(obj, i));
                         i++;
                     }
-                    return i3;
+                    return iComputeUInt64SizeNoTag;
                 case 5:
-                    int i4 = 0;
+                    int iComputeInt32SizeNoTag = 0;
                     while (i < length) {
-                        i4 += CodedOutputByteBufferNano.computeInt32SizeNoTag(Array.getInt(obj, i));
+                        iComputeInt32SizeNoTag += CodedOutputByteBufferNano.computeInt32SizeNoTag(Array.getInt(obj, i));
                         i++;
                     }
-                    return i4;
+                    return iComputeInt32SizeNoTag;
                 case 8:
                     return length;
                 case 9:
@@ -441,33 +441,33 @@ public class Extension<M extends ExtendableMessageNano<M>, T> {
                 default:
                     throw new IllegalArgumentException("Unexpected non-packable type " + this.type);
                 case 13:
-                    int i5 = 0;
+                    int iComputeUInt32SizeNoTag = 0;
                     while (i < length) {
-                        i5 += CodedOutputByteBufferNano.computeUInt32SizeNoTag(Array.getInt(obj, i));
+                        iComputeUInt32SizeNoTag += CodedOutputByteBufferNano.computeUInt32SizeNoTag(Array.getInt(obj, i));
                         i++;
                     }
-                    return i5;
+                    return iComputeUInt32SizeNoTag;
                 case 14:
-                    int i6 = 0;
+                    int iComputeEnumSizeNoTag = 0;
                     while (i < length) {
-                        i6 += CodedOutputByteBufferNano.computeEnumSizeNoTag(Array.getInt(obj, i));
+                        iComputeEnumSizeNoTag += CodedOutputByteBufferNano.computeEnumSizeNoTag(Array.getInt(obj, i));
                         i++;
                     }
-                    return i6;
+                    return iComputeEnumSizeNoTag;
                 case 17:
-                    int i7 = 0;
+                    int iComputeSInt32SizeNoTag = 0;
                     while (i < length) {
-                        i7 += CodedOutputByteBufferNano.computeSInt32SizeNoTag(Array.getInt(obj, i));
+                        iComputeSInt32SizeNoTag += CodedOutputByteBufferNano.computeSInt32SizeNoTag(Array.getInt(obj, i));
                         i++;
                     }
-                    return i7;
+                    return iComputeSInt32SizeNoTag;
                 case 18:
-                    int i8 = 0;
+                    int iComputeSInt64SizeNoTag = 0;
                     while (i < length) {
-                        i8 += CodedOutputByteBufferNano.computeSInt64SizeNoTag(Array.getLong(obj, i));
+                        iComputeSInt64SizeNoTag += CodedOutputByteBufferNano.computeSInt64SizeNoTag(Array.getLong(obj, i));
                         i++;
                     }
-                    return i8;
+                    return iComputeSInt64SizeNoTag;
             }
         }
 
@@ -477,8 +477,8 @@ public class Extension<M extends ExtendableMessageNano<M>, T> {
                 return super.computeRepeatedSerializedSize(obj);
             }
             if (this.tag == this.packedTag) {
-                int computePackedDataSize = computePackedDataSize(obj);
-                return computePackedDataSize + CodedOutputByteBufferNano.computeRawVarint32Size(computePackedDataSize) + CodedOutputByteBufferNano.computeRawVarint32Size(this.tag);
+                int iComputePackedDataSize = computePackedDataSize(obj);
+                return iComputePackedDataSize + CodedOutputByteBufferNano.computeRawVarint32Size(iComputePackedDataSize) + CodedOutputByteBufferNano.computeRawVarint32Size(this.tag);
             }
             throw new IllegalArgumentException("Unexpected repeated extension tag " + this.tag + ", unequal to both non-packed variant " + this.nonPackedTag + " and packed variant " + this.packedTag);
         }

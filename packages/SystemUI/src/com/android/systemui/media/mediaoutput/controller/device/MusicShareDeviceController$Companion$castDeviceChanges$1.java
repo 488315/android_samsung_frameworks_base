@@ -20,7 +20,6 @@ import kotlinx.coroutines.StandaloneCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class MusicShareDeviceController$Companion$castDeviceChanges$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ Context $context;
@@ -66,13 +65,13 @@ final class MusicShareDeviceController$Companion$castDeviceChanges$1 extends Sus
                 @Override // android.media.AudioDeviceCallback
                 public final void onAudioDevicesAdded(AudioDeviceInfo[] audioDeviceInfoArr) {
                     Log.d("MusicShareDeviceController", "onAudioDevicesAdded()");
-                    MusicShareDeviceController$Companion$castDeviceChanges$1.invokeSuspend$updateDevices(ProducerScope.this, audioManager);
+                    MusicShareDeviceController$Companion$castDeviceChanges$1.invokeSuspend$updateDevices(producerScope, audioManager);
                 }
 
                 @Override // android.media.AudioDeviceCallback
                 public final void onAudioDevicesRemoved(AudioDeviceInfo[] audioDeviceInfoArr) {
                     Log.d("MusicShareDeviceController", "onAudioDevicesRemoved()");
-                    MusicShareDeviceController$Companion$castDeviceChanges$1.invokeSuspend$updateDevices(ProducerScope.this, audioManager);
+                    MusicShareDeviceController$Companion$castDeviceChanges$1.invokeSuspend$updateDevices(producerScope, audioManager);
                 }
             };
             final AudioManager audioManager2 = this.$this_castDeviceChanges;
@@ -92,13 +91,13 @@ final class MusicShareDeviceController$Companion$castDeviceChanges$1 extends Sus
                                 if (!action.equals("com.samsung.android.bluetooth.audiocast.action.device.CONNECTION_STATE_CHANGED")) {
                                     return;
                                 }
-                                MusicShareDeviceController$Companion$castDeviceChanges$1.invokeSuspend$updateDevices(ProducerScope.this, audioManager2);
+                                MusicShareDeviceController$Companion$castDeviceChanges$1.invokeSuspend$updateDevices(producerScope, audioManager2);
                                 return;
                             case -1369865261:
                                 if (!action.equals("com.samsung.android.bluetooth.audiocast.action.device.AUDIO_SHARING_DEVICE_VOLUME_CHANGED")) {
                                     return;
                                 }
-                                MusicShareDeviceController$Companion$castDeviceChanges$1.invokeSuspend$updateDevices(ProducerScope.this, audioManager2);
+                                MusicShareDeviceController$Companion$castDeviceChanges$1.invokeSuspend$updateDevices(producerScope, audioManager2);
                                 return;
                             case -1315844839:
                                 if (!action.equals("android.media.STREAM_DEVICES_CHANGED_ACTION")) {
@@ -114,7 +113,7 @@ final class MusicShareDeviceController$Companion$castDeviceChanges$1 extends Sus
                                 return;
                         }
                         if (intent.getIntExtra("android.media.EXTRA_VOLUME_STREAM_TYPE", -1) == 3) {
-                            MusicShareDeviceController$Companion$castDeviceChanges$1.invokeSuspend$updateDevices(ProducerScope.this, audioManager2);
+                            MusicShareDeviceController$Companion$castDeviceChanges$1.invokeSuspend$updateDevices(producerScope, audioManager2);
                         }
                     }
                 }

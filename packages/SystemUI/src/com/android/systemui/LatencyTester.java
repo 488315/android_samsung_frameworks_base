@@ -14,7 +14,6 @@ import com.android.systemui.util.DeviceConfigProxy;
 import com.android.systemui.util.concurrency.DelayableExecutor;
 import java.io.PrintWriter;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class LatencyTester implements CoreStartable {
     public static final boolean DEFAULT_ENABLED = Build.IS_ENG;
@@ -24,9 +23,9 @@ public class LatencyTester implements CoreStartable {
         public final void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if ("com.android.systemui.latency.ACTION_FINGERPRINT_WAKE".equals(action)) {
-                LatencyTester.m995$$Nest$mfakeWakeAndUnlock(LatencyTester.this, BiometricSourceType.FINGERPRINT);
+                LatencyTester.m997$$Nest$mfakeWakeAndUnlock(LatencyTester.this, BiometricSourceType.FINGERPRINT);
             } else if ("com.android.systemui.latency.ACTION_FACE_WAKE".equals(action)) {
-                LatencyTester.m995$$Nest$mfakeWakeAndUnlock(LatencyTester.this, BiometricSourceType.FACE);
+                LatencyTester.m997$$Nest$mfakeWakeAndUnlock(LatencyTester.this, BiometricSourceType.FACE);
             }
         }
     };
@@ -36,7 +35,7 @@ public class LatencyTester implements CoreStartable {
     public final SelectedUserInteractor mSelectedUserInteractor;
 
     /* renamed from: -$$Nest$mfakeWakeAndUnlock, reason: not valid java name */
-    public static void m995$$Nest$mfakeWakeAndUnlock(LatencyTester latencyTester, BiometricSourceType biometricSourceType) {
+    public static void m997$$Nest$mfakeWakeAndUnlock(LatencyTester latencyTester, BiometricSourceType biometricSourceType) {
         if (latencyTester.mEnabled) {
             BiometricSourceType biometricSourceType2 = BiometricSourceType.FACE;
             SelectedUserInteractor selectedUserInteractor = latencyTester.mSelectedUserInteractor;
@@ -58,7 +57,7 @@ public class LatencyTester implements CoreStartable {
         updateEnabled();
         deviceConfigProxy.addOnPropertiesChangedListener("latency_tracker", delayableExecutor, new DeviceConfig.OnPropertiesChangedListener() { // from class: com.android.systemui.LatencyTester$$ExternalSyntheticLambda0
             public final void onPropertiesChanged(DeviceConfig.Properties properties) {
-                LatencyTester latencyTester = LatencyTester.this;
+                LatencyTester latencyTester = this.f$0;
                 boolean z = LatencyTester.DEFAULT_ENABLED;
                 latencyTester.updateEnabled();
             }

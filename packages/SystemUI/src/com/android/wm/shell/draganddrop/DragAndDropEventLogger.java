@@ -7,7 +7,6 @@ import com.android.internal.logging.InstanceId;
 import com.android.internal.logging.InstanceIdSequence;
 import com.android.internal.logging.UiEventLogger;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class DragAndDropEventLogger {
     public ActivityInfo mActivityInfo;
@@ -15,7 +14,6 @@ public class DragAndDropEventLogger {
     public InstanceId mInstanceId;
     public final UiEventLogger mUiEventLogger;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum DragAndDropUiEventEnum implements UiEventLogger.UiEventEnum {
         GLOBAL_APP_DRAG_START_ACTIVITY(884),
         GLOBAL_APP_DRAG_START_SHORTCUT(885),

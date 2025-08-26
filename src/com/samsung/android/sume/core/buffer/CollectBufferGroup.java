@@ -48,9 +48,7 @@ public class CollectBufferGroup extends MediaBufferGroup {
         return MediaBuffer.groupOf(this.primaryId, (List<MediaBuffer>) this.buffers.stream().map(new Function() { // from class: com.samsung.android.sume.core.buffer.CollectBufferGroup$$ExternalSyntheticLambda0
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                MediaBuffer convertTo;
-                convertTo = ((MediaBuffer) obj).convertTo(cls);
-                return convertTo;
+                return ((MediaBuffer) obj).convertTo(cls);
             }
         }).collect(Collectors.toList()));
     }

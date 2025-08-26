@@ -1,6 +1,7 @@
 package androidx.compose.ui.platform;
 
 import android.graphics.Outline;
+import androidx.compose.ui.geometry.CornerRadius;
 import androidx.compose.ui.geometry.Offset;
 import androidx.compose.ui.geometry.Rect;
 import androidx.compose.ui.geometry.RoundRect;
@@ -8,11 +9,12 @@ import androidx.compose.ui.geometry.RoundRectKt;
 import androidx.compose.ui.geometry.Size;
 import androidx.compose.ui.graphics.AndroidPath;
 import androidx.compose.ui.graphics.AndroidPath_androidKt;
+import androidx.compose.ui.graphics.Canvas;
+import androidx.compose.ui.graphics.ClipOp;
 import androidx.compose.ui.graphics.Outline;
 import androidx.compose.ui.graphics.Path;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class OutlineResolver {
     public boolean cacheIsDirty;
@@ -38,20 +40,63 @@ public final class OutlineResolver {
         this.rectSize = 0L;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:23:0x0073, code lost:
-    
-        if (java.lang.Float.intBitsToFloat((int) (r5.topLeftCornerRadius >> 32)) == r0) goto L31;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:26:0x0076  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void clipToOutline(androidx.compose.ui.graphics.Canvas r14) {
-        /*
-            Method dump skipped, instructions count: 279
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.platform.OutlineResolver.clipToOutline(androidx.compose.ui.graphics.Canvas):void");
+    public final void clipToOutline(Canvas canvas) {
+        updateCache();
+        Path path = this.outlinePath;
+        if (path != null) {
+            Canvas.m454clipPathmtrdDE$default(canvas, path);
+            return;
+        }
+        float f = this.roundedCornerRadius;
+        if (f <= 0.0f) {
+            float fIntBitsToFloat = Float.intBitsToFloat((int) (this.rectTopLeft >> 32));
+            float fIntBitsToFloat2 = Float.intBitsToFloat((int) (this.rectTopLeft & 4294967295L));
+            float fIntBitsToFloat3 = Float.intBitsToFloat((int) (this.rectSize >> 32)) + Float.intBitsToFloat((int) (this.rectTopLeft >> 32));
+            float fIntBitsToFloat4 = Float.intBitsToFloat((int) (this.rectSize & 4294967295L)) + Float.intBitsToFloat((int) (this.rectTopLeft & 4294967295L));
+            ClipOp.Companion.getClass();
+            canvas.mo426clipRectN_I0leg(fIntBitsToFloat, fIntBitsToFloat2, fIntBitsToFloat3, fIntBitsToFloat4, ClipOp.Intersect);
+            return;
+        }
+        Path Path = this.tmpPath;
+        RoundRect roundRect = this.tmpRoundRect;
+        if (Path != null) {
+            long j = this.rectTopLeft;
+            long j2 = this.rectSize;
+            if (roundRect == null || !RoundRectKt.isSimple(roundRect)) {
+                float fIntBitsToFloat5 = Float.intBitsToFloat((int) (this.rectTopLeft >> 32));
+                float fIntBitsToFloat6 = Float.intBitsToFloat((int) (this.rectTopLeft & 4294967295L));
+                float fIntBitsToFloat7 = Float.intBitsToFloat((int) (this.rectSize >> 32)) + Float.intBitsToFloat((int) (this.rectTopLeft >> 32));
+                float fIntBitsToFloat8 = Float.intBitsToFloat((int) (this.rectSize & 4294967295L)) + Float.intBitsToFloat((int) (this.rectTopLeft & 4294967295L));
+                float f2 = this.roundedCornerRadius;
+                long jFloatToRawIntBits = (Float.floatToRawIntBits(f2) << 32) | (4294967295L & Float.floatToRawIntBits(f2));
+                CornerRadius.Companion companion = CornerRadius.Companion;
+                RoundRect roundRectM414RoundRectgG7oq9Y = RoundRectKt.m414RoundRectgG7oq9Y(fIntBitsToFloat5, fIntBitsToFloat6, fIntBitsToFloat7, fIntBitsToFloat8, jFloatToRawIntBits);
+                if (Path == null) {
+                    Path = AndroidPath_androidKt.Path();
+                } else {
+                    ((AndroidPath) Path).reset();
+                }
+                Path.addRoundRect$default(Path, roundRectM414RoundRectgG7oq9Y);
+                this.tmpRoundRect = roundRectM414RoundRectgG7oq9Y;
+                this.tmpPath = Path;
+            } else {
+                int i = (int) (j >> 32);
+                if (roundRect.left == Float.intBitsToFloat(i)) {
+                    int i2 = (int) (j & 4294967295L);
+                    if (roundRect.top == Float.intBitsToFloat(i2)) {
+                        if (roundRect.right == Float.intBitsToFloat((int) (j2 >> 32)) + Float.intBitsToFloat(i)) {
+                            if (roundRect.bottom != Float.intBitsToFloat((int) (j2 & 4294967295L)) + Float.intBitsToFloat(i2) || Float.intBitsToFloat((int) (roundRect.topLeftCornerRadius >> 32)) != f) {
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        Canvas.m454clipPathmtrdDE$default(canvas, Path);
     }
 
     public final Outline getAndroidOutline() {
@@ -63,7 +108,7 @@ public final class OutlineResolver {
     }
 
     /* renamed from: isInOutline-k-4lQ0M, reason: not valid java name */
-    public final boolean m707isInOutlinek4lQ0M(long j) {
+    public final boolean m709isInOutlinek4lQ0M(long j) {
         androidx.compose.ui.graphics.Outline outline;
         if (this.outlineNeeded && (outline = this.outline) != null) {
             return ShapeContainingUtilKt.isInOutline(outline, Float.intBitsToFloat((int) (j >> 32)), Float.intBitsToFloat((int) (j & 4294967295L)));
@@ -72,11 +117,11 @@ public final class OutlineResolver {
     }
 
     /* renamed from: update-S_szKao, reason: not valid java name */
-    public final boolean m708updateS_szKao(androidx.compose.ui.graphics.Outline outline, float f, boolean z, float f2, long j) {
+    public final boolean m710updateS_szKao(androidx.compose.ui.graphics.Outline outline, float f, boolean z, float f2, long j) {
         this.cachedOutline.setAlpha(f);
-        boolean areEqual = Intrinsics.areEqual(this.outline, outline);
-        boolean z2 = !areEqual;
-        if (!areEqual) {
+        boolean zAreEqual = Intrinsics.areEqual(this.outline, outline);
+        boolean z2 = !zAreEqual;
+        if (!zAreEqual) {
             this.outline = outline;
             this.cacheIsDirty = true;
         }
@@ -104,15 +149,15 @@ public final class OutlineResolver {
             }
             if (outline instanceof Outline.Rectangle) {
                 Rect rect = ((Outline.Rectangle) outline).rect;
-                long floatToRawIntBits = Float.floatToRawIntBits(rect.left);
+                long jFloatToRawIntBits = Float.floatToRawIntBits(rect.left);
                 float f = rect.top;
-                this.rectTopLeft = (floatToRawIntBits << 32) | (Float.floatToRawIntBits(f) & 4294967295L);
+                this.rectTopLeft = (jFloatToRawIntBits << 32) | (Float.floatToRawIntBits(f) & 4294967295L);
                 float f2 = rect.right;
                 float f3 = rect.left;
                 float f4 = rect.bottom;
-                long floatToRawIntBits2 = Float.floatToRawIntBits(f2 - f3);
+                long jFloatToRawIntBits2 = Float.floatToRawIntBits(f2 - f3);
                 Size.Companion companion = Size.Companion;
-                this.rectSize = (Float.floatToRawIntBits(f4 - f) & 4294967295L) | (floatToRawIntBits2 << 32);
+                this.rectSize = (Float.floatToRawIntBits(f4 - f) & 4294967295L) | (jFloatToRawIntBits2 << 32);
                 this.cachedOutline.setRect(Math.round(f3), Math.round(f), Math.round(f2), Math.round(f4));
                 return;
             }
@@ -129,31 +174,31 @@ public final class OutlineResolver {
                 return;
             }
             RoundRect roundRect = ((Outline.Rounded) outline).roundRect;
-            float intBitsToFloat = Float.intBitsToFloat((int) (roundRect.topLeftCornerRadius >> 32));
+            float fIntBitsToFloat = Float.intBitsToFloat((int) (roundRect.topLeftCornerRadius >> 32));
             float f5 = roundRect.left;
-            long floatToRawIntBits3 = Float.floatToRawIntBits(f5);
+            long jFloatToRawIntBits3 = Float.floatToRawIntBits(f5);
             float f6 = roundRect.top;
-            this.rectTopLeft = (floatToRawIntBits3 << 32) | (Float.floatToRawIntBits(f6) & 4294967295L);
+            this.rectTopLeft = (jFloatToRawIntBits3 << 32) | (Float.floatToRawIntBits(f6) & 4294967295L);
             float width = roundRect.getWidth();
             float height = roundRect.getHeight();
-            long floatToRawIntBits4 = Float.floatToRawIntBits(width);
+            long jFloatToRawIntBits4 = Float.floatToRawIntBits(width);
             Size.Companion companion2 = Size.Companion;
-            this.rectSize = (Float.floatToRawIntBits(height) & 4294967295L) | (floatToRawIntBits4 << 32);
+            this.rectSize = (Float.floatToRawIntBits(height) & 4294967295L) | (jFloatToRawIntBits4 << 32);
             if (RoundRectKt.isSimple(roundRect)) {
-                this.cachedOutline.setRoundRect(Math.round(f5), Math.round(f6), Math.round(roundRect.right), Math.round(roundRect.bottom), intBitsToFloat);
-                this.roundedCornerRadius = intBitsToFloat;
+                this.cachedOutline.setRoundRect(Math.round(f5), Math.round(f6), Math.round(roundRect.right), Math.round(roundRect.bottom), fIntBitsToFloat);
+                this.roundedCornerRadius = fIntBitsToFloat;
                 return;
             }
-            AndroidPath androidPath = this.cachedRrectPath;
-            if (androidPath == null) {
-                androidPath = AndroidPath_androidKt.Path();
-                this.cachedRrectPath = androidPath;
+            AndroidPath androidPathPath = this.cachedRrectPath;
+            if (androidPathPath == null) {
+                androidPathPath = AndroidPath_androidKt.Path();
+                this.cachedRrectPath = androidPathPath;
             }
-            androidPath.reset();
-            Path.addRoundRect$default(androidPath, roundRect);
-            OutlineVerificationHelper.INSTANCE.setPath(this.cachedOutline, androidPath);
+            androidPathPath.reset();
+            Path.addRoundRect$default(androidPathPath, roundRect);
+            OutlineVerificationHelper.INSTANCE.setPath(this.cachedOutline, androidPathPath);
             this.usePathForClip = !this.cachedOutline.canClip();
-            this.outlinePath = androidPath;
+            this.outlinePath = androidPathPath;
         }
     }
 }

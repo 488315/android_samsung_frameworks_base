@@ -12,9 +12,9 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.android.systemui.R;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class BasicViewPagerAppBarWhiteCaseView extends BasicViewPagerAppBarView {
+    /* JADX WARN: Multi-variable type inference failed */
     public BasicViewPagerAppBarWhiteCaseView(Context context) {
         this(context, null, 2, 0 == true ? 1 : 0);
     }
@@ -42,28 +42,28 @@ public abstract class BasicViewPagerAppBarWhiteCaseView extends BasicViewPagerAp
 
     @Override // com.google.android.material.appbar.model.view.ViewPagerAppBarView, com.google.android.material.appbar.model.view.AppBarView
     public void updateResource(Context context) {
-        Drawable drawable;
-        Drawable mutate;
+        Drawable drawableMutate;
+        Drawable drawableMutate2;
         ViewPager2 viewpager = getViewpager();
         if (viewpager != null) {
             viewpager.setBackgroundTintList(getViewPagerBackgroundColorStateList(context));
         }
         SeslIndicator indicator = getIndicator();
         if (indicator != null) {
-            Drawable drawable2 = context.getDrawable(R.drawable.sesl_viewpager_indicator_on_off);
-            Drawable drawable3 = null;
-            if (drawable2 == null || (drawable = drawable2.mutate()) == null) {
-                drawable = null;
+            Drawable drawable = context.getDrawable(R.drawable.sesl_viewpager_indicator_on_off);
+            Drawable drawable2 = null;
+            if (drawable == null || (drawableMutate = drawable.mutate()) == null) {
+                drawableMutate = null;
             } else {
-                drawable.setTint(getViewPagerIndicatorOffWithWhiteCaseColor(context));
+                drawableMutate.setTint(getViewPagerIndicatorOffWithWhiteCaseColor(context));
             }
-            indicator.setDefaultCircle(drawable);
-            Drawable drawable4 = context.getDrawable(R.drawable.sesl_viewpager_indicator_on_off);
-            if (drawable4 != null && (mutate = drawable4.mutate()) != null) {
-                mutate.setTint(getViewPagerIndicatorOnWithWhiteCaseColor(context));
-                drawable3 = mutate;
+            indicator.setDefaultCircle(drawableMutate);
+            Drawable drawable3 = context.getDrawable(R.drawable.sesl_viewpager_indicator_on_off);
+            if (drawable3 != null && (drawableMutate2 = drawable3.mutate()) != null) {
+                drawableMutate2.setTint(getViewPagerIndicatorOnWithWhiteCaseColor(context));
+                drawable2 = drawableMutate2;
             }
-            indicator.setSelectCircle(drawable3);
+            indicator.setSelectCircle(drawable2);
         }
     }
 

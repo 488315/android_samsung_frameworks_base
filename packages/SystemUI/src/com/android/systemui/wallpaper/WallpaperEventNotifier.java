@@ -3,6 +3,7 @@ package com.android.systemui.wallpaper;
 import android.app.SemWallpaperColors;
 import android.app.WallpaperManager;
 import android.content.Context;
+import android.os.Debug;
 import android.os.Handler;
 import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
 import android.util.Log;
@@ -17,7 +18,6 @@ import com.android.systemui.widget.SystemUIWidgetCallback;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class WallpaperEventNotifier {
     public static final boolean DEBUG = !DeviceType.isShipBuild();
@@ -31,7 +31,6 @@ public class WallpaperEventNotifier {
     public boolean mIsThemeApplying = false;
     public final ArrayList mLogs = new ArrayList();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DebugLog {
         public final String text;
         public final long time = System.currentTimeMillis();
@@ -69,9 +68,9 @@ public class WallpaperEventNotifier {
         } else {
             sb.append("null");
         }
-        StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(str, ": ");
-        m.append(sb.toString());
-        Log.d("WallpaperEventNotifier", m.toString());
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(str, ": ");
+        sbM.append(sb.toString());
+        Log.d("WallpaperEventNotifier", sbM.toString());
         addLog(str + ": " + sb.toString());
     }
 
@@ -80,18 +79,67 @@ public class WallpaperEventNotifier {
         return keyguardWallpaperColors.getSemWallpaperColors(keyguardWallpaperColors.mSelectedUserId, z);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:37:0x00b5  */
-    /* JADX WARN: Removed duplicated region for block: B:42:0x00db  */
+    /* JADX WARN: Removed duplicated region for block: B:47:0x00b5  */
+    /* JADX WARN: Removed duplicated region for block: B:52:0x00db  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void registerCallback(boolean r11, com.android.systemui.widget.SystemUIWidgetCallback r12, long r13) {
-        /*
-            Method dump skipped, instructions count: 232
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.wallpaper.WallpaperEventNotifier.registerCallback(boolean, com.android.systemui.widget.SystemUIWidgetCallback, long):void");
+    public final void registerCallback(boolean z, SystemUIWidgetCallback systemUIWidgetCallback, long j) {
+        long j2;
+        long j3;
+        synchronized ((z ? this.mCoverCallbacks : this.mCallbacks)) {
+            try {
+                ArrayList arrayList = z ? this.mCoverCallbacks : this.mCallbacks;
+                for (int i = 0; i < arrayList.size(); i++) {
+                    if (((WeakReference) ((Pair) arrayList.get(i)).first).get() == systemUIWidgetCallback) {
+                        Log.e("WallpaperEventNotifier", "registerCallback: Object tried to add another callback " + Debug.getCaller());
+                        return;
+                    }
+                }
+                arrayList.add(Pair.create(new WeakReference(systemUIWidgetCallback), Long.valueOf(j)));
+                removeCallback(z, null);
+                if (this.mIsThemeApplying) {
+                    Log.d("WallpaperEventNotifier", "sendUpdates: Ignore update while theme is applying...");
+                    addLog("sendUpdates: Ignore update while theme is applying...");
+                    return;
+                }
+                KeyguardWallpaperColors keyguardWallpaperColors = this.mKeyguardWallpaperColors;
+                SemWallpaperColors semWallpaperColors = keyguardWallpaperColors.getSemWallpaperColors(keyguardWallpaperColors.mSelectedUserId, z);
+                if (semWallpaperColors == null) {
+                    Log.d("WallpaperEventNotifier", "sendUpdates: We don't have any colors to notify for now.");
+                    addLog("sendUpdates: We don't have any colors to notify for now");
+                    return;
+                }
+                if (!z) {
+                    long j4 = this.mCurStatusFlag;
+                    if ((1 & j4) == 0) {
+                        j &= -2;
+                    }
+                    if ((2 & j4) == 0) {
+                        j &= -3;
+                    }
+                    j3 = (j4 & 1024) == 0 ? -1025L : -1028L;
+                    j2 = j;
+                    if (j2 != 0) {
+                        Log.d("WallpaperEventNotifier", "sendUpdates: Nothing to notify");
+                        addLog("sendUpdates: Nothing to notify");
+                        return;
+                    }
+                    if (DEBUG) {
+                        debugNotify(z, j2, semWallpaperColors, "sendUpdates");
+                    }
+                    Log.d("WallpaperEventNotifier", "sendUpdates: typesTobeNotified = " + KeyguardWallpaperColors.getChangeFlagsString(j2));
+                    systemUIWidgetCallback.updateStyle(j2, semWallpaperColors);
+                    return;
+                }
+                j &= j3;
+                j2 = j;
+                if (j2 != 0) {
+                }
+            } catch (Throwable th) {
+                throw th;
+            }
+        }
     }
 
     public final void removeCallback(boolean z, SystemUIWidgetCallback systemUIWidgetCallback) {
@@ -117,11 +165,11 @@ public class WallpaperEventNotifier {
             addLog("setCurStatusFlag: colors is null. May cause unexptected behaviour!");
             return;
         }
-        long checkBaseUpdates = this.mKeyguardWallpaperColors.checkBaseUpdates(semWallpaperColors);
+        long jCheckBaseUpdates = this.mKeyguardWallpaperColors.checkBaseUpdates(semWallpaperColors);
         if (z) {
             return;
         }
-        this.mCurStatusFlag = checkBaseUpdates;
+        this.mCurStatusFlag = jCheckBaseUpdates;
     }
 
     public final void update(boolean z, long j, final SemWallpaperColors semWallpaperColors) {
@@ -143,34 +191,46 @@ public class WallpaperEventNotifier {
                     for (int i = 0; i < arrayList.size(); i++) {
                         Pair pair = (Pair) arrayList.get(i);
                         final SystemUIWidgetCallback systemUIWidgetCallback = (SystemUIWidgetCallback) ((WeakReference) pair.first).get();
-                        long longValue = ((Long) pair.second).longValue();
+                        long jLongValue = ((Long) pair.second).longValue();
                         if (systemUIWidgetCallback != null) {
-                            if ((longValue & j2) == 0) {
-                                if ((8 & longValue) != 0) {
-                                    for (int i2 = 0; i2 < KeyguardWallpaperColors.NUM_SEPARATED_AREA; i2++) {
-                                        if ((KeyguardWallpaperColors.UPDATE_FLAGS[i2] & longValue) != 0 && (KeyguardWallpaperColors.UPDATE_FLAGS_SHADOW[i2] & j2) != 0) {
-                                            break;
-                                        }
+                            if ((jLongValue & j2) != 0) {
+                                this.mHandler.post(new Runnable() { // from class: com.android.systemui.wallpaper.WallpaperEventNotifier$$ExternalSyntheticLambda1
+                                    @Override // java.lang.Runnable
+                                    public final void run() {
+                                        SystemUIWidgetCallback systemUIWidgetCallback2 = systemUIWidgetCallback;
+                                        long j3 = j2;
+                                        SemWallpaperColors semWallpaperColors2 = semWallpaperColors;
+                                        boolean z2 = WallpaperEventNotifier.DEBUG;
+                                        systemUIWidgetCallback2.updateStyle(j3, semWallpaperColors2);
                                     }
-                                }
-                                if ((4 & longValue) != 0) {
-                                    for (int i3 = 0; i3 < KeyguardWallpaperColors.NUM_SEPARATED_AREA; i3++) {
-                                        if ((KeyguardWallpaperColors.UPDATE_FLAGS[i3] & longValue) == 0 || (KeyguardWallpaperColors.UPDATE_FLAGS_ADAPTIVE_CONTRAST[i3] & j2) == 0) {
-                                        }
+                                });
+                                break;
+                            }
+                            if ((8 & jLongValue) != 0) {
+                                for (int i2 = 0; i2 < KeyguardWallpaperColors.NUM_SEPARATED_AREA; i2++) {
+                                    if ((KeyguardWallpaperColors.UPDATE_FLAGS[i2] & jLongValue) != 0 && (KeyguardWallpaperColors.UPDATE_FLAGS_SHADOW[i2] & j2) != 0) {
+                                        break;
                                     }
                                 }
                             }
-                            this.mHandler.post(new Runnable() { // from class: com.android.systemui.wallpaper.WallpaperEventNotifier$$ExternalSyntheticLambda1
-                                @Override // java.lang.Runnable
-                                public final void run() {
-                                    SystemUIWidgetCallback systemUIWidgetCallback2 = SystemUIWidgetCallback.this;
-                                    long j3 = j2;
-                                    SemWallpaperColors semWallpaperColors2 = semWallpaperColors;
-                                    boolean z2 = WallpaperEventNotifier.DEBUG;
-                                    systemUIWidgetCallback2.updateStyle(j3, semWallpaperColors2);
+                            if ((4 & jLongValue) != 0) {
+                                for (int i3 = 0; i3 < KeyguardWallpaperColors.NUM_SEPARATED_AREA; i3++) {
+                                    if ((KeyguardWallpaperColors.UPDATE_FLAGS[i3] & jLongValue) != 0 && (KeyguardWallpaperColors.UPDATE_FLAGS_ADAPTIVE_CONTRAST[i3] & j2) != 0) {
+                                        this.mHandler.post(new Runnable() { // from class: com.android.systemui.wallpaper.WallpaperEventNotifier$$ExternalSyntheticLambda1
+                                            @Override // java.lang.Runnable
+                                            public final void run() {
+                                                SystemUIWidgetCallback systemUIWidgetCallback2 = systemUIWidgetCallback;
+                                                long j3 = j2;
+                                                SemWallpaperColors semWallpaperColors2 = semWallpaperColors;
+                                                boolean z2 = WallpaperEventNotifier.DEBUG;
+                                                systemUIWidgetCallback2.updateStyle(j3, semWallpaperColors2);
+                                            }
+                                        });
+                                        break;
+                                        break;
+                                    }
                                 }
-                            });
-                            break;
+                            }
                         }
                     }
                 } catch (Throwable th) {

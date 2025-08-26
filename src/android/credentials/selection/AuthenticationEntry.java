@@ -45,16 +45,16 @@ public final class AuthenticationEntry implements Parcelable {
     }
 
     private AuthenticationEntry(Parcel parcel) {
-        String readString8 = parcel.readString8();
-        this.mKey = readString8;
-        String readString82 = parcel.readString8();
-        this.mSubkey = readString82;
+        String string8 = parcel.readString8();
+        this.mKey = string8;
+        String string82 = parcel.readString8();
+        this.mSubkey = string82;
         this.mStatus = parcel.readInt();
         Slice slice = (Slice) parcel.readTypedObject(Slice.CREATOR);
         this.mSlice = slice;
         this.mFrameworkExtrasIntent = (Intent) parcel.readTypedObject(Intent.CREATOR);
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString8);
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString82);
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string8);
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string82);
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) slice);
     }
 

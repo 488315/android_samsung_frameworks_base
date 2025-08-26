@@ -30,6 +30,7 @@ import com.android.internal.logging.InstanceId;
 import com.android.internal.protolog.ProtoLogImpl_1771455215;
 import com.android.systemui.R;
 import com.android.wm.shell.common.DisplayLayout;
+import com.android.wm.shell.common.MultiInstanceHelper;
 import com.android.wm.shell.desktopmode.DesktopModeUtils;
 import com.android.wm.shell.protolog.ShellProtoLogGroup;
 import com.android.wm.shell.shared.desktopmode.DesktopStateImpl;
@@ -44,7 +45,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SplitDragPolicy {
     public final Context mContext;
@@ -54,6 +54,7 @@ public class SplitDragPolicy {
     public final Starter mFullscreenStarter;
     public boolean mIsIntentSenderDropTarget;
     public InstanceId mLoggerSessionId;
+    public final MultiInstanceHelper mMultiInstanceHelper;
     public final MultiWindowManager mMultiWindowManager;
     public DragSession mSession;
     public final SplitScreenController mSplitScreen;
@@ -62,7 +63,6 @@ public class SplitDragPolicy {
     public Toast mToast;
     public final Transitions mTransitions;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DefaultStarter implements Starter {
         public final Context mContext;
 
@@ -71,7 +71,7 @@ public class SplitDragPolicy {
         }
 
         @Override // com.android.wm.shell.draganddrop.SplitDragPolicy.Starter
-        public final void startIntent(PendingIntent pendingIntent, int i, int i2, Bundle bundle, WindowContainerToken windowContainerToken, int i3) {
+        public final void startIntent(PendingIntent pendingIntent, int i, int i2, Bundle bundle, WindowContainerToken windowContainerToken, int i3) throws PendingIntent.CanceledException {
             if (windowContainerToken != null && ProtoLogImpl_1771455215.Cache.WM_SHELL_DRAG_AND_DROP_enabled[1]) {
                 ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_DRAG_AND_DROP, -9147733928334905053L, 0, null);
             }
@@ -104,7 +104,6 @@ public class SplitDragPolicy {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Target {
         public boolean alreadyRun;
         public final Rect drawRegion;
@@ -156,26 +155,26 @@ public class SplitDragPolicy {
     }
 
     public SplitDragPolicy(Context context, SplitScreenController splitScreenController, DragZoneAnimator dragZoneAnimator) {
-        this(context, splitScreenController, dragZoneAnimator, (Transitions) null);
+        this(context, splitScreenController, dragZoneAnimator, null, null);
     }
 
     public final void calculateDesktopTaskBounds(LaunchOptions launchOptions, ActivityOptions activityOptions) {
         if (launchOptions == null) {
             return;
         }
-        Rect calculateDefaultDesktopTaskBounds = DesktopModeUtils.calculateDefaultDesktopTaskBounds(this.mSession.displayLayout);
+        Rect rectCalculateDefaultDesktopTaskBounds = DesktopModeUtils.calculateDefaultDesktopTaskBounds(this.mSession.displayLayout);
         Rect rect = new Rect();
         this.mSession.displayLayout.getStableBounds(rect, false);
-        int width = calculateDefaultDesktopTaskBounds.width();
-        int height = calculateDefaultDesktopTaskBounds.height();
-        int max = Math.max(launchOptions.dropPositionX - (width / 2), 0);
-        int max2 = Math.max(launchOptions.dropPositionY, rect.top);
-        int i = width + max;
-        int max3 = Math.max(i - rect.right, 0);
-        int i2 = height + max2;
-        int max4 = Math.max(i2 - rect.bottom, 0);
-        Rect rect2 = new Rect(max, max2, i, i2);
-        rect2.offset(-max3, -max4);
+        int iWidth = rectCalculateDefaultDesktopTaskBounds.width();
+        int iHeight = rectCalculateDefaultDesktopTaskBounds.height();
+        int iMax = Math.max(launchOptions.dropPositionX - (iWidth / 2), 0);
+        int iMax2 = Math.max(launchOptions.dropPositionY, rect.top);
+        int i = iWidth + iMax;
+        int iMax3 = Math.max(i - rect.right, 0);
+        int i2 = iHeight + iMax2;
+        int iMax4 = Math.max(i2 - rect.bottom, 0);
+        Rect rect2 = new Rect(iMax, iMax2, i, i2);
+        rect2.offset(-iMax3, -iMax4);
         activityOptions.setLaunchBounds(rect2);
     }
 
@@ -192,11 +191,11 @@ public class SplitDragPolicy {
             dimensionPixelSize = this.mContext.getResources().getDimensionPixelSize(R.dimen.dnd_drop_freeform_height);
             dimensionPixelSize2 = this.mContext.getResources().getDimensionPixelSize(R.dimen.dnd_drop_freeform_width);
         }
-        int width = rect.width();
-        int height = rect.height();
-        int m = AbsActionBarView$$ExternalSyntheticOutline0.m(width, dimensionPixelSize, 2, rect.left);
-        int i = (height - dimensionPixelSize2) / 2;
-        rect.set(m, i, dimensionPixelSize + m, dimensionPixelSize2 + i);
+        int iWidth = rect.width();
+        int iHeight = rect.height();
+        int iM = AbsActionBarView$$ExternalSyntheticOutline0.m(iWidth, dimensionPixelSize, 2, rect.left);
+        int i = (iHeight - dimensionPixelSize2) / 2;
+        rect.set(iM, i, dimensionPixelSize + iM, dimensionPixelSize2 + i);
         return rect;
     }
 
@@ -209,30 +208,30 @@ public class SplitDragPolicy {
             ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_DRAG_AND_DROP, -884179424239469908L, 1, Long.valueOf(i));
         }
         ClipDescription description = dragSession.mInitialDragData.getDescription();
-        boolean hasMimeType = description.hasMimeType("application/vnd.android.task");
-        boolean hasMimeType2 = description.hasMimeType("application/vnd.android.shortcut");
-        ActivityOptions makeBasic = ActivityOptions.makeBasic();
-        makeBasic.setDisallowEnterPictureInPictureWhileLaunching(true);
-        makeBasic.setPendingIntentBackgroundActivityStartMode(3);
-        makeBasic.setLaunchDisplayId(i3);
+        boolean zHasMimeType = description.hasMimeType("application/vnd.android.task");
+        boolean zHasMimeType2 = description.hasMimeType("application/vnd.android.shortcut");
+        ActivityOptions activityOptionsMakeBasic = ActivityOptions.makeBasic();
+        activityOptionsMakeBasic.setDisallowEnterPictureInPictureWhileLaunching(true);
+        activityOptionsMakeBasic.setPendingIntentBackgroundActivityStartMode(3);
+        activityOptionsMakeBasic.setLaunchDisplayId(i3);
         DesktopStateImpl.Companion.getClass();
         if (DesktopStateImpl.Companion.inDesktopWindowing(i3)) {
-            calculateDesktopTaskBounds(launchOptions, makeBasic);
+            calculateDesktopTaskBounds(launchOptions, activityOptionsMakeBasic);
         }
-        Bundle bundle = makeBasic.toBundle();
+        Bundle bundle = activityOptionsMakeBasic.toBundle();
         if (dragSession.appData.hasExtra("android.intent.extra.ACTIVITY_OPTIONS")) {
             bundle.putAll(dragSession.appData.getBundleExtra("android.intent.extra.ACTIVITY_OPTIONS"));
         }
-        UserHandle userHandle = (UserHandle) dragSession.appData.getParcelableExtra("android.intent.extra.USER");
-        if (userHandle == null) {
-            userHandle = Process.myUserHandle();
+        UserHandle userHandleMyUserHandle = (UserHandle) dragSession.appData.getParcelableExtra("android.intent.extra.USER");
+        if (userHandleMyUserHandle == null) {
+            userHandleMyUserHandle = Process.myUserHandle();
         }
         int i4 = launchOptions != null ? launchOptions.splitDivision : -1;
         int i5 = launchOptions != null ? launchOptions.cellPosition : 0;
         boolean z = launchOptions != null ? launchOptions.parallelMultiSplit : false;
-        ActivityOptions fromBundle = ActivityOptions.fromBundle(bundle);
-        fromBundle.setStartedFromWindowTypeLauncher(true);
-        Bundle bundle2 = fromBundle.toBundle();
+        ActivityOptions activityOptionsFromBundle = ActivityOptions.fromBundle(bundle);
+        activityOptionsFromBundle.setStartedFromWindowTypeLauncher(true);
+        Bundle bundle2 = activityOptionsFromBundle.toBundle();
         DragSession dragSession2 = this.mSession;
         ExecutableAppHolder executableAppHolder = dragSession2.mExecutableAppHolder;
         if (executableAppHolder != null && executableAppHolder.mExecutableApp != null) {
@@ -254,12 +253,12 @@ public class SplitDragPolicy {
         }
         int i6 = i4;
         boolean z2 = z;
-        UserHandle userHandle2 = userHandle;
-        if (hasMimeType) {
+        UserHandle userHandle = userHandleMyUserHandle;
+        if (zHasMimeType) {
             int intExtra = dragSession.appData.getIntExtra("android.intent.extra.TASK_ID", -1);
             ComponentName component = dragSession.appData.getComponent();
             if (description.isDragFromRecent() && component != null && (starter instanceof SplitScreenController) && i != -1) {
-                startSplitScreenWithAllApps(intExtra, null, component, i, userHandle2, i6);
+                startSplitScreenWithAllApps(intExtra, null, component, i, userHandle, i6);
                 return;
             }
             if (description.isDragFromRecent()) {
@@ -274,29 +273,29 @@ public class SplitDragPolicy {
             }
         }
         int i7 = i5;
-        if (hasMimeType2) {
+        if (zHasMimeType2) {
             if (windowContainerToken != null && ProtoLogImpl_1771455215.Cache.WM_SHELL_DRAG_AND_DROP_enabled[1]) {
                 ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_DRAG_AND_DROP, 1109347913185901988L, 0, null);
             }
-            starter.startShortcut(dragSession.appData.getStringExtra("android.intent.extra.PACKAGE_NAME"), dragSession.appData.getStringExtra("android.intent.extra.shortcut.ID"), i, bundle2, userHandle2);
+            starter.startShortcut(dragSession.appData.getStringExtra("android.intent.extra.PACKAGE_NAME"), dragSession.appData.getStringExtra("android.intent.extra.shortcut.ID"), i, bundle2, userHandle);
             return;
         }
         if ((starter instanceof SplitScreenController) && i != -1) {
             List nonFloatingTopTask = dragSession2.getNonFloatingTopTask();
             if (!nonFloatingTopTask.isEmpty() && ((ActivityManager.RunningTaskInfo) nonFloatingTopTask.get(0)).topActivityType == 2) {
                 PendingIntent pendingIntent = (PendingIntent) dragSession.appData.getParcelableExtra("android.intent.extra.PENDING_INTENT");
-                startSplitScreenWithAllApps(-1, pendingIntent, pendingIntent.getIntent().getComponent(), i, userHandle2, i6);
+                startSplitScreenWithAllApps(-1, pendingIntent, pendingIntent.getIntent().getComponent(), i, userHandle, i6);
                 return;
             }
         }
         PendingIntent pendingIntent2 = (PendingIntent) dragSession.appData.getParcelableExtra("android.intent.extra.PENDING_INTENT");
-        if (Build.IS_DEBUGGABLE && !userHandle2.equals(pendingIntent2.getCreatorUserHandle())) {
+        if (Build.IS_DEBUGGABLE && !userHandle.equals(pendingIntent2.getCreatorUserHandle())) {
             Log.e("SplitDragPolicy", "Expected app intent's EXTRA_USER to match pending intent user");
         }
         if (CoreRune.MW_DND_MULTI_SPLIT_DROP_TARGET) {
-            starter.startIntent(pendingIntent2, userHandle2.getIdentifier(), null, i, bundle2, windowContainerToken, false, i2, i6, i7, z2);
+            starter.startIntent(pendingIntent2, userHandle.getIdentifier(), null, i, bundle2, windowContainerToken, false, i2, i6, i7, z2);
         } else {
-            starter.startIntent(pendingIntent2, userHandle2.getIdentifier(), i, bundle2, windowContainerToken, i2);
+            starter.startIntent(pendingIntent2, userHandle.getIdentifier(), i, bundle2, windowContainerToken, i2);
         }
     }
 
@@ -304,18 +303,18 @@ public class SplitDragPolicy {
         if (ProtoLogImpl_1771455215.Cache.WM_SHELL_DRAG_AND_DROP_enabled[1]) {
             ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_DRAG_AND_DROP, -4103711109691327801L, 1, Long.valueOf(i));
         }
-        ActivityOptions makeBasic = ActivityOptions.makeBasic();
-        makeBasic.setDisallowEnterPictureInPictureWhileLaunching(true);
-        makeBasic.setPendingIntentBackgroundActivityStartMode(2);
-        makeBasic.setPendingIntentLaunchFlags(402653184);
-        makeBasic.setLaunchDisplayId(i3);
+        ActivityOptions activityOptionsMakeBasic = ActivityOptions.makeBasic();
+        activityOptionsMakeBasic.setDisallowEnterPictureInPictureWhileLaunching(true);
+        activityOptionsMakeBasic.setPendingIntentBackgroundActivityStartMode(2);
+        activityOptionsMakeBasic.setPendingIntentLaunchFlags(402653184);
+        activityOptionsMakeBasic.setLaunchDisplayId(i3);
         DesktopStateImpl.Companion.getClass();
         if (DesktopStateImpl.Companion.inDesktopWindowing(i3)) {
-            calculateDesktopTaskBounds(launchOptions, makeBasic);
+            calculateDesktopTaskBounds(launchOptions, activityOptionsMakeBasic);
         }
-        ActivityOptions fromBundle = ActivityOptions.fromBundle(makeBasic.toBundle());
-        fromBundle.setStartedFromWindowTypeLauncher(true);
-        Bundle bundle = fromBundle.toBundle();
+        ActivityOptions activityOptionsFromBundle = ActivityOptions.fromBundle(activityOptionsMakeBasic.toBundle());
+        activityOptionsFromBundle.setStartedFromWindowTypeLauncher(true);
+        Bundle bundle = activityOptionsFromBundle.toBundle();
         int i4 = launchOptions != null ? launchOptions.splitDivision : -1;
         int i5 = launchOptions != null ? launchOptions.cellPosition : 0;
         boolean z = launchOptions != null ? launchOptions.parallelMultiSplit : false;
@@ -327,10 +326,10 @@ public class SplitDragPolicy {
             }
             return;
         }
-        ActivityOptions fromBundle2 = ActivityOptions.fromBundle(bundle);
-        fromBundle2.setLaunchWindowingMode(1);
-        fromBundle2.setPendingIntentBackgroundActivityStartMode(3);
-        Bundle bundle2 = fromBundle2.toBundle();
+        ActivityOptions activityOptionsFromBundle2 = ActivityOptions.fromBundle(bundle);
+        activityOptionsFromBundle2.setLaunchWindowingMode(1);
+        activityOptionsFromBundle2.setPendingIntentBackgroundActivityStartMode(3);
+        Bundle bundle2 = activityOptionsFromBundle2.toBundle();
         WindowContainerTransaction windowContainerTransaction = new WindowContainerTransaction();
         windowContainerTransaction.sendPendingIntent(dragSession.launchableIntent, (Intent) null, bundle2);
         this.mTransitions.startTransition(1, windowContainerTransaction, null);
@@ -360,6 +359,10 @@ public class SplitDragPolicy {
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:43:0x00e2 A[Catch: all -> 0x008b, TRY_LEAVE, TryCatch #0 {all -> 0x008b, blocks: (B:25:0x0087, B:28:0x008e, B:32:0x0097, B:34:0x009b, B:36:0x00a1, B:38:0x00b1, B:42:0x00c0, B:43:0x00e2), top: B:52:0x0087 }] */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void startDragAndSplit(Starter starter, Intent intent, int i, int i2, DragAndDropPermissions dragAndDropPermissions, Bundle bundle, int i3, int i4, boolean z) {
         int i5;
         int i6 = this.mSession.mExecutableAppHolder.mCallingUserId;
@@ -396,19 +399,18 @@ public class SplitDragPolicy {
             }
         }
         int i7 = this.mSession.isDragDataDropResolver ? userId : i6;
-        if ((starter instanceof SplitScreenController) && !splitScreenController.isSplitScreenVisible()) {
+        if (!(starter instanceof SplitScreenController) || splitScreenController.isSplitScreenVisible()) {
+            starter.startDragAndSplit(intent, i, i2, bundle, i7, i3, i4, z);
+        } else {
             ArrayList arrayList = (ArrayList) this.mSession.mVisibleTasks.getFullscreenTasks();
             if (!arrayList.isEmpty() && ((i5 = ((ActivityManager.RunningTaskInfo) arrayList.get(0)).topActivityType) == 2 || i5 == 3)) {
                 startSplitScreenWithAllApps(-1, PendingIntent.getActivityAsUser(this.mContext, 0, intent, 33554432, null, new UserHandle(i7)), intent.getComponent(), i, new UserHandle(i7), i3);
-                if (dragAndDropPermissions != null || z2) {
-                }
-                dragAndDropPermissions.release();
-                return;
             }
         }
-        starter.startDragAndSplit(intent, i, i2, bundle, i7, i3, i4, z);
-        if (dragAndDropPermissions != null) {
+        if (dragAndDropPermissions == null || z2) {
+            return;
         }
+        dragAndDropPermissions.release();
     }
 
     public final void startSplitScreenWithAllApps(int i, PendingIntent pendingIntent, ComponentName componentName, int i2, UserHandle userHandle, int i3) {
@@ -437,15 +439,15 @@ public class SplitDragPolicy {
         return CoreRune.MW_MULTI_SPLIT_ENSURE_APP_SIZE && this.mMultiWindowManager.supportMultiSplitAppMinimumSize();
     }
 
-    public SplitDragPolicy(Context context, SplitScreenController splitScreenController, DragZoneAnimator dragZoneAnimator, Transitions transitions) {
-        this(context, splitScreenController, new DefaultStarter(context), dragZoneAnimator, transitions);
+    public SplitDragPolicy(Context context, SplitScreenController splitScreenController, DragZoneAnimator dragZoneAnimator, Transitions transitions, MultiInstanceHelper multiInstanceHelper) {
+        this(context, splitScreenController, new DefaultStarter(context), dragZoneAnimator, transitions, multiInstanceHelper);
     }
 
     public SplitDragPolicy(Context context, SplitScreenController splitScreenController, Starter starter, DragZoneAnimator dragZoneAnimator) {
-        this(context, splitScreenController, starter, dragZoneAnimator, null);
+        this(context, splitScreenController, starter, dragZoneAnimator, null, null);
     }
 
-    public SplitDragPolicy(Context context, SplitScreenController splitScreenController, Starter starter, DragZoneAnimator dragZoneAnimator, Transitions transitions) {
+    public SplitDragPolicy(Context context, SplitScreenController splitScreenController, Starter starter, DragZoneAnimator dragZoneAnimator, Transitions transitions, MultiInstanceHelper multiInstanceHelper) {
         this.mTargets = new ArrayList();
         this.mDisallowHitRegion = new RectF();
         new HashMap();
@@ -460,9 +462,9 @@ public class SplitDragPolicy {
         sparseArray.put(1, new AospSplitDropTargetProvider(this, context));
         sparseArray.put(2, new MultiSplitDropTargetProvider(this, context));
         this.mTransitions = transitions;
+        this.mMultiInstanceHelper = multiInstanceHelper;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class LaunchOptions {
         public final int cellPosition;
         public final int dropPositionX;
@@ -490,7 +492,6 @@ public class SplitDragPolicy {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Starter {
         void startIntent(PendingIntent pendingIntent, int i, int i2, Bundle bundle, WindowContainerToken windowContainerToken, int i3);
 

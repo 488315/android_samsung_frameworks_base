@@ -51,40 +51,40 @@ public class SemImsUri implements Parcelable {
         if (str == null) {
             return null;
         }
-        String replaceAll = PATTERN_WHITE_SPACES.matcher(str).replaceAll("");
-        int indexOf = replaceAll.indexOf(58);
-        if (indexOf < 0) {
+        String strReplaceAll = PATTERN_WHITE_SPACES.matcher(str).replaceAll("");
+        int iIndexOf = strReplaceAll.indexOf(58);
+        if (iIndexOf < 0) {
             StringBuilder sb = new StringBuilder("parse: illegal Uri - ");
             if (!DBG) {
-                replaceAll = "xxxxx";
+                strReplaceAll = "xxxxx";
             }
-            sb.append(replaceAll);
+            sb.append(strReplaceAll);
             Log.e(LOG_TAG, sb.toString());
             return null;
         }
-        String substring = replaceAll.substring(0, indexOf);
+        String strSubstring = strReplaceAll.substring(0, iIndexOf);
         try {
         } catch (Exception e) {
             StringBuilder sb2 = new StringBuilder("parse: failured. uri=");
             if (!DBG) {
-                replaceAll = "xxxxx";
+                strReplaceAll = "xxxxx";
             }
-            sb2.append(replaceAll);
+            sb2.append(strReplaceAll);
             sb2.append(" e=");
             sb2.append(e);
             Log.e(LOG_TAG, sb2.toString());
             e.printStackTrace();
         }
-        if (!"sip".equalsIgnoreCase(substring) && !"sips".equalsIgnoreCase(substring)) {
-            if (PhoneAccount.SCHEME_TEL.equalsIgnoreCase(substring)) {
-                return new SemImsUri(SemTelUri.parseUri(replaceAll));
+        if (!"sip".equalsIgnoreCase(strSubstring) && !"sips".equalsIgnoreCase(strSubstring)) {
+            if (PhoneAccount.SCHEME_TEL.equalsIgnoreCase(strSubstring)) {
+                return new SemImsUri(SemTelUri.parseUri(strReplaceAll));
             }
-            if ("urn".equalsIgnoreCase(substring)) {
-                return new SemImsUri(replaceAll);
+            if ("urn".equalsIgnoreCase(strSubstring)) {
+                return new SemImsUri(strReplaceAll);
             }
             return null;
         }
-        return new SemImsUri(new URLParser(replaceAll).sipURL(true));
+        return new SemImsUri(new URLParser(strReplaceAll).sipURL(true));
     }
 
     public SemImsUri() {
@@ -120,9 +120,9 @@ public class SemImsUri implements Parcelable {
             if (str == null) {
                 this.mMsisdn = "";
             } else {
-                int indexOf = str.indexOf(59);
-                if (indexOf > 0) {
-                    this.mMsisdn = this.mUser.substring(0, indexOf);
+                int iIndexOf = str.indexOf(59);
+                if (iIndexOf > 0) {
+                    this.mMsisdn = this.mUser.substring(0, iIndexOf);
                 } else {
                     this.mMsisdn = this.mUser;
                 }

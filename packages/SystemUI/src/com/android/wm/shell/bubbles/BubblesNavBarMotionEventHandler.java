@@ -2,6 +2,7 @@ package com.android.wm.shell.bubbles;
 
 import android.R;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.view.MotionEvent;
@@ -11,7 +12,6 @@ import com.android.internal.protolog.ProtoLogImpl_1771455215;
 import com.android.wm.shell.bubbles.BubbleStackView;
 import com.android.wm.shell.protolog.ShellProtoLogGroup;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class BubblesNavBarMotionEventHandler {
     public boolean mInterceptingTouches;
@@ -23,7 +23,6 @@ public class BubblesNavBarMotionEventHandler {
     public boolean mTrackingTouches;
     public VelocityTracker mVelocityTracker;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface MotionEventListener {
     }
 
@@ -34,14 +33,14 @@ public class BubblesNavBarMotionEventHandler {
         this.mMotionEventListener = motionEventListener;
     }
 
-    public final boolean onMotionEvent(MotionEvent motionEvent) {
+    public final boolean onMotionEvent(MotionEvent motionEvent) throws Resources.NotFoundException {
         float x = motionEvent.getX() - this.mTouchDown.x;
         float y = motionEvent.getY() - this.mTouchDown.y;
         int action = motionEvent.getAction();
         MotionEventListener motionEventListener = this.mMotionEventListener;
         if (action == 0) {
             BubblePositioner bubblePositioner = this.mPositioner;
-            int dimensionPixelSize = bubblePositioner.mContext.getResources().getDimensionPixelSize(R.dimen.seekbar_thumb_exclusion_max_size);
+            int dimensionPixelSize = bubblePositioner.mContext.getResources().getDimensionPixelSize(R.dimen.seekbar_track_background_height_material);
             Rect rect = bubblePositioner.mScreenRect;
             int i = rect.left;
             int i2 = rect.bottom;
@@ -49,7 +48,7 @@ public class BubblesNavBarMotionEventHandler {
                 if (ProtoLogImpl_1771455215.Cache.WM_SHELL_BUBBLES_enabled[0]) {
                     long x2 = (int) motionEvent.getX();
                     long y2 = (int) motionEvent.getY();
-                    int dimensionPixelSize2 = bubblePositioner.mContext.getResources().getDimensionPixelSize(R.dimen.seekbar_thumb_exclusion_max_size);
+                    int dimensionPixelSize2 = bubblePositioner.mContext.getResources().getDimensionPixelSize(R.dimen.seekbar_track_background_height_material);
                     Rect rect2 = bubblePositioner.mScreenRect;
                     int i3 = rect2.left;
                     int i4 = rect2.bottom;

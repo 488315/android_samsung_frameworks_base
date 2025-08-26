@@ -24,17 +24,17 @@ public final class SemDisplayAdaptiveSyncManager {
     }
 
     public static int setAdaptiveSyncEnabled(boolean z) {
-        ISemDisplayQualityManager asInterface = ISemDisplayQualityManager.Stub.asInterface(ServiceManager.getService(Context.SEM_DISPLAY_QUALITY_SERVICE));
+        ISemDisplayQualityManager iSemDisplayQualityManagerAsInterface = ISemDisplayQualityManager.Stub.asInterface(ServiceManager.getService(Context.SEM_DISPLAY_QUALITY_SERVICE));
         if (!mEnabled || !mSupportAdaptiveSync) {
             Slog.e(TAG, "SemDisplayAdaptiveSyncManager is not supported");
             return 2;
         }
-        if (asInterface == null) {
+        if (iSemDisplayQualityManagerAsInterface == null) {
             Slog.e(TAG, "SemDisplayAdaptiveSyncManagerService is null");
             return 1;
         }
         try {
-            asInterface.setAdaptiveSync(z);
+            iSemDisplayQualityManagerAsInterface.setAdaptiveSync(z);
             return 0;
         } catch (Exception e) {
             Slog.e(TAG, "setAdaptiveSync", e);

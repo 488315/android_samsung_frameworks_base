@@ -46,9 +46,9 @@ public interface IFingerprintAuthenticatorsRegisteredCallback extends IInterface
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IFingerprintAuthenticatorsRegisteredCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IFingerprintAuthenticatorsRegisteredCallback)) {
-                return (IFingerprintAuthenticatorsRegisteredCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IFingerprintAuthenticatorsRegisteredCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IFingerprintAuthenticatorsRegisteredCallback)) {
+                return (IFingerprintAuthenticatorsRegisteredCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -75,9 +75,9 @@ public interface IFingerprintAuthenticatorsRegisteredCallback extends IInterface
                 return true;
             }
             if (i == 1) {
-                ArrayList createTypedArrayList = parcel.createTypedArrayList(FingerprintSensorPropertiesInternal.CREATOR);
+                ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(FingerprintSensorPropertiesInternal.CREATOR);
                 parcel.enforceNoDataAvail();
-                onAllAuthenticatorsRegistered(createTypedArrayList);
+                onAllAuthenticatorsRegistered(arrayListCreateTypedArrayList);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -101,13 +101,13 @@ public interface IFingerprintAuthenticatorsRegisteredCallback extends IInterface
 
             @Override // android.hardware.fingerprint.IFingerprintAuthenticatorsRegisteredCallback
             public void onAllAuthenticatorsRegistered(List<FingerprintSensorPropertiesInternal> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IFingerprintAuthenticatorsRegisteredCallback.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IFingerprintAuthenticatorsRegisteredCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

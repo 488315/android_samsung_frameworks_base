@@ -109,9 +109,9 @@ public class PromptInfo implements Parcelable {
         this.mSemTaskId = parcel.readInt();
         this.mSemBiometricType = parcel.readInt();
         this.mSemPrivilegedFlag = parcel.readInt();
-        int readInt = parcel.readInt();
-        if (readInt > 0) {
-            byte[] bArr = new byte[readInt];
+        int i = parcel.readInt();
+        if (i > 0) {
+            byte[] bArr = new byte[i];
             this.mSemChallengeData = bArr;
             parcel.readByteArray(bArr);
             return;

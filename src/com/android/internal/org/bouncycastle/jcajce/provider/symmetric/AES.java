@@ -36,10 +36,10 @@ public final class AES {
     private static final Map<String, String> generalAesAttributes;
 
     static {
-        HashMap hashMap = new HashMap();
-        generalAesAttributes = hashMap;
-        hashMap.put("SupportedKeyClasses", "javax.crypto.SecretKey");
-        hashMap.put("SupportedKeyFormats", "RAW");
+        HashMap map = new HashMap();
+        generalAesAttributes = map;
+        map.put("SupportedKeyClasses", "javax.crypto.SecretKey");
+        map.put("SupportedKeyFormats", "RAW");
     }
 
     private AES() {

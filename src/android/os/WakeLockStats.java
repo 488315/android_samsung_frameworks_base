@@ -39,21 +39,20 @@ public final class WakeLockStats implements Parcelable {
             this.timeHeldMs = j2;
         }
 
+        /* JADX WARN: Removed duplicated region for block: B:11:0x001a  */
+        /*
+            Code decompiled incorrectly, please refer to instructions dump.
+        */
         public boolean isDataValid() {
             boolean z;
             if (this.timesAcquired > 0) {
                 long j = this.totalTimeHeldMs;
                 if (j > 0) {
                     long j2 = this.timeHeldMs;
-                    if (j2 >= 0 && j >= j2) {
-                        z = true;
-                        return !isEmpty() || z;
-                    }
+                    z = j2 >= 0 && j >= j2;
                 }
             }
-            z = false;
-            if (isEmpty()) {
-            }
+            return isEmpty() || z;
         }
 
         private boolean isEmpty() {
@@ -134,19 +133,19 @@ public final class WakeLockStats implements Parcelable {
     }
 
     private WakeLockStats(Parcel parcel) {
-        int readInt = parcel.readInt();
-        this.mWakeLocks = new ArrayList(readInt);
-        int i = 0;
+        int i = parcel.readInt();
+        this.mWakeLocks = new ArrayList(i);
+        int i2 = 0;
         while (true) {
-            if (i >= readInt) {
+            if (i2 >= i) {
                 break;
             }
             this.mWakeLocks.add(new WakeLock(parcel));
-            i++;
+            i2++;
         }
-        int readInt2 = parcel.readInt();
-        this.mAggregatedWakeLocks = new ArrayList(readInt2);
-        for (int i2 = 0; i2 < readInt2; i2++) {
+        int i3 = parcel.readInt();
+        this.mAggregatedWakeLocks = new ArrayList(i3);
+        for (int i4 = 0; i4 < i3; i4++) {
             this.mAggregatedWakeLocks.add(new WakeLock(parcel));
         }
     }

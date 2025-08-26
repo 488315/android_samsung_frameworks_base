@@ -16,7 +16,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class MediaRouterRepositoryImpl$castDevices$2 extends SuspendLambda implements Function2 {
     /* synthetic */ Object L$0;
@@ -56,11 +55,11 @@ final class MediaRouterRepositoryImpl$castDevices$2 extends SuspendLambda implem
         while (it.hasNext()) {
             arrayList.add(((CastDevice) it.next()).shortLogString);
         }
-        String obj2 = arrayList.toString();
+        String string = arrayList.toString();
         LogBuffer logBuffer = this.this$0.logger;
-        LogMessage obtain = logBuffer.obtain("MediaRouterRepo", LogLevel.INFO, new MediaRouterRepositoryImpl$castDevices$2$$ExternalSyntheticLambda0(), null);
-        ((LogMessageImpl) obtain).str1 = obj2;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("MediaRouterRepo", LogLevel.INFO, new MediaRouterRepositoryImpl$castDevices$2$$ExternalSyntheticLambda0(), null);
+        ((LogMessageImpl) logMessageObtain).str1 = string;
+        logBuffer.commit(logMessageObtain);
         return Unit.INSTANCE;
     }
 }

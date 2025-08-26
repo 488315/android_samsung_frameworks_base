@@ -14,13 +14,11 @@ import androidx.collection.SimpleArrayMap;
 import androidx.core.internal.view.SupportMenuItem;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SupportActionModeWrapper extends android.view.ActionMode {
     public final Context mContext;
     public final ActionMode mWrappedObject;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CallbackWrapper implements ActionMode.Callback {
         public final Context mContext;
         public final ActionMode.Callback mWrappedCallback;
@@ -55,12 +53,12 @@ public class SupportActionModeWrapper extends android.view.ActionMode {
             ActionMode.Callback callback = this.mWrappedCallback;
             SupportActionModeWrapper actionModeWrapper = getActionModeWrapper(actionMode);
             SimpleArrayMap simpleArrayMap = this.mMenus;
-            Menu menu = (Menu) simpleArrayMap.get(menuBuilder);
-            if (menu == null) {
-                menu = new MenuWrapperICS(this.mContext, menuBuilder);
-                simpleArrayMap.put(menuBuilder, menu);
+            Menu menuWrapperICS = (Menu) simpleArrayMap.get(menuBuilder);
+            if (menuWrapperICS == null) {
+                menuWrapperICS = new MenuWrapperICS(this.mContext, menuBuilder);
+                simpleArrayMap.put(menuBuilder, menuWrapperICS);
             }
-            return callback.onCreateActionMode(actionModeWrapper, menu);
+            return callback.onCreateActionMode(actionModeWrapper, menuWrapperICS);
         }
 
         @Override // androidx.appcompat.view.ActionMode.Callback
@@ -73,12 +71,12 @@ public class SupportActionModeWrapper extends android.view.ActionMode {
             ActionMode.Callback callback = this.mWrappedCallback;
             SupportActionModeWrapper actionModeWrapper = getActionModeWrapper(actionMode);
             SimpleArrayMap simpleArrayMap = this.mMenus;
-            Menu menu = (Menu) simpleArrayMap.get(menuBuilder);
-            if (menu == null) {
-                menu = new MenuWrapperICS(this.mContext, menuBuilder);
-                simpleArrayMap.put(menuBuilder, menu);
+            Menu menuWrapperICS = (Menu) simpleArrayMap.get(menuBuilder);
+            if (menuWrapperICS == null) {
+                menuWrapperICS = new MenuWrapperICS(this.mContext, menuBuilder);
+                simpleArrayMap.put(menuBuilder, menuWrapperICS);
             }
-            return callback.onPrepareActionMode(actionModeWrapper, menu);
+            return callback.onPrepareActionMode(actionModeWrapper, menuWrapperICS);
         }
     }
 

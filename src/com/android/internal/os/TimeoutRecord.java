@@ -117,7 +117,7 @@ public class TimeoutRecord {
         return this;
     }
 
-    public void closeExpiredTimer() {
+    public void closeExpiredTimer() throws Exception {
         try {
             AutoCloseable autoCloseable = this.mExpiredTimer;
             if (autoCloseable != null) {

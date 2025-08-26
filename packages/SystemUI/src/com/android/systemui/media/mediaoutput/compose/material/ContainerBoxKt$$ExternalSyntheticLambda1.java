@@ -11,7 +11,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class ContainerBoxKt$$ExternalSyntheticLambda1 implements Function2 {
     public final /* synthetic */ int $r8$classId = 1;
@@ -34,16 +33,16 @@ public final /* synthetic */ class ContainerBoxKt$$ExternalSyntheticLambda1 impl
         switch (this.$r8$classId) {
             case 0:
                 ((Integer) obj2).getClass();
-                int updateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(24583);
+                int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(24583);
                 ComposableLambdaImpl composableLambdaImpl = (ComposableLambdaImpl) this.f$4;
-                ContainerBoxKt.ContainerBox(this.f$0, this.f$1, this.f$2, this.f$3, composableLambdaImpl, (Composer) obj, updateChangedFlags);
+                ContainerBoxKt.ContainerBox(this.f$0, this.f$1, this.f$2, this.f$3, composableLambdaImpl, (Composer) obj, iUpdateChangedFlags);
                 break;
             default:
                 ((Integer) obj2).getClass();
-                int updateChangedFlags2 = RecomposeScopeImplKt.updateChangedFlags(24577);
+                int iUpdateChangedFlags2 = RecomposeScopeImplKt.updateChangedFlags(24577);
                 LabsViewModel labsViewModel = this.f$3;
                 boolean z = this.f$0;
-                ContainerBoxKt.ActionButton((Function1) this.f$4, this.f$1, this.f$2, labsViewModel, z, (Composer) obj, updateChangedFlags2);
+                ContainerBoxKt.ActionButton((Function1) this.f$4, this.f$1, this.f$2, labsViewModel, z, (Composer) obj, iUpdateChangedFlags2);
                 break;
         }
         return Unit.INSTANCE;

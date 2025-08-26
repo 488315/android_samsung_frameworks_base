@@ -174,9 +174,7 @@ public final class SetupWizardProperties {
         return tryParseList(new Function() { // from class: android.sysprop.SetupWizardProperties$$ExternalSyntheticLambda0
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                String tryParseString;
-                tryParseString = SetupWizardProperties.tryParseString((String) obj);
-                return tryParseString;
+                return SetupWizardProperties.tryParseString((String) obj);
             }
         }, SystemProperties.get("ro.setupwizard.esim_cid_ignore"));
     }

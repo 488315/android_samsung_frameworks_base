@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import android.util.ArrayMap;
 import android.view.autofill.AutofillId;
 import com.android.internal.util.AnnotationValidations;
+import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Collections;
@@ -150,7 +151,7 @@ public final class ViewTranslationRequest implements Parcelable {
         parcel.writeMap(this.mTranslationRequestValues);
     }
 
-    ViewTranslationRequest(Parcel parcel) {
+    ViewTranslationRequest(Parcel parcel) throws ClassNotFoundException, IOException {
         AutofillId autofillId = (AutofillId) parcel.readTypedObject(AutofillId.CREATOR);
         LinkedHashMap linkedHashMap = new LinkedHashMap();
         parcel.readMap(linkedHashMap, TranslationRequestValue.class.getClassLoader());

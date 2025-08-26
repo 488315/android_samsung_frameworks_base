@@ -5,7 +5,6 @@ import com.samsung.context.sdk.samsunganalytics.internal.util.Utils;
 import java.util.HashMap;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class LogBuilders$ScreenViewBuilder extends LogBuilders$LogBuilder {
     public final Map build() {

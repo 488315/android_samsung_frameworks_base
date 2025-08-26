@@ -96,13 +96,13 @@ public final class PerfettoTrace {
             this.mName = str;
             this.mTag = str2;
             this.mSeverity = str3;
-            long native_init = native_init(str, str2, str3);
-            this.mPtr = native_init;
-            this.mExtraPtr = native_get_extra_ptr(native_init);
+            long jNative_init = native_init(str, str2, str3);
+            this.mPtr = jNative_init;
+            this.mExtraPtr = native_get_extra_ptr(jNative_init);
             if (RavenwoodEnvironment.getInstance().isRunningOnRavenwood()) {
                 return;
             }
-            sRegistry.registerNativeAllocation(this, native_init);
+            sRegistry.registerNativeAllocation(this, jNative_init);
         }
 
         public Category register() {

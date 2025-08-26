@@ -28,7 +28,6 @@ import com.samsung.android.wallpaper.utils.SemWallpaperProperties;
 import java.io.IOException;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class VideoSource {
     public final String TAG;
@@ -40,7 +39,6 @@ public class VideoSource {
     public final Point mVideoSize;
     public final int mWhich;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface VideoLocation {
         void release();
 
@@ -49,7 +47,6 @@ public class VideoSource {
         void useMediaRetriever(Consumer consumer);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class VideoResource implements VideoLocation {
         public AssetFileDescriptor mAssetFdForPlay;
         public final Context mContext;
@@ -62,29 +59,29 @@ public class VideoSource {
             this.mFilename = str2;
         }
 
-        /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:31:0x0095 -> B:23:0x0098). Please report as a decompilation issue!!! */
-        public final AssetFileDescriptor getAssetFileDescriptor() {
-            Context context;
+        /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:35:0x0095 -> B:37:0x0098). Please report as a decompilation issue!!! */
+        public final AssetFileDescriptor getAssetFileDescriptor() throws Resources.NotFoundException, PackageManager.NameNotFoundException, IOException {
+            Context contextCreatePackageContext;
             Resources resources;
             AssetManager assets;
-            Context context2 = this.mContext;
+            Context context = this.mContext;
             boolean z = WallpaperUtils.mIsExternalLiveWallpaper;
             StringBuilder sb = new StringBuilder("getVideoFDFromPackage() pkgName = ");
             String str = this.mPackageName;
             ExifInterface$$ExternalSyntheticOutline0.m(sb, str, "WallpaperUtils");
-            AssetFileDescriptor assetFileDescriptor = null;
-            if (context2 != null && !TextUtils.isEmpty(str)) {
+            AssetFileDescriptor assetFileDescriptorOpenFd = null;
+            if (context != null && !TextUtils.isEmpty(str)) {
                 String str2 = this.mFilename;
                 if (TextUtils.isEmpty(str2) || !"com.samsung.android.wallpaper.res".equals(str)) {
                     str2 = "video_1.mp4";
                 }
                 try {
-                    context = context2.createPackageContext(str, 0);
+                    contextCreatePackageContext = context.createPackageContext(str, 0);
                 } catch (PackageManager.NameNotFoundException unused) {
                     Log.d("WallpaperUtils", "Cannot find package name");
-                    context = null;
+                    contextCreatePackageContext = null;
                 }
-                if (context == null) {
+                if (contextCreatePackageContext == null) {
                     APKContents aPKContents = new APKContents(APKContents.getMainThemePackagePath(str));
                     resources = aPKContents.getResources();
                     assets = aPKContents.getAssets();
@@ -92,31 +89,31 @@ public class VideoSource {
                         Log.e("WallpaperUtils", "getVideoFDFromPackage: otherResources and otherAssets are null.");
                     }
                 } else {
-                    resources = context.getResources();
-                    assets = context.getAssets();
+                    resources = contextCreatePackageContext.getResources();
+                    assets = contextCreatePackageContext.getAssets();
                 }
                 try {
                     if ("com.samsung.android.wallpaper.res".equals(str)) {
-                        String substring = str2.substring(0, str2.lastIndexOf(46));
+                        String strSubstring = str2.substring(0, str2.lastIndexOf(46));
                         if (resources != null) {
-                            assetFileDescriptor = resources.openRawResourceFd(resources.getIdentifier(substring, "raw", str));
+                            assetFileDescriptorOpenFd = resources.openRawResourceFd(resources.getIdentifier(strSubstring, "raw", str));
                         } else {
                             Log.e("WallpaperUtils", "getVideoFDFromPackage: otherResources is null");
                         }
                     } else if (assets == null) {
                         Log.e("WallpaperUtils", "getVideoFDFromPackage: assetManager is null");
                     } else {
-                        assetFileDescriptor = assets.openFd(str2);
+                        assetFileDescriptorOpenFd = assets.openFd(str2);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
-            return assetFileDescriptor;
+            return assetFileDescriptorOpenFd;
         }
 
         @Override // com.android.systemui.wallpaper.engines.video.VideoSource.VideoLocation
-        public final void release() {
+        public final void release() throws IOException {
             AssetFileDescriptor assetFileDescriptor = this.mAssetFdForPlay;
             if (assetFileDescriptor != null) {
                 try {
@@ -129,7 +126,7 @@ public class VideoSource {
         }
 
         @Override // com.android.systemui.wallpaper.engines.video.VideoSource.VideoLocation
-        public final boolean setSourceToPlayer(SemMediaPlayer semMediaPlayer) {
+        public final boolean setSourceToPlayer(SemMediaPlayer semMediaPlayer) throws Resources.NotFoundException, PackageManager.NameNotFoundException, IOException {
             Log.d("ImageWallpaper[VideoResource]", "setSourceToPlayer: asset type. " + this);
             AssetFileDescriptor assetFileDescriptor = this.mAssetFdForPlay;
             if (assetFileDescriptor != null) {
@@ -159,7 +156,7 @@ public class VideoSource {
         }
 
         @Override // com.android.systemui.wallpaper.engines.video.VideoSource.VideoLocation
-        public final void useMediaRetriever(Consumer consumer) {
+        public final void useMediaRetriever(Consumer consumer) throws IOException {
             try {
                 MediaMetadataRetriever mediaMetadataRetriever = new MediaMetadataRetriever();
                 try {
@@ -189,7 +186,7 @@ public class VideoSource {
 
     public VideoSource(Context context, int i, int i2, int i3, CoverWallpaper coverWallpaper, PluginWallpaper pluginWallpaper) {
         String videoFilePath;
-        VideoLocation videoLocation;
+        VideoLocation videoResource;
         new Consumer() { // from class: com.android.systemui.wallpaper.engines.video.VideoSource.1
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
@@ -225,26 +222,26 @@ public class VideoSource {
                 videoFilePath = pluginWallpaperManager.getWallpaperPath(screen);
             }
         }
-        boolean isEmpty = TextUtils.isEmpty(videoFilePath);
+        boolean zIsEmpty = TextUtils.isEmpty(videoFilePath);
         String str = this.TAG;
         Point point = null;
-        if (isEmpty) {
+        if (zIsEmpty) {
             WallpaperManager wallpaperManager = WallpaperManager.getInstance(this.mContext);
             String videoPackage = wallpaperManager.getVideoPackage(sourceWhich);
             String videoFileName = wallpaperManager.getVideoFileName(sourceWhich);
             if (TextUtils.isEmpty(videoPackage)) {
                 Log.e(str, "VideoSource: failed to determine video location");
-                videoLocation = null;
+                videoResource = null;
             } else {
-                videoLocation = new VideoResource(this.mContext, videoPackage, videoFileName);
+                videoResource = new VideoResource(this.mContext, videoPackage, videoFileName);
             }
         } else {
-            videoLocation = new VideoFile(videoFilePath);
+            videoResource = new VideoFile(videoFilePath);
         }
-        this.mVideoLocation = videoLocation;
-        if (videoLocation != null) {
+        this.mVideoLocation = videoResource;
+        if (videoResource != null) {
             Point[] pointArr = {null};
-            videoLocation.useMediaRetriever(new VideoSource$$ExternalSyntheticLambda0(this, pointArr));
+            videoResource.useMediaRetriever(new VideoSource$$ExternalSyntheticLambda0(this, pointArr));
             point = pointArr[0];
         }
         this.mVideoSize = point;
@@ -253,24 +250,23 @@ public class VideoSource {
 
     public final boolean isFixedOrientation(boolean z) {
         PackageManager packageManager = this.mContext.getPackageManager();
-        boolean z2 = true;
-        boolean z3 = packageManager != null && packageManager.hasSystemFeature("com.samsung.feature.device_category_tablet");
-        boolean z4 = Rune.SUPPORT_SUB_DISPLAY_MODE && !Rune.SUPPORT_COVER_DISPLAY_WATCHFACE;
-        if (z || z3) {
-            z2 = false;
+        boolean zIsFixedOrientation = true;
+        boolean z2 = packageManager != null && packageManager.hasSystemFeature("com.samsung.feature.device_category_tablet");
+        boolean z3 = Rune.SUPPORT_SUB_DISPLAY_MODE && !Rune.SUPPORT_COVER_DISPLAY_WATCHFACE;
+        if (z || z2) {
+            zIsFixedOrientation = false;
         } else {
             int i = this.mWhich;
-            if (z4) {
-                z2 = WhichChecker.isFlagEnabled(i, 16);
+            if (z3) {
+                zIsFixedOrientation = WhichChecker.isFlagEnabled(i, 16);
             } else if (WhichChecker.isWatchFace(i)) {
-                z2 = new SemWallpaperProperties(this.mContext, WhichChecker.getSourceWhich(i), this.mUserId).isFixedOrientation();
+                zIsFixedOrientation = new SemWallpaperProperties(this.mContext, WhichChecker.getSourceWhich(i), this.mUserId).isFixedOrientation();
             }
         }
-        Log.i(this.TAG, KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(EmergencyButtonController$$ExternalSyntheticOutline0.m("isFixedOrientation: , isTablet=", ", isFold=", ", isPreview=", z3, z4), z, ", isFixedOrientation=", z2));
-        return z2;
+        Log.i(this.TAG, KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(EmergencyButtonController$$ExternalSyntheticOutline0.m("isFixedOrientation: , isTablet=", ", isFold=", ", isPreview=", z2, z3), z, ", isFixedOrientation=", zIsFixedOrientation));
+        return zIsFixedOrientation;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class VideoFile implements VideoLocation {
         public final String mFilePathName;
 
@@ -297,7 +293,7 @@ public class VideoSource {
         }
 
         @Override // com.android.systemui.wallpaper.engines.video.VideoSource.VideoLocation
-        public final void useMediaRetriever(Consumer consumer) {
+        public final void useMediaRetriever(Consumer consumer) throws IOException {
             StringBuilder sb = new StringBuilder("useMediaRetriever: path=");
             String str = this.mFilePathName;
             ExifInterface$$ExternalSyntheticOutline0.m(sb, str, "ImageWallpaper[VideoFile]");

@@ -42,7 +42,7 @@ public class SeekBar extends AbsSeekBar {
     }
 
     @Override // android.widget.AbsSeekBar, android.widget.ProgressBar
-    void onProgressRefresh(float f, boolean z, int i) {
+    void onProgressRefresh(float f, boolean z, int i) throws Throwable {
         super.onProgressRefresh(f, z, i);
         OnSeekBarChangeListener onSeekBarChangeListener = this.mOnSeekBarChangeListener;
         if (onSeekBarChangeListener != null) {

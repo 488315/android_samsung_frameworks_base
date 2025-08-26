@@ -31,7 +31,6 @@ import com.samsung.android.multiwindow.MultiWindowUtils;
 import com.samsung.android.rune.CoreRune;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SplitScreenProxyService extends Service {
     public static final boolean TEST_MOCK_REMOTE_TRANSITION = SystemProperties.getBoolean("persist.mt.debug.mock_remote", false);
@@ -39,7 +38,6 @@ public class SplitScreenProxyService extends Service {
     public SplitScreenController mSplitScreenController;
     public final AnonymousClass1 mTestRemoteTransition;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class MessageHandler extends Handler {
         public static final /* synthetic */ int $r8$clinit = 0;
 
@@ -155,7 +153,7 @@ public class SplitScreenProxyService extends Service {
                     if (!z5 || stageLaunchOptions.mCellStageIntent == null) {
                         i = 0;
                         final int i12 = 3;
-                        SplitScreenProxyService.m3260$$Nest$mexecuteRemoteCall(splitScreenProxyService, splitScreenProxyService.mSplitScreenController, new Consumer() { // from class: com.android.wm.shell.splitscreen.SplitScreenProxyService$MessageHandler$$ExternalSyntheticLambda0
+                        SplitScreenProxyService.m3278$$Nest$mexecuteRemoteCall(splitScreenProxyService, splitScreenProxyService.mSplitScreenController, new Consumer() { // from class: com.android.wm.shell.splitscreen.SplitScreenProxyService$MessageHandler$$ExternalSyntheticLambda0
                             @Override // java.util.function.Consumer
                             public final void accept(Object obj) {
                                 int i13 = i12;
@@ -204,12 +202,12 @@ public class SplitScreenProxyService extends Service {
                                                 if (z7) {
                                                     CoreSaLogger.logForAdvanced("1000", "From Apps edge_Tap");
                                                 }
-                                                ActivityOptions makeBasic = ActivityOptions.makeBasic();
-                                                boolean isMultiSplitScreenVisible = CoreRune.MW_MULTI_SPLIT ? splitScreenController2.mStageCoordinator.isMultiSplitScreenVisible() : splitScreenController2.mStageCoordinator.isSplitScreenVisible();
-                                                if (CoreRune.MW_RESUMED_AFFORDANCE_SHELL_TRANSITION && isMultiSplitScreenVisible) {
-                                                    makeBasic.setResumedAffordanceAnimation();
+                                                ActivityOptions activityOptionsMakeBasic = ActivityOptions.makeBasic();
+                                                boolean zIsMultiSplitScreenVisible = CoreRune.MW_MULTI_SPLIT ? splitScreenController2.mStageCoordinator.isMultiSplitScreenVisible() : splitScreenController2.mStageCoordinator.isSplitScreenVisible();
+                                                if (CoreRune.MW_RESUMED_AFFORDANCE_SHELL_TRANSITION && zIsMultiSplitScreenVisible) {
+                                                    activityOptionsMakeBasic.setResumedAffordanceAnimation();
                                                 }
-                                                Bundle bundle = makeBasic.toBundle();
+                                                Bundle bundle = activityOptionsMakeBasic.toBundle();
                                                 if (!CoreRune.MW_MULTI_SPLIT_TASK_ORGANIZER || MultiWindowUtils.isInSubDisplay(splitScreenController2.mContext) || !splitScreenController2.mStageCoordinator.isSplitScreenVisible() || !MultiWindowManager.getInstance().supportMultiSplitAppMinimumSize() || splitScreenController2.mSplitState.isSplitStashed()) {
                                                     if (i19 == -1) {
                                                         splitScreenController2.startIntent(intent7, userHandle5, 1, -1, bundle);
@@ -227,11 +225,11 @@ public class SplitScreenProxyService extends Service {
                                                         }
                                                     }
                                                     if (i19 != -1) {
-                                                        Bundle resolveStartCellStage = splitScreenController2.mStageCoordinator.resolveStartCellStage(-1, multiSplitLaunchPosition, bundle, null);
+                                                        Bundle bundleResolveStartCellStage = splitScreenController2.mStageCoordinator.resolveStartCellStage(-1, multiSplitLaunchPosition, bundle, null);
                                                         if (CoreRune.MW_MULTI_SPLIT_BOUNDS_POLICY && !splitScreenController2.mStageCoordinator.isMultiSplitActive()) {
                                                             splitScreenController2.mStageCoordinator.mSplitLayout.setCellDividerRatio(0.5f, multiSplitLaunchPosition, true, false);
                                                         }
-                                                        ActivityTaskManager.getService().startActivityFromRecents(i19, resolveStartCellStage);
+                                                        ActivityTaskManager.getService().startActivityFromRecents(i19, bundleResolveStartCellStage);
                                                     } else {
                                                         splitScreenController2.startIntentToCell(null, intent7, userHandle5, multiSplitLaunchPosition, false);
                                                     }
@@ -272,18 +270,18 @@ public class SplitScreenProxyService extends Service {
                                         break;
                                     case 8:
                                         int i26 = SplitScreenProxyService.MessageHandler.$r8$clinit;
-                                        ((SplitScreenController) obj).startSplitTasks(stageLaunchOptions2.mLeftTopTaskId, stageLaunchOptions2.mRightBottomTaskId, -1, true, 0, stageLaunchOptions2.mStageRatio, 0.5f);
+                                        ((SplitScreenController) obj).startSplitTasks(stageLaunchOptions2.mLeftTopTaskId, stageLaunchOptions2.mRightBottomTaskId, -1, true, 0, stageLaunchOptions2.mStageRatio, 0.5f, false);
                                         break;
                                     default:
                                         int i27 = SplitScreenProxyService.MessageHandler.$r8$clinit;
-                                        ((SplitScreenController) obj).startSplitTasks(stageLaunchOptions2.mLeftTopTaskId, stageLaunchOptions2.mRightBottomTaskId, stageLaunchOptions2.mCellTaskId, stageLaunchOptions2.mAppsStackedVertically, stageLaunchOptions2.mCellStageWindowConfigPosition, stageLaunchOptions2.mStageRatio, stageLaunchOptions2.mCellRatio);
+                                        ((SplitScreenController) obj).startSplitTasks(stageLaunchOptions2.mLeftTopTaskId, stageLaunchOptions2.mRightBottomTaskId, stageLaunchOptions2.mCellTaskId, stageLaunchOptions2.mAppsStackedVertically, stageLaunchOptions2.mCellStageWindowConfigPosition, stageLaunchOptions2.mStageRatio, stageLaunchOptions2.mCellRatio, stageLaunchOptions2.mParallelMultiSplit);
                                         break;
                                 }
                             }
                         });
                     } else {
                         i = 0;
-                        SplitScreenProxyService.m3260$$Nest$mexecuteRemoteCall(splitScreenProxyService, splitScreenProxyService.mSplitScreenController, new Consumer() { // from class: com.android.wm.shell.splitscreen.SplitScreenProxyService$MessageHandler$$ExternalSyntheticLambda0
+                        SplitScreenProxyService.m3278$$Nest$mexecuteRemoteCall(splitScreenProxyService, splitScreenProxyService.mSplitScreenController, new Consumer() { // from class: com.android.wm.shell.splitscreen.SplitScreenProxyService$MessageHandler$$ExternalSyntheticLambda0
                             @Override // java.util.function.Consumer
                             public final void accept(Object obj) {
                                 int i13 = i;
@@ -332,12 +330,12 @@ public class SplitScreenProxyService extends Service {
                                                 if (z7) {
                                                     CoreSaLogger.logForAdvanced("1000", "From Apps edge_Tap");
                                                 }
-                                                ActivityOptions makeBasic = ActivityOptions.makeBasic();
-                                                boolean isMultiSplitScreenVisible = CoreRune.MW_MULTI_SPLIT ? splitScreenController2.mStageCoordinator.isMultiSplitScreenVisible() : splitScreenController2.mStageCoordinator.isSplitScreenVisible();
-                                                if (CoreRune.MW_RESUMED_AFFORDANCE_SHELL_TRANSITION && isMultiSplitScreenVisible) {
-                                                    makeBasic.setResumedAffordanceAnimation();
+                                                ActivityOptions activityOptionsMakeBasic = ActivityOptions.makeBasic();
+                                                boolean zIsMultiSplitScreenVisible = CoreRune.MW_MULTI_SPLIT ? splitScreenController2.mStageCoordinator.isMultiSplitScreenVisible() : splitScreenController2.mStageCoordinator.isSplitScreenVisible();
+                                                if (CoreRune.MW_RESUMED_AFFORDANCE_SHELL_TRANSITION && zIsMultiSplitScreenVisible) {
+                                                    activityOptionsMakeBasic.setResumedAffordanceAnimation();
                                                 }
-                                                Bundle bundle = makeBasic.toBundle();
+                                                Bundle bundle = activityOptionsMakeBasic.toBundle();
                                                 if (!CoreRune.MW_MULTI_SPLIT_TASK_ORGANIZER || MultiWindowUtils.isInSubDisplay(splitScreenController2.mContext) || !splitScreenController2.mStageCoordinator.isSplitScreenVisible() || !MultiWindowManager.getInstance().supportMultiSplitAppMinimumSize() || splitScreenController2.mSplitState.isSplitStashed()) {
                                                     if (i19 == -1) {
                                                         splitScreenController2.startIntent(intent7, userHandle5, 1, -1, bundle);
@@ -355,11 +353,11 @@ public class SplitScreenProxyService extends Service {
                                                         }
                                                     }
                                                     if (i19 != -1) {
-                                                        Bundle resolveStartCellStage = splitScreenController2.mStageCoordinator.resolveStartCellStage(-1, multiSplitLaunchPosition, bundle, null);
+                                                        Bundle bundleResolveStartCellStage = splitScreenController2.mStageCoordinator.resolveStartCellStage(-1, multiSplitLaunchPosition, bundle, null);
                                                         if (CoreRune.MW_MULTI_SPLIT_BOUNDS_POLICY && !splitScreenController2.mStageCoordinator.isMultiSplitActive()) {
                                                             splitScreenController2.mStageCoordinator.mSplitLayout.setCellDividerRatio(0.5f, multiSplitLaunchPosition, true, false);
                                                         }
-                                                        ActivityTaskManager.getService().startActivityFromRecents(i19, resolveStartCellStage);
+                                                        ActivityTaskManager.getService().startActivityFromRecents(i19, bundleResolveStartCellStage);
                                                     } else {
                                                         splitScreenController2.startIntentToCell(null, intent7, userHandle5, multiSplitLaunchPosition, false);
                                                     }
@@ -400,11 +398,11 @@ public class SplitScreenProxyService extends Service {
                                         break;
                                     case 8:
                                         int i26 = SplitScreenProxyService.MessageHandler.$r8$clinit;
-                                        ((SplitScreenController) obj).startSplitTasks(stageLaunchOptions2.mLeftTopTaskId, stageLaunchOptions2.mRightBottomTaskId, -1, true, 0, stageLaunchOptions2.mStageRatio, 0.5f);
+                                        ((SplitScreenController) obj).startSplitTasks(stageLaunchOptions2.mLeftTopTaskId, stageLaunchOptions2.mRightBottomTaskId, -1, true, 0, stageLaunchOptions2.mStageRatio, 0.5f, false);
                                         break;
                                     default:
                                         int i27 = SplitScreenProxyService.MessageHandler.$r8$clinit;
-                                        ((SplitScreenController) obj).startSplitTasks(stageLaunchOptions2.mLeftTopTaskId, stageLaunchOptions2.mRightBottomTaskId, stageLaunchOptions2.mCellTaskId, stageLaunchOptions2.mAppsStackedVertically, stageLaunchOptions2.mCellStageWindowConfigPosition, stageLaunchOptions2.mStageRatio, stageLaunchOptions2.mCellRatio);
+                                        ((SplitScreenController) obj).startSplitTasks(stageLaunchOptions2.mLeftTopTaskId, stageLaunchOptions2.mRightBottomTaskId, stageLaunchOptions2.mCellTaskId, stageLaunchOptions2.mAppsStackedVertically, stageLaunchOptions2.mCellStageWindowConfigPosition, stageLaunchOptions2.mStageRatio, stageLaunchOptions2.mCellRatio, stageLaunchOptions2.mParallelMultiSplit);
                                         break;
                                 }
                             }
@@ -463,7 +461,7 @@ public class SplitScreenProxyService extends Service {
                     return;
                 case 2:
                     if (i10 != -1 && stageLaunchOptions.mSideStageIntent != null) {
-                        SplitScreenProxyService.m3260$$Nest$mexecuteRemoteCall(splitScreenProxyService, splitScreenProxyService.mSplitScreenController, new Consumer() { // from class: com.android.wm.shell.splitscreen.SplitScreenProxyService$MessageHandler$$ExternalSyntheticLambda0
+                        SplitScreenProxyService.m3278$$Nest$mexecuteRemoteCall(splitScreenProxyService, splitScreenProxyService.mSplitScreenController, new Consumer() { // from class: com.android.wm.shell.splitscreen.SplitScreenProxyService$MessageHandler$$ExternalSyntheticLambda0
                             @Override // java.util.function.Consumer
                             public final void accept(Object obj) {
                                 int i13 = i2;
@@ -512,12 +510,12 @@ public class SplitScreenProxyService extends Service {
                                                 if (z7) {
                                                     CoreSaLogger.logForAdvanced("1000", "From Apps edge_Tap");
                                                 }
-                                                ActivityOptions makeBasic = ActivityOptions.makeBasic();
-                                                boolean isMultiSplitScreenVisible = CoreRune.MW_MULTI_SPLIT ? splitScreenController2.mStageCoordinator.isMultiSplitScreenVisible() : splitScreenController2.mStageCoordinator.isSplitScreenVisible();
-                                                if (CoreRune.MW_RESUMED_AFFORDANCE_SHELL_TRANSITION && isMultiSplitScreenVisible) {
-                                                    makeBasic.setResumedAffordanceAnimation();
+                                                ActivityOptions activityOptionsMakeBasic = ActivityOptions.makeBasic();
+                                                boolean zIsMultiSplitScreenVisible = CoreRune.MW_MULTI_SPLIT ? splitScreenController2.mStageCoordinator.isMultiSplitScreenVisible() : splitScreenController2.mStageCoordinator.isSplitScreenVisible();
+                                                if (CoreRune.MW_RESUMED_AFFORDANCE_SHELL_TRANSITION && zIsMultiSplitScreenVisible) {
+                                                    activityOptionsMakeBasic.setResumedAffordanceAnimation();
                                                 }
-                                                Bundle bundle = makeBasic.toBundle();
+                                                Bundle bundle = activityOptionsMakeBasic.toBundle();
                                                 if (!CoreRune.MW_MULTI_SPLIT_TASK_ORGANIZER || MultiWindowUtils.isInSubDisplay(splitScreenController2.mContext) || !splitScreenController2.mStageCoordinator.isSplitScreenVisible() || !MultiWindowManager.getInstance().supportMultiSplitAppMinimumSize() || splitScreenController2.mSplitState.isSplitStashed()) {
                                                     if (i19 == -1) {
                                                         splitScreenController2.startIntent(intent7, userHandle5, 1, -1, bundle);
@@ -535,11 +533,11 @@ public class SplitScreenProxyService extends Service {
                                                         }
                                                     }
                                                     if (i19 != -1) {
-                                                        Bundle resolveStartCellStage = splitScreenController2.mStageCoordinator.resolveStartCellStage(-1, multiSplitLaunchPosition, bundle, null);
+                                                        Bundle bundleResolveStartCellStage = splitScreenController2.mStageCoordinator.resolveStartCellStage(-1, multiSplitLaunchPosition, bundle, null);
                                                         if (CoreRune.MW_MULTI_SPLIT_BOUNDS_POLICY && !splitScreenController2.mStageCoordinator.isMultiSplitActive()) {
                                                             splitScreenController2.mStageCoordinator.mSplitLayout.setCellDividerRatio(0.5f, multiSplitLaunchPosition, true, false);
                                                         }
-                                                        ActivityTaskManager.getService().startActivityFromRecents(i19, resolveStartCellStage);
+                                                        ActivityTaskManager.getService().startActivityFromRecents(i19, bundleResolveStartCellStage);
                                                     } else {
                                                         splitScreenController2.startIntentToCell(null, intent7, userHandle5, multiSplitLaunchPosition, false);
                                                     }
@@ -580,11 +578,11 @@ public class SplitScreenProxyService extends Service {
                                         break;
                                     case 8:
                                         int i26 = SplitScreenProxyService.MessageHandler.$r8$clinit;
-                                        ((SplitScreenController) obj).startSplitTasks(stageLaunchOptions2.mLeftTopTaskId, stageLaunchOptions2.mRightBottomTaskId, -1, true, 0, stageLaunchOptions2.mStageRatio, 0.5f);
+                                        ((SplitScreenController) obj).startSplitTasks(stageLaunchOptions2.mLeftTopTaskId, stageLaunchOptions2.mRightBottomTaskId, -1, true, 0, stageLaunchOptions2.mStageRatio, 0.5f, false);
                                         break;
                                     default:
                                         int i27 = SplitScreenProxyService.MessageHandler.$r8$clinit;
-                                        ((SplitScreenController) obj).startSplitTasks(stageLaunchOptions2.mLeftTopTaskId, stageLaunchOptions2.mRightBottomTaskId, stageLaunchOptions2.mCellTaskId, stageLaunchOptions2.mAppsStackedVertically, stageLaunchOptions2.mCellStageWindowConfigPosition, stageLaunchOptions2.mStageRatio, stageLaunchOptions2.mCellRatio);
+                                        ((SplitScreenController) obj).startSplitTasks(stageLaunchOptions2.mLeftTopTaskId, stageLaunchOptions2.mRightBottomTaskId, stageLaunchOptions2.mCellTaskId, stageLaunchOptions2.mAppsStackedVertically, stageLaunchOptions2.mCellStageWindowConfigPosition, stageLaunchOptions2.mStageRatio, stageLaunchOptions2.mCellRatio, stageLaunchOptions2.mParallelMultiSplit);
                                         break;
                                 }
                             }
@@ -599,7 +597,7 @@ public class SplitScreenProxyService extends Service {
                         return;
                     }
                     if (CoreRune.MW_MULTI_SPLIT && stageLaunchOptions.mPendingIntent != null && stageLaunchOptions.mCellStageWindowConfigPosition != 0) {
-                        SplitScreenProxyService.m3260$$Nest$mexecuteRemoteCall(splitScreenProxyService, splitScreenProxyService.mSplitScreenController, new Consumer() { // from class: com.android.wm.shell.splitscreen.SplitScreenProxyService$MessageHandler$$ExternalSyntheticLambda0
+                        SplitScreenProxyService.m3278$$Nest$mexecuteRemoteCall(splitScreenProxyService, splitScreenProxyService.mSplitScreenController, new Consumer() { // from class: com.android.wm.shell.splitscreen.SplitScreenProxyService$MessageHandler$$ExternalSyntheticLambda0
                             @Override // java.util.function.Consumer
                             public final void accept(Object obj) {
                                 int i13 = i3;
@@ -648,12 +646,12 @@ public class SplitScreenProxyService extends Service {
                                                 if (z7) {
                                                     CoreSaLogger.logForAdvanced("1000", "From Apps edge_Tap");
                                                 }
-                                                ActivityOptions makeBasic = ActivityOptions.makeBasic();
-                                                boolean isMultiSplitScreenVisible = CoreRune.MW_MULTI_SPLIT ? splitScreenController2.mStageCoordinator.isMultiSplitScreenVisible() : splitScreenController2.mStageCoordinator.isSplitScreenVisible();
-                                                if (CoreRune.MW_RESUMED_AFFORDANCE_SHELL_TRANSITION && isMultiSplitScreenVisible) {
-                                                    makeBasic.setResumedAffordanceAnimation();
+                                                ActivityOptions activityOptionsMakeBasic = ActivityOptions.makeBasic();
+                                                boolean zIsMultiSplitScreenVisible = CoreRune.MW_MULTI_SPLIT ? splitScreenController2.mStageCoordinator.isMultiSplitScreenVisible() : splitScreenController2.mStageCoordinator.isSplitScreenVisible();
+                                                if (CoreRune.MW_RESUMED_AFFORDANCE_SHELL_TRANSITION && zIsMultiSplitScreenVisible) {
+                                                    activityOptionsMakeBasic.setResumedAffordanceAnimation();
                                                 }
-                                                Bundle bundle = makeBasic.toBundle();
+                                                Bundle bundle = activityOptionsMakeBasic.toBundle();
                                                 if (!CoreRune.MW_MULTI_SPLIT_TASK_ORGANIZER || MultiWindowUtils.isInSubDisplay(splitScreenController2.mContext) || !splitScreenController2.mStageCoordinator.isSplitScreenVisible() || !MultiWindowManager.getInstance().supportMultiSplitAppMinimumSize() || splitScreenController2.mSplitState.isSplitStashed()) {
                                                     if (i19 == -1) {
                                                         splitScreenController2.startIntent(intent7, userHandle5, 1, -1, bundle);
@@ -671,11 +669,11 @@ public class SplitScreenProxyService extends Service {
                                                         }
                                                     }
                                                     if (i19 != -1) {
-                                                        Bundle resolveStartCellStage = splitScreenController2.mStageCoordinator.resolveStartCellStage(-1, multiSplitLaunchPosition, bundle, null);
+                                                        Bundle bundleResolveStartCellStage = splitScreenController2.mStageCoordinator.resolveStartCellStage(-1, multiSplitLaunchPosition, bundle, null);
                                                         if (CoreRune.MW_MULTI_SPLIT_BOUNDS_POLICY && !splitScreenController2.mStageCoordinator.isMultiSplitActive()) {
                                                             splitScreenController2.mStageCoordinator.mSplitLayout.setCellDividerRatio(0.5f, multiSplitLaunchPosition, true, false);
                                                         }
-                                                        ActivityTaskManager.getService().startActivityFromRecents(i19, resolveStartCellStage);
+                                                        ActivityTaskManager.getService().startActivityFromRecents(i19, bundleResolveStartCellStage);
                                                     } else {
                                                         splitScreenController2.startIntentToCell(null, intent7, userHandle5, multiSplitLaunchPosition, false);
                                                     }
@@ -716,11 +714,11 @@ public class SplitScreenProxyService extends Service {
                                         break;
                                     case 8:
                                         int i26 = SplitScreenProxyService.MessageHandler.$r8$clinit;
-                                        ((SplitScreenController) obj).startSplitTasks(stageLaunchOptions2.mLeftTopTaskId, stageLaunchOptions2.mRightBottomTaskId, -1, true, 0, stageLaunchOptions2.mStageRatio, 0.5f);
+                                        ((SplitScreenController) obj).startSplitTasks(stageLaunchOptions2.mLeftTopTaskId, stageLaunchOptions2.mRightBottomTaskId, -1, true, 0, stageLaunchOptions2.mStageRatio, 0.5f, false);
                                         break;
                                     default:
                                         int i27 = SplitScreenProxyService.MessageHandler.$r8$clinit;
-                                        ((SplitScreenController) obj).startSplitTasks(stageLaunchOptions2.mLeftTopTaskId, stageLaunchOptions2.mRightBottomTaskId, stageLaunchOptions2.mCellTaskId, stageLaunchOptions2.mAppsStackedVertically, stageLaunchOptions2.mCellStageWindowConfigPosition, stageLaunchOptions2.mStageRatio, stageLaunchOptions2.mCellRatio);
+                                        ((SplitScreenController) obj).startSplitTasks(stageLaunchOptions2.mLeftTopTaskId, stageLaunchOptions2.mRightBottomTaskId, stageLaunchOptions2.mCellTaskId, stageLaunchOptions2.mAppsStackedVertically, stageLaunchOptions2.mCellStageWindowConfigPosition, stageLaunchOptions2.mStageRatio, stageLaunchOptions2.mCellRatio, stageLaunchOptions2.mParallelMultiSplit);
                                         break;
                                 }
                             }
@@ -729,7 +727,7 @@ public class SplitScreenProxyService extends Service {
                     }
                     if (!CoreRune.MW_MULTI_SPLIT_FREE_POSITION || stageLaunchOptions.mSplitDivision == -1 || splitScreenProxyService.mSplitScreenController.mStageCoordinator.isSplitScreenVisible()) {
                         final int i13 = 7;
-                        SplitScreenProxyService.m3260$$Nest$mexecuteRemoteCall(splitScreenProxyService, splitScreenProxyService.mSplitScreenController, new Consumer() { // from class: com.android.wm.shell.splitscreen.SplitScreenProxyService$MessageHandler$$ExternalSyntheticLambda0
+                        SplitScreenProxyService.m3278$$Nest$mexecuteRemoteCall(splitScreenProxyService, splitScreenProxyService.mSplitScreenController, new Consumer() { // from class: com.android.wm.shell.splitscreen.SplitScreenProxyService$MessageHandler$$ExternalSyntheticLambda0
                             @Override // java.util.function.Consumer
                             public final void accept(Object obj) {
                                 int i132 = i13;
@@ -778,12 +776,12 @@ public class SplitScreenProxyService extends Service {
                                                 if (z7) {
                                                     CoreSaLogger.logForAdvanced("1000", "From Apps edge_Tap");
                                                 }
-                                                ActivityOptions makeBasic = ActivityOptions.makeBasic();
-                                                boolean isMultiSplitScreenVisible = CoreRune.MW_MULTI_SPLIT ? splitScreenController2.mStageCoordinator.isMultiSplitScreenVisible() : splitScreenController2.mStageCoordinator.isSplitScreenVisible();
-                                                if (CoreRune.MW_RESUMED_AFFORDANCE_SHELL_TRANSITION && isMultiSplitScreenVisible) {
-                                                    makeBasic.setResumedAffordanceAnimation();
+                                                ActivityOptions activityOptionsMakeBasic = ActivityOptions.makeBasic();
+                                                boolean zIsMultiSplitScreenVisible = CoreRune.MW_MULTI_SPLIT ? splitScreenController2.mStageCoordinator.isMultiSplitScreenVisible() : splitScreenController2.mStageCoordinator.isSplitScreenVisible();
+                                                if (CoreRune.MW_RESUMED_AFFORDANCE_SHELL_TRANSITION && zIsMultiSplitScreenVisible) {
+                                                    activityOptionsMakeBasic.setResumedAffordanceAnimation();
                                                 }
-                                                Bundle bundle = makeBasic.toBundle();
+                                                Bundle bundle = activityOptionsMakeBasic.toBundle();
                                                 if (!CoreRune.MW_MULTI_SPLIT_TASK_ORGANIZER || MultiWindowUtils.isInSubDisplay(splitScreenController2.mContext) || !splitScreenController2.mStageCoordinator.isSplitScreenVisible() || !MultiWindowManager.getInstance().supportMultiSplitAppMinimumSize() || splitScreenController2.mSplitState.isSplitStashed()) {
                                                     if (i19 == -1) {
                                                         splitScreenController2.startIntent(intent7, userHandle5, 1, -1, bundle);
@@ -801,11 +799,11 @@ public class SplitScreenProxyService extends Service {
                                                         }
                                                     }
                                                     if (i19 != -1) {
-                                                        Bundle resolveStartCellStage = splitScreenController2.mStageCoordinator.resolveStartCellStage(-1, multiSplitLaunchPosition, bundle, null);
+                                                        Bundle bundleResolveStartCellStage = splitScreenController2.mStageCoordinator.resolveStartCellStage(-1, multiSplitLaunchPosition, bundle, null);
                                                         if (CoreRune.MW_MULTI_SPLIT_BOUNDS_POLICY && !splitScreenController2.mStageCoordinator.isMultiSplitActive()) {
                                                             splitScreenController2.mStageCoordinator.mSplitLayout.setCellDividerRatio(0.5f, multiSplitLaunchPosition, true, false);
                                                         }
-                                                        ActivityTaskManager.getService().startActivityFromRecents(i19, resolveStartCellStage);
+                                                        ActivityTaskManager.getService().startActivityFromRecents(i19, bundleResolveStartCellStage);
                                                     } else {
                                                         splitScreenController2.startIntentToCell(null, intent7, userHandle5, multiSplitLaunchPosition, false);
                                                     }
@@ -846,11 +844,11 @@ public class SplitScreenProxyService extends Service {
                                         break;
                                     case 8:
                                         int i26 = SplitScreenProxyService.MessageHandler.$r8$clinit;
-                                        ((SplitScreenController) obj).startSplitTasks(stageLaunchOptions2.mLeftTopTaskId, stageLaunchOptions2.mRightBottomTaskId, -1, true, 0, stageLaunchOptions2.mStageRatio, 0.5f);
+                                        ((SplitScreenController) obj).startSplitTasks(stageLaunchOptions2.mLeftTopTaskId, stageLaunchOptions2.mRightBottomTaskId, -1, true, 0, stageLaunchOptions2.mStageRatio, 0.5f, false);
                                         break;
                                     default:
                                         int i27 = SplitScreenProxyService.MessageHandler.$r8$clinit;
-                                        ((SplitScreenController) obj).startSplitTasks(stageLaunchOptions2.mLeftTopTaskId, stageLaunchOptions2.mRightBottomTaskId, stageLaunchOptions2.mCellTaskId, stageLaunchOptions2.mAppsStackedVertically, stageLaunchOptions2.mCellStageWindowConfigPosition, stageLaunchOptions2.mStageRatio, stageLaunchOptions2.mCellRatio);
+                                        ((SplitScreenController) obj).startSplitTasks(stageLaunchOptions2.mLeftTopTaskId, stageLaunchOptions2.mRightBottomTaskId, stageLaunchOptions2.mCellTaskId, stageLaunchOptions2.mAppsStackedVertically, stageLaunchOptions2.mCellStageWindowConfigPosition, stageLaunchOptions2.mStageRatio, stageLaunchOptions2.mCellRatio, stageLaunchOptions2.mParallelMultiSplit);
                                         break;
                                 }
                             }
@@ -858,7 +856,7 @@ public class SplitScreenProxyService extends Service {
                         return;
                     } else {
                         final int i14 = 6;
-                        SplitScreenProxyService.m3260$$Nest$mexecuteRemoteCall(splitScreenProxyService, splitScreenProxyService.mSplitScreenController, new Consumer() { // from class: com.android.wm.shell.splitscreen.SplitScreenProxyService$MessageHandler$$ExternalSyntheticLambda0
+                        SplitScreenProxyService.m3278$$Nest$mexecuteRemoteCall(splitScreenProxyService, splitScreenProxyService.mSplitScreenController, new Consumer() { // from class: com.android.wm.shell.splitscreen.SplitScreenProxyService$MessageHandler$$ExternalSyntheticLambda0
                             @Override // java.util.function.Consumer
                             public final void accept(Object obj) {
                                 int i132 = i14;
@@ -907,12 +905,12 @@ public class SplitScreenProxyService extends Service {
                                                 if (z7) {
                                                     CoreSaLogger.logForAdvanced("1000", "From Apps edge_Tap");
                                                 }
-                                                ActivityOptions makeBasic = ActivityOptions.makeBasic();
-                                                boolean isMultiSplitScreenVisible = CoreRune.MW_MULTI_SPLIT ? splitScreenController2.mStageCoordinator.isMultiSplitScreenVisible() : splitScreenController2.mStageCoordinator.isSplitScreenVisible();
-                                                if (CoreRune.MW_RESUMED_AFFORDANCE_SHELL_TRANSITION && isMultiSplitScreenVisible) {
-                                                    makeBasic.setResumedAffordanceAnimation();
+                                                ActivityOptions activityOptionsMakeBasic = ActivityOptions.makeBasic();
+                                                boolean zIsMultiSplitScreenVisible = CoreRune.MW_MULTI_SPLIT ? splitScreenController2.mStageCoordinator.isMultiSplitScreenVisible() : splitScreenController2.mStageCoordinator.isSplitScreenVisible();
+                                                if (CoreRune.MW_RESUMED_AFFORDANCE_SHELL_TRANSITION && zIsMultiSplitScreenVisible) {
+                                                    activityOptionsMakeBasic.setResumedAffordanceAnimation();
                                                 }
-                                                Bundle bundle = makeBasic.toBundle();
+                                                Bundle bundle = activityOptionsMakeBasic.toBundle();
                                                 if (!CoreRune.MW_MULTI_SPLIT_TASK_ORGANIZER || MultiWindowUtils.isInSubDisplay(splitScreenController2.mContext) || !splitScreenController2.mStageCoordinator.isSplitScreenVisible() || !MultiWindowManager.getInstance().supportMultiSplitAppMinimumSize() || splitScreenController2.mSplitState.isSplitStashed()) {
                                                     if (i19 == -1) {
                                                         splitScreenController2.startIntent(intent7, userHandle5, 1, -1, bundle);
@@ -930,11 +928,11 @@ public class SplitScreenProxyService extends Service {
                                                         }
                                                     }
                                                     if (i19 != -1) {
-                                                        Bundle resolveStartCellStage = splitScreenController2.mStageCoordinator.resolveStartCellStage(-1, multiSplitLaunchPosition, bundle, null);
+                                                        Bundle bundleResolveStartCellStage = splitScreenController2.mStageCoordinator.resolveStartCellStage(-1, multiSplitLaunchPosition, bundle, null);
                                                         if (CoreRune.MW_MULTI_SPLIT_BOUNDS_POLICY && !splitScreenController2.mStageCoordinator.isMultiSplitActive()) {
                                                             splitScreenController2.mStageCoordinator.mSplitLayout.setCellDividerRatio(0.5f, multiSplitLaunchPosition, true, false);
                                                         }
-                                                        ActivityTaskManager.getService().startActivityFromRecents(i19, resolveStartCellStage);
+                                                        ActivityTaskManager.getService().startActivityFromRecents(i19, bundleResolveStartCellStage);
                                                     } else {
                                                         splitScreenController2.startIntentToCell(null, intent7, userHandle5, multiSplitLaunchPosition, false);
                                                     }
@@ -975,11 +973,11 @@ public class SplitScreenProxyService extends Service {
                                         break;
                                     case 8:
                                         int i26 = SplitScreenProxyService.MessageHandler.$r8$clinit;
-                                        ((SplitScreenController) obj).startSplitTasks(stageLaunchOptions2.mLeftTopTaskId, stageLaunchOptions2.mRightBottomTaskId, -1, true, 0, stageLaunchOptions2.mStageRatio, 0.5f);
+                                        ((SplitScreenController) obj).startSplitTasks(stageLaunchOptions2.mLeftTopTaskId, stageLaunchOptions2.mRightBottomTaskId, -1, true, 0, stageLaunchOptions2.mStageRatio, 0.5f, false);
                                         break;
                                     default:
                                         int i27 = SplitScreenProxyService.MessageHandler.$r8$clinit;
-                                        ((SplitScreenController) obj).startSplitTasks(stageLaunchOptions2.mLeftTopTaskId, stageLaunchOptions2.mRightBottomTaskId, stageLaunchOptions2.mCellTaskId, stageLaunchOptions2.mAppsStackedVertically, stageLaunchOptions2.mCellStageWindowConfigPosition, stageLaunchOptions2.mStageRatio, stageLaunchOptions2.mCellRatio);
+                                        ((SplitScreenController) obj).startSplitTasks(stageLaunchOptions2.mLeftTopTaskId, stageLaunchOptions2.mRightBottomTaskId, stageLaunchOptions2.mCellTaskId, stageLaunchOptions2.mAppsStackedVertically, stageLaunchOptions2.mCellStageWindowConfigPosition, stageLaunchOptions2.mStageRatio, stageLaunchOptions2.mCellRatio, stageLaunchOptions2.mParallelMultiSplit);
                                         break;
                                 }
                             }
@@ -992,7 +990,7 @@ public class SplitScreenProxyService extends Service {
                         return;
                     } else {
                         final int i15 = 8;
-                        SplitScreenProxyService.m3260$$Nest$mexecuteRemoteCall(splitScreenProxyService, splitScreenProxyService.mSplitScreenController, new Consumer() { // from class: com.android.wm.shell.splitscreen.SplitScreenProxyService$MessageHandler$$ExternalSyntheticLambda0
+                        SplitScreenProxyService.m3278$$Nest$mexecuteRemoteCall(splitScreenProxyService, splitScreenProxyService.mSplitScreenController, new Consumer() { // from class: com.android.wm.shell.splitscreen.SplitScreenProxyService$MessageHandler$$ExternalSyntheticLambda0
                             @Override // java.util.function.Consumer
                             public final void accept(Object obj) {
                                 int i132 = i15;
@@ -1041,12 +1039,12 @@ public class SplitScreenProxyService extends Service {
                                                 if (z7) {
                                                     CoreSaLogger.logForAdvanced("1000", "From Apps edge_Tap");
                                                 }
-                                                ActivityOptions makeBasic = ActivityOptions.makeBasic();
-                                                boolean isMultiSplitScreenVisible = CoreRune.MW_MULTI_SPLIT ? splitScreenController2.mStageCoordinator.isMultiSplitScreenVisible() : splitScreenController2.mStageCoordinator.isSplitScreenVisible();
-                                                if (CoreRune.MW_RESUMED_AFFORDANCE_SHELL_TRANSITION && isMultiSplitScreenVisible) {
-                                                    makeBasic.setResumedAffordanceAnimation();
+                                                ActivityOptions activityOptionsMakeBasic = ActivityOptions.makeBasic();
+                                                boolean zIsMultiSplitScreenVisible = CoreRune.MW_MULTI_SPLIT ? splitScreenController2.mStageCoordinator.isMultiSplitScreenVisible() : splitScreenController2.mStageCoordinator.isSplitScreenVisible();
+                                                if (CoreRune.MW_RESUMED_AFFORDANCE_SHELL_TRANSITION && zIsMultiSplitScreenVisible) {
+                                                    activityOptionsMakeBasic.setResumedAffordanceAnimation();
                                                 }
-                                                Bundle bundle = makeBasic.toBundle();
+                                                Bundle bundle = activityOptionsMakeBasic.toBundle();
                                                 if (!CoreRune.MW_MULTI_SPLIT_TASK_ORGANIZER || MultiWindowUtils.isInSubDisplay(splitScreenController2.mContext) || !splitScreenController2.mStageCoordinator.isSplitScreenVisible() || !MultiWindowManager.getInstance().supportMultiSplitAppMinimumSize() || splitScreenController2.mSplitState.isSplitStashed()) {
                                                     if (i19 == -1) {
                                                         splitScreenController2.startIntent(intent7, userHandle5, 1, -1, bundle);
@@ -1064,11 +1062,11 @@ public class SplitScreenProxyService extends Service {
                                                         }
                                                     }
                                                     if (i19 != -1) {
-                                                        Bundle resolveStartCellStage = splitScreenController2.mStageCoordinator.resolveStartCellStage(-1, multiSplitLaunchPosition, bundle, null);
+                                                        Bundle bundleResolveStartCellStage = splitScreenController2.mStageCoordinator.resolveStartCellStage(-1, multiSplitLaunchPosition, bundle, null);
                                                         if (CoreRune.MW_MULTI_SPLIT_BOUNDS_POLICY && !splitScreenController2.mStageCoordinator.isMultiSplitActive()) {
                                                             splitScreenController2.mStageCoordinator.mSplitLayout.setCellDividerRatio(0.5f, multiSplitLaunchPosition, true, false);
                                                         }
-                                                        ActivityTaskManager.getService().startActivityFromRecents(i19, resolveStartCellStage);
+                                                        ActivityTaskManager.getService().startActivityFromRecents(i19, bundleResolveStartCellStage);
                                                     } else {
                                                         splitScreenController2.startIntentToCell(null, intent7, userHandle5, multiSplitLaunchPosition, false);
                                                     }
@@ -1109,11 +1107,11 @@ public class SplitScreenProxyService extends Service {
                                         break;
                                     case 8:
                                         int i26 = SplitScreenProxyService.MessageHandler.$r8$clinit;
-                                        ((SplitScreenController) obj).startSplitTasks(stageLaunchOptions2.mLeftTopTaskId, stageLaunchOptions2.mRightBottomTaskId, -1, true, 0, stageLaunchOptions2.mStageRatio, 0.5f);
+                                        ((SplitScreenController) obj).startSplitTasks(stageLaunchOptions2.mLeftTopTaskId, stageLaunchOptions2.mRightBottomTaskId, -1, true, 0, stageLaunchOptions2.mStageRatio, 0.5f, false);
                                         break;
                                     default:
                                         int i27 = SplitScreenProxyService.MessageHandler.$r8$clinit;
-                                        ((SplitScreenController) obj).startSplitTasks(stageLaunchOptions2.mLeftTopTaskId, stageLaunchOptions2.mRightBottomTaskId, stageLaunchOptions2.mCellTaskId, stageLaunchOptions2.mAppsStackedVertically, stageLaunchOptions2.mCellStageWindowConfigPosition, stageLaunchOptions2.mStageRatio, stageLaunchOptions2.mCellRatio);
+                                        ((SplitScreenController) obj).startSplitTasks(stageLaunchOptions2.mLeftTopTaskId, stageLaunchOptions2.mRightBottomTaskId, stageLaunchOptions2.mCellTaskId, stageLaunchOptions2.mAppsStackedVertically, stageLaunchOptions2.mCellStageWindowConfigPosition, stageLaunchOptions2.mStageRatio, stageLaunchOptions2.mCellRatio, stageLaunchOptions2.mParallelMultiSplit);
                                         break;
                                 }
                             }
@@ -1125,7 +1123,7 @@ public class SplitScreenProxyService extends Service {
                         Slog.w("SplitScreenProxyService", "OPEN_IN_SPLIT_WITH_TAP has no valid start info");
                         return;
                     } else {
-                        SplitScreenProxyService.m3260$$Nest$mexecuteRemoteCall(splitScreenProxyService, splitScreenProxyService.mSplitScreenController, new Consumer() { // from class: com.android.wm.shell.splitscreen.SplitScreenProxyService$MessageHandler$$ExternalSyntheticLambda0
+                        SplitScreenProxyService.m3278$$Nest$mexecuteRemoteCall(splitScreenProxyService, splitScreenProxyService.mSplitScreenController, new Consumer() { // from class: com.android.wm.shell.splitscreen.SplitScreenProxyService$MessageHandler$$ExternalSyntheticLambda0
                             @Override // java.util.function.Consumer
                             public final void accept(Object obj) {
                                 int i132 = i5;
@@ -1174,12 +1172,12 @@ public class SplitScreenProxyService extends Service {
                                                 if (z7) {
                                                     CoreSaLogger.logForAdvanced("1000", "From Apps edge_Tap");
                                                 }
-                                                ActivityOptions makeBasic = ActivityOptions.makeBasic();
-                                                boolean isMultiSplitScreenVisible = CoreRune.MW_MULTI_SPLIT ? splitScreenController2.mStageCoordinator.isMultiSplitScreenVisible() : splitScreenController2.mStageCoordinator.isSplitScreenVisible();
-                                                if (CoreRune.MW_RESUMED_AFFORDANCE_SHELL_TRANSITION && isMultiSplitScreenVisible) {
-                                                    makeBasic.setResumedAffordanceAnimation();
+                                                ActivityOptions activityOptionsMakeBasic = ActivityOptions.makeBasic();
+                                                boolean zIsMultiSplitScreenVisible = CoreRune.MW_MULTI_SPLIT ? splitScreenController2.mStageCoordinator.isMultiSplitScreenVisible() : splitScreenController2.mStageCoordinator.isSplitScreenVisible();
+                                                if (CoreRune.MW_RESUMED_AFFORDANCE_SHELL_TRANSITION && zIsMultiSplitScreenVisible) {
+                                                    activityOptionsMakeBasic.setResumedAffordanceAnimation();
                                                 }
-                                                Bundle bundle = makeBasic.toBundle();
+                                                Bundle bundle = activityOptionsMakeBasic.toBundle();
                                                 if (!CoreRune.MW_MULTI_SPLIT_TASK_ORGANIZER || MultiWindowUtils.isInSubDisplay(splitScreenController2.mContext) || !splitScreenController2.mStageCoordinator.isSplitScreenVisible() || !MultiWindowManager.getInstance().supportMultiSplitAppMinimumSize() || splitScreenController2.mSplitState.isSplitStashed()) {
                                                     if (i19 == -1) {
                                                         splitScreenController2.startIntent(intent7, userHandle5, 1, -1, bundle);
@@ -1197,11 +1195,11 @@ public class SplitScreenProxyService extends Service {
                                                         }
                                                     }
                                                     if (i19 != -1) {
-                                                        Bundle resolveStartCellStage = splitScreenController2.mStageCoordinator.resolveStartCellStage(-1, multiSplitLaunchPosition, bundle, null);
+                                                        Bundle bundleResolveStartCellStage = splitScreenController2.mStageCoordinator.resolveStartCellStage(-1, multiSplitLaunchPosition, bundle, null);
                                                         if (CoreRune.MW_MULTI_SPLIT_BOUNDS_POLICY && !splitScreenController2.mStageCoordinator.isMultiSplitActive()) {
                                                             splitScreenController2.mStageCoordinator.mSplitLayout.setCellDividerRatio(0.5f, multiSplitLaunchPosition, true, false);
                                                         }
-                                                        ActivityTaskManager.getService().startActivityFromRecents(i19, resolveStartCellStage);
+                                                        ActivityTaskManager.getService().startActivityFromRecents(i19, bundleResolveStartCellStage);
                                                     } else {
                                                         splitScreenController2.startIntentToCell(null, intent7, userHandle5, multiSplitLaunchPosition, false);
                                                     }
@@ -1242,11 +1240,11 @@ public class SplitScreenProxyService extends Service {
                                         break;
                                     case 8:
                                         int i26 = SplitScreenProxyService.MessageHandler.$r8$clinit;
-                                        ((SplitScreenController) obj).startSplitTasks(stageLaunchOptions2.mLeftTopTaskId, stageLaunchOptions2.mRightBottomTaskId, -1, true, 0, stageLaunchOptions2.mStageRatio, 0.5f);
+                                        ((SplitScreenController) obj).startSplitTasks(stageLaunchOptions2.mLeftTopTaskId, stageLaunchOptions2.mRightBottomTaskId, -1, true, 0, stageLaunchOptions2.mStageRatio, 0.5f, false);
                                         break;
                                     default:
                                         int i27 = SplitScreenProxyService.MessageHandler.$r8$clinit;
-                                        ((SplitScreenController) obj).startSplitTasks(stageLaunchOptions2.mLeftTopTaskId, stageLaunchOptions2.mRightBottomTaskId, stageLaunchOptions2.mCellTaskId, stageLaunchOptions2.mAppsStackedVertically, stageLaunchOptions2.mCellStageWindowConfigPosition, stageLaunchOptions2.mStageRatio, stageLaunchOptions2.mCellRatio);
+                                        ((SplitScreenController) obj).startSplitTasks(stageLaunchOptions2.mLeftTopTaskId, stageLaunchOptions2.mRightBottomTaskId, stageLaunchOptions2.mCellTaskId, stageLaunchOptions2.mAppsStackedVertically, stageLaunchOptions2.mCellStageWindowConfigPosition, stageLaunchOptions2.mStageRatio, stageLaunchOptions2.mCellRatio, stageLaunchOptions2.mParallelMultiSplit);
                                         break;
                                 }
                             }
@@ -1259,7 +1257,7 @@ public class SplitScreenProxyService extends Service {
                         return;
                     } else {
                         final int i16 = 9;
-                        SplitScreenProxyService.m3260$$Nest$mexecuteRemoteCall(splitScreenProxyService, splitScreenProxyService.mSplitScreenController, new Consumer() { // from class: com.android.wm.shell.splitscreen.SplitScreenProxyService$MessageHandler$$ExternalSyntheticLambda0
+                        SplitScreenProxyService.m3278$$Nest$mexecuteRemoteCall(splitScreenProxyService, splitScreenProxyService.mSplitScreenController, new Consumer() { // from class: com.android.wm.shell.splitscreen.SplitScreenProxyService$MessageHandler$$ExternalSyntheticLambda0
                             @Override // java.util.function.Consumer
                             public final void accept(Object obj) {
                                 int i132 = i16;
@@ -1308,12 +1306,12 @@ public class SplitScreenProxyService extends Service {
                                                 if (z7) {
                                                     CoreSaLogger.logForAdvanced("1000", "From Apps edge_Tap");
                                                 }
-                                                ActivityOptions makeBasic = ActivityOptions.makeBasic();
-                                                boolean isMultiSplitScreenVisible = CoreRune.MW_MULTI_SPLIT ? splitScreenController2.mStageCoordinator.isMultiSplitScreenVisible() : splitScreenController2.mStageCoordinator.isSplitScreenVisible();
-                                                if (CoreRune.MW_RESUMED_AFFORDANCE_SHELL_TRANSITION && isMultiSplitScreenVisible) {
-                                                    makeBasic.setResumedAffordanceAnimation();
+                                                ActivityOptions activityOptionsMakeBasic = ActivityOptions.makeBasic();
+                                                boolean zIsMultiSplitScreenVisible = CoreRune.MW_MULTI_SPLIT ? splitScreenController2.mStageCoordinator.isMultiSplitScreenVisible() : splitScreenController2.mStageCoordinator.isSplitScreenVisible();
+                                                if (CoreRune.MW_RESUMED_AFFORDANCE_SHELL_TRANSITION && zIsMultiSplitScreenVisible) {
+                                                    activityOptionsMakeBasic.setResumedAffordanceAnimation();
                                                 }
-                                                Bundle bundle = makeBasic.toBundle();
+                                                Bundle bundle = activityOptionsMakeBasic.toBundle();
                                                 if (!CoreRune.MW_MULTI_SPLIT_TASK_ORGANIZER || MultiWindowUtils.isInSubDisplay(splitScreenController2.mContext) || !splitScreenController2.mStageCoordinator.isSplitScreenVisible() || !MultiWindowManager.getInstance().supportMultiSplitAppMinimumSize() || splitScreenController2.mSplitState.isSplitStashed()) {
                                                     if (i19 == -1) {
                                                         splitScreenController2.startIntent(intent7, userHandle5, 1, -1, bundle);
@@ -1331,11 +1329,11 @@ public class SplitScreenProxyService extends Service {
                                                         }
                                                     }
                                                     if (i19 != -1) {
-                                                        Bundle resolveStartCellStage = splitScreenController2.mStageCoordinator.resolveStartCellStage(-1, multiSplitLaunchPosition, bundle, null);
+                                                        Bundle bundleResolveStartCellStage = splitScreenController2.mStageCoordinator.resolveStartCellStage(-1, multiSplitLaunchPosition, bundle, null);
                                                         if (CoreRune.MW_MULTI_SPLIT_BOUNDS_POLICY && !splitScreenController2.mStageCoordinator.isMultiSplitActive()) {
                                                             splitScreenController2.mStageCoordinator.mSplitLayout.setCellDividerRatio(0.5f, multiSplitLaunchPosition, true, false);
                                                         }
-                                                        ActivityTaskManager.getService().startActivityFromRecents(i19, resolveStartCellStage);
+                                                        ActivityTaskManager.getService().startActivityFromRecents(i19, bundleResolveStartCellStage);
                                                     } else {
                                                         splitScreenController2.startIntentToCell(null, intent7, userHandle5, multiSplitLaunchPosition, false);
                                                     }
@@ -1376,11 +1374,11 @@ public class SplitScreenProxyService extends Service {
                                         break;
                                     case 8:
                                         int i26 = SplitScreenProxyService.MessageHandler.$r8$clinit;
-                                        ((SplitScreenController) obj).startSplitTasks(stageLaunchOptions2.mLeftTopTaskId, stageLaunchOptions2.mRightBottomTaskId, -1, true, 0, stageLaunchOptions2.mStageRatio, 0.5f);
+                                        ((SplitScreenController) obj).startSplitTasks(stageLaunchOptions2.mLeftTopTaskId, stageLaunchOptions2.mRightBottomTaskId, -1, true, 0, stageLaunchOptions2.mStageRatio, 0.5f, false);
                                         break;
                                     default:
                                         int i27 = SplitScreenProxyService.MessageHandler.$r8$clinit;
-                                        ((SplitScreenController) obj).startSplitTasks(stageLaunchOptions2.mLeftTopTaskId, stageLaunchOptions2.mRightBottomTaskId, stageLaunchOptions2.mCellTaskId, stageLaunchOptions2.mAppsStackedVertically, stageLaunchOptions2.mCellStageWindowConfigPosition, stageLaunchOptions2.mStageRatio, stageLaunchOptions2.mCellRatio);
+                                        ((SplitScreenController) obj).startSplitTasks(stageLaunchOptions2.mLeftTopTaskId, stageLaunchOptions2.mRightBottomTaskId, stageLaunchOptions2.mCellTaskId, stageLaunchOptions2.mAppsStackedVertically, stageLaunchOptions2.mCellStageWindowConfigPosition, stageLaunchOptions2.mStageRatio, stageLaunchOptions2.mCellRatio, stageLaunchOptions2.mParallelMultiSplit);
                                         break;
                                 }
                             }
@@ -1396,7 +1394,7 @@ public class SplitScreenProxyService extends Service {
                         Slog.w("SplitScreenProxyService", "OPEN_IN_SPLIT_WITH_ALLAPPS has no valid start info");
                         return;
                     } else {
-                        SplitScreenProxyService.m3260$$Nest$mexecuteRemoteCall(splitScreenProxyService, splitScreenProxyService.mSplitScreenController, new Consumer() { // from class: com.android.wm.shell.splitscreen.SplitScreenProxyService$MessageHandler$$ExternalSyntheticLambda0
+                        SplitScreenProxyService.m3278$$Nest$mexecuteRemoteCall(splitScreenProxyService, splitScreenProxyService.mSplitScreenController, new Consumer() { // from class: com.android.wm.shell.splitscreen.SplitScreenProxyService$MessageHandler$$ExternalSyntheticLambda0
                             @Override // java.util.function.Consumer
                             public final void accept(Object obj) {
                                 int i132 = i6;
@@ -1445,12 +1443,12 @@ public class SplitScreenProxyService extends Service {
                                                 if (z7) {
                                                     CoreSaLogger.logForAdvanced("1000", "From Apps edge_Tap");
                                                 }
-                                                ActivityOptions makeBasic = ActivityOptions.makeBasic();
-                                                boolean isMultiSplitScreenVisible = CoreRune.MW_MULTI_SPLIT ? splitScreenController2.mStageCoordinator.isMultiSplitScreenVisible() : splitScreenController2.mStageCoordinator.isSplitScreenVisible();
-                                                if (CoreRune.MW_RESUMED_AFFORDANCE_SHELL_TRANSITION && isMultiSplitScreenVisible) {
-                                                    makeBasic.setResumedAffordanceAnimation();
+                                                ActivityOptions activityOptionsMakeBasic = ActivityOptions.makeBasic();
+                                                boolean zIsMultiSplitScreenVisible = CoreRune.MW_MULTI_SPLIT ? splitScreenController2.mStageCoordinator.isMultiSplitScreenVisible() : splitScreenController2.mStageCoordinator.isSplitScreenVisible();
+                                                if (CoreRune.MW_RESUMED_AFFORDANCE_SHELL_TRANSITION && zIsMultiSplitScreenVisible) {
+                                                    activityOptionsMakeBasic.setResumedAffordanceAnimation();
                                                 }
-                                                Bundle bundle = makeBasic.toBundle();
+                                                Bundle bundle = activityOptionsMakeBasic.toBundle();
                                                 if (!CoreRune.MW_MULTI_SPLIT_TASK_ORGANIZER || MultiWindowUtils.isInSubDisplay(splitScreenController2.mContext) || !splitScreenController2.mStageCoordinator.isSplitScreenVisible() || !MultiWindowManager.getInstance().supportMultiSplitAppMinimumSize() || splitScreenController2.mSplitState.isSplitStashed()) {
                                                     if (i19 == -1) {
                                                         splitScreenController2.startIntent(intent7, userHandle5, 1, -1, bundle);
@@ -1468,11 +1466,11 @@ public class SplitScreenProxyService extends Service {
                                                         }
                                                     }
                                                     if (i19 != -1) {
-                                                        Bundle resolveStartCellStage = splitScreenController2.mStageCoordinator.resolveStartCellStage(-1, multiSplitLaunchPosition, bundle, null);
+                                                        Bundle bundleResolveStartCellStage = splitScreenController2.mStageCoordinator.resolveStartCellStage(-1, multiSplitLaunchPosition, bundle, null);
                                                         if (CoreRune.MW_MULTI_SPLIT_BOUNDS_POLICY && !splitScreenController2.mStageCoordinator.isMultiSplitActive()) {
                                                             splitScreenController2.mStageCoordinator.mSplitLayout.setCellDividerRatio(0.5f, multiSplitLaunchPosition, true, false);
                                                         }
-                                                        ActivityTaskManager.getService().startActivityFromRecents(i19, resolveStartCellStage);
+                                                        ActivityTaskManager.getService().startActivityFromRecents(i19, bundleResolveStartCellStage);
                                                     } else {
                                                         splitScreenController2.startIntentToCell(null, intent7, userHandle5, multiSplitLaunchPosition, false);
                                                     }
@@ -1513,11 +1511,11 @@ public class SplitScreenProxyService extends Service {
                                         break;
                                     case 8:
                                         int i26 = SplitScreenProxyService.MessageHandler.$r8$clinit;
-                                        ((SplitScreenController) obj).startSplitTasks(stageLaunchOptions2.mLeftTopTaskId, stageLaunchOptions2.mRightBottomTaskId, -1, true, 0, stageLaunchOptions2.mStageRatio, 0.5f);
+                                        ((SplitScreenController) obj).startSplitTasks(stageLaunchOptions2.mLeftTopTaskId, stageLaunchOptions2.mRightBottomTaskId, -1, true, 0, stageLaunchOptions2.mStageRatio, 0.5f, false);
                                         break;
                                     default:
                                         int i27 = SplitScreenProxyService.MessageHandler.$r8$clinit;
-                                        ((SplitScreenController) obj).startSplitTasks(stageLaunchOptions2.mLeftTopTaskId, stageLaunchOptions2.mRightBottomTaskId, stageLaunchOptions2.mCellTaskId, stageLaunchOptions2.mAppsStackedVertically, stageLaunchOptions2.mCellStageWindowConfigPosition, stageLaunchOptions2.mStageRatio, stageLaunchOptions2.mCellRatio);
+                                        ((SplitScreenController) obj).startSplitTasks(stageLaunchOptions2.mLeftTopTaskId, stageLaunchOptions2.mRightBottomTaskId, stageLaunchOptions2.mCellTaskId, stageLaunchOptions2.mAppsStackedVertically, stageLaunchOptions2.mCellStageWindowConfigPosition, stageLaunchOptions2.mStageRatio, stageLaunchOptions2.mCellRatio, stageLaunchOptions2.mParallelMultiSplit);
                                         break;
                                 }
                             }
@@ -1525,7 +1523,7 @@ public class SplitScreenProxyService extends Service {
                         return;
                     }
                 case 9:
-                    SplitScreenProxyService.m3260$$Nest$mexecuteRemoteCall(splitScreenProxyService, splitScreenProxyService.mSplitScreenController, new SplitScreenProxyService$MessageHandler$$ExternalSyntheticLambda1());
+                    SplitScreenProxyService.m3278$$Nest$mexecuteRemoteCall(splitScreenProxyService, splitScreenProxyService.mSplitScreenController, new SplitScreenProxyService$MessageHandler$$ExternalSyntheticLambda1());
                     return;
             }
         }
@@ -1535,7 +1533,7 @@ public class SplitScreenProxyService extends Service {
     }
 
     /* renamed from: -$$Nest$mexecuteRemoteCall, reason: not valid java name */
-    public static void m3260$$Nest$mexecuteRemoteCall(SplitScreenProxyService splitScreenProxyService, final RemoteCallable remoteCallable, final Consumer consumer) {
+    public static void m3278$$Nest$mexecuteRemoteCall(SplitScreenProxyService splitScreenProxyService, final RemoteCallable remoteCallable, final Consumer consumer) {
         splitScreenProxyService.getClass();
         remoteCallable.getRemoteCallExecutor().execute(new Runnable() { // from class: com.android.wm.shell.splitscreen.SplitScreenProxyService$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
@@ -1562,7 +1560,6 @@ public class SplitScreenProxyService extends Service {
         return messenger.getBinder();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.splitscreen.SplitScreenProxyService$1, reason: invalid class name */
     public class AnonymousClass1 extends IRemoteTransition.Stub {
         public static final /* synthetic */ int $r8$clinit = 0;
@@ -1577,9 +1574,9 @@ public class SplitScreenProxyService extends Service {
 
         public final void onTransitionConsumed(IBinder iBinder, boolean z) {
             boolean z2 = SplitScreenProxyService.TEST_MOCK_REMOTE_TRANSITION;
-            StringBuilder m = RowView$$ExternalSyntheticOutline0.m("onTransitionConsumed: aborted=", ", Callers=", z);
-            m.append(Debug.getCallers(10));
-            Slog.d("SplitScreenProxyService", m.toString());
+            StringBuilder sbM = RowView$$ExternalSyntheticOutline0.m("onTransitionConsumed: aborted=", ", Callers=", z);
+            sbM.append(Debug.getCallers(10));
+            Slog.d("SplitScreenProxyService", sbM.toString());
         }
 
         public final void startAnimation(IBinder iBinder, TransitionInfo transitionInfo, SurfaceControl.Transaction transaction, IRemoteTransitionFinishedCallback iRemoteTransitionFinishedCallback) {

@@ -42,7 +42,6 @@ import com.samsung.android.knox.net.nap.NetworkAnalyticsConstants;
 import dagger.Lazy;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class MediaProjectionPermissionActivity extends Activity {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -80,9 +79,9 @@ public class MediaProjectionPermissionActivity extends Activity {
     }
 
     @Override // android.app.Activity
-    public final void onCreate(Bundle bundle) {
+    public final void onCreate(Bundle bundle) throws PackageManager.NameNotFoundException {
         ApplicationInfo applicationInfo;
-        MediaProjectionPermissionActivity mediaProjectionPermissionActivity;
+        MediaProjectionPermissionActivity mediaProjectionPermissionActivityCreateDisplayContext;
         super.onCreate(bundle);
         Intent intent = getIntent();
         this.mReviewGrantedConsentRequired = intent.getBooleanExtra("extra_media_projection_user_consent_required", false);
@@ -111,9 +110,9 @@ public class MediaProjectionPermissionActivity extends Activity {
                 MediaProjectionServiceHelper.Companion companion = MediaProjectionServiceHelper.Companion;
                 companion.getClass();
                 IMediaProjectionManager iMediaProjectionManager = MediaProjectionServiceHelper.service;
-                boolean hasProjectionPermission = iMediaProjectionManager.hasProjectionPermission(i, str);
+                boolean zHasProjectionPermission = iMediaProjectionManager.hasProjectionPermission(i, str);
                 MediaProjectionMetricsLogger mediaProjectionMetricsLogger = this.mMediaProjectionMetricsLogger;
-                if (hasProjectionPermission) {
+                if (zHasProjectionPermission) {
                     if (bundle == null) {
                         mediaProjectionMetricsLogger.notifyProjectionInitiated(this.mUid, SessionCreationSource.APP);
                     }
@@ -138,99 +137,99 @@ public class MediaProjectionPermissionActivity extends Activity {
                 if (((ScreenCaptureDevicePolicyResolver) this.mScreenCaptureDevicePolicyResolver.get()).isScreenCaptureCompletelyDisabled(UserHandle.getUserHandleForUid(getLaunchedFromUid()))) {
                     ScreenCaptureDisabledDialogDelegate screenCaptureDisabledDialogDelegate = this.mScreenCaptureDisabledDialogDelegate;
                     screenCaptureDisabledDialogDelegate.getClass();
-                    AlertDialog create = new AlertDialog.Builder(screenCaptureDisabledDialogDelegate.context, R.style.Theme_SystemUI_Dialog).create();
-                    create.getClass();
-                    screenCaptureDisabledDialogDelegate.initDialog(create);
-                    setUpDialog(create);
-                    create.show();
+                    AlertDialog alertDialogCreate = new AlertDialog.Builder(screenCaptureDisabledDialogDelegate.context, R.style.Theme_SystemUI_Dialog).create();
+                    alertDialogCreate.getClass();
+                    screenCaptureDisabledDialogDelegate.initDialog(alertDialogCreate);
+                    setUpDialog(alertDialogCreate);
+                    alertDialogCreate.show();
                     finishAsCancelled();
                     return;
                 }
-                String charSequence = applicationInfo.loadLabel(packageManager).toString();
-                int length = charSequence.length();
-                int i3 = 0;
-                while (i3 < length) {
-                    int codePointAt = charSequence.codePointAt(i3);
-                    int type = Character.getType(codePointAt);
+                String string = applicationInfo.loadLabel(packageManager).toString();
+                int length = string.length();
+                int iCharCount = 0;
+                while (iCharCount < length) {
+                    int iCodePointAt = string.codePointAt(iCharCount);
+                    int type = Character.getType(iCodePointAt);
                     if (type == 13 || type == 15 || type == 14) {
-                        charSequence = charSequence.substring(0, i3) + "…";
+                        string = string.substring(0, iCharCount) + "…";
                         break;
                     }
-                    i3 += Character.charCount(codePointAt);
+                    iCharCount += Character.charCount(iCodePointAt);
                 }
-                if (charSequence.isEmpty()) {
-                    charSequence = this.mPackageName;
+                if (string.isEmpty()) {
+                    string = this.mPackageName;
                 }
                 TextPaint textPaint = new TextPaint();
                 textPaint.setTextSize(42.0f);
-                String unicodeWrap = BidiFormatter.getInstance().unicodeWrap(TextUtils.ellipsize(charSequence, textPaint, 500.0f, TextUtils.TruncateAt.END).toString());
-                if (unicodeWrap == null || unicodeWrap.isEmpty()) {
-                    unicodeWrap = this.mPackageName;
+                String strUnicodeWrap = BidiFormatter.getInstance().unicodeWrap(TextUtils.ellipsize(string, textPaint, 500.0f, TextUtils.TruncateAt.END).toString());
+                if (strUnicodeWrap == null || strUnicodeWrap.isEmpty()) {
+                    strUnicodeWrap = this.mPackageName;
                 }
-                String str3 = unicodeWrap;
+                String str3 = strUnicodeWrap;
                 MediaProjectionUtils mediaProjectionUtils = MediaProjectionUtils.INSTANCE;
                 String str4 = this.mPackageName;
                 mediaProjectionUtils.getClass();
-                final boolean isHeadlessRemoteDisplayProvider = Utils.isHeadlessRemoteDisplayProvider(packageManager, str4);
+                final boolean zIsHeadlessRemoteDisplayProvider = Utils.isHeadlessRemoteDisplayProvider(packageManager, str4);
                 if (!BasicRune.POPUPUI_FOLDERBLE_TYPE_FLIP || ((DisplayLifecycle) Dependency.sDependency.getDependencyInner(DisplayLifecycle.class)).mIsFolderOpened) {
-                    mediaProjectionPermissionActivity = this;
+                    mediaProjectionPermissionActivityCreateDisplayContext = this;
                 } else {
                     Display[] displays = ((DisplayManager) getApplicationContext().getSystemService(DisplayManager.class)).getDisplays("com.samsung.android.hardware.display.category.BUILTIN");
-                    mediaProjectionPermissionActivity = displays.length > 1 ? createDisplayContext(displays[1]) : this;
+                    mediaProjectionPermissionActivityCreateDisplayContext = displays.length > 1 ? createDisplayContext(displays[1]) : this;
                 }
-                boolean isChangeEnabled = CompatChanges.isChangeEnabled(316897322L, this.mPackageName, UserHandle.getUserHandleForUid(getLaunchedFromUid()));
+                boolean zIsChangeEnabled = CompatChanges.isChangeEnabled(316897322L, this.mPackageName, UserHandle.getUserHandleForUid(getLaunchedFromUid()));
                 Intent intent4 = getIntent();
                 MediaProjectionConfig mediaProjectionConfig = intent4 == null ? null : (MediaProjectionConfig) intent4.getParcelableExtra("android.media.projection.extra.EXTRA_MEDIA_PROJECTION_CONFIG");
                 Consumer consumer = new Consumer() { // from class: com.android.systemui.mediaprojection.permission.MediaProjectionPermissionActivity$$ExternalSyntheticLambda0
                     @Override // java.util.function.Consumer
                     public final void accept(Object obj) {
-                        MediaProjectionPermissionActivity mediaProjectionPermissionActivity2 = MediaProjectionPermissionActivity.this;
-                        boolean z2 = isHeadlessRemoteDisplayProvider;
-                        int i4 = MediaProjectionPermissionActivity.$r8$clinit;
+                        MediaProjectionPermissionActivity mediaProjectionPermissionActivity = this.f$0;
+                        boolean z2 = zIsHeadlessRemoteDisplayProvider;
+                        int i3 = MediaProjectionPermissionActivity.$r8$clinit;
                         BaseMediaProjectionPermissionViewBinder baseMediaProjectionPermissionViewBinder = ((BaseMediaProjectionPermissionDialogDelegate) obj).viewBinder;
                         if (baseMediaProjectionPermissionViewBinder == null) {
                             baseMediaProjectionPermissionViewBinder = null;
                         }
                         ScreenShareOption screenShareOption = baseMediaProjectionPermissionViewBinder.selectedScreenShareOption;
-                        int i5 = screenShareOption.mode;
-                        int i6 = screenShareOption.displayId;
+                        int i4 = screenShareOption.mode;
+                        int i5 = screenShareOption.displayId;
                         try {
                             try {
-                                int i7 = mediaProjectionPermissionActivity2.mUid;
-                                String str5 = mediaProjectionPermissionActivity2.mPackageName;
-                                boolean z3 = mediaProjectionPermissionActivity2.mReviewGrantedConsentRequired;
+                                int i6 = mediaProjectionPermissionActivity.mUid;
+                                String str5 = mediaProjectionPermissionActivity.mPackageName;
+                                boolean z3 = mediaProjectionPermissionActivity.mReviewGrantedConsentRequired;
                                 MediaProjectionServiceHelper.Companion.getClass();
-                                IMediaProjection projection2 = z3 ? MediaProjectionServiceHelper.service.getProjection(i7, str5) : null;
+                                IMediaProjection projection2 = z3 ? MediaProjectionServiceHelper.service.getProjection(i6, str5) : null;
                                 if (projection2 == null) {
-                                    projection2 = MediaProjectionServiceHelper.service.createProjection(i7, str5, 0, false, i6);
+                                    projection2 = MediaProjectionServiceHelper.service.createProjection(i6, str5, 0, false, i5);
                                 }
-                                if (i5 == 1) {
+                                if (i4 == 1) {
                                     Intent intent5 = new Intent();
                                     intent5.putExtra("android.media.projection.extra.EXTRA_MEDIA_PROJECTION", projection2.asBinder());
                                     intent5.putExtra("screen_share_type", z2 ? MediaProjectionAppSelectorActivity.ScreenShareType.SystemCast.name() : MediaProjectionAppSelectorActivity.ScreenShareType.ShareToApp.name());
-                                    mediaProjectionPermissionActivity2.setResult(-1, intent5);
-                                    mediaProjectionPermissionActivity2.finish(1, projection2);
+                                    mediaProjectionPermissionActivity.setResult(-1, intent5);
+                                    mediaProjectionPermissionActivity.finish(1, projection2);
                                 }
-                                if (i5 == 0) {
-                                    Intent intent6 = new Intent(mediaProjectionPermissionActivity2, (Class<?>) MediaProjectionAppSelectorActivity.class);
+                                if (i4 == 0) {
+                                    Intent intent6 = new Intent(mediaProjectionPermissionActivity, (Class<?>) MediaProjectionAppSelectorActivity.class);
                                     intent6.putExtra("android.media.projection.extra.EXTRA_MEDIA_PROJECTION", projection2.asBinder());
                                     intent6.putExtra("screen_share_type", z2 ? MediaProjectionAppSelectorActivity.ScreenShareType.SystemCast.name() : MediaProjectionAppSelectorActivity.ScreenShareType.ShareToApp.name());
-                                    intent6.putExtra("launched_from_user_handle", UserHandle.getUserHandleForUid(mediaProjectionPermissionActivity2.getLaunchedFromUid()));
-                                    intent6.putExtra("launched_from_host_uid", mediaProjectionPermissionActivity2.getLaunchedFromUid());
-                                    intent6.putExtra("extra_media_projection_user_consent_required", mediaProjectionPermissionActivity2.mReviewGrantedConsentRequired);
+                                    intent6.putExtra("launched_from_user_handle", UserHandle.getUserHandleForUid(mediaProjectionPermissionActivity.getLaunchedFromUid()));
+                                    intent6.putExtra("launched_from_host_uid", mediaProjectionPermissionActivity.getLaunchedFromUid());
+                                    intent6.putExtra("extra_media_projection_user_consent_required", mediaProjectionPermissionActivity.mReviewGrantedConsentRequired);
                                     intent6.setFlags(33554432);
-                                    mediaProjectionPermissionActivity2.mUserSelectingTask = true;
-                                    mediaProjectionPermissionActivity2.startActivityAsUser(intent6, UserHandle.of(0));
-                                    mediaProjectionPermissionActivity2.mStatusBarManager.collapsePanels();
+                                    mediaProjectionPermissionActivity.mUserSelectingTask = true;
+                                    mediaProjectionPermissionActivity.startActivityAsUser(intent6, UserHandle.of(0));
+                                    mediaProjectionPermissionActivity.mStatusBarManager.collapsePanels();
                                 }
-                                AlertDialogWithDelegate alertDialogWithDelegate = mediaProjectionPermissionActivity2.mDialog;
+                                AlertDialogWithDelegate alertDialogWithDelegate = mediaProjectionPermissionActivity.mDialog;
                                 if (alertDialogWithDelegate != null) {
                                     alertDialogWithDelegate.dismiss();
                                 }
                             } catch (RemoteException e) {
                                 Log.e("MediaProjectionPermissionActivity", "Error granting projection permission", e);
-                                mediaProjectionPermissionActivity2.finishAsCancelled();
-                                AlertDialogWithDelegate alertDialogWithDelegate2 = mediaProjectionPermissionActivity2.mDialog;
+                                mediaProjectionPermissionActivity.finishAsCancelled();
+                                AlertDialogWithDelegate alertDialogWithDelegate2 = mediaProjectionPermissionActivity.mDialog;
                                 if (alertDialogWithDelegate2 != null) {
                                     alertDialogWithDelegate2.dismiss();
                                 }
@@ -242,30 +241,30 @@ public class MediaProjectionPermissionActivity extends Activity {
                 Runnable runnable = new Runnable() { // from class: com.android.systemui.mediaprojection.permission.MediaProjectionPermissionActivity$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        MediaProjectionPermissionActivity mediaProjectionPermissionActivity2 = MediaProjectionPermissionActivity.this;
-                        int i4 = MediaProjectionPermissionActivity.$r8$clinit;
-                        mediaProjectionPermissionActivity2.finish(0, null);
+                        MediaProjectionPermissionActivity mediaProjectionPermissionActivity = this.f$0;
+                        int i3 = MediaProjectionPermissionActivity.$r8$clinit;
+                        mediaProjectionPermissionActivity.finish(0, null);
                     }
                 };
-                this.mDialog = new AlertDialogWithDelegate(mediaProjectionPermissionActivity, R.style.Theme_SystemUI_Dialog, isHeadlessRemoteDisplayProvider ? new SystemCastPermissionDialogDelegate(mediaProjectionPermissionActivity, mediaProjectionConfig, consumer, runnable, str3, isChangeEnabled, this.mUid, this.mMediaProjectionMetricsLogger) : new ShareToAppPermissionDialogDelegate(mediaProjectionPermissionActivity, mediaProjectionConfig, consumer, runnable, str3, isChangeEnabled, this.mUid, this.mMediaProjectionMetricsLogger));
+                this.mDialog = new AlertDialogWithDelegate(mediaProjectionPermissionActivityCreateDisplayContext, R.style.Theme_SystemUI_Dialog, zIsHeadlessRemoteDisplayProvider ? new SystemCastPermissionDialogDelegate(mediaProjectionPermissionActivityCreateDisplayContext, mediaProjectionConfig, consumer, runnable, str3, zIsChangeEnabled, this.mUid, this.mMediaProjectionMetricsLogger) : new ShareToAppPermissionDialogDelegate(mediaProjectionPermissionActivityCreateDisplayContext, mediaProjectionConfig, consumer, runnable, str3, zIsChangeEnabled, this.mUid, this.mMediaProjectionMetricsLogger));
                 if (bundle == null) {
-                    mediaProjectionMetricsLogger.notifyProjectionInitiated(this.mUid, isHeadlessRemoteDisplayProvider ? SessionCreationSource.CAST : SessionCreationSource.APP);
+                    mediaProjectionMetricsLogger.notifyProjectionInitiated(this.mUid, zIsHeadlessRemoteDisplayProvider ? SessionCreationSource.CAST : SessionCreationSource.APP);
                 }
                 setUpDialog(this.mDialog);
                 if (this.mKeyguardManager.isDeviceLocked()) {
                     this.mKeyguardManager.requestDismissKeyguard(this, new KeyguardManager.KeyguardDismissCallback() { // from class: com.android.systemui.mediaprojection.permission.MediaProjectionPermissionActivity.1
                         @Override // android.app.KeyguardManager.KeyguardDismissCallback
                         public final void onDismissCancelled() {
-                            MediaProjectionPermissionActivity mediaProjectionPermissionActivity2 = MediaProjectionPermissionActivity.this;
-                            int i4 = MediaProjectionPermissionActivity.$r8$clinit;
-                            mediaProjectionPermissionActivity2.finishAsCancelled();
+                            MediaProjectionPermissionActivity mediaProjectionPermissionActivity = MediaProjectionPermissionActivity.this;
+                            int i3 = MediaProjectionPermissionActivity.$r8$clinit;
+                            mediaProjectionPermissionActivity.finishAsCancelled();
                         }
 
                         @Override // android.app.KeyguardManager.KeyguardDismissCallback
                         public final void onDismissError() {
-                            MediaProjectionPermissionActivity mediaProjectionPermissionActivity2 = MediaProjectionPermissionActivity.this;
-                            int i4 = MediaProjectionPermissionActivity.$r8$clinit;
-                            mediaProjectionPermissionActivity2.finishAsCancelled();
+                            MediaProjectionPermissionActivity mediaProjectionPermissionActivity = MediaProjectionPermissionActivity.this;
+                            int i3 = MediaProjectionPermissionActivity.$r8$clinit;
+                            mediaProjectionPermissionActivity.finishAsCancelled();
                         }
 
                         @Override // android.app.KeyguardManager.KeyguardDismissCallback
@@ -307,7 +306,7 @@ public class MediaProjectionPermissionActivity extends Activity {
         alertDialog.setOnCancelListener(new DialogInterface.OnCancelListener() { // from class: com.android.systemui.mediaprojection.permission.MediaProjectionPermissionActivity$$ExternalSyntheticLambda2
             @Override // android.content.DialogInterface.OnCancelListener
             public final void onCancel(DialogInterface dialogInterface) {
-                MediaProjectionPermissionActivity mediaProjectionPermissionActivity = MediaProjectionPermissionActivity.this;
+                MediaProjectionPermissionActivity mediaProjectionPermissionActivity = this.f$0;
                 int i = MediaProjectionPermissionActivity.$r8$clinit;
                 if (mediaProjectionPermissionActivity.isFinishing()) {
                     return;
@@ -318,7 +317,7 @@ public class MediaProjectionPermissionActivity extends Activity {
         alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() { // from class: com.android.systemui.mediaprojection.permission.MediaProjectionPermissionActivity$$ExternalSyntheticLambda3
             @Override // android.content.DialogInterface.OnDismissListener
             public final void onDismiss(DialogInterface dialogInterface) {
-                MediaProjectionPermissionActivity mediaProjectionPermissionActivity = MediaProjectionPermissionActivity.this;
+                MediaProjectionPermissionActivity mediaProjectionPermissionActivity = this.f$0;
                 int i = MediaProjectionPermissionActivity.$r8$clinit;
                 if (mediaProjectionPermissionActivity.isFinishing()) {
                     return;

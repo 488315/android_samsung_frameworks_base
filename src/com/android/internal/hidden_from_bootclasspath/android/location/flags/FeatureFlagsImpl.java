@@ -133,6 +133,11 @@ public final class FeatureFlagsImpl implements FeatureFlags {
     }
 
     @Override // com.android.internal.hidden_from_bootclasspath.android.location.flags.FeatureFlags
+    public boolean updateIsInEmergencyBeforeOnRegister() {
+        return true;
+    }
+
+    @Override // com.android.internal.hidden_from_bootclasspath.android.location.flags.FeatureFlags
     public boolean updateMinLocationRequestInterval() {
         return false;
     }

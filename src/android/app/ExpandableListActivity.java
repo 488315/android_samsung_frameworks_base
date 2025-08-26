@@ -39,14 +39,14 @@ public class ExpandableListActivity extends Activity implements View.OnCreateCon
     @Override // android.app.Activity, android.view.Window.Callback
     public void onContentChanged() {
         super.onContentChanged();
-        View findViewById = findViewById(16908292);
+        View viewFindViewById = findViewById(16908292);
         ExpandableListView expandableListView = (ExpandableListView) findViewById(16908298);
         this.mList = expandableListView;
         if (expandableListView == null) {
             throw new RuntimeException("Your content must have a ExpandableListView whose id attribute is 'android.R.id.list'");
         }
-        if (findViewById != null) {
-            expandableListView.setEmptyView(findViewById);
+        if (viewFindViewById != null) {
+            expandableListView.setEmptyView(viewFindViewById);
         }
         this.mList.setOnChildClickListener(this);
         this.mList.setOnGroupExpandListener(this);

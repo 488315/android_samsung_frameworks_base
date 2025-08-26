@@ -68,11 +68,11 @@ public class FontManager {
 
     private FontConfig getFontConfig() {
         String str = SystemProperties.get("ro.csc.sales_code");
-        String concat = "/system/etc".concat((str.equals("MYM") || str.equals("BKD") || str.equals("BNG") || str.equals("BCK")) ? "/fonts_additional.xml" : "/fonts.xml");
+        String strConcat = "/system/etc".concat((str.equals("MYM") || str.equals("BKD") || str.equals("BNG") || str.equals("BCK")) ? "/fonts_additional.xml" : "/fonts.xml");
         try {
-            return FontListParser.parse(concat, SYSTEM_FONT_DIRECTORY, null, null, null, 0L, 0);
+            return FontListParser.parse(strConcat, SYSTEM_FONT_DIRECTORY, null, null, null, 0L, 0);
         } catch (Exception unused) {
-            Log.e(TAG, concat + " does not exist on this system");
+            Log.e(TAG, strConcat + " does not exist on this system");
             return null;
         }
     }
@@ -120,7 +120,7 @@ public class FontManager {
         }
     }
 
-    public String getFullFlipFont(Context context) {
+    public String getFullFlipFont(Context context) throws IOException {
         if (context == null) {
             return null;
         }
@@ -133,10 +133,10 @@ public class FontManager {
             try {
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream));
                 try {
-                    String readLine = bufferedReader.readLine();
+                    String line = bufferedReader.readLine();
                     bufferedReader.close();
                     fileInputStream.close();
-                    return readLine;
+                    return line;
                 } finally {
                 }
             } finally {
@@ -150,21 +150,21 @@ public class FontManager {
         if (context == null) {
             return null;
         }
-        String[] split = getFullFlipFont(context).split("#");
-        if (split.length < 2) {
-            if (split[0].endsWith("default")) {
+        String[] strArrSplit = getFullFlipFont(context).split("#");
+        if (strArrSplit.length < 2) {
+            if (strArrSplit[0].endsWith("default")) {
                 return "default";
             }
             return null;
         }
-        return split[1];
+        return strArrSplit[1];
     }
 
     public String getFontPathFlipFont(Context context) {
         return getFullFlipFont(context).split("#")[0];
     }
 
-    public String getFlipFontPath(Context context) {
+    public String getFlipFontPath(Context context) throws IOException {
         File file = new File(OWNER_SANS_LOC_PATH);
         if (!file.exists()) {
             String str = sOverrideFont;
@@ -174,16 +174,16 @@ public class FontManager {
             mFlipFontPath = "/system/fonts/ArialNarrow-Regular.ttf";
             return "/system/fonts/ArialNarrow-Regular.ttf";
         }
-        long lastModified = file.lastModified();
-        if (lastModified == mLastSystemFontChangedTime) {
+        long jLastModified = file.lastModified();
+        if (jLastModified == mLastSystemFontChangedTime) {
             if (DEBUG) {
                 Log.d(TAG, "System font not changed. -> flipFontPath = " + mFlipFontPath);
             }
             return mFlipFontPath;
         }
         String fontPathFlipFont = getFontPathFlipFont(context);
-        String substring = fontPathFlipFont.substring(fontPathFlipFont.lastIndexOf("/") + 1);
-        Log.d(TAG, "getFlipFontPath - strFontPath = " + fontPathFlipFont + ", strPackageName = " + substring);
+        String strSubstring = fontPathFlipFont.substring(fontPathFlipFont.lastIndexOf("/") + 1);
+        Log.d(TAG, "getFlipFontPath - strFontPath = " + fontPathFlipFont + ", strPackageName = " + strSubstring);
         if (fontPathFlipFont.endsWith("default")) {
             String str2 = sOverrideFont;
             if (!TextUtils.isEmpty(str2) && str2.contains(OVERRIDE_TB)) {
@@ -197,7 +197,7 @@ public class FontManager {
         if (DEBUG) {
             Log.d(TAG, "getFlipFontPath - DroidSans path: " + str3);
         }
-        String str4 = FONT_PACKAGE + substring;
+        String str4 = FONT_PACKAGE + strSubstring;
         File file2 = new File(str3);
         if (!file2.exists()) {
             String flipFontFromPackage = getFlipFontFromPackage(context, str4, getFontNameFlipFont(context));
@@ -205,17 +205,17 @@ public class FontManager {
                 return null;
             }
             mFlipFontPath = flipFontFromPackage;
-            mLastSystemFontChangedTime = lastModified;
+            mLastSystemFontChangedTime = jLastModified;
             return flipFontFromPackage;
         }
         String str5 = str4.toLowerCase() + MediaMetrics.SEPARATOR + getFontNameFlipFont(context) + ".ttf";
         insertFontData(str5, readFile(file2));
         mFlipFontPath = str5;
-        mLastSystemFontChangedTime = lastModified;
+        mLastSystemFontChangedTime = jLastModified;
         return str5;
     }
 
-    private String getFlipFontFromPackage(Context context, String str, String str2) {
+    private String getFlipFontFromPackage(Context context, String str, String str2) throws IOException {
         String lowerCase = str.toLowerCase();
         String str3 = FONT_DIRECTORY + str2 + ".ttf";
         String str4 = lowerCase + MediaMetrics.SEPARATOR + str2 + ".ttf";
@@ -226,22 +226,22 @@ public class FontManager {
             PackageManager packageManager = context.getPackageManager();
             ApplicationInfo applicationInfo = packageManager.getApplicationInfo(lowerCase, 128);
             applicationInfo.publicSourceDir = applicationInfo.sourceDir;
-            InputStream open = packageManager.getResourcesForApplication(applicationInfo).getAssets().open(str3);
-            byte[] bArr = new byte[open.available()];
-            open.read(bArr);
-            open.close();
+            InputStream inputStreamOpen = packageManager.getResourcesForApplication(applicationInfo).getAssets().open(str3);
+            byte[] bArr = new byte[inputStreamOpen.available()];
+            inputStreamOpen.read(bArr);
+            inputStreamOpen.close();
             insertFontData(str4, bArr);
             return str4;
         } catch (Exception e) {
             e.printStackTrace();
             try {
-                InputStream openInputStream = context.getContentResolver().openInputStream(Uri.parse(SecContentProviderURI.CONTENT + lowerCase + "/fonts/" + str2 + ".ttf"));
+                InputStream inputStreamOpenInputStream = context.getContentResolver().openInputStream(Uri.parse(SecContentProviderURI.CONTENT + lowerCase + "/fonts/" + str2 + ".ttf"));
                 try {
-                    byte[] bArr2 = new byte[openInputStream.available()];
-                    openInputStream.read(bArr2);
+                    byte[] bArr2 = new byte[inputStreamOpenInputStream.available()];
+                    inputStreamOpenInputStream.read(bArr2);
                     insertFontData(str4, bArr2);
-                    if (openInputStream != null) {
-                        openInputStream.close();
+                    if (inputStreamOpenInputStream != null) {
+                        inputStreamOpenInputStream.close();
                     }
                     return str4;
                 } finally {
@@ -253,7 +253,7 @@ public class FontManager {
         }
     }
 
-    private byte[] readFile(File file) {
+    private byte[] readFile(File file) throws IOException {
         try {
             FileInputStream fileInputStream = new FileInputStream(file);
             try {
@@ -261,9 +261,9 @@ public class FontManager {
                 try {
                     byte[] bArr = new byte[4096];
                     while (true) {
-                        int read = fileInputStream.read(bArr);
-                        if (read != -1) {
-                            byteArrayOutputStream.write(bArr, 0, read);
+                        int i = fileInputStream.read(bArr);
+                        if (i != -1) {
+                            byteArrayOutputStream.write(bArr, 0, i);
                         } else {
                             byte[] byteArray = byteArrayOutputStream.toByteArray();
                             byteArrayOutputStream.close();

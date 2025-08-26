@@ -4,7 +4,6 @@ import android.content.ContentUris;
 import android.net.Uri;
 import com.sec.ims.IMSParameter;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class CABContract {
     public static final Uri AUTHORITY_URI = Uri.parse("content://com.samsung.jansky.cab.provider");
@@ -41,7 +40,6 @@ public final class CABContract {
     public static final int SYNCING = 1;
     public static final int UNCOMPLETED = 0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class CABBusinessContact {
         public static final Uri CONTENT_URI = Uri.withAppendedPath(CABContract.AUTHORITY_URI, "bscontacts");
         public static final String DISPLAY_NAME = "display_name";
@@ -65,7 +63,6 @@ public final class CABContract {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class CABBusinessContactAddress {
         public static final String CITY = "city";
         public static final String CONTACT_ID = "contact_id";
@@ -96,7 +93,6 @@ public final class CABContract {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class CABBusinessContactEmail {
         public static final String ADDRESS = "address";
         public static final String CONTACT_ID = "contact_id";
@@ -122,7 +118,6 @@ public final class CABContract {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class CABBusinessContactOrgan {
         public static final String CONTACT_ID = "contact_id";
         public static final Uri CONTENT_URI = Uri.withAppendedPath(CABContract.AUTHORITY_URI, "organizations");
@@ -148,7 +143,6 @@ public final class CABContract {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class CABBusinessContactPhone {
         public static final String CONTACT_ID = "contact_id";
         public static final Uri CONTENT_URI = Uri.withAppendedPath(CABContract.AUTHORITY_URI, "phones");
@@ -174,7 +168,6 @@ public final class CABContract {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class CABBusinessContactRequest {
         public static final String COMPLETE = "complete";
         public static final Uri CONTENT_URI = Uri.withAppendedPath(CABContract.AUTHORITY_URI, "bsrequests");
@@ -196,7 +189,6 @@ public final class CABContract {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class CABConfig {
         public static final Uri CONTENT_URI = Uri.withAppendedPath(CABContract.AUTHORITY_URI, "config");
         public static final String ID = "_id";
@@ -218,7 +210,6 @@ public final class CABContract {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class CABConsumerContact {
         public static final Uri CONTENT_URI = Uri.withAppendedPath(CABContract.AUTHORITY_URI, "crcontacts");
         public static final String ID = "_id";
@@ -243,7 +234,6 @@ public final class CABContract {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class CABConsumerContactRequest {
         public static final String CLIENT_REQUEST_UID = "client_uid";
         public static final String COMPLETE = "complete";

@@ -9,7 +9,6 @@ import com.samsung.android.nexus.video.BuildConfig;
 import com.sec.ims.cmc.CmcRecordingInfo;
 import com.sec.ims.cmc.ICmcRecordingListener;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class CmcMediaRecorder {
     public static final int CMC_RECORDER_ERROR_UNKNOWN = 1;
@@ -41,12 +40,10 @@ public class CmcMediaRecorder {
     private int mPhoneId;
     private int mState;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface OnErrorListener {
         void onError(CmcMediaRecorder cmcMediaRecorder, int i, int i2);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface OnInfoListener {
         void onInfo(CmcMediaRecorder cmcMediaRecorder, int i, int i2);
     }

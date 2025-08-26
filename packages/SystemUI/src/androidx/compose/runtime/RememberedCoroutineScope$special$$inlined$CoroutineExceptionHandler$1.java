@@ -6,7 +6,6 @@ import kotlin.coroutines.AbstractCoroutineContextElement;
 import kotlin.coroutines.CoroutineContext;
 import kotlinx.coroutines.CoroutineExceptionHandler;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class RememberedCoroutineScope$special$$inlined$CoroutineExceptionHandler$1 extends AbstractCoroutineContextElement implements CoroutineExceptionHandler {
     public final /* synthetic */ CompositionErrorContextImpl $traceContext$inlined;
@@ -20,7 +19,7 @@ public final class RememberedCoroutineScope$special$$inlined$CoroutineExceptionH
     }
 
     @Override // kotlinx.coroutines.CoroutineExceptionHandler
-    public final void handleException(Throwable th, CoroutineContext coroutineContext) {
+    public final void handleException(Throwable th, CoroutineContext coroutineContext) throws Throwable {
         Unit unit;
         CompositionErrorContextImpl compositionErrorContextImpl = this.$traceContext$inlined;
         RememberedCoroutineScope rememberedCoroutineScope = this.this$0;

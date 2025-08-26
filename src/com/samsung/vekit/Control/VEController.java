@@ -42,7 +42,7 @@ import java.util.HashMap;
 /* loaded from: classes6.dex */
 public class VEController extends Element {
     public static final int UI_ANIMATION_MANAGER = -1;
-    public static final String VERSION = "3.0.2";
+    public static final String VERSION = "3.0.3";
     private final String TAG;
     private VEAnalyzer analyzer;
     private AnimationEventHandler animationEventHandler;
@@ -61,13 +61,13 @@ public class VEController extends Element {
     ViewMode viewMode;
 
     public VEController() {
-        super(null, ElementType.CONTROLLER, 0, "Controller");
         Looper mainLooper;
+        super(null, ElementType.CONTROLLER, 0, "Controller");
         this.isAnimating = false;
         this.isPlaying = false;
         String simpleName = getClass().getSimpleName();
         this.TAG = simpleName;
-        Log.i(simpleName, "[VEKit] Version : 3.0.2");
+        Log.i(simpleName, "[VEKit] Version : 3.0.3");
         if (Looper.myLooper() != null) {
             mainLooper = Looper.myLooper();
         } else {
@@ -83,7 +83,7 @@ public class VEController extends Element {
         this.controllerStatusListener = new VEControllerStatusListener() { // from class: com.samsung.vekit.Control.VEController$$ExternalSyntheticLambda0
             @Override // com.samsung.vekit.Listener.VEControllerStatusListener
             public final void onEvent(EventType eventType) {
-                VEController.this.m9806lambda$new$0$comsamsungvekitControlVEController(eventType);
+                this.f$0.m9819lambda$new$0$comsamsungvekitControlVEController(eventType);
             }
         };
         this.exportstatuslistener = null;
@@ -116,7 +116,7 @@ public class VEController extends Element {
     }
 
     /* renamed from: lambda$new$0$com-samsung-vekit-Control-VEController, reason: not valid java name */
-    /* synthetic */ void m9806lambda$new$0$comsamsungvekitControlVEController(EventType eventType) {
+    /* synthetic */ void m9819lambda$new$0$comsamsungvekitControlVEController(EventType eventType) {
         Log.d(this.TAG, "onEvent : EventType : " + eventType.name());
     }
 
@@ -174,7 +174,7 @@ public class VEController extends Element {
                 return;
             }
             if (i == 100) {
-                VEController.this.handleError(message.arg1, message.obj);
+                VEController.this.handleError(message.arg1, message.arg2, message.obj);
                 return;
             }
             if (i == 101) {
@@ -192,12 +192,12 @@ public class VEController extends Element {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void handleError(int i, Object obj) {
-        Log.e(this.TAG, "handleExecuteError with errorType : " + i + ", extension : " + obj);
+    public void handleError(int i, int i2, Object obj) {
+        Log.e(this.TAG, "handleExecuteError with errorType : " + i + ", extension : " + i2 + ", extension2 : " + obj);
         ErrorType errorType = ErrorType.values()[i];
         if (this.playerStatusListener != null) {
             if (AnonymousClass2.$SwitchMap$com$samsung$vekit$Common$Type$ErrorType[errorType.ordinal()] == 1) {
-                if (this.viewMode == ViewMode.PREVIEW) {
+                if (i2 == ViewMode.PREVIEW.ordinal()) {
                     pause();
                     this.playerStatusListener.onCodecReclaim(this.seekTime);
                     return;
@@ -207,7 +207,7 @@ public class VEController extends Element {
                     return;
                 }
             }
-            if (this.viewMode == ViewMode.PREVIEW) {
+            if (i2 == ViewMode.PREVIEW.ordinal()) {
                 this.playerStatusListener.onError(errorType, ((Long) obj).longValue());
             } else {
                 this.exportstatuslistener.onError(errorType, ((Long) obj).longValue());
@@ -236,13 +236,13 @@ public class VEController extends Element {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void handleAudioPcmUpdate(int i, HashMap<String, PcmInfo> hashMap) {
+    public void handleAudioPcmUpdate(int i, HashMap<String, PcmInfo> map) {
         Item item = this.context.getItemManager().get(i);
         if (item == null) {
             Log.e(this.TAG, "Item is null");
             return;
         }
-        if (hashMap == null) {
+        if (map == null) {
             Log.i(this.TAG, "Data is null");
             return;
         }
@@ -250,7 +250,7 @@ public class VEController extends Element {
         if (pcmInfoListener == null) {
             Log.i(this.TAG, "listener is null");
         } else {
-            pcmInfoListener.onUpdate(hashMap);
+            pcmInfoListener.onUpdate(map);
         }
     }
 
@@ -516,9 +516,9 @@ public class VEController extends Element {
     }
 
     public long pauseExport() {
-        long pauseExport = this.context.getNativeInterface().pauseExport();
-        this.renderTime = pauseExport;
-        return pauseExport;
+        long jPauseExport = this.context.getNativeInterface().pauseExport();
+        this.renderTime = jPauseExport;
+        return jPauseExport;
     }
 
     public void resumeExport(long j) {
@@ -673,7 +673,7 @@ public class VEController extends Element {
     }
 
     public String getVEKitVersion() {
-        Log.e(this.TAG, "getVEKitVersion version : 3.0.2");
+        Log.e(this.TAG, "getVEKitVersion version : 3.0.3");
         return VERSION;
     }
 }

@@ -14,11 +14,13 @@ import android.util.Log;
 import com.android.internal.util.ArrayUtils;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.function.Consumer;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import libcore.util.EmptyArray;
 
@@ -208,7 +210,7 @@ public class SQLiteQueryBuilder {
         if (this.mTables == null) {
             return null;
         }
-        String buildQuery = buildQuery(strArr, str, str2, str3, str4, str5);
+        String strBuildQuery = buildQuery(strArr, str, str2, str3, str4, str5);
         if (isStrictColumns()) {
             enforceStrictColumns(strArr);
         }
@@ -217,12 +219,12 @@ public class SQLiteQueryBuilder {
         }
         if (isStrict()) {
             cancellationSignal2 = cancellationSignal;
-            sQLiteDatabase.validateSql(buildQuery, cancellationSignal2);
-            buildQuery = buildQuery(strArr, wrap(str), str2, wrap(str3), str4, str5);
+            sQLiteDatabase.validateSql(strBuildQuery, cancellationSignal2);
+            strBuildQuery = buildQuery(strArr, wrap(str), str2, wrap(str3), str4, str5);
         } else {
             cancellationSignal2 = cancellationSignal;
         }
-        String str6 = buildQuery;
+        String str6 = strBuildQuery;
         if (Log.isLoggable(TAG, 3)) {
             if (Build.IS_DEBUGGABLE) {
                 Log.d(TAG, str6 + " with args " + Arrays.toString(strArr2));
@@ -240,7 +242,7 @@ public class SQLiteQueryBuilder {
         if (isStrictColumns()) {
             enforceStrictColumns(contentValues);
         }
-        String buildInsert = buildInsert(contentValues);
+        String strBuildInsert = buildInsert(contentValues);
         ArrayMap<String, Object> values = contentValues.getValues();
         int size = values.size();
         Object[] objArr = new Object[size];
@@ -249,12 +251,12 @@ public class SQLiteQueryBuilder {
         }
         if (Log.isLoggable(TAG, 3)) {
             if (Build.IS_DEBUGGABLE) {
-                Log.d(TAG, buildInsert + " with args " + Arrays.toString(objArr));
+                Log.d(TAG, strBuildInsert + " with args " + Arrays.toString(objArr));
             } else {
-                Log.d(TAG, buildInsert);
+                Log.d(TAG, strBuildInsert);
             }
         }
-        return DatabaseUtils.executeInsert(sQLiteDatabase, buildInsert, objArr);
+        return DatabaseUtils.executeInsert(sQLiteDatabase, strBuildInsert, objArr);
     }
 
     public int update(SQLiteDatabase sQLiteDatabase, ContentValues contentValues, String str, String[] strArr) {
@@ -263,7 +265,7 @@ public class SQLiteQueryBuilder {
         Objects.requireNonNull(this.mTables, "No tables defined");
         Objects.requireNonNull(sQLiteDatabase, "No database defined");
         Objects.requireNonNull(contentValues, "No values defined");
-        String buildUpdate = buildUpdate(contentValues, str);
+        String strBuildUpdate = buildUpdate(contentValues, str);
         if (isStrictColumns()) {
             enforceStrictColumns(contentValues);
         }
@@ -276,8 +278,8 @@ public class SQLiteQueryBuilder {
             str2 = str;
         }
         if (sQLiteQueryBuilder.isStrict()) {
-            sQLiteDatabase.validateSql(buildUpdate, null);
-            buildUpdate = sQLiteQueryBuilder.buildUpdate(contentValues, sQLiteQueryBuilder.wrap(str2));
+            sQLiteDatabase.validateSql(strBuildUpdate, null);
+            strBuildUpdate = sQLiteQueryBuilder.buildUpdate(contentValues, sQLiteQueryBuilder.wrap(str2));
         }
         if (strArr == null) {
             strArr = EmptyArray.STRING;
@@ -295,12 +297,12 @@ public class SQLiteQueryBuilder {
         }
         if (Log.isLoggable(TAG, 3)) {
             if (Build.IS_DEBUGGABLE) {
-                Log.d(TAG, buildUpdate + " with args " + Arrays.toString(objArr));
+                Log.d(TAG, strBuildUpdate + " with args " + Arrays.toString(objArr));
             } else {
-                Log.d(TAG, buildUpdate);
+                Log.d(TAG, strBuildUpdate);
             }
         }
-        return DatabaseUtils.executeUpdateDelete(sQLiteDatabase, buildUpdate, objArr);
+        return DatabaseUtils.executeUpdateDelete(sQLiteDatabase, strBuildUpdate, objArr);
     }
 
     public int delete(SQLiteDatabase sQLiteDatabase, String str, String[] strArr) {
@@ -308,7 +310,7 @@ public class SQLiteQueryBuilder {
         String str2;
         Objects.requireNonNull(this.mTables, "No tables defined");
         Objects.requireNonNull(sQLiteDatabase, "No database defined");
-        String buildDelete = buildDelete(str);
+        String strBuildDelete = buildDelete(str);
         if (isStrictGrammar()) {
             sQLiteQueryBuilder = this;
             str2 = str;
@@ -318,17 +320,17 @@ public class SQLiteQueryBuilder {
             str2 = str;
         }
         if (sQLiteQueryBuilder.isStrict()) {
-            sQLiteDatabase.validateSql(buildDelete, null);
-            buildDelete = sQLiteQueryBuilder.buildDelete(sQLiteQueryBuilder.wrap(str2));
+            sQLiteDatabase.validateSql(strBuildDelete, null);
+            strBuildDelete = sQLiteQueryBuilder.buildDelete(sQLiteQueryBuilder.wrap(str2));
         }
         if (Log.isLoggable(TAG, 3)) {
             if (Build.IS_DEBUGGABLE) {
-                Log.d(TAG, buildDelete + " with args " + Arrays.toString(strArr));
+                Log.d(TAG, strBuildDelete + " with args " + Arrays.toString(strArr));
             } else {
-                Log.d(TAG, buildDelete);
+                Log.d(TAG, strBuildDelete);
             }
         }
-        return DatabaseUtils.executeUpdateDelete(sQLiteDatabase, buildDelete, strArr);
+        return DatabaseUtils.executeUpdateDelete(sQLiteDatabase, strBuildDelete, strArr);
     }
 
     private void enforceStrictColumns(String[] strArr) {
@@ -340,9 +342,9 @@ public class SQLiteQueryBuilder {
         Objects.requireNonNull(this.mProjectionMap, "No projection map defined");
         ArrayMap<String, Object> values = contentValues.getValues();
         for (int i = 0; i < values.size(); i++) {
-            String keyAt = values.keyAt(i);
-            if (!this.mProjectionMap.containsKey(keyAt)) {
-                throw new IllegalArgumentException("Invalid column " + keyAt);
+            String strKeyAt = values.keyAt(i);
+            if (!this.mProjectionMap.containsKey(strKeyAt)) {
+                throw new IllegalArgumentException("Invalid column " + strKeyAt);
             }
         }
     }
@@ -351,42 +353,42 @@ public class SQLiteQueryBuilder {
         SQLiteTokenizer.tokenize(str, 0, new Consumer() { // from class: android.database.sqlite.SQLiteQueryBuilder$$ExternalSyntheticLambda0
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                SQLiteQueryBuilder.this.enforceStrictToken((String) obj);
+                this.f$0.enforceStrictToken((String) obj);
             }
         });
         SQLiteTokenizer.tokenize(str2, 0, new Consumer() { // from class: android.database.sqlite.SQLiteQueryBuilder$$ExternalSyntheticLambda0
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                SQLiteQueryBuilder.this.enforceStrictToken((String) obj);
+                this.f$0.enforceStrictToken((String) obj);
             }
         });
         SQLiteTokenizer.tokenize(str3, 0, new Consumer() { // from class: android.database.sqlite.SQLiteQueryBuilder$$ExternalSyntheticLambda0
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                SQLiteQueryBuilder.this.enforceStrictToken((String) obj);
+                this.f$0.enforceStrictToken((String) obj);
             }
         });
         SQLiteTokenizer.tokenize(str4, 0, new Consumer() { // from class: android.database.sqlite.SQLiteQueryBuilder$$ExternalSyntheticLambda0
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                SQLiteQueryBuilder.this.enforceStrictToken((String) obj);
+                this.f$0.enforceStrictToken((String) obj);
             }
         });
         SQLiteTokenizer.tokenize(str5, 0, new Consumer() { // from class: android.database.sqlite.SQLiteQueryBuilder$$ExternalSyntheticLambda0
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                SQLiteQueryBuilder.this.enforceStrictToken((String) obj);
+                this.f$0.enforceStrictToken((String) obj);
             }
         });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     public void enforceStrictToken(String str) {
-        boolean isKeyword;
+        boolean zIsKeyword;
         if (TextUtils.isEmpty(str) || isTableOrColumn(str) || SQLiteTokenizer.isFunction(str) || SQLiteTokenizer.isType(str)) {
             return;
         }
-        isKeyword = SQLiteTokenizer.isKeyword(str);
+        zIsKeyword = SQLiteTokenizer.isKeyword(str);
         String upperCase = str.toUpperCase(Locale.US);
         upperCase.hashCode();
         switch (upperCase) {
@@ -399,10 +401,10 @@ public class SQLiteQueryBuilder {
             case "ORDER":
             case "WHERE":
             case "HAVING":
-                isKeyword = false;
+                zIsKeyword = false;
                 break;
         }
-        if (isKeyword) {
+        if (zIsKeyword) {
             return;
         }
         throw new IllegalArgumentException("Invalid token " + str);
@@ -528,9 +530,9 @@ public class SQLiteQueryBuilder {
         if (map == null) {
             return null;
         }
-        Set<Map.Entry<String, String>> entrySet = map.entrySet();
-        String[] strArr3 = new String[entrySet.size()];
-        for (Map.Entry<String, String> entry : entrySet) {
+        Set<Map.Entry<String, String>> setEntrySet = map.entrySet();
+        String[] strArr3 = new String[setEntrySet.size()];
+        for (Map.Entry<String, String> entry : setEntrySet) {
             if (!entry.getKey().equals(BaseColumns._COUNT)) {
                 strArr3[i] = entry.getValue();
                 i++;
@@ -540,87 +542,55 @@ public class SQLiteQueryBuilder {
     }
 
     private String computeSingleProjectionOrThrow(String str) {
-        String computeSingleProjection = computeSingleProjection(str);
-        if (computeSingleProjection != null) {
-            return computeSingleProjection;
+        String strComputeSingleProjection = computeSingleProjection(str);
+        if (strComputeSingleProjection != null) {
+            return strComputeSingleProjection;
         }
         throw new IllegalArgumentException("Invalid column " + str);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x0032  */
-    /* JADX WARN: Removed duplicated region for block: B:13:0x0037  */
+    /* JADX WARN: Removed duplicated region for block: B:10:0x002d  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private java.lang.String computeSingleProjection(java.lang.String r5) {
-        /*
-            r4 = this;
-            java.util.Map<java.lang.String, java.lang.String> r0 = r4.mProjectionMap
-            if (r0 != 0) goto L5
-            return r5
-        L5:
-            java.lang.Object r0 = r0.get(r5)
-            java.lang.String r0 = (java.lang.String) r0
-            r1 = 0
-            if (r0 != 0) goto L2d
-            java.util.regex.Pattern r2 = android.database.sqlite.SQLiteQueryBuilder.sAggregationPattern
-            java.util.regex.Matcher r2 = r2.matcher(r5)
-            boolean r3 = r2.matches()
-            if (r3 == 0) goto L2d
-            r5 = 1
-            java.lang.String r5 = r2.group(r5)
-            r0 = 2
-            java.lang.String r0 = r2.group(r0)
-            java.util.Map<java.lang.String, java.lang.String> r2 = r4.mProjectionMap
-            java.lang.Object r2 = r2.get(r0)
-            java.lang.String r2 = (java.lang.String) r2
-            goto L30
-        L2d:
-            r2 = r0
-            r0 = r5
-            r5 = r1
-        L30:
-            if (r2 == 0) goto L37
-            java.lang.String r4 = maybeWithOperator(r5, r2)
-            return r4
-        L37:
-            int r2 = r4.mStrictFlags
-            if (r2 != 0) goto L50
-            java.lang.String r2 = " AS "
-            boolean r2 = r0.contains(r2)
-            if (r2 != 0) goto L4b
-            java.lang.String r2 = " as "
-            boolean r2 = r0.contains(r2)
-            if (r2 == 0) goto L50
-        L4b:
-            java.lang.String r4 = maybeWithOperator(r5, r0)
-            return r4
-        L50:
-            java.util.Collection<java.util.regex.Pattern> r4 = r4.mProjectionGreylist
-            if (r4 == 0) goto L86
-            java.util.Iterator r4 = r4.iterator()
-        L58:
-            boolean r2 = r4.hasNext()
-            if (r2 == 0) goto L86
-            java.lang.Object r2 = r4.next()
-            java.util.regex.Pattern r2 = (java.util.regex.Pattern) r2
-            java.util.regex.Matcher r2 = r2.matcher(r0)
-            boolean r2 = r2.matches()
-            if (r2 == 0) goto L58
-            java.lang.StringBuilder r4 = new java.lang.StringBuilder
-            java.lang.String r1 = "Allowing abusive custom column: "
-            r4.<init>(r1)
-            r4.append(r0)
-            java.lang.String r4 = r4.toString()
-            java.lang.String r1 = "SQLiteQueryBuilder"
-            android.util.Log.w(r1, r4)
-            java.lang.String r4 = maybeWithOperator(r5, r0)
-            return r4
-        L86:
-            return r1
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.database.sqlite.SQLiteQueryBuilder.computeSingleProjection(java.lang.String):java.lang.String");
+    private String computeSingleProjection(String str) {
+        String str2;
+        String strGroup;
+        String strGroup2;
+        Map<String, String> map = this.mProjectionMap;
+        if (map == null) {
+            return str;
+        }
+        String str3 = map.get(str);
+        if (str3 == null) {
+            Matcher matcher = sAggregationPattern.matcher(str);
+            if (matcher.matches()) {
+                strGroup2 = matcher.group(1);
+                strGroup = matcher.group(2);
+                str2 = this.mProjectionMap.get(strGroup);
+            } else {
+                str2 = str3;
+                strGroup = str;
+                strGroup2 = null;
+            }
+        }
+        if (str2 != null) {
+            return maybeWithOperator(strGroup2, str2);
+        }
+        if (this.mStrictFlags == 0 && (strGroup.contains(" AS ") || strGroup.contains(" as "))) {
+            return maybeWithOperator(strGroup2, strGroup);
+        }
+        Collection<Pattern> collection = this.mProjectionGreylist;
+        if (collection != null) {
+            Iterator<Pattern> it = collection.iterator();
+            while (it.hasNext()) {
+                if (it.next().matcher(strGroup).matches()) {
+                    Log.w(TAG, "Allowing abusive custom column: " + strGroup);
+                    return maybeWithOperator(strGroup2, strGroup);
+                }
+            }
+        }
+        return null;
     }
 
     private boolean isTableOrColumn(String str) {
@@ -628,21 +598,21 @@ public class SQLiteQueryBuilder {
     }
 
     public String computeWhere(String str) {
-        boolean isEmpty = TextUtils.isEmpty(this.mWhereClause);
-        boolean isEmpty2 = TextUtils.isEmpty(str);
-        if (isEmpty && isEmpty2) {
+        boolean zIsEmpty = TextUtils.isEmpty(this.mWhereClause);
+        boolean zIsEmpty2 = TextUtils.isEmpty(str);
+        if (zIsEmpty && zIsEmpty2) {
             return null;
         }
         StringBuilder sb = new StringBuilder();
-        if (!isEmpty) {
+        if (!zIsEmpty) {
             sb.append('(');
             sb.append((CharSequence) this.mWhereClause);
             sb.append(')');
         }
-        if (!isEmpty && !isEmpty2) {
+        if (!zIsEmpty && !zIsEmpty2) {
             sb.append(" AND ");
         }
-        if (!isEmpty2) {
+        if (!zIsEmpty2) {
             sb.append('(');
             sb.append(str);
             sb.append(')');

@@ -18,7 +18,6 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class HashBiMap<K, V> extends AbstractMap<K, V> implements BiMap, Serializable {
     public transient EntrySet entrySet;
@@ -38,7 +37,6 @@ public final class HashBiMap<K, V> extends AbstractMap<K, V> implements BiMap, S
     public transient ValueSet valueSet;
     public transient Object[] values;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class EntryForKey extends AbstractMapEntry {
         public int index;
         public final Object key;
@@ -94,7 +92,6 @@ public final class HashBiMap<K, V> extends AbstractMap<K, V> implements BiMap, S
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class EntryForValue extends AbstractMapEntry {
         public final HashBiMap biMap;
         public int index;
@@ -152,7 +149,6 @@ public final class HashBiMap<K, V> extends AbstractMap<K, V> implements BiMap, S
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class EntrySet extends View {
         public EntrySet() {
             super(HashBiMap.this);
@@ -168,8 +164,8 @@ public final class HashBiMap<K, V> extends AbstractMap<K, V> implements BiMap, S
             Object value = entry.getValue();
             HashBiMap hashBiMap = HashBiMap.this;
             hashBiMap.getClass();
-            int findEntryByKey = hashBiMap.findEntryByKey(Hashing.smearedHash(key), key);
-            return findEntryByKey != -1 && Objects.equal(value, HashBiMap.this.values[findEntryByKey]);
+            int iFindEntryByKey = hashBiMap.findEntryByKey(Hashing.smearedHash(key), key);
+            return iFindEntryByKey != -1 && Objects.equal(value, HashBiMap.this.values[iFindEntryByKey]);
         }
 
         @Override // com.google.common.collect.HashBiMap.View
@@ -185,17 +181,16 @@ public final class HashBiMap<K, V> extends AbstractMap<K, V> implements BiMap, S
             Map.Entry entry = (Map.Entry) obj;
             Object key = entry.getKey();
             Object value = entry.getValue();
-            int smearedHash = Hashing.smearedHash(key);
-            int findEntryByKey = HashBiMap.this.findEntryByKey(smearedHash, key);
-            if (findEntryByKey == -1 || !Objects.equal(value, HashBiMap.this.values[findEntryByKey])) {
+            int iSmearedHash = Hashing.smearedHash(key);
+            int iFindEntryByKey = HashBiMap.this.findEntryByKey(iSmearedHash, key);
+            if (iFindEntryByKey == -1 || !Objects.equal(value, HashBiMap.this.values[iFindEntryByKey])) {
                 return false;
             }
-            HashBiMap.this.removeEntryKeyHashKnown(findEntryByKey, smearedHash);
+            HashBiMap.this.removeEntryKeyHashKnown(iFindEntryByKey, iSmearedHash);
             return true;
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class Inverse<K, V> extends AbstractMap<V, K> implements BiMap, Serializable {
         private final HashBiMap<K, V> forward;
         public transient InverseEntrySet inverseEntrySet;
@@ -239,11 +234,11 @@ public final class HashBiMap<K, V> extends AbstractMap<K, V> implements BiMap, S
         public final Object get(Object obj) {
             HashBiMap<K, V> hashBiMap = this.forward;
             hashBiMap.getClass();
-            int findEntryByValue = hashBiMap.findEntryByValue(Hashing.smearedHash(obj), obj);
-            if (findEntryByValue == -1) {
+            int iFindEntryByValue = hashBiMap.findEntryByValue(Hashing.smearedHash(obj), obj);
+            if (iFindEntryByValue == -1) {
                 return null;
             }
-            return hashBiMap.keys[findEntryByValue];
+            return hashBiMap.keys[iFindEntryByValue];
         }
 
         @Override // java.util.AbstractMap, java.util.Map
@@ -260,13 +255,13 @@ public final class HashBiMap<K, V> extends AbstractMap<K, V> implements BiMap, S
         public final Object remove(Object obj) {
             HashBiMap<K, V> hashBiMap = this.forward;
             hashBiMap.getClass();
-            int smearedHash = Hashing.smearedHash(obj);
-            int findEntryByValue = hashBiMap.findEntryByValue(smearedHash, obj);
-            if (findEntryByValue == -1) {
+            int iSmearedHash = Hashing.smearedHash(obj);
+            int iFindEntryByValue = hashBiMap.findEntryByValue(iSmearedHash, obj);
+            if (iFindEntryByValue == -1) {
                 return null;
             }
-            Object obj2 = hashBiMap.keys[findEntryByValue];
-            hashBiMap.removeEntry(findEntryByValue, Hashing.smearedHash(obj2), smearedHash);
+            Object obj2 = hashBiMap.keys[iFindEntryByValue];
+            hashBiMap.removeEntry(iFindEntryByValue, Hashing.smearedHash(obj2), iSmearedHash);
             return obj2;
         }
 
@@ -281,7 +276,6 @@ public final class HashBiMap<K, V> extends AbstractMap<K, V> implements BiMap, S
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class InverseEntrySet extends View {
         public InverseEntrySet(HashBiMap<Object, Object> hashBiMap) {
             super(hashBiMap);
@@ -297,8 +291,8 @@ public final class HashBiMap<K, V> extends AbstractMap<K, V> implements BiMap, S
             Object value = entry.getValue();
             HashBiMap hashBiMap = this.biMap;
             hashBiMap.getClass();
-            int findEntryByValue = hashBiMap.findEntryByValue(Hashing.smearedHash(key), key);
-            return findEntryByValue != -1 && Objects.equal(this.biMap.keys[findEntryByValue], value);
+            int iFindEntryByValue = hashBiMap.findEntryByValue(Hashing.smearedHash(key), key);
+            return iFindEntryByValue != -1 && Objects.equal(this.biMap.keys[iFindEntryByValue], value);
         }
 
         @Override // com.google.common.collect.HashBiMap.View
@@ -314,18 +308,17 @@ public final class HashBiMap<K, V> extends AbstractMap<K, V> implements BiMap, S
             Map.Entry entry = (Map.Entry) obj;
             Object key = entry.getKey();
             Object value = entry.getValue();
-            int smearedHash = Hashing.smearedHash(key);
-            int findEntryByValue = this.biMap.findEntryByValue(smearedHash, key);
-            if (findEntryByValue == -1 || !Objects.equal(this.biMap.keys[findEntryByValue], value)) {
+            int iSmearedHash = Hashing.smearedHash(key);
+            int iFindEntryByValue = this.biMap.findEntryByValue(iSmearedHash, key);
+            if (iFindEntryByValue == -1 || !Objects.equal(this.biMap.keys[iFindEntryByValue], value)) {
                 return false;
             }
             HashBiMap hashBiMap = this.biMap;
-            hashBiMap.removeEntry(findEntryByValue, Hashing.smearedHash(hashBiMap.keys[findEntryByValue]), smearedHash);
+            hashBiMap.removeEntry(iFindEntryByValue, Hashing.smearedHash(hashBiMap.keys[iFindEntryByValue]), iSmearedHash);
             return true;
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class KeySet extends View {
         public KeySet() {
             super(HashBiMap.this);
@@ -343,17 +336,16 @@ public final class HashBiMap<K, V> extends AbstractMap<K, V> implements BiMap, S
 
         @Override // java.util.AbstractCollection, java.util.Collection, java.util.Set
         public final boolean remove(Object obj) {
-            int smearedHash = Hashing.smearedHash(obj);
-            int findEntryByKey = HashBiMap.this.findEntryByKey(smearedHash, obj);
-            if (findEntryByKey == -1) {
+            int iSmearedHash = Hashing.smearedHash(obj);
+            int iFindEntryByKey = HashBiMap.this.findEntryByKey(iSmearedHash, obj);
+            if (iFindEntryByKey == -1) {
                 return false;
             }
-            HashBiMap.this.removeEntryKeyHashKnown(findEntryByKey, smearedHash);
+            HashBiMap.this.removeEntryKeyHashKnown(iFindEntryByKey, iSmearedHash);
             return true;
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ValueSet extends View {
         public ValueSet() {
             super(HashBiMap.this);
@@ -371,22 +363,20 @@ public final class HashBiMap<K, V> extends AbstractMap<K, V> implements BiMap, S
 
         @Override // java.util.AbstractCollection, java.util.Collection, java.util.Set
         public final boolean remove(Object obj) {
-            int smearedHash = Hashing.smearedHash(obj);
-            int findEntryByValue = HashBiMap.this.findEntryByValue(smearedHash, obj);
-            if (findEntryByValue == -1) {
+            int iSmearedHash = Hashing.smearedHash(obj);
+            int iFindEntryByValue = HashBiMap.this.findEntryByValue(iSmearedHash, obj);
+            if (iFindEntryByValue == -1) {
                 return false;
             }
             HashBiMap hashBiMap = HashBiMap.this;
-            hashBiMap.removeEntry(findEntryByValue, Hashing.smearedHash(hashBiMap.keys[findEntryByValue]), smearedHash);
+            hashBiMap.removeEntry(iFindEntryByValue, Hashing.smearedHash(hashBiMap.keys[iFindEntryByValue]), iSmearedHash);
             return true;
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class View extends AbstractSet {
         public final HashBiMap biMap;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.google.common.collect.HashBiMap$View$1, reason: invalid class name */
         public class AnonymousClass1 implements Iterator {
             public int expectedModCount;
@@ -415,12 +405,12 @@ public final class HashBiMap<K, V> extends AbstractMap<K, V> implements BiMap, S
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                Object forEntry = View.this.forEntry(this.index);
+                Object objForEntry = View.this.forEntry(this.index);
                 int i = this.index;
                 this.indexToRemove = i;
                 this.index = View.this.biMap.nextInInsertionOrder[i];
                 this.remaining--;
-                return forEntry;
+                return objForEntry;
             }
 
             @Override // java.util.Iterator
@@ -480,11 +470,11 @@ public final class HashBiMap<K, V> extends AbstractMap<K, V> implements BiMap, S
         return iArr;
     }
 
-    private void readObject(ObjectInputStream objectInputStream) throws IOException, ClassNotFoundException {
+    private void readObject(ObjectInputStream objectInputStream) throws ClassNotFoundException, IOException {
         objectInputStream.defaultReadObject();
-        int readInt = objectInputStream.readInt();
+        int i = objectInputStream.readInt();
         init(16);
-        for (int i = 0; i < readInt; i++) {
+        for (int i2 = 0; i2 < i; i2++) {
             put(objectInputStream.readObject(), objectInputStream.readObject());
         }
     }
@@ -532,12 +522,12 @@ public final class HashBiMap<K, V> extends AbstractMap<K, V> implements BiMap, S
 
     public final void deleteFromTableKToV(int i, int i2) {
         Preconditions.checkArgument(i != -1);
-        int bucket = bucket(i2);
+        int iBucket = bucket(i2);
         int[] iArr = this.hashTableKToV;
-        int i3 = iArr[bucket];
+        int i3 = iArr[iBucket];
         if (i3 == i) {
             int[] iArr2 = this.nextInBucketKToV;
-            iArr[bucket] = iArr2[i];
+            iArr[iBucket] = iArr2[i];
             iArr2[i] = -1;
             return;
         }
@@ -560,12 +550,12 @@ public final class HashBiMap<K, V> extends AbstractMap<K, V> implements BiMap, S
 
     public final void deleteFromTableVToK(int i, int i2) {
         Preconditions.checkArgument(i != -1);
-        int bucket = bucket(i2);
+        int iBucket = bucket(i2);
         int[] iArr = this.hashTableVToK;
-        int i3 = iArr[bucket];
+        int i3 = iArr[iBucket];
         if (i3 == i) {
             int[] iArr2 = this.nextInBucketVToK;
-            iArr[bucket] = iArr2[i];
+            iArr[iBucket] = iArr2[i];
             iArr2[i] = -1;
             return;
         }
@@ -589,49 +579,49 @@ public final class HashBiMap<K, V> extends AbstractMap<K, V> implements BiMap, S
     public final void ensureCapacity(int i) {
         int[] iArr = this.nextInBucketKToV;
         if (iArr.length < i) {
-            int expandedCapacity = ImmutableCollection.Builder.expandedCapacity(iArr.length, i);
-            this.keys = Arrays.copyOf(this.keys, expandedCapacity);
-            this.values = Arrays.copyOf(this.values, expandedCapacity);
+            int iExpandedCapacity = ImmutableCollection.Builder.expandedCapacity(iArr.length, i);
+            this.keys = Arrays.copyOf(this.keys, iExpandedCapacity);
+            this.values = Arrays.copyOf(this.values, iExpandedCapacity);
             int[] iArr2 = this.nextInBucketKToV;
             int length = iArr2.length;
-            int[] copyOf = Arrays.copyOf(iArr2, expandedCapacity);
-            Arrays.fill(copyOf, length, expandedCapacity, -1);
-            this.nextInBucketKToV = copyOf;
+            int[] iArrCopyOf = Arrays.copyOf(iArr2, iExpandedCapacity);
+            Arrays.fill(iArrCopyOf, length, iExpandedCapacity, -1);
+            this.nextInBucketKToV = iArrCopyOf;
             int[] iArr3 = this.nextInBucketVToK;
             int length2 = iArr3.length;
-            int[] copyOf2 = Arrays.copyOf(iArr3, expandedCapacity);
-            Arrays.fill(copyOf2, length2, expandedCapacity, -1);
-            this.nextInBucketVToK = copyOf2;
+            int[] iArrCopyOf2 = Arrays.copyOf(iArr3, iExpandedCapacity);
+            Arrays.fill(iArrCopyOf2, length2, iExpandedCapacity, -1);
+            this.nextInBucketVToK = iArrCopyOf2;
             int[] iArr4 = this.prevInInsertionOrder;
             int length3 = iArr4.length;
-            int[] copyOf3 = Arrays.copyOf(iArr4, expandedCapacity);
-            Arrays.fill(copyOf3, length3, expandedCapacity, -1);
-            this.prevInInsertionOrder = copyOf3;
+            int[] iArrCopyOf3 = Arrays.copyOf(iArr4, iExpandedCapacity);
+            Arrays.fill(iArrCopyOf3, length3, iExpandedCapacity, -1);
+            this.prevInInsertionOrder = iArrCopyOf3;
             int[] iArr5 = this.nextInInsertionOrder;
             int length4 = iArr5.length;
-            int[] copyOf4 = Arrays.copyOf(iArr5, expandedCapacity);
-            Arrays.fill(copyOf4, length4, expandedCapacity, -1);
-            this.nextInInsertionOrder = copyOf4;
+            int[] iArrCopyOf4 = Arrays.copyOf(iArr5, iExpandedCapacity);
+            Arrays.fill(iArrCopyOf4, length4, iExpandedCapacity, -1);
+            this.nextInInsertionOrder = iArrCopyOf4;
         }
         if (this.hashTableKToV.length < i) {
-            int max = Math.max(i, 2);
-            int highestOneBit = Integer.highestOneBit(max);
-            if (max > ((int) (1.0d * highestOneBit)) && (highestOneBit = highestOneBit << 1) <= 0) {
-                highestOneBit = 1073741824;
+            int iMax = Math.max(i, 2);
+            int iHighestOneBit = Integer.highestOneBit(iMax);
+            if (iMax > ((int) (1.0d * iHighestOneBit)) && (iHighestOneBit = iHighestOneBit << 1) <= 0) {
+                iHighestOneBit = 1073741824;
             }
-            this.hashTableKToV = createFilledWithAbsent(highestOneBit);
-            this.hashTableVToK = createFilledWithAbsent(highestOneBit);
+            this.hashTableKToV = createFilledWithAbsent(iHighestOneBit);
+            this.hashTableVToK = createFilledWithAbsent(iHighestOneBit);
             for (int i2 = 0; i2 < this.size; i2++) {
-                int bucket = bucket(Hashing.smearedHash(this.keys[i2]));
+                int iBucket = bucket(Hashing.smearedHash(this.keys[i2]));
                 int[] iArr6 = this.nextInBucketKToV;
                 int[] iArr7 = this.hashTableKToV;
-                iArr6[i2] = iArr7[bucket];
-                iArr7[bucket] = i2;
-                int bucket2 = bucket(Hashing.smearedHash(this.values[i2]));
+                iArr6[i2] = iArr7[iBucket];
+                iArr7[iBucket] = i2;
+                int iBucket2 = bucket(Hashing.smearedHash(this.values[i2]));
                 int[] iArr8 = this.nextInBucketVToK;
                 int[] iArr9 = this.hashTableVToK;
-                iArr8[i2] = iArr9[bucket2];
-                iArr9[bucket2] = i2;
+                iArr8[i2] = iArr9[iBucket2];
+                iArr9[iBucket2] = i2;
             }
         }
     }
@@ -673,25 +663,25 @@ public final class HashBiMap<K, V> extends AbstractMap<K, V> implements BiMap, S
 
     @Override // java.util.AbstractMap, java.util.Map
     public final Object get(Object obj) {
-        int findEntryByKey = findEntryByKey(Hashing.smearedHash(obj), obj);
-        if (findEntryByKey == -1) {
+        int iFindEntryByKey = findEntryByKey(Hashing.smearedHash(obj), obj);
+        if (iFindEntryByKey == -1) {
             return null;
         }
-        return this.values[findEntryByKey];
+        return this.values[iFindEntryByKey];
     }
 
     public final void init(int i) {
         CollectPreconditions.checkNonnegative(i, "expectedSize");
-        int max = Math.max(i, 2);
-        int highestOneBit = Integer.highestOneBit(max);
-        if (max > ((int) (1.0d * highestOneBit)) && (highestOneBit = highestOneBit << 1) <= 0) {
-            highestOneBit = 1073741824;
+        int iMax = Math.max(i, 2);
+        int iHighestOneBit = Integer.highestOneBit(iMax);
+        if (iMax > ((int) (1.0d * iHighestOneBit)) && (iHighestOneBit = iHighestOneBit << 1) <= 0) {
+            iHighestOneBit = 1073741824;
         }
         this.size = 0;
         this.keys = new Object[i];
         this.values = new Object[i];
-        this.hashTableKToV = createFilledWithAbsent(highestOneBit);
-        this.hashTableVToK = createFilledWithAbsent(highestOneBit);
+        this.hashTableKToV = createFilledWithAbsent(iHighestOneBit);
+        this.hashTableVToK = createFilledWithAbsent(iHighestOneBit);
         this.nextInBucketKToV = createFilledWithAbsent(i);
         this.nextInBucketVToK = createFilledWithAbsent(i);
         this.firstInInsertionOrder = -2;
@@ -702,20 +692,20 @@ public final class HashBiMap<K, V> extends AbstractMap<K, V> implements BiMap, S
 
     public final void insertIntoTableKToV(int i, int i2) {
         Preconditions.checkArgument(i != -1);
-        int bucket = bucket(i2);
+        int iBucket = bucket(i2);
         int[] iArr = this.nextInBucketKToV;
         int[] iArr2 = this.hashTableKToV;
-        iArr[i] = iArr2[bucket];
-        iArr2[bucket] = i;
+        iArr[i] = iArr2[iBucket];
+        iArr2[iBucket] = i;
     }
 
     public final void insertIntoTableVToK(int i, int i2) {
         Preconditions.checkArgument(i != -1);
-        int bucket = bucket(i2);
+        int iBucket = bucket(i2);
         int[] iArr = this.nextInBucketVToK;
         int[] iArr2 = this.hashTableVToK;
-        iArr[i] = iArr2[bucket];
-        iArr2[bucket] = i;
+        iArr[i] = iArr2[iBucket];
+        iArr2[iBucket] = i;
     }
 
     public final BiMap inverse() {
@@ -741,18 +731,18 @@ public final class HashBiMap<K, V> extends AbstractMap<K, V> implements BiMap, S
 
     @Override // java.util.AbstractMap, java.util.Map
     public final Object put(Object obj, Object obj2) {
-        int smearedHash = Hashing.smearedHash(obj);
-        int findEntryByKey = findEntryByKey(smearedHash, obj);
-        if (findEntryByKey != -1) {
-            Object obj3 = this.values[findEntryByKey];
+        int iSmearedHash = Hashing.smearedHash(obj);
+        int iFindEntryByKey = findEntryByKey(iSmearedHash, obj);
+        if (iFindEntryByKey != -1) {
+            Object obj3 = this.values[iFindEntryByKey];
             if (Objects.equal(obj3, obj2)) {
                 return obj2;
             }
-            replaceValueInEntry(findEntryByKey, obj2);
+            replaceValueInEntry(iFindEntryByKey, obj2);
             return obj3;
         }
-        int smearedHash2 = Hashing.smearedHash(obj2);
-        if (!(findEntryByValue(smearedHash2, obj2) == -1)) {
+        int iSmearedHash2 = Hashing.smearedHash(obj2);
+        if (!(findEntryByValue(iSmearedHash2, obj2) == -1)) {
             throw new IllegalArgumentException(Strings.lenientFormat("Value already present: %s", obj2));
         }
         ensureCapacity(this.size + 1);
@@ -760,8 +750,8 @@ public final class HashBiMap<K, V> extends AbstractMap<K, V> implements BiMap, S
         int i = this.size;
         objArr[i] = obj;
         this.values[i] = obj2;
-        insertIntoTableKToV(i, smearedHash);
-        insertIntoTableVToK(this.size, smearedHash2);
+        insertIntoTableKToV(i, iSmearedHash);
+        insertIntoTableVToK(this.size, iSmearedHash2);
         setSucceeds(this.lastInInsertionOrder, this.size);
         setSucceeds(this.size, -2);
         this.size++;
@@ -770,19 +760,19 @@ public final class HashBiMap<K, V> extends AbstractMap<K, V> implements BiMap, S
     }
 
     public final Object putInverse(Object obj, Object obj2) {
-        int smearedHash = Hashing.smearedHash(obj);
-        int findEntryByValue = findEntryByValue(smearedHash, obj);
-        if (findEntryByValue != -1) {
-            Object obj3 = this.keys[findEntryByValue];
+        int iSmearedHash = Hashing.smearedHash(obj);
+        int iFindEntryByValue = findEntryByValue(iSmearedHash, obj);
+        if (iFindEntryByValue != -1) {
+            Object obj3 = this.keys[iFindEntryByValue];
             if (Objects.equal(obj3, obj2)) {
                 return obj2;
             }
-            replaceKeyInEntry(findEntryByValue, obj2);
+            replaceKeyInEntry(iFindEntryByValue, obj2);
             return obj3;
         }
         int i = this.lastInInsertionOrder;
-        int smearedHash2 = Hashing.smearedHash(obj2);
-        if (!(findEntryByKey(smearedHash2, obj2) == -1)) {
+        int iSmearedHash2 = Hashing.smearedHash(obj2);
+        if (!(findEntryByKey(iSmearedHash2, obj2) == -1)) {
             throw new IllegalArgumentException(Strings.lenientFormat("Key already present: %s", obj2));
         }
         ensureCapacity(this.size + 1);
@@ -790,8 +780,8 @@ public final class HashBiMap<K, V> extends AbstractMap<K, V> implements BiMap, S
         int i2 = this.size;
         objArr[i2] = obj2;
         this.values[i2] = obj;
-        insertIntoTableKToV(i2, smearedHash2);
-        insertIntoTableVToK(this.size, smearedHash);
+        insertIntoTableKToV(i2, iSmearedHash2);
+        insertIntoTableVToK(this.size, iSmearedHash);
         int i3 = i == -2 ? this.firstInInsertionOrder : this.nextInInsertionOrder[i];
         setSucceeds(i, this.size);
         setSucceeds(this.size, i3);
@@ -802,13 +792,13 @@ public final class HashBiMap<K, V> extends AbstractMap<K, V> implements BiMap, S
 
     @Override // java.util.AbstractMap, java.util.Map
     public final Object remove(Object obj) {
-        int smearedHash = Hashing.smearedHash(obj);
-        int findEntryByKey = findEntryByKey(smearedHash, obj);
-        if (findEntryByKey == -1) {
+        int iSmearedHash = Hashing.smearedHash(obj);
+        int iFindEntryByKey = findEntryByKey(iSmearedHash, obj);
+        if (iFindEntryByKey == -1) {
             return null;
         }
-        Object obj2 = this.values[findEntryByKey];
-        removeEntryKeyHashKnown(findEntryByKey, smearedHash);
+        Object obj2 = this.values[iFindEntryByKey];
+        removeEntryKeyHashKnown(iFindEntryByKey, iSmearedHash);
         return obj2;
     }
 
@@ -831,11 +821,11 @@ public final class HashBiMap<K, V> extends AbstractMap<K, V> implements BiMap, S
             Object obj2 = objArr2[i6];
             objArr[i] = obj;
             objArr2[i] = obj2;
-            int bucket = bucket(Hashing.smearedHash(obj));
+            int iBucket = bucket(Hashing.smearedHash(obj));
             int[] iArr = this.hashTableKToV;
-            int i9 = iArr[bucket];
+            int i9 = iArr[iBucket];
             if (i9 == i6) {
-                iArr[bucket] = i;
+                iArr[iBucket] = i;
             } else {
                 int i10 = this.nextInBucketKToV[i9];
                 while (true) {
@@ -852,11 +842,11 @@ public final class HashBiMap<K, V> extends AbstractMap<K, V> implements BiMap, S
             int[] iArr2 = this.nextInBucketKToV;
             iArr2[i] = iArr2[i6];
             iArr2[i6] = -1;
-            int bucket2 = bucket(Hashing.smearedHash(obj2));
+            int iBucket2 = bucket(Hashing.smearedHash(obj2));
             int[] iArr3 = this.hashTableVToK;
-            int i11 = iArr3[bucket2];
+            int i11 = iArr3[iBucket2];
             if (i11 == i6) {
-                iArr3[bucket2] = i;
+                iArr3[iBucket2] = i;
             } else {
                 int i12 = this.nextInBucketVToK[i11];
                 while (true) {
@@ -888,38 +878,38 @@ public final class HashBiMap<K, V> extends AbstractMap<K, V> implements BiMap, S
 
     public final void replaceKeyInEntry(int i, Object obj) {
         Preconditions.checkArgument(i != -1);
-        int findEntryByKey = findEntryByKey(Hashing.smearedHash(obj), obj);
+        int iFindEntryByKey = findEntryByKey(Hashing.smearedHash(obj), obj);
         int i2 = this.lastInInsertionOrder;
-        if (findEntryByKey != -1) {
+        if (iFindEntryByKey != -1) {
             throw new IllegalArgumentException("Key already present in map: " + obj);
         }
         if (i2 == i) {
             i2 = this.prevInInsertionOrder[i];
         } else if (i2 == this.size) {
-            i2 = findEntryByKey;
+            i2 = iFindEntryByKey;
         }
         if (-2 == i) {
-            findEntryByKey = this.nextInInsertionOrder[i];
+            iFindEntryByKey = this.nextInInsertionOrder[i];
         } else if (-2 != this.size) {
-            findEntryByKey = -2;
+            iFindEntryByKey = -2;
         }
         setSucceeds(this.prevInInsertionOrder[i], this.nextInInsertionOrder[i]);
         deleteFromTableKToV(i, Hashing.smearedHash(this.keys[i]));
         this.keys[i] = obj;
         insertIntoTableKToV(i, Hashing.smearedHash(obj));
         setSucceeds(i2, i);
-        setSucceeds(i, findEntryByKey);
+        setSucceeds(i, iFindEntryByKey);
     }
 
     public final void replaceValueInEntry(int i, Object obj) {
         Preconditions.checkArgument(i != -1);
-        int smearedHash = Hashing.smearedHash(obj);
-        if (findEntryByValue(smearedHash, obj) != -1) {
+        int iSmearedHash = Hashing.smearedHash(obj);
+        if (findEntryByValue(iSmearedHash, obj) != -1) {
             throw new IllegalArgumentException("Value already present in map: " + obj);
         }
         deleteFromTableVToK(i, Hashing.smearedHash(this.values[i]));
         this.values[i] = obj;
-        insertIntoTableVToK(i, smearedHash);
+        insertIntoTableVToK(i, iSmearedHash);
     }
 
     public final void setSucceeds(int i, int i2) {

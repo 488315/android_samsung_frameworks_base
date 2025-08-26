@@ -13,7 +13,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class NotificationHelper {
     public static final AnonymousClass1 notificationEntryComparator = new Comparator() { // from class: com.android.systemui.people.NotificationHelper.1
@@ -21,12 +20,12 @@ public class NotificationHelper {
         public final int compare(Object obj, Object obj2) {
             Notification notification2 = ((NotificationEntry) obj).mSbn.getNotification();
             Notification notification3 = ((NotificationEntry) obj2).mSbn.getNotification();
-            boolean isMissedCall = NotificationHelper.isMissedCall(notification2);
-            boolean isMissedCall2 = NotificationHelper.isMissedCall(notification3);
-            if (isMissedCall && !isMissedCall2) {
+            boolean zIsMissedCall = NotificationHelper.isMissedCall(notification2);
+            boolean zIsMissedCall2 = NotificationHelper.isMissedCall(notification3);
+            if (zIsMissedCall && !zIsMissedCall2) {
                 return -1;
             }
-            if (!isMissedCall && isMissedCall2) {
+            if (!zIsMissedCall && zIsMissedCall2) {
                 return 1;
             }
             List<Notification.MessagingStyle.Message> messagingStyleMessages = NotificationHelper.getMessagingStyleMessages(notification2);

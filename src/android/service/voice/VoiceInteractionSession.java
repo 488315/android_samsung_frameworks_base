@@ -50,6 +50,7 @@ import com.android.internal.os.SomeArgs;
 import com.android.internal.util.FunctionalUtils;
 import com.android.internal.util.function.pooled.PooledLambda;
 import java.io.FileDescriptor;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -285,14 +286,14 @@ public class VoiceInteractionSession implements KeyEvent.Callback, ComponentCall
             if (voiceInteractionSession == null) {
                 throw new IllegalStateException("VoiceInteractionSession has been destroyed");
             }
-            Request removeRequest = voiceInteractionSession.removeRequest(this.mInterface.asBinder());
-            if (removeRequest == null) {
+            Request requestRemoveRequest = voiceInteractionSession.removeRequest(this.mInterface.asBinder());
+            if (requestRemoveRequest == null) {
                 throw new IllegalStateException("Request not active: " + this);
             }
-            if (removeRequest == this) {
+            if (requestRemoveRequest == this) {
                 return;
             }
-            throw new IllegalStateException("Current active request " + removeRequest + " not same as calling request " + this);
+            throw new IllegalStateException("Current active request " + requestRemoveRequest + " not same as calling request " + this);
         }
 
         public void cancel() {
@@ -729,10 +730,10 @@ public class VoiceInteractionSession implements KeyEvent.Callback, ComponentCall
 
             @Override // com.android.internal.app.IVoiceInteractor
             public boolean[] supportsCommands(String str, String[] strArr) {
-                SomeArgs sendMessageAndWait = VoiceInteractionSession.this.mHandlerCaller.sendMessageAndWait(VoiceInteractionSession.this.mHandlerCaller.obtainMessageIOO(6, 0, strArr, null));
-                if (sendMessageAndWait != null) {
-                    boolean[] zArr = (boolean[]) sendMessageAndWait.arg1;
-                    sendMessageAndWait.recycle();
+                SomeArgs someArgsSendMessageAndWait = VoiceInteractionSession.this.mHandlerCaller.sendMessageAndWait(VoiceInteractionSession.this.mHandlerCaller.obtainMessageIOO(6, 0, strArr, null));
+                if (someArgsSendMessageAndWait != null) {
+                    boolean[] zArr = (boolean[]) someArgsSendMessageAndWait.arg1;
+                    someArgsSendMessageAndWait.recycle();
                     return zArr;
                 }
                 return new boolean[strArr.length];
@@ -774,22 +775,24 @@ public class VoiceInteractionSession implements KeyEvent.Callback, ComponentCall
                         if (assistStructure2 != null) {
                             try {
                                 assistStructure2.ensureData();
+                                th = null;
                             } catch (Throwable th) {
                                 th = th;
                                 Log.w(VoiceInteractionSession.TAG, "Failure retrieving AssistStructure", th);
                             }
+                        } else {
+                            th = null;
                         }
-                        th = null;
-                        SomeArgs obtain = SomeArgs.obtain();
-                        obtain.argi1 = i;
-                        obtain.arg1 = bundle;
-                        obtain.arg2 = th == null ? assistStructure : null;
-                        obtain.arg3 = th;
-                        obtain.arg4 = assistContent;
-                        obtain.arg5 = iBinder;
-                        obtain.argi5 = i2;
-                        obtain.argi6 = i3;
-                        VoiceInteractionSession.this.mHandlerCaller.sendMessage(VoiceInteractionSession.this.mHandlerCaller.obtainMessageO(104, obtain));
+                        SomeArgs someArgsObtain = SomeArgs.obtain();
+                        someArgsObtain.argi1 = i;
+                        someArgsObtain.arg1 = bundle;
+                        someArgsObtain.arg2 = th == null ? assistStructure : null;
+                        someArgsObtain.arg3 = th;
+                        someArgsObtain.arg4 = assistContent;
+                        someArgsObtain.arg5 = iBinder;
+                        someArgsObtain.argi5 = i2;
+                        someArgsObtain.argi6 = i3;
+                        VoiceInteractionSession.this.mHandlerCaller.sendMessage(VoiceInteractionSession.this.mHandlerCaller.obtainMessageO(104, someArgsObtain));
                     }
                 }.start();
             }
@@ -867,19 +870,19 @@ public class VoiceInteractionSession implements KeyEvent.Callback, ComponentCall
     }
 
     boolean isRequestActive(IBinder iBinder) {
-        boolean containsKey;
+        boolean zContainsKey;
         synchronized (this) {
-            containsKey = this.mActiveRequests.containsKey(iBinder);
+            zContainsKey = this.mActiveRequests.containsKey(iBinder);
         }
-        return containsKey;
+        return zContainsKey;
     }
 
     Request removeRequest(IBinder iBinder) {
-        Request remove;
+        Request requestRemove;
         synchronized (this) {
-            remove = this.mActiveRequests.remove(iBinder);
+            requestRemove = this.mActiveRequests.remove(iBinder);
         }
-        return remove;
+        return requestRemove;
     }
 
     void doCreate(IVoiceInteractionManagerService iVoiceInteractionManagerService, IBinder iBinder) {
@@ -1002,7 +1005,7 @@ public class VoiceInteractionSession implements KeyEvent.Callback, ComponentCall
             executor.execute(new Runnable() { // from class: android.service.voice.VoiceInteractionSession$$ExternalSyntheticLambda5
                 @Override // java.lang.Runnable
                 public final void run() {
-                    VoiceInteractionSession.VisibleActivityCallback.this.onVisible(visibleActivityInfo);
+                    visibleActivityCallback.onVisible(visibleActivityInfo);
                 }
             });
         }
@@ -1032,7 +1035,7 @@ public class VoiceInteractionSession implements KeyEvent.Callback, ComponentCall
                         value.execute(new Runnable() { // from class: android.service.voice.VoiceInteractionSession$$ExternalSyntheticLambda0
                             @Override // java.lang.Runnable
                             public final void run() {
-                                VoiceInteractionSession.VisibleActivityCallback.this.onVisible(r2);
+                                visibleActivityCallback.onVisible(visibleActivityInfo);
                             }
                         });
                     }
@@ -1044,7 +1047,7 @@ public class VoiceInteractionSession implements KeyEvent.Callback, ComponentCall
                         value.execute(new Runnable() { // from class: android.service.voice.VoiceInteractionSession$$ExternalSyntheticLambda2
                             @Override // java.lang.Runnable
                             public final void run() {
-                                VoiceInteractionSession.VisibleActivityCallback.this.onInvisible(r2.getActivityId());
+                                visibleActivityCallback.onInvisible(visibleActivityInfo.getActivityId());
                             }
                         });
                     }
@@ -1067,9 +1070,9 @@ public class VoiceInteractionSession implements KeyEvent.Callback, ComponentCall
         voiceInteractionWindow.getWindow().getAttributes().setFitInsetsTypes(0);
         this.mWindow.getWindow().addFlags(16843008);
         this.mThemeAttrs = this.mContext.obtainStyledAttributes(R.styleable.VoiceInteractionSession);
-        View inflate = this.mInflater.inflate(com.android.internal.R.layout.voice_interaction_session, (ViewGroup) null);
-        this.mRootView = inflate;
-        inflate.setSystemUiVisibility(1792);
+        View viewInflate = this.mInflater.inflate(com.android.internal.R.layout.voice_interaction_session, (ViewGroup) null);
+        this.mRootView = viewInflate;
+        viewInflate.setSystemUiVisibility(1792);
         this.mWindow.setContentView(this.mRootView);
         this.mRootView.getViewTreeObserver().addOnComputeInternalInsetsListener(this.mInsetsComputer);
         this.mContentFrame = (FrameLayout) this.mRootView.findViewById(16908290);
@@ -1083,9 +1086,9 @@ public class VoiceInteractionSession implements KeyEvent.Callback, ComponentCall
         }
         this.mWindowAdded = true;
         ensureWindowCreated();
-        View onCreateContentView = onCreateContentView();
-        if (onCreateContentView != null) {
-            setContentView(onCreateContentView);
+        View viewOnCreateContentView = onCreateContentView();
+        if (viewOnCreateContentView != null) {
+            setContentView(viewOnCreateContentView);
         }
     }
 
@@ -1179,7 +1182,7 @@ public class VoiceInteractionSession implements KeyEvent.Callback, ComponentCall
         this.mTheme = i;
     }
 
-    public void startVoiceActivity(Intent intent) {
+    public void startVoiceActivity(Intent intent) throws IOException {
         if (this.mToken == null) {
             throw new IllegalStateException("Can't call before onCreate()");
         }
@@ -1191,11 +1194,11 @@ public class VoiceInteractionSession implements KeyEvent.Callback, ComponentCall
         }
     }
 
-    public void startAssistantActivity(Intent intent) {
+    public void startAssistantActivity(Intent intent) throws IOException {
         startAssistantActivity(intent, ActivityOptions.makeBasic().toBundle());
     }
 
-    public void startAssistantActivity(Intent intent, Bundle bundle) {
+    public void startAssistantActivity(Intent intent, Bundle bundle) throws IOException {
         Objects.requireNonNull(bundle);
         if (this.mToken == null) {
             throw new IllegalStateException("Can't call before onCreate()");
@@ -1222,7 +1225,7 @@ public class VoiceInteractionSession implements KeyEvent.Callback, ComponentCall
             this.mSystemService.requestDirectActions(this.mToken, activityId.getTaskId(), activityId.getAssistToken(), cancellationSignal != null ? new RemoteCallback(new RemoteCallback.OnResultListener() { // from class: android.service.voice.VoiceInteractionSession$$ExternalSyntheticLambda8
                 @Override // android.os.RemoteCallback.OnResultListener
                 public final void onResult(Bundle bundle) {
-                    VoiceInteractionSession.lambda$requestDirectActions$5(CancellationSignal.this, bundle);
+                    VoiceInteractionSession.lambda$requestDirectActions$5(cancellationSignal, bundle);
                 }
             }) : null, new RemoteCallback(createSafeResultListener(new Consumer() { // from class: android.service.voice.VoiceInteractionSession$$ExternalSyntheticLambda9
                 @Override // java.util.function.Consumer
@@ -1244,19 +1247,10 @@ public class VoiceInteractionSession implements KeyEvent.Callback, ComponentCall
     }
 
     static /* synthetic */ void lambda$requestDirectActions$7(Executor executor, final Consumer consumer, Bundle bundle) {
+        ParceledListSlice parceledListSlice;
         final List list;
-        if (bundle == null) {
+        if (bundle == null || (parceledListSlice = (ParceledListSlice) bundle.getParcelable(DirectAction.KEY_ACTIONS_LIST, ParceledListSlice.class)) == null || (list = parceledListSlice.getList()) == null) {
             list = Collections.EMPTY_LIST;
-        } else {
-            ParceledListSlice parceledListSlice = (ParceledListSlice) bundle.getParcelable(DirectAction.KEY_ACTIONS_LIST, ParceledListSlice.class);
-            if (parceledListSlice != null) {
-                list = parceledListSlice.getList();
-                if (list == null) {
-                    list = Collections.EMPTY_LIST;
-                }
-            } else {
-                list = Collections.EMPTY_LIST;
-            }
         }
         executor.execute(new Runnable() { // from class: android.service.voice.VoiceInteractionSession$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
@@ -1279,7 +1273,7 @@ public class VoiceInteractionSession implements KeyEvent.Callback, ComponentCall
             this.mSystemService.performDirectAction(this.mToken, directAction.getId(), bundle, directAction.getTaskId(), directAction.getActivityId(), cancellationSignal != null ? new RemoteCallback(createSafeResultListener(new Consumer() { // from class: android.service.voice.VoiceInteractionSession$$ExternalSyntheticLambda10
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    VoiceInteractionSession.lambda$performDirectAction$8(CancellationSignal.this, (Bundle) obj);
+                    VoiceInteractionSession.lambda$performDirectAction$8(cancellationSignal, (Bundle) obj);
                 }
             })) : null, new RemoteCallback(createSafeResultListener(new Consumer() { // from class: android.service.voice.VoiceInteractionSession$$ExternalSyntheticLambda11
                 @Override // java.util.function.Consumer
@@ -1471,13 +1465,13 @@ public class VoiceInteractionSession implements KeyEvent.Callback, ComponentCall
             printWriter.println("Active requests:");
             String str2 = str + "    ";
             for (int i = 0; i < this.mActiveRequests.size(); i++) {
-                Request valueAt = this.mActiveRequests.valueAt(i);
+                Request requestValueAt = this.mActiveRequests.valueAt(i);
                 printWriter.print(str);
                 printWriter.print("  #");
                 printWriter.print(i);
                 printWriter.print(": ");
-                printWriter.println(valueAt);
-                valueAt.dump(str2, fileDescriptor, printWriter, strArr);
+                printWriter.println(requestValueAt);
+                requestValueAt.dump(str2, fileDescriptor, printWriter, strArr);
             }
         }
     }
@@ -1493,11 +1487,11 @@ public class VoiceInteractionSession implements KeyEvent.Callback, ComponentCall
 
     /* JADX INFO: Access modifiers changed from: private */
     public Consumer<Bundle> removeSafeResultListener(SafeResultListener safeResultListener) {
-        Consumer<Bundle> remove;
+        Consumer<Bundle> consumerRemove;
         synchronized (this) {
-            remove = this.mRemoteCallbacks.remove(safeResultListener);
+            consumerRemove = this.mRemoteCallbacks.remove(safeResultListener);
         }
-        return remove;
+        return consumerRemove;
     }
 
     public static final class AssistState {
@@ -1599,12 +1593,12 @@ public class VoiceInteractionSession implements KeyEvent.Callback, ComponentCall
 
         @Override // android.os.RemoteCallback.OnResultListener
         public void onResult(Bundle bundle) {
-            Consumer removeSafeResultListener;
+            Consumer consumerRemoveSafeResultListener;
             VoiceInteractionSession voiceInteractionSession = this.mWeakSession.get();
-            if (voiceInteractionSession == null || (removeSafeResultListener = voiceInteractionSession.removeSafeResultListener(this)) == null) {
+            if (voiceInteractionSession == null || (consumerRemoveSafeResultListener = voiceInteractionSession.removeSafeResultListener(this)) == null) {
                 return;
             }
-            removeSafeResultListener.accept(bundle);
+            consumerRemoveSafeResultListener.accept(bundle);
         }
     }
 }

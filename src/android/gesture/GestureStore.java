@@ -98,103 +98,100 @@ public class GestureStore {
         return this.mChanged;
     }
 
-    public void save(OutputStream outputStream) throws IOException {
+    public void save(OutputStream outputStream) throws Throwable {
         save(outputStream, false);
     }
 
-    public void save(OutputStream outputStream, boolean z) throws IOException {
-        HashMap<String, ArrayList<Gesture>> hashMap;
-        DataOutputStream dataOutputStream;
-        DataOutputStream dataOutputStream2 = null;
+    public void save(OutputStream outputStream, boolean z) throws Throwable {
+        DataOutputStream dataOutputStream = null;
         try {
-            hashMap = this.mNamedGestures;
+            HashMap<String, ArrayList<Gesture>> map = this.mNamedGestures;
             if (!(outputStream instanceof BufferedOutputStream)) {
                 outputStream = new BufferedOutputStream(outputStream, 32768);
             }
-            dataOutputStream = new DataOutputStream(outputStream);
-        } catch (Throwable th) {
-            th = th;
-        }
-        try {
-            dataOutputStream.writeShort(1);
-            dataOutputStream.writeInt(hashMap.size());
-            Iterator<Map.Entry<String, ArrayList<Gesture>>> it = hashMap.entrySet().iterator();
-            while (true) {
-                if (!it.hasNext()) {
-                    break;
+            DataOutputStream dataOutputStream2 = new DataOutputStream(outputStream);
+            try {
+                dataOutputStream2.writeShort(1);
+                dataOutputStream2.writeInt(map.size());
+                Iterator<Map.Entry<String, ArrayList<Gesture>>> it = map.entrySet().iterator();
+                while (true) {
+                    if (!it.hasNext()) {
+                        break;
+                    }
+                    Map.Entry<String, ArrayList<Gesture>> next = it.next();
+                    String key = next.getKey();
+                    ArrayList<Gesture> value = next.getValue();
+                    int size = value.size();
+                    dataOutputStream2.writeUTF(key);
+                    dataOutputStream2.writeInt(size);
+                    for (int i = 0; i < size; i++) {
+                        value.get(i).serialize(dataOutputStream2);
+                    }
                 }
-                Map.Entry<String, ArrayList<Gesture>> next = it.next();
-                String key = next.getKey();
-                ArrayList<Gesture> value = next.getValue();
-                int size = value.size();
-                dataOutputStream.writeUTF(key);
-                dataOutputStream.writeInt(size);
-                for (int i = 0; i < size; i++) {
-                    value.get(i).serialize(dataOutputStream);
+                dataOutputStream2.flush();
+                this.mChanged = false;
+                if (z) {
+                    GestureUtils.closeStream(dataOutputStream2);
                 }
-            }
-            dataOutputStream.flush();
-            this.mChanged = false;
-            if (z) {
-                GestureUtils.closeStream(dataOutputStream);
+            } catch (Throwable th) {
+                th = th;
+                dataOutputStream = dataOutputStream2;
+                if (z) {
+                    GestureUtils.closeStream(dataOutputStream);
+                }
+                throw th;
             }
         } catch (Throwable th2) {
             th = th2;
-            dataOutputStream2 = dataOutputStream;
-            if (z) {
-                GestureUtils.closeStream(dataOutputStream2);
-            }
-            throw th;
         }
     }
 
-    public void load(InputStream inputStream) throws IOException {
+    public void load(InputStream inputStream) throws Throwable {
         load(inputStream, false);
     }
 
-    public void load(InputStream inputStream, boolean z) throws IOException {
-        DataInputStream dataInputStream;
-        DataInputStream dataInputStream2 = null;
+    public void load(InputStream inputStream, boolean z) throws Throwable {
+        DataInputStream dataInputStream = null;
         try {
             if (!(inputStream instanceof BufferedInputStream)) {
                 inputStream = new BufferedInputStream(inputStream, 32768);
             }
-            dataInputStream = new DataInputStream(inputStream);
-        } catch (Throwable th) {
-            th = th;
-        }
-        try {
-            if (dataInputStream.readShort() == 1) {
-                readFormatV1(dataInputStream);
-            }
-            if (z) {
-                GestureUtils.closeStream(dataInputStream);
+            DataInputStream dataInputStream2 = new DataInputStream(inputStream);
+            try {
+                if (dataInputStream2.readShort() == 1) {
+                    readFormatV1(dataInputStream2);
+                }
+                if (z) {
+                    GestureUtils.closeStream(dataInputStream2);
+                }
+            } catch (Throwable th) {
+                th = th;
+                dataInputStream = dataInputStream2;
+                if (z) {
+                    GestureUtils.closeStream(dataInputStream);
+                }
+                throw th;
             }
         } catch (Throwable th2) {
             th = th2;
-            dataInputStream2 = dataInputStream;
-            if (z) {
-                GestureUtils.closeStream(dataInputStream2);
-            }
-            throw th;
         }
     }
 
     private void readFormatV1(DataInputStream dataInputStream) throws IOException {
         Learner learner = this.mClassifier;
-        HashMap<String, ArrayList<Gesture>> hashMap = this.mNamedGestures;
-        hashMap.clear();
-        int readInt = dataInputStream.readInt();
-        for (int i = 0; i < readInt; i++) {
-            String readUTF = dataInputStream.readUTF();
-            int readInt2 = dataInputStream.readInt();
-            ArrayList<Gesture> arrayList = new ArrayList<>(readInt2);
-            for (int i2 = 0; i2 < readInt2; i2++) {
-                Gesture deserialize = Gesture.deserialize(dataInputStream);
-                arrayList.add(deserialize);
-                learner.addInstance(Instance.createInstance(this.mSequenceType, this.mOrientationStyle, deserialize, readUTF));
+        HashMap<String, ArrayList<Gesture>> map = this.mNamedGestures;
+        map.clear();
+        int i = dataInputStream.readInt();
+        for (int i2 = 0; i2 < i; i2++) {
+            String utf = dataInputStream.readUTF();
+            int i3 = dataInputStream.readInt();
+            ArrayList<Gesture> arrayList = new ArrayList<>(i3);
+            for (int i4 = 0; i4 < i3; i4++) {
+                Gesture gestureDeserialize = Gesture.deserialize(dataInputStream);
+                arrayList.add(gestureDeserialize);
+                learner.addInstance(Instance.createInstance(this.mSequenceType, this.mOrientationStyle, gestureDeserialize, utf));
             }
-            hashMap.put(readUTF, arrayList);
+            map.put(utf, arrayList);
         }
     }
 

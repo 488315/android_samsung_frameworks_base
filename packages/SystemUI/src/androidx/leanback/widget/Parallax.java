@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class Parallax {
     public final List mEffects;
@@ -13,7 +12,6 @@ public abstract class Parallax {
     public final List mProperties;
     public final int[] mValues;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class IntProperty extends Property {
         public final int mIndex;
 
@@ -31,15 +29,14 @@ public abstract class Parallax {
         public final void set(Object obj, Object obj2) {
             Parallax parallax = (Parallax) obj;
             int i = this.mIndex;
-            int intValue = ((Integer) obj2).intValue();
+            int iIntValue = ((Integer) obj2).intValue();
             if (i >= ((ArrayList) parallax.mProperties).size()) {
                 throw new ArrayIndexOutOfBoundsException();
             }
-            parallax.mValues[i] = intValue;
+            parallax.mValues[i] = iIntValue;
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class IntPropertyMarkerValue extends PropertyMarkerValue {
         public final float mFactionOfMax;
         public final int mValue;
@@ -55,7 +52,6 @@ public abstract class Parallax {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PropertyMarkerValue {
         public final Object mProperty;
 

@@ -11,7 +11,6 @@ import java.util.Objects;
 import java.util.Set;
 
 /* JADX INFO: Access modifiers changed from: package-private */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class StandardTable<R, C, V> extends AbstractTable implements Serializable {
     private static final long serialVersionUID = 0;
@@ -19,7 +18,6 @@ public class StandardTable<R, C, V> extends AbstractTable implements Serializabl
     final Supplier factory;
     public transient RowMap rowMap;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CellIterator implements Iterator {
         public Iterator columnIterator;
         public Map.Entry rowEntry;
@@ -63,7 +61,6 @@ public class StandardTable<R, C, V> extends AbstractTable implements Serializabl
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Row extends Maps.IteratorBasedAbstractMap {
         public Map backingRowMap;
         public final Object rowKey;
@@ -86,15 +83,15 @@ public class StandardTable<R, C, V> extends AbstractTable implements Serializabl
         @Override // java.util.AbstractMap, java.util.Map
         public final boolean containsKey(Object obj) {
             Map map;
-            boolean z;
+            boolean zContainsKey;
             updateBackingRowMapField();
             if (obj != null && (map = this.backingRowMap) != null) {
                 try {
-                    z = map.containsKey(obj);
+                    zContainsKey = map.containsKey(obj);
                 } catch (ClassCastException | NullPointerException unused) {
-                    z = false;
+                    zContainsKey = false;
                 }
-                if (z) {
+                if (zContainsKey) {
                     return true;
                 }
             }
@@ -194,17 +191,17 @@ public class StandardTable<R, C, V> extends AbstractTable implements Serializabl
         public final Object remove(Object obj) {
             updateBackingRowMapField();
             Map map = this.backingRowMap;
-            Object obj2 = null;
+            Object objRemove = null;
             if (map == null) {
                 return null;
             }
             map.getClass();
             try {
-                obj2 = map.remove(obj);
+                objRemove = map.remove(obj);
             } catch (ClassCastException | NullPointerException unused) {
             }
             maintainEmptyInvariant();
-            return obj2;
+            return objRemove;
         }
 
         @Override // java.util.AbstractMap, java.util.Map
@@ -225,10 +222,8 @@ public class StandardTable<R, C, V> extends AbstractTable implements Serializabl
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class RowMap extends Maps.ViewCachingAbstractMap {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class EntrySet extends TableSet {
             private EntrySet() {
                 super();
@@ -236,18 +231,18 @@ public class StandardTable<R, C, V> extends AbstractTable implements Serializabl
 
             @Override // java.util.AbstractCollection, java.util.Collection, java.util.Set
             public final boolean contains(Object obj) {
-                boolean z;
+                boolean zContains;
                 if (obj instanceof Map.Entry) {
                     Map.Entry entry = (Map.Entry) obj;
                     if (entry.getKey() != null && (entry.getValue() instanceof Map)) {
-                        Set<Map.Entry<R, Map<C, V>>> entrySet = StandardTable.this.backingMap.entrySet();
-                        entrySet.getClass();
+                        Set<Map.Entry<R, Map<C, V>>> setEntrySet = StandardTable.this.backingMap.entrySet();
+                        setEntrySet.getClass();
                         try {
-                            z = entrySet.contains(entry);
+                            zContains = setEntrySet.contains(entry);
                         } catch (ClassCastException | NullPointerException unused) {
-                            z = false;
+                            zContains = false;
                         }
-                        if (z) {
+                        if (zContains) {
                             return true;
                         }
                     }
@@ -257,26 +252,26 @@ public class StandardTable<R, C, V> extends AbstractTable implements Serializabl
 
             @Override // java.util.AbstractCollection, java.util.Collection, java.lang.Iterable, java.util.Set
             public final Iterator iterator() {
-                Set<R> keySet = StandardTable.this.backingMap.keySet();
+                Set<R> setKeySet = StandardTable.this.backingMap.keySet();
                 final Function function = new Function() { // from class: com.google.common.collect.StandardTable.RowMap.EntrySet.1
                     @Override // com.google.common.base.Function
                     public final Object apply(Object obj) {
                         return StandardTable.this.row(obj);
                     }
                 };
-                final Iterator<R> it = keySet.iterator();
+                final Iterator<R> it = setKeySet.iterator();
                 return new TransformedIterator(it) { // from class: com.google.common.collect.Maps.3
                     public final /* synthetic */ Function val$function;
 
                     /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     public AnonymousClass3(final Iterator it2, final Function function2) {
                         super(it2);
-                        r2 = function2;
+                        function = function2;
                     }
 
                     @Override // com.google.common.collect.TransformedIterator
                     public final Object transform(Object obj) {
-                        return new ImmutableEntry(obj, r2.apply(obj));
+                        return new ImmutableEntry(obj, function.apply(obj));
                     }
                 };
             }
@@ -330,7 +325,6 @@ public class StandardTable<R, C, V> extends AbstractTable implements Serializabl
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class TableSet extends Sets$ImprovedAbstractSet {
         private TableSet() {
         }
@@ -362,16 +356,16 @@ public class StandardTable<R, C, V> extends AbstractTable implements Serializabl
     }
 
     public boolean containsRow(Object obj) {
-        boolean z;
+        boolean zContainsKey;
         if (obj != null) {
             Map<R, Map<C, V>> map = this.backingMap;
             map.getClass();
             try {
-                z = map.containsKey(obj);
+                zContainsKey = map.containsKey(obj);
             } catch (ClassCastException | NullPointerException unused) {
-                z = false;
+                zContainsKey = false;
             }
-            if (z) {
+            if (zContainsKey) {
                 return true;
             }
         }
@@ -406,10 +400,10 @@ public class StandardTable<R, C, V> extends AbstractTable implements Serializabl
     @Override // com.google.common.collect.AbstractTable
     public int size() {
         Iterator<Map<C, V>> it = this.backingMap.values().iterator();
-        int i = 0;
+        int size = 0;
         while (it.hasNext()) {
-            i += it.next().size();
+            size += it.next().size();
         }
-        return i;
+        return size;
     }
 }

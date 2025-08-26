@@ -12,7 +12,6 @@ import com.android.systemui.util.SettingsHelper;
 import com.android.systemui.util.ViewController;
 import java.util.Arrays;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class QSButtonsContainerController extends ViewController {
     private final SettingsHelper mSettingsHelper;
@@ -34,7 +33,7 @@ public class QSButtonsContainerController extends ViewController {
         this.mSettingsListener = new SettingsHelper.OnChangedCallback() { // from class: com.android.systemui.qs.buttons.QSButtonsContainerController$$ExternalSyntheticLambda0
             @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
             public final void onChanged(Uri uri) {
-                QSButtonsContainerController.$r8$lambda$sgux4KK4mXMVCKnJbWX2C18Qu0k(QSButtonsContainerController.this, uri);
+                QSButtonsContainerController.$r8$lambda$sgux4KK4mXMVCKnJbWX2C18Qu0k(this.f$0, uri);
             }
         };
         this.mSettingsHelper = settingsHelper;

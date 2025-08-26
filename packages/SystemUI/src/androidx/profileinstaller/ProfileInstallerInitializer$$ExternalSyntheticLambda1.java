@@ -5,7 +5,6 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final /* synthetic */ class ProfileInstallerInitializer$$ExternalSyntheticLambda1 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -17,7 +16,7 @@ public final /* synthetic */ class ProfileInstallerInitializer$$ExternalSyntheti
     }
 
     @Override // java.lang.Runnable
-    public final void run() {
+    public final void run() throws Throwable {
         int i = this.$r8$classId;
         Context context = this.f$0;
         switch (i) {

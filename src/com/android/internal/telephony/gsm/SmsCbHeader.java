@@ -309,97 +309,76 @@ public class SmsCbHeader {
         public final String language;
 
         /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-        /* JADX WARN: Code restructure failed: missing block: B:25:0x0042, code lost:
-        
-            if (((r8 & 4) >> 2) == 1) goto L23;
-         */
+        /* JADX WARN: Removed duplicated region for block: B:22:0x003c A[PHI: r4
+          0x003c: PHI (r4v1 java.lang.String) = 
+          (r4v0 java.lang.String)
+          (r4v0 java.lang.String)
+          (r4v4 java.lang.String)
+          (r4v5 java.lang.String)
+          (r4v0 java.lang.String)
+         binds: [B:25:0x0042, B:9:0x0018, B:21:0x0035, B:16:0x0026, B:13:0x0021] A[DONT_GENERATE, DONT_INLINE]] */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public DataCodingScheme(int r8) {
-            /*
-                r7 = this;
-                r7.<init>()
-                r0 = r8 & 240(0xf0, float:3.36E-43)
-                int r0 = r0 >> 4
-                r1 = 9
-                if (r0 == r1) goto L4c
-                r1 = 14
-                if (r0 == r1) goto L4c
-                r1 = 15
-                r2 = 2
-                r3 = 1
-                r4 = 0
-                r5 = 0
-                if (r0 == r1) goto L3f
-                r6 = 3
-                switch(r0) {
-                    case 0: goto L35;
-                    case 1: goto L2e;
-                    case 2: goto L26;
-                    case 3: goto L3c;
-                    case 4: goto L1c;
-                    case 5: goto L1c;
-                    case 6: goto L4c;
-                    case 7: goto L4c;
-                    default: goto L1b;
+        public DataCodingScheme(int i) {
+            int i2 = (i & 240) >> 4;
+            if (i2 != 9 && i2 != 14) {
+                int i3 = 2;
+                boolean z = true;
+                String str = null;
+                if (i2 != 15) {
+                    switch (i2) {
+                        case 0:
+                            str = SmsCbHeader.LANGUAGE_CODES_GROUP_0[i & 15];
+                            i3 = 1;
+                            z = false;
+                            break;
+                        case 1:
+                            if ((i & 15) != 1) {
+                                i3 = 1;
+                                break;
+                            } else {
+                                i3 = 3;
+                                break;
+                            }
+                        case 2:
+                            str = SmsCbHeader.LANGUAGE_CODES_GROUP_2[i & 15];
+                            i3 = 1;
+                            z = false;
+                            break;
+                        case 3:
+                        default:
+                            i3 = 1;
+                            z = false;
+                            break;
+                        case 4:
+                        case 5:
+                            int i4 = (i & 12) >> 2;
+                            if (i4 != 1) {
+                                if (i4 == 2) {
+                                    z = false;
+                                    i3 = 3;
+                                    break;
+                                }
+                                i3 = 1;
+                            }
+                            z = false;
+                            break;
+                        case 6:
+                        case 7:
+                            break;
+                    }
+                } else {
+                    if (((i & 4) >> 2) != 1) {
+                    }
+                    z = false;
                 }
-            L1b:
-                goto L3c
-            L1c:
-                r8 = r8 & 12
-                int r8 = r8 >> r2
-                if (r8 == r3) goto L3d
-                if (r8 == r2) goto L24
-                goto L3c
-            L24:
-                r3 = r5
-                goto L31
-            L26:
-                java.lang.String[] r0 = com.android.internal.telephony.gsm.SmsCbHeader.m8312$$Nest$sfgetLANGUAGE_CODES_GROUP_2()
-                r8 = r8 & r1
-                r4 = r0[r8]
-                goto L3c
-            L2e:
-                r8 = r8 & r1
-                if (r8 != r3) goto L33
-            L31:
-                r2 = r6
-                goto L45
-            L33:
-                r2 = r3
-                goto L45
-            L35:
-                java.lang.String[] r0 = com.android.internal.telephony.gsm.SmsCbHeader.m8311$$Nest$sfgetLANGUAGE_CODES_GROUP_0()
-                r8 = r8 & r1
-                r4 = r0[r8]
-            L3c:
-                r2 = r3
-            L3d:
-                r3 = r5
-                goto L45
-            L3f:
-                r8 = r8 & 4
-                int r8 = r8 >> r2
-                if (r8 != r3) goto L3c
-                goto L3d
-            L45:
-                r7.encoding = r2
-                r7.language = r4
-                r7.hasLanguageIndicator = r3
-                return
-            L4c:
-                java.lang.IllegalArgumentException r7 = new java.lang.IllegalArgumentException
-                java.lang.StringBuilder r0 = new java.lang.StringBuilder
-                java.lang.String r1 = "Unsupported GSM dataCodingScheme "
-                r0.<init>(r1)
-                r0.append(r8)
-                java.lang.String r8 = r0.toString()
-                r7.<init>(r8)
-                throw r7
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.internal.telephony.gsm.SmsCbHeader.DataCodingScheme.<init>(int):void");
+                this.encoding = i3;
+                this.language = str;
+                this.hasLanguageIndicator = z;
+                return;
+            }
+            throw new IllegalArgumentException("Unsupported GSM dataCodingScheme " + i);
         }
     }
 }

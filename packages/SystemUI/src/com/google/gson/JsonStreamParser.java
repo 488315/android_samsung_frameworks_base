@@ -11,7 +11,6 @@ import java.io.StringReader;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class JsonStreamParser implements Iterator<JsonElement> {
     private final Object lock;
@@ -29,11 +28,11 @@ public final class JsonStreamParser implements Iterator<JsonElement> {
                 try {
                     try {
                         z = this.parser.peek() != JsonToken.END_DOCUMENT;
-                    } catch (MalformedJsonException e) {
-                        throw new JsonSyntaxException(e);
+                    } catch (IOException e) {
+                        throw new JsonIOException(e);
                     }
-                } catch (IOException e2) {
-                    throw new JsonIOException(e2);
+                } catch (MalformedJsonException e2) {
+                    throw new JsonSyntaxException(e2);
                 }
             } catch (Throwable th) {
                 throw th;

@@ -34,7 +34,6 @@ import com.samsung.android.multiwindow.MultiWindowUtils;
 import com.samsung.android.rune.CoreRune;
 import com.samsung.android.view.SemWindowManager;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class FlexPanelStartController {
     public final Context mContext;
@@ -50,7 +49,6 @@ public class FlexPanelStartController {
     public final int mRotation;
     public final SemStatusBarManager mSemStatusBarManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class H extends Handler {
         public H(Looper looper) {
             super(looper);
@@ -66,9 +64,9 @@ public class FlexPanelStartController {
                 Intent intent = new Intent("android.intent.action.AUTORUN_FLEX_PANEL");
                 intent.setComponent(MultiWindowUtils.FLEX_PANEL_COMPONENT_NAME);
                 intent.setFlags(337907712);
-                ActivityOptions makeBasic = ActivityOptions.makeBasic();
-                makeBasic.setLaunchDisplayId(0);
-                flexPanelStartController.mContext.startActivityAsUser(intent, makeBasic.toBundle(), UserHandle.CURRENT);
+                ActivityOptions activityOptionsMakeBasic = ActivityOptions.makeBasic();
+                activityOptionsMakeBasic.setLaunchDisplayId(0);
+                flexPanelStartController.mContext.startActivityAsUser(intent, activityOptionsMakeBasic.toBundle(), UserHandle.CURRENT);
                 return;
             }
             if (i == 2) {
@@ -107,17 +105,17 @@ public class FlexPanelStartController {
         this.mIsFolded = SemWindowManager.getInstance().isFolded();
         ((DeviceStateManager) context.getSystemService(DeviceStateManager.class)).registerCallback(new HandlerExecutor(h), new DeviceStateManager.DeviceStateCallback() { // from class: com.android.wm.shell.flexpanel.FlexPanelStartController$$ExternalSyntheticLambda1
             public final void onDeviceStateChanged(DeviceState deviceState) {
-                FlexPanelStartController flexPanelStartController = FlexPanelStartController.this;
+                FlexPanelStartController flexPanelStartController = this.f$0;
                 boolean z = deviceState.getIdentifier() == 1;
                 if (flexPanelStartController.mIsFolded && !z) {
                     SystemClock.elapsedRealtime();
                 }
                 flexPanelStartController.mIsFolded = z;
-                boolean contains = deviceState.getConfiguration().getPhysicalProperties().contains(2);
-                CarrierTextManager$$ExternalSyntheticOutline0.m(new StringBuilder("OnDeviceStateChanged: mIsTableMode="), flexPanelStartController.mIsTableMode, ", isTableMode=", contains, "FlexPanelStartController");
-                if (flexPanelStartController.mIsTableMode != contains) {
-                    EmergencyButtonController$$ExternalSyntheticOutline0.m("onFoldStateTableModeChanged: isTableMode=", "FlexPanelStartController", contains);
-                    flexPanelStartController.mIsTableMode = contains;
+                boolean zContains = deviceState.getConfiguration().getPhysicalProperties().contains(2);
+                CarrierTextManager$$ExternalSyntheticOutline0.m(new StringBuilder("OnDeviceStateChanged: mIsTableMode="), flexPanelStartController.mIsTableMode, ", isTableMode=", zContains, "FlexPanelStartController");
+                if (flexPanelStartController.mIsTableMode != zContains) {
+                    EmergencyButtonController$$ExternalSyntheticOutline0.m("onFoldStateTableModeChanged: isTableMode=", "FlexPanelStartController", zContains);
+                    flexPanelStartController.mIsTableMode = zContains;
                     flexPanelStartController.onFlexModeChanged();
                 }
             }
@@ -170,7 +168,7 @@ public class FlexPanelStartController {
         this.mMwEnabled = MultiWindowCoreState.MW_ENABLED;
         ActivityThread.currentActivityThread().registerMultiWindowCoreStateListener(new MultiWindowCoreState.MultiWindowCoreStateListener() { // from class: com.android.wm.shell.flexpanel.FlexPanelStartController$$ExternalSyntheticLambda0
             public final void onMultiWindowCoreStateChanged(int i) {
-                FlexPanelStartController flexPanelStartController = FlexPanelStartController.this;
+                FlexPanelStartController flexPanelStartController = this.f$0;
                 if ((i & 1) != 0) {
                     boolean z = flexPanelStartController.mMwEnabled;
                     boolean z2 = MultiWindowCoreState.MW_ENABLED;

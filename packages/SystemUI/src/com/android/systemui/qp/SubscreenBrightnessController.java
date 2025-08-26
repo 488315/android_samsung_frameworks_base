@@ -29,7 +29,6 @@ import com.android.systemui.util.SettingsHelper;
 import com.android.systemui.util.SystemUIAnalytics;
 import com.android.systemui.util.ViewController;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SubscreenBrightnessController extends ViewController {
     public static final Uri HIGH_BRIGHTNESS_MODE_ENTER_URI = Settings.System.getUriFor("high_brightness_mode_pms_enter");
@@ -64,7 +63,6 @@ public class SubscreenBrightnessController extends ViewController {
     public final AnonymousClass2 mUpdateSliderRunnable;
     public final SubroomBrightnessSettingsView mView;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class BrightnessObserver extends ContentObserver {
         public final ContentResolver mCr;
         public final AnonymousClass1 mHighBrightnessModeEnterRunnable;
@@ -104,17 +102,17 @@ public class SubscreenBrightnessController extends ViewController {
     }
 
     /* renamed from: -$$Nest$monProgressSnap, reason: not valid java name */
-    public static void m2878$$Nest$monProgressSnap(SubscreenBrightnessController subscreenBrightnessController, SeekBar seekBar) {
+    public static void m2895$$Nest$monProgressSnap(SubscreenBrightnessController subscreenBrightnessController, SeekBar seekBar) {
         subscreenBrightnessController.getClass();
         int progress = seekBar.getProgress();
         if (!QpRune.QUICK_SUBSCREEN_PANEL) {
             int i = Integer.MAX_VALUE;
             int i2 = 0;
             for (int i3 : subscreenBrightnessController.mView.mBrightnessLevels) {
-                int abs = Math.abs(i3 - progress);
-                if (abs < i) {
+                int iAbs = Math.abs(i3 - progress);
+                if (iAbs < i) {
                     i2 = i3;
-                    i = abs;
+                    i = iAbs;
                 }
             }
             progress = i2;
@@ -123,7 +121,7 @@ public class SubscreenBrightnessController extends ViewController {
     }
 
     /* renamed from: -$$Nest$mupdateSlider, reason: not valid java name */
-    public static void m2879$$Nest$mupdateSlider(final SubscreenBrightnessController subscreenBrightnessController, float f) {
+    public static void m2896$$Nest$mupdateSlider(final SubscreenBrightnessController subscreenBrightnessController, float f) {
         StringBuilder sb = new StringBuilder("mMinimumBacklight=");
         float f2 = subscreenBrightnessController.mMinimumBacklight;
         sb.append(f2);
@@ -142,15 +140,15 @@ public class SubscreenBrightnessController extends ViewController {
             }
             subscreenBrightnessController.mSliderAnimationDuration = autoBrightnessTransitionTime;
         }
-        int round = Math.round((f * f3) - f2);
-        Log.d("SubscreenBrightnessController", "updateSlider() = " + round + ", brightnessValue = " + f + ", min = " + f2 + " max = " + f3);
+        int iRound = Math.round((f * f3) - f2);
+        Log.d("SubscreenBrightnessController", "updateSlider() = " + iRound + ", brightnessValue = " + f + ", min = " + f2 + " max = " + f3);
         if (QpRune.QUICK_SUBSCREEN_PANEL && subscreenBrightnessController.mBrightnessDialog != null) {
             Log.d("SubscreenBrightnessController", "updateSlider() - BrightnessDialog resetTimer()");
         }
         boolean z = mControlValueInitialized;
         SubroomBrightnessSettingsView subroomBrightnessSettingsView = subscreenBrightnessController.mView;
         if (!z || subroomBrightnessSettingsView.getVisibility() != 0) {
-            subroomBrightnessSettingsView.setProgress(round);
+            subroomBrightnessSettingsView.setProgress(iRound);
             mControlValueInitialized = true;
             return;
         }
@@ -158,12 +156,12 @@ public class SubscreenBrightnessController extends ViewController {
         if (valueAnimator != null && valueAnimator.isStarted()) {
             subscreenBrightnessController.mSliderAnimator.cancel();
         }
-        ValueAnimator ofInt = ValueAnimator.ofInt(subroomBrightnessSettingsView.mSeekBar.getProgress(), round);
-        subscreenBrightnessController.mSliderAnimator = ofInt;
-        ofInt.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.qp.SubscreenBrightnessController$$ExternalSyntheticLambda0
+        ValueAnimator valueAnimatorOfInt = ValueAnimator.ofInt(subroomBrightnessSettingsView.mSeekBar.getProgress(), iRound);
+        subscreenBrightnessController.mSliderAnimator = valueAnimatorOfInt;
+        valueAnimatorOfInt.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.qp.SubscreenBrightnessController$$ExternalSyntheticLambda0
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator2) {
-                SubscreenBrightnessController subscreenBrightnessController2 = SubscreenBrightnessController.this;
+                SubscreenBrightnessController subscreenBrightnessController2 = this.f$0;
                 boolean z2 = SubscreenBrightnessController.mExternalChange;
                 subscreenBrightnessController2.getClass();
                 SubscreenBrightnessController.mExternalChange = true;
@@ -252,7 +250,7 @@ public class SubscreenBrightnessController extends ViewController {
                     int i = message.what;
                     SubscreenBrightnessController subscreenBrightnessController = SubscreenBrightnessController.this;
                     if (i == 1) {
-                        SubscreenBrightnessController.m2879$$Nest$mupdateSlider(subscreenBrightnessController, Float.intBitsToFloat(message.arg1));
+                        SubscreenBrightnessController.m2896$$Nest$mupdateSlider(subscreenBrightnessController, Float.intBitsToFloat(message.arg1));
                     } else if (i != 10) {
                         super.handleMessage(message);
                     } else {
@@ -260,10 +258,10 @@ public class SubscreenBrightnessController extends ViewController {
                             z = false;
                         }
                         subscreenBrightnessController.getClass();
-                        StringBuilder m = RowView$$ExternalSyntheticOutline0.m("updateHighBrightnessModeEnter : ", ", slider is ", z);
+                        StringBuilder sbM = RowView$$ExternalSyntheticOutline0.m("updateHighBrightnessModeEnter : ", ", slider is ", z);
                         SubroomBrightnessSettingsView subroomBrightnessSettingsView2 = subscreenBrightnessController.mView;
-                        m.append(subroomBrightnessSettingsView2.mSeekBar);
-                        Log.d("SubscreenBrightnessController", m.toString());
+                        sbM.append(subroomBrightnessSettingsView2.mSeekBar);
+                        Log.d("SubscreenBrightnessController", sbM.toString());
                         SubScreenBrightnessToggleSeekBar subScreenBrightnessToggleSeekBar = subroomBrightnessSettingsView2.mSeekBar;
                         if (subScreenBrightnessToggleSeekBar != null) {
                             subScreenBrightnessToggleSeekBar.mHighBrightnessModeEnter = z;
@@ -316,7 +314,7 @@ public class SubscreenBrightnessController extends ViewController {
                 SubscreenBrightnessController.mTracking = false;
                 SubscreenBrightnessController subscreenBrightnessController = SubscreenBrightnessController.this;
                 subscreenBrightnessController.onChanged(subscreenBrightnessController.mView.mSeekBar.getProgress(), false, true);
-                SubscreenBrightnessController.m2878$$Nest$monProgressSnap(SubscreenBrightnessController.this, seekBar);
+                SubscreenBrightnessController.m2895$$Nest$monProgressSnap(SubscreenBrightnessController.this, seekBar);
                 ValueAnimator valueAnimator = SubscreenBrightnessController.this.mView.mThumbAnimator;
                 if (valueAnimator != null) {
                     valueAnimator.reverse();

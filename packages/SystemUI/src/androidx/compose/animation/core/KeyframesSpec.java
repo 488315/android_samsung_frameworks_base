@@ -8,12 +8,10 @@ import java.util.Arrays;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class KeyframesSpec<T> implements DurationBasedAnimationSpec<T> {
     public final KeyframesSpecConfig config;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class KeyframeEntity<T> extends KeyframeBaseEntity<T> {
         public final int arcMode;
 
@@ -41,34 +39,19 @@ public final class KeyframesSpec<T> implements DurationBasedAnimationSpec<T> {
 
         public final int hashCode() {
             Object obj = this.value;
-            int hashCode = obj != null ? obj.hashCode() : 0;
+            int iHashCode = obj != null ? obj.hashCode() : 0;
             ArcMode.Companion companion = ArcMode.Companion;
-            return this.easing.hashCode() + ReorderTile$$ExternalSyntheticOutline0.m(this.arcMode, hashCode * 31, 31);
+            return this.easing.hashCode() + ReorderTile$$ExternalSyntheticOutline0.m(this.arcMode, iHashCode * 31, 31);
         }
 
         /* JADX WARN: Illegal instructions before constructor call */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public KeyframeEntity(java.lang.Object r1, androidx.compose.animation.core.Easing r2, int r3, int r4, kotlin.jvm.internal.DefaultConstructorMarker r5) {
-            /*
-                r0 = this;
-                r5 = r4 & 2
-                if (r5 == 0) goto L6
-                androidx.compose.animation.core.EasingKt$$ExternalSyntheticLambda0 r2 = androidx.compose.animation.core.EasingKt.LinearEasing
-            L6:
-                r4 = r4 & 4
-                if (r4 == 0) goto L10
-                androidx.compose.animation.core.ArcMode$Companion r3 = androidx.compose.animation.core.ArcMode.Companion
-                r3.getClass()
-                r3 = 0
-            L10:
-                r4 = 0
-                r0.<init>(r1, r2, r3, r4)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: androidx.compose.animation.core.KeyframesSpec.KeyframeEntity.<init>(java.lang.Object, androidx.compose.animation.core.Easing, int, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+        public KeyframeEntity(Object obj, Easing easing, int i, int i2, DefaultConstructorMarker defaultConstructorMarker) {
+            easing = (i2 & 2) != 0 ? EasingKt.LinearEasing : easing;
+            if ((i2 & 4) != 0) {
+                ArcMode.Companion.getClass();
+                i = 0;
+            }
+            this(obj, easing, i, null);
         }
 
         private KeyframeEntity(T t, Easing easing, int i) {
@@ -77,7 +60,6 @@ public final class KeyframesSpec<T> implements DurationBasedAnimationSpec<T> {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class KeyframesSpecConfig<T> extends KeyframesSpecBaseConfig<T, KeyframeEntity<T>> {
         public KeyframesSpecConfig() {
             super(null);
@@ -129,7 +111,7 @@ public final class KeyframesSpec<T> implements DurationBasedAnimationSpec<T> {
                             iArr2 = iArr3;
                             objArr2 = objArr3;
                             jArr2 = jArr3;
-                            mutableIntObjectMap2.set(i7, new VectorizedKeyframeSpecElementInfo((AnimationVector) ((TwoWayConverterImpl) twoWayConverter).convertToVector.mo779invoke(keyframeEntity.value), keyframeEntity.easing, keyframeEntity.arcMode, null));
+                            mutableIntObjectMap2.set(i7, new VectorizedKeyframeSpecElementInfo((AnimationVector) ((TwoWayConverterImpl) twoWayConverter).convertToVector.mo781invoke(keyframeEntity.value), keyframeEntity.easing, keyframeEntity.arcMode, null));
                         } else {
                             iArr2 = iArr3;
                             objArr2 = objArr3;

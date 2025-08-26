@@ -6,7 +6,6 @@ import com.android.wm.shell.common.SingleInstanceRemoteListener;
 import com.android.wm.shell.desktopmode.DesktopTasksController;
 import com.android.wm.shell.protolog.ShellProtoLogGroup;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DesktopTasksController$IDesktopModeImpl$taskbarDesktopTaskListener$1 {
     public final /* synthetic */ DesktopTasksController.IDesktopModeImpl this$0;
@@ -26,13 +25,13 @@ public final class DesktopTasksController$IDesktopModeImpl$taskbarDesktopTaskLis
             public final void accept(Object obj) {
                 boolean z2 = z;
                 IDesktopTaskListener$Stub$Proxy iDesktopTaskListener$Stub$Proxy = (IDesktopTaskListener$Stub$Proxy) ((IDesktopTaskListener) obj);
-                Parcel obtain = Parcel.obtain(iDesktopTaskListener$Stub$Proxy.mRemote);
+                Parcel parcelObtain = Parcel.obtain(iDesktopTaskListener$Stub$Proxy.mRemote);
                 try {
-                    obtain.writeInterfaceToken("com.android.wm.shell.desktopmode.IDesktopTaskListener");
-                    obtain.writeBoolean(z2);
-                    iDesktopTaskListener$Stub$Proxy.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken("com.android.wm.shell.desktopmode.IDesktopTaskListener");
+                    parcelObtain.writeBoolean(z2);
+                    iDesktopTaskListener$Stub$Proxy.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         });

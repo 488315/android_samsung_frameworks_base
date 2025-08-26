@@ -6,18 +6,15 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface IKeyProvisioningCallback extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.knox.ex.knoxAI.IKeyProvisioningCallback";
 
     void onFinished(int i) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IKeyProvisioningCallback {
         public static final int TRANSACTION_onFinished = 1;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements IKeyProvisioningCallback {
             public IBinder mRemote;
 
@@ -36,16 +33,16 @@ public interface IKeyProvisioningCallback extends IInterface {
 
             @Override // com.samsung.android.knox.ex.knoxAI.IKeyProvisioningCallback
             public void onFinished(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IKeyProvisioningCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IKeyProvisioningCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -58,8 +55,8 @@ public interface IKeyProvisioningCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IKeyProvisioningCallback.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IKeyProvisioningCallback)) ? new Proxy(iBinder) : (IKeyProvisioningCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IKeyProvisioningCallback.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IKeyProvisioningCallback)) ? new Proxy(iBinder) : (IKeyProvisioningCallback) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder
@@ -74,9 +71,9 @@ public interface IKeyProvisioningCallback extends IInterface {
             if (i != 1) {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
-            int readInt = parcel.readInt();
+            int i3 = parcel.readInt();
             parcel.enforceNoDataAvail();
-            onFinished(readInt);
+            onFinished(i3);
             parcel2.writeNoException();
             return true;
         }
@@ -87,7 +84,6 @@ public interface IKeyProvisioningCallback extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements IKeyProvisioningCallback {
         @Override // android.os.IInterface
         public IBinder asBinder() {

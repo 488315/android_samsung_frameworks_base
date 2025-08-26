@@ -50,26 +50,26 @@ public class ToPackedGrayFilter extends Filter {
     }
 
     private FrameFormat convertInputFormat(FrameFormat frameFormat) {
-        int i = this.mOWidth;
-        int i2 = this.mOHeight;
+        int iMax = this.mOWidth;
+        int iMax2 = this.mOHeight;
         int width = frameFormat.getWidth();
         int height = frameFormat.getHeight();
         if (this.mOWidth == 0) {
-            i = width;
+            iMax = width;
         }
         if (this.mOHeight == 0) {
-            i2 = height;
+            iMax2 = height;
         }
         if (this.mKeepAspectRatio) {
             if (width > height) {
-                i = Math.max(i, i2);
-                i2 = (height * i) / width;
+                iMax = Math.max(iMax, iMax2);
+                iMax2 = (height * iMax) / width;
             } else {
-                i2 = Math.max(i, i2);
-                i = (width * i2) / height;
+                iMax2 = Math.max(iMax, iMax2);
+                iMax = (width * iMax2) / height;
             }
         }
-        return ImageFormat.create((i <= 0 || i >= 4) ? 4 * (i / 4) : 4, i2, 1, 2);
+        return ImageFormat.create((iMax <= 0 || iMax >= 4) ? 4 * (iMax / 4) : 4, iMax2, 1, 2);
     }
 
     @Override // android.filterfw.core.Filter
@@ -79,21 +79,21 @@ public class ToPackedGrayFilter extends Filter {
 
     @Override // android.filterfw.core.Filter
     public void process(FilterContext filterContext) {
-        Frame pullInput = pullInput("image");
-        FrameFormat format = pullInput.getFormat();
-        FrameFormat convertInputFormat = convertInputFormat(format);
-        int width = convertInputFormat.getWidth();
-        int height = convertInputFormat.getHeight();
+        Frame framePullInput = pullInput("image");
+        FrameFormat format = framePullInput.getFormat();
+        FrameFormat frameFormatConvertInputFormat = convertInputFormat(format);
+        int width = frameFormatConvertInputFormat.getWidth();
+        int height = frameFormatConvertInputFormat.getHeight();
         checkOutputDimensions(width, height);
         this.mProgram.setHostValue("pix_stride", Float.valueOf(1.0f / width));
-        MutableFrameFormat mutableCopy = format.mutableCopy();
-        mutableCopy.setDimensions(width / 4, height);
-        Frame newFrame = filterContext.getFrameManager().newFrame(mutableCopy);
-        this.mProgram.process(pullInput, newFrame);
-        Frame newFrame2 = filterContext.getFrameManager().newFrame(convertInputFormat);
-        newFrame2.setDataFromFrame(newFrame);
-        newFrame.release();
-        pushOutput("image", newFrame2);
-        newFrame2.release();
+        MutableFrameFormat mutableFrameFormatMutableCopy = format.mutableCopy();
+        mutableFrameFormatMutableCopy.setDimensions(width / 4, height);
+        Frame frameNewFrame = filterContext.getFrameManager().newFrame(mutableFrameFormatMutableCopy);
+        this.mProgram.process(framePullInput, frameNewFrame);
+        Frame frameNewFrame2 = filterContext.getFrameManager().newFrame(frameFormatConvertInputFormat);
+        frameNewFrame2.setDataFromFrame(frameNewFrame);
+        frameNewFrame.release();
+        pushOutput("image", frameNewFrame2);
+        frameNewFrame2.release();
     }
 }

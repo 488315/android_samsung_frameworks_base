@@ -93,12 +93,12 @@ public final class AlternativeSpan implements Parcelable {
     }
 
     AlternativeSpan(Parcel parcel) {
-        int readInt = parcel.readInt();
-        int readInt2 = parcel.readInt();
+        int i = parcel.readInt();
+        int i2 = parcel.readInt();
         ArrayList arrayList = new ArrayList();
         parcel.readStringList(arrayList);
-        this.mStartPosition = readInt;
-        this.mEndPosition = readInt2;
+        this.mStartPosition = i;
+        this.mEndPosition = i2;
         this.mAlternatives = arrayList;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) arrayList);
         onConstructed();

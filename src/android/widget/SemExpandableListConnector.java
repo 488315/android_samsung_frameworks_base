@@ -155,9 +155,9 @@ class SemExpandableListConnector extends BaseAdapter implements Filterable {
     public boolean isEnabled(int i) {
         PositionMetadata unflattenedPos = getUnflattenedPos(i);
         SemExpandableListPosition semExpandableListPosition = unflattenedPos.position;
-        boolean isChildSelectable = semExpandableListPosition.type == 1 ? this.mExpandableListAdapter.isChildSelectable(semExpandableListPosition.groupPos, semExpandableListPosition.childPos) : true;
+        boolean zIsChildSelectable = semExpandableListPosition.type == 1 ? this.mExpandableListAdapter.isChildSelectable(semExpandableListPosition.groupPos, semExpandableListPosition.childPos) : true;
         unflattenedPos.recycle();
-        return isChildSelectable;
+        return zIsChildSelectable;
     }
 
     @Override // android.widget.Adapter
@@ -205,12 +205,12 @@ class SemExpandableListConnector extends BaseAdapter implements Filterable {
         View childView;
         PositionMetadata unflattenedPos = getUnflattenedPos(i);
         ItemDecorator itemDecorator = this.mItemDecorator;
-        View unfoldDecoratedView = itemDecorator != null ? itemDecorator.unfoldDecoratedView(view) : view;
+        View viewUnfoldDecoratedView = itemDecorator != null ? itemDecorator.unfoldDecoratedView(view) : view;
         if (unflattenedPos.position.type == 2) {
-            childView = this.mExpandableListAdapter.getGroupView(unflattenedPos.position.groupPos, unflattenedPos.isExpanded(), unfoldDecoratedView, viewGroup);
+            childView = this.mExpandableListAdapter.getGroupView(unflattenedPos.position.groupPos, unflattenedPos.isExpanded(), viewUnfoldDecoratedView, viewGroup);
         } else {
             if (unflattenedPos.position.type == 1) {
-                childView = this.mExpandableListAdapter.getChildView(unflattenedPos.position.groupPos, unflattenedPos.position.childPos, unflattenedPos.groupMetadata.lastChildFlPos == i, unfoldDecoratedView, viewGroup);
+                childView = this.mExpandableListAdapter.getChildView(unflattenedPos.position.groupPos, unflattenedPos.position.childPos, unflattenedPos.groupMetadata.lastChildFlPos == i, viewUnfoldDecoratedView, viewGroup);
             } else {
                 throw new RuntimeException("Flat list position is of unknown type");
             }
@@ -225,22 +225,22 @@ class SemExpandableListConnector extends BaseAdapter implements Filterable {
 
     @Override // android.widget.BaseAdapter, android.widget.Adapter
     public int getItemViewType(int i) {
-        int i2;
+        int groupTypeCount;
         PositionMetadata unflattenedPos = getUnflattenedPos(i);
         SemExpandableListPosition semExpandableListPosition = unflattenedPos.position;
         ExpandableListAdapter expandableListAdapter = this.mExpandableListAdapter;
         if (expandableListAdapter instanceof HeterogeneousExpandableList) {
             HeterogeneousExpandableList heterogeneousExpandableList = (HeterogeneousExpandableList) expandableListAdapter;
             if (semExpandableListPosition.type == 2) {
-                i2 = heterogeneousExpandableList.getGroupType(semExpandableListPosition.groupPos);
+                groupTypeCount = heterogeneousExpandableList.getGroupType(semExpandableListPosition.groupPos);
             } else {
-                i2 = heterogeneousExpandableList.getGroupTypeCount() + heterogeneousExpandableList.getChildType(semExpandableListPosition.groupPos, semExpandableListPosition.childPos);
+                groupTypeCount = heterogeneousExpandableList.getGroupTypeCount() + heterogeneousExpandableList.getChildType(semExpandableListPosition.groupPos, semExpandableListPosition.childPos);
             }
         } else {
-            i2 = semExpandableListPosition.type == 2 ? 0 : 1;
+            groupTypeCount = semExpandableListPosition.type == 2 ? 0 : 1;
         }
         unflattenedPos.recycle();
-        return i2;
+        return groupTypeCount;
     }
 
     @Override // android.widget.BaseAdapter, android.widget.Adapter
@@ -268,13 +268,13 @@ class SemExpandableListConnector extends BaseAdapter implements Filterable {
             boolean z3 = false;
             for (int i = size - 1; i >= 0; i--) {
                 GroupMetadata groupMetadata = arrayList.get(i);
-                int findGroupPosition = findGroupPosition(groupMetadata.gId, groupMetadata.gPos);
-                if (findGroupPosition != groupMetadata.gPos) {
-                    if (findGroupPosition == -1) {
+                int iFindGroupPosition = findGroupPosition(groupMetadata.gId, groupMetadata.gPos);
+                if (iFindGroupPosition != groupMetadata.gPos) {
+                    if (iFindGroupPosition == -1) {
                         arrayList.remove(i);
                         size--;
                     }
-                    groupMetadata.gPos = findGroupPosition;
+                    groupMetadata.gPos = iFindGroupPosition;
                     if (!z3) {
                         z3 = true;
                     }
@@ -303,15 +303,15 @@ class SemExpandableListConnector extends BaseAdapter implements Filterable {
     }
 
     boolean collapseGroup(int i) {
-        SemExpandableListPosition obtain = SemExpandableListPosition.obtain(2, i, -1, -1);
-        PositionMetadata flattenedPos = getFlattenedPos(obtain);
-        obtain.recycle();
+        SemExpandableListPosition semExpandableListPositionObtain = SemExpandableListPosition.obtain(2, i, -1, -1);
+        PositionMetadata flattenedPos = getFlattenedPos(semExpandableListPositionObtain);
+        semExpandableListPositionObtain.recycle();
         if (flattenedPos == null) {
             return false;
         }
-        boolean collapseGroup = collapseGroup(flattenedPos);
+        boolean zCollapseGroup = collapseGroup(flattenedPos);
         flattenedPos.recycle();
-        return collapseGroup;
+        return zCollapseGroup;
     }
 
     boolean collapseGroup(PositionMetadata positionMetadata) {
@@ -326,15 +326,15 @@ class SemExpandableListConnector extends BaseAdapter implements Filterable {
     }
 
     boolean expandGroup(int i) {
-        SemExpandableListPosition obtain = SemExpandableListPosition.obtain(2, i, -1, -1);
-        PositionMetadata flattenedPos = getFlattenedPos(obtain);
+        SemExpandableListPosition semExpandableListPositionObtain = SemExpandableListPosition.obtain(2, i, -1, -1);
+        PositionMetadata flattenedPos = getFlattenedPos(semExpandableListPositionObtain);
         if (flattenedPos == null) {
             return false;
         }
-        obtain.recycle();
-        boolean expandGroup = expandGroup(flattenedPos);
+        semExpandableListPositionObtain.recycle();
+        boolean zExpandGroup = expandGroup(flattenedPos);
         flattenedPos.recycle();
-        return expandGroup;
+        return zExpandGroup;
     }
 
     boolean expandGroup(PositionMetadata positionMetadata) {
@@ -346,20 +346,20 @@ class SemExpandableListConnector extends BaseAdapter implements Filterable {
         }
         if (this.mExpGroupMetadataList.size() >= this.mMaxExpGroupCount) {
             GroupMetadata groupMetadata = this.mExpGroupMetadataList.get(0);
-            int indexOf = this.mExpGroupMetadataList.indexOf(groupMetadata);
+            int iIndexOf = this.mExpGroupMetadataList.indexOf(groupMetadata);
             collapseGroup(groupMetadata.gPos);
-            if (positionMetadata.groupInsertIndex > indexOf) {
+            if (positionMetadata.groupInsertIndex > iIndexOf) {
                 positionMetadata.groupInsertIndex--;
             }
         }
         if (positionMetadata.groupInsertIndex > this.mExpGroupMetadataList.size()) {
             return false;
         }
-        GroupMetadata obtain = GroupMetadata.obtain(-1, -1, positionMetadata.position.groupPos, this.mExpandableListAdapter.getGroupId(positionMetadata.position.groupPos));
-        this.mExpGroupMetadataList.add(positionMetadata.groupInsertIndex, obtain);
+        GroupMetadata groupMetadataObtain = GroupMetadata.obtain(-1, -1, positionMetadata.position.groupPos, this.mExpandableListAdapter.getGroupId(positionMetadata.position.groupPos));
+        this.mExpGroupMetadataList.add(positionMetadata.groupInsertIndex, groupMetadataObtain);
         refreshExpGroupMetadataList(false, false);
         notifyDataSetChanged();
-        this.mExpandableListAdapter.onGroupExpanded(obtain.gPos);
+        this.mExpandableListAdapter.onGroupExpanded(groupMetadataObtain.gPos);
         return true;
     }
 
@@ -423,17 +423,17 @@ class SemExpandableListConnector extends BaseAdapter implements Filterable {
             return -1;
         }
         int i2 = groupCount - 1;
-        int min = Math.min(i2, Math.max(0, i));
-        long uptimeMillis = SystemClock.uptimeMillis() + 100;
+        int iMin = Math.min(i2, Math.max(0, i));
+        long jUptimeMillis = SystemClock.uptimeMillis() + 100;
         ExpandableListAdapter adapter = getAdapter();
         if (adapter == null) {
             return -1;
         }
-        int i3 = min;
+        int i3 = iMin;
         int i4 = i3;
         boolean z = false;
-        while (SystemClock.uptimeMillis() <= uptimeMillis) {
-            if (adapter.getGroupId(min) != j) {
+        while (SystemClock.uptimeMillis() <= jUptimeMillis) {
+            if (adapter.getGroupId(iMin) != j) {
                 boolean z2 = i3 == i2;
                 boolean z3 = i4 == 0;
                 if (z2 && z3) {
@@ -442,14 +442,14 @@ class SemExpandableListConnector extends BaseAdapter implements Filterable {
                 if (z3 || (z && !z2)) {
                     i3++;
                     z = false;
-                    min = i3;
+                    iMin = i3;
                 } else if (z2 || (!z && !z3)) {
                     i4--;
                     z = true;
-                    min = i4;
+                    iMin = i4;
                 }
             } else {
-                return min;
+                return iMin;
             }
         }
         return -1;
@@ -557,9 +557,9 @@ class SemExpandableListConnector extends BaseAdapter implements Filterable {
         private static PositionMetadata getRecycledOrCreate() {
             synchronized (sPool) {
                 if (sPool.size() > 0) {
-                    PositionMetadata remove = sPool.remove(0);
-                    remove.resetState();
-                    return remove;
+                    PositionMetadata positionMetadataRemove = sPool.remove(0);
+                    positionMetadataRemove.resetState();
+                    return positionMetadataRemove;
                 }
                 return new PositionMetadata();
             }

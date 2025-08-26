@@ -15,7 +15,6 @@ import com.android.systemui.shared.clocks.view.FlexClockView;
 import com.android.systemui.shared.clocks.view.SimpleDigitalClockTextView;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class FlexClockFaceController$animations$1 implements ClockAnimations {
     public final /* synthetic */ ClockContext $clockCtx;
@@ -65,10 +64,10 @@ public final class FlexClockFaceController$animations$1 implements ClockAnimatio
             AxisDefinition axisDefinition = GSFAxes.WIDTH;
             fontUtils.getClass();
             Float f = clockAxisStyle2.get(axisDefinition.tag);
-            float floatValue = f != null ? f.floatValue() : axisDefinition.defaultValue;
+            float fFloatValue = f != null ? f.floatValue() : axisDefinition.defaultValue;
             FlexClockFaceController.Companion.getClass();
             float f2 = FlexClockFaceController.SMALL_CLOCK_MAX_WDTH;
-            if (floatValue > f2) {
+            if (fFloatValue > f2) {
                 clockAxisStyle2.set(axisDefinition.tag, f2);
             }
         }
@@ -111,13 +110,13 @@ public final class FlexClockFaceController$animations$1 implements ClockAnimatio
                     } else {
                         list = flexClockView.isLayoutRtl() ? FlexClockView.MOVE_RIGHT_DELAYS : FlexClockView.MOVE_LEFT_DELAYS;
                     }
-                    float floatValue = ((Number) list.get(i3)).floatValue() * 0.033f;
+                    float fFloatValue = ((Number) list.get(i3)).floatValue() * 0.033f;
                     Interpolator interpolator = FlexClockView.MOVE_INTERPOLATOR;
                     FlexClockView.Companion companion = FlexClockView.Companion;
                     int size = flexClockView.getChildViews().size();
                     companion.getClass();
                     float f2 = left;
-                    float interpolation = ((PathInterpolator) interpolator).getInterpolation(MathUtils.constrainedMap(0.0f, 1.0f, floatValue, (1.0f - ((size - 1) * 0.033f)) + floatValue, f)) * f2;
+                    float interpolation = ((PathInterpolator) interpolator).getInterpolation(MathUtils.constrainedMap(0.0f, 1.0f, fFloatValue, (1.0f - ((size - 1) * 0.033f)) + fFloatValue, f)) * f2;
                     float f3 = interpolation - f2;
                     if (z && interpolation < 0.0f) {
                         f3 *= -1;

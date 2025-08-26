@@ -141,15 +141,15 @@ public class ColorExtractor {
         }
         int[] iArr5 = iArr3;
         boolean[] zArr4 = zArr;
-        long freeMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+        long jFreeMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
         Arrays.fill(iArr4, 0);
         int i8 = 0;
         while (i8 < length) {
             Arrays.fill(jArr[i8], 0L);
             i8++;
-            freeMemory = freeMemory;
+            jFreeMemory = jFreeMemory;
         }
-        long j = freeMemory;
+        long j = jFreeMemory;
         int length2 = iArr.length;
         int i9 = 0;
         boolean z = false;
@@ -162,7 +162,7 @@ public class ColorExtractor {
             } else {
                 i10++;
                 IUXColorUtils.colorToHSV(i11, fArr4);
-                boolean checkGayScaleWithSV = checkGayScaleWithSV(fArr4, f, f2);
+                boolean zCheckGayScaleWithSV = checkGayScaleWithSV(fArr4, f, f2);
                 float f3 = Float.MAX_VALUE;
                 int i12 = 0;
                 i4 = length2;
@@ -171,18 +171,18 @@ public class ColorExtractor {
                     int i14 = i13;
                     float[] fArr6 = fArr[i14];
                     boolean z2 = zArr2[i14];
-                    if (!checkGayScaleWithSV && !z2) {
-                        float colorDistance_hsv_square2 = colorDistance_hsv_square2(fArr4, fArr6, fArr2);
-                        if (colorDistance_hsv_square2 < f3) {
+                    if (!zCheckGayScaleWithSV && !z2) {
+                        float fColorDistance_hsv_square2 = colorDistance_hsv_square2(fArr4, fArr6, fArr2);
+                        if (fColorDistance_hsv_square2 < f3) {
                             i12 = i14;
-                            f3 = colorDistance_hsv_square2;
+                            f3 = fColorDistance_hsv_square2;
                             z = false;
                         }
-                    } else if (checkGayScaleWithSV && z2) {
-                        float colorDistance_hsv_square22 = colorDistance_hsv_square2(fArr4, fArr6, fArr3);
-                        if (colorDistance_hsv_square22 < f3) {
+                    } else if (zCheckGayScaleWithSV && z2) {
+                        float fColorDistance_hsv_square22 = colorDistance_hsv_square2(fArr4, fArr6, fArr3);
+                        if (fColorDistance_hsv_square22 < f3) {
                             i12 = i14;
-                            f3 = colorDistance_hsv_square22;
+                            f3 = fColorDistance_hsv_square22;
                             z = true;
                         }
                     }
@@ -223,9 +223,7 @@ public class ColorExtractor {
         Arrays.sort(dominantColorResultArr, new Comparator() { // from class: com.samsung.android.wallpaper.legibilitycolors.utils.ColorExtractor$$ExternalSyntheticLambda1
             @Override // java.util.Comparator
             public final int compare(Object obj, Object obj2) {
-                int compare;
-                compare = Integer.compare((int) (((ColorExtractor.DominantColorResult) obj2).percentage * 1000000.0f), (int) (((ColorExtractor.DominantColorResult) obj).percentage * 1000000.0f));
-                return compare;
+                return Integer.compare((int) (((ColorExtractor.DominantColorResult) obj2).percentage * 1000000.0f), (int) (((ColorExtractor.DominantColorResult) obj).percentage * 1000000.0f));
             }
         });
         return dominantColorResultArr;
@@ -266,16 +264,16 @@ public class ColorExtractor {
                 fArr2[1] = fArr3[1];
             }
             fArr2[2] = IUXMathUtils.range(0.0f, 1.0f, fArr3[2] + fArr[2]);
-            int HSVToColor = IUXColorUtils.HSVToColor(fArr2);
+            int iHSVToColor = IUXColorUtils.HSVToColor(fArr2);
             float f3 = Float.MAX_VALUE;
             int i4 = i;
             int i5 = i4;
             while (i4 < length2) {
                 if (Color.alpha(iArr[i4]) > 0) {
-                    float colorDistance_rgb_sqaure2 = colorDistance_rgb_sqaure2(iArr[i4], HSVToColor);
-                    if (f3 > colorDistance_rgb_sqaure2) {
+                    float fColorDistance_rgb_sqaure2 = colorDistance_rgb_sqaure2(iArr[i4], iHSVToColor);
+                    if (f3 > fColorDistance_rgb_sqaure2) {
                         i5 = i4;
-                        f3 = colorDistance_rgb_sqaure2;
+                        f3 = fColorDistance_rgb_sqaure2;
                     }
                 }
                 i4++;
@@ -292,11 +290,11 @@ public class ColorExtractor {
     }
 
     protected static float colorDistance_hsv_square2(float[] fArr, float[] fArr2, float[] fArr3) {
-        float abs = Math.abs(fArr2[0] - fArr[0]);
-        if (abs >= 180.0f) {
-            abs = 360.0f - abs;
+        float fAbs = Math.abs(fArr2[0] - fArr[0]);
+        if (fAbs >= 180.0f) {
+            fAbs = 360.0f - fAbs;
         }
-        float f = (abs / 180.0f) * fArr3[0];
+        float f = (fAbs / 180.0f) * fArr3[0];
         float f2 = (fArr2[1] - fArr[1]) * fArr3[1];
         float f3 = (fArr2[2] - fArr[2]) * fArr3[2];
         return (f * f) + (f2 * f2) + (f3 * f3);
@@ -311,20 +309,20 @@ public class ColorExtractor {
     }
 
     public static int getAverageColorFromDominantColors(DominantColorResult[] dominantColorResultArr) {
-        float f = 0.0f;
-        float f2 = 0.0f;
-        float f3 = 0.0f;
+        float fRed = 0.0f;
+        float fGreen = 0.0f;
+        float fBlue = 0.0f;
         for (DominantColorResult dominantColorResult : dominantColorResultArr) {
             int i = dominantColorResult.color;
-            float f4 = dominantColorResult.percentage;
-            if (f4 <= 0.0f) {
+            float f = dominantColorResult.percentage;
+            if (f <= 0.0f) {
                 break;
             }
-            f += Color.red(i) * f4;
-            f2 += Color.green(i) * f4;
-            f3 += Color.blue(i) * f4;
+            fRed += Color.red(i) * f;
+            fGreen += Color.green(i) * f;
+            fBlue += Color.blue(i) * f;
         }
-        return Color.rgb((int) f, (int) f2, (int) f3);
+        return Color.rgb((int) fRed, (int) fGreen, (int) fBlue);
     }
 
     public static void discardSameHSVfromDominantColors(DominantColorResult[] dominantColorResultArr, float f) {
@@ -361,8 +359,8 @@ public class ColorExtractor {
                 break;
             }
             dominantColorResult.copyHSV(fArr6);
-            boolean checkGayScaleWithSV = checkGayScaleWithSV(fArr6, f12, f13);
-            if (checkGayScaleWithSV) {
+            boolean zCheckGayScaleWithSV = checkGayScaleWithSV(fArr6, f12, f13);
+            if (zCheckGayScaleWithSV) {
                 fArr = fArr5;
                 f2 = 0.0f;
                 f3 = f11;
@@ -387,9 +385,9 @@ public class ColorExtractor {
                     break;
                 }
                 dominantColorResult2.copyHSV(fArr7);
-                boolean checkGayScaleWithSV2 = checkGayScaleWithSV(fArr7, f12, f13);
+                boolean zCheckGayScaleWithSV2 = checkGayScaleWithSV(fArr7, f12, f13);
                 fArr7[i4] = IUXColorUtils.getHumanEyeBasedHueNormalizedDistance(fArr7[i4]) * 360.0f;
-                if (checkGayScaleWithSV == checkGayScaleWithSV2) {
+                if (zCheckGayScaleWithSV == zCheckGayScaleWithSV2) {
                     fArr3 = fArr5;
                     if (IUXColorUtils.colorDistance_hsv_square2(fArr6, fArr7, fArr) < f3) {
                         float f14 = dominantColorResult.percentage + dominantColorResult2.percentage;
@@ -442,9 +440,7 @@ public class ColorExtractor {
         Arrays.sort(dominantColorResultArr, new Comparator() { // from class: com.samsung.android.wallpaper.legibilitycolors.utils.ColorExtractor$$ExternalSyntheticLambda2
             @Override // java.util.Comparator
             public final int compare(Object obj, Object obj2) {
-                int compare;
-                compare = Integer.compare((int) (((ColorExtractor.DominantColorResult) obj2).percentage * 1000000.0f), (int) (((ColorExtractor.DominantColorResult) obj).percentage * 1000000.0f));
-                return compare;
+                return Integer.compare((int) (((ColorExtractor.DominantColorResult) obj2).percentage * 1000000.0f), (int) (((ColorExtractor.DominantColorResult) obj).percentage * 1000000.0f));
             }
         });
     }
@@ -474,9 +470,7 @@ public class ColorExtractor {
         Arrays.sort(dominantColorResultArr, new Comparator() { // from class: com.samsung.android.wallpaper.legibilitycolors.utils.ColorExtractor$$ExternalSyntheticLambda0
             @Override // java.util.Comparator
             public final int compare(Object obj, Object obj2) {
-                int compare;
-                compare = Float.compare(((ColorExtractor.DominantColorResult) obj2).percentage, ((ColorExtractor.DominantColorResult) obj).percentage);
-                return compare;
+                return Float.compare(((ColorExtractor.DominantColorResult) obj2).percentage, ((ColorExtractor.DominantColorResult) obj).percentage);
             }
         });
     }
@@ -538,7 +532,7 @@ public class ColorExtractor {
         }
 
         /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-        public DominantColorResult m9628clone() {
+        public DominantColorResult m9641clone() {
             try {
                 DominantColorResult dominantColorResult = (DominantColorResult) super.clone();
                 float[] fArr = this.hsv;

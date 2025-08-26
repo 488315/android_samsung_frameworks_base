@@ -11,7 +11,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class VolumeNavigator$createNewVolumePanelDialog$1$1$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ SystemUIDialog $dialog;
@@ -47,8 +46,8 @@ final class VolumeNavigator$createNewVolumePanelDialog$1$1$1 extends SuspendLamb
         systemUIDialog.setOnDismissListener(new DialogInterface.OnDismissListener() { // from class: com.android.systemui.volume.ui.navigation.VolumeNavigator$createNewVolumePanelDialog$1$1$1.1
             @Override // android.content.DialogInterface.OnDismissListener
             public final void onDismiss(DialogInterface dialogInterface) {
-                VolumeNavigator.this.uiEventLogger.log(VolumePanelUiEvent.VOLUME_PANEL_GONE);
-                VolumeNavigator.this.volumePanelGlobalStateInteractor.setVisible(false);
+                volumeNavigator.uiEventLogger.log(VolumePanelUiEvent.VOLUME_PANEL_GONE);
+                volumeNavigator.volumePanelGlobalStateInteractor.setVisible(false);
             }
         });
         return Unit.INSTANCE;

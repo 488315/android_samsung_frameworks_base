@@ -68,9 +68,9 @@ public interface IFileIntegrityService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IFileIntegrityService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IFileIntegrityService)) {
-                return (IFileIntegrityService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IFileIntegrityService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IFileIntegrityService)) {
+                return (IFileIntegrityService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -102,15 +102,15 @@ public interface IFileIntegrityService extends IInterface {
             if (i == 1) {
                 ParcelFileDescriptor parcelFileDescriptor = (ParcelFileDescriptor) parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
                 parcel.enforceNoDataAvail();
-                IInstalld.IFsveritySetupAuthToken createAuthToken = createAuthToken(parcelFileDescriptor);
+                IInstalld.IFsveritySetupAuthToken iFsveritySetupAuthTokenCreateAuthToken = createAuthToken(parcelFileDescriptor);
                 parcel2.writeNoException();
-                parcel2.writeStrongInterface(createAuthToken);
+                parcel2.writeStrongInterface(iFsveritySetupAuthTokenCreateAuthToken);
             } else if (i == 2) {
-                IInstalld.IFsveritySetupAuthToken asInterface = IInstalld.IFsveritySetupAuthToken.Stub.asInterface(parcel.readStrongBinder());
-                String readString = parcel.readString();
-                String readString2 = parcel.readString();
+                IInstalld.IFsveritySetupAuthToken iFsveritySetupAuthTokenAsInterface = IInstalld.IFsveritySetupAuthToken.Stub.asInterface(parcel.readStrongBinder());
+                String string = parcel.readString();
+                String string2 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                int i3 = setupFsverity(asInterface, readString, readString2);
+                int i3 = setupFsverity(iFsveritySetupAuthTokenAsInterface, string, string2);
                 parcel2.writeNoException();
                 parcel2.writeInt(i3);
             } else {
@@ -137,35 +137,35 @@ public interface IFileIntegrityService extends IInterface {
 
             @Override // android.security.IFileIntegrityService
             public IInstalld.IFsveritySetupAuthToken createAuthToken(ParcelFileDescriptor parcelFileDescriptor) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IFileIntegrityService.DESCRIPTOR);
-                    obtain.writeTypedObject(parcelFileDescriptor, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IInstalld.IFsveritySetupAuthToken.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(IFileIntegrityService.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IInstalld.IFsveritySetupAuthToken.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.security.IFileIntegrityService
             public int setupFsverity(IInstalld.IFsveritySetupAuthToken iFsveritySetupAuthToken, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IFileIntegrityService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iFsveritySetupAuthToken);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IFileIntegrityService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iFsveritySetupAuthToken);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

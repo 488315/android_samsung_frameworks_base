@@ -47,9 +47,9 @@ public interface ITelecomLoader extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ITelecomLoader.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ITelecomLoader)) {
-                return (ITelecomLoader) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ITelecomLoader.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ITelecomLoader)) {
+                return (ITelecomLoader) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -76,12 +76,12 @@ public interface ITelecomLoader extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IInternalServiceRetriever asInterface = IInternalServiceRetriever.Stub.asInterface(parcel.readStrongBinder());
-                String readString = parcel.readString();
+                IInternalServiceRetriever iInternalServiceRetrieverAsInterface = IInternalServiceRetriever.Stub.asInterface(parcel.readStrongBinder());
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                ITelecomService createTelecomService = createTelecomService(asInterface, readString);
+                ITelecomService iTelecomServiceCreateTelecomService = createTelecomService(iInternalServiceRetrieverAsInterface, string);
                 parcel2.writeNoException();
-                parcel2.writeStrongInterface(createTelecomService);
+                parcel2.writeStrongInterface(iTelecomServiceCreateTelecomService);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -105,18 +105,18 @@ public interface ITelecomLoader extends IInterface {
 
             @Override // com.android.internal.telecom.ITelecomLoader
             public ITelecomService createTelecomService(IInternalServiceRetriever iInternalServiceRetriever, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITelecomLoader.DESCRIPTOR);
-                    obtain.writeStrongInterface(iInternalServiceRetriever);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return ITelecomService.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(ITelecomLoader.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iInternalServiceRetriever);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return ITelecomService.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

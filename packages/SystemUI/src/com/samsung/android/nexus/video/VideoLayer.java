@@ -21,7 +21,6 @@ import kotlin.collections.CollectionsKt__CollectionsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class VideoLayer extends BaseLayer {
     private static final int RESET_MAX_CNT = 10000;
@@ -50,7 +49,6 @@ public final class VideoLayer extends BaseLayer {
     public static final Companion Companion = new Companion(null);
     private static final String TAG = "VideoLayer";
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class BackupData {
         private RectF boundRect;
         private Float contrast;
@@ -188,120 +186,99 @@ public final class VideoLayer extends BaseLayer {
             return this.isTransparencyEnabled;
         }
 
-        /* JADX WARN: Code restructure failed: missing block: B:14:0x003a, code lost:
-        
-            if (r2 != null) goto L22;
-         */
+        /* JADX WARN: Removed duplicated region for block: B:17:0x003d  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
         public final void restore() {
-            /*
-                r5 = this;
-                java.lang.Float r0 = r5.contrast
-                if (r0 == 0) goto Ld
-                float r0 = r0.floatValue()
-                com.samsung.android.nexus.video.VideoLayer r1 = com.samsung.android.nexus.video.VideoLayer.this
-                r1.setContrast(r0)
-            Ld:
-                java.lang.Float r0 = r5.hdrSaturation
-                if (r0 == 0) goto L1a
-                float r0 = r0.floatValue()
-                com.samsung.android.nexus.video.VideoLayer r1 = com.samsung.android.nexus.video.VideoLayer.this
-                r1.setHdrSaturation(r0)
-            L1a:
-                java.lang.Float r0 = r5.offsetZ
-                if (r0 == 0) goto L3d
-                float r0 = r0.floatValue()
-                java.lang.Float r1 = r5.offsetX
-                r2 = 0
-                if (r1 == 0) goto L3a
-                float r1 = r1.floatValue()
-                java.lang.Float r3 = r5.offsetY
-                if (r3 == 0) goto L3a
-                float r2 = r3.floatValue()
-                com.samsung.android.nexus.video.VideoLayer r3 = com.samsung.android.nexus.video.VideoLayer.this
-                r3.setOffset(r1, r2, r0)
-                kotlin.Unit r2 = kotlin.Unit.INSTANCE
-            L3a:
-                if (r2 == 0) goto L3d
-                goto L54
-            L3d:
-                java.lang.Float r0 = r5.offsetX
-                if (r0 == 0) goto L54
-                float r0 = r0.floatValue()
-                java.lang.Float r1 = r5.offsetY
-                if (r1 == 0) goto L54
-                float r1 = r1.floatValue()
-                com.samsung.android.nexus.video.VideoLayer r2 = com.samsung.android.nexus.video.VideoLayer.this
-                r2.setOffsetXY(r0, r1)
-                kotlin.Unit r0 = kotlin.Unit.INSTANCE
-            L54:
-                java.lang.Float r0 = r5.globalAlpha
-                if (r0 == 0) goto L61
-                float r0 = r0.floatValue()
-                com.samsung.android.nexus.video.VideoLayer r1 = com.samsung.android.nexus.video.VideoLayer.this
-                r1.setGlobalAlpha(r0)
-            L61:
-                com.samsung.android.nexus.video.VideoLayer r0 = com.samsung.android.nexus.video.VideoLayer.this
-                int r1 = r5.worldWidth
-                int r2 = r5.worldHeight
-                r0.onSizeChanged(r1, r2)
-                java.lang.Boolean r1 = r5.isHdrModeEnabled
-                if (r1 == 0) goto L75
-                boolean r1 = r1.booleanValue()
-                r0.setHdrModeEnabled(r1)
-            L75:
-                java.lang.Float r1 = r5.objectWidth
-                if (r1 == 0) goto L88
-                float r1 = r1.floatValue()
-                java.lang.Float r2 = r5.objectHeight
-                if (r2 == 0) goto L88
-                float r2 = r2.floatValue()
-                r0.setSize(r1, r2)
-            L88:
-                java.lang.Float r1 = r5.rotationAngle
-                if (r1 == 0) goto Lab
-                float r1 = r1.floatValue()
-                java.lang.Float r2 = r5.rotationX
-                if (r2 == 0) goto Lab
-                float r2 = r2.floatValue()
-                java.lang.Float r3 = r5.rotationY
-                if (r3 == 0) goto Lab
-                float r3 = r3.floatValue()
-                java.lang.Float r4 = r5.rotationZ
-                if (r4 == 0) goto Lab
-                float r4 = r4.floatValue()
-                r0.setRotation(r1, r2, r3, r4)
-            Lab:
-                java.lang.Float r1 = r5.scale
-                if (r1 == 0) goto Lb6
-                float r1 = r1.floatValue()
-                r0.setScale(r1)
-            Lb6:
-                android.graphics.RectF r1 = r5.cropRect
-                if (r1 == 0) goto Lbd
-                r0.setCropRect(r1)
-            Lbd:
-                android.graphics.RectF r1 = r5.boundRect
-                if (r1 == 0) goto Lc4
-                r0.setBoundRect(r1)
-            Lc4:
-                float[] r1 = r5.rgbFilterColor
-                if (r1 == 0) goto Lcb
-                r0.setRgbFilterColor(r1)
-            Lcb:
-                float[] r1 = r5.hsvFilterColor
-                r0.setHsvFilterColor(r1)
-                java.lang.Boolean r5 = r5.looping
-                if (r5 == 0) goto Ldb
-                boolean r5 = r5.booleanValue()
-                r0.setLooping(r5)
-            Ldb:
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.nexus.video.VideoLayer.BackupData.restore():void");
+            Float f = this.contrast;
+            if (f != null) {
+                VideoLayer.this.setContrast(f.floatValue());
+            }
+            Float f2 = this.hdrSaturation;
+            if (f2 != null) {
+                VideoLayer.this.setHdrSaturation(f2.floatValue());
+            }
+            Float f3 = this.offsetZ;
+            if (f3 != null) {
+                float fFloatValue = f3.floatValue();
+                Float f4 = this.offsetX;
+                Unit unit = null;
+                if (f4 != null) {
+                    float fFloatValue2 = f4.floatValue();
+                    Float f5 = this.offsetY;
+                    if (f5 != null) {
+                        VideoLayer.this.setOffset(fFloatValue2, f5.floatValue(), fFloatValue);
+                        unit = Unit.INSTANCE;
+                    }
+                }
+                if (unit == null) {
+                    Float f6 = this.offsetX;
+                    if (f6 != null) {
+                        float fFloatValue3 = f6.floatValue();
+                        Float f7 = this.offsetY;
+                        if (f7 != null) {
+                            VideoLayer.this.setOffsetXY(fFloatValue3, f7.floatValue());
+                            Unit unit2 = Unit.INSTANCE;
+                        }
+                    }
+                }
+            }
+            Float f8 = this.globalAlpha;
+            if (f8 != null) {
+                VideoLayer.this.setGlobalAlpha(f8.floatValue());
+            }
+            VideoLayer videoLayer = VideoLayer.this;
+            videoLayer.onSizeChanged(this.worldWidth, this.worldHeight);
+            Boolean bool = this.isHdrModeEnabled;
+            if (bool != null) {
+                videoLayer.setHdrModeEnabled(bool.booleanValue());
+            }
+            Float f9 = this.objectWidth;
+            if (f9 != null) {
+                float fFloatValue4 = f9.floatValue();
+                Float f10 = this.objectHeight;
+                if (f10 != null) {
+                    videoLayer.setSize(fFloatValue4, f10.floatValue());
+                }
+            }
+            Float f11 = this.rotationAngle;
+            if (f11 != null) {
+                float fFloatValue5 = f11.floatValue();
+                Float f12 = this.rotationX;
+                if (f12 != null) {
+                    float fFloatValue6 = f12.floatValue();
+                    Float f13 = this.rotationY;
+                    if (f13 != null) {
+                        float fFloatValue7 = f13.floatValue();
+                        Float f14 = this.rotationZ;
+                        if (f14 != null) {
+                            videoLayer.setRotation(fFloatValue5, fFloatValue6, fFloatValue7, f14.floatValue());
+                        }
+                    }
+                }
+            }
+            Float f15 = this.scale;
+            if (f15 != null) {
+                videoLayer.setScale(f15.floatValue());
+            }
+            RectF rectF = this.cropRect;
+            if (rectF != null) {
+                videoLayer.setCropRect(rectF);
+            }
+            RectF rectF2 = this.boundRect;
+            if (rectF2 != null) {
+                videoLayer.setBoundRect(rectF2);
+            }
+            float[] fArr = this.rgbFilterColor;
+            if (fArr != null) {
+                videoLayer.setRgbFilterColor(fArr);
+            }
+            videoLayer.setHsvFilterColor(this.hsvFilterColor);
+            Boolean bool2 = this.looping;
+            if (bool2 != null) {
+                videoLayer.setLooping(bool2.booleanValue());
+            }
         }
 
         public final void setBoundRect(RectF rectF) {
@@ -397,7 +374,6 @@ public final class VideoLayer extends BaseLayer {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         private Companion() {
         }
@@ -407,7 +383,6 @@ public final class VideoLayer extends BaseLayer {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ResetLogger {
         private final ArrayList<Integer> mResetCount = CollectionsKt__CollectionsKt.arrayListOf(0, 0, 0);
 
@@ -427,7 +402,6 @@ public final class VideoLayer extends BaseLayer {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface VideoStateChangedListener {
         void onStateChanged(VideoPlayer.VideoState videoState);
     }
@@ -520,10 +494,10 @@ public final class VideoLayer extends BaseLayer {
         videoPlayer2.setCompletionListener(new SemMediaPlayer.OnPlaybackCompleteListener() { // from class: com.samsung.android.nexus.video.VideoLayer$create$$inlined$apply$lambda$1
             public final void onPlaybackComplete(SemMediaPlayer semMediaPlayer) {
                 Log.i(VideoLayer.TAG, "OnPlaybackCompleteListener : " + semMediaPlayer.getCurrentPosition());
-                if (VideoLayer.this.isAutoPlayNextMediaSource()) {
-                    VideoLayer.this.setDataSource();
+                if (this.this$0.isAutoPlayNextMediaSource()) {
+                    this.this$0.setDataSource();
                 }
-                SemMediaPlayer.OnPlaybackCompleteListener completionListener = VideoLayer.this.getCompletionListener();
+                SemMediaPlayer.OnPlaybackCompleteListener completionListener = this.this$0.getCompletionListener();
                 if (completionListener != null) {
                     completionListener.onPlaybackComplete(semMediaPlayer);
                 }
@@ -532,7 +506,7 @@ public final class VideoLayer extends BaseLayer {
         videoPlayer2.setSeekCompleteListener(new SemMediaPlayer.OnSeekCompleteListener() { // from class: com.samsung.android.nexus.video.VideoLayer$create$$inlined$apply$lambda$2
             public final void onSeekComplete(SemMediaPlayer semMediaPlayer) {
                 Log.i(VideoLayer.TAG, "OnSeekCompleteListener : " + semMediaPlayer.getCurrentPosition());
-                SemMediaPlayer.OnSeekCompleteListener seekCompleteListener = VideoLayer.this.getSeekCompleteListener();
+                SemMediaPlayer.OnSeekCompleteListener seekCompleteListener = this.this$0.getSeekCompleteListener();
                 if (seekCompleteListener != null) {
                     seekCompleteListener.onSeekComplete(semMediaPlayer);
                 }
@@ -544,8 +518,8 @@ public final class VideoLayer extends BaseLayer {
                 if ((i != 1 || i2 != Integer.MIN_VALUE) && i != -38) {
                     return false;
                 }
-                VideoLayer.this.reset(1);
-                SemMediaPlayer.OnErrorListener errorListener = VideoLayer.this.getErrorListener();
+                this.this$0.reset(1);
+                SemMediaPlayer.OnErrorListener errorListener = this.this$0.getErrorListener();
                 if (errorListener != null) {
                     errorListener.onError(semMediaPlayer, i, i2);
                 }
@@ -554,14 +528,13 @@ public final class VideoLayer extends BaseLayer {
         });
         videoPlayer2.setPreparedListener(new SemMediaPlayer.OnInitCompleteListener() { // from class: com.samsung.android.nexus.video.VideoLayer$create$$inlined$apply$lambda$4
             public final void onInitComplete(SemMediaPlayer semMediaPlayer, SemMediaPlayer.TrackInfo[] trackInfoArr) {
-                ReservedActionQueue reservedActionQueue;
                 Log.i(VideoLayer.TAG, "OnInitCompleteListener : " + semMediaPlayer.getCurrentPosition());
-                SemMediaPlayer.OnInitCompleteListener preparedListener = VideoLayer.this.getPreparedListener();
+                SemMediaPlayer.OnInitCompleteListener preparedListener = this.this$0.getPreparedListener();
                 if (preparedListener != null) {
                     preparedListener.onInitComplete(semMediaPlayer, trackInfoArr);
                 }
-                reservedActionQueue = VideoLayer.this.mReservedActions;
-                VideoLayer videoLayer = VideoLayer.this;
+                ReservedActionQueue reservedActionQueue = this.this$0.mReservedActions;
+                VideoLayer videoLayer = this.this$0;
                 synchronized (reservedActionQueue.mList) {
                     try {
                     } catch (ConcurrentModificationException e) {

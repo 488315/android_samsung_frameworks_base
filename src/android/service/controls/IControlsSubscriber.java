@@ -66,9 +66,9 @@ public interface IControlsSubscriber extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IControlsSubscriber.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IControlsSubscriber)) {
-                return (IControlsSubscriber) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IControlsSubscriber.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IControlsSubscriber)) {
+                return (IControlsSubscriber) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -104,24 +104,24 @@ public interface IControlsSubscriber extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IBinder readStrongBinder = parcel.readStrongBinder();
-                IControlsSubscription asInterface = IControlsSubscription.Stub.asInterface(parcel.readStrongBinder());
+                IBinder strongBinder = parcel.readStrongBinder();
+                IControlsSubscription iControlsSubscriptionAsInterface = IControlsSubscription.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                onSubscribe(readStrongBinder, asInterface);
+                onSubscribe(strongBinder, iControlsSubscriptionAsInterface);
             } else if (i == 2) {
-                IBinder readStrongBinder2 = parcel.readStrongBinder();
+                IBinder strongBinder2 = parcel.readStrongBinder();
                 Control control = (Control) parcel.readTypedObject(Control.CREATOR);
                 parcel.enforceNoDataAvail();
-                onNext(readStrongBinder2, control);
+                onNext(strongBinder2, control);
             } else if (i == 3) {
-                IBinder readStrongBinder3 = parcel.readStrongBinder();
-                String readString = parcel.readString();
+                IBinder strongBinder3 = parcel.readStrongBinder();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                onError(readStrongBinder3, readString);
+                onError(strongBinder3, string);
             } else if (i == 4) {
-                IBinder readStrongBinder4 = parcel.readStrongBinder();
+                IBinder strongBinder4 = parcel.readStrongBinder();
                 parcel.enforceNoDataAvail();
-                onComplete(readStrongBinder4);
+                onComplete(strongBinder4);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -146,52 +146,52 @@ public interface IControlsSubscriber extends IInterface {
 
             @Override // android.service.controls.IControlsSubscriber
             public void onSubscribe(IBinder iBinder, IControlsSubscription iControlsSubscription) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IControlsSubscriber.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeStrongInterface(iControlsSubscription);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IControlsSubscriber.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeStrongInterface(iControlsSubscription);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.controls.IControlsSubscriber
             public void onNext(IBinder iBinder, Control control) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IControlsSubscriber.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(control, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IControlsSubscriber.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(control, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.controls.IControlsSubscriber
             public void onError(IBinder iBinder, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IControlsSubscriber.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IControlsSubscriber.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.controls.IControlsSubscriber
             public void onComplete(IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IControlsSubscriber.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IControlsSubscriber.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

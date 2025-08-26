@@ -7,7 +7,6 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ClippableRoundedCornerLayout extends FrameLayout {
     public float cornerRadius;
@@ -23,10 +22,10 @@ public class ClippableRoundedCornerLayout extends FrameLayout {
             super.dispatchDraw(canvas);
             return;
         }
-        int save = canvas.save();
+        int iSave = canvas.save();
         canvas.clipPath(this.path);
         super.dispatchDraw(canvas);
-        canvas.restoreToCount(save);
+        canvas.restoreToCount(iSave);
     }
 
     public final void updateClipBoundsAndCornerRadius(float f, float f2, float f3, float f4, float f5) {

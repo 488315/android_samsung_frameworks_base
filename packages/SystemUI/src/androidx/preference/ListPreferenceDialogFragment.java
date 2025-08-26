@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ListPreferenceDialogFragment extends PreferenceDialogFragment {
     public int mClickedDialogEntryIndex;
@@ -40,9 +39,9 @@ public class ListPreferenceDialogFragment extends PreferenceDialogFragment {
         if (!z || (i = this.mClickedDialogEntryIndex) < 0) {
             return;
         }
-        String charSequence = this.mEntryValues[i].toString();
-        if (listPreference.callChangeListener(charSequence)) {
-            listPreference.setValue(charSequence);
+        String string = this.mEntryValues[i].toString();
+        if (listPreference.callChangeListener(string)) {
+            listPreference.setValue(string);
         }
     }
 

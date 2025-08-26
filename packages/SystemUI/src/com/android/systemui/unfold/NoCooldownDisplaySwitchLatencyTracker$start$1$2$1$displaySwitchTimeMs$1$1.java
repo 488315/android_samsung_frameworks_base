@@ -11,7 +11,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class NoCooldownDisplaySwitchLatencyTracker$start$1$2$1$displaySwitchTimeMs$1$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ int $toFoldableDeviceState;
@@ -39,7 +38,7 @@ final class NoCooldownDisplaySwitchLatencyTracker$start$1$2$1$displaySwitchTimeM
     }
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
-    public final Object invokeSuspend(Object obj) {
+    public final Object invokeSuspend(Object obj) throws Throwable {
         int i;
         long j;
         String str;
@@ -50,22 +49,22 @@ final class NoCooldownDisplaySwitchLatencyTracker$start$1$2$1$displaySwitchTimeM
             NoCooldownDisplaySwitchLatencyTracker noCooldownDisplaySwitchLatencyTracker = this.this$0;
             int i3 = this.$toFoldableDeviceState;
             int i4 = TraceUtils.$r8$clinit;
-            int nextInt = ThreadLocalRandom.current().nextInt();
-            Trace.asyncTraceForTrackBegin(4096L, "DisplaySwitchLatency", "displaySwitch", nextInt);
+            int iNextInt = ThreadLocalRandom.current().nextInt();
+            Trace.asyncTraceForTrackBegin(4096L, "DisplaySwitchLatency", "displaySwitch", iNextInt);
             try {
                 this.L$0 = "DisplaySwitchLatency";
                 this.J$0 = 4096L;
-                this.I$0 = nextInt;
+                this.I$0 = iNextInt;
                 this.label = 1;
                 if (NoCooldownDisplaySwitchLatencyTracker.access$waitForDisplaySwitch(noCooldownDisplaySwitchLatencyTracker, i3, this) == coroutineSingletons) {
                     return coroutineSingletons;
                 }
-                i = nextInt;
+                i = iNextInt;
                 j = 4096;
                 str = "DisplaySwitchLatency";
             } catch (Throwable th) {
                 th = th;
-                i = nextInt;
+                i = iNextInt;
                 j = 4096;
                 str = "DisplaySwitchLatency";
                 Trace.asyncTraceForTrackEnd(j, str, i);

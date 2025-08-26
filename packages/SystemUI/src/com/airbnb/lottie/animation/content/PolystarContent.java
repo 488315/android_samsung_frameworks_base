@@ -16,7 +16,6 @@ import com.airbnb.lottie.value.LottieValueCallback;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class PolystarContent implements PathContent, BaseKeyframeAnimation.AnimationListener, KeyPathElementContent {
     public final boolean hidden;
@@ -35,7 +34,6 @@ public class PolystarContent implements PathContent, BaseKeyframeAnimation.Anima
     public final Path path = new Path();
     public final CompoundTrimPathContent trimPaths = new CompoundTrimPathContent();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.airbnb.lottie.animation.content.PolystarContent$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$com$airbnb$lottie$model$content$PolystarShape$Type;
@@ -61,16 +59,16 @@ public class PolystarContent implements PathContent, BaseKeyframeAnimation.Anima
         this.type = type;
         this.hidden = polystarShape.hidden;
         this.isReversed = polystarShape.isReversed;
-        BaseKeyframeAnimation createAnimation = polystarShape.points.createAnimation();
-        this.pointsAnimation = (FloatKeyframeAnimation) createAnimation;
-        BaseKeyframeAnimation createAnimation2 = polystarShape.position.createAnimation();
-        this.positionAnimation = createAnimation2;
-        BaseKeyframeAnimation createAnimation3 = polystarShape.rotation.createAnimation();
-        this.rotationAnimation = (FloatKeyframeAnimation) createAnimation3;
-        BaseKeyframeAnimation createAnimation4 = polystarShape.outerRadius.createAnimation();
-        this.outerRadiusAnimation = (FloatKeyframeAnimation) createAnimation4;
-        BaseKeyframeAnimation createAnimation5 = polystarShape.outerRoundedness.createAnimation();
-        this.outerRoundednessAnimation = (FloatKeyframeAnimation) createAnimation5;
+        BaseKeyframeAnimation baseKeyframeAnimationCreateAnimation = polystarShape.points.createAnimation();
+        this.pointsAnimation = (FloatKeyframeAnimation) baseKeyframeAnimationCreateAnimation;
+        BaseKeyframeAnimation baseKeyframeAnimationCreateAnimation2 = polystarShape.position.createAnimation();
+        this.positionAnimation = baseKeyframeAnimationCreateAnimation2;
+        BaseKeyframeAnimation baseKeyframeAnimationCreateAnimation3 = polystarShape.rotation.createAnimation();
+        this.rotationAnimation = (FloatKeyframeAnimation) baseKeyframeAnimationCreateAnimation3;
+        BaseKeyframeAnimation baseKeyframeAnimationCreateAnimation4 = polystarShape.outerRadius.createAnimation();
+        this.outerRadiusAnimation = (FloatKeyframeAnimation) baseKeyframeAnimationCreateAnimation4;
+        BaseKeyframeAnimation baseKeyframeAnimationCreateAnimation5 = polystarShape.outerRoundedness.createAnimation();
+        this.outerRoundednessAnimation = (FloatKeyframeAnimation) baseKeyframeAnimationCreateAnimation5;
         PolystarShape.Type type2 = PolystarShape.Type.STAR;
         if (type == type2) {
             this.innerRadiusAnimation = (FloatKeyframeAnimation) polystarShape.innerRadius.createAnimation();
@@ -79,20 +77,20 @@ public class PolystarContent implements PathContent, BaseKeyframeAnimation.Anima
             this.innerRadiusAnimation = null;
             this.innerRoundednessAnimation = null;
         }
-        baseLayer.addAnimation(createAnimation);
-        baseLayer.addAnimation(createAnimation2);
-        baseLayer.addAnimation(createAnimation3);
-        baseLayer.addAnimation(createAnimation4);
-        baseLayer.addAnimation(createAnimation5);
+        baseLayer.addAnimation(baseKeyframeAnimationCreateAnimation);
+        baseLayer.addAnimation(baseKeyframeAnimationCreateAnimation2);
+        baseLayer.addAnimation(baseKeyframeAnimationCreateAnimation3);
+        baseLayer.addAnimation(baseKeyframeAnimationCreateAnimation4);
+        baseLayer.addAnimation(baseKeyframeAnimationCreateAnimation5);
         if (type == type2) {
             baseLayer.addAnimation(this.innerRadiusAnimation);
             baseLayer.addAnimation(this.innerRoundednessAnimation);
         }
-        createAnimation.addUpdateListener(this);
-        createAnimation2.addUpdateListener(this);
-        createAnimation3.addUpdateListener(this);
-        createAnimation4.addUpdateListener(this);
-        createAnimation5.addUpdateListener(this);
+        baseKeyframeAnimationCreateAnimation.addUpdateListener(this);
+        baseKeyframeAnimationCreateAnimation2.addUpdateListener(this);
+        baseKeyframeAnimationCreateAnimation3.addUpdateListener(this);
+        baseKeyframeAnimationCreateAnimation4.addUpdateListener(this);
+        baseKeyframeAnimationCreateAnimation5.addUpdateListener(this);
         if (type == type2) {
             this.innerRadiusAnimation.addUpdateListener(this);
             this.innerRoundednessAnimation.addUpdateListener(this);
@@ -140,21 +138,21 @@ public class PolystarContent implements PathContent, BaseKeyframeAnimation.Anima
         float f;
         float f2;
         float f3;
-        float cos;
-        float sin;
+        float fCos;
+        float fSin;
         float f4;
         double d;
+        float fM$1;
         float f5;
-        float f6;
         double d2;
-        float f7;
+        float f6;
         BaseKeyframeAnimation baseKeyframeAnimation;
         double d3;
+        float f7;
         float f8;
-        float f9;
         int i;
         double d4;
-        float f10;
+        float f9;
         if (this.isPathValid) {
             return this.path;
         }
@@ -170,162 +168,162 @@ public class PolystarContent implements PathContent, BaseKeyframeAnimation.Anima
         FloatKeyframeAnimation floatKeyframeAnimation4 = this.pointsAnimation;
         BaseKeyframeAnimation baseKeyframeAnimation2 = this.positionAnimation;
         if (i2 == 1) {
-            float floatValue = ((Float) floatKeyframeAnimation4.getValue()).floatValue();
+            float fFloatValue = ((Float) floatKeyframeAnimation4.getValue()).floatValue();
             double radians = Math.toRadians((floatKeyframeAnimation3 != null ? ((Float) floatKeyframeAnimation3.getValue()).floatValue() : 0.0d) - 90.0d);
-            double d5 = floatValue;
-            float f11 = (float) (6.283185307179586d / d5);
+            double d5 = fFloatValue;
+            float f10 = (float) (6.283185307179586d / d5);
             if (this.isReversed) {
-                f11 *= -1.0f;
+                f10 *= -1.0f;
             }
-            float f12 = f11 / 2.0f;
-            float f13 = floatValue - ((int) floatValue);
-            if (f13 != 0.0f) {
-                radians += (1.0f - f13) * f12;
+            float f11 = f10 / 2.0f;
+            float f12 = fFloatValue - ((int) fFloatValue);
+            if (f12 != 0.0f) {
+                radians += (1.0f - f12) * f11;
             }
-            float floatValue2 = ((Float) floatKeyframeAnimation.getValue()).floatValue();
-            float floatValue3 = ((Float) this.innerRadiusAnimation.getValue()).floatValue();
+            float fFloatValue2 = ((Float) floatKeyframeAnimation.getValue()).floatValue();
+            float fFloatValue3 = ((Float) this.innerRadiusAnimation.getValue()).floatValue();
             FloatKeyframeAnimation floatKeyframeAnimation5 = this.innerRoundednessAnimation;
-            float floatValue4 = floatKeyframeAnimation5 != null ? ((Float) floatKeyframeAnimation5.getValue()).floatValue() / 100.0f : 0.0f;
-            float floatValue5 = floatKeyframeAnimation2 != null ? ((Float) floatKeyframeAnimation2.getValue()).floatValue() / 100.0f : 0.0f;
-            if (f13 != 0.0f) {
-                f5 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(floatValue2, floatValue3, f13, floatValue3);
+            float fFloatValue4 = floatKeyframeAnimation5 != null ? ((Float) floatKeyframeAnimation5.getValue()).floatValue() / 100.0f : 0.0f;
+            float fFloatValue5 = floatKeyframeAnimation2 != null ? ((Float) floatKeyframeAnimation2.getValue()).floatValue() / 100.0f : 0.0f;
+            if (f12 != 0.0f) {
+                fM$1 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(fFloatValue2, fFloatValue3, f12, fFloatValue3);
                 f3 = 2.0f;
-                double d6 = f5;
-                f = f13;
-                f2 = f11;
-                float cos2 = (float) (Math.cos(radians) * d6);
-                sin = (float) (d6 * Math.sin(radians));
-                this.path.moveTo(cos2, sin);
+                double d6 = fM$1;
+                f = f12;
+                f2 = f10;
+                float fCos2 = (float) (Math.cos(radians) * d6);
+                fSin = (float) (d6 * Math.sin(radians));
+                this.path.moveTo(fCos2, fSin);
                 d = radians + ((f2 * f) / 2.0f);
-                cos = cos2;
-                f4 = f12;
+                fCos = fCos2;
+                f4 = f11;
             } else {
-                f = f13;
-                f2 = f11;
+                f = f12;
+                f2 = f10;
                 f3 = 2.0f;
-                double d7 = floatValue2;
-                cos = (float) (Math.cos(radians) * d7);
-                sin = (float) (Math.sin(radians) * d7);
-                this.path.moveTo(cos, sin);
-                f4 = f12;
+                double d7 = fFloatValue2;
+                fCos = (float) (Math.cos(radians) * d7);
+                fSin = (float) (Math.sin(radians) * d7);
+                this.path.moveTo(fCos, fSin);
+                f4 = f11;
                 d = radians + f4;
-                f5 = 0.0f;
+                fM$1 = 0.0f;
             }
-            double ceil = Math.ceil(d5) * 2.0d;
-            float f14 = floatValue5;
+            double dCeil = Math.ceil(d5) * 2.0d;
+            float f13 = fFloatValue5;
             int i3 = 0;
             boolean z = false;
             while (true) {
                 double d8 = i3;
-                if (d8 >= ceil) {
+                if (d8 >= dCeil) {
                     break;
                 }
-                float f15 = z ? floatValue2 : floatValue3;
-                if (f5 == 0.0f || d8 != ceil - 2.0d) {
-                    f6 = f4;
+                float f14 = z ? fFloatValue2 : fFloatValue3;
+                if (fM$1 == 0.0f || d8 != dCeil - 2.0d) {
+                    f5 = f4;
                 } else {
-                    f6 = f4;
+                    f5 = f4;
                     f4 = (f2 * f) / f3;
                 }
-                if (f5 == 0.0f || d8 != ceil - 1.0d) {
+                if (fM$1 == 0.0f || d8 != dCeil - 1.0d) {
                     d2 = d8;
-                    f7 = f15;
+                    f6 = f14;
                 } else {
                     d2 = d8;
-                    f7 = f5;
+                    f6 = fM$1;
                 }
-                double d9 = f7;
-                float cos3 = (float) (Math.cos(d) * d9);
+                double d9 = f6;
+                float fCos3 = (float) (Math.cos(d) * d9);
                 double d10 = d;
-                float sin2 = (float) (Math.sin(d) * d9);
-                if (floatValue4 == 0.0f && f14 == 0.0f) {
-                    this.path.lineTo(cos3, sin2);
-                    f9 = cos3;
-                    f8 = sin2;
+                float fSin2 = (float) (Math.sin(d) * d9);
+                if (fFloatValue4 == 0.0f && f13 == 0.0f) {
+                    this.path.lineTo(fCos3, fSin2);
+                    f8 = fCos3;
+                    f7 = fSin2;
                     baseKeyframeAnimation = baseKeyframeAnimation2;
-                    d3 = ceil;
+                    d3 = dCeil;
                 } else {
                     baseKeyframeAnimation = baseKeyframeAnimation2;
-                    d3 = ceil;
-                    double atan2 = (float) (Math.atan2(sin, cos) - 1.5707963267948966d);
-                    float cos4 = (float) Math.cos(atan2);
-                    float sin3 = (float) Math.sin(atan2);
-                    f8 = sin2;
-                    double atan22 = (float) (Math.atan2(sin2, cos3) - 1.5707963267948966d);
-                    float cos5 = (float) Math.cos(atan22);
-                    float sin4 = (float) Math.sin(atan22);
-                    float f16 = z ? floatValue4 : f14;
-                    float f17 = z ? f14 : floatValue4;
-                    float f18 = (z ? floatValue3 : floatValue2) * f16 * 0.47829f;
-                    float f19 = cos4 * f18;
-                    float f20 = f18 * sin3;
-                    float f21 = (z ? floatValue2 : floatValue3) * f17 * 0.47829f;
-                    float f22 = cos5 * f21;
-                    float f23 = f21 * sin4;
-                    if (f13 != 0.0f) {
+                    d3 = dCeil;
+                    double dAtan2 = (float) (Math.atan2(fSin, fCos) - 1.5707963267948966d);
+                    float fCos4 = (float) Math.cos(dAtan2);
+                    float fSin3 = (float) Math.sin(dAtan2);
+                    f7 = fSin2;
+                    double dAtan22 = (float) (Math.atan2(fSin2, fCos3) - 1.5707963267948966d);
+                    float fCos5 = (float) Math.cos(dAtan22);
+                    float fSin4 = (float) Math.sin(dAtan22);
+                    float f15 = z ? fFloatValue4 : f13;
+                    float f16 = z ? f13 : fFloatValue4;
+                    float f17 = (z ? fFloatValue3 : fFloatValue2) * f15 * 0.47829f;
+                    float f18 = fCos4 * f17;
+                    float f19 = f17 * fSin3;
+                    float f20 = (z ? fFloatValue2 : fFloatValue3) * f16 * 0.47829f;
+                    float f21 = fCos5 * f20;
+                    float f22 = f20 * fSin4;
+                    if (f12 != 0.0f) {
                         if (i3 == 0) {
+                            f18 *= f;
                             f19 *= f;
-                            f20 *= f;
                         } else if (d2 == d3 - 1.0d) {
+                            f21 *= f;
                             f22 *= f;
-                            f23 *= f;
                         }
                     }
-                    f9 = cos3;
-                    this.path.cubicTo(cos - f19, sin - f20, cos3 + f22, f8 + f23, f9, f8);
+                    f8 = fCos3;
+                    this.path.cubicTo(fCos - f18, fSin - f19, fCos3 + f21, f7 + f22, f8, f7);
                 }
                 d = d10 + f4;
                 z = !z;
                 i3++;
                 baseKeyframeAnimation2 = baseKeyframeAnimation;
-                f4 = f6;
-                ceil = d3;
-                cos = f9;
-                sin = f8;
+                f4 = f5;
+                dCeil = d3;
+                fCos = f8;
+                fSin = f7;
             }
             PointF pointF = (PointF) baseKeyframeAnimation2.getValue();
             this.path.offset(pointF.x, pointF.y);
             this.path.close();
         } else if (i2 == 2) {
-            int floor = (int) Math.floor(((Float) floatKeyframeAnimation4.getValue()).floatValue());
+            int iFloor = (int) Math.floor(((Float) floatKeyframeAnimation4.getValue()).floatValue());
             double radians2 = Math.toRadians((floatKeyframeAnimation3 != null ? ((Float) floatKeyframeAnimation3.getValue()).floatValue() : 0.0d) - 90.0d);
-            double d11 = floor;
-            float floatValue6 = ((Float) floatKeyframeAnimation2.getValue()).floatValue() / 100.0f;
-            float floatValue7 = ((Float) floatKeyframeAnimation.getValue()).floatValue();
-            double d12 = floatValue7;
-            float cos6 = (float) (Math.cos(radians2) * d12);
-            float sin5 = (float) (Math.sin(radians2) * d12);
-            this.path.moveTo(cos6, sin5);
+            double d11 = iFloor;
+            float fFloatValue6 = ((Float) floatKeyframeAnimation2.getValue()).floatValue() / 100.0f;
+            float fFloatValue7 = ((Float) floatKeyframeAnimation.getValue()).floatValue();
+            double d12 = fFloatValue7;
+            float fCos6 = (float) (Math.cos(radians2) * d12);
+            float fSin5 = (float) (Math.sin(radians2) * d12);
+            this.path.moveTo(fCos6, fSin5);
             double d13 = (float) (6.283185307179586d / d11);
             double d14 = radians2 + d13;
-            double ceil2 = Math.ceil(d11);
+            double dCeil2 = Math.ceil(d11);
             int i4 = 0;
-            while (i4 < ceil2) {
-                float cos7 = (float) (Math.cos(d14) * d12);
-                float sin6 = (float) (Math.sin(d14) * d12);
-                if (floatValue6 != 0.0f) {
+            while (i4 < dCeil2) {
+                float fCos7 = (float) (Math.cos(d14) * d12);
+                float fSin6 = (float) (Math.sin(d14) * d12);
+                if (fFloatValue6 != 0.0f) {
                     d4 = d13;
                     i = i4;
-                    f10 = floatValue6;
-                    double atan23 = (float) (Math.atan2(sin5, cos6) - 1.5707963267948966d);
-                    float cos8 = (float) Math.cos(atan23);
-                    float sin7 = (float) Math.sin(atan23);
-                    double atan24 = (float) (Math.atan2(sin6, cos7) - 1.5707963267948966d);
-                    float f24 = floatValue7 * f10 * 0.25f;
-                    this.path.cubicTo(cos6 - (f24 * cos8), sin5 - (f24 * sin7), cos7 + (((float) Math.cos(atan24)) * f24), sin6 + (f24 * ((float) Math.sin(atan24))), cos7, sin6);
-                    cos6 = cos7;
-                    sin5 = sin6;
+                    f9 = fFloatValue6;
+                    double dAtan23 = (float) (Math.atan2(fSin5, fCos6) - 1.5707963267948966d);
+                    float fCos8 = (float) Math.cos(dAtan23);
+                    float fSin7 = (float) Math.sin(dAtan23);
+                    double dAtan24 = (float) (Math.atan2(fSin6, fCos7) - 1.5707963267948966d);
+                    float f23 = fFloatValue7 * f9 * 0.25f;
+                    this.path.cubicTo(fCos6 - (f23 * fCos8), fSin5 - (f23 * fSin7), fCos7 + (((float) Math.cos(dAtan24)) * f23), fSin6 + (f23 * ((float) Math.sin(dAtan24))), fCos7, fSin6);
+                    fCos6 = fCos7;
+                    fSin5 = fSin6;
                 } else {
                     i = i4;
                     d4 = d13;
-                    f10 = floatValue6;
-                    cos6 = cos7;
-                    sin5 = sin6;
-                    this.path.lineTo(cos6, sin5);
+                    f9 = fFloatValue6;
+                    fCos6 = fCos7;
+                    fSin5 = fSin6;
+                    this.path.lineTo(fCos6, fSin5);
                 }
                 d14 += d4;
                 i4 = i + 1;
-                floatValue6 = f10;
+                fFloatValue6 = f9;
                 d13 = d4;
             }
             PointF pointF2 = (PointF) baseKeyframeAnimation2.getValue();

@@ -84,9 +84,9 @@ public interface IFeatureFlags extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IFeatureFlags.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IFeatureFlags)) {
-                return (IFeatureFlags) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IFeatureFlags.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IFeatureFlags)) {
+                return (IFeatureFlags) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -126,30 +126,30 @@ public interface IFeatureFlags extends IInterface {
             }
             switch (i) {
                 case 1:
-                    ArrayList createTypedArrayList = parcel.createTypedArrayList(SyncableFlag.CREATOR);
+                    ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(SyncableFlag.CREATOR);
                     parcel.enforceNoDataAvail();
-                    List<SyncableFlag> syncFlags = syncFlags(createTypedArrayList);
+                    List<SyncableFlag> listSyncFlags = syncFlags(arrayListCreateTypedArrayList);
                     parcel2.writeNoException();
-                    parcel2.writeTypedList(syncFlags, 1);
+                    parcel2.writeTypedList(listSyncFlags, 1);
                     return true;
                 case 2:
-                    IFeatureFlagsCallback asInterface = IFeatureFlagsCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IFeatureFlagsCallback iFeatureFlagsCallbackAsInterface = IFeatureFlagsCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerCallback(asInterface);
+                    registerCallback(iFeatureFlagsCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    IFeatureFlagsCallback asInterface2 = IFeatureFlagsCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IFeatureFlagsCallback iFeatureFlagsCallbackAsInterface2 = IFeatureFlagsCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterCallback(asInterface2);
+                    unregisterCallback(iFeatureFlagsCallbackAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 4:
-                    ArrayList createTypedArrayList2 = parcel.createTypedArrayList(SyncableFlag.CREATOR);
+                    ArrayList arrayListCreateTypedArrayList2 = parcel.createTypedArrayList(SyncableFlag.CREATOR);
                     parcel.enforceNoDataAvail();
-                    List<SyncableFlag> queryFlags = queryFlags(createTypedArrayList2);
+                    List<SyncableFlag> listQueryFlags = queryFlags(arrayListCreateTypedArrayList2);
                     parcel2.writeNoException();
-                    parcel2.writeTypedList(queryFlags, 1);
+                    parcel2.writeTypedList(listQueryFlags, 1);
                     return true;
                 case 5:
                     SyncableFlag syncableFlag = (SyncableFlag) parcel.readTypedObject(SyncableFlag.CREATOR);
@@ -186,93 +186,93 @@ public interface IFeatureFlags extends IInterface {
 
             @Override // android.flags.IFeatureFlags
             public List<SyncableFlag> syncFlags(List<SyncableFlag> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IFeatureFlags.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(SyncableFlag.CREATOR);
+                    parcelObtain.writeInterfaceToken(IFeatureFlags.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(SyncableFlag.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.flags.IFeatureFlags
             public void registerCallback(IFeatureFlagsCallback iFeatureFlagsCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IFeatureFlags.DESCRIPTOR);
-                    obtain.writeStrongInterface(iFeatureFlagsCallback);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IFeatureFlags.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iFeatureFlagsCallback);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.flags.IFeatureFlags
             public void unregisterCallback(IFeatureFlagsCallback iFeatureFlagsCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IFeatureFlags.DESCRIPTOR);
-                    obtain.writeStrongInterface(iFeatureFlagsCallback);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IFeatureFlags.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iFeatureFlagsCallback);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.flags.IFeatureFlags
             public List<SyncableFlag> queryFlags(List<SyncableFlag> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IFeatureFlags.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(SyncableFlag.CREATOR);
+                    parcelObtain.writeInterfaceToken(IFeatureFlags.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(SyncableFlag.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.flags.IFeatureFlags
             public void overrideFlag(SyncableFlag syncableFlag) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IFeatureFlags.DESCRIPTOR);
-                    obtain.writeTypedObject(syncableFlag, 0);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IFeatureFlags.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(syncableFlag, 0);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.flags.IFeatureFlags
             public void resetFlag(SyncableFlag syncableFlag) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IFeatureFlags.DESCRIPTOR);
-                    obtain.writeTypedObject(syncableFlag, 0);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IFeatureFlags.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(syncableFlag, 0);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

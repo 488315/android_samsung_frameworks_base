@@ -21,7 +21,6 @@ import kotlin.ranges.RangesKt___RangesKt;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class NotificationsKt$NotificationScrollingStack$6$1$1 implements Consumer {
     public final /* synthetic */ CoroutineScope $coroutineScope;
@@ -31,7 +30,6 @@ public final class NotificationsKt$NotificationScrollingStack$6$1$1 implements C
     public final /* synthetic */ MutableState $stackBoundsOnScreen;
     public final /* synthetic */ NotificationScrollView $stackScrollView;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.notifications.ui.composable.NotificationsKt$NotificationScrollingStack$6$1$1$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ Function0 $minScrimOffset;
@@ -85,7 +83,6 @@ public final class NotificationsKt$NotificationScrollingStack$6$1$1 implements C
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -124,8 +121,8 @@ public final class NotificationsKt$NotificationScrollingStack$6$1$1 implements C
         Rect rect = (Rect) this.$stackBoundsOnScreen.getValue();
         float f = rect.bottom - rect.top;
         NotificationStackScrollLayout notificationStackScrollLayout = (NotificationStackScrollLayout) this.$stackScrollView;
-        float max = Math.max(0.0f, f - (notificationStackScrollLayout.mShelf.getHeight() + notificationStackScrollLayout.mPaddingBetweenElements));
+        float fMax = Math.max(0.0f, f - (notificationStackScrollLayout.mShelf.getHeight() + notificationStackScrollLayout.mPaddingBetweenElements));
         float value = this.$scrollState.getValue();
-        BuildersKt.launch$default(this.$coroutineScope, null, null, new AnonymousClass1(RangesKt___RangesKt.coerceIn((i2 * max) + value, 0.0f, this.$scrollState.getMaxValue()), value, this.$scrimOffset, this.$minScrimOffset, this.$scrollState, null), 3);
+        BuildersKt.launch$default(this.$coroutineScope, null, null, new AnonymousClass1(RangesKt___RangesKt.coerceIn((i2 * fMax) + value, 0.0f, this.$scrollState.getMaxValue()), value, this.$scrimOffset, this.$minScrimOffset, this.$scrollState, null), 3);
     }
 }

@@ -1,12 +1,22 @@
 package androidx.datastore.core;
 
+import com.samsung.android.knox.lockscreen.LSOUtils;
 import java.io.File;
+import java.io.IOException;
 import java.util.concurrent.atomic.AtomicBoolean;
+import kotlin.ExceptionsKt__ExceptionsKt;
+import kotlin.ResultKt;
+import kotlin.Unit;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
 import kotlin.jvm.functions.Function0;
+import kotlin.jvm.functions.Function2;
+import kotlin.jvm.functions.Function3;
+import kotlinx.coroutines.sync.Mutex;
 import kotlinx.coroutines.sync.MutexImpl;
 import kotlinx.coroutines.sync.MutexKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class FileStorageConnection implements StorageConnection {
     public final InterProcessCoordinator coordinator;
@@ -15,6 +25,47 @@ public final class FileStorageConnection implements StorageConnection {
     public final Serializer serializer;
     public final AtomicBoolean closed = new AtomicBoolean(false);
     public final MutexImpl transactionMutex = MutexKt.Mutex$default();
+
+    /* renamed from: androidx.datastore.core.FileStorageConnection$readScope$1, reason: invalid class name */
+    final class AnonymousClass1<R> extends ContinuationImpl {
+        Object L$0;
+        Object L$1;
+        boolean Z$0;
+        int label;
+        /* synthetic */ Object result;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return FileStorageConnection.this.readScope(null, this);
+        }
+    }
+
+    /* renamed from: androidx.datastore.core.FileStorageConnection$writeScope$1, reason: invalid class name and case insensitive filesystem */
+    final class C07591 extends ContinuationImpl {
+        Object L$0;
+        Object L$1;
+        Object L$2;
+        Object L$3;
+        int label;
+        /* synthetic */ Object result;
+
+        public C07591(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return FileStorageConnection.this.writeScope(null, this);
+        }
+    }
 
     public FileStorageConnection(File file, Serializer serializer, InterProcessCoordinator interProcessCoordinator, Function0 function0) {
         this.file = file;
@@ -34,17 +85,10 @@ public final class FileStorageConnection implements StorageConnection {
         return this.coordinator;
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(7:(2:3|(8:5|6|7|(1:(3:10|11|12)(2:41|42))(2:43|(5:45|46|47|48|(1:50)(1:51))(2:55|56))|14|15|16|(2:(1:19)|20)(2:22|23)))|7|(0)(0)|14|15|16|(0)(0)) */
-    /* JADX WARN: Code restructure failed: missing block: B:31:0x0078, code lost:
-    
-        r9 = th;
-     */
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x007b  */
-    /* JADX WARN: Removed duplicated region for block: B:22:0x0083 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x0099  */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x0040  */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0022  */
+    /* JADX WARN: Removed duplicated region for block: B:30:0x007b  */
+    /* JADX WARN: Removed duplicated region for block: B:54:0x0083 A[EXC_TOP_SPLITTER, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /* JADX WARN: Type inference failed for: r10v7, types: [boolean] */
     /* JADX WARN: Type inference failed for: r8v11, types: [boolean] */
     /* JADX WARN: Type inference failed for: r8v5 */
@@ -52,139 +96,114 @@ public final class FileStorageConnection implements StorageConnection {
     @Override // androidx.datastore.core.StorageConnection
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object readScope(kotlin.jvm.functions.Function3 r9, kotlin.coroutines.jvm.internal.ContinuationImpl r10) {
-        /*
-            r8 = this;
-            boolean r0 = r10 instanceof androidx.datastore.core.FileStorageConnection$readScope$1
-            if (r0 == 0) goto L13
-            r0 = r10
-            androidx.datastore.core.FileStorageConnection$readScope$1 r0 = (androidx.datastore.core.FileStorageConnection$readScope$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            androidx.datastore.core.FileStorageConnection$readScope$1 r0 = new androidx.datastore.core.FileStorageConnection$readScope$1
-            r0.<init>(r8, r10)
-        L18:
-            java.lang.Object r10 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 0
-            r4 = 1
-            if (r2 == 0) goto L40
-            if (r2 != r4) goto L38
-            boolean r8 = r0.Z$0
-            java.lang.Object r9 = r0.L$1
-            androidx.datastore.core.Closeable r9 = (androidx.datastore.core.Closeable) r9
-            java.lang.Object r0 = r0.L$0
-            androidx.datastore.core.FileStorageConnection r0 = (androidx.datastore.core.FileStorageConnection) r0
-            kotlin.ResultKt.throwOnFailure(r10)     // Catch: java.lang.Throwable -> L32
-            goto L73
-        L32:
-            r10 = move-exception
-            r7 = r10
-            r10 = r8
-            r8 = r0
-            r0 = r7
-            goto L8d
-        L38:
-            java.lang.IllegalStateException r8 = new java.lang.IllegalStateException
-            java.lang.String r9 = "call to 'resume' before 'invoke' with coroutine"
-            r8.<init>(r9)
-            throw r8
-        L40:
-            kotlin.ResultKt.throwOnFailure(r10)
-            java.util.concurrent.atomic.AtomicBoolean r10 = r8.closed
-            boolean r10 = r10.get()
-            if (r10 != 0) goto L9f
-            kotlinx.coroutines.sync.MutexImpl r10 = r8.transactionMutex
-            boolean r10 = r10.tryLock()
-            androidx.datastore.core.FileReadScope r2 = new androidx.datastore.core.FileReadScope     // Catch: java.lang.Throwable -> L96
-            java.io.File r5 = r8.file     // Catch: java.lang.Throwable -> L96
-            androidx.datastore.core.Serializer r6 = r8.serializer     // Catch: java.lang.Throwable -> L96
-            r2.<init>(r5, r6)     // Catch: java.lang.Throwable -> L96
-            java.lang.Boolean r5 = java.lang.Boolean.valueOf(r10)     // Catch: java.lang.Throwable -> L8b
-            r0.L$0 = r8     // Catch: java.lang.Throwable -> L8b
-            r0.L$1 = r2     // Catch: java.lang.Throwable -> L8b
-            r0.Z$0 = r10     // Catch: java.lang.Throwable -> L8b
-            r0.label = r4     // Catch: java.lang.Throwable -> L8b
-            androidx.datastore.core.StorageConnectionKt$readData$2 r9 = (androidx.datastore.core.StorageConnectionKt$readData$2) r9     // Catch: java.lang.Throwable -> L8b
-            java.lang.Object r9 = r9.invoke(r2, r5, r0)     // Catch: java.lang.Throwable -> L8b
-            if (r9 != r1) goto L6f
-            return r1
-        L6f:
-            r0 = r8
-            r8 = r10
-            r10 = r9
-            r9 = r2
-        L73:
-            r9.close()     // Catch: java.lang.Throwable -> L78
-            r9 = r3
-            goto L79
-        L78:
-            r9 = move-exception
-        L79:
-            if (r9 != 0) goto L83
-            if (r8 == 0) goto L82
-            kotlinx.coroutines.sync.MutexImpl r8 = r0.transactionMutex
-            r8.unlock(r3)
-        L82:
-            return r10
-        L83:
-            throw r9     // Catch: java.lang.Throwable -> L84
-        L84:
-            r9 = move-exception
-            r10 = r8
-            r8 = r0
-            goto L97
-        L88:
-            r0 = r9
-            r9 = r2
-            goto L8d
-        L8b:
-            r9 = move-exception
-            goto L88
-        L8d:
-            r9.close()     // Catch: java.lang.Throwable -> L91
-            goto L95
-        L91:
-            r9 = move-exception
-            kotlin.ExceptionsKt__ExceptionsKt.addSuppressed(r0, r9)     // Catch: java.lang.Throwable -> L96
-        L95:
-            throw r0     // Catch: java.lang.Throwable -> L96
-        L96:
-            r9 = move-exception
-        L97:
-            if (r10 == 0) goto L9e
-            kotlinx.coroutines.sync.MutexImpl r8 = r8.transactionMutex
-            r8.unlock(r3)
-        L9e:
-            throw r9
-        L9f:
-            java.lang.IllegalStateException r8 = new java.lang.IllegalStateException
-            java.lang.String r9 = "StorageConnection has already been disposed."
-            r8.<init>(r9)
-            throw r8
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.datastore.core.FileStorageConnection.readScope(kotlin.jvm.functions.Function3, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object readScope(Function3 function3, ContinuationImpl continuationImpl) throws Throwable {
+        AnonymousClass1 anonymousClass1;
+        Throwable th;
+        Closeable closeable;
+        FileStorageConnection fileStorageConnection;
+        ?? r8;
+        Object obj;
+        if (continuationImpl instanceof AnonymousClass1) {
+            anonymousClass1 = (AnonymousClass1) continuationImpl;
+            int i = anonymousClass1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                anonymousClass1.label = i - Integer.MIN_VALUE;
+            } else {
+                anonymousClass1 = new AnonymousClass1(continuationImpl);
+            }
+        }
+        Object obj2 = anonymousClass1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = anonymousClass1.label;
+        try {
+            if (i2 == 0) {
+                ResultKt.throwOnFailure(obj2);
+                if (this.closed.get()) {
+                    throw new IllegalStateException("StorageConnection has already been disposed.");
+                }
+                ?? TryLock = this.transactionMutex.tryLock();
+                FileReadScope fileReadScope = new FileReadScope(this.file, this.serializer);
+                try {
+                    Boolean boolValueOf = Boolean.valueOf((boolean) TryLock);
+                    anonymousClass1.L$0 = this;
+                    anonymousClass1.L$1 = fileReadScope;
+                    anonymousClass1.Z$0 = TryLock;
+                    anonymousClass1.label = 1;
+                    Object objInvoke = ((StorageConnectionKt$readData$2) function3).invoke(fileReadScope, boolValueOf, anonymousClass1);
+                    if (objInvoke == coroutineSingletons) {
+                        return coroutineSingletons;
+                    }
+                    fileStorageConnection = this;
+                    r8 = TryLock == true ? 1 : 0;
+                    obj = objInvoke;
+                    closeable = fileReadScope;
+                    closeable.close();
+                    th = null;
+                    if (th != null) {
+                    }
+                } catch (Throwable th2) {
+                    th = th2;
+                    closeable = fileReadScope;
+                    obj2 = TryLock;
+                    closeable.close();
+                    throw th;
+                }
+            } else {
+                if (i2 != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                r8 = anonymousClass1.Z$0;
+                closeable = (Closeable) anonymousClass1.L$1;
+                fileStorageConnection = (FileStorageConnection) anonymousClass1.L$0;
+                try {
+                    ResultKt.throwOnFailure(obj2);
+                    obj = obj2;
+                    try {
+                        closeable.close();
+                        th = null;
+                    } catch (Throwable th3) {
+                        th = th3;
+                    }
+                    if (th != null) {
+                        if (r8 != false) {
+                            fileStorageConnection.transactionMutex.unlock(null);
+                        }
+                        return obj;
+                    }
+                    try {
+                        throw th;
+                    } catch (Throwable th4) {
+                        th = th4;
+                        obj2 = r8;
+                        this = fileStorageConnection;
+                    }
+                } catch (Throwable th5) {
+                    obj2 = r8;
+                    this = fileStorageConnection;
+                    th = th5;
+                    try {
+                        closeable.close();
+                        throw th;
+                    } catch (Throwable th6) {
+                        ExceptionsKt__ExceptionsKt.addSuppressed(th, th6);
+                        throw th;
+                    }
+                }
+            }
+        } catch (Throwable th7) {
+            th = th7;
+        }
+        if (obj2 != null) {
+            this.transactionMutex.unlock(null);
+        }
+        throw th;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:70:0x009e, code lost:
-    
-        if (r10.lock(r1) == r2) goto L36;
-     */
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:19:0x00e3 A[Catch: all -> 0x0113, IOException -> 0x0116, TRY_ENTER, TryCatch #3 {all -> 0x0113, blocks: (B:19:0x00e3, B:21:0x00e9, B:24:0x00f2, B:25:0x0112, B:27:0x011a, B:30:0x0122, B:37:0x0130, B:40:0x012d), top: B:7:0x0023 }] */
-    /* JADX WARN: Removed duplicated region for block: B:30:0x0122 A[Catch: all -> 0x0113, IOException -> 0x0116, TRY_ENTER, TRY_LEAVE, TryCatch #3 {all -> 0x0113, blocks: (B:19:0x00e3, B:21:0x00e9, B:24:0x00f2, B:25:0x0112, B:27:0x011a, B:30:0x0122, B:37:0x0130, B:40:0x012d), top: B:7:0x0023 }] */
-    /* JADX WARN: Removed duplicated region for block: B:51:0x00d5  */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x005b  */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0025  */
+    /* JADX WARN: Removed duplicated region for block: B:43:0x00e3 A[Catch: all -> 0x0113, IOException -> 0x0116, TRY_ENTER, TryCatch #3 {all -> 0x0113, blocks: (B:43:0x00e3, B:45:0x00e9, B:48:0x00f2, B:49:0x0112, B:54:0x011a, B:57:0x0122, B:64:0x0130, B:63:0x012d), top: B:78:0x0023 }] */
+    /* JADX WARN: Removed duplicated region for block: B:57:0x0122 A[Catch: all -> 0x0113, IOException -> 0x0116, TRY_ENTER, TRY_LEAVE, TryCatch #3 {all -> 0x0113, blocks: (B:43:0x00e3, B:45:0x00e9, B:48:0x00f2, B:49:0x0112, B:54:0x011a, B:57:0x0122, B:64:0x0130, B:63:0x012d), top: B:78:0x0023 }] */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0015  */
     /* JADX WARN: Type inference failed for: r10v1, types: [java.lang.Object] */
     /* JADX WARN: Type inference failed for: r10v3 */
     /* JADX WARN: Type inference failed for: r10v4, types: [kotlinx.coroutines.sync.Mutex] */
@@ -195,13 +214,147 @@ public final class FileStorageConnection implements StorageConnection {
     @Override // androidx.datastore.core.StorageConnection
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object writeScope(kotlin.jvm.functions.Function2 r9, kotlin.coroutines.jvm.internal.ContinuationImpl r10) {
-        /*
-            Method dump skipped, instructions count: 330
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.datastore.core.FileStorageConnection.writeScope(kotlin.jvm.functions.Function2, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object writeScope(Function2 function2, ContinuationImpl continuationImpl) throws Throwable {
+        C07591 c07591;
+        ?? file;
+        MutexImpl mutexImpl;
+        Function2 function22;
+        FileWriteScope fileWriteScope;
+        Throwable th;
+        Closeable closeable;
+        FileStorageConnection fileStorageConnection;
+        Mutex mutex;
+        File file2;
+        if (continuationImpl instanceof C07591) {
+            c07591 = (C07591) continuationImpl;
+            int i = c07591.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                c07591.label = i - Integer.MIN_VALUE;
+            } else {
+                c07591 = new C07591(continuationImpl);
+            }
+        }
+        ?? r10 = c07591.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = c07591.label;
+        try {
+            try {
+                try {
+                } catch (Throwable th2) {
+                    th = th2;
+                    r10.unlock(null);
+                    throw th;
+                }
+            } catch (Throwable th3) {
+                th = th3;
+                r10 = coroutineSingletons;
+                r10.unlock(null);
+                throw th;
+            }
+        } catch (IOException e) {
+            e = e;
+            file = function2;
+        }
+        try {
+            try {
+                if (i2 == 0) {
+                    ResultKt.throwOnFailure(r10);
+                    if (this.closed.get()) {
+                        throw new IllegalStateException("StorageConnection has already been disposed.");
+                    }
+                    File file3 = this.file;
+                    File parentFile = file3.getCanonicalFile().getParentFile();
+                    if (parentFile != null) {
+                        parentFile.mkdirs();
+                        if (!parentFile.isDirectory()) {
+                            throw new IOException("Unable to create parent directories of " + file3);
+                        }
+                    }
+                    mutexImpl = this.transactionMutex;
+                    c07591.L$0 = this;
+                    c07591.L$1 = function2;
+                    c07591.L$2 = mutexImpl;
+                    c07591.label = 1;
+                    function22 = function2;
+                    if (mutexImpl.lock(c07591) != coroutineSingletons) {
+                    }
+                    return coroutineSingletons;
+                }
+                if (i2 != 1) {
+                    if (i2 != 2) {
+                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                    }
+                    closeable = (Closeable) c07591.L$3;
+                    file2 = (File) c07591.L$2;
+                    mutex = (Mutex) c07591.L$1;
+                    fileStorageConnection = (FileStorageConnection) c07591.L$0;
+                    try {
+                        ResultKt.throwOnFailure(r10);
+                        Unit unit = Unit.INSTANCE;
+                        try {
+                            closeable.close();
+                            th = null;
+                        } catch (Throwable th4) {
+                            th = th4;
+                        }
+                        if (th == null) {
+                            throw th;
+                        }
+                        if (file2.exists() && !FileMoves_androidKt.atomicMoveTo(file2, fileStorageConnection.file)) {
+                            throw new IOException("Unable to rename " + file2 + " to " + fileStorageConnection.file + ". This likely means that there are multiple instances of DataStore for this file. Ensure that you are only creating a single instance of datastore for this file.");
+                        }
+                        Unit unit2 = Unit.INSTANCE;
+                        mutex.unlock(null);
+                        return Unit.INSTANCE;
+                    } catch (Throwable th5) {
+                        th = th5;
+                        try {
+                            closeable.close();
+                        } catch (Throwable th6) {
+                            ExceptionsKt__ExceptionsKt.addSuppressed(th, th6);
+                        }
+                        throw th;
+                    }
+                }
+                ?? r8 = (Mutex) c07591.L$2;
+                Function2 function23 = (Function2) c07591.L$1;
+                FileStorageConnection fileStorageConnection2 = (FileStorageConnection) c07591.L$0;
+                ResultKt.throwOnFailure(r10);
+                mutexImpl = r8;
+                this = fileStorageConnection2;
+                function22 = function23;
+                c07591.L$0 = this;
+                c07591.L$1 = mutexImpl;
+                c07591.L$2 = file;
+                c07591.L$3 = fileWriteScope;
+                c07591.label = 2;
+                if (function22.invoke(fileWriteScope, c07591) != coroutineSingletons) {
+                    fileStorageConnection = this;
+                    mutex = mutexImpl;
+                    file2 = file;
+                    closeable = fileWriteScope;
+                    Unit unit3 = Unit.INSTANCE;
+                    closeable.close();
+                    th = null;
+                    if (th == null) {
+                    }
+                }
+                return coroutineSingletons;
+            } catch (Throwable th7) {
+                th = th7;
+                closeable = fileWriteScope;
+                closeable.close();
+                throw th;
+            }
+            fileWriteScope = new FileWriteScope(file, this.serializer);
+        } catch (IOException e2) {
+            e = e2;
+            if (file.exists()) {
+                file.delete();
+            }
+            throw e;
+        }
+        file = new File(this.file.getAbsolutePath() + LSOUtils.TEMP_DIR);
     }
 }

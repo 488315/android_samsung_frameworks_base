@@ -30,7 +30,6 @@ import com.google.android.material.shape.Shapeable;
 import com.google.android.material.theme.overlay.MaterialThemeOverlay;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class MaterialCardView extends CardView implements Checkable, Shapeable {
     public static final int[] CHECKABLE_STATE_SET = {R.attr.state_checkable};
@@ -57,15 +56,15 @@ public class MaterialCardView extends CardView implements Checkable, Shapeable {
 
     @Override // android.view.ViewGroup, android.view.View
     public final int[] onCreateDrawableState(int i) {
-        int[] onCreateDrawableState = super.onCreateDrawableState(i + 3);
+        int[] iArrOnCreateDrawableState = super.onCreateDrawableState(i + 3);
         MaterialCardViewHelper materialCardViewHelper = this.cardViewHelper;
         if (materialCardViewHelper != null && materialCardViewHelper.checkable) {
-            FrameLayout.mergeDrawableStates(onCreateDrawableState, CHECKABLE_STATE_SET);
+            FrameLayout.mergeDrawableStates(iArrOnCreateDrawableState, CHECKABLE_STATE_SET);
         }
         if (this.checked) {
-            FrameLayout.mergeDrawableStates(onCreateDrawableState, CHECKED_STATE_SET);
+            FrameLayout.mergeDrawableStates(iArrOnCreateDrawableState, CHECKED_STATE_SET);
         }
-        return onCreateDrawableState;
+        return iArrOnCreateDrawableState;
     }
 
     @Override // android.view.View
@@ -87,10 +86,10 @@ public class MaterialCardView extends CardView implements Checkable, Shapeable {
 
     @Override // androidx.cardview.widget.CardView, android.widget.FrameLayout, android.view.View
     public final void onMeasure(int i, int i2) {
+        int iCeil;
+        int iCeil2;
         int i3;
         int i4;
-        int i5;
-        int i6;
         super.onMeasure(i, i2);
         MaterialCardViewHelper materialCardViewHelper = this.cardViewHelper;
         int measuredWidth = getMeasuredWidth();
@@ -101,28 +100,28 @@ public class MaterialCardView extends CardView implements Checkable, Shapeable {
                 CardViewApi21Impl cardViewApi21Impl = CardView.IMPL;
                 CardView.AnonymousClass1 anonymousClass1 = materialCardView.mCardViewDelegate;
                 cardViewApi21Impl.getClass();
-                i3 = (int) Math.ceil(((((RoundRectDrawable) anonymousClass1.mCardBackground).mPadding * 1.5f) + (materialCardViewHelper.shouldAddCornerPaddingOutsideCardBackground() ? materialCardViewHelper.calculateActualCornerPadding() : 0.0f)) * 2.0f);
+                iCeil = (int) Math.ceil(((((RoundRectDrawable) anonymousClass1.mCardBackground).mPadding * 1.5f) + (materialCardViewHelper.shouldAddCornerPaddingOutsideCardBackground() ? materialCardViewHelper.calculateActualCornerPadding() : 0.0f)) * 2.0f);
                 CardView.AnonymousClass1 anonymousClass12 = materialCardView.mCardViewDelegate;
                 cardViewApi21Impl.getClass();
-                i4 = (int) Math.ceil((((RoundRectDrawable) anonymousClass12.mCardBackground).mPadding + (materialCardViewHelper.shouldAddCornerPaddingOutsideCardBackground() ? materialCardViewHelper.calculateActualCornerPadding() : 0.0f)) * 2.0f);
+                iCeil2 = (int) Math.ceil((((RoundRectDrawable) anonymousClass12.mCardBackground).mPadding + (materialCardViewHelper.shouldAddCornerPaddingOutsideCardBackground() ? materialCardViewHelper.calculateActualCornerPadding() : 0.0f)) * 2.0f);
             } else {
-                i3 = 0;
-                i4 = 0;
+                iCeil = 0;
+                iCeil2 = 0;
             }
-            int i7 = materialCardViewHelper.checkedIconGravity;
-            int i8 = (i7 & 8388613) == 8388613 ? ((measuredWidth - materialCardViewHelper.checkedIconMargin) - materialCardViewHelper.checkedIconSize) - i4 : materialCardViewHelper.checkedIconMargin;
-            int i9 = (i7 & 80) == 80 ? materialCardViewHelper.checkedIconMargin : ((measuredHeight - materialCardViewHelper.checkedIconMargin) - materialCardViewHelper.checkedIconSize) - i3;
-            int i10 = (i7 & 8388613) == 8388613 ? materialCardViewHelper.checkedIconMargin : ((measuredWidth - materialCardViewHelper.checkedIconMargin) - materialCardViewHelper.checkedIconSize) - i4;
-            int i11 = (i7 & 80) == 80 ? ((measuredHeight - materialCardViewHelper.checkedIconMargin) - materialCardViewHelper.checkedIconSize) - i3 : materialCardViewHelper.checkedIconMargin;
+            int i5 = materialCardViewHelper.checkedIconGravity;
+            int i6 = (i5 & 8388613) == 8388613 ? ((measuredWidth - materialCardViewHelper.checkedIconMargin) - materialCardViewHelper.checkedIconSize) - iCeil2 : materialCardViewHelper.checkedIconMargin;
+            int i7 = (i5 & 80) == 80 ? materialCardViewHelper.checkedIconMargin : ((measuredHeight - materialCardViewHelper.checkedIconMargin) - materialCardViewHelper.checkedIconSize) - iCeil;
+            int i8 = (i5 & 8388613) == 8388613 ? materialCardViewHelper.checkedIconMargin : ((measuredWidth - materialCardViewHelper.checkedIconMargin) - materialCardViewHelper.checkedIconSize) - iCeil2;
+            int i9 = (i5 & 80) == 80 ? ((measuredHeight - materialCardViewHelper.checkedIconMargin) - materialCardViewHelper.checkedIconSize) - iCeil : materialCardViewHelper.checkedIconMargin;
             WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
             if (materialCardView.getLayoutDirection() == 1) {
-                i6 = i10;
-                i5 = i8;
+                i4 = i8;
+                i3 = i6;
             } else {
-                i5 = i10;
-                i6 = i8;
+                i3 = i8;
+                i4 = i6;
             }
-            materialCardViewHelper.clickableForegroundDrawable.setLayerInset(2, i6, i11, i5, i9);
+            materialCardViewHelper.clickableForegroundDrawable.setLayerInset(2, i4, i9, i3, i7);
         }
     }
 
@@ -164,10 +163,10 @@ public class MaterialCardView extends CardView implements Checkable, Shapeable {
         MaterialCardViewHelper materialCardViewHelper = this.cardViewHelper;
         materialCardViewHelper.setShapeAppearanceModel(materialCardViewHelper.shapeAppearanceModel.withCornerSize(f));
         materialCardViewHelper.fgDrawable.invalidateSelf();
-        boolean shouldAddCornerPaddingOutsideCardBackground = materialCardViewHelper.shouldAddCornerPaddingOutsideCardBackground();
+        boolean zShouldAddCornerPaddingOutsideCardBackground = materialCardViewHelper.shouldAddCornerPaddingOutsideCardBackground();
         MaterialShapeDrawable materialShapeDrawable = materialCardViewHelper.bgDrawable;
         MaterialCardView materialCardView = materialCardViewHelper.materialCardView;
-        if (shouldAddCornerPaddingOutsideCardBackground || (materialCardView.mPreventCornerOverlap && !materialShapeDrawable.drawableState.shapeAppearanceModel.isRoundRect(materialShapeDrawable.getBoundsAsRectF$1()))) {
+        if (zShouldAddCornerPaddingOutsideCardBackground || (materialCardView.mPreventCornerOverlap && !materialShapeDrawable.drawableState.shapeAppearanceModel.isRoundRect(materialShapeDrawable.getBoundsAsRectF$1()))) {
             materialCardViewHelper.updateContentPadding();
         }
         if (materialCardViewHelper.shouldAddCornerPaddingOutsideCardBackground()) {
@@ -214,7 +213,7 @@ public class MaterialCardView extends CardView implements Checkable, Shapeable {
         super(MaterialThemeOverlay.wrap(context, attributeSet, i, com.android.systemui.R.style.Widget_MaterialComponents_CardView), attributeSet, i);
         this.checked = false;
         this.isParentCardViewDoneInitializing = true;
-        TypedArray obtainStyledAttributes = ThemeEnforcement.obtainStyledAttributes(getContext(), attributeSet, R$styleable.MaterialCardView, i, com.android.systemui.R.style.Widget_MaterialComponents_CardView, new int[0]);
+        TypedArray typedArrayObtainStyledAttributes = ThemeEnforcement.obtainStyledAttributes(getContext(), attributeSet, R$styleable.MaterialCardView, i, com.android.systemui.R.style.Widget_MaterialComponents_CardView, new int[0]);
         MaterialCardViewHelper materialCardViewHelper = new MaterialCardViewHelper(this, attributeSet, i, com.android.systemui.R.style.Widget_MaterialComponents_CardView);
         this.cardViewHelper = materialCardViewHelper;
         CardViewApi21Impl cardViewApi21Impl = CardView.IMPL;
@@ -227,21 +226,21 @@ public class MaterialCardView extends CardView implements Checkable, Shapeable {
         materialCardViewHelper.userContentPadding.set(rect.left, rect.top, rect.right, rect.bottom);
         materialCardViewHelper.updateContentPadding();
         MaterialCardView materialCardView = materialCardViewHelper.materialCardView;
-        ColorStateList colorStateList2 = MaterialResources.getColorStateList(materialCardView.getContext(), obtainStyledAttributes, 11);
+        ColorStateList colorStateList2 = MaterialResources.getColorStateList(materialCardView.getContext(), typedArrayObtainStyledAttributes, 11);
         materialCardViewHelper.strokeColor = colorStateList2;
         if (colorStateList2 == null) {
             materialCardViewHelper.strokeColor = ColorStateList.valueOf(-1);
         }
-        materialCardViewHelper.strokeWidth = obtainStyledAttributes.getDimensionPixelSize(12, 0);
-        boolean z = obtainStyledAttributes.getBoolean(0, false);
+        materialCardViewHelper.strokeWidth = typedArrayObtainStyledAttributes.getDimensionPixelSize(12, 0);
+        boolean z = typedArrayObtainStyledAttributes.getBoolean(0, false);
         materialCardViewHelper.checkable = z;
         materialCardView.setLongClickable(z);
-        materialCardViewHelper.checkedIconTint = MaterialResources.getColorStateList(materialCardView.getContext(), obtainStyledAttributes, 6);
-        Drawable drawable = MaterialResources.getDrawable(materialCardView.getContext(), obtainStyledAttributes, 2);
+        materialCardViewHelper.checkedIconTint = MaterialResources.getColorStateList(materialCardView.getContext(), typedArrayObtainStyledAttributes, 6);
+        Drawable drawable = MaterialResources.getDrawable(materialCardView.getContext(), typedArrayObtainStyledAttributes, 2);
         if (drawable != null) {
-            Drawable mutate = drawable.mutate();
-            materialCardViewHelper.checkedIcon = mutate;
-            mutate.setTintList(materialCardViewHelper.checkedIconTint);
+            Drawable drawableMutate = drawable.mutate();
+            materialCardViewHelper.checkedIcon = drawableMutate;
+            drawableMutate.setTintList(materialCardViewHelper.checkedIconTint);
             materialCardViewHelper.setChecked(materialCardView.checked, false);
         } else {
             materialCardViewHelper.checkedIcon = null;
@@ -250,15 +249,15 @@ public class MaterialCardView extends CardView implements Checkable, Shapeable {
         if (layerDrawable != null) {
             layerDrawable.setDrawableByLayerId(com.android.systemui.R.id.mtrl_card_checked_layer_id, materialCardViewHelper.checkedIcon);
         }
-        materialCardViewHelper.checkedIconSize = obtainStyledAttributes.getDimensionPixelSize(5, 0);
-        materialCardViewHelper.checkedIconMargin = obtainStyledAttributes.getDimensionPixelSize(4, 0);
-        materialCardViewHelper.checkedIconGravity = obtainStyledAttributes.getInteger(3, 8388661);
-        ColorStateList colorStateList3 = MaterialResources.getColorStateList(materialCardView.getContext(), obtainStyledAttributes, 7);
+        materialCardViewHelper.checkedIconSize = typedArrayObtainStyledAttributes.getDimensionPixelSize(5, 0);
+        materialCardViewHelper.checkedIconMargin = typedArrayObtainStyledAttributes.getDimensionPixelSize(4, 0);
+        materialCardViewHelper.checkedIconGravity = typedArrayObtainStyledAttributes.getInteger(3, 8388661);
+        ColorStateList colorStateList3 = MaterialResources.getColorStateList(materialCardView.getContext(), typedArrayObtainStyledAttributes, 7);
         materialCardViewHelper.rippleColor = colorStateList3;
         if (colorStateList3 == null) {
             materialCardViewHelper.rippleColor = ColorStateList.valueOf(MaterialColors.getColor(materialCardView, com.android.systemui.R.attr.colorControlHighlight));
         }
-        ColorStateList colorStateList4 = MaterialResources.getColorStateList(materialCardView.getContext(), obtainStyledAttributes, 1);
+        ColorStateList colorStateList4 = MaterialResources.getColorStateList(materialCardView.getContext(), typedArrayObtainStyledAttributes, 1);
         colorStateList4 = colorStateList4 == null ? ColorStateList.valueOf(0) : colorStateList4;
         MaterialShapeDrawable materialShapeDrawable2 = materialCardViewHelper.foregroundContentDrawable;
         materialShapeDrawable2.setFillColor(colorStateList4);
@@ -278,6 +277,6 @@ public class MaterialCardView extends CardView implements Checkable, Shapeable {
         MaterialShapeDrawable clickableForeground = materialCardViewHelper.shouldUseClickableForeground() ? materialCardViewHelper.getClickableForeground() : materialShapeDrawable2;
         materialCardViewHelper.fgDrawable = clickableForeground;
         materialCardView.setForeground(materialCardViewHelper.insetDrawable(clickableForeground));
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
     }
 }

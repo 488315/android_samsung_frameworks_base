@@ -46,9 +46,9 @@ public interface INearbyMediaDevicesUpdateCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(INearbyMediaDevicesUpdateCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof INearbyMediaDevicesUpdateCallback)) {
-                return (INearbyMediaDevicesUpdateCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(INearbyMediaDevicesUpdateCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof INearbyMediaDevicesUpdateCallback)) {
+                return (INearbyMediaDevicesUpdateCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -75,9 +75,9 @@ public interface INearbyMediaDevicesUpdateCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                ArrayList createTypedArrayList = parcel.createTypedArrayList(NearbyDevice.CREATOR);
+                ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(NearbyDevice.CREATOR);
                 parcel.enforceNoDataAvail();
-                onDevicesUpdated(createTypedArrayList);
+                onDevicesUpdated(arrayListCreateTypedArrayList);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -101,13 +101,13 @@ public interface INearbyMediaDevicesUpdateCallback extends IInterface {
 
             @Override // android.media.INearbyMediaDevicesUpdateCallback
             public void onDevicesUpdated(List<NearbyDevice> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(INearbyMediaDevicesUpdateCallback.DESCRIPTOR);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(INearbyMediaDevicesUpdateCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

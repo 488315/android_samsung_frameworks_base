@@ -59,9 +59,9 @@ public interface ISemInsTrCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISemInsTrCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISemInsTrCallback)) {
-                return (ISemInsTrCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISemInsTrCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISemInsTrCallback)) {
+                return (ISemInsTrCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -94,9 +94,9 @@ public interface ISemInsTrCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                boolean readBoolean = parcel.readBoolean();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                onTrainingCompleted(readBoolean);
+                onTrainingCompleted(z);
             } else if (i == 2) {
                 ModelMetrics modelMetrics = (ModelMetrics) parcel.readTypedObject(ModelMetrics.CREATOR);
                 parcel.enforceNoDataAvail();
@@ -129,37 +129,37 @@ public interface ISemInsTrCallback extends IInterface {
 
             @Override // com.samsung.android.wifi.intelligence.ins.ISemInsTrCallback
             public void onTrainingCompleted(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISemInsTrCallback.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISemInsTrCallback.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.intelligence.ins.ISemInsTrCallback
             public void onPathMetricsUpdate(ModelMetrics modelMetrics) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISemInsTrCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(modelMetrics, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISemInsTrCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(modelMetrics, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.wifi.intelligence.ins.ISemInsTrCallback
             public void onNsmMetricsUpdate(ModelMetrics modelMetrics) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISemInsTrCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(modelMetrics, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISemInsTrCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(modelMetrics, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

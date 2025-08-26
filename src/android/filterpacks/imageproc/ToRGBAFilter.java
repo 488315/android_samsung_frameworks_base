@@ -34,10 +34,10 @@ public class ToRGBAFilter extends Filter {
     }
 
     public FrameFormat getConvertedFormat(FrameFormat frameFormat) {
-        MutableFrameFormat mutableCopy = frameFormat.mutableCopy();
-        mutableCopy.setMetaValue(ImageFormat.COLORSPACE_KEY, 3);
-        mutableCopy.setBytesPerSample(4);
-        return mutableCopy;
+        MutableFrameFormat mutableFrameFormatMutableCopy = frameFormat.mutableCopy();
+        mutableFrameFormatMutableCopy.setMetaValue(ImageFormat.COLORSPACE_KEY, 3);
+        mutableFrameFormatMutableCopy.setBytesPerSample(4);
+        return mutableFrameFormatMutableCopy;
     }
 
     public void createProgram(FilterContext filterContext, FrameFormat frameFormat) {
@@ -60,11 +60,11 @@ public class ToRGBAFilter extends Filter {
 
     @Override // android.filterfw.core.Filter
     public void process(FilterContext filterContext) {
-        Frame pullInput = pullInput("image");
-        createProgram(filterContext, pullInput.getFormat());
-        Frame newFrame = filterContext.getFrameManager().newFrame(getConvertedFormat(pullInput.getFormat()));
-        this.mProgram.process(pullInput, newFrame);
-        pushOutput("image", newFrame);
-        newFrame.release();
+        Frame framePullInput = pullInput("image");
+        createProgram(filterContext, framePullInput.getFormat());
+        Frame frameNewFrame = filterContext.getFrameManager().newFrame(getConvertedFormat(framePullInput.getFormat()));
+        this.mProgram.process(framePullInput, frameNewFrame);
+        pushOutput("image", frameNewFrame);
+        frameNewFrame.release();
     }
 }

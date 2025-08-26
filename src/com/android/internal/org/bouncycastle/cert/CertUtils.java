@@ -47,9 +47,9 @@ class CertUtils {
     }
 
     static ASN1Primitive parseNonEmptyASN1(byte[] bArr) throws IOException {
-        ASN1Primitive fromByteArray = ASN1Primitive.fromByteArray(bArr);
-        if (fromByteArray != null) {
-            return fromByteArray;
+        ASN1Primitive aSN1PrimitiveFromByteArray = ASN1Primitive.fromByteArray(bArr);
+        if (aSN1PrimitiveFromByteArray != null) {
+            return aSN1PrimitiveFromByteArray;
         }
         throw new IOException("no content found");
     }
@@ -179,17 +179,17 @@ class CertUtils {
     }
 
     static ExtensionsGenerator doReplaceExtension(ExtensionsGenerator extensionsGenerator, Extension extension) {
-        Extensions generate = extensionsGenerator.generate();
+        Extensions extensionsGenerate = extensionsGenerator.generate();
         ExtensionsGenerator extensionsGenerator2 = new ExtensionsGenerator();
-        Enumeration oids = generate.oids();
+        Enumeration enumerationOids = extensionsGenerate.oids();
         boolean z = false;
-        while (oids.hasMoreElements()) {
-            ASN1ObjectIdentifier aSN1ObjectIdentifier = (ASN1ObjectIdentifier) oids.nextElement();
+        while (enumerationOids.hasMoreElements()) {
+            ASN1ObjectIdentifier aSN1ObjectIdentifier = (ASN1ObjectIdentifier) enumerationOids.nextElement();
             if (aSN1ObjectIdentifier.equals((ASN1Primitive) extension.getExtnId())) {
                 extensionsGenerator2.addExtension(extension);
                 z = true;
             } else {
-                extensionsGenerator2.addExtension(generate.getExtension(aSN1ObjectIdentifier));
+                extensionsGenerator2.addExtension(extensionsGenerate.getExtension(aSN1ObjectIdentifier));
             }
         }
         if (z) {
@@ -199,16 +199,16 @@ class CertUtils {
     }
 
     static ExtensionsGenerator doRemoveExtension(ExtensionsGenerator extensionsGenerator, ASN1ObjectIdentifier aSN1ObjectIdentifier) {
-        Extensions generate = extensionsGenerator.generate();
+        Extensions extensionsGenerate = extensionsGenerator.generate();
         ExtensionsGenerator extensionsGenerator2 = new ExtensionsGenerator();
-        Enumeration oids = generate.oids();
+        Enumeration enumerationOids = extensionsGenerate.oids();
         boolean z = false;
-        while (oids.hasMoreElements()) {
-            ASN1ObjectIdentifier aSN1ObjectIdentifier2 = (ASN1ObjectIdentifier) oids.nextElement();
+        while (enumerationOids.hasMoreElements()) {
+            ASN1ObjectIdentifier aSN1ObjectIdentifier2 = (ASN1ObjectIdentifier) enumerationOids.nextElement();
             if (aSN1ObjectIdentifier2.equals((ASN1Primitive) aSN1ObjectIdentifier)) {
                 z = true;
             } else {
-                extensionsGenerator2.addExtension(generate.getExtension(aSN1ObjectIdentifier2));
+                extensionsGenerator2.addExtension(extensionsGenerate.getExtension(aSN1ObjectIdentifier2));
             }
         }
         if (z) {

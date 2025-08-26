@@ -2,6 +2,7 @@ package com.android.systemui.statusbar;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.provider.Settings;
 import android.view.View;
@@ -25,7 +26,6 @@ import com.android.systemui.util.SettingsHelper;
 import java.util.Arrays;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class NotificationShelfManager {
     public boolean clearButtonVisible;
@@ -61,12 +61,12 @@ public final class NotificationShelfManager {
         this.configurationListener = new ConfigurationController.ConfigurationListener() { // from class: com.android.systemui.statusbar.NotificationShelfManager$configurationListener$1
             @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
             public final void onConfigChanged(Configuration configuration) {
-                final NotificationShelfManager notificationShelfManager = NotificationShelfManager.this;
+                final NotificationShelfManager notificationShelfManager = this.this$0;
                 NotificationShelfManager.access$updateRunnable(notificationShelfManager, new Runnable() { // from class: com.android.systemui.statusbar.NotificationShelfManager$configurationListener$1$onConfigChanged$1
                     @Override // java.lang.Runnable
-                    public final void run() {
-                        NotificationShelfManager.this.updateResources();
-                        NotificationShelfManager notificationShelfManager2 = NotificationShelfManager.this;
+                    public final void run() throws Resources.NotFoundException {
+                        notificationShelfManager.updateResources();
+                        NotificationShelfManager notificationShelfManager2 = notificationShelfManager;
                         String string = notificationShelfManager2.context.getResources().getString(R.string.accessibility_button);
                         String string2 = notificationShelfManager2.context.getResources().getString(R.string.noti_setting_text);
                         String string3 = notificationShelfManager2.context.getResources().getString(R.string.clear_all_text);
@@ -86,34 +86,34 @@ public final class NotificationShelfManager {
                         if (launchableTextView4 != null) {
                             launchableTextView4.setText(string3);
                         }
-                        NotificationShelfManager.this.updateClearButton();
-                        NotificationShelfManager.this.updateAccessibility();
+                        notificationShelfManager.updateClearButton();
+                        notificationShelfManager.updateAccessibility();
                     }
                 });
             }
 
             @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
             public final void onDensityOrFontScaleChanged() {
-                final NotificationShelfManager notificationShelfManager = NotificationShelfManager.this;
+                final NotificationShelfManager notificationShelfManager = this.this$0;
                 NotificationShelfManager.access$updateRunnable(notificationShelfManager, new Runnable() { // from class: com.android.systemui.statusbar.NotificationShelfManager$configurationListener$1$onDensityOrFontScaleChanged$1
                     @Override // java.lang.Runnable
-                    public final void run() {
-                        NotificationShelfManager.this.updateResources();
-                        NotificationShelfManager.this.updateClearButton();
-                        NotificationShelfManager.this.updateAccessibility();
+                    public final void run() throws Resources.NotFoundException {
+                        notificationShelfManager.updateResources();
+                        notificationShelfManager.updateClearButton();
+                        notificationShelfManager.updateAccessibility();
                     }
                 });
             }
 
             @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
             public final void onUiModeChanged() {
-                final NotificationShelfManager notificationShelfManager = NotificationShelfManager.this;
+                final NotificationShelfManager notificationShelfManager = this.this$0;
                 NotificationShelfManager.access$updateRunnable(notificationShelfManager, new Runnable() { // from class: com.android.systemui.statusbar.NotificationShelfManager$configurationListener$1$onUiModeChanged$1
                     @Override // java.lang.Runnable
-                    public final void run() {
-                        NotificationShelfManager.this.updateResources();
-                        NotificationShelfManager.this.updateClearButton();
-                        NotificationShelfManager.this.updateAccessibility();
+                    public final void run() throws Resources.NotFoundException {
+                        notificationShelfManager.updateResources();
+                        notificationShelfManager.updateClearButton();
+                        notificationShelfManager.updateAccessibility();
                     }
                 });
             }
@@ -124,7 +124,7 @@ public final class NotificationShelfManager {
                 if (uri == null || !Intrinsics.areEqual(Settings.Secure.getUriFor(SettingsHelper.INDEX_SPLIT_QUICK_PANEL), uri)) {
                     return;
                 }
-                NotificationShelfManager.this.updateShelfLayout();
+                this.this$0.updateShelfLayout();
             }
         };
         this.panelSplitChangeCallback = onChangedCallback;
@@ -147,7 +147,7 @@ public final class NotificationShelfManager {
             @Override // android.view.ViewTreeObserver.OnGlobalLayoutListener
             public final void onGlobalLayout() {
                 ViewTreeObserver viewTreeObserver2;
-                NotificationShelf notificationShelf2 = NotificationShelfManager.this.shelf;
+                NotificationShelf notificationShelf2 = this.this$0.shelf;
                 if (notificationShelf2 != null && (viewTreeObserver2 = notificationShelf2.getViewTreeObserver()) != null) {
                     viewTreeObserver2.removeOnGlobalLayoutListener(this);
                 }
@@ -156,13 +156,8 @@ public final class NotificationShelfManager {
         });
     }
 
-    public final int getShelfHeight() {
-        boolean z = this.statusBarState == 1;
-        boolean z2 = this.context.getResources().getConfiguration().orientation == 2;
-        this.mShelfTextAreaHeight = z ? this.context.getResources().getDimensionPixelSize(R.dimen.sec_notification_shelf_text_area_height_on_keyguard) : this.context.getResources().getDimensionPixelSize(R.dimen.sec_notification_shelf_text_area_height);
-        this.mShelfTextAreaPaddingTop = z ? 0 : (QpRune.QUICK_TABLET || this.secQsUiDisplayModeInteractor.isTablet()) ? this.context.getResources().getDimensionPixelSize(R.dimen.sec_notification_shelf_text_area_top_padding_on_tablet) : this.context.getResources().getDimensionPixelSize(R.dimen.sec_notification_shelf_text_area_top_padding);
-        this.mShelfTextAreaPaddingBottom = z ? 0 : (!QpRune.QUICK_DATA_USAGE_LABEL || DeviceState.getActiveSimCount(this.context) <= 0 || this.settingsHelper.isPanelSplit()) ? z2 ? this.context.getResources().getDimensionPixelSize(R.dimen.sec_notification_shelf_text_area_bottom_padding_with_swipe_nav_on_landscape) : this.settingsHelper.isNavigationBarGestureWhileHidden() ? this.context.getResources().getDimensionPixelSize(R.dimen.sec_notification_shelf_text_area_bottom_padding_with_swipe_nav) : this.context.getResources().getDimensionPixelSize(R.dimen.sec_notification_shelf_text_area_bottom_padding_with_button_nav) : this.context.getResources().getDimensionPixelSize(R.dimen.sec_notification_shelf_text_area_bottom_padding_with_data_usage_view);
-        this.mShelfPaddingHorizontal = this.context.getResources().getDimensionPixelSize(R.dimen.sec_notification_shelf_padding_horizontal);
+    public final int getPanelShelfHeight() {
+        updateShelfHeightResource(2);
         return this.mShelfTextAreaHeight + this.mShelfTextAreaPaddingTop + this.mShelfTextAreaPaddingBottom;
     }
 
@@ -255,23 +250,42 @@ public final class NotificationShelfManager {
         }
     }
 
-    public final void updateResources() {
+    public final void updateResources() throws Resources.NotFoundException {
         updateShelfLayout();
         int i = (QpRune.QUICK_TABLET || this.secQsUiDisplayModeInteractor.isTablet()) ? R.dimen.bottom_bar_button_text_size_for_tablet : R.dimen.bottom_bar_button_text_size;
         FontSizeUtils.updateFontSize(this.mSettingButton, i, 0.8f, 1.3f);
         FontSizeUtils.updateFontSize(this.mClearAllButton, i, 0.8f, 1.3f);
     }
 
+    public final void updateShelfHeightResource(int i) {
+        int dimensionPixelSize = 0;
+        boolean z = i == 1;
+        boolean z2 = this.context.getResources().getConfiguration().orientation == 2;
+        this.mShelfTextAreaHeight = z ? this.context.getResources().getDimensionPixelSize(R.dimen.sec_notification_shelf_text_area_height_on_keyguard) : this.context.getResources().getDimensionPixelSize(R.dimen.sec_notification_shelf_text_area_height);
+        SecQsUiDisplayModeInteractor secQsUiDisplayModeInteractor = this.secQsUiDisplayModeInteractor;
+        this.mShelfTextAreaPaddingTop = z ? 0 : (QpRune.QUICK_TABLET || secQsUiDisplayModeInteractor.isTablet()) ? this.context.getResources().getDimensionPixelSize(R.dimen.sec_notification_shelf_text_area_top_padding_on_tablet) : this.context.getResources().getDimensionPixelSize(R.dimen.sec_notification_shelf_text_area_top_padding);
+        if (!z && ((!QpRune.QUICK_DATA_USAGE_LABEL || DeviceState.getActiveSimCount(this.context) <= 0 || this.settingsHelper.isPanelSplit()) && (!QpRune.QUICK_PANEL_CODE_FOR_POP_OVER || !secQsUiDisplayModeInteractor.isTablet()))) {
+            dimensionPixelSize = z2 ? this.context.getResources().getDimensionPixelSize(R.dimen.sec_notification_shelf_text_area_bottom_padding_with_swipe_nav_on_landscape) : this.settingsHelper.isNavigationBarGestureWhileHidden() ? this.context.getResources().getDimensionPixelSize(R.dimen.sec_notification_shelf_text_area_bottom_padding_with_swipe_nav) : this.context.getResources().getDimensionPixelSize(R.dimen.sec_notification_shelf_text_area_bottom_padding_with_button_nav);
+        }
+        this.mShelfTextAreaPaddingBottom = dimensionPixelSize;
+        this.mShelfPaddingHorizontal = this.context.getResources().getDimensionPixelSize(R.dimen.sec_notification_shelf_padding_horizontal);
+    }
+
     public final void updateShelfLayout() {
-        int shelfHeight = getShelfHeight();
+        updateShelfHeightResource(this.statusBarState);
+        int i = this.mShelfTextAreaHeight + this.mShelfTextAreaPaddingTop + this.mShelfTextAreaPaddingBottom;
         NotificationShelf notificationShelf = this.shelf;
         if (notificationShelf != null) {
-            notificationShelf.getLayoutParams().height = shelfHeight;
+            if (!QpRune.QUICK_DATA_USAGE_LABEL || DeviceState.getActiveSimCount(notificationShelf.getContext()) <= 0 || this.settingsHelper.isPanelSplit()) {
+                notificationShelf.getLayoutParams().height = i;
+            } else {
+                notificationShelf.getLayoutParams().height = notificationShelf.getContext().getResources().getDimensionPixelSize(R.dimen.sec_notification_shelf_text_area_bottom_padding_with_data_usage_view) + i;
+            }
             notificationShelf.setPaddingRelative(this.mShelfPaddingHorizontal, notificationShelf.getPaddingTop(), this.mShelfPaddingHorizontal, notificationShelf.getPaddingBottom());
         }
         LinearLayout linearLayout = this.mShelfTextArea;
         if (linearLayout != null) {
-            linearLayout.getLayoutParams().height = shelfHeight;
+            linearLayout.getLayoutParams().height = i;
             linearLayout.setPaddingRelative(linearLayout.getPaddingStart(), this.mShelfTextAreaPaddingTop, linearLayout.getPaddingEnd(), this.mShelfTextAreaPaddingBottom);
         }
         LaunchableTextView launchableTextView = this.mSettingButton;

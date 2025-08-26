@@ -4,7 +4,6 @@ import gov.nist.javax.sip.address.AddressImpl;
 import javax.sip.header.Header;
 import javax.sip.header.HeaderAddress;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class RecordRoute extends AddressParametersHeader implements HeaderAddress, Header {
     private static final long serialVersionUID = 2388023364181727205L;

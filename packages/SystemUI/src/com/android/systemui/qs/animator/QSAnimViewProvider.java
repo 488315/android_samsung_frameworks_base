@@ -1,6 +1,10 @@
 package com.android.systemui.qs.animator;
 
 import android.view.View;
+import android.widget.FrameLayout;
+import com.android.systemui.R;
+import com.android.systemui.blur.SecQSBlurShadowView;
+import com.android.systemui.blur.SecQSNewBlurView;
 import com.android.systemui.qs.QSContainerImplController;
 import com.android.systemui.qs.SecQSDetailController;
 import com.android.systemui.qs.SecQSPanelController;
@@ -9,15 +13,17 @@ import com.android.systemui.qs.bar.BarController;
 import com.android.systemui.qs.bar.BarItemImpl;
 import com.android.systemui.qs.bar.BarType;
 import com.android.systemui.samsung.quicksetting.SecQSPanelCompose;
+import com.android.systemui.shade.NotificationPanelView;
 import com.android.systemui.shade.NotificationPanelViewController;
 import com.android.systemui.shade.ShadeHeaderController;
 import com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayoutController;
+import com.android.systemui.statusbar.phone.SecPanelBackground;
 import com.android.systemui.util.SecQsUiDisplayModeInteractor;
 import java.util.Arrays;
 import java.util.List;
+import kotlin.NoWhenBranchMatchedException;
 import kotlin.enums.EnumEntriesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class QSAnimViewProvider {
     public final BarController barController;
@@ -32,7 +38,6 @@ public final class QSAnimViewProvider {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ViewType {
         public static final /* synthetic */ ViewType[] $VALUES;
         public static final ViewType AFFORDANCE_GLOW;
@@ -59,12 +64,12 @@ public final class QSAnimViewProvider {
         public static final ViewType QS_HEADER_BUTTON_CONTAINER;
         public static final ViewType QS_HEADER_CLOCK;
         public static final ViewType QS_HEADER_CLOCK_DATE_PARENT;
+        public static final ViewType QS_HEADER_CLOCK_FOR_IMMERSIVE_POP_OVER;
         public static final ViewType QS_HEADER_DATE;
         public static final ViewType QS_HEADER_QQS;
         public static final ViewType QS_PANEL;
         public static final ViewType ROOT_VIEW;
         public static final ViewType SHADE_HEADER;
-        public static final ViewType SHADE_HEADER_NETWORK_SPEED;
         public static final ViewType SHADE_HEADER_PLMN;
         public static final ViewType SHADE_HEADER_PRIVACY_CONTAINER;
         public static final ViewType SHADE_HEADER_SYSTEM_ICONS;
@@ -113,18 +118,18 @@ public final class QSAnimViewProvider {
             SHADE_HEADER = viewType20;
             ViewType viewType21 = new ViewType("SHADE_HEADER_PLMN", 20);
             SHADE_HEADER_PLMN = viewType21;
-            ViewType viewType22 = new ViewType("SHADE_HEADER_NETWORK_SPEED", 21);
-            SHADE_HEADER_NETWORK_SPEED = viewType22;
-            ViewType viewType23 = new ViewType("SHADE_HEADER_SYSTEM_ICONS", 22);
-            SHADE_HEADER_SYSTEM_ICONS = viewType23;
-            ViewType viewType24 = new ViewType("SHADE_HEADER_PRIVACY_CONTAINER", 23);
-            SHADE_HEADER_PRIVACY_CONTAINER = viewType24;
-            ViewType viewType25 = new ViewType("QS_HEADER", 24);
-            QS_HEADER = viewType25;
-            ViewType viewType26 = new ViewType("QS_HEADER_QQS", 25);
-            QS_HEADER_QQS = viewType26;
-            ViewType viewType27 = new ViewType("QS_HEADER_CLOCK_DATE_PARENT", 26);
-            QS_HEADER_CLOCK_DATE_PARENT = viewType27;
+            ViewType viewType22 = new ViewType("SHADE_HEADER_SYSTEM_ICONS", 21);
+            SHADE_HEADER_SYSTEM_ICONS = viewType22;
+            ViewType viewType23 = new ViewType("SHADE_HEADER_PRIVACY_CONTAINER", 22);
+            SHADE_HEADER_PRIVACY_CONTAINER = viewType23;
+            ViewType viewType24 = new ViewType("QS_HEADER", 23);
+            QS_HEADER = viewType24;
+            ViewType viewType25 = new ViewType("QS_HEADER_QQS", 24);
+            QS_HEADER_QQS = viewType25;
+            ViewType viewType26 = new ViewType("QS_HEADER_CLOCK_DATE_PARENT", 25);
+            QS_HEADER_CLOCK_DATE_PARENT = viewType26;
+            ViewType viewType27 = new ViewType("QS_HEADER_CLOCK_FOR_IMMERSIVE_POP_OVER", 26);
+            QS_HEADER_CLOCK_FOR_IMMERSIVE_POP_OVER = viewType27;
             ViewType viewType28 = new ViewType("QS_HEADER_CLOCK", 27);
             QS_HEADER_CLOCK = viewType28;
             ViewType viewType29 = new ViewType("QS_HEADER_DATE", 28);
@@ -156,7 +161,6 @@ public final class QSAnimViewProvider {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -247,27 +251,27 @@ public final class QSAnimViewProvider {
             } catch (NoSuchFieldError unused21) {
             }
             try {
-                iArr[ViewType.SHADE_HEADER_NETWORK_SPEED.ordinal()] = 22;
+                iArr[ViewType.SHADE_HEADER_SYSTEM_ICONS.ordinal()] = 22;
             } catch (NoSuchFieldError unused22) {
             }
             try {
-                iArr[ViewType.SHADE_HEADER_SYSTEM_ICONS.ordinal()] = 23;
+                iArr[ViewType.SHADE_HEADER_PRIVACY_CONTAINER.ordinal()] = 23;
             } catch (NoSuchFieldError unused23) {
             }
             try {
-                iArr[ViewType.SHADE_HEADER_PRIVACY_CONTAINER.ordinal()] = 24;
+                iArr[ViewType.QS_HEADER.ordinal()] = 24;
             } catch (NoSuchFieldError unused24) {
             }
             try {
-                iArr[ViewType.QS_HEADER.ordinal()] = 25;
+                iArr[ViewType.QS_HEADER_QQS.ordinal()] = 25;
             } catch (NoSuchFieldError unused25) {
             }
             try {
-                iArr[ViewType.QS_HEADER_QQS.ordinal()] = 26;
+                iArr[ViewType.QS_HEADER_CLOCK_DATE_PARENT.ordinal()] = 26;
             } catch (NoSuchFieldError unused26) {
             }
             try {
-                iArr[ViewType.QS_HEADER_CLOCK_DATE_PARENT.ordinal()] = 27;
+                iArr[ViewType.QS_HEADER_CLOCK_FOR_IMMERSIVE_POP_OVER.ordinal()] = 27;
             } catch (NoSuchFieldError unused27) {
             }
             try {
@@ -315,18 +319,204 @@ public final class QSAnimViewProvider {
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Removed duplicated region for block: B:53:0x0176  */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x017c A[RETURN] */
+    /* JADX WARN: Removed duplicated region for block: B:11:0x003a  */
+    /* JADX WARN: Removed duplicated region for block: B:53:0x0174  */
+    /* JADX WARN: Removed duplicated region for block: B:55:0x017a A[RETURN] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final com.android.systemui.qs.animator.QSAnimView get(com.android.systemui.qs.animator.QSAnimViewProvider.ViewType r7) {
-        /*
-            Method dump skipped, instructions count: 454
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.animator.QSAnimViewProvider.get(com.android.systemui.qs.animator.QSAnimViewProvider$ViewType):com.android.systemui.qs.animator.QSAnimView");
+    public final QSAnimView get(ViewType viewType) {
+        int i = WhenMappings.$EnumSwitchMapping$0[viewType.ordinal()];
+        SecQsUiDisplayModeInteractor secQsUiDisplayModeInteractor = this.secQsUiDisplayModeInteractor;
+        ShadeHeaderController shadeHeaderController = this.headerController;
+        NotificationPanelViewController notificationPanelViewController = this.notificationPanelViewController;
+        SecQuickStatusBarHeader secQuickStatusBarHeader = this.qsHeader;
+        View view = secQuickStatusBarHeader;
+        switch (i) {
+            case 1:
+                view = this.qsContainerImplController.getView().mQSPanelContainer;
+                if (view == null) {
+                    return new QSAnimView(view, viewType);
+                }
+                return null;
+            case 2:
+                view = secQsUiDisplayModeInteractor.isTablet() ? (FrameLayout) notificationPanelViewController.mView.findViewById(R.id.qs_new_blur_view) : null;
+                if (view == null) {
+                }
+                break;
+            case 3:
+                if (secQsUiDisplayModeInteractor.isTablet()) {
+                    view = (SecQSNewBlurView) notificationPanelViewController.mView.findViewById(R.id.qs_new_blur);
+                }
+                if (view == null) {
+                }
+                break;
+            case 4:
+                if (secQsUiDisplayModeInteractor.isTablet()) {
+                    view = (SecPanelBackground) notificationPanelViewController.mView.findViewById(R.id.qs_new_blur_background);
+                }
+                if (view == null) {
+                }
+                break;
+            case 5:
+                if (secQsUiDisplayModeInteractor.isTablet()) {
+                    view = (SecQSBlurShadowView) notificationPanelViewController.mView.findViewById(R.id.qs_large_shadow_view);
+                }
+                if (view == null) {
+                }
+                break;
+            case 6:
+                if (secQsUiDisplayModeInteractor.isTablet()) {
+                    view = (SecQSBlurShadowView) notificationPanelViewController.mView.findViewById(R.id.qs_small_shadow_view);
+                }
+                if (view == null) {
+                }
+                break;
+            case 7:
+                view = this.panelController.getView();
+                if (view == null) {
+                }
+                break;
+            case 8:
+                view = getBar(BarType.TOP_LARGE_TILE);
+                if (view == null) {
+                }
+                break;
+            case 9:
+                view = getBar(BarType.TILE_CHUNK_LAYOUT);
+                if (view == null) {
+                }
+                break;
+            case 10:
+                view = getBar(BarType.VIDEO_CALL_MIC_MODE);
+                if (view == null) {
+                }
+                break;
+            case 11:
+                view = getBar(BarType.MULTI_SIM_PREFERRED_SLOT);
+                if (view == null) {
+                }
+                break;
+            case 12:
+                view = getBar(BarType.BRIGHTNESS_VOLUME);
+                if (view == null) {
+                }
+                break;
+            case 13:
+                view = getBar(BarType.QS_MEDIA_PLAYER);
+                if (view == null) {
+                }
+                break;
+            case 14:
+                view = getBar(BarType.QUICK_CONTROL);
+                if (view == null) {
+                }
+                break;
+            case 15:
+                view = getBar(BarType.BOTTOM_LARGE_TILE);
+                if (view == null) {
+                }
+                break;
+            case 16:
+                view = getBar(BarType.SMARTVIEW_LARGE_TILE);
+                if (view == null) {
+                }
+                break;
+            case 17:
+                view = getBar(BarType.SECURITY_FOOTER);
+                if (view == null) {
+                }
+                break;
+            case 18:
+                view = getBar(BarType.DATAUSAGE);
+                if (view == null) {
+                }
+                break;
+            case 19:
+                view = shadeHeaderController.header;
+                if (view == null) {
+                }
+                break;
+            case 20:
+                view = shadeHeaderController.header.findViewById(R.id.pop_over_immersive_clock);
+                if (view == null) {
+                }
+                break;
+            case 21:
+                view = shadeHeaderController.header.findViewById(R.id.anim_view);
+                if (view == null) {
+                }
+                break;
+            case 22:
+                view = shadeHeaderController.header.findViewById(R.id.shade_header_system_icons);
+                if (view == null) {
+                }
+                break;
+            case 23:
+                view = shadeHeaderController.header.findViewById(R.id.privacy_container);
+                if (view == null) {
+                }
+                break;
+            case 24:
+                if (view == null) {
+                }
+                break;
+            case 25:
+                view = secQuickStatusBarHeader.findViewById(R.id.quick_qs_panel);
+                if (view == null) {
+                }
+                break;
+            case 26:
+                view = secQuickStatusBarHeader.findViewById(R.id.clock_parent);
+                if (view == null) {
+                }
+                break;
+            case 27:
+                view = secQuickStatusBarHeader.findViewById(R.id.container_for_immersive_pop_over);
+                if (view == null) {
+                }
+                break;
+            case 28:
+                view = secQuickStatusBarHeader.findViewById(R.id.header_clock);
+                if (view == null) {
+                }
+                break;
+            case 29:
+                view = secQuickStatusBarHeader.findViewById(R.id.header_date);
+                if (view == null) {
+                }
+                break;
+            case 30:
+                view = secQuickStatusBarHeader.findViewById(R.id.header_settings_container);
+                if (view == null) {
+                }
+                break;
+            case 31:
+                view = secQuickStatusBarHeader.findViewById(R.id.quick_qs_date_buttons);
+                if (view == null) {
+                }
+                break;
+            case 32:
+                NotificationPanelView notificationPanelView = notificationPanelViewController.mView;
+                if (notificationPanelView != null) {
+                    view = notificationPanelView.findViewById(R.id.sec_quick_panel_affordance_glow);
+                }
+                if (view == null) {
+                }
+                break;
+            case 33:
+                view = this.notificationStackScrollLayoutController.mView;
+                if (view == null) {
+                }
+                break;
+            case 34:
+                view = this.detailController.view.findViewById(R.id.qs_detail);
+                if (view == null) {
+                }
+                break;
+            default:
+                throw new NoWhenBranchMatchedException();
+        }
     }
 
     public final View getBar(BarType barType) {

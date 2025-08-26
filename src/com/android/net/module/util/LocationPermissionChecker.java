@@ -54,8 +54,8 @@ public class LocationPermissionChecker {
 
     public boolean checkCallersLocationPermission(String str, String str2, int i, boolean z, String str3) {
         String str4;
-        boolean isTargetSdkLessThan = isTargetSdkLessThan(str, 29, i);
-        if (z && isTargetSdkLessThan) {
+        boolean zIsTargetSdkLessThan = isTargetSdkLessThan(str, 29, i);
+        if (z && zIsTargetSdkLessThan) {
             str4 = Manifest.permission.ACCESS_COARSE_LOCATION;
         } else {
             str4 = Manifest.permission.ACCESS_FINE_LOCATION;
@@ -66,7 +66,7 @@ public class LocationPermissionChecker {
         if (noteAppOpAllowed(AppOpsManager.OPSTR_FINE_LOCATION, str, str2, i, str3)) {
             return true;
         }
-        if (z && isTargetSdkLessThan) {
+        if (z && zIsTargetSdkLessThan) {
             return noteAppOpAllowed(AppOpsManager.OPSTR_COARSE_LOCATION, str, str2, i, str3);
         }
         return false;
@@ -82,18 +82,18 @@ public class LocationPermissionChecker {
     }
 
     private boolean isTargetSdkLessThan(String str, int i, int i2) {
-        long clearCallingIdentity = Binder.clearCallingIdentity();
+        long jClearCallingIdentity = Binder.clearCallingIdentity();
         try {
             if (this.mContext.getPackageManager().getApplicationInfoAsUser(str, 0, UserHandle.getUserHandleForUid(i2)).targetSdkVersion < i) {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
                 return true;
             }
         } catch (PackageManager.NameNotFoundException unused) {
         } catch (Throwable th) {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
+            Binder.restoreCallingIdentity(jClearCallingIdentity);
             throw th;
         }
-        Binder.restoreCallingIdentity(clearCallingIdentity);
+        Binder.restoreCallingIdentity(jClearCallingIdentity);
         return false;
     }
 

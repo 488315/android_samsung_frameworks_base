@@ -150,9 +150,9 @@ public interface IStorageStatsManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IStorageStatsManager)) {
-                return (IStorageStatsManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IStorageStatsManager)) {
+                return (IStorageStatsManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -208,127 +208,127 @@ public interface IStorageStatsManager extends IInterface {
             }
             switch (i) {
                 case 1:
-                    String readString = parcel.readString();
-                    String readString2 = parcel.readString();
+                    String string = parcel.readString();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isQuotaSupported = isQuotaSupported(readString, readString2);
+                    boolean zIsQuotaSupported = isQuotaSupported(string, string2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isQuotaSupported);
+                    parcel2.writeBoolean(zIsQuotaSupported);
                     return true;
                 case 2:
-                    String readString3 = parcel.readString();
-                    String readString4 = parcel.readString();
+                    String string3 = parcel.readString();
+                    String string4 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isReservedSupported = isReservedSupported(readString3, readString4);
+                    boolean zIsReservedSupported = isReservedSupported(string3, string4);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isReservedSupported);
+                    parcel2.writeBoolean(zIsReservedSupported);
                     return true;
                 case 3:
-                    String readString5 = parcel.readString();
-                    String readString6 = parcel.readString();
+                    String string5 = parcel.readString();
+                    String string6 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    long totalBytes = getTotalBytes(readString5, readString6);
+                    long totalBytes = getTotalBytes(string5, string6);
                     parcel2.writeNoException();
                     parcel2.writeLong(totalBytes);
                     return true;
                 case 4:
-                    String readString7 = parcel.readString();
-                    String readString8 = parcel.readString();
+                    String string7 = parcel.readString();
+                    String string8 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    long freeBytes = getFreeBytes(readString7, readString8);
+                    long freeBytes = getFreeBytes(string7, string8);
                     parcel2.writeNoException();
                     parcel2.writeLong(freeBytes);
                     return true;
                 case 5:
-                    String readString9 = parcel.readString();
-                    String readString10 = parcel.readString();
+                    String string9 = parcel.readString();
+                    String string10 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    long cacheBytes = getCacheBytes(readString9, readString10);
+                    long cacheBytes = getCacheBytes(string9, string10);
                     parcel2.writeNoException();
                     parcel2.writeLong(cacheBytes);
                     return true;
                 case 6:
-                    String readString11 = parcel.readString();
-                    int readInt = parcel.readInt();
-                    String readString12 = parcel.readString();
+                    String string11 = parcel.readString();
+                    int i3 = parcel.readInt();
+                    String string12 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    long cacheQuotaBytes = getCacheQuotaBytes(readString11, readInt, readString12);
+                    long cacheQuotaBytes = getCacheQuotaBytes(string11, i3, string12);
                     parcel2.writeNoException();
                     parcel2.writeLong(cacheQuotaBytes);
                     return true;
                 case 7:
-                    String readString13 = parcel.readString();
-                    String readString14 = parcel.readString();
-                    int readInt2 = parcel.readInt();
-                    String readString15 = parcel.readString();
+                    String string13 = parcel.readString();
+                    String string14 = parcel.readString();
+                    int i4 = parcel.readInt();
+                    String string15 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    StorageStats queryStatsForPackage = queryStatsForPackage(readString13, readString14, readInt2, readString15);
+                    StorageStats storageStatsQueryStatsForPackage = queryStatsForPackage(string13, string14, i4, string15);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(queryStatsForPackage, 1);
+                    parcel2.writeTypedObject(storageStatsQueryStatsForPackage, 1);
                     return true;
                 case 8:
-                    String readString16 = parcel.readString();
-                    int readInt3 = parcel.readInt();
-                    int readInt4 = parcel.readInt();
+                    String string16 = parcel.readString();
+                    int i5 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    StorageStats queryArtManagedStats = queryArtManagedStats(readString16, readInt3, readInt4);
+                    StorageStats storageStatsQueryArtManagedStats = queryArtManagedStats(string16, i5, i6);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(queryArtManagedStats, 1);
+                    parcel2.writeTypedObject(storageStatsQueryArtManagedStats, 1);
                     return true;
                 case 9:
-                    String readString17 = parcel.readString();
-                    int readInt5 = parcel.readInt();
-                    String readString18 = parcel.readString();
+                    String string17 = parcel.readString();
+                    int i7 = parcel.readInt();
+                    String string18 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    StorageStats queryStatsForUid = queryStatsForUid(readString17, readInt5, readString18);
+                    StorageStats storageStatsQueryStatsForUid = queryStatsForUid(string17, i7, string18);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(queryStatsForUid, 1);
+                    parcel2.writeTypedObject(storageStatsQueryStatsForUid, 1);
                     return true;
                 case 10:
-                    String readString19 = parcel.readString();
-                    int readInt6 = parcel.readInt();
-                    String readString20 = parcel.readString();
+                    String string19 = parcel.readString();
+                    int i8 = parcel.readInt();
+                    String string20 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    StorageStats queryStatsForUser = queryStatsForUser(readString19, readInt6, readString20);
+                    StorageStats storageStatsQueryStatsForUser = queryStatsForUser(string19, i8, string20);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(queryStatsForUser, 1);
+                    parcel2.writeTypedObject(storageStatsQueryStatsForUser, 1);
                     return true;
                 case 11:
-                    String readString21 = parcel.readString();
-                    int readInt7 = parcel.readInt();
-                    String readString22 = parcel.readString();
+                    String string21 = parcel.readString();
+                    int i9 = parcel.readInt();
+                    String string22 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    ExternalStorageStats queryExternalStatsForUser = queryExternalStatsForUser(readString21, readInt7, readString22);
+                    ExternalStorageStats externalStorageStatsQueryExternalStatsForUser = queryExternalStatsForUser(string21, i9, string22);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(queryExternalStatsForUser, 1);
+                    parcel2.writeTypedObject(externalStorageStatsQueryExternalStatsForUser, 1);
                     return true;
                 case 12:
-                    String readString23 = parcel.readString();
-                    String readString24 = parcel.readString();
-                    int readInt8 = parcel.readInt();
-                    String readString25 = parcel.readString();
+                    String string23 = parcel.readString();
+                    String string24 = parcel.readString();
+                    int i10 = parcel.readInt();
+                    String string25 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    ParceledListSlice queryCratesForPackage = queryCratesForPackage(readString23, readString24, readInt8, readString25);
+                    ParceledListSlice parceledListSliceQueryCratesForPackage = queryCratesForPackage(string23, string24, i10, string25);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(queryCratesForPackage, 1);
+                    parcel2.writeTypedObject(parceledListSliceQueryCratesForPackage, 1);
                     return true;
                 case 13:
-                    String readString26 = parcel.readString();
-                    int readInt9 = parcel.readInt();
-                    String readString27 = parcel.readString();
+                    String string26 = parcel.readString();
+                    int i11 = parcel.readInt();
+                    String string27 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    ParceledListSlice queryCratesForUid = queryCratesForUid(readString26, readInt9, readString27);
+                    ParceledListSlice parceledListSliceQueryCratesForUid = queryCratesForUid(string26, i11, string27);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(queryCratesForUid, 1);
+                    parcel2.writeTypedObject(parceledListSliceQueryCratesForUid, 1);
                     return true;
                 case 14:
-                    String readString28 = parcel.readString();
-                    int readInt10 = parcel.readInt();
-                    String readString29 = parcel.readString();
+                    String string28 = parcel.readString();
+                    int i12 = parcel.readInt();
+                    String string29 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    ParceledListSlice queryCratesForUser = queryCratesForUser(readString28, readInt10, readString29);
+                    ParceledListSlice parceledListSliceQueryCratesForUser = queryCratesForUser(string28, i12, string29);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(queryCratesForUser, 1);
+                    parcel2.writeTypedObject(parceledListSliceQueryCratesForUser, 1);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -353,250 +353,250 @@ public interface IStorageStatsManager extends IInterface {
 
             @Override // android.app.usage.IStorageStatsManager
             public boolean isQuotaSupported(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IStorageStatsManager
             public boolean isReservedSupported(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IStorageStatsManager
             public long getTotalBytes(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IStorageStatsManager
             public long getFreeBytes(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IStorageStatsManager
             public long getCacheBytes(String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IStorageStatsManager
             public long getCacheQuotaBytes(String str, int i, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readLong();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readLong();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IStorageStatsManager
             public StorageStats queryStatsForPackage(String str, String str2, int i, String str3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    obtain.writeString(str3);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (StorageStats) obtain2.readTypedObject(StorageStats.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str3);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (StorageStats) parcelObtain2.readTypedObject(StorageStats.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IStorageStatsManager
             public StorageStats queryArtManagedStats(String str, int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (StorageStats) obtain2.readTypedObject(StorageStats.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (StorageStats) parcelObtain2.readTypedObject(StorageStats.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IStorageStatsManager
             public StorageStats queryStatsForUid(String str, int i, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (StorageStats) obtain2.readTypedObject(StorageStats.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (StorageStats) parcelObtain2.readTypedObject(StorageStats.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IStorageStatsManager
             public StorageStats queryStatsForUser(String str, int i, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (StorageStats) obtain2.readTypedObject(StorageStats.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (StorageStats) parcelObtain2.readTypedObject(StorageStats.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IStorageStatsManager
             public ExternalStorageStats queryExternalStatsForUser(String str, int i, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ExternalStorageStats) obtain2.readTypedObject(ExternalStorageStats.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ExternalStorageStats) parcelObtain2.readTypedObject(ExternalStorageStats.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IStorageStatsManager
             public ParceledListSlice queryCratesForPackage(String str, String str2, int i, String str3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i);
-                    obtain.writeString(str3);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ParceledListSlice) obtain2.readTypedObject(ParceledListSlice.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str3);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ParceledListSlice) parcelObtain2.readTypedObject(ParceledListSlice.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IStorageStatsManager
             public ParceledListSlice queryCratesForUid(String str, int i, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ParceledListSlice) obtain2.readTypedObject(ParceledListSlice.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ParceledListSlice) parcelObtain2.readTypedObject(ParceledListSlice.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.usage.IStorageStatsManager
             public ParceledListSlice queryCratesForUser(String str, int i, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ParceledListSlice) obtain2.readTypedObject(ParceledListSlice.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ParceledListSlice) parcelObtain2.readTypedObject(ParceledListSlice.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

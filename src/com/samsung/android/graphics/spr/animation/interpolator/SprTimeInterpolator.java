@@ -40,11 +40,11 @@ public class SprTimeInterpolator implements TimeInterpolator {
     @Override // android.animation.TimeInterpolator
     public float getInterpolation(float f) {
         long j;
-        long currentTimeMillis = System.currentTimeMillis() + TimeZone.getDefault().getOffset(r0);
+        long jCurrentTimeMillis = System.currentTimeMillis() + TimeZone.getDefault().getOffset(r0);
         if (this.mPeriodType == 1) {
-            j = currentTimeMillis % 86400000;
+            j = jCurrentTimeMillis % 86400000;
         } else {
-            j = (currentTimeMillis - 259200000) % 604800000;
+            j = (jCurrentTimeMillis - 259200000) % 604800000;
         }
         int i = this.mDuration;
         long j2 = j % i;

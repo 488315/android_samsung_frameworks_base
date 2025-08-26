@@ -9,7 +9,6 @@ import kotlin.LazyKt__LazyJVMKt;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class NPVCDownEventState {
     public static final List TABLE_HEADERS;
@@ -26,7 +25,6 @@ public final class NPVCDownEventState {
     public float x;
     public float y;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Buffer {
         public final RingBuffer buffer;
 
@@ -35,7 +33,6 @@ public final class NPVCDownEventState {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -67,7 +64,7 @@ public final class NPVCDownEventState {
             public final Object invoke() {
                 List list = NPVCDownEventState.TABLE_HEADERS;
                 SimpleDateFormat simpleDateFormat = NPVCDownEventStateKt.DATE_FORMAT;
-                NPVCDownEventState nPVCDownEventState = NPVCDownEventState.this;
+                NPVCDownEventState nPVCDownEventState = this.f$0;
                 return Arrays.asList(simpleDateFormat.format(Long.valueOf(nPVCDownEventState.timeStamp)), String.valueOf(nPVCDownEventState.x), String.valueOf(nPVCDownEventState.y), String.valueOf(nPVCDownEventState.qsTouchAboveFalsingThreshold), String.valueOf(nPVCDownEventState.dozing), String.valueOf(nPVCDownEventState.collapsed), String.valueOf(nPVCDownEventState.canCollapseOnQQS), String.valueOf(nPVCDownEventState.listenForHeadsUp), String.valueOf(nPVCDownEventState.allowExpandForSmallExpansion), String.valueOf(nPVCDownEventState.touchSlopExceededBeforeDown), String.valueOf(nPVCDownEventState.lastEventSynthesized));
             }
         });

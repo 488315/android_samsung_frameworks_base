@@ -2,6 +2,7 @@ package com.android.systemui.qs.buttons;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+import com.android.settingslib.applications.InterestingConfigChanges;
 import com.android.systemui.Dependency;
 import com.android.systemui.R;
 import com.android.systemui.knox.CustomSdkMonitor;
@@ -22,22 +24,23 @@ import com.android.systemui.qs.buttons.QSButtonsContainer;
 import com.android.systemui.qs.panelresource.SecQSPanelResourceCommon;
 import com.android.systemui.util.ShadowDelegateUtil;
 import com.android.systemui.util.SystemUIAnalytics;
+import com.android.systemui.util.ViewUtil;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class QSEditButton extends FrameLayout implements QSButtonsContainer.CloseTooltipWindow {
-    public static final /* synthetic */ int $r8$clinit = 0;
+    public static final InterestingConfigChanges configChanges = new InterestingConfigChanges(268435456);
     public final Context mContext;
     public ImageButton mEditButton;
     public View mEditContainer;
     public SecQSPanelController mQsPanelController;
     public final SecQSPanelResourcePicker mResourcePicker;
-    public final QSTooltipWindow mTipWindow;
+    public QSTooltipWindow mTipWindow;
     public final int mToolTipString;
 
     public QSEditButton(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.mContext = context;
+        configChanges.applyNewConfig(context.getResources());
         this.mResourcePicker = (SecQSPanelResourcePicker) Dependency.sDependency.getDependencyInner(SecQSPanelResourcePicker.class);
         this.mTipWindow = QSTooltipWindow.getInstance(context);
         this.mToolTipString = R.string.tooltip_quick_settings_edit;
@@ -60,6 +63,9 @@ public class QSEditButton extends FrameLayout implements QSButtonsContainer.Clos
     @Override // android.view.View
     public final void onConfigurationChanged(Configuration configuration) {
         super.onConfigurationChanged(configuration);
+        if (configChanges.applyNewConfig(this.mContext.getResources())) {
+            this.mTipWindow = QSTooltipWindow.getInstance(this.mContext);
+        }
         updateTouchTargetArea$2();
     }
 
@@ -75,8 +81,8 @@ public class QSEditButton extends FrameLayout implements QSButtonsContainer.Clos
         this.mEditButton.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qs.buttons.QSEditButton$$ExternalSyntheticLambda1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                final QSEditButton qSEditButton = QSEditButton.this;
-                int i = QSEditButton.$r8$clinit;
+                final QSEditButton qSEditButton = this.f$0;
+                InterestingConfigChanges interestingConfigChanges = QSEditButton.configChanges;
                 EdmMonitor edmMonitor = ((KnoxStateMonitorImpl) ((KnoxStateMonitor) Dependency.sDependency.getDependencyInner(KnoxStateMonitor.class))).mEdmMonitor;
                 if (edmMonitor != null && !edmMonitor.mSettingsChangesAllowed) {
                     Context context = qSEditButton.mContext;
@@ -85,7 +91,7 @@ public class QSEditButton extends FrameLayout implements QSButtonsContainer.Clos
                     ((ActivityStarter) Dependency.sDependency.getDependencyInner(ActivityStarter.class)).postQSCustomizerRunnableDismissingKeyguard(new Runnable() { // from class: com.android.systemui.qs.buttons.QSEditButton$$ExternalSyntheticLambda4
                         @Override // java.lang.Runnable
                         public final void run() {
-                            QSEditButton.this.mQsPanelController.showEdit();
+                            qSEditButton.mQsPanelController.showEdit();
                         }
                     });
                     SystemUIAnalytics.sendEventLog(SystemUIAnalytics.getCurrentScreenID(), SystemUIAnalytics.EID_EDIT_BUTTON);
@@ -95,18 +101,22 @@ public class QSEditButton extends FrameLayout implements QSButtonsContainer.Clos
         this.mEditContainer.setOnTouchListener(new View.OnTouchListener() { // from class: com.android.systemui.qs.buttons.QSEditButton$$ExternalSyntheticLambda2
             @Override // android.view.View.OnTouchListener
             public final boolean onTouch(View view, MotionEvent motionEvent) {
-                return QSEditButton.this.mEditButton.onTouchEvent(motionEvent);
+                return this.f$0.mEditButton.onTouchEvent(motionEvent);
             }
         });
         this.mEditButton.setOnLongClickListener(new View.OnLongClickListener() { // from class: com.android.systemui.qs.buttons.QSEditButton$$ExternalSyntheticLambda3
             @Override // android.view.View.OnLongClickListener
-            public final boolean onLongClick(View view) {
-                QSEditButton qSEditButton = QSEditButton.this;
+            public final boolean onLongClick(View view) throws Resources.NotFoundException {
+                QSEditButton qSEditButton = this.f$0;
                 if (qSEditButton.mTipWindow.isTooltipShown()) {
                     return true;
                 }
                 qSEditButton.mTipWindow.showToolTip(view, qSEditButton.mToolTipString);
-                ((QSButtonsContainer) qSEditButton.getParent()).mCloseTooltipWindow = qSEditButton;
+                QSButtonsContainer qSButtonsContainer = (QSButtonsContainer) ViewUtil.findParentOfType(qSEditButton, QSButtonsContainer.class);
+                if (qSButtonsContainer == null) {
+                    return true;
+                }
+                qSButtonsContainer.mCloseTooltipWindow = qSEditButton;
                 return true;
             }
         });

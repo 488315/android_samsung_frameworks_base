@@ -486,7 +486,7 @@
     <style name="Theme.Material.Settings.NoActionBar" parent="@style/Theme.Material" />
     <style name="Theme.Material.Settings.SearchBar" parent="@style/Theme.Material.SearchBar" />
     <style name="Widget.Material.Button.ButtonBar.AlertDialog" parent="@style/Widget.Material.Button.Borderless.Small">
-        <item name="gravity">center|left</item>
+        <item name="gravity">left|center</item>
         <item name="minWidth">64.0dip</item>
         <item name="minHeight">@dimen/alert_dialog_button_bar_height</item>
         <item name="drawablePadding">8.0dip</item>

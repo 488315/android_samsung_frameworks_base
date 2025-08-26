@@ -8,7 +8,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class IntelligentCropHelper {
     public static Rect getNearestCropHint(Point point, ArrayList arrayList) {
@@ -25,16 +24,16 @@ public class IntelligentCropHelper {
         int i3 = 0;
         for (int i4 = 0; i4 < arrayList.size(); i4++) {
             Rect rect = (Rect) arrayList.get(i4);
-            float abs = Math.abs(f - (rect.height() / rect.width()));
-            if (f2 > abs) {
+            float fAbs = Math.abs(f - (rect.height() / rect.width()));
+            if (f2 > fAbs) {
                 i3 = i4;
-                f2 = abs;
+                f2 = fAbs;
             }
         }
         Rect rect2 = (Rect) arrayList.get(i3);
-        StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "selectProperCropHint: baseW = ", ", baseH = ", ", ");
-        m.append(rect2);
-        Log.i("IntelligentCropHelper", m.toString());
+        StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i, i2, "selectProperCropHint: baseW = ", ", baseH = ", ", ");
+        sbM.append(rect2);
+        Log.i("IntelligentCropHelper", sbM.toString());
         return rect2;
     }
 

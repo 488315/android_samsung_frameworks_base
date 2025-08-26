@@ -9,7 +9,6 @@ import androidx.compose.ui.platform.AndroidCompositionLocals_androidKt$$External
 import com.android.systemui.log.core.LogMessage;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final /* synthetic */ class SimLogger$$ExternalSyntheticLambda0 implements Function1 {
     public final /* synthetic */ int $r8$classId;
@@ -20,7 +19,7 @@ public final /* synthetic */ class SimLogger$$ExternalSyntheticLambda0 implement
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
         LogMessage logMessage = (LogMessage) obj;
         switch (this.$r8$classId) {
             case 0:
@@ -36,18 +35,18 @@ public final /* synthetic */ class SimLogger$$ExternalSyntheticLambda0 implement
                 String str2 = logMessage.getStr2();
                 int int1 = logMessage.getInt1();
                 int int2 = logMessage.getInt2();
-                StringBuilder m = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("action ", str1, " state: ", str2, " slotId: ");
-                m.append(int1);
-                m.append(" subid: ");
-                m.append(int2);
-                return m.toString();
+                StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("action ", str1, " state: ", str2, " slotId: ");
+                sbM.append(int1);
+                sbM.append(" subid: ");
+                sbM.append(int2);
+                return sbM.toString();
             case 5:
                 String str12 = logMessage.getStr1();
                 String str22 = logMessage.getStr2();
                 int int12 = logMessage.getInt1();
-                StringBuilder m2 = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("action ", str12, " serviceState=", str22, " subId=");
-                m2.append(int12);
-                return m2.toString();
+                StringBuilder sbM2 = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("action ", str12, " serviceState=", str22, " subId=");
+                sbM2.append(int12);
+                return sbM2.toString();
             default:
                 return AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("SubInfo:", logMessage.getStr1());
         }

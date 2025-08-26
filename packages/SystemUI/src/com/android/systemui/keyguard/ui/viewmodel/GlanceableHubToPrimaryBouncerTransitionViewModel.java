@@ -12,7 +12,6 @@ import com.android.systemui.keyguard.ui.transitions.PrimaryBouncerTransition;
 import com.android.systemui.statusbar.policy.KeyguardStateController;
 import kotlinx.coroutines.flow.Flow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class GlanceableHubToPrimaryBouncerTransitionViewModel implements PrimaryBouncerTransition {
     public final BlurConfig blurConfig;
@@ -27,10 +26,10 @@ public final class GlanceableHubToPrimaryBouncerTransitionViewModel implements P
         FromGlanceableHubTransitionInteractor.Companion.getClass();
         long j = FromGlanceableHubTransitionInteractor.TO_BOUNCER_DURATION;
         Edge.Companion.getClass();
-        KeyguardTransitionAnimationFlow.FlowBuilder m = AlternateBouncerToGoneTransitionViewModel$$ExternalSyntheticOutline0.m(KeyguardState.GLANCEABLE_HUB, KeyguardState.PRIMARY_BOUNCER, keyguardTransitionAnimationFlow.m2598setupVtjQ1oo(j, Edge.INVALID));
-        this.transitionAnimation = m;
-        this.windowBlurRadius = m.immediatelyTransitionTo(blurConfig.maxBlurRadiusPx);
-        this.notificationBlurRadius = m.immediatelyTransitionTo(0.0f);
+        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM = AlternateBouncerToGoneTransitionViewModel$$ExternalSyntheticOutline0.m(KeyguardState.GLANCEABLE_HUB, KeyguardState.PRIMARY_BOUNCER, keyguardTransitionAnimationFlow.m2615setupVtjQ1oo(j, Edge.INVALID));
+        this.transitionAnimation = flowBuilderM;
+        this.windowBlurRadius = flowBuilderM.immediatelyTransitionTo(blurConfig.maxBlurRadiusPx);
+        this.notificationBlurRadius = flowBuilderM.immediatelyTransitionTo(0.0f);
     }
 
     @Override // com.android.systemui.keyguard.ui.transitions.PrimaryBouncerTransition

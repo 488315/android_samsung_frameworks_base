@@ -2,6 +2,7 @@ package com.android.systemui.qs.bar;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.provider.Settings;
@@ -35,7 +36,6 @@ import com.android.systemui.util.SettingsHelper;
 import com.android.systemui.util.SystemUIAnalytics;
 import java.util.Arrays;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class MediaDevicesBar extends BarItemImpl implements TunerService.Tunable {
     public static final Uri EMERGENCY_MODE_URI = Settings.System.getUriFor(SettingsHelper.INDEX_EMERGENCY_MODE);
@@ -56,7 +56,6 @@ public class MediaDevicesBar extends BarItemImpl implements TunerService.Tunable
     private final SettingsHelper.OnChangedCallback mSettingsListener;
     public final TunerService mTunerService;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.qs.bar.MediaDevicesBar$1, reason: invalid class name */
     public class AnonymousClass1 {
         public AnonymousClass1() {
@@ -70,7 +69,7 @@ public class MediaDevicesBar extends BarItemImpl implements TunerService.Tunable
             @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
             public final void onChanged(Uri uri) {
                 Uri uri2 = MediaDevicesBar.EMERGENCY_MODE_URI;
-                MediaDevicesBar.this.updateBarVisibility();
+                this.f$0.updateBarVisibility();
             }
         };
         this.mSettingsListener = onChangedCallback;
@@ -144,12 +143,12 @@ public class MediaDevicesBar extends BarItemImpl implements TunerService.Tunable
             public final void onRestore(String str) {
                 MediaDevicesBar mediaDevicesBar = MediaDevicesBar.this;
                 mediaDevicesBar.getClass();
-                String[] split = str.split("::");
-                if (split[0].equals("show_media_divices")) {
-                    ?? r2 = Integer.parseInt(split[1]) == 1 ? 1 : 0;
-                    StringBuilder m = RowView$$ExternalSyntheticOutline0.m("showMediaDevices : ", "   Integer.parseInt(sp[1]) : ", r2);
-                    m.append(Integer.parseInt(split[1]));
-                    Log.d("MediaDevices", m.toString());
+                String[] strArrSplit = str.split("::");
+                if (strArrSplit[0].equals("show_media_divices")) {
+                    ?? r2 = Integer.parseInt(strArrSplit[1]) == 1 ? 1 : 0;
+                    StringBuilder sbM = RowView$$ExternalSyntheticOutline0.m("showMediaDevices : ", "   Integer.parseInt(sp[1]) : ", r2);
+                    sbM.append(Integer.parseInt(strArrSplit[1]));
+                    Log.d("MediaDevices", sbM.toString());
                     TunerService tunerService2 = mediaDevicesBar.mTunerService;
                     if (r2 != (tunerService2.getValue(1, "qspanel_media_quickcontrol_bar_available") != 0)) {
                         tunerService2.setValue((int) r2, "qspanel_media_quickcontrol_bar_available");
@@ -169,21 +168,21 @@ public class MediaDevicesBar extends BarItemImpl implements TunerService.Tunable
 
     @Override // com.android.systemui.qs.bar.BarItemImpl
     public final int getBarHeight() {
-        int dp;
+        int iDp;
         if (!this.mShowing) {
             return 0;
         }
         boolean z = this.mIsAllowedOnTop;
         SecQSPanelResourcePicker secQSPanelResourcePicker = this.mResourcePicker;
         if (z && this.mBrightnessBarOnTop && shouldShowOneLineWithBrightnessBar()) {
-            dp = secQSPanelResourcePicker.getBrightnessBarHeight(this.mContext);
+            iDp = secQSPanelResourcePicker.getBrightnessBarHeight(this.mContext);
         } else {
             Context context = this.mContext;
             secQSPanelResourcePicker.resourcePickHelper.getTargetPicker().getClass();
             SecQSPanelResourceCommon.Companion.getClass();
-            dp = SecQSPanelResourceCommon.Companion.dp(R.dimen.qspanel_media_quickcontrol_height, context);
+            iDp = SecQSPanelResourceCommon.Companion.dp(R.dimen.qspanel_media_quickcontrol_height, context);
         }
-        return secQSPanelResourcePicker.getQuickQSCommonBottomMargin(this.mContext) + dp;
+        return secQSPanelResourcePicker.getQuickQSCommonBottomMargin(this.mContext) + iDp;
     }
 
     @Override // com.android.systemui.qs.bar.BarItemImpl
@@ -193,9 +192,9 @@ public class MediaDevicesBar extends BarItemImpl implements TunerService.Tunable
 
     @Override // com.android.systemui.qs.bar.BarItemImpl
     public final void inflateViews(ViewGroup viewGroup) {
-        View inflate = LayoutInflater.from(this.mContext).inflate(R.layout.qspanel_media_devices_bar_layout, viewGroup, false);
-        this.mBarRootView = inflate;
-        this.mMediaTouchArea = (LinearLayout) inflate.findViewById(R.id.media_touch_area);
+        View viewInflate = LayoutInflater.from(this.mContext).inflate(R.layout.qspanel_media_devices_bar_layout, viewGroup, false);
+        this.mBarRootView = viewInflate;
+        this.mMediaTouchArea = (LinearLayout) viewInflate.findViewById(R.id.media_touch_area);
         this.mDeviceTouchArea = (LinearLayout) this.mBarRootView.findViewById(R.id.device_touch_area);
         this.mMediaTitleText = (TextView) this.mBarRootView.findViewById(R.id.media_title);
         this.mDevicesTitleText = (TextView) this.mBarRootView.findViewById(R.id.quickcontrol_title);
@@ -208,7 +207,7 @@ public class MediaDevicesBar extends BarItemImpl implements TunerService.Tunable
             }
 
             @Override // android.view.View.OnClickListener
-            public final void onClick(View view) {
+            public final void onClick(View view) throws Resources.NotFoundException {
                 int i2 = i;
                 MediaDevicesBar mediaDevicesBar = this.f$0;
                 switch (i2) {
@@ -237,7 +236,7 @@ public class MediaDevicesBar extends BarItemImpl implements TunerService.Tunable
             }
 
             @Override // android.view.View.OnClickListener
-            public final void onClick(View view) {
+            public final void onClick(View view) throws Resources.NotFoundException {
                 int i22 = i2;
                 MediaDevicesBar mediaDevicesBar = this.f$0;
                 switch (i22) {
@@ -317,7 +316,7 @@ public class MediaDevicesBar extends BarItemImpl implements TunerService.Tunable
     }
 
     @Override // com.android.systemui.tuner.TunerService.Tunable
-    public final void onTuningChanged(String str, String str2) {
+    public final void onTuningChanged(String str, String str2) throws Resources.NotFoundException {
         Log.d(this.TAG, AnimatorInflaterCompat$$ExternalSyntheticOutline0.m("onTuningChanged(): key = ", str, ", newValue = ", str2));
         if (str2 == null) {
             return;
@@ -342,7 +341,7 @@ public class MediaDevicesBar extends BarItemImpl implements TunerService.Tunable
     }
 
     @Override // com.android.systemui.qs.bar.BarItemImpl
-    public final void setUnderneathQqs(boolean z) {
+    public final void setUnderneathQqs(boolean z) throws Resources.NotFoundException {
         this.mIsUnderneathQqs = z;
         updateHeightMargins();
     }
@@ -359,10 +358,10 @@ public class MediaDevicesBar extends BarItemImpl implements TunerService.Tunable
         Context context = this.mContext;
         this.mResourcePicker.resourcePickHelper.getTargetPicker().getClass();
         SecQSPanelResourceCommon.Companion.getClass();
-        int dp = SecQSPanelResourceCommon.Companion.dp(R.dimen.qspanel_media_quickcontrol_height, context);
+        int iDp = SecQSPanelResourceCommon.Companion.dp(R.dimen.qspanel_media_quickcontrol_height, context);
         GradientDrawable gradientDrawable = new GradientDrawable();
         gradientDrawable.setColor(this.mContext.getResources().getColor(this.mSecQsUiDisplayModeInteractor.isTablet() ? R.color.sec_media_devices_tablet_button_bg_fill_color : R.color.sec_media_devices_button_bg_fill_color));
-        float f = dp;
+        float f = iDp;
         gradientDrawable.setCornerRadius(f);
         GradientDrawable gradientDrawable2 = new GradientDrawable();
         gradientDrawable2.setCornerRadius(f);
@@ -374,10 +373,10 @@ public class MediaDevicesBar extends BarItemImpl implements TunerService.Tunable
     }
 
     @Override // com.android.systemui.qs.bar.BarItemImpl
-    public final void updateHeightMargins() {
+    public final void updateHeightMargins() throws Resources.NotFoundException {
         float f;
         int i;
-        int i2;
+        int dimensionPixelSize;
         if (this.mBarRootView == null) {
             return;
         }
@@ -392,42 +391,42 @@ public class MediaDevicesBar extends BarItemImpl implements TunerService.Tunable
         SecQSPanelResourcePicker secQSPanelResourcePicker = this.mResourcePicker;
         secQSPanelResourcePicker.resourcePickHelper.getTargetPicker().getClass();
         SecQSPanelResourceCommon.Companion.getClass();
-        int dp = SecQSPanelResourceCommon.Companion.dp(R.dimen.qspanel_media_quickcontrol_height, context);
+        int iDp = SecQSPanelResourceCommon.Companion.dp(R.dimen.qspanel_media_quickcontrol_height, context);
         int mediaDeviceBarTouchAreaBetweenPadding = secQSPanelResourcePicker.resourcePickHelper.getTargetPicker().getMediaDeviceBarTouchAreaBetweenPadding(this.mContext);
         if (this.mIsAllowedOnTop && this.mBrightnessBarOnTop && shouldShowOneLineWithBrightnessBar()) {
-            dp = this.mContext.getResources().getDimensionPixelSize(R.dimen.brightness_slider_height);
+            iDp = this.mContext.getResources().getDimensionPixelSize(R.dimen.brightness_slider_height);
             mediaDeviceBarTouchAreaBetweenPadding = this.mContext.getResources().getDimensionPixelSize(R.dimen.media_device_bar_between_padding_with_brightness_bar);
-            i2 = this.mContext.getResources().getDimensionPixelSize(R.dimen.bar_between_margin);
+            dimensionPixelSize = this.mContext.getResources().getDimensionPixelSize(R.dimen.bar_between_margin);
         } else {
-            i2 = 0;
+            dimensionPixelSize = 0;
         }
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(i, dp, f);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(i, iDp, f);
         layoutParams.bottomMargin = secQSPanelResourcePicker.getQuickQSCommonBottomMargin(this.mContext);
         if (shouldShowOneLineWithBrightnessBar()) {
-            layoutParams.setMarginStart(i2);
+            layoutParams.setMarginStart(dimensionPixelSize);
         }
         this.mBarRootView.setLayoutParams(layoutParams);
         this.mDeviceTouchArea.setPaddingRelative(0, 0, mediaDeviceBarTouchAreaBetweenPadding, 0);
         this.mMediaTouchArea.setPaddingRelative(mediaDeviceBarTouchAreaBetweenPadding, 0, 0, 0);
-        LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(i, dp, f);
+        LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(i, iDp, f);
         this.mDevicesTitleText.setLayoutParams(layoutParams2);
         this.mMediaTitleText.setLayoutParams(layoutParams2);
         updateResources$10();
     }
 
-    public final void updateResources$10() {
+    public final void updateResources$10() throws Resources.NotFoundException {
         int color = this.mContext.getColor(R.color.sec_media_devices_buttons_text_color);
         TextView textView = this.mMediaTitleText;
         if (textView != null) {
             textView.setTextColor(color);
             this.mMediaTitleText.setBackground(updateBackground());
-            FontSizeUtils.updateFontSize(this.mMediaTitleText, R.dimen.qspanel_media_quickcontrol_text_size, 0.8f, 1.1f);
+            FontSizeUtils.updateFontSize(this.mMediaTitleText, R.dimen.qspanel_media_quickcontrol_text_size, 1.0f, 1.3f);
         }
         TextView textView2 = this.mDevicesTitleText;
         if (textView2 != null) {
             textView2.setTextColor(color);
             this.mDevicesTitleText.setBackground(updateBackground());
-            FontSizeUtils.updateFontSize(this.mDevicesTitleText, R.dimen.qspanel_media_quickcontrol_text_size, 0.8f, 1.1f);
+            FontSizeUtils.updateFontSize(this.mDevicesTitleText, R.dimen.qspanel_media_quickcontrol_text_size, 1.0f, 1.3f);
         }
     }
 }

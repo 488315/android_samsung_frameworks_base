@@ -23,10 +23,10 @@ public final class ContentCaptureContext implements Parcelable {
             ContentCaptureContext contentCaptureContext;
             if (parcel.readInt() == 1) {
                 LocusId locusId = (LocusId) parcel.readParcelable(null, LocusId.class);
-                Bundle readBundle = parcel.readBundle();
+                Bundle bundle = parcel.readBundle();
                 Builder builder = new Builder(locusId);
-                if (readBundle != null) {
-                    builder.setExtras(readBundle);
+                if (bundle != null) {
+                    builder.setExtras(bundle);
                 }
                 contentCaptureContext = new ContentCaptureContext(builder);
             } else {

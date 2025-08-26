@@ -5,12 +5,10 @@ import com.android.compose.animation.scene.SwipeSource;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class SceneContainerArea implements SwipeSource {
     public final Function1 resolveArea;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class EndHalf extends SceneContainerArea {
         public static final EndHalf INSTANCE = new EndHalf();
 
@@ -32,10 +30,8 @@ public abstract class SceneContainerArea implements SwipeSource {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Resolved extends SwipeSource.Resolved {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class BottomEdge implements Resolved {
             public static final BottomEdge INSTANCE = new BottomEdge();
 
@@ -56,7 +52,6 @@ public abstract class SceneContainerArea implements SwipeSource {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class LeftEdge implements Resolved {
             public static final LeftEdge INSTANCE = new LeftEdge();
 
@@ -77,7 +72,6 @@ public abstract class SceneContainerArea implements SwipeSource {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class LeftHalf implements Resolved {
             public static final LeftHalf INSTANCE = new LeftHalf();
 
@@ -98,7 +92,6 @@ public abstract class SceneContainerArea implements SwipeSource {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class RightEdge implements Resolved {
             public static final RightEdge INSTANCE = new RightEdge();
 
@@ -119,7 +112,6 @@ public abstract class SceneContainerArea implements SwipeSource {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class RightHalf implements Resolved {
             public static final RightHalf INSTANCE = new RightHalf();
 
@@ -140,7 +132,6 @@ public abstract class SceneContainerArea implements SwipeSource {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class TopEdgeLeftHalf implements Resolved {
             public static final TopEdgeLeftHalf INSTANCE = new TopEdgeLeftHalf();
 
@@ -161,7 +152,6 @@ public abstract class SceneContainerArea implements SwipeSource {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class TopEdgeRightHalf implements Resolved {
             public static final TopEdgeRightHalf INSTANCE = new TopEdgeRightHalf();
 
@@ -183,7 +173,6 @@ public abstract class SceneContainerArea implements SwipeSource {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TopEdgeEndHalf extends SceneContainerArea {
         public static final TopEdgeEndHalf INSTANCE = new TopEdgeEndHalf();
 
@@ -205,7 +194,6 @@ public abstract class SceneContainerArea implements SwipeSource {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TopEdgeStartHalf extends SceneContainerArea {
         public static final TopEdgeStartHalf INSTANCE = new TopEdgeStartHalf();
 
@@ -233,7 +221,7 @@ public abstract class SceneContainerArea implements SwipeSource {
 
     @Override // com.android.compose.animation.scene.SwipeSource
     public final SwipeSource.Resolved resolve(LayoutDirection layoutDirection) {
-        return (Resolved) this.resolveArea.mo779invoke(layoutDirection);
+        return (Resolved) this.resolveArea.mo781invoke(layoutDirection);
     }
 
     private SceneContainerArea(Function1 function1) {

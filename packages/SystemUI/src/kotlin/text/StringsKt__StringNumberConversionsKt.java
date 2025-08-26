@@ -2,7 +2,6 @@ package kotlin.text;
 
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class StringsKt__StringNumberConversionsKt extends StringsKt__StringNumberConversionsJVMKt {
     public static Integer toIntOrNull(int i, String str) {
@@ -15,17 +14,17 @@ public class StringsKt__StringNumberConversionsKt extends StringsKt__StringNumbe
             return null;
         }
         int i4 = 0;
-        char charAt = str.charAt(0);
+        char cCharAt = str.charAt(0);
         int i5 = -2147483647;
-        if (Intrinsics.compare(charAt, 48) < 0) {
+        if (Intrinsics.compare(cCharAt, 48) < 0) {
             i2 = 1;
             if (length == 1) {
                 return null;
             }
-            if (charAt == '+') {
+            if (cCharAt == '+') {
                 z = false;
             } else {
-                if (charAt != '-') {
+                if (cCharAt != '-') {
                     return null;
                 }
                 i5 = Integer.MIN_VALUE;
@@ -37,14 +36,14 @@ public class StringsKt__StringNumberConversionsKt extends StringsKt__StringNumbe
         }
         int i6 = -59652323;
         while (i2 < length) {
-            int digit = Character.digit((int) str.charAt(i2), i);
-            if (digit < 0) {
+            int iDigit = Character.digit((int) str.charAt(i2), i);
+            if (iDigit < 0) {
                 return null;
             }
-            if ((i4 < i6 && (i6 != -59652323 || i4 < (i6 = i5 / i))) || (i3 = i4 * i) < i5 + digit) {
+            if ((i4 < i6 && (i6 != -59652323 || i4 < (i6 = i5 / i))) || (i3 = i4 * i) < i5 + iDigit) {
                 return null;
             }
-            i4 = i3 - digit;
+            i4 = i3 - iDigit;
             i2++;
         }
         return z ? Integer.valueOf(i4) : Integer.valueOf(-i4);

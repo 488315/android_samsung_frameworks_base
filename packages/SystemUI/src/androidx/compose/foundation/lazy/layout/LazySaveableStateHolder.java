@@ -2,6 +2,11 @@ package androidx.compose.foundation.lazy.layout;
 
 import androidx.collection.MutableScatterSet;
 import androidx.collection.ScatterSetKt;
+import androidx.compose.runtime.Composer;
+import androidx.compose.runtime.ComposerImpl;
+import androidx.compose.runtime.ComposerKt;
+import androidx.compose.runtime.DisposableEffectResult;
+import androidx.compose.runtime.EffectsKt;
 import androidx.compose.runtime.saveable.SaveableStateHolder;
 import androidx.compose.runtime.saveable.SaveableStateRegistry;
 import androidx.compose.runtime.saveable.SaveableStateRegistryKt;
@@ -9,9 +14,9 @@ import java.util.List;
 import java.util.Map;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
+import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class LazySaveableStateHolder implements SaveableStateRegistry, SaveableStateHolder {
     public static final Companion Companion = new Companion(null);
@@ -19,7 +24,6 @@ final class LazySaveableStateHolder implements SaveableStateRegistry, SaveableSt
     public final SaveableStateHolder wrappedHolder;
     public final SaveableStateRegistry wrappedRegistry;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -35,54 +39,51 @@ final class LazySaveableStateHolder implements SaveableStateRegistry, SaveableSt
         this.previouslyComposedKeys = ScatterSetKt.mutableScatterSetOf();
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:7:0x0030, code lost:
-    
-        if (r5 == androidx.compose.runtime.Composer.Companion.Empty) goto L9;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:9:0x0032  */
     @Override // androidx.compose.runtime.saveable.SaveableStateHolder
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void SaveableStateProvider(final java.lang.Object r2, kotlin.jvm.functions.Function2 r3, androidx.compose.runtime.Composer r4, int r5) {
-        /*
-            r1 = this;
-            androidx.compose.runtime.ComposerImpl r4 = (androidx.compose.runtime.ComposerImpl) r4
-            r0 = -697180401(0xffffffffd671df0f, float:-6.6485083E13)
-            r4.startReplaceGroup(r0)
-            boolean r0 = androidx.compose.runtime.ComposerKt.isTraceInProgress()
-            if (r0 == 0) goto L13
-            java.lang.String r0 = "androidx.compose.foundation.lazy.layout.LazySaveableStateHolder.SaveableStateProvider (LazySaveableStateHolder.kt:74)"
-            androidx.compose.runtime.ComposerKt.traceEventStart(r0)
-        L13:
-            r5 = r5 & 126(0x7e, float:1.77E-43)
-            androidx.compose.runtime.saveable.SaveableStateHolder r0 = r1.wrappedHolder
-            r0.SaveableStateProvider(r2, r3, r4, r5)
-            boolean r3 = r4.changedInstance(r1)
-            boolean r5 = r4.changedInstance(r2)
-            r3 = r3 | r5
-            java.lang.Object r5 = r4.rememberedValue()
-            if (r3 != 0) goto L32
-            androidx.compose.runtime.Composer$Companion r3 = androidx.compose.runtime.Composer.Companion
-            r3.getClass()
-            androidx.compose.runtime.Composer$Companion$Empty$1 r3 = androidx.compose.runtime.Composer.Companion.Empty
-            if (r5 != r3) goto L3a
-        L32:
-            androidx.compose.foundation.lazy.layout.LazySaveableStateHolder$SaveableStateProvider$1$1 r5 = new androidx.compose.foundation.lazy.layout.LazySaveableStateHolder$SaveableStateProvider$1$1
-            r5.<init>()
-            r4.updateRememberedValue(r5)
-        L3a:
-            kotlin.jvm.functions.Function1 r5 = (kotlin.jvm.functions.Function1) r5
-            androidx.compose.runtime.EffectsKt.DisposableEffect(r2, r5, r4)
-            boolean r1 = androidx.compose.runtime.ComposerKt.isTraceInProgress()
-            if (r1 == 0) goto L48
-            androidx.compose.runtime.ComposerKt.traceEventEnd()
-        L48:
-            r1 = 0
-            r4.end(r1)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.foundation.lazy.layout.LazySaveableStateHolder.SaveableStateProvider(java.lang.Object, kotlin.jvm.functions.Function2, androidx.compose.runtime.Composer, int):void");
+    public final void SaveableStateProvider(final Object obj, Function2 function2, Composer composer, int i) {
+        ComposerImpl composerImpl = (ComposerImpl) composer;
+        composerImpl.startReplaceGroup(-697180401);
+        if (ComposerKt.isTraceInProgress()) {
+            ComposerKt.traceEventStart("androidx.compose.foundation.lazy.layout.LazySaveableStateHolder.SaveableStateProvider (LazySaveableStateHolder.kt:74)");
+        }
+        this.wrappedHolder.SaveableStateProvider(obj, function2, composerImpl, i & 126);
+        boolean zChangedInstance = composerImpl.changedInstance(this) | composerImpl.changedInstance(obj);
+        Object objRememberedValue = composerImpl.rememberedValue();
+        if (!zChangedInstance) {
+            Composer.Companion.getClass();
+            if (objRememberedValue == Composer.Companion.Empty) {
+                objRememberedValue = new Function1() { // from class: androidx.compose.foundation.lazy.layout.LazySaveableStateHolder$SaveableStateProvider$1$1
+                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+                    {
+                        super(1);
+                    }
+
+                    @Override // kotlin.jvm.functions.Function1
+                    /* renamed from: invoke */
+                    public final Object mo781invoke(Object obj2) {
+                        this.this$0.previouslyComposedKeys.minusAssign(obj);
+                        final LazySaveableStateHolder lazySaveableStateHolder = this.this$0;
+                        final Object obj3 = obj;
+                        return new DisposableEffectResult() { // from class: androidx.compose.foundation.lazy.layout.LazySaveableStateHolder$SaveableStateProvider$1$1$invoke$$inlined$onDispose$1
+                            @Override // androidx.compose.runtime.DisposableEffectResult
+                            public final void dispose() {
+                                lazySaveableStateHolder.previouslyComposedKeys.plusAssign(obj3);
+                            }
+                        };
+                    }
+                };
+                composerImpl.updateRememberedValue(objRememberedValue);
+            }
+        }
+        EffectsKt.DisposableEffect(obj, (Function1) objRememberedValue, composerImpl);
+        if (ComposerKt.isTraceInProgress()) {
+            ComposerKt.traceEventEnd();
+        }
+        composerImpl.end(false);
     }
 
     @Override // androidx.compose.runtime.saveable.SaveableStateRegistry
@@ -95,7 +96,11 @@ final class LazySaveableStateHolder implements SaveableStateRegistry, SaveableSt
         return this.wrappedRegistry.consumeRestored(str);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:14:0x0042  */
     @Override // androidx.compose.runtime.saveable.SaveableStateRegistry
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final Map performSave() {
         MutableScatterSet mutableScatterSet = this.previouslyComposedKeys;
         Object[] objArr = mutableScatterSet.elements;
@@ -116,11 +121,11 @@ final class LazySaveableStateHolder implements SaveableStateRegistry, SaveableSt
                     if (i2 != 8) {
                         break;
                     }
+                    if (i == length) {
+                        break;
+                    }
+                    i++;
                 }
-                if (i == length) {
-                    break;
-                }
-                i++;
             }
         }
         return this.wrappedRegistry.performSave();
@@ -144,8 +149,8 @@ final class LazySaveableStateHolder implements SaveableStateRegistry, SaveableSt
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                SaveableStateRegistry saveableStateRegistry2 = SaveableStateRegistry.this;
+            public final Object mo781invoke(Object obj) {
+                SaveableStateRegistry saveableStateRegistry2 = saveableStateRegistry;
                 return Boolean.valueOf(saveableStateRegistry2 != null ? saveableStateRegistry2.canBeSaved(obj) : true);
             }
         }), saveableStateHolder);

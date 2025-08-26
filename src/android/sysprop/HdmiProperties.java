@@ -167,9 +167,7 @@ public final class HdmiProperties {
         return tryParseList(new Function() { // from class: android.sysprop.HdmiProperties$$ExternalSyntheticLambda0
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                Integer tryParseInteger;
-                tryParseInteger = HdmiProperties.tryParseInteger((String) obj);
-                return tryParseInteger;
+                return HdmiProperties.tryParseInteger((String) obj);
             }
         }, SystemProperties.get("ro.hdmi.device_type"));
     }

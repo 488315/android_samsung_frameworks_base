@@ -12,13 +12,11 @@ import java.io.IOException;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class AlphaTintDrawableWrapper extends InsetDrawable {
     private int[] mThemeAttrs;
     private ColorStateList mTint;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class AlphaTintState extends Drawable.ConstantState {
         private int mAlpha;
         private ColorStateList mColorStateList;
@@ -81,9 +79,9 @@ public class AlphaTintDrawableWrapper extends InsetDrawable {
         super.applyTheme(theme);
         int[] iArr = this.mThemeAttrs;
         if (iArr != null && theme != null) {
-            TypedArray resolveAttributes = theme.resolveAttributes(iArr, R$styleable.AlphaTintDrawableWrapper);
-            updateStateFromTypedArray(resolveAttributes);
-            resolveAttributes.recycle();
+            TypedArray typedArrayResolveAttributes = theme.resolveAttributes(iArr, R$styleable.AlphaTintDrawableWrapper);
+            updateStateFromTypedArray(typedArrayResolveAttributes);
+            typedArrayResolveAttributes.recycle();
         }
         applyTint();
     }
@@ -101,11 +99,11 @@ public class AlphaTintDrawableWrapper extends InsetDrawable {
 
     @Override // android.graphics.drawable.InsetDrawable, android.graphics.drawable.DrawableWrapper, android.graphics.drawable.Drawable
     public void inflate(Resources resources, XmlPullParser xmlPullParser, AttributeSet attributeSet, Resources.Theme theme) throws XmlPullParserException, IOException {
-        TypedArray obtainAttributes = InsetDrawable.obtainAttributes(resources, theme, attributeSet, R$styleable.AlphaTintDrawableWrapper);
+        TypedArray typedArrayObtainAttributes = InsetDrawable.obtainAttributes(resources, theme, attributeSet, R$styleable.AlphaTintDrawableWrapper);
         super.inflate(resources, xmlPullParser, attributeSet, theme);
-        this.mThemeAttrs = obtainAttributes.extractThemeAttrs();
-        updateStateFromTypedArray(obtainAttributes);
-        obtainAttributes.recycle();
+        this.mThemeAttrs = typedArrayObtainAttributes.extractThemeAttrs();
+        updateStateFromTypedArray(typedArrayObtainAttributes);
+        typedArrayObtainAttributes.recycle();
         applyTint();
     }
 

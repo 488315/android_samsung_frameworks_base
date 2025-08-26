@@ -58,9 +58,9 @@ public class AndroidKeyStoreKey implements Key {
     }
 
     public int hashCode() {
-        int hashCode = (getClass().hashCode() + 31) * 31;
+        int iHashCode = (getClass().hashCode() + 31) * 31;
         long j = this.mKeyId;
-        return ((hashCode + ((int) (j >>> 32))) * 31) + ((int) j);
+        return ((iHashCode + ((int) (j >>> 32))) * 31) + ((int) j);
     }
 
     public boolean equals(Object obj) {

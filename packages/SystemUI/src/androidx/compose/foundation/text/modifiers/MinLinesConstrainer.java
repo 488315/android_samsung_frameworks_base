@@ -12,7 +12,6 @@ import androidx.compose.ui.unit.DensityKt;
 import androidx.compose.ui.unit.LayoutDirection;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class MinLinesConstrainer {
     public static final Companion Companion = new Companion(null);
@@ -25,7 +24,6 @@ public final class MinLinesConstrainer {
     public float oneLineHeightCache = Float.NaN;
     public final TextStyle resolvedStyle;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -57,32 +55,32 @@ public final class MinLinesConstrainer {
     }
 
     /* renamed from: coerceMinLines-Oh53vG4$foundation_release, reason: not valid java name */
-    public final long m223coerceMinLinesOh53vG4$foundation_release(int i, long j) {
-        int m822getMinHeightimpl;
+    public final long m224coerceMinLinesOh53vG4$foundation_release(int i, long j) {
+        int iM824getMinHeightimpl;
         float f = this.oneLineHeightCache;
         float f2 = this.lineHeightCache;
         if (Float.isNaN(f) || Float.isNaN(f2)) {
             String str = MinLinesConstrainerKt.EmptyTextReplacement;
-            long Constraints$default = ConstraintsKt.Constraints$default(0, 0, 0, 0, 15);
+            long jConstraints$default = ConstraintsKt.Constraints$default(0, 0, 0, 0, 15);
             TextOverflow.Companion.getClass();
             int i2 = TextOverflow.Clip;
-            float height = ParagraphKt.m738ParagraphUl8oQg4$default(str, this.resolvedStyle, Constraints$default, this.density, this.fontFamilyResolver, null, 1, i2, 96).getHeight();
-            float height2 = ParagraphKt.m738ParagraphUl8oQg4$default(MinLinesConstrainerKt.TwoLineTextReplacement, this.resolvedStyle, ConstraintsKt.Constraints$default(0, 0, 0, 0, 15), this.density, this.fontFamilyResolver, null, 2, i2, 96).getHeight() - height;
+            float height = ParagraphKt.m740ParagraphUl8oQg4$default(str, this.resolvedStyle, jConstraints$default, this.density, this.fontFamilyResolver, null, 1, i2, 96).getHeight();
+            float height2 = ParagraphKt.m740ParagraphUl8oQg4$default(MinLinesConstrainerKt.TwoLineTextReplacement, this.resolvedStyle, ConstraintsKt.Constraints$default(0, 0, 0, 0, 15), this.density, this.fontFamilyResolver, null, 2, i2, 96).getHeight() - height;
             this.oneLineHeightCache = height;
             this.lineHeightCache = height2;
             f2 = height2;
             f = height;
         }
         if (i != 1) {
-            int round = Math.round((f2 * (i - 1)) + f);
-            m822getMinHeightimpl = round >= 0 ? round : 0;
-            int m820getMaxHeightimpl = Constraints.m820getMaxHeightimpl(j);
-            if (m822getMinHeightimpl > m820getMaxHeightimpl) {
-                m822getMinHeightimpl = m820getMaxHeightimpl;
+            int iRound = Math.round((f2 * (i - 1)) + f);
+            iM824getMinHeightimpl = iRound >= 0 ? iRound : 0;
+            int iM822getMaxHeightimpl = Constraints.m822getMaxHeightimpl(j);
+            if (iM824getMinHeightimpl > iM822getMaxHeightimpl) {
+                iM824getMinHeightimpl = iM822getMaxHeightimpl;
             }
         } else {
-            m822getMinHeightimpl = Constraints.m822getMinHeightimpl(j);
+            iM824getMinHeightimpl = Constraints.m824getMinHeightimpl(j);
         }
-        return ConstraintsKt.Constraints(Constraints.m823getMinWidthimpl(j), Constraints.m821getMaxWidthimpl(j), m822getMinHeightimpl, Constraints.m820getMaxHeightimpl(j));
+        return ConstraintsKt.Constraints(Constraints.m825getMinWidthimpl(j), Constraints.m823getMaxWidthimpl(j), iM824getMinHeightimpl, Constraints.m822getMaxHeightimpl(j));
     }
 }

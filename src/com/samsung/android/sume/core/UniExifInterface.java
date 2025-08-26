@@ -93,41 +93,41 @@ public class UniExifInterface extends ExifInterface {
             byteBuffer.get(bArr);
         } else {
             byteBuffer.rewind();
-            int remaining = byteBuffer.remaining();
-            byte[] bArr2 = new byte[remaining];
+            int iRemaining = byteBuffer.remaining();
+            byte[] bArr2 = new byte[iRemaining];
             byte[] bArr3 = new byte[byteBuffer.limit() + 8];
             byteBuffer.get(bArr2);
             System.arraycopy(JPEG_PREFIX, 0, bArr3, 0, 2);
             System.arraycopy(EXIF_PREFIX, 0, bArr3, 2, 2);
-            int i = remaining + 2;
+            int i = iRemaining + 2;
             bArr3[4] = (byte) ((i >>> 8) & 255);
             bArr3[5] = (byte) (i & 255);
-            System.arraycopy(bArr2, 0, bArr3, 6, remaining);
-            System.arraycopy(JPEG_POSTFIX, 0, bArr3, remaining + 6, 2);
+            System.arraycopy(bArr2, 0, bArr3, 6, iRemaining);
+            System.arraycopy(JPEG_POSTFIX, 0, bArr3, iRemaining + 6, 2);
             bArr = bArr3;
         }
-        File createTempFile = File.createTempFile("UniExifInterface.jpg", "tmp");
-        FileOutputStream fileOutputStream = new FileOutputStream(createTempFile);
+        File fileCreateTempFile = File.createTempFile("UniExifInterface.jpg", "tmp");
+        FileOutputStream fileOutputStream = new FileOutputStream(fileCreateTempFile);
         fileOutputStream.write(bArr);
         fileOutputStream.close();
-        return createTempFile;
+        return fileCreateTempFile;
     }
 
-    public ByteBuffer toExifByteBuffer() {
-        byte[] bArr = new byte[0];
+    public ByteBuffer toExifByteBuffer() throws IOException {
+        byte[] allBytes = new byte[0];
         try {
-            bArr = Files.readAllBytes(this.tempFile.toPath());
+            allBytes = Files.readAllBytes(this.tempFile.toPath());
         } catch (IOException e) {
             e.printStackTrace();
         }
-        int length = bArr.length - 8;
-        byte[] bArr2 = new byte[length];
-        System.arraycopy(bArr, 6, bArr2, 0, length);
-        ByteBuffer allocateDirect = ByteBuffer.allocateDirect(length);
-        allocateDirect.put(bArr2);
-        allocateDirect.rewind();
+        int length = allBytes.length - 8;
+        byte[] bArr = new byte[length];
+        System.arraycopy(allBytes, 6, bArr, 0, length);
+        ByteBuffer byteBufferAllocateDirect = ByteBuffer.allocateDirect(length);
+        byteBufferAllocateDirect.put(bArr);
+        byteBufferAllocateDirect.rewind();
         reset();
-        return allocateDirect;
+        return byteBufferAllocateDirect;
     }
 
     public static UniExifInterface emptyOf() {
@@ -156,9 +156,9 @@ public class UniExifInterface extends ExifInterface {
         return of(new File(str));
     }
 
-    private static ByteBuffer parseExif(File file) {
-        ByteBuffer parseJpegExif = parseJpegExif(file);
-        return parseJpegExif == null ? parseHeifExif(file) : parseJpegExif;
+    private static ByteBuffer parseExif(File file) throws IOException {
+        ByteBuffer jpegExif = parseJpegExif(file);
+        return jpegExif == null ? parseHeifExif(file) : jpegExif;
     }
 
     private static ByteBuffer parseHeifExif(File file) {
@@ -171,7 +171,7 @@ public class UniExifInterface extends ExifInterface {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    private static ByteBuffer parseJpegExif(File file) {
+    private static ByteBuffer parseJpegExif(File file) throws IOException {
         try {
             FileInputStream fileInputStream = new FileInputStream(file);
             try {
@@ -185,23 +185,23 @@ public class UniExifInterface extends ExifInterface {
                     if (((Number) pair.first).intValue() != 255) {
                         Log.d(TAG, "this is not valid markers");
                     } else if ((208 > ((Number) pair.second).intValue() || 215 < ((Number) pair.second).intValue()) && ((Number) pair.second).intValue() == 225) {
-                        int read = (fileInputStream.read() << 8) | fileInputStream.read();
+                        int i = (fileInputStream.read() << 8) | fileInputStream.read();
                         byte[] bArr2 = new byte[4];
                         if (fileInputStream.read(bArr2) < 4) {
                             Log.e(TAG, "Fail to read exif Tag");
                         } else {
                             long j3 = 8 + j;
                             if (new String(bArr2, "UTF-8").equals("Exif")) {
-                                int i = read - 2;
-                                byte[] bArr3 = new byte[i];
+                                int i2 = i - 2;
+                                byte[] bArr3 = new byte[i2];
                                 fileInputStream.getChannel().position(j + 4);
-                                fileInputStream.read(bArr3, 0, i);
-                                ByteBuffer wrap = ByteBuffer.wrap(bArr3);
+                                fileInputStream.read(bArr3, 0, i2);
+                                ByteBuffer byteBufferWrap = ByteBuffer.wrap(bArr3);
                                 fileInputStream.close();
-                                return wrap;
+                                return byteBufferWrap;
                             }
-                            Log.d(TAG, "Not exif " + read);
-                            long j4 = (long) (read + (-6));
+                            Log.d(TAG, "Not exif " + i);
+                            long j4 = (long) (i + (-6));
                             fileInputStream.skip(j4);
                             j = j3 + j4;
                         }

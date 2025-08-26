@@ -32,31 +32,31 @@ public class ParsingUtils {
         if (charSequence == null || charSequence.length() <= 0) {
             return null;
         }
-        String charSequence2 = charSequence.toString();
-        if (charSequence2.charAt(0) == '.') {
-            return str + charSequence2;
+        String string = charSequence.toString();
+        if (string.charAt(0) == '.') {
+            return str + string;
         }
-        if (charSequence2.indexOf(46) >= 0) {
-            return charSequence2;
+        if (string.indexOf(46) >= 0) {
+            return string;
         }
-        return str + '.' + charSequence2;
+        return str + '.' + string;
     }
 
-    public static ParseResult unknownTag(String str, ParsingPackage parsingPackage, XmlResourceParser xmlResourceParser, ParseInput parseInput) throws IOException, XmlPullParserException {
+    public static ParseResult unknownTag(String str, ParsingPackage parsingPackage, XmlResourceParser xmlResourceParser, ParseInput parseInput) throws XmlPullParserException, IOException {
         Slog.w(TAG, "Unknown element under " + str + ": " + xmlResourceParser.getName() + " at " + parsingPackage.getBaseApkPath() + " " + xmlResourceParser.getPositionDescription());
         XmlUtils.skipCurrentTag(xmlResourceParser);
         return parseInput.success(null);
     }
 
     public static <Interface, Impl extends Interface> List<Interface> createTypedInterfaceList(Parcel parcel, Parcelable.Creator<Impl> creator) {
-        int readInt = parcel.readInt();
-        if (readInt < 0) {
+        int i = parcel.readInt();
+        if (i < 0) {
             return new ArrayList();
         }
-        ArrayList arrayList = new ArrayList(readInt);
-        while (readInt > 0) {
+        ArrayList arrayList = new ArrayList(i);
+        while (i > 0) {
             arrayList.add(parcel.readTypedObject(creator));
-            readInt--;
+            i--;
         }
         return arrayList;
     }
@@ -91,23 +91,23 @@ public class ParsingUtils {
 
         @Override // com.android.internal.util.Parcelling
         public List<Pair<String, ParsedIntentInfo>> unparcel(Parcel parcel) {
-            int readInt = parcel.readInt();
-            if (readInt == -1) {
+            int i = parcel.readInt();
+            if (i == -1) {
                 return null;
             }
-            if (readInt == 0) {
+            if (i == 0) {
                 return new ArrayList(0);
             }
-            ArrayList arrayList = new ArrayList(readInt);
-            for (int i = 0; i < readInt; i++) {
+            ArrayList arrayList = new ArrayList(i);
+            for (int i2 = 0; i2 < i; i2++) {
                 arrayList.add(Pair.create(parcel.readString(), (ParsedIntentInfo) parcel.readParcelable(ParsedIntentInfoImpl.class.getClassLoader(), ParsedIntentInfo.class)));
             }
             return arrayList;
         }
     }
 
-    public static ParseResult<Set<String>> parseKnownActivityEmbeddingCerts(TypedArray typedArray, Resources resources, int i, ParseInput parseInput) {
-        Set set = null;
+    public static ParseResult<Set<String>> parseKnownActivityEmbeddingCerts(TypedArray typedArray, Resources resources, int i, ParseInput parseInput) throws Resources.NotFoundException {
+        Set setOf = null;
         if (!typedArray.hasValue(i)) {
             return parseInput.success(null);
         }
@@ -116,18 +116,18 @@ public class ParsingUtils {
             if (resources.getResourceTypeName(resourceId).equals("array")) {
                 String[] stringArray = resources.getStringArray(resourceId);
                 if (stringArray != null) {
-                    set = Set.of((Object[]) stringArray);
+                    setOf = Set.of((Object[]) stringArray);
                 }
             } else {
                 String string = resources.getString(resourceId);
                 if (string != null) {
-                    set = Set.of(string);
+                    setOf = Set.of(string);
                 }
             }
-            if (set == null || set.isEmpty()) {
+            if (setOf == null || setOf.isEmpty()) {
                 return parseInput.error("Defined a knownActivityEmbeddingCerts attribute but the provided resource is null");
             }
-            return parseInput.success(set);
+            return parseInput.success(setOf);
         }
         String string2 = typedArray.getString(i);
         if (string2 == null || string2.isEmpty()) {

@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ShapeAppearancePathProvider {
     public final ShapePath[] cornerPaths = new ShapePath[4];
@@ -28,7 +27,6 @@ public class ShapeAppearancePathProvider {
     public final Path cornerPath = new Path();
     public final boolean edgeIntersectionCheckEnabled = true;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Lazy {
         public static final ShapeAppearancePathProvider INSTANCE = new ShapeAppearancePathProvider();
 
@@ -36,11 +34,9 @@ public class ShapeAppearancePathProvider {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface PathListener {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ShapeAppearancePathSpec {
         public final RectF bounds;
         public final float interpolation;
@@ -190,13 +186,13 @@ public class ShapeAppearancePathProvider {
             fArr2[r19] = f4;
             fArr2[i] = shapePath6.startY;
             this.cornerTransforms[i8].mapPoints(fArr2);
-            float max = Math.max(((float) Math.hypot(fArr[r19] - fArr2[r19], fArr[i] - fArr2[i])) - 0.001f, 0.0f);
+            float fMax = Math.max(((float) Math.hypot(fArr[r19] - fArr2[r19], fArr[i] - fArr2[i])) - 0.001f, 0.0f);
             RectF rectF4 = shapeAppearancePathSpec.bounds;
             ShapePath shapePath7 = shapePathArr[i6];
             fArr[r19] = shapePath7.endX;
             fArr[i] = shapePath7.endY;
             this.cornerTransforms[i6].mapPoints(fArr);
-            float abs = (i6 == i || i6 == 3) ? Math.abs(rectF4.centerX() - fArr[r19]) : Math.abs(rectF4.centerY() - fArr[i]);
+            float fAbs = (i6 == i || i6 == 3) ? Math.abs(rectF4.centerX() - fArr[r19]) : Math.abs(rectF4.centerY() - fArr[i]);
             ShapePath shapePath8 = this.shapePath;
             shapePath8.reset(0.0f, 0.0f, 270.0f, 0.0f);
             if (i6 != i) {
@@ -221,7 +217,7 @@ public class ShapeAppearancePathProvider {
                 c2 = 3;
                 edgeTreatment = shapeAppearanceModel2.bottomEdge;
             }
-            edgeTreatment.getEdgePath(max, abs, f2, shapePath8);
+            edgeTreatment.getEdgePath(fMax, fAbs, f2, shapePath8);
             this.edgePath.reset();
             shapePath8.applyToPath(this.edgeTransforms[i6], this.edgePath);
             if (this.edgeIntersectionCheckEnabled && (edgeTreatment.forceIntersection() || pathOverlapsCorner(this.edgePath, i6) || pathOverlapsCorner(this.edgePath, i8))) {

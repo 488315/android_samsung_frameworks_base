@@ -27,18 +27,18 @@ public class LayoutAnimationController {
     }
 
     public LayoutAnimationController(Context context, AttributeSet attributeSet) {
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.LayoutAnimation);
-        this.mDelay = Animation.Description.parseValue(obtainStyledAttributes.peekValue(1), context).value;
-        this.mOrder = obtainStyledAttributes.getInt(3, 0);
-        int resourceId = obtainStyledAttributes.getResourceId(2, 0);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.LayoutAnimation);
+        this.mDelay = Animation.Description.parseValue(typedArrayObtainStyledAttributes.peekValue(1), context).value;
+        this.mOrder = typedArrayObtainStyledAttributes.getInt(3, 0);
+        int resourceId = typedArrayObtainStyledAttributes.getResourceId(2, 0);
         if (resourceId > 0) {
             setAnimation(context, resourceId);
         }
-        int resourceId2 = obtainStyledAttributes.getResourceId(0, 0);
+        int resourceId2 = typedArrayObtainStyledAttributes.getResourceId(0, 0);
         if (resourceId2 > 0) {
             setInterpolator(context, resourceId2);
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     public LayoutAnimationController(Animation animation) {
@@ -105,9 +105,9 @@ public class LayoutAnimationController {
         long delayForView = getDelayForView(view) + this.mAnimation.getStartOffset();
         this.mMaxDelay = Math.max(this.mMaxDelay, delayForView);
         try {
-            Animation mo6219clone = this.mAnimation.mo6219clone();
-            mo6219clone.setStartOffset(delayForView);
-            return mo6219clone;
+            Animation animationMo6227clone = this.mAnimation.mo6227clone();
+            animationMo6227clone.setStartOffset(delayForView);
+            return animationMo6227clone;
         } catch (CloneNotSupportedException unused) {
             return null;
         }

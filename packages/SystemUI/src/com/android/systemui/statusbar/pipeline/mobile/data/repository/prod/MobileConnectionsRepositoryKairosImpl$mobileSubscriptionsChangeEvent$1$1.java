@@ -16,7 +16,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class MobileConnectionsRepositoryKairosImpl$mobileSubscriptionsChangeEvent$1$1 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -52,13 +51,13 @@ final class MobileConnectionsRepositoryKairosImpl$mobileSubscriptionsChangeEvent
             SubscriptionManager.OnSubscriptionsChangedListener onSubscriptionsChangedListener = new SubscriptionManager.OnSubscriptionsChangedListener() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryKairosImpl$mobileSubscriptionsChangeEvent$1$1$callback$1
                 @Override // android.telephony.SubscriptionManager.OnSubscriptionsChangedListener
                 public final void onSubscriptionsChanged() {
-                    MobileInputLogger mobileInputLogger = MobileConnectionsRepositoryKairosImpl.this.logger;
+                    MobileInputLogger mobileInputLogger = mobileConnectionsRepositoryKairosImpl.logger;
                     mobileInputLogger.getClass();
                     LogLevel logLevel = LogLevel.INFO;
                     MobileInputLogger$$ExternalSyntheticLambda0 mobileInputLogger$$ExternalSyntheticLambda0 = new MobileInputLogger$$ExternalSyntheticLambda0(9);
                     LogBuffer logBuffer = mobileInputLogger.buffer;
                     logBuffer.commit(logBuffer.obtain("MobileInputLog", logLevel, mobileInputLogger$$ExternalSyntheticLambda0, null));
-                    ((ChannelCoroutine) producerScope).mo3456trySendJP2dKIU(Unit.INSTANCE);
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Unit.INSTANCE);
                 }
             };
             this.this$0.subscriptionManager.addOnSubscriptionsChangedListener(new Executor() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryKairosImpl$mobileSubscriptionsChangeEvent$1$1.1

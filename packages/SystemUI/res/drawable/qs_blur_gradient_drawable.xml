@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape android:shape="rectangle"
   xmlns:android="http://schemas.android.com/apk/res/android">
-    <gradient android:startColor="#00000000" android:endColor="@color/qs_gradient_drawable_end_color" android:angle="90.0" android:type="linear" />
+    <gradient android:startColor="@color/qs_gradient_drawable_start_color" android:endColor="@color/qs_gradient_drawable_end_color" android:angle="90.0" android:type="linear" />
     <corners android:radius="@dimen/qs_pop_over_corner_radius" />
 </shape>

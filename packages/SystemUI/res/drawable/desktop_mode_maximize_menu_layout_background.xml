@@ -3,6 +3,6 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
     <corners android:radius="@dimen/desktop_mode_maximize_menu_buttons_outline_radius" />
-    <solid android:color="@android:color/side_fps_text_color" />
-    <stroke android:width="1.0dip" android:color="@android:color/search_url_text_pressed" />
+    <solid android:color="@android:color/overview_background_dark" />
+    <stroke android:width="1.0dip" android:color="@android:color/micro_text_light" />
 </shape>

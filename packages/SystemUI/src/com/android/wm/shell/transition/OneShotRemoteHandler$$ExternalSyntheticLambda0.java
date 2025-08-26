@@ -4,7 +4,6 @@ import android.os.IBinder;
 import android.util.Log;
 import com.android.wm.shell.transition.Transitions;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class OneShotRemoteHandler$$ExternalSyntheticLambda0 implements IBinder.DeathRecipient {
     public final /* synthetic */ OneShotRemoteHandler f$0;
@@ -24,7 +23,7 @@ public final /* synthetic */ class OneShotRemoteHandler$$ExternalSyntheticLambda
         oneShotRemoteHandler.mMainExecutor.execute(new Runnable() { // from class: com.android.wm.shell.transition.OneShotRemoteHandler$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
-                Transitions.TransitionFinishCallback.this.onTransitionFinished(null);
+                transitionFinishCallback.onTransitionFinished(null);
             }
         });
     }

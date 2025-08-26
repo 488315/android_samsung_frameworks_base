@@ -72,7 +72,7 @@ abstract class AndroidKeyStoreSignatureSpiBase extends SignatureSpi implements K
     }
 
     @Override // java.security.SignatureSpi
-    protected final void engineInitVerify(PublicKey publicKey) throws InvalidKeyException {
+    protected final void engineInitVerify(PublicKey publicKey) throws NoSuchAlgorithmException, InvalidKeyException {
         resetAll();
         try {
             Signature signature = Signature.getInstance(getAlgorithm());
@@ -109,7 +109,7 @@ abstract class AndroidKeyStoreSignatureSpiBase extends SignatureSpi implements K
         this.mCachedException = null;
     }
 
-    private void ensureKeystoreOperationInitialized() throws InvalidKeyException {
+    private void ensureKeystoreOperationInitialized() throws InterruptedException, InvalidKeyException {
         if (this.mMessageStreamer == null && this.mCachedException == null) {
             if (this.mKey == null) {
                 throw new IllegalStateException("Not initialized");
@@ -118,9 +118,9 @@ abstract class AndroidKeyStoreSignatureSpiBase extends SignatureSpi implements K
             addAlgorithmSpecificParametersToBegin(arrayList);
             arrayList.add(KeyStore2ParameterUtils.makeEnum(536870913, this.mSigning ? 2 : 3));
             try {
-                KeyStoreOperation createOperation = this.mKey.getSecurityLevel().createOperation(this.mKey.getKeyIdDescriptor(), arrayList);
-                this.mOperation = createOperation;
-                this.mOperationChallenge = KeyStoreCryptoOperationUtils.getOrMakeOperationChallenge(createOperation, this.mKey);
+                KeyStoreOperation keyStoreOperationCreateOperation = this.mKey.getSecurityLevel().createOperation(this.mKey.getKeyIdDescriptor(), arrayList);
+                this.mOperation = keyStoreOperationCreateOperation;
+                this.mOperationChallenge = KeyStoreCryptoOperationUtils.getOrMakeOperationChallenge(keyStoreOperationCreateOperation, this.mKey);
                 this.mMessageStreamer = createMainDataStreamer(this.mOperation);
             } catch (KeyStoreException e) {
                 throw KeyStoreCryptoOperationUtils.getInvalidKeyException(this.mKey, e);
@@ -138,7 +138,7 @@ abstract class AndroidKeyStoreSignatureSpiBase extends SignatureSpi implements K
     }
 
     @Override // java.security.SignatureSpi
-    protected final void engineUpdate(byte[] bArr, int i, int i2) throws SignatureException {
+    protected final void engineUpdate(byte[] bArr, int i, int i2) throws InterruptedException, SignatureException {
         Signature signature = this.mSignature;
         if (signature != null) {
             signature.update(bArr, i, i2);
@@ -153,11 +153,11 @@ abstract class AndroidKeyStoreSignatureSpiBase extends SignatureSpi implements K
                 return;
             }
             try {
-                byte[] update = this.mMessageStreamer.update(bArr, i, i2);
-                if (update.length == 0) {
+                byte[] bArrUpdate = this.mMessageStreamer.update(bArr, i, i2);
+                if (bArrUpdate.length == 0) {
                     return;
                 }
-                throw new ProviderException("Update operation unexpectedly produced output: " + update.length + " bytes");
+                throw new ProviderException("Update operation unexpectedly produced output: " + bArrUpdate.length + " bytes");
             } catch (KeyStoreException e) {
                 throw new SignatureException(e);
             }
@@ -167,26 +167,26 @@ abstract class AndroidKeyStoreSignatureSpiBase extends SignatureSpi implements K
     }
 
     @Override // java.security.SignatureSpi
-    protected final void engineUpdate(byte b) throws SignatureException {
+    protected final void engineUpdate(byte b) throws InterruptedException, SignatureException {
         engineUpdate(new byte[]{b}, 0, 1);
     }
 
     @Override // java.security.SignatureSpi
-    protected final void engineUpdate(ByteBuffer byteBuffer) {
-        byte[] bArr;
-        int i;
-        int remaining = byteBuffer.remaining();
+    protected final void engineUpdate(ByteBuffer byteBuffer) throws InterruptedException {
+        byte[] bArrArray;
+        int iArrayOffset;
+        int iRemaining = byteBuffer.remaining();
         if (byteBuffer.hasArray()) {
-            bArr = byteBuffer.array();
-            i = byteBuffer.arrayOffset() + byteBuffer.position();
+            bArrArray = byteBuffer.array();
+            iArrayOffset = byteBuffer.arrayOffset() + byteBuffer.position();
             byteBuffer.position(byteBuffer.limit());
         } else {
-            bArr = new byte[remaining];
-            byteBuffer.get(bArr);
-            i = 0;
+            bArrArray = new byte[iRemaining];
+            byteBuffer.get(bArrArray);
+            iArrayOffset = 0;
         }
         try {
-            engineUpdate(bArr, i, remaining);
+            engineUpdate(bArrArray, iArrayOffset, iRemaining);
         } catch (SignatureException e) {
             this.mCachedException = e;
         }
@@ -205,9 +205,9 @@ abstract class AndroidKeyStoreSignatureSpiBase extends SignatureSpi implements K
         try {
             ensureKeystoreOperationInitialized();
             KeyStoreCryptoOperationUtils.getRandomBytesToMixIntoKeystoreRng(this.appRandom, getAdditionalEntropyAmountForSign());
-            byte[] doFinal = this.mMessageStreamer.doFinal(EmptyArray.BYTE, 0, 0, null);
+            byte[] bArrDoFinal = this.mMessageStreamer.doFinal(EmptyArray.BYTE, 0, 0, null);
             resetWhilePreservingInitState();
-            return doFinal;
+            return bArrDoFinal;
         } catch (KeyStoreException | InvalidKeyException e) {
             throw new SignatureException(e);
         }

@@ -22,7 +22,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class LSOUtils {
     public static final int DEFAULT_COMPRESS_QUALITY = 100;
@@ -47,7 +46,7 @@ public class LSOUtils {
         return saveBitmapToFile(point != null ? getBitmapBySize(str, point.x, point.y) : getBitmap(str), compressFormat, str2);
     }
 
-    public static String copyFile(String str, String str2) {
+    public static String copyFile(String str, String str2) throws Throwable {
         FileOutputStream fileOutputStream;
         FileInputStream fileInputStream;
         if (str == null || str2 == null) {
@@ -70,31 +69,31 @@ public class LSOUtils {
                     fileInputStream = new FileInputStream(file);
                     try {
                         fileOutputStream = new FileOutputStream(file2);
-                        try {
-                            byte[] bArr = new byte[1024];
-                            while (true) {
-                                int read = fileInputStream.read(bArr);
-                                if (read <= 0) {
-                                    fileOutputStream.flush();
-                                    fileInputStream.close();
-                                    fileOutputStream.close();
-                                    return str2;
-                                }
-                                fileOutputStream.write(bArr, 0, read);
-                            }
-                        } catch (Throwable th) {
-                            th = th;
-                            if (fileInputStream != null) {
+                    } catch (Throwable th) {
+                        th = th;
+                        fileOutputStream = null;
+                    }
+                    try {
+                        byte[] bArr = new byte[1024];
+                        while (true) {
+                            int i = fileInputStream.read(bArr);
+                            if (i <= 0) {
+                                fileOutputStream.flush();
                                 fileInputStream.close();
-                            }
-                            if (fileOutputStream != null) {
                                 fileOutputStream.close();
+                                return str2;
                             }
-                            throw th;
+                            fileOutputStream.write(bArr, 0, i);
                         }
                     } catch (Throwable th2) {
                         th = th2;
-                        fileOutputStream = null;
+                        if (fileInputStream != null) {
+                            fileInputStream.close();
+                        }
+                        if (fileOutputStream != null) {
+                            fileOutputStream.close();
+                        }
+                        throw th;
                     }
                 } catch (Throwable th3) {
                     th = th3;
@@ -117,44 +116,44 @@ public class LSOUtils {
     }
 
     public static boolean createRippleImage(String str, Bitmap.CompressFormat compressFormat, String str2) {
-        Bitmap createRippleImage = createRippleImage(getBitmap(str));
-        if (createRippleImage == null) {
+        Bitmap bitmapCreateRippleImage = createRippleImage(getBitmap(str));
+        if (bitmapCreateRippleImage == null) {
             return false;
         }
-        return saveBitmapToFile(createRippleImage, compressFormat, str2);
+        return saveBitmapToFile(bitmapCreateRippleImage, compressFormat, str2);
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(11:5|(2:6|7)|(1:(1:34)(2:35|(1:37)(8:38|13|14|15|16|17|19|20)))(1:11)|12|13|14|15|16|17|19|20) */
-    /* JADX WARN: Code restructure failed: missing block: B:24:0x0092, code lost:
+    /* JADX WARN: Can't wrap try/catch for region: R(16:0|2|(1:4)(1:5)|6|57|(2:52|7)|(1:(1:20)(2:21|(1:23)(8:24|25|59|26|27|51|56|44)))(1:11)|12|25|59|26|27|51|56|44|(1:(0))) */
+    /* JADX WARN: Code restructure failed: missing block: B:33:0x0090, code lost:
     
         r11 = e;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:25:0x009d, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:35:0x0092, code lost:
     
-        android.util.Log.e(com.samsung.android.knox.lockscreen.LSOUtils.TAG, "decodeFile: ioexception", r11);
+        r11 = e;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:26:0x00a2, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:37:0x0094, code lost:
     
-        if (r12 != 0) goto L43;
+        android.util.Log.e(com.samsung.android.knox.lockscreen.LSOUtils.TAG, "decodeFile: error occurs. ", r11);
      */
-    /* JADX WARN: Code restructure failed: missing block: B:27:0x00a4, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:38:0x0097, code lost:
+    
+        if (r12 != 0) goto L39;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:39:0x0099, code lost:
     
         r12.close();
         r12 = r12;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:28:0x0090, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:41:0x009d, code lost:
     
-        r11 = e;
+        android.util.Log.e(com.samsung.android.knox.lockscreen.LSOUtils.TAG, "decodeFile: ioexception", r11);
      */
-    /* JADX WARN: Code restructure failed: missing block: B:29:0x0094, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:42:0x00a2, code lost:
     
-        android.util.Log.e(com.samsung.android.knox.lockscreen.LSOUtils.TAG, "decodeFile: error occurs. ", r11);
+        if (r12 != 0) goto L43;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:30:0x0097, code lost:
-    
-        if (r12 != 0) goto L39;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:31:0x0099, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:43:0x00a4, code lost:
     
         r12.close();
         r12 = r12;
@@ -175,126 +174,74 @@ public class LSOUtils {
     /* JADX WARN: Type inference failed for: r12v9 */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static android.graphics.Bitmap decodeFile(java.io.File r11, int r12, int r13) {
-        /*
-            java.lang.String r0 = "decodeFile: error occurs. "
-            java.lang.String r1 = "LSO_LSOUtils"
-            if (r12 <= r13) goto L8
-            r2 = r13
-            goto L9
-        L8:
-            r2 = r12
-        L9:
-            r3 = 0
-            android.graphics.Point r4 = getBitmapSize(r11)     // Catch: java.lang.Throwable -> L36 java.lang.Exception -> L39 java.io.IOException -> L3c
-            int r5 = r4.y     // Catch: java.lang.Throwable -> L36 java.lang.Exception -> L39 java.io.IOException -> L3c
-            r6 = 4602678819172646912(0x3fe0000000000000, double:0.5)
-            r8 = 4611686018427387904(0x4000000000000000, double:2.0)
-            if (r5 <= r13) goto L3f
-            int r10 = r4.x     // Catch: java.lang.Throwable -> L36 java.lang.Exception -> L39 java.io.IOException -> L3c
-            if (r10 <= r12) goto L3f
-            double r12 = (double) r2     // Catch: java.lang.Throwable -> L36 java.lang.Exception -> L39 java.io.IOException -> L3c
-            int r2 = java.lang.Math.max(r5, r10)     // Catch: java.lang.Throwable -> L36 java.lang.Exception -> L39 java.io.IOException -> L3c
-            double r4 = (double) r2     // Catch: java.lang.Throwable -> L36 java.lang.Exception -> L39 java.io.IOException -> L3c
-            double r12 = r12 / r4
-            double r12 = java.lang.Math.log(r12)     // Catch: java.lang.Throwable -> L36 java.lang.Exception -> L39 java.io.IOException -> L3c
-            double r4 = java.lang.Math.log(r6)     // Catch: java.lang.Throwable -> L36 java.lang.Exception -> L39 java.io.IOException -> L3c
-            double r12 = r12 / r4
-            long r12 = java.lang.Math.round(r12)     // Catch: java.lang.Throwable -> L36 java.lang.Exception -> L39 java.io.IOException -> L3c
-            int r12 = (int) r12     // Catch: java.lang.Throwable -> L36 java.lang.Exception -> L39 java.io.IOException -> L3c
-            double r12 = (double) r12     // Catch: java.lang.Throwable -> L36 java.lang.Exception -> L39 java.io.IOException -> L3c
-            double r12 = java.lang.Math.pow(r8, r12)     // Catch: java.lang.Throwable -> L36 java.lang.Exception -> L39 java.io.IOException -> L3c
-        L34:
-            int r12 = (int) r12     // Catch: java.lang.Throwable -> L36 java.lang.Exception -> L39 java.io.IOException -> L3c
-            goto L74
-        L36:
-            r11 = move-exception
-            goto La8
-        L39:
-            r11 = move-exception
-            r12 = r3
-            goto L94
-        L3c:
-            r11 = move-exception
-            r12 = r3
-            goto L9d
-        L3f:
-            if (r5 <= r13) goto L58
-            double r12 = (double) r13     // Catch: java.lang.Throwable -> L36 java.lang.Exception -> L39 java.io.IOException -> L3c
-            double r4 = (double) r5     // Catch: java.lang.Throwable -> L36 java.lang.Exception -> L39 java.io.IOException -> L3c
-            double r12 = r12 / r4
-            double r12 = java.lang.Math.log(r12)     // Catch: java.lang.Throwable -> L36 java.lang.Exception -> L39 java.io.IOException -> L3c
-            double r4 = java.lang.Math.log(r6)     // Catch: java.lang.Throwable -> L36 java.lang.Exception -> L39 java.io.IOException -> L3c
-            double r12 = r12 / r4
-            long r12 = java.lang.Math.round(r12)     // Catch: java.lang.Throwable -> L36 java.lang.Exception -> L39 java.io.IOException -> L3c
-            int r12 = (int) r12     // Catch: java.lang.Throwable -> L36 java.lang.Exception -> L39 java.io.IOException -> L3c
-            double r12 = (double) r12     // Catch: java.lang.Throwable -> L36 java.lang.Exception -> L39 java.io.IOException -> L3c
-            double r12 = java.lang.Math.pow(r8, r12)     // Catch: java.lang.Throwable -> L36 java.lang.Exception -> L39 java.io.IOException -> L3c
-            goto L34
-        L58:
-            int r13 = r4.x     // Catch: java.lang.Throwable -> L36 java.lang.Exception -> L39 java.io.IOException -> L3c
-            if (r13 <= r12) goto L73
-            double r4 = (double) r12     // Catch: java.lang.Throwable -> L36 java.lang.Exception -> L39 java.io.IOException -> L3c
-            double r12 = (double) r13     // Catch: java.lang.Throwable -> L36 java.lang.Exception -> L39 java.io.IOException -> L3c
-            double r4 = r4 / r12
-            double r12 = java.lang.Math.log(r4)     // Catch: java.lang.Throwable -> L36 java.lang.Exception -> L39 java.io.IOException -> L3c
-            double r4 = java.lang.Math.log(r6)     // Catch: java.lang.Throwable -> L36 java.lang.Exception -> L39 java.io.IOException -> L3c
-            double r12 = r12 / r4
-            long r12 = java.lang.Math.round(r12)     // Catch: java.lang.Throwable -> L36 java.lang.Exception -> L39 java.io.IOException -> L3c
-            int r12 = (int) r12     // Catch: java.lang.Throwable -> L36 java.lang.Exception -> L39 java.io.IOException -> L3c
-            double r12 = (double) r12     // Catch: java.lang.Throwable -> L36 java.lang.Exception -> L39 java.io.IOException -> L3c
-            double r12 = java.lang.Math.pow(r8, r12)     // Catch: java.lang.Throwable -> L36 java.lang.Exception -> L39 java.io.IOException -> L3c
-            goto L34
-        L73:
-            r12 = 1
-        L74:
-            android.graphics.BitmapFactory$Options r13 = new android.graphics.BitmapFactory$Options     // Catch: java.lang.Throwable -> L36 java.lang.Exception -> L39 java.io.IOException -> L3c
-            r13.<init>()     // Catch: java.lang.Throwable -> L36 java.lang.Exception -> L39 java.io.IOException -> L3c
-            r13.inSampleSize = r12     // Catch: java.lang.Throwable -> L36 java.lang.Exception -> L39 java.io.IOException -> L3c
-            java.io.FileInputStream r12 = new java.io.FileInputStream     // Catch: java.lang.Throwable -> L36 java.lang.Exception -> L39 java.io.IOException -> L3c
-            r12.<init>(r11)     // Catch: java.lang.Throwable -> L36 java.lang.Exception -> L39 java.io.IOException -> L3c
-            android.graphics.Bitmap r3 = android.graphics.BitmapFactory.decodeStream(r12, r3, r13)     // Catch: java.lang.Throwable -> L8d java.lang.Exception -> L90 java.io.IOException -> L92
-            r12.close()     // Catch: java.io.IOException -> L88
-            goto La7
-        L88:
-            r11 = move-exception
-            android.util.Log.e(r1, r0, r11)
-            goto La7
-        L8d:
-            r11 = move-exception
-            r3 = r12
-            goto La8
-        L90:
-            r11 = move-exception
-            goto L94
-        L92:
-            r11 = move-exception
-            goto L9d
-        L94:
-            android.util.Log.e(r1, r0, r11)     // Catch: java.lang.Throwable -> L8d
-            if (r12 == 0) goto La7
-            r12.close()     // Catch: java.io.IOException -> L88
-            goto La7
-        L9d:
-            java.lang.String r13 = "decodeFile: ioexception"
-            android.util.Log.e(r1, r13, r11)     // Catch: java.lang.Throwable -> L8d
-            if (r12 == 0) goto La7
-            r12.close()     // Catch: java.io.IOException -> L88
-        La7:
-            return r3
-        La8:
-            if (r3 == 0) goto Lb2
-            r3.close()     // Catch: java.io.IOException -> Lae
-            goto Lb2
-        Lae:
-            r12 = move-exception
-            android.util.Log.e(r1, r0, r12)
-        Lb2:
-            throw r11
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.knox.lockscreen.LSOUtils.decodeFile(java.io.File, int, int):android.graphics.Bitmap");
+    public static Bitmap decodeFile(File file, int i, int i2) throws Throwable {
+        Point bitmapSize;
+        int i3;
+        int i4;
+        double dPow;
+        int i5;
+        int i6 = i > i2 ? i2 : i;
+        Bitmap bitmapDecodeStream = null;
+        bitmapDecodeStream = null;
+        bitmapDecodeStream = null;
+        bitmapDecodeStream = null;
+        bitmapDecodeStream = null;
+        FileInputStream fileInputStream = null;
+        try {
+        } catch (Throwable th) {
+            th = th;
+            fileInputStream = i;
+        }
+        try {
+            try {
+                bitmapSize = getBitmapSize(file);
+                i3 = bitmapSize.y;
+            } catch (IOException e) {
+                Log.e(TAG, "decodeFile: error occurs. ", e);
+            }
+        } catch (IOException e2) {
+            e = e2;
+            i = 0;
+        } catch (Exception e3) {
+            e = e3;
+            i = 0;
+        } catch (Throwable th2) {
+            th = th2;
+            if (fileInputStream != null) {
+                try {
+                    fileInputStream.close();
+                } catch (IOException e4) {
+                    Log.e(TAG, "decodeFile: error occurs. ", e4);
+                }
+            }
+            throw th;
+        }
+        if (i3 > i2 && (i5 = bitmapSize.x) > i) {
+            dPow = Math.pow(2.0d, (int) Math.round(Math.log(i6 / Math.max(i3, i5)) / Math.log(0.5d)));
+        } else if (i3 > i2) {
+            dPow = Math.pow(2.0d, (int) Math.round(Math.log(i2 / i3) / Math.log(0.5d)));
+        } else {
+            if (bitmapSize.x <= i) {
+                i4 = 1;
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inSampleSize = i4;
+                i = new FileInputStream(file);
+                bitmapDecodeStream = BitmapFactory.decodeStream(i, null, options);
+                i.close();
+                i = i;
+                return bitmapDecodeStream;
+            }
+            dPow = Math.pow(2.0d, (int) Math.round(Math.log(((double) i) / r13) / Math.log(0.5d)));
+        }
+        i4 = (int) dPow;
+        BitmapFactory.Options options2 = new BitmapFactory.Options();
+        options2.inSampleSize = i4;
+        i = new FileInputStream(file);
+        bitmapDecodeStream = BitmapFactory.decodeStream(i, null, options2);
+        i.close();
+        i = i;
+        return bitmapDecodeStream;
     }
 
     public static void deleteFile(String str) {
@@ -310,12 +257,12 @@ public class LSOUtils {
     }
 
     public static void deleteRecursive(File file) {
-        File[] listFiles;
+        File[] fileArrListFiles;
         if (file == null || !file.exists()) {
             return;
         }
-        if (file.isDirectory() && (listFiles = file.listFiles()) != null) {
-            for (File file2 : listFiles) {
+        if (file.isDirectory() && (fileArrListFiles = file.listFiles()) != null) {
+            for (File file2 : fileArrListFiles) {
                 deleteRecursive(file2);
             }
         }
@@ -344,8 +291,8 @@ public class LSOUtils {
     }
 
     public static Bitmap getBitmapBySize(String str, int i, int i2) {
-        Bitmap resizeBitmapByScaleAndCropCenter;
-        Bitmap bitmap = null;
+        Bitmap bitmapResizeBitmapByScaleAndCropCenter;
+        Bitmap bitmapDecodeFile = null;
         if (str == null) {
             return null;
         }
@@ -353,70 +300,72 @@ public class LSOUtils {
             File file = new File(str);
             if (file.exists()) {
                 Log.d(TAG, "Image found: ".concat(str));
-                bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+                bitmapDecodeFile = BitmapFactory.decodeFile(file.getAbsolutePath());
             } else {
                 Log.e(TAG, "Image not found: ".concat(str));
             }
         } catch (Exception e) {
             EmergencyButton$$ExternalSyntheticOutline0.m("getBitmapBySize: ", e, TAG);
         }
-        return (bitmap == null || (resizeBitmapByScaleAndCropCenter = resizeBitmapByScaleAndCropCenter(bitmap, i, i2)) == null) ? bitmap : resizeBitmapByScaleAndCropCenter;
+        return (bitmapDecodeFile == null || (bitmapResizeBitmapByScaleAndCropCenter = resizeBitmapByScaleAndCropCenter(bitmapDecodeFile, i, i2)) == null) ? bitmapDecodeFile : bitmapResizeBitmapByScaleAndCropCenter;
     }
 
-    public static Point getBitmapSize(File file) {
+    public static Point getBitmapSize(File file) throws Throwable {
+        BitmapFactory.Options options;
+        FileInputStream fileInputStream;
         Point point = new Point();
-        FileInputStream fileInputStream = null;
+        FileInputStream fileInputStream2 = null;
         try {
             try {
                 try {
-                    BitmapFactory.Options options = new BitmapFactory.Options();
+                    options = new BitmapFactory.Options();
                     options.inJustDecodeBounds = true;
-                    FileInputStream fileInputStream2 = new FileInputStream(file);
-                    try {
-                        BitmapFactory.decodeStream(fileInputStream2, null, options);
-                        point.x = options.outWidth;
-                        point.y = options.outHeight;
-                        fileInputStream2.close();
-                        return point;
-                    } catch (IOException e) {
-                        e = e;
-                        fileInputStream = fileInputStream2;
-                        Log.e(TAG, "getBitmapSize: ioexception. " + e);
-                        if (fileInputStream != null) {
-                            fileInputStream.close();
-                        }
-                        return point;
-                    } catch (Exception e2) {
-                        e = e2;
-                        fileInputStream = fileInputStream2;
-                        Log.e(TAG, "getBitmapSize: error occurs. ", e);
-                        if (fileInputStream != null) {
-                            fileInputStream.close();
-                        }
-                        return point;
-                    } catch (Throwable th) {
-                        th = th;
-                        fileInputStream = fileInputStream2;
-                        if (fileInputStream != null) {
-                            try {
-                                fileInputStream.close();
-                            } catch (IOException e3) {
-                                Log.e(TAG, "getBitmapSize: error occurs. ", e3);
-                            }
-                        }
-                        throw th;
-                    }
-                } catch (IOException e4) {
-                    e = e4;
-                } catch (Exception e5) {
-                    e = e5;
+                    fileInputStream = new FileInputStream(file);
+                } catch (IOException e) {
+                    Log.e(TAG, "getBitmapSize: error occurs. ", e);
+                    return point;
                 }
-            } catch (IOException e6) {
-                Log.e(TAG, "getBitmapSize: error occurs. ", e6);
-                return point;
+            } catch (IOException e2) {
+                e = e2;
+            } catch (Exception e3) {
+                e = e3;
             }
+        } catch (Throwable th) {
+            th = th;
+        }
+        try {
+            BitmapFactory.decodeStream(fileInputStream, null, options);
+            point.x = options.outWidth;
+            point.y = options.outHeight;
+            fileInputStream.close();
+            return point;
+        } catch (IOException e4) {
+            e = e4;
+            fileInputStream2 = fileInputStream;
+            Log.e(TAG, "getBitmapSize: ioexception. " + e);
+            if (fileInputStream2 != null) {
+                fileInputStream2.close();
+            }
+            return point;
+        } catch (Exception e5) {
+            e = e5;
+            fileInputStream2 = fileInputStream;
+            Log.e(TAG, "getBitmapSize: error occurs. ", e);
+            if (fileInputStream2 != null) {
+                fileInputStream2.close();
+            }
+            return point;
         } catch (Throwable th2) {
             th = th2;
+            fileInputStream2 = fileInputStream;
+            if (fileInputStream2 != null) {
+                try {
+                    fileInputStream2.close();
+                } catch (IOException e6) {
+                    Log.e(TAG, "getBitmapSize: error occurs. ", e6);
+                }
+            }
+            throw th;
         }
     }
 
@@ -527,35 +476,35 @@ public class LSOUtils {
             return bitmap;
         }
         float f = i;
-        Bitmap bitmap2 = null;
+        Bitmap bitmapCreateBitmap = null;
         try {
             float f2 = i2;
-            float max = Math.max(f / bitmap.getWidth(), f2 / bitmap.getHeight());
-            if (max > 1.0f) {
-                max = Math.min(f / bitmap.getWidth(), f2 / bitmap.getHeight());
-                if (max > 1.0f) {
-                    max = 1.0f;
+            float fMax = Math.max(f / bitmap.getWidth(), f2 / bitmap.getHeight());
+            if (fMax > 1.0f) {
+                fMax = Math.min(f / bitmap.getWidth(), f2 / bitmap.getHeight());
+                if (fMax > 1.0f) {
+                    fMax = 1.0f;
                 }
             }
-            Log.d(TAG, "resizeBitmapByScaleAndCropCenter scale:" + max);
-            int round = Math.round(((float) bitmap.getWidth()) * max);
-            int round2 = Math.round(((float) bitmap.getHeight()) * max);
-            bitmap2 = (round < i || round2 < i2) ? Bitmap.createBitmap(i, i2, Bitmap.Config.ARGB_8888) : Bitmap.createBitmap(round, round2, Bitmap.Config.ARGB_8888);
-            Canvas canvas = new Canvas(bitmap2);
+            Log.d(TAG, "resizeBitmapByScaleAndCropCenter scale:" + fMax);
+            int iRound = Math.round(((float) bitmap.getWidth()) * fMax);
+            int iRound2 = Math.round(((float) bitmap.getHeight()) * fMax);
+            bitmapCreateBitmap = (iRound < i || iRound2 < i2) ? Bitmap.createBitmap(i, i2, Bitmap.Config.ARGB_8888) : Bitmap.createBitmap(iRound, iRound2, Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(bitmapCreateBitmap);
             canvas.drawColor(-16777216);
-            if (round < i || round2 < i2) {
-                canvas.translate((i - round) / 2.0f, (i2 - round2) / 2.0f);
+            if (iRound < i || iRound2 < i2) {
+                canvas.translate((i - iRound) / 2.0f, (i2 - iRound2) / 2.0f);
             }
-            canvas.scale(max, max);
+            canvas.scale(fMax, fMax);
             canvas.drawBitmap(bitmap, 0.0f, 0.0f, new Paint(6));
-            return bitmap2;
+            return bitmapCreateBitmap;
         } catch (Exception e) {
             Log.e(TAG, "resizeBitmapAndCropCenter: ", e);
-            return bitmap2;
+            return bitmapCreateBitmap;
         }
     }
 
-    public static boolean saveBitmapToFile(Bitmap bitmap, Bitmap.CompressFormat compressFormat, String str) {
+    public static boolean saveBitmapToFile(Bitmap bitmap, Bitmap.CompressFormat compressFormat, String str) throws IOException {
         File file = new File(str);
         try {
             file.createNewFile();
@@ -585,20 +534,20 @@ public class LSOUtils {
     }
 
     public static boolean saveBitmapToOutputStream(Bitmap bitmap, Bitmap.CompressFormat compressFormat, OutputStream outputStream) {
-        boolean z = false;
+        boolean zCompress = false;
         if (bitmap == null) {
             return false;
         }
         try {
-            z = bitmap.compress(compressFormat, 100, outputStream);
-            if (z) {
-                return z;
+            zCompress = bitmap.compress(compressFormat, 100, outputStream);
+            if (zCompress) {
+                return zCompress;
             }
             Log.e(TAG, "saveBitmapToOutputStream() : Bitmap write error!");
-            return z;
+            return zCompress;
         } catch (Exception e) {
             Log.e(TAG, "saveBitmapToOutputStream() : error occurs. ", e);
-            return z;
+            return zCompress;
         }
     }
 
@@ -624,7 +573,7 @@ public class LSOUtils {
         return copyFileToDataLocalDirectory(context, TEMP_DIR, str, str2);
     }
 
-    public static String copyFileToDataLocalDirectory(Context context, String str, String str2, String str3) {
+    public static String copyFileToDataLocalDirectory(Context context, String str, String str2, String str3) throws Throwable {
         String absolutePath = context.getFilesDir().getAbsolutePath();
         if (str != null) {
             absolutePath = AbstractResolvableFuture$$ExternalSyntheticOutline0.m(absolutePath, "/", str);
@@ -635,22 +584,22 @@ public class LSOUtils {
         if (str3 == null) {
             str3 = "";
         }
-        String copyFile = copyFile(str2, absolutePath + "/" + str3 + new File(str2).getName());
-        if (copyFile == null && str != null) {
+        String strCopyFile = copyFile(str2, absolutePath + "/" + str3 + new File(str2).getName());
+        if (strCopyFile == null && str != null) {
             deleteRecursive(new File(absolutePath));
         }
-        return copyFile;
+        return strCopyFile;
     }
 
     public static Bitmap createRippleImage(Bitmap bitmap) {
         float f;
-        Bitmap bitmap2 = null;
+        Bitmap bitmapCreateBitmap = null;
         if (bitmap == null) {
             return null;
         }
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();
-        int max = Math.max(width, height);
+        int iMax = Math.max(width, height);
         float f2 = 0.0f;
         if (width < height) {
             f2 = (height - width) / 2.0f;
@@ -659,14 +608,14 @@ public class LSOUtils {
             f = (width - height) / 2.0f;
         }
         try {
-            bitmap2 = Bitmap.createBitmap(max, max, Bitmap.Config.ARGB_8888);
-            Canvas canvas = new Canvas(bitmap2);
+            bitmapCreateBitmap = Bitmap.createBitmap(iMax, iMax, Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(bitmapCreateBitmap);
             canvas.drawColor(-16777216);
             canvas.drawBitmap(bitmap, f2, f, new Paint(2));
-            return bitmap2;
+            return bitmapCreateBitmap;
         } catch (Exception e) {
             EmergencyButton$$ExternalSyntheticOutline0.m("createRippleImage: ", e, TAG);
-            return bitmap2;
+            return bitmapCreateBitmap;
         }
     }
 
@@ -690,7 +639,7 @@ public class LSOUtils {
 
     public static Bitmap getBitmap(String str, int i, int i2) {
         Bitmap bitmap = getBitmap(str, i2 > i ? i2 : i);
-        Bitmap bitmap2 = null;
+        Bitmap bitmapCreateBitmap = null;
         if (bitmap == null) {
             return null;
         }
@@ -704,38 +653,38 @@ public class LSOUtils {
         rectF.left = 0.0f;
         rectF.bottom = i2;
         rectF.right = i;
-        int width = rect.width() - ((int) rectF.width());
-        int height = rect.height() - ((int) rectF.height());
-        if (width <= 0 && height <= 0) {
+        int iWidth = rect.width() - ((int) rectF.width());
+        int iHeight = rect.height() - ((int) rectF.height());
+        if (iWidth <= 0 && iHeight <= 0) {
             return bitmap;
         }
-        if (width > 0) {
-            int i3 = width / 2;
+        if (iWidth > 0) {
+            int i3 = iWidth / 2;
             rect.left += i3;
             rect.right -= i3;
         } else {
-            float f = width / 2;
+            float f = iWidth / 2;
             rectF.left -= f;
             rectF.right += f;
         }
-        if (height > 0) {
-            int i4 = height / 2;
+        if (iHeight > 0) {
+            int i4 = iHeight / 2;
             rect.top += i4;
             rect.bottom -= i4;
         } else {
-            float f2 = height / 2;
+            float f2 = iHeight / 2;
             rectF.top -= f2;
             rectF.bottom += f2;
         }
         try {
-            bitmap2 = Bitmap.createBitmap(i, i2, Bitmap.Config.ARGB_8888);
-            Canvas canvas = new Canvas(bitmap2);
+            bitmapCreateBitmap = Bitmap.createBitmap(i, i2, Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(bitmapCreateBitmap);
             canvas.drawColor(-16777216);
             canvas.drawBitmap(bitmap, rect, rectF, new Paint(2));
-            return bitmap2;
+            return bitmapCreateBitmap;
         } catch (Exception e) {
             Log.e(TAG, "getBitmap: failed. ", e);
-            return bitmap2;
+            return bitmapCreateBitmap;
         }
     }
 }

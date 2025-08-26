@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.BlendMode;
 import android.graphics.Canvas;
@@ -57,6 +58,7 @@ import android.view.inspector.PropertyMapper;
 import android.view.inspector.PropertyReader;
 import android.widget.RemoteViews;
 import com.android.internal.R;
+import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -251,33 +253,33 @@ public class ProgressBar extends View {
         };
         this.mUiThreadId = Thread.currentThread().getId();
         initProgressBar();
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.ProgressBar, i, i2);
-        saveAttributeDataForStyleable(context, R.styleable.ProgressBar, attributeSet, obtainStyledAttributes, i, i2);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.ProgressBar, i, i2);
+        saveAttributeDataForStyleable(context, R.styleable.ProgressBar, attributeSet, typedArrayObtainStyledAttributes, i, i2);
         this.mNoInvalidate = true;
-        Drawable drawable = obtainStyledAttributes.getDrawable(8);
+        Drawable drawable = typedArrayObtainStyledAttributes.getDrawable(8);
         if (drawable != null) {
-            Drawable mutate = drawable.mutate();
-            if (needsTileify(mutate)) {
-                setProgressDrawableTiled(mutate);
+            Drawable drawableMutate = drawable.mutate();
+            if (needsTileify(drawableMutate)) {
+                setProgressDrawableTiled(drawableMutate);
             } else {
-                setProgressDrawable(mutate);
+                setProgressDrawable(drawableMutate);
             }
         }
-        this.mDuration = obtainStyledAttributes.getInt(9, this.mDuration);
-        this.mMinWidth = obtainStyledAttributes.getDimensionPixelSize(11, this.mMinWidth);
-        this.mMaxWidth = obtainStyledAttributes.getDimensionPixelSize(0, this.mMaxWidth);
-        this.mMinHeight = obtainStyledAttributes.getDimensionPixelSize(12, this.mMinHeight);
-        this.mMaxHeight = obtainStyledAttributes.getDimensionPixelSize(1, this.mMaxHeight);
-        this.mBehavior = obtainStyledAttributes.getInt(10, this.mBehavior);
-        int resourceId = obtainStyledAttributes.getResourceId(13, 17432587);
+        this.mDuration = typedArrayObtainStyledAttributes.getInt(9, this.mDuration);
+        this.mMinWidth = typedArrayObtainStyledAttributes.getDimensionPixelSize(11, this.mMinWidth);
+        this.mMaxWidth = typedArrayObtainStyledAttributes.getDimensionPixelSize(0, this.mMaxWidth);
+        this.mMinHeight = typedArrayObtainStyledAttributes.getDimensionPixelSize(12, this.mMinHeight);
+        this.mMaxHeight = typedArrayObtainStyledAttributes.getDimensionPixelSize(1, this.mMaxHeight);
+        this.mBehavior = typedArrayObtainStyledAttributes.getInt(10, this.mBehavior);
+        int resourceId = typedArrayObtainStyledAttributes.getResourceId(13, 17432587);
         if (resourceId > 0) {
             setInterpolator(context, resourceId);
         }
-        setMin(obtainStyledAttributes.getInt(26, this.mMin));
-        setMax(obtainStyledAttributes.getInt(2, this.mMax));
-        setProgress(obtainStyledAttributes.getInt(3, this.mProgress));
-        setSecondaryProgress(obtainStyledAttributes.getInt(4, this.mSecondaryProgress));
-        Drawable drawable2 = obtainStyledAttributes.getDrawable(7);
+        setMin(typedArrayObtainStyledAttributes.getInt(26, this.mMin));
+        setMax(typedArrayObtainStyledAttributes.getInt(2, this.mMax));
+        setProgress(typedArrayObtainStyledAttributes.getInt(3, this.mProgress));
+        setSecondaryProgress(typedArrayObtainStyledAttributes.getInt(4, this.mSecondaryProgress));
+        Drawable drawable2 = typedArrayObtainStyledAttributes.getDrawable(7);
         if (drawable2 != null) {
             if (needsTileify(drawable2)) {
                 setIndeterminateDrawableTiled(drawable2);
@@ -285,68 +287,68 @@ public class ProgressBar extends View {
                 setIndeterminateDrawable(drawable2);
             }
         }
-        boolean z = obtainStyledAttributes.getBoolean(6, this.mOnlyIndeterminate);
+        boolean z = typedArrayObtainStyledAttributes.getBoolean(6, this.mOnlyIndeterminate);
         this.mOnlyIndeterminate = z;
         this.mNoInvalidate = false;
-        setIndeterminate(z || obtainStyledAttributes.getBoolean(5, this.mIndeterminate));
-        this.mMirrorForRtl = obtainStyledAttributes.getBoolean(15, this.mMirrorForRtl);
-        if (obtainStyledAttributes.hasValue(17)) {
+        setIndeterminate(z || typedArrayObtainStyledAttributes.getBoolean(5, this.mIndeterminate));
+        this.mMirrorForRtl = typedArrayObtainStyledAttributes.getBoolean(15, this.mMirrorForRtl);
+        if (typedArrayObtainStyledAttributes.hasValue(17)) {
             if (this.mProgressTintInfo == null) {
                 this.mProgressTintInfo = new ProgressTintInfo();
             }
-            this.mProgressTintInfo.mProgressBlendMode = Drawable.parseBlendMode(obtainStyledAttributes.getInt(17, -1), null);
+            this.mProgressTintInfo.mProgressBlendMode = Drawable.parseBlendMode(typedArrayObtainStyledAttributes.getInt(17, -1), null);
             this.mProgressTintInfo.mHasProgressTintMode = true;
         }
-        if (obtainStyledAttributes.hasValue(16)) {
+        if (typedArrayObtainStyledAttributes.hasValue(16)) {
             if (this.mProgressTintInfo == null) {
                 this.mProgressTintInfo = new ProgressTintInfo();
             }
-            this.mProgressTintInfo.mProgressTintList = obtainStyledAttributes.getColorStateList(16);
+            this.mProgressTintInfo.mProgressTintList = typedArrayObtainStyledAttributes.getColorStateList(16);
             this.mProgressTintInfo.mHasProgressTint = true;
         }
-        if (obtainStyledAttributes.hasValue(19)) {
+        if (typedArrayObtainStyledAttributes.hasValue(19)) {
             if (this.mProgressTintInfo == null) {
                 this.mProgressTintInfo = new ProgressTintInfo();
             }
-            this.mProgressTintInfo.mProgressBackgroundBlendMode = Drawable.parseBlendMode(obtainStyledAttributes.getInt(19, -1), null);
+            this.mProgressTintInfo.mProgressBackgroundBlendMode = Drawable.parseBlendMode(typedArrayObtainStyledAttributes.getInt(19, -1), null);
             this.mProgressTintInfo.mHasProgressBackgroundTintMode = true;
         }
-        if (obtainStyledAttributes.hasValue(18)) {
+        if (typedArrayObtainStyledAttributes.hasValue(18)) {
             if (this.mProgressTintInfo == null) {
                 this.mProgressTintInfo = new ProgressTintInfo();
             }
-            this.mProgressTintInfo.mProgressBackgroundTintList = obtainStyledAttributes.getColorStateList(18);
+            this.mProgressTintInfo.mProgressBackgroundTintList = typedArrayObtainStyledAttributes.getColorStateList(18);
             this.mProgressTintInfo.mHasProgressBackgroundTint = true;
         }
-        if (obtainStyledAttributes.hasValue(21)) {
+        if (typedArrayObtainStyledAttributes.hasValue(21)) {
             if (this.mProgressTintInfo == null) {
                 this.mProgressTintInfo = new ProgressTintInfo();
             }
-            this.mProgressTintInfo.mSecondaryProgressBlendMode = Drawable.parseBlendMode(obtainStyledAttributes.getInt(21, -1), null);
+            this.mProgressTintInfo.mSecondaryProgressBlendMode = Drawable.parseBlendMode(typedArrayObtainStyledAttributes.getInt(21, -1), null);
             this.mProgressTintInfo.mHasSecondaryProgressTintMode = true;
         }
-        if (obtainStyledAttributes.hasValue(20)) {
+        if (typedArrayObtainStyledAttributes.hasValue(20)) {
             if (this.mProgressTintInfo == null) {
                 this.mProgressTintInfo = new ProgressTintInfo();
             }
-            this.mProgressTintInfo.mSecondaryProgressTintList = obtainStyledAttributes.getColorStateList(20);
+            this.mProgressTintInfo.mSecondaryProgressTintList = typedArrayObtainStyledAttributes.getColorStateList(20);
             this.mProgressTintInfo.mHasSecondaryProgressTint = true;
         }
-        if (obtainStyledAttributes.hasValue(23)) {
+        if (typedArrayObtainStyledAttributes.hasValue(23)) {
             if (this.mProgressTintInfo == null) {
                 this.mProgressTintInfo = new ProgressTintInfo();
             }
-            this.mProgressTintInfo.mIndeterminateBlendMode = Drawable.parseBlendMode(obtainStyledAttributes.getInt(23, -1), null);
+            this.mProgressTintInfo.mIndeterminateBlendMode = Drawable.parseBlendMode(typedArrayObtainStyledAttributes.getInt(23, -1), null);
             this.mProgressTintInfo.mHasIndeterminateTintMode = true;
         }
-        if (obtainStyledAttributes.hasValue(22)) {
+        if (typedArrayObtainStyledAttributes.hasValue(22)) {
             if (this.mProgressTintInfo == null) {
                 this.mProgressTintInfo = new ProgressTintInfo();
             }
-            this.mProgressTintInfo.mIndeterminateTintList = obtainStyledAttributes.getColorStateList(22);
+            this.mProgressTintInfo.mIndeterminateTintList = typedArrayObtainStyledAttributes.getColorStateList(22);
             this.mProgressTintInfo.mHasIndeterminateTint = true;
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
         applyProgressTints();
         applyIndeterminateTint();
         if (getImportantForAccessibility() == 0) {
@@ -356,9 +358,9 @@ public class ProgressBar extends View {
         TypedValue typedValue = new TypedValue();
         context.getTheme().resolveAttribute(R.attr.parentIsDeviceDefaultDark, typedValue, true);
         this.mIsDeviceDefaultDark = typedValue.data != 0;
-        TypedArray obtainStyledAttributes2 = context.obtainStyledAttributes(attributeSet, R.styleable.SemProgressBar, i, i2);
-        this.mUseHorizontalProgress = obtainStyledAttributes2.getBoolean(6, this.mUseHorizontalProgress);
-        obtainStyledAttributes2.recycle();
+        TypedArray typedArrayObtainStyledAttributes2 = context.obtainStyledAttributes(attributeSet, R.styleable.SemProgressBar, i, i2);
+        this.mUseHorizontalProgress = typedArrayObtainStyledAttributes2.getBoolean(6, this.mUseHorizontalProgress);
+        typedArrayObtainStyledAttributes2.recycle();
         ContextThemeWrapper contextThemeWrapper = new ContextThemeWrapper(context, 16974123);
         this.mIndeterminateHorizontalXsmall = getResources().getDrawable(R.drawable.sem_progress_bar_indeterminate_xsmall_transition, contextThemeWrapper.getTheme());
         this.mIndeterminateHorizontalSmall = getResources().getDrawable(R.drawable.sem_progress_bar_indeterminate_small_transition, contextThemeWrapper.getTheme());
@@ -494,9 +496,9 @@ public class ProgressBar extends View {
         AnimationDrawable animationDrawable2 = new AnimationDrawable();
         animationDrawable2.setOneShot(animationDrawable.isOneShot());
         for (int i = 0; i < numberOfFrames; i++) {
-            Drawable tileify = tileify(animationDrawable.getFrame(i), true);
-            tileify.setLevel(10000);
-            animationDrawable2.addFrame(tileify, animationDrawable.getDuration(i));
+            Drawable drawableTileify = tileify(animationDrawable.getFrame(i), true);
+            drawableTileify.setLevel(10000);
+            animationDrawable2.addFrame(drawableTileify, animationDrawable.getDuration(i));
         }
         animationDrawable2.setLevel(10000);
         return animationDrawable2;
@@ -958,12 +960,12 @@ public class ProgressBar extends View {
         Drawable drawable = this.mProgressDrawable;
         if (drawable != null) {
             this.mProgressDrawable = drawable.mutate();
-            r1 = drawable instanceof LayerDrawable ? ((LayerDrawable) drawable).findDrawableByLayerId(i) : null;
-            if (z && r1 == null) {
+            drawableFindDrawableByLayerId = drawable instanceof LayerDrawable ? ((LayerDrawable) drawable).findDrawableByLayerId(i) : null;
+            if (z && drawableFindDrawableByLayerId == null) {
                 return drawable;
             }
         }
-        return r1;
+        return drawableFindDrawableByLayerId;
     }
 
     public void setProgressDrawableTiled(Drawable drawable) {
@@ -1050,15 +1052,15 @@ public class ProgressBar extends View {
         }
 
         public static RefreshData obtain(int i, int i2, boolean z, boolean z2) {
-            RefreshData acquire = sPool.acquire();
-            if (acquire == null) {
-                acquire = new RefreshData();
+            RefreshData refreshDataAcquire = sPool.acquire();
+            if (refreshDataAcquire == null) {
+                refreshDataAcquire = new RefreshData();
             }
-            acquire.id = i;
-            acquire.progress = i2;
-            acquire.fromUser = z;
-            acquire.animate = z2;
-            return acquire;
+            refreshDataAcquire.id = i;
+            refreshDataAcquire.progress = i2;
+            refreshDataAcquire.fromUser = z;
+            refreshDataAcquire.animate = z2;
+            return refreshDataAcquire;
         }
 
         public void recycle() {
@@ -1069,58 +1071,58 @@ public class ProgressBar extends View {
     /* JADX INFO: Access modifiers changed from: private */
     public synchronized void doRefreshProgress(int i, int i2, boolean z, boolean z2, boolean z3) {
         ObjectAnimator objectAnimator;
-        Drawable drawable;
+        Drawable drawableFindDrawableByLayerId;
         int i3 = this.mMax - this.mMin;
         float f = i3 > 0 ? (i2 - r1) / i3 : 0.0f;
         boolean z4 = i == 16908301;
         int i4 = (int) (10000.0f * f);
-        Drawable drawable2 = this.mCurrentDrawable;
-        if (drawable2 != null) {
-            if (drawable2 instanceof LayerDrawable) {
-                Drawable findDrawableByLayerId = ((LayerDrawable) drawable2).findDrawableByLayerId(i);
-                if (findDrawableByLayerId != null && canResolveLayoutDirection()) {
-                    findDrawableByLayerId.setLayoutDirection(getLayoutDirection());
+        Drawable drawable = this.mCurrentDrawable;
+        if (drawable != null) {
+            if (drawable instanceof LayerDrawable) {
+                Drawable drawableFindDrawableByLayerId2 = ((LayerDrawable) drawable).findDrawableByLayerId(i);
+                if (drawableFindDrawableByLayerId2 != null && canResolveLayoutDirection()) {
+                    drawableFindDrawableByLayerId2.setLayoutDirection(getLayoutDirection());
                 }
-                if (findDrawableByLayerId != null) {
-                    drawable2 = findDrawableByLayerId;
+                if (drawableFindDrawableByLayerId2 != null) {
+                    drawable = drawableFindDrawableByLayerId2;
                 }
-                drawable2.setLevel(i4);
-            } else if (drawable2 instanceof StateListDrawable) {
-                int stateCount = ((StateListDrawable) drawable2).getStateCount();
+                drawable.setLevel(i4);
+            } else if (drawable instanceof StateListDrawable) {
+                int stateCount = ((StateListDrawable) drawable).getStateCount();
                 for (int i5 = 0; i5 < stateCount; i5++) {
-                    Drawable stateDrawable = ((StateListDrawable) drawable2).getStateDrawable(i5);
+                    Drawable stateDrawable = ((StateListDrawable) drawable).getStateDrawable(i5);
                     if (stateDrawable instanceof LayerDrawable) {
-                        drawable = ((LayerDrawable) stateDrawable).findDrawableByLayerId(i);
-                        if (drawable != null && canResolveLayoutDirection()) {
-                            drawable.setLayoutDirection(getLayoutDirection());
+                        drawableFindDrawableByLayerId = ((LayerDrawable) stateDrawable).findDrawableByLayerId(i);
+                        if (drawableFindDrawableByLayerId != null && canResolveLayoutDirection()) {
+                            drawableFindDrawableByLayerId.setLayoutDirection(getLayoutDirection());
                         }
                     } else {
-                        drawable = null;
+                        drawableFindDrawableByLayerId = null;
                     }
-                    if (drawable == null) {
-                        drawable = drawable2;
+                    if (drawableFindDrawableByLayerId == null) {
+                        drawableFindDrawableByLayerId = drawable;
                     }
-                    drawable.setLevel(i4);
+                    drawableFindDrawableByLayerId.setLevel(i4);
                 }
             } else {
-                drawable2.setLevel(i4);
+                drawable.setLevel(i4);
             }
         } else {
             invalidate();
         }
         if (z4 && z3) {
-            ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this, this.VISUAL_PROGRESS, f);
-            ofFloat.setAutoCancel(true);
-            ofFloat.setDuration(80L);
-            ofFloat.setInterpolator(PROGRESS_ANIM_INTERPOLATOR);
-            ofFloat.addListener(new AnimatorListenerAdapter() { // from class: android.widget.ProgressBar.1
+            ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this, this.VISUAL_PROGRESS, f);
+            objectAnimatorOfFloat.setAutoCancel(true);
+            objectAnimatorOfFloat.setDuration(80L);
+            objectAnimatorOfFloat.setInterpolator(PROGRESS_ANIM_INTERPOLATOR);
+            objectAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: android.widget.ProgressBar.1
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public void onAnimationEnd(Animator animator) {
                     ProgressBar.this.mLastProgressAnimator = null;
                 }
             });
-            ofFloat.start();
-            this.mLastProgressAnimator = ofFloat;
+            objectAnimatorOfFloat.start();
+            this.mLastProgressAnimator = objectAnimatorOfFloat;
         } else {
             if (z4 && (objectAnimator = this.mLastProgressAnimator) != null) {
                 objectAnimator.cancel();
@@ -1159,12 +1161,12 @@ public class ProgressBar extends View {
         super.setStateDescription(charSequence);
     }
 
-    void onProgressRefresh(float f, boolean z, int i) {
+    void onProgressRefresh(float f, boolean z, int i) throws Throwable {
         if (AccessibilityManager.getInstance(this.mContext).isEnabled() && getStateDescription() == null && !isIndeterminate()) {
-            AccessibilityEvent obtain = AccessibilityEvent.obtain();
-            obtain.setEventType(2048);
-            obtain.setContentChangeTypes(64);
-            sendAccessibilityEventUnchecked(obtain);
+            AccessibilityEvent accessibilityEventObtain = AccessibilityEvent.obtain();
+            accessibilityEventObtain.setEventType(2048);
+            accessibilityEventObtain.setContentChangeTypes(64);
+            sendAccessibilityEventUnchecked(accessibilityEventObtain);
         }
         int i2 = this.mSecondaryProgress;
         if (i2 <= this.mProgress || z) {
@@ -1176,43 +1178,43 @@ public class ProgressBar extends View {
     /* JADX INFO: Access modifiers changed from: private */
     public void setVisualProgress(int i, float f) {
         this.mVisualProgress = f;
-        Drawable drawable = this.mCurrentDrawable;
-        if ((drawable instanceof LayerDrawable) && (drawable = ((LayerDrawable) drawable).findDrawableByLayerId(i)) == null) {
-            drawable = this.mCurrentDrawable;
+        Drawable drawableFindDrawableByLayerId = this.mCurrentDrawable;
+        if ((drawableFindDrawableByLayerId instanceof LayerDrawable) && (drawableFindDrawableByLayerId = ((LayerDrawable) drawableFindDrawableByLayerId).findDrawableByLayerId(i)) == null) {
+            drawableFindDrawableByLayerId = this.mCurrentDrawable;
         }
-        if (drawable != null) {
-            drawable.setLevel((int) (10000.0f * f));
+        if (drawableFindDrawableByLayerId != null) {
+            drawableFindDrawableByLayerId.setLevel((int) (10000.0f * f));
         } else {
             invalidate();
         }
         onVisualProgressChanged(i, f);
     }
 
-    private synchronized void refreshProgress(int i, int i2, boolean z, boolean z2) {
+    private synchronized void refreshProgress(int i, int i2, boolean z, boolean z2) throws Throwable {
         ProgressBar progressBar;
         try {
-        } catch (Throwable th) {
-            th = th;
-        }
-        try {
-            if (this.mUiThreadId == Thread.currentThread().getId()) {
-                progressBar = this;
-                progressBar.doRefreshProgress(i, i2, z, true, z2);
-            } else {
-                progressBar = this;
-                if (progressBar.mRefreshProgressRunnable == null) {
-                    progressBar.mRefreshProgressRunnable = new RefreshProgressRunnable();
+            try {
+                if (this.mUiThreadId == Thread.currentThread().getId()) {
+                    progressBar = this;
+                    progressBar.doRefreshProgress(i, i2, z, true, z2);
+                } else {
+                    progressBar = this;
+                    if (progressBar.mRefreshProgressRunnable == null) {
+                        progressBar.mRefreshProgressRunnable = new RefreshProgressRunnable();
+                    }
+                    progressBar.mRefreshData.add(RefreshData.obtain(i, i2, z, z2));
+                    if (progressBar.mAttached && !progressBar.mRefreshIsPosted) {
+                        progressBar.post(progressBar.mRefreshProgressRunnable);
+                        progressBar.mRefreshIsPosted = true;
+                    }
                 }
-                progressBar.mRefreshData.add(RefreshData.obtain(i, i2, z, z2));
-                if (progressBar.mAttached && !progressBar.mRefreshIsPosted) {
-                    progressBar.post(progressBar.mRefreshProgressRunnable);
-                    progressBar.mRefreshIsPosted = true;
-                }
+                return;
+            } catch (Throwable th) {
+                th = th;
+                throw th;
             }
-            return;
         } catch (Throwable th2) {
             th = th2;
-            throw th;
         }
         throw th;
     }
@@ -1228,17 +1230,17 @@ public class ProgressBar extends View {
 
     @RemotableViewMethod
     synchronized boolean setProgressInternal(int i, boolean z, boolean z2) {
-        Drawable findDrawableByLayerId;
+        Drawable drawableFindDrawableByLayerId;
         if (this.mIndeterminate) {
             return false;
         }
-        int constrain = MathUtils.constrain(i, this.mSemMinEnabled ? this.mSemMin : this.mMin, this.mMax);
-        if (constrain == this.mProgress) {
+        int iConstrain = MathUtils.constrain(i, this.mSemMinEnabled ? this.mSemMin : this.mMin, this.mMax);
+        if (iConstrain == this.mProgress) {
             return false;
         }
-        this.mProgress = constrain;
-        if (this.mCurrentMode == 6 && (getProgressDrawable() instanceof LayerDrawable) && (findDrawableByLayerId = ((LayerDrawable) getProgressDrawable()).findDrawableByLayerId(16908301)) != null && (findDrawableByLayerId instanceof CirCleProgressDrawable)) {
-            ((CirCleProgressDrawable) findDrawableByLayerId).setProgress(constrain, z2);
+        this.mProgress = iConstrain;
+        if (this.mCurrentMode == 6 && (getProgressDrawable() instanceof LayerDrawable) && (drawableFindDrawableByLayerId = ((LayerDrawable) getProgressDrawable()).findDrawableByLayerId(16908301)) != null && (drawableFindDrawableByLayerId instanceof CirCleProgressDrawable)) {
+            ((CirCleProgressDrawable) drawableFindDrawableByLayerId).setProgress(iConstrain, z2);
         }
         refreshProgress(16908301, this.mProgress, z, z2);
         return true;
@@ -1432,6 +1434,11 @@ public class ProgressBar extends View {
         updateDrawableBounds(i, i2);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:14:0x004c  */
+    /* JADX WARN: Removed duplicated region for block: B:20:0x005e  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     protected void updateDrawableBounds(int i, int i2) {
         int i3;
         int i4;
@@ -1461,23 +1468,24 @@ public class ProgressBar extends View {
                         i3 = i6;
                         i5 = 0;
                     }
-                    if (this.mMirrorForRtl || !isLayoutRtl()) {
-                        i6 = i3;
-                    } else {
-                        int i13 = i6 - i3;
-                        i6 -= i5;
-                        i5 = i13;
-                    }
+                }
+                if (this.mMirrorForRtl) {
+                    i6 = i3;
                     this.mIndeterminateDrawable.setBounds(i5, i4, i6, i7);
                 }
+            } else {
+                i3 = i6;
+                i4 = 0;
+                i5 = 0;
+                if (this.mMirrorForRtl || !isLayoutRtl()) {
+                    i6 = i3;
+                } else {
+                    int i13 = i6 - i3;
+                    i6 -= i5;
+                    i5 = i13;
+                }
+                this.mIndeterminateDrawable.setBounds(i5, i4, i6, i7);
             }
-            i3 = i6;
-            i4 = 0;
-            i5 = 0;
-            if (this.mMirrorForRtl) {
-            }
-            i6 = i3;
-            this.mIndeterminateDrawable.setBounds(i5, i4, i6, i7);
         }
         Drawable drawable2 = this.mProgressDrawable;
         if (drawable2 != null) {
@@ -1495,7 +1503,7 @@ public class ProgressBar extends View {
     void drawTrack(Canvas canvas) {
         Drawable drawable = this.mCurrentDrawable;
         if (drawable != 0) {
-            int save = canvas.save();
+            int iSave = canvas.save();
             if (this.mCurrentMode != 3 && this.mMirrorForRtl && isLayoutRtl()) {
                 canvas.translate(getWidth() - this.mPaddingRight, this.mPaddingTop);
                 canvas.scale(-1.0f, 1.0f);
@@ -1517,7 +1525,7 @@ public class ProgressBar extends View {
                 }
             }
             drawable.draw(canvas);
-            canvas.restoreToCount(save);
+            canvas.restoreToCount(iSave);
             if (this.mShouldStartAnimationDrawable && (drawable instanceof Animatable)) {
                 ((Animatable) drawable).start();
                 this.mShouldStartAnimationDrawable = false;
@@ -1527,26 +1535,26 @@ public class ProgressBar extends View {
 
     @Override // android.view.View
     protected synchronized void onMeasure(int i, int i2) {
-        int i3;
-        int i4;
+        int iMax;
+        int iMax2;
         Drawable drawable = this.mCurrentDrawable;
         if (drawable != null) {
-            i4 = Math.max(this.mMinWidth, Math.min(this.mMaxWidth, drawable.getIntrinsicWidth()));
-            i3 = Math.max(this.mMinHeight, Math.min(this.mMaxHeight, drawable.getIntrinsicHeight()));
+            iMax2 = Math.max(this.mMinWidth, Math.min(this.mMaxWidth, drawable.getIntrinsicWidth()));
+            iMax = Math.max(this.mMinHeight, Math.min(this.mMaxHeight, drawable.getIntrinsicHeight()));
         } else {
-            i3 = 0;
-            i4 = 0;
+            iMax = 0;
+            iMax2 = 0;
         }
         updateDrawableState();
-        int i5 = i4 + this.mPaddingLeft + this.mPaddingRight;
-        int i6 = i3 + this.mPaddingTop + this.mPaddingBottom;
-        int resolveSizeAndState = resolveSizeAndState(i5, i, 0);
-        int resolveSizeAndState2 = resolveSizeAndState(i6, i2, 0);
-        initCirCleStrokeWidth((resolveSizeAndState - this.mPaddingLeft) - this.mPaddingRight);
+        int i3 = iMax2 + this.mPaddingLeft + this.mPaddingRight;
+        int i4 = iMax + this.mPaddingTop + this.mPaddingBottom;
+        int iResolveSizeAndState = resolveSizeAndState(i3, i, 0);
+        int iResolveSizeAndState2 = resolveSizeAndState(i4, i2, 0);
+        initCirCleStrokeWidth((iResolveSizeAndState - this.mPaddingLeft) - this.mPaddingRight);
         if (this.mUseHorizontalProgress && this.mIndeterminate) {
-            semSetIndeterminateProgressDrawable((resolveSizeAndState - this.mPaddingLeft) - this.mPaddingRight);
+            semSetIndeterminateProgressDrawable((iResolveSizeAndState - this.mPaddingLeft) - this.mPaddingRight);
         }
-        setMeasuredDimension(resolveSizeAndState, resolveSizeAndState2);
+        setMeasuredDimension(iResolveSizeAndState, iResolveSizeAndState2);
     }
 
     @Override // android.view.View
@@ -1633,7 +1641,7 @@ public class ProgressBar extends View {
     }
 
     @Override // android.view.View
-    protected void onAttachedToWindow() {
+    protected void onAttachedToWindow() throws Throwable {
         ProgressBar progressBar;
         super.onAttachedToWindow();
         if (this.mIndeterminate) {
@@ -1657,12 +1665,12 @@ public class ProgressBar extends View {
                         progressBar.mRefreshData.clear();
                     } catch (Throwable th) {
                         th = th;
-                        ProgressBar progressBar3 = this;
                         Throwable th2 = th;
                         throw th2;
                     }
                 } catch (Throwable th3) {
                     th = th3;
+                    ProgressBar progressBar3 = this;
                     Throwable th22 = th;
                     throw th22;
                 }
@@ -1721,7 +1729,7 @@ public class ProgressBar extends View {
     }
 
     @Override // android.view.View
-    protected void encodeProperties(ViewHierarchyEncoder viewHierarchyEncoder) {
+    protected void encodeProperties(ViewHierarchyEncoder viewHierarchyEncoder) throws Resources.NotFoundException, IOException {
         super.encodeProperties(viewHierarchyEncoder);
         viewHierarchyEncoder.addProperty("progress:max", getMax());
         viewHierarchyEncoder.addProperty("progress:progress", getProgress());
@@ -1788,9 +1796,9 @@ public class ProgressBar extends View {
     protected void onSlidingRefresh(int i) {
         Drawable drawable = this.mCurrentDrawable;
         if (drawable != null) {
-            Drawable findDrawableByLayerId = drawable instanceof LayerDrawable ? ((LayerDrawable) drawable).findDrawableByLayerId(16908301) : null;
-            if (findDrawableByLayerId != null) {
-                findDrawableByLayerId.setLevel(i);
+            Drawable drawableFindDrawableByLayerId = drawable instanceof LayerDrawable ? ((LayerDrawable) drawable).findDrawableByLayerId(16908301) : null;
+            if (drawableFindDrawableByLayerId != null) {
+                drawableFindDrawableByLayerId.setLevel(i);
             }
         }
     }
@@ -1932,11 +1940,11 @@ public class ProgressBar extends View {
 
         public void setProgress(int i, boolean z) {
             if (z) {
-                ObjectAnimator ofInt = ObjectAnimator.ofInt(this, this.VISUAL_CIRCLE_PROGRESS, i);
-                ofInt.setAutoCancel(true);
-                ofInt.setDuration(80L);
-                ofInt.setInterpolator(ProgressBar.PROGRESS_ANIM_INTERPOLATOR);
-                ofInt.start();
+                ObjectAnimator objectAnimatorOfInt = ObjectAnimator.ofInt(this, this.VISUAL_CIRCLE_PROGRESS, i);
+                objectAnimatorOfInt.setAutoCancel(true);
+                objectAnimatorOfInt.setDuration(80L);
+                objectAnimatorOfInt.setInterpolator(ProgressBar.PROGRESS_ANIM_INTERPOLATOR);
+                objectAnimatorOfInt.start();
                 return;
             }
             this.mProgress = i;
@@ -1982,14 +1990,14 @@ public class ProgressBar extends View {
 
         @Override // android.graphics.drawable.Drawable
         protected boolean onStateChange(int[] iArr) {
-            boolean onStateChange = super.onStateChange(iArr);
+            boolean zOnStateChange = super.onStateChange(iArr);
             int colorForState = this.mColorStateList.getColorForState(iArr, this.mColor);
             if (this.mColor != colorForState) {
                 this.mColor = colorForState;
                 this.mPaint.setColor(colorForState);
                 invalidateSelf();
             }
-            return onStateChange;
+            return zOnStateChange;
         }
 
         @Override // android.graphics.drawable.Drawable

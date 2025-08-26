@@ -2,6 +2,7 @@ package com.android.internal.telephony;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -40,10 +41,10 @@ public class CellNetworkScanResult implements Parcelable {
 
     private CellNetworkScanResult(Parcel parcel) {
         this.mStatus = parcel.readInt();
-        int readInt = parcel.readInt();
-        if (readInt > 0) {
+        int i = parcel.readInt();
+        if (i > 0) {
             this.mOperators = new ArrayList();
-            for (int i = 0; i < readInt; i++) {
+            for (int i2 = 0; i2 < i; i2++) {
                 this.mOperators.add(OperatorInfo.CREATOR.createFromParcel(parcel));
             }
             return;
@@ -60,7 +61,7 @@ public class CellNetworkScanResult implements Parcelable {
     }
 
     @Override // android.os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
         parcel.writeInt(this.mStatus);
         List<OperatorInfo> list = this.mOperators;
         if (list != null && list.size() > 0) {

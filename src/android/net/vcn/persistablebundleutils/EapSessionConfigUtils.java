@@ -191,10 +191,10 @@ public final class EapSessionConfigUtils {
         public static void setBuilderByReadingPersistableBundle(PersistableBundle persistableBundle, EapSessionConfig.Builder builder) {
             Objects.requireNonNull(persistableBundle, "PersistableBundle was null");
             PersistableBundle persistableBundle2 = persistableBundle.getPersistableBundle(TRUST_CERT_KEY);
-            X509Certificate certificateFromByteArray = persistableBundle2 != null ? CertUtils.certificateFromByteArray(PersistableBundleUtils.toByteArray(persistableBundle2)) : null;
+            X509Certificate x509CertificateCertificateFromByteArray = persistableBundle2 != null ? CertUtils.certificateFromByteArray(PersistableBundleUtils.toByteArray(persistableBundle2)) : null;
             PersistableBundle persistableBundle3 = persistableBundle.getPersistableBundle(EAP_SESSION_CONFIG_KEY);
             Objects.requireNonNull(persistableBundle3, "Inner EAP Session Config was null");
-            builder.setEapTtlsConfig(certificateFromByteArray, EapSessionConfigUtils.fromPersistableBundle(persistableBundle3));
+            builder.setEapTtlsConfig(x509CertificateCertificateFromByteArray, EapSessionConfigUtils.fromPersistableBundle(persistableBundle3));
         }
     }
 }

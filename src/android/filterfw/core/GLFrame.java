@@ -203,11 +203,11 @@ public class GLFrame extends Frame {
     public void setData(ByteBuffer byteBuffer, int i, int i2) {
         assertFrameMutable();
         assertGLEnvValid();
-        byte[] array = byteBuffer.array();
-        if (getFormat().getSize() != array.length) {
+        byte[] bArrArray = byteBuffer.array();
+        if (getFormat().getSize() != bArrArray.length) {
             throw new RuntimeException("Data size in setData does not match GL frame size!");
         }
-        if (!setNativeData(array, i, i2)) {
+        if (!setNativeData(bArrArray, i, i2)) {
             throw new RuntimeException("Could not set GL frame data!");
         }
     }
@@ -226,8 +226,8 @@ public class GLFrame extends Frame {
         if (getFormat().getWidth() != bitmap.getWidth() || getFormat().getHeight() != bitmap.getHeight()) {
             throw new RuntimeException("Bitmap dimensions do not match GL frame dimensions!");
         }
-        Bitmap convertBitmapToRGBA = convertBitmapToRGBA(bitmap);
-        if (!setNativeBitmap(convertBitmapToRGBA, convertBitmapToRGBA.getByteCount())) {
+        Bitmap bitmapConvertBitmapToRGBA = convertBitmapToRGBA(bitmap);
+        if (!setNativeBitmap(bitmapConvertBitmapToRGBA, bitmapConvertBitmapToRGBA.getByteCount())) {
             throw new RuntimeException("Could not set GL frame bitmap data!");
         }
     }
@@ -236,9 +236,9 @@ public class GLFrame extends Frame {
     public Bitmap getBitmap() {
         assertGLEnvValid();
         flushGPU("getBitmap");
-        Bitmap createBitmap = Bitmap.createBitmap(getFormat().getWidth(), getFormat().getHeight(), Bitmap.Config.ARGB_8888);
-        if (getNativeBitmap(createBitmap)) {
-            return createBitmap;
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(getFormat().getWidth(), getFormat().getHeight(), Bitmap.Config.ARGB_8888);
+        if (getNativeBitmap(bitmapCreateBitmap)) {
+            return bitmapCreateBitmap;
         }
         throw new RuntimeException("Could not get bitmap data from GL frame!");
     }

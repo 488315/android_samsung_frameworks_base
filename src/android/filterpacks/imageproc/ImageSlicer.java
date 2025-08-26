@@ -63,13 +63,13 @@ public class ImageSlicer extends Filter {
     @Override // android.filterfw.core.Filter
     public void process(FilterContext filterContext) {
         if (this.mSliceIndex == 0) {
-            Frame pullInput = pullInput("image");
-            this.mOriginalFrame = pullInput;
-            calcOutputFormatForInput(pullInput);
+            Frame framePullInput = pullInput("image");
+            this.mOriginalFrame = framePullInput;
+            calcOutputFormatForInput(framePullInput);
         }
-        MutableFrameFormat mutableCopy = this.mOriginalFrame.getFormat().mutableCopy();
-        mutableCopy.setDimensions(this.mOutputWidth, this.mOutputHeight);
-        Frame newFrame = filterContext.getFrameManager().newFrame(mutableCopy);
+        MutableFrameFormat mutableFrameFormatMutableCopy = this.mOriginalFrame.getFormat().mutableCopy();
+        mutableFrameFormatMutableCopy.setDimensions(this.mOutputWidth, this.mOutputHeight);
+        Frame frameNewFrame = filterContext.getFrameManager().newFrame(mutableFrameFormatMutableCopy);
         if (this.mProgram == null) {
             this.mProgram = ShaderProgram.createIdentity(filterContext);
         }
@@ -84,7 +84,7 @@ public class ImageSlicer extends Filter {
         float f2 = (i4 * this.mSliceHeight) - i6;
         int i8 = this.mInputHeight;
         ((ShaderProgram) this.mProgram).setSourceRect(f, f2 / i8, this.mOutputWidth / i7, this.mOutputHeight / i8);
-        this.mProgram.process(this.mOriginalFrame, newFrame);
+        this.mProgram.process(this.mOriginalFrame, frameNewFrame);
         int i9 = this.mSliceIndex + 1;
         this.mSliceIndex = i9;
         if (i9 == this.mXSlices * this.mYSlices) {
@@ -95,7 +95,7 @@ public class ImageSlicer extends Filter {
             this.mOriginalFrame.retain();
             setWaitsOnInputPort("image", false);
         }
-        pushOutput("image", newFrame);
-        newFrame.release();
+        pushOutput("image", frameNewFrame);
+        frameNewFrame.release();
     }
 }

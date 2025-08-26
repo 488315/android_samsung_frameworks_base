@@ -14,7 +14,6 @@ import java.util.Iterator;
 import java.util.Optional;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class RotationLockControllerImpl implements RotationLockController {
     public final CopyOnWriteArrayList mCallbacks;
@@ -51,12 +50,12 @@ public final class RotationLockControllerImpl implements RotationLockController 
             LogLevel logLevel = LogLevel.VERBOSE;
             DeviceStateRotationLockSettingControllerLogger$$ExternalSyntheticLambda1 deviceStateRotationLockSettingControllerLogger$$ExternalSyntheticLambda1 = new DeviceStateRotationLockSettingControllerLogger$$ExternalSyntheticLambda1(1);
             LogBuffer logBuffer = deviceStateRotationLockSettingControllerLogger.logBuffer;
-            LogMessage obtain = logBuffer.obtain("DSRotateLockSettingCon", logLevel, deviceStateRotationLockSettingControllerLogger$$ExternalSyntheticLambda1, null);
-            ((LogMessageImpl) obtain).bool1 = true;
-            logBuffer.commit(obtain);
+            LogMessage logMessageObtain = logBuffer.obtain("DSRotateLockSettingCon", logLevel, deviceStateRotationLockSettingControllerLogger$$ExternalSyntheticLambda1, null);
+            ((LogMessageImpl) logMessageObtain).bool1 = true;
+            logBuffer.commit(logMessageObtain);
             DeviceStateManager.DeviceStateCallback deviceStateCallback = new DeviceStateManager.DeviceStateCallback() { // from class: com.android.systemui.statusbar.policy.DeviceStateRotationLockSettingController$$ExternalSyntheticLambda0
                 public final void onDeviceStateChanged(DeviceState deviceState) {
-                    DeviceStateRotationLockSettingController deviceStateRotationLockSettingController2 = DeviceStateRotationLockSettingController.this;
+                    DeviceStateRotationLockSettingController deviceStateRotationLockSettingController2 = deviceStateRotationLockSettingController;
                     int i = deviceStateRotationLockSettingController2.mDeviceState;
                     int identifier = deviceState.getIdentifier();
                     DeviceStateRotationLockSettingControllerLogger deviceStateRotationLockSettingControllerLogger2 = deviceStateRotationLockSettingController2.mLogger;
@@ -64,11 +63,11 @@ public final class RotationLockControllerImpl implements RotationLockController 
                     LogLevel logLevel2 = LogLevel.VERBOSE;
                     DeviceStateRotationLockSettingControllerLogger$$ExternalSyntheticLambda0 deviceStateRotationLockSettingControllerLogger$$ExternalSyntheticLambda0 = new DeviceStateRotationLockSettingControllerLogger$$ExternalSyntheticLambda0(deviceStateRotationLockSettingControllerLogger2, 2);
                     LogBuffer logBuffer2 = deviceStateRotationLockSettingControllerLogger2.logBuffer;
-                    LogMessage obtain2 = logBuffer2.obtain("DSRotateLockSettingCon", logLevel2, deviceStateRotationLockSettingControllerLogger$$ExternalSyntheticLambda0, null);
-                    LogMessageImpl logMessageImpl = (LogMessageImpl) obtain2;
+                    LogMessage logMessageObtain2 = logBuffer2.obtain("DSRotateLockSettingCon", logLevel2, deviceStateRotationLockSettingControllerLogger$$ExternalSyntheticLambda0, null);
+                    LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain2;
                     logMessageImpl.int1 = i;
                     logMessageImpl.int2 = identifier;
-                    logBuffer2.commit(obtain2);
+                    logBuffer2.commit(logMessageObtain2);
                     try {
                         if (Trace.isEnabled()) {
                             Trace.traceBegin(4096L, "updateDeviceState [state=" + deviceState.getIdentifier() + "]");

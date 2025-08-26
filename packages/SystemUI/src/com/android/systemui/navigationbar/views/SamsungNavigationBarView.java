@@ -2,6 +2,7 @@ package com.android.systemui.navigationbar.views;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
@@ -62,7 +63,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SamsungNavigationBarView extends NavigationBarView {
     public final int AMOTION_EVENT_FLAG_BYPASSABLE_WINDOW_TYPE;
@@ -104,9 +104,9 @@ public final class SamsungNavigationBarView extends NavigationBarView {
         this.mContextualButtonGroup.mKeyButtonMapper = navBarIconResourceMapper;
         ContextualButton contextualButton = new ContextualButton(R.id.ime_switcher, this.mLightContext, IconType.TYPE_IME);
         ContextualButton contextualButton2 = new ContextualButton(R.id.accessibility_button, this.mLightContext, IconType.TYPE_A11Y);
-        boolean isGestureMode = ((NavBarStateManagerImpl) this.navBarStateManager).isGestureMode();
+        boolean zIsGestureMode = ((NavBarStateManagerImpl) this.navBarStateManager).isGestureMode();
         ((ArrayList) this.mContextualButtonGroup.mButtonData).clear();
-        if (isGestureMode) {
+        if (zIsGestureMode) {
             this.mContextualButtonGroup.addButton(contextualButton2);
             this.mContextualButtonGroup.addButton(contextualButton);
         } else {
@@ -198,65 +198,77 @@ public final class SamsungNavigationBarView extends NavigationBarView {
         return ((NavBarButtonDrawableProvider) navBarIconResourceMapper.buttonDrawableProvider).getGestureHintDrawable(navBarIconResourceMapper.context, navBarIconResourceMapper.getIconResource(iconType), i);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:52:0x00ef A[LOOP:3: B:51:0x00ed->B:52:0x00ef, LOOP_END] */
     @Override // com.android.systemui.navigationbar.views.NavigationBarView
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void marqueeNavigationBarIcon(int i, int i2) {
+        int size;
+        int i3;
         if (this.mCurrentView == null) {
             reorient();
             return;
         }
         MarqueeLogic marqueeLogic = this.marqueeLogic;
         float f = getContext().getResources().getDisplayMetrics().density;
-        int i3 = marqueeLogic.horizontalShift;
-        if (-16 > i3 || i3 >= 17) {
+        int i4 = marqueeLogic.horizontalShift;
+        if (-16 > i4 || i4 >= 17) {
             marqueeLogic.horizontalMoved = -marqueeLogic.horizontalMoved;
         }
-        int i4 = marqueeLogic.verticalShift;
-        if (-10 > i4 || i4 >= 11) {
+        int i5 = marqueeLogic.verticalShift;
+        if (-10 > i5 || i5 >= 11) {
             marqueeLogic.verticalMoved = -marqueeLogic.verticalMoved;
         }
-        marqueeLogic.horizontalShift = i3 + marqueeLogic.horizontalMoved;
-        marqueeLogic.verticalShift = i4 + marqueeLogic.verticalMoved;
+        marqueeLogic.horizontalShift = i4 + marqueeLogic.horizontalMoved;
+        marqueeLogic.verticalShift = i5 + marqueeLogic.verticalMoved;
         marqueeLogic.scaleFactor = f / 4.0f;
         MarqueeLogic marqueeLogic2 = this.marqueeLogic;
-        int ceil = (int) Math.ceil((this.mIsVertical ? marqueeLogic2.verticalShift : marqueeLogic2.horizontalShift) * marqueeLogic2.scaleFactor);
+        int iCeil = (int) Math.ceil((this.mIsVertical ? marqueeLogic2.verticalShift : marqueeLogic2.horizontalShift) * marqueeLogic2.scaleFactor);
         MarqueeLogic marqueeLogic3 = this.marqueeLogic;
-        int ceil2 = (int) Math.ceil((this.mIsVertical ? marqueeLogic3.horizontalShift : marqueeLogic3.verticalShift) * marqueeLogic3.scaleFactor);
+        int iCeil2 = (int) Math.ceil((this.mIsVertical ? marqueeLogic3.horizontalShift : marqueeLogic3.verticalShift) * marqueeLogic3.scaleFactor);
         boolean z = ((NavBarStateManagerImpl) this.navBarStateManager).states.canMove;
         this.marqueeLogic.getClass();
-        int min = (int) (Math.min(i, i2) * 0.0222d);
-        int size = this.mButtonDispatchers.size();
-        for (int i5 = 0; i5 < size; i5++) {
-            ButtonDispatcher buttonDispatcher = (ButtonDispatcher) this.mButtonDispatchers.valueAt(i5);
+        int iMin = (int) (Math.min(i, i2) * 0.0222d);
+        int size2 = this.mButtonDispatchers.size();
+        for (int i6 = 0; i6 < size2; i6++) {
+            ButtonDispatcher buttonDispatcher = (ButtonDispatcher) this.mButtonDispatchers.valueAt(i6);
             if (z) {
                 ArrayList arrayList = (ArrayList) this.mContextualButtonGroup.mButtonData;
-                int size2 = arrayList.size();
-                int i6 = 0;
-                while (i6 < size2) {
-                    Object obj = arrayList.get(i6);
-                    i6++;
+                int size3 = arrayList.size();
+                int i7 = 0;
+                while (i7 < size3) {
+                    Object obj = arrayList.get(i7);
+                    i7++;
                     if (((ContextualButtonGroup.ButtonData) obj).button.equals(buttonDispatcher)) {
-                        int i7 = this.mCurrentRotation;
-                        int i8 = i7 == 1 ? min + ceil2 : ceil2;
-                        int i9 = i7 == 0 ? min : 0;
-                        int i10 = i7 == 3 ? min : 0;
+                        int i8 = this.mCurrentRotation;
+                        int i9 = i8 == 1 ? iMin + iCeil2 : iCeil2;
+                        int i10 = i8 == 0 ? iMin : 0;
+                        int i11 = i8 == 3 ? iMin : 0;
                         ArrayList arrayList2 = buttonDispatcher.mViews;
-                        int size3 = arrayList2.size();
-                        int i11 = 0;
-                        while (i11 < size3) {
-                            Object obj2 = arrayList2.get(i11);
-                            i11++;
-                            ((View) obj2).setPadding(ceil, i8, i9, i10);
+                        int size4 = arrayList2.size();
+                        int i12 = 0;
+                        while (i12 < size4) {
+                            Object obj2 = arrayList2.get(i12);
+                            i12++;
+                            ((View) obj2).setPadding(iCeil, i9, i10, i11);
                         }
                     }
                 }
-            }
-            ArrayList arrayList3 = buttonDispatcher.mViews;
-            int size4 = arrayList3.size();
-            int i12 = 0;
-            while (i12 < size4) {
-                Object obj3 = arrayList3.get(i12);
-                i12++;
-                ((View) obj3).setPadding(ceil, ceil2, 0, 0);
+                ArrayList arrayList3 = buttonDispatcher.mViews;
+                size = arrayList3.size();
+                i3 = 0;
+                while (i3 < size) {
+                    Object obj3 = arrayList3.get(i3);
+                    i3++;
+                    ((View) obj3).setPadding(iCeil, iCeil2, 0, 0);
+                }
+            } else {
+                ArrayList arrayList32 = buttonDispatcher.mViews;
+                size = arrayList32.size();
+                i3 = 0;
+                while (i3 < size) {
+                }
             }
         }
     }
@@ -376,18 +388,18 @@ public final class SamsungNavigationBarView extends NavigationBarView {
     }
 
     @Override // com.android.systemui.navigationbar.views.NavigationBarView, android.widget.FrameLayout, android.view.View
-    public final void onMeasure(int i, int i2) {
+    public final void onMeasure(int i, int i2) throws Resources.NotFoundException {
         int i3;
         int size = View.MeasureSpec.getSize(i);
         int size2 = View.MeasureSpec.getSize(i2);
         boolean z = ((NavBarStateManagerImpl) this.navBarStateManager).states.canMove;
         int stableInsetLeft = getRootWindowInsets().getStableInsetLeft();
         int stableInsetRight = getRootWindowInsets().getStableInsetRight();
-        int dimensionPixelSize = getResources().getDimensionPixelSize(android.R.dimen.seekbar_track_progress_height_material);
-        int dimensionPixelSize2 = getResources().getDimensionPixelSize(android.R.dimen.secondary_waterfall_display_left_edge_size);
-        boolean isGestureMode = ((NavBarStateManagerImpl) this.navBarStateManager).isGestureMode();
+        int dimensionPixelSize = getResources().getDimensionPixelSize(android.R.dimen.select_dialog_drawable_padding_start_material);
+        int dimensionPixelSize2 = getResources().getDimensionPixelSize(android.R.dimen.secondary_waterfall_display_right_edge_size);
+        boolean zIsGestureMode = ((NavBarStateManagerImpl) this.navBarStateManager).isGestureMode();
         if (!z || (i3 = this.mCurrentRotation) == 0 || i3 == 2) {
-            if (isGestureMode) {
+            if (zIsGestureMode) {
                 stableInsetLeft = 0;
                 stableInsetRight = 0;
             }
@@ -458,12 +470,12 @@ public final class SamsungNavigationBarView extends NavigationBarView {
     public final void showA11ySwipeUpTipPopup() {
         AccessibilityManager accessibilityManager = (AccessibilityManager) getContext().getSystemService("accessibility");
         final NavBarTipPopup navBarTipPopup = this.navBarTip;
-        final boolean semIsScreenReaderEnabled = accessibilityManager.semIsScreenReaderEnabled();
+        final boolean zSemIsScreenReaderEnabled = accessibilityManager.semIsScreenReaderEnabled();
         navBarTipPopup.handler.post(new Runnable() { // from class: com.android.systemui.navigationbar.NavBarTipPopup$showA11ySwipeUpTip$1
             @Override // java.lang.Runnable
-            public final void run() {
-                NavBarTipPopup navBarTipPopup2 = NavBarTipPopup.this;
-                int i = semIsScreenReaderEnabled ? R.string.gesture_accessibility_guide_gesture_onboarding_voice_assistant_on : R.string.gesture_accessibility_guide_gesture_onboarding;
+            public final void run() throws Resources.NotFoundException {
+                NavBarTipPopup navBarTipPopup2 = navBarTipPopup;
+                int i = zSemIsScreenReaderEnabled ? R.string.gesture_accessibility_guide_gesture_onboarding_voice_assistant_on : R.string.gesture_accessibility_guide_gesture_onboarding;
                 SemTipPopup semTipPopup = navBarTipPopup2.tipPopup;
                 if (semTipPopup != null && semTipPopup.isShowing()) {
                     navBarTipPopup2.hide();
@@ -486,7 +498,7 @@ public final class SamsungNavigationBarView extends NavigationBarView {
                 }
                 navBarTipPopup2.currentMessage = i;
                 NavBarTipPopupUtil navBarTipPopupUtil = NavBarTipPopupUtil.INSTANCE;
-                Context context = NavBarTipPopup.this.context;
+                Context context = navBarTipPopup.context;
                 navBarTipPopupUtil.getClass();
                 Prefs.putInt(context, "NavigationBarAccessibilityShortcutTipCount", Prefs.getInt(context, "NavigationBarAccessibilityShortcutTipCount", 0) + 1);
             }
@@ -661,9 +673,9 @@ public final class SamsungNavigationBarView extends NavigationBarView {
             }
             if (z2) {
                 NavBarStateManagerImpl navBarStateManagerImpl = (NavBarStateManagerImpl) this.navBarStateManager;
-                boolean canShowHideKeyboardButtonForRotation = navBarStateManagerImpl.canShowHideKeyboardButtonForRotation(navBarStateManagerImpl.states.rotation);
-                this.canShowHideKeyboard = canShowHideKeyboardButtonForRotation;
-                if (!canShowHideKeyboardButtonForRotation) {
+                boolean zCanShowHideKeyboardButtonForRotation = navBarStateManagerImpl.canShowHideKeyboardButtonForRotation(navBarStateManagerImpl.states.rotation);
+                this.canShowHideKeyboard = zCanShowHideKeyboardButtonForRotation;
+                if (!zCanShowHideKeyboardButtonForRotation) {
                     getBackButton().setVisibility(4);
                 }
                 NavBarStateManagerImpl navBarStateManagerImpl2 = (NavBarStateManagerImpl) this.navBarStateManager;
@@ -701,17 +713,17 @@ public final class SamsungNavigationBarView extends NavigationBarView {
                 navBarRemoteViewManager.useAltBack = z6;
             }
             updateRemoteViewContainerVisibility();
-            ((NavBarStoreImpl) this.navBarStore).handleEvent(this, new EventTypeFactory.EventType.OnUpdateSysUiStateFlag(z, r3, defaultConstructorMarker));
+            ((NavBarStoreImpl) this.navBarStore).handleEvent(this, new EventTypeFactory.EventType.OnUpdateSysUiStateFlag(z, i, defaultConstructorMarker));
         }
         if (((NavBarStoreImpl) this.navBarStore).pluginBarInteractionManager.pluginNavigationBar == null || ((NavBarStateManagerImpl) this.navBarStateManager).isGestureMode()) {
             return;
         }
-        r3 = (getBackButton().getVisibility() == 0 && getHomeButton().getVisibility() == 0) ? 1 : 0;
+        i = (getBackButton().getVisibility() == 0 && getHomeButton().getVisibility() == 0) ? 1 : 0;
         Iterator it = Arrays.asList(Integer.valueOf(R.id.nav_custom_key_1), Integer.valueOf(R.id.nav_custom_key_2), Integer.valueOf(R.id.nav_custom_key_3), Integer.valueOf(R.id.nav_custom_key_4), Integer.valueOf(R.id.nav_custom_key_5)).iterator();
         while (it.hasNext()) {
             ButtonDispatcher buttonDispatcher = (ButtonDispatcher) this.mButtonDispatchers.get(((Number) it.next()).intValue());
             if (buttonDispatcher != null) {
-                buttonDispatcher.setVisibility(r3 != 0 ? 0 : 4);
+                buttonDispatcher.setVisibility(i != 0 ? 0 : 4);
             }
         }
     }
@@ -757,109 +769,43 @@ public final class SamsungNavigationBarView extends NavigationBarView {
         ((NavBarStoreImpl) this.navBarStore).handleEvent(this, new EventTypeFactory.EventType.OnUpdateRemoteViewContainer(this.mCurrentRotation, linearLayout, linearLayout2, z, f, this.displayId));
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:35:0x0081  */
-    /* JADX WARN: Removed duplicated region for block: B:41:0x008d  */
-    /* JADX WARN: Removed duplicated region for block: B:46:? A[RETURN, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:37:0x007b  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final void updateRemoteViewContainerVisibility() {
-        /*
-            r7 = this;
-            com.android.systemui.navigationbar.store.NavBarStore r0 = r7.navBarStore
-            int r1 = r7.displayId
-            com.android.systemui.navigationbar.store.NavBarStoreImpl r0 = (com.android.systemui.navigationbar.store.NavBarStoreImpl) r0
-            java.lang.Class<com.android.systemui.navigationbar.remoteview.NavBarRemoteViewManager> r2 = com.android.systemui.navigationbar.remoteview.NavBarRemoteViewManager.class
-            java.lang.Object r0 = r0.getModule(r2, r1)
-            com.android.systemui.navigationbar.remoteview.NavBarRemoteViewManager r0 = (com.android.systemui.navigationbar.remoteview.NavBarRemoteViewManager) r0
-            if (r0 == 0) goto L93
-            android.view.View r1 = r7.currentRemoteView
-            r2 = 4
-            r3 = 0
-            r4 = 1
-            if (r1 == 0) goto L4b
-            android.util.SparseArray r5 = r7.mButtonDispatchers
-            r6 = 2131363231(0x7f0a059f, float:1.8346265E38)
-            java.lang.Object r5 = r5.get(r6)
-            com.android.systemui.navigationbar.views.buttons.ButtonDispatcher r5 = (com.android.systemui.navigationbar.views.buttons.ButtonDispatcher) r5
-            if (r5 == 0) goto L2b
-            int r5 = r5.getVisibility()
-            if (r5 != 0) goto L2b
-            goto L39
-        L2b:
-            com.android.systemui.navigationbar.store.NavBarStateManager r5 = r7.navBarStateManager
-            com.android.systemui.navigationbar.store.NavBarStateManagerImpl r5 = (com.android.systemui.navigationbar.store.NavBarStateManagerImpl) r5
-            boolean r5 = r5.isGestureMode()
-            if (r5 == 0) goto L47
-            boolean r5 = r0.showInGestureMode
-            if (r5 != 0) goto L47
-        L39:
-            boolean r5 = com.android.systemui.BasicRune.NAVBAR_SUPPORT_LARGE_COVER_SCREEN
-            if (r5 == 0) goto L45
-            android.content.Context r5 = r7.mContext
-            int r5 = r5.getDisplayId()
-            if (r5 == r4) goto L47
-        L45:
-            r5 = r2
-            goto L48
-        L47:
-            r5 = r3
-        L48:
-            r1.setVisibility(r5)
-        L4b:
-            int r7 = r7.displayId
-            boolean r1 = r0.showInGestureMode
-            if (r1 != 0) goto L52
-            goto L93
-        L52:
-            com.android.systemui.navigationbar.store.NavBarStoreImpl r1 = r0.navBarStore
-            r5 = 0
-            if (r1 == 0) goto L58
-            goto L59
-        L58:
-            r1 = r5
-        L59:
-            com.android.systemui.navigationbar.store.NavBarStateManager r1 = r1.getNavStateManager(r7)
-            com.android.systemui.navigationbar.store.NavBarStateManagerImpl r1 = (com.android.systemui.navigationbar.store.NavBarStateManagerImpl) r1
-            com.android.systemui.navigationbar.model.NavBarStates r1 = r1.states
-            boolean r1 = r1.canMove
-            if (r1 == 0) goto L7b
-            com.android.systemui.navigationbar.store.NavBarStoreImpl r1 = r0.navBarStore
-            if (r1 == 0) goto L6a
-            r5 = r1
-        L6a:
-            com.android.systemui.navigationbar.store.NavBarStateManager r7 = r5.getNavStateManager(r7)
-            com.android.systemui.navigationbar.store.NavBarStateManagerImpl r7 = (com.android.systemui.navigationbar.store.NavBarStateManagerImpl) r7
-            com.android.systemui.navigationbar.model.NavBarStates r7 = r7.states
-            int r7 = r7.rotation
-            if (r7 != r4) goto L7b
-            int r7 = r0.adaptivePosition
-            int r7 = 1 - r7
-            goto L7d
-        L7b:
-            int r7 = r0.adaptivePosition
-        L7d:
-            android.widget.LinearLayout r1 = r0.leftContainer
-            if (r1 == 0) goto L89
-            if (r7 != 0) goto L85
-            r5 = r3
-            goto L86
-        L85:
-            r5 = r2
-        L86:
-            r1.setVisibility(r5)
-        L89:
-            android.widget.LinearLayout r0 = r0.rightContainer
-            if (r0 == 0) goto L93
-            if (r7 != r4) goto L90
-            r2 = r3
-        L90:
-            r0.setVisibility(r2)
-        L93:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.navigationbar.views.SamsungNavigationBarView.updateRemoteViewContainerVisibility():void");
+        int i;
+        NavBarRemoteViewManager navBarRemoteViewManager = (NavBarRemoteViewManager) ((NavBarStoreImpl) this.navBarStore).getModule(NavBarRemoteViewManager.class, this.displayId);
+        if (navBarRemoteViewManager != null) {
+            View view = this.currentRemoteView;
+            if (view != null) {
+                ButtonDispatcher buttonDispatcher = (ButtonDispatcher) this.mButtonDispatchers.get(R.id.ime_switcher);
+                view.setVisibility((((buttonDispatcher == null || buttonDispatcher.getVisibility() != 0) && (!((NavBarStateManagerImpl) this.navBarStateManager).isGestureMode() || navBarRemoteViewManager.showInGestureMode)) || (BasicRune.NAVBAR_SUPPORT_LARGE_COVER_SCREEN && ((FrameLayout) this).mContext.getDisplayId() == 1)) ? 0 : 4);
+            }
+            int i2 = this.displayId;
+            if (navBarRemoteViewManager.showInGestureMode) {
+                NavBarStoreImpl navBarStoreImpl = navBarRemoteViewManager.navBarStore;
+                if (navBarStoreImpl == null) {
+                    navBarStoreImpl = null;
+                }
+                if (((NavBarStateManagerImpl) navBarStoreImpl.getNavStateManager(i2)).states.canMove) {
+                    NavBarStoreImpl navBarStoreImpl2 = navBarRemoteViewManager.navBarStore;
+                    if (((NavBarStateManagerImpl) (navBarStoreImpl2 != null ? navBarStoreImpl2 : null).getNavStateManager(i2)).states.rotation == 1) {
+                        i = 1 - navBarRemoteViewManager.adaptivePosition;
+                    }
+                } else {
+                    i = navBarRemoteViewManager.adaptivePosition;
+                }
+                LinearLayout linearLayout = navBarRemoteViewManager.leftContainer;
+                if (linearLayout != null) {
+                    linearLayout.setVisibility(i == 0 ? 0 : 4);
+                }
+                LinearLayout linearLayout2 = navBarRemoteViewManager.rightContainer;
+                if (linearLayout2 != null) {
+                    linearLayout2.setVisibility(i == 1 ? 0 : 4);
+                }
+            }
+        }
     }
 
     @Override // com.android.systemui.navigationbar.views.NavigationBarView

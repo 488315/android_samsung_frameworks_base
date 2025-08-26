@@ -21,7 +21,7 @@ public interface ITaskOrganizerController extends IInterface {
         }
 
         @Override // android.window.ITaskOrganizerController
-        public void createDeskRootTask(int i, int i2, int i3, IBinder iBinder, boolean z, boolean z2) throws RemoteException {
+        public void createDeskRootTask(int i, int i2, int i3, int i4, IBinder iBinder, boolean z, boolean z2) throws RemoteException {
         }
 
         @Override // android.window.ITaskOrganizerController
@@ -74,7 +74,7 @@ public interface ITaskOrganizerController extends IInterface {
         }
     }
 
-    void createDeskRootTask(int i, int i2, int i3, IBinder iBinder, boolean z, boolean z2) throws RemoteException;
+    void createDeskRootTask(int i, int i2, int i3, int i4, IBinder iBinder, boolean z, boolean z2) throws RemoteException;
 
     void createRootTask(int i, int i2, IBinder iBinder, boolean z, boolean z2) throws RemoteException;
 
@@ -130,9 +130,9 @@ public interface ITaskOrganizerController extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ITaskOrganizerController.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ITaskOrganizerController)) {
-                return (ITaskOrganizerController) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ITaskOrganizerController.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ITaskOrganizerController)) {
+                return (ITaskOrganizerController) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -184,83 +184,84 @@ public interface ITaskOrganizerController extends IInterface {
             }
             switch (i) {
                 case 1:
-                    ITaskOrganizer asInterface = ITaskOrganizer.Stub.asInterface(parcel.readStrongBinder());
+                    ITaskOrganizer iTaskOrganizerAsInterface = ITaskOrganizer.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    ParceledListSlice<TaskAppearedInfo> registerTaskOrganizer = registerTaskOrganizer(asInterface);
+                    ParceledListSlice<TaskAppearedInfo> parceledListSliceRegisterTaskOrganizer = registerTaskOrganizer(iTaskOrganizerAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(registerTaskOrganizer, 1);
+                    parcel2.writeTypedObject(parceledListSliceRegisterTaskOrganizer, 1);
                     return true;
                 case 2:
-                    ITaskOrganizer asInterface2 = ITaskOrganizer.Stub.asInterface(parcel.readStrongBinder());
+                    ITaskOrganizer iTaskOrganizerAsInterface2 = ITaskOrganizer.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterTaskOrganizer(asInterface2);
+                    unregisterTaskOrganizer(iTaskOrganizerAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    int readInt = parcel.readInt();
-                    int readInt2 = parcel.readInt();
-                    IBinder readStrongBinder = parcel.readStrongBinder();
-                    boolean readBoolean = parcel.readBoolean();
-                    boolean readBoolean2 = parcel.readBoolean();
+                    int i3 = parcel.readInt();
+                    int i4 = parcel.readInt();
+                    IBinder strongBinder = parcel.readStrongBinder();
+                    boolean z = parcel.readBoolean();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    createRootTask(readInt, readInt2, readStrongBinder, readBoolean, readBoolean2);
+                    createRootTask(i3, i4, strongBinder, z, z2);
                     parcel2.writeNoException();
                     return true;
                 case 4:
-                    int readInt3 = parcel.readInt();
-                    int readInt4 = parcel.readInt();
-                    int readInt5 = parcel.readInt();
-                    IBinder readStrongBinder2 = parcel.readStrongBinder();
+                    int i5 = parcel.readInt();
+                    int i6 = parcel.readInt();
+                    int i7 = parcel.readInt();
+                    IBinder strongBinder2 = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    createStageRootTask(readInt3, readInt4, readInt5, readStrongBinder2);
+                    createStageRootTask(i5, i6, i7, strongBinder2);
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    int readInt6 = parcel.readInt();
-                    int readInt7 = parcel.readInt();
-                    int readInt8 = parcel.readInt();
-                    IBinder readStrongBinder3 = parcel.readStrongBinder();
-                    boolean readBoolean3 = parcel.readBoolean();
-                    boolean readBoolean4 = parcel.readBoolean();
+                    int i8 = parcel.readInt();
+                    int i9 = parcel.readInt();
+                    int i10 = parcel.readInt();
+                    int i11 = parcel.readInt();
+                    IBinder strongBinder3 = parcel.readStrongBinder();
+                    boolean z3 = parcel.readBoolean();
+                    boolean z4 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    createDeskRootTask(readInt6, readInt7, readInt8, readStrongBinder3, readBoolean3, readBoolean4);
+                    createDeskRootTask(i8, i9, i10, i11, strongBinder3, z3, z4);
                     parcel2.writeNoException();
                     return true;
                 case 6:
                     WindowContainerToken windowContainerToken = (WindowContainerToken) parcel.readTypedObject(WindowContainerToken.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean deleteRootTask = deleteRootTask(windowContainerToken);
+                    boolean zDeleteRootTask = deleteRootTask(windowContainerToken);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(deleteRootTask);
+                    parcel2.writeBoolean(zDeleteRootTask);
                     return true;
                 case 7:
                     WindowContainerToken windowContainerToken2 = (WindowContainerToken) parcel.readTypedObject(WindowContainerToken.CREATOR);
-                    int[] createIntArray = parcel.createIntArray();
+                    int[] iArrCreateIntArray = parcel.createIntArray();
                     parcel.enforceNoDataAvail();
-                    List<ActivityManager.RunningTaskInfo> childTasks = getChildTasks(windowContainerToken2, createIntArray);
+                    List<ActivityManager.RunningTaskInfo> childTasks = getChildTasks(windowContainerToken2, iArrCreateIntArray);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(childTasks, 1);
                     return true;
                 case 8:
-                    int readInt9 = parcel.readInt();
-                    int[] createIntArray2 = parcel.createIntArray();
+                    int i12 = parcel.readInt();
+                    int[] iArrCreateIntArray2 = parcel.createIntArray();
                     parcel.enforceNoDataAvail();
-                    List<ActivityManager.RunningTaskInfo> rootTasks = getRootTasks(readInt9, createIntArray2);
+                    List<ActivityManager.RunningTaskInfo> rootTasks = getRootTasks(i12, iArrCreateIntArray2);
                     parcel2.writeNoException();
                     parcel2.writeTypedList(rootTasks, 1);
                     return true;
                 case 9:
-                    int readInt10 = parcel.readInt();
+                    int i13 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    WindowContainerToken imeTarget = getImeTarget(readInt10);
+                    WindowContainerToken imeTarget = getImeTarget(i13);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(imeTarget, 1);
                     return true;
                 case 10:
                     WindowContainerToken windowContainerToken3 = (WindowContainerToken) parcel.readTypedObject(WindowContainerToken.CREATOR);
-                    boolean readBoolean5 = parcel.readBoolean();
+                    boolean z5 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setInterceptBackPressedOnTaskRoot(windowContainerToken3, readBoolean5);
+                    setInterceptBackPressedOnTaskRoot(windowContainerToken3, z5);
                     parcel2.writeNoException();
                     return true;
                 case 11:
@@ -271,9 +272,9 @@ public interface ITaskOrganizerController extends IInterface {
                     return true;
                 case 12:
                     WindowContainerToken windowContainerToken5 = (WindowContainerToken) parcel.readTypedObject(WindowContainerToken.CREATOR);
-                    boolean readBoolean6 = parcel.readBoolean();
+                    boolean z6 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setFreeformTaskSurfaceOverlappedWithNavi(windowContainerToken5, readBoolean6);
+                    setFreeformTaskSurfaceOverlappedWithNavi(windowContainerToken5, z6);
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -299,202 +300,203 @@ public interface ITaskOrganizerController extends IInterface {
 
             @Override // android.window.ITaskOrganizerController
             public ParceledListSlice<TaskAppearedInfo> registerTaskOrganizer(ITaskOrganizer iTaskOrganizer) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITaskOrganizerController.DESCRIPTOR);
-                    obtain.writeStrongInterface(iTaskOrganizer);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ParceledListSlice) obtain2.readTypedObject(ParceledListSlice.CREATOR);
+                    parcelObtain.writeInterfaceToken(ITaskOrganizerController.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iTaskOrganizer);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ParceledListSlice) parcelObtain2.readTypedObject(ParceledListSlice.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.ITaskOrganizerController
             public void unregisterTaskOrganizer(ITaskOrganizer iTaskOrganizer) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITaskOrganizerController.DESCRIPTOR);
-                    obtain.writeStrongInterface(iTaskOrganizer);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ITaskOrganizerController.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iTaskOrganizer);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.ITaskOrganizerController
             public void createRootTask(int i, int i2, IBinder iBinder, boolean z, boolean z2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITaskOrganizerController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ITaskOrganizerController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.ITaskOrganizerController
             public void createStageRootTask(int i, int i2, int i3, IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITaskOrganizerController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ITaskOrganizerController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.ITaskOrganizerController
-            public void createDeskRootTask(int i, int i2, int i3, IBinder iBinder, boolean z, boolean z2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+            public void createDeskRootTask(int i, int i2, int i3, int i4, IBinder iBinder, boolean z, boolean z2) throws RemoteException {
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITaskOrganizerController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeBoolean(z);
-                    obtain.writeBoolean(z2);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ITaskOrganizerController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeInt(i4);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeBoolean(z2);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.ITaskOrganizerController
             public boolean deleteRootTask(WindowContainerToken windowContainerToken) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITaskOrganizerController.DESCRIPTOR);
-                    obtain.writeTypedObject(windowContainerToken, 0);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ITaskOrganizerController.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(windowContainerToken, 0);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.ITaskOrganizerController
             public List<ActivityManager.RunningTaskInfo> getChildTasks(WindowContainerToken windowContainerToken, int[] iArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITaskOrganizerController.DESCRIPTOR);
-                    obtain.writeTypedObject(windowContainerToken, 0);
-                    obtain.writeIntArray(iArr);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(ActivityManager.RunningTaskInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(ITaskOrganizerController.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(windowContainerToken, 0);
+                    parcelObtain.writeIntArray(iArr);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(ActivityManager.RunningTaskInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.ITaskOrganizerController
             public List<ActivityManager.RunningTaskInfo> getRootTasks(int i, int[] iArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITaskOrganizerController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeIntArray(iArr);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(ActivityManager.RunningTaskInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(ITaskOrganizerController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeIntArray(iArr);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(ActivityManager.RunningTaskInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.ITaskOrganizerController
             public WindowContainerToken getImeTarget(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITaskOrganizerController.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (WindowContainerToken) obtain2.readTypedObject(WindowContainerToken.CREATOR);
+                    parcelObtain.writeInterfaceToken(ITaskOrganizerController.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (WindowContainerToken) parcelObtain2.readTypedObject(WindowContainerToken.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.ITaskOrganizerController
             public void setInterceptBackPressedOnTaskRoot(WindowContainerToken windowContainerToken, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITaskOrganizerController.DESCRIPTOR);
-                    obtain.writeTypedObject(windowContainerToken, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ITaskOrganizerController.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(windowContainerToken, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.ITaskOrganizerController
             public void restartTaskTopActivityProcessIfVisible(WindowContainerToken windowContainerToken) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITaskOrganizerController.DESCRIPTOR);
-                    obtain.writeTypedObject(windowContainerToken, 0);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ITaskOrganizerController.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(windowContainerToken, 0);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.ITaskOrganizerController
             public void setFreeformTaskSurfaceOverlappedWithNavi(WindowContainerToken windowContainerToken, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ITaskOrganizerController.DESCRIPTOR);
-                    obtain.writeTypedObject(windowContainerToken, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ITaskOrganizerController.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(windowContainerToken, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -70,21 +70,9 @@ public class UcmKeyStoreMacSpi extends MacSpi {
         }
     }
 
-    public static class HmacMD5 extends UcmKeyStoreMacSpi {
-        public HmacMD5() {
-            super("HmacMD5");
-        }
-    }
-
     public static class HmacSHA1 extends UcmKeyStoreMacSpi {
         public HmacSHA1() {
             super(KeyProperties.KEY_ALGORITHM_HMAC_SHA1);
-        }
-    }
-
-    public static class HmacSHA224 extends UcmKeyStoreMacSpi {
-        public HmacSHA224() {
-            super(KeyProperties.KEY_ALGORITHM_HMAC_SHA224);
         }
     }
 

@@ -16,7 +16,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class SingleNotificationChipInteractor$notificationChip$1 extends SuspendLambda implements Function3 {
     /* synthetic */ Object L$0;
@@ -54,9 +53,9 @@ final class SingleNotificationChipInteractor$notificationChip$1 extends SuspendL
         String str = singleNotificationChipInteractor.extraLogTag;
         if (promotedNotificationContentModels == null) {
             SingleNotificationChipInteractor$$ExternalSyntheticLambda0 singleNotificationChipInteractor$$ExternalSyntheticLambda0 = new SingleNotificationChipInteractor$$ExternalSyntheticLambda0(1);
-            LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.WARNING, singleNotificationChipInteractor$$ExternalSyntheticLambda0, null);
-            obtain.setStr1(str);
-            logger.getBuffer().commit(obtain);
+            LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.WARNING, singleNotificationChipInteractor$$ExternalSyntheticLambda0, null);
+            logMessageObtain.setStr1(str);
+            logger.getBuffer().commit(logMessageObtain);
             return null;
         }
         StatusBarIconView statusBarIconView = activeNotificationModel.statusBarChipIconView;
@@ -66,9 +65,9 @@ final class SingleNotificationChipInteractor$notificationChip$1 extends SuspendL
             return new NotificationChipModel(activeNotificationModel.key, activeNotificationModel.appName, statusBarIconView, promotedNotificationContentModels, singleNotificationChipInteractor.creationTime, z, appVisibilityModel.lastAppVisibleTime, instanceId);
         }
         SingleNotificationChipInteractor$$ExternalSyntheticLambda0 singleNotificationChipInteractor$$ExternalSyntheticLambda02 = new SingleNotificationChipInteractor$$ExternalSyntheticLambda0(2);
-        LogMessage obtain2 = logger.getBuffer().obtain(logger.getTag(), LogLevel.WARNING, singleNotificationChipInteractor$$ExternalSyntheticLambda02, null);
-        obtain2.setStr1(str);
-        logger.getBuffer().commit(obtain2);
+        LogMessage logMessageObtain2 = logger.getBuffer().obtain(logger.getTag(), LogLevel.WARNING, singleNotificationChipInteractor$$ExternalSyntheticLambda02, null);
+        logMessageObtain2.setStr1(str);
+        logger.getBuffer().commit(logMessageObtain2);
         return null;
     }
 }

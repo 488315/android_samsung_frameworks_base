@@ -5,11 +5,9 @@ import androidx.compose.foundation.gestures.ContentInViewNode$Request$$ExternalS
 import com.android.settingslib.volume.shared.model.AudioStream;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public interface AudioManagerEvent {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class InternalRingerModeChanged implements AudioManagerEvent {
         public static final InternalRingerModeChanged INSTANCE = new InternalRingerModeChanged();
 
@@ -29,7 +27,6 @@ public interface AudioManagerEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class StreamDevicesChanged implements AudioManagerEvent {
         public static final StreamDevicesChanged INSTANCE = new StreamDevicesChanged();
 
@@ -49,7 +46,6 @@ public interface AudioManagerEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class StreamMasterMuteChanged implements AudioManagerEvent {
         public static final StreamMasterMuteChanged INSTANCE = new StreamMasterMuteChanged();
 
@@ -69,7 +65,6 @@ public interface AudioManagerEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class StreamMuteChanged implements StreamAudioManagerEvent {
         public final int audioStream;
 
@@ -91,7 +86,7 @@ public interface AudioManagerEvent {
 
         @Override // com.android.settingslib.volume.shared.model.StreamAudioManagerEvent
         /* renamed from: getAudioStream-2ffMKO0, reason: not valid java name */
-        public final int mo987getAudioStream2ffMKO0() {
+        public final int mo989getAudioStream2ffMKO0() {
             return this.audioStream;
         }
 
@@ -110,7 +105,6 @@ public interface AudioManagerEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class StreamVolumeChanged implements StreamAudioManagerEvent {
         public final int audioStream;
 
@@ -132,7 +126,7 @@ public interface AudioManagerEvent {
 
         @Override // com.android.settingslib.volume.shared.model.StreamAudioManagerEvent
         /* renamed from: getAudioStream-2ffMKO0 */
-        public final int mo987getAudioStream2ffMKO0() {
+        public final int mo989getAudioStream2ffMKO0() {
             return this.audioStream;
         }
 

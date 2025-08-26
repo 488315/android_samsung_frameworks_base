@@ -14,16 +14,78 @@ import kotlin.collections.IntIterator;
 import kotlin.jvm.internal.CollectionToArray;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.Ref$IntRef;
+import kotlin.jvm.internal.markers.KMappedMarker;
 import kotlin.jvm.internal.markers.KMutableList;
 import kotlin.ranges.RangesKt___RangesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class SubList<T> implements List<T>, KMutableList {
     public final int offset;
     public final SnapshotStateList parentList;
     public int size;
     public int structure;
+
+    /* renamed from: androidx.compose.runtime.snapshots.SubList$listIterator$1, reason: invalid class name */
+    public final class AnonymousClass1 implements ListIterator<Object>, KMappedMarker {
+        public final /* synthetic */ Ref$IntRef $current;
+        public final /* synthetic */ SubList this$0;
+
+        public AnonymousClass1(Ref$IntRef ref$IntRef, SubList<Object> subList) {
+            this.$current = ref$IntRef;
+            this.this$0 = subList;
+        }
+
+        @Override // java.util.ListIterator
+        public final void add(Object obj) {
+            throw new IllegalStateException("Cannot modify a state list through an iterator");
+        }
+
+        @Override // java.util.ListIterator, java.util.Iterator
+        public final boolean hasNext() {
+            return this.$current.element < this.this$0.size - 1;
+        }
+
+        @Override // java.util.ListIterator
+        public final boolean hasPrevious() {
+            return this.$current.element >= 0;
+        }
+
+        @Override // java.util.ListIterator, java.util.Iterator
+        public final Object next() {
+            int i = this.$current.element + 1;
+            SnapshotStateListKt.access$validateRange(i, this.this$0.size);
+            this.$current.element = i;
+            return this.this$0.get(i);
+        }
+
+        @Override // java.util.ListIterator
+        public final int nextIndex() {
+            return this.$current.element + 1;
+        }
+
+        @Override // java.util.ListIterator
+        public final Object previous() {
+            int i = this.$current.element;
+            SnapshotStateListKt.access$validateRange(i, this.this$0.size);
+            this.$current.element = i - 1;
+            return this.this$0.get(i);
+        }
+
+        @Override // java.util.ListIterator
+        public final int previousIndex() {
+            return this.$current.element;
+        }
+
+        @Override // java.util.ListIterator, java.util.Iterator
+        public final void remove() {
+            throw new IllegalStateException("Cannot modify a state list through an iterator");
+        }
+
+        @Override // java.util.ListIterator
+        public final void set(Object obj) {
+            throw new IllegalStateException("Cannot modify a state list through an iterator");
+        }
+    }
 
     public SubList(SnapshotStateList<T> snapshotStateList, int i, int i2) {
         this.parentList = snapshotStateList;
@@ -50,8 +112,8 @@ final class SubList<T> implements List<T>, KMutableList {
     public final void clear() {
         int i;
         PersistentList persistentList;
-        Snapshot currentSnapshot;
-        boolean attemptUpdate;
+        Snapshot snapshotCurrentSnapshot;
+        boolean zAttemptUpdate;
         if (this.size > 0) {
             validateModification$1();
             SnapshotStateList snapshotStateList = this.parentList;
@@ -66,20 +128,20 @@ final class SubList<T> implements List<T>, KMutableList {
                     Unit unit = Unit.INSTANCE;
                 }
                 persistentList.getClass();
-                PersistentVectorBuilder builder = persistentList.builder();
-                builder.subList(i2, i3).clear();
-                PersistentList build = builder.build();
-                if (Intrinsics.areEqual(build, persistentList)) {
+                PersistentVectorBuilder persistentVectorBuilderBuilder = persistentList.builder();
+                persistentVectorBuilderBuilder.subList(i2, i3).clear();
+                PersistentList persistentListBuild = persistentVectorBuilderBuilder.build();
+                if (Intrinsics.areEqual(persistentListBuild, persistentList)) {
                     break;
                 }
                 SnapshotStateList.StateListStateRecord stateListStateRecord2 = snapshotStateList.firstStateRecord;
                 synchronized (SnapshotKt.lock) {
                     Snapshot.Companion.getClass();
-                    currentSnapshot = SnapshotKt.currentSnapshot();
-                    attemptUpdate = SnapshotStateList.attemptUpdate((SnapshotStateList.StateListStateRecord) SnapshotKt.writableRecord(stateListStateRecord2, snapshotStateList, currentSnapshot), i, build, true);
+                    snapshotCurrentSnapshot = SnapshotKt.currentSnapshot();
+                    zAttemptUpdate = SnapshotStateList.attemptUpdate((SnapshotStateList.StateListStateRecord) SnapshotKt.writableRecord(stateListStateRecord2, snapshotStateList, snapshotCurrentSnapshot), i, persistentListBuild, true);
                 }
-                SnapshotKt.notifyWrite(currentSnapshot, snapshotStateList);
-            } while (!attemptUpdate);
+                SnapshotKt.notifyWrite(snapshotCurrentSnapshot, snapshotStateList);
+            } while (!zAttemptUpdate);
             this.size = 0;
             this.structure = this.parentList.getStructure$runtime_release();
         }
@@ -118,9 +180,9 @@ final class SubList<T> implements List<T>, KMutableList {
         int i = this.offset;
         Iterator<T> it = RangesKt___RangesKt.until(i, this.size + i).iterator();
         while (it.hasNext()) {
-            int nextInt = ((IntIterator) it).nextInt();
-            if (Intrinsics.areEqual(obj, this.parentList.get(nextInt))) {
-                return nextInt - this.offset;
+            int iNextInt = ((IntIterator) it).nextInt();
+            if (Intrinsics.areEqual(obj, this.parentList.get(iNextInt))) {
+                return iNextInt - this.offset;
             }
         }
         return -1;
@@ -156,11 +218,11 @@ final class SubList<T> implements List<T>, KMutableList {
 
     @Override // java.util.List, java.util.Collection
     public final boolean remove(Object obj) {
-        int indexOf = indexOf(obj);
-        if (indexOf < 0) {
+        int iIndexOf = indexOf(obj);
+        if (iIndexOf < 0) {
             return false;
         }
-        remove(indexOf);
+        remove(iIndexOf);
         return true;
     }
 
@@ -182,8 +244,8 @@ final class SubList<T> implements List<T>, KMutableList {
     public final boolean retainAll(Collection collection) {
         int i;
         PersistentList persistentList;
-        Snapshot currentSnapshot;
-        boolean attemptUpdate;
+        Snapshot snapshotCurrentSnapshot;
+        boolean zAttemptUpdate;
         validateModification$1();
         SnapshotStateList snapshotStateList = this.parentList;
         int i2 = this.offset;
@@ -197,20 +259,20 @@ final class SubList<T> implements List<T>, KMutableList {
                 Unit unit = Unit.INSTANCE;
             }
             persistentList.getClass();
-            PersistentVectorBuilder builder = persistentList.builder();
-            builder.subList(i2, i3).retainAll(collection);
-            PersistentList build = builder.build();
-            if (Intrinsics.areEqual(build, persistentList)) {
+            PersistentVectorBuilder persistentVectorBuilderBuilder = persistentList.builder();
+            persistentVectorBuilderBuilder.subList(i2, i3).retainAll(collection);
+            PersistentList persistentListBuild = persistentVectorBuilderBuilder.build();
+            if (Intrinsics.areEqual(persistentListBuild, persistentList)) {
                 break;
             }
             SnapshotStateList.StateListStateRecord stateListStateRecord2 = snapshotStateList.firstStateRecord;
             synchronized (SnapshotKt.lock) {
                 Snapshot.Companion.getClass();
-                currentSnapshot = SnapshotKt.currentSnapshot();
-                attemptUpdate = SnapshotStateList.attemptUpdate((SnapshotStateList.StateListStateRecord) SnapshotKt.writableRecord(stateListStateRecord2, snapshotStateList, currentSnapshot), i, build, true);
+                snapshotCurrentSnapshot = SnapshotKt.currentSnapshot();
+                zAttemptUpdate = SnapshotStateList.attemptUpdate((SnapshotStateList.StateListStateRecord) SnapshotKt.writableRecord(stateListStateRecord2, snapshotStateList, snapshotCurrentSnapshot), i, persistentListBuild, true);
             }
-            SnapshotKt.notifyWrite(currentSnapshot, snapshotStateList);
-        } while (!attemptUpdate);
+            SnapshotKt.notifyWrite(snapshotCurrentSnapshot, snapshotStateList);
+        } while (!zAttemptUpdate);
         int size2 = size - snapshotStateList.size();
         if (size2 > 0) {
             this.structure = this.parentList.getStructure$runtime_release();
@@ -260,7 +322,7 @@ final class SubList<T> implements List<T>, KMutableList {
         validateModification$1();
         Ref$IntRef ref$IntRef = new Ref$IntRef();
         ref$IntRef.element = i - 1;
-        return new SubList$listIterator$1(ref$IntRef, this);
+        return new AnonymousClass1(ref$IntRef, this);
     }
 
     @Override // java.util.List, java.util.Collection
@@ -271,21 +333,21 @@ final class SubList<T> implements List<T>, KMutableList {
     @Override // java.util.List
     public final boolean addAll(int i, Collection collection) {
         validateModification$1();
-        boolean addAll = this.parentList.addAll(i + this.offset, collection);
-        if (addAll) {
+        boolean zAddAll = this.parentList.addAll(i + this.offset, collection);
+        if (zAddAll) {
             this.size = collection.size() + this.size;
             this.structure = this.parentList.getStructure$runtime_release();
         }
-        return addAll;
+        return zAddAll;
     }
 
     @Override // java.util.List
     public final Object remove(int i) {
         validateModification$1();
-        Object remove = this.parentList.remove(this.offset + i);
+        Object objRemove = this.parentList.remove(this.offset + i);
         this.size--;
         this.structure = this.parentList.getStructure$runtime_release();
-        return remove;
+        return objRemove;
     }
 
     @Override // java.util.List

@@ -5,7 +5,6 @@ import android.window.WindowContainerTransaction;
 import com.android.internal.protolog.ProtoLog;
 import com.android.wm.shell.protolog.ShellProtoLogGroup;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class LaunchAdjacentController {
     public WindowContainerToken container;

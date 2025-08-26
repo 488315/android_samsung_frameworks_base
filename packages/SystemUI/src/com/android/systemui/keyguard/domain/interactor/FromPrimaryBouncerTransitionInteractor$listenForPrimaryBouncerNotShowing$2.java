@@ -14,7 +14,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class FromPrimaryBouncerTransitionInteractor$listenForPrimaryBouncerNotShowing$2 extends SuspendLambda implements Function2 {
     int label;
@@ -46,31 +45,31 @@ final class FromPrimaryBouncerTransitionInteractor$listenForPrimaryBouncerNotSho
             FromPrimaryBouncerTransitionInteractor fromPrimaryBouncerTransitionInteractor = this.this$0;
             TransitionInteractor$filterRelevantKeyguardStateAnd$$inlined$filter$1 transitionInteractor$filterRelevantKeyguardStateAnd$$inlined$filter$1 = new TransitionInteractor$filterRelevantKeyguardStateAnd$$inlined$filter$1(fromPrimaryBouncerTransitionInteractor.keyguardInteractor.primaryBouncerShowing, fromPrimaryBouncerTransitionInteractor, new FromPrimaryBouncerTransitionInteractor$listenForPrimaryBouncerNotShowing$2$$ExternalSyntheticLambda0());
             FromPrimaryBouncerTransitionInteractor fromPrimaryBouncerTransitionInteractor2 = this.this$0;
-            Flow sample = companion.sample(transitionInteractor$filterRelevantKeyguardStateAnd$$inlined$filter$1, fromPrimaryBouncerTransitionInteractor2.powerInteractor.isAwake, fromPrimaryBouncerTransitionInteractor2.keyguardInteractor.isDreaming, fromPrimaryBouncerTransitionInteractor2.communalSceneInteractor.isIdleOnCommunal);
+            Flow flowSample = companion.sample(transitionInteractor$filterRelevantKeyguardStateAnd$$inlined$filter$1, fromPrimaryBouncerTransitionInteractor2.powerInteractor.isAwake, fromPrimaryBouncerTransitionInteractor2.keyguardInteractor.isDreaming, fromPrimaryBouncerTransitionInteractor2.communalSceneInteractor.isIdleOnCommunal);
             final FromPrimaryBouncerTransitionInteractor fromPrimaryBouncerTransitionInteractor3 = this.this$0;
             FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.keyguard.domain.interactor.FromPrimaryBouncerTransitionInteractor$listenForPrimaryBouncerNotShowing$2.2
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 public final Object emit(Object obj2, Continuation continuation) {
                     KeyguardState keyguardState;
                     Quad quad = (Quad) obj2;
-                    boolean booleanValue = ((Boolean) quad.component2()).booleanValue();
-                    boolean booleanValue2 = ((Boolean) quad.component3()).booleanValue();
-                    boolean booleanValue3 = ((Boolean) quad.component4()).booleanValue();
-                    FromPrimaryBouncerTransitionInteractor fromPrimaryBouncerTransitionInteractor4 = FromPrimaryBouncerTransitionInteractor.this;
-                    boolean booleanValue4 = ((Boolean) fromPrimaryBouncerTransitionInteractor4.keyguardInteractor.isKeyguardOccluded.getValue()).booleanValue();
+                    boolean zBooleanValue = ((Boolean) quad.component2()).booleanValue();
+                    boolean zBooleanValue2 = ((Boolean) quad.component3()).booleanValue();
+                    boolean zBooleanValue3 = ((Boolean) quad.component4()).booleanValue();
+                    FromPrimaryBouncerTransitionInteractor fromPrimaryBouncerTransitionInteractor4 = fromPrimaryBouncerTransitionInteractor3;
+                    boolean zBooleanValue4 = ((Boolean) fromPrimaryBouncerTransitionInteractor4.keyguardInteractor.isKeyguardOccluded.getValue()).booleanValue();
                     fromPrimaryBouncerTransitionInteractor4.communalSettingsInteractor.isV2FlagEnabled();
-                    if (booleanValue) {
-                        keyguardState = (!booleanValue4 || booleanValue2) ? booleanValue3 ? KeyguardState.GLANCEABLE_HUB : booleanValue2 ? KeyguardState.DREAMING : KeyguardState.LOCKSCREEN : KeyguardState.OCCLUDED;
+                    if (zBooleanValue) {
+                        keyguardState = (!zBooleanValue4 || zBooleanValue2) ? zBooleanValue3 ? KeyguardState.GLANCEABLE_HUB : zBooleanValue2 ? KeyguardState.DREAMING : KeyguardState.LOCKSCREEN : KeyguardState.OCCLUDED;
                     } else {
                         Log.i("FromPrimaryBouncerTransitionInteractor", "Going back to sleeping state to correct an attempt to show bouncer");
                         keyguardState = (KeyguardState) fromPrimaryBouncerTransitionInteractor4.keyguardInteractor.asleepKeyguardState.$$delegate_0.getValue();
                     }
-                    Object startTransitionTo$default = TransitionInteractor.startTransitionTo$default(FromPrimaryBouncerTransitionInteractor.this, keyguardState, null, null, null, continuation, 14);
-                    return startTransitionTo$default == CoroutineSingletons.COROUTINE_SUSPENDED ? startTransitionTo$default : Unit.INSTANCE;
+                    Object objStartTransitionTo$default = TransitionInteractor.startTransitionTo$default(fromPrimaryBouncerTransitionInteractor3, keyguardState, null, null, null, continuation, 14);
+                    return objStartTransitionTo$default == CoroutineSingletons.COROUTINE_SUSPENDED ? objStartTransitionTo$default : Unit.INSTANCE;
                 }
             };
             this.label = 1;
-            if (sample.collect(flowCollector, this) == coroutineSingletons) {
+            if (flowSample.collect(flowCollector, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

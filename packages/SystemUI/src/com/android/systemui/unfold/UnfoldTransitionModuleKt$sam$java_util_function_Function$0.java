@@ -3,7 +3,6 @@ package com.android.systemui.unfold;
 import java.util.function.Function;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class UnfoldTransitionModuleKt$sam$java_util_function_Function$0 implements Function {
     public final /* synthetic */ Function1 function;
@@ -14,6 +13,6 @@ public final /* synthetic */ class UnfoldTransitionModuleKt$sam$java_util_functi
 
     @Override // java.util.function.Function
     public final /* synthetic */ Object apply(Object obj) {
-        return this.function.mo779invoke(obj);
+        return this.function.mo781invoke(obj);
     }
 }

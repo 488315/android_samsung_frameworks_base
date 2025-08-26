@@ -7,7 +7,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function5;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class MultiSIMViewModelImpl$getButtonCarrierName$1$1 extends SuspendLambda implements Function5 {
     final /* synthetic */ ButtonType $type;
@@ -25,13 +24,13 @@ final class MultiSIMViewModelImpl$getButtonCarrierName$1$1 extends SuspendLambda
 
     @Override // kotlin.jvm.functions.Function5
     public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4, Object obj5) {
-        int intValue = ((Number) obj).intValue();
-        boolean booleanValue = ((Boolean) obj4).booleanValue();
+        int iIntValue = ((Number) obj).intValue();
+        boolean zBooleanValue = ((Boolean) obj4).booleanValue();
         MultiSIMViewModelImpl$getButtonCarrierName$1$1 multiSIMViewModelImpl$getButtonCarrierName$1$1 = new MultiSIMViewModelImpl$getButtonCarrierName$1$1(this.$type, (Continuation) obj5);
-        multiSIMViewModelImpl$getButtonCarrierName$1$1.I$0 = intValue;
+        multiSIMViewModelImpl$getButtonCarrierName$1$1.I$0 = iIntValue;
         multiSIMViewModelImpl$getButtonCarrierName$1$1.L$0 = (String) obj2;
         multiSIMViewModelImpl$getButtonCarrierName$1$1.L$1 = (String) obj3;
-        multiSIMViewModelImpl$getButtonCarrierName$1$1.Z$0 = booleanValue;
+        multiSIMViewModelImpl$getButtonCarrierName$1$1.Z$0 = zBooleanValue;
         return multiSIMViewModelImpl$getButtonCarrierName$1$1.invokeSuspend(Unit.INSTANCE);
     }
 

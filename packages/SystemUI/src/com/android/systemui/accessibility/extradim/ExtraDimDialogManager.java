@@ -8,7 +8,6 @@ import com.android.systemui.plugins.ActivityStarter;
 import com.android.systemui.statusbar.phone.SystemUIDialog;
 import javax.inject.Provider;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ExtraDimDialogManager {
     public SystemUIDialog dialog;
@@ -25,28 +24,28 @@ public final class ExtraDimDialogManager {
     }
 
     public final void dismissKeyguardIfNeededAndShowDialog(final Expandable expandable) {
-        this.mainHandler.post(new Runnable() { // from class: com.android.systemui.accessibility.extradim.ExtraDimDialogManager$dismissKeyguardIfNeededAndShowDialog$1
+        this.mainHandler.post(new Runnable() { // from class: com.android.systemui.accessibility.extradim.ExtraDimDialogManager.dismissKeyguardIfNeededAndShowDialog.1
             @Override // java.lang.Runnable
             public final void run() {
                 final ExtraDimDialogManager extraDimDialogManager = ExtraDimDialogManager.this;
                 ActivityStarter activityStarter = extraDimDialogManager.mActivityStarter;
                 final Expandable expandable2 = expandable;
-                activityStarter.executeRunnableDismissingKeyguard(new Runnable() { // from class: com.android.systemui.accessibility.extradim.ExtraDimDialogManager$dismissKeyguardIfNeededAndShowDialog$1.1
+                activityStarter.executeRunnableDismissingKeyguard(new Runnable() { // from class: com.android.systemui.accessibility.extradim.ExtraDimDialogManager.dismissKeyguardIfNeededAndShowDialog.1.1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        ExtraDimDialogManager extraDimDialogManager2 = ExtraDimDialogManager.this;
+                        ExtraDimDialogManager extraDimDialogManager2 = extraDimDialogManager;
                         Expandable expandable3 = expandable2;
                         SystemUIDialog systemUIDialog = extraDimDialogManager2.dialog;
                         if (systemUIDialog != null) {
                             systemUIDialog.dismiss();
                         }
-                        SystemUIDialog createDialog = ((ExtraDimDialogDelegate) extraDimDialogManager2.extraDimDialogDelegateProvider.get()).createDialog();
-                        extraDimDialogManager2.dialog = createDialog;
-                        DialogTransitionAnimator.Controller dialogTransitionController = expandable3 != null ? expandable3.dialogTransitionController(new DialogCuj(58, null, 2, null)) : null;
-                        if (dialogTransitionController != null) {
-                            extraDimDialogManager2.dialogTransitionAnimator.show(createDialog, dialogTransitionController, true);
+                        SystemUIDialog systemUIDialogCreateDialog = ((ExtraDimDialogDelegate) extraDimDialogManager2.extraDimDialogDelegateProvider.get()).createDialog();
+                        extraDimDialogManager2.dialog = systemUIDialogCreateDialog;
+                        DialogTransitionAnimator.Controller controllerDialogTransitionController = expandable3 != null ? expandable3.dialogTransitionController(new DialogCuj(58, null, 2, null)) : null;
+                        if (controllerDialogTransitionController != null) {
+                            extraDimDialogManager2.dialogTransitionAnimator.show(systemUIDialogCreateDialog, controllerDialogTransitionController, true);
                         } else {
-                            createDialog.show();
+                            systemUIDialogCreateDialog.show();
                         }
                     }
                 }, null, true, true, false);

@@ -30,9 +30,9 @@ public class PrintServicesLoader extends Loader<List<PrintServiceInfo>> {
 
     /* JADX INFO: Access modifiers changed from: private */
     public void queueNewResult() {
-        Message obtainMessage = this.mHandler.obtainMessage(0);
-        obtainMessage.obj = this.mPrintManager.getPrintServices(this.mSelectionFlags);
-        this.mHandler.sendMessage(obtainMessage);
+        Message messageObtainMessage = this.mHandler.obtainMessage(0);
+        messageObtainMessage.obj = this.mPrintManager.getPrintServices(this.mSelectionFlags);
+        this.mHandler.sendMessage(messageObtainMessage);
     }
 
     @Override // android.content.Loader

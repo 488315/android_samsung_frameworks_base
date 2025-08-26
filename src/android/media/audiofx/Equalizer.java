@@ -30,7 +30,7 @@ public class Equalizer extends AudioEffect {
         void onParameterChange(Equalizer equalizer, int i, int i2, int i3, int i4);
     }
 
-    public Equalizer(int i, int i2) throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException, RuntimeException {
+    public Equalizer(int i, int i2) throws RuntimeException {
         super(EFFECT_TYPE_EQUALIZER, EFFECT_TYPE_NULL, i, i2);
         this.mNumBands = (short) 0;
         this.mParamListener = null;
@@ -57,7 +57,7 @@ public class Equalizer extends AudioEffect {
         }
     }
 
-    public short getNumberOfBands() throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public short getNumberOfBands() throws IllegalStateException, UnsupportedOperationException, IllegalArgumentException {
         short s = this.mNumBands;
         if (s != 0) {
             return s;
@@ -69,51 +69,51 @@ public class Equalizer extends AudioEffect {
         return s2;
     }
 
-    public short[] getBandLevelRange() throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public short[] getBandLevelRange() throws IllegalStateException, UnsupportedOperationException, IllegalArgumentException {
         short[] sArr = new short[2];
         checkStatus(getParameter(1, sArr));
         return sArr;
     }
 
-    public void setBandLevel(short s, short s2) throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public void setBandLevel(short s, short s2) throws IllegalStateException, UnsupportedOperationException, IllegalArgumentException {
         checkStatus(setParameter(new int[]{2, s}, new short[]{s2}));
     }
 
-    public short getBandLevel(short s) throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public short getBandLevel(short s) throws IllegalStateException, UnsupportedOperationException, IllegalArgumentException {
         short[] sArr = new short[1];
         checkStatus(getParameter(new int[]{2, s}, sArr));
         return sArr[0];
     }
 
-    public int getCenterFreq(short s) throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public int getCenterFreq(short s) throws IllegalStateException, UnsupportedOperationException, IllegalArgumentException {
         int[] iArr = new int[1];
         checkStatus(getParameter(new int[]{3, s}, iArr));
         return iArr[0];
     }
 
-    public int[] getBandFreqRange(short s) throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public int[] getBandFreqRange(short s) throws IllegalStateException, UnsupportedOperationException, IllegalArgumentException {
         int[] iArr = new int[2];
         checkStatus(getParameter(new int[]{4, s}, iArr));
         return iArr;
     }
 
-    public short getBand(int i) throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public short getBand(int i) throws IllegalStateException, UnsupportedOperationException, IllegalArgumentException {
         short[] sArr = new short[1];
         checkStatus(getParameter(new int[]{5, i}, sArr));
         return sArr[0];
     }
 
-    public short getCurrentPreset() throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public short getCurrentPreset() throws IllegalStateException, UnsupportedOperationException, IllegalArgumentException {
         short[] sArr = new short[1];
         checkStatus(getParameter(6, sArr));
         return sArr[0];
     }
 
-    public void usePreset(short s) throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public void usePreset(short s) throws IllegalStateException, UnsupportedOperationException, IllegalArgumentException {
         checkStatus(setParameter(6, s));
     }
 
-    public short getNumberOfPresets() throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public short getNumberOfPresets() throws IllegalStateException, UnsupportedOperationException, IllegalArgumentException {
         short[] sArr = new short[1];
         checkStatus(getParameter(7, sArr));
         return sArr[0];
@@ -134,39 +134,39 @@ public class Equalizer extends AudioEffect {
         public void onParameterChange(AudioEffect audioEffect, int i, byte[] bArr, byte[] bArr2) {
             OnParameterChangeListener onParameterChangeListener;
             int i2;
+            int iByteArrayToInt;
             int i3;
-            int i4;
-            int byteArrayToInt;
+            int iByteArrayToInt2;
             synchronized (Equalizer.this.mParamListenerLock) {
                 onParameterChangeListener = Equalizer.this.mParamListener != null ? Equalizer.this.mParamListener : null;
             }
             if (onParameterChangeListener != null) {
                 if (bArr.length >= 4) {
-                    int byteArrayToInt2 = AudioEffect.byteArrayToInt(bArr, 0);
+                    int iByteArrayToInt3 = AudioEffect.byteArrayToInt(bArr, 0);
                     if (bArr.length >= 8) {
-                        i2 = byteArrayToInt2;
-                        i3 = AudioEffect.byteArrayToInt(bArr, 4);
+                        i2 = iByteArrayToInt3;
+                        iByteArrayToInt = AudioEffect.byteArrayToInt(bArr, 4);
                     } else {
-                        i2 = byteArrayToInt2;
-                        i3 = -1;
+                        i2 = iByteArrayToInt3;
+                        iByteArrayToInt = -1;
                     }
                 } else {
                     i2 = -1;
-                    i3 = -1;
+                    iByteArrayToInt = -1;
                 }
                 if (bArr2.length == 2) {
-                    byteArrayToInt = AudioEffect.byteArrayToShort(bArr2, 0);
+                    iByteArrayToInt2 = AudioEffect.byteArrayToShort(bArr2, 0);
                 } else {
                     if (bArr2.length != 4) {
-                        i4 = -1;
-                        if (i2 != -1 || i4 == -1) {
+                        i3 = -1;
+                        if (i2 != -1 || i3 == -1) {
                         }
-                        onParameterChangeListener.onParameterChange(Equalizer.this, i, i2, i3, i4);
+                        onParameterChangeListener.onParameterChange(Equalizer.this, i, i2, iByteArrayToInt, i3);
                         return;
                     }
-                    byteArrayToInt = AudioEffect.byteArrayToInt(bArr2, 0);
+                    iByteArrayToInt2 = AudioEffect.byteArrayToInt(bArr2, 0);
                 }
-                i4 = byteArrayToInt;
+                i3 = iByteArrayToInt2;
                 if (i2 != -1) {
                 }
             }
@@ -203,42 +203,42 @@ public class Equalizer extends AudioEffect {
             if (stringTokenizer.countTokens() < 5) {
                 throw new IllegalArgumentException("settings: " + str);
             }
-            String nextToken = stringTokenizer.nextToken();
-            if (!nextToken.equals(Equalizer.TAG)) {
-                throw new IllegalArgumentException("invalid settings for Equalizer: " + nextToken);
+            String strNextToken = stringTokenizer.nextToken();
+            if (!strNextToken.equals(Equalizer.TAG)) {
+                throw new IllegalArgumentException("invalid settings for Equalizer: " + strNextToken);
             }
             try {
-                String nextToken2 = stringTokenizer.nextToken();
-                if (!nextToken2.equals("curPreset")) {
-                    throw new IllegalArgumentException("invalid key name: " + nextToken2);
+                String strNextToken2 = stringTokenizer.nextToken();
+                if (!strNextToken2.equals("curPreset")) {
+                    throw new IllegalArgumentException("invalid key name: " + strNextToken2);
                 }
                 this.curPreset = Short.parseShort(stringTokenizer.nextToken());
-                String nextToken3 = stringTokenizer.nextToken();
-                if (!nextToken3.equals("numBands")) {
-                    throw new IllegalArgumentException("invalid key name: " + nextToken3);
+                String strNextToken3 = stringTokenizer.nextToken();
+                if (!strNextToken3.equals("numBands")) {
+                    throw new IllegalArgumentException("invalid key name: " + strNextToken3);
                 }
                 this.numBands = Short.parseShort(stringTokenizer.nextToken());
-                int countTokens = stringTokenizer.countTokens();
+                int iCountTokens = stringTokenizer.countTokens();
                 int i2 = this.numBands;
-                if (countTokens != i2 * 2) {
+                if (iCountTokens != i2 * 2) {
                     throw new IllegalArgumentException("settings: " + str);
                 }
                 this.bandLevels = new short[i2];
                 while (i < this.numBands) {
-                    String nextToken4 = stringTokenizer.nextToken();
+                    String strNextToken4 = stringTokenizer.nextToken();
                     StringBuilder sb = new StringBuilder();
                     sb.append("band");
                     int i3 = i + 1;
                     sb.append(i3);
                     sb.append("Level");
-                    if (!nextToken4.equals(sb.toString())) {
-                        throw new IllegalArgumentException("invalid key name: " + nextToken4);
+                    if (!strNextToken4.equals(sb.toString())) {
+                        throw new IllegalArgumentException("invalid key name: " + strNextToken4);
                     }
                     this.bandLevels[i] = Short.parseShort(stringTokenizer.nextToken());
                     i = i3;
                 }
             } catch (NumberFormatException unused) {
-                throw new IllegalArgumentException("invalid value for key: " + nextToken);
+                throw new IllegalArgumentException("invalid value for key: " + strNextToken);
             }
         }
 
@@ -258,7 +258,7 @@ public class Equalizer extends AudioEffect {
         }
     }
 
-    public Settings getProperties() throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public Settings getProperties() throws IllegalStateException, UnsupportedOperationException, IllegalArgumentException {
         byte[] bArr = new byte[(this.mNumBands * 2) + 4];
         checkStatus(getParameter(9, bArr));
         Settings settings = new Settings();
@@ -271,14 +271,14 @@ public class Equalizer extends AudioEffect {
         return settings;
     }
 
-    public void setProperties(Settings settings) throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public void setProperties(Settings settings) throws IllegalStateException, UnsupportedOperationException, IllegalArgumentException {
         if (settings.numBands != settings.bandLevels.length || settings.numBands != this.mNumBands) {
             throw new IllegalArgumentException("settings invalid band count: " + ((int) settings.numBands));
         }
-        byte[] concatArrays = concatArrays(shortToByteArray(settings.curPreset), shortToByteArray(this.mNumBands));
+        byte[] bArrConcatArrays = concatArrays(shortToByteArray(settings.curPreset), shortToByteArray(this.mNumBands));
         for (int i = 0; i < this.mNumBands; i++) {
-            concatArrays = concatArrays(concatArrays, shortToByteArray(settings.bandLevels[i]));
+            bArrConcatArrays = concatArrays(bArrConcatArrays, shortToByteArray(settings.bandLevels[i]));
         }
-        checkStatus(setParameter(9, concatArrays));
+        checkStatus(setParameter(9, bArrConcatArrays));
     }
 }

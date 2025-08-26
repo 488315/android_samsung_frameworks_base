@@ -17,6 +17,7 @@ public class CoreMetaData {
     public static final String METADATA_DEX_KILL_PROCESS_TIMEOUT = "com.samsung.android.dex.kill_process_timeout";
     public static final String METADATA_DEX_TRANSIENT_BAR_DELAY = "com.samsung.android.dex.transient_bar_delay";
     public static final String METADATA_KEEP_SCREEN_WHEN_FOLDING = "com.samsung.android.foldable.keep_screen_when_folding";
+    public static final String METADATA_KEEP_SCREEN_WHEN_UNFOLDING = "com.samsung.android.foldable.keep_screen_when_unfolding";
     public static final String MULTIDISPLAY_FIXED_APP_CONTEXT_DISPLAY = "com.samsung.android.multidisplay.fixed_app_context_display";
     public static final String MULTIWINDOW_ALIAS_TARGET_ACTIVITY = "com.samsung.android.multiwindow.activity.alias.targetactivity";
     public static final String MULTIWINDOW_EMBED_ACTIVITY_NOT_SUPPORTED = "com.samsung.android.multiwindow.embed_activity_not_supported";

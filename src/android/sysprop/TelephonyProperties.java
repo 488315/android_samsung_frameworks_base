@@ -182,9 +182,7 @@ public final class TelephonyProperties {
         return tryParseList(new Function() { // from class: android.sysprop.TelephonyProperties$$ExternalSyntheticLambda5
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                String tryParseString;
-                tryParseString = TelephonyProperties.tryParseString((String) obj);
-                return tryParseString;
+                return TelephonyProperties.tryParseString((String) obj);
             }
         }, SystemProperties.get(com.android.internal.telephony.TelephonyProperties.PROPERTY_BASEBAND_VERSION));
     }
@@ -201,9 +199,7 @@ public final class TelephonyProperties {
         return tryParseList(new Function() { // from class: android.sysprop.TelephonyProperties$$ExternalSyntheticLambda6
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                String tryParseString;
-                tryParseString = TelephonyProperties.tryParseString((String) obj);
-                return tryParseString;
+                return TelephonyProperties.tryParseString((String) obj);
             }
         }, SystemProperties.get(com.android.internal.telephony.TelephonyProperties.PROPERTY_OPERATOR_ALPHA));
     }
@@ -216,9 +212,7 @@ public final class TelephonyProperties {
         return tryParseList(new Function() { // from class: android.sysprop.TelephonyProperties$$ExternalSyntheticLambda1
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                String tryParseString;
-                tryParseString = TelephonyProperties.tryParseString((String) obj);
-                return tryParseString;
+                return TelephonyProperties.tryParseString((String) obj);
             }
         }, SystemProperties.get(com.android.internal.telephony.TelephonyProperties.PROPERTY_OPERATOR_NUMERIC));
     }
@@ -235,9 +229,7 @@ public final class TelephonyProperties {
         return tryParseList(new Function() { // from class: android.sysprop.TelephonyProperties$$ExternalSyntheticLambda7
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                Boolean tryParseBoolean;
-                tryParseBoolean = TelephonyProperties.tryParseBoolean((String) obj);
-                return tryParseBoolean;
+                return TelephonyProperties.tryParseBoolean((String) obj);
             }
         }, SystemProperties.get(com.android.internal.telephony.TelephonyProperties.PROPERTY_OPERATOR_ISROAMING));
     }
@@ -250,9 +242,7 @@ public final class TelephonyProperties {
         return tryParseList(new Function() { // from class: android.sysprop.TelephonyProperties$$ExternalSyntheticLambda12
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                String tryParseString;
-                tryParseString = TelephonyProperties.tryParseString((String) obj);
-                return tryParseString;
+                return TelephonyProperties.tryParseString((String) obj);
             }
         }, SystemProperties.get(com.android.internal.telephony.TelephonyProperties.PROPERTY_OPERATOR_ISO_COUNTRY));
     }
@@ -273,9 +263,7 @@ public final class TelephonyProperties {
         return tryParseList(new Function() { // from class: android.sysprop.TelephonyProperties$$ExternalSyntheticLambda14
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                Integer tryParseInteger;
-                tryParseInteger = TelephonyProperties.tryParseInteger((String) obj);
-                return tryParseInteger;
+                return TelephonyProperties.tryParseInteger((String) obj);
             }
         }, SystemProperties.get(com.android.internal.telephony.TelephonyProperties.CURRENT_ACTIVE_PHONE));
     }
@@ -288,9 +276,7 @@ public final class TelephonyProperties {
         return tryParseList(new Function() { // from class: android.sysprop.TelephonyProperties$$ExternalSyntheticLambda4
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                String tryParseString;
-                tryParseString = TelephonyProperties.tryParseString((String) obj);
-                return tryParseString;
+                return TelephonyProperties.tryParseString((String) obj);
             }
         }, SystemProperties.get(com.android.internal.telephony.TelephonyProperties.PROPERTY_SIM_STATE));
     }
@@ -303,9 +289,7 @@ public final class TelephonyProperties {
         return tryParseList(new Function() { // from class: android.sysprop.TelephonyProperties$$ExternalSyntheticLambda2
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                String tryParseString;
-                tryParseString = TelephonyProperties.tryParseString((String) obj);
-                return tryParseString;
+                return TelephonyProperties.tryParseString((String) obj);
             }
         }, SystemProperties.get(com.android.internal.telephony.TelephonyProperties.PROPERTY_ICC_OPERATOR_NUMERIC));
     }
@@ -318,9 +302,7 @@ public final class TelephonyProperties {
         return tryParseList(new Function() { // from class: android.sysprop.TelephonyProperties$$ExternalSyntheticLambda8
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                String tryParseString;
-                tryParseString = TelephonyProperties.tryParseString((String) obj);
-                return tryParseString;
+                return TelephonyProperties.tryParseString((String) obj);
             }
         }, SystemProperties.get(com.android.internal.telephony.TelephonyProperties.PROPERTY_ICC_OPERATOR_ALPHA));
     }
@@ -333,9 +315,7 @@ public final class TelephonyProperties {
         return tryParseList(new Function() { // from class: android.sysprop.TelephonyProperties$$ExternalSyntheticLambda11
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                String tryParseString;
-                tryParseString = TelephonyProperties.tryParseString((String) obj);
-                return tryParseString;
+                return TelephonyProperties.tryParseString((String) obj);
             }
         }, SystemProperties.get(com.android.internal.telephony.TelephonyProperties.PROPERTY_ICC_OPERATOR_ISO_COUNTRY));
     }
@@ -348,9 +328,7 @@ public final class TelephonyProperties {
         return tryParseList(new Function() { // from class: android.sysprop.TelephonyProperties$$ExternalSyntheticLambda0
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                String tryParseString;
-                tryParseString = TelephonyProperties.tryParseString((String) obj);
-                return tryParseString;
+                return TelephonyProperties.tryParseString((String) obj);
             }
         }, SystemProperties.get(com.android.internal.telephony.TelephonyProperties.PROPERTY_DATA_NETWORK_TYPE));
     }
@@ -383,9 +361,7 @@ public final class TelephonyProperties {
         return tryParseList(new Function() { // from class: android.sysprop.TelephonyProperties$$ExternalSyntheticLambda3
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                String tryParseString;
-                tryParseString = TelephonyProperties.tryParseString((String) obj);
-                return tryParseString;
+                return TelephonyProperties.tryParseString((String) obj);
             }
         }, SystemProperties.get(com.android.internal.telephony.TelephonyProperties.PROPERTY_OTASP_NUM_SCHEMA));
     }
@@ -422,9 +398,7 @@ public final class TelephonyProperties {
         return tryParseList(new Function() { // from class: android.sysprop.TelephonyProperties$$ExternalSyntheticLambda9
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                Boolean tryParseBoolean;
-                tryParseBoolean = TelephonyProperties.tryParseBoolean((String) obj);
-                return tryParseBoolean;
+                return TelephonyProperties.tryParseBoolean((String) obj);
             }
         }, SystemProperties.get(com.android.internal.telephony.TelephonyProperties.PROPERTY_SMS_RECEIVE));
     }
@@ -433,9 +407,7 @@ public final class TelephonyProperties {
         return tryParseList(new Function() { // from class: android.sysprop.TelephonyProperties$$ExternalSyntheticLambda10
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                Boolean tryParseBoolean;
-                tryParseBoolean = TelephonyProperties.tryParseBoolean((String) obj);
-                return tryParseBoolean;
+                return TelephonyProperties.tryParseBoolean((String) obj);
             }
         }, SystemProperties.get(com.android.internal.telephony.TelephonyProperties.PROPERTY_SMS_SEND));
     }
@@ -472,9 +444,7 @@ public final class TelephonyProperties {
         return tryParseList(new Function() { // from class: android.sysprop.TelephonyProperties$$ExternalSyntheticLambda13
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                Integer tryParseInteger;
-                tryParseInteger = TelephonyProperties.tryParseInteger((String) obj);
-                return tryParseInteger;
+                return TelephonyProperties.tryParseInteger((String) obj);
             }
         }, SystemProperties.get("ro.telephony.default_network"));
     }

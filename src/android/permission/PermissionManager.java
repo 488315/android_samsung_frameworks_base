@@ -97,16 +97,16 @@ public final class PermissionManager {
     }
 
     static {
-        Set<String> set;
+        Set<String> setOf;
         int[] iArr = {17039411, 17039410, 17039412, 17039413, 17039414, 17039415};
         EXEMPTED_ROLES = iArr;
         INDICATOR_EXEMPTED_PACKAGES = new String[iArr.length];
         if (Flags.deviceAwarePermissionsEnabled()) {
-            set = Set.of(Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO);
+            setOf = Set.of(Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO);
         } else {
-            set = Collections.EMPTY_SET;
+            setOf = Collections.EMPTY_SET;
         }
-        DEVICE_AWARE_PERMISSIONS = set;
+        DEVICE_AWARE_PERMISSIONS = setOf;
         sShouldWarnMissingActivityManager = true;
         CACHE_KEY_PACKAGE_INFO_NOTIFY = PropertyInvalidatedCache.createSystemCacheKey("package_info");
         String packageInfoCacheKey = getPackageInfoCacheKey();
@@ -171,11 +171,11 @@ public final class PermissionManager {
 
     public List<PermissionInfo> queryPermissionsByGroup(String str, int i) {
         try {
-            ParceledListSlice queryPermissionsByGroup = this.mPermissionManager.queryPermissionsByGroup(str, i);
-            if (queryPermissionsByGroup == null) {
+            ParceledListSlice parceledListSliceQueryPermissionsByGroup = this.mPermissionManager.queryPermissionsByGroup(str, i);
+            if (parceledListSliceQueryPermissionsByGroup == null) {
                 return null;
             }
-            return queryPermissionsByGroup.getList();
+            return parceledListSliceQueryPermissionsByGroup.getList();
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -414,9 +414,9 @@ public final class PermissionManager {
             return list;
         }
         try {
-            List<SplitPermissionInfo> splitPermissionInfoListToNonParcelableList = splitPermissionInfoListToNonParcelableList(ActivityThread.getPermissionManager().getSplitPermissions());
-            this.mSplitPermissionInfos = splitPermissionInfoListToNonParcelableList;
-            return splitPermissionInfoListToNonParcelableList;
+            List<SplitPermissionInfo> listSplitPermissionInfoListToNonParcelableList = splitPermissionInfoListToNonParcelableList(ActivityThread.getPermissionManager().getSplitPermissions());
+            this.mSplitPermissionInfos = listSplitPermissionInfoListToNonParcelableList;
+            return listSplitPermissionInfoListToNonParcelableList;
         } catch (RemoteException e) {
             Slog.e(LOG_TAG, "Error getting split permissions", e);
             return Collections.EMPTY_LIST;
@@ -469,12 +469,12 @@ public final class PermissionManager {
     }
 
     public static void updateIndicatorExemptedPackages(Context context) {
-        long elapsedRealtime = SystemClock.elapsedRealtime();
+        long jElapsedRealtime = SystemClock.elapsedRealtime();
         long j = sLastIndicatorUpdateTime;
-        if (j != -1 && elapsedRealtime - j <= EXEMPTED_INDICATOR_ROLE_UPDATE_FREQUENCY_MS) {
+        if (j != -1 && jElapsedRealtime - j <= EXEMPTED_INDICATOR_ROLE_UPDATE_FREQUENCY_MS) {
             return;
         }
-        sLastIndicatorUpdateTime = elapsedRealtime;
+        sLastIndicatorUpdateTime = jElapsedRealtime;
         int i = 0;
         while (true) {
             int[] iArr = EXEMPTED_ROLES;
@@ -595,9 +595,9 @@ public final class PermissionManager {
             if (Flags.serverSideAttributionRegistration()) {
                 return attributionSource.withToken(this.mPermissionManager.registerAttributionSource(attributionSource.asState()));
             }
-            AttributionSource withToken = attributionSource.withToken(new Binder());
-            this.mPermissionManager.registerAttributionSource(withToken.asState());
-            return withToken;
+            AttributionSource attributionSourceWithToken = attributionSource.withToken(new Binder());
+            this.mPermissionManager.registerAttributionSource(attributionSourceWithToken.asState());
+            return attributionSourceWithToken;
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
             return attributionSource;

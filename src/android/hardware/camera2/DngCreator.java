@@ -57,26 +57,26 @@ public final class DngCreator implements AutoCloseable {
     private native synchronized void nativeWriteInputStream(OutputStream outputStream, InputStream inputStream, int i, int i2, long j) throws IOException;
 
     public DngCreator(CameraCharacteristics cameraCharacteristics, CaptureResult captureResult) {
-        long uptimeMillis;
+        long jUptimeMillis;
         if (cameraCharacteristics == null || captureResult == null) {
             throw new IllegalArgumentException("Null argument to DngCreator constructor");
         }
-        long currentTimeMillis = System.currentTimeMillis();
-        int intValue = ((Integer) cameraCharacteristics.get(CameraCharacteristics.SENSOR_INFO_TIMESTAMP_SOURCE)).intValue();
-        if (intValue == 1) {
-            uptimeMillis = SystemClock.elapsedRealtime();
-        } else if (intValue == 0) {
-            uptimeMillis = SystemClock.uptimeMillis();
+        long jCurrentTimeMillis = System.currentTimeMillis();
+        int iIntValue = ((Integer) cameraCharacteristics.get(CameraCharacteristics.SENSOR_INFO_TIMESTAMP_SOURCE)).intValue();
+        if (iIntValue == 1) {
+            jUptimeMillis = SystemClock.elapsedRealtime();
+        } else if (iIntValue == 0) {
+            jUptimeMillis = SystemClock.uptimeMillis();
         } else {
-            Log.w(TAG, "Sensor timestamp source is unexpected: " + intValue);
-            uptimeMillis = SystemClock.uptimeMillis();
+            Log.w(TAG, "Sensor timestamp source is unexpected: " + iIntValue);
+            jUptimeMillis = SystemClock.uptimeMillis();
         }
-        long j = currentTimeMillis - uptimeMillis;
+        long j = jCurrentTimeMillis - jUptimeMillis;
         Long l = (Long) captureResult.get(CaptureResult.SENSOR_TIMESTAMP);
-        currentTimeMillis = l != null ? (l.longValue() / 1000000) + j : currentTimeMillis;
+        jCurrentTimeMillis = l != null ? (l.longValue() / 1000000) + j : jCurrentTimeMillis;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(TIFF_DATETIME_FORMAT, Locale.US);
         simpleDateFormat.setTimeZone(TimeZone.getDefault());
-        nativeInit(cameraCharacteristics.getNativeCopy(), captureResult.getNativeCopy(), simpleDateFormat.format(Long.valueOf(currentTimeMillis)));
+        nativeInit(cameraCharacteristics.getNativeCopy(), captureResult.getNativeCopy(), simpleDateFormat.format(Long.valueOf(jCurrentTimeMillis)));
     }
 
     public DngCreator setOrientation(int i) {
@@ -131,9 +131,9 @@ public final class DngCreator implements AutoCloseable {
         int[] exifLatLong2 = toExifLatLong(longitude);
         String str = latitude >= SContextConstants.ENVIRONMENT_VALUE_UNKNOWN ? "N" : "S";
         String str2 = longitude >= SContextConstants.ENVIRONMENT_VALUE_UNKNOWN ? GPS_LONG_REF_EAST : "W";
-        String format = sExifGPSDateStamp.format(Long.valueOf(time));
+        String str3 = sExifGPSDateStamp.format(Long.valueOf(time));
         this.mGPSTimeStampCalendar.setTimeInMillis(time);
-        nativeSetGpsTags(exifLatLong, str, exifLatLong2, str2, format, new int[]{this.mGPSTimeStampCalendar.get(11), 1, this.mGPSTimeStampCalendar.get(12), 1, this.mGPSTimeStampCalendar.get(13), 1});
+        nativeSetGpsTags(exifLatLong, str, exifLatLong2, str2, str3, new int[]{this.mGPSTimeStampCalendar.get(11), 1, this.mGPSTimeStampCalendar.get(12), 1, this.mGPSTimeStampCalendar.get(13), 1});
         return this;
     }
 
@@ -225,10 +225,10 @@ public final class DngCreator implements AutoCloseable {
         if (i <= 0 || i2 <= 0) {
             throw new IllegalArgumentException("Image with invalid width, height: (" + i + "," + i2 + ") passed to write");
         }
-        long capacity = byteBuffer.capacity();
+        long jCapacity = byteBuffer.capacity();
         long j2 = (i4 * i2) + j;
-        if (capacity < j2) {
-            throw new IllegalArgumentException("Image size " + capacity + " is too small (must be larger than " + j2 + NavigationBarInflaterView.KEY_CODE_END);
+        if (jCapacity < j2) {
+            throw new IllegalArgumentException("Image size " + jCapacity + " is too small (must be larger than " + j2 + NavigationBarInflaterView.KEY_CODE_END);
         }
         int i5 = i3 * i;
         if (i5 > i4) {
@@ -260,7 +260,7 @@ public final class DngCreator implements AutoCloseable {
         int width = image.getWidth();
         int height = image.getHeight();
         int i = width * 3;
-        ByteBuffer allocateDirect = ByteBuffer.allocateDirect(i * height);
+        ByteBuffer byteBufferAllocateDirect = ByteBuffer.allocateDirect(i * height);
         Image.Plane plane = image.getPlanes()[0];
         Image.Plane plane2 = image.getPlanes()[1];
         Image.Plane plane3 = image.getPlanes()[2];
@@ -302,22 +302,22 @@ public final class DngCreator implements AutoCloseable {
                 i6++;
                 width = width;
             }
-            allocateDirect.put(bArr5);
+            byteBufferAllocateDirect.put(bArr5);
             i3++;
             height = i5;
         }
         buffer.rewind();
         buffer2.rewind();
         buffer3.rewind();
-        allocateDirect.rewind();
-        return allocateDirect;
+        byteBufferAllocateDirect.rewind();
+        return byteBufferAllocateDirect;
     }
 
     private static ByteBuffer convertToRGB(Bitmap bitmap) {
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();
         int i = width * 3;
-        ByteBuffer allocateDirect = ByteBuffer.allocateDirect(i * height);
+        ByteBuffer byteBufferAllocateDirect = ByteBuffer.allocateDirect(i * height);
         int[] iArr = new int[width];
         byte[] bArr = new byte[i];
         int i2 = 0;
@@ -327,18 +327,18 @@ public final class DngCreator implements AutoCloseable {
             for (int i3 = 0; i3 < width; i3++) {
                 colorToRgb(iArr[i3], i3 * 3, bArr);
             }
-            allocateDirect.put(bArr);
+            byteBufferAllocateDirect.put(bArr);
             i2++;
             bitmap = bitmap2;
         }
-        allocateDirect.rewind();
-        return allocateDirect;
+        byteBufferAllocateDirect.rewind();
+        return byteBufferAllocateDirect;
     }
 
     private static int[] toExifLatLong(double d) {
-        double abs = Math.abs(d);
-        int i = (int) abs;
-        double d2 = (abs - i) * 60.0d;
+        double dAbs = Math.abs(d);
+        int i = (int) dAbs;
+        double d2 = (dAbs - i) * 60.0d;
         int i2 = (int) d2;
         return new int[]{i, 1, i2, 1, (int) ((d2 - i2) * 6000.0d), 100};
     }

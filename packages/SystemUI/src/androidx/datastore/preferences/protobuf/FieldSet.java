@@ -2,6 +2,7 @@ package androidx.datastore.preferences.protobuf;
 
 import androidx.datastore.preferences.protobuf.GeneratedMessageLite;
 import androidx.datastore.preferences.protobuf.LazyField;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -9,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class FieldSet {
     public static final FieldSet DEFAULT_INSTANCE = new FieldSet(true);
@@ -17,7 +17,6 @@ public final class FieldSet {
     public boolean hasLazyField;
     public boolean isImmutable;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.datastore.preferences.protobuf.FieldSet$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$com$google$protobuf$WireFormat$FieldType;
@@ -144,16 +143,16 @@ public final class FieldSet {
     }
 
     public static int computeElementSize(WireFormat$FieldType wireFormat$FieldType, int i, Object obj) {
-        int computeTagSize = CodedOutputStream.computeTagSize(i);
+        int iComputeTagSize = CodedOutputStream.computeTagSize(i);
         if (wireFormat$FieldType == WireFormat$FieldType.GROUP) {
-            computeTagSize *= 2;
+            iComputeTagSize *= 2;
         }
-        return computeElementSizeNoTag(wireFormat$FieldType, obj) + computeTagSize;
+        return computeElementSizeNoTag(wireFormat$FieldType, obj) + iComputeTagSize;
     }
 
     public static int computeElementSizeNoTag(WireFormat$FieldType wireFormat$FieldType, Object obj) {
         int serializedSize;
-        int computeUInt32SizeNoTag;
+        int iComputeUInt32SizeNoTag;
         switch (AnonymousClass1.$SwitchMap$com$google$protobuf$WireFormat$FieldType[wireFormat$FieldType.ordinal()]) {
             case 1:
                 ((Double) obj).getClass();
@@ -188,7 +187,7 @@ public final class FieldSet {
                 if (!(obj instanceof LazyField)) {
                     Logger logger7 = CodedOutputStream.logger;
                     serializedSize = ((GeneratedMessageLite) ((MessageLite) obj)).getSerializedSize(null);
-                    computeUInt32SizeNoTag = CodedOutputStream.computeUInt32SizeNoTag(serializedSize);
+                    iComputeUInt32SizeNoTag = CodedOutputStream.computeUInt32SizeNoTag(serializedSize);
                     break;
                 } else {
                     return CodedOutputStream.computeLazyFieldSizeNoTag((LazyField) obj);
@@ -199,7 +198,7 @@ public final class FieldSet {
                 if (!(obj instanceof ByteString)) {
                     Logger logger8 = CodedOutputStream.logger;
                     serializedSize = ((byte[]) obj).length;
-                    computeUInt32SizeNoTag = CodedOutputStream.computeUInt32SizeNoTag(serializedSize);
+                    iComputeUInt32SizeNoTag = CodedOutputStream.computeUInt32SizeNoTag(serializedSize);
                     break;
                 } else {
                     return CodedOutputStream.computeBytesSizeNoTag((ByteString) obj);
@@ -223,7 +222,7 @@ public final class FieldSet {
             default:
                 throw new RuntimeException("There is no way to get here, but the compiler thinks otherwise.");
         }
-        return computeUInt32SizeNoTag + serializedSize;
+        return iComputeUInt32SizeNoTag + serializedSize;
     }
 
     public static int computeFieldSize(GeneratedMessageLite.ExtensionDescriptor extensionDescriptor, Object obj) {
@@ -236,22 +235,22 @@ public final class FieldSet {
         int size = list.size();
         int i2 = 0;
         if (!extensionDescriptor.isPacked) {
-            int i3 = 0;
+            int iComputeElementSize = 0;
             while (i2 < size) {
-                i3 += computeElementSize(wireFormat$FieldType, i, list.get(i2));
+                iComputeElementSize += computeElementSize(wireFormat$FieldType, i, list.get(i2));
                 i2++;
             }
-            return i3;
+            return iComputeElementSize;
         }
         if (list.isEmpty()) {
             return 0;
         }
-        int i4 = 0;
+        int iComputeElementSizeNoTag = 0;
         while (i2 < size) {
-            i4 += computeElementSizeNoTag(wireFormat$FieldType, list.get(i2));
+            iComputeElementSizeNoTag += computeElementSizeNoTag(wireFormat$FieldType, list.get(i2));
             i2++;
         }
-        return CodedOutputStream.computeUInt32SizeNoTag(i4) + CodedOutputStream.computeTagSize(i) + i4;
+        return CodedOutputStream.computeUInt32SizeNoTag(iComputeElementSizeNoTag) + CodedOutputStream.computeTagSize(i) + iComputeElementSizeNoTag;
     }
 
     public static int getMessageSetSerializedSize(Map.Entry entry) {
@@ -265,106 +264,59 @@ public final class FieldSet {
             return CodedOutputStream.computeLazyFieldSizeNoTag((LazyField) value) + CodedOutputStream.computeTagSize(3) + CodedOutputStream.computeUInt32SizeNoTag(i) + CodedOutputStream.computeTagSize(2) + (CodedOutputStream.computeTagSize(1) * 2);
         }
         int i2 = ((GeneratedMessageLite.ExtensionDescriptor) entry.getKey()).number;
-        int computeUInt32SizeNoTag = CodedOutputStream.computeUInt32SizeNoTag(i2) + CodedOutputStream.computeTagSize(2) + (CodedOutputStream.computeTagSize(1) * 2);
-        int computeTagSize = CodedOutputStream.computeTagSize(3);
+        int iComputeUInt32SizeNoTag = CodedOutputStream.computeUInt32SizeNoTag(i2) + CodedOutputStream.computeTagSize(2) + (CodedOutputStream.computeTagSize(1) * 2);
+        int iComputeTagSize = CodedOutputStream.computeTagSize(3);
         int serializedSize = ((GeneratedMessageLite) ((MessageLite) value)).getSerializedSize(null);
-        return CodedOutputStream.computeUInt32SizeNoTag(serializedSize) + serializedSize + computeTagSize + computeUInt32SizeNoTag;
+        return CodedOutputStream.computeUInt32SizeNoTag(serializedSize) + serializedSize + iComputeTagSize + iComputeUInt32SizeNoTag;
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Code restructure failed: missing block: B:12:0x0020, code lost:
-    
-        if ((r4 instanceof androidx.datastore.preferences.protobuf.LazyField) == false) goto L4;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:14:0x0025, code lost:
-    
-        if ((r4 instanceof java.lang.Integer) == false) goto L4;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:18:0x002e, code lost:
-    
-        if ((r4 instanceof byte[]) == false) goto L4;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:4:0x0018  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void verifyType(androidx.datastore.preferences.protobuf.GeneratedMessageLite.ExtensionDescriptor r3, java.lang.Object r4) {
-        /*
-            androidx.datastore.preferences.protobuf.WireFormat$FieldType r0 = r3.type
-            java.nio.charset.Charset r1 = androidx.datastore.preferences.protobuf.Internal.UTF_8
-            r4.getClass()
-            int[] r1 = androidx.datastore.preferences.protobuf.FieldSet.AnonymousClass1.$SwitchMap$com$google$protobuf$WireFormat$JavaType
-            androidx.datastore.preferences.protobuf.WireFormat$JavaType r0 = r0.getJavaType()
-            int r0 = r0.ordinal()
-            r0 = r1[r0]
-            r1 = 1
-            r2 = 0
-            switch(r0) {
-                case 1: goto L40;
-                case 2: goto L3d;
-                case 3: goto L3a;
-                case 4: goto L37;
-                case 5: goto L34;
-                case 6: goto L31;
-                case 7: goto L28;
-                case 8: goto L23;
-                case 9: goto L1a;
-                default: goto L18;
-            }
-        L18:
-            r1 = r2
-            goto L42
-        L1a:
-            boolean r0 = r4 instanceof androidx.datastore.preferences.protobuf.MessageLite
-            if (r0 != 0) goto L42
-            boolean r0 = r4 instanceof androidx.datastore.preferences.protobuf.LazyField
-            if (r0 == 0) goto L18
-            goto L42
-        L23:
-            boolean r0 = r4 instanceof java.lang.Integer
-            if (r0 != 0) goto L42
-            goto L18
-        L28:
-            boolean r0 = r4 instanceof androidx.datastore.preferences.protobuf.ByteString
-            if (r0 != 0) goto L42
-            boolean r0 = r4 instanceof byte[]
-            if (r0 == 0) goto L18
-            goto L42
-        L31:
-            boolean r1 = r4 instanceof java.lang.String
-            goto L42
-        L34:
-            boolean r1 = r4 instanceof java.lang.Boolean
-            goto L42
-        L37:
-            boolean r1 = r4 instanceof java.lang.Double
-            goto L42
-        L3a:
-            boolean r1 = r4 instanceof java.lang.Float
-            goto L42
-        L3d:
-            boolean r1 = r4 instanceof java.lang.Long
-            goto L42
-        L40:
-            boolean r1 = r4 instanceof java.lang.Integer
-        L42:
-            if (r1 == 0) goto L45
-            return
-        L45:
-            java.lang.IllegalArgumentException r0 = new java.lang.IllegalArgumentException
-            int r1 = r3.number
-            java.lang.Integer r1 = java.lang.Integer.valueOf(r1)
-            androidx.datastore.preferences.protobuf.WireFormat$FieldType r3 = r3.type
-            androidx.datastore.preferences.protobuf.WireFormat$JavaType r3 = r3.getJavaType()
-            java.lang.Class r4 = r4.getClass()
-            java.lang.String r4 = r4.getName()
-            java.lang.Object[] r3 = new java.lang.Object[]{r1, r3, r4}
-            java.lang.String r4 = "Wrong object type used with protocol message reflection.\nField number: %d, field java type: %s, value type: %s\n"
-            java.lang.String r3 = java.lang.String.format(r4, r3)
-            r0.<init>(r3)
-            throw r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.datastore.preferences.protobuf.FieldSet.verifyType(androidx.datastore.preferences.protobuf.GeneratedMessageLite$ExtensionDescriptor, java.lang.Object):void");
+    public static void verifyType(GeneratedMessageLite.ExtensionDescriptor extensionDescriptor, Object obj) {
+        WireFormat$FieldType wireFormat$FieldType = extensionDescriptor.type;
+        Charset charset = Internal.UTF_8;
+        obj.getClass();
+        boolean z = true;
+        switch (AnonymousClass1.$SwitchMap$com$google$protobuf$WireFormat$JavaType[wireFormat$FieldType.getJavaType().ordinal()]) {
+            case 1:
+                z = obj instanceof Integer;
+                break;
+            case 2:
+                z = obj instanceof Long;
+                break;
+            case 3:
+                z = obj instanceof Float;
+                break;
+            case 4:
+                z = obj instanceof Double;
+                break;
+            case 5:
+                z = obj instanceof Boolean;
+                break;
+            case 6:
+                z = obj instanceof String;
+                break;
+            case 7:
+                if (!(obj instanceof ByteString) && !(obj instanceof byte[])) {
+                    z = false;
+                    break;
+                }
+                break;
+            case 8:
+                if (!(obj instanceof Integer)) {
+                }
+                break;
+            case 9:
+                if (!(obj instanceof MessageLite) && !(obj instanceof LazyField)) {
+                }
+                break;
+        }
+        if (!z) {
+            throw new IllegalArgumentException(String.format("Wrong object type used with protocol message reflection.\nField number: %d, field java type: %s, value type: %s\n", Integer.valueOf(extensionDescriptor.number), extensionDescriptor.type.getJavaType(), obj.getClass().getName()));
+        }
     }
 
     public static void writeElement(CodedOutputStream codedOutputStream, WireFormat$FieldType wireFormat$FieldType, int i, Object obj) {
@@ -432,12 +384,12 @@ public final class FieldSet {
                 codedOutputStream.writeFixed64NoTag(((Long) obj).longValue());
                 break;
             case 16:
-                int intValue = ((Integer) obj).intValue();
-                codedOutputStream.writeUInt32NoTag((intValue >> 31) ^ (intValue << 1));
+                int iIntValue = ((Integer) obj).intValue();
+                codedOutputStream.writeUInt32NoTag((iIntValue >> 31) ^ (iIntValue << 1));
                 break;
             case 17:
-                long longValue = ((Long) obj).longValue();
-                codedOutputStream.writeUInt64NoTag((longValue >> 63) ^ (longValue << 1));
+                long jLongValue = ((Long) obj).longValue();
+                codedOutputStream.writeUInt64NoTag((jLongValue >> 63) ^ (jLongValue << 1));
                 break;
             case 18:
                 codedOutputStream.writeInt32NoTag(((Integer) obj).intValue());
@@ -627,7 +579,7 @@ public final class FieldSet {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public final FieldSet m897clone() {
+    public final FieldSet m899clone() {
         FieldSet fieldSet = new FieldSet();
         SmallSortedMap smallSortedMap = this.fields;
         int size = smallSortedMap.entryList.size();
@@ -673,7 +625,7 @@ public final class FieldSet {
     }
 
     public static boolean isInitialized(Map.Entry entry) {
-        boolean z;
+        boolean zIsInitialized;
         GeneratedMessageLite.ExtensionDescriptor extensionDescriptor = (GeneratedMessageLite.ExtensionDescriptor) entry.getKey();
         if (extensionDescriptor.type.getJavaType() == WireFormat$JavaType.MESSAGE) {
             if (extensionDescriptor.isRepeated) {
@@ -682,14 +634,14 @@ public final class FieldSet {
                 for (int i = 0; i < size; i++) {
                     Object obj = list.get(i);
                     if (obj instanceof MessageLiteOrBuilder) {
-                        z = ((MessageLiteOrBuilder) obj).isInitialized();
+                        zIsInitialized = ((MessageLiteOrBuilder) obj).isInitialized();
                     } else {
                         if (!(obj instanceof LazyField)) {
                             throw new IllegalArgumentException("Wrong object type used with protocol message reflection.");
                         }
-                        z = true;
+                        zIsInitialized = true;
                     }
-                    if (!z) {
+                    if (!zIsInitialized) {
                         return false;
                     }
                 }

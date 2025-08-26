@@ -67,9 +67,9 @@ public interface IAttentionService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IAttentionService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IAttentionService)) {
-                return (IAttentionService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IAttentionService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IAttentionService)) {
+                return (IAttentionService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -105,17 +105,17 @@ public interface IAttentionService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IAttentionCallback asInterface = IAttentionCallback.Stub.asInterface(parcel.readStrongBinder());
+                IAttentionCallback iAttentionCallbackAsInterface = IAttentionCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                checkAttention(asInterface);
+                checkAttention(iAttentionCallbackAsInterface);
             } else if (i == 2) {
-                IAttentionCallback asInterface2 = IAttentionCallback.Stub.asInterface(parcel.readStrongBinder());
+                IAttentionCallback iAttentionCallbackAsInterface2 = IAttentionCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                cancelAttentionCheck(asInterface2);
+                cancelAttentionCheck(iAttentionCallbackAsInterface2);
             } else if (i == 3) {
-                IProximityUpdateCallback asInterface3 = IProximityUpdateCallback.Stub.asInterface(parcel.readStrongBinder());
+                IProximityUpdateCallback iProximityUpdateCallbackAsInterface = IProximityUpdateCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                onStartProximityUpdates(asInterface3);
+                onStartProximityUpdates(iProximityUpdateCallbackAsInterface);
             } else if (i == 4) {
                 onStopProximityUpdates();
             } else {
@@ -142,48 +142,48 @@ public interface IAttentionService extends IInterface {
 
             @Override // android.service.attention.IAttentionService
             public void checkAttention(IAttentionCallback iAttentionCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IAttentionService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAttentionCallback);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IAttentionService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAttentionCallback);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.attention.IAttentionService
             public void cancelAttentionCheck(IAttentionCallback iAttentionCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IAttentionService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAttentionCallback);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IAttentionService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAttentionCallback);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.attention.IAttentionService
             public void onStartProximityUpdates(IProximityUpdateCallback iProximityUpdateCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IAttentionService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iProximityUpdateCallback);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IAttentionService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iProximityUpdateCallback);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.attention.IAttentionService
             public void onStopProximityUpdates() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IAttentionService.DESCRIPTOR);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IAttentionService.DESCRIPTOR);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

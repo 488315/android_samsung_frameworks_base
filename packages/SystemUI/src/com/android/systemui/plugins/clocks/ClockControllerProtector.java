@@ -5,7 +5,6 @@ import com.android.systemui.plugins.PluginWrapper;
 import com.android.systemui.plugins.ProtectedPluginListener;
 import java.io.PrintWriter;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class ClockControllerProtector implements ClockController, PluginWrapper<ClockController> {
     private static final String CLASS = "ClockController";

@@ -89,7 +89,7 @@ public abstract class Primes {
 
     public static MROutput enhancedMRProbablePrimeTest(BigInteger bigInteger, SecureRandom secureRandom, int i) {
         boolean z;
-        BigInteger bigInteger2;
+        BigInteger bigIntegerModPow;
         checkCandidate(bigInteger, "candidate");
         if (secureRandom == null) {
             throw new IllegalArgumentException("'random' cannot be null");
@@ -103,49 +103,49 @@ public abstract class Primes {
         if (!bigInteger.testBit(0)) {
             return MROutput.provablyCompositeWithFactor(TWO);
         }
-        BigInteger subtract = bigInteger.subtract(ONE);
-        BigInteger subtract2 = bigInteger.subtract(TWO);
-        int lowestSetBit = subtract.getLowestSetBit();
-        BigInteger shiftRight = subtract.shiftRight(lowestSetBit);
+        BigInteger bigIntegerSubtract = bigInteger.subtract(ONE);
+        BigInteger bigIntegerSubtract2 = bigInteger.subtract(TWO);
+        int lowestSetBit = bigIntegerSubtract.getLowestSetBit();
+        BigInteger bigIntegerShiftRight = bigIntegerSubtract.shiftRight(lowestSetBit);
         for (int i2 = 0; i2 < i; i2++) {
-            BigInteger createRandomInRange = BigIntegers.createRandomInRange(TWO, subtract2, secureRandom);
-            BigInteger gcd = createRandomInRange.gcd(bigInteger);
-            BigInteger bigInteger3 = ONE;
-            if (gcd.compareTo(bigInteger3) > 0) {
-                return MROutput.provablyCompositeWithFactor(gcd);
+            BigInteger bigIntegerCreateRandomInRange = BigIntegers.createRandomInRange(TWO, bigIntegerSubtract2, secureRandom);
+            BigInteger bigIntegerGcd = bigIntegerCreateRandomInRange.gcd(bigInteger);
+            BigInteger bigInteger2 = ONE;
+            if (bigIntegerGcd.compareTo(bigInteger2) > 0) {
+                return MROutput.provablyCompositeWithFactor(bigIntegerGcd);
             }
-            BigInteger modPow = createRandomInRange.modPow(shiftRight, bigInteger);
-            if (!modPow.equals(bigInteger3) && !modPow.equals(subtract)) {
+            BigInteger bigIntegerModPow2 = bigIntegerCreateRandomInRange.modPow(bigIntegerShiftRight, bigInteger);
+            if (!bigIntegerModPow2.equals(bigInteger2) && !bigIntegerModPow2.equals(bigIntegerSubtract)) {
                 int i3 = 1;
                 while (true) {
                     if (i3 >= lowestSetBit) {
                         z = false;
-                        bigInteger2 = modPow;
+                        bigIntegerModPow = bigIntegerModPow2;
                         break;
                     }
-                    bigInteger2 = modPow.modPow(TWO, bigInteger);
-                    if (bigInteger2.equals(subtract)) {
+                    bigIntegerModPow = bigIntegerModPow2.modPow(TWO, bigInteger);
+                    if (bigIntegerModPow.equals(bigIntegerSubtract)) {
                         z = true;
                         break;
                     }
-                    if (bigInteger2.equals(ONE)) {
+                    if (bigIntegerModPow.equals(ONE)) {
                         z = false;
                         break;
                     }
                     i3++;
-                    modPow = bigInteger2;
+                    bigIntegerModPow2 = bigIntegerModPow;
                 }
                 if (!z) {
-                    BigInteger bigInteger4 = ONE;
-                    if (!bigInteger2.equals(bigInteger4)) {
-                        modPow = bigInteger2.modPow(TWO, bigInteger);
-                        if (modPow.equals(bigInteger4)) {
-                            modPow = bigInteger2;
+                    BigInteger bigInteger3 = ONE;
+                    if (!bigIntegerModPow.equals(bigInteger3)) {
+                        bigIntegerModPow2 = bigIntegerModPow.modPow(TWO, bigInteger);
+                        if (bigIntegerModPow2.equals(bigInteger3)) {
+                            bigIntegerModPow2 = bigIntegerModPow;
                         }
                     }
-                    BigInteger gcd2 = modPow.subtract(bigInteger4).gcd(bigInteger);
-                    if (gcd2.compareTo(bigInteger4) > 0) {
-                        return MROutput.provablyCompositeWithFactor(gcd2);
+                    BigInteger bigIntegerGcd2 = bigIntegerModPow2.subtract(bigInteger3).gcd(bigInteger);
+                    if (bigIntegerGcd2.compareTo(bigInteger3) > 0) {
+                        return MROutput.provablyCompositeWithFactor(bigIntegerGcd2);
                     }
                     return MROutput.provablyCompositeNotPrimePower();
                 }
@@ -173,12 +173,12 @@ public abstract class Primes {
         if (!bigInteger.testBit(0)) {
             return false;
         }
-        BigInteger subtract = bigInteger.subtract(ONE);
-        BigInteger subtract2 = bigInteger.subtract(TWO);
-        int lowestSetBit = subtract.getLowestSetBit();
-        BigInteger shiftRight = subtract.shiftRight(lowestSetBit);
+        BigInteger bigIntegerSubtract = bigInteger.subtract(ONE);
+        BigInteger bigIntegerSubtract2 = bigInteger.subtract(TWO);
+        int lowestSetBit = bigIntegerSubtract.getLowestSetBit();
+        BigInteger bigIntegerShiftRight = bigIntegerSubtract.shiftRight(lowestSetBit);
         for (int i2 = 0; i2 < i; i2++) {
-            if (!implMRProbablePrimeToBase(bigInteger, subtract, shiftRight, lowestSetBit, BigIntegers.createRandomInRange(TWO, subtract2, secureRandom))) {
+            if (!implMRProbablePrimeToBase(bigInteger, bigIntegerSubtract, bigIntegerShiftRight, lowestSetBit, BigIntegers.createRandomInRange(TWO, bigIntegerSubtract2, secureRandom))) {
                 return false;
             }
         }
@@ -195,9 +195,9 @@ public abstract class Primes {
         if (bigInteger.bitLength() == 2) {
             return true;
         }
-        BigInteger subtract = bigInteger.subtract(bigInteger3);
-        int lowestSetBit = subtract.getLowestSetBit();
-        return implMRProbablePrimeToBase(bigInteger, subtract, subtract.shiftRight(lowestSetBit), lowestSetBit, bigInteger2);
+        BigInteger bigIntegerSubtract = bigInteger.subtract(bigInteger3);
+        int lowestSetBit = bigIntegerSubtract.getLowestSetBit();
+        return implMRProbablePrimeToBase(bigInteger, bigIntegerSubtract, bigIntegerSubtract.shiftRight(lowestSetBit), lowestSetBit, bigInteger2);
     }
 
     private static void checkCandidate(BigInteger bigInteger, String str) {
@@ -207,26 +207,26 @@ public abstract class Primes {
     }
 
     private static boolean implHasAnySmallFactors(BigInteger bigInteger) {
-        int intValue = bigInteger.mod(BigInteger.valueOf(223092870)).intValue();
-        if (intValue % 2 != 0 && intValue % 3 != 0 && intValue % 5 != 0 && intValue % 7 != 0 && intValue % 11 != 0 && intValue % 13 != 0 && intValue % 17 != 0 && intValue % 19 != 0 && intValue % 23 != 0) {
-            int intValue2 = bigInteger.mod(BigInteger.valueOf(58642669)).intValue();
-            if (intValue2 % 29 != 0 && intValue2 % 31 != 0 && intValue2 % 37 != 0 && intValue2 % 41 != 0 && intValue2 % 43 != 0) {
-                int intValue3 = bigInteger.mod(BigInteger.valueOf(600662303)).intValue();
-                if (intValue3 % 47 != 0 && intValue3 % 53 != 0 && intValue3 % 59 != 0 && intValue3 % 61 != 0 && intValue3 % 67 != 0) {
-                    int intValue4 = bigInteger.mod(BigInteger.valueOf(33984931)).intValue();
-                    if (intValue4 % 71 != 0 && intValue4 % 73 != 0 && intValue4 % 79 != 0 && intValue4 % 83 != 0) {
-                        int intValue5 = bigInteger.mod(BigInteger.valueOf(89809099)).intValue();
-                        if (intValue5 % 89 != 0 && intValue5 % 97 != 0 && intValue5 % 101 != 0 && intValue5 % 103 != 0) {
-                            int intValue6 = bigInteger.mod(BigInteger.valueOf(167375713)).intValue();
-                            if (intValue6 % 107 != 0 && intValue6 % 109 != 0 && intValue6 % 113 != 0 && intValue6 % 127 != 0) {
-                                int intValue7 = bigInteger.mod(BigInteger.valueOf(371700317)).intValue();
-                                if (intValue7 % 131 != 0 && intValue7 % 137 != 0 && intValue7 % 139 != 0 && intValue7 % 149 != 0) {
-                                    int intValue8 = bigInteger.mod(BigInteger.valueOf(645328247)).intValue();
-                                    if (intValue8 % 151 != 0 && intValue8 % 157 != 0 && intValue8 % 163 != 0 && intValue8 % 167 != 0) {
-                                        int intValue9 = bigInteger.mod(BigInteger.valueOf(1070560157)).intValue();
-                                        if (intValue9 % 173 != 0 && intValue9 % 179 != 0 && intValue9 % 181 != 0 && intValue9 % 191 != 0) {
-                                            int intValue10 = bigInteger.mod(BigInteger.valueOf(1596463769)).intValue();
-                                            if (intValue10 % 193 != 0 && intValue10 % 197 != 0 && intValue10 % 199 != 0 && intValue10 % 211 != 0) {
+        int iIntValue = bigInteger.mod(BigInteger.valueOf(223092870)).intValue();
+        if (iIntValue % 2 != 0 && iIntValue % 3 != 0 && iIntValue % 5 != 0 && iIntValue % 7 != 0 && iIntValue % 11 != 0 && iIntValue % 13 != 0 && iIntValue % 17 != 0 && iIntValue % 19 != 0 && iIntValue % 23 != 0) {
+            int iIntValue2 = bigInteger.mod(BigInteger.valueOf(58642669)).intValue();
+            if (iIntValue2 % 29 != 0 && iIntValue2 % 31 != 0 && iIntValue2 % 37 != 0 && iIntValue2 % 41 != 0 && iIntValue2 % 43 != 0) {
+                int iIntValue3 = bigInteger.mod(BigInteger.valueOf(600662303)).intValue();
+                if (iIntValue3 % 47 != 0 && iIntValue3 % 53 != 0 && iIntValue3 % 59 != 0 && iIntValue3 % 61 != 0 && iIntValue3 % 67 != 0) {
+                    int iIntValue4 = bigInteger.mod(BigInteger.valueOf(33984931)).intValue();
+                    if (iIntValue4 % 71 != 0 && iIntValue4 % 73 != 0 && iIntValue4 % 79 != 0 && iIntValue4 % 83 != 0) {
+                        int iIntValue5 = bigInteger.mod(BigInteger.valueOf(89809099)).intValue();
+                        if (iIntValue5 % 89 != 0 && iIntValue5 % 97 != 0 && iIntValue5 % 101 != 0 && iIntValue5 % 103 != 0) {
+                            int iIntValue6 = bigInteger.mod(BigInteger.valueOf(167375713)).intValue();
+                            if (iIntValue6 % 107 != 0 && iIntValue6 % 109 != 0 && iIntValue6 % 113 != 0 && iIntValue6 % 127 != 0) {
+                                int iIntValue7 = bigInteger.mod(BigInteger.valueOf(371700317)).intValue();
+                                if (iIntValue7 % 131 != 0 && iIntValue7 % 137 != 0 && iIntValue7 % 139 != 0 && iIntValue7 % 149 != 0) {
+                                    int iIntValue8 = bigInteger.mod(BigInteger.valueOf(645328247)).intValue();
+                                    if (iIntValue8 % 151 != 0 && iIntValue8 % 157 != 0 && iIntValue8 % 163 != 0 && iIntValue8 % 167 != 0) {
+                                        int iIntValue9 = bigInteger.mod(BigInteger.valueOf(1070560157)).intValue();
+                                        if (iIntValue9 % 173 != 0 && iIntValue9 % 179 != 0 && iIntValue9 % 181 != 0 && iIntValue9 % 191 != 0) {
+                                            int iIntValue10 = bigInteger.mod(BigInteger.valueOf(1596463769)).intValue();
+                                            if (iIntValue10 % 193 != 0 && iIntValue10 % 197 != 0 && iIntValue10 % 199 != 0 && iIntValue10 % 211 != 0) {
                                                 return false;
                                             }
                                         }
@@ -242,16 +242,16 @@ public abstract class Primes {
     }
 
     private static boolean implMRProbablePrimeToBase(BigInteger bigInteger, BigInteger bigInteger2, BigInteger bigInteger3, int i, BigInteger bigInteger4) {
-        BigInteger modPow = bigInteger4.modPow(bigInteger3, bigInteger);
-        if (modPow.equals(ONE) || modPow.equals(bigInteger2)) {
+        BigInteger bigIntegerModPow = bigInteger4.modPow(bigInteger3, bigInteger);
+        if (bigIntegerModPow.equals(ONE) || bigIntegerModPow.equals(bigInteger2)) {
             return true;
         }
         for (int i2 = 1; i2 < i; i2++) {
-            modPow = modPow.modPow(TWO, bigInteger);
-            if (modPow.equals(bigInteger2)) {
+            bigIntegerModPow = bigIntegerModPow.modPow(TWO, bigInteger);
+            if (bigIntegerModPow.equals(bigInteger2)) {
                 return true;
             }
-            if (modPow.equals(ONE)) {
+            if (bigIntegerModPow.equals(ONE)) {
                 return false;
             }
         }
@@ -273,44 +273,44 @@ public abstract class Primes {
                 hash(digest, bArr, bArr3, 0);
                 inc(bArr, 1);
                 i3++;
-                long extract32 = (((extract32(bArr2) ^ extract32(bArr3)) & ((-1) >>> (32 - i))) | (1 << (i - 1)) | 1) & 4294967295L;
-                if (isPrime32(extract32)) {
-                    return new STOutput(BigInteger.valueOf(extract32), bArr, i3);
+                long jExtract32 = (((extract32(bArr2) ^ extract32(bArr3)) & ((-1) >>> (32 - i))) | (1 << (i - 1)) | 1) & 4294967295L;
+                if (isPrime32(jExtract32)) {
+                    return new STOutput(BigInteger.valueOf(jExtract32), bArr, i3);
                 }
             } while (i3 <= i * 4);
             throw new IllegalStateException("Too many iterations in Shawe-Taylor Random_Prime Routine");
         }
-        STOutput implSTRandomPrime = implSTRandomPrime(digest, (i + 3) / 2, bArr);
-        BigInteger prime = implSTRandomPrime.getPrime();
-        byte[] primeSeed = implSTRandomPrime.getPrimeSeed();
-        int primeGenCounter = implSTRandomPrime.getPrimeGenCounter();
+        STOutput sTOutputImplSTRandomPrime = implSTRandomPrime(digest, (i + 3) / 2, bArr);
+        BigInteger prime = sTOutputImplSTRandomPrime.getPrime();
+        byte[] primeSeed = sTOutputImplSTRandomPrime.getPrimeSeed();
+        int primeGenCounter = sTOutputImplSTRandomPrime.getPrimeGenCounter();
         int i4 = i - 1;
         int i5 = (i4 / (digestSize * 8)) + 1;
-        BigInteger hashGen = hashGen(digest, primeSeed, i5);
+        BigInteger bigIntegerHashGen = hashGen(digest, primeSeed, i5);
         BigInteger bigInteger = ONE;
-        BigInteger bit = hashGen.mod(bigInteger.shiftLeft(i4)).setBit(i4);
-        BigInteger shiftLeft = prime.shiftLeft(1);
-        BigInteger shiftLeft2 = bit.subtract(bigInteger).divide(shiftLeft).add(bigInteger).shiftLeft(1);
-        BigInteger add = shiftLeft2.multiply(prime).add(bigInteger);
+        BigInteger bit = bigIntegerHashGen.mod(bigInteger.shiftLeft(i4)).setBit(i4);
+        BigInteger bigIntegerShiftLeft = prime.shiftLeft(1);
+        BigInteger bigIntegerShiftLeft2 = bit.subtract(bigInteger).divide(bigIntegerShiftLeft).add(bigInteger).shiftLeft(1);
+        BigInteger bigIntegerAdd = bigIntegerShiftLeft2.multiply(prime).add(bigInteger);
         int i6 = primeGenCounter;
         int i7 = 0;
         while (true) {
-            if (add.bitLength() > i) {
+            if (bigIntegerAdd.bitLength() > i) {
                 BigInteger bigInteger2 = ONE;
-                shiftLeft2 = bigInteger2.shiftLeft(i4).subtract(bigInteger2).divide(shiftLeft).add(bigInteger2).shiftLeft(i2);
-                add = shiftLeft2.multiply(prime).add(bigInteger2);
+                bigIntegerShiftLeft2 = bigInteger2.shiftLeft(i4).subtract(bigInteger2).divide(bigIntegerShiftLeft).add(bigInteger2).shiftLeft(i2);
+                bigIntegerAdd = bigIntegerShiftLeft2.multiply(prime).add(bigInteger2);
             }
             i6 += i2;
-            if (!implHasAnySmallFactors(add)) {
-                BigInteger add2 = hashGen(digest, primeSeed, i5).mod(add.subtract(THREE)).add(TWO);
-                BigInteger add3 = shiftLeft2.add(BigInteger.valueOf(i7));
-                BigInteger modPow = add2.modPow(add3, add);
+            if (!implHasAnySmallFactors(bigIntegerAdd)) {
+                BigInteger bigIntegerAdd2 = hashGen(digest, primeSeed, i5).mod(bigIntegerAdd.subtract(THREE)).add(TWO);
+                BigInteger bigIntegerAdd3 = bigIntegerShiftLeft2.add(BigInteger.valueOf(i7));
+                BigInteger bigIntegerModPow = bigIntegerAdd2.modPow(bigIntegerAdd3, bigIntegerAdd);
                 BigInteger bigInteger3 = ONE;
-                if (add.gcd(modPow.subtract(bigInteger3)).equals(bigInteger3) && modPow.modPow(prime, add).equals(bigInteger3)) {
-                    return new STOutput(add, primeSeed, i6);
+                if (bigIntegerAdd.gcd(bigIntegerModPow.subtract(bigInteger3)).equals(bigInteger3) && bigIntegerModPow.modPow(prime, bigIntegerAdd).equals(bigInteger3)) {
+                    return new STOutput(bigIntegerAdd, primeSeed, i6);
                 }
                 primesIA = null;
-                shiftLeft2 = add3;
+                bigIntegerShiftLeft2 = bigIntegerAdd3;
                 i7 = 0;
             } else {
                 primesIA = primesIA2;
@@ -320,17 +320,17 @@ public abstract class Primes {
                 throw new IllegalStateException("Too many iterations in Shawe-Taylor Random_Prime Routine");
             }
             i7 += 2;
-            add = add.add(shiftLeft);
+            bigIntegerAdd = bigIntegerAdd.add(bigIntegerShiftLeft);
             primesIA2 = primesIA;
             i2 = 1;
         }
     }
 
     private static int extract32(byte[] bArr) {
-        int min = Math.min(4, bArr.length);
+        int iMin = Math.min(4, bArr.length);
         int i = 0;
         int i2 = 0;
-        while (i < min) {
+        while (i < iMin) {
             int i3 = i + 1;
             i2 |= (bArr[bArr.length - i3] & 255) << (i * 8);
             i = i3;

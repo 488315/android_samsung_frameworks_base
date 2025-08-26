@@ -8,7 +8,6 @@ import androidx.compose.runtime.OpaqueKey$$ExternalSyntheticOutline0;
 import com.samsung.android.sdk.moneta.basicdomain.entity.Person$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class MediaSession extends Content {
     public static final Parcelable.Creator<MediaSession> CREATOR = new Creator();
@@ -22,7 +21,6 @@ public final class MediaSession extends Content {
     private final MediaType mediaType;
     private final String title;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Creator implements Parcelable.Creator {
         @Override // android.os.Parcelable.Creator
         public final Object createFromParcel(Parcel parcel) {
@@ -178,19 +176,19 @@ public final class MediaSession extends Content {
     }
 
     public int hashCode() {
-        int hashCode = (this.mediaType.hashCode() + PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.id.hashCode() * 31, 31, this.mediaId)) * 31;
+        int iHashCode = (this.mediaType.hashCode() + PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.id.hashCode() * 31, 31, this.mediaId)) * 31;
         String str = this.title;
-        int hashCode2 = (hashCode + (str == null ? 0 : str.hashCode())) * 31;
+        int iHashCode2 = (iHashCode + (str == null ? 0 : str.hashCode())) * 31;
         String str2 = this.albumArtBitmap;
-        int hashCode3 = (hashCode2 + (str2 == null ? 0 : str2.hashCode())) * 31;
+        int iHashCode3 = (iHashCode2 + (str2 == null ? 0 : str2.hashCode())) * 31;
         Uri uri = this.albumArtUri;
-        int hashCode4 = (hashCode3 + (uri == null ? 0 : uri.hashCode())) * 31;
+        int iHashCode4 = (iHashCode3 + (uri == null ? 0 : uri.hashCode())) * 31;
         Long l = this.duration;
-        int hashCode5 = (hashCode4 + (l == null ? 0 : l.hashCode())) * 31;
+        int iHashCode5 = (iHashCode4 + (l == null ? 0 : l.hashCode())) * 31;
         String str3 = this.artist;
-        int hashCode6 = (hashCode5 + (str3 == null ? 0 : str3.hashCode())) * 31;
+        int iHashCode6 = (iHashCode5 + (str3 == null ? 0 : str3.hashCode())) * 31;
         String str4 = this.albumTitle;
-        return hashCode6 + (str4 != null ? str4.hashCode() : 0);
+        return iHashCode6 + (str4 != null ? str4.hashCode() : 0);
     }
 
     public String toString() {

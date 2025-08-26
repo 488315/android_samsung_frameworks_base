@@ -85,39 +85,39 @@ public class WindowInfosListenerForTest {
         final CountDownLatch countDownLatch = new CountDownLatch(1);
         WindowInfosListener windowInfosListener = new WindowInfosListener(this) { // from class: android.window.WindowInfosListenerForTest.1
             @Override // android.window.WindowInfosListener
-            public void onWindowInfosChanged(InputWindowHandle[] inputWindowHandleArr, WindowInfosListener.DisplayInfo[] displayInfoArr) {
+            public void onWindowInfosChanged(InputWindowHandle[] inputWindowHandleArr, WindowInfosListener.DisplayInfo[] displayInfoArr) throws InterruptedException {
                 try {
                     countDownLatch.await();
                 } catch (InterruptedException unused) {
                     Log.e(WindowInfosListenerForTest.TAG, "Exception thrown while waiting for listener to be called with initial state");
                 }
-                Pair buildParams = WindowInfosListenerForTest.buildParams(inputWindowHandleArr, displayInfoArr);
-                biConsumer.accept((List) buildParams.first, (List) buildParams.second);
+                Pair pairBuildParams = WindowInfosListenerForTest.buildParams(inputWindowHandleArr, displayInfoArr);
+                biConsumer.accept((List) pairBuildParams.first, (List) pairBuildParams.second);
             }
         };
         this.mListeners.put(biConsumer, windowInfosListener);
-        Pair<InputWindowHandle[], WindowInfosListener.DisplayInfo[]> register = windowInfosListener.register();
-        Pair<List<WindowInfo>, List<DisplayInfo>> buildParams = buildParams(register.first, register.second);
-        biConsumer.accept(buildParams.first, buildParams.second);
+        Pair<InputWindowHandle[], WindowInfosListener.DisplayInfo[]> pairRegister = windowInfosListener.register();
+        Pair<List<WindowInfo>, List<DisplayInfo>> pairBuildParams = buildParams(pairRegister.first, pairRegister.second);
+        biConsumer.accept(pairBuildParams.first, pairBuildParams.second);
         countDownLatch.countDown();
     }
 
     @Deprecated
     public void removeWindowInfosListener(Consumer<List<WindowInfo>> consumer) {
-        WindowInfosListener remove;
-        BiConsumer<List<WindowInfo>, List<DisplayInfo>> remove2 = this.mConsumersToBiConsumers.remove(consumer);
-        if (remove2 == null || (remove = this.mListeners.remove(remove2)) == null) {
+        WindowInfosListener windowInfosListenerRemove;
+        BiConsumer<List<WindowInfo>, List<DisplayInfo>> biConsumerRemove = this.mConsumersToBiConsumers.remove(consumer);
+        if (biConsumerRemove == null || (windowInfosListenerRemove = this.mListeners.remove(biConsumerRemove)) == null) {
             return;
         }
-        remove.unregister();
+        windowInfosListenerRemove.unregister();
     }
 
     public void removeWindowInfosListener(BiConsumer<List<WindowInfo>, List<DisplayInfo>> biConsumer) {
-        WindowInfosListener remove = this.mListeners.remove(biConsumer);
-        if (remove == null) {
+        WindowInfosListener windowInfosListenerRemove = this.mListeners.remove(biConsumer);
+        if (windowInfosListenerRemove == null) {
             return;
         }
-        remove.unregister();
+        windowInfosListenerRemove.unregister();
     }
 
     /* JADX INFO: Access modifiers changed from: private */

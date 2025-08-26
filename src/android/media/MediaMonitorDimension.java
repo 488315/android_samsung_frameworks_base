@@ -34,12 +34,12 @@ public class MediaMonitorDimension implements Parcelable {
     MediaMonitorDimension(Parcel parcel) {
         this.mText = "";
         this.mNumber = -1L;
-        int readInt = parcel.readInt();
-        this.mType = readInt;
+        int i = parcel.readInt();
+        this.mType = i;
         this.mName = parcel.readString();
-        if (readInt == 0) {
+        if (i == 0) {
             this.mText = parcel.readString();
-        } else if (readInt == 1) {
+        } else if (i == 1) {
             this.mNumber = parcel.readLong();
         }
     }

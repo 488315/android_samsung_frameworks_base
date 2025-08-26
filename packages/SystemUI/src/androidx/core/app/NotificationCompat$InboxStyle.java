@@ -5,7 +5,6 @@ import android.os.Bundle;
 import java.util.ArrayList;
 import java.util.Collections;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class NotificationCompat$InboxStyle extends NotificationCompat$Style {
     public final ArrayList mTexts = new ArrayList();

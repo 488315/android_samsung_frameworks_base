@@ -45,9 +45,9 @@ public interface IAccessibilityInputMethodSessionCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IAccessibilityInputMethodSessionCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IAccessibilityInputMethodSessionCallback)) {
-                return (IAccessibilityInputMethodSessionCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IAccessibilityInputMethodSessionCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IAccessibilityInputMethodSessionCallback)) {
+                return (IAccessibilityInputMethodSessionCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,10 +74,10 @@ public interface IAccessibilityInputMethodSessionCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IAccessibilityInputMethodSession asInterface = IAccessibilityInputMethodSession.Stub.asInterface(parcel.readStrongBinder());
-                int readInt = parcel.readInt();
+                IAccessibilityInputMethodSession iAccessibilityInputMethodSessionAsInterface = IAccessibilityInputMethodSession.Stub.asInterface(parcel.readStrongBinder());
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                sessionCreated(asInterface, readInt);
+                sessionCreated(iAccessibilityInputMethodSessionAsInterface, i3);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -101,14 +101,14 @@ public interface IAccessibilityInputMethodSessionCallback extends IInterface {
 
             @Override // com.android.internal.inputmethod.IAccessibilityInputMethodSessionCallback
             public void sessionCreated(IAccessibilityInputMethodSession iAccessibilityInputMethodSession, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IAccessibilityInputMethodSessionCallback.DESCRIPTOR);
-                    obtain.writeStrongInterface(iAccessibilityInputMethodSession);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IAccessibilityInputMethodSessionCallback.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iAccessibilityInputMethodSession);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

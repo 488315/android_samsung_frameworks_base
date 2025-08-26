@@ -8,7 +8,6 @@ import com.android.systemui.navigationbar.views.buttons.ButtonDispatcher;
 import com.android.systemui.navigationbar.views.buttons.KeyButtonDrawable;
 import com.samsung.systemui.splugins.navigationbar.ButtonDispatcherProxyBase;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ButtonDispatcherProxy implements ButtonDispatcherProxyBase {
     public final SparseArray mButtonDispatchers;
@@ -37,10 +36,10 @@ public final class ButtonDispatcherProxy implements ButtonDispatcherProxyBase {
 
     @Override // com.samsung.systemui.splugins.navigationbar.ButtonDispatcherProxyBase
     public final void setButtonImage(int i, Drawable drawable, Drawable drawable2) {
-        KeyButtonDrawable create = KeyButtonDrawable.create(this.mContext, drawable, drawable2, false);
+        KeyButtonDrawable keyButtonDrawableCreate = KeyButtonDrawable.create(this.mContext, drawable, drawable2, false);
         ButtonDispatcher buttonDispatcher = (ButtonDispatcher) this.mButtonDispatchers.get(i);
         if (buttonDispatcher != null) {
-            buttonDispatcher.setImageDrawable(create);
+            buttonDispatcher.setImageDrawable(keyButtonDrawableCreate);
             buttonDispatcher.setVisibility(0);
         }
     }

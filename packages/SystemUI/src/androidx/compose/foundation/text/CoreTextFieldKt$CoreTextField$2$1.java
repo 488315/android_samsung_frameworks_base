@@ -23,7 +23,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.SafeFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class CoreTextFieldKt$CoreTextField$2$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ ImeOptions $imeOptions;
@@ -63,7 +62,7 @@ final class CoreTextFieldKt$CoreTextField$2$1 extends SuspendLambda implements F
             if (i == 0) {
                 ResultKt.throwOnFailure(obj);
                 final State<Boolean> state = this.$writeable$delegate;
-                SafeFlow snapshotFlow = SnapshotStateKt.snapshotFlow(new Function0() { // from class: androidx.compose.foundation.text.CoreTextFieldKt$CoreTextField$2$1.1
+                SafeFlow safeFlowSnapshotFlow = SnapshotStateKt.snapshotFlow(new Function0() { // from class: androidx.compose.foundation.text.CoreTextFieldKt$CoreTextField$2$1.1
                     /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(0);
@@ -84,9 +83,9 @@ final class CoreTextFieldKt$CoreTextField$2$1 extends SuspendLambda implements F
                     /* JADX WARN: Type inference failed for: r6v3, types: [T, androidx.compose.ui.text.input.TextInputSession, java.lang.Object] */
                     @Override // kotlinx.coroutines.flow.FlowCollector
                     public final Object emit(Object obj2, Continuation continuation) {
-                        boolean booleanValue = ((Boolean) obj2).booleanValue();
-                        LegacyTextFieldState legacyTextFieldState2 = LegacyTextFieldState.this;
-                        if (booleanValue && legacyTextFieldState2.getHasFocus()) {
+                        boolean zBooleanValue = ((Boolean) obj2).booleanValue();
+                        LegacyTextFieldState legacyTextFieldState2 = legacyTextFieldState;
+                        if (zBooleanValue && legacyTextFieldState2.getHasFocus()) {
                             TextFieldSelectionManager textFieldSelectionManager2 = textFieldSelectionManager;
                             TextFieldValue value$foundation_release = textFieldSelectionManager2.getValue$foundation_release();
                             OffsetMapping offsetMapping = textFieldSelectionManager2.offsetMapping;
@@ -111,7 +110,7 @@ final class CoreTextFieldKt$CoreTextField$2$1 extends SuspendLambda implements F
                     }
                 };
                 this.label = 1;
-                if (snapshotFlow.collect(flowCollector, this) == coroutineSingletons) {
+                if (safeFlowSnapshotFlow.collect(flowCollector, this) == coroutineSingletons) {
                     return coroutineSingletons;
                 }
             } else {

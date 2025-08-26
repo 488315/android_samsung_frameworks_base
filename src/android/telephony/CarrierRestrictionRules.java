@@ -136,15 +136,15 @@ public final class CarrierRestrictionRules implements Parcelable {
             if (i >= list.size()) {
                 break;
             }
-            boolean isCarrierIdInList = isCarrierIdInList(list.get(i), this.mAllowedCarriers);
-            boolean isCarrierIdInList2 = isCarrierIdInList(list.get(i), this.mExcludedCarriers);
+            boolean zIsCarrierIdInList = isCarrierIdInList(list.get(i), this.mAllowedCarriers);
+            boolean zIsCarrierIdInList2 = isCarrierIdInList(list.get(i), this.mExcludedCarriers);
             if (this.mCarrierRestrictionDefault == 0) {
-                arrayList.add(Boolean.valueOf(isCarrierIdInList && !isCarrierIdInList2));
+                arrayList.add(Boolean.valueOf(zIsCarrierIdInList && !zIsCarrierIdInList2));
             } else {
-                if (isCarrierIdInList2 && !isCarrierIdInList) {
-                    r4 = false;
+                if (zIsCarrierIdInList2 && !zIsCarrierIdInList) {
+                    z = false;
                 }
-                arrayList.add(Boolean.valueOf(r4));
+                arrayList.add(Boolean.valueOf(z));
             }
             i++;
         }
@@ -175,18 +175,18 @@ public final class CarrierRestrictionRules implements Parcelable {
     private static boolean isCarrierIdInList(CarrierIdentifier carrierIdentifier, List<CarrierIdentifier> list) {
         for (CarrierIdentifier carrierIdentifier2 : list) {
             if (patternMatch(carrierIdentifier.getMcc(), carrierIdentifier2.getMcc()) && patternMatch(carrierIdentifier.getMnc(), carrierIdentifier2.getMnc())) {
-                String convertNullToEmpty = convertNullToEmpty(carrierIdentifier2.getSpn());
-                String convertNullToEmpty2 = convertNullToEmpty(carrierIdentifier.getSpn());
-                if (convertNullToEmpty.isEmpty() || patternMatch(convertNullToEmpty2, convertNullToEmpty)) {
-                    String convertNullToEmpty3 = convertNullToEmpty(carrierIdentifier2.getImsi());
-                    String convertNullToEmpty4 = convertNullToEmpty(carrierIdentifier.getImsi());
-                    if (patternMatch(convertNullToEmpty4.substring(0, Math.min(convertNullToEmpty4.length(), convertNullToEmpty3.length())), convertNullToEmpty3)) {
-                        String convertNullToEmpty5 = convertNullToEmpty(carrierIdentifier2.getGid1());
-                        String convertNullToEmpty6 = convertNullToEmpty(carrierIdentifier.getGid1());
-                        if (patternMatch(convertNullToEmpty6.substring(0, Math.min(convertNullToEmpty6.length(), convertNullToEmpty5.length())), convertNullToEmpty5)) {
-                            String convertNullToEmpty7 = convertNullToEmpty(carrierIdentifier2.getGid2());
-                            String convertNullToEmpty8 = convertNullToEmpty(carrierIdentifier.getGid2());
-                            if (patternMatch(convertNullToEmpty8.substring(0, Math.min(convertNullToEmpty8.length(), convertNullToEmpty7.length())), convertNullToEmpty7)) {
+                String strConvertNullToEmpty = convertNullToEmpty(carrierIdentifier2.getSpn());
+                String strConvertNullToEmpty2 = convertNullToEmpty(carrierIdentifier.getSpn());
+                if (strConvertNullToEmpty.isEmpty() || patternMatch(strConvertNullToEmpty2, strConvertNullToEmpty)) {
+                    String strConvertNullToEmpty3 = convertNullToEmpty(carrierIdentifier2.getImsi());
+                    String strConvertNullToEmpty4 = convertNullToEmpty(carrierIdentifier.getImsi());
+                    if (patternMatch(strConvertNullToEmpty4.substring(0, Math.min(strConvertNullToEmpty4.length(), strConvertNullToEmpty3.length())), strConvertNullToEmpty3)) {
+                        String strConvertNullToEmpty5 = convertNullToEmpty(carrierIdentifier2.getGid1());
+                        String strConvertNullToEmpty6 = convertNullToEmpty(carrierIdentifier.getGid1());
+                        if (patternMatch(strConvertNullToEmpty6.substring(0, Math.min(strConvertNullToEmpty6.length(), strConvertNullToEmpty5.length())), strConvertNullToEmpty5)) {
+                            String strConvertNullToEmpty7 = convertNullToEmpty(carrierIdentifier2.getGid2());
+                            String strConvertNullToEmpty8 = convertNullToEmpty(carrierIdentifier.getGid2());
+                            if (patternMatch(strConvertNullToEmpty8.substring(0, Math.min(strConvertNullToEmpty8.length(), strConvertNullToEmpty7.length())), strConvertNullToEmpty7)) {
                                 return true;
                             }
                         } else {

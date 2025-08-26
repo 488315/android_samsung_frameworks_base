@@ -4,7 +4,6 @@ import kotlin.enums.EnumEntriesKt;
 
 /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
 /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class SeslSoundEffectConstants {
     public static final /* synthetic */ SeslSoundEffectConstants[] $VALUES;
@@ -31,7 +30,7 @@ public final class SeslSoundEffectConstants {
         return (SeslSoundEffectConstants[]) $VALUES.clone();
     }
 
-    public final int getSoundConstant$foundation_release() {
+    public final int getSoundConstant$sesl8_compose_core_release() {
         return this.soundConstant;
     }
 }

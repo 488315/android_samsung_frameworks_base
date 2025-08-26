@@ -33,8 +33,8 @@ public abstract class FilterEffect extends Effect {
     }
 
     protected Frame frameFromTexture(int i, int i2, int i3) {
-        Frame newBoundFrame = getFilterContext().getFrameManager().newBoundFrame(ImageFormat.create(i2, i3, 3, 3), 100, i);
-        newBoundFrame.setTimestamp(-1L);
-        return newBoundFrame;
+        Frame frameNewBoundFrame = getFilterContext().getFrameManager().newBoundFrame(ImageFormat.create(i2, i3, 3, 3), 100, i);
+        frameNewBoundFrame.setTimestamp(-1L);
+        return frameNewBoundFrame;
     }
 }

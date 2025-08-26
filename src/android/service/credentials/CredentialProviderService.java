@@ -41,9 +41,9 @@ public abstract class CredentialProviderService extends Service {
         public void onBeginGetCredential(BeginGetCredentialRequest beginGetCredentialRequest, final IBeginGetCredentialCallback iBeginGetCredentialCallback) {
             Objects.requireNonNull(beginGetCredentialRequest);
             Objects.requireNonNull(iBeginGetCredentialCallback);
-            ICancellationSignal createTransport = CancellationSignal.createTransport();
+            ICancellationSignal iCancellationSignalCreateTransport = CancellationSignal.createTransport();
             try {
-                iBeginGetCredentialCallback.onCancellable(createTransport);
+                iBeginGetCredentialCallback.onCancellable(iCancellationSignalCreateTransport);
             } catch (RemoteException e) {
                 e.rethrowFromSystemServer();
             }
@@ -52,7 +52,7 @@ public abstract class CredentialProviderService extends Service {
                 public final void accept(Object obj, Object obj2, Object obj3, Object obj4) {
                     ((CredentialProviderService) obj).onBeginGetCredential((BeginGetCredentialRequest) obj2, (CancellationSignal) obj3, (CredentialProviderService.AnonymousClass1.C00091) obj4);
                 }
-            }, CredentialProviderService.this, beginGetCredentialRequest, CancellationSignal.fromTransport(createTransport), new OutcomeReceiver<BeginGetCredentialResponse, GetCredentialException>(this) { // from class: android.service.credentials.CredentialProviderService.1.1
+            }, CredentialProviderService.this, beginGetCredentialRequest, CancellationSignal.fromTransport(iCancellationSignalCreateTransport), new OutcomeReceiver<BeginGetCredentialResponse, GetCredentialException>(this) { // from class: android.service.credentials.CredentialProviderService.1.1
                 @Override // android.os.OutcomeReceiver
                 public void onResult(BeginGetCredentialResponse beginGetCredentialResponse) {
                     try {
@@ -77,9 +77,9 @@ public abstract class CredentialProviderService extends Service {
         public void onBeginCreateCredential(BeginCreateCredentialRequest beginCreateCredentialRequest, final IBeginCreateCredentialCallback iBeginCreateCredentialCallback) {
             Objects.requireNonNull(beginCreateCredentialRequest);
             Objects.requireNonNull(iBeginCreateCredentialCallback);
-            ICancellationSignal createTransport = CancellationSignal.createTransport();
+            ICancellationSignal iCancellationSignalCreateTransport = CancellationSignal.createTransport();
             try {
-                iBeginCreateCredentialCallback.onCancellable(createTransport);
+                iBeginCreateCredentialCallback.onCancellable(iCancellationSignalCreateTransport);
             } catch (RemoteException e) {
                 e.rethrowFromSystemServer();
             }
@@ -88,7 +88,7 @@ public abstract class CredentialProviderService extends Service {
                 public final void accept(Object obj, Object obj2, Object obj3, Object obj4) {
                     ((CredentialProviderService) obj).onBeginCreateCredential((BeginCreateCredentialRequest) obj2, (CancellationSignal) obj3, (CredentialProviderService.AnonymousClass1.AnonymousClass2) obj4);
                 }
-            }, CredentialProviderService.this, beginCreateCredentialRequest, CancellationSignal.fromTransport(createTransport), new OutcomeReceiver<BeginCreateCredentialResponse, CreateCredentialException>(this) { // from class: android.service.credentials.CredentialProviderService.1.2
+            }, CredentialProviderService.this, beginCreateCredentialRequest, CancellationSignal.fromTransport(iCancellationSignalCreateTransport), new OutcomeReceiver<BeginCreateCredentialResponse, CreateCredentialException>(this) { // from class: android.service.credentials.CredentialProviderService.1.2
                 @Override // android.os.OutcomeReceiver
                 public void onResult(BeginCreateCredentialResponse beginCreateCredentialResponse) {
                     try {
@@ -113,9 +113,9 @@ public abstract class CredentialProviderService extends Service {
         public void onClearCredentialState(ClearCredentialStateRequest clearCredentialStateRequest, final IClearCredentialStateCallback iClearCredentialStateCallback) {
             Objects.requireNonNull(clearCredentialStateRequest);
             Objects.requireNonNull(iClearCredentialStateCallback);
-            ICancellationSignal createTransport = CancellationSignal.createTransport();
+            ICancellationSignal iCancellationSignalCreateTransport = CancellationSignal.createTransport();
             try {
-                iClearCredentialStateCallback.onCancellable(createTransport);
+                iClearCredentialStateCallback.onCancellable(iCancellationSignalCreateTransport);
             } catch (RemoteException e) {
                 e.rethrowFromSystemServer();
             }
@@ -124,7 +124,7 @@ public abstract class CredentialProviderService extends Service {
                 public final void accept(Object obj, Object obj2, Object obj3, Object obj4) {
                     ((CredentialProviderService) obj).onClearCredentialState((ClearCredentialStateRequest) obj2, (CancellationSignal) obj3, (CredentialProviderService.AnonymousClass1.AnonymousClass3) obj4);
                 }
-            }, CredentialProviderService.this, clearCredentialStateRequest, CancellationSignal.fromTransport(createTransport), new OutcomeReceiver<Void, ClearCredentialStateException>(this) { // from class: android.service.credentials.CredentialProviderService.1.3
+            }, CredentialProviderService.this, clearCredentialStateRequest, CancellationSignal.fromTransport(iCancellationSignalCreateTransport), new OutcomeReceiver<Void, ClearCredentialStateException>(this) { // from class: android.service.credentials.CredentialProviderService.1.3
                 @Override // android.os.OutcomeReceiver
                 public void onResult(Void r1) {
                     try {

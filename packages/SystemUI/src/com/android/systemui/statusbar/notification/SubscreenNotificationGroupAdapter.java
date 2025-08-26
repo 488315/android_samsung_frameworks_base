@@ -1,6 +1,8 @@
 package com.android.systemui.statusbar.notification;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -26,14 +28,12 @@ import com.android.systemui.util.SystemUIAnalytics;
 import java.util.ArrayList;
 import kotlin.Pair;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SubscreenNotificationGroupAdapter extends SubscreenParentAdapter {
     public static SubscreenNotificationGroupAdapter sInstance;
     public int mPositionControlCnt;
     public SubscreenNotificationInfo mSummaryInfo;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CustomViewHolder extends SubscreenParentItemViewHolder {
         public final FrameLayout mContentView;
 
@@ -60,11 +60,9 @@ public class SubscreenNotificationGroupAdapter extends SubscreenParentAdapter {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class FooterViewHolder extends RecyclerView.ViewHolder {
         public final FrameLayout mClearAllLayout;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.statusbar.notification.SubscreenNotificationGroupAdapter$FooterViewHolder$2, reason: invalid class name */
         public class AnonymousClass2 implements View.OnClickListener {
             public AnonymousClass2(SubscreenNotificationGroupAdapter subscreenNotificationGroupAdapter) {
@@ -89,9 +87,17 @@ public class SubscreenNotificationGroupAdapter extends SubscreenParentAdapter {
                         int i = 0;
                         if (subscreenNotificationInfo.mRow.isInsignificantSummary()) {
                             int i2 = subscreenNotificationInfoManager.mSubscreenNotificationController.mDeviceModel.mMoreNotificationCount;
-                            while (i < i2) {
-                                subscreenNotificationInfoManager.removeNotification(((ExpandableNotificationRow) ((ArrayList) subscreenNotificationInfo.mRow.mChildrenContainer.mAttachedChildren).get(i)).mEntry);
-                                i++;
+                            while (true) {
+                                if (i >= i2) {
+                                    break;
+                                }
+                                if (i >= subscreenNotificationInfo.mRow.mChildrenContainer.getNotificationChildCount()) {
+                                    Log.d("SubscreenNotificationInfoManager", "clearAllGroupNotificaiton() - IndexOutOfBounds");
+                                    break;
+                                } else {
+                                    subscreenNotificationInfoManager.removeNotification(((ExpandableNotificationRow) ((ArrayList) subscreenNotificationInfo.mRow.mChildrenContainer.mAttachedChildren).get(i)).mEntry);
+                                    i++;
+                                }
                             }
                             subscreenNotificationInfoManager.removeNotification(subscreenNotificationInfo.mRow.mEntry);
                         } else {
@@ -114,7 +120,7 @@ public class SubscreenNotificationGroupAdapter extends SubscreenParentAdapter {
             }
         }
 
-        public FooterViewHolder(View view) {
+        public FooterViewHolder(View view) throws Resources.NotFoundException {
             super(view);
             FrameLayout frameLayout = (FrameLayout) view.findViewById(R.id.subcreen_item_clear_all_layout);
             this.mClearAllLayout = frameLayout;
@@ -136,7 +142,6 @@ public class SubscreenNotificationGroupAdapter extends SubscreenParentAdapter {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class HeaderViewHolder extends RecyclerView.ViewHolder {
         public TextView mAppName;
         public ImageView mBackButton;
@@ -150,7 +155,6 @@ public class SubscreenNotificationGroupAdapter extends SubscreenParentAdapter {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class HideContenNotificationViewHolder extends SubscreenParentItemViewHolder {
         public final TextView mAppName;
 
@@ -175,7 +179,6 @@ public class SubscreenNotificationGroupAdapter extends SubscreenParentAdapter {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class NotificationGroupItemViewHolder extends SubscreenParentItemViewHolder {
         public NotificationGroupItemViewHolder(View view) {
             super(view);
@@ -197,7 +200,6 @@ public class SubscreenNotificationGroupAdapter extends SubscreenParentAdapter {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class OngoingViewHolder extends SubscreenParentItemViewHolder {
         public final FrameLayout mContentView;
         public OngoingActivityData mOngoingActivityData;
@@ -248,7 +250,7 @@ public class SubscreenNotificationGroupAdapter extends SubscreenParentAdapter {
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-    public final void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int i) {
+    public final void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int i) throws Throwable {
         if (viewHolder instanceof NotificationGroupItemViewHolder) {
             NotificationGroupItemViewHolder notificationGroupItemViewHolder = (NotificationGroupItemViewHolder) viewHolder;
             ListPopupWindow$$ExternalSyntheticOutline0.m(i, "Group position Item: ", "SubscreenNotificationGroupAdapter");
@@ -367,11 +369,11 @@ public class SubscreenNotificationGroupAdapter extends SubscreenParentAdapter {
             ongoingViewHolder.mOngoingActivityData = ongoingActivityDataByKey;
             RemoteViews remoteViews2 = ongoingActivityDataByKey != null ? ongoingActivityDataByKey.mOngoingSubScreenExpandView : null;
             if (remoteViews2 != null) {
-                View apply = remoteViews2.apply(subscreenNotificationGroupAdapter6.mContext, ongoingViewHolder.mContentView, ((SubscreenNotificationController) Dependency.sDependency.getDependencyInner(SubscreenNotificationController.class)).remoteInputManager.mInteractionHandler);
+                View viewApply = remoteViews2.apply(subscreenNotificationGroupAdapter6.mContext, ongoingViewHolder.mContentView, ((SubscreenNotificationController) Dependency.sDependency.getDependencyInner(SubscreenNotificationController.class)).remoteInputManager.mInteractionHandler);
                 if (ongoingViewHolder.mOngoingActivityData.mCustomExpandedCardView != null) {
-                    apply = subscreenNotificationGroupAdapter6.mController.faceWidgetNotificationControllerWrapper.getViewFromNowBar(apply, BundleKt.bundleOf(new Pair("type", "SUB")));
+                    viewApply = subscreenNotificationGroupAdapter6.mController.faceWidgetNotificationControllerWrapper.getViewFromNowBar(viewApply, BundleKt.bundleOf(new Pair("type", "SUB")));
                 }
-                ongoingViewHolder.mContentView.addView(apply);
+                ongoingViewHolder.mContentView.addView(viewApply);
                 LinearLayout linearLayout = (LinearLayout) ongoingViewHolder.mContentView.findViewById(R.id.ongoing_activity_expanded_header_container);
                 if (linearLayout != null) {
                     linearLayout.measure(0, View.MeasureSpec.makeMeasureSpec(41, Integer.MIN_VALUE));
@@ -383,19 +385,18 @@ public class SubscreenNotificationGroupAdapter extends SubscreenParentAdapter {
                 OngoingActivityData ongoingActivityData = ongoingViewHolder.mOngoingActivityData;
                 FrameLayout frameLayout = ongoingViewHolder.mContentView;
                 frameLayout.post(new SubscreenParentItemViewHolder$$ExternalSyntheticLambda0(ongoingViewHolder, ongoingActivityData, context2, frameLayout));
+                Context context3 = subscreenNotificationGroupAdapter6.mContext;
+                FrameLayout frameLayout2 = ongoingViewHolder.mContentView;
+                OngoingActivityData ongoingActivityData2 = ongoingViewHolder.mOngoingActivityData;
                 if (ongoingViewHolder.itemView.getMeasuredWidth() != 0) {
-                    Context context3 = subscreenNotificationGroupAdapter6.mContext;
-                    FrameLayout frameLayout2 = ongoingViewHolder.mContentView;
-                    OngoingActivityData ongoingActivityData2 = ongoingViewHolder.mOngoingActivityData;
                     OngoingActivityLayoutUtil ongoingActivityLayoutUtil = OngoingActivityLayoutUtil.INSTANCE;
                     OngoingType ongoingType = OngoingType.SUB;
                     ongoingActivityLayoutUtil.getClass();
                     OngoingActivityLayoutUtil.updateNowbarSports(context3, frameLayout2, ongoingActivityData2, ongoingType);
                 }
-                FrameLayout frameLayout3 = ongoingViewHolder.mContentView;
-                OngoingActivityData ongoingActivityData3 = ongoingViewHolder.mOngoingActivityData;
                 OngoingActivityLayoutUtil.INSTANCE.getClass();
-                OngoingActivityLayoutUtil.updateOngoingChronometer(frameLayout3, ongoingActivityData3, true);
+                OngoingActivityLayoutUtil.updateOngoingChronometer(frameLayout2, ongoingActivityData2, true);
+                OngoingActivityLayoutUtil.updateOngoingDescription(frameLayout2);
             }
             ongoingViewHolder.mNotificationInfoManager.addRecyclerViewItemView(ongoingViewHolder);
         }

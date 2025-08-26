@@ -8,7 +8,6 @@ import android.util.SparseIntArray;
 import androidx.constraintlayout.core.motion.utils.Easing;
 import androidx.constraintlayout.widget.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyPosition extends KeyPositionBase {
     public String mTransitionEasing = null;
@@ -22,7 +21,6 @@ public class KeyPosition extends KeyPositionBase {
     public float mAltPercentY = Float.NaN;
     public int mPositionType = 0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Loader {
         public static final SparseIntArray sAttrMap;
 
@@ -49,69 +47,69 @@ public class KeyPosition extends KeyPositionBase {
 
     @Override // androidx.constraintlayout.motion.widget.Key
     public final void load(Context context, AttributeSet attributeSet) {
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.KeyPosition);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.KeyPosition);
         SparseIntArray sparseIntArray = Loader.sAttrMap;
-        int indexCount = obtainStyledAttributes.getIndexCount();
+        int indexCount = typedArrayObtainStyledAttributes.getIndexCount();
         for (int i = 0; i < indexCount; i++) {
-            int index = obtainStyledAttributes.getIndex(i);
+            int index = typedArrayObtainStyledAttributes.getIndex(i);
             SparseIntArray sparseIntArray2 = Loader.sAttrMap;
             switch (sparseIntArray2.get(index)) {
                 case 1:
                     if (MotionLayout.IS_IN_EDIT_MODE) {
-                        int resourceId = obtainStyledAttributes.getResourceId(index, this.mTargetId);
+                        int resourceId = typedArrayObtainStyledAttributes.getResourceId(index, this.mTargetId);
                         this.mTargetId = resourceId;
                         if (resourceId == -1) {
-                            this.mTargetString = obtainStyledAttributes.getString(index);
+                            this.mTargetString = typedArrayObtainStyledAttributes.getString(index);
                             break;
                         } else {
                             break;
                         }
-                    } else if (obtainStyledAttributes.peekValue(index).type == 3) {
-                        this.mTargetString = obtainStyledAttributes.getString(index);
+                    } else if (typedArrayObtainStyledAttributes.peekValue(index).type == 3) {
+                        this.mTargetString = typedArrayObtainStyledAttributes.getString(index);
                         break;
                     } else {
-                        this.mTargetId = obtainStyledAttributes.getResourceId(index, this.mTargetId);
+                        this.mTargetId = typedArrayObtainStyledAttributes.getResourceId(index, this.mTargetId);
                         break;
                     }
                 case 2:
-                    this.mFramePosition = obtainStyledAttributes.getInt(index, this.mFramePosition);
+                    this.mFramePosition = typedArrayObtainStyledAttributes.getInt(index, this.mFramePosition);
                     break;
                 case 3:
-                    if (obtainStyledAttributes.peekValue(index).type == 3) {
-                        this.mTransitionEasing = obtainStyledAttributes.getString(index);
+                    if (typedArrayObtainStyledAttributes.peekValue(index).type == 3) {
+                        this.mTransitionEasing = typedArrayObtainStyledAttributes.getString(index);
                         break;
                     } else {
-                        this.mTransitionEasing = Easing.NAMED_EASING[obtainStyledAttributes.getInteger(index, 0)];
+                        this.mTransitionEasing = Easing.NAMED_EASING[typedArrayObtainStyledAttributes.getInteger(index, 0)];
                         break;
                     }
                 case 4:
-                    this.mCurveFit = obtainStyledAttributes.getInteger(index, this.mCurveFit);
+                    this.mCurveFit = typedArrayObtainStyledAttributes.getInteger(index, this.mCurveFit);
                     break;
                 case 5:
-                    this.mDrawPath = obtainStyledAttributes.getInt(index, this.mDrawPath);
+                    this.mDrawPath = typedArrayObtainStyledAttributes.getInt(index, this.mDrawPath);
                     break;
                 case 6:
-                    this.mPercentX = obtainStyledAttributes.getFloat(index, this.mPercentX);
+                    this.mPercentX = typedArrayObtainStyledAttributes.getFloat(index, this.mPercentX);
                     break;
                 case 7:
-                    this.mPercentY = obtainStyledAttributes.getFloat(index, this.mPercentY);
+                    this.mPercentY = typedArrayObtainStyledAttributes.getFloat(index, this.mPercentY);
                     break;
                 case 8:
-                    float f = obtainStyledAttributes.getFloat(index, this.mPercentHeight);
+                    float f = typedArrayObtainStyledAttributes.getFloat(index, this.mPercentHeight);
                     this.mPercentWidth = f;
                     this.mPercentHeight = f;
                     break;
                 case 9:
-                    this.mPositionType = obtainStyledAttributes.getInt(index, this.mPositionType);
+                    this.mPositionType = typedArrayObtainStyledAttributes.getInt(index, this.mPositionType);
                     break;
                 case 10:
-                    this.mPathMotionArc = obtainStyledAttributes.getInt(index, this.mPathMotionArc);
+                    this.mPathMotionArc = typedArrayObtainStyledAttributes.getInt(index, this.mPathMotionArc);
                     break;
                 case 11:
-                    this.mPercentWidth = obtainStyledAttributes.getFloat(index, this.mPercentWidth);
+                    this.mPercentWidth = typedArrayObtainStyledAttributes.getFloat(index, this.mPercentWidth);
                     break;
                 case 12:
-                    this.mPercentHeight = obtainStyledAttributes.getFloat(index, this.mPercentHeight);
+                    this.mPercentHeight = typedArrayObtainStyledAttributes.getFloat(index, this.mPercentHeight);
                     break;
                 default:
                     Log.e("KeyPosition", "unused attribute 0x" + Integer.toHexString(index) + "   " + sparseIntArray2.get(index));
@@ -125,7 +123,7 @@ public class KeyPosition extends KeyPositionBase {
 
     @Override // androidx.constraintlayout.motion.widget.Key
     /* renamed from: clone */
-    public final Key mo886clone() {
+    public final Key mo888clone() {
         KeyPosition keyPosition = new KeyPosition();
         super.copy(this);
         keyPosition.mTransitionEasing = this.mTransitionEasing;

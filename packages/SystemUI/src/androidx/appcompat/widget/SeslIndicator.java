@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SeslIndicator extends LinearLayout {
     public Drawable defaultCircle;
@@ -24,13 +23,13 @@ public final class SeslIndicator extends LinearLayout {
     public Drawable selectCircle;
     public int selectedPosition;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class PageIndicatorMarker extends FrameLayout {
         public Drawable defaultCircle;
         public final ImageView imageView;
         public boolean isActive;
         public Drawable selectCircle;
 
+        /* JADX WARN: Multi-variable type inference failed */
         public PageIndicatorMarker(Context context) {
             this(context, null, 2, 0 == true ? 1 : 0);
         }
@@ -54,6 +53,7 @@ public final class SeslIndicator extends LinearLayout {
         }
     }
 
+    /* JADX WARN: Multi-variable type inference failed */
     public SeslIndicator(Context context) {
         this(context, null, 2, 0 == true ? 1 : 0);
     }
@@ -122,30 +122,30 @@ public final class SeslIndicator extends LinearLayout {
     }
 
     public SeslIndicator(Context context, AttributeSet attributeSet) {
+        Drawable drawableMutate;
+        Drawable drawableMutate2;
         super(context, attributeSet);
-        Drawable drawable;
-        Drawable mutate;
         this.indicator = new ArrayList();
-        Drawable drawable2 = context.getDrawable(R.drawable.sesl_viewpager_indicator_on_off);
-        Drawable drawable3 = null;
-        if (drawable2 == null || (drawable = drawable2.mutate()) == null) {
-            drawable = null;
+        Drawable drawable = context.getDrawable(R.drawable.sesl_viewpager_indicator_on_off);
+        Drawable drawable2 = null;
+        if (drawable == null || (drawableMutate = drawable.mutate()) == null) {
+            drawableMutate = null;
         } else {
             SeslThemeResourceHelper.Companion companion = SeslThemeResourceHelper.Companion;
             SeslThemeResourceColor$OpenThemeResourceColor seslThemeResourceColor$OpenThemeResourceColor = new SeslThemeResourceColor$OpenThemeResourceColor(new SeslThemeResourceColor$ThemeResourceColor(R.color.sesl_appbar_viewpager_indicator_off, R.color.sesl_appbar_viewpager_indicator_off_dark), new SeslThemeResourceColor$ThemeResourceColor(R.color.sesl_appbar_viewpager_indicator_off_for_theme, R.color.sesl_appbar_viewpager_indicator_off_dark_for_theme));
             companion.getClass();
-            drawable.setTint(context.getColor(seslThemeResourceColor$OpenThemeResourceColor.getColor(context)));
+            drawableMutate.setTint(context.getColor(seslThemeResourceColor$OpenThemeResourceColor.getColor(context)));
         }
-        this.defaultCircle = drawable;
-        Drawable drawable4 = context.getDrawable(R.drawable.sesl_viewpager_indicator_on_off);
-        if (drawable4 != null && (mutate = drawable4.mutate()) != null) {
+        this.defaultCircle = drawableMutate;
+        Drawable drawable3 = context.getDrawable(R.drawable.sesl_viewpager_indicator_on_off);
+        if (drawable3 != null && (drawableMutate2 = drawable3.mutate()) != null) {
             SeslThemeResourceHelper.Companion companion2 = SeslThemeResourceHelper.Companion;
             SeslThemeResourceColor$OpenThemeResourceColor seslThemeResourceColor$OpenThemeResourceColor2 = new SeslThemeResourceColor$OpenThemeResourceColor(new SeslThemeResourceColor$ThemeResourceColor(R.color.sesl_appbar_viewpager_indicator_on), new SeslThemeResourceColor$ThemeResourceColor(R.color.sesl_appbar_viewpager_indicator_on_for_theme));
             companion2.getClass();
-            mutate.setTint(context.getColor(seslThemeResourceColor$OpenThemeResourceColor2.getColor(context)));
-            drawable3 = mutate;
+            drawableMutate2.setTint(context.getColor(seslThemeResourceColor$OpenThemeResourceColor2.getColor(context)));
+            drawable2 = drawableMutate2;
         }
-        this.selectCircle = drawable3;
+        this.selectCircle = drawable2;
         this.selectedPosition = -1;
     }
 }

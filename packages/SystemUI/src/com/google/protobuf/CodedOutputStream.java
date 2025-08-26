@@ -7,14 +7,12 @@ import java.io.OutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class CodedOutputStream extends ByteOutput {
     public CodedOutputStreamWriter wrapper;
     public static final Logger logger = Logger.getLogger(CodedOutputStream.class.getName());
     public static final boolean HAS_UNSAFE_ARRAY_OPERATIONS = UnsafeUtil.HAS_UNSAFE_ARRAY_OPERATIONS;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class AbstractBufferedEncoder extends CodedOutputStream {
         public final byte[] buffer;
         public final int limit;
@@ -131,7 +129,6 @@ public abstract class CodedOutputStream extends ByteOutput {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class OutOfSpaceException extends IOException {
         private static final long serialVersionUID = -6947486886997889499L;
 
@@ -243,7 +240,7 @@ public abstract class CodedOutputStream extends ByteOutput {
         return (j & (-16384)) != 0 ? i + 1 : i;
     }
 
-    public final void inefficientWriteStringNoTag(String str, Utf8.UnpairedSurrogateException unpairedSurrogateException) {
+    public final void inefficientWriteStringNoTag(String str, Utf8.UnpairedSurrogateException unpairedSurrogateException) throws OutOfSpaceException {
         logger.log(Level.WARNING, "Converting ill-formed UTF-16. Your Protocol Buffer will not round trip correctly!", (Throwable) unpairedSurrogateException);
         byte[] bytes = str.getBytes(Internal.UTF_8);
         try {
@@ -301,7 +298,6 @@ public abstract class CodedOutputStream extends ByteOutput {
     private CodedOutputStream() {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ArrayEncoder extends CodedOutputStream {
         public final byte[] buffer;
         public final int limit;
@@ -326,7 +322,7 @@ public abstract class CodedOutputStream extends ByteOutput {
         }
 
         @Override // com.google.protobuf.CodedOutputStream
-        public final void write(byte b) {
+        public final void write(byte b) throws OutOfSpaceException {
             try {
                 byte[] bArr = this.buffer;
                 int i = this.position;
@@ -338,37 +334,37 @@ public abstract class CodedOutputStream extends ByteOutput {
         }
 
         @Override // com.google.protobuf.CodedOutputStream
-        public final void writeBool(int i, boolean z) {
+        public final void writeBool(int i, boolean z) throws OutOfSpaceException {
             writeTag(i, 0);
             write(z ? (byte) 1 : (byte) 0);
         }
 
         @Override // com.google.protobuf.CodedOutputStream
-        public final void writeByteArrayNoTag(int i, byte[] bArr) {
+        public final void writeByteArrayNoTag(int i, byte[] bArr) throws OutOfSpaceException {
             writeUInt32NoTag(i);
             write(bArr, 0, i);
         }
 
         @Override // com.google.protobuf.CodedOutputStream
-        public final void writeBytes(int i, ByteString byteString) {
+        public final void writeBytes(int i, ByteString byteString) throws OutOfSpaceException {
             writeTag(i, 2);
             writeBytesNoTag(byteString);
         }
 
         @Override // com.google.protobuf.CodedOutputStream
-        public final void writeBytesNoTag(ByteString byteString) {
+        public final void writeBytesNoTag(ByteString byteString) throws OutOfSpaceException {
             writeUInt32NoTag(byteString.size());
             byteString.writeTo(this);
         }
 
         @Override // com.google.protobuf.CodedOutputStream
-        public final void writeFixed32(int i, int i2) {
+        public final void writeFixed32(int i, int i2) throws OutOfSpaceException {
             writeTag(i, 5);
             writeFixed32NoTag(i2);
         }
 
         @Override // com.google.protobuf.CodedOutputStream
-        public final void writeFixed32NoTag(int i) {
+        public final void writeFixed32NoTag(int i) throws OutOfSpaceException {
             try {
                 byte[] bArr = this.buffer;
                 int i2 = this.position;
@@ -389,13 +385,13 @@ public abstract class CodedOutputStream extends ByteOutput {
         }
 
         @Override // com.google.protobuf.CodedOutputStream
-        public final void writeFixed64(int i, long j) {
+        public final void writeFixed64(int i, long j) throws OutOfSpaceException {
             writeTag(i, 1);
             writeFixed64NoTag(j);
         }
 
         @Override // com.google.protobuf.CodedOutputStream
-        public final void writeFixed64NoTag(long j) {
+        public final void writeFixed64NoTag(long j) throws OutOfSpaceException {
             try {
                 byte[] bArr = this.buffer;
                 int i = this.position;
@@ -428,13 +424,13 @@ public abstract class CodedOutputStream extends ByteOutput {
         }
 
         @Override // com.google.protobuf.CodedOutputStream
-        public final void writeInt32(int i, int i2) {
+        public final void writeInt32(int i, int i2) throws OutOfSpaceException {
             writeTag(i, 0);
             writeInt32NoTag(i2);
         }
 
         @Override // com.google.protobuf.CodedOutputStream
-        public final void writeInt32NoTag(int i) {
+        public final void writeInt32NoTag(int i) throws OutOfSpaceException {
             if (i >= 0) {
                 writeUInt32NoTag(i);
             } else {
@@ -443,25 +439,25 @@ public abstract class CodedOutputStream extends ByteOutput {
         }
 
         @Override // com.google.protobuf.ByteOutput
-        public final void writeLazy(int i, int i2, byte[] bArr) {
+        public final void writeLazy(int i, int i2, byte[] bArr) throws OutOfSpaceException {
             write(bArr, i, i2);
         }
 
         @Override // com.google.protobuf.CodedOutputStream
-        public final void writeMessage(int i, MessageLite messageLite, Schema schema) {
+        public final void writeMessage(int i, MessageLite messageLite, Schema schema) throws OutOfSpaceException {
             writeTag(i, 2);
             writeUInt32NoTag(((AbstractMessageLite) messageLite).getSerializedSize(schema));
             schema.writeTo(messageLite, this.wrapper);
         }
 
         @Override // com.google.protobuf.CodedOutputStream
-        public final void writeMessageNoTag(MessageLite messageLite) {
+        public final void writeMessageNoTag(MessageLite messageLite) throws OutOfSpaceException {
             writeUInt32NoTag(((GeneratedMessageLite) messageLite).getSerializedSize(null));
             ((GeneratedMessageLite) messageLite).writeTo(this);
         }
 
         @Override // com.google.protobuf.CodedOutputStream
-        public final void writeMessageSetExtension(int i, MessageLite messageLite) {
+        public final void writeMessageSetExtension(int i, MessageLite messageLite) throws OutOfSpaceException {
             writeTag(1, 3);
             writeUInt32(2, i);
             writeTag(3, 2);
@@ -470,7 +466,7 @@ public abstract class CodedOutputStream extends ByteOutput {
         }
 
         @Override // com.google.protobuf.CodedOutputStream
-        public final void writeRawMessageSetExtension(int i, ByteString byteString) {
+        public final void writeRawMessageSetExtension(int i, ByteString byteString) throws OutOfSpaceException {
             writeTag(1, 3);
             writeUInt32(2, i);
             writeBytes(3, byteString);
@@ -478,29 +474,29 @@ public abstract class CodedOutputStream extends ByteOutput {
         }
 
         @Override // com.google.protobuf.CodedOutputStream
-        public final void writeString(int i, String str) {
+        public final void writeString(int i, String str) throws OutOfSpaceException {
             writeTag(i, 2);
             writeStringNoTag(str);
         }
 
         @Override // com.google.protobuf.CodedOutputStream
-        public final void writeStringNoTag(String str) {
+        public final void writeStringNoTag(String str) throws OutOfSpaceException {
             int i = this.position;
             try {
-                int computeUInt32SizeNoTag = CodedOutputStream.computeUInt32SizeNoTag(str.length() * 3);
-                int computeUInt32SizeNoTag2 = CodedOutputStream.computeUInt32SizeNoTag(str.length());
+                int iComputeUInt32SizeNoTag = CodedOutputStream.computeUInt32SizeNoTag(str.length() * 3);
+                int iComputeUInt32SizeNoTag2 = CodedOutputStream.computeUInt32SizeNoTag(str.length());
                 byte[] bArr = this.buffer;
-                if (computeUInt32SizeNoTag2 != computeUInt32SizeNoTag) {
+                if (iComputeUInt32SizeNoTag2 != iComputeUInt32SizeNoTag) {
                     writeUInt32NoTag(Utf8.encodedLength(str));
                     this.position = Utf8.encode(str, bArr, this.position, spaceLeft());
                     return;
                 }
-                int i2 = i + computeUInt32SizeNoTag2;
+                int i2 = i + iComputeUInt32SizeNoTag2;
                 this.position = i2;
-                int encode = Utf8.encode(str, bArr, i2, spaceLeft());
+                int iEncode = Utf8.encode(str, bArr, i2, spaceLeft());
                 this.position = i;
-                writeUInt32NoTag((encode - i) - computeUInt32SizeNoTag2);
-                this.position = encode;
+                writeUInt32NoTag((iEncode - i) - iComputeUInt32SizeNoTag2);
+                this.position = iEncode;
             } catch (Utf8.UnpairedSurrogateException e) {
                 this.position = i;
                 inefficientWriteStringNoTag(str, e);
@@ -510,18 +506,18 @@ public abstract class CodedOutputStream extends ByteOutput {
         }
 
         @Override // com.google.protobuf.CodedOutputStream
-        public final void writeTag(int i, int i2) {
+        public final void writeTag(int i, int i2) throws OutOfSpaceException {
             writeUInt32NoTag((i << 3) | i2);
         }
 
         @Override // com.google.protobuf.CodedOutputStream
-        public final void writeUInt32(int i, int i2) {
+        public final void writeUInt32(int i, int i2) throws OutOfSpaceException {
             writeTag(i, 0);
             writeUInt32NoTag(i2);
         }
 
         @Override // com.google.protobuf.CodedOutputStream
-        public final void writeUInt32NoTag(int i) {
+        public final void writeUInt32NoTag(int i) throws OutOfSpaceException {
             while (true) {
                 int i2 = i & (-128);
                 byte[] bArr = this.buffer;
@@ -545,13 +541,13 @@ public abstract class CodedOutputStream extends ByteOutput {
         }
 
         @Override // com.google.protobuf.CodedOutputStream
-        public final void writeUInt64(int i, long j) {
+        public final void writeUInt64(int i, long j) throws OutOfSpaceException {
             writeTag(i, 0);
             writeUInt64NoTag(j);
         }
 
         @Override // com.google.protobuf.CodedOutputStream
-        public final void writeUInt64NoTag(long j) {
+        public final void writeUInt64NoTag(long j) throws OutOfSpaceException {
             byte[] bArr = this.buffer;
             if (CodedOutputStream.HAS_UNSAFE_ARRAY_OPERATIONS && spaceLeft() >= 10) {
                 while ((j & (-128)) != 0) {
@@ -580,7 +576,7 @@ public abstract class CodedOutputStream extends ByteOutput {
             bArr[i4] = (byte) j;
         }
 
-        public final void write(byte[] bArr, int i, int i2) {
+        public final void write(byte[] bArr, int i, int i2) throws OutOfSpaceException {
             try {
                 System.arraycopy(bArr, i, this.buffer, this.position, i2);
                 this.position += i2;
@@ -590,7 +586,6 @@ public abstract class CodedOutputStream extends ByteOutput {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class OutputStreamEncoder extends AbstractBufferedEncoder {
         public final OutputStream out;
 
@@ -602,19 +597,19 @@ public abstract class CodedOutputStream extends ByteOutput {
             this.out = outputStream;
         }
 
-        public final void doFlush() {
+        public final void doFlush() throws IOException {
             this.out.write(this.buffer, 0, this.position);
             this.position = 0;
         }
 
-        public final void flushIfNotAvailable(int i) {
+        public final void flushIfNotAvailable(int i) throws IOException {
             if (this.limit - this.position < i) {
                 doFlush();
             }
         }
 
         @Override // com.google.protobuf.CodedOutputStream
-        public final void write(byte b) {
+        public final void write(byte b) throws IOException {
             if (this.position == this.limit) {
                 doFlush();
             }
@@ -624,7 +619,7 @@ public abstract class CodedOutputStream extends ByteOutput {
         }
 
         @Override // com.google.protobuf.CodedOutputStream
-        public final void writeBool(int i, boolean z) {
+        public final void writeBool(int i, boolean z) throws IOException {
             flushIfNotAvailable(11);
             bufferTag(i, 0);
             byte b = z ? (byte) 1 : (byte) 0;
@@ -634,51 +629,51 @@ public abstract class CodedOutputStream extends ByteOutput {
         }
 
         @Override // com.google.protobuf.CodedOutputStream
-        public final void writeByteArrayNoTag(int i, byte[] bArr) {
+        public final void writeByteArrayNoTag(int i, byte[] bArr) throws IOException {
             writeUInt32NoTag(i);
             write(bArr, 0, i);
         }
 
         @Override // com.google.protobuf.CodedOutputStream
-        public final void writeBytes(int i, ByteString byteString) {
+        public final void writeBytes(int i, ByteString byteString) throws IOException {
             writeTag(i, 2);
             writeBytesNoTag(byteString);
         }
 
         @Override // com.google.protobuf.CodedOutputStream
-        public final void writeBytesNoTag(ByteString byteString) {
+        public final void writeBytesNoTag(ByteString byteString) throws IOException {
             writeUInt32NoTag(byteString.size());
             byteString.writeTo(this);
         }
 
         @Override // com.google.protobuf.CodedOutputStream
-        public final void writeFixed32(int i, int i2) {
+        public final void writeFixed32(int i, int i2) throws IOException {
             flushIfNotAvailable(14);
             bufferTag(i, 5);
             bufferFixed32NoTag(i2);
         }
 
         @Override // com.google.protobuf.CodedOutputStream
-        public final void writeFixed32NoTag(int i) {
+        public final void writeFixed32NoTag(int i) throws IOException {
             flushIfNotAvailable(4);
             bufferFixed32NoTag(i);
         }
 
         @Override // com.google.protobuf.CodedOutputStream
-        public final void writeFixed64(int i, long j) {
+        public final void writeFixed64(int i, long j) throws IOException {
             flushIfNotAvailable(18);
             bufferTag(i, 1);
             bufferFixed64NoTag(j);
         }
 
         @Override // com.google.protobuf.CodedOutputStream
-        public final void writeFixed64NoTag(long j) {
+        public final void writeFixed64NoTag(long j) throws IOException {
             flushIfNotAvailable(8);
             bufferFixed64NoTag(j);
         }
 
         @Override // com.google.protobuf.CodedOutputStream
-        public final void writeInt32(int i, int i2) {
+        public final void writeInt32(int i, int i2) throws IOException {
             flushIfNotAvailable(20);
             bufferTag(i, 0);
             if (i2 >= 0) {
@@ -689,7 +684,7 @@ public abstract class CodedOutputStream extends ByteOutput {
         }
 
         @Override // com.google.protobuf.CodedOutputStream
-        public final void writeInt32NoTag(int i) {
+        public final void writeInt32NoTag(int i) throws IOException {
             if (i >= 0) {
                 writeUInt32NoTag(i);
             } else {
@@ -698,25 +693,25 @@ public abstract class CodedOutputStream extends ByteOutput {
         }
 
         @Override // com.google.protobuf.ByteOutput
-        public final void writeLazy(int i, int i2, byte[] bArr) {
+        public final void writeLazy(int i, int i2, byte[] bArr) throws IOException {
             write(bArr, i, i2);
         }
 
         @Override // com.google.protobuf.CodedOutputStream
-        public final void writeMessage(int i, MessageLite messageLite, Schema schema) {
+        public final void writeMessage(int i, MessageLite messageLite, Schema schema) throws IOException {
             writeTag(i, 2);
             writeUInt32NoTag(((AbstractMessageLite) messageLite).getSerializedSize(schema));
             schema.writeTo(messageLite, this.wrapper);
         }
 
         @Override // com.google.protobuf.CodedOutputStream
-        public final void writeMessageNoTag(MessageLite messageLite) {
+        public final void writeMessageNoTag(MessageLite messageLite) throws IOException {
             writeUInt32NoTag(((GeneratedMessageLite) messageLite).getSerializedSize(null));
             ((GeneratedMessageLite) messageLite).writeTo(this);
         }
 
         @Override // com.google.protobuf.CodedOutputStream
-        public final void writeMessageSetExtension(int i, MessageLite messageLite) {
+        public final void writeMessageSetExtension(int i, MessageLite messageLite) throws IOException {
             writeTag(1, 3);
             writeUInt32(2, i);
             writeTag(3, 2);
@@ -725,7 +720,7 @@ public abstract class CodedOutputStream extends ByteOutput {
         }
 
         @Override // com.google.protobuf.CodedOutputStream
-        public final void writeRawMessageSetExtension(int i, ByteString byteString) {
+        public final void writeRawMessageSetExtension(int i, ByteString byteString) throws IOException {
             writeTag(1, 3);
             writeUInt32(2, i);
             writeBytes(3, byteString);
@@ -733,43 +728,43 @@ public abstract class CodedOutputStream extends ByteOutput {
         }
 
         @Override // com.google.protobuf.CodedOutputStream
-        public final void writeString(int i, String str) {
+        public final void writeString(int i, String str) throws IOException {
             writeTag(i, 2);
             writeStringNoTag(str);
         }
 
         @Override // com.google.protobuf.CodedOutputStream
-        public final void writeStringNoTag(String str) {
+        public final void writeStringNoTag(String str) throws IOException {
             try {
                 int length = str.length() * 3;
-                int computeUInt32SizeNoTag = CodedOutputStream.computeUInt32SizeNoTag(length);
-                int i = computeUInt32SizeNoTag + length;
+                int iComputeUInt32SizeNoTag = CodedOutputStream.computeUInt32SizeNoTag(length);
+                int i = iComputeUInt32SizeNoTag + length;
                 int i2 = this.limit;
                 if (i > i2) {
                     byte[] bArr = new byte[length];
-                    int encode = Utf8.encode(str, bArr, 0, length);
-                    writeUInt32NoTag(encode);
-                    write(bArr, 0, encode);
+                    int iEncode = Utf8.encode(str, bArr, 0, length);
+                    writeUInt32NoTag(iEncode);
+                    write(bArr, 0, iEncode);
                     return;
                 }
                 if (i > i2 - this.position) {
                     doFlush();
                 }
-                int computeUInt32SizeNoTag2 = CodedOutputStream.computeUInt32SizeNoTag(str.length());
+                int iComputeUInt32SizeNoTag2 = CodedOutputStream.computeUInt32SizeNoTag(str.length());
                 int i3 = this.position;
                 byte[] bArr2 = this.buffer;
                 try {
-                    if (computeUInt32SizeNoTag2 == computeUInt32SizeNoTag) {
-                        int i4 = i3 + computeUInt32SizeNoTag2;
+                    if (iComputeUInt32SizeNoTag2 == iComputeUInt32SizeNoTag) {
+                        int i4 = i3 + iComputeUInt32SizeNoTag2;
                         this.position = i4;
-                        int encode2 = Utf8.encode(str, bArr2, i4, i2 - i4);
+                        int iEncode2 = Utf8.encode(str, bArr2, i4, i2 - i4);
                         this.position = i3;
-                        bufferUInt32NoTag((encode2 - i3) - computeUInt32SizeNoTag2);
-                        this.position = encode2;
+                        bufferUInt32NoTag((iEncode2 - i3) - iComputeUInt32SizeNoTag2);
+                        this.position = iEncode2;
                     } else {
-                        int encodedLength = Utf8.encodedLength(str);
-                        bufferUInt32NoTag(encodedLength);
-                        this.position = Utf8.encode(str, bArr2, this.position, encodedLength);
+                        int iEncodedLength = Utf8.encodedLength(str);
+                        bufferUInt32NoTag(iEncodedLength);
+                        this.position = Utf8.encode(str, bArr2, this.position, iEncodedLength);
                     }
                 } catch (Utf8.UnpairedSurrogateException e) {
                     this.position = i3;
@@ -783,37 +778,37 @@ public abstract class CodedOutputStream extends ByteOutput {
         }
 
         @Override // com.google.protobuf.CodedOutputStream
-        public final void writeTag(int i, int i2) {
+        public final void writeTag(int i, int i2) throws IOException {
             writeUInt32NoTag((i << 3) | i2);
         }
 
         @Override // com.google.protobuf.CodedOutputStream
-        public final void writeUInt32(int i, int i2) {
+        public final void writeUInt32(int i, int i2) throws IOException {
             flushIfNotAvailable(20);
             bufferTag(i, 0);
             bufferUInt32NoTag(i2);
         }
 
         @Override // com.google.protobuf.CodedOutputStream
-        public final void writeUInt32NoTag(int i) {
+        public final void writeUInt32NoTag(int i) throws IOException {
             flushIfNotAvailable(5);
             bufferUInt32NoTag(i);
         }
 
         @Override // com.google.protobuf.CodedOutputStream
-        public final void writeUInt64(int i, long j) {
+        public final void writeUInt64(int i, long j) throws IOException {
             flushIfNotAvailable(20);
             bufferTag(i, 0);
             bufferUInt64NoTag(j);
         }
 
         @Override // com.google.protobuf.CodedOutputStream
-        public final void writeUInt64NoTag(long j) {
+        public final void writeUInt64NoTag(long j) throws IOException {
             flushIfNotAvailable(10);
             bufferUInt64NoTag(j);
         }
 
-        public final void write(byte[] bArr, int i, int i2) {
+        public final void write(byte[] bArr, int i, int i2) throws IOException {
             int i3 = this.position;
             int i4 = this.limit;
             int i5 = i4 - i3;

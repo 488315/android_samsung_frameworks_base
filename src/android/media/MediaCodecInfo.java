@@ -1,18 +1,25 @@
 package android.media;
 
+import android.hardware.scontext.SContextConstants;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.media.MediaCodecInfo;
 import android.media.codec.Flags;
+import android.opengl.GLES20;
+import android.opengl.GLES30;
 import android.os.Build;
 import android.os.Process;
 import android.os.SystemProperties;
 import android.sysprop.MediaProperties;
+import android.text.Spanned;
 import android.util.Log;
 import android.util.Pair;
 import android.util.Range;
 import android.util.Rational;
 import android.util.Size;
 import com.android.internal.content.NativeLibraryHelper;
+import com.android.internal.logging.nano.MetricsProto;
+import com.android.internal.util.Protocol;
+import com.samsung.android.media.SemExtendedFormat;
 import com.samsung.android.media.SemMediaPostProcessor;
 import com.samsung.android.transcode.constants.EncodeConstants;
 import com.samsung.android.wallpaperbackup.BnRConstants;
@@ -101,8 +108,8 @@ public final class MediaCodecInfo {
     }
 
     public final String[] getSupportedTypes() {
-        Set<String> keySet = this.mCaps.keySet();
-        String[] strArr = (String[]) keySet.toArray(new String[keySet.size()]);
+        Set<String> setKeySet = this.mCaps.keySet();
+        String[] strArr = (String[]) setKeySet.toArray(new String[setKeySet.size()]);
         Arrays.sort(strArr);
         return strArr;
     }
@@ -135,20 +142,16 @@ public final class MediaCodecInfo {
 
     /* JADX INFO: Access modifiers changed from: private */
     public static synchronized Range<Integer> getSizeRange() {
-        Range<Integer> range;
-        Range<Integer> create;
-        synchronized (MediaCodecInfo.class) {
-            if (SIZE_RANGE == null) {
-                if (Process.is64Bit()) {
-                    create = Range.create(1, 32768);
-                } else {
-                    create = Range.create(1, MediaProperties.resolution_limit_32bit().orElse(4096));
-                }
-                SIZE_RANGE = create;
+        Range<Integer> rangeCreate;
+        if (SIZE_RANGE == null) {
+            if (Process.is64Bit()) {
+                rangeCreate = Range.create(1, 32768);
+            } else {
+                rangeCreate = Range.create(1, MediaProperties.resolution_limit_32bit().orElse(4096));
             }
-            range = SIZE_RANGE;
+            SIZE_RANGE = rangeCreate;
         }
-        return range;
+        return SIZE_RANGE;
     }
 
     public static final class CodecCapabilities {
@@ -272,9 +275,7 @@ public final class MediaCodecInfo {
                 if (MediaCodec.GetFlag(new Supplier() { // from class: android.media.MediaCodecInfo$CodecCapabilities$FeatureList$$ExternalSyntheticLambda0
                     @Override // java.util.function.Supplier
                     public final Object get() {
-                        Boolean valueOf;
-                        valueOf = Boolean.valueOf(Flags.dynamicColorAspects());
-                        return valueOf;
+                        return Boolean.valueOf(Flags.dynamicColorAspects());
                     }
                 })) {
                     arrayList.add(new Feature(CodecCapabilities.FEATURE_DynamicColorAspects, 256, true));
@@ -282,9 +283,7 @@ public final class MediaCodecInfo {
                 if (MediaCodec.GetFlag(new Supplier() { // from class: android.media.MediaCodecInfo$CodecCapabilities$FeatureList$$ExternalSyntheticLambda1
                     @Override // java.util.function.Supplier
                     public final Object get() {
-                        Boolean valueOf;
-                        valueOf = Boolean.valueOf(Flags.nullOutputSurface());
-                        return valueOf;
+                        return Boolean.valueOf(Flags.nullOutputSurface());
                     }
                 })) {
                     arrayList.add(new Feature(CodecCapabilities.FEATURE_DetachedSurface, 512, true));
@@ -304,9 +303,7 @@ public final class MediaCodecInfo {
                 if (MediaCodec.GetFlag(new Supplier() { // from class: android.media.MediaCodecInfo$CodecCapabilities$FeatureList$$ExternalSyntheticLambda2
                     @Override // java.util.function.Supplier
                     public final Object get() {
-                        Boolean valueOf;
-                        valueOf = Boolean.valueOf(Flags.hlgEditing());
-                        return valueOf;
+                        return Boolean.valueOf(Flags.hlgEditing());
                     }
                 })) {
                     arrayList.add(new Feature(CodecCapabilities.FEATURE_HlgEditing, 64, true));
@@ -314,9 +311,7 @@ public final class MediaCodecInfo {
                 if (MediaCodec.GetFlag(new Supplier() { // from class: android.media.MediaCodecInfo$CodecCapabilities$FeatureList$$ExternalSyntheticLambda3
                     @Override // java.util.function.Supplier
                     public final Object get() {
-                        Boolean valueOf;
-                        valueOf = Boolean.valueOf(Flags.regionOfInterest());
-                        return valueOf;
+                        return Boolean.valueOf(Flags.regionOfInterest());
                     }
                 })) {
                     arrayList.add(new Feature(CodecCapabilities.FEATURE_Roi, 128, true));
@@ -393,16 +388,16 @@ public final class MediaCodecInfo {
                         i = codecProfileLevel.level;
                     }
                 }
-                CodecCapabilities createFromProfileLevel = createFromProfileLevel(this.mMime, num2.intValue(), i);
-                HashMap hashMap = new HashMap(map);
+                CodecCapabilities codecCapabilitiesCreateFromProfileLevel = createFromProfileLevel(this.mMime, num2.intValue(), i);
+                HashMap map2 = new HashMap(map);
                 if (isVideo()) {
                     set = VideoCapabilities.VIDEO_LEVEL_CRITICAL_FORMAT_KEYS;
                 } else {
                     set = isAudio() ? AudioCapabilities.AUDIO_LEVEL_CRITICAL_FORMAT_KEYS : null;
                 }
-                if (set != null && set.size() > 1 && createFromProfileLevel != null) {
-                    hashMap.keySet().retainAll(set);
-                    if (!createFromProfileLevel.isFormatSupported(new MediaFormat(hashMap))) {
+                if (set != null && set.size() > 1 && codecCapabilitiesCreateFromProfileLevel != null) {
+                    map2.keySet().retainAll(set);
+                    if (!codecCapabilitiesCreateFromProfileLevel.isFormatSupported(new MediaFormat(map2))) {
                         return false;
                     }
                 }
@@ -422,17 +417,21 @@ public final class MediaCodecInfo {
         /* JADX INFO: Access modifiers changed from: private */
         public static boolean supportsBitrate(Range<Integer> range, MediaFormat mediaFormat) {
             Map<String, Object> map = mediaFormat.getMap();
-            Integer num = (Integer) map.get(MediaFormat.KEY_MAX_BIT_RATE);
-            Integer num2 = (Integer) map.get(MediaFormat.KEY_BIT_RATE);
-            if (num2 != null) {
-                num = num != null ? Integer.valueOf(Math.max(num2.intValue(), num.intValue())) : num2;
+            Integer numValueOf = (Integer) map.get(MediaFormat.KEY_MAX_BIT_RATE);
+            Integer num = (Integer) map.get(MediaFormat.KEY_BIT_RATE);
+            if (num != null) {
+                numValueOf = numValueOf != null ? Integer.valueOf(Math.max(num.intValue(), numValueOf.intValue())) : num;
             }
-            if (num == null || num.intValue() <= 0) {
+            if (numValueOf == null || numValueOf.intValue() <= 0) {
                 return true;
             }
-            return range.contains((Range<Integer>) num);
+            return range.contains((Range<Integer>) numValueOf);
         }
 
+        /* JADX WARN: Removed duplicated region for block: B:48:0x009a  */
+        /*
+            Code decompiled incorrectly, please refer to instructions dump.
+        */
         private boolean supportsProfileLevel(int i, Integer num) {
             for (CodecProfileLevel codecProfileLevel : this.profileLevels) {
                 if (codecProfileLevel.profile == i) {
@@ -442,10 +441,9 @@ public final class MediaCodecInfo {
                     if ((!this.mMime.equalsIgnoreCase("video/3gpp") || codecProfileLevel.level == num.intValue() || codecProfileLevel.level != 16 || num.intValue() <= 1) && (!this.mMime.equalsIgnoreCase("video/mp4v-es") || codecProfileLevel.level == num.intValue() || codecProfileLevel.level != 4 || num.intValue() <= 1)) {
                         if (this.mMime.equalsIgnoreCase("video/hevc")) {
                             boolean z = (codecProfileLevel.level & 44739242) != 0;
-                            if ((44739242 & num.intValue()) != 0 && !z) {
+                            if ((44739242 & num.intValue()) == 0 || z) {
                             }
-                        }
-                        if (codecProfileLevel.level >= num.intValue()) {
+                        } else if (codecProfileLevel.level >= num.intValue()) {
                             return createFromProfileLevel(this.mMime, i, codecProfileLevel.level) == null || createFromProfileLevel(this.mMime, i, num.intValue()) != null;
                         }
                     }
@@ -542,16 +540,16 @@ public final class MediaCodecInfo {
             }
             this.profileLevels = codecProfileLevelArr;
             if (this.mMime.toLowerCase().startsWith("audio/")) {
-                AudioCapabilities create = AudioCapabilities.create(mediaFormat2, this);
-                this.mAudioCaps = create;
-                create.getDefaultFormat(this.mDefaultFormat);
+                AudioCapabilities audioCapabilitiesCreate = AudioCapabilities.create(mediaFormat2, this);
+                this.mAudioCaps = audioCapabilitiesCreate;
+                audioCapabilitiesCreate.getDefaultFormat(this.mDefaultFormat);
             } else if (this.mMime.toLowerCase().startsWith(BnRConstants.VIDEO_DIR_PATH) || this.mMime.equalsIgnoreCase(MediaFormat.MIMETYPE_IMAGE_ANDROID_HEIC)) {
                 this.mVideoCaps = VideoCapabilities.create(mediaFormat2, this);
             }
             if (z) {
-                EncoderCapabilities create2 = EncoderCapabilities.create(mediaFormat2, this);
-                this.mEncoderCaps = create2;
-                create2.getDefaultFormat(this.mDefaultFormat);
+                EncoderCapabilities encoderCapabilitiesCreate = EncoderCapabilities.create(mediaFormat2, this);
+                this.mEncoderCaps = encoderCapabilitiesCreate;
+                encoderCapabilitiesCreate.getDefaultFormat(this.mDefaultFormat);
             }
             this.mMaxSupportedInstances = Utils.parseIntSafely(MediaCodecList.getGlobalSettings().get("max-concurrent-instances"), 32);
             this.mMaxSupportedInstances = ((Integer) Range.create(1, 256).clamp(Integer.valueOf(Utils.parseIntSafely(map.get("max-concurrent-instances"), this.mMaxSupportedInstances)))).intValue();
@@ -601,9 +599,9 @@ public final class MediaCodecInfo {
         public int getMaxInputChannelCount() {
             int i = 0;
             for (int length = this.mInputChannelRanges.length - 1; length >= 0; length--) {
-                int intValue = this.mInputChannelRanges[length].getUpper().intValue();
-                if (intValue > i) {
-                    i = intValue;
+                int iIntValue = ((Integer) this.mInputChannelRanges[length].getUpper()).intValue();
+                if (iIntValue > i) {
+                    i = iIntValue;
                 }
             }
             return i;
@@ -612,9 +610,9 @@ public final class MediaCodecInfo {
         public int getMinInputChannelCount() {
             int i = 30;
             for (int length = this.mInputChannelRanges.length - 1; length >= 0; length--) {
-                int intValue = this.mInputChannelRanges[length].getLower().intValue();
-                if (intValue < i) {
-                    i = intValue;
+                int iIntValue = ((Integer) this.mInputChannelRanges[length].getLower()).intValue();
+                if (iIntValue < i) {
+                    i = iIntValue;
                 }
             }
             return i;
@@ -679,17 +677,17 @@ public final class MediaCodecInfo {
                 if (i >= rangeArr.length) {
                     return;
                 }
-                this.mSampleRates[i] = rangeArr[i].getLower().intValue();
+                this.mSampleRates[i] = ((Integer) rangeArr[i].getLower()).intValue();
                 i++;
             }
         }
 
         private void limitSampleRates(Range<Integer>[] rangeArr) {
             Utils.sortDistinctRanges(rangeArr);
-            Range<Integer>[] intersectSortedDistinctRanges = Utils.intersectSortedDistinctRanges(this.mSampleRateRanges, rangeArr);
-            this.mSampleRateRanges = intersectSortedDistinctRanges;
-            for (Range<Integer> range : intersectSortedDistinctRanges) {
-                if (!range.getLower().equals(range.getUpper())) {
+            Range<Integer>[] rangeArrIntersectSortedDistinctRanges = Utils.intersectSortedDistinctRanges(this.mSampleRateRanges, rangeArr);
+            this.mSampleRateRanges = rangeArrIntersectSortedDistinctRanges;
+            for (Range<Integer> range : rangeArrIntersectSortedDistinctRanges) {
+                if (!((Integer) range.getLower()).equals(range.getUpper())) {
                     this.mSampleRates = null;
                     return;
                 }
@@ -697,56 +695,60 @@ public final class MediaCodecInfo {
             createDiscreteSampleRates();
         }
 
+        /* JADX WARN: Removed duplicated region for block: B:61:0x0292  */
+        /*
+            Code decompiled incorrectly, please refer to instructions dump.
+        */
         private void applyLevelLimits() {
             int i;
             int[] iArr;
-            Range<Integer> create;
+            Range<Integer> rangeCreate;
             int[] iArr2;
-            Range<Integer> create2;
+            Range<Integer> rangeCreate2;
             int i2;
             int i3;
             int[] iArr3;
-            Range<Integer> create3;
+            Range<Integer> rangeCreate3;
             int[] iArr4;
             CodecProfileLevel[] codecProfileLevelArr = this.mParent.profileLevels;
             String mimeType = this.mParent.getMimeType();
             char c = 5;
             int i4 = 44100;
-            Range<Integer> range = null;
+            Range<Integer> rangeCreate4 = null;
             if (mimeType.equalsIgnoreCase("audio/mpeg")) {
                 iArr = new int[]{8000, 11025, 12000, 16000, 22050, 24000, 32000, 44100, 48000};
-                create = Range.create(8000, 320000);
+                rangeCreate = Range.create(8000, 320000);
                 i = 2;
             } else {
                 if (mimeType.equalsIgnoreCase("audio/3gpp")) {
                     iArr = new int[]{8000};
-                    create = Range.create(4750, 12200);
+                    rangeCreate = Range.create(4750, 12200);
                 } else if (mimeType.equalsIgnoreCase("audio/amr-wb")) {
                     iArr = new int[]{16000};
-                    create = Range.create(6600, 23850);
+                    rangeCreate = Range.create(6600, 23850);
                 } else if (mimeType.equalsIgnoreCase("audio/mp4a-latm")) {
                     iArr = new int[]{7350, 8000, 11025, 12000, 16000, 22050, 24000, 32000, 44100, 48000, 64000, 88200, 96000};
-                    create = Range.create(8000, 510000);
+                    rangeCreate = Range.create(8000, 510000);
                     i = 48;
                 } else if (mimeType.equalsIgnoreCase(MediaFormat.MIMETYPE_AUDIO_VORBIS)) {
                     i = 255;
-                    create = Range.create(32000, Integer.valueOf(Build.VERSION_CODES_FULL.ECLAIR));
+                    rangeCreate = Range.create(32000, Integer.valueOf(Build.VERSION_CODES_FULL.ECLAIR));
                     iArr = null;
-                    range = Range.create(8000, 192000);
+                    rangeCreate4 = Range.create(8000, 192000);
                 } else {
                     if (mimeType.equalsIgnoreCase(MediaFormat.MIMETYPE_AUDIO_OPUS)) {
                         i = 255;
                         iArr4 = new int[]{8000, 12000, 16000, 24000, 48000};
-                        create = Range.create(6000, 510000);
+                        rangeCreate = Range.create(6000, 510000);
                     } else if (!mimeType.equalsIgnoreCase(MediaFormat.MIMETYPE_AUDIO_RAW)) {
                         if (!mimeType.equalsIgnoreCase("audio/flac")) {
                             i = 30;
                             if (mimeType.equalsIgnoreCase(MediaFormat.MIMETYPE_AUDIO_G711_ALAW) || mimeType.equalsIgnoreCase(MediaFormat.MIMETYPE_AUDIO_G711_MLAW)) {
                                 iArr = new int[]{8000};
-                                create = Range.create(64000, 64000);
+                                rangeCreate = Range.create(64000, 64000);
                             } else if (mimeType.equalsIgnoreCase(MediaFormat.MIMETYPE_AUDIO_MSGSM)) {
                                 iArr = new int[]{8000};
-                                create = Range.create(Integer.valueOf(EncodeConstants.BitRate.MM_AVG_FHD_DATARATE), Integer.valueOf(EncodeConstants.BitRate.MM_AVG_FHD_DATARATE));
+                                rangeCreate = Range.create(Integer.valueOf(EncodeConstants.BitRate.MM_AVG_FHD_DATARATE), Integer.valueOf(EncodeConstants.BitRate.MM_AVG_FHD_DATARATE));
                             } else {
                                 if (mimeType.equalsIgnoreCase(MediaFormat.MIMETYPE_AUDIO_AC3)) {
                                     i = 6;
@@ -754,119 +756,113 @@ public final class MediaCodecInfo {
                                     i = 16;
                                 } else if (mimeType.equalsIgnoreCase(MediaFormat.MIMETYPE_AUDIO_EAC3_JOC)) {
                                     iArr = new int[]{48000};
-                                    create = Range.create(32000, 6144000);
+                                    rangeCreate = Range.create(32000, 6144000);
                                     i = 16;
                                 } else if (mimeType.equalsIgnoreCase(MediaFormat.MIMETYPE_AUDIO_AC4)) {
                                     iArr = new int[]{44100, 48000, 96000, 192000};
-                                    create = Range.create(16000, 2688000);
+                                    rangeCreate = Range.create(16000, 2688000);
                                     i = 24;
                                 } else if (mimeType.equalsIgnoreCase(MediaFormat.MIMETYPE_AUDIO_DTS)) {
                                     iArr = new int[]{44100, 48000};
-                                    create = Range.create(96000, 1524000);
+                                    rangeCreate = Range.create(96000, 1524000);
                                     i = 6;
                                 } else if (mimeType.equalsIgnoreCase(MediaFormat.MIMETYPE_AUDIO_DTS_HD)) {
                                     int length = codecProfileLevelArr.length;
                                     int i5 = 0;
                                     int[] iArr5 = null;
-                                    Range<Integer> range2 = null;
+                                    Range<Integer> range = null;
                                     while (i5 < length) {
                                         CodecProfileLevel codecProfileLevel = codecProfileLevelArr[i5];
                                         char c2 = c;
                                         int i6 = codecProfileLevel.profile;
-                                        if (i6 != 1) {
-                                            if (i6 == 2) {
-                                                i3 = i4;
-                                                iArr3 = new int[]{22050, 24000, i3, 48000};
-                                                create3 = Range.create(32000, 768000);
-                                            } else if (i6 != 4) {
-                                                i3 = i4;
-                                                Log.w(TAG, "Unrecognized profile " + codecProfileLevel.profile + " for " + mimeType);
-                                                CodecCapabilities codecCapabilities = this.mParent;
-                                                codecCapabilities.mError = codecCapabilities.mError | 1;
-                                                iArr3 = new int[6];
-                                                iArr3[0] = i3;
-                                                iArr3[1] = 48000;
-                                                iArr3[2] = 88200;
-                                                iArr3[3] = 96000;
-                                                iArr3[4] = 176400;
-                                                iArr3[c2] = 192000;
-                                                create3 = Range.create(96000, 24500000);
-                                            }
-                                            iArr5 = iArr3;
-                                            range2 = create3;
-                                            i5++;
-                                            c = c2;
-                                            i4 = i3;
+                                        if (i6 == 1) {
+                                            i3 = i4;
+                                            iArr3 = new int[6];
+                                            iArr3[0] = i3;
+                                            iArr3[1] = 48000;
+                                            iArr3[2] = 88200;
+                                            iArr3[3] = 96000;
+                                            iArr3[4] = 176400;
+                                            iArr3[c2] = 192000;
+                                            rangeCreate3 = Range.create(96000, 24500000);
+                                        } else if (i6 == 2) {
+                                            i3 = i4;
+                                            iArr3 = new int[]{22050, 24000, i3, 48000};
+                                            rangeCreate3 = Range.create(32000, 768000);
+                                        } else if (i6 != 4) {
+                                            i3 = i4;
+                                            Log.w(TAG, "Unrecognized profile " + codecProfileLevel.profile + " for " + mimeType);
+                                            CodecCapabilities codecCapabilities = this.mParent;
+                                            codecCapabilities.mError = codecCapabilities.mError | 1;
+                                            iArr3 = new int[6];
+                                            iArr3[0] = i3;
+                                            iArr3[1] = 48000;
+                                            iArr3[2] = 88200;
+                                            iArr3[3] = 96000;
+                                            iArr3[4] = 176400;
+                                            iArr3[c2] = 192000;
+                                            rangeCreate3 = Range.create(96000, 24500000);
                                         }
-                                        i3 = i4;
-                                        iArr3 = new int[6];
-                                        iArr3[0] = i3;
-                                        iArr3[1] = 48000;
-                                        iArr3[2] = 88200;
-                                        iArr3[3] = 96000;
-                                        iArr3[4] = 176400;
-                                        iArr3[c2] = 192000;
-                                        create3 = Range.create(96000, 24500000);
                                         iArr5 = iArr3;
-                                        range2 = create3;
+                                        range = rangeCreate3;
                                         i5++;
                                         c = c2;
                                         i4 = i3;
                                     }
                                     i = 8;
                                     iArr = iArr5;
-                                    create = range2;
+                                    rangeCreate = range;
                                 } else if (mimeType.equalsIgnoreCase(MediaFormat.MIMETYPE_AUDIO_DTS_UHD)) {
                                     int[] iArr6 = null;
-                                    Range<Integer> range3 = null;
+                                    Range<Integer> range2 = null;
                                     for (CodecProfileLevel codecProfileLevel2 : codecProfileLevelArr) {
                                         int i7 = codecProfileLevel2.profile;
                                         if (i7 == 1) {
                                             iArr2 = new int[]{44100, 48000, 88200, 96000, 176400, 192000};
-                                            create2 = Range.create(96000, 24500000);
+                                            rangeCreate2 = Range.create(96000, 24500000);
                                         } else if (i7 == 2) {
                                             iArr2 = new int[]{48000};
-                                            create2 = Range.create(96000, 768000);
+                                            rangeCreate2 = Range.create(96000, 768000);
                                             i2 = 10;
-                                            Range<Integer> range4 = create2;
+                                            Range<Integer> range3 = rangeCreate2;
                                             iArr6 = iArr2;
                                             i = i2;
-                                            range3 = range4;
+                                            range2 = range3;
                                         } else {
                                             Log.w(TAG, "Unrecognized profile " + codecProfileLevel2.profile + " for " + mimeType);
                                             CodecCapabilities codecCapabilities2 = this.mParent;
                                             codecCapabilities2.mError = codecCapabilities2.mError | 1;
                                             iArr2 = new int[]{44100, 48000, 88200, 96000, 176400, 192000};
-                                            create2 = Range.create(96000, 24500000);
+                                            rangeCreate2 = Range.create(96000, 24500000);
                                         }
                                         i2 = 32;
-                                        Range<Integer> range42 = create2;
+                                        Range<Integer> range32 = rangeCreate2;
                                         iArr6 = iArr2;
                                         i = i2;
-                                        range3 = range42;
+                                        range2 = range32;
                                     }
                                     iArr = iArr6;
-                                    create = range3;
+                                    rangeCreate = range2;
                                 } else {
                                     Log.w(TAG, "Unsupported mime " + mimeType);
                                     CodecCapabilities codecCapabilities3 = this.mParent;
                                     codecCapabilities3.mError = codecCapabilities3.mError | 2;
                                 }
                                 iArr = null;
-                                create = null;
+                                rangeCreate = null;
                             }
                         } else {
                             i = 255;
-                            create = null;
-                            range = Range.create(1, 655350);
+                            rangeCreate = null;
+                            rangeCreate4 = Range.create(1, 655350);
                             iArr = null;
                         }
                     } else {
-                        Range<Integer> create4 = Range.create(1, 192000);
-                        create = Range.create(1, 10000000);
+                        Range<Integer> rangeCreate5 = Range.create(1, 192000);
+                        rangeCreate = Range.create(1, 10000000);
                         i = AudioSystem.OUT_CHANNEL_COUNT_MAX;
                         iArr4 = null;
-                        range = create4;
+                        rangeCreate4 = rangeCreate5;
                     }
                     iArr = iArr4;
                 }
@@ -874,20 +870,20 @@ public final class MediaCodecInfo {
             }
             if (iArr != null) {
                 limitSampleRates(iArr);
-            } else if (range != null) {
-                limitSampleRates(new Range[]{range});
+            } else if (rangeCreate4 != null) {
+                limitSampleRates(new Range[]{rangeCreate4});
             }
-            applyLimits(new Range[]{Range.create(1, Integer.valueOf(i))}, create);
+            applyLimits(new Range[]{Range.create(1, Integer.valueOf(i))}, rangeCreate);
         }
 
         private void applyLimits(Range<Integer>[] rangeArr, Range<Integer> range) {
             Range[] rangeArr2 = new Range[rangeArr.length];
             for (int i = 0; i < rangeArr.length; i++) {
-                Integer clamp = rangeArr[i].clamp(1);
-                clamp.intValue();
-                Integer clamp2 = rangeArr[i].clamp(30);
-                clamp2.intValue();
-                rangeArr2[i] = Range.create(clamp, clamp2);
+                Integer num = (Integer) rangeArr[i].clamp(1);
+                num.intValue();
+                Integer num2 = (Integer) rangeArr[i].clamp(30);
+                num2.intValue();
+                rangeArr2[i] = Range.create(num, num2);
             }
             Utils.sortDistinctRanges(rangeArr2);
             this.mInputChannelRanges = Utils.intersectSortedDistinctRanges(rangeArr2, this.mInputChannelRanges);
@@ -896,44 +892,45 @@ public final class MediaCodecInfo {
             }
         }
 
+        /* JADX WARN: Multi-variable type inference failed */
         private void parseFromInfo(MediaFormat mediaFormat) {
-            Range<Integer>[] rangeArr = {Range.create(1, 30)};
-            Range<Integer> range = MediaCodecInfo.POSITIVE_INTEGERS;
+            Range[] rangeArr = {Range.create(1, 30)};
+            Range rangeIntersect = MediaCodecInfo.POSITIVE_INTEGERS;
             if (mediaFormat.containsKey("sample-rate-ranges")) {
-                String[] split = mediaFormat.getString("sample-rate-ranges").split(",");
-                Range<Integer>[] rangeArr2 = new Range[split.length];
-                for (int i = 0; i < split.length; i++) {
-                    rangeArr2[i] = Utils.parseIntRange(split[i], null);
+                String[] strArrSplit = mediaFormat.getString("sample-rate-ranges").split(",");
+                Range[] rangeArr2 = new Range[strArrSplit.length];
+                for (int i = 0; i < strArrSplit.length; i++) {
+                    rangeArr2[i] = Utils.parseIntRange(strArrSplit[i], null);
                 }
-                limitSampleRates(rangeArr2);
+                limitSampleRates((Range<Integer>[]) rangeArr2);
             }
             if (mediaFormat.containsKey("channel-ranges")) {
-                String[] split2 = mediaFormat.getString("channel-ranges").split(",");
-                rangeArr = new Range[split2.length];
-                for (int i2 = 0; i2 < split2.length; i2++) {
-                    rangeArr[i2] = Utils.parseIntRange(split2[i2], null);
+                String[] strArrSplit2 = mediaFormat.getString("channel-ranges").split(",");
+                rangeArr = new Range[strArrSplit2.length];
+                for (int i2 = 0; i2 < strArrSplit2.length; i2++) {
+                    rangeArr[i2] = Utils.parseIntRange(strArrSplit2[i2], null);
                 }
             } else if (mediaFormat.containsKey("channel-range")) {
                 rangeArr = new Range[]{Utils.parseIntRange(mediaFormat.getString("channel-range"), null)};
             } else if (mediaFormat.containsKey("max-channel-count")) {
-                int parseIntSafely = Utils.parseIntSafely(mediaFormat.getString("max-channel-count"), 30);
-                if (parseIntSafely == 0) {
+                int intSafely = Utils.parseIntSafely(mediaFormat.getString("max-channel-count"), 30);
+                if (intSafely == 0) {
                     rangeArr = new Range[]{Range.create(0, 0)};
                 } else {
-                    rangeArr = new Range[]{Range.create(1, Integer.valueOf(parseIntSafely))};
+                    rangeArr = new Range[]{Range.create(1, Integer.valueOf(intSafely))};
                 }
             } else if ((this.mParent.mError & 2) != 0) {
                 rangeArr = new Range[]{Range.create(0, 0)};
             }
             if (mediaFormat.containsKey("bitrate-range")) {
-                range = range.intersect(Utils.parseIntRange(mediaFormat.getString("bitrate-range"), range));
+                rangeIntersect = rangeIntersect.intersect(Utils.parseIntRange(mediaFormat.getString("bitrate-range"), rangeIntersect));
             }
-            applyLimits(rangeArr, range);
+            applyLimits(rangeArr, rangeIntersect);
         }
 
         public void getDefaultFormat(MediaFormat mediaFormat) {
-            if (this.mBitrateRange.getLower().equals(this.mBitrateRange.getUpper())) {
-                mediaFormat.setInteger(MediaFormat.KEY_BIT_RATE, this.mBitrateRange.getLower().intValue());
+            if (((Integer) this.mBitrateRange.getLower()).equals(this.mBitrateRange.getUpper())) {
+                mediaFormat.setInteger(MediaFormat.KEY_BIT_RATE, ((Integer) this.mBitrateRange.getLower()).intValue());
             }
             if (getMaxInputChannelCount() == 1) {
                 mediaFormat.setInteger(MediaFormat.KEY_CHANNEL_COUNT, 1);
@@ -1008,14 +1005,14 @@ public final class MediaCodecInfo {
                 if (!this.mHeightRange.contains((Range<Integer>) Integer.valueOf(i)) || i % this.mHeightAlignment != 0) {
                     throw new IllegalArgumentException("unsupported height");
                 }
-                int divUp = Utils.divUp(i, this.mBlockHeight);
-                double d = divUp;
-                Range<Integer> intersect = range.intersect(Integer.valueOf(((Math.max(Utils.divUp(this.mBlockCountRange.getLower().intValue(), divUp), (int) Math.ceil(this.mBlockAspectRatioRange.getLower().doubleValue() * d)) - 1) * this.mBlockWidth) + this.mWidthAlignment), Integer.valueOf(Math.min(this.mBlockCountRange.getUpper().intValue() / divUp, (int) (this.mBlockAspectRatioRange.getUpper().doubleValue() * d)) * this.mBlockWidth));
+                int iDivUp = Utils.divUp(i, this.mBlockHeight);
+                double d = iDivUp;
+                Range rangeIntersect = range.intersect(Integer.valueOf(((Math.max(Utils.divUp(((Integer) this.mBlockCountRange.getLower()).intValue(), iDivUp), (int) Math.ceil(((Rational) this.mBlockAspectRatioRange.getLower()).doubleValue() * d)) - 1) * this.mBlockWidth) + this.mWidthAlignment), Integer.valueOf(Math.min(((Integer) this.mBlockCountRange.getUpper()).intValue() / iDivUp, (int) (((Rational) this.mBlockAspectRatioRange.getUpper()).doubleValue() * d)) * this.mBlockWidth));
                 if (i > this.mSmallerDimensionUpperLimit) {
-                    intersect = intersect.intersect(1, Integer.valueOf(this.mSmallerDimensionUpperLimit));
+                    rangeIntersect = rangeIntersect.intersect(1, Integer.valueOf(this.mSmallerDimensionUpperLimit));
                 }
                 double d2 = i;
-                return intersect.intersect(Integer.valueOf((int) Math.ceil(this.mAspectRatioRange.getLower().doubleValue() * d2)), Integer.valueOf((int) (this.mAspectRatioRange.getUpper().doubleValue() * d2)));
+                return rangeIntersect.intersect(Integer.valueOf((int) Math.ceil(((Rational) this.mAspectRatioRange.getLower()).doubleValue() * d2)), Integer.valueOf((int) (((Rational) this.mAspectRatioRange.getUpper()).doubleValue() * d2)));
             } catch (IllegalArgumentException unused) {
                 Log.v(TAG, "could not get supported widths for " + i);
                 throw new IllegalArgumentException("unsupported height");
@@ -1028,14 +1025,14 @@ public final class MediaCodecInfo {
                 if (!this.mWidthRange.contains((Range<Integer>) Integer.valueOf(i)) || i % this.mWidthAlignment != 0) {
                     throw new IllegalArgumentException("unsupported width");
                 }
-                int divUp = Utils.divUp(i, this.mBlockWidth);
-                double d = divUp;
-                Range<Integer> intersect = range.intersect(Integer.valueOf(((Math.max(Utils.divUp(this.mBlockCountRange.getLower().intValue(), divUp), (int) Math.ceil(d / this.mBlockAspectRatioRange.getUpper().doubleValue())) - 1) * this.mBlockHeight) + this.mHeightAlignment), Integer.valueOf(Math.min(this.mBlockCountRange.getUpper().intValue() / divUp, (int) (d / this.mBlockAspectRatioRange.getLower().doubleValue())) * this.mBlockHeight));
+                int iDivUp = Utils.divUp(i, this.mBlockWidth);
+                double d = iDivUp;
+                Range rangeIntersect = range.intersect(Integer.valueOf(((Math.max(Utils.divUp(((Integer) this.mBlockCountRange.getLower()).intValue(), iDivUp), (int) Math.ceil(d / ((Rational) this.mBlockAspectRatioRange.getUpper()).doubleValue())) - 1) * this.mBlockHeight) + this.mHeightAlignment), Integer.valueOf(Math.min(((Integer) this.mBlockCountRange.getUpper()).intValue() / iDivUp, (int) (d / ((Rational) this.mBlockAspectRatioRange.getLower()).doubleValue())) * this.mBlockHeight));
                 if (i > this.mSmallerDimensionUpperLimit) {
-                    intersect = intersect.intersect(1, Integer.valueOf(this.mSmallerDimensionUpperLimit));
+                    rangeIntersect = rangeIntersect.intersect(1, Integer.valueOf(this.mSmallerDimensionUpperLimit));
                 }
                 double d2 = i;
-                return intersect.intersect(Integer.valueOf((int) Math.ceil(d2 / this.mAspectRatioRange.getUpper().doubleValue())), Integer.valueOf((int) (d2 / this.mAspectRatioRange.getLower().doubleValue())));
+                return rangeIntersect.intersect(Integer.valueOf((int) Math.ceil(d2 / ((Rational) this.mAspectRatioRange.getUpper()).doubleValue())), Integer.valueOf((int) (d2 / ((Rational) this.mAspectRatioRange.getLower()).doubleValue())));
             } catch (IllegalArgumentException unused) {
                 Log.v(TAG, "could not get supported heights for " + i);
                 throw new IllegalArgumentException("unsupported width");
@@ -1046,8 +1043,8 @@ public final class MediaCodecInfo {
             if (!supports(Integer.valueOf(i), Integer.valueOf(i2), null)) {
                 throw new IllegalArgumentException("unsupported size");
             }
-            double divUp = Utils.divUp(i, this.mBlockWidth) * Utils.divUp(i2, this.mBlockHeight);
-            return Range.create(Double.valueOf(Math.max(this.mBlocksPerSecondRange.getLower().longValue() / divUp, this.mFrameRateRange.getLower().intValue())), Double.valueOf(Math.min(this.mBlocksPerSecondRange.getUpper().longValue() / divUp, this.mFrameRateRange.getUpper().intValue())));
+            double dDivUp = Utils.divUp(i, this.mBlockWidth) * Utils.divUp(i2, this.mBlockHeight);
+            return Range.create(Double.valueOf(Math.max(((Long) this.mBlocksPerSecondRange.getLower()).longValue() / dDivUp, ((Integer) this.mFrameRateRange.getLower()).intValue())), Double.valueOf(Math.min(((Long) this.mBlocksPerSecondRange.getUpper()).longValue() / dDivUp, ((Integer) this.mFrameRateRange.getUpper()).intValue())));
         }
 
         private int getBlockCount(int i, int i2) {
@@ -1059,10 +1056,10 @@ public final class MediaCodecInfo {
             Size size = null;
             int i3 = Integer.MAX_VALUE;
             for (Size size2 : this.mMeasuredFrameRates.keySet()) {
-                int abs = Math.abs(blockCount - getBlockCount(size2.getWidth(), size2.getHeight()));
-                if (abs < i3) {
+                int iAbs = Math.abs(blockCount - getBlockCount(size2.getWidth(), size2.getHeight()));
+                if (iAbs < i3) {
                     size = size2;
-                    i3 = abs;
+                    i3 = iAbs;
                 }
             }
             return size;
@@ -1071,13 +1068,13 @@ public final class MediaCodecInfo {
         private Range<Double> estimateFrameRatesFor(int i, int i2) {
             Range<Long> range = this.mMeasuredFrameRates.get(findClosestSize(i, i2));
             double blockCount = getBlockCount(r0.getWidth(), r0.getHeight()) / Math.max(getBlockCount(i, i2), 1);
-            Double valueOf = Double.valueOf(blockCount);
-            double longValue = range.getLower().longValue();
-            valueOf.getClass();
-            Double valueOf2 = Double.valueOf(longValue * blockCount);
-            double longValue2 = range.getUpper().longValue();
-            valueOf.getClass();
-            return Range.create(valueOf2, Double.valueOf(longValue2 * blockCount));
+            Double dValueOf = Double.valueOf(blockCount);
+            double dLongValue = ((Long) range.getLower()).longValue();
+            dValueOf.getClass();
+            Double dValueOf2 = Double.valueOf(dLongValue * blockCount);
+            double dLongValue2 = ((Long) range.getUpper()).longValue();
+            dValueOf.getClass();
+            return Range.create(dValueOf2, Double.valueOf(dLongValue2 * blockCount));
         }
 
         public Range<Double> getAchievableFrameRatesFor(int i, int i2) {
@@ -1157,9 +1154,9 @@ public final class MediaCodecInfo {
             public String toString() {
                 int width = this.mBlockSize.getWidth() * 16;
                 int height = this.mBlockSize.getHeight() * 16;
-                int divUp = (int) Utils.divUp(this.mMaxMacroBlockRate, getMaxMacroBlocks());
-                String str = (this.mWidth * 16) + "x" + (this.mHeight * 16) + "@" + divUp;
-                if (divUp < this.mMaxFrameRate) {
+                int iDivUp = (int) Utils.divUp(this.mMaxMacroBlockRate, getMaxMacroBlocks());
+                String str = (this.mWidth * 16) + "x" + (this.mHeight * 16) + "@" + iDivUp;
+                if (iDivUp < this.mMaxFrameRate) {
                     str = str + ", max " + this.mMaxFrameRate + SemMediaPostProcessor.ProcessingFormat.Key.FPS;
                 }
                 if (width > 16 || height > 16) {
@@ -1243,21 +1240,21 @@ public final class MediaCodecInfo {
 
         private boolean supports(Integer num, Integer num2, Number number) {
             boolean z = false;
-            boolean z2 = num == null || (this.mWidthRange.contains((Range<Integer>) num) && num.intValue() % this.mWidthAlignment == 0);
-            if (z2 && num2 != null) {
-                z2 = this.mHeightRange.contains((Range<Integer>) num2) && num2.intValue() % this.mHeightAlignment == 0;
+            boolean zContains = num == null || (this.mWidthRange.contains((Range<Integer>) num) && num.intValue() % this.mWidthAlignment == 0);
+            if (zContains && num2 != null) {
+                zContains = this.mHeightRange.contains((Range<Integer>) num2) && num2.intValue() % this.mHeightAlignment == 0;
             }
-            if (z2 && number != null) {
-                z2 = this.mFrameRateRange.contains(Utils.intRangeFor(number.doubleValue()));
+            if (zContains && number != null) {
+                zContains = this.mFrameRateRange.contains(Utils.intRangeFor(number.doubleValue()));
             }
-            if (!z2 || num2 == null || num == null) {
-                return z2;
+            if (!zContains || num2 == null || num == null) {
+                return zContains;
             }
-            boolean z3 = Math.min(num2.intValue(), num.intValue()) <= this.mSmallerDimensionUpperLimit;
-            int divUp = Utils.divUp(num.intValue(), this.mBlockWidth);
-            int divUp2 = Utils.divUp(num2.intValue(), this.mBlockHeight);
-            int i = divUp * divUp2;
-            if (z3 && this.mBlockCountRange.contains((Range<Integer>) Integer.valueOf(i)) && this.mBlockAspectRatioRange.contains((Range<Rational>) new Rational(divUp, divUp2)) && this.mAspectRatioRange.contains((Range<Rational>) new Rational(num.intValue(), num2.intValue()))) {
+            boolean z2 = Math.min(num2.intValue(), num.intValue()) <= this.mSmallerDimensionUpperLimit;
+            int iDivUp = Utils.divUp(num.intValue(), this.mBlockWidth);
+            int iDivUp2 = Utils.divUp(num2.intValue(), this.mBlockHeight);
+            int i = iDivUp * iDivUp2;
+            if (z2 && this.mBlockCountRange.contains((Range<Integer>) Integer.valueOf(i)) && this.mBlockAspectRatioRange.contains((Range<Rational>) new Rational(iDivUp, iDivUp2)) && this.mAspectRatioRange.contains((Range<Rational>) new Rational(num.intValue(), num2.intValue()))) {
                 z = true;
             }
             if (!z || number == null) {
@@ -1274,13 +1271,13 @@ public final class MediaCodecInfo {
         private VideoCapabilities() {
         }
 
-        public static VideoCapabilities create(MediaFormat mediaFormat, CodecCapabilities codecCapabilities) {
+        public static VideoCapabilities create(MediaFormat mediaFormat, CodecCapabilities codecCapabilities) throws NumberFormatException {
             VideoCapabilities videoCapabilities = new VideoCapabilities();
             videoCapabilities.init(mediaFormat, codecCapabilities);
             return videoCapabilities;
         }
 
-        private void init(MediaFormat mediaFormat, CodecCapabilities codecCapabilities) {
+        private void init(MediaFormat mediaFormat, CodecCapabilities codecCapabilities) throws NumberFormatException {
             this.mParent = codecCapabilities;
             initWithPlatformLimits();
             applyLevelLimits();
@@ -1323,18 +1320,18 @@ public final class MediaCodecInfo {
         }
 
         private List<PerformancePoint> getPerformancePoints(Map<String, Object> map) {
-            Size parseSize;
-            Range<Long> parseLongRange;
+            Size size;
+            Range<Long> longRange;
             Vector vector = new Vector();
             for (String str : map.keySet()) {
                 if (str.startsWith("performance-point-")) {
                     if (str.substring(18).equals("none") && vector.size() == 0) {
                         return Collections.unmodifiableList(vector);
                     }
-                    String[] split = str.split(NativeLibraryHelper.CLEAR_ABI_OVERRIDE);
-                    if (split.length == 4 && (parseSize = Utils.parseSize(split[2], null)) != null && parseSize.getWidth() * parseSize.getHeight() > 0 && (parseLongRange = Utils.parseLongRange(map.get(str), null)) != null && parseLongRange.getLower().longValue() >= 0 && parseLongRange.getUpper().longValue() >= 0) {
-                        PerformancePoint performancePoint = new PerformancePoint(parseSize.getWidth(), parseSize.getHeight(), parseLongRange.getLower().intValue(), parseLongRange.getUpper().intValue(), new Size(this.mBlockWidth, this.mBlockHeight));
-                        PerformancePoint performancePoint2 = new PerformancePoint(parseSize.getHeight(), parseSize.getWidth(), parseLongRange.getLower().intValue(), parseLongRange.getUpper().intValue(), new Size(this.mBlockWidth, this.mBlockHeight));
+                    String[] strArrSplit = str.split(NativeLibraryHelper.CLEAR_ABI_OVERRIDE);
+                    if (strArrSplit.length == 4 && (size = Utils.parseSize(strArrSplit[2], null)) != null && size.getWidth() * size.getHeight() > 0 && (longRange = Utils.parseLongRange(map.get(str), null)) != null && ((Long) longRange.getLower()).longValue() >= 0 && ((Long) longRange.getUpper()).longValue() >= 0) {
+                        PerformancePoint performancePoint = new PerformancePoint(size.getWidth(), size.getHeight(), ((Long) longRange.getLower()).intValue(), ((Long) longRange.getUpper()).intValue(), new Size(this.mBlockWidth, this.mBlockHeight));
+                        PerformancePoint performancePoint2 = new PerformancePoint(size.getHeight(), size.getWidth(), ((Long) longRange.getLower()).intValue(), ((Long) longRange.getUpper()).intValue(), new Size(this.mBlockWidth, this.mBlockHeight));
                         vector.add(performancePoint);
                         if (!performancePoint.covers(performancePoint2)) {
                             vector.add(performancePoint2);
@@ -1354,195 +1351,256 @@ public final class MediaCodecInfo {
             return Collections.unmodifiableList(vector);
         }
 
-        /* JADX WARN: Code restructure failed: missing block: B:12:0x002f, code lost:
-        
-            if (r6.getMaxMacroBlockRate() < r7.getMaxMacroBlockRate()) goto L19;
-         */
-        /* JADX WARN: Code restructure failed: missing block: B:16:0x0044, code lost:
-        
-            if (r6.getMaxFrameRate() < r7.getMaxFrameRate()) goto L19;
-         */
-        /* JADX WARN: Code restructure failed: missing block: B:4:0x0014, code lost:
-        
-            if (r6.getMaxMacroBlocks() < r7.getMaxMacroBlocks()) goto L19;
-         */
-        /* JADX WARN: Code restructure failed: missing block: B:5:0x0017, code lost:
-        
-            r2 = 1;
-         */
+        /* JADX WARN: Removed duplicated region for block: B:7:0x0017  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        static /* synthetic */ int lambda$getPerformancePoints$0(android.media.MediaCodecInfo.VideoCapabilities.PerformancePoint r6, android.media.MediaCodecInfo.VideoCapabilities.PerformancePoint r7) {
-            /*
-                int r0 = r6.getMaxMacroBlocks()
-                int r1 = r7.getMaxMacroBlocks()
-                r2 = -1
-                r3 = 1
-                if (r0 == r1) goto L19
-                int r6 = r6.getMaxMacroBlocks()
-                int r7 = r7.getMaxMacroBlocks()
-                if (r6 >= r7) goto L17
-                goto L48
-            L17:
-                r2 = r3
-                goto L48
-            L19:
-                long r0 = r6.getMaxMacroBlockRate()
-                long r4 = r7.getMaxMacroBlockRate()
-                int r0 = (r0 > r4 ? 1 : (r0 == r4 ? 0 : -1))
-                if (r0 == 0) goto L32
-                long r0 = r6.getMaxMacroBlockRate()
-                long r6 = r7.getMaxMacroBlockRate()
-                int r6 = (r0 > r6 ? 1 : (r0 == r6 ? 0 : -1))
-                if (r6 >= 0) goto L17
-                goto L48
-            L32:
-                int r0 = r6.getMaxFrameRate()
-                int r1 = r7.getMaxFrameRate()
-                if (r0 == r1) goto L47
-                int r6 = r6.getMaxFrameRate()
-                int r7 = r7.getMaxFrameRate()
-                if (r6 >= r7) goto L17
-                goto L48
-            L47:
-                r2 = 0
-            L48:
-                int r6 = -r2
-                return r6
-            */
-            throw new UnsupportedOperationException("Method not decompiled: android.media.MediaCodecInfo.VideoCapabilities.lambda$getPerformancePoints$0(android.media.MediaCodecInfo$VideoCapabilities$PerformancePoint, android.media.MediaCodecInfo$VideoCapabilities$PerformancePoint):int");
+        static /* synthetic */ int lambda$getPerformancePoints$0(PerformancePoint performancePoint, PerformancePoint performancePoint2) {
+            int i = -1;
+            if (performancePoint.getMaxMacroBlocks() != performancePoint2.getMaxMacroBlocks()) {
+                if (performancePoint.getMaxMacroBlocks() >= performancePoint2.getMaxMacroBlocks()) {
+                    i = 1;
+                }
+            } else if (performancePoint.getMaxMacroBlockRate() != performancePoint2.getMaxMacroBlockRate()) {
+                if (performancePoint.getMaxMacroBlockRate() >= performancePoint2.getMaxMacroBlockRate()) {
+                }
+            } else if (performancePoint.getMaxFrameRate() == performancePoint2.getMaxFrameRate()) {
+                i = 0;
+            } else if (performancePoint.getMaxFrameRate() >= performancePoint2.getMaxFrameRate()) {
+            }
+            return -i;
         }
 
         private Map<Size, Range<Long>> getMeasuredFrameRates(Map<String, Object> map) {
-            Size parseSize;
-            Range<Long> parseLongRange;
-            HashMap hashMap = new HashMap();
+            Size size;
+            Range<Long> longRange;
+            HashMap map2 = new HashMap();
             for (String str : map.keySet()) {
                 if (str.startsWith("measured-frame-rate-")) {
                     str.substring(20);
-                    String[] split = str.split(NativeLibraryHelper.CLEAR_ABI_OVERRIDE);
-                    if (split.length == 5 && (parseSize = Utils.parseSize(split[3], null)) != null && parseSize.getWidth() * parseSize.getHeight() > 0 && (parseLongRange = Utils.parseLongRange(map.get(str), null)) != null && parseLongRange.getLower().longValue() >= 0 && parseLongRange.getUpper().longValue() >= 0) {
-                        hashMap.put(parseSize, parseLongRange);
+                    String[] strArrSplit = str.split(NativeLibraryHelper.CLEAR_ABI_OVERRIDE);
+                    if (strArrSplit.length == 5 && (size = Utils.parseSize(strArrSplit[3], null)) != null && size.getWidth() * size.getHeight() > 0 && (longRange = Utils.parseLongRange(map.get(str), null)) != null && ((Long) longRange.getLower()).longValue() >= 0 && ((Long) longRange.getUpper()).longValue() >= 0) {
+                        map2.put(size, longRange);
                     }
                 }
             }
-            return hashMap;
+            return map2;
         }
 
         private static Pair<Range<Integer>, Range<Integer>> parseWidthHeightRanges(Object obj) {
-            Pair<Size, Size> parseSizeRange = Utils.parseSizeRange(obj);
-            if (parseSizeRange == null) {
+            Pair<Size, Size> sizeRange = Utils.parseSizeRange(obj);
+            if (sizeRange == null) {
                 return null;
             }
             try {
-                return Pair.create(Range.create(Integer.valueOf(parseSizeRange.first.getWidth()), Integer.valueOf(parseSizeRange.second.getWidth())), Range.create(Integer.valueOf(parseSizeRange.first.getHeight()), Integer.valueOf(parseSizeRange.second.getHeight())));
+                return Pair.create(Range.create(Integer.valueOf(sizeRange.first.getWidth()), Integer.valueOf(sizeRange.second.getWidth())), Range.create(Integer.valueOf(sizeRange.first.getHeight()), Integer.valueOf(sizeRange.second.getHeight())));
             } catch (IllegalArgumentException unused) {
                 Log.w(TAG, "could not parse size range '" + obj + "'");
                 return null;
             }
         }
 
-        public static int equivalentVP9Level(MediaFormat mediaFormat) {
+        public static int equivalentVP9Level(MediaFormat mediaFormat) throws NumberFormatException {
             Map<String, Object> map = mediaFormat.getMap();
-            Size parseSize = Utils.parseSize(map.get("block-size"), new Size(8, 8));
-            int width = parseSize.getWidth() * parseSize.getHeight();
-            Range<Integer> parseIntRange = Utils.parseIntRange(map.get("block-count-range"), null);
-            int intValue = parseIntRange == null ? 0 : parseIntRange.getUpper().intValue() * width;
-            Range<Long> parseLongRange = Utils.parseLongRange(map.get("blocks-per-second-range"), null);
-            long longValue = parseLongRange == null ? 0L : width * parseLongRange.getUpper().longValue();
-            Pair<Range<Integer>, Range<Integer>> parseWidthHeightRanges = parseWidthHeightRanges(map.get("size-range"));
-            int max = parseWidthHeightRanges == null ? 0 : Math.max(parseWidthHeightRanges.first.getUpper().intValue(), parseWidthHeightRanges.second.getUpper().intValue());
-            Range<Integer> parseIntRange2 = Utils.parseIntRange(map.get("bitrate-range"), null);
-            int divUp = parseIntRange2 != null ? Utils.divUp(parseIntRange2.getUpper().intValue(), 1000) : 0;
-            if (longValue <= 829440 && intValue <= 36864 && divUp <= 200 && max <= 512) {
+            Size size = Utils.parseSize(map.get("block-size"), new Size(8, 8));
+            int width = size.getWidth() * size.getHeight();
+            Range<Integer> intRange = Utils.parseIntRange(map.get("block-count-range"), null);
+            int iIntValue = intRange == null ? 0 : ((Integer) intRange.getUpper()).intValue() * width;
+            Range<Long> longRange = Utils.parseLongRange(map.get("blocks-per-second-range"), null);
+            long jLongValue = longRange == null ? 0L : width * ((Long) longRange.getUpper()).longValue();
+            Pair<Range<Integer>, Range<Integer>> widthHeightRanges = parseWidthHeightRanges(map.get("size-range"));
+            int iMax = widthHeightRanges == null ? 0 : Math.max(((Integer) widthHeightRanges.first.getUpper()).intValue(), ((Integer) widthHeightRanges.second.getUpper()).intValue());
+            Range<Integer> intRange2 = Utils.parseIntRange(map.get("bitrate-range"), null);
+            int iDivUp = intRange2 != null ? Utils.divUp(((Integer) intRange2.getUpper()).intValue(), 1000) : 0;
+            if (jLongValue <= 829440 && iIntValue <= 36864 && iDivUp <= 200 && iMax <= 512) {
                 return 1;
             }
-            if (longValue <= 2764800 && intValue <= 73728 && divUp <= 800 && max <= 768) {
+            if (jLongValue <= 2764800 && iIntValue <= 73728 && iDivUp <= 800 && iMax <= 768) {
                 return 2;
             }
-            if (longValue <= 4608000 && intValue <= 122880 && divUp <= 1800 && max <= 960) {
+            if (jLongValue <= 4608000 && iIntValue <= 122880 && iDivUp <= 1800 && iMax <= 960) {
                 return 4;
             }
-            if (longValue <= 9216000 && intValue <= 245760 && divUp <= 3600 && max <= 1344) {
+            if (jLongValue <= 9216000 && iIntValue <= 245760 && iDivUp <= 3600 && iMax <= 1344) {
                 return 8;
             }
-            if (longValue <= 20736000 && intValue <= 552960 && divUp <= 7200 && max <= 2048) {
+            if (jLongValue <= 20736000 && iIntValue <= 552960 && iDivUp <= 7200 && iMax <= 2048) {
                 return 16;
             }
-            if (longValue <= 36864000 && intValue <= 983040 && divUp <= 12000 && max <= 2752) {
+            if (jLongValue <= 36864000 && iIntValue <= 983040 && iDivUp <= 12000 && iMax <= 2752) {
                 return 32;
             }
-            if (longValue <= 83558400 && intValue <= 2228224 && divUp <= 18000 && max <= 4160) {
+            if (jLongValue <= 83558400 && iIntValue <= 2228224 && iDivUp <= 18000 && iMax <= 4160) {
                 return 64;
             }
-            if (longValue <= 160432128 && intValue <= 2228224 && divUp <= 30000 && max <= 4160) {
+            if (jLongValue <= 160432128 && iIntValue <= 2228224 && iDivUp <= 30000 && iMax <= 4160) {
                 return 128;
             }
-            if (longValue <= 311951360 && intValue <= 8912896 && divUp <= 60000 && max <= 8384) {
+            if (jLongValue <= 311951360 && iIntValue <= 8912896 && iDivUp <= 60000 && iMax <= 8384) {
                 return 256;
             }
-            if (longValue <= 588251136 && intValue <= 8912896 && divUp <= 120000 && max <= 8384) {
+            if (jLongValue <= 588251136 && iIntValue <= 8912896 && iDivUp <= 120000 && iMax <= 8384) {
                 return 512;
             }
-            if (longValue <= 1176502272 && intValue <= 8912896 && divUp <= 180000 && max <= 8384) {
+            if (jLongValue <= 1176502272 && iIntValue <= 8912896 && iDivUp <= 180000 && iMax <= 8384) {
                 return 1024;
             }
-            if (longValue > 1176502272 || intValue > 35651584 || divUp > 180000 || max > 16832) {
-                return (longValue > 2353004544L || intValue > 35651584 || divUp > 240000 || max > 16832) ? 8192 : 4096;
+            if (jLongValue > 1176502272 || iIntValue > 35651584 || iDivUp > 180000 || iMax > 16832) {
+                return (jLongValue > 2353004544L || iIntValue > 35651584 || iDivUp > 240000 || iMax > 16832) ? 8192 : 4096;
             }
             return 2048;
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:12:0x013a  */
-        /* JADX WARN: Removed duplicated region for block: B:40:0x0231  */
-        /* JADX WARN: Removed duplicated region for block: B:42:0x023d  */
-        /* JADX WARN: Removed duplicated region for block: B:44:0x0249  */
-        /* JADX WARN: Removed duplicated region for block: B:46:0x0268  */
-        /* JADX WARN: Removed duplicated region for block: B:48:0x0288  */
-        /* JADX WARN: Removed duplicated region for block: B:50:0x02a6  */
-        /* JADX WARN: Removed duplicated region for block: B:52:0x02b2  */
-        /* JADX WARN: Removed duplicated region for block: B:54:0x02be  */
-        /* JADX WARN: Removed duplicated region for block: B:58:0x0115 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:62:0x00e4 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        private void parseFromInfo(android.media.MediaFormat r22) {
-            /*
-                Method dump skipped, instructions count: 733
-                To view this dump change 'Code comments level' option to 'DEBUG'
-            */
-            throw new UnsupportedOperationException("Method not decompiled: android.media.MediaCodecInfo.VideoCapabilities.parseFromInfo(android.media.MediaFormat):void");
+        private void parseFromInfo(MediaFormat mediaFormat) throws NumberFormatException {
+            Range<Integer> range;
+            Range<Integer> range2;
+            Range<Integer> rangeExtend;
+            Range<Integer> range3;
+            Map<String, Object> map = mediaFormat.getMap();
+            Size size = new Size(this.mBlockWidth, this.mBlockHeight);
+            Size size2 = new Size(this.mWidthAlignment, this.mHeightAlignment);
+            Size size3 = Utils.parseSize(map.get("block-size"), size);
+            Size size4 = Utils.parseSize(map.get("alignment"), size2);
+            Range rangeIntersect = null;
+            Range<Integer> intRange = Utils.parseIntRange(map.get("block-count-range"), null);
+            Range<Long> longRange = Utils.parseLongRange(map.get("blocks-per-second-range"), null);
+            this.mMeasuredFrameRates = getMeasuredFrameRates(map);
+            this.mPerformancePoints = getPerformancePoints(map);
+            Pair<Range<Integer>, Range<Integer>> widthHeightRanges = parseWidthHeightRanges(map.get("size-range"));
+            if (widthHeightRanges != null) {
+                range2 = widthHeightRanges.first;
+                range = widthHeightRanges.second;
+            } else {
+                range = null;
+                range2 = null;
+            }
+            if (!map.containsKey("feature-can-swap-width-height")) {
+                rangeExtend = range;
+                range3 = range2;
+            } else if (range2 != null) {
+                this.mSmallerDimensionUpperLimit = Math.min(((Integer) range2.getUpper()).intValue(), ((Integer) range.getUpper()).intValue());
+                rangeExtend = range2.extend(range);
+                range3 = rangeExtend;
+            } else {
+                Log.w(TAG, "feature can-swap-width-height is best used with size-range");
+                this.mSmallerDimensionUpperLimit = Math.min(((Integer) this.mWidthRange.getUpper()).intValue(), ((Integer) this.mHeightRange.getUpper()).intValue());
+                Range rangeExtend2 = this.mWidthRange.extend(this.mHeightRange);
+                this.mHeightRange = rangeExtend2;
+                this.mWidthRange = rangeExtend2;
+                rangeExtend = range;
+                range3 = range2;
+            }
+            Range<Rational> rationalRange = Utils.parseRationalRange(map.get("block-aspect-ratio-range"), null);
+            Range<Rational> rationalRange2 = Utils.parseRationalRange(map.get("pixel-aspect-ratio-range"), null);
+            Range<Integer> intRange2 = Utils.parseIntRange(map.get("frame-rate-range"), null);
+            if (intRange2 != null) {
+                try {
+                    intRange2 = intRange2.intersect(MediaCodecInfo.FRAME_RATE_RANGE);
+                } catch (IllegalArgumentException unused) {
+                    Log.w(TAG, "frame rate range (" + intRange2 + ") is out of limits: " + MediaCodecInfo.FRAME_RATE_RANGE);
+                    intRange2 = null;
+                }
+            }
+            Range<Integer> intRange3 = Utils.parseIntRange(map.get("bitrate-range"), null);
+            if (intRange3 != null) {
+                try {
+                    rangeIntersect = intRange3.intersect(MediaCodecInfo.BITRATE_RANGE);
+                } catch (IllegalArgumentException unused2) {
+                    Log.w(TAG, "bitrate range (" + intRange3 + ") is out of limits: " + MediaCodecInfo.BITRATE_RANGE);
+                }
+            } else {
+                rangeIntersect = intRange3;
+            }
+            MediaCodecInfo.checkPowerOfTwo(size3.getWidth(), "block-size width must be power of two");
+            MediaCodecInfo.checkPowerOfTwo(size3.getHeight(), "block-size height must be power of two");
+            MediaCodecInfo.checkPowerOfTwo(size4.getWidth(), "alignment width must be power of two");
+            MediaCodecInfo.checkPowerOfTwo(size4.getHeight(), "alignment height must be power of two");
+            Range range4 = rangeIntersect;
+            Range<Integer> range5 = intRange2;
+            applyMacroBlockLimits(Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, Long.MAX_VALUE, size3.getWidth(), size3.getHeight(), size4.getWidth(), size4.getHeight());
+            if ((this.mParent.mError & 2) != 0 || this.mAllowMbOverride) {
+                if (range3 != null) {
+                    this.mWidthRange = MediaCodecInfo.getSizeRange().intersect(range3);
+                }
+                if (rangeExtend != null) {
+                    this.mHeightRange = MediaCodecInfo.getSizeRange().intersect(rangeExtend);
+                }
+                if (intRange != null) {
+                    this.mBlockCountRange = MediaCodecInfo.POSITIVE_INTEGERS.intersect(Utils.factorRange(intRange, ((this.mBlockWidth * this.mBlockHeight) / size3.getWidth()) / size3.getHeight()));
+                }
+                if (longRange != null) {
+                    this.mBlocksPerSecondRange = MediaCodecInfo.POSITIVE_LONGS.intersect(Utils.factorRange(longRange, ((this.mBlockWidth * this.mBlockHeight) / size3.getWidth()) / size3.getHeight()));
+                }
+                if (rationalRange2 != null) {
+                    this.mBlockAspectRatioRange = MediaCodecInfo.POSITIVE_RATIONALS.intersect(Utils.scaleRange(rationalRange2, this.mBlockHeight / size3.getHeight(), this.mBlockWidth / size3.getWidth()));
+                }
+                if (rationalRange != null) {
+                    this.mAspectRatioRange = MediaCodecInfo.POSITIVE_RATIONALS.intersect(rationalRange);
+                }
+                if (range5 != null) {
+                    this.mFrameRateRange = MediaCodecInfo.FRAME_RATE_RANGE.intersect(range5);
+                }
+                if (range4 != null) {
+                    if ((this.mParent.mError & 2) != 0) {
+                        this.mBitrateRange = MediaCodecInfo.BITRATE_RANGE.intersect(range4);
+                    } else {
+                        this.mBitrateRange = this.mBitrateRange.intersect(range4);
+                    }
+                }
+            } else {
+                if (range3 != null) {
+                    this.mWidthRange = this.mWidthRange.intersect(range3);
+                }
+                if (rangeExtend != null) {
+                    this.mHeightRange = this.mHeightRange.intersect(rangeExtend);
+                }
+                if (intRange != null) {
+                    this.mBlockCountRange = this.mBlockCountRange.intersect(Utils.factorRange(intRange, ((this.mBlockWidth * this.mBlockHeight) / size3.getWidth()) / size3.getHeight()));
+                }
+                if (longRange != null) {
+                    this.mBlocksPerSecondRange = this.mBlocksPerSecondRange.intersect(Utils.factorRange(longRange, ((this.mBlockWidth * this.mBlockHeight) / size3.getWidth()) / size3.getHeight()));
+                }
+                if (rationalRange2 != null) {
+                    this.mBlockAspectRatioRange = this.mBlockAspectRatioRange.intersect(Utils.scaleRange(rationalRange2, this.mBlockHeight / size3.getHeight(), this.mBlockWidth / size3.getWidth()));
+                }
+                if (rationalRange != null) {
+                    this.mAspectRatioRange = this.mAspectRatioRange.intersect(rationalRange);
+                }
+                if (range5 != null) {
+                    this.mFrameRateRange = this.mFrameRateRange.intersect(range5);
+                }
+                if (range4 != null) {
+                    this.mBitrateRange = this.mBitrateRange.intersect(range4);
+                }
+            }
+            updateLimits();
         }
 
         private void applyBlockLimits(int i, int i2, Range<Integer> range, Range<Long> range2, Range<Rational> range3) {
             MediaCodecInfo.checkPowerOfTwo(i, "blockWidth must be a power of two");
             MediaCodecInfo.checkPowerOfTwo(i2, "blockHeight must be a power of two");
-            int max = Math.max(i, this.mBlockWidth);
-            int max2 = Math.max(i2, this.mBlockHeight);
-            int i3 = max * max2;
+            int iMax = Math.max(i, this.mBlockWidth);
+            int iMax2 = Math.max(i2, this.mBlockHeight);
+            int i3 = iMax * iMax2;
             int i4 = (i3 / this.mBlockWidth) / this.mBlockHeight;
             if (i4 != 1) {
                 this.mBlockCountRange = Utils.factorRange(this.mBlockCountRange, i4);
                 this.mBlocksPerSecondRange = Utils.factorRange(this.mBlocksPerSecondRange, i4);
-                this.mBlockAspectRatioRange = Utils.scaleRange(this.mBlockAspectRatioRange, max2 / this.mBlockHeight, max / this.mBlockWidth);
-                this.mHorizontalBlockRange = Utils.factorRange(this.mHorizontalBlockRange, max / this.mBlockWidth);
-                this.mVerticalBlockRange = Utils.factorRange(this.mVerticalBlockRange, max2 / this.mBlockHeight);
+                this.mBlockAspectRatioRange = Utils.scaleRange(this.mBlockAspectRatioRange, iMax2 / this.mBlockHeight, iMax / this.mBlockWidth);
+                this.mHorizontalBlockRange = Utils.factorRange(this.mHorizontalBlockRange, iMax / this.mBlockWidth);
+                this.mVerticalBlockRange = Utils.factorRange(this.mVerticalBlockRange, iMax2 / this.mBlockHeight);
             }
             int i5 = (i3 / i) / i2;
             if (i5 != 1) {
                 range = Utils.factorRange(range, i5);
                 range2 = Utils.factorRange(range2, i5);
-                range3 = Utils.scaleRange(range3, max2 / i2, max / i);
+                range3 = Utils.scaleRange(range3, iMax2 / i2, iMax / i);
             }
             this.mBlockCountRange = this.mBlockCountRange.intersect(range);
             this.mBlocksPerSecondRange = this.mBlocksPerSecondRange.intersect(range2);
             this.mBlockAspectRatioRange = this.mBlockAspectRatioRange.intersect(range3);
-            this.mBlockWidth = max;
-            this.mBlockHeight = max2;
+            this.mBlockWidth = iMax;
+            this.mBlockHeight = iMax2;
         }
 
         private void applyAlignment(int i, int i2) {
@@ -1563,21 +1621,21 @@ public final class MediaCodecInfo {
         }
 
         private void updateLimits() {
-            Range<Integer> intersect = this.mHorizontalBlockRange.intersect(Utils.factorRange(this.mWidthRange, this.mBlockWidth));
-            this.mHorizontalBlockRange = intersect;
-            this.mHorizontalBlockRange = intersect.intersect(Range.create(Integer.valueOf(this.mBlockCountRange.getLower().intValue() / this.mVerticalBlockRange.getUpper().intValue()), Integer.valueOf(this.mBlockCountRange.getUpper().intValue() / this.mVerticalBlockRange.getLower().intValue())));
-            Range<Integer> intersect2 = this.mVerticalBlockRange.intersect(Utils.factorRange(this.mHeightRange, this.mBlockHeight));
-            this.mVerticalBlockRange = intersect2;
-            this.mVerticalBlockRange = intersect2.intersect(Range.create(Integer.valueOf(this.mBlockCountRange.getLower().intValue() / this.mHorizontalBlockRange.getUpper().intValue()), Integer.valueOf(this.mBlockCountRange.getUpper().intValue() / this.mHorizontalBlockRange.getLower().intValue())));
-            this.mBlockCountRange = this.mBlockCountRange.intersect(Range.create(Integer.valueOf(this.mHorizontalBlockRange.getLower().intValue() * this.mVerticalBlockRange.getLower().intValue()), Integer.valueOf(this.mHorizontalBlockRange.getUpper().intValue() * this.mVerticalBlockRange.getUpper().intValue())));
-            this.mBlockAspectRatioRange = this.mBlockAspectRatioRange.intersect(new Rational(this.mHorizontalBlockRange.getLower().intValue(), this.mVerticalBlockRange.getUpper().intValue()), new Rational(this.mHorizontalBlockRange.getUpper().intValue(), this.mVerticalBlockRange.getLower().intValue()));
-            this.mWidthRange = this.mWidthRange.intersect(Integer.valueOf(((this.mHorizontalBlockRange.getLower().intValue() - 1) * this.mBlockWidth) + this.mWidthAlignment), Integer.valueOf(this.mHorizontalBlockRange.getUpper().intValue() * this.mBlockWidth));
-            this.mHeightRange = this.mHeightRange.intersect(Integer.valueOf(((this.mVerticalBlockRange.getLower().intValue() - 1) * this.mBlockHeight) + this.mHeightAlignment), Integer.valueOf(this.mVerticalBlockRange.getUpper().intValue() * this.mBlockHeight));
-            this.mAspectRatioRange = this.mAspectRatioRange.intersect(new Rational(this.mWidthRange.getLower().intValue(), this.mHeightRange.getUpper().intValue()), new Rational(this.mWidthRange.getUpper().intValue(), this.mHeightRange.getLower().intValue()));
-            this.mSmallerDimensionUpperLimit = Math.min(this.mSmallerDimensionUpperLimit, Math.min(this.mWidthRange.getUpper().intValue(), this.mHeightRange.getUpper().intValue()));
-            Range<Long> intersect3 = this.mBlocksPerSecondRange.intersect(Long.valueOf(this.mBlockCountRange.getLower().intValue() * this.mFrameRateRange.getLower().intValue()), Long.valueOf(this.mBlockCountRange.getUpper().intValue() * this.mFrameRateRange.getUpper().intValue()));
-            this.mBlocksPerSecondRange = intersect3;
-            this.mFrameRateRange = this.mFrameRateRange.intersect(Integer.valueOf((int) (intersect3.getLower().longValue() / this.mBlockCountRange.getUpper().intValue())), Integer.valueOf((int) (this.mBlocksPerSecondRange.getUpper().longValue() / this.mBlockCountRange.getLower().intValue())));
+            Range rangeIntersect = this.mHorizontalBlockRange.intersect(Utils.factorRange(this.mWidthRange, this.mBlockWidth));
+            this.mHorizontalBlockRange = rangeIntersect;
+            this.mHorizontalBlockRange = rangeIntersect.intersect(Range.create(Integer.valueOf(((Integer) this.mBlockCountRange.getLower()).intValue() / ((Integer) this.mVerticalBlockRange.getUpper()).intValue()), Integer.valueOf(((Integer) this.mBlockCountRange.getUpper()).intValue() / ((Integer) this.mVerticalBlockRange.getLower()).intValue())));
+            Range rangeIntersect2 = this.mVerticalBlockRange.intersect(Utils.factorRange(this.mHeightRange, this.mBlockHeight));
+            this.mVerticalBlockRange = rangeIntersect2;
+            this.mVerticalBlockRange = rangeIntersect2.intersect(Range.create(Integer.valueOf(((Integer) this.mBlockCountRange.getLower()).intValue() / ((Integer) this.mHorizontalBlockRange.getUpper()).intValue()), Integer.valueOf(((Integer) this.mBlockCountRange.getUpper()).intValue() / ((Integer) this.mHorizontalBlockRange.getLower()).intValue())));
+            this.mBlockCountRange = this.mBlockCountRange.intersect(Range.create(Integer.valueOf(((Integer) this.mHorizontalBlockRange.getLower()).intValue() * ((Integer) this.mVerticalBlockRange.getLower()).intValue()), Integer.valueOf(((Integer) this.mHorizontalBlockRange.getUpper()).intValue() * ((Integer) this.mVerticalBlockRange.getUpper()).intValue())));
+            this.mBlockAspectRatioRange = this.mBlockAspectRatioRange.intersect(new Rational(((Integer) this.mHorizontalBlockRange.getLower()).intValue(), ((Integer) this.mVerticalBlockRange.getUpper()).intValue()), new Rational(((Integer) this.mHorizontalBlockRange.getUpper()).intValue(), ((Integer) this.mVerticalBlockRange.getLower()).intValue()));
+            this.mWidthRange = this.mWidthRange.intersect(Integer.valueOf(((((Integer) this.mHorizontalBlockRange.getLower()).intValue() - 1) * this.mBlockWidth) + this.mWidthAlignment), Integer.valueOf(((Integer) this.mHorizontalBlockRange.getUpper()).intValue() * this.mBlockWidth));
+            this.mHeightRange = this.mHeightRange.intersect(Integer.valueOf(((((Integer) this.mVerticalBlockRange.getLower()).intValue() - 1) * this.mBlockHeight) + this.mHeightAlignment), Integer.valueOf(((Integer) this.mVerticalBlockRange.getUpper()).intValue() * this.mBlockHeight));
+            this.mAspectRatioRange = this.mAspectRatioRange.intersect(new Rational(((Integer) this.mWidthRange.getLower()).intValue(), ((Integer) this.mHeightRange.getUpper()).intValue()), new Rational(((Integer) this.mWidthRange.getUpper()).intValue(), ((Integer) this.mHeightRange.getLower()).intValue()));
+            this.mSmallerDimensionUpperLimit = Math.min(this.mSmallerDimensionUpperLimit, Math.min(((Integer) this.mWidthRange.getUpper()).intValue(), ((Integer) this.mHeightRange.getUpper()).intValue()));
+            Range rangeIntersect3 = this.mBlocksPerSecondRange.intersect(Long.valueOf(((Integer) this.mBlockCountRange.getLower()).intValue() * ((Integer) this.mFrameRateRange.getLower()).intValue()), Long.valueOf(((Integer) this.mBlockCountRange.getUpper()).intValue() * ((Integer) this.mFrameRateRange.getUpper()).intValue()));
+            this.mBlocksPerSecondRange = rangeIntersect3;
+            this.mFrameRateRange = this.mFrameRateRange.intersect(Integer.valueOf((int) (((Long) rangeIntersect3.getLower()).longValue() / ((Integer) this.mBlockCountRange.getUpper()).intValue())), Integer.valueOf((int) (((Long) this.mBlocksPerSecondRange.getUpper()).longValue() / ((Integer) this.mBlockCountRange.getLower()).intValue())));
         }
 
         private void applyMacroBlockLimits(int i, int i2, int i3, long j, int i4, int i5, int i6, int i7) {
@@ -1591,21 +1649,1933 @@ public final class MediaCodecInfo {
             this.mVerticalBlockRange = this.mVerticalBlockRange.intersect(Integer.valueOf(Utils.divUp(i2, this.mBlockHeight / i7)), Integer.valueOf(i4 / (this.mBlockHeight / i7)));
         }
 
-        /* JADX WARN: Failed to find 'out' block for switch in B:133:0x03c4. Please report as an issue. */
-        /* JADX WARN: Removed duplicated region for block: B:100:0x0337 A[SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:31:0x019c  */
-        /* JADX WARN: Removed duplicated region for block: B:34:0x01a0 A[SYNTHETIC] */
-        /* JADX WARN: Removed duplicated region for block: B:97:0x0335  */
+        /* JADX WARN: Failed to find 'out' block for switch in B:125:0x03c4. Please report as an issue. */
+        /* JADX WARN: Removed duplicated region for block: B:114:0x0335  */
+        /* JADX WARN: Removed duplicated region for block: B:406:0x0cb9  */
+        /* JADX WARN: Removed duplicated region for block: B:497:0x01a0 A[SYNTHETIC] */
+        /* JADX WARN: Removed duplicated region for block: B:500:0x0337 A[SYNTHETIC] */
+        /* JADX WARN: Removed duplicated region for block: B:58:0x015e  */
+        /* JADX WARN: Removed duplicated region for block: B:65:0x0193  */
+        /* JADX WARN: Removed duplicated region for block: B:69:0x019c  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
         private void applyLevelLimits() {
-            /*
-                Method dump skipped, instructions count: 4448
-                To view this dump change 'Code comments level' option to 'DEBUG'
-            */
-            throw new UnsupportedOperationException("Method not decompiled: android.media.MediaCodecInfo.VideoCapabilities.applyLevelLimits():void");
+            VideoCapabilities videoCapabilities;
+            Integer num;
+            int iMax;
+            int i;
+            int i2;
+            long j;
+            long j2;
+            int i3;
+            int i4;
+            int i5;
+            CodecProfileLevel[] codecProfileLevelArr;
+            int i6;
+            int i7;
+            int i8;
+            long j3;
+            int i9;
+            int i10;
+            int i11;
+            int i12;
+            long j4;
+            int i13;
+            long j5;
+            int i14;
+            double d;
+            int i15;
+            int i16;
+            int i17;
+            int i18;
+            int i19;
+            int iMax2;
+            long j6;
+            int i20;
+            int i21;
+            int i22;
+            int i23;
+            int i24;
+            int i25;
+            int i26;
+            CodecProfileLevel[] codecProfileLevelArr2;
+            Integer num2;
+            int i27;
+            int i28;
+            int i29;
+            int i30;
+            String str;
+            String str2;
+            CodecProfileLevel[] codecProfileLevelArr3;
+            String str3;
+            int i31;
+            int i32;
+            int i33;
+            int i34;
+            int i35;
+            int i36;
+            int i37;
+            int i38;
+            int i39;
+            int i40;
+            boolean z;
+            String str4;
+            int i41;
+            int i42;
+            int i43;
+            int i44;
+            int i45;
+            int i46;
+            String str5;
+            String str6;
+            int i47;
+            String str7;
+            int i48;
+            String str8;
+            int i49;
+            int i50;
+            int i51;
+            int i52;
+            int i53;
+            boolean z2;
+            boolean z3;
+            int i54;
+            int i55;
+            int i56;
+            int i57;
+            int i58;
+            int i59;
+            int i60;
+            int iMax3;
+            int iMax4;
+            int i61;
+            int i62;
+            int i63;
+            String str9;
+            String str10;
+            Integer num3;
+            int i64;
+            int i65;
+            int i66;
+            int i67;
+            boolean z4;
+            int i68;
+            int i69;
+            int i70;
+            int i71;
+            int i72;
+            int i73;
+            int i74;
+            int i75;
+            int i76;
+            int i77;
+            boolean z5;
+            int i78;
+            int i79;
+            int i80;
+            int i81;
+            int i82;
+            int i83;
+            CodecProfileLevel[] codecProfileLevelArr4 = this.mParent.profileLevels;
+            String mimeType = this.mParent.getMimeType();
+            boolean zEqualsIgnoreCase = mimeType.equalsIgnoreCase("video/avc");
+            String str11 = "Unrecognized profile ";
+            int i84 = 2;
+            String str12 = " for ";
+            String str13 = TAG;
+            int i85 = 1;
+            Integer num4 = 1;
+            if (zEqualsIgnoreCase) {
+                int length = codecProfileLevelArr4.length;
+                long jMax = 1485;
+                iMax = 64000;
+                int i86 = 0;
+                i = 4;
+                int iMax5 = 99;
+                int iMax6 = 396;
+                while (i86 < length) {
+                    CodecProfileLevel codecProfileLevel = codecProfileLevelArr4[i86];
+                    int i87 = codecProfileLevel.level;
+                    if (i87 == i85) {
+                        i71 = 1485;
+                        i72 = 99;
+                        i73 = 64;
+                    } else if (i87 != i84) {
+                        switch (i87) {
+                            case 4:
+                                i71 = 3000;
+                                i79 = 192;
+                                i80 = 900;
+                                i73 = i79;
+                                i74 = i80;
+                                i72 = 396;
+                                break;
+                            case 8:
+                                i71 = 6000;
+                                i79 = 384;
+                                i80 = 2376;
+                                i73 = i79;
+                                i74 = i80;
+                                i72 = 396;
+                                break;
+                            case 16:
+                                i71 = 11880;
+                                i79 = 768;
+                                i80 = 2376;
+                                i73 = i79;
+                                i74 = i80;
+                                i72 = 396;
+                                break;
+                            case 32:
+                                i71 = 11880;
+                                i79 = 2000;
+                                i80 = 2376;
+                                i73 = i79;
+                                i74 = i80;
+                                i72 = 396;
+                                break;
+                            case 64:
+                                i71 = 19800;
+                                i72 = 792;
+                                i81 = 4000;
+                                i82 = 4752;
+                                i73 = i81;
+                                i74 = i82;
+                                break;
+                            case 128:
+                                i71 = 20250;
+                                i72 = 1620;
+                                i81 = 4000;
+                                i82 = 8100;
+                                i73 = i81;
+                                i74 = i82;
+                                break;
+                            case 256:
+                                i71 = 40500;
+                                i72 = 1620;
+                                i81 = 10000;
+                                i82 = 8100;
+                                i73 = i81;
+                                i74 = i82;
+                                break;
+                            case 512:
+                                i71 = 108000;
+                                i72 = 3600;
+                                i81 = 14000;
+                                i82 = EncodeConstants.BitRate.MM_AVG_QHD_DATARATE;
+                                i73 = i81;
+                                i74 = i82;
+                                break;
+                            case 1024:
+                                i71 = 216000;
+                                i72 = 5120;
+                                i81 = 20000;
+                                i82 = 20480;
+                                i73 = i81;
+                                i74 = i82;
+                                break;
+                            case 2048:
+                                i71 = 245760;
+                                i83 = 20000;
+                                i73 = i83;
+                                i74 = 32768;
+                                i72 = 8192;
+                                break;
+                            case 4096:
+                                i71 = 245760;
+                                i83 = 50000;
+                                i73 = i83;
+                                i74 = 32768;
+                                i72 = 8192;
+                                break;
+                            case 8192:
+                                i71 = 522240;
+                                i72 = 8704;
+                                i81 = 50000;
+                                i82 = GLES20.GL_STENCIL_BACK_FUNC;
+                                i73 = i81;
+                                i74 = i82;
+                                break;
+                            case 16384:
+                                i71 = 589824;
+                                i72 = 22080;
+                                i81 = 135000;
+                                i82 = 110400;
+                                i73 = i81;
+                                i74 = i82;
+                                break;
+                            case 32768:
+                                i71 = 983040;
+                                i72 = 36864;
+                                i81 = 240000;
+                                i82 = 184320;
+                                i73 = i81;
+                                i74 = i82;
+                                break;
+                            case 65536:
+                                i71 = 2073600;
+                                i72 = 36864;
+                                i81 = 240000;
+                                i82 = 184320;
+                                i73 = i81;
+                                i74 = i82;
+                                break;
+                            case 131072:
+                                i71 = 4177920;
+                                i72 = Protocol.BASE_WIFI_P2P_MANAGER;
+                                i81 = 240000;
+                                i82 = 696320;
+                                i73 = i81;
+                                i74 = i82;
+                                break;
+                            case 262144:
+                                i71 = 8355840;
+                                i72 = Protocol.BASE_WIFI_P2P_MANAGER;
+                                i81 = 480000;
+                                i82 = 696320;
+                                i73 = i81;
+                                i74 = i82;
+                                break;
+                            case 524288:
+                                i71 = Spanned.SPAN_PRIORITY;
+                                i72 = Protocol.BASE_WIFI_P2P_MANAGER;
+                                i81 = Build.VERSION_CODES_FULL.FROYO;
+                                i82 = 696320;
+                                i73 = i81;
+                                i74 = i82;
+                                break;
+                            default:
+                                Log.w(TAG, "Unrecognized level " + codecProfileLevel.level + " for " + mimeType);
+                                i |= 1;
+                                i71 = 0;
+                                i72 = 0;
+                                i73 = 0;
+                                i74 = 0;
+                                break;
+                        }
+                        i75 = codecProfileLevel.profile;
+                        if (i75 != i85 || i75 == 2) {
+                            i76 = length;
+                            i77 = i73;
+                        } else {
+                            if (i75 != 4) {
+                                if (i75 == 8) {
+                                    i78 = i73 * 1250;
+                                    i76 = length;
+                                    z5 = true;
+                                } else {
+                                    if (i75 == 16) {
+                                        i78 = i73 * 3000;
+                                    } else if (i75 != 32 && i75 != 64) {
+                                        if (i75 == 65536) {
+                                            i77 = i73;
+                                            i76 = length;
+                                        } else if (i75 != 524288) {
+                                            Log.w(TAG, "Unrecognized profile " + codecProfileLevel.profile + " for " + mimeType);
+                                            i |= 1;
+                                            i78 = i73 * 1000;
+                                        }
+                                    }
+                                    i76 = length;
+                                    z5 = true;
+                                }
+                                if (!z5) {
+                                    i &= -5;
+                                }
+                                jMax = Math.max(i71, jMax);
+                                iMax5 = Math.max(i72, iMax5);
+                                iMax = Math.max(i78, iMax);
+                                iMax6 = Math.max(iMax6, i74);
+                                i86++;
+                                length = i76;
+                                i84 = 2;
+                                i85 = 1;
+                            }
+                            i77 = i73;
+                            i76 = length;
+                            Log.w(TAG, "Unsupported profile " + codecProfileLevel.profile + " for " + mimeType);
+                            i |= 2;
+                            z5 = false;
+                            i78 = i77 * 1000;
+                            if (!z5) {
+                            }
+                            jMax = Math.max(i71, jMax);
+                            iMax5 = Math.max(i72, iMax5);
+                            iMax = Math.max(i78, iMax);
+                            iMax6 = Math.max(iMax6, i74);
+                            i86++;
+                            length = i76;
+                            i84 = 2;
+                            i85 = 1;
+                        }
+                        z5 = true;
+                        i78 = i77 * 1000;
+                        if (!z5) {
+                        }
+                        jMax = Math.max(i71, jMax);
+                        iMax5 = Math.max(i72, iMax5);
+                        iMax = Math.max(i78, iMax);
+                        iMax6 = Math.max(iMax6, i74);
+                        i86++;
+                        length = i76;
+                        i84 = 2;
+                        i85 = 1;
+                    } else {
+                        i71 = 1485;
+                        i72 = 99;
+                        i73 = 128;
+                    }
+                    i74 = 396;
+                    i75 = codecProfileLevel.profile;
+                    if (i75 != i85) {
+                        i76 = length;
+                        i77 = i73;
+                        z5 = true;
+                        i78 = i77 * 1000;
+                    }
+                    if (!z5) {
+                    }
+                    jMax = Math.max(i71, jMax);
+                    iMax5 = Math.max(i72, iMax5);
+                    iMax = Math.max(i78, iMax);
+                    iMax6 = Math.max(iMax6, i74);
+                    i86++;
+                    length = i76;
+                    i84 = 2;
+                    i85 = 1;
+                }
+                int iSqrt = (int) Math.sqrt(r3 * 8);
+                videoCapabilities = this;
+                videoCapabilities.applyMacroBlockLimits(iSqrt, iSqrt, iMax5, jMax, 16, 16, 1, 1);
+                num = num4;
+            } else if (mimeType.equalsIgnoreCase(MediaFormat.MIMETYPE_VIDEO_MPEG2)) {
+                int length2 = codecProfileLevelArr4.length;
+                int iMax7 = 64000;
+                int iMax8 = 15;
+                long jMax2 = 1485;
+                int iMax9 = 99;
+                int i88 = 0;
+                int iMax10 = 9;
+                int iMax11 = 11;
+                i = 4;
+                while (i88 < length2) {
+                    CodecProfileLevel codecProfileLevel2 = codecProfileLevelArr4[i88];
+                    int i89 = length2;
+                    int i90 = codecProfileLevel2.profile;
+                    if (i90 != 0) {
+                        i61 = i88;
+                        if (i90 == 1) {
+                            int i91 = codecProfileLevel2.level;
+                            if (i91 == 0) {
+                                str9 = str12;
+                                str10 = str13;
+                                num3 = num4;
+                                i64 = 11880;
+                                i62 = 22;
+                                i66 = 4000;
+                                i67 = 30;
+                                i63 = 18;
+                                i65 = 396;
+                            } else if (i91 != 1) {
+                                if (i91 != 2) {
+                                    if (i91 == 3) {
+                                        i67 = 60;
+                                        i62 = 120;
+                                        i63 = 68;
+                                        i68 = 244800;
+                                    } else if (i91 != 4) {
+                                        Log.w(str13, "Unrecognized profile/level " + codecProfileLevel2.profile + "/" + codecProfileLevel2.level + str12 + mimeType);
+                                    } else {
+                                        i67 = 60;
+                                        i62 = 120;
+                                        i63 = 68;
+                                        i68 = 489600;
+                                    }
+                                    i69 = 8160;
+                                    i70 = 80000;
+                                } else {
+                                    i67 = 60;
+                                    i62 = 90;
+                                    i63 = 68;
+                                    i68 = 183600;
+                                    i69 = 6120;
+                                    i70 = 60000;
+                                }
+                                str9 = str12;
+                                str10 = str13;
+                                num3 = num4;
+                                i64 = i68;
+                                i65 = i69;
+                                i66 = i70;
+                            } else {
+                                i62 = 45;
+                                i63 = 36;
+                                str9 = str12;
+                                str10 = str13;
+                                num3 = num4;
+                                i64 = 40500;
+                                i65 = 1620;
+                                i66 = 15000;
+                                i67 = 30;
+                            }
+                        } else if (i90 == 2 || i90 == 3 || i90 == 4 || i90 == 5) {
+                            Log.i(str13, "Unsupported profile " + codecProfileLevel2.profile + str12 + mimeType);
+                            i |= 2;
+                            str9 = str12;
+                            str10 = str13;
+                            num3 = num4;
+                            i67 = 0;
+                            i62 = 0;
+                            i63 = 0;
+                            i66 = 0;
+                            i65 = 0;
+                            i64 = 0;
+                            z4 = false;
+                            if (!z4) {
+                                i &= -5;
+                            }
+                            jMax2 = Math.max(i64, jMax2);
+                            iMax9 = Math.max(i65, iMax9);
+                            iMax7 = Math.max(i66 * 1000, iMax7);
+                            iMax11 = Math.max(i62, iMax11);
+                            iMax10 = Math.max(i63, iMax10);
+                            iMax8 = Math.max(i67, iMax8);
+                            i88 = i61 + 1;
+                            length2 = i89;
+                            num4 = num3;
+                            str13 = str10;
+                            str12 = str9;
+                            codecProfileLevelArr4 = codecProfileLevelArr4;
+                            mimeType = mimeType;
+                        } else {
+                            Log.w(str13, "Unrecognized profile " + codecProfileLevel2.profile + str12 + mimeType);
+                        }
+                        i |= 1;
+                        str9 = str12;
+                        str10 = str13;
+                        num3 = num4;
+                        i67 = 0;
+                        i62 = 0;
+                        i63 = 0;
+                        i66 = 0;
+                        i65 = 0;
+                        i64 = 0;
+                    } else {
+                        i61 = i88;
+                        if (codecProfileLevel2.level != 1) {
+                            Log.w(str13, "Unrecognized profile/level " + codecProfileLevel2.profile + "/" + codecProfileLevel2.level + str12 + mimeType);
+                            i |= 1;
+                            str9 = str12;
+                            str10 = str13;
+                            num3 = num4;
+                            i67 = 0;
+                            i62 = 0;
+                            i63 = 0;
+                            i66 = 0;
+                            i65 = 0;
+                            i64 = 0;
+                        }
+                        i62 = 45;
+                        i63 = 36;
+                        str9 = str12;
+                        str10 = str13;
+                        num3 = num4;
+                        i64 = 40500;
+                        i65 = 1620;
+                        i66 = 15000;
+                        i67 = 30;
+                    }
+                    z4 = true;
+                    if (!z4) {
+                    }
+                    jMax2 = Math.max(i64, jMax2);
+                    iMax9 = Math.max(i65, iMax9);
+                    iMax7 = Math.max(i66 * 1000, iMax7);
+                    iMax11 = Math.max(i62, iMax11);
+                    iMax10 = Math.max(i63, iMax10);
+                    iMax8 = Math.max(i67, iMax8);
+                    i88 = i61 + 1;
+                    length2 = i89;
+                    num4 = num3;
+                    str13 = str10;
+                    str12 = str9;
+                    codecProfileLevelArr4 = codecProfileLevelArr4;
+                    mimeType = mimeType;
+                }
+                num = num4;
+                videoCapabilities = this;
+                videoCapabilities.applyMacroBlockLimits(iMax11, iMax10, iMax9, jMax2, 16, 16, 1, 1);
+                videoCapabilities.mFrameRateRange = videoCapabilities.mFrameRateRange.intersect(12, Integer.valueOf(iMax8));
+                iMax = iMax7;
+            } else {
+                videoCapabilities = this;
+                String str14 = " for ";
+                String str15 = TAG;
+                num = num4;
+                if (mimeType.equalsIgnoreCase("video/mp4v-es")) {
+                    int length3 = codecProfileLevelArr4.length;
+                    long jMax3 = 1485;
+                    CodecProfileLevel[] codecProfileLevelArr5 = codecProfileLevelArr4;
+                    iMax2 = 64000;
+                    int iMax12 = 11;
+                    int i92 = 9;
+                    int iMax13 = 99;
+                    i = 4;
+                    int i93 = 15;
+                    int i94 = 0;
+                    while (i94 < length3) {
+                        CodecProfileLevel codecProfileLevel3 = codecProfileLevelArr5[i94];
+                        int i95 = codecProfileLevel3.profile;
+                        if (i95 == 1) {
+                            i46 = length3;
+                            str5 = str15;
+                            str6 = str14;
+                            int i96 = codecProfileLevel3.level;
+                            if (i96 == 1) {
+                                i47 = 15;
+                                str7 = str11;
+                                i48 = i94;
+                                str8 = str5;
+                                i49 = 1485;
+                                i50 = 11;
+                                i51 = 64;
+                            } else if (i96 == 2) {
+                                i47 = 15;
+                                str7 = str11;
+                                i48 = i94;
+                                str8 = str5;
+                                i49 = 1485;
+                                i50 = 11;
+                                i51 = 128;
+                            } else if (i96 == 4) {
+                                str7 = str11;
+                                i48 = i94;
+                                str8 = str5;
+                                i49 = 1485;
+                                i47 = 30;
+                                i50 = 11;
+                                i51 = 64;
+                                i52 = 99;
+                                i53 = 9;
+                                z2 = true;
+                                z3 = false;
+                            } else if (i96 == 8) {
+                                str7 = str11;
+                                i48 = i94;
+                                str8 = str5;
+                                i49 = 5940;
+                                i50 = 22;
+                                i47 = 30;
+                                i51 = 128;
+                                i52 = 396;
+                                i53 = 18;
+                                z2 = true;
+                                z3 = false;
+                            } else if (i96 == 16) {
+                                i54 = 11880;
+                                i60 = 384;
+                                str7 = str11;
+                                i48 = i94;
+                                str8 = str5;
+                                i49 = i54;
+                                i50 = 22;
+                                i52 = 396;
+                                i53 = 18;
+                                z2 = true;
+                                z3 = false;
+                                i51 = i60;
+                                i47 = 30;
+                            } else if (i96 == 64) {
+                                i55 = 40;
+                                str7 = str11;
+                                str8 = str5;
+                                i52 = 1200;
+                                z2 = true;
+                                z3 = false;
+                                i51 = 4000;
+                                i48 = i94;
+                                i49 = 36000;
+                                i53 = 30;
+                                i50 = i55;
+                                i47 = 30;
+                            } else if (i96 == 128) {
+                                i55 = 45;
+                                i56 = 36;
+                                i57 = 40500;
+                                i58 = 1620;
+                                i59 = 8000;
+                                int i97 = i59;
+                                str7 = str11;
+                                i51 = i97;
+                                str8 = str5;
+                                i52 = i58;
+                                z2 = true;
+                                z3 = false;
+                                i48 = i94;
+                                i49 = i57;
+                                i53 = i56;
+                                i50 = i55;
+                                i47 = 30;
+                            } else if (i96 != 256) {
+                                Log.w(str5, "Unrecognized profile/level " + codecProfileLevel3.profile + "/" + codecProfileLevel3.level + str6 + mimeType);
+                                i |= 1;
+                                str7 = str11;
+                                i48 = i94;
+                                str8 = str5;
+                                i47 = 0;
+                                i50 = 0;
+                                i51 = 0;
+                                i49 = 0;
+                                i52 = 0;
+                                i53 = 0;
+                                z2 = true;
+                                z3 = false;
+                            } else {
+                                i55 = 80;
+                                i56 = 45;
+                                i57 = 108000;
+                                i58 = 3600;
+                                i59 = 12000;
+                                int i972 = i59;
+                                str7 = str11;
+                                i51 = i972;
+                                str8 = str5;
+                                i52 = i58;
+                                z2 = true;
+                                z3 = false;
+                                i48 = i94;
+                                i49 = i57;
+                                i53 = i56;
+                                i50 = i55;
+                                i47 = 30;
+                            }
+                            i52 = 99;
+                            i53 = 9;
+                            z2 = true;
+                            z3 = true;
+                        } else {
+                            if (i95 != 2) {
+                                switch (i95) {
+                                    case 4:
+                                    case 8:
+                                    case 16:
+                                    case 32:
+                                    case 64:
+                                    case 128:
+                                    case 256:
+                                    case 512:
+                                    case 1024:
+                                    case 2048:
+                                    case 4096:
+                                    case 8192:
+                                    case 16384:
+                                        break;
+                                    case 32768:
+                                        str5 = str15;
+                                        str6 = str14;
+                                        int i98 = codecProfileLevel3.level;
+                                        i46 = length3;
+                                        if (i98 == 1 || i98 == 4) {
+                                            str7 = str11;
+                                            i48 = i94;
+                                            str8 = str5;
+                                            i49 = 2970;
+                                            i47 = 30;
+                                            i50 = 11;
+                                            i51 = 128;
+                                            i52 = 99;
+                                            i53 = 9;
+                                            z2 = true;
+                                            z3 = false;
+                                            break;
+                                        } else if (i98 != 8) {
+                                            if (i98 == 16) {
+                                                i54 = 11880;
+                                                i60 = 768;
+                                            } else if (i98 == 24) {
+                                                i54 = 11880;
+                                                i60 = 1500;
+                                            } else if (i98 == 32) {
+                                                i55 = 44;
+                                                i56 = 36;
+                                                i57 = 23760;
+                                                i58 = 792;
+                                                i59 = 3000;
+                                                int i9722 = i59;
+                                                str7 = str11;
+                                                i51 = i9722;
+                                                str8 = str5;
+                                                i52 = i58;
+                                                z2 = true;
+                                                z3 = false;
+                                                i48 = i94;
+                                                i49 = i57;
+                                                i53 = i56;
+                                                i50 = i55;
+                                                i47 = 30;
+                                            } else if (i98 == 128) {
+                                                i55 = 45;
+                                                i56 = 36;
+                                                i57 = 48600;
+                                                i58 = 1620;
+                                                i59 = 8000;
+                                                int i97222 = i59;
+                                                str7 = str11;
+                                                i51 = i97222;
+                                                str8 = str5;
+                                                i52 = i58;
+                                                z2 = true;
+                                                z3 = false;
+                                                i48 = i94;
+                                                i49 = i57;
+                                                i53 = i56;
+                                                i50 = i55;
+                                                i47 = 30;
+                                                break;
+                                            } else {
+                                                Log.w(str5, "Unrecognized profile/level " + codecProfileLevel3.profile + "/" + codecProfileLevel3.level + str6 + mimeType);
+                                                i |= 1;
+                                                str7 = str11;
+                                                i48 = i94;
+                                                str8 = str5;
+                                                i47 = 0;
+                                                i50 = 0;
+                                                i51 = 0;
+                                                i49 = 0;
+                                                i52 = 0;
+                                                i53 = 0;
+                                                z2 = true;
+                                                z3 = false;
+                                            }
+                                            str7 = str11;
+                                            i48 = i94;
+                                            str8 = str5;
+                                            i49 = i54;
+                                            i50 = 22;
+                                            i52 = 396;
+                                            i53 = 18;
+                                            z2 = true;
+                                            z3 = false;
+                                            i51 = i60;
+                                            i47 = 30;
+                                        } else {
+                                            i54 = 5940;
+                                            i60 = 384;
+                                            str7 = str11;
+                                            i48 = i94;
+                                            str8 = str5;
+                                            i49 = i54;
+                                            i50 = 22;
+                                            i52 = 396;
+                                            i53 = 18;
+                                            z2 = true;
+                                            z3 = false;
+                                            i51 = i60;
+                                            i47 = 30;
+                                        }
+                                        break;
+                                    default:
+                                        StringBuilder sb = new StringBuilder(str11);
+                                        sb.append(codecProfileLevel3.profile);
+                                        str6 = str14;
+                                        sb.append(str6);
+                                        sb.append(mimeType);
+                                        String str16 = str15;
+                                        Log.w(str16, sb.toString());
+                                        i |= 1;
+                                        i46 = length3;
+                                        str7 = str11;
+                                        i48 = i94;
+                                        str8 = str16;
+                                        i47 = 0;
+                                        i50 = 0;
+                                        i51 = 0;
+                                        i49 = 0;
+                                        i52 = 0;
+                                        i53 = 0;
+                                        z2 = true;
+                                        z3 = false;
+                                        break;
+                                }
+                            }
+                            i46 = length3;
+                            String str17 = str15;
+                            str6 = str14;
+                            Log.i(str17, "Unsupported profile " + codecProfileLevel3.profile + str6 + mimeType);
+                            i |= 2;
+                            str7 = str11;
+                            i48 = i94;
+                            str8 = str17;
+                            i47 = 0;
+                            i50 = 0;
+                            i51 = 0;
+                            i49 = 0;
+                            i52 = 0;
+                            i53 = 0;
+                            z2 = false;
+                            z3 = false;
+                        }
+                        if (z2) {
+                            i &= -5;
+                        }
+                        CodecProfileLevel[] codecProfileLevelArr6 = codecProfileLevelArr5;
+                        int i99 = i92;
+                        jMax3 = Math.max(i49, jMax3);
+                        iMax13 = Math.max(i52, iMax13);
+                        iMax2 = Math.max(i51 * 1000, iMax2);
+                        if (z3) {
+                            iMax12 = Math.max(i50, iMax12);
+                            iMax3 = Math.max(i53, i99);
+                            iMax4 = Math.max(i47, i93);
+                        } else {
+                            int iSqrt2 = (int) Math.sqrt(i52 * 2);
+                            iMax12 = Math.max(iSqrt2, iMax12);
+                            iMax3 = Math.max(iSqrt2, i99);
+                            iMax4 = Math.max(Math.max(i47, 60), i93);
+                        }
+                        i93 = iMax4;
+                        i92 = iMax3;
+                        i94 = i48 + 1;
+                        length3 = i46;
+                        str11 = str7;
+                        codecProfileLevelArr5 = codecProfileLevelArr6;
+                        str15 = str8;
+                        str14 = str6;
+                    }
+                    videoCapabilities = this;
+                    videoCapabilities.applyMacroBlockLimits(iMax12, i92, iMax13, jMax3, 16, 16, 1, 1);
+                    videoCapabilities.mFrameRateRange = videoCapabilities.mFrameRateRange.intersect(12, Integer.valueOf(i93));
+                } else {
+                    String str18 = str15;
+                    String str19 = "Unrecognized profile ";
+                    if (mimeType.equalsIgnoreCase("video/3gpp")) {
+                        int length4 = codecProfileLevelArr4.length;
+                        long jMax4 = 1485;
+                        int iMax14 = 15;
+                        int i100 = 16;
+                        int iMax15 = 64000;
+                        int iMin = 9;
+                        int iMax16 = 99;
+                        int i101 = 0;
+                        int iMax17 = 11;
+                        int iMax18 = 9;
+                        i = 4;
+                        CodecProfileLevel[] codecProfileLevelArr7 = codecProfileLevelArr4;
+                        int iMin2 = 11;
+                        while (i101 < length4) {
+                            int i102 = length4;
+                            CodecProfileLevel codecProfileLevel4 = codecProfileLevelArr7[i101];
+                            int i103 = i100;
+                            int i104 = codecProfileLevel4.level;
+                            int i105 = i101;
+                            if (i104 == 1) {
+                                codecProfileLevelArr3 = codecProfileLevelArr7;
+                                str3 = str18;
+                                i31 = iMin2;
+                                i32 = i31;
+                                i33 = iMin;
+                                i34 = i33;
+                                i35 = 15;
+                                i36 = i;
+                                i37 = 1485;
+                                i38 = 9;
+                                i39 = 11;
+                                i40 = 1;
+                                z = true;
+                            } else if (i104 != 2) {
+                                if (i104 == 4) {
+                                    codecProfileLevelArr3 = codecProfileLevelArr7;
+                                    str3 = str18;
+                                    i43 = 6;
+                                } else if (i104 == 8) {
+                                    codecProfileLevelArr3 = codecProfileLevelArr7;
+                                    str3 = str18;
+                                    i43 = 32;
+                                } else if (i104 != 16) {
+                                    if (i104 == 32) {
+                                        str3 = str18;
+                                        i32 = iMin2;
+                                        i34 = iMin;
+                                        codecProfileLevelArr3 = codecProfileLevelArr7;
+                                        i35 = 60;
+                                        i36 = i;
+                                        i39 = 22;
+                                        i37 = 19800;
+                                        i38 = 18;
+                                        i103 = 4;
+                                        i40 = 64;
+                                    } else if (i104 == 64) {
+                                        str3 = str18;
+                                        i32 = iMin2;
+                                        i34 = iMin;
+                                        codecProfileLevelArr3 = codecProfileLevelArr7;
+                                        i35 = 60;
+                                        i39 = 45;
+                                        i36 = i;
+                                        i37 = 40500;
+                                        i38 = 18;
+                                        i103 = 4;
+                                        i40 = 128;
+                                    } else if (i104 != 128) {
+                                        str3 = str18;
+                                        Log.w(str3, "Unrecognized profile/level " + codecProfileLevel4.profile + "/" + codecProfileLevel4.level + str14 + mimeType);
+                                        i31 = iMin2;
+                                        i32 = i31;
+                                        i33 = iMin;
+                                        i34 = i33;
+                                        codecProfileLevelArr3 = codecProfileLevelArr7;
+                                        i36 = i | 1;
+                                        i37 = 0;
+                                        i38 = 0;
+                                        i39 = 0;
+                                        i40 = 0;
+                                        z = false;
+                                        i35 = 0;
+                                    } else {
+                                        str3 = str18;
+                                        i32 = iMin2;
+                                        i34 = iMin;
+                                        i35 = 60;
+                                        i38 = 36;
+                                        i37 = 81000;
+                                        z = false;
+                                        i31 = 1;
+                                        i33 = 1;
+                                        i36 = i;
+                                        i40 = 256;
+                                        codecProfileLevelArr3 = codecProfileLevelArr7;
+                                        i39 = 45;
+                                        i103 = 4;
+                                    }
+                                    z = false;
+                                    i31 = 1;
+                                    i33 = 1;
+                                } else {
+                                    str3 = str18;
+                                    codecProfileLevelArr3 = codecProfileLevelArr7;
+                                    boolean z6 = codecProfileLevel4.profile == 1 || codecProfileLevel4.profile == 4;
+                                    if (z6) {
+                                        i44 = iMin2;
+                                        i45 = iMin;
+                                    } else {
+                                        i44 = 1;
+                                        i103 = 4;
+                                        i45 = 1;
+                                    }
+                                    i32 = iMin2;
+                                    i34 = iMin;
+                                    i33 = i45;
+                                    i35 = 15;
+                                    i37 = 1485;
+                                    i38 = 9;
+                                    z = z6;
+                                    i31 = i44;
+                                    i36 = i;
+                                    i39 = 11;
+                                    i40 = 2;
+                                }
+                                i31 = iMin2;
+                                i32 = i31;
+                                i33 = iMin;
+                                i34 = i33;
+                                i36 = i;
+                                i37 = 11880;
+                                i38 = 18;
+                                z = true;
+                                i35 = 30;
+                                i40 = i43;
+                                i39 = 22;
+                            } else {
+                                codecProfileLevelArr3 = codecProfileLevelArr7;
+                                str3 = str18;
+                                i31 = iMin2;
+                                i32 = i31;
+                                i33 = iMin;
+                                i34 = i33;
+                                i36 = i;
+                                i39 = 22;
+                                i37 = 5940;
+                                i38 = 18;
+                                i40 = 2;
+                                z = true;
+                                i35 = 30;
+                            }
+                            int i106 = codecProfileLevel4.profile;
+                            int i107 = iMax14;
+                            if (i106 == 1 || i106 == 2 || i106 == 4 || i106 == 8 || i106 == 16 || i106 == 32 || i106 == 64 || i106 == 128 || i106 == 256) {
+                                str4 = str19;
+                            } else {
+                                str4 = str19;
+                                Log.w(str3, str4 + codecProfileLevel4.profile + str14 + mimeType);
+                                i36 |= 1;
+                            }
+                            if (z) {
+                                i41 = 11;
+                                i42 = 9;
+                            } else {
+                                videoCapabilities.mAllowMbOverride = true;
+                                i41 = i31;
+                                i42 = i33;
+                            }
+                            str18 = str3;
+                            str19 = str4;
+                            jMax4 = Math.max(i37, jMax4);
+                            iMax16 = Math.max(i39 * i38, iMax16);
+                            iMax15 = Math.max(64000 * i40, iMax15);
+                            iMax17 = Math.max(i39, iMax17);
+                            iMax18 = Math.max(i38, iMax18);
+                            iMax14 = Math.max(i35, i107);
+                            iMin2 = Math.min(i41, i32);
+                            iMin = Math.min(i42, i34);
+                            i101 = i105 + 1;
+                            length4 = i102;
+                            i100 = i103;
+                            i = i36 & (-5);
+                            codecProfileLevelArr7 = codecProfileLevelArr3;
+                        }
+                        int i108 = iMin;
+                        int i109 = i100;
+                        if (!videoCapabilities.mAllowMbOverride) {
+                            videoCapabilities.mBlockAspectRatioRange = Range.create(new Rational(11, 9), new Rational(11, 9));
+                        }
+                        videoCapabilities.applyMacroBlockLimits(iMin2, i108, iMax17, iMax18, iMax16, jMax4, 16, 16, i109, i109);
+                        videoCapabilities.mFrameRateRange = Range.create(num, Integer.valueOf(iMax14));
+                        iMax = iMax15;
+                    } else {
+                        Integer num5 = num;
+                        if (mimeType.equalsIgnoreCase(MediaFormat.MIMETYPE_VIDEO_VP8)) {
+                            int length5 = codecProfileLevelArr4.length;
+                            int i110 = 0;
+                            i = 4;
+                            while (i110 < length5) {
+                                CodecProfileLevel codecProfileLevel5 = codecProfileLevelArr4[i110];
+                                int i111 = codecProfileLevel5.level;
+                                if (i111 == 1 || i111 == 2 || i111 == 4 || i111 == 8) {
+                                    str = str18;
+                                } else {
+                                    str = str18;
+                                    Log.w(str, "Unrecognized level " + codecProfileLevel5.level + str14 + mimeType);
+                                    i |= 1;
+                                }
+                                if (codecProfileLevel5.profile != 1) {
+                                    str2 = str19;
+                                    Log.w(str, str2 + codecProfileLevel5.profile + str14 + mimeType);
+                                    i |= 1;
+                                } else {
+                                    str2 = str19;
+                                }
+                                i &= -5;
+                                i110++;
+                                str19 = str2;
+                                str18 = str;
+                            }
+                            videoCapabilities.applyMacroBlockLimits(32767, 32767, Integer.MAX_VALUE, 2147483647L, 16, 16, 1, 1);
+                            num = num5;
+                            iMax = 100000000;
+                            videoCapabilities = this;
+                        } else {
+                            CodecProfileLevel[] codecProfileLevelArr8 = codecProfileLevelArr4;
+                            if (mimeType.equalsIgnoreCase(MediaFormat.MIMETYPE_VIDEO_VP9)) {
+                                int length6 = codecProfileLevelArr8.length;
+                                long jMax5 = 829440;
+                                int iMax19 = 36864;
+                                iMax2 = 200000;
+                                int iMax20 = 512;
+                                int i112 = 0;
+                                i = 4;
+                                while (i112 < length6) {
+                                    CodecProfileLevel codecProfileLevel6 = codecProfileLevelArr8[i112];
+                                    int i113 = codecProfileLevel6.level;
+                                    if (i113 == 1) {
+                                        j6 = 829440;
+                                        i20 = 36864;
+                                        i21 = 200;
+                                        i22 = 512;
+                                    } else if (i113 != 2) {
+                                        switch (i113) {
+                                            case 4:
+                                                j6 = 4608000;
+                                                i20 = 122880;
+                                                i21 = 1800;
+                                                i22 = EncodeConstants.Resolution.MM_360_EXPORT_HEIGHT_960;
+                                                break;
+                                            case 8:
+                                                j6 = 9216000;
+                                                i20 = 245760;
+                                                i21 = 3600;
+                                                i22 = MetricsProto.MetricsEvent.NOTIFICATION_ZEN_MODE_DURATION_PROMPT;
+                                                break;
+                                            case 16:
+                                                j6 = 20736000;
+                                                i20 = 552960;
+                                                i21 = 7200;
+                                                i22 = 2048;
+                                                break;
+                                            case 32:
+                                                j6 = 36864000;
+                                                i20 = 983040;
+                                                i21 = 12000;
+                                                i22 = SemExtendedFormat.DataType.DUAL_SHOT_ZOOMINOUT_INFO;
+                                                break;
+                                            case 64:
+                                                j6 = 83558400;
+                                                i20 = 2228224;
+                                                i21 = EncodeConstants.BitRate.MM_AVG_QHD_DATARATE;
+                                                i22 = 4160;
+                                                break;
+                                            case 128:
+                                                j6 = 160432128;
+                                                i20 = 2228224;
+                                                i21 = 30000;
+                                                i22 = 4160;
+                                                break;
+                                            case 256:
+                                                j6 = 311951360;
+                                                i29 = 60000;
+                                                codecProfileLevelArr2 = codecProfileLevelArr8;
+                                                num2 = num5;
+                                                i27 = 8384;
+                                                i25 = i112;
+                                                i26 = i29;
+                                                i23 = length6;
+                                                i24 = 8912896;
+                                                break;
+                                            case 512:
+                                                j6 = 588251136;
+                                                i29 = 120000;
+                                                codecProfileLevelArr2 = codecProfileLevelArr8;
+                                                num2 = num5;
+                                                i27 = 8384;
+                                                i25 = i112;
+                                                i26 = i29;
+                                                i23 = length6;
+                                                i24 = 8912896;
+                                                break;
+                                            case 1024:
+                                                j6 = 1176502272;
+                                                i29 = 180000;
+                                                codecProfileLevelArr2 = codecProfileLevelArr8;
+                                                num2 = num5;
+                                                i27 = 8384;
+                                                i25 = i112;
+                                                i26 = i29;
+                                                i23 = length6;
+                                                i24 = 8912896;
+                                                break;
+                                            case 2048:
+                                                j6 = 1176502272;
+                                                i30 = 180000;
+                                                codecProfileLevelArr2 = codecProfileLevelArr8;
+                                                num2 = num5;
+                                                i27 = 16832;
+                                                i25 = i112;
+                                                i26 = i30;
+                                                i23 = length6;
+                                                i24 = 35651584;
+                                                break;
+                                            case 4096:
+                                                j6 = 2353004544L;
+                                                i30 = 240000;
+                                                codecProfileLevelArr2 = codecProfileLevelArr8;
+                                                num2 = num5;
+                                                i27 = 16832;
+                                                i25 = i112;
+                                                i26 = i30;
+                                                i23 = length6;
+                                                i24 = 35651584;
+                                                break;
+                                            case 8192:
+                                                j6 = 4706009088L;
+                                                i30 = 480000;
+                                                codecProfileLevelArr2 = codecProfileLevelArr8;
+                                                num2 = num5;
+                                                i27 = 16832;
+                                                i25 = i112;
+                                                i26 = i30;
+                                                i23 = length6;
+                                                i24 = 35651584;
+                                                break;
+                                            default:
+                                                Log.w(str18, "Unrecognized level " + codecProfileLevel6.level + str14 + mimeType);
+                                                i |= 1;
+                                                j6 = 0;
+                                                i23 = length6;
+                                                codecProfileLevelArr2 = codecProfileLevelArr8;
+                                                num2 = num5;
+                                                i25 = i112;
+                                                i24 = 0;
+                                                i27 = 0;
+                                                i26 = 0;
+                                                break;
+                                        }
+                                        i28 = codecProfileLevel6.profile;
+                                        int i114 = iMax20;
+                                        if (i28 == 1 && i28 != 2 && i28 != 4 && i28 != 8 && i28 != 4096 && i28 != 8192 && i28 != 16384 && i28 != 32768) {
+                                            Log.w(str18, str19 + codecProfileLevel6.profile + str14 + mimeType);
+                                            i |= 1;
+                                        }
+                                        i &= -5;
+                                        jMax5 = Math.max(j6, jMax5);
+                                        iMax19 = Math.max(i24, iMax19);
+                                        iMax2 = Math.max(i26 * 1000, iMax2);
+                                        iMax20 = Math.max(i27, i114);
+                                        i112 = i25 + 1;
+                                        length6 = i23;
+                                        num5 = num2;
+                                        codecProfileLevelArr8 = codecProfileLevelArr2;
+                                    } else {
+                                        j6 = 2764800;
+                                        i20 = 73728;
+                                        i21 = 800;
+                                        i22 = 768;
+                                    }
+                                    int i115 = i20;
+                                    i23 = length6;
+                                    i24 = i115;
+                                    int i116 = i21;
+                                    i25 = i112;
+                                    i26 = i116;
+                                    codecProfileLevelArr2 = codecProfileLevelArr8;
+                                    num2 = num5;
+                                    i27 = i22;
+                                    i28 = codecProfileLevel6.profile;
+                                    int i1142 = iMax20;
+                                    if (i28 == 1) {
+                                    }
+                                    i &= -5;
+                                    jMax5 = Math.max(j6, jMax5);
+                                    iMax19 = Math.max(i24, iMax19);
+                                    iMax2 = Math.max(i26 * 1000, iMax2);
+                                    iMax20 = Math.max(i27, i1142);
+                                    i112 = i25 + 1;
+                                    length6 = i23;
+                                    num5 = num2;
+                                    codecProfileLevelArr8 = codecProfileLevelArr2;
+                                }
+                                num = num5;
+                                int iDivUp = Utils.divUp(iMax20, 8);
+                                videoCapabilities = this;
+                                videoCapabilities.applyMacroBlockLimits(iDivUp, iDivUp, Utils.divUp(iMax19, 64), Utils.divUp(jMax5, 64L), 8, 8, 1, 1);
+                            } else {
+                                num = num5;
+                                if (mimeType.equalsIgnoreCase("video/hevc")) {
+                                    int length7 = codecProfileLevelArr8.length;
+                                    iMax = 128000;
+                                    i = 4;
+                                    int iMax21 = 576;
+                                    long jMax6 = 8640;
+                                    int i117 = 0;
+                                    while (i117 < length7) {
+                                        CodecProfileLevel codecProfileLevel7 = codecProfileLevelArr8[i117];
+                                        int i118 = codecProfileLevel7.level;
+                                        if (i118 != 1 && i118 != 2) {
+                                            switch (i118) {
+                                                case 4:
+                                                case 8:
+                                                    d = 30.0d;
+                                                    i18 = 122880;
+                                                    i19 = 1500;
+                                                    int i119 = i19;
+                                                    i16 = i18;
+                                                    i17 = i119;
+                                                    i15 = i117;
+                                                    break;
+                                                case 16:
+                                                case 32:
+                                                    d = 30.0d;
+                                                    i18 = 245760;
+                                                    i19 = 3000;
+                                                    int i1192 = i19;
+                                                    i16 = i18;
+                                                    i17 = i1192;
+                                                    i15 = i117;
+                                                    break;
+                                                case 64:
+                                                case 128:
+                                                    d = 30.0d;
+                                                    i18 = 552960;
+                                                    i19 = 6000;
+                                                    int i11922 = i19;
+                                                    i16 = i18;
+                                                    i17 = i11922;
+                                                    i15 = i117;
+                                                    break;
+                                                case 256:
+                                                case 512:
+                                                    d = 33.75d;
+                                                    i18 = 983040;
+                                                    i19 = 10000;
+                                                    int i119222 = i19;
+                                                    i16 = i18;
+                                                    i17 = i119222;
+                                                    i15 = i117;
+                                                    break;
+                                                case 1024:
+                                                    d = 30.0d;
+                                                    i18 = 2228224;
+                                                    i19 = 12000;
+                                                    int i1192222 = i19;
+                                                    i16 = i18;
+                                                    i17 = i1192222;
+                                                    i15 = i117;
+                                                    break;
+                                                case 2048:
+                                                    d = 30.0d;
+                                                    i18 = 2228224;
+                                                    i19 = 30000;
+                                                    int i11922222 = i19;
+                                                    i16 = i18;
+                                                    i17 = i11922222;
+                                                    i15 = i117;
+                                                    break;
+                                                case 4096:
+                                                    d = 60.0d;
+                                                    i18 = 2228224;
+                                                    i19 = 20000;
+                                                    int i119222222 = i19;
+                                                    i16 = i18;
+                                                    i17 = i119222222;
+                                                    i15 = i117;
+                                                    break;
+                                                case 8192:
+                                                    d = 60.0d;
+                                                    i18 = 2228224;
+                                                    i19 = 50000;
+                                                    int i1192222222 = i19;
+                                                    i16 = i18;
+                                                    i17 = i1192222222;
+                                                    i15 = i117;
+                                                    break;
+                                                case 16384:
+                                                    d = 30.0d;
+                                                    i17 = 25000;
+                                                    i15 = i117;
+                                                    i16 = 8912896;
+                                                    break;
+                                                case 32768:
+                                                    d = 30.0d;
+                                                    i17 = 100000;
+                                                    i15 = i117;
+                                                    i16 = 8912896;
+                                                    break;
+                                                case 65536:
+                                                    d = 60.0d;
+                                                    i17 = 40000;
+                                                    i15 = i117;
+                                                    i16 = 8912896;
+                                                    break;
+                                                case 131072:
+                                                    d = 60.0d;
+                                                    i17 = 160000;
+                                                    i15 = i117;
+                                                    i16 = 8912896;
+                                                    break;
+                                                case 262144:
+                                                    d = 120.0d;
+                                                    i17 = 60000;
+                                                    i15 = i117;
+                                                    i16 = 8912896;
+                                                    break;
+                                                case 524288:
+                                                    d = 120.0d;
+                                                    i17 = 240000;
+                                                    i15 = i117;
+                                                    i16 = 8912896;
+                                                    break;
+                                                case 1048576:
+                                                    d = 30.0d;
+                                                    i17 = 60000;
+                                                    i15 = i117;
+                                                    i16 = 35651584;
+                                                    break;
+                                                case 2097152:
+                                                    d = 30.0d;
+                                                    i17 = 240000;
+                                                    i15 = i117;
+                                                    i16 = 35651584;
+                                                    break;
+                                                case 4194304:
+                                                    d = 60.0d;
+                                                    i17 = 120000;
+                                                    i15 = i117;
+                                                    i16 = 35651584;
+                                                    break;
+                                                case 8388608:
+                                                    d = 60.0d;
+                                                    i17 = 480000;
+                                                    i15 = i117;
+                                                    i16 = 35651584;
+                                                    break;
+                                                case 16777216:
+                                                    d = 120.0d;
+                                                    i17 = 240000;
+                                                    i15 = i117;
+                                                    i16 = 35651584;
+                                                    break;
+                                                case 33554432:
+                                                    d = 120.0d;
+                                                    i17 = Build.VERSION_CODES_FULL.FROYO;
+                                                    i15 = i117;
+                                                    i16 = 35651584;
+                                                    break;
+                                                default:
+                                                    Log.w(str18, "Unrecognized level " + codecProfileLevel7.level + str14 + mimeType);
+                                                    i |= 1;
+                                                    d = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
+                                                    i15 = i117;
+                                                    i17 = 0;
+                                                    i16 = 0;
+                                                    break;
+                                            }
+                                        } else {
+                                            d = 15.0d;
+                                            i15 = i117;
+                                            i16 = 36864;
+                                            i17 = 128;
+                                        }
+                                        int i120 = codecProfileLevel7.profile;
+                                        int i121 = length7;
+                                        if (i120 != 1 && i120 != 2 && i120 != 4 && i120 != 4096 && i120 != 8192) {
+                                            Log.w(str18, str19 + codecProfileLevel7.profile + str14 + mimeType);
+                                            i |= 1;
+                                        }
+                                        i &= -5;
+                                        jMax6 = Math.max((int) (r1 * d), jMax6);
+                                        iMax21 = Math.max(i16 >> 6, iMax21);
+                                        iMax = Math.max(i17 * 1000, iMax);
+                                        i117 = i15 + 1;
+                                        length7 = i121;
+                                    }
+                                    int iSqrt3 = (int) Math.sqrt(iMax21 * 8);
+                                    int i122 = iMax21;
+                                    videoCapabilities = this;
+                                    videoCapabilities.applyMacroBlockLimits(iSqrt3, iSqrt3, i122, jMax6, 8, 8, 1, 1);
+                                } else {
+                                    CodecProfileLevel[] codecProfileLevelArr9 = codecProfileLevelArr8;
+                                    if (mimeType.equalsIgnoreCase(MediaFormat.MIMETYPE_VIDEO_AV1)) {
+                                        int length8 = codecProfileLevelArr9.length;
+                                        long jMax7 = 829440;
+                                        int iMax22 = 36864;
+                                        int iMax23 = 512;
+                                        iMax = 200000;
+                                        int i123 = 0;
+                                        i2 = 4;
+                                        while (i123 < length8) {
+                                            CodecProfileLevel codecProfileLevel8 = codecProfileLevelArr9[i123];
+                                            int i124 = codecProfileLevel8.level;
+                                            if (i124 != 1) {
+                                                if (i124 != 2) {
+                                                    switch (i124) {
+                                                        case 4:
+                                                        case 8:
+                                                            j2 = 10454400;
+                                                            i3 = 278784;
+                                                            i4 = 3000;
+                                                            i5 = 2816;
+                                                            break;
+                                                        case 16:
+                                                            j2 = 24969600;
+                                                            i3 = 665856;
+                                                            i4 = 6000;
+                                                            i5 = 4352;
+                                                            break;
+                                                        case 32:
+                                                        case 64:
+                                                        case 128:
+                                                            j2 = 39938400;
+                                                            i3 = 1065024;
+                                                            i4 = 10000;
+                                                            i5 = 5504;
+                                                            break;
+                                                        case 256:
+                                                            j2 = 77856768;
+                                                            i3 = 2359296;
+                                                            i4 = 12000;
+                                                            i5 = GLES30.GL_COLOR;
+                                                            break;
+                                                        case 512:
+                                                        case 1024:
+                                                        case 2048:
+                                                            j2 = 155713536;
+                                                            i3 = 2359296;
+                                                            i4 = 20000;
+                                                            i5 = GLES30.GL_COLOR;
+                                                            break;
+                                                        case 4096:
+                                                            j4 = 273715200;
+                                                            i13 = 30000;
+                                                            i7 = length8;
+                                                            i8 = i123;
+                                                            codecProfileLevelArr = codecProfileLevelArr9;
+                                                            j3 = j4;
+                                                            i10 = 8912896;
+                                                            i9 = i13;
+                                                            i11 = 8192;
+                                                            break;
+                                                        case 8192:
+                                                            j4 = 547430400;
+                                                            i13 = 40000;
+                                                            i7 = length8;
+                                                            i8 = i123;
+                                                            codecProfileLevelArr = codecProfileLevelArr9;
+                                                            j3 = j4;
+                                                            i10 = 8912896;
+                                                            i9 = i13;
+                                                            i11 = 8192;
+                                                            break;
+                                                        case 16384:
+                                                            j4 = 1094860800;
+                                                            i13 = 60000;
+                                                            i7 = length8;
+                                                            i8 = i123;
+                                                            codecProfileLevelArr = codecProfileLevelArr9;
+                                                            j3 = j4;
+                                                            i10 = 8912896;
+                                                            i9 = i13;
+                                                            i11 = 8192;
+                                                            break;
+                                                        case 32768:
+                                                            j4 = 1176502272;
+                                                            i13 = 60000;
+                                                            i7 = length8;
+                                                            i8 = i123;
+                                                            codecProfileLevelArr = codecProfileLevelArr9;
+                                                            j3 = j4;
+                                                            i10 = 8912896;
+                                                            i9 = i13;
+                                                            i11 = 8192;
+                                                            break;
+                                                        case 65536:
+                                                            j5 = 1176502272;
+                                                            i14 = 60000;
+                                                            i7 = length8;
+                                                            codecProfileLevelArr = codecProfileLevelArr9;
+                                                            i6 = 16384;
+                                                            i8 = i123;
+                                                            j3 = j5;
+                                                            i10 = 35651584;
+                                                            i9 = i14;
+                                                            i11 = i6;
+                                                            break;
+                                                        case 131072:
+                                                            j5 = 2189721600L;
+                                                            i14 = 100000;
+                                                            i7 = length8;
+                                                            codecProfileLevelArr = codecProfileLevelArr9;
+                                                            i6 = 16384;
+                                                            i8 = i123;
+                                                            j3 = j5;
+                                                            i10 = 35651584;
+                                                            i9 = i14;
+                                                            i11 = i6;
+                                                            break;
+                                                        case 262144:
+                                                            j5 = 4379443200L;
+                                                            i14 = 160000;
+                                                            i7 = length8;
+                                                            codecProfileLevelArr = codecProfileLevelArr9;
+                                                            i6 = 16384;
+                                                            i8 = i123;
+                                                            j3 = j5;
+                                                            i10 = 35651584;
+                                                            i9 = i14;
+                                                            i11 = i6;
+                                                            break;
+                                                        case 524288:
+                                                            j5 = 4706009088L;
+                                                            i14 = 160000;
+                                                            i7 = length8;
+                                                            codecProfileLevelArr = codecProfileLevelArr9;
+                                                            i6 = 16384;
+                                                            i8 = i123;
+                                                            j3 = j5;
+                                                            i10 = 35651584;
+                                                            i9 = i14;
+                                                            i11 = i6;
+                                                            break;
+                                                        default:
+                                                            Log.w(str18, "Unrecognized level " + codecProfileLevel8.level + str14 + mimeType);
+                                                            i2 |= 1;
+                                                            i7 = length8;
+                                                            i8 = i123;
+                                                            codecProfileLevelArr = codecProfileLevelArr9;
+                                                            j3 = 0;
+                                                            i11 = 0;
+                                                            i10 = 0;
+                                                            i9 = 0;
+                                                            break;
+                                                    }
+                                                }
+                                                i12 = codecProfileLevel8.profile;
+                                                int i125 = iMax23;
+                                                if (i12 == 1 && i12 != 2 && i12 != 4096 && i12 != 8192) {
+                                                    Log.w(str18, str19 + codecProfileLevel8.profile + str14 + mimeType);
+                                                    i2 |= 1;
+                                                }
+                                                i2 &= -5;
+                                                jMax7 = Math.max(j3, jMax7);
+                                                iMax22 = Math.max(i10, iMax22);
+                                                iMax = Math.max(i9 * 1000, iMax);
+                                                iMax23 = Math.max(i11, i125);
+                                                i123 = i8 + 1;
+                                                length8 = i7;
+                                                codecProfileLevelArr9 = codecProfileLevelArr;
+                                            } else {
+                                                j2 = 5529600;
+                                                i3 = Protocol.BASE_WIFI_MONITOR;
+                                                i4 = 1500;
+                                                i5 = 2048;
+                                            }
+                                            codecProfileLevelArr = codecProfileLevelArr9;
+                                            i6 = i5;
+                                            i7 = length8;
+                                            int i126 = i4;
+                                            i8 = i123;
+                                            j3 = j2;
+                                            i9 = i126;
+                                            i10 = i3;
+                                            i11 = i6;
+                                            i12 = codecProfileLevel8.profile;
+                                            int i1252 = iMax23;
+                                            if (i12 == 1) {
+                                            }
+                                            i2 &= -5;
+                                            jMax7 = Math.max(j3, jMax7);
+                                            iMax22 = Math.max(i10, iMax22);
+                                            iMax = Math.max(i9 * 1000, iMax);
+                                            iMax23 = Math.max(i11, i1252);
+                                            i123 = i8 + 1;
+                                            length8 = i7;
+                                            codecProfileLevelArr9 = codecProfileLevelArr;
+                                        }
+                                        int iDivUp2 = Utils.divUp(iMax23, 8);
+                                        videoCapabilities = this;
+                                        videoCapabilities.applyMacroBlockLimits(iDivUp2, iDivUp2, Utils.divUp(iMax22, 64), Utils.divUp(jMax7, 64L), 8, 8, 1, 1);
+                                    } else if (MediaCodec.GetFlag(new Supplier() { // from class: android.media.MediaCodecInfo$VideoCapabilities$$ExternalSyntheticLambda1
+                                        @Override // java.util.function.Supplier
+                                        public final Object get() {
+                                            return Boolean.valueOf(Flags.apvSupport());
+                                        }
+                                    }) && mimeType.equalsIgnoreCase(MediaFormat.MIMETYPE_VIDEO_APV)) {
+                                        int length9 = codecProfileLevelArr9.length;
+                                        long jMax8 = 11880;
+                                        iMax = 7000000;
+                                        int i127 = 0;
+                                        i2 = 4;
+                                        while (true) {
+                                            int i128 = Integer.MAX_VALUE;
+                                            if (i127 < length9) {
+                                                CodecProfileLevel codecProfileLevel9 = codecProfileLevelArr9[i127];
+                                                switch (codecProfileLevel9.level) {
+                                                    case 257:
+                                                        j = 3041280;
+                                                        i128 = 7000000;
+                                                        break;
+                                                    case 258:
+                                                        j = 3041280;
+                                                        i128 = 11000000;
+                                                        break;
+                                                    case 260:
+                                                        j = 3041280;
+                                                        i128 = 14000000;
+                                                        break;
+                                                    case 264:
+                                                        j = 3041280;
+                                                        i128 = 21000000;
+                                                        break;
+                                                    case 513:
+                                                        j = 6082560;
+                                                        i128 = 14000000;
+                                                        break;
+                                                    case 514:
+                                                        j = 6082560;
+                                                        i128 = 21000000;
+                                                        break;
+                                                    case 516:
+                                                        j = 6082560;
+                                                        i128 = 28000000;
+                                                        break;
+                                                    case 520:
+                                                        j = 6082560;
+                                                        i128 = 42000000;
+                                                        break;
+                                                    case 1025:
+                                                        j = 15667200;
+                                                        i128 = 36000000;
+                                                        break;
+                                                    case 1026:
+                                                        j = 15667200;
+                                                        i128 = 53000000;
+                                                        break;
+                                                    case 1028:
+                                                        j = 15667200;
+                                                        i128 = 71000000;
+                                                        break;
+                                                    case 1032:
+                                                        j = 15667200;
+                                                        i128 = 106000000;
+                                                        break;
+                                                    case 2049:
+                                                        j = 31334400;
+                                                        i128 = 71000000;
+                                                        break;
+                                                    case 2050:
+                                                        j = 31334400;
+                                                        i128 = 106000000;
+                                                        break;
+                                                    case 2052:
+                                                        j = 31334400;
+                                                        i128 = 141000000;
+                                                        break;
+                                                    case 2056:
+                                                        j = 31334400;
+                                                        i128 = 212000000;
+                                                        break;
+                                                    case 4097:
+                                                        j = 66846720;
+                                                        i128 = 101000000;
+                                                        break;
+                                                    case 4098:
+                                                        j = 66846720;
+                                                        i128 = 151000000;
+                                                        break;
+                                                    case 4100:
+                                                        j = 66846720;
+                                                        i128 = 201000000;
+                                                        break;
+                                                    case 4104:
+                                                        j = 66846720;
+                                                        i128 = 301000000;
+                                                        break;
+                                                    case 8193:
+                                                        j = 133693440;
+                                                        i128 = 201000000;
+                                                        break;
+                                                    case 8194:
+                                                        j = 133693440;
+                                                        i128 = 301000000;
+                                                        break;
+                                                    case 8196:
+                                                        j = 133693440;
+                                                        i128 = 401000000;
+                                                        break;
+                                                    case 8200:
+                                                        j = 133693440;
+                                                        i128 = 602000000;
+                                                        break;
+                                                    case 16385:
+                                                        j = 265420800;
+                                                        i128 = 401000000;
+                                                        break;
+                                                    case 16386:
+                                                        j = 265420800;
+                                                        i128 = 602000000;
+                                                        break;
+                                                    case 16388:
+                                                        j = 265420800;
+                                                        i128 = 780000000;
+                                                        break;
+                                                    case 16392:
+                                                        j = 265420800;
+                                                        i128 = 1170000000;
+                                                        break;
+                                                    case 32769:
+                                                        j = 530841600;
+                                                        i128 = 780000000;
+                                                        break;
+                                                    case 32770:
+                                                        j = 530841600;
+                                                        i128 = 1170000000;
+                                                        break;
+                                                    case 32772:
+                                                        j = 530841600;
+                                                        i128 = 1560000000;
+                                                        break;
+                                                    case 32776:
+                                                        j = 530841600;
+                                                        break;
+                                                    case 65537:
+                                                        j = 1061683200;
+                                                        i128 = 1560000000;
+                                                        break;
+                                                    case 65538:
+                                                    case 65540:
+                                                    case 65544:
+                                                        j = 1061683200;
+                                                        break;
+                                                    case CodecProfileLevel.APVLevel51Band0 /* 131073 */:
+                                                    case CodecProfileLevel.APVLevel51Band1 /* 131074 */:
+                                                    case 131076:
+                                                    case CodecProfileLevel.APVLevel51Band3 /* 131080 */:
+                                                        j = 2123366400;
+                                                        break;
+                                                    case 262145:
+                                                    case CodecProfileLevel.APVLevel6Band1 /* 262146 */:
+                                                    case 262148:
+                                                    case CodecProfileLevel.APVLevel6Band3 /* 262152 */:
+                                                        j = 4777574400L;
+                                                        break;
+                                                    case CodecProfileLevel.APVLevel61Band0 /* 524289 */:
+                                                    case 524290:
+                                                    case 524292:
+                                                    case CodecProfileLevel.APVLevel61Band3 /* 524296 */:
+                                                        j = 8493465600L;
+                                                        break;
+                                                    case CodecProfileLevel.APVLevel7Band0 /* 1048577 */:
+                                                    case CodecProfileLevel.APVLevel7Band1 /* 1048578 */:
+                                                    case CodecProfileLevel.APVLevel7Band2 /* 1048580 */:
+                                                    case 1048584:
+                                                        j = 16986931200L;
+                                                        break;
+                                                    case CodecProfileLevel.APVLevel71Band0 /* 2097153 */:
+                                                    case CodecProfileLevel.APVLevel71Band1 /* 2097154 */:
+                                                    case CodecProfileLevel.APVLevel71Band2 /* 2097156 */:
+                                                    case CodecProfileLevel.APVLevel71Band3 /* 2097160 */:
+                                                        j = 33973862400L;
+                                                        break;
+                                                    default:
+                                                        Log.w(str18, "Unrecognized level " + codecProfileLevel9.level + str14 + mimeType);
+                                                        i2 |= 1;
+                                                        j = 0;
+                                                        i128 = 0;
+                                                        break;
+                                                }
+                                                int i129 = codecProfileLevel9.profile;
+                                                if (i129 != 1 && i129 != 4096) {
+                                                    if (i129 != 8192) {
+                                                        Log.w(str18, str19 + codecProfileLevel9.profile + str14 + mimeType);
+                                                        i2 |= 1;
+                                                    }
+                                                }
+                                                i2 &= -5;
+                                                jMax8 = Math.max(j, jMax8);
+                                                iMax = Math.max(i128, iMax);
+                                                i127++;
+                                            } else {
+                                                long jDivUp = Utils.divUp(jMax8, 256L);
+                                                int iMin3 = (int) Math.min(Integer.MAX_VALUE, jDivUp);
+                                                int iMin4 = Math.min(Utils.divUp((int) Math.pow(2.0d, 24.0d), 16), iMin3);
+                                                videoCapabilities = this;
+                                                videoCapabilities.applyMacroBlockLimits(iMin4, iMin4, iMin3, jDivUp, 16, 16, 2, 1);
+                                            }
+                                        }
+                                    } else {
+                                        videoCapabilities = this;
+                                        Log.w(str18, "Unsupported mime " + mimeType);
+                                        iMax = 64000;
+                                        i = 6;
+                                    }
+                                    i = i2;
+                                }
+                            }
+                        }
+                    }
+                }
+                iMax = iMax2;
+            }
+            videoCapabilities.mBitrateRange = Range.create(num, Integer.valueOf(iMax));
+            videoCapabilities.mParent.mError |= i;
         }
     }
 
@@ -1703,12 +3673,12 @@ public final class MediaCodecInfo {
         }
 
         private boolean supports(Integer num, Integer num2, Integer num3) {
-            boolean contains = num != null ? this.mComplexityRange.contains((Range<Integer>) num) : true;
-            if (contains && num2 != null) {
-                contains = this.mQualityRange.contains((Range<Integer>) num2);
+            boolean zContains = num != null ? this.mComplexityRange.contains((Range<Integer>) num) : true;
+            if (zContains && num2 != null) {
+                zContains = this.mQualityRange.contains((Range<Integer>) num2);
             }
-            if (!contains || num3 == null) {
-                return contains;
+            if (!zContains || num3 == null) {
+                return zContains;
             }
             CodecProfileLevel[] codecProfileLevelArr = this.mParent.profileLevels;
             int length = codecProfileLevelArr.length;
@@ -1729,10 +3699,10 @@ public final class MediaCodecInfo {
         public void getDefaultFormat(MediaFormat mediaFormat) {
             Integer num;
             Integer num2;
-            if (!this.mQualityRange.getUpper().equals(this.mQualityRange.getLower()) && (num2 = this.mDefaultQuality) != null) {
+            if (!((Integer) this.mQualityRange.getUpper()).equals(this.mQualityRange.getLower()) && (num2 = this.mDefaultQuality) != null) {
                 mediaFormat.setInteger("quality", num2.intValue());
             }
-            if (!this.mComplexityRange.getUpper().equals(this.mComplexityRange.getLower()) && (num = this.mDefaultComplexity) != null) {
+            if (!((Integer) this.mComplexityRange.getUpper()).equals(this.mComplexityRange.getLower()) && (num = this.mDefaultComplexity) != null) {
                 mediaFormat.setInteger(MediaFormat.KEY_COMPLEXITY, num.intValue());
             }
             for (Feature feature : bitrates) {

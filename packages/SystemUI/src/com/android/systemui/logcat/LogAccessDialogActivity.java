@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -27,7 +28,6 @@ import com.android.internal.app.ILogAccessDialogCallback;
 import com.android.systemui.R;
 import com.samsung.systemui.splugins.volume.VolumePanelState;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class LogAccessDialogActivity extends Activity implements View.OnClickListener {
     public static final int DIALOG_TIME_OUT;
@@ -88,15 +88,15 @@ public class LogAccessDialogActivity extends Activity implements View.OnClickLis
     }
 
     @Override // android.app.Activity
-    public final void onCreate(Bundle bundle) {
+    public final void onCreate(Bundle bundle) throws Resources.NotFoundException {
         super.onCreate(bundle);
         Intent intent = getIntent();
         if (intent == null) {
             Slog.e("LogAccessDialogActivity", "Intent is null");
         } else {
-            ILogAccessDialogCallback asInterface = ILogAccessDialogCallback.Stub.asInterface(intent.getExtras().getBinder("EXTRA_CALLBACK"));
-            this.mCallback = asInterface;
-            if (asInterface == null) {
+            ILogAccessDialogCallback iLogAccessDialogCallbackAsInterface = ILogAccessDialogCallback.Stub.asInterface(intent.getExtras().getBinder("EXTRA_CALLBACK"));
+            this.mCallback = iLogAccessDialogCallbackAsInterface;
+            if (iLogAccessDialogCallbackAsInterface == null) {
                 Slog.e("LogAccessDialogActivity", "Missing callback");
             } else {
                 String stringExtra = intent.getStringExtra("android.intent.extra.PACKAGE_NAME");
@@ -121,29 +121,29 @@ public class LogAccessDialogActivity extends Activity implements View.OnClickLis
                             } else {
                                 this.mAlertLearnMore = new SpannableString(getString(R.string.log_access_confirmation_learn_more_at, new Object[]{getString(R.string.log_access_confirmation_learn_more_url)}));
                             }
-                            View inflate = LayoutInflater.from(new ContextThemeWrapper(this, R.style.LogAccessDialogTheme)).inflate(R.layout.log_access_user_consent_dialog_permission, (ViewGroup) null);
-                            if (inflate == null) {
+                            View viewInflate = LayoutInflater.from(new ContextThemeWrapper(this, R.style.LogAccessDialogTheme)).inflate(R.layout.log_access_user_consent_dialog_permission, (ViewGroup) null);
+                            if (viewInflate == null) {
                                 throw new InflateException();
                             }
-                            ((TextView) inflate.findViewById(R.id.log_access_dialog_title)).setText(this.mAlertTitle);
+                            ((TextView) viewInflate.findViewById(R.id.log_access_dialog_title)).setText(this.mAlertTitle);
                             if (TextUtils.isEmpty(this.mAlertLearnMore)) {
-                                ((TextView) inflate.findViewById(R.id.log_access_dialog_body)).setText(this.mAlertBody);
+                                ((TextView) viewInflate.findViewById(R.id.log_access_dialog_body)).setText(this.mAlertBody);
                             } else {
-                                ((TextView) inflate.findViewById(R.id.log_access_dialog_body)).setText(TextUtils.concat(this.mAlertBody, "\n\n", this.mAlertLearnMore));
+                                ((TextView) viewInflate.findViewById(R.id.log_access_dialog_body)).setText(TextUtils.concat(this.mAlertBody, "\n\n", this.mAlertLearnMore));
                                 if (this.mAlertLearnMoreLink) {
-                                    ((TextView) inflate.findViewById(R.id.log_access_dialog_body)).setMovementMethod(LinkMovementMethod.getInstance());
+                                    ((TextView) viewInflate.findViewById(R.id.log_access_dialog_body)).setMovementMethod(LinkMovementMethod.getInstance());
                                 }
                             }
-                            ((Button) inflate.findViewById(R.id.log_access_dialog_allow_button)).setOnClickListener(this);
-                            ((Button) inflate.findViewById(R.id.log_access_dialog_deny_button)).setOnClickListener(this);
-                            this.mAlertView = inflate;
+                            ((Button) viewInflate.findViewById(R.id.log_access_dialog_allow_button)).setOnClickListener(this);
+                            ((Button) viewInflate.findViewById(R.id.log_access_dialog_deny_button)).setOnClickListener(this);
+                            this.mAlertView = viewInflate;
                             AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.LogAccessDialogTheme);
                             this.mAlertDialog = builder;
                             builder.setView(this.mAlertView);
                             this.mAlertDialog.setOnCancelListener(new DialogInterface.OnCancelListener() { // from class: com.android.systemui.logcat.LogAccessDialogActivity$$ExternalSyntheticLambda0
                                 @Override // android.content.DialogInterface.OnCancelListener
                                 public final void onCancel(DialogInterface dialogInterface) {
-                                    LogAccessDialogActivity logAccessDialogActivity = LogAccessDialogActivity.this;
+                                    LogAccessDialogActivity logAccessDialogActivity = this.f$0;
                                     int i = LogAccessDialogActivity.DIALOG_TIME_OUT;
                                     logAccessDialogActivity.declineLogAccess();
                                 }
@@ -151,14 +151,14 @@ public class LogAccessDialogActivity extends Activity implements View.OnClickLis
                             this.mAlertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() { // from class: com.android.systemui.logcat.LogAccessDialogActivity$$ExternalSyntheticLambda1
                                 @Override // android.content.DialogInterface.OnDismissListener
                                 public final void onDismiss(DialogInterface dialogInterface) {
-                                    LogAccessDialogActivity logAccessDialogActivity = LogAccessDialogActivity.this;
+                                    LogAccessDialogActivity logAccessDialogActivity = this.f$0;
                                     logAccessDialogActivity.mAlert = null;
                                     logAccessDialogActivity.finish();
                                 }
                             });
-                            AlertDialog create = this.mAlertDialog.create();
-                            this.mAlert = create;
-                            create.getWindow().setHideOverlayWindows(true);
+                            AlertDialog alertDialogCreate = this.mAlertDialog.create();
+                            this.mAlert = alertDialogCreate;
+                            alertDialogCreate.getWindow().setHideOverlayWindows(true);
                             this.mAlert.show();
                             sendEmptyMessageDelayed(0, DIALOG_TIME_OUT);
                             return;

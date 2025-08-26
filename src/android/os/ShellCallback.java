@@ -85,10 +85,10 @@ public class ShellCallback implements Parcelable {
     }
 
     ShellCallback(Parcel parcel) {
-        IShellCallback asInterface = IShellCallback.Stub.asInterface(parcel.readStrongBinder());
-        this.mShellCallback = asInterface;
-        if (asInterface != null) {
-            Binder.allowBlocking(asInterface.asBinder());
+        IShellCallback iShellCallbackAsInterface = IShellCallback.Stub.asInterface(parcel.readStrongBinder());
+        this.mShellCallback = iShellCallbackAsInterface;
+        if (iShellCallbackAsInterface != null) {
+            Binder.allowBlocking(iShellCallbackAsInterface.asBinder());
         }
     }
 }

@@ -101,9 +101,9 @@ public interface IMoccaService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IMoccaService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IMoccaService)) {
-                return (IMoccaService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IMoccaService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IMoccaService)) {
+                return (IMoccaService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -152,56 +152,56 @@ public interface IMoccaService extends IInterface {
                     parcel2.writeStringList(supportedTypes);
                     return true;
                 case 2:
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isAvailableType = isAvailableType(readString);
+                    boolean zIsAvailableType = isAvailableType(string);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isAvailableType);
+                    parcel2.writeBoolean(zIsAvailableType);
                     return true;
                 case 3:
-                    IMoccaEventListener asInterface = IMoccaEventListener.Stub.asInterface(parcel.readStrongBinder());
-                    String readString2 = parcel.readString();
+                    IMoccaEventListener iMoccaEventListenerAsInterface = IMoccaEventListener.Stub.asInterface(parcel.readStrongBinder());
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean registerContextAvailabilityListener = registerContextAvailabilityListener(asInterface, readString2);
+                    boolean zRegisterContextAvailabilityListener = registerContextAvailabilityListener(iMoccaEventListenerAsInterface, string2);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(registerContextAvailabilityListener);
+                    parcel2.writeBoolean(zRegisterContextAvailabilityListener);
                     return true;
                 case 4:
-                    IMoccaEventListener asInterface2 = IMoccaEventListener.Stub.asInterface(parcel.readStrongBinder());
-                    String readString3 = parcel.readString();
+                    IMoccaEventListener iMoccaEventListenerAsInterface2 = IMoccaEventListener.Stub.asInterface(parcel.readStrongBinder());
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    unregisterContextAvailabilityListener(asInterface2, readString3);
+                    unregisterContextAvailabilityListener(iMoccaEventListenerAsInterface2, string3);
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    IMoccaEventListener asInterface3 = IMoccaEventListener.Stub.asInterface(parcel.readStrongBinder());
+                    IMoccaEventListener iMoccaEventListenerAsInterface3 = IMoccaEventListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    boolean hasContextAvailabilityListener = hasContextAvailabilityListener(asInterface3);
+                    boolean zHasContextAvailabilityListener = hasContextAvailabilityListener(iMoccaEventListenerAsInterface3);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(hasContextAvailabilityListener);
+                    parcel2.writeBoolean(zHasContextAvailabilityListener);
                     return true;
                 case 6:
-                    IMoccaEventListener asInterface4 = IMoccaEventListener.Stub.asInterface(parcel.readStrongBinder());
-                    String readString4 = parcel.readString();
+                    IMoccaEventListener iMoccaEventListenerAsInterface4 = IMoccaEventListener.Stub.asInterface(parcel.readStrongBinder());
+                    String string4 = parcel.readString();
                     ContextParam contextParam = (ContextParam) parcel.readTypedObject(ContextParam.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean registerContextListener = registerContextListener(asInterface4, readString4, contextParam);
+                    boolean zRegisterContextListener = registerContextListener(iMoccaEventListenerAsInterface4, string4, contextParam);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(registerContextListener);
+                    parcel2.writeBoolean(zRegisterContextListener);
                     return true;
                 case 7:
-                    IMoccaEventListener asInterface5 = IMoccaEventListener.Stub.asInterface(parcel.readStrongBinder());
-                    String readString5 = parcel.readString();
+                    IMoccaEventListener iMoccaEventListenerAsInterface5 = IMoccaEventListener.Stub.asInterface(parcel.readStrongBinder());
+                    String string5 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    unregisterContextListener(asInterface5, readString5);
+                    unregisterContextListener(iMoccaEventListenerAsInterface5, string5);
                     parcel2.writeNoException();
                     return true;
                 case 8:
-                    IMoccaEventListener asInterface6 = IMoccaEventListener.Stub.asInterface(parcel.readStrongBinder());
+                    IMoccaEventListener iMoccaEventListenerAsInterface6 = IMoccaEventListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    boolean hasContextListener = hasContextListener(asInterface6);
+                    boolean zHasContextListener = hasContextListener(iMoccaEventListenerAsInterface6);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(hasContextListener);
+                    parcel2.writeBoolean(zHasContextListener);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -226,131 +226,131 @@ public interface IMoccaService extends IInterface {
 
             @Override // com.samsung.android.mocca.IMoccaService
             public List<String> getSupportedTypes() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMoccaService.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IMoccaService.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.mocca.IMoccaService
             public boolean isAvailableType(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMoccaService.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IMoccaService.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.mocca.IMoccaService
             public boolean registerContextAvailabilityListener(IMoccaEventListener iMoccaEventListener, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMoccaService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iMoccaEventListener);
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IMoccaService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iMoccaEventListener);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.mocca.IMoccaService
             public void unregisterContextAvailabilityListener(IMoccaEventListener iMoccaEventListener, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMoccaService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iMoccaEventListener);
-                    obtain.writeString(str);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMoccaService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iMoccaEventListener);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.mocca.IMoccaService
             public boolean hasContextAvailabilityListener(IMoccaEventListener iMoccaEventListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMoccaService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iMoccaEventListener);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IMoccaService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iMoccaEventListener);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.mocca.IMoccaService
             public boolean registerContextListener(IMoccaEventListener iMoccaEventListener, String str, ContextParam contextParam) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMoccaService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iMoccaEventListener);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(contextParam, 0);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IMoccaService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iMoccaEventListener);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(contextParam, 0);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.mocca.IMoccaService
             public void unregisterContextListener(IMoccaEventListener iMoccaEventListener, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMoccaService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iMoccaEventListener);
-                    obtain.writeString(str);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IMoccaService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iMoccaEventListener);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.mocca.IMoccaService
             public boolean hasContextListener(IMoccaEventListener iMoccaEventListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IMoccaService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iMoccaEventListener);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IMoccaService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iMoccaEventListener);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -6,19 +6,41 @@ import com.android.systemui.scene.domain.interactor.SceneInteractor;
 import com.android.systemui.shade.domain.interactor.ShadeInteractor;
 import com.android.systemui.shade.domain.interactor.ShadeInteractorImpl;
 import com.google.android.msdl.domain.MSDLPlayer;
+import kotlin.KotlinNothingValueException;
+import kotlin.ResultKt;
+import kotlin.Unit;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
 import kotlinx.coroutines.flow.Flow;
+import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$unsafeFlow$1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SceneContainerHapticsViewModel extends ExclusiveActivatable {
     public final Flow isShadePullHapticsRequired;
     public final View view;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         SceneContainerHapticsViewModel create(View view);
+    }
+
+    /* renamed from: com.android.systemui.scene.ui.viewmodel.SceneContainerHapticsViewModel$onActivated$1, reason: invalid class name */
+    final class AnonymousClass1 extends ContinuationImpl {
+        int label;
+        /* synthetic */ Object result;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return SceneContainerHapticsViewModel.this.onActivated(this);
+        }
     }
 
     public SceneContainerHapticsViewModel(View view, SceneInteractor sceneInteractor, ShadeInteractor shadeInteractor, MSDLPlayer mSDLPlayer) {
@@ -26,88 +48,127 @@ public final class SceneContainerHapticsViewModel extends ExclusiveActivatable {
         this.isShadePullHapticsRequired = FlowKt.distinctUntilChanged(new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(((ShadeInteractorImpl) shadeInteractor).isUserInteracting, sceneInteractor.transitionState, new SceneContainerHapticsViewModel$isShadePullHapticsRequired$1(this, null)));
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:18:0x0059, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:23:0x0059, code lost:
     
-        if (kotlinx.coroutines.DelayKt.awaitCancellation(r0) != r1) goto L25;
+        if (kotlinx.coroutines.DelayKt.awaitCancellation(r0) == r1) goto L24;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:19:0x005b, code lost:
-    
-        return r1;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:23:0x0050, code lost:
-    
-        if (r5 == r1) goto L24;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0036  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0022  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     @Override // com.android.systemui.lifecycle.ExclusiveActivatable
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object onActivated(kotlin.coroutines.Continuation r6) {
-        /*
-            r5 = this;
-            boolean r0 = r6 instanceof com.android.systemui.scene.ui.viewmodel.SceneContainerHapticsViewModel$onActivated$1
-            if (r0 == 0) goto L13
-            r0 = r6
-            com.android.systemui.scene.ui.viewmodel.SceneContainerHapticsViewModel$onActivated$1 r0 = (com.android.systemui.scene.ui.viewmodel.SceneContainerHapticsViewModel$onActivated$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.systemui.scene.ui.viewmodel.SceneContainerHapticsViewModel$onActivated$1 r0 = new com.android.systemui.scene.ui.viewmodel.SceneContainerHapticsViewModel$onActivated$1
-            r0.<init>(r5, r6)
-        L18:
-            java.lang.Object r6 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 2
-            r4 = 1
-            if (r2 == 0) goto L36
-            if (r2 == r4) goto L32
-            if (r2 == r3) goto L2e
-            java.lang.IllegalStateException r5 = new java.lang.IllegalStateException
-            java.lang.String r6 = "call to 'resume' before 'invoke' with coroutine"
-            r5.<init>(r6)
-            throw r5
-        L2e:
-            kotlin.ResultKt.throwOnFailure(r6)
-            goto L5c
-        L32:
-            kotlin.ResultKt.throwOnFailure(r6)
-            goto L53
-        L36:
-            kotlin.ResultKt.throwOnFailure(r6)
-            r0.label = r4
-            com.android.systemui.scene.ui.viewmodel.SceneContainerHapticsViewModel$playShadePullHaptics$$inlined$filter$1 r6 = new com.android.systemui.scene.ui.viewmodel.SceneContainerHapticsViewModel$playShadePullHaptics$$inlined$filter$1
-            kotlinx.coroutines.flow.Flow r2 = r5.isShadePullHapticsRequired
-            r6.<init>()
-            com.android.systemui.scene.ui.viewmodel.SceneContainerHapticsViewModel$playShadePullHaptics$3 r2 = new com.android.systemui.scene.ui.viewmodel.SceneContainerHapticsViewModel$playShadePullHaptics$3
-            r2.<init>()
-            java.lang.Object r5 = r6.collect(r2, r0)
-            if (r5 != r1) goto L4e
-            goto L50
-        L4e:
-            kotlin.Unit r5 = kotlin.Unit.INSTANCE
-        L50:
-            if (r5 != r1) goto L53
-            goto L5b
-        L53:
-            r0.label = r3
-            kotlin.coroutines.intrinsics.CoroutineSingletons r5 = kotlinx.coroutines.DelayKt.awaitCancellation(r0)
-            if (r5 != r1) goto L5c
-        L5b:
-            return r1
-        L5c:
-            kotlin.KotlinNothingValueException r5 = new kotlin.KotlinNothingValueException
-            r5.<init>()
-            throw r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.scene.ui.viewmodel.SceneContainerHapticsViewModel.onActivated(kotlin.coroutines.Continuation):java.lang.Object");
+    public final Object onActivated(Continuation continuation) {
+        AnonymousClass1 anonymousClass1;
+        if (continuation instanceof AnonymousClass1) {
+            anonymousClass1 = (AnonymousClass1) continuation;
+            int i = anonymousClass1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                anonymousClass1.label = i - Integer.MIN_VALUE;
+            } else {
+                anonymousClass1 = new AnonymousClass1(continuation);
+            }
+        }
+        Object obj = anonymousClass1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = anonymousClass1.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(obj);
+            anonymousClass1.label = 1;
+            final Flow flow = this.isShadePullHapticsRequired;
+            Object objCollect = new Flow() { // from class: com.android.systemui.scene.ui.viewmodel.SceneContainerHapticsViewModel$playShadePullHaptics$$inlined$filter$1
+
+                /* renamed from: com.android.systemui.scene.ui.viewmodel.SceneContainerHapticsViewModel$playShadePullHaptics$$inlined$filter$1$2, reason: invalid class name */
+                public final class AnonymousClass2 implements FlowCollector {
+                    public final /* synthetic */ FlowCollector $this_unsafeFlow;
+
+                    /* renamed from: com.android.systemui.scene.ui.viewmodel.SceneContainerHapticsViewModel$playShadePullHaptics$$inlined$filter$1$2$1, reason: invalid class name */
+                    public final class AnonymousClass1 extends ContinuationImpl {
+                        Object L$0;
+                        Object L$1;
+                        int label;
+                        /* synthetic */ Object result;
+
+                        public AnonymousClass1(Continuation continuation) {
+                            super(continuation);
+                        }
+
+                        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+                        public final Object invokeSuspend(Object obj) {
+                            this.result = obj;
+                            this.label |= Integer.MIN_VALUE;
+                            return AnonymousClass2.this.emit(null, this);
+                        }
+                    }
+
+                    public AnonymousClass2(FlowCollector flowCollector) {
+                        this.$this_unsafeFlow = flowCollector;
+                    }
+
+                    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
+                    @Override // kotlinx.coroutines.flow.FlowCollector
+                    /*
+                        Code decompiled incorrectly, please refer to instructions dump.
+                    */
+                    public final Object emit(Object obj, Continuation continuation) {
+                        AnonymousClass1 anonymousClass1;
+                        if (continuation instanceof AnonymousClass1) {
+                            anonymousClass1 = (AnonymousClass1) continuation;
+                            int i = anonymousClass1.label;
+                            if ((i & Integer.MIN_VALUE) != 0) {
+                                anonymousClass1.label = i - Integer.MIN_VALUE;
+                            } else {
+                                anonymousClass1 = new AnonymousClass1(continuation);
+                            }
+                        }
+                        Object obj2 = anonymousClass1.result;
+                        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                        int i2 = anonymousClass1.label;
+                        if (i2 == 0) {
+                            ResultKt.throwOnFailure(obj2);
+                            if (((Boolean) obj).booleanValue()) {
+                                anonymousClass1.label = 1;
+                                if (this.$this_unsafeFlow.emit(obj, anonymousClass1) == coroutineSingletons) {
+                                    return coroutineSingletons;
+                                }
+                            }
+                        } else {
+                            if (i2 != 1) {
+                                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                            }
+                            ResultKt.throwOnFailure(obj2);
+                        }
+                        return Unit.INSTANCE;
+                    }
+                }
+
+                @Override // kotlinx.coroutines.flow.Flow
+                public final Object collect(FlowCollector flowCollector, Continuation continuation2) {
+                    Object objCollect2 = flow.collect(new AnonymousClass2(flowCollector), continuation2);
+                    return objCollect2 == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect2 : Unit.INSTANCE;
+                }
+            }.collect(new FlowCollector() { // from class: com.android.systemui.scene.ui.viewmodel.SceneContainerHapticsViewModel$playShadePullHaptics$3
+                @Override // kotlinx.coroutines.flow.FlowCollector
+                public final Object emit(Object obj2, Continuation continuation2) {
+                    ((Boolean) obj2).booleanValue();
+                    this.this$0.view.performHapticFeedback(12);
+                    return Unit.INSTANCE;
+                }
+            }, anonymousClass1);
+            if (objCollect != coroutineSingletons) {
+                objCollect = Unit.INSTANCE;
+            }
+            if (objCollect != coroutineSingletons) {
+            }
+            return coroutineSingletons;
+        }
+        if (i2 != 1) {
+            if (i2 != 2) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            throw new KotlinNothingValueException();
+        }
+        ResultKt.throwOnFailure(obj);
+        anonymousClass1.label = 2;
     }
 }

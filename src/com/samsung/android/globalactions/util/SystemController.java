@@ -46,7 +46,7 @@ public class SystemController {
         this.mHandlerWrapper.postDelayed(new Runnable() { // from class: com.samsung.android.globalactions.util.SystemController$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                SystemController.this.lambda$doBugReport$0(z);
+                this.f$0.lambda$doBugReport$0(z);
             }
         }, 500L);
     }

@@ -20,7 +20,6 @@ import com.google.android.setupcompat.template.Mixin;
 import com.google.android.setupdesign.R$styleable;
 import com.google.android.setupdesign.util.PartnerStyleHelper;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class IconMixin implements Mixin {
     public final Context context;
@@ -42,8 +41,8 @@ public class IconMixin implements Mixin {
             this.originalHeight = 0;
             this.originalScaleType = null;
         }
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.SudIconMixin, i, 0);
-        int resourceId = obtainStyledAttributes.getResourceId(0, 0);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.SudIconMixin, i, 0);
+        int resourceId = typedArrayObtainStyledAttributes.getResourceId(0, 0);
         if ((resourceId != 0 || PartnerConfigHelper.isGlifExpressiveEnabled(context)) && (view = getView()) != null) {
             view.setImageResource(resourceId);
             if (PartnerConfigHelper.isGlifExpressiveEnabled(context)) {
@@ -56,7 +55,7 @@ public class IconMixin implements Mixin {
                 ((FrameLayout) templateLayout.findManagedViewById(R.id.sud_layout_icon_container)).setVisibility(visibility);
             }
         }
-        boolean z = obtainStyledAttributes.getBoolean(2, false);
+        boolean z = typedArrayObtainStyledAttributes.getBoolean(2, false);
         ImageView view4 = getView();
         if (view4 != null) {
             ViewGroup.LayoutParams layoutParams = view4.getLayoutParams();
@@ -64,21 +63,23 @@ public class IconMixin implements Mixin {
             view4.setLayoutParams(layoutParams);
             view4.setScaleType(z ? ImageView.ScaleType.FIT_CENTER : this.originalScaleType);
         }
-        int color = obtainStyledAttributes.getColor(1, 0);
+        int color = typedArrayObtainStyledAttributes.getColor(1, 0);
         if (color != 0 && (view2 = getView()) != null) {
             view2.setColorFilter(color);
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     public final ImageView getView() {
         return (ImageView) this.templateLayout.findManagedViewById(R.id.sud_layout_icon);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:24:0x0094  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void tryApplyPartnerCustomizationStyle() {
         int i;
-        PartnerConfigHelper partnerConfigHelper;
-        PartnerConfig partnerConfig;
         int dimension;
         int i2;
         TemplateLayout templateLayout = this.templateLayout;
@@ -95,9 +96,9 @@ public class IconMixin implements Mixin {
                 layoutParams.gravity = layoutGravity;
                 view.setLayoutParams(layoutParams);
             }
-            PartnerConfigHelper partnerConfigHelper2 = PartnerConfigHelper.get(context);
-            PartnerConfig partnerConfig2 = PartnerConfig.CONFIG_ICON_SIZE;
-            if (partnerConfigHelper2.isPartnerConfigAvailable(partnerConfig2)) {
+            PartnerConfigHelper partnerConfigHelper = PartnerConfigHelper.get(context);
+            PartnerConfig partnerConfig = PartnerConfig.CONFIG_ICON_SIZE;
+            if (partnerConfigHelper.isPartnerConfigAvailable(partnerConfig)) {
                 view.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() { // from class: com.google.android.setupdesign.util.HeaderAreaStyler$1
                     @Override // android.view.ViewTreeObserver.OnPreDrawListener
                     public final boolean onPreDraw() {
@@ -114,28 +115,23 @@ public class IconMixin implements Mixin {
                     }
                 });
                 ViewGroup.LayoutParams layoutParams2 = view.getLayoutParams();
-                layoutParams2.height = (int) PartnerConfigHelper.get(context).getDimension(context, partnerConfig2, 0.0f);
+                layoutParams2.height = (int) PartnerConfigHelper.get(context).getDimension(context, partnerConfig, 0.0f);
                 layoutParams2.width = -2;
                 view.setScaleType(ImageView.ScaleType.FIT_CENTER);
                 Drawable drawable = view.getDrawable();
-                if (drawable != null && drawable.getIntrinsicWidth() > drawable.getIntrinsicHeight() * 2 && (i2 = layoutParams2.height) > (dimension = (int) context.getResources().getDimension(R.dimen.sud_horizontal_icon_height))) {
+                if (drawable == null || drawable.getIntrinsicWidth() <= drawable.getIntrinsicHeight() * 2 || (i2 = layoutParams2.height) <= (dimension = (int) context.getResources().getDimension(R.dimen.sud_horizontal_icon_height))) {
+                    i = 0;
+                } else {
                     i = i2 - dimension;
                     layoutParams2.height = dimension;
-                    ViewGroup.LayoutParams layoutParams3 = frameLayout.getLayoutParams();
-                    partnerConfigHelper = PartnerConfigHelper.get(context);
-                    partnerConfig = PartnerConfig.CONFIG_ICON_MARGIN_TOP;
-                    if (partnerConfigHelper.isPartnerConfigAvailable(partnerConfig) || !(layoutParams3 instanceof ViewGroup.MarginLayoutParams)) {
-                    }
-                    ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) layoutParams3;
-                    marginLayoutParams.setMargins(marginLayoutParams.leftMargin, ((int) PartnerConfigHelper.get(context).getDimension(context, partnerConfig, 0.0f)) + i, marginLayoutParams.rightMargin, marginLayoutParams.bottomMargin);
-                    return;
                 }
             }
-            i = 0;
-            ViewGroup.LayoutParams layoutParams32 = frameLayout.getLayoutParams();
-            partnerConfigHelper = PartnerConfigHelper.get(context);
-            partnerConfig = PartnerConfig.CONFIG_ICON_MARGIN_TOP;
-            if (partnerConfigHelper.isPartnerConfigAvailable(partnerConfig)) {
+            ViewGroup.LayoutParams layoutParams3 = frameLayout.getLayoutParams();
+            PartnerConfigHelper partnerConfigHelper2 = PartnerConfigHelper.get(context);
+            PartnerConfig partnerConfig2 = PartnerConfig.CONFIG_ICON_MARGIN_TOP;
+            if (partnerConfigHelper2.isPartnerConfigAvailable(partnerConfig2) && (layoutParams3 instanceof ViewGroup.MarginLayoutParams)) {
+                ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) layoutParams3;
+                marginLayoutParams.setMargins(marginLayoutParams.leftMargin, ((int) PartnerConfigHelper.get(context).getDimension(context, partnerConfig2, 0.0f)) + i, marginLayoutParams.rightMargin, marginLayoutParams.bottomMargin);
             }
         }
     }

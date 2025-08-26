@@ -83,9 +83,9 @@ public interface ISmartFaceService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISmartFaceService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISmartFaceService)) {
-                return (ISmartFaceService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISmartFaceService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISmartFaceService)) {
+                return (ISmartFaceService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -125,36 +125,36 @@ public interface ISmartFaceService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    ISmartFaceClient asInterface = ISmartFaceClient.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt = parcel.readInt();
+                    ISmartFaceClient iSmartFaceClientAsInterface = ISmartFaceClient.Stub.asInterface(parcel.readStrongBinder());
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean register = register(asInterface, readInt);
+                    boolean zRegister = register(iSmartFaceClientAsInterface, i3);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(register);
+                    parcel2.writeBoolean(zRegister);
                     return true;
                 case 2:
-                    ISmartFaceClient asInterface2 = ISmartFaceClient.Stub.asInterface(parcel.readStrongBinder());
+                    ISmartFaceClient iSmartFaceClientAsInterface2 = ISmartFaceClient.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregister(asInterface2);
+                    unregister(iSmartFaceClientAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    ISmartFaceClient asInterface3 = ISmartFaceClient.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt2 = parcel.readInt();
+                    ISmartFaceClient iSmartFaceClientAsInterface3 = ISmartFaceClient.Stub.asInterface(parcel.readStrongBinder());
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    registerAsync(asInterface3, readInt2);
+                    registerAsync(iSmartFaceClientAsInterface3, i4);
                     return true;
                 case 4:
-                    ISmartFaceClient asInterface4 = ISmartFaceClient.Stub.asInterface(parcel.readStrongBinder());
+                    ISmartFaceClient iSmartFaceClientAsInterface4 = ISmartFaceClient.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterAsync(asInterface4);
+                    unregisterAsync(iSmartFaceClientAsInterface4);
                     return true;
                 case 5:
-                    ISmartFaceClient asInterface5 = ISmartFaceClient.Stub.asInterface(parcel.readStrongBinder());
-                    String readString = parcel.readString();
-                    String readString2 = parcel.readString();
+                    ISmartFaceClient iSmartFaceClientAsInterface5 = ISmartFaceClient.Stub.asInterface(parcel.readStrongBinder());
+                    String string = parcel.readString();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    setValue(asInterface5, readString, readString2);
+                    setValue(iSmartFaceClientAsInterface5, string, string2);
                     parcel2.writeNoException();
                     return true;
                 case 6:
@@ -185,90 +185,90 @@ public interface ISmartFaceService extends IInterface {
 
             @Override // com.samsung.android.smartface.ISmartFaceService
             public boolean register(ISmartFaceClient iSmartFaceClient, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISmartFaceService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSmartFaceClient);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(ISmartFaceService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSmartFaceClient);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.smartface.ISmartFaceService
             public void unregister(ISmartFaceClient iSmartFaceClient) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISmartFaceService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSmartFaceClient);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISmartFaceService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSmartFaceClient);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.smartface.ISmartFaceService
             public void registerAsync(ISmartFaceClient iSmartFaceClient, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISmartFaceService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSmartFaceClient);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISmartFaceService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSmartFaceClient);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.smartface.ISmartFaceService
             public void unregisterAsync(ISmartFaceClient iSmartFaceClient) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISmartFaceService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSmartFaceClient);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISmartFaceService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSmartFaceClient);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.smartface.ISmartFaceService
             public void setValue(ISmartFaceClient iSmartFaceClient, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISmartFaceService.DESCRIPTOR);
-                    obtain.writeStrongInterface(iSmartFaceClient);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISmartFaceService.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iSmartFaceClient);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.smartface.ISmartFaceService
             public int getSupportedServices() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISmartFaceService.DESCRIPTOR);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(ISmartFaceService.DESCRIPTOR);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

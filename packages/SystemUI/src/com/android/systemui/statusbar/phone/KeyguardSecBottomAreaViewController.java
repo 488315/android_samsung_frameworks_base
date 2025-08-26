@@ -12,6 +12,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -69,7 +70,6 @@ import com.android.systemui.statusbar.KeyguardShortcutManager;
 import com.android.systemui.statusbar.NotificationLockscreenUserManagerImpl;
 import com.android.systemui.statusbar.lockscreen.LockscreenSmartspaceController;
 import com.android.systemui.statusbar.phone.KeyguardSecBottomAreaView;
-import com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController$shortcutManagerCallback$1;
 import com.android.systemui.statusbar.policy.KeyguardStateController;
 import com.android.systemui.statusbar.policy.KeyguardStateControllerImpl;
 import com.android.systemui.user.domain.interactor.SelectedUserInteractor;
@@ -99,7 +99,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class KeyguardSecBottomAreaViewController extends ViewController implements KeyguardStateController.Callback, PluginLockBottomAreaCallback, KeyguardFoldController.StateListener, SystemUIWidgetCallback, Dumpable {
     public static final long APPEAR_ANIM_DURATION;
@@ -158,7 +157,6 @@ public final class KeyguardSecBottomAreaViewController extends ViewController im
     public final KeyguardSecBottomAreaViewController$startDelayRunnable$1 startDelayRunnable;
     public final WakefulnessLifecycle wakefulnessLifecycle;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -173,12 +171,12 @@ public final class KeyguardSecBottomAreaViewController extends ViewController im
     }
 
     /* renamed from: $r8$lambda$D4kp5cmGQ_rGLdyL6o-XY1kQhJo, reason: not valid java name */
-    public static ViewGroup m3070$r8$lambda$D4kp5cmGQ_rGLdyL6oXY1kQhJo(KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController) {
+    public static ViewGroup m3087$r8$lambda$D4kp5cmGQ_rGLdyL6oXY1kQhJo(KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController) {
         return (ViewGroup) ((KeyguardSecBottomAreaView) keyguardSecBottomAreaViewController.mView).indicationArea$delegate.getValue();
     }
 
     /* renamed from: $r8$lambda$Jgv21cVoSLZlA51xet8mwVw-iBs, reason: not valid java name */
-    public static View m3071$r8$lambda$Jgv21cVoSLZlA51xet8mwVwiBs(KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController) {
+    public static View m3088$r8$lambda$Jgv21cVoSLZlA51xet8mwVwiBs(KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController) {
         return (View) ((KeyguardSecBottomAreaView) keyguardSecBottomAreaViewController.mView).leftShortcutArea$delegate.getValue();
     }
 
@@ -187,7 +185,7 @@ public final class KeyguardSecBottomAreaViewController extends ViewController im
     }
 
     /* renamed from: $r8$lambda$YOkFmR-iWxOyhXrD-zbAm3sPmT8, reason: not valid java name */
-    public static TextView m3072$r8$lambda$YOkFmRiWxOyhXrDzbAm3sPmT8(KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController) {
+    public static TextView m3089$r8$lambda$YOkFmRiWxOyhXrDzbAm3sPmT8(KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController) {
         return (TextView) ((KeyguardSecBottomAreaView) keyguardSecBottomAreaViewController.mView).indicationText$delegate.getValue();
     }
 
@@ -240,7 +238,7 @@ public final class KeyguardSecBottomAreaViewController extends ViewController im
                 if (z) {
                     return;
                 }
-                KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController = KeyguardSecBottomAreaViewController.this;
+                KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController = this.this$0;
                 if (KeyguardSecBottomAreaViewController.access$isEditorShortcutTransitionNeeded(0, keyguardSecBottomAreaViewController) && !keyguardSecBottomAreaViewController.isNowBarExpanded) {
                     KeyguardSecBottomAreaViewController.access$changeDimToBlur(keyguardSecBottomAreaViewController.getLeftView(), keyguardSecBottomAreaViewController);
                 }
@@ -252,7 +250,7 @@ public final class KeyguardSecBottomAreaViewController extends ViewController im
 
             @Override // com.android.systemui.keyguard.KeyguardEditModeController.Listener
             public final void onTouchDownCanceled() {
-                KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController = KeyguardSecBottomAreaViewController.this;
+                KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController = this.this$0;
                 if (KeyguardSecBottomAreaViewController.access$isEditorShortcutTransitionNeeded(0, keyguardSecBottomAreaViewController) && !keyguardSecBottomAreaViewController.isNowBarExpanded) {
                     KeyguardSecBottomAreaViewController.access$changeDimToBlur(keyguardSecBottomAreaViewController.getLeftView(), keyguardSecBottomAreaViewController);
                 }
@@ -264,7 +262,7 @@ public final class KeyguardSecBottomAreaViewController extends ViewController im
 
             @Override // com.android.systemui.keyguard.KeyguardEditModeController.Listener
             public final void onTouchDownStarted() {
-                KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController = KeyguardSecBottomAreaViewController.this;
+                KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController = this.this$0;
                 if (KeyguardSecBottomAreaViewController.access$isEditorShortcutTransitionNeeded(0, keyguardSecBottomAreaViewController) && !keyguardSecBottomAreaViewController.isNowBarExpanded) {
                     KeyguardSecBottomAreaViewController.access$changeBlurToDim(keyguardSecBottomAreaViewController.getLeftView(), keyguardSecBottomAreaViewController);
                 }
@@ -291,18 +289,17 @@ public final class KeyguardSecBottomAreaViewController extends ViewController im
         this.mDevicePolicyReceiver = new BroadcastReceiver() { // from class: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController$mDevicePolicyReceiver$1
             @Override // android.content.BroadcastReceiver
             public final void onReceive(Context context, Intent intent) {
-                View view;
-                view = ((ViewController) KeyguardSecBottomAreaViewController.this).mView;
-                final KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController = KeyguardSecBottomAreaViewController.this;
-                ((KeyguardSecBottomAreaView) view).post(new Runnable() { // from class: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController$mDevicePolicyReceiver$1$onReceive$1
+                KeyguardSecBottomAreaView keyguardSecBottomAreaView2 = (KeyguardSecBottomAreaView) ((ViewController) this.this$0).mView;
+                final KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController = this.this$0;
+                keyguardSecBottomAreaView2.post(new Runnable() { // from class: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController$mDevicePolicyReceiver$1$onReceive$1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController2 = KeyguardSecBottomAreaViewController.this;
+                        KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController2 = keyguardSecBottomAreaViewController;
                         String str = KeyguardSecBottomAreaViewController.KEY_HELP_TEXT_VISIBILITY;
-                        List<KeyguardSecAffordanceView> asList = Arrays.asList(keyguardSecBottomAreaViewController2.getLeftView(), KeyguardSecBottomAreaViewController.this.getRightView());
-                        KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController3 = KeyguardSecBottomAreaViewController.this;
-                        ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(asList, 10));
-                        for (KeyguardSecAffordanceView keyguardSecAffordanceView : asList) {
+                        List<KeyguardSecAffordanceView> listAsList = Arrays.asList(keyguardSecBottomAreaViewController2.getLeftView(), keyguardSecBottomAreaViewController.getRightView());
+                        KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController3 = keyguardSecBottomAreaViewController;
+                        ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(listAsList, 10));
+                        for (KeyguardSecAffordanceView keyguardSecAffordanceView : listAsList) {
                             if (keyguardSecAffordanceView.mShortcutForCamera) {
                                 keyguardSecBottomAreaViewController3.updateAffordanceIcon(keyguardSecAffordanceView);
                             }
@@ -317,92 +314,36 @@ public final class KeyguardSecBottomAreaViewController extends ViewController im
         this.mPermDisableState = CscRune.SECURITY_SIM_PERM_DISABLED && keyguardUpdateMonitor.isIccBlockedPermanently();
         this.isUserSetupComplete = Settings.Secure.getInt(getContext().getContentResolver(), SettingsHelper.INDEX_USER_SETUP_COMPLETE, 0) == 1;
         this.mShortcutCallback = new SettingsHelper.OnChangedCallback() { // from class: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController$mShortcutCallback$1
-            /* JADX WARN: Code restructure failed: missing block: B:33:0x0091, code lost:
-            
-                if (r0.isEmergencyMode() != false) goto L34;
-             */
             @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
-            /*
-                Code decompiled incorrectly, please refer to instructions dump.
-                To view partially-correct code enable 'Show inconsistent code' option in preferences
-            */
-            public final void onChanged(android.net.Uri r4) {
-                /*
-                    r3 = this;
-                    if (r4 != 0) goto L4
-                    goto L9d
-                L4:
-                    java.lang.String r0 = "ultra_powersaving_mode"
-                    android.net.Uri r0 = android.provider.Settings.System.getUriFor(r0)
-                    boolean r0 = r4.equals(r0)
-                    r1 = 0
-                    r2 = 1
-                    com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController r3 = com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController.this
-                    if (r0 != 0) goto L7d
-                    java.lang.String r0 = "minimal_battery_use"
-                    android.net.Uri r0 = android.provider.Settings.System.getUriFor(r0)
-                    boolean r0 = r4.equals(r0)
-                    if (r0 != 0) goto L7d
-                    java.lang.String r0 = "emergency_mode"
-                    android.net.Uri r0 = android.provider.Settings.System.getUriFor(r0)
-                    boolean r0 = r4.equals(r0)
-                    if (r0 == 0) goto L2e
-                    goto L7d
-                L2e:
-                    java.lang.String r0 = "easy_mode_switch"
-                    android.net.Uri r0 = android.provider.Settings.System.getUriFor(r0)
-                    boolean r0 = r4.equals(r0)
-                    if (r0 == 0) goto L4e
-                    boolean r4 = r3.mEasyMode
-                    com.android.systemui.util.SettingsHelper r0 = com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController.access$getSettingsHelper$p(r3)
-                    boolean r0 = r0.isEasyModeOn()
-                    r3.mEasyMode = r0
-                    boolean r0 = r3.mEasyMode
-                    if (r4 == r0) goto L9d
-                    r3.onDensityOrFontScaleChanged(r2)
-                    return
-                L4e:
-                    java.lang.String r0 = "lock_shortcut_type"
-                    android.net.Uri r0 = android.provider.Settings.System.getUriFor(r0)
-                    boolean r0 = r4.equals(r0)
-                    if (r0 == 0) goto L67
-                    boolean r4 = r3.mSavingMode
-                    if (r4 != 0) goto L62
-                    boolean r4 = r3.mEasyMode
-                    if (r4 == 0) goto L63
-                L62:
-                    r1 = r2
-                L63:
-                    r3.onDensityOrFontScaleChanged(r1)
-                    return
-                L67:
-                    java.lang.String r0 = "display_cutout_hide_notch"
-                    android.net.Uri r0 = android.provider.Settings.Secure.getUriFor(r0)
-                    boolean r4 = r4.equals(r0)
-                    if (r4 == 0) goto L9d
-                    android.view.View r3 = com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController.access$getMView$p$s2038760804(r3)
-                    com.android.systemui.statusbar.phone.KeyguardSecBottomAreaView r3 = (com.android.systemui.statusbar.phone.KeyguardSecBottomAreaView) r3
-                    r3.updateLayout()
-                    return
-                L7d:
-                    boolean r4 = r3.mSavingMode
-                    com.android.systemui.util.SettingsHelper r0 = com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController.access$getSettingsHelper$p(r3)
-                    boolean r0 = r0.isUltraPowerSavingMode()
-                    if (r0 != 0) goto L93
-                    com.android.systemui.util.SettingsHelper r0 = com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController.access$getSettingsHelper$p(r3)
-                    boolean r0 = r0.isEmergencyMode()
-                    if (r0 == 0) goto L94
-                L93:
-                    r1 = r2
-                L94:
-                    r3.mSavingMode = r1
-                    boolean r0 = r3.mSavingMode
-                    if (r4 == r0) goto L9d
-                    r3.onDensityOrFontScaleChanged(r2)
-                L9d:
-                    return
-                */
-                throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController$mShortcutCallback$1.onChanged(android.net.Uri):void");
+            public final void onChanged(Uri uri) {
+                if (uri == null) {
+                    return;
+                }
+                boolean zEquals = uri.equals(Settings.System.getUriFor(SettingsHelper.INDEX_ULTRA_POWERSAVING_MODE));
+                KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController = this.this$0;
+                if (zEquals || uri.equals(Settings.System.getUriFor(SettingsHelper.INDEX_MINIMAL_BATTERY_USE)) || uri.equals(Settings.System.getUriFor(SettingsHelper.INDEX_EMERGENCY_MODE))) {
+                    boolean z = keyguardSecBottomAreaViewController.mSavingMode;
+                    keyguardSecBottomAreaViewController.mSavingMode = keyguardSecBottomAreaViewController.settingsHelper.isUltraPowerSavingMode() || keyguardSecBottomAreaViewController.settingsHelper.isEmergencyMode();
+                    if (z != keyguardSecBottomAreaViewController.mSavingMode) {
+                        keyguardSecBottomAreaViewController.onDensityOrFontScaleChanged(true);
+                        return;
+                    }
+                    return;
+                }
+                if (uri.equals(Settings.System.getUriFor(SettingsHelper.INDEX_EASY_MODE_SWITCH))) {
+                    boolean z2 = keyguardSecBottomAreaViewController.mEasyMode;
+                    keyguardSecBottomAreaViewController.mEasyMode = keyguardSecBottomAreaViewController.settingsHelper.isEasyModeOn();
+                    if (z2 != keyguardSecBottomAreaViewController.mEasyMode) {
+                        keyguardSecBottomAreaViewController.onDensityOrFontScaleChanged(true);
+                        return;
+                    }
+                    return;
+                }
+                if (uri.equals(Settings.System.getUriFor(SettingsHelper.INDEX_LOCK_SHORTCUT_TYPE))) {
+                    keyguardSecBottomAreaViewController.onDensityOrFontScaleChanged(keyguardSecBottomAreaViewController.mSavingMode || keyguardSecBottomAreaViewController.mEasyMode);
+                } else if (uri.equals(Settings.Secure.getUriFor("display_cutout_hide_notch"))) {
+                    ((KeyguardSecBottomAreaView) ((ViewController) keyguardSecBottomAreaViewController).mView).updateLayout();
+                }
             }
         };
         this.keyguardUpdateMonitorCallbackForShortcuts = new KeyguardUpdateMonitorCallback() { // from class: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController$keyguardUpdateMonitorCallbackForShortcuts$1
@@ -410,56 +351,45 @@ public final class KeyguardSecBottomAreaViewController extends ViewController im
 
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
             public final void onKeyguardVisibilityChanged(boolean z) {
-                View view;
-                View view2;
-                KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController = KeyguardSecBottomAreaViewController.this;
+                KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController = this.this$0;
                 keyguardSecBottomAreaViewController.isKeyguardVisible = z;
-                view = ((ViewController) keyguardSecBottomAreaViewController).mView;
-                ((KeyguardSecBottomAreaView) view).isKeyguardVisible = keyguardSecBottomAreaViewController.isKeyguardVisible;
+                ((KeyguardSecBottomAreaView) ((ViewController) keyguardSecBottomAreaViewController).mView).isKeyguardVisible = keyguardSecBottomAreaViewController.isKeyguardVisible;
                 KeyguardSecBottomAreaViewController.access$setIndicationUpdatable(keyguardSecBottomAreaViewController, z);
-                view2 = ((ViewController) keyguardSecBottomAreaViewController).mView;
-                ((KeyguardSecBottomAreaView) view2).updateIndicationPosition();
+                ((KeyguardSecBottomAreaView) ((ViewController) keyguardSecBottomAreaViewController).mView).updateIndicationPosition();
                 super.onKeyguardVisibilityChanged(z);
             }
 
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
             public final void onLockModeChanged() {
-                View view;
                 Log.d("KeyguardSecBottomAreaViewController", "onLockModeChanged");
-                view = ((ViewController) KeyguardSecBottomAreaViewController.this).mView;
-                ((KeyguardSecBottomAreaView) view).updateLayout();
+                ((KeyguardSecBottomAreaView) ((ViewController) this.this$0).mView).updateLayout();
             }
 
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
             public final void onRefreshCarrierInfo(Intent intent) {
-                View view;
-                boolean isOutOfService;
+                boolean zIsOutOfService;
                 boolean z = CscRune.SECURITY_DISABLE_EMERGENCY_CALL_WHEN_OFFLINE;
-                KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController = KeyguardSecBottomAreaViewController.this;
-                if (z && this.mOutOfService != (isOutOfService = keyguardSecBottomAreaViewController.keyguardUpdateMonitor.isOutOfService())) {
-                    this.mOutOfService = isOutOfService;
-                    List<KeyguardSecAffordanceView> asList = Arrays.asList(keyguardSecBottomAreaViewController.getLeftView(), keyguardSecBottomAreaViewController.getRightView());
-                    ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(asList, 10));
-                    for (KeyguardSecAffordanceView keyguardSecAffordanceView : asList) {
+                KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController = this.this$0;
+                if (z && this.mOutOfService != (zIsOutOfService = keyguardSecBottomAreaViewController.keyguardUpdateMonitor.isOutOfService())) {
+                    this.mOutOfService = zIsOutOfService;
+                    List<KeyguardSecAffordanceView> listAsList = Arrays.asList(keyguardSecBottomAreaViewController.getLeftView(), keyguardSecBottomAreaViewController.getRightView());
+                    ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(listAsList, 10));
+                    for (KeyguardSecAffordanceView keyguardSecAffordanceView : listAsList) {
                         if (keyguardSecAffordanceView.mIsShortcutForPhone) {
                             keyguardSecBottomAreaViewController.updateAffordanceIcon(keyguardSecAffordanceView);
                         }
                         arrayList.add(Unit.INSTANCE);
                     }
                 }
-                view = ((ViewController) keyguardSecBottomAreaViewController).mView;
-                ((KeyguardSecBottomAreaView) view).updateIndicationPosition();
+                ((KeyguardSecBottomAreaView) ((ViewController) keyguardSecBottomAreaViewController).mView).updateIndicationPosition();
             }
 
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
             public final void onSimStateChanged(int i, int i2, int i3) {
-                View view;
-                View view2;
                 boolean z = CscRune.LOCKUI_BOTTOM_USIM_TEXT;
-                KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController = KeyguardSecBottomAreaViewController.this;
+                KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController = this.this$0;
                 if (z) {
-                    view2 = ((ViewController) keyguardSecBottomAreaViewController).mView;
-                    ((KeyguardSecBottomAreaView) view2).currentSimState = i3;
+                    ((KeyguardSecBottomAreaView) ((ViewController) keyguardSecBottomAreaViewController).mView).currentSimState = i3;
                 }
                 if (CscRune.SECURITY_SIM_PERM_DISABLED) {
                     keyguardSecBottomAreaViewController.mPermDisableState = keyguardSecBottomAreaViewController.keyguardUpdateMonitor.isIccBlockedPermanently();
@@ -475,21 +405,18 @@ public final class KeyguardSecBottomAreaViewController extends ViewController im
                         }
                     }
                 }
-                view = ((ViewController) keyguardSecBottomAreaViewController).mView;
-                ((KeyguardSecBottomAreaView) view).updateIndicationPosition();
+                ((KeyguardSecBottomAreaView) ((ViewController) keyguardSecBottomAreaViewController).mView).updateIndicationPosition();
             }
 
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
             public final void onUserSwitchComplete(int i) {
-                View view;
-                view = ((ViewController) KeyguardSecBottomAreaViewController.this).mView;
-                ((KeyguardSecBottomAreaView) view).updateLayout();
+                ((KeyguardSecBottomAreaView) ((ViewController) this.this$0).mView).updateLayout();
             }
 
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
             public final void onUserUnlocked() {
                 String str = KeyguardSecBottomAreaViewController.KEY_HELP_TEXT_VISIBILITY;
-                KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController = KeyguardSecBottomAreaViewController.this;
+                KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController = this.this$0;
                 Log.d("KeyguardSecBottomAreaViewController", "onUserUnlocked() :" + keyguardSecBottomAreaViewController.isUserUnlocked$2());
                 keyguardSecBottomAreaViewController.showShortcutsIfPossible();
             }
@@ -500,18 +427,14 @@ public final class KeyguardSecBottomAreaViewController extends ViewController im
         this.mWakefulnessObserver = new WakefulnessLifecycle.Observer() { // from class: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController$mWakefulnessObserver$1
             @Override // com.android.systemui.keyguard.WakefulnessLifecycle.Observer
             public final void onFinishedGoingToSleep() {
-                View view;
-                View view2;
                 String str = KeyguardSecBottomAreaViewController.KEY_HELP_TEXT_VISIBILITY;
-                KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController = KeyguardSecBottomAreaViewController.this;
+                KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController = this.this$0;
                 keyguardSecBottomAreaViewController.getIndicationArea().setAlpha(0.0f);
                 KeyguardSecBottomAreaViewController.access$setIndicationUpdatable(keyguardSecBottomAreaViewController, !keyguardSecBottomAreaViewController.isKeyguardVisible);
-                view = ((ViewController) keyguardSecBottomAreaViewController).mView;
-                Handler handler = ((KeyguardSecBottomAreaView) view).getHandler();
+                Handler handler = ((KeyguardSecBottomAreaView) ((ViewController) keyguardSecBottomAreaViewController).mView).getHandler();
                 KeyguardSecBottomAreaViewController$shortcutAnimRunnable$1 keyguardSecBottomAreaViewController$shortcutAnimRunnable$1 = keyguardSecBottomAreaViewController.shortcutAnimRunnable;
                 if (handler.hasCallbacks(keyguardSecBottomAreaViewController$shortcutAnimRunnable$1)) {
-                    view2 = ((ViewController) keyguardSecBottomAreaViewController).mView;
-                    ((KeyguardSecBottomAreaView) view2).getHandler().removeCallbacks(keyguardSecBottomAreaViewController$shortcutAnimRunnable$1);
+                    ((KeyguardSecBottomAreaView) ((ViewController) keyguardSecBottomAreaViewController).mView).getHandler().removeCallbacks(keyguardSecBottomAreaViewController$shortcutAnimRunnable$1);
                 }
                 keyguardSecBottomAreaViewController.showShortcutAnim = false;
                 keyguardSecBottomAreaViewController.isShortcutAnimRunning = false;
@@ -519,30 +442,28 @@ public final class KeyguardSecBottomAreaViewController extends ViewController im
 
             @Override // com.android.systemui.keyguard.WakefulnessLifecycle.Observer
             public final void onPostFinishedWakingUp() {
-                View view;
-                KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController = KeyguardSecBottomAreaViewController.this;
-                view = ((ViewController) keyguardSecBottomAreaViewController).mView;
-                ((KeyguardSecBottomAreaView) view).getHandler().postDelayed(keyguardSecBottomAreaViewController.shortcutAnimRunnable, 100L);
+                KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController = this.this$0;
+                ((KeyguardSecBottomAreaView) ((ViewController) keyguardSecBottomAreaViewController).mView).getHandler().postDelayed(keyguardSecBottomAreaViewController.shortcutAnimRunnable, 100L);
                 keyguardSecBottomAreaViewController.getLeftView().onPostFinishedWakingUp();
                 keyguardSecBottomAreaViewController.getRightView().onPostFinishedWakingUp();
             }
 
             @Override // com.android.systemui.keyguard.WakefulnessLifecycle.Observer
             public final void onStartedWakingUp() {
-                final KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController = KeyguardSecBottomAreaViewController.this;
+                final KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController = this.this$0;
                 if (!keyguardSecBottomAreaViewController.isKeyguardVisible || keyguardSecBottomAreaViewController.keyguardUpdateMonitor.isFullscreenBouncer() || ((KeyguardFastBioUnlockController) Dependency.sDependency.getDependencyInner(KeyguardFastBioUnlockController.class)).isFastWakeAndUnlockMode()) {
                     return;
                 }
                 if (LsRune.LOCKUI_SUB_DISPLAY_LOCK && !keyguardSecBottomAreaViewController.isSecure && keyguardSecBottomAreaViewController.wakefulnessLifecycle.mLastWakeReason == 9) {
                     return;
                 }
-                ObjectAnimator ofFloat = ObjectAnimator.ofFloat(keyguardSecBottomAreaViewController.getIndicationArea(), (Property<ViewGroup, Float>) View.SCALE_X, 0.8f, 1.0f);
-                ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(keyguardSecBottomAreaViewController.getIndicationArea(), (Property<ViewGroup, Float>) View.SCALE_Y, 0.8f, 1.0f);
-                ObjectAnimator ofFloat3 = ObjectAnimator.ofFloat(keyguardSecBottomAreaViewController.getIndicationArea(), (Property<ViewGroup, Float>) View.ALPHA, 0.0f, 1.0f);
-                ofFloat3.setInterpolator(new LinearInterpolator());
+                ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(keyguardSecBottomAreaViewController.getIndicationArea(), (Property<ViewGroup, Float>) View.SCALE_X, 0.8f, 1.0f);
+                ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(keyguardSecBottomAreaViewController.getIndicationArea(), (Property<ViewGroup, Float>) View.SCALE_Y, 0.8f, 1.0f);
+                ObjectAnimator objectAnimatorOfFloat3 = ObjectAnimator.ofFloat(keyguardSecBottomAreaViewController.getIndicationArea(), (Property<ViewGroup, Float>) View.ALPHA, 0.0f, 1.0f);
+                objectAnimatorOfFloat3.setInterpolator(new LinearInterpolator());
                 AnimatorSet animatorSet = new AnimatorSet();
                 keyguardSecBottomAreaViewController.helpTextAnimSet = animatorSet;
-                animatorSet.playTogether(ofFloat, ofFloat2, ofFloat3);
+                animatorSet.playTogether(objectAnimatorOfFloat, objectAnimatorOfFloat2, objectAnimatorOfFloat3);
                 AnimatorSet animatorSet2 = keyguardSecBottomAreaViewController.helpTextAnimSet;
                 animatorSet2.getClass();
                 animatorSet2.setInterpolator(keyguardSecBottomAreaViewController.mInterpolator);
@@ -557,21 +478,21 @@ public final class KeyguardSecBottomAreaViewController extends ViewController im
                 animatorSet5.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController$startIndicationAppearAnimation$1
                     @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                     public final void onAnimationCancel(Animator animator) {
-                        KeyguardSecBottomAreaViewController.access$setIndicationUpdatable(KeyguardSecBottomAreaViewController.this, true);
+                        KeyguardSecBottomAreaViewController.access$setIndicationUpdatable(keyguardSecBottomAreaViewController, true);
                     }
 
                     @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                     public final void onAnimationEnd(Animator animator) {
-                        KeyguardSecBottomAreaViewController.access$setIndicationUpdatable(KeyguardSecBottomAreaViewController.this, true);
-                        KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController2 = KeyguardSecBottomAreaViewController.this;
+                        KeyguardSecBottomAreaViewController.access$setIndicationUpdatable(keyguardSecBottomAreaViewController, true);
+                        KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController2 = keyguardSecBottomAreaViewController;
                         keyguardSecBottomAreaViewController2.helpTextAnimSet = null;
                         keyguardSecBottomAreaViewController2.getIndicationArea().setScaleX(1.0f);
-                        KeyguardSecBottomAreaViewController.this.getIndicationArea().setScaleY(1.0f);
+                        keyguardSecBottomAreaViewController.getIndicationArea().setScaleY(1.0f);
                     }
 
                     @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                     public final void onAnimationStart(Animator animator) {
-                        KeyguardSecBottomAreaViewController.access$setIndicationUpdatable(KeyguardSecBottomAreaViewController.this, false);
+                        KeyguardSecBottomAreaViewController.access$setIndicationUpdatable(keyguardSecBottomAreaViewController, false);
                     }
                 });
                 AnimatorSet animatorSet6 = keyguardSecBottomAreaViewController.helpTextAnimSet;
@@ -583,57 +504,55 @@ public final class KeyguardSecBottomAreaViewController extends ViewController im
         this.shortcutAnimRunnable = new Runnable() { // from class: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController$shortcutAnimRunnable$1
             @Override // java.lang.Runnable
             public final void run() {
-                KeyguardSecBottomAreaViewController.this.showShortcutAnim = true;
+                this.this$0.showShortcutAnim = true;
             }
         };
         this.startDelayRunnable = new Runnable() { // from class: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController$startDelayRunnable$1
             @Override // java.lang.Runnable
             public final void run() {
-                View view;
-                KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController = KeyguardSecBottomAreaViewController.this;
+                KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController = this.this$0;
                 String str = KeyguardSecBottomAreaViewController.KEY_HELP_TEXT_VISIBILITY;
                 KeyguardSecAffordanceView leftView = keyguardSecBottomAreaViewController.getLeftView();
-                final KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController2 = KeyguardSecBottomAreaViewController.this;
+                final KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController2 = this.this$0;
                 boolean z = keyguardSecBottomAreaViewController2.nowBarVisible;
                 Consumer consumer = new Consumer() { // from class: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController$startDelayRunnable$1.1
                     @Override // java.util.function.Consumer
                     public final void accept(Object obj) {
                         ((Boolean) obj).getClass();
-                        KeyguardSecBottomAreaViewController.access$updateFinalShortcut(KeyguardSecBottomAreaViewController.this);
+                        KeyguardSecBottomAreaViewController.access$updateFinalShortcut(keyguardSecBottomAreaViewController2);
                     }
                 };
-                final KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController3 = KeyguardSecBottomAreaViewController.this;
+                final KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController3 = this.this$0;
                 leftView.setNowBarVisibility(z, consumer, new Consumer() { // from class: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController$startDelayRunnable$1.2
                     @Override // java.util.function.Consumer
                     public final void accept(Object obj) {
-                        KeyguardSecBottomAreaViewController.this.isShortcutAnimRunning = ((Boolean) obj).booleanValue();
+                        keyguardSecBottomAreaViewController3.isShortcutAnimRunning = ((Boolean) obj).booleanValue();
                     }
                 }, true);
-                KeyguardSecAffordanceView rightView = KeyguardSecBottomAreaViewController.this.getRightView();
-                final KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController4 = KeyguardSecBottomAreaViewController.this;
+                KeyguardSecAffordanceView rightView = this.this$0.getRightView();
+                final KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController4 = this.this$0;
                 boolean z2 = keyguardSecBottomAreaViewController4.nowBarVisible;
                 Consumer consumer2 = new Consumer() { // from class: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController$startDelayRunnable$1.3
                     @Override // java.util.function.Consumer
                     public final void accept(Object obj) {
                         ((Boolean) obj).getClass();
-                        KeyguardSecBottomAreaViewController.access$updateFinalShortcut(KeyguardSecBottomAreaViewController.this);
+                        KeyguardSecBottomAreaViewController.access$updateFinalShortcut(keyguardSecBottomAreaViewController4);
                     }
                 };
-                final KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController5 = KeyguardSecBottomAreaViewController.this;
+                final KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController5 = this.this$0;
                 rightView.setNowBarVisibility(z2, consumer2, new Consumer() { // from class: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController$startDelayRunnable$1.4
                     @Override // java.util.function.Consumer
                     public final void accept(Object obj) {
-                        KeyguardSecBottomAreaViewController.this.isShortcutAnimRunning = ((Boolean) obj).booleanValue();
+                        keyguardSecBottomAreaViewController5.isShortcutAnimRunning = ((Boolean) obj).booleanValue();
                     }
                 }, true);
-                view = ((ViewController) KeyguardSecBottomAreaViewController.this).mView;
-                ((KeyguardSecBottomAreaView) view).getHandler().postDelayed(KeyguardSecBottomAreaViewController.this.restoreRunnable, 600L);
+                ((KeyguardSecBottomAreaView) ((ViewController) this.this$0).mView).getHandler().postDelayed(this.this$0.restoreRunnable, 600L);
             }
         };
         this.restoreRunnable = new Runnable() { // from class: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController$restoreRunnable$1
             @Override // java.lang.Runnable
             public final void run() {
-                KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController = KeyguardSecBottomAreaViewController.this;
+                KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController = this.this$0;
                 boolean z = keyguardSecBottomAreaViewController.nowBarVisible;
                 KeyguardSecBottomAreaViewController.access$updateFinalShortcut(keyguardSecBottomAreaViewController);
             }
@@ -646,38 +565,43 @@ public final class KeyguardSecBottomAreaViewController extends ViewController im
             keyguardSecAffordanceView.setIsDrawBackgroundCircle(true);
         }
         if (keyguardSecAffordanceView != null) {
-            int parseColor = Color.parseColor("#2B2B2B");
-            keyguardSecAffordanceView.mDrawBackgroundColor = parseColor;
-            if (parseColor != -1) {
-                keyguardSecAffordanceView.mBackgroundCirclePaint.setColor(parseColor);
+            int color = Color.parseColor("#2B2B2B");
+            keyguardSecAffordanceView.mDrawBackgroundColor = color;
+            if (color != -1) {
+                keyguardSecAffordanceView.mBackgroundCirclePaint.setColor(color);
             }
         }
         if (keyguardSecAffordanceView != null) {
-            keyguardSecAffordanceView.setDrawBackgroundAlpha(0);
+            keyguardSecAffordanceView.mBackgroundCirclePaint.setAlpha(0);
+            keyguardSecAffordanceView.mMaxBackgroundAlpha = 0;
+            keyguardSecAffordanceView.invalidate();
         }
-        ValueAnimator ofFloat = ObjectAnimator.ofFloat(1.0f, 0.0f);
-        ofFloat.setDuration(500L);
-        ofFloat.setInterpolator(new PathInterpolator(0.22f, 0.25f, 0.0f, 1.0f));
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController$changeBlurToDim$1$1
+        ValueAnimator valueAnimatorOfFloat = ObjectAnimator.ofFloat(1.0f, 0.0f);
+        valueAnimatorOfFloat.setDuration(500L);
+        valueAnimatorOfFloat.setInterpolator(new PathInterpolator(0.22f, 0.25f, 0.0f, 1.0f));
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController$changeBlurToDim$1$1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                 KeyguardSecAffordanceView keyguardSecAffordanceView2;
                 Drawable background;
-                int floatValue = (int) (((Float) valueAnimator.getAnimatedValue()).floatValue() * 255);
-                KeyguardSecAffordanceView keyguardSecAffordanceView3 = KeyguardSecAffordanceView.this;
+                int iFloatValue = (int) (((Float) valueAnimator.getAnimatedValue()).floatValue() * 255);
+                KeyguardSecAffordanceView keyguardSecAffordanceView3 = keyguardSecAffordanceView;
                 if (keyguardSecAffordanceView3 != null && (background = keyguardSecAffordanceView3.getBackground()) != null) {
-                    background.setAlpha(floatValue);
+                    background.setAlpha(iFloatValue);
                 }
-                if (floatValue == 0 && (keyguardSecAffordanceView2 = KeyguardSecAffordanceView.this) != null) {
+                if (iFloatValue == 0 && (keyguardSecAffordanceView2 = keyguardSecAffordanceView) != null) {
                     keyguardSecAffordanceView2.updateBgBlur(false);
                 }
-                KeyguardSecAffordanceView keyguardSecAffordanceView4 = KeyguardSecAffordanceView.this;
+                KeyguardSecAffordanceView keyguardSecAffordanceView4 = keyguardSecAffordanceView;
                 if (keyguardSecAffordanceView4 != null) {
-                    keyguardSecAffordanceView4.setDrawBackgroundAlpha((int) ((255 - floatValue) * 0.5d));
+                    int i = (int) ((255 - iFloatValue) * 0.5d);
+                    keyguardSecAffordanceView4.mBackgroundCirclePaint.setAlpha(i);
+                    keyguardSecAffordanceView4.mMaxBackgroundAlpha = i;
+                    keyguardSecAffordanceView4.invalidate();
                 }
             }
         });
-        ofFloat.start();
+        valueAnimatorOfFloat.start();
     }
 
     public static final void access$changeDimToBlur(final KeyguardSecAffordanceView keyguardSecAffordanceView, final KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController) {
@@ -687,10 +611,10 @@ public final class KeyguardSecBottomAreaViewController extends ViewController im
             keyguardSecAffordanceView.setIsDrawBackgroundCircle(true);
         }
         if (keyguardSecAffordanceView != null) {
-            int parseColor = Color.parseColor("#2B2B2B");
-            keyguardSecAffordanceView.mDrawBackgroundColor = parseColor;
-            if (parseColor != -1) {
-                keyguardSecAffordanceView.mBackgroundCirclePaint.setColor(parseColor);
+            int color = Color.parseColor("#2B2B2B");
+            keyguardSecAffordanceView.mDrawBackgroundColor = color;
+            if (color != -1) {
+                keyguardSecAffordanceView.mBackgroundCirclePaint.setColor(color);
             }
         }
         if (keyguardSecAffordanceView != null) {
@@ -699,33 +623,36 @@ public final class KeyguardSecBottomAreaViewController extends ViewController im
         if (keyguardSecAffordanceView != null && (background = keyguardSecAffordanceView.getBackground()) != null) {
             background.setAlpha(0);
         }
-        ValueAnimator ofFloat = ObjectAnimator.ofFloat(0.0f, 1.0f);
-        ofFloat.setDuration(500L);
-        ofFloat.setInterpolator(new PathInterpolator(0.22f, 0.25f, 0.0f, 1.0f));
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController$changeDimToBlur$1$1
+        ValueAnimator valueAnimatorOfFloat = ObjectAnimator.ofFloat(0.0f, 1.0f);
+        valueAnimatorOfFloat.setDuration(500L);
+        valueAnimatorOfFloat.setInterpolator(new PathInterpolator(0.22f, 0.25f, 0.0f, 1.0f));
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController$changeDimToBlur$1$1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                 KeyguardSecAffordanceView keyguardSecAffordanceView2;
                 Drawable background2;
-                int floatValue = (int) (((Float) valueAnimator.getAnimatedValue()).floatValue() * 255);
-                KeyguardSecAffordanceView keyguardSecAffordanceView3 = KeyguardSecAffordanceView.this;
+                int iFloatValue = (int) (((Float) valueAnimator.getAnimatedValue()).floatValue() * 255);
+                KeyguardSecAffordanceView keyguardSecAffordanceView3 = keyguardSecAffordanceView;
                 if (keyguardSecAffordanceView3 != null && (background2 = keyguardSecAffordanceView3.getBackground()) != null) {
-                    background2.setAlpha(floatValue);
+                    background2.setAlpha(iFloatValue);
                 }
-                KeyguardSecAffordanceView keyguardSecAffordanceView4 = KeyguardSecAffordanceView.this;
+                KeyguardSecAffordanceView keyguardSecAffordanceView4 = keyguardSecAffordanceView;
                 if (keyguardSecAffordanceView4 != null) {
-                    keyguardSecAffordanceView4.setDrawBackgroundAlpha((int) ((255 - floatValue) * 0.5d));
+                    int i = (int) ((255 - iFloatValue) * 0.5d);
+                    keyguardSecAffordanceView4.mBackgroundCirclePaint.setAlpha(i);
+                    keyguardSecAffordanceView4.mMaxBackgroundAlpha = i;
+                    keyguardSecAffordanceView4.invalidate();
                 }
-                if (floatValue != 255 || (keyguardSecAffordanceView2 = KeyguardSecAffordanceView.this) == null) {
+                if (iFloatValue != 255 || (keyguardSecAffordanceView2 = keyguardSecAffordanceView) == null) {
                     return;
                 }
                 keyguardSecAffordanceView2.updateBgBlur(keyguardSecBottomAreaViewController.keyguardStateController.isVisible());
             }
         });
-        ofFloat.addListener(new Animator.AnimatorListener() { // from class: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController$changeDimToBlur$lambda$5$$inlined$doOnEnd$1
+        valueAnimatorOfFloat.addListener(new Animator.AnimatorListener() { // from class: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController$changeDimToBlur$lambda$5$$inlined$doOnEnd$1
             @Override // android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
-                KeyguardSecAffordanceView keyguardSecAffordanceView2 = KeyguardSecAffordanceView.this;
+                KeyguardSecAffordanceView keyguardSecAffordanceView2 = keyguardSecAffordanceView;
                 if (keyguardSecAffordanceView2 != null) {
                     keyguardSecAffordanceView2.mDrawBackgroundColor = -1;
                 }
@@ -746,7 +673,7 @@ public final class KeyguardSecBottomAreaViewController extends ViewController im
             public final void onAnimationStart(Animator animator) {
             }
         });
-        ofFloat.start();
+        valueAnimatorOfFloat.start();
     }
 
     public static final boolean access$isEditorShortcutTransitionNeeded(int i, KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController) {
@@ -832,9 +759,9 @@ public final class KeyguardSecBottomAreaViewController extends ViewController im
         return (KeyguardSecAffordanceView) this.rightView$delegate.getValue();
     }
 
-    public final int getUsimTextAreaHeight() {
+    public final int getUsimTextAreaHeight() throws Resources.NotFoundException {
         LinearLayout linearLayout = ((KeyguardSecBottomAreaView) this.mView).usimTextArea;
-        int i = 0;
+        int dimensionPixelSize = 0;
         if (linearLayout != null) {
             if (linearLayout.getVisibility() != 0) {
                 linearLayout = null;
@@ -846,7 +773,7 @@ public final class KeyguardSecBottomAreaViewController extends ViewController im
                         emergencyButton = null;
                     }
                     if (emergencyButton != null) {
-                        i = ((KeyguardSecBottomAreaView) this.mView).getResources().getDimensionPixelSize(R.dimen.keyguard_emergency_button);
+                        dimensionPixelSize = ((KeyguardSecBottomAreaView) this.mView).getResources().getDimensionPixelSize(R.dimen.keyguard_emergency_button);
                     }
                 }
                 KeyguardUsimTextView keyguardUsimTextView = ((KeyguardSecBottomAreaView) this.mView).usimCarrierText;
@@ -855,12 +782,12 @@ public final class KeyguardSecBottomAreaViewController extends ViewController im
                 }
                 if (keyguardUsimTextView != null) {
                     if ((keyguardUsimTextView.getVisibility() == 0 ? keyguardUsimTextView : null) != null) {
-                        return ((KeyguardSecBottomAreaView) this.mView).getResources().getDimensionPixelSize(R.dimen.keyguard_usim_text_area) + i;
+                        return ((KeyguardSecBottomAreaView) this.mView).getResources().getDimensionPixelSize(R.dimen.keyguard_usim_text_area) + dimensionPixelSize;
                     }
                 }
             }
         }
-        return i;
+        return dimensionPixelSize;
     }
 
     public final KeyguardSecBottomAreaView getView() {
@@ -911,7 +838,7 @@ public final class KeyguardSecBottomAreaViewController extends ViewController im
         if (!z || (!this.mSavingMode && !this.mEasyMode)) {
             getLeftView().updateDisplayParameters();
             getRightView().updateDisplayParameters();
-            ((KeyguardSecBottomAreaView) this.mView).postDelayed(new Runnable() { // from class: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController$onDensityOrFontScaleChanged$1
+            ((KeyguardSecBottomAreaView) this.mView).postDelayed(new Runnable() { // from class: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController.onDensityOrFontScaleChanged.1
                 @Override // java.lang.Runnable
                 public final void run() {
                     KeyguardShortcutManager keyguardShortcutManager = KeyguardSecBottomAreaViewController.this.shortcutManager;
@@ -929,7 +856,7 @@ public final class KeyguardSecBottomAreaViewController extends ViewController im
 
     @Override // com.android.systemui.keyguard.KeyguardFoldController.StateListener
     public final void onFoldStateChanged(boolean z) {
-        ((KeyguardSecBottomAreaView) this.mView).postDelayed(new Runnable() { // from class: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController$onFoldStateChanged$1
+        ((KeyguardSecBottomAreaView) this.mView).postDelayed(new Runnable() { // from class: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController.onFoldStateChanged.1
             @Override // java.lang.Runnable
             public final void run() {
                 KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController = KeyguardSecBottomAreaViewController.this;
@@ -1047,15 +974,15 @@ public final class KeyguardSecBottomAreaViewController extends ViewController im
                 final Function1 function1 = new Function1() { // from class: com.android.systemui.statusbar.KeyguardShortcutManager$$ExternalSyntheticLambda0
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
+                    public final Object mo781invoke(Object obj) {
                         KeyguardShortcutManager.Companion companion = KeyguardShortcutManager.Companion;
-                        return Boolean.valueOf(((WeakReference) obj).get() == KeyguardSecBottomAreaViewController$shortcutManagerCallback$1.this);
+                        return Boolean.valueOf(((WeakReference) obj).get() == keyguardSecBottomAreaViewController$shortcutManagerCallback$1);
                     }
                 };
                 if (arrayList.removeIf(new Predicate() { // from class: com.android.systemui.statusbar.KeyguardShortcutManager$sam$java_util_function_Predicate$0
                     @Override // java.util.function.Predicate
                     public final /* synthetic */ boolean test(Object obj) {
-                        return ((Boolean) Function1.this.mo779invoke(obj)).booleanValue();
+                        return ((Boolean) function1.mo781invoke(obj)).booleanValue();
                     }
                 })) {
                     Log.d("KeyguardShortcutManager", "Callback removed successfully , callback was : " + keyguardSecBottomAreaViewController$shortcutManagerCallback$1);
@@ -1193,25 +1120,25 @@ public final class KeyguardSecBottomAreaViewController extends ViewController im
             ((KeyguardSecBottomAreaView) this.mView).getHandler().removeCallbacks(keyguardSecBottomAreaViewController$startDelayRunnable$1);
         }
         if (!this.showShortcutAnim) {
-            getLeftView().setNowBarVisibility(this.nowBarVisible, new Consumer() { // from class: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController$setNowBarVisibility$1
+            getLeftView().setNowBarVisibility(this.nowBarVisible, new Consumer() { // from class: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController.setNowBarVisibility.1
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
                     ((Boolean) obj).getClass();
                     KeyguardSecBottomAreaViewController.access$updateFinalShortcut(KeyguardSecBottomAreaViewController.this);
                 }
-            }, new Consumer() { // from class: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController$setNowBarVisibility$2
+            }, new Consumer() { // from class: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController.setNowBarVisibility.2
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
                     KeyguardSecBottomAreaViewController.this.isShortcutAnimRunning = ((Boolean) obj).booleanValue();
                 }
             }, false);
-            getRightView().setNowBarVisibility(this.nowBarVisible, new Consumer() { // from class: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController$setNowBarVisibility$3
+            getRightView().setNowBarVisibility(this.nowBarVisible, new Consumer() { // from class: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController.setNowBarVisibility.3
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
                     ((Boolean) obj).getClass();
                     KeyguardSecBottomAreaViewController.access$updateFinalShortcut(KeyguardSecBottomAreaViewController.this);
                 }
-            }, new Consumer() { // from class: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController$setNowBarVisibility$4
+            }, new Consumer() { // from class: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController.setNowBarVisibility.4
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
                     KeyguardSecBottomAreaViewController.this.isShortcutAnimRunning = ((Boolean) obj).booleanValue();
@@ -1251,9 +1178,9 @@ public final class KeyguardSecBottomAreaViewController extends ViewController im
             linearLayout.setVisibility(8);
             return;
         }
-        boolean isIccBlockedPermanently = this.keyguardUpdateMonitor.isIccBlockedPermanently();
+        boolean zIsIccBlockedPermanently = this.keyguardUpdateMonitor.isIccBlockedPermanently();
         boolean z = this.isUsimTextAreaShowing;
-        if (isIccBlockedPermanently) {
+        if (zIsIccBlockedPermanently) {
             LinearLayout linearLayout2 = keyguardSecBottomAreaView.usimTextArea;
             linearLayout2.getClass();
             linearLayout2.setVisibility(z ? 0 : 8);
@@ -1285,25 +1212,25 @@ public final class KeyguardSecBottomAreaViewController extends ViewController im
             ((KeyguardSecBottomAreaView) this.mView).getHandler().removeCallbacks(keyguardSecBottomAreaViewController$startDelayRunnable$1);
         }
         if (j == 0) {
-            getLeftView().setNowBarVisibility(this.nowBarVisible, new Consumer() { // from class: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController$showShortcutAnimation$1
+            getLeftView().setNowBarVisibility(this.nowBarVisible, new Consumer() { // from class: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController.showShortcutAnimation.1
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
                     ((Boolean) obj).getClass();
                     KeyguardSecBottomAreaViewController.access$updateFinalShortcut(KeyguardSecBottomAreaViewController.this);
                 }
-            }, new Consumer() { // from class: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController$showShortcutAnimation$2
+            }, new Consumer() { // from class: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController.showShortcutAnimation.2
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
                     KeyguardSecBottomAreaViewController.this.isShortcutAnimRunning = ((Boolean) obj).booleanValue();
                 }
             }, true);
-            getRightView().setNowBarVisibility(this.nowBarVisible, new Consumer() { // from class: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController$showShortcutAnimation$3
+            getRightView().setNowBarVisibility(this.nowBarVisible, new Consumer() { // from class: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController.showShortcutAnimation.3
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
                     ((Boolean) obj).getClass();
                     KeyguardSecBottomAreaViewController.access$updateFinalShortcut(KeyguardSecBottomAreaViewController.this);
                 }
-            }, new Consumer() { // from class: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController$showShortcutAnimation$4
+            }, new Consumer() { // from class: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController.showShortcutAnimation.4
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
                     KeyguardSecBottomAreaViewController.this.isShortcutAnimRunning = ((Boolean) obj).booleanValue();
@@ -1346,9 +1273,12 @@ public final class KeyguardSecBottomAreaViewController extends ViewController im
         ((KeyguardSecBottomAreaView) this.mView).updateIndicationPosition();
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:31:0x007a  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void updateCustomShortcutIcon(KeyguardSecAffordanceView keyguardSecAffordanceView, int i, boolean z) {
-        boolean z2;
-        boolean z3 = !shouldDisableShortcut() && z;
+        boolean z2 = !shouldDisableShortcut() && z;
         if (keyguardSecAffordanceView == null || ((KeyguardFastBioUnlockController) Dependency.sDependency.getDependencyInner(KeyguardFastBioUnlockController.class)).isFastWakeAndUnlockMode()) {
             return;
         }
@@ -1359,26 +1289,19 @@ public final class KeyguardSecBottomAreaViewController extends ViewController im
                 CentralSurfacesImpl centralSurfacesImpl = (CentralSurfacesImpl) ((CentralSurfaces) lazy.get());
                 DevicePolicyManager devicePolicyManager = centralSurfacesImpl.mDevicePolicyManager;
                 NotificationLockscreenUserManagerImpl notificationLockscreenUserManagerImpl = (NotificationLockscreenUserManagerImpl) centralSurfacesImpl.mLockscreenUserManager;
-                if (devicePolicyManager.getCameraDisabled(null, notificationLockscreenUserManagerImpl.mCurrentUserId) || (((KeyguardStateControllerImpl) centralSurfacesImpl.mKeyguardStateController).mShowing && centralSurfacesImpl.mStatusBarKeyguardViewManager.isSecure() && (centralSurfacesImpl.mDevicePolicyManager.getKeyguardDisabledFeatures(null, notificationLockscreenUserManagerImpl.mCurrentUserId) & 2) != 0)) {
-                    z2 = true;
-                    boolean z4 = z2 && keyguardShortcutManager.isLockTaskPermitted("com.sec.android.app.camera") && this.isUserSetupComplete;
-                    KeyguardKnoxGuardViewController$$ExternalSyntheticOutline0.m("updateCameraVisibility isCameraDisabled:", " visible:", "KeyguardSecBottomAreaViewController", z2, z4);
-                    z3 = !z3 && z4;
-                }
+                boolean z3 = devicePolicyManager.getCameraDisabled(null, notificationLockscreenUserManagerImpl.mCurrentUserId) || (((KeyguardStateControllerImpl) centralSurfacesImpl.mKeyguardStateController).mShowing && centralSurfacesImpl.mStatusBarKeyguardViewManager.isSecure() && (centralSurfacesImpl.mDevicePolicyManager.getKeyguardDisabledFeatures(null, notificationLockscreenUserManagerImpl.mCurrentUserId) & 2) != 0);
+                boolean z4 = !z3 && keyguardShortcutManager.isLockTaskPermitted("com.sec.android.app.camera") && this.isUserSetupComplete;
+                KeyguardKnoxGuardViewController$$ExternalSyntheticOutline0.m("updateCameraVisibility isCameraDisabled:", " visible:", "KeyguardSecBottomAreaViewController", z3, z4);
+                z2 = z2 && z4;
             }
-            z2 = false;
-            if (z2) {
-            }
-            KeyguardKnoxGuardViewController$$ExternalSyntheticOutline0.m("updateCameraVisibility isCameraDisabled:", " visible:", "KeyguardSecBottomAreaViewController", z2, z4);
-            z3 = !z3 && z4;
         }
-        if (!z3) {
+        if (!z2) {
             keyguardSecAffordanceView.setVisibility(8);
             return;
         }
         keyguardSecAffordanceView.setVisibility(this.isUserSetupComplete ? 0 : 8);
         keyguardSecAffordanceView.setImageDrawable(keyguardShortcutManager.getShortcutDrawable(i));
-        keyguardSecAffordanceView.setAccessibilityDelegate(new View.AccessibilityDelegate() { // from class: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController$updateCustomShortcutIcon$1
+        keyguardSecAffordanceView.setAccessibilityDelegate(new View.AccessibilityDelegate() { // from class: com.android.systemui.statusbar.phone.KeyguardSecBottomAreaViewController.updateCustomShortcutIcon.1
             @Override // android.view.View.AccessibilityDelegate
             public final void onInitializeAccessibilityNodeInfo(View view, AccessibilityNodeInfo accessibilityNodeInfo) {
                 super.onInitializeAccessibilityNodeInfo(view, accessibilityNodeInfo);
@@ -1401,14 +1324,14 @@ public final class KeyguardSecBottomAreaViewController extends ViewController im
             Log.d("KeyguardShortcutManager", "updateWallpaperProperties: null");
         } else {
             try {
-                int HSVToColor = Color.HSVToColor(semWallpaperColors.get(256L).getHSV());
+                int iHSVToColor = Color.HSVToColor(semWallpaperColors.get(256L).getHSV());
                 boolean z = WallpaperUtils.mIsExternalLiveWallpaper;
-                double d = ((HSVToColor >>> 16) & 255) / 255.0d;
-                double d2 = ((HSVToColor >>> 8) & 255) / 255.0d;
-                double d3 = (HSVToColor & 255) / 255.0d;
-                double pow = d < 0.04045d ? d / 12.92d : Math.pow((d / 1.055d) + 0.05213270142180095d, 2.4d);
-                double pow2 = ((d3 < 0.04045d ? d3 / 12.92d : Math.pow((d3 / 1.055d) + 0.05213270142180095d, 2.4d)) * 0.0722d) + ((d2 < 0.04045d ? d2 / 12.92d : Math.pow((d2 / 1.055d) + 0.05213270142180095d, 2.4d)) * 0.7152d) + (pow * 0.2126d);
-                keyguardShortcutManager.wallpaperBrightness = (int) Math.max(0.0d, ((pow2 > 0.008856d ? Math.cbrt(pow2) : 0.13793103448275862d + (pow2 * 7.787068965517241d)) * 116.0d) - 16.0d);
+                double d = ((iHSVToColor >>> 16) & 255) / 255.0d;
+                double d2 = ((iHSVToColor >>> 8) & 255) / 255.0d;
+                double d3 = (iHSVToColor & 255) / 255.0d;
+                double dPow = d < 0.04045d ? d / 12.92d : Math.pow((d / 1.055d) + 0.05213270142180095d, 2.4d);
+                double dPow2 = ((d3 < 0.04045d ? d3 / 12.92d : Math.pow((d3 / 1.055d) + 0.05213270142180095d, 2.4d)) * 0.0722d) + ((d2 < 0.04045d ? d2 / 12.92d : Math.pow((d2 / 1.055d) + 0.05213270142180095d, 2.4d)) * 0.7152d) + (dPow * 0.2126d);
+                keyguardShortcutManager.wallpaperBrightness = (int) Math.max(0.0d, ((dPow2 > 0.008856d ? Math.cbrt(dPow2) : 0.13793103448275862d + (dPow2 * 7.787068965517241d)) * 116.0d) - 16.0d);
             } catch (Exception e) {
                 keyguardShortcutManager.wallpaperBrightness = -1;
                 Log.e("KeyguardShortcutManager", "updateWallpaperProperties: " + e.getMessage());

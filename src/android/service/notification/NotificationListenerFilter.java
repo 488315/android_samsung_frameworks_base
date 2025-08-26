@@ -4,6 +4,7 @@ import android.content.pm.VersionedPackage;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.ArraySet;
+import java.io.IOException;
 
 /* loaded from: classes3.dex */
 public class NotificationListenerFilter implements Parcelable {
@@ -45,7 +46,7 @@ public class NotificationListenerFilter implements Parcelable {
     }
 
     @Override // android.os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
         parcel.writeInt(this.mAllowedNotificationTypes);
         parcel.writeArraySet(this.mDisallowedPackages);
     }

@@ -1,6 +1,7 @@
 package com.android.wm.shell.pip.phone;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.Rect;
@@ -34,7 +35,6 @@ import com.android.wm.shell.protolog.ShellProtoLogGroup;
 import com.samsung.android.knox.custom.IKnoxCustomManager;
 import java.util.function.Function;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PipResizeGestureHandler {
     public boolean mAllowGesture;
@@ -89,13 +89,12 @@ public class PipResizeGestureHandler {
     public final PipResizeGestureHandler$$ExternalSyntheticLambda0 mUpdateResizeBoundsCallback = new PipResizeGestureHandler$$ExternalSyntheticLambda0(this, 0);
     public final PipResizeGestureHandler$$ExternalSyntheticLambda1 mResetTouchStateRunnable = new PipResizeGestureHandler$$ExternalSyntheticLambda1(this, 0);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PipResizeInputEventReceiver extends BatchedInputEventReceiver {
         public PipResizeInputEventReceiver(InputChannel inputChannel, Looper looper) {
             super(inputChannel, looper, Choreographer.getInstance());
         }
 
-        public final void onInputEvent(InputEvent inputEvent) {
+        public final void onInputEvent(InputEvent inputEvent) throws Resources.NotFoundException {
             PipResizeGestureHandler.this.onInputEvent(inputEvent);
             finishInputEvent(inputEvent, true);
         }
@@ -118,7 +117,7 @@ public class PipResizeGestureHandler {
         this.mPipUiEventLogger = pipUiEventLogger;
     }
 
-    public final void finishResize() {
+    public final void finishResize() throws Resources.NotFoundException {
         if (this.mLastResizeBounds.isEmpty()) {
             resetState();
             return;
@@ -132,18 +131,18 @@ public class PipResizeGestureHandler {
                 Point point = this.mMaxSize;
                 int i = point.x;
                 int i2 = point.y;
-                int centerX = rect2.centerX() - (i / 2);
-                int centerY = rect2.centerY() - (i2 / 2);
-                rect2.set(centerX, centerY, i + centerX, i2 + centerY);
+                int iCenterX = rect2.centerX() - (i / 2);
+                int iCenterY = rect2.centerY() - (i2 / 2);
+                rect2.set(iCenterX, iCenterY, i + iCenterX, i2 + iCenterY);
             }
             if (this.mLastResizeBounds.width() < this.mMinSize.x || this.mLastResizeBounds.height() < this.mMinSize.y) {
                 Rect rect3 = this.mLastResizeBounds;
                 Point point2 = this.mMinSize;
                 int i3 = point2.x;
                 int i4 = point2.y;
-                int centerX2 = rect3.centerX() - (i3 / 2);
-                int centerY2 = rect3.centerY() - (i4 / 2);
-                rect3.set(centerX2, centerY2, i3 + centerX2, i4 + centerY2);
+                int iCenterX2 = rect3.centerX() - (i3 / 2);
+                int iCenterY2 = rect3.centerY() - (i4 / 2);
+                rect3.set(iCenterX2, iCenterY2, i3 + iCenterX2, i4 + iCenterY2);
             }
             Rect rect4 = this.mLastResizeBounds;
             PipBoundsAlgorithm pipBoundsAlgorithm = this.mPipBoundsAlgorithm;
@@ -232,7 +231,7 @@ public class PipResizeGestureHandler {
         return this.mTmpRegion.contains(i, i2);
     }
 
-    public void onInputEvent(InputEvent inputEvent) {
+    public void onInputEvent(InputEvent inputEvent) throws Resources.NotFoundException {
         if (this.mEnableDragCornerResize || this.mEnablePinchResize) {
             if (!this.mPipTouchState.mAllowInputEvents) {
                 Log.d("PipResizeGestureHandler", "pip input event not allowed");
@@ -290,6 +289,9 @@ public class PipResizeGestureHandler {
                                     if (actionMasked2 != 5) {
                                         return;
                                     }
+                                    if (!this.mLastResizeBounds.equals(pipBoundsState.getBounds())) {
+                                        finishResize();
+                                    }
                                     resetState();
                                     return;
                                 }
@@ -344,20 +346,90 @@ public class PipResizeGestureHandler {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:30:0x0111, code lost:
-    
-        if (((float) java.lang.Math.hypot(r2.x - r1.x, r2.y - r1.y)) > r17.mTouchSlop) goto L37;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:37:0x0113  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void onPinchResize(android.view.MotionEvent r18) {
-        /*
-            Method dump skipped, instructions count: 407
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.pip.phone.PipResizeGestureHandler.onPinchResize(android.view.MotionEvent):void");
+    public void onPinchResize(MotionEvent motionEvent) throws Resources.NotFoundException {
+        int i;
+        int actionMasked = motionEvent.getActionMasked();
+        if (actionMasked == 1 || actionMasked == 3) {
+            this.mFirstIndex = -1;
+            this.mSecondIndex = -1;
+            this.mAllowGesture = false;
+            finishResize();
+            PipPerfHintController.PipHighPerfSession pipHighPerfSession = this.mPipHighPerfSession;
+            if (pipHighPerfSession != null) {
+                pipHighPerfSession.close();
+                this.mPipHighPerfSession = null;
+            }
+        }
+        if (motionEvent.getPointerCount() != 2) {
+            return;
+        }
+        PipBoundsState pipBoundsState = this.mPipBoundsState;
+        Rect bounds = pipBoundsState.getBounds();
+        if (actionMasked == 5 && this.mFirstIndex == -1 && this.mSecondIndex == -1 && bounds.contains((int) motionEvent.getRawX(0), (int) motionEvent.getRawY(0)) && bounds.contains((int) motionEvent.getRawX(1), (int) motionEvent.getRawY(1))) {
+            this.mAllowGesture = true;
+            this.mFirstIndex = 0;
+            this.mSecondIndex = 1;
+            this.mDownPoint.set(motionEvent.getRawX(0), motionEvent.getRawY(this.mFirstIndex));
+            this.mDownSecondPoint.set(motionEvent.getRawX(this.mSecondIndex), motionEvent.getRawY(this.mSecondIndex));
+            this.mDownBounds.set(bounds);
+            this.mLastPoint.set(this.mDownPoint);
+            PointF pointF = this.mLastSecondPoint;
+            pointF.set(pointF);
+            this.mLastResizeBounds.set(this.mDownBounds);
+            PipPerfHintController pipPerfHintController = this.mPipPerfHintController;
+            if (pipPerfHintController != null) {
+                this.mPipHighPerfSession = pipPerfHintController.startSession(new PipResizeGestureHandler$$ExternalSyntheticLambda0(this, 1), "onPinchResize");
+            }
+        }
+        if (actionMasked != 2 || (i = this.mFirstIndex) == -1 || this.mSecondIndex == -1) {
+            return;
+        }
+        float rawX = motionEvent.getRawX(i);
+        float rawY = motionEvent.getRawY(this.mFirstIndex);
+        float rawX2 = motionEvent.getRawX(this.mSecondIndex);
+        float rawY2 = motionEvent.getRawY(this.mSecondIndex);
+        this.mLastPoint.set(rawX, rawY);
+        this.mLastSecondPoint.set(rawX2, rawY2);
+        if (!this.mThresholdCrossed) {
+            PointF pointF2 = this.mDownSecondPoint;
+            PointF pointF3 = this.mLastSecondPoint;
+            if (((float) Math.hypot(pointF3.x - pointF2.x, pointF3.y - pointF2.y)) <= this.mTouchSlop) {
+                PointF pointF4 = this.mDownPoint;
+                PointF pointF5 = this.mLastPoint;
+                if (((float) Math.hypot(pointF5.x - pointF4.x, pointF5.y - pointF4.y)) > this.mTouchSlop) {
+                    pilferPointers();
+                    this.mThresholdCrossed = true;
+                    this.mDownPoint.set(this.mLastPoint);
+                    this.mDownSecondPoint.set(this.mLastSecondPoint);
+                    PhonePipMenuController phonePipMenuController = this.mPhonePipMenuController;
+                    if (phonePipMenuController.isMenuVisible()) {
+                        phonePipMenuController.hideMenu();
+                    }
+                }
+            }
+        }
+        if (this.mThresholdCrossed) {
+            this.mAngle = this.mPinchResizingAlgorithm.calculateBoundsAndAngle(this.mDownPoint, this.mDownSecondPoint, this.mLastPoint, this.mLastSecondPoint, this.mMinSize, this.mMaxSize, this.mDownBounds, this.mLastResizeBounds);
+            float f = pipBoundsState.mAspectRatio;
+            if (f <= 1.0f) {
+                int iRound = Math.round(this.mLastResizeBounds.height() * f);
+                Rect rect = this.mLastResizeBounds;
+                int i2 = rect.left;
+                rect.set(i2, rect.top, iRound + i2, rect.bottom);
+            } else {
+                int iRound2 = Math.round(this.mLastResizeBounds.width() / f);
+                Rect rect2 = this.mLastResizeBounds;
+                int i3 = rect2.left;
+                int i4 = rect2.top;
+                rect2.set(i3, i4, rect2.right, iRound2 + i4);
+            }
+            this.mPipTaskOrganizer.scheduleUserResizePip(this.mDownBounds, this.mLastResizeBounds, this.mAngle, null);
+            pipBoundsState.setHasUserResizedPip();
+        }
     }
 
     public void pilferPointers() {

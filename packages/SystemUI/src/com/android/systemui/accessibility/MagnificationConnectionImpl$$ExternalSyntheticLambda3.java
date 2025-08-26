@@ -11,7 +11,6 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final /* synthetic */ class MagnificationConnectionImpl$$ExternalSyntheticLambda3 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -39,9 +38,9 @@ public final /* synthetic */ class MagnificationConnectionImpl$$ExternalSyntheti
                         int state = fullscreenMagnificationController.getState();
                         if (state != 1 && state != 0) {
                             fullscreenMagnificationController.setState(1);
-                            ValueAnimator createHideTargetAnimator = fullscreenMagnificationController.createHideTargetAnimator(fullscreenMagnificationController.mFullscreenBorder);
-                            fullscreenMagnificationController.mShowHideBorderAnimator = createHideTargetAnimator;
-                            createHideTargetAnimator.start();
+                            ValueAnimator valueAnimatorCreateHideTargetAnimator = fullscreenMagnificationController.createHideTargetAnimator(fullscreenMagnificationController.mFullscreenBorder);
+                            fullscreenMagnificationController.mShowHideBorderAnimator = valueAnimatorCreateHideTargetAnimator;
+                            valueAnimatorCreateHideTargetAnimator.start();
                             break;
                         }
                     } else {
@@ -55,9 +54,9 @@ public final /* synthetic */ class MagnificationConnectionImpl$$ExternalSyntheti
                             fullscreenMagnificationController.onConfigurationChanged(fullscreenMagnificationController.mContext.getResources().getConfiguration());
                             fullscreenMagnificationController.mContext.registerComponentCallbacks(fullscreenMagnificationController);
                             if (fullscreenMagnificationController.mSurfaceControlViewHost == null) {
-                                View inflate = LayoutInflater.from(fullscreenMagnificationController.mContext).inflate(R.layout.fullscreen_magnification_border, (ViewGroup) null);
-                                fullscreenMagnificationController.mFullscreenBorder = inflate;
-                                inflate.setAlpha(0.0f);
+                                View viewInflate = LayoutInflater.from(fullscreenMagnificationController.mContext).inflate(R.layout.fullscreen_magnification_border, (ViewGroup) null);
+                                fullscreenMagnificationController.mFullscreenBorder = viewInflate;
+                                viewInflate.setAlpha(0.0f);
                                 SurfaceControlViewHost surfaceControlViewHost = (SurfaceControlViewHost) fullscreenMagnificationController.mScvhSupplier.get();
                                 fullscreenMagnificationController.mSurfaceControlViewHost = surfaceControlViewHost;
                                 View view = fullscreenMagnificationController.mFullscreenBorder;
@@ -72,10 +71,10 @@ public final /* synthetic */ class MagnificationConnectionImpl$$ExternalSyntheti
                                 }
                                 fullscreenMagnificationController.applyCornerRadiusToBorder();
                             }
-                            SurfaceControl.Transaction addTransactionCommittedListener = fullscreenMagnificationController.mTransaction.addTransactionCommittedListener(fullscreenMagnificationController.mExecutor, new SurfaceControl.TransactionCommittedListener() { // from class: com.android.systemui.accessibility.FullscreenMagnificationController$$ExternalSyntheticLambda0
+                            SurfaceControl.Transaction transactionAddTransactionCommittedListener = fullscreenMagnificationController.mTransaction.addTransactionCommittedListener(fullscreenMagnificationController.mExecutor, new SurfaceControl.TransactionCommittedListener() { // from class: com.android.systemui.accessibility.FullscreenMagnificationController$$ExternalSyntheticLambda0
                                 @Override // android.view.SurfaceControl.TransactionCommittedListener
                                 public final void onTransactionCommitted() {
-                                    FullscreenMagnificationController fullscreenMagnificationController2 = FullscreenMagnificationController.this;
+                                    FullscreenMagnificationController fullscreenMagnificationController2 = fullscreenMagnificationController;
                                     boolean z2 = FullscreenMagnificationController.DEBUG;
                                     if (fullscreenMagnificationController2.getState() == 2) {
                                         fullscreenMagnificationController2.mShowBorderRunnable.run();
@@ -84,7 +83,7 @@ public final /* synthetic */ class MagnificationConnectionImpl$$ExternalSyntheti
                             });
                             SurfaceControl surfaceControl = fullscreenMagnificationController.mBorderSurfaceControl;
                             float f = -fullscreenMagnificationController.mBorderOffset;
-                            addTransactionCommittedListener.setPosition(surfaceControl, f, f).setLayer(fullscreenMagnificationController.mBorderSurfaceControl, Integer.MAX_VALUE).show(fullscreenMagnificationController.mBorderSurfaceControl).apply();
+                            transactionAddTransactionCommittedListener.setPosition(surfaceControl, f, f).setLayer(fullscreenMagnificationController.mBorderSurfaceControl, Integer.MAX_VALUE).show(fullscreenMagnificationController.mBorderSurfaceControl).apply();
                             fullscreenMagnificationController.mAccessibilityManager.attachAccessibilityOverlayToDisplay(fullscreenMagnificationController.mDisplayId, fullscreenMagnificationController.mBorderSurfaceControl);
                             fullscreenMagnificationController.mDisplayManager.registerDisplayListener(fullscreenMagnificationController.mDisplayListener, fullscreenMagnificationController.mHandler);
                             if (fullscreenMagnificationController.mFullscreenBorder != null) {

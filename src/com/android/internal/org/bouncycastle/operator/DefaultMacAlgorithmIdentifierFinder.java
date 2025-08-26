@@ -14,9 +14,9 @@ public class DefaultMacAlgorithmIdentifierFinder implements MacAlgorithmIdentifi
     private static Map macNameToAlgIds;
 
     static {
-        HashMap hashMap = new HashMap();
-        macNameToAlgIds = hashMap;
-        hashMap.put("HMACSHA1", new AlgorithmIdentifier(OIWObjectIdentifiers.idSHA1));
+        HashMap map = new HashMap();
+        macNameToAlgIds = map;
+        map.put("HMACSHA1", new AlgorithmIdentifier(OIWObjectIdentifiers.idSHA1));
         macNameToAlgIds.put("HMACSHA224", new AlgorithmIdentifier(PKCSObjectIdentifiers.id_hmacWithSHA224, DERNull.INSTANCE));
         macNameToAlgIds.put("HMACSHA256", new AlgorithmIdentifier(PKCSObjectIdentifiers.id_hmacWithSHA256, DERNull.INSTANCE));
         macNameToAlgIds.put("HMACSHA384", new AlgorithmIdentifier(PKCSObjectIdentifiers.id_hmacWithSHA384, DERNull.INSTANCE));

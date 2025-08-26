@@ -19,11 +19,11 @@ public class WhitelistedFeature {
         if (num == null) {
             return EnableApi.ALL;
         }
-        int intValue = num.intValue();
-        if (intValue == 0) {
+        int iIntValue = num.intValue();
+        if (iIntValue == 0) {
             return EnableApi.ALL;
         }
-        if (intValue != 2) {
+        if (iIntValue != 2) {
             return null;
         }
         return EnableApi.GET;

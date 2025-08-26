@@ -2,6 +2,7 @@ package android.widget;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Rect;
@@ -59,7 +60,7 @@ public class TabWidget extends LinearLayout implements View.OnFocusChangeListene
         this(context, attributeSet, i, 0);
     }
 
-    public TabWidget(Context context, AttributeSet attributeSet, int i, int i2) {
+    public TabWidget(Context context, AttributeSet attributeSet, int i, int i2) throws Resources.NotFoundException {
         super(context, attributeSet, i, i2);
         this.mBounds = new Rect();
         this.mSelectedTab = -1;
@@ -67,39 +68,39 @@ public class TabWidget extends LinearLayout implements View.OnFocusChangeListene
         this.mImposedTabsHeight = -1;
         this.mDefaultTextSize = 14.0f;
         this.mMaxFontScale = 1.3f;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.TabWidget, i, i2);
-        saveAttributeDataForStyleable(context, R.styleable.TabWidget, attributeSet, obtainStyledAttributes, i, i2);
-        this.mDrawBottomStrips = obtainStyledAttributes.getBoolean(3, this.mDrawBottomStrips);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.TabWidget, i, i2);
+        saveAttributeDataForStyleable(context, R.styleable.TabWidget, attributeSet, typedArrayObtainStyledAttributes, i, i2);
+        this.mDrawBottomStrips = typedArrayObtainStyledAttributes.getBoolean(3, this.mDrawBottomStrips);
         boolean z = context.getApplicationInfo().targetSdkVersion <= 4;
-        if (obtainStyledAttributes.hasValueOrEmpty(1)) {
-            this.mLeftStrip = obtainStyledAttributes.getDrawable(1);
+        if (typedArrayObtainStyledAttributes.hasValueOrEmpty(1)) {
+            this.mLeftStrip = typedArrayObtainStyledAttributes.getDrawable(1);
         } else if (z) {
             this.mLeftStrip = context.getDrawable(R.drawable.tab_bottom_left_v4);
         } else {
             this.mLeftStrip = context.getDrawable(R.drawable.tab_bottom_left);
         }
-        if (obtainStyledAttributes.hasValueOrEmpty(2)) {
-            this.mRightStrip = obtainStyledAttributes.getDrawable(2);
+        if (typedArrayObtainStyledAttributes.hasValueOrEmpty(2)) {
+            this.mRightStrip = typedArrayObtainStyledAttributes.getDrawable(2);
         } else if (z) {
             this.mRightStrip = context.getDrawable(R.drawable.tab_bottom_right_v4);
         } else {
             this.mRightStrip = context.getDrawable(R.drawable.tab_bottom_right);
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
         setChildrenDrawingOrderEnabled(true);
         TypedValue typedValue = new TypedValue();
         context.getTheme().resolveAttribute(R.attr.parentIsDeviceDefault, typedValue, true);
         boolean z2 = typedValue.data != 0;
         this.mIsThemeDeviceDefaultFamily = z2;
         if (z2) {
-            TypedArray obtainStyledAttributes2 = context.getTheme().obtainStyledAttributes(null, R.styleable.Theme, 0, 0);
-            int resourceId = obtainStyledAttributes2.getResourceId(143, 0);
-            obtainStyledAttributes2.recycle();
-            TypedArray obtainStyledAttributes3 = getContext().obtainStyledAttributes(resourceId, R.styleable.TextAppearance);
-            TypedValue peekValue = obtainStyledAttributes3.peekValue(0);
-            obtainStyledAttributes3.recycle();
-            if (peekValue != null) {
-                this.mDefaultTextSize = TypedValue.complexToFloat(peekValue.data);
+            TypedArray typedArrayObtainStyledAttributes2 = context.getTheme().obtainStyledAttributes(null, R.styleable.Theme, 0, 0);
+            int resourceId = typedArrayObtainStyledAttributes2.getResourceId(143, 0);
+            typedArrayObtainStyledAttributes2.recycle();
+            TypedArray typedArrayObtainStyledAttributes3 = getContext().obtainStyledAttributes(resourceId, R.styleable.TextAppearance);
+            TypedValue typedValuePeekValue = typedArrayObtainStyledAttributes3.peekValue(0);
+            typedArrayObtainStyledAttributes3.recycle();
+            if (typedValuePeekValue != null) {
+                this.mDefaultTextSize = TypedValue.complexToFloat(typedValuePeekValue.data);
             }
             this.mSemRegularFont = Typeface.create(Typeface.create("sec", 0), 400, false);
             this.mSemSemiBoldFont = Typeface.create(Typeface.create("sec", 0), 600, false);
@@ -118,9 +119,9 @@ public class TabWidget extends LinearLayout implements View.OnFocusChangeListene
             for (int i3 = 0; i3 < tabCount; i3++) {
                 View childTabViewAt = getChildTabViewAt(i3);
                 if (childTabViewAt != null) {
-                    View findViewById = childTabViewAt.findViewById(16908310);
-                    if (findViewById instanceof TextView) {
-                        ((TextView) findViewById).setTextSize(1, this.mDefaultTextSize * f);
+                    View viewFindViewById = childTabViewAt.findViewById(16908310);
+                    if (viewFindViewById instanceof TextView) {
+                        ((TextView) viewFindViewById).setTextSize(1, this.mDefaultTextSize * f);
                     }
                 }
             }
@@ -156,9 +157,9 @@ public class TabWidget extends LinearLayout implements View.OnFocusChangeListene
             return;
         }
         int size = View.MeasureSpec.getSize(i);
-        int makeSafeMeasureSpec = View.MeasureSpec.makeSafeMeasureSpec(size, 0);
+        int iMakeSafeMeasureSpec = View.MeasureSpec.makeSafeMeasureSpec(size, 0);
         this.mImposedTabsHeight = -1;
-        super.measureHorizontal(makeSafeMeasureSpec, i2);
+        super.measureHorizontal(iMakeSafeMeasureSpec, i2);
         int measuredWidth = getMeasuredWidth() - size;
         if (measuredWidth > 0) {
             int childCount = getChildCount();
@@ -177,9 +178,9 @@ public class TabWidget extends LinearLayout implements View.OnFocusChangeListene
                     View childAt = getChildAt(i5);
                     if (childAt.getVisibility() != 8) {
                         int measuredWidth2 = childAt.getMeasuredWidth();
-                        int max = Math.max(0, measuredWidth2 - (measuredWidth / i3));
-                        this.mImposedTabWidths[i5] = max;
-                        measuredWidth -= measuredWidth2 - max;
+                        int iMax = Math.max(0, measuredWidth2 - (measuredWidth / i3));
+                        this.mImposedTabWidths[i5] = iMax;
+                        measuredWidth -= measuredWidth2 - iMax;
                         i3--;
                         this.mImposedTabsHeight = Math.max(this.mImposedTabsHeight, childAt.getMeasuredHeight());
                     }
@@ -336,7 +337,7 @@ public class TabWidget extends LinearLayout implements View.OnFocusChangeListene
         accessibilityEvent.setCurrentItemIndex(this.mSelectedTab);
     }
 
-    public void focusCurrentTab(int i) {
+    public void focusCurrentTab(int i) throws Resources.NotFoundException {
         int i2 = this.mSelectedTab;
         setCurrentTab(i);
         if (i2 != i) {
@@ -345,7 +346,7 @@ public class TabWidget extends LinearLayout implements View.OnFocusChangeListene
     }
 
     @Override // android.view.View
-    public void setEnabled(boolean z) {
+    public void setEnabled(boolean z) throws Resources.NotFoundException {
         super.setEnabled(z);
         int tabCount = getTabCount();
         for (int i = 0; i < tabCount; i++) {
@@ -354,7 +355,7 @@ public class TabWidget extends LinearLayout implements View.OnFocusChangeListene
     }
 
     @Override // android.view.ViewGroup
-    public void addView(View view) {
+    public void addView(View view) throws Resources.NotFoundException {
         if (view.getLayoutParams() == null) {
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(0, -1, 1.0f);
             layoutParams.setMargins(0, 0, 0, 0);

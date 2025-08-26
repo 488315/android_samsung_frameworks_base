@@ -6,7 +6,6 @@ import gov.nist.javax.sip.parser.Lexer;
 import gov.nist.javax.sip.parser.ParametersParser;
 import java.text.ParseException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class PChargingVectorParser extends ParametersParser {
     public PChargingVectorParser(String str) {
@@ -14,14 +13,14 @@ public class PChargingVectorParser extends ParametersParser {
     }
 
     @Override // gov.nist.javax.sip.parser.HeaderParser
-    public final SIPHeader parse() {
+    public final SIPHeader parse() throws ParseException {
         headerName(2125);
         PChargingVector pChargingVector = new PChargingVector();
         while (this.lexer.lookAhead(0) != '\n') {
             pChargingVector.setParameter(nameValue());
             this.lexer.SPorHT();
-            char lookAhead = this.lexer.lookAhead(0);
-            if (lookAhead == '\n' || lookAhead == 0) {
+            char cLookAhead = this.lexer.lookAhead(0);
+            if (cLookAhead == '\n' || cLookAhead == 0) {
                 break;
             }
             this.lexer.match(59);

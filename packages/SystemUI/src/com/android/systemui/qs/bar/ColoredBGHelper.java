@@ -36,7 +36,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ColoredBGHelper implements OnSemColorsChangedListener {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -52,34 +51,32 @@ public final class ColoredBGHelper implements OnSemColorsChangedListener {
     public final int WALLPAPER_FIXED_ALPHA = HexExtensionsKt.hexToInt$default("3d");
     public final int THEME_FIXED_ALPHA = HexExtensionsKt.hexToInt$default(DATA.DM_FIELD_INDEX.PREF_CSCF_PORT);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.qs.bar.ColoredBGHelper$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         int label;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.qs.bar.ColoredBGHelper$1$1, reason: invalid class name and collision with other inner class name */
-        final class C02361 extends SuspendLambda implements Function2 {
+        final class C03791 extends SuspendLambda implements Function2 {
             /* synthetic */ int I$0;
             int label;
             final /* synthetic */ ColoredBGHelper this$0;
 
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-            public C02361(ColoredBGHelper coloredBGHelper, Continuation continuation) {
+            public C03791(ColoredBGHelper coloredBGHelper, Continuation continuation) {
                 super(2, continuation);
                 this.this$0 = coloredBGHelper;
             }
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
             public final Continuation create(Object obj, Continuation continuation) {
-                C02361 c02361 = new C02361(this.this$0, continuation);
-                c02361.I$0 = ((Number) obj).intValue();
-                return c02361;
+                C03791 c03791 = new C03791(this.this$0, continuation);
+                c03791.I$0 = ((Number) obj).intValue();
+                return c03791;
             }
 
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
-                return ((C02361) create(Integer.valueOf(((Number) obj).intValue()), (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                return ((C03791) create(Integer.valueOf(((Number) obj).intValue()), (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
             }
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
@@ -128,9 +125,9 @@ public final class ColoredBGHelper implements OnSemColorsChangedListener {
                 ResultKt.throwOnFailure(obj);
                 ColoredBGHelper coloredBGHelper = ColoredBGHelper.this;
                 ReadonlyStateFlow readonlyStateFlow = coloredBGHelper.coloredBackgroundInteractor.backgroundColor;
-                C02361 c02361 = new C02361(coloredBGHelper, null);
+                C03791 c03791 = new C03791(coloredBGHelper, null);
                 this.label = 1;
-                if (FlowKt.collectLatest(readonlyStateFlow, c02361, this) == coroutineSingletons) {
+                if (FlowKt.collectLatest(readonlyStateFlow, c03791, this) == coroutineSingletons) {
                     return coroutineSingletons;
                 }
             } else {
@@ -143,7 +140,6 @@ public final class ColoredBGHelper implements OnSemColorsChangedListener {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -205,21 +201,21 @@ public final class ColoredBGHelper implements OnSemColorsChangedListener {
     }
 
     public final void setBackGroundDrawable(View view, int i) {
-        Drawable findDrawableByLayerId;
+        Drawable drawableFindDrawableByLayerId;
         int i2 = !StringsKt__StringsJVMKt.equals(Integer.toHexString(this.context.getResources().getColor(R.color.qs_tile_container_bg)), "3d000000", true) ? this.THEME_FIXED_ALPHA : this.WALLPAPER_FIXED_ALPHA;
         if (i != this.curExtractColor || i2 != this.curAlpha) {
-            int argb = Color.argb(i2, Color.red(i), Color.green(i), Color.blue(i));
-            Log.d("ColoredBGHelper", NotificationController$$ExternalSyntheticOutline0.m(MutableObjectList$$ExternalSyntheticOutline0.m(this.curAlpha, i2, "setBackGroundDrawable alpha = ", " > ", ", color = "), toCompareColorString(this.curExtractColor, i), ", actualAppliedColor = ", toCompareColorString(this.actualAppliedColor, argb), Debug.getCallers(3, " ")));
-            this.actualAppliedColor = argb;
+            int iArgb = Color.argb(i2, Color.red(i), Color.green(i), Color.blue(i));
+            Log.d("ColoredBGHelper", NotificationController$$ExternalSyntheticOutline0.m(MutableObjectList$$ExternalSyntheticOutline0.m(this.curAlpha, i2, "setBackGroundDrawable alpha = ", " > ", ", color = "), toCompareColorString(this.curExtractColor, i), ", actualAppliedColor = ", toCompareColorString(this.actualAppliedColor, iArgb), Debug.getCallers(3, " ")));
+            this.actualAppliedColor = iArgb;
             this.curExtractColor = i;
             this.curAlpha = i2;
         }
         if (view != null) {
             Drawable drawable = this.noRippleBarBGList.contains(view) ? this.context.getDrawable(R.drawable.sec_tile_layout_background) : this.context.getDrawable(R.drawable.sec_coloring_container_background);
-            if (drawable == null || (findDrawableByLayerId = ((LayerDrawable) drawable).findDrawableByLayerId(R.id.colored_bg_solid)) == null) {
+            if (drawable == null || (drawableFindDrawableByLayerId = ((LayerDrawable) drawable).findDrawableByLayerId(R.id.colored_bg_solid)) == null) {
                 return;
             }
-            findDrawableByLayerId.setTint(this.actualAppliedColor);
+            drawableFindDrawableByLayerId.setTint(this.actualAppliedColor);
             view.setBackground(drawable);
         }
     }

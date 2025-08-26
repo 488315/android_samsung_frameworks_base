@@ -5,7 +5,6 @@ import android.util.IntArray;
 import android.util.LongArray;
 import com.android.internal.vibrator.persistence.SerializedAmplitudeStepWaveform;
 import com.android.internal.vibrator.persistence.SerializedComposedEffect;
-import com.android.internal.vibrator.persistence.SerializedWaveformEffectEntries;
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
 import java.io.IOException;
@@ -76,12 +75,12 @@ final class SerializedWaveformEffectEntries implements SerializedComposedEffect.
         Parser() {
         }
 
-        public static void parseWaveformEntry(TypedXmlPullParser typedXmlPullParser, final Builder builder) throws XmlParserException, IOException {
+        public static void parseWaveformEntry(TypedXmlPullParser typedXmlPullParser, final Builder builder) throws IOException, XmlParserException {
             Objects.requireNonNull(builder);
             SerializedAmplitudeStepWaveform.Parser.parseWaveformEntry(typedXmlPullParser, new BiConsumer() { // from class: com.android.internal.vibrator.persistence.SerializedWaveformEffectEntries$Parser$$ExternalSyntheticLambda0
                 @Override // java.util.function.BiConsumer
                 public final void accept(Object obj, Object obj2) {
-                    SerializedWaveformEffectEntries.Builder.this.addDurationAndAmplitude(((Integer) obj).intValue(), ((Integer) obj2).intValue());
+                    builder.addDurationAndAmplitude(((Integer) obj).intValue(), ((Integer) obj2).intValue());
                 }
             });
         }

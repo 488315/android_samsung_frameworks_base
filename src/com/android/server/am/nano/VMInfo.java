@@ -49,24 +49,24 @@ public final class VMInfo extends MessageNano {
 
     @Override // com.android.framework.protobuf.nano.MessageNano
     protected int computeSerializedSize() {
-        int computeSerializedSize = super.computeSerializedSize();
+        int iComputeSerializedSize = super.computeSerializedSize();
         if (!this.name.equals("")) {
-            computeSerializedSize += CodedOutputByteBufferNano.computeStringSize(1, this.name);
+            iComputeSerializedSize += CodedOutputByteBufferNano.computeStringSize(1, this.name);
         }
-        return !this.version.equals("") ? computeSerializedSize + CodedOutputByteBufferNano.computeStringSize(2, this.version) : computeSerializedSize;
+        return !this.version.equals("") ? iComputeSerializedSize + CodedOutputByteBufferNano.computeStringSize(2, this.version) : iComputeSerializedSize;
     }
 
     @Override // com.android.framework.protobuf.nano.MessageNano
     public VMInfo mergeFrom(CodedInputByteBufferNano codedInputByteBufferNano) throws IOException {
         while (true) {
-            int readTag = codedInputByteBufferNano.readTag();
-            if (readTag == 0) {
+            int tag = codedInputByteBufferNano.readTag();
+            if (tag == 0) {
                 break;
             }
-            if (readTag == 10) {
+            if (tag == 10) {
                 this.name = codedInputByteBufferNano.readString();
-            } else if (readTag != 18) {
-                if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, readTag)) {
+            } else if (tag != 18) {
+                if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, tag)) {
                     break;
                 }
             } else {

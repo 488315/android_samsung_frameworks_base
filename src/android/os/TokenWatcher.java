@@ -62,10 +62,10 @@ public abstract class TokenWatcher {
 
     public void cleanup(IBinder iBinder, boolean z) {
         synchronized (this.mTokens) {
-            Death remove = this.mTokens.remove(iBinder);
-            if (z && remove != null) {
-                remove.token.unlinkToDeath(remove, 0);
-                remove.token = null;
+            Death deathRemove = this.mTokens.remove(iBinder);
+            if (z && deathRemove != null) {
+                deathRemove.token.unlinkToDeath(deathRemove, 0);
+                deathRemove.token = null;
             }
             if (this.mTokens.size() == 0 && this.mAcquired) {
                 sendNotificationLocked(false);
@@ -103,10 +103,10 @@ public abstract class TokenWatcher {
     private ArrayList<String> dumpInternal() {
         ArrayList<String> arrayList = new ArrayList<>();
         synchronized (this.mTokens) {
-            Set<IBinder> keySet = this.mTokens.keySet();
+            Set<IBinder> setKeySet = this.mTokens.keySet();
             arrayList.add("Token count: " + this.mTokens.size());
             int i = 0;
-            for (IBinder iBinder : keySet) {
+            for (IBinder iBinder : setKeySet) {
                 arrayList.add(NavigationBarInflaterView.SIZE_MOD_START + i + "] " + this.mTokens.get(iBinder).tag + " - " + iBinder);
                 i++;
             }

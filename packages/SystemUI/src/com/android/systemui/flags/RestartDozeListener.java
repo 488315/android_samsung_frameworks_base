@@ -8,7 +8,6 @@ import com.android.systemui.util.settings.SecureSettings;
 import com.android.systemui.util.time.SystemClock;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class RestartDozeListener {
     public static final Companion Companion = new Companion(null);
@@ -19,12 +18,12 @@ public final class RestartDozeListener {
         @Override // com.android.systemui.plugins.statusbar.StatusBarStateController.StateListener
         public final void onDozingChanged(final boolean z) {
             RestartDozeListener.Companion companion = RestartDozeListener.Companion;
-            final RestartDozeListener restartDozeListener = RestartDozeListener.this;
+            final RestartDozeListener restartDozeListener = this.this$0;
             restartDozeListener.getClass();
             restartDozeListener.bgExecutor.execute(new Runnable() { // from class: com.android.systemui.flags.RestartDozeListener$storeSleepState$1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SecureSettings secureSettings = RestartDozeListener.this.settings;
+                    SecureSettings secureSettings = restartDozeListener.settings;
                     RestartDozeListener.Companion.getClass();
                     secureSettings.putBool(RestartDozeListener.RESTART_SLEEP_KEY, z);
                 }
@@ -36,7 +35,6 @@ public final class RestartDozeListener {
     public final StatusBarStateController statusBarStateController;
     public final SystemClock systemClock;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();

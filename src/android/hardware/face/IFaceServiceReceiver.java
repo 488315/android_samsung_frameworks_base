@@ -150,9 +150,9 @@ public interface IFaceServiceReceiver extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IFaceServiceReceiver.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IFaceServiceReceiver)) {
-                return (IFaceServiceReceiver) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IFaceServiceReceiver.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IFaceServiceReceiver)) {
+                return (IFaceServiceReceiver) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -213,64 +213,64 @@ public interface IFaceServiceReceiver extends IInterface {
             switch (i) {
                 case 1:
                     Face face = (Face) parcel.readTypedObject(Face.CREATOR);
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onEnrollResult(face, readInt);
+                    onEnrollResult(face, i3);
                     return true;
                 case 2:
-                    int readInt2 = parcel.readInt();
-                    int readInt3 = parcel.readInt();
+                    int i4 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onAcquired(readInt2, readInt3);
+                    onAcquired(i4, i5);
                     return true;
                 case 3:
                     Face face2 = (Face) parcel.readTypedObject(Face.CREATOR);
-                    int readInt4 = parcel.readInt();
-                    boolean readBoolean = parcel.readBoolean();
+                    int i6 = parcel.readInt();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    onAuthenticationSucceeded(face2, readInt4, readBoolean);
+                    onAuthenticationSucceeded(face2, i6, z);
                     return true;
                 case 4:
-                    int readInt5 = parcel.readInt();
-                    int readInt6 = parcel.readInt();
-                    boolean readBoolean2 = parcel.readBoolean();
+                    int i7 = parcel.readInt();
+                    int i8 = parcel.readInt();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    onFaceDetected(readInt5, readInt6, readBoolean2);
+                    onFaceDetected(i7, i8, z2);
                     return true;
                 case 5:
                     onAuthenticationFailed();
                     return true;
                 case 6:
-                    int readInt7 = parcel.readInt();
-                    int readInt8 = parcel.readInt();
+                    int i9 = parcel.readInt();
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onError(readInt7, readInt8);
+                    onError(i9, i10);
                     return true;
                 case 7:
                     Face face3 = (Face) parcel.readTypedObject(Face.CREATOR);
-                    int readInt9 = parcel.readInt();
+                    int i11 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onRemoved(face3, readInt9);
+                    onRemoved(face3, i11);
                     return true;
                 case 8:
-                    boolean readBoolean3 = parcel.readBoolean();
-                    int readInt10 = parcel.readInt();
+                    boolean z3 = parcel.readBoolean();
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onFeatureSet(readBoolean3, readInt10);
+                    onFeatureSet(z3, i12);
                     return true;
                 case 9:
-                    boolean readBoolean4 = parcel.readBoolean();
-                    int[] createIntArray = parcel.createIntArray();
-                    boolean[] createBooleanArray = parcel.createBooleanArray();
+                    boolean z4 = parcel.readBoolean();
+                    int[] iArrCreateIntArray = parcel.createIntArray();
+                    boolean[] zArrCreateBooleanArray = parcel.createBooleanArray();
                     parcel.enforceNoDataAvail();
-                    onFeatureGet(readBoolean4, createIntArray, createBooleanArray);
+                    onFeatureGet(z4, iArrCreateIntArray, zArrCreateBooleanArray);
                     return true;
                 case 10:
-                    int readInt11 = parcel.readInt();
-                    int readInt12 = parcel.readInt();
-                    long readLong = parcel.readLong();
+                    int i13 = parcel.readInt();
+                    int i14 = parcel.readInt();
+                    long j = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    onChallengeGenerated(readInt11, readInt12, readLong);
+                    onChallengeGenerated(i13, i14, j);
                     return true;
                 case 11:
                     FaceAuthenticationFrame faceAuthenticationFrame = (FaceAuthenticationFrame) parcel.readTypedObject(FaceAuthenticationFrame.CREATOR);
@@ -284,35 +284,35 @@ public interface IFaceServiceReceiver extends IInterface {
                     return true;
                 case 13:
                     Face face4 = (Face) parcel.readTypedObject(Face.CREATOR);
-                    int readInt13 = parcel.readInt();
-                    boolean readBoolean5 = parcel.readBoolean();
-                    byte[] createByteArray = parcel.createByteArray();
+                    int i15 = parcel.readInt();
+                    boolean z5 = parcel.readBoolean();
+                    byte[] bArrCreateByteArray = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    onSemAuthenticationSucceeded(face4, readInt13, readBoolean5, createByteArray);
+                    onSemAuthenticationSucceeded(face4, i15, z5, bArrCreateByteArray);
                     return true;
                 case 14:
                     Face face5 = (Face) parcel.readTypedObject(Face.CREATOR);
-                    int readInt14 = parcel.readInt();
-                    boolean readBoolean6 = parcel.readBoolean();
+                    int i16 = parcel.readInt();
+                    boolean z6 = parcel.readBoolean();
                     Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onSemAuthenticationSucceededWithBundle(face5, readInt14, readBoolean6, bundle);
+                    onSemAuthenticationSucceededWithBundle(face5, i16, z6, bundle);
                     return true;
                 case 15:
-                    byte[] createByteArray2 = parcel.createByteArray();
-                    int readInt15 = parcel.readInt();
-                    int readInt16 = parcel.readInt();
-                    int readInt17 = parcel.readInt();
-                    int readInt18 = parcel.readInt();
+                    byte[] bArrCreateByteArray2 = parcel.createByteArray();
+                    int i17 = parcel.readInt();
+                    int i18 = parcel.readInt();
+                    int i19 = parcel.readInt();
+                    int i20 = parcel.readInt();
                     Bundle bundle2 = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    onSemImageProcessed(createByteArray2, readInt15, readInt16, readInt17, readInt18, bundle2);
+                    onSemImageProcessed(bArrCreateByteArray2, i17, i18, i19, i20, bundle2);
                     return true;
                 case 16:
-                    int readInt19 = parcel.readInt();
-                    String readString = parcel.readString();
+                    int i21 = parcel.readInt();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    onSemStatusUpdate(readInt19, readString);
+                    onSemStatusUpdate(i21, string);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -337,217 +337,217 @@ public interface IFaceServiceReceiver extends IInterface {
 
             @Override // android.hardware.face.IFaceServiceReceiver
             public void onEnrollResult(Face face, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IFaceServiceReceiver.DESCRIPTOR);
-                    obtain.writeTypedObject(face, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IFaceServiceReceiver.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(face, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.face.IFaceServiceReceiver
             public void onAcquired(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IFaceServiceReceiver.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IFaceServiceReceiver.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.face.IFaceServiceReceiver
             public void onAuthenticationSucceeded(Face face, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IFaceServiceReceiver.DESCRIPTOR);
-                    obtain.writeTypedObject(face, 0);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IFaceServiceReceiver.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(face, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.face.IFaceServiceReceiver
             public void onFaceDetected(int i, int i2, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IFaceServiceReceiver.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IFaceServiceReceiver.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.face.IFaceServiceReceiver
             public void onAuthenticationFailed() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IFaceServiceReceiver.DESCRIPTOR);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IFaceServiceReceiver.DESCRIPTOR);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.face.IFaceServiceReceiver
             public void onError(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IFaceServiceReceiver.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IFaceServiceReceiver.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.face.IFaceServiceReceiver
             public void onRemoved(Face face, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IFaceServiceReceiver.DESCRIPTOR);
-                    obtain.writeTypedObject(face, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IFaceServiceReceiver.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(face, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.face.IFaceServiceReceiver
             public void onFeatureSet(boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IFaceServiceReceiver.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IFaceServiceReceiver.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.face.IFaceServiceReceiver
             public void onFeatureGet(boolean z, int[] iArr, boolean[] zArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IFaceServiceReceiver.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeIntArray(iArr);
-                    obtain.writeBooleanArray(zArr);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IFaceServiceReceiver.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeIntArray(iArr);
+                    parcelObtain.writeBooleanArray(zArr);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.face.IFaceServiceReceiver
             public void onChallengeGenerated(int i, int i2, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IFaceServiceReceiver.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(10, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IFaceServiceReceiver.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(10, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.face.IFaceServiceReceiver
             public void onAuthenticationFrame(FaceAuthenticationFrame faceAuthenticationFrame) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IFaceServiceReceiver.DESCRIPTOR);
-                    obtain.writeTypedObject(faceAuthenticationFrame, 0);
-                    this.mRemote.transact(11, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IFaceServiceReceiver.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(faceAuthenticationFrame, 0);
+                    this.mRemote.transact(11, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.face.IFaceServiceReceiver
             public void onEnrollmentFrame(FaceEnrollFrame faceEnrollFrame) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IFaceServiceReceiver.DESCRIPTOR);
-                    obtain.writeTypedObject(faceEnrollFrame, 0);
-                    this.mRemote.transact(12, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IFaceServiceReceiver.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(faceEnrollFrame, 0);
+                    this.mRemote.transact(12, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.face.IFaceServiceReceiver
             public void onSemAuthenticationSucceeded(Face face, int i, boolean z, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IFaceServiceReceiver.DESCRIPTOR);
-                    obtain.writeTypedObject(face, 0);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(13, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IFaceServiceReceiver.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(face, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(13, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.face.IFaceServiceReceiver
             public void onSemAuthenticationSucceededWithBundle(Face face, int i, boolean z, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IFaceServiceReceiver.DESCRIPTOR);
-                    obtain.writeTypedObject(face, 0);
-                    obtain.writeInt(i);
-                    obtain.writeBoolean(z);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(14, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IFaceServiceReceiver.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(face, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(14, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.face.IFaceServiceReceiver
             public void onSemImageProcessed(byte[] bArr, int i, int i2, int i3, int i4, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IFaceServiceReceiver.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeInt(i4);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(15, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IFaceServiceReceiver.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeInt(i4);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(15, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.face.IFaceServiceReceiver
             public void onSemStatusUpdate(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IFaceServiceReceiver.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(16, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IFaceServiceReceiver.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(16, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

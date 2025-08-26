@@ -21,12 +21,12 @@ public final class CallAudioState implements Parcelable {
         @Override // android.os.Parcelable.Creator
         public CallAudioState createFromParcel(Parcel parcel) {
             boolean z = parcel.readByte() != 0;
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
             BluetoothDevice bluetoothDevice = (BluetoothDevice) parcel.readParcelable(ClassLoader.getSystemClassLoader(), BluetoothDevice.class);
             ArrayList arrayList = new ArrayList();
             parcel.readParcelableList(arrayList, ClassLoader.getSystemClassLoader(), BluetoothDevice.class);
-            return new CallAudioState(z, readInt, readInt2, bluetoothDevice, arrayList);
+            return new CallAudioState(z, i, i2, bluetoothDevice, arrayList);
         }
 
         /* JADX WARN: Can't rename method to resolve collision */

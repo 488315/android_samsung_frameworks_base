@@ -7,7 +7,6 @@ import com.android.systemui.R;
 import com.google.android.material.R$styleable;
 import com.google.android.material.internal.ThemeEnforcement;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class LinearProgressIndicatorSpec extends BaseProgressIndicatorSpec {
     public boolean drawHorizontallyInverse;
@@ -45,12 +44,12 @@ public final class LinearProgressIndicatorSpec extends BaseProgressIndicatorSpec
         super(context, attributeSet, i, i2);
         int[] iArr = R$styleable.LinearProgressIndicator;
         int i3 = LinearProgressIndicator.$r8$clinit;
-        TypedArray obtainStyledAttributes = ThemeEnforcement.obtainStyledAttributes(context, attributeSet, iArr, R.attr.linearProgressIndicatorStyle, R.style.Widget_MaterialComponents_LinearProgressIndicator, new int[0]);
-        this.indeterminateAnimationType = obtainStyledAttributes.getInt(0, 1);
-        int i4 = obtainStyledAttributes.getInt(1, 0);
+        TypedArray typedArrayObtainStyledAttributes = ThemeEnforcement.obtainStyledAttributes(context, attributeSet, iArr, R.attr.linearProgressIndicatorStyle, R.style.Widget_MaterialComponents_LinearProgressIndicator, new int[0]);
+        this.indeterminateAnimationType = typedArrayObtainStyledAttributes.getInt(0, 1);
+        int i4 = typedArrayObtainStyledAttributes.getInt(1, 0);
         this.indicatorDirection = i4;
-        this.trackStopIndicatorSize = Math.min(obtainStyledAttributes.getDimensionPixelSize(2, 0), this.trackThickness);
-        obtainStyledAttributes.recycle();
+        this.trackStopIndicatorSize = Math.min(typedArrayObtainStyledAttributes.getDimensionPixelSize(2, 0), this.trackThickness);
+        typedArrayObtainStyledAttributes.recycle();
         validateSpec();
         this.drawHorizontallyInverse = i4 == 1;
     }

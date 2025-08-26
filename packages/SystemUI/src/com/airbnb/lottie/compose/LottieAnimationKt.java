@@ -12,18 +12,32 @@ import androidx.compose.runtime.RecomposeScopeImpl;
 import androidx.compose.runtime.SnapshotStateKt;
 import androidx.compose.ui.Alignment;
 import androidx.compose.ui.Modifier;
+import androidx.compose.ui.geometry.Size;
+import androidx.compose.ui.graphics.AndroidCanvas;
+import androidx.compose.ui.graphics.AndroidCanvas_androidKt;
+import androidx.compose.ui.graphics.Canvas;
+import androidx.compose.ui.graphics.drawscope.DrawScope;
 import androidx.compose.ui.layout.ContentScale;
+import androidx.compose.ui.layout.ScaleFactor;
 import androidx.compose.ui.unit.Dp;
+import androidx.compose.ui.unit.IntOffset;
+import androidx.compose.ui.unit.IntSizeKt;
+import com.airbnb.lottie.AsyncUpdates;
 import com.airbnb.lottie.LottieComposition;
 import com.airbnb.lottie.LottieDrawable;
 import com.airbnb.lottie.RenderMode;
+import com.airbnb.lottie.model.KeyPath;
+import com.airbnb.lottie.model.layer.CompositionLayer;
 import com.airbnb.lottie.utils.Utils;
+import com.airbnb.lottie.value.LottieFrameInfo;
+import com.airbnb.lottie.value.LottieValueCallback;
+import java.util.concurrent.ThreadPoolExecutor;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
+import kotlin.math.MathKt__MathJVMKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class LottieAnimationKt {
     public static final void LottieAnimation(final LottieComposition lottieComposition, final Function0 function0, Modifier modifier, boolean z, boolean z2, boolean z3, RenderMode renderMode, boolean z4, LottieDynamicProperties lottieDynamicProperties, Alignment alignment, ContentScale contentScale, boolean z5, Composer composer, final int i, final int i2, final int i3) {
@@ -53,32 +67,32 @@ public abstract class LottieAnimationKt {
         }
         boolean z10 = (i3 & 2048) != 0 ? true : z5;
         composerImpl2.startReplaceableGroup(-3687241);
-        Object rememberedValue = composerImpl2.rememberedValue();
+        Object objRememberedValue = composerImpl2.rememberedValue();
         Composer.Companion.getClass();
         Composer$Companion$Empty$1 composer$Companion$Empty$1 = Composer.Companion.Empty;
-        if (rememberedValue == composer$Companion$Empty$1) {
-            rememberedValue = new LottieDrawable();
-            composerImpl2.updateRememberedValue(rememberedValue);
+        if (objRememberedValue == composer$Companion$Empty$1) {
+            objRememberedValue = new LottieDrawable();
+            composerImpl2.updateRememberedValue(objRememberedValue);
         }
         composerImpl2.end(false);
-        final LottieDrawable lottieDrawable = (LottieDrawable) rememberedValue;
+        final LottieDrawable lottieDrawable = (LottieDrawable) objRememberedValue;
         composerImpl2.startReplaceableGroup(-3687241);
-        Object rememberedValue2 = composerImpl2.rememberedValue();
-        if (rememberedValue2 == composer$Companion$Empty$1) {
-            rememberedValue2 = new Matrix();
-            composerImpl2.updateRememberedValue(rememberedValue2);
+        Object objRememberedValue2 = composerImpl2.rememberedValue();
+        if (objRememberedValue2 == composer$Companion$Empty$1) {
+            objRememberedValue2 = new Matrix();
+            composerImpl2.updateRememberedValue(objRememberedValue2);
         }
         final LottieDynamicProperties lottieDynamicProperties3 = lottieDynamicProperties2;
         composerImpl2.end(false);
-        final Matrix matrix = (Matrix) rememberedValue2;
+        final Matrix matrix = (Matrix) objRememberedValue2;
         composerImpl2.startReplaceableGroup(-3687241);
-        Object rememberedValue3 = composerImpl2.rememberedValue();
-        if (rememberedValue3 == composer$Companion$Empty$1) {
-            rememberedValue3 = SnapshotStateKt.mutableStateOf$default(null);
-            composerImpl2.updateRememberedValue(rememberedValue3);
+        Object objRememberedValue3 = composerImpl2.rememberedValue();
+        if (objRememberedValue3 == composer$Companion$Empty$1) {
+            objRememberedValue3 = SnapshotStateKt.mutableStateOf$default(null);
+            composerImpl2.updateRememberedValue(objRememberedValue3);
         }
         composerImpl2.end(false);
-        final MutableState mutableState = (MutableState) rememberedValue3;
+        final MutableState mutableState = (MutableState) objRememberedValue3;
         composerImpl2.startReplaceableGroup(185151250);
         if (lottieComposition == null || lottieComposition.getDuration() == 0.0f) {
             final Modifier modifier3 = modifier2;
@@ -87,12 +101,12 @@ public abstract class LottieAnimationKt {
             final ContentScale contentScale3 = contentScale2;
             final boolean z12 = z10;
             composerImpl2.end(false);
-            RecomposeScopeImpl endRestartGroup = composerImpl2.endRestartGroup();
-            if (endRestartGroup == null) {
+            RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl2.endRestartGroup();
+            if (recomposeScopeImplEndRestartGroup == null) {
                 composerImpl = composerImpl2;
             } else {
                 composerImpl = composerImpl2;
-                endRestartGroup.block = new Function2() { // from class: com.airbnb.lottie.compose.LottieAnimationKt$LottieAnimation$1
+                recomposeScopeImplEndRestartGroup.block = new Function2() { // from class: com.airbnb.lottie.compose.LottieAnimationKt.LottieAnimation.1
                     /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super(2);
@@ -101,7 +115,7 @@ public abstract class LottieAnimationKt {
                     @Override // kotlin.jvm.functions.Function2
                     public final Object invoke(Object obj, Object obj2) {
                         ((Number) obj2).intValue();
-                        LottieAnimationKt.LottieAnimation(LottieComposition.this, function0, modifier3, z11, z7, z8, renderMode2, z9, lottieDynamicProperties3, alignment3, contentScale3, z12, (Composer) obj, i | 1, i2, i3);
+                        LottieAnimationKt.LottieAnimation(lottieComposition, function0, modifier3, z11, z7, z8, renderMode2, z9, lottieDynamicProperties3, alignment3, contentScale3, z12, (Composer) obj, i | 1, i2, i3);
                         return Unit.INSTANCE;
                     }
                 };
@@ -110,54 +124,259 @@ public abstract class LottieAnimationKt {
             return;
         }
         composerImpl2.end(false);
-        float dpScale = Utils.dpScale();
+        float fDpScale = Utils.dpScale();
         Dp.Companion companion = Dp.Companion;
-        Modifier m140sizeVpY3zN4 = SizeKt.m140sizeVpY3zN4(modifier2, lottieComposition.bounds.width() / dpScale, lottieComposition.bounds.height() / dpScale);
+        Modifier modifierM141sizeVpY3zN4 = SizeKt.m141sizeVpY3zN4(modifier2, lottieComposition.bounds.width() / fDpScale, lottieComposition.bounds.height() / fDpScale);
         final boolean z13 = z7;
         final Modifier modifier4 = modifier2;
         final ContentScale contentScale4 = contentScale2;
         final boolean z14 = z10;
         final Alignment alignment4 = alignment2;
         final boolean z15 = z9;
-        Function1 function1 = new Function1() { // from class: com.airbnb.lottie.compose.LottieAnimationKt$LottieAnimation$2
+        Function1 function1 = new Function1() { // from class: com.airbnb.lottie.compose.LottieAnimationKt.LottieAnimation.2
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
             }
 
-            /* JADX WARN: Code restructure failed: missing block: B:126:0x03ce, code lost:
-            
-                if (r1.progress != r11.animator.getAnimatedValueAbsolute()) goto L122;
-             */
-            /* JADX WARN: Code restructure failed: missing block: B:127:0x03d0, code lost:
-            
-                ((java.util.concurrent.ThreadPoolExecutor) com.airbnb.lottie.LottieDrawable.setProgressExecutor).execute(r11.updateProgressRunnable);
-             */
-            /* JADX WARN: Code restructure failed: missing block: B:131:0x0408, code lost:
-            
-                if (r1.progress != r11.animator.getAnimatedValueAbsolute()) goto L122;
-             */
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            /*
-                Code decompiled incorrectly, please refer to instructions dump.
-                To view partially-correct code enable 'Show inconsistent code' option in preferences
-            */
-            public final java.lang.Object mo779invoke(java.lang.Object r27) {
-                /*
-                    Method dump skipped, instructions count: 1038
-                    To view this dump change 'Code comments level' option to 'DEBUG'
-                */
-                throw new UnsupportedOperationException("Method not decompiled: com.airbnb.lottie.compose.LottieAnimationKt$LottieAnimation$2.mo779invoke(java.lang.Object):java.lang.Object");
+            public final Object mo781invoke(Object obj) {
+                DrawScope drawScope = (DrawScope) obj;
+                LottieComposition lottieComposition2 = lottieComposition;
+                ContentScale contentScale5 = contentScale4;
+                Alignment alignment5 = alignment4;
+                Matrix matrix2 = matrix;
+                LottieDrawable lottieDrawable2 = lottieDrawable;
+                boolean z16 = z8;
+                RenderMode renderMode3 = renderMode2;
+                LottieDynamicProperties lottieDynamicProperties4 = lottieDynamicProperties3;
+                boolean z17 = z6;
+                boolean z18 = z13;
+                boolean z19 = z15;
+                boolean z20 = z14;
+                Function0 function02 = function0;
+                MutableState<LottieDynamicProperties> mutableState2 = mutableState;
+                Canvas canvas = drawScope.getDrawContext().getCanvas();
+                long jSize = androidx.compose.ui.geometry.SizeKt.Size(lottieComposition2.bounds.width(), lottieComposition2.bounds.height());
+                long jIntSize = IntSizeKt.IntSize(MathKt__MathJVMKt.roundToInt(Size.m419getWidthimpl(drawScope.mo547getSizeNHjbRc())), MathKt__MathJVMKt.roundToInt(Size.m417getHeightimpl(drawScope.mo547getSizeNHjbRc())));
+                long jMo608computeScaleFactorH7hwNQA = contentScale5.mo608computeScaleFactorH7hwNQA(jSize, drawScope.mo547getSizeNHjbRc());
+                float fM419getWidthimpl = Size.m419getWidthimpl(jSize);
+                int i4 = ScaleFactor.$r8$clinit;
+                int i5 = (int) (jMo608computeScaleFactorH7hwNQA >> 32);
+                int i6 = (int) (jMo608computeScaleFactorH7hwNQA & 4294967295L);
+                long jMo353alignKFBX0sM = alignment5.mo353alignKFBX0sM(IntSizeKt.IntSize((int) (Float.intBitsToFloat(i5) * fM419getWidthimpl), (int) (Float.intBitsToFloat(i6) * Size.m417getHeightimpl(jSize))), jIntSize, drawScope.getLayoutDirection());
+                matrix2.reset();
+                IntOffset.Companion companion2 = IntOffset.Companion;
+                matrix2.preTranslate((int) (jMo353alignKFBX0sM >> 32), (int) (jMo353alignKFBX0sM & 4294967295L));
+                matrix2.preScale(Float.intBitsToFloat(i5), Float.intBitsToFloat(i6));
+                if (lottieDrawable2.enableMergePaths != z16) {
+                    lottieDrawable2.enableMergePaths = z16;
+                    if (lottieDrawable2.composition != null) {
+                        lottieDrawable2.buildCompositionLayer();
+                    }
+                }
+                lottieDrawable2.renderMode = renderMode3;
+                lottieDrawable2.computeRenderMode();
+                lottieDrawable2.setComposition(lottieComposition2);
+                if (lottieDynamicProperties4 != ((LottieDynamicProperties) mutableState2.getValue())) {
+                    LottieDynamicProperties lottieDynamicProperties5 = (LottieDynamicProperties) mutableState2.getValue();
+                    if (lottieDynamicProperties5 != null) {
+                        for (LottieDynamicProperty lottieDynamicProperty : lottieDynamicProperties5.intProperties) {
+                            lottieDrawable2.addValueCallback(lottieDynamicProperty.keyPath, lottieDynamicProperty.property, null);
+                        }
+                        for (LottieDynamicProperty lottieDynamicProperty2 : lottieDynamicProperties5.pointFProperties) {
+                            lottieDrawable2.addValueCallback(lottieDynamicProperty2.keyPath, lottieDynamicProperty2.property, null);
+                        }
+                        for (LottieDynamicProperty lottieDynamicProperty3 : lottieDynamicProperties5.floatProperties) {
+                            lottieDrawable2.addValueCallback(lottieDynamicProperty3.keyPath, lottieDynamicProperty3.property, null);
+                        }
+                        for (LottieDynamicProperty lottieDynamicProperty4 : lottieDynamicProperties5.scaleProperties) {
+                            lottieDrawable2.addValueCallback(lottieDynamicProperty4.keyPath, lottieDynamicProperty4.property, null);
+                        }
+                        for (LottieDynamicProperty lottieDynamicProperty5 : lottieDynamicProperties5.colorFilterProperties) {
+                            lottieDrawable2.addValueCallback(lottieDynamicProperty5.keyPath, lottieDynamicProperty5.property, null);
+                        }
+                        for (LottieDynamicProperty lottieDynamicProperty6 : lottieDynamicProperties5.intArrayProperties) {
+                            lottieDrawable2.addValueCallback(lottieDynamicProperty6.keyPath, lottieDynamicProperty6.property, null);
+                        }
+                        for (LottieDynamicProperty lottieDynamicProperty7 : lottieDynamicProperties5.typefaceProperties) {
+                            lottieDrawable2.addValueCallback(lottieDynamicProperty7.keyPath, lottieDynamicProperty7.property, null);
+                        }
+                        for (LottieDynamicProperty lottieDynamicProperty8 : lottieDynamicProperties5.bitmapProperties) {
+                            lottieDrawable2.addValueCallback(lottieDynamicProperty8.keyPath, lottieDynamicProperty8.property, null);
+                        }
+                        for (LottieDynamicProperty lottieDynamicProperty9 : lottieDynamicProperties5.charSequenceProperties) {
+                            lottieDrawable2.addValueCallback(lottieDynamicProperty9.keyPath, lottieDynamicProperty9.property, null);
+                        }
+                    }
+                    if (lottieDynamicProperties4 != null) {
+                        for (LottieDynamicProperty lottieDynamicProperty10 : lottieDynamicProperties4.intProperties) {
+                            KeyPath keyPath = lottieDynamicProperty10.keyPath;
+                            final Function1 function12 = lottieDynamicProperty10.callback;
+                            lottieDrawable2.addValueCallback(keyPath, lottieDynamicProperty10.property, new LottieValueCallback() { // from class: com.airbnb.lottie.compose.LottieDynamicPropertiesKt$toValueCallback$1
+                                @Override // com.airbnb.lottie.value.LottieValueCallback
+                                public final Object getValue(LottieFrameInfo lottieFrameInfo) {
+                                    return function12.mo781invoke(lottieFrameInfo);
+                                }
+                            });
+                        }
+                        for (LottieDynamicProperty lottieDynamicProperty11 : lottieDynamicProperties4.pointFProperties) {
+                            KeyPath keyPath2 = lottieDynamicProperty11.keyPath;
+                            final Function1 function13 = lottieDynamicProperty11.callback;
+                            lottieDrawable2.addValueCallback(keyPath2, lottieDynamicProperty11.property, new LottieValueCallback() { // from class: com.airbnb.lottie.compose.LottieDynamicPropertiesKt$toValueCallback$1
+                                @Override // com.airbnb.lottie.value.LottieValueCallback
+                                public final Object getValue(LottieFrameInfo lottieFrameInfo) {
+                                    return function13.mo781invoke(lottieFrameInfo);
+                                }
+                            });
+                        }
+                        for (LottieDynamicProperty lottieDynamicProperty12 : lottieDynamicProperties4.floatProperties) {
+                            KeyPath keyPath3 = lottieDynamicProperty12.keyPath;
+                            final Function1 function14 = lottieDynamicProperty12.callback;
+                            lottieDrawable2.addValueCallback(keyPath3, lottieDynamicProperty12.property, new LottieValueCallback() { // from class: com.airbnb.lottie.compose.LottieDynamicPropertiesKt$toValueCallback$1
+                                @Override // com.airbnb.lottie.value.LottieValueCallback
+                                public final Object getValue(LottieFrameInfo lottieFrameInfo) {
+                                    return function14.mo781invoke(lottieFrameInfo);
+                                }
+                            });
+                        }
+                        for (LottieDynamicProperty lottieDynamicProperty13 : lottieDynamicProperties4.scaleProperties) {
+                            KeyPath keyPath4 = lottieDynamicProperty13.keyPath;
+                            final Function1 function15 = lottieDynamicProperty13.callback;
+                            lottieDrawable2.addValueCallback(keyPath4, lottieDynamicProperty13.property, new LottieValueCallback() { // from class: com.airbnb.lottie.compose.LottieDynamicPropertiesKt$toValueCallback$1
+                                @Override // com.airbnb.lottie.value.LottieValueCallback
+                                public final Object getValue(LottieFrameInfo lottieFrameInfo) {
+                                    return function15.mo781invoke(lottieFrameInfo);
+                                }
+                            });
+                        }
+                        for (LottieDynamicProperty lottieDynamicProperty14 : lottieDynamicProperties4.colorFilterProperties) {
+                            KeyPath keyPath5 = lottieDynamicProperty14.keyPath;
+                            final Function1 function16 = lottieDynamicProperty14.callback;
+                            lottieDrawable2.addValueCallback(keyPath5, lottieDynamicProperty14.property, new LottieValueCallback() { // from class: com.airbnb.lottie.compose.LottieDynamicPropertiesKt$toValueCallback$1
+                                @Override // com.airbnb.lottie.value.LottieValueCallback
+                                public final Object getValue(LottieFrameInfo lottieFrameInfo) {
+                                    return function16.mo781invoke(lottieFrameInfo);
+                                }
+                            });
+                        }
+                        for (LottieDynamicProperty lottieDynamicProperty15 : lottieDynamicProperties4.intArrayProperties) {
+                            KeyPath keyPath6 = lottieDynamicProperty15.keyPath;
+                            final Function1 function17 = lottieDynamicProperty15.callback;
+                            lottieDrawable2.addValueCallback(keyPath6, lottieDynamicProperty15.property, new LottieValueCallback() { // from class: com.airbnb.lottie.compose.LottieDynamicPropertiesKt$toValueCallback$1
+                                @Override // com.airbnb.lottie.value.LottieValueCallback
+                                public final Object getValue(LottieFrameInfo lottieFrameInfo) {
+                                    return function17.mo781invoke(lottieFrameInfo);
+                                }
+                            });
+                        }
+                        for (LottieDynamicProperty lottieDynamicProperty16 : lottieDynamicProperties4.typefaceProperties) {
+                            KeyPath keyPath7 = lottieDynamicProperty16.keyPath;
+                            final Function1 function18 = lottieDynamicProperty16.callback;
+                            lottieDrawable2.addValueCallback(keyPath7, lottieDynamicProperty16.property, new LottieValueCallback() { // from class: com.airbnb.lottie.compose.LottieDynamicPropertiesKt$toValueCallback$1
+                                @Override // com.airbnb.lottie.value.LottieValueCallback
+                                public final Object getValue(LottieFrameInfo lottieFrameInfo) {
+                                    return function18.mo781invoke(lottieFrameInfo);
+                                }
+                            });
+                        }
+                        for (LottieDynamicProperty lottieDynamicProperty17 : lottieDynamicProperties4.bitmapProperties) {
+                            KeyPath keyPath8 = lottieDynamicProperty17.keyPath;
+                            final Function1 function19 = lottieDynamicProperty17.callback;
+                            lottieDrawable2.addValueCallback(keyPath8, lottieDynamicProperty17.property, new LottieValueCallback() { // from class: com.airbnb.lottie.compose.LottieDynamicPropertiesKt$toValueCallback$1
+                                @Override // com.airbnb.lottie.value.LottieValueCallback
+                                public final Object getValue(LottieFrameInfo lottieFrameInfo) {
+                                    return function19.mo781invoke(lottieFrameInfo);
+                                }
+                            });
+                        }
+                        for (LottieDynamicProperty lottieDynamicProperty18 : lottieDynamicProperties4.charSequenceProperties) {
+                            KeyPath keyPath9 = lottieDynamicProperty18.keyPath;
+                            final Function1 function110 = lottieDynamicProperty18.callback;
+                            lottieDrawable2.addValueCallback(keyPath9, lottieDynamicProperty18.property, new LottieValueCallback() { // from class: com.airbnb.lottie.compose.LottieDynamicPropertiesKt$toValueCallback$1
+                                @Override // com.airbnb.lottie.value.LottieValueCallback
+                                public final Object getValue(LottieFrameInfo lottieFrameInfo) {
+                                    return function110.mo781invoke(lottieFrameInfo);
+                                }
+                            });
+                        }
+                    }
+                    mutableState2.setValue(lottieDynamicProperties4);
+                }
+                if (lottieDrawable2.outlineMasksAndMattes != z17) {
+                    lottieDrawable2.outlineMasksAndMattes = z17;
+                    CompositionLayer compositionLayer = lottieDrawable2.compositionLayer;
+                    if (compositionLayer != null) {
+                        compositionLayer.setOutlineMasksAndMattes(z17);
+                    }
+                }
+                lottieDrawable2.isApplyingOpacityToLayersEnabled = z18;
+                lottieDrawable2.maintainOriginalImageBounds = z19;
+                if (z20 != lottieDrawable2.clipToCompositionBounds) {
+                    lottieDrawable2.clipToCompositionBounds = z20;
+                    CompositionLayer compositionLayer2 = lottieDrawable2.compositionLayer;
+                    if (compositionLayer2 != null) {
+                        compositionLayer2.clipToCompositionBounds = z20;
+                    }
+                    lottieDrawable2.invalidateSelf();
+                }
+                lottieDrawable2.setProgress(((Number) function02.invoke()).floatValue());
+                lottieDrawable2.setBounds(0, 0, lottieComposition2.bounds.width(), lottieComposition2.bounds.height());
+                android.graphics.Canvas canvas2 = AndroidCanvas_androidKt.EmptyCanvas;
+                android.graphics.Canvas canvas3 = ((AndroidCanvas) canvas).internalCanvas;
+                CompositionLayer compositionLayer3 = lottieDrawable2.compositionLayer;
+                LottieComposition lottieComposition3 = lottieDrawable2.composition;
+                if (compositionLayer3 != null && lottieComposition3 != null) {
+                    boolean z21 = lottieDrawable2.asyncUpdates == AsyncUpdates.ENABLED;
+                    if (z21) {
+                        try {
+                            lottieDrawable2.setProgressDrawLock.acquire();
+                            if (lottieDrawable2.shouldSetProgressBeforeDrawing()) {
+                                lottieDrawable2.setProgress(lottieDrawable2.animator.getAnimatedValueAbsolute());
+                            }
+                        } catch (InterruptedException unused) {
+                            if (z21) {
+                                lottieDrawable2.setProgressDrawLock.release();
+                                if (compositionLayer3.progress != lottieDrawable2.animator.getAnimatedValueAbsolute()) {
+                                }
+                            }
+                        } catch (Throwable th) {
+                            if (z21) {
+                                lottieDrawable2.setProgressDrawLock.release();
+                                if (compositionLayer3.progress != lottieDrawable2.animator.getAnimatedValueAbsolute()) {
+                                    ((ThreadPoolExecutor) LottieDrawable.setProgressExecutor).execute(lottieDrawable2.updateProgressRunnable);
+                                }
+                            }
+                            throw th;
+                        }
+                    }
+                    if (lottieDrawable2.useSoftwareRendering) {
+                        canvas3.save();
+                        canvas3.concat(matrix2);
+                        lottieDrawable2.renderAndDrawAsBitmap(canvas3, compositionLayer3);
+                        canvas3.restore();
+                    } else {
+                        compositionLayer3.draw(canvas3, matrix2, lottieDrawable2.alpha);
+                    }
+                    lottieDrawable2.isDirty = false;
+                    if (z21) {
+                        lottieDrawable2.setProgressDrawLock.release();
+                        if (compositionLayer3.progress != lottieDrawable2.animator.getAnimatedValueAbsolute()) {
+                            ((ThreadPoolExecutor) LottieDrawable.setProgressExecutor).execute(lottieDrawable2.updateProgressRunnable);
+                        }
+                    }
+                }
+                return Unit.INSTANCE;
             }
         };
         final boolean z16 = z6;
-        CanvasKt.Canvas(m140sizeVpY3zN4, function1, composerImpl2, 0);
-        RecomposeScopeImpl endRestartGroup2 = composerImpl2.endRestartGroup();
-        if (endRestartGroup2 == null) {
+        CanvasKt.Canvas(modifierM141sizeVpY3zN4, function1, composerImpl2, 0);
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup2 = composerImpl2.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup2 == null) {
             return;
         }
-        endRestartGroup2.block = new Function2() { // from class: com.airbnb.lottie.compose.LottieAnimationKt$LottieAnimation$3
+        recomposeScopeImplEndRestartGroup2.block = new Function2() { // from class: com.airbnb.lottie.compose.LottieAnimationKt.LottieAnimation.3
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(2);
@@ -166,7 +385,7 @@ public abstract class LottieAnimationKt {
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 ((Number) obj2).intValue();
-                LottieAnimationKt.LottieAnimation(LottieComposition.this, function0, modifier4, z16, z13, z8, renderMode2, z15, lottieDynamicProperties3, alignment4, contentScale4, z14, (Composer) obj, i | 1, i2, i3);
+                LottieAnimationKt.LottieAnimation(lottieComposition, function0, modifier4, z16, z13, z8, renderMode2, z15, lottieDynamicProperties3, alignment4, contentScale4, z14, (Composer) obj, i | 1, i2, i3);
                 return Unit.INSTANCE;
             }
         };

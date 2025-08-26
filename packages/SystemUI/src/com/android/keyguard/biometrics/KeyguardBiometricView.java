@@ -13,7 +13,6 @@ import com.android.systemui.R;
 import com.android.systemui.keyguard.DisplayLifecycle;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardBiometricView extends FrameLayout {
     public final Display defaultDisplay;
@@ -51,7 +50,7 @@ public class KeyguardBiometricView extends FrameLayout {
         }
         SecLockIconView secLockIconView2 = this.lockIconView;
         if (secLockIconView2 != null) {
-            secLockIconView2.setAccessibilityDelegate(new View.AccessibilityDelegate() { // from class: com.android.keyguard.biometrics.KeyguardBiometricView$onFinishInflate$1
+            secLockIconView2.setAccessibilityDelegate(new View.AccessibilityDelegate() { // from class: com.android.keyguard.biometrics.KeyguardBiometricView.onFinishInflate.1
                 @Override // android.view.View.AccessibilityDelegate
                 public final void onInitializeAccessibilityNodeInfo(View view, AccessibilityNodeInfo accessibilityNodeInfo) {
                     super.onInitializeAccessibilityNodeInfo(view, accessibilityNodeInfo);

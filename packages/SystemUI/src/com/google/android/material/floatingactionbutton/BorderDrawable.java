@@ -16,7 +16,6 @@ import com.google.android.material.drawable.DrawableUtils;
 import com.google.android.material.shape.ShapeAppearanceModel;
 import com.google.android.material.shape.ShapeAppearancePathProvider;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class BorderDrawable extends Drawable {
     public ColorStateList borderTint;
@@ -36,7 +35,6 @@ public class BorderDrawable extends Drawable {
     public final BorderState state = new BorderState();
     public boolean invalidateShader = true;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class BorderState extends Drawable.ConstantState {
         private BorderState() {
         }
@@ -64,17 +62,17 @@ public class BorderDrawable extends Drawable {
         if (this.invalidateShader) {
             Paint paint = this.paint;
             copyBounds(this.rect);
-            float height = this.borderWidth / r5.height();
-            paint.setShader(new LinearGradient(0.0f, r5.top, 0.0f, r5.bottom, new int[]{ColorUtils.compositeColors(this.topOuterStrokeColor, this.currentBorderTintColor), ColorUtils.compositeColors(this.topInnerStrokeColor, this.currentBorderTintColor), ColorUtils.compositeColors(ColorUtils.setAlphaComponent(this.topInnerStrokeColor, 0), this.currentBorderTintColor), ColorUtils.compositeColors(ColorUtils.setAlphaComponent(this.bottomInnerStrokeColor, 0), this.currentBorderTintColor), ColorUtils.compositeColors(this.bottomInnerStrokeColor, this.currentBorderTintColor), ColorUtils.compositeColors(this.bottomOuterStrokeColor, this.currentBorderTintColor)}, new float[]{0.0f, height, 0.5f, 0.5f, 1.0f - height, 1.0f}, Shader.TileMode.CLAMP));
+            float fHeight = this.borderWidth / r5.height();
+            paint.setShader(new LinearGradient(0.0f, r5.top, 0.0f, r5.bottom, new int[]{ColorUtils.compositeColors(this.topOuterStrokeColor, this.currentBorderTintColor), ColorUtils.compositeColors(this.topInnerStrokeColor, this.currentBorderTintColor), ColorUtils.compositeColors(ColorUtils.setAlphaComponent(this.topInnerStrokeColor, 0), this.currentBorderTintColor), ColorUtils.compositeColors(ColorUtils.setAlphaComponent(this.bottomInnerStrokeColor, 0), this.currentBorderTintColor), ColorUtils.compositeColors(this.bottomInnerStrokeColor, this.currentBorderTintColor), ColorUtils.compositeColors(this.bottomOuterStrokeColor, this.currentBorderTintColor)}, new float[]{0.0f, fHeight, 0.5f, 0.5f, 1.0f - fHeight, 1.0f}, Shader.TileMode.CLAMP));
             this.invalidateShader = false;
         }
         float strokeWidth = this.paint.getStrokeWidth() / 2.0f;
         copyBounds(this.rect);
         this.rectF.set(this.rect);
-        float min = Math.min(this.shapeAppearanceModel.topLeftCornerSize.getCornerSize(getBoundsAsRectF()), this.rectF.width() / 2.0f);
+        float fMin = Math.min(this.shapeAppearanceModel.topLeftCornerSize.getCornerSize(getBoundsAsRectF()), this.rectF.width() / 2.0f);
         if (this.shapeAppearanceModel.isRoundRect(getBoundsAsRectF())) {
             this.rectF.inset(strokeWidth, strokeWidth);
-            canvas.drawRoundRect(this.rectF, min, min, this.paint);
+            canvas.drawRoundRect(this.rectF, fMin, fMin, this.paint);
         }
     }
 
@@ -110,8 +108,8 @@ public class BorderDrawable extends Drawable {
         if (!this.shapeAppearanceModel.isRoundRect(getBoundsAsRectF())) {
             return true;
         }
-        int round = Math.round(this.borderWidth);
-        rect.set(round, round, round, round);
+        int iRound = Math.round(this.borderWidth);
+        rect.set(iRound, iRound, iRound, iRound);
         return true;
     }
 

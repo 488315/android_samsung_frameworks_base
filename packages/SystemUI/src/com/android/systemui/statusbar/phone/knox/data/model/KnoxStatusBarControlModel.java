@@ -6,7 +6,6 @@ import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class KnoxStatusBarControlModel {
     public int customTextSize;
@@ -65,9 +64,9 @@ public final class KnoxStatusBarControlModel {
     }
 
     public final int hashCode() {
-        int m = TransitionData$$ExternalSyntheticOutline0.m(Boolean.hashCode(this.statusBarHidden) * 31, 31, this.statusBarIconsEnabled);
+        int iM = TransitionData$$ExternalSyntheticOutline0.m(Boolean.hashCode(this.statusBarHidden) * 31, 31, this.statusBarIconsEnabled);
         String str = this.knoxStatusBarCustomText;
-        return Integer.hashCode(this.customTextWidth) + ReorderTile$$ExternalSyntheticOutline0.m(this.customTextSize, ReorderTile$$ExternalSyntheticOutline0.m(this.customTextStyle, (m + (str == null ? 0 : str.hashCode())) * 31, 31), 31);
+        return Integer.hashCode(this.customTextWidth) + ReorderTile$$ExternalSyntheticOutline0.m(this.customTextSize, ReorderTile$$ExternalSyntheticOutline0.m(this.customTextStyle, (iM + (str == null ? 0 : str.hashCode())) * 31, 31), 31);
     }
 
     public final String toString() {

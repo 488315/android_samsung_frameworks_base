@@ -31,8 +31,8 @@ public class DecoderCapabilities {
 
     public static List<VideoDecoder> getVideoDecoders() {
         ArrayList arrayList = new ArrayList();
-        int native_get_num_video_decoders = native_get_num_video_decoders();
-        for (int i = 0; i < native_get_num_video_decoders; i++) {
+        int iNative_get_num_video_decoders = native_get_num_video_decoders();
+        for (int i = 0; i < iNative_get_num_video_decoders; i++) {
             arrayList.add(VideoDecoder.values()[native_get_video_decoder_type(i)]);
         }
         return arrayList;
@@ -40,8 +40,8 @@ public class DecoderCapabilities {
 
     public static List<AudioDecoder> getAudioDecoders() {
         ArrayList arrayList = new ArrayList();
-        int native_get_num_audio_decoders = native_get_num_audio_decoders();
-        for (int i = 0; i < native_get_num_audio_decoders; i++) {
+        int iNative_get_num_audio_decoders = native_get_num_audio_decoders();
+        for (int i = 0; i < iNative_get_num_audio_decoders; i++) {
             arrayList.add(AudioDecoder.values()[native_get_audio_decoder_type(i)]);
         }
         return arrayList;

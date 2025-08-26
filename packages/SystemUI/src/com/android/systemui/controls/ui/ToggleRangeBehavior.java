@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
@@ -23,7 +24,6 @@ import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 import com.android.app.animation.Interpolators;
 import com.android.systemui.R;
-import com.android.systemui.controls.ui.ToggleRangeBehavior;
 import com.android.systemui.controls.ui.view.ControlsActionButton;
 import java.util.Arrays;
 import java.util.IllegalFormatException;
@@ -33,7 +33,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.StringCompanionObject;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ToggleRangeBehavior implements Behavior, SecBehavior, SecActionButtonBehavior {
     public static final Companion Companion = new Companion(null);
@@ -52,7 +51,6 @@ public final class ToggleRangeBehavior implements Behavior, SecBehavior, SecActi
     public CharSequence currentStatusText = "";
     public String currentRangeValue = "";
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -63,7 +61,7 @@ public final class ToggleRangeBehavior implements Behavior, SecBehavior, SecActi
     }
 
     @Override // com.android.systemui.controls.ui.Behavior
-    public final void bind(ControlWithState controlWithState, int i) {
+    public final void bind(ControlWithState controlWithState, int i) throws Resources.NotFoundException {
         Control control = controlWithState.control;
         control.getClass();
         this.control = control;
@@ -92,7 +90,7 @@ public final class ToggleRangeBehavior implements Behavior, SecBehavior, SecActi
                 }
                 ControlsActionButton controlsActionButton = controlViewHolder3.getSecControlViewHolder().actionIcon;
                 if (controlsActionButton != null) {
-                    controlsActionButton.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.controls.ui.ToggleRangeBehavior$bind$1
+                    controlsActionButton.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.controls.ui.ToggleRangeBehavior.bind.1
                         @Override // android.view.View.OnClickListener
                         public final void onClick(View view) {
                             ControlViewHolder controlViewHolder4 = ToggleRangeBehavior.this.cvh;
@@ -135,25 +133,25 @@ public final class ToggleRangeBehavior implements Behavior, SecBehavior, SecActi
             }
             controlViewHolder4.applyRenderInfo$frameworks__base__packages__SystemUI__android_common__SystemUI_core(i, this.isChecked, true);
             ControlViewHolder controlViewHolder5 = this.cvh;
-            (controlViewHolder5 != null ? controlViewHolder5 : null).layout.setAccessibilityDelegate(new View.AccessibilityDelegate() { // from class: com.android.systemui.controls.ui.ToggleRangeBehavior$bind$2
+            (controlViewHolder5 != null ? controlViewHolder5 : null).layout.setAccessibilityDelegate(new View.AccessibilityDelegate() { // from class: com.android.systemui.controls.ui.ToggleRangeBehavior.bind.2
                 @Override // android.view.View.AccessibilityDelegate
                 public final void onInitializeAccessibilityNodeInfo(View view, AccessibilityNodeInfo accessibilityNodeInfo) {
                     super.onInitializeAccessibilityNodeInfo(view, accessibilityNodeInfo);
                     ToggleRangeBehavior toggleRangeBehavior = ToggleRangeBehavior.this;
-                    ToggleRangeBehavior.Companion companion = ToggleRangeBehavior.Companion;
-                    float levelToRangeValue = toggleRangeBehavior.levelToRangeValue(0);
+                    Companion companion = ToggleRangeBehavior.Companion;
+                    float fLevelToRangeValue = toggleRangeBehavior.levelToRangeValue(0);
                     ToggleRangeBehavior toggleRangeBehavior2 = ToggleRangeBehavior.this;
                     Drawable drawable = toggleRangeBehavior2.clipLayer;
                     if (drawable == null) {
                         drawable = null;
                     }
-                    float levelToRangeValue2 = toggleRangeBehavior2.levelToRangeValue(drawable.getLevel());
-                    float levelToRangeValue3 = ToggleRangeBehavior.this.levelToRangeValue(10000);
+                    float fLevelToRangeValue2 = toggleRangeBehavior2.levelToRangeValue(drawable.getLevel());
+                    float fLevelToRangeValue3 = ToggleRangeBehavior.this.levelToRangeValue(10000);
                     RangeTemplate rangeTemplate4 = ToggleRangeBehavior.this.rangeTemplate;
                     double stepValue = (rangeTemplate4 != null ? rangeTemplate4 : null).getStepValue();
                     int i2 = (stepValue == Math.floor(stepValue) ? 1 : 0) ^ 1;
                     if (ToggleRangeBehavior.this.isChecked) {
-                        accessibilityNodeInfo.setRangeInfo(AccessibilityNodeInfo.RangeInfo.obtain(i2, levelToRangeValue, levelToRangeValue3, levelToRangeValue2));
+                        accessibilityNodeInfo.setRangeInfo(AccessibilityNodeInfo.RangeInfo.obtain(i2, fLevelToRangeValue, fLevelToRangeValue3, fLevelToRangeValue2));
                     }
                     accessibilityNodeInfo.addAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_SET_PROGRESS);
                 }
@@ -164,7 +162,7 @@ public final class ToggleRangeBehavior implements Behavior, SecBehavior, SecActi
                 }
 
                 @Override // android.view.View.AccessibilityDelegate
-                public final boolean performAccessibilityAction(View view, int i2, Bundle bundle) {
+                public final boolean performAccessibilityAction(View view, int i2, Bundle bundle) throws Resources.NotFoundException {
                     if (i2 == 16) {
                         ControlViewHolder controlViewHolder6 = ToggleRangeBehavior.this.cvh;
                         if (controlViewHolder6 == null) {
@@ -189,16 +187,16 @@ public final class ToggleRangeBehavior implements Behavior, SecBehavior, SecActi
                         if (i2 != 32 && i2 == AccessibilityNodeInfo.AccessibilityAction.ACTION_SET_PROGRESS.getId() && bundle != null && bundle.containsKey("android.view.accessibility.action.ARGUMENT_PROGRESS_VALUE")) {
                             float f = bundle.getFloat("android.view.accessibility.action.ARGUMENT_PROGRESS_VALUE");
                             ToggleRangeBehavior toggleRangeBehavior2 = ToggleRangeBehavior.this;
-                            ToggleRangeBehavior.Companion companion = ToggleRangeBehavior.Companion;
+                            Companion companion = ToggleRangeBehavior.Companion;
                             RangeTemplate rangeTemplate4 = toggleRangeBehavior2.rangeTemplate;
                             if (rangeTemplate4 == null) {
                                 rangeTemplate4 = null;
                             }
                             float minValue2 = rangeTemplate4.getMinValue();
                             RangeTemplate rangeTemplate5 = toggleRangeBehavior2.rangeTemplate;
-                            int constrainedMap = (int) MathUtils.constrainedMap(0.0f, 10000.0f, minValue2, (rangeTemplate5 != null ? rangeTemplate5 : null).getMaxValue(), f);
+                            int iConstrainedMap = (int) MathUtils.constrainedMap(0.0f, 10000.0f, minValue2, (rangeTemplate5 != null ? rangeTemplate5 : null).getMaxValue(), f);
                             ToggleRangeBehavior toggleRangeBehavior3 = ToggleRangeBehavior.this;
-                            toggleRangeBehavior3.updateRange(constrainedMap, toggleRangeBehavior3.isChecked, true);
+                            toggleRangeBehavior3.updateRange(iConstrainedMap, toggleRangeBehavior3.isChecked, true);
                             ToggleRangeBehavior.this.endUpdateRange();
                             return true;
                         }
@@ -254,7 +252,7 @@ public final class ToggleRangeBehavior implements Behavior, SecBehavior, SecActi
         if (drawable == null) {
             drawable = null;
         }
-        final float findNearestStep = findNearestStep(levelToRangeValue(drawable.getLevel()));
+        final float fFindNearestStep = findNearestStep(levelToRangeValue(drawable.getLevel()));
         ControlActionCoordinatorImpl controlActionCoordinatorImpl = (ControlActionCoordinatorImpl) controlActionCoordinator;
         controlActionCoordinatorImpl.controlsMetricsLogger.drag(controlViewHolder2, controlActionCoordinatorImpl.isLocked());
         ControlWithState controlWithState = controlViewHolder2.cws;
@@ -263,7 +261,7 @@ public final class ToggleRangeBehavior implements Behavior, SecBehavior, SecActi
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
                 int i = ControlActionCoordinatorImpl.$r8$clinit;
-                ControlViewHolder.this.action(new FloatAction(templateId, findNearestStep));
+                controlViewHolder2.action(new FloatAction(templateId, fFindNearestStep));
                 return Unit.INSTANCE;
             }
         };
@@ -292,8 +290,8 @@ public final class ToggleRangeBehavior implements Behavior, SecBehavior, SecActi
                 RangeTemplate rangeTemplate3 = this.rangeTemplate;
                 return (rangeTemplate3 != null ? rangeTemplate3 : null).getMaxValue();
             }
-            float abs = Math.abs(f - minValue);
-            if (abs >= f2) {
+            float fAbs = Math.abs(f - minValue);
+            if (fAbs >= f2) {
                 RangeTemplate rangeTemplate4 = this.rangeTemplate;
                 return minValue - (rangeTemplate4 != null ? rangeTemplate4 : null).getStepValue();
             }
@@ -302,7 +300,7 @@ public final class ToggleRangeBehavior implements Behavior, SecBehavior, SecActi
                 rangeTemplate5 = null;
             }
             minValue += rangeTemplate5.getStepValue();
-            f2 = abs;
+            f2 = fAbs;
         }
     }
 
@@ -333,10 +331,10 @@ public final class ToggleRangeBehavior implements Behavior, SecBehavior, SecActi
             context = null;
         }
         final GestureDetector gestureDetector = new GestureDetector(context, secToggleRangeGestureListener);
-        controlViewHolder.layout.setOnTouchListener(new View.OnTouchListener() { // from class: com.android.systemui.controls.ui.ToggleRangeBehavior$initialize$1
+        controlViewHolder.layout.setOnTouchListener(new View.OnTouchListener() { // from class: com.android.systemui.controls.ui.ToggleRangeBehavior.initialize.1
             @Override // android.view.View.OnTouchListener
             public final boolean onTouch(View view, MotionEvent motionEvent) {
-                ToggleRangeBehavior.Companion companion = ToggleRangeBehavior.Companion;
+                Companion companion = ToggleRangeBehavior.Companion;
                 ToggleRangeBehavior.inProgress = motionEvent.getAction() == 0 || motionEvent.getAction() == 2;
                 try {
                     if (!gestureDetector.onTouchEvent(motionEvent) && motionEvent.getAction() == 1 && secToggleRangeGestureListener.isDragging) {
@@ -390,14 +388,14 @@ public final class ToggleRangeBehavior implements Behavior, SecBehavior, SecActi
         return true;
     }
 
-    public final void updateRange(int i, boolean z, boolean z2) {
+    public final void updateRange(int i, boolean z, boolean z2) throws Resources.NotFoundException {
         ControlViewHolder controlViewHolder;
-        int max = Math.max(0, Math.min(10000, i));
+        int iMax = Math.max(0, Math.min(10000, i));
         Drawable drawable = this.clipLayer;
         if (drawable == null) {
             drawable = null;
         }
-        if (drawable.getLevel() == 0 && max > 0) {
+        if (drawable.getLevel() == 0 && iMax > 0) {
             ControlViewHolder controlViewHolder2 = this.cvh;
             if (controlViewHolder2 == null) {
                 controlViewHolder2 = null;
@@ -409,12 +407,12 @@ public final class ToggleRangeBehavior implements Behavior, SecBehavior, SecActi
             valueAnimator.cancel();
         }
         if (z2) {
-            boolean z3 = max == 0 || max == 10000;
+            boolean z3 = iMax == 0 || iMax == 10000;
             Drawable drawable2 = this.clipLayer;
             if (drawable2 == null) {
                 drawable2 = null;
             }
-            if (drawable2.getLevel() != max) {
+            if (drawable2.getLevel() != iMax) {
                 ControlViewHolder controlViewHolder3 = this.cvh;
                 ControlActionCoordinator controlActionCoordinator = (controlViewHolder3 != null ? controlViewHolder3 : null).controlActionCoordinator;
                 if (controlViewHolder3 == null) {
@@ -430,39 +428,39 @@ public final class ToggleRangeBehavior implements Behavior, SecBehavior, SecActi
                 if (drawable3 == null) {
                     drawable3 = null;
                 }
-                drawable3.setLevel(max);
+                drawable3.setLevel(iMax);
             }
         } else {
             Drawable drawable4 = this.clipLayer;
             if (drawable4 == null) {
                 drawable4 = null;
             }
-            if (max != drawable4.getLevel()) {
+            if (iMax != drawable4.getLevel()) {
                 ControlViewHolder controlViewHolder4 = this.cvh;
                 if (controlViewHolder4 == null) {
                     controlViewHolder4 = null;
                 }
-                ValueAnimator ofInt = ValueAnimator.ofInt(controlViewHolder4.clipLayer.getLevel(), max);
-                ofInt.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.controls.ui.ToggleRangeBehavior$updateRange$1$1
+                ValueAnimator valueAnimatorOfInt = ValueAnimator.ofInt(controlViewHolder4.clipLayer.getLevel(), iMax);
+                valueAnimatorOfInt.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.controls.ui.ToggleRangeBehavior$updateRange$1$1
                     @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                     public final void onAnimationUpdate(ValueAnimator valueAnimator2) {
-                        ControlViewHolder controlViewHolder5 = ToggleRangeBehavior.this.cvh;
+                        ControlViewHolder controlViewHolder5 = this.this$0.cvh;
                         if (controlViewHolder5 == null) {
                             controlViewHolder5 = null;
                         }
                         controlViewHolder5.clipLayer.setLevel(((Integer) valueAnimator2.getAnimatedValue()).intValue());
                     }
                 });
-                ofInt.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.controls.ui.ToggleRangeBehavior$updateRange$1$2
+                valueAnimatorOfInt.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.controls.ui.ToggleRangeBehavior$updateRange$1$2
                     @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                     public final void onAnimationEnd(Animator animator) {
-                        ToggleRangeBehavior.this.rangeAnimator = null;
+                        this.this$0.rangeAnimator = null;
                     }
                 });
-                ofInt.setDuration(700L);
-                ofInt.setInterpolator(Interpolators.CONTROL_STATE);
-                ofInt.start();
-                this.rangeAnimator = ofInt;
+                valueAnimatorOfInt.setDuration(700L);
+                valueAnimatorOfInt.setInterpolator(Interpolators.CONTROL_STATE);
+                valueAnimatorOfInt.start();
+                this.rangeAnimator = valueAnimatorOfInt;
             }
         }
         if (!z) {
@@ -473,26 +471,25 @@ public final class ToggleRangeBehavior implements Behavior, SecBehavior, SecActi
             controlViewHolder.setStatusText(charSequence, false);
             return;
         }
-        float levelToRangeValue = levelToRangeValue(max);
+        float fLevelToRangeValue = levelToRangeValue(iMax);
         RangeTemplate rangeTemplate = this.rangeTemplate;
         if (rangeTemplate == null) {
             rangeTemplate = null;
         }
-        String format = format(rangeTemplate.getFormatString().toString(), "%.1f", levelToRangeValue);
-        this.currentRangeValue = format;
+        String str = format(rangeTemplate.getFormatString().toString(), "%.1f", fLevelToRangeValue);
+        this.currentRangeValue = str;
         if (z2) {
             ControlViewHolder controlViewHolder6 = this.cvh;
-            (controlViewHolder6 != null ? controlViewHolder6 : null).setStatusText(format, true);
+            (controlViewHolder6 != null ? controlViewHolder6 : null).setStatusText(str, true);
             return;
         }
         ControlViewHolder controlViewHolder7 = this.cvh;
         controlViewHolder = controlViewHolder7 != null ? controlViewHolder7 : null;
-        String str = ((Object) this.currentStatusText) + " " + format;
+        String str2 = ((Object) this.currentStatusText) + " " + str;
         Set set2 = ControlViewHolder.FORCE_PANEL_DEVICES;
-        controlViewHolder.setStatusText(str, false);
+        controlViewHolder.setStatusText(str2, false);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SecToggleRangeGestureListener extends GestureDetector.SimpleOnGestureListener {
         public boolean isDragging;
         public final View v;
@@ -507,7 +504,7 @@ public final class ToggleRangeBehavior implements Behavior, SecBehavior, SecActi
         }
 
         @Override // android.view.GestureDetector.SimpleOnGestureListener, android.view.GestureDetector.OnGestureListener
-        public final boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent2, float f, float f2) {
+        public final boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent2, float f, float f2) throws Resources.NotFoundException {
             if (!this.isDragging) {
                 this.v.getParent().requestDisallowInterceptTouchEvent(true);
                 ControlViewHolder controlViewHolder = ToggleRangeBehavior.this.cvh;

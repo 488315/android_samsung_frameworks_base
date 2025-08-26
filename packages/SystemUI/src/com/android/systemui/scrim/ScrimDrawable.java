@@ -14,7 +14,6 @@ import android.graphics.drawable.Drawable;
 import android.view.animation.DecelerateInterpolator;
 import com.android.internal.graphics.ColorUtils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class ScrimDrawable extends Drawable {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -31,7 +30,6 @@ public class ScrimDrawable extends Drawable {
     public int mAlpha = 255;
     public float mBottomEdgeRadius = -1.0f;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ConcaveInfo {
         public float mPathOverlap;
         public final Path mPath = new Path();
@@ -158,12 +156,12 @@ public class ScrimDrawable extends Drawable {
             return;
         }
         final int i2 = this.mMainColor;
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-        ofFloat.setDuration(360L);
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.scrim.ScrimDrawable$$ExternalSyntheticLambda0
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+        valueAnimatorOfFloat.setDuration(360L);
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.scrim.ScrimDrawable$$ExternalSyntheticLambda0
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator2) {
-                ScrimDrawable scrimDrawable = ScrimDrawable.this;
+                ScrimDrawable scrimDrawable = this.f$0;
                 int i3 = i2;
                 int i4 = i;
                 int i5 = ScrimDrawable.$r8$clinit;
@@ -172,7 +170,7 @@ public class ScrimDrawable extends Drawable {
                 scrimDrawable.invalidateSelf();
             }
         });
-        ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.scrim.ScrimDrawable.1
+        valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.scrim.ScrimDrawable.1
             @Override // android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator, boolean z2) {
                 ScrimDrawable scrimDrawable = ScrimDrawable.this;
@@ -181,9 +179,9 @@ public class ScrimDrawable extends Drawable {
                 }
             }
         });
-        ofFloat.setInterpolator(new DecelerateInterpolator());
-        ofFloat.start();
-        this.mColorAnimation = ofFloat;
+        valueAnimatorOfFloat.setInterpolator(new DecelerateInterpolator());
+        valueAnimatorOfFloat.start();
+        this.mColorAnimation = valueAnimatorOfFloat;
     }
 
     @Override // android.graphics.drawable.Drawable

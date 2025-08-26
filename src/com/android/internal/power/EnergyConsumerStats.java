@@ -116,10 +116,10 @@ public class EnergyConsumerStats {
             }
             boolean[] zArr = new boolean[parcel.readInt()];
             parcel.readBooleanArray(zArr);
-            String[] readStringArray = parcel.readStringArray();
+            String[] stringArray = parcel.readStringArray();
             int[] iArr = new int[parcel.readInt()];
             parcel.readIntArray(iArr);
-            return new Config(zArr, readStringArray, iArr, parcel.readStringArray());
+            return new Config(zArr, stringArray, iArr, parcel.readStringArray());
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -148,12 +148,12 @@ public class EnergyConsumerStats {
             if (EnergyConsumerStats.isValidStandardBucket(i)) {
                 return DebugUtils.valueToString(EnergyConsumerStats.class, "POWER_BUCKET_", i);
             }
-            int indexToCustomBucket = EnergyConsumerStats.indexToCustomBucket(i);
+            int iIndexToCustomBucket = EnergyConsumerStats.indexToCustomBucket(i);
             StringBuilder sb = new StringBuilder("CUSTOM_");
-            sb.append(indexToCustomBucket);
-            if (!TextUtils.isEmpty(this.mCustomBucketNames[indexToCustomBucket])) {
+            sb.append(iIndexToCustomBucket);
+            if (!TextUtils.isEmpty(this.mCustomBucketNames[iIndexToCustomBucket])) {
                 sb.append('(');
-                sb.append(this.mCustomBucketNames[indexToCustomBucket]);
+                sb.append(this.mCustomBucketNames[iIndexToCustomBucket]);
                 sb.append(')');
             }
             return sb.toString();
@@ -179,15 +179,15 @@ public class EnergyConsumerStats {
 
     public EnergyConsumerStats(Config config, Parcel parcel) {
         this.mConfig = config;
-        int readInt = parcel.readInt();
-        long[] jArr = new long[readInt];
+        int i = parcel.readInt();
+        long[] jArr = new long[i];
         this.mAccumulatedChargeMicroCoulomb = jArr;
         parcel.readLongArray(jArr);
         if (parcel.readBoolean()) {
-            this.mAccumulatedMultiStateChargeMicroCoulomb = new LongMultiStateCounter[readInt];
-            for (int i = 0; i < readInt; i++) {
+            this.mAccumulatedMultiStateChargeMicroCoulomb = new LongMultiStateCounter[i];
+            for (int i2 = 0; i2 < i; i2++) {
                 if (parcel.readBoolean()) {
-                    this.mAccumulatedMultiStateChargeMicroCoulomb[i] = LongMultiStateCounter.CREATOR.createFromParcel(parcel);
+                    this.mAccumulatedMultiStateChargeMicroCoulomb[i2] = LongMultiStateCounter.CREATOR.createFromParcel(parcel);
                 }
             }
             return;
@@ -214,31 +214,31 @@ public class EnergyConsumerStats {
     }
 
     private void readSummaryFromParcel(Parcel parcel) {
-        int readInt = parcel.readInt();
-        for (int i = 0; i < readInt; i++) {
-            int readInt2 = parcel.readInt();
-            long readLong = parcel.readLong();
+        int i = parcel.readInt();
+        for (int i2 = 0; i2 < i; i2++) {
+            int i3 = parcel.readInt();
+            long j = parcel.readLong();
             LongMultiStateCounter longMultiStateCounter = null;
             if (parcel.readBoolean()) {
-                LongMultiStateCounter createFromParcel = LongMultiStateCounter.CREATOR.createFromParcel(parcel);
-                if (this.mConfig != null && createFromParcel.getStateCount() == this.mConfig.getStateNames().length) {
-                    longMultiStateCounter = createFromParcel;
+                LongMultiStateCounter longMultiStateCounterCreateFromParcel = LongMultiStateCounter.CREATOR.createFromParcel(parcel);
+                if (this.mConfig != null && longMultiStateCounterCreateFromParcel.getStateCount() == this.mConfig.getStateNames().length) {
+                    longMultiStateCounter = longMultiStateCounterCreateFromParcel;
                 }
             }
-            if (readInt2 < this.mAccumulatedChargeMicroCoulomb.length) {
-                setValueIfSupported(readInt2, readLong);
+            if (i3 < this.mAccumulatedChargeMicroCoulomb.length) {
+                setValueIfSupported(i3, j);
                 if (longMultiStateCounter != null) {
                     if (this.mAccumulatedMultiStateChargeMicroCoulomb == null) {
                         this.mAccumulatedMultiStateChargeMicroCoulomb = new LongMultiStateCounter[this.mAccumulatedChargeMicroCoulomb.length];
                     }
-                    this.mAccumulatedMultiStateChargeMicroCoulomb[readInt2] = longMultiStateCounter;
+                    this.mAccumulatedMultiStateChargeMicroCoulomb[i3] = longMultiStateCounter;
                 }
             }
         }
     }
 
     private void writeSummaryToParcel(Parcel parcel) {
-        int dataPosition = parcel.dataPosition();
+        int iDataPosition = parcel.dataPosition();
         parcel.writeInt(0);
         int i = 0;
         int i2 = 0;
@@ -260,10 +260,10 @@ public class EnergyConsumerStats {
                 }
                 i++;
             } else {
-                int dataPosition2 = parcel.dataPosition();
-                parcel.setDataPosition(dataPosition);
+                int iDataPosition2 = parcel.dataPosition();
+                parcel.setDataPosition(iDataPosition);
                 parcel.writeInt(i2);
-                parcel.setDataPosition(dataPosition2);
+                parcel.setDataPosition(iDataPosition2);
                 return;
             }
         }
@@ -380,16 +380,16 @@ public class EnergyConsumerStats {
     }
 
     public static EnergyConsumerStats createAndReadSummaryFromParcel(Config config, Parcel parcel) {
-        int readInt = parcel.readInt();
-        if (readInt == 0) {
+        int i = parcel.readInt();
+        if (i == 0) {
             return null;
         }
         if (config == null) {
-            new EnergyConsumerStats(new Config(new boolean[readInt], null, new int[0], new String[]{""})).readSummaryFromParcel(parcel);
+            new EnergyConsumerStats(new Config(new boolean[i], null, new int[0], new String[]{""})).readSummaryFromParcel(parcel);
             return null;
         }
-        if (readInt != config.getNumberOfBuckets()) {
-            Slog.wtf(TAG, "Size of MeasuredEnergyStats parcel (" + readInt + ") does not match config (" + config.getNumberOfBuckets() + ").");
+        if (i != config.getNumberOfBuckets()) {
+            Slog.wtf(TAG, "Size of MeasuredEnergyStats parcel (" + i + ") does not match config (" + config.getNumberOfBuckets() + ").");
             new EnergyConsumerStats(config).readSummaryFromParcel(parcel);
             return null;
         }

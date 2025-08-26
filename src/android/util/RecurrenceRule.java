@@ -74,13 +74,13 @@ public class RecurrenceRule implements Parcelable {
     }
 
     public RecurrenceRule(DataInputStream dataInputStream) throws IOException {
-        int readInt = dataInputStream.readInt();
-        if (readInt == 0) {
+        int i = dataInputStream.readInt();
+        if (i == 0) {
             this.start = convertZonedDateTime(BackupUtils.readString(dataInputStream));
             this.end = convertZonedDateTime(BackupUtils.readString(dataInputStream));
             this.period = convertPeriod(BackupUtils.readString(dataInputStream));
         } else {
-            throw new ProtocolException("Unknown version " + readInt);
+            throw new ProtocolException("Unknown version " + i);
         }
     }
 
@@ -153,16 +153,16 @@ public class RecurrenceRule implements Parcelable {
 
         /* JADX WARN: Multi-variable type inference failed */
         public RecurringIterator() {
-            ZonedDateTime withZoneSameInstant = RecurrenceRule.this.end != null ? RecurrenceRule.this.end : ZonedDateTime.now(RecurrenceRule.sClock).withZoneSameInstant(RecurrenceRule.this.start.getZone());
+            ZonedDateTime zonedDateTimeWithZoneSameInstant = RecurrenceRule.this.end != null ? RecurrenceRule.this.end : ZonedDateTime.now(RecurrenceRule.sClock).withZoneSameInstant(RecurrenceRule.this.start.getZone());
             if (RecurrenceRule.LOGD) {
-                Log.d(RecurrenceRule.TAG, "Resolving using anchor " + withZoneSameInstant);
+                Log.d(RecurrenceRule.TAG, "Resolving using anchor " + zonedDateTimeWithZoneSameInstant);
             }
             updateCycle();
-            while (withZoneSameInstant.toEpochSecond() > this.cycleEnd.toEpochSecond()) {
+            while (zonedDateTimeWithZoneSameInstant.toEpochSecond() > this.cycleEnd.toEpochSecond()) {
                 this.i++;
                 updateCycle();
             }
-            while (withZoneSameInstant.toEpochSecond() <= this.cycleStart.toEpochSecond()) {
+            while (zonedDateTimeWithZoneSameInstant.toEpochSecond() <= this.cycleStart.toEpochSecond()) {
                 this.i--;
                 updateCycle();
             }

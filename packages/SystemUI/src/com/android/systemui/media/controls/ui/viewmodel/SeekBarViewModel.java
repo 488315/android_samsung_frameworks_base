@@ -38,14 +38,13 @@ import java.util.Locale;
 import kotlin.Pair;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SeekBarViewModel {
     public Progress _data = new Progress(false, false, false, false, null, 0, false);
     public final MutableLiveData _progress;
     public final RepeatableExecutor bgExecutor;
     public final SeekBarViewModel$callback$1 callback;
-    public SeekBarViewModel$checkIfPollingNeeded$1 cancel;
+    public AnonymousClass1 cancel;
     public MediaControlPanel$$ExternalSyntheticLambda0 contentDescriptionListener;
     public MediaController controller;
     public MediaControlPanel$$ExternalSyntheticLambda0 enabledChangeListener;
@@ -59,7 +58,6 @@ public final class SeekBarViewModel {
     public boolean scrubbing;
     public MediaControlPanel$$ExternalSyntheticLambda0 scrubbingChangeListener;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Progress {
         public final int duration;
         public final Integer elapsedTime;
@@ -117,9 +115,9 @@ public final class SeekBarViewModel {
         }
 
         public final int hashCode() {
-            int m = TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(Boolean.hashCode(this.enabled) * 31, 31, this.seekAvailable), 31, this.playing), 31, this.scrubbing);
+            int iM = TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(Boolean.hashCode(this.enabled) * 31, 31, this.seekAvailable), 31, this.playing), 31, this.scrubbing);
             Integer num = this.elapsedTime;
-            return Boolean.hashCode(this.listening) + ReorderTile$$ExternalSyntheticOutline0.m(this.duration, (m + (num == null ? 0 : num.hashCode())) * 31, 31);
+            return Boolean.hashCode(this.listening) + ReorderTile$$ExternalSyntheticOutline0.m(this.duration, (iM + (num == null ? 0 : num.hashCode())) * 31, 31);
         }
 
         public final String toString() {
@@ -140,7 +138,6 @@ public final class SeekBarViewModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SeekBarChangeListener implements SeekBar.OnSeekBarChangeListener {
         public final FalsingManager falsingManager;
         public final SeekBarViewModel viewModel;
@@ -159,7 +156,7 @@ public final class SeekBarViewModel {
                 seekBarViewModel.bgExecutor.execute(new Runnable() { // from class: com.android.systemui.media.controls.ui.viewmodel.SeekBarViewModel$onSeekProgress$1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SeekBarViewModel seekBarViewModel2 = SeekBarViewModel.this;
+                        SeekBarViewModel seekBarViewModel2 = seekBarViewModel;
                         if (seekBarViewModel2.scrubbing) {
                             seekBarViewModel2.set_data(SeekBarViewModel.Progress.copy$default(seekBarViewModel2._data, false, false, Integer.valueOf((int) j), 0, false, 111));
                         } else {
@@ -177,92 +174,59 @@ public final class SeekBarViewModel {
             seekBarViewModel.bgExecutor.execute(new Runnable() { // from class: com.android.systemui.media.controls.ui.viewmodel.SeekBarViewModel$onSeekStarting$1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SeekBarViewModel.access$setScrubbing(SeekBarViewModel.this, true);
-                    SeekBarViewModel.this.isFalseSeek = false;
+                    SeekBarViewModel.access$setScrubbing(seekBarViewModel, true);
+                    seekBarViewModel.isFalseSeek = false;
                 }
             });
         }
 
-        /* JADX WARN: Code restructure failed: missing block: B:12:0x0040, code lost:
-        
-            if (r3.falsingManager.isFalseTouch(18) != false) goto L11;
-         */
-        /* JADX WARN: Code restructure failed: missing block: B:6:0x0036, code lost:
-        
-            if (r1 >= java.lang.Math.abs(r2 - r0.getY())) goto L9;
-         */
-        /* JADX WARN: Code restructure failed: missing block: B:7:0x0042, code lost:
-        
-            r0 = r3.viewModel;
-            r0.getClass();
-            r0.bgExecutor.execute(new com.android.systemui.media.controls.ui.viewmodel.SeekBarViewModel$onSeekFalse$1(r0));
-         */
-        /* JADX WARN: Code restructure failed: missing block: B:8:0x0051, code lost:
-        
-            r3 = r3.viewModel;
-            r0 = r4.getProgress();
-            r3.getClass();
-            r3.bgExecutor.execute(new com.android.systemui.media.controls.ui.viewmodel.SeekBarViewModel$onSeek$1(r3, r0));
-         */
-        /* JADX WARN: Code restructure failed: missing block: B:9:0x0065, code lost:
-        
-            return;
-         */
+        /* JADX WARN: Removed duplicated region for block: B:11:0x0042  */
+        /* JADX WARN: Removed duplicated region for block: B:9:0x0038  */
         @Override // android.widget.SeekBar.OnSeekBarChangeListener
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final void onStopTrackingTouch(android.widget.SeekBar r4) {
-            /*
-                r3 = this;
-                com.android.systemui.media.controls.ui.viewmodel.SeekBarViewModel r0 = r3.viewModel
-                android.view.MotionEvent r1 = r0.firstMotionEvent
-                if (r1 == 0) goto L38
-                android.view.MotionEvent r2 = r0.lastMotionEvent
-                if (r2 != 0) goto Lb
-                goto L38
-            Lb:
-                float r1 = r1.getX()
-                android.view.MotionEvent r2 = r0.lastMotionEvent
-                r2.getClass()
-                float r2 = r2.getX()
-                float r1 = r1 - r2
-                float r1 = java.lang.Math.abs(r1)
-                android.view.MotionEvent r2 = r0.firstMotionEvent
-                r2.getClass()
-                float r2 = r2.getY()
-                android.view.MotionEvent r0 = r0.lastMotionEvent
-                r0.getClass()
-                float r0 = r0.getY()
-                float r2 = r2 - r0
-                float r0 = java.lang.Math.abs(r2)
-                int r0 = (r1 > r0 ? 1 : (r1 == r0 ? 0 : -1))
-                if (r0 < 0) goto L42
-            L38:
-                com.android.systemui.plugins.FalsingManager r0 = r3.falsingManager
-                r1 = 18
-                boolean r0 = r0.isFalseTouch(r1)
-                if (r0 == 0) goto L51
-            L42:
-                com.android.systemui.media.controls.ui.viewmodel.SeekBarViewModel r0 = r3.viewModel
-                r0.getClass()
-                com.android.systemui.media.controls.ui.viewmodel.SeekBarViewModel$onSeekFalse$1 r1 = new com.android.systemui.media.controls.ui.viewmodel.SeekBarViewModel$onSeekFalse$1
-                r1.<init>(r0)
-                com.android.systemui.util.concurrency.RepeatableExecutor r0 = r0.bgExecutor
-                r0.execute(r1)
-            L51:
-                com.android.systemui.media.controls.ui.viewmodel.SeekBarViewModel r3 = r3.viewModel
-                int r4 = r4.getProgress()
-                long r0 = (long) r4
-                r3.getClass()
-                com.android.systemui.media.controls.ui.viewmodel.SeekBarViewModel$onSeek$1 r4 = new com.android.systemui.media.controls.ui.viewmodel.SeekBarViewModel$onSeek$1
-                r4.<init>(r3, r0)
-                com.android.systemui.util.concurrency.RepeatableExecutor r3 = r3.bgExecutor
-                r3.execute(r4)
-                return
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.media.controls.ui.viewmodel.SeekBarViewModel.SeekBarChangeListener.onStopTrackingTouch(android.widget.SeekBar):void");
+        public final void onStopTrackingTouch(SeekBar seekBar) {
+            SeekBarViewModel seekBarViewModel = this.viewModel;
+            MotionEvent motionEvent = seekBarViewModel.firstMotionEvent;
+            if (motionEvent != null && seekBarViewModel.lastMotionEvent != null) {
+                float x = motionEvent.getX();
+                MotionEvent motionEvent2 = seekBarViewModel.lastMotionEvent;
+                motionEvent2.getClass();
+                float fAbs = Math.abs(x - motionEvent2.getX());
+                MotionEvent motionEvent3 = seekBarViewModel.firstMotionEvent;
+                motionEvent3.getClass();
+                float y = motionEvent3.getY();
+                MotionEvent motionEvent4 = seekBarViewModel.lastMotionEvent;
+                motionEvent4.getClass();
+                if (fAbs >= Math.abs(y - motionEvent4.getY())) {
+                }
+            } else if (this.falsingManager.isFalseTouch(18)) {
+                SeekBarViewModel seekBarViewModel2 = this.viewModel;
+                seekBarViewModel2.getClass();
+                seekBarViewModel2.bgExecutor.execute(new SeekBarViewModel$onSeekFalse$1(seekBarViewModel2));
+            }
+            SeekBarViewModel seekBarViewModel3 = this.viewModel;
+            long progress = seekBar.getProgress();
+            seekBarViewModel3.getClass();
+            seekBarViewModel3.bgExecutor.execute(new SeekBarViewModel$onSeek$1(seekBarViewModel3, progress));
+        }
+    }
+
+    /* renamed from: com.android.systemui.media.controls.ui.viewmodel.SeekBarViewModel$checkIfPollingNeeded$1, reason: invalid class name */
+    public final class AnonymousClass1 implements Runnable {
+        public final /* synthetic */ Runnable $cancelPolling;
+        public final /* synthetic */ int $traceCookie;
+
+        public AnonymousClass1(Runnable runnable, int i) {
+            this.$cancelPolling = runnable;
+            this.$traceCookie = i;
+        }
+
+        @Override // java.lang.Runnable
+        public final void run() {
+            this.$cancelPolling.run();
+            Trace.endAsyncSection("SeekBarPollingPosition", this.$traceCookie);
         }
     }
 
@@ -276,34 +240,34 @@ public final class SeekBarViewModel {
         this.callback = new MediaController.Callback() { // from class: com.android.systemui.media.controls.ui.viewmodel.SeekBarViewModel$callback$1
             @Override // android.media.session.MediaController.Callback
             public final void onMetadataChanged(MediaMetadata mediaMetadata) {
-                Pair enabledStateAndDuration = SeekBarViewModel.this.getEnabledStateAndDuration(mediaMetadata);
-                boolean booleanValue = ((Boolean) enabledStateAndDuration.component1()).booleanValue();
-                int intValue = ((Number) enabledStateAndDuration.component2()).intValue();
-                SeekBarViewModel seekBarViewModel = SeekBarViewModel.this;
+                Pair enabledStateAndDuration = this.this$0.getEnabledStateAndDuration(mediaMetadata);
+                boolean zBooleanValue = ((Boolean) enabledStateAndDuration.component1()).booleanValue();
+                int iIntValue = ((Number) enabledStateAndDuration.component2()).intValue();
+                SeekBarViewModel seekBarViewModel = this.this$0;
                 SeekBarViewModel.Progress progress = seekBarViewModel._data;
-                if (progress.duration != intValue) {
-                    seekBarViewModel.set_data(SeekBarViewModel.Progress.copy$default(progress, booleanValue, false, null, intValue, false, 94));
+                if (progress.duration != iIntValue) {
+                    seekBarViewModel.set_data(SeekBarViewModel.Progress.copy$default(progress, zBooleanValue, false, null, iIntValue, false, 94));
                 }
             }
 
             @Override // android.media.session.MediaController.Callback
             public final void onPlaybackStateChanged(PlaybackState playbackState) {
-                SeekBarViewModel.this.playbackState = playbackState;
+                this.this$0.playbackState = playbackState;
                 if (playbackState != null) {
                     Integer num = 0;
-                    if (!num.equals(SeekBarViewModel.this.playbackState)) {
-                        SeekBarViewModel.this.checkIfPollingNeeded(true);
+                    if (!num.equals(this.this$0.playbackState)) {
+                        this.this$0.checkIfPollingNeeded(true);
                         return;
                     }
                 }
-                SeekBarViewModel seekBarViewModel = SeekBarViewModel.this;
+                SeekBarViewModel seekBarViewModel = this.this$0;
                 seekBarViewModel.getClass();
                 seekBarViewModel.bgExecutor.execute(new SeekBarViewModel$clearController$1(seekBarViewModel));
             }
 
             @Override // android.media.session.MediaController.Callback
             public final void onSessionDestroyed() {
-                SeekBarViewModel seekBarViewModel = SeekBarViewModel.this;
+                SeekBarViewModel seekBarViewModel = this.this$0;
                 seekBarViewModel.getClass();
                 seekBarViewModel.bgExecutor.execute(new SeekBarViewModel$clearController$1(seekBarViewModel));
             }
@@ -351,32 +315,36 @@ public final class SeekBarViewModel {
         boolean z2 = this.listening && !this.scrubbing && (playbackState = this.playbackState) != null && (playbackState.getState() == 3 || playbackState.getState() == 4 || playbackState.getState() == 5);
         MediaController mediaController = this.controller;
         MediaSession.Token sessionToken = mediaController != null ? mediaController.getSessionToken() : null;
-        int hashCode = sessionToken != null ? sessionToken.hashCode() : 0;
+        int iHashCode = sessionToken != null ? sessionToken.hashCode() : 0;
         if (z2) {
             if (this.cancel == null) {
-                Trace.beginAsyncSection("SeekBarPollingPosition", hashCode);
-                this.cancel = new SeekBarViewModel$checkIfPollingNeeded$1(this.bgExecutor.executeRepeatedly(new Runnable() { // from class: com.android.systemui.media.controls.ui.viewmodel.SeekBarViewModel$checkIfPollingNeeded$cancelPolling$1
+                Trace.beginAsyncSection("SeekBarPollingPosition", iHashCode);
+                this.cancel = new AnonymousClass1(this.bgExecutor.executeRepeatedly(new Runnable() { // from class: com.android.systemui.media.controls.ui.viewmodel.SeekBarViewModel$checkIfPollingNeeded$cancelPolling$1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        SeekBarViewModel.this.checkPlaybackPosition();
+                        this.$tmp0.checkPlaybackPosition();
                     }
-                }, 0L, 500L), hashCode);
+                }, 0L, 500L), iHashCode);
                 return;
             }
             return;
         }
         if (z) {
             checkPlaybackPosition();
-            SeekBarViewModel$checkIfPollingNeeded$1 seekBarViewModel$checkIfPollingNeeded$1 = this.cancel;
-            if (seekBarViewModel$checkIfPollingNeeded$1 != null) {
-                seekBarViewModel$checkIfPollingNeeded$1.run();
+            AnonymousClass1 anonymousClass1 = this.cancel;
+            if (anonymousClass1 != null) {
+                anonymousClass1.run();
             }
             this.cancel = null;
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:21:0x004e  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void checkPlaybackPosition() {
-        Integer num;
+        Integer numValueOf;
         int i = this._data.duration;
         PlaybackState playbackState = this.playbackState;
         if (playbackState != null) {
@@ -384,25 +352,25 @@ public final class SeekBarViewModel {
             long position = playbackState.getPosition();
             if (playbackState.getState() == 3 || playbackState.getState() == 4 || playbackState.getState() == 5) {
                 long lastPositionUpdateTime = playbackState.getLastPositionUpdateTime();
-                long elapsedRealtime = SystemClock.elapsedRealtime();
+                long jElapsedRealtime = SystemClock.elapsedRealtime();
                 if (lastPositionUpdateTime > 0) {
-                    long position2 = playbackState.getPosition() + ((long) (playbackState.getPlaybackSpeed() * (elapsedRealtime - lastPositionUpdateTime)));
+                    long position2 = playbackState.getPosition() + ((long) (playbackState.getPlaybackSpeed() * (jElapsedRealtime - lastPositionUpdateTime)));
                     if (j < 0 || position2 <= j) {
                         j = position2 < 0 ? 0L : position2;
                     }
-                    num = Integer.valueOf((int) j);
+                } else {
+                    j = position;
                 }
+                numValueOf = Integer.valueOf((int) j);
             }
-            j = position;
-            num = Integer.valueOf((int) j);
         } else {
-            num = null;
+            numValueOf = null;
         }
-        Integer num2 = num;
-        if (num2 == null || Intrinsics.areEqual(this._data.elapsedTime, num2)) {
+        Integer num = numValueOf;
+        if (num == null || Intrinsics.areEqual(this._data.elapsedTime, num)) {
             return;
         }
-        set_data(Progress.copy$default(this._data, false, false, num2, 0, false, 111));
+        set_data(Progress.copy$default(this._data, false, false, num, 0, false, 111));
     }
 
     public final Pair getEnabledStateAndDuration(MediaMetadata mediaMetadata) {
@@ -449,24 +417,24 @@ public final class SeekBarViewModel {
         this.bgExecutor.execute(new Runnable() { // from class: com.android.systemui.media.controls.ui.viewmodel.SeekBarViewModel$_data$1
             @Override // java.lang.Runnable
             public final void run() {
-                final CharSequence charSequence;
-                final CharSequence access$formatTimeContentDescription = SeekBarViewModel.access$formatTimeContentDescription(SeekBarViewModel.this, progress.duration);
+                final CharSequence charSequenceAccess$formatTimeContentDescription;
+                final CharSequence charSequenceAccess$formatTimeContentDescription2 = SeekBarViewModel.access$formatTimeContentDescription(this.this$0, progress.duration);
                 Integer num = progress.elapsedTime;
-                if (num == null || (charSequence = SeekBarViewModel.access$formatTimeContentDescription(SeekBarViewModel.this, num.intValue())) == null) {
-                    charSequence = "";
+                if (num == null || (charSequenceAccess$formatTimeContentDescription = SeekBarViewModel.access$formatTimeContentDescription(this.this$0, num.intValue())) == null) {
+                    charSequenceAccess$formatTimeContentDescription = "";
                 }
-                MediaControlPanel$$ExternalSyntheticLambda0 mediaControlPanel$$ExternalSyntheticLambda02 = SeekBarViewModel.this.contentDescriptionListener;
+                MediaControlPanel$$ExternalSyntheticLambda0 mediaControlPanel$$ExternalSyntheticLambda02 = this.this$0.contentDescriptionListener;
                 if (mediaControlPanel$$ExternalSyntheticLambda02 != null) {
                     Intent intent = MediaControlPanel.SETTINGS_INTENT;
                     final MediaControlPanel mediaControlPanel2 = mediaControlPanel$$ExternalSyntheticLambda02.f$0;
                     mediaControlPanel2.mMainExecutor.execute(new Runnable() { // from class: com.android.systemui.media.controls.ui.controller.MediaControlPanel$$ExternalSyntheticLambda2
                         @Override // java.lang.Runnable
                         public final void run() {
-                            MediaControlPanel mediaControlPanel3 = MediaControlPanel.this;
-                            CharSequence charSequence2 = charSequence;
-                            CharSequence charSequence3 = access$formatTimeContentDescription;
+                            MediaControlPanel mediaControlPanel3 = mediaControlPanel2;
+                            CharSequence charSequence = charSequenceAccess$formatTimeContentDescription;
+                            CharSequence charSequence2 = charSequenceAccess$formatTimeContentDescription2;
                             SeekBar seekBar = mediaControlPanel3.mSeekBarObserver.holder.seekBar;
-                            seekBar.setContentDescription(seekBar.getContext().getString(R.string.controls_media_seekbar_description, charSequence2, charSequence3));
+                            seekBar.setContentDescription(seekBar.getContext().getString(R.string.controls_media_seekbar_description, charSequence, charSequence2));
                         }
                     });
                 }
@@ -480,18 +448,17 @@ public final class SeekBarViewModel {
         this.playbackState = mediaController2 != null ? mediaController2.getPlaybackState() : null;
         MediaController mediaController3 = this.controller;
         Pair enabledStateAndDuration = getEnabledStateAndDuration(mediaController3 != null ? mediaController3.getMetadata() : null);
-        boolean booleanValue = ((Boolean) enabledStateAndDuration.component1()).booleanValue();
-        int intValue = ((Number) enabledStateAndDuration.component2()).intValue();
+        boolean zBooleanValue = ((Boolean) enabledStateAndDuration.component1()).booleanValue();
+        int iIntValue = ((Number) enabledStateAndDuration.component2()).intValue();
         PlaybackState playbackState = this.playbackState;
         boolean z = ((playbackState != null ? playbackState.getActions() : 0L) & 256) != 0;
         PlaybackState playbackState2 = this.playbackState;
-        Integer valueOf = playbackState2 != null ? Integer.valueOf((int) playbackState2.getPosition()) : null;
+        Integer numValueOf = playbackState2 != null ? Integer.valueOf((int) playbackState2.getPosition()) : null;
         PlaybackState playbackState3 = this.playbackState;
-        set_data(new Progress(booleanValue, z, NotificationMediaManager.isPlayingState(playbackState3 != null ? playbackState3.getState() : 0), this.scrubbing, valueOf, intValue, this.listening));
+        set_data(new Progress(zBooleanValue, z, NotificationMediaManager.isPlayingState(playbackState3 != null ? playbackState3.getState() : 0), this.scrubbing, numValueOf, iIntValue, this.listening));
         checkIfPollingNeeded(false);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SeekBarTouchListener implements View.OnTouchListener, GestureDetector.OnGestureListener {
         public final SeekBar bar;
         public final GestureDetectorCompat detector;
@@ -517,10 +484,10 @@ public final class SeekBarViewModel {
             int width = (this.bar.getWidth() - paddingLeft) - paddingRight;
             double d = this.bar.isLayoutRtl() ? ((1 - min) * width) + paddingLeft : (width * min) + paddingLeft;
             long height = this.bar.getHeight() / 2;
-            int round = (int) (Math.round(d) - height);
-            int round2 = (int) (Math.round(d) + height);
-            int round3 = Math.round(motionEvent.getX());
-            boolean z = round3 >= round && round3 <= round2;
+            int iRound = (int) (Math.round(d) - height);
+            int iRound2 = (int) (Math.round(d) + height);
+            int iRound3 = Math.round(motionEvent.getX());
+            boolean z = iRound3 >= iRound && iRound3 <= iRound2;
             this.shouldGoToSeekBar = z;
             if (z && (parent = this.bar.getParent()) != null) {
                 parent.requestDisallowInterceptTouchEvent(true);

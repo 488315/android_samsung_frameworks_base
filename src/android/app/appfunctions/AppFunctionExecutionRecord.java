@@ -109,7 +109,7 @@ public class AppFunctionExecutionRecord {
         return context.getResources().getString(17039418);
     }
 
-    private List<String> getVisibleApps(Context context) {
+    private List<String> getVisibleApps(Context context) throws SecurityException {
         List<ActivityManager.RunningTaskInfo> runningTasks = ((ActivityManager) context.getSystemService(ActivityManager.class)).getRunningTasks(Integer.MAX_VALUE);
         ArrayList arrayList = new ArrayList();
         for (int i = 0; i < runningTasks.size(); i++) {
@@ -150,7 +150,7 @@ public class AppFunctionExecutionRecord {
         }
     }
 
-    void appendPropertyToJson(JSONObject jSONObject, String str, Object obj, boolean z) throws JSONException {
+    void appendPropertyToJson(JSONObject jSONObject, String str, Object obj, boolean z) throws JSONException, ArrayIndexOutOfBoundsException, IllegalArgumentException {
         int i = 0;
         if (obj instanceof GenericDocument[]) {
             JSONArray jSONArray = new JSONArray();
@@ -180,7 +180,7 @@ public class AppFunctionExecutionRecord {
         jSONObject.put(str, jSONArray2);
     }
 
-    void appendGenericDocumentToJson(JSONObject jSONObject, GenericDocument genericDocument, boolean z) throws JSONException {
+    void appendGenericDocumentToJson(JSONObject jSONObject, GenericDocument genericDocument, boolean z) throws JSONException, ArrayIndexOutOfBoundsException, IllegalArgumentException {
         jSONObject.put(Settings.EXTRA_NAMESPACE, genericDocument.getNamespace());
         jSONObject.put("id", genericDocument.getId());
         jSONObject.put(SemShareConstants.SHARE_STAR_KEY_SCORE, genericDocument.getScore());
@@ -213,9 +213,7 @@ public class AppFunctionExecutionRecord {
         }
         if (obj instanceof String) {
             length = ((String) obj).length();
-        } else if (obj instanceof Number) {
-            length = obj.toString().length();
-        } else if (obj instanceof byte[]) {
+        } else if (!(obj instanceof Number) && (obj instanceof byte[])) {
             length = ((byte[]) obj).length;
         } else {
             length = obj.toString().length();

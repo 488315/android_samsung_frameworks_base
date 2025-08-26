@@ -52,11 +52,11 @@ public class CRLReason extends ASN1Object {
 
     public String toString() {
         String str;
-        int intValue = getValue().intValue();
-        if (intValue < 0 || intValue > 10) {
+        int iIntValue = getValue().intValue();
+        if (iIntValue < 0 || iIntValue > 10) {
             str = "invalid";
         } else {
-            str = reasonString[intValue];
+            str = reasonString[iIntValue];
         }
         return "CRLReason: " + str;
     }
@@ -71,11 +71,11 @@ public class CRLReason extends ASN1Object {
     }
 
     public static CRLReason lookup(int i) {
-        Integer valueOf = Integers.valueOf(i);
+        Integer numValueOf = Integers.valueOf(i);
         Hashtable hashtable = table;
-        if (!hashtable.containsKey(valueOf)) {
-            hashtable.put(valueOf, new CRLReason(i));
+        if (!hashtable.containsKey(numValueOf)) {
+            hashtable.put(numValueOf, new CRLReason(i));
         }
-        return (CRLReason) hashtable.get(valueOf);
+        return (CRLReason) hashtable.get(numValueOf);
     }
 }

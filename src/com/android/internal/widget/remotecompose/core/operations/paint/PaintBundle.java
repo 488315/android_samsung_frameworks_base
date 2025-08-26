@@ -97,72 +97,72 @@ public class PaintBundle implements Serializable {
         if (this.mOutArray == null) {
             this.mOutArray = this.mArray;
         }
-        int i = 0;
-        while (i < this.mPos) {
+        int iCallSetGradient = 0;
+        while (iCallSetGradient < this.mPos) {
             int[] iArr = this.mOutArray;
-            int i2 = i + 1;
-            int i3 = iArr[i];
-            switch (65535 & i3) {
+            int i = iCallSetGradient + 1;
+            int i2 = iArr[iCallSetGradient];
+            switch (65535 & i2) {
                 case 1:
-                    i += 2;
-                    paintChanges.setTextSize(Float.intBitsToFloat(iArr[i2]));
+                    iCallSetGradient += 2;
+                    paintChanges.setTextSize(Float.intBitsToFloat(iArr[i]));
                     continue;
                 case 4:
                 case 19:
-                    i += 2;
-                    paintChanges.setColor(iArr[i2]);
+                    iCallSetGradient += 2;
+                    paintChanges.setColor(iArr[i]);
                     continue;
                 case 5:
-                    i += 2;
-                    paintChanges.setStrokeWidth(Float.intBitsToFloat(iArr[i2]));
+                    iCallSetGradient += 2;
+                    paintChanges.setStrokeWidth(Float.intBitsToFloat(iArr[i]));
                     continue;
                 case 6:
-                    i += 2;
-                    paintChanges.setStrokeMiter(Float.intBitsToFloat(iArr[i2]));
+                    iCallSetGradient += 2;
+                    paintChanges.setStrokeMiter(Float.intBitsToFloat(iArr[i]));
                     continue;
                 case 7:
-                    paintChanges.setStrokeCap(i3 >> 16);
+                    paintChanges.setStrokeCap(i2 >> 16);
                     break;
                 case 8:
-                    paintChanges.setStyle(i3 >> 16);
+                    paintChanges.setStyle(i2 >> 16);
                     break;
                 case 9:
-                    i += 2;
-                    paintChanges.setShader(iArr[i2]);
+                    iCallSetGradient += 2;
+                    paintChanges.setShader(iArr[i]);
                     continue;
                 case 10:
-                    paintChanges.setImageFilterQuality(i3 >> 16);
+                    paintChanges.setImageFilterQuality(i2 >> 16);
                     break;
                 case 11:
-                    i = callSetGradient(i3, iArr, i2, paintChanges);
+                    iCallSetGradient = callSetGradient(i2, iArr, i, paintChanges);
                     continue;
                 case 12:
-                    i += 2;
-                    paintChanges.setAlpha(Float.intBitsToFloat(iArr[i2]));
+                    iCallSetGradient += 2;
+                    paintChanges.setAlpha(Float.intBitsToFloat(iArr[i]));
                     continue;
                 case 13:
                 case 20:
-                    i += 2;
-                    paintChanges.setColorFilter(iArr[i2], i3 >> 16);
+                    iCallSetGradient += 2;
+                    paintChanges.setColorFilter(iArr[i], i2 >> 16);
                     continue;
                 case 15:
-                    paintChanges.setStrokeJoin(i3 >> 16);
+                    paintChanges.setStrokeJoin(i2 >> 16);
                     break;
                 case 16:
-                    i += 2;
-                    paintChanges.setTypeFace(iArr[i2], (i3 >> 16) & 1023, (i3 >> 26) > 0);
+                    iCallSetGradient += 2;
+                    paintChanges.setTypeFace(iArr[i], (i2 >> 16) & 1023, (i2 >> 26) > 0);
                     continue;
                 case 17:
-                    paintChanges.setFilterBitmap((i3 >> 16) != 0);
+                    paintChanges.setFilterBitmap((i2 >> 16) != 0);
                     break;
                 case 18:
-                    paintChanges.setBlendMode(i3 >> 16);
+                    paintChanges.setBlendMode(i2 >> 16);
                     break;
                 case 21:
                     paintChanges.clear(8192L);
                     break;
             }
-            i = i2;
+            iCallSetGradient = i;
         }
     }
 
@@ -182,118 +182,118 @@ public class PaintBundle implements Serializable {
     }
 
     private static String asFloatStr(int i) {
-        float intBitsToFloat = Float.intBitsToFloat(i);
-        if (Float.isNaN(intBitsToFloat)) {
-            return NavigationBarInflaterView.SIZE_MOD_START + Utils.idFromNan(intBitsToFloat) + NavigationBarInflaterView.SIZE_MOD_END;
+        float fIntBitsToFloat = Float.intBitsToFloat(i);
+        if (Float.isNaN(fIntBitsToFloat)) {
+            return NavigationBarInflaterView.SIZE_MOD_START + Utils.idFromNan(fIntBitsToFloat) + NavigationBarInflaterView.SIZE_MOD_END;
         }
-        return Float.toString(intBitsToFloat);
+        return Float.toString(fIntBitsToFloat);
     }
 
     public String toString() {
         StringBuilder sb = new StringBuilder(ShaderAssembler.NEWLINE);
-        int i = 0;
-        while (i < this.mPos) {
+        int iCallPrintGradient = 0;
+        while (iCallPrintGradient < this.mPos) {
             int[] iArr = this.mArray;
-            int i2 = i + 1;
-            int i3 = iArr[i];
-            int i4 = 65535 & i3;
-            if (i4 == 1) {
+            int i = iCallPrintGradient + 1;
+            int i2 = iArr[iCallPrintGradient];
+            int i3 = 65535 & i2;
+            if (i3 == 1) {
                 StringBuilder sb2 = new StringBuilder("    TextSize(");
-                i += 2;
-                sb2.append(asFloatStr(this.mArray[i2]));
+                iCallPrintGradient += 2;
+                sb2.append(asFloatStr(this.mArray[i]));
                 sb.append(sb2.toString());
             } else {
-                switch (i4) {
+                switch (i3) {
                     case 4:
                         StringBuilder sb3 = new StringBuilder("    Color(");
-                        i += 2;
-                        sb3.append(colorInt(this.mArray[i2]));
+                        iCallPrintGradient += 2;
+                        sb3.append(colorInt(this.mArray[i]));
                         sb.append(sb3.toString());
                         continue;
                     case 5:
                         StringBuilder sb4 = new StringBuilder("    StrokeWidth(");
-                        i += 2;
-                        sb4.append(asFloatStr(this.mArray[i2]));
+                        iCallPrintGradient += 2;
+                        sb4.append(asFloatStr(this.mArray[i]));
                         sb.append(sb4.toString());
                         continue;
                     case 6:
                         StringBuilder sb5 = new StringBuilder("    StrokeMiter(");
-                        i += 2;
-                        sb5.append(asFloatStr(this.mArray[i2]));
+                        iCallPrintGradient += 2;
+                        sb5.append(asFloatStr(this.mArray[i]));
                         sb.append(sb5.toString());
                         continue;
                     case 7:
-                        sb.append("    StrokeCap(" + (i3 >> 16));
+                        sb.append("    StrokeCap(" + (i2 >> 16));
                         break;
                     case 8:
-                        sb.append("    Style(" + (i3 >> 16));
+                        sb.append("    Style(" + (i2 >> 16));
                         break;
                     case 9:
                         StringBuilder sb6 = new StringBuilder("    Shader(");
-                        i += 2;
-                        sb6.append(this.mArray[i2]);
+                        iCallPrintGradient += 2;
+                        sb6.append(this.mArray[i]);
                         sb.append(sb6.toString());
                         continue;
                     case 10:
-                        sb.append("    ImageFilterQuality(" + (i3 >> 16));
+                        sb.append("    ImageFilterQuality(" + (i2 >> 16));
                         break;
                     case 11:
-                        i = callPrintGradient(i3, iArr, i2, sb);
+                        iCallPrintGradient = callPrintGradient(i2, iArr, i, sb);
                         continue;
                     case 12:
                         StringBuilder sb7 = new StringBuilder("    Alpha(");
-                        i += 2;
-                        sb7.append(asFloatStr(this.mArray[i2]));
+                        iCallPrintGradient += 2;
+                        sb7.append(asFloatStr(this.mArray[i]));
                         sb.append(sb7.toString());
                         continue;
                     case 13:
                         StringBuilder sb8 = new StringBuilder("    ColorFilter(color=");
-                        i += 2;
-                        sb8.append(colorInt(this.mArray[i2]));
+                        iCallPrintGradient += 2;
+                        sb8.append(colorInt(this.mArray[i]));
                         sb8.append(", mode=");
-                        sb8.append(blendModeString(i3 >> 16));
+                        sb8.append(blendModeString(i2 >> 16));
                         sb.append(sb8.toString());
                         continue;
                     case 14:
-                        sb.append("    AntiAlias(" + (i3 >> 16));
+                        sb.append("    AntiAlias(" + (i2 >> 16));
                         break;
                     case 15:
-                        sb.append("    StrokeJoin(" + (i3 >> 16));
+                        sb.append("    StrokeJoin(" + (i2 >> 16));
                         break;
                     case 16:
-                        int i5 = (i3 >> 16) & 1023;
-                        boolean z = (i3 >> 26) > 0;
-                        i += 2;
-                        sb.append("    TypeFace(" + iArr[i2] + ", " + i5 + ", " + z);
+                        int i4 = (i2 >> 16) & 1023;
+                        boolean z = (i2 >> 26) > 0;
+                        iCallPrintGradient += 2;
+                        sb.append("    TypeFace(" + iArr[i] + ", " + i4 + ", " + z);
                         continue;
                     case 17:
                         StringBuilder sb9 = new StringBuilder("    FilterBitmap(");
-                        sb9.append((i3 >> 16) != 0);
+                        sb9.append((i2 >> 16) != 0);
                         sb.append(sb9.toString());
                         break;
                     case 18:
-                        sb.append("    BlendMode(" + blendModeString(i3 >> 16));
+                        sb.append("    BlendMode(" + blendModeString(i2 >> 16));
                         break;
                     case 19:
                         StringBuilder sb10 = new StringBuilder("    ColorId([");
-                        i += 2;
-                        sb10.append(this.mArray[i2]);
+                        iCallPrintGradient += 2;
+                        sb10.append(this.mArray[i]);
                         sb10.append(NavigationBarInflaterView.SIZE_MOD_END);
                         sb.append(sb10.toString());
                         continue;
                     case 20:
                         StringBuilder sb11 = new StringBuilder("    ColorFilterID(color=[");
-                        i += 2;
-                        sb11.append(this.mArray[i2]);
+                        iCallPrintGradient += 2;
+                        sb11.append(this.mArray[i]);
                         sb11.append("], mode=");
-                        sb11.append(blendModeString(i3 >> 16));
+                        sb11.append(blendModeString(i2 >> 16));
                         sb.append(sb11.toString());
                         continue;
                     case 21:
                         sb.append("    clearColorFilter");
                         break;
                 }
-                i = i2;
+                iCallPrintGradient = i;
             }
             sb.append("),\n");
         }
@@ -301,9 +301,9 @@ public class PaintBundle implements Serializable {
     }
 
     private void registerFloat(int i, RemoteContext remoteContext, VariableSupport variableSupport) {
-        float intBitsToFloat = Float.intBitsToFloat(i);
-        if (Float.isNaN(intBitsToFloat)) {
-            remoteContext.listensTo(Utils.idFromNan(intBitsToFloat), variableSupport);
+        float fIntBitsToFloat = Float.intBitsToFloat(i);
+        if (Float.isNaN(fIntBitsToFloat)) {
+            remoteContext.listensTo(Utils.idFromNan(fIntBitsToFloat), variableSupport);
         }
     }
 
@@ -562,29 +562,29 @@ public class PaintBundle implements Serializable {
         float[] fArr2 = fArr;
         if (iArr2 != null) {
             if (i3 == 0) {
-                float intBitsToFloat = Float.intBitsToFloat(iArr[i8]);
-                float intBitsToFloat2 = Float.intBitsToFloat(iArr[i8 + 1]);
-                float intBitsToFloat3 = Float.intBitsToFloat(iArr[i8 + 2]);
+                float fIntBitsToFloat = Float.intBitsToFloat(iArr[i8]);
+                float fIntBitsToFloat2 = Float.intBitsToFloat(iArr[i8 + 1]);
+                float fIntBitsToFloat3 = Float.intBitsToFloat(iArr[i8 + 2]);
                 int i10 = i8 + 4;
-                float intBitsToFloat4 = Float.intBitsToFloat(iArr[i8 + 3]);
+                float fIntBitsToFloat4 = Float.intBitsToFloat(iArr[i8 + 3]);
                 int i11 = i8 + 5;
-                paintChanges.setLinearGradient(iArr2, fArr2, intBitsToFloat, intBitsToFloat2, intBitsToFloat3, intBitsToFloat4, iArr[i10]);
+                paintChanges.setLinearGradient(iArr2, fArr2, fIntBitsToFloat, fIntBitsToFloat2, fIntBitsToFloat3, fIntBitsToFloat4, iArr[i10]);
                 return i11;
             }
             if (i3 == 1) {
-                float intBitsToFloat5 = Float.intBitsToFloat(iArr[i8]);
-                float intBitsToFloat6 = Float.intBitsToFloat(iArr[i8 + 1]);
+                float fIntBitsToFloat5 = Float.intBitsToFloat(iArr[i8]);
+                float fIntBitsToFloat6 = Float.intBitsToFloat(iArr[i8 + 1]);
                 int i12 = i8 + 3;
-                float intBitsToFloat7 = Float.intBitsToFloat(iArr[i8 + 2]);
+                float fIntBitsToFloat7 = Float.intBitsToFloat(iArr[i8 + 2]);
                 int i13 = i8 + 4;
-                paintChanges.setRadialGradient(iArr2, fArr2, intBitsToFloat5, intBitsToFloat6, intBitsToFloat7, iArr[i12]);
+                paintChanges.setRadialGradient(iArr2, fArr2, fIntBitsToFloat5, fIntBitsToFloat6, fIntBitsToFloat7, iArr[i12]);
                 return i13;
             }
             if (i3 == 2) {
                 int i14 = i8 + 1;
-                float intBitsToFloat8 = Float.intBitsToFloat(iArr[i8]);
+                float fIntBitsToFloat8 = Float.intBitsToFloat(iArr[i8]);
                 int i15 = i8 + 2;
-                paintChanges.setSweepGradient(iArr2, fArr2, intBitsToFloat8, Float.intBitsToFloat(iArr[i14]));
+                paintChanges.setSweepGradient(iArr2, fArr2, fIntBitsToFloat8, Float.intBitsToFloat(iArr[i14]));
                 return i15;
             }
         }
@@ -599,19 +599,19 @@ public class PaintBundle implements Serializable {
     }
 
     public void readBundle(WireBuffer wireBuffer) {
-        int readInt = wireBuffer.readInt();
-        if (readInt <= 0 || readInt > 1024) {
-            throw new RuntimeException("buffer corrupt paint len = " + readInt);
+        int i = wireBuffer.readInt();
+        if (i <= 0 || i > 1024) {
+            throw new RuntimeException("buffer corrupt paint len = " + i);
         }
-        this.mArray = new int[readInt];
-        int i = 0;
+        this.mArray = new int[i];
+        int i2 = 0;
         while (true) {
             int[] iArr = this.mArray;
-            if (i < iArr.length) {
-                iArr[i] = wireBuffer.readInt();
-                i++;
+            if (i2 < iArr.length) {
+                iArr[i2] = wireBuffer.readInt();
+                i2++;
             } else {
-                this.mPos = readInt;
+                this.mPos = i;
                 return;
             }
         }
@@ -983,32 +983,37 @@ public class PaintBundle implements Serializable {
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:23:0x0033  */
+    /* JADX WARN: Removed duplicated region for block: B:24:0x0037  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public void registerVars(RemoteContext remoteContext, VariableSupport variableSupport) {
         PaintBundle paintBundle;
         RemoteContext remoteContext2;
         VariableSupport variableSupport2;
-        int i = 0;
-        while (i < this.mPos) {
+        int iCallRegisterGradient = 0;
+        while (iCallRegisterGradient < this.mPos) {
             int[] iArr = this.mArray;
-            int i2 = i + 1;
-            int i3 = iArr[i];
-            int i4 = 65535 & i3;
-            if (i4 != 1) {
-                if (i4 != 9 && i4 != 16 && i4 != 4) {
-                    if (i4 != 5 && i4 != 6) {
-                        if (i4 == 19 || i4 == 20) {
+            int i = iCallRegisterGradient + 1;
+            int i2 = iArr[iCallRegisterGradient];
+            int i3 = 65535 & i2;
+            if (i3 != 1) {
+                if (i3 != 9 && i3 != 16 && i3 != 4) {
+                    if (i3 != 5 && i3 != 6) {
+                        if (i3 == 19 || i3 == 20) {
                             paintBundle = this;
                             remoteContext2 = remoteContext;
                             variableSupport2 = variableSupport;
-                            i += 2;
-                            remoteContext2.listensTo(iArr[i2], variableSupport2);
+                            iCallRegisterGradient += 2;
+                            remoteContext2.listensTo(iArr[i], variableSupport2);
                         } else {
-                            switch (i4) {
+                            switch (i3) {
                                 case 11:
                                     paintBundle = this;
                                     remoteContext2 = remoteContext;
                                     variableSupport2 = variableSupport;
-                                    i = paintBundle.callRegisterGradient(i3, iArr, i2, remoteContext2, variableSupport2);
+                                    iCallRegisterGradient = paintBundle.callRegisterGradient(i2, iArr, i, remoteContext2, variableSupport2);
                                     break;
                                 case 12:
                                     break;
@@ -1018,30 +1023,26 @@ public class PaintBundle implements Serializable {
                                     paintBundle = this;
                                     remoteContext2 = remoteContext;
                                     variableSupport2 = variableSupport;
-                                    i = i2;
+                                    iCallRegisterGradient = i;
                                     break;
                             }
                         }
-                        this = paintBundle;
-                        remoteContext = remoteContext2;
-                        variableSupport = variableSupport2;
                     }
+                } else {
+                    paintBundle = this;
+                    remoteContext2 = remoteContext;
+                    variableSupport2 = variableSupport;
+                    iCallRegisterGradient += 2;
                 }
+            } else {
                 paintBundle = this;
                 remoteContext2 = remoteContext;
                 variableSupport2 = variableSupport;
-                i += 2;
-                this = paintBundle;
-                remoteContext = remoteContext2;
-                variableSupport = variableSupport2;
-            }
-            paintBundle = this;
-            remoteContext2 = remoteContext;
-            variableSupport2 = variableSupport;
-            i += 2;
-            float intBitsToFloat = Float.intBitsToFloat(iArr[i2]);
-            if (Float.isNaN(intBitsToFloat)) {
-                remoteContext2.listensTo(Utils.idFromNan(intBitsToFloat), variableSupport2);
+                iCallRegisterGradient += 2;
+                float fIntBitsToFloat = Float.intBitsToFloat(iArr[i]);
+                if (Float.isNaN(fIntBitsToFloat)) {
+                    remoteContext2.listensTo(Utils.idFromNan(fIntBitsToFloat), variableSupport2);
+                }
             }
             this = paintBundle;
             remoteContext = remoteContext2;
@@ -1049,12 +1050,17 @@ public class PaintBundle implements Serializable {
         }
     }
 
-    /* JADX WARN: Failed to find 'out' block for switch in B:23:0x003f. Please report as an issue. */
+    /* JADX WARN: Failed to find 'out' block for switch in B:24:0x003f. Please report as an issue. */
+    /* JADX WARN: Removed duplicated region for block: B:26:0x0046  */
+    /* JADX WARN: Removed duplicated region for block: B:27:0x0049  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public void updateVariables(RemoteContext remoteContext) {
         PaintBundle paintBundle;
         RemoteContext remoteContext2;
         int[] iArr = this.mOutArray;
-        int i = 0;
+        int iUpdateFloatsInGradient = 0;
         if (iArr == null) {
             int[] iArr2 = this.mArray;
             this.mOutArray = Arrays.copyOf(iArr2, iArr2.length);
@@ -1062,27 +1068,25 @@ public class PaintBundle implements Serializable {
             int[] iArr3 = this.mArray;
             System.arraycopy(iArr3, 0, iArr, 0, iArr3.length);
         }
-        while (i < this.mPos) {
+        while (iUpdateFloatsInGradient < this.mPos) {
             int[] iArr4 = this.mArray;
-            int i2 = i + 1;
-            int i3 = iArr4[i];
-            int i4 = 65535 & i3;
-            if (i4 != 1) {
-                if (i4 != 9 && i4 != 16 && i4 != 4) {
-                    if (i4 != 5 && i4 != 6) {
-                        if (i4 == 19 || i4 == 20) {
+            int i = iUpdateFloatsInGradient + 1;
+            int i2 = iArr4[iUpdateFloatsInGradient];
+            int i3 = 65535 & i2;
+            if (i3 != 1) {
+                if (i3 != 9 && i3 != 16 && i3 != 4) {
+                    if (i3 != 5 && i3 != 6) {
+                        if (i3 == 19 || i3 == 20) {
                             paintBundle = this;
                             remoteContext2 = remoteContext;
-                            paintBundle.mOutArray[i2] = paintBundle.fixColor(iArr4[i2], remoteContext2);
-                            i += 2;
-                            this = paintBundle;
-                            remoteContext = remoteContext2;
+                            paintBundle.mOutArray[i] = paintBundle.fixColor(iArr4[i], remoteContext2);
+                            iUpdateFloatsInGradient += 2;
                         } else {
-                            switch (i4) {
+                            switch (i3) {
                                 case 11:
                                     paintBundle = this;
                                     remoteContext2 = remoteContext;
-                                    i = paintBundle.updateFloatsInGradient(i3, this.mOutArray, iArr4, i2, remoteContext2);
+                                    iUpdateFloatsInGradient = paintBundle.updateFloatsInGradient(i2, this.mOutArray, iArr4, i, remoteContext2);
                                     break;
                                 case 12:
                                     break;
@@ -1091,32 +1095,30 @@ public class PaintBundle implements Serializable {
                                 default:
                                     paintBundle = this;
                                     remoteContext2 = remoteContext;
-                                    i = i2;
+                                    iUpdateFloatsInGradient = i;
                                     break;
                             }
-                            this = paintBundle;
-                            remoteContext = remoteContext2;
                         }
                     }
+                } else {
+                    paintBundle = this;
+                    remoteContext2 = remoteContext;
+                    iUpdateFloatsInGradient += 2;
                 }
+            } else {
                 paintBundle = this;
                 remoteContext2 = remoteContext;
-                i += 2;
-                this = paintBundle;
-                remoteContext = remoteContext2;
+                paintBundle.mOutArray[i] = paintBundle.fixFloatVar(iArr4[i], remoteContext2);
+                iUpdateFloatsInGradient += 2;
             }
-            paintBundle = this;
-            remoteContext2 = remoteContext;
-            paintBundle.mOutArray[i2] = paintBundle.fixFloatVar(iArr4[i2], remoteContext2);
-            i += 2;
             this = paintBundle;
             remoteContext = remoteContext2;
         }
     }
 
     private int fixFloatVar(int i, RemoteContext remoteContext) {
-        float intBitsToFloat = Float.intBitsToFloat(i);
-        return Float.isNaN(intBitsToFloat) ? Float.floatToRawIntBits(remoteContext.getFloat(Utils.idFromNan(intBitsToFloat))) : i;
+        float fIntBitsToFloat = Float.intBitsToFloat(i);
+        return Float.isNaN(fIntBitsToFloat) ? Float.floatToRawIntBits(remoteContext.getFloat(Utils.idFromNan(fIntBitsToFloat))) : i;
     }
 
     private int fixColor(int i, RemoteContext remoteContext) {
@@ -1217,97 +1219,97 @@ public class PaintBundle implements Serializable {
     public void serialize(MapSerializer mapSerializer) {
         mapSerializer.addType("PaintBundle");
         ArrayList arrayList = new ArrayList();
-        int i = 0;
-        while (i < this.mPos) {
+        int iSerializeGradient = 0;
+        while (iSerializeGradient < this.mPos) {
             int[] iArr = this.mArray;
-            int i2 = i + 1;
-            int i3 = iArr[i];
-            int i4 = 65535 & i3;
-            if (i4 != 1) {
-                switch (i4) {
+            int i = iSerializeGradient + 1;
+            int i2 = iArr[iSerializeGradient];
+            int i3 = 65535 & i2;
+            if (i3 != 1) {
+                switch (i3) {
                     case 4:
-                        i += 2;
-                        arrayList.add(MapSerializer.orderedOf("type", "Color", "color", colorInt(iArr[i2])));
+                        iSerializeGradient += 2;
+                        arrayList.add(MapSerializer.orderedOf("type", "Color", "color", colorInt(iArr[i])));
                         continue;
                     case 5:
-                        i += 2;
-                        arrayList.add(MapSerializer.orderedOf("type", "StrokeWidth", "width", getVariable(iArr[i2])));
+                        iSerializeGradient += 2;
+                        arrayList.add(MapSerializer.orderedOf("type", "StrokeWidth", "width", getVariable(iArr[i])));
                         continue;
                     case 6:
-                        i += 2;
-                        arrayList.add(MapSerializer.orderedOf("type", "StrokeMiter", "miter", getVariable(iArr[i2])));
+                        iSerializeGradient += 2;
+                        arrayList.add(MapSerializer.orderedOf("type", "StrokeMiter", "miter", getVariable(iArr[i])));
                         continue;
                     case 7:
-                        arrayList.add(MapSerializer.orderedOf("type", "StrokeCap", "cap", Integer.valueOf(i3 >> 16)));
+                        arrayList.add(MapSerializer.orderedOf("type", "StrokeCap", "cap", Integer.valueOf(i2 >> 16)));
                         break;
                     case 8:
-                        arrayList.add(MapSerializer.orderedOf("type", "Style", "style", Integer.valueOf(i3 >> 16)));
+                        arrayList.add(MapSerializer.orderedOf("type", "Style", "style", Integer.valueOf(i2 >> 16)));
                         break;
                     case 9:
-                        i += 2;
-                        arrayList.add(MapSerializer.orderedOf("type", "Shader", "id", Integer.valueOf(iArr[i2])));
+                        iSerializeGradient += 2;
+                        arrayList.add(MapSerializer.orderedOf("type", "Shader", "id", Integer.valueOf(iArr[i])));
                         continue;
                     case 10:
-                        arrayList.add(MapSerializer.orderedOf("type", "ImageFilterQuality", "quality", Integer.valueOf(i3 >> 16)));
+                        arrayList.add(MapSerializer.orderedOf("type", "ImageFilterQuality", "quality", Integer.valueOf(i2 >> 16)));
                         break;
                     case 11:
-                        i = serializeGradient(i3, iArr, i2, arrayList);
+                        iSerializeGradient = serializeGradient(i2, iArr, i, arrayList);
                         continue;
                     case 12:
-                        i += 2;
-                        arrayList.add(MapSerializer.orderedOf("type", "Alpha", "alpha", getVariable(iArr[i2])));
+                        iSerializeGradient += 2;
+                        arrayList.add(MapSerializer.orderedOf("type", "Alpha", "alpha", getVariable(iArr[i])));
                         continue;
                     case 13:
-                        i += 2;
-                        arrayList.add(MapSerializer.orderedOf("type", "ColorFilter", "color", colorInt(iArr[i2]), "mode", blendModeString(i3 >> 16)));
+                        iSerializeGradient += 2;
+                        arrayList.add(MapSerializer.orderedOf("type", "ColorFilter", "color", colorInt(iArr[i]), "mode", blendModeString(i2 >> 16)));
                         continue;
                     case 14:
-                        arrayList.add(MapSerializer.orderedOf("type", "AntiAlias", "enabled", Boolean.valueOf((i3 >> 16) != 0)));
+                        arrayList.add(MapSerializer.orderedOf("type", "AntiAlias", "enabled", Boolean.valueOf((i2 >> 16) != 0)));
                         break;
                     case 15:
-                        arrayList.add(MapSerializer.orderedOf("type", "StrokeJoin", "strokeJoin", Integer.valueOf(i3 >> 16)));
+                        arrayList.add(MapSerializer.orderedOf("type", "StrokeJoin", "strokeJoin", Integer.valueOf(i2 >> 16)));
                         break;
                     case 16:
-                        float f = (i3 >> 16) & 1023;
-                        boolean z = (i3 >> 26) > 0;
-                        i += 2;
-                        arrayList.add(MapSerializer.orderedOf("type", "FontFamily", "fontFamily", Integer.valueOf(iArr[i2])));
+                        float f = (i2 >> 16) & 1023;
+                        boolean z = (i2 >> 26) > 0;
+                        iSerializeGradient += 2;
+                        arrayList.add(MapSerializer.orderedOf("type", "FontFamily", "fontFamily", Integer.valueOf(iArr[i])));
                         arrayList.add(MapSerializer.orderedOf("type", "FontWeight", "weight", Float.valueOf(f)));
                         arrayList.add(MapSerializer.orderedOf("type", "TypeFace", FontListParser.STYLE_ITALIC, Boolean.valueOf(z)));
                         continue;
                     case 17:
-                        arrayList.add(MapSerializer.orderedOf("type", "FilterBitmap", "enabled", Boolean.valueOf((i3 >> 16) != 0)));
+                        arrayList.add(MapSerializer.orderedOf("type", "FilterBitmap", "enabled", Boolean.valueOf((i2 >> 16) != 0)));
                         break;
                     case 18:
-                        arrayList.add(MapSerializer.orderedOf("type", "BlendMode", "mode", blendModeString(i3 >> 16)));
+                        arrayList.add(MapSerializer.orderedOf("type", "BlendMode", "mode", blendModeString(i2 >> 16)));
                         break;
                     case 19:
-                        i += 2;
-                        arrayList.add(MapSerializer.orderedOf("type", "ColorId", "id", Integer.valueOf(iArr[i2])));
+                        iSerializeGradient += 2;
+                        arrayList.add(MapSerializer.orderedOf("type", "ColorId", "id", Integer.valueOf(iArr[i])));
                         continue;
                     case 20:
-                        i += 2;
-                        arrayList.add(MapSerializer.orderedOf("type", "ColorFilterID", "id", Integer.valueOf(iArr[i2]), "mode", blendModeString(i3 >> 16)));
+                        iSerializeGradient += 2;
+                        arrayList.add(MapSerializer.orderedOf("type", "ColorFilterID", "id", Integer.valueOf(iArr[i]), "mode", blendModeString(i2 >> 16)));
                         continue;
                     case 21:
                         arrayList.add(MapSerializer.orderedOf("type", "ClearColorFilter"));
                         break;
                 }
-                i = i2;
+                iSerializeGradient = i;
             } else {
-                i += 2;
-                arrayList.add(MapSerializer.orderedOf("type", "TextSize", Contract.DatabaseSize.PATH, getVariable(iArr[i2])));
+                iSerializeGradient += 2;
+                arrayList.add(MapSerializer.orderedOf("type", "TextSize", Contract.DatabaseSize.PATH, getVariable(iArr[i])));
             }
         }
         mapSerializer.add("operations", arrayList);
     }
 
     private static Map<String, Object> getVariable(int i) {
-        float intBitsToFloat = Float.intBitsToFloat(i);
-        if (Float.isNaN(intBitsToFloat)) {
-            return MapSerializer.orderedOf("type", "Variable", "id", Integer.valueOf(Utils.idFromNan(intBitsToFloat)));
+        float fIntBitsToFloat = Float.intBitsToFloat(i);
+        if (Float.isNaN(fIntBitsToFloat)) {
+            return MapSerializer.orderedOf("type", "Variable", "id", Integer.valueOf(Utils.idFromNan(fIntBitsToFloat)));
         }
-        return MapSerializer.orderedOf("type", "Value", "value", Float.valueOf(intBitsToFloat));
+        return MapSerializer.orderedOf("type", "Value", "value", Float.valueOf(fIntBitsToFloat));
     }
 
     private static int serializeGradient(int i, int[] iArr, int i2, List<Map<String, Object>> list) {

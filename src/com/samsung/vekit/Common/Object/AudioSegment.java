@@ -24,12 +24,12 @@ public class AudioSegment {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public AudioSegment m9804clone() {
+    public AudioSegment m9817clone() {
         AudioSegment audioSegment = new AudioSegment(this.key);
         audioSegment.enable = this.enable;
         Iterator<AudioRegion> it = this.regionList.iterator();
         while (it.hasNext()) {
-            audioSegment.addRegion(it.next().m9803clone());
+            audioSegment.addRegion(it.next().m9816clone());
         }
         return audioSegment;
     }

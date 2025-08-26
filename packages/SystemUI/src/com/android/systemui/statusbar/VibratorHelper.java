@@ -11,7 +11,6 @@ import java.util.Objects;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class VibratorHelper {
     public static final VibrationEffect BIOMETRIC_ERROR_VIBRATION_EFFECT = null;
@@ -85,7 +84,7 @@ public class VibratorHelper {
             this.mExecutor.execute(new Runnable() { // from class: com.android.systemui.statusbar.VibratorHelper$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    VibratorHelper vibratorHelper = VibratorHelper.this;
+                    VibratorHelper vibratorHelper = this.f$0;
                     vibratorHelper.mVibrator.vibrate(vibrationEffect);
                 }
             });

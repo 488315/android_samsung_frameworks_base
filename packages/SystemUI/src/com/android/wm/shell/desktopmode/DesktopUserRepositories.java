@@ -20,6 +20,7 @@ import com.android.wm.shell.sysui.UserChangeListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -29,7 +30,6 @@ import kotlin.jvm.internal.SpreadBuilder;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DesktopUserRepositories implements UserChangeListener {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -42,7 +42,6 @@ public final class DesktopUserRepositories implements UserChangeListener {
     public final Map userIdToProfileIdsMap;
     public final UserManager userManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -77,14 +76,14 @@ public final class DesktopUserRepositories implements UserChangeListener {
                         int currentUser = ActivityManager.getCurrentUser();
                         desktopUserRepositories.userId = currentUser;
                         Map map = desktopUserRepositories.userIdToProfileIdsMap;
-                        Integer valueOf = Integer.valueOf(currentUser);
+                        Integer numValueOf = Integer.valueOf(currentUser);
                         List profiles = desktopUserRepositories.userManager.getProfiles(desktopUserRepositories.userId);
                         ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(profiles, 10));
                         Iterator it = profiles.iterator();
                         while (it.hasNext()) {
                             arrayList.add(Integer.valueOf(((UserInfo) it.next()).id));
                         }
-                        map.put(valueOf, arrayList);
+                        map.put(numValueOf, arrayList);
                     }
                 }
             }, this);
@@ -92,21 +91,21 @@ public final class DesktopUserRepositories implements UserChangeListener {
         if (!DesktopModeFlags.ENABLE_DESKTOP_WINDOWING_HSUM.isTrue() || DesktopExperienceFlags.ENABLE_MULTIPLE_DESKTOPS_BACKEND.isTrue()) {
             return;
         }
-        Integer valueOf = Integer.valueOf(this.userId);
+        Integer numValueOf = Integer.valueOf(this.userId);
         List profiles = userManager.getProfiles(this.userId);
         ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(profiles, 10));
         Iterator it = profiles.iterator();
         while (it.hasNext()) {
             arrayList.add(Integer.valueOf(((UserInfo) it.next()).id));
         }
-        linkedHashMap.put(valueOf, arrayList);
+        linkedHashMap.put(numValueOf, arrayList);
     }
 
     public static void logD$3(String str, Object... objArr) {
         ShellProtoLogGroup shellProtoLogGroup = ShellProtoLogGroup.WM_SHELL_DESKTOP_MODE;
-        String concat = "%s: ".concat(str);
-        SpreadBuilder m = DesktopDisplayEventHandler$$ExternalSyntheticOutline0.m(2, "DesktopUserRepositories", objArr);
-        ProtoLog.d(shellProtoLogGroup, concat, m.list.toArray(new Object[m.list.size()]));
+        String strConcat = "%s: ".concat(str);
+        SpreadBuilder spreadBuilderM = DesktopDisplayEventHandler$$ExternalSyntheticOutline0.m(2, "DesktopUserRepositories", objArr);
+        ProtoLog.d(shellProtoLogGroup, strConcat, spreadBuilderM.list.toArray(new Object[spreadBuilderM.list.size()]));
     }
 
     public final DesktopRepository getCurrent() {
@@ -114,17 +113,31 @@ public final class DesktopUserRepositories implements UserChangeListener {
     }
 
     public final DesktopRepository getProfile(int i) {
-        boolean isTrue = DesktopModeFlags.ENABLE_DESKTOP_WINDOWING_HSUM.isTrue();
+        boolean zIsTrue = DesktopModeFlags.ENABLE_DESKTOP_WINDOWING_HSUM.isTrue();
         DesktopUserRepositories$desktopRepoByUserId$1 desktopUserRepositories$desktopRepoByUserId$1 = this.desktopRepoByUserId;
-        if (isTrue) {
+        if (zIsTrue) {
             for (Map.Entry entry : ((LinkedHashMap) this.userIdToProfileIdsMap).entrySet()) {
-                int intValue = ((Number) entry.getKey()).intValue();
+                int iIntValue = ((Number) entry.getKey()).intValue();
                 if (((List) entry.getValue()).contains(Integer.valueOf(i))) {
-                    return desktopUserRepositories$desktopRepoByUserId$1.getOrCreate(intValue);
+                    return desktopUserRepositories$desktopRepoByUserId$1.getOrCreate(iIntValue);
                 }
             }
         }
         return desktopUserRepositories$desktopRepoByUserId$1.getOrCreate(i);
+    }
+
+    public final Set getRepositoriesWithDeskId(int i) {
+        LinkedHashSet linkedHashSet = new LinkedHashSet();
+        DesktopUserRepositories$desktopRepoByUserId$1 desktopUserRepositories$desktopRepoByUserId$1 = this.desktopRepoByUserId;
+        int size = desktopUserRepositories$desktopRepoByUserId$1.size();
+        for (int i2 = 0; i2 < size; i2++) {
+            desktopUserRepositories$desktopRepoByUserId$1.keyAt(i2);
+            DesktopRepository desktopRepository = (DesktopRepository) desktopUserRepositories$desktopRepoByUserId$1.valueAt(i2);
+            if (desktopRepository.getAllDeskIds().contains(Integer.valueOf(i))) {
+                linkedHashSet.add(desktopRepository);
+            }
+        }
+        return linkedHashSet;
     }
 
     @Override // com.android.wm.shell.sysui.UserChangeListener
@@ -138,9 +151,9 @@ public final class DesktopUserRepositories implements UserChangeListener {
             while (it.hasNext()) {
                 arrayList.add(Integer.valueOf(((UserInfo) it.next()).id));
             }
-            Set keySet = ((LinkedHashMap) this.userIdToProfileIdsMap).keySet();
+            Set setKeySet = ((LinkedHashMap) this.userIdToProfileIdsMap).keySet();
             ArrayList arrayList2 = new ArrayList();
-            for (Object obj : keySet) {
+            for (Object obj : setKeySet) {
                 if (!arrayList.contains(Integer.valueOf(((Number) obj).intValue()))) {
                     arrayList2.add(obj);
                 }
@@ -150,9 +163,9 @@ public final class DesktopUserRepositories implements UserChangeListener {
             while (i2 < size) {
                 Object obj2 = arrayList2.get(i2);
                 i2++;
-                int intValue = ((Number) obj2).intValue();
-                this.userIdToProfileIdsMap.remove(Integer.valueOf(intValue));
-                this.desktopRepoByUserId.remove(intValue);
+                int iIntValue = ((Number) obj2).intValue();
+                this.userIdToProfileIdsMap.remove(Integer.valueOf(iIntValue));
+                this.desktopRepoByUserId.remove(iIntValue);
             }
             BuildersKt.launch$default(this.mainCoroutineScope, null, null, new DesktopUserRepositories$sanitizeUsers$2(this, arrayList2, null), 3);
         }
@@ -163,14 +176,14 @@ public final class DesktopUserRepositories implements UserChangeListener {
         logD$3("onUserProfilesChanged profiles=%s", list.toString());
         if (DesktopModeFlags.ENABLE_DESKTOP_WINDOWING_HSUM.isTrue()) {
             Map map = this.userIdToProfileIdsMap;
-            Integer valueOf = Integer.valueOf(this.userId);
+            Integer numValueOf = Integer.valueOf(this.userId);
             List list2 = list;
             ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(list2, 10));
             Iterator it = list2.iterator();
             while (it.hasNext()) {
                 arrayList.add(Integer.valueOf(((UserInfo) it.next()).id));
             }
-            map.put(valueOf, arrayList);
+            map.put(numValueOf, arrayList);
         }
     }
 }

@@ -2,6 +2,7 @@ package com.android.systemui.privacy;
 
 import android.content.Context;
 import com.android.systemui.R;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -13,7 +14,6 @@ import kotlin.collections.MapsKt___MapsKt;
 import kotlin.comparisons.ComparisonsKt__ComparisonsKt;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class PrivacyChipBuilder {
     public final Context context;
@@ -29,20 +29,20 @@ public final class PrivacyChipBuilder {
         LinkedHashMap linkedHashMap = new LinkedHashMap();
         for (PrivacyItem privacyItem : list2) {
             PrivacyApplication privacyApplication = privacyItem.application;
-            Object obj = linkedHashMap.get(privacyApplication);
-            if (obj == null) {
-                obj = new ArrayList();
-                linkedHashMap.put(privacyApplication, obj);
+            Object arrayList = linkedHashMap.get(privacyApplication);
+            if (arrayList == null) {
+                arrayList = new ArrayList();
+                linkedHashMap.put(privacyApplication, arrayList);
             }
-            ((List) obj).add(privacyItem.privacyType);
+            ((List) arrayList).add(privacyItem.privacyType);
         }
         final int i = 0;
         final int i2 = 1;
         CollectionsKt___CollectionsKt.sortedWith(MapsKt___MapsKt.toList(linkedHashMap), ComparisonsKt__ComparisonsKt.compareBy(new Function1() { // from class: com.android.systemui.privacy.PrivacyChipBuilder$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj2) {
-                Pair pair = (Pair) obj2;
+            public final Object mo781invoke(Object obj) {
+                Pair pair = (Pair) obj;
                 switch (i) {
                     case 0:
                         return Integer.valueOf(-((List) pair.getSecond()).size());
@@ -53,8 +53,8 @@ public final class PrivacyChipBuilder {
         }, new Function1() { // from class: com.android.systemui.privacy.PrivacyChipBuilder$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj2) {
-                Pair pair = (Pair) obj2;
+            public final Object mo781invoke(Object obj) {
+                Pair pair = (Pair) obj;
                 switch (i2) {
                     case 0:
                         return Integer.valueOf(-((List) pair.getSecond()).size());
@@ -63,15 +63,15 @@ public final class PrivacyChipBuilder {
                 }
             }
         }));
-        ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(list2, 10));
+        ArrayList arrayList2 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(list2, 10));
         Iterator<T> it = list2.iterator();
         while (it.hasNext()) {
-            arrayList.add(((PrivacyItem) it.next()).privacyType);
+            arrayList2.add(((PrivacyItem) it.next()).privacyType);
         }
-        this.types = CollectionsKt___CollectionsKt.sorted(CollectionsKt___CollectionsKt.distinct(arrayList));
+        this.types = CollectionsKt___CollectionsKt.sorted(CollectionsKt___CollectionsKt.distinct(arrayList2));
     }
 
-    public final String joinTypes() {
+    public final String joinTypes() throws IOException {
         int size = this.types.size();
         if (size == 0) {
             return "";
@@ -85,9 +85,9 @@ public final class PrivacyChipBuilder {
         while (it.hasNext()) {
             arrayList.add(((PrivacyType) it.next()).getName(this.context));
         }
-        List subList = arrayList.subList(0, arrayList.size() - 1);
+        List listSubList = arrayList.subList(0, arrayList.size() - 1);
         StringBuilder sb = new StringBuilder();
-        CollectionsKt___CollectionsKt.joinTo$default(subList, sb, this.separator, null, 124);
+        CollectionsKt___CollectionsKt.joinTo$default(listSubList, sb, this.separator, null, 124);
         sb.append(this.lastSeparator);
         sb.append(CollectionsKt___CollectionsKt.last(arrayList));
         return sb.toString();

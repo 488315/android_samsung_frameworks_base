@@ -15,10 +15,10 @@ import java.util.List;
 import kotlin.Unit;
 import kotlin.collections.CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1;
 import kotlin.jvm.functions.Function1;
-import kotlin.sequences.FilteringSequence$iterator$1;
+import kotlin.sequences.FilteringSequence;
+import kotlin.sequences.FilteringSequence.AnonymousClass1;
 import kotlin.sequences.SequencesKt___SequencesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class RenderStageManager implements PipelineDumpable {
     public ShadeViewManager$viewRenderer$1 viewRenderer;
@@ -27,13 +27,13 @@ public final class RenderStageManager implements PipelineDumpable {
     public final List onAfterRenderEntryListeners = new ArrayList();
 
     public final void dispatchOnAfterRenderEntries(ShadeViewManager$viewRenderer$1 shadeViewManager$viewRenderer$1, List list) {
-        boolean isEnabled = Trace.isEnabled();
-        if (isEnabled) {
+        boolean zIsEnabled = Trace.isEnabled();
+        if (zIsEnabled) {
             TraceUtilsKt.beginSlice("RenderStageManager.dispatchOnAfterRenderEntries");
         }
         try {
             if (((ArrayList) this.onAfterRenderEntryListeners).isEmpty()) {
-                if (isEnabled) {
+                if (zIsEnabled) {
                     TraceUtilsKt.endSlice();
                     return;
                 }
@@ -85,11 +85,11 @@ public final class RenderStageManager implements PipelineDumpable {
                 }
             }
             Unit unit = Unit.INSTANCE;
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
         } catch (Throwable th) {
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
             throw th;
@@ -97,27 +97,27 @@ public final class RenderStageManager implements PipelineDumpable {
     }
 
     public final void dispatchOnAfterRenderGroups(ShadeViewManager$viewRenderer$1 shadeViewManager$viewRenderer$1, List list) {
-        boolean isEnabled = Trace.isEnabled();
-        if (isEnabled) {
+        boolean zIsEnabled = Trace.isEnabled();
+        if (zIsEnabled) {
             TraceUtilsKt.beginSlice("RenderStageManager.dispatchOnAfterRenderGroups");
         }
         try {
             if (((ArrayList) this.onAfterRenderGroupListeners).isEmpty()) {
-                if (isEnabled) {
+                if (zIsEnabled) {
                     TraceUtilsKt.endSlice();
                     return;
                 }
                 return;
             }
-            FilteringSequence$iterator$1 filteringSequence$iterator$1 = new FilteringSequence$iterator$1(SequencesKt___SequencesKt.filter(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(list), new Function1() { // from class: com.android.systemui.statusbar.notification.collection.render.RenderStageManager$dispatchOnAfterRenderGroups$lambda$6$$inlined$filterIsInstance$1
+            FilteringSequence.AnonymousClass1 anonymousClass1 = SequencesKt___SequencesKt.filter(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(list), new Function1() { // from class: com.android.systemui.statusbar.notification.collection.render.RenderStageManager$dispatchOnAfterRenderGroups$lambda$6$$inlined$filterIsInstance$1
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
+                public final Object mo781invoke(Object obj) {
                     return Boolean.valueOf(obj instanceof GroupEntry);
                 }
-            }));
-            while (filteringSequence$iterator$1.hasNext()) {
-                GroupEntry groupEntry = (GroupEntry) filteringSequence$iterator$1.next();
+            }).new AnonymousClass1();
+            while (anonymousClass1.hasNext()) {
+                GroupEntry groupEntry = (GroupEntry) anonymousClass1.next();
                 NotifViewController groupController = shadeViewManager$viewRenderer$1.getGroupController(groupEntry);
                 ArrayList arrayList = (ArrayList) this.onAfterRenderGroupListeners;
                 int size = arrayList.size();
@@ -129,11 +129,11 @@ public final class RenderStageManager implements PipelineDumpable {
                 }
             }
             Unit unit = Unit.INSTANCE;
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
         } catch (Throwable th) {
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
             throw th;

@@ -19,21 +19,21 @@ public class FileHelper {
     }
 
     public static String getVEEditFilePath(Context context, Uri uri) {
-        String str = null;
+        String string = null;
         if (uri != null) {
-            String uri2 = uri.toString();
-            if (uri2.length() > 0) {
-                LogS.d("TranscodeLib", "uriStr :" + uri2);
-                if (!uri2.startsWith(SecContentProviderURI.CONTENT)) {
-                    return uri2.startsWith("file://") ? uri.getPath() : uri2;
+            String string2 = uri.toString();
+            if (string2.length() > 0) {
+                LogS.d("TranscodeLib", "uriStr :" + string2);
+                if (!string2.startsWith(SecContentProviderURI.CONTENT)) {
+                    return string2.startsWith("file://") ? uri.getPath() : string2;
                 }
-                if (uri2.startsWith(MediaStore.Video.Media.EXTERNAL_CONTENT_URI.toString()) || uri2.startsWith(MediaStore.Video.Media.INTERNAL_CONTENT_URI.toString())) {
+                if (string2.startsWith(MediaStore.Video.Media.EXTERNAL_CONTENT_URI.toString()) || string2.startsWith(MediaStore.Video.Media.INTERNAL_CONTENT_URI.toString())) {
                     Cursor videoFileInfoByUri = getVideoFileInfoByUri(uri, context);
                     if (videoFileInfoByUri != null) {
                         try {
                             if (videoFileInfoByUri.getCount() > 0) {
                                 videoFileInfoByUri.moveToFirst();
-                                str = videoFileInfoByUri.getString(videoFileInfoByUri.getColumnIndex("_data"));
+                                string = videoFileInfoByUri.getString(videoFileInfoByUri.getColumnIndex("_data"));
                             }
                         } catch (Throwable th) {
                             if (videoFileInfoByUri != null) {
@@ -49,7 +49,7 @@ public class FileHelper {
                     if (videoFileInfoByUri != null) {
                         videoFileInfoByUri.close();
                     }
-                    return str;
+                    return string;
                 }
                 return uri.getPath();
             }
@@ -76,11 +76,11 @@ public class FileHelper {
             int size = list.size();
             for (int i = 0; i < size; i++) {
                 StorageVolume storageVolume = (StorageVolume) list.get(i);
-                String semGetSubSystem = storageVolume.semGetSubSystem();
-                if (semGetSubSystem != null) {
-                    String semGetPath = storageVolume.semGetPath();
-                    if ("sd".equals(semGetSubSystem)) {
-                        return semGetPath;
+                String strSemGetSubSystem = storageVolume.semGetSubSystem();
+                if (strSemGetSubSystem != null) {
+                    String strSemGetPath = storageVolume.semGetPath();
+                    if ("sd".equals(strSemGetSubSystem)) {
+                        return strSemGetPath;
                     }
                 }
             }

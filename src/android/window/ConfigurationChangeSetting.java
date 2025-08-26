@@ -59,17 +59,17 @@ public abstract class ConfigurationChangeSetting implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public ConfigurationChangeSetting createFromParcel(Parcel parcel) {
-            int readInt = parcel.readInt();
+            int i = parcel.readInt();
             if (this.mIsSystem) {
-                return ((ConfigurationChangeSettingInternal) LocalServices.getService(ConfigurationChangeSettingInternal.class)).createImplFromParcel(readInt, parcel);
+                return ((ConfigurationChangeSettingInternal) LocalServices.getService(ConfigurationChangeSettingInternal.class)).createImplFromParcel(i, parcel);
             }
-            if (readInt == 0) {
+            if (i == 0) {
                 return DensitySetting.CREATOR.createFromParcel(parcel);
             }
-            if (readInt == 1) {
+            if (i == 1) {
                 return FontScaleSetting.CREATOR.createFromParcel(parcel);
             }
-            throw new IllegalArgumentException("Unknown setting type " + readInt);
+            throw new IllegalArgumentException("Unknown setting type " + i);
         }
 
         /* JADX WARN: Can't rename method to resolve collision */

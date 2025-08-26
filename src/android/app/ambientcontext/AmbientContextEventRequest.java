@@ -9,6 +9,7 @@ import android.os.PersistableBundle;
 import android.util.ArraySet;
 import com.android.internal.util.AnnotationValidations;
 import com.android.internal.util.Preconditions;
+import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -63,18 +64,18 @@ public final class AmbientContextEventRequest implements Parcelable {
     }
 
     @Override // android.os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
         parcel.writeArraySet(new ArraySet<>(this.mEventTypes));
         parcel.writeTypedObject(this.mOptions, i);
     }
 
     private AmbientContextEventRequest(Parcel parcel) {
-        ArraySet<? extends Object> readArraySet = parcel.readArraySet(Integer.class.getClassLoader());
+        ArraySet<? extends Object> arraySet = parcel.readArraySet(Integer.class.getClassLoader());
         PersistableBundle persistableBundle = (PersistableBundle) parcel.readTypedObject(PersistableBundle.CREATOR);
-        this.mEventTypes = readArraySet;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readArraySet);
-        Preconditions.checkArgument(!readArraySet.isEmpty(), "eventTypes cannot be empty");
-        Iterator<? extends Object> it = readArraySet.iterator();
+        this.mEventTypes = arraySet;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) arraySet);
+        Preconditions.checkArgument(!arraySet.isEmpty(), "eventTypes cannot be empty");
+        Iterator<? extends Object> it = arraySet.iterator();
         while (it.hasNext()) {
             AnnotationValidations.validate((Class<? extends Annotation>) AmbientContextEvent.EventCode.class, (Annotation) null, ((Integer) it.next()).intValue());
         }

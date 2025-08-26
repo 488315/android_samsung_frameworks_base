@@ -4,13 +4,11 @@ import kotlin.NoWhenBranchMatchedException;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class KTypeProjection {
     public final KType type;
     public final KVariance variance;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -20,7 +18,6 @@ public final class KTypeProjection {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -75,9 +72,9 @@ public final class KTypeProjection {
 
     public final int hashCode() {
         KVariance kVariance = this.variance;
-        int hashCode = (kVariance == null ? 0 : kVariance.hashCode()) * 31;
+        int iHashCode = (kVariance == null ? 0 : kVariance.hashCode()) * 31;
         KType kType = this.type;
-        return hashCode + (kType != null ? kType.hashCode() : 0);
+        return iHashCode + (kType != null ? kType.hashCode() : 0);
     }
 
     public final String toString() {

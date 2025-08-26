@@ -14,7 +14,6 @@ import kotlin.collections.EmptyList;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class SnapshotKt {
     public static List applyObservers;
@@ -28,7 +27,7 @@ public abstract class SnapshotKt {
     public static final Function1 emptyLambda = new Function1() { // from class: androidx.compose.runtime.snapshots.SnapshotKt$emptyLambda$1
         @Override // kotlin.jvm.functions.Function1
         /* renamed from: invoke */
-        public final /* bridge */ /* synthetic */ Object mo779invoke(Object obj) {
+        public final /* bridge */ /* synthetic */ Object mo781invoke(Object obj) {
             return Unit.INSTANCE;
         }
     };
@@ -62,9 +61,9 @@ public abstract class SnapshotKt {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                Function1.this.mo779invoke(obj);
-                function12.mo779invoke(obj);
+            public final Object mo781invoke(Object obj) {
+                function1.mo781invoke(obj);
+                function12.mo781invoke(obj);
                 return Unit.INSTANCE;
             }
         };
@@ -76,17 +75,17 @@ public abstract class SnapshotKt {
         long[] jArr2;
         SnapshotIdSet snapshotIdSet3;
         int i;
-        StateRecord readable;
+        StateRecord stateRecord;
         long j2 = j;
         MutableScatterSet modified$runtime_release = mutableSnapshot.getModified$runtime_release();
         if (modified$runtime_release != null) {
-            SnapshotIdSet or = mutableSnapshot.getInvalid$runtime_release().set(mutableSnapshot.getSnapshotId()).or(mutableSnapshot.previousIds);
+            SnapshotIdSet snapshotIdSetOr = mutableSnapshot.getInvalid$runtime_release().set(mutableSnapshot.getSnapshotId()).or(mutableSnapshot.previousIds);
             Object[] objArr = modified$runtime_release.elements;
             long[] jArr3 = modified$runtime_release.metadata;
             int length = jArr3.length - 2;
             if (length >= 0) {
                 int i2 = 0;
-                HashMap hashMap = null;
+                HashMap map = null;
                 while (true) {
                     long j3 = jArr3[i2];
                     if ((((~j3) << 7) & j3 & (-9187201950435737472L)) != -9187201950435737472L) {
@@ -99,29 +98,29 @@ public abstract class SnapshotKt {
                                 StateRecord firstStateRecord = stateObject.getFirstStateRecord();
                                 jArr2 = jArr3;
                                 i = i3;
-                                StateRecord readable2 = readable(firstStateRecord, j2, snapshotIdSet);
-                                if (readable2 == null || (readable = readable(firstStateRecord, j2, or)) == null || readable2.equals(readable)) {
-                                    snapshotIdSet3 = or;
+                                StateRecord stateRecord2 = readable(firstStateRecord, j2, snapshotIdSet);
+                                if (stateRecord2 == null || (stateRecord = readable(firstStateRecord, j2, snapshotIdSetOr)) == null || stateRecord2.equals(stateRecord)) {
+                                    snapshotIdSet3 = snapshotIdSetOr;
                                 } else {
-                                    snapshotIdSet3 = or;
-                                    StateRecord readable3 = readable(firstStateRecord, mutableSnapshot.getSnapshotId(), mutableSnapshot.getInvalid$runtime_release());
-                                    if (readable3 == null) {
+                                    snapshotIdSet3 = snapshotIdSetOr;
+                                    StateRecord stateRecord3 = readable(firstStateRecord, mutableSnapshot.getSnapshotId(), mutableSnapshot.getInvalid$runtime_release());
+                                    if (stateRecord3 == null) {
                                         readError();
                                         throw null;
                                     }
-                                    StateRecord mergeRecords = stateObject.mergeRecords(readable, readable2, readable3);
-                                    if (mergeRecords == null) {
+                                    StateRecord stateRecordMergeRecords = stateObject.mergeRecords(stateRecord, stateRecord2, stateRecord3);
+                                    if (stateRecordMergeRecords == null) {
                                         return null;
                                     }
-                                    if (hashMap == null) {
-                                        hashMap = new HashMap();
+                                    if (map == null) {
+                                        map = new HashMap();
                                     }
-                                    hashMap.put(readable2, mergeRecords);
-                                    hashMap = hashMap;
+                                    map.put(stateRecord2, stateRecordMergeRecords);
+                                    map = map;
                                 }
                             } else {
                                 jArr2 = jArr3;
-                                snapshotIdSet3 = or;
+                                snapshotIdSet3 = snapshotIdSetOr;
                                 i = i3;
                             }
                             j3 >>= i;
@@ -129,24 +128,24 @@ public abstract class SnapshotKt {
                             j2 = j;
                             i3 = i;
                             jArr3 = jArr2;
-                            or = snapshotIdSet3;
+                            snapshotIdSetOr = snapshotIdSet3;
                         }
                         jArr = jArr3;
-                        snapshotIdSet2 = or;
+                        snapshotIdSet2 = snapshotIdSetOr;
                         if (i4 != i3) {
-                            return hashMap;
+                            return map;
                         }
                     } else {
                         jArr = jArr3;
-                        snapshotIdSet2 = or;
+                        snapshotIdSet2 = snapshotIdSetOr;
                     }
                     if (i2 == length) {
-                        return hashMap;
+                        return map;
                     }
                     i2++;
                     j2 = j;
                     jArr3 = jArr;
-                    or = snapshotIdSet2;
+                    snapshotIdSetOr = snapshotIdSet2;
                 }
             }
         }
@@ -182,9 +181,13 @@ public abstract class SnapshotKt {
         return snapshotIdSet;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:42:0x0091  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public static final Object advanceGlobalSnapshot(Function1 function1) {
         MutableScatterSet mutableScatterSet;
-        Object resetGlobalSnapshotLocked;
+        Object objResetGlobalSnapshotLocked;
         GlobalSnapshot globalSnapshot2 = globalSnapshot;
         synchronized (lock) {
             try {
@@ -192,7 +195,7 @@ public abstract class SnapshotKt {
                 if (mutableScatterSet != null) {
                     pendingApplyObserverCount.addAndGet(1);
                 }
-                resetGlobalSnapshotLocked = resetGlobalSnapshotLocked(globalSnapshot2, function1);
+                objResetGlobalSnapshotLocked = resetGlobalSnapshotLocked(globalSnapshot2, function1);
             } catch (Throwable th) {
                 throw th;
             }
@@ -230,11 +233,11 @@ public abstract class SnapshotKt {
                                 if (i3 != 8) {
                                     break;
                                 }
+                                if (i2 == length) {
+                                    break;
+                                }
+                                i2++;
                             }
-                            if (i2 == length) {
-                                break;
-                            }
-                            i2++;
                         }
                     }
                     Unit unit = Unit.INSTANCE;
@@ -243,7 +246,7 @@ public abstract class SnapshotKt {
                 throw th2;
             }
         }
-        return resetGlobalSnapshotLocked;
+        return objResetGlobalSnapshotLocked;
     }
 
     public static final void checkAndOverwriteUnusedRecordsLocked() {
@@ -285,16 +288,16 @@ public abstract class SnapshotKt {
     }
 
     public static final StateRecord current(StateRecord stateRecord, Snapshot snapshot) {
-        StateRecord readable;
-        StateRecord readable2 = readable(stateRecord, snapshot.getSnapshotId(), snapshot.getInvalid$runtime_release());
-        if (readable2 != null) {
-            return readable2;
+        StateRecord stateRecord2;
+        StateRecord stateRecord3 = readable(stateRecord, snapshot.getSnapshotId(), snapshot.getInvalid$runtime_release());
+        if (stateRecord3 != null) {
+            return stateRecord3;
         }
         synchronized (lock) {
-            readable = readable(stateRecord, snapshot.getSnapshotId(), snapshot.getInvalid$runtime_release());
+            stateRecord2 = readable(stateRecord, snapshot.getSnapshotId(), snapshot.getInvalid$runtime_release());
         }
-        if (readable != null) {
-            return readable;
+        if (stateRecord2 != null) {
+            return stateRecord2;
         }
         readError();
         throw null;
@@ -309,7 +312,7 @@ public abstract class SnapshotKt {
         if (!z) {
             function12 = null;
         }
-        return (function1 == null || function12 == null || function1 == function12) ? function1 == null ? function12 : function1 : new Function1() { // from class: androidx.compose.runtime.snapshots.SnapshotKt$mergedReadObserver$1
+        return (function1 == null || function12 == null || function1 == function12) ? function1 == null ? function12 : function1 : new Function1() { // from class: androidx.compose.runtime.snapshots.SnapshotKt.mergedReadObserver.1
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
             {
                 super(1);
@@ -317,96 +320,73 @@ public abstract class SnapshotKt {
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                Function1.this.mo779invoke(obj);
-                function12.mo779invoke(obj);
+            public final Object mo781invoke(Object obj) {
+                function1.mo781invoke(obj);
+                function12.mo781invoke(obj);
                 return Unit.INSTANCE;
             }
         };
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:21:0x0042, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:20:0x0042, code lost:
     
         r4 = r0;
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static final androidx.compose.runtime.snapshots.StateRecord newOverwritableRecordLocked(androidx.compose.runtime.snapshots.StateRecord r11, androidx.compose.runtime.snapshots.StateObject r12) {
-        /*
-            androidx.compose.runtime.snapshots.StateRecord r0 = r12.getFirstStateRecord()
-            long r1 = androidx.compose.runtime.snapshots.SnapshotKt.nextSnapshotId
-            androidx.compose.runtime.snapshots.SnapshotDoubleIndexHeap r3 = androidx.compose.runtime.snapshots.SnapshotKt.pinningTable
-            int r4 = r3.size
-            if (r4 <= 0) goto L11
-            long[] r1 = r3.values
-            r2 = 0
-            r1 = r1[r2]
-        L11:
-            r3 = 1
-            long r1 = r1 - r3
-            androidx.compose.runtime.snapshots.SnapshotIdSet$Companion r3 = androidx.compose.runtime.snapshots.SnapshotIdSet.Companion
-            r3.getClass()
-            androidx.compose.runtime.snapshots.SnapshotIdSet r3 = androidx.compose.runtime.snapshots.SnapshotIdSet.EMPTY
-            r4 = 0
-            r5 = r4
-        L1d:
-            if (r0 == 0) goto L49
-            long r6 = r0.snapshotId
-            r8 = 0
-            int r10 = (r6 > r8 ? 1 : (r6 == r8 ? 0 : -1))
-            if (r10 != 0) goto L28
-            goto L42
-        L28:
-            int r8 = (r6 > r8 ? 1 : (r6 == r8 ? 0 : -1))
-            if (r8 == 0) goto L46
-            int r8 = (r6 > r1 ? 1 : (r6 == r1 ? 0 : -1))
-            if (r8 > 0) goto L46
-            boolean r6 = r3.get(r6)
-            if (r6 != 0) goto L46
-            if (r5 != 0) goto L3a
-            r5 = r0
-            goto L46
-        L3a:
-            long r1 = r0.snapshotId
-            long r3 = r5.snapshotId
-            int r1 = (r1 > r3 ? 1 : (r1 == r3 ? 0 : -1))
-            if (r1 >= 0) goto L44
-        L42:
-            r4 = r0
-            goto L49
-        L44:
-            r4 = r5
-            goto L49
-        L46:
-            androidx.compose.runtime.snapshots.StateRecord r0 = r0.next
-            goto L1d
-        L49:
-            r0 = 9223372036854775807(0x7fffffffffffffff, double:NaN)
-            if (r4 == 0) goto L53
-            r4.snapshotId = r0
-            return r4
-        L53:
-            androidx.compose.runtime.snapshots.StateRecord r11 = r11.create(r0)
-            androidx.compose.runtime.snapshots.StateRecord r0 = r12.getFirstStateRecord()
-            r11.next = r0
-            r12.prependStateRecord(r11)
-            return r11
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.runtime.snapshots.SnapshotKt.newOverwritableRecordLocked(androidx.compose.runtime.snapshots.StateRecord, androidx.compose.runtime.snapshots.StateObject):androidx.compose.runtime.snapshots.StateRecord");
+    public static final StateRecord newOverwritableRecordLocked(StateRecord stateRecord, StateObject stateObject) {
+        StateRecord firstStateRecord = stateObject.getFirstStateRecord();
+        long j = nextSnapshotId;
+        SnapshotDoubleIndexHeap snapshotDoubleIndexHeap = pinningTable;
+        if (snapshotDoubleIndexHeap.size > 0) {
+            j = snapshotDoubleIndexHeap.values[0];
+        }
+        long j2 = j - 1;
+        SnapshotIdSet.Companion.getClass();
+        SnapshotIdSet snapshotIdSet = SnapshotIdSet.EMPTY;
+        StateRecord stateRecord2 = null;
+        StateRecord stateRecord3 = null;
+        while (true) {
+            if (firstStateRecord == null) {
+                break;
+            }
+            long j3 = firstStateRecord.snapshotId;
+            if (j3 == 0) {
+                break;
+            }
+            if (j3 != 0 && j3 <= j2 && !snapshotIdSet.get(j3)) {
+                if (stateRecord3 == null) {
+                    stateRecord3 = firstStateRecord;
+                } else {
+                    if (firstStateRecord.snapshotId < stateRecord3.snapshotId) {
+                        break;
+                    }
+                    stateRecord2 = stateRecord3;
+                }
+            }
+            firstStateRecord = firstStateRecord.next;
+        }
+        if (stateRecord2 != null) {
+            stateRecord2.snapshotId = Long.MAX_VALUE;
+            return stateRecord2;
+        }
+        StateRecord stateRecordCreate = stateRecord.create(Long.MAX_VALUE);
+        stateRecordCreate.next = stateObject.getFirstStateRecord();
+        stateObject.prependStateRecord(stateRecordCreate);
+        return stateRecordCreate;
     }
 
     public static final void notifyWrite(Snapshot snapshot, StateObject stateObject) {
         snapshot.setWriteCount$runtime_release(snapshot.getWriteCount$runtime_release() + 1);
         Function1 writeObserver$runtime_release = snapshot.getWriteObserver$runtime_release();
         if (writeObserver$runtime_release != null) {
-            writeObserver$runtime_release.mo779invoke(stateObject);
+            writeObserver$runtime_release.mo781invoke(stateObject);
         }
     }
 
     public static final StateRecord overwritableRecord(StateRecord stateRecord, StateObjectImpl stateObjectImpl, Snapshot snapshot, StateRecord stateRecord2) {
-        StateRecord newOverwritableRecordLocked;
+        StateRecord stateRecordNewOverwritableRecordLocked;
         if (snapshot.getReadOnly()) {
             snapshot.recordModified$runtime_release(stateObjectImpl);
         }
@@ -415,13 +395,13 @@ public abstract class SnapshotKt {
             return stateRecord2;
         }
         synchronized (lock) {
-            newOverwritableRecordLocked = newOverwritableRecordLocked(stateRecord, stateObjectImpl);
+            stateRecordNewOverwritableRecordLocked = newOverwritableRecordLocked(stateRecord, stateObjectImpl);
         }
-        newOverwritableRecordLocked.snapshotId = snapshotId;
+        stateRecordNewOverwritableRecordLocked.snapshotId = snapshotId;
         if (stateRecord2.snapshotId != 1) {
             snapshot.recordModified$runtime_release(stateObjectImpl);
         }
-        return newOverwritableRecordLocked;
+        return stateRecordNewOverwritableRecordLocked;
     }
 
     public static final boolean overwriteUnusedRecordsLocked(StateObject stateObject) {
@@ -432,43 +412,43 @@ public abstract class SnapshotKt {
             j = snapshotDoubleIndexHeap.values[0];
         }
         StateRecord stateRecord2 = null;
-        StateRecord stateRecord3 = null;
+        StateRecord firstStateRecord = null;
         int i = 0;
-        for (StateRecord firstStateRecord = stateObject.getFirstStateRecord(); firstStateRecord != null; firstStateRecord = firstStateRecord.next) {
-            long j2 = firstStateRecord.snapshotId;
+        for (StateRecord firstStateRecord2 = stateObject.getFirstStateRecord(); firstStateRecord2 != null; firstStateRecord2 = firstStateRecord2.next) {
+            long j2 = firstStateRecord2.snapshotId;
             if (j2 != 0) {
                 if (j2 >= j) {
                     i++;
                 } else if (stateRecord2 == null) {
                     i++;
-                    stateRecord2 = firstStateRecord;
+                    stateRecord2 = firstStateRecord2;
                 } else {
                     if (j2 < stateRecord2.snapshotId) {
                         stateRecord = stateRecord2;
-                        stateRecord2 = firstStateRecord;
+                        stateRecord2 = firstStateRecord2;
                     } else {
-                        stateRecord = firstStateRecord;
+                        stateRecord = firstStateRecord2;
                     }
-                    if (stateRecord3 == null) {
-                        stateRecord3 = stateObject.getFirstStateRecord();
-                        StateRecord stateRecord4 = stateRecord3;
+                    if (firstStateRecord == null) {
+                        firstStateRecord = stateObject.getFirstStateRecord();
+                        StateRecord stateRecord3 = firstStateRecord;
                         while (true) {
-                            if (stateRecord3 == null) {
-                                stateRecord3 = stateRecord4;
+                            if (firstStateRecord == null) {
+                                firstStateRecord = stateRecord3;
                                 break;
                             }
-                            long j3 = stateRecord3.snapshotId;
+                            long j3 = firstStateRecord.snapshotId;
                             if (j3 >= j) {
                                 break;
                             }
-                            if (stateRecord4.snapshotId < j3) {
-                                stateRecord4 = stateRecord3;
+                            if (stateRecord3.snapshotId < j3) {
+                                stateRecord3 = firstStateRecord;
                             }
-                            stateRecord3 = stateRecord3.next;
+                            firstStateRecord = firstStateRecord.next;
                         }
                     }
                     stateRecord2.snapshotId = 0L;
-                    stateRecord2.assign(stateRecord3);
+                    stateRecord2.assign(firstStateRecord);
                     stateRecord2 = stateRecord;
                 }
             }
@@ -480,7 +460,7 @@ public abstract class SnapshotKt {
         if (overwriteUnusedRecordsLocked(stateObject)) {
             SnapshotWeakSet snapshotWeakSet = extraStateObjects;
             int i = snapshotWeakSet.size;
-            int identityHashCode = System.identityHashCode(stateObject);
+            int iIdentityHashCode = System.identityHashCode(stateObject);
             int i2 = -1;
             if (i > 0) {
                 int i3 = snapshotWeakSet.size - 1;
@@ -492,14 +472,16 @@ public abstract class SnapshotKt {
                     }
                     int i5 = (i4 + i3) >>> 1;
                     int i6 = snapshotWeakSet.hashes[i5];
-                    if (i6 < identityHashCode) {
+                    if (i6 < iIdentityHashCode) {
                         i4 = i5 + 1;
-                    } else if (i6 > identityHashCode) {
+                    } else if (i6 > iIdentityHashCode) {
                         i3 = i5 - 1;
                     } else {
                         WeakReference weakReference = snapshotWeakSet.values[i5];
-                        if (stateObject != (weakReference != null ? weakReference.get() : null)) {
-                            for (int i7 = i5 - 1; -1 < i7 && snapshotWeakSet.hashes[i7] == identityHashCode; i7--) {
+                        if (stateObject == (weakReference != null ? weakReference.get() : null)) {
+                            i2 = i5;
+                        } else {
+                            for (int i7 = i5 - 1; -1 < i7 && snapshotWeakSet.hashes[i7] == iIdentityHashCode; i7--) {
                                 WeakReference weakReference2 = snapshotWeakSet.values[i7];
                                 if ((weakReference2 != null ? weakReference2.get() : null) == stateObject) {
                                     i2 = i7;
@@ -513,7 +495,7 @@ public abstract class SnapshotKt {
                                     i2 = -(snapshotWeakSet.size + 1);
                                     break;
                                 } else {
-                                    if (snapshotWeakSet.hashes[i5] != identityHashCode) {
+                                    if (snapshotWeakSet.hashes[i5] != iIdentityHashCode) {
                                         i2 = -(i5 + 1);
                                         break;
                                     }
@@ -525,8 +507,8 @@ public abstract class SnapshotKt {
                                     }
                                 }
                             }
+                            i2 = i5;
                         }
-                        i2 = i5;
                     }
                 }
                 if (i2 >= 0) {
@@ -554,7 +536,7 @@ public abstract class SnapshotKt {
                 ArraysKt___ArraysJvmKt.copyInto(i12, i9, i, iArr2, iArr2);
             }
             snapshotWeakSet.values[i9] = new WeakReference(stateObject);
-            snapshotWeakSet.hashes[i9] = identityHashCode;
+            snapshotWeakSet.hashes[i9] = iIdentityHashCode;
             snapshotWeakSet.size++;
         }
     }
@@ -621,90 +603,90 @@ public abstract class SnapshotKt {
 
     public static final Object resetGlobalSnapshotLocked(GlobalSnapshot globalSnapshot2, Function1 function1) {
         long j = globalSnapshot2.snapshotId;
-        Object mo779invoke = function1.mo779invoke(openSnapshots.clear(j));
+        Object objMo781invoke = function1.mo781invoke(openSnapshots.clear(j));
         long j2 = nextSnapshotId;
         nextSnapshotId = 1 + j2;
-        SnapshotIdSet clear = openSnapshots.clear(j);
-        openSnapshots = clear;
+        SnapshotIdSet snapshotIdSetClear = openSnapshots.clear(j);
+        openSnapshots = snapshotIdSetClear;
         globalSnapshot2.snapshotId = j2;
-        globalSnapshot2.invalid = clear;
+        globalSnapshot2.invalid = snapshotIdSetClear;
         globalSnapshot2.writeCount = 0;
         globalSnapshot2.modified = null;
         globalSnapshot2.releasePinnedSnapshotLocked$runtime_release();
         openSnapshots = openSnapshots.set(j2);
-        return mo779invoke;
+        return objMo781invoke;
     }
 
     public static final StateRecord writableRecord(StateRecord stateRecord, StateObject stateObject, Snapshot snapshot) {
-        StateRecord readable;
+        StateRecord stateRecord2;
         if (snapshot.getReadOnly()) {
             snapshot.recordModified$runtime_release(stateObject);
         }
         long snapshotId = snapshot.getSnapshotId();
-        StateRecord readable2 = readable(stateRecord, snapshotId, snapshot.getInvalid$runtime_release());
-        if (readable2 == null) {
+        StateRecord stateRecord3 = readable(stateRecord, snapshotId, snapshot.getInvalid$runtime_release());
+        if (stateRecord3 == null) {
             readError();
             throw null;
         }
-        if (readable2.snapshotId == snapshot.getSnapshotId()) {
-            return readable2;
+        if (stateRecord3.snapshotId == snapshot.getSnapshotId()) {
+            return stateRecord3;
         }
         synchronized (lock) {
-            readable = readable(stateObject.getFirstStateRecord(), snapshotId, snapshot.getInvalid$runtime_release());
-            if (readable == null) {
+            stateRecord2 = readable(stateObject.getFirstStateRecord(), snapshotId, snapshot.getInvalid$runtime_release());
+            if (stateRecord2 == null) {
                 readError();
                 throw null;
             }
-            if (readable.snapshotId != snapshotId) {
-                StateRecord newOverwritableRecordLocked = newOverwritableRecordLocked(readable, stateObject);
-                newOverwritableRecordLocked.assign(readable);
-                newOverwritableRecordLocked.snapshotId = snapshot.getSnapshotId();
-                readable = newOverwritableRecordLocked;
+            if (stateRecord2.snapshotId != snapshotId) {
+                StateRecord stateRecordNewOverwritableRecordLocked = newOverwritableRecordLocked(stateRecord2, stateObject);
+                stateRecordNewOverwritableRecordLocked.assign(stateRecord2);
+                stateRecordNewOverwritableRecordLocked.snapshotId = snapshot.getSnapshotId();
+                stateRecord2 = stateRecordNewOverwritableRecordLocked;
             }
         }
-        if (readable2.snapshotId != 1) {
+        if (stateRecord3.snapshotId != 1) {
             snapshot.recordModified$runtime_release(stateObject);
         }
-        return readable;
+        return stateRecord2;
     }
 
     public static final StateRecord readable(StateRecord stateRecord, StateObject stateObject) {
-        StateRecord readable;
+        StateRecord stateRecord2;
         Snapshot.Companion.getClass();
-        Snapshot currentSnapshot = currentSnapshot();
-        Function1 readObserver = currentSnapshot.getReadObserver();
+        Snapshot snapshotCurrentSnapshot = currentSnapshot();
+        Function1 readObserver = snapshotCurrentSnapshot.getReadObserver();
         if (readObserver != null) {
-            readObserver.mo779invoke(stateObject);
+            readObserver.mo781invoke(stateObject);
         }
-        StateRecord readable2 = readable(stateRecord, currentSnapshot.getSnapshotId(), currentSnapshot.getInvalid$runtime_release());
-        if (readable2 != null) {
-            return readable2;
+        StateRecord stateRecord3 = readable(stateRecord, snapshotCurrentSnapshot.getSnapshotId(), snapshotCurrentSnapshot.getInvalid$runtime_release());
+        if (stateRecord3 != null) {
+            return stateRecord3;
         }
         synchronized (lock) {
-            Snapshot currentSnapshot2 = currentSnapshot();
-            readable = readable(stateObject.getFirstStateRecord(), currentSnapshot2.getSnapshotId(), currentSnapshot2.getInvalid$runtime_release());
-            if (readable == null) {
+            Snapshot snapshotCurrentSnapshot2 = currentSnapshot();
+            stateRecord2 = readable(stateObject.getFirstStateRecord(), snapshotCurrentSnapshot2.getSnapshotId(), snapshotCurrentSnapshot2.getInvalid$runtime_release());
+            if (stateRecord2 == null) {
                 readError();
                 throw null;
             }
         }
-        return readable;
+        return stateRecord2;
     }
 
     public static final StateRecord current(StateRecord stateRecord) {
-        StateRecord readable;
+        StateRecord stateRecord2;
         Snapshot.Companion.getClass();
-        Snapshot currentSnapshot = currentSnapshot();
-        StateRecord readable2 = readable(stateRecord, currentSnapshot.getSnapshotId(), currentSnapshot.getInvalid$runtime_release());
-        if (readable2 != null) {
-            return readable2;
+        Snapshot snapshotCurrentSnapshot = currentSnapshot();
+        StateRecord stateRecord3 = readable(stateRecord, snapshotCurrentSnapshot.getSnapshotId(), snapshotCurrentSnapshot.getInvalid$runtime_release());
+        if (stateRecord3 != null) {
+            return stateRecord3;
         }
         synchronized (lock) {
-            Snapshot currentSnapshot2 = currentSnapshot();
-            readable = readable(stateRecord, currentSnapshot2.getSnapshotId(), currentSnapshot2.getInvalid$runtime_release());
+            Snapshot snapshotCurrentSnapshot2 = currentSnapshot();
+            stateRecord2 = readable(stateRecord, snapshotCurrentSnapshot2.getSnapshotId(), snapshotCurrentSnapshot2.getInvalid$runtime_release());
         }
-        if (readable != null) {
-            return readable;
+        if (stateRecord2 != null) {
+            return stateRecord2;
         }
         readError();
         throw null;

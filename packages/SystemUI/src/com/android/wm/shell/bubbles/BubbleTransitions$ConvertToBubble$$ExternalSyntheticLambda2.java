@@ -4,7 +4,6 @@ import com.android.wm.shell.bubbles.BubbleTransitions;
 import com.android.wm.shell.taskview.TaskViewRepository;
 import com.android.wm.shell.taskview.TaskViewTaskController;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class BubbleTransitions$ConvertToBubble$$ExternalSyntheticLambda2 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -23,8 +22,8 @@ public final /* synthetic */ class BubbleTransitions$ConvertToBubble$$ExternalSy
             case 0:
                 TaskViewTaskController taskViewTaskController = convertToBubble.mBubble.mBubbleTaskView.taskView.mTaskViewTaskController;
                 TaskViewRepository taskViewRepository = BubbleTransitions.this.mRepository;
-                int findAndPrune = taskViewRepository.findAndPrune(taskViewTaskController);
-                TaskViewRepository.TaskViewState taskViewState = findAndPrune < 0 ? null : (TaskViewRepository.TaskViewState) taskViewRepository.mTaskViews.get(findAndPrune);
+                int iFindAndPrune = taskViewRepository.findAndPrune(taskViewTaskController);
+                TaskViewRepository.TaskViewState taskViewState = iFindAndPrune < 0 ? null : (TaskViewRepository.TaskViewState) taskViewRepository.mTaskViews.get(iFindAndPrune);
                 if (taskViewState != null) {
                     taskViewState.mVisible = true;
                     BubbleTransitions.ConvertToBubble.TransitionProgress transitionProgress = convertToBubble.mTransitionProgress;

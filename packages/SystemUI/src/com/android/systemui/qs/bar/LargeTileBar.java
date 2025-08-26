@@ -14,7 +14,6 @@ import com.android.systemui.util.ConfigurationState;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class LargeTileBar extends BarItemImpl implements TileHostable {
     public final ConfigurationState mLastConfigurationState;
@@ -63,10 +62,10 @@ public class LargeTileBar extends BarItemImpl implements TileHostable {
 
     @Override // com.android.systemui.qs.bar.BarItemImpl
     public void inflateViews(ViewGroup viewGroup) {
-        View inflate = LayoutInflater.from(this.mContext).inflate(R.layout.sec_large_tile_bar, viewGroup, false);
-        this.mBarRootView = inflate;
-        if (inflate != null) {
-            this.mTileContainer = (LinearLayout) inflate.findViewById(R.id.large_tile_container);
+        View viewInflate = LayoutInflater.from(this.mContext).inflate(R.layout.sec_large_tile_bar, viewGroup, false);
+        this.mBarRootView = viewInflate;
+        if (viewInflate != null) {
+            this.mTileContainer = (LinearLayout) viewInflate.findViewById(R.id.large_tile_container);
             this.mBarRootView.setVisibility(this.mShowing ? 0 : 8);
         }
         this.mTiles.forEach(new LargeTileBar$$ExternalSyntheticLambda0(this, 2));
@@ -80,9 +79,9 @@ public class LargeTileBar extends BarItemImpl implements TileHostable {
 
     @Override // com.android.systemui.qs.bar.BarItemImpl
     public final void makeCloneBar() {
-        View inflate = LayoutInflater.from(this.mContext).inflate(R.layout.sec_large_tile_bar, (ViewGroup) null);
-        this.mClonedBarView = inflate;
-        LinearLayout linearLayout = (LinearLayout) inflate.findViewById(R.id.large_tile_container);
+        View viewInflate = LayoutInflater.from(this.mContext).inflate(R.layout.sec_large_tile_bar, (ViewGroup) null);
+        this.mClonedBarView = viewInflate;
+        LinearLayout linearLayout = (LinearLayout) viewInflate.findViewById(R.id.large_tile_container);
         createTilesViewAndDistribute(linearLayout, this.mTiles, (SecQSPanelResourcePicker) Dependency.sDependency.getDependencyInner(SecQSPanelResourcePicker.class), Boolean.TRUE);
         for (int i = 0; i < linearLayout.getChildCount(); i++) {
             linearLayout.getChildAt(i).setImportantForAccessibility(2);

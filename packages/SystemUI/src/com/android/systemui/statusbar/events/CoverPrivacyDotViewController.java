@@ -10,7 +10,7 @@ import com.android.systemui.R;
 import com.android.systemui.keyguard.WakefulnessLifecycle;
 import com.android.systemui.plugins.statusbar.StatusBarStateController;
 import com.android.systemui.privacy.logging.PrivacyLogger;
-import com.android.systemui.qs.SecQSDetailController$$ExternalSyntheticOutline0;
+import com.android.systemui.qs.customize.viewcontroller.QSLayoutEditViewController$$ExternalSyntheticOutline0;
 import com.android.systemui.shade.domain.interactor.SecPanelExpansionStateInteractor;
 import com.android.systemui.shade.domain.interactor.ShadeInteractor;
 import com.android.systemui.statusbar.layout.StatusBarContentInsetsProvider;
@@ -20,7 +20,6 @@ import com.android.systemui.util.concurrency.DelayableExecutor;
 import java.util.concurrent.Executor;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class CoverPrivacyDotViewController extends PrivacyDotViewControllerImpl {
     public final Executor mainExecutor;
@@ -51,11 +50,11 @@ public final class CoverPrivacyDotViewController extends PrivacyDotViewControlle
         if (view != null) {
             int i = viewState.rotation;
             if (i == 0 || i == 2) {
-                view.getLayoutParams().width = SecQSDetailController$$ExternalSyntheticOutline0.m(view, R.dimen.cover_privacy_dot_container_width);
-                view.getLayoutParams().height = SecQSDetailController$$ExternalSyntheticOutline0.m(view, R.dimen.samsung_status_bar_battery_icon_height);
+                view.getLayoutParams().width = QSLayoutEditViewController$$ExternalSyntheticOutline0.m(view, R.dimen.cover_privacy_dot_container_width);
+                view.getLayoutParams().height = QSLayoutEditViewController$$ExternalSyntheticOutline0.m(view, R.dimen.samsung_status_bar_battery_icon_height);
             } else {
-                view.getLayoutParams().width = SecQSDetailController$$ExternalSyntheticOutline0.m(view, R.dimen.samsung_status_bar_battery_icon_height);
-                view.getLayoutParams().height = SecQSDetailController$$ExternalSyntheticOutline0.m(view, R.dimen.cover_privacy_dot_container_width);
+                view.getLayoutParams().width = QSLayoutEditViewController$$ExternalSyntheticOutline0.m(view, R.dimen.samsung_status_bar_battery_icon_height);
+                view.getLayoutParams().height = QSLayoutEditViewController$$ExternalSyntheticOutline0.m(view, R.dimen.cover_privacy_dot_container_width);
             }
             Context context = view.getContext();
             int dimensionPixelSize = i != 0 ? i != 2 ? 0 : context.getResources().getDimensionPixelSize(R.dimen.cover_battery_icon_opposite_margin) : context.getResources().getDimensionPixelSize(R.dimen.cover_battery_icon_default_margin);
@@ -63,22 +62,22 @@ public final class CoverPrivacyDotViewController extends PrivacyDotViewControlle
             if (cutout == null || (rect = cutout.getBoundingRectLeft()) == null) {
                 rect = new Rect();
             }
-            int width = rect.width();
+            int iWidth = rect.width();
             DisplayCutout cutout2 = view.getContext().getDisplay().getCutout();
             if (cutout2 == null || (rect2 = cutout2.getBoundingRectTop()) == null) {
                 rect2 = new Rect();
             }
-            int height = (rect2.height() + dimensionPixelSize) - 1;
+            int iHeight = (rect2.height() + dimensionPixelSize) - 1;
             DisplayCutout cutout3 = view.getContext().getDisplay().getCutout();
             if (cutout3 == null || (rect3 = cutout3.getBoundingRectRight()) == null) {
                 rect3 = new Rect();
             }
-            int width2 = rect3.width();
+            int iWidth2 = rect3.width();
             DisplayCutout cutout4 = view.getContext().getDisplay().getCutout();
             if (cutout4 == null || (rect4 = cutout4.getBoundingRectBottom()) == null) {
                 rect4 = new Rect();
             }
-            ((ViewGroup.MarginLayoutParams) view.getLayoutParams()).setMargins(width, height, width2, rect4.height());
+            ((ViewGroup.MarginLayoutParams) view.getLayoutParams()).setMargins(iWidth, iHeight, iWidth2, rect4.height());
         }
     }
 
@@ -92,10 +91,10 @@ public final class CoverPrivacyDotViewController extends PrivacyDotViewControlle
         int i3;
         for (View view : getViews()) {
             view.setPadding(0, 0, 0, 0);
-            PrivacyDotCorner rotatedCorner = PrivacyDotCornerKt.rotatedCorner(cornerForView(view), i);
-            ((FrameLayout.LayoutParams) view.getLayoutParams()).gravity = rotatedCorner.getGravity();
+            PrivacyDotCorner privacyDotCornerRotatedCorner = PrivacyDotCornerKt.rotatedCorner(cornerForView(view), i);
+            ((FrameLayout.LayoutParams) view.getLayoutParams()).gravity = privacyDotCornerRotatedCorner.getGravity();
             FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) view.requireViewById(R.id.privacy_dot).getLayoutParams();
-            int index = rotatedCorner.getIndex();
+            int index = privacyDotCornerRotatedCorner.getIndex();
             if (index == 0) {
                 i3 = 85;
             } else if (index == 1) {

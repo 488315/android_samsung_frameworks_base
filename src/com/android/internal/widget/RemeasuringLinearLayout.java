@@ -39,31 +39,31 @@ public class RemeasuringLinearLayout extends NotificationOptimizedLinearLayout {
         int childCount = getChildCount();
         boolean z = getOrientation() == 1;
         boolean z2 = getLayoutParams().height == -2;
-        int i3 = 0;
-        for (int i4 = 0; i4 < childCount; i4++) {
-            View childAt = getChildAt(i4);
+        int iMax = 0;
+        for (int i3 = 0; i3 < childCount; i3++) {
+            View childAt = getChildAt(i3);
             if (childAt != null && childAt.getVisibility() != 8) {
                 LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) childAt.getLayoutParams();
                 if (!z2 || layoutParams.height != -1 || z) {
                     int measuredHeight = childAt.getMeasuredHeight() + layoutParams.topMargin + layoutParams.bottomMargin;
                     if (z) {
-                        measuredHeight += i3;
+                        measuredHeight += iMax;
                     }
-                    i3 = Math.max(i3, measuredHeight);
+                    iMax = Math.max(iMax, measuredHeight);
                 } else {
                     this.mMatchParentViews.add(childAt);
                 }
             }
         }
         if (this.mMatchParentViews.size() > 0) {
-            int makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(i3, 1073741824);
+            int iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(iMax, 1073741824);
             Iterator<View> it = this.mMatchParentViews.iterator();
             while (it.hasNext()) {
                 View next = it.next();
-                next.measure(getChildMeasureSpec(i, getPaddingStart() + getPaddingEnd(), next.getLayoutParams().width), makeMeasureSpec);
+                next.measure(getChildMeasureSpec(i, getPaddingStart() + getPaddingEnd(), next.getLayoutParams().width), iMakeMeasureSpec);
             }
         }
         this.mMatchParentViews.clear();
-        setMeasuredDimension(getMeasuredWidth(), i3);
+        setMeasuredDimension(getMeasuredWidth(), iMax);
     }
 }

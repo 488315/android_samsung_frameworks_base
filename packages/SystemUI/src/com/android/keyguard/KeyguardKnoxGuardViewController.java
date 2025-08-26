@@ -79,7 +79,6 @@ import com.android.systemui.widget.SystemUIImageView;
 import com.android.systemui.widget.SystemUITextView;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardKnoxGuardViewController extends KeyguardSecAbsKeyInputViewController {
     public int mAttemptCount;
@@ -120,7 +119,6 @@ public class KeyguardKnoxGuardViewController extends KeyguardSecAbsKeyInputViewC
     public final SystemUIImageView mWifiButton;
     public final WifiManager mWifiManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.keyguard.KeyguardKnoxGuardViewController$3, reason: invalid class name */
     class AnonymousClass3 extends KeyguardUpdateMonitorCallback {
         public AnonymousClass3() {
@@ -142,7 +140,7 @@ public class KeyguardKnoxGuardViewController extends KeyguardSecAbsKeyInputViewC
     }
 
     /* renamed from: -$$Nest$mcheckUnlockAttempts, reason: not valid java name */
-    public static void m953$$Nest$mcheckUnlockAttempts(KeyguardKnoxGuardViewController keyguardKnoxGuardViewController, int i, long j) {
+    public static void m955$$Nest$mcheckUnlockAttempts(KeyguardKnoxGuardViewController keyguardKnoxGuardViewController, int i, long j) throws Resources.NotFoundException {
         long j2;
         keyguardKnoxGuardViewController.getClass();
         Log.d("KeyguardKnoxGuardView", "checkUnlockAttempts " + i);
@@ -172,9 +170,9 @@ public class KeyguardKnoxGuardViewController extends KeyguardSecAbsKeyInputViewC
                 if (keyguardKnoxGuardViewController.mRemoteLockInfo == null) {
                     j2 = -1;
                 } else {
-                    long currentTimeMillis = System.currentTimeMillis() + keyguardKnoxGuardViewController.mRemoteLockInfo.lockTimeOut;
-                    keyguardKnoxGuardViewController.setLong(ReorderTile$$ExternalSyntheticOutline0.m(keyguardKnoxGuardViewController.mRemoteLockInfo.lockType, "remotelockscreen.lockoutdeadline", new StringBuilder()), currentTimeMillis, selectedUserId);
-                    j2 = currentTimeMillis;
+                    long jCurrentTimeMillis = System.currentTimeMillis() + keyguardKnoxGuardViewController.mRemoteLockInfo.lockTimeOut;
+                    keyguardKnoxGuardViewController.setLong(ReorderTile$$ExternalSyntheticOutline0.m(keyguardKnoxGuardViewController.mRemoteLockInfo.lockType, "remotelockscreen.lockoutdeadline", new StringBuilder()), jCurrentTimeMillis, selectedUserId);
+                    j2 = jCurrentTimeMillis;
                 }
                 int selectedUserId2 = selectedUserInteractor.getSelectedUserId();
                 if (keyguardKnoxGuardViewController.mRemoteLockInfo == null) {
@@ -241,11 +239,11 @@ public class KeyguardKnoxGuardViewController extends KeyguardSecAbsKeyInputViewC
         };
         this.mHandler = new Handler(Looper.myLooper()) { // from class: com.android.keyguard.KeyguardKnoxGuardViewController.5
             @Override // android.os.Handler
-            public final void handleMessage(Message message) {
+            public final void handleMessage(Message message) throws Resources.NotFoundException {
                 int i = message.what;
                 KeyguardKnoxGuardViewController keyguardKnoxGuardViewController = KeyguardKnoxGuardViewController.this;
                 if (i == 2) {
-                    KeyguardKnoxGuardViewController.m953$$Nest$mcheckUnlockAttempts(keyguardKnoxGuardViewController, message.arg1, ((Long) message.obj).longValue());
+                    KeyguardKnoxGuardViewController.m955$$Nest$mcheckUnlockAttempts(keyguardKnoxGuardViewController, message.arg1, ((Long) message.obj).longValue());
                 } else {
                     if (i != 3) {
                         return;
@@ -267,9 +265,9 @@ public class KeyguardKnoxGuardViewController extends KeyguardSecAbsKeyInputViewC
                 DataUsageController dataUsageController = KeyguardKnoxGuardViewController.this.mDataController;
                 boolean z2 = dataUsageController != null && dataUsageController.isMobileDataEnabled();
                 if (KeyguardKnoxGuardViewController.this.mDataButton != null) {
-                    StringBuilder m = RowView$$ExternalSyntheticOutline0.m("mobileData settings changed mobileDataEnabled ", " visibility :", z2);
-                    m.append(KeyguardKnoxGuardViewController.this.mDataButton.getVisibility());
-                    Log.d("KeyguardKnoxGuardView", m.toString());
+                    StringBuilder sbM = RowView$$ExternalSyntheticOutline0.m("mobileData settings changed mobileDataEnabled ", " visibility :", z2);
+                    sbM.append(KeyguardKnoxGuardViewController.this.mDataButton.getVisibility());
+                    Log.d("KeyguardKnoxGuardView", sbM.toString());
                     if (!z2 || KeyguardKnoxGuardViewController.this.mDataButton.getVisibility() != 0) {
                         KeyguardKnoxGuardViewController.this.mDataButton.setVisibility(0);
                         return;
@@ -289,9 +287,9 @@ public class KeyguardKnoxGuardViewController extends KeyguardSecAbsKeyInputViewC
                 if ("android.net.wifi.WIFI_STATE_CHANGED".equals(intent.getAction())) {
                     boolean z = intent.getIntExtra("wifi_state", 4) == 3;
                     if (KeyguardKnoxGuardViewController.this.mWifiButton != null) {
-                        StringBuilder m = RowView$$ExternalSyntheticOutline0.m("WIFI_STATE_CHANGED_ACTION received : enabled = ", " visibility :", z);
-                        m.append(KeyguardKnoxGuardViewController.this.mWifiButton.getVisibility());
-                        Log.d("KeyguardKnoxGuardView", m.toString());
+                        StringBuilder sbM = RowView$$ExternalSyntheticOutline0.m("WIFI_STATE_CHANGED_ACTION received : enabled = ", " visibility :", z);
+                        sbM.append(KeyguardKnoxGuardViewController.this.mWifiButton.getVisibility());
+                        Log.d("KeyguardKnoxGuardView", sbM.toString());
                         if (z && KeyguardKnoxGuardViewController.this.mWifiButton.getVisibility() == 0) {
                             KeyguardKnoxGuardViewController keyguardKnoxGuardViewController = KeyguardKnoxGuardViewController.this;
                             keyguardKnoxGuardViewController.showToast(keyguardKnoxGuardViewController.getContext().getString(R.string.kg_knox_guard_wifi_turned_on_toast));
@@ -356,9 +354,9 @@ public class KeyguardKnoxGuardViewController extends KeyguardSecAbsKeyInputViewC
                 int i2 = i / 60;
                 int i3 = i2 / 60;
                 ListPopupWindow$$ExternalSyntheticOutline0.m(i, "onTick() secondsRemaining: ", "KeyguardKnoxGuardView");
-                String format = i > 3600 ? i3 > 1 ? String.format(KeyguardKnoxGuardViewController.this.getResources().getString(R.string.kg_knox_guard_incorrect_pin_remaining_hours_left_phone, Integer.valueOf(KeyguardKnoxGuardViewController.this.mAttemptCount), Integer.valueOf(i3)), new Object[0]) : String.format(KeyguardKnoxGuardViewController.this.getResources().getString(R.string.kg_knox_guard_incorrect_pin_remaining_hour_left_phone, Integer.valueOf(KeyguardKnoxGuardViewController.this.mAttemptCount)), new Object[0]) : i > 60 ? i2 > 1 ? String.format(KeyguardKnoxGuardViewController.this.getResources().getString(R.string.kg_knox_guard_incorrect_pin_remaining_mins_left_phone, Integer.valueOf(KeyguardKnoxGuardViewController.this.mAttemptCount), Integer.valueOf(i2)), new Object[0]) : String.format(KeyguardKnoxGuardViewController.this.getResources().getString(R.string.kg_knox_guard_incorrect_pin_remaining_min_left_phone, Integer.valueOf(KeyguardKnoxGuardViewController.this.mAttemptCount)), new Object[0]) : i > 0 ? i > 1 ? String.format(KeyguardKnoxGuardViewController.this.getResources().getString(R.string.kg_knox_guard_incorrect_pin_remaining_seconds_left_phone, Integer.valueOf(KeyguardKnoxGuardViewController.this.mAttemptCount), Integer.valueOf(i)), new Object[0]) : String.format(KeyguardKnoxGuardViewController.this.getResources().getString(R.string.kg_knox_guard_incorrect_pin_remaining_second_left_phone, Integer.valueOf(KeyguardKnoxGuardViewController.this.mAttemptCount)), new Object[0]) : null;
-                KeyguardKnoxGuardViewController.this.mPinMessageTextView.setText(format);
-                KeyguardKnoxGuardViewController.this.mPinMessageTextView.setVisibility(format == null ? 8 : 0);
+                String str = i > 3600 ? i3 > 1 ? String.format(KeyguardKnoxGuardViewController.this.getResources().getString(R.string.kg_knox_guard_incorrect_pin_remaining_hours_left_phone, Integer.valueOf(KeyguardKnoxGuardViewController.this.mAttemptCount), Integer.valueOf(i3)), new Object[0]) : String.format(KeyguardKnoxGuardViewController.this.getResources().getString(R.string.kg_knox_guard_incorrect_pin_remaining_hour_left_phone, Integer.valueOf(KeyguardKnoxGuardViewController.this.mAttemptCount)), new Object[0]) : i > 60 ? i2 > 1 ? String.format(KeyguardKnoxGuardViewController.this.getResources().getString(R.string.kg_knox_guard_incorrect_pin_remaining_mins_left_phone, Integer.valueOf(KeyguardKnoxGuardViewController.this.mAttemptCount), Integer.valueOf(i2)), new Object[0]) : String.format(KeyguardKnoxGuardViewController.this.getResources().getString(R.string.kg_knox_guard_incorrect_pin_remaining_min_left_phone, Integer.valueOf(KeyguardKnoxGuardViewController.this.mAttemptCount)), new Object[0]) : i > 0 ? i > 1 ? String.format(KeyguardKnoxGuardViewController.this.getResources().getString(R.string.kg_knox_guard_incorrect_pin_remaining_seconds_left_phone, Integer.valueOf(KeyguardKnoxGuardViewController.this.mAttemptCount), Integer.valueOf(i)), new Object[0]) : String.format(KeyguardKnoxGuardViewController.this.getResources().getString(R.string.kg_knox_guard_incorrect_pin_remaining_second_left_phone, Integer.valueOf(KeyguardKnoxGuardViewController.this.mAttemptCount)), new Object[0]) : null;
+                KeyguardKnoxGuardViewController.this.mPinMessageTextView.setText(str);
+                KeyguardKnoxGuardViewController.this.mPinMessageTextView.setVisibility(str == null ? 8 : 0);
             }
         }.start();
     }
@@ -426,8 +424,8 @@ public class KeyguardKnoxGuardViewController extends KeyguardSecAbsKeyInputViewC
         systemUIEditText.setOnClickListener(onClickListener);
         systemUIEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() { // from class: com.android.keyguard.KeyguardKnoxGuardViewController$$ExternalSyntheticLambda2
             @Override // android.widget.TextView.OnEditorActionListener
-            public final boolean onEditorAction(TextView textView, int i2, KeyEvent keyEvent) {
-                KeyguardKnoxGuardViewController keyguardKnoxGuardViewController = KeyguardKnoxGuardViewController.this;
+            public final boolean onEditorAction(TextView textView, int i2, KeyEvent keyEvent) throws Resources.NotFoundException {
+                KeyguardKnoxGuardViewController keyguardKnoxGuardViewController = this.f$0;
                 keyguardKnoxGuardViewController.getClass();
                 if ((keyEvent == null || keyEvent.getKeyCode() != 66) && i2 != 6) {
                     return false;
@@ -504,50 +502,50 @@ public class KeyguardKnoxGuardViewController extends KeyguardSecAbsKeyInputViewC
 
     @Override // com.android.keyguard.KeyguardAbsKeyInputViewController
     public final void resetState() {
+        long jCurrentTimeMillis;
         long j;
-        long j2;
         int i;
         SelectedUserInteractor selectedUserInteractor = this.mSelectedUserInteractor;
         int selectedUserId = selectedUserInteractor.getSelectedUserId();
-        long j3 = 0;
+        long j2 = 0;
         if (this.mRemoteLockInfo == null) {
-            j2 = -1;
+            j = -1;
         } else {
             try {
-                j = getLockSettings().getLong(ReorderTile$$ExternalSyntheticOutline0.m(this.mRemoteLockInfo.lockType, "remotelockscreen.lockoutdeadline", new StringBuilder()), 0L, selectedUserId);
+                jCurrentTimeMillis = getLockSettings().getLong(ReorderTile$$ExternalSyntheticOutline0.m(this.mRemoteLockInfo.lockType, "remotelockscreen.lockoutdeadline", new StringBuilder()), 0L, selectedUserId);
             } catch (RemoteException unused) {
-                j = 0;
+                jCurrentTimeMillis = 0;
             }
-            long currentTimeMillis = System.currentTimeMillis();
-            if (j > currentTimeMillis || j == 0) {
-                if (j > currentTimeMillis + this.mRemoteLockInfo.lockTimeOut) {
-                    j = System.currentTimeMillis() + this.mRemoteLockInfo.lockTimeOut;
-                    setLong(ReorderTile$$ExternalSyntheticOutline0.m(this.mRemoteLockInfo.lockType, "remotelockscreen.lockoutdeadline", new StringBuilder()), j, selectedUserId);
+            long jCurrentTimeMillis2 = System.currentTimeMillis();
+            if (jCurrentTimeMillis > jCurrentTimeMillis2 || jCurrentTimeMillis == 0) {
+                if (jCurrentTimeMillis > jCurrentTimeMillis2 + this.mRemoteLockInfo.lockTimeOut) {
+                    jCurrentTimeMillis = System.currentTimeMillis() + this.mRemoteLockInfo.lockTimeOut;
+                    setLong(ReorderTile$$ExternalSyntheticOutline0.m(this.mRemoteLockInfo.lockType, "remotelockscreen.lockoutdeadline", new StringBuilder()), jCurrentTimeMillis, selectedUserId);
                 }
-                j2 = j;
+                j = jCurrentTimeMillis;
             } else {
                 setLong(ReorderTile$$ExternalSyntheticOutline0.m(this.mRemoteLockInfo.lockType, "remotelockscreen.lockoutdeadline", new StringBuilder()), 0L, selectedUserId);
-                j2 = 0;
+                j = 0;
             }
         }
-        if (j2 > 0) {
+        if (j > 0) {
             int selectedUserId2 = selectedUserInteractor.getSelectedUserId();
             if (this.mRemoteLockInfo == null) {
                 i = -1;
             } else {
                 try {
-                    j3 = getLockSettings().getLong(ReorderTile$$ExternalSyntheticOutline0.m(this.mRemoteLockInfo.lockType, "remotelockscreen.failedunlockcount", new StringBuilder()), 0L, selectedUserId2);
+                    j2 = getLockSettings().getLong(ReorderTile$$ExternalSyntheticOutline0.m(this.mRemoteLockInfo.lockType, "remotelockscreen.failedunlockcount", new StringBuilder()), 0L, selectedUserId2);
                 } catch (RemoteException unused2) {
                 }
-                i = (int) j3;
+                i = (int) j2;
             }
             this.mAttemptCount = i;
-            handleAttemptLockout(j2);
+            handleAttemptLockout(j);
         }
     }
 
     public final void setKnoxGuardInfo() {
-        String str;
+        String strTrim;
         SystemUITextView systemUITextView;
         SystemUITextView systemUITextView2;
         SystemUITextView systemUITextView3;
@@ -571,24 +569,24 @@ public class KeyguardKnoxGuardViewController extends KeyguardSecAbsKeyInputViewC
         }
         CharSequence charSequence = remoteLockInfo.clientName;
         if (charSequence != null) {
-            str = charSequence.toString().trim();
-            if (str.isEmpty()) {
+            strTrim = charSequence.toString().trim();
+            if (strTrim.isEmpty()) {
                 Log.d("KeyguardKnoxGuardView", "mRemoteLockInfo.clientName is empty");
             }
         } else {
             Log.d("KeyguardKnoxGuardView", "mRemoteLockInfo.clientName is null");
-            str = "";
+            strTrim = "";
         }
         SystemUITextView systemUITextView5 = this.mCompanyNameTextView;
         if (systemUITextView5 != null) {
-            systemUITextView5.setText(str);
+            systemUITextView5.setText(strTrim);
         }
         CharSequence charSequence2 = this.mRemoteLockInfo.message;
         if (charSequence2 != null) {
-            String charSequence3 = charSequence2.toString();
-            if (charSequence3 != null && (systemUITextView4 = this.mLockMessageTextView) != null) {
+            String string = charSequence2.toString();
+            if (string != null && (systemUITextView4 = this.mLockMessageTextView) != null) {
                 systemUITextView4.setMovementMethod(new ScrollingMovementMethod());
-                systemUITextView4.setText(charSequence3);
+                systemUITextView4.setText(string);
             }
         } else {
             Log.d("KeyguardKnoxGuardView", "mRemoteLockInfo.message is null");
@@ -610,41 +608,41 @@ public class KeyguardKnoxGuardViewController extends KeyguardSecAbsKeyInputViewC
             Log.d("KeyguardKnoxGuardView", "mRemoteLockInfo.bundle is null");
         } else {
             Bundle bundle2 = this.mRemoteLockInfo.bundle;
-            final String charSequence4 = bundle2.getCharSequence("customer_package_name").toString();
-            CharSequence charSequence5 = bundle2.getCharSequence("customer_app_name");
+            final String string2 = bundle2.getCharSequence("customer_package_name").toString();
+            CharSequence charSequence3 = bundle2.getCharSequence("customer_app_name");
             PackageManager packageManager = getContext().getPackageManager();
             try {
-                applicationInfo = packageManager.getApplicationInfo(charSequence4, 0);
+                applicationInfo = packageManager.getApplicationInfo(string2, 0);
             } catch (PackageManager.NameNotFoundException e) {
                 Log.e("KeyguardKnoxGuardView", "NameNotFoundException while updating icon : " + e.getMessage());
             }
-            boolean isEmpty = TextUtils.isEmpty(charSequence5);
-            boolean z = !isEmpty;
+            boolean zIsEmpty = TextUtils.isEmpty(charSequence3);
+            boolean z = !zIsEmpty;
             SystemUIImageView systemUIImageView = this.mCustomerAppImageView;
             if (applicationInfo != null) {
-                if (isEmpty) {
-                    charSequence5 = applicationInfo.loadLabel(packageManager).toString();
+                if (zIsEmpty) {
+                    charSequence3 = applicationInfo.loadLabel(packageManager).toString();
                 }
-                systemUITextView3.setText(charSequence5);
-                Drawable loadIcon = applicationInfo.loadIcon(packageManager, true, 0);
-                if (loadIcon == null) {
-                    loadIcon = applicationInfo.loadIcon(packageManager);
+                systemUITextView3.setText(charSequence3);
+                Drawable drawableLoadIcon = applicationInfo.loadIcon(packageManager, true, 0);
+                if (drawableLoadIcon == null) {
+                    drawableLoadIcon = applicationInfo.loadIcon(packageManager);
                 }
-                Bitmap createBitmap = Bitmap.createBitmap(getResources().getDimensionPixelSize(R.dimen.kg_knox_guard_contact_image_width), getResources().getDimensionPixelSize(R.dimen.kg_knox_guard_contact_image_height), Bitmap.Config.ARGB_8888);
-                Canvas canvas = new Canvas(createBitmap);
-                loadIcon.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-                loadIcon.draw(canvas);
-                createBitmap.setDensity(getResources().getDisplayMetrics().densityDpi);
-                systemUIImageView.setImageDrawable(new BitmapDrawable(getResources(), createBitmap));
+                Bitmap bitmapCreateBitmap = Bitmap.createBitmap(getResources().getDimensionPixelSize(R.dimen.kg_knox_guard_contact_image_width), getResources().getDimensionPixelSize(R.dimen.kg_knox_guard_contact_image_height), Bitmap.Config.ARGB_8888);
+                Canvas canvas = new Canvas(bitmapCreateBitmap);
+                drawableLoadIcon.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+                drawableLoadIcon.draw(canvas);
+                bitmapCreateBitmap.setDensity(getResources().getDisplayMetrics().densityDpi);
+                systemUIImageView.setImageDrawable(new BitmapDrawable(getResources(), bitmapCreateBitmap));
             } else {
-                if (isEmpty) {
-                    charSequence5 = charSequence4;
+                if (zIsEmpty) {
+                    charSequence3 = string2;
                 }
-                systemUITextView3.setText(charSequence5);
+                systemUITextView3.setText(charSequence3);
                 systemUIImageView.setImageResource(R.drawable.kg_knox_guard_ic_default_app);
             }
-            Log.d("KeyguardKnoxGuardView", "customerPackageName : " + charSequence4 + ",  isAppNameExist : " + z);
-            if (this.mCustomerAppContainer != null && !charSequence4.isEmpty()) {
+            Log.d("KeyguardKnoxGuardView", "customerPackageName : " + string2 + ",  isAppNameExist : " + z);
+            if (this.mCustomerAppContainer != null && !string2.isEmpty()) {
                 this.mCustomerAppContainer.setVisibility(0);
                 final int i = 0;
                 this.mCustomerAppContainer.setOnClickListener(new View.OnClickListener(this) { // from class: com.android.keyguard.KeyguardKnoxGuardViewController$$ExternalSyntheticLambda6
@@ -659,14 +657,14 @@ public class KeyguardKnoxGuardViewController extends KeyguardSecAbsKeyInputViewC
                         switch (i) {
                             case 0:
                                 KeyguardKnoxGuardViewController keyguardKnoxGuardViewController = this.f$0;
-                                String str2 = charSequence4;
+                                String str = string2;
                                 KeyguardSecurityCallback keyguardSecurityCallback2 = keyguardSecurityCallback;
                                 keyguardKnoxGuardViewController.resetPinErrorMessage();
                                 try {
                                     Log.d("KeyguardKnoxGuardView", "click customer app button");
                                     Intent intent = new Intent("com.samsung.kgclient.intent.action.CUSTOMER_APP");
                                     intent.setClassName("com.samsung.android.kgclient", "com.samsung.android.kgclient.receiver.KGIntentReceiver");
-                                    intent.putExtra("customerPackageName", str2);
+                                    intent.putExtra("customerPackageName", str);
                                     intent.addFlags(32);
                                     keyguardKnoxGuardViewController.getContext().sendBroadcastAsUser(intent, UserHandle.CURRENT, "com.samsung.android.knoxguard.STATUS");
                                     if (keyguardSecurityCallback2 != null) {
@@ -679,7 +677,7 @@ public class KeyguardKnoxGuardViewController extends KeyguardSecAbsKeyInputViewC
                                 break;
                             default:
                                 KeyguardKnoxGuardViewController keyguardKnoxGuardViewController2 = this.f$0;
-                                String str3 = charSequence4;
+                                String str2 = string2;
                                 KeyguardSecurityCallback keyguardSecurityCallback3 = keyguardSecurityCallback;
                                 keyguardKnoxGuardViewController2.resetPinErrorMessage();
                                 TelephonyManager telephonyManager = keyguardKnoxGuardViewController2.mTelephonyManager;
@@ -688,7 +686,7 @@ public class KeyguardKnoxGuardViewController extends KeyguardSecAbsKeyInputViewC
                                     keyguardKnoxGuardViewController2.showToast(keyguardKnoxGuardViewController2.getContext().getString(R.string.kg_knox_guard_call_not_support_toast));
                                     break;
                                 } else {
-                                    Intent intent2 = new Intent("android.intent.action.CALL_PRIVILEGED", Uri.fromParts("tel", str3, null));
+                                    Intent intent2 = new Intent("android.intent.action.CALL_PRIVILEGED", Uri.fromParts("tel", str2, null));
                                     intent2.setFlags(268435456);
                                     try {
                                         Log.d("KeyguardKnoxGuardView", "click call button");
@@ -708,18 +706,18 @@ public class KeyguardKnoxGuardViewController extends KeyguardSecAbsKeyInputViewC
                 });
             }
         }
-        CharSequence charSequence6 = this.mRemoteLockInfo.phoneNumber;
-        if (charSequence6 == null || (systemUITextView = this.mPhoneSubTextTextView) == null || (systemUITextView2 = this.mPhoneHeaderTextView) == null) {
+        CharSequence charSequence4 = this.mRemoteLockInfo.phoneNumber;
+        if (charSequence4 == null || (systemUITextView = this.mPhoneSubTextTextView) == null || (systemUITextView2 = this.mPhoneHeaderTextView) == null) {
             this.mPhoneContainer.setVisibility(8);
             Log.d("KeyguardKnoxGuardView", "mRemoteLockInfo.phoneNumber is null");
         } else {
-            final String trim = charSequence6.toString().trim();
-            if (trim.isEmpty()) {
+            final String strTrim2 = charSequence4.toString().trim();
+            if (strTrim2.isEmpty()) {
                 this.mPhoneContainer.setVisibility(8);
             } else {
                 this.mPhoneContainer.setVisibility(0);
-                systemUITextView2.setText(getResources().getString(R.string.kg_remote_lock_accessibility_call, str));
-                systemUITextView.setText(trim);
+                systemUITextView2.setText(getResources().getString(R.string.kg_remote_lock_accessibility_call, strTrim));
+                systemUITextView.setText(strTrim2);
                 final int i2 = 1;
                 this.mPhoneContainer.setOnClickListener(new View.OnClickListener(this) { // from class: com.android.keyguard.KeyguardKnoxGuardViewController$$ExternalSyntheticLambda6
                     public final /* synthetic */ KeyguardKnoxGuardViewController f$0;
@@ -733,14 +731,14 @@ public class KeyguardKnoxGuardViewController extends KeyguardSecAbsKeyInputViewC
                         switch (i2) {
                             case 0:
                                 KeyguardKnoxGuardViewController keyguardKnoxGuardViewController = this.f$0;
-                                String str2 = trim;
+                                String str = strTrim2;
                                 KeyguardSecurityCallback keyguardSecurityCallback2 = keyguardSecurityCallback;
                                 keyguardKnoxGuardViewController.resetPinErrorMessage();
                                 try {
                                     Log.d("KeyguardKnoxGuardView", "click customer app button");
                                     Intent intent = new Intent("com.samsung.kgclient.intent.action.CUSTOMER_APP");
                                     intent.setClassName("com.samsung.android.kgclient", "com.samsung.android.kgclient.receiver.KGIntentReceiver");
-                                    intent.putExtra("customerPackageName", str2);
+                                    intent.putExtra("customerPackageName", str);
                                     intent.addFlags(32);
                                     keyguardKnoxGuardViewController.getContext().sendBroadcastAsUser(intent, UserHandle.CURRENT, "com.samsung.android.knoxguard.STATUS");
                                     if (keyguardSecurityCallback2 != null) {
@@ -753,7 +751,7 @@ public class KeyguardKnoxGuardViewController extends KeyguardSecAbsKeyInputViewC
                                 break;
                             default:
                                 KeyguardKnoxGuardViewController keyguardKnoxGuardViewController2 = this.f$0;
-                                String str3 = trim;
+                                String str2 = strTrim2;
                                 KeyguardSecurityCallback keyguardSecurityCallback3 = keyguardSecurityCallback;
                                 keyguardKnoxGuardViewController2.resetPinErrorMessage();
                                 TelephonyManager telephonyManager = keyguardKnoxGuardViewController2.mTelephonyManager;
@@ -762,7 +760,7 @@ public class KeyguardKnoxGuardViewController extends KeyguardSecAbsKeyInputViewC
                                     keyguardKnoxGuardViewController2.showToast(keyguardKnoxGuardViewController2.getContext().getString(R.string.kg_knox_guard_call_not_support_toast));
                                     break;
                                 } else {
-                                    Intent intent2 = new Intent("android.intent.action.CALL_PRIVILEGED", Uri.fromParts("tel", str3, null));
+                                    Intent intent2 = new Intent("android.intent.action.CALL_PRIVILEGED", Uri.fromParts("tel", str2, null));
                                     intent2.setFlags(268435456);
                                     try {
                                         Log.d("KeyguardKnoxGuardView", "click call button");
@@ -824,7 +822,7 @@ public class KeyguardKnoxGuardViewController extends KeyguardSecAbsKeyInputViewC
     }
 
     @Override // com.android.keyguard.KeyguardSecAbsKeyInputViewController
-    public final void updateLayout$1() {
+    public final void updateLayout$1() throws Resources.NotFoundException {
         super.updateLayout$1();
         updateTopContainer();
     }
@@ -835,16 +833,16 @@ public class KeyguardKnoxGuardViewController extends KeyguardSecAbsKeyInputViewC
         boolean z = wifiManager != null && wifiManager.isWifiEnabled();
         DataUsageController dataUsageController = this.mDataController;
         boolean z2 = dataUsageController != null && dataUsageController.isMobileDataEnabled();
-        boolean isWiFiOnlyDevice = DeviceType.isWiFiOnlyDevice();
-        boolean isAllSimState = ((KeyguardAbsKeyInputViewController) this).mKeyguardUpdateMonitor.isAllSimState();
-        CarrierTextManager$$ExternalSyntheticOutline0.m(EmergencyButtonController$$ExternalSyntheticOutline0.m("updateNetworkSettingsButton wifi : ", ",  mobileData : ", ",  wifiOnly : ", z, z2), isWiFiOnlyDevice, ",  noSimState : ", isAllSimState, "KeyguardKnoxGuardView");
+        boolean zIsWiFiOnlyDevice = DeviceType.isWiFiOnlyDevice();
+        boolean zIsAllSimState = ((KeyguardAbsKeyInputViewController) this).mKeyguardUpdateMonitor.isAllSimState();
+        CarrierTextManager$$ExternalSyntheticOutline0.m(EmergencyButtonController$$ExternalSyntheticOutline0.m("updateNetworkSettingsButton wifi : ", ",  mobileData : ", ",  wifiOnly : ", z, z2), zIsWiFiOnlyDevice, ",  noSimState : ", zIsAllSimState, "KeyguardKnoxGuardView");
         SystemUIImageView systemUIImageView = this.mWifiButton;
         if (systemUIImageView != null) {
             systemUIImageView.setVisibility(z ? 8 : 0);
         }
         SystemUIImageView systemUIImageView2 = this.mDataButton;
         if (systemUIImageView2 != null) {
-            if (isWiFiOnlyDevice || (z2 && !isAllSimState)) {
+            if (zIsWiFiOnlyDevice || (z2 && !zIsAllSimState)) {
                 i = 8;
             }
             systemUIImageView2.setVisibility(i);
@@ -875,14 +873,14 @@ public class KeyguardKnoxGuardViewController extends KeyguardSecAbsKeyInputViewC
     }
 
     @Override // com.android.keyguard.KeyguardSecAbsKeyInputViewController
-    public final void verifyPasswordAndUnlock() {
+    public final void verifyPasswordAndUnlock() throws Resources.NotFoundException {
         Log.d("KeyguardKnoxGuardView", "verifyPasswordAndUnlock()");
-        byte[] charSequenceToByteArray = KeyguardSecAbsKeyInputViewController.charSequenceToByteArray(this.mPinEditText.getText());
+        byte[] bArrCharSequenceToByteArray = KeyguardSecAbsKeyInputViewController.charSequenceToByteArray(this.mPinEditText.getText());
         ((KeyguardKnoxGuardView) this.mView).setPasswordEntryInputEnabled(false);
         resetPinErrorMessage();
-        if (charSequenceToByteArray.length > 3) {
+        if (bArrCharSequenceToByteArray.length > 3) {
             try {
-                getLockSettings().checkRemoteLockPassword(3, charSequenceToByteArray, this.mSelectedUserInteractor.getSelectedUserId(), this.mCheckPasswordCallback);
+                getLockSettings().checkRemoteLockPassword(3, bArrCharSequenceToByteArray, this.mSelectedUserInteractor.getSelectedUserId(), this.mCheckPasswordCallback);
                 ((KeyguardKnoxGuardView) this.mView).resetPasswordText(true, true);
                 return;
             } catch (RemoteException unused) {
@@ -890,7 +888,7 @@ public class KeyguardKnoxGuardViewController extends KeyguardSecAbsKeyInputViewC
                 return;
             }
         }
-        if (charSequenceToByteArray.length != 0) {
+        if (bArrCharSequenceToByteArray.length != 0) {
             Resources resources = getResources();
             ((KeyguardKnoxGuardView) this.mView).getClass();
             String string = resources.getString(R.string.kg_remote_lock_incorrect_pin);

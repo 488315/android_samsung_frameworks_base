@@ -12,7 +12,6 @@ jadx.core.utils.exceptions.JadxRuntimeException: Init of enum field 'WIDTH' uses
 	at jadx.core.dex.visitors.EnumVisitor.visit(EnumVisitor.java:100)
  */
 /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class FactorType {
     public static final /* synthetic */ FactorType[] $VALUES;
@@ -42,15 +41,14 @@ public final class FactorType {
     final int speedIdx;
     final int valueIdx;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Holder {
         public static final int sCount;
         public static final FactorType[] sValuesCache;
 
         static {
-            FactorType[] values = FactorType.values();
-            sValuesCache = values;
-            sCount = values.length;
+            FactorType[] factorTypeArrValues = FactorType.values();
+            sValuesCache = factorTypeArrValues;
+            sCount = factorTypeArrValues.length;
         }
 
         private Holder() {
@@ -58,11 +56,11 @@ public final class FactorType {
     }
 
     static {
-        Float valueOf = Float.valueOf(1.0f);
-        Float valueOf2 = Float.valueOf(2.1474836E9f);
-        FactorType factorType = new FactorType("WIDTH", 0, 0, new RangeChecker(valueOf, valueOf2));
+        Float fValueOf = Float.valueOf(1.0f);
+        Float fValueOf2 = Float.valueOf(2.1474836E9f);
+        FactorType factorType = new FactorType("WIDTH", 0, 0, new RangeChecker(fValueOf, fValueOf2));
         WIDTH = factorType;
-        FactorType factorType2 = new FactorType("HEIGHT", 1, 0, new RangeChecker(valueOf, valueOf2));
+        FactorType factorType2 = new FactorType("HEIGHT", 1, 0, new RangeChecker(fValueOf, fValueOf2));
         HEIGHT = factorType2;
         FactorType factorType3 = new FactorType("POS", 2, 0);
         POS = factorType3;
@@ -72,8 +70,8 @@ public final class FactorType {
         POS_Y = factorType5;
         FactorType factorType6 = new FactorType("ROTATION", 5, 0);
         ROTATION = factorType6;
-        Float valueOf3 = Float.valueOf(0.0f);
-        FactorType factorType7 = new FactorType("ALPHA", 6, 1, 1.0f, new RangeChecker(valueOf3, valueOf));
+        Float fValueOf3 = Float.valueOf(0.0f);
+        FactorType factorType7 = new FactorType("ALPHA", 6, 1, 1.0f, new RangeChecker(fValueOf3, fValueOf));
         ALPHA = factorType7;
         FactorType factorType8 = new FactorType("SCALE", 7, 1, 1.0f);
         SCALE = factorType8;
@@ -81,20 +79,20 @@ public final class FactorType {
         SCALE_X = factorType9;
         FactorType factorType10 = new FactorType("SCALE_Y", 9, 1, 1.0f);
         SCALE_Y = factorType10;
-        Float valueOf4 = Float.valueOf(255.0f);
-        FactorType factorType11 = new FactorType("COLOR_ALPHA", 10, 0, new RangeChecker(valueOf3, valueOf4));
+        Float fValueOf4 = Float.valueOf(255.0f);
+        FactorType factorType11 = new FactorType("COLOR_ALPHA", 10, 0, new RangeChecker(fValueOf3, fValueOf4));
         COLOR_ALPHA = factorType11;
-        FactorType factorType12 = new FactorType("COLOR_RED", 11, 0, new RangeChecker(valueOf3, valueOf4));
+        FactorType factorType12 = new FactorType("COLOR_RED", 11, 0, new RangeChecker(fValueOf3, fValueOf4));
         COLOR_RED = factorType12;
-        FactorType factorType13 = new FactorType("COLOR_GREEN", 12, 0, new RangeChecker(valueOf3, valueOf4));
+        FactorType factorType13 = new FactorType("COLOR_GREEN", 12, 0, new RangeChecker(fValueOf3, fValueOf4));
         COLOR_GREEN = factorType13;
-        FactorType factorType14 = new FactorType("COLOR_BLUE", 13, 0, new RangeChecker(valueOf3, valueOf4));
+        FactorType factorType14 = new FactorType("COLOR_BLUE", 13, 0, new RangeChecker(fValueOf3, fValueOf4));
         COLOR_BLUE = factorType14;
-        FactorType factorType15 = new FactorType("COLOR_HUE", 14, 0, new RangeChecker(valueOf3, Float.valueOf(360.0f)));
+        FactorType factorType15 = new FactorType("COLOR_HUE", 14, 0, new RangeChecker(fValueOf3, Float.valueOf(360.0f)));
         COLOR_HUE = factorType15;
-        FactorType factorType16 = new FactorType("COLOR_SATURATION", 15, 0, new RangeChecker(valueOf3, valueOf));
+        FactorType factorType16 = new FactorType("COLOR_SATURATION", 15, 0, new RangeChecker(fValueOf3, fValueOf));
         COLOR_SATURATION = factorType16;
-        FactorType factorType17 = new FactorType("COLOR_VALUE", 16, 0, new RangeChecker(valueOf3, valueOf));
+        FactorType factorType17 = new FactorType("COLOR_VALUE", 16, 0, new RangeChecker(fValueOf3, fValueOf));
         COLOR_VALUE = factorType17;
         $VALUES = new FactorType[]{factorType, factorType2, factorType3, factorType4, factorType5, factorType6, factorType7, factorType8, factorType9, factorType10, factorType11, factorType12, factorType13, factorType14, factorType15, factorType16, factorType17};
     }
@@ -128,11 +126,11 @@ public final class FactorType {
     }
 
     private FactorType(String str, int i, int i2, float f, float f2, RangeChecker rangeChecker) {
-        int ordinal = ordinal();
-        this.idx = ordinal;
-        this.valueIdx = ordinal * 3;
-        this.speedIdx = (ordinal * 3) + 1;
-        this.accelerationIdx = (ordinal * 3) + 2;
+        int iOrdinal = ordinal();
+        this.idx = iOrdinal;
+        this.valueIdx = iOrdinal * 3;
+        this.speedIdx = (iOrdinal * 3) + 1;
+        this.accelerationIdx = (iOrdinal * 3) + 2;
         this.min = f;
         this.max = f2;
         this.rangeChecker = rangeChecker;

@@ -5,7 +5,6 @@ import androidx.compose.ui.autofill.PopulateViewStructure_androidKt$$ExternalSyn
 import androidx.concurrent.futures.AbstractResolvableFuture$$ExternalSyntheticOutline0;
 import com.samsung.android.knox.net.vpn.VpnErrorValues;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class CustomVariable {
     public boolean mBooleanValue;
@@ -52,34 +51,34 @@ public class CustomVariable {
     }
 
     public final String toString() {
-        String m = OpaqueKey$$ExternalSyntheticOutline0.m(new StringBuilder(), this.mName, ':');
+        String strM = OpaqueKey$$ExternalSyntheticOutline0.m(new StringBuilder(), this.mName, ':');
         switch (this.mType) {
             case 900:
-                StringBuilder m2 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(m);
-                m2.append(this.mIntegerValue);
-                return m2.toString();
+                StringBuilder sbM = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(strM);
+                sbM.append(this.mIntegerValue);
+                return sbM.toString();
             case 901:
-                StringBuilder m3 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(m);
-                m3.append(this.mFloatValue);
-                return m3.toString();
+                StringBuilder sbM2 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(strM);
+                sbM2.append(this.mFloatValue);
+                return sbM2.toString();
             case VpnErrorValues.ERROR_USB_TETHERING_FAILED /* 902 */:
-                StringBuilder m4 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(m);
-                m4.append("#" + ("00000000" + Integer.toHexString(this.mIntegerValue)).substring(r3.length() - 8));
-                return m4.toString();
+                StringBuilder sbM3 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(strM);
+                sbM3.append("#" + ("00000000" + Integer.toHexString(this.mIntegerValue)).substring(r3.length() - 8));
+                return sbM3.toString();
             case 903:
-                StringBuilder m5 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(m);
-                m5.append(this.mStringValue);
-                return m5.toString();
+                StringBuilder sbM4 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(strM);
+                sbM4.append(this.mStringValue);
+                return sbM4.toString();
             case 904:
-                StringBuilder m6 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(m);
-                m6.append(Boolean.valueOf(this.mBooleanValue));
-                return m6.toString();
+                StringBuilder sbM5 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(strM);
+                sbM5.append(Boolean.valueOf(this.mBooleanValue));
+                return sbM5.toString();
             case 905:
-                StringBuilder m7 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(m);
-                m7.append(this.mFloatValue);
-                return m7.toString();
+                StringBuilder sbM6 = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(strM);
+                sbM6.append(this.mFloatValue);
+                return sbM6.toString();
             default:
-                return AbstractResolvableFuture$$ExternalSyntheticOutline0.m(m, "????");
+                return AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strM, "????");
         }
     }
 

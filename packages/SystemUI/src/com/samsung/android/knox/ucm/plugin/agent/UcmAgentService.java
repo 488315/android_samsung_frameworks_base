@@ -58,7 +58,6 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.GCMParameterSpec;
 import javax.crypto.spec.IvParameterSpec;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class UcmAgentService extends Service {
     public static final String ACTION_UCM_PLUGIN_STATUS = "com.samsung.android.knox.intent.action.UCM_PLUGIN_STATUS";
@@ -233,7 +232,6 @@ public abstract class UcmAgentService extends Service {
     public static final String USER_ID = "userId";
     private Provider mProvider = new UcmAgentProviderImpl();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class UcmAgentLoadParameter implements KeyStore.LoadStoreParameter {
         KeyStoreParameter param;
 
@@ -247,7 +245,6 @@ public abstract class UcmAgentService extends Service {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class UcmAgentServiceWrapper extends IUcmAgentService.Stub {
         public /* synthetic */ UcmAgentServiceWrapper(UcmAgentService ucmAgentService, int i) {
             this();
@@ -295,7 +292,7 @@ public abstract class UcmAgentService extends Service {
 
         @Override // com.samsung.android.knox.ucm.plugin.agent.IUcmAgentService
         public Bundle decrypt(String str, byte[] bArr, String str2, Bundle bundle) throws RemoteException {
-            return UcmAgentService.m3274$$Nest$mdecrypt(bundle, UcmAgentService.this, str, str2, bArr);
+            return UcmAgentService.m3292$$Nest$mdecrypt(bundle, UcmAgentService.this, str, str2, bArr);
         }
 
         @Override // com.samsung.android.knox.ucm.plugin.agent.IUcmAgentService
@@ -305,7 +302,7 @@ public abstract class UcmAgentService extends Service {
 
         @Override // com.samsung.android.knox.ucm.plugin.agent.IUcmAgentService
         public Bundle encrypt(String str, byte[] bArr, String str2, Bundle bundle) {
-            return UcmAgentService.m3276$$Nest$mencrypt(bundle, UcmAgentService.this, str, str2, bArr);
+            return UcmAgentService.m3294$$Nest$mencrypt(bundle, UcmAgentService.this, str, str2, bArr);
         }
 
         @Override // com.samsung.android.knox.ucm.plugin.agent.IUcmAgentService
@@ -425,12 +422,12 @@ public abstract class UcmAgentService extends Service {
 
         @Override // com.samsung.android.knox.ucm.plugin.agent.IUcmAgentService
         public Bundle installCertificateIfSupported(String str, byte[] bArr, String str2, Bundle bundle) throws RemoteException {
-            return UcmAgentService.m3285$$Nest$minstallCertificateIfSupported(bundle, UcmAgentService.this, str, str2, bArr);
+            return UcmAgentService.m3303$$Nest$minstallCertificateIfSupported(bundle, UcmAgentService.this, str, str2, bArr);
         }
 
         @Override // com.samsung.android.knox.ucm.plugin.agent.IUcmAgentService
         public Bundle keyAgreement(String str, String str2, byte[] bArr, Bundle bundle) throws RemoteException {
-            return UcmAgentService.m3286$$Nest$mkeyAgreement(bundle, UcmAgentService.this, str, str2, bArr);
+            return UcmAgentService.m3304$$Nest$mkeyAgreement(bundle, UcmAgentService.this, str, str2, bArr);
         }
 
         @Override // com.samsung.android.knox.ucm.plugin.agent.IUcmAgentService
@@ -440,7 +437,7 @@ public abstract class UcmAgentService extends Service {
 
         @Override // com.samsung.android.knox.ucm.plugin.agent.IUcmAgentService
         public Bundle mac(String str, byte[] bArr, String str2, Bundle bundle) throws RemoteException {
-            return UcmAgentService.m3287$$Nest$mmac(bundle, UcmAgentService.this, str, str2, bArr);
+            return UcmAgentService.m3305$$Nest$mmac(bundle, UcmAgentService.this, str, str2, bArr);
         }
 
         @Override // com.samsung.android.knox.ucm.plugin.agent.IUcmAgentService
@@ -504,7 +501,7 @@ public abstract class UcmAgentService extends Service {
 
         @Override // com.samsung.android.knox.ucm.plugin.agent.IUcmAgentService
         public Bundle sign(String str, byte[] bArr, String str2, boolean z, Bundle bundle) throws RemoteException {
-            return z ? UcmAgentService.this.encrypt(str, bArr, bundle) : UcmAgentService.m3289$$Nest$msign(bundle, UcmAgentService.this, str, str2, bArr);
+            return z ? UcmAgentService.this.encrypt(str, bArr, bundle) : UcmAgentService.m3307$$Nest$msign(bundle, UcmAgentService.this, str, str2, bArr);
         }
 
         @Override // com.samsung.android.knox.ucm.plugin.agent.IUcmAgentService
@@ -532,49 +529,49 @@ public abstract class UcmAgentService extends Service {
     }
 
     /* renamed from: -$$Nest$mdecrypt, reason: not valid java name */
-    public static /* bridge */ /* synthetic */ Bundle m3274$$Nest$mdecrypt(Bundle bundle, UcmAgentService ucmAgentService, String str, String str2, byte[] bArr) {
+    public static /* bridge */ /* synthetic */ Bundle m3292$$Nest$mdecrypt(Bundle bundle, UcmAgentService ucmAgentService, String str, String str2, byte[] bArr) {
         return ucmAgentService.decrypt(str, bArr, str2, bundle);
     }
 
     /* renamed from: -$$Nest$mencrypt, reason: not valid java name */
-    public static /* bridge */ /* synthetic */ Bundle m3276$$Nest$mencrypt(Bundle bundle, UcmAgentService ucmAgentService, String str, String str2, byte[] bArr) {
+    public static /* bridge */ /* synthetic */ Bundle m3294$$Nest$mencrypt(Bundle bundle, UcmAgentService ucmAgentService, String str, String str2, byte[] bArr) {
         return ucmAgentService.encrypt(str, bArr, str2, bundle);
     }
 
     /* renamed from: -$$Nest$minstallCertificateIfSupported, reason: not valid java name */
-    public static /* bridge */ /* synthetic */ Bundle m3285$$Nest$minstallCertificateIfSupported(Bundle bundle, UcmAgentService ucmAgentService, String str, String str2, byte[] bArr) {
+    public static /* bridge */ /* synthetic */ Bundle m3303$$Nest$minstallCertificateIfSupported(Bundle bundle, UcmAgentService ucmAgentService, String str, String str2, byte[] bArr) {
         return ucmAgentService.installCertificateIfSupported(str, bArr, str2, bundle);
     }
 
     /* renamed from: -$$Nest$mkeyAgreement, reason: not valid java name */
-    public static /* bridge */ /* synthetic */ Bundle m3286$$Nest$mkeyAgreement(Bundle bundle, UcmAgentService ucmAgentService, String str, String str2, byte[] bArr) {
+    public static /* bridge */ /* synthetic */ Bundle m3304$$Nest$mkeyAgreement(Bundle bundle, UcmAgentService ucmAgentService, String str, String str2, byte[] bArr) {
         return ucmAgentService.keyAgreement(str, str2, bArr, bundle);
     }
 
     /* renamed from: -$$Nest$mmac, reason: not valid java name */
-    public static /* bridge */ /* synthetic */ Bundle m3287$$Nest$mmac(Bundle bundle, UcmAgentService ucmAgentService, String str, String str2, byte[] bArr) {
+    public static /* bridge */ /* synthetic */ Bundle m3305$$Nest$mmac(Bundle bundle, UcmAgentService ucmAgentService, String str, String str2, byte[] bArr) {
         return ucmAgentService.mac(str, bArr, str2, bundle);
     }
 
     /* renamed from: -$$Nest$msign, reason: not valid java name */
-    public static /* bridge */ /* synthetic */ Bundle m3289$$Nest$msign(Bundle bundle, UcmAgentService ucmAgentService, String str, String str2, byte[] bArr) {
+    public static /* bridge */ /* synthetic */ Bundle m3307$$Nest$msign(Bundle bundle, UcmAgentService ucmAgentService, String str, String str2, byte[] bArr) {
         return ucmAgentService.sign(str, bArr, str2, bundle);
     }
 
     private final Bundle decrypt(String str, byte[] bArr, String str2, Bundle bundle) {
-        byte[] doFinal;
+        byte[] bArrDoFinal;
         int i;
-        AlgorithmParameterSpec algorithmParameterSpec;
+        AlgorithmParameterSpec ivParameterSpec;
         Log.d(TAG, "decrypt");
         if (bundle == null) {
             Log.e(TAG, "decrypt. property is null");
             return responseErrorWithNullBytes(16);
         }
-        StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("decrypt ", str, ",uid: ");
-        m.append(bundle.getInt(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_CALLER_UID));
-        m.append(", caller: ");
-        m.append(Binder.getCallingUid());
-        Log.i(TAG, m.toString());
+        StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("decrypt ", str, ",uid: ");
+        sbM.append(bundle.getInt(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_CALLER_UID));
+        sbM.append(", caller: ");
+        sbM.append(Binder.getCallingUid());
+        Log.i(TAG, sbM.toString());
         if (bArr == null) {
             Log.e(TAG, "decrypt. data is null");
             return responseErrorWithNullBytes(16);
@@ -594,55 +591,49 @@ public abstract class UcmAgentService extends Service {
             Cipher cipher = Cipher.getInstance(str2, this.mProvider);
             cipher.setProperty(bundle);
             Log.d(TAG, "decrypt. base algorithm = " + str3);
-            int i2 = 10;
-            if (!TextUtils.isEmpty(str2) && "AES".equalsIgnoreCase(str3)) {
+            int errorStatus = 10;
+            if (TextUtils.isEmpty(str2) || !"AES".equalsIgnoreCase(str3)) {
+                PrivateKey privateKey = ((KeyStore.PrivateKeyEntry) entry).getPrivateKey();
+                if (privateKey == null) {
+                    Log.e(TAG, "decrypt. getPrivateKey null");
+                    if (keyStore.getErrorStatus() != 0) {
+                        errorStatus = keyStore.getErrorStatus();
+                    }
+                    return responseErrorWithNullBytes(errorStatus);
+                }
+                cipher.init(2, privateKey);
+                bArrDoFinal = cipher.doFinal(bArr);
+            } else {
                 SecretKey secretKey = ((KeyStore.SecretKeyEntry) entry).getSecretKey();
                 if (secretKey == null) {
                     Log.e(TAG, "decrypt. getSecretKey null");
                     if (keyStore.getErrorStatus() != 0) {
-                        i2 = keyStore.getErrorStatus();
+                        errorStatus = keyStore.getErrorStatus();
                     }
-                    return responseErrorWithNullBytes(i2);
+                    return responseErrorWithNullBytes(errorStatus);
                 }
-                boolean equals = "GCM".equals(str2.split("/")[1]);
-                if (equals && bundle.containsKey(KEY_EXTRA_TAG_LEN) && bundle.containsKey(KEY_EXTRA_IV)) {
-                    algorithmParameterSpec = new GCMParameterSpec(bundle.getInt(KEY_EXTRA_TAG_LEN), bundle.getByteArray(KEY_EXTRA_IV));
+                boolean zEquals = "GCM".equals(str2.split("/")[1]);
+                if (zEquals && bundle.containsKey(KEY_EXTRA_TAG_LEN) && bundle.containsKey(KEY_EXTRA_IV)) {
+                    ivParameterSpec = new GCMParameterSpec(bundle.getInt(KEY_EXTRA_TAG_LEN), bundle.getByteArray(KEY_EXTRA_IV));
+                } else if (bundle.containsKey(KEY_EXTRA_IV)) {
+                    ivParameterSpec = new IvParameterSpec(bundle.getByteArray(KEY_EXTRA_IV));
                 } else {
-                    if (!bundle.containsKey(KEY_EXTRA_IV)) {
-                        i = 2;
-                        algorithmParameterSpec = null;
-                        cipher.init(i, secretKey, algorithmParameterSpec);
-                        if (equals && bundle.containsKey(KEY_EXTRA_AAD)) {
-                            cipher.updateAAD(bundle.getByteArray(KEY_EXTRA_AAD));
-                        }
-                        doFinal = cipher.doFinal(bArr);
-                        bundle2.putByteArray(PLUGIN_BYTEARRAY_RESPONSE, doFinal);
-                        bundle2.putInt(PLUGIN_ERROR_CODE, cipher.getErrorStatus());
-                        return bundle2;
+                    i = 2;
+                    ivParameterSpec = null;
+                    cipher.init(i, secretKey, ivParameterSpec);
+                    if (zEquals && bundle.containsKey(KEY_EXTRA_AAD)) {
+                        cipher.updateAAD(bundle.getByteArray(KEY_EXTRA_AAD));
                     }
-                    algorithmParameterSpec = new IvParameterSpec(bundle.getByteArray(KEY_EXTRA_IV));
+                    bArrDoFinal = cipher.doFinal(bArr);
                 }
                 i = 2;
-                cipher.init(i, secretKey, algorithmParameterSpec);
-                if (equals) {
+                cipher.init(i, secretKey, ivParameterSpec);
+                if (zEquals) {
                     cipher.updateAAD(bundle.getByteArray(KEY_EXTRA_AAD));
                 }
-                doFinal = cipher.doFinal(bArr);
-                bundle2.putByteArray(PLUGIN_BYTEARRAY_RESPONSE, doFinal);
-                bundle2.putInt(PLUGIN_ERROR_CODE, cipher.getErrorStatus());
-                return bundle2;
+                bArrDoFinal = cipher.doFinal(bArr);
             }
-            PrivateKey privateKey = ((KeyStore.PrivateKeyEntry) entry).getPrivateKey();
-            if (privateKey == null) {
-                Log.e(TAG, "decrypt. getPrivateKey null");
-                if (keyStore.getErrorStatus() != 0) {
-                    i2 = keyStore.getErrorStatus();
-                }
-                return responseErrorWithNullBytes(i2);
-            }
-            cipher.init(2, privateKey);
-            doFinal = cipher.doFinal(bArr);
-            bundle2.putByteArray(PLUGIN_BYTEARRAY_RESPONSE, doFinal);
+            bundle2.putByteArray(PLUGIN_BYTEARRAY_RESPONSE, bArrDoFinal);
             bundle2.putInt(PLUGIN_ERROR_CODE, cipher.getErrorStatus());
             return bundle2;
         } catch (IOException e) {
@@ -720,11 +711,11 @@ public abstract class UcmAgentService extends Service {
             Log.e(TAG, "deleteKey. property is null");
             return responseErrorWithBoolean();
         }
-        StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("deleteKey ", str, ", uid: ");
-        m.append(bundle.getInt(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_CALLER_UID));
-        m.append(", caller: ");
-        m.append(Binder.getCallingUid());
-        Log.i(TAG, m.toString());
+        StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("deleteKey ", str, ", uid: ");
+        sbM.append(bundle.getInt(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_CALLER_UID));
+        sbM.append(", caller: ");
+        sbM.append(Binder.getCallingUid());
+        Log.i(TAG, sbM.toString());
         Bundle bundle2 = new Bundle();
         try {
             com.samsung.android.knox.ucm.plugin.service.KeyStore keyStore = com.samsung.android.knox.ucm.plugin.service.KeyStore.getInstance("KNOX", this.mProvider);
@@ -840,14 +831,14 @@ public abstract class UcmAgentService extends Service {
             return responseErrorWithBoolean();
         }
         Bundle bundle3 = new Bundle();
-        KeyGenParameterSpec build = new KeyGenParameterSpec.Builder(str, i, i2, false, 1, i2).setAlgorithm(str2).setPurpose(bundle2.getInt(UcmAgentProviderImpl.KEY_EXTRA_PURPOSE)).setRandomizedEncryptionRequired(bundle2.getBoolean(UcmAgentProviderImpl.KEY_EXTRA_RANDOMIZED_ENCRYPTION, true)).setEcCurveName(bundle2.getString(UcmAgentProviderImpl.KEY_EXTRA_EC_CURVE_NAME, "")).setBlockModes(bundle2.getStringArray(UcmAgentProviderImpl.KEY_EXTRA_BLOCK_MODES)).setDigests(bundle2.getStringArray(UcmAgentProviderImpl.KEY_EXTRA_DIGESTS)).setSignaturePaddings(bundle2.getStringArray(UcmAgentProviderImpl.KEY_EXTRA_SIGNATURE_PADDINGS)).setOptions(bundle2).build();
-        Log.i(TAG, "generateKeyPair " + build.getKeystoreAlias() + ",uid: " + bundle.getInt(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_CALLER_UID) + ", caller: " + Binder.getCallingUid());
+        KeyGenParameterSpec keyGenParameterSpecBuild = new KeyGenParameterSpec.Builder(str, i, i2, false, 1, i2).setAlgorithm(str2).setPurpose(bundle2.getInt(UcmAgentProviderImpl.KEY_EXTRA_PURPOSE)).setRandomizedEncryptionRequired(bundle2.getBoolean(UcmAgentProviderImpl.KEY_EXTRA_RANDOMIZED_ENCRYPTION, true)).setEcCurveName(bundle2.getString(UcmAgentProviderImpl.KEY_EXTRA_EC_CURVE_NAME, "")).setBlockModes(bundle2.getStringArray(UcmAgentProviderImpl.KEY_EXTRA_BLOCK_MODES)).setDigests(bundle2.getStringArray(UcmAgentProviderImpl.KEY_EXTRA_DIGESTS)).setSignaturePaddings(bundle2.getStringArray(UcmAgentProviderImpl.KEY_EXTRA_SIGNATURE_PADDINGS)).setOptions(bundle2).build();
+        Log.i(TAG, "generateKeyPair " + keyGenParameterSpecBuild.getKeystoreAlias() + ",uid: " + bundle.getInt(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_CALLER_UID) + ", caller: " + Binder.getCallingUid());
         try {
-            KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance(build.getAlgorithm(), this.mProvider);
+            KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance(keyGenParameterSpecBuild.getAlgorithm(), this.mProvider);
             keyPairGenerator.setProperty(bundle);
-            keyPairGenerator.initialize(build, null);
-            KeyPair generateKeyPair = keyPairGenerator.generateKeyPair();
-            PublicKey publicKey = generateKeyPair != null ? generateKeyPair.getPublic() : null;
+            keyPairGenerator.initialize(keyGenParameterSpecBuild, null);
+            KeyPair keyPairGenerateKeyPair = keyPairGenerator.generateKeyPair();
+            PublicKey publicKey = keyPairGenerateKeyPair != null ? keyPairGenerateKeyPair.getPublic() : null;
             if (publicKey == null) {
                 bundle3.putInt(PLUGIN_ERROR_CODE, 259);
                 bundle3.putByteArray(PLUGIN_BYTEARRAY_RESPONSE, null);
@@ -891,11 +882,11 @@ public abstract class UcmAgentService extends Service {
             Log.e(TAG, "generateSecureRandom. property is null");
             return responseErrorWithNullBytes(16);
         }
-        StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "generateSecureRandom ", ",uid: ");
-        m.append(bundle.getInt(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_CALLER_UID));
-        m.append(", caller: ");
-        m.append(Binder.getCallingUid());
-        Log.i(TAG, m.toString());
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "generateSecureRandom ", ",uid: ");
+        sbM.append(bundle.getInt(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_CALLER_UID));
+        sbM.append(", caller: ");
+        sbM.append(Binder.getCallingUid());
+        Log.i(TAG, sbM.toString());
         Bundle bundle2 = new Bundle();
         try {
             SecureRandom secureRandom = SecureRandom.getInstance(UcmAgentProviderImpl.SECURERANDOM_SHA1PRNG, this.mProvider);
@@ -933,11 +924,11 @@ public abstract class UcmAgentService extends Service {
             Log.e(TAG, "getCertificateChain. property is null");
             return responseErrorWithNullBytes(16);
         }
-        StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("getCertificateChain ", str, ",uid:");
-        m.append(bundle.getInt(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_CALLER_UID));
-        m.append(", caller: ");
-        m.append(Binder.getCallingUid());
-        Log.i(TAG, m.toString());
+        StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("getCertificateChain ", str, ",uid:");
+        sbM.append(bundle.getInt(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_CALLER_UID));
+        sbM.append(", caller: ");
+        sbM.append(Binder.getCallingUid());
+        Log.i(TAG, sbM.toString());
         Bundle bundle2 = new Bundle();
         try {
             com.samsung.android.knox.ucm.plugin.service.KeyStore keyStore = com.samsung.android.knox.ucm.plugin.service.KeyStore.getInstance("KNOX", this.mProvider);
@@ -1005,18 +996,18 @@ public abstract class UcmAgentService extends Service {
             Log.e(TAG, "getKeyType. property is null");
             return responseErrorWithNullBytes(16);
         }
-        StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("getKeyType: ", str, ", uid: ");
-        m.append(bundle.getInt(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_CALLER_UID));
-        m.append(", caller: ");
-        m.append(Binder.getCallingUid());
-        Log.i(TAG, m.toString());
-        Bundle saw = saw(bundle);
-        String[] stringArray = saw.getStringArray(PLUGIN_STRINGARRAY_RESPONSE);
-        saw.putBoolean(PLUGIN_BOOLEAN_RESPONSE, false);
-        saw.putInt(PLUGIN_KEY_TYPE_RESPONSE, -1);
+        StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("getKeyType: ", str, ", uid: ");
+        sbM.append(bundle.getInt(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_CALLER_UID));
+        sbM.append(", caller: ");
+        sbM.append(Binder.getCallingUid());
+        Log.i(TAG, sbM.toString());
+        Bundle bundleSaw = saw(bundle);
+        String[] stringArray = bundleSaw.getStringArray(PLUGIN_STRINGARRAY_RESPONSE);
+        bundleSaw.putBoolean(PLUGIN_BOOLEAN_RESPONSE, false);
+        bundleSaw.putInt(PLUGIN_KEY_TYPE_RESPONSE, -1);
         if (stringArray == null) {
             Log.e(TAG, "getKeyType. aliases is null");
-            return saw;
+            return bundleSaw;
         }
         UcmAgentLoadParameter ucmAgentLoadParameter = new UcmAgentLoadParameter(bundle.getInt(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_OWNER_ID), bundle.getInt(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_RESOURCE_ID), bundle.getBundle(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_EXTRA_ARGS));
         for (String str2 : stringArray) {
@@ -1029,37 +1020,37 @@ public abstract class UcmAgentService extends Service {
                     if (key == null) {
                         Log.e(TAG, "getKeyType. key is null");
                     } else {
-                        saw.putBoolean(PLUGIN_BOOLEAN_RESPONSE, true);
-                        saw.putString(PLUGIN_STRING_RESPONSE, key.getAlgorithm());
-                        saw.putInt(PLUGIN_ERROR_CODE, keyStore.getErrorStatus());
+                        bundleSaw.putBoolean(PLUGIN_BOOLEAN_RESPONSE, true);
+                        bundleSaw.putString(PLUGIN_STRING_RESPONSE, key.getAlgorithm());
+                        bundleSaw.putInt(PLUGIN_ERROR_CODE, keyStore.getErrorStatus());
                         if (key instanceof SecretKey) {
-                            saw.putInt(PLUGIN_KEY_TYPE_RESPONSE, 1);
+                            bundleSaw.putInt(PLUGIN_KEY_TYPE_RESPONSE, 1);
                         } else if (key instanceof PrivateKey) {
-                            saw.putInt(PLUGIN_KEY_TYPE_RESPONSE, 2);
+                            bundleSaw.putInt(PLUGIN_KEY_TYPE_RESPONSE, 2);
                         }
                         Log.d(TAG, "UCMERRORTESTING: @UcmAgentService responding to getKeyType with error code ks.getErrorStatus() = " + keyStore.getErrorStatus());
                     }
-                    return saw;
+                    return bundleSaw;
                 } catch (IOException e) {
                     e.printStackTrace();
-                    saw.putInt(PLUGIN_ERROR_CODE, 269);
+                    bundleSaw.putInt(PLUGIN_ERROR_CODE, 269);
                 } catch (KeyStoreException e2) {
                     e2.printStackTrace();
-                    saw.putInt(PLUGIN_ERROR_CODE, 266);
+                    bundleSaw.putInt(PLUGIN_ERROR_CODE, 266);
                 } catch (NoSuchAlgorithmException e3) {
                     e3.printStackTrace();
-                    saw.putInt(PLUGIN_ERROR_CODE, 2);
+                    bundleSaw.putInt(PLUGIN_ERROR_CODE, 2);
                 } catch (UnrecoverableKeyException e4) {
                     e4.printStackTrace();
-                    saw.putInt(PLUGIN_ERROR_CODE, 265);
+                    bundleSaw.putInt(PLUGIN_ERROR_CODE, 265);
                 } catch (CertificateException e5) {
                     e5.printStackTrace();
-                    saw.putInt(PLUGIN_ERROR_CODE, 261);
+                    bundleSaw.putInt(PLUGIN_ERROR_CODE, 261);
                 }
             }
         }
-        Log.d(TAG, "UCMERRORTESTING: @UcmAgentService responding to getKeyType with EXCEPTION error code  = " + saw.getInt(PLUGIN_ERROR_CODE));
-        return saw;
+        Log.d(TAG, "UCMERRORTESTING: @UcmAgentService responding to getKeyType with EXCEPTION error code  = " + bundleSaw.getInt(PLUGIN_ERROR_CODE));
+        return bundleSaw;
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -1082,18 +1073,18 @@ public abstract class UcmAgentService extends Service {
             builder.setEncryptionPaddings(bundle.getString(UcmAgentProviderImpl.KEY_EXTRA_SIGNATURE_PADDINGS));
         }
         builder.setRandomizedEncryptionRequired(bundle.getBoolean(UcmAgentProviderImpl.KEY_EXTRA_RANDOMIZED_ENCRYPTION, true));
-        KeyProtection build = builder.build();
-        StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("importKey: ", str, ", uid: ");
-        m.append(bundle.getInt(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_CALLER_UID));
-        m.append(", caller: ");
-        m.append(Binder.getCallingUid());
-        Log.i(TAG, m.toString());
+        KeyProtection keyProtectionBuild = builder.build();
+        StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("importKey: ", str, ", uid: ");
+        sbM.append(bundle.getInt(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_CALLER_UID));
+        sbM.append(", caller: ");
+        sbM.append(Binder.getCallingUid());
+        Log.i(TAG, sbM.toString());
         Bundle bundle2 = new Bundle();
         try {
             com.samsung.android.knox.ucm.plugin.service.KeyStore keyStore = com.samsung.android.knox.ucm.plugin.service.KeyStore.getInstance("KNOX", this.mProvider);
             keyStore.setProperty(bundle);
             keyStore.load(new UcmAgentLoadParameter(bundle.getInt(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_OWNER_ID), bundle.getInt(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_RESOURCE_ID), bundle.getBundle(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_EXTRA_ARGS)));
-            keyStore.setEntry(str, new KeyStore.SecretKeyEntry(secretKey), build);
+            keyStore.setEntry(str, new KeyStore.SecretKeyEntry(secretKey), keyProtectionBuild);
             bundle2.putBoolean(PLUGIN_BOOLEAN_RESPONSE, true);
             bundle2.putInt(PLUGIN_ERROR_CODE, keyStore.getErrorStatus());
             Log.i(TAG, "UCMERRORTESTING: @UcmAgentService responding to importKey with error code ks.getErrorStatus() = " + keyStore.getErrorStatus());
@@ -1140,12 +1131,12 @@ public abstract class UcmAgentService extends Service {
             builder.setEncryptionPaddings(bundle.getString(UcmAgentProviderImpl.KEY_EXTRA_SIGNATURE_PADDINGS));
         }
         builder.setRandomizedEncryptionRequired(bundle.getBoolean(UcmAgentProviderImpl.KEY_EXTRA_RANDOMIZED_ENCRYPTION, true));
-        KeyProtection build = builder.build();
-        StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("importKeyPair ", str, ",uid: ");
-        m.append(bundle.getInt(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_CALLER_UID));
-        m.append(", caller: ");
-        m.append(Binder.getCallingUid());
-        Log.i(TAG, m.toString());
+        KeyProtection keyProtectionBuild = builder.build();
+        StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("importKeyPair ", str, ",uid: ");
+        sbM.append(bundle.getInt(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_CALLER_UID));
+        sbM.append(", caller: ");
+        sbM.append(Binder.getCallingUid());
+        Log.i(TAG, sbM.toString());
         Bundle bundle2 = new Bundle();
         try {
             List list = (List) CertificateFactory.getInstance("X.509").generateCertificates(new ByteArrayInputStream(bArr2));
@@ -1153,7 +1144,7 @@ public abstract class UcmAgentService extends Service {
             com.samsung.android.knox.ucm.plugin.service.KeyStore keyStore = com.samsung.android.knox.ucm.plugin.service.KeyStore.getInstance("KNOX", this.mProvider);
             keyStore.setProperty(bundle);
             keyStore.load(new UcmAgentLoadParameter(bundle.getInt(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_OWNER_ID), bundle.getInt(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_RESOURCE_ID), bundle.getBundle(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_EXTRA_ARGS)));
-            keyStore.setEntry(str, new KeyStore.PrivateKeyEntry(bArr != null ? KeyFactory.getInstance(bundle.getString(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_ALGORITHM, "RSA")).generatePrivate(new PKCS8EncodedKeySpec(bArr)) : (PrivateKey) keyStore.getKey(str, null), certificateArr), build);
+            keyStore.setEntry(str, new KeyStore.PrivateKeyEntry(bArr != null ? KeyFactory.getInstance(bundle.getString(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_ALGORITHM, "RSA")).generatePrivate(new PKCS8EncodedKeySpec(bArr)) : (PrivateKey) keyStore.getKey(str, null), certificateArr), keyProtectionBuild);
             bundle2.putBoolean(PLUGIN_BOOLEAN_RESPONSE, true);
             bundle2.putInt(PLUGIN_ERROR_CODE, keyStore.getErrorStatus());
             Log.d(TAG, "UCMERRORTESTING: @UcmAgentService responding to importKeyPair with error code ks.getErrorStatus() = " + keyStore.getErrorStatus());
@@ -1215,17 +1206,17 @@ public abstract class UcmAgentService extends Service {
         }
     }
 
-    private final Bundle installCertificateIfSupported(String str, byte[] bArr, String str2, Bundle bundle) {
+    private final Bundle installCertificateIfSupported(String str, byte[] bArr, String str2, Bundle bundle) throws IOException, CertificateException {
         Log.d(TAG, "installCertificateIfSupported");
         if (bundle == null) {
             Log.e(TAG, "installCertificateIfSupported. property is null");
             return responseErrorWithNullBytes(16);
         }
-        StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("installCertificateIfSupported: ", str, ", uid: ");
-        m.append(bundle.getInt(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_CALLER_UID));
-        m.append(", caller: ");
-        m.append(Binder.getCallingUid());
-        Log.i(TAG, m.toString());
+        StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("installCertificateIfSupported: ", str, ", uid: ");
+        sbM.append(bundle.getInt(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_CALLER_UID));
+        sbM.append(", caller: ");
+        sbM.append(Binder.getCallingUid());
+        Log.i(TAG, sbM.toString());
         Bundle bundle2 = new Bundle();
         try {
             com.samsung.android.knox.ucm.plugin.service.KeyStore keyStore = com.samsung.android.knox.ucm.plugin.service.KeyStore.getInstance("KNOX", this.mProvider);
@@ -1233,15 +1224,15 @@ public abstract class UcmAgentService extends Service {
             ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bArr);
             keyStore.load(byteArrayInputStream, str2.toCharArray());
             byteArrayInputStream.close();
-            Enumeration<String> aliases = keyStore.aliases();
+            Enumeration<String> enumerationAliases = keyStore.aliases();
             while (true) {
-                if (!aliases.hasMoreElements()) {
+                if (!enumerationAliases.hasMoreElements()) {
                     break;
                 }
-                String nextElement = aliases.nextElement();
-                Key key = keyStore.getKey(nextElement, str2.toCharArray());
+                String strNextElement = enumerationAliases.nextElement();
+                Key key = keyStore.getKey(strNextElement, str2.toCharArray());
                 if (key instanceof PrivateKey) {
-                    Certificate[] certificateChain = keyStore.getCertificateChain(nextElement);
+                    Certificate[] certificateChain = keyStore.getCertificateChain(strNextElement);
                     if (certificateChain == null || certificateChain.length == 0) {
                         throw new CertificateException("Certificate chain empty");
                     }
@@ -1284,17 +1275,17 @@ public abstract class UcmAgentService extends Service {
         }
     }
 
-    private final Bundle keyAgreement(String str, String str2, byte[] bArr, Bundle bundle) {
+    private final Bundle keyAgreement(String str, String str2, byte[] bArr, Bundle bundle) throws IllegalStateException, InvalidKeySpecException {
         Log.d(TAG, "keyAgreement");
         if (bundle == null) {
             Log.e(TAG, "keyAgreement. property is null");
             return responseErrorWithNullBytes(16);
         }
-        StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("keyAgreement ", str, ", uid: ");
-        m.append(bundle.getInt(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_CALLER_UID));
-        m.append(", caller: ");
-        m.append(Binder.getCallingUid());
-        Log.i(TAG, m.toString());
+        StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("keyAgreement ", str, ", uid: ");
+        sbM.append(bundle.getInt(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_CALLER_UID));
+        sbM.append(", caller: ");
+        sbM.append(Binder.getCallingUid());
+        Log.i(TAG, sbM.toString());
         if (bArr == null) {
             Log.e(TAG, "keyAgreement. data is null");
             return responseErrorWithNullBytes(16);
@@ -1316,14 +1307,14 @@ public abstract class UcmAgentService extends Service {
                 return responseErrorWithNullBytes(keyStore.getErrorStatus() == 0 ? 10 : keyStore.getErrorStatus());
             }
             try {
-                PublicKey generatePublic = KeyFactory.getInstance(CertProvisionProfile.KEY_TYPE_EC).generatePublic(new X509EncodedKeySpec(bArr));
+                PublicKey publicKeyGeneratePublic = KeyFactory.getInstance(CertProvisionProfile.KEY_TYPE_EC).generatePublic(new X509EncodedKeySpec(bArr));
                 KeyAgreement keyAgreement = KeyAgreement.getInstance(str2, this.mProvider);
                 keyAgreement.setProperty(bundle);
                 keyAgreement.init(privateKey, null);
-                keyAgreement.doPhase(generatePublic);
-                byte[] engineGenerateSecret = keyAgreement.engineGenerateSecret();
-                if (engineGenerateSecret != null) {
-                    bundle2.putByteArray(PLUGIN_BYTEARRAY_RESPONSE, engineGenerateSecret);
+                keyAgreement.doPhase(publicKeyGeneratePublic);
+                byte[] bArrEngineGenerateSecret = keyAgreement.engineGenerateSecret();
+                if (bArrEngineGenerateSecret != null) {
+                    bundle2.putByteArray(PLUGIN_BYTEARRAY_RESPONSE, bArrEngineGenerateSecret);
                 }
                 bundle2.putInt(PLUGIN_ERROR_CODE, keyAgreement.getErrorStatus());
                 return bundle2;
@@ -1380,11 +1371,11 @@ public abstract class UcmAgentService extends Service {
             Log.e(TAG, "mac. property is null");
             return responseErrorWithNullBytes(16);
         }
-        StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("mac ", str, ", uid: ");
-        m.append(bundle.getInt(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_CALLER_UID));
-        m.append(", caller: ");
-        m.append(Binder.getCallingUid());
-        Log.i(TAG, m.toString());
+        StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("mac ", str, ", uid: ");
+        sbM.append(bundle.getInt(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_CALLER_UID));
+        sbM.append(", caller: ");
+        sbM.append(Binder.getCallingUid());
+        Log.i(TAG, sbM.toString());
         if (bArr == null) {
             Log.e(TAG, "mac. data is null");
             return responseErrorWithNullBytes(16);
@@ -1469,7 +1460,7 @@ public abstract class UcmAgentService extends Service {
     /* JADX INFO: Access modifiers changed from: private */
     public final Bundle saw(Bundle bundle) {
         com.samsung.android.knox.ucm.plugin.service.KeyStore keyStore;
-        Enumeration<String> aliases;
+        Enumeration<String> enumerationAliases;
         Log.d(TAG, "saw");
         Bundle bundle2 = new Bundle();
         if (bundle == null) {
@@ -1483,7 +1474,7 @@ public abstract class UcmAgentService extends Service {
             keyStore = com.samsung.android.knox.ucm.plugin.service.KeyStore.getInstance("KNOX", this.mProvider);
             keyStore.setProperty(bundle);
             keyStore.load(new UcmAgentLoadParameter(bundle.getInt(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_OWNER_ID), bundle.getInt(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_RESOURCE_ID), bundle.getBundle(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_EXTRA_ARGS)));
-            aliases = keyStore.aliases();
+            enumerationAliases = keyStore.aliases();
         } catch (IOException e) {
             e.printStackTrace();
             bundle2.putInt(PLUGIN_ERROR_CODE, 269);
@@ -1506,15 +1497,15 @@ public abstract class UcmAgentService extends Service {
             e7.printStackTrace();
             bundle2.putInt(PLUGIN_ERROR_CODE, 261);
         }
-        if (aliases == null) {
+        if (enumerationAliases == null) {
             bundle2.putInt(PLUGIN_ERROR_CODE, keyStore.getErrorStatus());
             bundle2.putStringArray(PLUGIN_STRINGARRAY_RESPONSE, null);
             Log.d(TAG, "UCMERRORTESTING: @UcmAgentService responding to saw with EXCEPTION error code  = " + bundle2.getInt(PLUGIN_ERROR_CODE));
             return bundle2;
         }
         ArrayList arrayList = new ArrayList();
-        while (aliases.hasMoreElements()) {
-            arrayList.add(aliases.nextElement());
+        while (enumerationAliases.hasMoreElements()) {
+            arrayList.add(enumerationAliases.nextElement());
         }
         bundle2.putStringArray(PLUGIN_STRINGARRAY_RESPONSE, (String[]) arrayList.toArray(new String[arrayList.size()]));
         bundle2.putInt(PLUGIN_ERROR_CODE, keyStore.getErrorStatus());
@@ -1528,11 +1519,11 @@ public abstract class UcmAgentService extends Service {
             Log.e(TAG, "sign. property is null");
             return responseErrorWithNullBytes(16);
         }
-        StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("sign ", str, ",uid: ");
-        m.append(bundle.getInt(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_CALLER_UID));
-        m.append(", caller: ");
-        m.append(Binder.getCallingUid());
-        Log.i(TAG, m.toString());
+        StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("sign ", str, ",uid: ");
+        sbM.append(bundle.getInt(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_CALLER_UID));
+        sbM.append(", caller: ");
+        sbM.append(Binder.getCallingUid());
+        Log.i(TAG, sbM.toString());
         if (bArr == null) {
             Log.e(TAG, "sign. data is null");
             return responseErrorWithNullBytes(16);
@@ -1689,19 +1680,19 @@ public abstract class UcmAgentService extends Service {
 
     public abstract Bundle verifyPuk(String str, String str2);
 
-    private final Bundle encrypt(String str, byte[] bArr, String str2, Bundle bundle) {
+    private final Bundle encrypt(String str, byte[] bArr, String str2, Bundle bundle) throws IllegalStateException {
         Cipher cipher;
-        byte[] doFinal;
+        byte[] bArrDoFinal;
         Log.d(TAG, "encrypt");
         if (bundle == null) {
             Log.e(TAG, "encrypt. property is null");
             return responseErrorWithNullBytes(16);
         }
-        StringBuilder m = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("encrypt: ", str, ", algorithm: ", str2, ", uid: ");
-        m.append(bundle.getInt(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_CALLER_UID));
-        m.append(", caller: ");
-        m.append(Binder.getCallingUid());
-        Log.i(TAG, m.toString());
+        StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("encrypt: ", str, ", algorithm: ", str2, ", uid: ");
+        sbM.append(bundle.getInt(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_CALLER_UID));
+        sbM.append(", caller: ");
+        sbM.append(Binder.getCallingUid());
+        Log.i(TAG, sbM.toString());
         if (bArr == null) {
             Log.e(TAG, "encrypt. data is null");
             return responseErrorWithNullBytes(16);
@@ -1717,28 +1708,28 @@ public abstract class UcmAgentService extends Service {
                 Log.e(TAG, "encrypt. getEntry null");
                 return responseErrorWithNullBytes(keyStore.getErrorStatus() == 0 ? 8 : keyStore.getErrorStatus());
             }
-            int i = 10;
+            int errorStatus = 10;
             if (TextUtils.isEmpty(str2) || !str2.toUpperCase().startsWith("AES/")) {
                 PrivateKey privateKey = ((KeyStore.PrivateKeyEntry) entry).getPrivateKey();
                 if (privateKey == null) {
                     Log.e(TAG, "encrypt. getPrivateKey null ");
                     if (keyStore.getErrorStatus() != 0) {
-                        i = keyStore.getErrorStatus();
+                        errorStatus = keyStore.getErrorStatus();
                     }
-                    return responseErrorWithNullBytes(i);
+                    return responseErrorWithNullBytes(errorStatus);
                 }
                 cipher = Cipher.getInstance(UcmAgentProviderImpl.CIPHER_RSA_ECB_PKCS1PADDING, this.mProvider);
                 cipher.setProperty(bundle);
                 cipher.init(1, privateKey);
-                doFinal = cipher.doFinal(bArr);
+                bArrDoFinal = cipher.doFinal(bArr);
             } else {
                 SecretKey secretKey = ((KeyStore.SecretKeyEntry) entry).getSecretKey();
                 if (secretKey == null) {
                     Log.e(TAG, "encrypt. getSecretKey null!");
                     if (keyStore.getErrorStatus() != 0) {
-                        i = keyStore.getErrorStatus();
+                        errorStatus = keyStore.getErrorStatus();
                     }
-                    return responseErrorWithNullBytes(i);
+                    return responseErrorWithNullBytes(errorStatus);
                 }
                 cipher = Cipher.getInstance(str2, this.mProvider);
                 cipher.setProperty(bundle);
@@ -1746,9 +1737,9 @@ public abstract class UcmAgentService extends Service {
                 if ("GCM".equals(str2.split("/")[1]) && bundle.containsKey(KEY_EXTRA_AAD)) {
                     cipher.updateAAD(bundle.getByteArray(KEY_EXTRA_AAD));
                 }
-                doFinal = cipher.doFinal(bArr);
+                bArrDoFinal = cipher.doFinal(bArr);
             }
-            bundle2.putByteArray(PLUGIN_BYTEARRAY_RESPONSE, doFinal);
+            bundle2.putByteArray(PLUGIN_BYTEARRAY_RESPONSE, bArrDoFinal);
             bundle2.putInt(PLUGIN_ERROR_CODE, cipher.getErrorStatus());
             return bundle2;
         } catch (IOException e) {

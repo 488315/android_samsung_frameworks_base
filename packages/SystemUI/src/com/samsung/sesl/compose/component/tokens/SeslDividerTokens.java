@@ -5,7 +5,6 @@ import androidx.constraintlayout.motion.widget.MotionLayout$$ExternalSyntheticOu
 import kotlin.ULong;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class SeslDividerTokens {
     public static final Companion Companion = new Companion(null);
@@ -14,7 +13,6 @@ public final class SeslDividerTokens {
     public final long horizontalDividerColor;
     public final long verticalDividerColor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -24,7 +22,6 @@ public final class SeslDividerTokens {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -68,7 +65,7 @@ public final class SeslDividerTokens {
         SeslDividerTokens seslDividerTokens = (SeslDividerTokens) obj;
         long j = seslDividerTokens.horizontalDividerColor;
         Color.Companion companion = Color.Companion;
-        return ULong.m3427equalsimpl0(this.horizontalDividerColor, j) && ULong.m3427equalsimpl0(this.verticalDividerColor, seslDividerTokens.verticalDividerColor);
+        return ULong.m3447equalsimpl0(this.horizontalDividerColor, j) && ULong.m3447equalsimpl0(this.verticalDividerColor, seslDividerTokens.verticalDividerColor);
     }
 
     public final int hashCode() {
@@ -78,7 +75,7 @@ public final class SeslDividerTokens {
     }
 
     public final String toString() {
-        return MotionLayout$$ExternalSyntheticOutline0.m("SeslDividerTokens(horizontalDividerColor=", Color.m462toStringimpl(this.horizontalDividerColor), ", verticalDividerColor=", Color.m462toStringimpl(this.verticalDividerColor), ")");
+        return MotionLayout$$ExternalSyntheticOutline0.m("SeslDividerTokens(horizontalDividerColor=", Color.m464toStringimpl(this.horizontalDividerColor), ", verticalDividerColor=", Color.m464toStringimpl(this.verticalDividerColor), ")");
     }
 
     private SeslDividerTokens(long j, long j2) {

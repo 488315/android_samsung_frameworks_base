@@ -48,11 +48,11 @@ public class X509CRLHolder implements Encodable, Serializable {
 
     private static CertificateList parseStream(InputStream inputStream) throws IOException {
         try {
-            ASN1Primitive readObject = new ASN1InputStream(inputStream, true).readObject();
-            if (readObject == null) {
+            ASN1Primitive object = new ASN1InputStream(inputStream, true).readObject();
+            if (object == null) {
                 throw new IOException("no content found");
             }
-            return CertificateList.getInstance(readObject);
+            return CertificateList.getInstance(object);
         } catch (ClassCastException e) {
             throw new CertIOException("malformed data: " + e.getMessage(), e);
         } catch (IllegalArgumentException e2) {
@@ -124,12 +124,12 @@ public class X509CRLHolder implements Encodable, Serializable {
 
     public Collection getRevokedCertificates() {
         ArrayList arrayList = new ArrayList(this.x509CRL.getRevokedCertificates().length);
-        GeneralNames generalNames = this.issuerName;
+        GeneralNames certificateIssuer = this.issuerName;
         Enumeration revokedCertificateEnumeration = this.x509CRL.getRevokedCertificateEnumeration();
         while (revokedCertificateEnumeration.hasMoreElements()) {
-            X509CRLEntryHolder x509CRLEntryHolder = new X509CRLEntryHolder((TBSCertList.CRLEntry) revokedCertificateEnumeration.nextElement(), this.isIndirect, generalNames);
+            X509CRLEntryHolder x509CRLEntryHolder = new X509CRLEntryHolder((TBSCertList.CRLEntry) revokedCertificateEnumeration.nextElement(), this.isIndirect, certificateIssuer);
             arrayList.add(x509CRLEntryHolder);
-            generalNames = x509CRLEntryHolder.getCertificateIssuer();
+            certificateIssuer = x509CRLEntryHolder.getCertificateIssuer();
         }
         return arrayList;
     }
@@ -166,7 +166,7 @@ public class X509CRLHolder implements Encodable, Serializable {
         return this.x509CRL;
     }
 
-    public boolean isSignatureValid(ContentVerifierProvider contentVerifierProvider) throws CertException {
+    public boolean isSignatureValid(ContentVerifierProvider contentVerifierProvider) throws CertException, IOException {
         TBSCertList tBSCertList = this.x509CRL.getTBSCertList();
         if (!CertUtils.isAlgIdEqual(tBSCertList.getSignature(), this.x509CRL.getSignatureAlgorithm())) {
             throw new CertException("signature invalid - algorithm identifier mismatch");
@@ -182,13 +182,13 @@ public class X509CRLHolder implements Encodable, Serializable {
         }
     }
 
-    public boolean isAlternativeSignatureValid(ContentVerifierProvider contentVerifierProvider) throws CertException {
+    public boolean isAlternativeSignatureValid(ContentVerifierProvider contentVerifierProvider) throws IOException, CertException {
         int i;
         TBSCertList tBSCertList = this.x509CRL.getTBSCertList();
-        AltSignatureAlgorithm fromExtensions = AltSignatureAlgorithm.fromExtensions(tBSCertList.getExtensions());
-        AltSignatureValue fromExtensions2 = AltSignatureValue.fromExtensions(tBSCertList.getExtensions());
+        AltSignatureAlgorithm altSignatureAlgorithmFromExtensions = AltSignatureAlgorithm.fromExtensions(tBSCertList.getExtensions());
+        AltSignatureValue altSignatureValueFromExtensions = AltSignatureValue.fromExtensions(tBSCertList.getExtensions());
         try {
-            ContentVerifier contentVerifier = contentVerifierProvider.get(AlgorithmIdentifier.getInstance(fromExtensions.toASN1Primitive()));
+            ContentVerifier contentVerifier = contentVerifierProvider.get(AlgorithmIdentifier.getInstance(altSignatureAlgorithmFromExtensions.toASN1Primitive()));
             OutputStream outputStream = contentVerifier.getOutputStream();
             ASN1Sequence aSN1Sequence = ASN1Sequence.getInstance(tBSCertList.toASN1Primitive());
             ASN1EncodableVector aSN1EncodableVector = new ASN1EncodableVector();
@@ -205,7 +205,7 @@ public class X509CRLHolder implements Encodable, Serializable {
             aSN1EncodableVector.add(CertUtils.trimExtensions(0, tBSCertList.getExtensions()));
             new DERSequence(aSN1EncodableVector).encodeTo(outputStream, ASN1Encoding.DER);
             outputStream.close();
-            return contentVerifier.verify(fromExtensions2.getSignature().getOctets());
+            return contentVerifier.verify(altSignatureValueFromExtensions.getSignature().getOctets());
         } catch (Exception e) {
             throw new CertException("unable to process signature: " + e.getMessage(), e);
         }
@@ -225,7 +225,7 @@ public class X509CRLHolder implements Encodable, Serializable {
         return this.x509CRL.hashCode();
     }
 
-    private void readObject(ObjectInputStream objectInputStream) throws IOException, ClassNotFoundException {
+    private void readObject(ObjectInputStream objectInputStream) throws ClassNotFoundException, IOException {
         objectInputStream.defaultReadObject();
         init(CertificateList.getInstance(objectInputStream.readObject()));
     }

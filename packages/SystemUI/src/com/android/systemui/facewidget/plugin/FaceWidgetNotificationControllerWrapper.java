@@ -1,6 +1,7 @@
 package com.android.systemui.facewidget.plugin;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.os.Bundle;
@@ -43,7 +44,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class FaceWidgetNotificationControllerWrapper implements PluginNotificationController.Callback, FaceWidgetNotificationController {
     public final ActivityStarter mActivityStarter;
@@ -56,7 +56,6 @@ public class FaceWidgetNotificationControllerWrapper implements PluginNotificati
     public OngoingActivityDataHelper$nowbarWatcher$1 mNowbarWatcher;
     public Lazy mPanelViewControllerLazy;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.facewidget.plugin.FaceWidgetNotificationControllerWrapper$1, reason: invalid class name */
     public class AnonymousClass1 implements MediaDataManager.Listener {
         public AnonymousClass1() {
@@ -69,14 +68,14 @@ public class FaceWidgetNotificationControllerWrapper implements PluginNotificati
             boolean z2;
             PluginFaceWidgetMediaData.PluginFaceWidgetMediaDeviceData pluginFaceWidgetMediaDeviceData;
             Context context;
-            Drawable loadDrawable;
-            Drawable mutate;
+            Drawable drawableLoadDrawable;
+            Drawable drawableMutate;
             Drawable.ConstantState constantState;
             FaceWidgetNotificationControllerWrapper faceWidgetNotificationControllerWrapper = FaceWidgetNotificationControllerWrapper.this;
             if (faceWidgetNotificationControllerWrapper.mNotificationController != null) {
-                StringBuilder m = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("onMediaDataLoaded, ", str, ", ", str2, ", ");
-                m.append(mediaData.toString());
-                Log.d("FaceWidgetNotificationControllerWrapper", m.toString());
+                StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("onMediaDataLoaded, ", str, ", ", str2, ", ");
+                sbM.append(mediaData.toString());
+                Log.d("FaceWidgetNotificationControllerWrapper", sbM.toString());
                 PluginNotificationController pluginNotificationController = faceWidgetNotificationControllerWrapper.mNotificationController;
                 ArrayList arrayList = new ArrayList();
                 ArrayList arrayList2 = new ArrayList();
@@ -124,21 +123,21 @@ public class FaceWidgetNotificationControllerWrapper implements PluginNotificati
                     }
                     z2 = false;
                 }
-                Drawable drawable = null;
+                Drawable drawableNewDrawable = null;
                 MediaDeviceData mediaDeviceData = mediaData.device;
                 if (mediaDeviceData != null) {
                     Integer num = mediaDeviceData.customMediaDeviceData.deviceType;
-                    Drawable cloneDrawable = FaceWidgetNotificationControllerWrapper.cloneDrawable(mediaDeviceData.icon);
+                    Drawable drawableCloneDrawable = FaceWidgetNotificationControllerWrapper.cloneDrawable(mediaDeviceData.icon);
                     CharSequence charSequence = mediaDeviceData.name;
-                    pluginFaceWidgetMediaDeviceData = new PluginFaceWidgetMediaData.PluginFaceWidgetMediaDeviceData(mediaDeviceData.enabled, cloneDrawable, charSequence == null ? "" : charSequence.toString(), num == null ? -1 : num.intValue());
+                    pluginFaceWidgetMediaDeviceData = new PluginFaceWidgetMediaData.PluginFaceWidgetMediaDeviceData(mediaDeviceData.enabled, drawableCloneDrawable, charSequence == null ? "" : charSequence.toString(), num == null ? -1 : num.intValue());
                 } else {
                     pluginFaceWidgetMediaDeviceData = null;
                 }
                 Icon icon = mediaData.appIcon;
-                if (icon != null && (context = faceWidgetNotificationControllerWrapper.mContext) != null && (loadDrawable = icon.loadDrawable(context)) != null && (mutate = loadDrawable.mutate()) != null && (constantState = mutate.getConstantState()) != null) {
-                    drawable = constantState.newDrawable();
+                if (icon != null && (context = faceWidgetNotificationControllerWrapper.mContext) != null && (drawableLoadDrawable = icon.loadDrawable(context)) != null && (drawableMutate = drawableLoadDrawable.mutate()) != null && (constantState = drawableMutate.getConstantState()) != null) {
+                    drawableNewDrawable = constantState.newDrawable();
                 }
-                Drawable drawable2 = drawable;
+                Drawable drawable = drawableNewDrawable;
                 CharSequence charSequence2 = mediaData.artist;
                 CharSequence charSequence3 = mediaData.song;
                 Icon icon2 = mediaData.artwork;
@@ -146,7 +145,7 @@ public class FaceWidgetNotificationControllerWrapper implements PluginNotificati
                 if (!z2) {
                     arrayList4 = mediaData.actionsToShowInCompact;
                 }
-                pluginNotificationController.onMediaDataLoaded(str, str2, new PluginFaceWidgetMediaData(mediaData.userId, mediaData.initialized, 0, 0, mediaData.app, drawable2, charSequence2, charSequence3, icon2, arrayList, arrayList4, mediaData.packageName, mediaData.token, mediaData.clickIntent, pluginFaceWidgetMediaDeviceData, mediaData.active, mediaData.resumeAction, mediaData.resumption, mediaData.notificationKey, mediaData.hasCheckedForResume, Boolean.TRUE.equals(mediaData.isPlaying), mediaData.playbackLocation));
+                pluginNotificationController.onMediaDataLoaded(str, str2, new PluginFaceWidgetMediaData(mediaData.userId, mediaData.initialized, 0, 0, mediaData.app, drawable, charSequence2, charSequence3, icon2, arrayList, arrayList4, mediaData.packageName, mediaData.token, mediaData.clickIntent, pluginFaceWidgetMediaDeviceData, mediaData.active, mediaData.resumeAction, mediaData.resumption, mediaData.notificationKey, mediaData.hasCheckedForResume, Boolean.TRUE.equals(mediaData.isPlaying), mediaData.playbackLocation));
             }
         }
 
@@ -179,7 +178,7 @@ public class FaceWidgetNotificationControllerWrapper implements PluginNotificati
     }
 
     @Override // com.android.systemui.plugins.keyguardstatusview.PluginNotificationController.Callback
-    public final void expandToNotifications() {
+    public final void expandToNotifications() throws Resources.NotFoundException {
         if (this.mLockscreenNotificationIconsOnlyController != null) {
             ((SecPanelSAStatusLogInteractor) Dependency.sDependency.getDependencyInner(SecPanelSAStatusLogInteractor.class)).countOpenNotificationPanelFromStatusbarOnLockscreen();
             NotificationPanelViewController notificationPanelViewController = this.mLockscreenNotificationIconsOnlyController.mNPVController;
@@ -366,27 +365,27 @@ public class FaceWidgetNotificationControllerWrapper implements PluginNotificati
 
     @Override // com.android.systemui.plugins.keyguardstatusview.PluginNotificationController.Callback
     public final void onTopNowBarItemChangedFromNowbar(String str) {
-        StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("onTopNowBarItemChangedFromNowbar sbnId = ", str, " NowbarWatcher + ");
-        m.append(this.mNowbarWatcher);
-        Log.i("FaceWidgetNotificationControllerWrapper", m.toString());
+        StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("onTopNowBarItemChangedFromNowbar sbnId = ", str, " NowbarWatcher + ");
+        sbM.append(this.mNowbarWatcher);
+        Log.i("FaceWidgetNotificationControllerWrapper", sbM.toString());
         if (this.mNowbarWatcher != null) {
             OngoingActivityDataHelper.INSTANCE.getClass();
             CopyOnWriteArrayList copyOnWriteArrayList = OngoingActivityDataHelper.mOngoingActivityLists;
             if (copyOnWriteArrayList.size() > 1) {
                 OngoingActivityData mediaData = str.equals("MEDIA_NOWBAR") ? OngoingActivityDataHelper.getMediaData() : OngoingActivityDataHelper.getOngoingActivityDataByKey(str);
                 if (mediaData != null) {
-                    int indexOf = copyOnWriteArrayList.indexOf(mediaData);
-                    StringBuilder m2 = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m(" RECEIVED ID - ", str, " and our current top is ", ((OngoingActivityData) copyOnWriteArrayList.get(0)).mNotiID, " and index ");
-                    m2.append(indexOf);
-                    String sb = m2.toString();
+                    int iIndexOf = copyOnWriteArrayList.indexOf(mediaData);
+                    StringBuilder sbM2 = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m(" RECEIVED ID - ", str, " and our current top is ", ((OngoingActivityData) copyOnWriteArrayList.get(0)).mNotiID, " and index ");
+                    sbM2.append(iIndexOf);
+                    String string = sbM2.toString();
                     String str2 = OngoingActivityDataHelper.TAG;
-                    Log.d(str2, sb);
+                    Log.d(str2, string);
                     int i = 0;
-                    while (indexOf != -1 && i < indexOf) {
+                    while (iIndexOf != -1 && i < iIndexOf) {
                         Collections.rotate(OngoingActivityDataHelper.mOngoingActivityLists, -1);
                         i++;
                     }
-                    RecyclerView$$ExternalSyntheticOutline0.m(i, str2, KeyguardBiometricLockoutLogger$mKeyguardUpdateMonitorCallback$1$$ExternalSyntheticOutline0.m(indexOf, "found index - ", " and after rotation top is ", ((OngoingActivityData) OngoingActivityDataHelper.mOngoingActivityLists.get(0)).mNotiID, " and count "));
+                    RecyclerView$$ExternalSyntheticOutline0.m(i, str2, KeyguardBiometricLockoutLogger$mKeyguardUpdateMonitorCallback$1$$ExternalSyntheticOutline0.m(iIndexOf, "found index - ", " and after rotation top is ", ((OngoingActivityData) OngoingActivityDataHelper.mOngoingActivityLists.get(0)).mNotiID, " and count "));
                 }
                 OngoingActivityDataHelper.notifyUpdateObservers();
             }

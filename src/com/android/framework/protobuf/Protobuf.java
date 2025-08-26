@@ -37,15 +37,15 @@ final class Protobuf {
 
     public <T> Schema<T> schemaFor(Class<T> cls) {
         Internal.checkNotNull(cls, "messageType");
-        Schema<T> schema = (Schema) this.schemaCache.get(cls);
-        if (schema == null) {
-            schema = this.schemaFactory.createSchema(cls);
-            Schema<T> schema2 = (Schema<T>) registerSchema(cls, schema);
-            if (schema2 != null) {
-                return schema2;
+        Schema<T> schemaCreateSchema = (Schema) this.schemaCache.get(cls);
+        if (schemaCreateSchema == null) {
+            schemaCreateSchema = this.schemaFactory.createSchema(cls);
+            Schema<T> schema = (Schema<T>) registerSchema(cls, schemaCreateSchema);
+            if (schema != null) {
+                return schema;
             }
         }
-        return schema;
+        return schemaCreateSchema;
     }
 
     public <T> Schema<T> schemaFor(T t) {
@@ -68,12 +68,12 @@ final class Protobuf {
     }
 
     int getTotalSchemaSize() {
-        int i = 0;
+        int schemaSize = 0;
         for (Schema<?> schema : this.schemaCache.values()) {
             if (schema instanceof MessageSchema) {
-                i += ((MessageSchema) schema).getSchemaSize();
+                schemaSize += ((MessageSchema) schema).getSchemaSize();
             }
         }
-        return i;
+        return schemaSize;
     }
 }

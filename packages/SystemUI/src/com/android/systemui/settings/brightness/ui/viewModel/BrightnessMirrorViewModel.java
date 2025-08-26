@@ -14,7 +14,6 @@ import kotlinx.coroutines.flow.StateFlow;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class BrightnessMirrorViewModel implements MirrorController {
     public final StateFlowImpl _locationAndSize;
@@ -25,7 +24,6 @@ public final class BrightnessMirrorViewModel implements MirrorController {
     public final BrightnessSliderController.Factory sliderControllerFactory;
     public final int[] tempPosition = new int[2];
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -35,7 +33,6 @@ public final class BrightnessMirrorViewModel implements MirrorController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
     }
 
@@ -48,9 +45,9 @@ public final class BrightnessMirrorViewModel implements MirrorController {
         this.resources = resources;
         this.sliderControllerFactory = factory;
         this.isShowing = brightnessMirrorShowingInteractor.isShowing();
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(new LocationAndSize(0, 0, 0, 0, 15, null));
-        this._locationAndSize = MutableStateFlow;
-        this.locationAndSize = FlowKt.asStateFlow(MutableStateFlow);
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(new LocationAndSize(0, 0, 0, 0, 15, null));
+        this._locationAndSize = stateFlowImplMutableStateFlow;
+        this.locationAndSize = FlowKt.asStateFlow(stateFlowImplMutableStateFlow);
     }
 
     @Override // com.android.systemui.statusbar.policy.CallbackController
@@ -67,17 +64,17 @@ public final class BrightnessMirrorViewModel implements MirrorController {
     }
 
     @Override // com.android.systemui.settings.brightness.MirrorController
-    public final void setLocationAndSize(View view) {
+    public final void setLocationAndSize(View view) throws Resources.NotFoundException {
         int[] iArr = this.tempPosition;
         view.getLocationInWindow(iArr);
         int dimensionPixelSize = this.resources.getDimensionPixelSize(R.dimen.rounded_slider_background_padding);
-        int i = 0;
+        int top = 0;
         View view2 = view;
         while (true) {
             if (view2.getId() == R.id.quick_settings_container) {
                 break;
             }
-            i += view2.getTop();
+            top += view2.getTop();
             Object parent = view2.getParent();
             view2 = parent instanceof View ? (View) parent : null;
             if (view2 == null) {
@@ -85,10 +82,10 @@ public final class BrightnessMirrorViewModel implements MirrorController {
                 break;
             }
         }
-        int i2 = i - dimensionPixelSize;
-        int i3 = iArr[1] - dimensionPixelSize;
-        int i4 = dimensionPixelSize * 2;
-        this._locationAndSize.updateState(null, new LocationAndSize(i2, i3, view.getMeasuredWidth() + i4, view.getMeasuredHeight() + i4));
+        int i = top - dimensionPixelSize;
+        int i2 = iArr[1] - dimensionPixelSize;
+        int i3 = dimensionPixelSize * 2;
+        this._locationAndSize.updateState(null, new LocationAndSize(i, i2, view.getMeasuredWidth() + i3, view.getMeasuredHeight() + i3));
     }
 
     @Override // com.android.systemui.settings.brightness.MirrorController

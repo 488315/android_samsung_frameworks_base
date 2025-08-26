@@ -9,18 +9,15 @@ import com.android.systemui.animation.ActivityTransitionAnimator;
 import com.android.systemui.plugins.annotations.ProvidesInterface;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @ProvidesInterface(version = 2)
 /* loaded from: classes2.dex */
 public interface ActivityStarter {
     public static final int VERSION = 2;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Callback {
         void onActivityStarted(int i);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface OnDismissAction {
         boolean onDismiss();
 

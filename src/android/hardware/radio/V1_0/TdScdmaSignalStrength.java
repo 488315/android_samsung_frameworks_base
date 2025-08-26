@@ -31,13 +31,13 @@ public final class TdScdmaSignalStrength {
 
     public static final ArrayList<TdScdmaSignalStrength> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<TdScdmaSignalStrength> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 4, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 4, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             TdScdmaSignalStrength tdScdmaSignalStrength = new TdScdmaSignalStrength();
-            tdScdmaSignalStrength.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 4);
+            tdScdmaSignalStrength.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 4);
             arrayList.add(tdScdmaSignalStrength);
         }
         return arrayList;

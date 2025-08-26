@@ -7,7 +7,6 @@ import com.samsung.android.knox.ContextInfo;
 import com.samsung.android.knox.license.EnterpriseLicenseManager;
 import com.samsung.android.knox.restriction.IRestrictionPolicy;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ContainerRestrictionPolicy {
     public static String TAG = "ContainerRestrictionPolicy";
@@ -19,18 +18,14 @@ public class ContainerRestrictionPolicy {
     }
 
     public static synchronized IRestrictionPolicy getRestrictionService() {
-        IRestrictionPolicy iRestrictionPolicy;
-        synchronized (ContainerRestrictionPolicy.class) {
-            try {
-                if (gRestrictionService == null) {
-                    gRestrictionService = IRestrictionPolicy.Stub.asInterface(ServiceManager.getService("restriction_policy"));
-                }
-                iRestrictionPolicy = gRestrictionService;
-            } catch (Throwable th) {
-                throw th;
+        try {
+            if (gRestrictionService == null) {
+                gRestrictionService = IRestrictionPolicy.Stub.asInterface(ServiceManager.getService("restriction_policy"));
             }
+        } catch (Throwable th) {
+            throw th;
         }
-        return iRestrictionPolicy;
+        return gRestrictionService;
     }
 
     public boolean allowShareList(boolean z) {

@@ -3,12 +3,12 @@ package com.android.systemui.activity.data.model;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AppVisibilityModel {
     public final boolean isAppCurrentlyVisible;
     public final Long lastAppVisibleTime;
 
+    /* JADX WARN: Multi-variable type inference failed */
     public AppVisibilityModel() {
         this(false, null, 3, 0 == true ? 1 : 0);
     }
@@ -25,9 +25,9 @@ public final class AppVisibilityModel {
     }
 
     public final int hashCode() {
-        int hashCode = Boolean.hashCode(this.isAppCurrentlyVisible) * 31;
+        int iHashCode = Boolean.hashCode(this.isAppCurrentlyVisible) * 31;
         Long l = this.lastAppVisibleTime;
-        return hashCode + (l == null ? 0 : l.hashCode());
+        return iHashCode + (l == null ? 0 : l.hashCode());
     }
 
     public final String toString() {

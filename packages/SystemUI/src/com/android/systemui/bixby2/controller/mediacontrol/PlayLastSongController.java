@@ -9,7 +9,6 @@ import com.android.systemui.bixby2.util.AudioManagerWrapper;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class PlayLastSongController extends MediaCommandType {
     public static final int $stable = 0;
@@ -17,7 +16,6 @@ public final class PlayLastSongController extends MediaCommandType {
     private static final String YOUTUBE_PACKAGE = "com.google.android.youtube";
     private final int mode;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -37,7 +35,7 @@ public final class PlayLastSongController extends MediaCommandType {
         audioManagerWrapper.dispatchMediaKeyEvent(new KeyEvent(1, 126));
     }
 
-    private final boolean isInstalledApp(String str) {
+    private final boolean isInstalledApp(String str) throws PackageManager.NameNotFoundException {
         PackageManager packageManager = MediaCommandType.Companion.getContext().getPackageManager();
         String[] strArr = (String[]) StringsKt__StringsKt.split$default(str, new String[]{"/"}, 0, 6).toArray(new String[0]);
         if (strArr.length == 2) {

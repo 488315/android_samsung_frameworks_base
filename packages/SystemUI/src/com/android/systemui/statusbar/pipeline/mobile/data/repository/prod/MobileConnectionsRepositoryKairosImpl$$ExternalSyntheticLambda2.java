@@ -17,7 +17,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import kotlinx.coroutines.flow.FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class MobileConnectionsRepositoryKairosImpl$$ExternalSyntheticLambda2 implements Function1 {
     public final /* synthetic */ int $r8$classId = 0;
@@ -31,7 +30,7 @@ public final /* synthetic */ class MobileConnectionsRepositoryKairosImpl$$Extern
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
         Object obj2 = this.f$0;
         MobileConnectionsRepositoryKairosImpl mobileConnectionsRepositoryKairosImpl = this.f$1;
         switch (this.$r8$classId) {
@@ -40,18 +39,18 @@ public final /* synthetic */ class MobileConnectionsRepositoryKairosImpl$$Extern
                 FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 flowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 = new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new MobileConnectionsRepositoryKairosImpl$defaultDataSubId$1$2(mobileConnectionsRepositoryKairosImpl, null), BroadcastDispatcher.broadcastFlow$default((BroadcastDispatcher) obj2, new IntentFilter("android.intent.action.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED"), null, new MobileConnectionsRepositoryKairosImpl$$ExternalSyntheticLambda10(6), 14));
                 BuildScopeImpl buildScopeImpl = (BuildScopeImpl) ((BuildScope) obj);
                 buildScopeImpl.getClass();
-                StateInit holdState = buildScopeImpl.stateScope.holdState(BuildScope.DefaultImpls.toEvents(buildScopeImpl, flowKt__EmittersKt$onStart$$inlined$unsafeFlow$1), null);
-                DiffableKt.logIntDiffsForTable(buildScopeImpl, holdState, mobileConnectionsRepositoryKairosImpl.tableLogger, "Repo", "defaultSubId");
-                return holdState;
+                StateInit stateInitHoldState = buildScopeImpl.stateScope.holdState(BuildScope.DefaultImpls.toEvents(buildScopeImpl, flowKt__EmittersKt$onStart$$inlined$unsafeFlow$1), null);
+                DiffableKt.logIntDiffsForTable(buildScopeImpl, stateInitHoldState, mobileConnectionsRepositoryKairosImpl.tableLogger, "Repo", "defaultSubId");
+                return stateInitHoldState;
             default:
                 MobileInputLogger mobileInputLogger = mobileConnectionsRepositoryKairosImpl.logger;
                 mobileInputLogger.getClass();
                 LogLevel logLevel = LogLevel.INFO;
                 MobileInputLogger$$ExternalSyntheticLambda0 mobileInputLogger$$ExternalSyntheticLambda0 = new MobileInputLogger$$ExternalSyntheticLambda0(25);
                 LogBuffer logBuffer = mobileInputLogger.buffer;
-                LogMessage obtain = logBuffer.obtain("MobileInputLog", logLevel, mobileInputLogger$$ExternalSyntheticLambda0, null);
-                ((LogMessageImpl) obtain).str1 = ((MobileMappings.Config) obj2).toString();
-                logBuffer.commit(obtain);
+                LogMessage logMessageObtain = logBuffer.obtain("MobileInputLog", logLevel, mobileInputLogger$$ExternalSyntheticLambda0, null);
+                ((LogMessageImpl) logMessageObtain).str1 = ((MobileMappings.Config) obj2).toString();
+                logBuffer.commit(logMessageObtain);
                 return Unit.INSTANCE;
         }
     }

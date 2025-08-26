@@ -19,7 +19,7 @@ public class ImgCsConverter {
         return convert(str, str2, ColorSpace.get(ColorSpace.Named.SRGB));
     }
 
-    private static boolean convert(String str, String str2, ColorSpace colorSpace) {
+    private static boolean convert(String str, String str2, ColorSpace colorSpace) throws Throwable {
         FileOutputStream fileOutputStream;
         Log.d(TAG, "convert");
         if (str == null || str.length() <= 0) {
@@ -35,19 +35,19 @@ public class ImgCsConverter {
                     BitmapFactory.Options options = new BitmapFactory.Options();
                     options.inSampleSize = 1;
                     options.inPreferredColorSpace = colorSpace;
-                    Bitmap decodeFile = BitmapFactory.decodeFile(str, options);
+                    Bitmap bitmapDecodeFile = BitmapFactory.decodeFile(str, options);
                     try {
-                        if (decodeFile == null) {
+                        if (bitmapDecodeFile == null) {
                             Log.e(TAG, "decode fail");
-                            if (decodeFile != null) {
-                                decodeFile.recycle();
+                            if (bitmapDecodeFile != null) {
+                                bitmapDecodeFile.recycle();
                             }
                             return false;
                         }
                         Log.i(TAG, "dec x");
                         fileOutputStream = new FileOutputStream(str2);
                         try {
-                            decodeFile.compress(Bitmap.CompressFormat.JPEG, 95, fileOutputStream);
+                            bitmapDecodeFile.compress(Bitmap.CompressFormat.JPEG, 95, fileOutputStream);
                             Log.i(TAG, "enc x");
                             ExifInterface exifInterface = new ExifInterface(str);
                             ExifInterface exifInterface2 = new ExifInterface(str2);
@@ -70,8 +70,8 @@ public class ImgCsConverter {
                             System.setProperty("java.io.tmpdir", parent);
                             exifInterface2.saveAttributes();
                             System.setProperty("java.io.tmpdir", property);
-                            if (decodeFile != null) {
-                                decodeFile.recycle();
+                            if (bitmapDecodeFile != null) {
+                                bitmapDecodeFile.recycle();
                             }
                             try {
                                 fileOutputStream.close();
@@ -82,7 +82,7 @@ public class ImgCsConverter {
                             return true;
                         } catch (RuntimeException e2) {
                             e = e2;
-                            bitmap = decodeFile;
+                            bitmap = bitmapDecodeFile;
                             Log.e(TAG, " RuntimeException ");
                             e.printStackTrace();
                             if (bitmap != null) {
@@ -98,7 +98,7 @@ public class ImgCsConverter {
                             return false;
                         } catch (Exception e4) {
                             e = e4;
-                            bitmap = decodeFile;
+                            bitmap = bitmapDecodeFile;
                             Log.e(TAG, " Exception ");
                             e.printStackTrace();
                             if (bitmap != null) {
@@ -114,7 +114,7 @@ public class ImgCsConverter {
                             return false;
                         } catch (Throwable th) {
                             th = th;
-                            bitmap = decodeFile;
+                            bitmap = bitmapDecodeFile;
                             if (bitmap != null) {
                                 bitmap.recycle();
                             }
@@ -138,18 +138,18 @@ public class ImgCsConverter {
                         th = th2;
                         fileOutputStream = null;
                     }
-                } catch (RuntimeException e9) {
-                    e = e9;
-                    fileOutputStream = null;
-                } catch (Exception e10) {
-                    e = e10;
-                    fileOutputStream = null;
-                } catch (Throwable th3) {
-                    th = th3;
-                    fileOutputStream = null;
+                } catch (Exception unused3) {
+                    return false;
                 }
-            } catch (Exception unused3) {
-                return false;
+            } catch (RuntimeException e9) {
+                e = e9;
+                fileOutputStream = null;
+            } catch (Exception e10) {
+                e = e10;
+                fileOutputStream = null;
+            } catch (Throwable th3) {
+                th = th3;
+                fileOutputStream = null;
             }
         } catch (Throwable th4) {
             th = th4;

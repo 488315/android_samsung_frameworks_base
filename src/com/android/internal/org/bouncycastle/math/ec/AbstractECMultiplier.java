@@ -8,15 +8,15 @@ public abstract class AbstractECMultiplier implements ECMultiplier {
 
     @Override // com.android.internal.org.bouncycastle.math.ec.ECMultiplier
     public ECPoint multiply(ECPoint eCPoint, BigInteger bigInteger) {
-        int signum = bigInteger.signum();
-        if (signum == 0 || eCPoint.isInfinity()) {
+        int iSignum = bigInteger.signum();
+        if (iSignum == 0 || eCPoint.isInfinity()) {
             return eCPoint.getCurve().getInfinity();
         }
-        ECPoint multiplyPositive = multiplyPositive(eCPoint, bigInteger.abs());
-        if (signum <= 0) {
-            multiplyPositive = multiplyPositive.negate();
+        ECPoint eCPointMultiplyPositive = multiplyPositive(eCPoint, bigInteger.abs());
+        if (iSignum <= 0) {
+            eCPointMultiplyPositive = eCPointMultiplyPositive.negate();
         }
-        return checkResult(multiplyPositive);
+        return checkResult(eCPointMultiplyPositive);
     }
 
     protected ECPoint checkResult(ECPoint eCPoint) {

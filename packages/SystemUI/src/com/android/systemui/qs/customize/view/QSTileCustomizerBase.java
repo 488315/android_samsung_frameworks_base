@@ -2,6 +2,7 @@ package com.android.systemui.qs.customize.view;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.view.DisplayCutout;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -19,7 +20,6 @@ import com.android.systemui.qs.customize.SecQSSettingEditResources;
 import com.android.systemui.util.DeviceState;
 import com.android.systemui.util.SecQsUiDisplayModeInteractor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class QSTileCustomizerBase extends LinearLayout {
     public int mActiveColumns;
@@ -31,6 +31,7 @@ public abstract class QSTileCustomizerBase extends LinearLayout {
     public final CustomizerTileViewPager mAvailableTileLayout;
     public final Context mContext;
     public int mCutOutHeight;
+    public int mCutoutBottomMargin;
     public int mCutoutTopMargin;
     public TextView mEditButtonSummary;
     public SecQSSettingEditResources mEditResources;
@@ -41,7 +42,7 @@ public abstract class QSTileCustomizerBase extends LinearLayout {
     public final SecQSPanelResourcePicker mResourcePicker;
     public Toast mToast;
 
-    public QSTileCustomizerBase(Context context, int i) {
+    public QSTileCustomizerBase(Context context, int i, int i2) {
         super(context);
         this.mIsDragging = false;
         this.mIsMultiTouch = false;
@@ -52,10 +53,12 @@ public abstract class QSTileCustomizerBase extends LinearLayout {
         this.mActiveShowLabel = true;
         this.mIsTopEdit = false;
         this.mCutoutTopMargin = 0;
+        this.mCutoutBottomMargin = 0;
         DeviceState.getDisplayHeight(context);
         DeviceState.getDisplayWidth(context);
         this.mResourcePicker = (SecQSPanelResourcePicker) Dependency.sDependency.getDependencyInner(SecQSPanelResourcePicker.class);
         this.mCutoutTopMargin = i;
+        this.mCutoutBottomMargin = i2;
         this.mContext = context;
         if (QpRune.QUICK_POP_OVER_CUSTOMIZER && isLargeScreen()) {
             LayoutInflater.from(getContext()).inflate(R.layout.qs_pop_over_customize_tile_edit_layout, this);
@@ -75,12 +78,12 @@ public abstract class QSTileCustomizerBase extends LinearLayout {
         return ((SecQsUiDisplayModeInteractor) Dependency.sDependency.getDependencyInner(SecQsUiDisplayModeInteractor.class)).isTablet();
     }
 
-    public void calculateAvailableArea() {
+    public void calculateAvailableArea() throws Resources.NotFoundException {
         if (!isLargeScreen()) {
             int displayHeight = DeviceState.getDisplayHeight(this.mContext);
             int dateButtonContainerTopMargin = this.mResourcePicker.resourcePickHelper.getTargetPicker().getDateButtonContainerTopMargin(this.mContext);
-            View findViewById = findViewById(R.id.qs_customize_top_summary_buttons);
-            int height = findViewById != null ? findViewById.getHeight() : 0;
+            View viewFindViewById = findViewById(R.id.qs_customize_top_summary_buttons);
+            int height = viewFindViewById != null ? viewFindViewById.getHeight() : 0;
             int dimensionPixelSize = getResources().getDimensionPixelSize(R.dimen.qs_edit_tile_icon_frame_size);
             int dimensionPixelSize2 = (displayHeight - (((((dateButtonContainerTopMargin + height) + dimensionPixelSize) + getResources().getDimensionPixelSize(R.dimen.qs_edit_available_active_between_margin)) + getResources().getDimensionPixelSize(R.dimen.qs_edit_available_text_height)) + this.mResourcePicker.getNavBarHeight(this.mContext))) / (getResources().getDimensionPixelSize(R.dimen.qs_edit_tile_label_height) + dimensionPixelSize);
             if (!this.mIsTopEdit || this.mAvailableRows <= dimensionPixelSize2) {
@@ -112,10 +115,10 @@ public abstract class QSTileCustomizerBase extends LinearLayout {
         if (this.mIsTopEdit) {
             dimensionPixelSize6 += getResources().getDimensionPixelSize(R.dimen.qs_edit_summary_text);
         }
-        int min = ((Math.min(i - dateButtonContainerTopMargin2, getResources().getDimensionPixelSize(R.dimen.qs_edit_tablet_height)) - dimensionPixelSize6) / dimensionPixelSize3) - 1;
+        int iMin = ((Math.min(i - dateButtonContainerTopMargin2, getResources().getDimensionPixelSize(R.dimen.qs_edit_tablet_height)) - dimensionPixelSize6) / dimensionPixelSize3) - 1;
         if (!this.mIsTopEdit) {
             this.mAvailableRows = 2;
-            if (min < 2) {
+            if (iMin < 2) {
                 findViewById(R.id.qs_edit_summary).setVisibility(8);
                 this.mAvailableRows = 1;
                 return;
@@ -123,11 +126,11 @@ public abstract class QSTileCustomizerBase extends LinearLayout {
             return;
         }
         this.mAvailableRows = 4;
-        if (min >= 4) {
-            min = 4;
+        if (iMin >= 4) {
+            iMin = 4;
         }
-        if (min > 1) {
-            this.mAvailableRows = min;
+        if (iMin > 1) {
+            this.mAvailableRows = iMin;
             return;
         }
         findViewById(R.id.qs_edit_summary).setVisibility(8);
@@ -136,12 +139,12 @@ public abstract class QSTileCustomizerBase extends LinearLayout {
     }
 
     @Override // android.view.View
-    public final WindowInsets onApplyWindowInsets(WindowInsets windowInsets) {
+    public final WindowInsets onApplyWindowInsets(WindowInsets windowInsets) throws Resources.NotFoundException {
         DisplayCutout displayCutout = windowInsets.getDisplayCutout();
         if (displayCutout != null) {
             int safeInsetTop = displayCutout.getSafeInsetTop() - displayCutout.getSafeInsetBottom();
             if (safeInsetTop < 0) {
-                safeInsetTop = this.mContext.getResources().getDimensionPixelSize(17105895);
+                safeInsetTop = this.mContext.getResources().getDimensionPixelSize(17105896);
             }
             if (this.mCutOutHeight != safeInsetTop) {
                 this.mCutOutHeight = safeInsetTop;
@@ -156,13 +159,13 @@ public abstract class QSTileCustomizerBase extends LinearLayout {
     }
 
     @Override // android.view.ViewGroup, android.view.View
-    public final void onAttachedToWindow() {
+    public final void onAttachedToWindow() throws Resources.NotFoundException {
         super.onAttachedToWindow();
         calculateAvailableArea();
     }
 
     @Override // android.view.View
-    public final void onConfigurationChanged(Configuration configuration) {
+    public final void onConfigurationChanged(Configuration configuration) throws Resources.NotFoundException {
         super.onConfigurationChanged(configuration);
         calculateAvailableArea();
     }
@@ -192,7 +195,7 @@ public abstract class QSTileCustomizerBase extends LinearLayout {
     }
 
     @Override // android.widget.LinearLayout, android.view.View
-    public final void onMeasure(int i, int i2) {
+    public final void onMeasure(int i, int i2) throws Resources.NotFoundException {
         if (!QpRune.QUICK_POP_OVER_CUSTOMIZER || !isLargeScreen()) {
             if (this.mIsTopEdit) {
                 LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) requireViewById(R.id.qs_active_page_content).getLayoutParams();
@@ -211,7 +214,7 @@ public abstract class QSTileCustomizerBase extends LinearLayout {
         super.onMeasure(i, i2);
     }
 
-    public final void updateResources() {
+    public final void updateResources() throws Resources.NotFoundException {
         CustomizerTileViewPager customizerTileViewPager = this.mActiveTileLayout;
         int i = this.mActiveRows;
         int i2 = this.mActiveColumns;

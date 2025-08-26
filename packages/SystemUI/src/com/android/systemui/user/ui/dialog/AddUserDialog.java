@@ -15,7 +15,6 @@ import com.android.systemui.user.CreateUserActivity;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class AddUserDialog extends SystemUIDialog {
     public final BroadcastSender broadcastSender;
@@ -30,26 +29,26 @@ public final class AddUserDialog extends SystemUIDialog {
         DialogInterface.OnClickListener onClickListener = new DialogInterface.OnClickListener() { // from class: com.android.systemui.user.ui.dialog.AddUserDialog$onClickListener$1
             @Override // android.content.DialogInterface.OnClickListener
             public final void onClick(DialogInterface dialogInterface, int i) {
-                if (AddUserDialog.this.falsingManager.isFalseTap(i == -2 ? 0 : 2)) {
+                if (this.this$0.falsingManager.isFalseTap(i == -2 ? 0 : 2)) {
                     return;
                 }
                 if (i == -3) {
-                    AddUserDialog.this.cancel();
+                    this.this$0.cancel();
                     return;
                 }
-                AddUserDialog addUserDialog = AddUserDialog.this;
+                AddUserDialog addUserDialog = this.this$0;
                 addUserDialog.dialogTransitionAnimator.dismissStack(addUserDialog);
                 if (ActivityManager.isUserAMonkey()) {
                     return;
                 }
-                final BroadcastSender broadcastSender2 = AddUserDialog.this.broadcastSender;
+                final BroadcastSender broadcastSender2 = this.this$0.broadcastSender;
                 final Intent intent = new Intent(PopupUIUtil.ACTION_CLOSE_SYSTEM_DIALOGS);
                 final UserHandle userHandle2 = userHandle;
                 broadcastSender2.getClass();
                 broadcastSender2.sendInBackground(String.valueOf(intent), new Function0() { // from class: com.android.systemui.broadcast.BroadcastSender$$ExternalSyntheticLambda3
                     @Override // kotlin.jvm.functions.Function0
                     public final Object invoke() {
-                        BroadcastSender.this.context.sendBroadcastAsUser(intent, userHandle2);
+                        broadcastSender2.context.sendBroadcastAsUser(intent, userHandle2);
                         return Unit.INSTANCE;
                     }
                 });

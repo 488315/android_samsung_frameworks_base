@@ -7,7 +7,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function4;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class DeviceEntryIconViewModel$nonAnimatedBurnInOffsets$1 extends SuspendLambda implements Function4 {
     /* synthetic */ float F$0;
@@ -21,13 +20,13 @@ final class DeviceEntryIconViewModel$nonAnimatedBurnInOffsets$1 extends SuspendL
 
     @Override // kotlin.jvm.functions.Function4
     public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4) {
-        int intValue = ((Number) obj).intValue();
-        int intValue2 = ((Number) obj2).intValue();
-        float floatValue = ((Number) obj3).floatValue();
+        int iIntValue = ((Number) obj).intValue();
+        int iIntValue2 = ((Number) obj2).intValue();
+        float fFloatValue = ((Number) obj3).floatValue();
         DeviceEntryIconViewModel$nonAnimatedBurnInOffsets$1 deviceEntryIconViewModel$nonAnimatedBurnInOffsets$1 = new DeviceEntryIconViewModel$nonAnimatedBurnInOffsets$1((Continuation) obj4);
-        deviceEntryIconViewModel$nonAnimatedBurnInOffsets$1.I$0 = intValue;
-        deviceEntryIconViewModel$nonAnimatedBurnInOffsets$1.I$1 = intValue2;
-        deviceEntryIconViewModel$nonAnimatedBurnInOffsets$1.F$0 = floatValue;
+        deviceEntryIconViewModel$nonAnimatedBurnInOffsets$1.I$0 = iIntValue;
+        deviceEntryIconViewModel$nonAnimatedBurnInOffsets$1.I$1 = iIntValue2;
+        deviceEntryIconViewModel$nonAnimatedBurnInOffsets$1.F$0 = fFloatValue;
         return deviceEntryIconViewModel$nonAnimatedBurnInOffsets$1.invokeSuspend(Unit.INSTANCE);
     }
 

@@ -11,16 +11,16 @@ public class RemoteLockInfo implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public RemoteLockInfo createFromParcel(Parcel parcel) {
-            int readInt = parcel.readInt();
+            int i = parcel.readInt();
             boolean[] zArr = new boolean[1];
             parcel.readBooleanArray(zArr);
             boolean z = zArr[0];
-            CharSequence readCharSequence = parcel.readCharSequence();
-            CharSequence readCharSequence2 = parcel.readCharSequence();
-            CharSequence readCharSequence3 = parcel.readCharSequence();
+            CharSequence charSequence = parcel.readCharSequence();
+            CharSequence charSequence2 = parcel.readCharSequence();
+            CharSequence charSequence3 = parcel.readCharSequence();
             boolean[] zArr2 = new boolean[1];
             parcel.readBooleanArray(zArr2);
-            return new RemoteLockInfo(readInt, z, readCharSequence, readCharSequence2, readCharSequence3, zArr2[0], parcel.readCharSequence(), parcel.readInt(), parcel.readLong(), parcel.readInt(), parcel.readBoolean(), parcel.readBoolean(), parcel.readBundle(), parcel.readCharSequence());
+            return new RemoteLockInfo(i, z, charSequence, charSequence2, charSequence3, zArr2[0], parcel.readCharSequence(), parcel.readInt(), parcel.readLong(), parcel.readInt(), parcel.readBoolean(), parcel.readBoolean(), parcel.readBundle(), parcel.readCharSequence());
         }
 
         /* JADX WARN: Can't rename method to resolve collision */

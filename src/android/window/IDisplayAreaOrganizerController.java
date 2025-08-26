@@ -69,9 +69,9 @@ public interface IDisplayAreaOrganizerController extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IDisplayAreaOrganizerController.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IDisplayAreaOrganizerController)) {
-                return (IDisplayAreaOrganizerController) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IDisplayAreaOrganizerController.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IDisplayAreaOrganizerController)) {
+                return (IDisplayAreaOrganizerController) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -107,26 +107,26 @@ public interface IDisplayAreaOrganizerController extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IDisplayAreaOrganizer asInterface = IDisplayAreaOrganizer.Stub.asInterface(parcel.readStrongBinder());
-                int readInt = parcel.readInt();
+                IDisplayAreaOrganizer iDisplayAreaOrganizerAsInterface = IDisplayAreaOrganizer.Stub.asInterface(parcel.readStrongBinder());
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                ParceledListSlice<DisplayAreaAppearedInfo> registerOrganizer = registerOrganizer(asInterface, readInt);
+                ParceledListSlice<DisplayAreaAppearedInfo> parceledListSliceRegisterOrganizer = registerOrganizer(iDisplayAreaOrganizerAsInterface, i3);
                 parcel2.writeNoException();
-                parcel2.writeTypedObject(registerOrganizer, 1);
+                parcel2.writeTypedObject(parceledListSliceRegisterOrganizer, 1);
             } else if (i == 2) {
-                IDisplayAreaOrganizer asInterface2 = IDisplayAreaOrganizer.Stub.asInterface(parcel.readStrongBinder());
+                IDisplayAreaOrganizer iDisplayAreaOrganizerAsInterface2 = IDisplayAreaOrganizer.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                unregisterOrganizer(asInterface2);
+                unregisterOrganizer(iDisplayAreaOrganizerAsInterface2);
                 parcel2.writeNoException();
             } else if (i == 3) {
-                IDisplayAreaOrganizer asInterface3 = IDisplayAreaOrganizer.Stub.asInterface(parcel.readStrongBinder());
-                int readInt2 = parcel.readInt();
-                int readInt3 = parcel.readInt();
-                String readString = parcel.readString();
+                IDisplayAreaOrganizer iDisplayAreaOrganizerAsInterface3 = IDisplayAreaOrganizer.Stub.asInterface(parcel.readStrongBinder());
+                int i4 = parcel.readInt();
+                int i5 = parcel.readInt();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                DisplayAreaAppearedInfo createTaskDisplayArea = createTaskDisplayArea(asInterface3, readInt2, readInt3, readString);
+                DisplayAreaAppearedInfo displayAreaAppearedInfoCreateTaskDisplayArea = createTaskDisplayArea(iDisplayAreaOrganizerAsInterface3, i4, i5, string);
                 parcel2.writeNoException();
-                parcel2.writeTypedObject(createTaskDisplayArea, 1);
+                parcel2.writeTypedObject(displayAreaAppearedInfoCreateTaskDisplayArea, 1);
             } else if (i == 4) {
                 WindowContainerToken windowContainerToken = (WindowContainerToken) parcel.readTypedObject(WindowContainerToken.CREATOR);
                 parcel.enforceNoDataAvail();
@@ -156,67 +156,67 @@ public interface IDisplayAreaOrganizerController extends IInterface {
 
             @Override // android.window.IDisplayAreaOrganizerController
             public ParceledListSlice<DisplayAreaAppearedInfo> registerOrganizer(IDisplayAreaOrganizer iDisplayAreaOrganizer, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDisplayAreaOrganizerController.DESCRIPTOR);
-                    obtain.writeStrongInterface(iDisplayAreaOrganizer);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ParceledListSlice) obtain2.readTypedObject(ParceledListSlice.CREATOR);
+                    parcelObtain.writeInterfaceToken(IDisplayAreaOrganizerController.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iDisplayAreaOrganizer);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ParceledListSlice) parcelObtain2.readTypedObject(ParceledListSlice.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.IDisplayAreaOrganizerController
             public void unregisterOrganizer(IDisplayAreaOrganizer iDisplayAreaOrganizer) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDisplayAreaOrganizerController.DESCRIPTOR);
-                    obtain.writeStrongInterface(iDisplayAreaOrganizer);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IDisplayAreaOrganizerController.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iDisplayAreaOrganizer);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.IDisplayAreaOrganizerController
             public DisplayAreaAppearedInfo createTaskDisplayArea(IDisplayAreaOrganizer iDisplayAreaOrganizer, int i, int i2, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDisplayAreaOrganizerController.DESCRIPTOR);
-                    obtain.writeStrongInterface(iDisplayAreaOrganizer);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (DisplayAreaAppearedInfo) obtain2.readTypedObject(DisplayAreaAppearedInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(IDisplayAreaOrganizerController.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iDisplayAreaOrganizer);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (DisplayAreaAppearedInfo) parcelObtain2.readTypedObject(DisplayAreaAppearedInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.window.IDisplayAreaOrganizerController
             public void deleteTaskDisplayArea(WindowContainerToken windowContainerToken) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IDisplayAreaOrganizerController.DESCRIPTOR);
-                    obtain.writeTypedObject(windowContainerToken, 0);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IDisplayAreaOrganizerController.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(windowContainerToken, 0);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

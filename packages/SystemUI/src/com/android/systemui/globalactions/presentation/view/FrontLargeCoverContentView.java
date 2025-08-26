@@ -3,6 +3,7 @@ package com.android.systemui.globalactions.presentation.view;
 import android.app.Presentation;
 import android.app.WallpaperManager;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.hardware.display.DisplayManager;
@@ -45,7 +46,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class FrontLargeCoverContentView implements ContentView, ViewStateController {
     public ContentAdapter mAdapter;
@@ -75,21 +75,18 @@ public class FrontLargeCoverContentView implements ContentView, ViewStateControl
     public ActionViewModel mSelectedViewModel;
     public ViewAnimationState mState;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.globalactions.presentation.view.FrontLargeCoverContentView$3, reason: invalid class name */
     public class AnonymousClass3 {
         public AnonymousClass3() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ContentAdapter extends RecyclerView.Adapter {
         public View mLastAnimatedView;
         public final List mViewModelList = new ArrayList();
         public final List mTempViewModelList = new ArrayList();
         public boolean mIsConfirmView = false;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class ViewHolder extends RecyclerView.ViewHolder {
             public static final /* synthetic */ int $r8$clinit = 0;
             public final ViewGroup parent;
@@ -111,7 +108,7 @@ public class FrontLargeCoverContentView implements ContentView, ViewStateControl
         }
 
         @Override // androidx.recyclerview.widget.RecyclerView.Adapter
-        public final void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int i) {
+        public final void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int i) throws Resources.NotFoundException {
             ViewHolder viewHolder2 = (ViewHolder) viewHolder;
             FrontLargeCoverContentView frontLargeCoverContentView = FrontLargeCoverContentView.this;
             FrontLargeCoverContentItemView frontLargeCoverContentItemView = new FrontLargeCoverContentItemView(frontLargeCoverContentView.mDialog.getContext(), (ActionViewModel) ((ArrayList) this.mViewModelList).get(i), viewHolder2.parent, frontLargeCoverContentView.mIsIconOnly, frontLargeCoverContentView.mIsWhiteTheme, frontLargeCoverContentView.mIsCameraViewCover, frontLargeCoverContentView.mResourceFactory);
@@ -135,7 +132,6 @@ public class FrontLargeCoverContentView implements ContentView, ViewStateControl
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ContentGridView extends RecyclerView {
         public ContentGridView(Context context) {
             super(context);
@@ -152,7 +148,6 @@ public class FrontLargeCoverContentView implements ContentView, ViewStateControl
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class FrontLargeCoverGlobalActionsBackgroundView extends FrameLayout {
         public FrontLargeCoverGlobalActionsBackgroundView(FrontLargeCoverContentView frontLargeCoverContentView, Context context) {
             super(context);
@@ -160,7 +155,6 @@ public class FrontLargeCoverContentView implements ContentView, ViewStateControl
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class HorizontalSpaceItemDecoration extends RecyclerView.ItemDecoration {
         public final int horizontalSpaceHeight;
 
@@ -177,7 +171,6 @@ public class FrontLargeCoverContentView implements ContentView, ViewStateControl
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class RootView extends FrameLayout {
         public RootView(Context context) {
             super(context);
@@ -201,7 +194,6 @@ public class FrontLargeCoverContentView implements ContentView, ViewStateControl
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class VerticalSpaceItemDecoration extends RecyclerView.ItemDecoration {
         public final int verticalSpaceHeight;
 
@@ -239,9 +231,9 @@ public class FrontLargeCoverContentView implements ContentView, ViewStateControl
         this.mState = ViewAnimationState.IDLE;
         this.mLastFoldedState = true;
         this.mIsSecureConfirming = false;
-        boolean isEnabled = conditionChecker.isEnabled(SystemUIConditions.IS_CLEAR_CAMERA_VIEW_COVER_CLOSED);
-        this.mIsCameraViewCover = isEnabled;
-        if (isEnabled) {
+        boolean zIsEnabled = conditionChecker.isEnabled(SystemUIConditions.IS_CLEAR_CAMERA_VIEW_COVER_CLOSED);
+        this.mIsCameraViewCover = zIsEnabled;
+        if (zIsEnabled) {
             Display[] displays = displayManager.getDisplays("com.samsung.android.hardware.display.category.VIEW_COVER_DISPLAY");
             Display display2 = displays.length > 0 ? displays[0] : null;
             if (display2 != null) {
@@ -314,7 +306,7 @@ public class FrontLargeCoverContentView implements ContentView, ViewStateControl
         this.mAnimatorFSM = new CoverViewAnimatorFSM(frontLargeCoverViewAnimator, this.mLogWrapper, this);
     }
 
-    public final void initLayouts() {
+    public final void initLayouts() throws Resources.NotFoundException {
         RootView rootView = new RootView(this.mDialog.getContext());
         this.mRootView = rootView;
         ViewGroup viewGroup = (ViewGroup) rootView.findViewById(this.mResourceFactory.get(ResourceType.ID_FRONT_COVER_ITEM));
@@ -356,7 +348,7 @@ public class FrontLargeCoverContentView implements ContentView, ViewStateControl
         attributes.semSetScreenTimeout(this.mIsCameraViewCover ? 6000L : 5000L);
         attributes.semSetScreenDimDuration(0L);
         attributes.format = -3;
-        attributes.setTitle(this.mContext.getResources().getString(android.R.string.miniresolver_sms_information));
+        attributes.setTitle(this.mContext.getResources().getString(android.R.string.miniresolver_switch_to_work));
         attributes.layoutInDisplayCutoutMode = 3;
         window.getDecorView().setSystemUiVisibility(1792);
         window.setNavigationBarContrastEnforced(false);

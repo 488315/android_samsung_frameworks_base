@@ -76,9 +76,9 @@ public interface IAudioSignalInfo extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.signal.IAudioSignalInfo");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IAudioSignalInfo)) {
-                return (IAudioSignalInfo) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.signal.IAudioSignalInfo");
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IAudioSignalInfo)) {
+                return (IAudioSignalInfo) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -117,30 +117,30 @@ public interface IAudioSignalInfo extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                Bundle audioSignalInfo = getAudioSignalInfo(readString);
+                Bundle audioSignalInfo = getAudioSignalInfo(string);
                 parcel2.writeNoException();
                 parcel2.writeTypedObject(audioSignalInfo, 1);
             } else if (i == 2) {
-                boolean readBoolean = parcel.readBoolean();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                notifyMtsSelectTrackFlag(readBoolean);
+                notifyMtsSelectTrackFlag(z);
                 parcel2.writeNoException();
             } else if (i == 3) {
                 String mtsSelectedTrackId = getMtsSelectedTrackId();
                 parcel2.writeNoException();
                 parcel2.writeString(mtsSelectedTrackId);
             } else if (i == 4) {
-                String readString2 = parcel.readString();
-                IAudioSignalInfoListener asInterface = IAudioSignalInfoListener.Stub.asInterface(parcel.readStrongBinder());
+                String string2 = parcel.readString();
+                IAudioSignalInfoListener iAudioSignalInfoListenerAsInterface = IAudioSignalInfoListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                addAudioSignalInfoListener(readString2, asInterface);
+                addAudioSignalInfoListener(string2, iAudioSignalInfoListenerAsInterface);
                 parcel2.writeNoException();
             } else if (i == 5) {
-                IAudioSignalInfoListener asInterface2 = IAudioSignalInfoListener.Stub.asInterface(parcel.readStrongBinder());
+                IAudioSignalInfoListener iAudioSignalInfoListenerAsInterface2 = IAudioSignalInfoListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                removeAudioSignalInfoListener(asInterface2);
+                removeAudioSignalInfoListener(iAudioSignalInfoListenerAsInterface2);
                 parcel2.writeNoException();
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
@@ -166,78 +166,78 @@ public interface IAudioSignalInfo extends IInterface {
 
             @Override // android.media.tv.extension.signal.IAudioSignalInfo
             public Bundle getAudioSignalInfo(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.signal.IAudioSignalInfo");
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.signal.IAudioSignalInfo");
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.signal.IAudioSignalInfo
             public void notifyMtsSelectTrackFlag(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.signal.IAudioSignalInfo");
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.signal.IAudioSignalInfo");
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.signal.IAudioSignalInfo
             public String getMtsSelectedTrackId() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.signal.IAudioSignalInfo");
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.signal.IAudioSignalInfo");
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.signal.IAudioSignalInfo
             public void addAudioSignalInfoListener(String str, IAudioSignalInfoListener iAudioSignalInfoListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.signal.IAudioSignalInfo");
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iAudioSignalInfoListener);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.signal.IAudioSignalInfo");
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iAudioSignalInfoListener);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.signal.IAudioSignalInfo
             public void removeAudioSignalInfoListener(IAudioSignalInfoListener iAudioSignalInfoListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.signal.IAudioSignalInfo");
-                    obtain.writeStrongInterface(iAudioSignalInfoListener);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.signal.IAudioSignalInfo");
+                    parcelObtain.writeStrongInterface(iAudioSignalInfoListener);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -16,13 +16,11 @@ import com.android.systemui.fragments.FragmentService;
 import com.android.systemui.tuner.CustomListPreference;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class RadioListPreference extends CustomListPreference {
     public CustomListPreference.CustomListPreferenceDialogFragment.AnonymousClass2 mOnClickListener;
     public CharSequence mSummary;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class RadioFragment extends TunerPreferenceFragment {
         public RadioListPreference mListPref;
 
@@ -33,7 +31,7 @@ public class RadioListPreference extends CustomListPreference {
             preferenceScreen.onAttachedToHierarchy(preferenceManager);
             setPreferenceScreen(preferenceScreen);
             if (this.mListPref != null) {
-                update$2$1();
+                update$3$1();
             }
         }
 
@@ -43,7 +41,7 @@ public class RadioListPreference extends CustomListPreference {
             return true;
         }
 
-        public final void update$2$1() {
+        public final void update$3$1() {
             Context context = this.mPreferenceManager.mContext;
             RadioListPreference radioListPreference = this.mListPref;
             CharSequence[] charSequenceArr = radioListPreference.mEntries;
@@ -78,9 +76,9 @@ public class RadioListPreference extends CustomListPreference {
         view.setId(com.android.systemui.R.id.content);
         dialog2.setContentView(view);
         toolbar.setTitle(this.mTitle);
-        TypedArray obtainStyledAttributes = dialog2.getContext().obtainStyledAttributes(new int[]{R.attr.homeAsUpIndicator});
-        Drawable drawable = obtainStyledAttributes.getDrawable(0);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = dialog2.getContext().obtainStyledAttributes(new int[]{R.attr.homeAsUpIndicator});
+        Drawable drawable = typedArrayObtainStyledAttributes.getDrawable(0);
+        typedArrayObtainStyledAttributes.recycle();
         toolbar.setNavigationIcon(drawable);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.tuner.RadioListPreference$$ExternalSyntheticLambda0
             @Override // android.view.View.OnClickListener
@@ -91,7 +89,7 @@ public class RadioListPreference extends CustomListPreference {
         RadioFragment radioFragment = new RadioFragment();
         radioFragment.mListPref = this;
         if (radioFragment.mPreferenceManager != null) {
-            radioFragment.update$2$1();
+            radioFragment.update$3$1();
         }
         ((FragmentService) Dependency.sDependency.getDependencyInner(FragmentService.class)).getFragmentHostManager(view).mFragments.getFragmentManager().beginTransaction().add(R.id.content, radioFragment).commit();
         return dialog2;
@@ -103,7 +101,7 @@ public class RadioListPreference extends CustomListPreference {
         if (radioFragment != null) {
             radioFragment.mListPref = this;
             if (radioFragment.mPreferenceManager != null) {
-                radioFragment.update$2$1();
+                radioFragment.update$3$1();
             }
         }
     }

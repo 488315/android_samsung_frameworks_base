@@ -1,6 +1,7 @@
 package com.android.systemui.statusbar.phone;
 
 import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Color;
@@ -9,9 +10,11 @@ import android.util.Log;
 import android.util.MathUtils;
 import android.util.Pair;
 import android.view.View;
+import android.view.ViewRootImpl;
 import android.view.ViewTreeObserver;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
+import androidx.exifinterface.media.ExifInterface$$ExternalSyntheticOutline0;
 import com.android.app.tracing.coroutines.TrackTracer;
 import com.android.internal.colorextraction.ColorExtractor;
 import com.android.internal.graphics.ColorUtils;
@@ -19,6 +22,7 @@ import com.android.internal.util.ContrastColorUtil;
 import com.android.keyguard.BouncerPanelExpansionCalculator;
 import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.keyguard.KeyguardUpdateMonitorCallback;
+import com.android.systemui.Dependency;
 import com.android.systemui.Dumpable;
 import com.android.systemui.LsRune;
 import com.android.systemui.R;
@@ -29,6 +33,7 @@ import com.android.systemui.dock.DockManager;
 import com.android.systemui.doze.AODParameters;
 import com.android.systemui.doze.PluginAODManager;
 import com.android.systemui.flags.RefactorFlagUtils;
+import com.android.systemui.keyguard.DisplayLifecycle;
 import com.android.systemui.keyguard.KeyguardFastBioUnlockController;
 import com.android.systemui.keyguard.KeyguardUnlockAnimationController;
 import com.android.systemui.keyguard.WakefulnessLifecycle;
@@ -43,11 +48,14 @@ import com.android.systemui.scene.shared.flag.SceneContainerFlag;
 import com.android.systemui.scrim.ScrimView;
 import com.android.systemui.scrim.ScrimViewBase;
 import com.android.systemui.shade.transition.LargeScreenShadeInterpolator;
+import com.android.systemui.statusbar.notification.stack.ViewState;
 import com.android.systemui.statusbar.phone.ScrimStateLogger;
 import com.android.systemui.statusbar.phone.SecLsScrimControlHelper;
 import com.android.systemui.statusbar.policy.ConfigurationController;
 import com.android.systemui.statusbar.policy.KeyguardStateController;
 import com.android.systemui.statusbar.policy.KeyguardStateControllerImpl;
+import com.android.systemui.util.DeviceType;
+import com.android.systemui.util.LogUtil;
 import com.android.systemui.util.kotlin.JavaAdapter;
 import com.android.systemui.util.wakelock.DelayedWakeLock;
 import dagger.Lazy;
@@ -57,7 +65,6 @@ import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 import kotlinx.coroutines.CoroutineDispatcher;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ScrimController implements ViewTreeObserver.OnPreDrawListener, Dumpable {
     public AODAmbientWallpaperHelper mAODAmbientWallpaperHelper;
@@ -104,7 +111,7 @@ public class ScrimController implements ViewTreeObserver.OnPreDrawListener, Dump
     public ScrimStateLogger mScrimColorState;
     public ScrimView mScrimInFront;
     public final ScrimController$$ExternalSyntheticLambda2 mScrimStateListener;
-    public CentralSurfacesImpl$$ExternalSyntheticLambda1 mScrimVisibleListener;
+    public CentralSurfacesImpl$$ExternalSyntheticLambda2 mScrimVisibleListener;
     public int mScrimsVisibility;
     public SecLsScrimControlHelper mSecLsScrimControlHelper;
     public final StatusBarKeyguardViewManager mStatusBarKeyguardViewManager;
@@ -135,14 +142,12 @@ public class ScrimController implements ViewTreeObserver.OnPreDrawListener, Dump
     public final ScrimController$$ExternalSyntheticLambda1 mScrimAlphaConsumer = new ScrimController$$ExternalSyntheticLambda1(this, 1);
     public final ScrimController$$ExternalSyntheticLambda1 mGlanceableHubConsumer = new ScrimController$$ExternalSyntheticLambda1(this, 0);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.phone.ScrimController$3, reason: invalid class name */
     public class AnonymousClass3 implements ScrimStateLogger.Callback {
         public AnonymousClass3() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class KeyguardVisibilityCallback extends KeyguardUpdateMonitorCallback {
         public /* synthetic */ KeyguardVisibilityCallback(ScrimController scrimController, int i) {
             this();
@@ -228,18 +233,102 @@ public class ScrimController implements ViewTreeObserver.OnPreDrawListener, Dump
         dispatchBackScrimState(this.mScrimBehind.mViewAlpha);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:103:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x005b  */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
     public final void applyState$1() {
-        /*
-            Method dump skipped, instructions count: 419
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.phone.ScrimController.applyState$1():void");
+        boolean z;
+        ScrimState scrimState;
+        SecLsScrimControlHelper secLsScrimControlHelper = this.mSecLsScrimControlHelper;
+        secLsScrimControlHelper.getClass();
+        int i = SecLsScrimControlHelper.AnonymousClass4.$SwitchMap$com$android$systemui$statusbar$phone$ScrimState[secLsScrimControlHelper.mState.ordinal()];
+        if (i == 1 || i == 2) {
+            z = true;
+        } else if (i == 3 && ((scrimState = secLsScrimControlHelper.mPreviousState) == ScrimState.AOD || scrimState == ScrimState.KEYGUARD || scrimState == ScrimState.BOUNCER || scrimState == ScrimState.BOUNCER_SCRIMMED || scrimState == ScrimState.DREAMING)) {
+            secLsScrimControlHelper.mState.mBehindAlpha = 0.0f;
+            z = true;
+        } else {
+            z = false;
+        }
+        ScrimState scrimState2 = this.mState;
+        this.mInFrontTint = scrimState2.mFrontTint;
+        this.mBehindTint = scrimState2.mBehindTint;
+        this.mNotificationsTint = scrimState2.mNotifTint;
+        this.mInFrontAlpha = scrimState2.mFrontAlpha;
+        this.mBehindAlpha = scrimState2.mBehindAlpha;
+        this.mNotificationsAlpha = scrimState2.mNotifAlpha;
+        assertAlphasValid();
+        if (this.mExpansionAffectsAlpha) {
+            if (z) {
+                if (this.mState != ScrimState.UNLOCKED) {
+                    this.mAnimatingPanelExpansionOnUnlock = false;
+                    return;
+                }
+                return;
+            }
+            ScrimState scrimState3 = this.mState;
+            ScrimState scrimState4 = ScrimState.UNLOCKED;
+            if (scrimState3 == scrimState4 || scrimState3 == ScrimState.DREAMING || scrimState3 == ScrimState.GLANCEABLE_HUB_OVER_DREAM) {
+                if (!this.mOccludeAnimationPlaying && !scrimState3.mLaunchingAffordanceWithPreview) {
+                    z = false;
+                }
+                if (!this.mScreenOffAnimationController.shouldExpandNotifications() && !this.mAnimatingPanelExpansionOnUnlock && !z) {
+                    if (this.mTransparentScrimBackground) {
+                        this.mBehindAlpha = 0.0f;
+                        this.mNotificationsAlpha = 0.0f;
+                    } else {
+                        this.mBehindAlpha = this.mLargeScreenShadeInterpolator.getBehindScrimAlpha(this.mPanelExpansionFraction * 1.0f);
+                        this.mNotificationsAlpha = this.mLargeScreenShadeInterpolator.getNotificationScrimAlpha(this.mPanelExpansionFraction);
+                    }
+                    this.mBehindTint = this.mState.mBehindTint;
+                    this.mInFrontAlpha = 0.0f;
+                }
+                ScrimState scrimState5 = this.mState;
+                if (scrimState5 == ScrimState.DREAMING || scrimState5 == ScrimState.GLANCEABLE_HUB_OVER_DREAM) {
+                    float f = this.mBouncerHiddenFraction;
+                    if (f != 1.0f) {
+                        float fAboutToShowBouncerProgress = BouncerPanelExpansionCalculator.aboutToShowBouncerProgress(f);
+                        this.mBehindAlpha = MathUtils.lerp(1.0f, this.mBehindAlpha, fAboutToShowBouncerProgress);
+                        this.mBehindTint = ColorUtils.blendARGB(ScrimState.BOUNCER.mBehindTint, this.mBehindTint, fAboutToShowBouncerProgress);
+                    }
+                }
+            } else {
+                ScrimState scrimState6 = ScrimState.KEYGUARD;
+                if (scrimState3 == scrimState6 || scrimState3 == ScrimState.SHADE_LOCKED || scrimState3 == ScrimState.PULSING || scrimState3 == ScrimState.GLANCEABLE_HUB) {
+                    Pair pairCalculateBackStateForState = calculateBackStateForState(scrimState3);
+                    int iIntValue = ((Integer) pairCalculateBackStateForState.first).intValue();
+                    float fFloatValue = ((Float) pairCalculateBackStateForState.second).floatValue();
+                    float f2 = this.mTransitionToFullShadeProgress;
+                    if (f2 > 0.0f) {
+                        Pair pairCalculateBackStateForState2 = calculateBackStateForState(ScrimState.SHADE_LOCKED);
+                        fFloatValue = MathUtils.lerp(fFloatValue, ((Float) pairCalculateBackStateForState2.second).floatValue(), this.mTransitionToFullShadeProgress);
+                        iIntValue = ColorUtils.blendARGB(iIntValue, ((Integer) pairCalculateBackStateForState2.first).intValue(), this.mTransitionToFullShadeProgress);
+                    } else if (this.mState == ScrimState.GLANCEABLE_HUB && f2 == 0.0f && this.mBouncerHiddenFraction == 1.0f) {
+                        fFloatValue = 0.0f;
+                    }
+                    ScrimState scrimState7 = this.mState;
+                    this.mInFrontAlpha = scrimState7.mFrontAlpha;
+                    this.mBehindAlpha = fFloatValue;
+                    if (scrimState7 == scrimState6 && this.mTransitionToFullShadeProgress > 0.0f) {
+                        this.mNotificationsAlpha = MathUtils.saturate(this.mTransitionToLockScreenFullShadeNotificationsProgress);
+                    } else if (scrimState7 == ScrimState.SHADE_LOCKED) {
+                        this.mNotificationsAlpha = getInterpolatedFraction();
+                    } else if (scrimState7 == ScrimState.GLANCEABLE_HUB && this.mTransitionToFullShadeProgress == 0.0f) {
+                        this.mNotificationsAlpha = 0.0f;
+                    } else {
+                        this.mNotificationsAlpha = Math.max(1.0f - getInterpolatedFraction(), this.mQsExpansion);
+                    }
+                    ScrimState scrimState8 = this.mState;
+                    this.mNotificationsTint = scrimState8.mNotifTint;
+                    this.mBehindTint = iIntValue;
+                    z = scrimState8 == scrimState6 && this.mTransitionToFullShadeProgress == 0.0f && this.mQsExpansion == 0.0f;
+                    if (this.mKeyguardOccluded || z) {
+                        this.mNotificationsAlpha = 0.0f;
+                    }
+                }
+            }
+            if (this.mState != scrimState4) {
+                this.mAnimatingPanelExpansionOnUnlock = false;
+            }
+            assertAlphasValid();
+        }
     }
 
     public final void assertAlphasValid() {
@@ -249,18 +338,18 @@ public class ScrimController implements ViewTreeObserver.OnPreDrawListener, Dump
     }
 
     public final void calculateAndUpdatePanelExpansion() {
-        float f = this.mRawPanelExpansionFraction;
-        float f2 = this.mPanelScrimMinFraction;
-        if (f2 < 1.0f) {
-            f = Math.max((f - f2) / (1.0f - f2), 0.0f);
+        float fMax = this.mRawPanelExpansionFraction;
+        float f = this.mPanelScrimMinFraction;
+        if (f < 1.0f) {
+            fMax = Math.max((fMax - f) / (1.0f - f), 0.0f);
         }
-        if (this.mPanelExpansionFraction != f) {
-            if (f != 0.0f && this.mKeyguardUnlockAnimationController.playingCannedUnlockAnimation && this.mState != ScrimState.UNLOCKED) {
+        if (this.mPanelExpansionFraction != fMax) {
+            if (fMax != 0.0f && this.mKeyguardUnlockAnimationController.playingCannedUnlockAnimation && this.mState != ScrimState.UNLOCKED) {
                 this.mAnimatingPanelExpansionOnUnlock = true;
-            } else if (f == 0.0f) {
+            } else if (fMax == 0.0f) {
                 this.mAnimatingPanelExpansionOnUnlock = false;
             }
-            this.mPanelExpansionFraction = f;
+            this.mPanelExpansionFraction = fMax;
             ScrimState scrimState = this.mState;
             if ((scrimState == ScrimState.UNLOCKED || scrimState == ScrimState.KEYGUARD || scrimState == ScrimState.DREAMING || scrimState == ScrimState.GLANCEABLE_HUB_OVER_DREAM || scrimState == ScrimState.SHADE_LOCKED || scrimState == ScrimState.PULSING) && this.mExpansionAffectsAlpha && !this.mAnimatingPanelExpansionOnUnlock) {
                 applyAndDispatchState();
@@ -271,100 +360,55 @@ public class ScrimController implements ViewTreeObserver.OnPreDrawListener, Dump
     public final Pair calculateBackStateForState(ScrimState scrimState) {
         float interpolatedFraction = getInterpolatedFraction();
         float f = scrimState.mBehindAlpha;
-        int i = scrimState.mBehindTint;
-        float lerp = this.mDarkenWhileDragging ? MathUtils.lerp(1.0f, f, interpolatedFraction) : MathUtils.lerp(0.0f, f, interpolatedFraction);
+        int iBlendARGB = scrimState.mBehindTint;
+        float fLerp = this.mDarkenWhileDragging ? MathUtils.lerp(1.0f, f, interpolatedFraction) : MathUtils.lerp(0.0f, f, interpolatedFraction);
         if (this.mStatusBarKeyguardViewManager.isPrimaryBouncerInTransit()) {
-            i = ColorUtils.blendARGB(ScrimState.BOUNCER.mBehindTint, scrimState.mBehindTint, interpolatedFraction);
+            iBlendARGB = ColorUtils.blendARGB(ScrimState.BOUNCER.mBehindTint, scrimState.mBehindTint, interpolatedFraction);
         }
         float f2 = this.mQsExpansion;
         if (f2 > 0.0f) {
-            lerp = MathUtils.lerp(lerp, 1.0f, f2);
+            fLerp = MathUtils.lerp(fLerp, 1.0f, f2);
             float f3 = this.mQsExpansion;
             if (this.mStatusBarKeyguardViewManager.isPrimaryBouncerInTransit()) {
                 float f4 = this.mPanelExpansionFraction;
-                int i2 = BouncerPanelExpansionCalculator.$r8$clinit;
+                int i = BouncerPanelExpansionCalculator.$r8$clinit;
                 f3 = f4 < 0.9f ? ((double) f4) < 0.6d ? 0.0f : (f4 - 0.6f) / 0.3f : 1.0f;
             }
-            i = ColorUtils.blendARGB(i, ScrimState.SHADE_LOCKED.mBehindTint, f3);
+            iBlendARGB = ColorUtils.blendARGB(iBlendARGB, ScrimState.SHADE_LOCKED.mBehindTint, f3);
         }
-        return new Pair(Integer.valueOf(i), Float.valueOf(((KeyguardStateControllerImpl) this.mKeyguardStateController).mKeyguardGoingAway ? 0.0f : lerp));
+        return new Pair(Integer.valueOf(iBlendARGB), Float.valueOf(((KeyguardStateControllerImpl) this.mKeyguardStateController).mKeyguardGoingAway ? 0.0f : fLerp));
     }
 
     public final void dispatchBackScrimState(float f) {
         this.mScrimStateListener.accept(this.mState, Float.valueOf(f), this.mColors);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0027  */
-    /* JADX WARN: Removed duplicated region for block: B:27:? A[RETURN, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:13:0x0022  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final void dispatchScrimsVisible() {
-        /*
-            r6 = this;
-            com.android.systemui.scrim.ScrimView r0 = r6.mScrimBehind
-            com.android.systemui.scrim.ScrimView r1 = r6.mScrimInFront
-            float r1 = r1.mViewAlpha
-            r2 = 1065353216(0x3f800000, float:1.0)
-            int r3 = (r1 > r2 ? 1 : (r1 == r2 ? 0 : -1))
-            r4 = 2
-            r5 = 0
-            if (r3 == 0) goto L22
-            float r0 = r0.mViewAlpha
-            int r2 = (r0 > r2 ? 1 : (r0 == r2 ? 0 : -1))
-            if (r2 != 0) goto L15
-            goto L22
-        L15:
-            r2 = 0
-            int r1 = (r1 > r2 ? 1 : (r1 == r2 ? 0 : -1))
-            if (r1 != 0) goto L20
-            int r0 = (r0 > r2 ? 1 : (r0 == r2 ? 0 : -1))
-            if (r0 != 0) goto L20
-            r0 = r5
-            goto L23
-        L20:
-            r0 = 1
-            goto L23
-        L22:
-            r0 = r4
-        L23:
-            int r1 = r6.mScrimsVisibility
-            if (r1 == r0) goto L65
-            r6.mScrimsVisibility = r0
-            com.android.systemui.statusbar.phone.SecLsScrimControlHelper r1 = r6.mSecLsScrimControlHelper
-            boolean r2 = r6.mScreenOn
-            r1.getClass()
-            if (r2 != 0) goto L3b
-            if (r0 != r4) goto L3b
-            com.android.systemui.scrim.ScrimView r2 = r1.mScrimInFront
-            android.view.ViewRootImpl r2 = r2.getViewRootImpl()
-            goto L3c
-        L3b:
-            r2 = 0
-        L3c:
-            boolean r3 = com.android.systemui.LsRune.AOD_SUB_DISPLAY_COVER
-            if (r3 == 0) goto L54
-            com.android.systemui.Dependency r3 = com.android.systemui.Dependency.sDependency
-            java.lang.Class<com.android.systemui.keyguard.DisplayLifecycle> r4 = com.android.systemui.keyguard.DisplayLifecycle.class
-            java.lang.Object r3 = r3.getDependencyInner(r4)
-            com.android.systemui.keyguard.DisplayLifecycle r3 = (com.android.systemui.keyguard.DisplayLifecycle) r3
-            boolean r3 = r3.mIsFolderOpened
-            if (r3 != 0) goto L54
-            com.android.systemui.scrim.ScrimView r1 = r1.mScrimBehind
-            android.view.ViewRootImpl r2 = r1.getViewRootImpl()
-        L54:
-            if (r2 == 0) goto L5c
-            java.lang.String r1 = "scrim"
-            r2.setReportNextDraw(r5, r1)
-        L5c:
-            com.android.systemui.statusbar.phone.CentralSurfacesImpl$$ExternalSyntheticLambda1 r6 = r6.mScrimVisibleListener
-            java.lang.Integer r0 = java.lang.Integer.valueOf(r0)
-            r6.accept(r0)
-        L65:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.phone.ScrimController.dispatchScrimsVisible():void");
+        int i;
+        ScrimView scrimView = this.mScrimBehind;
+        float f = this.mScrimInFront.mViewAlpha;
+        if (f != 1.0f) {
+            float f2 = scrimView.mViewAlpha;
+            i = f2 == 1.0f ? 2 : (f == 0.0f && f2 == 0.0f) ? 0 : 1;
+        }
+        if (this.mScrimsVisibility != i) {
+            this.mScrimsVisibility = i;
+            SecLsScrimControlHelper secLsScrimControlHelper = this.mSecLsScrimControlHelper;
+            boolean z = this.mScreenOn;
+            secLsScrimControlHelper.getClass();
+            ViewRootImpl viewRootImpl = (z || i != 2) ? null : secLsScrimControlHelper.mScrimInFront.getViewRootImpl();
+            if (LsRune.AOD_SUB_DISPLAY_COVER && !((DisplayLifecycle) Dependency.sDependency.getDependencyInner(DisplayLifecycle.class)).mIsFolderOpened) {
+                viewRootImpl = secLsScrimControlHelper.mScrimBehind.getViewRootImpl();
+            }
+            if (viewRootImpl != null) {
+                viewRootImpl.setReportNextDraw(false, "scrim");
+            }
+            this.mScrimVisibleListener.accept(Integer.valueOf(i));
+        }
     }
 
     public void doOnTheNextFrame(Runnable runnable) {
@@ -447,9 +491,8 @@ public class ScrimController implements ViewTreeObserver.OnPreDrawListener, Dump
     }
 
     public final void internalTransitionTo(Callback callback, ScrimState scrimState) {
-        ScrimState scrimState2;
+        long j;
         AODParameters aODParameters;
-        ScrimState scrimState3;
         if (this.mIsBouncerToGoneTransitionRunning) {
             Log.i("ScrimController", "Skipping transition to: " + scrimState + " while mIsBouncerToGoneTransitionRunning");
             return;
@@ -468,14 +511,14 @@ public class ScrimController implements ViewTreeObserver.OnPreDrawListener, Dump
         if (scrimStateLogger != null) {
             scrimStateLogger.mForceChanged = true;
         }
-        ScrimState scrimState4 = ScrimState.UNINITIALIZED;
-        if (scrimState == scrimState4) {
+        ScrimState scrimState2 = ScrimState.UNINITIALIZED;
+        if (scrimState == scrimState2) {
             throw new IllegalArgumentException("Cannot change to UNINITIALIZED.");
         }
         SecLsScrimControlHelper secLsScrimControlHelper = this.mSecLsScrimControlHelper;
         secLsScrimControlHelper.mPreviousState = secLsScrimControlHelper.mState;
         secLsScrimControlHelper.mState = scrimState;
-        ScrimState scrimState5 = this.mState;
+        ScrimState scrimState3 = this.mState;
         this.mState = scrimState;
         TrackTracer.instantForGroup(scrimState.ordinal(), "scrim", "state");
         Callback callback2 = this.mCallback;
@@ -486,16 +529,16 @@ public class ScrimController implements ViewTreeObserver.OnPreDrawListener, Dump
         SecLsScrimControlHelper secLsScrimControlHelper2 = this.mSecLsScrimControlHelper;
         secLsScrimControlHelper2.getClass();
         int i = SecLsScrimControlHelper.AnonymousClass4.$SwitchMap$com$android$systemui$statusbar$phone$ScrimState[scrimState.ordinal()];
+        AODAmbientWallpaperHelper aODAmbientWallpaperHelper = secLsScrimControlHelper2.mAodAmbientWallpaperHelper;
         Lazy lazy = secLsScrimControlHelper2.mCoverHostLazy;
         if (i != 1) {
             WakefulnessLifecycle wakefulnessLifecycle = secLsScrimControlHelper2.mWakefulnessLifecycle;
             Lazy lazy2 = secLsScrimControlHelper2.mDozeParametersLazy;
             if (i == 2) {
-                scrimState2 = scrimState5;
                 scrimState.mClipQsScrim = false;
-                scrimState.prepare(scrimState2);
+                scrimState.prepare(scrimState3);
                 scrimState.mBehindAlpha = 0.0f;
-                if (scrimState2 == ScrimState.AOD) {
+                if (scrimState3 == ScrimState.AOD) {
                     if (!LsRune.KEYGUARD_SCREEN_ON_FADE_OUT_ANIM) {
                         AODParameters aODParameters2 = ((DozeParameters) lazy2.get()).mAODParameters;
                         if (aODParameters2 != null) {
@@ -510,29 +553,18 @@ public class ScrimController implements ViewTreeObserver.OnPreDrawListener, Dump
                     if (((PluginAODManager) secLsScrimControlHelper2.mPluginAODManagerLazy.get()).mIsDifferentOrientation) {
                         scrimState.mBlankScreen = true;
                     }
-                } else if (scrimState2 == ScrimState.UNLOCKED) {
+                } else if (scrimState3 == ScrimState.UNLOCKED) {
                     scrimState.mAnimateChange = false;
+                    j = 0;
                     scrimState.mAnimationDuration = 0L;
                 }
-            } else if (i != 3) {
-                if (i != 4) {
-                    scrimState.prepare(scrimState5);
-                } else {
-                    scrimState.mClipQsScrim = false;
-                    scrimState.prepare(scrimState5);
-                    if (LsRune.COVER_SUPPORTED && scrimState5 == ScrimState.AOD && ((CoverHostImpl) ((CoverHost) lazy.get())).isNeedScrimAnimation()) {
-                        scrimState.mBlankScreen = true;
-                        scrimState.mAnimateChange = true;
-                    }
-                }
-                scrimState2 = scrimState5;
-            } else {
+            } else if (i == 3) {
                 scrimState.mClipQsScrim = false;
                 KeyguardFastBioUnlockController keyguardFastBioUnlockController = secLsScrimControlHelper2.mKeyguardFastBioUnlockController;
-                boolean isFastWakeAndUnlockMode = keyguardFastBioUnlockController.isFastWakeAndUnlockMode();
-                ScrimState scrimState6 = ScrimState.AOD;
-                if (scrimState5 == scrimState6 && isFastWakeAndUnlockMode) {
-                    scrimState.prepare(scrimState4);
+                boolean zIsFastWakeAndUnlockMode = keyguardFastBioUnlockController.isFastWakeAndUnlockMode();
+                ScrimState scrimState4 = ScrimState.AOD;
+                if (scrimState3 == scrimState4 && zIsFastWakeAndUnlockMode) {
+                    scrimState.prepare(scrimState2);
                     if (keyguardFastBioUnlockController.needsBlankScreen) {
                         scrimState.updateScrimColor(secLsScrimControlHelper2.mScrimInFront, -16777216);
                         scrimState.updateScrimColor(secLsScrimControlHelper2.mScrimBehind, -16777216);
@@ -540,66 +572,72 @@ public class ScrimController implements ViewTreeObserver.OnPreDrawListener, Dump
                         scrimState.mBehindTint = -16777216;
                         scrimState.mAnimateChange = true;
                         scrimState.mBlankScreen = true;
-                        scrimState3 = scrimState5;
                         scrimState.mAnimationDuration = 50L;
                     } else {
-                        scrimState3 = scrimState5;
                         scrimState.mBlankScreen = false;
                         scrimState.mAnimateChange = false;
                         scrimState.mAnimationDuration = 0L;
                     }
-                    scrimState2 = scrimState3;
-                } else {
-                    scrimState2 = scrimState5;
-                    if (scrimState2 == scrimState6) {
-                        if (secLsScrimControlHelper2.mPowerInteractor.screenPowerState.$$delegate_0.getValue() == ScreenPowerState.SCREEN_ON && (aODParameters = ((DozeParameters) lazy2.get()).mAODParameters) != null && !aODParameters.mDozeUiState) {
-                            Log.i("ScrimController", "shouldPreventBlankScreen Screen is fully on");
-                        } else if (LsRune.COVER_SUPPORTED && wakefulnessLifecycle.mLastWakeReason == 103) {
-                            Log.i("ScrimController", "shouldPreventBlankScreen cover is opening");
-                        } else if (LsRune.AOD_FULLSCREEN && secLsScrimControlHelper2.mAodAmbientWallpaperHelper.isAODFullScreenAndShowing() && !((KeyguardStateControllerImpl) ((KeyguardStateController) secLsScrimControlHelper2.mKeyguardStateControllerLazy.get())).mShowing) {
-                            Log.i("ScrimController", "shouldPreventBlankScreen AOD FullScreen and Lock None");
-                        } else if (!secLsScrimControlHelper2.mKeyguardVisibilityMonitor.isVisible() || keyguardFastBioUnlockController.isInvisibleAfterGoingAwayTransStarted) {
-                            Log.i("ScrimController", "shouldPreventBlankScreen already keyguard is invisible or isInvisibleAfterGoingAwayTransStarted");
-                        } else {
-                            scrimState.updateScrimColor(secLsScrimControlHelper2.mScrimInFront, -16777216);
-                            scrimState.updateScrimColor(secLsScrimControlHelper2.mScrimBehind, -16777216);
-                            scrimState.mFrontTint = -16777216;
-                            scrimState.mBehindTint = -16777216;
-                            scrimState.mAnimationDuration = 300L;
-                            scrimState.mBlankScreen = true;
-                        }
-                        scrimState.mBlankScreen = false;
-                        scrimState.mAnimateChange = false;
-                        scrimState.mAnimationDuration = 0L;
+                } else if (scrimState3 == scrimState4) {
+                    if (secLsScrimControlHelper2.mPowerInteractor.screenPowerState.$$delegate_0.getValue() == ScreenPowerState.SCREEN_ON && (aODParameters = ((DozeParameters) lazy2.get()).mAODParameters) != null && !aODParameters.mDozeUiState) {
+                        Log.i("ScrimController", "shouldPreventBlankScreen Screen is fully on");
+                    } else if (LsRune.COVER_SUPPORTED && !DeviceType.isTablet() && wakefulnessLifecycle.mLastWakeReason == 103) {
+                        Log.i("ScrimController", "shouldPreventBlankScreen cover is opening");
+                    } else if (LsRune.AOD_FULLSCREEN && aODAmbientWallpaperHelper.isAODFullScreenAndShowing() && !((KeyguardStateControllerImpl) ((KeyguardStateController) secLsScrimControlHelper2.mKeyguardStateControllerLazy.get())).mShowing) {
+                        Log.i("ScrimController", "shouldPreventBlankScreen AOD FullScreen and Lock None");
+                    } else if (!secLsScrimControlHelper2.mKeyguardVisibilityMonitor.isVisible() || keyguardFastBioUnlockController.isInvisibleAfterGoingAwayTransStarted) {
+                        Log.i("ScrimController", "shouldPreventBlankScreen already keyguard is invisible or isInvisibleAfterGoingAwayTransStarted");
                     } else {
-                        scrimState.prepare(scrimState2);
+                        scrimState.updateScrimColor(secLsScrimControlHelper2.mScrimInFront, -16777216);
+                        scrimState.updateScrimColor(secLsScrimControlHelper2.mScrimBehind, -16777216);
+                        scrimState.mFrontTint = -16777216;
+                        scrimState.mBehindTint = -16777216;
+                        scrimState.mAnimationDuration = 300L;
+                        scrimState.mBlankScreen = true;
                     }
-                }
-                if (scrimState2 != scrimState6) {
+                    scrimState.mBlankScreen = false;
                     scrimState.mAnimateChange = false;
-                } else if (!isFastWakeAndUnlockMode) {
+                    scrimState.mAnimationDuration = 0L;
+                } else {
+                    scrimState.prepare(scrimState3);
+                }
+                if (scrimState3 != scrimState4) {
+                    scrimState.mAnimateChange = false;
+                } else if (!zIsFastWakeAndUnlockMode) {
+                    scrimState.mAnimateChange = true;
+                }
+            } else if (i != 4) {
+                scrimState.prepare(scrimState3);
+            } else {
+                scrimState.mClipQsScrim = false;
+                scrimState.prepare(scrimState3);
+                if (LsRune.COVER_SUPPORTED && scrimState3 == ScrimState.AOD && ((CoverHostImpl) ((CoverHost) lazy.get())).isNeedScrimAnimation()) {
+                    scrimState.mBlankScreen = true;
                     scrimState.mAnimateChange = true;
                 }
             }
+            j = 0;
         } else {
-            scrimState2 = scrimState5;
             scrimState.mClipQsScrim = false;
-            scrimState.prepare(scrimState2);
+            scrimState.prepare(scrimState3);
             scrimState.mAnimationDuration = 500L;
             if (LsRune.AOD_LIGHT_REVEAL) {
                 scrimState.mBehindAlpha = 0.0f;
                 scrimState.mAnimateChange = false;
             } else {
-                scrimState.mBehindAlpha = 1.0f;
+                scrimState.mBehindAlpha = aODAmbientWallpaperHelper.isWonderLandAmbientWallpaper() ? 0.0f : 1.0f;
             }
-            if (LsRune.COVER_SUPPORTED && !((CoverHostImpl) ((CoverHost) lazy.get())).isNeedScrimAnimation()) {
+            if (!LsRune.COVER_SUPPORTED || ((CoverHostImpl) ((CoverHost) lazy.get())).isNeedScrimAnimation()) {
+                j = 0;
+            } else {
                 scrimState.mBlankScreen = false;
                 scrimState.mAnimateChange = false;
+                j = 0;
                 scrimState.mAnimationDuration = 0L;
             }
         }
         this.mScreenBlankingCallbackCalled = false;
-        this.mAnimationDelay = 0L;
+        this.mAnimationDelay = j;
         boolean z = scrimState.mBlankScreen;
         this.mBlankScreen = z;
         this.mAnimateChange = scrimState.mAnimateChange;
@@ -633,8 +671,8 @@ public class ScrimController implements ViewTreeObserver.OnPreDrawListener, Dump
             this.mAnimationDelay = 100L;
             scheduleUpdate$1();
         } else {
-            ScrimState scrimState7 = ScrimState.AOD;
-            if (((scrimState2 == scrimState7 || scrimState2 == ScrimState.PULSING) && (!this.mDozeParameters.getAlwaysOn() || this.mState == ScrimState.UNLOCKED)) || (this.mState == scrimState7 && !this.mDozeParameters.getDisplayNeedsBlanking())) {
+            ScrimState scrimState5 = ScrimState.AOD;
+            if (((scrimState3 == scrimState5 || scrimState3 == ScrimState.PULSING) && (!this.mDozeParameters.getAlwaysOn() || this.mState == ScrimState.UNLOCKED)) || (this.mState == scrimState5 && !this.mDozeParameters.getDisplayNeedsBlanking())) {
                 onPreDraw();
             } else {
                 scheduleUpdate$1();
@@ -749,24 +787,130 @@ public class ScrimController implements ViewTreeObserver.OnPreDrawListener, Dump
         }
         ValueAnimator valueAnimator = (ValueAnimator) view.getTag(i);
         int i2 = TAG_END_ALPHA;
-        float floatValue = ((Float) view.getTag(i2)).floatValue();
+        float fFloatValue = ((Float) view.getTag(i2)).floatValue();
         int i3 = TAG_START_ALPHA;
-        view.setTag(i3, Float.valueOf((currentScrimAlpha - floatValue) + ((Float) view.getTag(i3)).floatValue()));
+        view.setTag(i3, Float.valueOf((currentScrimAlpha - fFloatValue) + ((Float) view.getTag(i3)).floatValue()));
         view.setTag(i2, Float.valueOf(currentScrimAlpha));
         valueAnimator.setCurrentPlayTime(valueAnimator.getCurrentPlayTime());
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:50:0x00d9  */
+    /* JADX WARN: Removed duplicated region for block: B:60:0x00cc  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void setScrimAlpha(final com.android.systemui.scrim.ScrimView r10, float r11) {
-        /*
-            Method dump skipped, instructions count: 306
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.phone.ScrimController.setScrimAlpha(com.android.systemui.scrim.ScrimView, float):void");
+    public final void setScrimAlpha(final ScrimView scrimView, float f) {
+        ValueAnimator valueAnimatorOfFloat;
+        Callback callback;
+        int i = 0;
+        if (f == 0.0f) {
+            scrimView.setClickable(false);
+        } else {
+            scrimView.setClickable(this.mState != ScrimState.AOD);
+        }
+        float f2 = scrimView.mViewAlpha;
+        int i2 = TAG_KEY_ANIM;
+        ViewState.AnonymousClass1 anonymousClass1 = ViewState.NO_NEW_ANIMATIONS;
+        ValueAnimator valueAnimator = (ValueAnimator) scrimView.getTag(i2);
+        if (valueAnimator != null) {
+            valueAnimator.cancel();
+        }
+        if (this.mPendingFrameCallback != null) {
+            return;
+        }
+        if (this.mBlankScreen) {
+            updateScrimColor(this.mScrimInFront, 1.0f, -16777216);
+            ScrimController$$ExternalSyntheticLambda3 scrimController$$ExternalSyntheticLambda3 = new ScrimController$$ExternalSyntheticLambda3(this, i);
+            this.mPendingFrameCallback = scrimController$$ExternalSyntheticLambda3;
+            doOnTheNextFrame(scrimController$$ExternalSyntheticLambda3);
+            return;
+        }
+        if (!this.mScreenBlankingCallbackCalled && (callback = this.mCallback) != null) {
+            callback.onDisplayBlanked();
+            this.mScreenBlankingCallbackCalled = true;
+        }
+        if (scrimView == this.mScrimBehind) {
+            dispatchBackScrimState(f);
+        }
+        boolean z = f != f2;
+        boolean z2 = scrimView.mTintColor != getCurrentScrimTint(scrimView);
+        if (z || z2) {
+            if (!this.mAnimateChange) {
+                updateScrimColor(scrimView, f, getCurrentScrimTint(scrimView));
+                return;
+            }
+            if (DEBUG) {
+                LogUtil.d("ScrimController", "startScrimAnimation %s %f %d %d", getScrimName(scrimView), Float.valueOf(f2), Long.valueOf(this.mAnimationDelay), Long.valueOf(this.mAnimationDuration));
+            }
+            if (LsRune.KEYGUARD_SCREEN_ON_FADE_OUT_ANIM) {
+                SecLsScrimControlHelper secLsScrimControlHelper = this.mSecLsScrimControlHelper;
+                AODParameters aODParameters = ((DozeParameters) secLsScrimControlHelper.mDozeParametersLazy.get()).mAODParameters;
+                valueAnimatorOfFloat = !(aODParameters != null ? aODParameters.mDozeUiState : false) && secLsScrimControlHelper.mPreviousState == ScrimState.AOD && secLsScrimControlHelper.mState == ScrimState.KEYGUARD ? ValueAnimator.ofFloat(0.3f, 1.0f) : ValueAnimator.ofFloat(0.0f, 1.0f);
+            }
+            Animator.AnimatorListener animatorListener = this.mAnimatorListener;
+            if (animatorListener != null) {
+                valueAnimatorOfFloat.addListener(animatorListener);
+            }
+            final int i3 = scrimView.mTintColor;
+            valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.phone.ScrimController$$ExternalSyntheticLambda4
+                @Override // android.animation.ValueAnimator.AnimatorUpdateListener
+                public final void onAnimationUpdate(ValueAnimator valueAnimator2) {
+                    ScrimController scrimController = this.f$0;
+                    ScrimView scrimView2 = scrimView;
+                    int i4 = i3;
+                    boolean z3 = ScrimController.DEBUG;
+                    scrimController.getClass();
+                    float fFloatValue = ((Float) scrimView2.getTag(ScrimController.TAG_START_ALPHA)).floatValue();
+                    float fFloatValue2 = ((Float) valueAnimator2.getAnimatedValue()).floatValue();
+                    scrimController.updateScrimColor(scrimView2, MathUtils.constrain(MathUtils.lerp(fFloatValue, scrimController.getCurrentScrimAlpha(scrimView2), fFloatValue2), 0.0f, 1.0f), ColorUtils.blendARGB(i4, scrimController.getCurrentScrimTint(scrimView2), fFloatValue2));
+                    scrimController.dispatchScrimsVisible();
+                }
+            });
+            valueAnimatorOfFloat.setInterpolator(this.mInterpolator);
+            valueAnimatorOfFloat.setStartDelay(this.mAnimationDelay);
+            valueAnimatorOfFloat.setDuration(this.mAnimationDuration);
+            valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.statusbar.phone.ScrimController.4
+                public final Callback mLastCallback;
+                public final ScrimState mLastState;
+
+                {
+                    this.mLastState = ScrimController.this.mState;
+                    this.mLastCallback = ScrimController.this.mCallback;
+                }
+
+                @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
+                public final void onAnimationEnd(Animator animator) {
+                    StringBuilder sb = new StringBuilder("onAnimationEnd ");
+                    ScrimController scrimController = ScrimController.this;
+                    View view = scrimView;
+                    boolean z3 = ScrimController.DEBUG;
+                    scrimController.getClass();
+                    ExifInterface$$ExternalSyntheticOutline0.m(sb, view instanceof ScrimView ? scrimController.getScrimName((ScrimView) view) : view.toString(), "ScrimController");
+                    ScrimStateLogger scrimStateLogger = ScrimController.this.mScrimColorState;
+                    if (scrimStateLogger != null) {
+                        scrimStateLogger.logScrimColor(true);
+                    }
+                    scrimView.setTag(ScrimController.TAG_KEY_ANIM, null);
+                    ScrimController.this.onFinished(this.mLastCallback, this.mLastState);
+                    ScrimController.this.dispatchScrimsVisible();
+                    if (LsRune.AOD_LIGHT_REVEAL) {
+                        return;
+                    }
+                    SecLsScrimControlHelper secLsScrimControlHelper2 = ScrimController.this.mSecLsScrimControlHelper;
+                    if (scrimView == secLsScrimControlHelper2.mScrimBehind && secLsScrimControlHelper2.mState == ScrimState.AOD) {
+                        PluginAODManager pluginAODManager = (PluginAODManager) secLsScrimControlHelper2.mPluginAODManagerLazy.get();
+                        if (pluginAODManager.mAODMachine == null || !LsRune.SUBSCREEN_WATCHFACE || pluginAODManager.mDisplayLifeCycle.mIsFolderOpened) {
+                            return;
+                        }
+                        Log.d("PluginAODManager", "onAodTransitionEnd() in folded state");
+                        pluginAODManager.onTransitionEnded();
+                    }
+                }
+            });
+            scrimView.setTag(TAG_START_ALPHA, Float.valueOf(f2));
+            scrimView.setTag(TAG_END_ALPHA, Float.valueOf(getCurrentScrimAlpha(scrimView)));
+            scrimView.setTag(i2, valueAnimatorOfFloat);
+            valueAnimatorOfFloat.start();
+        }
     }
 
     public final void setWakeLockScreenSensorActive(boolean z) {
@@ -800,10 +944,10 @@ public class ScrimController implements ViewTreeObserver.OnPreDrawListener, Dump
             }
             scrimStateLogger.mScrimVisibility = i2;
         }
-        float max = Math.max(0.0f, Math.min(1.0f, f));
+        float fMax = Math.max(0.0f, Math.min(1.0f, f));
         if (view instanceof ScrimView) {
             ScrimView scrimView2 = (ScrimView) view;
-            TrackTracer.instantForGroup((int) (255.0f * max), "scrim", getScrimName(scrimView2).concat("_alpha"));
+            TrackTracer.instantForGroup((int) (255.0f * fMax), "scrim", getScrimName(scrimView2).concat("_alpha"));
             TrackTracer.instantForGroup(Color.alpha(i), "scrim", getScrimName(scrimView2).concat("_tint"));
             SecLsScrimControlHelper secLsScrimControlHelper = this.mSecLsScrimControlHelper;
             if (scrimView2 == secLsScrimControlHelper.mScrimInFront && (secLsScrimControlHelper.mState == ScrimState.BOUNCER_SCRIMMED || secLsScrimControlHelper.needUpdateScrimColor())) {
@@ -812,16 +956,16 @@ public class ScrimController implements ViewTreeObserver.OnPreDrawListener, Dump
                 if (secLsScrimControlHelper2.needUpdateScrimColor()) {
                     scrimView2.setViewAlpha(0.0f);
                 } else {
-                    scrimView2.setViewAlpha(max);
+                    scrimView2.setViewAlpha(fMax);
                 }
             } else {
                 scrimView2.setTint(i);
                 if (!this.mIsBouncerToGoneTransitionRunning) {
-                    scrimView2.setViewAlpha(max);
+                    scrimView2.setViewAlpha(fMax);
                 }
             }
         } else {
-            view.setAlpha(max);
+            view.setAlpha(fMax);
         }
         dispatchScrimsVisible();
         ScrimStateLogger scrimStateLogger2 = this.mScrimColorState;
@@ -893,7 +1037,6 @@ public class ScrimController implements ViewTreeObserver.OnPreDrawListener, Dump
         this.mNeedsDrawableColorUpdate = true;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Callback {
         void onCancelled();
 

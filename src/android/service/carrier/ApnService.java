@@ -17,8 +17,8 @@ public abstract class ApnService extends Service {
         @Override // android.service.carrier.IApnSourceService
         public ContentValues[] getApns(int i) {
             try {
-                List<ContentValues> onRestoreApns = ApnService.this.onRestoreApns(i);
-                return (ContentValues[]) onRestoreApns.toArray(new ContentValues[onRestoreApns.size()]);
+                List<ContentValues> listOnRestoreApns = ApnService.this.onRestoreApns(i);
+                return (ContentValues[]) listOnRestoreApns.toArray(new ContentValues[listOnRestoreApns.size()]);
             } catch (Exception e) {
                 Log.e(ApnService.LOG_TAG, "Error in getApns for subId=" + i + ": " + e.getMessage(), e);
                 return null;

@@ -20,7 +20,9 @@ import android.view.Display;
 import android.view.DisplayInfo;
 import androidx.appcompat.widget.ListPopupWindow$$ExternalSyntheticOutline0;
 import androidx.collection.MutableObjectList$$ExternalSyntheticOutline0;
+import com.android.keyguard.KeyguardPluginControllerImpl$$ExternalSyntheticOutline0;
 import com.android.systemui.LsRune;
+import com.android.systemui.pluginlock.PluginWallpaperManager;
 import com.android.systemui.util.DeviceType;
 import com.android.systemui.wallpaper.CoverWallpaper;
 import com.android.systemui.wallpaper.CoverWallpaperController;
@@ -44,7 +46,6 @@ import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ImageWallpaperCanvasHelper {
     public final String TAG;
@@ -80,11 +81,9 @@ public class ImageWallpaperCanvasHelper {
     public boolean mIsFolded = false;
     public final HashMap mDownScaledSourceBitmapSet = new HashMap();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Callback {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DownScaledSourceBitmap {
         public final Bitmap mBitmap;
         public final float mScale;
@@ -121,8 +120,8 @@ public class ImageWallpaperCanvasHelper {
         anonymousClass3.getClass();
         int i2 = ImageWallpaper.CanvasEngine.$r8$clinit;
         sb.append(ImageWallpaper.CanvasEngine.this.getWallpaperFlags() != 2 ? 1 : 2);
-        String sb2 = sb.toString();
-        this.TAG = sb2;
+        String string = sb.toString();
+        this.TAG = string;
         this.mDisplayId = i;
         if (LsRune.COVER_VIRTUAL_DISPLAY) {
             this.mIsVirtualDisplay = WallpaperManager.isVirtualWallpaperDisplay(context, i);
@@ -135,22 +134,22 @@ public class ImageWallpaperCanvasHelper {
         if (LsRune.WALLPAPER_SUB_DISPLAY_MODE) {
             int lidState = wallpaperManager.getLidState();
             this.mPm = (PowerManager) context.getSystemService("power");
-            ((WallpaperLoggerImpl) wallpaperLogger).log(sb2, " initial lid state : " + convertLidStateToString(lidState) + " , " + context.getResources().getConfiguration().semDisplayDeviceType);
+            ((WallpaperLoggerImpl) wallpaperLogger).log(string, " initial lid state : " + convertLidStateToString(lidState) + " , " + context.getResources().getConfiguration().semDisplayDeviceType);
             int i3 = context.getResources().getConfiguration().semDisplayDeviceType;
             this.mDeviceDisplayType = i3;
             if (i3 == 5 && lidState != 0) {
-                Log.i(sb2, " flex mode ".concat(convertLidStateToString(0)));
+                Log.i(string, " flex mode ".concat(convertLidStateToString(0)));
                 lidState = 0;
             }
             setLidState(lidState);
         }
         this.mIsNightModeOn = (context.getResources().getConfiguration().uiMode & 32) != 0;
-        int convertDisplayIdToMode = WhichChecker.convertDisplayIdToMode(i, context);
-        if (convertDisplayIdToMode >= 0) {
-            Bundle wallpaperExtras = WallpaperManager.getInstance(context).getWallpaperExtras(convertDisplayIdToMode | 1, context.getUserId());
-            String string = wallpaperExtras != null ? wallpaperExtras.getString("imageFilterParams") : null;
-            if (!TextUtils.isEmpty(string)) {
-                this.mColorDecorFilterData = string;
+        int iConvertDisplayIdToMode = WhichChecker.convertDisplayIdToMode(i, context);
+        if (iConvertDisplayIdToMode >= 0) {
+            Bundle wallpaperExtras = WallpaperManager.getInstance(context).getWallpaperExtras(iConvertDisplayIdToMode | 1, context.getUserId());
+            String string2 = wallpaperExtras != null ? wallpaperExtras.getString("imageFilterParams") : null;
+            if (!TextUtils.isEmpty(string2)) {
+                this.mColorDecorFilterData = string2;
             }
         }
         if (TextUtils.isEmpty(this.mColorDecorFilterData)) {
@@ -164,86 +163,49 @@ public class ImageWallpaperCanvasHelper {
 
     public final DownScaledSourceBitmap createDownScaledSourceBitmap(Bitmap bitmap, int i) {
         Point displaySize = getDisplaySize();
-        int max = Math.max(displaySize.x, displaySize.y);
-        int min = Math.min(bitmap.getWidth(), bitmap.getHeight());
-        float max2 = ((int) Math.max(1024.0f, max * 0.5f)) / min;
-        StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(max, min, "createDownScaledSourceBitmap: longDisplay=", ", shortBmpLen=", ", scale=");
-        m.append(max2);
-        String sb = m.toString();
+        int iMax = Math.max(displaySize.x, displaySize.y);
+        int iMin = Math.min(bitmap.getWidth(), bitmap.getHeight());
+        float fMax = ((int) Math.max(1024.0f, iMax * 0.5f)) / iMin;
+        StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(iMax, iMin, "createDownScaledSourceBitmap: longDisplay=", ", shortBmpLen=", ", scale=");
+        sbM.append(fMax);
+        String string = sbM.toString();
         String str = this.TAG;
-        Log.d(str, sb);
-        if (max2 > 1.0f) {
+        Log.d(str, string);
+        if (fMax > 1.0f) {
             return null;
         }
-        Bitmap copy = max2 == 1.0f ? bitmap.copy(bitmap.getConfig(), false) : Bitmap.createScaledBitmap(bitmap, (int) (bitmap.getWidth() * max2), (int) (bitmap.getHeight() * max2), true);
-        if (copy != null && copy != bitmap) {
-            return new DownScaledSourceBitmap(i, copy, max2);
+        Bitmap bitmapCopy = fMax == 1.0f ? bitmap.copy(bitmap.getConfig(), false) : Bitmap.createScaledBitmap(bitmap, (int) (bitmap.getWidth() * fMax), (int) (bitmap.getHeight() * fMax), true);
+        if (bitmapCopy != null && bitmapCopy != bitmap) {
+            return new DownScaledSourceBitmap(i, bitmapCopy, fMax);
         }
-        Log.e(str, "createDownScaledSourceBitmap: Resized bitmap creation failed. org=" + bitmap + ", resized=" + copy);
+        Log.e(str, "createDownScaledSourceBitmap: Resized bitmap creation failed. org=" + bitmap + ", resized=" + bitmapCopy);
         return null;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:14:0x0014, code lost:
-    
-        if (r0 == 1) goto L10;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:18:0x0020, code lost:
-    
-        if (r6.mWallpaperManager.getLidState() == 0) goto L10;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:11:0x0018  */
+    /* JADX WARN: Removed duplicated region for block: B:15:0x0023  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final int getCurrentWhich() {
-        /*
-            r6 = this;
-            int r0 = r6.mDisplayId
-            r1 = 1
-            r2 = 2
-            if (r0 != r2) goto L9
-            r0 = 8
-            goto L2d
-        L9:
-            boolean r3 = com.android.systemui.LsRune.WALLPAPER_SUB_DISPLAY_MODE
-            r4 = 4
-            if (r3 == 0) goto L23
-            boolean r3 = com.android.systemui.LsRune.WALLPAPER_SUB_WATCHFACE
-            r5 = 16
-            if (r3 == 0) goto L1a
-            if (r0 != r1) goto L18
-        L16:
-            r0 = r5
-            goto L2d
-        L18:
-            r0 = r4
-            goto L2d
-        L1a:
-            android.app.WallpaperManager r0 = r6.mWallpaperManager
-            int r0 = r0.getLidState()
-            if (r0 != 0) goto L23
-            goto L16
-        L23:
-            boolean r0 = com.android.systemui.LsRune.COVER_VIRTUAL_DISPLAY
-            if (r0 == 0) goto L18
-            boolean r0 = r6.mIsVirtualDisplay
-            if (r0 == 0) goto L18
-            r0 = 32
-        L2d:
-            com.android.systemui.wallpaper.canvaswallpaper.ImageWallpaperCanvasHelper$Callback r6 = r6.mCallback
-            com.android.systemui.wallpapers.ImageWallpaper$CanvasEngine$3 r6 = (com.android.systemui.wallpapers.ImageWallpaper.CanvasEngine.AnonymousClass3) r6
-            r6.getClass()
-            int r3 = com.android.systemui.wallpapers.ImageWallpaper.CanvasEngine.$r8$clinit
-            com.android.systemui.wallpapers.ImageWallpaper$CanvasEngine r6 = com.android.systemui.wallpapers.ImageWallpaper.CanvasEngine.this
-            int r6 = r6.getWallpaperFlags()
-            if (r6 != r2) goto L3f
-            r1 = r2
-        L3f:
-            r6 = r1 & 3
-            r6 = r6 | r0
-            return r6
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.wallpaper.canvaswallpaper.ImageWallpaperCanvasHelper.getCurrentWhich():int");
+        int i;
+        int i2 = this.mDisplayId;
+        if (i2 == 2) {
+            i = 8;
+        } else if (LsRune.WALLPAPER_SUB_DISPLAY_MODE) {
+            if (LsRune.WALLPAPER_SUB_WATCHFACE) {
+                if (i2 == 1) {
+                }
+            } else if (this.mWallpaperManager.getLidState() == 0) {
+            }
+            i = 16;
+        } else {
+            i = (LsRune.COVER_VIRTUAL_DISPLAY && this.mIsVirtualDisplay) ? 32 : 4;
+        }
+        ImageWallpaper.CanvasEngine.AnonymousClass3 anonymousClass3 = (ImageWallpaper.CanvasEngine.AnonymousClass3) this.mCallback;
+        anonymousClass3.getClass();
+        int i3 = ImageWallpaper.CanvasEngine.$r8$clinit;
+        return ((ImageWallpaper.CanvasEngine.this.getWallpaperFlags() == 2 ? 2 : 1) & 3) | i;
     }
 
     public final Integer getDimFilterColor(int i) {
@@ -294,102 +256,40 @@ public class ImageWallpaperCanvasHelper {
         return bitmap;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0048  */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0054  */
+    /* JADX WARN: Removed duplicated region for block: B:19:0x002d  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.util.ArrayList getIntelligentCropHints(int r8) {
-        /*
-            r7 = this;
-            boolean r0 = com.android.systemui.LsRune.WALLPAPER_SUB_WATCHFACE
-            com.android.systemui.wallpaper.CoverWallpaper r1 = r7.mCoverWallpaper
-            r2 = 1
-            r3 = 0
-            if (r0 != 0) goto Lc
-            boolean r0 = com.android.systemui.LsRune.WALLPAPER_VIRTUAL_DISPLAY
-            if (r0 == 0) goto L2d
-        Lc:
-            r0 = r8 & 16
-            r4 = 16
-            if (r0 != r4) goto L14
-            r0 = r2
-            goto L15
-        L14:
-            r0 = r3
-        L15:
-            r4 = r8 & 32
-            r5 = 32
-            if (r4 != r5) goto L1d
-            r4 = r2
-            goto L1e
-        L1d:
-            r4 = r3
-        L1e:
-            if (r0 != 0) goto L22
-            if (r4 == 0) goto L2d
-        L22:
-            r0 = r1
-            com.android.systemui.wallpaper.CoverWallpaperController r0 = (com.android.systemui.wallpaper.CoverWallpaperController) r0
-            boolean r0 = r0.isCoverWallpaperRequired()
-            if (r0 == 0) goto L2d
-            r0 = r2
-            goto L2e
-        L2d:
-            r0 = r3
-        L2e:
-            android.app.WallpaperManager r4 = r7.mWallpaperManager
-            int r4 = r4.semGetWallpaperType(r8)
-            r5 = 3
-            com.android.systemui.wallpaper.PluginWallpaper r6 = r7.mPluginWallpaper
-            if (r4 != r5) goto L43
-            r4 = r6
-            com.android.systemui.wallpaper.PluginWallpaperController r4 = (com.android.systemui.wallpaper.PluginWallpaperController) r4
-            boolean r4 = r4.isPluginWallpaperRequired(r8)
-            if (r4 == 0) goto L43
-            goto L44
-        L43:
-            r2 = r3
-        L44:
-            java.lang.String r3 = r7.TAG
-            if (r0 == 0) goto L54
-            com.android.systemui.wallpaper.CoverWallpaperController r1 = (com.android.systemui.wallpaper.CoverWallpaperController) r1
-            java.lang.String r7 = r1.getWallpaperIntelligentCrop()
-            java.lang.String r8 = "getIntelligentCropHints: From CoverWallpaper. json = "
-            com.android.keyguard.KeyguardPluginControllerImpl$$ExternalSyntheticOutline0.m(r8, r7, r3)
-            goto L88
-        L54:
-            if (r2 == 0) goto L76
-            com.android.systemui.wallpaper.PluginWallpaperController r6 = (com.android.systemui.wallpaper.PluginWallpaperController) r6
-            r6.getClass()
-            int r7 = com.android.systemui.wallpaper.PluginWallpaperController.getScreen(r8)
-            com.android.systemui.pluginlock.PluginWallpaperManager r8 = r6.mPluginWallpaperManager
-            boolean r0 = r8.isFbeAvailable(r7)
-            if (r0 == 0) goto L6c
-            java.lang.String r7 = r8.getFbeWallpaperIntelligentCrop(r7)
-            goto L70
-        L6c:
-            java.lang.String r7 = r8.getWallpaperIntelligentCrop(r7)
-        L70:
-            java.lang.String r8 = "getIntelligentCropHints: From PluginWallpaper. json = "
-            androidx.constraintlayout.motion.widget.MotionLayout$$ExternalSyntheticOutline0.m$1(r8, r7, r3)
-            goto L88
-        L76:
-            android.app.WallpaperManager r0 = r7.mWallpaperManager
-            int r7 = r7.mCurrentUserId
-            android.os.Bundle r7 = r0.getWallpaperExtras(r8, r7)
-            if (r7 != 0) goto L82
-            r7 = 0
-            return r7
-        L82:
-            java.lang.String r8 = "cropHints"
-            java.lang.String r7 = r7.getString(r8)
-        L88:
-            java.util.ArrayList r7 = com.android.systemui.wallpaper.utils.IntelligentCropHelper.parseCropHints(r7)
-            return r7
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.wallpaper.canvaswallpaper.ImageWallpaperCanvasHelper.getIntelligentCropHints(int):java.util.ArrayList");
+    public final ArrayList getIntelligentCropHints(int i) {
+        boolean z;
+        String string;
+        boolean z2 = LsRune.WALLPAPER_SUB_WATCHFACE;
+        CoverWallpaper coverWallpaper = this.mCoverWallpaper;
+        if (z2 || LsRune.WALLPAPER_VIRTUAL_DISPLAY) {
+            z = (((i & 16) == 16) || ((i & 32) == 32)) && ((CoverWallpaperController) coverWallpaper).isCoverWallpaperRequired();
+        }
+        int iSemGetWallpaperType = this.mWallpaperManager.semGetWallpaperType(i);
+        PluginWallpaper pluginWallpaper = this.mPluginWallpaper;
+        boolean z3 = iSemGetWallpaperType == 3 && ((PluginWallpaperController) pluginWallpaper).isPluginWallpaperRequired(i);
+        String str = this.TAG;
+        if (z) {
+            string = ((CoverWallpaperController) coverWallpaper).getWallpaperIntelligentCrop();
+            KeyguardPluginControllerImpl$$ExternalSyntheticOutline0.m("getIntelligentCropHints: From CoverWallpaper. json = ", string, str);
+        } else if (z3) {
+            PluginWallpaperController pluginWallpaperController = (PluginWallpaperController) pluginWallpaper;
+            pluginWallpaperController.getClass();
+            int screen = PluginWallpaperController.getScreen(i);
+            PluginWallpaperManager pluginWallpaperManager = pluginWallpaperController.mPluginWallpaperManager;
+            string = pluginWallpaperManager.isFbeAvailable(screen) ? pluginWallpaperManager.getFbeWallpaperIntelligentCrop(screen) : pluginWallpaperManager.getWallpaperIntelligentCrop(screen);
+            Log.e(str, "getIntelligentCropHints: From PluginWallpaper. json = " + string);
+        } else {
+            Bundle wallpaperExtras = this.mWallpaperManager.getWallpaperExtras(i, this.mCurrentUserId);
+            if (wallpaperExtras == null) {
+                return null;
+            }
+            string = wallpaperExtras.getString("cropHints");
+        }
+        return IntelligentCropHelper.parseCropHints(string);
     }
 
     public final boolean hasIntelligentCropHints(int i) {
@@ -397,12 +297,12 @@ public class ImageWallpaperCanvasHelper {
         return intelligentCropHints != null && intelligentCropHints.size() > 0;
     }
 
-    public final Bitmap loadBitmap(int i) {
+    public final Bitmap loadBitmap(int i) throws IOException {
         Bitmap wallpaperBitmap;
         Bitmap bitmapAsUser;
-        boolean isWatchFace = WhichChecker.isWatchFace(i);
+        boolean zIsWatchFace = WhichChecker.isWatchFace(i);
         String str = this.TAG;
-        if (isWatchFace || WhichChecker.isVirtualDisplay(i)) {
+        if (zIsWatchFace || WhichChecker.isVirtualDisplay(i)) {
             CoverWallpaper coverWallpaper = this.mCoverWallpaper;
             if (((CoverWallpaperController) coverWallpaper).isCoverWallpaperRequired()) {
                 Log.i(str, "loadBitmap: Get cover wallpaper.");
@@ -414,9 +314,9 @@ public class ImageWallpaperCanvasHelper {
             Log.d(str, "loadBitmap: mWallpaperManager is null.");
             return null;
         }
-        int semGetWallpaperType = wallpaperManager.semGetWallpaperType(i);
+        int iSemGetWallpaperType = wallpaperManager.semGetWallpaperType(i);
         ListPopupWindow$$ExternalSyntheticOutline0.m(i, "loadBitmap: which = ", str);
-        if (semGetWallpaperType == 3 || semGetWallpaperType == 1000) {
+        if (iSemGetWallpaperType == 3 || iSemGetWallpaperType == 1000) {
             wallpaperBitmap = ((PluginWallpaperController) this.mPluginWallpaper).getWallpaperBitmap(i);
             Log.i(str, "loadBitmap: Get plugin wallpaper. bitmap = " + wallpaperBitmap);
         } else {
@@ -481,7 +381,7 @@ public class ImageWallpaperCanvasHelper {
     }
 
     public final void useWallpaperBitmap(int i, Consumer consumer) {
-        Bitmap bitmap;
+        Bitmap bitmapLoadBitmap;
         this.mRefCount.incrementAndGet();
         synchronized (this.mRefCount) {
             int i2 = i & 60;
@@ -492,26 +392,26 @@ public class ImageWallpaperCanvasHelper {
                 }
             }
             boolean z = i2 == 16;
-            bitmap = z ? this.mSubBitmap : this.mBitmap;
-            if (!WallpaperUtils.isValidBitmap(bitmap)) {
-                bitmap = loadBitmap(i);
+            bitmapLoadBitmap = z ? this.mSubBitmap : this.mBitmap;
+            if (!WallpaperUtils.isValidBitmap(bitmapLoadBitmap)) {
+                bitmapLoadBitmap = loadBitmap(i);
                 if (z) {
-                    this.mSubBitmap = bitmap;
+                    this.mSubBitmap = bitmapLoadBitmap;
                 } else {
-                    this.mBitmap = bitmap;
+                    this.mBitmap = bitmapLoadBitmap;
                 }
                 this.mWallpaperManager.forgetLoadedWallpaper();
-                if (WallpaperUtils.isValidBitmap(bitmap)) {
-                    Log.i(this.TAG, "useWallpaperBitmap: w=" + bitmap.getWidth() + ", h=" + bitmap.getHeight());
-                    this.mIsWcgContent = this.mWallpaperManager.wallpaperSupportsWcg(bitmap);
-                    this.mDimensions.set(0, 0, bitmap.getWidth(), bitmap.getHeight());
+                if (WallpaperUtils.isValidBitmap(bitmapLoadBitmap)) {
+                    Log.i(this.TAG, "useWallpaperBitmap: w=" + bitmapLoadBitmap.getWidth() + ", h=" + bitmapLoadBitmap.getHeight());
+                    this.mIsWcgContent = this.mWallpaperManager.wallpaperSupportsWcg(bitmapLoadBitmap);
+                    this.mDimensions.set(0, 0, bitmapLoadBitmap.getWidth(), bitmapLoadBitmap.getHeight());
                     if (((DownScaledSourceBitmap) this.mDownScaledSourceBitmapSet.get(Integer.valueOf(WhichChecker.getSourceWhich(i)))) == null) {
-                        DownScaledSourceBitmap createDownScaledSourceBitmap = createDownScaledSourceBitmap(bitmap, i);
+                        DownScaledSourceBitmap downScaledSourceBitmapCreateDownScaledSourceBitmap = createDownScaledSourceBitmap(bitmapLoadBitmap, i);
                         int sourceWhich = WhichChecker.getSourceWhich(i);
-                        if (createDownScaledSourceBitmap == null) {
+                        if (downScaledSourceBitmapCreateDownScaledSourceBitmap == null) {
                             this.mDownScaledSourceBitmapSet.remove(Integer.valueOf(sourceWhich));
                         } else {
-                            this.mDownScaledSourceBitmapSet.put(Integer.valueOf(sourceWhich), createDownScaledSourceBitmap);
+                            this.mDownScaledSourceBitmapSet.put(Integer.valueOf(sourceWhich), downScaledSourceBitmapCreateDownScaledSourceBitmap);
                         }
                     }
                 } else {
@@ -522,29 +422,29 @@ public class ImageWallpaperCanvasHelper {
             }
         }
         if (consumer != null) {
-            consumer.accept(bitmap);
+            consumer.accept(bitmapLoadBitmap);
         }
         synchronized (this.mRefCount) {
             try {
-                int decrementAndGet = this.mRefCount.decrementAndGet();
-                if (decrementAndGet == 0 && bitmap != null) {
+                int iDecrementAndGet = this.mRefCount.decrementAndGet();
+                if (iDecrementAndGet == 0 && bitmapLoadBitmap != null) {
                     String str = this.TAG;
                     StringBuilder sb = new StringBuilder("useWallpaperBitmap: release 0x");
-                    Bitmap bitmap2 = this.mBitmap;
-                    sb.append(bitmap2 != null ? Integer.toHexString(bitmap2.hashCode()) : "null");
+                    Bitmap bitmap = this.mBitmap;
+                    sb.append(bitmap != null ? Integer.toHexString(bitmap.hashCode()) : "null");
                     sb.append(" , ");
-                    Bitmap bitmap3 = this.mSubBitmap;
-                    sb.append(bitmap3 != null ? Integer.toHexString(bitmap3.hashCode()) : "null");
+                    Bitmap bitmap2 = this.mSubBitmap;
+                    sb.append(bitmap2 != null ? Integer.toHexString(bitmap2.hashCode()) : "null");
                     sb.append(", refCount=");
-                    sb.append(decrementAndGet);
+                    sb.append(iDecrementAndGet);
                     Log.i(str, sb.toString());
-                    Bitmap bitmap4 = this.mBitmap;
+                    Bitmap bitmap3 = this.mBitmap;
+                    if (bitmap3 != null) {
+                        bitmap3.recycle();
+                    }
+                    Bitmap bitmap4 = this.mSubBitmap;
                     if (bitmap4 != null) {
                         bitmap4.recycle();
-                    }
-                    Bitmap bitmap5 = this.mSubBitmap;
-                    if (bitmap5 != null) {
-                        bitmap5.recycle();
                     }
                     this.mBitmap = null;
                     this.mSubBitmap = null;

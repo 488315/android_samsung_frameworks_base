@@ -13,14 +13,13 @@ import kotlin.collections.MapsKt__MapsKt;
 import kotlin.jvm.internal.FloatCompanionObject;
 import kotlin.jvm.internal.IntCompanionObject;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class VisibilityThresholdsKt {
     public static final Rect RectVisibilityThreshold;
     public static final Map VisibilityThresholdMap;
 
     static {
-        Float valueOf = Float.valueOf(0.5f);
+        Float fValueOf = Float.valueOf(0.5f);
         RectVisibilityThreshold = new Rect(0.5f, 0.5f, 0.5f, 0.5f);
         int i = IntCompanionObject.$r8$clinit;
         Pair pair = new Pair(VectorConvertersKt.IntToVector, Float.valueOf(1.0f));
@@ -30,11 +29,11 @@ public abstract class VisibilityThresholdsKt {
         Pair pair3 = new Pair(VectorConvertersKt.IntOffsetToVector, Float.valueOf(1.0f));
         FloatCompanionObject floatCompanionObject = FloatCompanionObject.INSTANCE;
         Pair pair4 = new Pair(VectorConvertersKt.FloatToVector, Float.valueOf(0.01f));
-        Pair pair5 = new Pair(VectorConvertersKt.RectToVector, valueOf);
+        Pair pair5 = new Pair(VectorConvertersKt.RectToVector, fValueOf);
         Size.Companion companion3 = Size.Companion;
-        Pair pair6 = new Pair(VectorConvertersKt.SizeToVector, valueOf);
+        Pair pair6 = new Pair(VectorConvertersKt.SizeToVector, fValueOf);
         Offset.Companion companion4 = Offset.Companion;
-        Pair pair7 = new Pair(VectorConvertersKt.OffsetToVector, valueOf);
+        Pair pair7 = new Pair(VectorConvertersKt.OffsetToVector, fValueOf);
         Dp.Companion companion5 = Dp.Companion;
         Pair pair8 = new Pair(VectorConvertersKt.DpToVector, Float.valueOf(0.1f));
         int i2 = DpOffset.$r8$clinit;

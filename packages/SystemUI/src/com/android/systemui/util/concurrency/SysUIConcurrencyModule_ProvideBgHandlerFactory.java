@@ -5,7 +5,6 @@ import android.os.Looper;
 import dagger.internal.Provider;
 import dagger.internal.Providers;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SysUIConcurrencyModule_ProvideBgHandlerFactory implements Provider {
     private final Provider bgLooperProvider;
@@ -19,9 +18,9 @@ public final class SysUIConcurrencyModule_ProvideBgHandlerFactory implements Pro
     }
 
     public static Handler provideBgHandler(Looper looper) {
-        Handler provideBgHandler = SysUIConcurrencyModule.INSTANCE.provideBgHandler(looper);
-        provideBgHandler.getClass();
-        return provideBgHandler;
+        Handler handlerProvideBgHandler = SysUIConcurrencyModule.INSTANCE.provideBgHandler(looper);
+        handlerProvideBgHandler.getClass();
+        return handlerProvideBgHandler;
     }
 
     public static SysUIConcurrencyModule_ProvideBgHandlerFactory create(Provider provider) {

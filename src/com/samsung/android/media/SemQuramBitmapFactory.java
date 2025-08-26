@@ -115,9 +115,9 @@ public class SemQuramBitmapFactory {
         }
         options.setWidth(i);
         options.setHeight(i2);
-        Bitmap nativeDecodeFile2 = nativeDecodeFile2(str, options);
+        Bitmap bitmapNativeDecodeFile2 = nativeDecodeFile2(str, options);
         options.setHandle(0L);
-        return nativeDecodeFile2;
+        return bitmapNativeDecodeFile2;
     }
 
     public static ByteBuffer decodeFileToBuffer(String str, SemQrBitmapFactory.Options options, int i, int i2) {
@@ -125,29 +125,29 @@ public class SemQuramBitmapFactory {
     }
 
     public static ByteBuffer decodeFileToBuffer(String str, SemQrBitmapFactory.Options options, int i, int i2, int i3) {
-        ByteBuffer allocateDirect;
+        ByteBuffer byteBufferAllocateDirect;
         if (options.getHandle() != 0) {
             return null;
         }
         if (options.inPreferredConfig == 7) {
-            allocateDirect = ByteBuffer.allocateDirect(i * i2 * 4);
+            byteBufferAllocateDirect = ByteBuffer.allocateDirect(i * i2 * 4);
         } else if (options.inPreferredConfig == 0) {
-            allocateDirect = ByteBuffer.allocateDirect(i * i2 * 2);
+            byteBufferAllocateDirect = ByteBuffer.allocateDirect(i * i2 * 2);
         } else if (options.inPreferredConfig == 2) {
-            allocateDirect = ByteBuffer.allocateDirect((i * i2) + (((i + 1) >> 1) * ((i2 + 1) >> 1) * 2));
+            byteBufferAllocateDirect = ByteBuffer.allocateDirect((i * i2) + (((i + 1) >> 1) * ((i2 + 1) >> 1) * 2));
         } else {
             options.setHandle(0L);
             return null;
         }
-        allocateDirect.order(ByteOrder.BIG_ENDIAN);
+        byteBufferAllocateDirect.order(ByteOrder.BIG_ENDIAN);
         options.setWidth(i);
         options.setHeight(i2);
-        int nativeDecodeFileToBuffer = nativeDecodeFileToBuffer(str, allocateDirect, options);
+        int iNativeDecodeFileToBuffer = nativeDecodeFileToBuffer(str, byteBufferAllocateDirect, options);
         options.setHandle(0L);
-        if (nativeDecodeFileToBuffer == 0) {
+        if (iNativeDecodeFileToBuffer == 0) {
             return null;
         }
-        return allocateDirect;
+        return byteBufferAllocateDirect;
     }
 
     public static byte[] getICCProfile(String str) {
@@ -160,9 +160,9 @@ public class SemQuramBitmapFactory {
         }
         options.setWidth(i);
         options.setHeight(i2);
-        Bitmap nativeDecodeFile2 = nativeDecodeFile2(str, options);
+        Bitmap bitmapNativeDecodeFile2 = nativeDecodeFile2(str, options);
         options.setHandle(0L);
-        return nativeDecodeFile2;
+        return bitmapNativeDecodeFile2;
     }
 
     public static Bitmap decodeByteArray(byte[] bArr, int i, int i2, SemQrBitmapFactory.Options options) {
@@ -181,18 +181,18 @@ public class SemQuramBitmapFactory {
         return nativeDecodeByteArray2(bArr, i, i2, options);
     }
 
-    public static Bitmap decodeStream(InputStream inputStream, int i, int i2, SemQrBitmapFactory.Options options) {
+    public static Bitmap decodeStream(InputStream inputStream, int i, int i2, SemQrBitmapFactory.Options options) throws IOException {
         if (inputStream == null) {
             Log.e(TAG, "inputstream is null");
             return null;
         }
         try {
-            int available = inputStream.available();
-            if (available <= 0) {
+            int iAvailable = inputStream.available();
+            if (iAvailable <= 0) {
                 Log.e(TAG, "inpustream open fail");
                 return null;
             }
-            byte[] bArr = new byte[available];
+            byte[] bArr = new byte[iAvailable];
             if (inputStream.read(bArr) == -1) {
                 return null;
             }
@@ -202,7 +202,7 @@ public class SemQuramBitmapFactory {
             }
             options.setWidth(i);
             options.setHeight(i2);
-            return nativeDecodeByteArray2(bArr, 0, available, options);
+            return nativeDecodeByteArray2(bArr, 0, iAvailable, options);
         } catch (IOException e) {
             e.printStackTrace();
             return null;
@@ -212,18 +212,18 @@ public class SemQuramBitmapFactory {
         }
     }
 
-    public static Bitmap decodeStream(InputStream inputStream, int i, int i2, int i3, SemQrBitmapFactory.Options options) {
+    public static Bitmap decodeStream(InputStream inputStream, int i, int i2, int i3, SemQrBitmapFactory.Options options) throws IOException {
         if (inputStream == null) {
             Log.e(TAG, "inputstream is null");
             return null;
         }
         try {
-            int available = inputStream.available();
-            if (available <= 0) {
+            int iAvailable = inputStream.available();
+            if (iAvailable <= 0) {
                 Log.e(TAG, "inpustream open fail");
                 return null;
             }
-            byte[] bArr = new byte[available];
+            byte[] bArr = new byte[iAvailable];
             if (inputStream.read(bArr) == -1) {
                 return null;
             }
@@ -233,7 +233,7 @@ public class SemQuramBitmapFactory {
             }
             options.setWidth(i);
             options.setHeight(i2);
-            return nativeDecodeByteArray3(bArr, 0, available, i3, options);
+            return nativeDecodeByteArray3(bArr, 0, iAvailable, i3, options);
         } catch (IOException e) {
             e.printStackTrace();
             return null;
@@ -245,28 +245,28 @@ public class SemQuramBitmapFactory {
 
     public static int decodeThumbnailByteArrayToBuffer(byte[] bArr, int i, int i2, SemQuramImageBufferData semQuramImageBufferData, SemQrBitmapFactory.Options options) {
         if (i >= 0 && i2 > 0 && bArr.length >= i2 + i && semQuramImageBufferData != null && options.getHandle() == 0) {
-            int nativeGetImageInfoFromBuffer = nativeGetImageInfoFromBuffer(bArr, i, i2, options);
+            int iNativeGetImageInfoFromBuffer = nativeGetImageInfoFromBuffer(bArr, i, i2, options);
             if (options.inSampleSize == 0) {
                 options.inSampleSize = 1;
             }
-            int round = round(options.getWidth() / options.inSampleSize);
-            int round2 = round(options.getHeight() / options.inSampleSize);
-            if (nativeGetImageInfoFromBuffer == 0) {
+            int iRound = round(options.getWidth() / options.inSampleSize);
+            int iRound2 = round(options.getHeight() / options.inSampleSize);
+            if (iNativeGetImageInfoFromBuffer == 0) {
                 options.setHandle(0L);
                 return 0;
             }
             if (options.inPreferredConfig == 7) {
-                semQuramImageBufferData.buffer = ByteBuffer.allocateDirect(round * round2 * 4);
+                semQuramImageBufferData.buffer = ByteBuffer.allocateDirect(iRound * iRound2 * 4);
             } else if (options.inPreferredConfig == 0) {
-                semQuramImageBufferData.buffer = ByteBuffer.allocateDirect(round * round2 * 2);
+                semQuramImageBufferData.buffer = ByteBuffer.allocateDirect(iRound * iRound2 * 2);
             } else if (options.inPreferredConfig == 2) {
-                semQuramImageBufferData.buffer = ByteBuffer.allocateDirect((round * round2) + (((round + 1) >> 1) * ((round2 + 1) >> 1) * 2));
+                semQuramImageBufferData.buffer = ByteBuffer.allocateDirect((iRound * iRound2) + (((iRound + 1) >> 1) * ((iRound2 + 1) >> 1) * 2));
             } else {
                 options.setHandle(0L);
             }
             semQuramImageBufferData.buffer.order(ByteOrder.BIG_ENDIAN);
-            options.setWidth(round);
-            options.setHeight(round2);
+            options.setWidth(iRound);
+            options.setHeight(iRound2);
             nativeDecodeByteArrayToBuffer(bArr, semQuramImageBufferData.buffer, i, i2, options);
             if (semQuramImageBufferData.buffer == null) {
                 return 0;
@@ -283,43 +283,43 @@ public class SemQuramBitmapFactory {
         if (str == null || i <= 0 || i2 <= 0 || semQuramImageBufferData == null || options == null || options.getHandle() != 0) {
             return 0;
         }
-        int nativeCreateDecFileInfo = nativeCreateDecFileInfo(str, options, 2);
-        if (nativeCreateDecFileInfo != 0) {
+        int iNativeCreateDecFileInfo = nativeCreateDecFileInfo(str, options, 2);
+        if (iNativeCreateDecFileInfo != 0) {
             long[] jArr = new long[1];
-            int DecodeJPEGThumbnailToNativeBuffer = DecodeJPEGThumbnailToNativeBuffer(options.getHandle(), jArr, i, i2);
-            if (DecodeJPEGThumbnailToNativeBuffer == 1) {
+            int iDecodeJPEGThumbnailToNativeBuffer = DecodeJPEGThumbnailToNativeBuffer(options.getHandle(), jArr, i, i2);
+            if (iDecodeJPEGThumbnailToNativeBuffer == 1) {
                 semQuramImageBufferData.type = SemQuramImageBufferData.Type.HANDLE;
                 semQuramImageBufferData.width = i;
                 semQuramImageBufferData.height = i2;
                 semQuramImageBufferData.handle = jArr[0];
             }
-            nativeCreateDecFileInfo = DecodeJPEGThumbnailToNativeBuffer;
+            iNativeCreateDecFileInfo = iDecodeJPEGThumbnailToNativeBuffer;
         }
         options.setHandle(0L);
-        return nativeCreateDecFileInfo;
+        return iNativeCreateDecFileInfo;
     }
 
     public static Bitmap decodeFile(String str, SemQrBitmapFactory.Options options) {
-        Bitmap bitmap = null;
+        Bitmap bitmapNativeDecodeFile2 = null;
         if (options.getHandle() != 0) {
             return null;
         }
         if (options.inSampleSize > 8) {
             int i = options.inSampleSize;
             options.inSampleSize = 8;
-            Bitmap nativeDecodeFile2 = nativeDecodeFile2(str, options);
-            if (nativeDecodeFile2 != null) {
+            Bitmap bitmapNativeDecodeFile22 = nativeDecodeFile2(str, options);
+            if (bitmapNativeDecodeFile22 != null) {
                 if (options.getWidth() < i || options.getHeight() < i) {
                     return null;
                 }
-                bitmap = Bitmap.createScaledBitmap(nativeDecodeFile2, (int) ((options.getWidth() / i) + 0.5d), (int) ((options.getHeight() / i) + 0.5d), false);
+                bitmapNativeDecodeFile2 = Bitmap.createScaledBitmap(bitmapNativeDecodeFile22, (int) ((options.getWidth() / i) + 0.5d), (int) ((options.getHeight() / i) + 0.5d), false);
                 options.inSampleSize = i;
             }
         } else {
-            bitmap = nativeDecodeFile2(str, options);
+            bitmapNativeDecodeFile2 = nativeDecodeFile2(str, options);
         }
         options.setHandle(0L);
-        return bitmap;
+        return bitmapNativeDecodeFile2;
     }
 
     public static Bitmap partialDecodeByteArray(byte[] bArr, int i, int i2, SemQrBitmapFactory.Options options, int i3, int i4, int i5, int i6) {
@@ -332,20 +332,20 @@ public class SemQuramBitmapFactory {
         } else if (options.inSampleSize > 8) {
             options.inSampleSize = 8;
         }
-        Bitmap nativePartialDecodeByteArray = nativePartialDecodeByteArray(bArr, i, i2, i3, i5, i4 - i3, i6 - i5, options);
+        Bitmap bitmapNativePartialDecodeByteArray = nativePartialDecodeByteArray(bArr, i, i2, i3, i5, i4 - i3, i6 - i5, options);
         options.setHandle(0L);
         int width = options.getWidth();
         int height = options.getHeight();
-        if (nativePartialDecodeByteArray == null) {
+        if (bitmapNativePartialDecodeByteArray == null) {
             return null;
         }
         if (options.inSampleSize >= i7) {
-            return nativePartialDecodeByteArray;
+            return bitmapNativePartialDecodeByteArray;
         }
-        Bitmap createScaledBitmap = Bitmap.createScaledBitmap(nativePartialDecodeByteArray, (width * options.inSampleSize) / i7, (height * options.inSampleSize) / i7, false);
-        nativePartialDecodeByteArray.recycle();
+        Bitmap bitmapCreateScaledBitmap = Bitmap.createScaledBitmap(bitmapNativePartialDecodeByteArray, (width * options.inSampleSize) / i7, (height * options.inSampleSize) / i7, false);
+        bitmapNativePartialDecodeByteArray.recycle();
         options.inSampleSize = i7;
-        return createScaledBitmap;
+        return bitmapCreateScaledBitmap;
     }
 
     public static int partialDecodeByteArrayToBuffer(byte[] bArr, int i, int i2, SemQrBitmapFactory.Options options, int i3, int i4, int i5, int i6, SemQuramImageBufferData semQuramImageBufferData) {
@@ -355,25 +355,25 @@ public class SemQuramBitmapFactory {
             } else if (options.inSampleSize > 8) {
                 options.inSampleSize = 8;
             }
-            int nativeGetImageInfoFromBuffer = nativeGetImageInfoFromBuffer(bArr, i, i2, options);
-            int round = round(options.getWidth() / options.inSampleSize);
-            int round2 = round(options.getHeight() / options.inSampleSize);
-            if (nativeGetImageInfoFromBuffer == 0) {
+            int iNativeGetImageInfoFromBuffer = nativeGetImageInfoFromBuffer(bArr, i, i2, options);
+            int iRound = round(options.getWidth() / options.inSampleSize);
+            int iRound2 = round(options.getHeight() / options.inSampleSize);
+            if (iNativeGetImageInfoFromBuffer == 0) {
                 options.setHandle(0L);
                 return 0;
             }
             if (options.inPreferredConfig == 7) {
-                semQuramImageBufferData.buffer = ByteBuffer.allocateDirect(round * round2 * 4);
+                semQuramImageBufferData.buffer = ByteBuffer.allocateDirect(iRound * iRound2 * 4);
             } else if (options.inPreferredConfig == 0) {
-                semQuramImageBufferData.buffer = ByteBuffer.allocateDirect(round * round2 * 2);
+                semQuramImageBufferData.buffer = ByteBuffer.allocateDirect(iRound * iRound2 * 2);
             } else if (options.inPreferredConfig == 2) {
-                semQuramImageBufferData.buffer = ByteBuffer.allocateDirect((round * round2) + (((round + 1) >> 1) * ((round2 + 1) >> 1) * 2));
+                semQuramImageBufferData.buffer = ByteBuffer.allocateDirect((iRound * iRound2) + (((iRound + 1) >> 1) * ((iRound2 + 1) >> 1) * 2));
             } else {
                 options.setHandle(0L);
             }
             semQuramImageBufferData.buffer.order(ByteOrder.BIG_ENDIAN);
-            options.setWidth(round);
-            options.setHeight(round2);
+            options.setWidth(iRound);
+            options.setHeight(iRound2);
             nativePartialDecodeByteArrayToBuffer(bArr, semQuramImageBufferData.buffer, i, i2, i3, i5, i4 - i3, i6 - i5, options);
             options.setHandle(0L);
             return semQuramImageBufferData.buffer == null ? 0 : 1;
@@ -385,11 +385,11 @@ public class SemQuramBitmapFactory {
         if (str == null || options == null) {
             return 0;
         }
-        int nativeGetExifData = nativeGetExifData(str, options.getHandle(), options);
-        if (nativeGetExifData == 0) {
+        int iNativeGetExifData = nativeGetExifData(str, options.getHandle(), options);
+        if (iNativeGetExifData == 0) {
             options.setExif(0L);
         }
-        return nativeGetExifData;
+        return iNativeGetExifData;
     }
 
     public static Bitmap partialDecodeFile(String str, SemQrBitmapFactory.Options options, int i, int i2, int i3, int i4) {
@@ -404,20 +404,20 @@ public class SemQuramBitmapFactory {
         }
         int i6 = i2 - i;
         int i7 = i4 - i3;
-        Bitmap nativePartialDecodeFile = nativePartialDecodeFile(str, i, i3, i6, i7, options);
+        Bitmap bitmapNativePartialDecodeFile = nativePartialDecodeFile(str, i, i3, i6, i7, options);
         options.setHandle(0L);
-        if (nativePartialDecodeFile == null) {
+        if (bitmapNativePartialDecodeFile == null) {
             return null;
         }
         options.getWidth();
         options.getHeight();
         if (options.inSampleSize >= i5) {
-            return nativePartialDecodeFile;
+            return bitmapNativePartialDecodeFile;
         }
-        Bitmap createScaledBitmap = Bitmap.createScaledBitmap(nativePartialDecodeFile, ((i6 / options.inSampleSize) * options.inSampleSize) / i5, ((i7 / options.inSampleSize) * options.inSampleSize) / i5, false);
-        nativePartialDecodeFile.recycle();
+        Bitmap bitmapCreateScaledBitmap = Bitmap.createScaledBitmap(bitmapNativePartialDecodeFile, ((i6 / options.inSampleSize) * options.inSampleSize) / i5, ((i7 / options.inSampleSize) * options.inSampleSize) / i5, false);
+        bitmapNativePartialDecodeFile.recycle();
         options.inSampleSize = i5;
-        return createScaledBitmap;
+        return bitmapCreateScaledBitmap;
     }
 
     public static int compressToByte(Bitmap bitmap, String str, byte[] bArr, int i, int i2) {
@@ -442,23 +442,23 @@ public class SemQuramBitmapFactory {
     }
 
     public static int resizeCompressToURI(Bitmap bitmap, String str, Context context, Uri uri, int i, int i2, int i3, int i4) {
-        int i5 = 0;
+        int iNativeResizeEncodeFD = 0;
         if (!str.equals("Quram_JPEG")) {
             return 0;
         }
         try {
-            ParcelFileDescriptor openFileDescriptor = context.getContentResolver().openFileDescriptor(uri, "w");
+            ParcelFileDescriptor parcelFileDescriptorOpenFileDescriptor = context.getContentResolver().openFileDescriptor(uri, "w");
             try {
-                i5 = nativeResizeEncodeFD(bitmap, openFileDescriptor.getFileDescriptor(), i, i2, i3, i4, null);
-                if (openFileDescriptor != null) {
-                    openFileDescriptor.close();
+                iNativeResizeEncodeFD = nativeResizeEncodeFD(bitmap, parcelFileDescriptorOpenFileDescriptor.getFileDescriptor(), i, i2, i3, i4, null);
+                if (parcelFileDescriptorOpenFileDescriptor != null) {
+                    parcelFileDescriptorOpenFileDescriptor.close();
                 }
-                return i5;
+                return iNativeResizeEncodeFD;
             } finally {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return i5;
+            return iNativeResizeEncodeFD;
         }
     }
 
@@ -500,7 +500,7 @@ public class SemQuramBitmapFactory {
     }
 
     public static Bitmap decodeFileDescriptor(FileDescriptor fileDescriptor, Rect rect, SemQrBitmapFactory.Options options) {
-        int i;
+        int iAvailable;
         byte[] bArr;
         FileInputStream fileInputStream = new FileInputStream(fileDescriptor);
         if (options.getHandle() != 0) {
@@ -513,40 +513,40 @@ public class SemQuramBitmapFactory {
             return null;
         }
         try {
-            i = fileInputStream.available();
-            try {
-                bArr = new byte[i];
-                try {
-                    if (fileInputStream.read(bArr) == -1) {
-                        fileInputStream.close();
-                        return null;
-                    }
-                } catch (IOException e2) {
-                    e = e2;
-                    e.printStackTrace();
-                    Bitmap nativeDecodeByteArray2 = nativeDecodeByteArray2(bArr, 0, i, options);
-                    options.setHandle(0L);
-                    fileInputStream.close();
-                    return nativeDecodeByteArray2;
-                }
-            } catch (IOException e3) {
-                e = e3;
-                bArr = null;
-                e.printStackTrace();
-                Bitmap nativeDecodeByteArray22 = nativeDecodeByteArray2(bArr, 0, i, options);
-                options.setHandle(0L);
+            iAvailable = fileInputStream.available();
+        } catch (IOException e2) {
+            e = e2;
+            iAvailable = 0;
+        }
+        try {
+            bArr = new byte[iAvailable];
+        } catch (IOException e3) {
+            e = e3;
+            bArr = null;
+            e.printStackTrace();
+            Bitmap bitmapNativeDecodeByteArray2 = nativeDecodeByteArray2(bArr, 0, iAvailable, options);
+            options.setHandle(0L);
+            fileInputStream.close();
+            return bitmapNativeDecodeByteArray2;
+        }
+        try {
+            if (fileInputStream.read(bArr) == -1) {
                 fileInputStream.close();
-                return nativeDecodeByteArray22;
+                return null;
             }
         } catch (IOException e4) {
             e = e4;
-            i = 0;
+            e.printStackTrace();
+            Bitmap bitmapNativeDecodeByteArray22 = nativeDecodeByteArray2(bArr, 0, iAvailable, options);
+            options.setHandle(0L);
+            fileInputStream.close();
+            return bitmapNativeDecodeByteArray22;
         }
-        Bitmap nativeDecodeByteArray222 = nativeDecodeByteArray2(bArr, 0, i, options);
+        Bitmap bitmapNativeDecodeByteArray222 = nativeDecodeByteArray2(bArr, 0, iAvailable, options);
         options.setHandle(0L);
         try {
             fileInputStream.close();
-            return nativeDecodeByteArray222;
+            return bitmapNativeDecodeByteArray222;
         } catch (Exception e5) {
             Log.e(TAG, "" + e5.toString());
             return null;

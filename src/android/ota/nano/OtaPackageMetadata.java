@@ -87,16 +87,16 @@ public interface OtaPackageMetadata {
 
         @Override // com.android.framework.protobuf.nano.MessageNano
         protected int computeSerializedSize() {
-            int computeSerializedSize = super.computeSerializedSize();
+            int iComputeSerializedSize = super.computeSerializedSize();
             if (!this.partitionName.equals("")) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeStringSize(1, this.partitionName);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeStringSize(1, this.partitionName);
             }
             String[] strArr = this.device;
             int i = 0;
             if (strArr != null && strArr.length > 0) {
                 int i2 = 0;
+                int iComputeStringSizeNoTag = 0;
                 int i3 = 0;
-                int i4 = 0;
                 while (true) {
                     String[] strArr2 = this.device;
                     if (i2 >= strArr2.length) {
@@ -104,17 +104,17 @@ public interface OtaPackageMetadata {
                     }
                     String str = strArr2[i2];
                     if (str != null) {
-                        i4++;
-                        i3 += CodedOutputByteBufferNano.computeStringSizeNoTag(str);
+                        i3++;
+                        iComputeStringSizeNoTag += CodedOutputByteBufferNano.computeStringSizeNoTag(str);
                     }
                     i2++;
                 }
-                computeSerializedSize = computeSerializedSize + i3 + i4;
+                iComputeSerializedSize = iComputeSerializedSize + iComputeStringSizeNoTag + i3;
             }
             String[] strArr3 = this.build;
             if (strArr3 != null && strArr3.length > 0) {
-                int i5 = 0;
-                int i6 = 0;
+                int iComputeStringSizeNoTag2 = 0;
+                int i4 = 0;
                 while (true) {
                     String[] strArr4 = this.build;
                     if (i >= strArr4.length) {
@@ -122,26 +122,26 @@ public interface OtaPackageMetadata {
                     }
                     String str2 = strArr4[i];
                     if (str2 != null) {
-                        i6++;
-                        i5 += CodedOutputByteBufferNano.computeStringSizeNoTag(str2);
+                        i4++;
+                        iComputeStringSizeNoTag2 += CodedOutputByteBufferNano.computeStringSizeNoTag(str2);
                     }
                     i++;
                 }
-                computeSerializedSize = computeSerializedSize + i5 + i6;
+                iComputeSerializedSize = iComputeSerializedSize + iComputeStringSizeNoTag2 + i4;
             }
-            return !this.version.equals("") ? computeSerializedSize + CodedOutputByteBufferNano.computeStringSize(4, this.version) : computeSerializedSize;
+            return !this.version.equals("") ? iComputeSerializedSize + CodedOutputByteBufferNano.computeStringSize(4, this.version) : iComputeSerializedSize;
         }
 
         @Override // com.android.framework.protobuf.nano.MessageNano
         public PartitionState mergeFrom(CodedInputByteBufferNano codedInputByteBufferNano) throws IOException {
             while (true) {
-                int readTag = codedInputByteBufferNano.readTag();
-                if (readTag == 0) {
+                int tag = codedInputByteBufferNano.readTag();
+                if (tag == 0) {
                     break;
                 }
-                if (readTag == 10) {
+                if (tag == 10) {
                     this.partitionName = codedInputByteBufferNano.readString();
-                } else if (readTag == 18) {
+                } else if (tag == 18) {
                     int repeatedFieldArrayLength = WireFormatNano.getRepeatedFieldArrayLength(codedInputByteBufferNano, 18);
                     String[] strArr = this.device;
                     int length = strArr == null ? 0 : strArr.length;
@@ -157,7 +157,7 @@ public interface OtaPackageMetadata {
                     }
                     strArr2[length] = codedInputByteBufferNano.readString();
                     this.device = strArr2;
-                } else if (readTag == 26) {
+                } else if (tag == 26) {
                     int repeatedFieldArrayLength2 = WireFormatNano.getRepeatedFieldArrayLength(codedInputByteBufferNano, 26);
                     String[] strArr3 = this.build;
                     int length2 = strArr3 == null ? 0 : strArr3.length;
@@ -173,8 +173,8 @@ public interface OtaPackageMetadata {
                     }
                     strArr4[length2] = codedInputByteBufferNano.readString();
                     this.build = strArr4;
-                } else if (readTag != 34) {
-                    if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, readTag)) {
+                } else if (tag != 34) {
+                    if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, tag)) {
                         break;
                     }
                 } else {
@@ -295,13 +295,13 @@ public interface OtaPackageMetadata {
 
         @Override // com.android.framework.protobuf.nano.MessageNano
         protected int computeSerializedSize() {
-            int computeSerializedSize = super.computeSerializedSize();
+            int iComputeSerializedSize = super.computeSerializedSize();
             String[] strArr = this.device;
             int i = 0;
             if (strArr != null && strArr.length > 0) {
                 int i2 = 0;
+                int iComputeStringSizeNoTag = 0;
                 int i3 = 0;
-                int i4 = 0;
                 while (true) {
                     String[] strArr2 = this.device;
                     if (i2 >= strArr2.length) {
@@ -309,44 +309,44 @@ public interface OtaPackageMetadata {
                     }
                     String str = strArr2[i2];
                     if (str != null) {
-                        i4++;
-                        i3 += CodedOutputByteBufferNano.computeStringSizeNoTag(str);
+                        i3++;
+                        iComputeStringSizeNoTag += CodedOutputByteBufferNano.computeStringSizeNoTag(str);
                     }
                     i2++;
                 }
-                computeSerializedSize = computeSerializedSize + i3 + i4;
+                iComputeSerializedSize = iComputeSerializedSize + iComputeStringSizeNoTag + i3;
             }
             String[] strArr3 = this.build;
             if (strArr3 != null && strArr3.length > 0) {
+                int i4 = 0;
+                int iComputeStringSizeNoTag2 = 0;
                 int i5 = 0;
-                int i6 = 0;
-                int i7 = 0;
                 while (true) {
                     String[] strArr4 = this.build;
-                    if (i5 >= strArr4.length) {
+                    if (i4 >= strArr4.length) {
                         break;
                     }
-                    String str2 = strArr4[i5];
+                    String str2 = strArr4[i4];
                     if (str2 != null) {
-                        i7++;
-                        i6 += CodedOutputByteBufferNano.computeStringSizeNoTag(str2);
+                        i5++;
+                        iComputeStringSizeNoTag2 += CodedOutputByteBufferNano.computeStringSizeNoTag(str2);
                     }
-                    i5++;
+                    i4++;
                 }
-                computeSerializedSize = computeSerializedSize + i6 + i7;
+                iComputeSerializedSize = iComputeSerializedSize + iComputeStringSizeNoTag2 + i5;
             }
             if (!this.buildIncremental.equals("")) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeStringSize(3, this.buildIncremental);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeStringSize(3, this.buildIncremental);
             }
             long j = this.timestamp;
             if (j != 0) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt64Size(4, j);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt64Size(4, j);
             }
             if (!this.sdkLevel.equals("")) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeStringSize(5, this.sdkLevel);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeStringSize(5, this.sdkLevel);
             }
             if (!this.securityPatchLevel.equals("")) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeStringSize(6, this.securityPatchLevel);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeStringSize(6, this.securityPatchLevel);
             }
             PartitionState[] partitionStateArr = this.partitionState;
             if (partitionStateArr != null && partitionStateArr.length > 0) {
@@ -357,22 +357,22 @@ public interface OtaPackageMetadata {
                     }
                     PartitionState partitionState = partitionStateArr2[i];
                     if (partitionState != null) {
-                        computeSerializedSize += CodedOutputByteBufferNano.computeMessageSize(7, partitionState);
+                        iComputeSerializedSize += CodedOutputByteBufferNano.computeMessageSize(7, partitionState);
                     }
                     i++;
                 }
             }
-            return computeSerializedSize;
+            return iComputeSerializedSize;
         }
 
         @Override // com.android.framework.protobuf.nano.MessageNano
         public DeviceState mergeFrom(CodedInputByteBufferNano codedInputByteBufferNano) throws IOException {
             while (true) {
-                int readTag = codedInputByteBufferNano.readTag();
-                if (readTag == 0) {
+                int tag = codedInputByteBufferNano.readTag();
+                if (tag == 0) {
                     break;
                 }
-                if (readTag == 10) {
+                if (tag == 10) {
                     int repeatedFieldArrayLength = WireFormatNano.getRepeatedFieldArrayLength(codedInputByteBufferNano, 10);
                     String[] strArr = this.device;
                     int length = strArr == null ? 0 : strArr.length;
@@ -388,7 +388,7 @@ public interface OtaPackageMetadata {
                     }
                     strArr2[length] = codedInputByteBufferNano.readString();
                     this.device = strArr2;
-                } else if (readTag == 18) {
+                } else if (tag == 18) {
                     int repeatedFieldArrayLength2 = WireFormatNano.getRepeatedFieldArrayLength(codedInputByteBufferNano, 18);
                     String[] strArr3 = this.build;
                     int length2 = strArr3 == null ? 0 : strArr3.length;
@@ -404,16 +404,16 @@ public interface OtaPackageMetadata {
                     }
                     strArr4[length2] = codedInputByteBufferNano.readString();
                     this.build = strArr4;
-                } else if (readTag == 26) {
+                } else if (tag == 26) {
                     this.buildIncremental = codedInputByteBufferNano.readString();
-                } else if (readTag == 32) {
+                } else if (tag == 32) {
                     this.timestamp = codedInputByteBufferNano.readInt64();
-                } else if (readTag == 42) {
+                } else if (tag == 42) {
                     this.sdkLevel = codedInputByteBufferNano.readString();
-                } else if (readTag == 50) {
+                } else if (tag == 50) {
                     this.securityPatchLevel = codedInputByteBufferNano.readString();
-                } else if (readTag != 58) {
-                    if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, readTag)) {
+                } else if (tag != 58) {
+                    if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, tag)) {
                         break;
                     }
                 } else {
@@ -509,43 +509,43 @@ public interface OtaPackageMetadata {
 
         @Override // com.android.framework.protobuf.nano.MessageNano
         protected int computeSerializedSize() {
-            int computeSerializedSize = super.computeSerializedSize();
+            int iComputeSerializedSize = super.computeSerializedSize();
             if (!this.packageName.equals("")) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeStringSize(1, this.packageName);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeStringSize(1, this.packageName);
             }
             long j = this.version;
             if (j != 0) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt64Size(2, j);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt64Size(2, j);
             }
             boolean z = this.isCompressed;
             if (z) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeBoolSize(3, z);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeBoolSize(3, z);
             }
             long j2 = this.decompressedSize;
             if (j2 != 0) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt64Size(4, j2);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt64Size(4, j2);
             }
             long j3 = this.sourceVersion;
-            return j3 != 0 ? computeSerializedSize + CodedOutputByteBufferNano.computeInt64Size(5, j3) : computeSerializedSize;
+            return j3 != 0 ? iComputeSerializedSize + CodedOutputByteBufferNano.computeInt64Size(5, j3) : iComputeSerializedSize;
         }
 
         @Override // com.android.framework.protobuf.nano.MessageNano
         public ApexInfo mergeFrom(CodedInputByteBufferNano codedInputByteBufferNano) throws IOException {
             while (true) {
-                int readTag = codedInputByteBufferNano.readTag();
-                if (readTag == 0) {
+                int tag = codedInputByteBufferNano.readTag();
+                if (tag == 0) {
                     break;
                 }
-                if (readTag == 10) {
+                if (tag == 10) {
                     this.packageName = codedInputByteBufferNano.readString();
-                } else if (readTag == 16) {
+                } else if (tag == 16) {
                     this.version = codedInputByteBufferNano.readInt64();
-                } else if (readTag == 24) {
+                } else if (tag == 24) {
                     this.isCompressed = codedInputByteBufferNano.readBool();
-                } else if (readTag == 32) {
+                } else if (tag == 32) {
                     this.decompressedSize = codedInputByteBufferNano.readInt64();
-                } else if (readTag != 40) {
-                    if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, readTag)) {
+                } else if (tag != 40) {
+                    if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, tag)) {
                         break;
                     }
                 } else {
@@ -611,7 +611,7 @@ public interface OtaPackageMetadata {
 
         @Override // com.android.framework.protobuf.nano.MessageNano
         protected int computeSerializedSize() {
-            int computeSerializedSize = super.computeSerializedSize();
+            int iComputeSerializedSize = super.computeSerializedSize();
             ApexInfo[] apexInfoArr = this.apexInfo;
             if (apexInfoArr != null && apexInfoArr.length > 0) {
                 int i = 0;
@@ -622,23 +622,23 @@ public interface OtaPackageMetadata {
                     }
                     ApexInfo apexInfo = apexInfoArr2[i];
                     if (apexInfo != null) {
-                        computeSerializedSize += CodedOutputByteBufferNano.computeMessageSize(1, apexInfo);
+                        iComputeSerializedSize += CodedOutputByteBufferNano.computeMessageSize(1, apexInfo);
                     }
                     i++;
                 }
             }
-            return computeSerializedSize;
+            return iComputeSerializedSize;
         }
 
         @Override // com.android.framework.protobuf.nano.MessageNano
         public ApexMetadata mergeFrom(CodedInputByteBufferNano codedInputByteBufferNano) throws IOException {
             while (true) {
-                int readTag = codedInputByteBufferNano.readTag();
-                if (readTag == 0) {
+                int tag = codedInputByteBufferNano.readTag();
+                if (tag == 0) {
                     break;
                 }
-                if (readTag != 10) {
-                    if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, readTag)) {
+                if (tag != 10) {
+                    if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, tag)) {
                         break;
                     }
                 } else {
@@ -763,41 +763,41 @@ public interface OtaPackageMetadata {
 
         @Override // com.android.framework.protobuf.nano.MessageNano
         protected int computeSerializedSize() {
-            int computeSerializedSize = super.computeSerializedSize();
+            int iComputeSerializedSize = super.computeSerializedSize();
             int i = this.type;
             if (i != 0) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(1, i);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt32Size(1, i);
             }
             boolean z = this.wipe;
             if (z) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeBoolSize(2, z);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeBoolSize(2, z);
             }
             boolean z2 = this.downgrade;
             if (z2) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeBoolSize(3, z2);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeBoolSize(3, z2);
             }
             Map<String, String> map = this.propertyFiles;
             if (map != null) {
-                computeSerializedSize += InternalNano.computeMapFieldSize(map, 4, 9, 9);
+                iComputeSerializedSize += InternalNano.computeMapFieldSize(map, 4, 9, 9);
             }
             DeviceState deviceState = this.precondition;
             if (deviceState != null) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeMessageSize(5, deviceState);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeMessageSize(5, deviceState);
             }
             DeviceState deviceState2 = this.postcondition;
             if (deviceState2 != null) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeMessageSize(6, deviceState2);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeMessageSize(6, deviceState2);
             }
             boolean z3 = this.retrofitDynamicPartitions;
             if (z3) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeBoolSize(7, z3);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeBoolSize(7, z3);
             }
             long j = this.requiredCache;
             if (j != 0) {
-                computeSerializedSize += CodedOutputByteBufferNano.computeInt64Size(8, j);
+                iComputeSerializedSize += CodedOutputByteBufferNano.computeInt64Size(8, j);
             }
             boolean z4 = this.splDowngrade;
-            return z4 ? computeSerializedSize + CodedOutputByteBufferNano.computeBoolSize(9, z4) : computeSerializedSize;
+            return z4 ? iComputeSerializedSize + CodedOutputByteBufferNano.computeBoolSize(9, z4) : iComputeSerializedSize;
         }
 
         @Override // com.android.framework.protobuf.nano.MessageNano
@@ -805,39 +805,39 @@ public interface OtaPackageMetadata {
             CodedInputByteBufferNano codedInputByteBufferNano2;
             MapFactories.MapFactory mapFactory = MapFactories.getMapFactory();
             while (true) {
-                int readTag = codedInputByteBufferNano.readTag();
-                if (readTag == 0) {
+                int tag = codedInputByteBufferNano.readTag();
+                if (tag == 0) {
                     break;
                 }
-                if (readTag == 8) {
+                if (tag == 8) {
                     codedInputByteBufferNano2 = codedInputByteBufferNano;
-                    int readInt32 = codedInputByteBufferNano2.readInt32();
-                    if (readInt32 == 0 || readInt32 == 1 || readInt32 == 2 || readInt32 == 3) {
-                        this.type = readInt32;
+                    int int32 = codedInputByteBufferNano2.readInt32();
+                    if (int32 == 0 || int32 == 1 || int32 == 2 || int32 == 3) {
+                        this.type = int32;
                     }
-                } else if (readTag == 16) {
+                } else if (tag == 16) {
                     codedInputByteBufferNano2 = codedInputByteBufferNano;
                     this.wipe = codedInputByteBufferNano2.readBool();
-                } else if (readTag == 24) {
+                } else if (tag == 24) {
                     codedInputByteBufferNano2 = codedInputByteBufferNano;
                     this.downgrade = codedInputByteBufferNano2.readBool();
-                } else if (readTag != 34) {
-                    if (readTag == 42) {
+                } else if (tag != 34) {
+                    if (tag == 42) {
                         if (this.precondition == null) {
                             this.precondition = new DeviceState();
                         }
                         codedInputByteBufferNano.readMessage(this.precondition);
-                    } else if (readTag == 50) {
+                    } else if (tag == 50) {
                         if (this.postcondition == null) {
                             this.postcondition = new DeviceState();
                         }
                         codedInputByteBufferNano.readMessage(this.postcondition);
-                    } else if (readTag == 56) {
+                    } else if (tag == 56) {
                         this.retrofitDynamicPartitions = codedInputByteBufferNano.readBool();
-                    } else if (readTag == 64) {
+                    } else if (tag == 64) {
                         this.requiredCache = codedInputByteBufferNano.readInt64();
-                    } else if (readTag != 72) {
-                        if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, readTag)) {
+                    } else if (tag != 72) {
+                        if (!WireFormatNano.parseUnknownField(codedInputByteBufferNano, tag)) {
                             break;
                         }
                     } else {

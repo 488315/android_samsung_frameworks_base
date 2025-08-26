@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class DualDARManager {
     private static final boolean DEBUG = "eng".equals(Build.TYPE);
@@ -50,48 +49,48 @@ public class DualDARManager {
         try {
             try {
                 FileInfo fdFromPathForWrite = getFdFromPathForWrite(str);
-                if (fdFromPathForWrite != null && fdFromPathForWrite.fd != null) {
-                    boolean z = DEBUG;
-                    if (z) {
-                        Log.d(TAG, "FS Log File fd=" + fdFromPathForWrite.fd.getFd());
-                    }
-                    Bundle bundle = new Bundle();
-                    bundle.putParcelable("FSLOG_FILE_INFO", fdFromPathForWrite);
-                    Bundle processCommand = processCommand(FETCH_DUMPSTATE_REQUEST, bundle);
-                    if (processCommand == null || !processCommand.getBoolean("dual_dar_response", true)) {
-                        Log.e(TAG, "Fetch DumpState failed !!");
-                        ParcelFileDescriptor parcelFileDescriptor3 = fdFromPathForWrite.fd;
-                        if (parcelFileDescriptor3 != null) {
-                            try {
-                                parcelFileDescriptor3.close();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                        return false;
-                    }
-                    if (z) {
-                        Log.d(TAG, "Fetch DumpState Success");
-                    }
-                    ParcelFileDescriptor parcelFileDescriptor4 = fdFromPathForWrite.fd;
-                    if (parcelFileDescriptor4 != null) {
+                if (fdFromPathForWrite == null || fdFromPathForWrite.fd == null) {
+                    Log.e(TAG, "Error: Not able to open the Log files");
+                    if (fdFromPathForWrite != null && (parcelFileDescriptor2 = fdFromPathForWrite.fd) != null) {
                         try {
-                            parcelFileDescriptor4.close();
+                            parcelFileDescriptor2.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    return false;
+                }
+                boolean z = DEBUG;
+                if (z) {
+                    Log.d(TAG, "FS Log File fd=" + fdFromPathForWrite.fd.getFd());
+                }
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("FSLOG_FILE_INFO", fdFromPathForWrite);
+                Bundle bundleProcessCommand = processCommand(FETCH_DUMPSTATE_REQUEST, bundle);
+                if (bundleProcessCommand == null || !bundleProcessCommand.getBoolean("dual_dar_response", true)) {
+                    Log.e(TAG, "Fetch DumpState failed !!");
+                    ParcelFileDescriptor parcelFileDescriptor3 = fdFromPathForWrite.fd;
+                    if (parcelFileDescriptor3 != null) {
+                        try {
+                            parcelFileDescriptor3.close();
                         } catch (IOException e2) {
                             e2.printStackTrace();
                         }
                     }
-                    return true;
+                    return false;
                 }
-                Log.e(TAG, "Error: Not able to open the Log files");
-                if (fdFromPathForWrite != null && (parcelFileDescriptor2 = fdFromPathForWrite.fd) != null) {
+                if (z) {
+                    Log.d(TAG, "Fetch DumpState Success");
+                }
+                ParcelFileDescriptor parcelFileDescriptor4 = fdFromPathForWrite.fd;
+                if (parcelFileDescriptor4 != null) {
                     try {
-                        parcelFileDescriptor2.close();
+                        parcelFileDescriptor4.close();
                     } catch (IOException e3) {
                         e3.printStackTrace();
                     }
                 }
-                return false;
+                return true;
             } catch (Exception e4) {
                 Log.e(TAG, "Exception at fetchDumpState - " + e4.getMessage());
                 e4.printStackTrace();
@@ -108,7 +107,7 @@ public class DualDARManager {
         }
     }
 
-    private FileInfo getFdFromAsset(String str) {
+    private FileInfo getFdFromAsset(String str) throws IOException {
         String str2;
         AssetManager assets = this.mContext.getAssets();
         if (assets == null) {
@@ -120,27 +119,27 @@ public class DualDARManager {
                 if (z) {
                     Log.d(TAG, "FileName: " + str);
                 }
-                AssetFileDescriptor openFd = assets.openFd(str);
+                AssetFileDescriptor assetFileDescriptorOpenFd = assets.openFd(str);
                 if (z) {
                     Log.d(TAG, "Found FSRelay file: " + str);
                 }
-                if (openFd == null) {
+                if (assetFileDescriptorOpenFd == null) {
                     return null;
                 }
                 str2 = str;
                 try {
-                    return new FileInfo(str2, openFd.getParcelFileDescriptor(), openFd.getStartOffset(), openFd.getLength());
+                    return new FileInfo(str2, assetFileDescriptorOpenFd.getParcelFileDescriptor(), assetFileDescriptorOpenFd.getStartOffset(), assetFileDescriptorOpenFd.getLength());
                 } catch (FileNotFoundException unused) {
                     Log.e(TAG, "FSRelay file not found: " + str2);
                     return null;
                 }
-            } catch (Exception e) {
-                Log.e(TAG, "general exception");
-                e.printStackTrace();
-                return null;
+            } catch (FileNotFoundException unused2) {
+                str2 = str;
             }
-        } catch (FileNotFoundException unused2) {
-            str2 = str;
+        } catch (Exception e) {
+            Log.e(TAG, "general exception");
+            e.printStackTrace();
+            return null;
         }
     }
 
@@ -169,20 +168,26 @@ public class DualDARManager {
     }
 
     public static synchronized DualDARManager getInstance(Context context) {
-        DualDARManager dualDARManager;
-        synchronized (DualDARManager.class) {
-            try {
-                if (mInstance == null) {
-                    mInstance = new DualDARManager(context);
-                }
-                dualDARManager = mInstance;
-            } catch (Throwable th) {
-                throw th;
+        try {
+            if (mInstance == null) {
+                mInstance = new DualDARManager(context);
             }
+        } catch (Throwable th) {
+            throw th;
         }
-        return dualDARManager;
+        return mInstance;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:165:0x01ff A[EXC_TOP_SPLITTER, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:167:0x0180 A[EXC_TOP_SPLITTER, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:173:0x0034 A[EXC_TOP_SPLITTER, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:177:0x01b3 A[EXC_TOP_SPLITTER, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:181:0x022e A[EXC_TOP_SPLITTER, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:183:0x0148 A[EXC_TOP_SPLITTER, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:207:? A[Catch: all -> 0x0027, DONT_GENERATE, FINALLY_INSNS, SYNTHETIC, TryCatch #4 {, blocks: (B:4:0x0003, B:15:0x001f, B:17:0x0023, B:22:0x002b, B:23:0x002e, B:25:0x0034, B:27:0x003b, B:30:0x004a, B:73:0x0136, B:75:0x013a, B:79:0x0142, B:81:0x0148, B:83:0x014f, B:86:0x015e, B:78:0x013f, B:92:0x016e, B:94:0x0172, B:98:0x017a, B:100:0x0180, B:102:0x0186, B:105:0x0195, B:97:0x0177, B:109:0x01a1, B:111:0x01a5, B:115:0x01ad, B:117:0x01b3, B:119:0x01ba, B:122:0x01c9, B:114:0x01aa, B:144:0x021c, B:146:0x0220, B:149:0x0225, B:150:0x0228, B:152:0x022e, B:154:0x0234, B:158:0x0246, B:157:0x0243, B:127:0x01ed, B:129:0x01f1, B:132:0x01f6, B:133:0x01f9, B:135:0x01ff, B:137:0x0206, B:140:0x0215, B:7:0x000c, B:33:0x004f, B:35:0x0053, B:37:0x005b, B:40:0x0063, B:42:0x0067, B:44:0x0094, B:46:0x009a, B:47:0x009e, B:49:0x00a4, B:51:0x00ac, B:52:0x00b4, B:53:0x00bc, B:55:0x00c0, B:59:0x00e1, B:61:0x00f1, B:62:0x00fe, B:64:0x0106, B:70:0x0114, B:72:0x012f, B:89:0x0163, B:91:0x0167, B:108:0x019a, B:12:0x0017, B:125:0x01ce), top: B:169:0x0003, inners: #0, #1, #2, #3, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14 }] */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     private synchronized boolean installLibraryInternal(String str, List<String> list, boolean z) {
         ParcelFileDescriptor parcelFileDescriptor;
         ParcelFileDescriptor parcelFileDescriptor2;
@@ -199,6 +204,9 @@ public class DualDARManager {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
+                        if (!arrayList.isEmpty()) {
+                        }
+                        return false;
                     }
                     if (!arrayList.isEmpty()) {
                         try {
@@ -215,94 +223,103 @@ public class DualDARManager {
                     }
                     return false;
                 }
-                if (fdFromAsset.fd != null && fdFromAsset.offset >= 0 && fdFromAsset.len >= 0) {
-                    if (DEBUG) {
-                        Log.d(TAG, "FSRelay fd=" + fdFromAsset.fd.getFd() + " offset=" + fdFromAsset.offset + " len=" + fdFromAsset.len);
-                    }
-                    if (list != null && !list.isEmpty()) {
-                        for (String str2 : list) {
-                            if (z) {
-                                arrayList.add(getFdFromAsset(str2));
-                            } else {
-                                arrayList.add(getFdFromPath(str2));
-                            }
-                        }
-                    }
-                    if (DEBUG) {
-                        Log.d(TAG, "load FSRelay " + str + " from app");
-                    }
-                    boolean z2 = false;
-                    for (int i3 = 0; i3 < 5; i3++) {
-                        Bundle bundle = new Bundle();
-                        bundle.putParcelable("RELAY_FILE_INFO", fdFromAsset);
+                if (fdFromAsset.fd == null || fdFromAsset.offset < 0 || fdFromAsset.len < 0) {
+                    Log.e(TAG, "pfd is null");
+                    ParcelFileDescriptor parcelFileDescriptor3 = fdFromAsset.fd;
+                    if (parcelFileDescriptor3 == null) {
                         if (!arrayList.isEmpty()) {
-                            bundle.putParcelableArray("CRYPTO_FILE_INFO", (Parcelable[]) arrayList.toArray(new FileInfo[0]));
                         }
-                        Bundle processCommand = processCommand(INSTALL_CLIENT_LIBRARY_REQUEST, bundle);
-                        z2 = processCommand != null && processCommand.getBoolean("dual_dar_response", true);
-                        if (z2) {
-                            break;
-                        }
-                        Log.e(TAG, "FSRelay loading failure: " + i3);
+                        return false;
                     }
+                    try {
+                        parcelFileDescriptor3.close();
+                    } catch (IOException e3) {
+                        e3.printStackTrace();
+                    }
+                    if (!arrayList.isEmpty()) {
+                        try {
+                            int size2 = arrayList.size();
+                            int i3 = 0;
+                            while (i3 < size2) {
+                                Object obj2 = arrayList.get(i3);
+                                i3++;
+                                ((FileInfo) obj2).fd.close();
+                            }
+                        } catch (IOException e4) {
+                            e4.printStackTrace();
+                        }
+                    }
+                    return false;
+                }
+                if (DEBUG) {
+                    Log.d(TAG, "FSRelay fd=" + fdFromAsset.fd.getFd() + " offset=" + fdFromAsset.offset + " len=" + fdFromAsset.len);
+                }
+                if (list != null && !list.isEmpty()) {
+                    for (String str2 : list) {
+                        if (z) {
+                            arrayList.add(getFdFromAsset(str2));
+                        } else {
+                            arrayList.add(getFdFromPath(str2));
+                        }
+                    }
+                }
+                if (DEBUG) {
+                    Log.d(TAG, "load FSRelay " + str + " from app");
+                }
+                boolean z2 = false;
+                for (int i4 = 0; i4 < 5; i4++) {
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable("RELAY_FILE_INFO", fdFromAsset);
+                    if (!arrayList.isEmpty()) {
+                        bundle.putParcelableArray("CRYPTO_FILE_INFO", (Parcelable[]) arrayList.toArray(new FileInfo[0]));
+                    }
+                    Bundle bundleProcessCommand = processCommand(INSTALL_CLIENT_LIBRARY_REQUEST, bundle);
+                    z2 = bundleProcessCommand != null && bundleProcessCommand.getBoolean("dual_dar_response", true);
                     if (z2) {
-                        if (DEBUG) {
-                            Log.d(TAG, "FSRelay Loaded Successfully");
-                        }
-                        ParcelFileDescriptor parcelFileDescriptor3 = fdFromAsset.fd;
-                        if (parcelFileDescriptor3 != null) {
-                            try {
-                                parcelFileDescriptor3.close();
-                            } catch (IOException e3) {
-                                e3.printStackTrace();
-                            }
-                        }
+                        break;
+                    }
+                    Log.e(TAG, "FSRelay loading failure: " + i4);
+                }
+                if (z2) {
+                    if (DEBUG) {
+                        Log.d(TAG, "FSRelay Loaded Successfully");
+                    }
+                    ParcelFileDescriptor parcelFileDescriptor4 = fdFromAsset.fd;
+                    if (parcelFileDescriptor4 == null) {
                         if (!arrayList.isEmpty()) {
-                            try {
-                                int size2 = arrayList.size();
-                                while (i < size2) {
-                                    Object obj2 = arrayList.get(i);
-                                    i++;
-                                    ((FileInfo) obj2).fd.close();
-                                }
-                            } catch (IOException e4) {
-                                e4.printStackTrace();
-                            }
                         }
                         return true;
                     }
-                    Log.e(TAG, "FSRelay Load failed !!");
-                    ParcelFileDescriptor parcelFileDescriptor4 = fdFromAsset.fd;
-                    if (parcelFileDescriptor4 != null) {
-                        try {
-                            parcelFileDescriptor4.close();
-                        } catch (IOException e5) {
-                            e5.printStackTrace();
-                        }
+                    try {
+                        parcelFileDescriptor4.close();
+                    } catch (IOException e5) {
+                        e5.printStackTrace();
                     }
                     if (!arrayList.isEmpty()) {
                         try {
                             int size3 = arrayList.size();
-                            int i4 = 0;
-                            while (i4 < size3) {
-                                Object obj3 = arrayList.get(i4);
-                                i4++;
+                            while (i < size3) {
+                                Object obj3 = arrayList.get(i);
+                                i++;
                                 ((FileInfo) obj3).fd.close();
                             }
                         } catch (IOException e6) {
                             e6.printStackTrace();
                         }
                     }
+                    return true;
+                }
+                Log.e(TAG, "FSRelay Load failed !!");
+                ParcelFileDescriptor parcelFileDescriptor5 = fdFromAsset.fd;
+                if (parcelFileDescriptor5 == null) {
+                    if (!arrayList.isEmpty()) {
+                    }
                     return false;
                 }
-                Log.e(TAG, "pfd is null");
-                ParcelFileDescriptor parcelFileDescriptor5 = fdFromAsset.fd;
-                if (parcelFileDescriptor5 != null) {
-                    try {
-                        parcelFileDescriptor5.close();
-                    } catch (IOException e7) {
-                        e7.printStackTrace();
-                    }
+                try {
+                    parcelFileDescriptor5.close();
+                } catch (IOException e7) {
+                    e7.printStackTrace();
                 }
                 if (!arrayList.isEmpty()) {
                     try {
@@ -318,32 +335,35 @@ public class DualDARManager {
                     }
                 }
                 return false;
-            } finally {
-            }
-        } catch (Exception e9) {
-            Log.e(TAG, "Exception at installLibrary - " + e9.getMessage());
-            e9.printStackTrace();
-            if (0 != 0 && (parcelFileDescriptor = fileInfo.fd) != null) {
-                try {
-                    parcelFileDescriptor.close();
-                } catch (IOException e10) {
-                    e10.printStackTrace();
-                }
-            }
-            if (!arrayList.isEmpty()) {
-                try {
-                    int size5 = arrayList.size();
-                    int i6 = 0;
-                    while (i6 < size5) {
-                        Object obj5 = arrayList.get(i6);
-                        i6++;
-                        ((FileInfo) obj5).fd.close();
+            } catch (Exception e9) {
+                Log.e(TAG, "Exception at installLibrary - " + e9.getMessage());
+                e9.printStackTrace();
+                if (0 != 0 && (parcelFileDescriptor = fileInfo.fd) != null) {
+                    try {
+                        parcelFileDescriptor.close();
+                    } catch (IOException e10) {
+                        e10.printStackTrace();
                     }
-                } catch (IOException e11) {
-                    e11.printStackTrace();
+                    if (!arrayList.isEmpty()) {
+                    }
+                    return false;
                 }
+                if (!arrayList.isEmpty()) {
+                    try {
+                        int size5 = arrayList.size();
+                        int i6 = 0;
+                        while (i6 < size5) {
+                            Object obj5 = arrayList.get(i6);
+                            i6++;
+                            ((FileInfo) obj5).fd.close();
+                        }
+                    } catch (IOException e11) {
+                        e11.printStackTrace();
+                    }
+                }
+                return false;
             }
-            return false;
+        } finally {
         }
     }
 
@@ -369,12 +389,12 @@ public class DualDARManager {
     }
 
     public synchronized List<Integer> getDualDARUsers() {
-        Bundle processCommand = processCommand(GET_DUALDAR_USERS_REQUEST, null);
-        if (processCommand == null) {
+        Bundle bundleProcessCommand = processCommand(GET_DUALDAR_USERS_REQUEST, null);
+        if (bundleProcessCommand == null) {
             Log.e(TAG, "Failed to get service");
             return null;
         }
-        return processCommand.getIntegerArrayList("USERS");
+        return bundleProcessCommand.getIntegerArrayList("USERS");
     }
 
     public synchronized boolean getFileSystemLog(String str) {
@@ -382,9 +402,9 @@ public class DualDARManager {
     }
 
     public String getInstalledClientLibraryVersion() {
-        Bundle processCommand = processCommand(GET_CLIENT_VERSION_REQUEST, null);
-        if (processCommand != null) {
-            return processCommand.getString("CLIENT_VERSION");
+        Bundle bundleProcessCommand = processCommand(GET_CLIENT_VERSION_REQUEST, null);
+        if (bundleProcessCommand != null) {
+            return bundleProcessCommand.getString("CLIENT_VERSION");
         }
         Log.e(TAG, "Failed to get service");
         return null;
@@ -399,26 +419,26 @@ public class DualDARManager {
     }
 
     public synchronized void setSecret(int i, List<Secret> list) {
-        byte[] bArr;
+        byte[] bArrEncryptMessageFor;
         Log.d(TAG, "setSecret() ");
         try {
             Bundle bundle = new Bundle();
             ArrayList<? extends Parcelable> arrayList = new ArrayList<>();
             for (Secret secret : list) {
                 try {
-                    bArr = this.mSecureClientOutAPI.encryptMessageFor(DUALDAR_MGR_SERVICE, secret.data);
+                    bArrEncryptMessageFor = this.mSecureClientOutAPI.encryptMessageFor(DUALDAR_MGR_SERVICE, secret.data);
                 } catch (Exception e) {
                     Log.e(TAG, "PUSH_SECRET_REQUEST failed to encrypt secrets");
                     e.printStackTrace();
-                    bArr = null;
+                    bArrEncryptMessageFor = null;
                 }
                 Wiper.wipe(secret.data);
-                arrayList.add(new Secret(secret.alias, bArr));
+                arrayList.add(new Secret(secret.alias, bArrEncryptMessageFor));
             }
             list.clear();
             bundle.putParcelableArrayList("INNER_LAYER_SECRET", arrayList);
             bundle.putInt(UcmAgentProviderImpl.UcmAgentSpiProperty.KEY_USER_ID, i);
-            Bundle processCommandSecurely = processCommandSecurely(PUSH_SECRET_REQUEST, bundle);
+            Bundle bundleProcessCommandSecurely = processCommandSecurely(PUSH_SECRET_REQUEST, bundle);
             int size = arrayList.size();
             int i2 = 0;
             while (i2 < size) {
@@ -427,7 +447,7 @@ public class DualDARManager {
                 Wiper.wipe(((Secret) parcelable).data);
             }
             arrayList.clear();
-            Log.d(TAG, "PUSH_SECRET_REQUEST response: " + (processCommandSecurely != null ? processCommandSecurely.getBoolean("dual_dar_response", true) : false));
+            Log.d(TAG, "PUSH_SECRET_REQUEST response: " + (bundleProcessCommandSecurely != null ? bundleProcessCommandSecurely.getBoolean("dual_dar_response", true) : false));
         } catch (Exception e2) {
             e2.printStackTrace();
         }

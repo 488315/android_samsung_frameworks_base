@@ -65,8 +65,8 @@ public final class FieldClassificationResponse implements Parcelable {
     }
 
     FieldClassificationResponse(Parcel parcel) {
-        Set<FieldClassification> unparcelClassifications = unparcelClassifications(parcel);
-        this.mClassifications = unparcelClassifications;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) unparcelClassifications);
+        Set<FieldClassification> setUnparcelClassifications = unparcelClassifications(parcel);
+        this.mClassifications = setUnparcelClassifications;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) setUnparcelClassifications);
     }
 }

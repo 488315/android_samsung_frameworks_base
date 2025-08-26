@@ -30,12 +30,12 @@ class CredstoreWritableIdentityCredential extends WritableIdentityCredential {
     }
 
     @Override // android.security.identity.WritableIdentityCredential
-    public Collection<X509Certificate> getCredentialKeyCertificateChain(byte[] bArr) {
+    public Collection<X509Certificate> getCredentialKeyCertificateChain(byte[] bArr) throws CertificateException {
         try {
             try {
-                Collection<? extends Certificate> generateCertificates = CertificateFactory.getInstance("X.509").generateCertificates(new ByteArrayInputStream(this.mBinder.getCredentialKeyCertificateChain(bArr)));
+                Collection<? extends Certificate> collectionGenerateCertificates = CertificateFactory.getInstance("X.509").generateCertificates(new ByteArrayInputStream(this.mBinder.getCredentialKeyCertificateChain(bArr)));
                 ArrayList arrayList = new ArrayList();
-                Iterator<? extends Certificate> it = generateCertificates.iterator();
+                Iterator<? extends Certificate> it = collectionGenerateCertificates.iterator();
                 while (it.hasNext()) {
                     arrayList.add((X509Certificate) it.next());
                 }
@@ -119,7 +119,7 @@ class CredstoreWritableIdentityCredential extends WritableIdentityCredential {
         }
     }
 
-    private static long getRootSid() {
+    private static long getRootSid() throws IllegalStateException {
         long secureUserId = GateKeeper.getSecureUserId();
         if (secureUserId != 0) {
             return secureUserId;

@@ -15,7 +15,6 @@ import com.google.android.setupcompat.partnerconfig.PartnerConfig;
 import com.google.android.setupcompat.partnerconfig.PartnerConfigHelper;
 import com.google.android.setupdesign.R$styleable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class IntrinsicSizeFrameLayout extends FrameLayout {
     public int intrinsicHeight;
@@ -49,10 +48,10 @@ public class IntrinsicSizeFrameLayout extends FrameLayout {
         if (isInEditMode()) {
             return;
         }
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.SudIntrinsicSizeFrameLayout, i, 0);
-        this.intrinsicHeight = obtainStyledAttributes.getDimensionPixelSize(0, 0);
-        this.intrinsicWidth = obtainStyledAttributes.getDimensionPixelSize(1, 0);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.SudIntrinsicSizeFrameLayout, i, 0);
+        this.intrinsicHeight = typedArrayObtainStyledAttributes.getDimensionPixelSize(0, 0);
+        this.intrinsicWidth = typedArrayObtainStyledAttributes.getDimensionPixelSize(1, 0);
+        typedArrayObtainStyledAttributes.recycle();
         PartnerConfigHelper partnerConfigHelper = PartnerConfigHelper.get(context);
         PartnerConfig partnerConfig = PartnerConfig.CONFIG_CARD_VIEW_INTRINSIC_HEIGHT;
         if (partnerConfigHelper.isPartnerConfigAvailable(partnerConfig)) {

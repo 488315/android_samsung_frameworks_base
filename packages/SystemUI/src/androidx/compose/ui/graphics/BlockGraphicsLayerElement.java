@@ -6,7 +6,6 @@ import androidx.compose.ui.node.ModifierNodeElement;
 import androidx.compose.ui.node.NodeCoordinator;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class BlockGraphicsLayerElement extends ModifierNodeElement<BlockGraphicsLayerModifier> {
     public final Function1 block;
@@ -38,7 +37,7 @@ final class BlockGraphicsLayerElement extends ModifierNodeElement<BlockGraphicsL
     public final void update(Modifier.Node node) {
         BlockGraphicsLayerModifier blockGraphicsLayerModifier = (BlockGraphicsLayerModifier) node;
         blockGraphicsLayerModifier.layerBlock = this.block;
-        NodeCoordinator nodeCoordinator = DelegatableNodeKt.m632requireCoordinator64DMado(blockGraphicsLayerModifier, 2).wrapped;
+        NodeCoordinator nodeCoordinator = DelegatableNodeKt.m634requireCoordinator64DMado(blockGraphicsLayerModifier, 2).wrapped;
         if (nodeCoordinator != null) {
             nodeCoordinator.updateLayerBlock(blockGraphicsLayerModifier.layerBlock, true);
         }

@@ -11,7 +11,6 @@ import kotlin.coroutines.CoroutineContext;
 import kotlin.jvm.functions.Function0;
 import kotlinx.coroutines.flow.FlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class WakeGestureMonitor {
     public final AmbientDisplayConfiguration ambientDisplayConfiguration;
@@ -19,7 +18,7 @@ public final class WakeGestureMonitor {
     public final Lazy pickupSensor$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.dreams.WakeGestureMonitor$$ExternalSyntheticLambda0
         @Override // kotlin.jvm.functions.Function0
         public final Object invoke() {
-            return WakeGestureMonitor.this.asyncSensorManager.getDefaultSensor(25);
+            return this.f$0.asyncSensorManager.getDefaultSensor(25);
         }
     });
     public final SecureSettings secureSettings;

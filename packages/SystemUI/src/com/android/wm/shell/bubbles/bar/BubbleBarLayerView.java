@@ -2,6 +2,7 @@ package com.android.wm.shell.bubbles.bar;
 
 import android.R;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.graphics.Region;
 import android.graphics.drawable.ColorDrawable;
@@ -28,7 +29,6 @@ import com.android.wm.shell.shared.bubbles.DragZoneFactory;
 import com.android.wm.shell.shared.bubbles.DropTargetManager;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class BubbleBarLayerView extends FrameLayout implements ViewTreeObserver.OnComputeInternalInsetsListener {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -49,7 +49,6 @@ public class BubbleBarLayerView extends FrameLayout implements ViewTreeObserver.
     public final Rect mTempRect;
     public final Region mTouchableRegion;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.bubbles.bar.BubbleBarLayerView$1, reason: invalid class name */
     public class AnonymousClass1 implements DropTargetManager.DragZoneChangedListener {
         public final /* synthetic */ LocationChangeListener val$locationChangeListener;
@@ -61,14 +60,12 @@ public class BubbleBarLayerView extends FrameLayout implements ViewTreeObserver.
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.bubbles.bar.BubbleBarLayerView$2, reason: invalid class name */
     public class AnonymousClass2 implements DragZoneFactory.SplitScreenModeChecker {
         public AnonymousClass2(BubbleBarLayerView bubbleBarLayerView) {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.bubbles.bar.BubbleBarLayerView$4, reason: invalid class name */
     public class AnonymousClass4 {
         public final /* synthetic */ BubbleViewProvider val$b;
@@ -78,7 +75,6 @@ public class BubbleBarLayerView extends FrameLayout implements ViewTreeObserver.
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class LocationChangeListener {
         public BubbleBarLocation mInitialLocation;
 
@@ -138,7 +134,7 @@ public class BubbleBarLayerView extends FrameLayout implements ViewTreeObserver.
         setOnClickListener(new View.OnClickListener() { // from class: com.android.wm.shell.bubbles.bar.BubbleBarLayerView$$ExternalSyntheticLambda1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view2) {
-                BubbleBarLayerView bubbleBarLayerView = BubbleBarLayerView.this;
+                BubbleBarLayerView bubbleBarLayerView = this.f$0;
                 int i2 = BubbleBarLayerView.$r8$clinit;
                 bubbleBarLayerView.hideModalOrCollapse();
             }
@@ -180,54 +176,33 @@ public class BubbleBarLayerView extends FrameLayout implements ViewTreeObserver.
     }
 
     @Override // android.view.ViewGroup, android.view.View
-    public final void onAttachedToWindow() {
+    public final void onAttachedToWindow() throws Resources.NotFoundException {
         super.onAttachedToWindow();
         WindowManager windowManager = (WindowManager) ((FrameLayout) this).mContext.getSystemService(WindowManager.class);
         BubblePositioner bubblePositioner = this.mPositioner;
         Context context = ((FrameLayout) this).mContext;
         Objects.requireNonNull(windowManager);
-        bubblePositioner.update(DeviceConfig.create(context, windowManager));
+        bubblePositioner.update(DeviceConfig.create(context, windowManager, this.mPositioner.mDeviceConfig.displayCutout));
         getViewTreeObserver().addOnComputeInternalInsetsListener(this);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:6:0x001c, code lost:
-    
-        if (r1.rootView != null) goto L8;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:8:0x001e  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void onComputeInternalInsets(android.view.ViewTreeObserver.InternalInsetsInfo r4) {
-        /*
-            r3 = this;
-            r0 = 3
-            r4.setTouchableInsets(r0)
-            android.graphics.Region r0 = r3.mTouchableRegion
-            r0.setEmpty()
-            android.graphics.Region r0 = r3.mTouchableRegion
-            android.graphics.Rect r1 = r3.mTempRect
-            r1.setEmpty()
-            boolean r1 = r3.mIsExpanded
-            if (r1 != 0) goto L1e
-            com.android.wm.shell.bubbles.bar.BubbleEducationViewController r1 = r3.mEducationViewController
-            com.android.wm.shell.shared.bubbles.BubblePopupView r2 = r1.educationView
-            if (r2 == 0) goto L2a
-            android.view.ViewGroup r1 = r1.rootView
-            if (r1 == 0) goto L2a
-        L1e:
-            android.graphics.Rect r1 = r3.mTempRect
-            r3.getBoundsOnScreen(r1)
-            android.graphics.Rect r1 = r3.mTempRect
-            android.graphics.Region$Op r2 = android.graphics.Region.Op.UNION
-            r0.op(r1, r2)
-        L2a:
-            android.graphics.Region r4 = r4.touchableRegion
-            android.graphics.Region r3 = r3.mTouchableRegion
-            r4.set(r3)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.bubbles.bar.BubbleBarLayerView.onComputeInternalInsets(android.view.ViewTreeObserver$InternalInsetsInfo):void");
+    public final void onComputeInternalInsets(ViewTreeObserver.InternalInsetsInfo internalInsetsInfo) {
+        internalInsetsInfo.setTouchableInsets(3);
+        this.mTouchableRegion.setEmpty();
+        Region region = this.mTouchableRegion;
+        this.mTempRect.setEmpty();
+        if (!this.mIsExpanded) {
+            BubbleEducationViewController bubbleEducationViewController = this.mEducationViewController;
+            if (bubbleEducationViewController.educationView != null && bubbleEducationViewController.rootView != null) {
+                getBoundsOnScreen(this.mTempRect);
+                region.op(this.mTempRect, Region.Op.UNION);
+            }
+        }
+        internalInsetsInfo.touchableRegion.set(this.mTouchableRegion);
     }
 
     @Override // android.view.ViewGroup, android.view.View
@@ -267,10 +242,10 @@ public class BubbleBarLayerView extends FrameLayout implements ViewTreeObserver.
             }
             this.mExpandedBubble = bubbleViewProvider;
             this.mExpandedView = bubbleBarExpandedView;
-            boolean equals = bubbleViewProvider.getKey().equals("Overflow");
+            boolean zEquals = bubbleViewProvider.getKey().equals("Overflow");
             BubblePositioner bubblePositioner = this.mPositioner;
-            int i = equals ? bubblePositioner.mOverflowWidth : bubblePositioner.mExpandedViewBubbleBarWidth;
-            int expandedViewHeightForBubbleBar = bubblePositioner.getExpandedViewHeightForBubbleBar(equals);
+            int i = zEquals ? bubblePositioner.mOverflowWidth : bubblePositioner.mExpandedViewBubbleBarWidth;
+            int expandedViewHeightForBubbleBar = bubblePositioner.getExpandedViewHeightForBubbleBar(zEquals);
             this.mExpandedView.setVisibility(8);
             BubbleBarExpandedView bubbleBarExpandedView2 = this.mExpandedView;
             BubblePositioner bubblePositioner2 = this.mPositioner;

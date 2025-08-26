@@ -13,6 +13,6 @@ public class CreateIncrementalStateArgs<DataSourceInstanceType extends DataSourc
     }
 
     public DataSourceInstanceType getDataSourceInstanceLocked() {
-        return this.mDataSource.getDataSourceInstanceLocked(this.mInstanceIndex);
+        return (DataSourceInstanceType) this.mDataSource.getDataSourceInstanceLocked(this.mInstanceIndex);
     }
 }

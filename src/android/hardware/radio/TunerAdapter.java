@@ -299,7 +299,7 @@ final class TunerAdapter extends RadioTuner {
         this.mCallback.setProgramListObserver(programList2, new ProgramList.OnCloseListener() { // from class: android.hardware.radio.TunerAdapter$$ExternalSyntheticLambda1
             @Override // android.hardware.radio.ProgramList.OnCloseListener
             public final void onClose() {
-                TunerAdapter.this.lambda$getDynamicProgramList$1();
+                this.f$0.lambda$getDynamicProgramList$1();
             }
         });
         try {

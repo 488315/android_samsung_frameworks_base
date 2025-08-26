@@ -10,7 +10,6 @@ import kotlin.jvm.internal.Ref$ObjectRef;
 import kotlinx.coroutines.flow.internal.NullSurrogateKt;
 import kotlinx.coroutines.internal.Symbol;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 final class FlowKt__DelayKt$debounceInternal$1$3$1 extends SuspendLambda implements Function1 {
     final /* synthetic */ FlowCollector $downstream;
@@ -31,7 +30,7 @@ final class FlowKt__DelayKt$debounceInternal$1$3$1 extends SuspendLambda impleme
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
         return ((FlowKt__DelayKt$debounceInternal$1$3$1) create((Continuation) obj)).invokeSuspend(Unit.INSTANCE);
     }
 

@@ -21,9 +21,9 @@ public final class RealTimeTokenManager {
 
     private RealTimeTokenManager() {
         Slog.i(TAG, "RealTimeTokenManager getService");
-        IRealTimeTokenService asInterface = IRealTimeTokenService.Stub.asInterface(ServiceManager.getService("RealTimeTokenService"));
-        this.mService = asInterface;
-        if (asInterface == null) {
+        IRealTimeTokenService iRealTimeTokenServiceAsInterface = IRealTimeTokenService.Stub.asInterface(ServiceManager.getService("RealTimeTokenService"));
+        this.mService = iRealTimeTokenServiceAsInterface;
+        if (iRealTimeTokenServiceAsInterface == null) {
             Slog.i(TAG, " Failed to getService, return null");
         }
     }

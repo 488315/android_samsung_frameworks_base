@@ -6,18 +6,15 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface IChunkedAidlInterface extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.knox.zt.service.IChunkedAidlInterface";
 
     void sendChunk(String str, int i, boolean z) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IChunkedAidlInterface {
         public static final int TRANSACTION_sendChunk = 1;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements IChunkedAidlInterface {
             public IBinder mRemote;
 
@@ -36,18 +33,18 @@ public interface IChunkedAidlInterface extends IInterface {
 
             @Override // com.samsung.android.knox.zt.service.IChunkedAidlInterface
             public void sendChunk(String str, int i, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IChunkedAidlInterface.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(z ? 1 : 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IChunkedAidlInterface.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(z ? 1 : 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -60,8 +57,8 @@ public interface IChunkedAidlInterface extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IChunkedAidlInterface.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IChunkedAidlInterface)) ? new Proxy(iBinder) : (IChunkedAidlInterface) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IChunkedAidlInterface.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IChunkedAidlInterface)) ? new Proxy(iBinder) : (IChunkedAidlInterface) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder
@@ -87,7 +84,6 @@ public interface IChunkedAidlInterface extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements IChunkedAidlInterface {
         @Override // android.os.IInterface
         public IBinder asBinder() {

@@ -10,7 +10,6 @@ import dagger.internal.Provider;
 import dagger.internal.Providers;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class PluginsModule_ProvidesPluginManagerFactory implements Provider {
     private final Provider contextProvider;
@@ -38,9 +37,9 @@ public final class PluginsModule_ProvidesPluginManagerFactory implements Provide
     }
 
     public static PluginManager providesPluginManager(Context context, PluginActionManager.Factory factory, boolean z, UncaughtExceptionPreHandlerManager uncaughtExceptionPreHandlerManager, PluginEnabler pluginEnabler, PluginPrefs pluginPrefs, List<String> list, PluginInstance.Factory factory2) {
-        PluginManager providesPluginManager = PluginsModule.providesPluginManager(context, factory, z, uncaughtExceptionPreHandlerManager, pluginEnabler, pluginPrefs, list, factory2);
-        providesPluginManager.getClass();
-        return providesPluginManager;
+        PluginManager pluginManagerProvidesPluginManager = PluginsModule.providesPluginManager(context, factory, z, uncaughtExceptionPreHandlerManager, pluginEnabler, pluginPrefs, list, factory2);
+        pluginManagerProvidesPluginManager.getClass();
+        return pluginManagerProvidesPluginManager;
     }
 
     public static PluginsModule_ProvidesPluginManagerFactory create(Provider provider, Provider provider2, Provider provider3, Provider provider4, Provider provider5, Provider provider6, Provider provider7, Provider provider8) {

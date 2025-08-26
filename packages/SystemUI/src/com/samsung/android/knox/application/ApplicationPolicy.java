@@ -8,10 +8,12 @@ import android.net.Uri;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.IUserManager;
+import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.sec.enterprise.auditlog.AuditLog;
+import android.system.ErrnoException;
 import android.system.Os;
 import android.system.OsConstants;
 import android.system.StructStat;
@@ -22,12 +24,16 @@ import com.samsung.android.knox.ContextInfo;
 import com.samsung.android.knox.EdmConstants;
 import com.samsung.android.knox.EdmUtils;
 import com.samsung.android.knox.KnoxInternalFeature;
+import com.samsung.android.knox.accounts.DeviceAccountPolicy;
 import com.samsung.android.knox.appconfig.ApplicationRestrictionsManager;
 import com.samsung.android.knox.application.IApplicationPolicy;
 import com.samsung.android.knox.license.EnterpriseLicenseManager;
+import com.samsung.android.knox.lockscreen.LSOUtils;
 import com.samsung.android.knox.restriction.IRestrictionPolicy;
 import com.samsung.android.knox.restriction.RestrictionPolicy;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -35,7 +41,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ApplicationPolicy {
     public static final String ACTION_APPLICATION_FOCUS_CHANGE = "com.samsung.android.knox.intent.action.APPLICATION_FOCUS_CHANGE";
@@ -589,12 +594,12 @@ public class ApplicationPolicy {
         }
     }
 
-    public final void checkPathAccessSecured(String str) {
+    public final void checkPathAccessSecured(String str) throws ErrnoException {
         try {
             if (!str.contains("sdcard") && !str.contains("storage")) {
-                StructStat stat = Os.stat(str);
+                StructStat structStatStat = Os.stat(str);
                 int i = OsConstants.S_IWOTH;
-                if (OsConstants.S_ISREG(stat.st_mode) && (stat.st_mode & i) == i) {
+                if (OsConstants.S_ISREG(structStatStat.st_mode) && (structStatStat.st_mode & i) == i) {
                     AuditLog.logEventAsUser(UserHandle.getCallingUserId(), 361, new Object[]{str});
                     return;
                 }
@@ -758,9 +763,9 @@ public class ApplicationPolicy {
         List<String> packagesFromForceStopBlackList = getPackagesFromForceStopBlackList();
         List<String> packagesFromForceStopWhiteList = getPackagesFromForceStopWhiteList();
         if (packagesFromForceStopBlackList != null && packagesFromForceStopWhiteList != null) {
-            boolean removePackagesFromForceStopBlackList = removePackagesFromForceStopBlackList(packagesFromForceStopBlackList);
-            boolean removePackagesFromForceStopWhiteList = removePackagesFromForceStopWhiteList(packagesFromForceStopWhiteList);
-            if (removePackagesFromForceStopBlackList && removePackagesFromForceStopWhiteList) {
+            boolean zRemovePackagesFromForceStopBlackList = removePackagesFromForceStopBlackList(packagesFromForceStopBlackList);
+            boolean zRemovePackagesFromForceStopWhiteList = removePackagesFromForceStopWhiteList(packagesFromForceStopWhiteList);
+            if (zRemovePackagesFromForceStopBlackList && zRemovePackagesFromForceStopWhiteList) {
                 return true;
             }
         }
@@ -773,9 +778,9 @@ public class ApplicationPolicy {
         List<String> packagesFromNotificationBlackList = getPackagesFromNotificationBlackList();
         List<String> packagesFromNotificationWhiteList = getPackagesFromNotificationWhiteList();
         if (packagesFromNotificationBlackList != null && packagesFromNotificationWhiteList != null) {
-            boolean removePackagesFromNotificationBlackList = removePackagesFromNotificationBlackList(packagesFromNotificationBlackList);
-            boolean removePackagesFromNotificationWhiteList = removePackagesFromNotificationWhiteList(packagesFromNotificationWhiteList);
-            if (removePackagesFromNotificationBlackList && removePackagesFromNotificationWhiteList) {
+            boolean zRemovePackagesFromNotificationBlackList = removePackagesFromNotificationBlackList(packagesFromNotificationBlackList);
+            boolean zRemovePackagesFromNotificationWhiteList = removePackagesFromNotificationWhiteList(packagesFromNotificationWhiteList);
+            if (zRemovePackagesFromNotificationBlackList && zRemovePackagesFromNotificationWhiteList) {
                 return true;
             }
         }
@@ -788,9 +793,9 @@ public class ApplicationPolicy {
         List<String> packagesFromWidgetBlackList = getPackagesFromWidgetBlackList();
         List<String> packagesFromWidgetWhiteList = getPackagesFromWidgetWhiteList();
         if (packagesFromWidgetBlackList != null && packagesFromWidgetWhiteList != null) {
-            boolean removePackagesFromWidgetBlackList = removePackagesFromWidgetBlackList(packagesFromWidgetBlackList);
-            boolean removePackagesFromWidgetWhiteList = removePackagesFromWidgetWhiteList(packagesFromWidgetWhiteList);
-            if (removePackagesFromWidgetBlackList && removePackagesFromWidgetWhiteList) {
+            boolean zRemovePackagesFromWidgetBlackList = removePackagesFromWidgetBlackList(packagesFromWidgetBlackList);
+            boolean zRemovePackagesFromWidgetWhiteList = removePackagesFromWidgetWhiteList(packagesFromWidgetWhiteList);
+            if (zRemovePackagesFromWidgetBlackList && zRemovePackagesFromWidgetWhiteList) {
                 return true;
             }
         }
@@ -1845,21 +1850,182 @@ public class ApplicationPolicy {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:24:0x00c5  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x00ba A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:41:0x00ec  */
-    /* JADX WARN: Removed duplicated region for block: B:51:? A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:52:0x00e1 A[EXC_TOP_SPLITTER, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:100:0x00ba A[EXC_TOP_SPLITTER, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:112:? A[SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:64:0x00c5  */
+    /* JADX WARN: Removed duplicated region for block: B:77:0x00ec  */
+    /* JADX WARN: Removed duplicated region for block: B:94:0x00e1 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean installOrUpdateApplicationInternal(java.lang.String r12, boolean r13, boolean r14) {
-        /*
-            Method dump skipped, instructions count: 267
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.knox.application.ApplicationPolicy.installOrUpdateApplicationInternal(java.lang.String, boolean, boolean):boolean");
+    public final boolean installOrUpdateApplicationInternal(String str, boolean z, boolean z2) throws Throwable {
+        Throwable th;
+        RemoteException remoteException;
+        boolean z3;
+        String strCopyFileToDataLocalDirectory;
+        boolean z4;
+        boolean z5 = false;
+        if (str == null || str.isEmpty()) {
+            Log.e(TAG, "Invalid parameter - apkFilePath is null");
+        } else {
+            ParcelFileDescriptor parcelFileDescriptor = null;
+            try {
+                checkPathAccessSecured(str);
+                if (str.startsWith("/data")) {
+                    strCopyFileToDataLocalDirectory = str;
+                    z4 = false;
+                } else {
+                    strCopyFileToDataLocalDirectory = LSOUtils.copyFileToDataLocalDirectory(this.mContext, str, null);
+                    z4 = true;
+                }
+                if (strCopyFileToDataLocalDirectory == null) {
+                    try {
+                        Log.e(TAG, "failed to copy apk from public dir");
+                        return false;
+                    } catch (RemoteException e) {
+                        remoteException = e;
+                        z3 = false;
+                        str = strCopyFileToDataLocalDirectory;
+                        try {
+                            Log.e(TAG, "Failed talking with application policy", remoteException);
+                            if (parcelFileDescriptor != null) {
+                            }
+                            if (z3) {
+                            }
+                            return false;
+                        } catch (Throwable th2) {
+                            th = th2;
+                            z5 = z3;
+                            if (parcelFileDescriptor != null) {
+                                try {
+                                    parcelFileDescriptor.close();
+                                } catch (IOException unused) {
+                                    Log.e(TAG, "Failed to close file descriptor");
+                                }
+                            }
+                            if (z5) {
+                                throw th;
+                            }
+                            File file = new File(str);
+                            if (!file.exists()) {
+                                throw th;
+                            }
+                            try {
+                                file.delete();
+                                throw th;
+                            } catch (SecurityException e2) {
+                                Log.e(TAG, "Failed to delete temporary file, SecurityException occurred", e2);
+                                throw th;
+                            }
+                        }
+                    } catch (Throwable th3) {
+                        th = th3;
+                        str = strCopyFileToDataLocalDirectory;
+                        if (parcelFileDescriptor != null) {
+                        }
+                        if (z5) {
+                        }
+                    }
+                } else {
+                    try {
+                        try {
+                            ParcelFileDescriptor parcelFileDescriptorOpen = ParcelFileDescriptor.open(new File(strCopyFileToDataLocalDirectory), 268435456);
+                            try {
+                                boolean zInstallApplication = this.mService.installApplication(this.mContextInfo, strCopyFileToDataLocalDirectory, z, parcelFileDescriptorOpen, z2);
+                                if (parcelFileDescriptorOpen != null) {
+                                    try {
+                                        parcelFileDescriptorOpen.close();
+                                    } catch (IOException unused2) {
+                                        Log.e(TAG, "Failed to close file descriptor");
+                                    }
+                                }
+                                if (z4) {
+                                    File file2 = new File(strCopyFileToDataLocalDirectory);
+                                    if (file2.exists()) {
+                                        try {
+                                            file2.delete();
+                                        } catch (SecurityException e3) {
+                                            Log.e(TAG, "Failed to delete temporary file, SecurityException occurred", e3);
+                                        }
+                                    }
+                                }
+                                return zInstallApplication;
+                            } catch (RemoteException e4) {
+                                remoteException = e4;
+                                z3 = z4;
+                                str = strCopyFileToDataLocalDirectory;
+                                parcelFileDescriptor = parcelFileDescriptorOpen;
+                                Log.e(TAG, "Failed talking with application policy", remoteException);
+                                if (parcelFileDescriptor != null) {
+                                    try {
+                                        parcelFileDescriptor.close();
+                                    } catch (IOException unused3) {
+                                        Log.e(TAG, "Failed to close file descriptor");
+                                    }
+                                }
+                                if (z3) {
+                                    File file3 = new File(str);
+                                    if (file3.exists()) {
+                                        try {
+                                            file3.delete();
+                                        } catch (SecurityException e5) {
+                                            Log.e(TAG, "Failed to delete temporary file, SecurityException occurred", e5);
+                                        }
+                                    }
+                                }
+                                return false;
+                            } catch (Throwable th4) {
+                                th = th4;
+                                z5 = z4;
+                                str = strCopyFileToDataLocalDirectory;
+                                parcelFileDescriptor = parcelFileDescriptorOpen;
+                                if (parcelFileDescriptor != null) {
+                                }
+                                if (z5) {
+                                }
+                            }
+                        } catch (FileNotFoundException unused4) {
+                            Log.e(TAG, "File path provided doesn't exist");
+                            if (z4) {
+                                File file4 = new File(strCopyFileToDataLocalDirectory);
+                                if (file4.exists()) {
+                                    try {
+                                        file4.delete();
+                                    } catch (SecurityException e6) {
+                                        Log.e(TAG, "Failed to delete temporary file, SecurityException occurred", e6);
+                                    }
+                                }
+                            }
+                            return false;
+                        }
+                    } catch (RemoteException e7) {
+                        remoteException = e7;
+                        z3 = z4;
+                        str = strCopyFileToDataLocalDirectory;
+                        Log.e(TAG, "Failed talking with application policy", remoteException);
+                        if (parcelFileDescriptor != null) {
+                        }
+                        if (z3) {
+                        }
+                        return false;
+                    } catch (Throwable th5) {
+                        th = th5;
+                        z5 = z4;
+                        str = strCopyFileToDataLocalDirectory;
+                        if (parcelFileDescriptor != null) {
+                        }
+                        if (z5) {
+                        }
+                    }
+                }
+            } catch (RemoteException e8) {
+                remoteException = e8;
+                z3 = false;
+            } catch (Throwable th6) {
+                th = th6;
+            }
+        }
+        return false;
     }
 
     public boolean isApplicationClearCacheDisabled(String str, int i, boolean z) {
@@ -2784,154 +2950,84 @@ public class ApplicationPolicy {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x002a A[EXC_TOP_SPLITTER, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0023  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public boolean addAppPackageNameToWhiteList(java.lang.String r4, boolean r5) {
-        /*
-            r3 = this;
-            com.samsung.android.knox.ContextInfo r0 = r3.mContextInfo
-            java.lang.String r1 = "ApplicationPolicy.addAppPackageNameToWhiteList(String, boolean)"
-            com.samsung.android.knox.license.EnterpriseLicenseManager.log(r0, r1)
-            r0 = 0
-            r1 = 1
-            if (r5 == 0) goto L23
-            com.samsung.android.knox.ContextInfo r5 = r3.mContextInfo
-            java.lang.String r2 = "ApplicationPolicy.addAppPackageNameToWhiteList -> Adding Star in BlackList"
-            com.samsung.android.knox.license.EnterpriseLicenseManager.log(r5, r2)
-            java.lang.String r5 = ".*"
-            boolean r5 = r3.addAppPackageNameToBlackList(r5)
-            if (r5 != 0) goto L23
-            java.lang.String r5 = com.samsung.android.knox.application.ApplicationPolicy.TAG
-            java.lang.String r2 = "ApplicationPolicy.addAppPackageNameToWhiteList: failed to add .*"
-            android.util.Log.d(r5, r2)
-            r5 = r0
-            goto L24
-        L23:
-            r5 = r1
-        L24:
-            com.samsung.android.knox.application.IApplicationPolicy r2 = r3.getService()
-            if (r2 == 0) goto L40
-            com.samsung.android.knox.application.IApplicationPolicy r2 = r3.mService     // Catch: android.os.RemoteException -> L38
-            com.samsung.android.knox.ContextInfo r3 = r3.mContextInfo     // Catch: android.os.RemoteException -> L38
-            boolean r3 = r2.addAppPackageNameToWhiteList(r3, r4)     // Catch: android.os.RemoteException -> L38
-            if (r3 == 0) goto L37
-            if (r5 == 0) goto L37
-            return r1
-        L37:
-            return r0
-        L38:
-            r3 = move-exception
-            java.lang.String r4 = com.samsung.android.knox.application.ApplicationPolicy.TAG
-            java.lang.String r5 = "Failed talking with application policy"
-            android.util.Log.w(r4, r5, r3)
-        L40:
-            return r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.knox.application.ApplicationPolicy.addAppPackageNameToWhiteList(java.lang.String, boolean):boolean");
+    public boolean addAppPackageNameToWhiteList(String str, boolean z) {
+        boolean z2;
+        EnterpriseLicenseManager.log(this.mContextInfo, "ApplicationPolicy.addAppPackageNameToWhiteList(String, boolean)");
+        if (z) {
+            EnterpriseLicenseManager.log(this.mContextInfo, "ApplicationPolicy.addAppPackageNameToWhiteList -> Adding Star in BlackList");
+            if (addAppPackageNameToBlackList(DeviceAccountPolicy.ALL_ACCOUNTS)) {
+                z2 = true;
+            } else {
+                Log.d(TAG, "ApplicationPolicy.addAppPackageNameToWhiteList: failed to add .*");
+                z2 = false;
+            }
+        }
+        if (getService() != null) {
+            try {
+                return this.mService.addAppPackageNameToWhiteList(this.mContextInfo, str) && z2;
+            } catch (RemoteException e) {
+                Log.w(TAG, "Failed talking with application policy", e);
+            }
+        }
+        return false;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x002a A[EXC_TOP_SPLITTER, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0023  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public boolean addAppSignatureToWhiteList(java.lang.String r4, boolean r5) {
-        /*
-            r3 = this;
-            com.samsung.android.knox.ContextInfo r0 = r3.mContextInfo
-            java.lang.String r1 = "ApplicationPolicy.addAppSignatureToWhiteList(String, boolean)"
-            com.samsung.android.knox.license.EnterpriseLicenseManager.log(r0, r1)
-            r0 = 0
-            r1 = 1
-            if (r5 == 0) goto L23
-            com.samsung.android.knox.ContextInfo r5 = r3.mContextInfo
-            java.lang.String r2 = "ApplicationPolicy.addAppSignatureToWhiteList -> Adding Star in BlackList"
-            com.samsung.android.knox.license.EnterpriseLicenseManager.log(r5, r2)
-            java.lang.String r5 = "*"
-            boolean r5 = r3.addAppSignatureToBlackList(r5)
-            if (r5 != 0) goto L23
-            java.lang.String r5 = com.samsung.android.knox.application.ApplicationPolicy.TAG
-            java.lang.String r2 = "ApplicationPolicy.addAppSignatureToWhiteList: failed to add *"
-            android.util.Log.d(r5, r2)
-            r5 = r0
-            goto L24
-        L23:
-            r5 = r1
-        L24:
-            com.samsung.android.knox.application.IApplicationPolicy r2 = r3.getService()
-            if (r2 == 0) goto L40
-            com.samsung.android.knox.application.IApplicationPolicy r2 = r3.mService     // Catch: android.os.RemoteException -> L38
-            com.samsung.android.knox.ContextInfo r3 = r3.mContextInfo     // Catch: android.os.RemoteException -> L38
-            boolean r3 = r2.addAppSignatureToWhiteList(r3, r4)     // Catch: android.os.RemoteException -> L38
-            if (r3 == 0) goto L37
-            if (r5 == 0) goto L37
-            return r1
-        L37:
-            return r0
-        L38:
-            r3 = move-exception
-            java.lang.String r4 = com.samsung.android.knox.application.ApplicationPolicy.TAG
-            java.lang.String r5 = "Failed talking with application policy"
-            android.util.Log.w(r4, r5, r3)
-        L40:
-            return r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.knox.application.ApplicationPolicy.addAppSignatureToWhiteList(java.lang.String, boolean):boolean");
+    public boolean addAppSignatureToWhiteList(String str, boolean z) {
+        boolean z2;
+        EnterpriseLicenseManager.log(this.mContextInfo, "ApplicationPolicy.addAppSignatureToWhiteList(String, boolean)");
+        if (z) {
+            EnterpriseLicenseManager.log(this.mContextInfo, "ApplicationPolicy.addAppSignatureToWhiteList -> Adding Star in BlackList");
+            if (addAppSignatureToBlackList("*")) {
+                z2 = true;
+            } else {
+                Log.d(TAG, "ApplicationPolicy.addAppSignatureToWhiteList: failed to add *");
+                z2 = false;
+            }
+        }
+        if (getService() != null) {
+            try {
+                return this.mService.addAppSignatureToWhiteList(this.mContextInfo, str) && z2;
+            } catch (RemoteException e) {
+                Log.w(TAG, "Failed talking with application policy", e);
+            }
+        }
+        return false;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0032 A[EXC_TOP_SPLITTER, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x002b  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public boolean addPackagesToDisableUpdateWhiteList(java.util.List<java.lang.String> r4, boolean r5) {
-        /*
-            r3 = this;
-            com.samsung.android.knox.ContextInfo r0 = r3.mContextInfo
-            java.lang.String r1 = "ApplicationPolicy.addPackagesToDisableUpdateWhiteList(List<String>, boolean)"
-            com.samsung.android.knox.license.EnterpriseLicenseManager.log(r0, r1)
-            r0 = 0
-            r1 = 1
-            if (r5 == 0) goto L2b
-            com.samsung.android.knox.ContextInfo r5 = r3.mContextInfo
-            java.lang.String r2 = "ApplicationPolicy.addPackagesToPermissionWhiteList -> Adding Star in BlackList"
-            com.samsung.android.knox.license.EnterpriseLicenseManager.log(r5, r2)
-            java.util.ArrayList r5 = new java.util.ArrayList
-            r5.<init>()
-            java.lang.String r2 = "*"
-            r5.add(r2)
-            boolean r5 = r3.addPackagesToDisableUpdateBlackList(r5)
-            if (r5 != 0) goto L2b
-            java.lang.String r5 = com.samsung.android.knox.application.ApplicationPolicy.TAG
-            java.lang.String r2 = "ApplicationPolicy.addPackagesToDisableUpdateWhiteList: failed to add *"
-            android.util.Log.d(r5, r2)
-            r5 = r0
-            goto L2c
-        L2b:
-            r5 = r1
-        L2c:
-            com.samsung.android.knox.application.IApplicationPolicy r2 = r3.getService()
-            if (r2 == 0) goto L48
-            com.samsung.android.knox.application.IApplicationPolicy r2 = r3.mService     // Catch: android.os.RemoteException -> L40
-            com.samsung.android.knox.ContextInfo r3 = r3.mContextInfo     // Catch: android.os.RemoteException -> L40
-            boolean r3 = r2.addPackagesToDisableUpdateWhiteList(r3, r4)     // Catch: android.os.RemoteException -> L40
-            if (r3 == 0) goto L3f
-            if (r5 == 0) goto L3f
-            return r1
-        L3f:
-            return r0
-        L40:
-            r3 = move-exception
-            java.lang.String r4 = com.samsung.android.knox.application.ApplicationPolicy.TAG
-            java.lang.String r5 = "Failed talking with application policy"
-            android.util.Log.w(r4, r5, r3)
-        L48:
-            return r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.knox.application.ApplicationPolicy.addPackagesToDisableUpdateWhiteList(java.util.List, boolean):boolean");
+    public boolean addPackagesToDisableUpdateWhiteList(List<String> list, boolean z) {
+        boolean z2;
+        EnterpriseLicenseManager.log(this.mContextInfo, "ApplicationPolicy.addPackagesToDisableUpdateWhiteList(List<String>, boolean)");
+        if (z) {
+            EnterpriseLicenseManager.log(this.mContextInfo, "ApplicationPolicy.addPackagesToPermissionWhiteList -> Adding Star in BlackList");
+            ArrayList arrayList = new ArrayList();
+            arrayList.add("*");
+            if (addPackagesToDisableUpdateBlackList(arrayList)) {
+                z2 = true;
+            } else {
+                Log.d(TAG, "ApplicationPolicy.addPackagesToDisableUpdateWhiteList: failed to add *");
+                z2 = false;
+            }
+        }
+        if (getService() != null) {
+            try {
+                return this.mService.addPackagesToDisableUpdateWhiteList(this.mContextInfo, list) && z2;
+            } catch (RemoteException e) {
+                Log.w(TAG, "Failed talking with application policy", e);
+            }
+        }
+        return false;
     }
 
     public boolean setApplicationState(String str, boolean z, String str2, String str3) {
@@ -2958,224 +3054,120 @@ public class ApplicationPolicy {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0039 A[EXC_TOP_SPLITTER, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0032  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public boolean addPackagesToDisableClipboardWhiteList(java.util.List<java.lang.String> r4, boolean r5) {
-        /*
-            r3 = this;
-            com.samsung.android.knox.ContextInfo r0 = r3.mContextInfo
-            java.lang.String r1 = "addPackagesToDisableClipboardWhiteList"
-            com.samsung.android.knox.AccessController.throwIfParentInstance(r0, r1)
-            com.samsung.android.knox.ContextInfo r0 = r3.mContextInfo
-            java.lang.String r1 = "ApplicationPolicy.addPackagesToDisableClipboardWhiteList(List<String>, boolean)"
-            com.samsung.android.knox.license.EnterpriseLicenseManager.log(r0, r1)
-            r0 = 0
-            r1 = 1
-            if (r5 == 0) goto L32
-            com.samsung.android.knox.ContextInfo r5 = r3.mContextInfo
-            java.lang.String r2 = "ApplicationPolicy.addPackagesToDisableClipboardWhiteList -> Adding Star in BlackList"
-            com.samsung.android.knox.license.EnterpriseLicenseManager.log(r5, r2)
-            java.util.ArrayList r5 = new java.util.ArrayList
-            r5.<init>()
-            java.lang.String r2 = "*"
-            r5.add(r2)
-            boolean r5 = r3.addPackagesToDisableClipboardBlackList(r5)
-            if (r5 != 0) goto L32
-            java.lang.String r5 = com.samsung.android.knox.application.ApplicationPolicy.TAG
-            java.lang.String r2 = "ApplicationPolicy.addPackagesToDisableClipboardWhiteList: failed to add *"
-            android.util.Log.d(r5, r2)
-            r5 = r0
-            goto L33
-        L32:
-            r5 = r1
-        L33:
-            com.samsung.android.knox.application.IApplicationPolicy r2 = r3.getService()
-            if (r2 == 0) goto L4f
-            com.samsung.android.knox.application.IApplicationPolicy r2 = r3.mService     // Catch: android.os.RemoteException -> L47
-            com.samsung.android.knox.ContextInfo r3 = r3.mContextInfo     // Catch: android.os.RemoteException -> L47
-            boolean r3 = r2.addPackagesToDisableClipboardWhiteList(r3, r4)     // Catch: android.os.RemoteException -> L47
-            if (r3 == 0) goto L46
-            if (r5 == 0) goto L46
-            return r1
-        L46:
-            return r0
-        L47:
-            r3 = move-exception
-            java.lang.String r4 = com.samsung.android.knox.application.ApplicationPolicy.TAG
-            java.lang.String r5 = "Failed talking with application policy"
-            android.util.Log.w(r4, r5, r3)
-        L4f:
-            return r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.knox.application.ApplicationPolicy.addPackagesToDisableClipboardWhiteList(java.util.List, boolean):boolean");
+    public boolean addPackagesToDisableClipboardWhiteList(List<String> list, boolean z) {
+        boolean z2;
+        AccessController.throwIfParentInstance(this.mContextInfo, "addPackagesToDisableClipboardWhiteList");
+        EnterpriseLicenseManager.log(this.mContextInfo, "ApplicationPolicy.addPackagesToDisableClipboardWhiteList(List<String>, boolean)");
+        if (z) {
+            EnterpriseLicenseManager.log(this.mContextInfo, "ApplicationPolicy.addPackagesToDisableClipboardWhiteList -> Adding Star in BlackList");
+            ArrayList arrayList = new ArrayList();
+            arrayList.add("*");
+            if (addPackagesToDisableClipboardBlackList(arrayList)) {
+                z2 = true;
+            } else {
+                Log.d(TAG, "ApplicationPolicy.addPackagesToDisableClipboardWhiteList: failed to add *");
+                z2 = false;
+            }
+        }
+        if (getService() != null) {
+            try {
+                return this.mService.addPackagesToDisableClipboardWhiteList(this.mContextInfo, list) && z2;
+            } catch (RemoteException e) {
+                Log.w(TAG, "Failed talking with application policy", e);
+            }
+        }
+        return false;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0039 A[EXC_TOP_SPLITTER, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0032  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public boolean addPackagesToForceStopWhiteList(java.util.List<java.lang.String> r4, boolean r5) {
-        /*
-            r3 = this;
-            com.samsung.android.knox.ContextInfo r0 = r3.mContextInfo
-            java.lang.String r1 = "addPackagesToForceStopWhiteList"
-            com.samsung.android.knox.AccessController.throwIfParentInstance(r0, r1)
-            com.samsung.android.knox.ContextInfo r0 = r3.mContextInfo
-            java.lang.String r1 = "ApplicationPolicy.addPackagesToForceStopWhiteList(List<String>, boolean)"
-            com.samsung.android.knox.license.EnterpriseLicenseManager.log(r0, r1)
-            r0 = 0
-            r1 = 1
-            if (r5 == 0) goto L32
-            com.samsung.android.knox.ContextInfo r5 = r3.mContextInfo
-            java.lang.String r2 = "ApplicationPolicy.addPackagesToPermissionWhiteList -> Adding Star in BlackList"
-            com.samsung.android.knox.license.EnterpriseLicenseManager.log(r5, r2)
-            java.util.ArrayList r5 = new java.util.ArrayList
-            r5.<init>()
-            java.lang.String r2 = "*"
-            r5.add(r2)
-            boolean r5 = r3.addPackagesToForceStopBlackList(r5)
-            if (r5 != 0) goto L32
-            java.lang.String r5 = com.samsung.android.knox.application.ApplicationPolicy.TAG
-            java.lang.String r2 = "ApplicationPolicy.addPackagesToForceStopWhiteList: failed to add *"
-            android.util.Log.d(r5, r2)
-            r5 = r0
-            goto L33
-        L32:
-            r5 = r1
-        L33:
-            com.samsung.android.knox.application.IApplicationPolicy r2 = r3.getService()
-            if (r2 == 0) goto L4f
-            com.samsung.android.knox.application.IApplicationPolicy r2 = r3.mService     // Catch: android.os.RemoteException -> L47
-            com.samsung.android.knox.ContextInfo r3 = r3.mContextInfo     // Catch: android.os.RemoteException -> L47
-            boolean r3 = r2.addPackagesToForceStopWhiteList(r3, r4)     // Catch: android.os.RemoteException -> L47
-            if (r3 == 0) goto L46
-            if (r5 == 0) goto L46
-            return r1
-        L46:
-            return r0
-        L47:
-            r3 = move-exception
-            java.lang.String r4 = com.samsung.android.knox.application.ApplicationPolicy.TAG
-            java.lang.String r5 = "Failed talking with application policy"
-            android.util.Log.w(r4, r5, r3)
-        L4f:
-            return r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.knox.application.ApplicationPolicy.addPackagesToForceStopWhiteList(java.util.List, boolean):boolean");
+    public boolean addPackagesToForceStopWhiteList(List<String> list, boolean z) {
+        boolean z2;
+        AccessController.throwIfParentInstance(this.mContextInfo, "addPackagesToForceStopWhiteList");
+        EnterpriseLicenseManager.log(this.mContextInfo, "ApplicationPolicy.addPackagesToForceStopWhiteList(List<String>, boolean)");
+        if (z) {
+            EnterpriseLicenseManager.log(this.mContextInfo, "ApplicationPolicy.addPackagesToPermissionWhiteList -> Adding Star in BlackList");
+            ArrayList arrayList = new ArrayList();
+            arrayList.add("*");
+            if (addPackagesToForceStopBlackList(arrayList)) {
+                z2 = true;
+            } else {
+                Log.d(TAG, "ApplicationPolicy.addPackagesToForceStopWhiteList: failed to add *");
+                z2 = false;
+            }
+        }
+        if (getService() != null) {
+            try {
+                return this.mService.addPackagesToForceStopWhiteList(this.mContextInfo, list) && z2;
+            } catch (RemoteException e) {
+                Log.w(TAG, "Failed talking with application policy", e);
+            }
+        }
+        return false;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0039 A[EXC_TOP_SPLITTER, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0032  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public boolean addPackagesToNotificationWhiteList(java.util.List<java.lang.String> r4, boolean r5) {
-        /*
-            r3 = this;
-            com.samsung.android.knox.ContextInfo r0 = r3.mContextInfo
-            java.lang.String r1 = "addPackagesToNotificationWhiteList"
-            com.samsung.android.knox.AccessController.throwIfParentInstance(r0, r1)
-            com.samsung.android.knox.ContextInfo r0 = r3.mContextInfo
-            java.lang.String r1 = "ApplicationPolicy.addPackagesToNotificationWhiteList(List<String>, boolean)"
-            com.samsung.android.knox.license.EnterpriseLicenseManager.log(r0, r1)
-            r0 = 0
-            r1 = 1
-            if (r5 == 0) goto L32
-            com.samsung.android.knox.ContextInfo r5 = r3.mContextInfo
-            java.lang.String r2 = "ApplicationPolicy.addPackagesToNotificationWhiteList -> Adding Star in BlackList"
-            com.samsung.android.knox.license.EnterpriseLicenseManager.log(r5, r2)
-            java.util.ArrayList r5 = new java.util.ArrayList
-            r5.<init>()
-            java.lang.String r2 = "*"
-            r5.add(r2)
-            boolean r5 = r3.addPackagesToNotificationBlackList(r5)
-            if (r5 != 0) goto L32
-            java.lang.String r5 = com.samsung.android.knox.application.ApplicationPolicy.TAG
-            java.lang.String r2 = "ApplicationPolicy.addPackagesToNotificationWhiteList: failed to add *"
-            android.util.Log.d(r5, r2)
-            r5 = r0
-            goto L33
-        L32:
-            r5 = r1
-        L33:
-            com.samsung.android.knox.application.IApplicationPolicy r2 = r3.getService()
-            if (r2 == 0) goto L4f
-            com.samsung.android.knox.application.IApplicationPolicy r2 = r3.mService     // Catch: android.os.RemoteException -> L47
-            com.samsung.android.knox.ContextInfo r3 = r3.mContextInfo     // Catch: android.os.RemoteException -> L47
-            boolean r3 = r2.addAppNotificationWhiteList(r3, r4)     // Catch: android.os.RemoteException -> L47
-            if (r3 == 0) goto L46
-            if (r5 == 0) goto L46
-            return r1
-        L46:
-            return r0
-        L47:
-            r3 = move-exception
-            java.lang.String r4 = com.samsung.android.knox.application.ApplicationPolicy.TAG
-            java.lang.String r5 = "Failed talking with application policy"
-            android.util.Log.w(r4, r5, r3)
-        L4f:
-            return r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.knox.application.ApplicationPolicy.addPackagesToNotificationWhiteList(java.util.List, boolean):boolean");
+    public boolean addPackagesToNotificationWhiteList(List<String> list, boolean z) {
+        boolean z2;
+        AccessController.throwIfParentInstance(this.mContextInfo, "addPackagesToNotificationWhiteList");
+        EnterpriseLicenseManager.log(this.mContextInfo, "ApplicationPolicy.addPackagesToNotificationWhiteList(List<String>, boolean)");
+        if (z) {
+            EnterpriseLicenseManager.log(this.mContextInfo, "ApplicationPolicy.addPackagesToNotificationWhiteList -> Adding Star in BlackList");
+            ArrayList arrayList = new ArrayList();
+            arrayList.add("*");
+            if (addPackagesToNotificationBlackList(arrayList)) {
+                z2 = true;
+            } else {
+                Log.d(TAG, "ApplicationPolicy.addPackagesToNotificationWhiteList: failed to add *");
+                z2 = false;
+            }
+        }
+        if (getService() != null) {
+            try {
+                return this.mService.addAppNotificationWhiteList(this.mContextInfo, list) && z2;
+            } catch (RemoteException e) {
+                Log.w(TAG, "Failed talking with application policy", e);
+            }
+        }
+        return false;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:10:0x0039 A[EXC_TOP_SPLITTER, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0032  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public boolean addPackagesToWidgetWhiteList(java.util.List<java.lang.String> r4, boolean r5) {
-        /*
-            r3 = this;
-            com.samsung.android.knox.ContextInfo r0 = r3.mContextInfo
-            java.lang.String r1 = "addPackagesToWidgetWhiteList"
-            com.samsung.android.knox.AccessController.throwIfParentInstance(r0, r1)
-            com.samsung.android.knox.ContextInfo r0 = r3.mContextInfo
-            java.lang.String r1 = "ApplicationPolicy.addPackagesToWidgetWhiteList(List<String>, boolean)"
-            com.samsung.android.knox.license.EnterpriseLicenseManager.log(r0, r1)
-            r0 = 0
-            r1 = 1
-            if (r5 == 0) goto L32
-            com.samsung.android.knox.ContextInfo r5 = r3.mContextInfo
-            java.lang.String r2 = "ApplicationPolicy.addPackagesToWidgetWhiteList -> Adding Star in BlackList"
-            com.samsung.android.knox.license.EnterpriseLicenseManager.log(r5, r2)
-            java.util.ArrayList r5 = new java.util.ArrayList
-            r5.<init>()
-            java.lang.String r2 = "*"
-            r5.add(r2)
-            boolean r5 = r3.addPackagesToWidgetBlackList(r5)
-            if (r5 != 0) goto L32
-            java.lang.String r5 = com.samsung.android.knox.application.ApplicationPolicy.TAG
-            java.lang.String r2 = "ApplicationPolicy.addPackagesToWidgetWhiteList: failed to add *"
-            android.util.Log.d(r5, r2)
-            r5 = r0
-            goto L33
-        L32:
-            r5 = r1
-        L33:
-            com.samsung.android.knox.application.IApplicationPolicy r2 = r3.getService()
-            if (r2 == 0) goto L4f
-            com.samsung.android.knox.application.IApplicationPolicy r2 = r3.mService     // Catch: android.os.RemoteException -> L47
-            com.samsung.android.knox.ContextInfo r3 = r3.mContextInfo     // Catch: android.os.RemoteException -> L47
-            boolean r3 = r2.addPackagesToWidgetWhiteList(r3, r4)     // Catch: android.os.RemoteException -> L47
-            if (r3 == 0) goto L46
-            if (r5 == 0) goto L46
-            return r1
-        L46:
-            return r0
-        L47:
-            r3 = move-exception
-            java.lang.String r4 = com.samsung.android.knox.application.ApplicationPolicy.TAG
-            java.lang.String r5 = "Failed talking with application policy"
-            android.util.Log.w(r4, r5, r3)
-        L4f:
-            return r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.knox.application.ApplicationPolicy.addPackagesToWidgetWhiteList(java.util.List, boolean):boolean");
+    public boolean addPackagesToWidgetWhiteList(List<String> list, boolean z) {
+        boolean z2;
+        AccessController.throwIfParentInstance(this.mContextInfo, "addPackagesToWidgetWhiteList");
+        EnterpriseLicenseManager.log(this.mContextInfo, "ApplicationPolicy.addPackagesToWidgetWhiteList(List<String>, boolean)");
+        if (z) {
+            EnterpriseLicenseManager.log(this.mContextInfo, "ApplicationPolicy.addPackagesToWidgetWhiteList -> Adding Star in BlackList");
+            ArrayList arrayList = new ArrayList();
+            arrayList.add("*");
+            if (addPackagesToWidgetBlackList(arrayList)) {
+                z2 = true;
+            } else {
+                Log.d(TAG, "ApplicationPolicy.addPackagesToWidgetWhiteList: failed to add *");
+                z2 = false;
+            }
+        }
+        if (getService() != null) {
+            try {
+                return this.mService.addPackagesToWidgetWhiteList(this.mContextInfo, list) && z2;
+            } catch (RemoteException e) {
+                Log.w(TAG, "Failed talking with application policy", e);
+            }
+        }
+        return false;
     }
 
     public boolean installApplicationWithoutPermissions(String str, boolean z, boolean z2) {

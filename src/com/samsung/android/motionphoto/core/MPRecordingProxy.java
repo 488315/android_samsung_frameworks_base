@@ -37,8 +37,11 @@ public class MPRecordingProxy {
     private native int native_setup(Object obj, int i, String str);
 
     static {
-        System.loadLibrary(Def.MP_LEGACY_NATIVE_LIB);
-        native_init();
+        String property = System.getProperty(Def.JUNIT_TEST_EXECUTION_MODE);
+        if (property == null || !Boolean.parseBoolean(property)) {
+            System.loadLibrary(Def.MP_LEGACY_NATIVE_LIB);
+            native_init();
+        }
         TAG = "MPRecordingProxy";
     }
 

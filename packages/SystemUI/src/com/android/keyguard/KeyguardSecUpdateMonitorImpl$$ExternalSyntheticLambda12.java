@@ -6,7 +6,6 @@ import com.samsung.android.bio.face.SemBioFaceManager;
 import com.sec.ims.volte2.data.VolteConstants;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final /* synthetic */ class KeyguardSecUpdateMonitorImpl$$ExternalSyntheticLambda12 implements Consumer {
     public final /* synthetic */ int $r8$classId;
@@ -19,7 +18,7 @@ public final /* synthetic */ class KeyguardSecUpdateMonitorImpl$$ExternalSynthet
 
     @Override // java.util.function.Consumer
     public final void accept(Object obj) {
-        Message message;
+        Message messageObtainMessage;
         SecFaceMsg secFaceMsg;
         int i = this.$r8$classId;
         KeyguardSecUpdateMonitorImpl keyguardSecUpdateMonitorImpl = this.f$0;
@@ -27,27 +26,27 @@ public final /* synthetic */ class KeyguardSecUpdateMonitorImpl$$ExternalSynthet
             case 0:
                 SecFpMsg secFpMsg = (SecFpMsg) obj;
                 keyguardSecUpdateMonitorImpl.mFpMessages.add(secFpMsg);
-                Message obtainMessage = keyguardSecUpdateMonitorImpl.mHandler.obtainMessage(VolteConstants.ErrorCode.CALL_SWITCH_REJECTED, secFpMsg);
-                obtainMessage.setAsynchronous(true);
+                Message messageObtainMessage2 = keyguardSecUpdateMonitorImpl.mHandler.obtainMessage(VolteConstants.ErrorCode.CALL_SWITCH_REJECTED, secFpMsg);
+                messageObtainMessage2.setAsynchronous(true);
                 if (secFpMsg.type == 2 && (secFaceMsg = (SecFaceMsg) keyguardSecUpdateMonitorImpl.mFaceMessages.peek()) != null && secFaceMsg.type == 2) {
                     keyguardSecUpdateMonitorImpl.mHandler.removeMessages(VolteConstants.ErrorCode.CALL_HOLD_FAILED, secFaceMsg);
-                    message = keyguardSecUpdateMonitorImpl.mHandler.obtainMessage(VolteConstants.ErrorCode.CALL_HOLD_FAILED, secFaceMsg);
-                    message.setAsynchronous(true);
+                    messageObtainMessage = keyguardSecUpdateMonitorImpl.mHandler.obtainMessage(VolteConstants.ErrorCode.CALL_HOLD_FAILED, secFaceMsg);
+                    messageObtainMessage.setAsynchronous(true);
                 } else {
-                    message = null;
+                    messageObtainMessage = null;
                 }
-                keyguardSecUpdateMonitorImpl.mHandler.sendMessageAtFrontOfQueue(obtainMessage);
-                if (message != null) {
-                    keyguardSecUpdateMonitorImpl.mHandler.sendMessageAtFrontOfQueue(message);
+                keyguardSecUpdateMonitorImpl.mHandler.sendMessageAtFrontOfQueue(messageObtainMessage2);
+                if (messageObtainMessage != null) {
+                    keyguardSecUpdateMonitorImpl.mHandler.sendMessageAtFrontOfQueue(messageObtainMessage);
                     break;
                 }
                 break;
             case 1:
                 SecFaceMsg secFaceMsg2 = (SecFaceMsg) obj;
                 keyguardSecUpdateMonitorImpl.mFaceMessages.add(secFaceMsg2);
-                Message obtainMessage2 = keyguardSecUpdateMonitorImpl.mHandler.obtainMessage(VolteConstants.ErrorCode.CALL_HOLD_FAILED, secFaceMsg2);
-                obtainMessage2.setAsynchronous(true);
-                keyguardSecUpdateMonitorImpl.mHandler.sendMessageAtFrontOfQueue(obtainMessage2);
+                Message messageObtainMessage3 = keyguardSecUpdateMonitorImpl.mHandler.obtainMessage(VolteConstants.ErrorCode.CALL_HOLD_FAILED, secFaceMsg2);
+                messageObtainMessage3.setAsynchronous(true);
+                keyguardSecUpdateMonitorImpl.mHandler.sendMessageAtFrontOfQueue(messageObtainMessage3);
                 break;
             case 2:
                 ((KeyguardUpdateMonitorCallback) obj).onLockDisabledChanged(keyguardSecUpdateMonitorImpl.mLockscreenDisabled);

@@ -39,13 +39,13 @@ public final class SehCall {
 
     public static final ArrayList<SehCall> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<SehCall> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 112, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 112, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             SehCall sehCall = new SehCall();
-            sehCall.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 112);
+            sehCall.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 112);
             arrayList.add(sehCall);
         }
         return arrayList;
@@ -56,11 +56,11 @@ public final class SehCall {
         this.audioQuality = hwBlob.getInt32(88 + j);
         long j2 = j + 96;
         int int32 = hwBlob.getInt32(j + 104);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 24, hwBlob.handle(), j2, true);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 24, hwBlob.handle(), j2, true);
         this.callDetails.clear();
         for (int i = 0; i < int32; i++) {
             SehCallDetails sehCallDetails = new SehCallDetails();
-            sehCallDetails.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 24);
+            sehCallDetails.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 24);
             this.callDetails.add(sehCallDetails);
         }
     }

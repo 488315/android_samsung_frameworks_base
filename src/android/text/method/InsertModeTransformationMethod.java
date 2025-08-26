@@ -220,13 +220,13 @@ public class InsertModeTransformationMethod implements TransformationMethod, Tex
 
         @Override // android.text.Spanned
         public <T> T[] getSpans(final int i, final int i2, final Class<T> cls) {
-            Object[] objArr;
+            Object[] objArrFilter;
             if (i2 < i) {
                 return (T[]) ArrayUtils.emptyArray(cls);
             }
-            Object[] objArr2 = null;
+            Object[] spans = null;
             if (this.mSpannedOriginal != null) {
-                objArr = ArrayUtils.filter(this.mSpannedOriginal.getSpans(transformedToOriginal(i, 1), transformedToOriginal(i2, 1), cls), new IntFunction() { // from class: android.text.method.InsertModeTransformationMethod$TransformedText$$ExternalSyntheticLambda0
+                objArrFilter = ArrayUtils.filter(this.mSpannedOriginal.getSpans(transformedToOriginal(i, 1), transformedToOriginal(i2, 1), cls), new IntFunction() { // from class: android.text.method.InsertModeTransformationMethod$TransformedText$$ExternalSyntheticLambda0
                     @Override // java.util.function.IntFunction
                     public final Object apply(int i3) {
                         return InsertModeTransformationMethod.TransformedText.lambda$getSpans$0(cls, i3);
@@ -234,18 +234,16 @@ public class InsertModeTransformationMethod implements TransformationMethod, Tex
                 }, new Predicate() { // from class: android.text.method.InsertModeTransformationMethod$TransformedText$$ExternalSyntheticLambda1
                     @Override // java.util.function.Predicate
                     public final boolean test(Object obj) {
-                        boolean lambda$getSpans$1;
-                        lambda$getSpans$1 = InsertModeTransformationMethod.TransformedText.this.lambda$getSpans$1(i, i2, obj);
-                        return lambda$getSpans$1;
+                        return this.f$0.lambda$getSpans$1(i, i2, obj);
                     }
                 });
             } else {
-                objArr = null;
+                objArrFilter = null;
             }
             if (this.mSpannedPlaceholder != null && InsertModeTransformationMethod.intersect(i, i2, InsertModeTransformationMethod.this.mEnd, InsertModeTransformationMethod.this.mEnd + this.mPlaceholder.length())) {
-                objArr2 = this.mSpannedPlaceholder.getSpans(Math.max(i - InsertModeTransformationMethod.this.mEnd, 0), Math.min(i2 - InsertModeTransformationMethod.this.mEnd, this.mPlaceholder.length()), cls);
+                spans = this.mSpannedPlaceholder.getSpans(Math.max(i - InsertModeTransformationMethod.this.mEnd, 0), Math.min(i2 - InsertModeTransformationMethod.this.mEnd, this.mPlaceholder.length()), cls);
             }
-            return (T[]) ArrayUtils.concat(cls, objArr, objArr2);
+            return (T[]) ArrayUtils.concat(cls, objArrFilter, spans);
         }
 
         static /* synthetic */ Object[] lambda$getSpans$0(Class cls, int i) {

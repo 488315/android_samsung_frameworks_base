@@ -10,7 +10,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class NightDisplayRepository$nightDisplayState$1$4 extends SuspendLambda implements Function2 {
     final /* synthetic */ UserHandle $user;
@@ -47,9 +46,9 @@ final class NightDisplayRepository$nightDisplayState$1$4 extends SuspendLambda i
             NightDisplayRepository nightDisplayRepository = this.this$0;
             UserHandle userHandle = this.$user;
             int i2 = NightDisplayRepository.$r8$clinit;
-            NightDisplayState initialState = nightDisplayRepository.initialState(userHandle);
+            NightDisplayState nightDisplayStateInitialState = nightDisplayRepository.initialState(userHandle);
             this.label = 1;
-            if (flowCollector.emit(initialState, this) == coroutineSingletons) {
+            if (flowCollector.emit(nightDisplayStateInitialState, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

@@ -8,7 +8,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function1;
 import kotlinx.coroutines.BuildersKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class MobileConnectionsRepositoryKairosImpl$isDeviceEmergencyCallCapable$1$1$1 extends SuspendLambda implements Function1 {
     int label;
@@ -27,12 +26,12 @@ final class MobileConnectionsRepositoryKairosImpl$isDeviceEmergencyCallCapable$1
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
         return ((MobileConnectionsRepositoryKairosImpl$isDeviceEmergencyCallCapable$1$1$1) create((Continuation) obj)).invokeSuspend(Unit.INSTANCE);
     }
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
-    public final Object invokeSuspend(Object obj) {
+    public final Object invokeSuspend(Object obj) throws Throwable {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i != 0) {
@@ -47,7 +46,7 @@ final class MobileConnectionsRepositoryKairosImpl$isDeviceEmergencyCallCapable$1
         this.label = 1;
         int i2 = MobileConnectionsRepositoryKairosImpl.$r8$clinit;
         mobileConnectionsRepositoryKairosImpl.getClass();
-        Object withContext = BuildersKt.withContext(mobileConnectionsRepositoryKairosImpl.bgDispatcher, new MobileConnectionsRepositoryKairosImpl$doAnyModemsSupportEmergencyCalls$2(mobileConnectionsRepositoryKairosImpl, null), this);
-        return withContext == coroutineSingletons ? coroutineSingletons : withContext;
+        Object objWithContext = BuildersKt.withContext(mobileConnectionsRepositoryKairosImpl.bgDispatcher, new MobileConnectionsRepositoryKairosImpl$doAnyModemsSupportEmergencyCalls$2(mobileConnectionsRepositoryKairosImpl, null), this);
+        return objWithContext == coroutineSingletons ? coroutineSingletons : objWithContext;
     }
 }

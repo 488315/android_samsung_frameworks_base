@@ -49,7 +49,7 @@ public final class RuntimeAppOpAccessMessage implements Parcelable {
         this.mUid = i;
         AnnotationValidations.validate((Class<IntRange>) IntRange.class, (IntRange) null, i, "from", 0L);
         this.mOpCode = i2;
-        AnnotationValidations.validate((Class<IntRange>) IntRange.class, (IntRange) null, i2, "from", 0L, "to", 162L);
+        AnnotationValidations.validate((Class<IntRange>) IntRange.class, (IntRange) null, i2, "from", 0L, "to", 164L);
         this.mPackageName = str;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) str);
         this.mAttributionTag = str2;
@@ -94,23 +94,23 @@ public final class RuntimeAppOpAccessMessage implements Parcelable {
     }
 
     RuntimeAppOpAccessMessage(Parcel parcel) {
-        byte readByte = parcel.readByte();
-        int readInt = parcel.readInt();
-        int readInt2 = parcel.readInt();
-        String readString = parcel.readString();
-        String readString2 = (readByte & 8) == 0 ? null : parcel.readString();
-        String readString3 = parcel.readString();
-        int readInt3 = parcel.readInt();
-        this.mUid = readInt;
-        AnnotationValidations.validate((Class<IntRange>) IntRange.class, (IntRange) null, readInt, "from", 0L);
-        this.mOpCode = readInt2;
-        AnnotationValidations.validate((Class<IntRange>) IntRange.class, (IntRange) null, readInt2, "from", 0L, "to", 162L);
-        this.mPackageName = readString;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString);
-        this.mAttributionTag = readString2;
-        this.mMessage = readString3;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString3);
-        this.mSamplingStrategy = readInt3;
-        AnnotationValidations.validate((Class<? extends Annotation>) AppOpsManager.SamplingStrategy.class, (Annotation) null, readInt3);
+        byte b = parcel.readByte();
+        int i = parcel.readInt();
+        int i2 = parcel.readInt();
+        String string = parcel.readString();
+        String string2 = (b & 8) == 0 ? null : parcel.readString();
+        String string3 = parcel.readString();
+        int i3 = parcel.readInt();
+        this.mUid = i;
+        AnnotationValidations.validate((Class<IntRange>) IntRange.class, (IntRange) null, i, "from", 0L);
+        this.mOpCode = i2;
+        AnnotationValidations.validate((Class<IntRange>) IntRange.class, (IntRange) null, i2, "from", 0L, "to", 164L);
+        this.mPackageName = string;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string);
+        this.mAttributionTag = string2;
+        this.mMessage = string3;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string3);
+        this.mSamplingStrategy = i3;
+        AnnotationValidations.validate((Class<? extends Annotation>) AppOpsManager.SamplingStrategy.class, (Annotation) null, i3);
     }
 }

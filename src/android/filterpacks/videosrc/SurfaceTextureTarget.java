@@ -95,9 +95,9 @@ public class SurfaceTextureTarget extends Filter {
         if (this.mLogVerbose) {
             Log.v(TAG, "Prepare. Thread: " + Thread.currentThread());
         }
-        ShaderProgram createIdentity = ShaderProgram.createIdentity(filterContext);
-        this.mProgram = createIdentity;
-        createIdentity.setSourceRect(0.0f, 1.0f, 1.0f, -1.0f);
+        ShaderProgram shaderProgramCreateIdentity = ShaderProgram.createIdentity(filterContext);
+        this.mProgram = shaderProgramCreateIdentity;
+        shaderProgramCreateIdentity.setSourceRect(0.0f, 1.0f, 1.0f, -1.0f);
         this.mProgram.setClearColor(0.0f, 0.0f, 0.0f);
         updateRenderMode();
         MutableFrameFormat mutableFrameFormat = new MutableFrameFormat(2, 3);
@@ -112,9 +112,9 @@ public class SurfaceTextureTarget extends Filter {
             Log.e(TAG, "SurfaceTexture is null!!");
             throw new RuntimeException("Could not register SurfaceTexture: " + this.mSurfaceTexture);
         }
-        int registerSurfaceTexture = filterContext.getGLEnvironment().registerSurfaceTexture(this.mSurfaceTexture, this.mScreenWidth, this.mScreenHeight);
-        this.mSurfaceId = registerSurfaceTexture;
-        if (registerSurfaceTexture <= 0) {
+        int iRegisterSurfaceTexture = filterContext.getGLEnvironment().registerSurfaceTexture(this.mSurfaceTexture, this.mScreenWidth, this.mScreenHeight);
+        this.mSurfaceId = iRegisterSurfaceTexture;
+        if (iRegisterSurfaceTexture <= 0) {
             throw new RuntimeException("Could not register SurfaceTexture: " + this.mSurfaceTexture);
         }
     }
@@ -145,13 +145,13 @@ public class SurfaceTextureTarget extends Filter {
     @Override // android.filterfw.core.Filter
     public synchronized void process(FilterContext filterContext) {
         boolean z;
-        Frame frame;
+        Frame frameDuplicateFrameToTarget;
         if (this.mSurfaceId <= 0) {
             return;
         }
         GLEnvironment gLEnvironment = filterContext.getGLEnvironment();
-        Frame pullInput = pullInput("frame");
-        float width = pullInput.getFormat().getWidth() / pullInput.getFormat().getHeight();
+        Frame framePullInput = pullInput("frame");
+        float width = framePullInput.getFormat().getWidth() / framePullInput.getFormat().getHeight();
         if (width != this.mAspectRatio) {
             if (this.mLogVerbose) {
                 Log.v(TAG, "Process. New aspect ratio: " + width + ", previously: " + this.mAspectRatio + ". Thread: " + Thread.currentThread());
@@ -159,19 +159,19 @@ public class SurfaceTextureTarget extends Filter {
             this.mAspectRatio = width;
             updateTargetRect();
         }
-        if (pullInput.getFormat().getTarget() != 3) {
-            frame = filterContext.getFrameManager().duplicateFrameToTarget(pullInput, 3);
+        if (framePullInput.getFormat().getTarget() != 3) {
+            frameDuplicateFrameToTarget = filterContext.getFrameManager().duplicateFrameToTarget(framePullInput, 3);
             z = true;
         } else {
             z = false;
-            frame = pullInput;
+            frameDuplicateFrameToTarget = framePullInput;
         }
         gLEnvironment.activateSurfaceWithId(this.mSurfaceId);
-        this.mProgram.process(frame, this.mScreen);
-        gLEnvironment.setSurfaceTimestamp(pullInput.getTimestamp());
+        this.mProgram.process(frameDuplicateFrameToTarget, this.mScreen);
+        gLEnvironment.setSurfaceTimestamp(framePullInput.getTimestamp());
         gLEnvironment.swapBuffers();
         if (z) {
-            frame.release();
+            frameDuplicateFrameToTarget.release();
         }
     }
 

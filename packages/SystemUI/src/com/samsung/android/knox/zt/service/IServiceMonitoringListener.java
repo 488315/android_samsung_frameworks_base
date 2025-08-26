@@ -8,12 +8,10 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.RemoteException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public interface IServiceMonitoringListener extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.knox.zt.service.IServiceMonitoringListener";
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class _Parcel {
         public static <T> T readTypedObject(Parcel parcel, Parcelable.Creator<T> creator) {
             if (parcel.readInt() != 0) {
@@ -44,7 +42,6 @@ public interface IServiceMonitoringListener extends IInterface {
 
     void onUnauthorizedAccessDetected(int i, int i2, int i3, long j, int i4, int i5, String str, String str2) throws RemoteException;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements IServiceMonitoringListener {
         public static final int TRANSACTION_checkUrlReputation = 1;
         public static final int TRANSACTION_onEvent = 5;
@@ -53,7 +50,6 @@ public interface IServiceMonitoringListener extends IInterface {
         public static final int TRANSACTION_onSignal = 6;
         public static final int TRANSACTION_onUnauthorizedAccessDetected = 2;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         class Proxy implements IServiceMonitoringListener {
             public IBinder mRemote;
 
@@ -68,17 +64,17 @@ public interface IServiceMonitoringListener extends IInterface {
 
             @Override // com.samsung.android.knox.zt.service.IServiceMonitoringListener
             public int checkUrlReputation(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IServiceMonitoringListener.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IServiceMonitoringListener.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -88,87 +84,87 @@ public interface IServiceMonitoringListener extends IInterface {
 
             @Override // com.samsung.android.knox.zt.service.IServiceMonitoringListener
             public void onEvent(int i, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IServiceMonitoringListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    _Parcel.writeTypedObject(obtain, bundle, 0);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IServiceMonitoringListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    _Parcel.writeTypedObject(parcelObtain, bundle, 0);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.service.IServiceMonitoringListener
             public void onEventGeneralized(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IServiceMonitoringListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IServiceMonitoringListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.service.IServiceMonitoringListener
             public void onEventSimplified(int i, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IServiceMonitoringListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IServiceMonitoringListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.service.IServiceMonitoringListener
             public int onSignal(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IServiceMonitoringListener.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IServiceMonitoringListener.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.knox.zt.service.IServiceMonitoringListener
             public void onUnauthorizedAccessDetected(int i, int i2, int i3, long j, int i4, int i5, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain();
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain();
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IServiceMonitoringListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i4);
-                    obtain.writeInt(i5);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IServiceMonitoringListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i4);
+                    parcelObtain.writeInt(i5);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -181,8 +177,8 @@ public interface IServiceMonitoringListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IServiceMonitoringListener.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IServiceMonitoringListener)) ? new Proxy(iBinder) : (IServiceMonitoringListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IServiceMonitoringListener.DESCRIPTOR);
+            return (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IServiceMonitoringListener)) ? new Proxy(iBinder) : (IServiceMonitoringListener) iInterfaceQueryLocalInterface;
         }
 
         @Override // android.os.Binder
@@ -196,9 +192,9 @@ public interface IServiceMonitoringListener extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int checkUrlReputation = checkUrlReputation(parcel.readString());
+                    int iCheckUrlReputation = checkUrlReputation(parcel.readString());
                     parcel2.writeNoException();
-                    parcel2.writeInt(checkUrlReputation);
+                    parcel2.writeInt(iCheckUrlReputation);
                     return true;
                 case 2:
                     onUnauthorizedAccessDetected(parcel.readInt(), parcel.readInt(), parcel.readInt(), parcel.readLong(), parcel.readInt(), parcel.readInt(), parcel.readString(), parcel.readString());
@@ -217,9 +213,9 @@ public interface IServiceMonitoringListener extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 6:
-                    int onSignal = onSignal(parcel.readString());
+                    int iOnSignal = onSignal(parcel.readString());
                     parcel2.writeNoException();
-                    parcel2.writeInt(onSignal);
+                    parcel2.writeInt(iOnSignal);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -232,7 +228,6 @@ public interface IServiceMonitoringListener extends IInterface {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default implements IServiceMonitoringListener {
         @Override // android.os.IInterface
         public IBinder asBinder() {

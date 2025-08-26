@@ -26,13 +26,13 @@ public class Base64 {
     }
 
     public static byte[] decodeBase64(byte[] bArr) {
-        byte[] discardNonBase64 = discardNonBase64(bArr);
-        if (discardNonBase64.length == 0) {
+        byte[] bArrDiscardNonBase64 = discardNonBase64(bArr);
+        if (bArrDiscardNonBase64.length == 0) {
             return new byte[0];
         }
-        int length = discardNonBase64.length / 4;
-        int length2 = discardNonBase64.length;
-        while (discardNonBase64[length2 - 1] == 61) {
+        int length = bArrDiscardNonBase64.length / 4;
+        int length2 = bArrDiscardNonBase64.length;
+        while (bArrDiscardNonBase64[length2 - 1] == 61) {
             length2--;
             if (length2 == 0) {
                 return new byte[0];
@@ -42,11 +42,11 @@ public class Base64 {
         int i = 0;
         for (int i2 = 0; i2 < length; i2++) {
             int i3 = i2 * 4;
-            byte b = discardNonBase64[i3 + 2];
-            byte b2 = discardNonBase64[i3 + 3];
+            byte b = bArrDiscardNonBase64[i3 + 2];
+            byte b2 = bArrDiscardNonBase64[i3 + 3];
             byte[] bArr3 = base64Alphabet;
-            byte b3 = bArr3[discardNonBase64[i3]];
-            byte b4 = bArr3[discardNonBase64[i3 + 1]];
+            byte b3 = bArr3[bArrDiscardNonBase64[i3]];
+            byte b4 = bArr3[bArrDiscardNonBase64[i3 + 1]];
             if (b != 61 && b2 != 61) {
                 byte b5 = bArr3[b];
                 byte b6 = bArr3[b2];

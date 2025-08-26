@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class AncSliceInteractor$special$$inlined$flatMapLatest$1 extends SuspendLambda implements Function3 {
     private /* synthetic */ Object L$0;
@@ -39,11 +38,11 @@ public final class AncSliceInteractor$special$$inlined$flatMapLatest$1 extends S
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             FlowCollector flowCollector = (FlowCollector) this.L$0;
-            int intValue = ((Number) this.L$1).intValue();
+            int iIntValue = ((Number) this.L$1).intValue();
             AncSliceInteractor ancSliceInteractor = this.this$0;
-            ChannelFlowTransformLatest transformLatest = FlowKt.transformLatest(ancSliceInteractor.audioOutputInteractor.currentAudioDevice, new AncSliceInteractor$ancSlice$$inlined$flatMapLatest$1(null, ancSliceInteractor, intValue, true, true));
+            ChannelFlowTransformLatest channelFlowTransformLatestTransformLatest = FlowKt.transformLatest(ancSliceInteractor.audioOutputInteractor.currentAudioDevice, new AncSliceInteractor$ancSlice$$inlined$flatMapLatest$1(null, ancSliceInteractor, iIntValue, true, true));
             this.label = 1;
-            if (FlowKt.emitAll(flowCollector, transformLatest, this) == coroutineSingletons) {
+            if (FlowKt.emitAll(flowCollector, channelFlowTransformLatestTransformLatest, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

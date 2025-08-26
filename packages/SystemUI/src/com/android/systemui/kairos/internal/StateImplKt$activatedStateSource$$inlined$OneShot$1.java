@@ -4,7 +4,6 @@ import com.android.systemui.kairos.internal.Schedulable;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class StateImplKt$activatedStateSource$$inlined$OneShot$1 implements Function2 {
     public final /* synthetic */ EventsImpl $calm$inlined;
@@ -19,10 +18,10 @@ public final class StateImplKt$activatedStateSource$$inlined$OneShot$1 implement
     public final Object invoke(Object obj, Object obj2) {
         EvalScope evalScope = (EvalScope) obj;
         StateSource stateSource = this.$store$inlined;
-        ActivationResult activate = this.$calm$inlined.activate(evalScope, new Schedulable.S(stateSource));
-        if (activate != null) {
-            stateSource.upstreamConnection = activate.connection;
-            if (activate.needsEval) {
+        ActivationResult activationResultActivate = this.$calm$inlined.activate(evalScope, new Schedulable.S(stateSource));
+        if (activationResultActivate != null) {
+            stateSource.upstreamConnection = activationResultActivate.connection;
+            if (activationResultActivate.needsEval) {
                 evalScope.schedule(stateSource);
             }
         }

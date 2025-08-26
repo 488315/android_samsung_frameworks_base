@@ -15,7 +15,6 @@ import java.lang.ref.WeakReference;
 import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class EdgeLightingBRThread extends Thread {
     public static final String[] PERMISSIONS = {"android.permission.READ_EXTERNAL_STORAGE"};
@@ -28,7 +27,6 @@ public class EdgeLightingBRThread extends Thread {
     public int mSecuritylevel = 0;
     public boolean mLoopEnable = false;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class InnerHandler extends Handler {
         public final WeakReference mThread;
 
@@ -73,9 +71,9 @@ public class EdgeLightingBRThread extends Thread {
             sendResponse(1, 4);
             return;
         }
-        StringBuilder m = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(stringExtra);
-        m.append(File.separator);
-        String sb = m.toString();
+        StringBuilder sbM = PopulateViewStructure_androidKt$$ExternalSyntheticOutline0.m(stringExtra);
+        sbM.append(File.separator);
+        String string = sbM.toString();
         if (this.mOption == 1) {
             if (intExtra != 0) {
                 sendResponse(1, 3);
@@ -84,9 +82,9 @@ public class EdgeLightingBRThread extends Thread {
             this.mLoopEnable = true;
             try {
                 Encryption.streamCrypt(this.mSessionKey);
-                File decrypt = Encryption.decrypt(this.mSecuritylevel, sb);
-                if (decrypt != null) {
-                    BRUtils.getInstance(this.mContext).restoreSettingValue(decrypt, this.mLoopEnable);
+                File fileDecrypt = Encryption.decrypt(this.mSecuritylevel, string);
+                if (fileDecrypt != null) {
+                    BRUtils.getInstance(this.mContext).restoreSettingValue(fileDecrypt, this.mLoopEnable);
                 }
                 new Handler(Looper.getMainLooper()).post(new Runnable() { // from class: com.android.systemui.edgelighting.backup.EdgeLightingBRThread.1
                     @Override // java.lang.Runnable

@@ -60,15 +60,15 @@ public class CertificatePolicyCache {
 
     /* JADX INFO: Access modifiers changed from: private */
     public synchronized void readVariables(String str) {
-        int myUserId = UserHandle.myUserId();
-        Log.d(TAG, "readVariables type: " + str + " userId: " + myUserId);
+        int iMyUserId = UserHandle.myUserId();
+        Log.d(TAG, "readVariables type: " + str + " userId: " + iMyUserId);
         if (str == null) {
-            this.mTrustedUntrustedEnabled = this.mCertificatePolicy.isCertificateTrustedUntrustedEnabledAsUser(myUserId);
-            this.mCertificateValidationEnabled = this.mCertificatePolicy.isCertificateValidationAtInstallEnabledAsUser(myUserId);
+            this.mTrustedUntrustedEnabled = this.mCertificatePolicy.isCertificateTrustedUntrustedEnabledAsUser(iMyUserId);
+            this.mCertificateValidationEnabled = this.mCertificatePolicy.isCertificateValidationAtInstallEnabledAsUser(iMyUserId);
         } else if (str.equals(TYPE_CERTIFICATE_TRUSTED_UNTRUSTED)) {
-            this.mTrustedUntrustedEnabled = this.mCertificatePolicy.isCertificateTrustedUntrustedEnabledAsUser(myUserId);
+            this.mTrustedUntrustedEnabled = this.mCertificatePolicy.isCertificateTrustedUntrustedEnabledAsUser(iMyUserId);
         } else if (str.equals(TYPE_CERTIFICATE_VALIDATION)) {
-            this.mCertificateValidationEnabled = this.mCertificatePolicy.isCertificateValidationAtInstallEnabledAsUser(myUserId);
+            this.mCertificateValidationEnabled = this.mCertificatePolicy.isCertificateValidationAtInstallEnabledAsUser(iMyUserId);
         }
     }
 

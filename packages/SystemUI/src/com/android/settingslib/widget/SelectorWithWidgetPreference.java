@@ -12,7 +12,6 @@ import androidx.preference.PreferenceViewHolder;
 import com.android.settingslib.widget.preference.selector.R$styleable;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SelectorWithWidgetPreference extends CheckBoxPreference {
     static final int DEFAULT_MAX_LINES = 2;
@@ -45,29 +44,29 @@ public class SelectorWithWidgetPreference extends CheckBoxPreference {
             this.mIconSpaceReserved = false;
             notifyChanged();
         }
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.SelectorWithWidgetPreference, i, 0);
-        this.mTitleMaxLines = obtainStyledAttributes.getInt(0, 2);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.SelectorWithWidgetPreference, i, 0);
+        this.mTitleMaxLines = typedArrayObtainStyledAttributes.getInt(0, 2);
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     @Override // androidx.preference.CheckBoxPreference, androidx.preference.Preference
     public void onBindViewHolder(PreferenceViewHolder preferenceViewHolder) {
         int i;
         super.onBindViewHolder(preferenceViewHolder);
-        View findViewById = preferenceViewHolder.findViewById(R.id.summary_container);
-        if (findViewById != null) {
-            findViewById.setVisibility(TextUtils.isEmpty(getSummary()) ? 8 : 0);
-            View findViewById2 = preferenceViewHolder.findViewById(R.id.appendix);
-            this.mAppendix = findViewById2;
-            if (findViewById2 != null && (i = this.mAppendixVisibility) != -1) {
-                findViewById2.setVisibility(i);
+        View viewFindViewById = preferenceViewHolder.findViewById(R.id.summary_container);
+        if (viewFindViewById != null) {
+            viewFindViewById.setVisibility(TextUtils.isEmpty(getSummary()) ? 8 : 0);
+            View viewFindViewById2 = preferenceViewHolder.findViewById(R.id.appendix);
+            this.mAppendix = viewFindViewById2;
+            if (viewFindViewById2 != null && (i = this.mAppendixVisibility) != -1) {
+                viewFindViewById2.setVisibility(i);
             }
         }
         this.mExtraWidget = (ImageView) preferenceViewHolder.findViewById(R.id.selector_extra_widget);
-        View findViewById3 = preferenceViewHolder.findViewById(R.id.selector_extra_widget_container);
-        this.mExtraWidgetContainer = findViewById3;
+        View viewFindViewById3 = preferenceViewHolder.findViewById(R.id.selector_extra_widget_container);
+        this.mExtraWidgetContainer = viewFindViewById3;
         ImageView imageView = this.mExtraWidget;
-        if (imageView != null && findViewById3 != null) {
+        if (imageView != null && viewFindViewById3 != null) {
             imageView.setOnClickListener(null);
             this.mExtraWidgetContainer.setVisibility(8);
         }

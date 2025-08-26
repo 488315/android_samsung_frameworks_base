@@ -4,11 +4,13 @@ import android.animation.TimeInterpolator;
 import android.app.INotificationManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
+import android.app.NotificationChannelGroup;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ShortcutInfo;
 import android.graphics.drawable.Drawable;
@@ -17,7 +19,9 @@ import android.os.Handler;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
+import android.text.TextUtils;
 import android.transition.ChangeBounds;
 import android.transition.Fade;
 import android.transition.Transition;
@@ -41,12 +45,14 @@ import com.android.systemui.people.widget.PeopleSpaceWidgetManager;
 import com.android.systemui.people.widget.PeopleSpaceWidgetPinnedReceiver;
 import com.android.systemui.people.widget.PeopleSpaceWidgetProvider;
 import com.android.systemui.shade.ShadeController;
+import com.android.systemui.statusbar.notification.NmSummarizationUiFlag;
+import com.android.systemui.statusbar.notification.NotificationChannelHelper;
 import com.android.systemui.statusbar.notification.collection.NotificationEntry;
 import com.android.systemui.statusbar.notification.row.NotificationGuts;
 import com.android.systemui.statusbar.notification.shared.NotificationBundleUi;
+import com.android.systemui.wmshell.BubblesManager;
 import java.util.Optional;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class NotificationConversationInfo extends LinearLayout implements NotificationGuts.GutsContent {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -86,7 +92,6 @@ public class NotificationConversationInfo extends LinearLayout implements Notifi
     boolean mSkipPost;
     public UserManager mUm;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class UpdateChannelRunnable implements Runnable {
         public final int mAction;
         public final String mAppPkg;
@@ -197,11 +202,11 @@ public class NotificationConversationInfo extends LinearLayout implements Notifi
                                         bundle2.putParcelable("appWidgetPreview", preview);
                                         Context context2 = peopleSpaceWidgetManager.mContext;
                                         int i6 = PeopleSpaceWidgetPinnedReceiver.$r8$clinit;
-                                        Intent addFlags = new Intent(context2, (Class<?>) PeopleSpaceWidgetPinnedReceiver.class).addFlags(268435456);
-                                        addFlags.putExtra("android.intent.extra.shortcut.ID", shortcutInfo.getId());
-                                        addFlags.putExtra("android.intent.extra.USER_ID", shortcutInfo.getUserId());
-                                        addFlags.putExtra("android.intent.extra.PACKAGE_NAME", shortcutInfo.getPackage());
-                                        ((AppWidgetManager) peopleSpaceWidgetManager.mAppWidgetManagerOptional.get()).requestPinAppWidget(new ComponentName(peopleSpaceWidgetManager.mContext, (Class<?>) PeopleSpaceWidgetProvider.class), bundle2, PendingIntent.getBroadcast(context2, 0, addFlags, 167772160));
+                                        Intent intentAddFlags = new Intent(context2, (Class<?>) PeopleSpaceWidgetPinnedReceiver.class).addFlags(268435456);
+                                        intentAddFlags.putExtra("android.intent.extra.shortcut.ID", shortcutInfo.getId());
+                                        intentAddFlags.putExtra("android.intent.extra.USER_ID", shortcutInfo.getUserId());
+                                        intentAddFlags.putExtra("android.intent.extra.PACKAGE_NAME", shortcutInfo.getPackage());
+                                        ((AppWidgetManager) peopleSpaceWidgetManager.mAppWidgetManagerOptional.get()).requestPinAppWidget(new ComponentName(peopleSpaceWidgetManager.mContext, (Class<?>) PeopleSpaceWidgetProvider.class), bundle2, PendingIntent.getBroadcast(context2, 0, intentAddFlags, 167772160));
                                     }
                                 }
                             }
@@ -256,11 +261,11 @@ public class NotificationConversationInfo extends LinearLayout implements Notifi
                                         bundle2.putParcelable("appWidgetPreview", preview);
                                         Context context2 = peopleSpaceWidgetManager.mContext;
                                         int i6 = PeopleSpaceWidgetPinnedReceiver.$r8$clinit;
-                                        Intent addFlags = new Intent(context2, (Class<?>) PeopleSpaceWidgetPinnedReceiver.class).addFlags(268435456);
-                                        addFlags.putExtra("android.intent.extra.shortcut.ID", shortcutInfo.getId());
-                                        addFlags.putExtra("android.intent.extra.USER_ID", shortcutInfo.getUserId());
-                                        addFlags.putExtra("android.intent.extra.PACKAGE_NAME", shortcutInfo.getPackage());
-                                        ((AppWidgetManager) peopleSpaceWidgetManager.mAppWidgetManagerOptional.get()).requestPinAppWidget(new ComponentName(peopleSpaceWidgetManager.mContext, (Class<?>) PeopleSpaceWidgetProvider.class), bundle2, PendingIntent.getBroadcast(context2, 0, addFlags, 167772160));
+                                        Intent intentAddFlags = new Intent(context2, (Class<?>) PeopleSpaceWidgetPinnedReceiver.class).addFlags(268435456);
+                                        intentAddFlags.putExtra("android.intent.extra.shortcut.ID", shortcutInfo.getId());
+                                        intentAddFlags.putExtra("android.intent.extra.USER_ID", shortcutInfo.getUserId());
+                                        intentAddFlags.putExtra("android.intent.extra.PACKAGE_NAME", shortcutInfo.getPackage());
+                                        ((AppWidgetManager) peopleSpaceWidgetManager.mAppWidgetManagerOptional.get()).requestPinAppWidget(new ComponentName(peopleSpaceWidgetManager.mContext, (Class<?>) PeopleSpaceWidgetProvider.class), bundle2, PendingIntent.getBroadcast(context2, 0, intentAddFlags, 167772160));
                                     }
                                 }
                             }
@@ -315,11 +320,11 @@ public class NotificationConversationInfo extends LinearLayout implements Notifi
                                         bundle2.putParcelable("appWidgetPreview", preview);
                                         Context context2 = peopleSpaceWidgetManager.mContext;
                                         int i6 = PeopleSpaceWidgetPinnedReceiver.$r8$clinit;
-                                        Intent addFlags = new Intent(context2, (Class<?>) PeopleSpaceWidgetPinnedReceiver.class).addFlags(268435456);
-                                        addFlags.putExtra("android.intent.extra.shortcut.ID", shortcutInfo.getId());
-                                        addFlags.putExtra("android.intent.extra.USER_ID", shortcutInfo.getUserId());
-                                        addFlags.putExtra("android.intent.extra.PACKAGE_NAME", shortcutInfo.getPackage());
-                                        ((AppWidgetManager) peopleSpaceWidgetManager.mAppWidgetManagerOptional.get()).requestPinAppWidget(new ComponentName(peopleSpaceWidgetManager.mContext, (Class<?>) PeopleSpaceWidgetProvider.class), bundle2, PendingIntent.getBroadcast(context2, 0, addFlags, 167772160));
+                                        Intent intentAddFlags = new Intent(context2, (Class<?>) PeopleSpaceWidgetPinnedReceiver.class).addFlags(268435456);
+                                        intentAddFlags.putExtra("android.intent.extra.shortcut.ID", shortcutInfo.getId());
+                                        intentAddFlags.putExtra("android.intent.extra.USER_ID", shortcutInfo.getUserId());
+                                        intentAddFlags.putExtra("android.intent.extra.PACKAGE_NAME", shortcutInfo.getPackage());
+                                        ((AppWidgetManager) peopleSpaceWidgetManager.mAppWidgetManagerOptional.get()).requestPinAppWidget(new ComponentName(peopleSpaceWidgetManager.mContext, (Class<?>) PeopleSpaceWidgetProvider.class), bundle2, PendingIntent.getBroadcast(context2, 0, intentAddFlags, 167772160));
                                     }
                                 }
                             }
@@ -374,11 +379,11 @@ public class NotificationConversationInfo extends LinearLayout implements Notifi
                                         bundle2.putParcelable("appWidgetPreview", preview);
                                         Context context2 = peopleSpaceWidgetManager.mContext;
                                         int i6 = PeopleSpaceWidgetPinnedReceiver.$r8$clinit;
-                                        Intent addFlags = new Intent(context2, (Class<?>) PeopleSpaceWidgetPinnedReceiver.class).addFlags(268435456);
-                                        addFlags.putExtra("android.intent.extra.shortcut.ID", shortcutInfo.getId());
-                                        addFlags.putExtra("android.intent.extra.USER_ID", shortcutInfo.getUserId());
-                                        addFlags.putExtra("android.intent.extra.PACKAGE_NAME", shortcutInfo.getPackage());
-                                        ((AppWidgetManager) peopleSpaceWidgetManager.mAppWidgetManagerOptional.get()).requestPinAppWidget(new ComponentName(peopleSpaceWidgetManager.mContext, (Class<?>) PeopleSpaceWidgetProvider.class), bundle2, PendingIntent.getBroadcast(context2, 0, addFlags, 167772160));
+                                        Intent intentAddFlags = new Intent(context2, (Class<?>) PeopleSpaceWidgetPinnedReceiver.class).addFlags(268435456);
+                                        intentAddFlags.putExtra("android.intent.extra.shortcut.ID", shortcutInfo.getId());
+                                        intentAddFlags.putExtra("android.intent.extra.USER_ID", shortcutInfo.getUserId());
+                                        intentAddFlags.putExtra("android.intent.extra.PACKAGE_NAME", shortcutInfo.getPackage());
+                                        ((AppWidgetManager) peopleSpaceWidgetManager.mAppWidgetManagerOptional.get()).requestPinAppWidget(new ComponentName(peopleSpaceWidgetManager.mContext, (Class<?>) PeopleSpaceWidgetProvider.class), bundle2, PendingIntent.getBroadcast(context2, 0, intentAddFlags, 167772160));
                                     }
                                 }
                             }
@@ -412,26 +417,135 @@ public class NotificationConversationInfo extends LinearLayout implements Notifi
         findViewById(R.id.conversation_icon_badge_ring).setVisibility(z ? 0 : 8);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x00ba  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x016c  */
-    /* JADX WARN: Removed duplicated region for block: B:43:0x01f7  */
-    /* JADX WARN: Removed duplicated region for block: B:46:0x020e  */
-    /* JADX WARN: Removed duplicated region for block: B:54:0x01f9  */
-    /* JADX WARN: Removed duplicated region for block: B:56:0x0170  */
-    /* JADX WARN: Removed duplicated region for block: B:64:0x0148  */
-    /* JADX WARN: Removed duplicated region for block: B:65:0x0151  */
-    /* JADX WARN: Removed duplicated region for block: B:66:0x00d8 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:70:0x00c1  */
+    /* JADX WARN: Removed duplicated region for block: B:17:0x00ab  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void bindNotification(android.content.pm.PackageManager r2, android.os.UserManager r3, com.android.systemui.people.widget.PeopleSpaceWidgetManager r4, android.app.INotificationManager r5, com.android.systemui.statusbar.notification.row.OnUserInteractionCallback r6, java.lang.String r7, com.android.systemui.statusbar.notification.collection.NotificationEntry r8, android.service.notification.NotificationListenerService.Ranking r9, android.service.notification.StatusBarNotification r10, com.android.systemui.statusbar.notification.row.NotificationGutsManager$$ExternalSyntheticLambda1 r11, androidx.core.view.ViewCompat$$ExternalSyntheticLambda0 r12, com.android.settingslib.notification.ConversationIconFactory r13, boolean r14, android.os.Handler r15, android.os.Handler r16, java.util.Optional r17, com.android.systemui.shade.ShadeController r18, boolean r19, com.android.systemui.statusbar.notification.row.ExpandableNotificationRow$$ExternalSyntheticLambda6 r20) {
-        /*
-            Method dump skipped, instructions count: 588
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.notification.row.NotificationConversationInfo.bindNotification(android.content.pm.PackageManager, android.os.UserManager, com.android.systemui.people.widget.PeopleSpaceWidgetManager, android.app.INotificationManager, com.android.systemui.statusbar.notification.row.OnUserInteractionCallback, java.lang.String, com.android.systemui.statusbar.notification.collection.NotificationEntry, android.service.notification.NotificationListenerService$Ranking, android.service.notification.StatusBarNotification, com.android.systemui.statusbar.notification.row.NotificationGutsManager$$ExternalSyntheticLambda1, androidx.core.view.ViewCompat$$ExternalSyntheticLambda0, com.android.settingslib.notification.ConversationIconFactory, boolean, android.os.Handler, android.os.Handler, java.util.Optional, com.android.systemui.shade.ShadeController, boolean, com.android.systemui.statusbar.notification.row.ExpandableNotificationRow$$ExternalSyntheticLambda6):void");
+    public final void bindNotification(PackageManager packageManager, UserManager userManager, PeopleSpaceWidgetManager peopleSpaceWidgetManager, INotificationManager iNotificationManager, OnUserInteractionCallback onUserInteractionCallback, String str, NotificationEntry notificationEntry, NotificationListenerService.Ranking ranking, StatusBarNotification statusBarNotification, NotificationGutsManager$$ExternalSyntheticLambda1 notificationGutsManager$$ExternalSyntheticLambda1, ViewCompat$$ExternalSyntheticLambda0 viewCompat$$ExternalSyntheticLambda0, ConversationIconFactory conversationIconFactory, boolean z, Handler handler, Handler handler2, Optional optional, ShadeController shadeController, boolean z2, ExpandableNotificationRow$$ExternalSyntheticLambda6 expandableNotificationRow$$ExternalSyntheticLambda6) {
+        CharSequence name;
+        this.mINotificationManager = iNotificationManager;
+        this.mPeopleSpaceWidgetManager = peopleSpaceWidgetManager;
+        this.mOnUserInteractionCallback = onUserInteractionCallback;
+        this.mPackageName = str;
+        this.mEntry = notificationEntry;
+        this.mSbn = statusBarNotification;
+        this.mPm = packageManager;
+        this.mUm = userManager;
+        this.mAppName = str;
+        this.mOnSettingsClickListener = notificationGutsManager$$ExternalSyntheticLambda1;
+        this.mNotificationChannel = ranking.getChannel();
+        this.mAppUid = this.mSbn.getUid();
+        this.mDelegatePkg = this.mSbn.getOpPkg();
+        this.mIsDeviceProvisioned = z;
+        this.mIconFactory = conversationIconFactory;
+        this.mBubbleMetadata = statusBarNotification.getNotification().getBubbleMetadata();
+        this.mBubblesManagerOptional = optional;
+        this.mShadeController = shadeController;
+        this.mMainHandler = handler;
+        this.mBgHandler = handler2;
+        ShortcutInfo conversationShortcutInfo = ranking.getConversationShortcutInfo();
+        this.mShortcutInfo = conversationShortcutInfo;
+        this.mFeedbackClickListener = viewCompat$$ExternalSyntheticLambda0;
+        if (conversationShortcutInfo == null) {
+            throw new IllegalArgumentException("Does not have required information");
+        }
+        this.mNotificationChannel = NotificationChannelHelper.createConversationChannelIfNeeded(getContext(), this.mINotificationManager, notificationEntry, this.mNotificationChannel);
+        try {
+            this.mAppBubble = this.mINotificationManager.getBubblePreferenceForPackage(this.mPackageName, this.mAppUid);
+        } catch (RemoteException e) {
+            Log.e("ConversationGuts", "can't reach OS", e);
+            this.mAppBubble = 2;
+        }
+        ((TextView) findViewById(R.id.parent_channel_name)).setText(this.mNotificationChannel.getName());
+        NotificationChannel notificationChannel = this.mNotificationChannel;
+        View.OnClickListener onClickListener = null;
+        if (notificationChannel == null || notificationChannel.getGroup() == null) {
+            name = null;
+        } else {
+            try {
+                NotificationChannelGroup notificationChannelGroupForPackage = this.mINotificationManager.getNotificationChannelGroupForPackage(this.mNotificationChannel.getGroup(), this.mPackageName, this.mAppUid);
+                if (notificationChannelGroupForPackage != null) {
+                    name = notificationChannelGroupForPackage.getName();
+                }
+            } catch (RemoteException unused) {
+            }
+        }
+        TextView textView = (TextView) findViewById(R.id.group_name);
+        if (name != null) {
+            textView.setText(name);
+            textView.setVisibility(0);
+        } else {
+            textView.setVisibility(8);
+        }
+        ApplicationInfo applicationInfo = (ApplicationInfo) this.mSbn.getNotification().extras.getParcelable("android.appInfo", ApplicationInfo.class);
+        if (applicationInfo != null) {
+            try {
+                this.mAppName = String.valueOf(this.mPm.getApplicationLabel(applicationInfo));
+            } catch (Exception unused2) {
+            }
+        }
+        ((TextView) findViewById(R.id.pkg_name)).setText(this.mAppName);
+        bindIcon(this.mNotificationChannel.isImportantConversation());
+        this.mPriorityDescriptionView = (TextView) findViewById(R.id.priority_summary);
+        if (this.mBubbleMetadata != null && BubblesManager.areBubblesEnabled(((LinearLayout) this).mContext, this.mSbn.getUser()) && willBypassDnd()) {
+            this.mPriorityDescriptionView.setText(R.string.notification_channel_summary_priority_all);
+        } else if (this.mBubbleMetadata != null && BubblesManager.areBubblesEnabled(((LinearLayout) this).mContext, this.mSbn.getUser())) {
+            this.mPriorityDescriptionView.setText(R.string.notification_channel_summary_priority_bubble);
+        } else if (willBypassDnd()) {
+            this.mPriorityDescriptionView.setText(R.string.notification_channel_summary_priority_dnd);
+        } else {
+            this.mPriorityDescriptionView.setText(R.string.notification_channel_summary_priority_baseline);
+        }
+        TextView textView2 = (TextView) findViewById(R.id.delegate_name);
+        if (TextUtils.equals(this.mPackageName, this.mDelegatePkg)) {
+            textView2.setVisibility(8);
+        } else {
+            textView2.setVisibility(0);
+        }
+        TextView textView3 = (TextView) findViewById(R.id.default_summary);
+        if (this.mAppBubble == 1 && BubblesManager.areBubblesEnabled(((LinearLayout) this).mContext, this.mSbn.getUser())) {
+            textView3.setText(getResources().getString(R.string.notification_channel_summary_default_with_bubbles, this.mAppName));
+        } else {
+            textView3.setText(getResources().getString(R.string.notification_channel_summary_default));
+        }
+        findViewById(R.id.priority).setOnClickListener(this.mOnFavoriteClick);
+        findViewById(R.id.default_behavior).setOnClickListener(this.mOnDefaultClick);
+        findViewById(R.id.silence).setOnClickListener(this.mOnMuteClick);
+        View viewFindViewById = findViewById(R.id.info);
+        final int i = this.mAppUid;
+        if (i >= 0 && this.mOnSettingsClickListener != null && this.mIsDeviceProvisioned) {
+            onClickListener = new View.OnClickListener() { // from class: com.android.systemui.statusbar.notification.row.NotificationConversationInfo$$ExternalSyntheticLambda5
+                @Override // android.view.View.OnClickListener
+                public final void onClick(View view) {
+                    NotificationConversationInfo notificationConversationInfo = this.f$0;
+                    int i2 = i;
+                    NotificationGutsManager$$ExternalSyntheticLambda1 notificationGutsManager$$ExternalSyntheticLambda12 = notificationConversationInfo.mOnSettingsClickListener;
+                    NotificationChannel notificationChannel2 = notificationConversationInfo.mNotificationChannel;
+                    StatusBarNotification statusBarNotification2 = notificationGutsManager$$ExternalSyntheticLambda12.f$2;
+                    NotificationGutsManager notificationGutsManager = notificationGutsManager$$ExternalSyntheticLambda12.f$0;
+                    notificationGutsManager.mMetricsLogger.action(205);
+                    notificationGutsManager$$ExternalSyntheticLambda12.f$1.resetFalsingCheck();
+                    notificationGutsManager.mOnSettingsClickListener.onSettingsClick(statusBarNotification2.getKey());
+                    notificationGutsManager.startAppNotificationSettingsActivity(notificationGutsManager$$ExternalSyntheticLambda12.f$3, i2, notificationChannel2, notificationGutsManager$$ExternalSyntheticLambda12.f$4);
+                }
+            };
+        }
+        viewFindViewById.setOnClickListener(onClickListener);
+        viewFindViewById.setVisibility(viewFindViewById.hasOnClickListeners() ? 0 : 8);
+        View viewFindViewById2 = findViewById(R.id.feedback);
+        int i2 = NmSummarizationUiFlag.$r8$clinit;
+        viewFindViewById2.setVisibility(8);
+        int priority = this.mSelectedAction;
+        if (priority == -1) {
+            priority = getPriority();
+        }
+        updateToggleActions(priority, false);
+        View viewFindViewById3 = findViewById(R.id.inline_dismiss);
+        viewFindViewById3.setOnClickListener(expandableNotificationRow$$ExternalSyntheticLambda6);
+        viewFindViewById3.setVisibility((viewFindViewById3.hasOnClickListeners() && z2) ? 0 : 8);
+        View viewFindViewById4 = findViewById(R.id.done);
+        viewFindViewById4.setOnClickListener(this.mOnDone);
+        viewFindViewById4.setAccessibilityDelegate(this.mGutsContainer.getAccessibilityDelegate());
     }
 
     @Override // com.android.systemui.statusbar.notification.row.NotificationGuts.GutsContent
@@ -530,17 +644,17 @@ public class NotificationConversationInfo extends LinearLayout implements Notifi
         if (z) {
             TransitionSet transitionSet = new TransitionSet();
             transitionSet.setOrdering(0);
-            TransitionSet addTransition = transitionSet.addTransition(new Fade(2)).addTransition(new ChangeBounds());
+            TransitionSet transitionSetAddTransition = transitionSet.addTransition(new Fade(2)).addTransition(new ChangeBounds());
             Transition duration = new Fade(1).setStartDelay(150L).setDuration(200L);
             Interpolator interpolator = Interpolators.FAST_OUT_SLOW_IN;
-            addTransition.addTransition(duration.setInterpolator(interpolator));
+            transitionSetAddTransition.addTransition(duration.setInterpolator(interpolator));
             transitionSet.setDuration(350L);
             transitionSet.setInterpolator((TimeInterpolator) interpolator);
             TransitionManager.beginDelayedTransition(this, transitionSet);
         }
-        final View findViewById = findViewById(R.id.priority);
-        final View findViewById2 = findViewById(R.id.default_behavior);
-        final View findViewById3 = findViewById(R.id.silence);
+        final View viewFindViewById = findViewById(R.id.priority);
+        final View viewFindViewById2 = findViewById(R.id.default_behavior);
+        final View viewFindViewById3 = findViewById(R.id.silence);
         if (i == 0) {
             this.mDefaultDescriptionView.setVisibility(0);
             this.mSilentDescriptionView.setVisibility(8);
@@ -551,27 +665,27 @@ public class NotificationConversationInfo extends LinearLayout implements Notifi
                 public final void run() {
                     switch (i2) {
                         case 0:
-                            View view = findViewById;
-                            View view2 = findViewById2;
-                            View view3 = findViewById3;
+                            View view = viewFindViewById;
+                            View view2 = viewFindViewById2;
+                            View view3 = viewFindViewById3;
                             int i3 = NotificationConversationInfo.$r8$clinit;
                             view.setSelected(true);
                             view2.setSelected(false);
                             view3.setSelected(false);
                             break;
                         case 1:
-                            View view4 = findViewById;
-                            View view5 = findViewById2;
-                            View view6 = findViewById3;
+                            View view4 = viewFindViewById;
+                            View view5 = viewFindViewById2;
+                            View view6 = viewFindViewById3;
                             int i4 = NotificationConversationInfo.$r8$clinit;
                             view4.setSelected(false);
                             view5.setSelected(false);
                             view6.setSelected(true);
                             break;
                         default:
-                            View view7 = findViewById;
-                            View view8 = findViewById2;
-                            View view9 = findViewById3;
+                            View view7 = viewFindViewById;
+                            View view8 = viewFindViewById2;
+                            View view9 = viewFindViewById3;
                             int i5 = NotificationConversationInfo.$r8$clinit;
                             view7.setSelected(false);
                             view8.setSelected(true);
@@ -590,27 +704,27 @@ public class NotificationConversationInfo extends LinearLayout implements Notifi
                 public final void run() {
                     switch (i3) {
                         case 0:
-                            View view = findViewById;
-                            View view2 = findViewById2;
-                            View view3 = findViewById3;
+                            View view = viewFindViewById;
+                            View view2 = viewFindViewById2;
+                            View view3 = viewFindViewById3;
                             int i32 = NotificationConversationInfo.$r8$clinit;
                             view.setSelected(true);
                             view2.setSelected(false);
                             view3.setSelected(false);
                             break;
                         case 1:
-                            View view4 = findViewById;
-                            View view5 = findViewById2;
-                            View view6 = findViewById3;
+                            View view4 = viewFindViewById;
+                            View view5 = viewFindViewById2;
+                            View view6 = viewFindViewById3;
                             int i4 = NotificationConversationInfo.$r8$clinit;
                             view4.setSelected(false);
                             view5.setSelected(false);
                             view6.setSelected(true);
                             break;
                         default:
-                            View view7 = findViewById;
-                            View view8 = findViewById2;
-                            View view9 = findViewById3;
+                            View view7 = viewFindViewById;
+                            View view8 = viewFindViewById2;
+                            View view9 = viewFindViewById3;
                             int i5 = NotificationConversationInfo.$r8$clinit;
                             view7.setSelected(false);
                             view8.setSelected(true);
@@ -632,27 +746,27 @@ public class NotificationConversationInfo extends LinearLayout implements Notifi
                 public final void run() {
                     switch (i4) {
                         case 0:
-                            View view = findViewById;
-                            View view2 = findViewById2;
-                            View view3 = findViewById3;
+                            View view = viewFindViewById;
+                            View view2 = viewFindViewById2;
+                            View view3 = viewFindViewById3;
                             int i32 = NotificationConversationInfo.$r8$clinit;
                             view.setSelected(true);
                             view2.setSelected(false);
                             view3.setSelected(false);
                             break;
                         case 1:
-                            View view4 = findViewById;
-                            View view5 = findViewById2;
-                            View view6 = findViewById3;
+                            View view4 = viewFindViewById;
+                            View view5 = viewFindViewById2;
+                            View view6 = viewFindViewById3;
                             int i42 = NotificationConversationInfo.$r8$clinit;
                             view4.setSelected(false);
                             view5.setSelected(false);
                             view6.setSelected(true);
                             break;
                         default:
-                            View view7 = findViewById;
-                            View view8 = findViewById2;
-                            View view9 = findViewById3;
+                            View view7 = viewFindViewById;
+                            View view8 = viewFindViewById2;
+                            View view9 = viewFindViewById3;
                             int i5 = NotificationConversationInfo.$r8$clinit;
                             view7.setSelected(false);
                             view8.setSelected(true);

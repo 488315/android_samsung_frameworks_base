@@ -4,12 +4,10 @@ import com.samsung.android.wallpaper.legibilitycolors.ColorHSV;
 import com.samsung.android.wallpaper.legibilitycolors.LegibilityColorByHSV;
 import com.samsung.android.wallpaper.legibilitycolors.LegibilityDefinition;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class OngoingMediaResourceUtils {
     public static final OngoingMediaResourceUtils INSTANCE = new OngoingMediaResourceUtils();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 

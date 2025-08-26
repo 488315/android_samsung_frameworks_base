@@ -22,9 +22,9 @@ class Instance {
         for (float f2 : fArr) {
             f += f2 * f2;
         }
-        float sqrt = (float) Math.sqrt(f);
+        float fSqrt = (float) Math.sqrt(f);
         for (int i = 0; i < length; i++) {
-            fArr[i] = fArr[i] / sqrt;
+            fArr[i] = fArr[i] / fSqrt;
         }
     }
 
@@ -42,21 +42,21 @@ class Instance {
     }
 
     private static float[] temporalSampler(int i, Gesture gesture) {
-        float[] temporalSampling = GestureUtils.temporalSampling(gesture.getStrokes().get(0), 16);
-        float[] computeCentroid = GestureUtils.computeCentroid(temporalSampling);
-        float atan2 = (float) Math.atan2(temporalSampling[1] - computeCentroid[1], temporalSampling[0] - computeCentroid[0]);
-        float f = -atan2;
+        float[] fArrTemporalSampling = GestureUtils.temporalSampling(gesture.getStrokes().get(0), 16);
+        float[] fArrComputeCentroid = GestureUtils.computeCentroid(fArrTemporalSampling);
+        float fAtan2 = (float) Math.atan2(fArrTemporalSampling[1] - fArrComputeCentroid[1], fArrTemporalSampling[0] - fArrComputeCentroid[0]);
+        float f = -fAtan2;
         if (i != 1) {
             int length = ORIENTATIONS.length;
             for (int i2 = 0; i2 < length; i2++) {
-                float f2 = ORIENTATIONS[i2] - atan2;
+                float f2 = ORIENTATIONS[i2] - fAtan2;
                 if (Math.abs(f2) < Math.abs(f)) {
                     f = f2;
                 }
             }
         }
-        GestureUtils.translate(temporalSampling, -computeCentroid[0], -computeCentroid[1]);
-        GestureUtils.rotate(temporalSampling, f);
-        return temporalSampling;
+        GestureUtils.translate(fArrTemporalSampling, -fArrComputeCentroid[0], -fArrComputeCentroid[1]);
+        GestureUtils.rotate(fArrTemporalSampling, f);
+        return fArrTemporalSampling;
     }
 }

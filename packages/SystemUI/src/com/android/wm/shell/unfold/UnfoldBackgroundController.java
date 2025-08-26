@@ -1,11 +1,11 @@
 package com.android.wm.shell.unfold;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.view.SurfaceControl;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class UnfoldBackgroundController {
     public final float[] mBackgroundColor;
@@ -19,7 +19,7 @@ public class UnfoldBackgroundController {
         this.mSplitScreenBackgroundColor = getRGBColorFromId(R.color.split_divider_background, context);
     }
 
-    public static float[] getRGBColorFromId(int i, Context context) {
+    public static float[] getRGBColorFromId(int i, Context context) throws Resources.NotFoundException {
         int color = context.getResources().getColor(i);
         return new float[]{Color.red(color) / 255.0f, Color.green(color) / 255.0f, Color.blue(color) / 255.0f};
     }
@@ -35,9 +35,9 @@ public class UnfoldBackgroundController {
             }
             return;
         }
-        SurfaceControl build = new SurfaceControl.Builder().setName("app-unfold-background").setCallsite("AppUnfoldTransitionController").setColorLayer().build();
-        this.mBackgroundLayer = build;
-        transaction.setColor(build, fArr).show(this.mBackgroundLayer).setLayer(this.mBackgroundLayer, -1);
+        SurfaceControl surfaceControlBuild = new SurfaceControl.Builder().setName("app-unfold-background").setCallsite("AppUnfoldTransitionController").setColorLayer().build();
+        this.mBackgroundLayer = surfaceControlBuild;
+        transaction.setColor(surfaceControlBuild, fArr).show(this.mBackgroundLayer).setLayer(this.mBackgroundLayer, -1);
         this.mBackgroundColorSet = fArr;
     }
 }

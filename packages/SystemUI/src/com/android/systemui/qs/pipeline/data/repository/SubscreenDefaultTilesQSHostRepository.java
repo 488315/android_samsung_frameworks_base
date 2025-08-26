@@ -12,7 +12,6 @@ import kotlin.collections.EmptyList;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.text.Regex;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SubscreenDefaultTilesQSHostRepository implements DefaultTilesRepository {
     public final Resources resources;
@@ -22,23 +21,25 @@ public final class SubscreenDefaultTilesQSHostRepository implements DefaultTiles
     }
 
     @Override // com.android.systemui.qs.pipeline.data.repository.DefaultTilesRepository
-    public final List getDefaultTiles() {
-        Iterable iterable;
-        List split = new Regex(",").split(this.resources.getString(R.string.sec_sub_quick_settings_tiles_default));
-        if (!split.isEmpty()) {
-            ListIterator listIterator = split.listIterator(split.size());
+    public final List getDefaultTiles() throws Resources.NotFoundException {
+        Iterable iterableTake;
+        List listSplit = new Regex(",").split(this.resources.getString(R.string.sec_sub_quick_settings_tiles_default));
+        if (listSplit.isEmpty()) {
+            iterableTake = EmptyList.INSTANCE;
+        } else {
+            ListIterator listIterator = listSplit.listIterator(listSplit.size());
             while (listIterator.hasPrevious()) {
                 if (((String) listIterator.previous()).length() != 0) {
-                    iterable = CollectionsKt___CollectionsKt.take(split, listIterator.nextIndex() + 1);
+                    iterableTake = CollectionsKt___CollectionsKt.take(listSplit, listIterator.nextIndex() + 1);
                     break;
                 }
             }
+            iterableTake = EmptyList.INSTANCE;
         }
-        iterable = EmptyList.INSTANCE;
-        Iterable<String> iterable2 = iterable;
+        Iterable<String> iterable = iterableTake;
         TileSpec.Companion companion = TileSpec.Companion;
-        ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(iterable2, 10));
-        for (String str : iterable2) {
+        ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(iterable, 10));
+        for (String str : iterable) {
             companion.getClass();
             arrayList.add(TileSpec.Companion.create(str));
         }

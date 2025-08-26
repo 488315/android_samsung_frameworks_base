@@ -46,13 +46,13 @@ public final class SignalStrength {
 
     public static final ArrayList<SignalStrength> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<SignalStrength> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 136, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 136, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             SignalStrength signalStrength = new SignalStrength();
-            signalStrength.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 136);
+            signalStrength.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 136);
             arrayList.add(signalStrength);
         }
         return arrayList;

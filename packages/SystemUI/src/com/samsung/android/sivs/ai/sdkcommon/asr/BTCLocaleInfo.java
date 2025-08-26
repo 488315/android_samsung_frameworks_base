@@ -10,7 +10,6 @@ import java.util.Locale;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class BTCLocaleInfo extends LocaleInfo {
     public static final Parcelable.Creator<LocaleInfo> CREATOR = new Parcelable.Creator<LocaleInfo>() { // from class: com.samsung.android.sivs.ai.sdkcommon.asr.BTCLocaleInfo.1
@@ -51,9 +50,7 @@ public class BTCLocaleInfo extends LocaleInfo {
         return (List) this.ttsPackage.stream().filter(new Predicate() { // from class: com.samsung.android.sivs.ai.sdkcommon.asr.BTCLocaleInfo$$ExternalSyntheticLambda0
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                boolean lambda$getDefaultPackages$0;
-                lambda$getDefaultPackages$0 = BTCLocaleInfo.this.lambda$getDefaultPackages$0((TtsPackageInfo) obj);
-                return lambda$getDefaultPackages$0;
+                return this.f$0.lambda$getDefaultPackages$0((TtsPackageInfo) obj);
             }
         }).distinct().collect(Collectors.toList());
     }

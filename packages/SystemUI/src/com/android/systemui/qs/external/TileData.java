@@ -5,7 +5,6 @@ import androidx.compose.animation.core.TransitionKt$$ExternalSyntheticOutline0;
 import com.android.systemui.controls.controller.ControlInfo$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class TileData {
     public final CharSequence appName;
@@ -34,9 +33,9 @@ public final class TileData {
     }
 
     public final int hashCode() {
-        int m = ControlInfo$$ExternalSyntheticOutline0.m(ControlInfo$$ExternalSyntheticOutline0.m(Integer.hashCode(this.callingUid) * 31, 31, this.appName), 31, this.label);
+        int iM = ControlInfo$$ExternalSyntheticOutline0.m(ControlInfo$$ExternalSyntheticOutline0.m(Integer.hashCode(this.callingUid) * 31, 31, this.appName), 31, this.label);
         Icon icon = this.icon;
-        return this.packageName.hashCode() + ((m + (icon == null ? 0 : icon.hashCode())) * 31);
+        return this.packageName.hashCode() + ((iM + (icon == null ? 0 : icon.hashCode())) * 31);
     }
 
     public final String toString() {

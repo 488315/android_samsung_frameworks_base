@@ -14,6 +14,7 @@ import com.samsung.android.sume.core.format.MutableMediaFormat;
 import com.samsung.android.sume.core.types.ColorFormat;
 import com.samsung.android.sume.core.types.DataType;
 import com.samsung.android.sume.core.types.MediaType;
+import java.io.IOException;
 import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.util.Collections;
@@ -186,17 +187,17 @@ public class GenericMediaBuffer<T> extends MediaBufferBase {
 
     protected GenericMediaBuffer(Parcel parcel) {
         super(parcel);
-        int readInt = parcel.readInt();
-        if (readInt == 1) {
+        int i = parcel.readInt();
+        if (i == 1) {
             this.dataClass = MediaBufferAllocator.Nothing.class;
             this.data = (T) new MediaBufferAllocator.Nothing();
-        } else if (readInt == 2) {
+        } else if (i == 2) {
             this.dataClass = HardwareBuffer.class;
             this.data = (T) parcel.readParcelable(HardwareBuffer.class.getClassLoader());
-        } else if (readInt == 3) {
+        } else if (i == 3) {
             this.dataClass = ParcelFileDescriptor.class;
             this.data = (T) parcel.readParcelable(ParcelFileDescriptor.class.getClassLoader());
-        } else if (readInt == 5) {
+        } else if (i == 5) {
             T t = (T) parcel.readSerializable();
             this.data = t;
             this.dataClass = (Class<T>) t.getClass();
@@ -207,7 +208,7 @@ public class GenericMediaBuffer<T> extends MediaBufferBase {
     }
 
     @Override // com.samsung.android.sume.core.buffer.MediaBufferBase, android.os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
         HardwareBuffer hardwareBuffer;
         super.writeToParcel(parcel, i);
         T t = this.data;
@@ -233,17 +234,17 @@ public class GenericMediaBuffer<T> extends MediaBufferBase {
 
     @Override // com.samsung.android.sume.core.buffer.MediaBuffer
     public MediaBuffer asRef() {
-        int incrementAndGet = this.sharedCount.incrementAndGet();
-        Log.d(TAG, "inc ref count now: " + incrementAndGet + NavigationBarInflaterView.KEY_CODE_START + hashCode() + NavigationBarInflaterView.KEY_CODE_END);
+        int iIncrementAndGet = this.sharedCount.incrementAndGet();
+        Log.d(TAG, "inc ref count now: " + iIncrementAndGet + NavigationBarInflaterView.KEY_CODE_START + hashCode() + NavigationBarInflaterView.KEY_CODE_END);
         return this;
     }
 
     @Override // com.samsung.android.sume.core.buffer.MediaBufferBase, com.samsung.android.sume.core.buffer.MediaBuffer
     public void release() {
-        int decrementAndGet = this.sharedCount.decrementAndGet();
+        int iDecrementAndGet = this.sharedCount.decrementAndGet();
         String str = TAG;
-        Log.d(str, "dec ref count now: " + decrementAndGet + NavigationBarInflaterView.KEY_CODE_START + hashCode() + NavigationBarInflaterView.KEY_CODE_END);
-        if (decrementAndGet > 0) {
+        Log.d(str, "dec ref count now: " + iDecrementAndGet + NavigationBarInflaterView.KEY_CODE_START + hashCode() + NavigationBarInflaterView.KEY_CODE_END);
+        if (iDecrementAndGet > 0) {
             Log.d(str, "release skipped(" + hashCode() + NavigationBarInflaterView.KEY_CODE_END);
             return;
         }
@@ -260,9 +261,9 @@ public class GenericMediaBuffer<T> extends MediaBufferBase {
 
     @Override // com.samsung.android.sume.core.buffer.MediaBuffer
     public <V> MediaBuffer convertTo(Class<V> cls) {
-        MediaBuffer of = MediaBuffer.of(getFormat(), getTypedData(cls));
+        MediaBuffer mediaBufferOf = MediaBuffer.of(getFormat(), getTypedData(cls));
         release();
-        return of;
+        return mediaBufferOf;
     }
 
     @Override // com.samsung.android.sume.core.buffer.MediaBuffer
@@ -318,46 +319,43 @@ public class GenericMediaBuffer<T> extends MediaBufferBase {
         return (long) (getFormat().bytePerPixel() * getAlign().getDimension());
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:10:0x001a  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public void adjustShape() {
-        int i;
-        ColorFormat colorFormat;
+        int byteCount;
         T t = this.data;
-        if (t != null) {
-            if (t instanceof ByteBuffer) {
-                i = ((ByteBuffer) t).limit();
-            } else if (t instanceof Bitmap) {
-                i = ((Bitmap) t).getByteCount();
-            }
-            colorFormat = this.format.getColorFormat();
-            if (colorFormat != ColorFormat.NONE || colorFormat == ColorFormat.OPAQUE || colorFormat == ColorFormat.P010 || colorFormat == ColorFormat.P010_ZIPPED) {
-                return;
-            }
-            MutableMediaFormat mutableFormat = this.format.toMutableFormat();
-            if (i == 0 || this.format.getShape() == null) {
-                return;
-            }
-            if (this.format.getDataType() == null || this.format.getDataType() == DataType.NONE) {
-                int channels = getChannels();
-                float dimension = i / (this.align.getDimension() * colorFormat.bytePerPixel());
-                if (dimension == 1.0f) {
-                    mutableFormat.setDataType(DataType.of(DataType.U8, channels));
-                } else if (dimension == 2.0f) {
-                    mutableFormat.setDataType(DataType.of(DataType.U16, channels));
-                } else if (dimension == 3.0f) {
-                    mutableFormat.setDataType(DataType.of(DataType.F32, channels));
-                } else if (dimension == 4.0f) {
-                    mutableFormat.setDataType(DataType.of(DataType.F64, channels));
-                } else {
-                    throw new IllegalArgumentException("data-size and align(shape) doesn't match" + i + " vs " + this.format + " & " + this.align);
-                }
-                this.format = mutableFormat.toMediaFormat();
-                return;
-            }
+        if (t == null) {
+            byteCount = 0;
+        } else if (t instanceof ByteBuffer) {
+            byteCount = ((ByteBuffer) t).limit();
+        } else if (t instanceof Bitmap) {
+            byteCount = ((Bitmap) t).getByteCount();
+        }
+        ColorFormat colorFormat = this.format.getColorFormat();
+        if (colorFormat == ColorFormat.NONE || colorFormat == ColorFormat.OPAQUE || colorFormat == ColorFormat.P010 || colorFormat == ColorFormat.P010_ZIPPED) {
             return;
         }
-        i = 0;
-        colorFormat = this.format.getColorFormat();
-        if (colorFormat != ColorFormat.NONE) {
+        MutableMediaFormat mutableFormat = this.format.toMutableFormat();
+        if (byteCount == 0 || this.format.getShape() == null) {
+            return;
+        }
+        if (this.format.getDataType() == null || this.format.getDataType() == DataType.NONE) {
+            int channels = getChannels();
+            float dimension = byteCount / (this.align.getDimension() * colorFormat.bytePerPixel());
+            if (dimension == 1.0f) {
+                mutableFormat.setDataType(DataType.of(DataType.U8, channels));
+            } else if (dimension == 2.0f) {
+                mutableFormat.setDataType(DataType.of(DataType.U16, channels));
+            } else if (dimension == 3.0f) {
+                mutableFormat.setDataType(DataType.of(DataType.F32, channels));
+            } else if (dimension == 4.0f) {
+                mutableFormat.setDataType(DataType.of(DataType.F64, channels));
+            } else {
+                throw new IllegalArgumentException("data-size and align(shape) doesn't match" + byteCount + " vs " + this.format + " & " + this.align);
+            }
+            this.format = mutableFormat.toMediaFormat();
         }
     }
 

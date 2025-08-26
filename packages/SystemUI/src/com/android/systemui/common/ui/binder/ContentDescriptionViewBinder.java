@@ -1,10 +1,10 @@
 package com.android.systemui.common.ui.binder;
 
+import android.content.res.Resources;
 import android.view.View;
 import com.android.systemui.common.shared.model.ContentDescription;
 import kotlin.NoWhenBranchMatchedException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ContentDescriptionViewBinder {
     public static final ContentDescriptionViewBinder INSTANCE = new ContentDescriptionViewBinder();
@@ -12,7 +12,7 @@ public final class ContentDescriptionViewBinder {
     private ContentDescriptionViewBinder() {
     }
 
-    public static void bind(ContentDescription contentDescription, View view) {
+    public static void bind(ContentDescription contentDescription, View view) throws Resources.NotFoundException {
         String string;
         if (contentDescription == null) {
             string = null;

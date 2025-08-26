@@ -4,7 +4,6 @@ import androidx.compose.animation.FlingCalculator$FlingInfo$$ExternalSyntheticOu
 import androidx.compose.animation.core.CubicBezierEasing$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class BackTransformation {
     public float scale;
@@ -28,9 +27,9 @@ public final class BackTransformation {
     }
 
     public final int hashCode() {
-        int m = FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.scale, FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.translateY, Float.hashCode(this.translateX) * 31, 31), 31);
+        int iM = FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.scale, FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.translateY, Float.hashCode(this.translateX) * 31, 31), 31);
         ScalePivotPosition scalePivotPosition = this.scalePivotPosition;
-        return m + (scalePivotPosition == null ? 0 : scalePivotPosition.hashCode());
+        return iM + (scalePivotPosition == null ? 0 : scalePivotPosition.hashCode());
     }
 
     public final String toString() {
@@ -38,12 +37,12 @@ public final class BackTransformation {
         float f2 = this.translateY;
         float f3 = this.scale;
         ScalePivotPosition scalePivotPosition = this.scalePivotPosition;
-        StringBuilder m = CubicBezierEasing$$ExternalSyntheticOutline0.m("BackTransformation(translateX=", f, ", translateY=", f2, ", scale=");
-        m.append(f3);
-        m.append(", scalePivotPosition=");
-        m.append(scalePivotPosition);
-        m.append(")");
-        return m.toString();
+        StringBuilder sbM = CubicBezierEasing$$ExternalSyntheticOutline0.m("BackTransformation(translateX=", f, ", translateY=", f2, ", scale=");
+        sbM.append(f3);
+        sbM.append(", scalePivotPosition=");
+        sbM.append(scalePivotPosition);
+        sbM.append(")");
+        return sbM.toString();
     }
 
     public BackTransformation(float f, float f2, float f3, ScalePivotPosition scalePivotPosition) {

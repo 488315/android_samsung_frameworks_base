@@ -1,91 +1,112 @@
 package androidx.compose.foundation.relocation;
 
 import androidx.compose.runtime.collection.MutableVector;
+import androidx.compose.ui.geometry.Rect;
+import androidx.compose.ui.relocation.BringIntoViewModifierNodeKt;
+import kotlin.ResultKt;
+import kotlin.Unit;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class BringIntoViewRequesterImpl implements BringIntoViewRequester {
     public final MutableVector nodes = new MutableVector(new BringIntoViewRequesterNode[16], 0);
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x004c  */
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0068  */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x003c  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
-    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:13:0x0063 -> B:10:0x0066). Please report as a decompilation issue!!! */
+    /* renamed from: androidx.compose.foundation.relocation.BringIntoViewRequesterImpl$bringIntoView$1, reason: invalid class name */
+    final class AnonymousClass1 extends ContinuationImpl {
+        int I$0;
+        int I$1;
+        Object L$0;
+        Object L$1;
+        int label;
+        /* synthetic */ Object result;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return BringIntoViewRequesterImpl.this.bringIntoView(null, this);
+        }
+    }
+
+    /* JADX WARN: Removed duplicated region for block: B:16:0x004c  */
+    /* JADX WARN: Removed duplicated region for block: B:20:0x0068  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
+    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:17:0x0063 -> B:19:0x0066). Please report as a decompilation issue!!! */
     @Override // androidx.compose.foundation.relocation.BringIntoViewRequester
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object bringIntoView(androidx.compose.ui.geometry.Rect r8, kotlin.coroutines.jvm.internal.ContinuationImpl r9) {
-        /*
-            r7 = this;
-            boolean r0 = r9 instanceof androidx.compose.foundation.relocation.BringIntoViewRequesterImpl$bringIntoView$1
-            if (r0 == 0) goto L13
-            r0 = r9
-            androidx.compose.foundation.relocation.BringIntoViewRequesterImpl$bringIntoView$1 r0 = (androidx.compose.foundation.relocation.BringIntoViewRequesterImpl$bringIntoView$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            androidx.compose.foundation.relocation.BringIntoViewRequesterImpl$bringIntoView$1 r0 = new androidx.compose.foundation.relocation.BringIntoViewRequesterImpl$bringIntoView$1
-            r0.<init>(r7, r9)
-        L18:
-            java.lang.Object r9 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L3c
-            if (r2 != r3) goto L34
-            int r7 = r0.I$1
-            int r8 = r0.I$0
-            java.lang.Object r2 = r0.L$1
-            java.lang.Object[] r2 = (java.lang.Object[]) r2
-            java.lang.Object r4 = r0.L$0
-            androidx.compose.ui.geometry.Rect r4 = (androidx.compose.ui.geometry.Rect) r4
-            kotlin.ResultKt.throwOnFailure(r9)
-            r9 = r4
-            goto L66
-        L34:
-            java.lang.IllegalStateException r7 = new java.lang.IllegalStateException
-            java.lang.String r8 = "call to 'resume' before 'invoke' with coroutine"
-            r7.<init>(r8)
-            throw r7
-        L3c:
-            kotlin.ResultKt.throwOnFailure(r9)
-            androidx.compose.runtime.collection.MutableVector r7 = r7.nodes
-            java.lang.Object[] r9 = r7.content
-            int r7 = r7.size
-            r2 = 0
-            r6 = r9
-            r9 = r8
-            r8 = r2
-            r2 = r6
-        L4a:
-            if (r8 >= r7) goto L68
-            r4 = r2[r8]
-            androidx.compose.foundation.relocation.BringIntoViewRequesterNode r4 = (androidx.compose.foundation.relocation.BringIntoViewRequesterNode) r4
-            androidx.compose.foundation.relocation.BringIntoViewRequesterImpl$bringIntoView$2$1 r5 = new androidx.compose.foundation.relocation.BringIntoViewRequesterImpl$bringIntoView$2$1
-            r5.<init>()
-            r0.L$0 = r9
-            r0.L$1 = r2
-            r0.I$0 = r8
-            r0.I$1 = r7
-            r0.label = r3
-            java.lang.Object r4 = androidx.compose.ui.relocation.BringIntoViewModifierNodeKt.bringIntoView(r4, r5, r0)
-            if (r4 != r1) goto L66
-            return r1
-        L66:
-            int r8 = r8 + r3
-            goto L4a
-        L68:
-            kotlin.Unit r7 = kotlin.Unit.INSTANCE
-            return r7
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.foundation.relocation.BringIntoViewRequesterImpl.bringIntoView(androidx.compose.ui.geometry.Rect, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object bringIntoView(Rect rect, ContinuationImpl continuationImpl) {
+        AnonymousClass1 anonymousClass1;
+        int i;
+        final Rect rect2;
+        int i2;
+        Object[] objArr;
+        if (continuationImpl instanceof AnonymousClass1) {
+            anonymousClass1 = (AnonymousClass1) continuationImpl;
+            int i3 = anonymousClass1.label;
+            if ((i3 & Integer.MIN_VALUE) != 0) {
+                anonymousClass1.label = i3 - Integer.MIN_VALUE;
+            } else {
+                anonymousClass1 = new AnonymousClass1(continuationImpl);
+            }
+        }
+        Object obj = anonymousClass1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i4 = anonymousClass1.label;
+        if (i4 == 0) {
+            ResultKt.throwOnFailure(obj);
+            MutableVector mutableVector = this.nodes;
+            Object[] objArr2 = mutableVector.content;
+            i = mutableVector.size;
+            rect2 = rect;
+            i2 = 0;
+            objArr = objArr2;
+            if (i2 < i) {
+            }
+        } else {
+            if (i4 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            i = anonymousClass1.I$1;
+            i2 = anonymousClass1.I$0;
+            objArr = (Object[]) anonymousClass1.L$1;
+            Rect rect3 = (Rect) anonymousClass1.L$0;
+            ResultKt.throwOnFailure(obj);
+            rect2 = rect3;
+            i2++;
+            if (i2 < i) {
+                BringIntoViewRequesterNode bringIntoViewRequesterNode = (BringIntoViewRequesterNode) objArr[i2];
+                Function0 function0 = new Function0() { // from class: androidx.compose.foundation.relocation.BringIntoViewRequesterImpl$bringIntoView$2$1
+                    {
+                        super(0);
+                    }
+
+                    @Override // kotlin.jvm.functions.Function0
+                    public final Object invoke() {
+                        return rect2;
+                    }
+                };
+                anonymousClass1.L$0 = rect2;
+                anonymousClass1.L$1 = objArr;
+                anonymousClass1.I$0 = i2;
+                anonymousClass1.I$1 = i;
+                anonymousClass1.label = 1;
+                if (BringIntoViewModifierNodeKt.bringIntoView(bringIntoViewRequesterNode, function0, anonymousClass1) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+                i2++;
+                if (i2 < i) {
+                    return Unit.INSTANCE;
+                }
+            }
+        }
     }
 }

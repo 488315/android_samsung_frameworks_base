@@ -37,7 +37,7 @@ public final class BackupRestoreEventLogger {
     public @interface BackupRestoreError {
     }
 
-    public BackupRestoreEventLogger(int i) {
+    public BackupRestoreEventLogger(int i) throws NoSuchAlgorithmException {
         MessageDigest messageDigest;
         this.mOperationType = i;
         try {
@@ -160,20 +160,20 @@ public final class BackupRestoreEventLogger {
             /* JADX WARN: Can't rename method to resolve collision */
             @Override // android.os.Parcelable.Creator
             public DataTypeResult createFromParcel(Parcel parcel) {
-                String readString = parcel.readString();
-                int readInt = parcel.readInt();
-                int readInt2 = parcel.readInt();
+                String string = parcel.readString();
+                int i = parcel.readInt();
+                int i2 = parcel.readInt();
                 ArrayMap arrayMap = new ArrayMap();
-                Bundle readBundle = parcel.readBundle(getClass().getClassLoader());
-                for (String str : readBundle.keySet()) {
-                    arrayMap.put(str, Integer.valueOf(readBundle.getInt(str)));
+                Bundle bundle = parcel.readBundle(getClass().getClassLoader());
+                for (String str : bundle.keySet()) {
+                    arrayMap.put(str, Integer.valueOf(bundle.getInt(str)));
                 }
-                byte[] createByteArray = parcel.createByteArray();
-                DataTypeResult dataTypeResult = new DataTypeResult(readString);
-                dataTypeResult.mSuccessCount = readInt;
-                dataTypeResult.mFailCount = readInt2;
+                byte[] bArrCreateByteArray = parcel.createByteArray();
+                DataTypeResult dataTypeResult = new DataTypeResult(string);
+                dataTypeResult.mSuccessCount = i;
+                dataTypeResult.mFailCount = i2;
                 dataTypeResult.mErrors.putAll(arrayMap);
-                dataTypeResult.mMetadataHash = createByteArray;
+                dataTypeResult.mMetadataHash = bArrCreateByteArray;
                 return dataTypeResult;
             }
 

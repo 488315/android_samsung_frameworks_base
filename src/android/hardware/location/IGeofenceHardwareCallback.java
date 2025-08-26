@@ -73,9 +73,9 @@ public interface IGeofenceHardwareCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IGeofenceHardwareCallback)) {
-                return (IGeofenceHardwareCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IGeofenceHardwareCallback)) {
+                return (IGeofenceHardwareCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -114,33 +114,33 @@ public interface IGeofenceHardwareCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                int readInt2 = parcel.readInt();
+                int i3 = parcel.readInt();
+                int i4 = parcel.readInt();
                 Location location = (Location) parcel.readTypedObject(Location.CREATOR);
-                long readLong = parcel.readLong();
-                int readInt3 = parcel.readInt();
+                long j = parcel.readLong();
+                int i5 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onGeofenceTransition(readInt, readInt2, location, readLong, readInt3);
+                onGeofenceTransition(i3, i4, location, j, i5);
             } else if (i == 2) {
-                int readInt4 = parcel.readInt();
-                int readInt5 = parcel.readInt();
+                int i6 = parcel.readInt();
+                int i7 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onGeofenceAdd(readInt4, readInt5);
+                onGeofenceAdd(i6, i7);
             } else if (i == 3) {
-                int readInt6 = parcel.readInt();
-                int readInt7 = parcel.readInt();
+                int i8 = parcel.readInt();
+                int i9 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onGeofenceRemove(readInt6, readInt7);
+                onGeofenceRemove(i8, i9);
             } else if (i == 4) {
-                int readInt8 = parcel.readInt();
-                int readInt9 = parcel.readInt();
+                int i10 = parcel.readInt();
+                int i11 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onGeofencePause(readInt8, readInt9);
+                onGeofencePause(i10, i11);
             } else if (i == 5) {
-                int readInt10 = parcel.readInt();
-                int readInt11 = parcel.readInt();
+                int i12 = parcel.readInt();
+                int i13 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onGeofenceResume(readInt10, readInt11);
+                onGeofenceResume(i12, i13);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -165,69 +165,69 @@ public interface IGeofenceHardwareCallback extends IInterface {
 
             @Override // android.hardware.location.IGeofenceHardwareCallback
             public void onGeofenceTransition(int i, int i2, Location location, long j, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(location, 0);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(location, 0);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.location.IGeofenceHardwareCallback
             public void onGeofenceAdd(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.location.IGeofenceHardwareCallback
             public void onGeofenceRemove(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.location.IGeofenceHardwareCallback
             public void onGeofencePause(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.location.IGeofenceHardwareCallback
             public void onGeofenceResume(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

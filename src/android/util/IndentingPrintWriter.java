@@ -74,33 +74,33 @@ public class IndentingPrintWriter extends PrintWriter {
     }
 
     public IndentingPrintWriter print(String str, Object obj) {
-        String valueOf;
+        String strValueOf;
         if (obj == null) {
-            valueOf = PerfettoProtoLogImpl.NULL_STRING;
+            strValueOf = PerfettoProtoLogImpl.NULL_STRING;
         } else if (obj.getClass().isArray()) {
             if (obj.getClass() == boolean[].class) {
-                valueOf = Arrays.toString((boolean[]) obj);
+                strValueOf = Arrays.toString((boolean[]) obj);
             } else if (obj.getClass() == byte[].class) {
-                valueOf = Arrays.toString((byte[]) obj);
+                strValueOf = Arrays.toString((byte[]) obj);
             } else if (obj.getClass() == char[].class) {
-                valueOf = Arrays.toString((char[]) obj);
+                strValueOf = Arrays.toString((char[]) obj);
             } else if (obj.getClass() == double[].class) {
-                valueOf = Arrays.toString((double[]) obj);
+                strValueOf = Arrays.toString((double[]) obj);
             } else if (obj.getClass() == float[].class) {
-                valueOf = Arrays.toString((float[]) obj);
+                strValueOf = Arrays.toString((float[]) obj);
             } else if (obj.getClass() == int[].class) {
-                valueOf = Arrays.toString((int[]) obj);
+                strValueOf = Arrays.toString((int[]) obj);
             } else if (obj.getClass() == long[].class) {
-                valueOf = Arrays.toString((long[]) obj);
+                strValueOf = Arrays.toString((long[]) obj);
             } else if (obj.getClass() == short[].class) {
-                valueOf = Arrays.toString((short[]) obj);
+                strValueOf = Arrays.toString((short[]) obj);
             } else {
-                valueOf = Arrays.toString((Object[]) obj);
+                strValueOf = Arrays.toString((Object[]) obj);
             }
         } else {
-            valueOf = String.valueOf(obj);
+            strValueOf = String.valueOf(obj);
         }
-        print(str + "=" + valueOf + " ");
+        print(str + "=" + strValueOf + " ");
         return this;
     }
 

@@ -29,7 +29,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DesktopHeaderManageWindowsMenu extends ManageWindowsViewContainer {
     public final ActivityManager.RunningTaskInfo callerTaskInfo;
@@ -43,7 +42,7 @@ public final class DesktopHeaderManageWindowsMenu extends ManageWindowsViewConta
     public final int y;
 
     public DesktopHeaderManageWindowsMenu(ActivityManager.RunningTaskInfo runningTaskInfo, int i, int i2, DisplayController displayController, RootTaskDisplayAreaOrganizer rootTaskDisplayAreaOrganizer, Context context, DesktopUserRepositories desktopUserRepositories, Supplier<SurfaceControl.Builder> supplier, Supplier<SurfaceControl.Transaction> supplier2, List<? extends Pair<Integer, ? extends TaskSnapshot>> list, Function1 function1, Function0 function0) {
-        super(context, ColorKt.m467toArgb8_81llA(new DecorThemeUtil(context).getColorScheme(runningTaskInfo).background));
+        super(context, ColorKt.m469toArgb8_81llA(new DecorThemeUtil(context).getColorScheme(runningTaskInfo).background));
         this.callerTaskInfo = runningTaskInfo;
         this.x = i;
         this.y = i2;
@@ -76,26 +75,26 @@ public final class DesktopHeaderManageWindowsMenu extends ManageWindowsViewConta
                 manageWindowsView2 = null;
             }
             int i5 = manageWindowsView2.menuHeight;
-            int systemBars = WindowInsets.Type.systemBars();
+            int iSystemBars = WindowInsets.Type.systemBars();
             ManageWindowsViewContainer.ManageWindowsView manageWindowsView3 = this.menuView;
-            additionalViewHostViewContainer = new AdditionalSystemViewContainer(windowManagerWrapper, i, i2, i3, i4, i5, 262152, systemBars, false, (View) (manageWindowsView3 != null ? manageWindowsView3 : null).rootView, 256, (DefaultConstructorMarker) null);
+            additionalViewHostViewContainer = new AdditionalSystemViewContainer(windowManagerWrapper, i, i2, i3, i4, i5, 262152, iSystemBars, false, (View) (manageWindowsView3 != null ? manageWindowsView3 : null).rootView, 256, (DefaultConstructorMarker) null);
         } else {
             SurfaceControl.Builder builder = (SurfaceControl.Builder) this.surfaceControlBuilderSupplier.get();
             this.rootTdaOrganizer.attachToDisplayArea(this.callerTaskInfo.displayId, builder);
-            SurfaceControl build = builder.setName("Manage Windows Menu").setContainerLayer().build();
+            SurfaceControl surfaceControlBuild = builder.setName("Manage Windows Menu").setContainerLayer().build();
             ManageWindowsViewContainer.ManageWindowsView manageWindowsView4 = this.menuView;
             int i6 = (manageWindowsView4 != null ? manageWindowsView4 : null).menuWidth;
             if (manageWindowsView4 == null) {
                 manageWindowsView4 = null;
             }
             WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams(i6, manageWindowsView4.menuHeight, 2, 262152, -2);
-            SurfaceControlViewHost surfaceControlViewHost = new SurfaceControlViewHost(this.context, this.displayController.mDisplayManager.getDisplay(this.callerTaskInfo.displayId), new WindowlessWindowManager(this.callerTaskInfo.configuration, build, (InputTransferToken) null), "MaximizeMenu");
+            SurfaceControlViewHost surfaceControlViewHost = new SurfaceControlViewHost(this.context, this.displayController.mDisplayManager.getDisplay(this.callerTaskInfo.displayId), new WindowlessWindowManager(this.callerTaskInfo.configuration, surfaceControlBuild, (InputTransferToken) null), "MaximizeMenu");
             ManageWindowsViewContainer.ManageWindowsView manageWindowsView5 = this.menuView;
             surfaceControlViewHost.setView((manageWindowsView5 != null ? manageWindowsView5 : null).rootView, layoutParams);
             SurfaceControl.Transaction transaction = (SurfaceControl.Transaction) this.surfaceControlTransactionSupplier.get();
-            transaction.setLayer(build, 70000).setPosition(build, point.x, point.y).show(build);
+            transaction.setLayer(surfaceControlBuild, 70000).setPosition(surfaceControlBuild, point.x, point.y).show(surfaceControlBuild);
             transaction.apply();
-            additionalViewHostViewContainer = new AdditionalViewHostViewContainer(build, surfaceControlViewHost, this.surfaceControlTransactionSupplier);
+            additionalViewHostViewContainer = new AdditionalViewHostViewContainer(surfaceControlBuild, surfaceControlViewHost, this.surfaceControlTransactionSupplier);
         }
         this.menuViewContainer = additionalViewHostViewContainer;
     }

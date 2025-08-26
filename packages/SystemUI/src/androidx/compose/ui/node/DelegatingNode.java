@@ -5,7 +5,6 @@ import androidx.compose.ui.Modifier;
 import androidx.compose.ui.internal.InlineClassHelperKt;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class DelegatingNode extends Modifier.Node {
     public Modifier.Node delegate;
@@ -25,17 +24,17 @@ public abstract class DelegatingNode extends Modifier.Node {
             }
             node.setAsDelegateTo$ui_release(this.node);
             int i = this.kindSet;
-            int calculateNodeKindSetFromIncludingDelegates = NodeKindKt.calculateNodeKindSetFromIncludingDelegates(node);
-            node.kindSet = calculateNodeKindSetFromIncludingDelegates;
+            int iCalculateNodeKindSetFromIncludingDelegates = NodeKindKt.calculateNodeKindSetFromIncludingDelegates(node);
+            node.kindSet = iCalculateNodeKindSetFromIncludingDelegates;
             int i2 = this.kindSet;
-            int i3 = calculateNodeKindSetFromIncludingDelegates & 2;
+            int i3 = iCalculateNodeKindSetFromIncludingDelegates & 2;
             if (i3 != 0 && (i2 & 2) != 0 && !(this instanceof LayoutModifierNode)) {
                 InlineClassHelperKt.throwIllegalStateException("Delegating to multiple LayoutModifierNodes without the delegating node implementing LayoutModifierNode itself is not allowed.\nDelegating Node: " + this + "\nDelegate Node: " + node);
             }
             node.child = this.delegate;
             this.delegate = node;
             node.parent = this;
-            updateNodeKindSet(calculateNodeKindSetFromIncludingDelegates | this.kindSet, false);
+            updateNodeKindSet(iCalculateNodeKindSetFromIncludingDelegates | this.kindSet, false);
             if (this.isAttached) {
                 if (i3 == 0 || (i & 2) != 0) {
                     updateCoordinator$ui_release(this.coordinator);
@@ -130,9 +129,9 @@ public abstract class DelegatingNode extends Modifier.Node {
                 node2.child = null;
                 node2.parent = null;
                 int i = this.kindSet;
-                int calculateNodeKindSetFromIncludingDelegates = NodeKindKt.calculateNodeKindSetFromIncludingDelegates(this);
-                updateNodeKindSet(calculateNodeKindSetFromIncludingDelegates, true);
-                if (this.isAttached && (i & 2) != 0 && (calculateNodeKindSetFromIncludingDelegates & 2) == 0) {
+                int iCalculateNodeKindSetFromIncludingDelegates = NodeKindKt.calculateNodeKindSetFromIncludingDelegates(this);
+                updateNodeKindSet(iCalculateNodeKindSetFromIncludingDelegates, true);
+                if (this.isAttached && (i & 2) != 0 && (iCalculateNodeKindSetFromIncludingDelegates & 2) == 0) {
                     NodeChain nodeChain = DelegatableNodeKt.requireLayoutNode(this).nodes;
                     this.node.updateCoordinator$ui_release(null);
                     nodeChain.syncCoordinators();

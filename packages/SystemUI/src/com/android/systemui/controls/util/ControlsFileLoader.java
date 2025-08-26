@@ -23,11 +23,9 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlSerializer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ControlsFileLoader {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -41,7 +39,7 @@ public final class ControlsFileLoader {
         new Companion(null);
     }
 
-    public static void generateBodyForControl(XmlSerializer xmlSerializer, ControlsBackupControl controlsBackupControl) {
+    public static void generateBodyForControl(XmlSerializer xmlSerializer, ControlsBackupControl controlsBackupControl) throws IllegalStateException, IOException, IllegalArgumentException {
         xmlSerializer.startTag(null, "structures");
         for (StructureInfo structureInfo : controlsBackupControl.structures) {
             xmlSerializer.startTag(null, "structure");
@@ -65,7 +63,7 @@ public final class ControlsFileLoader {
         xmlSerializer.endDocument();
     }
 
-    public static void generateBodyForSetting(XmlSerializer xmlSerializer, ControlsBackupSetting controlsBackupSetting) {
+    public static void generateBodyForSetting(XmlSerializer xmlSerializer, ControlsBackupSetting controlsBackupSetting) throws IllegalStateException, IOException, IllegalArgumentException {
         xmlSerializer.startTag(null, "setting");
         xmlSerializer.attribute(null, "setting_show_device", String.valueOf(controlsBackupSetting.showDevice));
         xmlSerializer.attribute(null, "setting_control_device", String.valueOf(controlsBackupSetting.controlDevice));
@@ -78,7 +76,7 @@ public final class ControlsFileLoader {
         xmlSerializer.endTag(null, "setting");
     }
 
-    public static File generateResultXML(File file, ControlsBackupFormat controlsBackupFormat) {
+    public static File generateResultXML(File file, ControlsBackupFormat controlsBackupFormat) throws IOException {
         MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("generateResultXml path = ", file.getPath(), "ControlsFileLoader");
         try {
             File parentFile = file.getParentFile();
@@ -93,33 +91,33 @@ public final class ControlsFileLoader {
             if (!file.exists()) {
                 file.createNewFile();
             }
+        } catch (Exception e) {
+            KeyguardSecSimPinViewController$$ExternalSyntheticOutline0.m("make file Exception : ", e, "ControlsFileLoader");
+        }
+        try {
+            FileWriter fileWriter = new FileWriter(file);
             try {
-                FileWriter fileWriter = new FileWriter(file);
-                try {
-                    XmlSerializer newSerializer = Xml.newSerializer();
-                    newSerializer.setOutput(fileWriter);
-                    newSerializer.startDocument("UTF-8", Boolean.TRUE);
-                    newSerializer.startTag(null, "version");
-                    newSerializer.text("1");
-                    newSerializer.endTag(null, "version");
-                    generateBodyForSetting(newSerializer, controlsBackupFormat.setting);
-                    generateBodyForControl(newSerializer, controlsBackupFormat.controls);
-                    Log.d("ControlsFileLoader", "backup success");
-                    fileWriter.close();
-                    return file;
-                } finally {
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-                return null;
+                XmlSerializer xmlSerializerNewSerializer = Xml.newSerializer();
+                xmlSerializerNewSerializer.setOutput(fileWriter);
+                xmlSerializerNewSerializer.startDocument("UTF-8", Boolean.TRUE);
+                xmlSerializerNewSerializer.startTag(null, "version");
+                xmlSerializerNewSerializer.text("1");
+                xmlSerializerNewSerializer.endTag(null, "version");
+                generateBodyForSetting(xmlSerializerNewSerializer, controlsBackupFormat.setting);
+                generateBodyForControl(xmlSerializerNewSerializer, controlsBackupFormat.controls);
+                Log.d("ControlsFileLoader", "backup success");
+                fileWriter.close();
+                return file;
+            } finally {
             }
-        } catch (Exception e2) {
-            KeyguardSecSimPinViewController$$ExternalSyntheticOutline0.m("make file Exception : ", e2, "ControlsFileLoader");
+        } catch (IOException e2) {
+            e2.printStackTrace();
+            return null;
         }
     }
 
     public static ControlsBackupFormat loadResultXml(File file) {
-        ControlsBackupFormat parseXml;
+        ControlsBackupFormat xml;
         if (!file.exists()) {
             Log.d("ControlsFileLoader", "No backup file, returning null");
             return null;
@@ -131,18 +129,18 @@ public final class ControlsFileLoader {
                     Log.d("ControlsFileLoader", "Reading data from file = " + file);
                     BackupHelper.Companion.getClass();
                     synchronized (BackupHelper.controlsDataLock) {
-                        XmlPullParser newPullParser = Xml.newPullParser();
-                        newPullParser.setInput(bufferedInputStream, null);
-                        parseXml = parseXml(newPullParser);
+                        XmlPullParser xmlPullParserNewPullParser = Xml.newPullParser();
+                        xmlPullParserNewPullParser.setInput(bufferedInputStream, null);
+                        xml = parseXml(xmlPullParserNewPullParser);
                     }
-                    return parseXml;
-                } catch (IOException e) {
-                    throw new IllegalStateException("Failed parsing backup file: " + file, e);
-                } catch (XmlPullParserException e2) {
-                    throw new IllegalStateException("Failed parsing backup file: " + file, e2);
+                    return xml;
+                } finally {
+                    IoUtils.closeQuietly(bufferedInputStream);
                 }
-            } finally {
-                IoUtils.closeQuietly(bufferedInputStream);
+            } catch (IOException e) {
+                throw new IllegalStateException("Failed parsing backup file: " + file, e);
+            } catch (XmlPullParserException e2) {
+                throw new IllegalStateException("Failed parsing backup file: " + file, e2);
             }
         } catch (FileNotFoundException e3) {
             Log.i("ControlsFileLoader", "No file found e = " + e3);
@@ -150,11 +148,11 @@ public final class ControlsFileLoader {
         }
     }
 
-    public static ControlsBackupFormat parseXml(XmlPullParser xmlPullParser) {
+    public static ControlsBackupFormat parseXml(XmlPullParser xmlPullParser) throws XmlPullParserException, IOException {
         ArrayList arrayList = new ArrayList();
         ControlsBackupSetting controlsBackupSetting = new ControlsBackupSetting(false, false, false, "");
         ArrayList arrayList2 = new ArrayList();
-        ComponentName componentName = null;
+        ComponentName componentNameUnflattenFromString = null;
         String str = null;
         while (true) {
             boolean z = true;
@@ -173,7 +171,7 @@ public final class ControlsFileLoader {
                     controlsBackupSetting.isOOBECompleted = Boolean.parseBoolean(xmlPullParser.getAttributeValue(null, "setting_oobe_completed"));
                     controlsBackupSetting.selectedComponent = xmlPullParser.getAttributeValue(null, "settings_selected_component");
                 } else if (next == 2 && name.equals("structure")) {
-                    componentName = ComponentName.unflattenFromString(xmlPullParser.getAttributeValue(null, "component"));
+                    componentNameUnflattenFromString = ComponentName.unflattenFromString(xmlPullParser.getAttributeValue(null, "component"));
                     String attributeValue = xmlPullParser.getAttributeValue(null, "structure");
                     str = attributeValue != null ? attributeValue : "";
                     String attributeValue2 = xmlPullParser.getAttributeValue(null, "sem_active");
@@ -186,9 +184,9 @@ public final class ControlsFileLoader {
                     String attributeValue5 = xmlPullParser.getAttributeValue(null, "subtitle");
                     String str2 = attributeValue5 == null ? "" : attributeValue5;
                     String attributeValue6 = xmlPullParser.getAttributeValue(null, "type");
-                    Integer valueOf = attributeValue6 != null ? Integer.valueOf(Integer.parseInt(attributeValue6)) : null;
-                    if (attributeValue3 != null && attributeValue4 != null && valueOf != null) {
-                        ControlInfo controlInfo = new ControlInfo(attributeValue3, attributeValue4, str2, valueOf.intValue(), 0, 16, null);
+                    Integer numValueOf = attributeValue6 != null ? Integer.valueOf(Integer.parseInt(attributeValue6)) : null;
+                    if (attributeValue3 != null && attributeValue4 != null && numValueOf != null) {
+                        ControlInfo controlInfo = new ControlInfo(attributeValue3, attributeValue4, str2, numValueOf.intValue(), 0, 16, null);
                         String attributeValue7 = xmlPullParser.getAttributeValue(null, "sem_layoutType");
                         if (attributeValue7 != null) {
                             controlInfo.layoutType = Integer.parseInt(attributeValue7);
@@ -196,9 +194,9 @@ public final class ControlsFileLoader {
                         arrayList2.add(controlInfo);
                     }
                 } else if (next == 3 && name.equals("structure")) {
-                    componentName.getClass();
+                    componentNameUnflattenFromString.getClass();
                     str.getClass();
-                    StructureInfo structureInfo = new StructureInfo(componentName, str, CollectionsKt___CollectionsKt.toList(arrayList2), false, 8, null);
+                    StructureInfo structureInfo = new StructureInfo(componentNameUnflattenFromString, str, CollectionsKt___CollectionsKt.toList(arrayList2), false, 8, null);
                     structureInfo.active = z;
                     arrayList.add(structureInfo);
                     arrayList2.clear();

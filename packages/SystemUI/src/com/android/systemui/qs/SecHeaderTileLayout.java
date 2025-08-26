@@ -19,7 +19,6 @@ import java.util.function.IntFunction;
 import java.util.function.IntSupplier;
 import java.util.function.Supplier;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SecHeaderTileLayout extends TileLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -152,7 +151,7 @@ public class SecHeaderTileLayout extends TileLayout {
         IntConsumer intConsumer = new IntConsumer() { // from class: com.android.systemui.qs.SecHeaderTileLayout$$ExternalSyntheticLambda4
             @Override // java.util.function.IntConsumer
             public final void accept(int i4) {
-                SecHeaderTileLayout secHeaderTileLayout = SecHeaderTileLayout.this;
+                SecHeaderTileLayout secHeaderTileLayout = this.f$0;
                 int i5 = SecHeaderTileLayout.$r8$clinit;
                 secHeaderTileLayout.mColumns = i4;
             }
@@ -240,7 +239,7 @@ public class SecHeaderTileLayout extends TileLayout {
         IntFunction intFunction = new IntFunction() { // from class: com.android.systemui.qs.SecHeaderTileLayout$$ExternalSyntheticLambda8
             @Override // java.util.function.IntFunction
             public final Object apply(int i6) {
-                return Integer.valueOf((int) (((r2.mCellHeight * ((SecHeaderTileLayout.this.mSquishinessFraction * 0.9f) + 0.1f)) + r2.mCellMarginVertical) * i6));
+                return Integer.valueOf((int) (((r2.mCellHeight * ((this.f$0.mSquishinessFraction * 0.9f) + 0.1f)) + r2.mCellMarginVertical) * i6));
             }
         };
         ArrayList arrayList = this.mRecords;
@@ -318,7 +317,7 @@ public class SecHeaderTileLayout extends TileLayout {
         }, new BiFunction() { // from class: com.android.systemui.qs.SecHeaderTileLayout$$ExternalSyntheticLambda1
             @Override // java.util.function.BiFunction
             public final Object apply(Object obj, Object obj2) {
-                return Boolean.valueOf(SecHeaderTileLayout.this.updateMaxRows(((Integer) obj).intValue(), ((Integer) obj2).intValue()));
+                return Boolean.valueOf(this.f$0.updateMaxRows(((Integer) obj).intValue(), ((Integer) obj2).intValue()));
             }
         });
     }
@@ -363,13 +362,13 @@ public class SecHeaderTileLayout extends TileLayout {
                 this.mCellMarginHorizontal = i6 / Math.max(1, size - 1);
                 this.mColumns = size;
             } else {
-                int min = i5 == 0 ? 1 : Math.min(size, measuredWidth / i5);
-                this.mColumns = min;
-                if (min != 0) {
-                    if (min == 1) {
+                int iMin = i5 == 0 ? 1 : Math.min(size, measuredWidth / i5);
+                this.mColumns = iMin;
+                if (iMin != 0) {
+                    if (iMin == 1) {
                         this.mCellMarginHorizontal = (measuredWidth - this.mCellWidth) / 2;
                     } else {
-                        this.mCellMarginHorizontal = (measuredWidth - (this.mCellWidth * min)) / (min - 1);
+                        this.mCellMarginHorizontal = (measuredWidth - (this.mCellWidth * iMin)) / (iMin - 1);
                     }
                 }
             }
@@ -391,14 +390,14 @@ public class SecHeaderTileLayout extends TileLayout {
         if (arrayList != null && arrayList.size() > 0) {
             ArrayList arrayList2 = this.mRecords;
             int size2 = arrayList2.size();
-            View view = this;
+            View viewUpdateAccessibilityOrder = this;
             int i9 = 0;
             while (i9 < size2) {
                 Object obj = arrayList2.get(i9);
                 i9++;
                 SecQSPanelControllerBase.TileRecord tileRecord = (SecQSPanelControllerBase.TileRecord) obj;
                 if (tileRecord.tileView.getVisibility() != 8) {
-                    view = tileRecord.tileView.updateAccessibilityOrder(view);
+                    viewUpdateAccessibilityOrder = tileRecord.tileView.updateAccessibilityOrder(viewUpdateAccessibilityOrder);
                 }
             }
         }

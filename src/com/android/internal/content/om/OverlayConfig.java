@@ -94,7 +94,7 @@ public class OverlayConfig {
         return i == 0 ? parsedOverlayInfo.path.compareTo(parsedOverlayInfo2.path) : i;
     }
 
-    public OverlayConfig(final File file, Supplier<OverlayScanner> supplier, PackageProvider packageProvider) {
+    public OverlayConfig(final File file, Supplier<OverlayScanner> supplier, PackageProvider packageProvider) throws IOException {
         ArrayList arrayList;
         ArrayList arrayList2;
         int i = 1;
@@ -176,24 +176,24 @@ public class OverlayConfig {
         return sb.toString();
     }
 
-    private static boolean parseAndValidatePartitionsOrderXml(String str, Map<String, Integer> map, List<OverlayConfigParser.OverlayPartition> list) {
+    private static boolean parseAndValidatePartitionsOrderXml(String str, Map<String, Integer> map, List<OverlayConfigParser.OverlayPartition> list) throws SAXException, IOException {
         try {
             File file = new File(str);
             if (!file.exists()) {
                 Log.w(TAG, "partition_order.xml does not exist.");
                 return false;
             }
-            Document parse = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(file);
-            parse.getDocumentElement().normalize();
-            if (!parse.getDocumentElement().getNodeName().equals("partition-order")) {
+            Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(file);
+            document.getDocumentElement().normalize();
+            if (!document.getDocumentElement().getNodeName().equals("partition-order")) {
                 Log.w(TAG, "Invalid partition_order.xml, xml root element is not partition-order");
                 return false;
             }
-            NodeList elementsByTagName = parse.getElementsByTagName("partition");
+            NodeList elementsByTagName = document.getElementsByTagName("partition");
             for (int i = 0; i < elementsByTagName.getLength(); i++) {
-                Node item = elementsByTagName.item(i);
-                if (item.getNodeType() == 1) {
-                    String attribute = ((Element) item).getAttribute("name");
+                Node nodeItem = elementsByTagName.item(i);
+                if (nodeItem.getNodeType() == 1) {
+                    String attribute = ((Element) nodeItem).getAttribute("name");
                     if (map.containsKey(attribute)) {
                         Log.w(TAG, "Invalid partition_order.xml, it has duplicate partition: " + attribute);
                         return false;
@@ -220,16 +220,14 @@ public class OverlayConfig {
     }
 
     public static boolean sortPartitions(String str, List<OverlayConfigParser.OverlayPartition> list) {
-        final HashMap hashMap = new HashMap();
-        if (!parseAndValidatePartitionsOrderXml(str, hashMap, list)) {
+        final HashMap map = new HashMap();
+        if (!parseAndValidatePartitionsOrderXml(str, map, list)) {
             return false;
         }
         Collections.sort(list, Comparator.comparingInt(new ToIntFunction() { // from class: com.android.internal.content.om.OverlayConfig$$ExternalSyntheticLambda0
             @Override // java.util.function.ToIntFunction
             public final int applyAsInt(Object obj) {
-                int intValue;
-                intValue = ((Integer) hashMap.get(((OverlayConfigParser.OverlayPartition) obj).getName())).intValue();
-                return intValue;
+                return ((Integer) map.get(((OverlayConfigParser.OverlayPartition) obj).getName())).intValue();
             }
         }));
         return true;
@@ -306,33 +304,31 @@ public class OverlayConfig {
         arrayList.sort(Comparator.comparingInt(new ToIntFunction() { // from class: com.android.internal.content.om.OverlayConfig$$ExternalSyntheticLambda5
             @Override // java.util.function.ToIntFunction
             public final int applyAsInt(Object obj) {
-                int i2;
-                i2 = ((OverlayConfig.Configuration) obj).configIndex;
-                return i2;
+                return ((OverlayConfig.Configuration) obj).configIndex;
             }
         }));
         return arrayList;
     }
 
     private static Map<String, OverlayScanner.ParsedOverlayInfo> getOverlayPackageInfos(PackageProvider packageProvider) {
-        final HashMap hashMap = new HashMap();
+        final HashMap map = new HashMap();
         packageProvider.forEachPackage(new TriConsumer() { // from class: com.android.internal.content.om.OverlayConfig$$ExternalSyntheticLambda6
             @Override // com.android.internal.util.function.TriConsumer
             public final void accept(Object obj, Object obj2, Object obj3) {
-                OverlayConfig.lambda$getOverlayPackageInfos$4(hashMap, (OverlayConfig.PackageProvider.Package) obj, (Boolean) obj2, (File) obj3);
+                OverlayConfig.lambda$getOverlayPackageInfos$4(map, (OverlayConfig.PackageProvider.Package) obj, (Boolean) obj2, (File) obj3);
             }
         });
-        return hashMap;
+        return map;
     }
 
-    static /* synthetic */ void lambda$getOverlayPackageInfos$4(HashMap hashMap, PackageProvider.Package r9, Boolean bool, File file) {
+    static /* synthetic */ void lambda$getOverlayPackageInfos$4(HashMap map, PackageProvider.Package r9, Boolean bool, File file) {
         if (r9.getOverlayTarget() == null || !bool.booleanValue()) {
             return;
         }
-        hashMap.put(r9.getPackageName(), new OverlayScanner.ParsedOverlayInfo(r9.getPackageName(), r9.getOverlayTarget(), r9.getTargetSdkVersion(), r9.isOverlayIsStatic(), r9.getOverlayPriority(), new File(r9.getBaseApkPath()), file));
+        map.put(r9.getPackageName(), new OverlayScanner.ParsedOverlayInfo(r9.getPackageName(), r9.getOverlayTarget(), r9.getTargetSdkVersion(), r9.isOverlayIsStatic(), r9.getOverlayPriority(), new File(r9.getBaseApkPath()), file));
     }
 
-    private static ArrayMap<Integer, List<String>> getActiveApexes(List<OverlayConfigParser.OverlayPartition> list) {
+    private static ArrayMap<Integer, List<String>> getActiveApexes(List<OverlayConfigParser.OverlayPartition> list) throws IOException {
         ArrayMap<Integer, List<String>> arrayMap = new ArrayMap<>();
         Iterator<OverlayConfigParser.OverlayPartition> it = list.iterator();
         while (it.hasNext()) {
@@ -383,89 +379,32 @@ public class OverlayConfig {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:17:0x005f, code lost:
-    
-        if (r6.policy.equals(r4.parsedConfig.policy) != false) goto L23;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:22:0x0062  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public java.util.ArrayList<com.android.internal.content.om.OverlayConfig.IdmapInvocation> getImmutableFrameworkOverlayIdmapInvocations() {
-        /*
-            r9 = this;
-            java.util.ArrayList r0 = new java.util.ArrayList
-            r0.<init>()
-            java.util.ArrayList r9 = r9.getSortedOverlays()
-            int r1 = r9.size()
-            r2 = 0
-            r3 = r2
-        Lf:
-            if (r3 >= r1) goto L83
-            java.lang.Object r4 = r9.get(r3)
-            com.android.internal.content.om.OverlayConfig$Configuration r4 = (com.android.internal.content.om.OverlayConfig.Configuration) r4
-            com.android.internal.content.om.OverlayConfigParser$ParsedConfiguration r5 = r4.parsedConfig
-            boolean r5 = r5.mutable
-            if (r5 != 0) goto L80
-            com.android.internal.content.om.OverlayConfigParser$ParsedConfiguration r5 = r4.parsedConfig
-            boolean r5 = r5.enabled
-            if (r5 == 0) goto L80
-            com.android.internal.content.om.OverlayConfigParser$ParsedConfiguration r5 = r4.parsedConfig
-            com.android.internal.content.om.OverlayScanner$ParsedOverlayInfo r5 = r5.parsedInfo
-            java.lang.String r5 = r5.targetPackageName
-            java.lang.String r6 = "android"
-            boolean r5 = r6.equals(r5)
-            if (r5 != 0) goto L32
-            goto L80
-        L32:
-            com.android.internal.content.om.OverlayConfigParser$ParsedConfiguration r5 = r4.parsedConfig
-            com.android.internal.content.om.OverlayScanner$ParsedOverlayInfo r5 = r5.parsedInfo
-            int r5 = r5.targetSdkVersion
-            r6 = 29
-            r7 = 1
-            if (r5 < r6) goto L3f
-            r5 = r7
-            goto L40
-        L3f:
-            r5 = r2
-        L40:
-            boolean r6 = r0.isEmpty()
-            if (r6 != 0) goto L62
-            int r6 = r0.size()
-            int r6 = r6 - r7
-            java.lang.Object r6 = r0.get(r6)
-            com.android.internal.content.om.OverlayConfig$IdmapInvocation r6 = (com.android.internal.content.om.OverlayConfig.IdmapInvocation) r6
-            boolean r7 = r6.enforceOverlayable
-            if (r7 != r5) goto L62
-            java.lang.String r7 = r6.policy
-            com.android.internal.content.om.OverlayConfigParser$ParsedConfiguration r8 = r4.parsedConfig
-            java.lang.String r8 = r8.policy
-            boolean r7 = r7.equals(r8)
-            if (r7 == 0) goto L62
-            goto L63
-        L62:
-            r6 = 0
-        L63:
-            if (r6 != 0) goto L71
-            com.android.internal.content.om.OverlayConfig$IdmapInvocation r6 = new com.android.internal.content.om.OverlayConfig$IdmapInvocation
-            com.android.internal.content.om.OverlayConfigParser$ParsedConfiguration r7 = r4.parsedConfig
-            java.lang.String r7 = r7.policy
-            r6.<init>(r5, r7)
-            r0.add(r6)
-        L71:
-            java.util.ArrayList<java.lang.String> r5 = r6.overlayPaths
-            com.android.internal.content.om.OverlayConfigParser$ParsedConfiguration r4 = r4.parsedConfig
-            com.android.internal.content.om.OverlayScanner$ParsedOverlayInfo r4 = r4.parsedInfo
-            java.io.File r4 = r4.path
-            java.lang.String r4 = r4.getAbsolutePath()
-            r5.add(r4)
-        L80:
-            int r3 = r3 + 1
-            goto Lf
-        L83:
-            return r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.content.om.OverlayConfig.getImmutableFrameworkOverlayIdmapInvocations():java.util.ArrayList");
+    public ArrayList<IdmapInvocation> getImmutableFrameworkOverlayIdmapInvocations() {
+        ArrayList<IdmapInvocation> arrayList = new ArrayList<>();
+        ArrayList<Configuration> sortedOverlays = getSortedOverlays();
+        int size = sortedOverlays.size();
+        for (int i = 0; i < size; i++) {
+            Configuration configuration = sortedOverlays.get(i);
+            if (!configuration.parsedConfig.mutable && configuration.parsedConfig.enabled && "android".equals(configuration.parsedConfig.parsedInfo.targetPackageName)) {
+                boolean z = configuration.parsedConfig.parsedInfo.targetSdkVersion >= 29;
+                if (!arrayList.isEmpty()) {
+                    IdmapInvocation idmapInvocation = arrayList.get(arrayList.size() - 1);
+                    if (idmapInvocation.enforceOverlayable != z || !idmapInvocation.policy.equals(configuration.parsedConfig.policy)) {
+                        idmapInvocation = null;
+                    }
+                    if (idmapInvocation == null) {
+                        idmapInvocation = new IdmapInvocation(z, configuration.parsedConfig.policy);
+                        arrayList.add(idmapInvocation);
+                    }
+                    idmapInvocation.overlayPaths.add(configuration.parsedConfig.parsedInfo.path.getAbsolutePath());
+                }
+            }
+        }
+        return arrayList;
     }
 
     public String[] createImmutableFrameworkIdmapsInZygote() {
@@ -475,12 +414,12 @@ public class OverlayConfig {
         int size = immutableFrameworkOverlayIdmapInvocations.size();
         for (int i = 0; i < size; i++) {
             IdmapInvocation idmapInvocation = immutableFrameworkOverlayIdmapInvocations.get(i);
-            String[] createIdmap = createIdmap(str, (String[]) idmapInvocation.overlayPaths.toArray(new String[0]), new String[]{"public", idmapInvocation.policy}, idmapInvocation.enforceOverlayable);
-            if (createIdmap == null) {
+            String[] strArrCreateIdmap = createIdmap(str, (String[]) idmapInvocation.overlayPaths.toArray(new String[0]), new String[]{"public", idmapInvocation.policy}, idmapInvocation.enforceOverlayable);
+            if (strArrCreateIdmap == null) {
                 Log.w(TAG, "'idmap2 create-multiple' failed: no mutable=\"false\" overlays targeting \"android\" will be loaded");
                 return new String[0];
             }
-            arrayList.addAll(Arrays.asList(createIdmap));
+            arrayList.addAll(Arrays.asList(strArrCreateIdmap));
         }
         return (String[]) arrayList.toArray(new String[0]);
     }
@@ -493,9 +432,7 @@ public class OverlayConfig {
         arrayList.sort(Comparator.comparingInt(new ToIntFunction() { // from class: com.android.internal.content.om.OverlayConfig$$ExternalSyntheticLambda1
             @Override // java.util.function.ToIntFunction
             public final int applyAsInt(Object obj) {
-                int i;
-                i = ((OverlayConfig.Configuration) obj).configIndex;
-                return i;
+                return ((OverlayConfig.Configuration) obj).configIndex;
             }
         }));
         for (int i = 0; i < arrayList.size(); i++) {

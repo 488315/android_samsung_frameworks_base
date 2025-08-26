@@ -9,6 +9,7 @@ import java.security.AlgorithmParameters;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.SecureRandom;
 import java.security.spec.AlgorithmParameterSpec;
+import java.security.spec.InvalidParameterSpecException;
 import javax.crypto.spec.DHGenParameterSpec;
 import javax.crypto.spec.DHParameterSpec;
 
@@ -36,14 +37,14 @@ public class AlgorithmParameterGeneratorSpi extends BaseAlgorithmParameterGenera
     }
 
     @Override // java.security.AlgorithmParameterGeneratorSpi
-    protected AlgorithmParameters engineGenerateParameters() {
+    protected AlgorithmParameters engineGenerateParameters() throws InvalidParameterSpecException, IllegalArgumentException {
         DHParametersGenerator dHParametersGenerator = new DHParametersGenerator();
         dHParametersGenerator.init(this.strength, PrimeCertaintyCalculator.getDefaultCertainty(this.strength), CryptoServicesRegistrar.getSecureRandom(this.random));
-        DHParameters generateParameters = dHParametersGenerator.generateParameters();
+        DHParameters dHParametersGenerateParameters = dHParametersGenerator.generateParameters();
         try {
-            AlgorithmParameters createParametersInstance = createParametersInstance("DH");
-            createParametersInstance.init(new DHParameterSpec(generateParameters.getP(), generateParameters.getG(), this.l));
-            return createParametersInstance;
+            AlgorithmParameters algorithmParametersCreateParametersInstance = createParametersInstance("DH");
+            algorithmParametersCreateParametersInstance.init(new DHParameterSpec(dHParametersGenerateParameters.getP(), dHParametersGenerateParameters.getG(), this.l));
+            return algorithmParametersCreateParametersInstance;
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }

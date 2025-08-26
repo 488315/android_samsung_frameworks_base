@@ -21,7 +21,6 @@ import com.android.systemui.statusbar.notification.stack.NotificationChildrenCon
 import com.android.systemui.util.SystemUIAnalytics;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SubscreenParentItemViewHolder extends RecyclerView.ViewHolder {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -69,25 +68,28 @@ public class SubscreenParentItemViewHolder extends RecyclerView.ViewHolder {
             this.mClickAnimator = subscreenSubRoomNotificaitonAnimatorManager.alphaAnimatedMainView(300L, subscreenSubRoomNotification.mSubscreenMainLayout, new Runnable() { // from class: com.android.systemui.statusbar.notification.SubscreenParentItemViewHolder$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SubscreenParentItemViewHolder subscreenParentItemViewHolder = SubscreenParentItemViewHolder.this;
+                    SubscreenParentItemViewHolder subscreenParentItemViewHolder = this.f$0;
                     SubscreenSubRoomNotification subscreenSubRoomNotification2 = subscreenSubRoomNotification;
                     boolean z3 = z;
                     int i = SubscreenParentItemViewHolder.$r8$clinit;
                     subscreenParentItemViewHolder.getClass();
-                    subscreenSubRoomNotification2.getClass();
-                    boolean isKnoxSecurity = SubscreenSubRoomNotification.getDeviceModel().isKnoxSecurity(subscreenParentItemViewHolder.mInfo.mRow.mEntry);
+                    if (!subscreenSubRoomNotification2.mIsInNotiRoom) {
+                        Log.d("SubscreenParentItemViewHolder", "clickNotification return - noti room closed during click operation.");
+                        return;
+                    }
+                    boolean zIsKnoxSecurity = SubscreenSubRoomNotification.getDeviceModel().isKnoxSecurity(subscreenParentItemViewHolder.mInfo.mRow.mEntry);
                     SubscreenDeviceModelParent deviceModel = SubscreenSubRoomNotification.getDeviceModel();
                     NotificationEntry notificationEntry = subscreenParentItemViewHolder.mInfo.mRow.mEntry;
                     deviceModel.getClass();
                     NotificationChildrenContainer notificationChildrenContainer = notificationEntry.row.mChildrenContainer;
                     boolean z4 = notificationEntry.mSbn.getNotification().isGroupSummary() && (notificationChildrenContainer == null || notificationChildrenContainer.getNotificationChildCount() == 0);
-                    boolean isInsignificantSummary = subscreenParentItemViewHolder.mInfo.mRow.isInsignificantSummary();
-                    StringBuilder sb = new StringBuilder("setHeaderVIewLayout onClick mInfo.isGroupSummary() : ");
+                    boolean zIsInsignificantSummary = subscreenParentItemViewHolder.mInfo.mRow.isInsignificantSummary();
+                    StringBuilder sb = new StringBuilder("clickNotification - mInfo.isGroupSummary() : ");
                     KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sb, subscreenParentItemViewHolder.mInfo.mGroupSummary, ", hideContent : ", z3, ", isKnoxSecurity : ");
-                    KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sb, isKnoxSecurity, ", isOnlyGroupSummary : ", z4, ", isInsignificantSummary : ");
-                    sb.append(isInsignificantSummary);
+                    KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sb, zIsKnoxSecurity, ", isOnlyGroupSummary : ", z4, ", isInsignificantSummary : ");
+                    sb.append(zIsInsignificantSummary);
                     Log.e("SubscreenParentItemViewHolder", sb.toString());
-                    if (!(subscreenParentItemViewHolder.mInfo.mGroupSummary || isInsignificantSummary) || z3 || z4) {
+                    if (!(subscreenParentItemViewHolder.mInfo.mGroupSummary || zIsInsignificantSummary) || z3 || z4) {
                         SubscreenNotificationInfoManager subscreenNotificationInfoManager = subscreenParentItemViewHolder.mNotificationInfoManager;
                         subscreenNotificationInfoManager.mNotificationDetailAdapter.mItemPostionInGroup = subscreenNotificationInfoManager.mIsShownGroup ? subscreenParentItemViewHolder.getBindingAdapterPosition() : 0;
                         subscreenSubRoomNotification2.showDetailNotification(subscreenParentItemViewHolder.mInfo);
@@ -107,15 +109,15 @@ public class SubscreenParentItemViewHolder extends RecyclerView.ViewHolder {
                             ExpandableNotificationRow expandableNotificationRow = subscreenNotificationInfo2.mRow;
                             if (expandableNotificationRow.mIsSummaryWithChildren) {
                                 NotificationChildrenContainer notificationChildrenContainer2 = expandableNotificationRow.mChildrenContainer;
-                                int min = Math.min(notificationChildrenContainer2.getNotificationChildCount(), 8);
+                                int iMin = Math.min(notificationChildrenContainer2.getNotificationChildCount(), 8);
                                 if (subscreenNotificationInfo2.mRow.isInsignificantSummary()) {
-                                    min = ((ArrayList) notificationChildrenContainer2.mAttachedChildren).size() > 50 ? 50 : ((ArrayList) notificationChildrenContainer2.mAttachedChildren).size();
+                                    iMin = ((ArrayList) notificationChildrenContainer2.mAttachedChildren).size() > 50 ? 50 : ((ArrayList) notificationChildrenContainer2.mAttachedChildren).size();
                                     SubscreenNotificationController subscreenNotificationController = subscreenNotificationInfoManager2.mSubscreenNotificationController;
-                                    if (min <= subscreenNotificationController.mDeviceModel.mMoreNotificationCount) {
-                                        RecyclerView$$ExternalSyntheticOutline0.m(subscreenNotificationController.mDeviceModel.mMoreNotificationCount, "SubscreenNotificationInfoManager", MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(min, "addGroupItems - childCount : ", ", MoreNotificationCount : "));
+                                    if (iMin <= subscreenNotificationController.mDeviceModel.mMoreNotificationCount) {
+                                        RecyclerView$$ExternalSyntheticOutline0.m(subscreenNotificationController.mDeviceModel.mMoreNotificationCount, "SubscreenNotificationInfoManager", MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(iMin, "addGroupItems - childCount : ", ", MoreNotificationCount : "));
                                     }
                                 }
-                                for (int i2 = 0; i2 < min; i2++) {
+                                for (int i2 = 0; i2 < iMin; i2++) {
                                     ExpandableNotificationRow expandableNotificationRow2 = (ExpandableNotificationRow) ((ArrayList) notificationChildrenContainer2.mAttachedChildren).get(i2);
                                     expandableNotificationRow2.mEntry.getClass();
                                     subscreenNotificationInfoManager2.mGroupDataArray.add(subscreenNotificationInfoManager2.createItemsData(expandableNotificationRow2));

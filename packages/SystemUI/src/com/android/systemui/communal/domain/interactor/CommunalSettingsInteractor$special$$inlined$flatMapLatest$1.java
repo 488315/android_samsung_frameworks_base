@@ -1,6 +1,7 @@
 package com.android.systemui.communal.domain.interactor;
 
 import android.R;
+import android.content.res.Resources;
 import com.android.systemui.communal.data.repository.CommunalSettingsRepositoryImpl;
 import com.android.systemui.communal.shared.model.WhenToStartHub;
 import kotlin.ResultKt;
@@ -14,7 +15,6 @@ import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class CommunalSettingsInteractor$special$$inlined$flatMapLatest$1 extends SuspendLambda implements Function3 {
     private /* synthetic */ Object L$0;
@@ -37,16 +37,16 @@ public final class CommunalSettingsInteractor$special$$inlined$flatMapLatest$1 e
     }
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
-    public final Object invokeSuspend(Object obj) {
+    public final Object invokeSuspend(Object obj) throws Resources.NotFoundException {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             FlowCollector flowCollector = (FlowCollector) this.L$0;
             ((CommunalSettingsRepositoryImpl) this.this$0.repository).resources.getBoolean(R.bool.config_letterboxIsEducationEnabled);
-            StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(WhenToStartHub.NEVER);
+            StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(WhenToStartHub.NEVER);
             this.label = 1;
-            if (FlowKt.emitAll(flowCollector, MutableStateFlow, this) == coroutineSingletons) {
+            if (FlowKt.emitAll(flowCollector, stateFlowImplMutableStateFlow, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

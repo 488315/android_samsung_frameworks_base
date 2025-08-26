@@ -61,7 +61,7 @@ public class PackageInfoCommonUtils {
         if (androidPackage == null) {
             return null;
         }
-        ApplicationInfo generateApplicationInfo = generateApplicationInfo(androidPackage, j, i);
+        ApplicationInfo applicationInfoGenerateApplicationInfo = generateApplicationInfo(androidPackage, j, i);
         PackageInfo packageInfo = new PackageInfo();
         packageInfo.packageName = androidPackage.getPackageName();
         packageInfo.splitNames = androidPackage.getSplitNames();
@@ -75,7 +75,7 @@ public class PackageInfoCommonUtils {
             packageInfo.sharedUserId = androidPackage.getSharedUserId();
             packageInfo.sharedUserLabel = androidPackage.getSharedUserLabelResourceId();
         }
-        packageInfo.applicationInfo = generateApplicationInfo;
+        packageInfo.applicationInfo = applicationInfoGenerateApplicationInfo;
         packageInfo.installLocation = androidPackage.getInstallLocation();
         if ((packageInfo.applicationInfo.flags & 1) != 0 || (packageInfo.applicationInfo.flags & 128) != 0) {
             packageInfo.requiredForAllUsers = androidPackage.isRequiredForAllUsers();
@@ -181,7 +181,7 @@ public class PackageInfoCommonUtils {
             for (int i6 = 0; i6 < size5; i6++) {
                 ParsedActivity parsedActivity = androidPackage.getActivities().get(i6);
                 if (isMatch(androidPackage, parsedActivity.isDirectBootAware(), j) && !PackageManager.APP_DETAILS_ACTIVITY_CLASS_NAME.equals(parsedActivity.getName())) {
-                    activityInfoArr[i5] = generateActivityInfo(parsedActivity, j, generateApplicationInfo);
+                    activityInfoArr[i5] = generateActivityInfo(parsedActivity, j, applicationInfoGenerateApplicationInfo);
                     i5++;
                 }
             }
@@ -193,7 +193,7 @@ public class PackageInfoCommonUtils {
             for (int i8 = 0; i8 < size4; i8++) {
                 ParsedActivity parsedActivity2 = androidPackage.getReceivers().get(i8);
                 if (isMatch(androidPackage, parsedActivity2.isDirectBootAware(), j)) {
-                    activityInfoArr2[i7] = generateActivityInfo(parsedActivity2, j, generateApplicationInfo);
+                    activityInfoArr2[i7] = generateActivityInfo(parsedActivity2, j, applicationInfoGenerateApplicationInfo);
                     i7++;
                 }
             }
@@ -205,7 +205,7 @@ public class PackageInfoCommonUtils {
             for (int i10 = 0; i10 < size3; i10++) {
                 ParsedService parsedService = androidPackage.getServices().get(i10);
                 if (isMatch(androidPackage, parsedService.isDirectBootAware(), j)) {
-                    serviceInfoArr[i9] = generateServiceInfo(parsedService, j, generateApplicationInfo);
+                    serviceInfoArr[i9] = generateServiceInfo(parsedService, j, applicationInfoGenerateApplicationInfo);
                     i9++;
                 }
             }
@@ -217,7 +217,7 @@ public class PackageInfoCommonUtils {
             for (int i12 = 0; i12 < size2; i12++) {
                 ParsedProvider parsedProvider = androidPackage.getProviders().get(i12);
                 if (isMatch(androidPackage, parsedProvider.isDirectBootAware(), j)) {
-                    providerInfoArr[i11] = generateProviderInfo(androidPackage, parsedProvider, j, generateApplicationInfo, i);
+                    providerInfoArr[i11] = generateProviderInfo(androidPackage, parsedProvider, j, applicationInfoGenerateApplicationInfo, i);
                     i11++;
                 }
             }
@@ -446,15 +446,15 @@ public class PackageInfoCommonUtils {
                 applicationInfo.credentialProtectedDataDir = baseAppDataCredentialProtectedDirForSystemUser + packageName;
                 applicationInfo.deviceProtectedDataDir = baseAppDataDeviceProtectedDirForSystemUser + packageName;
             } else {
-                String valueOf = String.valueOf(i);
+                String strValueOf = String.valueOf(i);
                 int length = baseAppDataCredentialProtectedDirForSystemUser.length();
-                StringBuilder replace = new StringBuilder(baseAppDataCredentialProtectedDirForSystemUser).replace(length - 2, length - 1, valueOf);
-                replace.append(packageName);
-                applicationInfo.credentialProtectedDataDir = replace.toString();
+                StringBuilder sbReplace = new StringBuilder(baseAppDataCredentialProtectedDirForSystemUser).replace(length - 2, length - 1, strValueOf);
+                sbReplace.append(packageName);
+                applicationInfo.credentialProtectedDataDir = sbReplace.toString();
                 int length2 = baseAppDataDeviceProtectedDirForSystemUser.length();
-                StringBuilder replace2 = new StringBuilder(baseAppDataDeviceProtectedDirForSystemUser).replace(length2 - 2, length2 - 1, valueOf);
-                replace2.append(packageName);
-                applicationInfo.deviceProtectedDataDir = replace2.toString();
+                StringBuilder sbReplace2 = new StringBuilder(baseAppDataDeviceProtectedDirForSystemUser).replace(length2 - 2, length2 - 1, strValueOf);
+                sbReplace2.append(packageName);
+                applicationInfo.deviceProtectedDataDir = sbReplace2.toString();
             }
         }
         if (androidPackage.isDefaultToDeviceProtectedStorage()) {
@@ -474,15 +474,15 @@ public class PackageInfoCommonUtils {
                 instrumentationInfo.credentialProtectedDataDir = baseAppDataCredentialProtectedDirForSystemUser + packageName;
                 instrumentationInfo.deviceProtectedDataDir = baseAppDataDeviceProtectedDirForSystemUser + packageName;
             } else {
-                String valueOf = String.valueOf(i);
+                String strValueOf = String.valueOf(i);
                 int length = baseAppDataCredentialProtectedDirForSystemUser.length();
-                StringBuilder replace = new StringBuilder(baseAppDataCredentialProtectedDirForSystemUser).replace(length - 2, length - 1, valueOf);
-                replace.append(packageName);
-                instrumentationInfo.credentialProtectedDataDir = replace.toString();
+                StringBuilder sbReplace = new StringBuilder(baseAppDataCredentialProtectedDirForSystemUser).replace(length - 2, length - 1, strValueOf);
+                sbReplace.append(packageName);
+                instrumentationInfo.credentialProtectedDataDir = sbReplace.toString();
                 int length2 = baseAppDataDeviceProtectedDirForSystemUser.length();
-                StringBuilder replace2 = new StringBuilder(baseAppDataDeviceProtectedDirForSystemUser).replace(length2 - 2, length2 - 1, valueOf);
-                replace2.append(packageName);
-                instrumentationInfo.deviceProtectedDataDir = replace2.toString();
+                StringBuilder sbReplace2 = new StringBuilder(baseAppDataDeviceProtectedDirForSystemUser).replace(length2 - 2, length2 - 1, strValueOf);
+                sbReplace2.append(packageName);
+                instrumentationInfo.deviceProtectedDataDir = sbReplace2.toString();
             }
         }
         if (androidPackage.isDefaultToDeviceProtectedStorage()) {
@@ -493,8 +493,8 @@ public class PackageInfoCommonUtils {
     }
 
     private static boolean isMatch(AndroidPackage androidPackage, boolean z, long j) {
-        boolean isSystem = ((AndroidPackageHidden) androidPackage).isSystem();
-        if ((1048576 & j) != 0 && !isSystem) {
+        boolean zIsSystem = ((AndroidPackageHidden) androidPackage).isSystem();
+        if ((1048576 & j) != 0 && !zIsSystem) {
             return reportIfDebug(false, j);
         }
         return reportIfDebug((((262144 & j) > 0L ? 1 : ((262144 & j) == 0L ? 0 : -1)) != 0 && !z) || (((524288 & j) > 0L ? 1 : ((524288 & j) == 0L ? 0 : -1)) != 0 && z), j);

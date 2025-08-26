@@ -17,6 +17,7 @@ import androidx.core.animation.KeyframeSet;
 import androidx.core.animation.ObjectAnimator;
 import androidx.core.animation.PropertyValuesHolder;
 import com.android.internal.jank.InteractionJankMonitor;
+import com.android.systemui.scene.shared.flag.SceneContainerFlag;
 import com.android.systemui.statusbar.notification.row.ExpandableNotificationRow;
 import com.android.systemui.statusbar.notification.row.ExpandableView;
 import com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout;
@@ -26,7 +27,6 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ExpandHelper implements Gefingerpoken {
     public static final AnonymousClass1 VIEW_SCALER_HEIGHT_PROPERTY = new FloatProperty("ViewScalerHeight") { // from class: com.android.systemui.ExpandHelper.1
@@ -74,11 +74,9 @@ public class ExpandHelper implements Gefingerpoken {
     public int mExpansionStyle = 0;
     public boolean mEnabled = true;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Callback {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ViewScaler {
         public ExpandableNotificationRow mView;
 
@@ -172,25 +170,91 @@ public class ExpandHelper implements Gefingerpoken {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:19:0x0053, code lost:
-    
-        if (r0 != 3) goto L72;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:63:0x010f, code lost:
-    
-        if (com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout.this.getOwnScrollY() == 0) goto L66;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:50:0x00d7  */
+    /* JADX WARN: Removed duplicated region for block: B:65:0x0112  */
     @Override // com.android.systemui.Gefingerpoken
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean onInterceptTouchEvent(android.view.MotionEvent r8) {
-        /*
-            Method dump skipped, instructions count: 324
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.ExpandHelper.onInterceptTouchEvent(android.view.MotionEvent):boolean");
+    public final boolean onInterceptTouchEvent(MotionEvent motionEvent) {
+        float yVelocity;
+        if (!this.mEnabled) {
+            return false;
+        }
+        trackVelocity(motionEvent);
+        int action = motionEvent.getAction();
+        this.mSGD.onTouchEvent(motionEvent);
+        int focusX = (int) this.mSGD.getFocusX();
+        float focusY = (int) this.mSGD.getFocusY();
+        this.mInitialTouchFocusY = focusY;
+        float currentSpan = this.mSGD.getCurrentSpan();
+        this.mInitialTouchSpan = currentSpan;
+        this.mLastFocusY = this.mInitialTouchFocusY;
+        this.mLastSpanY = currentSpan;
+        if (this.mExpanding) {
+            this.mLastMotionY = motionEvent.getRawY();
+            maybeRecycleVelocityTracker(motionEvent);
+            return true;
+        }
+        if (action == 2 && (this.mExpansionStyle & 1) != 0) {
+            return true;
+        }
+        int i = action & 255;
+        if (i == 0) {
+            NotificationStackScrollLayout.AnonymousClass9 anonymousClass9 = this.mScrollAdapter;
+            if (anonymousClass9 != null) {
+                if (isInside(NotificationStackScrollLayout.this, focusX, focusY)) {
+                    NotificationStackScrollLayout.AnonymousClass9 anonymousClass92 = this.mScrollAdapter;
+                    anonymousClass92.getClass();
+                    int i2 = SceneContainerFlag.$r8$clinit;
+                    boolean z = NotificationStackScrollLayout.this.getOwnScrollY() == 0;
+                    this.mWatchingForPull = z;
+                    ExpandableView expandableViewFindView$1 = findView$1(focusX, focusY);
+                    this.mResizedView = expandableViewFindView$1;
+                    if (expandableViewFindView$1 != null && !((NotificationStackScrollLayout.AnonymousClass11) this.mCallback).canChildBeExpanded(expandableViewFindView$1)) {
+                        this.mResizedView = null;
+                        this.mWatchingForPull = false;
+                    }
+                    this.mInitialTouchY = motionEvent.getRawY();
+                    this.mInitialTouchX = motionEvent.getRawX();
+                }
+            }
+        } else if (i == 1) {
+            boolean z2 = motionEvent.getActionMasked() == 3;
+            VelocityTracker velocityTracker = this.mVelocityTracker;
+            if (velocityTracker != null) {
+                velocityTracker.computeCurrentVelocity(1000);
+                yVelocity = this.mVelocityTracker.getYVelocity();
+            } else {
+                yVelocity = 0.0f;
+            }
+            finishExpanding(z2, yVelocity);
+            this.mResizedView = null;
+        } else if (i == 2) {
+            float currentSpanX = this.mSGD.getCurrentSpanX();
+            if (currentSpanX > this.mPullGestureMinXSpan && currentSpanX > this.mSGD.getCurrentSpanY() && !this.mExpanding) {
+                startExpanding(this.mResizedView, 2);
+                this.mWatchingForPull = false;
+            }
+            if (this.mWatchingForPull) {
+                float rawY = motionEvent.getRawY() - this.mInitialTouchY;
+                float rawX = motionEvent.getRawX() - this.mInitialTouchX;
+                int classification = motionEvent.getClassification();
+                int i3 = this.mTouchSlop;
+                if (rawY > (classification == 1 ? i3 * this.mSlopMultiplier : i3) && rawY > Math.abs(rawX)) {
+                    this.mWatchingForPull = false;
+                    ExpandableView expandableView = this.mResizedView;
+                    if (expandableView != null && ((expandableView.getIntrinsicHeight() != expandableView.getMaxContentHeight() || (expandableView.isSummaryWithChildren() && !expandableView.areChildrenExpanded())) && startExpanding(this.mResizedView, 1))) {
+                        this.mLastMotionY = motionEvent.getRawY();
+                        this.mInitialTouchY = motionEvent.getRawY();
+                    }
+                }
+            }
+        } else if (i == 3) {
+        }
+        this.mLastMotionY = motionEvent.getRawY();
+        maybeRecycleVelocityTracker(motionEvent);
+        return this.mExpanding;
     }
 
     public boolean startExpanding(ExpandableView expandableView, int i) {
@@ -251,19 +315,19 @@ public class ExpandHelper implements Gefingerpoken {
     public void updateExpansion() {
         float currentSpan = (this.mSGD.getCurrentSpan() - this.mInitialTouchSpan) * 1.0f;
         float focusY = (this.mSGD.getFocusY() - this.mInitialTouchFocusY) * 1.0f * (this.mGravity == 80 ? -1.0f : 1.0f);
-        float abs = Math.abs(currentSpan) + Math.abs(focusY) + 1.0f;
-        float abs2 = ((Math.abs(currentSpan) * currentSpan) / abs) + ((Math.abs(focusY) * focusY) / abs) + this.mOldHeight;
+        float fAbs = Math.abs(currentSpan) + Math.abs(focusY) + 1.0f;
+        float fAbs2 = ((Math.abs(currentSpan) * currentSpan) / fAbs) + ((Math.abs(focusY) * focusY) / fAbs) + this.mOldHeight;
         float f = this.mSmallSize;
-        if (abs2 < f) {
-            abs2 = f;
+        if (fAbs2 < f) {
+            fAbs2 = f;
         }
         float f2 = this.mNaturalHeight;
-        if (abs2 > f2) {
-            abs2 = f2;
+        if (fAbs2 > f2) {
+            fAbs2 = f2;
         }
         ViewScaler viewScaler = this.mScaler;
-        viewScaler.mView.setActualHeight((int) abs2, true);
-        ExpandHelper.this.mCurrentHeight = abs2;
+        viewScaler.mView.setActualHeight((int) fAbs2, true);
+        ExpandHelper.this.mCurrentHeight = fAbs2;
         this.mLastFocusY = this.mSGD.getFocusY();
         this.mLastSpanY = this.mSGD.getCurrentSpan();
     }

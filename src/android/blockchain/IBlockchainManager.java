@@ -85,9 +85,9 @@ public interface IBlockchainManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IBlockchainManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IBlockchainManager)) {
-                return (IBlockchainManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IBlockchainManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IBlockchainManager)) {
+                return (IBlockchainManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -129,9 +129,9 @@ public interface IBlockchainManager extends IInterface {
                 case 1:
                     BlockchainTZServiceConfig blockchainTZServiceConfig = (BlockchainTZServiceConfig) parcel.readTypedObject(BlockchainTZServiceConfig.CREATOR);
                     parcel.enforceNoDataAvail();
-                    BlockchainTZServiceCommnInfo registerBlockchainFW = registerBlockchainFW(blockchainTZServiceConfig);
+                    BlockchainTZServiceCommnInfo blockchainTZServiceCommnInfoRegisterBlockchainFW = registerBlockchainFW(blockchainTZServiceConfig);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(registerBlockchainFW, 1);
+                    parcel2.writeTypedObject(blockchainTZServiceCommnInfoRegisterBlockchainFW, 1);
                     return true;
                 case 2:
                     byte[] measurementFile = getMeasurementFile();
@@ -139,29 +139,29 @@ public interface IBlockchainManager extends IInterface {
                     parcel2.writeByteArray(measurementFile);
                     return true;
                 case 3:
-                    int readInt = parcel.readInt();
-                    byte[] createByteArray = parcel.createByteArray();
+                    int i3 = parcel.readInt();
+                    byte[] bArrCreateByteArray = parcel.createByteArray();
                     parcel.enforceNoDataAvail();
-                    boolean putCredential = putCredential(readInt, createByteArray);
+                    boolean zPutCredential = putCredential(i3, bArrCreateByteArray);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(putCredential);
+                    parcel2.writeBoolean(zPutCredential);
                     return true;
                 case 4:
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    byte[] credential = getCredential(readInt2);
+                    byte[] credential = getCredential(i4);
                     parcel2.writeNoException();
                     parcel2.writeByteArray(credential);
                     return true;
                 case 5:
-                    int sspInit = sspInit();
+                    int iSspInit = sspInit();
                     parcel2.writeNoException();
-                    parcel2.writeInt(sspInit);
+                    parcel2.writeInt(iSspInit);
                     return true;
                 case 6:
-                    int sspExit = sspExit();
+                    int iSspExit = sspExit();
                     parcel2.writeNoException();
-                    parcel2.writeInt(sspExit);
+                    parcel2.writeInt(iSspExit);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -186,95 +186,95 @@ public interface IBlockchainManager extends IInterface {
 
             @Override // android.blockchain.IBlockchainManager
             public BlockchainTZServiceCommnInfo registerBlockchainFW(BlockchainTZServiceConfig blockchainTZServiceConfig) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IBlockchainManager.DESCRIPTOR);
-                    obtain.writeTypedObject(blockchainTZServiceConfig, 0);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (BlockchainTZServiceCommnInfo) obtain2.readTypedObject(BlockchainTZServiceCommnInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(IBlockchainManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(blockchainTZServiceConfig, 0);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (BlockchainTZServiceCommnInfo) parcelObtain2.readTypedObject(BlockchainTZServiceCommnInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.blockchain.IBlockchainManager
             public byte[] getMeasurementFile() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IBlockchainManager.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(IBlockchainManager.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.blockchain.IBlockchainManager
             public boolean putCredential(int i, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IBlockchainManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IBlockchainManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.blockchain.IBlockchainManager
             public byte[] getCredential(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IBlockchainManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createByteArray();
+                    parcelObtain.writeInterfaceToken(IBlockchainManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createByteArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.blockchain.IBlockchainManager
             public int sspInit() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IBlockchainManager.DESCRIPTOR);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IBlockchainManager.DESCRIPTOR);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.blockchain.IBlockchainManager
             public int sspExit() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IBlockchainManager.DESCRIPTOR);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IBlockchainManager.DESCRIPTOR);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

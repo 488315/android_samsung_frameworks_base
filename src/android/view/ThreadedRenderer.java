@@ -150,13 +150,13 @@ public final class ThreadedRenderer extends HardwareRenderer {
     ThreadedRenderer(Context context, boolean z, String str) {
         setName(str);
         setOpaque(!z);
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(null, R.styleable.Lighting, 0, 0);
-        this.mLightY = obtainStyledAttributes.getDimension(3, 0.0f);
-        this.mLightZ = obtainStyledAttributes.getDimension(4, 0.0f);
-        this.mLightRadius = obtainStyledAttributes.getDimension(2, 0.0f);
-        float f = obtainStyledAttributes.getFloat(0, 0.0f);
-        float f2 = obtainStyledAttributes.getFloat(1, 0.0f);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(null, R.styleable.Lighting, 0, 0);
+        this.mLightY = typedArrayObtainStyledAttributes.getDimension(3, 0.0f);
+        this.mLightZ = typedArrayObtainStyledAttributes.getDimension(4, 0.0f);
+        this.mLightRadius = typedArrayObtainStyledAttributes.getDimension(2, 0.0f);
+        float f = typedArrayObtainStyledAttributes.getFloat(0, 0.0f);
+        float f2 = typedArrayObtainStyledAttributes.getFloat(1, 0.0f);
+        typedArrayObtainStyledAttributes.recycle();
         setLightSourceAlpha(f, f2);
     }
 
@@ -273,10 +273,10 @@ public final class ThreadedRenderer extends HardwareRenderer {
     }
 
     private void updateWebViewOverlayCallbacks() {
-        boolean shouldEnableOverlaySupport = this.mWebViewOverlayProvider.shouldEnableOverlaySupport();
-        if (shouldEnableOverlaySupport != this.mWebViewOverlaysEnabled) {
-            this.mWebViewOverlaysEnabled = shouldEnableOverlaySupport;
-            if (shouldEnableOverlaySupport) {
+        boolean zShouldEnableOverlaySupport = this.mWebViewOverlayProvider.shouldEnableOverlaySupport();
+        if (zShouldEnableOverlaySupport != this.mWebViewOverlaysEnabled) {
+            this.mWebViewOverlaysEnabled = zShouldEnableOverlaySupport;
+            if (zShouldEnableOverlaySupport) {
                 setASurfaceTransactionCallback(this.mWebViewOverlayProvider);
                 setPrepareSurfaceControlForWebviewCallback(this.mWebViewOverlayProvider);
             } else {
@@ -356,11 +356,11 @@ public final class ThreadedRenderer extends HardwareRenderer {
 
     @Override // android.graphics.HardwareRenderer
     public boolean loadSystemProperties() {
-        boolean loadSystemProperties = super.loadSystemProperties();
-        if (loadSystemProperties) {
+        boolean zLoadSystemProperties = super.loadSystemProperties();
+        if (zLoadSystemProperties) {
             invalidateRoot();
         }
-        return loadSystemProperties;
+        return zLoadSystemProperties;
     }
 
     private void updateViewTreeDisplayList(View view) {
@@ -380,16 +380,16 @@ public final class ThreadedRenderer extends HardwareRenderer {
             setFrameCallback(new AnonymousClass1(this, arrayList));
         }
         if (this.mRootNodeNeedsUpdate || !this.mRootNode.hasDisplayList()) {
-            RecordingCanvas beginRecording = this.mRootNode.beginRecording(this.mSurfaceWidth, this.mSurfaceHeight);
+            RecordingCanvas recordingCanvasBeginRecording = this.mRootNode.beginRecording(this.mSurfaceWidth, this.mSurfaceHeight);
             try {
-                int save = beginRecording.save();
-                beginRecording.translate(this.mInsetLeft, this.mInsetTop);
-                drawCallbacks.onPreDraw(beginRecording);
-                beginRecording.enableZ();
-                beginRecording.drawRenderNode(view.updateDisplayListIfDirty());
-                beginRecording.disableZ();
-                drawCallbacks.onPostDraw(beginRecording);
-                beginRecording.restoreToCount(save);
+                int iSave = recordingCanvasBeginRecording.save();
+                recordingCanvasBeginRecording.translate(this.mInsetLeft, this.mInsetTop);
+                drawCallbacks.onPreDraw(recordingCanvasBeginRecording);
+                recordingCanvasBeginRecording.enableZ();
+                recordingCanvasBeginRecording.drawRenderNode(view.updateDisplayListIfDirty());
+                recordingCanvasBeginRecording.disableZ();
+                drawCallbacks.onPostDraw(recordingCanvasBeginRecording);
+                recordingCanvasBeginRecording.restoreToCount(iSave);
                 this.mRootNodeNeedsUpdate = false;
             } finally {
                 this.mRootNode.endRecording();
@@ -414,9 +414,9 @@ public final class ThreadedRenderer extends HardwareRenderer {
         public HardwareRenderer.FrameCommitCallback onFrameDraw(int i, long j) {
             final ArrayList arrayList = new ArrayList();
             for (int i2 = 0; i2 < this.val$frameCallbacks.size(); i2++) {
-                HardwareRenderer.FrameCommitCallback onFrameDraw = ((HardwareRenderer.FrameDrawingCallback) this.val$frameCallbacks.get(i2)).onFrameDraw(i, j);
-                if (onFrameDraw != null) {
-                    arrayList.add(onFrameDraw);
+                HardwareRenderer.FrameCommitCallback frameCommitCallbackOnFrameDraw = ((HardwareRenderer.FrameDrawingCallback) this.val$frameCallbacks.get(i2)).onFrameDraw(i, j);
+                if (frameCommitCallbackOnFrameDraw != null) {
+                    arrayList.add(frameCommitCallbackOnFrameDraw);
                 }
             }
             if (arrayList.isEmpty()) {
@@ -452,13 +452,13 @@ public final class ThreadedRenderer extends HardwareRenderer {
             attachInfo.mPendingAnimatingRenderNodes.clear();
             attachInfo.mPendingAnimatingRenderNodes = null;
         }
-        int syncAndDrawFrame = syncAndDrawFrame(attachInfo.mViewRootImpl.getUpdatedFrameInfo());
-        if ((syncAndDrawFrame & 2) != 0) {
+        int iSyncAndDrawFrame = syncAndDrawFrame(attachInfo.mViewRootImpl.getUpdatedFrameInfo());
+        if ((iSyncAndDrawFrame & 2) != 0) {
             Log.w("HWUI", "Surface lost, forcing relayout");
             attachInfo.mViewRootImpl.mForceNextWindowRelayout = true;
             attachInfo.mViewRootImpl.requestLayout();
         }
-        if ((syncAndDrawFrame & 1) != 0) {
+        if ((iSyncAndDrawFrame & 1) != 0) {
             attachInfo.mViewRootImpl.invalidate();
         }
     }
@@ -476,13 +476,13 @@ public final class ThreadedRenderer extends HardwareRenderer {
             setName(str);
             setOpaque(false);
             setSurface(surface);
-            TypedArray obtainStyledAttributes = context.obtainStyledAttributes(null, R.styleable.Lighting, 0, 0);
-            this.mLightY = obtainStyledAttributes.getDimension(3, 0.0f);
-            this.mLightZ = obtainStyledAttributes.getDimension(4, 0.0f);
-            this.mLightRadius = obtainStyledAttributes.getDimension(2, 0.0f);
-            float f = obtainStyledAttributes.getFloat(0, 0.0f);
-            float f2 = obtainStyledAttributes.getFloat(1, 0.0f);
-            obtainStyledAttributes.recycle();
+            TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(null, R.styleable.Lighting, 0, 0);
+            this.mLightY = typedArrayObtainStyledAttributes.getDimension(3, 0.0f);
+            this.mLightZ = typedArrayObtainStyledAttributes.getDimension(4, 0.0f);
+            this.mLightRadius = typedArrayObtainStyledAttributes.getDimension(2, 0.0f);
+            float f = typedArrayObtainStyledAttributes.getFloat(0, 0.0f);
+            float f2 = typedArrayObtainStyledAttributes.getFloat(1, 0.0f);
+            typedArrayObtainStyledAttributes.recycle();
             setLightSourceAlpha(f, f2);
         }
 
@@ -497,11 +497,11 @@ public final class ThreadedRenderer extends HardwareRenderer {
         }
 
         public void draw(HardwareRenderer.FrameDrawingCallback frameDrawingCallback) {
-            long currentAnimationTimeMillis = AnimationUtils.currentAnimationTimeMillis() * 1000000;
+            long jCurrentAnimationTimeMillis = AnimationUtils.currentAnimationTimeMillis() * 1000000;
             if (frameDrawingCallback != null) {
                 setFrameCallback(frameDrawingCallback);
             }
-            createRenderRequest().setVsyncTime(currentAnimationTimeMillis).syncAndDraw();
+            createRenderRequest().setVsyncTime(jCurrentAnimationTimeMillis).syncAndDraw();
         }
     }
 }

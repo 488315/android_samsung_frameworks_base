@@ -34,7 +34,7 @@ public class ClientRemasterDirector implements IDirector {
         photoRemasterServiceClient.setServiceConnectionCallback(new ServiceDisconnectionCallback() { // from class: com.samsung.android.photoremasterservice.ClientRemasterDirector$$ExternalSyntheticLambda0
             @Override // com.samsung.android.photoremasterservice.ServiceDisconnectionCallback
             public final void onServiceDisconnected() {
-                ClientRemasterDirector.this.lambda$new$0();
+                this.f$0.lambda$new$0();
             }
         });
     }
@@ -118,12 +118,12 @@ public class ClientRemasterDirector implements IDirector {
             if (!doInit(context)) {
                 return false;
             }
-            Bundle callService = this.mServiceClient.callService(18, null);
-            if (callService == null) {
+            Bundle bundleCallService = this.mServiceClient.callService(18, null);
+            if (bundleCallService == null) {
                 LogUtil.e(TAG, "retBundle is null.");
                 return false;
             }
-            this.mInitialized = callService.getBoolean(ServiceReturnKey.BOOLEAN);
+            this.mInitialized = bundleCallService.getBoolean(ServiceReturnKey.BOOLEAN);
             this.mIsServiceDisconnected = false;
             this.mStopLockManager.unlock();
             if (!this.mInitialized) {
@@ -187,18 +187,18 @@ public class ClientRemasterDirector implements IDirector {
                     try {
                         this.mStopCmdClient.callService(4, null);
                         photoRemasterServiceClient = this.mStopCmdClient;
-                    } catch (Throwable th) {
-                        this.mStopCmdClient.unbindService();
-                        throw th;
+                    } catch (IllegalStateException unused) {
+                        LogUtil.w(TAG, "Stop is called before initialization!!!");
+                        photoRemasterServiceClient = this.mStopCmdClient;
                     }
-                } catch (IllegalStateException unused) {
-                    LogUtil.w(TAG, "Stop is called before initialization!!!");
-                    photoRemasterServiceClient = this.mStopCmdClient;
+                    photoRemasterServiceClient.unbindService();
+                    this.mStopLockManager.unlock();
+                    deinit();
+                    LogUtil.d(TAG, "stop() is done.");
+                } catch (Throwable th) {
+                    this.mStopCmdClient.unbindService();
+                    throw th;
                 }
-                photoRemasterServiceClient.unbindService();
-                this.mStopLockManager.unlock();
-                deinit();
-                LogUtil.d(TAG, "stop() is done.");
             } catch (IllegalStateException unused2) {
                 LogUtil.w(TAG, "Stop is called after deinit is done. Stop is ignored.");
                 this.mStopLockManager.unlock();
@@ -218,12 +218,12 @@ public class ClientRemasterDirector implements IDirector {
         bundle.putInt(ServiceParameterKey.INT_PROCESS_MODE, i);
         bundle.putIntegerArrayList(ServiceParameterKey.ARRAY_LIST_INT, new ArrayList<>(list));
         LogUtil.i(TAG, "processImage(" + i + ", " + list + NavigationBarInflaterView.KEY_CODE_END);
-        Bundle callService = this.mServiceClient.callService(5, bundle);
-        if (callService == null) {
+        Bundle bundleCallService = this.mServiceClient.callService(5, bundle);
+        if (bundleCallService == null) {
             LogUtil.e(TAG, "retBundle is null.");
             return false;
         }
-        return callService.getBoolean(ServiceReturnKey.BOOLEAN);
+        return bundleCallService.getBoolean(ServiceReturnKey.BOOLEAN);
     }
 
     @Override // com.samsung.android.photoremaster.IDirector
@@ -305,13 +305,13 @@ public class ClientRemasterDirector implements IDirector {
             confirmInitialized();
             Bundle bundle = new Bundle();
             bundle.putInt(ServiceParameterKey.INT_ID, i);
-            Bundle callService = this.mServiceClient.callService(11, bundle);
-            if (callService == null) {
+            Bundle bundleCallService = this.mServiceClient.callService(11, bundle);
+            if (bundleCallService == null) {
                 throwEmptyBundleException();
                 return "";
             }
-            LogUtil.d(TAG, "ret Value: " + callService.getString(ServiceReturnKey.STRING));
-            return callService.getString(ServiceReturnKey.STRING);
+            LogUtil.d(TAG, "ret Value: " + bundleCallService.getString(ServiceReturnKey.STRING));
+            return bundleCallService.getString(ServiceReturnKey.STRING);
         } finally {
             this.mStopLockManager.unlock();
         }
@@ -326,13 +326,13 @@ public class ClientRemasterDirector implements IDirector {
             Bundle bundle = new Bundle();
             bundle.putInt(ServiceParameterKey.INT_ID, i);
             LogUtil.d(TAG, "arg:" + bundle.getInt(ServiceParameterKey.INT_ID));
-            Bundle callService = this.mServiceClient.callService(12, bundle);
-            if (callService == null) {
+            Bundle bundleCallService = this.mServiceClient.callService(12, bundle);
+            if (bundleCallService == null) {
                 throwEmptyBundleException();
                 return -1;
             }
-            LogUtil.d(TAG, "ret Value: " + callService.getInt(ServiceReturnKey.INT));
-            return callService.getInt(ServiceReturnKey.INT);
+            LogUtil.d(TAG, "ret Value: " + bundleCallService.getInt(ServiceReturnKey.INT));
+            return bundleCallService.getInt(ServiceReturnKey.INT);
         } finally {
             this.mStopLockManager.unlock();
         }
@@ -346,13 +346,13 @@ public class ClientRemasterDirector implements IDirector {
             confirmInitialized();
             Bundle bundle = new Bundle();
             bundle.putInt(ServiceParameterKey.INT_ID, i);
-            Bundle callService = this.mServiceClient.callService(13, bundle);
-            if (callService == null) {
+            Bundle bundleCallService = this.mServiceClient.callService(13, bundle);
+            if (bundleCallService == null) {
                 throwEmptyBundleException();
                 return -1L;
             }
-            LogUtil.d(TAG, "ret Value: " + callService.getLong(ServiceReturnKey.LONG));
-            return callService.getLong(ServiceReturnKey.LONG);
+            LogUtil.d(TAG, "ret Value: " + bundleCallService.getLong(ServiceReturnKey.LONG));
+            return bundleCallService.getLong(ServiceReturnKey.LONG);
         } finally {
             this.mStopLockManager.unlock();
         }
@@ -367,12 +367,12 @@ public class ClientRemasterDirector implements IDirector {
             confirmInitialized();
             Bundle bundle = new Bundle();
             bundle.putInt(ServiceParameterKey.INT_ID, i);
-            Bundle callService = this.mServiceClient.callService(19, bundle);
-            if (callService == null) {
+            Bundle bundleCallService = this.mServiceClient.callService(19, bundle);
+            if (bundleCallService == null) {
                 LogUtil.e(TAG, "Return bundle is empty.");
                 throw new IllegalStateException();
             }
-            bitmap = (Bitmap) callService.getParcelable(ServiceReturnKey.BITMAP, Bitmap.class);
+            bitmap = (Bitmap) bundleCallService.getParcelable(ServiceReturnKey.BITMAP, Bitmap.class);
             LogUtil.d(TAG, "ret Value: " + bitmap);
         } finally {
             this.mStopLockManager.unlock();
@@ -426,13 +426,13 @@ public class ClientRemasterDirector implements IDirector {
             bundle.putString(ServiceParameterKey.REMASTERED_IMAGE_FOCUS_ROI, str2);
             LogUtil.d(TAG, "original image for getFocusRoi(): " + bundle.getString(ServiceParameterKey.ORIGINAL_IMAGE_FOCUS_ROI));
             LogUtil.d(TAG, "remastered image for getFocusRoi(): " + bundle.getString(ServiceParameterKey.REMASTERED_IMAGE_FOCUS_ROI));
-            Bundle callService = this.mServiceClient.callService(17, bundle);
-            if (callService == null) {
+            Bundle bundleCallService = this.mServiceClient.callService(17, bundle);
+            if (bundleCallService == null) {
                 throwEmptyBundleException();
                 return "";
             }
-            LogUtil.d(TAG, "ret Value: " + callService.getString(ServiceReturnKey.STRING));
-            return callService.getString(ServiceReturnKey.STRING);
+            LogUtil.d(TAG, "ret Value: " + bundleCallService.getString(ServiceReturnKey.STRING));
+            return bundleCallService.getString(ServiceReturnKey.STRING);
         } finally {
             this.mStopLockManager.unlock();
         }

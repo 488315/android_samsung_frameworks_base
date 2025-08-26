@@ -16,7 +16,6 @@ import com.android.systemui.plugins.subscreen.SubRoom;
 import java.io.PrintWriter;
 import java.lang.reflect.Array;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class DozeLog implements Dumpable {
     public final SummaryStats mEmergencyCallStats;
@@ -47,9 +46,9 @@ public class DozeLog implements Dumpable {
             LogLevel logLevel = LogLevel.INFO;
             DozeLogger$$ExternalSyntheticLambda0 dozeLogger$$ExternalSyntheticLambda0 = new DozeLogger$$ExternalSyntheticLambda0(8);
             LogBuffer logBuffer = dozeLogger.buffer;
-            LogMessage obtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda0, null);
-            ((LogMessageImpl) obtain).int1 = i;
-            logBuffer.commit(obtain);
+            LogMessage logMessageObtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda0, null);
+            ((LogMessageImpl) logMessageObtain).int1 = i;
+            logBuffer.commit(logMessageObtain);
         }
 
         @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
@@ -59,9 +58,9 @@ public class DozeLog implements Dumpable {
             LogLevel logLevel = LogLevel.INFO;
             DozeLogger$$ExternalSyntheticLambda0 dozeLogger$$ExternalSyntheticLambda0 = new DozeLogger$$ExternalSyntheticLambda0(10);
             LogBuffer logBuffer = dozeLogger.buffer;
-            LogMessage obtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda0, null);
-            ((LogMessageImpl) obtain).bool1 = z;
-            logBuffer.commit(obtain);
+            LogMessage logMessageObtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda0, null);
+            ((LogMessageImpl) logMessageObtain).bool1 = z;
+            logBuffer.commit(logMessageObtain);
         }
 
         @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
@@ -72,9 +71,9 @@ public class DozeLog implements Dumpable {
             LogLevel logLevel = LogLevel.INFO;
             DozeLogger$$ExternalSyntheticLambda0 dozeLogger$$ExternalSyntheticLambda0 = new DozeLogger$$ExternalSyntheticLambda0(4);
             LogBuffer logBuffer = dozeLogger.buffer;
-            LogMessage obtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda0, null);
-            ((LogMessageImpl) obtain).bool1 = z;
-            logBuffer.commit(obtain);
+            LogMessage logMessageObtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda0, null);
+            ((LogMessageImpl) logMessageObtain).bool1 = z;
+            logBuffer.commit(logMessageObtain);
             if (z) {
                 return;
             }
@@ -90,9 +89,9 @@ public class DozeLog implements Dumpable {
             LogLevel logLevel = LogLevel.INFO;
             DozeLogger$$ExternalSyntheticLambda0 dozeLogger$$ExternalSyntheticLambda0 = new DozeLogger$$ExternalSyntheticLambda0(2);
             LogBuffer logBuffer = dozeLogger.buffer;
-            LogMessage obtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda0, null);
-            ((LogMessageImpl) obtain).bool1 = z;
-            logBuffer.commit(obtain);
+            LogMessage logMessageObtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda0, null);
+            ((LogMessageImpl) logMessageObtain).bool1 = z;
+            logBuffer.commit(logMessageObtain);
             (dozeLog.mPulsing ? dozeLog.mScreenOnPulsingStats : dozeLog.mScreenOnNotPulsingStats).mCount++;
             dozeLog.mPulsing = false;
         }
@@ -100,7 +99,6 @@ public class DozeLog implements Dumpable {
     public final long mSince = System.currentTimeMillis();
     public final SummaryStats[][] mProxStats = (SummaryStats[][]) Array.newInstance((Class<?>) SummaryStats.class, 13, 2);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SummaryStats {
         public int mCount;
 
@@ -193,9 +191,9 @@ public class DozeLog implements Dumpable {
                 this.mScreenOnNotPulsingStats.dump(printWriter, "Screen on (not pulsing)");
                 this.mEmergencyCallStats.dump(printWriter, "Emergency call");
                 for (int i = 0; i < 13; i++) {
-                    String reasonToString = reasonToString(i);
-                    this.mProxStats[i][0].dump(printWriter, "Proximity near (" + reasonToString + ")");
-                    this.mProxStats[i][1].dump(printWriter, "Proximity far (" + reasonToString + ")");
+                    String strReasonToString = reasonToString(i);
+                    this.mProxStats[i][0].dump(printWriter, "Proximity near (" + strReasonToString + ")");
+                    this.mProxStats[i][1].dump(printWriter, "Proximity far (" + strReasonToString + ")");
                 }
             } catch (Throwable th) {
                 throw th;
@@ -209,11 +207,11 @@ public class DozeLog implements Dumpable {
         LogLevel logLevel = LogLevel.INFO;
         DozeLogger$$ExternalSyntheticLambda3 dozeLogger$$ExternalSyntheticLambda3 = new DozeLogger$$ExternalSyntheticLambda3(8);
         LogBuffer logBuffer = dozeLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda3, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda3, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = Display.stateToString(i);
         logMessageImpl.bool1 = z;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void traceDozeScreenBrightness(int i, boolean z) {
@@ -222,11 +220,11 @@ public class DozeLog implements Dumpable {
         LogLevel logLevel = LogLevel.INFO;
         DozeLogger$$ExternalSyntheticLambda3 dozeLogger$$ExternalSyntheticLambda3 = new DozeLogger$$ExternalSyntheticLambda3(9);
         LogBuffer logBuffer = dozeLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda3, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda3, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.int1 = i;
         logMessageImpl.bool1 = z;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void traceDozeScreenBrightnessFloat(float f, boolean z) {
@@ -235,12 +233,12 @@ public class DozeLog implements Dumpable {
         LogLevel logLevel = LogLevel.INFO;
         DozeLogger$$ExternalSyntheticLambda0 dozeLogger$$ExternalSyntheticLambda0 = new DozeLogger$$ExternalSyntheticLambda0(12);
         LogBuffer logBuffer = dozeLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda0, null);
+        LogMessage logMessageObtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda0, null);
         double d = f;
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.double1 = d;
         logMessageImpl.bool1 = z;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void traceDozing(boolean z) {
@@ -249,9 +247,9 @@ public class DozeLog implements Dumpable {
         LogLevel logLevel = LogLevel.INFO;
         DozeLogger$$ExternalSyntheticLambda0 dozeLogger$$ExternalSyntheticLambda0 = new DozeLogger$$ExternalSyntheticLambda0(6);
         LogBuffer logBuffer = dozeLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda0, null);
-        ((LogMessageImpl) obtain).bool1 = z;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda0, null);
+        ((LogMessageImpl) logMessageObtain).bool1 = z;
+        logBuffer.commit(logMessageObtain);
         this.mPulsing = false;
     }
 
@@ -261,11 +259,11 @@ public class DozeLog implements Dumpable {
         LogLevel logLevel = LogLevel.INFO;
         DozeLogger$$ExternalSyntheticLambda3 dozeLogger$$ExternalSyntheticLambda3 = new DozeLogger$$ExternalSyntheticLambda3(1);
         LogBuffer logBuffer = dozeLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda3, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda3, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.int1 = i;
         logMessageImpl.str1 = str;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void tracePulseDropped(String str, DozeMachine.State state) {
@@ -274,26 +272,26 @@ public class DozeLog implements Dumpable {
         LogLevel logLevel = LogLevel.INFO;
         DozeLogger$$ExternalSyntheticLambda0 dozeLogger$$ExternalSyntheticLambda0 = new DozeLogger$$ExternalSyntheticLambda0(29);
         LogBuffer logBuffer = dozeLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = str;
         logMessageImpl.str2 = state != null ? state.name() : null;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void tracePulseEvent(int i, String str, boolean z) {
-        String reasonToString = reasonToString(i);
+        String strReasonToString = reasonToString(i);
         DozeLogger dozeLogger = this.mLogger;
         dozeLogger.getClass();
         LogLevel logLevel = LogLevel.DEBUG;
         DozeLogger$$ExternalSyntheticLambda3 dozeLogger$$ExternalSyntheticLambda3 = new DozeLogger$$ExternalSyntheticLambda3(4);
         LogBuffer logBuffer = dozeLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda3, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda3, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = str;
         logMessageImpl.bool1 = z;
-        logMessageImpl.str2 = reasonToString;
-        logBuffer.commit(obtain);
+        logMessageImpl.str2 = strReasonToString;
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void traceSensorEventDropped(int i, String str) {
@@ -302,11 +300,11 @@ public class DozeLog implements Dumpable {
         LogLevel logLevel = LogLevel.INFO;
         DozeLogger$$ExternalSyntheticLambda0 dozeLogger$$ExternalSyntheticLambda0 = new DozeLogger$$ExternalSyntheticLambda0(23);
         LogBuffer logBuffer = dozeLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.int1 = i;
         logMessageImpl.str1 = str;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
     }
 
     public final void tracePulseDropped(String str) {
@@ -315,8 +313,8 @@ public class DozeLog implements Dumpable {
         LogLevel logLevel = LogLevel.INFO;
         DozeLogger$$ExternalSyntheticLambda0 dozeLogger$$ExternalSyntheticLambda0 = new DozeLogger$$ExternalSyntheticLambda0(3);
         LogBuffer logBuffer = dozeLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda0, null);
-        ((LogMessageImpl) obtain).str1 = str;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda0, null);
+        ((LogMessageImpl) logMessageObtain).str1 = str;
+        logBuffer.commit(logMessageObtain);
     }
 }

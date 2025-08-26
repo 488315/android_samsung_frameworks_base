@@ -27,7 +27,7 @@ public class SemAffinityControl {
 
     public SemAffinityControl() {
         int i;
-        int i2;
+        int length;
         this.core_num = -1;
         logOnEng(TAG, "[Java Side], SemAffinityControl Class Initialized");
         String str = HMP_PROPERTY;
@@ -37,38 +37,38 @@ public class SemAffinityControl {
         initializeHmpCore();
         this.core_num = (Integer.parseInt(strHmpCore[littleIndex]) + Integer.parseInt(strHmpCore[bigIndex])) - 1;
         logOnEng(TAG, "[Java Side], SemAffinityControl Class Initialized core_num : " + this.core_num);
-        int length = nLittle.length;
-        int i3 = 0;
+        int length2 = nLittle.length;
+        int i2 = 0;
         if (littleIndex == 1) {
-            i2 = nBig.length;
+            length = nBig.length;
             i = 0;
         } else {
-            i = length;
-            i2 = 0;
+            i = length2;
+            length = 0;
         }
-        int i4 = 0;
+        int i3 = 0;
         while (true) {
             int[] iArr = nLittle;
-            if (i4 >= iArr.length) {
+            if (i3 >= iArr.length) {
                 break;
             }
-            iArr[i4] = i4 + i2;
-            i4++;
+            iArr[i3] = i3 + length;
+            i3++;
         }
         while (true) {
             int[] iArr2 = nBig;
-            if (i3 >= iArr2.length) {
+            if (i2 >= iArr2.length) {
                 return;
             }
-            iArr2[i3] = i3 + i;
-            i3++;
+            iArr2[i2] = i2 + i;
+            i2++;
         }
     }
 
     private static void initializeHmpCore() {
-        String[] split = HMP_PROPERTY.split(":");
-        strHmpCore = split;
-        if (split.length > 2 && GnssSignalType.CODE_TYPE_B.equals(split[2])) {
+        String[] strArrSplit = HMP_PROPERTY.split(":");
+        strHmpCore = strArrSplit;
+        if (strArrSplit.length > 2 && GnssSignalType.CODE_TYPE_B.equals(strArrSplit[2])) {
             littleIndex = 1;
             bigIndex = 0;
         } else {
@@ -116,21 +116,21 @@ public class SemAffinityControl {
 
     public int clearAffinity(int i) {
         if (this.core_num < 0) {
-            String[] split = SystemProperties.get("sys.perf.hmp", "4:4").split(":");
-            int parseInt = split.length >= 2 ? Integer.parseInt(split[0]) + Integer.parseInt(split[1]) : -1;
-            if (parseInt >= 0) {
-                this.core_num = parseInt;
-                logOnEng(TAG, "[Java Side], clearAffinity numCore : " + parseInt + ", core_num : " + this.core_num);
+            String[] strArrSplit = SystemProperties.get("sys.perf.hmp", "4:4").split(":");
+            int i2 = strArrSplit.length >= 2 ? Integer.parseInt(strArrSplit[0]) + Integer.parseInt(strArrSplit[1]) : -1;
+            if (i2 >= 0) {
+                this.core_num = i2;
+                logOnEng(TAG, "[Java Side], clearAffinity numCore : " + i2 + ", core_num : " + this.core_num);
             } else {
                 logOnEng(TAG, "clear_affinity_failed. It can't read the num of core");
                 return -1;
             }
         }
-        int i2 = this.core_num;
-        if (i2 > 0) {
-            int[] iArr = new int[i2 + 1];
-            for (int i3 = 0; i3 <= this.core_num; i3++) {
-                iArr[i3] = i3;
+        int i3 = this.core_num;
+        if (i3 > 0) {
+            int[] iArr = new int[i3 + 1];
+            for (int i4 = 0; i4 <= this.core_num; i4++) {
+                iArr[i4] = i4;
             }
             if (native_set_affinity(i, iArr) == 1) {
                 logOnEng(TAG, "clear_affinity_failed");
@@ -158,57 +158,58 @@ public class SemAffinityControl {
     /* JADX WARN: Type inference failed for: r2v6 */
     /* JADX WARN: Type inference failed for: r2v7, types: [java.lang.String] */
     /* JADX WARN: Type inference failed for: r2v8 */
-    public static String readSysfs(String str, String str2) {
+    public static String readSysfs(String str, String str2) throws Throwable {
         String str3;
+        BufferedReader bufferedReader;
         ?? r2 = 0;
-        String str4 = null;
-        BufferedReader bufferedReader = null;
+        String line = null;
+        BufferedReader bufferedReader2 = null;
         try {
             try {
-                BufferedReader bufferedReader2 = new BufferedReader(new InputStreamReader(new FileInputStream(str2), "UTF-8"));
-                try {
-                    str4 = bufferedReader2.readLine();
-                    logOnEng(str, "readSysfs:: path = " + str2 + ", strTemp result = " + str4);
-                    try {
-                        bufferedReader2.close();
-                        r2 = str4;
-                    } catch (IOException e) {
-                        logOnEng(str, "e = " + e.getMessage());
-                        r2 = str4;
-                    }
-                } catch (IOException e2) {
-                    e = e2;
-                    str3 = str4;
-                    bufferedReader = bufferedReader2;
-                    logOnEng(str, "e = " + e.getMessage());
-                    if (bufferedReader != null) {
-                        try {
-                            bufferedReader.close();
-                        } catch (IOException e3) {
-                            logOnEng(str, "e = " + e3.getMessage());
-                        }
-                    }
-                    r2 = str3;
-                    return r2;
-                } catch (Throwable th) {
-                    th = th;
-                    r2 = bufferedReader2;
-                    if (r2 != 0) {
-                        try {
-                            r2.close();
-                        } catch (IOException e4) {
-                            logOnEng(str, "e = " + e4.getMessage());
-                        }
-                    }
-                    throw th;
-                }
-            } catch (IOException e5) {
-                e = e5;
-                str3 = null;
+                bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(str2), "UTF-8"));
+            } catch (Throwable th) {
+                th = th;
             }
+        } catch (IOException e) {
+            e = e;
+            str3 = null;
+        }
+        try {
+            line = bufferedReader.readLine();
+            logOnEng(str, "readSysfs:: path = " + str2 + ", strTemp result = " + line);
+            try {
+                bufferedReader.close();
+                r2 = line;
+            } catch (IOException e2) {
+                logOnEng(str, "e = " + e2.getMessage());
+                r2 = line;
+            }
+        } catch (IOException e3) {
+            e = e3;
+            str3 = line;
+            bufferedReader2 = bufferedReader;
+            logOnEng(str, "e = " + e.getMessage());
+            if (bufferedReader2 != null) {
+                try {
+                    bufferedReader2.close();
+                } catch (IOException e4) {
+                    logOnEng(str, "e = " + e4.getMessage());
+                }
+            }
+            r2 = str3;
             return r2;
         } catch (Throwable th2) {
             th = th2;
+            r2 = bufferedReader;
+            if (r2 != 0) {
+                try {
+                    r2.close();
+                } catch (IOException e5) {
+                    logOnEng(str, "e = " + e5.getMessage());
+                }
+            }
+            throw th;
         }
+        return r2;
     }
 }

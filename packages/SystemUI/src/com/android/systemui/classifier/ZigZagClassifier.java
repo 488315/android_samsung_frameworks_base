@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ZigZagClassifier extends FalsingClassifier {
     public float mLastDevianceY;
@@ -31,8 +30,8 @@ public class ZigZagClassifier extends FalsingClassifier {
 
     public static List rotateMotionEvents(List list, double d) {
         ArrayList arrayList = new ArrayList();
-        double cos = Math.cos(d);
-        double sin = Math.sin(d);
+        double dCos = Math.cos(d);
+        double dSin = Math.sin(d);
         MotionEvent motionEvent = (MotionEvent) list.get(0);
         float x = motionEvent.getX();
         float y = motionEvent.getY();
@@ -41,15 +40,15 @@ public class ZigZagClassifier extends FalsingClassifier {
             MotionEvent motionEvent2 = (MotionEvent) it.next();
             double x2 = motionEvent2.getX() - x;
             double y2 = motionEvent2.getY() - y;
-            double d2 = cos;
-            arrayList.add(new Point((int) ((sin * y2) + (cos * x2) + x), (int) ((y2 * d2) + ((-sin) * x2) + y)));
+            double d2 = dCos;
+            arrayList.add(new Point((int) ((dSin * y2) + (dCos * x2) + x), (int) ((y2 * d2) + ((-dSin) * x2) + y)));
             motionEvent = motionEvent;
-            cos = d2;
+            dCos = d2;
         }
         MotionEvent motionEvent3 = motionEvent;
         MotionEvent motionEvent4 = (MotionEvent) PreferenceGroupAdapter$$ExternalSyntheticOutline0.m(1, list);
         Point point = (Point) arrayList.get(0);
-        Point point2 = (Point) AlertController$$ExternalSyntheticOutline0.m(arrayList, 1);
+        Point point2 = (Point) AlertController$$ExternalSyntheticOutline0.m(1, arrayList);
         motionEvent3.getX();
         motionEvent3.getY();
         motionEvent4.getX();
@@ -62,7 +61,7 @@ public class ZigZagClassifier extends FalsingClassifier {
 
     @Override // com.android.systemui.classifier.FalsingClassifier
     public final FalsingClassifier.Result calculateFalsingResult(int i) {
-        List<Point> rotateMotionEvents;
+        List<Point> listRotateMotionEvents;
         float f;
         float f2;
         if (i == 10 || i == 18 || i == 11) {
@@ -75,51 +74,51 @@ public class ZigZagClassifier extends FalsingClassifier {
         if (falsingDataProvider.isHorizontal()) {
             double atan2LastPoint = getAtan2LastPoint();
             boolean z = BrightLineFalsingManager.DEBUG;
-            rotateMotionEvents = rotateMotionEvents(falsingDataProvider.getRecentMotionEvents(), atan2LastPoint);
+            listRotateMotionEvents = rotateMotionEvents(falsingDataProvider.getRecentMotionEvents(), atan2LastPoint);
         } else {
             boolean z2 = BrightLineFalsingManager.DEBUG;
-            rotateMotionEvents = rotateMotionEvents(falsingDataProvider.getRecentMotionEvents(), -(1.5707963267948966d - getAtan2LastPoint()));
+            listRotateMotionEvents = rotateMotionEvents(falsingDataProvider.getRecentMotionEvents(), -(1.5707963267948966d - getAtan2LastPoint()));
         }
         boolean z3 = true;
-        float abs = Math.abs(((Point) rotateMotionEvents.get(0)).x - ((Point) PreferenceGroupAdapter$$ExternalSyntheticOutline0.m(1, rotateMotionEvents)).x);
-        float abs2 = Math.abs(((Point) rotateMotionEvents.get(0)).y - ((Point) PreferenceGroupAdapter$$ExternalSyntheticOutline0.m(1, rotateMotionEvents)).y);
+        float fAbs = Math.abs(((Point) listRotateMotionEvents.get(0)).x - ((Point) PreferenceGroupAdapter$$ExternalSyntheticOutline0.m(1, listRotateMotionEvents)).x);
+        float fAbs2 = Math.abs(((Point) listRotateMotionEvents.get(0)).y - ((Point) PreferenceGroupAdapter$$ExternalSyntheticOutline0.m(1, listRotateMotionEvents)).y);
+        float fAbs3 = 0.0f;
+        float fAbs4 = 0.0f;
         float f3 = 0.0f;
         float f4 = 0.0f;
-        float f5 = 0.0f;
-        float f6 = 0.0f;
-        for (Point point : rotateMotionEvents) {
+        for (Point point : listRotateMotionEvents) {
             if (z3) {
-                f5 = point.x;
-                f6 = point.y;
+                f3 = point.x;
+                f4 = point.y;
                 z3 = false;
             } else {
-                f3 += Math.abs(point.x - f5);
-                f4 += Math.abs(point.y - f6);
-                f5 = point.x;
-                f6 = point.y;
+                fAbs3 += Math.abs(point.x - f3);
+                fAbs4 += Math.abs(point.y - f4);
+                f3 = point.x;
+                f4 = point.y;
                 boolean z4 = BrightLineFalsingManager.DEBUG;
             }
         }
-        float f7 = f3 - abs;
-        float f8 = f4 - abs2;
-        float f9 = falsingDataProvider.mXdpi;
-        float f10 = abs / f9;
-        float f11 = falsingDataProvider.mYdpi;
-        float f12 = abs2 / f11;
-        float sqrt = (float) Math.sqrt((f12 * f12) + (f10 * f10));
-        if (abs > abs2) {
-            f = this.mMaxXPrimaryDeviance * sqrt * f9;
+        float f5 = fAbs3 - fAbs;
+        float f6 = fAbs4 - fAbs2;
+        float f7 = falsingDataProvider.mXdpi;
+        float f8 = fAbs / f7;
+        float f9 = falsingDataProvider.mYdpi;
+        float f10 = fAbs2 / f9;
+        float fSqrt = (float) Math.sqrt((f10 * f10) + (f8 * f8));
+        if (fAbs > fAbs2) {
+            f = this.mMaxXPrimaryDeviance * fSqrt * f7;
             f2 = this.mMaxYSecondaryDeviance;
         } else {
-            f = this.mMaxXSecondaryDeviance * sqrt * f9;
+            f = this.mMaxXSecondaryDeviance * fSqrt * f7;
             f2 = this.mMaxYPrimaryDeviance;
         }
-        float f13 = f2 * sqrt * f11;
-        this.mLastDevianceY = f8;
+        float f11 = f2 * fSqrt * f9;
+        this.mLastDevianceY = f6;
         this.mLastMaxXDeviance = f;
-        this.mLastMaxYDeviance = f13;
+        this.mLastMaxYDeviance = f11;
         boolean z5 = BrightLineFalsingManager.DEBUG;
-        return (f7 > f || f8 > f13) ? falsed(0.5d, String.format(null, "{devianceX=%f, maxDevianceX=%s, devianceY=%s, maxDevianceY=%s}", Float.valueOf(f7), Float.valueOf(this.mLastMaxXDeviance), Float.valueOf(this.mLastDevianceY), Float.valueOf(this.mLastMaxYDeviance))) : FalsingClassifier.Result.passed(0.5d);
+        return (f5 > f || f6 > f11) ? falsed(0.5d, String.format(null, "{devianceX=%f, maxDevianceX=%s, devianceY=%s, maxDevianceY=%s}", Float.valueOf(f5), Float.valueOf(this.mLastMaxXDeviance), Float.valueOf(this.mLastDevianceY), Float.valueOf(this.mLastMaxYDeviance))) : FalsingClassifier.Result.passed(0.5d);
     }
 
     public final float getAtan2LastPoint() {

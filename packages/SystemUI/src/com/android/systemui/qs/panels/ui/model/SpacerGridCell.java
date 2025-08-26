@@ -4,7 +4,6 @@ import androidx.compose.foundation.lazy.grid.GridItemSpan;
 import androidx.compose.foundation.lazy.grid.LazyGridSpanKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SpacerGridCell implements GridCell {
     public final int row;
@@ -32,7 +31,7 @@ public final class SpacerGridCell implements GridCell {
 
     @Override // com.android.systemui.qs.panels.ui.model.GridCell
     /* renamed from: getSpan-hRN5aJ8 */
-    public final long mo2891getSpanhRN5aJ8() {
+    public final long mo2908getSpanhRN5aJ8() {
         return this.span;
     }
 
@@ -41,7 +40,7 @@ public final class SpacerGridCell implements GridCell {
     }
 
     public final String toString() {
-        return "SpacerGridCell(row=" + this.row + ", span=" + GridItemSpan.m158toStringimpl(this.span) + ")";
+        return "SpacerGridCell(row=" + this.row + ", span=" + GridItemSpan.m159toStringimpl(this.span) + ")";
     }
 
     private SpacerGridCell(int i, long j) {

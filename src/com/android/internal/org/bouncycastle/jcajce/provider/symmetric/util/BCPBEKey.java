@@ -66,7 +66,7 @@ public class BCPBEKey implements PBEKey, Destroyable {
 
     @Override // java.security.Key
     public byte[] getEncoded() {
-        byte[] PKCS5PasswordToBytes;
+        byte[] bArrPKCS5PasswordToBytes;
         KeyParameter keyParameter;
         CipherParameters cipherParameters = this.param;
         if (cipherParameters != null) {
@@ -75,19 +75,19 @@ public class BCPBEKey implements PBEKey, Destroyable {
             } else {
                 keyParameter = (KeyParameter) cipherParameters;
             }
-            PKCS5PasswordToBytes = keyParameter.getKey();
+            bArrPKCS5PasswordToBytes = keyParameter.getKey();
         } else {
             int i = this.type;
             if (i == 2) {
-                PKCS5PasswordToBytes = PBEParametersGenerator.PKCS12PasswordToBytes(this.password);
+                bArrPKCS5PasswordToBytes = PBEParametersGenerator.PKCS12PasswordToBytes(this.password);
             } else if (i == 5) {
-                PKCS5PasswordToBytes = PBEParametersGenerator.PKCS5PasswordToUTF8Bytes(this.password);
+                bArrPKCS5PasswordToBytes = PBEParametersGenerator.PKCS5PasswordToUTF8Bytes(this.password);
             } else {
-                PKCS5PasswordToBytes = PBEParametersGenerator.PKCS5PasswordToBytes(this.password);
+                bArrPKCS5PasswordToBytes = PBEParametersGenerator.PKCS5PasswordToBytes(this.password);
             }
         }
         checkDestroyed(this);
-        return PKCS5PasswordToBytes;
+        return bArrPKCS5PasswordToBytes;
     }
 
     int getType() {
@@ -122,19 +122,19 @@ public class BCPBEKey implements PBEKey, Destroyable {
 
     @Override // javax.crypto.interfaces.PBEKey
     public char[] getPassword() {
-        char[] clone = Arrays.clone(this.password);
+        char[] cArrClone = Arrays.clone(this.password);
         checkDestroyed(this);
-        if (clone != null) {
-            return clone;
+        if (cArrClone != null) {
+            return cArrClone;
         }
         throw new IllegalStateException("no password available");
     }
 
     @Override // javax.crypto.interfaces.PBEKey
     public byte[] getSalt() {
-        byte[] clone = Arrays.clone(this.salt);
+        byte[] bArrClone = Arrays.clone(this.salt);
         checkDestroyed(this);
-        return clone;
+        return bArrClone;
     }
 
     @Override // javax.crypto.interfaces.PBEKey

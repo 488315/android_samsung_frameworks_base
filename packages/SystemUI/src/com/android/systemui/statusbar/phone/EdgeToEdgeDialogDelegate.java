@@ -10,9 +10,7 @@ import android.window.BackEvent;
 import com.android.app.animation.Interpolators;
 import com.android.systemui.animation.back.BackAnimationSpec;
 import com.android.systemui.util.DimensionKt;
-import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class EdgeToEdgeDialogDelegate implements DialogDelegate {
     @Override // com.android.systemui.statusbar.phone.DialogDelegate
@@ -22,7 +20,7 @@ public final class EdgeToEdgeDialogDelegate implements DialogDelegate {
         return new BackAnimationSpec() { // from class: com.android.systemui.animation.back.BottomsheetBackAnimationSpecKt$createBottomsheetAnimationSpec$1
             @Override // com.android.systemui.animation.back.BackAnimationSpec
             public final void getBackTransformation(BackEvent backEvent, float f, BackTransformation backTransformation) {
-                backTransformation.scale = 1.0f - ((1.0f - (1 - (DimensionKt.dpToPx((Number) 48, (DisplayMetrics) Function0.this.invoke()) / r5.widthPixels))) * interpolator.getInterpolation(backEvent.getProgress()));
+                backTransformation.scale = 1.0f - ((1.0f - (1 - (DimensionKt.dpToPx((Number) 48, (DisplayMetrics) systemUIDialog$$ExternalSyntheticLambda2.invoke()) / r5.widthPixels))) * interpolator.getInterpolation(backEvent.getProgress()));
                 backTransformation.scalePivotPosition = ScalePivotPosition.BOTTOM_CENTER;
             }
         };

@@ -177,8 +177,8 @@ public final class ImageDecoder implements AutoCloseable {
             if (!this.mBuffer.isDirect() && this.mBuffer.hasArray()) {
                 return ImageDecoder.nCreate(this.mBuffer.array(), this.mBuffer.arrayOffset() + this.mBuffer.position(), this.mBuffer.limit() - this.mBuffer.position(), z, this);
             }
-            ByteBuffer slice = this.mBuffer.slice();
-            return ImageDecoder.nCreate(slice, slice.position(), slice.limit(), z, this);
+            ByteBuffer byteBufferSlice = this.mBuffer.slice();
+            return ImageDecoder.nCreate(byteBufferSlice, byteBufferSlice.position(), byteBufferSlice.limit(), z, this);
         }
 
         public String toString() {
@@ -205,48 +205,48 @@ public final class ImageDecoder implements AutoCloseable {
 
         @Override // android.graphics.ImageDecoder.Source
         public ImageDecoder createImageDecoder(boolean z) throws IOException {
-            AssetFileDescriptor assetFileDescriptor = null;
+            AssetFileDescriptor assetFileDescriptorOpenAssetFileDescriptor = null;
             try {
                 if ("content".equals(this.mUri.getScheme())) {
-                    assetFileDescriptor = this.mResolver.openTypedAssetFileDescriptor(this.mUri, ContentType.IMAGE_UNSPECIFIED, null);
+                    assetFileDescriptorOpenAssetFileDescriptor = this.mResolver.openTypedAssetFileDescriptor(this.mUri, ContentType.IMAGE_UNSPECIFIED, null);
                 } else {
-                    assetFileDescriptor = this.mResolver.openAssetFileDescriptor(this.mUri, "r");
+                    assetFileDescriptorOpenAssetFileDescriptor = this.mResolver.openAssetFileDescriptor(this.mUri, "r");
                 }
             } catch (FileNotFoundException unused) {
             }
-            if (assetFileDescriptor == null) {
-                InputStream openInputStream = this.mResolver.openInputStream(this.mUri);
-                if (openInputStream == null) {
+            if (assetFileDescriptorOpenAssetFileDescriptor == null) {
+                InputStream inputStreamOpenInputStream = this.mResolver.openInputStream(this.mUri);
+                if (inputStreamOpenInputStream == null) {
                     throw new FileNotFoundException(this.mUri.toString());
                 }
-                return ImageDecoder.createFromStream(openInputStream, true, z, this);
+                return ImageDecoder.createFromStream(inputStreamOpenInputStream, true, z, this);
             }
-            return ImageDecoder.createFromAssetFileDescriptor(assetFileDescriptor, z, this);
+            return ImageDecoder.createFromAssetFileDescriptor(assetFileDescriptorOpenAssetFileDescriptor, z, this);
         }
 
         public String toString() {
-            String uri = this.mUri.toString();
-            if (uri.length() > 90) {
-                uri = uri.substring(0, 80) + ".." + uri.substring(uri.length() - 10);
+            String string = this.mUri.toString();
+            if (string.length() > 90) {
+                string = string.substring(0, 80) + ".." + string.substring(string.length() - 10);
             }
-            return "ContentResolverSource{uri=" + uri + "}";
+            return "ContentResolverSource{uri=" + string + "}";
         }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public static ImageDecoder createFromFile(File file, boolean z, Source source) throws IOException {
+    public static ImageDecoder createFromFile(File file, boolean z, Source source) throws IOException, ErrnoException {
         FileInputStream fileInputStream = new FileInputStream(file);
         FileDescriptor fd = fileInputStream.getFD();
         try {
             Os.lseek(fd, 0L, OsConstants.SEEK_CUR);
             try {
-                ImageDecoder nCreate = nCreate(fd, -1L, z, source);
-                if (nCreate == null) {
-                    return nCreate;
+                ImageDecoder imageDecoderNCreate = nCreate(fd, -1L, z, source);
+                if (imageDecoderNCreate == null) {
+                    return imageDecoderNCreate;
                 }
-                nCreate.mInputStream = fileInputStream;
-                nCreate.mOwnsInputStream = true;
-                return nCreate;
+                imageDecoderNCreate.mInputStream = fileInputStream;
+                imageDecoderNCreate.mOwnsInputStream = true;
+                return imageDecoderNCreate;
             } finally {
                 IoUtils.closeQuietly(fileInputStream);
             }
@@ -259,14 +259,14 @@ public final class ImageDecoder implements AutoCloseable {
     public static ImageDecoder createFromStream(InputStream inputStream, boolean z, boolean z2, Source source) throws IOException {
         byte[] bArr = new byte[16384];
         try {
-            ImageDecoder nCreate = nCreate(inputStream, bArr, z2, source);
-            if (nCreate == null) {
-                return nCreate;
+            ImageDecoder imageDecoderNCreate = nCreate(inputStream, bArr, z2, source);
+            if (imageDecoderNCreate == null) {
+                return imageDecoderNCreate;
             }
-            nCreate.mInputStream = inputStream;
-            nCreate.mOwnsInputStream = z;
-            nCreate.mTempStorage = bArr;
-            return nCreate;
+            imageDecoderNCreate.mInputStream = inputStream;
+            imageDecoderNCreate.mOwnsInputStream = z;
+            imageDecoderNCreate.mTempStorage = bArr;
+            return imageDecoderNCreate;
         } finally {
             if (z) {
                 IoUtils.closeQuietly(inputStream);
@@ -276,7 +276,7 @@ public final class ImageDecoder implements AutoCloseable {
 
     /* JADX INFO: Access modifiers changed from: private */
     public static ImageDecoder createFromAssetFileDescriptor(AssetFileDescriptor assetFileDescriptor, boolean z, Source source) throws IOException {
-        ImageDecoder createFromStream;
+        ImageDecoder imageDecoderCreateFromStream;
         if (assetFileDescriptor == null) {
             throw new FileNotFoundException();
         }
@@ -284,14 +284,14 @@ public final class ImageDecoder implements AutoCloseable {
         try {
             try {
                 Os.lseek(fileDescriptor, assetFileDescriptor.getStartOffset(), OsConstants.SEEK_SET);
-                createFromStream = nCreate(fileDescriptor, assetFileDescriptor.getDeclaredLength(), z, source);
+                imageDecoderCreateFromStream = nCreate(fileDescriptor, assetFileDescriptor.getDeclaredLength(), z, source);
             } catch (ErrnoException unused) {
-                createFromStream = createFromStream(new FileInputStream(fileDescriptor), true, z, source);
+                imageDecoderCreateFromStream = createFromStream(new FileInputStream(fileDescriptor), true, z, source);
             }
-            if (createFromStream != null) {
-                createFromStream.mAssetFd = assetFileDescriptor;
+            if (imageDecoderCreateFromStream != null) {
+                imageDecoderCreateFromStream.mAssetFd = assetFileDescriptor;
             }
-            return createFromStream;
+            return imageDecoderCreateFromStream;
         } finally {
             IoUtils.closeQuietly(assetFileDescriptor);
         }
@@ -324,16 +324,16 @@ public final class ImageDecoder implements AutoCloseable {
 
         @Override // android.graphics.ImageDecoder.Source
         public ImageDecoder createImageDecoder(boolean z) throws IOException {
-            ImageDecoder createFromStream;
+            ImageDecoder imageDecoderCreateFromStream;
             synchronized (this) {
                 InputStream inputStream = this.mInputStream;
                 if (inputStream == null) {
                     throw new IOException("Cannot reuse InputStreamSource");
                 }
                 this.mInputStream = null;
-                createFromStream = ImageDecoder.createFromStream(inputStream, false, z, this);
+                imageDecoderCreateFromStream = ImageDecoder.createFromStream(inputStream, false, z, this);
             }
-            return createFromStream;
+            return imageDecoderCreateFromStream;
         }
 
         public String toString() {
@@ -371,16 +371,16 @@ public final class ImageDecoder implements AutoCloseable {
 
         @Override // android.graphics.ImageDecoder.Source
         public ImageDecoder createImageDecoder(boolean z) throws IOException {
-            ImageDecoder createFromAsset;
+            ImageDecoder imageDecoderCreateFromAsset;
             synchronized (this) {
                 AssetManager.AssetInputStream assetInputStream = this.mAssetInputStream;
                 if (assetInputStream == null) {
                     throw new IOException("Cannot reuse AssetInputStreamSource");
                 }
                 this.mAssetInputStream = null;
-                createFromAsset = ImageDecoder.createFromAsset(assetInputStream, z, this);
+                imageDecoderCreateFromAsset = ImageDecoder.createFromAsset(assetInputStream, z, this);
             }
-            return createFromAsset;
+            return imageDecoderCreateFromAsset;
         }
 
         public String toString() {
@@ -417,9 +417,9 @@ public final class ImageDecoder implements AutoCloseable {
         }
 
         @Override // android.graphics.ImageDecoder.Source
-        public ImageDecoder createImageDecoder(boolean z) throws IOException {
+        public ImageDecoder createImageDecoder(boolean z) throws Resources.NotFoundException, IOException {
             TypedValue typedValue = new TypedValue();
-            InputStream openRawResource = this.mResources.openRawResource(this.mResId, typedValue);
+            InputStream inputStreamOpenRawResource = this.mResources.openRawResource(this.mResId, typedValue);
             synchronized (this.mLock) {
                 if (typedValue.density == 0) {
                     this.mResDensity = 160;
@@ -427,7 +427,7 @@ public final class ImageDecoder implements AutoCloseable {
                     this.mResDensity = typedValue.density;
                 }
             }
-            return ImageDecoder.createFromAsset((AssetManager.AssetInputStream) openRawResource, z, this);
+            return ImageDecoder.createFromAsset((AssetManager.AssetInputStream) inputStreamOpenRawResource, z, this);
         }
 
         public String toString() {
@@ -442,13 +442,13 @@ public final class ImageDecoder implements AutoCloseable {
     /* JADX INFO: Access modifiers changed from: private */
     public static ImageDecoder createFromAsset(AssetManager.AssetInputStream assetInputStream, boolean z, Source source) throws IOException {
         try {
-            ImageDecoder nCreate = nCreate(assetInputStream.getNativeAsset(), z, source);
-            if (nCreate == null) {
-                return nCreate;
+            ImageDecoder imageDecoderNCreate = nCreate(assetInputStream.getNativeAsset(), z, source);
+            if (imageDecoderNCreate == null) {
+                return imageDecoderNCreate;
             }
-            nCreate.mInputStream = assetInputStream;
-            nCreate.mOwnsInputStream = true;
-            return nCreate;
+            imageDecoderNCreate.mInputStream = assetInputStream;
+            imageDecoderNCreate.mOwnsInputStream = true;
+            return imageDecoderNCreate;
         } finally {
             IoUtils.closeQuietly(assetInputStream);
         }
@@ -894,11 +894,11 @@ public final class ImageDecoder implements AutoCloseable {
     public static ImageInfo decodeHeader(Source source) throws IOException {
         Trace.traceBegin(8192L, "ImageDecoder#decodeHeader");
         try {
-            ImageDecoder createImageDecoder = source.createImageDecoder(true);
+            ImageDecoder imageDecoderCreateImageDecoder = source.createImageDecoder(true);
             try {
-                ImageInfo imageInfo = new ImageInfo(new Size(createImageDecoder.mWidth, createImageDecoder.mHeight), createImageDecoder.mAnimated, createImageDecoder.getMimeType(), createImageDecoder.getColorSpace());
-                if (createImageDecoder != null) {
-                    createImageDecoder.close();
+                ImageInfo imageInfo = new ImageInfo(new Size(imageDecoderCreateImageDecoder.mWidth, imageDecoderCreateImageDecoder.mHeight), imageDecoderCreateImageDecoder.mAnimated, imageDecoderCreateImageDecoder.getMimeType(), imageDecoderCreateImageDecoder.getColorSpace());
+                if (imageDecoderCreateImageDecoder != null) {
+                    imageDecoderCreateImageDecoder.close();
                 }
                 return imageInfo;
             } finally {
@@ -918,55 +918,55 @@ public final class ImageDecoder implements AutoCloseable {
     private static Drawable decodeDrawableImpl(Source source, OnHeaderDecodedListener onHeaderDecodedListener) throws IOException {
         Trace.traceBegin(8192L, "ImageDecoder#decodeDrawable");
         try {
-            ImageDecoder createImageDecoder = source.createImageDecoder(true);
+            ImageDecoder imageDecoderCreateImageDecoder = source.createImageDecoder(true);
             try {
-                createImageDecoder.mSource = source;
-                createImageDecoder.callHeaderDecoded(onHeaderDecodedListener, source);
-                ImageDecoderSourceTrace imageDecoderSourceTrace = new ImageDecoderSourceTrace(createImageDecoder);
+                imageDecoderCreateImageDecoder.mSource = source;
+                imageDecoderCreateImageDecoder.callHeaderDecoded(onHeaderDecodedListener, source);
+                ImageDecoderSourceTrace imageDecoderSourceTrace = new ImageDecoderSourceTrace(imageDecoderCreateImageDecoder);
                 try {
-                    if (createImageDecoder.mUnpremultipliedRequired) {
+                    if (imageDecoderCreateImageDecoder.mUnpremultipliedRequired) {
                         throw new IllegalStateException("Cannot decode a Drawable with unpremultiplied pixels!");
                     }
-                    if (createImageDecoder.mMutable) {
+                    if (imageDecoderCreateImageDecoder.mMutable) {
                         throw new IllegalStateException("Cannot decode a mutable Drawable!");
                     }
-                    int computeDensity = createImageDecoder.computeDensity(source);
-                    if (createImageDecoder.mAnimated) {
-                        ImageDecoder imageDecoder = createImageDecoder.mPostProcessor == null ? null : createImageDecoder;
-                        createImageDecoder.checkState(true);
-                        AnimatedImageDrawable animatedImageDrawable = new AnimatedImageDrawable(createImageDecoder.mNativePtr, imageDecoder, createImageDecoder.mDesiredWidth, createImageDecoder.mDesiredHeight, createImageDecoder.getColorSpacePtr(), createImageDecoder.checkForExtended(), computeDensity, source.computeDstDensity(), createImageDecoder.mCropRect, createImageDecoder.mInputStream, createImageDecoder.mAssetFd);
-                        createImageDecoder.mInputStream = null;
-                        createImageDecoder.mAssetFd = null;
+                    int iComputeDensity = imageDecoderCreateImageDecoder.computeDensity(source);
+                    if (imageDecoderCreateImageDecoder.mAnimated) {
+                        ImageDecoder imageDecoder = imageDecoderCreateImageDecoder.mPostProcessor == null ? null : imageDecoderCreateImageDecoder;
+                        imageDecoderCreateImageDecoder.checkState(true);
+                        AnimatedImageDrawable animatedImageDrawable = new AnimatedImageDrawable(imageDecoderCreateImageDecoder.mNativePtr, imageDecoder, imageDecoderCreateImageDecoder.mDesiredWidth, imageDecoderCreateImageDecoder.mDesiredHeight, imageDecoderCreateImageDecoder.getColorSpacePtr(), imageDecoderCreateImageDecoder.checkForExtended(), iComputeDensity, source.computeDstDensity(), imageDecoderCreateImageDecoder.mCropRect, imageDecoderCreateImageDecoder.mInputStream, imageDecoderCreateImageDecoder.mAssetFd);
+                        imageDecoderCreateImageDecoder.mInputStream = null;
+                        imageDecoderCreateImageDecoder.mAssetFd = null;
                         imageDecoderSourceTrace.close();
-                        if (createImageDecoder != null) {
-                            createImageDecoder.close();
+                        if (imageDecoderCreateImageDecoder != null) {
+                            imageDecoderCreateImageDecoder.close();
                         }
                         return animatedImageDrawable;
                     }
-                    Bitmap decodeBitmapInternal = createImageDecoder.decodeBitmapInternal();
-                    decodeBitmapInternal.setDensity(computeDensity);
+                    Bitmap bitmapDecodeBitmapInternal = imageDecoderCreateImageDecoder.decodeBitmapInternal();
+                    bitmapDecodeBitmapInternal.setDensity(iComputeDensity);
                     Resources resources = source.getResources();
-                    byte[] ninePatchChunk = decodeBitmapInternal.getNinePatchChunk();
+                    byte[] ninePatchChunk = bitmapDecodeBitmapInternal.getNinePatchChunk();
                     if (ninePatchChunk == null || !NinePatch.isNinePatchChunk(ninePatchChunk)) {
-                        BitmapDrawable bitmapDrawable = new BitmapDrawable(resources, decodeBitmapInternal);
+                        BitmapDrawable bitmapDrawable = new BitmapDrawable(resources, bitmapDecodeBitmapInternal);
                         imageDecoderSourceTrace.close();
-                        if (createImageDecoder != null) {
-                            createImageDecoder.close();
+                        if (imageDecoderCreateImageDecoder != null) {
+                            imageDecoderCreateImageDecoder.close();
                         }
                         return bitmapDrawable;
                     }
                     Rect rect = new Rect();
-                    decodeBitmapInternal.getOpticalInsets(rect);
-                    Rect rect2 = createImageDecoder.mOutPaddingRect;
+                    bitmapDecodeBitmapInternal.getOpticalInsets(rect);
+                    Rect rect2 = imageDecoderCreateImageDecoder.mOutPaddingRect;
                     if (rect2 == null) {
                         rect2 = new Rect();
                     }
                     Rect rect3 = rect2;
-                    nGetPadding(createImageDecoder.mNativePtr, rect3);
-                    NinePatchDrawable ninePatchDrawable = new NinePatchDrawable(resources, decodeBitmapInternal, ninePatchChunk, rect3, rect, null);
+                    nGetPadding(imageDecoderCreateImageDecoder.mNativePtr, rect3);
+                    NinePatchDrawable ninePatchDrawable = new NinePatchDrawable(resources, bitmapDecodeBitmapInternal, ninePatchChunk, rect3, rect, null);
                     imageDecoderSourceTrace.close();
-                    if (createImageDecoder != null) {
-                        createImageDecoder.close();
+                    if (imageDecoderCreateImageDecoder != null) {
+                        imageDecoderCreateImageDecoder.close();
                     }
                     return ninePatchDrawable;
                 } finally {
@@ -993,24 +993,24 @@ public final class ImageDecoder implements AutoCloseable {
         byte[] ninePatchChunk;
         Trace.traceBegin(8192L, "ImageDecoder#decodeBitmap");
         try {
-            ImageDecoder createImageDecoder = source.createImageDecoder(false);
+            ImageDecoder imageDecoderCreateImageDecoder = source.createImageDecoder(false);
             try {
-                createImageDecoder.mSource = source;
-                createImageDecoder.callHeaderDecoded(onHeaderDecodedListener, source);
-                ImageDecoderSourceTrace imageDecoderSourceTrace = new ImageDecoderSourceTrace(createImageDecoder);
+                imageDecoderCreateImageDecoder.mSource = source;
+                imageDecoderCreateImageDecoder.callHeaderDecoded(onHeaderDecodedListener, source);
+                ImageDecoderSourceTrace imageDecoderSourceTrace = new ImageDecoderSourceTrace(imageDecoderCreateImageDecoder);
                 try {
-                    int computeDensity = createImageDecoder.computeDensity(source);
-                    Bitmap decodeBitmapInternal = createImageDecoder.decodeBitmapInternal();
-                    decodeBitmapInternal.setDensity(computeDensity);
-                    Rect rect = createImageDecoder.mOutPaddingRect;
-                    if (rect != null && (ninePatchChunk = decodeBitmapInternal.getNinePatchChunk()) != null && NinePatch.isNinePatchChunk(ninePatchChunk)) {
-                        nGetPadding(createImageDecoder.mNativePtr, rect);
+                    int iComputeDensity = imageDecoderCreateImageDecoder.computeDensity(source);
+                    Bitmap bitmapDecodeBitmapInternal = imageDecoderCreateImageDecoder.decodeBitmapInternal();
+                    bitmapDecodeBitmapInternal.setDensity(iComputeDensity);
+                    Rect rect = imageDecoderCreateImageDecoder.mOutPaddingRect;
+                    if (rect != null && (ninePatchChunk = bitmapDecodeBitmapInternal.getNinePatchChunk()) != null && NinePatch.isNinePatchChunk(ninePatchChunk)) {
+                        nGetPadding(imageDecoderCreateImageDecoder.mNativePtr, rect);
                     }
                     imageDecoderSourceTrace.close();
-                    if (createImageDecoder != null) {
-                        createImageDecoder.close();
+                    if (imageDecoderCreateImageDecoder != null) {
+                        imageDecoderCreateImageDecoder.close();
                     }
-                    return decodeBitmapInternal;
+                    return bitmapDecodeBitmapInternal;
                 } finally {
                 }
             } finally {
@@ -1021,14 +1021,14 @@ public final class ImageDecoder implements AutoCloseable {
     }
 
     private static AutoCloseable traceDecoderSource(ImageDecoder imageDecoder) {
-        final boolean isTagEnabled = Trace.isTagEnabled(8192L);
-        if (isTagEnabled) {
+        final boolean zIsTagEnabled = Trace.isTagEnabled(8192L);
+        if (zIsTagEnabled) {
             Trace.traceBegin(8192L, describeDecoderForTrace(imageDecoder));
         }
         return new AutoCloseable() { // from class: android.graphics.ImageDecoder.1
             @Override // java.lang.AutoCloseable
             public void close() throws Exception {
-                if (isTagEnabled) {
+                if (zIsTagEnabled) {
                     Trace.traceEnd(8192L);
                 }
             }
@@ -1037,17 +1037,17 @@ public final class ImageDecoder implements AutoCloseable {
 
     private int computeDensity(Source source) {
         Resources resources;
-        int computeDstDensity;
+        int iComputeDstDensity;
         if (requestedResize()) {
             return 0;
         }
         int density = source.getDensity();
-        if (density == 0 || ((this.mIsNinePatch && this.mPostProcessor == null) || (((resources = source.getResources()) != null && resources.getDisplayMetrics().noncompatDensityDpi == density) || density == (computeDstDensity = source.computeDstDensity()) || (density < computeDstDensity && Compatibility.getTargetSdkVersion() >= 28)))) {
+        if (density == 0 || ((this.mIsNinePatch && this.mPostProcessor == null) || (((resources = source.getResources()) != null && resources.getDisplayMetrics().noncompatDensityDpi == density) || density == (iComputeDstDensity = source.computeDstDensity()) || (density < iComputeDstDensity && Compatibility.getTargetSdkVersion() >= 28)))) {
             return density;
         }
-        float f = computeDstDensity / density;
+        float f = iComputeDstDensity / density;
         setTargetSize(Math.max((int) ((this.mWidth * f) + 0.5f), 1), Math.max((int) ((this.mHeight * f) + 0.5f), 1));
-        return computeDstDensity;
+        return iComputeDstDensity;
     }
 
     private String getMimeType() {
@@ -1129,13 +1129,9 @@ public final class ImageDecoder implements AutoCloseable {
     private void onPartialImage(int i, Throwable th) throws DecodeException {
         DecodeException decodeException = new DecodeException(i, th, this.mSource);
         OnPartialImageListener onPartialImageListener = this.mOnPartialImageListener;
-        if (onPartialImageListener != null) {
-            if (!onPartialImageListener.onPartialImage(decodeException)) {
-                throw decodeException;
-            }
-            return;
+        if (onPartialImageListener == null || !onPartialImageListener.onPartialImage(decodeException)) {
+            throw decodeException;
         }
-        throw decodeException;
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -1159,9 +1155,9 @@ public final class ImageDecoder implements AutoCloseable {
         private final boolean mResourceTracingEnabled;
 
         ImageDecoderSourceTrace(ImageDecoder imageDecoder) {
-            boolean isTagEnabled = Trace.isTagEnabled(8192L);
-            this.mResourceTracingEnabled = isTagEnabled;
-            if (isTagEnabled) {
+            boolean zIsTagEnabled = Trace.isTagEnabled(8192L);
+            this.mResourceTracingEnabled = zIsTagEnabled;
+            if (zIsTagEnabled) {
                 Trace.traceBegin(8192L, ImageDecoder.describeDecoderForTrace(imageDecoder));
             }
         }

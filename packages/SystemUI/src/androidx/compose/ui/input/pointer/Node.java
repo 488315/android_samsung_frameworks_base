@@ -4,14 +4,17 @@ import androidx.collection.LongSparseArray;
 import androidx.collection.MutableObjectList;
 import androidx.compose.runtime.collection.MutableVector;
 import androidx.compose.ui.Modifier;
+import androidx.compose.ui.geometry.Offset;
 import androidx.compose.ui.input.pointer.util.PointerIdArray;
+import androidx.compose.ui.layout.LayoutCoordinates;
 import androidx.compose.ui.node.DelegatableNodeKt;
 import androidx.compose.ui.node.DelegatingNode;
 import androidx.compose.ui.node.NodeCoordinator;
 import androidx.compose.ui.node.PointerInputModifierNode;
+import java.util.ArrayList;
 import java.util.List;
+import kotlin.collections.EmptyList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class Node extends NodeParent {
     public NodeCoordinator coordinates;
@@ -28,7 +31,10 @@ public final class Node extends NodeParent {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:119:0x027c  */
+    /* JADX WARN: Removed duplicated region for block: B:123:0x027c  */
+    /* JADX WARN: Removed duplicated region for block: B:136:0x029f  */
+    /* JADX WARN: Removed duplicated region for block: B:165:0x0314 A[EDGE_INSN: B:165:0x0314->B:166:0x0316 BREAK  A[LOOP:8: B:159:0x02f2->B:163:0x030f]] */
+    /* JADX WARN: Removed duplicated region for block: B:64:0x0176  */
     /* JADX WARN: Type inference failed for: r4v38 */
     /* JADX WARN: Type inference failed for: r4v8 */
     /* JADX WARN: Type inference failed for: r4v9, types: [int] */
@@ -59,14 +65,247 @@ public final class Node extends NodeParent {
     @Override // androidx.compose.ui.input.pointer.NodeParent
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean buildCache(androidx.collection.LongSparseArray r56, androidx.compose.ui.layout.LayoutCoordinates r57, androidx.compose.ui.input.pointer.InternalPointerEvent r58, boolean r59) {
-        /*
-            Method dump skipped, instructions count: 793
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.input.pointer.Node.buildCache(androidx.collection.LongSparseArray, androidx.compose.ui.layout.LayoutCoordinates, androidx.compose.ui.input.pointer.InternalPointerEvent, boolean):boolean");
+    public final boolean buildCache(LongSparseArray longSparseArray, LayoutCoordinates layoutCoordinates, InternalPointerEvent internalPointerEvent, boolean z) {
+        LongSparseArray longSparseArray2;
+        PointerIdArray pointerIdArray;
+        Object obj;
+        boolean z2;
+        boolean z3;
+        boolean z4;
+        PointerEvent pointerEvent;
+        int i;
+        int i2;
+        boolean z5;
+        int i3;
+        int i4;
+        int i5;
+        int i6;
+        LayoutCoordinates layoutCoordinates2 = layoutCoordinates;
+        boolean zBuildCache = super.buildCache(longSparseArray, layoutCoordinates, internalPointerEvent, z);
+        DelegatingNode delegatingNodeAccess$pop = this.modifierNode;
+        if (delegatingNodeAccess$pop.isAttached) {
+            ?? mutableVector = 0;
+            while (delegatingNodeAccess$pop != 0) {
+                if (delegatingNodeAccess$pop instanceof PointerInputModifierNode) {
+                    this.coordinates = DelegatableNodeKt.m634requireCoordinator64DMado((PointerInputModifierNode) delegatingNodeAccess$pop, 16);
+                } else if ((delegatingNodeAccess$pop.kindSet & 16) != 0 && (delegatingNodeAccess$pop instanceof DelegatingNode)) {
+                    Modifier.Node node = delegatingNodeAccess$pop.delegate;
+                    int i7 = 0;
+                    delegatingNodeAccess$pop = delegatingNodeAccess$pop;
+                    mutableVector = mutableVector;
+                    while (node != null) {
+                        if ((node.kindSet & 16) != 0) {
+                            i7++;
+                            mutableVector = mutableVector;
+                            if (i7 == 1) {
+                                delegatingNodeAccess$pop = node;
+                            } else {
+                                if (mutableVector == 0) {
+                                    mutableVector = new MutableVector(new Modifier.Node[16], 0);
+                                }
+                                if (delegatingNodeAccess$pop != 0) {
+                                    mutableVector.add(delegatingNodeAccess$pop);
+                                    delegatingNodeAccess$pop = 0;
+                                }
+                                mutableVector.add(node);
+                            }
+                        }
+                        node = node.child;
+                        delegatingNodeAccess$pop = delegatingNodeAccess$pop;
+                        mutableVector = mutableVector;
+                    }
+                    if (i7 == 1) {
+                    }
+                }
+                delegatingNodeAccess$pop = DelegatableNodeKt.access$pop(mutableVector);
+            }
+            if (this.coordinates != null) {
+                int size = longSparseArray.size();
+                int i8 = 0;
+                while (true) {
+                    longSparseArray2 = this.relevantChanges;
+                    pointerIdArray = this.pointerIds;
+                    if (i8 >= size) {
+                        break;
+                    }
+                    long jKeyAt = longSparseArray.keyAt(i8);
+                    PointerInputChange pointerInputChange = (PointerInputChange) longSparseArray.valueAt(i8);
+                    if (pointerIdArray.contains(jKeyAt)) {
+                        long j = pointerInputChange.previousPosition;
+                        if ((((j & 9223372034707292159L) + 36028792732385279L) & (-9223372034707292160L)) == 0) {
+                            long j2 = pointerInputChange.position;
+                            if ((((j2 & 9223372034707292159L) + 36028792732385279L) & (-9223372034707292160L)) == 0) {
+                                List list = pointerInputChange._historical;
+                                if (list == null) {
+                                    list = EmptyList.INSTANCE;
+                                }
+                                ArrayList arrayList = new ArrayList(list.size());
+                                List list2 = pointerInputChange._historical;
+                                if (list2 == null) {
+                                    list2 = EmptyList.INSTANCE;
+                                }
+                                z5 = zBuildCache;
+                                int size2 = list2.size();
+                                i3 = size;
+                                int i9 = 0;
+                                while (i9 < size2) {
+                                    int i10 = size2;
+                                    HistoricalChange historicalChange = (HistoricalChange) list2.get(i9);
+                                    long j3 = jKeyAt;
+                                    long j4 = historicalChange.position;
+                                    if ((((j4 & 9223372034707292159L) + 36028792732385279L) & (-9223372034707292160L)) == 0) {
+                                        i5 = i9;
+                                        NodeCoordinator nodeCoordinator = this.coordinates;
+                                        nodeCoordinator.getClass();
+                                        i6 = i8;
+                                        arrayList.add(new HistoricalChange(historicalChange.uptimeMillis, nodeCoordinator.mo614localPositionOfS_NoaFU(layoutCoordinates2, j4, true), historicalChange.originalEventPosition, null));
+                                    } else {
+                                        i5 = i9;
+                                        i6 = i8;
+                                    }
+                                    i9 = i5 + 1;
+                                    size2 = i10;
+                                    jKeyAt = j3;
+                                    i8 = i6;
+                                }
+                                i4 = i8;
+                                long j5 = jKeyAt;
+                                NodeCoordinator nodeCoordinator2 = this.coordinates;
+                                nodeCoordinator2.getClass();
+                                long jMo614localPositionOfS_NoaFU = nodeCoordinator2.mo614localPositionOfS_NoaFU(layoutCoordinates2, j, true);
+                                NodeCoordinator nodeCoordinator3 = this.coordinates;
+                                nodeCoordinator3.getClass();
+                                PointerInputChange pointerInputChange2 = new PointerInputChange(pointerInputChange.id, pointerInputChange.uptimeMillis, nodeCoordinator3.mo614localPositionOfS_NoaFU(layoutCoordinates2, j2, true), pointerInputChange.pressed, pointerInputChange.pressure, pointerInputChange.previousUptimeMillis, jMo614localPositionOfS_NoaFU, pointerInputChange.previousPressed, false, pointerInputChange.type, arrayList, pointerInputChange.scrollDelta, pointerInputChange.originalEventPosition, null);
+                                PointerInputChange pointerInputChange3 = pointerInputChange.consumedDelegate;
+                                if (pointerInputChange3 == null) {
+                                    pointerInputChange3 = pointerInputChange;
+                                }
+                                pointerInputChange2.consumedDelegate = pointerInputChange3;
+                                PointerInputChange pointerInputChange4 = pointerInputChange.consumedDelegate;
+                                if (pointerInputChange4 != null) {
+                                    pointerInputChange = pointerInputChange4;
+                                }
+                                pointerInputChange2.consumedDelegate = pointerInputChange;
+                                longSparseArray2.put(j5, pointerInputChange2);
+                            } else {
+                                z5 = zBuildCache;
+                                i3 = size;
+                                i4 = i8;
+                            }
+                        }
+                    }
+                    i8 = i4 + 1;
+                    layoutCoordinates2 = layoutCoordinates;
+                    zBuildCache = z5;
+                    size = i3;
+                }
+                boolean z6 = zBuildCache;
+                if (longSparseArray2.size() == 0) {
+                    pointerIdArray.size = 0;
+                    this.children.clear();
+                    return true;
+                }
+                int i11 = pointerIdArray.size;
+                while (true) {
+                    i11--;
+                    if (-1 >= i11) {
+                        break;
+                    }
+                    if (longSparseArray.indexOfKey(pointerIdArray.internalArray[i11]) < 0 && i11 < (i2 = pointerIdArray.size)) {
+                        int i12 = i2 - 1;
+                        int i13 = i11;
+                        while (i13 < i12) {
+                            long[] jArr = pointerIdArray.internalArray;
+                            int i14 = i13 + 1;
+                            jArr[i13] = jArr[i14];
+                            i13 = i14;
+                        }
+                        pointerIdArray.size--;
+                    }
+                }
+                ArrayList arrayList2 = new ArrayList(longSparseArray2.size());
+                int size3 = longSparseArray2.size();
+                for (int i15 = 0; i15 < size3; i15++) {
+                    arrayList2.add(longSparseArray2.valueAt(i15));
+                }
+                PointerEvent pointerEvent2 = new PointerEvent(arrayList2, internalPointerEvent);
+                List list3 = pointerEvent2.changes;
+                int size4 = list3.size();
+                int i16 = 0;
+                while (true) {
+                    if (i16 >= size4) {
+                        obj = null;
+                        break;
+                    }
+                    obj = list3.get(i16);
+                    if (internalPointerEvent.m590activeHoverEvent0FcD4WY(((PointerInputChange) obj).id)) {
+                        break;
+                    }
+                    i16++;
+                }
+                PointerInputChange pointerInputChange5 = (PointerInputChange) obj;
+                if (pointerInputChange5 != null) {
+                    boolean z7 = pointerInputChange5.pressed;
+                    if (z) {
+                        z2 = false;
+                        if (!this.isIn && (z7 || pointerInputChange5.previousPressed)) {
+                            NodeCoordinator nodeCoordinator4 = this.coordinates;
+                            nodeCoordinator4.getClass();
+                            long j6 = nodeCoordinator4.measuredSize;
+                            long j7 = pointerInputChange5.position;
+                            float fIntBitsToFloat = Float.intBitsToFloat((int) (j7 >> 32));
+                            float fIntBitsToFloat2 = Float.intBitsToFloat((int) (j7 & 4294967295L));
+                            z3 = true;
+                            this.isIn = !((fIntBitsToFloat < 0.0f) | (fIntBitsToFloat > ((float) ((int) (j6 >> 32)))) | (fIntBitsToFloat2 < 0.0f) | (fIntBitsToFloat2 > ((float) ((int) (j6 & 4294967295L)))));
+                        }
+                        if (this.isIn == this.wasIn) {
+                            int i17 = pointerEvent2.type;
+                            PointerEventType.Companion.getClass();
+                            if (i17 == PointerEventType.Move || (i = pointerEvent2.type) == PointerEventType.Enter || i == PointerEventType.Exit) {
+                                pointerEvent2.type = this.isIn ? PointerEventType.Enter : PointerEventType.Exit;
+                            } else {
+                                int i18 = pointerEvent2.type;
+                                PointerEventType.Companion.getClass();
+                                if (i18 == PointerEventType.Enter && this.wasIn && !this.hasExited) {
+                                    pointerEvent2.type = PointerEventType.Move;
+                                } else if (pointerEvent2.type == PointerEventType.Exit && this.isIn && z7) {
+                                    pointerEvent2.type = PointerEventType.Move;
+                                }
+                            }
+                        }
+                    } else {
+                        z2 = false;
+                        this.isIn = false;
+                    }
+                    z3 = true;
+                    if (this.isIn == this.wasIn) {
+                    }
+                } else {
+                    z2 = false;
+                    z3 = true;
+                }
+                if (!z6) {
+                    int i19 = pointerEvent2.type;
+                    PointerEventType.Companion.getClass();
+                    if (i19 != PointerEventType.Move || (pointerEvent = this.pointerEvent) == null || pointerEvent.changes.size() != pointerEvent2.changes.size()) {
+                        z4 = z3;
+                        break;
+                    }
+                    int size5 = pointerEvent2.changes.size();
+                    for (?? r4 = z2; r4 < size5; r4++) {
+                        if (!Offset.m398equalsimpl0(((PointerInputChange) pointerEvent.changes.get(r4)).position, ((PointerInputChange) pointerEvent2.changes.get(r4)).position)) {
+                            z4 = z3;
+                            break;
+                        }
+                    }
+                    z4 = z2;
+                }
+                this.pointerEvent = pointerEvent2;
+                return z4;
+            }
+        }
+        return true;
     }
 
     @Override // androidx.compose.ui.input.pointer.NodeParent
@@ -83,9 +322,9 @@ public final class Node extends NodeParent {
             PointerInputChange pointerInputChange = (PointerInputChange) list.get(i);
             boolean z = pointerInputChange.pressed;
             long j = pointerInputChange.id;
-            boolean m588activeHoverEvent0FcD4WY = internalPointerEvent.m588activeHoverEvent0FcD4WY(j);
+            boolean zM590activeHoverEvent0FcD4WY = internalPointerEvent.m590activeHoverEvent0FcD4WY(j);
             boolean z2 = this.isIn;
-            if ((!z && !m588activeHoverEvent0FcD4WY) || (!z && !z2)) {
+            if ((!z && !zM590activeHoverEvent0FcD4WY) || (!z && !z2)) {
                 this.pointerIds.remove(j);
             }
         }
@@ -125,41 +364,41 @@ public final class Node extends NodeParent {
         for (int i2 = 0; i2 < i; i2++) {
             ((Node) objArr[i2]).dispatchCancel();
         }
-        DelegatingNode delegatingNode = this.modifierNode;
-        ?? r1 = 0;
-        while (delegatingNode != 0) {
-            if (delegatingNode instanceof PointerInputModifierNode) {
-                ((PointerInputModifierNode) delegatingNode).onCancelPointerInput();
-            } else if ((delegatingNode.kindSet & 16) != 0 && (delegatingNode instanceof DelegatingNode)) {
-                Modifier.Node node = delegatingNode.delegate;
+        DelegatingNode delegatingNodeAccess$pop = this.modifierNode;
+        ?? mutableVector2 = 0;
+        while (delegatingNodeAccess$pop != 0) {
+            if (delegatingNodeAccess$pop instanceof PointerInputModifierNode) {
+                ((PointerInputModifierNode) delegatingNodeAccess$pop).onCancelPointerInput();
+            } else if ((delegatingNodeAccess$pop.kindSet & 16) != 0 && (delegatingNodeAccess$pop instanceof DelegatingNode)) {
+                Modifier.Node node = delegatingNodeAccess$pop.delegate;
                 int i3 = 0;
-                r1 = r1;
-                delegatingNode = delegatingNode;
+                mutableVector2 = mutableVector2;
+                delegatingNodeAccess$pop = delegatingNodeAccess$pop;
                 while (node != null) {
                     if ((node.kindSet & 16) != 0) {
                         i3++;
-                        r1 = r1;
+                        mutableVector2 = mutableVector2;
                         if (i3 == 1) {
-                            delegatingNode = node;
+                            delegatingNodeAccess$pop = node;
                         } else {
-                            if (r1 == 0) {
-                                r1 = new MutableVector(new Modifier.Node[16], 0);
+                            if (mutableVector2 == 0) {
+                                mutableVector2 = new MutableVector(new Modifier.Node[16], 0);
                             }
-                            if (delegatingNode != 0) {
-                                r1.add(delegatingNode);
-                                delegatingNode = 0;
+                            if (delegatingNodeAccess$pop != 0) {
+                                mutableVector2.add(delegatingNodeAccess$pop);
+                                delegatingNodeAccess$pop = 0;
                             }
-                            r1.add(node);
+                            mutableVector2.add(node);
                         }
                     }
                     node = node.child;
-                    r1 = r1;
-                    delegatingNode = delegatingNode;
+                    mutableVector2 = mutableVector2;
+                    delegatingNodeAccess$pop = delegatingNodeAccess$pop;
                 }
                 if (i3 == 1) {
                 }
             }
-            delegatingNode = DelegatableNodeKt.access$pop(r1);
+            delegatingNodeAccess$pop = DelegatableNodeKt.access$pop(mutableVector2);
         }
     }
 
@@ -198,46 +437,46 @@ public final class Node extends NodeParent {
                 NodeCoordinator nodeCoordinator = this.coordinates;
                 nodeCoordinator.getClass();
                 long j = nodeCoordinator.measuredSize;
-                DelegatingNode delegatingNode = node;
-                ?? r9 = 0;
-                while (delegatingNode != 0) {
-                    if (delegatingNode instanceof PointerInputModifierNode) {
-                        ((PointerInputModifierNode) delegatingNode).mo16onPointerEventH0pRuoY(pointerEvent, PointerEventPass.Final, j);
-                    } else if ((delegatingNode.kindSet & 16) != 0 && (delegatingNode instanceof DelegatingNode)) {
-                        Modifier.Node node2 = delegatingNode.delegate;
+                DelegatingNode delegatingNodeAccess$pop = node;
+                ?? mutableVector = 0;
+                while (delegatingNodeAccess$pop != 0) {
+                    if (delegatingNodeAccess$pop instanceof PointerInputModifierNode) {
+                        ((PointerInputModifierNode) delegatingNodeAccess$pop).mo16onPointerEventH0pRuoY(pointerEvent, PointerEventPass.Final, j);
+                    } else if ((delegatingNodeAccess$pop.kindSet & 16) != 0 && (delegatingNodeAccess$pop instanceof DelegatingNode)) {
+                        Modifier.Node node2 = delegatingNodeAccess$pop.delegate;
                         int i = 0;
-                        delegatingNode = delegatingNode;
-                        r9 = r9;
+                        delegatingNodeAccess$pop = delegatingNodeAccess$pop;
+                        mutableVector = mutableVector;
                         while (node2 != null) {
                             if ((node2.kindSet & 16) != 0) {
                                 i++;
-                                r9 = r9;
+                                mutableVector = mutableVector;
                                 if (i == 1) {
-                                    delegatingNode = node2;
+                                    delegatingNodeAccess$pop = node2;
                                 } else {
-                                    if (r9 == 0) {
-                                        r9 = new MutableVector(new Modifier.Node[16], 0);
+                                    if (mutableVector == 0) {
+                                        mutableVector = new MutableVector(new Modifier.Node[16], 0);
                                     }
-                                    if (delegatingNode != 0) {
-                                        r9.add(delegatingNode);
-                                        delegatingNode = 0;
+                                    if (delegatingNodeAccess$pop != 0) {
+                                        mutableVector.add(delegatingNodeAccess$pop);
+                                        delegatingNodeAccess$pop = 0;
                                     }
-                                    r9.add(node2);
+                                    mutableVector.add(node2);
                                 }
                             }
                             node2 = node2.child;
-                            delegatingNode = delegatingNode;
-                            r9 = r9;
+                            delegatingNodeAccess$pop = delegatingNodeAccess$pop;
+                            mutableVector = mutableVector;
                         }
                         if (i == 1) {
                         }
                     }
-                    delegatingNode = DelegatableNodeKt.access$pop(r9);
+                    delegatingNodeAccess$pop = DelegatableNodeKt.access$pop(mutableVector);
                 }
                 if (node.isAttached) {
-                    MutableVector mutableVector = this.children;
-                    Object[] objArr = mutableVector.content;
-                    int i2 = mutableVector.size;
+                    MutableVector mutableVector2 = this.children;
+                    Object[] objArr = mutableVector2.content;
+                    int i2 = mutableVector2.size;
                     for (int i3 = 0; i3 < i2; i3++) {
                         ((Node) objArr[i3]).dispatchFinalEventPass(internalPointerEvent);
                     }
@@ -298,94 +537,94 @@ public final class Node extends NodeParent {
     /* JADX WARN: Type inference failed for: r8v9 */
     public final boolean dispatchMainEventPass(InternalPointerEvent internalPointerEvent, boolean z) {
         if (!(this.relevantChanges.size() == 0)) {
-            DelegatingNode delegatingNode = this.modifierNode;
-            if (delegatingNode.isAttached) {
+            DelegatingNode delegatingNodeAccess$pop = this.modifierNode;
+            if (delegatingNodeAccess$pop.isAttached) {
                 PointerEvent pointerEvent = this.pointerEvent;
                 pointerEvent.getClass();
                 NodeCoordinator nodeCoordinator = this.coordinates;
                 nodeCoordinator.getClass();
                 long j = nodeCoordinator.measuredSize;
-                DelegatingNode delegatingNode2 = delegatingNode;
-                ?? r8 = 0;
-                while (delegatingNode2 != 0) {
-                    if (delegatingNode2 instanceof PointerInputModifierNode) {
-                        ((PointerInputModifierNode) delegatingNode2).mo16onPointerEventH0pRuoY(pointerEvent, PointerEventPass.Initial, j);
-                    } else if ((delegatingNode2.kindSet & 16) != 0 && (delegatingNode2 instanceof DelegatingNode)) {
-                        Modifier.Node node = delegatingNode2.delegate;
+                DelegatingNode delegatingNodeAccess$pop2 = delegatingNodeAccess$pop;
+                ?? mutableVector = 0;
+                while (delegatingNodeAccess$pop2 != 0) {
+                    if (delegatingNodeAccess$pop2 instanceof PointerInputModifierNode) {
+                        ((PointerInputModifierNode) delegatingNodeAccess$pop2).mo16onPointerEventH0pRuoY(pointerEvent, PointerEventPass.Initial, j);
+                    } else if ((delegatingNodeAccess$pop2.kindSet & 16) != 0 && (delegatingNodeAccess$pop2 instanceof DelegatingNode)) {
+                        Modifier.Node node = delegatingNodeAccess$pop2.delegate;
                         int i = 0;
-                        delegatingNode2 = delegatingNode2;
-                        r8 = r8;
+                        delegatingNodeAccess$pop2 = delegatingNodeAccess$pop2;
+                        mutableVector = mutableVector;
                         while (node != null) {
                             if ((node.kindSet & 16) != 0) {
                                 i++;
-                                r8 = r8;
+                                mutableVector = mutableVector;
                                 if (i == 1) {
-                                    delegatingNode2 = node;
+                                    delegatingNodeAccess$pop2 = node;
                                 } else {
-                                    if (r8 == 0) {
-                                        r8 = new MutableVector(new Modifier.Node[16], 0);
+                                    if (mutableVector == 0) {
+                                        mutableVector = new MutableVector(new Modifier.Node[16], 0);
                                     }
-                                    if (delegatingNode2 != 0) {
-                                        r8.add(delegatingNode2);
-                                        delegatingNode2 = 0;
+                                    if (delegatingNodeAccess$pop2 != 0) {
+                                        mutableVector.add(delegatingNodeAccess$pop2);
+                                        delegatingNodeAccess$pop2 = 0;
                                     }
-                                    r8.add(node);
+                                    mutableVector.add(node);
                                 }
                             }
                             node = node.child;
-                            delegatingNode2 = delegatingNode2;
-                            r8 = r8;
+                            delegatingNodeAccess$pop2 = delegatingNodeAccess$pop2;
+                            mutableVector = mutableVector;
                         }
                         if (i == 1) {
                         }
                     }
-                    delegatingNode2 = DelegatableNodeKt.access$pop(r8);
+                    delegatingNodeAccess$pop2 = DelegatableNodeKt.access$pop(mutableVector);
                 }
-                if (delegatingNode.isAttached) {
-                    MutableVector mutableVector = this.children;
-                    Object[] objArr = mutableVector.content;
-                    int i2 = mutableVector.size;
+                if (delegatingNodeAccess$pop.isAttached) {
+                    MutableVector mutableVector2 = this.children;
+                    Object[] objArr = mutableVector2.content;
+                    int i2 = mutableVector2.size;
                     for (int i3 = 0; i3 < i2; i3++) {
                         Node node2 = (Node) objArr[i3];
                         this.coordinates.getClass();
                         node2.dispatchMainEventPass(internalPointerEvent, z);
                     }
                 }
-                if (delegatingNode.isAttached) {
-                    ?? r13 = 0;
-                    while (delegatingNode != 0) {
-                        if (delegatingNode instanceof PointerInputModifierNode) {
-                            ((PointerInputModifierNode) delegatingNode).mo16onPointerEventH0pRuoY(pointerEvent, PointerEventPass.Main, j);
-                        } else if ((delegatingNode.kindSet & 16) != 0 && (delegatingNode instanceof DelegatingNode)) {
-                            Modifier.Node node3 = delegatingNode.delegate;
+                if (delegatingNodeAccess$pop.isAttached) {
+                    ?? mutableVector3 = 0;
+                    while (delegatingNodeAccess$pop != 0) {
+                        if (delegatingNodeAccess$pop instanceof PointerInputModifierNode) {
+                            ((PointerInputModifierNode) delegatingNodeAccess$pop).mo16onPointerEventH0pRuoY(pointerEvent, PointerEventPass.Main, j);
+                        } else if ((delegatingNodeAccess$pop.kindSet & 16) != 0 && (delegatingNodeAccess$pop instanceof DelegatingNode)) {
+                            Modifier.Node node3 = delegatingNodeAccess$pop.delegate;
                             int i4 = 0;
-                            delegatingNode = delegatingNode;
-                            r13 = r13;
+                            delegatingNodeAccess$pop = delegatingNodeAccess$pop;
+                            mutableVector3 = mutableVector3;
                             while (node3 != null) {
                                 if ((node3.kindSet & 16) != 0) {
                                     i4++;
-                                    r13 = r13;
+                                    mutableVector3 = mutableVector3;
                                     if (i4 == 1) {
-                                        delegatingNode = node3;
+                                        delegatingNodeAccess$pop = node3;
                                     } else {
-                                        if (r13 == 0) {
-                                            r13 = new MutableVector(new Modifier.Node[16], 0);
+                                        if (mutableVector3 == 0) {
+                                            mutableVector3 = new MutableVector(new Modifier.Node[16], 0);
                                         }
-                                        if (delegatingNode != 0) {
-                                            r13.add(delegatingNode);
-                                            delegatingNode = 0;
+                                        if (delegatingNodeAccess$pop != 0) {
+                                            mutableVector3.add(delegatingNodeAccess$pop);
+                                            delegatingNodeAccess$pop = 0;
                                         }
-                                        r13.add(node3);
+                                        mutableVector3.add(node3);
                                     }
                                 }
                                 node3 = node3.child;
-                                delegatingNode = delegatingNode;
-                                r13 = r13;
+                                delegatingNodeAccess$pop = delegatingNodeAccess$pop;
+                                mutableVector3 = mutableVector3;
                             }
                             if (i4 == 1) {
                             }
                         }
-                        delegatingNode = DelegatableNodeKt.access$pop(r13);
+                        delegatingNodeAccess$pop = DelegatableNodeKt.access$pop(mutableVector3);
                     }
                 }
                 return true;

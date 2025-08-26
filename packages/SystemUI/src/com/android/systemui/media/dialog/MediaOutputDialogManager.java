@@ -11,7 +11,6 @@ import com.android.systemui.media.dialog.MediaSwitchingController;
 import java.util.concurrent.Executor;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class MediaOutputDialogManager {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -23,7 +22,6 @@ public class MediaOutputDialogManager {
     public final MediaSwitchingController.Factory mediaSwitchingControllerFactory;
     public final UiEventLogger uiEventLogger;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -53,13 +51,13 @@ public class MediaOutputDialogManager {
     }
 
     public final void createAndShow(String str, boolean z, DialogTransitionAnimator.Controller controller, boolean z2, UserHandle userHandle, MediaSession.Token token) {
-        MediaSwitchingController create = this.mediaSwitchingControllerFactory.create(str, userHandle, token);
+        MediaSwitchingController mediaSwitchingControllerCreate = this.mediaSwitchingControllerFactory.create(str, userHandle, token);
         Context context = this.context;
         UiEventLogger uiEventLogger = this.uiEventLogger;
         Executor executor = this.mainExecutor;
         Executor executor2 = executor != null ? executor : null;
         Executor executor3 = this.backgroundExecutor;
-        MediaOutputDialog mediaOutputDialog = new MediaOutputDialog(context, z, this.broadcastSender, create, this.dialogTransitionAnimator, uiEventLogger, executor2, executor3 != null ? executor3 : null, z2);
+        MediaOutputDialog mediaOutputDialog = new MediaOutputDialog(context, z, this.broadcastSender, mediaSwitchingControllerCreate, this.dialogTransitionAnimator, uiEventLogger, executor2, executor3 != null ? executor3 : null, z2);
         if (controller == null) {
             mediaOutputDialog.show();
         } else {

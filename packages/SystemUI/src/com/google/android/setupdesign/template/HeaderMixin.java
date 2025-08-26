@@ -20,7 +20,6 @@ import com.google.android.setupdesign.util.PartnerStyleHelper;
 import com.google.android.setupdesign.util.TextViewPartnerStyler;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class HeaderMixin implements Mixin {
     public float headerAutoSizeLineExtraSpacingInPx;
@@ -35,10 +34,10 @@ public class HeaderMixin implements Mixin {
         TextView textView;
         TextView textView2;
         this.templateLayout = templateLayout;
-        TypedArray obtainStyledAttributes = templateLayout.getContext().obtainStyledAttributes(attributeSet, R$styleable.SucHeaderMixin, i, 0);
-        CharSequence text = obtainStyledAttributes.getText(4);
-        ColorStateList colorStateList = obtainStyledAttributes.getColorStateList(5);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = templateLayout.getContext().obtainStyledAttributes(attributeSet, R$styleable.SucHeaderMixin, i, 0);
+        CharSequence text = typedArrayObtainStyledAttributes.getText(4);
+        ColorStateList colorStateList = typedArrayObtainStyledAttributes.getColorStateList(5);
+        typedArrayObtainStyledAttributes.recycle();
         if (getTextView() != null) {
             getTextView().getTextSize();
             getTextView().getLineHeight();
@@ -104,12 +103,12 @@ public class HeaderMixin implements Mixin {
         TemplateLayout templateLayout = this.templateLayout;
         TextView textView = (TextView) templateLayout.findManagedViewById(R.id.suc_layout_title);
         if (PartnerStyleHelper.shouldApplyPartnerResource(templateLayout)) {
-            View findManagedViewById = templateLayout.findManagedViewById(R.id.sud_layout_header);
-            LayoutStyler.applyPartnerCustomizationExtraPaddingStyle(findManagedViewById);
+            View viewFindManagedViewById = templateLayout.findManagedViewById(R.id.sud_layout_header);
+            LayoutStyler.applyPartnerCustomizationExtraPaddingStyle(viewFindManagedViewById);
             if (textView != null) {
                 TextViewPartnerStyler.applyPartnerCustomizationStyle(textView, new TextViewPartnerStyler.TextPartnerConfigs(PartnerConfig.CONFIG_HEADER_TEXT_COLOR, null, PartnerConfig.CONFIG_HEADER_TEXT_SIZE, PartnerConfig.CONFIG_HEADER_FONT_FAMILY, PartnerConfig.CONFIG_HEADER_FONT_WEIGHT, null, PartnerConfig.CONFIG_HEADER_TEXT_MARGIN_TOP, PartnerConfig.CONFIG_HEADER_TEXT_MARGIN_BOTTOM, PartnerConfig.CONFIG_HEADER_FONT_VARIATION_SETTINGS, PartnerStyleHelper.getLayoutGravity(textView.getContext())));
             }
-            ViewGroup viewGroup = (ViewGroup) findManagedViewById;
+            ViewGroup viewGroup = (ViewGroup) viewFindManagedViewById;
             if (viewGroup != null) {
                 Context context = viewGroup.getContext();
                 viewGroup.setBackgroundColor(PartnerConfigHelper.get(context).getColor(context, PartnerConfig.CONFIG_HEADER_AREA_BACKGROUND_COLOR));

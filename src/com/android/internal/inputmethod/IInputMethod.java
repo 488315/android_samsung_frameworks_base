@@ -210,9 +210,9 @@ public interface IInputMethod extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IInputMethod.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IInputMethod)) {
-                return (IInputMethod) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IInputMethod.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IInputMethod)) {
+                return (IInputMethod) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -290,9 +290,9 @@ public interface IInputMethod extends IInterface {
                     return true;
                 case 2:
                     InlineSuggestionsRequestInfo inlineSuggestionsRequestInfo = (InlineSuggestionsRequestInfo) parcel.readTypedObject(InlineSuggestionsRequestInfo.CREATOR);
-                    IInlineSuggestionsRequestCallback asInterface = IInlineSuggestionsRequestCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IInlineSuggestionsRequestCallback iInlineSuggestionsRequestCallbackAsInterface = IInlineSuggestionsRequestCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    onCreateInlineSuggestionsRequest(inlineSuggestionsRequestInfo, asInterface);
+                    onCreateInlineSuggestionsRequest(inlineSuggestionsRequestInfo, iInlineSuggestionsRequestCallbackAsInterface);
                     return true;
                 case 3:
                     InputBinding inputBinding = (InputBinding) parcel.readTypedObject(InputBinding.CREATOR);
@@ -308,42 +308,42 @@ public interface IInputMethod extends IInterface {
                     startInput(startInputParams);
                     return true;
                 case 6:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    onNavButtonFlagsChanged(readInt);
+                    onNavButtonFlagsChanged(i3);
                     return true;
                 case 7:
                     InputChannel inputChannel = (InputChannel) parcel.readTypedObject(InputChannel.CREATOR);
-                    IInputMethodSessionCallback asInterface2 = IInputMethodSessionCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IInputMethodSessionCallback iInputMethodSessionCallbackAsInterface = IInputMethodSessionCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    createSession(inputChannel, asInterface2);
+                    createSession(inputChannel, iInputMethodSessionCallbackAsInterface);
                     return true;
                 case 8:
-                    IInputMethodSession asInterface3 = IInputMethodSession.Stub.asInterface(parcel.readStrongBinder());
-                    boolean readBoolean = parcel.readBoolean();
+                    IInputMethodSession iInputMethodSessionAsInterface = IInputMethodSession.Stub.asInterface(parcel.readStrongBinder());
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setSessionEnabled(asInterface3, readBoolean);
+                    setSessionEnabled(iInputMethodSessionAsInterface, z);
                     return true;
                 case 9:
-                    IBinder readStrongBinder = parcel.readStrongBinder();
+                    IBinder strongBinder = parcel.readStrongBinder();
                     ImeTracker.Token token = (ImeTracker.Token) parcel.readTypedObject(ImeTracker.Token.CREATOR);
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     ResultReceiver resultReceiver = (ResultReceiver) parcel.readTypedObject(ResultReceiver.CREATOR);
                     parcel.enforceNoDataAvail();
-                    showSoftInput(readStrongBinder, token, readInt2, resultReceiver);
+                    showSoftInput(strongBinder, token, i4, resultReceiver);
                     return true;
                 case 10:
-                    IBinder readStrongBinder2 = parcel.readStrongBinder();
+                    IBinder strongBinder2 = parcel.readStrongBinder();
                     ImeTracker.Token token2 = (ImeTracker.Token) parcel.readTypedObject(ImeTracker.Token.CREATOR);
-                    int readInt3 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     ResultReceiver resultReceiver2 = (ResultReceiver) parcel.readTypedObject(ResultReceiver.CREATOR);
                     parcel.enforceNoDataAvail();
-                    hideSoftInput(readStrongBinder2, token2, readInt3, resultReceiver2);
+                    hideSoftInput(strongBinder2, token2, i5, resultReceiver2);
                     return true;
                 case 11:
-                    int readInt4 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    updateEditorToolType(readInt4);
+                    updateEditorToolType(i6);
                     return true;
                 case 12:
                     InputMethodSubtype inputMethodSubtype = (InputMethodSubtype) parcel.readTypedObject(InputMethodSubtype.CREATOR);
@@ -351,19 +351,19 @@ public interface IInputMethod extends IInterface {
                     changeInputMethodSubtype(inputMethodSubtype);
                     return true;
                 case 13:
-                    int readInt5 = parcel.readInt();
-                    IConnectionlessHandwritingCallback asInterface4 = IConnectionlessHandwritingCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i7 = parcel.readInt();
+                    IConnectionlessHandwritingCallback iConnectionlessHandwritingCallbackAsInterface = IConnectionlessHandwritingCallback.Stub.asInterface(parcel.readStrongBinder());
                     CursorAnchorInfo cursorAnchorInfo = (CursorAnchorInfo) parcel.readTypedObject(CursorAnchorInfo.CREATOR);
-                    boolean readBoolean2 = parcel.readBoolean();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    canStartStylusHandwriting(readInt5, asInterface4, cursorAnchorInfo, readBoolean2);
+                    canStartStylusHandwriting(i7, iConnectionlessHandwritingCallbackAsInterface, cursorAnchorInfo, z2);
                     return true;
                 case 14:
-                    int readInt6 = parcel.readInt();
+                    int i8 = parcel.readInt();
                     InputChannel inputChannel2 = (InputChannel) parcel.readTypedObject(InputChannel.CREATOR);
-                    ArrayList createTypedArrayList = parcel.createTypedArrayList(MotionEvent.CREATOR);
+                    ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(MotionEvent.CREATOR);
                     parcel.enforceNoDataAvail();
-                    startStylusHandwriting(readInt6, inputChannel2, createTypedArrayList);
+                    startStylusHandwriting(i8, inputChannel2, arrayListCreateTypedArrayList);
                     return true;
                 case 15:
                     commitHandwritingDelegationTextIfAvailable();
@@ -381,14 +381,14 @@ public interface IInputMethod extends IInterface {
                     removeStylusHandwritingWindow();
                     return true;
                 case 20:
-                    long readLong = parcel.readLong();
+                    long j = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    setStylusWindowIdleTimeoutForTest(readLong);
+                    setStylusWindowIdleTimeoutForTest(j);
                     return true;
                 case 21:
-                    int readInt7 = parcel.readInt();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    minimizeSoftInput(readInt7);
+                    minimizeSoftInput(i9);
                     return true;
                 case 22:
                     undoMinimizeSoftInput();
@@ -416,272 +416,272 @@ public interface IInputMethod extends IInterface {
 
             @Override // com.android.internal.inputmethod.IInputMethod
             public void initializeInternal(InitParams initParams) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInputMethod.DESCRIPTOR);
-                    obtain.writeTypedObject(initParams, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInputMethod.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(initParams, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IInputMethod
             public void onCreateInlineSuggestionsRequest(InlineSuggestionsRequestInfo inlineSuggestionsRequestInfo, IInlineSuggestionsRequestCallback iInlineSuggestionsRequestCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInputMethod.DESCRIPTOR);
-                    obtain.writeTypedObject(inlineSuggestionsRequestInfo, 0);
-                    obtain.writeStrongInterface(iInlineSuggestionsRequestCallback);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInputMethod.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(inlineSuggestionsRequestInfo, 0);
+                    parcelObtain.writeStrongInterface(iInlineSuggestionsRequestCallback);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IInputMethod
             public void bindInput(InputBinding inputBinding) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInputMethod.DESCRIPTOR);
-                    obtain.writeTypedObject(inputBinding, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInputMethod.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(inputBinding, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IInputMethod
             public void unbindInput() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInputMethod.DESCRIPTOR);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInputMethod.DESCRIPTOR);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IInputMethod
             public void startInput(StartInputParams startInputParams) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInputMethod.DESCRIPTOR);
-                    obtain.writeTypedObject(startInputParams, 0);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInputMethod.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(startInputParams, 0);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IInputMethod
             public void onNavButtonFlagsChanged(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInputMethod.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInputMethod.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IInputMethod
             public void createSession(InputChannel inputChannel, IInputMethodSessionCallback iInputMethodSessionCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInputMethod.DESCRIPTOR);
-                    obtain.writeTypedObject(inputChannel, 0);
-                    obtain.writeStrongInterface(iInputMethodSessionCallback);
-                    this.mRemote.transact(7, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInputMethod.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(inputChannel, 0);
+                    parcelObtain.writeStrongInterface(iInputMethodSessionCallback);
+                    this.mRemote.transact(7, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IInputMethod
             public void setSessionEnabled(IInputMethodSession iInputMethodSession, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInputMethod.DESCRIPTOR);
-                    obtain.writeStrongInterface(iInputMethodSession);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(8, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInputMethod.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iInputMethodSession);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(8, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IInputMethod
             public void showSoftInput(IBinder iBinder, ImeTracker.Token token, int i, ResultReceiver resultReceiver) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInputMethod.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(token, 0);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(resultReceiver, 0);
-                    this.mRemote.transact(9, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInputMethod.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(token, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(resultReceiver, 0);
+                    this.mRemote.transact(9, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IInputMethod
             public void hideSoftInput(IBinder iBinder, ImeTracker.Token token, int i, ResultReceiver resultReceiver) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInputMethod.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(token, 0);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(resultReceiver, 0);
-                    this.mRemote.transact(10, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInputMethod.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(token, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(resultReceiver, 0);
+                    this.mRemote.transact(10, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IInputMethod
             public void updateEditorToolType(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInputMethod.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(11, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInputMethod.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(11, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IInputMethod
             public void changeInputMethodSubtype(InputMethodSubtype inputMethodSubtype) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInputMethod.DESCRIPTOR);
-                    obtain.writeTypedObject(inputMethodSubtype, 0);
-                    this.mRemote.transact(12, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInputMethod.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(inputMethodSubtype, 0);
+                    this.mRemote.transact(12, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IInputMethod
             public void canStartStylusHandwriting(int i, IConnectionlessHandwritingCallback iConnectionlessHandwritingCallback, CursorAnchorInfo cursorAnchorInfo, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInputMethod.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iConnectionlessHandwritingCallback);
-                    obtain.writeTypedObject(cursorAnchorInfo, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(13, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInputMethod.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iConnectionlessHandwritingCallback);
+                    parcelObtain.writeTypedObject(cursorAnchorInfo, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(13, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IInputMethod
             public void startStylusHandwriting(int i, InputChannel inputChannel, List<MotionEvent> list) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInputMethod.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(inputChannel, 0);
-                    obtain.writeTypedList(list, 0);
-                    this.mRemote.transact(14, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInputMethod.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(inputChannel, 0);
+                    parcelObtain.writeTypedList(list, 0);
+                    this.mRemote.transact(14, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IInputMethod
             public void commitHandwritingDelegationTextIfAvailable() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInputMethod.DESCRIPTOR);
-                    this.mRemote.transact(15, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInputMethod.DESCRIPTOR);
+                    this.mRemote.transact(15, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IInputMethod
             public void discardHandwritingDelegationText() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInputMethod.DESCRIPTOR);
-                    this.mRemote.transact(16, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInputMethod.DESCRIPTOR);
+                    this.mRemote.transact(16, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IInputMethod
             public void initInkWindow() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInputMethod.DESCRIPTOR);
-                    this.mRemote.transact(17, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInputMethod.DESCRIPTOR);
+                    this.mRemote.transact(17, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IInputMethod
             public void finishStylusHandwriting() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInputMethod.DESCRIPTOR);
-                    this.mRemote.transact(18, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInputMethod.DESCRIPTOR);
+                    this.mRemote.transact(18, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IInputMethod
             public void removeStylusHandwritingWindow() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInputMethod.DESCRIPTOR);
-                    this.mRemote.transact(19, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInputMethod.DESCRIPTOR);
+                    this.mRemote.transact(19, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IInputMethod
             public void setStylusWindowIdleTimeoutForTest(long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInputMethod.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(20, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInputMethod.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(20, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IInputMethod
             public void minimizeSoftInput(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInputMethod.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(21, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInputMethod.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(21, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.inputmethod.IInputMethod
             public void undoMinimizeSoftInput() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInputMethod.DESCRIPTOR);
-                    this.mRemote.transact(22, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInputMethod.DESCRIPTOR);
+                    this.mRemote.transact(22, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -714,48 +714,48 @@ public interface IInputMethod extends IInterface {
 
         @Override // android.os.Parcelable
         public final void writeToParcel(Parcel parcel, int i) {
-            int dataPosition = parcel.dataPosition();
+            int iDataPosition = parcel.dataPosition();
             parcel.writeInt(0);
             parcel.writeStrongBinder(this.token);
             parcel.writeStrongInterface(this.privilegedOperations);
             parcel.writeInt(this.navigationBarFlags);
-            int dataPosition2 = parcel.dataPosition();
-            parcel.setDataPosition(dataPosition);
-            parcel.writeInt(dataPosition2 - dataPosition);
-            parcel.setDataPosition(dataPosition2);
+            int iDataPosition2 = parcel.dataPosition();
+            parcel.setDataPosition(iDataPosition);
+            parcel.writeInt(iDataPosition2 - iDataPosition);
+            parcel.setDataPosition(iDataPosition2);
         }
 
         public final void readFromParcel(Parcel parcel) {
-            int dataPosition = parcel.dataPosition();
-            int readInt = parcel.readInt();
+            int iDataPosition = parcel.dataPosition();
+            int i = parcel.readInt();
             try {
-                if (readInt < 4) {
+                if (i < 4) {
                     throw new BadParcelableException("Parcelable too small");
                 }
-                if (parcel.dataPosition() - dataPosition < readInt) {
+                if (parcel.dataPosition() - iDataPosition < i) {
                     this.token = parcel.readStrongBinder();
-                    if (parcel.dataPosition() - dataPosition < readInt) {
+                    if (parcel.dataPosition() - iDataPosition < i) {
                         this.privilegedOperations = IInputMethodPrivilegedOperations.Stub.asInterface(parcel.readStrongBinder());
-                        if (parcel.dataPosition() - dataPosition < readInt) {
+                        if (parcel.dataPosition() - iDataPosition < i) {
                             this.navigationBarFlags = parcel.readInt();
-                            if (dataPosition > Integer.MAX_VALUE - readInt) {
+                            if (iDataPosition > Integer.MAX_VALUE - i) {
                                 throw new BadParcelableException("Overflow in the size of parcelable");
                             }
-                        } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                        } else if (iDataPosition > Integer.MAX_VALUE - i) {
                             throw new BadParcelableException("Overflow in the size of parcelable");
                         }
-                    } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                    } else if (iDataPosition > Integer.MAX_VALUE - i) {
                         throw new BadParcelableException("Overflow in the size of parcelable");
                     }
-                } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                } else if (iDataPosition > Integer.MAX_VALUE - i) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
-                parcel.setDataPosition(dataPosition + readInt);
+                parcel.setDataPosition(iDataPosition + i);
             } catch (Throwable th) {
-                if (dataPosition > Integer.MAX_VALUE - readInt) {
+                if (iDataPosition > Integer.MAX_VALUE - i) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
-                parcel.setDataPosition(dataPosition + readInt);
+                parcel.setDataPosition(iDataPosition + i);
                 throw th;
             }
         }
@@ -786,7 +786,7 @@ public interface IInputMethod extends IInterface {
 
         @Override // android.os.Parcelable
         public final void writeToParcel(Parcel parcel, int i) {
-            int dataPosition = parcel.dataPosition();
+            int iDataPosition = parcel.dataPosition();
             parcel.writeInt(0);
             parcel.writeStrongBinder(this.startInputToken);
             parcel.writeStrongInterface(this.remoteInputConnection);
@@ -794,58 +794,58 @@ public interface IInputMethod extends IInterface {
             parcel.writeBoolean(this.restarting);
             parcel.writeInt(this.navigationBarFlags);
             parcel.writeTypedObject(this.imeDispatcher, i);
-            int dataPosition2 = parcel.dataPosition();
-            parcel.setDataPosition(dataPosition);
-            parcel.writeInt(dataPosition2 - dataPosition);
-            parcel.setDataPosition(dataPosition2);
+            int iDataPosition2 = parcel.dataPosition();
+            parcel.setDataPosition(iDataPosition);
+            parcel.writeInt(iDataPosition2 - iDataPosition);
+            parcel.setDataPosition(iDataPosition2);
         }
 
         public final void readFromParcel(Parcel parcel) {
-            int dataPosition = parcel.dataPosition();
-            int readInt = parcel.readInt();
+            int iDataPosition = parcel.dataPosition();
+            int i = parcel.readInt();
             try {
-                if (readInt < 4) {
+                if (i < 4) {
                     throw new BadParcelableException("Parcelable too small");
                 }
-                if (parcel.dataPosition() - dataPosition < readInt) {
+                if (parcel.dataPosition() - iDataPosition < i) {
                     this.startInputToken = parcel.readStrongBinder();
-                    if (parcel.dataPosition() - dataPosition < readInt) {
+                    if (parcel.dataPosition() - iDataPosition < i) {
                         this.remoteInputConnection = IRemoteInputConnection.Stub.asInterface(parcel.readStrongBinder());
-                        if (parcel.dataPosition() - dataPosition < readInt) {
+                        if (parcel.dataPosition() - iDataPosition < i) {
                             this.editorInfo = (EditorInfo) parcel.readTypedObject(EditorInfo.CREATOR);
-                            if (parcel.dataPosition() - dataPosition < readInt) {
+                            if (parcel.dataPosition() - iDataPosition < i) {
                                 this.restarting = parcel.readBoolean();
-                                if (parcel.dataPosition() - dataPosition < readInt) {
+                                if (parcel.dataPosition() - iDataPosition < i) {
                                     this.navigationBarFlags = parcel.readInt();
-                                    if (parcel.dataPosition() - dataPosition < readInt) {
+                                    if (parcel.dataPosition() - iDataPosition < i) {
                                         this.imeDispatcher = (ImeOnBackInvokedDispatcher) parcel.readTypedObject(ImeOnBackInvokedDispatcher.CREATOR);
-                                        if (dataPosition > Integer.MAX_VALUE - readInt) {
+                                        if (iDataPosition > Integer.MAX_VALUE - i) {
                                             throw new BadParcelableException("Overflow in the size of parcelable");
                                         }
-                                    } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                                    } else if (iDataPosition > Integer.MAX_VALUE - i) {
                                         throw new BadParcelableException("Overflow in the size of parcelable");
                                     }
-                                } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                                } else if (iDataPosition > Integer.MAX_VALUE - i) {
                                     throw new BadParcelableException("Overflow in the size of parcelable");
                                 }
-                            } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                            } else if (iDataPosition > Integer.MAX_VALUE - i) {
                                 throw new BadParcelableException("Overflow in the size of parcelable");
                             }
-                        } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                        } else if (iDataPosition > Integer.MAX_VALUE - i) {
                             throw new BadParcelableException("Overflow in the size of parcelable");
                         }
-                    } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                    } else if (iDataPosition > Integer.MAX_VALUE - i) {
                         throw new BadParcelableException("Overflow in the size of parcelable");
                     }
-                } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+                } else if (iDataPosition > Integer.MAX_VALUE - i) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
-                parcel.setDataPosition(dataPosition + readInt);
+                parcel.setDataPosition(iDataPosition + i);
             } catch (Throwable th) {
-                if (dataPosition > Integer.MAX_VALUE - readInt) {
+                if (iDataPosition > Integer.MAX_VALUE - i) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
-                parcel.setDataPosition(dataPosition + readInt);
+                parcel.setDataPosition(iDataPosition + i);
                 throw th;
             }
         }

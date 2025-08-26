@@ -13,7 +13,6 @@ import androidx.dynamicanimation.animation.SpringForce;
 import com.android.systemui.util.SettingsHelper;
 import com.google.android.material.progressindicator.DrawingDelegate;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class DeterminateDrawable extends DrawableWithAnimatedVisibilityChange {
     public static final AnonymousClass1 INDICATOR_LENGTH_IN_LEVEL = new FloatPropertyCompat("indicatorLevel") { // from class: com.google.android.material.progressindicator.DeterminateDrawable.1
@@ -62,21 +61,21 @@ public final class DeterminateDrawable extends DrawableWithAnimatedVisibilityCha
             DrawingDelegate drawingDelegate = this.drawingDelegate;
             Rect bounds = getBounds();
             float growFraction = getGrowFraction();
-            boolean isShowing = isShowing();
-            boolean isHiding = isHiding();
+            boolean zIsShowing = isShowing();
+            boolean zIsHiding = isHiding();
             drawingDelegate.spec.validateSpec();
-            drawingDelegate.adjustCanvas(canvas, bounds, growFraction, isShowing, isHiding);
+            drawingDelegate.adjustCanvas(canvas, bounds, growFraction, zIsShowing, zIsHiding);
             this.paint.setStyle(Paint.Style.FILL);
             this.paint.setAntiAlias(true);
             DrawingDelegate.ActiveIndicator activeIndicator = this.activeIndicator;
             BaseProgressIndicatorSpec baseProgressIndicatorSpec = this.baseSpec;
             activeIndicator.color = baseProgressIndicatorSpec.indicatorColors[0];
-            int i = baseProgressIndicatorSpec.indicatorTrackGapSize;
-            if (i > 0) {
+            int iClamp = baseProgressIndicatorSpec.indicatorTrackGapSize;
+            if (iClamp > 0) {
                 if (!(this.drawingDelegate instanceof LinearDrawingDelegate)) {
-                    i = (int) ((MathUtils.clamp(activeIndicator.endFraction, 0.0f, 0.01f) * i) / 0.01f);
+                    iClamp = (int) ((MathUtils.clamp(activeIndicator.endFraction, 0.0f, 0.01f) * iClamp) / 0.01f);
                 }
-                this.drawingDelegate.fillTrack(canvas, this.paint, this.activeIndicator.endFraction, 1.0f, this.baseSpec.trackColor, this.totalAlpha, i);
+                this.drawingDelegate.fillTrack(canvas, this.paint, this.activeIndicator.endFraction, 1.0f, this.baseSpec.trackColor, this.totalAlpha, iClamp);
             } else {
                 this.drawingDelegate.fillTrack(canvas, this.paint, 0.0f, 1.0f, baseProgressIndicatorSpec.trackColor, this.totalAlpha, 0);
             }

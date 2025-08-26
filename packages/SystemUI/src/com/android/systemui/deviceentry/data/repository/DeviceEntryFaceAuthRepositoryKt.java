@@ -19,7 +19,6 @@ import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.internal.CombineKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class DeviceEntryFaceAuthRepositoryKt {
     /* JADX WARN: Type inference failed for: r1v3, types: [com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryKt$andAllFlows$$inlined$combine$1] */
@@ -33,7 +32,6 @@ public abstract class DeviceEntryFaceAuthRepositoryKt {
         final Flow[] flowArr = (Flow[]) CollectionsKt___CollectionsKt.toList(arrayList).toArray(new Flow[0]);
         return new Flow() { // from class: com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryKt$andAllFlows$$inlined$combine$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryKt$andAllFlows$$inlined$combine$1$3, reason: invalid class name */
             public final class AnonymousClass3 extends SuspendLambda implements Function3 {
                 final /* synthetic */ String $combinedLoggingInfo$inlined;
@@ -70,32 +68,32 @@ public abstract class DeviceEntryFaceAuthRepositoryKt {
                         if (boolArr.length == 0) {
                             throw new UnsupportedOperationException("Empty array can't be reduced.");
                         }
-                        Boolean bool = boolArr[0];
+                        Boolean boolValueOf = boolArr[0];
                         int length = boolArr.length - 1;
                         if (1 <= length) {
                             int i2 = 1;
                             while (true) {
-                                boolean booleanValue = boolArr[i2].booleanValue();
-                                boolean booleanValue2 = bool.booleanValue();
+                                boolean zBooleanValue = boolArr[i2].booleanValue();
+                                boolean zBooleanValue2 = boolValueOf.booleanValue();
                                 TableLogBuffer tableLogBuffer = this.$tableLogBuffer$inlined;
                                 String str = (String) ((Pair) this.$this_andAllFlows$inlined.get(i2)).getSecond();
                                 tableLogBuffer.getClass();
-                                TableLogBufferBase.DefaultImpls.logChange(tableLogBuffer, "", str, booleanValue);
-                                bool = Boolean.valueOf(booleanValue2 && booleanValue);
+                                TableLogBufferBase.DefaultImpls.logChange(tableLogBuffer, "", str, zBooleanValue);
+                                boolValueOf = Boolean.valueOf(zBooleanValue2 && zBooleanValue);
                                 if (i2 == length) {
                                     break;
                                 }
                                 i2++;
                             }
                         }
-                        boolean booleanValue3 = bool.booleanValue();
+                        boolean zBooleanValue3 = boolValueOf.booleanValue();
                         TableLogBuffer tableLogBuffer2 = this.$tableLogBuffer$inlined;
                         String str2 = this.$combinedLoggingInfo$inlined;
                         tableLogBuffer2.getClass();
-                        TableLogBufferBase.DefaultImpls.logChange(tableLogBuffer2, "", str2, booleanValue3);
-                        Boolean valueOf = Boolean.valueOf(booleanValue3);
+                        TableLogBufferBase.DefaultImpls.logChange(tableLogBuffer2, "", str2, zBooleanValue3);
+                        Boolean boolValueOf2 = Boolean.valueOf(zBooleanValue3);
                         this.label = 1;
-                        if (flowCollector.emit(valueOf, this) == coroutineSingletons) {
+                        if (flowCollector.emit(boolValueOf2, this) == coroutineSingletons) {
                             return coroutineSingletons;
                         }
                     } else {
@@ -111,13 +109,13 @@ public abstract class DeviceEntryFaceAuthRepositoryKt {
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
                 final Flow[] flowArr2 = flowArr;
-                Object combineInternal = CombineKt.combineInternal(flowArr2, new Function0() { // from class: com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryKt$andAllFlows$$inlined$combine$1.2
+                Object objCombineInternal = CombineKt.combineInternal(flowArr2, new Function0() { // from class: com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryKt$andAllFlows$$inlined$combine$1.2
                     @Override // kotlin.jvm.functions.Function0
                     public final Object invoke() {
                         return new Boolean[flowArr2.length];
                     }
                 }, new AnonymousClass3(null, tableLogBuffer, str, list), flowCollector, continuation);
-                return combineInternal == CoroutineSingletons.COROUTINE_SUSPENDED ? combineInternal : Unit.INSTANCE;
+                return objCombineInternal == CoroutineSingletons.COROUTINE_SUSPENDED ? objCombineInternal : Unit.INSTANCE;
             }
         };
     }

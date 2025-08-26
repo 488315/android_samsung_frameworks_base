@@ -85,86 +85,45 @@ public abstract class RecognitionService extends Service {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    /* JADX WARN: Removed duplicated region for block: B:17:0x003c A[Catch: RemoteException -> 0x0085, TryCatch #0 {RemoteException -> 0x0085, blocks: (B:4:0x0010, B:6:0x001c, B:9:0x0027, B:11:0x002f, B:17:0x003c, B:19:0x0056, B:22:0x005c, B:24:0x0063, B:25:0x0075, B:28:0x007b), top: B:2:0x000e }] */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x0063 A[Catch: RemoteException -> 0x0085, TryCatch #0 {RemoteException -> 0x0085, blocks: (B:4:0x0010, B:6:0x001c, B:9:0x0027, B:11:0x002f, B:17:0x003c, B:19:0x0056, B:22:0x005c, B:24:0x0063, B:25:0x0075, B:28:0x007b), top: B:2:0x000e }] */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public void dispatchStartListening(android.content.Intent r6, android.speech.IRecognitionListener r7, android.content.AttributionSource r8) {
-        /*
-            r5 = this;
-            java.util.Map<android.os.IBinder, android.speech.RecognitionService$SessionState> r0 = r5.mSessions
-            android.os.IBinder r1 = r7.asBinder()
-            java.lang.Object r0 = r0.get(r1)
-            android.speech.RecognitionService$SessionState r0 = (android.speech.RecognitionService.SessionState) r0
-            java.lang.String r1 = "RecognitionService"
-            if (r0 != 0) goto L7b
-            java.util.Map<android.os.IBinder, android.speech.RecognitionService$SessionState> r2 = r5.mSessions     // Catch: android.os.RemoteException -> L85
-            int r2 = r2.size()     // Catch: android.os.RemoteException -> L85
-            int r3 = r5.getMaxConcurrentSessionsCount()     // Catch: android.os.RemoteException -> L85
-            if (r2 < r3) goto L27
-            r5 = 8
-            r7.onError(r5)     // Catch: android.os.RemoteException -> L85
-            java.lang.String r5 = "#startListening received when the service's capacity is full - ignoring this call."
-            android.util.Log.i(r1, r5)     // Catch: android.os.RemoteException -> L85
-            return
-        L27:
-            java.lang.String r2 = "android.speech.extra.AUDIO_SOURCE"
-            boolean r2 = r6.hasExtra(r2)     // Catch: android.os.RemoteException -> L85
-            if (r2 != 0) goto L38
-            boolean r2 = r5.checkPermissionForPreflightNotHardDenied(r8)     // Catch: android.os.RemoteException -> L85
-            if (r2 == 0) goto L36
-            goto L38
-        L36:
-            r2 = 0
-            goto L39
-        L38:
-            r2 = 1
-        L39:
-            r3 = 0
-            if (r2 == 0) goto L54
-            android.speech.RecognitionService$Callback r0 = new android.speech.RecognitionService$Callback     // Catch: android.os.RemoteException -> L85
-            r0.<init>(r7, r8)     // Catch: android.os.RemoteException -> L85
-            android.speech.RecognitionService$SessionState r8 = new android.speech.RecognitionService$SessionState     // Catch: android.os.RemoteException -> L85
-            r8.<init>(r0)     // Catch: android.os.RemoteException -> L85
-            java.util.Map<android.os.IBinder, android.speech.RecognitionService$SessionState> r3 = r5.mSessions     // Catch: android.os.RemoteException -> L85
-            android.os.IBinder r4 = r7.asBinder()     // Catch: android.os.RemoteException -> L85
-            r3.put(r4, r8)     // Catch: android.os.RemoteException -> L85
-            r5.onStartListening(r6, r0)     // Catch: android.os.RemoteException -> L85
-            r3 = r0
-            r0 = r8
-        L54:
-            if (r2 == 0) goto L5c
-            boolean r6 = r5.checkPermissionAndStartDataDelivery(r0)     // Catch: android.os.RemoteException -> L85
-            if (r6 != 0) goto L8a
-        L5c:
-            r6 = 9
-            r7.onError(r6)     // Catch: android.os.RemoteException -> L85
-            if (r2 == 0) goto L75
-            r5.onCancel(r3)     // Catch: android.os.RemoteException -> L85
-            java.util.Map<android.os.IBinder, android.speech.RecognitionService$SessionState> r6 = r5.mSessions     // Catch: android.os.RemoteException -> L85
-            android.os.IBinder r7 = r7.asBinder()     // Catch: android.os.RemoteException -> L85
-            r6.remove(r7)     // Catch: android.os.RemoteException -> L85
-            r5.finishDataDelivery(r0)     // Catch: android.os.RemoteException -> L85
-            r0.reset()     // Catch: android.os.RemoteException -> L85
-        L75:
-            java.lang.String r5 = "#startListening received from a caller without permission android.permission.RECORD_AUDIO."
-            android.util.Log.i(r1, r5)     // Catch: android.os.RemoteException -> L85
-            return
-        L7b:
-            r5 = 5
-            r7.onError(r5)     // Catch: android.os.RemoteException -> L85
-            java.lang.String r5 = "#startListening received for a listener which is already in session - ignoring this call."
-            android.util.Log.i(r1, r5)     // Catch: android.os.RemoteException -> L85
-            return
-        L85:
-            java.lang.String r5 = "#onError call from #startListening failed."
-            android.util.Log.d(r1, r5)
-        L8a:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.speech.RecognitionService.dispatchStartListening(android.content.Intent, android.speech.IRecognitionListener, android.content.AttributionSource):void");
+    /* JADX WARN: Multi-variable type inference failed */
+    public void dispatchStartListening(Intent intent, IRecognitionListener iRecognitionListener, AttributionSource attributionSource) {
+        SessionState sessionState = this.mSessions.get(iRecognitionListener.asBinder());
+        try {
+            if (sessionState == null) {
+                if (this.mSessions.size() >= getMaxConcurrentSessionsCount()) {
+                    iRecognitionListener.onError(8);
+                    Log.i(TAG, "#startListening received when the service's capacity is full - ignoring this call.");
+                    return;
+                }
+                boolean z = intent.hasExtra(RecognizerIntent.EXTRA_AUDIO_SOURCE) || checkPermissionForPreflightNotHardDenied(attributionSource);
+                Callback callback = null;
+                Object[] objArr = 0;
+                if (z) {
+                    Callback callback2 = new Callback(iRecognitionListener, attributionSource);
+                    SessionState sessionState2 = new SessionState(callback2);
+                    this.mSessions.put(iRecognitionListener.asBinder(), sessionState2);
+                    onStartListening(intent, callback2);
+                    callback = callback2;
+                    sessionState = sessionState2;
+                }
+                if (z && checkPermissionAndStartDataDelivery(sessionState)) {
+                    return;
+                }
+                iRecognitionListener.onError(9);
+                if (z) {
+                    onCancel(callback);
+                    this.mSessions.remove(iRecognitionListener.asBinder());
+                    finishDataDelivery(sessionState);
+                    sessionState.reset();
+                }
+                Log.i(TAG, "#startListening received from a caller without permission android.permission.RECORD_AUDIO.");
+                return;
+            }
+            iRecognitionListener.onError(5);
+            Log.i(TAG, "#startListening received for a listener which is already in session - ignoring this call.");
+        } catch (RemoteException unused) {
+            Log.d(TAG, "#onError call from #startListening failed.");
+        }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -195,10 +154,10 @@ public abstract class RecognitionService extends Service {
 
     /* JADX INFO: Access modifiers changed from: private */
     public void dispatchClearCallback(IRecognitionListener iRecognitionListener) {
-        SessionState remove = this.mSessions.remove(iRecognitionListener.asBinder());
-        if (remove != null) {
-            finishDataDelivery(remove);
-            remove.reset();
+        SessionState sessionStateRemove = this.mSessions.remove(iRecognitionListener.asBinder());
+        if (sessionStateRemove != null) {
+            finishDataDelivery(sessionStateRemove);
+            sessionStateRemove.reset();
         }
     }
 
@@ -339,7 +298,7 @@ public abstract class RecognitionService extends Service {
                 this.mHandler.sendMessage(PooledLambda.obtainMessage(new Consumer() { // from class: android.speech.RecognitionService$$ExternalSyntheticLambda0
                     @Override // java.util.function.Consumer
                     public final void accept(Object obj) {
-                        RecognitionService.this.handleAttributionContextCreation((AttributionSource) obj);
+                        this.f$0.handleAttributionContextCreation((AttributionSource) obj);
                     }
                 }, contextParams.getNextAttributionSource()));
             }
@@ -542,8 +501,8 @@ public abstract class RecognitionService extends Service {
     }
 
     private boolean checkPermissionForPreflightNotHardDenied(AttributionSource attributionSource) {
-        int checkPermissionForPreflight = PermissionChecker.checkPermissionForPreflight(this, Manifest.permission.RECORD_AUDIO, attributionSource);
-        return checkPermissionForPreflight == 0 || checkPermissionForPreflight == 1;
+        int iCheckPermissionForPreflight = PermissionChecker.checkPermissionForPreflight(this, Manifest.permission.RECORD_AUDIO, attributionSource);
+        return iCheckPermissionForPreflight == 0 || iCheckPermissionForPreflight == 1;
     }
 
     void finishDataDelivery(SessionState sessionState) {

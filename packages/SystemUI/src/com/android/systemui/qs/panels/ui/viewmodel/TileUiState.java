@@ -6,7 +6,6 @@ import androidx.compose.animation.graphics.vector.PropertyValuesHolder2D$$Extern
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class TileUiState {
     public final AccessibilityUiState accessibilityUiState;
@@ -39,9 +38,9 @@ public final class TileUiState {
     }
 
     public final int hashCode() {
-        int m = TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.state, PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.label.hashCode() * 31, 31, this.secondaryLabel), 31), 31, this.handlesLongClick), 31, this.handlesSecondaryClick);
+        int iM = TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.state, PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.label.hashCode() * 31, 31, this.secondaryLabel), 31), 31, this.handlesLongClick), 31, this.handlesSecondaryClick);
         Drawable drawable = this.sideDrawable;
-        return this.accessibilityUiState.hashCode() + ((m + (drawable == null ? 0 : drawable.hashCode())) * 31);
+        return this.accessibilityUiState.hashCode() + ((iM + (drawable == null ? 0 : drawable.hashCode())) * 31);
     }
 
     public final String toString() {

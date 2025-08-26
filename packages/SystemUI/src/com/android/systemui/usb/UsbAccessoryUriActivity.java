@@ -15,7 +15,6 @@ import com.android.systemui.statusbar.policy.DeviceProvisionedController;
 import com.android.systemui.statusbar.policy.DeviceProvisionedControllerImpl;
 import com.samsung.android.knox.net.nap.NetworkAnalyticsConstants;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class UsbAccessoryUriActivity extends AlertActivity implements DialogInterface.OnClickListener {
     public UsbAccessory mAccessory;
@@ -52,14 +51,14 @@ public class UsbAccessoryUriActivity extends AlertActivity implements DialogInte
         Intent intent = getIntent();
         this.mAccessory = (UsbAccessory) intent.getParcelableExtra("accessory");
         String stringExtra = intent.getStringExtra("uri");
-        Uri parse = stringExtra == null ? null : Uri.parse(stringExtra);
-        this.mUri = parse;
-        if (parse == null) {
+        Uri uri = stringExtra == null ? null : Uri.parse(stringExtra);
+        this.mUri = uri;
+        if (uri == null) {
             Log.e("UsbAccessoryUriActivity", "could not parse Uri " + stringExtra);
             finish();
             return;
         }
-        String scheme = parse.getScheme();
+        String scheme = uri.getScheme();
         if (!"http".equals(scheme) && !"https".equals(scheme)) {
             Log.e("UsbAccessoryUriActivity", "Uri not http or https: " + this.mUri);
             finish();

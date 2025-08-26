@@ -1,8 +1,11 @@
 package com.android.systemui.biometrics.ui.viewmodel;
 
+import com.android.systemui.R;
 import com.android.systemui.biometrics.domain.interactor.DisplayStateInteractorImpl;
 import com.android.systemui.biometrics.domain.interactor.PromptSelectorInteractor;
 import com.android.systemui.biometrics.domain.interactor.PromptSelectorInteractorImpl;
+import com.android.systemui.biometrics.shared.model.DisplayRotation;
+import com.android.systemui.biometrics.shared.model.FingerprintSensorType;
 import com.android.systemui.biometrics.ui.viewmodel.PromptIconViewModel;
 import kotlin.NoWhenBranchMatchedException;
 import kotlin.ResultKt;
@@ -17,9 +20,9 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.StateFlow;
+import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.internal.CombineKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class PromptIconViewModel$special$$inlined$flatMapLatest$1 extends SuspendLambda implements Function3 {
     final /* synthetic */ PromptSelectorInteractor $promptSelectorInteractor$inlined;
@@ -47,7 +50,7 @@ public final class PromptIconViewModel$special$$inlined$flatMapLatest$1 extends 
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
-        Flow flow;
+        Flow flowCombine;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i == 0) {
@@ -62,9 +65,8 @@ public final class PromptIconViewModel$special$$inlined$flatMapLatest$1 extends 
                 StateFlow stateFlow = ((PromptSelectorInteractorImpl) this.$promptSelectorInteractor$inlined).fingerprintSensorType;
                 PromptViewModel promptViewModel = this.$promptViewModel$inlined;
                 final Flow[] flowArr = {readonlyStateFlow, readonlyStateFlow2, stateFlow, promptViewModel.isAuthenticated, promptViewModel.isAuthenticating, promptViewModel.showingError};
-                flow = new Flow() { // from class: com.android.systemui.biometrics.ui.viewmodel.PromptIconViewModel$iconAsset$lambda$2$$inlined$combine$1
+                flowCombine = new Flow() { // from class: com.android.systemui.biometrics.ui.viewmodel.PromptIconViewModel$iconAsset$lambda$2$$inlined$combine$1
 
-                    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
                     /* renamed from: com.android.systemui.biometrics.ui.viewmodel.PromptIconViewModel$iconAsset$lambda$2$$inlined$combine$1$3, reason: invalid class name */
                     public final class AnonymousClass3 extends SuspendLambda implements Function3 {
                         private /* synthetic */ Object L$0;
@@ -86,150 +88,84 @@ public final class PromptIconViewModel$special$$inlined$flatMapLatest$1 extends 
                             return anonymousClass3.invokeSuspend(Unit.INSTANCE);
                         }
 
-                        /* JADX WARN: Code restructure failed: missing block: B:42:0x00c5, code lost:
-                        
-                            if (r1 != false) goto L37;
-                         */
+                        /* JADX WARN: Removed duplicated region for block: B:37:0x00c7  */
                         @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
                         /*
                             Code decompiled incorrectly, please refer to instructions dump.
-                            To view partially-correct code enable 'Show inconsistent code' option in preferences
                         */
-                        public final java.lang.Object invokeSuspend(java.lang.Object r10) {
-                            /*
-                                r9 = this;
-                                kotlin.coroutines.intrinsics.CoroutineSingletons r0 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                                int r1 = r9.label
-                                r2 = 1
-                                if (r1 == 0) goto L16
-                                if (r1 != r2) goto Le
-                                kotlin.ResultKt.throwOnFailure(r10)
-                                goto Ld8
-                            Le:
-                                java.lang.IllegalStateException r9 = new java.lang.IllegalStateException
-                                java.lang.String r10 = "call to 'resume' before 'invoke' with coroutine"
-                                r9.<init>(r10)
-                                throw r9
-                            L16:
-                                kotlin.ResultKt.throwOnFailure(r10)
-                                java.lang.Object r10 = r9.L$0
-                                kotlinx.coroutines.flow.FlowCollector r10 = (kotlinx.coroutines.flow.FlowCollector) r10
-                                java.lang.Object r1 = r9.L$1
-                                java.lang.Object[] r1 = (java.lang.Object[]) r1
-                                r3 = 0
-                                r3 = r1[r3]
-                                r4 = r1[r2]
-                                r5 = 2
-                                r5 = r1[r5]
-                                r6 = 3
-                                r6 = r1[r6]
-                                r7 = 4
-                                r7 = r1[r7]
-                                r8 = 5
-                                r1 = r1[r8]
-                                java.lang.Boolean r1 = (java.lang.Boolean) r1
-                                boolean r1 = r1.booleanValue()
-                                java.lang.Boolean r7 = (java.lang.Boolean) r7
-                                boolean r7 = r7.booleanValue()
-                                com.android.systemui.biometrics.ui.viewmodel.PromptAuthState r6 = (com.android.systemui.biometrics.ui.viewmodel.PromptAuthState) r6
-                                com.android.systemui.biometrics.shared.model.FingerprintSensorType r5 = (com.android.systemui.biometrics.shared.model.FingerprintSensorType) r5
-                                java.lang.Boolean r4 = (java.lang.Boolean) r4
-                                boolean r4 = r4.booleanValue()
-                                com.android.systemui.biometrics.shared.model.DisplayRotation r3 = (com.android.systemui.biometrics.shared.model.DisplayRotation) r3
-                                int[] r8 = com.android.systemui.biometrics.ui.viewmodel.PromptIconViewModel.WhenMappings.$EnumSwitchMapping$0
-                                int r5 = r5.ordinal()
-                                r5 = r8[r5]
-                                r8 = -1
-                                if (r5 != r2) goto L97
-                                com.android.systemui.biometrics.ui.viewmodel.PromptIconViewModel r5 = r9.this$0
-                                boolean r6 = r6.isAuthenticated
-                                kotlinx.coroutines.flow.StateFlowImpl r5 = r5._previousIconWasError
-                                if (r6 == 0) goto L72
-                                java.lang.Object r1 = r5.getValue()
-                                java.lang.Boolean r1 = (java.lang.Boolean) r1
-                                boolean r1 = r1.booleanValue()
-                                if (r1 == 0) goto L6d
-                                r8 = 2131886095(0x7f12000f, float:1.940676E38)
-                                goto Lca
-                            L6d:
-                                int r8 = com.android.systemui.biometrics.ui.viewmodel.PromptIconViewModel.getSfpsAsset_fingerprintToSuccess(r3, r4)
-                                goto Lca
-                            L72:
-                                if (r7 == 0) goto L90
-                                java.lang.Object r1 = r5.getValue()
-                                java.lang.Boolean r1 = (java.lang.Boolean) r1
-                                boolean r1 = r1.booleanValue()
-                                if (r1 == 0) goto L85
-                                int r8 = com.android.systemui.biometrics.ui.viewmodel.PromptIconViewModel.getSfpsAsset_errorToFingerprint(r3, r4)
-                                goto Lca
-                            L85:
-                                if (r4 == 0) goto L8c
-                                r1 = 2131886114(0x7f120022, float:1.9406798E38)
-                            L8a:
-                                r8 = r1
-                                goto Lca
-                            L8c:
-                                r1 = 2131886097(0x7f120011, float:1.9406763E38)
-                                goto L8a
-                            L90:
-                                if (r1 == 0) goto Lca
-                                int r8 = com.android.systemui.biometrics.ui.viewmodel.PromptIconViewModel.getSfpsAsset_fingerprintToError(r3, r4)
-                                goto Lca
-                            L97:
-                                com.android.systemui.biometrics.ui.viewmodel.PromptIconViewModel r3 = r9.this$0
-                                boolean r4 = r6.isAuthenticated
-                                kotlinx.coroutines.flow.StateFlowImpl r3 = r3._previousIconWasError
-                                if (r4 == 0) goto Lb3
-                                java.lang.Object r1 = r3.getValue()
-                                java.lang.Boolean r1 = (java.lang.Boolean) r1
-                                boolean r1 = r1.booleanValue()
-                                if (r1 == 0) goto Laf
-                                r8 = 2131886137(0x7f120039, float:1.9406844E38)
-                                goto Lca
-                            Laf:
-                                r8 = 2131886140(0x7f12003c, float:1.940685E38)
-                                goto Lca
-                            Lb3:
-                                if (r7 == 0) goto Lc5
-                                java.lang.Object r1 = r3.getValue()
-                                java.lang.Boolean r1 = (java.lang.Boolean) r1
-                                boolean r1 = r1.booleanValue()
-                                if (r1 == 0) goto Lc7
-                                r8 = 2131886136(0x7f120038, float:1.9406842E38)
-                                goto Lca
-                            Lc5:
-                                if (r1 == 0) goto Lca
-                            Lc7:
-                                r8 = 2131886139(0x7f12003b, float:1.9406848E38)
-                            Lca:
-                                java.lang.Integer r1 = new java.lang.Integer
-                                r1.<init>(r8)
-                                r9.label = r2
-                                java.lang.Object r9 = r10.emit(r1, r9)
-                                if (r9 != r0) goto Ld8
-                                return r0
-                            Ld8:
-                                kotlin.Unit r9 = kotlin.Unit.INSTANCE
-                                return r9
-                            */
-                            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.biometrics.ui.viewmodel.PromptIconViewModel$iconAsset$lambda$2$$inlined$combine$1.AnonymousClass3.invokeSuspend(java.lang.Object):java.lang.Object");
+                        public final Object invokeSuspend(Object obj) {
+                            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                            int i = this.label;
+                            if (i == 0) {
+                                ResultKt.throwOnFailure(obj);
+                                FlowCollector flowCollector = (FlowCollector) this.L$0;
+                                Object[] objArr = (Object[]) this.L$1;
+                                Object obj2 = objArr[0];
+                                Object obj3 = objArr[1];
+                                Object obj4 = objArr[2];
+                                Object obj5 = objArr[3];
+                                Object obj6 = objArr[4];
+                                boolean zBooleanValue = ((Boolean) objArr[5]).booleanValue();
+                                boolean zBooleanValue2 = ((Boolean) obj6).booleanValue();
+                                PromptAuthState promptAuthState = (PromptAuthState) obj5;
+                                boolean zBooleanValue3 = ((Boolean) obj3).booleanValue();
+                                DisplayRotation displayRotation = (DisplayRotation) obj2;
+                                int sfpsAsset_fingerprintToError = -1;
+                                if (PromptIconViewModel.WhenMappings.$EnumSwitchMapping$0[((FingerprintSensorType) obj4).ordinal()] == 1) {
+                                    PromptIconViewModel promptIconViewModel = this.this$0;
+                                    boolean z = promptAuthState.isAuthenticated;
+                                    StateFlowImpl stateFlowImpl = promptIconViewModel._previousIconWasError;
+                                    if (z) {
+                                        sfpsAsset_fingerprintToError = ((Boolean) stateFlowImpl.getValue()).booleanValue() ? R.raw.biometricprompt_sfps_error_to_success : PromptIconViewModel.getSfpsAsset_fingerprintToSuccess(displayRotation, zBooleanValue3);
+                                    } else if (zBooleanValue2) {
+                                        if (((Boolean) stateFlowImpl.getValue()).booleanValue()) {
+                                            sfpsAsset_fingerprintToError = PromptIconViewModel.getSfpsAsset_errorToFingerprint(displayRotation, zBooleanValue3);
+                                        } else {
+                                            sfpsAsset_fingerprintToError = zBooleanValue3 ? R.raw.biometricprompt_sfps_rear_display_fingerprint_authenticating : R.raw.biometricprompt_sfps_fingerprint_authenticating;
+                                        }
+                                    } else if (zBooleanValue) {
+                                        sfpsAsset_fingerprintToError = PromptIconViewModel.getSfpsAsset_fingerprintToError(displayRotation, zBooleanValue3);
+                                    }
+                                } else {
+                                    PromptIconViewModel promptIconViewModel2 = this.this$0;
+                                    boolean z2 = promptAuthState.isAuthenticated;
+                                    StateFlowImpl stateFlowImpl2 = promptIconViewModel2._previousIconWasError;
+                                    if (z2) {
+                                        sfpsAsset_fingerprintToError = ((Boolean) stateFlowImpl2.getValue()).booleanValue() ? R.raw.fingerprint_dialogue_error_to_success_lottie : R.raw.fingerprint_dialogue_fingerprint_to_success_lottie;
+                                    } else if (zBooleanValue2) {
+                                        sfpsAsset_fingerprintToError = ((Boolean) stateFlowImpl2.getValue()).booleanValue() ? R.raw.fingerprint_dialogue_error_to_fingerprint_lottie : R.raw.fingerprint_dialogue_fingerprint_to_error_lottie;
+                                    } else if (zBooleanValue) {
+                                    }
+                                }
+                                Integer num = new Integer(sfpsAsset_fingerprintToError);
+                                this.label = 1;
+                                if (flowCollector.emit(num, this) == coroutineSingletons) {
+                                    return coroutineSingletons;
+                                }
+                            } else {
+                                if (i != 1) {
+                                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                                }
+                                ResultKt.throwOnFailure(obj);
+                            }
+                            return Unit.INSTANCE;
                         }
                     }
 
                     @Override // kotlinx.coroutines.flow.Flow
                     public final Object collect(FlowCollector flowCollector2, Continuation continuation) {
                         final Flow[] flowArr2 = flowArr;
-                        Object combineInternal = CombineKt.combineInternal(flowArr2, new Function0() { // from class: com.android.systemui.biometrics.ui.viewmodel.PromptIconViewModel$iconAsset$lambda$2$$inlined$combine$1.2
+                        Object objCombineInternal = CombineKt.combineInternal(flowArr2, new Function0() { // from class: com.android.systemui.biometrics.ui.viewmodel.PromptIconViewModel$iconAsset$lambda$2$$inlined$combine$1.2
                             @Override // kotlin.jvm.functions.Function0
                             public final Object invoke() {
                                 return new Object[flowArr2.length];
                             }
                         }, new AnonymousClass3(null, promptIconViewModel), flowCollector2, continuation);
-                        return combineInternal == CoroutineSingletons.COROUTINE_SUSPENDED ? combineInternal : Unit.INSTANCE;
+                        return objCombineInternal == CoroutineSingletons.COROUTINE_SUSPENDED ? objCombineInternal : Unit.INSTANCE;
                     }
                 };
             } else if (i2 == 2) {
-                flow = FlowKt.combine(FlowKt.distinctUntilChanged(this.$promptViewModel$inlined.isAuthenticated), FlowKt.distinctUntilChanged(this.$promptViewModel$inlined.isAuthenticating), FlowKt.distinctUntilChanged(this.$promptViewModel$inlined.isPendingConfirmation), FlowKt.distinctUntilChanged(this.$promptViewModel$inlined.showingError), new PromptIconViewModel$iconAsset$1$2(this.this$0, null));
+                flowCombine = FlowKt.combine(FlowKt.distinctUntilChanged(this.$promptViewModel$inlined.isAuthenticated), FlowKt.distinctUntilChanged(this.$promptViewModel$inlined.isAuthenticating), FlowKt.distinctUntilChanged(this.$promptViewModel$inlined.isPendingConfirmation), FlowKt.distinctUntilChanged(this.$promptViewModel$inlined.showingError), new PromptIconViewModel$iconAsset$1$2(this.this$0, null));
             } else {
                 if (i2 != 3) {
                     throw new NoWhenBranchMatchedException();
@@ -241,9 +177,8 @@ public final class PromptIconViewModel$special$$inlined$flatMapLatest$1 extends 
                 StateFlow stateFlow2 = ((PromptSelectorInteractorImpl) this.$promptSelectorInteractor$inlined).fingerprintSensorType;
                 PromptViewModel promptViewModel2 = this.$promptViewModel$inlined;
                 final Flow[] flowArr2 = {readonlyStateFlow3, readonlyStateFlow4, stateFlow2, promptViewModel2.isAuthenticated, promptViewModel2.isAuthenticating, promptViewModel2.isPendingConfirmation, promptViewModel2.showingError};
-                flow = new Flow() { // from class: com.android.systemui.biometrics.ui.viewmodel.PromptIconViewModel$iconAsset$lambda$2$$inlined$combine$2
+                flowCombine = new Flow() { // from class: com.android.systemui.biometrics.ui.viewmodel.PromptIconViewModel$iconAsset$lambda$2$$inlined$combine$2
 
-                    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
                     /* renamed from: com.android.systemui.biometrics.ui.viewmodel.PromptIconViewModel$iconAsset$lambda$2$$inlined$combine$2$3, reason: invalid class name */
                     public final class AnonymousClass3 extends SuspendLambda implements Function3 {
                         private /* synthetic */ Object L$0;
@@ -265,39 +200,129 @@ public final class PromptIconViewModel$special$$inlined$flatMapLatest$1 extends 
                             return anonymousClass3.invokeSuspend(Unit.INSTANCE);
                         }
 
-                        /* JADX WARN: Code restructure failed: missing block: B:82:0x016b, code lost:
-                        
-                            if (r1 != false) goto L77;
-                         */
+                        /* JADX WARN: Removed duplicated region for block: B:77:0x016d  */
                         @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
                         /*
                             Code decompiled incorrectly, please refer to instructions dump.
-                            To view partially-correct code enable 'Show inconsistent code' option in preferences
                         */
-                        public final java.lang.Object invokeSuspend(java.lang.Object r15) {
-                            /*
-                                Method dump skipped, instructions count: 385
-                                To view this dump change 'Code comments level' option to 'DEBUG'
-                            */
-                            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.biometrics.ui.viewmodel.PromptIconViewModel$iconAsset$lambda$2$$inlined$combine$2.AnonymousClass3.invokeSuspend(java.lang.Object):java.lang.Object");
+                        public final Object invokeSuspend(Object obj) {
+                            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                            int i = this.label;
+                            if (i == 0) {
+                                ResultKt.throwOnFailure(obj);
+                                FlowCollector flowCollector = (FlowCollector) this.L$0;
+                                Object[] objArr = (Object[]) this.L$1;
+                                Object obj2 = objArr[0];
+                                Object obj3 = objArr[1];
+                                Object obj4 = objArr[2];
+                                Object obj5 = objArr[3];
+                                Object obj6 = objArr[4];
+                                Object obj7 = objArr[5];
+                                boolean zBooleanValue = ((Boolean) objArr[6]).booleanValue();
+                                boolean zBooleanValue2 = ((Boolean) obj7).booleanValue();
+                                boolean zBooleanValue3 = ((Boolean) obj6).booleanValue();
+                                PromptAuthState promptAuthState = (PromptAuthState) obj5;
+                                boolean zBooleanValue4 = ((Boolean) obj3).booleanValue();
+                                DisplayRotation displayRotation = (DisplayRotation) obj2;
+                                int sfpsAsset_fingerprintToError = -1;
+                                if (PromptIconViewModel.WhenMappings.$EnumSwitchMapping$0[((FingerprintSensorType) obj4).ordinal()] == 1) {
+                                    PromptIconViewModel promptIconViewModel = this.this$0;
+                                    promptIconViewModel.getClass();
+                                    if (promptAuthState.isAuthenticatedAndExplicitlyConfirmed()) {
+                                        sfpsAsset_fingerprintToError = R.raw.biometricprompt_sfps_unlock_to_success;
+                                    } else {
+                                        StateFlowImpl stateFlowImpl = promptIconViewModel._previousIconWasError;
+                                        if (zBooleanValue2) {
+                                            if (((Boolean) stateFlowImpl.getValue()).booleanValue()) {
+                                                sfpsAsset_fingerprintToError = R.raw.biometricprompt_sfps_error_to_unlock;
+                                            } else if (zBooleanValue4) {
+                                                int i2 = PromptIconViewModel.WhenMappings.$EnumSwitchMapping$2[displayRotation.ordinal()];
+                                                if (i2 == 1) {
+                                                    sfpsAsset_fingerprintToError = R.raw.biometricprompt_sfps_rear_display_fingerprint_to_unlock;
+                                                } else if (i2 == 2) {
+                                                    sfpsAsset_fingerprintToError = R.raw.biometricprompt_sfps_rear_display_fingerprint_to_unlock_90;
+                                                } else if (i2 == 3) {
+                                                    sfpsAsset_fingerprintToError = R.raw.biometricprompt_sfps_rear_display_fingerprint_to_unlock_180;
+                                                } else {
+                                                    if (i2 != 4) {
+                                                        throw new NoWhenBranchMatchedException();
+                                                    }
+                                                    sfpsAsset_fingerprintToError = R.raw.biometricprompt_sfps_rear_display_fingerprint_to_unlock_270;
+                                                }
+                                            } else {
+                                                int i3 = PromptIconViewModel.WhenMappings.$EnumSwitchMapping$2[displayRotation.ordinal()];
+                                                if (i3 == 1) {
+                                                    sfpsAsset_fingerprintToError = R.raw.biometricprompt_sfps_fingerprint_to_unlock;
+                                                } else if (i3 == 2) {
+                                                    sfpsAsset_fingerprintToError = R.raw.biometricprompt_sfps_fingerprint_to_unlock_90;
+                                                } else if (i3 == 3) {
+                                                    sfpsAsset_fingerprintToError = R.raw.biometricprompt_sfps_fingerprint_to_unlock_180;
+                                                } else {
+                                                    if (i3 != 4) {
+                                                        throw new NoWhenBranchMatchedException();
+                                                    }
+                                                    sfpsAsset_fingerprintToError = R.raw.biometricprompt_sfps_fingerprint_to_unlock_270;
+                                                }
+                                            }
+                                        } else if (promptAuthState.isAuthenticated) {
+                                            sfpsAsset_fingerprintToError = ((Boolean) stateFlowImpl.getValue()).booleanValue() ? R.raw.biometricprompt_sfps_error_to_success : PromptIconViewModel.getSfpsAsset_fingerprintToSuccess(displayRotation, zBooleanValue4);
+                                        } else if (zBooleanValue3) {
+                                            if (((Boolean) stateFlowImpl.getValue()).booleanValue()) {
+                                                sfpsAsset_fingerprintToError = PromptIconViewModel.getSfpsAsset_errorToFingerprint(displayRotation, zBooleanValue4);
+                                            } else {
+                                                sfpsAsset_fingerprintToError = zBooleanValue4 ? R.raw.biometricprompt_sfps_rear_display_fingerprint_authenticating : R.raw.biometricprompt_sfps_fingerprint_authenticating;
+                                            }
+                                        } else if (zBooleanValue) {
+                                            sfpsAsset_fingerprintToError = PromptIconViewModel.getSfpsAsset_fingerprintToError(displayRotation, zBooleanValue4);
+                                        }
+                                    }
+                                } else {
+                                    PromptIconViewModel promptIconViewModel2 = this.this$0;
+                                    promptIconViewModel2.getClass();
+                                    if (promptAuthState.isAuthenticatedAndExplicitlyConfirmed()) {
+                                        sfpsAsset_fingerprintToError = R.raw.fingerprint_dialogue_unlocked_to_checkmark_success_lottie;
+                                    } else {
+                                        StateFlowImpl stateFlowImpl2 = promptIconViewModel2._previousIconWasError;
+                                        if (zBooleanValue2) {
+                                            sfpsAsset_fingerprintToError = ((Boolean) stateFlowImpl2.getValue()).booleanValue() ? R.raw.fingerprint_dialogue_error_to_unlock_lottie : R.raw.fingerprint_dialogue_fingerprint_to_unlock_lottie;
+                                        } else if (promptAuthState.isAuthenticated) {
+                                            sfpsAsset_fingerprintToError = ((Boolean) stateFlowImpl2.getValue()).booleanValue() ? R.raw.fingerprint_dialogue_error_to_success_lottie : R.raw.fingerprint_dialogue_fingerprint_to_success_lottie;
+                                        } else if (zBooleanValue3) {
+                                            sfpsAsset_fingerprintToError = ((Boolean) stateFlowImpl2.getValue()).booleanValue() ? R.raw.fingerprint_dialogue_error_to_fingerprint_lottie : R.raw.fingerprint_dialogue_fingerprint_to_error_lottie;
+                                        } else if (zBooleanValue) {
+                                        }
+                                    }
+                                }
+                                Integer num = new Integer(sfpsAsset_fingerprintToError);
+                                this.label = 1;
+                                if (flowCollector.emit(num, this) == coroutineSingletons) {
+                                    return coroutineSingletons;
+                                }
+                            } else {
+                                if (i != 1) {
+                                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                                }
+                                ResultKt.throwOnFailure(obj);
+                            }
+                            return Unit.INSTANCE;
                         }
                     }
 
                     @Override // kotlinx.coroutines.flow.Flow
                     public final Object collect(FlowCollector flowCollector2, Continuation continuation) {
                         final Flow[] flowArr3 = flowArr2;
-                        Object combineInternal = CombineKt.combineInternal(flowArr3, new Function0() { // from class: com.android.systemui.biometrics.ui.viewmodel.PromptIconViewModel$iconAsset$lambda$2$$inlined$combine$2.2
+                        Object objCombineInternal = CombineKt.combineInternal(flowArr3, new Function0() { // from class: com.android.systemui.biometrics.ui.viewmodel.PromptIconViewModel$iconAsset$lambda$2$$inlined$combine$2.2
                             @Override // kotlin.jvm.functions.Function0
                             public final Object invoke() {
                                 return new Object[flowArr3.length];
                             }
                         }, new AnonymousClass3(null, promptIconViewModel2), flowCollector2, continuation);
-                        return combineInternal == CoroutineSingletons.COROUTINE_SUSPENDED ? combineInternal : Unit.INSTANCE;
+                        return objCombineInternal == CoroutineSingletons.COROUTINE_SUSPENDED ? objCombineInternal : Unit.INSTANCE;
                     }
                 };
             }
             this.label = 1;
-            if (FlowKt.emitAll(flowCollector, flow, this) == coroutineSingletons) {
+            if (FlowKt.emitAll(flowCollector, flowCombine, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

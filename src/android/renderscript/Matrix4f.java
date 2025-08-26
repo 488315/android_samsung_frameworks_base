@@ -86,32 +86,32 @@ public class Matrix4f {
         fArr[14] = 0.0f;
         fArr[15] = 1.0f;
         double d = f * 0.017453292f;
-        float cos = (float) Math.cos(d);
-        float sin = (float) Math.sin(d);
-        float sqrt = (float) Math.sqrt((f2 * f2) + (f3 * f3) + (f4 * f4));
-        if (sqrt == 1.0f) {
-            float f5 = 1.0f / sqrt;
+        float fCos = (float) Math.cos(d);
+        float fSin = (float) Math.sin(d);
+        float fSqrt = (float) Math.sqrt((f2 * f2) + (f3 * f3) + (f4 * f4));
+        if (fSqrt == 1.0f) {
+            float f5 = 1.0f / fSqrt;
             f2 *= f5;
             f3 *= f5;
             f4 *= f5;
         }
-        float f6 = 1.0f - cos;
-        float f7 = f2 * sin;
-        float f8 = f3 * sin;
-        float f9 = sin * f4;
+        float f6 = 1.0f - fCos;
+        float f7 = f2 * fSin;
+        float f8 = f3 * fSin;
+        float f9 = fSin * f4;
         float[] fArr2 = this.mMat;
-        fArr2[0] = (f2 * f2 * f6) + cos;
+        fArr2[0] = (f2 * f2 * f6) + fCos;
         float f10 = f2 * f3 * f6;
         fArr2[4] = f10 - f9;
         float f11 = f4 * f2 * f6;
         fArr2[8] = f11 + f8;
         fArr2[1] = f10 + f9;
-        fArr2[5] = (f3 * f3 * f6) + cos;
+        fArr2[5] = (f3 * f3 * f6) + fCos;
         float f12 = f3 * f4 * f6;
         fArr2[9] = f12 - f7;
         fArr2[2] = f11 - f8;
         fArr2[6] = f12 + f7;
-        fArr2[10] = (f4 * f4 * f6) + cos;
+        fArr2[10] = (f4 * f4 * f6) + fCos;
     }
 
     public void loadScale(float f, float f2, float f3) {
@@ -186,9 +186,9 @@ public class Matrix4f {
     }
 
     public void loadPerspective(float f, float f2, float f3, float f4) {
-        float tan = f3 * ((float) Math.tan((float) ((f * 3.141592653589793d) / 360.0d)));
-        float f5 = -tan;
-        loadFrustum(f5 * f2, tan * f2, f5, tan, f3, f4);
+        float fTan = f3 * ((float) Math.tan((float) ((f * 3.141592653589793d) / 360.0d)));
+        float f5 = -fTan;
+        loadFrustum(f5 * f2, fTan * f2, f5, fTan, f3, f4);
     }
 
     public void loadProjectionNormalized(int i, int i2) {

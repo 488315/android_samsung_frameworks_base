@@ -18,6 +18,7 @@ public @interface InputConfig {
     public static final int NO_INPUT_CHANNEL = 1;
     public static final int PAUSE_DISPATCHING = 128;
     public static final int SENSITIVE_FOR_PRIVACY = 262144;
+    public static final int SKIP_UNTRUSTED_TOUCH_TOAST = 1073741824;
     public static final int SLIPPERY = 1024;
     public static final int SPY = 16384;
     public static final int TRUSTED_OVERLAY = 256;

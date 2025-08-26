@@ -39,9 +39,9 @@ public interface IStagedApexObserver extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IStagedApexObserver.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IStagedApexObserver)) {
-                return (IStagedApexObserver) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IStagedApexObserver.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IStagedApexObserver)) {
+                return (IStagedApexObserver) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -82,13 +82,13 @@ public interface IStagedApexObserver extends IInterface {
 
             @Override // android.content.pm.IStagedApexObserver
             public void onApexStaged(ApexStagedEvent apexStagedEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IStagedApexObserver.DESCRIPTOR);
-                    obtain.writeTypedObject(apexStagedEvent, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IStagedApexObserver.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(apexStagedEvent, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

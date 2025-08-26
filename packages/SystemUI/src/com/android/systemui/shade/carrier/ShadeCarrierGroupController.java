@@ -53,7 +53,6 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ShadeCarrierGroupController {
     public final ActivityStarter mActivityStarter;
@@ -77,7 +76,6 @@ public class ShadeCarrierGroupController {
     public final SlotIndexResolver mSlotIndexResolver;
     public final StatusBarPipelineFlags mStatusBarPipelineFlags;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Builder {
         public final ActivityStarter mActivityStarter;
         public final CoroutineScope mAppScope;
@@ -118,7 +116,6 @@ public class ShadeCarrierGroupController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Callback implements CarrierTextManager.CarrierTextCallback {
         public final H mHandler;
 
@@ -132,7 +129,6 @@ public class ShadeCarrierGroupController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class H extends Handler {
         public final Consumer mUpdateCarrierInfo;
         public final Runnable mUpdateState;
@@ -156,7 +152,6 @@ public class ShadeCarrierGroupController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class IconData {
         public final int slotIndex;
 
@@ -165,7 +160,6 @@ public class ShadeCarrierGroupController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class QuickStarHelper implements SlimIndicatorViewSubscriber {
         public boolean mIsRegistered;
         public final SlimIndicatorViewMediator mSlimIndicatorViewMediator;
@@ -187,11 +181,9 @@ public class ShadeCarrierGroupController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface SlotIndexResolver {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SubscriptionManagerSlotIndexResolver implements SlotIndexResolver {
     }
 
@@ -267,7 +259,7 @@ public class ShadeCarrierGroupController {
         return list.stream().limit(3L).map(new Function() { // from class: com.android.systemui.shade.carrier.ShadeCarrierGroupController$$ExternalSyntheticLambda1
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                ShadeCarrierGroupController shadeCarrierGroupController = ShadeCarrierGroupController.this;
+                ShadeCarrierGroupController shadeCarrierGroupController = this.f$0;
                 Integer num = (Integer) obj;
                 shadeCarrierGroupController.getClass();
                 return new ShadeCarrierGroupController.IconData(num.intValue(), shadeCarrierGroupController.getSlotIndex(num.intValue()));
@@ -287,7 +279,7 @@ public class ShadeCarrierGroupController {
     private ShadeCarrierGroupController(ShadeCarrierGroup shadeCarrierGroup, ActivityStarter activityStarter, Handler handler, Looper looper, ShadeCarrierGroupControllerLogger shadeCarrierGroupControllerLogger, NetworkController networkController, CarrierTextManager.Builder builder, Context context, CarrierConfigTracker carrierConfigTracker, SlotIndexResolver slotIndexResolver, MobileUiAdapter mobileUiAdapter, MobileContextProvider mobileContextProvider, StatusBarPipelineFlags statusBarPipelineFlags, Lazy lazy, CoroutineScope coroutineScope, KairosNetwork kairosNetwork, LatinNetworkNameProvider latinNetworkNameProvider, SlimIndicatorViewMediator slimIndicatorViewMediator) {
         this.mInfos = new CellSignalState[3];
         this.mCarrierDividers = new View[]{shadeCarrierGroup.findViewById(R.id.shade_carrier_divider1), shadeCarrierGroup.findViewById(R.id.shade_carrier_divider2)};
-        this.mCarrierGroups = new ShadeCarrier[]{(ShadeCarrier) shadeCarrierGroup.findViewById(R.id.carrier1), (ShadeCarrier) shadeCarrierGroup.findViewById(R.id.carrier2), (ShadeCarrier) shadeCarrierGroup.findViewById(R.id.carrier3)};
+        this.mCarrierGroups = new ShadeCarrier[]{shadeCarrierGroup.getCarrier1View(), (ShadeCarrier) shadeCarrierGroup.findViewById(R.id.carrier2), (ShadeCarrier) shadeCarrierGroup.findViewById(R.id.carrier3)};
         this.mLastSignalLevel = new int[3];
         this.mLastSignalLevelDescription = new String[3];
         this.mSignalCallback = new SignalCallback() { // from class: com.android.systemui.shade.carrier.ShadeCarrierGroupController.1
@@ -334,7 +326,7 @@ public class ShadeCarrierGroupController {
         H h = new H(looper, new Consumer() { // from class: com.android.systemui.shade.carrier.ShadeCarrierGroupController$$ExternalSyntheticLambda3
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                ShadeCarrierGroupController shadeCarrierGroupController = ShadeCarrierGroupController.this;
+                ShadeCarrierGroupController shadeCarrierGroupController = this.f$0;
                 CarrierTextManager.CarrierTextCallbackInfo carrierTextCallbackInfo = (CarrierTextManager.CarrierTextCallbackInfo) obj;
                 ShadeCarrierGroupController.H h2 = shadeCarrierGroupController.mMainHandler;
                 int i = 0;
@@ -347,26 +339,26 @@ public class ShadeCarrierGroupController {
                 LogLevel logLevel = LogLevel.VERBOSE;
                 ShadeCarrierGroupControllerLogger$$ExternalSyntheticLambda0 shadeCarrierGroupControllerLogger$$ExternalSyntheticLambda0 = new ShadeCarrierGroupControllerLogger$$ExternalSyntheticLambda0();
                 LogBuffer logBuffer = shadeCarrierGroupControllerLogger2.buffer;
-                LogMessage obtain = logBuffer.obtain("SCGC", logLevel, shadeCarrierGroupControllerLogger$$ExternalSyntheticLambda0, null);
-                LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+                LogMessage logMessageObtain = logBuffer.obtain("SCGC", logLevel, shadeCarrierGroupControllerLogger$$ExternalSyntheticLambda0, null);
+                LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
                 logMessageImpl.str1 = String.valueOf(carrierTextCallbackInfo.carrierText);
                 logMessageImpl.bool1 = carrierTextCallbackInfo.anySimReady;
                 boolean z = carrierTextCallbackInfo.airplaneMode;
                 logMessageImpl.bool2 = z;
-                logBuffer.commit(obtain);
+                logBuffer.commit(logMessageObtain);
                 shadeCarrierGroupController.mNoSimTextView.setVisibility(8);
-                String trim = carrierTextCallbackInfo.carrierText.toString().trim();
+                String strTrim = carrierTextCallbackInfo.carrierText.toString().trim();
                 LatinNetworkNameProviderImpl latinNetworkNameProviderImpl = (LatinNetworkNameProviderImpl) shadeCarrierGroupController.mLatinNetworkNameProvider;
                 latinNetworkNameProviderImpl.getClass();
                 CarrierInfraMediator.Conditions conditions = CarrierInfraMediator.Conditions.DISPLAY_CBCH50;
                 CarrierInfraMediator carrierInfraMediator = latinNetworkNameProviderImpl.carrierInfraMediator;
                 if (carrierInfraMediator.isEnabled(conditions, 0, new Object[0]) && !latinNetworkNameProviderImpl.subscriptionManager.getCompleteActiveSubscriptionInfoList().isEmpty()) {
                     latinNetworkNameProviderImpl.isAirplaneMode = z;
-                    trim = latinNetworkNameProviderImpl.getCombinedNetworkName();
+                    strTrim = latinNetworkNameProviderImpl.getCombinedNetworkName();
                 }
-                ActionBarContextView$$ExternalSyntheticOutline0.m(ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("handleUpdateCarrierInfo [", trim, "] isLatin="), carrierInfraMediator.isEnabled(conditions, 0, new Object[0]) && !latinNetworkNameProviderImpl.subscriptionManager.getCompleteActiveSubscriptionInfoList().isEmpty(), "ShadeCarrierGroup");
+                ActionBarContextView$$ExternalSyntheticOutline0.m(ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("handleUpdateCarrierInfo [", strTrim, "] isLatin="), carrierInfraMediator.isEnabled(conditions, 0, new Object[0]) && !latinNetworkNameProviderImpl.subscriptionManager.getCompleteActiveSubscriptionInfoList().isEmpty(), "ShadeCarrierGroup");
                 ShadeCarrier[] shadeCarrierArr = shadeCarrierGroupController.mCarrierGroups;
-                shadeCarrierArr[0].setCarrierText(trim);
+                shadeCarrierArr[0].setCarrierText(strTrim);
                 ShadeCarrier shadeCarrier = shadeCarrierGroupController.mCarrierGroups[0];
                 SlimIndicatorViewMediatorImpl slimIndicatorViewMediatorImpl = (SlimIndicatorViewMediatorImpl) shadeCarrierGroupController.mQuickStarHelper.mSlimIndicatorViewMediator;
                 if (slimIndicatorViewMediatorImpl.mPluginMediator.mIsSPluginConnected && slimIndicatorViewMediatorImpl.mCarrierCrew.mIsPanelCarrierDisabled == 1) {
@@ -411,14 +403,14 @@ public class ShadeCarrierGroupController {
                     intentFilter.addAction("android.telephony.action.SERVICE_PROVIDERS_UPDATED");
                     intentFilter.addAction("android.location.MODE_CHANGED");
                     BroadcastDispatcher.registerReceiver$default(latinNetworkNameProviderImpl.broadcastDispatcher, latinNetworkNameProviderImpl.broadcastReceiver, intentFilter, null, null, 0, null, 60);
-                    Intent registerReceiver = latinNetworkNameProviderImpl.context.registerReceiver(null, new IntentFilter("android.intent.action.SERVICE_STATE"));
+                    Intent intentRegisterReceiver = latinNetworkNameProviderImpl.context.registerReceiver(null, new IntentFilter("android.intent.action.SERVICE_STATE"));
                     LatinNetworkNameProviderImpl$broadcastReceiver$1 latinNetworkNameProviderImpl$broadcastReceiver$1 = latinNetworkNameProviderImpl.broadcastReceiver;
-                    if (registerReceiver != null) {
-                        latinNetworkNameProviderImpl$broadcastReceiver$1.onReceive(latinNetworkNameProviderImpl.context, registerReceiver);
+                    if (intentRegisterReceiver != null) {
+                        latinNetworkNameProviderImpl$broadcastReceiver$1.onReceive(latinNetworkNameProviderImpl.context, intentRegisterReceiver);
                     }
-                    Intent registerReceiver2 = latinNetworkNameProviderImpl.context.registerReceiver(null, new IntentFilter("android.telephony.action.SERVICE_PROVIDERS_UPDATED"));
-                    if (registerReceiver2 != null) {
-                        latinNetworkNameProviderImpl$broadcastReceiver$1.onReceive(latinNetworkNameProviderImpl.context, registerReceiver2);
+                    Intent intentRegisterReceiver2 = latinNetworkNameProviderImpl.context.registerReceiver(null, new IntentFilter("android.telephony.action.SERVICE_PROVIDERS_UPDATED"));
+                    if (intentRegisterReceiver2 != null) {
+                        latinNetworkNameProviderImpl$broadcastReceiver$1.onReceive(latinNetworkNameProviderImpl.context, intentRegisterReceiver2);
                     }
                 }
                 if (carrierInfraMediator.isEnabled(conditions, 0, new Object[0])) {
@@ -429,11 +421,11 @@ public class ShadeCarrierGroupController {
                     intentFilter2.addAction("android.intent.action.SIM_STATE_CHANGED");
                     BroadcastDispatcher.registerReceiver$default(latinNetworkNameProviderImpl.broadcastDispatcher, latinNetworkNameProviderImpl.broadcastReceiver, intentFilter2, null, null, 0, null, 60);
                     if (latinNetworkNameProviderImpl.cellBroadcastService == null) {
-                        List<ResolveInfo> queryIntentServices = latinNetworkNameProviderImpl.context.getPackageManager().queryIntentServices(new Intent("android.telephony.CellBroadcastService"), PackageManager.ResolveInfoFlags.of(1048576L));
-                        if (queryIntentServices.size() != 1) {
-                            ClockEventController$$ExternalSyntheticOutline0.m(queryIntentServices.size(), "getCellBroadcastServicePackageName: found ", "LatinNetworkNameProvider");
+                        List<ResolveInfo> listQueryIntentServices = latinNetworkNameProviderImpl.context.getPackageManager().queryIntentServices(new Intent("android.telephony.CellBroadcastService"), PackageManager.ResolveInfoFlags.of(1048576L));
+                        if (listQueryIntentServices.size() != 1) {
+                            ClockEventController$$ExternalSyntheticOutline0.m(listQueryIntentServices.size(), "getCellBroadcastServicePackageName: found ", "LatinNetworkNameProvider");
                         }
-                        Iterator<ResolveInfo> it = queryIntentServices.iterator();
+                        Iterator<ResolveInfo> it = listQueryIntentServices.iterator();
                         while (true) {
                             if (!it.hasNext()) {
                                 Log.e("LatinNetworkNameProvider", "getCellBroadcastServicePackageName: package name not found");

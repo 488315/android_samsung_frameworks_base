@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ListBuilderImpl extends TemplateBuilderImpl implements ListBuilder {
     public boolean mFirstRowChecked;
@@ -56,48 +55,48 @@ public class ListBuilderImpl extends TemplateBuilderImpl implements ListBuilder 
             if (i >= arrayList.size()) {
                 break;
             }
-            int intValue = ((Integer) ((ArrayList) list2).get(i)).intValue();
-            if (intValue == 0) {
-                long longValue = ((Long) arrayList.get(i)).longValue();
+            int iIntValue = ((Integer) ((ArrayList) list2).get(i)).intValue();
+            if (iIntValue == 0) {
+                long jLongValue = ((Long) arrayList.get(i)).longValue();
                 ArrayList arrayList2 = rowBuilderImpl.mEndItems;
                 Slice.Builder builder = new Slice.Builder(rowBuilderImpl.mSliceBuilder);
-                builder.addTimestamp(longValue, null, new String[0]);
+                builder.addTimestamp(jLongValue, null, new String[0]);
                 arrayList2.add(builder.build());
-            } else if (intValue == 1) {
+            } else if (iIntValue == 1) {
                 Pair pair = (Pair) arrayList.get(i);
                 IconCompat iconCompat = (IconCompat) pair.first;
-                int intValue2 = ((Integer) pair.second).intValue();
-                boolean booleanValue = ((Boolean) ((ArrayList) list3).get(i)).booleanValue();
+                int iIntValue2 = ((Integer) pair.second).intValue();
+                boolean zBooleanValue = ((Boolean) ((ArrayList) list3).get(i)).booleanValue();
                 Slice.Builder builder2 = new Slice.Builder(rowBuilderImpl.mSliceBuilder);
                 ArrayList arrayList3 = new ArrayList();
-                if (intValue2 == 6) {
+                if (iIntValue2 == 6) {
                     arrayList3.add("show_label");
                 }
-                if (intValue2 != 0) {
+                if (iIntValue2 != 0) {
                     arrayList3.add("no_tint");
                 }
-                if (intValue2 == 2 || intValue2 == 4) {
+                if (iIntValue2 == 2 || iIntValue2 == 4) {
                     arrayList3.add("large");
                 }
-                if (intValue2 == 3 || intValue2 == 4) {
+                if (iIntValue2 == 3 || iIntValue2 == 4) {
                     arrayList3.add("raw");
                 }
-                if (booleanValue) {
+                if (zBooleanValue) {
                     arrayList3.add("partial");
                 }
                 iconCompat.getClass();
                 if (Slice.isValidIcon(iconCompat)) {
                     builder2.addIcon(iconCompat, null, (String[]) arrayList3.toArray(new String[arrayList3.size()]));
                 }
-                if (booleanValue) {
+                if (zBooleanValue) {
                     builder2.addHints("partial");
                 }
                 rowBuilderImpl.mEndItems.add(builder2.build());
-            } else if (intValue == 2) {
+            } else if (iIntValue == 2) {
                 SliceAction sliceAction = (SliceAction) arrayList.get(i);
-                boolean booleanValue2 = ((Boolean) ((ArrayList) list3).get(i)).booleanValue();
+                boolean zBooleanValue2 = ((Boolean) ((ArrayList) list3).get(i)).booleanValue();
                 Slice.Builder builder3 = new Slice.Builder(rowBuilderImpl.mSliceBuilder);
-                if (booleanValue2) {
+                if (zBooleanValue2) {
                     builder3.addHints("partial");
                 }
                 ArrayList arrayList4 = rowBuilderImpl.mEndItems;
@@ -124,16 +123,16 @@ public class ListBuilderImpl extends TemplateBuilderImpl implements ListBuilder 
         }
         rowBuilderImpl.mSliceBuilder.addHints("list_item");
         Slice.Builder builder4 = this.mSliceBuilder;
-        Slice build = rowBuilderImpl.build();
+        Slice sliceBuild = rowBuilderImpl.build();
         builder4.getClass();
-        builder4.addSubSlice(build, null);
+        builder4.addSubSlice(sliceBuild, null);
     }
 
     @Override // androidx.slice.builders.impl.TemplateBuilderImpl
     public final void apply(Slice.Builder builder) {
         ((SystemClock) this.mClock).getClass();
-        long currentTimeMillis = System.currentTimeMillis();
-        builder.mItems.add(new SliceItem(Long.valueOf(currentTimeMillis), "long", "millis", new String[]{"last_updated"}));
+        long jCurrentTimeMillis = System.currentTimeMillis();
+        builder.mItems.add(new SliceItem(Long.valueOf(jCurrentTimeMillis), "long", "millis", new String[]{"last_updated"}));
         Slice slice = this.mSliceHeader;
         if (slice != null) {
             builder.addSubSlice(slice, null);
@@ -142,33 +141,33 @@ public class ListBuilderImpl extends TemplateBuilderImpl implements ListBuilder 
 
     @Override // androidx.slice.builders.impl.TemplateBuilderImpl
     public final Slice build() {
-        Slice build = super.build();
+        Slice sliceBuild = super.build();
         final String[] strArr = null;
-        boolean z = SliceQuery.find(build, (String) null, "partial") != null;
+        boolean z = SliceQuery.find(sliceBuild, (String) null, "partial") != null;
         final String str = "slice";
-        boolean z2 = SliceQuery.find(build, "slice", "list_item") == null;
+        boolean z2 = SliceQuery.find(sliceBuild, "slice", "list_item") == null;
         final String[] strArr2 = {"shortcut", UniversalCredentialUtil.AGENT_TITLE};
-        SliceItem find = SliceQuery.find(build, "action", strArr2, (String[]) null);
+        SliceItem sliceItemFind = SliceQuery.find(sliceBuild, "action", strArr2, (String[]) null);
         ArrayList arrayList = new ArrayList();
         ArrayDeque arrayDeque = new ArrayDeque();
-        Collections.addAll(arrayDeque, build.mItems);
+        Collections.addAll(arrayDeque, sliceBuild.mItems);
         SliceQuery.findAll(arrayDeque, new SliceQuery.Filter() { // from class: androidx.slice.core.SliceQuery.2
             public final /* synthetic */ String val$format;
             public final /* synthetic */ String[] val$hints;
             public final /* synthetic */ String[] val$nonHints;
 
             public AnonymousClass2(final String str2, final String[] strArr22, final String[] strArr3) {
-                r1 = str2;
-                r2 = strArr22;
-                r3 = strArr3;
+                str = str2;
+                strArr = strArr22;
+                strArr = strArr3;
             }
 
             @Override // androidx.slice.core.SliceQuery.Filter
             public final boolean filter(SliceItem sliceItem) {
-                return SliceQuery.checkFormat(sliceItem, r1) && SliceQuery.hasHints(sliceItem, r2) && !SliceQuery.hasAnyHints(sliceItem, r3);
+                return SliceQuery.checkFormat(sliceItem, str) && SliceQuery.hasHints(sliceItem, strArr) && !SliceQuery.hasAnyHints(sliceItem, strArr);
             }
         }, arrayList);
-        if (!z && !z2 && find == null && arrayList.isEmpty()) {
+        if (!z && !z2 && sliceItemFind == null && arrayList.isEmpty()) {
             throw new IllegalStateException("A slice requires a primary action; ensure one of your builders has called #setPrimaryAction with a valid SliceAction.");
         }
         boolean z3 = this.mFirstRowChecked;
@@ -176,7 +175,7 @@ public class ListBuilderImpl extends TemplateBuilderImpl implements ListBuilder 
             throw new IllegalStateException("A slice cannot have the first row be constructed from a GridRowBuilder, consider using #setHeader.");
         }
         if (!z3 || this.mFirstRowHasText) {
-            return build;
+            return sliceBuild;
         }
         throw new IllegalStateException("A slice requires the first row to have some text.");
     }
@@ -201,19 +200,18 @@ public class ListBuilderImpl extends TemplateBuilderImpl implements ListBuilder 
 
     @Override // androidx.slice.builders.impl.ListBuilder
     public final void setTtl(long j) {
-        long j2 = -1;
+        long jCurrentTimeMillis = -1;
         if (j != -1) {
             ((SystemClock) this.mClock).getClass();
-            j2 = System.currentTimeMillis() + j;
+            jCurrentTimeMillis = System.currentTimeMillis() + j;
         }
-        this.mSliceBuilder.addTimestamp(j2, "millis", "ttl");
+        this.mSliceBuilder.addTimestamp(jCurrentTimeMillis, "millis", "ttl");
     }
 
     public ListBuilderImpl(Slice.Builder builder, SliceSpec sliceSpec, Clock clock) {
         super(builder, sliceSpec, clock);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class HeaderBuilderImpl extends TemplateBuilderImpl {
         public SliceItem mTitleItem;
 
@@ -237,7 +235,6 @@ public class ListBuilderImpl extends TemplateBuilderImpl implements ListBuilder 
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class RowBuilderImpl extends TemplateBuilderImpl {
         public CharSequence mContentDescr;
         public final ArrayList mEndItems;

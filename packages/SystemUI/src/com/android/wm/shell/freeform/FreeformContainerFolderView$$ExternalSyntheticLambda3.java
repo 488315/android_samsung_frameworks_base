@@ -1,11 +1,11 @@
 package com.android.wm.shell.freeform;
 
+import android.content.res.Resources;
 import android.view.View;
 import com.android.wm.shell.freeform.FreeformContainerFolderView;
 import com.samsung.android.rune.CoreRune;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class FreeformContainerFolderView$$ExternalSyntheticLambda3 implements View.OnClickListener {
     public final /* synthetic */ int $r8$classId;
@@ -16,8 +16,12 @@ public final /* synthetic */ class FreeformContainerFolderView$$ExternalSyntheti
         this.f$0 = multiInstancePreviewAdapter;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:15:0x005d  */
     @Override // android.view.View.OnClickListener
-    public final void onClick(View view) {
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public final void onClick(View view) throws Resources.NotFoundException {
         int i = this.$r8$classId;
         Object obj = this.f$0;
         switch (i) {
@@ -45,10 +49,11 @@ public final /* synthetic */ class FreeformContainerFolderView$$ExternalSyntheti
                                 freeformContainerItemController.removeItem(freeformContainerItem2);
                                 freeformContainerItem2.launch();
                             }
+                        } else {
+                            freeformContainerItemController.removeItem(freeformContainerItem);
+                            freeformContainerItem.launch();
                         }
                     }
-                    freeformContainerItemController.removeItem(freeformContainerItem);
-                    freeformContainerItem.launch();
                 }
                 break;
             default:

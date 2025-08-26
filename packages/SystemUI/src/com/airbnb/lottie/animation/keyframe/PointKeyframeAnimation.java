@@ -6,7 +6,6 @@ import com.airbnb.lottie.value.Keyframe;
 import com.airbnb.lottie.value.LottieValueCallback;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class PointKeyframeAnimation extends KeyframeAnimation {
     public final PointF point;
@@ -37,9 +36,9 @@ public class PointKeyframeAnimation extends KeyframeAnimation {
             }
             PointF pointF4 = this.point;
             float f4 = pointF.x;
-            float m$1 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(pointF2.x, f4, f2, f4);
+            float fM$1 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(pointF2.x, f4, f2, f4);
             float f5 = pointF.y;
-            pointF4.set(m$1, DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(pointF2.y, f5, f3, f5));
+            pointF4.set(fM$1, DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(pointF2.y, f5, f3, f5));
             return this.point;
         }
         throw new IllegalStateException("Missing values for keyframe.");

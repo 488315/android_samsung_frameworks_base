@@ -74,7 +74,7 @@ public abstract class AsyncTaskLoader<D> extends Loader<D> {
             AsyncTaskLoader.this.executePendingTask();
         }
 
-        public void waitForLoader() {
+        public void waitForLoader() throws InterruptedException {
             try {
                 this.mDone.await();
             } catch (InterruptedException unused) {
@@ -129,13 +129,13 @@ public abstract class AsyncTaskLoader<D> extends Loader<D> {
             this.mTask = null;
             return false;
         }
-        boolean cancel = this.mTask.cancel(false);
-        if (cancel) {
+        boolean zCancel = this.mTask.cancel(false);
+        if (zCancel) {
             this.mCancellingTask = this.mTask;
             cancelLoadInBackground();
         }
         this.mTask = null;
-        return cancel;
+        return zCancel;
     }
 
     void executePendingTask() {
@@ -188,7 +188,7 @@ public abstract class AsyncTaskLoader<D> extends Loader<D> {
         return this.mCancellingTask != null;
     }
 
-    public void waitForLoader() {
+    public void waitForLoader() throws InterruptedException {
         AsyncTaskLoader<D>.LoadTask loadTask = this.mTask;
         if (loadTask != null) {
             loadTask.waitForLoader();

@@ -22,13 +22,11 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.BuildersKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class CommunalBackupHelper implements BackupHelper {
     public final CommunalBackupUtils communalBackupUtils;
     public final UserHandle userHandle;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -48,7 +46,7 @@ public final class CommunalBackupHelper implements BackupHelper {
     }
 
     @Override // android.app.backup.BackupHelper
-    public final void performBackup(ParcelFileDescriptor parcelFileDescriptor, BackupDataOutput backupDataOutput, ParcelFileDescriptor parcelFileDescriptor2) {
+    public final void performBackup(ParcelFileDescriptor parcelFileDescriptor, BackupDataOutput backupDataOutput, ParcelFileDescriptor parcelFileDescriptor2) throws IOException {
         if (backupDataOutput == null) {
             Log.e("CommunalBackupHelper", "Backup failed. Data is null");
             return;
@@ -91,7 +89,7 @@ public final class CommunalBackupHelper implements BackupHelper {
     }
 
     @Override // android.app.backup.BackupHelper
-    public final void restoreEntity(BackupDataInputStream backupDataInputStream) {
+    public final void restoreEntity(BackupDataInputStream backupDataInputStream) throws IOException {
         if (backupDataInputStream == null) {
             Log.e("CommunalBackupHelper", "Restore failed. Data is null");
             return;

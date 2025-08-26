@@ -32,7 +32,6 @@ import dagger.Lazy;
 import java.util.Optional;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SplitTaskUnfoldAnimator implements UnfoldTaskAnimator, DisplayInsetsController.OnInsetsChangedListener, SplitScreen.SplitScreenListener, ConfigurationChangeListener {
     public final Context mContext;
@@ -53,7 +52,6 @@ public class SplitTaskUnfoldAnimator implements UnfoldTaskAnimator, DisplayInset
     public int mMainStagePosition = -1;
     public int mSideStagePosition = -1;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AnimationContext {
         public final Rect mCurrentCropRect;
         public final Rect mEndCropRect;
@@ -68,7 +66,7 @@ public class SplitTaskUnfoldAnimator implements UnfoldTaskAnimator, DisplayInset
 
         public final void update() {
             int i;
-            Insets of;
+            Insets insetsOf;
             int i2;
             int i3 = this.mStageType;
             SplitTaskUnfoldAnimator splitTaskUnfoldAnimator = SplitTaskUnfoldAnimator.this;
@@ -82,26 +80,26 @@ public class SplitTaskUnfoldAnimator implements UnfoldTaskAnimator, DisplayInset
             }
             this.mStartCropRect.offsetTo(0, 0);
             this.mEndCropRect.set(this.mStartCropRect);
-            int max = (int) (Math.max(this.mEndCropRect.width(), this.mEndCropRect.height()) * 0.05f);
+            int iMax = (int) (Math.max(this.mEndCropRect.width(), this.mEndCropRect.height()) * 0.05f);
             if (((SplitScreenController) ((Optional) splitTaskUnfoldAnimator.mSplitScreenController.get()).get()).isLeftRightSplit()) {
-                int i5 = z ? 0 : max;
+                int i5 = z ? 0 : iMax;
                 if ((this.mStageType == 0 ? splitTaskUnfoldAnimator.mMainStagePosition : splitTaskUnfoldAnimator.mSideStagePosition) == 0) {
                     i2 = 0;
-                    i4 = max;
+                    i4 = iMax;
                 } else {
-                    i2 = max;
+                    i2 = iMax;
                 }
-                of = Insets.of(i4, max, i2, i5);
+                insetsOf = Insets.of(i4, iMax, i2, i5);
             } else {
                 if ((this.mStageType == 0 ? splitTaskUnfoldAnimator.mMainStagePosition : splitTaskUnfoldAnimator.mSideStagePosition) == 0) {
                     i = 0;
-                    i4 = max;
+                    i4 = iMax;
                 } else {
-                    i = z ? 0 : max;
+                    i = z ? 0 : iMax;
                 }
-                of = Insets.of(max, i4, max, i);
+                insetsOf = Insets.of(iMax, i4, iMax, i);
             }
-            this.mStartCropRect.inset(of);
+            this.mStartCropRect.inset(insetsOf);
         }
 
         private AnimationContext(SurfaceControl surfaceControl) {
@@ -162,21 +160,21 @@ public class SplitTaskUnfoldAnimator implements UnfoldTaskAnimator, DisplayInset
 
     @Override // com.android.wm.shell.common.DisplayInsetsController.OnInsetsChangedListener
     public final void insetsChanged(InsetsState insetsState) {
-        InsetsSource insetsSource;
-        int sourceSize = insetsState.sourceSize() - 1;
+        InsetsSource insetsSourceSourceAt;
+        int iSourceSize = insetsState.sourceSize() - 1;
         while (true) {
-            if (sourceSize < 0) {
-                insetsSource = null;
+            if (iSourceSize < 0) {
+                insetsSourceSourceAt = null;
                 break;
             }
-            insetsSource = insetsState.sourceAt(sourceSize);
-            if (insetsSource.getType() == WindowInsets.Type.navigationBars() && insetsSource.hasFlags(2)) {
+            insetsSourceSourceAt = insetsState.sourceAt(iSourceSize);
+            if (insetsSourceSourceAt.getType() == WindowInsets.Type.navigationBars() && insetsSourceSourceAt.hasFlags(2)) {
                 break;
             } else {
-                sourceSize--;
+                iSourceSize--;
             }
         }
-        this.mExpandedTaskbarInsetsSource = insetsSource;
+        this.mExpandedTaskbarInsetsSource = insetsSourceSourceAt;
         updateContexts();
     }
 
@@ -298,7 +296,7 @@ public class SplitTaskUnfoldAnimator implements UnfoldTaskAnimator, DisplayInset
         SplitScreenController.this.mMainExecutor.execute(new Runnable() { // from class: com.android.wm.shell.splitscreen.SplitScreenController$SplitScreenImpl$$ExternalSyntheticLambda13
             @Override // java.lang.Runnable
             public final void run() {
-                SplitScreenController.SplitScreenImpl splitScreenImpl2 = SplitScreenController.SplitScreenImpl.this;
+                SplitScreenController.SplitScreenImpl splitScreenImpl2 = splitScreenImpl;
                 SplitTaskUnfoldAnimator splitTaskUnfoldAnimator = this;
                 Executor executor2 = executor;
                 if (splitScreenImpl2.mExecutors.size() == 0) {

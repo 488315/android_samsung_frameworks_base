@@ -7,7 +7,6 @@ import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MuxDeferredActivator implements MuxActivator {
     public final Function1 getPatches;
@@ -42,16 +41,16 @@ public final class MuxDeferredActivator implements MuxActivator {
         return new Pair(muxDeferredNode, new Function0() { // from class: com.android.systemui.kairos.internal.MuxDeferredActivator$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                MuxDeferredActivator muxDeferredActivator = MuxDeferredActivator.this;
+                MuxDeferredActivator muxDeferredActivator = this.f$0;
                 EvalScope evalScope2 = evalScope;
                 MuxDeferredNode muxDeferredNode2 = muxDeferredNode;
-                ActivationResult activate = ((EventsImpl) muxDeferredActivator.getPatches.mo779invoke(evalScope2)).activate(evalScope2, muxDeferredNode2.schedulable);
-                if (activate == null) {
+                ActivationResult activationResultActivate = ((EventsImpl) muxDeferredActivator.getPatches.mo781invoke(evalScope2)).activate(evalScope2, muxDeferredNode2.schedulable);
+                if (activationResultActivate == null) {
                     muxDeferredNode2.depthTracker.setIsIndirectRoot(false);
                     return Unit.INSTANCE;
                 }
-                NodeConnection nodeConnection = activate.connection;
-                boolean z = activate.needsEval;
+                NodeConnection nodeConnection = activationResultActivate.connection;
+                boolean z = activationResultActivate.needsEval;
                 muxDeferredNode2.patches = nodeConnection;
                 if (!nodeConnection.schedulerUpstream.getDepthTracker().snapshotIsDirect && (muxDeferredNode2.depthTracker.setIsIndirectRoot(false) | muxDeferredNode2.depthTracker.addIndirectUpstream(nodeConnection.schedulerUpstream.getDepthTracker().snapshotIndirectDepth, null) | DepthTracker.updateIndirectRoots$default(muxDeferredNode2.depthTracker, CollectionsKt___CollectionsKt.toSet(nodeConnection.schedulerUpstream.getDepthTracker()._snapshotIndirectRoots), null, null, 6))) {
                     muxDeferredNode2.depthTracker.schedule(evalScope2.getScheduler(), muxDeferredNode2);

@@ -62,7 +62,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class EnterpriseDeviceManager {
     public static final String ACTION_ADD_DEVICE_ADMIN = "android.app.action.ADD_DEVICE_ADMIN";
@@ -219,7 +218,6 @@ public class EnterpriseDeviceManager {
     public volatile VpnPolicy mVpnPolicy;
     public volatile WifiPolicy mWifiPolicy;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum EnterpriseKeyVersion {
         ENTERPRISE_KEY_VERSION_1;
 
@@ -277,15 +275,15 @@ public class EnterpriseDeviceManager {
         EnterpriseDeviceManager enterpriseDeviceManager;
         synchronized (mSync) {
             try {
-                int myUid = Process.myUid();
-                int myPid = Process.myPid();
-                int myTid = Process.myTid();
+                int iMyUid = Process.myUid();
+                int iMyPid = Process.myPid();
+                int iMyTid = Process.myTid();
                 if (sEnterpriseDeviceManager == null) {
                     sEnterpriseDeviceManager = new EnterpriseDeviceManager(context);
-                    KnoxsdkFileLog.d(TAG, "getInstance() : (" + myPid + "/" + myTid + ") create an instance with UID " + myUid);
+                    KnoxsdkFileLog.d(TAG, "getInstance() : (" + iMyPid + "/" + iMyTid + ") create an instance with UID " + iMyUid);
                 }
-                if (sEnterpriseDeviceManager.mContextInfo.mCallerUid != myUid) {
-                    KnoxsdkFileLog.w(TAG, "getInstance() : (" + myPid + "/" + myTid + ") currentUid is " + myUid + " but mCallerUid is " + sEnterpriseDeviceManager.mContextInfo.mCallerUid);
+                if (sEnterpriseDeviceManager.mContextInfo.mCallerUid != iMyUid) {
+                    KnoxsdkFileLog.w(TAG, "getInstance() : (" + iMyPid + "/" + iMyTid + ") currentUid is " + iMyUid + " but mCallerUid is " + sEnterpriseDeviceManager.mContextInfo.mCallerUid);
                 }
                 enterpriseDeviceManager = sEnterpriseDeviceManager;
             } catch (Throwable th) {
@@ -1943,13 +1941,13 @@ public class EnterpriseDeviceManager {
         this.mContext = context;
         this.mDPM = (DevicePolicyManager) context.getSystemService("device_policy");
         if (z) {
-            int i = contextInfo.mCallerUid;
-            int i2 = contextInfo.mContainerId;
-            int i3 = contextInfo.mDALessCallerUid;
-            if (i == 1000 && (i = Binder.getCallingUid()) != 1000) {
-                KnoxsdkFileLog.d(TAG, "(" + Process.myPid() + "/" + Process.myTid() + ") callerUid is SYSTEM_UID but Binder.getCallingUid() returns " + i, new Exception("STACK TRACE"));
+            int callingUid = contextInfo.mCallerUid;
+            int i = contextInfo.mContainerId;
+            int i2 = contextInfo.mDALessCallerUid;
+            if (callingUid == 1000 && (callingUid = Binder.getCallingUid()) != 1000) {
+                KnoxsdkFileLog.d(TAG, "(" + Process.myPid() + "/" + Process.myTid() + ") callerUid is SYSTEM_UID but Binder.getCallingUid() returns " + callingUid, new Exception("STACK TRACE"));
             }
-            contextInfo = new ContextInfo(i, i2, contextInfo.mParent, i3);
+            contextInfo = new ContextInfo(callingUid, i, contextInfo.mParent, i2);
         }
         this.mContextInfo = contextInfo;
     }

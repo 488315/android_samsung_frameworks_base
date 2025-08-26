@@ -29,9 +29,9 @@ public class WindowInfo implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public WindowInfo createFromParcel(Parcel parcel) {
-            WindowInfo obtain = WindowInfo.obtain();
-            obtain.initFromParcel(parcel);
-            return obtain;
+            WindowInfo windowInfoObtain = WindowInfo.obtain();
+            windowInfoObtain.initFromParcel(parcel);
+            return windowInfoObtain;
         }
 
         /* JADX WARN: Can't rename method to resolve collision */
@@ -57,28 +57,28 @@ public class WindowInfo implements Parcelable {
     }
 
     public static WindowInfo obtain() {
-        WindowInfo acquire = sPool.acquire();
-        return acquire == null ? new WindowInfo() : acquire;
+        WindowInfo windowInfoAcquire = sPool.acquire();
+        return windowInfoAcquire == null ? new WindowInfo() : windowInfoAcquire;
     }
 
     public static WindowInfo obtain(WindowInfo windowInfo) {
-        WindowInfo obtain = obtain();
-        obtain.displayId = windowInfo.displayId;
-        obtain.taskId = windowInfo.taskId;
-        obtain.type = windowInfo.type;
-        obtain.layer = windowInfo.layer;
-        obtain.token = windowInfo.token;
-        obtain.parentToken = windowInfo.parentToken;
-        obtain.activityToken = windowInfo.activityToken;
-        obtain.focused = windowInfo.focused;
-        obtain.regionInScreen.set(windowInfo.regionInScreen);
-        obtain.title = windowInfo.title;
-        obtain.accessibilityIdOfAnchor = windowInfo.accessibilityIdOfAnchor;
-        obtain.inPictureInPicture = windowInfo.inPictureInPicture;
-        obtain.hasFlagWatchOutsideTouch = windowInfo.hasFlagWatchOutsideTouch;
+        WindowInfo windowInfoObtain = obtain();
+        windowInfoObtain.displayId = windowInfo.displayId;
+        windowInfoObtain.taskId = windowInfo.taskId;
+        windowInfoObtain.type = windowInfo.type;
+        windowInfoObtain.layer = windowInfo.layer;
+        windowInfoObtain.token = windowInfo.token;
+        windowInfoObtain.parentToken = windowInfo.parentToken;
+        windowInfoObtain.activityToken = windowInfo.activityToken;
+        windowInfoObtain.focused = windowInfo.focused;
+        windowInfoObtain.regionInScreen.set(windowInfo.regionInScreen);
+        windowInfoObtain.title = windowInfo.title;
+        windowInfoObtain.accessibilityIdOfAnchor = windowInfo.accessibilityIdOfAnchor;
+        windowInfoObtain.inPictureInPicture = windowInfo.inPictureInPicture;
+        windowInfoObtain.hasFlagWatchOutsideTouch = windowInfo.hasFlagWatchOutsideTouch;
         int i = 0;
         while (true) {
-            float[] fArr = obtain.mTransformMatrix;
+            float[] fArr = windowInfoObtain.mTransformMatrix;
             if (i >= fArr.length) {
                 break;
             }
@@ -87,16 +87,16 @@ public class WindowInfo implements Parcelable {
         }
         List<IBinder> list = windowInfo.childTokens;
         if (list != null && !list.isEmpty()) {
-            List<IBinder> list2 = obtain.childTokens;
+            List<IBinder> list2 = windowInfoObtain.childTokens;
             if (list2 == null) {
-                obtain.childTokens = new ArrayList(windowInfo.childTokens);
+                windowInfoObtain.childTokens = new ArrayList(windowInfo.childTokens);
             } else {
                 list2.addAll(windowInfo.childTokens);
             }
         }
-        obtain.mMagnificationSpec.setTo(windowInfo.mMagnificationSpec);
-        obtain.locales = windowInfo.locales;
-        return obtain;
+        windowInfoObtain.mMagnificationSpec.setTo(windowInfo.mMagnificationSpec);
+        windowInfoObtain.locales = windowInfo.locales;
+        return windowInfoObtain;
     }
 
     public void recycle() {

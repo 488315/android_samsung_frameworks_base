@@ -9,7 +9,6 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class DialogInfo implements Parcelable {
     public static final Parcelable.Creator<DialogInfo> CREATOR = new Parcelable.Creator<DialogInfo>() { // from class: com.samsung.android.scs.ai.sdkcommon.asr.DialogInfo.1
@@ -54,9 +53,7 @@ public class DialogInfo implements Parcelable {
         return (List) this.speechInfos.stream().filter(new Predicate() { // from class: com.samsung.android.scs.ai.sdkcommon.asr.DialogInfo$$ExternalSyntheticLambda0
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                boolean lambda$getSpeechInfosById$0;
-                lambda$getSpeechInfosById$0 = DialogInfo.lambda$getSpeechInfosById$0(i, (SpeechInfo) obj);
-                return lambda$getSpeechInfosById$0;
+                return DialogInfo.lambda$getSpeechInfosById$0(i, (SpeechInfo) obj);
             }
         }).collect(Collectors.toList());
     }

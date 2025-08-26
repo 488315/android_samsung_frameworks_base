@@ -13,7 +13,6 @@ import java.util.Comparator;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class DreamBackend {
     public static DreamBackend sInstance;
@@ -21,14 +20,12 @@ public class DreamBackend {
     public final Set mDisabledDreams;
     public Set mSupportedComplications;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DreamInfo {
         public final String toString() {
             return DreamInfo.class.getSimpleName() + "[null,null]";
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DreamInfoComparator implements Comparator {
         public DreamInfoComparator(ComponentName componentName) {
         }
@@ -40,27 +37,27 @@ public class DreamBackend {
         }
     }
 
-    public DreamBackend(Context context) {
+    public DreamBackend(Context context) throws Resources.NotFoundException {
         Context applicationContext = context.getApplicationContext();
         this.mContext = applicationContext;
         Resources resources = applicationContext.getResources();
-        IDreamManager asInterface = IDreamManager.Stub.asInterface(ServiceManager.getService("dreams"));
-        ComponentName componentName = null;
-        if (asInterface != null) {
+        IDreamManager iDreamManagerAsInterface = IDreamManager.Stub.asInterface(ServiceManager.getService("dreams"));
+        ComponentName defaultDreamComponentForUser = null;
+        if (iDreamManagerAsInterface != null) {
             try {
-                componentName = asInterface.getDefaultDreamComponentForUser(applicationContext.getUserId());
+                defaultDreamComponentForUser = iDreamManagerAsInterface.getDefaultDreamComponentForUser(applicationContext.getUserId());
             } catch (RemoteException e) {
                 Log.w("DreamBackend", "Failed to get default dream", e);
             }
         }
-        new DreamInfoComparator(componentName);
+        new DreamInfoComparator(defaultDreamComponentForUser);
         resources.getBoolean(R.bool.config_enableAppWidgetService);
         resources.getBoolean(R.bool.config_enableActivityRecognitionHardwareOverlay);
         resources.getBoolean(R.bool.config_earcFeatureEnabled_default);
         resources.getBoolean(R.bool.config_emergencyGestureEnabled);
-        this.mDisabledDreams = (Set) Arrays.stream(resources.getStringArray(R.array.config_udfps_enroll_stage_thresholds)).map(new DreamBackend$$ExternalSyntheticLambda0()).collect(Collectors.toSet());
-        Arrays.stream(resources.getStringArray(17236254)).toList();
-        this.mSupportedComplications = (Set) Arrays.stream(resources.getIntArray(17236338)).boxed().collect(Collectors.toSet());
+        this.mDisabledDreams = (Set) Arrays.stream(resources.getStringArray(R.array.config_udfps_sensor_props)).map(new DreamBackend$$ExternalSyntheticLambda0()).collect(Collectors.toSet());
+        Arrays.stream(resources.getStringArray(17236255)).toList();
+        this.mSupportedComplications = (Set) Arrays.stream(resources.getIntArray(17236339)).boxed().collect(Collectors.toSet());
     }
 
     public void setSupportedComplications(Set<Integer> set) {

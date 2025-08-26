@@ -2,6 +2,7 @@ package com.android.systemui.shade.ui.viewmodel;
 
 import android.content.Context;
 import androidx.compose.runtime.State;
+import com.android.app.tracing.coroutines.CoroutineTracingKt;
 import com.android.systemui.R;
 import com.android.systemui.battery.BatteryMeterViewController;
 import com.android.systemui.kairos.KairosNetwork;
@@ -18,16 +19,27 @@ import com.android.systemui.shade.domain.interactor.ShadeModeInteractor;
 import com.android.systemui.shade.domain.interactor.ShadeModeInteractorImpl;
 import com.android.systemui.statusbar.phone.ui.StatusBarIconController;
 import com.android.systemui.statusbar.phone.ui.TintedIconManager;
+import com.android.systemui.statusbar.pipeline.mobile.data.model.SubscriptionModel;
 import com.android.systemui.statusbar.pipeline.mobile.domain.interactor.MobileIconsInteractor;
 import com.android.systemui.statusbar.pipeline.mobile.ui.viewmodel.MobileIconsViewModel;
 import dagger.Lazy;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
+import kotlin.KotlinNothingValueException;
+import kotlin.ResultKt;
 import kotlin.Unit;
+import kotlin.collections.CollectionsKt__IterablesKt;
 import kotlin.collections.EmptyList;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
+import kotlinx.coroutines.CoroutineScope;
+import kotlinx.coroutines.CoroutineScopeKt;
+import kotlinx.coroutines.DelayKt;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
@@ -36,7 +48,6 @@ import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.StateFlow;
 import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ShadeHeaderViewModel extends ExclusiveActivatable {
     public final ActivityStarter activityStarter;
@@ -68,9 +79,109 @@ public final class ShadeHeaderViewModel extends ExclusiveActivatable {
     public final State showClock$delegate;
     public final StatusBarIconController statusBarIconController;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         ShadeHeaderViewModel create();
+    }
+
+    /* renamed from: com.android.systemui.shade.ui.viewmodel.ShadeHeaderViewModel$onActivated$1, reason: invalid class name */
+    final class AnonymousClass1 extends ContinuationImpl {
+        int label;
+        /* synthetic */ Object result;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return ShadeHeaderViewModel.this.onActivated(this);
+        }
+    }
+
+    /* renamed from: com.android.systemui.shade.ui.viewmodel.ShadeHeaderViewModel$onActivated$2, reason: invalid class name */
+    final class AnonymousClass2 extends SuspendLambda implements Function2 {
+        private /* synthetic */ Object L$0;
+        int label;
+
+        /* renamed from: com.android.systemui.shade.ui.viewmodel.ShadeHeaderViewModel$onActivated$2$1, reason: invalid class name */
+        final class AnonymousClass1 extends SuspendLambda implements Function2 {
+            int label;
+            final /* synthetic */ ShadeHeaderViewModel this$0;
+
+            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+            public AnonymousClass1(ShadeHeaderViewModel shadeHeaderViewModel, Continuation continuation) {
+                super(2, continuation);
+                this.this$0 = shadeHeaderViewModel;
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Continuation create(Object obj, Continuation continuation) {
+                return new AnonymousClass1(this.this$0, continuation);
+            }
+
+            @Override // kotlin.jvm.functions.Function2
+            public final Object invoke(Object obj, Object obj2) {
+                return ((AnonymousClass1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) {
+                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                int i = this.label;
+                if (i == 0) {
+                    ResultKt.throwOnFailure(obj);
+                    Hydrator hydrator = this.this$0.hydrator;
+                    this.label = 1;
+                    if (hydrator.activate(this) == coroutineSingletons) {
+                        return coroutineSingletons;
+                    }
+                } else {
+                    if (i != 1) {
+                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                    }
+                    ResultKt.throwOnFailure(obj);
+                }
+                throw new KotlinNothingValueException();
+            }
+        }
+
+        public AnonymousClass2(Continuation continuation) {
+            super(2, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            AnonymousClass2 anonymousClass2 = ShadeHeaderViewModel.this.new AnonymousClass2(continuation);
+            anonymousClass2.L$0 = obj;
+            return anonymousClass2;
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((AnonymousClass2) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                CoroutineTracingKt.launchTraced$default((CoroutineScope) this.L$0, null, null, new AnonymousClass1(ShadeHeaderViewModel.this, null), 7);
+                this.label = 1;
+                if (DelayKt.awaitCancellation(this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            throw new KotlinNothingValueException();
+        }
     }
 
     public ShadeHeaderViewModel(Context context, ActivityStarter activityStarter, SceneInteractor sceneInteractor, ShadeInteractor shadeInteractor, ShadeModeInteractor shadeModeInteractor, MobileIconsInteractor mobileIconsInteractor, MobileIconsViewModel mobileIconsViewModel, PrivacyChipInteractor privacyChipInteractor, ShadeHeaderClockInteractor shadeHeaderClockInteractor, TintedIconManager.Factory factory, BatteryMeterViewController.Factory factory2, StatusBarIconController statusBarIconController, KairosNetwork kairosNetwork, Lazy lazy) {
@@ -83,20 +194,19 @@ public final class ShadeHeaderViewModel extends ExclusiveActivatable {
         this.clockInteractor = shadeHeaderClockInteractor;
         this.statusBarIconController = statusBarIconController;
         this.kairosNetwork = kairosNetwork;
-        Hydrator hydrator = new Hydrator("ShadeHeaderViewModel.hydrator", null, 2, 0 == true ? 1 : 0);
+        Hydrator hydrator = new Hydrator("ShadeHeaderViewModel.hydrator", null, 2, null);
         this.hydrator = hydrator;
         this.createTintedIconManager = new ShadeHeaderViewModel$createTintedIconManager$1(factory);
         this.createBatteryMeterViewController = new ShadeHeaderViewModel$createBatteryMeterViewController$1(factory2);
         ShadeModeInteractorImpl shadeModeInteractorImpl = (ShadeModeInteractorImpl) shadeModeInteractor;
-        Boolean valueOf = Boolean.valueOf(((Boolean) shadeModeInteractorImpl.isShadeLayoutWide.$$delegate_0.getValue()).booleanValue() || !((Set) sceneInteractor.currentOverlays.getValue()).contains(Overlays.NotificationsShade));
+        Boolean boolValueOf = Boolean.valueOf(((Boolean) shadeModeInteractorImpl.isShadeLayoutWide.$$delegate_0.getValue()).booleanValue() || !((Set) sceneInteractor.currentOverlays.getValue()).contains(Overlays.NotificationsShade));
         ReadonlyStateFlow readonlyStateFlow = shadeModeInteractorImpl.isShadeLayoutWide;
         ShadeHeaderViewModel$showClock$2 shadeHeaderViewModel$showClock$2 = new ShadeHeaderViewModel$showClock$2(this);
         final StateFlow stateFlow = sceneInteractor.currentOverlays;
-        this.showClock$delegate = hydrator.hydratedStateOf("showClock", valueOf, new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(readonlyStateFlow, stateFlow, shadeHeaderViewModel$showClock$2));
+        this.showClock$delegate = hydrator.hydratedStateOf("showClock", boolValueOf, new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(readonlyStateFlow, stateFlow, shadeHeaderViewModel$showClock$2));
         ShadeHeaderViewModel$HeaderChipHighlight$None shadeHeaderViewModel$HeaderChipHighlight$None = ShadeHeaderViewModel$HeaderChipHighlight$None.INSTANCE;
         this.notificationsChipHighlight$delegate = hydrator.hydratedStateOf("notificationsChipHighlight", shadeHeaderViewModel$HeaderChipHighlight$None, new Flow() { // from class: com.android.systemui.shade.ui.viewmodel.ShadeHeaderViewModel$special$$inlined$map$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.shade.ui.viewmodel.ShadeHeaderViewModel$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -123,83 +233,51 @@ public final class ShadeHeaderViewModel extends ExclusiveActivatable {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.shade.ui.viewmodel.ShadeHeaderViewModel$special$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.shade.ui.viewmodel.ShadeHeaderViewModel$special$$inlined$map$1$2$1 r0 = (com.android.systemui.shade.ui.viewmodel.ShadeHeaderViewModel$special$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.shade.ui.viewmodel.ShadeHeaderViewModel$special$$inlined$map$1$2$1 r0 = new com.android.systemui.shade.ui.viewmodel.ShadeHeaderViewModel$special$$inlined$map$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L57
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        java.util.Set r5 = (java.util.Set) r5
-                        com.android.compose.animation.scene.OverlayKey r6 = com.android.systemui.scene.shared.model.Overlays.NotificationsShade
-                        boolean r6 = r5.contains(r6)
-                        if (r6 == 0) goto L3f
-                        com.android.systemui.shade.ui.viewmodel.ShadeHeaderViewModel$HeaderChipHighlight$Strong r5 = com.android.systemui.shade.ui.viewmodel.ShadeHeaderViewModel$HeaderChipHighlight$Strong.INSTANCE
-                        goto L4c
-                    L3f:
-                        com.android.compose.animation.scene.OverlayKey r6 = com.android.systemui.scene.shared.model.Overlays.QuickSettingsShade
-                        boolean r5 = r5.contains(r6)
-                        if (r5 == 0) goto L4a
-                        com.android.systemui.shade.ui.viewmodel.ShadeHeaderViewModel$HeaderChipHighlight$Weak r5 = com.android.systemui.shade.ui.viewmodel.ShadeHeaderViewModel$HeaderChipHighlight$Weak.INSTANCE
-                        goto L4c
-                    L4a:
-                        com.android.systemui.shade.ui.viewmodel.ShadeHeaderViewModel$HeaderChipHighlight$None r5 = com.android.systemui.shade.ui.viewmodel.ShadeHeaderViewModel$HeaderChipHighlight$None.INSTANCE
-                    L4c:
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L57
-                        return r1
-                    L57:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.shade.ui.viewmodel.ShadeHeaderViewModel$special$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        Set set = (Set) obj;
+                        Object obj3 = set.contains(Overlays.NotificationsShade) ? ShadeHeaderViewModel$HeaderChipHighlight$Strong.INSTANCE : set.contains(Overlays.QuickSettingsShade) ? ShadeHeaderViewModel$HeaderChipHighlight$Weak.INSTANCE : ShadeHeaderViewModel$HeaderChipHighlight$None.INSTANCE;
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(obj3, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = stateFlow.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         });
         this.quickSettingsChipHighlight$delegate = hydrator.hydratedStateOf("quickSettingsChipHighlight", shadeHeaderViewModel$HeaderChipHighlight$None, new Flow() { // from class: com.android.systemui.shade.ui.viewmodel.ShadeHeaderViewModel$special$$inlined$map$2
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.shade.ui.viewmodel.ShadeHeaderViewModel$special$$inlined$map$2$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -226,78 +304,47 @@ public final class ShadeHeaderViewModel extends ExclusiveActivatable {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.shade.ui.viewmodel.ShadeHeaderViewModel$special$$inlined$map$2.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.shade.ui.viewmodel.ShadeHeaderViewModel$special$$inlined$map$2$2$1 r0 = (com.android.systemui.shade.ui.viewmodel.ShadeHeaderViewModel$special$$inlined$map$2.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.shade.ui.viewmodel.ShadeHeaderViewModel$special$$inlined$map$2$2$1 r0 = new com.android.systemui.shade.ui.viewmodel.ShadeHeaderViewModel$special$$inlined$map$2$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L57
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        java.util.Set r5 = (java.util.Set) r5
-                        com.android.compose.animation.scene.OverlayKey r6 = com.android.systemui.scene.shared.model.Overlays.QuickSettingsShade
-                        boolean r6 = r5.contains(r6)
-                        if (r6 == 0) goto L3f
-                        com.android.systemui.shade.ui.viewmodel.ShadeHeaderViewModel$HeaderChipHighlight$Strong r5 = com.android.systemui.shade.ui.viewmodel.ShadeHeaderViewModel$HeaderChipHighlight$Strong.INSTANCE
-                        goto L4c
-                    L3f:
-                        com.android.compose.animation.scene.OverlayKey r6 = com.android.systemui.scene.shared.model.Overlays.NotificationsShade
-                        boolean r5 = r5.contains(r6)
-                        if (r5 == 0) goto L4a
-                        com.android.systemui.shade.ui.viewmodel.ShadeHeaderViewModel$HeaderChipHighlight$Weak r5 = com.android.systemui.shade.ui.viewmodel.ShadeHeaderViewModel$HeaderChipHighlight$Weak.INSTANCE
-                        goto L4c
-                    L4a:
-                        com.android.systemui.shade.ui.viewmodel.ShadeHeaderViewModel$HeaderChipHighlight$None r5 = com.android.systemui.shade.ui.viewmodel.ShadeHeaderViewModel$HeaderChipHighlight$None.INSTANCE
-                    L4c:
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L57
-                        return r1
-                    L57:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.shade.ui.viewmodel.ShadeHeaderViewModel$special$$inlined$map$2.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        Set set = (Set) obj;
+                        Object obj3 = set.contains(Overlays.QuickSettingsShade) ? ShadeHeaderViewModel$HeaderChipHighlight$Strong.INSTANCE : set.contains(Overlays.NotificationsShade) ? ShadeHeaderViewModel$HeaderChipHighlight$Weak.INSTANCE : ShadeHeaderViewModel$HeaderChipHighlight$None.INSTANCE;
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(obj3, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = stateFlow.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         });
         this.isSingleCarrier = mobileIconsInteractor.isSingleCarrier();
@@ -305,7 +352,6 @@ public final class ShadeHeaderViewModel extends ExclusiveActivatable {
         final Flow filteredSubscriptions = mobileIconsInteractor.getFilteredSubscriptions();
         this.mobileSubIds$delegate = hydrator.hydratedStateOf("mobileSubIds", emptyList, new Flow() { // from class: com.android.systemui.shade.ui.viewmodel.ShadeHeaderViewModel$special$$inlined$map$3
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.shade.ui.viewmodel.ShadeHeaderViewModel$special$$inlined$map$3$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -332,81 +378,51 @@ public final class ShadeHeaderViewModel extends ExclusiveActivatable {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r6, kotlin.coroutines.Continuation r7) {
-                    /*
-                        r5 = this;
-                        boolean r0 = r7 instanceof com.android.systemui.shade.ui.viewmodel.ShadeHeaderViewModel$special$$inlined$map$3.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r7
-                        com.android.systemui.shade.ui.viewmodel.ShadeHeaderViewModel$special$$inlined$map$3$2$1 r0 = (com.android.systemui.shade.ui.viewmodel.ShadeHeaderViewModel$special$$inlined$map$3.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.shade.ui.viewmodel.ShadeHeaderViewModel$special$$inlined$map$3$2$1 r0 = new com.android.systemui.shade.ui.viewmodel.ShadeHeaderViewModel$special$$inlined$map$3$2$1
-                        r0.<init>(r7)
-                    L18:
-                        java.lang.Object r7 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r7)
-                        goto L67
-                    L27:
-                        java.lang.IllegalStateException r5 = new java.lang.IllegalStateException
-                        java.lang.String r6 = "call to 'resume' before 'invoke' with coroutine"
-                        r5.<init>(r6)
-                        throw r5
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r7)
-                        java.util.List r6 = (java.util.List) r6
-                        java.lang.Iterable r6 = (java.lang.Iterable) r6
-                        java.util.ArrayList r7 = new java.util.ArrayList
-                        r2 = 10
-                        int r2 = kotlin.collections.CollectionsKt__IterablesKt.collectionSizeOrDefault(r6, r2)
-                        r7.<init>(r2)
-                        java.util.Iterator r6 = r6.iterator()
-                    L45:
-                        boolean r2 = r6.hasNext()
-                        if (r2 == 0) goto L5c
-                        java.lang.Object r2 = r6.next()
-                        com.android.systemui.statusbar.pipeline.mobile.data.model.SubscriptionModel r2 = (com.android.systemui.statusbar.pipeline.mobile.data.model.SubscriptionModel) r2
-                        int r2 = r2.subscriptionId
-                        java.lang.Integer r4 = new java.lang.Integer
-                        r4.<init>(r2)
-                        r7.add(r4)
-                        goto L45
-                    L5c:
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r5 = r5.$this_unsafeFlow
-                        java.lang.Object r5 = r5.emit(r7, r0)
-                        if (r5 != r1) goto L67
-                        return r1
-                    L67:
-                        kotlin.Unit r5 = kotlin.Unit.INSTANCE
-                        return r5
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.shade.ui.viewmodel.ShadeHeaderViewModel$special$$inlined$map$3.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        List list = (List) obj;
+                        ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(list, 10));
+                        Iterator it = list.iterator();
+                        while (it.hasNext()) {
+                            arrayList.add(new Integer(((SubscriptionModel) it.next()).subscriptionId));
+                        }
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(arrayList, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = filteredSubscriptions.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         });
         this.privacyItems = privacyChipInteractor.privacyItems;
@@ -416,68 +432,48 @@ public final class ShadeHeaderViewModel extends ExclusiveActivatable {
         this.isPrivacyChipEnabled = privacyChipInteractor.isChipEnabled;
         this.longerPattern = context.getString(R.string.abbrev_wday_month_day_no_year_alarm);
         this.shorterPattern = context.getString(R.string.abbrev_month_day_no_year);
-        ChannelFlowTransformLatest mapLatest = FlowKt.mapLatest(shadeHeaderClockInteractor.onTimezoneOrLocaleChanged, new ShadeHeaderViewModel$longerDateFormat$1(this, null));
-        this.longerDateFormat = mapLatest;
-        ChannelFlowTransformLatest mapLatest2 = FlowKt.mapLatest(shadeHeaderClockInteractor.onTimezoneOrLocaleChanged, new ShadeHeaderViewModel$shorterDateFormat$1(this, null));
-        this.shorterDateFormat = mapLatest2;
+        ChannelFlowTransformLatest channelFlowTransformLatestMapLatest = FlowKt.mapLatest(shadeHeaderClockInteractor.onTimezoneOrLocaleChanged, new ShadeHeaderViewModel$longerDateFormat$1(this, null));
+        this.longerDateFormat = channelFlowTransformLatestMapLatest;
+        ChannelFlowTransformLatest channelFlowTransformLatestMapLatest2 = FlowKt.mapLatest(shadeHeaderClockInteractor.onTimezoneOrLocaleChanged, new ShadeHeaderViewModel$shorterDateFormat$1(this, null));
+        this.shorterDateFormat = channelFlowTransformLatestMapLatest2;
         ShadeHeaderViewModel$longerDateText$2 shadeHeaderViewModel$longerDateText$2 = new ShadeHeaderViewModel$longerDateText$2(null);
         ShadeHeaderClockInteractor$special$$inlined$map$1 shadeHeaderClockInteractor$special$$inlined$map$1 = shadeHeaderClockInteractor.currentTime;
-        this.longerDateText$delegate = hydrator.hydratedStateOf("longerDateText", "", new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(mapLatest, shadeHeaderClockInteractor$special$$inlined$map$1, shadeHeaderViewModel$longerDateText$2));
-        this.shorterDateText$delegate = hydrator.hydratedStateOf("shorterDateText", "", new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(mapLatest2, shadeHeaderClockInteractor$special$$inlined$map$1, new ShadeHeaderViewModel$shorterDateText$2(null)));
+        this.longerDateText$delegate = hydrator.hydratedStateOf("longerDateText", "", new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(channelFlowTransformLatestMapLatest, shadeHeaderClockInteractor$special$$inlined$map$1, shadeHeaderViewModel$longerDateText$2));
+        this.shorterDateText$delegate = hydrator.hydratedStateOf("shorterDateText", "", new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(channelFlowTransformLatestMapLatest2, shadeHeaderClockInteractor$special$$inlined$map$1, new ShadeHeaderViewModel$shorterDateText$2(null)));
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     @Override // com.android.systemui.lifecycle.ExclusiveActivatable
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object onActivated(kotlin.coroutines.Continuation r5) {
-        /*
-            r4 = this;
-            boolean r0 = r5 instanceof com.android.systemui.shade.ui.viewmodel.ShadeHeaderViewModel$onActivated$1
-            if (r0 == 0) goto L13
-            r0 = r5
-            com.android.systemui.shade.ui.viewmodel.ShadeHeaderViewModel$onActivated$1 r0 = (com.android.systemui.shade.ui.viewmodel.ShadeHeaderViewModel$onActivated$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            com.android.systemui.shade.ui.viewmodel.ShadeHeaderViewModel$onActivated$1 r0 = new com.android.systemui.shade.ui.viewmodel.ShadeHeaderViewModel$onActivated$1
-            r0.<init>(r4, r5)
-        L18:
-            java.lang.Object r5 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L2f
-            if (r2 == r3) goto L2b
-            java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-            java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-            r4.<init>(r5)
-            throw r4
-        L2b:
-            kotlin.ResultKt.throwOnFailure(r5)
-            goto L41
-        L2f:
-            kotlin.ResultKt.throwOnFailure(r5)
-            com.android.systemui.shade.ui.viewmodel.ShadeHeaderViewModel$onActivated$2 r5 = new com.android.systemui.shade.ui.viewmodel.ShadeHeaderViewModel$onActivated$2
-            r2 = 0
-            r5.<init>(r4, r2)
-            r0.label = r3
-            java.lang.Object r4 = kotlinx.coroutines.CoroutineScopeKt.coroutineScope(r5, r0)
-            if (r4 != r1) goto L41
-            return r1
-        L41:
-            kotlin.KotlinNothingValueException r4 = new kotlin.KotlinNothingValueException
-            r4.<init>()
-            throw r4
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.shade.ui.viewmodel.ShadeHeaderViewModel.onActivated(kotlin.coroutines.Continuation):java.lang.Object");
+    public final Object onActivated(Continuation continuation) {
+        AnonymousClass1 anonymousClass1;
+        if (continuation instanceof AnonymousClass1) {
+            anonymousClass1 = (AnonymousClass1) continuation;
+            int i = anonymousClass1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                anonymousClass1.label = i - Integer.MIN_VALUE;
+            } else {
+                anonymousClass1 = new AnonymousClass1(continuation);
+            }
+        }
+        Object obj = anonymousClass1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = anonymousClass1.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(obj);
+            AnonymousClass2 anonymousClass2 = new AnonymousClass2(null);
+            anonymousClass1.label = 1;
+            if (CoroutineScopeKt.coroutineScope(anonymousClass2, anonymousClass1) == coroutineSingletons) {
+                return coroutineSingletons;
+            }
+        } else {
+            if (i2 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+        }
+        throw new KotlinNothingValueException();
     }
 }

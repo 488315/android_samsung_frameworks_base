@@ -13,6 +13,9 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.RepeatOnLifecycleKt;
 import com.android.app.tracing.coroutines.CoroutineTracingKt;
 import com.android.keyguard.ClockEventController;
 import com.android.systemui.broadcast.BroadcastDispatcher;
@@ -22,8 +25,11 @@ import com.android.systemui.flags.Flags;
 import com.android.systemui.flags.RefactorFlagUtils;
 import com.android.systemui.keyguard.domain.interactor.KeyguardInteractor;
 import com.android.systemui.keyguard.domain.interactor.KeyguardTransitionInteractor;
+import com.android.systemui.keyguard.shared.model.Edge;
+import com.android.systemui.keyguard.shared.model.KeyguardState;
+import com.android.systemui.keyguard.shared.model.TransitionState;
+import com.android.systemui.keyguard.shared.model.TransitionStep;
 import com.android.systemui.lifecycle.RepeatWhenAttachedKt;
-import com.android.systemui.lifecycle.RepeatWhenAttachedKt$repeatWhenAttached$1;
 import com.android.systemui.log.core.LogLevel;
 import com.android.systemui.log.core.LogMessage;
 import com.android.systemui.log.core.Logger;
@@ -60,16 +66,27 @@ import java.util.Locale;
 import java.util.TimeZone;
 import java.util.concurrent.Executor;
 import kotlin.NoWhenBranchMatchedException;
+import kotlin.ResultKt;
+import kotlin.Unit;
 import kotlin.collections.CollectionsKt__IterablesKt;
+import kotlin.coroutines.Continuation;
 import kotlin.coroutines.CoroutineContext;
 import kotlin.coroutines.EmptyCoroutineContext;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
+import kotlin.jvm.functions.Function2;
+import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.Job;
+import kotlinx.coroutines.flow.Flow;
+import kotlinx.coroutines.flow.FlowCollector;
+import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
+import kotlinx.coroutines.flow.internal.ChannelLimitedFlowMerge;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ClockEventController {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -83,7 +100,7 @@ public class ClockEventController {
     public final ClockEventController$configListener$1 configListener;
     public final ConfigurationController configurationController;
     public final Context context;
-    public RepeatWhenAttachedKt$repeatWhenAttached$1 disposableHandle;
+    public RepeatWhenAttachedKt.C09181 disposableHandle;
     public final StateFlowImpl dozeAmount;
     public final FeatureFlagsClassic featureFlags;
     public boolean isCharging;
@@ -111,7 +128,6 @@ public class ClockEventController {
     public final ZenModeController zenModeController;
     public final ZenModeInteractor zenModeInteractor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -121,7 +137,6 @@ public class ClockEventController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TimeListener {
         public final ClockFaceController clockFace;
         public final DelayableExecutor executor;
@@ -129,22 +144,21 @@ public class ClockEventController {
         public final ClockEventController$TimeListener$predrawListener$1 predrawListener = new ViewTreeObserver.OnPreDrawListener() { // from class: com.android.keyguard.ClockEventController$TimeListener$predrawListener$1
             @Override // android.view.ViewTreeObserver.OnPreDrawListener
             public final boolean onPreDraw() {
-                ClockEventController.TimeListener.this.clockFace.getEvents().onTimeTick();
+                this.this$0.clockFace.getEvents().onTimeTick();
                 return true;
             }
         };
         public final ClockEventController$TimeListener$secondsRunnable$1 secondsRunnable = new Runnable() { // from class: com.android.keyguard.ClockEventController$TimeListener$secondsRunnable$1
             @Override // java.lang.Runnable
             public final void run() {
-                ClockEventController.TimeListener timeListener = ClockEventController.TimeListener.this;
+                ClockEventController.TimeListener timeListener = this.this$0;
                 if (timeListener.isRunning) {
                     timeListener.executor.executeDelayed(this, 990L);
-                    ClockEventController.TimeListener.this.clockFace.getEvents().onTimeTick();
+                    this.this$0.clockFace.getEvents().onTimeTick();
                 }
             }
         };
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public abstract /* synthetic */ class WhenMappings {
             public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -205,6 +219,786 @@ public class ClockEventController {
         }
     }
 
+    /* renamed from: com.android.keyguard.ClockEventController$listenForAnyStateToAodTransition$1, reason: invalid class name */
+    final class AnonymousClass1 extends SuspendLambda implements Function2 {
+        int label;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(2, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return ClockEventController.this.new AnonymousClass1(continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((AnonymousClass1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                final Flow flowTransition = ClockEventController.this.keyguardTransitionInteractor.transition(Edge.Companion.create$default(Edge.Companion, null, KeyguardState.AOD, 1));
+                final Flow flow = new Flow() { // from class: com.android.keyguard.ClockEventController$listenForAnyStateToAodTransition$1$invokeSuspend$$inlined$filter$1
+
+                    /* renamed from: com.android.keyguard.ClockEventController$listenForAnyStateToAodTransition$1$invokeSuspend$$inlined$filter$1$2, reason: invalid class name */
+                    public final class AnonymousClass2 implements FlowCollector {
+                        public final /* synthetic */ FlowCollector $this_unsafeFlow;
+
+                        /* renamed from: com.android.keyguard.ClockEventController$listenForAnyStateToAodTransition$1$invokeSuspend$$inlined$filter$1$2$1, reason: invalid class name */
+                        public final class AnonymousClass1 extends ContinuationImpl {
+                            Object L$0;
+                            Object L$1;
+                            int label;
+                            /* synthetic */ Object result;
+
+                            public AnonymousClass1(Continuation continuation) {
+                                super(continuation);
+                            }
+
+                            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+                            public final Object invokeSuspend(Object obj) {
+                                this.result = obj;
+                                this.label |= Integer.MIN_VALUE;
+                                return AnonymousClass2.this.emit(null, this);
+                            }
+                        }
+
+                        public AnonymousClass2(FlowCollector flowCollector) {
+                            this.$this_unsafeFlow = flowCollector;
+                        }
+
+                        /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
+                        @Override // kotlinx.coroutines.flow.FlowCollector
+                        /*
+                            Code decompiled incorrectly, please refer to instructions dump.
+                        */
+                        public final Object emit(Object obj, Continuation continuation) {
+                            AnonymousClass1 anonymousClass1;
+                            if (continuation instanceof AnonymousClass1) {
+                                anonymousClass1 = (AnonymousClass1) continuation;
+                                int i = anonymousClass1.label;
+                                if ((i & Integer.MIN_VALUE) != 0) {
+                                    anonymousClass1.label = i - Integer.MIN_VALUE;
+                                } else {
+                                    anonymousClass1 = new AnonymousClass1(continuation);
+                                }
+                            }
+                            Object obj2 = anonymousClass1.result;
+                            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                            int i2 = anonymousClass1.label;
+                            if (i2 == 0) {
+                                ResultKt.throwOnFailure(obj2);
+                                if (((TransitionStep) obj).transitionState == TransitionState.STARTED) {
+                                    anonymousClass1.label = 1;
+                                    if (this.$this_unsafeFlow.emit(obj, anonymousClass1) == coroutineSingletons) {
+                                        return coroutineSingletons;
+                                    }
+                                }
+                            } else {
+                                if (i2 != 1) {
+                                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                                }
+                                ResultKt.throwOnFailure(obj2);
+                            }
+                            return Unit.INSTANCE;
+                        }
+                    }
+
+                    @Override // kotlinx.coroutines.flow.Flow
+                    public final Object collect(FlowCollector flowCollector, Continuation continuation) {
+                        Object objCollect = flowTransition.collect(new AnonymousClass2(flowCollector), continuation);
+                        return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
+                    }
+                };
+                Flow flow2 = new Flow() { // from class: com.android.keyguard.ClockEventController$listenForAnyStateToAodTransition$1$invokeSuspend$$inlined$filter$2
+
+                    /* renamed from: com.android.keyguard.ClockEventController$listenForAnyStateToAodTransition$1$invokeSuspend$$inlined$filter$2$2, reason: invalid class name */
+                    public final class AnonymousClass2 implements FlowCollector {
+                        public final /* synthetic */ FlowCollector $this_unsafeFlow;
+
+                        /* renamed from: com.android.keyguard.ClockEventController$listenForAnyStateToAodTransition$1$invokeSuspend$$inlined$filter$2$2$1, reason: invalid class name */
+                        public final class AnonymousClass1 extends ContinuationImpl {
+                            Object L$0;
+                            Object L$1;
+                            int label;
+                            /* synthetic */ Object result;
+
+                            public AnonymousClass1(Continuation continuation) {
+                                super(continuation);
+                            }
+
+                            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+                            public final Object invokeSuspend(Object obj) {
+                                this.result = obj;
+                                this.label |= Integer.MIN_VALUE;
+                                return AnonymousClass2.this.emit(null, this);
+                            }
+                        }
+
+                        public AnonymousClass2(FlowCollector flowCollector) {
+                            this.$this_unsafeFlow = flowCollector;
+                        }
+
+                        /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
+                        @Override // kotlinx.coroutines.flow.FlowCollector
+                        /*
+                            Code decompiled incorrectly, please refer to instructions dump.
+                        */
+                        public final Object emit(Object obj, Continuation continuation) {
+                            AnonymousClass1 anonymousClass1;
+                            if (continuation instanceof AnonymousClass1) {
+                                anonymousClass1 = (AnonymousClass1) continuation;
+                                int i = anonymousClass1.label;
+                                if ((i & Integer.MIN_VALUE) != 0) {
+                                    anonymousClass1.label = i - Integer.MIN_VALUE;
+                                } else {
+                                    anonymousClass1 = new AnonymousClass1(continuation);
+                                }
+                            }
+                            Object obj2 = anonymousClass1.result;
+                            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                            int i2 = anonymousClass1.label;
+                            if (i2 == 0) {
+                                ResultKt.throwOnFailure(obj2);
+                                if (((TransitionStep) obj).from != KeyguardState.LOCKSCREEN) {
+                                    anonymousClass1.label = 1;
+                                    if (this.$this_unsafeFlow.emit(obj, anonymousClass1) == coroutineSingletons) {
+                                        return coroutineSingletons;
+                                    }
+                                }
+                            } else {
+                                if (i2 != 1) {
+                                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                                }
+                                ResultKt.throwOnFailure(obj2);
+                            }
+                            return Unit.INSTANCE;
+                        }
+                    }
+
+                    @Override // kotlinx.coroutines.flow.Flow
+                    public final Object collect(FlowCollector flowCollector, Continuation continuation) {
+                        Object objCollect = flow.collect(new AnonymousClass2(flowCollector), continuation);
+                        return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
+                    }
+                };
+                final ClockEventController clockEventController = ClockEventController.this;
+                FlowCollector flowCollector = new FlowCollector() { // from class: com.android.keyguard.ClockEventController.listenForAnyStateToAodTransition.1.3
+                    @Override // kotlinx.coroutines.flow.FlowCollector
+                    public final Object emit(Object obj2, Continuation continuation) {
+                        int i2 = ClockEventController.$r8$clinit;
+                        clockEventController.handleDoze(1.0f);
+                        return Unit.INSTANCE;
+                    }
+                };
+                this.label = 1;
+                if (flow2.collect(flowCollector, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            return Unit.INSTANCE;
+        }
+    }
+
+    /* renamed from: com.android.keyguard.ClockEventController$listenForAnyStateToDozingTransition$1, reason: invalid class name and case insensitive filesystem */
+    final class C07701 extends SuspendLambda implements Function2 {
+        int label;
+
+        public C07701(Continuation continuation) {
+            super(2, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return ClockEventController.this.new C07701(continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((C07701) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                final Flow flowTransition = ClockEventController.this.keyguardTransitionInteractor.transition(Edge.Companion.create$default(Edge.Companion, null, KeyguardState.DOZING, 1));
+                Flow flow = new Flow() { // from class: com.android.keyguard.ClockEventController$listenForAnyStateToDozingTransition$1$invokeSuspend$$inlined$filter$1
+
+                    /* renamed from: com.android.keyguard.ClockEventController$listenForAnyStateToDozingTransition$1$invokeSuspend$$inlined$filter$1$2, reason: invalid class name */
+                    public final class AnonymousClass2 implements FlowCollector {
+                        public final /* synthetic */ FlowCollector $this_unsafeFlow;
+
+                        /* renamed from: com.android.keyguard.ClockEventController$listenForAnyStateToDozingTransition$1$invokeSuspend$$inlined$filter$1$2$1, reason: invalid class name */
+                        public final class AnonymousClass1 extends ContinuationImpl {
+                            Object L$0;
+                            Object L$1;
+                            int label;
+                            /* synthetic */ Object result;
+
+                            public AnonymousClass1(Continuation continuation) {
+                                super(continuation);
+                            }
+
+                            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+                            public final Object invokeSuspend(Object obj) {
+                                this.result = obj;
+                                this.label |= Integer.MIN_VALUE;
+                                return AnonymousClass2.this.emit(null, this);
+                            }
+                        }
+
+                        public AnonymousClass2(FlowCollector flowCollector) {
+                            this.$this_unsafeFlow = flowCollector;
+                        }
+
+                        /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
+                        @Override // kotlinx.coroutines.flow.FlowCollector
+                        /*
+                            Code decompiled incorrectly, please refer to instructions dump.
+                        */
+                        public final Object emit(Object obj, Continuation continuation) {
+                            AnonymousClass1 anonymousClass1;
+                            if (continuation instanceof AnonymousClass1) {
+                                anonymousClass1 = (AnonymousClass1) continuation;
+                                int i = anonymousClass1.label;
+                                if ((i & Integer.MIN_VALUE) != 0) {
+                                    anonymousClass1.label = i - Integer.MIN_VALUE;
+                                } else {
+                                    anonymousClass1 = new AnonymousClass1(continuation);
+                                }
+                            }
+                            Object obj2 = anonymousClass1.result;
+                            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                            int i2 = anonymousClass1.label;
+                            if (i2 == 0) {
+                                ResultKt.throwOnFailure(obj2);
+                                if (((TransitionStep) obj).transitionState == TransitionState.FINISHED) {
+                                    anonymousClass1.label = 1;
+                                    if (this.$this_unsafeFlow.emit(obj, anonymousClass1) == coroutineSingletons) {
+                                        return coroutineSingletons;
+                                    }
+                                }
+                            } else {
+                                if (i2 != 1) {
+                                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                                }
+                                ResultKt.throwOnFailure(obj2);
+                            }
+                            return Unit.INSTANCE;
+                        }
+                    }
+
+                    @Override // kotlinx.coroutines.flow.Flow
+                    public final Object collect(FlowCollector flowCollector, Continuation continuation) {
+                        Object objCollect = flowTransition.collect(new AnonymousClass2(flowCollector), continuation);
+                        return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
+                    }
+                };
+                final ClockEventController clockEventController = ClockEventController.this;
+                FlowCollector flowCollector = new FlowCollector() { // from class: com.android.keyguard.ClockEventController.listenForAnyStateToDozingTransition.1.2
+                    @Override // kotlinx.coroutines.flow.FlowCollector
+                    public final Object emit(Object obj2, Continuation continuation) {
+                        int i2 = ClockEventController.$r8$clinit;
+                        clockEventController.handleDoze(1.0f);
+                        return Unit.INSTANCE;
+                    }
+                };
+                this.label = 1;
+                if (flow.collect(flowCollector, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            return Unit.INSTANCE;
+        }
+    }
+
+    /* renamed from: com.android.keyguard.ClockEventController$listenForAnyStateToLockscreenTransition$1, reason: invalid class name and case insensitive filesystem */
+    final class C07711 extends SuspendLambda implements Function2 {
+        int label;
+
+        public C07711(Continuation continuation) {
+            super(2, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return ClockEventController.this.new C07711(continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((C07711) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                final Flow flowTransition = ClockEventController.this.keyguardTransitionInteractor.transition(Edge.Companion.create$default(Edge.Companion, null, KeyguardState.LOCKSCREEN, 1));
+                final Flow flow = new Flow() { // from class: com.android.keyguard.ClockEventController$listenForAnyStateToLockscreenTransition$1$invokeSuspend$$inlined$filter$1
+
+                    /* renamed from: com.android.keyguard.ClockEventController$listenForAnyStateToLockscreenTransition$1$invokeSuspend$$inlined$filter$1$2, reason: invalid class name */
+                    public final class AnonymousClass2 implements FlowCollector {
+                        public final /* synthetic */ FlowCollector $this_unsafeFlow;
+
+                        /* renamed from: com.android.keyguard.ClockEventController$listenForAnyStateToLockscreenTransition$1$invokeSuspend$$inlined$filter$1$2$1, reason: invalid class name */
+                        public final class AnonymousClass1 extends ContinuationImpl {
+                            Object L$0;
+                            Object L$1;
+                            int label;
+                            /* synthetic */ Object result;
+
+                            public AnonymousClass1(Continuation continuation) {
+                                super(continuation);
+                            }
+
+                            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+                            public final Object invokeSuspend(Object obj) {
+                                this.result = obj;
+                                this.label |= Integer.MIN_VALUE;
+                                return AnonymousClass2.this.emit(null, this);
+                            }
+                        }
+
+                        public AnonymousClass2(FlowCollector flowCollector) {
+                            this.$this_unsafeFlow = flowCollector;
+                        }
+
+                        /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
+                        @Override // kotlinx.coroutines.flow.FlowCollector
+                        /*
+                            Code decompiled incorrectly, please refer to instructions dump.
+                        */
+                        public final Object emit(Object obj, Continuation continuation) {
+                            AnonymousClass1 anonymousClass1;
+                            if (continuation instanceof AnonymousClass1) {
+                                anonymousClass1 = (AnonymousClass1) continuation;
+                                int i = anonymousClass1.label;
+                                if ((i & Integer.MIN_VALUE) != 0) {
+                                    anonymousClass1.label = i - Integer.MIN_VALUE;
+                                } else {
+                                    anonymousClass1 = new AnonymousClass1(continuation);
+                                }
+                            }
+                            Object obj2 = anonymousClass1.result;
+                            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                            int i2 = anonymousClass1.label;
+                            if (i2 == 0) {
+                                ResultKt.throwOnFailure(obj2);
+                                if (((TransitionStep) obj).transitionState == TransitionState.STARTED) {
+                                    anonymousClass1.label = 1;
+                                    if (this.$this_unsafeFlow.emit(obj, anonymousClass1) == coroutineSingletons) {
+                                        return coroutineSingletons;
+                                    }
+                                }
+                            } else {
+                                if (i2 != 1) {
+                                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                                }
+                                ResultKt.throwOnFailure(obj2);
+                            }
+                            return Unit.INSTANCE;
+                        }
+                    }
+
+                    @Override // kotlinx.coroutines.flow.Flow
+                    public final Object collect(FlowCollector flowCollector, Continuation continuation) {
+                        Object objCollect = flowTransition.collect(new AnonymousClass2(flowCollector), continuation);
+                        return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
+                    }
+                };
+                Flow flow2 = new Flow() { // from class: com.android.keyguard.ClockEventController$listenForAnyStateToLockscreenTransition$1$invokeSuspend$$inlined$filter$2
+
+                    /* renamed from: com.android.keyguard.ClockEventController$listenForAnyStateToLockscreenTransition$1$invokeSuspend$$inlined$filter$2$2, reason: invalid class name */
+                    public final class AnonymousClass2 implements FlowCollector {
+                        public final /* synthetic */ FlowCollector $this_unsafeFlow;
+
+                        /* renamed from: com.android.keyguard.ClockEventController$listenForAnyStateToLockscreenTransition$1$invokeSuspend$$inlined$filter$2$2$1, reason: invalid class name */
+                        public final class AnonymousClass1 extends ContinuationImpl {
+                            Object L$0;
+                            Object L$1;
+                            int label;
+                            /* synthetic */ Object result;
+
+                            public AnonymousClass1(Continuation continuation) {
+                                super(continuation);
+                            }
+
+                            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+                            public final Object invokeSuspend(Object obj) {
+                                this.result = obj;
+                                this.label |= Integer.MIN_VALUE;
+                                return AnonymousClass2.this.emit(null, this);
+                            }
+                        }
+
+                        public AnonymousClass2(FlowCollector flowCollector) {
+                            this.$this_unsafeFlow = flowCollector;
+                        }
+
+                        /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
+                        @Override // kotlinx.coroutines.flow.FlowCollector
+                        /*
+                            Code decompiled incorrectly, please refer to instructions dump.
+                        */
+                        public final Object emit(Object obj, Continuation continuation) {
+                            AnonymousClass1 anonymousClass1;
+                            if (continuation instanceof AnonymousClass1) {
+                                anonymousClass1 = (AnonymousClass1) continuation;
+                                int i = anonymousClass1.label;
+                                if ((i & Integer.MIN_VALUE) != 0) {
+                                    anonymousClass1.label = i - Integer.MIN_VALUE;
+                                } else {
+                                    anonymousClass1 = new AnonymousClass1(continuation);
+                                }
+                            }
+                            Object obj2 = anonymousClass1.result;
+                            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                            int i2 = anonymousClass1.label;
+                            if (i2 == 0) {
+                                ResultKt.throwOnFailure(obj2);
+                                if (((TransitionStep) obj).from != KeyguardState.AOD) {
+                                    anonymousClass1.label = 1;
+                                    if (this.$this_unsafeFlow.emit(obj, anonymousClass1) == coroutineSingletons) {
+                                        return coroutineSingletons;
+                                    }
+                                }
+                            } else {
+                                if (i2 != 1) {
+                                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                                }
+                                ResultKt.throwOnFailure(obj2);
+                            }
+                            return Unit.INSTANCE;
+                        }
+                    }
+
+                    @Override // kotlinx.coroutines.flow.Flow
+                    public final Object collect(FlowCollector flowCollector, Continuation continuation) {
+                        Object objCollect = flow.collect(new AnonymousClass2(flowCollector), continuation);
+                        return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
+                    }
+                };
+                final ClockEventController clockEventController = ClockEventController.this;
+                FlowCollector flowCollector = new FlowCollector() { // from class: com.android.keyguard.ClockEventController.listenForAnyStateToLockscreenTransition.1.3
+                    @Override // kotlinx.coroutines.flow.FlowCollector
+                    public final Object emit(Object obj2, Continuation continuation) {
+                        int i2 = ClockEventController.$r8$clinit;
+                        clockEventController.handleDoze(0.0f);
+                        return Unit.INSTANCE;
+                    }
+                };
+                this.label = 1;
+                if (flow2.collect(flowCollector, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            return Unit.INSTANCE;
+        }
+    }
+
+    /* renamed from: com.android.keyguard.ClockEventController$listenForDozeAmountTransition$1, reason: invalid class name and case insensitive filesystem */
+    final class C07721 extends SuspendLambda implements Function2 {
+        int label;
+
+        public C07721(Continuation continuation) {
+            super(2, continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return ClockEventController.this.new C07721(continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((C07721) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                KeyguardTransitionInteractor keyguardTransitionInteractor = ClockEventController.this.keyguardTransitionInteractor;
+                Edge.Companion companion = Edge.Companion;
+                KeyguardState keyguardState = KeyguardState.AOD;
+                KeyguardState keyguardState2 = KeyguardState.LOCKSCREEN;
+                companion.getClass();
+                final Flow flowTransition = keyguardTransitionInteractor.transition(new Edge.StateToState(keyguardState, keyguardState2));
+                final ChannelLimitedFlowMerge channelLimitedFlowMergeMerge = FlowKt.merge(new Flow() { // from class: com.android.keyguard.ClockEventController$listenForDozeAmountTransition$1$invokeSuspend$$inlined$map$1
+
+                    /* renamed from: com.android.keyguard.ClockEventController$listenForDozeAmountTransition$1$invokeSuspend$$inlined$map$1$2, reason: invalid class name */
+                    public final class AnonymousClass2 implements FlowCollector {
+                        public final /* synthetic */ FlowCollector $this_unsafeFlow;
+
+                        /* renamed from: com.android.keyguard.ClockEventController$listenForDozeAmountTransition$1$invokeSuspend$$inlined$map$1$2$1, reason: invalid class name */
+                        public final class AnonymousClass1 extends ContinuationImpl {
+                            Object L$0;
+                            int label;
+                            /* synthetic */ Object result;
+
+                            public AnonymousClass1(Continuation continuation) {
+                                super(continuation);
+                            }
+
+                            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+                            public final Object invokeSuspend(Object obj) {
+                                this.result = obj;
+                                this.label |= Integer.MIN_VALUE;
+                                return AnonymousClass2.this.emit(null, this);
+                            }
+                        }
+
+                        public AnonymousClass2(FlowCollector flowCollector) {
+                            this.$this_unsafeFlow = flowCollector;
+                        }
+
+                        /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
+                        @Override // kotlinx.coroutines.flow.FlowCollector
+                        /*
+                            Code decompiled incorrectly, please refer to instructions dump.
+                        */
+                        public final Object emit(Object obj, Continuation continuation) {
+                            AnonymousClass1 anonymousClass1;
+                            if (continuation instanceof AnonymousClass1) {
+                                anonymousClass1 = (AnonymousClass1) continuation;
+                                int i = anonymousClass1.label;
+                                if ((i & Integer.MIN_VALUE) != 0) {
+                                    anonymousClass1.label = i - Integer.MIN_VALUE;
+                                } else {
+                                    anonymousClass1 = new AnonymousClass1(continuation);
+                                }
+                            }
+                            Object obj2 = anonymousClass1.result;
+                            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                            int i2 = anonymousClass1.label;
+                            if (i2 == 0) {
+                                ResultKt.throwOnFailure(obj2);
+                                TransitionStep transitionStep = (TransitionStep) obj;
+                                TransitionStep transitionStepCopy$default = TransitionStep.copy$default(transitionStep, 1.0f - transitionStep.value, null, 27);
+                                anonymousClass1.label = 1;
+                                if (this.$this_unsafeFlow.emit(transitionStepCopy$default, anonymousClass1) == coroutineSingletons) {
+                                    return coroutineSingletons;
+                                }
+                            } else {
+                                if (i2 != 1) {
+                                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                                }
+                                ResultKt.throwOnFailure(obj2);
+                            }
+                            return Unit.INSTANCE;
+                        }
+                    }
+
+                    @Override // kotlinx.coroutines.flow.Flow
+                    public final Object collect(FlowCollector flowCollector, Continuation continuation) {
+                        Object objCollect = flowTransition.collect(new AnonymousClass2(flowCollector), continuation);
+                        return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
+                    }
+                }, ClockEventController.this.keyguardTransitionInteractor.transition(new Edge.StateToState(keyguardState2, keyguardState)));
+                Flow flow = new Flow() { // from class: com.android.keyguard.ClockEventController$listenForDozeAmountTransition$1$invokeSuspend$$inlined$filter$1
+
+                    /* renamed from: com.android.keyguard.ClockEventController$listenForDozeAmountTransition$1$invokeSuspend$$inlined$filter$1$2, reason: invalid class name */
+                    public final class AnonymousClass2 implements FlowCollector {
+                        public final /* synthetic */ FlowCollector $this_unsafeFlow;
+
+                        /* renamed from: com.android.keyguard.ClockEventController$listenForDozeAmountTransition$1$invokeSuspend$$inlined$filter$1$2$1, reason: invalid class name */
+                        public final class AnonymousClass1 extends ContinuationImpl {
+                            Object L$0;
+                            Object L$1;
+                            int label;
+                            /* synthetic */ Object result;
+
+                            public AnonymousClass1(Continuation continuation) {
+                                super(continuation);
+                            }
+
+                            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+                            public final Object invokeSuspend(Object obj) {
+                                this.result = obj;
+                                this.label |= Integer.MIN_VALUE;
+                                return AnonymousClass2.this.emit(null, this);
+                            }
+                        }
+
+                        public AnonymousClass2(FlowCollector flowCollector) {
+                            this.$this_unsafeFlow = flowCollector;
+                        }
+
+                        /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
+                        @Override // kotlinx.coroutines.flow.FlowCollector
+                        /*
+                            Code decompiled incorrectly, please refer to instructions dump.
+                        */
+                        public final Object emit(Object obj, Continuation continuation) {
+                            AnonymousClass1 anonymousClass1;
+                            if (continuation instanceof AnonymousClass1) {
+                                anonymousClass1 = (AnonymousClass1) continuation;
+                                int i = anonymousClass1.label;
+                                if ((i & Integer.MIN_VALUE) != 0) {
+                                    anonymousClass1.label = i - Integer.MIN_VALUE;
+                                } else {
+                                    anonymousClass1 = new AnonymousClass1(continuation);
+                                }
+                            }
+                            Object obj2 = anonymousClass1.result;
+                            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                            int i2 = anonymousClass1.label;
+                            if (i2 == 0) {
+                                ResultKt.throwOnFailure(obj2);
+                                if (((TransitionStep) obj).transitionState != TransitionState.FINISHED) {
+                                    anonymousClass1.label = 1;
+                                    if (this.$this_unsafeFlow.emit(obj, anonymousClass1) == coroutineSingletons) {
+                                        return coroutineSingletons;
+                                    }
+                                }
+                            } else {
+                                if (i2 != 1) {
+                                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                                }
+                                ResultKt.throwOnFailure(obj2);
+                            }
+                            return Unit.INSTANCE;
+                        }
+                    }
+
+                    @Override // kotlinx.coroutines.flow.Flow
+                    public final Object collect(FlowCollector flowCollector, Continuation continuation) {
+                        Object objCollect = channelLimitedFlowMergeMerge.collect(new AnonymousClass2(flowCollector), continuation);
+                        return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
+                    }
+                };
+                final ClockEventController clockEventController = ClockEventController.this;
+                FlowCollector flowCollector = new FlowCollector() { // from class: com.android.keyguard.ClockEventController.listenForDozeAmountTransition.1.3
+                    @Override // kotlinx.coroutines.flow.FlowCollector
+                    public final Object emit(Object obj2, Continuation continuation) {
+                        float f = ((TransitionStep) obj2).value;
+                        int i2 = ClockEventController.$r8$clinit;
+                        clockEventController.handleDoze(f);
+                        return Unit.INSTANCE;
+                    }
+                };
+                this.label = 1;
+                if (flow.collect(flowCollector, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            return Unit.INSTANCE;
+        }
+    }
+
+    /* renamed from: com.android.keyguard.ClockEventController$registerListeners$1, reason: invalid class name and case insensitive filesystem */
+    final class C07731 extends SuspendLambda implements Function3 {
+        private /* synthetic */ Object L$0;
+        int label;
+
+        /* renamed from: com.android.keyguard.ClockEventController$registerListeners$1$1, reason: invalid class name and collision with other inner class name */
+        final class C00471 extends SuspendLambda implements Function2 {
+            private /* synthetic */ Object L$0;
+            int label;
+            final /* synthetic */ ClockEventController this$0;
+
+            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+            public C00471(ClockEventController clockEventController, Continuation continuation) {
+                super(2, continuation);
+                this.this$0 = clockEventController;
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Continuation create(Object obj, Continuation continuation) {
+                C00471 c00471 = new C00471(this.this$0, continuation);
+                c00471.L$0 = obj;
+                return c00471;
+            }
+
+            @Override // kotlin.jvm.functions.Function2
+            public final Object invoke(Object obj, Object obj2) {
+                return ((C00471) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) {
+                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                if (this.label != 0) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+                CoroutineScope coroutineScope = (CoroutineScope) this.L$0;
+                this.this$0.listenForDozeAmountTransition(coroutineScope);
+                this.this$0.listenForAnyStateToAodTransition(coroutineScope);
+                this.this$0.listenForAnyStateToLockscreenTransition(coroutineScope);
+                this.this$0.listenForAnyStateToDozingTransition(coroutineScope);
+                return Unit.INSTANCE;
+            }
+        }
+
+        public C07731(Continuation continuation) {
+            super(3, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function3
+        public final Object invoke(Object obj, Object obj2, Object obj3) {
+            C07731 c07731 = ClockEventController.this.new C07731((Continuation) obj3);
+            c07731.L$0 = (LifecycleOwner) obj;
+            return c07731.invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                LifecycleOwner lifecycleOwner = (LifecycleOwner) this.L$0;
+                Lifecycle.State state = Lifecycle.State.CREATED;
+                C00471 c00471 = new C00471(ClockEventController.this, null);
+                this.label = 1;
+                if (RepeatOnLifecycleKt.repeatOnLifecycle(lifecycleOwner, state, c00471, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            return Unit.INSTANCE;
+        }
+    }
+
     static {
         new Companion(null);
     }
@@ -228,9 +1022,9 @@ public class ClockEventController {
         this.zenModeController = zenModeController;
         this.zenModeInteractor = zenModeInteractor;
         this.userTracker = userTracker;
-        List asList = Arrays.asList(clockMessageBuffers.getInfraMessageBuffer(), clockMessageBuffers.getSmallClockMessageBuffer(), clockMessageBuffers.getLargeClockMessageBuffer());
-        ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(asList, 10));
-        Iterator it = asList.iterator();
+        List listAsList = Arrays.asList(clockMessageBuffers.getInfraMessageBuffer(), clockMessageBuffers.getSmallClockMessageBuffer(), clockMessageBuffers.getLargeClockMessageBuffer());
+        ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(listAsList, 10));
+        Iterator it = listAsList.iterator();
         while (it.hasNext()) {
             arrayList.add(new Logger((MessageBuffer) it.next(), "ClockEventController"));
         }
@@ -239,31 +1033,31 @@ public class ClockEventController {
         Flags.INSTANCE.getClass();
         featureFlagsClassic2.getClass();
         this.dozeAmount = StateFlowKt.MutableStateFlow(Float.valueOf(0.0f));
-        this.onClockBoundsChanged = StateFlowKt.MutableStateFlow(VRectF.m2809boximpl(VRectF.Companion.m2833getZERO3Hl7r_E()));
+        this.onClockBoundsChanged = StateFlowKt.MutableStateFlow(VRectF.m2827boximpl(VRectF.Companion.m2851getZERO3Hl7r_E()));
         this.clockListener = new ClockEventListener() { // from class: com.android.keyguard.ClockEventController$clockListener$1
             @Override // com.android.systemui.plugins.clocks.ClockEventListener
             /* renamed from: onBoundsChanged-TTAm5xc, reason: not valid java name */
-            public final void mo945onBoundsChangedTTAm5xc(long j) {
-                ClockEventController.this.onClockBoundsChanged.setValue(VRectF.m2809boximpl(j));
+            public final void mo947onBoundsChangedTTAm5xc(long j) {
+                this.this$0.onClockBoundsChanged.setValue(VRectF.m2827boximpl(j));
             }
         };
         this.configListener = new ConfigurationController.ConfigurationListener() { // from class: com.android.keyguard.ClockEventController$configListener$1
             @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
             public final void onDensityOrFontScaleChanged() {
-                ClockEventController.this.updateFontSizes();
+                this.this$0.updateFontSizes();
             }
 
             @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
             public final void onThemeChanged() {
                 int i = ClockEventController.$r8$clinit;
-                ClockEventController.this.updateColors();
+                this.this$0.updateColors();
             }
         };
         this.batteryCallback = new BatteryController.BatteryStateChangeCallback() { // from class: com.android.keyguard.ClockEventController$batteryCallback$1
             @Override // com.android.systemui.statusbar.policy.BatteryController.BatteryStateChangeCallback
             public final void onBatteryLevelChanged(int i, boolean z, boolean z2) {
                 ClockController clockController;
-                ClockEventController clockEventController = ClockEventController.this;
+                ClockEventController clockEventController = this.this$0;
                 if (clockEventController.isKeyguardVisible && !clockEventController.isCharging && z2 && (clockController = clockEventController.clock) != null) {
                     clockController.getSmallClock().getAnimations().charge();
                     clockController.getLargeClock().getAnimations().charge();
@@ -274,7 +1068,7 @@ public class ClockEventController {
         this.localeBroadcastReceiver = new BroadcastReceiver() { // from class: com.android.keyguard.ClockEventController$localeBroadcastReceiver$1
             @Override // android.content.BroadcastReceiver
             public final void onReceive(Context context2, Intent intent) {
-                ClockController clockController = ClockEventController.this.clock;
+                ClockController clockController = this.this$0.clock;
                 if (clockController != null) {
                     clockController.getEvents().onLocaleChanged(Locale.getDefault());
                 }
@@ -283,7 +1077,7 @@ public class ClockEventController {
         this.keyguardUpdateMonitorCallback = new KeyguardUpdateMonitorCallback() { // from class: com.android.keyguard.ClockEventController$keyguardUpdateMonitorCallback$1
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
             public final void onKeyguardVisibilityChanged(boolean z) {
-                ClockEventController clockEventController = ClockEventController.this;
+                ClockEventController clockEventController = this.this$0;
                 clockEventController.isKeyguardVisible = z;
                 if (z) {
                     refreshTime();
@@ -305,19 +1099,16 @@ public class ClockEventController {
 
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
             public final void onTimeFormatChanged(String str) {
-                boolean is24HourFormat;
-                ClockEventController clockEventController = ClockEventController.this;
+                ClockEventController clockEventController = this.this$0;
                 ClockController clockController = clockEventController.clock;
                 if (clockController != null) {
-                    ClockEvents events = clockController.getEvents();
-                    is24HourFormat = DateFormat.is24HourFormat(clockEventController.context, ((UserTrackerImpl) clockEventController.userTracker).getUserId());
-                    events.onTimeFormatChanged(is24HourFormat);
+                    clockController.getEvents().onTimeFormatChanged(DateFormat.is24HourFormat(clockEventController.context, ((UserTrackerImpl) clockEventController.userTracker).getUserId()));
                 }
             }
 
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
             public final void onTimeZoneChanged(TimeZone timeZone) {
-                ClockController clockController = ClockEventController.this.clock;
+                ClockController clockController = this.this$0.clock;
                 if (clockController != null) {
                     clockController.getEvents().onTimeZoneChanged(timeZone);
                 }
@@ -325,7 +1116,7 @@ public class ClockEventController {
 
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
             public final void onUserSwitchComplete(int i) {
-                ClockEventController clockEventController = ClockEventController.this;
+                ClockEventController clockEventController = this.this$0;
                 ClockController clockController = clockEventController.clock;
                 if (clockController != null) {
                     clockController.getEvents().onTimeFormatChanged(DateFormat.is24HourFormat(clockEventController.context, i));
@@ -335,7 +1126,7 @@ public class ClockEventController {
 
             @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
             public final void onWeatherDataChanged(WeatherData weatherData) {
-                ClockEventController clockEventController = ClockEventController.this;
+                ClockEventController clockEventController = this.this$0;
                 clockEventController.weatherData = weatherData;
                 ClockController clockController = clockEventController.clock;
                 if (clockController != null) {
@@ -348,7 +1139,7 @@ public class ClockEventController {
                 ClockFaceEvents events;
                 ClockFaceController smallClock;
                 ClockFaceEvents events2;
-                ClockEventController clockEventController = ClockEventController.this;
+                ClockEventController clockEventController = this.this$0;
                 ClockController clockController = clockEventController.clock;
                 if (clockController != null && (smallClock = clockController.getSmallClock()) != null && (events2 = smallClock.getEvents()) != null) {
                     events2.onTimeTick();
@@ -365,16 +1156,16 @@ public class ClockEventController {
 
     public static final void access$handleZenMode(final ClockEventController clockEventController, int i) {
         clockEventController.getClass();
-        ZenData.ZenMode fromInt = ZenData.ZenMode.Companion.fromInt(i);
-        if (fromInt == null) {
+        ZenData.ZenMode zenModeFromInt = ZenData.ZenMode.Companion.fromInt(i);
+        if (zenModeFromInt == null) {
             ClockEventController$$ExternalSyntheticOutline0.m(i, "Failed to get zen mode from int: ", "ClockEventController");
             return;
         }
-        final ZenData zenData = new ZenData(fromInt, fromInt == ZenData.ZenMode.OFF ? "dnd_is_off" : "dnd_is_on");
+        final ZenData zenData = new ZenData(zenModeFromInt, zenModeFromInt == ZenData.ZenMode.OFF ? "dnd_is_off" : "dnd_is_on");
         clockEventController.mainExecutor.execute(new Runnable() { // from class: com.android.keyguard.ClockEventController$handleZenMode$1$1
             @Override // java.lang.Runnable
             public final void run() {
-                ClockController clockController = ClockEventController.this.clock;
+                ClockController clockController = this.this$0.clock;
                 if (clockController != null) {
                     clockController.getEvents().onZenDataChanged(zenData);
                 }
@@ -410,17 +1201,17 @@ public class ClockEventController {
 
     @DeprecatedSysuiVisibleForTesting
     public final Job listenForAnyStateToAodTransition(CoroutineScope coroutineScope) {
-        return CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new ClockEventController$listenForAnyStateToAodTransition$1(this, null), 7);
+        return CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new AnonymousClass1(null), 7);
     }
 
     @DeprecatedSysuiVisibleForTesting
     public final Job listenForAnyStateToDozingTransition(CoroutineScope coroutineScope) {
-        return CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new ClockEventController$listenForAnyStateToDozingTransition$1(this, null), 7);
+        return CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new C07701(null), 7);
     }
 
     @DeprecatedSysuiVisibleForTesting
     public final Job listenForAnyStateToLockscreenTransition(CoroutineScope coroutineScope) {
-        return CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new ClockEventController$listenForAnyStateToLockscreenTransition$1(this, null), 7);
+        return CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new C07711(null), 7);
     }
 
     @DeprecatedSysuiVisibleForTesting
@@ -432,7 +1223,7 @@ public class ClockEventController {
 
     @DeprecatedSysuiVisibleForTesting
     public final Job listenForDozeAmountTransition(CoroutineScope coroutineScope) {
-        return CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new ClockEventController$listenForDozeAmountTransition$1(this, null), 7);
+        return CoroutineTracingKt.launchTraced$default(coroutineScope, null, null, new C07721(null), 7);
     }
 
     public final void registerListeners(View view) {
@@ -445,9 +1236,9 @@ public class ClockEventController {
         ((BatteryControllerImpl) this.batteryController).addCallback(this.batteryCallback);
         this.keyguardUpdateMonitor.registerCallback(this.keyguardUpdateMonitorCallback);
         ((ZenModeControllerImpl) this.zenModeController).addCallback(this.zenModeCallback);
-        ClockEventController$registerListeners$1 clockEventController$registerListeners$1 = new ClockEventController$registerListeners$1(this, null);
+        C07731 c07731 = new C07731(null);
         CoroutineContext coroutineContext = RepeatWhenAttachedKt.MAIN_DISPATCHER_SINGLETON;
-        this.disposableHandle = RepeatWhenAttachedKt.repeatWhenAttached(view, EmptyCoroutineContext.INSTANCE, clockEventController$registerListeners$1);
+        this.disposableHandle = RepeatWhenAttachedKt.repeatWhenAttached(view, EmptyCoroutineContext.INSTANCE, c07731);
         TimeListener timeListener = this.smallTimeListener;
         if (timeListener != null) {
             timeListener.update(getShouldTimeListenerRun());
@@ -456,7 +1247,7 @@ public class ClockEventController {
         if (timeListener2 != null) {
             timeListener2.update(getShouldTimeListenerRun());
         }
-        this.bgExecutor.execute(new Runnable() { // from class: com.android.keyguard.ClockEventController$registerListeners$2
+        this.bgExecutor.execute(new Runnable() { // from class: com.android.keyguard.ClockEventController.registerListeners.2
             @Override // java.lang.Runnable
             public final void run() {
                 ClockEventController clockEventController = ClockEventController.this;
@@ -488,17 +1279,17 @@ public class ClockEventController {
         if (clockController == null) {
             return;
         }
-        String obj = clockController.toString();
+        String string = clockController.toString();
         ArrayList arrayList = (ArrayList) this.loggers;
         int size = arrayList.size();
         int i = 0;
         while (i < size) {
-            Object obj2 = arrayList.get(i);
+            Object obj = arrayList.get(i);
             i++;
-            Logger logger = (Logger) obj2;
-            LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.DEBUG, new ClockEventController$$ExternalSyntheticLambda1(), null);
-            obtain.setStr1(obj);
-            logger.getBuffer().commit(obtain);
+            Logger logger = (Logger) obj;
+            LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.DEBUG, new ClockEventController$$ExternalSyntheticLambda1(), null);
+            logMessageObtain.setStr1(string);
+            logger.getBuffer().commit(logMessageObtain);
         }
         TypedValue typedValue = new TypedValue();
         this.context.getTheme().resolveAttribute(R.attr.isLightTheme, typedValue, true);
@@ -544,10 +1335,9 @@ public class ClockEventController {
         this.largeClockOnAttachStateChangeListener = new View.OnAttachStateChangeListener() { // from class: com.android.keyguard.ClockEventController$connectClock$10
             @Override // android.view.View.OnAttachStateChangeListener
             public final void onViewAttachedToWindow(View view) {
-                boolean is24HourFormat;
-                ClockEvents events = ClockController.this.getEvents();
-                is24HourFormat = DateFormat.is24HourFormat(r0.context, ((UserTrackerImpl) this.userTracker).getUserId());
-                events.onTimeFormatChanged(is24HourFormat);
+                ClockEvents events = clockController.getEvents();
+                ClockEventController clockEventController = this;
+                events.onTimeFormatChanged(DateFormat.is24HourFormat(clockEventController.context, ((UserTrackerImpl) clockEventController.userTracker).getUserId()));
             }
 
             @Override // android.view.View.OnAttachStateChangeListener

@@ -16,17 +16,17 @@ public abstract class FrameManager {
     }
 
     public Frame duplicateFrame(Frame frame) {
-        Frame newFrame = newFrame(frame.getFormat());
-        newFrame.setDataFromFrame(frame);
-        return newFrame;
+        Frame frameNewFrame = newFrame(frame.getFormat());
+        frameNewFrame.setDataFromFrame(frame);
+        return frameNewFrame;
     }
 
     public Frame duplicateFrameToTarget(Frame frame, int i) {
-        MutableFrameFormat mutableCopy = frame.getFormat().mutableCopy();
-        mutableCopy.setTarget(i);
-        Frame newFrame = newFrame(mutableCopy);
-        newFrame.setDataFromFrame(frame);
-        return newFrame;
+        MutableFrameFormat mutableFrameFormatMutableCopy = frame.getFormat().mutableCopy();
+        mutableFrameFormatMutableCopy.setTarget(i);
+        Frame frameNewFrame = newFrame(mutableFrameFormatMutableCopy);
+        frameNewFrame.setDataFromFrame(frame);
+        return frameNewFrame;
     }
 
     public FilterContext getContext() {

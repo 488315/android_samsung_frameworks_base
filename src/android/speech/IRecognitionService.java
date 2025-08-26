@@ -77,9 +77,9 @@ public interface IRecognitionService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IRecognitionService)) {
-                return (IRecognitionService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IRecognitionService)) {
+                return (IRecognitionService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -119,31 +119,31 @@ public interface IRecognitionService extends IInterface {
             }
             if (i == 1) {
                 Intent intent = (Intent) parcel.readTypedObject(Intent.CREATOR);
-                IRecognitionListener asInterface = IRecognitionListener.Stub.asInterface(parcel.readStrongBinder());
+                IRecognitionListener iRecognitionListenerAsInterface = IRecognitionListener.Stub.asInterface(parcel.readStrongBinder());
                 AttributionSource attributionSource = (AttributionSource) parcel.readTypedObject(AttributionSource.CREATOR);
                 parcel.enforceNoDataAvail();
-                startListening(intent, asInterface, attributionSource);
+                startListening(intent, iRecognitionListenerAsInterface, attributionSource);
             } else if (i == 2) {
-                IRecognitionListener asInterface2 = IRecognitionListener.Stub.asInterface(parcel.readStrongBinder());
+                IRecognitionListener iRecognitionListenerAsInterface2 = IRecognitionListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                stopListening(asInterface2);
+                stopListening(iRecognitionListenerAsInterface2);
             } else if (i == 3) {
-                IRecognitionListener asInterface3 = IRecognitionListener.Stub.asInterface(parcel.readStrongBinder());
-                boolean readBoolean = parcel.readBoolean();
+                IRecognitionListener iRecognitionListenerAsInterface3 = IRecognitionListener.Stub.asInterface(parcel.readStrongBinder());
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                cancel(asInterface3, readBoolean);
+                cancel(iRecognitionListenerAsInterface3, z);
             } else if (i == 4) {
                 Intent intent2 = (Intent) parcel.readTypedObject(Intent.CREATOR);
                 AttributionSource attributionSource2 = (AttributionSource) parcel.readTypedObject(AttributionSource.CREATOR);
-                IRecognitionSupportCallback asInterface4 = IRecognitionSupportCallback.Stub.asInterface(parcel.readStrongBinder());
+                IRecognitionSupportCallback iRecognitionSupportCallbackAsInterface = IRecognitionSupportCallback.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                checkRecognitionSupport(intent2, attributionSource2, asInterface4);
+                checkRecognitionSupport(intent2, attributionSource2, iRecognitionSupportCallbackAsInterface);
             } else if (i == 5) {
                 Intent intent3 = (Intent) parcel.readTypedObject(Intent.CREATOR);
                 AttributionSource attributionSource3 = (AttributionSource) parcel.readTypedObject(AttributionSource.CREATOR);
-                IModelDownloadListener asInterface5 = IModelDownloadListener.Stub.asInterface(parcel.readStrongBinder());
+                IModelDownloadListener iModelDownloadListenerAsInterface = IModelDownloadListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                triggerModelDownload(intent3, attributionSource3, asInterface5);
+                triggerModelDownload(intent3, attributionSource3, iModelDownloadListenerAsInterface);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -168,68 +168,68 @@ public interface IRecognitionService extends IInterface {
 
             @Override // android.speech.IRecognitionService
             public void startListening(Intent intent, IRecognitionListener iRecognitionListener, AttributionSource attributionSource) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(intent, 0);
-                    obtain.writeStrongInterface(iRecognitionListener);
-                    obtain.writeTypedObject(attributionSource, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(intent, 0);
+                    parcelObtain.writeStrongInterface(iRecognitionListener);
+                    parcelObtain.writeTypedObject(attributionSource, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.speech.IRecognitionService
             public void stopListening(IRecognitionListener iRecognitionListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iRecognitionListener);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iRecognitionListener);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.speech.IRecognitionService
             public void cancel(IRecognitionListener iRecognitionListener, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iRecognitionListener);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iRecognitionListener);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.speech.IRecognitionService
             public void checkRecognitionSupport(Intent intent, AttributionSource attributionSource, IRecognitionSupportCallback iRecognitionSupportCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(intent, 0);
-                    obtain.writeTypedObject(attributionSource, 0);
-                    obtain.writeStrongInterface(iRecognitionSupportCallback);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(intent, 0);
+                    parcelObtain.writeTypedObject(attributionSource, 0);
+                    parcelObtain.writeStrongInterface(iRecognitionSupportCallback);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.speech.IRecognitionService
             public void triggerModelDownload(Intent intent, AttributionSource attributionSource, IModelDownloadListener iModelDownloadListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(intent, 0);
-                    obtain.writeTypedObject(attributionSource, 0);
-                    obtain.writeStrongInterface(iModelDownloadListener);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(intent, 0);
+                    parcelObtain.writeTypedObject(attributionSource, 0);
+                    parcelObtain.writeStrongInterface(iModelDownloadListener);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

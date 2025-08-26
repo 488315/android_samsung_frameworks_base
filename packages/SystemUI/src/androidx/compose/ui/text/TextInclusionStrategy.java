@@ -3,12 +3,10 @@ package androidx.compose.ui.text;
 import androidx.compose.ui.geometry.Rect;
 import androidx.compose.ui.text.TextInclusionStrategy;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public interface TextInclusionStrategy {
     public static final Companion Companion = Companion.$$INSTANCE;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public static final /* synthetic */ Companion $$INSTANCE = new Companion();
         public static final TextInclusionStrategy$Companion$$ExternalSyntheticLambda0 AnyOverlap;
@@ -27,7 +25,7 @@ public interface TextInclusionStrategy {
                             return rect.overlaps(rect2);
                         default:
                             TextInclusionStrategy.Companion companion2 = TextInclusionStrategy.Companion.$$INSTANCE;
-                            return rect2.m405containsk4lQ0M(rect.m407getCenterF1C5BW0());
+                            return rect2.m407containsk4lQ0M(rect.m409getCenterF1C5BW0());
                     }
                 }
             };
@@ -41,7 +39,7 @@ public interface TextInclusionStrategy {
                             return rect.overlaps(rect2);
                         default:
                             TextInclusionStrategy.Companion companion2 = TextInclusionStrategy.Companion.$$INSTANCE;
-                            return rect2.m405containsk4lQ0M(rect.m407getCenterF1C5BW0());
+                            return rect2.m407containsk4lQ0M(rect.m409getCenterF1C5BW0());
                     }
                 }
             };

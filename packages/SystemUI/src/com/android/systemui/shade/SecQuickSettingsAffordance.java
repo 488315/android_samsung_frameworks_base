@@ -37,7 +37,6 @@ import kotlin.Unit;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SecQuickSettingsAffordance implements ConfigurationController.ConfigurationListener {
     public static final AnimHelper.AnimProperty BOUNCING1_ANIM_ARROW_ALPHA_PROPERTY;
@@ -82,7 +81,6 @@ public final class SecQuickSettingsAffordance implements ConfigurationController
     public final ArrayList bouncing2AnimList = new ArrayList();
     public final ArrayList hideAnimList = new ArrayList();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -92,7 +90,6 @@ public final class SecQuickSettingsAffordance implements ConfigurationController
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class HideAnimatorListener extends AnimHelper.BaseAnimatorListener {
         public HideAnimatorListener(String str) {
             super("SecQuickSettingsAffordance", str, true);
@@ -123,7 +120,6 @@ public final class SecQuickSettingsAffordance implements ConfigurationController
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ShowAnimatorListener extends AnimHelper.BaseAnimatorListener {
         public ShowAnimatorListener(String str) {
             super("SecQuickSettingsAffordance", str, true);
@@ -138,8 +134,8 @@ public final class SecQuickSettingsAffordance implements ConfigurationController
                 SecQuickSettingsAffordance secQuickSettingsAffordance = SecQuickSettingsAffordance.this;
                 boolean z = secQuickSettingsAffordance.isAnimating;
                 AnimatorSet animatorSet2 = secQuickSettingsAffordance.showAnimSet;
-                Boolean valueOf = animatorSet2 != null ? Boolean.valueOf(animatorSet2.isRunning()) : null;
-                Log.d(tag, logPrefix + " onAnimationCancel isAnimating = " + z + ", isRunning = " + valueOf + ", isAttachedView = " + SecQuickSettingsAffordance.this.isAttachedView);
+                Boolean boolValueOf = animatorSet2 != null ? Boolean.valueOf(animatorSet2.isRunning()) : null;
+                Log.d(tag, logPrefix + " onAnimationCancel isAnimating = " + z + ", isRunning = " + boolValueOf + ", isAttachedView = " + SecQuickSettingsAffordance.this.isAttachedView);
             }
             setCanceled(true);
             SecQuickSettingsAffordance secQuickSettingsAffordance2 = SecQuickSettingsAffordance.this;
@@ -228,13 +224,11 @@ public final class SecQuickSettingsAffordance implements ConfigurationController
         this.settingsListener = new SettingsHelper.OnChangedCallback() { // from class: com.android.systemui.shade.SecQuickSettingsAffordance$settingsListener$1
             @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
             public final void onChanged(Uri uri) {
-                SettingsHelper settingsHelper2;
                 if (Intrinsics.areEqual(Settings.Secure.getUriFor(SettingsHelper.INDEX_SPLIT_QUICK_PANEL_REVERSED), uri)) {
-                    SecQuickSettingsAffordance secQuickSettingsAffordance = SecQuickSettingsAffordance.this;
-                    settingsHelper2 = secQuickSettingsAffordance.settingsHelper;
-                    boolean isPanelSplitReversed = settingsHelper2.isPanelSplitReversed();
-                    secQuickSettingsAffordance.isReversed = isPanelSplitReversed;
-                    Log.d("SecQuickSettingsAffordance", "OnChangedCallback isReversed = " + isPanelSplitReversed);
+                    SecQuickSettingsAffordance secQuickSettingsAffordance = this.this$0;
+                    boolean zIsPanelSplitReversed = secQuickSettingsAffordance.settingsHelper.isPanelSplitReversed();
+                    secQuickSettingsAffordance.isReversed = zIsPanelSplitReversed;
+                    Log.d("SecQuickSettingsAffordance", "OnChangedCallback isReversed = " + zIsPanelSplitReversed);
                     secQuickSettingsAffordance.removeView();
                 }
             }
@@ -244,7 +238,7 @@ public final class SecQuickSettingsAffordance implements ConfigurationController
             public final void onFolderStateChanged(boolean z) {
                 EmergencyButtonController$$ExternalSyntheticOutline0.m("onFolderStateChanged isOpened = ", "SecQuickSettingsAffordance", z);
                 AnimHelper.AnimationType[] animationTypeArr = SecQuickSettingsAffordance.INIT_PROPERTY_FIELDS;
-                SecQuickSettingsAffordance.this.removeView();
+                this.this$0.removeView();
             }
         };
         Log.d("SecQuickSettingsAffordance", "init");
@@ -262,10 +256,10 @@ public final class SecQuickSettingsAffordance implements ConfigurationController
         boolean z2 = secQuickSettingsAffordance.isShowAnimating;
         boolean z3 = secQuickSettingsAffordance.isBouncingAnimating;
         boolean z4 = secQuickSettingsAffordance.isAnimating;
-        boolean isInvalidOrientation = secQuickSettingsAffordance.isInvalidOrientation();
-        StringBuilder m = EmergencyButtonController$$ExternalSyntheticOutline0.m("hiding isVisibleView = ", ", isShowAnimating = ", ", isBouncingAnimating = ", z, z2);
-        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(m, z3, ", isAnimating = ", z4, ", isInvalidOrientation = ");
-        ActionBarContextView$$ExternalSyntheticOutline0.m(m, isInvalidOrientation, "SecQuickSettingsAffordance");
+        boolean zIsInvalidOrientation = secQuickSettingsAffordance.isInvalidOrientation();
+        StringBuilder sbM = EmergencyButtonController$$ExternalSyntheticOutline0.m("hiding isVisibleView = ", ", isShowAnimating = ", ", isBouncingAnimating = ", z, z2);
+        KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sbM, z3, ", isAnimating = ", z4, ", isInvalidOrientation = ");
+        ActionBarContextView$$ExternalSyntheticOutline0.m(sbM, zIsInvalidOrientation, "SecQuickSettingsAffordance");
         if (secQuickSettingsAffordance.settingsHelper.isRemoveAnimation() || secQuickSettingsAffordance.isInvalidOrientation()) {
             return;
         }
@@ -317,9 +311,9 @@ public final class SecQuickSettingsAffordance implements ConfigurationController
 
     public final void displayEffect(final AnimHelper.AnimationState animationState, final SecQuickSettingsAffordanceInteractor$broadcastReceiver$1$onReceive$1 secQuickSettingsAffordanceInteractor$broadcastReceiver$1$onReceive$1) {
         Log.d("SecQuickSettingsAffordance", "displayEffect animationState = " + animationState);
-        this.handler.post(new Runnable() { // from class: com.android.systemui.shade.SecQuickSettingsAffordance$displayEffect$1
+        this.handler.post(new Runnable() { // from class: com.android.systemui.shade.SecQuickSettingsAffordance.displayEffect.1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+            /* renamed from: com.android.systemui.shade.SecQuickSettingsAffordance$displayEffect$1$WhenMappings */
             public abstract /* synthetic */ class WhenMappings {
                 public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -339,7 +333,7 @@ public final class SecQuickSettingsAffordance implements ConfigurationController
 
             @Override // java.lang.Runnable
             public final void run() {
-                int i = WhenMappings.$EnumSwitchMapping$0[AnimHelper.AnimationState.this.ordinal()];
+                int i = WhenMappings.$EnumSwitchMapping$0[animationState.ordinal()];
                 if (i != 1) {
                     if (i != 2) {
                         return;
@@ -379,12 +373,12 @@ public final class SecQuickSettingsAffordance implements ConfigurationController
             boolean z4 = this.isVisibleView;
             int i = this.bouncingCount;
             boolean z5 = this.isBouncingAnimating;
-            StringBuilder m = EmergencyButtonController$$ExternalSyntheticOutline0.m("initAnimProperties VI layout visibility is GONE, isAnimating = ", ", isAttachedView = ", ", isVisibleView = ", z2, z3);
-            m.append(z4);
-            m.append(", bouncingCount = ");
-            m.append(i);
-            m.append(", isBouncingAnimating = ");
-            ActionBarContextView$$ExternalSyntheticOutline0.m(m, z5, "SecQuickSettingsAffordance");
+            StringBuilder sbM = EmergencyButtonController$$ExternalSyntheticOutline0.m("initAnimProperties VI layout visibility is GONE, isAnimating = ", ", isAttachedView = ", ", isVisibleView = ", z2, z3);
+            sbM.append(z4);
+            sbM.append(", bouncingCount = ");
+            sbM.append(i);
+            sbM.append(", isBouncingAnimating = ");
+            ActionBarContextView$$ExternalSyntheticOutline0.m(sbM, z5, "SecQuickSettingsAffordance");
             this.isAnimating = false;
             this.bouncingCount = 0;
             this.isBouncingAnimating = false;
@@ -403,13 +397,13 @@ public final class SecQuickSettingsAffordance implements ConfigurationController
     public final void onConfigChanged(Configuration configuration) {
         if (configuration != null) {
             boolean z = this.isAttachedView;
-            boolean isRemoveAnimation = this.settingsHelper.isRemoveAnimation();
+            boolean zIsRemoveAnimation = this.settingsHelper.isRemoveAnimation();
             boolean z2 = this.isRemoveView;
-            StringBuilder m = EmergencyButtonController$$ExternalSyntheticOutline0.m("onConfigChanged isAttachedView = ", ", noAnim = ", ", isRemoveView = ", z, isRemoveAnimation);
-            m.append(z2);
-            m.append(", newConfig = ");
-            m.append(configuration);
-            Log.d("SecQuickSettingsAffordance", m.toString());
+            StringBuilder sbM = EmergencyButtonController$$ExternalSyntheticOutline0.m("onConfigChanged isAttachedView = ", ", noAnim = ", ", isRemoveView = ", z, zIsRemoveAnimation);
+            sbM.append(z2);
+            sbM.append(", newConfig = ");
+            sbM.append(configuration);
+            Log.d("SecQuickSettingsAffordance", sbM.toString());
             if (!this.isAttachedView || this.settingsHelper.isRemoveAnimation() || this.isRemoveView) {
                 this.lastDensityDpi = configuration.densityDpi;
                 this.lastOrientation = configuration.orientation;
@@ -550,12 +544,12 @@ public final class SecQuickSettingsAffordance implements ConfigurationController
         float arrowTranslateY2 = getArrowTranslateY();
         AnimHelper.AnimProperty animProperty3 = BOUNCING2_ANIM_ARROW_TRANSLATION_Y_PROPERTY;
         animProperty3.setToValue(arrowTranslateY2);
-        AnimatorSet makeAnimSet$default = AnimHelper.makeAnimSet$default(animHelper, new AnimHelper.AnimPairSet[]{animPairSet4, new AnimHelper.AnimPairSet(imageView5, animProperty3)}, this.bouncing2AnimList, null, 4, null);
-        this.bouncing2AnimSet = makeAnimSet$default;
+        AnimatorSet animatorSetMakeAnimSet$default = AnimHelper.makeAnimSet$default(animHelper, new AnimHelper.AnimPairSet[]{animPairSet4, new AnimHelper.AnimPairSet(imageView5, animProperty3)}, this.bouncing2AnimList, null, 4, null);
+        this.bouncing2AnimSet = animatorSetMakeAnimSet$default;
         AnimatorSet animatorSet4 = this.bouncing1AnimSet;
         if (animatorSet4 != null) {
             secQuickSettingsAffordance = this;
-            animatorSet4.addListener(new BouncingAnimatorListener(secQuickSettingsAffordance, "Bouncing1", makeAnimSet$default, 0, 4, null));
+            animatorSet4.addListener(new BouncingAnimatorListener(secQuickSettingsAffordance, "Bouncing1", animatorSetMakeAnimSet$default, 0, 4, null));
         } else {
             secQuickSettingsAffordance = this;
         }
@@ -595,9 +589,9 @@ public final class SecQuickSettingsAffordance implements ConfigurationController
             Unit unit = Unit.INSTANCE;
             AnimHelper.AnimPairSet animPairSet = new AnimHelper.AnimPairSet(imageView, animProperty);
             ImageView imageView2 = this.glowView;
-            float floatValue = (imageView2 != null ? Float.valueOf(imageView2.getTranslationY()) : Integer.valueOf(getGlowHeight())).floatValue();
+            float fFloatValue = (imageView2 != null ? Float.valueOf(imageView2.getTranslationY()) : Integer.valueOf(getGlowHeight())).floatValue();
             AnimHelper.AnimProperty animProperty2 = HIDE_ANIM_GLOW_TRANSLATION_Y_PROPERTY;
-            animProperty2.setFromValue(floatValue);
+            animProperty2.setFromValue(fFloatValue);
             animProperty2.setToValue(getGlowHeight() * 0.8f);
             AnimHelper.AnimPairSet animPairSet2 = new AnimHelper.AnimPairSet(imageView2, animProperty2);
             ImageView imageView3 = this.arrowView;
@@ -606,14 +600,14 @@ public final class SecQuickSettingsAffordance implements ConfigurationController
             animProperty3.setFromValue(alpha2);
             AnimHelper.AnimPairSet animPairSet3 = new AnimHelper.AnimPairSet(imageView3, animProperty3);
             ImageView imageView4 = this.arrowView;
-            float floatValue2 = (imageView4 != null ? Float.valueOf(imageView4.getTranslationY()) : Integer.valueOf(getArrowTranslateY())).floatValue();
+            float fFloatValue2 = (imageView4 != null ? Float.valueOf(imageView4.getTranslationY()) : Integer.valueOf(getArrowTranslateY())).floatValue();
             AnimHelper.AnimProperty animProperty4 = HIDE_ANIM_ARROW_TRANSLATION_Y_PROPERTY;
-            animProperty4.setFromValue(floatValue2);
+            animProperty4.setFromValue(fFloatValue2);
             animProperty4.setToValue(getArrowTranslateY() * 0.8f);
-            AnimatorSet makeAnimSet = animHelper.makeAnimSet(new AnimHelper.AnimPairSet[]{animPairSet, animPairSet2, animPairSet3, new AnimHelper.AnimPairSet(imageView4, animProperty4)}, this.hideAnimList, new HideAnimatorListener("Hide"));
-            this.hideAnimSet = makeAnimSet;
-            if (makeAnimSet != null) {
-                makeAnimSet.setStartDelay(100L);
+            AnimatorSet animatorSetMakeAnimSet = animHelper.makeAnimSet(new AnimHelper.AnimPairSet[]{animPairSet, animPairSet2, animPairSet3, new AnimHelper.AnimPairSet(imageView4, animProperty4)}, this.hideAnimList, new HideAnimatorListener("Hide"));
+            this.hideAnimSet = animatorSetMakeAnimSet;
+            if (animatorSetMakeAnimSet != null) {
+                animatorSetMakeAnimSet.setStartDelay(100L);
             }
             AnimatorSet animatorSet2 = this.hideAnimSet;
             if (animatorSet2 != null) {
@@ -629,7 +623,6 @@ public final class SecQuickSettingsAffordance implements ConfigurationController
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class BouncingAnimatorListener extends AnimHelper.BaseAnimatorListener {
         public final AnimatorSet nextAnimSet;
         public final int startDelay;
@@ -647,9 +640,9 @@ public final class SecQuickSettingsAffordance implements ConfigurationController
             if (getDebug()) {
                 String tag = getTag();
                 String logPrefix = getLogPrefix();
-                boolean isCanceled = isCanceled();
+                boolean zIsCanceled = isCanceled();
                 SecQuickSettingsAffordance secQuickSettingsAffordance2 = SecQuickSettingsAffordance.this;
-                Log.d(tag, logPrefix + " onAnimationEnd isCanceled = " + isCanceled + ", bouncingCount = " + secQuickSettingsAffordance2.bouncingCount + ", isBouncingAnimating = " + secQuickSettingsAffordance2.isBouncingAnimating);
+                Log.d(tag, logPrefix + " onAnimationEnd isCanceled = " + zIsCanceled + ", bouncingCount = " + secQuickSettingsAffordance2.bouncingCount + ", isBouncingAnimating = " + secQuickSettingsAffordance2.isBouncingAnimating);
             }
             if (isCanceled() || (i = (secQuickSettingsAffordance = SecQuickSettingsAffordance.this).bouncingCount) >= 5) {
                 SecQuickSettingsAffordance secQuickSettingsAffordance3 = SecQuickSettingsAffordance.this;

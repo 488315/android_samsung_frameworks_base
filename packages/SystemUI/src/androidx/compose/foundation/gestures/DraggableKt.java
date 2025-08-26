@@ -11,7 +11,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class DraggableKt {
     public static final Function3 NoOpOnDragStarted = new DraggableKt$NoOpOnDragStarted$1(null);
@@ -32,11 +31,11 @@ public abstract class DraggableKt {
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventStart("androidx.compose.foundation.gestures.rememberDraggableState (Draggable.kt:127)");
         }
-        final MutableState rememberUpdatedState = SnapshotStateKt.rememberUpdatedState(function1, composer);
+        final MutableState mutableStateRememberUpdatedState = SnapshotStateKt.rememberUpdatedState(function1, composer);
         ComposerImpl composerImpl = (ComposerImpl) composer;
-        Object rememberedValue = composerImpl.rememberedValue();
+        Object objRememberedValue = composerImpl.rememberedValue();
         Composer.Companion.getClass();
-        if (rememberedValue == Composer.Companion.Empty) {
+        if (objRememberedValue == Composer.Companion.Empty) {
             DefaultDraggableState defaultDraggableState = new DefaultDraggableState(new Function1() { // from class: androidx.compose.foundation.gestures.DraggableKt$rememberDraggableState$1$1
                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                 /* JADX WARN: Multi-variable type inference failed */
@@ -46,15 +45,15 @@ public abstract class DraggableKt {
 
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
-                    ((Function1) rememberUpdatedState.getValue()).mo779invoke(Float.valueOf(((Number) obj).floatValue()));
+                public final Object mo781invoke(Object obj) {
+                    ((Function1) mutableStateRememberUpdatedState.getValue()).mo781invoke(Float.valueOf(((Number) obj).floatValue()));
                     return Unit.INSTANCE;
                 }
             });
             composerImpl.updateRememberedValue(defaultDraggableState);
-            rememberedValue = defaultDraggableState;
+            objRememberedValue = defaultDraggableState;
         }
-        DraggableState draggableState = (DraggableState) rememberedValue;
+        DraggableState draggableState = (DraggableState) objRememberedValue;
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventEnd();
         }

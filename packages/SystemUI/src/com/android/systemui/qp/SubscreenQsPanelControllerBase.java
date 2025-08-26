@@ -1,6 +1,7 @@
 package com.android.systemui.qp;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +25,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SubscreenQsPanelControllerBase extends ViewController implements SubscreenQSControllerContract$BaseViewController {
     public final Context mContext;
@@ -45,12 +45,12 @@ public class SubscreenQsPanelControllerBase extends ViewController implements Su
         this.mQSHostCallback = new QSHost.Callback() { // from class: com.android.systemui.qp.SubscreenQsPanelControllerBase$$ExternalSyntheticLambda0
             @Override // com.android.systemui.qs.QSHost.Callback
             public final void onTilesChanged() {
-                SubscreenQsPanelControllerBase.this.setTiles();
+                this.f$0.setTiles();
             }
         };
         ?? r2 = new DisplayLifecycle.Observer() { // from class: com.android.systemui.qp.SubscreenQsPanelControllerBase.1
             @Override // com.android.systemui.keyguard.DisplayLifecycle.Observer
-            public final void onFolderStateChanged(boolean z) {
+            public final void onFolderStateChanged(boolean z) throws Resources.NotFoundException {
                 EmergencyButtonController$$ExternalSyntheticOutline0.m("onFolderStateChanged", "SubscreenQsPanelControllerBase", z);
                 SubscreenQsPanelControllerBase subscreenQsPanelControllerBase = SubscreenQsPanelControllerBase.this;
                 if (z) {
@@ -92,7 +92,7 @@ public class SubscreenQsPanelControllerBase extends ViewController implements Su
     }
 
     @Override // com.android.systemui.util.ViewController
-    public final void onInit() {
+    public final void onInit() throws Resources.NotFoundException {
         super.onInit();
         Objects.toString(this.mView);
         SubroomQuickSettingsQSPanelBaseView subroomQuickSettingsQSPanelBaseView = (SubroomQuickSettingsQSPanelBaseView) this.mView;
@@ -130,7 +130,7 @@ public class SubscreenQsPanelControllerBase extends ViewController implements Su
     }
 
     @Override // com.android.systemui.util.ViewController
-    public final void onViewAttached() {
+    public final void onViewAttached() throws Resources.NotFoundException {
         Objects.toString(this.mView);
         QSHost qSHost = this.mSubScreenTileHost;
         if (qSHost != null) {

@@ -46,9 +46,9 @@ public interface IInternalServiceRetriever extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IInternalServiceRetriever.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IInternalServiceRetriever)) {
-                return (IInternalServiceRetriever) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IInternalServiceRetriever.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IInternalServiceRetriever)) {
+                return (IInternalServiceRetriever) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -101,16 +101,16 @@ public interface IInternalServiceRetriever extends IInterface {
 
             @Override // com.android.internal.telecom.IInternalServiceRetriever
             public IDeviceIdleControllerAdapter getDeviceIdleController() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IInternalServiceRetriever.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IDeviceIdleControllerAdapter.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(IInternalServiceRetriever.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IDeviceIdleControllerAdapter.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

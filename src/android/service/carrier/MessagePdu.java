@@ -13,12 +13,12 @@ public final class MessagePdu implements Parcelable {
         @Override // android.os.Parcelable.Creator
         public MessagePdu createFromParcel(Parcel parcel) {
             ArrayList arrayList;
-            int readInt = parcel.readInt();
-            if (readInt == -1) {
+            int i = parcel.readInt();
+            if (i == -1) {
                 arrayList = null;
             } else {
-                ArrayList arrayList2 = new ArrayList(readInt);
-                for (int i = 0; i < readInt; i++) {
+                ArrayList arrayList2 = new ArrayList(i);
+                for (int i2 = 0; i2 < i; i2++) {
                     arrayList2.add(parcel.createByteArray());
                 }
                 arrayList = arrayList2;

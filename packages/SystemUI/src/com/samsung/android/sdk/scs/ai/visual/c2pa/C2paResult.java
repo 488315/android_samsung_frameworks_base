@@ -1,6 +1,5 @@
 package com.samsung.android.sdk.scs.ai.visual.c2pa;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class C2paResult {
     private String errorString;
@@ -9,7 +8,6 @@ public class C2paResult {
     private boolean isTrusted;
     private String manifestResult;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Builder {
         private boolean isSuccess = false;
         private boolean isTrusted = false;

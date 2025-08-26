@@ -19,18 +19,18 @@ import java.util.List;
 import kotlin.Pair;
 import kotlin.collections.CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1;
 import kotlin.jvm.internal.Intrinsics;
-import kotlin.sequences.MergingSequence$iterator$1;
+import kotlin.sequences.MergingSequence;
+import kotlin.sequences.MergingSequence.AnonymousClass1;
 import kotlin.sequences.SequencesKt___SequencesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class MediaProcessingHelperKt {
     public static final boolean areCustomActionListsEqual(List list, List list2) {
         if (list != list2) {
             if (list != null && list2 != null && list.size() == list2.size()) {
-                MergingSequence$iterator$1 mergingSequence$iterator$1 = new MergingSequence$iterator$1(SequencesKt___SequencesKt.zip(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(list), new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(list2)));
-                while (mergingSequence$iterator$1.hasNext()) {
-                    Pair pair = (Pair) mergingSequence$iterator$1.next();
+                MergingSequence.AnonymousClass1 anonymousClass1 = SequencesKt___SequencesKt.zip(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(list), new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(list2)).new AnonymousClass1();
+                while (anonymousClass1.hasNext()) {
+                    Pair pair = (Pair) anonymousClass1.next();
                     PlaybackState.CustomAction customAction = (PlaybackState.CustomAction) pair.component1();
                     PlaybackState.CustomAction customAction2 = (PlaybackState.CustomAction) pair.component2();
                     if (Intrinsics.areEqual(customAction.getAction(), customAction2.getAction()) && Intrinsics.areEqual(customAction.getName(), customAction2.getName()) && customAction.getIcon() == customAction2.getIcon()) {
@@ -61,10 +61,10 @@ public abstract class MediaProcessingHelperKt {
         }
         if (icon != null && icon2 != null && icon.getType() == icon2.getType()) {
             if (icon.getType() != 1 && icon.getType() != 5) {
-                Drawable loadDrawable = icon.loadDrawable(context);
-                Drawable loadDrawable2 = icon2.loadDrawable(context);
-                if (loadDrawable != null && (bitmap = Utils.toBitmap(loadDrawable)) != null) {
-                    return bitmap.sameAs(loadDrawable2 != null ? Utils.toBitmap(loadDrawable2) : null);
+                Drawable drawableLoadDrawable = icon.loadDrawable(context);
+                Drawable drawableLoadDrawable2 = icon2.loadDrawable(context);
+                if (drawableLoadDrawable != null && (bitmap = Utils.toBitmap(drawableLoadDrawable)) != null) {
+                    return bitmap.sameAs(drawableLoadDrawable2 != null ? Utils.toBitmap(drawableLoadDrawable2) : null);
                 }
             } else {
                 if (!icon.getBitmap().isRecycled() && !icon2.getBitmap().isRecycled()) {
@@ -76,6 +76,10 @@ public abstract class MediaProcessingHelperKt {
         return false;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:87:0x0182  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public static final boolean isSameMediaData(Context context, MediaController mediaController, MediaData mediaData, MediaData mediaData2) {
         boolean z;
         if (mediaData2 != null) {
@@ -90,10 +94,10 @@ public abstract class MediaProcessingHelperKt {
                         MediaButton mediaButton = mediaData.semanticActions;
                         MediaButton mediaButton2 = mediaData2.semanticActions;
                         if (mediaButton == null && mediaButton2 == null && mediaData.actions.size() == mediaData2.actions.size()) {
-                            MergingSequence$iterator$1 mergingSequence$iterator$1 = new MergingSequence$iterator$1(SequencesKt___SequencesKt.zip(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(mediaData.actions), new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(mediaData2.actions)));
+                            MergingSequence.AnonymousClass1 anonymousClass1 = SequencesKt___SequencesKt.zip(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(mediaData.actions), new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(mediaData2.actions)).new AnonymousClass1();
                             z = true;
-                            while (mergingSequence$iterator$1.hasNext()) {
-                                Pair pair = (Pair) mergingSequence$iterator$1.next();
+                            while (anonymousClass1.hasNext()) {
+                                Pair pair = (Pair) anonymousClass1.next();
                                 PendingIntent pendingIntent = ((MediaNotificationAction) pair.getFirst()).actionIntent;
                                 Intent intent = pendingIntent != null ? pendingIntent.getIntent() : null;
                                 PendingIntent pendingIntent2 = ((MediaNotificationAction) pair.getSecond()).actionIntent;
@@ -101,19 +105,18 @@ public abstract class MediaProcessingHelperKt {
                                     z = false;
                                 }
                             }
+                        } else if (mediaButton == null || mediaButton2 == null) {
+                            z = false;
                         } else {
-                            if (mediaButton != null && mediaButton2 != null) {
-                                Long valueOf = playbackState != null ? Long.valueOf(playbackState.getActions()) : null;
-                                PlaybackState playbackState2 = mediaController.getPlaybackState();
-                                if (Intrinsics.areEqual(valueOf, playbackState2 != null ? Long.valueOf(playbackState2.getActions()) : null)) {
-                                    List<PlaybackState.CustomAction> customActions = playbackState != null ? playbackState.getCustomActions() : null;
-                                    PlaybackState playbackState3 = mediaController.getPlaybackState();
-                                    if (areCustomActionListsEqual(customActions, playbackState3 != null ? playbackState3.getCustomActions() : null)) {
-                                        z = true;
-                                    }
+                            Long lValueOf = playbackState != null ? Long.valueOf(playbackState.getActions()) : null;
+                            PlaybackState playbackState2 = mediaController.getPlaybackState();
+                            if (Intrinsics.areEqual(lValueOf, playbackState2 != null ? Long.valueOf(playbackState2.getActions()) : null)) {
+                                List<PlaybackState.CustomAction> customActions = playbackState != null ? playbackState.getCustomActions() : null;
+                                PlaybackState playbackState3 = mediaController.getPlaybackState();
+                                if (areCustomActionListsEqual(customActions, playbackState3 != null ? playbackState3.getCustomActions() : null)) {
+                                    z = true;
                                 }
                             }
-                            z = false;
                         }
                         if (z && areIconsEqual(context, mediaData.artwork, mediaData2.artwork) && areIconsEqual(context, mediaData.appIcon, mediaData2.appIcon)) {
                             return true;

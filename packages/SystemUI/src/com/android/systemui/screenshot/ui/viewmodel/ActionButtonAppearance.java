@@ -6,7 +6,6 @@ import com.android.systemui.controls.controller.ControlInfo$$ExternalSyntheticOu
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ActionButtonAppearance {
     public final Drawable customBackground;
@@ -32,11 +31,11 @@ public final class ActionButtonAppearance {
 
     public final int hashCode() {
         Drawable drawable = this.icon;
-        int hashCode = (drawable == null ? 0 : drawable.hashCode()) * 31;
+        int iHashCode = (drawable == null ? 0 : drawable.hashCode()) * 31;
         CharSequence charSequence = this.label;
-        int m = TransitionData$$ExternalSyntheticOutline0.m(ControlInfo$$ExternalSyntheticOutline0.m((hashCode + (charSequence == null ? 0 : charSequence.hashCode())) * 31, 31, this.description), 31, this.tint);
+        int iM = TransitionData$$ExternalSyntheticOutline0.m(ControlInfo$$ExternalSyntheticOutline0.m((iHashCode + (charSequence == null ? 0 : charSequence.hashCode())) * 31, 31, this.description), 31, this.tint);
         Drawable drawable2 = this.customBackground;
-        return m + (drawable2 != null ? drawable2.hashCode() : 0);
+        return iM + (drawable2 != null ? drawable2.hashCode() : 0);
     }
 
     public final String toString() {

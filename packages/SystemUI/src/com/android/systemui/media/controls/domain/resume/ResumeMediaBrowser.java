@@ -15,7 +15,6 @@ import com.android.systemui.log.core.LogLevel;
 import com.android.systemui.log.core.LogMessage;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class ResumeMediaBrowser {
     public final MediaBrowserFactory mBrowserFactory;
@@ -126,7 +125,6 @@ public class ResumeMediaBrowser {
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SessionDestroyCallback extends MediaController.Callback {
         public /* synthetic */ SessionDestroyCallback(ResumeMediaBrowser resumeMediaBrowser, int i) {
             this();
@@ -136,17 +134,17 @@ public class ResumeMediaBrowser {
         public final void onSessionDestroyed() {
             ResumeMediaBrowser resumeMediaBrowser = ResumeMediaBrowser.this;
             ResumeMediaBrowserLogger resumeMediaBrowserLogger = resumeMediaBrowser.mLogger;
-            boolean isBrowserConnected = resumeMediaBrowser.isBrowserConnected();
+            boolean zIsBrowserConnected = resumeMediaBrowser.isBrowserConnected();
             ComponentName componentName = ResumeMediaBrowser.this.mComponentName;
             resumeMediaBrowserLogger.getClass();
             LogLevel logLevel = LogLevel.DEBUG;
             ResumeMediaBrowserLogger$$ExternalSyntheticLambda0 resumeMediaBrowserLogger$$ExternalSyntheticLambda0 = new ResumeMediaBrowserLogger$$ExternalSyntheticLambda0(2);
             LogBuffer logBuffer = resumeMediaBrowserLogger.buffer;
-            LogMessage obtain = logBuffer.obtain("MediaBrowser", logLevel, resumeMediaBrowserLogger$$ExternalSyntheticLambda0, null);
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
-            logMessageImpl.bool1 = isBrowserConnected;
+            LogMessage logMessageObtain = logBuffer.obtain("MediaBrowser", logLevel, resumeMediaBrowserLogger$$ExternalSyntheticLambda0, null);
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
+            logMessageImpl.bool1 = zIsBrowserConnected;
             logMessageImpl.str1 = componentName.toShortString();
-            logBuffer.commit(obtain);
+            logBuffer.commit(logMessageObtain);
             ResumeMediaBrowser.this.disconnect();
         }
 
@@ -172,11 +170,11 @@ public class ResumeMediaBrowser {
         LogLevel logLevel = LogLevel.DEBUG;
         ResumeMediaBrowserLogger$$ExternalSyntheticLambda0 resumeMediaBrowserLogger$$ExternalSyntheticLambda0 = new ResumeMediaBrowserLogger$$ExternalSyntheticLambda0(0);
         LogBuffer logBuffer = resumeMediaBrowserLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("MediaBrowser", logLevel, resumeMediaBrowserLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("MediaBrowser", logLevel, resumeMediaBrowserLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = componentName.toShortString();
         logMessageImpl.str2 = str;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         disconnect();
         this.mMediaBrowser = mediaBrowser;
         mediaBrowser.connect();
@@ -195,9 +193,9 @@ public class ResumeMediaBrowser {
             LogLevel logLevel = LogLevel.DEBUG;
             ResumeMediaBrowserLogger$$ExternalSyntheticLambda0 resumeMediaBrowserLogger$$ExternalSyntheticLambda0 = new ResumeMediaBrowserLogger$$ExternalSyntheticLambda0(1);
             LogBuffer logBuffer = resumeMediaBrowserLogger.buffer;
-            LogMessage obtain = logBuffer.obtain("MediaBrowser", logLevel, resumeMediaBrowserLogger$$ExternalSyntheticLambda0, null);
-            ((LogMessageImpl) obtain).str1 = componentName.toShortString();
-            logBuffer.commit(obtain);
+            LogMessage logMessageObtain = logBuffer.obtain("MediaBrowser", logLevel, resumeMediaBrowserLogger$$ExternalSyntheticLambda0, null);
+            ((LogMessageImpl) logMessageObtain).str1 = componentName.toShortString();
+            logBuffer.commit(logMessageObtain);
             this.mMediaBrowser.disconnect();
         }
         this.mMediaBrowser = null;
@@ -226,13 +224,12 @@ public class ResumeMediaBrowser {
                 this.mMediaController = null;
                 return;
             }
-            MediaController createMediaController = createMediaController(sessionToken2);
-            this.mMediaController = createMediaController;
-            createMediaController.registerCallback(sessionDestroyCallback);
+            MediaController mediaControllerCreateMediaController = createMediaController(sessionToken2);
+            this.mMediaController = mediaControllerCreateMediaController;
+            mediaControllerCreateMediaController.registerCallback(sessionDestroyCallback);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Callback {
         public void onConnected() {
         }

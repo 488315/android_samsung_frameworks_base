@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.TimeInterpolator;
 import android.animation.ValueAnimator;
+import android.content.res.Resources;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.accessibility.AccessibilityEvent;
@@ -19,7 +20,6 @@ import com.google.android.material.animation.AnimationUtils;
 import com.google.android.material.motion.MotionUtils;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class DropdownMenuEndIconDelegate extends EndIconDelegate {
     public AccessibilityManager accessibilityManager;
@@ -45,13 +45,13 @@ public class DropdownMenuEndIconDelegate extends EndIconDelegate {
         this.onIconClickListener = new View.OnClickListener() { // from class: com.google.android.material.textfield.DropdownMenuEndIconDelegate$$ExternalSyntheticLambda3
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                DropdownMenuEndIconDelegate.this.showHideDropdown();
+                this.f$0.showHideDropdown();
             }
         };
         this.onEditTextFocusChangeListener = new View.OnFocusChangeListener() { // from class: com.google.android.material.textfield.DropdownMenuEndIconDelegate$$ExternalSyntheticLambda4
             @Override // android.view.View.OnFocusChangeListener
             public final void onFocusChange(View view, boolean z) {
-                DropdownMenuEndIconDelegate dropdownMenuEndIconDelegate = DropdownMenuEndIconDelegate.this;
+                DropdownMenuEndIconDelegate dropdownMenuEndIconDelegate = this.f$0;
                 dropdownMenuEndIconDelegate.editTextHasFocus = z;
                 dropdownMenuEndIconDelegate.refreshIconState();
                 if (z) {
@@ -64,7 +64,7 @@ public class DropdownMenuEndIconDelegate extends EndIconDelegate {
         this.touchExplorationStateChangeListener = new AccessibilityManagerCompat$TouchExplorationStateChangeListener() { // from class: com.google.android.material.textfield.DropdownMenuEndIconDelegate$$ExternalSyntheticLambda5
             @Override // androidx.core.view.accessibility.AccessibilityManagerCompat$TouchExplorationStateChangeListener
             public final void onTouchExplorationStateChanged(boolean z) {
-                DropdownMenuEndIconDelegate dropdownMenuEndIconDelegate = DropdownMenuEndIconDelegate.this;
+                DropdownMenuEndIconDelegate dropdownMenuEndIconDelegate = this.f$0;
                 AutoCompleteTextView autoCompleteTextView = dropdownMenuEndIconDelegate.autoCompleteTextView;
                 if (autoCompleteTextView == null || EditTextUtils.isEditable(autoCompleteTextView)) {
                     return;
@@ -88,10 +88,10 @@ public class DropdownMenuEndIconDelegate extends EndIconDelegate {
         this.autoCompleteTextView.post(new Runnable() { // from class: com.google.android.material.textfield.DropdownMenuEndIconDelegate$$ExternalSyntheticLambda6
             @Override // java.lang.Runnable
             public final void run() {
-                DropdownMenuEndIconDelegate dropdownMenuEndIconDelegate = DropdownMenuEndIconDelegate.this;
-                boolean isPopupShowing = dropdownMenuEndIconDelegate.autoCompleteTextView.isPopupShowing();
-                dropdownMenuEndIconDelegate.setEndIconChecked(isPopupShowing);
-                dropdownMenuEndIconDelegate.dropdownPopupDirty = isPopupShowing;
+                DropdownMenuEndIconDelegate dropdownMenuEndIconDelegate = this.f$0;
+                boolean zIsPopupShowing = dropdownMenuEndIconDelegate.autoCompleteTextView.isPopupShowing();
+                dropdownMenuEndIconDelegate.setEndIconChecked(zIsPopupShowing);
+                dropdownMenuEndIconDelegate.dropdownPopupDirty = zIsPopupShowing;
             }
         });
     }
@@ -137,7 +137,7 @@ public class DropdownMenuEndIconDelegate extends EndIconDelegate {
     }
 
     @Override // com.google.android.material.textfield.EndIconDelegate
-    public final void onEditTextAttached(EditText editText) {
+    public final void onEditTextAttached(EditText editText) throws Resources.NotFoundException {
         if (!(editText instanceof AutoCompleteTextView)) {
             throw new RuntimeException("EditText needs to be an AutoCompleteTextView if an Exposed Dropdown Menu is being used.");
         }
@@ -146,11 +146,11 @@ public class DropdownMenuEndIconDelegate extends EndIconDelegate {
         autoCompleteTextView.setOnTouchListener(new View.OnTouchListener() { // from class: com.google.android.material.textfield.DropdownMenuEndIconDelegate$$ExternalSyntheticLambda1
             @Override // android.view.View.OnTouchListener
             public final boolean onTouch(View view, MotionEvent motionEvent) {
-                DropdownMenuEndIconDelegate dropdownMenuEndIconDelegate = DropdownMenuEndIconDelegate.this;
+                DropdownMenuEndIconDelegate dropdownMenuEndIconDelegate = this.f$0;
                 dropdownMenuEndIconDelegate.getClass();
                 if (motionEvent.getAction() == 1) {
-                    long currentTimeMillis = System.currentTimeMillis() - dropdownMenuEndIconDelegate.dropdownPopupActivatedAt;
-                    if (currentTimeMillis < 0 || currentTimeMillis > 300) {
+                    long jCurrentTimeMillis = System.currentTimeMillis() - dropdownMenuEndIconDelegate.dropdownPopupActivatedAt;
+                    if (jCurrentTimeMillis < 0 || jCurrentTimeMillis > 300) {
                         dropdownMenuEndIconDelegate.dropdownPopupDirty = false;
                     }
                     dropdownMenuEndIconDelegate.showHideDropdown();
@@ -163,7 +163,7 @@ public class DropdownMenuEndIconDelegate extends EndIconDelegate {
         this.autoCompleteTextView.setOnDismissListener(new AutoCompleteTextView.OnDismissListener() { // from class: com.google.android.material.textfield.DropdownMenuEndIconDelegate$$ExternalSyntheticLambda2
             @Override // android.widget.AutoCompleteTextView.OnDismissListener
             public final void onDismiss() {
-                DropdownMenuEndIconDelegate dropdownMenuEndIconDelegate = DropdownMenuEndIconDelegate.this;
+                DropdownMenuEndIconDelegate dropdownMenuEndIconDelegate = this.f$0;
                 dropdownMenuEndIconDelegate.dropdownPopupDirty = true;
                 dropdownMenuEndIconDelegate.dropdownPopupActivatedAt = System.currentTimeMillis();
                 dropdownMenuEndIconDelegate.setEndIconChecked(false);
@@ -215,31 +215,31 @@ public class DropdownMenuEndIconDelegate extends EndIconDelegate {
 
     @Override // com.google.android.material.textfield.EndIconDelegate
     public final void setUp() {
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-        ofFloat.setInterpolator(this.animationFadeInterpolator);
-        ofFloat.setDuration(this.animationFadeInDuration);
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.google.android.material.textfield.DropdownMenuEndIconDelegate$$ExternalSyntheticLambda0
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+        valueAnimatorOfFloat.setInterpolator(this.animationFadeInterpolator);
+        valueAnimatorOfFloat.setDuration(this.animationFadeInDuration);
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.google.android.material.textfield.DropdownMenuEndIconDelegate$$ExternalSyntheticLambda0
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                DropdownMenuEndIconDelegate dropdownMenuEndIconDelegate = DropdownMenuEndIconDelegate.this;
+                DropdownMenuEndIconDelegate dropdownMenuEndIconDelegate = this.f$0;
                 dropdownMenuEndIconDelegate.getClass();
                 dropdownMenuEndIconDelegate.endIconView.setAlpha(((Float) valueAnimator.getAnimatedValue()).floatValue());
             }
         });
-        this.fadeInAnim = ofFloat;
-        ValueAnimator ofFloat2 = ValueAnimator.ofFloat(1.0f, 0.0f);
-        ofFloat2.setInterpolator(this.animationFadeInterpolator);
-        ofFloat2.setDuration(this.animationFadeOutDuration);
-        ofFloat2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.google.android.material.textfield.DropdownMenuEndIconDelegate$$ExternalSyntheticLambda0
+        this.fadeInAnim = valueAnimatorOfFloat;
+        ValueAnimator valueAnimatorOfFloat2 = ValueAnimator.ofFloat(1.0f, 0.0f);
+        valueAnimatorOfFloat2.setInterpolator(this.animationFadeInterpolator);
+        valueAnimatorOfFloat2.setDuration(this.animationFadeOutDuration);
+        valueAnimatorOfFloat2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.google.android.material.textfield.DropdownMenuEndIconDelegate$$ExternalSyntheticLambda0
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                DropdownMenuEndIconDelegate dropdownMenuEndIconDelegate = DropdownMenuEndIconDelegate.this;
+                DropdownMenuEndIconDelegate dropdownMenuEndIconDelegate = this.f$0;
                 dropdownMenuEndIconDelegate.getClass();
                 dropdownMenuEndIconDelegate.endIconView.setAlpha(((Float) valueAnimator.getAnimatedValue()).floatValue());
             }
         });
-        this.fadeOutAnim = ofFloat2;
-        ofFloat2.addListener(new AnimatorListenerAdapter() { // from class: com.google.android.material.textfield.DropdownMenuEndIconDelegate.1
+        this.fadeOutAnim = valueAnimatorOfFloat2;
+        valueAnimatorOfFloat2.addListener(new AnimatorListenerAdapter() { // from class: com.google.android.material.textfield.DropdownMenuEndIconDelegate.1
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
                 DropdownMenuEndIconDelegate.this.refreshIconState();
@@ -253,8 +253,8 @@ public class DropdownMenuEndIconDelegate extends EndIconDelegate {
         if (this.autoCompleteTextView == null) {
             return;
         }
-        long currentTimeMillis = System.currentTimeMillis() - this.dropdownPopupActivatedAt;
-        if (currentTimeMillis < 0 || currentTimeMillis > 300) {
+        long jCurrentTimeMillis = System.currentTimeMillis() - this.dropdownPopupActivatedAt;
+        if (jCurrentTimeMillis < 0 || jCurrentTimeMillis > 300) {
             this.dropdownPopupDirty = false;
         }
         if (this.dropdownPopupDirty) {

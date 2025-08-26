@@ -6,7 +6,6 @@ import androidx.compose.ui.geometry.Offset;
 import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SelectionHandleInfo {
     public final SelectionHandleAnchor anchor;
@@ -26,20 +25,20 @@ public final class SelectionHandleInfo {
             return false;
         }
         SelectionHandleInfo selectionHandleInfo = (SelectionHandleInfo) obj;
-        return this.handle == selectionHandleInfo.handle && Offset.m396equalsimpl0(this.position, selectionHandleInfo.position) && this.anchor == selectionHandleInfo.anchor && this.visible == selectionHandleInfo.visible;
+        return this.handle == selectionHandleInfo.handle && Offset.m398equalsimpl0(this.position, selectionHandleInfo.position) && this.anchor == selectionHandleInfo.anchor && this.visible == selectionHandleInfo.visible;
     }
 
     public final int hashCode() {
-        int hashCode = this.handle.hashCode() * 31;
+        int iHashCode = this.handle.hashCode() * 31;
         Offset.Companion companion = Offset.Companion;
-        return Boolean.hashCode(this.visible) + ((this.anchor.hashCode() + MoveResult$$ExternalSyntheticOutline0.m(hashCode, 31, this.position)) * 31);
+        return Boolean.hashCode(this.visible) + ((this.anchor.hashCode() + MoveResult$$ExternalSyntheticOutline0.m(iHashCode, 31, this.position)) * 31);
     }
 
     public final String toString() {
         StringBuilder sb = new StringBuilder("SelectionHandleInfo(handle=");
         sb.append(this.handle);
         sb.append(", position=");
-        sb.append((Object) Offset.m403toStringimpl(this.position));
+        sb.append((Object) Offset.m405toStringimpl(this.position));
         sb.append(", anchor=");
         sb.append(this.anchor);
         sb.append(", visible=");

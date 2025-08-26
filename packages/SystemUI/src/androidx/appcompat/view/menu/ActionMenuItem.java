@@ -13,7 +13,6 @@ import android.view.SubMenu;
 import android.view.View;
 import androidx.core.internal.view.SupportMenuItem;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ActionMenuItem implements SupportMenuItem {
     public CharSequence mContentDescription;
@@ -49,10 +48,10 @@ public class ActionMenuItem implements SupportMenuItem {
         if (drawable != null) {
             if (this.mHasIconTint || this.mHasIconTintMode) {
                 this.mIconDrawable = drawable;
-                Drawable mutate = drawable.mutate();
-                this.mIconDrawable = mutate;
+                Drawable drawableMutate = drawable.mutate();
+                this.mIconDrawable = drawableMutate;
                 if (this.mHasIconTint) {
-                    mutate.setTintList(this.mIconTintList);
+                    drawableMutate.setTintList(this.mIconTintList);
                 }
                 if (this.mHasIconTintMode) {
                     this.mIconDrawable.setTintMode(this.mIconTintMode);

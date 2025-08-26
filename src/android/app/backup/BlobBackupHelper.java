@@ -31,47 +31,47 @@ public abstract class BlobBackupHelper extends BackupHelperWithLogger {
         this.mKeys = strArr;
     }
 
-    private ArrayMap<String, Long> readOldState(ParcelFileDescriptor parcelFileDescriptor) {
-        int readInt;
+    private ArrayMap<String, Long> readOldState(ParcelFileDescriptor parcelFileDescriptor) throws IOException {
+        int i;
         ArrayMap<String, Long> arrayMap = new ArrayMap<>();
         DataInputStream dataInputStream = new DataInputStream(new FileInputStream(parcelFileDescriptor.getFileDescriptor()));
         try {
-            readInt = dataInputStream.readInt();
+            i = dataInputStream.readInt();
         } catch (EOFException unused) {
             arrayMap.clear();
         } catch (Exception e) {
             Log.e(TAG, "Error examining prior backup state " + e.getMessage());
             arrayMap.clear();
         }
-        if (readInt > this.mCurrentBlobVersion) {
-            Log.w(TAG, "Prior state from unrecognized version " + readInt);
+        if (i > this.mCurrentBlobVersion) {
+            Log.w(TAG, "Prior state from unrecognized version " + i);
             return arrayMap;
         }
-        int readInt2 = dataInputStream.readInt();
-        for (int i = 0; i < readInt2; i++) {
+        int i2 = dataInputStream.readInt();
+        for (int i3 = 0; i3 < i2; i3++) {
             arrayMap.put(dataInputStream.readUTF(), Long.valueOf(dataInputStream.readLong()));
         }
         return arrayMap;
     }
 
-    private void writeBackupState(ArrayMap<String, Long> arrayMap, ParcelFileDescriptor parcelFileDescriptor) {
+    private void writeBackupState(ArrayMap<String, Long> arrayMap, ParcelFileDescriptor parcelFileDescriptor) throws IOException {
         try {
             DataOutputStream dataOutputStream = new DataOutputStream(new FileOutputStream(parcelFileDescriptor.getFileDescriptor()));
             dataOutputStream.writeInt(this.mCurrentBlobVersion);
             int size = arrayMap != null ? arrayMap.size() : 0;
             dataOutputStream.writeInt(size);
             for (int i = 0; i < size; i++) {
-                String keyAt = arrayMap.keyAt(i);
-                long longValue = arrayMap.valueAt(i).longValue();
-                dataOutputStream.writeUTF(keyAt);
-                dataOutputStream.writeLong(longValue);
+                String strKeyAt = arrayMap.keyAt(i);
+                long jLongValue = arrayMap.valueAt(i).longValue();
+                dataOutputStream.writeUTF(strKeyAt);
+                dataOutputStream.writeLong(jLongValue);
             }
         } catch (IOException e) {
             Log.e(TAG, "Unable to write updated state", e);
         }
     }
 
-    private byte[] deflate(byte[] bArr) {
+    private byte[] deflate(byte[] bArr) throws IOException {
         if (bArr == null) {
             return null;
         }
@@ -88,26 +88,26 @@ public abstract class BlobBackupHelper extends BackupHelperWithLogger {
         }
     }
 
-    private byte[] inflate(byte[] bArr) {
+    private byte[] inflate(byte[] bArr) throws IOException {
         if (bArr != null) {
             try {
                 ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bArr);
-                int readInt = new DataInputStream(byteArrayInputStream).readInt();
-                if (readInt > this.mCurrentBlobVersion) {
-                    Log.w(TAG, "Saved payload from unrecognized version " + readInt);
+                int i = new DataInputStream(byteArrayInputStream).readInt();
+                if (i > this.mCurrentBlobVersion) {
+                    Log.w(TAG, "Saved payload from unrecognized version " + i);
                     return null;
                 }
                 InflaterInputStream inflaterInputStream = new InflaterInputStream(byteArrayInputStream);
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                 byte[] bArr2 = new byte[4096];
                 while (true) {
-                    int read = inflaterInputStream.read(bArr2);
-                    if (read <= 0) {
+                    int i2 = inflaterInputStream.read(bArr2);
+                    if (i2 <= 0) {
                         inflaterInputStream.close();
                         byteArrayOutputStream.flush();
                         return byteArrayOutputStream.toByteArray();
                     }
-                    byteArrayOutputStream.write(bArr2, 0, read);
+                    byteArrayOutputStream.write(bArr2, 0, i2);
                 }
             } catch (IOException e) {
                 Log.w(TAG, "Unable to process restored payload: " + e.getMessage());
@@ -125,9 +125,9 @@ public abstract class BlobBackupHelper extends BackupHelperWithLogger {
             ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bArr);
             byte[] bArr2 = new byte[4096];
             while (true) {
-                int read = byteArrayInputStream.read(bArr2);
-                if (read >= 0) {
-                    crc32.update(bArr2, 0, read);
+                int i = byteArrayInputStream.read(bArr2);
+                if (i >= 0) {
+                    crc32.update(bArr2, 0, i);
                 } else {
                     return crc32.getValue();
                 }
@@ -138,19 +138,19 @@ public abstract class BlobBackupHelper extends BackupHelperWithLogger {
     }
 
     @Override // android.app.backup.BackupHelperWithLogger, android.app.backup.BackupHelper
-    public void performBackup(ParcelFileDescriptor parcelFileDescriptor, BackupDataOutput backupDataOutput, ParcelFileDescriptor parcelFileDescriptor2) {
-        ArrayMap<String, Long> readOldState = readOldState(parcelFileDescriptor);
+    public void performBackup(ParcelFileDescriptor parcelFileDescriptor, BackupDataOutput backupDataOutput, ParcelFileDescriptor parcelFileDescriptor2) throws IOException {
+        ArrayMap<String, Long> oldState = readOldState(parcelFileDescriptor);
         ArrayMap<String, Long> arrayMap = new ArrayMap<>();
         try {
             for (String str : this.mKeys) {
-                byte[] deflate = deflate(getBackupPayload(str));
-                long checksum = checksum(deflate);
-                arrayMap.put(str, Long.valueOf(checksum));
-                Long l = readOldState.get(str);
-                if (l == null || checksum != l.longValue()) {
-                    if (deflate != null) {
-                        backupDataOutput.writeEntityHeader(str, deflate.length);
-                        backupDataOutput.writeEntityData(deflate, deflate.length);
+                byte[] bArrDeflate = deflate(getBackupPayload(str));
+                long jChecksum = checksum(bArrDeflate);
+                arrayMap.put(str, Long.valueOf(jChecksum));
+                Long l = oldState.get(str);
+                if (l == null || jChecksum != l.longValue()) {
+                    if (bArrDeflate != null) {
+                        backupDataOutput.writeEntityHeader(str, bArrDeflate.length);
+                        backupDataOutput.writeEntityData(bArrDeflate, bArrDeflate.length);
                     } else {
                         backupDataOutput.writeEntityHeader(str, -1);
                     }
@@ -191,7 +191,7 @@ public abstract class BlobBackupHelper extends BackupHelperWithLogger {
     }
 
     @Override // android.app.backup.BackupHelperWithLogger, android.app.backup.BackupHelper
-    public void writeNewStateDescription(ParcelFileDescriptor parcelFileDescriptor) {
+    public void writeNewStateDescription(ParcelFileDescriptor parcelFileDescriptor) throws IOException {
         writeBackupState(null, parcelFileDescriptor);
     }
 }

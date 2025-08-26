@@ -165,7 +165,7 @@ public class LoudnessCodecController implements SafeCloseable {
     }
 
     private static LoudnessCodecInfo getCodecInfo(MediaCodec mediaCodec) {
-        int i;
+        int integer;
         LoudnessCodecInfo loudnessCodecInfo = new LoudnessCodecInfo();
         if (mediaCodec.getCodecInfo().isEncoder()) {
             Log.w(TAG, "MediaCodec used for encoding does not support loudness annotation");
@@ -174,18 +174,18 @@ public class LoudnessCodecController implements SafeCloseable {
         try {
             MediaFormat inputFormat = mediaCodec.getInputFormat();
             if ("audio/mp4a-latm".equalsIgnoreCase(inputFormat.getString("mime"))) {
-                int i2 = -1;
+                int integer2 = -1;
                 try {
-                    i = inputFormat.getInteger(MediaFormat.KEY_AAC_PROFILE);
+                    integer = inputFormat.getInteger(MediaFormat.KEY_AAC_PROFILE);
                 } catch (NullPointerException unused) {
-                    i = -1;
+                    integer = -1;
                 }
                 try {
-                    i2 = inputFormat.getInteger("profile");
+                    integer2 = inputFormat.getInteger("profile");
                 } catch (NullPointerException unused2) {
                 }
                 boolean z = true;
-                if (i == 42 || i2 == 42) {
+                if (integer == 42 || integer2 == 42) {
                     loudnessCodecInfo.metadataType = 2;
                 } else {
                     loudnessCodecInfo.metadataType = 1;

@@ -52,9 +52,9 @@ public interface IRemoteSessionCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IRemoteSessionCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IRemoteSessionCallback)) {
-                return (IRemoteSessionCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IRemoteSessionCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IRemoteSessionCallback)) {
+                return (IRemoteSessionCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -85,9 +85,9 @@ public interface IRemoteSessionCallback extends IInterface {
             }
             if (i == 1) {
                 MediaSession.Token token = (MediaSession.Token) parcel.readTypedObject(MediaSession.Token.CREATOR);
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onVolumeChanged(token, readInt);
+                onVolumeChanged(token, i3);
             } else if (i == 2) {
                 MediaSession.Token token2 = (MediaSession.Token) parcel.readTypedObject(MediaSession.Token.CREATOR);
                 parcel.enforceNoDataAvail();
@@ -116,26 +116,26 @@ public interface IRemoteSessionCallback extends IInterface {
 
             @Override // android.media.IRemoteSessionCallback
             public void onVolumeChanged(MediaSession.Token token, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IRemoteSessionCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(token, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IRemoteSessionCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(token, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.IRemoteSessionCallback
             public void onSessionChanged(MediaSession.Token token) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IRemoteSessionCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(token, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IRemoteSessionCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(token, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

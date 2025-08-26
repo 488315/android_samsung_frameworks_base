@@ -42,7 +42,7 @@ public final class MFDescriptorHolder<T extends MFDescriptor> extends MFDescript
         T t = (T) Optional.ofNullable(this.descriptor).orElseGet(new Supplier() { // from class: com.samsung.android.sume.core.descriptor.MFDescriptorHolder$$ExternalSyntheticLambda1
             @Override // java.util.function.Supplier
             public final Object get() {
-                return MFDescriptorHolder.this.m9531xea657ff5();
+                return this.f$0.m9544xea657ff5();
             }
         });
         this.vararg = null;
@@ -55,17 +55,17 @@ public final class MFDescriptorHolder<T extends MFDescriptor> extends MFDescript
     }
 
     /* renamed from: lambda$reset$1$com-samsung-android-sume-core-descriptor-MFDescriptorHolder, reason: not valid java name */
-    /* synthetic */ MFDescriptor m9531xea657ff5() {
+    /* synthetic */ MFDescriptor m9544xea657ff5() {
         return (MFDescriptor) Optional.ofNullable(this.mfDescriptorProvider).map(new Function() { // from class: com.samsung.android.sume.core.descriptor.MFDescriptorHolder$$ExternalSyntheticLambda0
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                return MFDescriptorHolder.this.m9530x2fefdf74((Function) obj);
+                return this.f$0.m9543x2fefdf74((Function) obj);
             }
         }).orElse(null);
     }
 
     /* renamed from: lambda$reset$0$com-samsung-android-sume-core-descriptor-MFDescriptorHolder, reason: not valid java name */
-    /* synthetic */ MFDescriptor m9530x2fefdf74(Function function) {
+    /* synthetic */ MFDescriptor m9543x2fefdf74(Function function) {
         return (MFDescriptor) function.apply(this.vararg);
     }
 

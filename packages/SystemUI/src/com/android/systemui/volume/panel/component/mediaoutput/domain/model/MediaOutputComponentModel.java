@@ -6,11 +6,9 @@ import com.android.systemui.volume.panel.component.mediaoutput.shared.model.Medi
 import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public interface MediaOutputComponentModel {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Calling implements MediaOutputComponentModel {
         public final boolean canOpenAudioSwitcher;
         public final AudioOutputDevice device;
@@ -62,7 +60,6 @@ public interface MediaOutputComponentModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Idle implements MediaOutputComponentModel {
         public final boolean canOpenAudioSwitcher;
         public final AudioOutputDevice device;
@@ -114,7 +111,6 @@ public interface MediaOutputComponentModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class MediaSession implements MediaOutputComponentModel {
         public final boolean canOpenAudioSwitcher;
         public final AudioOutputDevice device;

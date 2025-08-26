@@ -34,7 +34,6 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.Stack;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SVGAndroidRenderer {
     public static HashSet supportedFeatures;
@@ -46,7 +45,6 @@ public class SVGAndroidRenderer {
     public RendererState state;
     public Stack stateStack;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.caverock.androidsvg.SVGAndroidRenderer$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
         public static final /* synthetic */ int[] $SwitchMap$com$caverock$androidsvg$PreserveAspectRatio$Alignment;
@@ -119,7 +117,6 @@ public class SVGAndroidRenderer {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class MarkerPositionCalculator implements SVG.PathInterface {
         public boolean closepathReAdjustPending;
         public MarkerVector lastPos;
@@ -215,7 +212,6 @@ public class SVGAndroidRenderer {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PathConverter implements SVG.PathInterface {
         public float lastX;
         public float lastY;
@@ -269,7 +265,6 @@ public class SVGAndroidRenderer {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PathTextDrawer extends PlainTextDrawer {
         public final Path path;
 
@@ -295,7 +290,6 @@ public class SVGAndroidRenderer {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PlainTextDrawer extends TextProcessor {
         public float x;
         public float y;
@@ -323,7 +317,6 @@ public class SVGAndroidRenderer {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PlainTextToPath extends TextProcessor {
         public final Path textAsPath;
         public float x;
@@ -361,7 +354,6 @@ public class SVGAndroidRenderer {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class TextBoundsCalculator extends TextProcessor {
         public final RectF bbox;
         public float x;
@@ -380,12 +372,12 @@ public class SVGAndroidRenderer {
                 return true;
             }
             SVG.TextPath textPath = (SVG.TextPath) textContainer;
-            SVG.SvgElementBase resolveIRI = textContainer.document.resolveIRI(textPath.href);
-            if (resolveIRI == null) {
+            SVG.SvgElementBase svgElementBaseResolveIRI = textContainer.document.resolveIRI(textPath.href);
+            if (svgElementBaseResolveIRI == null) {
                 SVGAndroidRenderer.error("TextPath path reference '%s' not found", textPath.href);
                 return false;
             }
-            SVG.Path path = (SVG.Path) resolveIRI;
+            SVG.Path path = (SVG.Path) svgElementBaseResolveIRI;
             Path path2 = new PathConverter(SVGAndroidRenderer.this, path.d).path;
             Matrix matrix = path.transform;
             if (matrix != null) {
@@ -411,7 +403,6 @@ public class SVGAndroidRenderer {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class TextProcessor {
         private TextProcessor(SVGAndroidRenderer sVGAndroidRenderer) {
         }
@@ -440,26 +431,26 @@ public class SVGAndroidRenderer {
             pathInterface.lineTo(f6, f7);
             return;
         }
-        float abs = Math.abs(f3);
-        float abs2 = Math.abs(f4);
+        float fAbs = Math.abs(f3);
+        float fAbs2 = Math.abs(f4);
         double radians = Math.toRadians(f5 % 360.0d);
-        double cos = Math.cos(radians);
-        double sin = Math.sin(radians);
+        double dCos = Math.cos(radians);
+        double dSin = Math.sin(radians);
         double d = (f - f6) / 2.0d;
         double d2 = (f2 - f7) / 2.0d;
-        double d3 = (sin * d2) + (cos * d);
-        double d4 = (cos * d2) + ((-sin) * d);
-        double d5 = abs * abs;
-        double d6 = abs2 * abs2;
+        double d3 = (dSin * d2) + (dCos * d);
+        double d4 = (dCos * d2) + ((-dSin) * d);
+        double d5 = fAbs * fAbs;
+        double d6 = fAbs2 * fAbs2;
         double d7 = d3 * d3;
         double d8 = d4 * d4;
         double d9 = (d8 / d6) + (d7 / d5);
         if (d9 > 0.99999d) {
-            double sqrt = Math.sqrt(d9) * 1.00001d;
-            abs = (float) (abs * sqrt);
-            abs2 = (float) (sqrt * abs2);
-            d5 = abs * abs;
-            d6 = abs2 * abs2;
+            double dSqrt = Math.sqrt(d9) * 1.00001d;
+            fAbs = (float) (fAbs * dSqrt);
+            fAbs2 = (float) (dSqrt * fAbs2);
+            d5 = fAbs * fAbs;
+            d6 = fAbs2 * fAbs2;
         }
         double d10 = z == z2 ? -1.0d : 1.0d;
         double d11 = d5 * d6;
@@ -469,59 +460,59 @@ public class SVGAndroidRenderer {
         if (d14 < 0.0d) {
             d14 = 0.0d;
         }
-        double sqrt2 = Math.sqrt(d14) * d10;
-        double d15 = abs;
-        double d16 = abs2;
-        double d17 = ((d15 * d4) / d16) * sqrt2;
-        double d18 = sqrt2 * (-((d16 * d3) / d15));
-        double d19 = ((cos * d17) - (sin * d18)) + ((f + f6) / 2.0d);
-        double d20 = (cos * d18) + (sin * d17) + ((f2 + f7) / 2.0d);
+        double dSqrt2 = Math.sqrt(d14) * d10;
+        double d15 = fAbs;
+        double d16 = fAbs2;
+        double d17 = ((d15 * d4) / d16) * dSqrt2;
+        double d18 = dSqrt2 * (-((d16 * d3) / d15));
+        double d19 = ((dCos * d17) - (dSin * d18)) + ((f + f6) / 2.0d);
+        double d20 = (dCos * d18) + (dSin * d17) + ((f2 + f7) / 2.0d);
         double d21 = (d3 - d17) / d15;
         double d22 = (d4 - d18) / d16;
         double d23 = ((-d3) - d17) / d15;
         double d24 = ((-d4) - d18) / d16;
         double d25 = (d22 * d22) + (d21 * d21);
-        double acos = Math.acos(d21 / Math.sqrt(d25)) * (d22 < 0.0d ? -1.0d : 1.0d);
-        double sqrt3 = ((d22 * d24) + (d21 * d23)) / Math.sqrt(((d24 * d24) + (d23 * d23)) * d25);
-        double acos2 = ((d21 * d24) - (d22 * d23) < 0.0d ? -1.0d : 1.0d) * (sqrt3 < -1.0d ? 3.141592653589793d : sqrt3 > 1.0d ? 0.0d : Math.acos(sqrt3));
-        if (!z2 && acos2 > 0.0d) {
-            acos2 -= 6.283185307179586d;
-        } else if (z2 && acos2 < 0.0d) {
-            acos2 += 6.283185307179586d;
+        double dAcos = Math.acos(d21 / Math.sqrt(d25)) * (d22 < 0.0d ? -1.0d : 1.0d);
+        double dSqrt3 = ((d22 * d24) + (d21 * d23)) / Math.sqrt(((d24 * d24) + (d23 * d23)) * d25);
+        double dAcos2 = ((d21 * d24) - (d22 * d23) < 0.0d ? -1.0d : 1.0d) * (dSqrt3 < -1.0d ? 3.141592653589793d : dSqrt3 > 1.0d ? 0.0d : Math.acos(dSqrt3));
+        if (!z2 && dAcos2 > 0.0d) {
+            dAcos2 -= 6.283185307179586d;
+        } else if (z2 && dAcos2 < 0.0d) {
+            dAcos2 += 6.283185307179586d;
         }
-        double d26 = acos2 % 6.283185307179586d;
-        double d27 = acos % 6.283185307179586d;
-        int ceil = (int) Math.ceil((Math.abs(d26) * 2.0d) / 3.141592653589793d);
-        double d28 = d26 / ceil;
+        double d26 = dAcos2 % 6.283185307179586d;
+        double d27 = dAcos % 6.283185307179586d;
+        int iCeil = (int) Math.ceil((Math.abs(d26) * 2.0d) / 3.141592653589793d);
+        double d28 = d26 / iCeil;
         double d29 = d28 / 2.0d;
-        double sin2 = (Math.sin(d29) * 1.3333333333333333d) / (Math.cos(d29) + 1.0d);
-        int i = ceil * 6;
+        double dSin2 = (Math.sin(d29) * 1.3333333333333333d) / (Math.cos(d29) + 1.0d);
+        int i = iCeil * 6;
         float[] fArr = new float[i];
         int i2 = 0;
         int i3 = 0;
-        while (i2 < ceil) {
+        while (i2 < iCeil) {
             double d30 = d27;
             double d31 = (i2 * d28) + d30;
-            double cos2 = Math.cos(d31);
-            double sin3 = Math.sin(d31);
+            double dCos2 = Math.cos(d31);
+            double dSin3 = Math.sin(d31);
             int i4 = i2;
             int i5 = i3;
-            fArr[i5] = (float) (cos2 - (sin2 * sin3));
-            fArr[i3 + 1] = (float) ((cos2 * sin2) + sin3);
+            fArr[i5] = (float) (dCos2 - (dSin2 * dSin3));
+            fArr[i3 + 1] = (float) ((dCos2 * dSin2) + dSin3);
             double d32 = d31 + d28;
-            double cos3 = Math.cos(d32);
-            double sin4 = Math.sin(d32);
-            fArr[i5 + 2] = (float) ((sin2 * sin4) + cos3);
-            fArr[i5 + 3] = (float) (sin4 - (sin2 * cos3));
-            fArr[i5 + 4] = (float) cos3;
+            double dCos3 = Math.cos(d32);
+            double dSin4 = Math.sin(d32);
+            fArr[i5 + 2] = (float) ((dSin2 * dSin4) + dCos3);
+            fArr[i5 + 3] = (float) (dSin4 - (dSin2 * dCos3));
+            fArr[i5 + 4] = (float) dCos3;
             i3 = i5 + 6;
-            fArr[i5 + 5] = (float) sin4;
+            fArr[i5 + 5] = (float) dSin4;
             i2 = i4 + 1;
             d27 = d30;
-            ceil = ceil;
+            iCeil = iCeil;
         }
         Matrix matrix = new Matrix();
-        matrix.postScale(abs, abs2);
+        matrix.postScale(fAbs, fAbs2);
         matrix.postRotate(f5);
         matrix.postTranslate((float) d19, (float) d20);
         matrix.mapPoints(fArr);
@@ -538,251 +529,152 @@ public class SVGAndroidRenderer {
         return new SVG.Box(rectF.left, rectF.top, rectF.width(), rectF.height());
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:29:0x0077, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:32:0x0077, code lost:
     
         if (r1 != 8) goto L37;
      */
+    /* JADX WARN: Removed duplicated region for block: B:23:0x0069  */
+    /* JADX WARN: Removed duplicated region for block: B:36:0x007f  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static android.graphics.Matrix calculateViewBoxTransform(com.caverock.androidsvg.SVG.Box r9, com.caverock.androidsvg.SVG.Box r10, com.caverock.androidsvg.PreserveAspectRatio r11) {
-        /*
-            android.graphics.Matrix r0 = new android.graphics.Matrix
-            r0.<init>()
-            if (r11 == 0) goto L91
-            com.caverock.androidsvg.PreserveAspectRatio$Alignment r1 = r11.alignment
-            if (r1 != 0) goto Ld
-            goto L91
-        Ld:
-            float r2 = r9.width
-            float r3 = r10.width
-            float r2 = r2 / r3
-            float r3 = r9.height
-            float r4 = r10.height
-            float r3 = r3 / r4
-            float r4 = r10.minX
-            float r4 = -r4
-            float r5 = r10.minY
-            float r5 = -r5
-            com.caverock.androidsvg.PreserveAspectRatio r6 = com.caverock.androidsvg.PreserveAspectRatio.STRETCH
-            boolean r6 = r11.equals(r6)
-            if (r6 == 0) goto L33
-            float r10 = r9.minX
-            float r9 = r9.minY
-            r0.preTranslate(r10, r9)
-            r0.preScale(r2, r3)
-            r0.preTranslate(r4, r5)
-            return r0
-        L33:
-            com.caverock.androidsvg.PreserveAspectRatio$Scale r6 = com.caverock.androidsvg.PreserveAspectRatio.Scale.slice
-            com.caverock.androidsvg.PreserveAspectRatio$Scale r11 = r11.scale
-            if (r11 != r6) goto L3e
-            float r11 = java.lang.Math.max(r2, r3)
-            goto L42
-        L3e:
-            float r11 = java.lang.Math.min(r2, r3)
-        L42:
-            float r2 = r9.width
-            float r2 = r2 / r11
-            float r3 = r9.height
-            float r3 = r3 / r11
-            int[] r6 = com.caverock.androidsvg.SVGAndroidRenderer.AnonymousClass1.$SwitchMap$com$caverock$androidsvg$PreserveAspectRatio$Alignment
-            int r7 = r1.ordinal()
-            r7 = r6[r7]
-            r8 = 1073741824(0x40000000, float:2.0)
-            switch(r7) {
-                case 1: goto L5b;
-                case 2: goto L5b;
-                case 3: goto L5b;
-                case 4: goto L56;
-                case 5: goto L56;
-                case 6: goto L56;
-                default: goto L55;
+    public static Matrix calculateViewBoxTransform(SVG.Box box, SVG.Box box2, PreserveAspectRatio preserveAspectRatio) {
+        PreserveAspectRatio.Alignment alignment;
+        int i;
+        float f;
+        float f2;
+        Matrix matrix = new Matrix();
+        if (preserveAspectRatio != null && (alignment = preserveAspectRatio.alignment) != null) {
+            float f3 = box.width / box2.width;
+            float f4 = box.height / box2.height;
+            float f5 = -box2.minX;
+            float f6 = -box2.minY;
+            if (preserveAspectRatio.equals(PreserveAspectRatio.STRETCH)) {
+                matrix.preTranslate(box.minX, box.minY);
+                matrix.preScale(f3, f4);
+                matrix.preTranslate(f5, f6);
+                return matrix;
             }
-        L55:
-            goto L60
-        L56:
-            float r7 = r10.width
-            float r7 = r7 - r2
-        L59:
-            float r4 = r4 - r7
-            goto L60
-        L5b:
-            float r7 = r10.width
-            float r7 = r7 - r2
-            float r7 = r7 / r8
-            goto L59
-        L60:
-            int r1 = r1.ordinal()
-            r1 = r6[r1]
-            r2 = 2
-            if (r1 == r2) goto L7f
-            r2 = 3
-            if (r1 == r2) goto L7a
-            r2 = 5
-            if (r1 == r2) goto L7f
-            r2 = 6
-            if (r1 == r2) goto L7a
-            r2 = 7
-            if (r1 == r2) goto L7f
-            r2 = 8
-            if (r1 == r2) goto L7a
-            goto L84
-        L7a:
-            float r10 = r10.height
-            float r10 = r10 - r3
-        L7d:
-            float r5 = r5 - r10
-            goto L84
-        L7f:
-            float r10 = r10.height
-            float r10 = r10 - r3
-            float r10 = r10 / r8
-            goto L7d
-        L84:
-            float r10 = r9.minX
-            float r9 = r9.minY
-            r0.preTranslate(r10, r9)
-            r0.preScale(r11, r11)
-            r0.preTranslate(r4, r5)
-        L91:
-            return r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.caverock.androidsvg.SVGAndroidRenderer.calculateViewBoxTransform(com.caverock.androidsvg.SVG$Box, com.caverock.androidsvg.SVG$Box, com.caverock.androidsvg.PreserveAspectRatio):android.graphics.Matrix");
+            float fMax = preserveAspectRatio.scale == PreserveAspectRatio.Scale.slice ? Math.max(f3, f4) : Math.min(f3, f4);
+            float f7 = box.width / fMax;
+            float f8 = box.height / fMax;
+            int[] iArr = AnonymousClass1.$SwitchMap$com$caverock$androidsvg$PreserveAspectRatio$Alignment;
+            switch (iArr[alignment.ordinal()]) {
+                case 1:
+                case 2:
+                case 3:
+                    f2 = (box2.width - f7) / 2.0f;
+                    break;
+                case 4:
+                case 5:
+                case 6:
+                    f2 = box2.width - f7;
+                    break;
+                default:
+                    i = iArr[alignment.ordinal()];
+                    if (i == 2) {
+                        f = (box2.height - f8) / 2.0f;
+                        f6 -= f;
+                        matrix.preTranslate(box.minX, box.minY);
+                        matrix.preScale(fMax, fMax);
+                        matrix.preTranslate(f5, f6);
+                        break;
+                    } else {
+                        if (i != 3) {
+                            if (i != 5) {
+                                if (i != 6) {
+                                    if (i != 7) {
+                                        break;
+                                    }
+                                }
+                            }
+                            f = (box2.height - f8) / 2.0f;
+                            f6 -= f;
+                            matrix.preTranslate(box.minX, box.minY);
+                            matrix.preScale(fMax, fMax);
+                            matrix.preTranslate(f5, f6);
+                        }
+                        f = box2.height - f8;
+                        f6 -= f;
+                        matrix.preTranslate(box.minX, box.minY);
+                        matrix.preScale(fMax, fMax);
+                        matrix.preTranslate(f5, f6);
+                    }
+            }
+            f5 -= f2;
+            i = iArr[alignment.ordinal()];
+            if (i == 2) {
+            }
+        }
+        return matrix;
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Code restructure failed: missing block: B:31:0x0048, code lost:
-    
-        if (r5.equals("fantasy") == false) goto L16;
-     */
+    /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
+    /* JADX WARN: Removed duplicated region for block: B:16:0x0029  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static android.graphics.Typeface checkGenericFont(java.lang.String r5, java.lang.Integer r6, com.caverock.androidsvg.SVG.Style.FontStyle r7) {
-        /*
-            r0 = 2
-            r1 = 3
-            com.caverock.androidsvg.SVG$Style$FontStyle r2 = com.caverock.androidsvg.SVG.Style.FontStyle.Italic
-            r3 = 0
-            r4 = 1
-            if (r7 != r2) goto La
-            r7 = r4
-            goto Lb
-        La:
-            r7 = r3
-        Lb:
-            int r6 = r6.intValue()
-            r2 = 500(0x1f4, float:7.0E-43)
-            if (r6 <= r2) goto L19
-            if (r7 == 0) goto L17
-            r6 = r1
-            goto L1e
-        L17:
-            r6 = r4
-            goto L1e
-        L19:
-            if (r7 == 0) goto L1d
-            r6 = r0
-            goto L1e
-        L1d:
-            r6 = r3
-        L1e:
-            r5.getClass()
-            r7 = -1
-            int r2 = r5.hashCode()
-            switch(r2) {
-                case -1536685117: goto L56;
-                case -1431958525: goto L4b;
-                case -1081737434: goto L42;
-                case 109326717: goto L36;
-                case 1126973893: goto L2b;
-                default: goto L29;
-            }
-        L29:
-            r0 = r7
-            goto L61
-        L2b:
-            java.lang.String r0 = "cursive"
-            boolean r5 = r5.equals(r0)
-            if (r5 != 0) goto L34
-            goto L29
-        L34:
-            r0 = 4
-            goto L61
-        L36:
-            java.lang.String r0 = "serif"
-            boolean r5 = r5.equals(r0)
-            if (r5 != 0) goto L40
-            goto L29
-        L40:
-            r0 = r1
-            goto L61
-        L42:
-            java.lang.String r1 = "fantasy"
-            boolean r5 = r5.equals(r1)
-            if (r5 != 0) goto L61
-            goto L29
-        L4b:
-            java.lang.String r0 = "monospace"
-            boolean r5 = r5.equals(r0)
-            if (r5 != 0) goto L54
-            goto L29
-        L54:
-            r0 = r4
-            goto L61
-        L56:
-            java.lang.String r0 = "sans-serif"
-            boolean r5 = r5.equals(r0)
-            if (r5 != 0) goto L60
-            goto L29
-        L60:
-            r0 = r3
-        L61:
-            switch(r0) {
-                case 0: goto L82;
-                case 1: goto L7b;
-                case 2: goto L74;
-                case 3: goto L6d;
-                case 4: goto L66;
-                default: goto L64;
-            }
-        L64:
-            r5 = 0
-            return r5
-        L66:
-            android.graphics.Typeface r5 = android.graphics.Typeface.SANS_SERIF
-            android.graphics.Typeface r5 = android.graphics.Typeface.create(r5, r6)
-            return r5
-        L6d:
-            android.graphics.Typeface r5 = android.graphics.Typeface.SERIF
-            android.graphics.Typeface r5 = android.graphics.Typeface.create(r5, r6)
-            return r5
-        L74:
-            android.graphics.Typeface r5 = android.graphics.Typeface.SANS_SERIF
-            android.graphics.Typeface r5 = android.graphics.Typeface.create(r5, r6)
-            return r5
-        L7b:
-            android.graphics.Typeface r5 = android.graphics.Typeface.MONOSPACE
-            android.graphics.Typeface r5 = android.graphics.Typeface.create(r5, r6)
-            return r5
-        L82:
-            android.graphics.Typeface r5 = android.graphics.Typeface.SANS_SERIF
-            android.graphics.Typeface r5 = android.graphics.Typeface.create(r5, r6)
-            return r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.caverock.androidsvg.SVGAndroidRenderer.checkGenericFont(java.lang.String, java.lang.Integer, com.caverock.androidsvg.SVG$Style$FontStyle):android.graphics.Typeface");
+    public static Typeface checkGenericFont(String str, Integer num, SVG.Style.FontStyle fontStyle) {
+        char c = 2;
+        boolean z = fontStyle == SVG.Style.FontStyle.Italic;
+        int i = num.intValue() > 500 ? z ? 3 : 1 : z ? 2 : 0;
+        str.getClass();
+        switch (str.hashCode()) {
+            case -1536685117:
+                if (!str.equals("sans-serif")) {
+                    c = 65535;
+                    break;
+                } else {
+                    c = 0;
+                    break;
+                }
+            case -1431958525:
+                if (str.equals("monospace")) {
+                    c = 1;
+                    break;
+                }
+                break;
+            case -1081737434:
+                if (!str.equals("fantasy")) {
+                }
+                break;
+            case 109326717:
+                if (str.equals("serif")) {
+                    c = 3;
+                    break;
+                }
+                break;
+            case 1126973893:
+                if (str.equals("cursive")) {
+                    c = 4;
+                    break;
+                }
+                break;
+        }
+        switch (c) {
+            case 0:
+                return Typeface.create(Typeface.SANS_SERIF, i);
+            case 1:
+                return Typeface.create(Typeface.MONOSPACE, i);
+            case 2:
+                return Typeface.create(Typeface.SANS_SERIF, i);
+            case 3:
+                return Typeface.create(Typeface.SERIF, i);
+            case 4:
+                return Typeface.create(Typeface.SANS_SERIF, i);
+            default:
+                return null;
+        }
     }
 
     public static int colourWithOpacity(float f, int i) {
         int i2 = 255;
-        int round = Math.round(((i >> 24) & 255) * f);
-        if (round < 0) {
+        int iRound = Math.round(((i >> 24) & 255) * f);
+        if (iRound < 0) {
             i2 = 0;
-        } else if (round <= 255) {
-            i2 = round;
+        } else if (iRound <= 255) {
+            i2 = iRound;
         }
         return (i2 << 24) | (i & 16777215);
     }
@@ -792,20 +684,20 @@ public class SVGAndroidRenderer {
     }
 
     public static void fillInChainedGradientFields(SVG.GradientElement gradientElement, String str) {
-        SVG.SvgElementBase resolveIRI = gradientElement.document.resolveIRI(str);
-        if (resolveIRI == null) {
+        SVG.SvgElementBase svgElementBaseResolveIRI = gradientElement.document.resolveIRI(str);
+        if (svgElementBaseResolveIRI == null) {
             Log.w("SVGAndroidRenderer", "Gradient reference '" + str + "' not found");
             return;
         }
-        if (!(resolveIRI instanceof SVG.GradientElement)) {
+        if (!(svgElementBaseResolveIRI instanceof SVG.GradientElement)) {
             error("Gradient href attributes must point to other gradient elements", new Object[0]);
             return;
         }
-        if (resolveIRI == gradientElement) {
+        if (svgElementBaseResolveIRI == gradientElement) {
             error("Circular reference in gradient href attribute '%s'", str);
             return;
         }
-        SVG.GradientElement gradientElement2 = (SVG.GradientElement) resolveIRI;
+        SVG.GradientElement gradientElement2 = (SVG.GradientElement) svgElementBaseResolveIRI;
         if (gradientElement.gradientUnitsAreUser == null) {
             gradientElement.gradientUnitsAreUser = gradientElement2.gradientUnitsAreUser;
         }
@@ -821,7 +713,7 @@ public class SVGAndroidRenderer {
         try {
             if (gradientElement instanceof SVG.SvgLinearGradient) {
                 SVG.SvgLinearGradient svgLinearGradient = (SVG.SvgLinearGradient) gradientElement;
-                SVG.SvgLinearGradient svgLinearGradient2 = (SVG.SvgLinearGradient) resolveIRI;
+                SVG.SvgLinearGradient svgLinearGradient2 = (SVG.SvgLinearGradient) svgElementBaseResolveIRI;
                 if (svgLinearGradient.x1 == null) {
                     svgLinearGradient.x1 = svgLinearGradient2.x1;
                 }
@@ -835,7 +727,7 @@ public class SVGAndroidRenderer {
                     svgLinearGradient.y2 = svgLinearGradient2.y2;
                 }
             } else {
-                fillInChainedGradientFields((SVG.SvgRadialGradient) gradientElement, (SVG.SvgRadialGradient) resolveIRI);
+                fillInChainedGradientFields((SVG.SvgRadialGradient) gradientElement, (SVG.SvgRadialGradient) svgElementBaseResolveIRI);
             }
         } catch (ClassCastException unused) {
         }
@@ -846,20 +738,20 @@ public class SVGAndroidRenderer {
     }
 
     public static void fillInChainedPatternFields(SVG.Pattern pattern, String str) {
-        SVG.SvgElementBase resolveIRI = pattern.document.resolveIRI(str);
-        if (resolveIRI == null) {
+        SVG.SvgElementBase svgElementBaseResolveIRI = pattern.document.resolveIRI(str);
+        if (svgElementBaseResolveIRI == null) {
             Log.w("SVGAndroidRenderer", "Pattern reference '" + str + "' not found");
             return;
         }
-        if (!(resolveIRI instanceof SVG.Pattern)) {
+        if (!(svgElementBaseResolveIRI instanceof SVG.Pattern)) {
             error("Pattern href attributes must point to other pattern elements", new Object[0]);
             return;
         }
-        if (resolveIRI == pattern) {
+        if (svgElementBaseResolveIRI == pattern) {
             error("Circular reference in pattern href attribute '%s'", str);
             return;
         }
-        SVG.Pattern pattern2 = (SVG.Pattern) resolveIRI;
+        SVG.Pattern pattern2 = (SVG.Pattern) svgElementBaseResolveIRI;
         if (pattern.patternUnitsAreUser == null) {
             pattern.patternUnitsAreUser = pattern2.patternUnitsAreUser;
         }
@@ -903,7 +795,7 @@ public class SVGAndroidRenderer {
     public static void setPaintColour(RendererState rendererState, boolean z, SVG.SvgPaint svgPaint) {
         int i;
         SVG.Style style = rendererState.style;
-        float floatValue = (z ? style.fillOpacity : style.strokeOpacity).floatValue();
+        float fFloatValue = (z ? style.fillOpacity : style.strokeOpacity).floatValue();
         if (svgPaint instanceof SVG.Colour) {
             i = ((SVG.Colour) svgPaint).colour;
         } else if (!(svgPaint instanceof SVG.CurrentColor)) {
@@ -911,22 +803,22 @@ public class SVGAndroidRenderer {
         } else {
             i = rendererState.style.color.colour;
         }
-        int colourWithOpacity = colourWithOpacity(floatValue, i);
+        int iColourWithOpacity = colourWithOpacity(fFloatValue, i);
         if (z) {
-            rendererState.fillPaint.setColor(colourWithOpacity);
+            rendererState.fillPaint.setColor(iColourWithOpacity);
         } else {
-            rendererState.strokePaint.setColor(colourWithOpacity);
+            rendererState.strokePaint.setColor(iColourWithOpacity);
         }
     }
 
     public final Path calculateClipPath(SVG.SvgElement svgElement, SVG.Box box) {
-        Path objectToPath;
-        SVG.SvgElementBase resolveIRI = svgElement.document.resolveIRI(this.state.style.clipPath);
-        if (resolveIRI == null) {
+        Path pathObjectToPath;
+        SVG.SvgElementBase svgElementBaseResolveIRI = svgElement.document.resolveIRI(this.state.style.clipPath);
+        if (svgElementBaseResolveIRI == null) {
             error("ClipPath reference '%s' not found", this.state.style.clipPath);
             return null;
         }
-        SVG.ClipPath clipPath = (SVG.ClipPath) resolveIRI;
+        SVG.ClipPath clipPath = (SVG.ClipPath) svgElementBaseResolveIRI;
         this.stateStack.push(this.state);
         this.state = findInheritFromAncestorState(clipPath);
         Boolean bool = clipPath.clipPathUnitsAreUser;
@@ -948,17 +840,17 @@ public class SVGAndroidRenderer {
             Object obj = arrayList.get(i);
             i++;
             SVG.SvgObject svgObject = (SVG.SvgObject) obj;
-            if ((svgObject instanceof SVG.SvgElement) && (objectToPath = objectToPath((SVG.SvgElement) svgObject, true)) != null) {
-                path.op(objectToPath, Path.Op.UNION);
+            if ((svgObject instanceof SVG.SvgElement) && (pathObjectToPath = objectToPath((SVG.SvgElement) svgObject, true)) != null) {
+                path.op(pathObjectToPath, Path.Op.UNION);
             }
         }
         if (this.state.style.clipPath != null) {
             if (clipPath.boundingBox == null) {
                 clipPath.boundingBox = calculatePathBounds(path);
             }
-            Path calculateClipPath = calculateClipPath(clipPath, clipPath.boundingBox);
-            if (calculateClipPath != null) {
-                path.op(calculateClipPath, Path.Op.INTERSECT);
+            Path pathCalculateClipPath = calculateClipPath(clipPath, clipPath.boundingBox);
+            if (pathCalculateClipPath != null) {
+                path.op(pathCalculateClipPath, Path.Op.INTERSECT);
             }
         }
         path.transform(matrix);
@@ -973,11 +865,11 @@ public class SVGAndroidRenderer {
     }
 
     public final void checkForClipPath(SVG.SvgElement svgElement, SVG.Box box) {
-        Path calculateClipPath;
-        if (this.state.style.clipPath == null || (calculateClipPath = calculateClipPath(svgElement, box)) == null) {
+        Path pathCalculateClipPath;
+        if (this.state.style.clipPath == null || (pathCalculateClipPath = calculateClipPath(svgElement, box)) == null) {
             return;
         }
-        this.canvas.clipPath(calculateClipPath);
+        this.canvas.clipPath(pathCalculateClipPath);
     }
 
     public final void checkForGradientsAndPatterns(SVG.SvgElement svgElement) {
@@ -993,15 +885,15 @@ public class SVGAndroidRenderer {
 
     public final void decodePaintReference(boolean z, SVG.Box box, SVG.PaintReference paintReference) {
         float f;
-        float floatValue;
+        float fFloatValue;
         float f2;
-        float floatValue2;
+        float fFloatValue2;
         float f3;
-        float floatValue3;
+        float fFloatValue3;
         float f4;
         float f5;
-        SVG.SvgElementBase resolveIRI = this.document.resolveIRI(paintReference.href);
-        if (resolveIRI == null) {
+        SVG.SvgElementBase svgElementBaseResolveIRI = this.document.resolveIRI(paintReference.href);
+        if (svgElementBaseResolveIRI == null) {
             error("%s reference '%s' not found", z ? "Fill" : "Stroke", paintReference.href);
             SVG.SvgPaint svgPaint = paintReference.fallback;
             if (svgPaint != null) {
@@ -1016,8 +908,8 @@ public class SVGAndroidRenderer {
             }
         }
         float f6 = -1.0f;
-        if (resolveIRI instanceof SVG.SvgLinearGradient) {
-            SVG.SvgLinearGradient svgLinearGradient = (SVG.SvgLinearGradient) resolveIRI;
+        if (svgElementBaseResolveIRI instanceof SVG.SvgLinearGradient) {
+            SVG.SvgLinearGradient svgLinearGradient = (SVG.SvgLinearGradient) svgElementBaseResolveIRI;
             String str = svgLinearGradient.href;
             if (str != null) {
                 fillInChainedGradientFields(svgLinearGradient, str);
@@ -1033,30 +925,30 @@ public class SVGAndroidRenderer {
                     box2 = rendererState2.viewPort;
                 }
                 SVG.Length length = svgLinearGradient.x1;
-                float floatValueX = length != null ? length.floatValueX(this) : 0.0f;
+                float fFloatValueX = length != null ? length.floatValueX(this) : 0.0f;
                 SVG.Length length2 = svgLinearGradient.y1;
-                floatValue2 = length2 != null ? length2.floatValueY(this) : 0.0f;
+                fFloatValue2 = length2 != null ? length2.floatValueY(this) : 0.0f;
                 SVG.Length length3 = svgLinearGradient.x2;
-                float floatValueX2 = length3 != null ? length3.floatValueX(this) : box2.width;
+                float fFloatValueX2 = length3 != null ? length3.floatValueX(this) : box2.width;
                 SVG.Length length4 = svgLinearGradient.y2;
-                f4 = floatValueX;
-                f5 = floatValueX2;
-                floatValue3 = length4 != null ? length4.floatValueY(this) : 0.0f;
+                f4 = fFloatValueX;
+                f5 = fFloatValueX2;
+                fFloatValue3 = length4 != null ? length4.floatValueY(this) : 0.0f;
                 f3 = 256.0f;
             } else {
                 SVG.Length length5 = svgLinearGradient.x1;
-                float floatValue4 = length5 != null ? length5.floatValue(this, 1.0f) : 0.0f;
+                float fFloatValue4 = length5 != null ? length5.floatValue(this, 1.0f) : 0.0f;
                 SVG.Length length6 = svgLinearGradient.y1;
-                floatValue2 = length6 != null ? length6.floatValue(this, 1.0f) : 0.0f;
+                fFloatValue2 = length6 != null ? length6.floatValue(this, 1.0f) : 0.0f;
                 SVG.Length length7 = svgLinearGradient.x2;
-                float floatValue5 = length7 != null ? length7.floatValue(this, 1.0f) : 1.0f;
+                float fFloatValue5 = length7 != null ? length7.floatValue(this, 1.0f) : 1.0f;
                 f3 = 256.0f;
                 SVG.Length length8 = svgLinearGradient.y2;
-                floatValue3 = length8 != null ? length8.floatValue(this, 1.0f) : 0.0f;
-                f4 = floatValue4;
-                f5 = floatValue5;
+                fFloatValue3 = length8 != null ? length8.floatValue(this, 1.0f) : 0.0f;
+                f4 = fFloatValue4;
+                f5 = fFloatValue5;
             }
-            float f7 = floatValue2;
+            float f7 = fFloatValue2;
             statePush();
             this.state = findInheritFromAncestorState(svgLinearGradient);
             Matrix matrix = new Matrix();
@@ -1090,10 +982,10 @@ public class SVGAndroidRenderer {
                 i2++;
                 SVG.Stop stop = (SVG.Stop) ((SVG.SvgObject) obj);
                 Float f8 = stop.offset;
-                float floatValue6 = f8 != null ? f8.floatValue() : 0.0f;
-                if (i == 0 || floatValue6 >= f6) {
-                    fArr[i] = floatValue6;
-                    f6 = floatValue6;
+                float fFloatValue6 = f8 != null ? f8.floatValue() : 0.0f;
+                if (i == 0 || fFloatValue6 >= f6) {
+                    fArr[i] = fFloatValue6;
+                    f6 = fFloatValue6;
                 } else {
                     fArr[i] = f6;
                 }
@@ -1108,7 +1000,7 @@ public class SVGAndroidRenderer {
                 i++;
                 statePop();
             }
-            if ((f4 == f5 && f7 == floatValue3) || size == 1) {
+            if ((f4 == f5 && f7 == fFloatValue3) || size == 1) {
                 statePop();
                 paint.setColor(iArr[size - 1]);
                 return;
@@ -1124,16 +1016,16 @@ public class SVGAndroidRenderer {
             }
             Shader.TileMode tileMode2 = tileMode;
             statePop();
-            LinearGradient linearGradient = new LinearGradient(f4, f7, f5, floatValue3, iArr, fArr, tileMode2);
+            LinearGradient linearGradient = new LinearGradient(f4, f7, f5, fFloatValue3, iArr, fArr, tileMode2);
             linearGradient.setLocalMatrix(matrix);
             paint.setShader(linearGradient);
-            int floatValue7 = (int) (this.state.style.fillOpacity.floatValue() * f3);
-            paint.setAlpha(floatValue7 < 0 ? 0 : floatValue7 > 255 ? 255 : floatValue7);
+            int iFloatValue = (int) (this.state.style.fillOpacity.floatValue() * f3);
+            paint.setAlpha(iFloatValue < 0 ? 0 : iFloatValue > 255 ? 255 : iFloatValue);
             return;
         }
-        if (!(resolveIRI instanceof SVG.SvgRadialGradient)) {
-            if (resolveIRI instanceof SVG.SolidColor) {
-                SVG.SolidColor solidColor = (SVG.SolidColor) resolveIRI;
+        if (!(svgElementBaseResolveIRI instanceof SVG.SvgRadialGradient)) {
+            if (svgElementBaseResolveIRI instanceof SVG.SolidColor) {
+                SVG.SolidColor solidColor = (SVG.SolidColor) svgElementBaseResolveIRI;
                 if (z) {
                     if (isSpecified(solidColor.baseStyle, 2147483648L)) {
                         RendererState rendererState3 = this.state;
@@ -1171,7 +1063,7 @@ public class SVGAndroidRenderer {
             }
             return;
         }
-        SVG.SvgRadialGradient svgRadialGradient = (SVG.SvgRadialGradient) resolveIRI;
+        SVG.SvgRadialGradient svgRadialGradient = (SVG.SvgRadialGradient) svgElementBaseResolveIRI;
         String str2 = svgRadialGradient.href;
         if (str2 != null) {
             fillInChainedGradientFields(svgRadialGradient, str2);
@@ -1183,22 +1075,22 @@ public class SVGAndroidRenderer {
         if (z3) {
             SVG.Length length9 = new SVG.Length(50.0f, SVG.Unit.percent);
             SVG.Length length10 = svgRadialGradient.cx;
-            float floatValueX3 = length10 != null ? length10.floatValueX(this) : length9.floatValueX(this);
+            float fFloatValueX3 = length10 != null ? length10.floatValueX(this) : length9.floatValueX(this);
             SVG.Length length11 = svgRadialGradient.cy;
-            float floatValueY = length11 != null ? length11.floatValueY(this) : length9.floatValueY(this);
+            float fFloatValueY = length11 != null ? length11.floatValueY(this) : length9.floatValueY(this);
             SVG.Length length12 = svgRadialGradient.r;
-            floatValue = length12 != null ? length12.floatValue(this) : length9.floatValue(this);
-            f = floatValueX3;
-            f2 = floatValueY;
+            fFloatValue = length12 != null ? length12.floatValue(this) : length9.floatValue(this);
+            f = fFloatValueX3;
+            f2 = fFloatValueY;
         } else {
             SVG.Length length13 = svgRadialGradient.cx;
-            float floatValue8 = length13 != null ? length13.floatValue(this, 1.0f) : 0.5f;
+            float fFloatValue7 = length13 != null ? length13.floatValue(this, 1.0f) : 0.5f;
             SVG.Length length14 = svgRadialGradient.cy;
-            float floatValue9 = length14 != null ? length14.floatValue(this, 1.0f) : 0.5f;
+            float fFloatValue8 = length14 != null ? length14.floatValue(this, 1.0f) : 0.5f;
             SVG.Length length15 = svgRadialGradient.r;
-            f = floatValue8;
-            floatValue = length15 != null ? length15.floatValue(this, 1.0f) : 0.5f;
-            f2 = floatValue9;
+            f = fFloatValue7;
+            fFloatValue = length15 != null ? length15.floatValue(this, 1.0f) : 0.5f;
+            f2 = fFloatValue8;
         }
         statePush();
         this.state = findInheritFromAncestorState(svgRadialGradient);
@@ -1233,10 +1125,10 @@ public class SVGAndroidRenderer {
             i3++;
             SVG.Stop stop2 = (SVG.Stop) ((SVG.SvgObject) obj2);
             Float f9 = stop2.offset;
-            float floatValue10 = f9 != null ? f9.floatValue() : 0.0f;
-            if (i4 == 0 || floatValue10 >= f6) {
-                fArr2[i4] = floatValue10;
-                f6 = floatValue10;
+            float fFloatValue9 = f9 != null ? f9.floatValue() : 0.0f;
+            if (i4 == 0 || fFloatValue9 >= f6) {
+                fArr2[i4] = fFloatValue9;
+                f6 = fFloatValue9;
             } else {
                 fArr2[i4] = f6;
             }
@@ -1251,7 +1143,7 @@ public class SVGAndroidRenderer {
             i4++;
             statePop();
         }
-        if (floatValue == 0.0f || size3 == 1) {
+        if (fFloatValue == 0.0f || size3 == 1) {
             statePop();
             paint2.setColor(iArr2[size3 - 1]);
             return;
@@ -1267,16 +1159,16 @@ public class SVGAndroidRenderer {
         }
         Shader.TileMode tileMode4 = tileMode3;
         statePop();
-        RadialGradient radialGradient = new RadialGradient(f, f2, floatValue, iArr2, fArr2, tileMode4);
+        RadialGradient radialGradient = new RadialGradient(f, f2, fFloatValue, iArr2, fArr2, tileMode4);
         radialGradient.setLocalMatrix(matrix3);
         paint2.setShader(radialGradient);
-        int floatValue11 = (int) (this.state.style.fillOpacity.floatValue() * 256.0f);
-        if (floatValue11 < 0) {
-            floatValue11 = 0;
-        } else if (floatValue11 > 255) {
-            floatValue11 = 255;
+        int iFloatValue2 = (int) (this.state.style.fillOpacity.floatValue() * 256.0f);
+        if (iFloatValue2 < 0) {
+            iFloatValue2 = 0;
+        } else if (iFloatValue2 > 255) {
+            iFloatValue2 = 255;
         }
-        paint2.setAlpha(floatValue11);
+        paint2.setAlpha(iFloatValue2);
     }
 
     public final boolean display() {
@@ -1287,18 +1179,169 @@ public class SVGAndroidRenderer {
         return true;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:60:0x01a9  */
-    /* JADX WARN: Removed duplicated region for block: B:88:0x0226  */
+    /* JADX WARN: Removed duplicated region for block: B:79:0x0177  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void doFilledPath(com.caverock.androidsvg.SVG.SvgElement r23, android.graphics.Path r24) {
-        /*
-            Method dump skipped, instructions count: 569
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.caverock.androidsvg.SVGAndroidRenderer.doFilledPath(com.caverock.androidsvg.SVG$SvgElement, android.graphics.Path):void");
+    public final void doFilledPath(SVG.SvgElement svgElement, Path path) {
+        float fFloatValueX;
+        float fFloatValueY;
+        float fFloatValueY2;
+        float fFloatValueX2;
+        int i;
+        int i2;
+        float f;
+        SVG.SvgPaint svgPaint = this.state.style.fill;
+        if (svgPaint instanceof SVG.PaintReference) {
+            SVG.SvgElementBase svgElementBaseResolveIRI = this.document.resolveIRI(((SVG.PaintReference) svgPaint).href);
+            if (svgElementBaseResolveIRI instanceof SVG.Pattern) {
+                SVG.Pattern pattern = (SVG.Pattern) svgElementBaseResolveIRI;
+                Boolean bool = pattern.patternUnitsAreUser;
+                boolean z = bool != null && bool.booleanValue();
+                String str = pattern.href;
+                if (str != null) {
+                    fillInChainedPatternFields(pattern, str);
+                }
+                if (z) {
+                    SVG.Length length = pattern.x;
+                    fFloatValueX = length != null ? length.floatValueX(this) : 0.0f;
+                    SVG.Length length2 = pattern.y;
+                    fFloatValueY2 = length2 != null ? length2.floatValueY(this) : 0.0f;
+                    SVG.Length length3 = pattern.width;
+                    fFloatValueX2 = length3 != null ? length3.floatValueX(this) : 0.0f;
+                    SVG.Length length4 = pattern.height;
+                    fFloatValueY = length4 != null ? length4.floatValueY(this) : 0.0f;
+                } else {
+                    SVG.Length length5 = pattern.x;
+                    float fFloatValue = length5 != null ? length5.floatValue(this, 1.0f) : 0.0f;
+                    SVG.Length length6 = pattern.y;
+                    float fFloatValue2 = length6 != null ? length6.floatValue(this, 1.0f) : 0.0f;
+                    SVG.Length length7 = pattern.width;
+                    float fFloatValue3 = length7 != null ? length7.floatValue(this, 1.0f) : 0.0f;
+                    SVG.Length length8 = pattern.height;
+                    float fFloatValue4 = length8 != null ? length8.floatValue(this, 1.0f) : 0.0f;
+                    SVG.Box box = svgElement.boundingBox;
+                    float f2 = box.minX;
+                    float f3 = box.width;
+                    fFloatValueX = (fFloatValue * f3) + f2;
+                    float f4 = box.minY;
+                    float f5 = box.height;
+                    float f6 = fFloatValue3 * f3;
+                    fFloatValueY = fFloatValue4 * f5;
+                    fFloatValueY2 = (fFloatValue2 * f5) + f4;
+                    fFloatValueX2 = f6;
+                }
+                if (fFloatValueX2 == 0.0f || fFloatValueY == 0.0f) {
+                    return;
+                }
+                PreserveAspectRatio preserveAspectRatio = pattern.preserveAspectRatio;
+                if (preserveAspectRatio == null) {
+                    preserveAspectRatio = PreserveAspectRatio.LETTERBOX;
+                }
+                statePush();
+                this.canvas.clipPath(path);
+                RendererState rendererState = new RendererState(this);
+                updateStyle(rendererState, SVG.Style.getDefaultStyle());
+                rendererState.style.overflow = Boolean.FALSE;
+                findInheritFromAncestorState(pattern, rendererState);
+                this.state = rendererState;
+                SVG.Box box2 = svgElement.boundingBox;
+                Matrix matrix = pattern.patternTransform;
+                if (matrix != null) {
+                    this.canvas.concat(matrix);
+                    Matrix matrix2 = new Matrix();
+                    if (pattern.patternTransform.invert(matrix2)) {
+                        SVG.Box box3 = svgElement.boundingBox;
+                        float f7 = box3.minX;
+                        i = 0;
+                        float f8 = box3.minY;
+                        float fMaxX = box3.maxX();
+                        SVG.Box box4 = svgElement.boundingBox;
+                        i2 = 1;
+                        float f9 = box4.minY;
+                        float fMaxX2 = box4.maxX();
+                        float fMaxY = svgElement.boundingBox.maxY();
+                        SVG.Box box5 = svgElement.boundingBox;
+                        float[] fArr = {f7, f8, fMaxX, f9, fMaxX2, fMaxY, box5.minX, box5.maxY()};
+                        matrix2.mapPoints(fArr);
+                        float f10 = fArr[0];
+                        float f11 = fArr[1];
+                        RectF rectF = new RectF(f10, f11, f10, f11);
+                        for (int i3 = 2; i3 <= 6; i3 += 2) {
+                            float f12 = fArr[i3];
+                            if (f12 < rectF.left) {
+                                rectF.left = f12;
+                            }
+                            if (f12 > rectF.right) {
+                                rectF.right = f12;
+                            }
+                            float f13 = fArr[i3 + 1];
+                            if (f13 < rectF.top) {
+                                rectF.top = f13;
+                            }
+                            if (f13 > rectF.bottom) {
+                                rectF.bottom = f13;
+                            }
+                        }
+                        float f14 = rectF.left;
+                        float f15 = rectF.top;
+                        box2 = new SVG.Box(f14, f15, rectF.right - f14, rectF.bottom - f15);
+                    } else {
+                        i = 0;
+                        i2 = 1;
+                    }
+                }
+                float fFloor = (((float) Math.floor((box2.minX - fFloatValueX) / fFloatValueX2)) * fFloatValueX2) + fFloatValueX;
+                float fMaxX3 = box2.maxX();
+                float fMaxY2 = box2.maxY();
+                SVG.Box box6 = new SVG.Box(0.0f, 0.0f, fFloatValueX2, fFloatValueY);
+                boolean zPushLayer = pushLayer();
+                for (float fFloor2 = (((float) Math.floor((box2.minY - fFloatValueY2) / fFloatValueY)) * fFloatValueY) + fFloatValueY2; fFloor2 < fMaxY2; fFloor2 += fFloatValueY) {
+                    float f16 = fFloor;
+                    while (f16 < fMaxX3) {
+                        box6.minX = f16;
+                        box6.minY = fFloor2;
+                        statePush();
+                        if (this.state.style.overflow.booleanValue()) {
+                            f = fMaxY2;
+                        } else {
+                            f = fMaxY2;
+                            setClipRect(box6.minX, box6.minY, box6.width, box6.height);
+                        }
+                        SVG.Box box7 = pattern.viewBox;
+                        if (box7 != null) {
+                            this.canvas.concat(calculateViewBoxTransform(box6, box7, preserveAspectRatio));
+                        } else {
+                            Boolean bool2 = pattern.patternContentUnitsAreUser;
+                            int i4 = (bool2 == null || bool2.booleanValue()) ? i2 : i;
+                            this.canvas.translate(f16, fFloor2);
+                            if (i4 == 0) {
+                                Canvas canvas = this.canvas;
+                                SVG.Box box8 = svgElement.boundingBox;
+                                canvas.scale(box8.width, box8.height);
+                            }
+                        }
+                        ArrayList arrayList = (ArrayList) pattern.children;
+                        int size = arrayList.size();
+                        int i5 = i;
+                        while (i5 < size) {
+                            Object obj = arrayList.get(i5);
+                            i5++;
+                            render((SVG.SvgObject) obj);
+                        }
+                        statePop();
+                        f16 += fFloatValueX2;
+                        fMaxY2 = f;
+                    }
+                }
+                if (zPushLayer) {
+                    popLayer(pattern.boundingBox);
+                }
+                statePop();
+                return;
+            }
+        }
+        this.canvas.drawPath(path, this.state.fillPaint);
     }
 
     public final void doStroke(Path path) {
@@ -1328,8 +1371,8 @@ public class SVGAndroidRenderer {
 
     public final void enumerateTextSpans(SVG.TextContainer textContainer, TextProcessor textProcessor) {
         float f;
-        float f2;
-        float f3;
+        float fFloatValueY;
+        float fFloatValueX;
         SVG.Style.TextAnchor anchorPosition;
         if (display()) {
             Iterator it = ((ArrayList) textContainer.children).iterator();
@@ -1339,17 +1382,17 @@ public class SVGAndroidRenderer {
                 if (svgObject instanceof SVG.TextSequence) {
                     textProcessor.processText(textXMLSpaceTransform(((SVG.TextSequence) svgObject).text, z, !it.hasNext()));
                 } else if (textProcessor.doTextContainer((SVG.TextContainer) svgObject)) {
-                    float f4 = 0.0f;
+                    float fFloatValueY2 = 0.0f;
                     if (svgObject instanceof SVG.TextPath) {
                         statePush();
                         SVG.TextPath textPath = (SVG.TextPath) svgObject;
                         updateStyleForElement(textPath, this.state);
                         if (display() && visible()) {
-                            SVG.SvgElementBase resolveIRI = textPath.document.resolveIRI(textPath.href);
-                            if (resolveIRI == null) {
+                            SVG.SvgElementBase svgElementBaseResolveIRI = textPath.document.resolveIRI(textPath.href);
+                            if (svgElementBaseResolveIRI == null) {
                                 error("TextPath reference '%s' not found", textPath.href);
                             } else {
-                                SVG.Path path = (SVG.Path) resolveIRI;
+                                SVG.Path path = (SVG.Path) svgElementBaseResolveIRI;
                                 Path path2 = new PathConverter(this, path.d).path;
                                 Matrix matrix = path.transform;
                                 if (matrix != null) {
@@ -1357,19 +1400,19 @@ public class SVGAndroidRenderer {
                                 }
                                 PathMeasure pathMeasure = new PathMeasure(path2, false);
                                 SVG.Length length = textPath.startOffset;
-                                float floatValue = length != null ? length.floatValue(this, pathMeasure.getLength()) : 0.0f;
+                                float fFloatValue = length != null ? length.floatValue(this, pathMeasure.getLength()) : 0.0f;
                                 SVG.Style.TextAnchor anchorPosition2 = getAnchorPosition();
                                 if (anchorPosition2 != SVG.Style.TextAnchor.Start) {
-                                    float calculateTextWidth = calculateTextWidth(textPath);
+                                    float fCalculateTextWidth = calculateTextWidth(textPath);
                                     if (anchorPosition2 == SVG.Style.TextAnchor.Middle) {
-                                        calculateTextWidth /= 2.0f;
+                                        fCalculateTextWidth /= 2.0f;
                                     }
-                                    floatValue -= calculateTextWidth;
+                                    fFloatValue -= fCalculateTextWidth;
                                 }
                                 checkForGradientsAndPatterns(textPath.textRoot);
-                                boolean pushLayer = pushLayer();
-                                enumerateTextSpans(textPath, new PathTextDrawer(path2, floatValue, 0.0f));
-                                if (pushLayer) {
+                                boolean zPushLayer = pushLayer();
+                                enumerateTextSpans(textPath, new PathTextDrawer(path2, fFloatValue, 0.0f));
+                                if (zPushLayer) {
                                     popLayer(textPath.boundingBox);
                                 }
                             }
@@ -1384,39 +1427,39 @@ public class SVGAndroidRenderer {
                             boolean z2 = list != null && ((ArrayList) list).size() > 0;
                             boolean z3 = textProcessor instanceof PlainTextDrawer;
                             if (z3) {
-                                float floatValueX = !z2 ? ((PlainTextDrawer) textProcessor).x : ((SVG.Length) ((ArrayList) tSpan.x).get(0)).floatValueX(this);
+                                float fFloatValueX2 = !z2 ? ((PlainTextDrawer) textProcessor).x : ((SVG.Length) ((ArrayList) tSpan.x).get(0)).floatValueX(this);
                                 List list2 = tSpan.y;
-                                f2 = (list2 == null || ((ArrayList) list2).size() == 0) ? ((PlainTextDrawer) textProcessor).y : ((SVG.Length) ((ArrayList) tSpan.y).get(0)).floatValueY(this);
+                                fFloatValueY = (list2 == null || ((ArrayList) list2).size() == 0) ? ((PlainTextDrawer) textProcessor).y : ((SVG.Length) ((ArrayList) tSpan.y).get(0)).floatValueY(this);
                                 List list3 = tSpan.dx;
-                                f3 = (list3 == null || ((ArrayList) list3).size() == 0) ? 0.0f : ((SVG.Length) ((ArrayList) tSpan.dx).get(0)).floatValueX(this);
+                                fFloatValueX = (list3 == null || ((ArrayList) list3).size() == 0) ? 0.0f : ((SVG.Length) ((ArrayList) tSpan.dx).get(0)).floatValueX(this);
                                 List list4 = tSpan.dy;
                                 if (list4 != null && ((ArrayList) list4).size() != 0) {
-                                    f4 = ((SVG.Length) ((ArrayList) tSpan.dy).get(0)).floatValueY(this);
+                                    fFloatValueY2 = ((SVG.Length) ((ArrayList) tSpan.dy).get(0)).floatValueY(this);
                                 }
-                                float f5 = floatValueX;
-                                f = f4;
-                                f4 = f5;
+                                float f2 = fFloatValueX2;
+                                f = fFloatValueY2;
+                                fFloatValueY2 = f2;
                             } else {
                                 f = 0.0f;
-                                f2 = 0.0f;
-                                f3 = 0.0f;
+                                fFloatValueY = 0.0f;
+                                fFloatValueX = 0.0f;
                             }
                             if (z2 && (anchorPosition = getAnchorPosition()) != SVG.Style.TextAnchor.Start) {
-                                float calculateTextWidth2 = calculateTextWidth(tSpan);
+                                float fCalculateTextWidth2 = calculateTextWidth(tSpan);
                                 if (anchorPosition == SVG.Style.TextAnchor.Middle) {
-                                    calculateTextWidth2 /= 2.0f;
+                                    fCalculateTextWidth2 /= 2.0f;
                                 }
-                                f4 -= calculateTextWidth2;
+                                fFloatValueY2 -= fCalculateTextWidth2;
                             }
                             checkForGradientsAndPatterns(tSpan.textRoot);
                             if (z3) {
                                 PlainTextDrawer plainTextDrawer = (PlainTextDrawer) textProcessor;
-                                plainTextDrawer.x = f4 + f3;
-                                plainTextDrawer.y = f2 + f;
+                                plainTextDrawer.x = fFloatValueY2 + fFloatValueX;
+                                plainTextDrawer.y = fFloatValueY + f;
                             }
-                            boolean pushLayer2 = pushLayer();
+                            boolean zPushLayer2 = pushLayer();
                             enumerateTextSpans(tSpan, textProcessor);
-                            if (pushLayer2) {
+                            if (zPushLayer2) {
                                 popLayer(tSpan.boundingBox);
                             }
                         }
@@ -1427,12 +1470,12 @@ public class SVGAndroidRenderer {
                         updateStyleForElement(tRef, this.state);
                         if (display()) {
                             checkForGradientsAndPatterns(tRef.textRoot);
-                            SVG.SvgElementBase resolveIRI2 = svgObject.document.resolveIRI(tRef.href);
-                            if (resolveIRI2 == null || !(resolveIRI2 instanceof SVG.TextContainer)) {
+                            SVG.SvgElementBase svgElementBaseResolveIRI2 = svgObject.document.resolveIRI(tRef.href);
+                            if (svgElementBaseResolveIRI2 == null || !(svgElementBaseResolveIRI2 instanceof SVG.TextContainer)) {
                                 error("Tref reference '%s' not found", tRef.href);
                             } else {
                                 StringBuilder sb = new StringBuilder();
-                                extractRawText((SVG.TextContainer) resolveIRI2, sb);
+                                extractRawText((SVG.TextContainer) svgElementBaseResolveIRI2, sb);
                                 if (sb.length() > 0) {
                                     textProcessor.processText(sb.toString());
                                 }
@@ -1482,37 +1525,121 @@ public class SVGAndroidRenderer {
         return (fillRule == null || fillRule != SVG.Style.FillRule.EvenOdd) ? Path.FillType.WINDING : Path.FillType.EVEN_ODD;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0053  */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x006a  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0059  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x004e  */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x0048  */
+    /* JADX WARN: Removed duplicated region for block: B:16:0x0048  */
+    /* JADX WARN: Removed duplicated region for block: B:17:0x004e  */
+    /* JADX WARN: Removed duplicated region for block: B:20:0x0053  */
+    /* JADX WARN: Removed duplicated region for block: B:21:0x0059  */
+    /* JADX WARN: Removed duplicated region for block: B:24:0x006a  */
+    /* JADX WARN: Removed duplicated region for block: B:29:0x0081  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final android.graphics.Path makePathAndBoundingBox(com.caverock.androidsvg.SVG.Rect r20) {
-        /*
-            Method dump skipped, instructions count: 224
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.caverock.androidsvg.SVGAndroidRenderer.makePathAndBoundingBox(com.caverock.androidsvg.SVG$Rect):android.graphics.Path");
+    public final Path makePathAndBoundingBox(SVG.Rect rect) {
+        float fFloatValueX;
+        float fFloatValueY;
+        float fMin;
+        float fFloatValueX2;
+        float fFloatValueY2;
+        float f;
+        float f2;
+        Path path;
+        SVG.Length length = rect.rx;
+        if (length == null && rect.ry == null) {
+            fFloatValueX = 0.0f;
+        } else if (length == null) {
+            fFloatValueX = rect.ry.floatValueY(this);
+        } else {
+            if (rect.ry != null) {
+                fFloatValueX = length.floatValueX(this);
+                fFloatValueY = rect.ry.floatValueY(this);
+                fMin = Math.min(fFloatValueX, rect.width.floatValueX(this) / 2.0f);
+                float fMin2 = Math.min(fFloatValueY, rect.height.floatValueY(this) / 2.0f);
+                SVG.Length length2 = rect.x;
+                fFloatValueX2 = length2 == null ? length2.floatValueX(this) : 0.0f;
+                SVG.Length length3 = rect.y;
+                fFloatValueY2 = length3 == null ? length3.floatValueY(this) : 0.0f;
+                float fFloatValueX3 = rect.width.floatValueX(this);
+                float fFloatValueY3 = rect.height.floatValueY(this);
+                if (rect.boundingBox == null) {
+                    rect.boundingBox = new SVG.Box(fFloatValueX2, fFloatValueY2, fFloatValueX3, fFloatValueY3);
+                }
+                f = fFloatValueX3 + fFloatValueX2;
+                f2 = fFloatValueY2 + fFloatValueY3;
+                path = new Path();
+                if (fMin != 0.0f || fMin2 == 0.0f) {
+                    path.moveTo(fFloatValueX2, fFloatValueY2);
+                    path.lineTo(f, fFloatValueY2);
+                    path.lineTo(f, f2);
+                    path.lineTo(fFloatValueX2, f2);
+                    path.lineTo(fFloatValueX2, fFloatValueY2);
+                } else {
+                    float f3 = fMin * 0.5522848f;
+                    float f4 = 0.5522848f * fMin2;
+                    float f5 = fFloatValueY2 + fMin2;
+                    path.moveTo(fFloatValueX2, f5);
+                    float f6 = f5 - f4;
+                    float f7 = fFloatValueX2 + fMin;
+                    float f8 = f7 - f3;
+                    path.cubicTo(fFloatValueX2, f6, f8, fFloatValueY2, f7, fFloatValueY2);
+                    float f9 = f - fMin;
+                    path.lineTo(f9, fFloatValueY2);
+                    float f10 = f9 + f3;
+                    path.cubicTo(f10, fFloatValueY2, f, f6, f, f5);
+                    float f11 = f2 - fMin2;
+                    path.lineTo(f, f11);
+                    float f12 = f11 + f4;
+                    path.cubicTo(f, f12, f10, f2, f9, f2);
+                    path.lineTo(f7, f2);
+                    float f13 = fFloatValueX2;
+                    path.cubicTo(f8, f2, f13, f12, fFloatValueX2, f11);
+                    path.lineTo(f13, f5);
+                }
+                path.close();
+                return path;
+            }
+            fFloatValueX = length.floatValueX(this);
+        }
+        fFloatValueY = fFloatValueX;
+        fMin = Math.min(fFloatValueX, rect.width.floatValueX(this) / 2.0f);
+        float fMin22 = Math.min(fFloatValueY, rect.height.floatValueY(this) / 2.0f);
+        SVG.Length length22 = rect.x;
+        if (length22 == null) {
+        }
+        SVG.Length length32 = rect.y;
+        if (length32 == null) {
+        }
+        float fFloatValueX32 = rect.width.floatValueX(this);
+        float fFloatValueY32 = rect.height.floatValueY(this);
+        if (rect.boundingBox == null) {
+        }
+        f = fFloatValueX32 + fFloatValueX2;
+        f2 = fFloatValueY2 + fFloatValueY32;
+        path = new Path();
+        if (fMin != 0.0f) {
+            path.moveTo(fFloatValueX2, fFloatValueY2);
+            path.lineTo(f, fFloatValueY2);
+            path.lineTo(f, f2);
+            path.lineTo(fFloatValueX2, f2);
+            path.lineTo(fFloatValueX2, fFloatValueY2);
+        }
+        path.close();
+        return path;
     }
 
     public final SVG.Box makeViewPort(SVG.Length length, SVG.Length length2, SVG.Length length3, SVG.Length length4) {
-        float floatValueX = length != null ? length.floatValueX(this) : 0.0f;
-        float floatValueY = length2 != null ? length2.floatValueY(this) : 0.0f;
+        float fFloatValueX = length != null ? length.floatValueX(this) : 0.0f;
+        float fFloatValueY = length2 != null ? length2.floatValueY(this) : 0.0f;
         RendererState rendererState = this.state;
         SVG.Box box = rendererState.viewBox;
         if (box == null) {
             box = rendererState.viewPort;
         }
-        return new SVG.Box(floatValueX, floatValueY, length3 != null ? length3.floatValueX(this) : box.width, length4 != null ? length4.floatValueY(this) : box.height);
+        return new SVG.Box(fFloatValueX, fFloatValueY, length3 != null ? length3.floatValueX(this) : box.width, length4 != null ? length4.floatValueY(this) : box.height);
     }
 
     public final Path objectToPath(SVG.SvgElement svgElement, boolean z) {
-        Path path;
-        Path calculateClipPath;
+        Path pathMakePathAndBoundingBox;
+        Path pathCalculateClipPath;
         this.stateStack.push(this.state);
         RendererState rendererState = new RendererState(this, this.state);
         this.state = rendererState;
@@ -1526,52 +1653,52 @@ public class SVGAndroidRenderer {
                 error("<use> elements inside a <clipPath> cannot reference another <use>", new Object[0]);
             }
             SVG.Use use = (SVG.Use) svgElement;
-            SVG.SvgElementBase resolveIRI = svgElement.document.resolveIRI(use.href);
-            if (resolveIRI == null) {
+            SVG.SvgElementBase svgElementBaseResolveIRI = svgElement.document.resolveIRI(use.href);
+            if (svgElementBaseResolveIRI == null) {
                 error("Use reference '%s' not found", use.href);
                 this.state = (RendererState) this.stateStack.pop();
                 return null;
             }
-            if (!(resolveIRI instanceof SVG.SvgElement)) {
+            if (!(svgElementBaseResolveIRI instanceof SVG.SvgElement)) {
                 this.state = (RendererState) this.stateStack.pop();
                 return null;
             }
-            path = objectToPath((SVG.SvgElement) resolveIRI, false);
-            if (path != null) {
+            pathMakePathAndBoundingBox = objectToPath((SVG.SvgElement) svgElementBaseResolveIRI, false);
+            if (pathMakePathAndBoundingBox != null) {
                 if (use.boundingBox == null) {
-                    use.boundingBox = calculatePathBounds(path);
+                    use.boundingBox = calculatePathBounds(pathMakePathAndBoundingBox);
                 }
                 Matrix matrix = use.transform;
                 if (matrix != null) {
-                    path.transform(matrix);
+                    pathMakePathAndBoundingBox.transform(matrix);
                 }
-                if (this.state.style.clipPath != null && (calculateClipPath = calculateClipPath(svgElement, svgElement.boundingBox)) != null) {
-                    path.op(calculateClipPath, Path.Op.INTERSECT);
+                if (this.state.style.clipPath != null && (pathCalculateClipPath = calculateClipPath(svgElement, svgElement.boundingBox)) != null) {
+                    pathMakePathAndBoundingBox.op(pathCalculateClipPath, Path.Op.INTERSECT);
                 }
                 this.state = (RendererState) this.stateStack.pop();
-                return path;
+                return pathMakePathAndBoundingBox;
             }
             return null;
         }
         if (svgElement instanceof SVG.GraphicsElement) {
             SVG.GraphicsElement graphicsElement = (SVG.GraphicsElement) svgElement;
             if (svgElement instanceof SVG.Path) {
-                path = new PathConverter(this, ((SVG.Path) svgElement).d).path;
+                pathMakePathAndBoundingBox = new PathConverter(this, ((SVG.Path) svgElement).d).path;
                 if (svgElement.boundingBox == null) {
-                    svgElement.boundingBox = calculatePathBounds(path);
+                    svgElement.boundingBox = calculatePathBounds(pathMakePathAndBoundingBox);
                 }
             } else {
-                path = svgElement instanceof SVG.Rect ? makePathAndBoundingBox((SVG.Rect) svgElement) : svgElement instanceof SVG.Circle ? makePathAndBoundingBox((SVG.Circle) svgElement) : svgElement instanceof SVG.Ellipse ? makePathAndBoundingBox((SVG.Ellipse) svgElement) : svgElement instanceof SVG.PolyLine ? makePathAndBoundingBox((SVG.PolyLine) svgElement) : null;
+                pathMakePathAndBoundingBox = svgElement instanceof SVG.Rect ? makePathAndBoundingBox((SVG.Rect) svgElement) : svgElement instanceof SVG.Circle ? makePathAndBoundingBox((SVG.Circle) svgElement) : svgElement instanceof SVG.Ellipse ? makePathAndBoundingBox((SVG.Ellipse) svgElement) : svgElement instanceof SVG.PolyLine ? makePathAndBoundingBox((SVG.PolyLine) svgElement) : null;
             }
-            if (path != null) {
+            if (pathMakePathAndBoundingBox != null) {
                 if (graphicsElement.boundingBox == null) {
-                    graphicsElement.boundingBox = calculatePathBounds(path);
+                    graphicsElement.boundingBox = calculatePathBounds(pathMakePathAndBoundingBox);
                 }
                 Matrix matrix2 = graphicsElement.transform;
                 if (matrix2 != null) {
-                    path.transform(matrix2);
+                    pathMakePathAndBoundingBox.transform(matrix2);
                 }
-                path.setFillType(getClipRuleFromState());
+                pathMakePathAndBoundingBox.setFillType(getClipRuleFromState());
             }
             return null;
         }
@@ -1581,42 +1708,42 @@ public class SVGAndroidRenderer {
         }
         SVG.Text text = (SVG.Text) svgElement;
         List list = text.x;
-        float f = 0.0f;
-        float floatValueX = (list == null || ((ArrayList) list).size() == 0) ? 0.0f : ((SVG.Length) ((ArrayList) text.x).get(0)).floatValueX(this);
+        float fFloatValueY = 0.0f;
+        float fFloatValueX = (list == null || ((ArrayList) list).size() == 0) ? 0.0f : ((SVG.Length) ((ArrayList) text.x).get(0)).floatValueX(this);
         List list2 = text.y;
-        float floatValueY = (list2 == null || ((ArrayList) list2).size() == 0) ? 0.0f : ((SVG.Length) ((ArrayList) text.y).get(0)).floatValueY(this);
+        float fFloatValueY2 = (list2 == null || ((ArrayList) list2).size() == 0) ? 0.0f : ((SVG.Length) ((ArrayList) text.y).get(0)).floatValueY(this);
         List list3 = text.dx;
-        float floatValueX2 = (list3 == null || ((ArrayList) list3).size() == 0) ? 0.0f : ((SVG.Length) ((ArrayList) text.dx).get(0)).floatValueX(this);
+        float fFloatValueX2 = (list3 == null || ((ArrayList) list3).size() == 0) ? 0.0f : ((SVG.Length) ((ArrayList) text.dx).get(0)).floatValueX(this);
         List list4 = text.dy;
         if (list4 != null && ((ArrayList) list4).size() != 0) {
-            f = ((SVG.Length) ((ArrayList) text.dy).get(0)).floatValueY(this);
+            fFloatValueY = ((SVG.Length) ((ArrayList) text.dy).get(0)).floatValueY(this);
         }
         if (this.state.style.textAnchor != SVG.Style.TextAnchor.Start) {
-            float calculateTextWidth = calculateTextWidth(text);
+            float fCalculateTextWidth = calculateTextWidth(text);
             if (this.state.style.textAnchor == SVG.Style.TextAnchor.Middle) {
-                calculateTextWidth /= 2.0f;
+                fCalculateTextWidth /= 2.0f;
             }
-            floatValueX -= calculateTextWidth;
+            fFloatValueX -= fCalculateTextWidth;
         }
         if (text.boundingBox == null) {
-            TextBoundsCalculator textBoundsCalculator = new TextBoundsCalculator(floatValueX, floatValueY);
+            TextBoundsCalculator textBoundsCalculator = new TextBoundsCalculator(fFloatValueX, fFloatValueY2);
             enumerateTextSpans(text, textBoundsCalculator);
             RectF rectF = textBoundsCalculator.bbox;
             text.boundingBox = new SVG.Box(rectF.left, rectF.top, rectF.width(), textBoundsCalculator.bbox.height());
         }
-        Path path2 = new Path();
-        enumerateTextSpans(text, new PlainTextToPath(floatValueX + floatValueX2, floatValueY + f, path2));
+        Path path = new Path();
+        enumerateTextSpans(text, new PlainTextToPath(fFloatValueX + fFloatValueX2, fFloatValueY2 + fFloatValueY, path));
         Matrix matrix3 = text.transform;
         if (matrix3 != null) {
-            path2.transform(matrix3);
+            path.transform(matrix3);
         }
-        path2.setFillType(getClipRuleFromState());
-        path = path2;
+        path.setFillType(getClipRuleFromState());
+        pathMakePathAndBoundingBox = path;
         if (this.state.style.clipPath != null) {
-            path.op(calculateClipPath, Path.Op.INTERSECT);
+            pathMakePathAndBoundingBox.op(pathCalculateClipPath, Path.Op.INTERSECT);
         }
         this.state = (RendererState) this.stateStack.pop();
-        return path;
+        return pathMakePathAndBoundingBox;
     }
 
     public final void popLayer(SVG.Box box) {
@@ -1642,17 +1769,17 @@ public class SVGAndroidRenderer {
     }
 
     public final boolean pushLayer() {
-        SVG.SvgElementBase resolveIRI;
+        SVG.SvgElementBase svgElementBaseResolveIRI;
         int i = 0;
         if (this.state.style.opacity.floatValue() >= 1.0f && this.state.style.mask == null) {
             return false;
         }
         Canvas canvas = this.canvas;
-        int floatValue = (int) (this.state.style.opacity.floatValue() * 256.0f);
-        if (floatValue >= 0) {
+        int iFloatValue = (int) (this.state.style.opacity.floatValue() * 256.0f);
+        if (iFloatValue >= 0) {
             i = 255;
-            if (floatValue <= 255) {
-                i = floatValue;
+            if (iFloatValue <= 255) {
+                i = iFloatValue;
             }
         }
         canvas.saveLayerAlpha(null, i, 31);
@@ -1660,7 +1787,7 @@ public class SVGAndroidRenderer {
         RendererState rendererState = new RendererState(this, this.state);
         this.state = rendererState;
         String str = rendererState.style.mask;
-        if (str != null && ((resolveIRI = this.document.resolveIRI(str)) == null || !(resolveIRI instanceof SVG.Mask))) {
+        if (str != null && ((svgElementBaseResolveIRI = this.document.resolveIRI(str)) == null || !(svgElementBaseResolveIRI instanceof SVG.Mask))) {
             error("Mask reference '%s' not found", this.state.style.mask);
             this.state.style.mask = null;
         }
@@ -1671,7 +1798,7 @@ public class SVGAndroidRenderer {
     public final void render(SVG.SvgObject svgObject) {
         SVG.Length length;
         String str;
-        int indexOf;
+        int iIndexOf;
         Set systemLanguage;
         SVG.Length length2;
         Boolean bool;
@@ -1686,15 +1813,15 @@ public class SVGAndroidRenderer {
             SVG.Svg svg = (SVG.Svg) svgObject;
             render(svg, makeViewPort(svg.x, svg.y, svg.width, svg.height), svg.viewBox, svg.preserveAspectRatio);
         } else {
-            Bitmap bitmap = null;
+            Bitmap bitmapDecodeByteArray = null;
             if (svgObject instanceof SVG.Use) {
                 SVG.Use use = (SVG.Use) svgObject;
                 SVG.Length length3 = use.width;
                 if ((length3 == null || !length3.isZero()) && ((length2 = use.height) == null || !length2.isZero())) {
                     updateStyleForElement(use, this.state);
                     if (display()) {
-                        SVG.SvgObject resolveIRI = use.document.resolveIRI(use.href);
-                        if (resolveIRI == null) {
+                        SVG.SvgObject svgObjectResolveIRI = use.document.resolveIRI(use.href);
+                        if (svgObjectResolveIRI == null) {
                             error("Use reference '%s' not found", use.href);
                         } else {
                             Matrix matrix = use.transform;
@@ -1702,20 +1829,20 @@ public class SVGAndroidRenderer {
                                 this.canvas.concat(matrix);
                             }
                             SVG.Length length4 = use.x;
-                            float floatValueX = length4 != null ? length4.floatValueX(this) : 0.0f;
+                            float fFloatValueX = length4 != null ? length4.floatValueX(this) : 0.0f;
                             SVG.Length length5 = use.y;
-                            this.canvas.translate(floatValueX, length5 != null ? length5.floatValueY(this) : 0.0f);
+                            this.canvas.translate(fFloatValueX, length5 != null ? length5.floatValueY(this) : 0.0f);
                             checkForClipPath(use, use.boundingBox);
-                            boolean pushLayer = pushLayer();
+                            boolean zPushLayer = pushLayer();
                             this.parentStack.push(use);
                             this.matrixStack.push(this.canvas.getMatrix());
-                            if (resolveIRI instanceof SVG.Svg) {
-                                SVG.Svg svg2 = (SVG.Svg) resolveIRI;
-                                SVG.Box makeViewPort = makeViewPort(null, null, use.width, use.height);
+                            if (svgObjectResolveIRI instanceof SVG.Svg) {
+                                SVG.Svg svg2 = (SVG.Svg) svgObjectResolveIRI;
+                                SVG.Box boxMakeViewPort = makeViewPort(null, null, use.width, use.height);
                                 statePush();
-                                render(svg2, makeViewPort, svg2.viewBox, svg2.preserveAspectRatio);
+                                render(svg2, boxMakeViewPort, svg2.viewBox, svg2.preserveAspectRatio);
                                 statePop();
-                            } else if (resolveIRI instanceof SVG.Symbol) {
+                            } else if (svgObjectResolveIRI instanceof SVG.Symbol) {
                                 SVG.Length length6 = use.width;
                                 if (length6 == null) {
                                     length6 = new SVG.Length(100.0f, SVG.Unit.percent);
@@ -1724,17 +1851,17 @@ public class SVGAndroidRenderer {
                                 if (length7 == null) {
                                     length7 = new SVG.Length(100.0f, SVG.Unit.percent);
                                 }
-                                SVG.Box makeViewPort2 = makeViewPort(null, null, length6, length7);
+                                SVG.Box boxMakeViewPort2 = makeViewPort(null, null, length6, length7);
                                 statePush();
-                                SVG.Symbol symbol = (SVG.Symbol) resolveIRI;
-                                if (makeViewPort2.width != 0.0f && makeViewPort2.height != 0.0f) {
+                                SVG.Symbol symbol = (SVG.Symbol) svgObjectResolveIRI;
+                                if (boxMakeViewPort2.width != 0.0f && boxMakeViewPort2.height != 0.0f) {
                                     PreserveAspectRatio preserveAspectRatio = symbol.preserveAspectRatio;
                                     if (preserveAspectRatio == null) {
                                         preserveAspectRatio = PreserveAspectRatio.LETTERBOX;
                                     }
                                     updateStyleForElement(symbol, this.state);
                                     RendererState rendererState = this.state;
-                                    rendererState.viewPort = makeViewPort2;
+                                    rendererState.viewPort = boxMakeViewPort2;
                                     if (!rendererState.style.overflow.booleanValue()) {
                                         SVG.Box box = this.state.viewPort;
                                         setClipRect(box.minX, box.minY, box.width, box.height);
@@ -1748,20 +1875,20 @@ public class SVGAndroidRenderer {
                                         SVG.Box box3 = this.state.viewPort;
                                         canvas.translate(box3.minX, box3.minY);
                                     }
-                                    boolean pushLayer2 = pushLayer();
+                                    boolean zPushLayer2 = pushLayer();
                                     renderChildren(symbol, true);
-                                    if (pushLayer2) {
+                                    if (zPushLayer2) {
                                         popLayer(symbol.boundingBox);
                                     }
                                     updateParentBoundingBox(symbol);
                                 }
                                 statePop();
                             } else {
-                                render(resolveIRI);
+                                render(svgObjectResolveIRI);
                             }
                             this.parentStack.pop();
                             this.matrixStack.pop();
-                            if (pushLayer) {
+                            if (zPushLayer) {
                                 popLayer(use.boundingBox);
                             }
                             updateParentBoundingBox(use);
@@ -1778,16 +1905,16 @@ public class SVGAndroidRenderer {
                             this.canvas.concat(matrix2);
                         }
                         checkForClipPath(r13, r13.boundingBox);
-                        boolean pushLayer3 = pushLayer();
+                        boolean zPushLayer3 = pushLayer();
                         String language = Locale.getDefault().getLanguage();
                         ArrayList arrayList = (ArrayList) r13.children;
                         int size = arrayList.size();
                         while (true) {
-                            if (r4 >= size) {
+                            if (i >= size) {
                                 break;
                             }
-                            Object obj = arrayList.get(r4);
-                            r4++;
+                            Object obj = arrayList.get(i);
+                            i++;
                             SVG.SvgObject svgObject2 = (SVG.SvgObject) obj;
                             if (svgObject2 instanceof SVG.SvgConditional) {
                                 SVG.SvgConditional svgConditional = (SVG.SvgConditional) svgObject2;
@@ -1819,7 +1946,7 @@ public class SVGAndroidRenderer {
                                                 supportedFeatures.add("View");
                                             }
                                         }
-                                        if (!requiredFeatures.isEmpty() && supportedFeatures.containsAll(requiredFeatures)) {
+                                        if (requiredFeatures.isEmpty() || !supportedFeatures.containsAll(requiredFeatures)) {
                                         }
                                     }
                                     Set requiredFormats = svgConditional.getRequiredFormats();
@@ -1836,7 +1963,7 @@ public class SVGAndroidRenderer {
                                 }
                             }
                         }
-                        if (pushLayer3) {
+                        if (zPushLayer3) {
                             popLayer(r13.boundingBox);
                         }
                         updateParentBoundingBox(r13);
@@ -1850,9 +1977,9 @@ public class SVGAndroidRenderer {
                             this.canvas.concat(matrix3);
                         }
                         checkForClipPath(group, group.boundingBox);
-                        boolean pushLayer4 = pushLayer();
+                        boolean zPushLayer4 = pushLayer();
                         renderChildren(group, true);
-                        if (pushLayer4) {
+                        if (zPushLayer4) {
                             popLayer(group.boundingBox);
                         }
                         updateParentBoundingBox(group);
@@ -1865,16 +1992,16 @@ public class SVGAndroidRenderer {
                         if (preserveAspectRatio2 == null) {
                             preserveAspectRatio2 = PreserveAspectRatio.LETTERBOX;
                         }
-                        if (str.startsWith("data:") && str.length() >= 14 && (indexOf = str.indexOf(44)) >= 12 && ";base64".equals(str.substring(indexOf - 7, indexOf))) {
+                        if (str.startsWith("data:") && str.length() >= 14 && (iIndexOf = str.indexOf(44)) >= 12 && ";base64".equals(str.substring(iIndexOf - 7, iIndexOf))) {
                             try {
-                                byte[] decode = Base64.decode(str.substring(indexOf + 1), 0);
-                                bitmap = BitmapFactory.decodeByteArray(decode, 0, decode.length);
+                                byte[] bArrDecode = Base64.decode(str.substring(iIndexOf + 1), 0);
+                                bitmapDecodeByteArray = BitmapFactory.decodeByteArray(bArrDecode, 0, bArrDecode.length);
                             } catch (Exception e) {
                                 Log.e("SVGAndroidRenderer", "Could not decode bad Data URL", e);
                             }
                         }
-                        if (bitmap != null) {
-                            SVG.Box box4 = new SVG.Box(0.0f, 0.0f, bitmap.getWidth(), bitmap.getHeight());
+                        if (bitmapDecodeByteArray != null) {
+                            SVG.Box box4 = new SVG.Box(0.0f, 0.0f, bitmapDecodeByteArray.getWidth(), bitmapDecodeByteArray.getHeight());
                             updateStyleForElement(image, this.state);
                             if (display() && visible()) {
                                 Matrix matrix4 = image.transform;
@@ -1882,9 +2009,9 @@ public class SVGAndroidRenderer {
                                     this.canvas.concat(matrix4);
                                 }
                                 SVG.Length length9 = image.x;
-                                float floatValueX2 = length9 != null ? length9.floatValueX(this) : 0.0f;
+                                float fFloatValueX2 = length9 != null ? length9.floatValueX(this) : 0.0f;
                                 SVG.Length length10 = image.y;
-                                this.state.viewPort = new SVG.Box(floatValueX2, length10 != null ? length10.floatValueY(this) : 0.0f, image.width.floatValueX(this), image.height.floatValueX(this));
+                                this.state.viewPort = new SVG.Box(fFloatValueX2, length10 != null ? length10.floatValueY(this) : 0.0f, image.width.floatValueX(this), image.height.floatValueX(this));
                                 if (!this.state.style.overflow.booleanValue()) {
                                     SVG.Box box5 = this.state.viewPort;
                                     setClipRect(box5.minX, box5.minY, box5.width, box5.height);
@@ -1892,13 +2019,13 @@ public class SVGAndroidRenderer {
                                 image.boundingBox = this.state.viewPort;
                                 updateParentBoundingBox(image);
                                 checkForClipPath(image, image.boundingBox);
-                                boolean pushLayer5 = pushLayer();
+                                boolean zPushLayer5 = pushLayer();
                                 viewportFill();
                                 this.canvas.save();
                                 this.canvas.concat(calculateViewBoxTransform(this.state.viewPort, box4, preserveAspectRatio2));
-                                this.canvas.drawBitmap(bitmap, 0.0f, 0.0f, new Paint(this.state.style.imageRendering != SVG.Style.RenderQuality.optimizeSpeed ? 2 : 0));
+                                this.canvas.drawBitmap(bitmapDecodeByteArray, 0.0f, 0.0f, new Paint(this.state.style.imageRendering != SVG.Style.RenderQuality.optimizeSpeed ? 2 : 0));
                                 this.canvas.restore();
-                                if (pushLayer5) {
+                                if (zPushLayer5) {
                                     popLayer(image.boundingBox);
                                 }
                             }
@@ -1922,7 +2049,7 @@ public class SVGAndroidRenderer {
                                 updateParentBoundingBox(path);
                                 checkForGradientsAndPatterns(path);
                                 checkForClipPath(path, path.boundingBox);
-                                boolean pushLayer6 = pushLayer();
+                                boolean zPushLayer6 = pushLayer();
                                 RendererState rendererState3 = this.state;
                                 if (rendererState3.hasFill) {
                                     SVG.Style.FillRule fillRule = rendererState3.style.fillRule;
@@ -1933,7 +2060,7 @@ public class SVGAndroidRenderer {
                                     doStroke(path2);
                                 }
                                 renderMarkers(path);
-                                if (pushLayer6) {
+                                if (zPushLayer6) {
                                     popLayer(path.boundingBox);
                                 }
                             }
@@ -1949,18 +2076,18 @@ public class SVGAndroidRenderer {
                             if (matrix6 != null) {
                                 this.canvas.concat(matrix6);
                             }
-                            Path makePathAndBoundingBox = makePathAndBoundingBox(rect);
+                            Path pathMakePathAndBoundingBox = makePathAndBoundingBox(rect);
                             updateParentBoundingBox(rect);
                             checkForGradientsAndPatterns(rect);
                             checkForClipPath(rect, rect.boundingBox);
-                            boolean pushLayer7 = pushLayer();
+                            boolean zPushLayer7 = pushLayer();
                             if (this.state.hasFill) {
-                                doFilledPath(rect, makePathAndBoundingBox);
+                                doFilledPath(rect, pathMakePathAndBoundingBox);
                             }
                             if (this.state.hasStroke) {
-                                doStroke(makePathAndBoundingBox);
+                                doStroke(pathMakePathAndBoundingBox);
                             }
-                            if (pushLayer7) {
+                            if (zPushLayer7) {
                                 popLayer(rect.boundingBox);
                             }
                         }
@@ -1975,18 +2102,18 @@ public class SVGAndroidRenderer {
                             if (matrix7 != null) {
                                 this.canvas.concat(matrix7);
                             }
-                            Path makePathAndBoundingBox2 = makePathAndBoundingBox(circle);
+                            Path pathMakePathAndBoundingBox2 = makePathAndBoundingBox(circle);
                             updateParentBoundingBox(circle);
                             checkForGradientsAndPatterns(circle);
                             checkForClipPath(circle, circle.boundingBox);
-                            boolean pushLayer8 = pushLayer();
+                            boolean zPushLayer8 = pushLayer();
                             if (this.state.hasFill) {
-                                doFilledPath(circle, makePathAndBoundingBox2);
+                                doFilledPath(circle, pathMakePathAndBoundingBox2);
                             }
                             if (this.state.hasStroke) {
-                                doStroke(makePathAndBoundingBox2);
+                                doStroke(pathMakePathAndBoundingBox2);
                             }
-                            if (pushLayer8) {
+                            if (zPushLayer8) {
                                 popLayer(circle.boundingBox);
                             }
                         }
@@ -2001,18 +2128,18 @@ public class SVGAndroidRenderer {
                             if (matrix8 != null) {
                                 this.canvas.concat(matrix8);
                             }
-                            Path makePathAndBoundingBox3 = makePathAndBoundingBox(ellipse);
+                            Path pathMakePathAndBoundingBox3 = makePathAndBoundingBox(ellipse);
                             updateParentBoundingBox(ellipse);
                             checkForGradientsAndPatterns(ellipse);
                             checkForClipPath(ellipse, ellipse.boundingBox);
-                            boolean pushLayer9 = pushLayer();
+                            boolean zPushLayer9 = pushLayer();
                             if (this.state.hasFill) {
-                                doFilledPath(ellipse, makePathAndBoundingBox3);
+                                doFilledPath(ellipse, pathMakePathAndBoundingBox3);
                             }
                             if (this.state.hasStroke) {
-                                doStroke(makePathAndBoundingBox3);
+                                doStroke(pathMakePathAndBoundingBox3);
                             }
-                            if (pushLayer9) {
+                            if (zPushLayer9) {
                                 popLayer(ellipse.boundingBox);
                             }
                         }
@@ -2026,26 +2153,26 @@ public class SVGAndroidRenderer {
                             this.canvas.concat(matrix9);
                         }
                         SVG.Length length14 = line.x1;
-                        float floatValueX3 = length14 == null ? 0.0f : length14.floatValueX(this);
+                        float fFloatValueX3 = length14 == null ? 0.0f : length14.floatValueX(this);
                         SVG.Length length15 = line.y1;
-                        float floatValueY = length15 == null ? 0.0f : length15.floatValueY(this);
+                        float fFloatValueY = length15 == null ? 0.0f : length15.floatValueY(this);
                         SVG.Length length16 = line.x2;
-                        float floatValueX4 = length16 == null ? 0.0f : length16.floatValueX(this);
+                        float fFloatValueX4 = length16 == null ? 0.0f : length16.floatValueX(this);
                         SVG.Length length17 = line.y2;
-                        r3 = length17 != null ? length17.floatValueY(this) : 0.0f;
+                        fFloatValueY = length17 != null ? length17.floatValueY(this) : 0.0f;
                         if (line.boundingBox == null) {
-                            line.boundingBox = new SVG.Box(Math.min(floatValueX3, floatValueX4), Math.min(floatValueY, r3), Math.abs(floatValueX4 - floatValueX3), Math.abs(r3 - floatValueY));
+                            line.boundingBox = new SVG.Box(Math.min(fFloatValueX3, fFloatValueX4), Math.min(fFloatValueY, fFloatValueY), Math.abs(fFloatValueX4 - fFloatValueX3), Math.abs(fFloatValueY - fFloatValueY));
                         }
                         Path path3 = new Path();
-                        path3.moveTo(floatValueX3, floatValueY);
-                        path3.lineTo(floatValueX4, r3);
+                        path3.moveTo(fFloatValueX3, fFloatValueY);
+                        path3.lineTo(fFloatValueX4, fFloatValueY);
                         updateParentBoundingBox(line);
                         checkForGradientsAndPatterns(line);
                         checkForClipPath(line, line.boundingBox);
-                        boolean pushLayer10 = pushLayer();
+                        boolean zPushLayer10 = pushLayer();
                         doStroke(path3);
                         renderMarkers(line);
-                        if (pushLayer10) {
+                        if (zPushLayer10) {
                             popLayer(line.boundingBox);
                         }
                     }
@@ -2060,19 +2187,19 @@ public class SVGAndroidRenderer {
                                 this.canvas.concat(matrix10);
                             }
                             if (polygon.points.length >= 2) {
-                                Path makePathAndBoundingBox4 = makePathAndBoundingBox(polygon);
+                                Path pathMakePathAndBoundingBox4 = makePathAndBoundingBox(polygon);
                                 updateParentBoundingBox(polygon);
                                 checkForGradientsAndPatterns(polygon);
                                 checkForClipPath(polygon, polygon.boundingBox);
-                                boolean pushLayer11 = pushLayer();
+                                boolean zPushLayer11 = pushLayer();
                                 if (this.state.hasFill) {
-                                    doFilledPath(polygon, makePathAndBoundingBox4);
+                                    doFilledPath(polygon, pathMakePathAndBoundingBox4);
                                 }
                                 if (this.state.hasStroke) {
-                                    doStroke(makePathAndBoundingBox4);
+                                    doStroke(pathMakePathAndBoundingBox4);
                                 }
                                 renderMarkers(polygon);
-                                if (pushLayer11) {
+                                if (zPushLayer11) {
                                     popLayer(polygon.boundingBox);
                                 }
                             }
@@ -2089,21 +2216,21 @@ public class SVGAndroidRenderer {
                                 this.canvas.concat(matrix11);
                             }
                             if (polyLine.points.length >= 2) {
-                                Path makePathAndBoundingBox5 = makePathAndBoundingBox(polyLine);
+                                Path pathMakePathAndBoundingBox5 = makePathAndBoundingBox(polyLine);
                                 updateParentBoundingBox(polyLine);
                                 SVG.Style.FillRule fillRule2 = this.state.style.fillRule;
-                                makePathAndBoundingBox5.setFillType((fillRule2 == null || fillRule2 != SVG.Style.FillRule.EvenOdd) ? Path.FillType.WINDING : Path.FillType.EVEN_ODD);
+                                pathMakePathAndBoundingBox5.setFillType((fillRule2 == null || fillRule2 != SVG.Style.FillRule.EvenOdd) ? Path.FillType.WINDING : Path.FillType.EVEN_ODD);
                                 checkForGradientsAndPatterns(polyLine);
                                 checkForClipPath(polyLine, polyLine.boundingBox);
-                                boolean pushLayer12 = pushLayer();
+                                boolean zPushLayer12 = pushLayer();
                                 if (this.state.hasFill) {
-                                    doFilledPath(polyLine, makePathAndBoundingBox5);
+                                    doFilledPath(polyLine, pathMakePathAndBoundingBox5);
                                 }
                                 if (this.state.hasStroke) {
-                                    doStroke(makePathAndBoundingBox5);
+                                    doStroke(pathMakePathAndBoundingBox5);
                                 }
                                 renderMarkers(polyLine);
-                                if (pushLayer12) {
+                                if (zPushLayer12) {
                                     popLayer(polyLine.boundingBox);
                                 }
                             }
@@ -2118,25 +2245,25 @@ public class SVGAndroidRenderer {
                             this.canvas.concat(matrix12);
                         }
                         List list = text.x;
-                        float floatValueX5 = (list == null || ((ArrayList) list).size() == 0) ? 0.0f : ((SVG.Length) ((ArrayList) text.x).get(0)).floatValueX(this);
+                        float fFloatValueX5 = (list == null || ((ArrayList) list).size() == 0) ? 0.0f : ((SVG.Length) ((ArrayList) text.x).get(0)).floatValueX(this);
                         List list2 = text.y;
-                        float floatValueY2 = (list2 == null || ((ArrayList) list2).size() == 0) ? 0.0f : ((SVG.Length) ((ArrayList) text.y).get(0)).floatValueY(this);
+                        float fFloatValueY2 = (list2 == null || ((ArrayList) list2).size() == 0) ? 0.0f : ((SVG.Length) ((ArrayList) text.y).get(0)).floatValueY(this);
                         List list3 = text.dx;
-                        float floatValueX6 = (list3 == null || ((ArrayList) list3).size() == 0) ? 0.0f : ((SVG.Length) ((ArrayList) text.dx).get(0)).floatValueX(this);
+                        float fFloatValueX6 = (list3 == null || ((ArrayList) list3).size() == 0) ? 0.0f : ((SVG.Length) ((ArrayList) text.dx).get(0)).floatValueX(this);
                         List list4 = text.dy;
                         if (list4 != null && ((ArrayList) list4).size() != 0) {
-                            r3 = ((SVG.Length) ((ArrayList) text.dy).get(0)).floatValueY(this);
+                            fFloatValueY = ((SVG.Length) ((ArrayList) text.dy).get(0)).floatValueY(this);
                         }
                         SVG.Style.TextAnchor anchorPosition = getAnchorPosition();
                         if (anchorPosition != SVG.Style.TextAnchor.Start) {
-                            float calculateTextWidth = calculateTextWidth(text);
+                            float fCalculateTextWidth = calculateTextWidth(text);
                             if (anchorPosition == SVG.Style.TextAnchor.Middle) {
-                                calculateTextWidth /= 2.0f;
+                                fCalculateTextWidth /= 2.0f;
                             }
-                            floatValueX5 -= calculateTextWidth;
+                            fFloatValueX5 -= fCalculateTextWidth;
                         }
                         if (text.boundingBox == null) {
-                            TextBoundsCalculator textBoundsCalculator = new TextBoundsCalculator(floatValueX5, floatValueY2);
+                            TextBoundsCalculator textBoundsCalculator = new TextBoundsCalculator(fFloatValueX5, fFloatValueY2);
                             enumerateTextSpans(text, textBoundsCalculator);
                             RectF rectF = textBoundsCalculator.bbox;
                             text.boundingBox = new SVG.Box(rectF.left, rectF.top, rectF.width(), textBoundsCalculator.bbox.height());
@@ -2144,9 +2271,9 @@ public class SVGAndroidRenderer {
                         updateParentBoundingBox(text);
                         checkForGradientsAndPatterns(text);
                         checkForClipPath(text, text.boundingBox);
-                        boolean pushLayer13 = pushLayer();
-                        enumerateTextSpans(text, new PlainTextDrawer(floatValueX5 + floatValueX6, floatValueY2 + r3));
-                        if (pushLayer13) {
+                        boolean zPushLayer13 = pushLayer();
+                        enumerateTextSpans(text, new PlainTextDrawer(fFloatValueX5 + fFloatValueX6, fFloatValueY2 + fFloatValueY));
+                        if (zPushLayer13) {
                             popLayer(text.boundingBox);
                         }
                     }
@@ -2175,82 +2302,371 @@ public class SVGAndroidRenderer {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:52:0x012c, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:74:0x012c, code lost:
     
         if (r7 != 8) goto L79;
      */
-    /* JADX WARN: Removed duplicated region for block: B:12:0x0038  */
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0096  */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x00a0  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x00ac  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x00b6  */
-    /* JADX WARN: Removed duplicated region for block: B:27:0x00be  */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x0143  */
-    /* JADX WARN: Removed duplicated region for block: B:59:0x0175  */
-    /* JADX WARN: Removed duplicated region for block: B:69:0x0152  */
-    /* JADX WARN: Removed duplicated region for block: B:72:0x00b1  */
-    /* JADX WARN: Removed duplicated region for block: B:73:0x00a5  */
-    /* JADX WARN: Removed duplicated region for block: B:74:0x009b  */
-    /* JADX WARN: Removed duplicated region for block: B:75:0x003b  */
+    /* JADX WARN: Removed duplicated region for block: B:12:0x0033  */
+    /* JADX WARN: Removed duplicated region for block: B:81:0x0143  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void renderMarker(com.caverock.androidsvg.SVG.Marker r12, com.caverock.androidsvg.SVGAndroidRenderer.MarkerVector r13) {
-        /*
-            Method dump skipped, instructions count: 412
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.caverock.androidsvg.SVGAndroidRenderer.renderMarker(com.caverock.androidsvg.SVG$Marker, com.caverock.androidsvg.SVGAndroidRenderer$MarkerVector):void");
+    public final void renderMarker(SVG.Marker marker, MarkerVector markerVector) {
+        float fFloatValue;
+        float f;
+        float f2;
+        float f3;
+        float f4;
+        float f5;
+        float f6;
+        statePush();
+        Float f7 = marker.orient;
+        float f8 = 0.0f;
+        if (f7 == null) {
+            fFloatValue = 0.0f;
+        } else if (Float.isNaN(f7.floatValue())) {
+            float f9 = markerVector.dx;
+            if (f9 != 0.0f || markerVector.dy != 0.0f) {
+                fFloatValue = (float) Math.toDegrees(Math.atan2(markerVector.dy, f9));
+            }
+        } else {
+            fFloatValue = marker.orient.floatValue();
+        }
+        if (marker.markerUnitsAreUser) {
+            f = 1.0f;
+        } else {
+            SVG.Length length = this.state.style.strokeWidth;
+            length.getClass();
+            int i = SVG.AnonymousClass1.$SwitchMap$com$caverock$androidsvg$SVG$Unit[length.unit.ordinal()];
+            if (i != 1) {
+                float f10 = this.dpi;
+                switch (i) {
+                    case 4:
+                        f = length.value * f10;
+                        break;
+                    case 5:
+                        f2 = length.value * f10;
+                        f3 = 2.54f;
+                        f = f2 / f3;
+                        break;
+                    case 6:
+                        f2 = length.value * f10;
+                        f3 = 25.4f;
+                        f = f2 / f3;
+                        break;
+                    case 7:
+                        f2 = length.value * f10;
+                        f3 = 72.0f;
+                        f = f2 / f3;
+                        break;
+                    case 8:
+                        f2 = length.value * f10;
+                        f3 = 6.0f;
+                        f = f2 / f3;
+                        break;
+                    default:
+                        f = length.value;
+                        break;
+                }
+            } else {
+                f = length.value;
+            }
+        }
+        this.state = findInheritFromAncestorState(marker);
+        Matrix matrix = new Matrix();
+        matrix.preTranslate(markerVector.x, markerVector.y);
+        matrix.preRotate(fFloatValue);
+        matrix.preScale(f, f);
+        SVG.Length length2 = marker.refX;
+        float fFloatValueX = length2 != null ? length2.floatValueX(this) : 0.0f;
+        SVG.Length length3 = marker.refY;
+        float fFloatValueY = length3 != null ? length3.floatValueY(this) : 0.0f;
+        SVG.Length length4 = marker.markerWidth;
+        float fFloatValueX2 = length4 != null ? length4.floatValueX(this) : 3.0f;
+        SVG.Length length5 = marker.markerHeight;
+        float fFloatValueY2 = length5 != null ? length5.floatValueY(this) : 3.0f;
+        SVG.Box box = marker.viewBox;
+        if (box != null) {
+            float fMax = fFloatValueX2 / box.width;
+            float f11 = fFloatValueY2 / box.height;
+            PreserveAspectRatio preserveAspectRatio = marker.preserveAspectRatio;
+            if (preserveAspectRatio == null) {
+                preserveAspectRatio = PreserveAspectRatio.LETTERBOX;
+            }
+            if (!preserveAspectRatio.equals(PreserveAspectRatio.STRETCH)) {
+                fMax = preserveAspectRatio.scale == PreserveAspectRatio.Scale.slice ? Math.max(fMax, f11) : Math.min(fMax, f11);
+                f11 = fMax;
+            }
+            matrix.preTranslate((-fFloatValueX) * fMax, (-fFloatValueY) * f11);
+            this.canvas.concat(matrix);
+            SVG.Box box2 = marker.viewBox;
+            float f12 = box2.width * fMax;
+            float f13 = box2.height * f11;
+            int[] iArr = AnonymousClass1.$SwitchMap$com$caverock$androidsvg$PreserveAspectRatio$Alignment;
+            PreserveAspectRatio.Alignment alignment = preserveAspectRatio.alignment;
+            switch (iArr[alignment.ordinal()]) {
+                case 1:
+                case 2:
+                case 3:
+                    f4 = (fFloatValueX2 - f12) / 2.0f;
+                    f5 = 0.0f - f4;
+                    break;
+                case 4:
+                case 5:
+                case 6:
+                    f4 = fFloatValueX2 - f12;
+                    f5 = 0.0f - f4;
+                    break;
+                default:
+                    f5 = 0.0f;
+                    break;
+            }
+            int i2 = iArr[alignment.ordinal()];
+            if (i2 == 2) {
+                f6 = (fFloatValueY2 - f13) / 2.0f;
+                f8 = 0.0f - f6;
+                if (!this.state.style.overflow.booleanValue()) {
+                    setClipRect(f5, f8, fFloatValueX2, fFloatValueY2);
+                }
+                matrix.reset();
+                matrix.preScale(fMax, f11);
+                this.canvas.concat(matrix);
+            } else {
+                if (i2 != 3) {
+                    if (i2 != 5) {
+                        if (i2 != 6) {
+                            if (i2 != 7) {
+                            }
+                        }
+                    }
+                    f6 = (fFloatValueY2 - f13) / 2.0f;
+                    f8 = 0.0f - f6;
+                    if (!this.state.style.overflow.booleanValue()) {
+                    }
+                    matrix.reset();
+                    matrix.preScale(fMax, f11);
+                    this.canvas.concat(matrix);
+                }
+                f6 = fFloatValueY2 - f13;
+                f8 = 0.0f - f6;
+                if (!this.state.style.overflow.booleanValue()) {
+                }
+                matrix.reset();
+                matrix.preScale(fMax, f11);
+                this.canvas.concat(matrix);
+            }
+        } else {
+            matrix.preTranslate(-fFloatValueX, -fFloatValueY);
+            this.canvas.concat(matrix);
+            if (!this.state.style.overflow.booleanValue()) {
+                setClipRect(0.0f, 0.0f, fFloatValueX2, fFloatValueY2);
+            }
+        }
+        boolean zPushLayer = pushLayer();
+        renderChildren(marker, false);
+        if (zPushLayer) {
+            popLayer(marker.boundingBox);
+        }
+        statePop();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x003d  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x005f  */
-    /* JADX WARN: Removed duplicated region for block: B:26:0x0080  */
-    /* JADX WARN: Removed duplicated region for block: B:28:0x017c  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x0190  */
-    /* JADX WARN: Removed duplicated region for block: B:39:0x01b5  */
-    /* JADX WARN: Removed duplicated region for block: B:60:0x01ff  */
-    /* JADX WARN: Removed duplicated region for block: B:62:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:64:? A[ADDED_TO_REGION, RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:65:0x008f  */
+    /* JADX WARN: Removed duplicated region for block: B:67:0x016f  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void renderMarkers(com.caverock.androidsvg.SVG.GraphicsElement r19) {
-        /*
-            Method dump skipped, instructions count: 522
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.caverock.androidsvg.SVGAndroidRenderer.renderMarkers(com.caverock.androidsvg.SVG$GraphicsElement):void");
+    public final void renderMarkers(SVG.GraphicsElement graphicsElement) {
+        SVG.Marker marker;
+        SVG.Marker marker2;
+        SVG.Marker marker3;
+        float f;
+        float f2;
+        float f3;
+        List list;
+        int size;
+        SVGAndroidRenderer sVGAndroidRenderer = this;
+        SVG.Style style = sVGAndroidRenderer.state.style;
+        String str = style.markerStart;
+        if (str == null && style.markerMid == null && style.markerEnd == null) {
+            return;
+        }
+        if (str == null) {
+            marker = null;
+        } else {
+            SVG.SvgElementBase svgElementBaseResolveIRI = graphicsElement.document.resolveIRI(str);
+            if (svgElementBaseResolveIRI != null) {
+                marker = (SVG.Marker) svgElementBaseResolveIRI;
+            } else {
+                error("Marker reference '%s' not found", sVGAndroidRenderer.state.style.markerStart);
+                marker = null;
+            }
+        }
+        String str2 = sVGAndroidRenderer.state.style.markerMid;
+        if (str2 == null) {
+            marker2 = null;
+        } else {
+            SVG.SvgElementBase svgElementBaseResolveIRI2 = graphicsElement.document.resolveIRI(str2);
+            if (svgElementBaseResolveIRI2 != null) {
+                marker2 = (SVG.Marker) svgElementBaseResolveIRI2;
+            } else {
+                error("Marker reference '%s' not found", sVGAndroidRenderer.state.style.markerMid);
+                marker2 = null;
+            }
+        }
+        String str3 = sVGAndroidRenderer.state.style.markerEnd;
+        if (str3 == null) {
+            marker3 = null;
+        } else {
+            SVG.SvgElementBase svgElementBaseResolveIRI3 = graphicsElement.document.resolveIRI(str3);
+            if (svgElementBaseResolveIRI3 != null) {
+                marker3 = (SVG.Marker) svgElementBaseResolveIRI3;
+            } else {
+                error("Marker reference '%s' not found", sVGAndroidRenderer.state.style.markerEnd);
+                marker3 = null;
+            }
+        }
+        if (graphicsElement instanceof SVG.Path) {
+            list = sVGAndroidRenderer.new MarkerPositionCalculator(((SVG.Path) graphicsElement).d).markers;
+            f = 0.0f;
+        } else if (graphicsElement instanceof SVG.Line) {
+            SVG.Line line = (SVG.Line) graphicsElement;
+            SVG.Length length = line.x1;
+            float fFloatValueX = length != null ? length.floatValueX(sVGAndroidRenderer) : 0.0f;
+            SVG.Length length2 = line.y1;
+            float fFloatValueY = length2 != null ? length2.floatValueY(sVGAndroidRenderer) : 0.0f;
+            SVG.Length length3 = line.x2;
+            float fFloatValueX2 = length3 != null ? length3.floatValueX(sVGAndroidRenderer) : 0.0f;
+            SVG.Length length4 = line.y2;
+            float fFloatValueY2 = length4 != null ? length4.floatValueY(sVGAndroidRenderer) : 0.0f;
+            ArrayList arrayList = new ArrayList(2);
+            float f4 = fFloatValueX2 - fFloatValueX;
+            float f5 = fFloatValueY2 - fFloatValueY;
+            f = 0.0f;
+            arrayList.add(new MarkerVector(sVGAndroidRenderer, fFloatValueX, fFloatValueY, f4, f5));
+            arrayList.add(new MarkerVector(this, fFloatValueX2, fFloatValueY2, f4, f5));
+            sVGAndroidRenderer = this;
+            list = arrayList;
+        } else {
+            f = 0.0f;
+            SVG.PolyLine polyLine = (SVG.PolyLine) graphicsElement;
+            int length5 = polyLine.points.length;
+            if (length5 < 2) {
+                sVGAndroidRenderer = this;
+                list = null;
+            } else {
+                ArrayList arrayList2 = new ArrayList();
+                float[] fArr = polyLine.points;
+                MarkerVector markerVector = new MarkerVector(this, fArr[0], fArr[1], 0.0f, 0.0f);
+                int i = 2;
+                float f6 = 0.0f;
+                float f7 = 0.0f;
+                while (true) {
+                    f2 = markerVector.y;
+                    f3 = markerVector.x;
+                    if (i >= length5) {
+                        break;
+                    }
+                    float[] fArr2 = polyLine.points;
+                    f6 = fArr2[i];
+                    f7 = fArr2[i + 1];
+                    markerVector.add(f6, f7);
+                    arrayList2.add(markerVector);
+                    markerVector = new MarkerVector(this, f6, f7, f6 - f3, f7 - f2);
+                    i += 2;
+                }
+                if (polyLine instanceof SVG.Polygon) {
+                    float[] fArr3 = polyLine.points;
+                    float f8 = f6;
+                    float f9 = fArr3[0];
+                    if (f8 != f9) {
+                        float f10 = fArr3[1];
+                        if (f7 != f10) {
+                            markerVector.add(f9, f10);
+                            arrayList2.add(markerVector);
+                            float f11 = f9 - f3;
+                            float f12 = f10 - f2;
+                            sVGAndroidRenderer = this;
+                            MarkerVector markerVector2 = new MarkerVector(sVGAndroidRenderer, f9, f10, f11, f12);
+                            markerVector2.add((MarkerVector) arrayList2.get(0));
+                            arrayList2.add(markerVector2);
+                            arrayList2.set(0, markerVector2);
+                        } else {
+                            sVGAndroidRenderer = this;
+                        }
+                    }
+                } else {
+                    sVGAndroidRenderer = this;
+                    arrayList2.add(markerVector);
+                }
+                list = arrayList2;
+            }
+        }
+        if (list == null || (size = list.size()) == 0) {
+            return;
+        }
+        SVG.Style style2 = sVGAndroidRenderer.state.style;
+        style2.markerEnd = null;
+        style2.markerMid = null;
+        style2.markerStart = null;
+        if (marker != null) {
+            sVGAndroidRenderer.renderMarker(marker, (MarkerVector) list.get(0));
+        }
+        if (marker2 != null && list.size() > 2) {
+            MarkerVector markerVector3 = (MarkerVector) list.get(0);
+            MarkerVector markerVector4 = (MarkerVector) list.get(1);
+            int i2 = 1;
+            while (i2 < size - 1) {
+                i2++;
+                MarkerVector markerVector5 = (MarkerVector) list.get(i2);
+                if (markerVector4.isAmbiguous) {
+                    float f13 = markerVector4.dx;
+                    float f14 = markerVector4.dy;
+                    float f15 = markerVector3.x;
+                    float f16 = markerVector4.x;
+                    float f17 = markerVector4.y;
+                    float f18 = ((f17 - markerVector3.y) * f14) + ((f16 - f15) * f13);
+                    if (f18 == f) {
+                        f18 = ((markerVector5.x - f16) * f13) + ((markerVector5.y - f17) * f14);
+                    }
+                    if (f18 <= f && (f18 != f || (f13 <= f && f14 < f))) {
+                        markerVector4.dx = -f13;
+                        markerVector4.dy = -f14;
+                    }
+                }
+                sVGAndroidRenderer.renderMarker(marker2, markerVector4);
+                markerVector3 = markerVector4;
+                markerVector4 = markerVector5;
+            }
+        }
+        if (marker3 != null) {
+            sVGAndroidRenderer.renderMarker(marker3, (MarkerVector) list.get(size - 1));
+        }
     }
 
     public final void renderMask(SVG.Mask mask, SVG.Box box) {
-        float f;
-        float f2;
+        float fFloatValueX;
+        float fFloatValueY;
         Boolean bool = mask.maskUnitsAreUser;
         if (bool == null || !bool.booleanValue()) {
             SVG.Length length = mask.width;
-            float floatValue = length != null ? length.floatValue(this, 1.0f) : 1.2f;
+            float fFloatValue = length != null ? length.floatValue(this, 1.0f) : 1.2f;
             SVG.Length length2 = mask.height;
-            float floatValue2 = length2 != null ? length2.floatValue(this, 1.0f) : 1.2f;
-            f = floatValue * box.width;
-            f2 = floatValue2 * box.height;
+            float fFloatValue2 = length2 != null ? length2.floatValue(this, 1.0f) : 1.2f;
+            fFloatValueX = fFloatValue * box.width;
+            fFloatValueY = fFloatValue2 * box.height;
         } else {
             SVG.Length length3 = mask.width;
-            f = length3 != null ? length3.floatValueX(this) : box.width;
+            fFloatValueX = length3 != null ? length3.floatValueX(this) : box.width;
             SVG.Length length4 = mask.height;
-            f2 = length4 != null ? length4.floatValueY(this) : box.height;
+            fFloatValueY = length4 != null ? length4.floatValueY(this) : box.height;
         }
-        if (f == 0.0f || f2 == 0.0f) {
+        if (fFloatValueX == 0.0f || fFloatValueY == 0.0f) {
             return;
         }
         statePush();
-        RendererState findInheritFromAncestorState = findInheritFromAncestorState(mask);
-        this.state = findInheritFromAncestorState;
-        findInheritFromAncestorState.style.opacity = Float.valueOf(1.0f);
-        boolean pushLayer = pushLayer();
+        RendererState rendererStateFindInheritFromAncestorState = findInheritFromAncestorState(mask);
+        this.state = rendererStateFindInheritFromAncestorState;
+        rendererStateFindInheritFromAncestorState.style.opacity = Float.valueOf(1.0f);
+        boolean zPushLayer = pushLayer();
         this.canvas.save();
         Boolean bool2 = mask.maskContentUnitsAreUser;
         if (bool2 != null && !bool2.booleanValue()) {
@@ -2259,23 +2675,23 @@ public class SVGAndroidRenderer {
         }
         renderChildren(mask, false);
         this.canvas.restore();
-        if (pushLayer) {
+        if (zPushLayer) {
             popLayer(box);
         }
         statePop();
     }
 
     public final void setClipRect(float f, float f2, float f3, float f4) {
-        float f5 = f3 + f;
-        float f6 = f4 + f2;
+        float fFloatValueX = f3 + f;
+        float fFloatValueY = f4 + f2;
         SVG.CSSClipRect cSSClipRect = this.state.style.clip;
         if (cSSClipRect != null) {
             f += cSSClipRect.left.floatValueX(this);
             f2 += this.state.style.clip.top.floatValueY(this);
-            f5 -= this.state.style.clip.right.floatValueX(this);
-            f6 -= this.state.style.clip.bottom.floatValueY(this);
+            fFloatValueX -= this.state.style.clip.right.floatValueX(this);
+            fFloatValueY -= this.state.style.clip.bottom.floatValueY(this);
         }
-        this.canvas.clipRect(f, f2, f5, f6);
+        this.canvas.clipRect(f, f2, fFloatValueX, fFloatValueY);
     }
 
     public final void statePop() {
@@ -2293,14 +2709,14 @@ public class SVGAndroidRenderer {
         if (this.state.spacePreserve) {
             return str.replaceAll("[\\n\\t]", " ");
         }
-        String replaceAll = str.replaceAll("\\n", "").replaceAll("\\t", " ");
+        String strReplaceAll = str.replaceAll("\\n", "").replaceAll("\\t", " ");
         if (z) {
-            replaceAll = replaceAll.replaceAll("^\\s+", "");
+            strReplaceAll = strReplaceAll.replaceAll("^\\s+", "");
         }
         if (z2) {
-            replaceAll = replaceAll.replaceAll("\\s+$", "");
+            strReplaceAll = strReplaceAll.replaceAll("\\s+$", "");
         }
-        return replaceAll.replaceAll("\\s{2,}", " ");
+        return strReplaceAll.replaceAll("\\s{2,}", " ");
     }
 
     public final void updateParentBoundingBox(SVG.SvgElement svgElement) {
@@ -2312,13 +2728,13 @@ public class SVGAndroidRenderer {
             SVG.Box box = svgElement.boundingBox;
             float f = box.minX;
             float f2 = box.minY;
-            float maxX = box.maxX();
+            float fMaxX = box.maxX();
             SVG.Box box2 = svgElement.boundingBox;
             float f3 = box2.minY;
-            float maxX2 = box2.maxX();
-            float maxY = svgElement.boundingBox.maxY();
+            float fMaxX2 = box2.maxX();
+            float fMaxY = svgElement.boundingBox.maxY();
             SVG.Box box3 = svgElement.boundingBox;
-            float[] fArr = {f, f2, maxX, f3, maxX2, maxY, box3.minX, box3.maxY()};
+            float[] fArr = {f, f2, fMaxX, f3, fMaxX2, fMaxY, box3.minX, box3.maxY()};
             matrix.preConcat(this.canvas.getMatrix());
             matrix.mapPoints(fArr);
             float f4 = fArr[0];
@@ -2442,7 +2858,7 @@ public class SVGAndroidRenderer {
         if (isSpecified(style, 1024L)) {
             rendererState.style.strokeDashOffset = style.strokeDashOffset;
         }
-        Typeface typeface = null;
+        Typeface typefaceCheckGenericFont = null;
         if (isSpecified(style, 1536L)) {
             SVG.Length[] lengthArr = rendererState.style.strokeDashArray;
             if (lengthArr == null) {
@@ -2458,19 +2874,19 @@ public class SVGAndroidRenderer {
                     if (i4 >= i3) {
                         break;
                     }
-                    float floatValue = style2.strokeDashArray[i4 % length2].floatValue(this);
-                    fArr[i4] = floatValue;
-                    f += floatValue;
+                    float fFloatValue = style2.strokeDashArray[i4 % length2].floatValue(this);
+                    fArr[i4] = fFloatValue;
+                    f += fFloatValue;
                     i4++;
                 }
                 if (f == 0.0f) {
                     rendererState.strokePaint.setPathEffect(null);
                 } else {
-                    float floatValue2 = style2.strokeDashOffset.floatValue(this);
-                    if (floatValue2 < 0.0f) {
-                        floatValue2 = (floatValue2 % f) + f;
+                    float fFloatValue2 = style2.strokeDashOffset.floatValue(this);
+                    if (fFloatValue2 < 0.0f) {
+                        fFloatValue2 = (fFloatValue2 % f) + f;
                     }
-                    rendererState.strokePaint.setPathEffect(new DashPathEffect(fArr, floatValue2));
+                    rendererState.strokePaint.setPathEffect(new DashPathEffect(fArr, fFloatValue2));
                 }
             }
         }
@@ -2502,14 +2918,14 @@ public class SVGAndroidRenderer {
             List list = style6.fontFamily;
             if (list != null && this.document != null) {
                 Iterator it = list.iterator();
-                while (it.hasNext() && (typeface = checkGenericFont((String) it.next(), style6.fontWeight, style6.fontStyle)) == null) {
+                while (it.hasNext() && (typefaceCheckGenericFont = checkGenericFont((String) it.next(), style6.fontWeight, style6.fontStyle)) == null) {
                 }
             }
-            if (typeface == null) {
-                typeface = checkGenericFont("serif", style6.fontWeight, style6.fontStyle);
+            if (typefaceCheckGenericFont == null) {
+                typefaceCheckGenericFont = checkGenericFont("serif", style6.fontWeight, style6.fontStyle);
             }
-            rendererState.fillPaint.setTypeface(typeface);
-            rendererState.strokePaint.setTypeface(typeface);
+            rendererState.fillPaint.setTypeface(typefaceCheckGenericFont);
+            rendererState.strokePaint.setTypeface(typefaceCheckGenericFont);
         }
         if (isSpecified(style, 131072L)) {
             rendererState.style.textDecoration = style.textDecoration;
@@ -2622,21 +3038,21 @@ public class SVGAndroidRenderer {
     }
 
     public final void viewportFill() {
-        int i;
+        int iColourWithOpacity;
         SVG.Style style = this.state.style;
         SVG.SvgPaint svgPaint = style.viewportFill;
         if (svgPaint instanceof SVG.Colour) {
-            i = ((SVG.Colour) svgPaint).colour;
+            iColourWithOpacity = ((SVG.Colour) svgPaint).colour;
         } else if (!(svgPaint instanceof SVG.CurrentColor)) {
             return;
         } else {
-            i = style.color.colour;
+            iColourWithOpacity = style.color.colour;
         }
         Float f = style.viewportFillOpacity;
         if (f != null) {
-            i = colourWithOpacity(f.floatValue(), i);
+            iColourWithOpacity = colourWithOpacity(f.floatValue(), iColourWithOpacity);
         }
-        this.canvas.drawColor(i);
+        this.canvas.drawColor(iColourWithOpacity);
     }
 
     public final boolean visible() {
@@ -2647,7 +3063,6 @@ public class SVGAndroidRenderer {
         return true;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class TextWidthCalculator extends TextProcessor {
         public float x;
 
@@ -2695,7 +3110,6 @@ public class SVGAndroidRenderer {
         rendererState.viewPort = rendererState2.viewPort;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class MarkerVector {
         public float dx;
         public float dy;
@@ -2708,20 +3122,20 @@ public class SVGAndroidRenderer {
             this.dy = 0.0f;
             this.x = f;
             this.y = f2;
-            double sqrt = Math.sqrt((f4 * f4) + (f3 * f3));
-            if (sqrt != 0.0d) {
-                this.dx = (float) (f3 / sqrt);
-                this.dy = (float) (f4 / sqrt);
+            double dSqrt = Math.sqrt((f4 * f4) + (f3 * f3));
+            if (dSqrt != 0.0d) {
+                this.dx = (float) (f3 / dSqrt);
+                this.dy = (float) (f4 / dSqrt);
             }
         }
 
         public final void add(float f, float f2) {
             float f3 = f - this.x;
             float f4 = f2 - this.y;
-            double sqrt = Math.sqrt((f4 * f4) + (f3 * f3));
-            if (sqrt != 0.0d) {
-                f3 = (float) (f3 / sqrt);
-                f4 = (float) (f4 / sqrt);
+            double dSqrt = Math.sqrt((f4 * f4) + (f3 * f3));
+            if (dSqrt != 0.0d) {
+                f3 = (float) (f3 / dSqrt);
+                f4 = (float) (f4 / dSqrt);
             }
             float f5 = this.dx;
             if (f3 != (-f5) || f4 != (-this.dy)) {
@@ -2762,7 +3176,6 @@ public class SVGAndroidRenderer {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class RendererState {
         public final Paint fillPaint;
         public boolean hasFill;
@@ -2833,59 +3246,59 @@ public class SVGAndroidRenderer {
 
     public final Path makePathAndBoundingBox(SVG.Circle circle) {
         SVG.Length length = circle.cx;
-        float floatValueX = length != null ? length.floatValueX(this) : 0.0f;
+        float fFloatValueX = length != null ? length.floatValueX(this) : 0.0f;
         SVG.Length length2 = circle.cy;
-        float floatValueY = length2 != null ? length2.floatValueY(this) : 0.0f;
-        float floatValue = circle.r.floatValue(this);
-        float f = floatValueX - floatValue;
-        float f2 = floatValueY - floatValue;
-        float f3 = floatValueX + floatValue;
-        float f4 = floatValueY + floatValue;
+        float fFloatValueY = length2 != null ? length2.floatValueY(this) : 0.0f;
+        float fFloatValue = circle.r.floatValue(this);
+        float f = fFloatValueX - fFloatValue;
+        float f2 = fFloatValueY - fFloatValue;
+        float f3 = fFloatValueX + fFloatValue;
+        float f4 = fFloatValueY + fFloatValue;
         if (circle.boundingBox == null) {
-            float f5 = 2.0f * floatValue;
+            float f5 = 2.0f * fFloatValue;
             circle.boundingBox = new SVG.Box(f, f2, f5, f5);
         }
-        float f6 = floatValue * 0.5522848f;
-        Path m = PathInterpolator$$ExternalSyntheticOutline0.m(floatValueX, f2);
-        float f7 = floatValueX + f6;
-        float f8 = floatValueY - f6;
-        m.cubicTo(f7, f2, f3, f8, f3, floatValueY);
-        float f9 = floatValueY + f6;
-        m.cubicTo(f3, f9, f7, f4, floatValueX, f4);
-        float f10 = floatValueX - f6;
-        m.cubicTo(f10, f4, f, f9, f, floatValueY);
-        m.cubicTo(f, f8, f10, f2, floatValueX, f2);
-        m.close();
-        return m;
+        float f6 = fFloatValue * 0.5522848f;
+        Path pathM = PathInterpolator$$ExternalSyntheticOutline0.m(fFloatValueX, f2);
+        float f7 = fFloatValueX + f6;
+        float f8 = fFloatValueY - f6;
+        pathM.cubicTo(f7, f2, f3, f8, f3, fFloatValueY);
+        float f9 = fFloatValueY + f6;
+        pathM.cubicTo(f3, f9, f7, f4, fFloatValueX, f4);
+        float f10 = fFloatValueX - f6;
+        pathM.cubicTo(f10, f4, f, f9, f, fFloatValueY);
+        pathM.cubicTo(f, f8, f10, f2, fFloatValueX, f2);
+        pathM.close();
+        return pathM;
     }
 
     public final Path makePathAndBoundingBox(SVG.Ellipse ellipse) {
         SVG.Length length = ellipse.cx;
-        float floatValueX = length != null ? length.floatValueX(this) : 0.0f;
+        float fFloatValueX = length != null ? length.floatValueX(this) : 0.0f;
         SVG.Length length2 = ellipse.cy;
-        float floatValueY = length2 != null ? length2.floatValueY(this) : 0.0f;
-        float floatValueX2 = ellipse.rx.floatValueX(this);
-        float floatValueY2 = ellipse.ry.floatValueY(this);
-        float f = floatValueX - floatValueX2;
-        float f2 = floatValueY - floatValueY2;
-        float f3 = floatValueX + floatValueX2;
-        float f4 = floatValueY + floatValueY2;
+        float fFloatValueY = length2 != null ? length2.floatValueY(this) : 0.0f;
+        float fFloatValueX2 = ellipse.rx.floatValueX(this);
+        float fFloatValueY2 = ellipse.ry.floatValueY(this);
+        float f = fFloatValueX - fFloatValueX2;
+        float f2 = fFloatValueY - fFloatValueY2;
+        float f3 = fFloatValueX + fFloatValueX2;
+        float f4 = fFloatValueY + fFloatValueY2;
         if (ellipse.boundingBox == null) {
-            ellipse.boundingBox = new SVG.Box(f, f2, floatValueX2 * 2.0f, 2.0f * floatValueY2);
+            ellipse.boundingBox = new SVG.Box(f, f2, fFloatValueX2 * 2.0f, 2.0f * fFloatValueY2);
         }
-        float f5 = floatValueX2 * 0.5522848f;
-        float f6 = floatValueY2 * 0.5522848f;
-        Path m = PathInterpolator$$ExternalSyntheticOutline0.m(floatValueX, f2);
-        float f7 = floatValueX + f5;
-        float f8 = floatValueY - f6;
-        m.cubicTo(f7, f2, f3, f8, f3, floatValueY);
-        float f9 = floatValueY + f6;
-        m.cubicTo(f3, f9, f7, f4, floatValueX, f4);
-        float f10 = floatValueX - f5;
-        m.cubicTo(f10, f4, f, f9, f, floatValueY);
-        m.cubicTo(f, f8, f10, f2, floatValueX, f2);
-        m.close();
-        return m;
+        float f5 = fFloatValueX2 * 0.5522848f;
+        float f6 = fFloatValueY2 * 0.5522848f;
+        Path pathM = PathInterpolator$$ExternalSyntheticOutline0.m(fFloatValueX, f2);
+        float f7 = fFloatValueX + f5;
+        float f8 = fFloatValueY - f6;
+        pathM.cubicTo(f7, f2, f3, f8, f3, fFloatValueY);
+        float f9 = fFloatValueY + f6;
+        pathM.cubicTo(f3, f9, f7, f4, fFloatValueX, f4);
+        float f10 = fFloatValueX - f5;
+        pathM.cubicTo(f10, f4, f, f9, f, fFloatValueY);
+        pathM.cubicTo(f, f8, f10, f2, fFloatValueX, f2);
+        pathM.close();
+        return pathM;
     }
 
     public static Path makePathAndBoundingBox(SVG.PolyLine polyLine) {
@@ -2934,10 +3347,10 @@ public class SVGAndroidRenderer {
                 SVG.Box box4 = this.state.viewPort;
                 canvas.translate(box4.minX, box4.minY);
             }
-            boolean pushLayer = pushLayer();
+            boolean zPushLayer = pushLayer();
             viewportFill();
             renderChildren(svg, true);
-            if (pushLayer) {
+            if (zPushLayer) {
                 popLayer(svg.boundingBox);
             }
             updateParentBoundingBox(svg);

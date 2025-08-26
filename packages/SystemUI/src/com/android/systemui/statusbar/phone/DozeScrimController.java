@@ -13,7 +13,6 @@ import com.android.systemui.plugins.statusbar.StatusBarStateController;
 import com.android.systemui.statusbar.phone.DozeServiceHost;
 import com.android.systemui.statusbar.phone.ScrimController;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class DozeScrimController implements StatusBarStateController.StateListener {
     public final DozeLog mDozeLog;
@@ -44,9 +43,9 @@ public class DozeScrimController implements StatusBarStateController.StateListen
                 LogLevel logLevel = LogLevel.INFO;
                 DozeLogger$$ExternalSyntheticLambda0 dozeLogger$$ExternalSyntheticLambda0 = new DozeLogger$$ExternalSyntheticLambda0(1);
                 LogBuffer logBuffer = dozeLogger.buffer;
-                LogMessage obtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda0, null);
-                ((LogMessageImpl) obtain).int1 = i;
-                logBuffer.commit(obtain);
+                LogMessage logMessageObtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda0, null);
+                ((LogMessageImpl) logMessageObtain).int1 = i;
+                logBuffer.commit(logMessageObtain);
                 dozeLog.mPulsing = true;
                 dozeScrimController.mPulseCallback.onPulseStarted();
             }
@@ -77,7 +76,6 @@ public class DozeScrimController implements StatusBarStateController.StateListen
     };
     public final AnonymousClass3 mPulseOut = new AnonymousClass3();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.phone.DozeScrimController$3, reason: invalid class name */
     public class AnonymousClass3 implements Runnable {
         public AnonymousClass3() {
@@ -114,9 +112,9 @@ public class DozeScrimController implements StatusBarStateController.StateListen
             LogLevel logLevel = LogLevel.INFO;
             DozeLogger$$ExternalSyntheticLambda0 dozeLogger$$ExternalSyntheticLambda0 = new DozeLogger$$ExternalSyntheticLambda0(22);
             LogBuffer logBuffer = dozeLogger.buffer;
-            LogMessage obtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda0, null);
-            ((LogMessageImpl) obtain).bool1 = z;
-            logBuffer.commit(obtain);
+            LogMessage logMessageObtain = logBuffer.obtain("DozeLog", logLevel, dozeLogger$$ExternalSyntheticLambda0, null);
+            ((LogMessageImpl) logMessageObtain).bool1 = z;
+            logBuffer.commit(logMessageObtain);
         }
         setDozing(z);
     }

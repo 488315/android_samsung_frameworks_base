@@ -6,7 +6,6 @@ import android.net.Uri;
 import com.android.systemui.edgelighting.interfaces.IEdgeLightingStyle;
 import java.util.HashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class ELPlusStyle implements IEdgeLightingStyle {
     public final String mDBName;
@@ -15,14 +14,14 @@ public class ELPlusStyle implements IEdgeLightingStyle {
     public final Uri mSpecialEffect;
     public final HashMap mSupportMap = new HashMap();
 
-    public ELPlusStyle(Context context, String str, Drawable drawable, Uri uri, Uri uri2, String str2, String str3) {
-        String[] split;
+    public ELPlusStyle(Context context, String str, Drawable drawable, Uri uri, Uri uri2, String str2, String str3) throws NumberFormatException {
+        String[] strArrSplit;
         this.mEffectName = str;
         this.mIcon = drawable;
         this.mSpecialEffect = uri;
-        String[] split2 = (str2 != null) & (str2.isEmpty() ^ true) ? str2.split("!") : null;
-        if (split2 != null) {
-            for (String str4 : split2) {
+        String[] strArrSplit2 = (str2 != null) & (str2.isEmpty() ^ true) ? str2.split("!") : null;
+        if (strArrSplit2 != null) {
+            for (String str4 : strArrSplit2) {
                 if (str4.contains("centerPosition")) {
                     str4.endsWith("true");
                 } else if (str4.contains("edgeSpecialEffect")) {
@@ -30,15 +29,15 @@ public class ELPlusStyle implements IEdgeLightingStyle {
                 } else if (str4.contains("edgeFrameEffect")) {
                     str4.endsWith("true");
                 } else if (str4.contains("repeatCount")) {
-                    String[] split3 = str4.split(":");
-                    if (split3 != null) {
-                        Integer.parseInt(split3[1]);
+                    String[] strArrSplit3 = str4.split(":");
+                    if (strArrSplit3 != null) {
+                        Integer.parseInt(strArrSplit3[1]);
                     }
                 } else if (str4.contains("specialSize")) {
-                    String[] split4 = str4.split(":");
-                    if (split4 != null && (split = split4[1].split("x")) != null) {
-                        Integer.parseInt(split[0]);
-                        Integer.parseInt(split[1]);
+                    String[] strArrSplit4 = str4.split(":");
+                    if (strArrSplit4 != null && (strArrSplit = strArrSplit4[1].split("x")) != null) {
+                        Integer.parseInt(strArrSplit[0]);
+                        Integer.parseInt(strArrSplit[1]);
                     }
                 } else if (str4.contains("startAfterToastFinished")) {
                     str4.endsWith("true");

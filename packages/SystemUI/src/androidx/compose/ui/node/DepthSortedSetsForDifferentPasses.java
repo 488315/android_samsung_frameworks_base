@@ -1,6 +1,5 @@
 package androidx.compose.ui.node;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class DepthSortedSetsForDifferentPasses {
     public final DepthSortedSet lookaheadSet;
@@ -26,8 +25,8 @@ public final class DepthSortedSetsForDifferentPasses {
     }
 
     public final boolean contains(LayoutNode layoutNode, boolean z) {
-        boolean contains = this.lookaheadSet.contains(layoutNode);
-        return z ? contains : contains || this.set.contains(layoutNode);
+        boolean zContains = this.lookaheadSet.contains(layoutNode);
+        return z ? zContains : zContains || this.set.contains(layoutNode);
     }
 
     public final boolean isNotEmpty() {

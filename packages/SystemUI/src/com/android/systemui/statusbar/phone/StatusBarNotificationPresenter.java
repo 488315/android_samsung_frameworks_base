@@ -9,9 +9,14 @@ import android.service.vr.IVrStateCallbacks;
 import android.text.TextUtils;
 import android.util.Slog;
 import com.android.internal.statusbar.IStatusBarService;
+import com.android.systemui.Dependency;
 import com.android.systemui.InitController;
+import com.android.systemui.NotiRune;
 import com.android.systemui.R;
+import com.android.systemui.blur.SecQpBlurController;
+import com.android.systemui.blur.di.SecPanelBlurBinding;
 import com.android.systemui.deviceentry.domain.interactor.DeviceUnlockedInteractor;
+import com.android.systemui.flags.RefactorFlagUtils;
 import com.android.systemui.media.NotificationMediaManager;
 import com.android.systemui.media.NotificationMediaManager$$ExternalSyntheticLambda5;
 import com.android.systemui.plugins.ActivityStarter;
@@ -21,6 +26,7 @@ import com.android.systemui.shade.NotificationShadeWindowView;
 import com.android.systemui.shade.QuickSettingsController;
 import com.android.systemui.shade.ShadeViewController;
 import com.android.systemui.shade.domain.interactor.PanelExpansionInteractor;
+import com.android.systemui.shade.domain.interactor.SecPanelSAStatusLogInteractor;
 import com.android.systemui.statusbar.CommandQueue;
 import com.android.systemui.statusbar.LockscreenShadeTransitionController;
 import com.android.systemui.statusbar.NotificationLockscreenUserManager;
@@ -29,6 +35,7 @@ import com.android.systemui.statusbar.NotificationPresenter;
 import com.android.systemui.statusbar.NotificationRemoteInputManager;
 import com.android.systemui.statusbar.NotificationShadeWindowController;
 import com.android.systemui.statusbar.RemoteInputController;
+import com.android.systemui.statusbar.StatusBarStateControllerImpl;
 import com.android.systemui.statusbar.SysuiStatusBarStateController;
 import com.android.systemui.statusbar.notification.AboveShelfObserver;
 import com.android.systemui.statusbar.notification.DynamicPrivacyController;
@@ -45,16 +52,20 @@ import com.android.systemui.statusbar.notification.interruption.VisualInterrupti
 import com.android.systemui.statusbar.notification.interruption.VisualInterruptionRefactor;
 import com.android.systemui.statusbar.notification.interruption.VisualInterruptionType;
 import com.android.systemui.statusbar.notification.logging.NotificationLogger;
+import com.android.systemui.statusbar.notification.row.ExpandableNotificationRow;
 import com.android.systemui.statusbar.notification.row.NotificationGutsManager;
+import com.android.systemui.statusbar.notification.shared.NotificationBundleUi;
 import com.android.systemui.statusbar.notification.stack.NotificationListContainer;
 import com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayoutController;
-import com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayoutController.AnonymousClass18;
+import com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayoutController.AnonymousClass19;
 import com.android.systemui.statusbar.policy.KeyguardStateController;
+import com.android.systemui.statusbar.policy.KeyguardStateControllerImpl;
+import com.android.systemui.util.SystemUIAnalytics;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Set;
+import kotlinx.coroutines.flow.StateFlowImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class StatusBarNotificationPresenter implements NotificationPresenter, CommandQueue.Callbacks {
     public final AboveShelfObserver mAboveShelfObserver;
@@ -88,7 +99,6 @@ public class StatusBarNotificationPresenter implements NotificationPresenter, Co
     public final AnonymousClass5 mVrModeCondition;
     public final AnonymousClass1 mVrStateCallbacks;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.phone.StatusBarNotificationPresenter$2, reason: invalid class name */
     public class AnonymousClass2 {
         public AnonymousClass2() {
@@ -102,7 +112,6 @@ public class StatusBarNotificationPresenter implements NotificationPresenter, Co
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.phone.StatusBarNotificationPresenter$3, reason: invalid class name */
     public class AnonymousClass3 implements NotificationInterruptSuppressor {
         public AnonymousClass3() {
@@ -157,19 +166,19 @@ public class StatusBarNotificationPresenter implements NotificationPresenter, Co
         this.mKeyguardManager = (KeyguardManager) context.getSystemService(KeyguardManager.class);
         this.mBarService = IStatusBarService.Stub.asInterface(ServiceManager.getService("statusbar"));
         this.mNotifListContainer = notificationListContainer;
-        IVrManager asInterface = IVrManager.Stub.asInterface(ServiceManager.getService("vrmanager"));
-        if (asInterface != null) {
+        IVrManager iVrManagerAsInterface = IVrManager.Stub.asInterface(ServiceManager.getService("vrmanager"));
+        if (iVrManagerAsInterface != null) {
             try {
-                asInterface.registerListener(iVrStateCallbacks);
+                iVrManagerAsInterface.registerListener(iVrStateCallbacks);
             } catch (RemoteException e) {
                 Slog.e("StatusBarNotificationPresenter", "Failed to register VR mode state listener: " + e);
             }
         }
         NotificationStackScrollLayoutController notificationStackScrollLayoutController2 = this.mNsslController;
         notificationStackScrollLayoutController2.getClass();
-        NotificationStackScrollLayoutController.AnonymousClass18 anonymousClass18 = notificationStackScrollLayoutController2.new AnonymousClass18();
+        NotificationStackScrollLayoutController.AnonymousClass19 anonymousClass19 = notificationStackScrollLayoutController2.new AnonymousClass19();
         notificationRemoteInputManager.mCallback = callback;
-        RemoteInputController remoteInputController = new RemoteInputController(anonymousClass18, notificationRemoteInputManager.mRemoteInputUriController, notificationRemoteInputManager.mRemoteInputControllerLogger);
+        RemoteInputController remoteInputController = new RemoteInputController(anonymousClass19, notificationRemoteInputManager.mRemoteInputUriController, notificationRemoteInputManager.mRemoteInputControllerLogger);
         notificationRemoteInputManager.mRemoteInputController = remoteInputController;
         RemoteInputCoordinator remoteInputCoordinator = notificationRemoteInputManager.mRemoteInputListener;
         if (remoteInputCoordinator != null) {
@@ -189,7 +198,7 @@ public class StatusBarNotificationPresenter implements NotificationPresenter, Co
         }
         ((ArrayList) notificationRemoteInputManager.mControllerCallbacks).clear();
         RemoteInputController remoteInputController3 = notificationRemoteInputManager.mRemoteInputController;
-        RemoteInputController.Callback anonymousClass2 = new RemoteInputController.Callback() { // from class: com.android.systemui.statusbar.NotificationRemoteInputManager.2
+        RemoteInputController.Callback callback3 = new RemoteInputController.Callback() { // from class: com.android.systemui.statusbar.NotificationRemoteInputManager.2
             public AnonymousClass2() {
             }
 
@@ -215,11 +224,11 @@ public class StatusBarNotificationPresenter implements NotificationPresenter, Co
             }
         };
         remoteInputController3.getClass();
-        remoteInputController3.mCallbacks.add(anonymousClass2);
+        remoteInputController3.mCallbacks.add(callback3);
         Runnable runnable = new Runnable() { // from class: com.android.systemui.statusbar.phone.StatusBarNotificationPresenter$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                final StatusBarNotificationPresenter statusBarNotificationPresenter = StatusBarNotificationPresenter.this;
+                final StatusBarNotificationPresenter statusBarNotificationPresenter = this.f$0;
                 VisualInterruptionDecisionProvider visualInterruptionDecisionProvider2 = visualInterruptionDecisionProvider;
                 final int i2 = 0;
                 Runnable runnable2 = new Runnable() { // from class: com.android.systemui.statusbar.phone.StatusBarNotificationPresenter$$ExternalSyntheticLambda1
@@ -297,28 +306,64 @@ public class StatusBarNotificationPresenter implements NotificationPresenter, Co
         return this.mPanelExpansionInteractor.isCollapsing() || ((NotificationShadeWindowControllerImpl) this.mNotificationShadeWindowController).mCurrentState.launchingActivityFromNotification;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:51:0x00f0, code lost:
-    
-        if (r7.isDynamicallyUnlocked() == false) goto L49;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:52:0x00f9, code lost:
-    
-        ((com.android.systemui.statusbar.StatusBarStateControllerImpl) r9).setLeaveOpenOnKeyguardHide(true);
-        r4.dismissKeyguardThenExecute(new com.android.systemui.statusbar.phone.StatusBarNotificationPresenter$$ExternalSyntheticLambda3(), null, false);
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:54:0x00f7, code lost:
-    
-        if (r7.isInLockedDownShade() != false) goto L49;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:49:0x00f9  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void onExpandClicked(com.android.systemui.statusbar.notification.collection.NotificationEntry r8, boolean r9) {
-        /*
-            Method dump skipped, instructions count: 297
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.phone.StatusBarNotificationPresenter.onExpandClicked(com.android.systemui.statusbar.notification.collection.NotificationEntry, boolean):void");
+    public final void onExpandClicked(NotificationEntry notificationEntry, boolean z) {
+        int state;
+        HeadsUpManagerImpl headsUpManagerImpl = (HeadsUpManagerImpl) this.mHeadsUpManager;
+        headsUpManagerImpl.getClass();
+        int i = NotificationBundleUi.$r8$clinit;
+        RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
+        HeadsUpManagerImpl.HeadsUpEntry headsUpEntry = headsUpManagerImpl.getHeadsUpEntry(notificationEntry.mKey);
+        if (headsUpEntry != null && notificationEntry.isRowPinned() && headsUpEntry.mExpanded != z) {
+            headsUpEntry.mExpanded = z;
+            if (z) {
+                headsUpEntry.cancelAutoRemovalCallbacks("setExpanded(true)");
+            } else {
+                headsUpEntry.updateEntry("setExpanded(false)", false, true);
+            }
+        }
+        this.mPowerInteractor.wakeUpIfDozing(4, "NOTIFICATION_CLICK");
+        if (z) {
+            SysuiStatusBarStateController sysuiStatusBarStateController = this.mStatusBarStateController;
+            int state2 = sysuiStatusBarStateController.getState();
+            ActivityStarter activityStarter = this.mActivityStarter;
+            StateFlowImpl stateFlowImpl = notificationEntry.mSensitive;
+            if (state2 == 1) {
+                if (((Boolean) stateFlowImpl.getValue()).booleanValue()) {
+                    ((StatusBarStateControllerImpl) sysuiStatusBarStateController).setLeaveOpenOnKeyguardHide(true);
+                    if (!this.mKeyguardManager.isKeyguardSecure()) {
+                        SecQpBlurController secQpBlurController = (SecQpBlurController) Dependency.sDependency.getDependencyInner(SecQpBlurController.class);
+                        secQpBlurController.getClass();
+                        secQpBlurController.doBlur(1.0f, SecPanelBlurBinding.BlurType.QUICK_PANEL);
+                    }
+                    activityStarter.dismissKeyguardThenExecute(new StatusBarNotificationPresenter$$ExternalSyntheticLambda3(), null, false);
+                } else {
+                    ((SecPanelSAStatusLogInteractor) Dependency.sDependency.getDependencyInner(SecPanelSAStatusLogInteractor.class)).countOpenNotificationPanelFromLockscreen();
+                    this.mShadeTransitionController.goToLockedShade(notificationEntry.row, true);
+                }
+            } else if (((Boolean) stateFlowImpl.getValue()).booleanValue() && sysuiStatusBarStateController.getState() == 2) {
+                ((StatusBarStateControllerImpl) sysuiStatusBarStateController).setLeaveOpenOnKeyguardHide(true);
+                activityStarter.dismissKeyguardThenExecute(new StatusBarNotificationPresenter$$ExternalSyntheticLambda3(), null, false);
+            } else if (((Boolean) stateFlowImpl.getValue()).booleanValue()) {
+                boolean z2 = NotiRune.NOTI_LOCKSCREEN_ALWAYS_HIDE_SENSITIVE;
+                DynamicPrivacyController dynamicPrivacyController = this.mDynamicPrivacyController;
+                if (z2) {
+                    KeyguardStateControllerImpl keyguardStateControllerImpl = (KeyguardStateControllerImpl) dynamicPrivacyController.mKeyguardStateController;
+                    if (keyguardStateControllerImpl.mShowing && keyguardStateControllerImpl.mSecure && ((state = dynamicPrivacyController.mStateController.getState()) == 0 || state == 2)) {
+                        NotificationLockscreenUserManagerImpl notificationLockscreenUserManagerImpl = (NotificationLockscreenUserManagerImpl) dynamicPrivacyController.mLockscreenUserManager;
+                        if (notificationLockscreenUserManagerImpl.userAllowsNotificationsInPublic(notificationLockscreenUserManagerImpl.mCurrentUserId) && !dynamicPrivacyController.isDynamicallyUnlocked()) {
+                            ((StatusBarStateControllerImpl) sysuiStatusBarStateController).setLeaveOpenOnKeyguardHide(true);
+                            activityStarter.dismissKeyguardThenExecute(new StatusBarNotificationPresenter$$ExternalSyntheticLambda3(), null, false);
+                        }
+                    }
+                } else if (dynamicPrivacyController.isInLockedDownShade()) {
+                }
+            }
+            ExpandableNotificationRow expandableNotificationRow = notificationEntry.row;
+            SystemUIAnalytics.sendEventCDLog(SystemUIAnalytics.SID_QUICKPANEL_OPENED, SystemUIAnalytics.EID_QPNE_NOTI_EXPANSION, "type", (expandableNotificationRow == null || !expandableNotificationRow.mIsSummaryWithChildren) ? SystemUIAnalytics.QPNE_VID_SINGLE : SystemUIAnalytics.QPNE_VID_GROUPED, SystemUIAnalytics.QPNE_KEY_APP, notificationEntry.mSbn.getPackageName());
+        }
     }
 }

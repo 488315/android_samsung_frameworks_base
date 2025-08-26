@@ -4,11 +4,9 @@ import androidx.compose.ui.graphics.AndroidPath;
 import androidx.compose.ui.graphics.AndroidPath_androidKt;
 import androidx.compose.ui.graphics.PathSvgKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public interface BatteryGlyph {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Bolt implements BatteryGlyph {
         public static final Bolt INSTANCE = new Bolt();
         public static final AndroidPath path = null;
@@ -33,7 +31,6 @@ public interface BatteryGlyph {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class BoltLarge implements BatteryGlyph {
         public static final BoltLarge INSTANCE = new BoltLarge();
         public static final AndroidPath path = null;
@@ -58,7 +55,6 @@ public interface BatteryGlyph {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Defend implements BatteryGlyph {
         public static final Defend INSTANCE = new Defend();
         public static final AndroidPath bgPath = null;
@@ -85,7 +81,6 @@ public interface BatteryGlyph {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DefendLarge implements BatteryGlyph {
         public static final DefendLarge INSTANCE = new DefendLarge();
         public static final AndroidPath bgPath = null;
@@ -112,7 +107,6 @@ public interface BatteryGlyph {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Eight implements BatteryGlyph {
         public static final Eight INSTANCE = new Eight();
         public static final AndroidPath path = null;
@@ -137,7 +131,6 @@ public interface BatteryGlyph {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Five implements BatteryGlyph {
         public static final Five INSTANCE = new Five();
         public static final AndroidPath path = null;
@@ -162,7 +155,6 @@ public interface BatteryGlyph {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Four implements BatteryGlyph {
         public static final Four INSTANCE = new Four();
         public static final AndroidPath path = null;
@@ -187,7 +179,6 @@ public interface BatteryGlyph {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Nine implements BatteryGlyph {
         public static final Nine INSTANCE = new Nine();
         public static final AndroidPath path = null;
@@ -212,7 +203,6 @@ public interface BatteryGlyph {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class One implements BatteryGlyph {
         public static final One INSTANCE = new One();
         public static final AndroidPath path = null;
@@ -237,7 +227,6 @@ public interface BatteryGlyph {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Plus implements BatteryGlyph {
         public static final Plus INSTANCE = new Plus();
         public static final AndroidPath path = null;
@@ -262,7 +251,6 @@ public interface BatteryGlyph {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class PlusLarge implements BatteryGlyph {
         public static final PlusLarge INSTANCE = new PlusLarge();
         public static final AndroidPath path = null;
@@ -287,7 +275,6 @@ public interface BatteryGlyph {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Seven implements BatteryGlyph {
         public static final Seven INSTANCE = new Seven();
         public static final AndroidPath path = null;
@@ -312,7 +299,6 @@ public interface BatteryGlyph {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Six implements BatteryGlyph {
         public static final Six INSTANCE = new Six();
         public static final AndroidPath path = null;
@@ -337,7 +323,6 @@ public interface BatteryGlyph {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Three implements BatteryGlyph {
         public static final Three INSTANCE = new Three();
         public static final AndroidPath path = null;
@@ -362,7 +347,6 @@ public interface BatteryGlyph {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Two implements BatteryGlyph {
         public static final Two INSTANCE = new Two();
         public static final AndroidPath path = null;
@@ -387,7 +371,6 @@ public interface BatteryGlyph {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Zero implements BatteryGlyph {
         public static final Zero INSTANCE = new Zero();
         public static final AndroidPath path = null;

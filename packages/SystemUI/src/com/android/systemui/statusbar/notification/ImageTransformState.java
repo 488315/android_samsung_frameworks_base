@@ -12,7 +12,6 @@ import com.android.systemui.statusbar.TransformableView;
 import com.android.systemui.statusbar.ViewTransformationHelper;
 import com.android.systemui.statusbar.notification.row.HybridNotificationView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ImageTransformState extends TransformState {
     public static final Pools.SimplePool sInstancePool = new Pools.SimplePool(40);
@@ -29,9 +28,9 @@ public class ImageTransformState extends TransformState {
             this.mTransformedView.setPivotX(r0.getWidth() / 2);
             resetTransformedView();
         }
-        float max = Math.max(Math.min(((f * 360.0f) - 150.0f) / 210.0f, 1.0f), 0.0f);
-        CrossFadeHelper.fadeIn(this.mTransformedView, max, false);
-        float interpolation = ((PathInterpolator) Interpolators.LINEAR_OUT_SLOW_IN).getInterpolation(max);
+        float fMax = Math.max(Math.min(((f * 360.0f) - 150.0f) / 210.0f, 1.0f), 0.0f);
+        CrossFadeHelper.fadeIn(this.mTransformedView, fMax, false);
+        float interpolation = ((PathInterpolator) Interpolators.LINEAR_OUT_SLOW_IN).getInterpolation(fMax);
         this.mTransformedView.setScaleX(interpolation);
         this.mTransformedView.setScaleY(interpolation);
     }
@@ -46,9 +45,9 @@ public class ImageTransformState extends TransformState {
             this.mTransformedView.setPivotY(0.0f);
             this.mTransformedView.setPivotX(r0.getWidth() / 2);
         }
-        float max = Math.max(Math.min((((1.0f - f) * 360.0f) - 150.0f) / 210.0f, 1.0f), 0.0f);
-        CrossFadeHelper.fadeOut(this.mTransformedView, 1.0f - max, false);
-        float interpolation = ((PathInterpolator) Interpolators.LINEAR_OUT_SLOW_IN).getInterpolation(max);
+        float fMax = Math.max(Math.min((((1.0f - f) * 360.0f) - 150.0f) / 210.0f, 1.0f), 0.0f);
+        CrossFadeHelper.fadeOut(this.mTransformedView, 1.0f - fMax, false);
+        float interpolation = ((PathInterpolator) Interpolators.LINEAR_OUT_SLOW_IN).getInterpolation(fMax);
         this.mTransformedView.setScaleX(interpolation);
         this.mTransformedView.setScaleY(interpolation);
     }

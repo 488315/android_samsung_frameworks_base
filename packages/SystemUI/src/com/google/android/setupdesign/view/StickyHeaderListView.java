@@ -15,7 +15,6 @@ import android.view.accessibility.AccessibilityEvent;
 import android.widget.ListView;
 import com.google.android.setupdesign.R$styleable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class StickyHeaderListView extends ListView {
     public int statusBarInset;
@@ -44,7 +43,7 @@ public class StickyHeaderListView extends ListView {
     public final void draw(Canvas canvas) {
         super.draw(canvas);
         if (this.sticky != null) {
-            int save = canvas.save();
+            int iSave = canvas.save();
             View view = this.stickyContainer;
             View view2 = view != null ? view : this.sticky;
             if (view2.getTop() + (view != null ? this.sticky.getTop() : 0) < this.statusBarInset || !view2.isShown()) {
@@ -55,7 +54,7 @@ public class StickyHeaderListView extends ListView {
             } else {
                 this.stickyRect.setEmpty();
             }
-            canvas.restoreToCount(save);
+            canvas.restoreToCount(iSave);
         }
     }
 
@@ -63,13 +62,13 @@ public class StickyHeaderListView extends ListView {
         if (isInEditMode()) {
             return;
         }
-        TypedArray obtainStyledAttributes = getContext().obtainStyledAttributes(attributeSet, R$styleable.SudStickyHeaderListView, i, 0);
-        int resourceId = obtainStyledAttributes.getResourceId(0, 0);
-        obtainStyledAttributes.getBoolean(1, false);
+        TypedArray typedArrayObtainStyledAttributes = getContext().obtainStyledAttributes(attributeSet, R$styleable.SudStickyHeaderListView, i, 0);
+        int resourceId = typedArrayObtainStyledAttributes.getResourceId(0, 0);
+        typedArrayObtainStyledAttributes.getBoolean(1, false);
         if (resourceId != 0) {
             addHeaderView(LayoutInflater.from(getContext()).inflate(resourceId, (ViewGroup) this, false), null, false);
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     @Override // android.view.View

@@ -119,9 +119,9 @@ public class FastPrintWriter extends PrintWriter {
 
     private final void initEncoder(String str) throws UnsupportedEncodingException {
         try {
-            CharsetEncoder newEncoder = Charset.forName(str).newEncoder();
-            this.mCharset = newEncoder;
-            newEncoder.onMalformedInput(CodingErrorAction.REPLACE);
+            CharsetEncoder charsetEncoderNewEncoder = Charset.forName(str).newEncoder();
+            this.mCharset = charsetEncoderNewEncoder;
+            charsetEncoderNewEncoder.onMalformedInput(CodingErrorAction.REPLACE);
             this.mCharset.onUnmappableCharacter(CodingErrorAction.REPLACE);
         } catch (Exception unused) {
             throw new UnsupportedEncodingException(str);
@@ -153,9 +153,9 @@ public class FastPrintWriter extends PrintWriter {
     }
 
     private final void initDefaultEncoder() {
-        CharsetEncoder newEncoder = Charset.defaultCharset().newEncoder();
-        this.mCharset = newEncoder;
-        newEncoder.onMalformedInput(CodingErrorAction.REPLACE);
+        CharsetEncoder charsetEncoderNewEncoder = Charset.defaultCharset().newEncoder();
+        this.mCharset = charsetEncoderNewEncoder;
+        charsetEncoderNewEncoder.onMalformedInput(CodingErrorAction.REPLACE);
         this.mCharset.onUnmappableCharacter(CodingErrorAction.REPLACE);
     }
 
@@ -210,12 +210,12 @@ public class FastPrintWriter extends PrintWriter {
     }
 
     private void flushBytesLocked() throws IOException {
-        int position;
-        if (this.mIoError || (position = this.mBytes.position()) <= 0) {
+        int iPosition;
+        if (this.mIoError || (iPosition = this.mBytes.position()) <= 0) {
             return;
         }
         this.mBytes.flip();
-        this.mOutputStream.write(this.mBytes.array(), 0, position);
+        this.mOutputStream.write(this.mBytes.array(), 0, iPosition);
         this.mBytes.clear();
     }
 
@@ -223,17 +223,17 @@ public class FastPrintWriter extends PrintWriter {
         int i = this.mPos;
         if (i > 0) {
             if (this.mOutputStream != null) {
-                CharBuffer wrap = CharBuffer.wrap(this.mText, 0, i);
-                CoderResult encode = this.mCharset.encode(wrap, this.mBytes, true);
+                CharBuffer charBufferWrap = CharBuffer.wrap(this.mText, 0, i);
+                CoderResult coderResultEncode = this.mCharset.encode(charBufferWrap, this.mBytes, true);
                 while (!this.mIoError) {
-                    if (encode.isError()) {
-                        throw new IOException(encode.toString());
+                    if (coderResultEncode.isError()) {
+                        throw new IOException(coderResultEncode.toString());
                     }
-                    if (!encode.isOverflow()) {
+                    if (!coderResultEncode.isOverflow()) {
                         break;
                     }
                     flushBytesLocked();
-                    encode = this.mCharset.encode(wrap, this.mBytes, true);
+                    coderResultEncode = this.mCharset.encode(charBufferWrap, this.mBytes, true);
                 }
                 if (!this.mIoError) {
                     flushBytesLocked();
@@ -380,12 +380,12 @@ public class FastPrintWriter extends PrintWriter {
             try {
                 String str = this.mSeparator;
                 appendLocked(str, 0, str.length());
-                if (this.mAutoFlush) {
-                    flushLocked();
-                }
             } catch (IOException e) {
                 Log.w("FastPrintWriter", "Write failure", e);
                 setError();
+            }
+            if (this.mAutoFlush) {
+                flushLocked();
             }
         }
     }
@@ -473,8 +473,8 @@ public class FastPrintWriter extends PrintWriter {
         if (charSequence == null) {
             charSequence = PerfettoProtoLogImpl.NULL_STRING;
         }
-        String charSequence2 = charSequence.subSequence(i, i2).toString();
-        write(charSequence2, 0, charSequence2.length());
+        String string = charSequence.subSequence(i, i2).toString();
+        write(string, 0, string.length());
         return this;
     }
 }

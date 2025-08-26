@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.ListView;
+import android.widget.TextView;
 import com.android.internal.R;
 import com.android.internal.app.ChooserActivity;
 import com.android.internal.hidden_from_bootclasspath.android.service.chooser.Flags;
@@ -89,7 +90,7 @@ public class ChooserGridLayoutManager extends GridLayoutManager {
     public void onInitializeAccessibilityNodeInfoForItem(RecyclerView.Recycler recycler, RecyclerView.State state, View view, AccessibilityNodeInfo accessibilityNodeInfo) {
         super.onInitializeAccessibilityNodeInfoForItem(recycler, state, view, accessibilityNodeInfo);
         if (Flags.announceShortcutsAndSuggestedAppsLegacy() && (view instanceof ViewGroup)) {
-            if (view.getId() == 16909819) {
+            if (view.getId() == 16909820) {
                 accessibilityNodeInfo.setClassName(ListView.class.getName());
                 accessibilityNodeInfo.setContainerTitle(this.mShortcutGroupTitle);
                 accessibilityNodeInfo.setCollectionInfo(createShortcutsA11yCollectionInfo((ViewGroup) view));
@@ -121,60 +122,45 @@ public class ChooserGridLayoutManager extends GridLayoutManager {
         return Flags.announceShortcutsAndSuggestedAppsLegacy() || super.isLayoutHierarchical(recycler, state);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:20:0x003d  */
-    /* JADX WARN: Removed duplicated region for block: B:23:0x0043 A[SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:20:0x003a  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private android.view.accessibility.AccessibilityNodeInfo.CollectionInfo createShortcutsA11yCollectionInfo(android.view.ViewGroup r9) {
-        /*
-            r8 = this;
-            r8 = 0
-            r0 = r8
-            r1 = r0
-            r2 = r1
-        L4:
-            int r3 = r9.getChildCount()
-            if (r0 >= r3) goto L46
-            android.view.View r3 = r9.getChildAt(r0)
-            boolean r4 = r3 instanceof android.view.ViewGroup
-            if (r4 == 0) goto L3a
-            r4 = r3
-            android.view.ViewGroup r4 = (android.view.ViewGroup) r4
-            int r3 = r3.getVisibility()
-            if (r3 != 0) goto L3a
-            r3 = r8
-            r5 = r3
-        L1d:
-            int r6 = r4.getChildCount()
-            if (r3 >= r6) goto L3b
-            android.view.View r6 = r4.getChildAt(r3)
-            if (r6 == 0) goto L37
-            int r7 = r6.getVisibility()
-            if (r7 != 0) goto L37
-            int r5 = r5 + 1
-            boolean r6 = r6 instanceof android.widget.TextView
-            if (r6 == 0) goto L37
-            r5 = 1
-            goto L3b
-        L37:
-            int r3 = r3 + 1
-            goto L1d
-        L3a:
-            r5 = r8
-        L3b:
-            if (r5 <= 0) goto L43
-            int r1 = r1 + 1
-            int r2 = java.lang.Math.max(r2, r5)
-        L43:
-            int r0 = r0 + 1
-            goto L4
-        L46:
-            android.view.accessibility.AccessibilityNodeInfo$CollectionInfo r8 = android.view.accessibility.AccessibilityNodeInfo.CollectionInfo.obtain(r1, r2, r8)
-            return r8
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.app.ChooserGridLayoutManager.createShortcutsA11yCollectionInfo(android.view.ViewGroup):android.view.accessibility.AccessibilityNodeInfo$CollectionInfo");
+    private AccessibilityNodeInfo.CollectionInfo createShortcutsA11yCollectionInfo(ViewGroup viewGroup) {
+        int i;
+        int i2 = 0;
+        int iMax = 0;
+        for (int i3 = 0; i3 < viewGroup.getChildCount(); i3++) {
+            View childAt = viewGroup.getChildAt(i3);
+            if (childAt instanceof ViewGroup) {
+                ViewGroup viewGroup2 = (ViewGroup) childAt;
+                if (childAt.getVisibility() == 0) {
+                    int i4 = 0;
+                    i = 0;
+                    while (true) {
+                        if (i4 >= viewGroup2.getChildCount()) {
+                            break;
+                        }
+                        View childAt2 = viewGroup2.getChildAt(i4);
+                        if (childAt2 != null && childAt2.getVisibility() == 0) {
+                            i++;
+                            if (childAt2 instanceof TextView) {
+                                i = 1;
+                                break;
+                            }
+                        }
+                        i4++;
+                    }
+                } else {
+                    i = 0;
+                }
+            }
+            if (i > 0) {
+                i2++;
+                iMax = Math.max(iMax, i);
+            }
+        }
+        return AccessibilityNodeInfo.CollectionInfo.obtain(i2, iMax, false);
     }
 
     private AccessibilityNodeInfo.CollectionInfo createSuggestedAppsA11yCollectionInfo(ViewGroup viewGroup) {

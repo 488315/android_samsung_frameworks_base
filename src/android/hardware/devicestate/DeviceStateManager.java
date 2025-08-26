@@ -93,16 +93,16 @@ public final class DeviceStateManager {
 
         @Override // android.hardware.devicestate.DeviceStateManager.DeviceStateCallback
         public final void onDeviceStateChanged(DeviceState deviceState) {
-            boolean contains;
+            boolean zContains;
             if (this.mFeatureFlags.deviceStatePropertyApi()) {
-                contains = deviceState.hasProperty(11) || ArrayUtils.contains(this.mFoldedDeviceStates, deviceState.getIdentifier());
+                zContains = deviceState.hasProperty(11) || ArrayUtils.contains(this.mFoldedDeviceStates, deviceState.getIdentifier());
             } else {
-                contains = ArrayUtils.contains(this.mFoldedDeviceStates, deviceState.getIdentifier());
+                zContains = ArrayUtils.contains(this.mFoldedDeviceStates, deviceState.getIdentifier());
             }
             Boolean bool = this.lastResult;
-            if (bool == null || !bool.equals(Boolean.valueOf(contains))) {
-                this.lastResult = Boolean.valueOf(contains);
-                this.mDelegate.accept(Boolean.valueOf(contains));
+            if (bool == null || !bool.equals(Boolean.valueOf(zContains))) {
+                this.lastResult = Boolean.valueOf(zContains);
+                this.mDelegate.accept(Boolean.valueOf(zContains));
             }
         }
 

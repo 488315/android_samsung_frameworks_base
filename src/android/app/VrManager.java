@@ -1,7 +1,6 @@
 package android.app;
 
 import android.annotation.SystemApi;
-import android.app.VrManager;
 import android.content.ComponentName;
 import android.os.RemoteException;
 import android.service.vr.IPersistentVrStateCallbacks;
@@ -42,7 +41,7 @@ public class VrManager {
                 CallbackEntry.this.mExecutor.execute(new Runnable() { // from class: android.app.VrManager$CallbackEntry$1$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        VrManager.CallbackEntry.AnonymousClass1.this.lambda$onVrStateChanged$0(z);
+                        this.f$0.lambda$onVrStateChanged$0(z);
                     }
                 });
             }
@@ -63,7 +62,7 @@ public class VrManager {
                 CallbackEntry.this.mExecutor.execute(new Runnable() { // from class: android.app.VrManager$CallbackEntry$2$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        VrManager.CallbackEntry.AnonymousClass2.this.lambda$onPersistentVrStateChanged$0(z);
+                        this.f$0.lambda$onPersistentVrStateChanged$0(z);
                     }
                 });
             }
@@ -98,14 +97,14 @@ public class VrManager {
     }
 
     public void unregisterVrStateCallback(VrStateCallback vrStateCallback) {
-        CallbackEntry remove = this.mCallbackMap.remove(vrStateCallback);
-        if (remove != null) {
+        CallbackEntry callbackEntryRemove = this.mCallbackMap.remove(vrStateCallback);
+        if (callbackEntryRemove != null) {
             try {
-                this.mService.unregisterListener(remove.mStateCallback);
+                this.mService.unregisterListener(callbackEntryRemove.mStateCallback);
             } catch (RemoteException unused) {
             }
             try {
-                this.mService.unregisterPersistentVrStateListener(remove.mPersistentStateCallback);
+                this.mService.unregisterPersistentVrStateListener(callbackEntryRemove.mPersistentStateCallback);
             } catch (RemoteException unused2) {
             }
         }

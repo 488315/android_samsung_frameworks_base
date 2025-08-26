@@ -12,7 +12,6 @@ import com.android.wm.shell.sysui.ShellInit;
 import com.android.wm.shell.transition.Transitions;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class LetterboxTransitionObserver implements Transitions.TransitionObserver {
     public static final Rect EMPTY_BOUNDS;
@@ -21,7 +20,6 @@ public final class LetterboxTransitionObserver implements Transitions.Transition
     public final TransitionStateHolder transitionStateHolder;
     public final Transitions transitions;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -52,8 +50,8 @@ public final class LetterboxTransitionObserver implements Transitions.Transition
                 Rect rect = new Rect(change.getEndRelOffset().x, change.getEndRelOffset().y, change.getEndAbsBounds().width(), change.getEndAbsBounds().height());
                 LetterboxController letterboxController = this.letterboxController;
                 if (!TransitionUtil.isClosingType(change.getMode()) || this.transitionStateHolder.recentsTransitionState >= 2) {
-                    boolean isTopActivityLetterboxed = taskInfo.appCompatTaskInfo.isTopActivityLetterboxed();
-                    if (isTopActivityLetterboxed) {
+                    boolean zIsTopActivityLetterboxed = taskInfo.appCompatTaskInfo.isTopActivityLetterboxed();
+                    if (zIsTopActivityLetterboxed) {
                         LetterboxControllerStrategy letterboxControllerStrategy = this.letterboxModeStrategy;
                         letterboxControllerStrategy.currentMode = Math.max(letterboxControllerStrategy.letterboxConfiguration.letterboxActivityCornersRadius, 0) > 0 ? LetterboxControllerStrategy.LetterboxMode.SINGLE_SURFACE : LetterboxControllerStrategy.LetterboxMode.MULTIPLE_SURFACES;
                         letterboxController.createLetterboxSurface(letterboxKey, transaction, change.getLeash());
@@ -63,7 +61,7 @@ public final class LetterboxTransitionObserver implements Transitions.Transition
                         }
                         letterboxController.updateLetterboxSurfaceBounds(letterboxKey, transaction, rect, rect2);
                     }
-                    letterboxController.updateLetterboxSurfaceVisibility(letterboxKey, transaction, isTopActivityLetterboxed);
+                    letterboxController.updateLetterboxSurfaceVisibility(letterboxKey, transaction, zIsTopActivityLetterboxed);
                 } else {
                     letterboxController.destroyLetterboxSurface(letterboxKey, transaction2);
                 }

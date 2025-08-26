@@ -143,8 +143,8 @@ public abstract class AndroidKeyStoreHmacSpi extends MacSpi implements KeyStoreC
         try {
             ensureKeystoreOperationInitialized();
             try {
-                byte[] update = this.mChunkedStreamer.update(bArr, i, i2);
-                if (update != null && update.length != 0) {
+                byte[] bArrUpdate = this.mChunkedStreamer.update(bArr, i, i2);
+                if (bArrUpdate != null && bArrUpdate.length != 0) {
                     throw new ProviderException("Update operation unexpectedly produced output");
                 }
             } catch (KeyStoreException e) {
@@ -160,9 +160,9 @@ public abstract class AndroidKeyStoreHmacSpi extends MacSpi implements KeyStoreC
         try {
             ensureKeystoreOperationInitialized();
             try {
-                byte[] doFinal = this.mChunkedStreamer.doFinal(null, 0, 0, null);
+                byte[] bArrDoFinal = this.mChunkedStreamer.doFinal(null, 0, 0, null);
                 resetWhilePreservingInitState();
-                return doFinal;
+                return bArrDoFinal;
             } catch (KeyStoreException e) {
                 throw new ProviderException("Keystore operation failed", e);
             }

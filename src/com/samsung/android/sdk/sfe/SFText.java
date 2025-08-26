@@ -131,54 +131,54 @@ public class SFText {
                 setSFTextLine(this.mLines);
                 setSFTextView(this.owner);
                 setSFTextLayout(layout);
-                int[] renderTextEffect = renderTextEffect();
+                int[] iArrRenderTextEffect = renderTextEffect();
                 int[] drawingBitmapSize = getDrawingBitmapSize();
                 int i3 = drawingBitmapSize[0];
                 int i4 = drawingBitmapSize[1];
-                Bitmap createBitmap = Bitmap.createBitmap(i3, i4, Bitmap.Config.ARGB_8888);
-                createBitmap.setPixels(renderTextEffect, 0, i3, 0, 0, i3, i4);
+                Bitmap bitmapCreateBitmap = Bitmap.createBitmap(i3, i4, Bitmap.Config.ARGB_8888);
+                bitmapCreateBitmap.setPixels(iArrRenderTextEffect, 0, i3, 0, 0, i3, i4);
                 canvas.save();
                 int effectLeftOffset = getEffectLeftOffset();
                 int effectTopOffset = getEffectTopOffset();
                 int i5 = 0;
-                int i6 = 0;
-                for (int i7 = 0; i7 < i3; i7++) {
-                    int i8 = 0;
+                int iAlpha = 0;
+                for (int i6 = 0; i6 < i3; i6++) {
+                    int i7 = 0;
                     while (true) {
-                        if (i8 >= i4) {
+                        if (i7 >= i4) {
                             break;
                         }
-                        i6 = Color.alpha(createBitmap.getPixel(i7, i8));
-                        if (i6 > 0) {
-                            i5 = i7;
+                        iAlpha = Color.alpha(bitmapCreateBitmap.getPixel(i6, i7));
+                        if (iAlpha > 0) {
+                            i5 = i6;
                             break;
                         }
-                        i8++;
+                        i7++;
                     }
-                    if (i6 > 0) {
+                    if (iAlpha > 0) {
                         break;
                     }
                 }
-                int i9 = 0;
-                for (int i10 = i3 - 1; i10 >= 0; i10--) {
-                    int i11 = 0;
+                int i8 = 0;
+                for (int i9 = i3 - 1; i9 >= 0; i9--) {
+                    int i10 = 0;
                     while (true) {
-                        if (i11 >= i4) {
+                        if (i10 >= i4) {
                             break;
                         }
-                        i6 = Color.alpha(createBitmap.getPixel(i10, i11));
-                        if (i6 > 0) {
-                            i9 = i10;
+                        iAlpha = Color.alpha(bitmapCreateBitmap.getPixel(i9, i10));
+                        if (iAlpha > 0) {
+                            i8 = i9;
                             break;
                         }
-                        i11++;
+                        i10++;
                     }
-                    if (i6 > 0) {
+                    if (iAlpha > 0) {
                         break;
                     }
                 }
                 canvas.translate(i - effectLeftOffset, i2 - effectTopOffset);
-                canvas.drawBitmap(createBitmap, (i5 + (i3 - i9)) / 2, 0.0f, this.mPaint);
+                canvas.drawBitmap(bitmapCreateBitmap, (i5 + (i3 - i8)) / 2, 0.0f, this.mPaint);
                 canvas.restore();
                 Log.d(TAG, "render() - End.");
                 return true;

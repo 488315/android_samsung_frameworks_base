@@ -8,7 +8,6 @@ import com.android.systemui.keyboard.docking.ui.viewmodel.KeyboardDockingIndicat
 import com.android.systemui.surfaceeffects.PaintDrawCallback;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class KeyboardDockingIndicationViewBinder {
     public final KeyboardDockingIndicationViewBinder$drawCallback$1 drawCallback;
@@ -37,7 +36,7 @@ public final class KeyboardDockingIndicationViewBinder {
         this.drawCallback = new PaintDrawCallback() { // from class: com.android.systemui.keyboard.docking.binder.KeyboardDockingIndicationViewBinder$drawCallback$1
             @Override // com.android.systemui.surfaceeffects.PaintDrawCallback
             public final void onDraw(Paint paint) {
-                KeyboardDockingIndicationView keyboardDockingIndicationView = KeyboardDockingIndicationViewBinder.this.glowEffectView;
+                KeyboardDockingIndicationView keyboardDockingIndicationView = this.this$0.glowEffectView;
                 keyboardDockingIndicationView.paint = paint;
                 keyboardDockingIndicationView.invalidate();
             }

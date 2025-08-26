@@ -1,29 +1,40 @@
 package com.android.systemui.biometrics.domain.interactor;
 
 import android.hardware.biometrics.IBiometricContextListener;
+import android.os.IBinder;
+import android.os.RemoteException;
+import android.util.Log;
 import com.android.app.tracing.coroutines.CoroutineTracingKt;
+import com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl;
 import com.android.systemui.display.data.repository.DeviceStateRepository;
 import com.android.systemui.display.data.repository.DeviceStateRepositoryImpl;
 import com.android.systemui.keyguard.domain.interactor.KeyguardTransitionInteractor;
 import com.android.systemui.keyguard.shared.model.KeyguardState;
+import com.android.systemui.keyguard.shared.model.TransitionStep;
 import kotlin.Lazy;
 import kotlin.LazyKt__LazyJVMKt;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function0;
+import kotlin.jvm.functions.Function2;
+import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.CoroutineScope;
+import kotlinx.coroutines.CoroutineScopeKt;
 import kotlinx.coroutines.StandaloneCoroutine;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
+import kotlinx.coroutines.flow.FlowKt__ErrorsKt$catch$$inlined$unsafeFlow$1;
+import kotlinx.coroutines.flow.FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1;
 import kotlinx.coroutines.flow.ReadonlySharedFlow;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.SharingStarted;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class LogContextInteractorImpl implements LogContextInteractor {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -32,7 +43,6 @@ public final class LogContextInteractorImpl implements LogContextInteractor {
     public final ReadonlySharedFlow foldState;
     public final LogContextInteractorImpl$special$$inlined$map$1 isHardwareIgnoringTouches;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -42,7 +52,6 @@ public final class LogContextInteractorImpl implements LogContextInteractor {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
         public static final /* synthetic */ int[] $EnumSwitchMapping$1;
@@ -111,6 +120,245 @@ public final class LogContextInteractorImpl implements LogContextInteractor {
         }
     }
 
+    /* renamed from: com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl$addBiometricContextListener$1, reason: invalid class name */
+    final class AnonymousClass1 extends SuspendLambda implements Function2 {
+        final /* synthetic */ IBiometricContextListener $listener;
+        private /* synthetic */ Object L$0;
+        int label;
+
+        /* renamed from: com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl$addBiometricContextListener$1$1, reason: invalid class name and collision with other inner class name */
+        final class C00591 extends SuspendLambda implements Function2 {
+            final /* synthetic */ IBiometricContextListener $listener;
+            /* synthetic */ int I$0;
+            int label;
+
+            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+            public C00591(IBiometricContextListener iBiometricContextListener, Continuation continuation) {
+                super(2, continuation);
+                this.$listener = iBiometricContextListener;
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Continuation create(Object obj, Continuation continuation) {
+                C00591 c00591 = new C00591(this.$listener, continuation);
+                c00591.I$0 = ((Number) obj).intValue();
+                return c00591;
+            }
+
+            @Override // kotlin.jvm.functions.Function2
+            public final Object invoke(Object obj, Object obj2) {
+                return ((C00591) create(Integer.valueOf(((Number) obj).intValue()), (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) {
+                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                if (this.label != 0) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+                this.$listener.onFoldChanged(this.I$0);
+                return Unit.INSTANCE;
+            }
+        }
+
+        /* renamed from: com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl$addBiometricContextListener$1$2, reason: invalid class name */
+        final class AnonymousClass2 extends SuspendLambda implements Function3 {
+            /* synthetic */ Object L$0;
+            int label;
+
+            public AnonymousClass2(Continuation continuation) {
+                super(3, continuation);
+            }
+
+            @Override // kotlin.jvm.functions.Function3
+            public final Object invoke(Object obj, Object obj2, Object obj3) {
+                AnonymousClass2 anonymousClass2 = new AnonymousClass2((Continuation) obj3);
+                anonymousClass2.L$0 = (Throwable) obj2;
+                return anonymousClass2.invokeSuspend(Unit.INSTANCE);
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) {
+                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                if (this.label != 0) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+                Log.w("ContextRepositoryImpl", "failed to notify new fold state", (Throwable) this.L$0);
+                return Unit.INSTANCE;
+            }
+        }
+
+        /* renamed from: com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl$addBiometricContextListener$1$3, reason: invalid class name */
+        final class AnonymousClass3 extends SuspendLambda implements Function2 {
+            final /* synthetic */ IBiometricContextListener $listener;
+            /* synthetic */ int I$0;
+            int label;
+
+            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+            public AnonymousClass3(IBiometricContextListener iBiometricContextListener, Continuation continuation) {
+                super(2, continuation);
+                this.$listener = iBiometricContextListener;
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Continuation create(Object obj, Continuation continuation) {
+                AnonymousClass3 anonymousClass3 = new AnonymousClass3(this.$listener, continuation);
+                anonymousClass3.I$0 = ((Number) obj).intValue();
+                return anonymousClass3;
+            }
+
+            @Override // kotlin.jvm.functions.Function2
+            public final Object invoke(Object obj, Object obj2) {
+                return ((AnonymousClass3) create(Integer.valueOf(((Number) obj).intValue()), (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) {
+                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                if (this.label != 0) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+                this.$listener.onDisplayStateChanged(this.I$0);
+                return Unit.INSTANCE;
+            }
+        }
+
+        /* renamed from: com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl$addBiometricContextListener$1$4, reason: invalid class name */
+        final class AnonymousClass4 extends SuspendLambda implements Function3 {
+            /* synthetic */ Object L$0;
+            int label;
+
+            public AnonymousClass4(Continuation continuation) {
+                super(3, continuation);
+            }
+
+            @Override // kotlin.jvm.functions.Function3
+            public final Object invoke(Object obj, Object obj2, Object obj3) {
+                AnonymousClass4 anonymousClass4 = new AnonymousClass4((Continuation) obj3);
+                anonymousClass4.L$0 = (Throwable) obj2;
+                return anonymousClass4.invokeSuspend(Unit.INSTANCE);
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) {
+                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                if (this.label != 0) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+                Log.w("ContextRepositoryImpl", "failed to notify new display state", (Throwable) this.L$0);
+                return Unit.INSTANCE;
+            }
+        }
+
+        /* renamed from: com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl$addBiometricContextListener$1$5, reason: invalid class name */
+        final class AnonymousClass5 extends SuspendLambda implements Function2 {
+            final /* synthetic */ IBiometricContextListener $listener;
+            /* synthetic */ boolean Z$0;
+            int label;
+
+            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+            public AnonymousClass5(IBiometricContextListener iBiometricContextListener, Continuation continuation) {
+                super(2, continuation);
+                this.$listener = iBiometricContextListener;
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Continuation create(Object obj, Continuation continuation) {
+                AnonymousClass5 anonymousClass5 = new AnonymousClass5(this.$listener, continuation);
+                anonymousClass5.Z$0 = ((Boolean) obj).booleanValue();
+                return anonymousClass5;
+            }
+
+            @Override // kotlin.jvm.functions.Function2
+            public final Object invoke(Object obj, Object obj2) {
+                Boolean bool = (Boolean) obj;
+                bool.booleanValue();
+                return ((AnonymousClass5) create(bool, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) {
+                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                if (this.label != 0) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+                this.$listener.onHardwareIgnoreTouchesChanged(this.Z$0);
+                return Unit.INSTANCE;
+            }
+        }
+
+        /* renamed from: com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl$addBiometricContextListener$1$6, reason: invalid class name */
+        final class AnonymousClass6 extends SuspendLambda implements Function3 {
+            /* synthetic */ Object L$0;
+            int label;
+
+            public AnonymousClass6(Continuation continuation) {
+                super(3, continuation);
+            }
+
+            @Override // kotlin.jvm.functions.Function3
+            public final Object invoke(Object obj, Object obj2, Object obj3) {
+                AnonymousClass6 anonymousClass6 = new AnonymousClass6((Continuation) obj3);
+                anonymousClass6.L$0 = (Throwable) obj2;
+                return anonymousClass6.invokeSuspend(Unit.INSTANCE);
+            }
+
+            @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+            public final Object invokeSuspend(Object obj) {
+                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                if (this.label != 0) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+                Log.w("ContextRepositoryImpl", "failed to notify new set ignore state", (Throwable) this.L$0);
+                return Unit.INSTANCE;
+            }
+        }
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public AnonymousClass1(IBiometricContextListener iBiometricContextListener, Continuation continuation) {
+            super(2, continuation);
+            this.$listener = iBiometricContextListener;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            AnonymousClass1 anonymousClass1 = LogContextInteractorImpl.this.new AnonymousClass1(this.$listener, continuation);
+            anonymousClass1.L$0 = obj;
+            return anonymousClass1;
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((AnonymousClass1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) throws RemoteException {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            if (this.label != 0) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            final CoroutineScope coroutineScope = (CoroutineScope) this.L$0;
+            FlowKt.launchIn(new FlowKt__ErrorsKt$catch$$inlined$unsafeFlow$1(new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(LogContextInteractorImpl.this.foldState, new C00591(this.$listener, null)), new AnonymousClass2(null)), coroutineScope);
+            FlowKt.launchIn(new FlowKt__ErrorsKt$catch$$inlined$unsafeFlow$1(new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(FlowKt.distinctUntilChanged((Flow) LogContextInteractorImpl.this.displayState$delegate.getValue()), new AnonymousClass3(this.$listener, null)), new AnonymousClass4(null)), coroutineScope);
+            FlowKt.launchIn(new FlowKt__ErrorsKt$catch$$inlined$unsafeFlow$1(new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(FlowKt.distinctUntilChanged(LogContextInteractorImpl.this.isHardwareIgnoringTouches), new AnonymousClass5(this.$listener, null)), new AnonymousClass6(null)), coroutineScope);
+            this.$listener.asBinder().linkToDeath(new IBinder.DeathRecipient() { // from class: com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl.addBiometricContextListener.1.7
+                @Override // android.os.IBinder.DeathRecipient
+                public final void binderDied() {
+                    CoroutineScopeKt.cancel(coroutineScope, null);
+                }
+            }, 0);
+            return Unit.INSTANCE;
+        }
+    }
+
     static {
         new Companion(null);
     }
@@ -134,7 +382,6 @@ public final class LogContextInteractorImpl implements LogContextInteractor {
                 final LogContextInteractorImpl logContextInteractorImpl = this.f$2;
                 return new Flow() { // from class: com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl$displayState_delegate$lambda$1$$inlined$map$1
 
-                    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
                     /* renamed from: com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl$displayState_delegate$lambda$1$$inlined$map$1$2, reason: invalid class name */
                     public final class AnonymousClass2 implements FlowCollector {
                         public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -163,100 +410,67 @@ public final class LogContextInteractorImpl implements LogContextInteractor {
                             this.this$0 = logContextInteractorImpl;
                         }
 
-                        /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                        /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                        /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                         @Override // kotlinx.coroutines.flow.FlowCollector
                         /*
                             Code decompiled incorrectly, please refer to instructions dump.
-                            To view partially-correct code enable 'Show inconsistent code' option in preferences
                         */
-                        public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                            /*
-                                r4 = this;
-                                boolean r0 = r6 instanceof com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl$displayState_delegate$lambda$1$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                                if (r0 == 0) goto L13
-                                r0 = r6
-                                com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl$displayState_delegate$lambda$1$$inlined$map$1$2$1 r0 = (com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl$displayState_delegate$lambda$1$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                                int r1 = r0.label
-                                r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                                r3 = r1 & r2
-                                if (r3 == 0) goto L13
-                                int r1 = r1 - r2
-                                r0.label = r1
-                                goto L18
-                            L13:
-                                com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl$displayState_delegate$lambda$1$$inlined$map$1$2$1 r0 = new com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl$displayState_delegate$lambda$1$$inlined$map$1$2$1
-                                r0.<init>(r6)
-                            L18:
-                                java.lang.Object r6 = r0.result
-                                kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                                int r2 = r0.label
-                                r3 = 1
-                                if (r2 == 0) goto L2f
-                                if (r2 != r3) goto L27
-                                kotlin.ResultKt.throwOnFailure(r6)
-                                goto L61
-                            L27:
-                                java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                                java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                                r4.<init>(r5)
-                                throw r4
-                            L2f:
-                                kotlin.ResultKt.throwOnFailure(r6)
-                                com.android.systemui.keyguard.shared.model.TransitionStep r5 = (com.android.systemui.keyguard.shared.model.TransitionStep) r5
-                                int r6 = com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl.$r8$clinit
-                                com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl r6 = r4.this$0
-                                r6.getClass()
-                                com.android.systemui.keyguard.shared.model.KeyguardState r5 = r5.to
-                                int[] r6 = com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl.WhenMappings.$EnumSwitchMapping$1
-                                int r5 = r5.ordinal()
-                                r5 = r6[r5]
-                                r6 = 0
-                                switch(r5) {
-                                    case 1: goto L50;
-                                    case 2: goto L50;
-                                    case 3: goto L50;
-                                    case 4: goto L50;
-                                    case 5: goto L4e;
-                                    case 6: goto L4c;
-                                    case 7: goto L4c;
-                                    case 8: goto L4a;
-                                    case 9: goto L51;
-                                    default: goto L49;
+                        public final Object emit(Object obj, Continuation continuation) {
+                            AnonymousClass1 anonymousClass1;
+                            if (continuation instanceof AnonymousClass1) {
+                                anonymousClass1 = (AnonymousClass1) continuation;
+                                int i = anonymousClass1.label;
+                                if ((i & Integer.MIN_VALUE) != 0) {
+                                    anonymousClass1.label = i - Integer.MIN_VALUE;
+                                } else {
+                                    anonymousClass1 = new AnonymousClass1(continuation);
                                 }
-                            L49:
-                                goto L51
-                            L4a:
-                                r6 = 3
-                                goto L51
-                            L4c:
-                                r6 = 2
-                                goto L51
-                            L4e:
-                                r6 = 4
-                                goto L51
-                            L50:
-                                r6 = r3
-                            L51:
-                                java.lang.Integer r5 = new java.lang.Integer
-                                r5.<init>(r6)
-                                r0.label = r3
-                                kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                                java.lang.Object r4 = r4.emit(r5, r0)
-                                if (r4 != r1) goto L61
-                                return r1
-                            L61:
-                                kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                                return r4
-                            */
-                            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl$displayState_delegate$lambda$1$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                            }
+                            Object obj2 = anonymousClass1.result;
+                            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                            int i2 = anonymousClass1.label;
+                            if (i2 == 0) {
+                                ResultKt.throwOnFailure(obj2);
+                                int i3 = LogContextInteractorImpl.$r8$clinit;
+                                this.this$0.getClass();
+                                int i4 = 0;
+                                switch (LogContextInteractorImpl.WhenMappings.$EnumSwitchMapping$1[((TransitionStep) obj).to.ordinal()]) {
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                        i4 = 1;
+                                        break;
+                                    case 5:
+                                        i4 = 4;
+                                        break;
+                                    case 6:
+                                    case 7:
+                                        i4 = 2;
+                                        break;
+                                    case 8:
+                                        i4 = 3;
+                                        break;
+                                }
+                                Integer num = new Integer(i4);
+                                anonymousClass1.label = 1;
+                                if (this.$this_unsafeFlow.emit(num, anonymousClass1) == coroutineSingletons) {
+                                    return coroutineSingletons;
+                                }
+                            } else {
+                                if (i2 != 1) {
+                                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                                }
+                                ResultKt.throwOnFailure(obj2);
+                            }
+                            return Unit.INSTANCE;
                         }
                     }
 
                     @Override // kotlinx.coroutines.flow.Flow
                     public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                        Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, logContextInteractorImpl), continuation);
-                        return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                        Object objCollect = readonlyStateFlow.collect(new AnonymousClass2(flowCollector, logContextInteractorImpl), continuation);
+                        return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
                     }
                 };
             }
@@ -265,7 +479,6 @@ public final class LogContextInteractorImpl implements LogContextInteractor {
         final ReadonlyStateFlow readonlyStateFlow = udfpsOverlayInteractor.shouldHandleTouches;
         this.isHardwareIgnoringTouches = new Flow() { // from class: com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl$special$$inlined$map$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -292,73 +505,51 @@ public final class LogContextInteractorImpl implements LogContextInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl$special$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl$special$$inlined$map$1$2$1 r0 = (com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl$special$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl$special$$inlined$map$1$2$1 r0 = new com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl$special$$inlined$map$1$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L48
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        java.lang.Boolean r5 = (java.lang.Boolean) r5
-                        boolean r5 = r5.booleanValue()
-                        r5 = r5 ^ r3
-                        java.lang.Boolean r5 = java.lang.Boolean.valueOf(r5)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L48
-                        return r1
-                    L48:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl$special$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        Boolean boolValueOf = Boolean.valueOf(!((Boolean) obj).booleanValue());
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(boolValueOf, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = readonlyStateFlow.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         };
         final Flow flow = (Flow) lazy2.getValue();
         FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl$special$$inlined$map$2
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl$special$$inlined$map$2$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -385,79 +576,51 @@ public final class LogContextInteractorImpl implements LogContextInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl$special$$inlined$map$2.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl$special$$inlined$map$2$2$1 r0 = (com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl$special$$inlined$map$2.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl$special$$inlined$map$2$2$1 r0 = new com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl$special$$inlined$map$2$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L4d
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        java.lang.Number r5 = (java.lang.Number) r5
-                        int r5 = r5.intValue()
-                        r6 = 4
-                        if (r5 != r6) goto L3d
-                        r5 = r3
-                        goto L3e
-                    L3d:
-                        r5 = 0
-                    L3e:
-                        java.lang.Boolean r5 = java.lang.Boolean.valueOf(r5)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L4d
-                        return r1
-                    L4d:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl$special$$inlined$map$2.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        Boolean boolValueOf = Boolean.valueOf(((Number) obj).intValue() == 4);
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(boolValueOf, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flow.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         });
         final Flow flow2 = (Flow) lazy2.getValue();
         FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl$special$$inlined$map$3
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl$special$$inlined$map$3$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -484,81 +647,52 @@ public final class LogContextInteractorImpl implements LogContextInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl$special$$inlined$map$3.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl$special$$inlined$map$3$2$1 r0 = (com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl$special$$inlined$map$3.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl$special$$inlined$map$3$2$1 r0 = new com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl$special$$inlined$map$3$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L51
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        java.lang.Number r5 = (java.lang.Number) r5
-                        int r5 = r5.intValue()
-                        if (r5 == 0) goto L41
-                        if (r5 == r3) goto L41
-                        r6 = 3
-                        if (r5 == r6) goto L41
-                        r5 = 0
-                        goto L42
-                    L41:
-                        r5 = r3
-                    L42:
-                        java.lang.Boolean r5 = java.lang.Boolean.valueOf(r5)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L51
-                        return r1
-                    L51:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl$special$$inlined$map$3.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        int iIntValue = ((Number) obj).intValue();
+                        Boolean boolValueOf = Boolean.valueOf(iIntValue == 0 || iIntValue == 1 || iIntValue == 3);
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(boolValueOf, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flow2.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         });
         final ReadonlyStateFlow readonlyStateFlow2 = ((DeviceStateRepositoryImpl) deviceStateRepository).state;
-        Flow distinctUntilChanged = FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl$special$$inlined$map$4
+        Flow flowDistinctUntilChanged = FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl$special$$inlined$map$4
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl$special$$inlined$map$4$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -585,93 +719,58 @@ public final class LogContextInteractorImpl implements LogContextInteractor {
                     this.$this_unsafeFlow = flowCollector;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r5, kotlin.coroutines.Continuation r6) {
-                    /*
-                        r4 = this;
-                        boolean r0 = r6 instanceof com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl$special$$inlined$map$4.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r6
-                        com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl$special$$inlined$map$4$2$1 r0 = (com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl$special$$inlined$map$4.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl$special$$inlined$map$4$2$1 r0 = new com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl$special$$inlined$map$4$2$1
-                        r0.<init>(r6)
-                    L18:
-                        java.lang.Object r6 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        goto L5f
-                    L27:
-                        java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                        java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                        r4.<init>(r5)
-                        throw r4
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r6)
-                        com.android.systemui.display.data.repository.DeviceStateRepository$DeviceState r5 = (com.android.systemui.display.data.repository.DeviceStateRepository.DeviceState) r5
-                        int[] r6 = com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl.WhenMappings.$EnumSwitchMapping$0
-                        int r5 = r5.ordinal()
-                        r5 = r6[r5]
-                        r6 = 2
-                        if (r5 == r3) goto L4f
-                        if (r5 == r6) goto L4f
-                        r2 = 3
-                        if (r5 == r2) goto L4f
-                        r6 = 4
-                        if (r5 == r6) goto L4e
-                        r6 = 5
-                        if (r5 == r6) goto L4c
-                        r6 = 0
-                        goto L4f
-                    L4c:
-                        r6 = r3
-                        goto L4f
-                    L4e:
-                        r6 = r2
-                    L4f:
-                        java.lang.Integer r5 = new java.lang.Integer
-                        r5.<init>(r6)
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r4 = r4.$this_unsafeFlow
-                        java.lang.Object r4 = r4.emit(r5, r0)
-                        if (r4 != r1) goto L5f
-                        return r1
-                    L5f:
-                        kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                        return r4
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl$special$$inlined$map$4.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        int i3 = LogContextInteractorImpl.WhenMappings.$EnumSwitchMapping$0[((DeviceStateRepository.DeviceState) obj).ordinal()];
+                        int i4 = 2;
+                        if (i3 != 1 && i3 != 2 && i3 != 3) {
+                            i4 = i3 != 4 ? i3 != 5 ? 0 : 1 : 3;
+                        }
+                        Integer num = new Integer(i4);
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(num, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = readonlyStateFlow2.collect(new AnonymousClass2(flowCollector), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         });
         SharingStarted.Companion.getClass();
-        this.foldState = FlowKt.shareIn(distinctUntilChanged, coroutineScope, SharingStarted.Companion.Eagerly, 1);
+        this.foldState = FlowKt.shareIn(flowDistinctUntilChanged, coroutineScope, SharingStarted.Companion.Eagerly, 1);
     }
 
     public final StandaloneCoroutine addBiometricContextListener(IBiometricContextListener iBiometricContextListener) {
-        return CoroutineTracingKt.launchTraced$default(this.applicationScope, null, null, new LogContextInteractorImpl$addBiometricContextListener$1(this, iBiometricContextListener, null), 7);
+        return CoroutineTracingKt.launchTraced$default(this.applicationScope, null, null, new AnonymousClass1(iBiometricContextListener, null), 7);
     }
 }

@@ -71,9 +71,9 @@ public interface IScrollCaptureConnection extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IScrollCaptureConnection.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IScrollCaptureConnection)) {
-                return (IScrollCaptureConnection) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IScrollCaptureConnection.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IScrollCaptureConnection)) {
+                return (IScrollCaptureConnection) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -110,21 +110,21 @@ public interface IScrollCaptureConnection extends IInterface {
             }
             if (i == 1) {
                 Surface surface = (Surface) parcel.readTypedObject(Surface.CREATOR);
-                IScrollCaptureCallbacks asInterface = IScrollCaptureCallbacks.Stub.asInterface(parcel.readStrongBinder());
+                IScrollCaptureCallbacks iScrollCaptureCallbacksAsInterface = IScrollCaptureCallbacks.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                ICancellationSignal startCapture = startCapture(surface, asInterface);
+                ICancellationSignal iCancellationSignalStartCapture = startCapture(surface, iScrollCaptureCallbacksAsInterface);
                 parcel2.writeNoException();
-                parcel2.writeStrongInterface(startCapture);
+                parcel2.writeStrongInterface(iCancellationSignalStartCapture);
             } else if (i == 2) {
                 Rect rect = (Rect) parcel.readTypedObject(Rect.CREATOR);
                 parcel.enforceNoDataAvail();
-                ICancellationSignal requestImage = requestImage(rect);
+                ICancellationSignal iCancellationSignalRequestImage = requestImage(rect);
                 parcel2.writeNoException();
-                parcel2.writeStrongInterface(requestImage);
+                parcel2.writeStrongInterface(iCancellationSignalRequestImage);
             } else if (i == 3) {
-                ICancellationSignal endCapture = endCapture();
+                ICancellationSignal iCancellationSignalEndCapture = endCapture();
                 parcel2.writeNoException();
-                parcel2.writeStrongInterface(endCapture);
+                parcel2.writeStrongInterface(iCancellationSignalEndCapture);
             } else if (i == 4) {
                 close();
             } else {
@@ -151,60 +151,60 @@ public interface IScrollCaptureConnection extends IInterface {
 
             @Override // android.view.IScrollCaptureConnection
             public ICancellationSignal startCapture(Surface surface, IScrollCaptureCallbacks iScrollCaptureCallbacks) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IScrollCaptureConnection.DESCRIPTOR);
-                    obtain.writeTypedObject(surface, 0);
-                    obtain.writeStrongInterface(iScrollCaptureCallbacks);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return ICancellationSignal.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(IScrollCaptureConnection.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(surface, 0);
+                    parcelObtain.writeStrongInterface(iScrollCaptureCallbacks);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return ICancellationSignal.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.IScrollCaptureConnection
             public ICancellationSignal requestImage(Rect rect) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IScrollCaptureConnection.DESCRIPTOR);
-                    obtain.writeTypedObject(rect, 0);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return ICancellationSignal.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(IScrollCaptureConnection.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(rect, 0);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return ICancellationSignal.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.IScrollCaptureConnection
             public ICancellationSignal endCapture() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IScrollCaptureConnection.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return ICancellationSignal.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(IScrollCaptureConnection.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return ICancellationSignal.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.IScrollCaptureConnection
             public void close() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IScrollCaptureConnection.DESCRIPTOR);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IScrollCaptureConnection.DESCRIPTOR);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

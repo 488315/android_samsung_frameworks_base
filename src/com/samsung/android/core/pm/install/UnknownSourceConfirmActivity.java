@@ -34,7 +34,7 @@ public class UnknownSourceConfirmActivity extends AlertActivity implements Dialo
     }
 
     private void initAlertParams(final int i) {
-        boolean contains = SystemProperties.get("ro.build.characteristics").contains(BnRConstants.DEVICETYPE_TABLET);
+        boolean zContains = SystemProperties.get("ro.build.characteristics").contains(BnRConstants.DEVICETYPE_TABLET);
         if (i == 1) {
             this.mAlertParams.mTitle = getString(R.string.unknown_install_blocked_dlg_title);
             this.mAlertParams.mMessage = getString(R.string.unknown_install_blocked_dlg_desc);
@@ -45,12 +45,12 @@ public class UnknownSourceConfirmActivity extends AlertActivity implements Dialo
         if (i == 127) {
             this.mAlertParams.mCustomTitleView = LayoutInflater.from(this).inflate(R.layout.dialog_unknownsource_autoblocker, (ViewGroup) null);
             if (isChinaDevice()) {
-                if (contains) {
+                if (zContains) {
                     this.mAlertParams.mMessage = getString(R.string.unknown_install_blocked_esm_desc_tablet_china);
                 } else {
                     this.mAlertParams.mMessage = getString(R.string.unknown_install_blocked_esm_desc_phone_china);
                 }
-            } else if (contains) {
+            } else if (zContains) {
                 this.mAlertParams.mMessage = getString(R.string.unknown_install_blocked_esm_desc_tablet);
             } else {
                 this.mAlertParams.mMessage = getString(R.string.unknown_install_blocked_esm_desc_phone);
@@ -63,7 +63,7 @@ public class UnknownSourceConfirmActivity extends AlertActivity implements Dialo
             switch (i) {
                 case 100:
                     this.mAlertParams.mTitle = getString(R.string.unknown_install_dlg_general_title);
-                    if (contains) {
+                    if (zContains) {
                         this.mAlertParams.mMessage = getString(R.string.unknown_install_dlg_desc_tablet);
                     } else {
                         this.mAlertParams.mMessage = getString(R.string.unknown_install_dlg_desc_phone);
@@ -74,7 +74,7 @@ public class UnknownSourceConfirmActivity extends AlertActivity implements Dialo
                     break;
                 case 101:
                     this.mAlertParams.mTitle = getString(R.string.unknown_install_dlg_general_title);
-                    if (contains) {
+                    if (zContains) {
                         this.mAlertParams.mMessage = getString(R.string.unknown_install_dlg_desc_global_tablet);
                     } else {
                         this.mAlertParams.mMessage = getString(R.string.unknown_install_dlg_desc_global_phone);
@@ -85,7 +85,7 @@ public class UnknownSourceConfirmActivity extends AlertActivity implements Dialo
                     break;
                 case 102:
                     this.mAlertParams.mTitle = getString(R.string.unknown_install_dlg_title);
-                    if (contains) {
+                    if (zContains) {
                         this.mAlertParams.mMessage = getString(R.string.unknown_install_publicsign_dlg_desc_tablet);
                     } else {
                         this.mAlertParams.mMessage = getString(R.string.unknown_install_publicsign_dlg_desc_phone);
@@ -101,7 +101,7 @@ public class UnknownSourceConfirmActivity extends AlertActivity implements Dialo
             return;
         }
         this.mAlertParams.mTitle = getString(R.string.unknown_install_dlg_title);
-        if (contains) {
+        if (zContains) {
             this.mAlertParams.mMessage = getString(R.string.unknown_install_dlg_desc_phishing_tablet);
         } else {
             this.mAlertParams.mMessage = getString(R.string.unknown_install_dlg_desc_phishing_phone);
@@ -111,7 +111,7 @@ public class UnknownSourceConfirmActivity extends AlertActivity implements Dialo
         this.mAlertParams.mNegativeButtonListener = new DialogInterface.OnClickListener() { // from class: com.samsung.android.core.pm.install.UnknownSourceConfirmActivity$$ExternalSyntheticLambda0
             @Override // android.content.DialogInterface.OnClickListener
             public final void onClick(DialogInterface dialogInterface, int i2) {
-                UnknownSourceConfirmActivity.this.lambda$initAlertParams$0(i, dialogInterface, i2);
+                this.f$0.lambda$initAlertParams$0(i, dialogInterface, i2);
             }
         };
     }

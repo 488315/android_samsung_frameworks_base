@@ -181,13 +181,13 @@ public final class InputDevice implements Parcelable {
         this.mGeneration = parcel.readInt();
         this.mControllerNumber = parcel.readInt();
         this.mName = parcel.readString();
-        int readInt = parcel.readInt();
-        this.mVendorId = readInt;
-        int readInt2 = parcel.readInt();
-        this.mProductId = readInt2;
+        int i = parcel.readInt();
+        this.mVendorId = i;
+        int i2 = parcel.readInt();
+        this.mProductId = i2;
         this.mDeviceBus = parcel.readInt();
-        String readString = parcel.readString();
-        this.mDescriptor = readString;
+        String string = parcel.readString();
+        this.mDescriptor = string;
         this.mIsExternal = parcel.readInt() != 0;
         this.mSources = parcel.readInt();
         this.mKeyboardType = parcel.readInt();
@@ -201,10 +201,10 @@ public final class InputDevice implements Parcelable {
         this.mHostUsiVersion = HostUsiVersion.CREATOR.createFromParcel(parcel);
         this.mAssociatedDisplayId = parcel.readInt();
         this.mEnabled = parcel.readInt() != 0;
-        this.mIdentifier = new InputDeviceIdentifier(readString, readInt, readInt2);
-        int readInt3 = parcel.readInt();
-        readInt3 = readInt3 > 1000 ? 1000 : readInt3;
-        for (int i = 0; i < readInt3; i++) {
+        this.mIdentifier = new InputDeviceIdentifier(string, i, i2);
+        int i3 = parcel.readInt();
+        i3 = i3 > 1000 ? 1000 : i3;
+        for (int i4 = 0; i4 < i3; i4++) {
             addMotionRange(parcel.readInt(), parcel.readInt(), parcel.readFloat(), parcel.readFloat(), parcel.readFloat(), parcel.readFloat(), parcel.readFloat());
         }
         this.mViewBehavior.mShouldSmoothScroll = parcel.readBoolean();

@@ -55,22 +55,22 @@ class KeyStoreCryptoOperationChunkedStreamer implements KeyStoreCryptoOperationS
         if (i2 < 0 || i < 0 || i + i2 > bArr.length) {
             throw new KeyStoreException(-1000, "Input offset and length out of bounds of input array");
         }
-        byte[] bArr2 = EmptyArray.BYTE;
+        byte[] bArrConcat = EmptyArray.BYTE;
         int i3 = this.mChunkLength;
         if (i3 > 0) {
-            int copy = ArrayUtils.copy(bArr, i, this.mChunk, i3, i2);
-            i2 -= copy;
-            i += copy;
-            int i4 = this.mChunkLength + copy;
+            int iCopy = ArrayUtils.copy(bArr, i, this.mChunk, i3, i2);
+            i2 -= iCopy;
+            i += iCopy;
+            int i4 = this.mChunkLength + iCopy;
             this.mChunkLength = i4;
             if (i4 < this.mChunkSizeMax) {
-                return bArr2;
+                return bArrConcat;
             }
-            byte[] update = this.mKeyStoreStream.update(this.mChunk);
-            if (update != null) {
-                bArr2 = ArrayUtils.concat(bArr2, update);
+            byte[] bArrUpdate = this.mKeyStoreStream.update(this.mChunk);
+            if (bArrUpdate != null) {
+                bArrConcat = ArrayUtils.concat(bArrConcat, bArrUpdate);
             }
-            this.mConsumedInputSizeBytes += copy;
+            this.mConsumedInputSizeBytes += iCopy;
             this.mChunkLength = 0;
         }
         while (i2 >= this.mChunkSizeThreshold) {
@@ -78,31 +78,31 @@ class KeyStoreCryptoOperationChunkedStreamer implements KeyStoreCryptoOperationS
             if (i2 < i5) {
                 i5 = i2;
             }
-            byte[] update2 = this.mKeyStoreStream.update(ArrayUtils.subarray(bArr, i, i5));
+            byte[] bArrUpdate2 = this.mKeyStoreStream.update(ArrayUtils.subarray(bArr, i, i5));
             i2 -= i5;
             i += i5;
             this.mConsumedInputSizeBytes += i5;
-            if (update2 != null) {
-                bArr2 = ArrayUtils.concat(bArr2, update2);
+            if (bArrUpdate2 != null) {
+                bArrConcat = ArrayUtils.concat(bArrConcat, bArrUpdate2);
             }
         }
         if (i2 > 0) {
             this.mChunkLength = ArrayUtils.copy(bArr, i, this.mChunk, 0, i2);
             this.mConsumedInputSizeBytes += i2;
         }
-        this.mProducedOutputSizeBytes += bArr2.length;
-        return bArr2;
+        this.mProducedOutputSizeBytes += bArrConcat.length;
+        return bArrConcat;
     }
 
     @Override // android.security.keystore2.KeyStoreCryptoOperationStreamer
     public byte[] doFinal(byte[] bArr, int i, int i2, byte[] bArr2) throws KeyStoreException {
-        byte[] update = update(bArr, i, i2);
-        byte[] finish = this.mKeyStoreStream.finish(ArrayUtils.subarray(this.mChunk, 0, this.mChunkLength), bArr2);
-        if (finish == null) {
-            return update;
+        byte[] bArrUpdate = update(bArr, i, i2);
+        byte[] bArrFinish = this.mKeyStoreStream.finish(ArrayUtils.subarray(this.mChunk, 0, this.mChunkLength), bArr2);
+        if (bArrFinish == null) {
+            return bArrUpdate;
         }
-        this.mProducedOutputSizeBytes += finish.length;
-        return update != null ? ArrayUtils.concat(update, finish) : finish;
+        this.mProducedOutputSizeBytes += bArrFinish.length;
+        return bArrUpdate != null ? ArrayUtils.concat(bArrUpdate, bArrFinish) : bArrFinish;
     }
 
     @Override // android.security.keystore2.KeyStoreCryptoOperationStreamer

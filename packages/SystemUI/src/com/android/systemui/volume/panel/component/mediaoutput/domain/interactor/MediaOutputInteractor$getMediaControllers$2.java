@@ -13,7 +13,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.text.StringsKt__StringsJVMKt;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class MediaOutputInteractor$getMediaControllers$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ Collection<MediaController> $controllers;
@@ -45,27 +44,27 @@ final class MediaOutputInteractor$getMediaControllers$2 extends SuspendLambda im
         }
         ResultKt.throwOnFailure(obj);
         LinkedHashSet linkedHashSet = new LinkedHashSet();
-        MediaController mediaController = null;
-        MediaController mediaController2 = null;
-        for (MediaController mediaController3 : this.$controllers) {
-            MediaController.PlaybackInfo playbackInfo = mediaController3.getPlaybackInfo();
+        MediaController mediaControllerAccess$chooseController = null;
+        MediaController mediaControllerAccess$chooseController2 = null;
+        for (MediaController mediaController : this.$controllers) {
+            MediaController.PlaybackInfo playbackInfo = mediaController.getPlaybackInfo();
             if (playbackInfo != null) {
                 int playbackType = playbackInfo.getPlaybackType();
                 if (playbackType != 1) {
                     if (playbackType == 2) {
-                        if (StringsKt__StringsJVMKt.equals(mediaController != null ? mediaController.getPackageName() : null, mediaController3.getPackageName(), false)) {
-                            mediaController = null;
+                        if (StringsKt__StringsJVMKt.equals(mediaControllerAccess$chooseController != null ? mediaControllerAccess$chooseController.getPackageName() : null, mediaController.getPackageName(), false)) {
+                            mediaControllerAccess$chooseController = null;
                         }
-                        if (!linkedHashSet.contains(mediaController3.getPackageName())) {
-                            linkedHashSet.add(mediaController3.getPackageName());
-                            mediaController2 = MediaOutputInteractor.access$chooseController(this.this$0, mediaController2, mediaController3);
+                        if (!linkedHashSet.contains(mediaController.getPackageName())) {
+                            linkedHashSet.add(mediaController.getPackageName());
+                            mediaControllerAccess$chooseController2 = MediaOutputInteractor.access$chooseController(this.this$0, mediaControllerAccess$chooseController2, mediaController);
                         }
                     }
-                } else if (!linkedHashSet.contains(mediaController3.getPackageName())) {
-                    mediaController = MediaOutputInteractor.access$chooseController(this.this$0, mediaController, mediaController3);
+                } else if (!linkedHashSet.contains(mediaController.getPackageName())) {
+                    mediaControllerAccess$chooseController = MediaOutputInteractor.access$chooseController(this.this$0, mediaControllerAccess$chooseController, mediaController);
                 }
             }
         }
-        return new MediaOutputInteractor.MediaControllers(mediaController, mediaController2);
+        return new MediaOutputInteractor.MediaControllers(mediaControllerAccess$chooseController, mediaControllerAccess$chooseController2);
     }
 }

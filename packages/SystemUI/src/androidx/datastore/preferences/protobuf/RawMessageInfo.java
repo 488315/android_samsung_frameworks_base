@@ -1,6 +1,5 @@
 package androidx.datastore.preferences.protobuf;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class RawMessageInfo implements MessageInfo {
     public final MessageLite defaultInstance;
@@ -12,22 +11,22 @@ public final class RawMessageInfo implements MessageInfo {
         this.defaultInstance = messageLite;
         this.info = str;
         this.objects = objArr;
-        char charAt = str.charAt(0);
-        if (charAt < 55296) {
-            this.flags = charAt;
+        char cCharAt = str.charAt(0);
+        if (cCharAt < 55296) {
+            this.flags = cCharAt;
             return;
         }
-        int i = charAt & 8191;
+        int i = cCharAt & 8191;
         int i2 = 13;
         int i3 = 1;
         while (true) {
             int i4 = i3 + 1;
-            char charAt2 = str.charAt(i3);
-            if (charAt2 < 55296) {
-                this.flags = i | (charAt2 << i2);
+            char cCharAt2 = str.charAt(i3);
+            if (cCharAt2 < 55296) {
+                this.flags = i | (cCharAt2 << i2);
                 return;
             } else {
-                i |= (charAt2 & 8191) << i2;
+                i |= (cCharAt2 & 8191) << i2;
                 i2 += 13;
                 i3 = i4;
             }

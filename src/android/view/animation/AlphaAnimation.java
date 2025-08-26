@@ -27,10 +27,10 @@ public class AlphaAnimation extends Animation {
 
     public AlphaAnimation(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.AlphaAnimation);
-        this.mFromAlpha = obtainStyledAttributes.getFloat(0, 1.0f);
-        this.mToAlpha = obtainStyledAttributes.getFloat(1, 1.0f);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.AlphaAnimation);
+        this.mFromAlpha = typedArrayObtainStyledAttributes.getFloat(0, 1.0f);
+        this.mToAlpha = typedArrayObtainStyledAttributes.getFloat(1, 1.0f);
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     public AlphaAnimation(float f, float f2) {

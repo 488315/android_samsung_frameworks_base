@@ -33,9 +33,9 @@ public abstract class PreferenceGroup extends Preference implements GenericInfla
         this.mIsChangedCategoryBG = false;
         this.mCategoryBGColor = 0;
         this.mPreferenceList = new ArrayList();
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.PreferenceGroup, i, i2);
-        this.mOrderingAsAdded = obtainStyledAttributes.getBoolean(0, this.mOrderingAsAdded);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.PreferenceGroup, i, i2);
+        this.mOrderingAsAdded = typedArrayObtainStyledAttributes.getBoolean(0, this.mOrderingAsAdded);
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     public PreferenceGroup(Context context, AttributeSet attributeSet, int i) {
@@ -85,11 +85,11 @@ public abstract class PreferenceGroup extends Preference implements GenericInfla
             return false;
         }
         synchronized (this) {
-            int binarySearch = Collections.binarySearch(this.mPreferenceList, preference);
-            if (binarySearch < 0) {
-                binarySearch = (binarySearch * (-1)) - 1;
+            int iBinarySearch = Collections.binarySearch(this.mPreferenceList, preference);
+            if (iBinarySearch < 0) {
+                iBinarySearch = (iBinarySearch * (-1)) - 1;
             }
-            this.mPreferenceList.add(binarySearch, preference);
+            this.mPreferenceList.add(iBinarySearch, preference);
         }
         preference.onAttachedToHierarchy(getPreferenceManager());
         preference.assignParent(this);
@@ -101,21 +101,21 @@ public abstract class PreferenceGroup extends Preference implements GenericInfla
     }
 
     public boolean removePreference(Preference preference) {
-        boolean removePreferenceInt = removePreferenceInt(preference);
+        boolean zRemovePreferenceInt = removePreferenceInt(preference);
         notifyHierarchyChanged();
-        return removePreferenceInt;
+        return zRemovePreferenceInt;
     }
 
     private boolean removePreferenceInt(Preference preference) {
-        boolean remove;
+        boolean zRemove;
         synchronized (this) {
             preference.onPrepareForRemoval();
             if (preference.getParent() == this) {
                 preference.assignParent(null);
             }
-            remove = this.mPreferenceList.remove(preference);
+            zRemove = this.mPreferenceList.remove(preference);
         }
-        return remove;
+        return zRemove;
     }
 
     public void removeAll() {
@@ -134,7 +134,7 @@ public abstract class PreferenceGroup extends Preference implements GenericInfla
     }
 
     public Preference findPreference(CharSequence charSequence) {
-        Preference findPreference;
+        Preference preferenceFindPreference;
         if (TextUtils.equals(getKey(), charSequence)) {
             return this;
         }
@@ -145,8 +145,8 @@ public abstract class PreferenceGroup extends Preference implements GenericInfla
             if (key != null && key.equals(charSequence)) {
                 return preference;
             }
-            if ((preference instanceof PreferenceGroup) && (findPreference = ((PreferenceGroup) preference).findPreference(charSequence)) != null) {
-                return findPreference;
+            if ((preference instanceof PreferenceGroup) && (preferenceFindPreference = ((PreferenceGroup) preference).findPreference(charSequence)) != null) {
+                return preferenceFindPreference;
             }
         }
         return null;

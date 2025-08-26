@@ -5,7 +5,6 @@ import android.graphics.RectF;
 import com.samsung.android.nexus.base.utils.keyFrameSet.FloatKeyFrameSet;
 import com.samsung.android.nexus.particle.emitter.FactorType;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class Status {
     public float acc;
@@ -54,14 +53,14 @@ public class Status {
 
     public static int AHSVToColor(float f, float f2, float f3, float f4) {
         double d = f2 / 60.0f;
-        int floor = (int) (Math.floor(d) % 6.0d);
-        float floor2 = (float) (d - Math.floor(d));
+        int iFloor = (int) (Math.floor(d) % 6.0d);
+        float fFloor = (float) (d - Math.floor(d));
         int i = (int) f;
         int i2 = (int) ((f4 * 255.0f) + 0.5f);
         int i3 = (int) (((1.0f - f3) * f4 * 255.0f) + 0.5f);
-        int i4 = (int) (((1.0f - (floor2 * f3)) * f4 * 255.0f) + 0.5f);
-        int i5 = (int) (((1.0f - ((1.0f - floor2) * f3)) * f4 * 255.0f) + 0.5f);
-        return floor != 0 ? floor != 1 ? floor != 2 ? floor != 3 ? floor != 4 ? (i << 24) | (i2 << 16) | (i3 << 8) | i4 : (i << 24) | (i5 << 16) | (i3 << 8) | i2 : (i << 24) | (i3 << 16) | (i4 << 8) | i2 : (i << 24) | (i3 << 16) | (i2 << 8) | i5 : (i << 24) | (i4 << 16) | (i2 << 8) | i3 : (i << 24) | (i2 << 16) | (i5 << 8) | i3;
+        int i4 = (int) (((1.0f - (fFloor * f3)) * f4 * 255.0f) + 0.5f);
+        int i5 = (int) (((1.0f - ((1.0f - fFloor) * f3)) * f4 * 255.0f) + 0.5f);
+        return iFloor != 0 ? iFloor != 1 ? iFloor != 2 ? iFloor != 3 ? iFloor != 4 ? (i << 24) | (i2 << 16) | (i3 << 8) | i4 : (i << 24) | (i5 << 16) | (i3 << 8) | i2 : (i << 24) | (i3 << 16) | (i4 << 8) | i2 : (i << 24) | (i3 << 16) | (i2 << 8) | i5 : (i << 24) | (i4 << 16) | (i2 << 8) | i3 : (i << 24) | (i2 << 16) | (i5 << 8) | i3;
     }
 
     public final void onStep(float f, float f2, float[] fArr) {
@@ -118,7 +117,7 @@ public class Status {
         }
         FactorKeyFrameSetList factorKeyFrameSetList = this.factorKeyFrameSetList;
         FloatKeyFrameSet[] floatKeyFrameSetArr = factorKeyFrameSetList.list;
-        boolean isEmpty = factorKeyFrameSetList.isEmpty();
+        boolean zIsEmpty = factorKeyFrameSetList.isEmpty();
         FactorType factorType4 = FactorType.WIDTH;
         int i7 = factorType4.valueIdx;
         FloatKeyFrameSet floatKeyFrameSet = floatKeyFrameSetArr[factorType4.idx];
@@ -222,13 +221,13 @@ public class Status {
                     this.color = AHSVToColor(fArr2[FactorType.COLOR_ALPHA.valueIdx], fArr2[FactorType.COLOR_HUE.valueIdx], fArr2[FactorType.COLOR_SATURATION.valueIdx], fArr2[FactorType.COLOR_VALUE.valueIdx]);
                 }
             } else {
-                if (isEmpty) {
+                if (zIsEmpty) {
                     throw new IllegalArgumentException("null key frame set");
                 }
                 this.color = AHSVToColor(floatKeyFrameSetArr[FactorType.COLOR_ALPHA.idx].get(f), floatKeyFrameSetArr[FactorType.COLOR_HUE.idx].get(f), floatKeyFrameSetArr[FactorType.COLOR_SATURATION.idx].get(f), floatKeyFrameSetArr[FactorType.COLOR_VALUE.idx].get(f));
             }
         } else {
-            if (isEmpty) {
+            if (zIsEmpty) {
                 throw new IllegalArgumentException("null key frame set");
             }
             this.color = Color.argb(floatKeyFrameSetArr[FactorType.COLOR_ALPHA.idx].get(f) / 255.0f, floatKeyFrameSetArr[FactorType.COLOR_RED.idx].get(f) / 255.0f, floatKeyFrameSetArr[FactorType.COLOR_GREEN.idx].get(f) / 255.0f, floatKeyFrameSetArr[FactorType.COLOR_BLUE.idx].get(f) / 255.0f);
@@ -239,9 +238,9 @@ public class Status {
         updateBounds();
         if (f > 0.0f) {
             float f18 = this.speed;
-            float hypot = ((float) Math.hypot(this.posX - f5, this.posY - f6)) / f2;
-            this.speed = hypot;
-            this.acc = hypot - f18;
+            float fHypot = ((float) Math.hypot(this.posX - f5, this.posY - f6)) / f2;
+            this.speed = fHypot;
+            this.acc = fHypot - f18;
         }
     }
 

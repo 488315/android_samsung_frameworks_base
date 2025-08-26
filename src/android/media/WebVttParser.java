@@ -57,58 +57,58 @@ class WebVttParser {
             TextTrackRegion parseRegion(String str) {
                 TextTrackRegion textTrackRegion = new TextTrackRegion();
                 for (String str2 : str.split(" +")) {
-                    int indexOf = str2.indexOf(61);
-                    if (indexOf > 0 && indexOf != str2.length() - 1) {
-                        String substring = str2.substring(0, indexOf);
-                        String substring2 = str2.substring(indexOf + 1);
-                        if (substring.equals("id")) {
-                            textTrackRegion.mId = substring2;
-                        } else if (substring.equals("width")) {
+                    int iIndexOf = str2.indexOf(61);
+                    if (iIndexOf > 0 && iIndexOf != str2.length() - 1) {
+                        String strSubstring = str2.substring(0, iIndexOf);
+                        String strSubstring2 = str2.substring(iIndexOf + 1);
+                        if (strSubstring.equals("id")) {
+                            textTrackRegion.mId = strSubstring2;
+                        } else if (strSubstring.equals("width")) {
                             try {
-                                textTrackRegion.mWidth = WebVttParser.parseFloatPercentage(substring2);
+                                textTrackRegion.mWidth = WebVttParser.parseFloatPercentage(strSubstring2);
                             } catch (NumberFormatException e) {
-                                WebVttParser.this.log_warning("region setting", substring, "has invalid value", e.getMessage(), substring2);
+                                WebVttParser.this.log_warning("region setting", strSubstring, "has invalid value", e.getMessage(), strSubstring2);
                             }
-                        } else if (substring.equals("lines")) {
-                            if (substring2.matches(".*[^0-9].*")) {
-                                WebVttParser.this.log_warning("lines", substring, "contains an invalid character", substring2);
+                        } else if (strSubstring.equals("lines")) {
+                            if (strSubstring2.matches(".*[^0-9].*")) {
+                                WebVttParser.this.log_warning("lines", strSubstring, "contains an invalid character", strSubstring2);
                             } else {
                                 try {
-                                    textTrackRegion.mLines = Integer.parseInt(substring2);
+                                    textTrackRegion.mLines = Integer.parseInt(strSubstring2);
                                 } catch (NumberFormatException unused) {
-                                    WebVttParser.this.log_warning("region setting", substring, "is not numeric", substring2);
+                                    WebVttParser.this.log_warning("region setting", strSubstring, "is not numeric", strSubstring2);
                                 }
                             }
-                        } else if (substring.equals("regionanchor") || substring.equals("viewportanchor")) {
-                            int indexOf2 = substring2.indexOf(",");
-                            if (indexOf2 < 0) {
-                                WebVttParser.this.log_warning("region setting", substring, "contains no comma", substring2);
+                        } else if (strSubstring.equals("regionanchor") || strSubstring.equals("viewportanchor")) {
+                            int iIndexOf2 = strSubstring2.indexOf(",");
+                            if (iIndexOf2 < 0) {
+                                WebVttParser.this.log_warning("region setting", strSubstring, "contains no comma", strSubstring2);
                             } else {
-                                String substring3 = substring2.substring(0, indexOf2);
-                                String substring4 = substring2.substring(indexOf2 + 1);
+                                String strSubstring3 = strSubstring2.substring(0, iIndexOf2);
+                                String strSubstring4 = strSubstring2.substring(iIndexOf2 + 1);
                                 try {
-                                    float parseFloatPercentage = WebVttParser.parseFloatPercentage(substring3);
+                                    float floatPercentage = WebVttParser.parseFloatPercentage(strSubstring3);
                                     try {
-                                        float parseFloatPercentage2 = WebVttParser.parseFloatPercentage(substring4);
-                                        if (substring.charAt(0) == 'r') {
-                                            textTrackRegion.mAnchorPointX = parseFloatPercentage;
-                                            textTrackRegion.mAnchorPointY = parseFloatPercentage2;
+                                        float floatPercentage2 = WebVttParser.parseFloatPercentage(strSubstring4);
+                                        if (strSubstring.charAt(0) == 'r') {
+                                            textTrackRegion.mAnchorPointX = floatPercentage;
+                                            textTrackRegion.mAnchorPointY = floatPercentage2;
                                         } else {
-                                            textTrackRegion.mViewportAnchorPointX = parseFloatPercentage;
-                                            textTrackRegion.mViewportAnchorPointY = parseFloatPercentage2;
+                                            textTrackRegion.mViewportAnchorPointX = floatPercentage;
+                                            textTrackRegion.mViewportAnchorPointY = floatPercentage2;
                                         }
                                     } catch (NumberFormatException e2) {
-                                        WebVttParser.this.log_warning("region setting", substring, "has invalid y component", e2.getMessage(), substring4);
+                                        WebVttParser.this.log_warning("region setting", strSubstring, "has invalid y component", e2.getMessage(), strSubstring4);
                                     }
                                 } catch (NumberFormatException e3) {
-                                    WebVttParser.this.log_warning("region setting", substring, "has invalid x component", e3.getMessage(), substring3);
+                                    WebVttParser.this.log_warning("region setting", strSubstring, "has invalid x component", e3.getMessage(), strSubstring3);
                                 }
                             }
-                        } else if (substring.equals(AppJankStats.WIDGET_CATEGORY_SCROLL)) {
-                            if (substring2.equals(MediaMetrics.Value.UP)) {
+                        } else if (strSubstring.equals(AppJankStats.WIDGET_CATEGORY_SCROLL)) {
+                            if (strSubstring2.equals(MediaMetrics.Value.UP)) {
                                 textTrackRegion.mScrollValue = 301;
                             } else {
-                                WebVttParser.this.log_warning("region setting", substring, "has invalid value", substring2);
+                                WebVttParser.this.log_warning("region setting", strSubstring, "has invalid value", strSubstring2);
                             }
                         }
                     }
@@ -129,15 +129,15 @@ class WebVttParser {
                     WebVttParser.this.mPhase.parse(str);
                     return;
                 }
-                int indexOf = str.indexOf(58);
-                if (indexOf <= 0 || indexOf >= str.length() - 1) {
+                int iIndexOf = str.indexOf(58);
+                if (iIndexOf <= 0 || iIndexOf >= str.length() - 1) {
                     WebVttParser.this.log_warning("meta data header has invalid format", str);
                     return;
                 }
-                String substring = str.substring(0, indexOf);
-                String substring2 = str.substring(indexOf + 1);
-                if (substring.equals("Region")) {
-                    WebVttParser.this.mListener.onRegionParsed(parseRegion(substring2));
+                String strSubstring = str.substring(0, iIndexOf);
+                String strSubstring2 = str.substring(iIndexOf + 1);
+                if (strSubstring.equals("Region")) {
+                    WebVttParser.this.mListener.onRegionParsed(parseRegion(strSubstring2));
                 }
             }
         };
@@ -169,79 +169,79 @@ class WebVttParser {
 
             @Override // android.media.WebVttParser.Phase
             public void parse(String str) {
-                String str2;
-                int indexOf = str.indexOf("-->");
-                if (indexOf < 0) {
+                String strSubstring;
+                int iIndexOf = str.indexOf("-->");
+                if (iIndexOf < 0) {
                     WebVttParser.this.mCue = null;
                     WebVttParser webVttParser = WebVttParser.this;
                     webVttParser.mPhase = webVttParser.mParseCueId;
                     return;
                 }
-                String trim = str.substring(0, indexOf).trim();
-                String replaceFirst = str.substring(indexOf + 3).replaceFirst("^\\s+", "").replaceFirst("\\s+", " ");
-                int indexOf2 = replaceFirst.indexOf(32);
-                String substring = indexOf2 > 0 ? replaceFirst.substring(0, indexOf2) : replaceFirst;
-                if (indexOf2 <= 0) {
-                    str2 = "";
+                String strTrim = str.substring(0, iIndexOf).trim();
+                String strReplaceFirst = str.substring(iIndexOf + 3).replaceFirst("^\\s+", "").replaceFirst("\\s+", " ");
+                int iIndexOf2 = strReplaceFirst.indexOf(32);
+                String strSubstring2 = iIndexOf2 > 0 ? strReplaceFirst.substring(0, iIndexOf2) : strReplaceFirst;
+                if (iIndexOf2 <= 0) {
+                    strSubstring = "";
                 } else {
-                    str2 = replaceFirst.substring(indexOf2 + 1);
+                    strSubstring = strReplaceFirst.substring(iIndexOf2 + 1);
                 }
-                WebVttParser.this.mCue.mStartTimeMs = WebVttParser.parseTimestampMs(trim);
-                WebVttParser.this.mCue.mEndTimeMs = WebVttParser.parseTimestampMs(substring);
-                for (String str3 : str2.split(" +")) {
-                    int indexOf3 = str3.indexOf(58);
-                    if (indexOf3 > 0 && indexOf3 != str3.length() - 1) {
-                        String substring2 = str3.substring(0, indexOf3);
-                        String substring3 = str3.substring(indexOf3 + 1);
-                        if (substring2.equals("region")) {
-                            WebVttParser.this.mCue.mRegionId = substring3;
-                        } else if (substring2.equals("vertical")) {
-                            if (substring3.equals("rl")) {
+                WebVttParser.this.mCue.mStartTimeMs = WebVttParser.parseTimestampMs(strTrim);
+                WebVttParser.this.mCue.mEndTimeMs = WebVttParser.parseTimestampMs(strSubstring2);
+                for (String str2 : strSubstring.split(" +")) {
+                    int iIndexOf3 = str2.indexOf(58);
+                    if (iIndexOf3 > 0 && iIndexOf3 != str2.length() - 1) {
+                        String strSubstring3 = str2.substring(0, iIndexOf3);
+                        String strSubstring4 = str2.substring(iIndexOf3 + 1);
+                        if (strSubstring3.equals("region")) {
+                            WebVttParser.this.mCue.mRegionId = strSubstring4;
+                        } else if (strSubstring3.equals("vertical")) {
+                            if (strSubstring4.equals("rl")) {
                                 WebVttParser.this.mCue.mWritingDirection = 101;
-                            } else if (substring3.equals("lr")) {
+                            } else if (strSubstring4.equals("lr")) {
                                 WebVttParser.this.mCue.mWritingDirection = 102;
                             } else {
-                                WebVttParser.this.log_warning("cue setting", substring2, "has invalid value", substring3);
+                                WebVttParser.this.log_warning("cue setting", strSubstring3, "has invalid value", strSubstring4);
                             }
-                        } else if (substring2.equals("line")) {
+                        } else if (strSubstring3.equals("line")) {
                             try {
-                                if (substring3.endsWith("%")) {
+                                if (strSubstring4.endsWith("%")) {
                                     WebVttParser.this.mCue.mSnapToLines = false;
-                                    WebVttParser.this.mCue.mLinePosition = Integer.valueOf(WebVttParser.parseIntPercentage(substring3));
-                                } else if (substring3.matches(".*[^0-9].*")) {
-                                    WebVttParser.this.log_warning("cue setting", substring2, "contains an invalid character", substring3);
+                                    WebVttParser.this.mCue.mLinePosition = Integer.valueOf(WebVttParser.parseIntPercentage(strSubstring4));
+                                } else if (strSubstring4.matches(".*[^0-9].*")) {
+                                    WebVttParser.this.log_warning("cue setting", strSubstring3, "contains an invalid character", strSubstring4);
                                 } else {
                                     WebVttParser.this.mCue.mSnapToLines = true;
-                                    WebVttParser.this.mCue.mLinePosition = Integer.valueOf(Integer.parseInt(substring3));
+                                    WebVttParser.this.mCue.mLinePosition = Integer.valueOf(Integer.parseInt(strSubstring4));
                                 }
                             } catch (NumberFormatException unused) {
-                                WebVttParser.this.log_warning("cue setting", substring2, "is not numeric or percentage", substring3);
+                                WebVttParser.this.log_warning("cue setting", strSubstring3, "is not numeric or percentage", strSubstring4);
                             }
-                        } else if (substring2.equals("position")) {
+                        } else if (strSubstring3.equals("position")) {
                             try {
-                                WebVttParser.this.mCue.mTextPosition = WebVttParser.parseIntPercentage(substring3);
+                                WebVttParser.this.mCue.mTextPosition = WebVttParser.parseIntPercentage(strSubstring4);
                             } catch (NumberFormatException unused2) {
-                                WebVttParser.this.log_warning("cue setting", substring2, "is not numeric or percentage", substring3);
+                                WebVttParser.this.log_warning("cue setting", strSubstring3, "is not numeric or percentage", strSubstring4);
                             }
-                        } else if (substring2.equals(Contract.DatabaseSize.PATH)) {
+                        } else if (strSubstring3.equals(Contract.DatabaseSize.PATH)) {
                             try {
-                                WebVttParser.this.mCue.mSize = WebVttParser.parseIntPercentage(substring3);
+                                WebVttParser.this.mCue.mSize = WebVttParser.parseIntPercentage(strSubstring4);
                             } catch (NumberFormatException unused3) {
-                                WebVttParser.this.log_warning("cue setting", substring2, "is not numeric or percentage", substring3);
+                                WebVttParser.this.log_warning("cue setting", strSubstring3, "is not numeric or percentage", strSubstring4);
                             }
-                        } else if (substring2.equals("align")) {
-                            if (substring3.equals("start")) {
+                        } else if (strSubstring3.equals("align")) {
+                            if (strSubstring4.equals("start")) {
                                 WebVttParser.this.mCue.mAlignment = 201;
-                            } else if (substring3.equals("middle")) {
+                            } else if (strSubstring4.equals("middle")) {
                                 WebVttParser.this.mCue.mAlignment = 200;
-                            } else if (substring3.equals("end")) {
+                            } else if (strSubstring4.equals("end")) {
                                 WebVttParser.this.mCue.mAlignment = 202;
-                            } else if (substring3.equals("left")) {
+                            } else if (strSubstring4.equals("left")) {
                                 WebVttParser.this.mCue.mAlignment = 203;
-                            } else if (substring3.equals("right")) {
+                            } else if (strSubstring4.equals("right")) {
                                 WebVttParser.this.mCue.mAlignment = 204;
                             } else {
-                                WebVttParser.this.log_warning("cue setting", substring2, "has invalid value", substring3);
+                                WebVttParser.this.log_warning("cue setting", strSubstring3, "has invalid value", strSubstring4);
                             }
                         }
                     }
@@ -275,16 +275,16 @@ class WebVttParser {
         if (!str.endsWith("%")) {
             throw new NumberFormatException("does not end in %");
         }
-        String substring = str.substring(0, str.length() - 1);
-        if (substring.matches(".*[^0-9.].*")) {
+        String strSubstring = str.substring(0, str.length() - 1);
+        if (strSubstring.matches(".*[^0-9.].*")) {
             throw new NumberFormatException("contains an invalid character");
         }
         try {
-            float parseFloat = Float.parseFloat(substring);
-            if (parseFloat < 0.0f || parseFloat > 100.0f) {
+            float f = Float.parseFloat(strSubstring);
+            if (f < 0.0f || f > 100.0f) {
                 throw new NumberFormatException("is out of range");
             }
-            return parseFloat;
+            return f;
         } catch (NumberFormatException unused) {
             throw new NumberFormatException("is not a number");
         }
@@ -294,16 +294,16 @@ class WebVttParser {
         if (!str.endsWith("%")) {
             throw new NumberFormatException("does not end in %");
         }
-        String substring = str.substring(0, str.length() - 1);
-        if (substring.matches(".*[^0-9].*")) {
+        String strSubstring = str.substring(0, str.length() - 1);
+        if (strSubstring.matches(".*[^0-9].*")) {
             throw new NumberFormatException("contains an invalid character");
         }
         try {
-            int parseInt = Integer.parseInt(substring);
-            if (parseInt < 0 || parseInt > 100) {
+            int i = Integer.parseInt(strSubstring);
+            if (i < 0 || i > 100) {
                 throw new NumberFormatException("is out of range");
             }
-            return parseInt;
+            return i;
         } catch (NumberFormatException unused) {
             throw new NumberFormatException("is not a number");
         }
@@ -313,12 +313,12 @@ class WebVttParser {
         if (!str.matches("(\\d+:)?[0-5]\\d:[0-5]\\d\\.\\d{3}")) {
             throw new NumberFormatException("has invalid format");
         }
-        String[] split = str.split("\\.", 2);
+        String[] strArrSplit = str.split("\\.", 2);
         long j = 0;
-        for (String str2 : split[0].split(":")) {
+        for (String str2 : strArrSplit[0].split(":")) {
             j = (j * 60) + Long.parseLong(str2);
         }
-        return (j * 1000) + Long.parseLong(split[1]);
+        return (j * 1000) + Long.parseLong(strArrSplit[1]);
     }
 
     public static String timeToString(long j) {
@@ -327,20 +327,20 @@ class WebVttParser {
 
     public void parse(String str) {
         boolean z;
-        String replace = (this.mBuffer + str.replace("\u0000", "�")).replace("\r\n", ShaderAssembler.NEWLINE);
-        this.mBuffer = replace;
-        if (replace.endsWith("\r")) {
+        String strReplace = (this.mBuffer + str.replace("\u0000", "�")).replace("\r\n", ShaderAssembler.NEWLINE);
+        this.mBuffer = strReplace;
+        if (strReplace.endsWith("\r")) {
             String str2 = this.mBuffer;
             this.mBuffer = str2.substring(0, str2.length() - 1);
             z = true;
         } else {
             z = false;
         }
-        String[] split = this.mBuffer.split("[\r\n]");
-        for (int i = 0; i < split.length - 1; i++) {
-            this.mPhase.parse(split[i]);
+        String[] strArrSplit = this.mBuffer.split("[\r\n]");
+        for (int i = 0; i < strArrSplit.length - 1; i++) {
+            this.mPhase.parse(strArrSplit[i]);
         }
-        this.mBuffer = split[split.length - 1];
+        this.mBuffer = strArrSplit[strArrSplit.length - 1];
         if (z) {
             this.mBuffer += "\r";
         }

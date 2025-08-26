@@ -44,7 +44,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicIntegerArray;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class TypeAdapters {
     public static final TypeAdapter<AtomicBoolean> ATOMIC_BOOLEAN;
@@ -98,7 +97,6 @@ public final class TypeAdapters {
     public static final TypeAdapter<UUID> UUID;
     public static final TypeAdapterFactory UUID_FACTORY;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.google.gson.internal.bind.TypeAdapters$35, reason: invalid class name */
     /* synthetic */ class AnonymousClass35 {
         static final /* synthetic */ int[] $SwitchMap$com$google$gson$stream$JsonToken;
@@ -149,7 +147,6 @@ public final class TypeAdapters {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class EnumTypeAdapter<T extends Enum<T>> extends TypeAdapter<T> {
         private final Map<String, T> nameToConstant = new HashMap();
         private final Map<T, String> constantToName = new HashMap();
@@ -158,7 +155,7 @@ public final class TypeAdapters {
             try {
                 for (Field field : (Field[]) AccessController.doPrivileged(new PrivilegedAction<Field[]>() { // from class: com.google.gson.internal.bind.TypeAdapters.EnumTypeAdapter.1
                     @Override // java.security.PrivilegedAction
-                    public Field[] run() {
+                    public Field[] run() throws SecurityException {
                         Field[] declaredFields = cls.getDeclaredFields();
                         ArrayList arrayList = new ArrayList(declaredFields.length);
                         for (Field field2 : declaredFields) {
@@ -172,16 +169,16 @@ public final class TypeAdapters {
                     }
                 })) {
                     Enum r4 = (Enum) field.get(null);
-                    String name = r4.name();
+                    String strName = r4.name();
                     SerializedName serializedName = (SerializedName) field.getAnnotation(SerializedName.class);
                     if (serializedName != null) {
-                        name = serializedName.value();
+                        strName = serializedName.value();
                         for (String str : serializedName.alternate()) {
                             this.nameToConstant.put(str, r4);
                         }
                     }
-                    this.nameToConstant.put(name, r4);
-                    this.constantToName.put(r4, name);
+                    this.nameToConstant.put(strName, r4);
+                    this.constantToName.put(r4, strName);
                 }
             } catch (IllegalAccessException e) {
                 throw new AssertionError(e);
@@ -205,7 +202,7 @@ public final class TypeAdapters {
     }
 
     static {
-        TypeAdapter<Class> nullSafe = new TypeAdapter<Class>() { // from class: com.google.gson.internal.bind.TypeAdapters.1
+        TypeAdapter<Class> typeAdapterNullSafe = new TypeAdapter<Class>() { // from class: com.google.gson.internal.bind.TypeAdapters.1
             /* JADX WARN: Can't rename method to resolve collision */
             @Override // com.google.gson.TypeAdapter
             /* renamed from: read */
@@ -218,39 +215,39 @@ public final class TypeAdapters {
                 throw new UnsupportedOperationException("Attempted to serialize java.lang.Class: " + cls.getName() + ". Forgot to register a type adapter?");
             }
         }.nullSafe();
-        CLASS = nullSafe;
-        CLASS_FACTORY = newFactory(Class.class, nullSafe);
-        TypeAdapter<BitSet> nullSafe2 = new TypeAdapter<BitSet>() { // from class: com.google.gson.internal.bind.TypeAdapters.2
+        CLASS = typeAdapterNullSafe;
+        CLASS_FACTORY = newFactory(Class.class, typeAdapterNullSafe);
+        TypeAdapter<BitSet> typeAdapterNullSafe2 = new TypeAdapter<BitSet>() { // from class: com.google.gson.internal.bind.TypeAdapters.2
             @Override // com.google.gson.TypeAdapter
             /* renamed from: read, reason: avoid collision after fix types in other method */
-            public BitSet read2(JsonReader jsonReader) throws IOException {
+            public BitSet read2(JsonReader jsonReader) throws IOException, NumberFormatException {
                 BitSet bitSet = new BitSet();
                 jsonReader.beginArray();
-                JsonToken peek = jsonReader.peek();
+                JsonToken jsonTokenPeek = jsonReader.peek();
                 int i = 0;
-                while (peek != JsonToken.END_ARRAY) {
-                    int i2 = AnonymousClass35.$SwitchMap$com$google$gson$stream$JsonToken[peek.ordinal()];
-                    boolean z = true;
+                while (jsonTokenPeek != JsonToken.END_ARRAY) {
+                    int i2 = AnonymousClass35.$SwitchMap$com$google$gson$stream$JsonToken[jsonTokenPeek.ordinal()];
+                    boolean zNextBoolean = true;
                     if (i2 == 1 || i2 == 2) {
-                        int nextInt = jsonReader.nextInt();
-                        if (nextInt == 0) {
-                            z = false;
-                        } else if (nextInt != 1) {
-                            StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(nextInt, "Invalid bitset value ", ", expected 0 or 1; at path ");
-                            m.append(jsonReader.getPreviousPath());
-                            throw new JsonSyntaxException(m.toString());
+                        int iNextInt = jsonReader.nextInt();
+                        if (iNextInt == 0) {
+                            zNextBoolean = false;
+                        } else if (iNextInt != 1) {
+                            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(iNextInt, "Invalid bitset value ", ", expected 0 or 1; at path ");
+                            sbM.append(jsonReader.getPreviousPath());
+                            throw new JsonSyntaxException(sbM.toString());
                         }
                     } else {
                         if (i2 != 3) {
-                            throw new JsonSyntaxException("Invalid bitset value type: " + peek + "; at path " + jsonReader.getPath());
+                            throw new JsonSyntaxException("Invalid bitset value type: " + jsonTokenPeek + "; at path " + jsonReader.getPath());
                         }
-                        z = jsonReader.nextBoolean();
+                        zNextBoolean = jsonReader.nextBoolean();
                     }
-                    if (z) {
+                    if (zNextBoolean) {
                         bitSet.set(i);
                     }
                     i++;
-                    peek = jsonReader.peek();
+                    jsonTokenPeek = jsonReader.peek();
                 }
                 jsonReader.endArray();
                 return bitSet;
@@ -266,16 +263,16 @@ public final class TypeAdapters {
                 jsonWriter.endArray();
             }
         }.nullSafe();
-        BIT_SET = nullSafe2;
-        BIT_SET_FACTORY = newFactory(BitSet.class, nullSafe2);
+        BIT_SET = typeAdapterNullSafe2;
+        BIT_SET_FACTORY = newFactory(BitSet.class, typeAdapterNullSafe2);
         TypeAdapter<Boolean> typeAdapter = new TypeAdapter<Boolean>() { // from class: com.google.gson.internal.bind.TypeAdapters.3
             /* JADX WARN: Can't rename method to resolve collision */
             @Override // com.google.gson.TypeAdapter
             /* renamed from: read */
             public Boolean read2(JsonReader jsonReader) throws IOException {
-                JsonToken peek = jsonReader.peek();
-                if (peek != JsonToken.NULL) {
-                    return peek == JsonToken.STRING ? Boolean.valueOf(Boolean.parseBoolean(jsonReader.nextString())) : Boolean.valueOf(jsonReader.nextBoolean());
+                JsonToken jsonTokenPeek = jsonReader.peek();
+                if (jsonTokenPeek != JsonToken.NULL) {
+                    return jsonTokenPeek == JsonToken.STRING ? Boolean.valueOf(Boolean.parseBoolean(jsonReader.nextString())) : Boolean.valueOf(jsonReader.nextBoolean());
                 }
                 jsonReader.nextNull();
                 return null;
@@ -315,13 +312,13 @@ public final class TypeAdapters {
                     return null;
                 }
                 try {
-                    int nextInt = jsonReader.nextInt();
-                    if (nextInt <= 255 && nextInt >= -128) {
-                        return Byte.valueOf((byte) nextInt);
+                    int iNextInt = jsonReader.nextInt();
+                    if (iNextInt <= 255 && iNextInt >= -128) {
+                        return Byte.valueOf((byte) iNextInt);
                     }
-                    StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(nextInt, "Lossy conversion from ", " to byte; at path ");
-                    m.append(jsonReader.getPreviousPath());
-                    throw new JsonSyntaxException(m.toString());
+                    StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(iNextInt, "Lossy conversion from ", " to byte; at path ");
+                    sbM.append(jsonReader.getPreviousPath());
+                    throw new JsonSyntaxException(sbM.toString());
                 } catch (NumberFormatException e) {
                     throw new JsonSyntaxException(e);
                 }
@@ -344,13 +341,13 @@ public final class TypeAdapters {
                     return null;
                 }
                 try {
-                    int nextInt = jsonReader.nextInt();
-                    if (nextInt <= 65535 && nextInt >= -32768) {
-                        return Short.valueOf((short) nextInt);
+                    int iNextInt = jsonReader.nextInt();
+                    if (iNextInt <= 65535 && iNextInt >= -32768) {
+                        return Short.valueOf((short) iNextInt);
                     }
-                    StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(nextInt, "Lossy conversion from ", " to short; at path ");
-                    m.append(jsonReader.getPreviousPath());
-                    throw new JsonSyntaxException(m.toString());
+                    StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(iNextInt, "Lossy conversion from ", " to short; at path ");
+                    sbM.append(jsonReader.getPreviousPath());
+                    throw new JsonSyntaxException(sbM.toString());
                 } catch (NumberFormatException e) {
                     throw new JsonSyntaxException(e);
                 }
@@ -386,7 +383,7 @@ public final class TypeAdapters {
         };
         INTEGER = typeAdapter4;
         INTEGER_FACTORY = newFactory(Integer.TYPE, Integer.class, typeAdapter4);
-        TypeAdapter<AtomicInteger> nullSafe3 = new TypeAdapter<AtomicInteger>() { // from class: com.google.gson.internal.bind.TypeAdapters.8
+        TypeAdapter<AtomicInteger> typeAdapterNullSafe3 = new TypeAdapter<AtomicInteger>() { // from class: com.google.gson.internal.bind.TypeAdapters.8
             @Override // com.google.gson.TypeAdapter
             /* renamed from: read, reason: avoid collision after fix types in other method */
             public AtomicInteger read2(JsonReader jsonReader) throws IOException {
@@ -402,9 +399,9 @@ public final class TypeAdapters {
                 jsonWriter.value(atomicInteger.get());
             }
         }.nullSafe();
-        ATOMIC_INTEGER = nullSafe3;
-        ATOMIC_INTEGER_FACTORY = newFactory(AtomicInteger.class, nullSafe3);
-        TypeAdapter<AtomicBoolean> nullSafe4 = new TypeAdapter<AtomicBoolean>() { // from class: com.google.gson.internal.bind.TypeAdapters.9
+        ATOMIC_INTEGER = typeAdapterNullSafe3;
+        ATOMIC_INTEGER_FACTORY = newFactory(AtomicInteger.class, typeAdapterNullSafe3);
+        TypeAdapter<AtomicBoolean> typeAdapterNullSafe4 = new TypeAdapter<AtomicBoolean>() { // from class: com.google.gson.internal.bind.TypeAdapters.9
             @Override // com.google.gson.TypeAdapter
             /* renamed from: read, reason: avoid collision after fix types in other method */
             public AtomicBoolean read2(JsonReader jsonReader) throws IOException {
@@ -416,9 +413,9 @@ public final class TypeAdapters {
                 jsonWriter.value(atomicBoolean.get());
             }
         }.nullSafe();
-        ATOMIC_BOOLEAN = nullSafe4;
-        ATOMIC_BOOLEAN_FACTORY = newFactory(AtomicBoolean.class, nullSafe4);
-        TypeAdapter<AtomicIntegerArray> nullSafe5 = new TypeAdapter<AtomicIntegerArray>() { // from class: com.google.gson.internal.bind.TypeAdapters.10
+        ATOMIC_BOOLEAN = typeAdapterNullSafe4;
+        ATOMIC_BOOLEAN_FACTORY = newFactory(AtomicBoolean.class, typeAdapterNullSafe4);
+        TypeAdapter<AtomicIntegerArray> typeAdapterNullSafe5 = new TypeAdapter<AtomicIntegerArray>() { // from class: com.google.gson.internal.bind.TypeAdapters.10
             @Override // com.google.gson.TypeAdapter
             /* renamed from: read, reason: avoid collision after fix types in other method */
             public AtomicIntegerArray read2(JsonReader jsonReader) throws IOException {
@@ -450,8 +447,8 @@ public final class TypeAdapters {
                 jsonWriter.endArray();
             }
         }.nullSafe();
-        ATOMIC_INTEGER_ARRAY = nullSafe5;
-        ATOMIC_INTEGER_ARRAY_FACTORY = newFactory(AtomicIntegerArray.class, nullSafe5);
+        ATOMIC_INTEGER_ARRAY = typeAdapterNullSafe5;
+        ATOMIC_INTEGER_ARRAY_FACTORY = newFactory(AtomicIntegerArray.class, typeAdapterNullSafe5);
         LONG = new TypeAdapter<Number>() { // from class: com.google.gson.internal.bind.TypeAdapters.11
             /* JADX WARN: Can't rename method to resolve collision */
             @Override // com.google.gson.TypeAdapter
@@ -516,13 +513,13 @@ public final class TypeAdapters {
                     jsonReader.nextNull();
                     return null;
                 }
-                String nextString = jsonReader.nextString();
-                if (nextString.length() == 1) {
-                    return Character.valueOf(nextString.charAt(0));
+                String strNextString = jsonReader.nextString();
+                if (strNextString.length() == 1) {
+                    return Character.valueOf(strNextString.charAt(0));
                 }
-                StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("Expecting character, got: ", nextString, "; at ");
-                m.append(jsonReader.getPreviousPath());
-                throw new JsonSyntaxException(m.toString());
+                StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("Expecting character, got: ", strNextString, "; at ");
+                sbM.append(jsonReader.getPreviousPath());
+                throw new JsonSyntaxException(sbM.toString());
             }
 
             @Override // com.google.gson.TypeAdapter
@@ -536,9 +533,9 @@ public final class TypeAdapters {
             @Override // com.google.gson.TypeAdapter
             /* renamed from: read, reason: avoid collision after fix types in other method */
             public String read2(JsonReader jsonReader) throws IOException {
-                JsonToken peek = jsonReader.peek();
-                if (peek != JsonToken.NULL) {
-                    return peek == JsonToken.BOOLEAN ? Boolean.toString(jsonReader.nextBoolean()) : jsonReader.nextString();
+                JsonToken jsonTokenPeek = jsonReader.peek();
+                if (jsonTokenPeek != JsonToken.NULL) {
+                    return jsonTokenPeek == JsonToken.BOOLEAN ? Boolean.toString(jsonReader.nextBoolean()) : jsonReader.nextString();
                 }
                 jsonReader.nextNull();
                 return null;
@@ -558,13 +555,13 @@ public final class TypeAdapters {
                     jsonReader.nextNull();
                     return null;
                 }
-                String nextString = jsonReader.nextString();
+                String strNextString = jsonReader.nextString();
                 try {
-                    return new BigDecimal(nextString);
+                    return new BigDecimal(strNextString);
                 } catch (NumberFormatException e) {
-                    StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("Failed parsing '", nextString, "' as BigDecimal; at path ");
-                    m.append(jsonReader.getPreviousPath());
-                    throw new JsonSyntaxException(m.toString(), e);
+                    StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("Failed parsing '", strNextString, "' as BigDecimal; at path ");
+                    sbM.append(jsonReader.getPreviousPath());
+                    throw new JsonSyntaxException(sbM.toString(), e);
                 }
             }
 
@@ -581,13 +578,13 @@ public final class TypeAdapters {
                     jsonReader.nextNull();
                     return null;
                 }
-                String nextString = jsonReader.nextString();
+                String strNextString = jsonReader.nextString();
                 try {
-                    return new BigInteger(nextString);
+                    return new BigInteger(strNextString);
                 } catch (NumberFormatException e) {
-                    StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("Failed parsing '", nextString, "' as BigInteger; at path ");
-                    m.append(jsonReader.getPreviousPath());
-                    throw new JsonSyntaxException(m.toString(), e);
+                    StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("Failed parsing '", strNextString, "' as BigInteger; at path ");
+                    sbM.append(jsonReader.getPreviousPath());
+                    throw new JsonSyntaxException(sbM.toString(), e);
                 }
             }
 
@@ -658,11 +655,11 @@ public final class TypeAdapters {
                     jsonReader.nextNull();
                     return null;
                 }
-                String nextString = jsonReader.nextString();
-                if ("null".equals(nextString)) {
+                String strNextString = jsonReader.nextString();
+                if ("null".equals(strNextString)) {
                     return null;
                 }
-                return new URL(nextString);
+                return new URL(strNextString);
             }
 
             @Override // com.google.gson.TypeAdapter
@@ -681,11 +678,11 @@ public final class TypeAdapters {
                     return null;
                 }
                 try {
-                    String nextString = jsonReader.nextString();
-                    if ("null".equals(nextString)) {
+                    String strNextString = jsonReader.nextString();
+                    if ("null".equals(strNextString)) {
                         return null;
                     }
-                    return new URI(nextString);
+                    return new URI(strNextString);
                 } catch (URISyntaxException e) {
                     throw new JsonIOException(e);
                 }
@@ -724,13 +721,13 @@ public final class TypeAdapters {
                     jsonReader.nextNull();
                     return null;
                 }
-                String nextString = jsonReader.nextString();
+                String strNextString = jsonReader.nextString();
                 try {
-                    return UUID.fromString(nextString);
+                    return UUID.fromString(strNextString);
                 } catch (IllegalArgumentException e) {
-                    StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("Failed parsing '", nextString, "' as UUID; at path ");
-                    m.append(jsonReader.getPreviousPath());
-                    throw new JsonSyntaxException(m.toString(), e);
+                    StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("Failed parsing '", strNextString, "' as UUID; at path ");
+                    sbM.append(jsonReader.getPreviousPath());
+                    throw new JsonSyntaxException(sbM.toString(), e);
                 }
             }
 
@@ -741,17 +738,17 @@ public final class TypeAdapters {
         };
         UUID = typeAdapter12;
         UUID_FACTORY = newFactory(UUID.class, typeAdapter12);
-        TypeAdapter<Currency> nullSafe6 = new TypeAdapter<Currency>() { // from class: com.google.gson.internal.bind.TypeAdapters.25
+        TypeAdapter<Currency> typeAdapterNullSafe6 = new TypeAdapter<Currency>() { // from class: com.google.gson.internal.bind.TypeAdapters.25
             @Override // com.google.gson.TypeAdapter
             /* renamed from: read, reason: avoid collision after fix types in other method */
             public Currency read2(JsonReader jsonReader) throws IOException {
-                String nextString = jsonReader.nextString();
+                String strNextString = jsonReader.nextString();
                 try {
-                    return Currency.getInstance(nextString);
+                    return Currency.getInstance(strNextString);
                 } catch (IllegalArgumentException e) {
-                    StringBuilder m = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("Failed parsing '", nextString, "' as Currency; at path ");
-                    m.append(jsonReader.getPreviousPath());
-                    throw new JsonSyntaxException(m.toString(), e);
+                    StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("Failed parsing '", strNextString, "' as Currency; at path ");
+                    sbM.append(jsonReader.getPreviousPath());
+                    throw new JsonSyntaxException(sbM.toString(), e);
                 }
             }
 
@@ -760,8 +757,8 @@ public final class TypeAdapters {
                 jsonWriter.value(currency.getCurrencyCode());
             }
         }.nullSafe();
-        CURRENCY = nullSafe6;
-        CURRENCY_FACTORY = newFactory(Currency.class, nullSafe6);
+        CURRENCY = typeAdapterNullSafe6;
+        CURRENCY_FACTORY = newFactory(Currency.class, typeAdapterNullSafe6);
         TypeAdapter<Calendar> typeAdapter13 = new TypeAdapter<Calendar>() { // from class: com.google.gson.internal.bind.TypeAdapters.26
             private static final String DAY_OF_MONTH = "dayOfMonth";
             private static final String HOUR_OF_DAY = "hourOfDay";
@@ -772,7 +769,7 @@ public final class TypeAdapters {
 
             @Override // com.google.gson.TypeAdapter
             /* renamed from: read, reason: avoid collision after fix types in other method */
-            public Calendar read2(JsonReader jsonReader) throws IOException {
+            public Calendar read2(JsonReader jsonReader) throws IOException, NumberFormatException {
                 if (jsonReader.peek() == JsonToken.NULL) {
                     jsonReader.nextNull();
                     return null;
@@ -785,20 +782,20 @@ public final class TypeAdapters {
                 int i5 = 0;
                 int i6 = 0;
                 while (jsonReader.peek() != JsonToken.END_OBJECT) {
-                    String nextName = jsonReader.nextName();
-                    int nextInt = jsonReader.nextInt();
-                    if (YEAR.equals(nextName)) {
-                        i = nextInt;
-                    } else if (MONTH.equals(nextName)) {
-                        i2 = nextInt;
-                    } else if (DAY_OF_MONTH.equals(nextName)) {
-                        i3 = nextInt;
-                    } else if (HOUR_OF_DAY.equals(nextName)) {
-                        i4 = nextInt;
-                    } else if (MINUTE.equals(nextName)) {
-                        i5 = nextInt;
-                    } else if (SECOND.equals(nextName)) {
-                        i6 = nextInt;
+                    String strNextName = jsonReader.nextName();
+                    int iNextInt = jsonReader.nextInt();
+                    if (YEAR.equals(strNextName)) {
+                        i = iNextInt;
+                    } else if (MONTH.equals(strNextName)) {
+                        i2 = iNextInt;
+                    } else if (DAY_OF_MONTH.equals(strNextName)) {
+                        i3 = iNextInt;
+                    } else if (HOUR_OF_DAY.equals(strNextName)) {
+                        i4 = iNextInt;
+                    } else if (MINUTE.equals(strNextName)) {
+                        i5 = iNextInt;
+                    } else if (SECOND.equals(strNextName)) {
+                        i6 = iNextInt;
                     }
                 }
                 jsonReader.endObject();
@@ -838,10 +835,10 @@ public final class TypeAdapters {
                     return null;
                 }
                 StringTokenizer stringTokenizer = new StringTokenizer(jsonReader.nextString(), "_");
-                String nextToken = stringTokenizer.hasMoreElements() ? stringTokenizer.nextToken() : null;
-                String nextToken2 = stringTokenizer.hasMoreElements() ? stringTokenizer.nextToken() : null;
-                String nextToken3 = stringTokenizer.hasMoreElements() ? stringTokenizer.nextToken() : null;
-                return (nextToken2 == null && nextToken3 == null) ? new Locale(nextToken) : nextToken3 == null ? new Locale(nextToken, nextToken2) : new Locale(nextToken, nextToken2, nextToken3);
+                String strNextToken = stringTokenizer.hasMoreElements() ? stringTokenizer.nextToken() : null;
+                String strNextToken2 = stringTokenizer.hasMoreElements() ? stringTokenizer.nextToken() : null;
+                String strNextToken3 = stringTokenizer.hasMoreElements() ? stringTokenizer.nextToken() : null;
+                return (strNextToken2 == null && strNextToken3 == null) ? new Locale(strNextToken) : strNextToken3 == null ? new Locale(strNextToken, strNextToken2) : new Locale(strNextToken, strNextToken2, strNextToken3);
             }
 
             @Override // com.google.gson.TypeAdapter
@@ -954,7 +951,7 @@ public final class TypeAdapters {
         return new TypeAdapterFactory() { // from class: com.google.gson.internal.bind.TypeAdapters.30
             @Override // com.google.gson.TypeAdapterFactory
             public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> typeToken2) {
-                if (typeToken2.equals(TypeToken.this)) {
+                if (typeToken2.equals(typeToken)) {
                     return typeAdapter;
                 }
                 return null;
@@ -989,11 +986,11 @@ public final class TypeAdapters {
                         @Override // com.google.gson.TypeAdapter
                         /* renamed from: read */
                         public Object read2(JsonReader jsonReader) throws IOException {
-                            Object read2 = typeAdapter.read2(jsonReader);
-                            if (read2 == null || rawType.isInstance(read2)) {
-                                return read2;
+                            Object obj = typeAdapter.read2(jsonReader);
+                            if (obj == null || rawType.isInstance(obj)) {
+                                return obj;
                             }
-                            throw new JsonSyntaxException("Expected a " + rawType.getName() + " but was " + read2.getClass().getName() + "; at path " + jsonReader.getPreviousPath());
+                            throw new JsonSyntaxException("Expected a " + rawType.getName() + " but was " + obj.getClass().getName() + "; at path " + jsonReader.getPreviousPath());
                         }
 
                         @Override // com.google.gson.TypeAdapter

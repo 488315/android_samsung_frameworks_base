@@ -14,20 +14,24 @@ import kotlinx.coroutines.Job;
 import kotlinx.coroutines.ThreadLocalEventLoop;
 import kotlinx.coroutines.UndispatchedCoroutine;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class DispatchedContinuationKt {
     public static final Symbol UNDEFINED = new Symbol(PeripheralBarcodeConstants.Symbology.UNDEFINED);
     public static final Symbol REUSABLE_CLAIMED = new Symbol("REUSABLE_CLAIMED");
 
+    /* JADX WARN: Removed duplicated region for block: B:30:0x009c A[Catch: all -> 0x0077, DONT_GENERATE, TryCatch #0 {all -> 0x0077, blocks: (B:16:0x0054, B:18:0x0064, B:20:0x006a, B:31:0x009f, B:23:0x0079, B:25:0x0089, B:28:0x0096, B:30:0x009c, B:36:0x00ac, B:39:0x00b5, B:38:0x00b2, B:26:0x008d), top: B:48:0x0054, inners: #1 }] */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public static final void resumeCancellableWith(Object obj, Continuation continuation) {
+        Job job;
         if (!(continuation instanceof DispatchedContinuation)) {
             continuation.resumeWith(obj);
             return;
         }
         DispatchedContinuation dispatchedContinuation = (DispatchedContinuation) continuation;
-        Throwable m3422exceptionOrNullimpl = Result.m3422exceptionOrNullimpl(obj);
-        Object completedExceptionally = m3422exceptionOrNullimpl == null ? obj : new CompletedExceptionally(m3422exceptionOrNullimpl, false, 2, null);
+        Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(obj);
+        Object completedExceptionally = thM3442exceptionOrNullimpl == null ? obj : new CompletedExceptionally(thM3442exceptionOrNullimpl, false, 2, null);
         if (safeIsDispatchNeeded(dispatchedContinuation.dispatcher, dispatchedContinuation.continuation.getContext())) {
             dispatchedContinuation._state = completedExceptionally;
             dispatchedContinuation.resumeMode = 1;
@@ -44,30 +48,29 @@ public abstract class DispatchedContinuationKt {
         }
         eventLoop$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host.incrementUseCount(true);
         try {
-            Job job = (Job) dispatchedContinuation.continuation.getContext().get(Job.Key);
-            if (job == null || job.isActive()) {
-                Continuation continuation2 = dispatchedContinuation.continuation;
-                Object obj2 = dispatchedContinuation.countOrElement;
-                CoroutineContext context = continuation2.getContext();
-                Object updateThreadContext = ThreadContextKt.updateThreadContext(context, obj2);
-                UndispatchedCoroutine updateUndispatchedCompletion = updateThreadContext != ThreadContextKt.NO_THREAD_ELEMENTS ? CoroutineContextKt.updateUndispatchedCompletion(continuation2, context, updateThreadContext) : null;
-                try {
-                    dispatchedContinuation.continuation.resumeWith(obj);
-                    Unit unit = Unit.INSTANCE;
-                } finally {
-                    if (updateUndispatchedCompletion == null || updateUndispatchedCompletion.clearThreadContext()) {
-                        ThreadContextKt.restoreThreadContext(context, updateThreadContext);
-                    }
-                }
-            } else {
-                dispatchedContinuation.resumeWith(new Result.Failure(job.getCancellationException()));
-            }
-            while (eventLoop$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host.processUnconfinedEvent()) {
-            }
+            job = (Job) dispatchedContinuation.continuation.getContext().get(Job.Key);
         } finally {
             try {
             } finally {
             }
+        }
+        if (job == null || job.isActive()) {
+            Continuation continuation2 = dispatchedContinuation.continuation;
+            Object obj2 = dispatchedContinuation.countOrElement;
+            CoroutineContext context = continuation2.getContext();
+            Object objUpdateThreadContext = ThreadContextKt.updateThreadContext(context, obj2);
+            UndispatchedCoroutine undispatchedCoroutineUpdateUndispatchedCompletion = objUpdateThreadContext != ThreadContextKt.NO_THREAD_ELEMENTS ? CoroutineContextKt.updateUndispatchedCompletion(continuation2, context, objUpdateThreadContext) : null;
+            try {
+                dispatchedContinuation.continuation.resumeWith(obj);
+                Unit unit = Unit.INSTANCE;
+            } finally {
+                if (undispatchedCoroutineUpdateUndispatchedCompletion == null || undispatchedCoroutineUpdateUndispatchedCompletion.clearThreadContext()) {
+                    ThreadContextKt.restoreThreadContext(context, objUpdateThreadContext);
+                }
+            }
+        }
+        dispatchedContinuation.resumeWith(new Result.Failure(job.getCancellationException()));
+        while (eventLoop$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host.processUnconfinedEvent()) {
         }
     }
 
@@ -79,7 +82,7 @@ public abstract class DispatchedContinuationKt {
         }
     }
 
-    public static final boolean safeIsDispatchNeeded(CoroutineDispatcher coroutineDispatcher, CoroutineContext coroutineContext) {
+    public static final boolean safeIsDispatchNeeded(CoroutineDispatcher coroutineDispatcher, CoroutineContext coroutineContext) throws DispatchException {
         try {
             return coroutineDispatcher.isDispatchNeeded(coroutineContext);
         } catch (Throwable th) {

@@ -45,9 +45,9 @@ public interface IRecommendationService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IRecommendationService)) {
-                return (IRecommendationService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IRecommendationService)) {
+                return (IRecommendationService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,9 +74,9 @@ public interface IRecommendationService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IRecommendationServiceCallbacks asInterface = IRecommendationServiceCallbacks.Stub.asInterface(parcel.readStrongBinder());
+                IRecommendationServiceCallbacks iRecommendationServiceCallbacksAsInterface = IRecommendationServiceCallbacks.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                registerCallbacks(asInterface);
+                registerCallbacks(iRecommendationServiceCallbacksAsInterface);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -100,13 +100,13 @@ public interface IRecommendationService extends IInterface {
 
             @Override // android.printservice.recommendation.IRecommendationService
             public void registerCallbacks(IRecommendationServiceCallbacks iRecommendationServiceCallbacks) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iRecommendationServiceCallbacks);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iRecommendationServiceCallbacks);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

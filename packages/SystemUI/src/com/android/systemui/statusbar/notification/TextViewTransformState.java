@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.TextView;
 import com.android.systemui.statusbar.ViewTransformationHelper;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class TextViewTransformState extends TransformState {
     public static final Pools.SimplePool sInstancePool = new Pools.SimplePool(40);
@@ -56,7 +55,6 @@ public class TextViewTransformState extends TransformState {
     public final boolean sameAs(TransformState transformState) {
         KeyEvent.Callback callback;
         boolean z;
-        int i;
         if (this.mSameAsAny) {
             return true;
         }
@@ -71,10 +69,11 @@ public class TextViewTransformState extends TransformState {
                 Spanned spanned2 = (Spanned) textViewTransformState.mText;
                 Object[] spans2 = spanned2.getSpans(0, spanned2.length(), Object.class);
                 if (spans.length == spans2.length) {
-                    for (0; i < spans.length; i + 1) {
+                    for (int i = 0; i < spans.length; i++) {
                         Object obj = spans[i];
                         Object obj2 = spans2[i];
-                        i = (obj.getClass().equals(obj2.getClass()) && spanned.getSpanStart(obj) == spanned2.getSpanStart(obj2) && spanned.getSpanEnd(obj) == spanned2.getSpanEnd(obj2)) ? i + 1 : 0;
+                        if (obj.getClass().equals(obj2.getClass()) && spanned.getSpanStart(obj) == spanned2.getSpanStart(obj2) && spanned.getSpanEnd(obj) == spanned2.getSpanEnd(obj2)) {
+                        }
                     }
                     return true;
                 }

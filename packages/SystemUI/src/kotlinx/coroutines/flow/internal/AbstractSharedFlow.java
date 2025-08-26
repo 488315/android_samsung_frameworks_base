@@ -6,7 +6,6 @@ import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 import kotlinx.coroutines.flow.StateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class AbstractSharedFlow {
     public SubscriptionCountStateFlow _subscriptionCount;
@@ -15,31 +14,31 @@ public abstract class AbstractSharedFlow {
     public AbstractSharedFlowSlot[] slots;
 
     public final AbstractSharedFlowSlot allocateSlot() {
-        AbstractSharedFlowSlot abstractSharedFlowSlot;
+        AbstractSharedFlowSlot abstractSharedFlowSlotCreateSlot;
         SubscriptionCountStateFlow subscriptionCountStateFlow;
         synchronized (this) {
             try {
-                AbstractSharedFlowSlot[] abstractSharedFlowSlotArr = this.slots;
-                if (abstractSharedFlowSlotArr == null) {
-                    abstractSharedFlowSlotArr = createSlotArray();
-                    this.slots = abstractSharedFlowSlotArr;
-                } else if (this.nCollectors >= abstractSharedFlowSlotArr.length) {
-                    Object[] copyOf = Arrays.copyOf(abstractSharedFlowSlotArr, abstractSharedFlowSlotArr.length * 2);
-                    this.slots = (AbstractSharedFlowSlot[]) copyOf;
-                    abstractSharedFlowSlotArr = (AbstractSharedFlowSlot[]) copyOf;
+                AbstractSharedFlowSlot[] abstractSharedFlowSlotArrCreateSlotArray = this.slots;
+                if (abstractSharedFlowSlotArrCreateSlotArray == null) {
+                    abstractSharedFlowSlotArrCreateSlotArray = createSlotArray();
+                    this.slots = abstractSharedFlowSlotArrCreateSlotArray;
+                } else if (this.nCollectors >= abstractSharedFlowSlotArrCreateSlotArray.length) {
+                    Object[] objArrCopyOf = Arrays.copyOf(abstractSharedFlowSlotArrCreateSlotArray, abstractSharedFlowSlotArrCreateSlotArray.length * 2);
+                    this.slots = (AbstractSharedFlowSlot[]) objArrCopyOf;
+                    abstractSharedFlowSlotArrCreateSlotArray = (AbstractSharedFlowSlot[]) objArrCopyOf;
                 }
                 int i = this.nextIndex;
                 do {
-                    abstractSharedFlowSlot = abstractSharedFlowSlotArr[i];
-                    if (abstractSharedFlowSlot == null) {
-                        abstractSharedFlowSlot = createSlot();
-                        abstractSharedFlowSlotArr[i] = abstractSharedFlowSlot;
+                    abstractSharedFlowSlotCreateSlot = abstractSharedFlowSlotArrCreateSlotArray[i];
+                    if (abstractSharedFlowSlotCreateSlot == null) {
+                        abstractSharedFlowSlotCreateSlot = createSlot();
+                        abstractSharedFlowSlotArrCreateSlotArray[i] = abstractSharedFlowSlotCreateSlot;
                     }
                     i++;
-                    if (i >= abstractSharedFlowSlotArr.length) {
+                    if (i >= abstractSharedFlowSlotArrCreateSlotArray.length) {
                         i = 0;
                     }
-                } while (!abstractSharedFlowSlot.allocateLocked(this));
+                } while (!abstractSharedFlowSlotCreateSlot.allocateLocked(this));
                 this.nextIndex = i;
                 this.nCollectors++;
                 subscriptionCountStateFlow = this._subscriptionCount;
@@ -50,7 +49,7 @@ public abstract class AbstractSharedFlow {
         if (subscriptionCountStateFlow != null) {
             subscriptionCountStateFlow.increment(1);
         }
-        return abstractSharedFlowSlot;
+        return abstractSharedFlowSlotCreateSlot;
     }
 
     public abstract AbstractSharedFlowSlot createSlot();
@@ -60,7 +59,7 @@ public abstract class AbstractSharedFlow {
     public final void freeSlot(AbstractSharedFlowSlot abstractSharedFlowSlot) {
         SubscriptionCountStateFlow subscriptionCountStateFlow;
         int i;
-        Continuation[] freeLocked;
+        Continuation[] continuationArrFreeLocked;
         synchronized (this) {
             try {
                 int i2 = this.nCollectors - 1;
@@ -69,12 +68,12 @@ public abstract class AbstractSharedFlow {
                 if (i2 == 0) {
                     this.nextIndex = 0;
                 }
-                freeLocked = abstractSharedFlowSlot.freeLocked(this);
+                continuationArrFreeLocked = abstractSharedFlowSlot.freeLocked(this);
             } catch (Throwable th) {
                 throw th;
             }
         }
-        for (Continuation continuation : freeLocked) {
+        for (Continuation continuation : continuationArrFreeLocked) {
             if (continuation != null) {
                 int i3 = Result.$r8$clinit;
                 continuation.resumeWith(Unit.INSTANCE);

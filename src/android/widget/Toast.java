@@ -32,7 +32,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.WindowManagerGlobal;
 import android.view.accessibility.IAccessibilityManager;
-import android.widget.Toast;
 import android.widget.flags.Flags;
 import com.android.internal.R;
 import com.android.internal.util.Preconditions;
@@ -111,9 +110,9 @@ public class Toast {
     }
 
     private boolean isSpeg() {
-        Application currentApplication;
+        Application applicationCurrentApplication;
         PackageManager packageManager;
-        return CoreRune.SYSFW_APP_SPEG && (currentApplication = ActivityThread.currentApplication()) != null && (packageManager = currentApplication.getPackageManager()) != null && packageManager.isSpeg(Binder.getCallingUid());
+        return CoreRune.SYSFW_APP_SPEG && (applicationCurrentApplication = ActivityThread.currentApplication()) != null && (packageManager = applicationCurrentApplication.getPackageManager()) != null && packageManager.isSpeg(Binder.getCallingUid());
     }
 
     public void show() {
@@ -139,37 +138,37 @@ public class Toast {
         Log.i(TAG, "show: caller = " + Debug.getCallers(1));
         this.mDisplayContext = null;
         int displayId = this.mContext.getDisplayId();
-        int semGetFocusedDisplayId = semGetFocusedDisplayId();
+        int iSemGetFocusedDisplayId = semGetFocusedDisplayId();
         boolean z = getActivityContext(this.mContext) != null;
-        boolean z2 = semGetFocusedDisplayId == getExternalDesktopDisplayId();
+        boolean z2 = iSemGetFocusedDisplayId == getExternalDesktopDisplayId();
         if (!this.mIsCustomToast && !z && z2 && this.mContext.getApplicationContext() != null) {
             this.mDisplayContext = semCreateDisplayContext(getExternalDesktopDisplayId());
         }
-        if (ViewRune.WIDGET_ONEUI_TOAST_SUPPRORT_SUB_DISPLAY && !this.mIsCustomToast && semGetFocusedDisplayId == 1 && displayId != 1 && this.mContext.getApplicationContext() != null) {
+        if (ViewRune.WIDGET_ONEUI_TOAST_SUPPRORT_SUB_DISPLAY && !this.mIsCustomToast && iSemGetFocusedDisplayId == 1 && displayId != 1 && this.mContext.getApplicationContext() != null) {
             this.mDisplayContext = semCreateDisplayContext(1);
         }
-        Log.i(TAG, "show: contextDispId = " + displayId + " mCustomDisplayId = " + this.mCustomDisplayId + " focusedDisplayId = " + semGetFocusedDisplayId + " isActivityContext = " + z);
+        Log.i(TAG, "show: contextDispId = " + displayId + " mCustomDisplayId = " + this.mCustomDisplayId + " focusedDisplayId = " + iSemGetFocusedDisplayId + " isActivityContext = " + z);
         if (customDeviceManagerProxy != null && customDeviceManagerProxy.getToastShowPackageNameState()) {
-            String charSequence2 = this.mContext.getPackageManager().getApplicationLabel(this.mContext.getApplicationInfo()).toString();
+            String string = this.mContext.getPackageManager().getApplicationLabel(this.mContext.getApplicationInfo()).toString();
             View view = this.mNextView;
             if (view != null) {
                 TextView textView = (TextView) view.findViewById(16908299);
-                if (textView != null && charSequence2 != null && !textView.getText().toString().startsWith(charSequence2)) {
+                if (textView != null && string != null && !textView.getText().toString().startsWith(string)) {
                     try {
                         String html = Html.toHtml(new SpannableString(textView.getText()));
-                        textView.lambda$setTextAsync$0(Html.fromHtml(String.format("%1s: %2s", charSequence2, html.substring(html.indexOf(62) + 1, html.lastIndexOf(60)))));
+                        textView.lambda$setTextAsync$0(Html.fromHtml(String.format("%1s: %2s", string, html.substring(html.indexOf(62) + 1, html.lastIndexOf(60)))));
                     } catch (Exception e) {
                         Log.e(TAG, "Exception thrown :", e);
-                        textView.lambda$setTextAsync$0(String.format("%1s: %2s", charSequence2, textView.getText().toString()));
+                        textView.lambda$setTextAsync$0(String.format("%1s: %2s", string, textView.getText().toString()));
                     }
                 }
-            } else if (charSequence2 != null && (charSequence = this.mText) != null && !charSequence.toString().startsWith(charSequence2)) {
+            } else if (string != null && (charSequence = this.mText) != null && !charSequence.toString().startsWith(string)) {
                 try {
                     String html2 = Html.toHtml(new SpannableString(this.mText));
-                    this.mText = Html.fromHtml(String.format("%1s: %2s", charSequence2, html2.substring(html2.indexOf(62) + 1, html2.lastIndexOf(60))));
+                    this.mText = Html.fromHtml(String.format("%1s: %2s", string, html2.substring(html2.indexOf(62) + 1, html2.lastIndexOf(60))));
                 } catch (Exception e2) {
                     Log.e(TAG, "Exception thrown :", e2);
-                    this.mText = String.format("%1s: %2s", charSequence2, this.mText.toString());
+                    this.mText = String.format("%1s: %2s", string, this.mText.toString());
                 }
             }
         }
@@ -217,22 +216,22 @@ public class Toast {
             Log.e(TAG, "show: cannot get uid!!!", e3);
         }
         int i4 = i2;
-        boolean isUiContext = this.mContext.isUiContext();
+        boolean zIsUiContext = this.mContext.isUiContext();
         if (service != null) {
             try {
                 if (Compatibility.isChangeEnabled(CHANGE_TEXT_TOASTS_IN_THE_SYSTEM)) {
                     View view4 = this.mNextView;
                     if (view4 != null) {
-                        service.enqueueToastForDex(opPackageName, this.mToken, tn, this.mDuration, isUiContext, i3, semGetMessageFromTv(view4), i4);
+                        service.enqueueToastForDex(opPackageName, this.mToken, tn, this.mDuration, zIsUiContext, i3, semGetMessageFromTv(view4), i4);
                         return;
                     }
                     CallbackBinder callbackBinder = new CallbackBinder(this.mCallbacks, this.mHandler);
                     Binder binder = this.mToken;
-                    CharSequence charSequence3 = this.mText;
-                    service.enqueueTextToastForDex(opPackageName, binder, charSequence3, this.mDuration, isUiContext, i3, callbackBinder, charSequence3 != null ? charSequence3.toString() : "", i4);
+                    CharSequence charSequence2 = this.mText;
+                    service.enqueueTextToastForDex(opPackageName, binder, charSequence2, this.mDuration, zIsUiContext, i3, callbackBinder, charSequence2 != null ? charSequence2.toString() : "", i4);
                     return;
                 }
-                service.enqueueToastForDex(opPackageName, this.mToken, tn, this.mDuration, isUiContext, i3, semGetMessageFromTv(this.mNextView), i4);
+                service.enqueueToastForDex(opPackageName, this.mToken, tn, this.mDuration, zIsUiContext, i3, semGetMessageFromTv(this.mNextView), i4);
             } catch (RemoteException unused) {
             }
         }
@@ -412,9 +411,9 @@ public class Toast {
         if (iNotificationManager != null) {
             return iNotificationManager;
         }
-        INotificationManager asInterface = INotificationManager.Stub.asInterface(ServiceManager.getService("notification"));
-        sService = asInterface;
-        return asInterface;
+        INotificationManager iNotificationManagerAsInterface = INotificationManager.Stub.asInterface(ServiceManager.getService("notification"));
+        sService = iNotificationManagerAsInterface;
+        return iNotificationManagerAsInterface;
     }
 
     public static class TN extends ITransientNotification.Stub {
@@ -600,7 +599,7 @@ public class Toast {
             this.mHandler.post(new Runnable() { // from class: android.widget.Toast$CallbackBinder$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    Toast.CallbackBinder.this.lambda$onToastShown$0();
+                    this.f$0.lambda$onToastShown$0();
                 }
             });
         }
@@ -618,7 +617,7 @@ public class Toast {
             this.mHandler.post(new Runnable() { // from class: android.widget.Toast$CallbackBinder$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    Toast.CallbackBinder.this.lambda$onToastHidden$1();
+                    this.f$0.lambda$onToastHidden$1();
                 }
             });
         }
@@ -709,7 +708,7 @@ public class Toast {
 
     private Context semCreateDisplayContext(int i) {
         Display[] displays;
-        Context createDisplayContext;
+        Context contextCreateDisplayContext;
         DisplayManager displayManager = (DisplayManager) this.mContext.getSystemService(Context.DISPLAY_SERVICE);
         if (displayManager == null) {
             return null;
@@ -720,8 +719,8 @@ public class Toast {
             displays = displayManager.getDisplays();
         }
         for (Display display : displays) {
-            if (i == display.getDisplayId() && (createDisplayContext = this.mContext.createDisplayContext(display)) != null) {
-                return new ContextThemeWrapper(createDisplayContext, 16974123);
+            if (i == display.getDisplayId() && (contextCreateDisplayContext = this.mContext.createDisplayContext(display)) != null) {
+                return new ContextThemeWrapper(contextCreateDisplayContext, 16974123);
             }
         }
         return null;
@@ -730,8 +729,8 @@ public class Toast {
     private String semGetMessageFromTv(View view) {
         CharSequence text;
         if (view != null) {
-            View findViewById = view.findViewById(16908299);
-            if ((findViewById instanceof TextView) && (text = ((TextView) findViewById).getText()) != null) {
+            View viewFindViewById = view.findViewById(16908299);
+            if ((viewFindViewById instanceof TextView) && (text = ((TextView) viewFindViewById).getText()) != null) {
                 return text.toString();
             }
             return "";

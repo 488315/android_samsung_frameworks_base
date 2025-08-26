@@ -12,7 +12,6 @@ import com.android.systemui.media.mediaoutput.icons.EqualizerPlayingKt$$External
 import com.samsung.android.knox.custom.IKnoxCustomManager;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class SkipPreviousKt$$ExternalSyntheticLambda0 implements Function0 {
     @Override // kotlin.jvm.functions.Function0
@@ -24,24 +23,24 @@ public final /* synthetic */ class SkipPreviousKt$$ExternalSyntheticLambda0 impl
         SolidColor solidColor2 = new SolidColor(ColorKt.Color(4294967295L), null);
         StrokeCap.Companion.getClass();
         StrokeJoin.Companion.getClass();
-        PathBuilder m = EqualizerPlayingKt$$ExternalSyntheticOutline0.m(PathFillType.Companion, 26.007f, 12.0381f);
-        m.curveTo(25.7098f, 12.0381f, 25.4126f, 12.1253f, 25.1246f, 12.2946f);
-        m.lineTo(15.4844f, 18.8183f);
-        m.curveTo(15.4587f, 18.8334f, 15.4404f, 18.8518f, 15.4184f, 18.8686f);
-        m.lineTo(15.4184f, 12.8762f);
-        m.curveTo(15.4184f, 12.1822f, 14.802f, 11.619f, 14.0425f, 11.619f);
-        m.curveTo(13.2812f, 11.619f, 12.6667f, 12.1822f, 12.6667f, 12.8762f);
-        m.lineTo(12.6667f, 27.1238f);
-        m.curveTo(12.6667f, 27.8178f, 13.2812f, 28.381f, 14.0425f, 28.381f);
-        m.curveTo(14.802f, 28.381f, 15.4184f, 27.8178f, 15.4184f, 27.1238f);
-        m.lineTo(15.4184f, 21.1298f);
-        m.curveTo(15.4404f, 21.1465f, 15.4587f, 21.165f, 15.4844f, 21.18f);
-        m.lineTo(25.1246f, 27.7054f);
-        m.curveTo(25.4145f, 27.8747f, 25.7098f, 27.9619f, 26.007f, 27.9619f);
-        m.curveTo(26.6674f, 27.9619f, 27.3333f, 27.4959f, 27.3333f, 26.6042f);
-        m.lineTo(27.3333f, 13.3958f);
-        m.curveTo(27.3333f, 12.5041f, 26.6674f, 12.0381f, 26.007f, 12.0381f);
-        builder.m565addPathoIyEayM("", m._nodes, 0, solidColor, 1.0f, solidColor2, 1.0f, 0.2f, 0, 0, 4.0f, 0.0f, 1.0f, 0.0f);
+        PathBuilder pathBuilderM = EqualizerPlayingKt$$ExternalSyntheticOutline0.m(PathFillType.Companion, 26.007f, 12.0381f);
+        pathBuilderM.curveTo(25.7098f, 12.0381f, 25.4126f, 12.1253f, 25.1246f, 12.2946f);
+        pathBuilderM.lineTo(15.4844f, 18.8183f);
+        pathBuilderM.curveTo(15.4587f, 18.8334f, 15.4404f, 18.8518f, 15.4184f, 18.8686f);
+        pathBuilderM.lineTo(15.4184f, 12.8762f);
+        pathBuilderM.curveTo(15.4184f, 12.1822f, 14.802f, 11.619f, 14.0425f, 11.619f);
+        pathBuilderM.curveTo(13.2812f, 11.619f, 12.6667f, 12.1822f, 12.6667f, 12.8762f);
+        pathBuilderM.lineTo(12.6667f, 27.1238f);
+        pathBuilderM.curveTo(12.6667f, 27.8178f, 13.2812f, 28.381f, 14.0425f, 28.381f);
+        pathBuilderM.curveTo(14.802f, 28.381f, 15.4184f, 27.8178f, 15.4184f, 27.1238f);
+        pathBuilderM.lineTo(15.4184f, 21.1298f);
+        pathBuilderM.curveTo(15.4404f, 21.1465f, 15.4587f, 21.165f, 15.4844f, 21.18f);
+        pathBuilderM.lineTo(25.1246f, 27.7054f);
+        pathBuilderM.curveTo(25.4145f, 27.8747f, 25.7098f, 27.9619f, 26.007f, 27.9619f);
+        pathBuilderM.curveTo(26.6674f, 27.9619f, 27.3333f, 27.4959f, 27.3333f, 26.6042f);
+        pathBuilderM.lineTo(27.3333f, 13.3958f);
+        pathBuilderM.curveTo(27.3333f, 12.5041f, 26.6674f, 12.0381f, 26.007f, 12.0381f);
+        builder.m567addPathoIyEayM("", pathBuilderM._nodes, 0, solidColor, 1.0f, solidColor2, 1.0f, 0.2f, 0, 0, 4.0f, 0.0f, 1.0f, 0.0f);
         return builder.build();
     }
 }

@@ -12,7 +12,6 @@ import com.airbnb.lottie.value.Keyframe;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ShapeKeyframeAnimation extends BaseKeyframeAnimation {
     public List shapeModifiers;
@@ -63,13 +62,13 @@ public class ShapeKeyframeAnimation extends BaseKeyframeAnimation {
         if (((ArrayList) shapeData2.curves).size() != ((ArrayList) shapeData3.curves).size()) {
             Logger.warning("Curves must have the same number of control points. Shape 1: " + ((ArrayList) shapeData2.curves).size() + "\tShape 2: " + ((ArrayList) shapeData3.curves).size());
         }
-        int min = Math.min(((ArrayList) shapeData2.curves).size(), ((ArrayList) shapeData3.curves).size());
-        if (((ArrayList) shapeData4.curves).size() < min) {
-            for (int size = ((ArrayList) shapeData4.curves).size(); size < min; size++) {
+        int iMin = Math.min(((ArrayList) shapeData2.curves).size(), ((ArrayList) shapeData3.curves).size());
+        if (((ArrayList) shapeData4.curves).size() < iMin) {
+            for (int size = ((ArrayList) shapeData4.curves).size(); size < iMin; size++) {
                 ((ArrayList) shapeData4.curves).add(new CubicCurveData());
             }
-        } else if (((ArrayList) shapeData4.curves).size() > min) {
-            for (int size2 = ((ArrayList) shapeData4.curves).size() - 1; size2 >= min; size2--) {
+        } else if (((ArrayList) shapeData4.curves).size() > iMin) {
+            for (int size2 = ((ArrayList) shapeData4.curves).size() - 1; size2 >= iMin; size2--) {
                 ArrayList arrayList = (ArrayList) shapeData4.curves;
                 arrayList.remove(arrayList.size() - 1);
             }
@@ -102,8 +101,8 @@ public class ShapeKeyframeAnimation extends BaseKeyframeAnimation {
                 roundedCornersContent.getClass();
                 ArrayList arrayList2 = (ArrayList) shapeData4.curves;
                 if (arrayList2.size() > 2) {
-                    float floatValue = ((Float) roundedCornersContent.roundedCorners.getValue()).floatValue();
-                    if (floatValue != 0.0f) {
+                    float fFloatValue = ((Float) roundedCornersContent.roundedCorners.getValue()).floatValue();
+                    if (fFloatValue != 0.0f) {
                         List list3 = shapeData4.curves;
                         boolean z5 = shapeData4.closed;
                         ArrayList arrayList3 = (ArrayList) list3;
@@ -155,40 +154,40 @@ public class ShapeKeyframeAnimation extends BaseKeyframeAnimation {
                                 float f7 = pointF15.x - f3;
                                 float f8 = pointF15.y - f5;
                                 shapeData = shapeData4;
-                                f2 = floatValue;
-                                float hypot = (float) Math.hypot(f4, f6);
-                                float hypot2 = (float) Math.hypot(f7, f8);
-                                float min2 = Math.min(f2 / hypot, 0.5f);
-                                float min3 = Math.min(f2 / hypot2, 0.5f);
+                                f2 = fFloatValue;
+                                float fHypot = (float) Math.hypot(f4, f6);
+                                float fHypot2 = (float) Math.hypot(f7, f8);
+                                float fMin = Math.min(f2 / fHypot, 0.5f);
+                                float fMin2 = Math.min(f2 / fHypot2, 0.5f);
                                 float f9 = pointF11.x;
-                                float m$1 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(pointF14.x, f9, min2, f9);
+                                float fM$1 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(pointF14.x, f9, fMin, f9);
                                 float f10 = pointF11.y;
-                                float m$12 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(pointF14.y, f10, min2, f10);
-                                float m$13 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(pointF15.x, f9, min3, f9);
-                                float m$14 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(pointF15.y, f10, min3, f10);
-                                float f11 = m$1 - ((m$1 - f9) * 0.5519f);
-                                float f12 = m$12 - ((m$12 - f10) * 0.5519f);
-                                float f13 = m$13 - ((m$13 - f9) * 0.5519f);
-                                float f14 = m$14 - ((m$14 - f10) * 0.5519f);
+                                float fM$12 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(pointF14.y, f10, fMin, f10);
+                                float fM$13 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(pointF15.x, f9, fMin2, f9);
+                                float fM$14 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(pointF15.y, f10, fMin2, f10);
+                                float f11 = fM$1 - ((fM$1 - f9) * 0.5519f);
+                                float f12 = fM$12 - ((fM$12 - f10) * 0.5519f);
+                                float f13 = fM$13 - ((fM$13 - f9) * 0.5519f);
+                                float f14 = fM$14 - ((fM$14 - f10) * 0.5519f);
                                 ?? r15 = (ArrayList) list4;
                                 list = list4;
                                 CubicCurveData cubicCurveData8 = (CubicCurveData) r15.get(RoundedCornersContent.floorMod(r102 - 1, r15.size()));
                                 CubicCurveData cubicCurveData9 = (CubicCurveData) r15.get(r102);
                                 z = z6;
-                                cubicCurveData8.controlPoint2.set(m$1, m$12);
-                                cubicCurveData8.vertex.set(m$1, m$12);
+                                cubicCurveData8.controlPoint2.set(fM$1, fM$12);
+                                cubicCurveData8.vertex.set(fM$1, fM$12);
                                 if (r9 == 0) {
-                                    shapeData6.setInitialPoint(m$1, m$12);
+                                    shapeData6.setInitialPoint(fM$1, fM$12);
                                 }
                                 cubicCurveData9.controlPoint1.set(f11, f12);
                                 CubicCurveData cubicCurveData10 = (CubicCurveData) r15.get(r102 + 1);
                                 cubicCurveData9.controlPoint2.set(f13, f14);
-                                cubicCurveData9.vertex.set(m$13, m$14);
-                                cubicCurveData10.controlPoint1.set(m$13, m$14);
+                                cubicCurveData9.vertex.set(fM$13, fM$14);
+                                cubicCurveData10.controlPoint1.set(fM$13, fM$14);
                                 r102 += 2;
                             } else {
                                 shapeData = shapeData4;
-                                f2 = floatValue;
+                                f2 = fFloatValue;
                                 list = list4;
                                 z = z6;
                                 ?? r6 = (ArrayList) list;
@@ -205,7 +204,7 @@ public class ShapeKeyframeAnimation extends BaseKeyframeAnimation {
                             size4 = i2;
                             r3 = list5;
                             shapeData4 = shapeData;
-                            floatValue = f2;
+                            fFloatValue = f2;
                             list4 = list;
                             z6 = z;
                             r9++;

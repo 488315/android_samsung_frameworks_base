@@ -202,76 +202,46 @@ public final class PhysicalChannelConfig implements Parcelable {
         this.mUplinkFrequency = AccessNetworkUtils.getFrequencyFromArfcn(this.mBand, this.mUplinkChannelNumber, true);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0049  */
-    /* JADX WARN: Removed duplicated region for block: B:21:? A[RETURN, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:20:0x0034 A[FALL_THROUGH] */
+    /* JADX WARN: Removed duplicated region for block: B:21:0x003d  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     private void setFrequencyRange() {
-        /*
-            r2 = this;
-            int r0 = r2.mFrequencyRange
-            if (r0 == 0) goto L5
-            goto L51
-        L5:
-            int r0 = r2.mNetworkType
-            r1 = 1
-            if (r0 == r1) goto L3d
-            r1 = 2
-            if (r0 == r1) goto L3d
-            r1 = 3
-            if (r0 == r1) goto L34
-            r1 = 13
-            if (r0 == r1) goto L2b
-            r1 = 20
-            if (r0 == r1) goto L22
-            switch(r0) {
-                case 8: goto L34;
-                case 9: goto L34;
-                case 10: goto L34;
-                default: goto L1b;
+        if (this.mFrequencyRange != 0) {
+            return;
+        }
+        int i = this.mNetworkType;
+        if (i == 1 || i == 2) {
+            this.mFrequencyRange = AccessNetworkUtils.getFrequencyRangeGroupFromGeranBand(this.mBand);
+        } else if (i == 3) {
+            this.mFrequencyRange = AccessNetworkUtils.getFrequencyRangeGroupFromUtranBand(this.mBand);
+        } else if (i == 13) {
+            this.mFrequencyRange = AccessNetworkUtils.getFrequencyRangeGroupFromEutranBand(this.mBand);
+        } else if (i == 20) {
+            this.mFrequencyRange = AccessNetworkUtils.getFrequencyRangeGroupFromNrBand(this.mBand);
+        } else {
+            switch (i) {
+                default:
+                    switch (i) {
+                        case 15:
+                        case 17:
+                            break;
+                        case 16:
+                            break;
+                        default:
+                            this.mFrequencyRange = 0;
+                            break;
+                    }
+                case 8:
+                case 9:
+                case 10:
+                    break;
             }
-        L1b:
-            switch(r0) {
-                case 15: goto L34;
-                case 16: goto L3d;
-                case 17: goto L34;
-                default: goto L1e;
-            }
-        L1e:
-            r0 = 0
-            r2.mFrequencyRange = r0
-            goto L45
-        L22:
-            int r0 = r2.mBand
-            int r0 = android.telephony.AccessNetworkUtils.getFrequencyRangeGroupFromNrBand(r0)
-            r2.mFrequencyRange = r0
-            goto L45
-        L2b:
-            int r0 = r2.mBand
-            int r0 = android.telephony.AccessNetworkUtils.getFrequencyRangeGroupFromEutranBand(r0)
-            r2.mFrequencyRange = r0
-            goto L45
-        L34:
-            int r0 = r2.mBand
-            int r0 = android.telephony.AccessNetworkUtils.getFrequencyRangeGroupFromUtranBand(r0)
-            r2.mFrequencyRange = r0
-            goto L45
-        L3d:
-            int r0 = r2.mBand
-            int r0 = android.telephony.AccessNetworkUtils.getFrequencyRangeGroupFromGeranBand(r0)
-            r2.mFrequencyRange = r0
-        L45:
-            int r0 = r2.mFrequencyRange
-            if (r0 != 0) goto L51
-            int r0 = r2.mDownlinkFrequency
-            int r0 = android.telephony.AccessNetworkUtils.getFrequencyRangeFromArfcn(r0)
-            r2.mFrequencyRange = r0
-        L51:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.telephony.PhysicalChannelConfig.setFrequencyRange():void");
+        }
+        if (this.mFrequencyRange == 0) {
+            this.mFrequencyRange = AccessNetworkUtils.getFrequencyRangeFromArfcn(this.mDownlinkFrequency);
+        }
     }
 
     public boolean equals(Object obj) {
@@ -303,9 +273,9 @@ public final class PhysicalChannelConfig implements Parcelable {
         this.mFrequencyRange = parcel.readInt();
         this.mContextIds = parcel.createIntArray();
         this.mPhysicalCellId = parcel.readInt();
-        int readInt = parcel.readInt();
-        this.mBand = readInt;
-        if (readInt > 0) {
+        int i = parcel.readInt();
+        this.mBand = i;
+        if (i > 0) {
             setDownlinkFrequency();
             setUplinkFrequency();
             setFrequencyRange();

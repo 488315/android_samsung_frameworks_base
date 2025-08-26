@@ -2,6 +2,7 @@ package com.android.wm.shell.windowdecor;
 
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.Region;
@@ -43,7 +44,6 @@ import com.android.wm.shell.windowdecor.DragResizeInputListener;
 import com.android.wm.shell.windowdecor.common.viewhost.WindowDecorViewHostSupplier;
 import com.android.wm.shell.windowdecor.extension.TaskInfoKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class CaptionWindowDecorViewModel implements WindowDecorViewModel, FocusTransitionListener {
     public final ShellExecutor mBgExecutor;
@@ -68,7 +68,6 @@ public class CaptionWindowDecorViewModel implements WindowDecorViewModel, FocusT
     public final SparseArray mWindowDecorByTaskId = new SparseArray();
     public final AnonymousClass1 mGestureExclusionListener = new AnonymousClass1();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.windowdecor.CaptionWindowDecorViewModel$1, reason: invalid class name */
     public class AnonymousClass1 extends ISystemGestureExclusionListener.Stub {
         public AnonymousClass1() {
@@ -80,8 +79,8 @@ public class CaptionWindowDecorViewModel implements WindowDecorViewModel, FocusT
             }
             CaptionWindowDecorViewModel.this.mMainExecutor.execute(new Runnable() { // from class: com.android.wm.shell.windowdecor.CaptionWindowDecorViewModel$1$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
-                public final void run() {
-                    CaptionWindowDecorViewModel.AnonymousClass1 anonymousClass1 = CaptionWindowDecorViewModel.AnonymousClass1.this;
+                public final void run() throws Resources.NotFoundException {
+                    CaptionWindowDecorViewModel.AnonymousClass1 anonymousClass1 = this.f$0;
                     Region region3 = region;
                     int i2 = i;
                     CaptionWindowDecorViewModel.this.mExclusionRegion.set(region3);
@@ -100,7 +99,6 @@ public class CaptionWindowDecorViewModel implements WindowDecorViewModel, FocusT
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CaptionTouchEventListener implements View.OnClickListener, View.OnTouchListener, DragDetector.MotionEventHandler {
         public final int mDisplayId;
         public final DragDetector mDragDetector;
@@ -138,8 +136,8 @@ public class CaptionWindowDecorViewModel implements WindowDecorViewModel, FocusT
                     if (dragResizeInputListener != null && (taskResizeInputEventReceiver = dragResizeInputListener.mInputEventReceiver) != null && taskResizeInputEventReceiver.mShouldHandleEvents) {
                         return true;
                     }
-                    int findPointerIndex = motionEvent.findPointerIndex(this.mDragPointerId);
-                    this.mDragPositioningCallback.onDragPositioningMove(motionEvent.getRawX(findPointerIndex), motionEvent.getRawY(findPointerIndex), motionEvent.getDisplayId());
+                    int iFindPointerIndex = motionEvent.findPointerIndex(this.mDragPointerId);
+                    this.mDragPositioningCallback.onDragPositioningMove(motionEvent.getRawX(iFindPointerIndex), motionEvent.getRawY(iFindPointerIndex), motionEvent.getDisplayId());
                     this.mIsDragging = true;
                     return true;
                 }
@@ -150,28 +148,28 @@ public class CaptionWindowDecorViewModel implements WindowDecorViewModel, FocusT
             if (motionEvent.findPointerIndex(this.mDragPointerId) == -1) {
                 this.mDragPointerId = motionEvent.getPointerId(0);
             }
-            int findPointerIndex2 = motionEvent.findPointerIndex(this.mDragPointerId);
-            Rect onDragPositioningEnd = this.mDragPositioningCallback.onDragPositioningEnd(motionEvent.getRawX(findPointerIndex2), motionEvent.getRawY(findPointerIndex2), motionEvent.getDisplayId());
+            int iFindPointerIndex2 = motionEvent.findPointerIndex(this.mDragPointerId);
+            Rect rectOnDragPositioningEnd = this.mDragPositioningCallback.onDragPositioningEnd(motionEvent.getRawX(iFindPointerIndex2), motionEvent.getRawY(iFindPointerIndex2), motionEvent.getDisplayId());
             CaptionWindowDecoration captionWindowDecoration = (CaptionWindowDecoration) CaptionWindowDecorViewModel.this.mWindowDecorByTaskId.get(this.mTaskId);
             Context displayContext = captionWindowDecoration.mDisplayController.getDisplayContext(captionWindowDecoration.mTaskInfo.displayId);
             if (displayContext == null) {
                 rect = new Rect();
             } else {
-                int loadDimensionPixelSize = WindowDecoration.loadDimensionPixelSize(captionWindowDecoration.mContext.getResources(), R.dimen.caption_left_buttons_width);
-                int loadDimensionPixelSize2 = WindowDecoration.loadDimensionPixelSize(captionWindowDecoration.mContext.getResources(), displayContext.getResources().getConfiguration().smallestScreenWidthDp >= 600 ? R.dimen.freeform_required_visible_empty_space_in_header : R.dimen.small_screen_required_visible_empty_space_in_header);
-                int loadDimensionPixelSize3 = WindowDecoration.loadDimensionPixelSize(captionWindowDecoration.mContext.getResources(), R.dimen.caption_right_buttons_width);
-                int width = captionWindowDecoration.mTaskInfo.configuration.windowConfiguration.getBounds().width();
+                int iLoadDimensionPixelSize = WindowDecoration.loadDimensionPixelSize(captionWindowDecoration.mContext.getResources(), R.dimen.caption_left_buttons_width);
+                int iLoadDimensionPixelSize2 = WindowDecoration.loadDimensionPixelSize(captionWindowDecoration.mContext.getResources(), displayContext.getResources().getConfiguration().smallestScreenWidthDp >= 600 ? R.dimen.freeform_required_visible_empty_space_in_header : R.dimen.small_screen_required_visible_empty_space_in_header);
+                int iLoadDimensionPixelSize3 = WindowDecoration.loadDimensionPixelSize(captionWindowDecoration.mContext.getResources(), R.dimen.caption_right_buttons_width);
+                int iWidth = captionWindowDecoration.mTaskInfo.configuration.windowConfiguration.getBounds().width();
                 DisplayLayout displayLayout = captionWindowDecoration.mDisplayController.getDisplayLayout(captionWindowDecoration.mTaskInfo.displayId);
                 int i = displayLayout.mWidth;
                 Rect rect2 = new Rect();
                 displayLayout.getStableBounds(rect2, false);
-                int i2 = loadDimensionPixelSize + loadDimensionPixelSize3 + loadDimensionPixelSize2;
-                rect = new Rect(i2 > width ? 0 : (-width) + loadDimensionPixelSize2 + loadDimensionPixelSize3, rect2.top, i2 > width ? i - width : (i - loadDimensionPixelSize2) - loadDimensionPixelSize, rect2.bottom - loadDimensionPixelSize2);
+                int i2 = iLoadDimensionPixelSize + iLoadDimensionPixelSize3 + iLoadDimensionPixelSize2;
+                rect = new Rect(i2 > iWidth ? 0 : (-iWidth) + iLoadDimensionPixelSize2 + iLoadDimensionPixelSize3, rect2.top, i2 > iWidth ? i - iWidth : (i - iLoadDimensionPixelSize2) - iLoadDimensionPixelSize, rect2.bottom - iLoadDimensionPixelSize2);
             }
-            DragPositioningCallbackUtility.snapTaskBoundsIfNecessary(onDragPositioningEnd, rect);
-            if (onDragPositioningEnd != runningTaskInfo.configuration.windowConfiguration.getBounds()) {
+            DragPositioningCallbackUtility.snapTaskBoundsIfNecessary(rectOnDragPositioningEnd, rect);
+            if (rectOnDragPositioningEnd != runningTaskInfo.configuration.windowConfiguration.getBounds()) {
                 WindowContainerTransaction windowContainerTransaction = new WindowContainerTransaction();
-                windowContainerTransaction.setBounds(runningTaskInfo.token, onDragPositioningEnd);
+                windowContainerTransaction.setBounds(runningTaskInfo.token, rectOnDragPositioningEnd);
                 CaptionWindowDecorViewModel.this.mTransitions.startTransition(6, windowContainerTransaction, null);
             }
             boolean z = this.mIsDragging;
@@ -233,15 +231,15 @@ public class CaptionWindowDecorViewModel implements WindowDecorViewModel, FocusT
                 boolean z = actionMasked == 0;
                 boolean z2 = actionMasked == 3 || actionMasked == 1;
                 if (z) {
-                    boolean contains = captionWindowDecoration.mResult.mCustomizableCaptionRegion.contains((int) motionEvent.getRawX(), (int) motionEvent.getRawY());
-                    boolean contains2 = CaptionWindowDecorViewModel.this.mExclusionRegion.contains((int) motionEvent.getRawX(), (int) motionEvent.getRawY());
-                    boolean isTransparentCaptionBarAppearance = TaskInfoKt.isTransparentCaptionBarAppearance(captionWindowDecoration.mTaskInfo);
+                    boolean zContains = captionWindowDecoration.mResult.mCustomizableCaptionRegion.contains((int) motionEvent.getRawX(), (int) motionEvent.getRawY());
+                    boolean zContains2 = CaptionWindowDecorViewModel.this.mExclusionRegion.contains((int) motionEvent.getRawX(), (int) motionEvent.getRawY());
+                    boolean zIsTransparentCaptionBarAppearance = TaskInfoKt.isTransparentCaptionBarAppearance(captionWindowDecoration.mTaskInfo);
                     int[] iArr = new int[2];
                     view.getLocationInWindow(iArr);
                     Point point = new Point(iArr[0], iArr[1]);
                     DragResizeInputListener dragResizeInputListener = captionWindowDecoration.mDragResizeListener;
                     boolean z3 = (dragResizeInputListener == null || (taskResizeInputEventReceiver = dragResizeInputListener.mInputEventReceiver) == null || !taskResizeInputEventReceiver.mDragResizeWindowGeometry.shouldHandleEvent(motionEvent, point)) ? false : true;
-                    CaptionWindowDecorViewModel.this.mShouldPilferCaptionEvents = ((contains && contains2 && isTransparentCaptionBarAppearance) || z3) ? false : true;
+                    CaptionWindowDecorViewModel.this.mShouldPilferCaptionEvents = ((zContains && zContains2 && zIsTransparentCaptionBarAppearance) || z3) ? false : true;
                 }
                 CaptionWindowDecorViewModel captionWindowDecorViewModel = CaptionWindowDecorViewModel.this;
                 if (captionWindowDecorViewModel.mShouldPilferCaptionEvents) {
@@ -291,7 +289,7 @@ public class CaptionWindowDecorViewModel implements WindowDecorViewModel, FocusT
         shellInit.addInitCallback(new Runnable() { // from class: com.android.wm.shell.windowdecor.CaptionWindowDecorViewModel$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                CaptionWindowDecorViewModel captionWindowDecorViewModel = CaptionWindowDecorViewModel.this;
+                CaptionWindowDecorViewModel captionWindowDecorViewModel = this.f$0;
                 try {
                     captionWindowDecorViewModel.mWindowManager.registerSystemGestureExclusionListener(captionWindowDecorViewModel.mGestureExclusionListener, captionWindowDecorViewModel.mContext.getDisplayId());
                 } catch (RemoteException e) {
@@ -302,15 +300,15 @@ public class CaptionWindowDecorViewModel implements WindowDecorViewModel, FocusT
         }, this);
     }
 
-    public final void createWindowDecoration$1(ActivityManager.RunningTaskInfo runningTaskInfo, SurfaceControl surfaceControl, SurfaceControl.Transaction transaction, SurfaceControl.Transaction transaction2) {
+    public final void createWindowDecoration$1(ActivityManager.RunningTaskInfo runningTaskInfo, SurfaceControl surfaceControl, SurfaceControl.Transaction transaction, SurfaceControl.Transaction transaction2) throws Resources.NotFoundException {
         CaptionWindowDecoration captionWindowDecoration = (CaptionWindowDecoration) this.mWindowDecorByTaskId.get(runningTaskInfo.taskId);
         if (captionWindowDecoration != null) {
             captionWindowDecoration.close();
         }
         Context context = this.mContext;
-        Context createContextAsUser = context.createContextAsUser(UserHandle.of(runningTaskInfo.userId), 0);
+        Context contextCreateContextAsUser = context.createContextAsUser(UserHandle.of(runningTaskInfo.userId), 0);
         Choreographer choreographer = this.mMainChoreographer;
-        CaptionWindowDecoration captionWindowDecoration2 = new CaptionWindowDecoration(context, createContextAsUser, this.mDisplayController, this.mTaskOrganizer, runningTaskInfo, surfaceControl, this.mMainHandler, this.mMainExecutor, this.mBgExecutor, choreographer, this.mSyncQueue, this.mWindowDecorViewHostSupplier, this.mDesktopConfig);
+        CaptionWindowDecoration captionWindowDecoration2 = new CaptionWindowDecoration(context, contextCreateContextAsUser, this.mDisplayController, this.mTaskOrganizer, runningTaskInfo, surfaceControl, this.mMainHandler, this.mMainExecutor, this.mBgExecutor, choreographer, this.mSyncQueue, this.mWindowDecorViewHostSupplier, this.mDesktopConfig);
         this.mWindowDecorByTaskId.put(runningTaskInfo.taskId, captionWindowDecoration2);
         FluidResizeTaskPositioner fluidResizeTaskPositioner = new FluidResizeTaskPositioner(this.mTaskOrganizer, this.mTransitions, captionWindowDecoration2, this.mDisplayController, this.mDesktopState);
         CaptionTouchEventListener captionTouchEventListener = new CaptionTouchEventListener(this, runningTaskInfo, fluidResizeTaskPositioner);
@@ -339,7 +337,7 @@ public class CaptionWindowDecorViewModel implements WindowDecorViewModel, FocusT
     }
 
     @Override // com.android.wm.shell.windowdecor.WindowDecorViewModel
-    public final void onTaskChanging(ActivityManager.RunningTaskInfo runningTaskInfo, SurfaceControl surfaceControl, SurfaceControl.Transaction transaction, SurfaceControl.Transaction transaction2) {
+    public final void onTaskChanging(ActivityManager.RunningTaskInfo runningTaskInfo, SurfaceControl surfaceControl, SurfaceControl.Transaction transaction, SurfaceControl.Transaction transaction2) throws Resources.NotFoundException {
         CaptionWindowDecoration captionWindowDecoration = (CaptionWindowDecoration) this.mWindowDecorByTaskId.get(runningTaskInfo.taskId);
         if (!shouldShowWindowDecor$1(runningTaskInfo)) {
             if (captionWindowDecoration != null) {
@@ -353,7 +351,7 @@ public class CaptionWindowDecorViewModel implements WindowDecorViewModel, FocusT
     }
 
     @Override // com.android.wm.shell.windowdecor.WindowDecorViewModel
-    public final void onTaskClosing(ActivityManager.RunningTaskInfo runningTaskInfo, SurfaceControl.Transaction transaction, SurfaceControl.Transaction transaction2) {
+    public final void onTaskClosing(ActivityManager.RunningTaskInfo runningTaskInfo, SurfaceControl.Transaction transaction, SurfaceControl.Transaction transaction2) throws Resources.NotFoundException {
         CaptionWindowDecoration captionWindowDecoration = (CaptionWindowDecoration) this.mWindowDecorByTaskId.get(runningTaskInfo.taskId);
         if (captionWindowDecoration == null) {
             return;
@@ -362,7 +360,7 @@ public class CaptionWindowDecorViewModel implements WindowDecorViewModel, FocusT
     }
 
     @Override // com.android.wm.shell.windowdecor.WindowDecorViewModel
-    public final void onTaskInfoChanged(ActivityManager.RunningTaskInfo runningTaskInfo) {
+    public final void onTaskInfoChanged(ActivityManager.RunningTaskInfo runningTaskInfo) throws Resources.NotFoundException {
         CaptionWindowDecoration captionWindowDecoration = (CaptionWindowDecoration) this.mWindowDecorByTaskId.get(runningTaskInfo.taskId);
         if (captionWindowDecoration == null) {
             return;
@@ -375,7 +373,7 @@ public class CaptionWindowDecorViewModel implements WindowDecorViewModel, FocusT
     }
 
     @Override // com.android.wm.shell.windowdecor.WindowDecorViewModel
-    public final boolean onTaskOpening(ActivityManager.RunningTaskInfo runningTaskInfo, SurfaceControl surfaceControl, SurfaceControl.Transaction transaction, SurfaceControl.Transaction transaction2) {
+    public final boolean onTaskOpening(ActivityManager.RunningTaskInfo runningTaskInfo, SurfaceControl surfaceControl, SurfaceControl.Transaction transaction, SurfaceControl.Transaction transaction2) throws Resources.NotFoundException {
         if (!shouldShowWindowDecor$1(runningTaskInfo)) {
             return false;
         }

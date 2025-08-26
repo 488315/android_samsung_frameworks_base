@@ -111,7 +111,7 @@ public final class KeyChain {
     }
 
     public static void choosePrivateKeyAlias(Activity activity, KeyChainAliasCallback keyChainAliasCallback, String[] strArr, Principal[] principalArr, String str, int i, String str2) {
-        Uri uri;
+        Uri uriBuild;
         String str3;
         if (str != null) {
             Uri.Builder builder = new Uri.Builder();
@@ -123,11 +123,11 @@ public final class KeyChain {
                 str3 = "";
             }
             sb.append(str3);
-            uri = builder.authority(sb.toString()).build();
+            uriBuild = builder.authority(sb.toString()).build();
         } else {
-            uri = null;
+            uriBuild = null;
         }
-        choosePrivateKeyAlias(activity, keyChainAliasCallback, strArr, principalArr, uri, str2);
+        choosePrivateKeyAlias(activity, keyChainAliasCallback, strArr, principalArr, uriBuild, str2);
     }
 
     public static void choosePrivateKeyAlias(Activity activity, KeyChainAliasCallback keyChainAliasCallback, String[] strArr, Principal[] principalArr, Uri uri, String str) {
@@ -159,59 +159,59 @@ public final class KeyChain {
 
     public static boolean isCredentialManagementApp(Context context) {
         RemoteException e;
-        boolean z;
+        boolean zIsCredentialManagementApp;
         try {
             try {
-                KeyChainConnection bind = bind(context);
+                KeyChainConnection keyChainConnectionBind = bind(context);
                 try {
-                    z = bind.getService().isCredentialManagementApp(context.getPackageName());
-                    if (bind == null) {
-                        return z;
+                    zIsCredentialManagementApp = keyChainConnectionBind.getService().isCredentialManagementApp(context.getPackageName());
+                    if (keyChainConnectionBind == null) {
+                        return zIsCredentialManagementApp;
                     }
                     try {
-                        bind.close();
-                        return z;
+                        keyChainConnectionBind.close();
+                        return zIsCredentialManagementApp;
                     } catch (RemoteException e2) {
                         e = e2;
                         e.rethrowAsRuntimeException();
-                        return z;
+                        return zIsCredentialManagementApp;
                     }
                 } catch (Throwable th) {
-                    if (bind != null) {
+                    if (keyChainConnectionBind != null) {
                         try {
-                            bind.close();
+                            keyChainConnectionBind.close();
                         } catch (Throwable th2) {
                             th.addSuppressed(th2);
                         }
                     }
                     throw th;
                 }
-            } catch (InterruptedException e3) {
-                throw new RuntimeException("Interrupted while checking whether the caller is the credential management app.", e3);
-            } catch (SecurityException unused) {
-                return false;
+            } catch (RemoteException e3) {
+                e = e3;
+                zIsCredentialManagementApp = false;
             }
-        } catch (RemoteException e4) {
-            e = e4;
-            z = false;
+        } catch (InterruptedException e4) {
+            throw new RuntimeException("Interrupted while checking whether the caller is the credential management app.", e4);
+        } catch (SecurityException unused) {
+            return false;
         }
     }
 
     public static AppUriAuthenticationPolicy getCredentialManagementAppPolicy(Context context) throws SecurityException {
-        AppUriAuthenticationPolicy appUriAuthenticationPolicy = null;
+        AppUriAuthenticationPolicy credentialManagementAppPolicy = null;
         try {
-            KeyChainConnection bind = bind(context);
+            KeyChainConnection keyChainConnectionBind = bind(context);
             try {
-                appUriAuthenticationPolicy = bind.getService().getCredentialManagementAppPolicy();
-                if (bind != null) {
-                    bind.close();
+                credentialManagementAppPolicy = keyChainConnectionBind.getService().getCredentialManagementAppPolicy();
+                if (keyChainConnectionBind != null) {
+                    keyChainConnectionBind.close();
                 }
-                return appUriAuthenticationPolicy;
+                return credentialManagementAppPolicy;
             } finally {
             }
         } catch (RemoteException e) {
             e.rethrowAsRuntimeException();
-            return appUriAuthenticationPolicy;
+            return credentialManagementAppPolicy;
         } catch (InterruptedException e2) {
             throw new RuntimeException("Interrupted while getting credential management app policy.", e2);
         }
@@ -219,17 +219,17 @@ public final class KeyChain {
 
     public static boolean setCredentialManagementApp(Context context, String str, AppUriAuthenticationPolicy appUriAuthenticationPolicy) {
         try {
-            KeyChainConnection bind = bind(context);
+            KeyChainConnection keyChainConnectionBind = bind(context);
             try {
-                bind.getService().setCredentialManagementApp(str, appUriAuthenticationPolicy);
-                if (bind != null) {
-                    bind.close();
+                keyChainConnectionBind.getService().setCredentialManagementApp(str, appUriAuthenticationPolicy);
+                if (keyChainConnectionBind != null) {
+                    keyChainConnectionBind.close();
                 }
                 return true;
             } catch (Throwable th) {
-                if (bind != null) {
+                if (keyChainConnectionBind != null) {
                     try {
-                        bind.close();
+                        keyChainConnectionBind.close();
                     } catch (Throwable th2) {
                         th.addSuppressed(th2);
                     }
@@ -245,17 +245,17 @@ public final class KeyChain {
 
     public static boolean removeCredentialManagementApp(Context context) {
         try {
-            KeyChainConnection bind = bind(context);
+            KeyChainConnection keyChainConnectionBind = bind(context);
             try {
-                bind.getService().removeCredentialManagementApp();
-                if (bind != null) {
-                    bind.close();
+                keyChainConnectionBind.getService().removeCredentialManagementApp();
+                if (keyChainConnectionBind != null) {
+                    keyChainConnectionBind.close();
                 }
                 return true;
             } catch (Throwable th) {
-                if (bind != null) {
+                if (keyChainConnectionBind != null) {
                     try {
-                        bind.close();
+                        keyChainConnectionBind.close();
                     } catch (Throwable th2) {
                         th.addSuppressed(th2);
                     }
@@ -282,7 +282,7 @@ public final class KeyChain {
         }
     }
 
-    public static PrivateKey getPrivateKey(Context context, String str) throws KeyChainException, InterruptedException {
+    public static PrivateKey getPrivateKey(Context context, String str) throws InterruptedException, KeyChainException {
         KeyPair keyPair = getKeyPair(context, str);
         if (keyPair != null) {
             return keyPair.getPrivate();
@@ -307,7 +307,7 @@ public final class KeyChain {
         return String.format("ks2_keychain_grant_id:%016X", Long.valueOf(keyDescriptor.nspace));
     }
 
-    public static KeyPair getKeyPair(Context context, String str) throws KeyChainException, InterruptedException {
+    public static KeyPair getKeyPair(Context context, String str) throws InterruptedException, KeyChainException {
         if (str == null) {
             throw new NullPointerException("alias == null");
         }
@@ -323,24 +323,24 @@ public final class KeyChain {
             }
         }
         try {
-            KeyChainConnection bind = bind(context.getApplicationContext());
+            KeyChainConnection keyChainConnectionBind = bind(context.getApplicationContext());
             try {
-                String requestPrivateKey = bind.getService().requestPrivateKey(str);
-                if (bind != null) {
-                    bind.close();
+                String strRequestPrivateKey = keyChainConnectionBind.getService().requestPrivateKey(str);
+                if (keyChainConnectionBind != null) {
+                    keyChainConnectionBind.close();
                 }
-                if (requestPrivateKey == null) {
+                if (strRequestPrivateKey == null) {
                     return null;
                 }
                 try {
-                    return AndroidKeyStoreProvider.loadAndroidKeyStoreKeyPairFromKeystore(KeyStore2.getInstance(), getGrantDescriptor(requestPrivateKey));
+                    return AndroidKeyStoreProvider.loadAndroidKeyStoreKeyPairFromKeystore(KeyStore2.getInstance(), getGrantDescriptor(strRequestPrivateKey));
                 } catch (KeyPermanentlyInvalidatedException | UnrecoverableKeyException e) {
                     throw new KeyChainException(e);
                 }
             } catch (Throwable th) {
-                if (bind != null) {
+                if (keyChainConnectionBind != null) {
                     try {
-                        bind.close();
+                        keyChainConnectionBind.close();
                     } catch (Throwable th2) {
                         th.addSuppressed(th2);
                     }
@@ -354,7 +354,7 @@ public final class KeyChain {
         }
     }
 
-    public static X509Certificate[] getCertificateChain(Context context, String str) throws KeyChainException, InterruptedException {
+    public static X509Certificate[] getCertificateChain(Context context, String str) throws InterruptedException, KeyChainException {
         if (str == null) {
             throw new NullPointerException("alias == null");
         }
@@ -366,11 +366,11 @@ public final class KeyChain {
                 IEDMProxy service = EnterpriseDeviceManager.EDMProxyServiceHelper.getService();
                 if (service != null) {
                     try {
-                        byte[] ucmGetCertificateChain = service.ucmGetCertificateChain(str);
-                        if (ucmGetCertificateChain == null) {
+                        byte[] bArrUcmGetCertificateChain = service.ucmGetCertificateChain(str);
+                        if (bArrUcmGetCertificateChain == null) {
                             return null;
                         }
-                        List<Certificate> list = (List) CertificateFactory.getInstance("X.509").generateCertificates(new ByteArrayInputStream(ucmGetCertificateChain));
+                        List<Certificate> list = (List) CertificateFactory.getInstance("X.509").generateCertificates(new ByteArrayInputStream(bArrUcmGetCertificateChain));
                         X509Certificate[] x509CertificateArr = new X509Certificate[list.size()];
                         int i = 0;
                         for (Certificate certificate : list) {
@@ -392,19 +392,19 @@ public final class KeyChain {
             }
         }
         try {
-            KeyChainConnection bind = bind(context.getApplicationContext());
+            KeyChainConnection keyChainConnectionBind = bind(context.getApplicationContext());
             try {
-                IKeyChainService service2 = bind.getService();
+                IKeyChainService service2 = keyChainConnectionBind.getService();
                 byte[] certificate2 = service2.getCertificate(str);
                 if (certificate2 == null) {
-                    if (bind != null) {
-                        bind.close();
+                    if (keyChainConnectionBind != null) {
+                        keyChainConnectionBind.close();
                     }
                     return null;
                 }
                 byte[] caCertificates = service2.getCaCertificates(str);
-                if (bind != null) {
-                    bind.close();
+                if (keyChainConnectionBind != null) {
+                    keyChainConnectionBind.close();
                 }
                 try {
                     X509Certificate certificate3 = toCertificate(certificate2);
@@ -489,49 +489,17 @@ public final class KeyChain {
     public static String getWifiKeyGrantAsUser(Context context, UserHandle userHandle, String str) {
         try {
             try {
-                KeyChainConnection bindAsUser = bindAsUser(context.getApplicationContext(), userHandle);
+                KeyChainConnection keyChainConnectionBindAsUser = bindAsUser(context.getApplicationContext(), userHandle);
                 try {
-                    String wifiKeyGrantAsUser = bindAsUser.getService().getWifiKeyGrantAsUser(str);
-                    if (bindAsUser != null) {
-                        bindAsUser.close();
+                    String wifiKeyGrantAsUser = keyChainConnectionBindAsUser.getService().getWifiKeyGrantAsUser(str);
+                    if (keyChainConnectionBindAsUser != null) {
+                        keyChainConnectionBindAsUser.close();
                     }
                     return wifiKeyGrantAsUser;
                 } catch (Throwable th) {
-                    if (bindAsUser != null) {
+                    if (keyChainConnectionBindAsUser != null) {
                         try {
-                            bindAsUser.close();
-                        } catch (Throwable th2) {
-                            th.addSuppressed(th2);
-                        }
-                    }
-                    throw th;
-                }
-            } catch (RemoteException | RuntimeException e) {
-                Log.i(LOG, "Couldn't get grant for wifi", e);
-                return null;
-            }
-        } catch (InterruptedException e2) {
-            Thread.currentThread().interrupt();
-            Log.i(LOG, "Interrupted while getting grant for wifi", e2);
-            return null;
-        }
-    }
-
-    @SystemApi
-    public static boolean hasWifiKeyGrantAsUser(Context context, UserHandle userHandle, String str) {
-        try {
-            try {
-                KeyChainConnection bindAsUser = bindAsUser(context.getApplicationContext(), userHandle);
-                try {
-                    boolean hasGrant = bindAsUser.getService().hasGrant(1010, str);
-                    if (bindAsUser != null) {
-                        bindAsUser.close();
-                    }
-                    return hasGrant;
-                } catch (Throwable th) {
-                    if (bindAsUser != null) {
-                        try {
-                            bindAsUser.close();
+                            keyChainConnectionBindAsUser.close();
                         } catch (Throwable th2) {
                             th.addSuppressed(th2);
                         }
@@ -540,18 +508,50 @@ public final class KeyChain {
                 }
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
-                Log.i(LOG, "Interrupted while querying grant for wifi", e);
-                return false;
+                Log.i(LOG, "Interrupted while getting grant for wifi", e);
+                return null;
             }
         } catch (RemoteException | RuntimeException e2) {
-            Log.i(LOG, "Couldn't query grant for wifi", e2);
+            Log.i(LOG, "Couldn't get grant for wifi", e2);
+            return null;
+        }
+    }
+
+    @SystemApi
+    public static boolean hasWifiKeyGrantAsUser(Context context, UserHandle userHandle, String str) {
+        try {
+            try {
+                KeyChainConnection keyChainConnectionBindAsUser = bindAsUser(context.getApplicationContext(), userHandle);
+                try {
+                    boolean zHasGrant = keyChainConnectionBindAsUser.getService().hasGrant(1010, str);
+                    if (keyChainConnectionBindAsUser != null) {
+                        keyChainConnectionBindAsUser.close();
+                    }
+                    return zHasGrant;
+                } catch (Throwable th) {
+                    if (keyChainConnectionBindAsUser != null) {
+                        try {
+                            keyChainConnectionBindAsUser.close();
+                        } catch (Throwable th2) {
+                            th.addSuppressed(th2);
+                        }
+                    }
+                    throw th;
+                }
+            } catch (RemoteException | RuntimeException e) {
+                Log.i(LOG, "Couldn't query grant for wifi", e);
+                return false;
+            }
+        } catch (InterruptedException e2) {
+            Thread.currentThread().interrupt();
+            Log.i(LOG, "Interrupted while querying grant for wifi", e2);
             return false;
         }
     }
 
     public static KeyChainConnection bindAsUser(Context context, Handler handler, UserHandle userHandle) throws InterruptedException {
         Context context2;
-        boolean bindServiceAsUser;
+        boolean zBindServiceAsUser;
         if (context == null) {
             throw new NullPointerException("context == null");
         }
@@ -590,21 +590,21 @@ public final class KeyChain {
             }
         };
         Intent intent = new Intent(IKeyChainService.class.getName());
-        ComponentName resolveSystemService = intent.resolveSystemService(context.getPackageManager(), 0);
-        if (resolveSystemService == null) {
+        ComponentName componentNameResolveSystemService = intent.resolveSystemService(context.getPackageManager(), 0);
+        if (componentNameResolveSystemService == null) {
             Log.e(LOG, "Intent Action : " + intent.getAction());
             Log.e(LOG, "Intent Component : " + intent.getComponent());
             Log.e(LOG, "IKeyChainService class Name : " + IKeyChainService.class.getName());
             Log.e(LOG, "Context: " + context.toString());
             PackageManager packageManager = context.getPackageManager();
             if (packageManager != null) {
-                List<ResolveInfo> queryIntentServices = packageManager.queryIntentServices(intent, 0);
-                if (queryIntentServices == null) {
+                List<ResolveInfo> listQueryIntentServices = packageManager.queryIntentServices(intent, 0);
+                if (listQueryIntentServices == null) {
                     Log.e(LOG, "service is null : " + intent.getAction());
-                } else if (queryIntentServices.isEmpty()) {
+                } else if (listQueryIntentServices.isEmpty()) {
                     Log.e(LOG, "No services found matching the intent : " + intent.getAction());
                 } else {
-                    for (ResolveInfo resolveInfo : queryIntentServices) {
+                    for (ResolveInfo resolveInfo : listQueryIntentServices) {
                         Log.d(LOG, "Matching service found : " + resolveInfo.serviceInfo.packageName + "/" + resolveInfo.serviceInfo.name);
                     }
                 }
@@ -613,15 +613,15 @@ public final class KeyChain {
             }
             throw new AssertionError("could not resolve KeyChainService");
         }
-        intent.setComponent(resolveSystemService);
+        intent.setComponent(componentNameResolveSystemService);
         if (handler != null) {
             context2 = context;
-            bindServiceAsUser = context2.bindServiceAsUser(intent, serviceConnection, 1, handler, userHandle);
+            zBindServiceAsUser = context2.bindServiceAsUser(intent, serviceConnection, 1, handler, userHandle);
         } else {
             context2 = context;
-            bindServiceAsUser = context2.bindServiceAsUser(intent, serviceConnection, 1, userHandle);
+            zBindServiceAsUser = context2.bindServiceAsUser(intent, serviceConnection, 1, userHandle);
         }
-        if (!bindServiceAsUser) {
+        if (!zBindServiceAsUser) {
             context2.unbindService(serviceConnection);
             throw new AssertionError("could not bind to KeyChainService");
         }
@@ -638,8 +638,8 @@ public final class KeyChain {
     }
 
     private static void ensureNotOnMainThread(Context context) {
-        Looper myLooper = Looper.myLooper();
-        if (myLooper != null && myLooper == context.getMainLooper()) {
+        Looper looperMyLooper = Looper.myLooper();
+        if (looperMyLooper != null && looperMyLooper == context.getMainLooper()) {
             throw new IllegalStateException("calling this from your main thread can lead to deadlock");
         }
     }
@@ -649,11 +649,11 @@ public final class KeyChain {
             return false;
         }
         Log.d(LOG, "isKeyChainUri: " + str);
-        Uri parse = Uri.parse(str);
-        if (parse == null) {
+        Uri uri = Uri.parse(str);
+        if (uri == null) {
             return false;
         }
-        return UCM_KEYCHAIN_SCHEME.equals(parse.getScheme());
+        return UCM_KEYCHAIN_SCHEME.equals(uri.getScheme());
     }
 
     private static String getSource(String str) {
@@ -683,12 +683,12 @@ public final class KeyChain {
             return null;
         }
         try {
-            byte[] ucmGetCertificateChain = service.ucmGetCertificateChain(str);
-            if (ucmGetCertificateChain == null) {
+            byte[] bArrUcmGetCertificateChain = service.ucmGetCertificateChain(str);
+            if (bArrUcmGetCertificateChain == null) {
                 Log.e(LOG, "getUCMPrivateKey. certificateBytes is null");
                 return null;
             }
-            return UcmKeyStoreKeyFactory.getPrivateKey(str, ucmGetCertificateChain);
+            return UcmKeyStoreKeyFactory.getPrivateKey(str, bArrUcmGetCertificateChain);
         } catch (RemoteException e) {
             Log.e(LOG, "Remote Exception " + e);
             return null;

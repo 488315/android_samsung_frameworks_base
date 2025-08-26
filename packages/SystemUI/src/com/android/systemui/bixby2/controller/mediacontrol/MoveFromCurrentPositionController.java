@@ -7,7 +7,6 @@ import com.android.systemui.bixby2.actionresult.ActionResults;
 import com.android.systemui.bixby2.controller.mediacontrol.MediaCommandType;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class MoveFromCurrentPositionController extends MediaCommandType {
     public static final int $stable = 0;
@@ -17,7 +16,6 @@ public final class MoveFromCurrentPositionController extends MediaCommandType {
     private static final String NETFLIX_PACKAGE_NAME = "com.netflix.mediaclient";
     public static final String OFFSET = "offset";
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();

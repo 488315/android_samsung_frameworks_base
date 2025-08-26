@@ -4,11 +4,9 @@ import com.android.internal.logging.InstanceId;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class MediaDataLoadingModel {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Loaded extends MediaDataLoadingModel {
         public final InstanceId instanceId;
 
@@ -38,7 +36,6 @@ public abstract class MediaDataLoadingModel {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Removed extends MediaDataLoadingModel {
         public final InstanceId instanceId;
 

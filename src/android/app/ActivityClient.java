@@ -13,6 +13,7 @@ import android.os.IRemoteCallback;
 import android.os.PersistableBundle;
 import android.os.RemoteException;
 import android.os.UserHandle;
+import android.util.Log;
 import android.util.Singleton;
 import android.view.RemoteAnimationDefinition;
 import android.window.SizeConfigurationBuckets;
@@ -20,6 +21,7 @@ import com.android.internal.policy.IKeyguardDismissCallback;
 
 /* loaded from: classes.dex */
 public class ActivityClient {
+    public static final String TAG = "ActivityClient";
     private static final Singleton<ActivityClient> sInstance = new Singleton<ActivityClient>() { // from class: android.app.ActivityClient.1
         /* JADX INFO: Access modifiers changed from: protected */
         /* JADX WARN: Can't rename method to resolve collision */
@@ -611,6 +613,15 @@ public class ActivityClient {
 
     public static ActivityClient getInstance() {
         return sInstance.get();
+    }
+
+    public boolean shouldPreloadHardwareRenderer(int i) {
+        try {
+            return getActivityClientController().shouldPreloadHardwareRenderer(i);
+        } catch (RemoteException e) {
+            Log.e(TAG, "shouldPreloadHardwareRenderer failed ", e);
+            return false;
+        }
     }
 
     public static IActivityClientController setActivityClientController(IActivityClientController iActivityClientController) {

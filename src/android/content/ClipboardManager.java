@@ -1,7 +1,6 @@
 package android.content;
 
 import android.annotation.SystemApi;
-import android.content.ClipboardManager;
 import android.content.IClipboard;
 import android.content.IOnPrimaryClipChangedListener;
 import android.os.Handler;
@@ -36,7 +35,7 @@ public class ClipboardManager extends android.text.ClipboardManager {
             ClipboardManager.this.mHandler.post(new Runnable() { // from class: android.content.ClipboardManager$1$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ClipboardManager.AnonymousClass1.this.lambda$dispatchPrimaryClipChanged$0();
+                    this.f$0.lambda$dispatchPrimaryClipChanged$0();
                 }
             });
         }

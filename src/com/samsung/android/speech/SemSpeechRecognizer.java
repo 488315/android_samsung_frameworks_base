@@ -117,16 +117,16 @@ public class SemSpeechRecognizer {
     private void SendHandlerMessage(int i) {
         Handler handler = this.handler;
         if (handler != null) {
-            Message obtainMessage = handler.obtainMessage();
+            Message messageObtainMessage = handler.obtainMessage();
             Bundle bundle = new Bundle();
             bundle.putInt("commandType", i);
-            obtainMessage.setData(bundle);
+            messageObtainMessage.setData(bundle);
             if (i == 2) {
                 Log.d(TAG, "sendMessageDelayed : 1500");
-                this.handler.sendMessageDelayed(obtainMessage, 1500L);
+                this.handler.sendMessageDelayed(messageObtainMessage, 1500L);
             } else {
                 Log.d(TAG, "sendMessageDelayed : 700");
-                this.handler.sendMessageDelayed(obtainMessage, 700L);
+                this.handler.sendMessageDelayed(messageObtainMessage, 700L);
             }
         }
     }
@@ -398,10 +398,10 @@ public class SemSpeechRecognizer {
             str2 = "en";
             country = "US";
         } else {
-            String locale2 = locale.toString();
+            String string = locale.toString();
             String language = locale.getLanguage();
             country = locale.getCountry();
-            str = locale2;
+            str = string;
             str2 = language;
         }
         String str3 = TAG;
@@ -506,32 +506,32 @@ public class SemSpeechRecognizer {
         }
     }
 
-    private String readString(String str) {
+    private String readString(String str) throws IOException {
         FileInputStream fileInputStream;
         File file = new File(str);
         if (file.exists()) {
             try {
                 fileInputStream = new FileInputStream(file);
-                try {
-                    byte[] bArr = new byte[fileInputStream.available()];
-                    fileInputStream.read(bArr);
-                    fileInputStream.close();
-                    return new String(bArr);
-                } catch (IOException e) {
-                    e = e;
-                    if (fileInputStream != null) {
-                        try {
-                            fileInputStream.close();
-                        } catch (IOException e2) {
-                            e2.printStackTrace();
-                        }
-                    }
-                    e.printStackTrace();
-                    return null;
-                }
-            } catch (IOException e3) {
-                e = e3;
+            } catch (IOException e) {
+                e = e;
                 fileInputStream = null;
+            }
+            try {
+                byte[] bArr = new byte[fileInputStream.available()];
+                fileInputStream.read(bArr);
+                fileInputStream.close();
+                return new String(bArr);
+            } catch (IOException e2) {
+                e = e2;
+                if (fileInputStream != null) {
+                    try {
+                        fileInputStream.close();
+                    } catch (IOException e3) {
+                        e3.printStackTrace();
+                    }
+                }
+                e.printStackTrace();
+                return null;
             }
         }
         return null;

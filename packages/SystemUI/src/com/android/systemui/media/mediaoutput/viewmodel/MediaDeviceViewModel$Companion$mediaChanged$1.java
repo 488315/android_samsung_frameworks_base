@@ -1,13 +1,24 @@
 package com.android.systemui.media.mediaoutput.viewmodel;
 
+import android.util.Log;
+import com.android.settingslib.SecNotificationBlockManager$$ExternalSyntheticOutline0;
+import com.android.settingslib.volume.MediaSessions$H$$ExternalSyntheticOutline0;
+import com.samsung.android.oneconnect.mediaoutput.deviceoperations.IDeviceStatusChangeCallback;
+import com.samsung.android.oneconnect.mediaoutput.mediadeviceoperations.IMediaContentChangeCallback;
+import com.samsung.android.oneconnect.mediaoutput.mediadeviceoperations.IMediaDeviceControlCallback;
 import com.samsung.android.smartthingsmediasdk.mediasdk.SmartThingsMediaSdkManager;
+import com.samsung.android.smartthingsmediasdk.mediasdk.manager.MediaSdkOperationManager;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
+import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function2;
+import kotlinx.coroutines.BuildersKt;
+import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class MediaDeviceViewModel$Companion$mediaChanged$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ SmartThingsMediaSdkManager $this_mediaChanged;
@@ -32,17 +43,9 @@ final class MediaDeviceViewModel$Companion$mediaChanged$1 extends SuspendLambda 
         return ((MediaDeviceViewModel$Companion$mediaChanged$1) create((ProducerScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:13:0x0074, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:14:0x0074, code lost:
     
         if (kotlinx.coroutines.channels.ProduceKt.awaitClose(r1, r6, r7) == r0) goto L15;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:14:0x0076, code lost:
-    
-        return r0;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:16:0x0037, code lost:
-    
-        if (r8 == r0) goto L15;
      */
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Type inference failed for: r3v7, types: [com.android.systemui.media.mediaoutput.viewmodel.MediaDeviceViewModel$Companion$mediaChanged$1$mediaContentChangeCallback$1, com.samsung.android.oneconnect.mediaoutput.mediadeviceoperations.IMediaContentChangeCallback$Stub] */
@@ -51,77 +54,89 @@ final class MediaDeviceViewModel$Companion$mediaChanged$1 extends SuspendLambda 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object invokeSuspend(java.lang.Object r8) {
-        /*
-            r7 = this;
-            kotlin.coroutines.intrinsics.CoroutineSingletons r0 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r1 = r7.label
-            r2 = 2
-            r3 = 1
-            if (r1 == 0) goto L20
-            if (r1 == r3) goto L18
-            if (r1 != r2) goto L10
-            kotlin.ResultKt.throwOnFailure(r8)
-            goto L77
-        L10:
-            java.lang.IllegalStateException r7 = new java.lang.IllegalStateException
-            java.lang.String r8 = "call to 'resume' before 'invoke' with coroutine"
-            r7.<init>(r8)
-            throw r7
-        L18:
-            java.lang.Object r1 = r7.L$0
-            kotlinx.coroutines.channels.ProducerScope r1 = (kotlinx.coroutines.channels.ProducerScope) r1
-            kotlin.ResultKt.throwOnFailure(r8)
-            goto L3a
-        L20:
-            kotlin.ResultKt.throwOnFailure(r8)
-            java.lang.Object r8 = r7.L$0
-            r1 = r8
-            kotlinx.coroutines.channels.ProducerScope r1 = (kotlinx.coroutines.channels.ProducerScope) r1
-            kotlin.Unit r8 = kotlin.Unit.INSTANCE
-            r7.L$0 = r1
-            r7.label = r3
-            r3 = r1
-            kotlinx.coroutines.channels.ChannelCoroutine r3 = (kotlinx.coroutines.channels.ChannelCoroutine) r3
-            kotlinx.coroutines.channels.Channel r3 = r3._channel
-            java.lang.Object r8 = r3.send(r8, r7)
-            if (r8 != r0) goto L3a
-            goto L76
-        L3a:
-            com.android.systemui.media.mediaoutput.viewmodel.MediaDeviceViewModel$Companion$mediaChanged$1$mediaDeviceControlCallback$1 r8 = new com.android.systemui.media.mediaoutput.viewmodel.MediaDeviceViewModel$Companion$mediaChanged$1$mediaDeviceControlCallback$1
-            r8.<init>()
-            com.samsung.android.smartthingsmediasdk.mediasdk.SmartThingsMediaSdkManager r3 = r7.$this_mediaChanged
-            com.samsung.android.smartthingsmediasdk.mediasdk.manager.MediaSdkOperationManager r3 = r3.mediaSdkOperationManager
-            com.samsung.android.smartthingsmediasdk.mediasdk.manager.mediasdkoperations.devicecontrol.DeviceControlOperationImpl r3 = r3.deviceControlOperationImpl
-            r3.getClass()
-            com.android.systemui.media.mediaoutput.viewmodel.MediaDeviceViewModel$Companion$mediaChanged$1$mediaContentChangeCallback$1 r3 = new com.android.systemui.media.mediaoutput.viewmodel.MediaDeviceViewModel$Companion$mediaChanged$1$mediaContentChangeCallback$1
-            r3.<init>()
-            com.samsung.android.smartthingsmediasdk.mediasdk.SmartThingsMediaSdkManager r4 = r7.$this_mediaChanged
-            com.samsung.android.smartthingsmediasdk.mediasdk.manager.MediaSdkOperationManager r4 = r4.mediaSdkOperationManager
-            com.samsung.android.smartthingsmediasdk.mediasdk.manager.mediasdkoperations.mediacontent.MediaContentOperationImpl r4 = r4.mediaContentOperationImpl
-            r4.addContentChangeCallback(r3)
-            com.android.systemui.media.mediaoutput.viewmodel.MediaDeviceViewModel$Companion$mediaChanged$1$deviceStatusChangeCallback$1 r4 = new com.android.systemui.media.mediaoutput.viewmodel.MediaDeviceViewModel$Companion$mediaChanged$1$deviceStatusChangeCallback$1
-            r4.<init>()
-            com.samsung.android.smartthingsmediasdk.mediasdk.SmartThingsMediaSdkManager r5 = r7.$this_mediaChanged
-            com.samsung.android.smartthingsmediasdk.mediasdk.manager.MediaSdkOperationManager r5 = r5.mediaSdkOperationManager
-            com.samsung.android.smartthingsmediasdk.mediasdk.manager.mediasdkoperations.devicestatus.DeviceStatusOperationImpl r5 = r5.deviceStatusOperationImpl
-            r5.addDeviceStatusChangeCallback(r4)
-            com.samsung.android.smartthingsmediasdk.mediasdk.SmartThingsMediaSdkManager r5 = r7.$this_mediaChanged
-            com.android.systemui.media.mediaoutput.viewmodel.MediaDeviceViewModel$Companion$mediaChanged$1$$ExternalSyntheticLambda0 r6 = new com.android.systemui.media.mediaoutput.viewmodel.MediaDeviceViewModel$Companion$mediaChanged$1$$ExternalSyntheticLambda0
-            r6.<init>()
-            r8 = 0
-            r7.L$0 = r8
-            r7.label = r2
-            java.lang.Object r7 = kotlinx.coroutines.channels.ProduceKt.awaitClose(r1, r6, r7)
-            if (r7 != r0) goto L77
-        L76:
-            return r0
-        L77:
-            kotlin.Unit r7 = kotlin.Unit.INSTANCE
-            return r7
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.media.mediaoutput.viewmodel.MediaDeviceViewModel$Companion$mediaChanged$1.invokeSuspend(java.lang.Object):java.lang.Object");
+    public final Object invokeSuspend(Object obj) {
+        final ProducerScope producerScope;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i = this.label;
+        if (i == 0) {
+            ResultKt.throwOnFailure(obj);
+            ProducerScope producerScope2 = (ProducerScope) this.L$0;
+            Unit unit = Unit.INSTANCE;
+            this.L$0 = producerScope2;
+            this.label = 1;
+            Object objSend = ((ChannelCoroutine) producerScope2)._channel.send(unit, this);
+            producerScope = producerScope2;
+            if (objSend != coroutineSingletons) {
+            }
+            return coroutineSingletons;
+        }
+        if (i != 1) {
+            if (i != 2) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+            return Unit.INSTANCE;
+        }
+        ProducerScope producerScope3 = (ProducerScope) this.L$0;
+        ResultKt.throwOnFailure(obj);
+        producerScope = producerScope3;
+        final ?? r8 = new IMediaDeviceControlCallback.Stub() { // from class: com.android.systemui.media.mediaoutput.viewmodel.MediaDeviceViewModel$Companion$mediaChanged$1$mediaDeviceControlCallback$1
+            @Override // com.samsung.android.oneconnect.mediaoutput.mediadeviceoperations.IMediaDeviceControlCallback
+            public final void onMuteChanged(String str, boolean z) {
+                Log.d("MediaDeviceViewModel", "onMuteChanged() - " + str + " : " + z);
+                ProducerScope producerScope4 = producerScope;
+                BuildersKt.launch$default(producerScope4, null, null, new MediaDeviceViewModel$Companion$mediaChanged$1$mediaDeviceControlCallback$1$onMuteChanged$1(producerScope4, null), 3);
+            }
+
+            @Override // com.samsung.android.oneconnect.mediaoutput.mediadeviceoperations.IMediaDeviceControlCallback
+            public final void onVolumeChanged(int i2, String str) {
+                SecNotificationBlockManager$$ExternalSyntheticOutline0.m(i2, "onVolumeChanged() - ", str, " : ", "MediaDeviceViewModel");
+                ProducerScope producerScope4 = producerScope;
+                BuildersKt.launch$default(producerScope4, null, null, new MediaDeviceViewModel$Companion$mediaChanged$1$mediaDeviceControlCallback$1$onVolumeChanged$1(producerScope4, null), 3);
+            }
+        };
+        this.$this_mediaChanged.mediaSdkOperationManager.deviceControlOperationImpl.getClass();
+        final ?? r3 = new IMediaContentChangeCallback.Stub() { // from class: com.android.systemui.media.mediaoutput.viewmodel.MediaDeviceViewModel$Companion$mediaChanged$1$mediaContentChangeCallback$1
+            @Override // com.samsung.android.oneconnect.mediaoutput.mediadeviceoperations.IMediaContentChangeCallback
+            public final void onChanged(String str, String str2) {
+                MediaSessions$H$$ExternalSyntheticOutline0.m("onChanged() - ", str, " : ", str2, "MediaDeviceViewModel");
+                ProducerScope producerScope4 = producerScope;
+                BuildersKt.launch$default(producerScope4, null, null, new MediaDeviceViewModel$Companion$mediaChanged$1$mediaContentChangeCallback$1$onChanged$1(producerScope4, null), 3);
+            }
+        };
+        this.$this_mediaChanged.mediaSdkOperationManager.mediaContentOperationImpl.addContentChangeCallback(r3);
+        final ?? r4 = new IDeviceStatusChangeCallback.Stub() { // from class: com.android.systemui.media.mediaoutput.viewmodel.MediaDeviceViewModel$Companion$mediaChanged$1$deviceStatusChangeCallback$1
+            @Override // com.samsung.android.oneconnect.mediaoutput.deviceoperations.IDeviceStatusChangeCallback
+            public final void onCloudDeviceChanged(int i2, String str) {
+                SecNotificationBlockManager$$ExternalSyntheticOutline0.m(i2, "onCloudDeviceChanged() - ", str, " : ", "MediaDeviceViewModel");
+                ProducerScope producerScope4 = producerScope;
+                BuildersKt.launch$default(producerScope4, null, null, new MediaDeviceViewModel$Companion$mediaChanged$1$deviceStatusChangeCallback$1$onCloudDeviceChanged$1(producerScope4, null), 3);
+            }
+
+            @Override // com.samsung.android.oneconnect.mediaoutput.deviceoperations.IDeviceStatusChangeCallback
+            public final void onNearbyChanged(int i2, String str) {
+                SecNotificationBlockManager$$ExternalSyntheticOutline0.m(i2, "onNearbyChanged() - ", str, " : ", "MediaDeviceViewModel");
+                ProducerScope producerScope4 = producerScope;
+                BuildersKt.launch$default(producerScope4, null, null, new MediaDeviceViewModel$Companion$mediaChanged$1$deviceStatusChangeCallback$1$onNearbyChanged$1(producerScope4, null), 3);
+            }
+        };
+        this.$this_mediaChanged.mediaSdkOperationManager.deviceStatusOperationImpl.addDeviceStatusChangeCallback(r4);
+        final SmartThingsMediaSdkManager smartThingsMediaSdkManager = this.$this_mediaChanged;
+        Function0 function0 = new Function0() { // from class: com.android.systemui.media.mediaoutput.viewmodel.MediaDeviceViewModel$Companion$mediaChanged$1$$ExternalSyntheticLambda0
+            @Override // kotlin.jvm.functions.Function0
+            public final Object invoke() {
+                Log.d("MediaDeviceViewModel", "removeCallback");
+                SmartThingsMediaSdkManager smartThingsMediaSdkManager2 = smartThingsMediaSdkManager;
+                smartThingsMediaSdkManager2.mediaSdkOperationManager.deviceControlOperationImpl.getClass();
+                MediaDeviceViewModel$Companion$mediaChanged$1$mediaContentChangeCallback$1 mediaDeviceViewModel$Companion$mediaChanged$1$mediaContentChangeCallback$1 = r3;
+                MediaSdkOperationManager mediaSdkOperationManager = smartThingsMediaSdkManager2.mediaSdkOperationManager;
+                mediaSdkOperationManager.mediaContentOperationImpl.removeContentChangeCallback(mediaDeviceViewModel$Companion$mediaChanged$1$mediaContentChangeCallback$1);
+                mediaSdkOperationManager.deviceStatusOperationImpl.removeDeviceStatusChangeCallback(r4);
+                return Unit.INSTANCE;
+            }
+        };
+        this.L$0 = null;
+        this.label = 2;
     }
 }

@@ -14,7 +14,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class SecBlurSettingsRepositoryImpl$blurReduced$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ SettingsHelper $settingsHelper;
@@ -52,8 +51,8 @@ final class SecBlurSettingsRepositoryImpl$blurReduced$1 extends SuspendLambda im
                 public final void onChanged(Uri uri) {
                     if (uri != null && uri.equals(Settings.System.getUriFor(SettingsHelper.INDEX_ACCESSIBILITY_REDUCE_TRANSPARENCY))) {
                         SecBlurSettingsRepositoryImpl.Companion.getClass();
-                        EmergencyButtonController$$ExternalSyntheticOutline0.m("isReduceTransparencyEnabled changed ", SecBlurSettingsRepositoryImpl.TAG, SettingsHelper.this.isReduceTransparencyEnabled());
-                        ((ChannelCoroutine) producerScope).mo3456trySendJP2dKIU(Boolean.valueOf(SettingsHelper.this.isReduceTransparencyEnabled()));
+                        EmergencyButtonController$$ExternalSyntheticOutline0.m("isReduceTransparencyEnabled changed ", SecBlurSettingsRepositoryImpl.TAG, settingsHelper.isReduceTransparencyEnabled());
+                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(settingsHelper.isReduceTransparencyEnabled()));
                     }
                 }
             };

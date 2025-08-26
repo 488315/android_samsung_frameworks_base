@@ -105,20 +105,20 @@ final class PooledLambdaImpl<R> extends OmniFunction<Object, Object, Object, Obj
         if (fillInArg(obj) && fillInArg(obj2) && fillInArg(obj3) && fillInArg(obj4) && fillInArg(obj5) && fillInArg(obj6) && fillInArg(obj7) && fillInArg(obj8) && fillInArg(obj9) && fillInArg(obj10)) {
             fillInArg(obj11);
         }
-        int decodeArgCount = LambdaType.decodeArgCount(getFlags(MASK_FUNC_TYPE));
+        int iDecodeArgCount = LambdaType.decodeArgCount(getFlags(MASK_FUNC_TYPE));
         int i = 0;
-        if (decodeArgCount != 15) {
-            for (int i2 = 0; i2 < decodeArgCount; i2++) {
+        if (iDecodeArgCount != 15) {
+            for (int i2 = 0; i2 < iDecodeArgCount; i2++) {
                 if (this.mArgs[i2] == ArgumentPlaceholder.INSTANCE) {
                     throw new IllegalStateException("Missing argument #" + i2 + " among " + Arrays.toString(this.mArgs));
                 }
             }
         }
         try {
-            R doInvoke = doInvoke();
+            R rDoInvoke = doInvoke();
             if (isRecycleOnUse()) {
                 doRecycle();
-                return doInvoke;
+                return rDoInvoke;
             }
             if (!isRecycled()) {
                 int size = ArrayUtils.size(this.mArgs);
@@ -127,7 +127,7 @@ final class PooledLambdaImpl<R> extends OmniFunction<Object, Object, Object, Obj
                     i++;
                 }
             }
-            return doInvoke;
+            return rDoInvoke;
         } catch (Throwable th) {
             if (isRecycleOnUse()) {
                 doRecycle();
@@ -165,170 +165,170 @@ final class PooledLambdaImpl<R> extends OmniFunction<Object, Object, Object, Obj
 
     private R doInvoke() {
         int flags = getFlags(MASK_FUNC_TYPE);
-        int decodeArgCount = LambdaType.decodeArgCount(flags);
-        int decodeReturnType = LambdaType.decodeReturnType(flags);
-        if (decodeArgCount == 15) {
-            if (decodeReturnType == 4) {
+        int iDecodeArgCount = LambdaType.decodeArgCount(flags);
+        int iDecodeReturnType = LambdaType.decodeReturnType(flags);
+        if (iDecodeArgCount == 15) {
+            if (iDecodeReturnType == 4) {
                 return (R) Integer.valueOf(getAsInt());
             }
-            if (decodeReturnType == 5) {
+            if (iDecodeReturnType == 5) {
                 return (R) Long.valueOf(getAsLong());
             }
-            if (decodeReturnType == 6) {
+            if (iDecodeReturnType == 6) {
                 return (R) Double.valueOf(getAsDouble());
             }
             return (R) this.mFunc;
         }
-        switch (decodeArgCount) {
+        switch (iDecodeArgCount) {
             case 0:
-                if (decodeReturnType == 1) {
+                if (iDecodeReturnType == 1) {
                     ((Runnable) this.mFunc).run();
                     return null;
                 }
-                if (decodeReturnType == 2 || decodeReturnType == 3) {
+                if (iDecodeReturnType == 2 || iDecodeReturnType == 3) {
                     return (R) ((Supplier) this.mFunc).get();
                 }
             case 1:
-                if (decodeReturnType == 1) {
+                if (iDecodeReturnType == 1) {
                     ((Consumer) this.mFunc).accept(popArg(0));
                     return null;
                 }
-                if (decodeReturnType == 2) {
+                if (iDecodeReturnType == 2) {
                     return (R) Boolean.valueOf(((Predicate) this.mFunc).test(popArg(0)));
                 }
-                if (decodeReturnType == 3) {
+                if (iDecodeReturnType == 3) {
                     return (R) ((Function) this.mFunc).apply(popArg(0));
                 }
                 break;
             case 2:
-                if (decodeReturnType == 1) {
+                if (iDecodeReturnType == 1) {
                     ((BiConsumer) this.mFunc).accept(popArg(0), popArg(1));
                     return null;
                 }
-                if (decodeReturnType == 2) {
+                if (iDecodeReturnType == 2) {
                     return (R) Boolean.valueOf(((BiPredicate) this.mFunc).test(popArg(0), popArg(1)));
                 }
-                if (decodeReturnType == 3) {
+                if (iDecodeReturnType == 3) {
                     return (R) ((BiFunction) this.mFunc).apply(popArg(0), popArg(1));
                 }
                 break;
             case 3:
-                if (decodeReturnType == 1) {
+                if (iDecodeReturnType == 1) {
                     ((TriConsumer) this.mFunc).accept(popArg(0), popArg(1), popArg(2));
                     return null;
                 }
-                if (decodeReturnType == 2) {
+                if (iDecodeReturnType == 2) {
                     return (R) Boolean.valueOf(((TriPredicate) this.mFunc).test(popArg(0), popArg(1), popArg(2)));
                 }
-                if (decodeReturnType == 3) {
+                if (iDecodeReturnType == 3) {
                     return (R) ((TriFunction) this.mFunc).apply(popArg(0), popArg(1), popArg(2));
                 }
                 break;
             case 4:
-                if (decodeReturnType == 1) {
+                if (iDecodeReturnType == 1) {
                     ((QuadConsumer) this.mFunc).accept(popArg(0), popArg(1), popArg(2), popArg(3));
                     return null;
                 }
-                if (decodeReturnType == 2) {
+                if (iDecodeReturnType == 2) {
                     return (R) Boolean.valueOf(((QuadPredicate) this.mFunc).test(popArg(0), popArg(1), popArg(2), popArg(3)));
                 }
-                if (decodeReturnType == 3) {
+                if (iDecodeReturnType == 3) {
                     return (R) ((QuadFunction) this.mFunc).apply(popArg(0), popArg(1), popArg(2), popArg(3));
                 }
                 break;
             case 5:
-                if (decodeReturnType == 1) {
+                if (iDecodeReturnType == 1) {
                     ((QuintConsumer) this.mFunc).accept(popArg(0), popArg(1), popArg(2), popArg(3), popArg(4));
                     return null;
                 }
-                if (decodeReturnType == 2) {
+                if (iDecodeReturnType == 2) {
                     return (R) Boolean.valueOf(((QuintPredicate) this.mFunc).test(popArg(0), popArg(1), popArg(2), popArg(3), popArg(4)));
                 }
-                if (decodeReturnType == 3) {
+                if (iDecodeReturnType == 3) {
                     return (R) ((QuintFunction) this.mFunc).apply(popArg(0), popArg(1), popArg(2), popArg(3), popArg(4));
                 }
                 break;
             case 6:
-                if (decodeReturnType == 1) {
+                if (iDecodeReturnType == 1) {
                     ((HexConsumer) this.mFunc).accept(popArg(0), popArg(1), popArg(2), popArg(3), popArg(4), popArg(5));
                     return null;
                 }
-                if (decodeReturnType == 2) {
+                if (iDecodeReturnType == 2) {
                     return (R) Boolean.valueOf(((HexPredicate) this.mFunc).test(popArg(0), popArg(1), popArg(2), popArg(3), popArg(4), popArg(5)));
                 }
-                if (decodeReturnType == 3) {
+                if (iDecodeReturnType == 3) {
                     return (R) ((HexFunction) this.mFunc).apply(popArg(0), popArg(1), popArg(2), popArg(3), popArg(4), popArg(5));
                 }
                 break;
             case 7:
-                if (decodeReturnType == 1) {
+                if (iDecodeReturnType == 1) {
                     ((HeptConsumer) this.mFunc).accept(popArg(0), popArg(1), popArg(2), popArg(3), popArg(4), popArg(5), popArg(6));
                     return null;
                 }
-                if (decodeReturnType == 2) {
+                if (iDecodeReturnType == 2) {
                     return (R) Boolean.valueOf(((HeptPredicate) this.mFunc).test(popArg(0), popArg(1), popArg(2), popArg(3), popArg(4), popArg(5), popArg(6)));
                 }
-                if (decodeReturnType == 3) {
+                if (iDecodeReturnType == 3) {
                     return (R) ((HeptFunction) this.mFunc).apply(popArg(0), popArg(1), popArg(2), popArg(3), popArg(4), popArg(5), popArg(6));
                 }
                 break;
             case 8:
-                if (decodeReturnType == 1) {
+                if (iDecodeReturnType == 1) {
                     ((OctConsumer) this.mFunc).accept(popArg(0), popArg(1), popArg(2), popArg(3), popArg(4), popArg(5), popArg(6), popArg(7));
                     return null;
                 }
-                if (decodeReturnType == 2) {
+                if (iDecodeReturnType == 2) {
                     return (R) Boolean.valueOf(((OctPredicate) this.mFunc).test(popArg(0), popArg(1), popArg(2), popArg(3), popArg(4), popArg(5), popArg(6), popArg(7)));
                 }
-                if (decodeReturnType == 3) {
+                if (iDecodeReturnType == 3) {
                     return (R) ((OctFunction) this.mFunc).apply(popArg(0), popArg(1), popArg(2), popArg(3), popArg(4), popArg(5), popArg(6), popArg(7));
                 }
                 break;
             case 9:
-                if (decodeReturnType == 1) {
+                if (iDecodeReturnType == 1) {
                     ((NonaConsumer) this.mFunc).accept(popArg(0), popArg(1), popArg(2), popArg(3), popArg(4), popArg(5), popArg(6), popArg(7), popArg(8));
                     return null;
                 }
-                if (decodeReturnType == 2) {
+                if (iDecodeReturnType == 2) {
                     return (R) Boolean.valueOf(((NonaPredicate) this.mFunc).test(popArg(0), popArg(1), popArg(2), popArg(3), popArg(4), popArg(5), popArg(6), popArg(7), popArg(8)));
                 }
-                if (decodeReturnType == 3) {
+                if (iDecodeReturnType == 3) {
                     return (R) ((NonaFunction) this.mFunc).apply(popArg(0), popArg(1), popArg(2), popArg(3), popArg(4), popArg(5), popArg(6), popArg(7), popArg(8));
                 }
                 break;
             case 10:
-                if (decodeReturnType == 1) {
+                if (iDecodeReturnType == 1) {
                     ((DecConsumer) this.mFunc).accept(popArg(0), popArg(1), popArg(2), popArg(3), popArg(4), popArg(5), popArg(6), popArg(7), popArg(8), popArg(9));
                     return null;
                 }
-                if (decodeReturnType == 2) {
+                if (iDecodeReturnType == 2) {
                     return (R) Boolean.valueOf(((DecPredicate) this.mFunc).test(popArg(0), popArg(1), popArg(2), popArg(3), popArg(4), popArg(5), popArg(6), popArg(7), popArg(8), popArg(9)));
                 }
-                if (decodeReturnType == 3) {
+                if (iDecodeReturnType == 3) {
                     return (R) ((DecFunction) this.mFunc).apply(popArg(0), popArg(1), popArg(2), popArg(3), popArg(4), popArg(5), popArg(6), popArg(7), popArg(8), popArg(9));
                 }
                 break;
             case 11:
-                if (decodeReturnType == 1) {
+                if (iDecodeReturnType == 1) {
                     ((UndecConsumer) this.mFunc).accept(popArg(0), popArg(1), popArg(2), popArg(3), popArg(4), popArg(5), popArg(6), popArg(7), popArg(8), popArg(9), popArg(10));
                     return null;
                 }
-                if (decodeReturnType == 2) {
+                if (iDecodeReturnType == 2) {
                     return (R) Boolean.valueOf(((UndecPredicate) this.mFunc).test(popArg(0), popArg(1), popArg(2), popArg(3), popArg(4), popArg(5), popArg(6), popArg(7), popArg(8), popArg(9), popArg(10)));
                 }
-                if (decodeReturnType == 3) {
+                if (iDecodeReturnType == 3) {
                     return (R) ((UndecFunction) this.mFunc).apply(popArg(0), popArg(1), popArg(2), popArg(3), popArg(4), popArg(5), popArg(6), popArg(7), popArg(8), popArg(9), popArg(10));
                 }
                 break;
             case 12:
-                if (decodeReturnType == 1) {
+                if (iDecodeReturnType == 1) {
                     ((DodecConsumer) this.mFunc).accept(popArg(0), popArg(1), popArg(2), popArg(3), popArg(4), popArg(5), popArg(6), popArg(7), popArg(8), popArg(9), popArg(10), popArg(11));
                     return null;
                 }
-                if (decodeReturnType == 2) {
+                if (iDecodeReturnType == 2) {
                     return (R) Boolean.valueOf(((DodecPredicate) this.mFunc).test(popArg(0), popArg(1), popArg(2), popArg(3), popArg(4), popArg(5), popArg(6), popArg(7), popArg(8), popArg(9), popArg(10), popArg(11)));
                 }
-                if (decodeReturnType == 3) {
+                if (iDecodeReturnType == 3) {
                     return (R) ((DodecFunction) this.mFunc).apply(popArg(0), popArg(1), popArg(2), popArg(3), popArg(4), popArg(5), popArg(6), popArg(7), popArg(8), popArg(9), popArg(10), popArg(11));
                 }
                 break;
@@ -393,49 +393,49 @@ final class PooledLambdaImpl<R> extends OmniFunction<Object, Object, Object, Obj
         if (isConstSupplier()) {
             return "supplier";
         }
-        String lambdaType = LambdaType.toString(getFlags(MASK_EXPOSED_AS));
-        return lambdaType.endsWith("Consumer") ? "consumer" : lambdaType.endsWith("Function") ? "function" : lambdaType.endsWith("Predicate") ? "predicate" : lambdaType.endsWith("Supplier") ? "supplier" : lambdaType.endsWith("Runnable") ? "runnable" : lambdaType;
+        String string = LambdaType.toString(getFlags(MASK_EXPOSED_AS));
+        return string.endsWith("Consumer") ? "consumer" : string.endsWith("Function") ? "function" : string.endsWith("Predicate") ? "predicate" : string.endsWith("Supplier") ? "supplier" : string.endsWith("Runnable") ? "runnable" : string;
     }
 
     static <E extends PooledLambda> E acquire(Pool pool, Object obj, int i, int i2, int i3, Object obj2, Object obj3, Object obj4, Object obj5, Object obj6, Object obj7, Object obj8, Object obj9, Object obj10, Object obj11, Object obj12, Object obj13) {
-        PooledLambdaImpl acquire = acquire(pool);
-        acquire.mFunc = Objects.requireNonNull(obj);
-        acquire.setFlags(MASK_FUNC_TYPE, LambdaType.encode(i, i3));
-        acquire.setFlags(MASK_EXPOSED_AS, LambdaType.encode(i2, i3));
-        if (ArrayUtils.size(acquire.mArgs) < i) {
-            acquire.mArgs = new Object[i];
+        PooledLambdaImpl pooledLambdaImplAcquire = acquire(pool);
+        pooledLambdaImplAcquire.mFunc = Objects.requireNonNull(obj);
+        pooledLambdaImplAcquire.setFlags(MASK_FUNC_TYPE, LambdaType.encode(i, i3));
+        pooledLambdaImplAcquire.setFlags(MASK_EXPOSED_AS, LambdaType.encode(i2, i3));
+        if (ArrayUtils.size(pooledLambdaImplAcquire.mArgs) < i) {
+            pooledLambdaImplAcquire.mArgs = new Object[i];
         }
-        setIfInBounds(acquire.mArgs, 0, obj2);
-        setIfInBounds(acquire.mArgs, 1, obj3);
-        setIfInBounds(acquire.mArgs, 2, obj4);
-        setIfInBounds(acquire.mArgs, 3, obj5);
-        setIfInBounds(acquire.mArgs, 4, obj6);
-        setIfInBounds(acquire.mArgs, 5, obj7);
-        setIfInBounds(acquire.mArgs, 6, obj8);
-        setIfInBounds(acquire.mArgs, 7, obj9);
-        setIfInBounds(acquire.mArgs, 8, obj10);
-        setIfInBounds(acquire.mArgs, 9, obj11);
-        setIfInBounds(acquire.mArgs, 10, obj12);
-        setIfInBounds(acquire.mArgs, 11, obj13);
-        return acquire;
+        setIfInBounds(pooledLambdaImplAcquire.mArgs, 0, obj2);
+        setIfInBounds(pooledLambdaImplAcquire.mArgs, 1, obj3);
+        setIfInBounds(pooledLambdaImplAcquire.mArgs, 2, obj4);
+        setIfInBounds(pooledLambdaImplAcquire.mArgs, 3, obj5);
+        setIfInBounds(pooledLambdaImplAcquire.mArgs, 4, obj6);
+        setIfInBounds(pooledLambdaImplAcquire.mArgs, 5, obj7);
+        setIfInBounds(pooledLambdaImplAcquire.mArgs, 6, obj8);
+        setIfInBounds(pooledLambdaImplAcquire.mArgs, 7, obj9);
+        setIfInBounds(pooledLambdaImplAcquire.mArgs, 8, obj10);
+        setIfInBounds(pooledLambdaImplAcquire.mArgs, 9, obj11);
+        setIfInBounds(pooledLambdaImplAcquire.mArgs, 10, obj12);
+        setIfInBounds(pooledLambdaImplAcquire.mArgs, 11, obj13);
+        return pooledLambdaImplAcquire;
     }
 
     static PooledLambdaImpl acquireConstSupplier(int i) {
-        PooledLambdaImpl acquire = acquire(sPool);
-        int encode = LambdaType.encode(15, i);
-        acquire.setFlags(MASK_FUNC_TYPE, encode);
-        acquire.setFlags(MASK_EXPOSED_AS, encode);
-        return acquire;
+        PooledLambdaImpl pooledLambdaImplAcquire = acquire(sPool);
+        int iEncode = LambdaType.encode(15, i);
+        pooledLambdaImplAcquire.setFlags(MASK_FUNC_TYPE, iEncode);
+        pooledLambdaImplAcquire.setFlags(MASK_EXPOSED_AS, iEncode);
+        return pooledLambdaImplAcquire;
     }
 
     static PooledLambdaImpl acquire(Pool pool) {
-        PooledLambdaImpl acquire = pool.acquire();
-        if (acquire == null) {
-            acquire = new PooledLambdaImpl();
+        PooledLambdaImpl pooledLambdaImplAcquire = pool.acquire();
+        if (pooledLambdaImplAcquire == null) {
+            pooledLambdaImplAcquire = new PooledLambdaImpl();
         }
-        acquire.mFlags &= -2049;
-        acquire.setFlags(8192, pool == sMessageCallbacksPool ? 1 : 0);
-        return acquire;
+        pooledLambdaImplAcquire.mFlags &= -2049;
+        pooledLambdaImplAcquire.setFlags(8192, pool == sMessageCallbacksPool ? 1 : 0);
+        return pooledLambdaImplAcquire;
     }
 
     private static void setIfInBounds(Object[] objArr, int i, Object obj) {
@@ -534,17 +534,17 @@ final class PooledLambdaImpl<R> extends OmniFunction<Object, Object, Object, Obj
         }
 
         static String toString(int i) {
-            int decodeArgCount = decodeArgCount(i);
-            int decodeReturnType = decodeReturnType(i);
-            if (decodeArgCount == 0) {
-                if (decodeReturnType == 1) {
+            int iDecodeArgCount = decodeArgCount(i);
+            int iDecodeReturnType = decodeReturnType(i);
+            if (iDecodeArgCount == 0) {
+                if (iDecodeReturnType == 1) {
                     return "Runnable";
                 }
-                if (decodeReturnType == 3 || decodeReturnType == 2) {
+                if (iDecodeReturnType == 3 || iDecodeReturnType == 2) {
                     return "Supplier";
                 }
             }
-            return argCountPrefix(decodeArgCount) + ReturnType.lambdaSuffix(decodeReturnType);
+            return argCountPrefix(iDecodeArgCount) + ReturnType.lambdaSuffix(iDecodeReturnType);
         }
 
         private static String argCountPrefix(int i) {

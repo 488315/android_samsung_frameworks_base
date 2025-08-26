@@ -8,14 +8,12 @@ import com.android.systemui.log.core.LogMessage;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class CarrierTextManagerLogger {
     public static final Companion Companion = new Companion(null);
     public final LogBuffer buffer;
     public String location;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -34,7 +32,7 @@ public final class CarrierTextManagerLogger {
         Function1 function1 = new Function1() { // from class: com.android.keyguard.logging.CarrierTextManagerLogger$$ExternalSyntheticLambda8
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 LogMessage logMessage = (LogMessage) obj;
                 CarrierTextManagerLogger.Companion.getClass();
                 int i2 = i;
@@ -47,10 +45,10 @@ public final class CarrierTextManagerLogger {
             }
         };
         LogBuffer logBuffer = this.buffer;
-        LogMessage obtain = logBuffer.obtain("CarrierTextManagerLog", logLevel, function1, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("CarrierTextManagerLog", logLevel, function1, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.int1 = i;
         logMessageImpl.str1 = this.location;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
     }
 }

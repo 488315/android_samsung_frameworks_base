@@ -23,7 +23,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.text.StringsKt__IndentKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class MSDLPlayerImpl implements MSDLPlayer {
     public static final Companion Companion = new Companion(null);
@@ -34,7 +33,6 @@ public final class MSDLPlayerImpl implements MSDLPlayer {
     public final Map useHapticFallbackForToken;
     public final Vibrator vibrator;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -58,7 +56,7 @@ public final class MSDLPlayerImpl implements MSDLPlayer {
 
     @Override // com.google.android.msdl.domain.MSDLPlayer
     public final void playToken(MSDLToken mSDLToken, InteractionProperties interactionProperties) {
-        final VibrationAttributes build;
+        final VibrationAttributes vibrationAttributesBuild;
         MSDLPlayer.Companion.getClass();
         if (MSDLPlayer.Companion.SYSTEM_FEEDBACK_LEVEL.compareTo(mSDLToken.getMinimumFeedbackLevel()) < 0) {
             return;
@@ -72,20 +70,20 @@ public final class MSDLPlayerImpl implements MSDLPlayer {
             return;
         }
         HapticComposition hapticComposition = mSDLHapticData.get();
-        final VibrationEffect composeIntoVibrationEffect$default = Intrinsics.areEqual(this.useHapticFallbackForToken.get(mSDLToken), Boolean.TRUE) ? hapticComposition.fallbackEffect : interactionProperties instanceof InteractionProperties.DynamicVibrationScale ? MSDLPlayerImplKt.composeIntoVibrationEffect$default(hapticComposition, Float.valueOf(((InteractionProperties.DynamicVibrationScale) interactionProperties).scale), 2) : MSDLPlayerImplKt.composeIntoVibrationEffect$default(hapticComposition, null, 3);
-        if (composeIntoVibrationEffect$default == null || !this.vibrator.hasVibrator()) {
+        final VibrationEffect vibrationEffectComposeIntoVibrationEffect$default = Intrinsics.areEqual(this.useHapticFallbackForToken.get(mSDLToken), Boolean.TRUE) ? hapticComposition.fallbackEffect : interactionProperties instanceof InteractionProperties.DynamicVibrationScale ? MSDLPlayerImplKt.composeIntoVibrationEffect$default(hapticComposition, Float.valueOf(((InteractionProperties.DynamicVibrationScale) interactionProperties).scale), 2) : MSDLPlayerImplKt.composeIntoVibrationEffect$default(hapticComposition, null, 3);
+        if (vibrationEffectComposeIntoVibrationEffect$default == null || !this.vibrator.hasVibrator()) {
             return;
         }
         if ((interactionProperties != null ? interactionProperties.getVibrationAttributes() : null) != null) {
-            build = interactionProperties.getVibrationAttributes();
+            vibrationAttributesBuild = interactionProperties.getVibrationAttributes();
         } else {
-            build = new VibrationAttributes.Builder().setUsage(18).build();
-            build.getClass();
+            vibrationAttributesBuild = new VibrationAttributes.Builder().setUsage(18).build();
+            vibrationAttributesBuild.getClass();
         }
         this.executor.execute(new Runnable() { // from class: com.google.android.msdl.domain.MSDLPlayerImpl$playData$1
             @Override // java.lang.Runnable
             public final void run() {
-                MSDLPlayerImpl.this.vibrator.vibrate(composeIntoVibrationEffect$default, build);
+                this.this$0.vibrator.vibrate(vibrationEffectComposeIntoVibrationEffect$default, vibrationAttributesBuild);
             }
         });
         MSDLEvent mSDLEvent = new MSDLEvent(mSDLToken, interactionProperties);

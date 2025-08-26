@@ -20,7 +20,6 @@ import javax.net.ssl.HttpsURLConnection;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class RegisterTask implements AsyncTaskClient {
     public final AsyncTaskCallback callback;
@@ -37,7 +36,7 @@ public class RegisterTask implements AsyncTaskClient {
         this.callback = asyncTaskCallback;
     }
 
-    public final void cleanUp(BufferedReader bufferedReader, InputStream inputStream) {
+    public final void cleanUp(BufferedReader bufferedReader, InputStream inputStream) throws IOException {
         if (inputStream != null) {
             try {
                 inputStream.close();
@@ -55,7 +54,7 @@ public class RegisterTask implements AsyncTaskClient {
         }
     }
 
-    public final String makeRequestBody() {
+    public final String makeRequestBody() throws JSONException {
         JSONObject jSONObject = new JSONObject();
         try {
             jSONObject.put("tid", this.trid);
@@ -68,55 +67,57 @@ public class RegisterTask implements AsyncTaskClient {
     }
 
     @Override // com.sec.android.diagmonagent.common.util.executor.AsyncTaskClient
-    public final int onFinish() {
-        InputStream inputStream;
+    public final int onFinish() throws Throwable {
+        InputStream errorStream;
+        int responseCode;
+        BufferedReader bufferedReader;
         AsyncTaskCallback asyncTaskCallback = this.callback;
-        BufferedReader bufferedReader = null;
+        BufferedReader bufferedReader2 = null;
         try {
             try {
-                int responseCode = this.conn.getResponseCode();
-                inputStream = responseCode >= 400 ? this.conn.getErrorStream() : this.conn.getInputStream();
+                responseCode = this.conn.getResponseCode();
+                errorStream = responseCode >= 400 ? this.conn.getErrorStream() : this.conn.getInputStream();
                 try {
-                    BufferedReader bufferedReader2 = new BufferedReader(new InputStreamReader(inputStream));
-                    try {
-                        String string = new JSONObject(bufferedReader2.readLine()).getString("rc");
-                        if (responseCode == 200 && string.equalsIgnoreCase("1000")) {
-                            Debug.LogENG("Success : " + responseCode + " " + string);
-                        } else {
-                            Debug.LogENG("Fail : " + responseCode + " " + string);
-                        }
-                        if (asyncTaskCallback != null) {
-                            if (responseCode == 200 && string.equalsIgnoreCase("1000")) {
-                                asyncTaskCallback.onSuccess();
-                            } else {
-                                asyncTaskCallback.onFail(string, "", "");
-                            }
-                        }
-                        cleanUp(bufferedReader2, inputStream);
-                        return 0;
-                    } catch (Exception unused) {
-                        bufferedReader = bufferedReader2;
-                        if (asyncTaskCallback != null) {
-                            asyncTaskCallback.onFail("", "", "");
-                        }
-                        cleanUp(bufferedReader, inputStream);
-                        return 0;
-                    } catch (Throwable th) {
-                        th = th;
-                        bufferedReader = bufferedReader2;
-                        cleanUp(bufferedReader, inputStream);
-                        throw th;
-                    }
-                } catch (Exception unused2) {
+                    bufferedReader = new BufferedReader(new InputStreamReader(errorStream));
+                } catch (Exception unused) {
                 }
-            } catch (Exception unused3) {
-                inputStream = null;
-            } catch (Throwable th2) {
-                th = th2;
-                inputStream = null;
+            } catch (Throwable th) {
+                th = th;
             }
+        } catch (Exception unused2) {
+            errorStream = null;
+        } catch (Throwable th2) {
+            th = th2;
+            errorStream = null;
+        }
+        try {
+            String string = new JSONObject(bufferedReader.readLine()).getString("rc");
+            if (responseCode == 200 && string.equalsIgnoreCase("1000")) {
+                Debug.LogENG("Success : " + responseCode + " " + string);
+            } else {
+                Debug.LogENG("Fail : " + responseCode + " " + string);
+            }
+            if (asyncTaskCallback != null) {
+                if (responseCode == 200 && string.equalsIgnoreCase("1000")) {
+                    asyncTaskCallback.onSuccess();
+                } else {
+                    asyncTaskCallback.onFail(string, "", "");
+                }
+            }
+            cleanUp(bufferedReader, errorStream);
+            return 0;
+        } catch (Exception unused3) {
+            bufferedReader2 = bufferedReader;
+            if (asyncTaskCallback != null) {
+                asyncTaskCallback.onFail("", "", "");
+            }
+            cleanUp(bufferedReader2, errorStream);
+            return 0;
         } catch (Throwable th3) {
             th = th3;
+            bufferedReader2 = bufferedReader;
+            cleanUp(bufferedReader2, errorStream);
+            throw th;
         }
     }
 
@@ -124,22 +125,22 @@ public class RegisterTask implements AsyncTaskClient {
     public final void run() {
         String str = this.trid;
         try {
-            Uri.Builder buildUpon = Uri.parse(this.api.getUrl()).buildUpon();
-            String valueOf = String.valueOf(System.currentTimeMillis());
-            buildUpon.appendQueryParameter("tid", str).appendQueryParameter("ts", valueOf).appendQueryParameter("hc", AuthUtil.sha256(str + valueOf + ClientUtil.SALT));
-            URL url = new URL(buildUpon.build().toString());
-            String makeRequestBody = makeRequestBody();
-            if (TextUtils.isEmpty(makeRequestBody)) {
+            Uri.Builder builderBuildUpon = Uri.parse(this.api.getUrl()).buildUpon();
+            String strValueOf = String.valueOf(System.currentTimeMillis());
+            builderBuildUpon.appendQueryParameter("tid", str).appendQueryParameter("ts", strValueOf).appendQueryParameter("hc", AuthUtil.sha256(str + strValueOf + ClientUtil.SALT));
+            URL url = new URL(builderBuildUpon.build().toString());
+            String strMakeRequestBody = makeRequestBody();
+            if (TextUtils.isEmpty(strMakeRequestBody)) {
                 Log.w("SamsungAnalytics605073", "[Register Client] body is empty");
             } else {
-                upload(url, makeRequestBody);
+                upload(url, strMakeRequestBody);
             }
         } catch (Exception e) {
             Debug.LogENG("[Register Client] " + e.getMessage());
         }
     }
 
-    public final void upload(URL url, String str) {
+    public final void upload(URL url, String str) throws IOException {
         HttpsURLConnection httpsURLConnection = (HttpsURLConnection) url.openConnection();
         this.conn = httpsURLConnection;
         httpsURLConnection.setSSLSocketFactory(CertificateManager.Singleton.instance.sslContext.getSocketFactory());

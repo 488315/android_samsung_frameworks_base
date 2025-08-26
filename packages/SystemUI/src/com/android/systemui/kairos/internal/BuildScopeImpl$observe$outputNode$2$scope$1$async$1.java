@@ -11,7 +11,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class BuildScopeImpl$observe$outputNode$2$scope$1$async$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ Function2 $block;
@@ -19,7 +18,6 @@ final class BuildScopeImpl$observe$outputNode$2$scope$1$async$1 extends SuspendL
     private /* synthetic */ Object L$0;
     int label;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.kairos.internal.BuildScopeImpl$observe$outputNode$2$scope$1$async$1$1, reason: invalid class name */
     public final class AnonymousClass1 implements KairosCoroutineScope, CoroutineScope {
         public final /* synthetic */ CoroutineScope $$delegate_0;
@@ -71,7 +69,7 @@ final class BuildScopeImpl$observe$outputNode$2$scope$1$async$1 extends SuspendL
         Function2 function2 = this.$block;
         AnonymousClass1 anonymousClass1 = new AnonymousClass1(coroutineScope, this.$localNetwork);
         this.label = 1;
-        Object invoke = function2.invoke(anonymousClass1, this);
-        return invoke == coroutineSingletons ? coroutineSingletons : invoke;
+        Object objInvoke = function2.invoke(anonymousClass1, this);
+        return objInvoke == coroutineSingletons ? coroutineSingletons : objInvoke;
     }
 }

@@ -3,7 +3,6 @@ package com.google.zxing.datamatrix.encoder;
 import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
 import com.samsung.android.knox.custom.IKnoxCustomManager;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class ErrorCorrection {
     public static final int[] FACTOR_SETS = {5, 7, 10, 11, 12, 14, 18, 20, 24, 28, 36, 42, 48, 56, 62, 68};
@@ -57,24 +56,24 @@ public final class ErrorCorrection {
                 break;
             }
             int i7 = i - 1;
-            int charAt = str.charAt(i6) ^ cArr[i7];
+            int iCharAt = str.charAt(i6) ^ cArr[i7];
             while (true) {
                 iArr = LOG;
                 iArr2 = ALOG;
                 if (i7 <= 0) {
                     break;
                 }
-                if (charAt == 0 || (i3 = iArr3[i7]) == 0) {
+                if (iCharAt == 0 || (i3 = iArr3[i7]) == 0) {
                     cArr[i7] = cArr[i7 - 1];
                 } else {
-                    cArr[i7] = (char) (iArr2[(iArr[charAt] + iArr[i3]) % 255] ^ cArr[i7 - 1]);
+                    cArr[i7] = (char) (iArr2[(iArr[iCharAt] + iArr[i3]) % 255] ^ cArr[i7 - 1]);
                 }
                 i7--;
             }
-            if (charAt == 0 || (i2 = iArr3[0]) == 0) {
+            if (iCharAt == 0 || (i2 = iArr3[0]) == 0) {
                 cArr[0] = 0;
             } else {
-                cArr[0] = (char) iArr2[(iArr[charAt] + iArr[i2]) % 255];
+                cArr[0] = (char) iArr2[(iArr[iCharAt] + iArr[i2]) % 255];
             }
             i6++;
         }

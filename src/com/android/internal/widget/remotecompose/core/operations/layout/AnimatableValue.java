@@ -53,14 +53,14 @@ public class AnimatableValue implements Serializable {
         }
         float f = paintContext.getContext().mRemoteComposeState.getFloat(this.mId);
         if (f != this.mValue) {
-            long currentTimeMillis = System.currentTimeMillis();
+            long jCurrentTimeMillis = System.currentTimeMillis();
             long j = this.mLastUpdate;
-            if (currentTimeMillis - j > this.mAnimateDuration && j != 0) {
+            if (jCurrentTimeMillis - j > this.mAnimateDuration && j != 0) {
                 this.mAnimateValueChanges = true;
             } else {
                 this.mAnimateValueChanges = false;
             }
-            this.mLastUpdate = currentTimeMillis;
+            this.mLastUpdate = jCurrentTimeMillis;
         }
         if (!this.mAnimateValueChanges) {
             this.mValue = f;

@@ -23,7 +23,6 @@ import android.window.BackProgressAnimator;
 import android.window.BackTouchTracker;
 import android.window.IOnBackInvokedCallback;
 import android.window.ImeOnBackInvokedDispatcher;
-import android.window.WindowOnBackInvokedDispatcher;
 import com.android.internal.R;
 import com.android.internal.hidden_from_bootclasspath.com.android.window.flags.Flags;
 import com.samsung.android.rune.CoreRune;
@@ -206,20 +205,20 @@ public class WindowOnBackInvokedDispatcher implements OnBackInvokedDispatcher {
     }
 
     public boolean isBackGestureInProgress() {
-        boolean isActive;
+        boolean zIsActive;
         synchronized (this.mLock) {
-            isActive = this.mTouchTracker.isActive();
+            zIsActive = this.mTouchTracker.isActive();
         }
-        return isActive;
+        return zIsActive;
     }
 
     private void sendCancelledIfInProgress(OnBackInvokedCallback onBackInvokedCallback) {
-        boolean isBackAnimationInProgress = this.mProgressAnimator.isBackAnimationInProgress();
-        if (isBackAnimationInProgress && (onBackInvokedCallback instanceof OnBackAnimationCallback)) {
+        boolean zIsBackAnimationInProgress = this.mProgressAnimator.isBackAnimationInProgress();
+        if (zIsBackAnimationInProgress && (onBackInvokedCallback instanceof OnBackAnimationCallback)) {
             ((OnBackAnimationCallback) onBackInvokedCallback).onBackCancelled();
             return;
         }
-        Log.w(TAG, "sendCancelIfRunning: isInProgress=" + isBackAnimationInProgress + " callback=" + onBackInvokedCallback);
+        Log.w(TAG, "sendCancelIfRunning: isInProgress=" + zIsBackAnimationInProgress + " callback=" + onBackInvokedCallback);
     }
 
     @Override // android.window.OnBackInvokedDispatcher
@@ -286,21 +285,19 @@ public class WindowOnBackInvokedDispatcher implements OnBackInvokedDispatcher {
         }
         if (onBackInvokedCallback != null) {
             try {
-                int intValue = this.mAllCallbacks.get(onBackInvokedCallback).intValue();
-                int overrideBehavior = onBackInvokedCallback instanceof SystemOverrideOnBackInvokedCallback ? ((SystemOverrideOnBackInvokedCallback) onBackInvokedCallback).overrideBehavior() : 0;
+                int iIntValue = this.mAllCallbacks.get(onBackInvokedCallback).intValue();
+                int iOverrideBehavior = onBackInvokedCallback instanceof SystemOverrideOnBackInvokedCallback ? ((SystemOverrideOnBackInvokedCallback) onBackInvokedCallback).overrideBehavior() : 0;
                 onBackInvokedCallbackInfo = new OnBackInvokedCallbackInfo(new OnBackInvokedCallbackWrapper(onBackInvokedCallback, this.mTouchTracker, this.mProgressAnimator, this.mHandler, new BooleanSupplier() { // from class: android.window.WindowOnBackInvokedDispatcher$$ExternalSyntheticLambda0
                     @Override // java.util.function.BooleanSupplier
                     public final boolean getAsBoolean() {
-                        boolean callOnKeyPreIme;
-                        callOnKeyPreIme = WindowOnBackInvokedDispatcher.this.callOnKeyPreIme();
-                        return callOnKeyPreIme;
+                        return this.f$0.callOnKeyPreIme();
                     }
                 }, new Runnable() { // from class: android.window.WindowOnBackInvokedDispatcher$$ExternalSyntheticLambda1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        WindowOnBackInvokedDispatcher.this.invokeSystemNavigationObserverCallback();
+                        this.f$0.invokeSystemNavigationObserverCallback();
                     }
-                }, intValue == -1 || overrideBehavior != 0), intValue, onBackInvokedCallback instanceof OnBackAnimationCallback, overrideBehavior);
+                }, iIntValue == -1 || iOverrideBehavior != 0), iIntValue, onBackInvokedCallback instanceof OnBackAnimationCallback, iOverrideBehavior);
             } catch (RemoteException e) {
                 Log.e(TAG, "Failed to set OnBackInvokedCallback to WM. Error: " + e);
                 return;
@@ -327,7 +324,7 @@ public class WindowOnBackInvokedDispatcher implements OnBackInvokedDispatcher {
         }
     }
 
-    public void updateContext(Context context) {
+    public void updateContext(Context context) throws Resources.NotFoundException {
         this.mChecker = new Checker(context);
         Resources resources = context.getResources();
         this.mBackSwipeLinearThreshold = resources.getDimension(R.dimen.navigation_edge_action_progress_threshold);
@@ -338,8 +335,8 @@ public class WindowOnBackInvokedDispatcher implements OnBackInvokedDispatcher {
     }
 
     public void onConfigurationChanged(Configuration configuration) {
-        float width = configuration.windowConfiguration.getMaxBounds().width();
-        this.mTouchTracker.setProgressThresholds(Math.min(width, this.mBackSwipeLinearThreshold), width, this.mNonLinearProgressFactor);
+        float fWidth = configuration.windowConfiguration.getMaxBounds().width();
+        this.mTouchTracker.setProgressThresholds(Math.min(fWidth, this.mBackSwipeLinearThreshold), fWidth, this.mNonLinearProgressFactor);
     }
 
     public boolean isOnBackInvokedCallbackEnabled() {
@@ -402,7 +399,7 @@ public class WindowOnBackInvokedDispatcher implements OnBackInvokedDispatcher {
             this.mHandler.post(new Runnable() { // from class: android.window.WindowOnBackInvokedDispatcher$OnBackInvokedCallbackWrapper$$ExternalSyntheticLambda3
                 @Override // java.lang.Runnable
                 public final void run() {
-                    WindowOnBackInvokedDispatcher.OnBackInvokedCallbackWrapper.this.lambda$onBackStarted$0(backMotionEvent);
+                    this.f$0.lambda$onBackStarted$0(backMotionEvent);
                 }
             });
         }
@@ -423,7 +420,7 @@ public class WindowOnBackInvokedDispatcher implements OnBackInvokedDispatcher {
                 backProgressAnimator.onBackStarted(backMotionEvent, new BackProgressAnimator.ProgressCallback() { // from class: android.window.WindowOnBackInvokedDispatcher$OnBackInvokedCallbackWrapper$$ExternalSyntheticLambda6
                     @Override // android.window.BackProgressAnimator.ProgressCallback
                     public final void onProgressUpdate(BackEvent backEvent) {
-                        OnBackAnimationCallback.this.onBackProgressed(backEvent);
+                        backAnimationCallback.onBackProgressed(backEvent);
                     }
                 });
             }
@@ -434,7 +431,7 @@ public class WindowOnBackInvokedDispatcher implements OnBackInvokedDispatcher {
             this.mHandler.post(new Runnable() { // from class: android.window.WindowOnBackInvokedDispatcher$OnBackInvokedCallbackWrapper$$ExternalSyntheticLambda5
                 @Override // java.lang.Runnable
                 public final void run() {
-                    WindowOnBackInvokedDispatcher.OnBackInvokedCallbackWrapper.this.lambda$onBackProgressed$1(backMotionEvent);
+                    this.f$0.lambda$onBackProgressed$1(backMotionEvent);
                 }
             });
         }
@@ -451,7 +448,7 @@ public class WindowOnBackInvokedDispatcher implements OnBackInvokedDispatcher {
             this.mHandler.post(new Runnable() { // from class: android.window.WindowOnBackInvokedDispatcher$OnBackInvokedCallbackWrapper$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    WindowOnBackInvokedDispatcher.OnBackInvokedCallbackWrapper.this.lambda$onBackCancelled$2();
+                    this.f$0.lambda$onBackCancelled$2();
                 }
             });
         }
@@ -473,7 +470,7 @@ public class WindowOnBackInvokedDispatcher implements OnBackInvokedDispatcher {
             this.mHandler.post(new Runnable() { // from class: android.window.WindowOnBackInvokedDispatcher$OnBackInvokedCallbackWrapper$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    WindowOnBackInvokedDispatcher.OnBackInvokedCallbackWrapper.this.lambda$onBackInvoked$4();
+                    this.f$0.lambda$onBackInvoked$4();
                 }
             });
         }
@@ -484,14 +481,14 @@ public class WindowOnBackInvokedDispatcher implements OnBackInvokedDispatcher {
             if (consumedByOnKeyPreIme()) {
                 return;
             }
-            boolean isBackAnimationInProgress = this.mProgressAnimator.isBackAnimationInProgress();
+            boolean zIsBackAnimationInProgress = this.mProgressAnimator.isBackAnimationInProgress();
             final OnBackInvokedCallback onBackInvokedCallback = this.mCallback.get();
             if (onBackInvokedCallback == null) {
                 this.mProgressAnimator.reset();
                 Log.d(WindowOnBackInvokedDispatcher.TAG, "Trying to call onBackInvoked() on a null callback reference.");
                 return;
             }
-            if ((onBackInvokedCallback instanceof OnBackAnimationCallback) && !isBackAnimationInProgress) {
+            if ((onBackInvokedCallback instanceof OnBackAnimationCallback) && !zIsBackAnimationInProgress) {
                 Log.w(WindowOnBackInvokedDispatcher.TAG, "ProgressAnimator was not in progress, skip onBackInvoked().");
                 return;
             }
@@ -499,7 +496,7 @@ public class WindowOnBackInvokedDispatcher implements OnBackInvokedDispatcher {
                 this.mProgressAnimator.onBackInvoked(new Runnable() { // from class: android.window.WindowOnBackInvokedDispatcher$OnBackInvokedCallbackWrapper$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        WindowOnBackInvokedDispatcher.OnBackInvokedCallbackWrapper.this.lambda$onBackInvoked$3(onBackInvokedCallback);
+                        this.f$0.lambda$onBackInvoked$3(onBackInvokedCallback);
                     }
                 });
             } else {
@@ -560,14 +557,14 @@ public class WindowOnBackInvokedDispatcher implements OnBackInvokedDispatcher {
     }
 
     public static boolean isOnBackInvokedCallbackEnabled(final Context context) {
-        Context context2 = context;
-        while ((context2 instanceof ContextWrapper) && !(context2 instanceof Activity)) {
-            context2 = ((ContextWrapper) context2).getBaseContext();
+        Context baseContext = context;
+        while ((baseContext instanceof ContextWrapper) && !(baseContext instanceof Activity)) {
+            baseContext = ((ContextWrapper) baseContext).getBaseContext();
         }
-        return isOnBackInvokedCallbackEnabled(context2 instanceof Activity ? ((Activity) context2).getActivityInfo() : null, context2.getApplicationInfo(), new Supplier() { // from class: android.window.WindowOnBackInvokedDispatcher$$ExternalSyntheticLambda2
+        return isOnBackInvokedCallbackEnabled(baseContext instanceof Activity ? ((Activity) baseContext).getActivityInfo() : null, baseContext.getApplicationInfo(), new Supplier() { // from class: android.window.WindowOnBackInvokedDispatcher$$ExternalSyntheticLambda2
             @Override // java.util.function.Supplier
             public final Object get() {
-                return WindowOnBackInvokedDispatcher.lambda$isOnBackInvokedCallbackEnabled$1(Context.this);
+                return WindowOnBackInvokedDispatcher.lambda$isOnBackInvokedCallbackEnabled$1(context);
             }
         });
     }
@@ -626,19 +623,19 @@ public class WindowOnBackInvokedDispatcher implements OnBackInvokedDispatcher {
         if (activityInfo != null && activityInfo.hasOnBackInvokedCallbackEnabled()) {
             return activityInfo.isOnBackInvokedCallbackEnabled();
         }
-        boolean isOnBackInvokedCallbackEnabled = applicationInfo.isOnBackInvokedCallbackEnabled();
-        if (isOnBackInvokedCallbackEnabled) {
+        boolean zIsOnBackInvokedCallbackEnabled = applicationInfo.isOnBackInvokedCallbackEnabled();
+        if (zIsOnBackInvokedCallbackEnabled) {
             return true;
         }
         if (!PREDICTIVE_BACK_FALLBACK_WINDOW_ATTRIBUTE) {
-            return isOnBackInvokedCallbackEnabled;
+            return zIsOnBackInvokedCallbackEnabled;
         }
         Context context = supplier.get();
         if (context != null) {
-            TypedArray obtainStyledAttributes = context.obtainStyledAttributes(new int[]{16843763});
-            r2 = obtainStyledAttributes.getIndexCount() > 0 ? obtainStyledAttributes.getBoolean(0, true) : true;
-            obtainStyledAttributes.recycle();
+            TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(new int[]{16843763});
+            z = typedArrayObtainStyledAttributes.getIndexCount() > 0 ? typedArrayObtainStyledAttributes.getBoolean(0, true) : true;
+            typedArrayObtainStyledAttributes.recycle();
         }
-        return r2;
+        return z;
     }
 }

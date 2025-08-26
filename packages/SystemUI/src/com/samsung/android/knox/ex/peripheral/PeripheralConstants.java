@@ -1,6 +1,5 @@
 package com.samsung.android.knox.ex.peripheral;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class PeripheralConstants {
     public static final String ACTION_LOOPBACK_DEVICE_ATTACHED = "ACTION_LOOPBACK_DEVICE_ATTACHED";
@@ -66,7 +65,6 @@ public class PeripheralConstants {
     public static final String KEY_RESULT_STATE_STR = "KEY_RESULT_STATE_STR";
     public static final String KEY_RESULT_STR = "KEY_RESULT_STR";
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class BarcodeDataProcessMode {
         public static final String STORE = "PERIPHERAL_BARCODE_DATA_PROCESS_MODE_STORE";
         public static final String STORE_IF_NOT_SENT = "PERIPHERAL_BARCODE_DATA_PROCESS_MODE_STORE_IF_NOT_SENT";
@@ -78,7 +76,6 @@ public class PeripheralConstants {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class BatteryStatus {
         public static final String NO_BATTERY = "PERIPHERAL_BATTERY_STATUS_NO_BATTERY";
         public static final String UNKNOWN = "PERIPHERAL_BATTERY_STATUS_UNKNOWN";
@@ -87,7 +84,6 @@ public class PeripheralConstants {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class BeepSoundEffect {
         public static final String INTERVAL_INT = "BEEP_SOUND_EFFECT_INTERVAL_INT";
         public static final String REPEAT_INT = "BEEP_SOUND_EFFECT_REPEAT_INT";
@@ -96,7 +92,6 @@ public class PeripheralConstants {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class BtConstants {
         public static final int DISCOVER_TIMEOUT = 30;
 
@@ -104,7 +99,6 @@ public class PeripheralConstants {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class BtPeripheralListOption {
         public static final String ALL = "BT_PERIPHERAL_LIST_OPTION_ALL";
         public static final String RECENT = "BT_PERIPHERAL_LIST_OPTION_RECENT";
@@ -113,7 +107,6 @@ public class PeripheralConstants {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ConnectionProfile {
         public static final String HID = "HID";
         public static final String HID_WINDOW_PAIRING = "HID_WINDOW_PAIRING";
@@ -124,7 +117,6 @@ public class PeripheralConstants {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ConnectionState {
         public static final String CONNECTED = "PERIPHERAL_CONNECTION_STATE_CONNECTED";
         public static final String CONNECTING = "PERIPHERAL_CONNECTION_STATE_CONNECTING";
@@ -135,7 +127,6 @@ public class PeripheralConstants {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ConnectivityType {
         public static final String BLUETOOTH_CLASSIC = "BLUETOOTH_CLASSIC";
         public static final String BLUETOOTH_SMART = "BLUETOOTH_SMART";
@@ -148,7 +139,6 @@ public class PeripheralConstants {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DataClearOption {
         public static final String ALL = "PERIPHERAL_DATA_CLEAR_OPTION_ALL";
         public static final String FIRST = "PERIPHERAL_DATA_CLEAR_OPTION_FIRST";
@@ -158,7 +148,6 @@ public class PeripheralConstants {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DataResetOption {
         public static final String RESET_ALL = "PERIPHERAL_DATA_RESET_OPTION_ALL";
         public static final String RESET_SYSTEM_TIME = "PERIPHERAL_DATA_RESET_OPTION_SYSTEM_TIME";
@@ -167,7 +156,6 @@ public class PeripheralConstants {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DataSyncOption {
         public static final String SYNC_SYSTEM_TIME = "PERIPHERAL_DATA_SYNC_OPTION_SYSTEM_TIME";
 
@@ -175,7 +163,6 @@ public class PeripheralConstants {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DataType {
         public static final String BARCODE = "PERIPHERAL_DATA_TYPE_BARCODE";
         public static final String UNKNOWN = "PERIPHERAL_DATA_TYPE_UNKNOWN";
@@ -184,7 +171,6 @@ public class PeripheralConstants {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DeviceType {
         public static final String BARCODE_SCANNER = "PERIPHERAL_DEVICE_TYPE_BARCODE_SCANNER";
         public static final String UNKNOWN = "PERIPHERAL_DEVICE_TYPE_UNKNOWN";
@@ -193,7 +179,6 @@ public class PeripheralConstants {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DisplayText {
         public static final String CLEAR_DISPLAY_BOOL = "DISPLAY_TEXT_CLEAR_DISPLAY_BOOL";
 
@@ -201,7 +186,6 @@ public class PeripheralConstants {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ErrorCode {
         public static final int ERROR_FRAMEWORK_BASE = 2;
         public static final int ERROR_FRAMEWORK_CONNECTION_FAIL = 4;
@@ -237,7 +221,6 @@ public class PeripheralConstants {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class EventType {
         public static final int BT_DISCOVER_STOPPED = 4;
         public static final int CONNECTION_CHANGED = 0;
@@ -250,7 +233,6 @@ public class PeripheralConstants {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class FirmwareUpdateStatus {
         public static final String FAIL = "PERIPHERAL_FIRMWARE_UPDATE_FAIL";
         public static final String PROCESSING = "PERIPHERAL_FIRMWARE_UPDATE_PROCESSING";
@@ -260,7 +242,6 @@ public class PeripheralConstants {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Internal {
         public static final String INTERNAL_KEY_BLUETOOTH_DEVICE = "INTERNAL_KEY_BLUETOOTH_DEVICE";
         public static final String INTERNAL_KEY_BT_PAIRING_EXTRA_DATA_2_STR = "INTERNAL_KEY_BT_PAIRING_EXTRA_DATA_2_STR";
@@ -268,7 +249,6 @@ public class PeripheralConstants {
         public static final String INTERNAL_KEY_BT_PAIRING_EXTRA_DATA_TYPE_STR = "INTERNAL_KEY_BT_PAIRING_EXTRA_DATA_TYPE_STR";
         public static final String INTERNAL_KEY_PLUGIN_NONCE_STR = "INTERNAL_KEY_PLUGIN_NONCE_STR";
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class BtPairingExtraDataType {
             public static final String DEVICE_NAME = "DEVICE_NAME";
             public static final String MAC_ADDRESS = "MAC_ADDRESS";
@@ -280,7 +260,6 @@ public class PeripheralConstants {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PeripheralInfo {
         public static final String SUMMARY = "SUMMARY";
 
@@ -288,7 +267,6 @@ public class PeripheralConstants {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PeripheralState {
         public static final String NORMAL = "PERIPHERAL_STATE_NORMAL";
 
@@ -296,7 +274,6 @@ public class PeripheralConstants {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Result {
         public static final String NOT_AVAILABLE = "N/A";
 
@@ -304,11 +281,9 @@ public class PeripheralConstants {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class VendorKoamtac {
         public static final String KEY_PERIPHERAL_FIRMWARE_TYPE = "VENDOR_KOAMTAC_KEY_PERIPHERAL_FIRMWARE_TYPE";
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class FirmwareType {
             public static final String INTERFACE = "INTERFACE_FIRMWARE";
             public static final String KDC = "KDC_FIRMWARE";
@@ -322,7 +297,6 @@ public class PeripheralConstants {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class VibrationEffect {
         public static final String INTERVAL_INT = "VIBRATION_SOUND_EFFECT_INTERVAL_INT";
         public static final String REPEAT_INT = "VIBRATION_SOUND_EFFECT_REPEAT_INT";

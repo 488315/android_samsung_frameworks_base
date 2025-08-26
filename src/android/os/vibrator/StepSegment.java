@@ -77,8 +77,8 @@ public final class StepSegment extends VibrationEffectSegment {
 
     @Override // android.os.vibrator.VibrationEffectSegment
     public boolean areVibrationFeaturesSupported(VibratorInfo vibratorInfo) {
-        boolean hasFrequencyControl = frequencyRequiresFrequencyControl(this.mFrequencyHz) ? vibratorInfo.hasFrequencyControl() : true;
-        return amplitudeRequiresAmplitudeControl(this.mAmplitude) ? vibratorInfo.hasAmplitudeControl() & hasFrequencyControl : hasFrequencyControl;
+        boolean zHasFrequencyControl = frequencyRequiresFrequencyControl(this.mFrequencyHz) ? vibratorInfo.hasFrequencyControl() : true;
+        return amplitudeRequiresAmplitudeControl(this.mAmplitude) ? vibratorInfo.hasAmplitudeControl() & zHasFrequencyControl : zHasFrequencyControl;
     }
 
     @Override // android.os.vibrator.VibrationEffectSegment
@@ -104,9 +104,9 @@ public final class StepSegment extends VibrationEffectSegment {
     @Override // android.os.vibrator.VibrationEffectSegment
     public StepSegment scale(float f) {
         if (Float.compare(this.mAmplitude, -1.0f) != 0) {
-            float scale = VibrationEffect.scale(this.mAmplitude, f);
-            if (Float.compare(scale, this.mAmplitude) != 0) {
-                return new StepSegment(scale, this.mFrequencyHz, this.mDuration);
+            float fScale = VibrationEffect.scale(this.mAmplitude, f);
+            if (Float.compare(fScale, this.mAmplitude) != 0) {
+                return new StepSegment(fScale, this.mFrequencyHz, this.mDuration);
             }
         }
         return this;
@@ -115,9 +115,9 @@ public final class StepSegment extends VibrationEffectSegment {
     @Override // android.os.vibrator.VibrationEffectSegment
     public StepSegment scaleLinearly(float f) {
         if (Float.compare(this.mAmplitude, -1.0f) != 0) {
-            float scaleLinearly = VibrationEffect.scaleLinearly(this.mAmplitude, f);
-            if (Float.compare(scaleLinearly, this.mAmplitude) != 0) {
-                return new StepSegment(scaleLinearly, this.mFrequencyHz, this.mDuration);
+            float fScaleLinearly = VibrationEffect.scaleLinearly(this.mAmplitude, f);
+            if (Float.compare(fScaleLinearly, this.mAmplitude) != 0) {
+                return new StepSegment(fScaleLinearly, this.mFrequencyHz, this.mDuration);
             }
         }
         return this;
@@ -134,14 +134,14 @@ public final class StepSegment extends VibrationEffectSegment {
     @Override // android.os.vibrator.VibrationEffectSegment
     public String toDebugString() {
         String str;
-        Integer valueOf = Integer.valueOf(this.mDuration);
-        Float valueOf2 = Float.valueOf(this.mAmplitude);
+        Integer numValueOf = Integer.valueOf(this.mDuration);
+        Float fValueOf = Float.valueOf(this.mAmplitude);
         if (Float.compare(this.mFrequencyHz, 0.0f) == 0) {
             str = "";
         } else {
             str = " @ " + this.mFrequencyHz + "Hz";
         }
-        return String.format("Step=%dms(amplitude=%.2f%s)", valueOf, valueOf2, str);
+        return String.format("Step=%dms(amplitude=%.2f%s)", numValueOf, fValueOf, str);
     }
 
     @Override // android.os.Parcelable

@@ -12,7 +12,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class FromGlanceableHubTransitionInteractor$listenForHubToAodOrDozing$1 extends SuspendLambda implements Function2 {
     int label;
@@ -47,7 +46,7 @@ final class FromGlanceableHubTransitionInteractor$listenForHubToAodOrDozing$1 ex
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 public final Object emit(Object obj2, Continuation continuation) {
                     ((Boolean) obj2).getClass();
-                    FromGlanceableHubTransitionInteractor fromGlanceableHubTransitionInteractor3 = FromGlanceableHubTransitionInteractor.this;
+                    FromGlanceableHubTransitionInteractor fromGlanceableHubTransitionInteractor3 = fromGlanceableHubTransitionInteractor2;
                     CommunalSceneInteractor.changeScene$default(fromGlanceableHubTransitionInteractor3.communalSceneInteractor, CommunalScenes.Blank, "hub to sleep", null, (KeyguardState) fromGlanceableHubTransitionInteractor3.keyguardInteractor.asleepKeyguardState.$$delegate_0.getValue(), 4);
                     return Unit.INSTANCE;
                 }

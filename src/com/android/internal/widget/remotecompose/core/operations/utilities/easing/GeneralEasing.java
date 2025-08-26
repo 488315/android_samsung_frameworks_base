@@ -15,25 +15,25 @@ public class GeneralEasing extends Easing {
     }
 
     void createEngine() {
-        int floatToRawIntBits = Float.floatToRawIntBits(this.mEasingData[0]);
-        if (floatToRawIntBits == 11) {
+        int iFloatToRawIntBits = Float.floatToRawIntBits(this.mEasingData[0]);
+        if (iFloatToRawIntBits == 11) {
             float[] fArr = this.mEasingData;
             this.mEasingCurve = new CubicEasing(fArr[1], fArr[2], fArr[3], fArr[5]);
         } else {
-            if (floatToRawIntBits != 13) {
-                switch (floatToRawIntBits) {
+            if (iFloatToRawIntBits != 13) {
+                switch (iFloatToRawIntBits) {
                     case 1:
                     case 2:
                     case 3:
                     case 4:
                     case 5:
                     case 6:
-                        this.mEasingCurve = new CubicEasing(floatToRawIntBits);
+                        this.mEasingCurve = new CubicEasing(iFloatToRawIntBits);
                         break;
                 }
                 return;
             }
-            this.mEasingCurve = new BounceCurve(floatToRawIntBits);
+            this.mEasingCurve = new BounceCurve(iFloatToRawIntBits);
         }
     }
 

@@ -7,7 +7,7 @@ import android.hardware.camera2.impl.CameraMetadataNative;
 import android.hardware.camera2.impl.ExtensionKey;
 import android.hardware.camera2.impl.PublicKey;
 import android.hardware.camera2.impl.SyntheticKey;
-import android.sec.enterprise.proxy.EnterpriseProxyConstants;
+import com.samsung.android.sume.core.controller.MediaController;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -368,7 +368,7 @@ public abstract class CameraMetadata<TKey> {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    <TKey> ArrayList<TKey> getKeys(Class<?> cls, Class<TKey> cls2, CameraMetadata<TKey> cameraMetadata, int[] iArr, boolean z) {
+    <TKey> ArrayList<TKey> getKeys(Class<?> cls, Class<TKey> cls2, CameraMetadata<TKey> cameraMetadata, int[] iArr, boolean z) throws IllegalAccessException, IllegalArgumentException {
         ArrayList allVendorKeys;
         String name;
         long vendorId;
@@ -378,13 +378,13 @@ public abstract class CameraMetadata<TKey> {
         if (iArr != null) {
             Arrays.sort(iArr);
         }
-        EnterpriseProxyConstants.AnonymousClass1 anonymousClass1 = (ArrayList<TKey>) new ArrayList();
+        MediaController.AnonymousClass2 anonymousClass2 = (ArrayList<TKey>) new ArrayList();
         for (Field field : cls.getDeclaredFields()) {
             if (field.getType().isAssignableFrom(cls2) && (field.getModifiers() & 1) != 0) {
                 try {
                     Object obj = field.get(cameraMetadata);
                     if ((cameraMetadata == 0 || cameraMetadata.getProtected(obj) != null) && shouldKeyBeAdded(obj, field, iArr, z)) {
-                        anonymousClass1.add(obj);
+                        anonymousClass2.add(obj);
                     }
                 } catch (IllegalAccessException e) {
                     throw new AssertionError("Can't get IllegalAccessException", e);
@@ -413,12 +413,12 @@ public abstract class CameraMetadata<TKey> {
                 }
                 if (iArr == null || Arrays.binarySearch(iArr, CameraMetadataNative.getTag(name, vendorId)) >= 0) {
                     if (cameraMetadata == 0 || cameraMetadata.getProtected(next) != null) {
-                        anonymousClass1.add(next);
+                        anonymousClass2.add(next);
                     }
                 }
             }
         }
-        return anonymousClass1;
+        return anonymousClass2;
     }
 
     /* JADX WARN: Multi-variable type inference failed */

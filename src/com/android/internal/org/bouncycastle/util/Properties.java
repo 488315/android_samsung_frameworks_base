@@ -41,7 +41,7 @@ public class Properties {
     }
 
     public static boolean setThreadOverride(String str, boolean z) {
-        boolean isOverrideSet = isOverrideSet(str);
+        boolean zIsOverrideSet = isOverrideSet(str);
         ThreadLocal threadLocal = threadProperties;
         Map map = (Map) threadLocal.get();
         if (map == null) {
@@ -49,7 +49,7 @@ public class Properties {
             threadLocal.set(map);
         }
         map.put(str, z ? "true" : "false");
-        return isOverrideSet;
+        return zIsOverrideSet;
     }
 
     public static boolean removeThreadOverride(String str) {

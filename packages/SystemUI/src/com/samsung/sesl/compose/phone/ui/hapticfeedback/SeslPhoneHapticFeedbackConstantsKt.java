@@ -6,13 +6,13 @@ import com.samsung.sesl.sep.reflect.SepBaseReflector;
 import com.samsung.sesl.sep.reflect.view.SepHapticFeedbackConstantsReflector;
 import java.lang.reflect.Method;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class SeslPhoneHapticFeedbackConstantsKt {
     public static final SeslHapticFeedbackConstants SeslPhoneHapticFeedbackConstants;
 
+    /* JADX WARN: Removed duplicated region for block: B:9:0x0042  */
     static {
-        int i;
+        int iIntValue;
         SeslPhoneHapticFeedbackConstantsKt$SeslPhoneHapticFeedbackConstants$1 seslPhoneHapticFeedbackConstantsKt$SeslPhoneHapticFeedbackConstants$1 = new SeslPhoneHapticFeedbackConstantsKt$SeslPhoneHapticFeedbackConstants$1(SepHapticFeedbackConstantsCompat.INSTANCE);
         SepHapticFeedbackConstantsReflector.INSTANCE.getClass();
         SepBaseReflector sepBaseReflector = SepBaseReflector.INSTANCE;
@@ -21,14 +21,10 @@ public abstract class SeslPhoneHapticFeedbackConstantsKt {
         sepBaseReflector.getClass();
         Method declaredMethod = SepBaseReflector.getDeclaredMethod(cls, "hidden_semGetVibrationIndex", clsArr);
         if (declaredMethod != null) {
-            Object invoke = SepBaseReflector.invoke(null, declaredMethod, 27);
-            Integer num = invoke instanceof Integer ? (Integer) invoke : null;
-            if (num != null) {
-                i = num.intValue();
-                SeslPhoneHapticFeedbackConstants = new SeslHapticFeedbackConstants(seslPhoneHapticFeedbackConstantsKt$SeslPhoneHapticFeedbackConstants$1, i);
-            }
+            Object objInvoke = SepBaseReflector.invoke(null, declaredMethod, 27);
+            Integer num = objInvoke instanceof Integer ? (Integer) objInvoke : null;
+            iIntValue = num != null ? num.intValue() : -1;
         }
-        i = -1;
-        SeslPhoneHapticFeedbackConstants = new SeslHapticFeedbackConstants(seslPhoneHapticFeedbackConstantsKt$SeslPhoneHapticFeedbackConstants$1, i);
+        SeslPhoneHapticFeedbackConstants = new SeslHapticFeedbackConstants(seslPhoneHapticFeedbackConstantsKt$SeslPhoneHapticFeedbackConstants$1, iIntValue);
     }
 }

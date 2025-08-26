@@ -53,9 +53,9 @@ public interface IObbBackupService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IObbBackupService)) {
-                return (IObbBackupService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IObbBackupService)) {
+                return (IObbBackupService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -85,24 +85,24 @@ public interface IObbBackupService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 ParcelFileDescriptor parcelFileDescriptor = (ParcelFileDescriptor) parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
-                int readInt = parcel.readInt();
-                IBackupManager asInterface = IBackupManager.Stub.asInterface(parcel.readStrongBinder());
+                int i3 = parcel.readInt();
+                IBackupManager iBackupManagerAsInterface = IBackupManager.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                backupObbs(readString, parcelFileDescriptor, readInt, asInterface);
+                backupObbs(string, parcelFileDescriptor, i3, iBackupManagerAsInterface);
             } else if (i == 2) {
-                String readString2 = parcel.readString();
+                String string2 = parcel.readString();
                 ParcelFileDescriptor parcelFileDescriptor2 = (ParcelFileDescriptor) parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
-                long readLong = parcel.readLong();
-                int readInt2 = parcel.readInt();
-                String readString3 = parcel.readString();
-                long readLong2 = parcel.readLong();
-                long readLong3 = parcel.readLong();
-                int readInt3 = parcel.readInt();
-                IBackupManager asInterface2 = IBackupManager.Stub.asInterface(parcel.readStrongBinder());
+                long j = parcel.readLong();
+                int i4 = parcel.readInt();
+                String string3 = parcel.readString();
+                long j2 = parcel.readLong();
+                long j3 = parcel.readLong();
+                int i5 = parcel.readInt();
+                IBackupManager iBackupManagerAsInterface2 = IBackupManager.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                restoreObbFile(readString2, parcelFileDescriptor2, readLong, readInt2, readString3, readLong2, readLong3, readInt3, asInterface2);
+                restoreObbFile(string2, parcelFileDescriptor2, j, i4, string3, j2, j3, i5, iBackupManagerAsInterface2);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -127,36 +127,36 @@ public interface IObbBackupService extends IInterface {
 
             @Override // com.android.internal.backup.IObbBackupService
             public void backupObbs(String str, ParcelFileDescriptor parcelFileDescriptor, int i, IBackupManager iBackupManager) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(parcelFileDescriptor, 0);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iBackupManager);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iBackupManager);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.android.internal.backup.IObbBackupService
             public void restoreObbFile(String str, ParcelFileDescriptor parcelFileDescriptor, long j, int i, String str2, long j2, long j3, int i2, IBackupManager iBackupManager) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(parcelFileDescriptor, 0);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i);
-                    obtain.writeString(str2);
-                    obtain.writeLong(j2);
-                    obtain.writeLong(j3);
-                    obtain.writeInt(i2);
-                    obtain.writeStrongInterface(iBackupManager);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(parcelFileDescriptor, 0);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeLong(j2);
+                    parcelObtain.writeLong(j3);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeStrongInterface(iBackupManager);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

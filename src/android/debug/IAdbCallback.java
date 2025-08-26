@@ -44,9 +44,9 @@ public interface IAdbCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IAdbCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IAdbCallback)) {
-                return (IAdbCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IAdbCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IAdbCallback)) {
+                return (IAdbCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,10 +73,10 @@ public interface IAdbCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                boolean readBoolean = parcel.readBoolean();
-                byte readByte = parcel.readByte();
+                boolean z = parcel.readBoolean();
+                byte b = parcel.readByte();
                 parcel.enforceNoDataAvail();
-                onDebuggingChanged(readBoolean, readByte);
+                onDebuggingChanged(z, b);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -100,14 +100,14 @@ public interface IAdbCallback extends IInterface {
 
             @Override // android.debug.IAdbCallback
             public void onDebuggingChanged(boolean z, byte b) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IAdbCallback.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    obtain.writeByte(b);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IAdbCallback.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeByte(b);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

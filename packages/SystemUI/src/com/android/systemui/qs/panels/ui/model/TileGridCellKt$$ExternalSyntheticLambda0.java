@@ -7,7 +7,6 @@ import java.util.List;
 import kotlin.collections.CollectionsKt__IterablesKt;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class TileGridCellKt$$ExternalSyntheticLambda0 implements Function2 {
     public final /* synthetic */ int f$0;
@@ -20,25 +19,25 @@ public final /* synthetic */ class TileGridCellKt$$ExternalSyntheticLambda0 impl
 
     @Override // kotlin.jvm.functions.Function2
     public final Object invoke(Object obj, Object obj2) {
-        int intValue = ((Integer) obj).intValue() + this.f$0;
+        int iIntValue = ((Integer) obj).intValue() + this.f$0;
         List list = (List) obj2;
         ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(list, 10));
         Iterator it = list.iterator();
         int i = 0;
         while (it.hasNext()) {
-            TileGridCell tileGridCell = new TileGridCell((SizedTile) it.next(), intValue, i);
+            TileGridCell tileGridCell = new TileGridCell((SizedTile) it.next(), iIntValue, i);
             i += tileGridCell.width;
             arrayList.add(tileGridCell);
         }
         Iterator it2 = list.iterator();
-        int i2 = 0;
+        int width = 0;
         while (it2.hasNext()) {
-            i2 += ((SizedTile) it2.next()).getWidth();
+            width += ((SizedTile) it2.next()).getWidth();
         }
-        int i3 = this.f$1 - i2;
+        int i2 = this.f$1 - width;
         ArrayList arrayList2 = new ArrayList(arrayList);
-        for (int i4 = 0; i4 < i3; i4++) {
-            arrayList2.add(new SpacerGridCell(intValue, 0L, 2, null));
+        for (int i3 = 0; i3 < i2; i3++) {
+            arrayList2.add(new SpacerGridCell(iIntValue, 0L, 2, null));
         }
         return arrayList2;
     }

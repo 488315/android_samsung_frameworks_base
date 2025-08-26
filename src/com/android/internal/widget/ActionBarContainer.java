@@ -2,6 +2,7 @@ package com.android.internal.widget;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
@@ -47,25 +48,25 @@ public class ActionBarContainer extends FrameLayout {
         this.mIsThemeDeviceDefaultFamily = z2;
         this.mIsSetOpenTheme = z2 && context.getResources().getAssets().getSamsungThemeOverlays().size() > 0;
         this.mSetBackground = false;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.ActionBar);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.ActionBar);
         if (this.mIsSetOpenTheme) {
-            if (obtainStyledAttributes.getResourceId(2, 0) == 17304054) {
+            if (typedArrayObtainStyledAttributes.getResourceId(2, 0) == 17304054) {
                 this.mBackground = context.getDrawable(R.drawable.tw_action_bar_background);
-            } else if (obtainStyledAttributes.getResourceId(2, 0) == 17304055) {
+            } else if (typedArrayObtainStyledAttributes.getResourceId(2, 0) == 17304055) {
                 this.mBackground = context.getDrawable(R.drawable.tw_action_bar_background_dark);
             } else {
-                this.mBackground = obtainStyledAttributes.getDrawable(2);
+                this.mBackground = typedArrayObtainStyledAttributes.getDrawable(2);
             }
         } else {
-            this.mBackground = obtainStyledAttributes.getDrawable(2);
+            this.mBackground = typedArrayObtainStyledAttributes.getDrawable(2);
         }
-        this.mStackedBackground = obtainStyledAttributes.getDrawable(18);
-        this.mHeight = obtainStyledAttributes.getDimensionPixelSize(4, -1);
-        if (getId() == 16909868) {
+        this.mStackedBackground = typedArrayObtainStyledAttributes.getDrawable(18);
+        this.mHeight = typedArrayObtainStyledAttributes.getDimensionPixelSize(4, -1);
+        if (getId() == 16909869) {
             this.mIsSplit = true;
-            this.mSplitBackground = obtainStyledAttributes.getDrawable(19);
+            this.mSplitBackground = typedArrayObtainStyledAttributes.getDrawable(19);
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
         if (!this.mIsSplit ? this.mBackground != null || this.mStackedBackground != null : this.mSplitBackground != null) {
             z = false;
         }
@@ -76,20 +77,20 @@ public class ActionBarContainer extends FrameLayout {
     protected void onConfigurationChanged(Configuration configuration) {
         super.onConfigurationChanged(configuration);
         if (this.mIsThemeDeviceDefaultFamily) {
-            TypedArray obtainStyledAttributes = getContext().obtainStyledAttributes(null, R.styleable.ActionBar, 16843470, 0);
+            TypedArray typedArrayObtainStyledAttributes = getContext().obtainStyledAttributes(null, R.styleable.ActionBar, 16843470, 0);
             if (this.mIsSetOpenTheme) {
-                if (obtainStyledAttributes.getResourceId(2, 0) == 17304054) {
+                if (typedArrayObtainStyledAttributes.getResourceId(2, 0) == 17304054) {
                     this.mBackground = getContext().getDrawable(R.drawable.tw_action_bar_background);
-                } else if (obtainStyledAttributes.getResourceId(2, 0) == 17304055) {
+                } else if (typedArrayObtainStyledAttributes.getResourceId(2, 0) == 17304055) {
                     this.mBackground = getContext().getDrawable(R.drawable.tw_action_bar_background_dark);
                 } else if (!this.mSetBackground) {
-                    this.mBackground = obtainStyledAttributes.getDrawable(2);
+                    this.mBackground = typedArrayObtainStyledAttributes.getDrawable(2);
                 }
             } else if (!this.mSetBackground) {
-                this.mBackground = obtainStyledAttributes.getDrawable(2);
+                this.mBackground = typedArrayObtainStyledAttributes.getDrawable(2);
             }
-            this.mHeight = obtainStyledAttributes.getDimensionPixelSize(4, -1);
-            obtainStyledAttributes.recycle();
+            this.mHeight = typedArrayObtainStyledAttributes.getDimensionPixelSize(4, -1);
+            typedArrayObtainStyledAttributes.recycle();
         }
     }
 
@@ -332,18 +333,23 @@ public class ActionBarContainer extends FrameLayout {
         }
         int paddingTop = getPaddingTop() + getPaddingBottom();
         int childCount = getChildCount();
-        int i4 = 0;
-        for (int i5 = 0; i5 < childCount; i5++) {
-            View childAt = getChildAt(i5);
+        int iMax = 0;
+        for (int i4 = 0; i4 < childCount; i4++) {
+            View childAt = getChildAt(i4);
             if (childAt != this.mTabContainer) {
-                i4 = Math.max(i4, isCollapsed(childAt) ? 0 : getMeasuredHeightWithMargins(childAt));
+                iMax = Math.max(iMax, isCollapsed(childAt) ? 0 : getMeasuredHeightWithMargins(childAt));
             }
         }
-        setMeasuredDimension(getMeasuredWidth(), Math.min(paddingTop + i4 + getMeasuredHeightWithMargins(this.mTabContainer), View.MeasureSpec.getMode(i2) == Integer.MIN_VALUE ? View.MeasureSpec.getSize(i2) : Integer.MAX_VALUE));
+        setMeasuredDimension(getMeasuredWidth(), Math.min(paddingTop + iMax + getMeasuredHeightWithMargins(this.mTabContainer), View.MeasureSpec.getMode(i2) == Integer.MIN_VALUE ? View.MeasureSpec.getSize(i2) : Integer.MAX_VALUE));
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:17:0x0049 A[PHI: r0
+      0x0049: PHI (r0v4 boolean) = (r0v1 boolean), (r0v1 boolean), (r0v0 boolean) binds: [B:31:0x0078, B:33:0x007c, B:15:0x003b] A[DONT_GENERATE, DONT_INLINE]] */
     @Override // android.widget.FrameLayout, android.view.ViewGroup, android.view.View
-    public void onLayout(boolean z, int i, int i2, int i3, int i4) {
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public void onLayout(boolean z, int i, int i2, int i3, int i4) throws Resources.NotFoundException {
         Drawable drawable;
         View view;
         super.onLayout(z, i, i2, i3, i4);
@@ -360,8 +366,9 @@ public class ActionBarContainer extends FrameLayout {
             Drawable drawable2 = this.mSplitBackground;
             if (drawable2 != null) {
                 drawable2.setBounds(0, 0, getMeasuredWidth(), getMeasuredHeight());
+            } else {
+                z2 = z3;
             }
-            z2 = z3;
         } else {
             if (this.mBackground != null) {
                 if (this.mActionBarView.getVisibility() == 0 || ((view = this.mActionContextView) != null && view.getVisibility() == 0)) {
@@ -375,7 +382,6 @@ public class ActionBarContainer extends FrameLayout {
             if (z4 && (drawable = this.mStackedBackground) != null) {
                 drawable.setBounds(view2.getLeft(), view2.getTop(), view2.getRight(), view2.getBottom());
             }
-            z2 = z3;
         }
         if (z2) {
             invalidate();

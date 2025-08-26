@@ -19,7 +19,6 @@ import com.android.systemui.shared.animation.UnfoldConstantTranslateAnimator;
 import java.util.function.Consumer;
 import kotlin.coroutines.EmptyCoroutineContext;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class NotificationShadeWindowViewController$$ExternalSyntheticLambda6 implements Consumer {
     public final /* synthetic */ int $r8$classId;
@@ -36,9 +35,9 @@ public final /* synthetic */ class NotificationShadeWindowViewController$$Extern
         NotificationShadeWindowViewController notificationShadeWindowViewController = this.f$0;
         switch (i) {
             case 0:
-                boolean booleanValue = ((Boolean) obj).booleanValue();
+                boolean zBooleanValue = ((Boolean) obj).booleanValue();
                 GlanceableHubContainerController glanceableHubContainerController = notificationShadeWindowViewController.mGlanceableHubContainerController;
-                if (!booleanValue) {
+                if (!zBooleanValue) {
                     glanceableHubContainerController.getClass();
                     RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
                     int i2 = SceneContainerFlag.$r8$clinit;
@@ -64,12 +63,12 @@ public final /* synthetic */ class NotificationShadeWindowViewController$$Extern
                     break;
                 } else {
                     NotificationShadeWindowView notificationShadeWindowView = notificationShadeWindowViewController.mView;
-                    int indexOfChild = notificationShadeWindowView.indexOfChild(notificationShadeWindowView.findViewById(R.id.communal_ui_stub));
+                    int iIndexOfChild = notificationShadeWindowView.indexOfChild(notificationShadeWindowView.findViewById(R.id.communal_ui_stub));
                     Context context = notificationShadeWindowView.getContext();
                     glanceableHubContainerController.getClass();
                     ComposeView composeView = new ComposeView(context, null, 0, 6, null);
                     RepeatWhenAttachedKt.repeatWhenAttached(composeView, EmptyCoroutineContext.INSTANCE, new GlanceableHubContainerController$initView$1$1(composeView, glanceableHubContainerController, null));
-                    notificationShadeWindowView.addView(glanceableHubContainerController.initView$frameworks__base__packages__SystemUI__android_common__SystemUI_core(composeView), indexOfChild);
+                    notificationShadeWindowView.addView(glanceableHubContainerController.initView$frameworks__base__packages__SystemUI__android_common__SystemUI_core(composeView), iIndexOfChild);
                     break;
                 }
             case 1:

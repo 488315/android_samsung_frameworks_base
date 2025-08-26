@@ -1,6 +1,5 @@
 package gov.nist.javax.sip.header;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class CallIdentifier extends SIPObject {
     private static final long serialVersionUID = 7314773655675451377L;
@@ -59,16 +58,16 @@ public final class CallIdentifier extends SIPObject {
 
     public CallIdentifier(String str) throws IllegalArgumentException {
         if (str != null) {
-            int indexOf = str.indexOf(64);
-            if (indexOf == -1) {
+            int iIndexOf = str.indexOf(64);
+            if (iIndexOf == -1) {
                 this.localId = str;
                 this.host = null;
                 return;
             }
-            this.localId = str.substring(0, indexOf);
-            String substring = str.substring(indexOf + 1, str.length());
-            this.host = substring;
-            if (this.localId == null || substring == null) {
+            this.localId = str.substring(0, iIndexOf);
+            String strSubstring = str.substring(iIndexOf + 1, str.length());
+            this.host = strSubstring;
+            if (this.localId == null || strSubstring == null) {
                 throw new IllegalArgumentException("CallID  must be token@token or token");
             }
             return;

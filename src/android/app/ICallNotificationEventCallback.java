@@ -52,9 +52,9 @@ public interface ICallNotificationEventCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ICallNotificationEventCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ICallNotificationEventCallback)) {
-                return (ICallNotificationEventCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ICallNotificationEventCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ICallNotificationEventCallback)) {
+                return (ICallNotificationEventCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -84,15 +84,15 @@ public interface ICallNotificationEventCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 UserHandle userHandle = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
                 parcel.enforceNoDataAvail();
-                onCallNotificationPosted(readString, userHandle);
+                onCallNotificationPosted(string, userHandle);
             } else if (i == 2) {
-                String readString2 = parcel.readString();
+                String string2 = parcel.readString();
                 UserHandle userHandle2 = (UserHandle) parcel.readTypedObject(UserHandle.CREATOR);
                 parcel.enforceNoDataAvail();
-                onCallNotificationRemoved(readString2, userHandle2);
+                onCallNotificationRemoved(string2, userHandle2);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -117,27 +117,27 @@ public interface ICallNotificationEventCallback extends IInterface {
 
             @Override // android.app.ICallNotificationEventCallback
             public void onCallNotificationPosted(String str, UserHandle userHandle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICallNotificationEventCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(userHandle, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICallNotificationEventCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.ICallNotificationEventCallback
             public void onCallNotificationRemoved(String str, UserHandle userHandle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICallNotificationEventCallback.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(userHandle, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICallNotificationEventCallback.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

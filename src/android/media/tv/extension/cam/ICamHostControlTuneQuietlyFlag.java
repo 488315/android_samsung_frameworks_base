@@ -61,9 +61,9 @@ public interface ICamHostControlTuneQuietlyFlag extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.cam.ICamHostControlTuneQuietlyFlag");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ICamHostControlTuneQuietlyFlag)) {
-                return (ICamHostControlTuneQuietlyFlag) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.cam.ICamHostControlTuneQuietlyFlag");
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ICamHostControlTuneQuietlyFlag)) {
+                return (ICamHostControlTuneQuietlyFlag) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -96,19 +96,19 @@ public interface ICamHostControlTuneQuietlyFlag extends IInterface {
                 return true;
             }
             if (i == 1) {
-                ICamHostControlTuneQuietlyFlagListener asInterface = ICamHostControlTuneQuietlyFlagListener.Stub.asInterface(parcel.readStrongBinder());
+                ICamHostControlTuneQuietlyFlagListener iCamHostControlTuneQuietlyFlagListenerAsInterface = ICamHostControlTuneQuietlyFlagListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                addHcTuneQuietlyFlagListener(asInterface);
+                addHcTuneQuietlyFlagListener(iCamHostControlTuneQuietlyFlagListenerAsInterface);
                 parcel2.writeNoException();
             } else if (i == 2) {
-                ICamHostControlTuneQuietlyFlagListener asInterface2 = ICamHostControlTuneQuietlyFlagListener.Stub.asInterface(parcel.readStrongBinder());
+                ICamHostControlTuneQuietlyFlagListener iCamHostControlTuneQuietlyFlagListenerAsInterface2 = ICamHostControlTuneQuietlyFlagListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                removeHcTuneQuietlyFlagListener(asInterface2);
+                removeHcTuneQuietlyFlagListener(iCamHostControlTuneQuietlyFlagListenerAsInterface2);
                 parcel2.writeNoException();
             } else if (i == 3) {
-                String readString = parcel.readString();
+                String string = parcel.readString();
                 parcel.enforceNoDataAvail();
-                Bundle hcTuneQuietlyFlag = getHcTuneQuietlyFlag(readString);
+                Bundle hcTuneQuietlyFlag = getHcTuneQuietlyFlag(string);
                 parcel2.writeNoException();
                 parcel2.writeTypedObject(hcTuneQuietlyFlag, 1);
             } else {
@@ -135,47 +135,47 @@ public interface ICamHostControlTuneQuietlyFlag extends IInterface {
 
             @Override // android.media.tv.extension.cam.ICamHostControlTuneQuietlyFlag
             public void addHcTuneQuietlyFlagListener(ICamHostControlTuneQuietlyFlagListener iCamHostControlTuneQuietlyFlagListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.cam.ICamHostControlTuneQuietlyFlag");
-                    obtain.writeStrongInterface(iCamHostControlTuneQuietlyFlagListener);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.cam.ICamHostControlTuneQuietlyFlag");
+                    parcelObtain.writeStrongInterface(iCamHostControlTuneQuietlyFlagListener);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.cam.ICamHostControlTuneQuietlyFlag
             public void removeHcTuneQuietlyFlagListener(ICamHostControlTuneQuietlyFlagListener iCamHostControlTuneQuietlyFlagListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.cam.ICamHostControlTuneQuietlyFlag");
-                    obtain.writeStrongInterface(iCamHostControlTuneQuietlyFlagListener);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.cam.ICamHostControlTuneQuietlyFlag");
+                    parcelObtain.writeStrongInterface(iCamHostControlTuneQuietlyFlagListener);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.cam.ICamHostControlTuneQuietlyFlag
             public Bundle getHcTuneQuietlyFlag(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.cam.ICamHostControlTuneQuietlyFlag");
-                    obtain.writeString(str);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (Bundle) obtain2.readTypedObject(Bundle.CREATOR);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.cam.ICamHostControlTuneQuietlyFlag");
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (Bundle) parcelObtain2.readTypedObject(Bundle.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

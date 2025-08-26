@@ -3,6 +3,7 @@ package com.android.systemui.qp.customize;
 import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Point;
 import android.util.Log;
 import android.view.View;
@@ -30,7 +31,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SubscreenCustomizerController extends ViewController implements SubscreenQSControllerContract$BaseViewController {
     public final Context mContext;
@@ -53,7 +53,7 @@ public class SubscreenCustomizerController extends ViewController implements Sub
         this.mQSHostCallback = new QSHost.Callback() { // from class: com.android.systemui.qp.customize.SubscreenCustomizerController$$ExternalSyntheticLambda0
             @Override // com.android.systemui.qs.QSHost.Callback
             public final void onTilesChanged() {
-                SubscreenCustomizerController.this.setTiles();
+                this.f$0.setTiles();
             }
         };
         this.mDragStart = false;
@@ -83,9 +83,9 @@ public class SubscreenCustomizerController extends ViewController implements Sub
                 final QSTileView qSTileView = subscreenCustomizerController3.mLongClickedView;
                 final float f = -Math.abs(qSTileView.getWidth() * 0.125f);
                 final float f2 = -Math.abs(qSTileView.getHeight() * 0.25f);
-                ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-                ofFloat.setDuration(80L);
-                ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.qp.customize.SubscreenCustomizerController$$ExternalSyntheticLambda1
+                ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+                valueAnimatorOfFloat.setDuration(80L);
+                valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.qp.customize.SubscreenCustomizerController$$ExternalSyntheticLambda1
                     @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                     public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                         View view2 = qSTileView;
@@ -96,8 +96,8 @@ public class SubscreenCustomizerController extends ViewController implements Sub
                         view2.setTranslationY(f4 * animatedFraction);
                     }
                 });
-                ofFloat.addListener(subscreenCustomizerController3.new AnonymousClass2(qSTileView));
-                ofFloat.start();
+                valueAnimatorOfFloat.addListener(subscreenCustomizerController3.new AnonymousClass2(qSTileView));
+                valueAnimatorOfFloat.start();
                 return true;
             }
         };
@@ -106,7 +106,7 @@ public class SubscreenCustomizerController extends ViewController implements Sub
     }
 
     @Override // com.android.systemui.util.ViewController
-    public final void onInit() {
+    public final void onInit() throws Resources.NotFoundException {
         super.onInit();
         Objects.toString(this.mView);
         SubscreenCustomizer subscreenCustomizer = (SubscreenCustomizer) this.mView;
@@ -143,7 +143,7 @@ public class SubscreenCustomizerController extends ViewController implements Sub
     }
 
     @Override // com.android.systemui.util.ViewController
-    public final void onViewAttached() {
+    public final void onViewAttached() throws Resources.NotFoundException {
         Objects.toString(this.mView);
         QSHost qSHost = this.mHost;
         if (qSHost != null) {
@@ -255,7 +255,6 @@ public class SubscreenCustomizerController extends ViewController implements Sub
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.qp.customize.SubscreenCustomizerController$2, reason: invalid class name */
     public class AnonymousClass2 implements Animator.AnimatorListener {
         public final /* synthetic */ View val$view;
@@ -299,15 +298,11 @@ public class SubscreenCustomizerController extends ViewController implements Sub
             this.val$view.postDelayed(new Runnable() { // from class: com.android.systemui.qp.customize.SubscreenCustomizerController$2$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    View view;
-                    View view2;
-                    SubscreenCustomizerController.AnonymousClass2 anonymousClass2 = SubscreenCustomizerController.AnonymousClass2.this;
-                    view = ((ViewController) SubscreenCustomizerController.this).mView;
-                    if (((SubscreenCustomizer) view).mIsDragging) {
+                    SubscreenCustomizerController.AnonymousClass2 anonymousClass2 = this.f$0;
+                    if (((SubscreenCustomizer) ((ViewController) SubscreenCustomizerController.this).mView).mIsDragging) {
                         return;
                     }
-                    view2 = ((ViewController) SubscreenCustomizerController.this).mView;
-                    ((SubscreenCustomizer) view2).animationDrop(SubscreenCustomizerController.this.mLongClickedViewInfo);
+                    ((SubscreenCustomizer) ((ViewController) SubscreenCustomizerController.this).mView).animationDrop(SubscreenCustomizerController.this.mLongClickedViewInfo);
                 }
             }, 100L);
         }

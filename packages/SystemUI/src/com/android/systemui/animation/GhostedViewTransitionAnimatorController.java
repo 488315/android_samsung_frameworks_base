@@ -29,7 +29,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.math.MathKt__MathJVMKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class GhostedViewTransitionAnimatorController implements ActivityTransitionAnimator.Controller {
     public static final Companion Companion = new Companion(null);
@@ -54,7 +53,6 @@ public class GhostedViewTransitionAnimatorController implements ActivityTransiti
     public final int[] transitionContainerLocation;
     public final ActivityTransitionAnimator.TransitionCookie transitionCookie;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -76,9 +74,9 @@ public class GhostedViewTransitionAnimatorController implements ActivityTransiti
                 LayerDrawable layerDrawable = (LayerDrawable) drawable;
                 int numberOfLayers = layerDrawable.getNumberOfLayers();
                 for (int i = 0; i < numberOfLayers; i++) {
-                    GradientDrawable findGradientDrawable = findGradientDrawable(layerDrawable.getDrawable(i));
-                    if (findGradientDrawable != null) {
-                        return findGradientDrawable;
+                    GradientDrawable gradientDrawableFindGradientDrawable = findGradientDrawable(layerDrawable.getDrawable(i));
+                    if (gradientDrawableFindGradientDrawable != null) {
+                        return gradientDrawableFindGradientDrawable;
                     }
                 }
             }
@@ -92,7 +90,6 @@ public class GhostedViewTransitionAnimatorController implements ActivityTransiti
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class WrappedDrawable extends Drawable {
         public final float[] cornerRadii;
         public int currentAlpha = 255;
@@ -145,13 +142,13 @@ public class GhostedViewTransitionAnimatorController implements ActivityTransiti
             drawable3.setBounds(getBounds());
             if (this.cornerRadii[0] >= 0.0f && (drawable2 = this.wrapped) != null) {
                 GhostedViewTransitionAnimatorController.Companion.getClass();
-                GradientDrawable findGradientDrawable = Companion.findGradientDrawable(drawable2);
-                if (findGradientDrawable != null) {
-                    float[] cornerRadii = findGradientDrawable.getCornerRadii();
+                GradientDrawable gradientDrawableFindGradientDrawable = Companion.findGradientDrawable(drawable2);
+                if (gradientDrawableFindGradientDrawable != null) {
+                    float[] cornerRadii = gradientDrawableFindGradientDrawable.getCornerRadii();
                     if (cornerRadii != null) {
-                        System.arraycopy(cornerRadii, 0, this.previousCornerRadii, 0, (r3 & 8) != 0 ? cornerRadii.length : 6);
+                        System.arraycopy(cornerRadii, 0, this.previousCornerRadii, 0, (6 & 8) != 0 ? cornerRadii.length : 6);
                     } else {
-                        float cornerRadius = findGradientDrawable.getCornerRadius();
+                        float cornerRadius = gradientDrawableFindGradientDrawable.getCornerRadius();
                         float[] fArr = this.previousCornerRadii;
                         fArr[0] = cornerRadius;
                         fArr[1] = cornerRadius;
@@ -267,12 +264,12 @@ public class GhostedViewTransitionAnimatorController implements ActivityTransiti
             return 0.0f;
         }
         Companion.getClass();
-        GradientDrawable findGradientDrawable = Companion.findGradientDrawable(drawable);
-        if (findGradientDrawable == null) {
+        GradientDrawable gradientDrawableFindGradientDrawable = Companion.findGradientDrawable(drawable);
+        if (gradientDrawableFindGradientDrawable == null) {
             return 0.0f;
         }
-        float[] cornerRadii = findGradientDrawable.getCornerRadii();
-        float cornerRadius = cornerRadii != null ? cornerRadii[4] : findGradientDrawable.getCornerRadius();
+        float[] cornerRadii = gradientDrawableFindGradientDrawable.getCornerRadii();
+        float cornerRadius = cornerRadii != null ? cornerRadii[4] : gradientDrawableFindGradientDrawable.getCornerRadius();
         View view = this._ghostedView;
         view.getClass();
         return view.getScaleX() * cornerRadius;
@@ -284,12 +281,12 @@ public class GhostedViewTransitionAnimatorController implements ActivityTransiti
             return 0.0f;
         }
         Companion.getClass();
-        GradientDrawable findGradientDrawable = Companion.findGradientDrawable(drawable);
-        if (findGradientDrawable == null) {
+        GradientDrawable gradientDrawableFindGradientDrawable = Companion.findGradientDrawable(drawable);
+        if (gradientDrawableFindGradientDrawable == null) {
             return 0.0f;
         }
-        float[] cornerRadii = findGradientDrawable.getCornerRadii();
-        float cornerRadius = cornerRadii != null ? cornerRadii[0] : findGradientDrawable.getCornerRadius();
+        float[] cornerRadii = gradientDrawableFindGradientDrawable.getCornerRadii();
+        float cornerRadius = cornerRadii != null ? cornerRadii[0] : gradientDrawableFindGradientDrawable.getCornerRadius();
         View view = this._ghostedView;
         view.getClass();
         return view.getScaleX() * cornerRadius;
@@ -388,7 +385,7 @@ public class GhostedViewTransitionAnimatorController implements ActivityTransiti
                 int i2 = state.right - state2.right;
                 int i3 = state.top - state2.top;
                 int i4 = state.bottom - state2.bottom;
-                float min = Math.min(state.getWidth() / state2.getWidth(), state.getHeight() / state2.getHeight());
+                float fMin = Math.min(state.getWidth() / state2.getWidth(), state.getHeight() / state2.getHeight());
                 View view2 = this._ghostedView;
                 view2.getClass();
                 if (view2.getParent() instanceof ViewGroup) {
@@ -399,7 +396,7 @@ public class GhostedViewTransitionAnimatorController implements ActivityTransiti
                 ViewGroup transitionContainer = getTransitionContainer();
                 int[] iArr = this.transitionContainerLocation;
                 transitionContainer.getLocationOnScreen(iArr);
-                this.ghostViewMatrix.postScale(min, min, state2.getCenterX() - iArr[0], state2.getCenterY() - iArr[1]);
+                this.ghostViewMatrix.postScale(fMin, fMin, state2.getCenterX() - iArr[0], state2.getCenterY() - iArr[1]);
                 this.ghostViewMatrix.postTranslate((i + i2) / 2.0f, (i3 + i4) / 2.0f);
                 ghostView.setAnimationMatrix(this.ghostViewMatrix);
                 Insets insets = (Insets) this.backgroundInsets$delegate.getValue();
@@ -446,7 +443,7 @@ public class GhostedViewTransitionAnimatorController implements ActivityTransiti
 
     @Override // com.android.systemui.animation.TransitionAnimator.Controller
     public final void onTransitionAnimationStart(boolean z) {
-        Matrix matrix;
+        Matrix animationMatrix;
         ViewParent parent;
         View view = this._ghostedView;
         view.getClass();
@@ -486,17 +483,17 @@ public class GhostedViewTransitionAnimatorController implements ActivityTransiti
             viewGroup.setClipToPadding(false);
         }
         GhostView ghostView2 = this.ghostView;
-        if (ghostView2 == null || (matrix = ghostView2.getAnimationMatrix()) == null) {
-            matrix = Matrix.IDENTITY_MATRIX;
+        if (ghostView2 == null || (animationMatrix = ghostView2.getAnimationMatrix()) == null) {
+            animationMatrix = Matrix.IDENTITY_MATRIX;
         }
-        matrix.getValues(this.initialGhostViewMatrixValues);
+        animationMatrix.getValues(this.initialGhostViewMatrixValues);
         Integer num = this.isLaunching ? this.launchCujType : this.returnCujType;
         if (num != null) {
-            int intValue = num.intValue();
+            int iIntValue = num.intValue();
             InteractionJankMonitor interactionJankMonitor = this.interactionJankMonitor;
             View view3 = this._ghostedView;
             view3.getClass();
-            interactionJankMonitor.begin(view3, intValue);
+            interactionJankMonitor.begin(view3, iIntValue);
         }
     }
 
@@ -526,7 +523,7 @@ public class GhostedViewTransitionAnimatorController implements ActivityTransiti
 
     /* JADX WARN: Type inference failed for: r1v9, types: [com.android.systemui.animation.GhostedViewTransitionAnimatorController$detachListener$1] */
     public GhostedViewTransitionAnimatorController(View view, Integer num, ActivityTransitionAnimator.TransitionCookie transitionCookie, ComponentName componentName, Integer num2, boolean z, InteractionJankMonitor interactionJankMonitor, IViewTransitionRegistry iViewTransitionRegistry) {
-        Drawable drawable;
+        Drawable background;
         this.launchCujType = num;
         this.transitionCookie = transitionCookie;
         this.component = componentName;
@@ -545,8 +542,8 @@ public class GhostedViewTransitionAnimatorController implements ActivityTransiti
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
                 Insets opticalInsets;
-                Drawable drawable2 = GhostedViewTransitionAnimatorController.this.background;
-                return (drawable2 == null || (opticalInsets = drawable2.getOpticalInsets()) == null) ? Insets.NONE : opticalInsets;
+                Drawable drawable = this.f$0.background;
+                return (drawable == null || (opticalInsets = drawable.getOpticalInsets()) == null) ? Insets.NONE : opticalInsets;
             }
         });
         this.startBackgroundAlpha = 255;
@@ -555,7 +552,7 @@ public class GhostedViewTransitionAnimatorController implements ActivityTransiti
         this.detachListener = new View.OnAttachStateChangeListener() { // from class: com.android.systemui.animation.GhostedViewTransitionAnimatorController$detachListener$1
             @Override // android.view.View.OnAttachStateChangeListener
             public final void onViewDetachedFromWindow(View view2) {
-                GhostedViewTransitionAnimatorController.this.onDispose();
+                this.this$0.onDispose();
             }
 
             @Override // android.view.View.OnAttachStateChangeListener
@@ -566,18 +563,18 @@ public class GhostedViewTransitionAnimatorController implements ActivityTransiti
         if (view instanceof LaunchableView) {
             view.getClass();
             if (view.getBackground() != null) {
-                drawable = view.getBackground();
+                background = view.getBackground();
             } else {
                 LinkedList linkedList = new LinkedList();
                 linkedList.add(view);
                 while (true) {
                     if (linkedList.isEmpty()) {
-                        drawable = null;
+                        background = null;
                         break;
                     }
                     View view2 = (View) linkedList.remove(0);
                     if (view2.getBackground() != null) {
-                        drawable = view2.getBackground();
+                        background = view2.getBackground();
                         break;
                     } else if (view2 instanceof ViewGroup) {
                         ViewGroup viewGroup = (ViewGroup) view2;
@@ -588,7 +585,7 @@ public class GhostedViewTransitionAnimatorController implements ActivityTransiti
                     }
                 }
             }
-            this.background = drawable;
+            this.background = background;
             TransitionAnimator.Companion.getClass();
             if (this.isEphemeral) {
                 View view3 = this._ghostedView;

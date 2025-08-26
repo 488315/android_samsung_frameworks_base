@@ -15,7 +15,6 @@ import androidx.preference.SwitchPreference;
 import com.android.systemui.R;
 import java.util.function.Supplier;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class RestrictedSwitchPreference extends SwitchPreference {
     public final RestrictedPreferenceHelper mHelper;
@@ -28,19 +27,19 @@ public class RestrictedSwitchPreference extends SwitchPreference {
         RestrictedPreferenceHelper restrictedPreferenceHelper = new RestrictedPreferenceHelper(context, this, attributeSet);
         this.mHelper = restrictedPreferenceHelper;
         if (attributeSet != null) {
-            TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.RestrictedSwitchPreference);
-            TypedValue peekValue = obtainStyledAttributes.peekValue(1);
-            if (peekValue != null) {
-                this.mUseAdditionalSummary = peekValue.type == 18 && peekValue.data != 0;
+            TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.RestrictedSwitchPreference);
+            TypedValue typedValuePeekValue = typedArrayObtainStyledAttributes.peekValue(1);
+            if (typedValuePeekValue != null) {
+                this.mUseAdditionalSummary = typedValuePeekValue.type == 18 && typedValuePeekValue.data != 0;
             }
-            TypedValue peekValue2 = obtainStyledAttributes.peekValue(0);
-            obtainStyledAttributes.recycle();
-            if (peekValue2 != null && peekValue2.type == 3) {
-                int i3 = peekValue2.resourceId;
+            TypedValue typedValuePeekValue2 = typedArrayObtainStyledAttributes.peekValue(0);
+            typedArrayObtainStyledAttributes.recycle();
+            if (typedValuePeekValue2 != null && typedValuePeekValue2.type == 3) {
+                int i3 = typedValuePeekValue2.resourceId;
                 if (i3 != 0) {
                     this.mRestrictedSwitchSummary = context.getText(i3);
                 } else {
-                    this.mRestrictedSwitchSummary = peekValue2.string;
+                    this.mRestrictedSwitchSummary = typedValuePeekValue2.string;
                 }
             }
         }
@@ -59,20 +58,20 @@ public class RestrictedSwitchPreference extends SwitchPreference {
     @Override // androidx.preference.SwitchPreference, androidx.preference.Preference
     public final void onBindViewHolder(PreferenceViewHolder preferenceViewHolder) {
         super.onBindViewHolder(preferenceViewHolder);
-        View findViewById = preferenceViewHolder.findViewById(android.R.id.switch_widget);
-        if (findViewById != null) {
-            findViewById.getRootView().setFilterTouchesWhenObscured(true);
+        View viewFindViewById = preferenceViewHolder.findViewById(android.R.id.switch_widget);
+        if (viewFindViewById != null) {
+            viewFindViewById.getRootView().setFilterTouchesWhenObscured(true);
         }
         this.mHelper.onBindViewHolder(preferenceViewHolder);
-        CharSequence charSequence = this.mRestrictedSwitchSummary;
-        if (charSequence == null) {
+        CharSequence string = this.mRestrictedSwitchSummary;
+        if (string == null) {
             if (this.mHelper.isRestrictionEnforcedByAdvancedProtection()) {
-                charSequence = null;
+                string = null;
             } else if (this.mChecked) {
                 final Context context = this.mContext;
                 DevicePolicyResourcesManager resources = ((DevicePolicyManager) context.getSystemService(DevicePolicyManager.class)).getResources();
                 final int i = R.string.enabled_by_admin;
-                charSequence = resources.getString("Settings.ENABLED_BY_ADMIN_SWITCH_SUMMARY", new Supplier() { // from class: com.android.settingslib.RestrictedSwitchPreference$$ExternalSyntheticLambda0
+                string = resources.getString("Settings.ENABLED_BY_ADMIN_SWITCH_SUMMARY", new Supplier() { // from class: com.android.settingslib.RestrictedSwitchPreference$$ExternalSyntheticLambda0
                     @Override // java.util.function.Supplier
                     public final Object get() {
                         return context.getString(i);
@@ -82,7 +81,7 @@ public class RestrictedSwitchPreference extends SwitchPreference {
                 final Context context2 = this.mContext;
                 DevicePolicyResourcesManager resources2 = ((DevicePolicyManager) context2.getSystemService(DevicePolicyManager.class)).getResources();
                 final int i2 = R.string.disabled_by_admin;
-                charSequence = resources2.getString("Settings.DISABLED_BY_ADMIN_SWITCH_SUMMARY", new Supplier() { // from class: com.android.settingslib.RestrictedSwitchPreference$$ExternalSyntheticLambda0
+                string = resources2.getString("Settings.DISABLED_BY_ADMIN_SWITCH_SUMMARY", new Supplier() { // from class: com.android.settingslib.RestrictedSwitchPreference$$ExternalSyntheticLambda0
                     @Override // java.util.function.Supplier
                     public final Object get() {
                         return context2.getString(i2);
@@ -90,26 +89,26 @@ public class RestrictedSwitchPreference extends SwitchPreference {
                 });
             }
         }
-        View findViewById2 = preferenceViewHolder.findViewById(R.id.icon_frame);
+        View viewFindViewById2 = preferenceViewHolder.findViewById(R.id.icon_frame);
         if (this.mUseAdditionalSummary) {
             TextView textView = (TextView) preferenceViewHolder.findViewById(R.id.additional_summary);
             if (textView != null) {
-                if (!this.mHelper.mDisabledByAdmin || charSequence == null) {
+                if (!this.mHelper.mDisabledByAdmin || string == null) {
                     textView.setVisibility(8);
                 } else {
-                    textView.setText(charSequence);
+                    textView.setText(string);
                     textView.setVisibility(0);
                 }
             }
         } else {
             TextView textView2 = (TextView) preferenceViewHolder.findViewById(android.R.id.summary);
-            if (textView2 != null && this.mHelper.mDisabledByAdmin && charSequence != null) {
-                textView2.setText(charSequence);
+            if (textView2 != null && this.mHelper.mDisabledByAdmin && string != null) {
+                textView2.setText(string);
                 textView2.setVisibility(0);
             }
         }
-        if (findViewById2 != null) {
-            findViewById2.setVisibility(this.mIconSpaceReserved ? 0 : 8);
+        if (viewFindViewById2 != null) {
+            viewFindViewById2.setVisibility(this.mIconSpaceReserved ? 0 : 8);
         }
     }
 
@@ -121,44 +120,36 @@ public class RestrictedSwitchPreference extends SwitchPreference {
         super.performClick();
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:11:0x001f  */
-    /* JADX WARN: Removed duplicated region for block: B:14:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:7:0x0012  */
+    /* JADX WARN: Removed duplicated region for block: B:12:0x001c  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x000f  */
     @Override // androidx.preference.Preference
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void setEnabled(boolean r5) {
-        /*
-            r4 = this;
-            r0 = 1
-            if (r5 == 0) goto Lf
-            com.android.settingslib.RestrictedPreferenceHelper r1 = r4.mHelper
-            boolean r2 = r1.mDisabledByAdmin
-            if (r2 == 0) goto Lf
-            r2 = 0
-            r1.setDisabledByAdmin(r2)
-            r1 = r0
-            goto L10
-        Lf:
-            r1 = 0
-        L10:
-            if (r5 == 0) goto L1c
-            com.android.settingslib.RestrictedPreferenceHelper r2 = r4.mHelper
-            boolean r3 = r2.mDisabledByEcm
-            if (r3 == 0) goto L1c
-            r2.setDisabledByEcm()
-            goto L1d
-        L1c:
-            r0 = r1
-        L1d:
-            if (r0 != 0) goto L22
-            super.setEnabled(r5)
-        L22:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.settingslib.RestrictedSwitchPreference.setEnabled(boolean):void");
+    public final void setEnabled(boolean z) {
+        boolean z2;
+        boolean z3 = true;
+        if (z) {
+            RestrictedPreferenceHelper restrictedPreferenceHelper = this.mHelper;
+            if (restrictedPreferenceHelper.mDisabledByAdmin) {
+                restrictedPreferenceHelper.setDisabledByAdmin(null);
+                z2 = true;
+            } else {
+                z2 = false;
+            }
+        }
+        if (z) {
+            RestrictedPreferenceHelper restrictedPreferenceHelper2 = this.mHelper;
+            if (restrictedPreferenceHelper2.mDisabledByEcm) {
+                restrictedPreferenceHelper2.setDisabledByEcm();
+            } else {
+                z3 = z2;
+            }
+        }
+        if (z3) {
+            return;
+        }
+        super.setEnabled(z);
     }
 
     public RestrictedSwitchPreference(Context context, AttributeSet attributeSet, int i) {

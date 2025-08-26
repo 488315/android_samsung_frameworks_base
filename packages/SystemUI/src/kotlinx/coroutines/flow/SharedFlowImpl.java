@@ -5,16 +5,19 @@ import java.util.Arrays;
 import java.util.List;
 import kotlin.NoWhenBranchMatchedException;
 import kotlin.Result;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.collections.EmptyList;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.CoroutineContext;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.intrinsics.IntrinsicsKt__IntrinsicsJvmKt;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
 import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.CancellableContinuationImpl;
 import kotlinx.coroutines.DisposableHandle;
 import kotlinx.coroutines.DisposeOnCancel;
+import kotlinx.coroutines.Job;
 import kotlinx.coroutines.channels.BufferOverflow;
 import kotlinx.coroutines.flow.internal.AbstractSharedFlow;
 import kotlinx.coroutines.flow.internal.AbstractSharedFlowKt;
@@ -22,7 +25,6 @@ import kotlinx.coroutines.flow.internal.AbstractSharedFlowSlot;
 import kotlinx.coroutines.flow.internal.FusibleFlow;
 import kotlinx.coroutines.internal.Symbol;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SharedFlowImpl extends AbstractSharedFlow implements MutableSharedFlow, CancellableFlow, FusibleFlow {
     public Object[] buffer;
@@ -34,7 +36,6 @@ public class SharedFlowImpl extends AbstractSharedFlow implements MutableSharedF
     public final int replay;
     public long replayIndex;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Emitter implements DisposableHandle {
         public final Continuation cont;
         public final SharedFlowImpl flow;
@@ -69,7 +70,6 @@ public class SharedFlowImpl extends AbstractSharedFlow implements MutableSharedF
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -91,40 +91,143 @@ public class SharedFlowImpl extends AbstractSharedFlow implements MutableSharedF
         }
     }
 
+    /* JADX INFO: Access modifiers changed from: package-private */
+    /* renamed from: kotlinx.coroutines.flow.SharedFlowImpl$collect$1, reason: invalid class name */
+    public final class AnonymousClass1<T> extends ContinuationImpl {
+        Object L$0;
+        Object L$1;
+        Object L$2;
+        Object L$3;
+        int label;
+        /* synthetic */ Object result;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return SharedFlowImpl.collect$suspendImpl(SharedFlowImpl.this, null, this);
+        }
+    }
+
     public SharedFlowImpl(int i, int i2, BufferOverflow bufferOverflow) {
         this.replay = i;
         this.bufferCapacity = i2;
         this.onBufferOverflow = bufferOverflow;
     }
 
-    /* JADX WARN: Can't wrap try/catch for region: R(11:0|1|(2:3|(8:5|6|(3:(7:(1:(1:11)(2:46|47))(1:48)|12|13|14|15|(2:16|(3:38|39|(2:41|42)(2:43|37))(4:18|(3:23|24|25)|32|(1:34)(2:36|37)))|35)(4:49|50|51|52)|30|31)(5:58|59|60|(1:62)|65)|53|54|15|(3:16|(0)(0)|37)|35))|68|6|(0)(0)|53|54|15|(3:16|(0)(0)|37)|35) */
-    /* JADX WARN: Code restructure failed: missing block: B:28:0x00c1, code lost:
-    
-        r10 = move-exception;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:29:0x00c2, code lost:
-    
-        r5 = r8;
-        r8 = r10;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:63:0x0090, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:31:0x0090, code lost:
     
         if (((kotlinx.coroutines.flow.SubscribedFlowCollector) r9).onSubscription(r0) == r1) goto L53;
      */
-    /* JADX WARN: Removed duplicated region for block: B:18:0x00c5 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:38:0x00b0 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:58:0x0074  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0023  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static kotlin.coroutines.intrinsics.CoroutineSingletons collect$suspendImpl(kotlinx.coroutines.flow.SharedFlowImpl r8, kotlinx.coroutines.flow.FlowCollector r9, kotlin.coroutines.Continuation r10) {
-        /*
-            Method dump skipped, instructions count: 232
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: kotlinx.coroutines.flow.SharedFlowImpl.collect$suspendImpl(kotlinx.coroutines.flow.SharedFlowImpl, kotlinx.coroutines.flow.FlowCollector, kotlin.coroutines.Continuation):kotlin.coroutines.intrinsics.CoroutineSingletons");
+    public static CoroutineSingletons collect$suspendImpl(SharedFlowImpl sharedFlowImpl, FlowCollector flowCollector, Continuation continuation) throws Throwable {
+        AnonymousClass1 anonymousClass1;
+        SharedFlowImpl sharedFlowImpl2;
+        Throwable th;
+        SharedFlowSlot sharedFlowSlot;
+        FlowCollector flowCollector2;
+        Job job;
+        if (continuation instanceof AnonymousClass1) {
+            anonymousClass1 = (AnonymousClass1) continuation;
+            int i = anonymousClass1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                anonymousClass1.label = i - Integer.MIN_VALUE;
+            } else {
+                anonymousClass1 = sharedFlowImpl.new AnonymousClass1(continuation);
+            }
+        }
+        Object obj = anonymousClass1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = anonymousClass1.label;
+        if (i2 != 0) {
+            if (i2 == 1) {
+                sharedFlowSlot = (SharedFlowSlot) anonymousClass1.L$2;
+                FlowCollector flowCollector3 = (FlowCollector) anonymousClass1.L$1;
+                SharedFlowImpl sharedFlowImpl3 = (SharedFlowImpl) anonymousClass1.L$0;
+                try {
+                    ResultKt.throwOnFailure(obj);
+                    flowCollector2 = flowCollector3;
+                    sharedFlowImpl = sharedFlowImpl3;
+                    try {
+                        job = (Job) anonymousClass1.getContext().get(Job.Key);
+                    } catch (Throwable th2) {
+                        sharedFlowImpl2 = sharedFlowImpl;
+                        th = th2;
+                    }
+                } catch (Throwable th3) {
+                    th = th3;
+                    sharedFlowImpl2 = sharedFlowImpl3;
+                }
+            } else {
+                if (i2 != 2 && i2 != 3) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                Job job2 = (Job) anonymousClass1.L$3;
+                sharedFlowSlot = (SharedFlowSlot) anonymousClass1.L$2;
+                FlowCollector flowCollector4 = (FlowCollector) anonymousClass1.L$1;
+                sharedFlowImpl2 = (SharedFlowImpl) anonymousClass1.L$0;
+                try {
+                    ResultKt.throwOnFailure(obj);
+                    flowCollector2 = flowCollector4;
+                    job = job2;
+                    sharedFlowImpl = sharedFlowImpl2;
+                } catch (Throwable th4) {
+                    th = th4;
+                }
+            }
+            sharedFlowImpl2.freeSlot(sharedFlowSlot);
+            throw th;
+        }
+        ResultKt.throwOnFailure(obj);
+        SharedFlowSlot sharedFlowSlot2 = (SharedFlowSlot) sharedFlowImpl.allocateSlot();
+        try {
+            if (flowCollector instanceof SubscribedFlowCollector) {
+                anonymousClass1.L$0 = sharedFlowImpl;
+                anonymousClass1.L$1 = flowCollector;
+                anonymousClass1.L$2 = sharedFlowSlot2;
+                anonymousClass1.label = 1;
+            }
+            flowCollector2 = flowCollector;
+            sharedFlowSlot = sharedFlowSlot2;
+            job = (Job) anonymousClass1.getContext().get(Job.Key);
+        } catch (Throwable th5) {
+            sharedFlowImpl2 = sharedFlowImpl;
+            th = th5;
+            sharedFlowSlot = sharedFlowSlot2;
+        }
+        while (true) {
+            Object objTryTakeValue = sharedFlowImpl.tryTakeValue(sharedFlowSlot);
+            if (objTryTakeValue == SharedFlowKt.NO_VALUE) {
+                anonymousClass1.L$0 = sharedFlowImpl;
+                anonymousClass1.L$1 = flowCollector2;
+                anonymousClass1.L$2 = sharedFlowSlot;
+                anonymousClass1.L$3 = job;
+                anonymousClass1.label = 2;
+                if (sharedFlowImpl.awaitValue(sharedFlowSlot, anonymousClass1) == coroutineSingletons) {
+                    break;
+                }
+            } else {
+                if (job != null && !job.isActive()) {
+                    throw job.getCancellationException();
+                }
+                anonymousClass1.L$0 = sharedFlowImpl;
+                anonymousClass1.L$1 = flowCollector2;
+                anonymousClass1.L$2 = sharedFlowSlot;
+                anonymousClass1.L$3 = job;
+                anonymousClass1.label = 3;
+                if (flowCollector2.emit(objTryTakeValue, anonymousClass1) == coroutineSingletons) {
+                    break;
+                }
+            }
+        }
+        return coroutineSingletons;
     }
 
     public final Object awaitValue(SharedFlowSlot sharedFlowSlot, Continuation continuation) {
@@ -201,70 +304,89 @@ public class SharedFlowImpl extends AbstractSharedFlow implements MutableSharedF
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:24:0x005b  */
+    /* JADX WARN: Removed duplicated region for block: B:27:0x0067  */
+    /* JADX WARN: Removed duplicated region for block: B:34:0x007d  */
+    /* JADX WARN: Removed duplicated region for block: B:36:0x0081 A[RETURN] */
+    /* JADX WARN: Removed duplicated region for block: B:37:0x0082  */
     @Override // kotlinx.coroutines.flow.MutableSharedFlow, kotlinx.coroutines.flow.FlowCollector
-    public final Object emit(Object obj, Continuation continuation) {
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public final Object emit(Object obj, Continuation continuation) throws Throwable {
         SharedFlowImpl sharedFlowImpl;
         Throwable th;
-        Continuation[] findSlotsToResumeLocked;
+        Continuation[] continuationArrFindSlotsToResumeLocked;
         Emitter emitter;
+        Object result;
+        CoroutineSingletons coroutineSingletons;
         if (tryEmit(obj)) {
             return Unit.INSTANCE;
         }
         CancellableContinuationImpl cancellableContinuationImpl = new CancellableContinuationImpl(IntrinsicsKt__IntrinsicsJvmKt.intercepted(continuation), 1);
         cancellableContinuationImpl.initCancellability();
-        Continuation[] continuationArr = AbstractSharedFlowKt.EMPTY_RESUMES;
+        Continuation[] continuationArrFindSlotsToResumeLocked2 = AbstractSharedFlowKt.EMPTY_RESUMES;
         synchronized (this) {
             try {
                 if (tryEmitLocked(obj)) {
                     try {
                         int i = Result.$r8$clinit;
                         cancellableContinuationImpl.resumeWith(Unit.INSTANCE);
-                        findSlotsToResumeLocked = findSlotsToResumeLocked(continuationArr);
+                        continuationArrFindSlotsToResumeLocked = findSlotsToResumeLocked(continuationArrFindSlotsToResumeLocked2);
                         emitter = null;
                         sharedFlowImpl = this;
+                        if (emitter != null) {
+                            cancellableContinuationImpl.invokeOnCancellationImpl(new DisposeOnCancel(emitter));
+                        }
+                        for (Continuation continuation2 : continuationArrFindSlotsToResumeLocked) {
+                            if (continuation2 != null) {
+                                int i2 = Result.$r8$clinit;
+                                continuation2.resumeWith(Unit.INSTANCE);
+                            }
+                        }
+                        result = cancellableContinuationImpl.getResult();
+                        coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                        if (result != coroutineSingletons) {
+                            result = Unit.INSTANCE;
+                        }
+                        return result != coroutineSingletons ? result : Unit.INSTANCE;
                     } catch (Throwable th2) {
                         th = th2;
                         sharedFlowImpl = this;
                         throw th;
                     }
-                } else {
-                    try {
-                        sharedFlowImpl = this;
-                    } catch (Throwable th3) {
-                        sharedFlowImpl = this;
-                        th = th3;
-                        throw th;
-                    }
+                }
+                try {
+                    sharedFlowImpl = this;
                     try {
                         Emitter emitter2 = new Emitter(sharedFlowImpl, getHead() + this.bufferSize + this.queueSize, obj, cancellableContinuationImpl);
                         sharedFlowImpl.enqueueLocked(emitter2);
                         sharedFlowImpl.queueSize++;
                         if (sharedFlowImpl.bufferCapacity == 0) {
-                            continuationArr = sharedFlowImpl.findSlotsToResumeLocked(continuationArr);
+                            continuationArrFindSlotsToResumeLocked2 = sharedFlowImpl.findSlotsToResumeLocked(continuationArrFindSlotsToResumeLocked2);
                         }
-                        findSlotsToResumeLocked = continuationArr;
+                        continuationArrFindSlotsToResumeLocked = continuationArrFindSlotsToResumeLocked2;
                         emitter = emitter2;
-                    } catch (Throwable th4) {
-                        th = th4;
+                        if (emitter != null) {
+                        }
+                        while (i < r7) {
+                        }
+                        result = cancellableContinuationImpl.getResult();
+                        coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                        if (result != coroutineSingletons) {
+                        }
+                        if (result != coroutineSingletons) {
+                        }
+                    } catch (Throwable th3) {
+                        th = th3;
                         th = th;
                         throw th;
                     }
+                } catch (Throwable th4) {
+                    sharedFlowImpl = this;
+                    th = th4;
+                    throw th;
                 }
-                if (emitter != null) {
-                    cancellableContinuationImpl.invokeOnCancellationImpl(new DisposeOnCancel(emitter));
-                }
-                for (Continuation continuation2 : findSlotsToResumeLocked) {
-                    if (continuation2 != null) {
-                        int i2 = Result.$r8$clinit;
-                        continuation2.resumeWith(Unit.INSTANCE);
-                    }
-                }
-                Object result = cancellableContinuationImpl.getResult();
-                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
-                if (result != coroutineSingletons) {
-                    result = Unit.INSTANCE;
-                }
-                return result == coroutineSingletons ? result : Unit.INSTANCE;
             } catch (Throwable th5) {
                 th = th5;
                 sharedFlowImpl = this;
@@ -274,13 +396,13 @@ public class SharedFlowImpl extends AbstractSharedFlow implements MutableSharedF
 
     public final void enqueueLocked(Object obj) {
         int i = this.bufferSize + this.queueSize;
-        Object[] objArr = this.buffer;
-        if (objArr == null) {
-            objArr = growBuffer(0, 2, null);
-        } else if (i >= objArr.length) {
-            objArr = growBuffer(i, objArr.length * 2, objArr);
+        Object[] objArrGrowBuffer = this.buffer;
+        if (objArrGrowBuffer == null) {
+            objArrGrowBuffer = growBuffer(0, 2, null);
+        } else if (i >= objArrGrowBuffer.length) {
+            objArrGrowBuffer = growBuffer(i, objArrGrowBuffer.length * 2, objArrGrowBuffer);
         }
-        SharedFlowKt.access$setBufferAt(objArr, getHead() + i, obj);
+        SharedFlowKt.access$setBufferAt(objArrGrowBuffer, getHead() + i, obj);
     }
 
     /* JADX WARN: Multi-variable type inference failed */
@@ -365,22 +487,22 @@ public class SharedFlowImpl extends AbstractSharedFlow implements MutableSharedF
     }
 
     @Override // kotlinx.coroutines.flow.MutableSharedFlow
-    public final void resetReplayCache() {
+    public final void resetReplayCache() throws Throwable {
         SharedFlowImpl sharedFlowImpl;
         synchronized (this) {
             try {
                 sharedFlowImpl = this;
-            } catch (Throwable th) {
-                th = th;
+                try {
+                    sharedFlowImpl.updateBufferLocked(getHead() + this.bufferSize, this.minCollectorIndex, getHead() + this.bufferSize, getHead() + this.bufferSize + this.queueSize);
+                    Unit unit = Unit.INSTANCE;
+                } catch (Throwable th) {
+                    th = th;
+                    Throwable th2 = th;
+                    throw th2;
+                }
+            } catch (Throwable th3) {
+                th = th3;
                 sharedFlowImpl = this;
-            }
-            try {
-                sharedFlowImpl.updateBufferLocked(getHead() + this.bufferSize, this.minCollectorIndex, getHead() + this.bufferSize, getHead() + this.bufferSize + this.queueSize);
-                Unit unit = Unit.INSTANCE;
-            } catch (Throwable th2) {
-                th = th2;
-                Throwable th3 = th;
-                throw th3;
             }
         }
     }
@@ -389,16 +511,16 @@ public class SharedFlowImpl extends AbstractSharedFlow implements MutableSharedF
     public final boolean tryEmit(Object obj) {
         int i;
         boolean z;
-        Continuation[] continuationArr = AbstractSharedFlowKt.EMPTY_RESUMES;
+        Continuation[] continuationArrFindSlotsToResumeLocked = AbstractSharedFlowKt.EMPTY_RESUMES;
         synchronized (this) {
             if (tryEmitLocked(obj)) {
-                continuationArr = findSlotsToResumeLocked(continuationArr);
+                continuationArrFindSlotsToResumeLocked = findSlotsToResumeLocked(continuationArrFindSlotsToResumeLocked);
                 z = true;
             } else {
                 z = false;
             }
         }
-        for (Continuation continuation : continuationArr) {
+        for (Continuation continuation : continuationArrFindSlotsToResumeLocked) {
             if (continuation != null) {
                 int i2 = Result.$r8$clinit;
                 continuation.resumeWith(Unit.INSTANCE);
@@ -407,39 +529,57 @@ public class SharedFlowImpl extends AbstractSharedFlow implements MutableSharedF
         return z;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:28:0x0056  */
+    /* JADX WARN: Removed duplicated region for block: B:31:0x0067  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final boolean tryEmitLocked(Object obj) {
-        int i = this.nCollectors;
-        int i2 = this.replay;
-        if (i != 0) {
-            int i3 = this.bufferSize;
-            int i4 = this.bufferCapacity;
-            if (i3 >= i4 && this.minCollectorIndex <= this.replayIndex) {
-                int i5 = WhenMappings.$EnumSwitchMapping$0[this.onBufferOverflow.ordinal()];
-                if (i5 == 1) {
+        int i;
+        long head;
+        long j;
+        int i2 = this.nCollectors;
+        int i3 = this.replay;
+        if (i2 != 0) {
+            int i4 = this.bufferSize;
+            int i5 = this.bufferCapacity;
+            if (i4 < i5 || this.minCollectorIndex > this.replayIndex) {
+                enqueueLocked(obj);
+                i = this.bufferSize + 1;
+                this.bufferSize = i;
+                if (i > i5) {
+                    dropOldestLocked();
+                }
+                head = getHead() + this.bufferSize;
+                j = this.replayIndex;
+                if (((int) (head - j)) > i3) {
+                    updateBufferLocked(1 + j, this.minCollectorIndex, getHead() + this.bufferSize, getHead() + this.bufferSize + this.queueSize);
+                }
+            } else {
+                int i6 = WhenMappings.$EnumSwitchMapping$0[this.onBufferOverflow.ordinal()];
+                if (i6 == 1) {
                     return false;
                 }
-                if (i5 != 2) {
-                    if (i5 != 3) {
+                if (i6 != 2) {
+                    if (i6 != 3) {
                         throw new NoWhenBranchMatchedException();
+                    }
+                    enqueueLocked(obj);
+                    i = this.bufferSize + 1;
+                    this.bufferSize = i;
+                    if (i > i5) {
+                    }
+                    head = getHead() + this.bufferSize;
+                    j = this.replayIndex;
+                    if (((int) (head - j)) > i3) {
                     }
                 }
             }
-            enqueueLocked(obj);
-            int i6 = this.bufferSize + 1;
-            this.bufferSize = i6;
-            if (i6 > i4) {
-                dropOldestLocked();
-            }
-            long head = getHead() + this.bufferSize;
-            long j = this.replayIndex;
-            if (((int) (head - j)) > i2) {
-                updateBufferLocked(1 + j, this.minCollectorIndex, getHead() + this.bufferSize, getHead() + this.bufferSize + this.queueSize);
-            }
-        } else if (i2 != 0) {
+        } else if (i3 != 0) {
             enqueueLocked(obj);
             int i7 = this.bufferSize + 1;
             this.bufferSize = i7;
-            if (i7 > i2) {
+            if (i7 > i3) {
                 dropOldestLocked();
             }
             this.minCollectorIndex = getHead() + this.bufferSize;
@@ -458,31 +598,31 @@ public class SharedFlowImpl extends AbstractSharedFlow implements MutableSharedF
 
     public final Object tryTakeValue(SharedFlowSlot sharedFlowSlot) {
         Object obj;
-        Continuation[] continuationArr = AbstractSharedFlowKt.EMPTY_RESUMES;
+        Continuation[] continuationArrUpdateCollectorIndexLocked$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host = AbstractSharedFlowKt.EMPTY_RESUMES;
         synchronized (this) {
             try {
-                long tryPeekLocked = tryPeekLocked(sharedFlowSlot);
-                if (tryPeekLocked < 0) {
+                long jTryPeekLocked = tryPeekLocked(sharedFlowSlot);
+                if (jTryPeekLocked < 0) {
                     obj = SharedFlowKt.NO_VALUE;
                 } else {
                     long j = sharedFlowSlot.index;
                     Object[] objArr = this.buffer;
                     objArr.getClass();
                     Symbol symbol = SharedFlowKt.NO_VALUE;
-                    Object obj2 = objArr[((int) tryPeekLocked) & (objArr.length - 1)];
+                    Object obj2 = objArr[((int) jTryPeekLocked) & (objArr.length - 1)];
                     if (obj2 instanceof Emitter) {
                         obj2 = ((Emitter) obj2).value;
                     }
-                    sharedFlowSlot.index = tryPeekLocked + 1;
+                    sharedFlowSlot.index = jTryPeekLocked + 1;
                     Object obj3 = obj2;
-                    continuationArr = updateCollectorIndexLocked$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host(j);
+                    continuationArrUpdateCollectorIndexLocked$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host = updateCollectorIndexLocked$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host(j);
                     obj = obj3;
                 }
             } catch (Throwable th) {
                 throw th;
             }
         }
-        for (Continuation continuation : continuationArr) {
+        for (Continuation continuation : continuationArrUpdateCollectorIndexLocked$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host) {
             if (continuation != null) {
                 int i = Result.$r8$clinit;
                 continuation.resumeWith(Unit.INSTANCE);
@@ -492,15 +632,15 @@ public class SharedFlowImpl extends AbstractSharedFlow implements MutableSharedF
     }
 
     public final void updateBufferLocked(long j, long j2, long j3, long j4) {
-        long min = Math.min(j2, j);
-        for (long head = getHead(); head < min; head++) {
+        long jMin = Math.min(j2, j);
+        for (long head = getHead(); head < jMin; head++) {
             Object[] objArr = this.buffer;
             objArr.getClass();
             SharedFlowKt.access$setBufferAt(objArr, head, null);
         }
         this.replayIndex = j;
         this.minCollectorIndex = j2;
-        this.bufferSize = (int) (j3 - min);
+        this.bufferSize = (int) (j3 - jMin);
         this.queueSize = (int) (j4 - j3);
     }
 
@@ -533,10 +673,10 @@ public class SharedFlowImpl extends AbstractSharedFlow implements MutableSharedF
             }
             if (j5 > this.minCollectorIndex) {
                 long head2 = getHead() + this.bufferSize;
-                int min = this.nCollectors > 0 ? Math.min(this.queueSize, i2 - ((int) (head2 - j5))) : this.queueSize;
+                int iMin = this.nCollectors > 0 ? Math.min(this.queueSize, i2 - ((int) (head2 - j5))) : this.queueSize;
                 long j7 = this.queueSize + head2;
-                if (min > 0) {
-                    Continuation[] continuationArr4 = new Continuation[min];
+                if (iMin > 0) {
+                    Continuation[] continuationArr4 = new Continuation[iMin];
                     Object[] objArr = this.buffer;
                     objArr.getClass();
                     j3 = 1;
@@ -561,7 +701,7 @@ public class SharedFlowImpl extends AbstractSharedFlow implements MutableSharedF
                             SharedFlowKt.access$setBufferAt(objArr, head2, symbol);
                             SharedFlowKt.access$setBufferAt(objArr, j8, emitter.value);
                             long j9 = j8 + 1;
-                            if (i4 >= min) {
+                            if (i4 >= iMin) {
                                 head2 = j9;
                                 break;
                             }
@@ -584,16 +724,16 @@ public class SharedFlowImpl extends AbstractSharedFlow implements MutableSharedF
                 }
                 int i5 = (int) (head2 - j2);
                 long j10 = this.nCollectors == 0 ? head2 : j5;
-                long max = Math.max(this.replayIndex, head2 - Math.min(this.replay, i5));
-                if (i == 0 && max < j7) {
+                long jMax = Math.max(this.replayIndex, head2 - Math.min(this.replay, i5));
+                if (i == 0 && jMax < j7) {
                     Object[] objArr2 = this.buffer;
                     objArr2.getClass();
-                    if (Intrinsics.areEqual(objArr2[((int) max) & (objArr2.length - 1)], SharedFlowKt.NO_VALUE)) {
+                    if (Intrinsics.areEqual(objArr2[((int) jMax) & (objArr2.length - 1)], SharedFlowKt.NO_VALUE)) {
                         head2 += j3;
-                        max += j3;
+                        jMax += j3;
                     }
                 }
-                updateBufferLocked(max, j10, head2, j7);
+                updateBufferLocked(jMax, j10, head2, j7);
                 cleanupTailLocked();
                 return continuationArr.length == 0 ? continuationArr : findSlotsToResumeLocked(continuationArr);
             }

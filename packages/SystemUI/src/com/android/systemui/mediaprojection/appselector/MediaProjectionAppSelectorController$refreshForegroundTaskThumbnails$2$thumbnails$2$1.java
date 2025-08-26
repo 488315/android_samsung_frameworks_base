@@ -11,7 +11,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class MediaProjectionAppSelectorController$refreshForegroundTaskThumbnails$2$thumbnails$2$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ RecentTask $it;
@@ -50,7 +49,7 @@ final class MediaProjectionAppSelectorController$refreshForegroundTaskThumbnails
         RecentTaskThumbnailLoader recentTaskThumbnailLoader = this.this$0.thumbnailLoader;
         int i2 = this.$it.taskId;
         this.label = 1;
-        Object captureThumbnail = ((ActivityTaskManagerThumbnailLoader) recentTaskThumbnailLoader).captureThumbnail(i2, this);
-        return captureThumbnail == coroutineSingletons ? coroutineSingletons : captureThumbnail;
+        Object objCaptureThumbnail = ((ActivityTaskManagerThumbnailLoader) recentTaskThumbnailLoader).captureThumbnail(i2, this);
+        return objCaptureThumbnail == coroutineSingletons ? coroutineSingletons : objCaptureThumbnail;
     }
 }

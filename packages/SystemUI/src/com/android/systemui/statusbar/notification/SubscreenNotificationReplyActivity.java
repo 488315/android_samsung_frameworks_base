@@ -7,6 +7,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.telephony.SmsMessage;
@@ -39,7 +40,6 @@ import java.util.List;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SubscreenNotificationReplyActivity extends Activity implements CommandQueue.Callbacks {
     public static final String TAG;
@@ -65,7 +65,7 @@ public final class SubscreenNotificationReplyActivity extends Activity implement
         public final void onFolderStateChanged(boolean z) {
             EmergencyButtonController$$ExternalSyntheticOutline0.m("isFolderOpened: ", SubscreenNotificationReplyActivity.TAG, z);
             if (z) {
-                SubscreenNotificationReplyActivity subscreenNotificationReplyActivity = SubscreenNotificationReplyActivity.this;
+                SubscreenNotificationReplyActivity subscreenNotificationReplyActivity = this.this$0;
                 subscreenNotificationReplyActivity.isForce = true;
                 subscreenNotificationReplyActivity.finish();
             }
@@ -75,7 +75,7 @@ public final class SubscreenNotificationReplyActivity extends Activity implement
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, Intent intent) {
             if (intent != null) {
-                SubscreenNotificationReplyActivity subscreenNotificationReplyActivity = SubscreenNotificationReplyActivity.this;
+                SubscreenNotificationReplyActivity subscreenNotificationReplyActivity = this.this$0;
                 if (Intrinsics.areEqual(intent.getAction(), PopupUIUtil.ACTION_CLOSE_SYSTEM_DIALOGS) && Intrinsics.areEqual(intent.getStringExtra("reason"), "homekey")) {
                     InputMethodManager inputMethodManager = subscreenNotificationReplyActivity.imm;
                     if (inputMethodManager != null) {
@@ -88,7 +88,6 @@ public final class SubscreenNotificationReplyActivity extends Activity implement
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -120,7 +119,7 @@ public final class SubscreenNotificationReplyActivity extends Activity implement
             @Override // android.view.WindowInsetsAnimation.Callback
             public final void onEnd(WindowInsetsAnimation windowInsetsAnimation) {
                 SystemUIEditText systemUIEditText;
-                if (this.imeBottom != 0 || (systemUIEditText = SubscreenNotificationReplyActivity.this.editText) == null) {
+                if (this.imeBottom != 0 || (systemUIEditText = this.this$0.editText) == null) {
                     return;
                 }
                 systemUIEditText.setMaxLines(4);
@@ -128,7 +127,7 @@ public final class SubscreenNotificationReplyActivity extends Activity implement
 
             @Override // android.view.WindowInsetsAnimation.Callback
             public final void onPrepare(WindowInsetsAnimation windowInsetsAnimation) {
-                SystemUIEditText systemUIEditText = SubscreenNotificationReplyActivity.this.editText;
+                SystemUIEditText systemUIEditText = this.this$0.editText;
                 if (systemUIEditText != null) {
                     systemUIEditText.setMaxLines(2);
                 }
@@ -156,12 +155,12 @@ public final class SubscreenNotificationReplyActivity extends Activity implement
         if (linearLayout == null) {
             linearLayout = null;
         }
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(linearLayout, (Property<LinearLayout, Float>) View.ALPHA, 1.0f, 0.0f);
-        ofFloat.setDuration(300L);
-        ofFloat.addListener(new Animator.AnimatorListener() { // from class: com.android.systemui.statusbar.notification.SubscreenNotificationReplyActivity$performBackClicked$lambda$11$$inlined$doOnEnd$1
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(linearLayout, (Property<LinearLayout, Float>) View.ALPHA, 1.0f, 0.0f);
+        objectAnimatorOfFloat.setDuration(300L);
+        objectAnimatorOfFloat.addListener(new Animator.AnimatorListener() { // from class: com.android.systemui.statusbar.notification.SubscreenNotificationReplyActivity$performBackClicked$lambda$11$$inlined$doOnEnd$1
             @Override // android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
-                SubscreenNotificationReplyActivity.this.finish();
+                this.this$0.finish();
             }
 
             @Override // android.animation.Animator.AnimatorListener
@@ -176,19 +175,19 @@ public final class SubscreenNotificationReplyActivity extends Activity implement
             public final void onAnimationStart(Animator animator) {
             }
         });
-        ofFloat.start();
+        objectAnimatorOfFloat.start();
     }
 
-    public static final void access$showExceedTextLimitToast(SubscreenNotificationReplyActivity subscreenNotificationReplyActivity) {
+    public static final void access$showExceedTextLimitToast(SubscreenNotificationReplyActivity subscreenNotificationReplyActivity) throws Resources.NotFoundException {
         String string = subscreenNotificationReplyActivity.getResources().getString(R.string.noti_direct_reply_exceed_text_limit_toast);
         Toast toast = subscreenNotificationReplyActivity.toast;
         if (toast != null) {
             toast.cancel();
         }
-        Toast makeText = Toast.makeText(subscreenNotificationReplyActivity, string, 1);
-        subscreenNotificationReplyActivity.toast = makeText;
-        if (makeText != null) {
-            makeText.show();
+        Toast toastMakeText = Toast.makeText(subscreenNotificationReplyActivity, string, 1);
+        subscreenNotificationReplyActivity.toast = toastMakeText;
+        if (toastMakeText != null) {
+            toastMakeText.show();
         }
         Log.d(TAG, "showExceedTextLimitToast. current text = " + ((Object) subscreenNotificationReplyActivity.prevText));
     }
@@ -197,8 +196,8 @@ public final class SubscreenNotificationReplyActivity extends Activity implement
     public final boolean dispatchKeyEvent(KeyEvent keyEvent) {
         ImageView imageView;
         ImageView imageView2;
-        Integer valueOf = keyEvent != null ? Integer.valueOf(keyEvent.getAction()) : null;
-        if (valueOf != null && valueOf.intValue() == 1 && keyEvent.getKeyCode() == 66 && (imageView = this.sendButton) != null && imageView.isFocused() && (imageView2 = this.sendButton) != null) {
+        Integer numValueOf = keyEvent != null ? Integer.valueOf(keyEvent.getAction()) : null;
+        if (numValueOf != null && numValueOf.intValue() == 1 && keyEvent.getKeyCode() == 66 && (imageView = this.sendButton) != null && imageView.isFocused() && (imageView2 = this.sendButton) != null) {
             imageView2.performClick();
         }
         return super.dispatchKeyEvent(keyEvent);
@@ -288,7 +287,7 @@ public final class SubscreenNotificationReplyActivity extends Activity implement
             linearLayout4.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.statusbar.notification.SubscreenNotificationReplyActivity$initView$1$1
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
-                    SubscreenNotificationReplyActivity.access$performBackClicked(SubscreenNotificationReplyActivity.this);
+                    SubscreenNotificationReplyActivity.access$performBackClicked(this.this$0);
                 }
             });
         }
@@ -297,7 +296,7 @@ public final class SubscreenNotificationReplyActivity extends Activity implement
             frameLayout.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.statusbar.notification.SubscreenNotificationReplyActivity$initView$2$1
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
-                    SubscreenNotificationReplyActivity.access$performBackClicked(SubscreenNotificationReplyActivity.this);
+                    SubscreenNotificationReplyActivity.access$performBackClicked(this.this$0);
                 }
             });
         }
@@ -307,26 +306,26 @@ public final class SubscreenNotificationReplyActivity extends Activity implement
                 @Override // android.view.View.OnFocusChangeListener
                 public final void onFocusChange(View view, boolean z) {
                     InputMethodManager inputMethodManager;
-                    if (z && view.isPressed() && (inputMethodManager = SubscreenNotificationReplyActivity.this.imm) != null) {
+                    if (z && view.isPressed() && (inputMethodManager = this.this$0.imm) != null) {
                         inputMethodManager.showSoftInput(view, 1);
                     }
                 }
             });
             systemUIEditText.addTextChangedListener(new TextWatcher() { // from class: com.android.systemui.statusbar.notification.SubscreenNotificationReplyActivity$initView$3$2
                 @Override // android.text.TextWatcher
-                public final void onTextChanged(CharSequence charSequence2, int i, int i2, int i3) {
-                    SubscreenNotificationReplyActivity subscreenNotificationReplyActivity = SubscreenNotificationReplyActivity.this;
+                public final void onTextChanged(CharSequence charSequence2, int i, int i2, int i3) throws Resources.NotFoundException {
+                    SubscreenNotificationReplyActivity subscreenNotificationReplyActivity = this.this$0;
                     String str3 = SubscreenNotificationReplyActivity.TAG;
                     subscreenNotificationReplyActivity.enableSendButton();
                     Editable text = systemUIEditText.getText();
-                    String str4 = ((Object) text) + SubscreenNotificationReplyActivity.this.signature;
+                    String str4 = ((Object) text) + this.this$0.signature;
                     int length = str4.length();
-                    SubscreenNotificationReplyActivity subscreenNotificationReplyActivity2 = SubscreenNotificationReplyActivity.this;
+                    SubscreenNotificationReplyActivity subscreenNotificationReplyActivity2 = this.this$0;
                     if (subscreenNotificationReplyActivity2.isSms) {
                         if (SmsMessage.calculateLength(str4, false)[0] > 1) {
-                            SubscreenNotificationReplyActivity.this.setPrevText();
-                            SubscreenNotificationReplyActivity.access$showExceedTextLimitToast(SubscreenNotificationReplyActivity.this);
-                            if (SubscreenNotificationReplyActivity.this.prevText == null) {
+                            this.this$0.setPrevText();
+                            SubscreenNotificationReplyActivity.access$showExceedTextLimitToast(this.this$0);
+                            if (this.this$0.prevText == null) {
                                 systemUIEditText.setText((CharSequence) null);
                                 return;
                             }
@@ -334,14 +333,14 @@ public final class SubscreenNotificationReplyActivity extends Activity implement
                         }
                     } else if (length > subscreenNotificationReplyActivity2.maxLength) {
                         subscreenNotificationReplyActivity2.setPrevText();
-                        SubscreenNotificationReplyActivity.access$showExceedTextLimitToast(SubscreenNotificationReplyActivity.this);
-                        if (SubscreenNotificationReplyActivity.this.prevText == null) {
+                        SubscreenNotificationReplyActivity.access$showExceedTextLimitToast(this.this$0);
+                        if (this.this$0.prevText == null) {
                             systemUIEditText.setText((CharSequence) null);
                             return;
                         }
                         return;
                     }
-                    SubscreenNotificationReplyActivity.this.prevText = systemUIEditText.getText().toString();
+                    this.this$0.prevText = systemUIEditText.getText().toString();
                 }
 
                 @Override // android.text.TextWatcher
@@ -363,7 +362,7 @@ public final class SubscreenNotificationReplyActivity extends Activity implement
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view) {
                     Editable text;
-                    SubscreenNotificationReplyActivity subscreenNotificationReplyActivity = SubscreenNotificationReplyActivity.this;
+                    SubscreenNotificationReplyActivity subscreenNotificationReplyActivity = this.this$0;
                     if (subscreenNotificationReplyActivity.isSent) {
                         return;
                     }
@@ -371,30 +370,30 @@ public final class SubscreenNotificationReplyActivity extends Activity implement
                     if (inputMethodManager != null) {
                         inputMethodManager.hideSoftInputFromWindow(imageView2.getWindowToken(), 0);
                     }
-                    SystemUIEditText systemUIEditText2 = SubscreenNotificationReplyActivity.this.editText;
-                    Integer num = null;
-                    String valueOf = String.valueOf(systemUIEditText2 != null ? systemUIEditText2.getText() : null);
-                    SubscreenNotificationReplyActivity subscreenNotificationReplyActivity2 = SubscreenNotificationReplyActivity.this;
-                    final boolean useHistory = subscreenNotificationReplyActivity2.controller.useHistory(subscreenNotificationReplyActivity2.entry);
-                    SubscreenNotificationReplyActivity subscreenNotificationReplyActivity3 = SubscreenNotificationReplyActivity.this;
+                    SystemUIEditText systemUIEditText2 = this.this$0.editText;
+                    Integer numValueOf = null;
+                    String strValueOf = String.valueOf(systemUIEditText2 != null ? systemUIEditText2.getText() : null);
+                    SubscreenNotificationReplyActivity subscreenNotificationReplyActivity2 = this.this$0;
+                    final boolean zUseHistory = subscreenNotificationReplyActivity2.controller.useHistory(subscreenNotificationReplyActivity2.entry);
+                    SubscreenNotificationReplyActivity subscreenNotificationReplyActivity3 = this.this$0;
                     SubscreenNotificationController subscreenNotificationController2 = subscreenNotificationReplyActivity3.controller;
                     String str3 = subscreenNotificationReplyActivity3.key;
                     str3.getClass();
-                    subscreenNotificationController2.replyNotification(str3, valueOf);
-                    SubscreenNotificationReplyActivity subscreenNotificationReplyActivity4 = SubscreenNotificationReplyActivity.this;
+                    subscreenNotificationController2.replyNotification(str3, strValueOf);
+                    SubscreenNotificationReplyActivity subscreenNotificationReplyActivity4 = this.this$0;
                     subscreenNotificationReplyActivity4.isSent = true;
                     LinearLayout linearLayout5 = subscreenNotificationReplyActivity4.replyLayout;
                     if (linearLayout5 == null) {
                         linearLayout5 = null;
                     }
-                    ObjectAnimator ofFloat = ObjectAnimator.ofFloat(linearLayout5, (Property<LinearLayout, Float>) View.ALPHA, 1.0f, 0.0f);
-                    final SubscreenNotificationReplyActivity subscreenNotificationReplyActivity5 = SubscreenNotificationReplyActivity.this;
-                    ofFloat.setDuration(300L);
-                    ofFloat.addListener(new Animator.AnimatorListener() { // from class: com.android.systemui.statusbar.notification.SubscreenNotificationReplyActivity$initView$4$1$onClick$lambda$1$$inlined$doOnEnd$1
+                    ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(linearLayout5, (Property<LinearLayout, Float>) View.ALPHA, 1.0f, 0.0f);
+                    final SubscreenNotificationReplyActivity subscreenNotificationReplyActivity5 = this.this$0;
+                    objectAnimatorOfFloat.setDuration(300L);
+                    objectAnimatorOfFloat.addListener(new Animator.AnimatorListener() { // from class: com.android.systemui.statusbar.notification.SubscreenNotificationReplyActivity$initView$4$1$onClick$lambda$1$$inlined$doOnEnd$1
                         @Override // android.animation.Animator.AnimatorListener
                         public final void onAnimationEnd(Animator animator) {
                             SubscreenDeviceModelParent subscreenDeviceModelParent3;
-                            if (!useHistory && (subscreenDeviceModelParent3 = subscreenNotificationReplyActivity5.controller.mDeviceModel) != null) {
+                            if (!zUseHistory && (subscreenDeviceModelParent3 = subscreenNotificationReplyActivity5.controller.mDeviceModel) != null) {
                                 subscreenDeviceModelParent3.hideDetailNotificationAnimated(0, true);
                             }
                             subscreenNotificationReplyActivity5.finish();
@@ -412,12 +411,12 @@ public final class SubscreenNotificationReplyActivity extends Activity implement
                         public final void onAnimationStart(Animator animator) {
                         }
                     });
-                    ofFloat.start();
-                    SystemUIEditText systemUIEditText3 = SubscreenNotificationReplyActivity.this.editText;
+                    objectAnimatorOfFloat.start();
+                    SystemUIEditText systemUIEditText3 = this.this$0.editText;
                     if (systemUIEditText3 != null && (text = systemUIEditText3.getText()) != null) {
-                        num = Integer.valueOf(text.length());
+                        numValueOf = Integer.valueOf(text.length());
                     }
-                    SystemUIAnalytics.sendEventCDLog(SystemUIAnalytics.EID_QPNE_COVER_SCREEN_ID_DETAIL, SystemUIAnalytics.EID_QPNE_COVER_REPLY_WITH_KEYBORAD, "length", String.valueOf(num));
+                    SystemUIAnalytics.sendEventCDLog(SystemUIAnalytics.EID_QPNE_COVER_SCREEN_ID_DETAIL, SystemUIAnalytics.EID_QPNE_COVER_REPLY_WITH_KEYBORAD, "length", String.valueOf(numValueOf));
                 }
             });
             imageView = imageView2;
@@ -437,17 +436,17 @@ public final class SubscreenNotificationReplyActivity extends Activity implement
 
     @Override // android.app.Activity
     public final void onDestroy() {
-        String valueOf;
+        String strValueOf;
         Log.d(TAG, "onDestroy()");
         NotificationEntry notificationEntry = this.entry;
         if (notificationEntry != null) {
             if (this.isSent) {
-                valueOf = "";
+                strValueOf = "";
             } else {
                 SystemUIEditText systemUIEditText = this.editText;
-                valueOf = String.valueOf(systemUIEditText != null ? systemUIEditText.getText() : null);
+                strValueOf = String.valueOf(systemUIEditText != null ? systemUIEditText.getText() : null);
             }
-            notificationEntry.remoteInputText = valueOf;
+            notificationEntry.remoteInputText = strValueOf;
         }
         SubscreenSubRoomNotification subscreenSubRoomNotification = this.subRoomNoti;
         if (subscreenSubRoomNotification == null) {

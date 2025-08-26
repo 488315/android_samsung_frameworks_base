@@ -73,8 +73,8 @@ public class SemHEIFCodec {
         return native_decodeFile(str, options, 0);
     }
 
-    public static Bitmap decodeFileDescriptor(FileDescriptor fileDescriptor, BitmapFactory.Options options) {
-        Bitmap bitmap = null;
+    public static Bitmap decodeFileDescriptor(FileDescriptor fileDescriptor, BitmapFactory.Options options) throws IOException {
+        Bitmap bitmapDecodeStream = null;
         if (!mLibraryLoaded) {
             Log.e(TAG, "decodeFileDescriptor - mLibraryLoaded is false");
             return null;
@@ -88,18 +88,18 @@ public class SemHEIFCodec {
         try {
             FileInputStream fileInputStream = new FileInputStream(fileDescriptor);
             try {
-                bitmap = decodeStream(fileInputStream, options);
+                bitmapDecodeStream = decodeStream(fileInputStream, options);
                 fileInputStream.close();
-                return bitmap;
+                return bitmapDecodeStream;
             } finally {
             }
         } catch (IOException e) {
             e.printStackTrace();
-            return bitmap;
+            return bitmapDecodeStream;
         }
     }
 
-    public static Bitmap decodeStream(InputStream inputStream, BitmapFactory.Options options) {
+    public static Bitmap decodeStream(InputStream inputStream, BitmapFactory.Options options) throws IOException {
         if (!mLibraryLoaded) {
             Log.e(TAG, "decodeStream - mLibraryLoaded is false");
             return null;
@@ -114,9 +114,9 @@ public class SemHEIFCodec {
         byte[] bArr = new byte[8192];
         while (true) {
             try {
-                int read = inputStream.read(bArr);
-                if (read != -1) {
-                    byteArrayOutputStream.write(bArr, 0, read);
+                int i = inputStream.read(bArr);
+                if (i != -1) {
+                    byteArrayOutputStream.write(bArr, 0, i);
                 } else {
                     byte[] byteArray = byteArrayOutputStream.toByteArray();
                     byteArrayOutputStream.close();
@@ -160,8 +160,8 @@ public class SemHEIFCodec {
         return native_decodeFile(str, options, 1);
     }
 
-    public static Bitmap getThumbnail(FileDescriptor fileDescriptor, BitmapFactory.Options options) {
-        Bitmap bitmap = null;
+    public static Bitmap getThumbnail(FileDescriptor fileDescriptor, BitmapFactory.Options options) throws IOException {
+        Bitmap thumbnail = null;
         if (!mLibraryLoaded) {
             Log.e(TAG, "getThumbnail - mLibraryLoaded is false");
             return null;
@@ -175,18 +175,18 @@ public class SemHEIFCodec {
         try {
             FileInputStream fileInputStream = new FileInputStream(fileDescriptor);
             try {
-                bitmap = getThumbnail(fileInputStream, options);
+                thumbnail = getThumbnail(fileInputStream, options);
                 fileInputStream.close();
-                return bitmap;
+                return thumbnail;
             } finally {
             }
         } catch (IOException e) {
             e.printStackTrace();
-            return bitmap;
+            return thumbnail;
         }
     }
 
-    public static Bitmap getThumbnail(InputStream inputStream, BitmapFactory.Options options) {
+    public static Bitmap getThumbnail(InputStream inputStream, BitmapFactory.Options options) throws IOException {
         if (!mLibraryLoaded) {
             Log.e(TAG, "getThumbnail - mLibraryLoaded is false");
             return null;
@@ -201,9 +201,9 @@ public class SemHEIFCodec {
         byte[] bArr = new byte[8192];
         while (true) {
             try {
-                int read = inputStream.read(bArr);
-                if (read != -1) {
-                    byteArrayOutputStream.write(bArr, 0, read);
+                int i = inputStream.read(bArr);
+                if (i != -1) {
+                    byteArrayOutputStream.write(bArr, 0, i);
                 } else {
                     byte[] byteArray = byteArrayOutputStream.toByteArray();
                     byteArrayOutputStream.close();
@@ -244,7 +244,7 @@ public class SemHEIFCodec {
         return native_getExifData(str);
     }
 
-    public static byte[] getExifData(FileDescriptor fileDescriptor) {
+    public static byte[] getExifData(FileDescriptor fileDescriptor) throws IOException {
         if (!mLibraryLoaded) {
             Log.e(TAG, "getExifData - mLibraryLoaded is false");
             return null;
@@ -266,7 +266,7 @@ public class SemHEIFCodec {
         }
     }
 
-    public static byte[] getExifData(InputStream inputStream) {
+    public static byte[] getExifData(InputStream inputStream) throws IOException {
         if (!mLibraryLoaded) {
             Log.e(TAG, "getExifData - mLibraryLoaded is false");
             return null;
@@ -278,9 +278,9 @@ public class SemHEIFCodec {
         byte[] bArr = new byte[8192];
         while (true) {
             try {
-                int read = inputStream.read(bArr);
-                if (read != -1) {
-                    byteArrayOutputStream.write(bArr, 0, read);
+                int i = inputStream.read(bArr);
+                if (i != -1) {
+                    byteArrayOutputStream.write(bArr, 0, i);
                 } else {
                     byte[] byteArray = byteArrayOutputStream.toByteArray();
                     byteArrayOutputStream.close();

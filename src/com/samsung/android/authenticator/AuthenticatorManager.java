@@ -37,14 +37,10 @@ public final class AuthenticatorManager {
     }
 
     public static synchronized AuthenticatorManager getInstance() {
-        AuthenticatorManager authenticatorManager;
-        synchronized (AuthenticatorManager.class) {
-            if (sAuthenticatorManager == null) {
-                sAuthenticatorManager = new AuthenticatorManager();
-            }
-            authenticatorManager = sAuthenticatorManager;
+        if (sAuthenticatorManager == null) {
+            sAuthenticatorManager = new AuthenticatorManager();
         }
-        return authenticatorManager;
+        return sAuthenticatorManager;
     }
 
     private AuthenticatorManager() {
@@ -55,16 +51,16 @@ public final class AuthenticatorManager {
             AuthenticatorLog.e(TAG, "type is null");
             return -1;
         }
-        TrustedApplication trustedApplication = this.mReservedTrustedApplications.get(trustedAppType);
-        if (trustedApplication == null) {
-            trustedApplication = makeReservedTrustedApplication(trustedAppType);
-            if (trustedApplication == null) {
+        TrustedApplication trustedApplicationMakeReservedTrustedApplication = this.mReservedTrustedApplications.get(trustedAppType);
+        if (trustedApplicationMakeReservedTrustedApplication == null) {
+            trustedApplicationMakeReservedTrustedApplication = makeReservedTrustedApplication(trustedAppType);
+            if (trustedApplicationMakeReservedTrustedApplication == null) {
                 AuthenticatorLog.e(TAG, "mrta failed");
                 return -1;
             }
-            this.mReservedTrustedApplications.put(trustedAppType, trustedApplication);
+            this.mReservedTrustedApplications.put(trustedAppType, trustedApplicationMakeReservedTrustedApplication);
         }
-        return trustedApplication.load();
+        return trustedApplicationMakeReservedTrustedApplication.load();
     }
 
     /* renamed from: com.samsung.android.authenticator.AuthenticatorManager$1, reason: invalid class name */
@@ -109,12 +105,12 @@ public final class AuthenticatorManager {
             AuthenticatorLog.e(TAG, "file is null");
             return -1;
         }
-        TrustedApplication trustedApplication = this.mAssetTrustedApplications.get(assetFileDescriptor);
-        if (trustedApplication == null) {
-            trustedApplication = makeAssetTrustedApplication(TrustedAppAssetType.PASS_AUTHENTICATOR, assetFileDescriptor);
-            this.mAssetTrustedApplications.put(assetFileDescriptor, trustedApplication);
+        TrustedApplication trustedApplicationMakeAssetTrustedApplication = this.mAssetTrustedApplications.get(assetFileDescriptor);
+        if (trustedApplicationMakeAssetTrustedApplication == null) {
+            trustedApplicationMakeAssetTrustedApplication = makeAssetTrustedApplication(TrustedAppAssetType.PASS_AUTHENTICATOR, assetFileDescriptor);
+            this.mAssetTrustedApplications.put(assetFileDescriptor, trustedApplicationMakeAssetTrustedApplication);
         }
-        return trustedApplication.load();
+        return trustedApplicationMakeAssetTrustedApplication.load();
     }
 
     private TrustedApplication makeAssetTrustedApplication(TrustedAppAssetType trustedAppAssetType, AssetFileDescriptor assetFileDescriptor) {
@@ -126,22 +122,22 @@ public final class AuthenticatorManager {
             AuthenticatorLog.e(TAG, "file is null");
             return -1;
         }
-        TrustedApplication trustedApplication = this.mFileTrustedApplications.get(file);
-        if (trustedApplication == null) {
-            trustedApplication = makeFileTrustedApplication(file);
-            if (trustedApplication == null) {
+        TrustedApplication trustedApplicationMakeFileTrustedApplication = this.mFileTrustedApplications.get(file);
+        if (trustedApplicationMakeFileTrustedApplication == null) {
+            trustedApplicationMakeFileTrustedApplication = makeFileTrustedApplication(file);
+            if (trustedApplicationMakeFileTrustedApplication == null) {
                 AuthenticatorLog.e(TAG, "mfta failed");
                 return -1;
             }
-            this.mFileTrustedApplications.put(file, trustedApplication);
+            this.mFileTrustedApplications.put(file, trustedApplicationMakeFileTrustedApplication);
         }
-        return trustedApplication.load();
+        return trustedApplicationMakeFileTrustedApplication.load();
     }
 
     private TrustedApplication makeFileTrustedApplication(File file) {
         try {
-            ParcelFileDescriptor open = ParcelFileDescriptor.open(file, 268435456);
-            return new DownloadedTrustedApplication(this.mFileTrustedApplicationHandle.getAndIncrement(), TrustedAppAssetType.PASS_AUTHENTICATOR, open, 0L, open.getStatSize());
+            ParcelFileDescriptor parcelFileDescriptorOpen = ParcelFileDescriptor.open(file, 268435456);
+            return new DownloadedTrustedApplication(this.mFileTrustedApplicationHandle.getAndIncrement(), TrustedAppAssetType.PASS_AUTHENTICATOR, parcelFileDescriptorOpen, 0L, parcelFileDescriptorOpen.getStatSize());
         } catch (FileNotFoundException unused) {
             AuthenticatorLog.e(TAG, "open failed");
             return null;
@@ -153,13 +149,13 @@ public final class AuthenticatorManager {
             AuthenticatorLog.e(TAG, "file is null");
             return -1;
         }
-        TrustedApplication trustedApplication = this.mAssetTrustedApplications.get(assetFileDescriptor);
-        if (trustedApplication == null) {
+        TrustedApplication trustedApplicationMakeAssetTrustedApplication = this.mAssetTrustedApplications.get(assetFileDescriptor);
+        if (trustedApplicationMakeAssetTrustedApplication == null) {
             AuthenticatorLog.i(TAG, "ta is null");
-            trustedApplication = makeAssetTrustedApplication(trustedAppAssetType, assetFileDescriptor);
-            this.mAssetTrustedApplications.put(assetFileDescriptor, trustedApplication);
+            trustedApplicationMakeAssetTrustedApplication = makeAssetTrustedApplication(trustedAppAssetType, assetFileDescriptor);
+            this.mAssetTrustedApplications.put(assetFileDescriptor, trustedApplicationMakeAssetTrustedApplication);
         }
-        return trustedApplication.load();
+        return trustedApplicationMakeAssetTrustedApplication.load();
     }
 
     public int load() {

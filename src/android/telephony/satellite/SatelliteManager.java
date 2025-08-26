@@ -444,7 +444,7 @@ public final class SatelliteManager {
                         Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda17
                             @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                             public final void runOrThrow() {
-                                r1.accept(23);
+                                consumer.accept(23);
                             }
                         });
                     }
@@ -460,7 +460,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda70
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            r1.accept(23);
+                            consumer.accept(23);
                         }
                     });
                 }
@@ -488,7 +488,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$1$$ExternalSyntheticLambda0
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            r1.accept(Integer.valueOf(r2));
+                            consumer.accept(Integer.valueOf(i));
                         }
                     });
                 }
@@ -512,7 +512,7 @@ public final class SatelliteManager {
                         Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda77
                             @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                             public final void runOrThrow() {
-                                OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(23));
+                                outcomeReceiver.onError(new SatelliteManager.SatelliteException(23));
                             }
                         });
                     }
@@ -526,7 +526,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda76
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(23));
+                            outcomeReceiver.onError(new SatelliteManager.SatelliteException(23));
                         }
                     });
                 }
@@ -559,7 +559,7 @@ public final class SatelliteManager {
                             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$2$$ExternalSyntheticLambda1
                                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                                 public final void runOrThrow() {
-                                    OutcomeReceiver.this.onResult(Boolean.valueOf(r2));
+                                    outcomeReceiver.onResult(Boolean.valueOf(z));
                                 }
                             });
                         }
@@ -575,7 +575,7 @@ public final class SatelliteManager {
                         Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$2$$ExternalSyntheticLambda0
                             @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                             public final void runOrThrow() {
-                                OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(9));
+                                outcomeReceiver.onError(new SatelliteManager.SatelliteException(9));
                             }
                         });
                     }
@@ -590,7 +590,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$2$$ExternalSyntheticLambda5
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(r2));
+                            outcomeReceiver.onError(new SatelliteManager.SatelliteException(i));
                         }
                     });
                 }
@@ -614,7 +614,7 @@ public final class SatelliteManager {
                         Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda45
                             @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                             public final void runOrThrow() {
-                                OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(23));
+                                outcomeReceiver.onError(new SatelliteManager.SatelliteException(23));
                             }
                         });
                     }
@@ -628,7 +628,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda3
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(23));
+                            outcomeReceiver.onError(new SatelliteManager.SatelliteException(23));
                         }
                     });
                 }
@@ -661,7 +661,7 @@ public final class SatelliteManager {
                             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$3$$ExternalSyntheticLambda1
                                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                                 public final void runOrThrow() {
-                                    OutcomeReceiver.this.onResult(Boolean.valueOf(r2));
+                                    outcomeReceiver.onResult(Boolean.valueOf(z));
                                 }
                             });
                         }
@@ -677,7 +677,7 @@ public final class SatelliteManager {
                         Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$3$$ExternalSyntheticLambda2
                             @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                             public final void runOrThrow() {
-                                OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(9));
+                                outcomeReceiver.onError(new SatelliteManager.SatelliteException(9));
                             }
                         });
                     }
@@ -692,7 +692,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$3$$ExternalSyntheticLambda0
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(r2));
+                            outcomeReceiver.onError(new SatelliteManager.SatelliteException(i));
                         }
                     });
                 }
@@ -715,7 +715,7 @@ public final class SatelliteManager {
                         Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda100
                             @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                             public final void runOrThrow() {
-                                OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(23));
+                                outcomeReceiver.onError(new SatelliteManager.SatelliteException(23));
                             }
                         });
                     }
@@ -752,7 +752,7 @@ public final class SatelliteManager {
                             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$4$$ExternalSyntheticLambda5
                                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                                 public final void runOrThrow() {
-                                    OutcomeReceiver.this.onResult(Boolean.valueOf(r2));
+                                    outcomeReceiver.onResult(Boolean.valueOf(z));
                                 }
                             });
                         }
@@ -768,7 +768,7 @@ public final class SatelliteManager {
                         Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$4$$ExternalSyntheticLambda3
                             @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                             public final void runOrThrow() {
-                                OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(9));
+                                outcomeReceiver.onError(new SatelliteManager.SatelliteException(9));
                             }
                         });
                     }
@@ -783,7 +783,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$4$$ExternalSyntheticLambda4
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(r2));
+                            outcomeReceiver.onError(new SatelliteManager.SatelliteException(i));
                         }
                     });
                 }
@@ -807,7 +807,7 @@ public final class SatelliteManager {
                         Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda93
                             @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                             public final void runOrThrow() {
-                                OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(23));
+                                outcomeReceiver.onError(new SatelliteManager.SatelliteException(23));
                             }
                         });
                     }
@@ -821,7 +821,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda69
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(23));
+                            outcomeReceiver.onError(new SatelliteManager.SatelliteException(23));
                         }
                     });
                 }
@@ -854,7 +854,7 @@ public final class SatelliteManager {
                             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$5$$ExternalSyntheticLambda2
                                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                                 public final void runOrThrow() {
-                                    OutcomeReceiver.this.onResult(Boolean.valueOf(r2));
+                                    outcomeReceiver.onResult(Boolean.valueOf(z));
                                 }
                             });
                         }
@@ -870,7 +870,7 @@ public final class SatelliteManager {
                         Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$5$$ExternalSyntheticLambda1
                             @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                             public final void runOrThrow() {
-                                OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(9));
+                                outcomeReceiver.onError(new SatelliteManager.SatelliteException(9));
                             }
                         });
                     }
@@ -885,7 +885,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$5$$ExternalSyntheticLambda0
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(r2));
+                            outcomeReceiver.onError(new SatelliteManager.SatelliteException(i));
                         }
                     });
                 }
@@ -909,7 +909,7 @@ public final class SatelliteManager {
                         Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda65
                             @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                             public final void runOrThrow() {
-                                OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(23));
+                                outcomeReceiver.onError(new SatelliteManager.SatelliteException(23));
                             }
                         });
                     }
@@ -923,7 +923,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda20
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(23));
+                            outcomeReceiver.onError(new SatelliteManager.SatelliteException(23));
                         }
                     });
                 }
@@ -956,7 +956,7 @@ public final class SatelliteManager {
                             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$6$$ExternalSyntheticLambda5
                                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                                 public final void runOrThrow() {
-                                    OutcomeReceiver.this.onResult(r2);
+                                    outcomeReceiver.onResult(satelliteCapabilities);
                                 }
                             });
                         }
@@ -972,7 +972,7 @@ public final class SatelliteManager {
                         Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$6$$ExternalSyntheticLambda4
                             @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                             public final void runOrThrow() {
-                                OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(9));
+                                outcomeReceiver.onError(new SatelliteManager.SatelliteException(9));
                             }
                         });
                     }
@@ -987,7 +987,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$6$$ExternalSyntheticLambda0
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(r2));
+                            outcomeReceiver.onError(new SatelliteManager.SatelliteException(i));
                         }
                     });
                 }
@@ -1016,7 +1016,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda83
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            r1.accept(23);
+                            consumer.accept(23);
                         }
                     });
                 }
@@ -1029,7 +1029,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda91
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            r1.accept(23);
+                            consumer.accept(23);
                         }
                     });
                 }
@@ -1057,7 +1057,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$7$$ExternalSyntheticLambda1
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            r1.accept(Integer.valueOf(r2));
+                            consumer.accept(Integer.valueOf(i));
                         }
                     });
                 }
@@ -1085,7 +1085,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$8$$ExternalSyntheticLambda3
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            SatelliteTransmissionUpdateCallback.this.onSatellitePositionChanged(r2);
+                            satelliteTransmissionUpdateCallback.onSatellitePositionChanged(pointingInfo);
                         }
                     });
                 }
@@ -1102,7 +1102,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$8$$ExternalSyntheticLambda0
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            SatelliteTransmissionUpdateCallback.this.onSendDatagramStateChanged(r2, r3, r4, r5);
+                            satelliteTransmissionUpdateCallback.onSendDatagramStateChanged(i, i, i, i);
                         }
                     });
                 }
@@ -1115,7 +1115,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$8$$ExternalSyntheticLambda2
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            SatelliteTransmissionUpdateCallback.this.onSendDatagramStateChanged(r2, r3, r4);
+                            satelliteTransmissionUpdateCallback.onSendDatagramStateChanged(i, i, i);
                         }
                     });
                 }
@@ -1132,7 +1132,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$8$$ExternalSyntheticLambda7
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            SatelliteTransmissionUpdateCallback.this.onReceiveDatagramStateChanged(r2, r3, r4);
+                            satelliteTransmissionUpdateCallback.onReceiveDatagramStateChanged(i, i, i);
                         }
                     });
                 }
@@ -1149,7 +1149,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$8$$ExternalSyntheticLambda9
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            SatelliteTransmissionUpdateCallback.this.onSendDatagramRequested(r2);
+                            satelliteTransmissionUpdateCallback.onSendDatagramRequested(i);
                         }
                     });
                 }
@@ -1162,7 +1162,7 @@ public final class SatelliteManager {
         Objects.requireNonNull(satelliteTransmissionUpdateCallback);
         Objects.requireNonNull(executor);
         Objects.requireNonNull(consumer);
-        ISatelliteTransmissionUpdateCallback remove = sSatelliteTransmissionUpdateCallbackMap.remove(satelliteTransmissionUpdateCallback);
+        ISatelliteTransmissionUpdateCallback iSatelliteTransmissionUpdateCallbackRemove = sSatelliteTransmissionUpdateCallbackMap.remove(satelliteTransmissionUpdateCallback);
         try {
             ITelephony iTelephony = getITelephony();
             if (iTelephony == null) {
@@ -1173,13 +1173,13 @@ public final class SatelliteManager {
                         Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda68
                             @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                             public final void runOrThrow() {
-                                r1.accept(23);
+                                consumer.accept(23);
                             }
                         });
                     }
                 });
-            } else if (remove != null) {
-                iTelephony.stopSatelliteTransmissionUpdates(new AnonymousClass9(this, executor, consumer), remove);
+            } else if (iSatelliteTransmissionUpdateCallbackRemove != null) {
+                iTelephony.stopSatelliteTransmissionUpdates(new AnonymousClass9(this, executor, consumer), iSatelliteTransmissionUpdateCallbackRemove);
             } else {
                 loge("stopSatelliteTransmissionUpdates: No internal callback.");
                 executor.execute(new Runnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda42
@@ -1188,7 +1188,7 @@ public final class SatelliteManager {
                         Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda27
                             @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                             public final void runOrThrow() {
-                                r1.accept(8);
+                                consumer.accept(8);
                             }
                         });
                     }
@@ -1202,7 +1202,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda22
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            r1.accept(23);
+                            consumer.accept(23);
                         }
                     });
                 }
@@ -1230,7 +1230,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$9$$ExternalSyntheticLambda0
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            r1.accept(Integer.valueOf(r2));
+                            consumer.accept(Integer.valueOf(i));
                         }
                     });
                 }
@@ -1244,11 +1244,11 @@ public final class SatelliteManager {
         Objects.requireNonNull(executor);
         Objects.requireNonNull(consumer);
         Objects.requireNonNull(bArr);
-        ICancellationSignal iCancellationSignal = null;
+        ICancellationSignal iCancellationSignalProvisionSatelliteService = null;
         try {
             ITelephony iTelephony = getITelephony();
             if (iTelephony != null) {
-                iCancellationSignal = iTelephony.provisionSatelliteService(str, bArr, new AnonymousClass10(this, executor, consumer));
+                iCancellationSignalProvisionSatelliteService = iTelephony.provisionSatelliteService(str, bArr, new AnonymousClass10(this, executor, consumer));
             } else {
                 loge("provisionService() invalid telephony");
                 executor.execute(new Runnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda95
@@ -1257,7 +1257,7 @@ public final class SatelliteManager {
                         Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda86
                             @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                             public final void runOrThrow() {
-                                r1.accept(23);
+                                consumer.accept(23);
                             }
                         });
                     }
@@ -1271,14 +1271,14 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda4
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            r1.accept(23);
+                            consumer.accept(23);
                         }
                     });
                 }
             });
         }
         if (cancellationSignal != null) {
-            cancellationSignal.setRemote(iCancellationSignal);
+            cancellationSignal.setRemote(iCancellationSignalProvisionSatelliteService);
         }
     }
 
@@ -1302,7 +1302,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$10$$ExternalSyntheticLambda1
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            r1.accept(Integer.valueOf(r2));
+                            consumer.accept(Integer.valueOf(i));
                         }
                     });
                 }
@@ -1327,7 +1327,7 @@ public final class SatelliteManager {
                         Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda31
                             @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                             public final void runOrThrow() {
-                                r1.accept(23);
+                                consumer.accept(23);
                             }
                         });
                     }
@@ -1341,7 +1341,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda49
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            r1.accept(23);
+                            consumer.accept(23);
                         }
                     });
                 }
@@ -1369,7 +1369,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$11$$ExternalSyntheticLambda0
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            r1.accept(Integer.valueOf(r2));
+                            consumer.accept(Integer.valueOf(i));
                         }
                     });
                 }
@@ -1416,7 +1416,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$12$$ExternalSyntheticLambda2
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            SatelliteProvisionStateCallback.this.onSatelliteProvisionStateChanged(r2);
+                            satelliteProvisionStateCallback.onSatelliteProvisionStateChanged(z);
                         }
                     });
                 }
@@ -1433,7 +1433,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$12$$ExternalSyntheticLambda1
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            SatelliteProvisionStateCallback.this.onSatelliteSubscriptionProvisionStateChanged(r2);
+                            satelliteProvisionStateCallback.onSatelliteSubscriptionProvisionStateChanged(list);
                         }
                     });
                 }
@@ -1444,14 +1444,14 @@ public final class SatelliteManager {
     @SystemApi
     public void unregisterForProvisionStateChanged(SatelliteProvisionStateCallback satelliteProvisionStateCallback) {
         Objects.requireNonNull(satelliteProvisionStateCallback);
-        ISatelliteProvisionStateCallback remove = sSatelliteProvisionStateCallbackMap.remove(satelliteProvisionStateCallback);
+        ISatelliteProvisionStateCallback iSatelliteProvisionStateCallbackRemove = sSatelliteProvisionStateCallbackMap.remove(satelliteProvisionStateCallback);
         try {
             ITelephony iTelephony = getITelephony();
             if (iTelephony == null) {
                 throw new IllegalStateException("telephony service is null.");
             }
-            if (remove != null) {
-                iTelephony.unregisterForSatelliteProvisionStateChanged(remove);
+            if (iSatelliteProvisionStateCallbackRemove != null) {
+                iTelephony.unregisterForSatelliteProvisionStateChanged(iSatelliteProvisionStateCallbackRemove);
             } else {
                 loge("unregisterForProvisionStateChanged: No internal callback.");
             }
@@ -1477,7 +1477,7 @@ public final class SatelliteManager {
                         Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda78
                             @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                             public final void runOrThrow() {
-                                OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(23));
+                                outcomeReceiver.onError(new SatelliteManager.SatelliteException(23));
                             }
                         });
                     }
@@ -1491,7 +1491,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda0
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(23));
+                            outcomeReceiver.onError(new SatelliteManager.SatelliteException(23));
                         }
                     });
                 }
@@ -1524,7 +1524,7 @@ public final class SatelliteManager {
                             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$13$$ExternalSyntheticLambda5
                                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                                 public final void runOrThrow() {
-                                    OutcomeReceiver.this.onResult(Boolean.valueOf(r2));
+                                    outcomeReceiver.onResult(Boolean.valueOf(z));
                                 }
                             });
                         }
@@ -1540,7 +1540,7 @@ public final class SatelliteManager {
                         Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$13$$ExternalSyntheticLambda4
                             @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                             public final void runOrThrow() {
-                                OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(9));
+                                outcomeReceiver.onError(new SatelliteManager.SatelliteException(9));
                             }
                         });
                     }
@@ -1555,7 +1555,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$13$$ExternalSyntheticLambda3
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(r2));
+                            outcomeReceiver.onError(new SatelliteManager.SatelliteException(i));
                         }
                     });
                 }
@@ -1602,7 +1602,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$14$$ExternalSyntheticLambda1
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            SatelliteModemStateCallback.this.onSatelliteModemStateChanged(r2);
+                            satelliteModemStateCallback.onSatelliteModemStateChanged(i);
                         }
                     });
                 }
@@ -1619,7 +1619,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$14$$ExternalSyntheticLambda0
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            SatelliteModemStateCallback.this.onEmergencyModeChanged(r2);
+                            satelliteModemStateCallback.onEmergencyModeChanged(z);
                         }
                     });
                 }
@@ -1636,7 +1636,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$14$$ExternalSyntheticLambda4
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            SatelliteModemStateCallback.this.onRegistrationFailure(r2);
+                            satelliteModemStateCallback.onRegistrationFailure(i);
                         }
                     });
                 }
@@ -1653,7 +1653,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$14$$ExternalSyntheticLambda2
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            SatelliteModemStateCallback.this.onTerrestrialNetworkAvailableChanged(r2);
+                            satelliteModemStateCallback.onTerrestrialNetworkAvailableChanged(z);
                         }
                     });
                 }
@@ -1664,14 +1664,14 @@ public final class SatelliteManager {
     @SystemApi
     public void unregisterForModemStateChanged(SatelliteModemStateCallback satelliteModemStateCallback) {
         Objects.requireNonNull(satelliteModemStateCallback);
-        ISatelliteModemStateCallback remove = sSatelliteModemStateCallbackMap.remove(satelliteModemStateCallback);
+        ISatelliteModemStateCallback iSatelliteModemStateCallbackRemove = sSatelliteModemStateCallbackMap.remove(satelliteModemStateCallback);
         try {
             ITelephony iTelephony = getITelephony();
             if (iTelephony == null) {
                 throw new IllegalStateException("telephony service is null.");
             }
-            if (remove != null) {
-                iTelephony.unregisterForModemStateChanged(remove);
+            if (iSatelliteModemStateCallbackRemove != null) {
+                iTelephony.unregisterForModemStateChanged(iSatelliteModemStateCallbackRemove);
             } else {
                 loge("unregisterForModemStateChanged: No internal callback.");
             }
@@ -1730,7 +1730,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$15$$ExternalSyntheticLambda1
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            SatelliteDatagramCallback.this.onSatelliteDatagramReceived(r2, r4, r5, r6);
+                            satelliteDatagramCallback.onSatelliteDatagramReceived(j, satelliteDatagram, i, consumer);
                         }
                     });
                 }
@@ -1741,14 +1741,14 @@ public final class SatelliteManager {
     @SystemApi
     public void unregisterForIncomingDatagram(SatelliteDatagramCallback satelliteDatagramCallback) {
         Objects.requireNonNull(satelliteDatagramCallback);
-        ISatelliteDatagramCallback remove = sSatelliteDatagramCallbackMap.remove(satelliteDatagramCallback);
+        ISatelliteDatagramCallback iSatelliteDatagramCallbackRemove = sSatelliteDatagramCallbackMap.remove(satelliteDatagramCallback);
         try {
             ITelephony iTelephony = getITelephony();
             if (iTelephony == null) {
                 throw new IllegalStateException("telephony service is null.");
             }
-            if (remove != null) {
-                iTelephony.unregisterForIncomingDatagram(remove);
+            if (iSatelliteDatagramCallbackRemove != null) {
+                iTelephony.unregisterForIncomingDatagram(iSatelliteDatagramCallbackRemove);
             } else {
                 loge("unregisterForIncomingDatagram: No internal callback.");
             }
@@ -1774,7 +1774,7 @@ public final class SatelliteManager {
                         Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda18
                             @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                             public final void runOrThrow() {
-                                r1.accept(23);
+                                consumer.accept(23);
                             }
                         });
                     }
@@ -1788,7 +1788,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda90
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            r1.accept(23);
+                            consumer.accept(23);
                         }
                     });
                 }
@@ -1816,7 +1816,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$16$$ExternalSyntheticLambda1
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            r1.accept(Integer.valueOf(r2));
+                            consumer.accept(Integer.valueOf(i));
                         }
                     });
                 }
@@ -1841,7 +1841,7 @@ public final class SatelliteManager {
                         Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda46
                             @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                             public final void runOrThrow() {
-                                r1.accept(23);
+                                consumer.accept(23);
                             }
                         });
                     }
@@ -1855,7 +1855,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda99
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            r1.accept(23);
+                            consumer.accept(23);
                         }
                     });
                 }
@@ -1883,7 +1883,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$17$$ExternalSyntheticLambda1
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            r1.accept(Integer.valueOf(r2));
+                            consumer.accept(Integer.valueOf(i));
                         }
                     });
                 }
@@ -1907,7 +1907,7 @@ public final class SatelliteManager {
                         Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda89
                             @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                             public final void runOrThrow() {
-                                OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(23));
+                                outcomeReceiver.onError(new SatelliteManager.SatelliteException(23));
                             }
                         });
                     }
@@ -1921,7 +1921,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda92
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(23));
+                            outcomeReceiver.onError(new SatelliteManager.SatelliteException(23));
                         }
                     });
                 }
@@ -1954,7 +1954,7 @@ public final class SatelliteManager {
                             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$18$$ExternalSyntheticLambda4
                                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                                 public final void runOrThrow() {
-                                    OutcomeReceiver.this.onResult(Boolean.valueOf(r2));
+                                    outcomeReceiver.onResult(Boolean.valueOf(z));
                                 }
                             });
                         }
@@ -1970,7 +1970,7 @@ public final class SatelliteManager {
                         Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$18$$ExternalSyntheticLambda3
                             @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                             public final void runOrThrow() {
-                                OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(9));
+                                outcomeReceiver.onError(new SatelliteManager.SatelliteException(9));
                             }
                         });
                     }
@@ -1985,7 +1985,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$18$$ExternalSyntheticLambda5
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(r2));
+                            outcomeReceiver.onError(new SatelliteManager.SatelliteException(i));
                         }
                     });
                 }
@@ -2009,7 +2009,7 @@ public final class SatelliteManager {
                         Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda39
                             @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                             public final void runOrThrow() {
-                                OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(23));
+                                outcomeReceiver.onError(new SatelliteManager.SatelliteException(23));
                             }
                         });
                     }
@@ -2023,7 +2023,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda33
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(23));
+                            outcomeReceiver.onError(new SatelliteManager.SatelliteException(23));
                         }
                     });
                 }
@@ -2056,7 +2056,7 @@ public final class SatelliteManager {
                             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$19$$ExternalSyntheticLambda0
                                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                                 public final void runOrThrow() {
-                                    OutcomeReceiver.this.onResult(r2);
+                                    outcomeReceiver.onResult(satelliteAccessConfiguration);
                                 }
                             });
                         }
@@ -2072,7 +2072,7 @@ public final class SatelliteManager {
                         Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$19$$ExternalSyntheticLambda5
                             @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                             public final void runOrThrow() {
-                                OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(9));
+                                outcomeReceiver.onError(new SatelliteManager.SatelliteException(9));
                             }
                         });
                     }
@@ -2087,7 +2087,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$19$$ExternalSyntheticLambda1
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(r2));
+                            outcomeReceiver.onError(new SatelliteManager.SatelliteException(i));
                         }
                     });
                 }
@@ -2111,7 +2111,7 @@ public final class SatelliteManager {
                         Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda19
                             @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                             public final void runOrThrow() {
-                                OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(23));
+                                outcomeReceiver.onError(new SatelliteManager.SatelliteException(23));
                             }
                         });
                     }
@@ -2125,7 +2125,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda29
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(23));
+                            outcomeReceiver.onError(new SatelliteManager.SatelliteException(23));
                         }
                     });
                 }
@@ -2158,7 +2158,7 @@ public final class SatelliteManager {
                             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$20$$ExternalSyntheticLambda3
                                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                                 public final void runOrThrow() {
-                                    OutcomeReceiver.this.onResult(Duration.ofSeconds(r2));
+                                    outcomeReceiver.onResult(Duration.ofSeconds(i));
                                 }
                             });
                         }
@@ -2174,7 +2174,7 @@ public final class SatelliteManager {
                         Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$20$$ExternalSyntheticLambda4
                             @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                             public final void runOrThrow() {
-                                OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(9));
+                                outcomeReceiver.onError(new SatelliteManager.SatelliteException(9));
                             }
                         });
                     }
@@ -2189,7 +2189,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$20$$ExternalSyntheticLambda5
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(r2));
+                            outcomeReceiver.onError(new SatelliteManager.SatelliteException(i));
                         }
                     });
                 }
@@ -2213,7 +2213,7 @@ public final class SatelliteManager {
                         Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda94
                             @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                             public final void runOrThrow() {
-                                OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(23));
+                                outcomeReceiver.onError(new SatelliteManager.SatelliteException(23));
                             }
                         });
                     }
@@ -2227,7 +2227,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda48
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(23));
+                            outcomeReceiver.onError(new SatelliteManager.SatelliteException(23));
                         }
                     });
                 }
@@ -2260,7 +2260,7 @@ public final class SatelliteManager {
                             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$21$$ExternalSyntheticLambda5
                                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                                 public final void runOrThrow() {
-                                    OutcomeReceiver.this.onResult(Integer.valueOf(r2));
+                                    outcomeReceiver.onResult(Integer.valueOf(i));
                                 }
                             });
                         }
@@ -2276,7 +2276,7 @@ public final class SatelliteManager {
                         Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$21$$ExternalSyntheticLambda3
                             @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                             public final void runOrThrow() {
-                                OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(9));
+                                outcomeReceiver.onError(new SatelliteManager.SatelliteException(9));
                             }
                         });
                     }
@@ -2291,7 +2291,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$21$$ExternalSyntheticLambda4
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(r2));
+                            outcomeReceiver.onError(new SatelliteManager.SatelliteException(i));
                         }
                     });
                 }
@@ -2338,7 +2338,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$22$$ExternalSyntheticLambda1
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            SelectedNbIotSatelliteSubscriptionCallback.this.onSelectedNbIotSatelliteSubscriptionChanged(r2);
+                            selectedNbIotSatelliteSubscriptionCallback.onSelectedNbIotSatelliteSubscriptionChanged(i);
                         }
                     });
                 }
@@ -2349,14 +2349,14 @@ public final class SatelliteManager {
     @SystemApi
     public void unregisterForSelectedNbIotSatelliteSubscriptionChanged(SelectedNbIotSatelliteSubscriptionCallback selectedNbIotSatelliteSubscriptionCallback) {
         Objects.requireNonNull(selectedNbIotSatelliteSubscriptionCallback);
-        ISelectedNbIotSatelliteSubscriptionCallback remove = sSelectedNbIotSatelliteSubscriptionCallbackMap.remove(selectedNbIotSatelliteSubscriptionCallback);
+        ISelectedNbIotSatelliteSubscriptionCallback iSelectedNbIotSatelliteSubscriptionCallbackRemove = sSelectedNbIotSatelliteSubscriptionCallbackMap.remove(selectedNbIotSatelliteSubscriptionCallback);
         try {
             ITelephony iTelephony = getITelephony();
             if (iTelephony == null) {
                 throw new IllegalStateException("Telephony service is null.");
             }
-            if (remove != null) {
-                iTelephony.unregisterForSelectedNbIotSatelliteSubscriptionChanged(remove);
+            if (iSelectedNbIotSatelliteSubscriptionCallbackRemove != null) {
+                iTelephony.unregisterForSelectedNbIotSatelliteSubscriptionChanged(iSelectedNbIotSatelliteSubscriptionCallbackRemove);
             } else {
                 loge("unregisterForSelectedNbIotSatelliteSubscriptionChanged: No internal callback.");
             }
@@ -2400,7 +2400,7 @@ public final class SatelliteManager {
         executor.execute(new Runnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda71
             @Override // java.lang.Runnable
             public final void run() {
-                OutcomeReceiver outcomeReceiver2 = OutcomeReceiver.this;
+                OutcomeReceiver outcomeReceiver2 = outcomeReceiver;
                 Set set = attachRestrictionReasonsForCarrier;
                 outcomeReceiver2.onResult(Boolean.valueOf(!set.contains(0)));
             }
@@ -2424,7 +2424,7 @@ public final class SatelliteManager {
                         Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda16
                             @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                             public final void runOrThrow() {
-                                r1.accept(23);
+                                consumer.accept(23);
                             }
                         });
                     }
@@ -2438,7 +2438,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda30
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            r1.accept(23);
+                            consumer.accept(23);
                         }
                     });
                 }
@@ -2466,7 +2466,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$23$$ExternalSyntheticLambda0
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            r1.accept(Integer.valueOf(r2));
+                            consumer.accept(Integer.valueOf(i));
                         }
                     });
                 }
@@ -2491,7 +2491,7 @@ public final class SatelliteManager {
                         Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda64
                             @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                             public final void runOrThrow() {
-                                r1.accept(23);
+                                consumer.accept(23);
                             }
                         });
                     }
@@ -2505,7 +2505,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda57
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            r1.accept(23);
+                            consumer.accept(23);
                         }
                     });
                 }
@@ -2533,7 +2533,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$24$$ExternalSyntheticLambda1
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            r1.accept(Integer.valueOf(r2));
+                            consumer.accept(Integer.valueOf(i));
                         }
                     });
                 }
@@ -2618,7 +2618,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$25$$ExternalSyntheticLambda0
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            SatelliteDisallowedReasonsCallback.this.onSatelliteDisallowedReasonsChanged(r2);
+                            satelliteDisallowedReasonsCallback.onSatelliteDisallowedReasonsChanged(iArr);
                         }
                     });
                 }
@@ -2629,14 +2629,14 @@ public final class SatelliteManager {
     @SystemApi
     public void unregisterForSatelliteDisallowedReasonsChanged(SatelliteDisallowedReasonsCallback satelliteDisallowedReasonsCallback) {
         Objects.requireNonNull(satelliteDisallowedReasonsCallback);
-        ISatelliteDisallowedReasonsCallback remove = sSatelliteDisallowedReasonsCallbackMap.remove(satelliteDisallowedReasonsCallback);
+        ISatelliteDisallowedReasonsCallback iSatelliteDisallowedReasonsCallbackRemove = sSatelliteDisallowedReasonsCallbackMap.remove(satelliteDisallowedReasonsCallback);
         try {
             ITelephony iTelephony = getITelephony();
             if (iTelephony == null) {
                 throw new IllegalStateException("Telephony service is null.");
             }
-            if (remove != null) {
-                iTelephony.unregisterForSatelliteDisallowedReasonsChanged(remove);
+            if (iSatelliteDisallowedReasonsCallbackRemove != null) {
+                iTelephony.unregisterForSatelliteDisallowedReasonsChanged(iSatelliteDisallowedReasonsCallbackRemove);
             } else {
                 loge("unregisterForSatelliteDisallowedReasonsChanged: No internal callback.");
                 throw new IllegalArgumentException("callback is not valid");
@@ -2663,7 +2663,7 @@ public final class SatelliteManager {
                         Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda21
                             @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                             public final void runOrThrow() {
-                                OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(23));
+                                outcomeReceiver.onError(new SatelliteManager.SatelliteException(23));
                             }
                         });
                     }
@@ -2677,7 +2677,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda23
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(23));
+                            outcomeReceiver.onError(new SatelliteManager.SatelliteException(23));
                         }
                     });
                 }
@@ -2710,7 +2710,7 @@ public final class SatelliteManager {
                             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$26$$ExternalSyntheticLambda0
                                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                                 public final void runOrThrow() {
-                                    OutcomeReceiver.this.onResult(r2);
+                                    outcomeReceiver.onResult(ntnSignalStrength);
                                 }
                             });
                         }
@@ -2726,7 +2726,7 @@ public final class SatelliteManager {
                         Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$26$$ExternalSyntheticLambda1
                             @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                             public final void runOrThrow() {
-                                OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(9));
+                                outcomeReceiver.onError(new SatelliteManager.SatelliteException(9));
                             }
                         });
                     }
@@ -2741,7 +2741,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$26$$ExternalSyntheticLambda5
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(r2));
+                            outcomeReceiver.onError(new SatelliteManager.SatelliteException(i));
                         }
                     });
                 }
@@ -2788,7 +2788,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$27$$ExternalSyntheticLambda0
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            NtnSignalStrengthCallback.this.onNtnSignalStrengthChanged(r2);
+                            ntnSignalStrengthCallback.onNtnSignalStrengthChanged(ntnSignalStrength);
                         }
                     });
                 }
@@ -2799,14 +2799,14 @@ public final class SatelliteManager {
     @SystemApi
     public void unregisterForNtnSignalStrengthChanged(NtnSignalStrengthCallback ntnSignalStrengthCallback) {
         Objects.requireNonNull(ntnSignalStrengthCallback);
-        INtnSignalStrengthCallback remove = sNtnSignalStrengthCallbackMap.remove(ntnSignalStrengthCallback);
+        INtnSignalStrengthCallback iNtnSignalStrengthCallbackRemove = sNtnSignalStrengthCallbackMap.remove(ntnSignalStrengthCallback);
         try {
             ITelephony iTelephony = getITelephony();
             if (iTelephony == null) {
                 throw new IllegalStateException("Telephony service is null.");
             }
-            if (remove != null) {
-                iTelephony.unregisterForNtnSignalStrengthChanged(remove);
+            if (iNtnSignalStrengthCallbackRemove != null) {
+                iTelephony.unregisterForNtnSignalStrengthChanged(iNtnSignalStrengthCallbackRemove);
             } else {
                 loge("unregisterForNtnSignalStrengthChanged: No internal callback.");
                 throw new IllegalArgumentException("callback is not valid");
@@ -2856,7 +2856,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$28$$ExternalSyntheticLambda0
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            SatelliteCapabilitiesCallback.this.onSatelliteCapabilitiesChanged(r2);
+                            satelliteCapabilitiesCallback.onSatelliteCapabilitiesChanged(satelliteCapabilities);
                         }
                     });
                 }
@@ -2867,14 +2867,14 @@ public final class SatelliteManager {
     @SystemApi
     public void unregisterForCapabilitiesChanged(SatelliteCapabilitiesCallback satelliteCapabilitiesCallback) {
         Objects.requireNonNull(satelliteCapabilitiesCallback);
-        ISatelliteCapabilitiesCallback remove = sSatelliteCapabilitiesCallbackMap.remove(satelliteCapabilitiesCallback);
+        ISatelliteCapabilitiesCallback iSatelliteCapabilitiesCallbackRemove = sSatelliteCapabilitiesCallbackMap.remove(satelliteCapabilitiesCallback);
         try {
             ITelephony iTelephony = getITelephony();
             if (iTelephony == null) {
                 throw new IllegalStateException("Telephony service is null.");
             }
-            if (remove != null) {
-                iTelephony.unregisterForCapabilitiesChanged(remove);
+            if (iSatelliteCapabilitiesCallbackRemove != null) {
+                iTelephony.unregisterForCapabilitiesChanged(iSatelliteCapabilitiesCallbackRemove);
             } else {
                 loge("unregisterForCapabilitiesChanged: No internal callback.");
             }
@@ -2941,7 +2941,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$29$$ExternalSyntheticLambda0
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            r1.accept(Boolean.valueOf(r2));
+                            consumer.accept(Boolean.valueOf(z));
                         }
                     });
                 }
@@ -2952,14 +2952,14 @@ public final class SatelliteManager {
     @SystemApi
     public void unregisterForSupportedStateChanged(Consumer<Boolean> consumer) {
         Objects.requireNonNull(consumer);
-        IBooleanConsumer remove = sSatelliteSupportedStateCallbackMap.remove(consumer);
+        IBooleanConsumer iBooleanConsumerRemove = sSatelliteSupportedStateCallbackMap.remove(consumer);
         try {
             ITelephony iTelephony = getITelephony();
             if (iTelephony == null) {
                 throw new IllegalStateException("telephony service is null.");
             }
-            if (remove != null) {
-                iTelephony.unregisterForSatelliteSupportedStateChanged(remove);
+            if (iBooleanConsumerRemove != null) {
+                iTelephony.unregisterForSatelliteSupportedStateChanged(iBooleanConsumerRemove);
             } else {
                 loge("unregisterForSupportedStateChanged: No internal callback.");
             }
@@ -3008,7 +3008,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$30$$ExternalSyntheticLambda3
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            SatelliteCommunicationAccessStateCallback.this.onAccessAllowedStateChanged(r2);
+                            satelliteCommunicationAccessStateCallback.onAccessAllowedStateChanged(z);
                         }
                     });
                 }
@@ -3025,7 +3025,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$30$$ExternalSyntheticLambda2
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            SatelliteCommunicationAccessStateCallback.this.onAccessConfigurationChanged(r2);
+                            satelliteCommunicationAccessStateCallback.onAccessConfigurationChanged(satelliteAccessConfiguration);
                         }
                     });
                 }
@@ -3036,14 +3036,14 @@ public final class SatelliteManager {
     @SystemApi
     public void unregisterForCommunicationAccessStateChanged(SatelliteCommunicationAccessStateCallback satelliteCommunicationAccessStateCallback) {
         Objects.requireNonNull(satelliteCommunicationAccessStateCallback);
-        ISatelliteCommunicationAccessStateCallback remove = sSatelliteCommunicationAccessStateCallbackMap.remove(satelliteCommunicationAccessStateCallback);
+        ISatelliteCommunicationAccessStateCallback iSatelliteCommunicationAccessStateCallbackRemove = sSatelliteCommunicationAccessStateCallbackMap.remove(satelliteCommunicationAccessStateCallback);
         try {
             ITelephony iTelephony = getITelephony();
             if (iTelephony == null) {
                 throw new IllegalStateException("telephony service is null.");
             }
-            if (remove != null) {
-                iTelephony.unregisterForCommunicationAccessStateChanged(this.mSubId, remove);
+            if (iSatelliteCommunicationAccessStateCallbackRemove != null) {
+                iTelephony.unregisterForCommunicationAccessStateChanged(this.mSubId, iSatelliteCommunicationAccessStateCallbackRemove);
             } else {
                 loge("unregisterForCommunicationAccessStateChanged: No internal callback.");
             }
@@ -3068,7 +3068,7 @@ public final class SatelliteManager {
                         Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda63
                             @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                             public final void runOrThrow() {
-                                OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(23));
+                                outcomeReceiver.onError(new SatelliteManager.SatelliteException(23));
                             }
                         });
                     }
@@ -3082,7 +3082,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda47
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(23));
+                            outcomeReceiver.onError(new SatelliteManager.SatelliteException(23));
                         }
                     });
                 }
@@ -3119,7 +3119,7 @@ public final class SatelliteManager {
                                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$31$$ExternalSyntheticLambda0
                                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                                         public final void runOrThrow() {
-                                            OutcomeReceiver.this.onResult(r2);
+                                            outcomeReceiver.onResult(satelliteSessionStats);
                                         }
                                     });
                                 }
@@ -3140,7 +3140,7 @@ public final class SatelliteManager {
                         Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$31$$ExternalSyntheticLambda5
                             @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                             public final void runOrThrow() {
-                                OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(9));
+                                outcomeReceiver.onError(new SatelliteManager.SatelliteException(9));
                             }
                         });
                     }
@@ -3155,7 +3155,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$31$$ExternalSyntheticLambda4
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(r2));
+                            outcomeReceiver.onError(new SatelliteManager.SatelliteException(i));
                         }
                     });
                 }
@@ -3179,7 +3179,7 @@ public final class SatelliteManager {
                         Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda74
                             @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                             public final void runOrThrow() {
-                                OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(23));
+                                outcomeReceiver.onError(new SatelliteManager.SatelliteException(23));
                             }
                         });
                     }
@@ -3193,7 +3193,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda26
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(23));
+                            outcomeReceiver.onError(new SatelliteManager.SatelliteException(23));
                         }
                     });
                 }
@@ -3226,7 +3226,7 @@ public final class SatelliteManager {
                             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$32$$ExternalSyntheticLambda5
                                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                                 public final void runOrThrow() {
-                                    OutcomeReceiver.this.onResult(r2);
+                                    outcomeReceiver.onResult(list);
                                 }
                             });
                         }
@@ -3242,7 +3242,7 @@ public final class SatelliteManager {
                         Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$32$$ExternalSyntheticLambda0
                             @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                             public final void runOrThrow() {
-                                OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(9));
+                                outcomeReceiver.onError(new SatelliteManager.SatelliteException(9));
                             }
                         });
                     }
@@ -3257,7 +3257,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$32$$ExternalSyntheticLambda1
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(r2));
+                            outcomeReceiver.onError(new SatelliteManager.SatelliteException(i));
                         }
                     });
                 }
@@ -3280,7 +3280,7 @@ public final class SatelliteManager {
                         Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda36
                             @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                             public final void runOrThrow() {
-                                OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(23));
+                                outcomeReceiver.onError(new SatelliteManager.SatelliteException(23));
                             }
                         });
                     }
@@ -3294,7 +3294,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda75
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(23));
+                            outcomeReceiver.onError(new SatelliteManager.SatelliteException(23));
                         }
                     });
                 }
@@ -3327,7 +3327,7 @@ public final class SatelliteManager {
                             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$33$$ExternalSyntheticLambda1
                                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                                 public final void runOrThrow() {
-                                    OutcomeReceiver.this.onResult(r2);
+                                    outcomeReceiver.onResult(charSequence);
                                 }
                             });
                         }
@@ -3343,7 +3343,7 @@ public final class SatelliteManager {
                         Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$33$$ExternalSyntheticLambda5
                             @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                             public final void runOrThrow() {
-                                OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(9));
+                                outcomeReceiver.onError(new SatelliteManager.SatelliteException(9));
                             }
                         });
                     }
@@ -3358,7 +3358,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$33$$ExternalSyntheticLambda0
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(r2));
+                            outcomeReceiver.onError(new SatelliteManager.SatelliteException(i));
                         }
                     });
                 }
@@ -3382,7 +3382,7 @@ public final class SatelliteManager {
                         Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda32
                             @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                             public final void runOrThrow() {
-                                OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(23));
+                                outcomeReceiver.onError(new SatelliteManager.SatelliteException(23));
                             }
                         });
                     }
@@ -3396,7 +3396,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda54
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(23));
+                            outcomeReceiver.onError(new SatelliteManager.SatelliteException(23));
                         }
                     });
                 }
@@ -3429,7 +3429,7 @@ public final class SatelliteManager {
                             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$34$$ExternalSyntheticLambda4
                                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                                 public final void runOrThrow() {
-                                    OutcomeReceiver.this.onResult(null);
+                                    outcomeReceiver.onResult(null);
                                 }
                             });
                         }
@@ -3445,7 +3445,7 @@ public final class SatelliteManager {
                         Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$34$$ExternalSyntheticLambda0
                             @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                             public final void runOrThrow() {
-                                OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(9));
+                                outcomeReceiver.onError(new SatelliteManager.SatelliteException(9));
                             }
                         });
                     }
@@ -3460,7 +3460,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$34$$ExternalSyntheticLambda5
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(r2));
+                            outcomeReceiver.onError(new SatelliteManager.SatelliteException(i));
                         }
                     });
                 }
@@ -3484,7 +3484,7 @@ public final class SatelliteManager {
                         Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda58
                             @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                             public final void runOrThrow() {
-                                OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(23));
+                                outcomeReceiver.onError(new SatelliteManager.SatelliteException(23));
                             }
                         });
                     }
@@ -3498,7 +3498,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$$ExternalSyntheticLambda5
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(23));
+                            outcomeReceiver.onError(new SatelliteManager.SatelliteException(23));
                         }
                     });
                 }
@@ -3531,7 +3531,7 @@ public final class SatelliteManager {
                             Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$35$$ExternalSyntheticLambda1
                                 @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                                 public final void runOrThrow() {
-                                    OutcomeReceiver.this.onResult(null);
+                                    outcomeReceiver.onResult(null);
                                 }
                             });
                         }
@@ -3547,7 +3547,7 @@ public final class SatelliteManager {
                         Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$35$$ExternalSyntheticLambda5
                             @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                             public final void runOrThrow() {
-                                OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(9));
+                                outcomeReceiver.onError(new SatelliteManager.SatelliteException(9));
                             }
                         });
                     }
@@ -3562,7 +3562,7 @@ public final class SatelliteManager {
                     Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.satellite.SatelliteManager$35$$ExternalSyntheticLambda0
                         @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
                         public final void runOrThrow() {
-                            OutcomeReceiver.this.onError(new SatelliteManager.SatelliteException(r2));
+                            outcomeReceiver.onError(new SatelliteManager.SatelliteException(i));
                         }
                     });
                 }

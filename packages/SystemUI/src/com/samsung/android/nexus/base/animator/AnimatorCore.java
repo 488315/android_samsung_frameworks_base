@@ -8,7 +8,6 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class AnimatorCore {
     public final Choreographer mChoreographer;
@@ -20,7 +19,7 @@ public class AnimatorCore {
     public final List mAnimatorList = new ArrayList();
     public final AnonymousClass1 mFrameCallback = new Choreographer.FrameCallback() { // from class: com.samsung.android.nexus.base.animator.AnimatorCore.1
         @Override // android.view.Choreographer.FrameCallback
-        public final void doFrame(long j) {
+        public final void doFrame(long j) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
             Method method;
             AnimatorCore animatorCore = AnimatorCore.this;
             if (j - animatorCore.mFrameStartTime < animatorCore.mFrameTime) {

@@ -16,7 +16,6 @@ import com.android.systemui.navigationbar.views.NavigationBarInflaterView;
 import com.android.systemui.tuner.TunerService;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @Deprecated
 /* loaded from: classes3.dex */
 public class NavBarTuner extends TunerPreferenceFragment {
@@ -41,19 +40,19 @@ public class NavBarTuner extends TunerPreferenceFragment {
 
     public final void bindButton(String str, final String str2, String str3) {
         final ListPreference listPreference = (ListPreference) findPreference("type_".concat(str3));
-        final Preference findPreference = findPreference("keycode_".concat(str3));
+        final Preference preferenceFindPreference = findPreference("keycode_".concat(str3));
         final ListPreference listPreference2 = (ListPreference) findPreference("icon_".concat(str3));
         CharSequence[] charSequenceArr = new CharSequence[6];
         CharSequence[] charSequenceArr2 = new CharSequence[6];
-        int applyDimension = (int) TypedValue.applyDimension(1, 14.0f, getContext().getResources().getDisplayMetrics());
+        int iApplyDimension = (int) TypedValue.applyDimension(1, 14.0f, getContext().getResources().getDisplayMetrics());
         for (int i = 0; i < 6; i++) {
             SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder();
             String packageName = getContext().getPackageName();
             int[][] iArr = ICONS;
-            Drawable loadDrawable = Icon.createWithResource(packageName, iArr[i][0]).loadDrawable(getContext());
-            loadDrawable.setTint(-16777216);
-            loadDrawable.setBounds(0, 0, applyDimension, applyDimension);
-            spannableStringBuilder.append("  ", new ImageSpan(loadDrawable, 1), 0);
+            Drawable drawableLoadDrawable = Icon.createWithResource(packageName, iArr[i][0]).loadDrawable(getContext());
+            drawableLoadDrawable.setTint(-16777216);
+            drawableLoadDrawable.setBounds(0, 0, iApplyDimension, iApplyDimension);
+            spannableStringBuilder.append("  ", new ImageSpan(drawableLoadDrawable, 1), 0);
             spannableStringBuilder.append((CharSequence) " ");
             spannableStringBuilder.append((CharSequence) getString(iArr[i][1]));
             charSequenceArr[i] = spannableStringBuilder;
@@ -64,16 +63,16 @@ public class NavBarTuner extends TunerPreferenceFragment {
         TunerService.Tunable tunable = new TunerService.Tunable() { // from class: com.android.systemui.tuner.NavBarTuner$$ExternalSyntheticLambda2
             @Override // com.android.systemui.tuner.TunerService.Tunable
             public final void onTuningChanged(String str4, final String str5) {
-                final NavBarTuner navBarTuner = NavBarTuner.this;
+                final NavBarTuner navBarTuner = this.f$0;
                 Handler handler = navBarTuner.mHandler;
                 final String str6 = str2;
                 final ListPreference listPreference3 = listPreference2;
-                final Preference preference = findPreference;
+                final Preference preference = preferenceFindPreference;
                 final ListPreference listPreference4 = listPreference;
                 handler.post(new Runnable() { // from class: com.android.systemui.tuner.NavBarTuner$$ExternalSyntheticLambda9
                     @Override // java.lang.Runnable
                     public final void run() {
-                        NavBarTuner navBarTuner2 = NavBarTuner.this;
+                        NavBarTuner navBarTuner2 = navBarTuner;
                         String str7 = str5;
                         String str8 = str6;
                         ListPreference listPreference5 = listPreference4;
@@ -84,19 +83,19 @@ public class NavBarTuner extends TunerPreferenceFragment {
                         if (str7 == null) {
                             str7 = str8;
                         }
-                        String extractButton = NavigationBarInflaterView.extractButton(str7);
-                        if (!extractButton.startsWith("key")) {
-                            listPreference5.setValue(extractButton);
+                        String strExtractButton = NavigationBarInflaterView.extractButton(str7);
+                        if (!strExtractButton.startsWith("key")) {
+                            listPreference5.setValue(strExtractButton);
                             preference2.setVisible(false);
                             listPreference6.setVisible(false);
                             return;
                         }
                         listPreference5.setValue("key");
-                        String extractImage = NavigationBarInflaterView.extractImage(extractButton);
-                        int extractKeycode = NavigationBarInflaterView.extractKeycode(extractButton);
-                        listPreference6.setValue(extractImage);
+                        String strExtractImage = NavigationBarInflaterView.extractImage(strExtractButton);
+                        int iExtractKeycode = NavigationBarInflaterView.extractKeycode(strExtractButton);
+                        listPreference6.setValue(strExtractImage);
                         navBarTuner2.updateSummary(listPreference6);
-                        preference2.setSummary(extractKeycode + "");
+                        preference2.setSummary(iExtractKeycode + "");
                         preference2.setVisible(true);
                         listPreference6.setVisible(true);
                     }
@@ -105,10 +104,10 @@ public class NavBarTuner extends TunerPreferenceFragment {
         };
         this.mTunables.add(tunable);
         ((TunerService) Dependency.sDependency.getDependencyInner(TunerService.class)).addTunable(tunable, str);
-        NavBarTuner$$ExternalSyntheticLambda3 navBarTuner$$ExternalSyntheticLambda3 = new NavBarTuner$$ExternalSyntheticLambda3(this, str, listPreference, findPreference, listPreference2);
+        NavBarTuner$$ExternalSyntheticLambda3 navBarTuner$$ExternalSyntheticLambda3 = new NavBarTuner$$ExternalSyntheticLambda3(this, str, listPreference, preferenceFindPreference, listPreference2);
         listPreference.mOnChangeListener = navBarTuner$$ExternalSyntheticLambda3;
         listPreference2.mOnChangeListener = navBarTuner$$ExternalSyntheticLambda3;
-        findPreference.mOnClickListener = new NavBarTuner$$ExternalSyntheticLambda3(this, findPreference, str, listPreference, listPreference2);
+        preferenceFindPreference.mOnClickListener = new NavBarTuner$$ExternalSyntheticLambda3(this, preferenceFindPreference, str, listPreference, listPreference2);
     }
 
     @Override // android.app.Fragment
@@ -130,7 +129,7 @@ public class NavBarTuner extends TunerPreferenceFragment {
         TunerService.Tunable tunable = new TunerService.Tunable() { // from class: com.android.systemui.tuner.NavBarTuner$$ExternalSyntheticLambda0
             @Override // com.android.systemui.tuner.TunerService.Tunable
             public final void onTuningChanged(String str2, final String str3) {
-                Handler handler = NavBarTuner.this.mHandler;
+                Handler handler = this.f$0.mHandler;
                 final ListPreference listPreference2 = listPreference;
                 handler.post(new Runnable() { // from class: com.android.systemui.tuner.NavBarTuner$$ExternalSyntheticLambda8
                     @Override // java.lang.Runnable
@@ -161,27 +160,27 @@ public class NavBarTuner extends TunerPreferenceFragment {
 
     public final void updateSummary(ListPreference listPreference) {
         try {
-            int applyDimension = (int) TypedValue.applyDimension(1, 14.0f, getContext().getResources().getDisplayMetrics());
+            int iApplyDimension = (int) TypedValue.applyDimension(1, 14.0f, getContext().getResources().getDisplayMetrics());
             String str = listPreference.mValue.split("/")[0];
-            int parseInt = Integer.parseInt(listPreference.mValue.split("/")[1]);
+            int i = Integer.parseInt(listPreference.mValue.split("/")[1]);
             SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder();
-            Drawable loadDrawable = Icon.createWithResource(str, parseInt).loadDrawable(getContext());
-            loadDrawable.setTint(-16777216);
-            loadDrawable.setBounds(0, 0, applyDimension, applyDimension);
-            spannableStringBuilder.append("  ", new ImageSpan(loadDrawable, 1), 0);
+            Drawable drawableLoadDrawable = Icon.createWithResource(str, i).loadDrawable(getContext());
+            drawableLoadDrawable.setTint(-16777216);
+            drawableLoadDrawable.setBounds(0, 0, iApplyDimension, iApplyDimension);
+            spannableStringBuilder.append("  ", new ImageSpan(drawableLoadDrawable, 1), 0);
             spannableStringBuilder.append((CharSequence) " ");
-            int i = 0;
+            int i2 = 0;
             while (true) {
                 int[][] iArr = ICONS;
-                if (i >= 6) {
+                if (i2 >= 6) {
                     listPreference.setSummary(spannableStringBuilder);
                     return;
                 }
-                int[] iArr2 = iArr[i];
-                if (iArr2[0] == parseInt) {
+                int[] iArr2 = iArr[i2];
+                if (iArr2[0] == i) {
                     spannableStringBuilder.append((CharSequence) getString(iArr2[1]));
                 }
-                i++;
+                i2++;
             }
         } catch (Exception e) {
             Log.d("NavButton", "Problem with summary", e);

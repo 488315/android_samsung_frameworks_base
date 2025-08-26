@@ -106,7 +106,7 @@ public class CleanEvent extends JSONObject {
         }
     }
 
-    public String toJsonString() {
+    public String toJsonString() throws JSONException {
         JSONObject jSONObject = new JSONObject();
         JSONObject jSONObject2 = new JSONObject();
         try {

@@ -75,10 +75,10 @@ public final class VisibleActivityInfo implements Parcelable {
     }
 
     VisibleActivityInfo(Parcel parcel) {
-        int readInt = parcel.readInt();
-        IBinder readStrongBinder = parcel.readStrongBinder();
-        this.mTaskId = readInt;
-        this.mAssistToken = readStrongBinder;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readStrongBinder);
+        int i = parcel.readInt();
+        IBinder strongBinder = parcel.readStrongBinder();
+        this.mTaskId = i;
+        this.mAssistToken = strongBinder;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) strongBinder);
     }
 }

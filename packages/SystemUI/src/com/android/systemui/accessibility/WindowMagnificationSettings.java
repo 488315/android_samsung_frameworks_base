@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.graphics.Insets;
 import android.graphics.Rect;
@@ -39,7 +40,6 @@ import com.android.systemui.accessibility.SecSeekBarWithIconButtonsView;
 import com.android.systemui.util.SystemUIAnalytics;
 import com.android.systemui.util.settings.SecureSettings;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class WindowMagnificationSettings implements MagnificationGestureDetector.OnGestureListener {
     public final boolean mAllowDiagonalScrolling;
@@ -108,22 +108,22 @@ public class WindowMagnificationSettings implements MagnificationGestureDetector
         public final void onClick(View view) {
             int id = view.getId();
             if (id == R.id.magnifier_small_button) {
-                WindowMagnificationSettings.m1000$$Nest$msetMagnifierSize(WindowMagnificationSettings.this, 1);
+                WindowMagnificationSettings.m1002$$Nest$msetMagnifierSize(WindowMagnificationSettings.this, 1);
                 SystemUIAnalytics.sendEventLog(SystemUIAnalytics.SA_ACCESSIBILITY_SCREEN_MAGNIFICATION_PANNEL, SystemUIAnalytics.SA_ACCESSIBILITY_EVENT_MAGNIFICATION_PANNEL_SIZE_SMALL);
                 return;
             }
             if (id == R.id.magnifier_medium_button) {
-                WindowMagnificationSettings.m1000$$Nest$msetMagnifierSize(WindowMagnificationSettings.this, 2);
+                WindowMagnificationSettings.m1002$$Nest$msetMagnifierSize(WindowMagnificationSettings.this, 2);
                 SystemUIAnalytics.sendEventLog(SystemUIAnalytics.SA_ACCESSIBILITY_SCREEN_MAGNIFICATION_PANNEL, SystemUIAnalytics.SA_ACCESSIBILITY_EVENT_MAGNIFICATION_PANNEL_SIZE_MEDIUM);
                 return;
             }
             if (id == R.id.magnifier_large_button) {
-                WindowMagnificationSettings.m1000$$Nest$msetMagnifierSize(WindowMagnificationSettings.this, 3);
+                WindowMagnificationSettings.m1002$$Nest$msetMagnifierSize(WindowMagnificationSettings.this, 3);
                 SystemUIAnalytics.sendEventLog(SystemUIAnalytics.SA_ACCESSIBILITY_SCREEN_MAGNIFICATION_PANNEL, SystemUIAnalytics.SA_ACCESSIBILITY_EVENT_MAGNIFICATION_PANNEL_SIZE_LARGE);
                 return;
             }
             if (id == R.id.magnifier_full_button) {
-                WindowMagnificationSettings.m1000$$Nest$msetMagnifierSize(WindowMagnificationSettings.this, 4);
+                WindowMagnificationSettings.m1002$$Nest$msetMagnifierSize(WindowMagnificationSettings.this, 4);
                 SystemUIAnalytics.sendEventLog(SystemUIAnalytics.SA_ACCESSIBILITY_SCREEN_MAGNIFICATION_PANNEL, SystemUIAnalytics.SA_ACCESSIBILITY_EVENT_MAGNIFICATION_CHANGE_SIZE_FULL);
                 return;
             }
@@ -172,7 +172,6 @@ public class WindowMagnificationSettings implements MagnificationGestureDetector
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.accessibility.WindowMagnificationSettings$1, reason: invalid class name */
     public class AnonymousClass1 extends ContentObserver {
         public AnonymousClass1(Handler handler) {
@@ -185,7 +184,6 @@ public class WindowMagnificationSettings implements MagnificationGestureDetector
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SliderA11yDelegate extends View.AccessibilityDelegate {
         public /* synthetic */ SliderA11yDelegate(WindowMagnificationSettings windowMagnificationSettings, int i) {
             this(windowMagnificationSettings);
@@ -201,7 +199,6 @@ public class WindowMagnificationSettings implements MagnificationGestureDetector
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ZoomSeekbarChangeListener implements SecSeekBarWithIconButtonsView.OnSeekBarWithIconButtonsChangeListener {
         public /* synthetic */ ZoomSeekbarChangeListener(WindowMagnificationSettings windowMagnificationSettings, int i) {
             this();
@@ -236,7 +233,7 @@ public class WindowMagnificationSettings implements MagnificationGestureDetector
     }
 
     /* renamed from: -$$Nest$msetMagnifierSize, reason: not valid java name */
-    public static void m1000$$Nest$msetMagnifierSize(WindowMagnificationSettings windowMagnificationSettings, int i) {
+    public static void m1002$$Nest$msetMagnifierSize(WindowMagnificationSettings windowMagnificationSettings, int i) {
         Settings.Secure.putIntForUser(windowMagnificationSettings.mContext.getContentResolver(), "accessibility_change_magnification_size", i, -2);
         int i2 = 1;
         if (i == 4) {
@@ -312,8 +309,8 @@ public class WindowMagnificationSettings implements MagnificationGestureDetector
     public final Rect getDraggableWindowBounds$1() {
         WindowMetrics currentWindowMetrics = this.mWindowManager.getCurrentWindowMetrics();
         Insets insetsIgnoringVisibility = currentWindowMetrics.getWindowInsets().getInsetsIgnoringVisibility(WindowInsets.Type.systemBars() | WindowInsets.Type.displayCutout());
-        int makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, 0);
-        this.mSettingView.measure(makeMeasureSpec, makeMeasureSpec);
+        int iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, 0);
+        this.mSettingView.measure(iMakeMeasureSpec, iMakeMeasureSpec);
         Rect rect = new Rect(currentWindowMetrics.getBounds());
         rect.offsetTo(0, 0);
         rect.inset(0, 0, this.mSettingView.getMeasuredWidth(), this.mSettingView.getMeasuredHeight());
@@ -323,7 +320,7 @@ public class WindowMagnificationSettings implements MagnificationGestureDetector
         return rect;
     }
 
-    public final int getPanelWidth(Context context) {
+    public final int getPanelWidth(Context context) throws Resources.NotFoundException {
         return Math.min(this.mWindowManager.getCurrentWindowMetrics().getBounds().width(), (context.getResources().getDimensionPixelSize(R.dimen.magnification_setting_background_padding) * 2) + context.getResources().getDimensionPixelSize(R.dimen.magnification_setting_button_done_width));
     }
 
@@ -359,7 +356,7 @@ public class WindowMagnificationSettings implements MagnificationGestureDetector
         this.mSettingView.setOnTouchListener(new View.OnTouchListener() { // from class: com.android.systemui.accessibility.WindowMagnificationSettings$$ExternalSyntheticLambda3
             @Override // android.view.View.OnTouchListener
             public final boolean onTouch(View view, MotionEvent motionEvent) {
-                WindowMagnificationSettings windowMagnificationSettings = WindowMagnificationSettings.this;
+                WindowMagnificationSettings windowMagnificationSettings = this.f$0;
                 if (windowMagnificationSettings.mIsVisible) {
                     return windowMagnificationSettings.mGestureDetector.onTouch(view, motionEvent);
                 }
@@ -417,7 +414,7 @@ public class WindowMagnificationSettings implements MagnificationGestureDetector
         this.mSettingView.setOnApplyWindowInsetsListener(new View.OnApplyWindowInsetsListener() { // from class: com.android.systemui.accessibility.WindowMagnificationSettings$$ExternalSyntheticLambda4
             @Override // android.view.View.OnApplyWindowInsetsListener
             public final WindowInsets onApplyWindowInsets(View view, WindowInsets windowInsets) {
-                WindowMagnificationSettings windowMagnificationSettings = WindowMagnificationSettings.this;
+                WindowMagnificationSettings windowMagnificationSettings = this.f$0;
                 if (windowMagnificationSettings.mSettingView.isAttachedToWindow()) {
                     Handler handler = windowMagnificationSettings.mSettingView.getHandler();
                     WindowMagnificationSettings$$ExternalSyntheticLambda5 windowMagnificationSettings$$ExternalSyntheticLambda5 = windowMagnificationSettings.mWindowInsetChangeRunnable;
@@ -438,7 +435,7 @@ public class WindowMagnificationSettings implements MagnificationGestureDetector
         this.mSfVsyncFrameProvider.postFrameCallback(new Choreographer.FrameCallback() { // from class: com.android.systemui.accessibility.WindowMagnificationSettings$$ExternalSyntheticLambda2
             @Override // android.view.Choreographer.FrameCallback
             public final void doFrame(long j) {
-                WindowMagnificationSettings windowMagnificationSettings = WindowMagnificationSettings.this;
+                WindowMagnificationSettings windowMagnificationSettings = this.f$0;
                 float f3 = f;
                 float f4 = f2;
                 WindowManager.LayoutParams layoutParams = windowMagnificationSettings.mParams;
@@ -480,13 +477,13 @@ public class WindowMagnificationSettings implements MagnificationGestureDetector
     }
 
     public final void setScaleSeekbar(float f) {
-        int i = (int) ((f - 1.0f) * this.mSeekBarMagnitude);
-        if (i < 0) {
-            i = 0;
-        } else if (i > this.mZoomSeekbar.mSeekbar.getMax()) {
-            i = this.mZoomSeekbar.mSeekbar.getMax();
+        int max = (int) ((f - 1.0f) * this.mSeekBarMagnitude);
+        if (max < 0) {
+            max = 0;
+        } else if (max > this.mZoomSeekbar.mSeekbar.getMax()) {
+            max = this.mZoomSeekbar.mSeekbar.getMax();
         }
-        this.mZoomSeekbar.setProgress(i);
+        this.mZoomSeekbar.setProgress(max);
     }
 
     public final void showSettingPanel(boolean z) {
@@ -517,7 +514,7 @@ public class WindowMagnificationSettings implements MagnificationGestureDetector
             this.mSettingView.post(new Runnable() { // from class: com.android.systemui.accessibility.WindowMagnificationSettings$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    WindowMagnificationSettings windowMagnificationSettings = WindowMagnificationSettings.this;
+                    WindowMagnificationSettings windowMagnificationSettings = this.f$0;
                     Rect rect3 = rect2;
                     windowMagnificationSettings.mParams.x = (rect3.width() - windowMagnificationSettings.mSettingView.getWidth()) / 2;
                     if (windowMagnificationSettings.mSettingView.getWindowToken() != null) {

@@ -1,6 +1,5 @@
 package androidx.constraintlayout.core.motion.utils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class Schlick extends Easing {
     public final double mS;
@@ -8,10 +7,10 @@ public class Schlick extends Easing {
 
     public Schlick(String str) {
         this.mStr = str;
-        int indexOf = str.indexOf(40);
-        int indexOf2 = str.indexOf(44, indexOf);
-        this.mS = Double.parseDouble(str.substring(indexOf + 1, indexOf2).trim());
-        int i = indexOf2 + 1;
+        int iIndexOf = str.indexOf(40);
+        int iIndexOf2 = str.indexOf(44, iIndexOf);
+        this.mS = Double.parseDouble(str.substring(iIndexOf + 1, iIndexOf2).trim());
+        int i = iIndexOf2 + 1;
         this.mT = Double.parseDouble(str.substring(i, str.indexOf(44, i)).trim());
     }
 

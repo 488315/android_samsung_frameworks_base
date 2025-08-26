@@ -58,7 +58,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class NotificationController {
     static final String NOTI_APPNAME = "appName";
@@ -100,7 +99,6 @@ public class NotificationController {
     PendingIntent mRemoteInputIntent = null;
     String mRemoteInputId = "-1";
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class DisplayContentObject {
 
         @SerializedName(NotificationController.NOTI_APPNAME)
@@ -131,7 +129,6 @@ public class NotificationController {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ReadOutNotificationData {
         StringBuffer contentDescription;
         int count;
@@ -214,7 +211,7 @@ public class NotificationController {
             this.mUiHandler.post(new Runnable() { // from class: com.android.systemui.bixby2.controller.NotificationController$$ExternalSyntheticLambda3
                 @Override // java.lang.Runnable
                 public final void run() {
-                    NotificationController.this.lambda$deleteAppNotifications$3(notificationEntry2);
+                    this.f$0.lambda$deleteAppNotifications$3(notificationEntry2);
                 }
             });
         }
@@ -330,10 +327,10 @@ public class NotificationController {
         for (int i2 = 0; i2 < size; i2++) {
             String str2 = list.get(i2).row.mAppName;
             if (str2 != null && arrayMap.containsKey(str2)) {
-                int intValue = ((Integer) arrayMap.get(str2)).intValue();
-                String stringValidater = stringValidater(str2);
-                readOutNotificationData.contentDescription.append(ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m(intValue, "{\"appName\":\"", stringValidater, "\", \"notiCount\":\"", "\"}"));
-                arrayMap.remove(stringValidater);
+                int iIntValue = ((Integer) arrayMap.get(str2)).intValue();
+                String strStringValidater = stringValidater(str2);
+                readOutNotificationData.contentDescription.append(ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m(iIntValue, "{\"appName\":\"", strStringValidater, "\", \"notiCount\":\"", "\"}"));
+                arrayMap.remove(strStringValidater);
                 if (arrayMap.size() != 0) {
                     readOutNotificationData.contentDescription.append(",");
                 } else {
@@ -350,11 +347,11 @@ public class NotificationController {
         int i3;
         int i4;
         int i5;
-        String charSequence;
-        String str2;
+        String string;
+        String string2;
         int i6;
+        String str2;
         String str3;
-        String str4;
         NotificationController notificationController = this;
         Bundle bundle = new Bundle();
         int size = list.size();
@@ -382,49 +379,49 @@ public class NotificationController {
                 i3 = size;
                 if (expandableNotificationRow.mIsCustomNotification) {
                     i4 = i7;
-                    StringBuffer searchForTextView = notificationController.searchForTextView(expandableNotificationRow.mPrivateLayout.mContractedChild, new StringBuffer());
-                    charSequence = searchForTextView == null ? "NULL" : searchForTextView.toString();
-                    str2 = "NULL";
+                    StringBuffer stringBufferSearchForTextView = notificationController.searchForTextView(expandableNotificationRow.mPrivateLayout.mContractedChild, new StringBuffer());
+                    string = stringBufferSearchForTextView == null ? "NULL" : stringBufferSearchForTextView.toString();
+                    string2 = "NULL";
                 } else {
                     i4 = i7;
                     if (Notification.MessagingStyle.class.equals(notification2.getNotificationStyle())) {
-                        Notification.MessagingStyle.Message findLatestIncomingMessage = Notification.MessagingStyle.findLatestIncomingMessage(Notification.MessagingStyle.Message.getMessagesFromBundleArray((Parcelable[]) notification2.extras.get("android.messages")));
-                        CharSequence sender = findLatestIncomingMessage.getSender();
-                        str2 = sender == null ? "NULL" : sender.toString();
-                        CharSequence text = findLatestIncomingMessage.getText();
-                        charSequence = text != null ? text.toString() : "NULL";
+                        Notification.MessagingStyle.Message messageFindLatestIncomingMessage = Notification.MessagingStyle.findLatestIncomingMessage(Notification.MessagingStyle.Message.getMessagesFromBundleArray((Parcelable[]) notification2.extras.get("android.messages")));
+                        CharSequence sender = messageFindLatestIncomingMessage.getSender();
+                        string2 = sender == null ? "NULL" : sender.toString();
+                        CharSequence text = messageFindLatestIncomingMessage.getText();
+                        string = text != null ? text.toString() : "NULL";
                     } else {
-                        CharSequence charSequence2 = notification2.extras.getCharSequence("android.title");
-                        String charSequence3 = charSequence2 == null ? "NULL" : charSequence2.toString();
-                        CharSequence charSequence4 = notification2.extras.getCharSequence("android.text");
-                        charSequence = charSequence4 != null ? charSequence4.toString() : "NULL";
-                        str2 = charSequence3;
+                        CharSequence charSequence = notification2.extras.getCharSequence("android.title");
+                        String string3 = charSequence == null ? "NULL" : charSequence.toString();
+                        CharSequence charSequence2 = notification2.extras.getCharSequence("android.text");
+                        string = charSequence2 != null ? charSequence2.toString() : "NULL";
+                        string2 = string3;
                     }
                 }
-                String stringValidater = notificationController.stringValidater(str2);
-                String stringValidater2 = notificationController.stringValidater(charSequence);
-                String str5 = notificationController.isRemoteInputNotification(notificationEntry) ? "TRUE" : "FALSE";
-                String valueOf = String.valueOf(statusBarNotification.getPostTime());
+                String strStringValidater = notificationController.stringValidater(string2);
+                String strStringValidater2 = notificationController.stringValidater(string);
+                String str4 = notificationController.isRemoteInputNotification(notificationEntry) ? "TRUE" : "FALSE";
+                String strValueOf = String.valueOf(statusBarNotification.getPostTime());
                 int i10 = notification2.flags;
                 if ((i10 & 64) != 0) {
                     i6 = i10;
-                    str3 = "TRUE";
+                    str2 = "TRUE";
                 } else {
                     i6 = i10;
-                    str3 = "FALSE";
+                    str2 = "FALSE";
                 }
                 if ((i6 & 2) != 0) {
                     i5 = i8;
-                    str4 = "TRUE";
+                    str3 = "TRUE";
                 } else {
                     i5 = i8;
-                    str4 = "FALSE";
+                    str3 = "FALSE";
                 }
-                String stringValidater3 = notificationController.stringValidater(expandableNotificationRow.mAppName);
-                StringBuilder m = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("{\"notiID\":\"", key, "\", \"notiTitle\":\"", stringValidater, "\", \"notiText\":\"");
-                MoveResult$$ExternalSyntheticOutline0.m(m, stringValidater2, "\", \"canReply\":\"", str5, "\", \"when\":\"");
-                MoveResult$$ExternalSyntheticOutline0.m(m, valueOf, "\", \"fgs\":\"", str3, "\", \"ongoing\":\"");
-                stringBuffer.append(NotificationController$$ExternalSyntheticOutline0.m(m, str4, "\", \"appName\":\"", stringValidater3, "\"},"));
+                String strStringValidater3 = notificationController.stringValidater(expandableNotificationRow.mAppName);
+                StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("{\"notiID\":\"", key, "\", \"notiTitle\":\"", strStringValidater, "\", \"notiText\":\"");
+                MoveResult$$ExternalSyntheticOutline0.m(sbM, strStringValidater2, "\", \"canReply\":\"", str4, "\", \"when\":\"");
+                MoveResult$$ExternalSyntheticOutline0.m(sbM, strValueOf, "\", \"fgs\":\"", str2, "\", \"ongoing\":\"");
+                stringBuffer.append(NotificationController$$ExternalSyntheticOutline0.m(sbM, str3, "\", \"appName\":\"", strStringValidater3, "\"},"));
                 i9++;
             }
             i8 = i5 + 1;
@@ -445,11 +442,11 @@ public class NotificationController {
             stringBuffer = new StringBuffer();
             i2 = 0;
         }
-        StringBuilder m2 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "result: ", " notiList:");
-        m2.append(stringBuffer.length());
-        m2.append(" itemCount:");
-        m2.append(i2);
-        Log.d(TAG, m2.toString());
+        StringBuilder sbM2 = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "result: ", " notiList:");
+        sbM2.append(stringBuffer.length());
+        sbM2.append(" itemCount:");
+        sbM2.append(i2);
+        Log.d(TAG, sbM2.toString());
         bundle.putInt("result", i);
         bundle.putString(NOTI_LIST, stringBuffer.toString());
         bundle.putInt(NOTI_ITEM_COUNT, i2);
@@ -485,14 +482,14 @@ public class NotificationController {
         }
     }
 
-    public int checkNotificationStatusForPackage(String str) {
+    public int checkNotificationStatusForPackage(String str) throws PackageManager.NameNotFoundException {
         if (str == null) {
             return 0;
         }
         try {
-            int isNotificationTurnedOff = this.mNotifManager.isNotificationTurnedOff(str, this.mContext.getPackageManager().getPackageUid(str, 0));
-            Log.d(TAG, "checkNotificationStatusForPackage : 0x" + Integer.toHexString(isNotificationTurnedOff));
-            return isNotificationTurnedOff;
+            int iIsNotificationTurnedOff = this.mNotifManager.isNotificationTurnedOff(str, this.mContext.getPackageManager().getPackageUid(str, 0));
+            Log.d(TAG, "checkNotificationStatusForPackage : 0x" + Integer.toHexString(iIsNotificationTurnedOff));
+            return iIsNotificationTurnedOff;
         } catch (PackageManager.NameNotFoundException e) {
             Log.e(TAG, "NameNotFoundException" + e);
             return 0;
@@ -502,35 +499,35 @@ public class NotificationController {
     }
 
     public int deleteNotification(String str) {
-        int i;
+        int iDeleteAppNotifications;
         List<NotificationEntry> visibleNotifications = getVisibleNotifications();
         if (!checkNotificatoins(visibleNotifications.size())) {
-            i = 2;
+            iDeleteAppNotifications = 2;
         } else if (str == null) {
             Log.d(TAG, "deleteAllNotification ");
-            i = deleteAllNotifications(visibleNotifications);
+            iDeleteAppNotifications = deleteAllNotifications(visibleNotifications);
         } else if (str.equals(PARAMETER_INCLUDE_ONGOING)) {
             Log.d(TAG, "deleteAllNotification with ongoing");
-            i = deleteNotificationAllDismissable();
+            iDeleteAppNotifications = deleteNotificationAllDismissable();
         } else {
             Log.d(TAG, "deleteNotification ".concat(str));
-            i = deleteAppNotifications(str, visibleNotifications);
+            iDeleteAppNotifications = deleteAppNotifications(str, visibleNotifications);
         }
-        ListPopupWindow$$ExternalSyntheticOutline0.m(i, " deleteNotification : ", TAG);
-        return i;
+        ListPopupWindow$$ExternalSyntheticOutline0.m(iDeleteAppNotifications, " deleteNotification : ", TAG);
+        return iDeleteAppNotifications;
     }
 
     public int deleteNotificationAllDismissable() {
-        int i;
+        int iDeleteAllNotificationsDismissable;
         List<NotificationEntry> visibleNotifications = getVisibleNotifications();
         if (checkNotificatoins(visibleNotifications.size())) {
             Log.d(TAG, "deleteAllNotificationAllDismissable ");
-            i = deleteAllNotificationsDismissable(visibleNotifications);
+            iDeleteAllNotificationsDismissable = deleteAllNotificationsDismissable(visibleNotifications);
         } else {
-            i = 2;
+            iDeleteAllNotificationsDismissable = 2;
         }
-        ListPopupWindow$$ExternalSyntheticOutline0.m(i, " deleteNotificationAllDismissable : ", TAG);
-        return i;
+        ListPopupWindow$$ExternalSyntheticOutline0.m(iDeleteAllNotificationsDismissable, " deleteNotificationAllDismissable : ", TAG);
+        return iDeleteAllNotificationsDismissable;
     }
 
     public boolean filterReadOutNotification(ExpandableNotificationRow expandableNotificationRow) {
@@ -601,9 +598,9 @@ public class NotificationController {
                 SubscreenDeviceModelParent subscreenDeviceModelParent = ((SubscreenNotificationController) Dependency.sDependency.getDependencyInner(SubscreenNotificationController.class)).mDeviceModel;
                 (subscreenDeviceModelParent != null ? subscreenDeviceModelParent.getSubRoomNotification() : null).notifyNotificationSubRoomRequest();
             } else {
-                IStatusBarService asInterface = IStatusBarService.Stub.asInterface(ServiceManager.getService("statusbar"));
-                if (asInterface != null) {
-                    asInterface.expandNotificationsPanelToType(0);
+                IStatusBarService iStatusBarServiceAsInterface = IStatusBarService.Stub.asInterface(ServiceManager.getService("statusbar"));
+                if (iStatusBarServiceAsInterface != null) {
+                    iStatusBarServiceAsInterface.expandNotificationsPanelToType(0);
                 }
             }
         } catch (RemoteException unused) {
@@ -612,21 +609,21 @@ public class NotificationController {
     }
 
     public Bundle readNotificationWithID(String str) {
-        Bundle readAppNotificationWithID;
+        Bundle appNotificationWithID;
         List<NotificationEntry> visibleNotifications = getVisibleNotifications();
         if (str == null) {
             Log.d(TAG, "readAllNotificationWithID   activeNotifications = " + visibleNotifications);
-            readAppNotificationWithID = readAppNotificationWithID(SystemUIAnalytics.QPNE_VID_COVER_ALL, visibleNotifications);
+            appNotificationWithID = readAppNotificationWithID(SystemUIAnalytics.QPNE_VID_COVER_ALL, visibleNotifications);
             readAllNotification(visibleNotifications);
         } else {
             Log.d(TAG, "readAppNotificationWithID ".concat(str));
-            readAppNotificationWithID = readAppNotificationWithID(str, visibleNotifications);
+            appNotificationWithID = readAppNotificationWithID(str, visibleNotifications);
         }
-        Log.d(TAG, "readNotification = " + readAppNotificationWithID.getInt("result"));
-        return readAppNotificationWithID;
+        Log.d(TAG, "readNotification = " + appNotificationWithID.getInt("result"));
+        return appNotificationWithID;
     }
 
-    public int replyNotification(String str, String str2) {
+    public int replyNotification(String str, String str2) throws PendingIntent.CanceledException {
         NotificationEntry entry = this.mNotifPipeline.mNotifCollection.getEntry(str);
         if (entry == null) {
             KeyguardPluginControllerImpl$$ExternalSyntheticOutline0.m("Unable to send remote input result, entry is null : ", str, TAG);
@@ -638,17 +635,17 @@ public class NotificationController {
         }
         Bundle bundle = new Bundle();
         bundle.putString(this.mRemoteInput.getResultKey(), str2);
-        Intent addFlags = new Intent().addFlags(268435456);
-        RemoteInput.addResultsToIntent(this.mRemoteInputs, addFlags, bundle);
+        Intent intentAddFlags = new Intent().addFlags(268435456);
+        RemoteInput.addResultsToIntent(this.mRemoteInputs, intentAddFlags, bundle);
         entry.remoteInputText = str2;
         entry.remoteInputUri = null;
         entry.remoteInputMimeType = null;
-        RemoteInput.setResultsSource(addFlags, 0);
+        RemoteInput.setResultsSource(intentAddFlags, 0);
         try {
             if (NotiRune.NOTI_SUBSCREEN_SUPPORT_NOTIFICATION_HISTORY) {
                 this.mNotifManager.addReplyHistory(1, entry.mKey, entry.mSbn.getPackageName(), entry.mSbn.getUser().getIdentifier(), "NOUI_2023", str2);
             }
-            this.mRemoteInputIntent.send(this.mContext, 0, addFlags);
+            this.mRemoteInputIntent.send(this.mContext, 0, intentAddFlags);
             Log.i(TAG, "send remote input result by others : " + str);
             return 1;
         } catch (PendingIntent.CanceledException e) {
@@ -663,7 +660,7 @@ public class NotificationController {
         this.mEntries = list;
     }
 
-    public int setNotificationTurnOffForPackage(String str) {
+    public int setNotificationTurnOffForPackage(String str) throws PackageManager.NameNotFoundException {
         if (str == null) {
             return 0;
         }

@@ -55,9 +55,9 @@ public final class FillContext implements Parcelable {
         for (int i = 0; i < autofillIdArr.length; i++) {
             ArrayMap<AutofillId, AssistStructure.ViewNode> arrayMap = this.mViewNodeLookupTable;
             if (arrayMap != null) {
-                int indexOfKey = arrayMap.indexOfKey(autofillIdArr[i]);
-                if (indexOfKey >= 0) {
-                    viewNodeArr[i] = this.mViewNodeLookupTable.valueAt(indexOfKey);
+                int iIndexOfKey = arrayMap.indexOfKey(autofillIdArr[i]);
+                if (iIndexOfKey >= 0) {
+                    viewNodeArr[i] = this.mViewNodeLookupTable.valueAt(iIndexOfKey);
                 } else {
                     sparseIntArray.put(i, 0);
                 }
@@ -76,12 +76,12 @@ public final class FillContext implements Parcelable {
                 if (i3 >= sparseIntArray.size()) {
                     break;
                 }
-                int keyAt = sparseIntArray.keyAt(i3);
-                AutofillId autofillId = autofillIdArr[keyAt];
+                int iKeyAt = sparseIntArray.keyAt(i3);
+                AutofillId autofillId = autofillIdArr[iKeyAt];
                 if (autofillId == null || !autofillId.equals(viewNode.getAutofillId())) {
                     i3++;
                 } else {
-                    viewNodeArr[keyAt] = viewNode;
+                    viewNodeArr[iKeyAt] = viewNode;
                     if (this.mViewNodeLookupTable == null) {
                         this.mViewNodeLookupTable = new ArrayMap<>(autofillIdArr.length);
                     }

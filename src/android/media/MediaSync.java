@@ -109,14 +109,14 @@ public final class MediaSync {
             if (handler != null) {
                 this.mCallbackHandler = handler;
             } else {
-                Looper myLooper = Looper.myLooper();
-                if (myLooper == null) {
-                    myLooper = Looper.getMainLooper();
+                Looper looperMyLooper = Looper.myLooper();
+                if (looperMyLooper == null) {
+                    looperMyLooper = Looper.getMainLooper();
                 }
-                if (myLooper == null) {
+                if (looperMyLooper == null) {
                     this.mCallbackHandler = null;
                 } else {
-                    this.mCallbackHandler = new Handler(myLooper);
+                    this.mCallbackHandler = new Handler(looperMyLooper);
                 }
             }
             this.mCallback = callback;
@@ -128,14 +128,14 @@ public final class MediaSync {
             if (handler != null) {
                 this.mOnErrorListenerHandler = handler;
             } else {
-                Looper myLooper = Looper.myLooper();
-                if (myLooper == null) {
-                    myLooper = Looper.getMainLooper();
+                Looper looperMyLooper = Looper.myLooper();
+                if (looperMyLooper == null) {
+                    looperMyLooper = Looper.getMainLooper();
                 }
-                if (myLooper == null) {
+                if (looperMyLooper == null) {
                     this.mOnErrorListenerHandler = null;
                 } else {
-                    this.mOnErrorListenerHandler = new Handler(myLooper);
+                    this.mOnErrorListenerHandler = new Handler(looperMyLooper);
                 }
             }
             this.mOnErrorListener = onErrorListener;
@@ -156,30 +156,30 @@ public final class MediaSync {
     }
 
     public void setPlaybackParams(PlaybackParams playbackParams) {
-        float native_setPlaybackParams;
+        float fNative_setPlaybackParams;
         synchronized (this.mAudioLock) {
-            native_setPlaybackParams = native_setPlaybackParams(playbackParams);
-            this.mPlaybackRate = native_setPlaybackParams;
+            fNative_setPlaybackParams = native_setPlaybackParams(playbackParams);
+            this.mPlaybackRate = fNative_setPlaybackParams;
         }
-        if (native_setPlaybackParams == SContextConstants.ENVIRONMENT_VALUE_UNKNOWN || this.mAudioThread == null) {
+        if (fNative_setPlaybackParams == SContextConstants.ENVIRONMENT_VALUE_UNKNOWN || this.mAudioThread == null) {
             return;
         }
         postRenderAudio(0L);
     }
 
     public void setSyncParams(SyncParams syncParams) {
-        float native_setSyncParams;
+        float fNative_setSyncParams;
         synchronized (this.mAudioLock) {
-            native_setSyncParams = native_setSyncParams(syncParams);
-            this.mPlaybackRate = native_setSyncParams;
+            fNative_setSyncParams = native_setSyncParams(syncParams);
+            this.mPlaybackRate = fNative_setSyncParams;
         }
-        if (native_setSyncParams == SContextConstants.ENVIRONMENT_VALUE_UNKNOWN || this.mAudioThread == null) {
+        if (fNative_setSyncParams == SContextConstants.ENVIRONMENT_VALUE_UNKNOWN || this.mAudioThread == null) {
             return;
         }
         postRenderAudio(0L);
     }
 
-    public void flush() {
+    public void flush() throws IllegalStateException {
         synchronized (this.mAudioLock) {
             this.mAudioBuffers.clear();
             this.mCallbackHandler.removeCallbacksAndMessages(null);
@@ -230,21 +230,21 @@ public final class MediaSync {
                         return;
                     }
                     AudioBuffer audioBuffer = (AudioBuffer) MediaSync.this.mAudioBuffers.get(0);
-                    int remaining = audioBuffer.mByteBuffer.remaining();
-                    if (remaining > 0 && MediaSync.this.mAudioTrack.getPlayState() != 3) {
+                    int iRemaining = audioBuffer.mByteBuffer.remaining();
+                    if (iRemaining > 0 && MediaSync.this.mAudioTrack.getPlayState() != 3) {
                         try {
                             MediaSync.this.mAudioTrack.play();
                         } catch (IllegalStateException unused) {
                             Log.w(MediaSync.TAG, "could not start audio track");
                         }
                     }
-                    int write = MediaSync.this.mAudioTrack.write(audioBuffer.mByteBuffer, remaining, 1);
-                    if (write > 0) {
+                    int iWrite = MediaSync.this.mAudioTrack.write(audioBuffer.mByteBuffer, iRemaining, 1);
+                    if (iWrite > 0) {
                         if (audioBuffer.mPresentationTimeUs != -1) {
-                            MediaSync.this.native_updateQueuedAudioData(remaining, audioBuffer.mPresentationTimeUs);
+                            MediaSync.this.native_updateQueuedAudioData(iRemaining, audioBuffer.mPresentationTimeUs);
                             audioBuffer.mPresentationTimeUs = -1L;
                         }
-                        if (write == remaining) {
+                        if (iWrite == iRemaining) {
                             MediaSync.this.postReturnByteBuffer(audioBuffer);
                             MediaSync.this.mAudioBuffers.remove(0);
                             if (!MediaSync.this.mAudioBuffers.isEmpty()) {

@@ -51,9 +51,9 @@ public interface ISemMhsAiService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISemMhsAiService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISemMhsAiService)) {
-                return (ISemMhsAiService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISemMhsAiService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISemMhsAiService)) {
+                return (ISemMhsAiService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -84,15 +84,15 @@ public interface ISemMhsAiService extends IInterface {
             }
             if (i == 1) {
                 float[][] fArr = (float[][]) parcel.createFixedArray(float[][].class, 12, 60);
-                String[] createStringArray = parcel.createStringArray();
-                int[] createIntArray = parcel.createIntArray();
-                int readInt = parcel.readInt();
+                String[] strArrCreateStringArray = parcel.createStringArray();
+                int[] iArrCreateIntArray = parcel.createIntArray();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                serviceTypeQuery(fArr, createStringArray, createIntArray, readInt);
+                serviceTypeQuery(fArr, strArrCreateStringArray, iArrCreateIntArray, i3);
             } else if (i == 2) {
-                boolean readBoolean = parcel.readBoolean();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                toggleDebugMode(readBoolean);
+                toggleDebugMode(z);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -117,28 +117,28 @@ public interface ISemMhsAiService extends IInterface {
 
             @Override // com.samsung.android.mhs.ai.ISemMhsAiService
             public void serviceTypeQuery(float[][] fArr, String[] strArr, int[] iArr, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISemMhsAiService.DESCRIPTOR);
-                    obtain.writeFixedArray(fArr, 0, 12, 60);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeIntArray(iArr);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISemMhsAiService.DESCRIPTOR);
+                    parcelObtain.writeFixedArray(fArr, 0, 12, 60);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeIntArray(iArr);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // com.samsung.android.mhs.ai.ISemMhsAiService
             public void toggleDebugMode(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ISemMhsAiService.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ISemMhsAiService.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

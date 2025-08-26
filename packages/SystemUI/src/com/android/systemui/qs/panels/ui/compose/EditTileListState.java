@@ -21,7 +21,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.sequences.SequencesKt___SequencesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class EditTileListState implements DragAndDropState {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -32,7 +31,6 @@ public final class EditTileListState implements DragAndDropState {
     public final MutableState draggedPosition$delegate;
     public final int largeTilesSpan;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -50,7 +48,7 @@ public final class EditTileListState implements DragAndDropState {
         this.columns = i;
         this.largeTilesSpan = i2;
         Offset.Companion.getClass();
-        this.draggedPosition$delegate = SnapshotStateKt.mutableStateOf$default(Offset.m393boximpl(Offset.Unspecified));
+        this.draggedPosition$delegate = SnapshotStateKt.mutableStateOf$default(Offset.m395boximpl(Offset.Unspecified));
         this.dragType$delegate = SnapshotStateKt.mutableStateOf$default(null);
         List list2 = SequencesKt___SequencesKt.toList(SequencesKt___SequencesKt.flatMapIndexedIterable(TileRowKt.splitInRowsSequence(i, list), new TileGridCellKt$$ExternalSyntheticLambda0(0, i)));
         SnapshotStateList snapshotStateList = new SnapshotStateList();
@@ -85,7 +83,7 @@ public final class EditTileListState implements DragAndDropState {
     public final void onDrop() {
         ((SnapshotMutableStateImpl) this.draggedCell$delegate).setValue(null);
         Offset.Companion.getClass();
-        m2888setDraggedPositionk4lQ0M(Offset.Unspecified);
+        m2905setDraggedPositionk4lQ0M(Offset.Unspecified);
         ((SnapshotMutableStateImpl) this.dragType$delegate).setValue(null);
         regenerateGrid();
     }
@@ -107,8 +105,8 @@ public final class EditTileListState implements DragAndDropState {
     }
 
     /* renamed from: setDraggedPosition-k-4lQ0M, reason: not valid java name */
-    public final void m2888setDraggedPositionk4lQ0M(long j) {
-        ((SnapshotMutableStateImpl) this.draggedPosition$delegate).setValue(Offset.m393boximpl(j));
+    public final void m2905setDraggedPositionk4lQ0M(long j) {
+        ((SnapshotMutableStateImpl) this.draggedPosition$delegate).setValue(Offset.m395boximpl(j));
     }
 
     public final List tileSpecs() {

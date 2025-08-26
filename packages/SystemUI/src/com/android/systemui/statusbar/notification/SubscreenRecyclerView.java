@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.systemui.Dependency;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SubscreenRecyclerView extends RecyclerView {
     public float mItemTouchDownX;
@@ -22,18 +21,18 @@ public class SubscreenRecyclerView extends RecyclerView {
 
     @Override // androidx.recyclerview.widget.RecyclerView, android.view.ViewGroup, android.view.View
     public final boolean dispatchKeyEvent(KeyEvent keyEvent) {
-        boolean dispatchKeyEvent = ((SubscreenNotificationController) Dependency.sDependency.getDependencyInner(SubscreenNotificationController.class)).mDeviceModel.dispatchKeyEvent(keyEvent);
-        return !dispatchKeyEvent ? super.dispatchKeyEvent(keyEvent) : dispatchKeyEvent;
+        boolean zDispatchKeyEvent = ((SubscreenNotificationController) Dependency.sDependency.getDependencyInner(SubscreenNotificationController.class)).mDeviceModel.dispatchKeyEvent(keyEvent);
+        return !zDispatchKeyEvent ? super.dispatchKeyEvent(keyEvent) : zDispatchKeyEvent;
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView, android.view.ViewGroup, android.view.View
     public final boolean dispatchTouchEvent(MotionEvent motionEvent) {
-        boolean dispatchTouchEvent = super.dispatchTouchEvent(motionEvent);
+        boolean zDispatchTouchEvent = super.dispatchTouchEvent(motionEvent);
         int actionMasked = motionEvent.getActionMasked();
         if (actionMasked == 0) {
             this.mItemTouchDownX = motionEvent.getX();
             this.mItemTouchDownY = motionEvent.getY();
-            return dispatchTouchEvent;
+            return zDispatchTouchEvent;
         }
         if (actionMasked == 2) {
             if (Math.abs(this.mItemTouchDownY - motionEvent.getY()) + this.mThresHold > Math.abs(this.mItemTouchDownX - motionEvent.getX())) {
@@ -41,7 +40,7 @@ public class SubscreenRecyclerView extends RecyclerView {
                 return true;
             }
         }
-        return dispatchTouchEvent;
+        return zDispatchTouchEvent;
     }
 
     public SubscreenRecyclerView(Context context, AttributeSet attributeSet) {

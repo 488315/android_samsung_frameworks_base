@@ -12,7 +12,6 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class Shader {
     public final int mFragmentShaderId;
@@ -26,21 +25,21 @@ public class Shader {
         this(context, loadProgramFromRawResource(context.getResources(), i), loadProgramFromRawResource(context.getResources(), i2));
     }
 
-    public static String loadProgramFromRawResource(Resources resources, int i) {
+    public static String loadProgramFromRawResource(Resources resources, int i) throws Resources.NotFoundException, IOException {
         try {
-            InputStream openRawResource = resources.openRawResource(i);
+            InputStream inputStreamOpenRawResource = resources.openRawResource(i);
             try {
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                 try {
-                    byte[] bArr = new byte[openRawResource.available()];
-                    openRawResource.read(bArr);
+                    byte[] bArr = new byte[inputStreamOpenRawResource.available()];
+                    inputStreamOpenRawResource.read(bArr);
                     byteArrayOutputStream.write(bArr);
                     byteArrayOutputStream.close();
-                    openRawResource.close();
-                    String byteArrayOutputStream2 = byteArrayOutputStream.toString();
+                    inputStreamOpenRawResource.close();
+                    String string = byteArrayOutputStream.toString();
                     byteArrayOutputStream.close();
-                    openRawResource.close();
-                    return byteArrayOutputStream2;
+                    inputStreamOpenRawResource.close();
+                    return string;
                 } finally {
                 }
             } finally {
@@ -52,47 +51,47 @@ public class Shader {
     }
 
     public static int loadShader(int i, String str) {
-        int glCreateShader = GLES20.glCreateShader(i);
-        EglUtils.checkGlError("glCreateShader type = " + i + ", id = " + glCreateShader);
-        if (glCreateShader != 0) {
-            GLES20.glShaderSource(glCreateShader, str);
-            EglUtils.checkGlError("glShaderSource id = " + glCreateShader);
-            GLES20.glCompileShader(glCreateShader);
-            EglUtils.checkGlError("glCompileShader id = " + glCreateShader);
+        int iGlCreateShader = GLES20.glCreateShader(i);
+        EglUtils.checkGlError("glCreateShader type = " + i + ", id = " + iGlCreateShader);
+        if (iGlCreateShader != 0) {
+            GLES20.glShaderSource(iGlCreateShader, str);
+            EglUtils.checkGlError("glShaderSource id = " + iGlCreateShader);
+            GLES20.glCompileShader(iGlCreateShader);
+            EglUtils.checkGlError("glCompileShader id = " + iGlCreateShader);
             int[] iArr = new int[1];
-            GLES20.glGetShaderiv(glCreateShader, 35713, iArr, 0);
+            GLES20.glGetShaderiv(iGlCreateShader, 35713, iArr, 0);
             if (iArr[0] == 0) {
                 Log.e("Shader", "Could not compile shader " + i + ":");
-                Log.e("Shader", GLES20.glGetShaderInfoLog(glCreateShader));
-                GLES20.glDeleteShader(glCreateShader);
+                Log.e("Shader", GLES20.glGetShaderInfoLog(iGlCreateShader));
+                GLES20.glDeleteShader(iGlCreateShader);
                 return 0;
             }
         }
-        return glCreateShader;
+        return iGlCreateShader;
     }
 
     public final int getHandle(String str) {
-        Integer num = (Integer) ((HashMap) this.mHandleMap).get(str);
-        if (num == null || num.intValue() < 0) {
-            num = Integer.valueOf(loadHandle(str));
+        Integer numValueOf = (Integer) ((HashMap) this.mHandleMap).get(str);
+        if (numValueOf == null || numValueOf.intValue() < 0) {
+            numValueOf = Integer.valueOf(loadHandle(str));
         }
-        return num.intValue();
+        return numValueOf.intValue();
     }
 
     public final int loadHandle(String str) {
         if (str.charAt(0) == 'u') {
-            int glGetUniformLocation = GLES20.glGetUniformLocation(this.mProgramId, str);
-            Log.i("Shader", "load uniform handle for " + str + " = " + glGetUniformLocation);
-            ((HashMap) this.mHandleMap).put(str, Integer.valueOf(glGetUniformLocation));
-            return glGetUniformLocation;
+            int iGlGetUniformLocation = GLES20.glGetUniformLocation(this.mProgramId, str);
+            Log.i("Shader", "load uniform handle for " + str + " = " + iGlGetUniformLocation);
+            ((HashMap) this.mHandleMap).put(str, Integer.valueOf(iGlGetUniformLocation));
+            return iGlGetUniformLocation;
         }
         if (str.charAt(0) != 'a') {
             return -1;
         }
-        int glGetAttribLocation = GLES20.glGetAttribLocation(this.mProgramId, str);
-        Log.i("Shader", "load attribute handle for " + str + " = " + glGetAttribLocation);
-        ((HashMap) this.mHandleMap).put(str, Integer.valueOf(glGetAttribLocation));
-        return glGetAttribLocation;
+        int iGlGetAttribLocation = GLES20.glGetAttribLocation(this.mProgramId, str);
+        Log.i("Shader", "load attribute handle for " + str + " = " + iGlGetAttribLocation);
+        ((HashMap) this.mHandleMap).put(str, Integer.valueOf(iGlGetAttribLocation));
+        return iGlGetAttribLocation;
     }
 
     public Shader(Context context, String str, String str2) {

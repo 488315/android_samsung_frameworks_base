@@ -5,7 +5,6 @@ import java.util.concurrent.ThreadLocalRandom;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final /* synthetic */ class FlowTracing$$ExternalSyntheticLambda1 implements Function0 {
     public final /* synthetic */ String f$0;
@@ -18,42 +17,42 @@ public final /* synthetic */ class FlowTracing$$ExternalSyntheticLambda1 impleme
 
     @Override // kotlin.jvm.functions.Function0
     public final Object invoke() {
-        boolean isEnabled;
+        boolean zIsEnabled;
         FlowTracing flowTracing = FlowTracing.INSTANCE;
-        boolean isEnabled2 = Trace.isEnabled();
+        boolean zIsEnabled2 = Trace.isEnabled();
         String str = this.f$0;
         Function0 function0 = this.f$1;
-        if (isEnabled2) {
+        if (zIsEnabled2) {
             int i = TraceUtils.$r8$clinit;
-            String concat = str.concat("#TracedAwaitClose");
-            int nextInt = ThreadLocalRandom.current().nextInt();
-            Trace.asyncTraceForTrackBegin(4096L, "FlowTracing", concat, nextInt);
+            String strConcat = str.concat("#TracedAwaitClose");
+            int iNextInt = ThreadLocalRandom.current().nextInt();
+            Trace.asyncTraceForTrackBegin(4096L, "FlowTracing", strConcat, iNextInt);
             try {
-                isEnabled = Trace.isEnabled();
-                if (isEnabled) {
+                zIsEnabled = Trace.isEnabled();
+                if (zIsEnabled) {
                     TraceUtilsKt.beginSlice(str.concat("#TracedAwaitClose"));
                 }
                 try {
                     function0.invoke();
                     Unit unit = Unit.INSTANCE;
-                    if (isEnabled) {
+                    if (zIsEnabled) {
                         TraceUtilsKt.endSlice();
                     }
                 } finally {
                 }
             } finally {
-                Trace.asyncTraceForTrackEnd(4096L, "FlowTracing", nextInt);
+                Trace.asyncTraceForTrackEnd(4096L, "FlowTracing", iNextInt);
             }
         } else {
-            isEnabled = Trace.isEnabled();
-            if (isEnabled) {
+            zIsEnabled = Trace.isEnabled();
+            if (zIsEnabled) {
                 TraceUtilsKt.beginSlice(str.concat("#TracedAwaitClose"));
             }
             try {
                 function0.invoke();
                 Unit unit2 = Unit.INSTANCE;
             } finally {
-                if (isEnabled) {
+                if (zIsEnabled) {
                     TraceUtilsKt.endSlice();
                 }
             }

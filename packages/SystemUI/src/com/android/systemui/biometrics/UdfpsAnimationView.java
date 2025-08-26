@@ -5,7 +5,6 @@ import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class UdfpsAnimationView extends FrameLayout {
     public float mDialogSuggestedAlpha;
@@ -29,9 +28,9 @@ public abstract class UdfpsAnimationView extends FrameLayout {
     public abstract UdfpsFpDrawable getDrawable();
 
     public final void updateAlpha() {
-        int calculateAlpha = calculateAlpha();
-        getDrawable().setAlpha(calculateAlpha);
-        if (this.mPauseAuth && calculateAlpha == 0 && getParent() != null) {
+        int iCalculateAlpha = calculateAlpha();
+        getDrawable().setAlpha(iCalculateAlpha);
+        if (this.mPauseAuth && iCalculateAlpha == 0 && getParent() != null) {
             ((ViewGroup) getParent()).setVisibility(4);
         } else {
             ((ViewGroup) getParent()).setVisibility(0);

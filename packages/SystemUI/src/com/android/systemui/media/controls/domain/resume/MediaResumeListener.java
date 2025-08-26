@@ -45,7 +45,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlin.text.Regex;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MediaResumeListener implements MediaDataManager.Listener, Dumpable {
     public final Executor backgroundExecutor;
@@ -68,7 +67,7 @@ public final class MediaResumeListener implements MediaDataManager.Listener, Dum
     /* JADX WARN: Type inference failed for: r14v4, types: [com.android.systemui.media.controls.domain.resume.MediaResumeListener$mediaBrowserCallback$1] */
     /* JADX WARN: Type inference failed for: r1v0, types: [android.content.BroadcastReceiver, com.android.systemui.media.controls.domain.resume.MediaResumeListener$userUnlockReceiver$1] */
     /* JADX WARN: Type inference failed for: r9v2, types: [com.android.systemui.media.controls.domain.resume.MediaResumeListener$userTrackerCallback$1, com.android.systemui.settings.UserTracker$Callback] */
-    public MediaResumeListener(Context context, BroadcastDispatcher broadcastDispatcher, UserTracker userTracker, Executor executor, Executor executor2, TunerService tunerService, ResumeMediaBrowserFactory resumeMediaBrowserFactory, DumpManager dumpManager, SystemClock systemClock) {
+    public MediaResumeListener(Context context, BroadcastDispatcher broadcastDispatcher, UserTracker userTracker, Executor executor, Executor executor2, TunerService tunerService, ResumeMediaBrowserFactory resumeMediaBrowserFactory, DumpManager dumpManager, SystemClock systemClock) throws NumberFormatException {
         this.context = context;
         this.mainExecutor = executor;
         this.backgroundExecutor = executor2;
@@ -82,14 +81,14 @@ public final class MediaResumeListener implements MediaDataManager.Listener, Dum
             public final void onReceive(Context context2, Intent intent) {
                 if ("android.intent.action.USER_UNLOCKED".equals(intent.getAction())) {
                     int intExtra = intent.getIntExtra("android.intent.extra.user_handle", -1);
-                    MediaResumeListener mediaResumeListener = MediaResumeListener.this;
+                    MediaResumeListener mediaResumeListener = this.this$0;
                     if (intExtra == mediaResumeListener.currentUserId && mediaResumeListener.useMediaResumption) {
                         PackageManager packageManager = mediaResumeListener.context.getPackageManager();
-                        long currentTimeMillis = mediaResumeListener.systemClock.currentTimeMillis();
+                        long jCurrentTimeMillis = mediaResumeListener.systemClock.currentTimeMillis();
                         Iterator it = mediaResumeListener.resumeComponents.iterator();
                         while (it.hasNext()) {
                             Pair pair = (Pair) it.next();
-                            if (currentTimeMillis - ((Number) pair.getSecond()).longValue() <= MediaTimeoutListenerKt.RESUME_MEDIA_TIMEOUT) {
+                            if (jCurrentTimeMillis - ((Number) pair.getSecond()).longValue() <= MediaTimeoutListenerKt.RESUME_MEDIA_TIMEOUT) {
                                 Intent intent2 = new Intent("android.media.browse.MediaBrowserService");
                                 intent2.setComponent((ComponentName) pair.getFirst());
                                 if (packageManager.resolveServiceAsUser(intent2, 0, mediaResumeListener.currentUserId) != null) {
@@ -116,8 +115,8 @@ public final class MediaResumeListener implements MediaDataManager.Listener, Dum
         this.userUnlockReceiver = r1;
         ?? r9 = new UserTracker.Callback() { // from class: com.android.systemui.media.controls.domain.resume.MediaResumeListener$userTrackerCallback$1
             @Override // com.android.systemui.settings.UserTracker.Callback
-            public final void onUserChanged(int i, Context context2) {
-                MediaResumeListener mediaResumeListener = MediaResumeListener.this;
+            public final void onUserChanged(int i, Context context2) throws NumberFormatException {
+                MediaResumeListener mediaResumeListener = this.this$0;
                 mediaResumeListener.currentUserId = i;
                 mediaResumeListener.loadSavedComponents();
             }
@@ -125,10 +124,10 @@ public final class MediaResumeListener implements MediaDataManager.Listener, Dum
         this.userTrackerCallback = r9;
         this.mediaBrowserCallback = new ResumeMediaBrowser.Callback() { // from class: com.android.systemui.media.controls.domain.resume.MediaResumeListener$mediaBrowserCallback$1
             @Override // com.android.systemui.media.controls.domain.resume.ResumeMediaBrowser.Callback
-            public final void addTrack(MediaDescription mediaDescription, ComponentName componentName, ResumeMediaBrowser resumeMediaBrowser) {
+            public final void addTrack(MediaDescription mediaDescription, ComponentName componentName, ResumeMediaBrowser resumeMediaBrowser) throws PackageManager.NameNotFoundException {
                 MediaSession.Token sessionToken = !resumeMediaBrowser.isBrowserConnected() ? null : resumeMediaBrowser.mMediaBrowser.getSessionToken();
                 PendingIntent activity = PendingIntent.getActivity(resumeMediaBrowser.mContext, 0, resumeMediaBrowser.mContext.getPackageManager().getLaunchIntentForPackage(resumeMediaBrowser.mComponentName.getPackageName()), 67108864);
-                MediaResumeListener mediaResumeListener = MediaResumeListener.this;
+                MediaResumeListener mediaResumeListener = this.this$0;
                 PackageManager packageManager = mediaResumeListener.context.getPackageManager();
                 CharSequence packageName = componentName.getPackageName();
                 MediaResumeListener$getResumeAction$1 mediaResumeListener$getResumeAction$1 = new MediaResumeListener$getResumeAction$1(mediaResumeListener, componentName);
@@ -143,9 +142,9 @@ public final class MediaResumeListener implements MediaDataManager.Listener, Dum
                 LegacyMediaDataManagerImpl legacyMediaDataManagerImpl = mediaResumeListener.mediaDataManager;
                 LegacyMediaDataManagerImpl legacyMediaDataManagerImpl2 = legacyMediaDataManagerImpl != null ? legacyMediaDataManagerImpl : null;
                 sessionToken.getClass();
-                String obj = packageName.toString();
+                String string = packageName.toString();
                 activity.getClass();
-                legacyMediaDataManagerImpl2.addResumptionControls(resumeMediaBrowser.mUserId, mediaDescription, mediaResumeListener$getResumeAction$1, sessionToken, obj, activity, componentName.getPackageName());
+                legacyMediaDataManagerImpl2.addResumptionControls(resumeMediaBrowser.mUserId, mediaDescription, mediaResumeListener$getResumeAction$1, sessionToken, string, activity, componentName.getPackageName());
             }
         };
         if (this.useMediaResumption) {
@@ -163,45 +162,47 @@ public final class MediaResumeListener implements MediaDataManager.Listener, Dum
         printWriter.println("resumeComponents: " + this.resumeComponents);
     }
 
-    public final void loadSavedComponents() {
-        long currentTimeMillis;
-        List split;
+    public final void loadSavedComponents() throws NumberFormatException {
+        long jCurrentTimeMillis;
+        List listSplit;
         this.resumeComponents.clear();
         boolean z = false;
-        Iterable iterable = null;
+        Iterable iterableTake = null;
         String string = this.context.getSharedPreferences("media_control_prefs", 0).getString("browser_components_" + this.currentUserId, null);
-        if (string != null && (split = new Regex(":").split(string)) != null) {
-            if (!split.isEmpty()) {
-                ListIterator listIterator = split.listIterator(split.size());
+        if (string != null && (listSplit = new Regex(":").split(string)) != null) {
+            if (listSplit.isEmpty()) {
+                iterableTake = EmptyList.INSTANCE;
+            } else {
+                ListIterator listIterator = listSplit.listIterator(listSplit.size());
                 while (listIterator.hasPrevious()) {
                     if (((String) listIterator.previous()).length() != 0) {
-                        iterable = CollectionsKt___CollectionsKt.take(split, listIterator.nextIndex() + 1);
+                        iterableTake = CollectionsKt___CollectionsKt.take(listSplit, listIterator.nextIndex() + 1);
                         break;
                     }
                 }
+                iterableTake = EmptyList.INSTANCE;
             }
-            iterable = EmptyList.INSTANCE;
         }
-        if (iterable != null) {
-            Iterator it = iterable.iterator();
+        if (iterableTake != null) {
+            Iterator it = iterableTake.iterator();
             boolean z2 = false;
             while (it.hasNext()) {
-                List split$default = StringsKt__StringsKt.split$default((String) it.next(), new String[]{"/"}, 0, 6);
-                ComponentName componentName = new ComponentName((String) split$default.get(0), (String) split$default.get(1));
-                int size = split$default.size();
+                List listSplit$default = StringsKt__StringsKt.split$default((String) it.next(), new String[]{"/"}, 0, 6);
+                ComponentName componentName = new ComponentName((String) listSplit$default.get(0), (String) listSplit$default.get(1));
+                int size = listSplit$default.size();
                 SystemClock systemClock = this.systemClock;
                 if (size == 3) {
                     try {
-                        currentTimeMillis = Long.parseLong((String) split$default.get(2));
+                        jCurrentTimeMillis = Long.parseLong((String) listSplit$default.get(2));
                     } catch (NumberFormatException unused) {
-                        currentTimeMillis = systemClock.currentTimeMillis();
+                        jCurrentTimeMillis = systemClock.currentTimeMillis();
                     }
-                    this.resumeComponents.add(new Pair(componentName, Long.valueOf(currentTimeMillis)));
+                    this.resumeComponents.add(new Pair(componentName, Long.valueOf(jCurrentTimeMillis)));
                 } else {
-                    currentTimeMillis = systemClock.currentTimeMillis();
+                    jCurrentTimeMillis = systemClock.currentTimeMillis();
                 }
                 z2 = true;
-                this.resumeComponents.add(new Pair(componentName, Long.valueOf(currentTimeMillis)));
+                this.resumeComponents.add(new Pair(componentName, Long.valueOf(jCurrentTimeMillis)));
             }
             z = z2;
         }
@@ -221,7 +222,7 @@ public final class MediaResumeListener implements MediaDataManager.Listener, Dum
             }
             boolean z2 = mediaData.playbackLocation == 0;
             if (mediaData.resumeAction == null && !mediaData.hasCheckedForResume && z2) {
-                this.backgroundExecutor.execute(new Runnable() { // from class: com.android.systemui.media.controls.domain.resume.MediaResumeListener$onMediaDataLoaded$1
+                this.backgroundExecutor.execute(new Runnable() { // from class: com.android.systemui.media.controls.domain.resume.MediaResumeListener.onMediaDataLoaded.1
                     @Override // java.lang.Runnable
                     public final void run() {
                         LegacyMediaDataManagerImpl legacyMediaDataManagerImpl = MediaResumeListener.this.mediaDataManager;
@@ -230,10 +231,10 @@ public final class MediaResumeListener implements MediaDataManager.Listener, Dum
                         }
                         legacyMediaDataManagerImpl.setResumeAction(null, str);
                         MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("Checking for service component for ", mediaData.packageName, "MediaResumeListener");
-                        List queryIntentServicesAsUser = MediaResumeListener.this.context.getPackageManager().queryIntentServicesAsUser(new Intent("android.media.browse.MediaBrowserService"), 0, MediaResumeListener.this.currentUserId);
+                        List listQueryIntentServicesAsUser = MediaResumeListener.this.context.getPackageManager().queryIntentServicesAsUser(new Intent("android.media.browse.MediaBrowserService"), 0, MediaResumeListener.this.currentUserId);
                         MediaData mediaData2 = mediaData;
                         ArrayList arrayList = new ArrayList();
-                        for (Object obj : queryIntentServicesAsUser) {
+                        for (Object obj : listQueryIntentServicesAsUser) {
                             if (Intrinsics.areEqual(((ResolveInfo) obj).serviceInfo.packageName, mediaData2.packageName)) {
                                 arrayList.add(obj);
                             }
@@ -247,7 +248,7 @@ public final class MediaResumeListener implements MediaDataManager.Listener, Dum
                             ResumeMediaBrowser.Callback callback = new ResumeMediaBrowser.Callback() { // from class: com.android.systemui.media.controls.domain.resume.MediaResumeListener$tryUpdateResumptionList$1
                                 @Override // com.android.systemui.media.controls.domain.resume.ResumeMediaBrowser.Callback
                                 public final void addTrack(MediaDescription mediaDescription, ComponentName componentName2, ResumeMediaBrowser resumeMediaBrowser) {
-                                    Object obj2;
+                                    Object next;
                                     ComponentName componentName3 = componentName;
                                     if (Log.isLoggable("MediaResumeListener", 3)) {
                                         Log.d("MediaResumeListener", "Can get resumable media for " + resumeMediaBrowser.mUserId + " from " + componentName3);
@@ -263,16 +264,16 @@ public final class MediaResumeListener implements MediaDataManager.Listener, Dum
                                     Iterator it = concurrentLinkedQueue.iterator();
                                     while (true) {
                                         if (!it.hasNext()) {
-                                            obj2 = null;
+                                            next = null;
                                             break;
                                         } else {
-                                            obj2 = it.next();
-                                            if (((ComponentName) ((Pair) obj2).getFirst()).equals(componentName4)) {
+                                            next = it.next();
+                                            if (((ComponentName) ((Pair) next).getFirst()).equals(componentName4)) {
                                                 break;
                                             }
                                         }
                                     }
-                                    concurrentLinkedQueue.remove(obj2);
+                                    concurrentLinkedQueue.remove(next);
                                     mediaResumeListener2.resumeComponents.add(new Pair(componentName4, Long.valueOf(mediaResumeListener2.systemClock.currentTimeMillis())));
                                     if (mediaResumeListener2.resumeComponents.size() > 5) {
                                         mediaResumeListener2.resumeComponents.remove();

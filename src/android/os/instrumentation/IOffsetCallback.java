@@ -39,9 +39,9 @@ public interface IOffsetCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IOffsetCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IOffsetCallback)) {
-                return (IOffsetCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IOffsetCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IOffsetCallback)) {
+                return (IOffsetCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -82,13 +82,13 @@ public interface IOffsetCallback extends IInterface {
 
             @Override // android.os.instrumentation.IOffsetCallback
             public void onResult(ExecutableMethodFileOffsets executableMethodFileOffsets) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IOffsetCallback.DESCRIPTOR);
-                    obtain.writeTypedObject(executableMethodFileOffsets, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IOffsetCallback.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(executableMethodFileOffsets, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

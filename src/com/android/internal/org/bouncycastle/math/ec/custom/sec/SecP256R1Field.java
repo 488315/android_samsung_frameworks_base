@@ -34,14 +34,14 @@ public class SecP256R1Field {
     }
 
     public static int[] fromBigInteger(BigInteger bigInteger) {
-        int[] fromBigInteger = Nat256.fromBigInteger(bigInteger);
-        if (fromBigInteger[7] == -1) {
+        int[] iArrFromBigInteger = Nat256.fromBigInteger(bigInteger);
+        if (iArrFromBigInteger[7] == -1) {
             int[] iArr = P;
-            if (Nat256.gte(fromBigInteger, iArr)) {
-                Nat256.subFrom(iArr, fromBigInteger);
+            if (Nat256.gte(iArrFromBigInteger, iArr)) {
+                Nat256.subFrom(iArr, iArrFromBigInteger);
             }
         }
-        return fromBigInteger;
+        return iArrFromBigInteger;
     }
 
     public static void half(int[] iArr, int[] iArr2) {
@@ -65,9 +65,9 @@ public class SecP256R1Field {
     }
 
     public static void multiply(int[] iArr, int[] iArr2, int[] iArr3) {
-        int[] createExt = Nat256.createExt();
-        Nat256.mul(iArr, iArr2, createExt);
-        reduce(createExt, iArr3);
+        int[] iArrCreateExt = Nat256.createExt();
+        Nat256.mul(iArr, iArr2, iArrCreateExt);
+        reduce(iArrCreateExt, iArr3);
     }
 
     public static void multiply(int[] iArr, int[] iArr2, int[] iArr3, int[] iArr4) {
@@ -178,9 +178,9 @@ public class SecP256R1Field {
     }
 
     public static void square(int[] iArr, int[] iArr2) {
-        int[] createExt = Nat256.createExt();
-        Nat256.square(iArr, createExt);
-        reduce(createExt, iArr2);
+        int[] iArrCreateExt = Nat256.createExt();
+        Nat256.square(iArr, iArrCreateExt);
+        reduce(iArrCreateExt, iArr2);
     }
 
     public static void square(int[] iArr, int[] iArr2, int[] iArr3) {
@@ -189,16 +189,16 @@ public class SecP256R1Field {
     }
 
     public static void squareN(int[] iArr, int i, int[] iArr2) {
-        int[] createExt = Nat256.createExt();
-        Nat256.square(iArr, createExt);
-        reduce(createExt, iArr2);
+        int[] iArrCreateExt = Nat256.createExt();
+        Nat256.square(iArr, iArrCreateExt);
+        reduce(iArrCreateExt, iArr2);
         while (true) {
             i--;
             if (i <= 0) {
                 return;
             }
-            Nat256.square(iArr2, createExt);
-            reduce(createExt, iArr2);
+            Nat256.square(iArr2, iArrCreateExt);
+            reduce(iArrCreateExt, iArr2);
         }
     }
 

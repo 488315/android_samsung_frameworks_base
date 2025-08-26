@@ -13,7 +13,6 @@ import java.util.List;
 import kotlin.collections.CollectionsKt__IterablesKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class EngramQueryOptionWrapperV1 implements Parcelable {
     private final boolean contentFill;
@@ -34,7 +33,6 @@ public final class EngramQueryOptionWrapperV1 implements Parcelable {
     public static final Companion Companion = new Companion(null);
     public static final Parcelable.Creator<EngramQueryOptionWrapperV1> CREATOR = new Creator();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -44,37 +42,36 @@ public final class EngramQueryOptionWrapperV1 implements Parcelable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Creator implements Parcelable.Creator {
         @Override // android.os.Parcelable.Creator
         public final Object createFromParcel(Parcel parcel) {
             ArrayList arrayList;
             ArrayList arrayList2;
-            Long valueOf = parcel.readInt() == 0 ? null : Long.valueOf(parcel.readLong());
-            Long valueOf2 = parcel.readInt() == 0 ? null : Long.valueOf(parcel.readLong());
-            String readString = parcel.readString();
-            int readInt = parcel.readInt();
-            ArrayList<String> createStringArrayList = parcel.createStringArrayList();
-            ArrayList<String> createStringArrayList2 = parcel.createStringArrayList();
+            Long lValueOf = parcel.readInt() == 0 ? null : Long.valueOf(parcel.readLong());
+            Long lValueOf2 = parcel.readInt() == 0 ? null : Long.valueOf(parcel.readLong());
+            String string = parcel.readString();
+            int i = parcel.readInt();
+            ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
+            ArrayList<String> arrayListCreateStringArrayList2 = parcel.createStringArrayList();
             if (parcel.readInt() == 0) {
                 arrayList = null;
             } else {
-                int readInt2 = parcel.readInt();
-                arrayList = new ArrayList(readInt2);
-                for (int i = 0; i != readInt2; i++) {
+                int i2 = parcel.readInt();
+                arrayList = new ArrayList(i2);
+                for (int i3 = 0; i3 != i2; i3++) {
                     arrayList.add(Integer.valueOf(parcel.readInt()));
                 }
             }
             if (parcel.readInt() == 0) {
                 arrayList2 = null;
             } else {
-                int readInt3 = parcel.readInt();
-                arrayList2 = new ArrayList(readInt3);
-                for (int i2 = 0; i2 != readInt3; i2++) {
+                int i4 = parcel.readInt();
+                arrayList2 = new ArrayList(i4);
+                for (int i5 = 0; i5 != i4; i5++) {
                     arrayList2.add(Integer.valueOf(parcel.readInt()));
                 }
             }
-            return new EngramQueryOptionWrapperV1(valueOf, valueOf2, readString, readInt, createStringArrayList, createStringArrayList2, arrayList, arrayList2, parcel.readInt(), parcel.readInt(), parcel.readString(), parcel.readInt() == 0 ? null : Double.valueOf(parcel.readDouble()), parcel.readInt() == 0 ? null : Double.valueOf(parcel.readDouble()), parcel.readInt() != 0 ? Double.valueOf(parcel.readDouble()) : null, parcel.readInt() != 0);
+            return new EngramQueryOptionWrapperV1(lValueOf, lValueOf2, string, i, arrayListCreateStringArrayList, arrayListCreateStringArrayList2, arrayList, arrayList2, parcel.readInt(), parcel.readInt(), parcel.readString(), parcel.readInt() == 0 ? null : Double.valueOf(parcel.readDouble()), parcel.readInt() == 0 ? null : Double.valueOf(parcel.readDouble()), parcel.readInt() != 0 ? Double.valueOf(parcel.readDouble()) : null, parcel.readInt() != 0);
         }
 
         @Override // android.os.Parcelable.Creator
@@ -154,7 +151,7 @@ public final class EngramQueryOptionWrapperV1 implements Parcelable {
 
     public final EngramQueryOption toOption() {
         ArrayList arrayList;
-        Object obj;
+        Object next;
         ArrayList arrayList2;
         Long l = this.startTimestamp;
         Long l2 = this.endTimestamp;
@@ -166,15 +163,15 @@ public final class EngramQueryOptionWrapperV1 implements Parcelable {
         while (true) {
             arrayList = null;
             if (!it.hasNext()) {
-                obj = null;
+                next = null;
                 break;
             }
-            obj = it.next();
-            if (((EngramQueryType) obj).getValue() == i) {
+            next = it.next();
+            if (((EngramQueryType) next).getValue() == i) {
                 break;
             }
         }
-        EngramQueryType engramQueryType = (EngramQueryType) obj;
+        EngramQueryType engramQueryType = (EngramQueryType) next;
         if (engramQueryType == null) {
             engramQueryType = EngramQueryType.BETWEEN_TIMESTAMP;
         }
@@ -187,13 +184,13 @@ public final class EngramQueryOptionWrapperV1 implements Parcelable {
             arrayList2 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(list4, 10));
             Iterator<T> it2 = list4.iterator();
             while (it2.hasNext()) {
-                int intValue = ((Number) it2.next()).intValue();
+                int iIntValue = ((Number) it2.next()).intValue();
                 ActivityType.Companion companion2 = ActivityType.Companion;
-                Integer valueOf = Integer.valueOf(intValue);
+                Integer numValueOf = Integer.valueOf(iIntValue);
                 companion2.getClass();
-                ActivityType fromInt = ActivityType.Companion.fromInt(valueOf);
-                fromInt.getClass();
-                arrayList2.add(fromInt);
+                ActivityType activityTypeFromInt = ActivityType.Companion.fromInt(numValueOf);
+                activityTypeFromInt.getClass();
+                arrayList2.add(activityTypeFromInt);
             }
         } else {
             arrayList2 = null;
@@ -204,13 +201,13 @@ public final class EngramQueryOptionWrapperV1 implements Parcelable {
             arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(list6, 10));
             Iterator<T> it3 = list6.iterator();
             while (it3.hasNext()) {
-                int intValue2 = ((Number) it3.next()).intValue();
+                int iIntValue2 = ((Number) it3.next()).intValue();
                 ActivityType.Companion companion3 = ActivityType.Companion;
-                Integer valueOf2 = Integer.valueOf(intValue2);
+                Integer numValueOf2 = Integer.valueOf(iIntValue2);
                 companion3.getClass();
-                ActivityType fromInt2 = ActivityType.Companion.fromInt(valueOf2);
-                fromInt2.getClass();
-                arrayList.add(fromInt2);
+                ActivityType activityTypeFromInt2 = ActivityType.Companion.fromInt(numValueOf2);
+                activityTypeFromInt2.getClass();
+                arrayList.add(activityTypeFromInt2);
             }
         }
         EngramQueryOption.WrapBuilder wrapBuilder = new EngramQueryOption.WrapBuilder(l, l2, str, engramQueryType2, list, list2, arrayList2, arrayList, this.limit, this.offset, this.engramId, this.latitude, this.longitude, this.radius, this.contentFill);

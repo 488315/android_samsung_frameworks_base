@@ -69,22 +69,22 @@ public final class PrinterInfo implements Parcelable {
     public Drawable loadIcon(Context context) {
         Icon customPrinterIcon;
         PackageManager packageManager = context.getPackageManager();
-        Drawable loadDrawable = (!this.mHasCustomPrinterIcon || (customPrinterIcon = ((PrintManager) context.getSystemService(Context.PRINT_SERVICE)).getCustomPrinterIcon(this.mId)) == null) ? null : customPrinterIcon.loadDrawable(context);
-        if (loadDrawable == null) {
+        Drawable drawableLoadDrawable = (!this.mHasCustomPrinterIcon || (customPrinterIcon = ((PrintManager) context.getSystemService(Context.PRINT_SERVICE)).getCustomPrinterIcon(this.mId)) == null) ? null : customPrinterIcon.loadDrawable(context);
+        if (drawableLoadDrawable == null) {
             try {
                 String packageName = this.mId.getServiceName().getPackageName();
                 ApplicationInfo applicationInfo = packageManager.getPackageInfo(packageName, 0).applicationInfo;
                 int i = this.mIconResourceId;
                 if (i != 0) {
-                    loadDrawable = packageManager.getDrawable(packageName, i, applicationInfo);
+                    drawableLoadDrawable = packageManager.getDrawable(packageName, i, applicationInfo);
                 }
-                if (loadDrawable == null) {
+                if (drawableLoadDrawable == null) {
                     return applicationInfo.loadIcon(packageManager);
                 }
             } catch (PackageManager.NameNotFoundException unused) {
             }
         }
-        return loadDrawable;
+        return drawableLoadDrawable;
     }
 
     public boolean getHasCustomPrinterIcon() {
@@ -155,13 +155,13 @@ public final class PrinterInfo implements Parcelable {
     }
 
     public int hashCode() {
-        int hashCode = (((((this.mId.hashCode() + 31) * 31) + this.mName.hashCode()) * 31) + this.mStatus) * 31;
+        int iHashCode = (((((this.mId.hashCode() + 31) * 31) + this.mName.hashCode()) * 31) + this.mStatus) * 31;
         String str = this.mDescription;
-        int hashCode2 = (hashCode + (str != null ? str.hashCode() : 0)) * 31;
+        int iHashCode2 = (iHashCode + (str != null ? str.hashCode() : 0)) * 31;
         PrinterCapabilitiesInfo printerCapabilitiesInfo = this.mCapabilities;
-        int hashCode3 = (((((((hashCode2 + (printerCapabilitiesInfo != null ? printerCapabilitiesInfo.hashCode() : 0)) * 31) + this.mIconResourceId) * 31) + (this.mHasCustomPrinterIcon ? 1 : 0)) * 31) + this.mCustomPrinterIconGen) * 31;
+        int iHashCode3 = (((((((iHashCode2 + (printerCapabilitiesInfo != null ? printerCapabilitiesInfo.hashCode() : 0)) * 31) + this.mIconResourceId) * 31) + (this.mHasCustomPrinterIcon ? 1 : 0)) * 31) + this.mCustomPrinterIconGen) * 31;
         PendingIntent pendingIntent = this.mInfoIntent;
-        return hashCode3 + (pendingIntent != null ? pendingIntent.hashCode() : 0);
+        return iHashCode3 + (pendingIntent != null ? pendingIntent.hashCode() : 0);
     }
 
     public boolean equalsIgnoringStatus(PrinterInfo printerInfo) {

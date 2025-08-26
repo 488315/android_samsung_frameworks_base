@@ -80,9 +80,9 @@ public interface ISearchUiManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISearchUiManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISearchUiManager)) {
-                return (ISearchUiManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ISearchUiManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ISearchUiManager)) {
+                return (ISearchUiManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -124,17 +124,17 @@ public interface ISearchUiManager extends IInterface {
                 case 1:
                     SearchContext searchContext = (SearchContext) parcel.readTypedObject(SearchContext.CREATOR);
                     SearchSessionId searchSessionId = (SearchSessionId) parcel.readTypedObject(SearchSessionId.CREATOR);
-                    IBinder readStrongBinder = parcel.readStrongBinder();
+                    IBinder strongBinder = parcel.readStrongBinder();
                     parcel.enforceNoDataAvail();
-                    createSearchSession(searchContext, searchSessionId, readStrongBinder);
+                    createSearchSession(searchContext, searchSessionId, strongBinder);
                     parcel2.writeNoException();
                     return true;
                 case 2:
                     SearchSessionId searchSessionId2 = (SearchSessionId) parcel.readTypedObject(SearchSessionId.CREATOR);
                     Query query = (Query) parcel.readTypedObject(Query.CREATOR);
-                    ISearchCallback asInterface = ISearchCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ISearchCallback iSearchCallbackAsInterface = ISearchCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    query(searchSessionId2, query, asInterface);
+                    query(searchSessionId2, query, iSearchCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 3:
@@ -147,16 +147,16 @@ public interface ISearchUiManager extends IInterface {
                     return true;
                 case 4:
                     SearchSessionId searchSessionId4 = (SearchSessionId) parcel.readTypedObject(SearchSessionId.CREATOR);
-                    ISearchCallback asInterface2 = ISearchCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ISearchCallback iSearchCallbackAsInterface2 = ISearchCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerEmptyQueryResultUpdateCallback(searchSessionId4, asInterface2);
+                    registerEmptyQueryResultUpdateCallback(searchSessionId4, iSearchCallbackAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 5:
                     SearchSessionId searchSessionId5 = (SearchSessionId) parcel.readTypedObject(SearchSessionId.CREATOR);
-                    ISearchCallback asInterface3 = ISearchCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ISearchCallback iSearchCallbackAsInterface3 = ISearchCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterEmptyQueryResultUpdateCallback(searchSessionId5, asInterface3);
+                    unregisterEmptyQueryResultUpdateCallback(searchSessionId5, iSearchCallbackAsInterface3);
                     parcel2.writeNoException();
                     return true;
                 case 6:
@@ -188,99 +188,99 @@ public interface ISearchUiManager extends IInterface {
 
             @Override // android.app.search.ISearchUiManager
             public void createSearchSession(SearchContext searchContext, SearchSessionId searchSessionId, IBinder iBinder) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISearchUiManager.DESCRIPTOR);
-                    obtain.writeTypedObject(searchContext, 0);
-                    obtain.writeTypedObject(searchSessionId, 0);
-                    obtain.writeStrongBinder(iBinder);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISearchUiManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(searchContext, 0);
+                    parcelObtain.writeTypedObject(searchSessionId, 0);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.search.ISearchUiManager
             public void query(SearchSessionId searchSessionId, Query query, ISearchCallback iSearchCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISearchUiManager.DESCRIPTOR);
-                    obtain.writeTypedObject(searchSessionId, 0);
-                    obtain.writeTypedObject(query, 0);
-                    obtain.writeStrongInterface(iSearchCallback);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISearchUiManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(searchSessionId, 0);
+                    parcelObtain.writeTypedObject(query, 0);
+                    parcelObtain.writeStrongInterface(iSearchCallback);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.search.ISearchUiManager
             public void notifyEvent(SearchSessionId searchSessionId, Query query, SearchTargetEvent searchTargetEvent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISearchUiManager.DESCRIPTOR);
-                    obtain.writeTypedObject(searchSessionId, 0);
-                    obtain.writeTypedObject(query, 0);
-                    obtain.writeTypedObject(searchTargetEvent, 0);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISearchUiManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(searchSessionId, 0);
+                    parcelObtain.writeTypedObject(query, 0);
+                    parcelObtain.writeTypedObject(searchTargetEvent, 0);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.search.ISearchUiManager
             public void registerEmptyQueryResultUpdateCallback(SearchSessionId searchSessionId, ISearchCallback iSearchCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISearchUiManager.DESCRIPTOR);
-                    obtain.writeTypedObject(searchSessionId, 0);
-                    obtain.writeStrongInterface(iSearchCallback);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISearchUiManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(searchSessionId, 0);
+                    parcelObtain.writeStrongInterface(iSearchCallback);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.search.ISearchUiManager
             public void unregisterEmptyQueryResultUpdateCallback(SearchSessionId searchSessionId, ISearchCallback iSearchCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISearchUiManager.DESCRIPTOR);
-                    obtain.writeTypedObject(searchSessionId, 0);
-                    obtain.writeStrongInterface(iSearchCallback);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISearchUiManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(searchSessionId, 0);
+                    parcelObtain.writeStrongInterface(iSearchCallback);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.app.search.ISearchUiManager
             public void destroySearchSession(SearchSessionId searchSessionId) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ISearchUiManager.DESCRIPTOR);
-                    obtain.writeTypedObject(searchSessionId, 0);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(ISearchUiManager.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(searchSessionId, 0);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

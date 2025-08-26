@@ -18,7 +18,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class ModalBottomSheetDialogLayout extends AbstractComposeView {
     public ModalBottomSheetDialogLayout$Api34Impl$createBackCallback$1 backCallback;
@@ -29,7 +28,6 @@ final class ModalBottomSheetDialogLayout extends AbstractComposeView {
     public boolean shouldCreateCompositionOnAttachedToWindow;
     public final boolean shouldDismissOnBackPress;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class Api33Impl {
         public static final /* synthetic */ int $r8$clinit = 0;
 
@@ -41,7 +39,6 @@ final class ModalBottomSheetDialogLayout extends AbstractComposeView {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class Api34Impl {
         public static final /* synthetic */ int $r8$clinit = 0;
 
@@ -84,7 +81,7 @@ final class ModalBottomSheetDialogLayout extends AbstractComposeView {
     /* JADX WARN: Type inference failed for: r3v1, types: [androidx.compose.material3.ModalBottomSheetDialogLayout$Api34Impl$createBackCallback$1] */
     @Override // androidx.compose.ui.platform.AbstractComposeView, android.view.ViewGroup, android.view.View
     public final void onAttachedToWindow() {
-        OnBackInvokedDispatcher findOnBackInvokedDispatcher;
+        OnBackInvokedDispatcher onBackInvokedDispatcherFindOnBackInvokedDispatcher;
         super.onAttachedToWindow();
         if (this.shouldDismissOnBackPress) {
             if (this.backCallback == null) {
@@ -95,7 +92,7 @@ final class ModalBottomSheetDialogLayout extends AbstractComposeView {
                 this.backCallback = new OnBackAnimationCallback() { // from class: androidx.compose.material3.ModalBottomSheetDialogLayout$Api34Impl$createBackCallback$1
                     @Override // android.window.OnBackAnimationCallback
                     public final void onBackCancelled() {
-                        BuildersKt.launch$default(CoroutineScope.this, null, null, new ModalBottomSheetDialogLayout$Api34Impl$createBackCallback$1$onBackCancelled$1(animatable, null), 3);
+                        BuildersKt.launch$default(coroutineScope, null, null, new ModalBottomSheetDialogLayout$Api34Impl$createBackCallback$1$onBackCancelled$1(animatable, null), 3);
                     }
 
                     @Override // android.window.OnBackInvokedCallback
@@ -105,32 +102,32 @@ final class ModalBottomSheetDialogLayout extends AbstractComposeView {
 
                     @Override // android.window.OnBackAnimationCallback
                     public final void onBackProgressed(BackEvent backEvent) {
-                        BuildersKt.launch$default(CoroutineScope.this, null, null, new ModalBottomSheetDialogLayout$Api34Impl$createBackCallback$1$onBackProgressed$1(animatable, backEvent, null), 3);
+                        BuildersKt.launch$default(coroutineScope, null, null, new ModalBottomSheetDialogLayout$Api34Impl$createBackCallback$1$onBackProgressed$1(animatable, backEvent, null), 3);
                     }
 
                     @Override // android.window.OnBackAnimationCallback
                     public final void onBackStarted(BackEvent backEvent) {
-                        BuildersKt.launch$default(CoroutineScope.this, null, null, new ModalBottomSheetDialogLayout$Api34Impl$createBackCallback$1$onBackStarted$1(animatable, backEvent, null), 3);
+                        BuildersKt.launch$default(coroutineScope, null, null, new ModalBottomSheetDialogLayout$Api34Impl$createBackCallback$1$onBackStarted$1(animatable, backEvent, null), 3);
                     }
                 };
             }
             ModalBottomSheetDialogLayout$Api34Impl$createBackCallback$1 modalBottomSheetDialogLayout$Api34Impl$createBackCallback$1 = this.backCallback;
             int i2 = Api33Impl.$r8$clinit;
-            if (modalBottomSheetDialogLayout$Api34Impl$createBackCallback$1 == null || (findOnBackInvokedDispatcher = findOnBackInvokedDispatcher()) == null) {
+            if (modalBottomSheetDialogLayout$Api34Impl$createBackCallback$1 == null || (onBackInvokedDispatcherFindOnBackInvokedDispatcher = findOnBackInvokedDispatcher()) == null) {
                 return;
             }
-            findOnBackInvokedDispatcher.registerOnBackInvokedCallback(0, modalBottomSheetDialogLayout$Api34Impl$createBackCallback$1);
+            onBackInvokedDispatcherFindOnBackInvokedDispatcher.registerOnBackInvokedCallback(0, modalBottomSheetDialogLayout$Api34Impl$createBackCallback$1);
         }
     }
 
     @Override // android.view.ViewGroup, android.view.View
     public final void onDetachedFromWindow() {
-        OnBackInvokedDispatcher findOnBackInvokedDispatcher;
+        OnBackInvokedDispatcher onBackInvokedDispatcherFindOnBackInvokedDispatcher;
         super.onDetachedFromWindow();
         ModalBottomSheetDialogLayout$Api34Impl$createBackCallback$1 modalBottomSheetDialogLayout$Api34Impl$createBackCallback$1 = this.backCallback;
         int i = Api33Impl.$r8$clinit;
-        if (modalBottomSheetDialogLayout$Api34Impl$createBackCallback$1 != null && (findOnBackInvokedDispatcher = findOnBackInvokedDispatcher()) != null) {
-            findOnBackInvokedDispatcher.unregisterOnBackInvokedCallback(modalBottomSheetDialogLayout$Api34Impl$createBackCallback$1);
+        if (modalBottomSheetDialogLayout$Api34Impl$createBackCallback$1 != null && (onBackInvokedDispatcherFindOnBackInvokedDispatcher = findOnBackInvokedDispatcher()) != null) {
+            onBackInvokedDispatcherFindOnBackInvokedDispatcher.unregisterOnBackInvokedCallback(modalBottomSheetDialogLayout$Api34Impl$createBackCallback$1);
         }
         this.backCallback = null;
     }

@@ -5,7 +5,6 @@ import com.android.systemui.animation.Expandable;
 import com.android.systemui.plugins.qs.QSTile;
 import kotlin.NotImplementedError;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class QuickTileKt$getDummyTile$1 implements QSTile {
     @Override // com.android.systemui.plugins.qs.QSTile

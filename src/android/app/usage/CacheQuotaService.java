@@ -60,9 +60,9 @@ public abstract class CacheQuotaService extends Service {
             int i = message.what;
             if (i == 1) {
                 Pair pair = (Pair) message.obj;
-                List<CacheQuotaHint> onComputeCacheQuotaHints = CacheQuotaService.this.onComputeCacheQuotaHints((List) pair.second);
+                List<CacheQuotaHint> listOnComputeCacheQuotaHints = CacheQuotaService.this.onComputeCacheQuotaHints((List) pair.second);
                 Bundle bundle = new Bundle();
-                bundle.putParcelableList(CacheQuotaService.REQUEST_LIST_KEY, onComputeCacheQuotaHints);
+                bundle.putParcelableList(CacheQuotaService.REQUEST_LIST_KEY, listOnComputeCacheQuotaHints);
                 ((RemoteCallback) pair.first).sendResult(bundle);
                 return;
             }

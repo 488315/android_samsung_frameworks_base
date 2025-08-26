@@ -1,6 +1,7 @@
 package com.android.keyguard;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.drawable.ShapeDrawable;
 import android.view.MotionEvent;
@@ -10,7 +11,6 @@ import android.widget.ListView;
 import com.android.systemui.R;
 import com.android.systemui.plugins.FalsingManager;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardUserSwitcherPopupMenu extends ListPopupWindow {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -27,7 +27,7 @@ public class KeyguardUserSwitcherPopupMenu extends ListPopupWindow {
     }
 
     @Override // android.widget.ListPopupWindow
-    public final void show() {
+    public final void show() throws Resources.NotFoundException {
         super.show();
         ListView listView = getListView();
         listView.setVerticalScrollBarEnabled(false);
@@ -63,7 +63,7 @@ public class KeyguardUserSwitcherPopupMenu extends ListPopupWindow {
         listView.setOnTouchListener(new View.OnTouchListener() { // from class: com.android.keyguard.KeyguardUserSwitcherPopupMenu$$ExternalSyntheticLambda0
             @Override // android.view.View.OnTouchListener
             public final boolean onTouch(View view, MotionEvent motionEvent) {
-                KeyguardUserSwitcherPopupMenu keyguardUserSwitcherPopupMenu = KeyguardUserSwitcherPopupMenu.this;
+                KeyguardUserSwitcherPopupMenu keyguardUserSwitcherPopupMenu = this.f$0;
                 int i = KeyguardUserSwitcherPopupMenu.$r8$clinit;
                 keyguardUserSwitcherPopupMenu.getClass();
                 if (motionEvent.getActionMasked() == 0) {

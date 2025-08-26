@@ -25,7 +25,6 @@ import kotlin.collections.MapsKt__MapsKt;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AnimatedContentTransitionScopeImpl<S> implements AnimatedContentTransitionScope<S> {
     public Alignment contentAlignment;
@@ -33,7 +32,6 @@ public final class AnimatedContentTransitionScopeImpl<S> implements AnimatedCont
     public final MutableScatterMap targetSizeMap;
     public final Transition transition;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class SizeModifierElement<S> extends ModifierNodeElement<SizeModifierNode<S>> {
         public final AnimatedContentTransitionScopeImpl scope;
         public final Transition.DeferredAnimation sizeAnimation;
@@ -59,9 +57,9 @@ public final class AnimatedContentTransitionScopeImpl<S> implements AnimatedCont
         }
 
         public final int hashCode() {
-            int hashCode = this.scope.hashCode() * 31;
+            int iHashCode = this.scope.hashCode() * 31;
             Transition.DeferredAnimation deferredAnimation = this.sizeAnimation;
-            return this.sizeTransform.hashCode() + ((hashCode + (deferredAnimation != null ? deferredAnimation.hashCode() : 0)) * 31);
+            return this.sizeTransform.hashCode() + ((iHashCode + (deferredAnimation != null ? deferredAnimation.hashCode() : 0)) * 31);
         }
 
         @Override // androidx.compose.ui.node.ModifierNodeElement
@@ -73,7 +71,6 @@ public final class AnimatedContentTransitionScopeImpl<S> implements AnimatedCont
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class SizeModifierNode<S> extends LayoutModifierNodeWithPassThroughIntrinsics {
         public long lastSize = AnimatedContentKt.UnspecifiedSize;
         public AnimatedContentTransitionScopeImpl scope;
@@ -90,21 +87,20 @@ public final class AnimatedContentTransitionScopeImpl<S> implements AnimatedCont
         /* renamed from: measure-3p2s80s, reason: not valid java name */
         public final MeasureResult mo4measure3p2s80s(MeasureScope measureScope, Measurable measurable, long j) {
             final long j2;
-            MeasureResult layout$1;
-            final Placeable mo608measureBRTryo0 = measurable.mo608measureBRTryo0(j);
+            final Placeable placeableMo610measureBRTryo0 = measurable.mo610measureBRTryo0(j);
             if (measureScope.isLookingAhead()) {
-                j2 = (mo608measureBRTryo0.width << 32) | (mo608measureBRTryo0.height & 4294967295L);
+                j2 = (placeableMo610measureBRTryo0.width << 32) | (placeableMo610measureBRTryo0.height & 4294967295L);
                 IntSize.Companion companion = IntSize.Companion;
             } else {
                 Transition.DeferredAnimation deferredAnimation = this.sizeAnimation;
                 if (deferredAnimation == null) {
-                    j2 = (mo608measureBRTryo0.width << 32) | (mo608measureBRTryo0.height & 4294967295L);
+                    j2 = (placeableMo610measureBRTryo0.width << 32) | (placeableMo610measureBRTryo0.height & 4294967295L);
                     IntSize.Companion companion2 = IntSize.Companion;
                     this.lastSize = j2;
                 } else {
-                    final long j3 = (mo608measureBRTryo0.height & 4294967295L) | (mo608measureBRTryo0.width << 32);
+                    final long j3 = (placeableMo610measureBRTryo0.height & 4294967295L) | (placeableMo610measureBRTryo0.width << 32);
                     IntSize.Companion companion3 = IntSize.Companion;
-                    Transition.DeferredAnimation.DeferredAnimationData animate = deferredAnimation.animate(new Function1(this) { // from class: androidx.compose.animation.AnimatedContentTransitionScopeImpl$SizeModifierNode$measure$size$1
+                    Transition.DeferredAnimation.DeferredAnimationData deferredAnimationDataAnimate = deferredAnimation.animate(new Function1(this) { // from class: androidx.compose.animation.AnimatedContentTransitionScopeImpl$SizeModifierNode$measure$size$1
                         final /* synthetic */ AnimatedContentTransitionScopeImpl.SizeModifierNode<Object> this$0;
 
                         /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
@@ -115,14 +111,14 @@ public final class AnimatedContentTransitionScopeImpl<S> implements AnimatedCont
 
                         @Override // kotlin.jvm.functions.Function1
                         /* renamed from: invoke */
-                        public final Object mo779invoke(Object obj) {
+                        public final Object mo781invoke(Object obj) {
                             long j4;
                             Transition.Segment segment = (Transition.Segment) obj;
                             long j5 = 0;
                             if (Intrinsics.areEqual(segment.getInitialState(), this.this$0.scope.getInitialState())) {
                                 AnimatedContentTransitionScopeImpl.SizeModifierNode<Object> sizeModifierNode = this.this$0;
                                 j4 = j3;
-                                if (!IntSize.m861equalsimpl0(sizeModifierNode.lastSize, AnimatedContentKt.UnspecifiedSize)) {
+                                if (!IntSize.m863equalsimpl0(sizeModifierNode.lastSize, AnimatedContentKt.UnspecifiedSize)) {
                                     j4 = sizeModifierNode.lastSize;
                                 }
                             } else {
@@ -142,7 +138,7 @@ public final class AnimatedContentTransitionScopeImpl<S> implements AnimatedCont
                             }
                             SizeTransform sizeTransform = (SizeTransform) this.this$0.sizeTransform.getValue();
                             if (sizeTransform != null) {
-                                FiniteAnimationSpec finiteAnimationSpec = (FiniteAnimationSpec) ((SizeTransformImpl) sizeTransform).sizeAnimationSpec.invoke(IntSize.m859boximpl(j4), IntSize.m859boximpl(j5));
+                                FiniteAnimationSpec finiteAnimationSpec = (FiniteAnimationSpec) ((SizeTransformImpl) sizeTransform).sizeAnimationSpec.invoke(IntSize.m861boximpl(j4), IntSize.m861boximpl(j5));
                                 if (finiteAnimationSpec != null) {
                                     return finiteAnimationSpec;
                                 }
@@ -160,12 +156,12 @@ public final class AnimatedContentTransitionScopeImpl<S> implements AnimatedCont
 
                         @Override // kotlin.jvm.functions.Function1
                         /* renamed from: invoke */
-                        public final Object mo779invoke(Object obj) {
+                        public final Object mo781invoke(Object obj) {
                             long j4;
                             if (Intrinsics.areEqual(obj, this.this$0.scope.getInitialState())) {
                                 AnimatedContentTransitionScopeImpl.SizeModifierNode<Object> sizeModifierNode = this.this$0;
                                 j4 = j3;
-                                if (!IntSize.m861equalsimpl0(sizeModifierNode.lastSize, AnimatedContentKt.UnspecifiedSize)) {
+                                if (!IntSize.m863equalsimpl0(sizeModifierNode.lastSize, AnimatedContentKt.UnspecifiedSize)) {
                                     j4 = sizeModifierNode.lastSize;
                                 }
                             } else {
@@ -177,15 +173,15 @@ public final class AnimatedContentTransitionScopeImpl<S> implements AnimatedCont
                                     j4 = 0;
                                 }
                             }
-                            return IntSize.m859boximpl(j4);
+                            return IntSize.m861boximpl(j4);
                         }
                     });
                     this.scope.getClass();
-                    j2 = ((IntSize) animate.getValue()).packedValue;
-                    this.lastSize = ((IntSize) animate.getValue()).packedValue;
+                    j2 = ((IntSize) deferredAnimationDataAnimate.getValue()).packedValue;
+                    this.lastSize = ((IntSize) deferredAnimationDataAnimate.getValue()).packedValue;
                 }
             }
-            layout$1 = measureScope.layout$1((int) (j2 >> 32), (int) (4294967295L & j2), MapsKt__MapsKt.emptyMap(), new Function1(this) { // from class: androidx.compose.animation.AnimatedContentTransitionScopeImpl$SizeModifierNode$measure$1
+            return measureScope.layout$1((int) (j2 >> 32), (int) (4294967295L & j2), MapsKt__MapsKt.emptyMap(), new Function1(this) { // from class: androidx.compose.animation.AnimatedContentTransitionScopeImpl$SizeModifierNode$measure$1
                 final /* synthetic */ AnimatedContentTransitionScopeImpl.SizeModifierNode<Object> this$0;
 
                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
@@ -196,16 +192,15 @@ public final class AnimatedContentTransitionScopeImpl<S> implements AnimatedCont
 
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
+                public final Object mo781invoke(Object obj) {
                     Alignment alignment = this.this$0.scope.contentAlignment;
-                    Placeable placeable = mo608measureBRTryo0;
+                    Placeable placeable = placeableMo610measureBRTryo0;
                     long j4 = (placeable.width << 32) | (placeable.height & 4294967295L);
                     IntSize.Companion companion4 = IntSize.Companion;
-                    Placeable.PlacementScope.m626place70tqf50$default((Placeable.PlacementScope) obj, mo608measureBRTryo0, alignment.mo352alignKFBX0sM(j4, j2, LayoutDirection.Ltr));
+                    Placeable.PlacementScope.m628place70tqf50$default((Placeable.PlacementScope) obj, placeableMo610measureBRTryo0, alignment.mo353alignKFBX0sM(j4, j2, LayoutDirection.Ltr));
                     return Unit.INSTANCE;
                 }
             });
-            return layout$1;
         }
 
         @Override // androidx.compose.ui.Modifier.Node
@@ -218,7 +213,7 @@ public final class AnimatedContentTransitionScopeImpl<S> implements AnimatedCont
         this.transition = transition;
         this.contentAlignment = alignment;
         IntSize.Companion.getClass();
-        this.measuredSize$delegate = SnapshotStateKt.mutableStateOf$default(IntSize.m859boximpl(0L));
+        this.measuredSize$delegate = SnapshotStateKt.mutableStateOf$default(IntSize.m861boximpl(0L));
         this.targetSizeMap = ScatterMapKt.mutableScatterMapOf();
     }
 
@@ -232,7 +227,6 @@ public final class AnimatedContentTransitionScopeImpl<S> implements AnimatedCont
         return this.transition.getSegment().getTargetState();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ChildData implements ParentDataModifier {
         public final MutableState isTarget$delegate;
 

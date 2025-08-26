@@ -1,6 +1,7 @@
 package com.android.internal.widget;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -37,7 +38,7 @@ public class NotificationMaxHeightFrameLayout extends FrameLayout {
         super.onMeasure(i, i2);
     }
 
-    private static int getFontScaledHeight(Context context, int i) {
+    private static int getFontScaledHeight(Context context, int i) throws Resources.NotFoundException {
         return (int) (context.getResources().getDimensionPixelSize(i) * Math.max(1.0f, context.getResources().getDisplayMetrics().scaledDensity / context.getResources().getDisplayMetrics().density));
     }
 }

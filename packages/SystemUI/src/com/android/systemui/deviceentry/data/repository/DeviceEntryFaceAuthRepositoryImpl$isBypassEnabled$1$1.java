@@ -12,7 +12,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class DeviceEntryFaceAuthRepositoryImpl$isBypassEnabled$1$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ KeyguardBypassController $it;
@@ -50,21 +49,21 @@ final class DeviceEntryFaceAuthRepositoryImpl$isBypassEnabled$1$1 extends Suspen
                 @Override // com.android.systemui.statusbar.phone.KeyguardBypassController.OnBypassStateChangedListener
                 public final void onBypassStateChanged(boolean z) {
                     ChannelExt channelExt = ChannelExt.INSTANCE;
-                    Boolean valueOf = Boolean.valueOf(z);
+                    Boolean boolValueOf = Boolean.valueOf(z);
                     channelExt.getClass();
-                    ChannelExt.trySendWithFailureLogging(ProducerScope.this, valueOf, "DeviceEntryFaceAuthRepository", "BypassStateChanged");
+                    ChannelExt.trySendWithFailureLogging(producerScope, boolValueOf, "DeviceEntryFaceAuthRepository", "BypassStateChanged");
                 }
             };
             this.$it.registerOnBypassStateChangedListener(r1);
             ChannelExt channelExt = ChannelExt.INSTANCE;
-            Boolean valueOf = Boolean.valueOf(this.$it.getBypassEnabled());
+            Boolean boolValueOf = Boolean.valueOf(this.$it.getBypassEnabled());
             channelExt.getClass();
-            ChannelExt.trySendWithFailureLogging(producerScope, valueOf, "DeviceEntryFaceAuthRepository", "BypassStateChanged");
+            ChannelExt.trySendWithFailureLogging(producerScope, boolValueOf, "DeviceEntryFaceAuthRepository", "BypassStateChanged");
             final KeyguardBypassController keyguardBypassController = this.$it;
             Function0 function0 = new Function0() { // from class: com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryImpl$isBypassEnabled$1$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    KeyguardBypassController.this.unregisterOnBypassStateChangedListener(r1);
+                    keyguardBypassController.unregisterOnBypassStateChangedListener(r1);
                     return Unit.INSTANCE;
                 }
             };

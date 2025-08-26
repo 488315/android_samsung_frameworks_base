@@ -14,12 +14,10 @@ import com.android.systemui.statusbar.pipeline.wifi.shared.model.WifiNetworkMode
 import kotlin.NoWhenBranchMatchedException;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public interface WifiIcon extends Diffable {
     public static final Companion Companion = Companion.$$INSTANCE;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Hidden implements WifiIcon {
         public static final Hidden INSTANCE = new Hidden();
 
@@ -31,7 +29,6 @@ public interface WifiIcon extends Diffable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Visible implements WifiIcon {
         public final ContentDescription.Loaded contentDescription;
         public final Icon.Resource icon;
@@ -59,12 +56,10 @@ public interface WifiIcon extends Diffable {
         tableRowLoggerImpl.logChange("icon", toString());
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public static final /* synthetic */ Companion $$INSTANCE = new Companion();
         public static final int NO_INTERNET = R.string.data_connection_no_internet;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public abstract /* synthetic */ class WhenMappings {
             public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -138,10 +133,10 @@ public interface WifiIcon extends Diffable {
                     return z3 ? new Visible(WifiIcons.WIFI_FULL_ICONS[i3], new ContentDescription.Loaded(string)) : new Visible(WifiIcons.WIFI_NO_INTERNET_ICONS[i3], new ContentDescription.Loaded(AbstractResolvableFuture$$ExternalSyntheticOutline0.m(string, ",", context.getString(i2))));
                 }
                 String string2 = context.getString(signalIcon$IconGroup.contentDesc[active.level]);
-                boolean equals = Integer.valueOf(active.receivedInetCondition).equals(-1);
+                boolean zEquals = Integer.valueOf(active.receivedInetCondition).equals(-1);
                 int[][] iArr = signalIcon$IconGroup.sbIcons;
                 int i4 = active.level;
-                return ((equals && active.isValidated) || Integer.valueOf(active.receivedInetCondition).equals(1)) ? new Visible(iArr[1][i4], new ContentDescription.Loaded(string2)) : new Visible(iArr[0][i4], new ContentDescription.Loaded(AbstractResolvableFuture$$ExternalSyntheticOutline0.m(string2, ",", context.getString(i2))));
+                return ((zEquals && active.isValidated) || Integer.valueOf(active.receivedInetCondition).equals(1)) ? new Visible(iArr[1][i4], new ContentDescription.Loaded(string2)) : new Visible(iArr[0][i4], new ContentDescription.Loaded(AbstractResolvableFuture$$ExternalSyntheticOutline0.m(string2, ",", context.getString(i2))));
             }
             switch (WhenMappings.$EnumSwitchMapping$0[hotspotDeviceType.ordinal()]) {
                 case 1:

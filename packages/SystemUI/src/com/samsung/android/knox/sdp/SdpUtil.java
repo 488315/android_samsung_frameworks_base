@@ -15,7 +15,6 @@ import com.samsung.android.knox.sdp.core.SdpEngineInfo;
 import com.samsung.android.knox.sdp.core.SdpException;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SdpUtil {
     private static final String ANDROID_DEFAULT_ALIAS = "android_";
@@ -32,24 +31,22 @@ public class SdpUtil {
     private static final boolean runAllConvert = false;
     private ArrayList<SdpStateBinderListener> mBinderListeners = new ArrayList<>();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class EngineRemovedEvent extends SdpEvent {
         public EngineRemovedEvent(SdpUtil sdpUtil) {
             super(sdpUtil, 2);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class SdpEvent {
         static final int ON_ENGINE_REMOVED = 2;
         static final int ON_STATE_CHANGED = 1;
         private Message mMessage;
 
         public SdpEvent(SdpUtil sdpUtil, int i) {
-            Message obtain = Message.obtain();
-            this.mMessage = obtain;
-            obtain.what = i;
-            obtain.obj = this;
+            Message messageObtain = Message.obtain();
+            this.mMessage = messageObtain;
+            messageObtain.what = i;
+            messageObtain.obj = this;
         }
 
         public Message getMessage() {
@@ -57,7 +54,6 @@ public class SdpUtil {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class SdpStateBinderListener extends ISdpListener.Stub {
         private final Handler mHandler;
         SdpStateListener mListener;
@@ -101,7 +97,6 @@ public class SdpUtil {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class StateChangeEvent extends SdpEvent {
         public int state;
 
@@ -115,10 +110,10 @@ public class SdpUtil {
     }
 
     private void enforcePermission() throws SdpException {
-        IDarManagerService asInterface = IDarManagerService.Stub.asInterface(ServiceManager.getService("dar"));
-        if (asInterface != null) {
+        IDarManagerService iDarManagerServiceAsInterface = IDarManagerService.Stub.asInterface(ServiceManager.getService("dar"));
+        if (iDarManagerServiceAsInterface != null) {
             try {
-                if (asInterface.isLicensed() == 0) {
+                if (iDarManagerServiceAsInterface.isLicensed() == 0) {
                 } else {
                     throw new SdpException(-9);
                 }
@@ -134,16 +129,16 @@ public class SdpUtil {
         }
         int length = str.length() - 8;
         char[] charArray = str.substring(8).toCharArray();
-        int i = 0;
-        for (int i2 = 0; i2 < length; i2++) {
-            if (!Character.isDigit(charArray[i2])) {
+        int iPow = 0;
+        for (int i = 0; i < length; i++) {
+            if (!Character.isDigit(charArray[i])) {
                 return -1;
             }
-            int numericValue = Character.getNumericValue(charArray[i2]);
-            SuggestionsAdapter$$ExternalSyntheticOutline0.m(numericValue, i2, "num:", " index-", TAG);
-            i = i2 == 8 ? i + numericValue : (int) ((Math.pow(10.0d, (length - i2) - 1) * numericValue) + i);
+            int numericValue = Character.getNumericValue(charArray[i]);
+            SuggestionsAdapter$$ExternalSyntheticOutline0.m(numericValue, i, "num:", " index-", TAG);
+            iPow = i == 8 ? iPow + numericValue : (int) ((Math.pow(10.0d, (length - i) - 1) * numericValue) + iPow);
         }
-        return i;
+        return iPow;
     }
 
     public static String getAndroidDefaultAlias(int i) {
@@ -164,9 +159,9 @@ public class SdpUtil {
         if (str == null || str.isEmpty()) {
             return true;
         }
-        int extractAndroidDefaultUserId = extractAndroidDefaultUserId(str);
-        ListPopupWindow$$ExternalSyntheticOutline0.m(extractAndroidDefaultUserId, "detecected userId : ", TAG);
-        return extractAndroidDefaultUserId >= 0 && extractAndroidDefaultUserId <= ANDROID_DEFAULT_USER_ID_MAX;
+        int iExtractAndroidDefaultUserId = extractAndroidDefaultUserId(str);
+        ListPopupWindow$$ExternalSyntheticOutline0.m(iExtractAndroidDefaultUserId, "detecected userId : ", TAG);
+        return iExtractAndroidDefaultUserId >= 0 && iExtractAndroidDefaultUserId <= ANDROID_DEFAULT_USER_ID_MAX;
     }
 
     public static boolean isAndroidDefaultUser(int i) {
@@ -179,10 +174,10 @@ public class SdpUtil {
 
     public SdpEngineInfo getEngineInfo(String str) throws SdpException {
         enforcePermission();
-        IDarManagerService asInterface = IDarManagerService.Stub.asInterface(ServiceManager.getService("dar"));
-        if (asInterface != null) {
+        IDarManagerService iDarManagerServiceAsInterface = IDarManagerService.Stub.asInterface(ServiceManager.getService("dar"));
+        if (iDarManagerServiceAsInterface != null) {
             try {
-                SdpEngineInfo engineInfo = asInterface.getEngineInfo(str);
+                SdpEngineInfo engineInfo = iDarManagerServiceAsInterface.getEngineInfo(str);
                 if (engineInfo != null) {
                     return engineInfo;
                 }
@@ -204,12 +199,12 @@ public class SdpUtil {
     }
 
     public boolean isSdpSupported() {
-        IDarManagerService asInterface = IDarManagerService.Stub.asInterface(ServiceManager.getService("dar"));
-        if (asInterface == null) {
+        IDarManagerService iDarManagerServiceAsInterface = IDarManagerService.Stub.asInterface(ServiceManager.getService("dar"));
+        if (iDarManagerServiceAsInterface == null) {
             return false;
         }
         try {
-            return asInterface.isSdpSupported();
+            return iDarManagerServiceAsInterface.isSdpSupported();
         } catch (RemoteException e) {
             Log.e(TAG, "Failed to talk with sdp service...", e);
             return false;
@@ -217,12 +212,12 @@ public class SdpUtil {
     }
 
     public boolean registerListener(String str, SdpStateListener sdpStateListener) {
-        IDarManagerService asInterface = IDarManagerService.Stub.asInterface(ServiceManager.getService("dar"));
+        IDarManagerService iDarManagerServiceAsInterface = IDarManagerService.Stub.asInterface(ServiceManager.getService("dar"));
         int i = 0;
-        if (asInterface != null) {
+        if (iDarManagerServiceAsInterface != null) {
             try {
                 SdpStateBinderListener sdpStateBinderListener = new SdpStateBinderListener(this, sdpStateListener, i);
-                if (asInterface.registerListener(str, sdpStateBinderListener) == 0) {
+                if (iDarManagerServiceAsInterface.registerListener(str, sdpStateBinderListener) == 0) {
                     this.mBinderListeners.add(sdpStateBinderListener);
                     return true;
                 }
@@ -235,15 +230,15 @@ public class SdpUtil {
     }
 
     public boolean unregisterListener(String str, SdpStateListener sdpStateListener) {
-        IDarManagerService asInterface = IDarManagerService.Stub.asInterface(ServiceManager.getService("dar"));
-        if (asInterface != null) {
+        IDarManagerService iDarManagerServiceAsInterface = IDarManagerService.Stub.asInterface(ServiceManager.getService("dar"));
+        if (iDarManagerServiceAsInterface != null) {
             int size = this.mBinderListeners.size();
             for (int i = 0; i < size; i++) {
                 SdpStateBinderListener sdpStateBinderListener = this.mBinderListeners.get(i);
                 if (sdpStateBinderListener.getListener() == sdpStateListener) {
                     this.mBinderListeners.remove(i);
                     try {
-                        if (asInterface.unregisterListener(str, sdpStateBinderListener) != 0) {
+                        if (iDarManagerServiceAsInterface.unregisterListener(str, sdpStateBinderListener) != 0) {
                         }
                     } catch (RemoteException e) {
                         Log.e(TAG, "RemoteException from call unregisterListener", e);

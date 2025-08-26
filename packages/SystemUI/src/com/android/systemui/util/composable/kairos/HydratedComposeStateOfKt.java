@@ -11,21 +11,18 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class HydratedComposeStateOfKt {
     public static final <T> State<T> hydratedComposeStateOf(KairosBuilder kairosBuilder, final com.android.systemui.kairos.State state, T t) {
-        final MutableState mutableStateOf$default = SnapshotStateKt.mutableStateOf$default(t);
+        final MutableState mutableStateMutableStateOf$default = SnapshotStateKt.mutableStateOf$default(t);
         kairosBuilder.onActivated(new Function1() { // from class: com.android.systemui.util.composable.kairos.HydratedComposeStateOfKt$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                Unit hydratedComposeStateOf$lambda$2$lambda$1;
-                hydratedComposeStateOf$lambda$2$lambda$1 = HydratedComposeStateOfKt.hydratedComposeStateOf$lambda$2$lambda$1(com.android.systemui.kairos.State.this, mutableStateOf$default, (BuildScope) obj);
-                return hydratedComposeStateOf$lambda$2$lambda$1;
+            public final Object mo781invoke(Object obj) {
+                return HydratedComposeStateOfKt.hydratedComposeStateOf$lambda$2$lambda$1(state, mutableStateMutableStateOf$default, (BuildScope) obj);
             }
         });
-        return mutableStateOf$default;
+        return mutableStateMutableStateOf$default;
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -33,9 +30,7 @@ public final class HydratedComposeStateOfKt {
         ((BuildScopeImpl) buildScope).observe(state, new Function2() { // from class: com.android.systemui.util.composable.kairos.HydratedComposeStateOfKt$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
-                Unit hydratedComposeStateOf$lambda$2$lambda$1$lambda$0;
-                hydratedComposeStateOf$lambda$2$lambda$1$lambda$0 = HydratedComposeStateOfKt.hydratedComposeStateOf$lambda$2$lambda$1$lambda$0(MutableState.this, (EffectScope) obj, obj2);
-                return hydratedComposeStateOf$lambda$2$lambda$1$lambda$0;
+                return HydratedComposeStateOfKt.hydratedComposeStateOf$lambda$2$lambda$1$lambda$0(mutableState, (EffectScope) obj, obj2);
             }
         });
         return Unit.INSTANCE;

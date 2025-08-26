@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.hardware.input.InputManager;
 import android.telephony.PinResult;
 import android.telephony.TelephonyManager;
@@ -24,7 +25,6 @@ import com.android.systemui.util.PluralMessageFormaterKt;
 import com.android.systemui.util.ViewController;
 import com.android.systemui.vibrate.VibrationUtil;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardSimPinViewController extends KeyguardSecPinBasedInputViewController {
     public CheckSimPin mCheckSimPinThread;
@@ -36,7 +36,6 @@ public class KeyguardSimPinViewController extends KeyguardSecPinBasedInputViewCo
     public int mSubId;
     public final TelephonyManager mTelephonyManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.keyguard.KeyguardSimPinViewController$2, reason: invalid class name */
     public class AnonymousClass2 extends CheckSimPin {
         public AnonymousClass2(String str, int i) {
@@ -49,7 +48,6 @@ public class KeyguardSimPinViewController extends KeyguardSecPinBasedInputViewCo
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class CheckSimPin extends Thread {
         public static final /* synthetic */ int $r8$clinit = 0;
         public final String mPin;
@@ -64,14 +62,14 @@ public class KeyguardSimPinViewController extends KeyguardSecPinBasedInputViewCo
 
         @Override // java.lang.Thread, java.lang.Runnable
         public void run() {
-            PinResult supplyIccLockPin = KeyguardSimPinViewController.this.mTelephonyManager.createForSubscriptionId(this.mSubId).supplyIccLockPin(this.mPin);
-            supplyIccLockPin.toString();
-            ((KeyguardSimPinView) ((ViewController) KeyguardSimPinViewController.this).mView).post(new KeyguardSimPinViewController$2$$ExternalSyntheticLambda0(this, supplyIccLockPin, 1));
+            PinResult pinResultSupplyIccLockPin = KeyguardSimPinViewController.this.mTelephonyManager.createForSubscriptionId(this.mSubId).supplyIccLockPin(this.mPin);
+            pinResultSupplyIccLockPin.toString();
+            ((KeyguardSimPinView) ((ViewController) KeyguardSimPinViewController.this).mView).post(new KeyguardSimPinViewController$2$$ExternalSyntheticLambda0(this, pinResultSupplyIccLockPin, 1));
         }
     }
 
     /* renamed from: -$$Nest$mgetSimRemainingAttemptsDialog, reason: not valid java name */
-    public static Dialog m961$$Nest$mgetSimRemainingAttemptsDialog(KeyguardSimPinViewController keyguardSimPinViewController, int i) {
+    public static Dialog m963$$Nest$mgetSimRemainingAttemptsDialog(KeyguardSimPinViewController keyguardSimPinViewController, int i) throws Resources.NotFoundException {
         String pinPasswordErrorMessage = keyguardSimPinViewController.getPinPasswordErrorMessage(i);
         AlertDialog alertDialog = keyguardSimPinViewController.mRemainingAttemptsDialog;
         if (alertDialog == null) {
@@ -79,9 +77,9 @@ public class KeyguardSimPinViewController extends KeyguardSecPinBasedInputViewCo
             builder.setMessage(pinPasswordErrorMessage);
             builder.setCancelable(false);
             builder.setNeutralButton(R.string.ok, (DialogInterface.OnClickListener) null);
-            AlertDialog create = builder.create();
-            keyguardSimPinViewController.mRemainingAttemptsDialog = create;
-            create.getWindow().setType(2009);
+            AlertDialog alertDialogCreate = builder.create();
+            keyguardSimPinViewController.mRemainingAttemptsDialog = alertDialogCreate;
+            alertDialogCreate.getWindow().setType(2009);
         } else {
             alertDialog.setMessage(pinPasswordErrorMessage);
         }
@@ -110,7 +108,7 @@ public class KeyguardSimPinViewController extends KeyguardSecPinBasedInputViewCo
         this.mSimImageView = (ImageView) ((KeyguardSimPinView) this.mView).findViewById(R.id.keyguard_sim);
     }
 
-    public final String getPinPasswordErrorMessage(int i) {
+    public final String getPinPasswordErrorMessage(int i) throws Resources.NotFoundException {
         String string = i == 0 ? ((KeyguardSimPinView) this.mView).getResources().getString(R.string.kg_password_wrong_pin_code_pukked) : i > 0 ? PluralMessageFormaterKt.icuMessageFormat(((KeyguardSimPinView) this.mView).getResources(), R.string.kg_password_wrong_pin_code, i) : ((KeyguardSimPinView) this.mView).getResources().getString(R.string.kg_password_pin_failed);
         if (KeyguardEsimArea.isEsimLocked(this.mSubId, ((KeyguardSimPinView) this.mView).getContext())) {
             string = ((KeyguardSimPinView) this.mView).getResources().getString(R.string.kg_sim_lock_esim_instructions, string);
@@ -145,8 +143,8 @@ public class KeyguardSimPinViewController extends KeyguardSecPinBasedInputViewCo
 
     @Override // com.android.keyguard.KeyguardSecPinBasedInputViewController, com.android.keyguard.KeyguardSecAbsKeyInputViewController
     public void verifyPasswordAndUnlock() {
-        String editable = this.mPasswordEntry.getText().toString();
-        if (editable.length() < 4 || editable.length() > 8) {
+        String string = this.mPasswordEntry.getText().toString();
+        if (string.length() < 4 || string.length() > 8) {
             ((KeyguardSimPinView) this.mView).resetPasswordText(true, true);
             getKeyguardSecurityCallback().userActivity();
             this.mMessageAreaController.setMessage(R.string.kg_invalid_sim_pin_hint);
@@ -162,7 +160,7 @@ public class KeyguardSimPinViewController extends KeyguardSecPinBasedInputViewCo
         }
         this.mSimUnlockProgressDialog.show();
         if (this.mCheckSimPinThread == null) {
-            AnonymousClass2 anonymousClass2 = new AnonymousClass2(editable, this.mSubId);
+            AnonymousClass2 anonymousClass2 = new AnonymousClass2(string, this.mSubId);
             this.mCheckSimPinThread = anonymousClass2;
             anonymousClass2.start();
         }

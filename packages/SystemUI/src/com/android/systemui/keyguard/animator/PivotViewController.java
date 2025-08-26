@@ -10,7 +10,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.Function;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class PivotViewController extends ViewAnimationController {
     public int affordancePivotX;
@@ -64,20 +63,20 @@ public final class PivotViewController extends ViewAnimationController {
                 return Float.valueOf(((View) obj).getWidth() / 2.0f);
             }
         }, new Function() { // from class: com.android.systemui.keyguard.animator.PivotViewController.6
+            /* JADX WARN: Removed duplicated region for block: B:7:0x002e  */
             @Override // java.util.function.Function
+            /*
+                Code decompiled incorrectly, please refer to instructions dump.
+            */
             public final Object apply(Object obj) {
-                int i;
+                int height;
                 if (PivotViewController.this.keyguardTouchAnimator.hasView$frameworks__base__packages__SystemUI__android_common__SystemUI_core(1)) {
                     float y = PivotViewController.this.keyguardTouchAnimator.getView$frameworks__base__packages__SystemUI__android_common__SystemUI_core(1).getY();
                     PivotViewController pivotViewController = PivotViewController.this;
-                    int i2 = pivotViewController.affordancePivotY;
-                    if (y < i2) {
-                        i = i2 - pivotViewController.keyguardTouchAnimator.getView$frameworks__base__packages__SystemUI__android_common__SystemUI_core(1).getHeight();
-                        return Float.valueOf(i);
-                    }
+                    int i = pivotViewController.affordancePivotY;
+                    height = y < ((float) i) ? i - pivotViewController.keyguardTouchAnimator.getView$frameworks__base__packages__SystemUI__android_common__SystemUI_core(1).getHeight() : -PivotViewController.this.affordancePivotY;
                 }
-                i = -PivotViewController.this.affordancePivotY;
-                return Float.valueOf(i);
+                return Float.valueOf(height);
             }
         });
         initPivot(2, new Function() { // from class: com.android.systemui.keyguard.animator.PivotViewController.7
@@ -128,7 +127,7 @@ public final class PivotViewController extends ViewAnimationController {
             public final Object apply(Object obj) {
                 int i;
                 float height;
-                int i2;
+                int height2;
                 View view = (View) obj;
                 PivotViewController pivotViewController = PivotViewController.this;
                 KeyguardTouchAnimator keyguardTouchAnimator2 = pivotViewController.keyguardTouchAnimator;
@@ -136,23 +135,22 @@ public final class PivotViewController extends ViewAnimationController {
                     float y = view.getY();
                     i = pivotViewController.affordancePivotY;
                     if (y < i) {
-                        i2 = i - keyguardTouchAnimator2.getView$frameworks__base__packages__SystemUI__android_common__SystemUI_core(1).getHeight();
-                        height = i2;
+                        height2 = i - keyguardTouchAnimator2.getView$frameworks__base__packages__SystemUI__android_common__SystemUI_core(1).getHeight();
+                    }
+                    height = height2;
+                    return Float.valueOf(height);
+                }
+                if (keyguardTouchAnimator2.hasView$frameworks__base__packages__SystemUI__android_common__SystemUI_core(1)) {
+                    float y2 = keyguardTouchAnimator2.getView$frameworks__base__packages__SystemUI__android_common__SystemUI_core(1).getY();
+                    int i2 = pivotViewController.affordancePivotY;
+                    if (y2 < i2) {
+                        height = i2 - keyguardTouchAnimator2.getView$frameworks__base__packages__SystemUI__android_common__SystemUI_core(1).getHeight();
                         return Float.valueOf(height);
                     }
-                } else {
-                    if (keyguardTouchAnimator2.hasView$frameworks__base__packages__SystemUI__android_common__SystemUI_core(1)) {
-                        float y2 = keyguardTouchAnimator2.getView$frameworks__base__packages__SystemUI__android_common__SystemUI_core(1).getY();
-                        int i3 = pivotViewController.affordancePivotY;
-                        if (y2 < i3) {
-                            height = i3 - keyguardTouchAnimator2.getView$frameworks__base__packages__SystemUI__android_common__SystemUI_core(1).getHeight();
-                            return Float.valueOf(height);
-                        }
-                    }
-                    i = pivotViewController.affordancePivotY;
                 }
-                i2 = -i;
-                height = i2;
+                i = pivotViewController.affordancePivotY;
+                height2 = -i;
+                height = height2;
                 return Float.valueOf(height);
             }
         });
@@ -204,9 +202,9 @@ public final class PivotViewController extends ViewAnimationController {
         ArrayList arrayList = new ArrayList();
         Iterator it = list.iterator();
         while (true) {
-            boolean hasNext = it.hasNext();
+            boolean zHasNext = it.hasNext();
             keyguardTouchAnimator = this.keyguardTouchAnimator;
-            if (!hasNext) {
+            if (!zHasNext) {
                 break;
             }
             Object next = it.next();
@@ -223,8 +221,8 @@ public final class PivotViewController extends ViewAnimationController {
         }
         Iterator it2 = this.pivotViews.iterator();
         while (it2.hasNext()) {
-            int intValue = ((Number) it2.next()).intValue();
-            if (keyguardTouchAnimator.hasView$frameworks__base__packages__SystemUI__android_common__SystemUI_core(intValue) && (view$frameworks__base__packages__SystemUI__android_common__SystemUI_core = keyguardTouchAnimator.getView$frameworks__base__packages__SystemUI__android_common__SystemUI_core(intValue)) != null && view$frameworks__base__packages__SystemUI__android_common__SystemUI_core.getVisibility() == 0 && (pair = (Pair) this.pivot.get(intValue)) != null) {
+            int iIntValue = ((Number) it2.next()).intValue();
+            if (keyguardTouchAnimator.hasView$frameworks__base__packages__SystemUI__android_common__SystemUI_core(iIntValue) && (view$frameworks__base__packages__SystemUI__android_common__SystemUI_core = keyguardTouchAnimator.getView$frameworks__base__packages__SystemUI__android_common__SystemUI_core(iIntValue)) != null && view$frameworks__base__packages__SystemUI__android_common__SystemUI_core.getVisibility() == 0 && (pair = (Pair) this.pivot.get(iIntValue)) != null) {
                 view$frameworks__base__packages__SystemUI__android_common__SystemUI_core.setPivotX(((Number) ((Function) pair.first).apply(view$frameworks__base__packages__SystemUI__android_common__SystemUI_core)).floatValue());
                 view$frameworks__base__packages__SystemUI__android_common__SystemUI_core.setPivotY(((Number) ((Function) pair.second).apply(view$frameworks__base__packages__SystemUI__android_common__SystemUI_core)).floatValue());
             }

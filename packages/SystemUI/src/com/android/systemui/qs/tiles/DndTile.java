@@ -1,6 +1,8 @@
 package com.android.systemui.qs.tiles;
 
 import android.app.ActivityManager;
+import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -53,7 +55,6 @@ import com.android.systemui.util.settings.SecureSettings;
 import com.samsung.android.knox.net.vpn.KnoxVpnPolicyConstants;
 import java.util.Calendar;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class DndTile extends SQSTileImpl {
     public static final Intent DND_SETTINGS;
@@ -67,12 +68,31 @@ public class DndTile extends SQSTileImpl {
     public int mLastDndDurationSelected;
     public boolean mListening;
     public final PanelInteractor mPanelInteractor;
-    public final AnonymousClass3 mPrefListener;
+    public final AnonymousClass4 mPrefListener;
     public int mPreviousSetZenDuration;
     public final AnonymousClass1 mSettingZenDuration;
     public final AnonymousClass2 mSettingsObserver;
     public final SharedPreferences mSharedPreferences;
-    public final AnonymousClass4 mZenCallback;
+    public final AnonymousClass5 mZenCallback;
+
+    /* renamed from: com.android.systemui.qs.tiles.DndTile$3, reason: invalid class name */
+    public class AnonymousClass3 extends BroadcastReceiver {
+        public static final /* synthetic */ int $r8$clinit = 0;
+        public final /* synthetic */ AlertDialog val$mDialog;
+
+        public AnonymousClass3(AlertDialog alertDialog) {
+            this.val$mDialog = alertDialog;
+        }
+
+        @Override // android.content.BroadcastReceiver
+        public final void onReceive(Context context, Intent intent) {
+            if ("android.intent.action.CONFIGURATION_CHANGED".equals(intent.getAction()) && this.val$mDialog.isShowing()) {
+                DndTile dndTile = DndTile.this;
+                Intent intent2 = DndTile.DND_SETTINGS;
+                dndTile.mUiHandler.post(new DndTile$$ExternalSyntheticLambda2(this.val$mDialog, 1));
+            }
+        }
+    }
 
     static {
         new Intent("android.settings.ZEN_MODE_SETTINGS");
@@ -84,8 +104,8 @@ public class DndTile extends SQSTileImpl {
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Type inference failed for: r15v1, types: [android.database.ContentObserver, com.android.systemui.qs.tiles.DndTile$2] */
     /* JADX WARN: Type inference failed for: r2v0, types: [com.android.systemui.qs.tiles.DndTile$1] */
-    /* JADX WARN: Type inference failed for: r9v4, types: [com.android.systemui.qs.tiles.DndTile$3] */
-    /* JADX WARN: Type inference failed for: r9v5, types: [com.android.systemui.qs.tiles.DndTile$4, java.lang.Object] */
+    /* JADX WARN: Type inference failed for: r9v4, types: [com.android.systemui.qs.tiles.DndTile$4] */
+    /* JADX WARN: Type inference failed for: r9v5, types: [com.android.systemui.qs.tiles.DndTile$5, java.lang.Object] */
     public DndTile(QSHost qSHost, QsEventLogger qsEventLogger, Looper looper, Handler handler, FalsingManager falsingManager, MetricsLogger metricsLogger, StatusBarStateController statusBarStateController, ActivityStarter activityStarter, QSLogger qSLogger, ZenModeController zenModeController, SharedPreferences sharedPreferences, SecureSettings secureSettings, DialogTransitionAnimator dialogTransitionAnimator, PanelInteractor panelInteractor, GlobalSettings globalSettings) {
         super(qSHost, qsEventLogger, looper, handler, falsingManager, metricsLogger, statusBarStateController, activityStarter, qSLogger);
         this.mDndMenuSelectedItem = 0;
@@ -110,7 +130,7 @@ public class DndTile extends SQSTileImpl {
             }
         };
         this.mSettingsObserver = r15;
-        this.mPrefListener = new SharedPreferences.OnSharedPreferenceChangeListener() { // from class: com.android.systemui.qs.tiles.DndTile.3
+        this.mPrefListener = new SharedPreferences.OnSharedPreferenceChangeListener() { // from class: com.android.systemui.qs.tiles.DndTile.4
             @Override // android.content.SharedPreferences.OnSharedPreferenceChangeListener
             public final void onSharedPreferenceChanged(SharedPreferences sharedPreferences2, String str) {
                 if ("DndTileCombinedIcon".equals(str) || "DndTileVisible".equals(str)) {
@@ -118,7 +138,7 @@ public class DndTile extends SQSTileImpl {
                 }
             }
         };
-        ?? r9 = new ZenModeController.Callback() { // from class: com.android.systemui.qs.tiles.DndTile.4
+        ?? r9 = new ZenModeController.Callback() { // from class: com.android.systemui.qs.tiles.DndTile.5
             @Override // com.android.systemui.statusbar.policy.ZenModeController.Callback
             public final void onZenChanged(int i) {
                 Intent intent = DndTile.DND_SETTINGS;
@@ -190,12 +210,12 @@ public class DndTile extends SQSTileImpl {
 
     @Override // com.android.systemui.qs.tileimpl.QSTileImpl
     public final void handleClick(Expandable expandable) {
-        boolean hasUserRestriction = ((UserManager) this.mContext.getSystemService("user")).hasUserRestriction("no_adjust_volume");
-        Log.i(this.TAG, KeyguardUpdateMonitorLogger$$ExternalSyntheticOutline0.m("getDisallowAdjustVolume enabled = ", hasUserRestriction));
-        if (hasUserRestriction) {
+        boolean zHasUserRestriction = ((UserManager) this.mContext.getSystemService("user")).hasUserRestriction("no_adjust_volume");
+        Log.i(this.TAG, KeyguardUpdateMonitorLogger$$ExternalSyntheticOutline0.m("getDisallowAdjustVolume enabled = ", zHasUserRestriction));
+        if (zHasUserRestriction) {
             ((PanelInteractorImpl) this.mPanelInteractor).collapsePanels();
             Context context = this.mContext;
-            Toast.makeText(context, context.getString(android.R.string.keyguard_accessibility_slide_unlock), 1).show();
+            Toast.makeText(context, context.getString(android.R.string.keyguard_accessibility_unlock_area_collapsed), 1).show();
             return;
         }
         QSTile.BooleanState booleanState = (QSTile.BooleanState) this.mState;
@@ -205,16 +225,16 @@ public class DndTile extends SQSTileImpl {
         }
         ActionBarContextView$$ExternalSyntheticOutline0.m(new StringBuilder("handleClick ="), ((QSTile.BooleanState) this.mState).value, this.TAG);
         boolean z = ((QSTile.BooleanState) this.mState).value;
-        String m = KeyguardUpdateMonitorLogger$$ExternalSyntheticOutline0.m("setZen state: ", !z);
+        String strM = KeyguardUpdateMonitorLogger$$ExternalSyntheticOutline0.m("setZen state: ", !z);
         String str = this.TAG;
-        Log.d(str, m);
+        Log.d(str, strM);
         ZenModeController zenModeController = this.mController;
         if (z) {
             ((ZenModeControllerImpl) zenModeController).setZen(0, null, str);
         } else {
             int i = Settings.Global.getInt(this.mHost.getUserContext().getContentResolver(), "zen_duration", -1);
             if (i == -1) {
-                this.mUiHandler.post(new DndTile$$ExternalSyntheticLambda0(this, 0));
+                this.mUiHandler.post(new DndTile$$ExternalSyntheticLambda2(this, 2));
             } else if (i != 0) {
                 ((ZenModeControllerImpl) zenModeController).setZen(1, ZenModeConfig.toTimeCondition(this.mContext, i, ActivityManager.getCurrentUser(), true).id, str);
             } else {
@@ -245,11 +265,11 @@ public class DndTile extends SQSTileImpl {
             return;
         }
         this.mListening = z;
-        AnonymousClass3 anonymousClass3 = this.mPrefListener;
+        AnonymousClass4 anonymousClass4 = this.mPrefListener;
         if (z) {
-            Prefs.get(this.mContext).registerOnSharedPreferenceChangeListener(anonymousClass3);
+            Prefs.get(this.mContext).registerOnSharedPreferenceChangeListener(anonymousClass4);
         } else {
-            Prefs.get(this.mContext).unregisterOnSharedPreferenceChangeListener(anonymousClass3);
+            Prefs.get(this.mContext).unregisterOnSharedPreferenceChangeListener(anonymousClass4);
         }
         setListening(z);
         GlobalSettings globalSettings = this.mGlobalSettings;
@@ -268,9 +288,9 @@ public class DndTile extends SQSTileImpl {
         if (zenModeController == null) {
             return;
         }
-        int intValue = obj instanceof Integer ? ((Integer) obj).intValue() : ((ZenModeControllerImpl) zenModeController).mZenMode;
-        Log.d(this.TAG, "handleUpdateState zen " + intValue + "  state = " + booleanState);
-        boolean z = intValue != 0;
+        int iIntValue = obj instanceof Integer ? ((Integer) obj).intValue() : ((ZenModeControllerImpl) zenModeController).mZenMode;
+        Log.d(this.TAG, "handleUpdateState zen " + iIntValue + "  state = " + booleanState);
+        boolean z = iIntValue != 0;
         boolean z2 = booleanState.value;
         booleanState.dualTarget = true;
         booleanState.value = z;

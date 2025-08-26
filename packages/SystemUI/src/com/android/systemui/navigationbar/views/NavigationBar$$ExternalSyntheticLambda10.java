@@ -5,7 +5,6 @@ import android.view.View;
 import com.android.systemui.statusbar.CommandQueue;
 import com.android.systemui.statusbar.phone.AutoHideControllerImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class NavigationBar$$ExternalSyntheticLambda10 implements View.OnTouchListener {
     public final /* synthetic */ int $r8$classId;

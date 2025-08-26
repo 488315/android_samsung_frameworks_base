@@ -16,13 +16,11 @@ import kotlinx.coroutines.DeferredCoroutine;
 import kotlinx.coroutines.TimeoutCancellationException;
 import kotlinx.coroutines.TimeoutKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class ScreenshotSoundControllerImpl$releaseScreenshotSound$2 extends SuspendLambda implements Function2 {
     int label;
     final /* synthetic */ ScreenshotSoundControllerImpl this$0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.screenshot.ScreenshotSoundControllerImpl$releaseScreenshotSound$2$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         int label;
@@ -104,8 +102,8 @@ final class ScreenshotSoundControllerImpl$releaseScreenshotSound$2 extends Suspe
             long duration = DurationKt.toDuration(1, DurationUnit.SECONDS);
             AnonymousClass1 anonymousClass1 = new AnonymousClass1(this.this$0, null);
             this.label = 1;
-            Object m3451withTimeoutKLykuaI = TimeoutKt.m3451withTimeoutKLykuaI(duration, anonymousClass1, this);
-            return m3451withTimeoutKLykuaI == coroutineSingletons ? coroutineSingletons : m3451withTimeoutKLykuaI;
+            Object objM3471withTimeoutKLykuaI = TimeoutKt.m3471withTimeoutKLykuaI(duration, anonymousClass1, this);
+            return objM3471withTimeoutKLykuaI == coroutineSingletons ? coroutineSingletons : objM3471withTimeoutKLykuaI;
         } catch (TimeoutCancellationException e) {
             this.this$0.player.cancel(null);
             return new Integer(Log.w("ScreenshotSoundControllerImpl", "Error releasing shutter sound", e));

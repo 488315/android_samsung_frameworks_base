@@ -36,7 +36,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.FunctionReferenceImpl;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class MediaViewController {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -72,7 +71,6 @@ public class MediaViewController {
     public TransitionLayout transitionLayout;
     public final Map viewStates;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -120,7 +118,7 @@ public class MediaViewController {
             @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
             public final void onConfigChanged(Configuration configuration) {
                 if (configuration != null) {
-                    MediaViewController mediaViewController = MediaViewController.this;
+                    MediaViewController mediaViewController = this.this$0;
                     TransitionLayout transitionLayout = mediaViewController.transitionLayout;
                     if (transitionLayout == null || transitionLayout.getRawLayoutDirection() != configuration.getLayoutDirection()) {
                         TransitionLayout transitionLayout2 = mediaViewController.transitionLayout;
@@ -149,11 +147,11 @@ public class MediaViewController {
             /* JADX WARN: Type inference failed for: r0v6 */
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
-                int intValue = ((Integer) obj).intValue();
-                int intValue2 = ((Integer) obj2).intValue();
-                MediaViewController mediaViewController = MediaViewController.this;
-                mediaViewController.currentWidth = intValue;
-                mediaViewController.currentHeight = intValue2;
+                int iIntValue = ((Integer) obj).intValue();
+                int iIntValue2 = ((Integer) obj2).intValue();
+                MediaViewController mediaViewController = this.f$0;
+                mediaViewController.currentWidth = iIntValue;
+                mediaViewController.currentHeight = iIntValue2;
                 FunctionReferenceImpl functionReferenceImpl = mediaViewController.sizeChangedListener;
                 ?? r0 = functionReferenceImpl;
                 if (functionReferenceImpl == null) {
@@ -171,45 +169,45 @@ public class MediaViewController {
         float measureHeight2 = transitionViewState.getMeasureHeight();
         Set set2 = set;
         Iterator it = set2.iterator();
-        float f3 = 0.0f;
+        float fMax = 0.0f;
         while (it.hasNext()) {
             WidgetState widgetState = transitionViewState.getWidgetStates().get(Integer.valueOf(((Number) it.next()).intValue()));
             if (widgetState != null) {
                 measureHeight2 = Float.min(measureHeight2, widgetState.getY());
-                f3 = Float.max(f3, widgetState.getY() + widgetState.getHeight());
+                fMax = Float.max(fMax, widgetState.getY() + widgetState.getHeight());
             }
         }
-        if (f3 == f) {
-            f3 = (float) (f - ((f3 - measureHeight2) * 0.2d));
+        if (fMax == f) {
+            fMax = (float) (f - ((fMax - measureHeight2) * 0.2d));
         }
         Iterator it2 = set2.iterator();
         while (it2.hasNext()) {
             WidgetState widgetState2 = transitionViewState.getWidgetStates().get(Integer.valueOf(((Number) it2.next()).intValue()));
             if (widgetState2 != null && widgetState2.getAlpha() != 0.0f) {
-                float f4 = measureHeight;
-                float f5 = f3 / f4;
+                float f3 = measureHeight;
+                float f4 = fMax / f3;
                 MediaCarouselController.Companion.getClass();
-                widgetState2.setAlpha(MediaCarouselController.TRANSFORM_BEZIER.getInterpolation(MathUtils.constrain((f2 - f5) / ((f / f4) - f5), 0.0f, 1.0f)));
+                widgetState2.setAlpha(MediaCarouselController.TRANSFORM_BEZIER.getInterpolation(MathUtils.constrain((f2 - f4) / ((f / f3) - f4), 0.0f, 1.0f)));
             }
         }
     }
 
     public static TransitionViewState squishViewState$frameworks__base__packages__SystemUI__android_common__SystemUI_core(TransitionViewState transitionViewState, float f) {
-        TransitionViewState copy$default = TransitionViewState.copy$default(transitionViewState, null, 1, null);
-        int measureHeight = (int) (copy$default.getMeasureHeight() * f);
-        copy$default.setHeight(measureHeight);
+        TransitionViewState transitionViewStateCopy$default = TransitionViewState.copy$default(transitionViewState, null, 1, null);
+        int measureHeight = (int) (transitionViewStateCopy$default.getMeasureHeight() * f);
+        transitionViewStateCopy$default.setHeight(measureHeight);
         MediaViewHolder.Companion.getClass();
         Iterator it = MediaViewHolder.backgroundIds.iterator();
         while (it.hasNext()) {
-            WidgetState widgetState = copy$default.getWidgetStates().get(Integer.valueOf(((Number) it.next()).intValue()));
+            WidgetState widgetState = transitionViewStateCopy$default.getWidgetStates().get(Integer.valueOf(((Number) it.next()).intValue()));
             if (widgetState != null) {
                 widgetState.setHeight(measureHeight);
             }
         }
         MediaViewHolder.Companion.getClass();
-        calculateWidgetGroupAlphaForSquishiness(MediaViewHolder.expandedBottomActionIds, copy$default.getMeasureHeight(), copy$default, f);
-        calculateWidgetGroupAlphaForSquishiness(MediaViewHolder.detailIds, copy$default.getMeasureHeight(), copy$default, f);
-        return copy$default;
+        calculateWidgetGroupAlphaForSquishiness(MediaViewHolder.expandedBottomActionIds, transitionViewStateCopy$default.getMeasureHeight(), transitionViewStateCopy$default, f);
+        calculateWidgetGroupAlphaForSquishiness(MediaViewHolder.detailIds, transitionViewStateCopy$default.getMeasureHeight(), transitionViewStateCopy$default, f);
+        return transitionViewStateCopy$default;
     }
 
     public AnimatorSet loadAnimator(Context context, int i, Interpolator interpolator, View... viewArr) {
@@ -226,7 +224,7 @@ public class MediaViewController {
     }
 
     public final TransitionViewState obtainViewState(MediaHostState mediaHostState, boolean z) {
-        TransitionViewState calculateViewState;
+        TransitionViewState transitionViewStateCalculateViewState;
         if (mediaHostState == null || mediaHostState.getMeasurementInput() == null) {
             return null;
         }
@@ -255,7 +253,7 @@ public class MediaViewController {
             transitionLayout.getClass();
             MeasurementInput measurementInput3 = mediaHostState.getMeasurementInput();
             measurementInput3.getClass();
-            calculateViewState = transitionLayout.calculateViewState(measurementInput3, mediaHostState.getExpansion() > 0.0f ? this.expandedLayout : this.collapsedLayout, new TransitionViewState());
+            transitionViewStateCalculateViewState = transitionLayout.calculateViewState(measurementInput3, mediaHostState.getExpansion() > 0.0f ? this.expandedLayout : this.collapsedLayout, new TransitionViewState());
             MediaViewHolder.Companion.getClass();
             Set set = MediaViewHolder.controlsIds;
             GutsViewHolder.Companion.getClass();
@@ -265,7 +263,7 @@ public class MediaViewController {
                 if (!it.hasNext()) {
                     break;
                 }
-                WidgetState widgetState = calculateViewState.getWidgetStates().get(Integer.valueOf(((Number) it.next()).intValue()));
+                WidgetState widgetState = transitionViewStateCalculateViewState.getWidgetStates().get(Integer.valueOf(((Number) it.next()).intValue()));
                 if (widgetState != null) {
                     widgetState.setAlpha(this.isGutsVisible ? 0.0f : widgetState.getAlpha());
                     widgetState.setGone(this.isGutsVisible ? true : widgetState.getGone());
@@ -273,27 +271,27 @@ public class MediaViewController {
             }
             Iterator it2 = set2.iterator();
             while (it2.hasNext()) {
-                WidgetState widgetState2 = calculateViewState.getWidgetStates().get(Integer.valueOf(((Number) it2.next()).intValue()));
+                WidgetState widgetState2 = transitionViewStateCalculateViewState.getWidgetStates().get(Integer.valueOf(((Number) it2.next()).intValue()));
                 if (widgetState2 != null) {
                     widgetState2.setAlpha(this.isGutsVisible ? widgetState2.getAlpha() : 0.0f);
                     widgetState2.setGone(this.isGutsVisible ? widgetState2.getGone() : true);
                 }
             }
-            this.viewStates.put(cacheKey2, calculateViewState);
+            this.viewStates.put(cacheKey2, transitionViewStateCalculateViewState);
         } else {
-            MediaHost.MediaHostStateHolder copy = mediaHostState.copy();
-            copy.setExpansion(0.0f);
-            TransitionViewState obtainViewState = obtainViewState(copy, z);
-            MediaHost.MediaHostStateHolder copy2 = mediaHostState.copy();
-            copy2.setExpansion(1.0f);
-            calculateViewState = TransitionLayoutController.getInterpolatedState$default(this.layoutController, obtainViewState, obtainViewState(copy2, z), mediaHostState.getExpansion(), null, 8, null);
+            MediaHost.MediaHostStateHolder mediaHostStateHolderCopy = mediaHostState.copy();
+            mediaHostStateHolderCopy.setExpansion(0.0f);
+            TransitionViewState transitionViewStateObtainViewState = obtainViewState(mediaHostStateHolderCopy, z);
+            MediaHost.MediaHostStateHolder mediaHostStateHolderCopy2 = mediaHostState.copy();
+            mediaHostStateHolderCopy2.setExpansion(1.0f);
+            transitionViewStateCalculateViewState = TransitionLayoutController.getInterpolatedState$default(this.layoutController, transitionViewStateObtainViewState, obtainViewState(mediaHostStateHolderCopy2, z), mediaHostState.getExpansion(), null, 8, null);
         }
-        return (mediaHostState.getSquishFraction() > 1.0f || z) ? calculateViewState : squishViewState$frameworks__base__packages__SystemUI__android_common__SystemUI_core(calculateViewState, mediaHostState.getSquishFraction());
+        return (mediaHostState.getSquishFraction() > 1.0f || z) ? transitionViewStateCalculateViewState : squishViewState$frameworks__base__packages__SystemUI__android_common__SystemUI_core(transitionViewStateCalculateViewState, mediaHostState.getSquishFraction());
     }
 
     public final void refreshState() {
-        boolean isEnabled = Trace.isEnabled();
-        if (isEnabled) {
+        boolean zIsEnabled = Trace.isEnabled();
+        if (zIsEnabled) {
             TraceUtilsKt.beginSlice("MediaViewController#refreshState");
         }
         try {
@@ -307,7 +305,7 @@ public class MediaViewController {
             }
             setCurrentState(this.currentStartLocation, this.currentEndLocation, this.currentTransitionProgress, true, false);
             Unit unit = Unit.INSTANCE;
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
         } finally {
@@ -329,8 +327,8 @@ public class MediaViewController {
     public final void setCurrentState(int i, int i2, float f, boolean z, boolean z2) {
         MediaHostStatesManager mediaHostStatesManager = this.mediaHostStatesManager;
         TransitionLayoutController transitionLayoutController = this.layoutController;
-        boolean isEnabled = Trace.isEnabled();
-        if (isEnabled) {
+        boolean zIsEnabled = Trace.isEnabled();
+        if (zIsEnabled) {
             TraceUtilsKt.beginSlice("MediaViewController#setCurrentState");
         }
         try {
@@ -342,55 +340,55 @@ public class MediaViewController {
             boolean z3 = this.animateNextStateChange && !z;
             MediaHostState mediaHostState = (MediaHostState) ((LinkedHashMap) mediaHostStatesManager.mediaHostStates).get(Integer.valueOf(i2));
             if (mediaHostState == null) {
-                if (isEnabled) {
+                if (zIsEnabled) {
                     return;
                 } else {
                     return;
                 }
             }
             MediaHostState mediaHostState2 = (MediaHostState) ((LinkedHashMap) mediaHostStatesManager.mediaHostStates).get(Integer.valueOf(i));
-            TransitionViewState obtainViewState = obtainViewState(mediaHostState, z2);
-            if (obtainViewState == null) {
-                if (isEnabled) {
+            TransitionViewState transitionViewStateObtainViewState = obtainViewState(mediaHostState, z2);
+            if (transitionViewStateObtainViewState == null) {
+                if (zIsEnabled) {
                     TraceUtilsKt.endSlice();
                     return;
                 }
                 return;
             }
-            TransitionViewState updateViewStateSize = updateViewStateSize(obtainViewState, i2, this.tmpState2);
-            updateViewStateSize.getClass();
-            transitionLayoutController.setMeasureState(updateViewStateSize);
+            TransitionViewState transitionViewStateUpdateViewStateSize = updateViewStateSize(transitionViewStateObtainViewState, i2, this.tmpState2);
+            transitionViewStateUpdateViewStateSize.getClass();
+            transitionLayoutController.setMeasureState(transitionViewStateUpdateViewStateSize);
             this.animateNextStateChange = false;
             TransitionLayout transitionLayout = this.transitionLayout;
             MediaViewLogger mediaViewLogger = this.logger;
             if (transitionLayout == null) {
                 mediaViewLogger.logMediaLocation(i, i2, "setCurrentState: view not bound");
-                if (isEnabled) {
+                if (zIsEnabled) {
                     TraceUtilsKt.endSlice();
                     return;
                 }
                 return;
             }
-            TransitionViewState updateViewStateSize2 = updateViewStateSize(obtainViewState(mediaHostState2, z2), i, this.tmpState3);
+            TransitionViewState transitionViewStateUpdateViewStateSize2 = updateViewStateSize(obtainViewState(mediaHostState2, z2), i, this.tmpState3);
             boolean visible = mediaHostState.getVisible();
             TransitionViewState transitionViewState = this.tmpState;
             if (visible) {
                 if (mediaHostState2 != null && !mediaHostState2.getVisible()) {
-                    updateViewStateSize = transitionLayoutController.getGoneState(updateViewStateSize, mediaHostState.getDisappearParameters(), 1.0f - f, transitionViewState);
-                } else if (f != 1.0f && updateViewStateSize2 != null) {
-                    updateViewStateSize = f == 0.0f ? updateViewStateSize2 : transitionLayoutController.getInterpolatedState(updateViewStateSize2, updateViewStateSize, f, transitionViewState);
+                    transitionViewStateUpdateViewStateSize = transitionLayoutController.getGoneState(transitionViewStateUpdateViewStateSize, mediaHostState.getDisappearParameters(), 1.0f - f, transitionViewState);
+                } else if (f != 1.0f && transitionViewStateUpdateViewStateSize2 != null) {
+                    transitionViewStateUpdateViewStateSize = f == 0.0f ? transitionViewStateUpdateViewStateSize2 : transitionLayoutController.getInterpolatedState(transitionViewStateUpdateViewStateSize2, transitionViewStateUpdateViewStateSize, f, transitionViewState);
                 }
-            } else if (updateViewStateSize2 != null && mediaHostState2 != null && mediaHostState2.getVisible()) {
-                updateViewStateSize = transitionLayoutController.getGoneState(updateViewStateSize2, mediaHostState2.getDisappearParameters(), f, transitionViewState);
+            } else if (transitionViewStateUpdateViewStateSize2 != null && mediaHostState2 != null && mediaHostState2.getVisible()) {
+                transitionViewStateUpdateViewStateSize = transitionLayoutController.getGoneState(transitionViewStateUpdateViewStateSize2, mediaHostState2.getDisappearParameters(), f, transitionViewState);
             }
-            mediaViewLogger.logMediaSize(updateViewStateSize.getWidth(), updateViewStateSize.getHeight(), "setCurrentState " + i + " -> " + i2 + " (progress " + f + ")");
-            this.layoutController.setState(updateViewStateSize, z, z3, this.animationDuration, this.animationDelay, z2);
+            mediaViewLogger.logMediaSize(transitionViewStateUpdateViewStateSize.getWidth(), transitionViewStateUpdateViewStateSize.getHeight(), "setCurrentState " + i + " -> " + i2 + " (progress " + f + ")");
+            this.layoutController.setState(transitionViewStateUpdateViewStateSize, z, z3, this.animationDuration, this.animationDelay, z2);
             Unit unit = Unit.INSTANCE;
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
         } finally {
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
         }
@@ -401,8 +399,8 @@ public class MediaViewController {
     }
 
     public final TransitionViewState updateViewStateSize(TransitionViewState transitionViewState, int i, TransitionViewState transitionViewState2) {
-        TransitionViewState copy;
-        if (transitionViewState == null || (copy = transitionViewState.copy(transitionViewState2)) == null) {
+        TransitionViewState transitionViewStateCopy;
+        if (transitionViewState == null || (transitionViewStateCopy = transitionViewState.copy(transitionViewState2)) == null) {
             return null;
         }
         MediaHostStatesManager mediaHostStatesManager = this.mediaHostStatesManager;
@@ -410,30 +408,30 @@ public class MediaViewController {
         MeasurementOutput measurementOutput = (MeasurementOutput) ((LinkedHashMap) mediaHostStatesManager.carouselSizes).get(Integer.valueOf(i));
         boolean z = false;
         if (measurementOutput != null) {
-            if (copy.getMeasureHeight() != measurementOutput.getMeasuredHeight() || copy.getMeasureWidth() != measurementOutput.getMeasuredWidth()) {
-                copy.setMeasureHeight(Math.max(measurementOutput.getMeasuredHeight(), copy.getMeasureHeight()));
-                copy.setMeasureWidth(Math.max(measurementOutput.getMeasuredWidth(), copy.getMeasureWidth()));
+            if (transitionViewStateCopy.getMeasureHeight() != measurementOutput.getMeasuredHeight() || transitionViewStateCopy.getMeasureWidth() != measurementOutput.getMeasuredWidth()) {
+                transitionViewStateCopy.setMeasureHeight(Math.max(measurementOutput.getMeasuredHeight(), transitionViewStateCopy.getMeasureHeight()));
+                transitionViewStateCopy.setMeasureWidth(Math.max(measurementOutput.getMeasuredWidth(), transitionViewStateCopy.getMeasureWidth()));
                 z = true;
             }
             if (z) {
-                copy.setHeight(copy.getMeasureHeight());
-                copy.setWidth(copy.getMeasureWidth());
+                transitionViewStateCopy.setHeight(transitionViewStateCopy.getMeasureHeight());
+                transitionViewStateCopy.setWidth(transitionViewStateCopy.getMeasureWidth());
                 MediaViewHolder.Companion.getClass();
                 Iterator it = MediaViewHolder.backgroundIds.iterator();
                 while (it.hasNext()) {
-                    WidgetState widgetState = copy.getWidgetStates().get(Integer.valueOf(((Number) it.next()).intValue()));
+                    WidgetState widgetState = transitionViewStateCopy.getWidgetStates().get(Integer.valueOf(((Number) it.next()).intValue()));
                     if (widgetState != null) {
-                        widgetState.setHeight(copy.getHeight());
-                        widgetState.setWidth(copy.getWidth());
+                        widgetState.setHeight(transitionViewStateCopy.getHeight());
+                        widgetState.setWidth(transitionViewStateCopy.getWidth());
                     }
                 }
             }
         }
         if (z && mediaHostState != null && mediaHostState.getSquishFraction() <= 1.0f) {
-            copy = squishViewState$frameworks__base__packages__SystemUI__android_common__SystemUI_core(copy, mediaHostState.getSquishFraction());
+            transitionViewStateCopy = squishViewState$frameworks__base__packages__SystemUI__android_common__SystemUI_core(transitionViewStateCopy, mediaHostState.getSquishFraction());
         }
-        this.logger.logMediaSize(copy.getWidth(), copy.getHeight(), "update to carousel");
-        return copy;
+        this.logger.logMediaSize(transitionViewStateCopy.getWidth(), transitionViewStateCopy.getHeight(), "update to carousel");
+        return transitionViewStateCopy;
     }
 
     private static /* synthetic */ void getTransitionLayout$annotations() {

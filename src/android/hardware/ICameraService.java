@@ -366,9 +366,9 @@ public interface ICameraService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ICameraService)) {
-                return (ICameraService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ICameraService)) {
+                return (ICameraService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -470,57 +470,57 @@ public interface ICameraService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     AttributionSourceState attributionSourceState = (AttributionSourceState) parcel.readTypedObject(AttributionSourceState.CREATOR);
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int numberOfCameras = getNumberOfCameras(readInt, attributionSourceState, readInt2);
+                    int numberOfCameras = getNumberOfCameras(i3, attributionSourceState, i4);
                     parcel2.writeNoException();
                     parcel2.writeInt(numberOfCameras);
                     return true;
                 case 2:
-                    int readInt3 = parcel.readInt();
-                    int readInt4 = parcel.readInt();
+                    int i5 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     AttributionSourceState attributionSourceState2 = (AttributionSourceState) parcel.readTypedObject(AttributionSourceState.CREATOR);
-                    int readInt5 = parcel.readInt();
+                    int i7 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    CameraInfo cameraInfo = getCameraInfo(readInt3, readInt4, attributionSourceState2, readInt5);
+                    CameraInfo cameraInfo = getCameraInfo(i5, i6, attributionSourceState2, i7);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(cameraInfo, 1);
                     return true;
                 case 3:
-                    ICameraClient asInterface = ICameraClient.Stub.asInterface(parcel.readStrongBinder());
-                    int readInt6 = parcel.readInt();
-                    int readInt7 = parcel.readInt();
-                    int readInt8 = parcel.readInt();
-                    boolean readBoolean = parcel.readBoolean();
+                    ICameraClient iCameraClientAsInterface = ICameraClient.Stub.asInterface(parcel.readStrongBinder());
+                    int i8 = parcel.readInt();
+                    int i9 = parcel.readInt();
+                    int i10 = parcel.readInt();
+                    boolean z = parcel.readBoolean();
                     AttributionSourceState attributionSourceState3 = (AttributionSourceState) parcel.readTypedObject(AttributionSourceState.CREATOR);
-                    int readInt9 = parcel.readInt();
+                    int i11 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    ICamera connect = connect(asInterface, readInt6, readInt7, readInt8, readBoolean, attributionSourceState3, readInt9);
+                    ICamera iCameraConnect = connect(iCameraClientAsInterface, i8, i9, i10, z, attributionSourceState3, i11);
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(connect);
+                    parcel2.writeStrongInterface(iCameraConnect);
                     return true;
                 case 4:
-                    ICameraDeviceCallbacks asInterface2 = ICameraDeviceCallbacks.Stub.asInterface(parcel.readStrongBinder());
-                    String readString = parcel.readString();
-                    int readInt10 = parcel.readInt();
-                    int readInt11 = parcel.readInt();
-                    int readInt12 = parcel.readInt();
+                    ICameraDeviceCallbacks iCameraDeviceCallbacksAsInterface = ICameraDeviceCallbacks.Stub.asInterface(parcel.readStrongBinder());
+                    String string = parcel.readString();
+                    int i12 = parcel.readInt();
+                    int i13 = parcel.readInt();
+                    int i14 = parcel.readInt();
                     AttributionSourceState attributionSourceState4 = (AttributionSourceState) parcel.readTypedObject(AttributionSourceState.CREATOR);
-                    int readInt13 = parcel.readInt();
-                    boolean readBoolean2 = parcel.readBoolean();
+                    int i15 = parcel.readInt();
+                    boolean z2 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    ICameraDeviceUser connectDevice = connectDevice(asInterface2, readString, readInt10, readInt11, readInt12, attributionSourceState4, readInt13, readBoolean2);
+                    ICameraDeviceUser iCameraDeviceUserConnectDevice = connectDevice(iCameraDeviceCallbacksAsInterface, string, i12, i13, i14, attributionSourceState4, i15, z2);
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(connectDevice);
+                    parcel2.writeStrongInterface(iCameraDeviceUserConnectDevice);
                     return true;
                 case 5:
-                    ICameraServiceListener asInterface3 = ICameraServiceListener.Stub.asInterface(parcel.readStrongBinder());
+                    ICameraServiceListener iCameraServiceListenerAsInterface = ICameraServiceListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    CameraStatus[] addListener = addListener(asInterface3);
+                    CameraStatus[] cameraStatusArrAddListener = addListener(iCameraServiceListenerAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeTypedArray(addListener, 1);
+                    parcel2.writeTypedArray(cameraStatusArrAddListener, 1);
                     return true;
                 case 6:
                     ConcurrentCameraIdCombination[] concurrentCameraIds = getConcurrentCameraIds();
@@ -529,35 +529,35 @@ public interface ICameraService extends IInterface {
                     return true;
                 case 7:
                     CameraIdAndSessionConfiguration[] cameraIdAndSessionConfigurationArr = (CameraIdAndSessionConfiguration[]) parcel.createTypedArray(CameraIdAndSessionConfiguration.CREATOR);
-                    int readInt14 = parcel.readInt();
+                    int i16 = parcel.readInt();
                     AttributionSourceState attributionSourceState5 = (AttributionSourceState) parcel.readTypedObject(AttributionSourceState.CREATOR);
-                    int readInt15 = parcel.readInt();
+                    int i17 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isConcurrentSessionConfigurationSupported = isConcurrentSessionConfigurationSupported(cameraIdAndSessionConfigurationArr, readInt14, attributionSourceState5, readInt15);
+                    boolean zIsConcurrentSessionConfigurationSupported = isConcurrentSessionConfigurationSupported(cameraIdAndSessionConfigurationArr, i16, attributionSourceState5, i17);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isConcurrentSessionConfigurationSupported);
+                    parcel2.writeBoolean(zIsConcurrentSessionConfigurationSupported);
                     return true;
                 case 8:
-                    String readString2 = parcel.readString();
+                    String string2 = parcel.readString();
                     CameraMetadataNative cameraMetadataNative = (CameraMetadataNative) parcel.readTypedObject(CameraMetadataNative.CREATOR);
                     parcel.enforceNoDataAvail();
-                    injectSessionParams(readString2, cameraMetadataNative);
+                    injectSessionParams(string2, cameraMetadataNative);
                     parcel2.writeNoException();
                     return true;
                 case 9:
-                    ICameraServiceListener asInterface4 = ICameraServiceListener.Stub.asInterface(parcel.readStrongBinder());
+                    ICameraServiceListener iCameraServiceListenerAsInterface2 = ICameraServiceListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    removeListener(asInterface4);
+                    removeListener(iCameraServiceListenerAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 10:
-                    String readString3 = parcel.readString();
-                    int readInt16 = parcel.readInt();
-                    int readInt17 = parcel.readInt();
+                    String string3 = parcel.readString();
+                    int i18 = parcel.readInt();
+                    int i19 = parcel.readInt();
                     AttributionSourceState attributionSourceState6 = (AttributionSourceState) parcel.readTypedObject(AttributionSourceState.CREATOR);
-                    int readInt18 = parcel.readInt();
+                    int i20 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    CameraMetadataNative cameraCharacteristics = getCameraCharacteristics(readString3, readInt16, readInt17, attributionSourceState6, readInt18);
+                    CameraMetadataNative cameraCharacteristics = getCameraCharacteristics(string3, i18, i19, attributionSourceState6, i20);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(cameraCharacteristics, 1);
                     return true;
@@ -572,149 +572,149 @@ public interface ICameraService extends IInterface {
                     parcel2.writeTypedObject(cameraVendorTagCache, 1);
                     return true;
                 case 13:
-                    int readInt19 = parcel.readInt();
+                    int i21 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    String legacyParameters = getLegacyParameters(readInt19);
+                    String legacyParameters = getLegacyParameters(i21);
                     parcel2.writeNoException();
                     parcel2.writeString(legacyParameters);
                     return true;
                 case 14:
-                    String readString4 = parcel.readString();
+                    String string4 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isHiddenPhysicalCamera = isHiddenPhysicalCamera(readString4);
+                    boolean zIsHiddenPhysicalCamera = isHiddenPhysicalCamera(string4);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isHiddenPhysicalCamera);
+                    parcel2.writeBoolean(zIsHiddenPhysicalCamera);
                     return true;
                 case 15:
-                    String readString5 = parcel.readString();
-                    String readString6 = parcel.readString();
-                    String readString7 = parcel.readString();
-                    ICameraInjectionCallback asInterface5 = ICameraInjectionCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string5 = parcel.readString();
+                    String string6 = parcel.readString();
+                    String string7 = parcel.readString();
+                    ICameraInjectionCallback iCameraInjectionCallbackAsInterface = ICameraInjectionCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    ICameraInjectionSession injectCamera = injectCamera(readString5, readString6, readString7, asInterface5);
+                    ICameraInjectionSession iCameraInjectionSessionInjectCamera = injectCamera(string5, string6, string7, iCameraInjectionCallbackAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(injectCamera);
+                    parcel2.writeStrongInterface(iCameraInjectionSessionInjectCamera);
                     return true;
                 case 16:
-                    String readString8 = parcel.readString();
-                    boolean readBoolean3 = parcel.readBoolean();
-                    IBinder readStrongBinder = parcel.readStrongBinder();
+                    String string8 = parcel.readString();
+                    boolean z3 = parcel.readBoolean();
+                    IBinder strongBinder = parcel.readStrongBinder();
                     AttributionSourceState attributionSourceState7 = (AttributionSourceState) parcel.readTypedObject(AttributionSourceState.CREATOR);
-                    int readInt20 = parcel.readInt();
+                    int i22 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setTorchMode(readString8, readBoolean3, readStrongBinder, attributionSourceState7, readInt20);
+                    setTorchMode(string8, z3, strongBinder, attributionSourceState7, i22);
                     parcel2.writeNoException();
                     return true;
                 case 17:
-                    String readString9 = parcel.readString();
-                    int readInt21 = parcel.readInt();
-                    IBinder readStrongBinder2 = parcel.readStrongBinder();
+                    String string9 = parcel.readString();
+                    int i23 = parcel.readInt();
+                    IBinder strongBinder2 = parcel.readStrongBinder();
                     AttributionSourceState attributionSourceState8 = (AttributionSourceState) parcel.readTypedObject(AttributionSourceState.CREATOR);
-                    int readInt22 = parcel.readInt();
+                    int i24 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    turnOnTorchWithStrengthLevel(readString9, readInt21, readStrongBinder2, attributionSourceState8, readInt22);
+                    turnOnTorchWithStrengthLevel(string9, i23, strongBinder2, attributionSourceState8, i24);
                     parcel2.writeNoException();
                     return true;
                 case 18:
-                    String readString10 = parcel.readString();
+                    String string10 = parcel.readString();
                     AttributionSourceState attributionSourceState9 = (AttributionSourceState) parcel.readTypedObject(AttributionSourceState.CREATOR);
-                    int readInt23 = parcel.readInt();
+                    int i25 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int torchStrengthLevel = getTorchStrengthLevel(readString10, attributionSourceState9, readInt23);
+                    int torchStrengthLevel = getTorchStrengthLevel(string10, attributionSourceState9, i25);
                     parcel2.writeNoException();
                     parcel2.writeInt(torchStrengthLevel);
                     return true;
                 case 19:
-                    int readInt24 = parcel.readInt();
-                    int[] createIntArray = parcel.createIntArray();
+                    int i26 = parcel.readInt();
+                    int[] iArrCreateIntArray = parcel.createIntArray();
                     parcel.enforceNoDataAvail();
-                    notifySystemEvent(readInt24, createIntArray);
+                    notifySystemEvent(i26, iArrCreateIntArray);
                     return true;
                 case 20:
                     notifyDisplayConfigurationChange();
                     return true;
                 case 21:
-                    long readLong = parcel.readLong();
+                    long j = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    notifyDeviceStateChange(readLong);
+                    notifyDeviceStateChange(j);
                     return true;
                 case 22:
                     CameraExtensionSessionStats cameraExtensionSessionStats = (CameraExtensionSessionStats) parcel.readTypedObject(CameraExtensionSessionStats.CREATOR);
                     parcel.enforceNoDataAvail();
-                    String reportExtensionSessionStats = reportExtensionSessionStats(cameraExtensionSessionStats);
+                    String strReportExtensionSessionStats = reportExtensionSessionStats(cameraExtensionSessionStats);
                     parcel2.writeNoException();
-                    parcel2.writeString(reportExtensionSessionStats);
+                    parcel2.writeString(strReportExtensionSessionStats);
                     return true;
                 case 23:
-                    long readLong2 = parcel.readLong();
+                    long j2 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    notifyDeviceStateChangeSync(readLong2);
+                    notifyDeviceStateChangeSync(j2);
                     parcel2.writeNoException();
                     return true;
                 case 24:
-                    String readString11 = parcel.readString();
-                    int readInt25 = parcel.readInt();
+                    String string11 = parcel.readString();
+                    int i27 = parcel.readInt();
                     AttributionSourceState attributionSourceState10 = (AttributionSourceState) parcel.readTypedObject(AttributionSourceState.CREATOR);
-                    int readInt26 = parcel.readInt();
+                    int i28 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    CameraMetadataNative createDefaultRequest = createDefaultRequest(readString11, readInt25, attributionSourceState10, readInt26);
+                    CameraMetadataNative cameraMetadataNativeCreateDefaultRequest = createDefaultRequest(string11, i27, attributionSourceState10, i28);
                     parcel2.writeNoException();
-                    parcel2.writeTypedObject(createDefaultRequest, 1);
+                    parcel2.writeTypedObject(cameraMetadataNativeCreateDefaultRequest, 1);
                     return true;
                 case 25:
-                    String readString12 = parcel.readString();
-                    int readInt27 = parcel.readInt();
+                    String string12 = parcel.readString();
+                    int i29 = parcel.readInt();
                     SessionConfiguration sessionConfiguration = (SessionConfiguration) parcel.readTypedObject(SessionConfiguration.CREATOR);
                     AttributionSourceState attributionSourceState11 = (AttributionSourceState) parcel.readTypedObject(AttributionSourceState.CREATOR);
-                    int readInt28 = parcel.readInt();
+                    int i30 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isSessionConfigurationWithParametersSupported = isSessionConfigurationWithParametersSupported(readString12, readInt27, sessionConfiguration, attributionSourceState11, readInt28);
+                    boolean zIsSessionConfigurationWithParametersSupported = isSessionConfigurationWithParametersSupported(string12, i29, sessionConfiguration, attributionSourceState11, i30);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isSessionConfigurationWithParametersSupported);
+                    parcel2.writeBoolean(zIsSessionConfigurationWithParametersSupported);
                     return true;
                 case 26:
-                    String readString13 = parcel.readString();
-                    int readInt29 = parcel.readInt();
-                    int readInt30 = parcel.readInt();
+                    String string13 = parcel.readString();
+                    int i31 = parcel.readInt();
+                    int i32 = parcel.readInt();
                     SessionConfiguration sessionConfiguration2 = (SessionConfiguration) parcel.readTypedObject(SessionConfiguration.CREATOR);
                     AttributionSourceState attributionSourceState12 = (AttributionSourceState) parcel.readTypedObject(AttributionSourceState.CREATOR);
-                    int readInt31 = parcel.readInt();
+                    int i33 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    CameraMetadataNative sessionCharacteristics = getSessionCharacteristics(readString13, readInt29, readInt30, sessionConfiguration2, attributionSourceState12, readInt31);
+                    CameraMetadataNative sessionCharacteristics = getSessionCharacteristics(string13, i31, i32, sessionConfiguration2, attributionSourceState12, i33);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(sessionCharacteristics, 1);
                     return true;
                 case 27:
-                    String readString14 = parcel.readString();
+                    String string14 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean isHiddenIdPermittedPackage = isHiddenIdPermittedPackage(readString14);
+                    boolean zIsHiddenIdPermittedPackage = isHiddenIdPermittedPackage(string14);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isHiddenIdPermittedPackage);
+                    parcel2.writeBoolean(zIsHiddenIdPermittedPackage);
                     return true;
                 case 28:
-                    int readInt32 = parcel.readInt();
-                    String[] createStringArray = parcel.createStringArray();
-                    String[] createStringArray2 = parcel.createStringArray();
+                    int i34 = parcel.readInt();
+                    String[] strArrCreateStringArray = parcel.createStringArray();
+                    String[] strArrCreateStringArray2 = parcel.createStringArray();
                     parcel.enforceNoDataAvail();
-                    notifyPkgListParamChange(readInt32, createStringArray, createStringArray2);
+                    notifyPkgListParamChange(i34, strArrCreateStringArray, strArrCreateStringArray2);
                     return true;
                 case 29:
                     PersistableBundle[] persistableBundleArr = (PersistableBundle[]) parcel.createTypedArray(PersistableBundle.CREATOR);
                     parcel.enforceNoDataAvail();
-                    boolean applyExtraRequestsToRequestInjector = applyExtraRequestsToRequestInjector(persistableBundleArr);
+                    boolean zApplyExtraRequestsToRequestInjector = applyExtraRequestsToRequestInjector(persistableBundleArr);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(applyExtraRequestsToRequestInjector);
+                    parcel2.writeBoolean(zApplyExtraRequestsToRequestInjector);
                     return true;
                 case 30:
-                    String[] createStringArray3 = parcel.createStringArray();
+                    String[] strArrCreateStringArray3 = parcel.createStringArray();
                     parcel.enforceNoDataAvail();
-                    updateRequestInjectorAllowedList(createStringArray3);
+                    updateRequestInjectorAllowedList(strArrCreateStringArray3);
                     parcel2.writeNoException();
                     return true;
                 case 31:
-                    IRequestInjectorCallback asInterface6 = IRequestInjectorCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IRequestInjectorCallback iRequestInjectorCallbackAsInterface = IRequestInjectorCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    boolean requestInjectorCallback = setRequestInjectorCallback(asInterface6);
+                    boolean requestInjectorCallback = setRequestInjectorCallback(iRequestInjectorCallbackAsInterface);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(requestInjectorCallback);
                     return true;
@@ -723,21 +723,21 @@ public interface ICameraService extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 33:
-                    String[] createStringArray4 = parcel.createStringArray();
-                    String[] createStringArray5 = parcel.createStringArray();
-                    String readString15 = parcel.readString();
-                    IDeviceInjectorCallback asInterface7 = IDeviceInjectorCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String[] strArrCreateStringArray4 = parcel.createStringArray();
+                    String[] strArrCreateStringArray5 = parcel.createStringArray();
+                    String string15 = parcel.readString();
+                    IDeviceInjectorCallback iDeviceInjectorCallbackAsInterface = IDeviceInjectorCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    startDeviceInjector(createStringArray4, createStringArray5, readString15, asInterface7);
+                    startDeviceInjector(strArrCreateStringArray4, strArrCreateStringArray5, string15, iDeviceInjectorCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 34:
-                    String[] createStringArray6 = parcel.createStringArray();
-                    String[] createStringArray7 = parcel.createStringArray();
-                    IRemoteDevice asInterface8 = IRemoteDevice.Stub.asInterface(parcel.readStrongBinder());
-                    IDeviceInjectorCallback asInterface9 = IDeviceInjectorCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String[] strArrCreateStringArray6 = parcel.createStringArray();
+                    String[] strArrCreateStringArray7 = parcel.createStringArray();
+                    IRemoteDevice iRemoteDeviceAsInterface = IRemoteDevice.Stub.asInterface(parcel.readStrongBinder());
+                    IDeviceInjectorCallback iDeviceInjectorCallbackAsInterface2 = IDeviceInjectorCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    startRemoteDeviceInjector(createStringArray6, createStringArray7, asInterface8, asInterface9);
+                    startRemoteDeviceInjector(strArrCreateStringArray6, strArrCreateStringArray7, iRemoteDeviceAsInterface, iDeviceInjectorCallbackAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 35:
@@ -745,9 +745,9 @@ public interface ICameraService extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 36:
-                    boolean readBoolean4 = parcel.readBoolean();
+                    boolean z4 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    setDeviceInjectorPending(readBoolean4);
+                    setDeviceInjectorPending(z4);
                     parcel2.writeNoException();
                     return true;
                 case 37:
@@ -776,615 +776,615 @@ public interface ICameraService extends IInterface {
 
             @Override // android.hardware.ICameraService
             public int getNumberOfCameras(int i, AttributionSourceState attributionSourceState, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(attributionSourceState, 0);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(attributionSourceState, 0);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ICameraService
             public CameraInfo getCameraInfo(int i, int i2, AttributionSourceState attributionSourceState, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(attributionSourceState, 0);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (CameraInfo) obtain2.readTypedObject(CameraInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(attributionSourceState, 0);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (CameraInfo) parcelObtain2.readTypedObject(CameraInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ICameraService
             public ICamera connect(ICameraClient iCameraClient, int i, int i2, int i3, boolean z, AttributionSourceState attributionSourceState, int i4) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iCameraClient);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeBoolean(z);
-                    obtain.writeTypedObject(attributionSourceState, 0);
-                    obtain.writeInt(i4);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return ICamera.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iCameraClient);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeTypedObject(attributionSourceState, 0);
+                    parcelObtain.writeInt(i4);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return ICamera.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ICameraService
             public ICameraDeviceUser connectDevice(ICameraDeviceCallbacks iCameraDeviceCallbacks, String str, int i, int i2, int i3, AttributionSourceState attributionSourceState, int i4, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iCameraDeviceCallbacks);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeTypedObject(attributionSourceState, 0);
-                    obtain.writeInt(i4);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return ICameraDeviceUser.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iCameraDeviceCallbacks);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeTypedObject(attributionSourceState, 0);
+                    parcelObtain.writeInt(i4);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return ICameraDeviceUser.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ICameraService
             public CameraStatus[] addListener(ICameraServiceListener iCameraServiceListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iCameraServiceListener);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (CameraStatus[]) obtain2.createTypedArray(CameraStatus.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iCameraServiceListener);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (CameraStatus[]) parcelObtain2.createTypedArray(CameraStatus.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ICameraService
             public ConcurrentCameraIdCombination[] getConcurrentCameraIds() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ConcurrentCameraIdCombination[]) obtain2.createTypedArray(ConcurrentCameraIdCombination.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ConcurrentCameraIdCombination[]) parcelObtain2.createTypedArray(ConcurrentCameraIdCombination.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ICameraService
             public boolean isConcurrentSessionConfigurationSupported(CameraIdAndSessionConfiguration[] cameraIdAndSessionConfigurationArr, int i, AttributionSourceState attributionSourceState, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedArray(cameraIdAndSessionConfigurationArr, 0);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(attributionSourceState, 0);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedArray(cameraIdAndSessionConfigurationArr, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(attributionSourceState, 0);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ICameraService
             public void injectSessionParams(String str, CameraMetadataNative cameraMetadataNative) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(cameraMetadataNative, 0);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(cameraMetadataNative, 0);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ICameraService
             public void removeListener(ICameraServiceListener iCameraServiceListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iCameraServiceListener);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iCameraServiceListener);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ICameraService
             public CameraMetadataNative getCameraCharacteristics(String str, int i, int i2, AttributionSourceState attributionSourceState, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(attributionSourceState, 0);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (CameraMetadataNative) obtain2.readTypedObject(CameraMetadataNative.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(attributionSourceState, 0);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (CameraMetadataNative) parcelObtain2.readTypedObject(CameraMetadataNative.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ICameraService
             public VendorTagDescriptor getCameraVendorTagDescriptor() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (VendorTagDescriptor) obtain2.readTypedObject(VendorTagDescriptor.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (VendorTagDescriptor) parcelObtain2.readTypedObject(VendorTagDescriptor.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ICameraService
             public VendorTagDescriptorCache getCameraVendorTagCache() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (VendorTagDescriptorCache) obtain2.readTypedObject(VendorTagDescriptorCache.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (VendorTagDescriptorCache) parcelObtain2.readTypedObject(VendorTagDescriptorCache.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ICameraService
             public String getLegacyParameters(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ICameraService
             public boolean isHiddenPhysicalCamera(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ICameraService
             public ICameraInjectionSession injectCamera(String str, String str2, String str3, ICameraInjectionCallback iCameraInjectionCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    obtain.writeString(str3);
-                    obtain.writeStrongInterface(iCameraInjectionCallback);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return ICameraInjectionSession.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeString(str3);
+                    parcelObtain.writeStrongInterface(iCameraInjectionCallback);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return ICameraInjectionSession.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ICameraService
             public void setTorchMode(String str, boolean z, IBinder iBinder, AttributionSourceState attributionSourceState, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeBoolean(z);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(attributionSourceState, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(attributionSourceState, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ICameraService
             public void turnOnTorchWithStrengthLevel(String str, int i, IBinder iBinder, AttributionSourceState attributionSourceState, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(attributionSourceState, 0);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(attributionSourceState, 0);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ICameraService
             public int getTorchStrengthLevel(String str, AttributionSourceState attributionSourceState, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(attributionSourceState, 0);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(attributionSourceState, 0);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ICameraService
             public void notifySystemEvent(int i, int[] iArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeIntArray(iArr);
-                    this.mRemote.transact(19, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeIntArray(iArr);
+                    this.mRemote.transact(19, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ICameraService
             public void notifyDisplayConfigurationChange() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(20, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(20, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ICameraService
             public void notifyDeviceStateChange(long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(21, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(21, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ICameraService
             public String reportExtensionSessionStats(CameraExtensionSessionStats cameraExtensionSessionStats) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(cameraExtensionSessionStats, 0);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readString();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(cameraExtensionSessionStats, 0);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readString();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ICameraService
             public void notifyDeviceStateChangeSync(long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ICameraService
             public CameraMetadataNative createDefaultRequest(String str, int i, AttributionSourceState attributionSourceState, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(attributionSourceState, 0);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (CameraMetadataNative) obtain2.readTypedObject(CameraMetadataNative.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(attributionSourceState, 0);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (CameraMetadataNative) parcelObtain2.readTypedObject(CameraMetadataNative.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ICameraService
             public boolean isSessionConfigurationWithParametersSupported(String str, int i, SessionConfiguration sessionConfiguration, AttributionSourceState attributionSourceState, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(sessionConfiguration, 0);
-                    obtain.writeTypedObject(attributionSourceState, 0);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(sessionConfiguration, 0);
+                    parcelObtain.writeTypedObject(attributionSourceState, 0);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ICameraService
             public CameraMetadataNative getSessionCharacteristics(String str, int i, int i2, SessionConfiguration sessionConfiguration, AttributionSourceState attributionSourceState, int i3) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(sessionConfiguration, 0);
-                    obtain.writeTypedObject(attributionSourceState, 0);
-                    obtain.writeInt(i3);
-                    this.mRemote.transact(26, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (CameraMetadataNative) obtain2.readTypedObject(CameraMetadataNative.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(sessionConfiguration, 0);
+                    parcelObtain.writeTypedObject(attributionSourceState, 0);
+                    parcelObtain.writeInt(i3);
+                    this.mRemote.transact(26, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (CameraMetadataNative) parcelObtain2.readTypedObject(CameraMetadataNative.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ICameraService
             public boolean isHiddenIdPermittedPackage(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(27, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(27, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ICameraService
             public void notifyPkgListParamChange(int i, String[] strArr, String[] strArr2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeStringArray(strArr2);
-                    this.mRemote.transact(28, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeStringArray(strArr2);
+                    this.mRemote.transact(28, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ICameraService
             public boolean applyExtraRequestsToRequestInjector(PersistableBundle[] persistableBundleArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedArray(persistableBundleArr, 0);
-                    this.mRemote.transact(29, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedArray(persistableBundleArr, 0);
+                    this.mRemote.transact(29, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ICameraService
             public void updateRequestInjectorAllowedList(String[] strArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStringArray(strArr);
-                    this.mRemote.transact(30, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStringArray(strArr);
+                    this.mRemote.transact(30, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ICameraService
             public boolean setRequestInjectorCallback(IRequestInjectorCallback iRequestInjectorCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iRequestInjectorCallback);
-                    this.mRemote.transact(31, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iRequestInjectorCallback);
+                    this.mRemote.transact(31, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ICameraService
             public void removeRequestInjectorCallback() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(32, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(32, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ICameraService
             public void startDeviceInjector(String[] strArr, String[] strArr2, String str, IDeviceInjectorCallback iDeviceInjectorCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeStringArray(strArr2);
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iDeviceInjectorCallback);
-                    this.mRemote.transact(33, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeStringArray(strArr2);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iDeviceInjectorCallback);
+                    this.mRemote.transact(33, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ICameraService
             public void startRemoteDeviceInjector(String[] strArr, String[] strArr2, IRemoteDevice iRemoteDevice, IDeviceInjectorCallback iDeviceInjectorCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStringArray(strArr);
-                    obtain.writeStringArray(strArr2);
-                    obtain.writeStrongInterface(iRemoteDevice);
-                    obtain.writeStrongInterface(iDeviceInjectorCallback);
-                    this.mRemote.transact(34, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStringArray(strArr);
+                    parcelObtain.writeStringArray(strArr2);
+                    parcelObtain.writeStrongInterface(iRemoteDevice);
+                    parcelObtain.writeStrongInterface(iDeviceInjectorCallback);
+                    this.mRemote.transact(34, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ICameraService
             public void stopDeviceInjector() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(35, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(35, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ICameraService
             public void setDeviceInjectorPending(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(36, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(36, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.ICameraService
             public void notifyDeviceInjectorOrientationChange() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(37, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(37, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

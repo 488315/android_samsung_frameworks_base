@@ -59,13 +59,13 @@ public class TemplateManager {
         this.mMetaDataManager = metaDataManager;
     }
 
-    public void loadStaticTemplate(Context context) {
+    public void loadStaticTemplate(Context context) throws Resources.NotFoundException, IOException {
         try {
-            InputStream openRawResource = context.getResources().openRawResource(R.raw.wallpapertheme_template);
+            InputStream inputStreamOpenRawResource = context.getResources().openRawResource(R.raw.wallpapertheme_template);
             try {
-                initTemplate(readFromInputStream(openRawResource));
-                if (openRawResource != null) {
-                    openRawResource.close();
+                initTemplate(readFromInputStream(inputStreamOpenRawResource));
+                if (inputStreamOpenRawResource != null) {
+                    inputStreamOpenRawResource.close();
                 }
             } finally {
             }
@@ -75,15 +75,15 @@ public class TemplateManager {
         Log.i(this.TAG, "static templates loaded, uidsize:" + this.mUidTemplate.size() + ", colorsize:" + this.mColorTemplate.size());
     }
 
-    public void loadTemplateFromUri(Context context, Uri uri) {
+    public void loadTemplateFromUri(Context context, Uri uri) throws IOException {
         try {
-            InputStream openInputStream = context.getContentResolver().openInputStream(uri);
+            InputStream inputStreamOpenInputStream = context.getContentResolver().openInputStream(uri);
             try {
-                String readFromInputStream = readFromInputStream(openInputStream);
-                initTemplate(readFromInputStream);
-                writeThemeParkTemplate(readFromInputStream);
-                if (openInputStream != null) {
-                    openInputStream.close();
+                String fromInputStream = readFromInputStream(inputStreamOpenInputStream);
+                initTemplate(fromInputStream);
+                writeThemeParkTemplate(fromInputStream);
+                if (inputStreamOpenInputStream != null) {
+                    inputStreamOpenInputStream.close();
                 }
             } finally {
             }
@@ -93,7 +93,7 @@ public class TemplateManager {
         Log.i(this.TAG, "loadTemplateFromUri uidsize:" + this.mUidTemplate.size() + ", colorsize:" + this.mColorTemplate.size());
     }
 
-    private void writeThemeParkTemplate(String str) {
+    private void writeThemeParkTemplate(String str) throws IOException {
         File file = new File(SamsungThemeConstants.PATH_THEMEPARK_STATE_CHECK);
         if (file.exists()) {
             try {
@@ -140,10 +140,10 @@ public class TemplateManager {
         for (int i = 0; i < jSONArray.length(); i++) {
             JSONObject jSONObject = jSONArray.getJSONObject(i);
             UidItem uidItem = new UidItem();
-            String[] split = jSONObject.getString("theme").split(",");
-            uidItem.theme = split[0];
-            if (split.length == 2) {
-                uidItem.themes = split;
+            String[] strArrSplit = jSONObject.getString("theme").split(",");
+            uidItem.theme = strArrSplit[0];
+            if (strArrSplit.length == 2) {
+                uidItem.themes = strArrSplit;
             }
             uidItem.uid = jSONObject.getString("uid");
             uidItem.opacity = Integer.valueOf(jSONObject.isNull("opacity") ? 100 : jSONObject.getInt("opacity"));
@@ -151,8 +151,8 @@ public class TemplateManager {
         }
     }
 
-    private void initColorTemplate(JSONArray jSONArray, HashMap<String, ColorItem> hashMap) throws JSONException {
-        hashMap.clear();
+    private void initColorTemplate(JSONArray jSONArray, HashMap<String, ColorItem> map) throws JSONException {
+        map.clear();
         for (int i = 0; i < jSONArray.length(); i++) {
             JSONObject jSONObject = jSONArray.getJSONObject(i);
             if (!jSONObject.isNull("name") && !jSONObject.isNull("colorLight")) {
@@ -166,7 +166,7 @@ public class TemplateManager {
                 checkValidTemplate(colorItem.colorDark);
                 checkValidTemplate(colorItem.colorLightGray);
                 checkValidTemplate(colorItem.colorDarkGray);
-                hashMap.put(colorItem.name, colorItem);
+                map.put(colorItem.name, colorItem);
             }
         }
     }
@@ -178,12 +178,12 @@ public class TemplateManager {
         Log.e(this.TAG, "Error in color mapping. wrong value : " + str);
     }
 
-    public void update(ApplicationInfo applicationInfo) {
+    public void update(ApplicationInfo applicationInfo) throws IOException {
         String str;
         Bundle bundle;
         Resources packageResources;
-        int intValue;
-        InputStream openRawResource;
+        int iIntValue;
+        InputStream inputStreamOpenRawResource;
         try {
             str = applicationInfo.packageName;
             bundle = applicationInfo.metaData;
@@ -200,11 +200,11 @@ public class TemplateManager {
                 int identifier = packageResources.getIdentifier(str2, "raw", applicationInfo.packageName);
                 if (identifier > 0) {
                     try {
-                        openRawResource = packageResources.openRawResource(identifier);
+                        inputStreamOpenRawResource = packageResources.openRawResource(identifier);
                         try {
-                            updateTemplate(readFromInputStream(openRawResource), str);
-                            if (openRawResource != null) {
-                                openRawResource.close();
+                            updateTemplate(readFromInputStream(inputStreamOpenRawResource), str);
+                            if (inputStreamOpenRawResource != null) {
+                                inputStreamOpenRawResource.close();
                             }
                         } catch (Throwable th) {
                             throw th;
@@ -218,22 +218,22 @@ public class TemplateManager {
             }
             return;
         }
-        if (!(obj instanceof Integer) || (intValue = ((Integer) obj).intValue()) <= 0) {
+        if (!(obj instanceof Integer) || (iIntValue = ((Integer) obj).intValue()) <= 0) {
             return;
         }
         try {
-            openRawResource = packageResources.openRawResource(intValue);
+            inputStreamOpenRawResource = packageResources.openRawResource(iIntValue);
             try {
-                updateTemplate(readFromInputStream(openRawResource), str);
-                if (openRawResource != null) {
-                    openRawResource.close();
+                updateTemplate(readFromInputStream(inputStreamOpenRawResource), str);
+                if (inputStreamOpenRawResource != null) {
+                    inputStreamOpenRawResource.close();
                     return;
                 }
                 return;
             } finally {
-                if (openRawResource != null) {
+                if (inputStreamOpenRawResource != null) {
                     try {
-                        openRawResource.close();
+                        inputStreamOpenRawResource.close();
                     } catch (Throwable th2) {
                         th.addSuppressed(th2);
                     }
@@ -322,9 +322,9 @@ public class TemplateManager {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         byte[] bArr = new byte[1024];
         while (true) {
-            int read = inputStream.read(bArr);
-            if (read != -1) {
-                byteArrayOutputStream.write(bArr, 0, read);
+            int i = inputStream.read(bArr);
+            if (i != -1) {
+                byteArrayOutputStream.write(bArr, 0, i);
             } else {
                 return byteArrayOutputStream.toString("UTF-8");
             }
@@ -390,80 +390,43 @@ public class TemplateManager {
 
     /* JADX INFO: Access modifiers changed from: private */
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
+    /* JADX WARN: Removed duplicated region for block: B:11:0x0030  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public Integer getColorFromName(String str) {
-        boolean z;
         int i;
         TemplateManager templateManager;
         if (str.startsWith("#")) {
             return Integer.valueOf(Color.parseColor(str));
         }
-        String[] split = str.split(Session.SESSION_SEPARATION_CHAR_CHILD);
+        String[] strArrSplit = str.split(Session.SESSION_SEPARATION_CHAR_CHILD);
         int i2 = 2;
-        if (split.length != 2) {
+        if (strArrSplit.length != 2) {
             return null;
         }
-        String str2 = split[0];
+        String str2 = strArrSplit[0];
         str2.hashCode();
-        switch (str2.hashCode()) {
-            case -1177623385:
-                if (str2.equals(WallpaperThemeConstants.STRING_ACCENT1)) {
-                    z = false;
-                    break;
-                }
-                z = -1;
-                break;
-            case -1177623384:
-                if (str2.equals(WallpaperThemeConstants.STRING_ACCENT2)) {
-                    z = true;
-                    break;
-                }
-                z = -1;
-                break;
-            case -1177623383:
-                if (str2.equals(WallpaperThemeConstants.STRING_ACCENT3)) {
-                    z = 2;
-                    break;
-                }
-                z = -1;
-                break;
-            case 1339398986:
-                if (str2.equals(WallpaperThemeConstants.STRING_NEUTRAL1)) {
-                    z = 3;
-                    break;
-                }
-                z = -1;
-                break;
-            case 1339398987:
-                if (str2.equals(WallpaperThemeConstants.STRING_NEUTRAL2)) {
-                    z = 4;
-                    break;
-                }
-                z = -1;
-                break;
-            default:
-                z = -1;
-                break;
-        }
-        switch (z) {
-            case false:
+        switch (str2) {
+            case "accent1":
                 i = 0;
                 break;
-            case true:
+            case "accent2":
                 i = 1;
                 break;
-            case true:
+            case "accent3":
                 i = 2;
                 break;
-            case true:
+            case "neutral1":
                 i = 3;
                 break;
-            case true:
+            case "neutral2":
                 i = 4;
                 break;
             default:
                 return null;
         }
-        String str3 = split[1];
+        String str3 = strArrSplit[1];
         str3.hashCode();
         switch (str3) {
             case "0":

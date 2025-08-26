@@ -9,13 +9,12 @@ import java.util.List;
 import kotlin.collections.ArraysKt___ArraysKt;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class SavedStateViewModelFactoryKt {
     public static final List ANDROID_VIEWMODEL_SIGNATURE = Arrays.asList(Application.class, SavedStateHandle.class);
     public static final List VIEWMODEL_SIGNATURE = Collections.singletonList(SavedStateHandle.class);
 
-    public static final Constructor findMatchingConstructor(Class cls, List list) {
+    public static final Constructor findMatchingConstructor(Class cls, List list) throws SecurityException {
         for (Constructor<?> constructor : cls.getConstructors()) {
             List list2 = ArraysKt___ArraysKt.toList(constructor.getParameterTypes());
             if (Intrinsics.areEqual(list, list2)) {

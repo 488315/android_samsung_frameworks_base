@@ -24,6 +24,7 @@ import com.android.systemui.blur.ui.viewmodel.SecCapturedBlurContainerViewModel;
 import com.android.systemui.bouncer.domain.interactor.PrimaryBouncerInteractor;
 import com.android.systemui.lifecycle.RepeatWhenAttachedKt;
 import com.android.systemui.statusbar.phone.CapturedBlurContainer;
+import com.android.systemui.util.SecQsUiDisplayModeInteractor;
 import com.android.systemui.volume.util.ViewVisibilityUtil;
 import com.android.systemui.wallpaper.WallpaperUtils;
 import java.util.Optional;
@@ -46,12 +47,12 @@ import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1;
 import kotlinx.coroutines.flow.ReadonlyStateFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SecCapturedBlurContainerBinder implements SecPanelCapturedBlurBinding {
     public static final String TAG;
     public final SecCapturedBlurBitmapGenerator secCapturedBlurBitmapGenerator;
     public final SecCapturedBlurInteractor secCapturedBlurInteractor;
+    public final SecQsUiDisplayModeInteractor secQsUiDisplayModeInteractor;
     public final SecBlurSettingsInteractor settingsInteractor;
     public final CapturedBlurContainer view;
     public final SecCapturedBlurContainerViewModel viewModel;
@@ -62,9 +63,9 @@ public final class SecCapturedBlurContainerBinder implements SecPanelCapturedBlu
         public final void run() {
             String str = SecCapturedBlurContainerBinder.TAG;
             Log.d(str, "Retry wallpaper screenshot");
-            BitmapDrawable blurredBitmapWithEffect = SecCapturedBlurContainerBinder.this.secCapturedBlurBitmapGenerator.getBlurredBitmapWithEffect(SecPanelBlurBinding.BlurType.BOUNCER);
+            BitmapDrawable blurredBitmapWithEffect = this.this$0.secCapturedBlurBitmapGenerator.getBlurredBitmapWithEffect(SecPanelBlurBinding.BlurType.BOUNCER);
             if (blurredBitmapWithEffect != null) {
-                SecCapturedBlurContainerBinder secCapturedBlurContainerBinder = SecCapturedBlurContainerBinder.this;
+                SecCapturedBlurContainerBinder secCapturedBlurContainerBinder = this.this$0;
                 secCapturedBlurContainerBinder.view.setBackgroundDrawable(blurredBitmapWithEffect);
                 secCapturedBlurContainerBinder.view.setAlpha(1.0f);
                 Log.d(str, "applied bitmap from retryBouncerBlur");
@@ -72,42 +73,37 @@ public final class SecCapturedBlurContainerBinder implements SecPanelCapturedBlu
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.blur.ui.viewbinder.SecCapturedBlurContainerBinder$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function3 {
-        final /* synthetic */ Optional<SecCapturedBlurCollapseShaderInteractor> $secCapturedBlurCollapseShaderInteractor;
         private /* synthetic */ Object L$0;
         int label;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.blur.ui.viewbinder.SecCapturedBlurContainerBinder$1$1, reason: invalid class name and collision with other inner class name */
-        final class C00541 extends SuspendLambda implements Function2 {
+        final class C01071 extends SuspendLambda implements Function2 {
             final /* synthetic */ LifecycleOwner $$this$repeatWhenAttached;
-            final /* synthetic */ Optional<SecCapturedBlurCollapseShaderInteractor> $secCapturedBlurCollapseShaderInteractor;
             private /* synthetic */ Object L$0;
             int label;
             final /* synthetic */ SecCapturedBlurContainerBinder this$0;
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.blur.ui.viewbinder.SecCapturedBlurContainerBinder$1$1$1, reason: invalid class name and collision with other inner class name */
-            final class C00551 extends SuspendLambda implements Function2 {
+            final class C01081 extends SuspendLambda implements Function2 {
                 int label;
                 final /* synthetic */ SecCapturedBlurContainerBinder this$0;
 
                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-                public C00551(SecCapturedBlurContainerBinder secCapturedBlurContainerBinder, Continuation continuation) {
+                public C01081(SecCapturedBlurContainerBinder secCapturedBlurContainerBinder, Continuation continuation) {
                     super(2, continuation);
                     this.this$0 = secCapturedBlurContainerBinder;
                 }
 
                 @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
                 public final Continuation create(Object obj, Continuation continuation) {
-                    return new C00551(this.this$0, continuation);
+                    return new C01081(this.this$0, continuation);
                 }
 
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj, Object obj2) {
-                    return ((C00551) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                    return ((C01081) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
                 }
 
                 @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
@@ -121,11 +117,11 @@ public final class SecCapturedBlurContainerBinder implements SecPanelCapturedBlu
                         FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.blur.ui.viewbinder.SecCapturedBlurContainerBinder.1.1.1.1
                             @Override // kotlinx.coroutines.flow.FlowCollector
                             public final Object emit(Object obj2, Continuation continuation) {
-                                boolean booleanValue = ((Boolean) obj2).booleanValue();
-                                EmergencyButtonController$$ExternalSyntheticOutline0.m("shouldBeGone = ", SecCapturedBlurContainerBinder.TAG, booleanValue);
-                                SecCapturedBlurContainerBinder secCapturedBlurContainerBinder2 = SecCapturedBlurContainerBinder.this;
+                                boolean zBooleanValue = ((Boolean) obj2).booleanValue();
+                                EmergencyButtonController$$ExternalSyntheticOutline0.m("shouldBeGone = ", SecCapturedBlurContainerBinder.TAG, zBooleanValue);
+                                SecCapturedBlurContainerBinder secCapturedBlurContainerBinder2 = secCapturedBlurContainerBinder;
                                 secCapturedBlurContainerBinder2.getClass();
-                                secCapturedBlurContainerBinder2.view.setVisibility(booleanValue ? 8 : 0);
+                                secCapturedBlurContainerBinder2.view.setVisibility(zBooleanValue ? 8 : 0);
                                 return Unit.INSTANCE;
                             }
                         };
@@ -143,26 +139,23 @@ public final class SecCapturedBlurContainerBinder implements SecPanelCapturedBlu
                 }
             }
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.blur.ui.viewbinder.SecCapturedBlurContainerBinder$1$1$3, reason: invalid class name */
             final class AnonymousClass3 extends SuspendLambda implements Function2 {
                 final /* synthetic */ CoroutineScope $$this$repeatOnLifecycle;
-                final /* synthetic */ Optional<SecCapturedBlurCollapseShaderInteractor> $secCapturedBlurCollapseShaderInteractor;
                 /* synthetic */ Object L$0;
                 int label;
                 final /* synthetic */ SecCapturedBlurContainerBinder this$0;
 
                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-                public AnonymousClass3(SecCapturedBlurContainerBinder secCapturedBlurContainerBinder, Optional<SecCapturedBlurCollapseShaderInteractor> optional, CoroutineScope coroutineScope, Continuation continuation) {
+                public AnonymousClass3(SecCapturedBlurContainerBinder secCapturedBlurContainerBinder, CoroutineScope coroutineScope, Continuation continuation) {
                     super(2, continuation);
                     this.this$0 = secCapturedBlurContainerBinder;
-                    this.$secCapturedBlurCollapseShaderInteractor = optional;
                     this.$$this$repeatOnLifecycle = coroutineScope;
                 }
 
                 @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
                 public final Continuation create(Object obj, Continuation continuation) {
-                    AnonymousClass3 anonymousClass3 = new AnonymousClass3(this.this$0, this.$secCapturedBlurCollapseShaderInteractor, this.$$this$repeatOnLifecycle, continuation);
+                    AnonymousClass3 anonymousClass3 = new AnonymousClass3(this.this$0, this.$$this$repeatOnLifecycle, continuation);
                     anonymousClass3.L$0 = obj;
                     return anonymousClass3;
                 }
@@ -180,14 +173,11 @@ public final class SecCapturedBlurContainerBinder implements SecPanelCapturedBlu
                     }
                     ResultKt.throwOnFailure(obj);
                     SecPanelBlurBinding.BlurType blurType = (SecPanelBlurBinding.BlurType) this.L$0;
-                    if (this.this$0.view.getVisibility() != 0) {
-                        if (blurType == SecPanelBlurBinding.BlurType.QUICK_PANEL) {
-                            this.$secCapturedBlurCollapseShaderInteractor.get().sendCollapseQsWhileCapturedViewInvisible();
-                        }
-                        return Unit.INSTANCE;
-                    }
                     CapturedBlurContainer capturedBlurContainer = this.this$0.view;
                     if (capturedBlurContainer.getAlpha() > 0.0f && capturedBlurContainer.getBackground() == null) {
+                        if (this.this$0.secQsUiDisplayModeInteractor.isTablet()) {
+                            return Unit.INSTANCE;
+                        }
                         BitmapDrawable blurredBitmapWithEffect = this.this$0.secCapturedBlurBitmapGenerator.getBlurredBitmapWithEffect(blurType);
                         if (blurredBitmapWithEffect != null) {
                             this.this$0.view.setBackgroundDrawable(blurredBitmapWithEffect);
@@ -206,23 +196,22 @@ public final class SecCapturedBlurContainerBinder implements SecPanelCapturedBlu
             }
 
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-            public C00541(SecCapturedBlurContainerBinder secCapturedBlurContainerBinder, LifecycleOwner lifecycleOwner, Optional<SecCapturedBlurCollapseShaderInteractor> optional, Continuation continuation) {
+            public C01071(SecCapturedBlurContainerBinder secCapturedBlurContainerBinder, LifecycleOwner lifecycleOwner, Continuation continuation) {
                 super(2, continuation);
                 this.this$0 = secCapturedBlurContainerBinder;
                 this.$$this$repeatWhenAttached = lifecycleOwner;
-                this.$secCapturedBlurCollapseShaderInteractor = optional;
             }
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
             public final Continuation create(Object obj, Continuation continuation) {
-                C00541 c00541 = new C00541(this.this$0, this.$$this$repeatWhenAttached, this.$secCapturedBlurCollapseShaderInteractor, continuation);
-                c00541.L$0 = obj;
-                return c00541;
+                C01071 c01071 = new C01071(this.this$0, this.$$this$repeatWhenAttached, continuation);
+                c01071.L$0 = obj;
+                return c01071;
             }
 
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
-                return ((C00541) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                return ((C01071) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
             }
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
@@ -233,22 +222,20 @@ public final class SecCapturedBlurContainerBinder implements SecPanelCapturedBlu
                 }
                 ResultKt.throwOnFailure(obj);
                 CoroutineScope coroutineScope = (CoroutineScope) this.L$0;
-                BuildersKt.launch$default(coroutineScope, null, null, new C00551(this.this$0, null), 3);
+                BuildersKt.launch$default(coroutineScope, null, null, new C01081(this.this$0, null), 3);
                 SecCapturedBlurContainerBinder secCapturedBlurContainerBinder = this.this$0;
-                FlowKt.launchIn(new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(secCapturedBlurContainerBinder.viewModel.requestCaptureBlur, new AnonymousClass3(secCapturedBlurContainerBinder, this.$secCapturedBlurCollapseShaderInteractor, coroutineScope, null)), LifecycleOwnerKt.getLifecycleScope(this.$$this$repeatWhenAttached));
+                FlowKt.launchIn(new FlowKt__TransformKt$onEach$$inlined$unsafeTransform$1(secCapturedBlurContainerBinder.viewModel.requestCaptureBlur, new AnonymousClass3(secCapturedBlurContainerBinder, coroutineScope, null)), LifecycleOwnerKt.getLifecycleScope(this.$$this$repeatWhenAttached));
                 return Unit.INSTANCE;
             }
         }
 
-        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-        public AnonymousClass1(Optional<SecCapturedBlurCollapseShaderInteractor> optional, Continuation continuation) {
+        public AnonymousClass1(Continuation continuation) {
             super(3, continuation);
-            this.$secCapturedBlurCollapseShaderInteractor = optional;
         }
 
         @Override // kotlin.jvm.functions.Function3
         public final Object invoke(Object obj, Object obj2, Object obj3) {
-            AnonymousClass1 anonymousClass1 = SecCapturedBlurContainerBinder.this.new AnonymousClass1(this.$secCapturedBlurCollapseShaderInteractor, (Continuation) obj3);
+            AnonymousClass1 anonymousClass1 = SecCapturedBlurContainerBinder.this.new AnonymousClass1((Continuation) obj3);
             anonymousClass1.L$0 = (LifecycleOwner) obj;
             return anonymousClass1.invokeSuspend(Unit.INSTANCE);
         }
@@ -261,9 +248,9 @@ public final class SecCapturedBlurContainerBinder implements SecPanelCapturedBlu
                 ResultKt.throwOnFailure(obj);
                 LifecycleOwner lifecycleOwner = (LifecycleOwner) this.L$0;
                 Lifecycle.State state = Lifecycle.State.CREATED;
-                C00541 c00541 = new C00541(SecCapturedBlurContainerBinder.this, lifecycleOwner, this.$secCapturedBlurCollapseShaderInteractor, null);
+                C01071 c01071 = new C01071(SecCapturedBlurContainerBinder.this, lifecycleOwner, null);
                 this.label = 1;
-                if (RepeatOnLifecycleKt.repeatOnLifecycle(lifecycleOwner, state, c00541, this) == coroutineSingletons) {
+                if (RepeatOnLifecycleKt.repeatOnLifecycle(lifecycleOwner, state, c01071, this) == coroutineSingletons) {
                     return coroutineSingletons;
                 }
             } else {
@@ -276,7 +263,6 @@ public final class SecCapturedBlurContainerBinder implements SecPanelCapturedBlu
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -292,13 +278,14 @@ public final class SecCapturedBlurContainerBinder implements SecPanelCapturedBlu
     }
 
     /* JADX WARN: Type inference failed for: r2v4, types: [com.android.systemui.blur.ui.viewbinder.SecCapturedBlurContainerBinder$retryBouncerBlur$1] */
-    public SecCapturedBlurContainerBinder(CapturedBlurContainer capturedBlurContainer, SecCapturedBlurContainerViewModel.Factory factory, SecCapturedBlurBitmapGenerator secCapturedBlurBitmapGenerator, SecCapturedBlurInteractor secCapturedBlurInteractor, SecBlurSettingsInteractor secBlurSettingsInteractor, final PrimaryBouncerInteractor primaryBouncerInteractor, Optional<SecCapturedBlurCollapseShaderInteractor> optional, Optional<SecCapturedBlurInfoInteractor> optional2) {
+    public SecCapturedBlurContainerBinder(CapturedBlurContainer capturedBlurContainer, SecCapturedBlurContainerViewModel.Factory factory, SecCapturedBlurBitmapGenerator secCapturedBlurBitmapGenerator, SecCapturedBlurInteractor secCapturedBlurInteractor, SecBlurSettingsInteractor secBlurSettingsInteractor, final PrimaryBouncerInteractor primaryBouncerInteractor, Optional<SecCapturedBlurCollapseShaderInteractor> optional, Optional<SecCapturedBlurInfoInteractor> optional2, SecQsUiDisplayModeInteractor secQsUiDisplayModeInteractor) {
         this.view = capturedBlurContainer;
         this.secCapturedBlurBitmapGenerator = secCapturedBlurBitmapGenerator;
         this.secCapturedBlurInteractor = secCapturedBlurInteractor;
         this.settingsInteractor = secBlurSettingsInteractor;
+        this.secQsUiDisplayModeInteractor = secQsUiDisplayModeInteractor;
         this.viewModel = factory.create();
-        RepeatWhenAttachedKt.repeatWhenAttached(capturedBlurContainer, EmptyCoroutineContext.INSTANCE, new AnonymousClass1(optional, null));
+        RepeatWhenAttachedKt.repeatWhenAttached(capturedBlurContainer, EmptyCoroutineContext.INSTANCE, new AnonymousClass1(null));
         capturedBlurContainer.addOnLayoutChangeListener(new View.OnLayoutChangeListener() { // from class: com.android.systemui.blur.ui.viewbinder.SecCapturedBlurContainerBinder.2
             @Override // android.view.View.OnLayoutChangeListener
             public final void onLayoutChange(View view, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8) {
@@ -319,10 +306,10 @@ public final class SecCapturedBlurContainerBinder implements SecPanelCapturedBlu
                     public final void run() {
                         BitmapDrawable blurredBitmapWithEffect;
                         BitmapDrawable blurredBitmapWithEffect2;
-                        if (PrimaryBouncerInteractor.this.isBouncerShowing() && (blurredBitmapWithEffect2 = secCapturedBlurContainerBinder.secCapturedBlurBitmapGenerator.getBlurredBitmapWithEffect(SecPanelBlurBinding.BlurType.BOUNCER)) != null) {
+                        if (primaryBouncerInteractor2.isBouncerShowing() && (blurredBitmapWithEffect2 = secCapturedBlurContainerBinder.secCapturedBlurBitmapGenerator.getBlurredBitmapWithEffect(SecPanelBlurBinding.BlurType.BOUNCER)) != null) {
                             secCapturedBlurContainerBinder.view.setBackgroundDrawable(blurredBitmapWithEffect2);
                         }
-                        if (!((Boolean) secCapturedBlurContainerBinder.viewModel.fullScreenBlurShowing.$$delegate_0.getValue()).booleanValue() || (blurredBitmapWithEffect = secCapturedBlurContainerBinder.secCapturedBlurBitmapGenerator.getBlurredBitmapWithEffect(SecPanelBlurBinding.BlurType.FULL_SCREEN)) == null) {
+                        if (!((Boolean) secCapturedBlurContainerBinder.viewModel.fullScreenBlurShowing.$$delegate_0.getValue()).booleanValue() || secCapturedBlurContainerBinder.secQsUiDisplayModeInteractor.isTablet() || (blurredBitmapWithEffect = secCapturedBlurContainerBinder.secCapturedBlurBitmapGenerator.getBlurredBitmapWithEffect(SecPanelBlurBinding.BlurType.FULL_SCREEN)) == null) {
                             return;
                         }
                         secCapturedBlurContainerBinder.view.setBackgroundDrawable(blurredBitmapWithEffect);
@@ -343,14 +330,21 @@ public final class SecCapturedBlurContainerBinder implements SecPanelCapturedBlu
     }
 
     @Override // com.android.systemui.blur.di.SecPanelBlurBinding
-    public final void setFraction(float f) {
-        CapturedBlurContainer capturedBlurContainer = this.view;
+    public final void setFraction(float f, SecPanelBlurBinding.BlurType blurType) {
+        SecPanelBlurBinding.BlurType blurType2 = SecPanelBlurBinding.BlurType.BOUNCER;
         SecCapturedBlurContainerViewModel secCapturedBlurContainerViewModel = this.viewModel;
-        if (f == 0.0f && !((Boolean) secCapturedBlurContainerViewModel.secCapturedBlurInteractor.mirrorShowing.$$delegate_0.getValue()).booleanValue()) {
-            capturedBlurContainer.setAlpha(0.0f);
-            capturedBlurContainer.setBackgroundDrawable(null);
+        if (blurType == blurType2 || !((Boolean) secCapturedBlurContainerViewModel.bouncerShowing.$$delegate_0.getValue()).booleanValue()) {
+            CapturedBlurContainer capturedBlurContainer = this.view;
+            if (f == 0.0f && !((Boolean) secCapturedBlurContainerViewModel.secCapturedBlurInteractor.mirrorShowing.$$delegate_0.getValue()).booleanValue()) {
+                capturedBlurContainer.setAlpha(0.0f);
+                capturedBlurContainer.setBackgroundDrawable(null);
+            }
+            capturedBlurContainer.setAlpha(f);
+            Log.d(TAG, "setFraction fraction = " + f + ", mirrorShowing = " + ((Boolean) secCapturedBlurContainerViewModel.secCapturedBlurInteractor.mirrorShowing.$$delegate_0.getValue()).booleanValue());
         }
-        capturedBlurContainer.setAlpha(f);
-        Log.d(TAG, "setFraction fraction = " + f + " , mirrorShowing = " + ((Boolean) secCapturedBlurContainerViewModel.secCapturedBlurInteractor.mirrorShowing.$$delegate_0.getValue()).booleanValue());
+    }
+
+    @Override // com.android.systemui.blur.di.SecPanelBlurBinding
+    public final void updateConfigurationChanged() {
     }
 }

@@ -60,10 +60,10 @@ public final class CompoundFormula extends IntegrityFormula implements Parcelabl
 
     CompoundFormula(Parcel parcel) {
         this.mConnector = parcel.readInt();
-        int readInt = parcel.readInt();
-        Preconditions.checkArgument(readInt >= 0, "Must have non-negative length. Got %d", Integer.valueOf(readInt));
-        this.mFormulas = new ArrayList(readInt);
-        for (int i = 0; i < readInt; i++) {
+        int i = parcel.readInt();
+        Preconditions.checkArgument(i >= 0, "Must have non-negative length. Got %d", Integer.valueOf(i));
+        this.mFormulas = new ArrayList(i);
+        for (int i2 = 0; i2 < i; i2++) {
             this.mFormulas.add(IntegrityFormula.readFromParcel(parcel));
         }
         validateFormulas(this.mConnector, this.mFormulas);
@@ -84,9 +84,7 @@ public final class CompoundFormula extends IntegrityFormula implements Parcelabl
             return getFormulas().stream().allMatch(new Predicate() { // from class: android.content.integrity.CompoundFormula$$ExternalSyntheticLambda2
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
-                    boolean matches;
-                    matches = ((IntegrityFormula) obj).matches(AppInstallMetadata.this);
-                    return matches;
+                    return ((IntegrityFormula) obj).matches(appInstallMetadata);
                 }
             });
         }
@@ -94,9 +92,7 @@ public final class CompoundFormula extends IntegrityFormula implements Parcelabl
             return getFormulas().stream().anyMatch(new Predicate() { // from class: android.content.integrity.CompoundFormula$$ExternalSyntheticLambda3
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
-                    boolean matches;
-                    matches = ((IntegrityFormula) obj).matches(AppInstallMetadata.this);
-                    return matches;
+                    return ((IntegrityFormula) obj).matches(appInstallMetadata);
                 }
             });
         }
@@ -111,9 +107,7 @@ public final class CompoundFormula extends IntegrityFormula implements Parcelabl
         return getFormulas().stream().anyMatch(new Predicate() { // from class: android.content.integrity.CompoundFormula$$ExternalSyntheticLambda0
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                boolean isAppCertificateFormula;
-                isAppCertificateFormula = ((IntegrityFormula) obj).isAppCertificateFormula();
-                return isAppCertificateFormula;
+                return ((IntegrityFormula) obj).isAppCertificateFormula();
             }
         });
     }
@@ -123,9 +117,7 @@ public final class CompoundFormula extends IntegrityFormula implements Parcelabl
         return getFormulas().stream().anyMatch(new Predicate() { // from class: android.content.integrity.CompoundFormula$$ExternalSyntheticLambda1
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                boolean isAppCertificateLineageFormula;
-                isAppCertificateLineageFormula = ((IntegrityFormula) obj).isAppCertificateLineageFormula();
-                return isAppCertificateLineageFormula;
+                return ((IntegrityFormula) obj).isAppCertificateLineageFormula();
             }
         });
     }
@@ -135,9 +127,7 @@ public final class CompoundFormula extends IntegrityFormula implements Parcelabl
         return getFormulas().stream().anyMatch(new Predicate() { // from class: android.content.integrity.CompoundFormula$$ExternalSyntheticLambda4
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
-                boolean isInstallerFormula;
-                isInstallerFormula = ((IntegrityFormula) obj).isInstallerFormula();
-                return isInstallerFormula;
+                return ((IntegrityFormula) obj).isInstallerFormula();
             }
         });
     }

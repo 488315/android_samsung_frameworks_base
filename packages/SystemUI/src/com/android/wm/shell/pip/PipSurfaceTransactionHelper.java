@@ -10,7 +10,6 @@ import com.android.systemui.R;
 import com.android.wm.shell.transition.Transitions;
 import com.samsung.android.rune.CoreRune;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class PipSurfaceTransactionHelper {
     public int mCornerRadius;
@@ -21,11 +20,9 @@ public class PipSurfaceTransactionHelper {
     public final RectF mTmpDestinationRectF = new RectF();
     public final Rect mTmpDestinationRect = new Rect();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface SurfaceControlTransactionFactory {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class VsyncSurfaceControlTransactionFactory implements SurfaceControlTransactionFactory {
         public final SurfaceControl.Transaction getTransaction() {
             SurfaceControl.Transaction transaction = new SurfaceControl.Transaction();
@@ -56,19 +53,19 @@ public class PipSurfaceTransactionHelper {
         int i;
         this.mTmpDestinationRect.set(rect);
         this.mTmpDestinationRect.inset(rect3);
-        int width = this.mTmpDestinationRect.width();
-        int height = this.mTmpDestinationRect.height();
-        int width2 = rect2.width();
-        int height2 = rect2.height();
-        float f4 = width <= height ? width2 / width : height2 / height;
+        int iWidth = this.mTmpDestinationRect.width();
+        int iHeight = this.mTmpDestinationRect.height();
+        int iWidth2 = rect2.width();
+        int iHeight2 = rect2.height();
+        float f4 = iWidth <= iHeight ? iWidth2 / iWidth : iHeight2 / iHeight;
         Rect rect5 = this.mTmpDestinationRect;
         if (!z || rect4 == null) {
             boolean z3 = Transitions.SHELL_TRANSITIONS_ROTATION;
-            int i2 = z3 ? height2 : width2;
+            int i2 = z3 ? iHeight2 : iWidth2;
             if (!z3) {
-                width2 = height2;
+                iWidth2 = iHeight2;
             }
-            rect5.set(0, 0, i2, width2);
+            rect5.set(0, 0, i2, iWidth2);
             rect5.scale(1.0f / f4);
             rect5.offset(rect3.left, rect3.top);
             if (z) {

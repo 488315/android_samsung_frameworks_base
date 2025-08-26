@@ -86,7 +86,7 @@ public class TaskDrainer<T> {
         this.mExecutor.execute(new Runnable() { // from class: android.hardware.camera2.utils.TaskDrainer$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                TaskDrainer.this.lambda$postDrained$0();
+                this.f$0.lambda$postDrained$0();
             }
         });
     }

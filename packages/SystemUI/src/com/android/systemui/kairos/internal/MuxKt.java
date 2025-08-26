@@ -12,7 +12,6 @@ import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.collections.builders.ListBuilder;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public abstract class MuxKt {
     public static final void initializeDepth(MuxNode muxNode) {
@@ -36,8 +35,8 @@ public abstract class MuxKt {
     }
 
     public static final void initializeUpstream(MuxNode muxNode, EvalScope evalScope, Function1 function1, MutableMapK.Factory factory) {
-        Iterable iterable = (Iterable) function1.mo779invoke(evalScope);
-        ListBuilder createListBuilder = CollectionsKt__CollectionsJVMKt.createListBuilder();
+        Iterable iterable = (Iterable) function1.mo781invoke(evalScope);
+        ListBuilder listBuilderCreateListBuilder = CollectionsKt__CollectionsJVMKt.createListBuilder();
         Iterator it = iterable.iterator();
         while (true) {
             if (!it.hasNext()) {
@@ -47,18 +46,18 @@ public abstract class MuxKt {
             Object key = entry.getKey();
             EventsImpl eventsImpl = (EventsImpl) entry.getValue();
             MuxNode.BranchNode branchNode = muxNode.new BranchNode(key);
-            ActivationResult activate = eventsImpl.activate(evalScope, branchNode.schedulable);
-            if (activate != null) {
-                NodeConnection nodeConnection = activate.connection;
+            ActivationResult activationResultActivate = eventsImpl.activate(evalScope, branchNode.schedulable);
+            if (activationResultActivate != null) {
+                NodeConnection nodeConnection = activationResultActivate.connection;
                 branchNode.upstream = nodeConnection;
-                r2 = new Triple(key, branchNode, activate.needsEval ? nodeConnection.directUpstream : null);
+                triple = new Triple(key, branchNode, activationResultActivate.needsEval ? nodeConnection.directUpstream : null);
             }
-            createListBuilder.add(r2);
+            listBuilderCreateListBuilder.add(triple);
         }
-        ListBuilder build = createListBuilder.build();
-        muxNode.switchedIn = factory.create(Integer.valueOf(build.getSize()));
-        muxNode.upstreamData = factory.create(Integer.valueOf(build.getSize()));
-        ListIterator listIterator = build.listIterator(0);
+        ListBuilder listBuilderBuild = listBuilderCreateListBuilder.build();
+        muxNode.switchedIn = factory.create(Integer.valueOf(listBuilderBuild.getSize()));
+        muxNode.upstreamData = factory.create(Integer.valueOf(listBuilderBuild.getSize()));
+        ListIterator listIterator = listBuilderBuild.listIterator(0);
         while (true) {
             ListBuilder.Itr itr = (ListBuilder.Itr) listIterator;
             if (!itr.hasNext()) {
@@ -66,20 +65,20 @@ public abstract class MuxKt {
             }
             Triple triple = (Triple) itr.next();
             if (triple != null) {
-                Object component1 = triple.component1();
+                Object objComponent1 = triple.component1();
                 MuxNode.BranchNode branchNode2 = (MuxNode.BranchNode) triple.component2();
                 PullNode pullNode = (PullNode) triple.component3();
                 MutableMapK mutableMapK = muxNode.switchedIn;
                 if (mutableMapK == null) {
                     mutableMapK = null;
                 }
-                mutableMapK.put(component1, branchNode2);
+                mutableMapK.put(objComponent1, branchNode2);
                 if (pullNode != null) {
                     MutableMapK mutableMapK2 = muxNode.upstreamData;
                     if (mutableMapK2 == null) {
                         mutableMapK2 = null;
                     }
-                    mutableMapK2.put(component1, pullNode);
+                    mutableMapK2.put(objComponent1, pullNode);
                 }
             }
         }

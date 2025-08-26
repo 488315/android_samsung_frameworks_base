@@ -8,7 +8,6 @@ import java.util.Map;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class OngoingCardController$$ExternalSyntheticLambda0 implements Function1 {
     public final /* synthetic */ int $r8$classId;
@@ -21,7 +20,7 @@ public final /* synthetic */ class OngoingCardController$$ExternalSyntheticLambd
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
         OngoingCardController ongoingCardController = this.f$0;
         switch (this.$r8$classId) {
             case 0:
@@ -34,9 +33,12 @@ public final /* synthetic */ class OngoingCardController$$ExternalSyntheticLambd
             case 1:
                 String str = (String) obj;
                 Log.i("{OngoingExpandedPipController}", "Swipe L/R dismiss. sbnId= " + str + "}");
-                ongoingCardController.notifCollection.dismissOngoingActivityNotification(str);
                 OngoingActivityDataHelper.INSTANCE.getClass();
                 OngoingActivityData ongoingActivityDataByKey = OngoingActivityDataHelper.getOngoingActivityDataByKey(str);
+                if (ongoingActivityDataByKey != null) {
+                    ongoingActivityDataByKey.mDismissRequested = true;
+                }
+                ongoingCardController.notifCollection.dismissOngoingActivityNotification(str);
                 if (ongoingActivityDataByKey != null && ongoingActivityDataByKey.mIsMediaOngoingData) {
                     Log.i("{OngoingExpandedPipController}", "Swipe L/R delete media");
                     SecMediaPlayerData secMediaPlayerData = (SecMediaPlayerData) ongoingCardController.mediaHost.mMediaPlayerData.get(MediaType.OA);
@@ -50,7 +52,7 @@ public final /* synthetic */ class OngoingCardController$$ExternalSyntheticLambd
                 return Unit.INSTANCE;
             case 2:
                 OngoingActivityController$$ExternalSyntheticLambda2 ongoingActivityController$$ExternalSyntheticLambda22 = ongoingCardController.isMediaPlaying;
-                return Boolean.valueOf(ongoingActivityController$$ExternalSyntheticLambda22 == null ? false : ((Boolean) ongoingActivityController$$ExternalSyntheticLambda22.mo779invoke(Unit.INSTANCE)).booleanValue());
+                return Boolean.valueOf(ongoingActivityController$$ExternalSyntheticLambda22 == null ? false : ((Boolean) ongoingActivityController$$ExternalSyntheticLambda22.mo781invoke(Unit.INSTANCE)).booleanValue());
             default:
                 ongoingCardController.collapseAnimation();
                 return Unit.INSTANCE;

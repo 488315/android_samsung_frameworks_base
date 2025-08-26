@@ -2,7 +2,6 @@ package com.google.common.base;
 
 import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class Preconditions {
     private Preconditions() {
@@ -25,17 +24,17 @@ public final class Preconditions {
     }
 
     public static void checkElementIndex(int i, int i2) {
-        String lenientFormat;
+        String strLenientFormat;
         if (i < 0 || i >= i2) {
             if (i < 0) {
-                lenientFormat = Strings.lenientFormat("%s (%s) must not be negative", "index", Integer.valueOf(i));
+                strLenientFormat = Strings.lenientFormat("%s (%s) must not be negative", "index", Integer.valueOf(i));
             } else {
                 if (i2 < 0) {
                     throw new IllegalArgumentException(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i2, "negative size: "));
                 }
-                lenientFormat = Strings.lenientFormat("%s (%s) must be less than size (%s)", "index", Integer.valueOf(i), Integer.valueOf(i2));
+                strLenientFormat = Strings.lenientFormat("%s (%s) must be less than size (%s)", "index", Integer.valueOf(i), Integer.valueOf(i2));
             }
-            throw new IndexOutOfBoundsException(lenientFormat);
+            throw new IndexOutOfBoundsException(strLenientFormat);
         }
     }
 

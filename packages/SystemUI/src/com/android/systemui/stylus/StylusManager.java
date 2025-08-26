@@ -18,7 +18,6 @@ import com.android.systemui.flags.FeatureFlags;
 import com.android.systemui.flags.FeatureFlagsClassicRelease;
 import com.android.systemui.flags.Flags;
 import com.android.systemui.log.DebugLogger;
-import com.android.systemui.stylus.StylusManager;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -31,7 +30,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.Reflection;
 import kotlin.text.Charsets;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class StylusManager implements InputManager.InputDeviceListener, InputManager.InputDeviceBatteryListener, BluetoothAdapter.OnMetadataChangedListener {
     public static final String TAG;
@@ -49,7 +47,6 @@ public final class StylusManager implements InputManager.InputDeviceListener, In
     public final Map inputDeviceBtSessionIdMap = new ArrayMap();
     public final InstanceIdSequence instanceIdSequence = new InstanceIdSequence(8192);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -78,8 +75,8 @@ public final class StylusManager implements InputManager.InputDeviceListener, In
         this.uiEventLogger = uiEventLogger;
     }
 
-    public final void onBatteryStateChanged(final int i, final long j, final BatteryState batteryState) {
-        this.handler.post(new Runnable(batteryState, i, j) { // from class: com.android.systemui.stylus.StylusManager$onBatteryStateChanged$1
+    public final void onBatteryStateChanged(int i, long j, BatteryState batteryState) {
+        this.handler.post(new Runnable(batteryState, i, j) { // from class: com.android.systemui.stylus.StylusManager.onBatteryStateChanged.1
             public final /* synthetic */ BatteryState $batteryState;
             public final /* synthetic */ int $deviceId;
 
@@ -97,9 +94,9 @@ public final class StylusManager implements InputManager.InputDeviceListener, In
                     int i2 = !((ArrayMap) stylusManager2.inputDeviceBtSessionIdMap).isEmpty() ? 1 : 0;
                     if (z2 && stylusManager2.usiSessionId == null) {
                         Reflection.getOrCreateKotlinClass(StylusManager.class).getSimpleName();
-                        InstanceId newInstanceId = stylusManager2.instanceIdSequence.newInstanceId();
-                        stylusManager2.usiSessionId = newInstanceId;
-                        stylusManager2.uiEventLogger.logWithInstanceIdAndPosition(StylusUiEvent.USI_STYLUS_BATTERY_PRESENCE_FIRST_DETECTED, 0, (String) null, newInstanceId, i2);
+                        InstanceId instanceIdNewInstanceId = stylusManager2.instanceIdSequence.newInstanceId();
+                        stylusManager2.usiSessionId = instanceIdNewInstanceId;
+                        stylusManager2.uiEventLogger.logWithInstanceIdAndPosition(StylusUiEvent.USI_STYLUS_BATTERY_PRESENCE_FIRST_DETECTED, 0, (String) null, instanceIdNewInstanceId, i2);
                     } else if (!z2 && stylusManager2.usiSessionId != null) {
                         Reflection.getOrCreateKotlinClass(StylusManager.class).getSimpleName();
                         stylusManager2.uiEventLogger.logWithInstanceIdAndPosition(StylusUiEvent.USI_STYLUS_BATTERY_PRESENCE_REMOVED, 0, (String) null, stylusManager2.usiSessionId, i2);
@@ -113,7 +110,7 @@ public final class StylusManager implements InputManager.InputDeviceListener, In
                     BatteryState batteryState3 = this.$batteryState;
                     Iterator it = stylusManager3.stylusCallbacks.iterator();
                     while (it.hasNext()) {
-                        ((StylusManager.StylusCallback) it.next()).onStylusUsiBatteryStateChanged(i3, batteryState3);
+                        ((StylusCallback) it.next()).onStylusUsiBatteryStateChanged(i3, batteryState3);
                         Unit unit = Unit.INSTANCE;
                     }
                 }
@@ -212,7 +209,7 @@ public final class StylusManager implements InputManager.InputDeviceListener, In
     }
 
     public final void onMetadataChanged(final BluetoothDevice bluetoothDevice, final int i, final byte[] bArr) {
-        this.handler.post(new Runnable() { // from class: com.android.systemui.stylus.StylusManager$onMetadataChanged$1
+        this.handler.post(new Runnable() { // from class: com.android.systemui.stylus.StylusManager.onMetadataChanged.1
             @Override // java.lang.Runnable
             public final void run() {
                 StylusManager stylusManager = StylusManager.this;
@@ -233,7 +230,7 @@ public final class StylusManager implements InputManager.InputDeviceListener, In
                         Reflection.getOrCreateKotlinClass(stylusManager2.getClass()).getSimpleName();
                         Iterator it = StylusManager.this.stylusCallbacks.iterator();
                         while (it.hasNext()) {
-                            ((StylusManager.StylusCallback) it.next()).getClass();
+                            ((StylusCallback) it.next()).getClass();
                             Unit unit = Unit.INSTANCE;
                         }
                     }
@@ -301,12 +298,11 @@ public final class StylusManager implements InputManager.InputDeviceListener, In
             ((ArrayMap) this.inputDeviceBtSessionIdMap).remove(Integer.valueOf(i));
             return;
         }
-        Integer valueOf = Integer.valueOf(i);
-        ((ArrayMap) this.inputDeviceBtSessionIdMap).put(valueOf, this.instanceIdSequence.newInstanceId());
+        Integer numValueOf = Integer.valueOf(i);
+        ((ArrayMap) this.inputDeviceBtSessionIdMap).put(numValueOf, this.instanceIdSequence.newInstanceId());
         this.uiEventLogger.logWithInstanceId(StylusUiEvent.BLUETOOTH_STYLUS_CONNECTED, 0, (String) null, (InstanceId) ((ArrayMap) this.inputDeviceBtSessionIdMap).get(Integer.valueOf(i)));
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface StylusCallback {
         default void onStylusAdded(int i) {
         }

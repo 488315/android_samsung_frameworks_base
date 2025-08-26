@@ -45,9 +45,9 @@ public interface IInputMethodSessionCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IInputMethodSessionCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IInputMethodSessionCallback)) {
-                return (IInputMethodSessionCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IInputMethodSessionCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IInputMethodSessionCallback)) {
+                return (IInputMethodSessionCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -74,9 +74,9 @@ public interface IInputMethodSessionCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IInputMethodSession asInterface = IInputMethodSession.Stub.asInterface(parcel.readStrongBinder());
+                IInputMethodSession iInputMethodSessionAsInterface = IInputMethodSession.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                sessionCreated(asInterface);
+                sessionCreated(iInputMethodSessionAsInterface);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -100,13 +100,13 @@ public interface IInputMethodSessionCallback extends IInterface {
 
             @Override // com.android.internal.inputmethod.IInputMethodSessionCallback
             public void sessionCreated(IInputMethodSession iInputMethodSession) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IInputMethodSessionCallback.DESCRIPTOR);
-                    obtain.writeStrongInterface(iInputMethodSession);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IInputMethodSessionCallback.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iInputMethodSession);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

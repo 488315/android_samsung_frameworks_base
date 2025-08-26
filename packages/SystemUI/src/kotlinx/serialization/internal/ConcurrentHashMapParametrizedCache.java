@@ -12,7 +12,6 @@ import kotlin.reflect.KClass;
 import kotlin.reflect.KType;
 import kotlinx.serialization.KSerializer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class ConcurrentHashMapParametrizedCache implements ParametrizedSerializerCache {
     public final ConcurrentHashMap cache = new ConcurrentHashMap();
@@ -24,24 +23,24 @@ public final class ConcurrentHashMapParametrizedCache implements ParametrizedSer
 
     @Override // kotlinx.serialization.internal.ParametrizedSerializerCache
     /* renamed from: get-gIAlu-s */
-    public final Object mo3467getgIAlus(KClass kClass, List list) {
+    public final Object mo3487getgIAlus(KClass kClass, List list) {
         Object failure;
-        Object putIfAbsent;
+        Object objPutIfAbsent;
         ConcurrentHashMap concurrentHashMap = this.cache;
         Class jClass = ((ClassBasedDeclarationContainer) kClass).getJClass();
-        Object obj = concurrentHashMap.get(jClass);
-        if (obj == null && (putIfAbsent = concurrentHashMap.putIfAbsent(jClass, (obj = new ParametrizedCacheEntry()))) != null) {
-            obj = putIfAbsent;
+        Object parametrizedCacheEntry = concurrentHashMap.get(jClass);
+        if (parametrizedCacheEntry == null && (objPutIfAbsent = concurrentHashMap.putIfAbsent(jClass, (parametrizedCacheEntry = new ParametrizedCacheEntry()))) != null) {
+            parametrizedCacheEntry = objPutIfAbsent;
         }
-        ParametrizedCacheEntry parametrizedCacheEntry = (ParametrizedCacheEntry) obj;
+        ParametrizedCacheEntry parametrizedCacheEntry2 = (ParametrizedCacheEntry) parametrizedCacheEntry;
         ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(list, 10));
         Iterator it = list.iterator();
         while (it.hasNext()) {
             arrayList.add(new KTypeWrapper((KType) it.next()));
         }
-        ConcurrentHashMap concurrentHashMap2 = parametrizedCacheEntry.serializers;
-        Object obj2 = concurrentHashMap2.get(arrayList);
-        if (obj2 == null) {
+        ConcurrentHashMap concurrentHashMap2 = parametrizedCacheEntry2.serializers;
+        Object obj = concurrentHashMap2.get(arrayList);
+        if (obj == null) {
             try {
                 int i = Result.$r8$clinit;
                 failure = (KSerializer) this.compute.invoke(kClass, list);
@@ -49,10 +48,10 @@ public final class ConcurrentHashMapParametrizedCache implements ParametrizedSer
                 int i2 = Result.$r8$clinit;
                 failure = new Result.Failure(th);
             }
-            Result m3421boximpl = Result.m3421boximpl(failure);
-            Object putIfAbsent2 = concurrentHashMap2.putIfAbsent(arrayList, m3421boximpl);
-            obj2 = putIfAbsent2 == null ? m3421boximpl : putIfAbsent2;
+            Result resultM3441boximpl = Result.m3441boximpl(failure);
+            Object objPutIfAbsent2 = concurrentHashMap2.putIfAbsent(arrayList, resultM3441boximpl);
+            obj = objPutIfAbsent2 == null ? resultM3441boximpl : objPutIfAbsent2;
         }
-        return ((Result) obj2).m3423unboximpl();
+        return ((Result) obj).m3443unboximpl();
     }
 }

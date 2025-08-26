@@ -53,9 +53,9 @@ public interface IPackageInstallObserver2 extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IPackageInstallObserver2)) {
-                return (IPackageInstallObserver2) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IPackageInstallObserver2)) {
+                return (IPackageInstallObserver2) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -89,12 +89,12 @@ public interface IPackageInstallObserver2 extends IInterface {
                 parcel.enforceNoDataAvail();
                 onUserActionRequired(intent);
             } else if (i == 2) {
-                String readString = parcel.readString();
-                int readInt = parcel.readInt();
-                String readString2 = parcel.readString();
+                String string = parcel.readString();
+                int i3 = parcel.readInt();
+                String string2 = parcel.readString();
                 Bundle bundle = (Bundle) parcel.readTypedObject(Bundle.CREATOR);
                 parcel.enforceNoDataAvail();
-                onPackageInstalled(readString, readInt, readString2, bundle);
+                onPackageInstalled(string, i3, string2, bundle);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -119,28 +119,28 @@ public interface IPackageInstallObserver2 extends IInterface {
 
             @Override // android.content.pm.IPackageInstallObserver2
             public void onUserActionRequired(Intent intent) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(intent, 0);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(intent, 0);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.content.pm.IPackageInstallObserver2
             public void onPackageInstalled(String str, int i, String str2, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeString(str2);
-                    obtain.writeTypedObject(bundle, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeTypedObject(bundle, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

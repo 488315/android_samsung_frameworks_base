@@ -6,11 +6,9 @@ import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public interface AuthenticationState {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Acquired implements AuthenticationState {
         public final int acquiredInfo;
         public final BiometricSourceType biometricSourceType;
@@ -58,7 +56,6 @@ public interface AuthenticationState {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Error implements AuthenticationState {
         public final BiometricSourceType biometricSourceType;
         public final int errCode;
@@ -94,9 +91,9 @@ public interface AuthenticationState {
         }
 
         public final int hashCode() {
-            int hashCode = this.biometricSourceType.hashCode() * 31;
+            int iHashCode = this.biometricSourceType.hashCode() * 31;
             String str = this.errString;
-            return this.requestReason.hashCode() + ReorderTile$$ExternalSyntheticOutline0.m(this.errCode, (hashCode + (str == null ? 0 : str.hashCode())) * 31, 31);
+            return this.requestReason.hashCode() + ReorderTile$$ExternalSyntheticOutline0.m(this.errCode, (iHashCode + (str == null ? 0 : str.hashCode())) * 31, 31);
         }
 
         public final String toString() {
@@ -104,7 +101,6 @@ public interface AuthenticationState {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Failed implements AuthenticationState {
         public final BiometricSourceType biometricSourceType;
         public final AuthenticationReason requestReason;
@@ -152,7 +148,6 @@ public interface AuthenticationState {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Help implements AuthenticationState {
         public final BiometricSourceType biometricSourceType;
         public final int helpCode;
@@ -188,9 +183,9 @@ public interface AuthenticationState {
         }
 
         public final int hashCode() {
-            int hashCode = this.biometricSourceType.hashCode() * 31;
+            int iHashCode = this.biometricSourceType.hashCode() * 31;
             String str = this.helpString;
-            return this.requestReason.hashCode() + ReorderTile$$ExternalSyntheticOutline0.m(this.helpCode, (hashCode + (str == null ? 0 : str.hashCode())) * 31, 31);
+            return this.requestReason.hashCode() + ReorderTile$$ExternalSyntheticOutline0.m(this.helpCode, (iHashCode + (str == null ? 0 : str.hashCode())) * 31, 31);
         }
 
         public final String toString() {
@@ -198,7 +193,6 @@ public interface AuthenticationState {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Started implements AuthenticationState {
         public final BiometricSourceType biometricSourceType;
         public final AuthenticationReason requestReason;
@@ -238,7 +232,6 @@ public interface AuthenticationState {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Stopped implements AuthenticationState {
         public final BiometricSourceType biometricSourceType;
         public final AuthenticationReason requestReason;
@@ -278,7 +271,6 @@ public interface AuthenticationState {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Succeeded implements AuthenticationState {
         public final BiometricSourceType biometricSourceType;
         public final boolean isStrongBiometric;
@@ -326,7 +318,6 @@ public interface AuthenticationState {
 
     AuthenticationReason getRequestReason();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Idle implements AuthenticationState {
         public final BiometricSourceType biometricSourceType;
         public final AuthenticationReason requestReason;

@@ -1,6 +1,7 @@
 package android.content.res;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.util.Log;
 import android.util.Xml;
 import com.android.internal.R;
@@ -130,32 +131,32 @@ public class FontResourcesParser {
         return null;
     }
 
-    private static FamilyResourceEntry readFamily(XmlPullParser xmlPullParser, Resources resources) throws XmlPullParserException, IOException {
-        TypedArray obtainAttributes = resources.obtainAttributes(Xml.asAttributeSet(xmlPullParser), R.styleable.FontFamily);
-        String string = obtainAttributes.getString(0);
-        String string2 = obtainAttributes.getString(2);
-        String string3 = obtainAttributes.getString(1);
-        int resourceId = obtainAttributes.getResourceId(3, 0);
-        String string4 = obtainAttributes.getString(4);
-        obtainAttributes.recycle();
+    private static FamilyResourceEntry readFamily(XmlPullParser xmlPullParser, Resources resources) throws XmlPullParserException, Resources.NotFoundException, IOException {
+        TypedArray typedArrayObtainAttributes = resources.obtainAttributes(Xml.asAttributeSet(xmlPullParser), R.styleable.FontFamily);
+        String string = typedArrayObtainAttributes.getString(0);
+        String string2 = typedArrayObtainAttributes.getString(2);
+        String string3 = typedArrayObtainAttributes.getString(1);
+        int resourceId = typedArrayObtainAttributes.getResourceId(3, 0);
+        String string4 = typedArrayObtainAttributes.getString(4);
+        typedArrayObtainAttributes.recycle();
         ArrayList arrayList = null;
         if (string != null && string2 != null && string3 != null) {
             while (xmlPullParser.next() != 3) {
                 skip(xmlPullParser);
             }
             if (resourceId != 0) {
-                TypedArray obtainTypedArray = resources.obtainTypedArray(resourceId);
-                if (obtainTypedArray.length() > 0) {
+                TypedArray typedArrayObtainTypedArray = resources.obtainTypedArray(resourceId);
+                if (typedArrayObtainTypedArray.length() > 0) {
                     arrayList = new ArrayList();
-                    if (obtainTypedArray.getResourceId(0, 0) != 0) {
-                        for (int i = 0; i < obtainTypedArray.length(); i++) {
-                            arrayList.add(Arrays.asList(resources.getStringArray(obtainTypedArray.getResourceId(i, 0))));
+                    if (typedArrayObtainTypedArray.getResourceId(0, 0) != 0) {
+                        for (int i = 0; i < typedArrayObtainTypedArray.length(); i++) {
+                            arrayList.add(Arrays.asList(resources.getStringArray(typedArrayObtainTypedArray.getResourceId(i, 0))));
                         }
                     } else {
                         arrayList.add(Arrays.asList(resources.getStringArray(resourceId)));
                     }
                 }
-                obtainTypedArray.recycle();
+                typedArrayObtainTypedArray.recycle();
             }
             return new ProviderResourceEntry(string, string2, string3, arrayList, string4);
         }
@@ -163,9 +164,9 @@ public class FontResourcesParser {
         while (xmlPullParser.next() != 3) {
             if (xmlPullParser.getEventType() == 2) {
                 if (xmlPullParser.getName().equals(Context.FONT_SERVICE)) {
-                    FontFileResourceEntry readFont = readFont(xmlPullParser, resources);
-                    if (readFont != null) {
-                        arrayList2.add(readFont);
+                    FontFileResourceEntry font = readFont(xmlPullParser, resources);
+                    if (font != null) {
+                        arrayList2.add(font);
                     }
                 } else {
                     skip(xmlPullParser);
@@ -179,13 +180,13 @@ public class FontResourcesParser {
     }
 
     private static FontFileResourceEntry readFont(XmlPullParser xmlPullParser, Resources resources) throws XmlPullParserException, IOException {
-        TypedArray obtainAttributes = resources.obtainAttributes(Xml.asAttributeSet(xmlPullParser), R.styleable.FontFamilyFont);
-        int i = obtainAttributes.getInt(1, -1);
-        int i2 = obtainAttributes.getInt(2, -1);
-        String string = obtainAttributes.getString(4);
-        int i3 = obtainAttributes.getInt(3, 0);
-        String string2 = obtainAttributes.getString(0);
-        obtainAttributes.recycle();
+        TypedArray typedArrayObtainAttributes = resources.obtainAttributes(Xml.asAttributeSet(xmlPullParser), R.styleable.FontFamilyFont);
+        int i = typedArrayObtainAttributes.getInt(1, -1);
+        int i2 = typedArrayObtainAttributes.getInt(2, -1);
+        String string = typedArrayObtainAttributes.getString(4);
+        int i3 = typedArrayObtainAttributes.getInt(3, 0);
+        String string2 = typedArrayObtainAttributes.getString(0);
+        typedArrayObtainAttributes.recycle();
         while (xmlPullParser.next() != 3) {
             skip(xmlPullParser);
         }

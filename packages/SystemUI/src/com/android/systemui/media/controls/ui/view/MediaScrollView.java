@@ -13,7 +13,6 @@ import com.samsung.android.knox.ex.peripheral.PeripheralConstants;
 import java.util.WeakHashMap;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MediaScrollView extends HorizontalScrollView {
     public float animationTargetX;
@@ -25,11 +24,11 @@ public final class MediaScrollView extends HorizontalScrollView {
     }
 
     public final void cancelCurrentScroll() {
-        long uptimeMillis = SystemClock.uptimeMillis();
-        MotionEvent obtain = MotionEvent.obtain(uptimeMillis, uptimeMillis, 3, 0.0f, 0.0f, 0);
-        obtain.setSource(PeripheralConstants.ErrorCode.ERROR_PERIPHERAL_CONNECTION_FAIL);
-        super.onTouchEvent(obtain);
-        obtain.recycle();
+        long jUptimeMillis = SystemClock.uptimeMillis();
+        MotionEvent motionEventObtain = MotionEvent.obtain(jUptimeMillis, jUptimeMillis, 3, 0.0f, 0.0f, 0);
+        motionEventObtain.setSource(PeripheralConstants.ErrorCode.ERROR_PERIPHERAL_CONNECTION_FAIL);
+        super.onTouchEvent(motionEventObtain);
+        motionEventObtain.recycle();
     }
 
     public final float getContentTranslation() {
@@ -77,7 +76,7 @@ public final class MediaScrollView extends HorizontalScrollView {
     @Override // android.widget.HorizontalScrollView, android.view.View
     public final boolean onTouchEvent(MotionEvent motionEvent) {
         boolean z;
-        float f;
+        float fSignum;
         MediaCarouselScrollHandler$touchListener$1 mediaCarouselScrollHandler$touchListener$1 = this.touchListener;
         if (mediaCarouselScrollHandler$touchListener$1 != null) {
             mediaCarouselScrollHandler$touchListener$1.getClass();
@@ -86,9 +85,9 @@ public final class MediaScrollView extends HorizontalScrollView {
             z = false;
             if (!mediaCarouselScrollHandler.scrollingDisabled) {
                 boolean z2 = motionEvent.getAction() == 1;
-                boolean onTouchEvent = mediaCarouselScrollHandler.gestureDetector.mDetector.onTouchEvent(motionEvent);
+                boolean zOnTouchEvent = mediaCarouselScrollHandler.gestureDetector.mDetector.onTouchEvent(motionEvent);
                 MediaScrollView mediaScrollView = mediaCarouselScrollHandler.scrollView;
-                if (onTouchEvent) {
+                if (zOnTouchEvent) {
                     if (z2) {
                         mediaScrollView.cancelCurrentScroll();
                         z = true;
@@ -117,7 +116,7 @@ public final class MediaScrollView extends HorizontalScrollView {
                         delayableExecutor.execute(new Runnable() { // from class: com.android.systemui.media.controls.ui.view.MediaCarouselScrollHandler$onTouch$1
                             @Override // java.lang.Runnable
                             public final void run() {
-                                MediaScrollView mediaScrollView2 = MediaCarouselScrollHandler.this.scrollView;
+                                MediaScrollView mediaScrollView2 = mediaCarouselScrollHandler.scrollView;
                                 mediaScrollView2.smoothScrollTo(scrollX2, mediaScrollView2.getScrollY());
                             }
                         });
@@ -125,23 +124,23 @@ public final class MediaScrollView extends HorizontalScrollView {
                     float contentTranslation = mediaScrollView.getContentTranslation();
                     if (contentTranslation != 0.0f) {
                         if (Math.abs(contentTranslation) < mediaCarouselScrollHandler.getMaxTranslation() / 2 || (mediaCarouselScrollHandler.falsingProtectionNeeded && mediaCarouselScrollHandler.falsingManager.isFalseTouch(1))) {
-                            f = 0.0f;
+                            fSignum = 0.0f;
                         } else {
-                            f = Math.signum(contentTranslation) * mediaCarouselScrollHandler.getMaxTranslation();
+                            fSignum = Math.signum(contentTranslation) * mediaCarouselScrollHandler.getMaxTranslation();
                             if (!mediaCarouselScrollHandler.showsSettingsButton) {
                                 delayableExecutor.executeDelayed(new Runnable() { // from class: com.android.systemui.media.controls.ui.view.MediaCarouselScrollHandler$onTouch$2
                                     @Override // java.lang.Runnable
                                     public final void run() {
-                                        MediaCarouselScrollHandler.this.dismissCallback.invoke();
+                                        mediaCarouselScrollHandler.dismissCallback.invoke();
                                     }
                                 }, 100L);
                             }
                         }
                         PhysicsAnimator.Companion.getClass();
                         PhysicsAnimator companion = PhysicsAnimator.Companion.getInstance(mediaCarouselScrollHandler);
-                        companion.spring(MediaCarouselScrollHandler.CONTENT_TRANSLATION, f, 0.0f, MediaCarouselScrollHandlerKt.translationConfig);
+                        companion.spring(MediaCarouselScrollHandler.CONTENT_TRANSLATION, fSignum, 0.0f, MediaCarouselScrollHandlerKt.translationConfig);
                         companion.start();
-                        mediaScrollView.animationTargetX = f;
+                        mediaScrollView.animationTargetX = fSignum;
                     }
                 }
             }

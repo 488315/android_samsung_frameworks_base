@@ -19,17 +19,17 @@ public class DecorContext extends ContextThemeWrapper {
     private Resources mResources;
 
     public DecorContext(Context context, PhoneWindow phoneWindow) {
+        Context contextCreateDisplayContext;
         super((Context) null, (Resources.Theme) null);
-        Context createDisplayContext;
         setPhoneWindow(phoneWindow);
         Display displayNoVerify = phoneWindow.getContext().getDisplayNoVerify();
         if (displayNoVerify.getDisplayId() == 0) {
-            createDisplayContext = context.createConfigurationContext(Configuration.EMPTY);
-            createDisplayContext.updateDisplay(0);
+            contextCreateDisplayContext = context.createConfigurationContext(Configuration.EMPTY);
+            contextCreateDisplayContext.updateDisplay(0);
         } else {
-            createDisplayContext = context.createDisplayContext(displayNoVerify);
+            contextCreateDisplayContext = context.createDisplayContext(displayNoVerify);
         }
-        attachBaseContext(createDisplayContext);
+        attachBaseContext(contextCreateDisplayContext);
     }
 
     void setPhoneWindow(PhoneWindow phoneWindow) {

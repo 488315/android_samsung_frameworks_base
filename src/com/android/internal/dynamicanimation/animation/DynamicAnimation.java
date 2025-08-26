@@ -335,9 +335,9 @@ public abstract class DynamicAnimation<T extends DynamicAnimation<T>> implements
     }
 
     private static <T> void removeEntry(ArrayList<T> arrayList, T t) {
-        int indexOf = arrayList.indexOf(t);
-        if (indexOf >= 0) {
-            arrayList.set(indexOf, null);
+        int iIndexOf = arrayList.indexOf(t);
+        if (iIndexOf >= 0) {
+            arrayList.set(iIndexOf, null);
         }
     }
 
@@ -394,16 +394,16 @@ public abstract class DynamicAnimation<T extends DynamicAnimation<T>> implements
         long j3 = j - j2;
         this.mLastFrameTime = j;
         float durationScale = ValueAnimator.getDurationScale();
-        boolean updateValueAndVelocity = updateValueAndVelocity(durationScale == 0.0f ? 2147483647L : (long) (j3 / durationScale));
-        float min = Math.min(this.mValue, this.mMaxValue);
-        this.mValue = min;
-        float max = Math.max(min, this.mMinValue);
-        this.mValue = max;
-        setPropertyValue(max);
-        if (updateValueAndVelocity) {
+        boolean zUpdateValueAndVelocity = updateValueAndVelocity(durationScale == 0.0f ? 2147483647L : (long) (j3 / durationScale));
+        float fMin = Math.min(this.mValue, this.mMaxValue);
+        this.mValue = fMin;
+        float fMax = Math.max(fMin, this.mMinValue);
+        this.mValue = fMax;
+        setPropertyValue(fMax);
+        if (zUpdateValueAndVelocity) {
             endAnimationInternal(false);
         }
-        return updateValueAndVelocity;
+        return zUpdateValueAndVelocity;
     }
 
     @Override // android.animation.AnimationHandler.AnimationFrameCallback

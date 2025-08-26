@@ -5,6 +5,7 @@ import androidx.compose.ui.internal.InlineClassHelperKt;
 import androidx.compose.ui.layout.Placeable;
 import androidx.compose.ui.layout.PlaceableKt;
 import androidx.compose.ui.node.LayoutNode;
+import androidx.compose.ui.node.OnPositionedDispatcher;
 import androidx.compose.ui.node.Owner;
 import androidx.compose.ui.platform.AndroidComposeView;
 import androidx.compose.ui.unit.Constraints;
@@ -12,7 +13,6 @@ import kotlin.NoWhenBranchMatchedException;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class MeasureAndLayoutDelegate {
     public boolean duringFullMeasureLayoutPass;
@@ -24,7 +24,6 @@ public final class MeasureAndLayoutDelegate {
     public final LayoutNode root;
     public Constraints rootConstraints;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class PostponedRequest {
         public final boolean isForced;
         public final boolean isLookahead;
@@ -37,7 +36,6 @@ public final class MeasureAndLayoutDelegate {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -76,131 +74,110 @@ public final class MeasureAndLayoutDelegate {
         this.postponedMeasureRequests = new MutableVector(new PostponedRequest[16], 0);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:9:0x0018  */
     /* renamed from: doLookaheadRemeasure-sdFAvZA, reason: not valid java name */
-    public static boolean m655doLookaheadRemeasuresdFAvZA(LayoutNode layoutNode, Constraints constraints) {
-        boolean m654remeasureBRTryo0;
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public static boolean m657doLookaheadRemeasuresdFAvZA(LayoutNode layoutNode, Constraints constraints) throws Throwable {
+        boolean zM656remeasureBRTryo0;
         LayoutNode layoutNode2 = layoutNode.lookaheadRoot;
         if (layoutNode2 == null) {
             return false;
         }
         LayoutNodeLayoutDelegate layoutNodeLayoutDelegate = layoutNode.layoutDelegate;
-        if (constraints != null) {
-            if (layoutNode2 != null) {
-                LookaheadPassDelegate lookaheadPassDelegate = layoutNodeLayoutDelegate.lookaheadPassDelegate;
-                lookaheadPassDelegate.getClass();
-                m654remeasureBRTryo0 = lookaheadPassDelegate.m654remeasureBRTryo0(constraints.value);
-            }
-            m654remeasureBRTryo0 = false;
-        } else {
-            LookaheadPassDelegate lookaheadPassDelegate2 = layoutNodeLayoutDelegate.lookaheadPassDelegate;
-            Constraints constraints2 = lookaheadPassDelegate2 != null ? lookaheadPassDelegate2.lookaheadConstraints : null;
+        if (constraints == null) {
+            LookaheadPassDelegate lookaheadPassDelegate = layoutNodeLayoutDelegate.lookaheadPassDelegate;
+            Constraints constraints2 = lookaheadPassDelegate != null ? lookaheadPassDelegate.lookaheadConstraints : null;
             if (constraints2 != null && layoutNode2 != null) {
-                lookaheadPassDelegate2.getClass();
-                m654remeasureBRTryo0 = lookaheadPassDelegate2.m654remeasureBRTryo0(constraints2.value);
+                lookaheadPassDelegate.getClass();
+                zM656remeasureBRTryo0 = lookaheadPassDelegate.m656remeasureBRTryo0(constraints2.value);
             }
-            m654remeasureBRTryo0 = false;
+        } else if (layoutNode2 != null) {
+            LookaheadPassDelegate lookaheadPassDelegate2 = layoutNodeLayoutDelegate.lookaheadPassDelegate;
+            lookaheadPassDelegate2.getClass();
+            zM656remeasureBRTryo0 = lookaheadPassDelegate2.m656remeasureBRTryo0(constraints.value);
+        } else {
+            zM656remeasureBRTryo0 = false;
         }
         LayoutNode parent$ui_release = layoutNode.getParent$ui_release();
-        if (m654remeasureBRTryo0 && parent$ui_release != null) {
+        if (zM656remeasureBRTryo0 && parent$ui_release != null) {
             if (parent$ui_release.lookaheadRoot == null) {
                 LayoutNode.requestRemeasure$ui_release$default(parent$ui_release, false, 3);
-                return m654remeasureBRTryo0;
+                return zM656remeasureBRTryo0;
             }
             if (layoutNode.getMeasuredByParentInLookahead$ui_release() == LayoutNode.UsageByParent.InMeasureBlock) {
                 LayoutNode.requestLookaheadRemeasure$ui_release$default(parent$ui_release, false, 3);
-                return m654remeasureBRTryo0;
+                return zM656remeasureBRTryo0;
             }
             if (layoutNode.getMeasuredByParentInLookahead$ui_release() == LayoutNode.UsageByParent.InLayoutBlock) {
                 parent$ui_release.requestLookaheadRelayout$ui_release(false);
             }
         }
-        return m654remeasureBRTryo0;
+        return zM656remeasureBRTryo0;
     }
 
     /* renamed from: doRemeasure-sdFAvZA, reason: not valid java name */
-    public static boolean m656doRemeasuresdFAvZA(LayoutNode layoutNode, Constraints constraints) {
-        boolean m642remeasure_Sx5XlM$ui_release = constraints != null ? layoutNode.m642remeasure_Sx5XlM$ui_release(constraints) : LayoutNode.m639remeasure_Sx5XlM$ui_release$default(layoutNode);
+    public static boolean m658doRemeasuresdFAvZA(LayoutNode layoutNode, Constraints constraints) {
+        boolean zM644remeasure_Sx5XlM$ui_release = constraints != null ? layoutNode.m644remeasure_Sx5XlM$ui_release(constraints) : LayoutNode.m641remeasure_Sx5XlM$ui_release$default(layoutNode);
         LayoutNode parent$ui_release = layoutNode.getParent$ui_release();
-        if (m642remeasure_Sx5XlM$ui_release && parent$ui_release != null) {
+        if (zM644remeasure_Sx5XlM$ui_release && parent$ui_release != null) {
             if (layoutNode.getMeasuredByParent$ui_release() == LayoutNode.UsageByParent.InMeasureBlock) {
                 LayoutNode.requestRemeasure$ui_release$default(parent$ui_release, false, 3);
-                return m642remeasure_Sx5XlM$ui_release;
+                return zM644remeasure_Sx5XlM$ui_release;
             }
             if (layoutNode.getMeasuredByParent$ui_release() == LayoutNode.UsageByParent.InLayoutBlock) {
                 parent$ui_release.requestRelayout$ui_release(false);
             }
         }
-        return m642remeasure_Sx5XlM$ui_release;
+        return zM644remeasure_Sx5XlM$ui_release;
     }
 
     public static boolean getMeasureAffectsParent(LayoutNode layoutNode) {
         return layoutNode.getMeasuredByParent$ui_release() == LayoutNode.UsageByParent.InMeasureBlock || layoutNode.layoutDelegate.measurePassDelegate.alignmentLines.getRequired$ui_release();
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:7:0x0022, code lost:
-    
-        if (r3 < r5) goto L9;
-     */
     /* JADX WARN: Multi-variable type inference failed */
+    /* JADX WARN: Removed duplicated region for block: B:9:0x0024  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void dispatchOnPositionedCallbacks(boolean r6) {
-        /*
-            r5 = this;
-            androidx.compose.ui.node.OnPositionedDispatcher r0 = r5.onPositionedDispatcher
-            r1 = 1
-            if (r6 == 0) goto L11
-            androidx.compose.runtime.collection.MutableVector r6 = r0.layoutNodes
-            r6.clear()
-            androidx.compose.ui.node.LayoutNode r5 = r5.root
-            r6.add(r5)
-            r5.needsOnPositionedDispatch = r1
-        L11:
-            r0.getClass()
-            androidx.compose.ui.node.OnPositionedDispatcher$Companion$DepthComparator r5 = androidx.compose.ui.node.OnPositionedDispatcher.Companion.DepthComparator.INSTANCE
-            androidx.compose.runtime.collection.MutableVector r6 = r0.layoutNodes
-            r6.sortWith(r5)
-            int r5 = r6.size
-            androidx.compose.ui.node.LayoutNode[] r2 = r0.cachedNodes
-            if (r2 == 0) goto L24
-            int r3 = r2.length
-            if (r3 >= r5) goto L2c
-        L24:
-            r2 = 16
-            int r2 = java.lang.Math.max(r2, r5)
-            androidx.compose.ui.node.LayoutNode[] r2 = new androidx.compose.ui.node.LayoutNode[r2]
-        L2c:
-            r3 = 0
-            r0.cachedNodes = r3
-            r3 = 0
-        L30:
-            if (r3 >= r5) goto L3b
-            java.lang.Object[] r4 = r6.content
-            r4 = r4[r3]
-            r2[r3] = r4
-            int r3 = r3 + 1
-            goto L30
-        L3b:
-            r6.clear()
-            int r5 = r5 - r1
-        L3f:
-            r6 = -1
-            if (r6 >= r5) goto L51
-            r6 = r2[r5]
-            r6.getClass()
-            boolean r1 = r6.needsOnPositionedDispatch
-            if (r1 == 0) goto L4e
-            androidx.compose.ui.node.OnPositionedDispatcher.dispatchHierarchy(r6)
-        L4e:
-            int r5 = r5 + (-1)
-            goto L3f
-        L51:
-            r0.cachedNodes = r2
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.ui.node.MeasureAndLayoutDelegate.dispatchOnPositionedCallbacks(boolean):void");
+    public final void dispatchOnPositionedCallbacks(boolean z) {
+        LayoutNode[] layoutNodeArr;
+        OnPositionedDispatcher onPositionedDispatcher = this.onPositionedDispatcher;
+        if (z) {
+            MutableVector mutableVector = onPositionedDispatcher.layoutNodes;
+            mutableVector.clear();
+            LayoutNode layoutNode = this.root;
+            mutableVector.add(layoutNode);
+            layoutNode.needsOnPositionedDispatch = true;
+        }
+        onPositionedDispatcher.getClass();
+        OnPositionedDispatcher.Companion.DepthComparator depthComparator = OnPositionedDispatcher.Companion.DepthComparator.INSTANCE;
+        MutableVector mutableVector2 = onPositionedDispatcher.layoutNodes;
+        mutableVector2.sortWith(depthComparator);
+        int i = mutableVector2.size;
+        LayoutNode[] layoutNodeArr2 = onPositionedDispatcher.cachedNodes;
+        if (layoutNodeArr2 != null) {
+            int length = layoutNodeArr2.length;
+            layoutNodeArr = layoutNodeArr2;
+            if (length < i) {
+                layoutNodeArr = new LayoutNode[Math.max(16, i)];
+            }
+        }
+        onPositionedDispatcher.cachedNodes = null;
+        for (int i2 = 0; i2 < i; i2++) {
+            layoutNodeArr[i2] = mutableVector2.content[i2];
+        }
+        mutableVector2.clear();
+        for (int i3 = i - 1; -1 < i3; i3--) {
+            LayoutNode layoutNode2 = layoutNodeArr[i3];
+            layoutNode2.getClass();
+            if (layoutNode2.needsOnPositionedDispatch) {
+                OnPositionedDispatcher.dispatchHierarchy(layoutNode2);
+            }
+        }
+        onPositionedDispatcher.cachedNodes = layoutNodeArr;
     }
 
     public final void drainPostponedMeasureRequests() {
@@ -269,9 +246,9 @@ public final class MeasureAndLayoutDelegate {
             }
             LayoutNode layoutNode2 = (LayoutNode) objArr[i2];
             if ((!z && getMeasureAffectsParent(layoutNode2)) || (z && (layoutNode2.getMeasuredByParentInLookahead$ui_release() == LayoutNode.UsageByParent.InMeasureBlock || ((lookaheadPassDelegate = layoutNode2.layoutDelegate.lookaheadPassDelegate) != null && (lookaheadAlignmentLines = lookaheadPassDelegate.alignmentLines) != null && lookaheadAlignmentLines.getRequired$ui_release())))) {
-                boolean isOutMostLookaheadRoot = LayoutNodeLayoutDelegateKt.isOutMostLookaheadRoot(layoutNode2);
+                boolean zIsOutMostLookaheadRoot = LayoutNodeLayoutDelegateKt.isOutMostLookaheadRoot(layoutNode2);
                 LayoutNodeLayoutDelegate layoutNodeLayoutDelegate = layoutNode2.layoutDelegate;
-                if (isOutMostLookaheadRoot && !z) {
+                if (zIsOutMostLookaheadRoot && !z) {
                     if (layoutNodeLayoutDelegate.lookaheadMeasurePending && depthSortedSetsForDifferentPasses.contains(layoutNode2, true)) {
                         remeasureAndRelayoutIfNeeded(layoutNode2, true, false);
                     } else {
@@ -307,10 +284,10 @@ public final class MeasureAndLayoutDelegate {
         if (this.duringMeasureLayout) {
             InlineClassHelperKt.throwIllegalArgumentException("performMeasureAndLayout called during measure layout");
         }
-        byte b = 0;
-        byte b2 = 0;
-        byte b3 = 0;
-        byte b4 = 0;
+        Object[] objArr = 0;
+        Object[] objArr2 = 0;
+        Object[] objArr3 = 0;
+        Object[] objArr4 = 0;
         if (this.rootConstraints != null) {
             this.duringMeasureLayout = true;
             this.duringFullMeasureLayoutPass = true;
@@ -318,14 +295,14 @@ public final class MeasureAndLayoutDelegate {
                 if (depthSortedSetsForDifferentPasses.isNotEmpty()) {
                     z = false;
                     while (true) {
-                        boolean isNotEmpty = depthSortedSetsForDifferentPasses.isNotEmpty();
+                        boolean zIsNotEmpty = depthSortedSetsForDifferentPasses.isNotEmpty();
                         DepthSortedSet depthSortedSet = depthSortedSetsForDifferentPasses.lookaheadSet;
-                        if (!isNotEmpty) {
+                        if (!zIsNotEmpty) {
                             break;
                         }
-                        boolean isEmpty = depthSortedSet.set.isEmpty();
-                        boolean z2 = !isEmpty;
-                        if (isEmpty) {
+                        boolean zIsEmpty = depthSortedSet.set.isEmpty();
+                        boolean z2 = !zIsEmpty;
+                        if (zIsEmpty) {
                             DepthSortedSet depthSortedSet2 = depthSortedSetsForDifferentPasses.set;
                             LayoutNode layoutNode3 = (LayoutNode) depthSortedSet2.set.first();
                             depthSortedSet2.remove(layoutNode3);
@@ -334,8 +311,8 @@ public final class MeasureAndLayoutDelegate {
                             layoutNode = (LayoutNode) depthSortedSet.set.first();
                             depthSortedSet.remove(layoutNode);
                         }
-                        boolean remeasureAndRelayoutIfNeeded = remeasureAndRelayoutIfNeeded(layoutNode, z2, true);
-                        if (layoutNode == layoutNode2 && remeasureAndRelayoutIfNeeded) {
+                        boolean zRemeasureAndRelayoutIfNeeded = remeasureAndRelayoutIfNeeded(layoutNode, z2, true);
+                        if (layoutNode == layoutNode2 && zRemeasureAndRelayoutIfNeeded) {
                             z = true;
                         }
                     }
@@ -351,17 +328,18 @@ public final class MeasureAndLayoutDelegate {
             z = false;
         }
         MutableVector mutableVector = this.onLayoutCompletedListeners;
-        Object[] objArr = mutableVector.content;
+        Object[] objArr5 = mutableVector.content;
         int i = mutableVector.size;
         for (int i2 = 0; i2 < i; i2++) {
-            ((Owner.OnLayoutCompletedListener) objArr[i2]).onLayoutComplete();
+            ((Owner.OnLayoutCompletedListener) objArr5[i2]).onLayoutComplete();
         }
         mutableVector.clear();
         return z;
     }
 
+    /* JADX WARN: Multi-variable type inference failed */
     /* renamed from: measureAndLayout-0kLqBqw, reason: not valid java name */
-    public final void m657measureAndLayout0kLqBqw(LayoutNode layoutNode, long j) {
+    public final void m659measureAndLayout0kLqBqw(LayoutNode layoutNode, long j) {
         if (layoutNode.isDeactivated) {
             return;
         }
@@ -378,10 +356,10 @@ public final class MeasureAndLayoutDelegate {
         if (this.duringMeasureLayout) {
             InlineClassHelperKt.throwIllegalArgumentException("performMeasureAndLayout called during measure layout");
         }
-        byte b = 0;
-        byte b2 = 0;
-        byte b3 = 0;
-        byte b4 = 0;
+        Object[] objArr = 0;
+        Object[] objArr2 = 0;
+        Object[] objArr3 = 0;
+        Object[] objArr4 = 0;
         if (this.rootConstraints != null) {
             this.duringMeasureLayout = true;
             this.duringFullMeasureLayoutPass = false;
@@ -389,11 +367,11 @@ public final class MeasureAndLayoutDelegate {
                 DepthSortedSetsForDifferentPasses depthSortedSetsForDifferentPasses = this.relayoutNodes;
                 depthSortedSetsForDifferentPasses.lookaheadSet.remove(layoutNode);
                 depthSortedSetsForDifferentPasses.set.remove(layoutNode);
-                if ((m655doLookaheadRemeasuresdFAvZA(layoutNode, Constraints.m813boximpl(j)) || layoutNode.layoutDelegate.lookaheadLayoutPending) && Intrinsics.areEqual(layoutNode.isPlacedInLookahead(), Boolean.TRUE)) {
+                if ((m657doLookaheadRemeasuresdFAvZA(layoutNode, Constraints.m815boximpl(j)) || layoutNode.layoutDelegate.lookaheadLayoutPending) && Intrinsics.areEqual(layoutNode.isPlacedInLookahead(), Boolean.TRUE)) {
                     layoutNode.lookaheadReplace$ui_release();
                 }
                 ensureSubtreeLookaheadReplaced(layoutNode);
-                m656doRemeasuresdFAvZA(layoutNode, Constraints.m813boximpl(j));
+                m658doRemeasuresdFAvZA(layoutNode, Constraints.m815boximpl(j));
                 if (layoutNode.getLayoutPending$ui_release() && layoutNode.isPlaced()) {
                     layoutNode.replace$ui_release();
                     this.onPositionedDispatcher.layoutNodes.add(layoutNode);
@@ -404,10 +382,10 @@ public final class MeasureAndLayoutDelegate {
             }
         }
         MutableVector mutableVector = this.onLayoutCompletedListeners;
-        Object[] objArr = mutableVector.content;
+        Object[] objArr5 = mutableVector.content;
         int i = mutableVector.size;
         for (int i2 = 0; i2 < i; i2++) {
-            ((Owner.OnLayoutCompletedListener) objArr[i2]).onLayoutComplete();
+            ((Owner.OnLayoutCompletedListener) objArr5[i2]).onLayoutComplete();
         }
         mutableVector.clear();
     }
@@ -451,7 +429,7 @@ public final class MeasureAndLayoutDelegate {
 
     public final boolean remeasureAndRelayoutIfNeeded(LayoutNode layoutNode, boolean z, boolean z2) {
         Constraints constraints;
-        boolean z3;
+        boolean zM657doLookaheadRemeasuresdFAvZA;
         Placeable.PlacementScope PlacementScope;
         InnerNodeCoordinator innerNodeCoordinator;
         LayoutNode parent$ui_release;
@@ -460,9 +438,9 @@ public final class MeasureAndLayoutDelegate {
         LookaheadPassDelegate lookaheadPassDelegate2;
         LookaheadAlignmentLines lookaheadAlignmentLines2;
         if (!layoutNode.isDeactivated) {
-            boolean isPlaced = layoutNode.isPlaced();
+            boolean zIsPlaced = layoutNode.isPlaced();
             LayoutNodeLayoutDelegate layoutNodeLayoutDelegate = layoutNode.layoutDelegate;
-            if (isPlaced || layoutNodeLayoutDelegate.measurePassDelegate.isPlacedByParent || ((layoutNode.getMeasurePending$ui_release() && getMeasureAffectsParent(layoutNode)) || Intrinsics.areEqual(layoutNode.isPlacedInLookahead(), Boolean.TRUE) || ((layoutNodeLayoutDelegate.lookaheadMeasurePending && (layoutNode.getMeasuredByParentInLookahead$ui_release() == LayoutNode.UsageByParent.InMeasureBlock || ((lookaheadPassDelegate2 = layoutNodeLayoutDelegate.lookaheadPassDelegate) != null && (lookaheadAlignmentLines2 = lookaheadPassDelegate2.alignmentLines) != null && lookaheadAlignmentLines2.getRequired$ui_release()))) || layoutNodeLayoutDelegate.measurePassDelegate.alignmentLines.getRequired$ui_release() || ((lookaheadPassDelegate = layoutNodeLayoutDelegate.lookaheadPassDelegate) != null && (lookaheadAlignmentLines = lookaheadPassDelegate.alignmentLines) != null && lookaheadAlignmentLines.getRequired$ui_release())))) {
+            if (zIsPlaced || layoutNodeLayoutDelegate.measurePassDelegate.isPlacedByParent || ((layoutNode.getMeasurePending$ui_release() && getMeasureAffectsParent(layoutNode)) || Intrinsics.areEqual(layoutNode.isPlacedInLookahead(), Boolean.TRUE) || ((layoutNodeLayoutDelegate.lookaheadMeasurePending && (layoutNode.getMeasuredByParentInLookahead$ui_release() == LayoutNode.UsageByParent.InMeasureBlock || ((lookaheadPassDelegate2 = layoutNodeLayoutDelegate.lookaheadPassDelegate) != null && (lookaheadAlignmentLines2 = lookaheadPassDelegate2.alignmentLines) != null && lookaheadAlignmentLines2.getRequired$ui_release()))) || layoutNodeLayoutDelegate.measurePassDelegate.alignmentLines.getRequired$ui_release() || ((lookaheadPassDelegate = layoutNodeLayoutDelegate.lookaheadPassDelegate) != null && (lookaheadAlignmentLines = lookaheadPassDelegate.alignmentLines) != null && lookaheadAlignmentLines.getRequired$ui_release())))) {
                 LayoutNode layoutNode2 = this.root;
                 if (layoutNode == layoutNode2) {
                     constraints = this.rootConstraints;
@@ -471,12 +449,12 @@ public final class MeasureAndLayoutDelegate {
                     constraints = null;
                 }
                 if (z) {
-                    z3 = layoutNodeLayoutDelegate.lookaheadMeasurePending ? m655doLookaheadRemeasuresdFAvZA(layoutNode, constraints) : false;
-                    if (z2 && ((z3 || layoutNodeLayoutDelegate.lookaheadLayoutPending) && Intrinsics.areEqual(layoutNode.isPlacedInLookahead(), Boolean.TRUE))) {
+                    zM657doLookaheadRemeasuresdFAvZA = layoutNodeLayoutDelegate.lookaheadMeasurePending ? m657doLookaheadRemeasuresdFAvZA(layoutNode, constraints) : false;
+                    if (z2 && ((zM657doLookaheadRemeasuresdFAvZA || layoutNodeLayoutDelegate.lookaheadLayoutPending) && Intrinsics.areEqual(layoutNode.isPlacedInLookahead(), Boolean.TRUE))) {
                         layoutNode.lookaheadReplace$ui_release();
                     }
                 } else {
-                    boolean m656doRemeasuresdFAvZA = layoutNode.getMeasurePending$ui_release() ? m656doRemeasuresdFAvZA(layoutNode, constraints) : false;
+                    boolean zM658doRemeasuresdFAvZA = layoutNode.getMeasurePending$ui_release() ? m658doRemeasuresdFAvZA(layoutNode, constraints) : false;
                     if (z2 && layoutNode.getLayoutPending$ui_release() && (layoutNode == layoutNode2 || ((parent$ui_release = layoutNode.getParent$ui_release()) != null && parent$ui_release.isPlaced() && layoutNodeLayoutDelegate.measurePassDelegate.isPlacedByParent))) {
                         if (layoutNode == layoutNode2) {
                             if (layoutNode.intrinsicsUsageByParent == LayoutNode.UsageByParent.NotUsed) {
@@ -494,16 +472,16 @@ public final class MeasureAndLayoutDelegate {
                         layoutNode.needsOnPositionedDispatch = true;
                         ((AndroidComposeView) LayoutNodeKt.requireOwner(layoutNode)).rectManager.invalidateCallbacksFor(layoutNode);
                     }
-                    z3 = m656doRemeasuresdFAvZA;
+                    zM657doLookaheadRemeasuresdFAvZA = zM658doRemeasuresdFAvZA;
                 }
                 drainPostponedMeasureRequests();
-                return z3;
+                return zM657doLookaheadRemeasuresdFAvZA;
             }
         }
         return false;
     }
 
-    public final void remeasureLookaheadRootsInSubtree(LayoutNode layoutNode) {
+    public final void remeasureLookaheadRootsInSubtree(LayoutNode layoutNode) throws Throwable {
         MutableVector mutableVector = layoutNode.get_children$ui_release();
         Object[] objArr = mutableVector.content;
         int i = mutableVector.size;
@@ -519,7 +497,7 @@ public final class MeasureAndLayoutDelegate {
         }
     }
 
-    public final void remeasureOnly(LayoutNode layoutNode, boolean z) {
+    public final void remeasureOnly(LayoutNode layoutNode, boolean z) throws Throwable {
         Constraints constraints;
         if (layoutNode.isDeactivated) {
             return;
@@ -531,9 +509,9 @@ public final class MeasureAndLayoutDelegate {
             constraints = null;
         }
         if (z) {
-            m655doLookaheadRemeasuresdFAvZA(layoutNode, constraints);
+            m657doLookaheadRemeasuresdFAvZA(layoutNode, constraints);
         } else {
-            m656doRemeasuresdFAvZA(layoutNode, constraints);
+            m658doRemeasuresdFAvZA(layoutNode, constraints);
         }
     }
 
@@ -565,15 +543,15 @@ public final class MeasureAndLayoutDelegate {
     }
 
     /* renamed from: updateRootConstraints-BRTryo0, reason: not valid java name */
-    public final void m658updateRootConstraintsBRTryo0(long j) {
+    public final void m660updateRootConstraintsBRTryo0(long j) {
         Constraints constraints = this.rootConstraints;
-        if (constraints == null ? false : Constraints.m815equalsimpl0(constraints.value, j)) {
+        if (constraints == null ? false : Constraints.m817equalsimpl0(constraints.value, j)) {
             return;
         }
         if (this.duringMeasureLayout) {
             InlineClassHelperKt.throwIllegalArgumentException("updateRootConstraints called while measuring");
         }
-        this.rootConstraints = Constraints.m813boximpl(j);
+        this.rootConstraints = Constraints.m815boximpl(j);
         LayoutNode layoutNode = this.root;
         LayoutNode layoutNode2 = layoutNode.lookaheadRoot;
         LayoutNodeLayoutDelegate layoutNodeLayoutDelegate = layoutNode.layoutDelegate;

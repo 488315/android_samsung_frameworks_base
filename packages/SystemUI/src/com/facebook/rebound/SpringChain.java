@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SpringChain implements SpringListener {
     public final SpringConfig mAttachmentSpringConfig;
@@ -46,17 +45,17 @@ public class SpringChain implements SpringListener {
     public final void onSpringUpdate(Spring spring) {
         int i;
         int i2;
-        int indexOf = this.mSprings.indexOf(spring);
-        SpringListener springListener = (SpringListener) this.mListeners.get(indexOf);
+        int iIndexOf = this.mSprings.indexOf(spring);
+        SpringListener springListener = (SpringListener) this.mListeners.get(iIndexOf);
         int i3 = this.mControlSpringIndex;
-        if (indexOf == i3) {
-            i2 = indexOf - 1;
-            i = indexOf + 1;
-        } else if (indexOf < i3) {
-            i2 = indexOf - 1;
+        if (iIndexOf == i3) {
+            i2 = iIndexOf - 1;
+            i = iIndexOf + 1;
+        } else if (iIndexOf < i3) {
+            i2 = iIndexOf - 1;
             i = -1;
-        } else if (indexOf > i3) {
-            i = indexOf + 1;
+        } else if (iIndexOf > i3) {
+            i = iIndexOf + 1;
             i2 = -1;
         } else {
             i = -1;
@@ -76,8 +75,8 @@ public class SpringChain implements SpringListener {
         if (((Spring) this.mSprings.get(0)) == null) {
             return;
         }
-        Collection values = ((HashMap) this.mSpringSystem.mSpringRegistry).values();
-        for (Spring spring : Collections.unmodifiableList(values instanceof List ? (List) values : new ArrayList(values))) {
+        Collection collectionValues = ((HashMap) this.mSpringSystem.mSpringRegistry).values();
+        for (Spring spring : Collections.unmodifiableList(collectionValues instanceof List ? (List) collectionValues : new ArrayList(collectionValues))) {
             SpringConfig springConfig = this.mAttachmentSpringConfig;
             if (springConfig == null) {
                 spring.getClass();

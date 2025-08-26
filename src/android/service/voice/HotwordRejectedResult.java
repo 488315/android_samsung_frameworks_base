@@ -102,9 +102,9 @@ public final class HotwordRejectedResult implements Parcelable {
     }
 
     HotwordRejectedResult(Parcel parcel) {
-        int readInt = parcel.readInt();
-        this.mConfidenceLevel = readInt;
-        AnnotationValidations.validate((Class<? extends Annotation>) HotwordConfidenceLevelValue.class, (Annotation) null, readInt);
+        int i = parcel.readInt();
+        this.mConfidenceLevel = i;
+        AnnotationValidations.validate((Class<? extends Annotation>) HotwordConfidenceLevelValue.class, (Annotation) null, i);
     }
 
     public static final class Builder {

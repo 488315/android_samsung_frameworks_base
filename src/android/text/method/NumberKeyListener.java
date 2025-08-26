@@ -61,28 +61,28 @@ public abstract class NumberKeyListener extends BaseKeyListener implements Input
     public boolean onKeyDown(View view, Editable editable, int i, KeyEvent keyEvent) {
         int selectionStart = Selection.getSelectionStart(editable);
         int selectionEnd = Selection.getSelectionEnd(editable);
-        int min = Math.min(selectionStart, selectionEnd);
-        int max = Math.max(selectionStart, selectionEnd);
-        if (min < 0 || max < 0) {
+        int iMin = Math.min(selectionStart, selectionEnd);
+        int iMax = Math.max(selectionStart, selectionEnd);
+        if (iMin < 0 || iMax < 0) {
             Selection.setSelection(editable, 0);
-            max = 0;
-            min = 0;
+            iMax = 0;
+            iMin = 0;
         }
-        int lookup = keyEvent != null ? lookup(keyEvent, editable) : 0;
+        int iLookup = keyEvent != null ? lookup(keyEvent, editable) : 0;
         int repeatCount = keyEvent != null ? keyEvent.getRepeatCount() : 0;
         if (repeatCount == 0) {
-            if (lookup != 0) {
-                if (min != max) {
-                    Selection.setSelection(editable, max);
+            if (iLookup != 0) {
+                if (iMin != iMax) {
+                    Selection.setSelection(editable, iMax);
                 }
-                editable.replace(min, max, String.valueOf((char) lookup));
+                editable.replace(iMin, iMax, String.valueOf((char) iLookup));
                 adjustMetaAfterKeypress(editable);
                 return true;
             }
-        } else if (lookup == 48 && repeatCount == 1 && min == max && max > 0) {
-            int i2 = min - 1;
+        } else if (iLookup == 48 && repeatCount == 1 && iMin == iMax && iMax > 0) {
+            int i2 = iMin - 1;
             if (editable.charAt(i2) == '0') {
-                editable.replace(i2, max, String.valueOf('+'));
+                editable.replace(i2, iMax, String.valueOf('+'));
                 adjustMetaAfterKeypress(editable);
                 return true;
             }
@@ -105,6 +105,11 @@ public abstract class NumberKeyListener extends BaseKeyListener implements Input
         return true;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:18:0x002d A[PHI: r2
+      0x002d: PHI (r2v2 boolean) = (r2v1 boolean), (r2v4 boolean) binds: [B:12:0x001e, B:16:0x002a] A[DONT_GENERATE, DONT_INLINE]] */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     static boolean addFormatCharsFromSkeleton(Collection<Character> collection, Locale locale, String str, String str2) {
         if (locale == null) {
             return false;
@@ -112,26 +117,27 @@ public abstract class NumberKeyListener extends BaseKeyListener implements Input
         String bestDateTimePattern = DateFormat.getBestDateTimePattern(locale, str);
         boolean z = true;
         for (int i = 0; i < bestDateTimePattern.length(); i++) {
-            char charAt = bestDateTimePattern.charAt(i);
-            if (Character.isSurrogate(charAt)) {
+            char cCharAt = bestDateTimePattern.charAt(i);
+            if (Character.isSurrogate(cCharAt)) {
                 return false;
             }
-            if (charAt == '\'') {
+            if (cCharAt == '\'') {
                 z = !z;
-                if (i == 0) {
-                    continue;
-                } else if (bestDateTimePattern.charAt(i - 1) != '\'') {
-                    continue;
+                if (i != 0 && bestDateTimePattern.charAt(i - 1) == '\'') {
+                    if (z) {
+                        if (str2.indexOf(cCharAt) == -1) {
+                            if (DATE_TIME_FORMAT_SYMBOLS.indexOf(cCharAt) != -1) {
+                                return false;
+                            }
+                            collection.add(Character.valueOf(cCharAt));
+                        } else {
+                            continue;
+                        }
+                    } else {
+                        collection.add(Character.valueOf(cCharAt));
+                    }
                 }
             }
-            if (z) {
-                if (str2.indexOf(charAt) != -1) {
-                    continue;
-                } else if (DATE_TIME_FORMAT_SYMBOLS.indexOf(charAt) != -1) {
-                    return false;
-                }
-            }
-            collection.add(Character.valueOf(charAt));
         }
         return true;
     }
@@ -152,11 +158,11 @@ public abstract class NumberKeyListener extends BaseKeyListener implements Input
         String[] amPmStrings = DateFormat.getIcuDateFormatSymbols(locale).getAmPmStrings();
         for (int i = 0; i < amPmStrings.length; i++) {
             for (int i2 = 0; i2 < amPmStrings[i].length(); i2++) {
-                char charAt = amPmStrings[i].charAt(i2);
-                if (!Character.isBmpCodePoint(charAt)) {
+                char cCharAt = amPmStrings[i].charAt(i2);
+                if (!Character.isBmpCodePoint(cCharAt)) {
                     return false;
                 }
-                collection.add(Character.valueOf(charAt));
+                collection.add(Character.valueOf(cCharAt));
             }
         }
         return true;

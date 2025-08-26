@@ -34,7 +34,6 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class DisplayImeController implements DisplayController.OnDisplaysChangedListener {
     public static final Interpolator INTERPOLATOR = new PathInterpolator(0.4f, 0.0f, 0.2f, 1.0f);
@@ -48,7 +47,7 @@ public class DisplayImeController implements DisplayController.OnDisplaysChanged
     public final ArrayList mPositionProcessors = new ArrayList();
 
     /* renamed from: -$$Nest$smhaveSameLeash, reason: not valid java name */
-    public static boolean m3219$$Nest$smhaveSameLeash(InsetsSourceControl insetsSourceControl, InsetsSourceControl insetsSourceControl2) {
+    public static boolean m3236$$Nest$smhaveSameLeash(InsetsSourceControl insetsSourceControl, InsetsSourceControl insetsSourceControl2) {
         if (insetsSourceControl == insetsSourceControl2) {
             return true;
         }
@@ -88,9 +87,9 @@ public class DisplayImeController implements DisplayController.OnDisplaysChanged
     }
 
     public final boolean isImeShowing(int i) {
-        InsetsSource peekSource;
+        InsetsSource insetsSourcePeekSource;
         PerDisplay perDisplay = (PerDisplay) this.mImePerDisplay.get(i);
-        return (perDisplay == null || (peekSource = perDisplay.mInsetsState.peekSource(InsetsSource.ID_IME)) == null || perDisplay.mImeSourceControl == null || !peekSource.isVisible()) ? false : true;
+        return (perDisplay == null || (insetsSourcePeekSource = perDisplay.mInsetsState.peekSource(InsetsSource.ID_IME)) == null || perDisplay.mImeSourceControl == null || !insetsSourcePeekSource.isVisible()) ? false : true;
     }
 
     @Override // com.android.wm.shell.common.DisplayController.OnDisplaysChangedListener
@@ -119,7 +118,6 @@ public class DisplayImeController implements DisplayController.OnDisplaysChanged
         this.mImePerDisplay.remove(i);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PerDisplay implements DisplayInsetsController.OnInsetsChangedListener {
         public boolean mAnimateAlpha;
         public ValueAnimator mAnimation;
@@ -173,11 +171,11 @@ public class DisplayImeController implements DisplayController.OnDisplaysChanged
             }
             int i = InsetsSource.ID_IME;
             updateImeVisibilityForDispatch(insetsState.isSourceOrDefaultVisible(i, WindowInsets.Type.ime()));
-            InsetsSource peekSource = insetsState.peekSource(i);
-            Rect frame = peekSource != null ? peekSource.getFrame() : null;
-            boolean z = peekSource != null && peekSource.isVisible();
-            InsetsSource peekSource2 = this.mInsetsState.peekSource(i);
-            Rect frame2 = peekSource2 != null ? peekSource2.getFrame() : null;
+            InsetsSource insetsSourcePeekSource = insetsState.peekSource(i);
+            Rect frame = insetsSourcePeekSource != null ? insetsSourcePeekSource.getFrame() : null;
+            boolean z = insetsSourcePeekSource != null && insetsSourcePeekSource.isVisible();
+            InsetsSource insetsSourcePeekSource2 = this.mInsetsState.peekSource(i);
+            Rect frame2 = insetsSourcePeekSource2 != null ? insetsSourcePeekSource2.getFrame() : null;
             this.mInsetsState.set(insetsState, true);
             if (this.mImeShowing && !Objects.equals(frame2, frame) && z) {
                 Slog.d("DisplayImeController", "insetsChanged when IME showing, restart animation");
@@ -230,38 +228,38 @@ public class DisplayImeController implements DisplayController.OnDisplaysChanged
                 if (this.mAnimation != null) {
                     DisplayImeController.this.getClass();
                     z2 = !insetsSourceControl.getSurfacePosition().equals(z4 ? this.mImeSourceControl.getSurfacePosition() : null);
-                    if (!DisplayImeController.m3219$$Nest$smhaveSameLeash(this.mImeSourceControl, insetsSourceControl)) {
+                    if (!DisplayImeController.m3236$$Nest$smhaveSameLeash(this.mImeSourceControl, insetsSourceControl)) {
                         Slog.d("DisplayImeController", "insetsControlChanged: leash changed during animation.");
                         z2 = true;
                     }
                     z = false;
                 } else {
-                    if (DisplayImeController.m3219$$Nest$smhaveSameLeash(this.mImeSourceControl, insetsSourceControl)) {
+                    if (DisplayImeController.m3236$$Nest$smhaveSameLeash(this.mImeSourceControl, insetsSourceControl)) {
                         z = false;
                     } else {
-                        boolean isInitiallyVisible = insetsSourceControl.isInitiallyVisible();
-                        if (this.mImeShowing != isInitiallyVisible) {
-                            this.mImeShowing = isInitiallyVisible;
+                        boolean zIsInitiallyVisible = insetsSourceControl.isInitiallyVisible();
+                        if (this.mImeShowing != zIsInitiallyVisible) {
+                            this.mImeShowing = zIsInitiallyVisible;
                         }
                         SurfaceControl leash = insetsSourceControl.getLeash();
                         if (leash != null) {
                             DisplayImeController displayImeController2 = DisplayImeController.this;
-                            SurfaceControl.Transaction acquire = displayImeController2.mTransactionPool.acquire();
+                            SurfaceControl.Transaction transactionAcquire = displayImeController2.mTransactionPool.acquire();
                             if (this.mImeShowing) {
-                                acquire.show(leash);
+                                transactionAcquire.show(leash);
                             } else {
-                                acquire.hide(leash);
+                                transactionAcquire.hide(leash);
                             }
-                            acquire.apply();
-                            displayImeController2.mTransactionPool.release(acquire);
+                            transactionAcquire.apply();
+                            displayImeController2.mTransactionPool.release(transactionAcquire);
                         }
                         z = true;
                     }
                     Point surfacePosition = z4 ? this.mImeSourceControl.getSurfacePosition() : null;
                     if (this.mImeShowing && surfacePosition != null) {
-                        boolean equals = insetsSourceControl.getSurfacePosition().equals(surfacePosition);
-                        z2 = !equals;
-                        if (!equals) {
+                        boolean zEquals = insetsSourceControl.getSurfacePosition().equals(surfacePosition);
+                        z2 = !zEquals;
+                        if (!zEquals) {
                             Slog.d("DisplayImeController", "insetsControlChanged: no anim but positionChanged.");
                         }
                     }
@@ -299,110 +297,69 @@ public class DisplayImeController implements DisplayController.OnDisplaysChanged
             }
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:38:0x0075  */
         @Override // com.android.wm.shell.common.DisplayInsetsController.OnInsetsChangedListener
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public final void setImeInputTargetRequestedVisibility(boolean r8, android.view.inputmethod.ImeTracker.Token r9) {
-            /*
-                r7 = this;
-                android.view.inputmethod.ImeTracker r0 = android.view.inputmethod.ImeTracker.forLogging()
-                r1 = 68
-                r0.onProgress(r9, r1)
-                r7.mImeRequestedVisible = r8
-                com.android.wm.shell.common.DisplayImeController r0 = com.android.wm.shell.common.DisplayImeController.this
-                int r1 = r7.mDisplayId
-                java.util.ArrayList r2 = r0.mPositionProcessors
-                monitor-enter(r2)
-                java.util.ArrayList r0 = r0.mPositionProcessors     // Catch: java.lang.Throwable -> L28
-                int r3 = r0.size()     // Catch: java.lang.Throwable -> L28
-                r4 = 0
-                r5 = r4
-            L1a:
-                if (r5 >= r3) goto L2a
-                java.lang.Object r6 = r0.get(r5)     // Catch: java.lang.Throwable -> L28
-                int r5 = r5 + 1
-                com.android.wm.shell.common.DisplayImeController$ImePositionProcessor r6 = (com.android.wm.shell.common.DisplayImeController.ImePositionProcessor) r6     // Catch: java.lang.Throwable -> L28
-                r6.onImeRequested(r1, r8)     // Catch: java.lang.Throwable -> L28
-                goto L1a
-            L28:
-                r7 = move-exception
-                goto L7a
-            L2a:
-                monitor-exit(r2)     // Catch: java.lang.Throwable -> L28
-                if (r8 != 0) goto L31
-                boolean r8 = r7.mImeShowing
-                if (r8 == 0) goto L36
-            L31:
-                boolean r8 = r7.mImeRequestedVisible
-                r7.startAnimation(r8, r4, r9)
-            L36:
-                boolean r8 = r7.mImeRequestedVisible
-                r0 = 1
-                if (r8 != 0) goto L41
-                android.animation.ValueAnimator r1 = r7.mAnimation
-                if (r1 == 0) goto L41
-                r1 = r0
-                goto L42
-            L41:
-                r1 = r4
-            L42:
-                if (r8 != 0) goto L4a
-                android.animation.ValueAnimator r8 = r7.mAnimation
-                if (r8 == 0) goto L49
-                goto L4a
-            L49:
-                r0 = r4
-            L4a:
-                if (r1 == 0) goto L72
-                if (r0 == 0) goto L72
-                com.android.wm.shell.common.DisplayImeController r8 = com.android.wm.shell.common.DisplayImeController.this
-                java.util.ArrayList r2 = r8.mPositionProcessors
-                monitor-enter(r2)
-                java.util.ArrayList r8 = r8.mPositionProcessors     // Catch: java.lang.Throwable -> L6c
-                int r3 = r8.size()     // Catch: java.lang.Throwable -> L6c
-                r5 = r4
-            L5a:
-                if (r5 >= r3) goto L6e
-                java.lang.Object r6 = r8.get(r5)     // Catch: java.lang.Throwable -> L6c
-                int r5 = r5 + 1
-                com.android.wm.shell.common.DisplayImeController$ImePositionProcessor r6 = (com.android.wm.shell.common.DisplayImeController.ImePositionProcessor) r6     // Catch: java.lang.Throwable -> L6c
-                boolean r6 = r6.hasSplitImeFocus()     // Catch: java.lang.Throwable -> L6c
-                if (r6 == 0) goto L5a
-                monitor-exit(r2)     // Catch: java.lang.Throwable -> L6c
-                goto L72
-            L6c:
-                r7 = move-exception
-                goto L70
-            L6e:
-                monitor-exit(r2)     // Catch: java.lang.Throwable -> L6c
-                goto L73
-            L70:
-                monitor-exit(r2)     // Catch: java.lang.Throwable -> L6c
-                throw r7
-            L72:
-                r4 = r0
-            L73:
-                if (r1 == 0) goto L76
-                r9 = 0
-            L76:
-                r7.setVisibleDirectly(r4, r9)
-                return
-            L7a:
-                monitor-exit(r2)     // Catch: java.lang.Throwable -> L28
-                throw r7
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.common.DisplayImeController.PerDisplay.setImeInputTargetRequestedVisibility(boolean, android.view.inputmethod.ImeTracker$Token):void");
+        public final void setImeInputTargetRequestedVisibility(boolean z, ImeTracker.Token token) {
+            boolean z2;
+            ImeTracker.forLogging().onProgress(token, 68);
+            this.mImeRequestedVisible = z;
+            DisplayImeController displayImeController = DisplayImeController.this;
+            int i = this.mDisplayId;
+            synchronized (displayImeController.mPositionProcessors) {
+                try {
+                    ArrayList arrayList = displayImeController.mPositionProcessors;
+                    int size = arrayList.size();
+                    z2 = false;
+                    int i2 = 0;
+                    while (i2 < size) {
+                        Object obj = arrayList.get(i2);
+                        i2++;
+                        ((ImePositionProcessor) obj).onImeRequested(i, z);
+                    }
+                } finally {
+                }
+            }
+            if (z || this.mImeShowing) {
+                startAnimation(this.mImeRequestedVisible, false, token);
+            }
+            boolean z3 = this.mImeRequestedVisible;
+            boolean z4 = true;
+            boolean z5 = (z3 || this.mAnimation == null) ? false : true;
+            if (!z3 && this.mAnimation == null) {
+                z4 = false;
+            }
+            if (!z5 || !z4) {
+                z2 = z4;
+                break;
+            }
+            DisplayImeController displayImeController2 = DisplayImeController.this;
+            synchronized (displayImeController2.mPositionProcessors) {
+                try {
+                    ArrayList arrayList2 = displayImeController2.mPositionProcessors;
+                    int size2 = arrayList2.size();
+                    int i3 = 0;
+                    while (i3 < size2) {
+                        Object obj2 = arrayList2.get(i3);
+                        i3++;
+                        if (((ImePositionProcessor) obj2).hasSplitImeFocus()) {
+                            z2 = z4;
+                            break;
+                        }
+                    }
+                } finally {
+                }
+            }
+            if (z5) {
+                token = null;
+            }
+            setVisibleDirectly(z2, token);
         }
 
         public final void setVisibleDirectly(boolean z, ImeTracker.Token token) {
             this.mInsetsState.setSourceVisible(InsetsSource.ID_IME, z);
-            int ime = z ? WindowInsets.Type.ime() : 0;
+            int iIme = z ? WindowInsets.Type.ime() : 0;
             try {
                 Slog.d("DisplayImeController", "setVisibleDirectly: " + z + ", t=" + token + "");
-                DisplayImeController.this.mWmService.updateDisplayWindowRequestedVisibleTypes(this.mDisplayId, ime, WindowInsets.Type.ime(), token);
+                DisplayImeController.this.mWmService.updateDisplayWindowRequestedVisibleTypes(this.mDisplayId, iIme, WindowInsets.Type.ime(), token);
             } catch (RemoteException unused) {
             }
         }
@@ -418,16 +375,16 @@ public class DisplayImeController implements DisplayController.OnDisplaysChanged
 
         public final void startAnimation(int i, boolean z, boolean z2) {
             InsetsSourceControl insetsSourceControl;
-            ImeTracker.Token onStart;
+            ImeTracker.Token tokenOnStart;
             if (this.mInsetsState.peekSource(InsetsSource.ID_IME) == null || (insetsSourceControl = this.mImeSourceControl) == null) {
                 return;
             }
             if (insetsSourceControl.getImeStatsToken() != null) {
-                onStart = this.mImeSourceControl.getImeStatsToken();
+                tokenOnStart = this.mImeSourceControl.getImeStatsToken();
             } else {
-                onStart = ImeTracker.forLogging().onStart(z ? 1 : 2, 8, i, false);
+                tokenOnStart = ImeTracker.forLogging().onStart(z ? 1 : 2, 8, i, false);
             }
-            startAnimation(z, z2, onStart);
+            startAnimation(z, z2, tokenOnStart);
         }
 
         public final void updateImeVisibilityForDispatch(boolean z) {
@@ -454,7 +411,7 @@ public class DisplayImeController implements DisplayController.OnDisplaysChanged
 
         public final void startAnimation(boolean z, boolean z2, ImeTracker.Token token) {
             String str;
-            float f;
+            float fFloatValue;
             boolean z3;
             InsetsSourceControl insetsSourceControl = this.mImeSourceControl;
             if (insetsSourceControl != null && insetsSourceControl.getLeash() != null) {
@@ -462,32 +419,32 @@ public class DisplayImeController implements DisplayController.OnDisplaysChanged
                     Slog.e("DisplayImeController", "IME was not requested visible, not starting the show animation.");
                     return;
                 }
-                InsetsSource peekSource = this.mInsetsState.peekSource(InsetsSource.ID_IME);
-                if (peekSource == null) {
+                InsetsSource insetsSourcePeekSource = this.mInsetsState.peekSource(InsetsSource.ID_IME);
+                if (insetsSourcePeekSource == null) {
                     ImeTracker.forLogging().onFailed(token, 26);
                     return;
                 }
-                Rect frame = peekSource.getFrame();
-                Rect frame2 = peekSource.getFrame();
-                int height = frame2.height();
+                Rect frame = insetsSourcePeekSource.getFrame();
+                Rect frame2 = insetsSourcePeekSource.getFrame();
+                int iHeight = frame2.height();
                 int i = this.mDisplayId;
                 DisplayImeController displayImeController = DisplayImeController.this;
-                boolean z4 = (height == 0 || frame2.height() <= displayImeController.mDisplayController.getDisplayLayout(i).mNavBarFrameHeight) && z;
+                boolean z4 = (iHeight == 0 || frame2.height() <= displayImeController.mDisplayController.getDisplayLayout(i).mNavBarFrameHeight) && z;
                 if (z4) {
                     this.mImeFrame.set(frame);
                     this.mImeFrame.bottom -= (int) (displayImeController.mDisplayController.getDisplayLayout(i).density() * (-80.0f));
                 } else if (frame.height() != 0) {
                     this.mImeFrame.set(frame);
                 }
-                StringBuilder m = RowView$$ExternalSyntheticOutline0.m("Run startAnim  show:", "  was:", z);
+                StringBuilder sbM = RowView$$ExternalSyntheticOutline0.m("Run startAnim  show:", "  was:", z);
                 int i2 = this.mAnimationDirection;
                 if (i2 == 1) {
                     str = "SHOW";
                 } else {
                     str = i2 == 2 ? "HIDE" : PeripheralBarcodeConstants.Symbology.Type.TYPE_NONE;
                 }
-                m.append(str);
-                Slog.d("DisplayImeController", m.toString());
+                sbM.append(str);
+                Slog.d("DisplayImeController", sbM.toString());
                 if ((!z2 && this.mAnimationDirection == 1 && z) || (this.mAnimationDirection == 2 && !z)) {
                     ImeTracker.forLogging().onCancelled(token, 26);
                     return;
@@ -495,28 +452,28 @@ public class DisplayImeController implements DisplayController.OnDisplaysChanged
                 ValueAnimator valueAnimator = this.mAnimation;
                 if (valueAnimator != null) {
                     if (valueAnimator.isRunning()) {
-                        f = ((Float) this.mAnimation.getAnimatedValue()).floatValue();
+                        fFloatValue = ((Float) this.mAnimation.getAnimatedValue()).floatValue();
                         z3 = true;
                     } else {
-                        f = 0.0f;
+                        fFloatValue = 0.0f;
                         z3 = false;
                     }
                     this.mAnimation.cancel();
                     this.mAnimationDirection = 0;
                 } else {
-                    f = 0.0f;
+                    fFloatValue = 0.0f;
                     z3 = false;
                 }
                 InsetsSourceControl insetsSourceControl2 = new InsetsSourceControl(this.mImeSourceControl);
                 final boolean z5 = z4;
                 final SurfaceControl leash = insetsSourceControl2.getLeash();
-                final float f2 = insetsSourceControl2.getSurfacePosition().y;
-                final float f3 = insetsSourceControl2.getSurfacePosition().x;
-                final float height2 = this.mImeFrame.height() + f2;
-                float f4 = z ? height2 : f2;
-                float f5 = z ? f2 : height2;
+                final float f = insetsSourceControl2.getSurfacePosition().y;
+                final float f2 = insetsSourceControl2.getSurfacePosition().x;
+                final float fHeight = this.mImeFrame.height() + f;
+                float f3 = z ? fHeight : f;
+                float f4 = z ? f : fHeight;
                 if (this.mAnimationDirection == 0 && this.mImeShowing && z) {
-                    f = f2;
+                    fFloatValue = f;
                     z3 = true;
                 }
                 this.mAnimationDirection = z ? 1 : 2;
@@ -524,31 +481,31 @@ public class DisplayImeController implements DisplayController.OnDisplaysChanged
                     this.mImeShowing = z;
                 }
                 updateImeVisibilityForDispatch(z);
-                ValueAnimator ofFloat = ValueAnimator.ofFloat(f4, f5);
-                this.mAnimation = ofFloat;
-                ofFloat.setDuration(z ? 275L : 340L);
+                ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(f3, f4);
+                this.mAnimation = valueAnimatorOfFloat;
+                valueAnimatorOfFloat.setDuration(z ? 275L : 340L);
                 if (z3) {
-                    this.mAnimation.setCurrentFraction((f - f4) / (f5 - f4));
+                    this.mAnimation.setCurrentFraction((fFloatValue - f3) / (f4 - f3));
                 } else {
                     this.mAnimation.setCurrentFraction(0.0f);
                 }
                 this.mAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.common.DisplayImeController$PerDisplay$$ExternalSyntheticLambda1
                     @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                     public final void onAnimationUpdate(ValueAnimator valueAnimator2) {
-                        DisplayImeController.PerDisplay perDisplay = DisplayImeController.PerDisplay.this;
+                        DisplayImeController.PerDisplay perDisplay = this.f$0;
                         SurfaceControl surfaceControl = leash;
-                        float f6 = f3;
+                        float f5 = f2;
                         boolean z6 = z5;
-                        float f7 = height2;
-                        float f8 = f2;
-                        float f9 = f2;
-                        SurfaceControl.Transaction acquire = DisplayImeController.this.mTransactionPool.acquire();
-                        float floatValue = ((Float) valueAnimator2.getAnimatedValue()).floatValue();
-                        acquire.setPosition(surfaceControl, f6, floatValue);
-                        acquire.setAlpha(surfaceControl, (perDisplay.mAnimateAlpha || z6) ? (floatValue - f7) / (f8 - f7) : 1.0f);
+                        float f6 = fHeight;
+                        float f7 = f;
+                        float f8 = f;
+                        SurfaceControl.Transaction transactionAcquire = DisplayImeController.this.mTransactionPool.acquire();
+                        float fFloatValue2 = ((Float) valueAnimator2.getAnimatedValue()).floatValue();
+                        transactionAcquire.setPosition(surfaceControl, f5, fFloatValue2);
+                        transactionAcquire.setAlpha(surfaceControl, (perDisplay.mAnimateAlpha || z6) ? (fFloatValue2 - f6) / (f7 - f6) : 1.0f);
                         DisplayImeController displayImeController2 = DisplayImeController.this;
                         int i3 = perDisplay.mDisplayId;
-                        int imeTop = perDisplay.imeTop(floatValue, f9);
+                        int iImeTop = perDisplay.imeTop(fFloatValue2, f8);
                         synchronized (displayImeController2.mPositionProcessors) {
                             try {
                                 ArrayList arrayList = displayImeController2.mPositionProcessors;
@@ -557,19 +514,19 @@ public class DisplayImeController implements DisplayController.OnDisplaysChanged
                                 while (i4 < size) {
                                     Object obj = arrayList.get(i4);
                                     i4++;
-                                    ((DisplayImeController.ImePositionProcessor) obj).onImePositionChanged(i3, imeTop, acquire);
+                                    ((DisplayImeController.ImePositionProcessor) obj).onImePositionChanged(i3, iImeTop, transactionAcquire);
                                 }
                             } catch (Throwable th) {
                                 throw th;
                             }
                         }
-                        acquire.apply();
-                        DisplayImeController.this.mTransactionPool.release(acquire);
+                        transactionAcquire.apply();
+                        DisplayImeController.this.mTransactionPool.release(transactionAcquire);
                     }
                 });
                 this.mAnimation.setInterpolator(DisplayImeController.INTERPOLATOR);
                 ImeTracker.forLogging().onProgress(token, 26);
-                this.mAnimation.addListener(new AnimatorListenerAdapter(token, leash, f3, height2, f2, f2, z5, f5, insetsSourceControl2) { // from class: com.android.wm.shell.common.DisplayImeController.PerDisplay.1
+                this.mAnimation.addListener(new AnimatorListenerAdapter(token, leash, f2, fHeight, f, f, z5, f4, insetsSourceControl2) { // from class: com.android.wm.shell.common.DisplayImeController.PerDisplay.1
                     public boolean mCancelled = false;
                     public final ImeTracker.Token mStatsToken;
                     public final /* synthetic */ InsetsSourceControl val$animatingControl;
@@ -585,12 +542,12 @@ public class DisplayImeController implements DisplayController.OnDisplaysChanged
                     {
                         this.val$statsToken = token;
                         this.val$animatingLeash = leash;
-                        this.val$x = f3;
-                        this.val$hiddenY = height2;
-                        this.val$defaultY = f2;
-                        this.val$shownY = f2;
+                        this.val$x = f2;
+                        this.val$hiddenY = fHeight;
+                        this.val$defaultY = f;
+                        this.val$shownY = f;
                         this.val$isFloating = z5;
-                        this.val$endY = f5;
+                        this.val$endY = f4;
                         this.val$animatingControl = insetsSourceControl2;
                         this.mStatsToken = token;
                     }
@@ -607,15 +564,15 @@ public class DisplayImeController implements DisplayController.OnDisplaysChanged
                     @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                     public final void onAnimationEnd(Animator animator) {
                         Slog.d("DisplayImeController", "onAnimationEnd " + this.mCancelled);
-                        SurfaceControl.Transaction acquire = DisplayImeController.this.mTransactionPool.acquire();
+                        SurfaceControl.Transaction transactionAcquire = DisplayImeController.this.mTransactionPool.acquire();
                         if (!this.mCancelled) {
-                            acquire.setPosition(this.val$animatingLeash, this.val$x, this.val$endY);
-                            acquire.setAlpha(this.val$animatingLeash, 1.0f);
+                            transactionAcquire.setPosition(this.val$animatingLeash, this.val$x, this.val$endY);
+                            transactionAcquire.setAlpha(this.val$animatingLeash, 1.0f);
                         }
                         int i3 = PerDisplay.this.mAnimationDirection;
                         if (i3 == 2 && !this.mCancelled) {
                             ImeTracker.forLogging().onProgress(this.mStatsToken, 27);
-                            acquire.hide(this.val$animatingLeash);
+                            transactionAcquire.hide(this.val$animatingLeash);
                             PerDisplay.this.setVisibleDirectly(false, this.val$statsToken);
                         } else if (i3 == 1 && !this.mCancelled) {
                             ImeTracker.forLogging().onShown(this.mStatsToken);
@@ -634,7 +591,7 @@ public class DisplayImeController implements DisplayController.OnDisplaysChanged
                                 while (i5 < size) {
                                     Object obj = arrayList.get(i5);
                                     i5++;
-                                    ((ImePositionProcessor) obj).onImeEndPositioning(i4, z6, acquire);
+                                    ((ImePositionProcessor) obj).onImeEndPositioning(i4, z6, transactionAcquire);
                                 }
                             } catch (Throwable th) {
                                 throw th;
@@ -644,8 +601,8 @@ public class DisplayImeController implements DisplayController.OnDisplaysChanged
                             ImeTracker.Token token2 = this.mStatsToken;
                             EventLog.writeEvent(32010, token2 != null ? token2.getTag() : "TOKEN_NONE", Integer.valueOf(PerDisplay.this.mDisplayId), Integer.valueOf(PerDisplay.this.mAnimationDirection), Float.valueOf(this.val$endY), Objects.toString(this.val$animatingLeash), Objects.toString(this.val$animatingControl.getInsetsHint()), Objects.toString(this.val$animatingControl.getSurfacePosition()), Objects.toString(PerDisplay.this.mImeFrame));
                         }
-                        acquire.apply();
-                        DisplayImeController.this.mTransactionPool.release(acquire);
+                        transactionAcquire.apply();
+                        DisplayImeController.this.mTransactionPool.release(transactionAcquire);
                         PerDisplay perDisplay2 = PerDisplay.this;
                         perDisplay2.mAnimationDirection = 0;
                         perDisplay2.mAnimation = null;
@@ -655,12 +612,12 @@ public class DisplayImeController implements DisplayController.OnDisplaysChanged
 
                     @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                     public final void onAnimationStart(Animator animator) {
-                        int i3;
-                        float f6;
-                        Float f7 = (Float) ((ValueAnimator) animator).getAnimatedValue();
-                        float floatValue = f7.floatValue();
-                        SurfaceControl.Transaction acquire = DisplayImeController.this.mTransactionPool.acquire();
-                        acquire.setPosition(this.val$animatingLeash, this.val$x, floatValue);
+                        int iOnImeStartPositioning;
+                        float f5;
+                        Float f6 = (Float) ((ValueAnimator) animator).getAnimatedValue();
+                        float fFloatValue2 = f6.floatValue();
+                        SurfaceControl.Transaction transactionAcquire = DisplayImeController.this.mTransactionPool.acquire();
+                        transactionAcquire.setPosition(this.val$animatingLeash, this.val$x, fFloatValue2);
                         StringBuilder sb = new StringBuilder("onAnimationStart d:");
                         sb.append(PerDisplay.this.mDisplayId);
                         sb.append(" top:");
@@ -672,22 +629,22 @@ public class DisplayImeController implements DisplayController.OnDisplaysChanged
                         Slog.d("DisplayImeController", sb.toString());
                         PerDisplay perDisplay = PerDisplay.this;
                         DisplayImeController displayImeController2 = DisplayImeController.this;
-                        int i4 = perDisplay.mDisplayId;
-                        int imeTop = perDisplay.imeTop(this.val$hiddenY, this.val$defaultY);
-                        int imeTop2 = PerDisplay.this.imeTop(this.val$shownY, this.val$defaultY);
+                        int i3 = perDisplay.mDisplayId;
+                        int iImeTop = perDisplay.imeTop(this.val$hiddenY, this.val$defaultY);
+                        int iImeTop2 = PerDisplay.this.imeTop(this.val$shownY, this.val$defaultY);
                         boolean z6 = PerDisplay.this.mAnimationDirection == 1;
                         boolean z7 = this.val$isFloating;
                         synchronized (displayImeController2.mPositionProcessors) {
                             try {
                                 ArrayList arrayList = displayImeController2.mPositionProcessors;
                                 int size = arrayList.size();
-                                i3 = 0;
-                                int i5 = 0;
-                                while (i5 < size) {
-                                    Object obj = arrayList.get(i5);
-                                    i5++;
+                                iOnImeStartPositioning = 0;
+                                int i4 = 0;
+                                while (i4 < size) {
+                                    Object obj = arrayList.get(i4);
+                                    i4++;
                                     boolean z8 = z7;
-                                    i3 |= ((ImePositionProcessor) obj).onImeStartPositioning(i4, imeTop, z6, z8, imeTop2);
+                                    iOnImeStartPositioning |= ((ImePositionProcessor) obj).onImeStartPositioning(i3, iImeTop, z6, z8, iImeTop2);
                                     z7 = z8;
                                 }
                             } catch (Throwable th) {
@@ -695,25 +652,25 @@ public class DisplayImeController implements DisplayController.OnDisplaysChanged
                             }
                         }
                         PerDisplay perDisplay2 = PerDisplay.this;
-                        boolean z9 = (i3 & 1) == 0;
+                        boolean z9 = (iOnImeStartPositioning & 1) == 0;
                         perDisplay2.mAnimateAlpha = z9;
                         if (z9 || this.val$isFloating) {
-                            float f8 = this.val$hiddenY;
-                            f6 = (floatValue - f8) / (this.val$shownY - f8);
+                            float f7 = this.val$hiddenY;
+                            f5 = (fFloatValue2 - f7) / (this.val$shownY - f7);
                         } else {
-                            f6 = 1.0f;
+                            f5 = 1.0f;
                         }
-                        acquire.setAlpha(this.val$animatingLeash, f6);
+                        transactionAcquire.setAlpha(this.val$animatingLeash, f5);
                         if (PerDisplay.this.mAnimationDirection == 1) {
                             ImeTracker.forLogging().onProgress(this.mStatsToken, 27);
-                            acquire.show(this.val$animatingLeash);
+                            transactionAcquire.show(this.val$animatingLeash);
                         }
                         if (ImeTracker.DEBUG_IME_VISIBILITY) {
                             ImeTracker.Token token2 = this.mStatsToken;
-                            EventLog.writeEvent(32009, token2 != null ? token2.getTag() : "TOKEN_NONE", Integer.valueOf(PerDisplay.this.mDisplayId), Integer.valueOf(PerDisplay.this.mAnimationDirection), Float.valueOf(f6), f7, Float.valueOf(this.val$endY), Objects.toString(this.val$animatingLeash), Objects.toString(this.val$animatingControl.getInsetsHint()), Objects.toString(this.val$animatingControl.getSurfacePosition()), Objects.toString(PerDisplay.this.mImeFrame));
+                            EventLog.writeEvent(32009, token2 != null ? token2.getTag() : "TOKEN_NONE", Integer.valueOf(PerDisplay.this.mDisplayId), Integer.valueOf(PerDisplay.this.mAnimationDirection), Float.valueOf(f5), f6, Float.valueOf(this.val$endY), Objects.toString(this.val$animatingLeash), Objects.toString(this.val$animatingControl.getInsetsHint()), Objects.toString(this.val$animatingControl.getSurfacePosition()), Objects.toString(PerDisplay.this.mImeFrame));
                         }
-                        acquire.apply();
-                        DisplayImeController.this.mTransactionPool.release(acquire);
+                        transactionAcquire.apply();
+                        DisplayImeController.this.mTransactionPool.release(transactionAcquire);
                     }
                 });
                 if (z) {
@@ -750,7 +707,6 @@ public class DisplayImeController implements DisplayController.OnDisplaysChanged
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface ImePositionProcessor {
         default boolean hasSplitImeFocus() {
             return false;

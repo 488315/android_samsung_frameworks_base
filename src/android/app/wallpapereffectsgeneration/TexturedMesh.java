@@ -50,15 +50,15 @@ public final class TexturedMesh implements Parcelable {
         this.mIndicesLayoutType = parcel.readInt();
         this.mVerticesLayoutType = parcel.readInt();
         this.mBitmap = (Bitmap) parcel.readTypedObject(Bitmap.CREATOR);
-        Parcel obtain = Parcel.obtain();
+        Parcel parcelObtain = Parcel.obtain();
         try {
-            byte[] readBlob = parcel.readBlob();
-            obtain.unmarshall(readBlob, 0, readBlob.length);
-            obtain.setDataPosition(0);
-            this.mIndices = obtain.createIntArray();
-            this.mVertices = obtain.createFloatArray();
+            byte[] blob = parcel.readBlob();
+            parcelObtain.unmarshall(blob, 0, blob.length);
+            parcelObtain.setDataPosition(0);
+            this.mIndices = parcelObtain.createIntArray();
+            this.mVertices = parcelObtain.createFloatArray();
         } finally {
-            obtain.recycle();
+            parcelObtain.recycle();
         }
     }
 
@@ -95,13 +95,13 @@ public final class TexturedMesh implements Parcelable {
         parcel.writeInt(this.mIndicesLayoutType);
         parcel.writeInt(this.mVerticesLayoutType);
         parcel.writeTypedObject(this.mBitmap, i);
-        Parcel obtain = Parcel.obtain();
+        Parcel parcelObtain = Parcel.obtain();
         try {
-            obtain.writeIntArray(this.mIndices);
-            obtain.writeFloatArray(this.mVertices);
-            parcel.writeBlob(obtain.marshall());
+            parcelObtain.writeIntArray(this.mIndices);
+            parcelObtain.writeFloatArray(this.mVertices);
+            parcel.writeBlob(parcelObtain.marshall());
         } finally {
-            obtain.recycle();
+            parcelObtain.recycle();
         }
     }
 

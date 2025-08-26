@@ -18,6 +18,11 @@ public final class FeatureFlagsImpl implements FeatureFlags {
     }
 
     @Override // com.android.media.projection.flags.FeatureFlags
+    public boolean recordingOverlay() {
+        return false;
+    }
+
+    @Override // com.android.media.projection.flags.FeatureFlags
     public boolean showStopDialogPostCallEnd() {
         return true;
     }

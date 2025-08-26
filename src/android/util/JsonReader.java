@@ -83,9 +83,9 @@ public final class JsonReader implements Closeable {
         switch (AnonymousClass1.$SwitchMap$android$util$JsonScope[peekStack().ordinal()]) {
             case 1:
                 replaceTop(JsonScope.NONEMPTY_DOCUMENT);
-                JsonToken nextValue = nextValue();
+                JsonToken jsonTokenNextValue = nextValue();
                 if (this.lenient || this.token == JsonToken.BEGIN_ARRAY || this.token == JsonToken.BEGIN_OBJECT) {
-                    return nextValue;
+                    return jsonTokenNextValue;
                 }
                 throw new IOException("Expected JSON document to start with '[' or '{' but was " + this.token);
             case 2:
@@ -100,9 +100,9 @@ public final class JsonReader implements Closeable {
                 return nextInObject(false);
             case 7:
                 try {
-                    JsonToken nextValue2 = nextValue();
+                    JsonToken jsonTokenNextValue2 = nextValue();
                     if (this.lenient) {
-                        return nextValue2;
+                        return jsonTokenNextValue2;
                     }
                     throw syntaxError("Expected EOF");
                 } catch (EOFException unused) {
@@ -206,17 +206,17 @@ public final class JsonReader implements Closeable {
         advance();
     }
 
-    public double nextDouble() throws IOException {
+    public double nextDouble() throws IOException, NumberFormatException {
         peek();
         if (this.token != JsonToken.STRING && this.token != JsonToken.NUMBER) {
             throw new IllegalStateException("Expected a double but was " + this.token);
         }
-        double parseDouble = Double.parseDouble(this.value);
+        double d = Double.parseDouble(this.value);
         advance();
-        return parseDouble;
+        return d;
     }
 
-    public long nextLong() throws IOException {
+    public long nextLong() throws IOException, NumberFormatException {
         long j;
         peek();
         if (this.token != JsonToken.STRING && this.token != JsonToken.NUMBER) {
@@ -225,9 +225,9 @@ public final class JsonReader implements Closeable {
         try {
             j = Long.parseLong(this.value);
         } catch (NumberFormatException unused) {
-            double parseDouble = Double.parseDouble(this.value);
-            long j2 = (long) parseDouble;
-            if (j2 != parseDouble) {
+            double d = Double.parseDouble(this.value);
+            long j2 = (long) d;
+            if (j2 != d) {
                 throw new NumberFormatException(this.value);
             }
             j = j2;
@@ -236,7 +236,7 @@ public final class JsonReader implements Closeable {
         return j;
     }
 
-    public int nextInt() throws IOException {
+    public int nextInt() throws IOException, NumberFormatException {
         int i;
         peek();
         if (this.token != JsonToken.STRING && this.token != JsonToken.NUMBER) {
@@ -245,9 +245,9 @@ public final class JsonReader implements Closeable {
         try {
             i = Integer.parseInt(this.value);
         } catch (NumberFormatException unused) {
-            double parseDouble = Double.parseDouble(this.value);
-            int i2 = (int) parseDouble;
-            if (i2 != parseDouble) {
+            double d = Double.parseDouble(this.value);
+            int i2 = (int) d;
+            if (i2 != d) {
                 throw new NumberFormatException(this.value);
             }
             i = i2;
@@ -273,13 +273,12 @@ public final class JsonReader implements Closeable {
             }
             int i = 0;
             do {
-                JsonToken advance = advance();
-                if (advance != JsonToken.BEGIN_ARRAY && advance != JsonToken.BEGIN_OBJECT) {
-                    if (advance == JsonToken.END_ARRAY || advance == JsonToken.END_OBJECT) {
-                        i--;
-                    }
+                JsonToken jsonTokenAdvance = advance();
+                if (jsonTokenAdvance == JsonToken.BEGIN_ARRAY || jsonTokenAdvance == JsonToken.BEGIN_OBJECT) {
+                    i++;
+                } else if (jsonTokenAdvance == JsonToken.END_ARRAY || jsonTokenAdvance == JsonToken.END_OBJECT) {
+                    i--;
                 }
-                i++;
             } while (i != 0);
         } finally {
             this.skipping = false;
@@ -306,10 +305,10 @@ public final class JsonReader implements Closeable {
         if (z) {
             replaceTop(JsonScope.NONEMPTY_ARRAY);
         } else {
-            int nextNonWhitespace = nextNonWhitespace();
-            if (nextNonWhitespace != 44) {
-                if (nextNonWhitespace != 59) {
-                    if (nextNonWhitespace == 93) {
+            int iNextNonWhitespace = nextNonWhitespace();
+            if (iNextNonWhitespace != 44) {
+                if (iNextNonWhitespace != 59) {
+                    if (iNextNonWhitespace == 93) {
                         pop();
                         JsonToken jsonToken = JsonToken.END_ARRAY;
                         this.token = jsonToken;
@@ -320,9 +319,9 @@ public final class JsonReader implements Closeable {
                 checkLenient();
             }
         }
-        int nextNonWhitespace2 = nextNonWhitespace();
-        if (nextNonWhitespace2 != 44 && nextNonWhitespace2 != 59) {
-            if (nextNonWhitespace2 != 93) {
+        int iNextNonWhitespace2 = nextNonWhitespace();
+        if (iNextNonWhitespace2 != 44 && iNextNonWhitespace2 != 59) {
+            if (iNextNonWhitespace2 != 93) {
                 this.pos--;
                 return nextValue();
             }
@@ -351,9 +350,9 @@ public final class JsonReader implements Closeable {
             }
             this.pos--;
         } else {
-            int nextNonWhitespace = nextNonWhitespace();
-            if (nextNonWhitespace != 44 && nextNonWhitespace != 59) {
-                if (nextNonWhitespace == 125) {
+            int iNextNonWhitespace = nextNonWhitespace();
+            if (iNextNonWhitespace != 44 && iNextNonWhitespace != 59) {
+                if (iNextNonWhitespace == 125) {
                     pop();
                     JsonToken jsonToken2 = JsonToken.END_OBJECT;
                     this.token = jsonToken2;
@@ -362,35 +361,31 @@ public final class JsonReader implements Closeable {
                 throw syntaxError("Unterminated object");
             }
         }
-        int nextNonWhitespace2 = nextNonWhitespace();
-        if (nextNonWhitespace2 != 34) {
-            if (nextNonWhitespace2 == 39) {
-                checkLenient();
-            } else {
-                checkLenient();
-                this.pos--;
-                String nextLiteral = nextLiteral(false);
-                this.name = nextLiteral;
-                if (nextLiteral.isEmpty()) {
-                    throw syntaxError("Expected name");
-                }
-                replaceTop(JsonScope.DANGLING_NAME);
-                JsonToken jsonToken3 = JsonToken.NAME;
-                this.token = jsonToken3;
-                return jsonToken3;
+        int iNextNonWhitespace2 = nextNonWhitespace();
+        if (iNextNonWhitespace2 == 34) {
+            this.name = nextString((char) iNextNonWhitespace2);
+        } else if (iNextNonWhitespace2 == 39) {
+            checkLenient();
+            this.name = nextString((char) iNextNonWhitespace2);
+        } else {
+            checkLenient();
+            this.pos--;
+            String strNextLiteral = nextLiteral(false);
+            this.name = strNextLiteral;
+            if (strNextLiteral.isEmpty()) {
+                throw syntaxError("Expected name");
             }
         }
-        this.name = nextString((char) nextNonWhitespace2);
         replaceTop(JsonScope.DANGLING_NAME);
-        JsonToken jsonToken32 = JsonToken.NAME;
-        this.token = jsonToken32;
-        return jsonToken32;
+        JsonToken jsonToken3 = JsonToken.NAME;
+        this.token = jsonToken3;
+        return jsonToken3;
     }
 
     private JsonToken objectValue() throws IOException {
-        int nextNonWhitespace = nextNonWhitespace();
-        if (nextNonWhitespace != 58) {
-            if (nextNonWhitespace == 61) {
+        int iNextNonWhitespace = nextNonWhitespace();
+        if (iNextNonWhitespace != 58) {
+            if (iNextNonWhitespace == 61) {
                 checkLenient();
                 if (this.pos < this.limit || fillBuffer(1)) {
                     char[] cArr = this.buffer;
@@ -408,16 +403,16 @@ public final class JsonReader implements Closeable {
     }
 
     private JsonToken nextValue() throws IOException {
-        int nextNonWhitespace = nextNonWhitespace();
-        if (nextNonWhitespace != 34) {
-            if (nextNonWhitespace != 39) {
-                if (nextNonWhitespace == 91) {
+        int iNextNonWhitespace = nextNonWhitespace();
+        if (iNextNonWhitespace != 34) {
+            if (iNextNonWhitespace != 39) {
+                if (iNextNonWhitespace == 91) {
                     push(JsonScope.EMPTY_ARRAY);
                     JsonToken jsonToken = JsonToken.BEGIN_ARRAY;
                     this.token = jsonToken;
                     return jsonToken;
                 }
-                if (nextNonWhitespace == 123) {
+                if (iNextNonWhitespace == 123) {
                     push(JsonScope.EMPTY_OBJECT);
                     JsonToken jsonToken2 = JsonToken.BEGIN_OBJECT;
                     this.token = jsonToken2;
@@ -428,7 +423,7 @@ public final class JsonReader implements Closeable {
             }
             checkLenient();
         }
-        this.value = nextString((char) nextNonWhitespace);
+        this.value = nextString((char) iNextNonWhitespace);
         JsonToken jsonToken3 = JsonToken.STRING;
         this.token = jsonToken3;
         return jsonToken3;
@@ -466,11 +461,11 @@ public final class JsonReader implements Closeable {
             Reader reader = this.in;
             char[] cArr2 = this.buffer;
             int i8 = this.limit;
-            int read = reader.read(cArr2, i8, cArr2.length - i8);
-            if (read == -1) {
+            int i9 = reader.read(cArr2, i8, cArr2.length - i8);
+            if (i9 == -1) {
                 return false;
             }
-            i3 = this.limit + read;
+            i3 = this.limit + i9;
             this.limit = i3;
             if (this.bufferStartLine == 1 && (i4 = this.bufferStartColumn) == 1 && i3 > 0 && this.buffer[0] == 65279) {
                 this.pos++;
@@ -498,15 +493,21 @@ public final class JsonReader implements Closeable {
         return i;
     }
 
+    /* JADX WARN: Code restructure failed: missing block: B:30:0x0053, code lost:
+    
+        return r0;
+     */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     private int nextNonWhitespace() throws IOException {
-        char c;
         while (true) {
             if (this.pos < this.limit || fillBuffer(1)) {
                 char[] cArr = this.buffer;
                 int i = this.pos;
                 int i2 = i + 1;
                 this.pos = i2;
-                c = cArr[i];
+                char c = cArr[i];
                 if (c != '\t' && c != '\n' && c != '\r' && c != ' ') {
                     if (c != '#') {
                         if (c != '/' || (i2 == this.limit && !fillBuffer(1))) {
@@ -538,7 +539,6 @@ public final class JsonReader implements Closeable {
                 throw new EOFException("End of input");
             }
         }
-        return c;
     }
 
     private void checkLenient() throws IOException {
@@ -578,224 +578,130 @@ public final class JsonReader implements Closeable {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:27:0x004f, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:22:0x004f, code lost:
     
         if (r0 != null) goto L24;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:28:0x0051, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:23:0x0051, code lost:
     
         r0 = new java.lang.StringBuilder();
      */
-    /* JADX WARN: Code restructure failed: missing block: B:29:0x0056, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:24:0x0056, code lost:
     
         r0.append(r6.buffer, r1, r6.pos - r1);
      */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private java.lang.String nextString(char r7) throws java.io.IOException {
-        /*
-            r6 = this;
-            r0 = 0
-        L1:
-            int r1 = r6.pos
-        L3:
-            int r2 = r6.pos
-            int r3 = r6.limit
-            r4 = 1
-            if (r2 >= r3) goto L4f
-            char[] r3 = r6.buffer
-            int r5 = r2 + 1
-            r6.pos = r5
-            char r2 = r3[r2]
-            if (r2 != r7) goto L31
-            boolean r7 = r6.skipping
-            if (r7 == 0) goto L1c
-            java.lang.String r6 = "skipped!"
-            return r6
-        L1c:
-            if (r0 != 0) goto L27
-            com.android.internal.util.StringPool r6 = r6.stringPool
-            int r5 = r5 - r1
-            int r5 = r5 - r4
-            java.lang.String r6 = r6.get(r3, r1, r5)
-            return r6
-        L27:
-            int r5 = r5 - r1
-            int r5 = r5 - r4
-            r0.append(r3, r1, r5)
-            java.lang.String r6 = r0.toString()
-            return r6
-        L31:
-            r3 = 92
-            if (r2 != r3) goto L3
-            if (r0 != 0) goto L3c
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder
-            r0.<init>()
-        L3c:
-            char[] r2 = r6.buffer
-            int r3 = r6.pos
-            int r3 = r3 - r1
-            int r3 = r3 - r4
-            r0.append(r2, r1, r3)
-            char r1 = r6.readEscapeCharacter()
-            r0.append(r1)
-            int r1 = r6.pos
-            goto L3
-        L4f:
-            if (r0 != 0) goto L56
-            java.lang.StringBuilder r0 = new java.lang.StringBuilder
-            r0.<init>()
-        L56:
-            char[] r2 = r6.buffer
-            int r3 = r6.pos
-            int r3 = r3 - r1
-            r0.append(r2, r1, r3)
-            boolean r1 = r6.fillBuffer(r4)
-            if (r1 == 0) goto L65
-            goto L1
-        L65:
-            java.lang.String r7 = "Unterminated string"
-            java.io.IOException r6 = r6.syntaxError(r7)
-            throw r6
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.util.JsonReader.nextString(char):java.lang.String");
+    private String nextString(char c) throws IOException {
+        StringBuilder sb = null;
+        do {
+            int i = this.pos;
+            while (true) {
+                int i2 = this.pos;
+                if (i2 >= this.limit) {
+                    break;
+                }
+                char[] cArr = this.buffer;
+                int i3 = i2 + 1;
+                this.pos = i3;
+                char c2 = cArr[i2];
+                if (c2 == c) {
+                    if (this.skipping) {
+                        return "skipped!";
+                    }
+                    if (sb == null) {
+                        return this.stringPool.get(cArr, i, (i3 - i) - 1);
+                    }
+                    sb.append(cArr, i, (i3 - i) - 1);
+                    return sb.toString();
+                }
+                if (c2 == '\\') {
+                    if (sb == null) {
+                        sb = new StringBuilder();
+                    }
+                    sb.append(this.buffer, i, (this.pos - i) - 1);
+                    sb.append(readEscapeCharacter());
+                    i = this.pos;
+                }
+            }
+        } while (fillBuffer(1));
+        throw syntaxError("Unterminated string");
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:66:0x0050, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:33:0x0050, code lost:
     
         checkLenient();
      */
-    /* JADX WARN: Failed to find 'out' block for switch in B:62:0x004a. Please report as an issue. */
+    /* JADX WARN: Code restructure failed: missing block: B:40:0x0068, code lost:
+    
+        r0 = r2;
+     */
+    /* JADX WARN: Failed to find 'out' block for switch in B:31:0x004a. Please report as an issue. */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private java.lang.String nextLiteral(boolean r8) throws java.io.IOException {
-        /*
-            r7 = this;
-            r0 = -1
-            r7.valuePos = r0
-            r0 = 0
-            r7.valueLength = r0
-            r1 = 0
-            r2 = r0
-            r3 = r1
-        L9:
-            int r4 = r7.pos
-            int r5 = r4 + r2
-            int r6 = r7.limit
-            if (r5 >= r6) goto L54
-            char[] r5 = r7.buffer
-            int r4 = r4 + r2
-            char r4 = r5[r4]
-            r5 = 9
-            if (r4 == r5) goto L68
-            r5 = 10
-            if (r4 == r5) goto L68
-            r5 = 12
-            if (r4 == r5) goto L68
-            r5 = 13
-            if (r4 == r5) goto L68
-            r5 = 32
-            if (r4 == r5) goto L68
-            r5 = 35
-            if (r4 == r5) goto L50
-            r5 = 44
-            if (r4 == r5) goto L68
-            r5 = 47
-            if (r4 == r5) goto L50
-            r5 = 61
-            if (r4 == r5) goto L50
-            r5 = 123(0x7b, float:1.72E-43)
-            if (r4 == r5) goto L68
-            r5 = 125(0x7d, float:1.75E-43)
-            if (r4 == r5) goto L68
-            r5 = 58
-            if (r4 == r5) goto L68
-            r5 = 59
-            if (r4 == r5) goto L50
-            switch(r4) {
-                case 91: goto L68;
-                case 92: goto L50;
-                case 93: goto L68;
-                default: goto L4d;
+    private String nextLiteral(boolean z) throws IOException {
+        this.valuePos = -1;
+        int i = 0;
+        this.valueLength = 0;
+        String string = null;
+        int i2 = 0;
+        StringBuilder sb = null;
+        while (true) {
+            int i3 = this.pos;
+            if (i3 + i2 < this.limit) {
+                char c = this.buffer[i3 + i2];
+                if (c != '\t' && c != '\n' && c != '\f' && c != '\r' && c != ' ') {
+                    if (c != '#') {
+                        if (c != ',') {
+                            if (c != '/' && c != '=') {
+                                if (c != '{' && c != '}' && c != ':') {
+                                    if (c != ';') {
+                                        switch (c) {
+                                            case '[':
+                                            case ']':
+                                                break;
+                                            case '\\':
+                                                break;
+                                            default:
+                                                i2++;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            } else if (i2 < this.buffer.length) {
+                if (!fillBuffer(i2 + 1)) {
+                    this.buffer[this.limit] = 0;
+                }
+            } else {
+                if (sb == null) {
+                    sb = new StringBuilder();
+                }
+                sb.append(this.buffer, this.pos, i2);
+                this.valueLength += i2;
+                this.pos += i2;
+                if (fillBuffer(1)) {
+                    i2 = 0;
+                }
             }
-        L4d:
-            int r2 = r2 + 1
-            goto L9
-        L50:
-            r7.checkLenient()
-            goto L68
-        L54:
-            char[] r4 = r7.buffer
-            int r4 = r4.length
-            if (r2 >= r4) goto L6a
-            int r4 = r2 + 1
-            boolean r4 = r7.fillBuffer(r4)
-            if (r4 == 0) goto L62
-            goto L9
-        L62:
-            char[] r4 = r7.buffer
-            int r5 = r7.limit
-            r4[r5] = r0
-        L68:
-            r0 = r2
-            goto L89
-        L6a:
-            if (r3 != 0) goto L71
-            java.lang.StringBuilder r3 = new java.lang.StringBuilder
-            r3.<init>()
-        L71:
-            char[] r4 = r7.buffer
-            int r5 = r7.pos
-            r3.append(r4, r5, r2)
-            int r4 = r7.valueLength
-            int r4 = r4 + r2
-            r7.valueLength = r4
-            int r4 = r7.pos
-            int r4 = r4 + r2
-            r7.pos = r4
-            r2 = 1
-            boolean r2 = r7.fillBuffer(r2)
-            if (r2 != 0) goto Lbd
-        L89:
-            if (r8 == 0) goto L92
-            if (r3 != 0) goto L92
-            int r8 = r7.pos
-            r7.valuePos = r8
-            goto Lb2
-        L92:
-            boolean r8 = r7.skipping
-            if (r8 == 0) goto L9a
-            java.lang.String r1 = "skipped!"
-            goto Lb2
-        L9a:
-            if (r3 != 0) goto La7
-            com.android.internal.util.StringPool r8 = r7.stringPool
-            char[] r1 = r7.buffer
-            int r2 = r7.pos
-            java.lang.String r1 = r8.get(r1, r2, r0)
-            goto Lb2
-        La7:
-            char[] r8 = r7.buffer
-            int r1 = r7.pos
-            r3.append(r8, r1, r0)
-            java.lang.String r1 = r3.toString()
-        Lb2:
-            int r8 = r7.valueLength
-            int r8 = r8 + r0
-            r7.valueLength = r8
-            int r8 = r7.pos
-            int r8 = r8 + r0
-            r7.pos = r8
-            return r1
-        Lbd:
-            r2 = r0
-            goto L9
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.util.JsonReader.nextLiteral(boolean):java.lang.String");
+        }
+        if (z && sb == null) {
+            this.valuePos = this.pos;
+        } else if (this.skipping) {
+            string = "skipped!";
+        } else if (sb == null) {
+            string = this.stringPool.get(this.buffer, this.pos, i);
+        } else {
+            sb.append(this.buffer, this.pos, i);
+            string = sb.toString();
+        }
+        this.valueLength += i;
+        this.pos += i;
+        return string;
     }
 
     public String toString() {
@@ -841,9 +747,9 @@ public final class JsonReader implements Closeable {
         if (this.valueLength == 0) {
             throw syntaxError("Expected literal value");
         }
-        JsonToken decodeLiteral = decodeLiteral();
-        this.token = decodeLiteral;
-        if (decodeLiteral == JsonToken.STRING) {
+        JsonToken jsonTokenDecodeLiteral = decodeLiteral();
+        this.token = jsonTokenDecodeLiteral;
+        if (jsonTokenDecodeLiteral == JsonToken.STRING) {
             checkLenient();
         }
         return this.token;
@@ -941,8 +847,8 @@ public final class JsonReader implements Closeable {
 
     private CharSequence getSnippet() {
         StringBuilder sb = new StringBuilder();
-        int min = Math.min(this.pos, 20);
-        sb.append(this.buffer, this.pos - min, min);
+        int iMin = Math.min(this.pos, 20);
+        sb.append(this.buffer, this.pos - iMin, iMin);
         sb.append(this.buffer, this.pos, Math.min(this.limit - this.pos, 20));
         return sb;
     }

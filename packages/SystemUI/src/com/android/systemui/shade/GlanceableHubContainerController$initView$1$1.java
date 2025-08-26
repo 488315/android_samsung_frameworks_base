@@ -25,7 +25,6 @@ import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function3;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class GlanceableHubContainerController$initView$1$1 extends SuspendLambda implements Function3 {
     final /* synthetic */ ComposeView $this_apply;
@@ -33,7 +32,6 @@ final class GlanceableHubContainerController$initView$1$1 extends SuspendLambda 
     int label;
     final /* synthetic */ GlanceableHubContainerController this$0;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.shade.GlanceableHubContainerController$initView$1$1$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         final /* synthetic */ LifecycleOwner $$this$repeatWhenAttached;
@@ -41,16 +39,15 @@ final class GlanceableHubContainerController$initView$1$1 extends SuspendLambda 
         int label;
         final /* synthetic */ GlanceableHubContainerController this$0;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.shade.GlanceableHubContainerController$initView$1$1$1$1, reason: invalid class name and collision with other inner class name */
-        final class C02931 extends SuspendLambda implements Function2 {
+        final class C04581 extends SuspendLambda implements Function2 {
             final /* synthetic */ LifecycleOwner $$this$repeatWhenAttached;
             final /* synthetic */ ComposeView $this_apply;
             int label;
             final /* synthetic */ GlanceableHubContainerController this$0;
 
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-            public C02931(ComposeView composeView, LifecycleOwner lifecycleOwner, GlanceableHubContainerController glanceableHubContainerController, Continuation continuation) {
+            public C04581(ComposeView composeView, LifecycleOwner lifecycleOwner, GlanceableHubContainerController glanceableHubContainerController, Continuation continuation) {
                 super(2, continuation);
                 this.$this_apply = composeView;
                 this.$$this$repeatWhenAttached = lifecycleOwner;
@@ -59,12 +56,12 @@ final class GlanceableHubContainerController$initView$1$1 extends SuspendLambda 
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
             public final Continuation create(Object obj, Continuation continuation) {
-                return new C02931(this.$this_apply, this.$$this$repeatWhenAttached, this.this$0, continuation);
+                return new C04581(this.$this_apply, this.$$this$repeatWhenAttached, this.this$0, continuation);
             }
 
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
-                return ((C02931) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+                return ((C04581) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
             }
 
             @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
@@ -83,7 +80,7 @@ final class GlanceableHubContainerController$initView$1$1 extends SuspendLambda 
                         OnBackPressedDispatcher onBackPressedDispatcher = new OnBackPressedDispatcher(null, 1, null);
                         onBackPressedDispatcher.setOnBackInvokedDispatcher(composeView.getViewRootImpl().getOnBackInvokedDispatcher());
                         this.onBackPressedDispatcher = onBackPressedDispatcher;
-                        this.lifecycle = r4.getLifecycle();
+                        this.lifecycle = lifecycleOwner.getLifecycle();
                     }
 
                     @Override // androidx.lifecycle.LifecycleOwner
@@ -99,44 +96,52 @@ final class GlanceableHubContainerController$initView$1$1 extends SuspendLambda 
                 ComposeView composeView2 = this.$this_apply;
                 final GlanceableHubContainerController glanceableHubContainerController = this.this$0;
                 composeView2.setContent(new ComposableLambdaImpl(-293440279, true, new Function2() { // from class: com.android.systemui.shade.GlanceableHubContainerController.initView.1.1.1.1.2
+                    /* JADX WARN: Removed duplicated region for block: B:8:0x001b  */
                     @Override // kotlin.jvm.functions.Function2
+                    /*
+                        Code decompiled incorrectly, please refer to instructions dump.
+                    */
                     public final Object invoke(Object obj2, Object obj3) {
                         Composer composer = (Composer) obj2;
                         if ((((Number) obj3).intValue() & 3) == 2) {
                             ComposerImpl composerImpl = (ComposerImpl) composer;
                             if (composerImpl.getSkipping()) {
                                 composerImpl.skipToGroupEnd();
-                                return Unit.INSTANCE;
-                            }
-                        }
-                        if (ComposerKt.isTraceInProgress()) {
-                            ComposerKt.traceEventStart("com.android.systemui.shade.GlanceableHubContainerController.initView.<anonymous>.<anonymous>.<anonymous>.<anonymous>.<anonymous> (GlanceableHubContainerController.kt:308)");
-                        }
-                        final GlanceableHubContainerController glanceableHubContainerController2 = GlanceableHubContainerController.this;
-                        PlatformThemeKt.PlatformTheme(false, ComposableLambdaKt.rememberComposableLambda(1821507507, new Function2() { // from class: com.android.systemui.shade.GlanceableHubContainerController.initView.1.1.1.1.2.1
-                            @Override // kotlin.jvm.functions.Function2
-                            public final Object invoke(Object obj4, Object obj5) {
-                                Composer composer2 = (Composer) obj4;
-                                if ((((Number) obj5).intValue() & 3) == 2) {
-                                    ComposerImpl composerImpl2 = (ComposerImpl) composer2;
-                                    if (composerImpl2.getSkipping()) {
-                                        composerImpl2.skipToGroupEnd();
+                            } else {
+                                if (ComposerKt.isTraceInProgress()) {
+                                    ComposerKt.traceEventStart("com.android.systemui.shade.GlanceableHubContainerController.initView.<anonymous>.<anonymous>.<anonymous>.<anonymous>.<anonymous> (GlanceableHubContainerController.kt:308)");
+                                }
+                                final GlanceableHubContainerController glanceableHubContainerController2 = glanceableHubContainerController;
+                                PlatformThemeKt.PlatformTheme(false, ComposableLambdaKt.rememberComposableLambda(1821507507, new Function2() { // from class: com.android.systemui.shade.GlanceableHubContainerController.initView.1.1.1.1.2.1
+                                    /* JADX WARN: Removed duplicated region for block: B:8:0x001c  */
+                                    @Override // kotlin.jvm.functions.Function2
+                                    /*
+                                        Code decompiled incorrectly, please refer to instructions dump.
+                                    */
+                                    public final Object invoke(Object obj4, Object obj5) {
+                                        Composer composer2 = (Composer) obj4;
+                                        if ((((Number) obj5).intValue() & 3) == 2) {
+                                            ComposerImpl composerImpl2 = (ComposerImpl) composer2;
+                                            if (composerImpl2.getSkipping()) {
+                                                composerImpl2.skipToGroupEnd();
+                                            } else {
+                                                if (ComposerKt.isTraceInProgress()) {
+                                                    ComposerKt.traceEventStart("com.android.systemui.shade.GlanceableHubContainerController.initView.<anonymous>.<anonymous>.<anonymous>.<anonymous>.<anonymous>.<anonymous> (GlanceableHubContainerController.kt:309)");
+                                                }
+                                                GlanceableHubContainerController glanceableHubContainerController3 = glanceableHubContainerController2;
+                                                CommunalContainerKt.CommunalContainer(null, glanceableHubContainerController3.communalViewModel, glanceableHubContainerController3.dataSourceDelegator, glanceableHubContainerController3.communalColors, glanceableHubContainerController3.communalContent, composer2, 0);
+                                                if (ComposerKt.isTraceInProgress()) {
+                                                    ComposerKt.traceEventEnd();
+                                                }
+                                            }
+                                        }
                                         return Unit.INSTANCE;
                                     }
-                                }
-                                if (ComposerKt.isTraceInProgress()) {
-                                    ComposerKt.traceEventStart("com.android.systemui.shade.GlanceableHubContainerController.initView.<anonymous>.<anonymous>.<anonymous>.<anonymous>.<anonymous>.<anonymous> (GlanceableHubContainerController.kt:309)");
-                                }
-                                GlanceableHubContainerController glanceableHubContainerController3 = GlanceableHubContainerController.this;
-                                CommunalContainerKt.CommunalContainer(null, glanceableHubContainerController3.communalViewModel, glanceableHubContainerController3.dataSourceDelegator, glanceableHubContainerController3.communalColors, glanceableHubContainerController3.communalContent, composer2, 0);
+                                }, composer), composer, 48, 1);
                                 if (ComposerKt.isTraceInProgress()) {
                                     ComposerKt.traceEventEnd();
                                 }
-                                return Unit.INSTANCE;
                             }
-                        }, composer), composer, 48, 1);
-                        if (ComposerKt.isTraceInProgress()) {
-                            ComposerKt.traceEventEnd();
                         }
                         return Unit.INSTANCE;
                     }
@@ -171,9 +176,9 @@ final class GlanceableHubContainerController$initView$1$1 extends SuspendLambda 
                 ResultKt.throwOnFailure(obj);
                 LifecycleOwner lifecycleOwner = this.$$this$repeatWhenAttached;
                 Lifecycle.State state = Lifecycle.State.CREATED;
-                C02931 c02931 = new C02931(this.$this_apply, lifecycleOwner, this.this$0, null);
+                C04581 c04581 = new C04581(this.$this_apply, lifecycleOwner, this.this$0, null);
                 this.label = 1;
-                if (RepeatOnLifecycleKt.repeatOnLifecycle(lifecycleOwner, state, c02931, this) == coroutineSingletons) {
+                if (RepeatOnLifecycleKt.repeatOnLifecycle(lifecycleOwner, state, c04581, this) == coroutineSingletons) {
                     return coroutineSingletons;
                 }
             } else {

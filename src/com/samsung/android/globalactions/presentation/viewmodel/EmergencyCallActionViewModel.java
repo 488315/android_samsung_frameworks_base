@@ -48,39 +48,39 @@ public class EmergencyCallActionViewModel implements ActionViewModel {
 
     @Override // com.samsung.android.globalactions.presentation.viewmodel.ActionViewModel
     public void onPress() {
-        Intent putExtra;
+        Intent intentPutExtra;
         if (this.mTelecomManager == null) {
             return;
         }
         Display[] displays = ((DisplayManager) this.mContext.getSystemService(Context.DISPLAY_SERVICE)).getDisplays("com.samsung.android.hardware.display.category.BUILTIN");
-        int i = 0;
+        int displayId = 0;
         Display display = displays[0];
         int length = displays.length;
-        int i2 = 0;
+        int i = 0;
         while (true) {
-            if (i2 >= length) {
+            if (i >= length) {
                 break;
             }
-            Display display2 = displays[i2];
+            Display display2 = displays[i];
             if (display2.getDisplayId() == 1) {
                 display = display2;
                 break;
             }
-            i2++;
+            i++;
         }
         if (display != null) {
-            ActivityOptions makeCustomAnimation = ActivityOptions.makeCustomAnimation(this.mContext, 0, 0);
+            ActivityOptions activityOptionsMakeCustomAnimation = ActivityOptions.makeCustomAnimation(this.mContext, 0, 0);
             if (SemWindowManager.getInstance().isFolded()) {
-                i = display.getDisplayId();
-                putExtra = new Intent();
-                putExtra.setAction("com.samsung.android.app.telephonyui.action.OPEN_EMERGENCY_DIALER_COVER_SCREEN");
+                displayId = display.getDisplayId();
+                intentPutExtra = new Intent();
+                intentPutExtra.setAction("com.samsung.android.app.telephonyui.action.OPEN_EMERGENCY_DIALER_COVER_SCREEN");
             } else {
-                putExtra = this.mTelecomManager.createLaunchEmergencyDialerIntent(null).setFlags(343932928).putExtra("com.android.phone.EmergencyDialer.extra.ENTRY_TYPE", 2);
+                intentPutExtra = this.mTelecomManager.createLaunchEmergencyDialerIntent(null).setFlags(343932928).putExtra("com.android.phone.EmergencyDialer.extra.ENTRY_TYPE", 2);
             }
-            putExtra.addFlags(268468224);
-            putExtra.putExtra("from_global_action", true);
-            makeCustomAnimation.setLaunchDisplayId(i);
-            this.mContext.startActivityAsUser(putExtra, makeCustomAnimation.toBundle(), new UserHandle(ActivityManager.getCurrentUser()));
+            intentPutExtra.addFlags(268468224);
+            intentPutExtra.putExtra("from_global_action", true);
+            activityOptionsMakeCustomAnimation.setLaunchDisplayId(displayId);
+            this.mContext.startActivityAsUser(intentPutExtra, activityOptionsMakeCustomAnimation.toBundle(), new UserHandle(ActivityManager.getCurrentUser()));
         }
         this.mGlobalActions.dismissDialog(true);
         this.mSAnalytics.sendEventLog(SamsungGlobalActionsAnalytics.SID_DEVICE_OPTIONS, SamsungGlobalActionsAnalytics.EID_DEVICE_OPTIONS, SamsungGlobalActionsAnalytics.DID_EMERGENCY_SOS, 9L);

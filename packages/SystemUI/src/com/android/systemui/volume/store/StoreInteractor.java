@@ -9,7 +9,6 @@ import kotlin.Lazy;
 import kotlin.LazyKt__LazyJVMKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class StoreInteractor {
     public VolumeUnsubscriber disposable;
@@ -17,6 +16,7 @@ public final class StoreInteractor {
     public final VolumeObserver stateObserver;
     public VolumePanelStore store;
 
+    /* JADX WARN: Multi-variable type inference failed */
     public StoreInteractor() {
         this(null, 0 == true ? 1 : 0, 3, 0 == true ? 1 : 0);
     }
@@ -43,10 +43,10 @@ public final class StoreInteractor {
             return;
         }
         if (z) {
-            ((Handler) this.mainThreadHandler$delegate.getValue()).post(new Runnable() { // from class: com.android.systemui.volume.store.StoreInteractor$sendAction$1
+            ((Handler) this.mainThreadHandler$delegate.getValue()).post(new Runnable() { // from class: com.android.systemui.volume.store.StoreInteractor.sendAction.1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    VolumePanelStore.this.onChanged(volumePanelAction);
+                    volumePanelStore.onChanged(volumePanelAction);
                 }
             });
         } else {

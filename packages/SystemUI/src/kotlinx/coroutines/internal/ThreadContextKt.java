@@ -4,7 +4,6 @@ import kotlin.coroutines.CoroutineContext;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.ThreadContextElement;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class ThreadContextKt {
     public static final Symbol NO_THREAD_ELEMENTS = new Symbol("NO_THREAD_ELEMENTS");
@@ -27,8 +26,8 @@ public abstract class ThreadContextKt {
                             return obj;
                         }
                         Integer num = obj instanceof Integer ? (Integer) obj : null;
-                        int intValue = num != null ? num.intValue() : 1;
-                        return intValue == 0 ? element : Integer.valueOf(intValue + 1);
+                        int iIntValue = num != null ? num.intValue() : 1;
+                        return iIntValue == 0 ? element : Integer.valueOf(iIntValue + 1);
                     case 1:
                         ThreadContextElement threadContextElement = (ThreadContextElement) obj;
                         CoroutineContext.Element element2 = (CoroutineContext.Element) obj2;
@@ -44,9 +43,9 @@ public abstract class ThreadContextKt {
                         CoroutineContext.Element element3 = (CoroutineContext.Element) obj2;
                         if (element3 instanceof ThreadContextElement) {
                             ThreadContextElement threadContextElement2 = (ThreadContextElement) element3;
-                            Object updateThreadContext = threadContextElement2.updateThreadContext(threadState.context);
+                            Object objUpdateThreadContext = threadContextElement2.updateThreadContext(threadState.context);
                             int i2 = threadState.i;
-                            threadState.values[i2] = updateThreadContext;
+                            threadState.values[i2] = objUpdateThreadContext;
                             threadState.i = i2 + 1;
                             threadState.elements[i2] = threadContextElement2;
                         }
@@ -65,8 +64,8 @@ public abstract class ThreadContextKt {
                             return obj;
                         }
                         Integer num = obj instanceof Integer ? (Integer) obj : null;
-                        int intValue = num != null ? num.intValue() : 1;
-                        return intValue == 0 ? element : Integer.valueOf(intValue + 1);
+                        int iIntValue = num != null ? num.intValue() : 1;
+                        return iIntValue == 0 ? element : Integer.valueOf(iIntValue + 1);
                     case 1:
                         ThreadContextElement threadContextElement = (ThreadContextElement) obj;
                         CoroutineContext.Element element2 = (CoroutineContext.Element) obj2;
@@ -82,9 +81,9 @@ public abstract class ThreadContextKt {
                         CoroutineContext.Element element3 = (CoroutineContext.Element) obj2;
                         if (element3 instanceof ThreadContextElement) {
                             ThreadContextElement threadContextElement2 = (ThreadContextElement) element3;
-                            Object updateThreadContext = threadContextElement2.updateThreadContext(threadState.context);
+                            Object objUpdateThreadContext = threadContextElement2.updateThreadContext(threadState.context);
                             int i22 = threadState.i;
-                            threadState.values[i22] = updateThreadContext;
+                            threadState.values[i22] = objUpdateThreadContext;
                             threadState.i = i22 + 1;
                             threadState.elements[i22] = threadContextElement2;
                         }
@@ -103,8 +102,8 @@ public abstract class ThreadContextKt {
                             return obj;
                         }
                         Integer num = obj instanceof Integer ? (Integer) obj : null;
-                        int intValue = num != null ? num.intValue() : 1;
-                        return intValue == 0 ? element : Integer.valueOf(intValue + 1);
+                        int iIntValue = num != null ? num.intValue() : 1;
+                        return iIntValue == 0 ? element : Integer.valueOf(iIntValue + 1);
                     case 1:
                         ThreadContextElement threadContextElement = (ThreadContextElement) obj;
                         CoroutineContext.Element element2 = (CoroutineContext.Element) obj2;
@@ -120,9 +119,9 @@ public abstract class ThreadContextKt {
                         CoroutineContext.Element element3 = (CoroutineContext.Element) obj2;
                         if (element3 instanceof ThreadContextElement) {
                             ThreadContextElement threadContextElement2 = (ThreadContextElement) element3;
-                            Object updateThreadContext = threadContextElement2.updateThreadContext(threadState.context);
+                            Object objUpdateThreadContext = threadContextElement2.updateThreadContext(threadState.context);
                             int i22 = threadState.i;
-                            threadState.values[i22] = updateThreadContext;
+                            threadState.values[i22] = objUpdateThreadContext;
                             threadState.i = i22 + 1;
                             threadState.elements[i22] = threadContextElement2;
                         }
@@ -160,9 +159,9 @@ public abstract class ThreadContextKt {
     }
 
     public static final Object threadContextElements(CoroutineContext coroutineContext) {
-        Object fold = coroutineContext.fold(0, countAll);
-        fold.getClass();
-        return fold;
+        Object objFold = coroutineContext.fold(0, countAll);
+        objFold.getClass();
+        return objFold;
     }
 
     public static final Object updateThreadContext(CoroutineContext coroutineContext, Object obj) {

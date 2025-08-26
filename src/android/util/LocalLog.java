@@ -20,9 +20,9 @@ public final class LocalLog {
     }
 
     public LocalLog(int i, boolean z) {
-        int max = Math.max(0, i);
-        this.mMaxLines = max;
-        this.mLog = new ArrayDeque(max);
+        int iMax = Math.max(0, i);
+        this.mMaxLines = iMax;
+        this.mLog = new ArrayDeque(iMax);
         this.mUseLocalTimestamps = z;
     }
 
@@ -66,9 +66,9 @@ public final class LocalLog {
     }
 
     public synchronized void reverseDump(PrintWriter printWriter) {
-        Iterator<String> descendingIterator = this.mLog.descendingIterator();
-        while (descendingIterator.hasNext()) {
-            printWriter.println(descendingIterator.next());
+        Iterator<String> itDescendingIterator = this.mLog.descendingIterator();
+        while (itDescendingIterator.hasNext()) {
+            printWriter.println(itDescendingIterator.next());
         }
     }
 

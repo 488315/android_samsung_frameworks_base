@@ -8,7 +8,6 @@ import com.android.systemui.plugins.aod.PluginAOD;
 import com.android.systemui.plugins.aod.PluginAODSystemUIConfiguration;
 import java.io.PrintWriter;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @ProvidesInterface(action = PluginClockPack.ACTION, version = 1)
 /* loaded from: classes2.dex */
 public interface PluginClockPack extends Plugin {

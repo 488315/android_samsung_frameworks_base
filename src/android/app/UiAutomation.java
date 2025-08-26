@@ -157,7 +157,7 @@ public final class UiAutomation {
                 return;
             }
             this.mConnectionState = 1;
-            HandlerThread handlerThread = new HandlerThread(LOG_TAG);
+            HandlerThread handlerThread = new HandlerThread("UiAutomation");
             this.mRemoteCallbackThread = handlerThread;
             handlerThread.start();
             Looper looper = this.mRemoteCallbackThread.getLooper();
@@ -173,15 +173,15 @@ public final class UiAutomation {
                     return;
                 }
                 synchronized (this.mLock) {
-                    long uptimeMillis = SystemClock.uptimeMillis();
+                    long jUptimeMillis = SystemClock.uptimeMillis();
                     while (this.mConnectionState != 2) {
-                        long uptimeMillis2 = j - (SystemClock.uptimeMillis() - uptimeMillis);
-                        if (uptimeMillis2 <= 0) {
+                        long jUptimeMillis2 = j - (SystemClock.uptimeMillis() - jUptimeMillis);
+                        if (jUptimeMillis2 <= 0) {
                             this.mConnectionState = 3;
                             throw new TimeoutException("Timeout while connecting " + this);
                         }
                         try {
-                            this.mLock.wait(uptimeMillis2);
+                            this.mLock.wait(jUptimeMillis2);
                         } catch (InterruptedException unused) {
                         }
                     }
@@ -506,7 +506,7 @@ public final class UiAutomation {
 
     public AccessibilityEvent executeAndWaitForEvent(Runnable runnable, AccessibilityEventFilter accessibilityEventFilter, long j) throws TimeoutException {
         int i;
-        long uptimeMillis;
+        long jUptimeMillis;
         int size;
         int size2;
         int i2;
@@ -515,7 +515,7 @@ public final class UiAutomation {
             throwIfNotConnectedLocked();
             i = this.mCurrentEventWatchersCount + 1;
             this.mCurrentEventWatchersCount = i;
-            uptimeMillis = SystemClock.uptimeMillis();
+            jUptimeMillis = SystemClock.uptimeMillis();
             size = this.mEventQueue.size();
         }
         try {
@@ -525,7 +525,7 @@ public final class UiAutomation {
                     throw new IllegalStateException("Unexpected event watchers count, expected: " + i + ", actual: " + this.mCurrentEventWatchersCount);
                 }
             }
-            long uptimeMillis2 = SystemClock.uptimeMillis();
+            long jUptimeMillis2 = SystemClock.uptimeMillis();
             ArrayList arrayList = new ArrayList();
             long j2 = 0;
             int i3 = 0;
@@ -544,13 +544,10 @@ public final class UiAutomation {
                         accessibilityEvent = null;
                     }
                 }
-                long uptimeMillis3 = SystemClock.uptimeMillis() - uptimeMillis2;
-                if (accessibilityEvent != null && accessibilityEvent.getEventTime() >= uptimeMillis) {
+                long jUptimeMillis3 = SystemClock.uptimeMillis() - jUptimeMillis2;
+                if (accessibilityEvent != null && accessibilityEvent.getEventTime() >= jUptimeMillis) {
                     if (!accessibilityEventFilter.accept(accessibilityEvent)) {
                         arrayList.add(accessibilityEvent);
-                        size = i2;
-                        i3 = size2;
-                        j2 = uptimeMillis3;
                     } else {
                         synchronized (this.mLock) {
                             int i4 = this.mCurrentEventWatchersCount - 1;
@@ -565,7 +562,7 @@ public final class UiAutomation {
                 }
                 size = i2;
                 i3 = size2;
-                j2 = uptimeMillis3;
+                j2 = jUptimeMillis3;
             }
             if (size < i3) {
                 Log.w(LOG_TAG, "Timed out before reading all events from the queue");
@@ -587,16 +584,16 @@ public final class UiAutomation {
     public void waitForIdle(long j, long j2) throws TimeoutException {
         synchronized (this.mLock) {
             throwIfNotConnectedLocked();
-            long uptimeMillis = SystemClock.uptimeMillis();
+            long jUptimeMillis = SystemClock.uptimeMillis();
             if (this.mLastEventTimeMillis <= 0) {
-                this.mLastEventTimeMillis = uptimeMillis;
+                this.mLastEventTimeMillis = jUptimeMillis;
             }
             while (true) {
-                long uptimeMillis2 = SystemClock.uptimeMillis();
-                if (j2 - (uptimeMillis2 - uptimeMillis) <= 0) {
+                long jUptimeMillis2 = SystemClock.uptimeMillis();
+                if (j2 - (jUptimeMillis2 - jUptimeMillis) <= 0) {
                     throw new TimeoutException("No idle state with idle timeout: " + j + " within global timeout: " + j2);
                 }
-                long j3 = j - (uptimeMillis2 - this.mLastEventTimeMillis);
+                long j3 = j - (jUptimeMillis2 - this.mLastEventTimeMillis);
                 if (j3 > 0) {
                     try {
                         this.mLock.wait(j3);
@@ -611,30 +608,30 @@ public final class UiAutomation {
         Display realDisplay = DisplayManagerGlobal.getInstance().getRealDisplay(this.mDisplayId);
         Point point = new Point();
         realDisplay.getRealSize(point);
-        ScreenCapture.SynchronousScreenCaptureListener createSyncCaptureListener = ScreenCapture.createSyncCaptureListener();
+        ScreenCapture.SynchronousScreenCaptureListener synchronousScreenCaptureListenerCreateSyncCaptureListener = ScreenCapture.createSyncCaptureListener();
         try {
-            if (!this.mUiAutomationConnection.takeScreenshot(new Rect(0, 0, point.x, point.y), createSyncCaptureListener, this.mDisplayId)) {
+            if (!this.mUiAutomationConnection.takeScreenshot(new Rect(0, 0, point.x, point.y), synchronousScreenCaptureListenerCreateSyncCaptureListener, this.mDisplayId)) {
                 return null;
             }
-            ScreenCapture.ScreenshotHardwareBuffer buffer = createSyncCaptureListener.getBuffer();
+            ScreenCapture.ScreenshotHardwareBuffer buffer = synchronousScreenCaptureListenerCreateSyncCaptureListener.getBuffer();
             if (buffer == null) {
                 Log.e(LOG_TAG, "Failed to take screenshot for display=" + this.mDisplayId);
                 return null;
             }
-            Bitmap asBitmap = buffer.asBitmap();
-            if (asBitmap == null) {
+            Bitmap bitmapAsBitmap = buffer.asBitmap();
+            if (bitmapAsBitmap == null) {
                 Log.e(LOG_TAG, "Failed to take screenshot for display=" + this.mDisplayId);
                 return null;
             }
             HardwareBuffer hardwareBuffer = buffer.getHardwareBuffer();
             try {
-                Bitmap copy = asBitmap.copy(Bitmap.Config.ARGB_8888, false);
+                Bitmap bitmapCopy = bitmapAsBitmap.copy(Bitmap.Config.ARGB_8888, false);
                 if (hardwareBuffer != null) {
                     hardwareBuffer.close();
                 }
-                asBitmap.recycle();
-                copy.setHasAlpha(false);
-                return copy;
+                bitmapAsBitmap.recycle();
+                bitmapCopy.setHasAlpha(false);
+                return bitmapCopy;
             } catch (Throwable th) {
                 if (hardwareBuffer != null) {
                     try {
@@ -652,9 +649,9 @@ public final class UiAutomation {
     }
 
     public Bitmap takeScreenshot(Window window) {
-        View peekDecorView;
+        View viewPeekDecorView;
         ViewRootImpl viewRootImpl;
-        if (window == null || (peekDecorView = window.peekDecorView()) == null || (viewRootImpl = peekDecorView.getViewRootImpl()) == null) {
+        if (window == null || (viewPeekDecorView = window.peekDecorView()) == null || (viewRootImpl = viewPeekDecorView.getViewRootImpl()) == null) {
             return null;
         }
         SurfaceControl surfaceControl = viewRootImpl.getSurfaceControl();
@@ -662,30 +659,30 @@ public final class UiAutomation {
             return null;
         }
         new SurfaceControl.Transaction().apply(true);
-        ScreenCapture.SynchronousScreenCaptureListener createSyncCaptureListener = ScreenCapture.createSyncCaptureListener();
+        ScreenCapture.SynchronousScreenCaptureListener synchronousScreenCaptureListenerCreateSyncCaptureListener = ScreenCapture.createSyncCaptureListener();
         try {
-            if (!this.mUiAutomationConnection.takeSurfaceControlScreenshot(surfaceControl, createSyncCaptureListener)) {
+            if (!this.mUiAutomationConnection.takeSurfaceControlScreenshot(surfaceControl, synchronousScreenCaptureListenerCreateSyncCaptureListener)) {
                 Log.e(LOG_TAG, "Failed to take screenshot for window=" + window);
                 return null;
             }
-            ScreenCapture.ScreenshotHardwareBuffer buffer = createSyncCaptureListener.getBuffer();
+            ScreenCapture.ScreenshotHardwareBuffer buffer = synchronousScreenCaptureListenerCreateSyncCaptureListener.getBuffer();
             if (buffer == null) {
                 Log.e(LOG_TAG, "Failed to take screenshot for window=" + window);
                 return null;
             }
-            Bitmap asBitmap = buffer.asBitmap();
-            if (asBitmap == null) {
+            Bitmap bitmapAsBitmap = buffer.asBitmap();
+            if (bitmapAsBitmap == null) {
                 Log.e(LOG_TAG, "Failed to take screenshot for window=" + window);
                 return null;
             }
             HardwareBuffer hardwareBuffer = buffer.getHardwareBuffer();
             try {
-                Bitmap copy = asBitmap.copy(Bitmap.Config.ARGB_8888, false);
+                Bitmap bitmapCopy = bitmapAsBitmap.copy(Bitmap.Config.ARGB_8888, false);
                 if (hardwareBuffer != null) {
                     hardwareBuffer.close();
                 }
-                asBitmap.recycle();
-                return copy;
+                bitmapAsBitmap.recycle();
+                return bitmapCopy;
             } catch (Throwable th) {
                 if (hardwareBuffer != null) {
                     try {
@@ -789,55 +786,54 @@ public final class UiAutomation {
         }
     }
 
-    /* JADX WARN: Not initialized variable reg: 1, insn: 0x002b: MOVE (r0 I:??[OBJECT, ARRAY]) = (r1 I:??[OBJECT, ARRAY]), block:B:36:0x002b */
-    public ParcelFileDescriptor executeShellCommand(String str) {
+    /* JADX WARN: Not initialized variable reg: 1, insn: 0x002b: MOVE (r0 I:??[OBJECT, ARRAY]) = (r1 I:??[OBJECT, ARRAY]), block:B:25:0x002b */
+    public ParcelFileDescriptor executeShellCommand(String str) throws Throwable {
         ParcelFileDescriptor parcelFileDescriptor;
         ParcelFileDescriptor parcelFileDescriptor2;
-        ParcelFileDescriptor parcelFileDescriptor3;
         warnIfBetterCommand(str);
-        ParcelFileDescriptor parcelFileDescriptor4 = null;
-        try {
-        } catch (Throwable th) {
-            th = th;
-            parcelFileDescriptor4 = parcelFileDescriptor;
-        }
+        ParcelFileDescriptor parcelFileDescriptor3 = null;
         try {
             try {
-                ParcelFileDescriptor[] createPipe = ParcelFileDescriptor.createPipe();
-                parcelFileDescriptor2 = createPipe[0];
                 try {
-                    parcelFileDescriptor3 = createPipe[1];
-                } catch (RemoteException | IOException e) {
-                    e = e;
-                } catch (IllegalArgumentException | NullPointerException | SecurityException e2) {
-                    e = e2;
+                    ParcelFileDescriptor[] parcelFileDescriptorArrCreatePipe = ParcelFileDescriptor.createPipe();
+                    parcelFileDescriptor2 = parcelFileDescriptorArrCreatePipe[0];
+                    try {
+                        ParcelFileDescriptor parcelFileDescriptor4 = parcelFileDescriptorArrCreatePipe[1];
+                        try {
+                            this.mUiAutomationConnection.executeShellCommand(str, parcelFileDescriptor4, null);
+                            IoUtils.closeQuietly(parcelFileDescriptor4);
+                            return parcelFileDescriptor2;
+                        } catch (RemoteException | IOException e) {
+                            e = e;
+                            parcelFileDescriptor3 = parcelFileDescriptor4;
+                            Log.e(LOG_TAG, "Error executing shell command!", e);
+                            IoUtils.closeQuietly(parcelFileDescriptor3);
+                            return parcelFileDescriptor2;
+                        } catch (IllegalArgumentException | NullPointerException | SecurityException e2) {
+                            e = e2;
+                            parcelFileDescriptor3 = parcelFileDescriptor2;
+                            IoUtils.closeQuietly(parcelFileDescriptor3);
+                            throw e;
+                        }
+                    } catch (RemoteException | IOException e3) {
+                        e = e3;
+                    } catch (IllegalArgumentException | NullPointerException | SecurityException e4) {
+                        e = e4;
+                    }
+                } catch (Throwable th) {
+                    th = th;
+                    IoUtils.closeQuietly(parcelFileDescriptor3);
+                    throw th;
                 }
-            } catch (RemoteException | IOException e3) {
-                e = e3;
-                parcelFileDescriptor2 = null;
-            } catch (IllegalArgumentException | NullPointerException | SecurityException e4) {
-                e = e4;
-            }
-            try {
-                this.mUiAutomationConnection.executeShellCommand(str, parcelFileDescriptor3, null);
-                IoUtils.closeQuietly(parcelFileDescriptor3);
-                return parcelFileDescriptor2;
             } catch (RemoteException | IOException e5) {
                 e = e5;
-                parcelFileDescriptor4 = parcelFileDescriptor3;
-                Log.e(LOG_TAG, "Error executing shell command!", e);
-                IoUtils.closeQuietly(parcelFileDescriptor4);
-                return parcelFileDescriptor2;
+                parcelFileDescriptor2 = null;
             } catch (IllegalArgumentException | NullPointerException | SecurityException e6) {
                 e = e6;
-                parcelFileDescriptor4 = parcelFileDescriptor2;
-                IoUtils.closeQuietly(parcelFileDescriptor4);
-                throw e;
             }
         } catch (Throwable th2) {
             th = th2;
-            IoUtils.closeQuietly(parcelFileDescriptor4);
-            throw th;
+            parcelFileDescriptor3 = parcelFileDescriptor;
         }
     }
 
@@ -853,19 +849,201 @@ public final class UiAutomation {
         return this.mDisplayId;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:18:0x0096  */
-    /* JADX WARN: Removed duplicated region for block: B:21:0x00a1  */
-    /* JADX WARN: Removed duplicated region for block: B:24:0x0098  */
+    /* JADX WARN: Removed duplicated region for block: B:55:0x0096  */
+    /* JADX WARN: Removed duplicated region for block: B:56:0x0098  */
+    /* JADX WARN: Removed duplicated region for block: B:59:0x00a1  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private android.os.ParcelFileDescriptor[] executeShellCommandInternal(java.lang.String r10, boolean r11) {
-        /*
-            Method dump skipped, instructions count: 175
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.app.UiAutomation.executeShellCommandInternal(java.lang.String, boolean):android.os.ParcelFileDescriptor[]");
+    private ParcelFileDescriptor[] executeShellCommandInternal(String str, boolean z) throws Throwable {
+        ParcelFileDescriptor parcelFileDescriptor;
+        ParcelFileDescriptor parcelFileDescriptor2;
+        ParcelFileDescriptor parcelFileDescriptor3;
+        ParcelFileDescriptor parcelFileDescriptor4;
+        ParcelFileDescriptor parcelFileDescriptor5;
+        ParcelFileDescriptor parcelFileDescriptor6;
+        ParcelFileDescriptor[] parcelFileDescriptorArrCreatePipe;
+        warnIfBetterCommand(str);
+        ParcelFileDescriptor parcelFileDescriptor7 = null;
+        try {
+            try {
+                parcelFileDescriptorArrCreatePipe = ParcelFileDescriptor.createPipe();
+                parcelFileDescriptor3 = parcelFileDescriptorArrCreatePipe[0];
+            } catch (Throwable th) {
+                th = th;
+                parcelFileDescriptor = null;
+                parcelFileDescriptor4 = null;
+                IoUtils.closeQuietly(parcelFileDescriptor7);
+                IoUtils.closeQuietly(parcelFileDescriptor4);
+                IoUtils.closeQuietly(parcelFileDescriptor);
+                throw th;
+            }
+        } catch (RemoteException | IOException e) {
+            e = e;
+            parcelFileDescriptor = null;
+            parcelFileDescriptor3 = null;
+            parcelFileDescriptor5 = null;
+        } catch (IllegalArgumentException | NullPointerException | SecurityException e2) {
+            e = e2;
+            parcelFileDescriptor = null;
+            parcelFileDescriptor2 = null;
+            parcelFileDescriptor3 = null;
+            parcelFileDescriptor4 = null;
+        }
+        try {
+            parcelFileDescriptor2 = parcelFileDescriptorArrCreatePipe[1];
+            try {
+                ParcelFileDescriptor[] parcelFileDescriptorArrCreatePipe2 = ParcelFileDescriptor.createPipe();
+                parcelFileDescriptor4 = parcelFileDescriptorArrCreatePipe2[0];
+                try {
+                    try {
+                        parcelFileDescriptor5 = parcelFileDescriptorArrCreatePipe2[1];
+                        if (z) {
+                            try {
+                                ParcelFileDescriptor[] parcelFileDescriptorArrCreatePipe3 = ParcelFileDescriptor.createPipe();
+                                parcelFileDescriptor6 = parcelFileDescriptorArrCreatePipe3[0];
+                                try {
+                                    parcelFileDescriptor7 = parcelFileDescriptorArrCreatePipe3[1];
+                                } catch (RemoteException | IOException e3) {
+                                    e = e3;
+                                    parcelFileDescriptor = parcelFileDescriptor7;
+                                    parcelFileDescriptor7 = parcelFileDescriptor2;
+                                    try {
+                                        Log.e(LOG_TAG, "Error executing shell command!", e);
+                                        IoUtils.closeQuietly(parcelFileDescriptor7);
+                                        IoUtils.closeQuietly(parcelFileDescriptor4);
+                                        IoUtils.closeQuietly(parcelFileDescriptor);
+                                        ParcelFileDescriptor[] parcelFileDescriptorArr = new ParcelFileDescriptor[!z ? 3 : 2];
+                                        parcelFileDescriptorArr[0] = parcelFileDescriptor3;
+                                        parcelFileDescriptorArr[1] = parcelFileDescriptor5;
+                                        if (z) {
+                                        }
+                                        return parcelFileDescriptorArr;
+                                    } catch (Throwable th2) {
+                                        th = th2;
+                                        IoUtils.closeQuietly(parcelFileDescriptor7);
+                                        IoUtils.closeQuietly(parcelFileDescriptor4);
+                                        IoUtils.closeQuietly(parcelFileDescriptor);
+                                        throw th;
+                                    }
+                                } catch (IllegalArgumentException | NullPointerException | SecurityException e4) {
+                                    e = e4;
+                                    parcelFileDescriptor = parcelFileDescriptor7;
+                                    parcelFileDescriptor7 = parcelFileDescriptor5;
+                                    try {
+                                        IoUtils.closeQuietly(parcelFileDescriptor7);
+                                        IoUtils.closeQuietly(parcelFileDescriptor3);
+                                        IoUtils.closeQuietly(parcelFileDescriptor6);
+                                        throw e;
+                                    } catch (Throwable th3) {
+                                        th = th3;
+                                        parcelFileDescriptor7 = parcelFileDescriptor2;
+                                        IoUtils.closeQuietly(parcelFileDescriptor7);
+                                        IoUtils.closeQuietly(parcelFileDescriptor4);
+                                        IoUtils.closeQuietly(parcelFileDescriptor);
+                                        throw th;
+                                    }
+                                }
+                            } catch (RemoteException | IOException e5) {
+                                e = e5;
+                                parcelFileDescriptor = null;
+                                parcelFileDescriptor6 = null;
+                                parcelFileDescriptor7 = parcelFileDescriptor2;
+                                Log.e(LOG_TAG, "Error executing shell command!", e);
+                                IoUtils.closeQuietly(parcelFileDescriptor7);
+                                IoUtils.closeQuietly(parcelFileDescriptor4);
+                                IoUtils.closeQuietly(parcelFileDescriptor);
+                                ParcelFileDescriptor[] parcelFileDescriptorArr2 = new ParcelFileDescriptor[!z ? 3 : 2];
+                                parcelFileDescriptorArr2[0] = parcelFileDescriptor3;
+                                parcelFileDescriptorArr2[1] = parcelFileDescriptor5;
+                                if (z) {
+                                }
+                                return parcelFileDescriptorArr2;
+                            } catch (IllegalArgumentException | NullPointerException | SecurityException e6) {
+                                e = e6;
+                                parcelFileDescriptor = null;
+                                parcelFileDescriptor6 = null;
+                                parcelFileDescriptor7 = parcelFileDescriptor5;
+                                IoUtils.closeQuietly(parcelFileDescriptor7);
+                                IoUtils.closeQuietly(parcelFileDescriptor3);
+                                IoUtils.closeQuietly(parcelFileDescriptor6);
+                                throw e;
+                            }
+                        } else {
+                            parcelFileDescriptor6 = null;
+                        }
+                        this.mUiAutomationConnection.executeShellCommandWithStderr(str, parcelFileDescriptor2, parcelFileDescriptor4, parcelFileDescriptor7);
+                        IoUtils.closeQuietly(parcelFileDescriptor2);
+                        IoUtils.closeQuietly(parcelFileDescriptor4);
+                        IoUtils.closeQuietly(parcelFileDescriptor7);
+                    } catch (Throwable th4) {
+                        th = th4;
+                        parcelFileDescriptor = parcelFileDescriptor7;
+                        parcelFileDescriptor7 = parcelFileDescriptor2;
+                        IoUtils.closeQuietly(parcelFileDescriptor7);
+                        IoUtils.closeQuietly(parcelFileDescriptor4);
+                        IoUtils.closeQuietly(parcelFileDescriptor);
+                        throw th;
+                    }
+                } catch (RemoteException | IOException e7) {
+                    e = e7;
+                    parcelFileDescriptor = null;
+                    parcelFileDescriptor5 = null;
+                    parcelFileDescriptor6 = null;
+                } catch (IllegalArgumentException | NullPointerException | SecurityException e8) {
+                    e = e8;
+                    parcelFileDescriptor = null;
+                    parcelFileDescriptor6 = null;
+                }
+            } catch (RemoteException | IOException e9) {
+                e = e9;
+                parcelFileDescriptor = null;
+                parcelFileDescriptor5 = null;
+                parcelFileDescriptor4 = null;
+                parcelFileDescriptor6 = null;
+            } catch (IllegalArgumentException | NullPointerException | SecurityException e10) {
+                e = e10;
+                parcelFileDescriptor = null;
+                parcelFileDescriptor4 = null;
+                parcelFileDescriptor6 = parcelFileDescriptor4;
+                IoUtils.closeQuietly(parcelFileDescriptor7);
+                IoUtils.closeQuietly(parcelFileDescriptor3);
+                IoUtils.closeQuietly(parcelFileDescriptor6);
+                throw e;
+            } catch (Throwable th5) {
+                th = th5;
+                parcelFileDescriptor = null;
+                parcelFileDescriptor4 = null;
+            }
+        } catch (RemoteException | IOException e11) {
+            e = e11;
+            parcelFileDescriptor = null;
+            parcelFileDescriptor5 = null;
+            parcelFileDescriptor4 = parcelFileDescriptor5;
+            parcelFileDescriptor6 = parcelFileDescriptor4;
+            Log.e(LOG_TAG, "Error executing shell command!", e);
+            IoUtils.closeQuietly(parcelFileDescriptor7);
+            IoUtils.closeQuietly(parcelFileDescriptor4);
+            IoUtils.closeQuietly(parcelFileDescriptor);
+            ParcelFileDescriptor[] parcelFileDescriptorArr22 = new ParcelFileDescriptor[!z ? 3 : 2];
+            parcelFileDescriptorArr22[0] = parcelFileDescriptor3;
+            parcelFileDescriptorArr22[1] = parcelFileDescriptor5;
+            if (z) {
+            }
+            return parcelFileDescriptorArr22;
+        } catch (IllegalArgumentException | NullPointerException | SecurityException e12) {
+            e = e12;
+            parcelFileDescriptor = null;
+            parcelFileDescriptor2 = null;
+            parcelFileDescriptor4 = null;
+        }
+        ParcelFileDescriptor[] parcelFileDescriptorArr222 = new ParcelFileDescriptor[!z ? 3 : 2];
+        parcelFileDescriptorArr222[0] = parcelFileDescriptor3;
+        parcelFileDescriptorArr222[1] = parcelFileDescriptor5;
+        if (z) {
+            parcelFileDescriptorArr222[2] = parcelFileDescriptor6;
+        }
+        return parcelFileDescriptorArr222;
     }
 
     public String toString() {
@@ -1003,39 +1181,39 @@ public final class UiAutomation {
                 }
 
                 private boolean isGenerationChangedLocked() {
-                    return this.mGenerationId != UiAutomation.this.mGenerationId;
+                    return this.mGenerationId != this.val$this$0.mGenerationId;
                 }
 
                 @Override // android.accessibilityservice.AccessibilityService.Callbacks
                 public void init(int i2, IBinder iBinder) {
-                    synchronized (UiAutomation.this.mLock) {
+                    synchronized (this.val$this$0.mLock) {
                         if (isGenerationChangedLocked()) {
                             return;
                         }
-                        UiAutomation.this.mConnectionState = 2;
-                        UiAutomation.this.mConnectionId = i2;
-                        UiAutomation.this.mLock.notifyAll();
+                        this.val$this$0.mConnectionState = 2;
+                        this.val$this$0.mConnectionId = i2;
+                        this.val$this$0.mLock.notifyAll();
                         if (Build.IS_DEBUGGABLE) {
-                            Log.v(UiAutomation.LOG_TAG, "Init " + UiAutomation.this);
+                            Log.v(UiAutomation.LOG_TAG, "Init " + this.val$this$0);
                         }
                     }
                 }
 
                 @Override // android.accessibilityservice.AccessibilityService.Callbacks
                 public void onAccessibilityEvent(AccessibilityEvent accessibilityEvent) {
-                    synchronized (UiAutomation.this.mLock) {
+                    synchronized (this.val$this$0.mLock) {
                         if (isGenerationChangedLocked()) {
                             return;
                         }
-                        UiAutomation uiAutomation2 = UiAutomation.this;
+                        UiAutomation uiAutomation2 = this.val$this$0;
                         uiAutomation2.mLastEventTimeMillis = Math.max(uiAutomation2.mLastEventTimeMillis, accessibilityEvent.getEventTime());
-                        if (UiAutomation.this.mCurrentEventWatchersCount > 0) {
-                            UiAutomation.this.mEventQueue.add(AccessibilityEvent.obtain(accessibilityEvent));
+                        if (this.val$this$0.mCurrentEventWatchersCount > 0) {
+                            this.val$this$0.mEventQueue.add(AccessibilityEvent.obtain(accessibilityEvent));
                         }
-                        UiAutomation.this.mLock.notifyAll();
-                        OnAccessibilityEventListener onAccessibilityEventListener = UiAutomation.this.mOnAccessibilityEventListener;
+                        this.val$this$0.mLock.notifyAll();
+                        OnAccessibilityEventListener onAccessibilityEventListener = this.val$this$0.mOnAccessibilityEventListener;
                         if (onAccessibilityEventListener != null) {
-                            UiAutomation.this.mLocalCallbackHandler.sendMessage(PooledLambda.obtainMessage(new BiConsumer() { // from class: android.app.UiAutomation$IAccessibilityServiceClientImpl$1$$ExternalSyntheticLambda0
+                            this.val$this$0.mLocalCallbackHandler.sendMessage(PooledLambda.obtainMessage(new BiConsumer() { // from class: android.app.UiAutomation$IAccessibilityServiceClientImpl$1$$ExternalSyntheticLambda0
                                 @Override // java.util.function.BiConsumer
                                 public final void accept(Object obj, Object obj2) {
                                     ((UiAutomation.OnAccessibilityEventListener) obj).onAccessibilityEvent((AccessibilityEvent) obj2);

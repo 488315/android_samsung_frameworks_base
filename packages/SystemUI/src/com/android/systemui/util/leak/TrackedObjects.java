@@ -3,13 +3,11 @@ package com.android.systemui.util.leak;
 import java.util.Collection;
 import java.util.WeakHashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class TrackedObjects {
     private final WeakHashMap<Class<?>, TrackedClass<?>> mTrackedClasses = new WeakHashMap<>();
     private final TrackedCollections mTrackedCollections;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class TrackedClass<T> extends AbstractCollection<T> {
         final WeakIdentityHashMap<T, Void> instances;
 

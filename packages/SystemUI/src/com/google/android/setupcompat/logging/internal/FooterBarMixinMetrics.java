@@ -6,7 +6,6 @@ import com.samsung.android.sdk.scs.ai.visual.c2pa.C2paManifestList;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class FooterBarMixinMetrics {
     public static final String EXTRA_PRIMARY_BUTTON_VISIBILITY = "PrimaryButtonVisibility";
@@ -15,7 +14,6 @@ public class FooterBarMixinMetrics {
     public String primaryButtonVisibility = C2paManifestList.UNKNOWN_VALUE;
     public String secondaryButtonVisibility = C2paManifestList.UNKNOWN_VALUE;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     @Retention(RetentionPolicy.SOURCE)
     public @interface FooterButtonVisibility {
     }

@@ -98,16 +98,16 @@ public abstract class ECCurve {
             if (!ECCurve.this.supportsCoordinateSystem(this.coord)) {
                 throw new IllegalStateException("unsupported coordinate system");
             }
-            ECCurve cloneCurve = ECCurve.this.cloneCurve();
-            if (cloneCurve == ECCurve.this) {
+            ECCurve eCCurveCloneCurve = ECCurve.this.cloneCurve();
+            if (eCCurveCloneCurve == ECCurve.this) {
                 throw new IllegalStateException("implementation returned current curve");
             }
-            synchronized (cloneCurve) {
-                cloneCurve.coord = this.coord;
-                cloneCurve.endomorphism = this.endomorphism;
-                cloneCurve.multiplier = this.multiplier;
+            synchronized (eCCurveCloneCurve) {
+                eCCurveCloneCurve.coord = this.coord;
+                eCCurveCloneCurve.endomorphism = this.endomorphism;
+                eCCurveCloneCurve.multiplier = this.multiplier;
             }
-            return cloneCurve;
+            return eCCurveCloneCurve;
         }
     }
 
@@ -120,9 +120,9 @@ public abstract class ECCurve {
     }
 
     public ECPoint validatePoint(BigInteger bigInteger, BigInteger bigInteger2) {
-        ECPoint createPoint = createPoint(bigInteger, bigInteger2);
-        if (createPoint.isValid()) {
-            return createPoint;
+        ECPoint eCPointCreatePoint = createPoint(bigInteger, bigInteger2);
+        if (eCPointCreatePoint.isValid()) {
+            return eCPointCreatePoint;
         }
         throw new IllegalArgumentException("Invalid point coordinates");
     }
@@ -156,7 +156,7 @@ public abstract class ECCurve {
 
     public PreCompInfo precompute(ECPoint eCPoint, String str, PreCompCallback preCompCallback) {
         Hashtable hashtable;
-        PreCompInfo precompute;
+        PreCompInfo preCompInfoPrecompute;
         checkPoint(eCPoint);
         synchronized (eCPoint) {
             hashtable = eCPoint.preCompTable;
@@ -167,12 +167,12 @@ public abstract class ECCurve {
         }
         synchronized (hashtable) {
             PreCompInfo preCompInfo = (PreCompInfo) hashtable.get(str);
-            precompute = preCompCallback.precompute(preCompInfo);
-            if (precompute != preCompInfo) {
-                hashtable.put(str, precompute);
+            preCompInfoPrecompute = preCompCallback.precompute(preCompInfo);
+            if (preCompInfoPrecompute != preCompInfo) {
+                hashtable.put(str, preCompInfoPrecompute);
             }
         }
-        return precompute;
+        return preCompInfoPrecompute;
     }
 
     public ECPoint importPoint(ECPoint eCPoint) {
@@ -182,8 +182,8 @@ public abstract class ECCurve {
         if (eCPoint.isInfinity()) {
             return getInfinity();
         }
-        ECPoint normalize = eCPoint.normalize();
-        return createPoint(normalize.getXCoord().toBigInteger(), normalize.getYCoord().toBigInteger());
+        ECPoint eCPointNormalize = eCPoint.normalize();
+        return createPoint(eCPointNormalize.getXCoord().toBigInteger(), eCPointNormalize.getYCoord().toBigInteger());
     }
 
     public void normalizeAll(ECPoint[] eCPointArr) {
@@ -274,12 +274,12 @@ public abstract class ECCurve {
                     if (bArr.length != (fieldSize * 2) + 1) {
                         throw new IllegalArgumentException("Incorrect length for hybrid encoding");
                     }
-                    BigInteger fromUnsignedByteArray = BigIntegers.fromUnsignedByteArray(bArr, 1, fieldSize);
-                    BigInteger fromUnsignedByteArray2 = BigIntegers.fromUnsignedByteArray(bArr, fieldSize + 1, fieldSize);
-                    if (fromUnsignedByteArray2.testBit(0) != (b == 7)) {
+                    BigInteger bigIntegerFromUnsignedByteArray = BigIntegers.fromUnsignedByteArray(bArr, 1, fieldSize);
+                    BigInteger bigIntegerFromUnsignedByteArray2 = BigIntegers.fromUnsignedByteArray(bArr, fieldSize + 1, fieldSize);
+                    if (bigIntegerFromUnsignedByteArray2.testBit(0) != (b == 7)) {
                         throw new IllegalArgumentException("Inconsistent Y coordinate in hybrid encoding");
                     }
-                    infinity = validatePoint(fromUnsignedByteArray, fromUnsignedByteArray2);
+                    infinity = validatePoint(bigIntegerFromUnsignedByteArray, bigIntegerFromUnsignedByteArray2);
                 } else {
                     throw new IllegalArgumentException("Invalid point encoding 0x" + Integer.toString(b, 16));
                 }
@@ -446,30 +446,30 @@ public abstract class ECCurve {
 
         @Override // com.android.internal.org.bouncycastle.math.ec.ECCurve
         protected ECPoint decompressPoint(int i, BigInteger bigInteger) {
-            ECFieldElement fromBigInteger = fromBigInteger(bigInteger);
-            ECFieldElement sqrt = fromBigInteger.square().add(this.a).multiply(fromBigInteger).add(this.b).sqrt();
-            if (sqrt == null) {
+            ECFieldElement eCFieldElementFromBigInteger = fromBigInteger(bigInteger);
+            ECFieldElement eCFieldElementSqrt = eCFieldElementFromBigInteger.square().add(this.a).multiply(eCFieldElementFromBigInteger).add(this.b).sqrt();
+            if (eCFieldElementSqrt == null) {
                 throw new IllegalArgumentException("Invalid point compression");
             }
-            if (sqrt.testBitZero() != (i == 1)) {
-                sqrt = sqrt.negate();
+            if (eCFieldElementSqrt.testBitZero() != (i == 1)) {
+                eCFieldElementSqrt = eCFieldElementSqrt.negate();
             }
-            return createRawPoint(fromBigInteger, sqrt);
+            return createRawPoint(eCFieldElementFromBigInteger, eCFieldElementSqrt);
         }
 
         private static BigInteger implRandomFieldElement(SecureRandom secureRandom, BigInteger bigInteger) {
-            BigInteger createRandomBigInteger;
+            BigInteger bigIntegerCreateRandomBigInteger;
             do {
-                createRandomBigInteger = BigIntegers.createRandomBigInteger(bigInteger.bitLength(), secureRandom);
-            } while (createRandomBigInteger.compareTo(bigInteger) >= 0);
-            return createRandomBigInteger;
+                bigIntegerCreateRandomBigInteger = BigIntegers.createRandomBigInteger(bigInteger.bitLength(), secureRandom);
+            } while (bigIntegerCreateRandomBigInteger.compareTo(bigInteger) >= 0);
+            return bigIntegerCreateRandomBigInteger;
         }
 
         private static BigInteger implRandomFieldElementMult(SecureRandom secureRandom, BigInteger bigInteger) {
             while (true) {
-                BigInteger createRandomBigInteger = BigIntegers.createRandomBigInteger(bigInteger.bitLength(), secureRandom);
-                if (createRandomBigInteger.signum() > 0 && createRandomBigInteger.compareTo(bigInteger) < 0) {
-                    return createRandomBigInteger;
+                BigInteger bigIntegerCreateRandomBigInteger = BigIntegers.createRandomBigInteger(bigInteger.bitLength(), secureRandom);
+                if (bigIntegerCreateRandomBigInteger.signum() > 0 && bigIntegerCreateRandomBigInteger.compareTo(bigInteger) < 0) {
+                    return bigIntegerCreateRandomBigInteger;
                 }
             }
         }
@@ -496,29 +496,32 @@ public abstract class ECCurve {
             this(bigInteger, bigInteger2, bigInteger3, bigInteger4, bigInteger5, false);
         }
 
+        /* JADX WARN: Removed duplicated region for block: B:21:0x005e  */
+        /*
+            Code decompiled incorrectly, please refer to instructions dump.
+        */
         public Fp(BigInteger bigInteger, BigInteger bigInteger2, BigInteger bigInteger3, BigInteger bigInteger4, BigInteger bigInteger5, boolean z) {
             super(bigInteger);
             if (z) {
                 this.q = bigInteger;
                 knownQs.add(bigInteger);
-            } else {
-                if (!knownQs.contains(bigInteger)) {
-                    BigIntegers.Cache cache = validatedQs;
-                    if (!cache.contains(bigInteger)) {
-                        int asInteger = Properties.asInteger("com.android.internal.org.bouncycastle.ec.fp_max_size", 1042);
-                        int asInteger2 = Properties.asInteger("com.android.internal.org.bouncycastle.ec.fp_certainty", 100);
-                        int bitLength = bigInteger.bitLength();
-                        if (asInteger < bitLength) {
-                            throw new IllegalArgumentException("Fp q value out of range");
-                        }
-                        if (Primes.hasAnySmallFactors(bigInteger) || !Primes.isMRProbablePrime(bigInteger, CryptoServicesRegistrar.getSecureRandom(), ECCurve.getNumberOfIterations(bitLength, asInteger2))) {
-                            throw new IllegalArgumentException("Fp q value not prime");
-                        }
-                        cache.add(bigInteger);
-                        this.q = bigInteger;
+            } else if (!knownQs.contains(bigInteger)) {
+                BigIntegers.Cache cache = validatedQs;
+                if (cache.contains(bigInteger)) {
+                    this.q = bigInteger;
+                } else {
+                    int iAsInteger = Properties.asInteger("com.android.internal.org.bouncycastle.ec.fp_max_size", 1042);
+                    int iAsInteger2 = Properties.asInteger("com.android.internal.org.bouncycastle.ec.fp_certainty", 100);
+                    int iBitLength = bigInteger.bitLength();
+                    if (iAsInteger < iBitLength) {
+                        throw new IllegalArgumentException("Fp q value out of range");
                     }
+                    if (Primes.hasAnySmallFactors(bigInteger) || !Primes.isMRProbablePrime(bigInteger, CryptoServicesRegistrar.getSecureRandom(), ECCurve.getNumberOfIterations(iBitLength, iAsInteger2))) {
+                        throw new IllegalArgumentException("Fp q value not prime");
+                    }
+                    cache.add(bigInteger);
+                    this.q = bigInteger;
                 }
-                this.q = bigInteger;
             }
             this.r = ECFieldElement.Fp.calculateResidue(bigInteger);
             this.infinity = new ECPoint.Fp(this, null, null);
@@ -612,19 +615,19 @@ public abstract class ECCurve {
 
         @Override // com.android.internal.org.bouncycastle.math.ec.ECCurve
         public ECPoint createPoint(BigInteger bigInteger, BigInteger bigInteger2) {
-            ECFieldElement fromBigInteger = fromBigInteger(bigInteger);
-            ECFieldElement fromBigInteger2 = fromBigInteger(bigInteger2);
+            ECFieldElement eCFieldElementFromBigInteger = fromBigInteger(bigInteger);
+            ECFieldElement eCFieldElementFromBigInteger2 = fromBigInteger(bigInteger2);
             int coordinateSystem = getCoordinateSystem();
             if (coordinateSystem == 5 || coordinateSystem == 6) {
-                if (fromBigInteger.isZero()) {
-                    if (!fromBigInteger2.square().equals(getB())) {
+                if (eCFieldElementFromBigInteger.isZero()) {
+                    if (!eCFieldElementFromBigInteger2.square().equals(getB())) {
                         throw new IllegalArgumentException();
                     }
                 } else {
-                    fromBigInteger2 = fromBigInteger2.divide(fromBigInteger).add(fromBigInteger);
+                    eCFieldElementFromBigInteger2 = eCFieldElementFromBigInteger2.divide(eCFieldElementFromBigInteger).add(eCFieldElementFromBigInteger);
                 }
             }
-            return createRawPoint(fromBigInteger, fromBigInteger2);
+            return createRawPoint(eCFieldElementFromBigInteger, eCFieldElementFromBigInteger2);
         }
 
         @Override // com.android.internal.org.bouncycastle.math.ec.ECCurve
@@ -645,66 +648,66 @@ public abstract class ECCurve {
 
         @Override // com.android.internal.org.bouncycastle.math.ec.ECCurve
         protected ECPoint decompressPoint(int i, BigInteger bigInteger) {
-            ECFieldElement eCFieldElement;
-            ECFieldElement fromBigInteger = fromBigInteger(bigInteger);
-            if (fromBigInteger.isZero()) {
-                eCFieldElement = getB().sqrt();
+            ECFieldElement eCFieldElementAdd;
+            ECFieldElement eCFieldElementFromBigInteger = fromBigInteger(bigInteger);
+            if (eCFieldElementFromBigInteger.isZero()) {
+                eCFieldElementAdd = getB().sqrt();
             } else {
-                ECFieldElement solveQuadraticEquation = solveQuadraticEquation(fromBigInteger.square().invert().multiply(getB()).add(getA()).add(fromBigInteger));
-                if (solveQuadraticEquation != null) {
-                    if (solveQuadraticEquation.testBitZero() != (i == 1)) {
-                        solveQuadraticEquation = solveQuadraticEquation.addOne();
+                ECFieldElement eCFieldElementSolveQuadraticEquation = solveQuadraticEquation(eCFieldElementFromBigInteger.square().invert().multiply(getB()).add(getA()).add(eCFieldElementFromBigInteger));
+                if (eCFieldElementSolveQuadraticEquation != null) {
+                    if (eCFieldElementSolveQuadraticEquation.testBitZero() != (i == 1)) {
+                        eCFieldElementSolveQuadraticEquation = eCFieldElementSolveQuadraticEquation.addOne();
                     }
                     int coordinateSystem = getCoordinateSystem();
                     if (coordinateSystem == 5 || coordinateSystem == 6) {
-                        eCFieldElement = solveQuadraticEquation.add(fromBigInteger);
+                        eCFieldElementAdd = eCFieldElementSolveQuadraticEquation.add(eCFieldElementFromBigInteger);
                     } else {
-                        eCFieldElement = solveQuadraticEquation.multiply(fromBigInteger);
+                        eCFieldElementAdd = eCFieldElementSolveQuadraticEquation.multiply(eCFieldElementFromBigInteger);
                     }
                 } else {
-                    eCFieldElement = null;
+                    eCFieldElementAdd = null;
                 }
             }
-            if (eCFieldElement == null) {
+            if (eCFieldElementAdd == null) {
                 throw new IllegalArgumentException("Invalid point compression");
             }
-            return createRawPoint(fromBigInteger, eCFieldElement);
+            return createRawPoint(eCFieldElementFromBigInteger, eCFieldElementAdd);
         }
 
         protected ECFieldElement solveQuadraticEquation(ECFieldElement eCFieldElement) {
-            ECFieldElement eCFieldElement2;
+            ECFieldElement eCFieldElementAdd;
             ECFieldElement.AbstractF2m abstractF2m = (ECFieldElement.AbstractF2m) eCFieldElement;
-            boolean hasFastTrace = abstractF2m.hasFastTrace();
-            if (hasFastTrace && abstractF2m.trace() != 0) {
+            boolean zHasFastTrace = abstractF2m.hasFastTrace();
+            if (zHasFastTrace && abstractF2m.trace() != 0) {
                 return null;
             }
             int fieldSize = getFieldSize();
             if ((fieldSize & 1) != 0) {
-                ECFieldElement halfTrace = abstractF2m.halfTrace();
-                if (hasFastTrace || halfTrace.square().add(halfTrace).add(eCFieldElement).isZero()) {
-                    return halfTrace;
+                ECFieldElement eCFieldElementHalfTrace = abstractF2m.halfTrace();
+                if (zHasFastTrace || eCFieldElementHalfTrace.square().add(eCFieldElementHalfTrace).add(eCFieldElement).isZero()) {
+                    return eCFieldElementHalfTrace;
                 }
                 return null;
             }
             if (eCFieldElement.isZero()) {
                 return eCFieldElement;
             }
-            ECFieldElement fromBigInteger = fromBigInteger(ECConstants.ZERO);
+            ECFieldElement eCFieldElementFromBigInteger = fromBigInteger(ECConstants.ZERO);
             Random random = new Random();
             do {
-                ECFieldElement fromBigInteger2 = fromBigInteger(new BigInteger(fieldSize, random));
-                ECFieldElement eCFieldElement3 = eCFieldElement;
-                eCFieldElement2 = fromBigInteger;
+                ECFieldElement eCFieldElementFromBigInteger2 = fromBigInteger(new BigInteger(fieldSize, random));
+                ECFieldElement eCFieldElementAdd2 = eCFieldElement;
+                eCFieldElementAdd = eCFieldElementFromBigInteger;
                 for (int i = 1; i < fieldSize; i++) {
-                    ECFieldElement square = eCFieldElement3.square();
-                    eCFieldElement2 = eCFieldElement2.square().add(square.multiply(fromBigInteger2));
-                    eCFieldElement3 = square.add(eCFieldElement);
+                    ECFieldElement eCFieldElementSquare = eCFieldElementAdd2.square();
+                    eCFieldElementAdd = eCFieldElementAdd.square().add(eCFieldElementSquare.multiply(eCFieldElementFromBigInteger2));
+                    eCFieldElementAdd2 = eCFieldElementSquare.add(eCFieldElement);
                 }
-                if (!eCFieldElement3.isZero()) {
+                if (!eCFieldElementAdd2.isZero()) {
                     return null;
                 }
-            } while (eCFieldElement2.square().add(eCFieldElement2).isZero());
-            return eCFieldElement2;
+            } while (eCFieldElementAdd.square().add(eCFieldElementAdd).isZero());
+            return eCFieldElementAdd;
         }
 
         synchronized BigInteger[] getSi() {
@@ -722,11 +725,11 @@ public abstract class ECCurve {
         }
 
         private static BigInteger implRandomFieldElementMult(SecureRandom secureRandom, int i) {
-            BigInteger createRandomBigInteger;
+            BigInteger bigIntegerCreateRandomBigInteger;
             do {
-                createRandomBigInteger = BigIntegers.createRandomBigInteger(i, secureRandom);
-            } while (createRandomBigInteger.signum() <= 0);
-            return createRandomBigInteger;
+                bigIntegerCreateRandomBigInteger = BigIntegers.createRandomBigInteger(i, secureRandom);
+            } while (bigIntegerCreateRandomBigInteger.signum() <= 0);
+            return bigIntegerCreateRandomBigInteger;
         }
     }
 
@@ -874,8 +877,8 @@ public abstract class ECCurve {
                 @Override // com.android.internal.org.bouncycastle.math.ec.ECLookupTable
                 public ECPoint lookup(int i7) {
                     int i8;
-                    long[] create64 = Nat.create64(i3);
-                    long[] create642 = Nat.create64(i3);
+                    long[] jArrCreate64 = Nat.create64(i3);
+                    long[] jArrCreate642 = Nat.create64(i3);
                     int i9 = 0;
                     for (int i10 = 0; i10 < i2; i10++) {
                         long j = ((i10 ^ i7) - 1) >> 31;
@@ -883,33 +886,33 @@ public abstract class ECCurve {
                         while (true) {
                             i8 = i3;
                             if (i11 < i8) {
-                                long j2 = create64[i11];
+                                long j2 = jArrCreate64[i11];
                                 long[] jArr2 = jArr;
-                                create64[i11] = j2 ^ (jArr2[i9 + i11] & j);
-                                create642[i11] = create642[i11] ^ (jArr2[(i8 + i9) + i11] & j);
+                                jArrCreate64[i11] = j2 ^ (jArr2[i9 + i11] & j);
+                                jArrCreate642[i11] = jArrCreate642[i11] ^ (jArr2[(i8 + i9) + i11] & j);
                                 i11++;
                             }
                         }
                         i9 += i8 * 2;
                     }
-                    return createPoint(create64, create642);
+                    return createPoint(jArrCreate64, jArrCreate642);
                 }
 
                 @Override // com.android.internal.org.bouncycastle.math.ec.AbstractECLookupTable, com.android.internal.org.bouncycastle.math.ec.ECLookupTable
                 public ECPoint lookupVar(int i7) {
-                    long[] create64 = Nat.create64(i3);
-                    long[] create642 = Nat.create64(i3);
+                    long[] jArrCreate64 = Nat.create64(i3);
+                    long[] jArrCreate642 = Nat.create64(i3);
                     int i8 = i7 * i3 * 2;
                     int i9 = 0;
                     while (true) {
                         int i10 = i3;
                         if (i9 < i10) {
                             long[] jArr2 = jArr;
-                            create64[i9] = jArr2[i8 + i9];
-                            create642[i9] = jArr2[i10 + i8 + i9];
+                            jArrCreate64[i9] = jArr2[i8 + i9];
+                            jArrCreate642[i9] = jArr2[i10 + i8 + i9];
                             i9++;
                         } else {
-                            return createPoint(create64, create642);
+                            return createPoint(jArrCreate64, jArrCreate642);
                         }
                     }
                 }

@@ -233,9 +233,7 @@ public class TwoFingerSwipeGestureDetector implements WindowManagerPolicyConstan
                     if (allMatch(motionEvent, new BiFunction() { // from class: android.view.TwoFingerSwipeGestureDetector$$ExternalSyntheticLambda5
                         @Override // java.util.function.BiFunction
                         public final Object apply(Object obj, Object obj2) {
-                            Boolean lambda$onInputEvent$0;
-                            lambda$onInputEvent$0 = TwoFingerSwipeGestureDetector.this.lambda$onInputEvent$0((Integer) obj, (Integer) obj2);
-                            return lambda$onInputEvent$0;
+                            return this.f$0.lambda$onInputEvent$0((Integer) obj, (Integer) obj2);
                         }
                     })) {
                         if (this.DEBUG) {
@@ -248,20 +246,20 @@ public class TwoFingerSwipeGestureDetector implements WindowManagerPolicyConstan
                     this.mStartCenterX = getCenter(motionEvent, new Function() { // from class: android.view.TwoFingerSwipeGestureDetector$$ExternalSyntheticLambda6
                         @Override // java.util.function.Function
                         public final Object apply(Object obj) {
-                            return Float.valueOf(MotionEvent.this.getX(((Integer) obj).intValue()));
+                            return Float.valueOf(motionEvent.getX(((Integer) obj).intValue()));
                         }
                     });
                     Objects.requireNonNull(motionEvent);
                     this.mStartCenterY = getCenter(motionEvent, new Function() { // from class: android.view.TwoFingerSwipeGestureDetector$$ExternalSyntheticLambda7
                         @Override // java.util.function.Function
                         public final Object apply(Object obj) {
-                            return Float.valueOf(MotionEvent.this.getY(((Integer) obj).intValue()));
+                            return Float.valueOf(motionEvent.getY(((Integer) obj).intValue()));
                         }
                     });
                     if (allMatch(motionEvent, new BiFunction() { // from class: android.view.TwoFingerSwipeGestureDetector$$ExternalSyntheticLambda8
                         @Override // java.util.function.BiFunction
                         public final Object apply(Object obj, Object obj2) {
-                            return Boolean.valueOf(TwoFingerSwipeGestureDetector.this.excludeRegionContains(((Integer) obj).intValue(), ((Integer) obj2).intValue()));
+                            return Boolean.valueOf(this.f$0.excludeRegionContains(((Integer) obj).intValue(), ((Integer) obj2).intValue()));
                         }
                     })) {
                         if (this.DEBUG) {
@@ -288,14 +286,14 @@ public class TwoFingerSwipeGestureDetector implements WindowManagerPolicyConstan
                     float distanceSquareSum = getDistanceSquareSum(motionEvent, new Function() { // from class: android.view.TwoFingerSwipeGestureDetector$$ExternalSyntheticLambda6
                         @Override // java.util.function.Function
                         public final Object apply(Object obj) {
-                            return Float.valueOf(MotionEvent.this.getX(((Integer) obj).intValue()));
+                            return Float.valueOf(motionEvent.getX(((Integer) obj).intValue()));
                         }
                     });
                     Objects.requireNonNull(motionEvent);
                     this.mInitialDistance = distanceSquareSum + getDistanceSquareSum(motionEvent, new Function() { // from class: android.view.TwoFingerSwipeGestureDetector$$ExternalSyntheticLambda7
                         @Override // java.util.function.Function
                         public final Object apply(Object obj) {
-                            return Float.valueOf(MotionEvent.this.getY(((Integer) obj).intValue()));
+                            return Float.valueOf(motionEvent.getY(((Integer) obj).intValue()));
                         }
                     });
                     detected();
@@ -313,14 +311,14 @@ public class TwoFingerSwipeGestureDetector implements WindowManagerPolicyConstan
                     float center = getCenter(motionEvent, new Function() { // from class: android.view.TwoFingerSwipeGestureDetector$$ExternalSyntheticLambda6
                         @Override // java.util.function.Function
                         public final Object apply(Object obj) {
-                            return Float.valueOf(MotionEvent.this.getX(((Integer) obj).intValue()));
+                            return Float.valueOf(motionEvent.getX(((Integer) obj).intValue()));
                         }
                     });
                     Objects.requireNonNull(motionEvent);
                     float center2 = getCenter(motionEvent, new Function() { // from class: android.view.TwoFingerSwipeGestureDetector$$ExternalSyntheticLambda7
                         @Override // java.util.function.Function
                         public final Object apply(Object obj) {
-                            return Float.valueOf(MotionEvent.this.getY(((Integer) obj).intValue()));
+                            return Float.valueOf(motionEvent.getY(((Integer) obj).intValue()));
                         }
                     });
                     if (isOverThreshold(center, center2, this.mEasyThresholds, this.mStartPosition).booleanValue()) {
@@ -341,14 +339,14 @@ public class TwoFingerSwipeGestureDetector implements WindowManagerPolicyConstan
                     float distanceSquareSum2 = getDistanceSquareSum(motionEvent, new Function() { // from class: android.view.TwoFingerSwipeGestureDetector$$ExternalSyntheticLambda6
                         @Override // java.util.function.Function
                         public final Object apply(Object obj) {
-                            return Float.valueOf(MotionEvent.this.getX(((Integer) obj).intValue()));
+                            return Float.valueOf(motionEvent.getX(((Integer) obj).intValue()));
                         }
                     });
                     Objects.requireNonNull(motionEvent);
                     float distanceSquareSum3 = distanceSquareSum2 + getDistanceSquareSum(motionEvent, new Function() { // from class: android.view.TwoFingerSwipeGestureDetector$$ExternalSyntheticLambda7
                         @Override // java.util.function.Function
                         public final Object apply(Object obj) {
-                            return Float.valueOf(MotionEvent.this.getY(((Integer) obj).intValue()));
+                            return Float.valueOf(motionEvent.getY(((Integer) obj).intValue()));
                         }
                     });
                     if (!this.mUseThreeFinger && isTwoFingerDistanceFartherThanBefore(this.mInitialDistance, distanceSquareSum3)) {
@@ -370,14 +368,14 @@ public class TwoFingerSwipeGestureDetector implements WindowManagerPolicyConstan
                     this.mEndCenterX = getCenter(motionEvent, new Function() { // from class: android.view.TwoFingerSwipeGestureDetector$$ExternalSyntheticLambda6
                         @Override // java.util.function.Function
                         public final Object apply(Object obj) {
-                            return Float.valueOf(MotionEvent.this.getX(((Integer) obj).intValue()));
+                            return Float.valueOf(motionEvent.getX(((Integer) obj).intValue()));
                         }
                     });
                     Objects.requireNonNull(motionEvent);
                     this.mEndCenterY = getCenter(motionEvent, new Function() { // from class: android.view.TwoFingerSwipeGestureDetector$$ExternalSyntheticLambda7
                         @Override // java.util.function.Function
                         public final Object apply(Object obj) {
-                            return Float.valueOf(MotionEvent.this.getY(((Integer) obj).intValue()));
+                            return Float.valueOf(motionEvent.getY(((Integer) obj).intValue()));
                         }
                     });
                     return;
@@ -397,14 +395,14 @@ public class TwoFingerSwipeGestureDetector implements WindowManagerPolicyConstan
                     float center3 = getCenter(motionEvent, new Function() { // from class: android.view.TwoFingerSwipeGestureDetector$$ExternalSyntheticLambda6
                         @Override // java.util.function.Function
                         public final Object apply(Object obj) {
-                            return Float.valueOf(MotionEvent.this.getX(((Integer) obj).intValue()));
+                            return Float.valueOf(motionEvent.getX(((Integer) obj).intValue()));
                         }
                     });
                     Objects.requireNonNull(motionEvent);
                     float center4 = getCenter(motionEvent, new Function() { // from class: android.view.TwoFingerSwipeGestureDetector$$ExternalSyntheticLambda7
                         @Override // java.util.function.Function
                         public final Object apply(Object obj) {
-                            return Float.valueOf(MotionEvent.this.getY(((Integer) obj).intValue()));
+                            return Float.valueOf(motionEvent.getY(((Integer) obj).intValue()));
                         }
                     });
                     if (!isOverThreshold(center3, center4, this.mThresholds, this.mStartPosition).booleanValue()) {
@@ -448,15 +446,15 @@ public class TwoFingerSwipeGestureDetector implements WindowManagerPolicyConstan
     }
 
     protected boolean commitIfPossible(float f, float f2) {
-        int gestureFrom = gestureFrom(this.mStartPosition, getDirection(this.mStartCenterX, this.mStartCenterY, f, f2));
-        if (gestureFrom == -1) {
+        int iGestureFrom = gestureFrom(this.mStartPosition, getDirection(this.mStartCenterX, this.mStartCenterY, f, f2));
+        if (iGestureFrom == -1) {
             if (!this.DEBUG) {
                 return false;
             }
             Slog.d(this.TAG, "ActionMOVE: gestureFrom not found.");
             return false;
         }
-        committed(gestureFrom);
+        committed(iGestureFrom);
         return true;
     }
 
@@ -516,11 +514,11 @@ public class TwoFingerSwipeGestureDetector implements WindowManagerPolicyConstan
 
     protected boolean allMatch(MotionEvent motionEvent, BiFunction<Integer, Integer, Boolean> biFunction) {
         int pointerCount = motionEvent.getPointerCount();
-        boolean z = true;
+        boolean zBooleanValue = true;
         for (int i = 0; i < pointerCount; i++) {
-            z &= biFunction.apply(Integer.valueOf((int) motionEvent.getX(i)), Integer.valueOf((int) motionEvent.getY(i))).booleanValue();
+            zBooleanValue &= biFunction.apply(Integer.valueOf((int) motionEvent.getX(i)), Integer.valueOf((int) motionEvent.getY(i))).booleanValue();
         }
-        return z;
+        return zBooleanValue;
     }
 
     protected boolean excludeRegionContains(float f, float f2) {
@@ -612,19 +610,19 @@ public class TwoFingerSwipeGestureDetector implements WindowManagerPolicyConstan
             if (i2 >= pointerCount) {
                 return f;
             }
-            float floatValue = function.apply(Integer.valueOf(i)).floatValue() - function.apply(Integer.valueOf(i2)).floatValue();
-            f += floatValue * floatValue;
+            float fFloatValue = function.apply(Integer.valueOf(i)).floatValue() - function.apply(Integer.valueOf(i2)).floatValue();
+            f += fFloatValue * fFloatValue;
             i = i2;
         }
     }
 
     protected float getCenter(MotionEvent motionEvent, Function<Integer, Float> function) {
         int pointerCount = motionEvent.getPointerCount();
-        float f = 0.0f;
+        float fFloatValue = 0.0f;
         for (int i = 0; i < pointerCount; i++) {
-            f += function.apply(Integer.valueOf(i)).floatValue();
+            fFloatValue += function.apply(Integer.valueOf(i)).floatValue();
         }
-        return f / pointerCount;
+        return fFloatValue / pointerCount;
     }
 
     public int getPosition(int i, int i2, int[] iArr) {
@@ -743,7 +741,7 @@ public class TwoFingerSwipeGestureDetector implements WindowManagerPolicyConstan
         return allMatch(motionEvent, new BiFunction() { // from class: android.view.TwoFingerSwipeGestureDetector$$ExternalSyntheticLambda1
             @Override // java.util.function.BiFunction
             public final Object apply(Object obj, Object obj2) {
-                return Boolean.valueOf(Region.this.contains(((Integer) obj).intValue(), ((Integer) obj2).intValue()));
+                return Boolean.valueOf(region.contains(((Integer) obj).intValue(), ((Integer) obj2).intValue()));
             }
         });
     }

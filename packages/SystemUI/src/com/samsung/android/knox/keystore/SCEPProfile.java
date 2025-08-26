@@ -3,7 +3,6 @@ package com.samsung.android.knox.keystore;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @Deprecated
 /* loaded from: classes4.dex */
 public class SCEPProfile extends EnrollmentProfile implements Parcelable {
@@ -20,9 +19,9 @@ public class SCEPProfile extends EnrollmentProfile implements Parcelable {
         try {
             this.scepUrl = parcel.readString();
             this.scepProfileName = parcel.readString();
-            int readInt = parcel.readInt();
-            this.challengeLength = readInt;
-            byte[] bArr = new byte[readInt];
+            int i = parcel.readInt();
+            this.challengeLength = i;
+            byte[] bArr = new byte[i];
             this.challengePassword = bArr;
             parcel.readByteArray(bArr);
             this.subjectName = parcel.readString();

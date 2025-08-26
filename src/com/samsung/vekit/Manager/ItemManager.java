@@ -25,34 +25,34 @@ public class ItemManager extends Manager<Item> {
     public Item create(ItemType itemType, String str) {
         Item videoItem;
         try {
-            int generateUniqueId = generateUniqueId();
+            int iGenerateUniqueId = generateUniqueId();
             switch (AnonymousClass1.$SwitchMap$com$samsung$vekit$Common$Type$ItemType[itemType.ordinal()]) {
                 case 1:
-                    videoItem = new VideoItem(this.context, generateUniqueId, str);
+                    videoItem = new VideoItem(this.context, iGenerateUniqueId, str);
                     break;
                 case 2:
-                    videoItem = new ImageItem(this.context, generateUniqueId, str);
+                    videoItem = new ImageItem(this.context, iGenerateUniqueId, str);
                     break;
                 case 3:
-                    videoItem = new DoodleItem(this.context, generateUniqueId, str);
+                    videoItem = new DoodleItem(this.context, iGenerateUniqueId, str);
                     break;
                 case 4:
-                    videoItem = new CaptionItem(this.context, generateUniqueId, str);
+                    videoItem = new CaptionItem(this.context, iGenerateUniqueId, str);
                     break;
                 case 5:
-                    videoItem = new AudioItem(this.context, generateUniqueId, str);
+                    videoItem = new AudioItem(this.context, iGenerateUniqueId, str);
                     break;
                 case 6:
-                    videoItem = new FragmentAudioItem(this.context, generateUniqueId, str);
+                    videoItem = new FragmentAudioItem(this.context, iGenerateUniqueId, str);
                     break;
                 case 7:
-                    videoItem = new ColorItem(this.context, generateUniqueId, str);
+                    videoItem = new ColorItem(this.context, iGenerateUniqueId, str);
                     break;
                 case 8:
-                    videoItem = new EmptyItem(this.context, generateUniqueId, str);
+                    videoItem = new EmptyItem(this.context, iGenerateUniqueId, str);
                     break;
                 case 9:
-                    videoItem = new PortraitVideoItem(this.context, generateUniqueId, str);
+                    videoItem = new PortraitVideoItem(this.context, iGenerateUniqueId, str);
                     break;
                 default:
                     return null;

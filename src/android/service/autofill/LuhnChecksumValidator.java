@@ -41,12 +41,12 @@ public final class LuhnChecksumValidator extends InternalValidator implements Va
         int i = 0;
         boolean z = false;
         for (int length = str.length() - 1; length >= 0; length--) {
-            int charAt = str.charAt(length) - '0';
-            if (charAt >= 0 && charAt <= 9) {
-                if (z && (charAt = charAt * 2) > 9) {
-                    charAt -= 9;
+            int iCharAt = str.charAt(length) - '0';
+            if (iCharAt >= 0 && iCharAt <= 9) {
+                if (z && (iCharAt = iCharAt * 2) > 9) {
+                    iCharAt -= 9;
                 }
-                i += charAt;
+                i += iCharAt;
                 z = !z;
             }
         }
@@ -61,21 +61,21 @@ public final class LuhnChecksumValidator extends InternalValidator implements Va
         }
         StringBuilder sb = new StringBuilder();
         for (AutofillId autofillId : this.mIds) {
-            String findByAutofillId = valueFinder.findByAutofillId(autofillId);
-            if (findByAutofillId == null) {
+            String strFindByAutofillId = valueFinder.findByAutofillId(autofillId);
+            if (strFindByAutofillId == null) {
                 if (Helper.sDebug) {
                     Log.d(TAG, "No partial number for id " + autofillId);
                 }
                 return false;
             }
-            sb.append(findByAutofillId);
+            sb.append(strFindByAutofillId);
         }
-        String sb2 = sb.toString();
-        boolean isLuhnChecksumValid = isLuhnChecksumValid(sb2);
+        String string = sb.toString();
+        boolean zIsLuhnChecksumValid = isLuhnChecksumValid(string);
         if (Helper.sDebug) {
-            Log.d(TAG, "isValid(" + sb2.length() + " chars): " + isLuhnChecksumValid);
+            Log.d(TAG, "isValid(" + string.length() + " chars): " + zIsLuhnChecksumValid);
         }
-        return isLuhnChecksumValid;
+        return zIsLuhnChecksumValid;
     }
 
     public String toString() {

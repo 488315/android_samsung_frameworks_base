@@ -15,17 +15,17 @@ public class AppSecurityPermissions {
     }
 
     private static View getPermissionItemViewOld(Context context, LayoutInflater layoutInflater, CharSequence charSequence, CharSequence charSequence2, boolean z, Drawable drawable) {
-        View inflate = layoutInflater.inflate(R.layout.app_permission_item_old, (ViewGroup) null);
-        TextView textView = (TextView) inflate.findViewById(R.id.permission_group);
-        TextView textView2 = (TextView) inflate.findViewById(R.id.permission_list);
-        ((ImageView) inflate.findViewById(R.id.perm_icon)).lambda$setImageURIAsync$0(drawable);
+        View viewInflate = layoutInflater.inflate(R.layout.app_permission_item_old, (ViewGroup) null);
+        TextView textView = (TextView) viewInflate.findViewById(R.id.permission_group);
+        TextView textView2 = (TextView) viewInflate.findViewById(R.id.permission_list);
+        ((ImageView) viewInflate.findViewById(R.id.perm_icon)).lambda$setImageURIAsync$2(drawable);
         if (charSequence != null) {
             textView.lambda$setTextAsync$0(charSequence);
             textView2.lambda$setTextAsync$0(charSequence2);
-            return inflate;
+            return viewInflate;
         }
         textView.lambda$setTextAsync$0(charSequence2);
         textView2.setVisibility(8);
-        return inflate;
+        return viewInflate;
     }
 }

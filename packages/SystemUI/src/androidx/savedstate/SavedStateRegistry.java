@@ -9,7 +9,6 @@ import java.util.Map;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SavedStateRegistry {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -20,11 +19,9 @@ public final class SavedStateRegistry {
     public Recreator.SavedStateProvider recreatorProvider;
     public Bundle restoredState;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface AutoRecreated {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -34,7 +31,6 @@ public final class SavedStateRegistry {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface SavedStateProvider {
         Bundle saveState();
     }
@@ -86,7 +82,7 @@ public final class SavedStateRegistry {
         }
     }
 
-    public final void runOnNextRecreation() {
+    public final void runOnNextRecreation() throws NoSuchMethodException, SecurityException {
         if (!this.isAllowingSavingState) {
             throw new IllegalStateException("Can not perform this action after onSaveInstanceState");
         }

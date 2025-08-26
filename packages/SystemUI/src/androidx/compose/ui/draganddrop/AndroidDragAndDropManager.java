@@ -15,7 +15,6 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.Ref$BooleanRef;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AndroidDragAndDropManager implements View.OnDragListener {
     public final Function3 startDrag;
@@ -24,7 +23,7 @@ public final class AndroidDragAndDropManager implements View.OnDragListener {
     public final AndroidDragAndDropManager$modifier$1 modifier = new ModifierNodeElement<DragAndDropNode>() { // from class: androidx.compose.ui.draganddrop.AndroidDragAndDropManager$modifier$1
         @Override // androidx.compose.ui.node.ModifierNodeElement
         public final Modifier.Node create() {
-            return AndroidDragAndDropManager.this.rootDragAndDropNode;
+            return this.this$0.rootDragAndDropNode;
         }
 
         public final boolean equals(Object obj) {
@@ -32,7 +31,7 @@ public final class AndroidDragAndDropManager implements View.OnDragListener {
         }
 
         public final int hashCode() {
-            return AndroidDragAndDropManager.this.rootDragAndDropNode.hashCode();
+            return this.this$0.rootDragAndDropNode.hashCode();
         }
 
         @Override // androidx.compose.ui.node.ModifierNodeElement
@@ -40,6 +39,7 @@ public final class AndroidDragAndDropManager implements View.OnDragListener {
         }
     };
 
+    /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Type inference failed for: r4v3, types: [androidx.compose.ui.draganddrop.AndroidDragAndDropManager$modifier$1] */
     public AndroidDragAndDropManager(Function3 function3) {
         this.startDrag = function3;
@@ -61,7 +61,7 @@ public final class AndroidDragAndDropManager implements View.OnDragListener {
 
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
+                    public final Object mo781invoke(Object obj) {
                         DragAndDropNode dragAndDropNode2 = (DragAndDropNode) obj;
                         if (!dragAndDropNode2.isAttached) {
                             return TraversableNode$Companion$TraverseDescendantsAction.SkipSubtreeAndContinueTraversal;
@@ -70,7 +70,7 @@ public final class AndroidDragAndDropManager implements View.OnDragListener {
                             InlineClassHelperKt.throwIllegalStateException("DragAndDropTarget self reference must be null at the start of a drag and drop session");
                         }
                         Function1 function12 = dragAndDropNode2.onDropTargetValidate;
-                        DragAndDropTarget dragAndDropTarget = function12 != null ? (DragAndDropTarget) function12.mo779invoke(DragAndDropEvent.this) : null;
+                        DragAndDropTarget dragAndDropTarget = function12 != null ? (DragAndDropTarget) function12.mo781invoke(dragAndDropEvent) : null;
                         dragAndDropNode2.thisDragAndDropTarget = dragAndDropTarget;
                         boolean z = dragAndDropTarget != null;
                         if (z) {
@@ -83,7 +83,7 @@ public final class AndroidDragAndDropManager implements View.OnDragListener {
                         return TraversableNode$Companion$TraverseDescendantsAction.ContinueTraversal;
                     }
                 };
-                if (function1.mo779invoke(dragAndDropNode) == TraversableNode$Companion$TraverseDescendantsAction.ContinueTraversal) {
+                if (function1.mo781invoke(dragAndDropNode) == TraversableNode$Companion$TraverseDescendantsAction.ContinueTraversal) {
                     TraversableNodeKt.traverseDescendants(dragAndDropNode, function1);
                 }
                 boolean z = ref$BooleanRef.element;

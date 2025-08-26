@@ -47,7 +47,6 @@ import com.android.systemui.widget.SystemUIWidgetCallback;
 import com.samsung.systemui.splugins.lockstar.PluginLockStar;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyguardPunchHoleVIViewController extends ViewController implements SystemUIWidgetCallback {
     public final ConfigurationController mConfigurationController;
@@ -72,14 +71,12 @@ public class KeyguardPunchHoleVIViewController extends ViewController implements
     public final WakefulnessLifecycle mWakefulnessLifecycle;
     public final AnonymousClass3 mWakefulnessObserver;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.keyguard.punchhole.KeyguardPunchHoleVIViewController$1, reason: invalid class name */
     public class AnonymousClass1 {
         public AnonymousClass1() {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Factory {
         public final ConfigurationController mConfigurationController;
         public final DisplayLifecycle mDisplayLifecycle;
@@ -107,7 +104,7 @@ public class KeyguardPunchHoleVIViewController extends ViewController implements
     }
 
     /* renamed from: $r8$lambda$1DuoW-xem1eLxLd0EvhmzdXc9U0, reason: not valid java name */
-    public static void m971$r8$lambda$1DuoWxem1eLxLd0EvhmzdXc9U0(KeyguardPunchHoleVIViewController keyguardPunchHoleVIViewController) {
+    public static void m973$r8$lambda$1DuoWxem1eLxLd0EvhmzdXc9U0(KeyguardPunchHoleVIViewController keyguardPunchHoleVIViewController) {
         if (((KeyguardPunchHoleVIView) keyguardPunchHoleVIViewController.mView).mIsAnimationPlaying) {
             keyguardPunchHoleVIViewController.stopVI();
         } else if (((KeyguardUpdateMonitor) Dependency.sDependency.getDependencyInner(KeyguardUpdateMonitor.class)).isFaceDetectionRunning()) {
@@ -194,10 +191,10 @@ public class KeyguardPunchHoleVIViewController extends ViewController implements
             public final void onLockModeChanged() {
                 KeyguardPunchHoleVIViewController keyguardPunchHoleVIViewController = KeyguardPunchHoleVIViewController.this;
                 if (DeviceState.shouldEnableKeyguardScreenRotation(keyguardPunchHoleVIViewController.getContext())) {
-                    boolean isFaceOptionEnabled = keyguardPunchHoleVIViewController.mKeyguardUpdateMonitor.isFaceOptionEnabled();
+                    boolean zIsFaceOptionEnabled = keyguardPunchHoleVIViewController.mKeyguardUpdateMonitor.isFaceOptionEnabled();
                     AnonymousClass4 anonymousClass4 = keyguardPunchHoleVIViewController.mDisplayLifeCycleObserver;
                     DisplayLifecycle displayLifecycle2 = keyguardPunchHoleVIViewController.mDisplayLifecycle;
-                    if (isFaceOptionEnabled) {
+                    if (zIsFaceOptionEnabled) {
                         displayLifecycle2.addObserver(anonymousClass4);
                     } else {
                         displayLifecycle2.removeObserver(anonymousClass4);
@@ -226,7 +223,7 @@ public class KeyguardPunchHoleVIViewController extends ViewController implements
         this.mSettingsListener = new SettingsHelper.OnChangedCallback() { // from class: com.android.keyguard.punchhole.KeyguardPunchHoleVIViewController$$ExternalSyntheticLambda1
             @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
             public final void onChanged(Uri uri) {
-                KeyguardPunchHoleVIViewController.m971$r8$lambda$1DuoWxem1eLxLd0EvhmzdXc9U0(KeyguardPunchHoleVIViewController.this);
+                KeyguardPunchHoleVIViewController.m973$r8$lambda$1DuoWxem1eLxLd0EvhmzdXc9U0(this.f$0);
             }
         };
         this.mDisplayLifeCycleObserver = new DisplayLifecycle.Observer() { // from class: com.android.keyguard.punchhole.KeyguardPunchHoleVIViewController.4
@@ -379,7 +376,7 @@ public class KeyguardPunchHoleVIViewController extends ViewController implements
     }
 
     public final void setPunchHoleVI() {
-        final String m;
+        final String strM;
         boolean z = LsRune.SECURITY_PUNCH_HOLE_FACE_VI;
         if (z && this.mKeyguardUpdateMonitor.isFaceOptionEnabled()) {
             final KeyguardPunchHoleVIView keyguardPunchHoleVIView = (KeyguardPunchHoleVIView) this.mView;
@@ -401,23 +398,23 @@ public class KeyguardPunchHoleVIViewController extends ViewController implements
                 VIDirector vIDirector = keyguardPunchHoleVIView.mVIDirector;
                 if (WallpaperUtils.isWhiteKeyguardWallpaper(vIDirector.mIsBouncer ? BriefViewController.SUGGESTION_BACKGROUND_KEY : "statusbar")) {
                     Log.d("KeyguardPunchHoleVIView_VIDirector", "getFaceRecognitionVIFileName() - file name = " + vIDirector.mVIFileName + "_whitebg.json");
-                    m = TransitionKt$$ExternalSyntheticOutline0.m(new StringBuilder(), vIDirector.mVIFileName, "_whitebg.json");
+                    strM = TransitionKt$$ExternalSyntheticOutline0.m(new StringBuilder(), vIDirector.mVIFileName, "_whitebg.json");
                 } else {
                     Log.d("KeyguardPunchHoleVIView_VIDirector", "getFaceRecognitionVIFileName() - file name = " + vIDirector.mVIFileName + ".json");
-                    m = TransitionKt$$ExternalSyntheticOutline0.m(new StringBuilder(), vIDirector.mVIFileName, ".json");
+                    strM = TransitionKt$$ExternalSyntheticOutline0.m(new StringBuilder(), vIDirector.mVIFileName, ".json");
                 }
-                if (TextUtils.isEmpty(m)) {
-                    MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("prepareVI() - return, no VI file : ", m, keyguardPunchHoleVIView.TAG);
-                } else if (TextUtils.equals(m, keyguardPunchHoleVIView.mAppliedVIFileName)) {
-                    MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("prepareVI() - return, already applied : ", m, keyguardPunchHoleVIView.TAG);
+                if (TextUtils.isEmpty(strM)) {
+                    MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("prepareVI() - return, no VI file : ", strM, keyguardPunchHoleVIView.TAG);
+                } else if (TextUtils.equals(strM, keyguardPunchHoleVIView.mAppliedVIFileName)) {
+                    MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("prepareVI() - return, already applied : ", strM, keyguardPunchHoleVIView.TAG);
                 } else {
-                    keyguardPunchHoleVIView.mAppliedVIFileName = m;
+                    keyguardPunchHoleVIView.mAppliedVIFileName = strM;
                     try {
-                        LottieTask fromAsset = LottieCompositionFactory.fromAsset(keyguardPunchHoleVIView.getContext(), m);
-                        fromAsset.addListener(new LottieListener() { // from class: com.android.keyguard.punchhole.KeyguardPunchHoleVIView$$ExternalSyntheticLambda1
+                        LottieTask lottieTaskFromAsset = LottieCompositionFactory.fromAsset(keyguardPunchHoleVIView.getContext(), strM);
+                        lottieTaskFromAsset.addListener(new LottieListener() { // from class: com.android.keyguard.punchhole.KeyguardPunchHoleVIView$$ExternalSyntheticLambda1
                             @Override // com.airbnb.lottie.LottieListener
                             public final void onResult(Object obj) {
-                                KeyguardPunchHoleVIView keyguardPunchHoleVIView2 = KeyguardPunchHoleVIView.this;
+                                KeyguardPunchHoleVIView keyguardPunchHoleVIView2 = keyguardPunchHoleVIView;
                                 Log.d(keyguardPunchHoleVIView2.TAG, "prepareVI() - VI is prepared");
                                 keyguardPunchHoleVIView2.mVIView.setComposition((LottieComposition) obj);
                                 keyguardPunchHoleVIView2.mVIView.setRepeatCount(-1);
@@ -430,11 +427,11 @@ public class KeyguardPunchHoleVIViewController extends ViewController implements
                                 }
                             }
                         });
-                        fromAsset.addFailureListener(new LottieListener() { // from class: com.android.keyguard.punchhole.KeyguardPunchHoleVIView$$ExternalSyntheticLambda2
+                        lottieTaskFromAsset.addFailureListener(new LottieListener() { // from class: com.android.keyguard.punchhole.KeyguardPunchHoleVIView$$ExternalSyntheticLambda2
                             @Override // com.airbnb.lottie.LottieListener
                             public final void onResult(Object obj) {
-                                KeyguardPunchHoleVIView keyguardPunchHoleVIView2 = KeyguardPunchHoleVIView.this;
-                                Log.e(keyguardPunchHoleVIView2.TAG, "Unable to parse json composition : " + m);
+                                KeyguardPunchHoleVIView keyguardPunchHoleVIView2 = keyguardPunchHoleVIView;
+                                Log.e(keyguardPunchHoleVIView2.TAG, "Unable to parse json composition : " + strM);
                                 keyguardPunchHoleVIView2.setPrepareState(0);
                             }
                         });
@@ -519,16 +516,16 @@ public class KeyguardPunchHoleVIViewController extends ViewController implements
     public final void updatePunchHoleColor() {
         PluginLockStarManager pluginLockStarManager = this.mPluginLockStarManager;
         if (pluginLockStarManager != null) {
-            Color color = null;
+            Color colorValueOf = null;
             if (pluginLockStarManager.getLockStarValues() != null) {
                 try {
-                    color = Color.valueOf(pluginLockStarManager.getLockStarValues().getPunchHoleColor());
+                    colorValueOf = Color.valueOf(pluginLockStarManager.getLockStarValues().getPunchHoleColor());
                 } catch (Throwable th) {
                     Log.w("LStar|PluginLockStarManager", "getPunchHoleColor() failed " + th.getMessage());
                 }
             }
-            if (color != null) {
-                final int argb = color.toArgb();
+            if (colorValueOf != null) {
+                final int argb = colorValueOf.toArgb();
                 final KeyguardPunchHoleVIView keyguardPunchHoleVIView = (KeyguardPunchHoleVIView) this.mView;
                 keyguardPunchHoleVIView.mVIView.addValueCallback(new KeyPath("**"), (KeyPath) LottieProperty.COLOR_FILTER, new SimpleLottieValueCallback(keyguardPunchHoleVIView, argb) { // from class: com.android.keyguard.punchhole.KeyguardPunchHoleVIView.1
                     public final /* synthetic */ int val$color;

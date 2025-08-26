@@ -3,6 +3,7 @@ package com.android.systemui.statusbar.phone;
 import android.R;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Insets;
 import android.graphics.Rect;
@@ -34,7 +35,6 @@ import java.util.Objects;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class KeyguardStatusBarView extends RelativeLayout implements KnoxStatusBarViewControl {
     public boolean isMultiUserAvatarHidden;
@@ -52,7 +52,6 @@ public class KeyguardStatusBarView extends RelativeLayout implements KnoxStatusB
     public ImageView mMultiUserAvatar;
     public String mMultiUserName;
     public NetspeedView mNetspeedView;
-    public int mNotifIconColor;
     public WindowInsets mPreviousInsets;
     public boolean mShowPercentAvailable;
     public ViewGroup mStatusIconArea;
@@ -97,7 +96,7 @@ public class KeyguardStatusBarView extends RelativeLayout implements KnoxStatusB
     }
 
     @Override // android.view.View
-    public final void onFinishInflate() {
+    public final void onFinishInflate() throws Resources.NotFoundException {
         super.onFinishInflate();
         this.mSystemIconsContainer = findViewById(com.android.systemui.R.id.system_icons_container);
         this.mSystemIcons = findViewById(com.android.systemui.R.id.system_icons);
@@ -139,9 +138,10 @@ public class KeyguardStatusBarView extends RelativeLayout implements KnoxStatusB
         Trace.endSection();
     }
 
-    public final void onOverlayChanged() {
+    public final void onOverlayChanged(float f) throws Resources.NotFoundException {
         this.mCarrierLabel.setTextAppearance(Utils.getThemeAttr(R.attr.textAppearanceSmall, ((RelativeLayout) this).mContext));
-        this.mCarrierLabel.setTextAppearance(com.android.systemui.R.style.TextAppearance_StatusBar_Default);
+        this.mCarrierLabel.setTextAppearance(com.android.systemui.R.style.TextAppearance_Keyguard_Status_SamsungCarriers);
+        this.mCarrierLabel.setTextSize(0, getResources().getDimensionPixelSize(com.android.systemui.R.dimen.status_bar_clock_size) * f);
         BatteryMeterView batteryMeterView = this.mBatteryView;
         if (batteryMeterView != null) {
             batteryMeterView.updateShowPercent();
@@ -161,56 +161,45 @@ public class KeyguardStatusBarView extends RelativeLayout implements KnoxStatusB
         updateIconsAndTextColors(tintedIconManager);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:10:0x0040, code lost:
-    
-        if (java.lang.Double.compare(r1, 1.0d) != 0) goto L13;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:12:0x0042  */
     @Override // android.view.View
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void setAlpha(float r8) {
-        /*
-            r7 = this;
-            com.android.systemui.statusbar.phone.KeyguardStatusBarViewExt r0 = r7.mExt
-            float r1 = r0.alpha
-            int r1 = java.lang.Float.compare(r1, r8)
-            if (r1 == 0) goto L45
-            float r1 = r0.alpha
-            r0.alpha = r8
-            java.lang.Class<com.android.systemui.statusbar.phone.nio.KeyguardStatusBarNioLayoutRepository> r2 = com.android.systemui.statusbar.phone.nio.KeyguardStatusBarNioLayoutRepository.class
-            com.android.systemui.Dependency r3 = com.android.systemui.Dependency.sDependency
-            java.lang.Object r2 = r3.getDependencyInner(r2)
-            com.android.systemui.statusbar.phone.nio.KeyguardStatusBarNioLayoutRepository r2 = (com.android.systemui.statusbar.phone.nio.KeyguardStatusBarNioLayoutRepository) r2
-            float r3 = r0.alpha
-            com.android.systemui.statusbar.phone.nio.KeyguardStatusBarNioLayoutModel r2 = r2.nioLayoutModel
-            com.android.systemui.statusbar.phone.nio.KeyguardStatusBarNioLayoutRepository$updateKeyguardStatusBarViewAlpha$1$1 r4 = new com.android.systemui.statusbar.phone.nio.KeyguardStatusBarNioLayoutRepository$updateKeyguardStatusBarViewAlpha$1$1
-            r4.<init>()
-            r2.updateValues(r4)
-            double r1 = (double) r1
-            r3 = 0
-            int r5 = java.lang.Double.compare(r1, r3)
-            if (r5 == 0) goto L42
-            r5 = 4607182418800017408(0x3ff0000000000000, double:1.0)
-            int r1 = java.lang.Double.compare(r1, r5)
-            if (r1 == 0) goto L42
-            double r1 = (double) r8
-            int r3 = java.lang.Double.compare(r1, r3)
-            if (r3 == 0) goto L42
-            int r1 = java.lang.Double.compare(r1, r5)
-            if (r1 != 0) goto L45
-        L42:
-            r0.printStatusLog()
-        L45:
-            super.setAlpha(r8)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.phone.KeyguardStatusBarView.setAlpha(float):void");
+    public final void setAlpha(float f) {
+        KeyguardStatusBarViewExt keyguardStatusBarViewExt = this.mExt;
+        if (Float.compare(keyguardStatusBarViewExt.alpha, f) != 0) {
+            float f2 = keyguardStatusBarViewExt.alpha;
+            keyguardStatusBarViewExt.alpha = f;
+            KeyguardStatusBarNioLayoutRepository keyguardStatusBarNioLayoutRepository = (KeyguardStatusBarNioLayoutRepository) Dependency.sDependency.getDependencyInner(KeyguardStatusBarNioLayoutRepository.class);
+            final float f3 = keyguardStatusBarViewExt.alpha;
+            final KeyguardStatusBarNioLayoutModel keyguardStatusBarNioLayoutModel = keyguardStatusBarNioLayoutRepository.nioLayoutModel;
+            keyguardStatusBarNioLayoutModel.updateValues(new Runnable() { // from class: com.android.systemui.statusbar.phone.nio.KeyguardStatusBarNioLayoutRepository$updateKeyguardStatusBarViewAlpha$1$1
+                @Override // java.lang.Runnable
+                public final void run() {
+                    KeyguardStatusBarNioLayoutModel keyguardStatusBarNioLayoutModel2 = keyguardStatusBarNioLayoutModel;
+                    float f4 = f3;
+                    if (keyguardStatusBarNioLayoutModel2.keyguardStatusBarViewAlpha == f4) {
+                        return;
+                    }
+                    keyguardStatusBarNioLayoutModel2.keyguardStatusBarViewAlpha = f4;
+                    keyguardStatusBarNioLayoutModel2.isUpdatedModel = true;
+                }
+            });
+            double d = f2;
+            if (Double.compare(d, 0.0d) == 0 || Double.compare(d, 1.0d) == 0) {
+                keyguardStatusBarViewExt.printStatusLog();
+            } else {
+                double d2 = f;
+                if (Double.compare(d2, 0.0d) == 0 || Double.compare(d2, 1.0d) == 0) {
+                }
+            }
+        }
+        super.setAlpha(f);
     }
 
     @Override // android.view.View
-    public final void setVisibility(int i) {
+    public final void setVisibility(int i) throws Resources.NotFoundException {
         KeyguardStatusBarViewExt keyguardStatusBarViewExt = this.mExt;
         if (keyguardStatusBarViewExt.visibility != i) {
             keyguardStatusBarViewExt.visibility = i;
@@ -220,7 +209,7 @@ public class KeyguardStatusBarView extends RelativeLayout implements KnoxStatusB
             keyguardStatusBarNioLayoutModel.updateValues(new Runnable() { // from class: com.android.systemui.statusbar.phone.nio.KeyguardStatusBarNioLayoutRepository$updateKeyguardStatusBarViewVisibility$1$1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    KeyguardStatusBarNioLayoutModel keyguardStatusBarNioLayoutModel2 = KeyguardStatusBarNioLayoutModel.this;
+                    KeyguardStatusBarNioLayoutModel keyguardStatusBarNioLayoutModel2 = keyguardStatusBarNioLayoutModel;
                     int i3 = i2;
                     if (keyguardStatusBarNioLayoutModel2.keyguardStatusBarViewVisibility != i3) {
                         keyguardStatusBarNioLayoutModel2.keyguardStatusBarViewVisibility = i3;
@@ -244,9 +233,9 @@ public class KeyguardStatusBarView extends RelativeLayout implements KnoxStatusB
     public final void updateIconsAndTextColors(TintedIconManager tintedIconManager) {
         NetspeedView netspeedView;
         int colorAttrDefaultColor = Utils.getColorAttrDefaultColor(((RelativeLayout) this).mContext, com.android.systemui.R.attr.wallpaperTextColor, 0);
-        double luminance = Color.luminance(colorAttrDefaultColor);
-        int colorStateListDefaultColor = Utils.getColorStateListDefaultColor(luminance < 0.5d ? com.android.systemui.R.color.dark_mode_icon_color_single_tone : com.android.systemui.R.color.light_mode_icon_color_single_tone, ((RelativeLayout) this).mContext);
-        int i = luminance < 0.5d ? -301989889 : -16777216;
+        double dLuminance = Color.luminance(colorAttrDefaultColor);
+        int colorStateListDefaultColor = Utils.getColorStateListDefaultColor(dLuminance < 0.5d ? com.android.systemui.R.color.dark_mode_icon_color_single_tone : com.android.systemui.R.color.light_mode_icon_color_single_tone, ((RelativeLayout) this).mContext);
+        int i = dLuminance < 0.5d ? -301989889 : -16777216;
         float f = colorAttrDefaultColor == -1 ? 0.0f : 1.0f;
         KeyguardStatusBarWallpaperHelper keyguardStatusBarWallpaperHelper = this.mKeyguardStatusBarWallpaperHelper;
         if (keyguardStatusBarWallpaperHelper != null) {
@@ -256,7 +245,6 @@ public class KeyguardStatusBarView extends RelativeLayout implements KnoxStatusB
             i = i2;
         }
         this.mCarrierLabel.setTextColor(colorStateListDefaultColor);
-        this.mNotifIconColor = colorStateListDefaultColor;
         TextView textView = (TextView) this.mUserSwitcherContainer.findViewById(com.android.systemui.R.id.current_user_name);
         if (textView != null) {
             textView.setTextColor(Utils.getColorStateListDefaultColor(com.android.systemui.R.color.light_mode_icon_color_single_tone, ((RelativeLayout) this).mContext));
@@ -273,14 +261,14 @@ public class KeyguardStatusBarView extends RelativeLayout implements KnoxStatusB
         }
         this.mDarkChange.updateState(null, new SysuiDarkIconDispatcher$DarkChange(this.mEmptyTintRect, f, colorStateListDefaultColor));
         ArrayList<Rect> arrayList = this.mEmptyTintRect;
-        KeyEvent.Callback findViewById = findViewById(com.android.systemui.R.id.battery);
-        if (findViewById instanceof DarkIconDispatcher.DarkReceiver) {
-            ((DarkIconDispatcher.DarkReceiver) findViewById).onDarkChanged(arrayList, f, colorStateListDefaultColor);
+        KeyEvent.Callback callbackFindViewById = findViewById(com.android.systemui.R.id.battery);
+        if (callbackFindViewById instanceof DarkIconDispatcher.DarkReceiver) {
+            ((DarkIconDispatcher.DarkReceiver) callbackFindViewById).onDarkChanged(arrayList, f, colorStateListDefaultColor);
         }
         ArrayList<Rect> arrayList2 = this.mEmptyTintRect;
-        KeyEvent.Callback findViewById2 = findViewById(com.android.systemui.R.id.clock);
-        if (findViewById2 instanceof DarkIconDispatcher.DarkReceiver) {
-            ((DarkIconDispatcher.DarkReceiver) findViewById2).onDarkChanged(arrayList2, f, colorStateListDefaultColor);
+        KeyEvent.Callback callbackFindViewById2 = findViewById(com.android.systemui.R.id.clock);
+        if (callbackFindViewById2 instanceof DarkIconDispatcher.DarkReceiver) {
+            ((DarkIconDispatcher.DarkReceiver) callbackFindViewById2).onDarkChanged(arrayList2, f, colorStateListDefaultColor);
         }
         if (!BasicRune.STATUS_REAL_TIME_NETWORK_SPEED || (netspeedView = this.mNetspeedView) == null) {
             return;
@@ -288,7 +276,7 @@ public class KeyguardStatusBarView extends RelativeLayout implements KnoxStatusB
         netspeedView.onDarkChanged(this.mEmptyTintRect, f, colorStateListDefaultColor);
     }
 
-    public final void updateVisibilities() {
+    public final void updateVisibilities() throws Resources.NotFoundException {
         if (!this.mKeyguardUserAvatarEnabled) {
             ViewParent parent = this.mMultiUserAvatar.getParent();
             ViewGroup viewGroup = this.mStatusIconArea;

@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Point;
@@ -45,7 +46,6 @@ import java.util.Iterator;
 import java.util.Set;
 import noticolorpicker.NotificationColorPicker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class ActivatableNotificationView extends ExpandableOutlineView {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -75,7 +75,7 @@ public abstract class ActivatableNotificationView extends ExpandableOutlineView 
     public Gefingerpoken mTouchHandler;
 
     /* renamed from: -$$Nest$mgetCujType, reason: not valid java name */
-    public static int m3065$$Nest$mgetCujType(ActivatableNotificationView activatableNotificationView, boolean z) {
+    public static int m3082$$Nest$mgetCujType(ActivatableNotificationView activatableNotificationView, boolean z) {
         return activatableNotificationView.mIsHeadsUpAnimation ? z ? 12 : 13 : z ? 14 : 15;
     }
 
@@ -181,10 +181,10 @@ public abstract class ActivatableNotificationView extends ExpandableOutlineView 
     @Override // android.view.ViewGroup, android.view.View
     public final boolean dispatchTouchEvent(MotionEvent motionEvent) {
         String simpleName = getClass().getSimpleName();
-        boolean dispatchTouchEvent = super.dispatchTouchEvent(motionEvent);
+        boolean zDispatchTouchEvent = super.dispatchTouchEvent(motionEvent);
         TouchLogger.Companion.getClass();
-        TouchLogger.Companion.logDispatchTouch(motionEvent, simpleName, dispatchTouchEvent);
-        return dispatchTouchEvent;
+        TouchLogger.Companion.logDispatchTouch(motionEvent, simpleName, zDispatchTouchEvent);
+        return zDispatchTouchEvent;
     }
 
     @Override // android.view.ViewGroup, android.view.View
@@ -227,7 +227,7 @@ public abstract class ActivatableNotificationView extends ExpandableOutlineView 
         return false;
     }
 
-    public final void initBackground() {
+    public final void initBackground() throws Resources.NotFoundException {
         NotificationEntry notificationEntry;
         NotificationEntry notificationEntry2;
         ExpandableNotificationRow expandableNotificationRow = this instanceof ExpandableNotificationRow ? (ExpandableNotificationRow) this : null;
@@ -454,14 +454,14 @@ public abstract class ActivatableNotificationView extends ExpandableOutlineView 
         if (this.mIsHeadsUpCycling) {
             this.mCurrentAppearInterpolator = Interpolators.LINEAR;
         }
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(this.mAppearAnimationFraction, f2);
-        this.mAppearAnimator = ofFloat;
-        ofFloat.setInterpolator(!this.mIsHeadsUpCycling ? Interpolators.LINEAR : this.mCurrentAppearInterpolator);
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(this.mAppearAnimationFraction, f2);
+        this.mAppearAnimator = valueAnimatorOfFloat;
+        valueAnimatorOfFloat.setInterpolator(!this.mIsHeadsUpCycling ? Interpolators.LINEAR : this.mCurrentAppearInterpolator);
         this.mAppearAnimator.setDuration((long) (Math.abs(this.mAppearAnimationFraction - f2) * j2));
         this.mAppearAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.notification.row.ActivatableNotificationView$$ExternalSyntheticLambda1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator2) {
-                ActivatableNotificationView activatableNotificationView = ActivatableNotificationView.this;
+                ActivatableNotificationView activatableNotificationView = this.f$0;
                 ExpandableView.ClipSide clipSide2 = clipSide;
                 int i2 = ActivatableNotificationView.$r8$clinit;
                 activatableNotificationView.getClass();
@@ -499,9 +499,9 @@ public abstract class ActivatableNotificationView extends ExpandableOutlineView 
                 }
                 ActivatableNotificationView.this.onAppearAnimationFinished(z, !this.mRunWithoutInterruptions);
                 if (this.mRunWithoutInterruptions) {
-                    InteractionJankMonitor.getInstance().end(ActivatableNotificationView.m3065$$Nest$mgetCujType(ActivatableNotificationView.this, z));
+                    InteractionJankMonitor.getInstance().end(ActivatableNotificationView.m3082$$Nest$mgetCujType(ActivatableNotificationView.this, z));
                 } else {
-                    InteractionJankMonitor.getInstance().cancel(ActivatableNotificationView.m3065$$Nest$mgetCujType(ActivatableNotificationView.this, z));
+                    InteractionJankMonitor.getInstance().cancel(ActivatableNotificationView.m3082$$Nest$mgetCujType(ActivatableNotificationView.this, z));
                 }
             }
 
@@ -513,14 +513,14 @@ public abstract class ActivatableNotificationView extends ExpandableOutlineView 
                 }
                 ActivatableNotificationView.this.onAppearAnimationStarted(z);
                 this.mRunWithoutInterruptions = true;
-                InteractionJankMonitor.getInstance().begin(InteractionJankMonitor.Configuration.Builder.withView(ActivatableNotificationView.m3065$$Nest$mgetCujType(ActivatableNotificationView.this, z), ActivatableNotificationView.this));
+                InteractionJankMonitor.getInstance().begin(InteractionJankMonitor.Configuration.Builder.withView(ActivatableNotificationView.m3082$$Nest$mgetCujType(ActivatableNotificationView.this, z), ActivatableNotificationView.this));
             }
         });
         final ValueAnimator valueAnimator2 = this.mAppearAnimator;
         Choreographer.getInstance().postFrameCallbackDelayed(new Choreographer.FrameCallback() { // from class: com.android.systemui.statusbar.notification.row.ActivatableNotificationView$$ExternalSyntheticLambda2
             @Override // android.view.Choreographer.FrameCallback
             public final void doFrame(long j3) {
-                ActivatableNotificationView activatableNotificationView = ActivatableNotificationView.this;
+                ActivatableNotificationView activatableNotificationView = this.f$0;
                 ValueAnimator valueAnimator3 = valueAnimator2;
                 boolean z2 = z;
                 ValueAnimator valueAnimator4 = activatableNotificationView.mAppearAnimator;
@@ -626,9 +626,9 @@ public abstract class ActivatableNotificationView extends ExpandableOutlineView 
         NotificationColorPicker notificationColorPicker = (NotificationColorPicker) Dependency.sDependency.getDependencyInner(NotificationColorPicker.class);
         notificationColorPicker.getClass();
         if (NotificationColorPicker.isNeedToUpdated((ExpandableNotificationRow) this)) {
-            float interpolate = NotificationUtils.interpolate(notificationColorPicker.isDarkMode$1() ? 56 : 102, notificationColorPicker.mCustomedAlpha, f);
+            float fInterpolate = NotificationUtils.interpolate(notificationColorPicker.isDarkMode$1() ? 56 : 102, notificationColorPicker.mCustomedAlpha, f);
             NotificationBackgroundView notificationBackgroundView = this.mBackgroundNormal;
-            int i = (int) interpolate;
+            int i = (int) fInterpolate;
             notificationBackgroundView.mDrawableAlpha = i;
             if (notificationBackgroundView.mExpandAnimationRunning) {
                 return;
@@ -646,21 +646,21 @@ public abstract class ActivatableNotificationView extends ExpandableOutlineView 
         NotificationBackgroundView notificationBackgroundView = this.mBackgroundNormal;
         SeslRecoilDrawable seslRecoilDrawable = notificationBackgroundView.mBackground;
         notificationBackgroundView.mRippleColor = null;
-        int calculateBgColor = calculateBgColor(true, true);
+        int iCalculateBgColor = calculateBgColor(true, true);
         if (!z) {
-            setBackgroundTintColor(calculateBgColor);
+            setBackgroundTintColor(iCalculateBgColor);
             return;
         }
         int i = this.mCurrentBackgroundTint;
-        if (calculateBgColor != i) {
+        if (iCalculateBgColor != i) {
             this.mStartTint = i;
-            this.mTargetTint = calculateBgColor;
-            ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-            this.mBackgroundColorAnimator = ofFloat;
-            ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.notification.row.ActivatableNotificationView$$ExternalSyntheticLambda0
+            this.mTargetTint = iCalculateBgColor;
+            ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+            this.mBackgroundColorAnimator = valueAnimatorOfFloat;
+            valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.notification.row.ActivatableNotificationView$$ExternalSyntheticLambda0
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public final void onAnimationUpdate(ValueAnimator valueAnimator2) {
-                    ActivatableNotificationView activatableNotificationView = ActivatableNotificationView.this;
+                    ActivatableNotificationView activatableNotificationView = this.f$0;
                     activatableNotificationView.setBackgroundTintColor(NotificationUtils.interpolateColors(valueAnimator2.getAnimatedFraction(), activatableNotificationView.mStartTint, activatableNotificationView.mTargetTint));
                 }
             });

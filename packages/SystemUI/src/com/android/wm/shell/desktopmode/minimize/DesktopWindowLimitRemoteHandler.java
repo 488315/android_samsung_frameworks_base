@@ -15,7 +15,6 @@ import com.android.wm.shell.transition.Transitions;
 import java.util.Iterator;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class DesktopWindowLimitRemoteHandler implements Transitions.TransitionHandler {
     public final OneShotRemoteHandler oneShotRemoteHandler;
@@ -37,24 +36,24 @@ public final class DesktopWindowLimitRemoteHandler implements Transitions.Transi
 
     @Override // com.android.wm.shell.transition.Transitions.TransitionHandler
     public final boolean startAnimation(IBinder iBinder, TransitionInfo transitionInfo, SurfaceControl.Transaction transaction, SurfaceControl.Transaction transaction2, Transitions.TransitionFinishCallback transitionFinishCallback) {
-        Object obj;
+        Object next;
         if (!Intrinsics.areEqual(iBinder, this.transition)) {
             return false;
         }
         Iterator it = transitionInfo.getChanges().iterator();
         while (true) {
             if (!it.hasNext()) {
-                obj = null;
+                next = null;
                 break;
             }
-            obj = it.next();
-            TransitionInfo.Change change = (TransitionInfo.Change) obj;
+            next = it.next();
+            TransitionInfo.Change change = (TransitionInfo.Change) next;
             ActivityManager.RunningTaskInfo taskInfo = change.getTaskInfo();
             if (taskInfo != null && taskInfo.taskId == this.taskIdToMinimize && change.getMode() == 4) {
                 break;
             }
         }
-        TransitionInfo.Change change2 = (TransitionInfo.Change) obj;
+        TransitionInfo.Change change2 = (TransitionInfo.Change) next;
         if (change2 == null) {
             return false;
         }

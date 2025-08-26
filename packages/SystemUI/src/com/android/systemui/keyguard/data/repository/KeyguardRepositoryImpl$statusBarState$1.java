@@ -12,7 +12,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class KeyguardRepositoryImpl$statusBarState$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ StatusBarStateController $statusBarStateController;
@@ -53,9 +52,9 @@ final class KeyguardRepositoryImpl$statusBarState$1 extends SuspendLambda implem
                     ChannelExt channelExt = ChannelExt.INSTANCE;
                     int i3 = KeyguardRepositoryImpl.$r8$clinit;
                     keyguardRepositoryImpl.getClass();
-                    StatusBarState statusBarStateIntToObject = KeyguardRepositoryImpl.statusBarStateIntToObject(i2);
+                    StatusBarState statusBarStateStatusBarStateIntToObject = KeyguardRepositoryImpl.statusBarStateIntToObject(i2);
                     channelExt.getClass();
-                    ChannelExt.trySendWithFailureLogging(ProducerScope.this, statusBarStateIntToObject, "KeyguardRepositoryImpl", "state");
+                    ChannelExt.trySendWithFailureLogging(producerScope, statusBarStateStatusBarStateIntToObject, "KeyguardRepositoryImpl", "state");
                 }
             };
             this.$statusBarStateController.addCallback(stateListener);

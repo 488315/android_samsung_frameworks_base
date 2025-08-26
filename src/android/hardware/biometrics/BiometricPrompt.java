@@ -10,7 +10,6 @@ import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.hardware.biometrics.BiometricAuthenticator;
-import android.hardware.biometrics.BiometricPrompt;
 import android.hardware.biometrics.IAuthService;
 import android.hardware.biometrics.IBiometricServiceReceiver;
 import android.hardware.face.FaceManager;
@@ -323,9 +322,9 @@ public class BiometricPrompt implements BiometricAuthenticator, BiometricConstan
         public BiometricPrompt build() {
             CharSequence title = this.mPromptInfo.getTitle();
             CharSequence negativeButtonText = this.mPromptInfo.getNegativeButtonText();
-            boolean isUseDefaultTitle = this.mPromptInfo.isUseDefaultTitle();
+            boolean zIsUseDefaultTitle = this.mPromptInfo.isUseDefaultTitle();
             boolean z = this.mPromptInfo.isDeviceCredentialAllowed() || BiometricPrompt.isCredentialAllowed(this.mPromptInfo.getAuthenticators());
-            if (TextUtils.isEmpty(title) && !isUseDefaultTitle) {
+            if (TextUtils.isEmpty(title) && !zIsUseDefaultTitle) {
                 throw new IllegalArgumentException("Title must be set and non-empty");
             }
             if (TextUtils.isEmpty(negativeButtonText) && !z) {
@@ -334,11 +333,11 @@ public class BiometricPrompt implements BiometricAuthenticator, BiometricConstan
             if (!TextUtils.isEmpty(negativeButtonText) && z) {
                 throw new IllegalArgumentException("Can't have both negative button behavior and device credential enabled");
             }
-            IAuthService iAuthService = this.mService;
-            if (iAuthService == null) {
-                iAuthService = IAuthService.Stub.asInterface(ServiceManager.getService(Context.AUTH_SERVICE));
+            IAuthService iAuthServiceAsInterface = this.mService;
+            if (iAuthServiceAsInterface == null) {
+                iAuthServiceAsInterface = IAuthService.Stub.asInterface(ServiceManager.getService(Context.AUTH_SERVICE));
             }
-            this.mService = iAuthService;
+            this.mService = iAuthServiceAsInterface;
             return new BiometricPrompt(this.mContext, this.mPromptInfo, this.mNegativeButtonInfo, this.mContentViewMoreOptionsButtonInfo, this.mService);
         }
     }
@@ -372,7 +371,7 @@ public class BiometricPrompt implements BiometricAuthenticator, BiometricConstan
             BiometricPrompt.this.mExecutor.execute(new Runnable() { // from class: android.hardware.biometrics.BiometricPrompt$1$$ExternalSyntheticLambda4
                 @Override // java.lang.Runnable
                 public final void run() {
-                    BiometricPrompt.AnonymousClass1.this.lambda$onAuthenticationSucceeded$0(i);
+                    this.f$0.lambda$onAuthenticationSucceeded$0(i);
                 }
             });
         }
@@ -389,7 +388,7 @@ public class BiometricPrompt implements BiometricAuthenticator, BiometricConstan
             BiometricPrompt.this.mExecutor.execute(new Runnable() { // from class: android.hardware.biometrics.BiometricPrompt$1$$ExternalSyntheticLambda6
                 @Override // java.lang.Runnable
                 public final void run() {
-                    BiometricPrompt.AnonymousClass1.this.lambda$onAuthenticationFailed$1();
+                    this.f$0.lambda$onAuthenticationFailed$1();
                 }
             });
         }
@@ -425,7 +424,7 @@ public class BiometricPrompt implements BiometricAuthenticator, BiometricConstan
             BiometricPrompt.this.mExecutor.execute(new Runnable() { // from class: android.hardware.biometrics.BiometricPrompt$1$$ExternalSyntheticLambda5
                 @Override // java.lang.Runnable
                 public final void run() {
-                    BiometricPrompt.AnonymousClass1.this.lambda$onError$2(i2, errorString);
+                    this.f$0.lambda$onError$2(i2, errorString);
                 }
             });
         }
@@ -441,7 +440,7 @@ public class BiometricPrompt implements BiometricAuthenticator, BiometricConstan
             BiometricPrompt.this.mExecutor.execute(new Runnable() { // from class: android.hardware.biometrics.BiometricPrompt$1$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    BiometricPrompt.AnonymousClass1.this.lambda$onAcquired$3(i, str);
+                    this.f$0.lambda$onAcquired$3(i, str);
                 }
             });
         }
@@ -459,7 +458,7 @@ public class BiometricPrompt implements BiometricAuthenticator, BiometricConstan
                     BiometricPrompt.this.mNegativeButtonInfo.executor.execute(new Runnable() { // from class: android.hardware.biometrics.BiometricPrompt$1$$ExternalSyntheticLambda2
                         @Override // java.lang.Runnable
                         public final void run() {
-                            BiometricPrompt.AnonymousClass1.this.lambda$onDialogDismissed$4();
+                            this.f$0.lambda$onDialogDismissed$4();
                         }
                     });
                     return;
@@ -473,7 +472,7 @@ public class BiometricPrompt implements BiometricAuthenticator, BiometricConstan
                     BiometricPrompt.this.mContentViewMoreOptionsButtonInfo.executor.execute(new Runnable() { // from class: android.hardware.biometrics.BiometricPrompt$1$$ExternalSyntheticLambda3
                         @Override // java.lang.Runnable
                         public final void run() {
-                            BiometricPrompt.AnonymousClass1.this.lambda$onDialogDismissed$5();
+                            this.f$0.lambda$onDialogDismissed$5();
                         }
                     });
                 }
@@ -500,7 +499,7 @@ public class BiometricPrompt implements BiometricAuthenticator, BiometricConstan
             BiometricPrompt.this.mExecutor.execute(new Runnable() { // from class: android.hardware.biometrics.BiometricPrompt$1$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    BiometricPrompt.AnonymousClass1.this.lambda$onSystemEvent$6(i);
+                    this.f$0.lambda$onSystemEvent$6(i);
                 }
             });
         }
@@ -516,7 +515,7 @@ public class BiometricPrompt implements BiometricAuthenticator, BiometricConstan
             BiometricPrompt.this.mExecutor.execute(new Runnable() { // from class: android.hardware.biometrics.BiometricPrompt$1$$ExternalSyntheticLambda7
                 @Override // java.lang.Runnable
                 public final void run() {
-                    BiometricPrompt.AnonymousClass1.this.lambda$onSemAuthenticationSucceeded$7(i, bArr, i2);
+                    this.f$0.lambda$onSemAuthenticationSucceeded$7(i, bArr, i2);
                 }
             });
         }
@@ -805,16 +804,16 @@ public class BiometricPrompt implements BiometricAuthenticator, BiometricConstan
                 this.mExecutor.execute(new Runnable() { // from class: android.hardware.biometrics.BiometricPrompt$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        BiometricPrompt.this.lambda$authenticateInternal$0(string);
+                        this.f$0.lambda$authenticateInternal$0(string);
                     }
                 });
                 return -1L;
             }
             if (j != 0) {
-                Parcel obtain = Parcel.obtain();
-                this.mPromptInfo.writeToParcel(obtain, 0);
-                obtain.setDataPosition(0);
-                promptInfo = new PromptInfo(obtain);
+                Parcel parcelObtain = Parcel.obtain();
+                this.mPromptInfo.writeToParcel(parcelObtain, 0);
+                parcelObtain.setDataPosition(0);
+                promptInfo = new PromptInfo(parcelObtain);
                 if (promptInfo.getAuthenticators() == 0) {
                     promptInfo.setAuthenticators(15);
                 }
@@ -823,16 +822,16 @@ public class BiometricPrompt implements BiometricAuthenticator, BiometricConstan
             }
             PromptInfo promptInfo2 = promptInfo;
             semSetExtraInfo(promptInfo2);
-            long authenticate = this.mService.authenticate(this.mToken, j, i, this.mBiometricServiceReceiver, this.mContext.getPackageName(), promptInfo2);
-            cancellationSignal.setOnCancelListener(new OnAuthenticationCancelListener(authenticate));
+            long jAuthenticate = this.mService.authenticate(this.mToken, j, i, this.mBiometricServiceReceiver, this.mContext.getPackageName(), promptInfo2);
+            cancellationSignal.setOnCancelListener(new OnAuthenticationCancelListener(jAuthenticate));
             this.mIsPromptShowing = true;
-            return authenticate;
+            return jAuthenticate;
         } catch (RemoteException e) {
             Log.e(TAG, "Remote exception while authenticating", e);
             this.mExecutor.execute(new Runnable() { // from class: android.hardware.biometrics.BiometricPrompt$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    BiometricPrompt.this.lambda$authenticateInternal$1(authenticationCallback);
+                    this.f$0.lambda$authenticateInternal$1(authenticationCallback);
                 }
             });
             return -1L;
@@ -851,7 +850,7 @@ public class BiometricPrompt implements BiometricAuthenticator, BiometricConstan
 
     /* JADX INFO: Access modifiers changed from: private */
     public static Bitmap convertDrawableToBitmap(Drawable drawable) {
-        Bitmap createBitmap;
+        Bitmap bitmapCreateBitmap;
         if (drawable == null) {
             return null;
         }
@@ -859,14 +858,14 @@ public class BiometricPrompt implements BiometricAuthenticator, BiometricConstan
             return ((BitmapDrawable) drawable).getBitmap();
         }
         if (drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
-            createBitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
+            bitmapCreateBitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
         } else {
-            createBitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+            bitmapCreateBitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
         }
-        Canvas canvas = new Canvas(createBitmap);
+        Canvas canvas = new Canvas(bitmapCreateBitmap);
         drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
         drawable.draw(canvas);
-        return createBitmap;
+        return bitmapCreateBitmap;
     }
 
     public void semAuthenticate(CryptoObject cryptoObject, CancellationSignal cancellationSignal, Executor executor, AuthenticationCallback authenticationCallback, byte[] bArr) {
@@ -886,14 +885,14 @@ public class BiometricPrompt implements BiometricAuthenticator, BiometricConstan
     }
 
     private void semSetExtraInfo(PromptInfo promptInfo) {
-        int i;
+        int displayId;
         try {
-            i = this.mContext.getDisplayId();
+            displayId = this.mContext.getDisplayId();
         } catch (Exception e) {
             Slog.w(TAG, "semSetExtraInfo: " + e.getMessage());
-            i = 0;
+            displayId = 0;
         }
-        promptInfo.semSetDisplayId(i);
+        promptInfo.semSetDisplayId(displayId);
         try {
             Context context = this.mContext;
             if (context instanceof Activity) {

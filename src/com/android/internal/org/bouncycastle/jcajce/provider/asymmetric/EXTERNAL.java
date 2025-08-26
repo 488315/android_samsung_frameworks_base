@@ -24,10 +24,10 @@ public class EXTERNAL {
     private static final Map<String, String> externalAttributes;
 
     static {
-        HashMap hashMap = new HashMap();
-        externalAttributes = hashMap;
-        hashMap.put("SupportedKeyClasses", "com.android.internal.org.bouncycastle.jcajce.ExternalPublicKey");
-        hashMap.put("SupportedKeyFormats", "X.509");
+        HashMap map = new HashMap();
+        externalAttributes = map;
+        map.put("SupportedKeyClasses", "com.android.internal.org.bouncycastle.jcajce.ExternalPublicKey");
+        map.put("SupportedKeyFormats", "X.509");
     }
 
     public static class KeyFactory extends BaseKeyFactorySpi {

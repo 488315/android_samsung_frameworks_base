@@ -11,7 +11,6 @@ import kotlin.coroutines.Continuation;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ScreenSaverEnabledCondition extends Condition {
     public static final String TAG;
@@ -19,7 +18,6 @@ public final class ScreenSaverEnabledCondition extends Condition {
     public final ScreenSaverEnabledCondition$screenSaverSettingObserver$1 screenSaverSettingObserver;
     public final SecureSettings secureSettings;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -46,7 +44,7 @@ public final class ScreenSaverEnabledCondition extends Condition {
 
             @Override // android.database.ContentObserver
             public final void onChange(boolean z) {
-                ScreenSaverEnabledCondition screenSaverEnabledCondition = ScreenSaverEnabledCondition.this;
+                ScreenSaverEnabledCondition screenSaverEnabledCondition = this.this$0;
                 String str = ScreenSaverEnabledCondition.TAG;
                 screenSaverEnabledCondition.updateScreenSaverEnabledSetting();
             }

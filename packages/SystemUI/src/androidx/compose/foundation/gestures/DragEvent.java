@@ -2,11 +2,9 @@ package androidx.compose.foundation.gestures;
 
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class DragEvent {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DragCancelled extends DragEvent {
         public static final DragCancelled INSTANCE = new DragCancelled();
 
@@ -15,7 +13,6 @@ public abstract class DragEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DragDelta extends DragEvent {
         public final long delta;
 
@@ -29,7 +26,6 @@ public abstract class DragEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DragStarted extends DragEvent {
         public final long startPoint;
 
@@ -43,7 +39,6 @@ public abstract class DragEvent {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DragStopped extends DragEvent {
         public final long velocity;
 

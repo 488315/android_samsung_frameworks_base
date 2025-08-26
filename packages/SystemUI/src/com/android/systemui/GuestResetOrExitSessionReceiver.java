@@ -1,6 +1,5 @@
 package com.android.systemui;
 
-import android.R;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -15,7 +14,6 @@ import com.android.systemui.settings.UserTrackerImpl;
 import com.android.systemui.statusbar.phone.SystemUIDialog;
 import com.android.systemui.statusbar.policy.UserSwitcherController;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class GuestResetOrExitSessionReceiver extends BroadcastReceiver {
     public final BroadcastDispatcher mBroadcastDispatcher;
@@ -25,14 +23,12 @@ public final class GuestResetOrExitSessionReceiver extends BroadcastReceiver {
     public final ResetSessionDialogFactory mResetSessionDialogFactory;
     public final UserTracker mUserTracker;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ExitSessionDialogClickListener implements DialogInterface.OnClickListener {
         public final DialogInterface mDialog;
         public final boolean mIsEphemeral;
         public final int mUserId;
         public final UserSwitcherController mUserSwitcherController;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public interface Factory {
             ExitSessionDialogClickListener create(boolean z, int i, DialogInterface dialogInterface);
         }
@@ -71,7 +67,6 @@ public final class GuestResetOrExitSessionReceiver extends BroadcastReceiver {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ExitSessionDialogFactory {
         public final ExitSessionDialogClickListener.Factory mClickListenerFactory;
         public final SystemUIDialog.Factory mDialogFactory;
@@ -84,14 +79,12 @@ public final class GuestResetOrExitSessionReceiver extends BroadcastReceiver {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ResetSessionDialogClickListener implements DialogInterface.OnClickListener {
         public final DialogInterface mDialog;
         public final UiEventLogger mUiEventLogger;
         public final int mUserId;
         public final UserSwitcherController mUserSwitcherController;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public interface Factory {
             ResetSessionDialogClickListener create(int i, DialogInterface dialogInterface);
         }
@@ -117,7 +110,6 @@ public final class GuestResetOrExitSessionReceiver extends BroadcastReceiver {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ResetSessionDialogFactory {
         public final ResetSessionDialogClickListener.Factory mClickListenerFactory;
         public final SystemUIDialog.Factory mDialogFactory;
@@ -130,14 +122,14 @@ public final class GuestResetOrExitSessionReceiver extends BroadcastReceiver {
         }
 
         public final SystemUIDialog create(int i) {
-            SystemUIDialog create = this.mDialogFactory.create();
-            ResetSessionDialogClickListener create2 = this.mClickListenerFactory.create(i, create);
-            create.setTitle(R.string.guest_reset_and_restart_dialog_title);
-            create.setMessage(this.mResources.getString(R.string.guest_reset_and_restart_dialog_message));
-            create.setButton(-3, this.mResources.getString(R.string.cancel), create2);
-            create.setButton(-1, this.mResources.getString(R.string.guest_reset_guest_confirm_button), create2);
-            create.setCanceledOnTouchOutside(false);
-            return create;
+            SystemUIDialog systemUIDialogCreate = this.mDialogFactory.create();
+            ResetSessionDialogClickListener resetSessionDialogClickListenerCreate = this.mClickListenerFactory.create(i, systemUIDialogCreate);
+            systemUIDialogCreate.setTitle(R.string.guest_reset_and_restart_dialog_title);
+            systemUIDialogCreate.setMessage(this.mResources.getString(R.string.guest_reset_and_restart_dialog_message));
+            systemUIDialogCreate.setButton(-3, this.mResources.getString(android.R.string.cancel), resetSessionDialogClickListenerCreate);
+            systemUIDialogCreate.setButton(-1, this.mResources.getString(R.string.guest_reset_guest_confirm_button), resetSessionDialogClickListenerCreate);
+            systemUIDialogCreate.setCanceledOnTouchOutside(false);
+            return systemUIDialogCreate;
         }
     }
 
@@ -164,32 +156,32 @@ public final class GuestResetOrExitSessionReceiver extends BroadcastReceiver {
         UserInfo userInfo = ((UserTrackerImpl) this.mUserTracker).getUserInfo();
         if (userInfo.isGuest()) {
             if ("android.intent.action.GUEST_RESET".equals(action)) {
-                SystemUIDialog create = this.mResetSessionDialogFactory.create(userInfo.id);
-                this.mResetSessionDialog = create;
-                create.show();
+                SystemUIDialog systemUIDialogCreate = this.mResetSessionDialogFactory.create(userInfo.id);
+                this.mResetSessionDialog = systemUIDialogCreate;
+                systemUIDialogCreate.show();
                 return;
             }
             if ("android.intent.action.GUEST_EXIT".equals(action)) {
                 ExitSessionDialogFactory exitSessionDialogFactory = this.mExitSessionDialogFactory;
-                boolean isEphemeral = userInfo.isEphemeral();
+                boolean zIsEphemeral = userInfo.isEphemeral();
                 int i = userInfo.id;
-                SystemUIDialog create2 = exitSessionDialogFactory.mDialogFactory.create();
-                ExitSessionDialogClickListener create3 = exitSessionDialogFactory.mClickListenerFactory.create(isEphemeral, i, create2);
-                if (isEphemeral) {
-                    create2.setTitle(exitSessionDialogFactory.mResources.getString(R.string.guest_exit_dialog_title));
-                    create2.setMessage(exitSessionDialogFactory.mResources.getString(R.string.guest_exit_dialog_message));
-                    create2.setButton(-3, exitSessionDialogFactory.mResources.getString(R.string.cancel), create3);
-                    create2.setButton(-1, exitSessionDialogFactory.mResources.getString(R.string.guest_exit_dialog_button), create3);
+                SystemUIDialog systemUIDialogCreate2 = exitSessionDialogFactory.mDialogFactory.create();
+                ExitSessionDialogClickListener exitSessionDialogClickListenerCreate = exitSessionDialogFactory.mClickListenerFactory.create(zIsEphemeral, i, systemUIDialogCreate2);
+                if (zIsEphemeral) {
+                    systemUIDialogCreate2.setTitle(exitSessionDialogFactory.mResources.getString(R.string.guest_exit_dialog_title));
+                    systemUIDialogCreate2.setMessage(exitSessionDialogFactory.mResources.getString(R.string.guest_exit_dialog_message));
+                    systemUIDialogCreate2.setButton(-3, exitSessionDialogFactory.mResources.getString(android.R.string.cancel), exitSessionDialogClickListenerCreate);
+                    systemUIDialogCreate2.setButton(-1, exitSessionDialogFactory.mResources.getString(R.string.guest_exit_dialog_button), exitSessionDialogClickListenerCreate);
                 } else {
-                    create2.setTitle(exitSessionDialogFactory.mResources.getString(R.string.guest_exit_dialog_title_non_ephemeral));
-                    create2.setMessage(exitSessionDialogFactory.mResources.getString(R.string.guest_exit_dialog_message_non_ephemeral));
-                    create2.setButton(-3, exitSessionDialogFactory.mResources.getString(R.string.cancel), create3);
-                    create2.setButton(-2, exitSessionDialogFactory.mResources.getString(R.string.guest_exit_clear_data_button), create3);
-                    create2.setButton(-1, exitSessionDialogFactory.mResources.getString(R.string.guest_exit_save_data_button), create3);
+                    systemUIDialogCreate2.setTitle(exitSessionDialogFactory.mResources.getString(R.string.guest_exit_dialog_title_non_ephemeral));
+                    systemUIDialogCreate2.setMessage(exitSessionDialogFactory.mResources.getString(R.string.guest_exit_dialog_message_non_ephemeral));
+                    systemUIDialogCreate2.setButton(-3, exitSessionDialogFactory.mResources.getString(android.R.string.cancel), exitSessionDialogClickListenerCreate);
+                    systemUIDialogCreate2.setButton(-2, exitSessionDialogFactory.mResources.getString(R.string.guest_exit_clear_data_button), exitSessionDialogClickListenerCreate);
+                    systemUIDialogCreate2.setButton(-1, exitSessionDialogFactory.mResources.getString(R.string.guest_exit_save_data_button), exitSessionDialogClickListenerCreate);
                 }
-                create2.setCanceledOnTouchOutside(false);
-                this.mExitSessionDialog = create2;
-                create2.show();
+                systemUIDialogCreate2.setCanceledOnTouchOutside(false);
+                this.mExitSessionDialog = systemUIDialogCreate2;
+                systemUIDialogCreate2.show();
             }
         }
     }

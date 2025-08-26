@@ -1,17 +1,57 @@
 package androidx.compose.foundation.gestures;
 
 import androidx.compose.ui.unit.Density;
+import kotlin.ResultKt;
+import kotlin.Unit;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
 import kotlinx.coroutines.internal.Symbol;
 import kotlinx.coroutines.sync.MutexImpl;
 import kotlinx.coroutines.sync.MutexKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class PressGestureScopeImpl implements PressGestureScope, Density {
     public final /* synthetic */ Density $$delegate_0;
     public boolean isCanceled;
     public boolean isReleased;
     public final MutexImpl mutex;
+
+    /* renamed from: androidx.compose.foundation.gestures.PressGestureScopeImpl$reset$1, reason: invalid class name */
+    final class AnonymousClass1 extends ContinuationImpl {
+        Object L$0;
+        int label;
+        /* synthetic */ Object result;
+
+        public AnonymousClass1(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return PressGestureScopeImpl.this.reset(this);
+        }
+    }
+
+    /* renamed from: androidx.compose.foundation.gestures.PressGestureScopeImpl$tryAwaitRelease$1, reason: invalid class name and case insensitive filesystem */
+    final class C06971 extends ContinuationImpl {
+        Object L$0;
+        int label;
+        /* synthetic */ Object result;
+
+        public C06971(Continuation continuation) {
+            super(continuation);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            this.result = obj;
+            this.label |= Integer.MIN_VALUE;
+            return PressGestureScopeImpl.this.tryAwaitRelease(this);
+        }
+    }
 
     public PressGestureScopeImpl(Density density) {
         this.$$delegate_0 = density;
@@ -45,183 +85,140 @@ public final class PressGestureScopeImpl implements PressGestureScope, Density {
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0033  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object reset(kotlin.coroutines.jvm.internal.ContinuationImpl r5) {
-        /*
-            r4 = this;
-            boolean r0 = r5 instanceof androidx.compose.foundation.gestures.PressGestureScopeImpl$reset$1
-            if (r0 == 0) goto L13
-            r0 = r5
-            androidx.compose.foundation.gestures.PressGestureScopeImpl$reset$1 r0 = (androidx.compose.foundation.gestures.PressGestureScopeImpl$reset$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            androidx.compose.foundation.gestures.PressGestureScopeImpl$reset$1 r0 = new androidx.compose.foundation.gestures.PressGestureScopeImpl$reset$1
-            r0.<init>(r4, r5)
-        L18:
-            java.lang.Object r5 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L33
-            if (r2 != r3) goto L2b
-            java.lang.Object r4 = r0.L$0
-            androidx.compose.foundation.gestures.PressGestureScopeImpl r4 = (androidx.compose.foundation.gestures.PressGestureScopeImpl) r4
-            kotlin.ResultKt.throwOnFailure(r5)
-            goto L43
-        L2b:
-            java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-            java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-            r4.<init>(r5)
-            throw r4
-        L33:
-            kotlin.ResultKt.throwOnFailure(r5)
-            kotlinx.coroutines.sync.MutexImpl r5 = r4.mutex
-            r0.L$0 = r4
-            r0.label = r3
-            java.lang.Object r5 = r5.lock(r0)
-            if (r5 != r1) goto L43
-            return r1
-        L43:
-            r5 = 0
-            r4.isReleased = r5
-            r4.isCanceled = r5
-            kotlin.Unit r4 = kotlin.Unit.INSTANCE
-            return r4
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.foundation.gestures.PressGestureScopeImpl.reset(kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object reset(ContinuationImpl continuationImpl) {
+        AnonymousClass1 anonymousClass1;
+        if (continuationImpl instanceof AnonymousClass1) {
+            anonymousClass1 = (AnonymousClass1) continuationImpl;
+            int i = anonymousClass1.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                anonymousClass1.label = i - Integer.MIN_VALUE;
+            } else {
+                anonymousClass1 = new AnonymousClass1(continuationImpl);
+            }
+        }
+        Object obj = anonymousClass1.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = anonymousClass1.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(obj);
+            MutexImpl mutexImpl = this.mutex;
+            anonymousClass1.L$0 = this;
+            anonymousClass1.label = 1;
+            if (mutexImpl.lock(anonymousClass1) == coroutineSingletons) {
+                return coroutineSingletons;
+            }
+        } else {
+            if (i2 != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            this = (PressGestureScopeImpl) anonymousClass1.L$0;
+            ResultKt.throwOnFailure(obj);
+        }
+        this.isReleased = false;
+        this.isCanceled = false;
+        return Unit.INSTANCE;
     }
 
     @Override // androidx.compose.ui.unit.Density
     /* renamed from: roundToPx-0680j_4 */
-    public final int mo51roundToPx0680j_4(float f) {
-        return this.$$delegate_0.mo51roundToPx0680j_4(f);
+    public final int mo52roundToPx0680j_4(float f) {
+        return this.$$delegate_0.mo52roundToPx0680j_4(f);
     }
 
     @Override // androidx.compose.ui.unit.FontScaling
     /* renamed from: toDp-GaN1DYA */
-    public final float mo52toDpGaN1DYA(long j) {
-        return this.$$delegate_0.mo52toDpGaN1DYA(j);
+    public final float mo53toDpGaN1DYA(long j) {
+        return this.$$delegate_0.mo53toDpGaN1DYA(j);
     }
 
     @Override // androidx.compose.ui.unit.Density
     /* renamed from: toDp-u2uoSUM */
-    public final float mo53toDpu2uoSUM(float f) {
-        return this.$$delegate_0.mo53toDpu2uoSUM(f);
+    public final float mo54toDpu2uoSUM(float f) {
+        return this.$$delegate_0.mo54toDpu2uoSUM(f);
     }
 
     @Override // androidx.compose.ui.unit.Density
     /* renamed from: toDpSize-k-rfVVM */
-    public final long mo55toDpSizekrfVVM(long j) {
-        return this.$$delegate_0.mo55toDpSizekrfVVM(j);
+    public final long mo56toDpSizekrfVVM(long j) {
+        return this.$$delegate_0.mo56toDpSizekrfVVM(j);
     }
 
     @Override // androidx.compose.ui.unit.Density
     /* renamed from: toPx--R2X_6o */
-    public final float mo56toPxR2X_6o(long j) {
-        return this.$$delegate_0.mo56toPxR2X_6o(j);
+    public final float mo57toPxR2X_6o(long j) {
+        return this.$$delegate_0.mo57toPxR2X_6o(j);
     }
 
     @Override // androidx.compose.ui.unit.Density
     /* renamed from: toPx-0680j_4 */
-    public final float mo57toPx0680j_4(float f) {
-        return this.$$delegate_0.mo57toPx0680j_4(f);
+    public final float mo58toPx0680j_4(float f) {
+        return this.$$delegate_0.mo58toPx0680j_4(f);
     }
 
     @Override // androidx.compose.ui.unit.Density
     /* renamed from: toSize-XkaWNTQ */
-    public final long mo58toSizeXkaWNTQ(long j) {
-        return this.$$delegate_0.mo58toSizeXkaWNTQ(j);
+    public final long mo59toSizeXkaWNTQ(long j) {
+        return this.$$delegate_0.mo59toSizeXkaWNTQ(j);
     }
 
     @Override // androidx.compose.ui.unit.FontScaling
     /* renamed from: toSp-0xMU5do */
-    public final long mo59toSp0xMU5do(float f) {
-        return this.$$delegate_0.mo59toSp0xMU5do(f);
+    public final long mo60toSp0xMU5do(float f) {
+        return this.$$delegate_0.mo60toSp0xMU5do(f);
     }
 
     @Override // androidx.compose.ui.unit.Density
     /* renamed from: toSp-kPz2Gy4 */
-    public final long mo60toSpkPz2Gy4(float f) {
-        return this.$$delegate_0.mo60toSpkPz2Gy4(f);
+    public final long mo61toSpkPz2Gy4(float f) {
+        return this.$$delegate_0.mo61toSpkPz2Gy4(f);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x0033  */
-    /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+    /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object tryAwaitRelease(kotlin.coroutines.jvm.internal.ContinuationImpl r5) {
-        /*
-            r4 = this;
-            boolean r0 = r5 instanceof androidx.compose.foundation.gestures.PressGestureScopeImpl$tryAwaitRelease$1
-            if (r0 == 0) goto L13
-            r0 = r5
-            androidx.compose.foundation.gestures.PressGestureScopeImpl$tryAwaitRelease$1 r0 = (androidx.compose.foundation.gestures.PressGestureScopeImpl$tryAwaitRelease$1) r0
-            int r1 = r0.label
-            r2 = -2147483648(0xffffffff80000000, float:-0.0)
-            r3 = r1 & r2
-            if (r3 == 0) goto L13
-            int r1 = r1 - r2
-            r0.label = r1
-            goto L18
-        L13:
-            androidx.compose.foundation.gestures.PressGestureScopeImpl$tryAwaitRelease$1 r0 = new androidx.compose.foundation.gestures.PressGestureScopeImpl$tryAwaitRelease$1
-            r0.<init>(r4, r5)
-        L18:
-            java.lang.Object r5 = r0.result
-            kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r2 = r0.label
-            r3 = 1
-            if (r2 == 0) goto L33
-            if (r2 != r3) goto L2b
-            java.lang.Object r4 = r0.L$0
-            androidx.compose.foundation.gestures.PressGestureScopeImpl r4 = (androidx.compose.foundation.gestures.PressGestureScopeImpl) r4
-            kotlin.ResultKt.throwOnFailure(r5)
-            goto L4b
-        L2b:
-            java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-            java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-            r4.<init>(r5)
-            throw r4
-        L33:
-            kotlin.ResultKt.throwOnFailure(r5)
-            boolean r5 = r4.isReleased
-            if (r5 != 0) goto L51
-            boolean r5 = r4.isCanceled
-            if (r5 != 0) goto L51
-            kotlinx.coroutines.sync.MutexImpl r5 = r4.mutex
-            r0.L$0 = r4
-            r0.label = r3
-            java.lang.Object r5 = r5.lock(r0)
-            if (r5 != r1) goto L4b
-            return r1
-        L4b:
-            kotlinx.coroutines.sync.MutexImpl r5 = r4.mutex
-            r0 = 0
-            r5.unlock(r0)
-        L51:
-            boolean r4 = r4.isReleased
-            java.lang.Boolean r4 = java.lang.Boolean.valueOf(r4)
-            return r4
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.compose.foundation.gestures.PressGestureScopeImpl.tryAwaitRelease(kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+    public final Object tryAwaitRelease(ContinuationImpl continuationImpl) {
+        C06971 c06971;
+        if (continuationImpl instanceof C06971) {
+            c06971 = (C06971) continuationImpl;
+            int i = c06971.label;
+            if ((i & Integer.MIN_VALUE) != 0) {
+                c06971.label = i - Integer.MIN_VALUE;
+            } else {
+                c06971 = new C06971(continuationImpl);
+            }
+        }
+        Object obj = c06971.result;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i2 = c06971.label;
+        if (i2 == 0) {
+            ResultKt.throwOnFailure(obj);
+            if (!this.isReleased && !this.isCanceled) {
+                MutexImpl mutexImpl = this.mutex;
+                c06971.L$0 = this;
+                c06971.label = 1;
+                if (mutexImpl.lock(c06971) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            }
+            return Boolean.valueOf(this.isReleased);
+        }
+        if (i2 != 1) {
+            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+        }
+        this = (PressGestureScopeImpl) c06971.L$0;
+        ResultKt.throwOnFailure(obj);
+        this.mutex.unlock(null);
+        return Boolean.valueOf(this.isReleased);
     }
 
     @Override // androidx.compose.ui.unit.Density
     /* renamed from: toDp-u2uoSUM */
-    public final float mo54toDpu2uoSUM(int i) {
-        return this.$$delegate_0.mo54toDpu2uoSUM(i);
+    public final float mo55toDpu2uoSUM(int i) {
+        return this.$$delegate_0.mo55toDpu2uoSUM(i);
     }
 }

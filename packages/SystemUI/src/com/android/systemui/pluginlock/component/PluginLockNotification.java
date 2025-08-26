@@ -17,7 +17,6 @@ import com.android.systemui.pluginlock.model.DynamicLockData;
 import com.android.systemui.util.LogUtil;
 import com.android.systemui.util.SettingsHelper;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class PluginLockNotification extends AbstractPluginLockItem {
     private static final String KEY_ICON_ONLY = "lockscreen_minimizing_notification";
@@ -43,7 +42,7 @@ public class PluginLockNotification extends AbstractPluginLockItem {
         this.mCallBack = new SettingsHelper.OnChangedCallback() { // from class: com.android.systemui.pluginlock.component.PluginLockNotification$$ExternalSyntheticLambda0
             @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
             public final void onChanged(Uri uri) {
-                PluginLockNotification.this.lambda$new$0(uri);
+                this.f$0.lambda$new$0(uri);
             }
         };
         this.mMediator = pluginLockMediator;
@@ -51,9 +50,9 @@ public class PluginLockNotification extends AbstractPluginLockItem {
 
     private int getCurrentNotificationType() {
         int settingsInt = getSettingsInt("lockscreen_minimizing_notification", 1);
-        StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(settingsInt, "getCurrentNotificationType() getSettings: ", ", Type : ");
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(settingsInt, "getCurrentNotificationType() getSettings: ", ", Type : ");
         int i = settingsInt + 1;
-        RecyclerView$$ExternalSyntheticOutline0.m(i, TAG, m);
+        RecyclerView$$ExternalSyntheticOutline0.m(i, TAG, sbM);
         return i;
     }
 
@@ -91,9 +90,9 @@ public class PluginLockNotification extends AbstractPluginLockItem {
     }
 
     private void setNotificationType(int i) {
-        StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "setNotificationType() value: ", ", putSettings : ");
+        StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "setNotificationType() value: ", ", putSettings : ");
         int i2 = i - 1;
-        RecyclerView$$ExternalSyntheticOutline0.m(i2, TAG, m);
+        RecyclerView$$ExternalSyntheticOutline0.m(i2, TAG, sbM);
         putSettingsSystem("lockscreen_minimizing_notification", i2);
     }
 
@@ -135,10 +134,10 @@ public class PluginLockNotification extends AbstractPluginLockItem {
     public void apply(DynamicLockData dynamicLockData, DynamicLockData dynamicLockData2) {
         Log.d(TAG, "apply()");
         loadData(dynamicLockData2);
-        int intValue = dynamicLockData2.getNotificationData().getNotiType().intValue();
-        int intValue2 = dynamicLockData2.getNotificationData().getVisibility().intValue();
+        int iIntValue = dynamicLockData2.getNotificationData().getNotiType().intValue();
+        int iIntValue2 = dynamicLockData2.getNotificationData().getVisibility().intValue();
         int notificationState = getNotificationState();
-        RecyclerView$$ExternalSyntheticOutline0.m(intValue2, TAG, MutableObjectList$$ExternalSyntheticOutline0.m(notificationState, intValue, "apply() state:", ", notiType:", ", notiVisibility:"));
+        RecyclerView$$ExternalSyntheticOutline0.m(iIntValue2, TAG, MutableObjectList$$ExternalSyntheticOutline0.m(notificationState, iIntValue, "apply() state:", ", notiType:", ", notiVisibility:"));
         if (notificationState == -2) {
             Log.d(TAG, "apply() skip!");
             return;
@@ -147,16 +146,16 @@ public class PluginLockNotification extends AbstractPluginLockItem {
             update(dynamicLockData, dynamicLockData2);
             return;
         }
-        if (intValue2 == -1 || intValue == 0) {
+        if (iIntValue2 == -1 || iIntValue == 0) {
             return;
         }
         int currentNotificationType = getCurrentNotificationType();
         int settingsInt = getSettingsInt("lock_screen_show_notifications", 1);
         setNotificationBackup(currentNotificationType, settingsInt);
-        KeyguardSecPinBasedInputViewController$$ExternalSyntheticOutline0.m(MutableObjectList$$ExternalSyntheticOutline0.m(currentNotificationType, settingsInt, "apply() Backup curType: ", ", curVisibility: ", ", Set notiType: "), intValue, ", notiVisibility: ", intValue2, TAG);
-        setNotificationVisibility(intValue2);
-        setNotificationType(intValue);
-        registerCallback(intValue, intValue2);
+        KeyguardSecPinBasedInputViewController$$ExternalSyntheticOutline0.m(MutableObjectList$$ExternalSyntheticOutline0.m(currentNotificationType, settingsInt, "apply() Backup curType: ", ", curVisibility: ", ", Set notiType: "), iIntValue, ", notiVisibility: ", iIntValue2, TAG);
+        setNotificationVisibility(iIntValue2);
+        setNotificationType(iIntValue);
+        registerCallback(iIntValue, iIntValue2);
     }
 
     @Override // com.android.systemui.pluginlock.component.AbstractPluginLockItem
@@ -205,13 +204,13 @@ public class PluginLockNotification extends AbstractPluginLockItem {
             return;
         }
         unregisterCallback();
-        int intValue = dynamicLockData2.getNotificationData().getVisibility().intValue();
-        int intValue2 = dynamicLockData2.getNotificationData().getNotiType().intValue();
-        SuggestionsAdapter$$ExternalSyntheticOutline0.m(intValue2, intValue, "update() notiType: ", ", visibility: ", TAG);
-        if (intValue != -1 && intValue2 != 0) {
-            setNotificationVisibility(intValue);
-            setNotificationType(intValue2);
-            registerCallback(intValue2, intValue);
+        int iIntValue = dynamicLockData2.getNotificationData().getVisibility().intValue();
+        int iIntValue2 = dynamicLockData2.getNotificationData().getNotiType().intValue();
+        SuggestionsAdapter$$ExternalSyntheticOutline0.m(iIntValue2, iIntValue, "update() notiType: ", ", visibility: ", TAG);
+        if (iIntValue != -1 && iIntValue2 != 0) {
+            setNotificationVisibility(iIntValue);
+            setNotificationType(iIntValue2);
+            registerCallback(iIntValue2, iIntValue);
         } else {
             Log.d(TAG, "disable & restore backup value ");
             setNotificationVisibility(getNotificationBackupVisibility());

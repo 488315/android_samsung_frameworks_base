@@ -17,7 +17,6 @@ import kotlin.Unit;
 import kotlin.collections.CollectionsKt__CollectionsKt;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class RememberEventDispatcher {
     public final Set abandoning;
@@ -156,7 +155,7 @@ public final class RememberEventDispatcher {
         }
         int i2 = 0;
         int i3 = 0;
-        List list = null;
+        List listMutableListOf = null;
         MutableIntList mutableIntList = null;
         MutableIntList mutableIntList2 = null;
         while (true) {
@@ -165,36 +164,36 @@ public final class RememberEventDispatcher {
                 break;
             }
             if (i <= mutableIntList3.get(i3)) {
-                Object remove = ((ArrayList) this.pending).remove(i3);
-                int removeAt = mutableIntList3.removeAt(i3);
-                int removeAt2 = this.priorities.removeAt(i3);
-                if (list == null) {
-                    list = CollectionsKt__CollectionsKt.mutableListOf(remove);
+                Object objRemove = ((ArrayList) this.pending).remove(i3);
+                int iRemoveAt = mutableIntList3.removeAt(i3);
+                int iRemoveAt2 = this.priorities.removeAt(i3);
+                if (listMutableListOf == null) {
+                    listMutableListOf = CollectionsKt__CollectionsKt.mutableListOf(objRemove);
                     mutableIntList2 = new MutableIntList(0, 1, null);
-                    mutableIntList2.add(removeAt);
+                    mutableIntList2.add(iRemoveAt);
                     mutableIntList = new MutableIntList(0, 1, null);
-                    mutableIntList.add(removeAt2);
+                    mutableIntList.add(iRemoveAt2);
                 } else {
-                    list.add(remove);
-                    mutableIntList2.add(removeAt);
-                    mutableIntList.add(removeAt2);
+                    listMutableListOf.add(objRemove);
+                    mutableIntList2.add(iRemoveAt);
+                    mutableIntList.add(iRemoveAt2);
                 }
             } else {
                 i3++;
             }
         }
-        if (list != null) {
-            int size = list.size() - 1;
+        if (listMutableListOf != null) {
+            int size = listMutableListOf.size() - 1;
             while (i2 < size) {
                 int i4 = i2 + 1;
-                int size2 = list.size();
+                int size2 = listMutableListOf.size();
                 for (int i5 = i4; i5 < size2; i5++) {
                     int i6 = mutableIntList2.get(i2);
                     int i7 = mutableIntList2.get(i5);
                     if (i6 < i7 || (i7 == i6 && mutableIntList.get(i2) < mutableIntList.get(i5))) {
-                        Object obj = list.get(i2);
-                        list.set(i2, list.get(i5));
-                        list.set(i5, obj);
+                        Object obj = listMutableListOf.get(i2);
+                        listMutableListOf.set(i2, listMutableListOf.get(i5));
+                        listMutableListOf.set(i5, obj);
                         int i8 = mutableIntList.get(i2);
                         mutableIntList.set(i2, mutableIntList.get(i5));
                         mutableIntList.set(i5, i8);
@@ -206,7 +205,7 @@ public final class RememberEventDispatcher {
                 i2 = i4;
             }
             MutableVector mutableVector = this.leaving;
-            mutableVector.addAll(mutableVector.size, list);
+            mutableVector.addAll(mutableVector.size, listMutableListOf);
         }
     }
 

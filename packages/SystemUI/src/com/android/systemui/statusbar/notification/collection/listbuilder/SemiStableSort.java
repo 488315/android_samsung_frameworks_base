@@ -12,7 +12,6 @@ import kotlin.LazyKt__LazyJVMKt;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SemiStableSort {
     public static final Companion Companion = new Companion(null);
@@ -22,11 +21,11 @@ public final class SemiStableSort {
         @Override // kotlin.jvm.functions.Function0
         public final Object invoke() {
             SemiStableSort.Companion companion = SemiStableSort.Companion;
-            final SemiStableSort semiStableSort = SemiStableSort.this;
+            final SemiStableSort semiStableSort = this.f$0;
             return Comparator.comparingInt(new ToIntFunction() { // from class: com.android.systemui.statusbar.notification.collection.listbuilder.SemiStableSort$preallocatedMapToIndexComparator$2$1
                 @Override // java.util.function.ToIntFunction
                 public final int applyAsInt(Object obj) {
-                    Integer num = (Integer) ((HashMap) SemiStableSort.this.preallocatedMapToIndex$delegate.getValue()).get(obj);
+                    Integer num = (Integer) ((HashMap) semiStableSort.preallocatedMapToIndex$delegate.getValue()).get(obj);
                     if (num != null) {
                         return num.intValue();
                     }
@@ -37,7 +36,6 @@ public final class SemiStableSort {
     });
     public final Lazy preallocatedWorkspace$delegate;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -48,19 +46,19 @@ public final class SemiStableSort {
             int i = 0;
             for (Object obj : iterable) {
                 int size = list.size();
+                int iSignum = 0;
                 int i2 = 0;
-                int i3 = 0;
-                int i4 = i;
+                int i3 = i;
                 while (i < size) {
-                    i2 += Integer.signum(comparator.compare(obj, list.get(i)));
-                    if (i2 > i3) {
-                        i4 = i + 1;
-                        i3 = i2;
+                    iSignum += Integer.signum(comparator.compare(obj, list.get(i)));
+                    if (iSignum > i2) {
+                        i3 = i + 1;
+                        i2 = iSignum;
                     }
                     i++;
                 }
-                list.add(i4, obj);
-                i = i4 + 1;
+                list.add(i3, obj);
+                i = i3 + 1;
             }
         }
 
@@ -84,7 +82,6 @@ public final class SemiStableSort {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface StableOrder {
     }
 

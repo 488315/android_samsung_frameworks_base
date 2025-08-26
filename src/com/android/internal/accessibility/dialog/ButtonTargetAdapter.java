@@ -1,5 +1,6 @@
 package com.android.internal.accessibility.dialog;
 
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,13 +33,13 @@ class ButtonTargetAdapter extends TargetAdapter {
     }
 
     @Override // android.widget.Adapter
-    public View getView(int i, View view, ViewGroup viewGroup) {
-        View inflate = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.accessibility_button_chooser_item, viewGroup, false);
+    public View getView(int i, View view, ViewGroup viewGroup) throws Resources.NotFoundException {
+        View viewInflate = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.accessibility_button_chooser_item, viewGroup, false);
         AccessibilityTarget accessibilityTarget = this.mTargets.get(i);
-        ImageView imageView = (ImageView) inflate.findViewById(R.id.accessibility_button_target_icon);
-        TextView textView = (TextView) inflate.findViewById(R.id.accessibility_button_target_label);
-        imageView.lambda$setImageURIAsync$0(accessibilityTarget.getIcon());
+        ImageView imageView = (ImageView) viewInflate.findViewById(R.id.accessibility_button_target_icon);
+        TextView textView = (TextView) viewInflate.findViewById(R.id.accessibility_button_target_label);
+        imageView.lambda$setImageURIAsync$2(accessibilityTarget.getIcon());
         textView.lambda$setTextAsync$0(accessibilityTarget.getLabel());
-        return inflate;
+        return viewInflate;
     }
 }

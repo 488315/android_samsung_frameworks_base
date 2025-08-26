@@ -15,7 +15,6 @@ import com.android.systemui.Dependency;
 import com.android.systemui.util.SettingsHelper;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SubscreenSubRoomNotificaitonAnimatorManager {
     public final SubscreenNotificationInfoManager mNotificationInfoManager;
@@ -46,9 +45,9 @@ public class SubscreenSubRoomNotificaitonAnimatorManager {
     }
 
     public final Animator alphaViewAnimated(View view, final Runnable runnable, long j, float f, float f2) {
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.ALPHA, f, f2);
-        ofFloat.setDuration(j);
-        ofFloat.addListener(new AnimatorListenerAdapter(this) { // from class: com.android.systemui.statusbar.notification.SubscreenSubRoomNotificaitonAnimatorManager.2
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.ALPHA, f, f2);
+        objectAnimatorOfFloat.setDuration(j);
+        objectAnimatorOfFloat.addListener(new AnimatorListenerAdapter(this) { // from class: com.android.systemui.statusbar.notification.SubscreenSubRoomNotificaitonAnimatorManager.2
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
                 Runnable runnable2 = runnable;
@@ -65,8 +64,8 @@ public class SubscreenSubRoomNotificaitonAnimatorManager {
             public final void onAnimationStart(Animator animator) {
             }
         });
-        ofFloat.start();
-        return ofFloat;
+        objectAnimatorOfFloat.start();
+        return objectAnimatorOfFloat;
     }
 
     public final void performDismissAllAnimations(Runnable runnable) {
@@ -75,15 +74,15 @@ public class SubscreenSubRoomNotificaitonAnimatorManager {
         ArrayList arrayList = this.mNotificationInfoManager.mRecyclerViewItemHolderArray;
         int size = arrayList.size();
         Log.d("SubscreenSubRoomNotificaitonAnimatorManager", "performDismissAllAnimations() dismiss list size: " + size);
-        int i = 140;
-        int i2 = 180;
+        int iMax = 140;
+        int i = 180;
         boolean z = false;
-        for (int i3 = size + (-1); i3 >= 0; i3--) {
-            if (arrayList.size() <= i3) {
-                Log.e("SubscreenSubRoomNotificaitonAnimatorManager", "Invalid dismiss position. size = " + arrayList.size() + ", index = " + i3);
+        for (int i2 = size + (-1); i2 >= 0; i2--) {
+            if (arrayList.size() <= i2) {
+                Log.e("SubscreenSubRoomNotificaitonAnimatorManager", "Invalid dismiss position. size = " + arrayList.size() + ", index = " + i2);
             } else {
-                SubscreenParentItemViewHolder subscreenParentItemViewHolder = (SubscreenParentItemViewHolder) arrayList.get(i3);
-                if (i3 == 0 || i3 == size - 5) {
+                SubscreenParentItemViewHolder subscreenParentItemViewHolder = (SubscreenParentItemViewHolder) arrayList.get(i2);
+                if (i2 == 0 || i2 == size - 5) {
                     if (((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).isHapticFeedbackEnabled()) {
                         this.mVibrator.vibrate(this.effect);
                     }
@@ -97,13 +96,13 @@ public class SubscreenSubRoomNotificaitonAnimatorManager {
                 if (!SubscreenNotificationInfoManager.canViewBeCleared(subscreenParentItemViewHolder.mInfo.mRow)) {
                     measuredWidth = 0.0f;
                 }
-                ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.TRANSLATION_X, measuredWidth);
-                ofFloat.setInterpolator(Interpolators.FAST_OUT_LINEAR_IN);
-                ofFloat.setDuration(200L);
-                if (i2 > 0) {
-                    ofFloat.setStartDelay(i2);
+                ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.TRANSLATION_X, measuredWidth);
+                objectAnimatorOfFloat.setInterpolator(Interpolators.FAST_OUT_LINEAR_IN);
+                objectAnimatorOfFloat.setDuration(200L);
+                if (i > 0) {
+                    objectAnimatorOfFloat.setStartDelay(i);
                 }
-                ofFloat.addListener(new AnimatorListenerAdapter(this) { // from class: com.android.systemui.statusbar.notification.SubscreenSubRoomNotificaitonAnimatorManager.1
+                objectAnimatorOfFloat.addListener(new AnimatorListenerAdapter(this) { // from class: com.android.systemui.statusbar.notification.SubscreenSubRoomNotificaitonAnimatorManager.1
                     @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                     public final void onAnimationEnd(Animator animator) {
                         Runnable runnable3 = runnable2;
@@ -120,9 +119,9 @@ public class SubscreenSubRoomNotificaitonAnimatorManager {
                     public final void onAnimationStart(Animator animator) {
                     }
                 });
-                ofFloat.start();
-                i = Math.max(50, i - 10);
-                i2 += i;
+                objectAnimatorOfFloat.start();
+                iMax = Math.max(50, iMax - 10);
+                i += iMax;
                 if (z) {
                     return;
                 }
@@ -131,12 +130,12 @@ public class SubscreenSubRoomNotificaitonAnimatorManager {
     }
 
     public final void replyButtonAnimated(View view, final SubscreenNotificationDetailAdapter$$ExternalSyntheticLambda0 subscreenNotificationDetailAdapter$$ExternalSyntheticLambda0, float f, float f2, float f3, float f4) {
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.SCALE_X, f, f2);
-        ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.SCALE_Y, f, f2);
-        ObjectAnimator ofFloat3 = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.ALPHA, f3, f4);
-        ofFloat3.setInterpolator(Interpolators.LINEAR);
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.SCALE_X, f, f2);
+        ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.SCALE_Y, f, f2);
+        ObjectAnimator objectAnimatorOfFloat3 = ObjectAnimator.ofFloat(view, (Property<View, Float>) View.ALPHA, f3, f4);
+        objectAnimatorOfFloat3.setInterpolator(Interpolators.LINEAR);
         AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.playTogether(ofFloat, ofFloat2, ofFloat3);
+        animatorSet.playTogether(objectAnimatorOfFloat, objectAnimatorOfFloat2, objectAnimatorOfFloat3);
         animatorSet.setDuration(200L);
         animatorSet.setStartDelay(0L);
         animatorSet.addListener(new AnimatorListenerAdapter(this) { // from class: com.android.systemui.statusbar.notification.SubscreenSubRoomNotificaitonAnimatorManager.4

@@ -51,9 +51,9 @@ public class HapticScrollFeedbackProvider implements ScrollFeedbackProvider {
             }
             int i5 = this.mTotalScrollPixels + i4;
             this.mTotalScrollPixels = i5;
-            int abs = Math.abs(i5);
+            int iAbs = Math.abs(i5);
             int i6 = this.mTickIntervalPixels;
-            if (abs >= i6) {
+            if (iAbs >= i6) {
                 this.mTotalScrollPixels %= i6;
                 if (android.os.vibrator.Flags.hapticFeedbackInputSourceCustomizationEnabled()) {
                     this.mView.performHapticFeedbackForInputDevice(18, i, i2, 0);

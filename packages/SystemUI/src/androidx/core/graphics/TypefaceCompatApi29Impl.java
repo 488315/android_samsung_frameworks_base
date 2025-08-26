@@ -13,7 +13,6 @@ import com.samsung.android.knox.license.KnoxEnterpriseLicenseManager;
 import java.io.IOException;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class TypefaceCompatApi29Impl extends TypefaceCompatBaseImpl {
     public static Font findBaseFont(FontFamily fontFamily, int i) {
@@ -31,38 +30,36 @@ public class TypefaceCompatApi29Impl extends TypefaceCompatBaseImpl {
         return font;
     }
 
-    public static FontFamily getFontFamily(FontsContractCompat$FontInfo[] fontsContractCompat$FontInfoArr, ContentResolver contentResolver) {
-        int i;
-        ParcelFileDescriptor openFileDescriptor;
-        int length = fontsContractCompat$FontInfoArr.length;
+    public static FontFamily getFontFamily(FontsContractCompat$FontInfo[] fontsContractCompat$FontInfoArr, ContentResolver contentResolver) throws IOException {
+        ParcelFileDescriptor parcelFileDescriptorOpenFileDescriptor;
         FontFamily.Builder builder = null;
-        while (i < length) {
-            FontsContractCompat$FontInfo fontsContractCompat$FontInfo = fontsContractCompat$FontInfoArr[i];
+        for (FontsContractCompat$FontInfo fontsContractCompat$FontInfo : fontsContractCompat$FontInfoArr) {
             try {
-                openFileDescriptor = contentResolver.openFileDescriptor(fontsContractCompat$FontInfo.mUri, "r", null);
+                parcelFileDescriptorOpenFileDescriptor = contentResolver.openFileDescriptor(fontsContractCompat$FontInfo.mUri, "r", null);
             } catch (IOException e) {
                 Log.w("TypefaceCompatApi29Impl", "Font load failed", e);
             }
-            if (openFileDescriptor == null) {
-                i = openFileDescriptor == null ? i + 1 : 0;
+            if (parcelFileDescriptorOpenFileDescriptor == null) {
+                if (parcelFileDescriptorOpenFileDescriptor != null) {
+                }
             } else {
                 try {
-                    Font build = new Font.Builder(openFileDescriptor).setWeight(fontsContractCompat$FontInfo.mWeight).setSlant(fontsContractCompat$FontInfo.mItalic ? 1 : 0).setTtcIndex(fontsContractCompat$FontInfo.mTtcIndex).build();
+                    Font fontBuild = new Font.Builder(parcelFileDescriptorOpenFileDescriptor).setWeight(fontsContractCompat$FontInfo.mWeight).setSlant(fontsContractCompat$FontInfo.mItalic ? 1 : 0).setTtcIndex(fontsContractCompat$FontInfo.mTtcIndex).build();
                     if (builder == null) {
-                        builder = new FontFamily.Builder(build);
+                        builder = new FontFamily.Builder(fontBuild);
                     } else {
-                        builder.addFont(build);
+                        builder.addFont(fontBuild);
                     }
                 } catch (Throwable th) {
                     try {
-                        openFileDescriptor.close();
+                        parcelFileDescriptorOpenFileDescriptor.close();
                     } catch (Throwable th2) {
                         th.addSuppressed(th2);
                     }
                     throw th;
                 }
             }
-            openFileDescriptor.close();
+            parcelFileDescriptorOpenFileDescriptor.close();
         }
         if (builder == null) {
             return null;

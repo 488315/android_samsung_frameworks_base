@@ -136,11 +136,11 @@ public class TransactionExecutorHelper {
     }
 
     static boolean shouldExcludeLastLifecycleState(List<ClientTransactionItem> list, int i) {
-        int findNextLifecycleItemIndex;
+        int iFindNextLifecycleItemIndex;
         ClientTransactionItem clientTransactionItem = list.get(i);
         IBinder activityToken = clientTransactionItem.getActivityToken();
         int postExecutionState = clientTransactionItem.getPostExecutionState();
-        return (activityToken == null || postExecutionState == -1 || (findNextLifecycleItemIndex = findNextLifecycleItemIndex(list, i + 1, activityToken)) == -1 || postExecutionState != ((ActivityLifecycleItem) list.get(findNextLifecycleItemIndex)).getTargetState() || i != lastCallbackRequestingStateIndex(list, i, findNextLifecycleItemIndex - 1, activityToken)) ? false : true;
+        return (activityToken == null || postExecutionState == -1 || (iFindNextLifecycleItemIndex = findNextLifecycleItemIndex(list, i + 1, activityToken)) == -1 || postExecutionState != ((ActivityLifecycleItem) list.get(iFindNextLifecycleItemIndex)).getTargetState() || i != lastCallbackRequestingStateIndex(list, i, iFindNextLifecycleItemIndex - 1, activityToken)) ? false : true;
     }
 
     private static int findNextLifecycleItemIndex(List<ClientTransactionItem> list, int i, IBinder iBinder) {

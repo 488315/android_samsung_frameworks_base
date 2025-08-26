@@ -9,7 +9,6 @@ import androidx.compose.ui.unit.LayoutDirection;
 import androidx.core.graphics.Insets;
 import androidx.core.view.WindowInsetsCompat;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AndroidWindowInsets implements WindowInsets {
     public final MutableState insets$delegate = SnapshotStateKt.mutableStateOf$default(Insets.NONE);
@@ -77,8 +76,8 @@ public final class AndroidWindowInsets implements WindowInsets {
         int i2 = this.type;
         if (i == 0 || (i & i2) != 0) {
             ((SnapshotMutableStateImpl) this.insets$delegate).setValue(windowInsetsCompat.mImpl.getInsets(i2));
-            boolean isVisible = windowInsetsCompat.mImpl.isVisible(i2);
-            ((SnapshotMutableStateImpl) this.isVisible$delegate).setValue(Boolean.valueOf(isVisible));
+            boolean zIsVisible = windowInsetsCompat.mImpl.isVisible(i2);
+            ((SnapshotMutableStateImpl) this.isVisible$delegate).setValue(Boolean.valueOf(zIsVisible));
         }
     }
 }

@@ -37,8 +37,8 @@ public class MetricsLoggerWrapper {
 
     public static void logPostGcMemorySnapshot() {
         if (Flags.nativeMetrics()) {
-            int myPid = Process.myPid();
-            String myProcessName = Process.myProcessName();
+            int iMyPid = Process.myPid();
+            String strMyProcessName = Process.myProcessName();
             Collection<NativeAllocationRegistry.Metrics> metrics = NativeAllocationRegistry.getMetrics();
             int size = metrics.size();
             String[] strArr = new String[size];
@@ -55,8 +55,8 @@ public class MetricsLoggerWrapper {
                 jArr4[i] = metrics2.getNonmallocedBytes();
                 i++;
             }
-            ProcfsMemoryUtil.MemorySnapshot readMemorySnapshotFromProcfs = ProcfsMemoryUtil.readMemorySnapshotFromProcfs();
-            FrameworkStatsLog.write(924, readMemorySnapshotFromProcfs.uid, myProcessName, myPid, ProcfsMemoryUtil.readOomScoreAdjFromProcfs(), readMemorySnapshotFromProcfs.rssInKilobytes, readMemorySnapshotFromProcfs.anonRssInKilobytes, readMemorySnapshotFromProcfs.swapInKilobytes, readMemorySnapshotFromProcfs.anonRssInKilobytes + readMemorySnapshotFromProcfs.swapInKilobytes, strArr, jArr, jArr2, jArr3, jArr4);
+            ProcfsMemoryUtil.MemorySnapshot memorySnapshotFromProcfs = ProcfsMemoryUtil.readMemorySnapshotFromProcfs();
+            FrameworkStatsLog.write(924, memorySnapshotFromProcfs.uid, strMyProcessName, iMyPid, ProcfsMemoryUtil.readOomScoreAdjFromProcfs(), memorySnapshotFromProcfs.rssInKilobytes, memorySnapshotFromProcfs.anonRssInKilobytes, memorySnapshotFromProcfs.swapInKilobytes, memorySnapshotFromProcfs.anonRssInKilobytes + memorySnapshotFromProcfs.swapInKilobytes, strArr, jArr, jArr2, jArr3, jArr4);
         }
     }
 }

@@ -12,32 +12,33 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class DesktopCaptionButton extends LinearLayout {
     public final ImageView mIconView;
+    public final ImageView mNotification;
     public final View mRootView;
     public final TextView mTextView;
 
     public DesktopCaptionButton(Context context, AttributeSet attributeSet) {
         super(new ContextThemeWrapper(context, R.style.Theme.DeviceDefault.DayNight), attributeSet);
-        View inflate = LayoutInflater.from(((LinearLayout) this).mContext).inflate(com.android.systemui.R.layout.mw_dex_caption_popup_button, this);
-        this.mRootView = inflate;
-        ImageView imageView = (ImageView) inflate.requireViewById(com.android.systemui.R.id.button_icon);
+        View viewInflate = LayoutInflater.from(((LinearLayout) this).mContext).inflate(com.android.systemui.R.layout.mw_dex_caption_popup_button, this);
+        this.mRootView = viewInflate;
+        ImageView imageView = (ImageView) viewInflate.requireViewById(com.android.systemui.R.id.button_icon);
         this.mIconView = imageView;
-        TextView textView = (TextView) inflate.requireViewById(com.android.systemui.R.id.button_description);
+        TextView textView = (TextView) viewInflate.requireViewById(com.android.systemui.R.id.button_description);
         this.mTextView = textView;
+        this.mNotification = (ImageView) viewInflate.requireViewById(com.android.systemui.R.id.button_notification);
         setClickable(true);
         setFocusable(true);
         TypedValue typedValue = new TypedValue();
         context.getTheme().resolveAttribute(R.attr.selectableItemBackground, typedValue, true);
         setBackgroundResource(typedValue.resourceId);
-        TypedArray obtainStyledAttributes = ((LinearLayout) this).mContext.obtainStyledAttributes(attributeSet, com.android.wm.shell.R.styleable.DesktopCaptionButton);
+        TypedArray typedArrayObtainStyledAttributes = ((LinearLayout) this).mContext.obtainStyledAttributes(attributeSet, com.android.wm.shell.R.styleable.DesktopCaptionButton);
         try {
-            textView.setText(obtainStyledAttributes.getString(1));
-            imageView.setImageDrawable(context.getResources().getDrawable(obtainStyledAttributes.getResourceId(0, 0), null));
+            textView.setText(typedArrayObtainStyledAttributes.getString(1));
+            imageView.setImageDrawable(context.getResources().getDrawable(typedArrayObtainStyledAttributes.getResourceId(0, 0), null));
         } finally {
-            obtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes.recycle();
         }
     }
 

@@ -66,7 +66,6 @@ import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.TypeIntrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ComponentActivity extends androidx.core.app.ComponentActivity implements ViewModelStoreOwner, HasDefaultViewModelProviderFactory, SavedStateRegistryOwner, OnBackPressedDispatcherOwner, ActivityResultRegistryOwner, OnConfigurationChangedProvider, OnTrimMemoryProvider, OnMultiWindowModeChangedProvider, OnPictureInPictureModeChangedProvider, MenuHost {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -89,7 +88,6 @@ public class ComponentActivity extends androidx.core.app.ComponentActivity imple
     public final ReportFullyDrawnExecutorImpl reportFullyDrawnExecutor;
     public final SavedStateRegistryController savedStateRegistryController;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Api33Impl {
         public static final Api33Impl INSTANCE = new Api33Impl();
 
@@ -97,7 +95,6 @@ public class ComponentActivity extends androidx.core.app.ComponentActivity imple
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -107,13 +104,11 @@ public class ComponentActivity extends androidx.core.app.ComponentActivity imple
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class NonConfigurationInstances {
         public Object custom;
         public ViewModelStore viewModelStore;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ReportFullyDrawnExecutorImpl implements ViewTreeObserver.OnDrawListener, Runnable, Executor {
         public Runnable currentRunnable;
         public final long endWatchTimeMillis = SystemClock.uptimeMillis() + 10000;
@@ -182,8 +177,8 @@ public class ComponentActivity extends androidx.core.app.ComponentActivity imple
         this.contextAwareHelper = new ContextAwareHelper();
         this.menuHostHelper = new MenuHostHelper(new ComponentActivity$$ExternalSyntheticLambda0(this, 0));
         SavedStateRegistryController.Companion.getClass();
-        SavedStateRegistryController create = SavedStateRegistryController.Companion.create(this);
-        this.savedStateRegistryController = create;
+        SavedStateRegistryController savedStateRegistryControllerCreate = SavedStateRegistryController.Companion.create(this);
+        this.savedStateRegistryController = savedStateRegistryControllerCreate;
         this.reportFullyDrawnExecutor = new ReportFullyDrawnExecutorImpl();
         this.fullyDrawnReporter$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: androidx.activity.ComponentActivity$fullyDrawnReporter$2
             {
@@ -192,7 +187,7 @@ public class ComponentActivity extends androidx.core.app.ComponentActivity imple
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                final ComponentActivity componentActivity = ComponentActivity.this;
+                final ComponentActivity componentActivity = this.this$0;
                 return new FullyDrawnReporter(componentActivity.reportFullyDrawnExecutor, new Function0() { // from class: androidx.activity.ComponentActivity$fullyDrawnReporter$2.1
                     {
                         super(0);
@@ -200,7 +195,7 @@ public class ComponentActivity extends androidx.core.app.ComponentActivity imple
 
                     @Override // kotlin.jvm.functions.Function0
                     public final Object invoke() {
-                        ComponentActivity.this.reportFullyDrawn();
+                        componentActivity.reportFullyDrawn();
                         return Unit.INSTANCE;
                     }
                 });
@@ -230,12 +225,12 @@ public class ComponentActivity extends androidx.core.app.ComponentActivity imple
             @Override // androidx.lifecycle.LifecycleEventObserver
             public final void onStateChanged(LifecycleOwner lifecycleOwner, Lifecycle.Event event) {
                 Window window;
-                View peekDecorView;
+                View viewPeekDecorView;
                 switch (i) {
                     case 0:
                         int i2 = ComponentActivity.$r8$clinit;
-                        if (event == Lifecycle.Event.ON_STOP && (window = this.f$0.getWindow()) != null && (peekDecorView = window.peekDecorView()) != null) {
-                            peekDecorView.cancelPendingInputEvents();
+                        if (event == Lifecycle.Event.ON_STOP && (window = this.f$0.getWindow()) != null && (viewPeekDecorView = window.peekDecorView()) != null) {
+                            viewPeekDecorView.cancelPendingInputEvents();
                             break;
                         }
                         break;
@@ -267,12 +262,12 @@ public class ComponentActivity extends androidx.core.app.ComponentActivity imple
             @Override // androidx.lifecycle.LifecycleEventObserver
             public final void onStateChanged(LifecycleOwner lifecycleOwner, Lifecycle.Event event) {
                 Window window;
-                View peekDecorView;
+                View viewPeekDecorView;
                 switch (i2) {
                     case 0:
                         int i22 = ComponentActivity.$r8$clinit;
-                        if (event == Lifecycle.Event.ON_STOP && (window = this.f$0.getWindow()) != null && (peekDecorView = window.peekDecorView()) != null) {
-                            peekDecorView.cancelPendingInputEvents();
+                        if (event == Lifecycle.Event.ON_STOP && (window = this.f$0.getWindow()) != null && (viewPeekDecorView = window.peekDecorView()) != null) {
+                            viewPeekDecorView.cancelPendingInputEvents();
                             break;
                         }
                         break;
@@ -310,14 +305,14 @@ public class ComponentActivity extends androidx.core.app.ComponentActivity imple
                 componentActivity.lifecycleRegistry.removeObserver(this);
             }
         });
-        create.performAttach();
+        savedStateRegistryControllerCreate.performAttach();
         SavedStateHandleSupport.enableSavedStateHandles(this);
-        create.savedStateRegistry.registerSavedStateProvider("android:support:activity-result", new SavedStateRegistry.SavedStateProvider() { // from class: androidx.activity.ComponentActivity$$ExternalSyntheticLambda3
+        savedStateRegistryControllerCreate.savedStateRegistry.registerSavedStateProvider("android:support:activity-result", new SavedStateRegistry.SavedStateProvider() { // from class: androidx.activity.ComponentActivity$$ExternalSyntheticLambda3
             @Override // androidx.savedstate.SavedStateRegistry.SavedStateProvider
             public final Bundle saveState() {
                 int i3 = ComponentActivity.$r8$clinit;
                 Bundle bundle = new Bundle();
-                ComponentActivity$activityResultRegistry$1 componentActivity$activityResultRegistry$1 = ComponentActivity.this.activityResultRegistry;
+                ComponentActivity$activityResultRegistry$1 componentActivity$activityResultRegistry$1 = this.f$0.activityResultRegistry;
                 componentActivity$activityResultRegistry$1.getClass();
                 bundle.putIntegerArrayList("KEY_COMPONENT_ACTIVITY_REGISTERED_RCS", new ArrayList<>(((LinkedHashMap) componentActivity$activityResultRegistry$1.keyToRc).values()));
                 bundle.putStringArrayList("KEY_COMPONENT_ACTIVITY_REGISTERED_KEYS", new ArrayList<>(((LinkedHashMap) componentActivity$activityResultRegistry$1.keyToRc).keySet()));
@@ -329,21 +324,21 @@ public class ComponentActivity extends androidx.core.app.ComponentActivity imple
         addOnContextAvailableListener(new OnContextAvailableListener() { // from class: androidx.activity.ComponentActivity$$ExternalSyntheticLambda4
             @Override // androidx.activity.contextaware.OnContextAvailableListener
             public final void onContextAvailable() {
-                ComponentActivity componentActivity = ComponentActivity.this;
-                Bundle consumeRestoredStateForKey = componentActivity.savedStateRegistryController.savedStateRegistry.consumeRestoredStateForKey("android:support:activity-result");
-                if (consumeRestoredStateForKey != null) {
+                ComponentActivity componentActivity = this.f$0;
+                Bundle bundleConsumeRestoredStateForKey = componentActivity.savedStateRegistryController.savedStateRegistry.consumeRestoredStateForKey("android:support:activity-result");
+                if (bundleConsumeRestoredStateForKey != null) {
                     ComponentActivity$activityResultRegistry$1 componentActivity$activityResultRegistry$1 = componentActivity.activityResultRegistry;
                     componentActivity$activityResultRegistry$1.getClass();
-                    ArrayList<Integer> integerArrayList = consumeRestoredStateForKey.getIntegerArrayList("KEY_COMPONENT_ACTIVITY_REGISTERED_RCS");
-                    ArrayList<String> stringArrayList = consumeRestoredStateForKey.getStringArrayList("KEY_COMPONENT_ACTIVITY_REGISTERED_KEYS");
+                    ArrayList<Integer> integerArrayList = bundleConsumeRestoredStateForKey.getIntegerArrayList("KEY_COMPONENT_ACTIVITY_REGISTERED_RCS");
+                    ArrayList<String> stringArrayList = bundleConsumeRestoredStateForKey.getStringArrayList("KEY_COMPONENT_ACTIVITY_REGISTERED_KEYS");
                     if (stringArrayList == null || integerArrayList == null) {
                         return;
                     }
-                    ArrayList<String> stringArrayList2 = consumeRestoredStateForKey.getStringArrayList("KEY_COMPONENT_ACTIVITY_LAUNCHED_KEYS");
+                    ArrayList<String> stringArrayList2 = bundleConsumeRestoredStateForKey.getStringArrayList("KEY_COMPONENT_ACTIVITY_LAUNCHED_KEYS");
                     if (stringArrayList2 != null) {
                         ((ArrayList) componentActivity$activityResultRegistry$1.launchedKeys).addAll(stringArrayList2);
                     }
-                    Bundle bundle = consumeRestoredStateForKey.getBundle("KEY_COMPONENT_ACTIVITY_PENDING_RESULT");
+                    Bundle bundle = bundleConsumeRestoredStateForKey.getBundle("KEY_COMPONENT_ACTIVITY_PENDING_RESULT");
                     if (bundle != null) {
                         componentActivity$activityResultRegistry$1.pendingResults.putAll(bundle);
                     }
@@ -356,10 +351,10 @@ public class ComponentActivity extends androidx.core.app.ComponentActivity imple
                                 TypeIntrinsics.asMutableMap(componentActivity$activityResultRegistry$1.rcToKey).remove(num);
                             }
                         }
-                        int intValue = integerArrayList.get(i3).intValue();
+                        int iIntValue = integerArrayList.get(i3).intValue();
                         String str2 = stringArrayList.get(i3);
-                        componentActivity$activityResultRegistry$1.rcToKey.put(Integer.valueOf(intValue), str2);
-                        componentActivity$activityResultRegistry$1.keyToRc.put(str2, Integer.valueOf(intValue));
+                        componentActivity$activityResultRegistry$1.rcToKey.put(Integer.valueOf(iIntValue), str2);
+                        componentActivity$activityResultRegistry$1.keyToRc.put(str2, Integer.valueOf(iIntValue));
                     }
                 }
             }
@@ -371,9 +366,9 @@ public class ComponentActivity extends androidx.core.app.ComponentActivity imple
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                Application application = ComponentActivity.this.getApplication();
-                ComponentActivity componentActivity = ComponentActivity.this;
-                return new SavedStateViewModelFactory(application, componentActivity, componentActivity.getIntent() != null ? ComponentActivity.this.getIntent().getExtras() : null);
+                Application application = this.this$0.getApplication();
+                ComponentActivity componentActivity = this.this$0;
+                return new SavedStateViewModelFactory(application, componentActivity, componentActivity.getIntent() != null ? this.this$0.getIntent().getExtras() : null);
             }
         });
         this.onBackPressedDispatcher$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: androidx.activity.ComponentActivity$onBackPressedDispatcher$2
@@ -383,13 +378,13 @@ public class ComponentActivity extends androidx.core.app.ComponentActivity imple
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                final OnBackPressedDispatcher onBackPressedDispatcher = new OnBackPressedDispatcher(new ComponentActivity$$ExternalSyntheticLambda0(ComponentActivity.this, 1));
-                final ComponentActivity componentActivity = ComponentActivity.this;
+                final OnBackPressedDispatcher onBackPressedDispatcher = new OnBackPressedDispatcher(new ComponentActivity$$ExternalSyntheticLambda0(this.this$0, 1));
+                final ComponentActivity componentActivity = this.this$0;
                 if (!Intrinsics.areEqual(Looper.myLooper(), Looper.getMainLooper())) {
                     new Handler(Looper.getMainLooper()).post(new Runnable() { // from class: androidx.activity.ComponentActivity$onBackPressedDispatcher$2$$ExternalSyntheticLambda1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            ComponentActivity componentActivity2 = ComponentActivity.this;
+                            ComponentActivity componentActivity2 = componentActivity;
                             OnBackPressedDispatcher onBackPressedDispatcher2 = onBackPressedDispatcher;
                             int i3 = ComponentActivity.$r8$clinit;
                             componentActivity2.lifecycleRegistry.addObserver(new ComponentActivity$$ExternalSyntheticLambda5(componentActivity2, onBackPressedDispatcher2));
@@ -451,6 +446,7 @@ public class ComponentActivity extends androidx.core.app.ComponentActivity imple
         return this.activityResultRegistry;
     }
 
+    /* JADX WARN: Multi-variable type inference failed */
     @Override // androidx.lifecycle.HasDefaultViewModelProviderFactory
     public CreationExtras getDefaultViewModelCreationExtras() {
         MutableCreationExtras mutableCreationExtras = new MutableCreationExtras(0 == true ? 1 : 0, 1, 0 == true ? 1 : 0);
@@ -649,16 +645,16 @@ public class ComponentActivity extends androidx.core.app.ComponentActivity imple
     @Override // android.app.Activity
     public final Object onRetainNonConfigurationInstance() {
         NonConfigurationInstances nonConfigurationInstances;
-        Object onRetainCustomNonConfigurationInstance = onRetainCustomNonConfigurationInstance();
+        Object objOnRetainCustomNonConfigurationInstance = onRetainCustomNonConfigurationInstance();
         ViewModelStore viewModelStore = this._viewModelStore;
         if (viewModelStore == null && (nonConfigurationInstances = (NonConfigurationInstances) getLastNonConfigurationInstance()) != null) {
             viewModelStore = nonConfigurationInstances.viewModelStore;
         }
-        if (viewModelStore == null && onRetainCustomNonConfigurationInstance == null) {
+        if (viewModelStore == null && objOnRetainCustomNonConfigurationInstance == null) {
             return null;
         }
         NonConfigurationInstances nonConfigurationInstances2 = new NonConfigurationInstances();
-        nonConfigurationInstances2.custom = onRetainCustomNonConfigurationInstance;
+        nonConfigurationInstances2.custom = objOnRetainCustomNonConfigurationInstance;
         nonConfigurationInstances2.viewModelStore = viewModelStore;
         return nonConfigurationInstances2;
     }

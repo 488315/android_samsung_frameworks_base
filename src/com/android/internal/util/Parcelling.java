@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.ArraySet;
+import java.io.IOException;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -70,14 +71,14 @@ public interface Parcelling<T> {
 
             @Override // com.android.internal.util.Parcelling
             public String[] unparcel(Parcel parcel) {
-                String[] readStringArray = parcel.readStringArray();
-                if (readStringArray != null) {
-                    int size = ArrayUtils.size(readStringArray);
+                String[] stringArray = parcel.readStringArray();
+                if (stringArray != null) {
+                    int size = ArrayUtils.size(stringArray);
                     for (int i = 0; i < size; i++) {
-                        readStringArray[i] = TextUtils.safeIntern(readStringArray[i]);
+                        stringArray[i] = TextUtils.safeIntern(stringArray[i]);
                     }
                 }
-                return readStringArray;
+                return stringArray;
             }
         }
 
@@ -89,14 +90,14 @@ public interface Parcelling<T> {
 
             @Override // com.android.internal.util.Parcelling
             public List<String> unparcel(Parcel parcel) {
-                ArrayList<String> createStringArrayList = parcel.createStringArrayList();
-                if (createStringArrayList != null) {
-                    int size = createStringArrayList.size();
+                ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
+                if (arrayListCreateStringArrayList != null) {
+                    int size = arrayListCreateStringArrayList.size();
                     for (int i = 0; i < size; i++) {
-                        createStringArrayList.set(i, createStringArrayList.get(i).intern());
+                        arrayListCreateStringArrayList.set(i, arrayListCreateStringArrayList.get(i).intern());
                     }
                 }
-                return CollectionUtils.emptyIfNull(createStringArrayList);
+                return CollectionUtils.emptyIfNull(arrayListCreateStringArrayList);
             }
         }
 
@@ -107,7 +108,7 @@ public interface Parcelling<T> {
             }
 
             @Override // com.android.internal.util.Parcelling
-            public Map<String, String> unparcel(Parcel parcel) {
+            public Map<String, String> unparcel(Parcel parcel) throws ClassNotFoundException, IOException {
                 ArrayMap arrayMap = new ArrayMap();
                 parcel.readMap(arrayMap, String.class.getClassLoader());
                 for (int i = 0; i < arrayMap.size(); i++) {
@@ -133,12 +134,12 @@ public interface Parcelling<T> {
 
             @Override // com.android.internal.util.Parcelling
             public Set<String> unparcel(Parcel parcel) {
-                int readInt = parcel.readInt();
-                if (readInt < 0) {
+                int i = parcel.readInt();
+                if (i < 0) {
                     return Collections.EMPTY_SET;
                 }
                 ArraySet arraySet = new ArraySet();
-                for (int i = 0; i < readInt; i++) {
+                for (int i2 = 0; i2 < i; i2++) {
                     arraySet.add(parcel.readString());
                 }
                 return arraySet;
@@ -161,12 +162,12 @@ public interface Parcelling<T> {
 
             @Override // com.android.internal.util.Parcelling
             public Set<String> unparcel(Parcel parcel) {
-                int readInt = parcel.readInt();
-                if (readInt < 0) {
+                int i = parcel.readInt();
+                if (i < 0) {
                     return Collections.EMPTY_SET;
                 }
                 ArraySet arraySet = new ArraySet();
-                for (int i = 0; i < readInt; i++) {
+                for (int i2 = 0; i2 < i; i2++) {
                     arraySet.add(TextUtils.safeIntern(parcel.readString()));
                 }
                 return arraySet;
@@ -190,12 +191,12 @@ public interface Parcelling<T> {
             /* JADX WARN: Can't rename method to resolve collision */
             @Override // com.android.internal.util.Parcelling
             public ArraySet<String> unparcel(Parcel parcel) {
-                int readInt = parcel.readInt();
-                if (readInt < 0) {
+                int i = parcel.readInt();
+                if (i < 0) {
                     return null;
                 }
                 ArraySet<String> arraySet = new ArraySet<>();
-                for (int i = 0; i < readInt; i++) {
+                for (int i2 = 0; i2 < i; i2++) {
                     arraySet.add(TextUtils.safeIntern(parcel.readString()));
                 }
                 return arraySet;
@@ -217,14 +218,14 @@ public interface Parcelling<T> {
             /* JADX WARN: Can't rename method to resolve collision */
             @Override // com.android.internal.util.Parcelling
             public Boolean unparcel(Parcel parcel) {
-                int readInt = parcel.readInt();
-                if (readInt == -1) {
+                int i = parcel.readInt();
+                if (i == -1) {
                     return Boolean.TRUE;
                 }
-                if (readInt == 0) {
+                if (i == 0) {
                     return Boolean.FALSE;
                 }
-                if (readInt == 1) {
+                if (i == 1) {
                     return null;
                 }
                 throw new IllegalStateException("Malformed Parcel reading Boolean: " + parcel);
@@ -239,11 +240,11 @@ public interface Parcelling<T> {
 
             @Override // com.android.internal.util.Parcelling
             public Pattern unparcel(Parcel parcel) {
-                String readString = parcel.readString();
-                if (readString == null) {
+                String string = parcel.readString();
+                if (string == null) {
                     return null;
                 }
-                return Pattern.compile(readString);
+                return Pattern.compile(string);
             }
         }
 
@@ -255,11 +256,11 @@ public interface Parcelling<T> {
 
             @Override // com.android.internal.util.Parcelling
             public UUID unparcel(Parcel parcel) {
-                String readString = parcel.readString();
-                if (readString == null) {
+                String string = parcel.readString();
+                if (string == null) {
                     return null;
                 }
-                return UUID.fromString(readString);
+                return UUID.fromString(string);
             }
         }
 
@@ -272,12 +273,12 @@ public interface Parcelling<T> {
 
             @Override // com.android.internal.util.Parcelling
             public Instant unparcel(Parcel parcel) {
-                long readLong = parcel.readLong();
-                int readInt = parcel.readInt();
-                if (readLong == Long.MIN_VALUE) {
+                long j = parcel.readLong();
+                int i = parcel.readInt();
+                if (j == Long.MIN_VALUE) {
                     return null;
                 }
-                return Instant.ofEpochSecond(readLong, readInt);
+                return Instant.ofEpochSecond(j, i);
             }
         }
     }

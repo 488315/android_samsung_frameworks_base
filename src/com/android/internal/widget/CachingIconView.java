@@ -56,10 +56,10 @@ public class CachingIconView extends ImageView {
         if (attributeSet == null) {
             return;
         }
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.CachingIconView, i, i2);
-        this.mMaxDrawableWidth = obtainStyledAttributes.getDimensionPixelSize(0, -1);
-        this.mMaxDrawableHeight = obtainStyledAttributes.getDimensionPixelSize(1, -1);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.CachingIconView, i, i2);
+        this.mMaxDrawableWidth = typedArrayObtainStyledAttributes.getDimensionPixelSize(0, -1);
+        this.mMaxDrawableHeight = typedArrayObtainStyledAttributes.getDimensionPixelSize(1, -1);
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     @Override // android.widget.ImageView
@@ -69,11 +69,11 @@ public class CachingIconView extends ImageView {
             return;
         }
         this.mInternalSetDrawable = true;
-        Drawable loadSizeRestrictedIcon = loadSizeRestrictedIcon(icon);
-        if (loadSizeRestrictedIcon == null) {
+        Drawable drawableLoadSizeRestrictedIcon = loadSizeRestrictedIcon(icon);
+        if (drawableLoadSizeRestrictedIcon == null) {
             super.setImageIcon(icon);
         } else {
-            super.lambda$setImageURIAsync$2(loadSizeRestrictedIcon);
+            super.lambda$setImageURIAsync$2(drawableLoadSizeRestrictedIcon);
         }
         this.mInternalSetDrawable = false;
     }
@@ -85,12 +85,12 @@ public class CachingIconView extends ImageView {
     @Override // android.widget.ImageView
     public Runnable setImageIconAsync(Icon icon) {
         resetCache();
-        final Drawable loadSizeRestrictedIcon = loadSizeRestrictedIcon(icon);
-        if (loadSizeRestrictedIcon != null) {
+        final Drawable drawableLoadSizeRestrictedIcon = loadSizeRestrictedIcon(icon);
+        if (drawableLoadSizeRestrictedIcon != null) {
             return new Runnable() { // from class: com.android.internal.widget.CachingIconView$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    CachingIconView.this.lambda$setImageIconAsync$0(loadSizeRestrictedIcon);
+                    this.f$0.lambda$setImageIconAsync$0(drawableLoadSizeRestrictedIcon);
                 }
             };
         }
@@ -104,11 +104,11 @@ public class CachingIconView extends ImageView {
             return;
         }
         this.mInternalSetDrawable = true;
-        Drawable loadSizeRestrictedDrawable = loadSizeRestrictedDrawable(i);
-        if (loadSizeRestrictedDrawable == null) {
+        Drawable drawableLoadSizeRestrictedDrawable = loadSizeRestrictedDrawable(i);
+        if (drawableLoadSizeRestrictedDrawable == null) {
             super.setImageResource(i);
         } else {
-            super.lambda$setImageURIAsync$2(loadSizeRestrictedDrawable);
+            super.lambda$setImageURIAsync$2(drawableLoadSizeRestrictedDrawable);
         }
         this.mInternalSetDrawable = false;
     }
@@ -120,12 +120,12 @@ public class CachingIconView extends ImageView {
     @Override // android.widget.ImageView
     public Runnable setImageResourceAsync(int i) {
         resetCache();
-        final Drawable loadSizeRestrictedDrawable = loadSizeRestrictedDrawable(i);
-        if (loadSizeRestrictedDrawable != null) {
+        final Drawable drawableLoadSizeRestrictedDrawable = loadSizeRestrictedDrawable(i);
+        if (drawableLoadSizeRestrictedDrawable != null) {
             return new Runnable() { // from class: com.android.internal.widget.CachingIconView$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    CachingIconView.this.lambda$setImageResourceAsync$1(loadSizeRestrictedDrawable);
+                    this.f$0.lambda$setImageResourceAsync$1(drawableLoadSizeRestrictedDrawable);
                 }
             };
         }
@@ -136,13 +136,13 @@ public class CachingIconView extends ImageView {
     @RemotableViewMethod(asyncImpl = "setImageURIAsync")
     public void setImageURI(Uri uri) {
         resetCache();
-        Drawable loadSizeRestrictedUri = loadSizeRestrictedUri(uri);
-        if (loadSizeRestrictedUri == null) {
+        Drawable drawableLoadSizeRestrictedUri = loadSizeRestrictedUri(uri);
+        if (drawableLoadSizeRestrictedUri == null) {
             super.setImageURI(uri);
             return;
         }
         this.mInternalSetDrawable = true;
-        super.lambda$setImageURIAsync$2(loadSizeRestrictedUri);
+        super.lambda$setImageURIAsync$2(drawableLoadSizeRestrictedUri);
         this.mInternalSetDrawable = false;
     }
 
@@ -153,14 +153,14 @@ public class CachingIconView extends ImageView {
     @Override // android.widget.ImageView
     public Runnable setImageURIAsync(Uri uri) {
         resetCache();
-        final Drawable loadSizeRestrictedUri = loadSizeRestrictedUri(uri);
-        if (loadSizeRestrictedUri == null) {
+        final Drawable drawableLoadSizeRestrictedUri = loadSizeRestrictedUri(uri);
+        if (drawableLoadSizeRestrictedUri == null) {
             return super.setImageURIAsync(uri);
         }
         return new Runnable() { // from class: com.android.internal.widget.CachingIconView$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
-                CachingIconView.this.lambda$setImageURIAsync$2(loadSizeRestrictedUri);
+                this.f$0.lambda$setImageURIAsync$2(drawableLoadSizeRestrictedUri);
             }
         };
     }
@@ -191,11 +191,11 @@ public class CachingIconView extends ImageView {
         boolean z = false;
         if (icon != null) {
             if (icon.getType() == 2) {
-                String normalizeIconPackage = normalizeIconPackage(icon);
-                if (this.mLastResId != 0 && icon.getResId() == this.mLastResId && Objects.equals(normalizeIconPackage, this.mLastPackage)) {
+                String strNormalizeIconPackage = normalizeIconPackage(icon);
+                if (this.mLastResId != 0 && icon.getResId() == this.mLastResId && Objects.equals(strNormalizeIconPackage, this.mLastPackage)) {
                     z = true;
                 }
-                this.mLastPackage = normalizeIconPackage;
+                this.mLastPackage = strNormalizeIconPackage;
                 this.mLastResId = icon.getResId();
                 return z;
             }

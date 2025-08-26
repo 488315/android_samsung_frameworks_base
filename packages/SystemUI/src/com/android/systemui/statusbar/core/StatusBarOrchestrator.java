@@ -32,7 +32,6 @@ import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$unsafeFlow$1;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class StatusBarOrchestrator implements Dumpable {
     public final AutoHideController autoHideController;
@@ -53,7 +52,6 @@ public final class StatusBarOrchestrator implements Dumpable {
     public final FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 statusBarVisible;
     public final StatusBarWindowStatePerDisplayRepository statusBarWindowStateRepository;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Factory {
         StatusBarOrchestrator create(int i, CoroutineScope coroutineScope, StatusBarWindowStatePerDisplayRepository statusBarWindowStatePerDisplayRepository, StatusBarModePerDisplayRepository statusBarModePerDisplayRepository, StatusBarInitializer statusBarInitializer, StatusBarWindowController statusBarWindowController, AutoHideController autoHideController);
     }
@@ -69,18 +67,18 @@ public final class StatusBarOrchestrator implements Dumpable {
         this.bubblesOptional = optional;
         this.dumpManager = dumpManager;
         this.dumpableName = i != 0 ? MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "StatusBarOrchestrator") : "StatusBarOrchestrator";
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(null);
-        this.phoneStatusBarViewController = MutableStateFlow;
-        StateFlowImpl MutableStateFlow2 = StateFlowKt.MutableStateFlow(null);
-        this.phoneStatusBarTransitions = MutableStateFlow2;
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(null);
+        this.phoneStatusBarViewController = stateFlowImplMutableStateFlow;
+        StateFlowImpl stateFlowImplMutableStateFlow2 = StateFlowKt.MutableStateFlow(null);
+        this.phoneStatusBarTransitions = stateFlowImplMutableStateFlow2;
         StatusBarModePerDisplayRepositoryImpl statusBarModePerDisplayRepositoryImpl = (StatusBarModePerDisplayRepositoryImpl) statusBarModePerDisplayRepository;
         StatusBarWindowStatePerDisplayRepositoryImpl statusBarWindowStatePerDisplayRepositoryImpl = (StatusBarWindowStatePerDisplayRepositoryImpl) statusBarWindowStatePerDisplayRepository;
-        FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1 combine = FlowKt.combine(statusBarModePerDisplayRepositoryImpl.isTransientShown, powerInteractor.isAwake, statusBarWindowStatePerDisplayRepositoryImpl.windowState, new StatusBarOrchestrator$shouldAnimateNextBarModeChange$1(null));
-        this.shouldAnimateNextBarModeChange = combine;
-        this.controllerAndBouncerShowing = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(new FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1(MutableStateFlow), primaryBouncerInteractor.isShowing, StatusBarOrchestrator$controllerAndBouncerShowing$3.INSTANCE);
-        this.barTransitionsAndDeviceAsleep = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(new FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1(MutableStateFlow2), powerInteractor.isAsleep, StatusBarOrchestrator$barTransitionsAndDeviceAsleep$3.INSTANCE);
+        FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1 flowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1Combine = FlowKt.combine(statusBarModePerDisplayRepositoryImpl.isTransientShown, powerInteractor.isAwake, statusBarWindowStatePerDisplayRepositoryImpl.windowState, new StatusBarOrchestrator$shouldAnimateNextBarModeChange$1(null));
+        this.shouldAnimateNextBarModeChange = flowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1Combine;
+        this.controllerAndBouncerShowing = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(new FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1(stateFlowImplMutableStateFlow), primaryBouncerInteractor.isShowing, StatusBarOrchestrator$controllerAndBouncerShowing$3.INSTANCE);
+        this.barTransitionsAndDeviceAsleep = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(new FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1(stateFlowImplMutableStateFlow2), powerInteractor.isAsleep, StatusBarOrchestrator$barTransitionsAndDeviceAsleep$3.INSTANCE);
         this.statusBarVisible = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(statusBarModePerDisplayRepositoryImpl.statusBarMode, statusBarWindowStatePerDisplayRepositoryImpl.windowState, new StatusBarOrchestrator$statusBarVisible$1(null));
-        this.barModeUpdate = FlowKt__DistinctKt.distinctUntilChangedBy$FlowKt__DistinctKt(FlowKt.combine(combine, new FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1(MutableStateFlow2), statusBarModePerDisplayRepositoryImpl.statusBarMode, StatusBarOrchestrator$barModeUpdate$3.INSTANCE), new StatusBarOrchestrator$$ExternalSyntheticLambda0(), FlowKt__DistinctKt.defaultAreEquivalent);
+        this.barModeUpdate = FlowKt__DistinctKt.distinctUntilChangedBy$FlowKt__DistinctKt(FlowKt.combine(flowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$1Combine, new FlowKt__TransformKt$filterNotNull$$inlined$unsafeTransform$1(stateFlowImplMutableStateFlow2), statusBarModePerDisplayRepositoryImpl.statusBarMode, StatusBarOrchestrator$barModeUpdate$3.INSTANCE), new StatusBarOrchestrator$$ExternalSyntheticLambda0(), FlowKt__DistinctKt.defaultAreEquivalent);
     }
 
     @Override // com.android.systemui.Dumpable

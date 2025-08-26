@@ -7,16 +7,13 @@ import android.view.WindowInsetsController;
 import android.view.inputmethod.InputMethodManager;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class SoftwareKeyboardControllerCompat {
     public final Impl30 mImpl;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Impl {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Impl20 extends Impl {
         public final View mView;
 
@@ -32,26 +29,26 @@ public final class SoftwareKeyboardControllerCompat {
         }
 
         public void show() {
-            final View view = this.mView;
-            if (view == null) {
+            final View viewFindViewById = this.mView;
+            if (viewFindViewById == null) {
                 return;
             }
-            if (view.isInEditMode() || view.onCheckIsTextEditor()) {
-                view.requestFocus();
+            if (viewFindViewById.isInEditMode() || viewFindViewById.onCheckIsTextEditor()) {
+                viewFindViewById.requestFocus();
             } else {
-                view = view.getRootView().findFocus();
+                viewFindViewById = viewFindViewById.getRootView().findFocus();
             }
-            if (view == null) {
-                view = this.mView.getRootView().findViewById(R.id.content);
+            if (viewFindViewById == null) {
+                viewFindViewById = this.mView.getRootView().findViewById(R.id.content);
             }
-            if (view == null || !view.hasWindowFocus()) {
+            if (viewFindViewById == null || !viewFindViewById.hasWindowFocus()) {
                 return;
             }
-            view.post(new Runnable() { // from class: androidx.core.view.SoftwareKeyboardControllerCompat$Impl20$$ExternalSyntheticLambda0
+            viewFindViewById.post(new Runnable() { // from class: androidx.core.view.SoftwareKeyboardControllerCompat$Impl20$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    View view2 = view;
-                    ((InputMethodManager) view2.getContext().getSystemService("input_method")).showSoftInput(view2, 0);
+                    View view = viewFindViewById;
+                    ((InputMethodManager) view.getContext().getSystemService("input_method")).showSoftInput(view, 0);
                 }
             });
         }
@@ -61,7 +58,6 @@ public final class SoftwareKeyboardControllerCompat {
         this.mImpl = new Impl30(view);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Impl30 extends Impl20 {
         public final View mView;
         public final WindowInsetsController mWindowInsetsController;

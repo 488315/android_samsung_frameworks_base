@@ -19,6 +19,8 @@ import com.android.systemui.Dumpable;
 import com.android.systemui.R;
 import com.android.systemui.classifier.FalsingCollector;
 import com.android.systemui.dump.DumpManager;
+import com.android.systemui.keyguard.KeyguardEditModeController;
+import com.android.systemui.keyguard.KeyguardEditModeControllerImpl;
 import com.android.systemui.keyguard.WakefulnessLifecycle;
 import com.android.systemui.keyguard.animator.KeyguardTouchSecurityInjector;
 import com.android.systemui.keyguard.domain.interactor.NaturalScrollingSettingObserver;
@@ -78,7 +80,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class LockscreenShadeTransitionController implements Dumpable {
     public static final Companion Companion = new Companion(null);
@@ -136,7 +137,6 @@ public final class LockscreenShadeTransitionController implements Dumpable {
     public final DragDownHelper touchHelper;
     public int udfpsTransitionDistance;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Callback {
         default void setTransitionToFullShadeAmount(float f) {
         }
@@ -160,7 +160,6 @@ public final class LockscreenShadeTransitionController implements Dumpable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -373,46 +372,25 @@ public final class LockscreenShadeTransitionController implements Dumpable {
         this.callbacks.add(callback);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:11:0x0026, code lost:
-    
-        if (r0.mDynamicPrivacyController.isInLockedDownShade() != false) goto L12;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:12:0x0028  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final boolean canDragDown$frameworks__base__packages__SystemUI__android_common__SystemUI_core() {
-        /*
-            r3 = this;
-            dagger.Lazy r0 = r3.editModeController
-            java.lang.Object r0 = r0.get()
-            com.android.systemui.keyguard.KeyguardEditModeController r0 = (com.android.systemui.keyguard.KeyguardEditModeController) r0
-            com.android.systemui.keyguard.KeyguardEditModeControllerImpl r0 = (com.android.systemui.keyguard.KeyguardEditModeControllerImpl) r0
-            boolean r0 = r0.getVIRunning()
-            r1 = 0
-            if (r0 == 0) goto L12
-            return r1
-        L12:
-            com.android.systemui.statusbar.SysuiStatusBarStateController r0 = r3.statusBarStateController
-            int r0 = r0.getState()
-            r2 = 1
-            if (r0 == r2) goto L28
-            com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayoutController r0 = r3.nsslController
-            if (r0 != 0) goto L20
-            r0 = 0
-        L20:
-            com.android.systemui.statusbar.notification.DynamicPrivacyController r0 = r0.mDynamicPrivacyController
-            boolean r0 = r0.isInLockedDownShade()
-            if (r0 == 0) goto L2e
-        L28:
-            boolean r3 = r3.isQsFullyCollapsed$1()
-            if (r3 != 0) goto L2f
-        L2e:
-            return r1
-        L2f:
-            return r2
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.LockscreenShadeTransitionController.canDragDown$frameworks__base__packages__SystemUI__android_common__SystemUI_core():boolean");
+        if (((KeyguardEditModeControllerImpl) ((KeyguardEditModeController) this.editModeController.get())).getVIRunning()) {
+            return false;
+        }
+        if (this.statusBarStateController.getState() != 1) {
+            NotificationStackScrollLayoutController notificationStackScrollLayoutController = this.nsslController;
+            if (notificationStackScrollLayoutController == null) {
+                notificationStackScrollLayoutController = null;
+            }
+            if (notificationStackScrollLayoutController.mDynamicPrivacyController.isInLockedDownShade()) {
+            }
+        } else if (isQsFullyCollapsed$1()) {
+            return true;
+        }
+        return false;
     }
 
     @Override // com.android.systemui.Dumpable
@@ -466,17 +444,17 @@ public final class LockscreenShadeTransitionController implements Dumpable {
         LogLevel logLevel = LogLevel.INFO;
         LSShadeTransitionLogger$$ExternalSyntheticLambda0 lSShadeTransitionLogger$$ExternalSyntheticLambda0 = new LSShadeTransitionLogger$$ExternalSyntheticLambda0(5);
         LogBuffer logBuffer = lSShadeTransitionLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("LockscreenShadeTransitionController", logLevel, lSShadeTransitionLogger$$ExternalSyntheticLambda0, null);
-        ((LogMessageImpl) obtain).bool1 = z2;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("LockscreenShadeTransitionController", logLevel, lSShadeTransitionLogger$$ExternalSyntheticLambda0, null);
+        ((LogMessageImpl) logMessageObtain).bool1 = z2;
+        logBuffer.commit(logMessageObtain);
         if (z2) {
             SecPanelTouchBlockHelper secPanelTouchBlockHelper = (SecPanelTouchBlockHelper) this.panelTouchBlockHelper$delegate.getValue();
             if (secPanelTouchBlockHelper == null || !secPanelTouchBlockHelper.isKeyguardPanelDisabled()) {
                 goToLockedShadeInternal(view, !z ? new Function1() { // from class: com.android.systemui.statusbar.LockscreenShadeTransitionController$$ExternalSyntheticLambda1
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
-                        ((ShadeLockscreenInteractor) LockscreenShadeTransitionController.this.shadeLockscreenInteractorLazy.get()).transitionToExpandedShade(((Long) obj).longValue(), false);
+                    public final Object mo781invoke(Object obj) {
+                        ((ShadeLockscreenInteractor) this.f$0.shadeLockscreenInteractorLazy.get()).transitionToExpandedShade(((Long) obj).longValue(), false);
                         return Unit.INSTANCE;
                     }
                 } : null, null);
@@ -487,9 +465,9 @@ public final class LockscreenShadeTransitionController implements Dumpable {
     }
 
     public final void goToLockedShadeInternal(View view, Function1 function1, LockscreenShadeTransitionController$onDraggedDown$cancelRunnable$1 lockscreenShadeTransitionController$onDraggedDown$cancelRunnable$1) {
-        boolean booleanValue = ((Boolean) ((ShadeInteractorImpl) this.shadeInteractor).isShadeEnabled.$$delegate_0.getValue()).booleanValue();
+        boolean zBooleanValue = ((Boolean) ((ShadeInteractorImpl) this.shadeInteractor).isShadeEnabled.$$delegate_0.getValue()).booleanValue();
         LSShadeTransitionLogger lSShadeTransitionLogger = this.logger;
-        if (!booleanValue) {
+        if (!zBooleanValue) {
             if (lockscreenShadeTransitionController$onDraggedDown$cancelRunnable$1 != null) {
                 lockscreenShadeTransitionController$onDraggedDown$cancelRunnable$1.run();
             }
@@ -508,12 +486,12 @@ public final class LockscreenShadeTransitionController implements Dumpable {
             return;
         }
         NotificationLockscreenUserManager notificationLockscreenUserManager = this.lockScreenUserManager;
-        int i = ((NotificationLockscreenUserManagerImpl) notificationLockscreenUserManager).mCurrentUserId;
+        int userId = ((NotificationLockscreenUserManagerImpl) notificationLockscreenUserManager).mCurrentUserId;
         if (view instanceof ExpandableNotificationRow) {
             ExpandableNotificationRow expandableNotificationRow = (ExpandableNotificationRow) view;
             expandableNotificationRow.setUserExpanded(true, true);
             expandableNotificationRow.mGroupExpansionChanging = true;
-            i = expandableNotificationRow.getEntryLegacy().mSbn.getUserId();
+            userId = expandableNotificationRow.getEntryLegacy().mSbn.getUserId();
         }
         notificationLockscreenUserManager.getClass();
         this.falsingCollector.getClass();
@@ -526,28 +504,28 @@ public final class LockscreenShadeTransitionController implements Dumpable {
         if (!statusBarKeyguardViewManager.isBouncerShowing() && centralSurfacesImpl.mStatusBarStateController.getState() != 0) {
             statusBarKeyguardViewManager.resetKeyguardDismissAction();
         }
-        ((NotificationLockscreenUserManagerImpl) notificationLockscreenUserManager).isLockscreenPublicMode(i);
+        ((NotificationLockscreenUserManagerImpl) notificationLockscreenUserManager).isLockscreenPublicMode(userId);
         final boolean z = function1 != null;
         lSShadeTransitionLogger.getClass();
         LogLevel logLevel2 = LogLevel.INFO;
         Function1 function12 = new Function1() { // from class: com.android.systemui.statusbar.phone.LSShadeTransitionLogger$$ExternalSyntheticLambda13
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 return "Going to locked shade ".concat(z ? "with" : "without a custom handler");
             }
         };
         LogBuffer logBuffer2 = lSShadeTransitionLogger.buffer;
-        LogMessage obtain = logBuffer2.obtain("LockscreenShadeTransitionController", logLevel2, function12, null);
-        ((LogMessageImpl) obtain).bool1 = z;
-        logBuffer2.commit(obtain);
+        LogMessage logMessageObtain = logBuffer2.obtain("LockscreenShadeTransitionController", logLevel2, function12, null);
+        ((LogMessageImpl) logMessageObtain).bool1 = z;
+        logBuffer2.commit(logMessageObtain);
         SysuiStatusBarStateController sysuiStatusBarStateController = this.statusBarStateController;
         if (sysuiStatusBarStateController.isDozing()) {
             this.isWakingToShadeLocked = true;
         }
         sysuiStatusBarStateController.setState(2);
         if (function1 != null) {
-            function1.mo779invoke(0L);
+            function1.mo781invoke(0L);
         } else {
             performDefaultGoToFullShadeAnimation(0L);
         }
@@ -606,13 +584,13 @@ public final class LockscreenShadeTransitionController implements Dumpable {
         LogLevel logLevel = LogLevel.INFO;
         LSShadeTransitionLogger$$ExternalSyntheticLambda0 lSShadeTransitionLogger$$ExternalSyntheticLambda0 = new LSShadeTransitionLogger$$ExternalSyntheticLambda0(19);
         LogBuffer logBuffer = lSShadeTransitionLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("LockscreenShadeTransitionController", logLevel, lSShadeTransitionLogger$$ExternalSyntheticLambda0, null);
+        LogMessage logMessageObtain = logBuffer.obtain("LockscreenShadeTransitionController", logLevel, lSShadeTransitionLogger$$ExternalSyntheticLambda0, null);
         ExpandableNotificationRow expandableNotificationRow = expandableView instanceof ExpandableNotificationRow ? (ExpandableNotificationRow) expandableView : null;
         if (expandableNotificationRow == null || (str = expandableNotificationRow.mLoggingKey) == null) {
             str = "no entry";
         }
-        ((LogMessageImpl) obtain).str1 = str;
-        logBuffer.commit(obtain);
+        ((LogMessageImpl) logMessageObtain).str1 = str;
+        logBuffer.commit(logMessageObtain);
         NotificationStackScrollLayoutController notificationStackScrollLayoutController = this.nsslController;
         if (notificationStackScrollLayoutController == null) {
             notificationStackScrollLayoutController = null;
@@ -642,9 +620,9 @@ public final class LockscreenShadeTransitionController implements Dumpable {
         LogLevel logLevel = LogLevel.DEBUG;
         LSShadeTransitionLogger$$ExternalSyntheticLambda0 lSShadeTransitionLogger$$ExternalSyntheticLambda0 = new LSShadeTransitionLogger$$ExternalSyntheticLambda0(14);
         LogBuffer logBuffer = lSShadeTransitionLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("LockscreenShadeTransitionController", logLevel, lSShadeTransitionLogger$$ExternalSyntheticLambda0, null);
-        ((LogMessageImpl) obtain).long1 = j;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("LockscreenShadeTransitionController", logLevel, lSShadeTransitionLogger$$ExternalSyntheticLambda0, null);
+        ((LogMessageImpl) logMessageObtain).long1 = j;
+        logBuffer.commit(logMessageObtain);
         ((ShadeLockscreenInteractor) this.shadeLockscreenInteractorLazy.get()).transitionToExpandedShade(j, false);
         this.forceApplyAmount = true;
         setDragDownAmount$frameworks__base__packages__SystemUI__android_common__SystemUI_core(1.0f);
@@ -667,9 +645,9 @@ public final class LockscreenShadeTransitionController implements Dumpable {
                 notificationStackScrollLayoutController = null;
             }
             if (!notificationStackScrollLayoutController.mDynamicPrivacyController.isInLockedDownShade() || this.dragDownAmount == 0.0f || this.forceApplyAmount) {
-                float saturate = MathUtils.saturate(this.dragDownAmount / this.notificationShelfTransitionDistance);
-                this.fractionToShade = saturate;
-                ((ShadeRepositoryImpl) this.shadeRepository)._lockscreenShadeExpansion.updateState(null, Float.valueOf(saturate));
+                float fSaturate = MathUtils.saturate(this.dragDownAmount / this.notificationShelfTransitionDistance);
+                this.fractionToShade = fSaturate;
+                ((ShadeRepositoryImpl) this.shadeRepository)._lockscreenShadeExpansion.updateState(null, Float.valueOf(fSaturate));
                 NotificationStackScrollLayoutController notificationStackScrollLayoutController2 = this.nsslController;
                 if (notificationStackScrollLayoutController2 == null) {
                     notificationStackScrollLayoutController2 = null;
@@ -707,14 +685,14 @@ public final class LockscreenShadeTransitionController implements Dumpable {
                     lockscreenShadeScrimTransitionController.scrimProgress = MathUtils.saturate(f / lockscreenShadeScrimTransitionController.scrimTransitionDistance);
                     float f5 = f - lockscreenShadeScrimTransitionController.notificationsScrimTransitionDelay;
                     lockscreenShadeScrimTransitionController.notificationsScrimDragAmount = f5;
-                    float saturate2 = MathUtils.saturate(f5 / lockscreenShadeScrimTransitionController.notificationsScrimTransitionDistance);
-                    lockscreenShadeScrimTransitionController.notificationsScrimProgress = saturate2;
+                    float fSaturate2 = MathUtils.saturate(f5 / lockscreenShadeScrimTransitionController.notificationsScrimTransitionDistance);
+                    lockscreenShadeScrimTransitionController.notificationsScrimProgress = fSaturate2;
                     float f6 = lockscreenShadeScrimTransitionController.scrimProgress;
                     ScrimController scrimController = lockscreenShadeScrimTransitionController.scrimController;
-                    if (f6 != scrimController.mTransitionToFullShadeProgress || saturate2 != scrimController.mTransitionToLockScreenFullShadeNotificationsProgress) {
+                    if (f6 != scrimController.mTransitionToFullShadeProgress || fSaturate2 != scrimController.mTransitionToLockScreenFullShadeNotificationsProgress) {
                         scrimController.mTransitionToFullShadeProgress = f6;
-                        scrimController.mTransitionToLockScreenFullShadeNotificationsProgress = saturate2;
-                        boolean z = f6 > 0.0f || saturate2 > 0.0f;
+                        scrimController.mTransitionToLockScreenFullShadeNotificationsProgress = fSaturate2;
+                        boolean z = f6 > 0.0f || fSaturate2 > 0.0f;
                         if (z != scrimController.mTransitioningToFullShade) {
                             scrimController.mTransitioningToFullShade = z;
                         }
@@ -725,9 +703,9 @@ public final class LockscreenShadeTransitionController implements Dumpable {
                 LockscreenShadeKeyguardTransitionController lockscreenShadeKeyguardTransitionController = (LockscreenShadeKeyguardTransitionController) this.keyguardTransitionController$delegate.getValue();
                 if (f != lockscreenShadeKeyguardTransitionController.dragDownAmount) {
                     lockscreenShadeKeyguardTransitionController.dragDownAmount = f;
-                    float saturate3 = MathUtils.saturate(f / lockscreenShadeKeyguardTransitionController.alphaTransitionDistance);
-                    lockscreenShadeKeyguardTransitionController.alphaProgress = saturate3;
-                    lockscreenShadeKeyguardTransitionController.alpha = 1.0f - saturate3;
+                    float fSaturate3 = MathUtils.saturate(f / lockscreenShadeKeyguardTransitionController.alphaTransitionDistance);
+                    lockscreenShadeKeyguardTransitionController.alphaProgress = fSaturate3;
+                    lockscreenShadeKeyguardTransitionController.alpha = 1.0f - fSaturate3;
                     lockscreenShadeKeyguardTransitionController.statusBarAlpha = -1.0f;
                     ShadeLockscreenInteractor shadeLockscreenInteractor = lockscreenShadeKeyguardTransitionController.shadeLockscreenInteractor;
                     shadeLockscreenInteractor.setKeyguardStatusBarAlpha();
@@ -743,17 +721,17 @@ public final class LockscreenShadeTransitionController implements Dumpable {
                         f2 = 0.0f;
                     } else {
                         float height = notificationStackScrollLayoutController3.mView.getHeight();
-                        float saturate4 = MathUtils.saturate(singleShadeLockScreenOverScroller.expansionDragDownAmount / height);
+                        float fSaturate4 = MathUtils.saturate(singleShadeLockScreenOverScroller.expansionDragDownAmount / height);
                         float f8 = singleShadeLockScreenOverScroller.totalDistanceForFullShadeTransition / height;
                         Interpolator interpolator = Interpolators.EMPHASIZED;
                         if (f8 == 0.0f) {
                             throw new IllegalArgumentException("Invalid values for overshoot");
                         }
-                        float exp = ((float) (1.0d - Math.exp((-(((float) Math.log(2.6666665f)) / f8)) * saturate4))) * 1.6f;
-                        if (0.0f > exp) {
-                            exp = 0.0f;
+                        float fExp = ((float) (1.0d - Math.exp((-(((float) Math.log(2.6666665f)) / f8)) * fSaturate4))) * 1.6f;
+                        if (0.0f > fExp) {
+                            fExp = 0.0f;
                         }
-                        f2 = exp * singleShadeLockScreenOverScroller.maxOverScrollAmount;
+                        f2 = fExp * singleShadeLockScreenOverScroller.maxOverScrollAmount;
                     }
                     notificationStackScrollLayoutController3.setOverScrollAmount((int) f2);
                 }
@@ -774,31 +752,31 @@ public final class LockscreenShadeTransitionController implements Dumpable {
         LogLevel logLevel = LogLevel.DEBUG;
         LSShadeTransitionLogger$$ExternalSyntheticLambda0 lSShadeTransitionLogger$$ExternalSyntheticLambda0 = new LSShadeTransitionLogger$$ExternalSyntheticLambda0(18);
         LogBuffer logBuffer = lSShadeTransitionLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("LockscreenShadeTransitionController", logLevel, lSShadeTransitionLogger$$ExternalSyntheticLambda0, null);
-        ((LogMessageImpl) obtain).double1 = f;
-        logBuffer.commit(obtain);
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(this.dragDownAmount, f);
-        ofFloat.setInterpolator(com.android.wm.shell.shared.animation.Interpolators.FAST_OUT_SLOW_IN);
-        ofFloat.setDuration(375L);
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.LockscreenShadeTransitionController$setDragDownAmountAnimated$1
+        LogMessage logMessageObtain = logBuffer.obtain("LockscreenShadeTransitionController", logLevel, lSShadeTransitionLogger$$ExternalSyntheticLambda0, null);
+        ((LogMessageImpl) logMessageObtain).double1 = f;
+        logBuffer.commit(logMessageObtain);
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(this.dragDownAmount, f);
+        valueAnimatorOfFloat.setInterpolator(com.android.wm.shell.shared.animation.Interpolators.FAST_OUT_SLOW_IN);
+        valueAnimatorOfFloat.setDuration(375L);
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.LockscreenShadeTransitionController.setDragDownAmountAnimated.1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                 LockscreenShadeTransitionController.this.setDragDownAmount$frameworks__base__packages__SystemUI__android_common__SystemUI_core(((Float) valueAnimator.getAnimatedValue()).floatValue());
             }
         });
         if (j > 0) {
-            ofFloat.setStartDelay(j);
+            valueAnimatorOfFloat.setStartDelay(j);
         }
         if (lockscreenShadeTransitionController$$ExternalSyntheticLambda0 != null) {
-            ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.statusbar.LockscreenShadeTransitionController$setDragDownAmountAnimated$2
+            valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.statusbar.LockscreenShadeTransitionController.setDragDownAmountAnimated.2
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public final void onAnimationEnd(Animator animator) {
-                    Function0.this.invoke();
+                    lockscreenShadeTransitionController$$ExternalSyntheticLambda0.invoke();
                 }
             });
         }
-        ofFloat.start();
-        this.dragDownAnimator = ofFloat;
+        valueAnimatorOfFloat.start();
+        this.dragDownAnimator = valueAnimatorOfFloat;
     }
 
     public final void setOverDragAmount$frameworks__base__packages__SystemUI__android_common__SystemUI_core(float f) {
@@ -822,20 +800,20 @@ public final class LockscreenShadeTransitionController implements Dumpable {
 
     public final void setPulseHeight(float f, boolean z) {
         if (z) {
-            ValueAnimator ofFloat = ValueAnimator.ofFloat(this.pulseHeight, f);
-            ofFloat.setInterpolator(com.android.wm.shell.shared.animation.Interpolators.FAST_OUT_SLOW_IN);
-            ofFloat.setDuration(375L);
-            ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.LockscreenShadeTransitionController$setPulseHeight$1
+            ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(this.pulseHeight, f);
+            valueAnimatorOfFloat.setInterpolator(com.android.wm.shell.shared.animation.Interpolators.FAST_OUT_SLOW_IN);
+            valueAnimatorOfFloat.setDuration(375L);
+            valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.LockscreenShadeTransitionController.setPulseHeight.1
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                     LockscreenShadeTransitionController lockscreenShadeTransitionController = LockscreenShadeTransitionController.this;
-                    float floatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
-                    LockscreenShadeTransitionController.Companion companion = LockscreenShadeTransitionController.Companion;
-                    lockscreenShadeTransitionController.setPulseHeight(floatValue, false);
+                    float fFloatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
+                    Companion companion = LockscreenShadeTransitionController.Companion;
+                    lockscreenShadeTransitionController.setPulseHeight(fFloatValue, false);
                 }
             });
-            ofFloat.start();
-            this.pulseHeightAnimator = ofFloat;
+            valueAnimatorOfFloat.start();
+            this.pulseHeightAnimator = valueAnimatorOfFloat;
             return;
         }
         this.pulseHeight = f;
@@ -854,9 +832,9 @@ public final class LockscreenShadeTransitionController implements Dumpable {
         int i = this.depthControllerTransitionDistance;
         NotificationShadeDepthController notificationShadeDepthController = this.depthController;
         if (i != 0) {
-            float saturate = MathUtils.saturate(f / i);
-            if (notificationShadeDepthController.transitionToFullShadeProgress != saturate) {
-                notificationShadeDepthController.transitionToFullShadeProgress = saturate;
+            float fSaturate = MathUtils.saturate(f / i);
+            if (notificationShadeDepthController.transitionToFullShadeProgress != fSaturate) {
+                notificationShadeDepthController.transitionToFullShadeProgress = fSaturate;
                 notificationShadeDepthController.scheduleUpdate();
             }
         } else if (notificationShadeDepthController.transitionToFullShadeProgress != 0.0f) {
@@ -864,9 +842,9 @@ public final class LockscreenShadeTransitionController implements Dumpable {
             notificationShadeDepthController.scheduleUpdate();
         }
         ((ShadeRepositoryImpl) this.shadeRepository)._udfpsTransitionToFullShadeProgress.updateState(null, Float.valueOf(MathUtils.saturate(f / this.udfpsTransitionDistance)));
-        float saturate2 = MathUtils.saturate(f / this.statusBarTransitionDistance);
+        float fSaturate2 = MathUtils.saturate(f / this.statusBarTransitionDistance);
         CentralSurfacesImpl centralSurfacesImpl = this.centralSurfaces;
-        (centralSurfacesImpl != null ? centralSurfacesImpl : null).mTransitionToFullShadeProgress = saturate2;
+        (centralSurfacesImpl != null ? centralSurfacesImpl : null).mTransitionToFullShadeProgress = fSaturate2;
     }
 
     public final void updateResources$12() {

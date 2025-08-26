@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class CollectionToArray {
     public static final Object[] EMPTY = new Object[0];
@@ -17,13 +16,13 @@ public abstract class CollectionToArray {
         if (size != 0) {
             Iterator it = collection.iterator();
             if (it.hasNext()) {
-                Object[] objArr2 = size <= objArr.length ? objArr : (Object[]) Array.newInstance(objArr.getClass().getComponentType(), size);
+                Object[] objArrCopyOf = size <= objArr.length ? objArr : (Object[]) Array.newInstance(objArr.getClass().getComponentType(), size);
                 while (true) {
                     int i2 = i + 1;
-                    objArr2[i] = it.next();
-                    if (i2 >= objArr2.length) {
+                    objArrCopyOf[i] = it.next();
+                    if (i2 >= objArrCopyOf.length) {
                         if (!it.hasNext()) {
-                            return objArr2;
+                            return objArrCopyOf;
                         }
                         int i3 = ((i2 * 3) + 1) >>> 1;
                         if (i3 <= i2) {
@@ -32,10 +31,10 @@ public abstract class CollectionToArray {
                                 throw new OutOfMemoryError();
                             }
                         }
-                        objArr2 = Arrays.copyOf(objArr2, i3);
+                        objArrCopyOf = Arrays.copyOf(objArrCopyOf, i3);
                     } else if (!it.hasNext()) {
-                        if (objArr2 != objArr) {
-                            return Arrays.copyOf(objArr2, i2);
+                        if (objArrCopyOf != objArr) {
+                            return Arrays.copyOf(objArrCopyOf, i2);
                         }
                         objArr[i2] = null;
                         return objArr;
@@ -62,14 +61,14 @@ public abstract class CollectionToArray {
         if (!it.hasNext()) {
             return objArr;
         }
-        Object[] objArr2 = new Object[size];
+        Object[] objArrCopyOf = new Object[size];
         int i = 0;
         while (true) {
             int i2 = i + 1;
-            objArr2[i] = it.next();
-            if (i2 >= objArr2.length) {
+            objArrCopyOf[i] = it.next();
+            if (i2 >= objArrCopyOf.length) {
                 if (!it.hasNext()) {
-                    return objArr2;
+                    return objArrCopyOf;
                 }
                 int i3 = ((i2 * 3) + 1) >>> 1;
                 if (i3 <= i2) {
@@ -78,9 +77,9 @@ public abstract class CollectionToArray {
                         throw new OutOfMemoryError();
                     }
                 }
-                objArr2 = Arrays.copyOf(objArr2, i3);
+                objArrCopyOf = Arrays.copyOf(objArrCopyOf, i3);
             } else if (!it.hasNext()) {
-                return Arrays.copyOf(objArr2, i2);
+                return Arrays.copyOf(objArrCopyOf, i2);
             }
             i = i2;
         }

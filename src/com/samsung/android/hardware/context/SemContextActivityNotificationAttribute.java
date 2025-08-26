@@ -47,7 +47,18 @@ public class SemContextActivityNotificationAttribute extends SemContextAttribute
         Log.e(TAG, "The activityFilter is wrong.");
     }
 
+    /* JADX WARN: Code restructure failed: missing block: B:21:0x0041, code lost:
+    
+        android.util.Log.e(com.samsung.android.hardware.context.SemContextActivityNotificationAttribute.TAG, "The activity status is wrong.");
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:22:0x0046, code lost:
+    
+        return false;
+     */
     @Override // com.samsung.android.hardware.context.SemContextAttribute
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public boolean checkAttribute() {
         if (this.mActivityFilter == null) {
             return false;
@@ -72,8 +83,6 @@ public class SemContextActivityNotificationAttribute extends SemContextAttribute
             }
             i++;
         }
-        Log.e(TAG, "The activity status is wrong.");
-        return false;
     }
 
     private void setAttribute() {

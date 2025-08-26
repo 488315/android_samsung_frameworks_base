@@ -19,7 +19,6 @@ import com.android.systemui.statusbar.notification.collection.notifcollection.Up
 import com.android.systemui.statusbar.notification.icon.IconManager;
 import com.android.systemui.util.Utils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @CoordinatorScope
 /* loaded from: classes3.dex */
 public class MediaCoordinator implements Coordinator {
@@ -37,9 +36,9 @@ public class MediaCoordinator implements Coordinator {
             if (MediaCoordinator.this.mIsMediaFeatureEnabled.booleanValue()) {
                 StatusBarNotification statusBarNotification = notificationEntry.mSbn;
                 MediaDataManager.Companion.getClass();
-                if (statusBarNotification.getNotification().isMediaNotification()) {
-                    int intValue = ((Integer) MediaCoordinator.this.mIconsState.getOrDefault(notificationEntry, 0)).intValue();
-                    if (intValue == 0) {
+                if (MediaDataManager.Companion.isMediaNotification(statusBarNotification)) {
+                    int iIntValue = ((Integer) MediaCoordinator.this.mIconsState.getOrDefault(notificationEntry, 0)).intValue();
+                    if (iIntValue == 0) {
                         try {
                             MediaCoordinator.this.mIconManager.createIcons(notificationEntry);
                             MediaCoordinator.this.mIconsState.put(notificationEntry, 1);
@@ -48,7 +47,7 @@ public class MediaCoordinator implements Coordinator {
                             MediaCoordinator.this.reportInflationError(notificationEntry, e);
                             MediaCoordinator.this.mIconsState.put(notificationEntry, 2);
                         }
-                    } else if (intValue == 1) {
+                    } else if (iIntValue == 1) {
                         try {
                             MediaCoordinator.this.mIconManager.updateIcons(notificationEntry, false);
                             return true;

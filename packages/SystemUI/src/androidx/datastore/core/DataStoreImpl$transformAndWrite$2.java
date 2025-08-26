@@ -1,13 +1,16 @@
 package androidx.datastore.core;
 
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.CoroutineContext;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
+import kotlin.jvm.internal.Intrinsics;
+import kotlinx.coroutines.BuildersKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class DataStoreImpl$transformAndWrite$2 extends SuspendLambda implements Function1 {
     final /* synthetic */ CoroutineContext $callerContext;
@@ -31,99 +34,69 @@ final class DataStoreImpl$transformAndWrite$2 extends SuspendLambda implements F
 
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
-    public final Object mo779invoke(Object obj) {
+    public final Object mo781invoke(Object obj) {
         return ((DataStoreImpl$transformAndWrite$2) create((Continuation) obj)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:28:0x004c, code lost:
-    
-        if (r9 == r0) goto L29;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:30:0x0034, code lost:
-    
-        if (r9 == r0) goto L29;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:21:0x0053  */
+    /* JADX WARN: Removed duplicated region for block: B:22:0x0058  */
+    /* JADX WARN: Removed duplicated region for block: B:25:0x005d  */
+    /* JADX WARN: Removed duplicated region for block: B:31:0x0073  */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Object invokeSuspend(java.lang.Object r9) {
-        /*
-            r8 = this;
-            kotlin.coroutines.intrinsics.CoroutineSingletons r0 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-            int r1 = r8.label
-            r2 = 3
-            r3 = 2
-            r4 = 1
-            if (r1 == 0) goto L29
-            if (r1 == r4) goto L25
-            if (r1 == r3) goto L1d
-            if (r1 != r2) goto L15
-            java.lang.Object r8 = r8.L$0
-            kotlin.ResultKt.throwOnFailure(r9)
-            return r8
-        L15:
-            java.lang.IllegalStateException r8 = new java.lang.IllegalStateException
-            java.lang.String r9 = "call to 'resume' before 'invoke' with coroutine"
-            r8.<init>(r9)
-            throw r8
-        L1d:
-            java.lang.Object r1 = r8.L$0
-            androidx.datastore.core.Data r1 = (androidx.datastore.core.Data) r1
-            kotlin.ResultKt.throwOnFailure(r9)
-            goto L4f
-        L25:
-            kotlin.ResultKt.throwOnFailure(r9)
-            goto L37
-        L29:
-            kotlin.ResultKt.throwOnFailure(r9)
-            androidx.datastore.core.DataStoreImpl r9 = r8.this$0
-            r8.label = r4
-            java.lang.Object r9 = androidx.datastore.core.DataStoreImpl.access$readDataOrHandleCorruption(r9, r4, r8)
-            if (r9 != r0) goto L37
-            goto L71
-        L37:
-            r1 = r9
-            androidx.datastore.core.Data r1 = (androidx.datastore.core.Data) r1
-            kotlin.coroutines.CoroutineContext r9 = r8.$callerContext
-            androidx.datastore.core.DataStoreImpl$transformAndWrite$2$newData$1 r5 = new androidx.datastore.core.DataStoreImpl$transformAndWrite$2$newData$1
-            kotlin.jvm.functions.Function2 r6 = r8.$transform
-            r7 = 0
-            r5.<init>(r6, r1, r7)
-            r8.L$0 = r1
-            r8.label = r3
-            java.lang.Object r9 = kotlinx.coroutines.BuildersKt.withContext(r9, r5, r8)
-            if (r9 != r0) goto L4f
-            goto L71
-        L4f:
-            java.lang.Object r3 = r1.value
-            if (r3 == 0) goto L58
-            int r3 = r3.hashCode()
-            goto L59
-        L58:
-            r3 = 0
-        L59:
-            int r5 = r1.hashCode
-            if (r3 != r5) goto L73
-            java.lang.Object r1 = r1.value
-            boolean r1 = kotlin.jvm.internal.Intrinsics.areEqual(r1, r9)
-            if (r1 != 0) goto L72
-            androidx.datastore.core.DataStoreImpl r1 = r8.this$0
-            r8.L$0 = r9
-            r8.label = r2
-            java.lang.Object r8 = r1.writeData$datastore_core_release(r9, r4, r8)
-            if (r8 != r0) goto L72
-        L71:
-            return r0
-        L72:
-            return r9
-        L73:
-            java.lang.IllegalStateException r8 = new java.lang.IllegalStateException
-            java.lang.String r9 = "Data in DataStore was mutated but DataStore is only compatible with Immutable types."
-            r8.<init>(r9)
-            throw r8
-        */
-        throw new UnsupportedOperationException("Method not decompiled: androidx.datastore.core.DataStoreImpl$transformAndWrite$2.invokeSuspend(java.lang.Object):java.lang.Object");
+    public final Object invokeSuspend(Object obj) throws Throwable {
+        Data data;
+        Object obj2;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i = this.label;
+        if (i == 0) {
+            ResultKt.throwOnFailure(obj);
+            DataStoreImpl dataStoreImpl = this.this$0;
+            this.label = 1;
+            obj = DataStoreImpl.access$readDataOrHandleCorruption(dataStoreImpl, true, this);
+            if (obj != coroutineSingletons) {
+            }
+            return coroutineSingletons;
+        }
+        if (i != 1) {
+            if (i != 2) {
+                if (i != 3) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                Object obj3 = this.L$0;
+                ResultKt.throwOnFailure(obj);
+                return obj3;
+            }
+            data = (Data) this.L$0;
+            ResultKt.throwOnFailure(obj);
+            obj2 = data.value;
+            if ((obj2 == null ? obj2.hashCode() : 0) == data.hashCode) {
+                throw new IllegalStateException("Data in DataStore was mutated but DataStore is only compatible with Immutable types.");
+            }
+            if (!Intrinsics.areEqual(data.value, obj)) {
+                DataStoreImpl dataStoreImpl2 = this.this$0;
+                this.L$0 = obj;
+                this.label = 3;
+                if (dataStoreImpl2.writeData$datastore_core_release(obj, true, this) == coroutineSingletons) {
+                    return coroutineSingletons;
+                }
+            }
+            return obj;
+        }
+        ResultKt.throwOnFailure(obj);
+        data = (Data) obj;
+        CoroutineContext coroutineContext = this.$callerContext;
+        DataStoreImpl$transformAndWrite$2$newData$1 dataStoreImpl$transformAndWrite$2$newData$1 = new DataStoreImpl$transformAndWrite$2$newData$1(this.$transform, data, null);
+        this.L$0 = data;
+        this.label = 2;
+        obj = BuildersKt.withContext(coroutineContext, dataStoreImpl$transformAndWrite$2$newData$1, this);
+        if (obj != coroutineSingletons) {
+            obj2 = data.value;
+            if ((obj2 == null ? obj2.hashCode() : 0) == data.hashCode) {
+            }
+        }
+        return coroutineSingletons;
     }
 }

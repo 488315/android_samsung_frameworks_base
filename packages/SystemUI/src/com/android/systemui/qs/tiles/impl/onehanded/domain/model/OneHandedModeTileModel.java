@@ -2,7 +2,6 @@ package com.android.systemui.qs.tiles.impl.onehanded.domain.model;
 
 import defpackage.MoveResult$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class OneHandedModeTileModel {
     public final boolean isEnabled;
@@ -12,7 +11,7 @@ public final class OneHandedModeTileModel {
     }
 
     /* renamed from: box-impl, reason: not valid java name */
-    public static final /* synthetic */ OneHandedModeTileModel m2916boximpl(boolean z) {
+    public static final /* synthetic */ OneHandedModeTileModel m2933boximpl(boolean z) {
         return new OneHandedModeTileModel(z);
     }
 

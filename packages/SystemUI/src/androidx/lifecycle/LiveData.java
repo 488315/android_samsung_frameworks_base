@@ -11,7 +11,6 @@ import androidx.lifecycle.Lifecycle;
 import java.util.Iterator;
 import java.util.Map;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class LiveData {
     static final Object NOT_SET = new Object();
@@ -27,7 +26,6 @@ public abstract class LiveData {
     private final Runnable mPostValueRunnable;
     private int mVersion;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AlwaysActiveObserver extends ObserverWrapper {
         public AlwaysActiveObserver(LiveData liveData, Observer observer) {
             super(observer);
@@ -39,7 +37,6 @@ public abstract class LiveData {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class LifecycleBoundObserver extends ObserverWrapper implements LifecycleEventObserver {
         public final LifecycleOwner mOwner;
 
@@ -309,7 +306,6 @@ public abstract class LiveData {
         this.mVersion = -1;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class ObserverWrapper {
         public boolean mActive;
         public int mLastVersion = -1;

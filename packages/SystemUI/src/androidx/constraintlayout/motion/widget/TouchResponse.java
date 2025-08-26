@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import androidx.constraintlayout.widget.R;
 import org.xmlpull.v1.XmlPullParser;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class TouchResponse {
     public final float[] mAnchorDpDt;
@@ -74,20 +73,20 @@ public class TouchResponse {
         this.mSpringBoundary = 0;
         this.mAutoCompleteMode = 0;
         this.mMotionLayout = motionLayout;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(Xml.asAttributeSet(xmlPullParser), R.styleable.OnSwipe);
-        int indexCount = obtainStyledAttributes.getIndexCount();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(Xml.asAttributeSet(xmlPullParser), R.styleable.OnSwipe);
+        int indexCount = typedArrayObtainStyledAttributes.getIndexCount();
         for (int i = 0; i < indexCount; i++) {
-            int index = obtainStyledAttributes.getIndex(i);
+            int index = typedArrayObtainStyledAttributes.getIndex(i);
             if (index == R.styleable.OnSwipe_touchAnchorId) {
-                this.mTouchAnchorId = obtainStyledAttributes.getResourceId(index, this.mTouchAnchorId);
+                this.mTouchAnchorId = typedArrayObtainStyledAttributes.getResourceId(index, this.mTouchAnchorId);
             } else if (index == R.styleable.OnSwipe_touchAnchorSide) {
-                int i2 = obtainStyledAttributes.getInt(index, this.mTouchAnchorSide);
+                int i2 = typedArrayObtainStyledAttributes.getInt(index, this.mTouchAnchorSide);
                 this.mTouchAnchorSide = i2;
                 float[] fArr = TOUCH_SIDES[i2];
                 this.mTouchAnchorX = fArr[0];
                 this.mTouchAnchorY = fArr[1];
             } else if (index == R.styleable.OnSwipe_dragDirection) {
-                int i3 = obtainStyledAttributes.getInt(index, this.mTouchSide);
+                int i3 = typedArrayObtainStyledAttributes.getInt(index, this.mTouchSide);
                 this.mTouchSide = i3;
                 if (i3 < 6) {
                     float[] fArr2 = TOUCH_DIRECTION[i3];
@@ -99,59 +98,59 @@ public class TouchResponse {
                     this.mIsRotateMode = true;
                 }
             } else if (index == R.styleable.OnSwipe_maxVelocity) {
-                this.mMaxVelocity = obtainStyledAttributes.getFloat(index, this.mMaxVelocity);
+                this.mMaxVelocity = typedArrayObtainStyledAttributes.getFloat(index, this.mMaxVelocity);
             } else if (index == R.styleable.OnSwipe_maxAcceleration) {
-                this.mMaxAcceleration = obtainStyledAttributes.getFloat(index, this.mMaxAcceleration);
+                this.mMaxAcceleration = typedArrayObtainStyledAttributes.getFloat(index, this.mMaxAcceleration);
             } else if (index == R.styleable.OnSwipe_moveWhenScrollAtTop) {
-                this.mMoveWhenScrollAtTop = obtainStyledAttributes.getBoolean(index, this.mMoveWhenScrollAtTop);
+                this.mMoveWhenScrollAtTop = typedArrayObtainStyledAttributes.getBoolean(index, this.mMoveWhenScrollAtTop);
             } else if (index == R.styleable.OnSwipe_dragScale) {
-                this.mDragScale = obtainStyledAttributes.getFloat(index, this.mDragScale);
+                this.mDragScale = typedArrayObtainStyledAttributes.getFloat(index, this.mDragScale);
             } else if (index == R.styleable.OnSwipe_dragThreshold) {
-                this.mDragThreshold = obtainStyledAttributes.getFloat(index, this.mDragThreshold);
+                this.mDragThreshold = typedArrayObtainStyledAttributes.getFloat(index, this.mDragThreshold);
             } else if (index == R.styleable.OnSwipe_touchRegionId) {
-                this.mTouchRegionId = obtainStyledAttributes.getResourceId(index, this.mTouchRegionId);
+                this.mTouchRegionId = typedArrayObtainStyledAttributes.getResourceId(index, this.mTouchRegionId);
             } else if (index == R.styleable.OnSwipe_onTouchUp) {
-                this.mOnTouchUp = obtainStyledAttributes.getInt(index, this.mOnTouchUp);
+                this.mOnTouchUp = typedArrayObtainStyledAttributes.getInt(index, this.mOnTouchUp);
             } else if (index == R.styleable.OnSwipe_nestedScrollFlags) {
-                this.mFlags = obtainStyledAttributes.getInteger(index, 0);
+                this.mFlags = typedArrayObtainStyledAttributes.getInteger(index, 0);
             } else if (index == R.styleable.OnSwipe_limitBoundsTo) {
-                this.mLimitBoundsTo = obtainStyledAttributes.getResourceId(index, 0);
+                this.mLimitBoundsTo = typedArrayObtainStyledAttributes.getResourceId(index, 0);
             } else if (index == R.styleable.OnSwipe_rotationCenterId) {
-                this.mRotationCenterId = obtainStyledAttributes.getResourceId(index, this.mRotationCenterId);
+                this.mRotationCenterId = typedArrayObtainStyledAttributes.getResourceId(index, this.mRotationCenterId);
             } else if (index == R.styleable.OnSwipe_springDamping) {
-                this.mSpringDamping = obtainStyledAttributes.getFloat(index, this.mSpringDamping);
+                this.mSpringDamping = typedArrayObtainStyledAttributes.getFloat(index, this.mSpringDamping);
             } else if (index == R.styleable.OnSwipe_springMass) {
-                this.mSpringMass = obtainStyledAttributes.getFloat(index, this.mSpringMass);
+                this.mSpringMass = typedArrayObtainStyledAttributes.getFloat(index, this.mSpringMass);
             } else if (index == R.styleable.OnSwipe_springStiffness) {
-                this.mSpringStiffness = obtainStyledAttributes.getFloat(index, this.mSpringStiffness);
+                this.mSpringStiffness = typedArrayObtainStyledAttributes.getFloat(index, this.mSpringStiffness);
             } else if (index == R.styleable.OnSwipe_springStopThreshold) {
-                this.mSpringStopThreshold = obtainStyledAttributes.getFloat(index, this.mSpringStopThreshold);
+                this.mSpringStopThreshold = typedArrayObtainStyledAttributes.getFloat(index, this.mSpringStopThreshold);
             } else if (index == R.styleable.OnSwipe_springBoundary) {
-                this.mSpringBoundary = obtainStyledAttributes.getInt(index, this.mSpringBoundary);
+                this.mSpringBoundary = typedArrayObtainStyledAttributes.getInt(index, this.mSpringBoundary);
             } else if (index == R.styleable.OnSwipe_autoCompleteMode) {
-                this.mAutoCompleteMode = obtainStyledAttributes.getInt(index, this.mAutoCompleteMode);
+                this.mAutoCompleteMode = typedArrayObtainStyledAttributes.getInt(index, this.mAutoCompleteMode);
             }
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     public final RectF getLimitBoundsTo(ViewGroup viewGroup, RectF rectF) {
-        View findViewById;
+        View viewFindViewById;
         int i = this.mLimitBoundsTo;
-        if (i == -1 || (findViewById = viewGroup.findViewById(i)) == null) {
+        if (i == -1 || (viewFindViewById = viewGroup.findViewById(i)) == null) {
             return null;
         }
-        rectF.set(findViewById.getLeft(), findViewById.getTop(), findViewById.getRight(), findViewById.getBottom());
+        rectF.set(viewFindViewById.getLeft(), viewFindViewById.getTop(), viewFindViewById.getRight(), viewFindViewById.getBottom());
         return rectF;
     }
 
     public final RectF getTouchRegion(ViewGroup viewGroup, RectF rectF) {
-        View findViewById;
+        View viewFindViewById;
         int i = this.mTouchRegionId;
-        if (i == -1 || (findViewById = viewGroup.findViewById(i)) == null) {
+        if (i == -1 || (viewFindViewById = viewGroup.findViewById(i)) == null) {
             return null;
         }
-        rectF.set(findViewById.getLeft(), findViewById.getTop(), findViewById.getRight(), findViewById.getBottom());
+        rectF.set(viewFindViewById.getLeft(), viewFindViewById.getTop(), viewFindViewById.getRight(), viewFindViewById.getBottom());
         return rectF;
     }
 

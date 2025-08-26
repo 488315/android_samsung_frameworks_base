@@ -17,7 +17,6 @@ import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ConfigurationState {
     public static final int DEFAULT_VALUE = -100;
@@ -26,7 +25,6 @@ public final class ConfigurationState {
     public static final Companion Companion = new Companion(null);
     public static final int $stable = 8;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -38,7 +36,6 @@ public final class ConfigurationState {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class ConfigurationField {
         private static final /* synthetic */ EnumEntries $ENTRIES;
         private static final /* synthetic */ ConfigurationField[] $VALUES;
@@ -52,7 +49,6 @@ public final class ConfigurationState {
         public static final ConfigurationField UI_MODE = new UI_MODE("UI_MODE", 7);
         public static final ConfigurationField DENSITY_DPI = new DENSITY_DPI("DENSITY_DPI", 8);
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         final class ASSET_SEQ extends ConfigurationField {
             public ASSET_SEQ(String str, int i) {
                 super(str, i, null);
@@ -80,7 +76,6 @@ public final class ConfigurationState {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         final class DENSITY_DPI extends ConfigurationField {
             public DENSITY_DPI(String str, int i) {
                 super(str, i, null);
@@ -114,7 +109,6 @@ public final class ConfigurationState {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         final class DISPLAY_DEVICE_TYPE extends ConfigurationField {
             public DISPLAY_DEVICE_TYPE(String str, int i) {
                 super(str, i, null);
@@ -142,7 +136,6 @@ public final class ConfigurationState {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         final class LOCALE extends ConfigurationField {
             public LOCALE(String str, int i) {
                 super(str, i, null);
@@ -170,7 +163,6 @@ public final class ConfigurationState {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         final class ORIENTATION extends ConfigurationField {
             public ORIENTATION(String str, int i) {
                 super(str, i, null);
@@ -198,7 +190,6 @@ public final class ConfigurationState {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         final class SCREEN_HEIGHT_DP extends ConfigurationField {
             public SCREEN_HEIGHT_DP(String str, int i) {
                 super(str, i, null);
@@ -232,7 +223,6 @@ public final class ConfigurationState {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         final class SCREEN_LAYOUT extends ConfigurationField {
             public SCREEN_LAYOUT(String str, int i) {
                 super(str, i, null);
@@ -264,7 +254,6 @@ public final class ConfigurationState {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         final class THEME_SEQ extends ConfigurationField {
             public THEME_SEQ(String str, int i) {
                 super(str, i, null);
@@ -292,49 +281,48 @@ public final class ConfigurationState {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         final class UI_MODE extends ConfigurationField {
             public UI_MODE(String str, int i) {
                 super(str, i, null);
             }
 
             private final String convertToString(int i) {
-                String str;
+                String strValueOf;
                 if (i == -100) {
                     return "def";
                 }
                 int i2 = i & 15;
                 switch (i2) {
                     case 0:
-                        str = "undef";
+                        strValueOf = "undef";
                         break;
                     case 1:
-                        str = SystemUIAnalytics.QPNE_VID_NORMAL;
+                        strValueOf = SystemUIAnalytics.QPNE_VID_NORMAL;
                         break;
                     case 2:
-                        str = "desk";
+                        strValueOf = "desk";
                         break;
                     case 3:
-                        str = "car";
+                        strValueOf = "car";
                         break;
                     case 4:
-                        str = "television";
+                        strValueOf = "television";
                         break;
                     case 5:
-                        str = "appliance";
+                        strValueOf = "appliance";
                         break;
                     case 6:
-                        str = "watch";
+                        strValueOf = "watch";
                         break;
                     case 7:
-                        str = "vrheadset";
+                        strValueOf = "vrheadset";
                         break;
                     default:
-                        str = String.valueOf(i2);
+                        strValueOf = String.valueOf(i2);
                         break;
                 }
                 int i3 = i & 48;
-                return AbstractResolvableFuture$$ExternalSyntheticOutline0.m(str, "/", i3 != 0 ? i3 != 16 ? i3 != 32 ? String.valueOf(i3) : "night" : "nightNo" : "undef");
+                return AbstractResolvableFuture$$ExternalSyntheticOutline0.m(strValueOf, "/", i3 != 0 ? i3 != 16 ? i3 != 32 ? String.valueOf(i3) : "night" : "nightNo" : "undef");
             }
 
             @Override // com.android.systemui.util.ConfigurationState.ConfigurationField
@@ -360,9 +348,9 @@ public final class ConfigurationState {
         }
 
         static {
-            ConfigurationField[] $values = $values();
-            $VALUES = $values;
-            $ENTRIES = EnumEntriesKt.enumEntries($values);
+            ConfigurationField[] configurationFieldArr$values = $values();
+            $VALUES = configurationFieldArr$values;
+            $ENTRIES = EnumEntriesKt.enumEntries(configurationFieldArr$values);
         }
 
         public /* synthetic */ ConfigurationField(String str, int i, DefaultConstructorMarker defaultConstructorMarker) {
@@ -399,8 +387,8 @@ public final class ConfigurationState {
     public ConfigurationState(List<? extends ConfigurationField> list) {
         this.fields = list;
         EnumEntries entries = ConfigurationField.getEntries();
-        int mapCapacity = MapsKt__MapsJVMKt.mapCapacity(CollectionsKt__IterablesKt.collectionSizeOrDefault(entries, 10));
-        LinkedHashMap linkedHashMap = new LinkedHashMap(mapCapacity < 16 ? 16 : mapCapacity);
+        int iMapCapacity = MapsKt__MapsJVMKt.mapCapacity(CollectionsKt__IterablesKt.collectionSizeOrDefault(entries, 10));
+        LinkedHashMap linkedHashMap = new LinkedHashMap(iMapCapacity < 16 ? 16 : iMapCapacity);
         for (Object obj : entries) {
             linkedHashMap.put(obj, -100);
         }
@@ -413,20 +401,20 @@ public final class ConfigurationState {
     }
 
     public final int getValue(ConfigurationField configurationField) {
-        Object obj;
+        Object next;
         Integer num;
         Iterator<T> it = this.fields.iterator();
         while (true) {
             if (!it.hasNext()) {
-                obj = null;
+                next = null;
                 break;
             }
-            obj = it.next();
-            if (((ConfigurationField) obj) == configurationField) {
+            next = it.next();
+            if (((ConfigurationField) next) == configurationField) {
                 break;
             }
         }
-        ConfigurationField configurationField2 = (ConfigurationField) obj;
+        ConfigurationField configurationField2 = (ConfigurationField) next;
         if (configurationField2 == null || (num = this.fieldMap.get(configurationField2)) == null) {
             return -100;
         }
@@ -454,10 +442,8 @@ public final class ConfigurationState {
         return configuration == null ? "" : CollectionsKt___CollectionsKt.joinToString$default(this.fields, ", ", null, null, new Function1() { // from class: com.android.systemui.util.ConfigurationState$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
-                CharSequence compareString$lambda$5;
-                compareString$lambda$5 = ConfigurationState.toCompareString$lambda$5(ConfigurationState.this, configuration, (ConfigurationState.ConfigurationField) obj);
-                return compareString$lambda$5;
+            public final Object mo781invoke(Object obj) {
+                return ConfigurationState.toCompareString$lambda$5(this.f$0, configuration, (ConfigurationState.ConfigurationField) obj);
             }
         }, 30);
     }

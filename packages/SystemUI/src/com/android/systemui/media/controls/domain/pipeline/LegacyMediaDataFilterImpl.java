@@ -19,7 +19,6 @@ import java.util.Set;
 import java.util.concurrent.Executor;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class LegacyMediaDataFilterImpl implements MediaDataManager.Listener {
     public final Executor executor;
@@ -40,12 +39,12 @@ public final class LegacyMediaDataFilterImpl implements MediaDataManager.Listene
         ?? r2 = new UserTracker.Callback() { // from class: com.android.systemui.media.controls.domain.pipeline.LegacyMediaDataFilterImpl$userTrackerCallback$1
             @Override // com.android.systemui.settings.UserTracker.Callback
             public final void onProfilesChanged(List list) {
-                LegacyMediaDataFilterImpl.this.handleProfileChanged$frameworks__base__packages__SystemUI__android_common__SystemUI_core();
+                this.this$0.handleProfileChanged$frameworks__base__packages__SystemUI__android_common__SystemUI_core();
             }
 
             @Override // com.android.systemui.settings.UserTracker.Callback
             public final void onUserChanged(int i, Context context) {
-                LegacyMediaDataFilterImpl.this.handleUserSwitched$frameworks__base__packages__SystemUI__android_common__SystemUI_core();
+                this.this$0.handleUserSwitched$frameworks__base__packages__SystemUI__android_common__SystemUI_core();
             }
         };
         this.userTrackerCallback = r2;

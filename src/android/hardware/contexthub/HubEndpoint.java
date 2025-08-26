@@ -2,7 +2,6 @@ package android.hardware.contexthub;
 
 import android.annotation.SystemApi;
 import android.content.Context;
-import android.hardware.contexthub.HubEndpoint;
 import android.hardware.contexthub.IContextHubEndpointCallback;
 import android.hardware.location.IContextHubService;
 import android.hardware.location.IContextHubTransactionCallback;
@@ -65,7 +64,7 @@ public class HubEndpoint {
                 HubEndpoint.this.mLifecycleCallbackExecutor.execute(new Runnable() { // from class: android.hardware.contexthub.HubEndpoint$1$$ExternalSyntheticLambda2
                     @Override // java.lang.Runnable
                     public final void run() {
-                        HubEndpoint.AnonymousClass1.this.lambda$onSessionOpenRequest$0(i, hubEndpointInfo, str);
+                        this.f$0.lambda$onSessionOpenRequest$0(i, hubEndpointInfo, str);
                     }
                 });
             } else {
@@ -90,7 +89,7 @@ public class HubEndpoint {
                 HubEndpoint.this.mLifecycleCallbackExecutor.execute(new Runnable() { // from class: android.hardware.contexthub.HubEndpoint$1$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        HubEndpoint.AnonymousClass1.this.lambda$onSessionOpenComplete$1(activeSession);
+                        this.f$0.lambda$onSessionOpenComplete$1(activeSession);
                     }
                 });
             } else {
@@ -114,7 +113,7 @@ public class HubEndpoint {
                 HubEndpoint.this.mLifecycleCallbackExecutor.execute(new Runnable() { // from class: android.hardware.contexthub.HubEndpoint$1$$ExternalSyntheticLambda6
                     @Override // java.lang.Runnable
                     public final void run() {
-                        HubEndpoint.AnonymousClass1.this.lambda$onSessionClosed$2(activeSession, i2, i);
+                        this.f$0.lambda$onSessionClosed$2(activeSession, i2, i);
                     }
                 });
             } else {
@@ -144,7 +143,7 @@ public class HubEndpoint {
                 HubEndpoint.this.mMessageCallbackExecutor.execute(new Runnable() { // from class: android.hardware.contexthub.HubEndpoint$1$$ExternalSyntheticLambda3
                     @Override // java.lang.Runnable
                     public final void run() {
-                        HubEndpoint.AnonymousClass1.this.lambda$onMessageReceived$3(activeSession, hubMessage, i);
+                        this.f$0.lambda$onMessageReceived$3(activeSession, hubMessage, i);
                     }
                 });
             }
@@ -168,7 +167,7 @@ public class HubEndpoint {
             if (hubMessage.isResponseRequired()) {
                 invokeCallback(new EndpointConsumer() { // from class: android.hardware.contexthub.HubEndpoint$1$$ExternalSyntheticLambda8
                     @Override // android.hardware.contexthub.HubEndpoint.EndpointConsumer
-                    public final void accept(IContextHubEndpoint iContextHubEndpoint) {
+                    public final void accept(IContextHubEndpoint iContextHubEndpoint) throws RemoteException {
                         iContextHubEndpoint.sendMessageDeliveryStatus(i, hubMessage.getMessageSequenceNumber(), b);
                     }
                 });
@@ -199,7 +198,7 @@ public class HubEndpoint {
                 final HubEndpointSession hubEndpointSession = new HubEndpointSession(i, hubEndpoint, hubEndpoint.mAssignedHubEndpointInfo, hubEndpointInfo, str);
                 invokeCallback(new EndpointConsumer() { // from class: android.hardware.contexthub.HubEndpoint$1$$ExternalSyntheticLambda4
                     @Override // android.hardware.contexthub.HubEndpoint.EndpointConsumer
-                    public final void accept(IContextHubEndpoint iContextHubEndpoint) {
+                    public final void accept(IContextHubEndpoint iContextHubEndpoint) throws RemoteException {
                         iContextHubEndpoint.openSessionRequestComplete(i);
                     }
                 });
@@ -209,7 +208,7 @@ public class HubEndpoint {
                     HubEndpoint.this.mLifecycleCallbackExecutor.execute(new Runnable() { // from class: android.hardware.contexthub.HubEndpoint$1$$ExternalSyntheticLambda5
                         @Override // java.lang.Runnable
                         public final void run() {
-                            HubEndpoint.AnonymousClass1.this.lambda$acceptSession$6(hubEndpointSession);
+                            this.f$0.lambda$acceptSession$6(hubEndpointSession);
                         }
                     });
                 }
@@ -224,7 +223,7 @@ public class HubEndpoint {
         private void rejectSession(final int i) {
             invokeCallback(new EndpointConsumer() { // from class: android.hardware.contexthub.HubEndpoint$1$$ExternalSyntheticLambda1
                 @Override // android.hardware.contexthub.HubEndpoint.EndpointConsumer
-                public final void accept(IContextHubEndpoint iContextHubEndpoint) {
+                public final void accept(IContextHubEndpoint iContextHubEndpoint) throws RemoteException {
                     iContextHubEndpoint.closeSession(i, 3);
                 }
             });
@@ -233,7 +232,7 @@ public class HubEndpoint {
         private void invokeCallbackFinished() {
             invokeCallback(new EndpointConsumer() { // from class: android.hardware.contexthub.HubEndpoint$1$$ExternalSyntheticLambda7
                 @Override // android.hardware.contexthub.HubEndpoint.EndpointConsumer
-                public final void accept(IContextHubEndpoint iContextHubEndpoint) {
+                public final void accept(IContextHubEndpoint iContextHubEndpoint) throws RemoteException {
                     iContextHubEndpoint.onCallbackFinished();
                 }
             });
@@ -264,9 +263,9 @@ public class HubEndpoint {
     public void register(IContextHubService iContextHubService) {
         try {
             HubEndpointInfo hubEndpointInfo = this.mPendingHubEndpointInfo;
-            IContextHubEndpoint registerEndpoint = iContextHubService.registerEndpoint(hubEndpointInfo, this.mServiceCallback, hubEndpointInfo.getName(), this.mPendingHubEndpointInfo.getTag());
-            this.mAssignedHubEndpointInfo = registerEndpoint.getAssignedHubEndpointInfo();
-            this.mServiceToken = registerEndpoint;
+            IContextHubEndpoint iContextHubEndpointRegisterEndpoint = iContextHubService.registerEndpoint(hubEndpointInfo, this.mServiceCallback, hubEndpointInfo.getName(), this.mPendingHubEndpointInfo.getTag());
+            this.mAssignedHubEndpointInfo = iContextHubEndpointRegisterEndpoint.getAssignedHubEndpointInfo();
+            this.mServiceToken = iContextHubEndpointRegisterEndpoint;
         } catch (RemoteException e) {
             Log.e(TAG, "registerEndpoint: failed to register endpoint", e);
             e.rethrowFromSystemServer();
@@ -289,14 +288,14 @@ public class HubEndpoint {
         }
     }
 
-    public void openSession(HubEndpointInfo hubEndpointInfo, String str) {
+    public void openSession(HubEndpointInfo hubEndpointInfo, String str) throws Throwable {
         HubEndpointInfo hubEndpointInfo2;
         try {
             try {
                 synchronized (this.mLock) {
                     try {
-                        int openSession = this.mServiceToken.openSession(hubEndpointInfo, str);
-                        this.mActiveSessions.put(openSession, new HubEndpointSession(openSession, this, hubEndpointInfo, this.mAssignedHubEndpointInfo, str));
+                        int iOpenSession = this.mServiceToken.openSession(hubEndpointInfo, str);
+                        this.mActiveSessions.put(iOpenSession, new HubEndpointSession(iOpenSession, this, hubEndpointInfo, this.mAssignedHubEndpointInfo, str));
                     } catch (Throwable th) {
                         th = th;
                         hubEndpointInfo2 = hubEndpointInfo;

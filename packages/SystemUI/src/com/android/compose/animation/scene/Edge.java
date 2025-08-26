@@ -9,7 +9,6 @@ import kotlin.jvm.functions.Function1;
 
 /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
 /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class Edge implements SwipeSource {
     public static final /* synthetic */ Edge[] $VALUES;
@@ -20,7 +19,6 @@ public final class Edge implements SwipeSource {
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Resolved implements SwipeSource.Resolved {
         public static final /* synthetic */ Resolved[] $VALUES;
         public static final Resolved Bottom;
@@ -59,7 +57,7 @@ public final class Edge implements SwipeSource {
         Edge edge = new Edge("Top", 0, new Function1() { // from class: com.android.compose.animation.scene.Edge$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 LayoutDirection layoutDirection = (LayoutDirection) obj;
                 switch (i) {
                     case 0:
@@ -88,7 +86,7 @@ public final class Edge implements SwipeSource {
         Edge edge2 = new Edge("Bottom", 1, new Function1() { // from class: com.android.compose.animation.scene.Edge$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 LayoutDirection layoutDirection = (LayoutDirection) obj;
                 switch (i2) {
                     case 0:
@@ -117,7 +115,7 @@ public final class Edge implements SwipeSource {
         Edge edge3 = new Edge(SystemUIAnalytics.DT_BOUNCER_POSITION_LEFT, 2, new Function1() { // from class: com.android.compose.animation.scene.Edge$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 LayoutDirection layoutDirection = (LayoutDirection) obj;
                 switch (i3) {
                     case 0:
@@ -145,7 +143,7 @@ public final class Edge implements SwipeSource {
         Edge edge4 = new Edge(SystemUIAnalytics.DT_BOUNCER_POSITION_RIGHT, 3, new Function1() { // from class: com.android.compose.animation.scene.Edge$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 LayoutDirection layoutDirection = (LayoutDirection) obj;
                 switch (i4) {
                     case 0:
@@ -173,7 +171,7 @@ public final class Edge implements SwipeSource {
         Edge edge5 = new Edge("Start", 4, new Function1() { // from class: com.android.compose.animation.scene.Edge$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 LayoutDirection layoutDirection = (LayoutDirection) obj;
                 switch (i5) {
                     case 0:
@@ -201,7 +199,7 @@ public final class Edge implements SwipeSource {
         Edge edge6 = new Edge("End", 5, new Function1() { // from class: com.android.compose.animation.scene.Edge$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 LayoutDirection layoutDirection = (LayoutDirection) obj;
                 switch (i6) {
                     case 0:
@@ -245,6 +243,6 @@ public final class Edge implements SwipeSource {
 
     @Override // com.android.compose.animation.scene.SwipeSource
     public final Resolved resolve(LayoutDirection layoutDirection) {
-        return (Resolved) this.resolveEdge.mo779invoke(layoutDirection);
+        return (Resolved) this.resolveEdge.mo781invoke(layoutDirection);
     }
 }

@@ -5,15 +5,14 @@ import kotlinx.coroutines.flow.ReadonlyStateFlow;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class TileSquishinessRepository {
     public final StateFlowImpl _squishiness;
     public final ReadonlyStateFlow squishiness;
 
     public TileSquishinessRepository() {
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(Float.valueOf(1.0f));
-        this._squishiness = MutableStateFlow;
-        this.squishiness = FlowKt.asStateFlow(MutableStateFlow);
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(Float.valueOf(1.0f));
+        this._squishiness = stateFlowImplMutableStateFlow;
+        this.squishiness = FlowKt.asStateFlow(stateFlowImplMutableStateFlow);
     }
 }

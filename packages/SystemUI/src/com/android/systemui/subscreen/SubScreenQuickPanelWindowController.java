@@ -47,7 +47,6 @@ import java.util.function.DoubleConsumer;
 import java.util.function.DoubleSupplier;
 import java.util.function.Supplier;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class SubScreenQuickPanelWindowController implements PanelScreenShotLogger.LogProvider, CommandQueue.Callbacks {
     public final QsCoverAnimator mAnimator;
@@ -149,7 +148,6 @@ public class SubScreenQuickPanelWindowController implements PanelScreenShotLogge
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PanelExpandedFractionProvider implements SubRoom {
         public /* synthetic */ PanelExpandedFractionProvider(SubScreenQuickPanelWindowController subScreenQuickPanelWindowController, int i) {
             this();
@@ -190,15 +188,15 @@ public class SubScreenQuickPanelWindowController implements PanelScreenShotLogge
         this.mSubScreenComponent = factory;
         this.mPanelResourcePicker = secQSPanelResourcePicker;
         Display[] displays = displayManager.getDisplays("com.samsung.android.hardware.display.category.BUILTIN");
-        Context createDisplayContext = displays.length > 1 ? context.createDisplayContext(displays[1]) : context;
-        this.mContext = createDisplayContext;
+        Context contextCreateDisplayContext = displays.length > 1 ? context.createDisplayContext(displays[1]) : context;
+        this.mContext = contextCreateDisplayContext;
         this.mDisplayManager = displayManager;
-        createDisplayContext.getDisplayId();
+        contextCreateDisplayContext.getDisplayId();
         builder.reset();
         builder.mMaxLengthSeconds = 0.5f;
         builder.mSpeedUpFactor = 0.6f;
         this.mFlingAnimationUtils = builder.build();
-        this.mAnimator = new QsCoverAnimator(createDisplayContext, subscreenQsPanelController);
+        this.mAnimator = new QsCoverAnimator(contextCreateDisplayContext, subscreenQsPanelController);
         subscreenUtil.mSubScreenQuickPanelWindowController = this;
         final int i = 0;
         Runnable runnable = new Runnable(this) { // from class: com.android.systemui.subscreen.SubScreenQuickPanelWindowController$$ExternalSyntheticLambda0
@@ -279,7 +277,7 @@ public class SubScreenQuickPanelWindowController implements PanelScreenShotLogge
         BiConsumer biConsumer = new BiConsumer() { // from class: com.android.systemui.subscreen.SubScreenQuickPanelWindowController$$ExternalSyntheticLambda6
             @Override // java.util.function.BiConsumer
             public final void accept(Object obj, Object obj2) {
-                SubScreenQuickPanelWindowController.this.createPanelHeightAnimatorAndRun(((Float) obj).floatValue(), ((Boolean) obj2).booleanValue());
+                this.f$0.createPanelHeightAnimatorAndRun(((Float) obj).floatValue(), ((Boolean) obj2).booleanValue());
             }
         };
         final int i4 = 0;
@@ -436,7 +434,7 @@ public class SubScreenQuickPanelWindowController implements PanelScreenShotLogge
         }, sysUiState, new DoubleConsumer() { // from class: com.android.systemui.subscreen.SubScreenQuickPanelWindowController$$ExternalSyntheticLambda2
             @Override // java.util.function.DoubleConsumer
             public final void accept(double d) {
-                SubScreenQuickPanelWindowController.this.updatePanelExpansion((float) d, false);
+                this.f$0.updatePanelExpansion((float) d, false);
             }
         }, wakefulnessLifecycle, new Supplier(this) { // from class: com.android.systemui.subscreen.SubScreenQuickPanelWindowController$$ExternalSyntheticLambda1
             public final /* synthetic */ SubScreenQuickPanelWindowController f$0;
@@ -492,12 +490,12 @@ public class SubScreenQuickPanelWindowController implements PanelScreenShotLogge
     public final void createPanelHeightAnimatorAndRun(float f, final boolean z) {
         float f2 = z ? this.mMaxExpandedHeight : 0.0f;
         final boolean z2 = this.mPanelFullyExpanded;
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(this.mExpandedHeight, f2);
-        this.mPanelHeightAnimator = ofFloat;
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.subscreen.SubScreenQuickPanelWindowController$$ExternalSyntheticLambda13
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(this.mExpandedHeight, f2);
+        this.mPanelHeightAnimator = valueAnimatorOfFloat;
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.subscreen.SubScreenQuickPanelWindowController$$ExternalSyntheticLambda13
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                SubScreenQuickPanelWindowController subScreenQuickPanelWindowController = SubScreenQuickPanelWindowController.this;
+                SubScreenQuickPanelWindowController subScreenQuickPanelWindowController = this.f$0;
                 boolean z3 = z;
                 boolean z4 = z2;
                 subScreenQuickPanelWindowController.getClass();
@@ -588,7 +586,7 @@ public class SubScreenQuickPanelWindowController implements PanelScreenShotLogge
             ((UiOffloadThread) Dependency.sDependency.getDependencyInner(UiOffloadThread.class)).execute(new Runnable() { // from class: com.android.systemui.subscreen.SubScreenQuickPanelWindowController$$ExternalSyntheticLambda14
                 @Override // java.lang.Runnable
                 public final void run() {
-                    SubScreenQuickPanelWindowController subScreenQuickPanelWindowController = SubScreenQuickPanelWindowController.this;
+                    SubScreenQuickPanelWindowController subScreenQuickPanelWindowController = this.f$0;
                     subScreenQuickPanelWindowController.mContext.sendBroadcastAsUser(intent, UserHandle.ALL);
                 }
             });

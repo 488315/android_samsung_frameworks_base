@@ -7,17 +7,18 @@ import android.view.accessibility.AccessibilityNodeInfo;
 import android.view.accessibility.IAccessibilityInteractionConnectionCallback;
 import com.android.wm.shell.pip.phone.PipAccessibilityInteractionConnection;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class PipAccessibilityInteractionConnection$PipAccessibilityInteractionConnectionImpl$$ExternalSyntheticLambda1 implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ PipAccessibilityInteractionConnection.PipAccessibilityInteractionConnectionImpl f$0;
+    public final /* synthetic */ Region f$3;
     public final /* synthetic */ int f$4;
     public final /* synthetic */ IAccessibilityInteractionConnectionCallback f$5;
 
     public /* synthetic */ PipAccessibilityInteractionConnection$PipAccessibilityInteractionConnectionImpl$$ExternalSyntheticLambda1(PipAccessibilityInteractionConnection.PipAccessibilityInteractionConnectionImpl pipAccessibilityInteractionConnectionImpl, long j, int i, Region region, int i2, IAccessibilityInteractionConnectionCallback iAccessibilityInteractionConnectionCallback, int i3, int i4, long j2, MagnificationSpec magnificationSpec, int i5) {
         this.$r8$classId = i5;
         this.f$0 = pipAccessibilityInteractionConnectionImpl;
+        this.f$3 = region;
         this.f$4 = i2;
         this.f$5 = iAccessibilityInteractionConnectionCallback;
     }
@@ -75,6 +76,7 @@ public final /* synthetic */ class PipAccessibilityInteractionConnection$PipAcce
     public /* synthetic */ PipAccessibilityInteractionConnection$PipAccessibilityInteractionConnectionImpl$$ExternalSyntheticLambda1(PipAccessibilityInteractionConnection.PipAccessibilityInteractionConnectionImpl pipAccessibilityInteractionConnectionImpl, long j, String str, Region region, int i, IAccessibilityInteractionConnectionCallback iAccessibilityInteractionConnectionCallback, int i2, int i3, long j2, MagnificationSpec magnificationSpec, int i4) {
         this.$r8$classId = i4;
         this.f$0 = pipAccessibilityInteractionConnectionImpl;
+        this.f$3 = region;
         this.f$4 = i;
         this.f$5 = iAccessibilityInteractionConnectionCallback;
     }

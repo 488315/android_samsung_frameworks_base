@@ -7,7 +7,6 @@ import com.samsung.android.globalactions.presentation.strategies.DisposingStrate
 import com.samsung.android.globalactions.presentation.strategies.SecureConfirmStrategy;
 import com.samsung.android.globalactions.presentation.viewmodel.ActionViewModel;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class FingerprintInDisplayStrategy implements ActionsCreationStrategy, DisposingStrategy, SecureConfirmStrategy {
     public final KeyguardUpdateMonitorWrapper mKeyguardUpdateMonitorWrapper;

@@ -10,7 +10,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class InternetTileDataInteractor$mobileDataContentName$1$1 extends SuspendLambda implements Function3 {
     /* synthetic */ Object L$0;
@@ -26,16 +25,16 @@ final class InternetTileDataInteractor$mobileDataContentName$1$1 extends Suspend
 
     @Override // kotlin.jvm.functions.Function3
     public final Object invoke(Object obj, Object obj2, Object obj3) {
-        boolean booleanValue = ((Boolean) obj).booleanValue();
+        boolean zBooleanValue = ((Boolean) obj).booleanValue();
         InternetTileDataInteractor$mobileDataContentName$1$1 internetTileDataInteractor$mobileDataContentName$1$1 = new InternetTileDataInteractor$mobileDataContentName$1$1(this.this$0, (Continuation) obj3);
-        internetTileDataInteractor$mobileDataContentName$1$1.Z$0 = booleanValue;
+        internetTileDataInteractor$mobileDataContentName$1$1.Z$0 = zBooleanValue;
         internetTileDataInteractor$mobileDataContentName$1$1.L$0 = (NetworkTypeIconModel) obj2;
         return internetTileDataInteractor$mobileDataContentName$1$1.invokeSuspend(Unit.INSTANCE);
     }
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
-        String str;
+        String string;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         if (this.label != 0) {
             throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
@@ -46,16 +45,16 @@ final class InternetTileDataInteractor$mobileDataContentName$1$1 extends Suspend
         InternetTileDataInteractor internetTileDataInteractor = this.this$0;
         int contentDescription = networkTypeIconModel.getContentDescription();
         if (contentDescription != 0) {
-            str = internetTileDataInteractor.context.getString(contentDescription);
+            string = internetTileDataInteractor.context.getString(contentDescription);
         } else {
             InternetTileDataInteractor.Companion companion = InternetTileDataInteractor.Companion;
             internetTileDataInteractor.getClass();
-            str = null;
+            string = null;
         }
         if (!z) {
-            return str;
+            return string;
         }
-        String string = this.this$0.context.getString(R.string.data_connection_roaming);
-        return str != null ? this.this$0.context.getString(R.string.mobile_data_text_format, string, str) : string;
+        String string2 = this.this$0.context.getString(R.string.data_connection_roaming);
+        return string != null ? this.this$0.context.getString(R.string.mobile_data_text_format, string2, string) : string2;
     }
 }

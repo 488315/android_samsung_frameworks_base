@@ -3,11 +3,15 @@ package com.android.systemui.wallpaper.engines.multipack;
 import android.app.WallpaperManager;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Surface;
 import android.view.SurfaceHolder;
+import androidx.appcompat.widget.TooltipPopup$$ExternalSyntheticOutline0;
 import androidx.compose.runtime.external.kotlinx.collections.immutable.internal.ListImplementation$$ExternalSyntheticOutline0;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.keyguard.KeyguardUpdateMonitor;
@@ -25,7 +29,12 @@ import com.android.systemui.wallpaper.colors.SystemWallpaperColors;
 import com.android.systemui.wallpaper.engines.WallpaperAnimator;
 import com.android.systemui.wallpaper.engines.WallpaperEngine;
 import com.android.systemui.wallpaper.engines.WallpaperEngineCallback;
+import com.android.systemui.wallpaper.engines.gif.GifEngine;
+import com.android.systemui.wallpaper.engines.gif.GifSource;
 import com.android.systemui.wallpaper.engines.image.ImageEngine;
+import com.android.systemui.wallpaper.engines.image.ImageSource;
+import com.android.systemui.wallpaper.engines.video.VideoEngine;
+import com.android.systemui.wallpaper.engines.video.VideoSource;
 import com.android.systemui.wallpaper.utils.WhichChecker;
 import com.android.systemui.wallpapers.ImageWallpaper;
 import com.samsung.android.wallpaper.live.sdk.data.DisplayState;
@@ -35,7 +44,6 @@ import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class MultipackEngine extends WallpaperEngine {
     public final String TAG;
@@ -62,7 +70,6 @@ public class MultipackEngine extends WallpaperEngine {
     public final SystemWallpaperColors mSystemWallpaperColors;
     public final WallpaperAnimator mWallpaperAnimator;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.wallpaper.engines.multipack.MultipackEngine$1, reason: invalid class name */
     public class AnonymousClass1 implements Consumer {
         public AnonymousClass1() {
@@ -75,7 +82,6 @@ public class MultipackEngine extends WallpaperEngine {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.wallpaper.engines.multipack.MultipackEngine$2, reason: invalid class name */
     public class AnonymousClass2 implements Consumer {
         public AnonymousClass2() {
@@ -116,11 +122,11 @@ public class MultipackEngine extends WallpaperEngine {
         if (wallpaperEngine == null) {
             return false;
         }
-        boolean isFlagEnabled = WhichChecker.isFlagEnabled(getWhich(), 2);
+        boolean zIsFlagEnabled = WhichChecker.isFlagEnabled(getWhich(), 2);
         Context appContext = getAppContext();
         int currentUserId = getCurrentUserId();
         boolean z = WallpaperUtils.mIsExternalLiveWallpaper;
-        return isFlagEnabled && !new LockPatternUtils(appContext).isLockScreenDisabled(currentUserId) && (wallpaperEngine instanceof ImageEngine);
+        return zIsFlagEnabled && !new LockPatternUtils(appContext).isLockScreenDisabled(currentUserId) && (wallpaperEngine instanceof ImageEngine);
     }
 
     @Override // com.android.systemui.wallpaper.engines.WallpaperEngine
@@ -234,7 +240,7 @@ public class MultipackEngine extends WallpaperEngine {
         runAsWorkerThread$1(new Runnable() { // from class: com.android.systemui.wallpaper.engines.multipack.MultipackEngine$$ExternalSyntheticLambda2
             @Override // java.lang.Runnable
             public final void run() {
-                MultipackEngine multipackEngine = MultipackEngine.this;
+                MultipackEngine multipackEngine = this.f$0;
                 DisplayState displayState3 = displayState;
                 DisplayState displayState4 = displayState2;
                 WallpaperEngine wallpaperEngine = multipackEngine.mSubEngine;
@@ -336,37 +342,141 @@ public class MultipackEngine extends WallpaperEngine {
         return false;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:28:0x0090  */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x0098  */
-    /* JADX WARN: Removed duplicated region for block: B:41:0x0111  */
-    /* JADX WARN: Removed duplicated region for block: B:44:0x011c  */
-    /* JADX WARN: Removed duplicated region for block: B:55:0x0166  */
+    /* JADX WARN: Removed duplicated region for block: B:26:0x0061  */
+    /* JADX WARN: Removed duplicated region for block: B:31:0x0076  */
+    /* JADX WARN: Removed duplicated region for block: B:45:0x00da  */
+    /* JADX WARN: Removed duplicated region for block: B:46:0x00ed  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final void updateWallpaper() {
-        /*
-            Method dump skipped, instructions count: 559
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.wallpaper.engines.multipack.MultipackEngine.updateWallpaper():void");
+        int wallpaperType;
+        final WallpaperEngine videoEngine;
+        WallpaperEngine wallpaperEngine = this.mSubEngine;
+        if (wallpaperEngine instanceof VideoEngine) {
+            ((VideoEngine) wallpaperEngine).mVideoController.pause(true);
+        }
+        if (!this.mIsAlive) {
+            Log.w(this.TAG, "changeWallpaper: engine destroyed");
+            return;
+        }
+        if (this.mSubEngine != null) {
+            if (!this.mIsFirstTransition && willShowAodWithWallpaper$1()) {
+                ScreenshotResults screenshotResultsOnGetScreenshot = this.mSubEngine.onGetScreenshot(new ScreenshotOptions("prev"));
+                this.mPrevScreenshot = screenshotResultsOnGetScreenshot != null ? screenshotResultsOnGetScreenshot.mBitmap : null;
+            }
+            this.mSubEngine.onDestroy();
+        }
+        int which = getWhich();
+        boolean zIsFlagEnabled = WhichChecker.isFlagEnabled(which, 1);
+        String str = this.TAG;
+        CoverWallpaper coverWallpaper = this.mCoverWallpaper;
+        if (zIsFlagEnabled) {
+            CoverWallpaperController coverWallpaperController = (CoverWallpaperController) coverWallpaper;
+            if (coverWallpaperController.isCoverWallpaperRequired()) {
+                wallpaperType = coverWallpaperController.getWallpaperType();
+            } else if (WhichChecker.isFlagEnabled(which, 2)) {
+                PluginWallpaperController pluginWallpaperController = (PluginWallpaperController) this.mPluginWallpaper;
+                if (pluginWallpaperController.isPluginWallpaperRequired(which)) {
+                    wallpaperType = pluginWallpaperController.getWallpaperType(which);
+                } else {
+                    Log.e(str, "getCurrentWallpaperType: Not ready");
+                    wallpaperType = -1;
+                }
+            }
+        }
+        this.mNextType = wallpaperType;
+        TooltipPopup$$ExternalSyntheticOutline0.m(this.mNextType, str, new StringBuilder("createNextEngine: mNextType = "));
+        int i = this.mNextType;
+        WallpaperEngineCallback wallpaperEngineCallback = this.mCallback;
+        if (i == 2 || i == 8) {
+            videoEngine = new VideoEngine(new VideoSource(getAppContext(), getWhich(), 2, getCurrentUserId(), this.mCoverWallpaper, this.mPluginWallpaper), wallpaperEngineCallback, this.mKeyguardUpdateMonitor);
+        } else if (i == 12) {
+            videoEngine = new GifEngine(new GifSource(getAppContext(), getWhich(), coverWallpaper), wallpaperEngineCallback);
+        } else if (i != 13) {
+            if (i != 22) {
+                if (i != 23) {
+                    videoEngine = new ImageEngine(new ImageSource(getAppContext(), this.mCoverWallpaper, this.mPluginWallpaper, getWhich(), getCurrentUserId(), ImageWallpaper.IntegratedEngine.this.getDisplayId()), this.mCallback, this.mSettingsHelper, this.mSystemWallpaperColors, this.mLongExecutor, this.mKeyguardWallpaper, this.mKeyguardUpdateMonitor, this.mDozeParameters);
+                }
+            }
+        }
+        if (!canSupportScaleAnimation(videoEngine)) {
+            this.mWallpaperAnimator.release();
+        }
+        if (willShowAodWithWallpaper$1()) {
+            if (!this.mIsFirstTransition && this.mPrevScreenshot != null) {
+                ScreenshotResults screenshotResultsOnGetScreenshot2 = videoEngine.onGetScreenshot(new ScreenshotOptions("next"));
+                TransitionEngine transitionEngine = new TransitionEngine(this.mCallback, this.mPrevScreenshot, screenshotResultsOnGetScreenshot2 != null ? screenshotResultsOnGetScreenshot2.mBitmap : null, new Runnable() { // from class: com.android.systemui.wallpaper.engines.multipack.MultipackEngine$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        MultipackEngine multipackEngine = this.f$0;
+                        WallpaperEngine wallpaperEngine2 = videoEngine;
+                        multipackEngine.mSubEngine = wallpaperEngine2;
+                        multipackEngine.initSubEngine(wallpaperEngine2);
+                    }
+                });
+                this.mSubEngine = transitionEngine;
+                initSubEngine(transitionEngine);
+                return;
+            }
+            Log.i(this.TAG, "handleTransition: mIsFirstTransition = " + this.mIsFirstTransition);
+            this.mSubEngine = videoEngine;
+            initSubEngine(videoEngine);
+            this.mIsFirstTransition = false;
+            return;
+        }
+        int which2 = getWhich();
+        if ((WhichChecker.isFlagEnabled(which2, 2) || WhichChecker.isVirtualDisplay(which2)) && ((videoEngine instanceof VideoEngine) || (videoEngine instanceof GifEngine))) {
+            try {
+                Rect surfaceFrame = this.mSurfaceHolder.getSurfaceFrame();
+                if (surfaceFrame == null || surfaceFrame.isEmpty()) {
+                    Log.i(this.TAG, "makeSurfaceBlack: empty surface frame. frame=" + surfaceFrame);
+                } else {
+                    int iWidth = surfaceFrame.width();
+                    int iHeight = surfaceFrame.height();
+                    Log.i(this.TAG, "makeSurfaceBlack: width == " + iWidth + ", height = " + iHeight);
+                    Paint paint = new Paint();
+                    paint.setColor(-16777216);
+                    Surface surface = this.mSurfaceHolder.getSurface();
+                    if (surface == null || !surface.isValid()) {
+                        Log.w(this.TAG, "makeSurfaceBlack: surface = " + surface);
+                    } else {
+                        synchronized (this.mDrawLock) {
+                            try {
+                                Canvas canvasLockHardwareCanvas = surface.lockHardwareCanvas();
+                                if (canvasLockHardwareCanvas == null) {
+                                    Log.w(this.TAG, "makeSurfaceBlack: canvas is null");
+                                } else {
+                                    canvasLockHardwareCanvas.drawRect(0.0f, 0.0f, iWidth, iHeight, paint);
+                                    surface.unlockCanvasAndPost(canvasLockHardwareCanvas);
+                                }
+                            } finally {
+                            }
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                Log.w(this.TAG, "makeSurfaceBlack: e = " + e, e);
+            }
+        }
+        this.mSubEngine = videoEngine;
+        initSubEngine(videoEngine);
     }
 
     public final void updateWallpaperIfReady(int i) {
         int wallpaperId = WallpaperManager.getInstance(getAppContext()).getWallpaperId(getSourceWhich());
-        String m = ListImplementation$$ExternalSyntheticOutline0.m(i, wallpaperId, "updateWallpaperIfReady: wallpaperId = ", ", wallpaperManagerId = ");
+        String strM = ListImplementation$$ExternalSyntheticOutline0.m(i, wallpaperId, "updateWallpaperIfReady: wallpaperId = ", ", wallpaperManagerId = ");
         String str = this.TAG;
-        Log.i(str, m);
+        Log.i(str, strM);
         if (i == wallpaperId) {
             updateWallpaper();
             return;
         }
         int which = getWhich();
         if (WhichChecker.isFlagEnabled(which, 2)) {
-            boolean isPluginWallpaperRequired = ((PluginWallpaperController) this.mPluginWallpaper).isPluginWallpaperRequired(which);
-            AODAmbientWallpaperHelper$initAODAmbientWallpaperHelper$1$$ExternalSyntheticOutline0.m("updateWallpaperIfReady: isPluginLockReady = ", str, isPluginWallpaperRequired);
-            if (isPluginWallpaperRequired) {
+            boolean zIsPluginWallpaperRequired = ((PluginWallpaperController) this.mPluginWallpaper).isPluginWallpaperRequired(which);
+            AODAmbientWallpaperHelper$initAODAmbientWallpaperHelper$1$$ExternalSyntheticOutline0.m("updateWallpaperIfReady: isPluginLockReady = ", str, zIsPluginWallpaperRequired);
+            if (zIsPluginWallpaperRequired) {
                 updateWallpaper();
             }
         }

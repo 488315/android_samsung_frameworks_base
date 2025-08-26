@@ -13,6 +13,6 @@ public class CreateTlsStateArgs<DataSourceInstanceType extends DataSourceInstanc
     }
 
     public DataSourceInstanceType getDataSourceInstanceLocked() {
-        return this.mDataSource.getDataSourceInstanceLocked(this.mInstanceIndex);
+        return (DataSourceInstanceType) this.mDataSource.getDataSourceInstanceLocked(this.mInstanceIndex);
     }
 }

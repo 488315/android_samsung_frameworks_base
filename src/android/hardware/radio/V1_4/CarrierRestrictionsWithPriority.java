@@ -38,13 +38,13 @@ public final class CarrierRestrictionsWithPriority {
 
     public static final ArrayList<CarrierRestrictionsWithPriority> readVectorFromParcel(HwParcel hwParcel) {
         ArrayList<CarrierRestrictionsWithPriority> arrayList = new ArrayList<>();
-        HwBlob readBuffer = hwParcel.readBuffer(16L);
-        int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 40, readBuffer.handle(), 0L, true);
+        HwBlob buffer = hwParcel.readBuffer(16L);
+        int int32 = buffer.getInt32(8L);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 40, buffer.handle(), 0L, true);
         arrayList.clear();
         for (int i = 0; i < int32; i++) {
             CarrierRestrictionsWithPriority carrierRestrictionsWithPriority = new CarrierRestrictionsWithPriority();
-            carrierRestrictionsWithPriority.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 40);
+            carrierRestrictionsWithPriority.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 40);
             arrayList.add(carrierRestrictionsWithPriority);
         }
         return arrayList;
@@ -52,19 +52,19 @@ public final class CarrierRestrictionsWithPriority {
 
     public final void readEmbeddedFromParcel(HwParcel hwParcel, HwBlob hwBlob, long j) {
         int int32 = hwBlob.getInt32(8 + j);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 56, hwBlob.handle(), j, true);
+        HwBlob embeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 56, hwBlob.handle(), j, true);
         this.allowedCarriers.clear();
         for (int i = 0; i < int32; i++) {
             Carrier carrier = new Carrier();
-            carrier.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer, i * 56);
+            carrier.readEmbeddedFromParcel(hwParcel, embeddedBuffer, i * 56);
             this.allowedCarriers.add(carrier);
         }
         int int322 = hwBlob.getInt32(24 + j);
-        HwBlob readEmbeddedBuffer2 = hwParcel.readEmbeddedBuffer(int322 * 56, hwBlob.handle(), j + 16, true);
+        HwBlob embeddedBuffer2 = hwParcel.readEmbeddedBuffer(int322 * 56, hwBlob.handle(), j + 16, true);
         this.excludedCarriers.clear();
         for (int i2 = 0; i2 < int322; i2++) {
             Carrier carrier2 = new Carrier();
-            carrier2.readEmbeddedFromParcel(hwParcel, readEmbeddedBuffer2, i2 * 56);
+            carrier2.readEmbeddedFromParcel(hwParcel, embeddedBuffer2, i2 * 56);
             this.excludedCarriers.add(carrier2);
         }
         this.allowedCarriersPrioritized = hwBlob.getBool(j + 32);

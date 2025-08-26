@@ -72,16 +72,16 @@ public final class ParcelableHolder implements Parcelable {
     }
 
     public void readFromParcel(Parcel parcel) {
-        int readInt = parcel.readInt();
-        if (this.mStability != readInt) {
-            throw new IllegalArgumentException("Expected stability " + this.mStability + " but got " + readInt);
+        int i = parcel.readInt();
+        if (this.mStability != i) {
+            throw new IllegalArgumentException("Expected stability " + this.mStability + " but got " + i);
         }
         this.mParcelable = null;
-        int readInt2 = parcel.readInt();
-        if (readInt2 < 0) {
+        int i2 = parcel.readInt();
+        if (i2 < 0) {
             throw new IllegalArgumentException("dataSize from parcel is negative");
         }
-        if (readInt2 == 0) {
+        if (i2 == 0) {
             Parcel parcel2 = this.mParcel;
             if (parcel2 != null) {
                 parcel2.recycle();
@@ -95,9 +95,9 @@ public final class ParcelableHolder implements Parcelable {
         }
         this.mParcel.setDataPosition(0);
         this.mParcel.setDataSize(0);
-        int dataPosition = parcel.dataPosition();
-        this.mParcel.appendFrom(parcel, dataPosition, readInt2);
-        parcel.setDataPosition(MathUtils.addOrThrow(dataPosition, readInt2));
+        int iDataPosition = parcel.dataPosition();
+        this.mParcel.appendFrom(parcel, iDataPosition, i2);
+        parcel.setDataPosition(MathUtils.addOrThrow(iDataPosition, i2));
     }
 
     @Override // android.os.Parcelable
@@ -113,14 +113,14 @@ public final class ParcelableHolder implements Parcelable {
                 parcel.writeInt(0);
                 return;
             }
-            int dataPosition = parcel.dataPosition();
+            int iDataPosition = parcel.dataPosition();
             parcel.writeInt(0);
-            int dataPosition2 = parcel.dataPosition();
+            int iDataPosition2 = parcel.dataPosition();
             parcel.writeParcelable(this.mParcelable, 0);
-            int dataPosition3 = parcel.dataPosition() - dataPosition2;
-            parcel.setDataPosition(dataPosition);
-            parcel.writeInt(dataPosition3);
-            parcel.setDataPosition(MathUtils.addOrThrow(parcel.dataPosition(), dataPosition3));
+            int iDataPosition3 = parcel.dataPosition() - iDataPosition2;
+            parcel.setDataPosition(iDataPosition);
+            parcel.writeInt(iDataPosition3);
+            parcel.setDataPosition(MathUtils.addOrThrow(parcel.dataPosition(), iDataPosition3));
         }
     }
 

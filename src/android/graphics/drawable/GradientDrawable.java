@@ -9,11 +9,15 @@ import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.DashPathEffect;
 import android.graphics.Insets;
+import android.graphics.LinearGradient;
 import android.graphics.Outline;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.RadialGradient;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.Shader;
+import android.graphics.SweepGradient;
 import android.graphics.Xfermode;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
@@ -277,7 +281,11 @@ public class GradientDrawable extends Drawable {
         return iArr;
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:87:0x01b4  */
     @Override // android.graphics.drawable.Drawable
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public void draw(Canvas canvas) {
         Canvas canvas2;
         Paint paint;
@@ -285,17 +293,17 @@ public class GradientDrawable extends Drawable {
             int alpha = this.mFillPaint.getAlpha();
             Paint paint2 = this.mStrokePaint;
             int alpha2 = paint2 != null ? paint2.getAlpha() : 0;
-            int modulateAlpha = modulateAlpha(alpha);
-            int modulateAlpha2 = modulateAlpha(alpha2);
-            boolean z = modulateAlpha2 > 0 && (paint = this.mStrokePaint) != null && paint.getStrokeWidth() > 0.0f;
-            boolean z2 = modulateAlpha > 0;
+            int iModulateAlpha = modulateAlpha(alpha);
+            int iModulateAlpha2 = modulateAlpha(alpha2);
+            boolean z = iModulateAlpha2 > 0 && (paint = this.mStrokePaint) != null && paint.getStrokeWidth() > 0.0f;
+            boolean z2 = iModulateAlpha > 0;
             GradientState gradientState = this.mGradientState;
             ColorFilter colorFilter = this.mColorFilter;
             if (colorFilter == null) {
                 colorFilter = this.mBlendModeColorFilter;
             }
             ColorFilter colorFilter2 = colorFilter;
-            boolean z3 = z && z2 && gradientState.mShape != 2 && modulateAlpha2 < 255 && (this.mAlpha < 255 || colorFilter2 != null);
+            boolean z3 = z && z2 && gradientState.mShape != 2 && iModulateAlpha2 < 255 && (this.mAlpha < 255 || colorFilter2 != null);
             if (z3) {
                 if (this.mLayerPaint == null) {
                     this.mLayerPaint = new Paint();
@@ -308,14 +316,14 @@ public class GradientDrawable extends Drawable {
                 this.mFillPaint.setColorFilter(null);
                 this.mStrokePaint.setColorFilter(null);
             } else {
-                this.mFillPaint.setAlpha(modulateAlpha);
+                this.mFillPaint.setAlpha(iModulateAlpha);
                 this.mFillPaint.setDither(gradientState.mDither);
                 this.mFillPaint.setColorFilter(colorFilter2);
                 if (colorFilter2 != null && gradientState.mSolidColors == null) {
                     this.mFillPaint.setColor(this.mAlpha << 24);
                 }
                 if (z) {
-                    this.mStrokePaint.setAlpha(modulateAlpha2);
+                    this.mStrokePaint.setAlpha(iModulateAlpha2);
                     this.mStrokePaint.setDither(gradientState.mDither);
                     this.mStrokePaint.setColorFilter(colorFilter2);
                 }
@@ -330,13 +338,13 @@ public class GradientDrawable extends Drawable {
                         canvas2.drawPath(this.mPath, this.mStrokePaint);
                     }
                 } else if (gradientState.mRadius > 0.0f) {
-                    float min = Math.min(gradientState.mRadius, Math.min(this.mRect.width(), this.mRect.height()) * 0.5f);
+                    float fMin = Math.min(gradientState.mRadius, Math.min(this.mRect.width(), this.mRect.height()) * 0.5f);
                     if (this.mIsSmoothCorner) {
-                        drawSmoothCornerRect(canvas2, min, z);
+                        drawSmoothCornerRect(canvas2, fMin, z);
                     } else {
-                        canvas2.drawRoundRect(this.mRect, min, min, this.mFillPaint);
+                        canvas2.drawRoundRect(this.mRect, fMin, fMin, this.mFillPaint);
                         if (z) {
-                            canvas2.drawRoundRect(this.mRect, min, min, this.mStrokePaint);
+                            canvas2.drawRoundRect(this.mRect, fMin, fMin, this.mStrokePaint);
                         }
                     }
                 } else {
@@ -356,57 +364,54 @@ public class GradientDrawable extends Drawable {
             } else if (i == 2) {
                 canvas2 = canvas;
                 RectF rectF = this.mRect;
-                float centerY = rectF.centerY();
+                float fCenterY = rectF.centerY();
                 if (z) {
-                    canvas2.drawLine(rectF.left, centerY, rectF.right, centerY, this.mStrokePaint);
+                    canvas2.drawLine(rectF.left, fCenterY, rectF.right, fCenterY, this.mStrokePaint);
                 }
-            } else {
-                if (i != 3) {
-                    if (i != 4) {
-                        canvas2 = canvas;
-                    } else if (Flags.gradientDrawableShapeArcForRoundedCap()) {
-                        float centerX = this.mRect.centerX();
-                        float centerY2 = this.mRect.centerY();
-                        float width = gradientState.mThickness != -1 ? gradientState.mThickness : this.mRect.width() / gradientState.mThicknessRatio;
-                        float width2 = (gradientState.mInnerRadius != -1 ? gradientState.mInnerRadius : this.mRect.width() / gradientState.mInnerRadiusRatio) - width;
-                        float level = gradientState.mUseLevelForShape ? (getLevel() * 360.0f) / 10000.0f : 360.0f;
-                        this.mRect.set(centerX - width2, centerY2 - width2, centerX + width2, centerY2 + width2);
-                        this.mFillPaint.setStyle(Paint.Style.STROKE);
-                        this.mFillPaint.setStrokeWidth(width);
-                        this.mFillPaint.setStrokeCap(getStrokeLineCapForPaint(gradientState.mStrokeCap));
-                        float f = level;
-                        canvas2 = canvas;
-                        canvas2.drawArc(this.mRect, 0.0f, f, false, this.mFillPaint);
-                        if (z) {
-                            Path path = this.mArcPath;
-                            if (path == null) {
-                                this.mArcPath = new Path();
-                            } else {
-                                path.reset();
-                            }
-                            Path path2 = this.mArcOutlinePath;
-                            if (path2 == null) {
-                                this.mArcOutlinePath = new Path();
-                            } else {
-                                path2.reset();
-                            }
-                            if (f == 360.0f) {
-                                this.mArcPath.addOval(this.mRect, Path.Direction.CW);
-                            } else {
-                                this.mArcPath.arcTo(this.mRect, 0.0f, f, false);
-                            }
-                            this.mFillPaint.getFillPath(this.mArcPath, this.mArcOutlinePath);
-                            canvas2.drawPath(this.mArcOutlinePath, this.mStrokePaint);
-                        }
-                        this.mFillPaint.setStyle(Paint.Style.FILL);
-                    }
-                }
+            } else if (i == 3) {
                 canvas2 = canvas;
-                Path buildRing = buildRing(gradientState);
-                canvas2.drawPath(buildRing, this.mFillPaint);
+                Path pathBuildRing = buildRing(gradientState);
+                canvas2.drawPath(pathBuildRing, this.mFillPaint);
                 if (z) {
-                    canvas2.drawPath(buildRing, this.mStrokePaint);
+                    canvas2.drawPath(pathBuildRing, this.mStrokePaint);
                 }
+            } else if (i != 4) {
+                canvas2 = canvas;
+            } else if (Flags.gradientDrawableShapeArcForRoundedCap()) {
+                float fCenterX = this.mRect.centerX();
+                float fCenterY2 = this.mRect.centerY();
+                float fWidth = gradientState.mThickness != -1 ? gradientState.mThickness : this.mRect.width() / gradientState.mThicknessRatio;
+                float fWidth2 = (gradientState.mInnerRadius != -1 ? gradientState.mInnerRadius : this.mRect.width() / gradientState.mInnerRadiusRatio) - fWidth;
+                float level = gradientState.mUseLevelForShape ? (getLevel() * 360.0f) / 10000.0f : 360.0f;
+                this.mRect.set(fCenterX - fWidth2, fCenterY2 - fWidth2, fCenterX + fWidth2, fCenterY2 + fWidth2);
+                this.mFillPaint.setStyle(Paint.Style.STROKE);
+                this.mFillPaint.setStrokeWidth(fWidth);
+                this.mFillPaint.setStrokeCap(getStrokeLineCapForPaint(gradientState.mStrokeCap));
+                float f = level;
+                canvas2 = canvas;
+                canvas2.drawArc(this.mRect, 0.0f, f, false, this.mFillPaint);
+                if (z) {
+                    Path path = this.mArcPath;
+                    if (path == null) {
+                        this.mArcPath = new Path();
+                    } else {
+                        path.reset();
+                    }
+                    Path path2 = this.mArcOutlinePath;
+                    if (path2 == null) {
+                        this.mArcOutlinePath = new Path();
+                    } else {
+                        path2.reset();
+                    }
+                    if (f == 360.0f) {
+                        this.mArcPath.addOval(this.mRect, Path.Direction.CW);
+                    } else {
+                        this.mArcPath.arcTo(this.mRect, 0.0f, f, false);
+                    }
+                    this.mFillPaint.getFillPath(this.mArcPath, this.mArcOutlinePath);
+                    canvas2.drawPath(this.mArcOutlinePath, this.mStrokePaint);
+                }
+                this.mFillPaint.setStyle(Paint.Style.FILL);
             }
             if (z3) {
                 canvas2.restore();
@@ -510,14 +515,14 @@ public class GradientDrawable extends Drawable {
         this.mPathIsDirty = false;
         float level = gradientState.mUseLevelForShape ? (getLevel() * 360.0f) / 10000.0f : 360.0f;
         RectF rectF = new RectF(this.mRect);
-        float width = rectF.width() / 2.0f;
-        float height = rectF.height() / 2.0f;
-        float width2 = gradientState.mThickness != -1 ? gradientState.mThickness : rectF.width() / gradientState.mThicknessRatio;
-        float width3 = gradientState.mInnerRadius != -1 ? gradientState.mInnerRadius : rectF.width() / gradientState.mInnerRadiusRatio;
+        float fWidth = rectF.width() / 2.0f;
+        float fHeight = rectF.height() / 2.0f;
+        float fWidth2 = gradientState.mThickness != -1 ? gradientState.mThickness : rectF.width() / gradientState.mThicknessRatio;
+        float fWidth3 = gradientState.mInnerRadius != -1 ? gradientState.mInnerRadius : rectF.width() / gradientState.mInnerRadiusRatio;
         RectF rectF2 = new RectF(rectF);
-        rectF2.inset(width - width3, height - width3);
+        rectF2.inset(fWidth - fWidth3, fHeight - fWidth3);
         RectF rectF3 = new RectF(rectF2);
-        float f = -width2;
+        float f = -fWidth2;
         rectF3.inset(f, f);
         Path path = this.mRingPath;
         if (path == null) {
@@ -528,9 +533,9 @@ public class GradientDrawable extends Drawable {
         Path path2 = this.mRingPath;
         if (level < 360.0f && level > -360.0f) {
             path2.setFillType(Path.FillType.EVEN_ODD);
-            float f2 = width + width3;
-            path2.moveTo(f2, height);
-            path2.lineTo(f2 + width2, height);
+            float f2 = fWidth + fWidth3;
+            path2.moveTo(f2, fHeight);
+            path2.lineTo(f2 + fWidth2, fHeight);
             path2.arcTo(rectF3, 0.0f, level, false);
             path2.arcTo(rectF2, level, -level, false);
             path2.close();
@@ -708,27 +713,205 @@ public class GradientDrawable extends Drawable {
     }
 
     /* JADX WARN: Failed to find 'out' block for switch in B:25:0x0074. Please report as an issue. */
-    /* JADX WARN: Removed duplicated region for block: B:56:0x012d  */
-    /* JADX WARN: Removed duplicated region for block: B:59:0x013a  */
+    /* JADX WARN: Removed duplicated region for block: B:58:0x012d  */
+    /* JADX WARN: Removed duplicated region for block: B:61:0x013a  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     private boolean ensureValidRect() {
-        /*
-            Method dump skipped, instructions count: 474
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.graphics.drawable.GradientDrawable.ensureValidRect():boolean");
+        int[] iArr;
+        float fMin;
+        float f;
+        float f2;
+        float f3;
+        float f4;
+        float f5;
+        float f6;
+        float f7;
+        float f8;
+        float f9;
+        float f10;
+        float f11;
+        float f12;
+        float f13;
+        float f14;
+        if (this.mGradientIsDirty) {
+            this.mGradientIsDirty = false;
+            Rect bounds = getBounds();
+            Paint paint = this.mStrokePaint;
+            float strokeWidth = paint != null ? paint.getStrokeWidth() * 0.5f : 0.0f;
+            GradientState gradientState = this.mGradientState;
+            this.mRect.set(bounds.left + strokeWidth, bounds.top + strokeWidth, bounds.right - strokeWidth, bounds.bottom - strokeWidth);
+            float[] fArr = null;
+            if (gradientState.mGradientColors != null) {
+                int length = gradientState.mGradientColors.length;
+                int[] iArr2 = new int[length];
+                for (int i = 0; i < length; i++) {
+                    if (gradientState.mGradientColors[i] != null) {
+                        iArr2[i] = gradientState.mGradientColors[i].getDefaultColor();
+                    }
+                }
+                iArr = iArr2;
+            } else {
+                iArr = null;
+            }
+            if (iArr != null) {
+                RectF rectF = this.mRect;
+                if (gradientState.mGradient == 0) {
+                    float level = gradientState.mUseLevel ? getLevel() / 10000.0f : 1.0f;
+                    switch (gradientState.mOrientation) {
+                        case TOP_BOTTOM:
+                            f = rectF.left;
+                            f2 = rectF.top;
+                            f3 = rectF.bottom;
+                            f11 = f3 * level;
+                            f12 = f;
+                            f13 = f12;
+                            f14 = f2;
+                            f9 = f11;
+                            break;
+                        case TR_BL:
+                            f4 = rectF.right;
+                            f5 = rectF.top;
+                            f6 = rectF.left * level;
+                            f7 = rectF.bottom;
+                            f11 = f7 * level;
+                            f12 = f4;
+                            f14 = f5;
+                            f13 = f6;
+                            f9 = f11;
+                            break;
+                        case RIGHT_LEFT:
+                            f8 = rectF.right;
+                            f9 = rectF.top;
+                            f10 = rectF.left;
+                            f12 = f8;
+                            f14 = f9;
+                            f13 = level * f10;
+                            break;
+                        case BR_TL:
+                            f4 = rectF.right;
+                            f5 = rectF.bottom;
+                            f6 = rectF.left * level;
+                            f7 = rectF.top;
+                            f11 = f7 * level;
+                            f12 = f4;
+                            f14 = f5;
+                            f13 = f6;
+                            f9 = f11;
+                            break;
+                        case BOTTOM_TOP:
+                            f = rectF.left;
+                            f2 = rectF.bottom;
+                            f3 = rectF.top;
+                            f11 = f3 * level;
+                            f12 = f;
+                            f13 = f12;
+                            f14 = f2;
+                            f9 = f11;
+                            break;
+                        case BL_TR:
+                            f4 = rectF.left;
+                            f5 = rectF.bottom;
+                            f6 = rectF.right * level;
+                            f7 = rectF.top;
+                            f11 = f7 * level;
+                            f12 = f4;
+                            f14 = f5;
+                            f13 = f6;
+                            f9 = f11;
+                            break;
+                        case LEFT_RIGHT:
+                            f8 = rectF.left;
+                            f9 = rectF.top;
+                            f10 = rectF.right;
+                            f12 = f8;
+                            f14 = f9;
+                            f13 = level * f10;
+                            break;
+                        default:
+                            f4 = rectF.left;
+                            f5 = rectF.top;
+                            f6 = rectF.right * level;
+                            f7 = rectF.bottom;
+                            f11 = f7 * level;
+                            f12 = f4;
+                            f14 = f5;
+                            f13 = f6;
+                            f9 = f11;
+                            break;
+                    }
+                    this.mFillPaint.setShader(new LinearGradient(f12, f14, f13, f9, iArr, gradientState.mPositions, Shader.TileMode.CLAMP));
+                } else if (gradientState.mGradient == 1) {
+                    float f15 = rectF.left + ((rectF.right - rectF.left) * gradientState.mCenterX);
+                    float f16 = rectF.top + ((rectF.bottom - rectF.top) * gradientState.mCenterY);
+                    float level2 = gradientState.mGradientRadius;
+                    if (gradientState.mGradientRadiusType == 1) {
+                        fMin = Math.min(gradientState.mWidth >= 0 ? gradientState.mWidth : rectF.width(), gradientState.mHeight >= 0 ? gradientState.mHeight : rectF.height());
+                    } else {
+                        if (gradientState.mGradientRadiusType == 2) {
+                            fMin = Math.min(rectF.width(), rectF.height());
+                        }
+                        if (gradientState.mUseLevel) {
+                            level2 *= getLevel() / 10000.0f;
+                        }
+                        this.mGradientRadius = level2;
+                        if (level2 <= 0.0f) {
+                            level2 = 0.001f;
+                        }
+                        this.mFillPaint.setShader(new RadialGradient(f15, f16, level2, iArr, (float[]) null, Shader.TileMode.CLAMP));
+                    }
+                    level2 *= fMin;
+                    if (gradientState.mUseLevel) {
+                    }
+                    this.mGradientRadius = level2;
+                    if (level2 <= 0.0f) {
+                    }
+                    this.mFillPaint.setShader(new RadialGradient(f15, f16, level2, iArr, (float[]) null, Shader.TileMode.CLAMP));
+                } else if (gradientState.mGradient == 2) {
+                    float f17 = rectF.left + ((rectF.right - rectF.left) * gradientState.mCenterX);
+                    float f18 = rectF.top + ((rectF.bottom - rectF.top) * gradientState.mCenterY);
+                    if (gradientState.mUseLevel) {
+                        int[] iArr3 = gradientState.mTempColors;
+                        int length2 = iArr.length;
+                        if (iArr3 == null || iArr3.length != length2 + 1) {
+                            iArr3 = new int[length2 + 1];
+                            gradientState.mTempColors = iArr3;
+                        }
+                        System.arraycopy(iArr, 0, iArr3, 0, length2);
+                        int i2 = length2 - 1;
+                        iArr3[length2] = iArr[i2];
+                        float[] fArr2 = gradientState.mTempPositions;
+                        float f19 = 1.0f / i2;
+                        if (fArr2 == null || fArr2.length != length2 + 1) {
+                            fArr2 = new float[length2 + 1];
+                            gradientState.mTempPositions = fArr2;
+                        }
+                        float level3 = getLevel() / 10000.0f;
+                        for (int i3 = 0; i3 < length2; i3++) {
+                            fArr2[i3] = i3 * f19 * level3;
+                        }
+                        fArr2[length2] = 1.0f;
+                        iArr = iArr3;
+                        fArr = fArr2;
+                    }
+                    this.mFillPaint.setShader(new SweepGradient(f17, f18, iArr, fArr));
+                }
+                if (gradientState.mSolidColors == null) {
+                    this.mFillPaint.setColor(-16777216);
+                }
+            }
+        }
+        return !this.mRect.isEmpty();
     }
 
     @Override // android.graphics.drawable.Drawable
     public void inflate(Resources resources, XmlPullParser xmlPullParser, AttributeSet attributeSet, Resources.Theme theme) throws XmlPullParserException, IOException {
         super.inflate(resources, xmlPullParser, attributeSet, theme);
         this.mGradientState.setDensity(Drawable.resolveDensity(resources, 0));
-        TypedArray obtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.GradientDrawable);
-        updateStateFromTypedArray(obtainAttributes);
-        obtainAttributes.recycle();
+        TypedArray typedArrayObtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.GradientDrawable);
+        updateStateFromTypedArray(typedArrayObtainAttributes);
+        typedArrayObtainAttributes.recycle();
         inflateChildElements(resources, xmlPullParser, attributeSet, theme);
         updateLocalState(resources);
     }
@@ -742,9 +925,9 @@ public class GradientDrawable extends Drawable {
         }
         gradientState.setDensity(Drawable.resolveDensity(theme.getResources(), 0));
         if (gradientState.mThemeAttrs != null) {
-            TypedArray resolveAttributes = theme.resolveAttributes(gradientState.mThemeAttrs, R.styleable.GradientDrawable);
-            updateStateFromTypedArray(resolveAttributes);
-            resolveAttributes.recycle();
+            TypedArray typedArrayResolveAttributes = theme.resolveAttributes(gradientState.mThemeAttrs, R.styleable.GradientDrawable);
+            updateStateFromTypedArray(typedArrayResolveAttributes);
+            typedArrayResolveAttributes.recycle();
         }
         if (gradientState.mTint != null && gradientState.mTint.canApplyTheme()) {
             gradientState.mTint = gradientState.mTint.obtainForTheme(theme);
@@ -804,28 +987,28 @@ public class GradientDrawable extends Drawable {
     private void applyThemeChildElements(Resources.Theme theme) {
         GradientState gradientState = this.mGradientState;
         if (gradientState.mAttrSize != null) {
-            TypedArray resolveAttributes = theme.resolveAttributes(gradientState.mAttrSize, R.styleable.GradientDrawableSize);
-            updateGradientDrawableSize(resolveAttributes);
-            resolveAttributes.recycle();
+            TypedArray typedArrayResolveAttributes = theme.resolveAttributes(gradientState.mAttrSize, R.styleable.GradientDrawableSize);
+            updateGradientDrawableSize(typedArrayResolveAttributes);
+            typedArrayResolveAttributes.recycle();
         }
         if (gradientState.mAttrGradient != null) {
-            TypedArray resolveAttributes2 = theme.resolveAttributes(gradientState.mAttrGradient, R.styleable.GradientDrawableGradient);
+            TypedArray typedArrayResolveAttributes2 = theme.resolveAttributes(gradientState.mAttrGradient, R.styleable.GradientDrawableGradient);
             try {
-                updateGradientDrawableGradient(theme.getResources(), resolveAttributes2);
-                resolveAttributes2.recycle();
+                updateGradientDrawableGradient(theme.getResources(), typedArrayResolveAttributes2);
+                typedArrayResolveAttributes2.recycle();
             } finally {
-                resolveAttributes2.recycle();
+                typedArrayResolveAttributes2.recycle();
             }
         }
         if (gradientState.mAttrSolid != null) {
-            TypedArray resolveAttributes3 = theme.resolveAttributes(gradientState.mAttrSolid, R.styleable.GradientDrawableSolid);
-            updateGradientDrawableSolid(resolveAttributes3);
-            resolveAttributes3.recycle();
+            TypedArray typedArrayResolveAttributes3 = theme.resolveAttributes(gradientState.mAttrSolid, R.styleable.GradientDrawableSolid);
+            updateGradientDrawableSolid(typedArrayResolveAttributes3);
+            typedArrayResolveAttributes3.recycle();
         }
         if (gradientState.mAttrStroke != null) {
-            TypedArray resolveAttributes4 = theme.resolveAttributes(gradientState.mAttrStroke, R.styleable.GradientDrawableStroke);
-            updateGradientDrawableStroke(resolveAttributes4);
-            resolveAttributes4.recycle();
+            TypedArray typedArrayResolveAttributes4 = theme.resolveAttributes(gradientState.mAttrStroke, R.styleable.GradientDrawableStroke);
+            updateGradientDrawableStroke(typedArrayResolveAttributes4);
+            typedArrayResolveAttributes4.recycle();
         }
         if (gradientState.mAttrCorners != null) {
             updateDrawableCorners(theme.resolveAttributes(gradientState.mAttrCorners, R.styleable.DrawableCorners));
@@ -849,29 +1032,29 @@ public class GradientDrawable extends Drawable {
             if (next == 2 && depth2 <= depth) {
                 String name = xmlPullParser.getName();
                 if (name.equals(Contract.DatabaseSize.PATH)) {
-                    TypedArray obtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.GradientDrawableSize);
-                    updateGradientDrawableSize(obtainAttributes);
-                    obtainAttributes.recycle();
+                    TypedArray typedArrayObtainAttributes = obtainAttributes(resources, theme, attributeSet, R.styleable.GradientDrawableSize);
+                    updateGradientDrawableSize(typedArrayObtainAttributes);
+                    typedArrayObtainAttributes.recycle();
                 } else if (name.equals("gradient")) {
-                    TypedArray obtainAttributes2 = obtainAttributes(resources, theme, attributeSet, R.styleable.GradientDrawableGradient);
-                    updateGradientDrawableGradient(resources, obtainAttributes2);
-                    obtainAttributes2.recycle();
+                    TypedArray typedArrayObtainAttributes2 = obtainAttributes(resources, theme, attributeSet, R.styleable.GradientDrawableGradient);
+                    updateGradientDrawableGradient(resources, typedArrayObtainAttributes2);
+                    typedArrayObtainAttributes2.recycle();
                 } else if (name.equals("solid")) {
-                    TypedArray obtainAttributes3 = obtainAttributes(resources, theme, attributeSet, R.styleable.GradientDrawableSolid);
-                    updateGradientDrawableSolid(obtainAttributes3);
-                    obtainAttributes3.recycle();
+                    TypedArray typedArrayObtainAttributes3 = obtainAttributes(resources, theme, attributeSet, R.styleable.GradientDrawableSolid);
+                    updateGradientDrawableSolid(typedArrayObtainAttributes3);
+                    typedArrayObtainAttributes3.recycle();
                 } else if (name.equals(SemSmartClipMetaTagType.STROKE)) {
-                    TypedArray obtainAttributes4 = obtainAttributes(resources, theme, attributeSet, R.styleable.GradientDrawableStroke);
-                    updateGradientDrawableStroke(obtainAttributes4);
-                    obtainAttributes4.recycle();
+                    TypedArray typedArrayObtainAttributes4 = obtainAttributes(resources, theme, attributeSet, R.styleable.GradientDrawableStroke);
+                    updateGradientDrawableStroke(typedArrayObtainAttributes4);
+                    typedArrayObtainAttributes4.recycle();
                 } else if (name.equals("corners")) {
-                    TypedArray obtainAttributes5 = obtainAttributes(resources, theme, attributeSet, R.styleable.DrawableCorners);
-                    updateDrawableCorners(obtainAttributes5);
-                    obtainAttributes5.recycle();
+                    TypedArray typedArrayObtainAttributes5 = obtainAttributes(resources, theme, attributeSet, R.styleable.DrawableCorners);
+                    updateDrawableCorners(typedArrayObtainAttributes5);
+                    typedArrayObtainAttributes5.recycle();
                 } else if (name.equals("padding")) {
-                    TypedArray obtainAttributes6 = obtainAttributes(resources, theme, attributeSet, R.styleable.GradientDrawablePadding);
-                    updateGradientDrawablePadding(obtainAttributes6);
-                    obtainAttributes6.recycle();
+                    TypedArray typedArrayObtainAttributes6 = obtainAttributes(resources, theme, attributeSet, R.styleable.GradientDrawablePadding);
+                    updateGradientDrawablePadding(typedArrayObtainAttributes6);
+                    typedArrayObtainAttributes6.recycle();
                 } else {
                     Log.w("drawable", "Bad element under <shape>: " + name);
                 }
@@ -939,7 +1122,7 @@ public class GradientDrawable extends Drawable {
     }
 
     private void updateGradientDrawableGradient(Resources resources, TypedArray typedArray) {
-        float f;
+        float dimension;
         GradientState gradientState = this.mGradientState;
         gradientState.mChangingConfigurations |= typedArray.getChangingConfigurations();
         gradientState.mAttrGradient = typedArray.extractThemeAttrs();
@@ -952,22 +1135,22 @@ public class GradientDrawable extends Drawable {
         ColorStateList colorStateList2 = typedArray.getColorStateList(8);
         ColorStateList colorStateList3 = typedArray.getColorStateList(1);
         boolean z = gradientState.mGradientColors != null;
-        boolean hasCenterColor = gradientState.hasCenterColor();
+        boolean zHasCenterColor = gradientState.hasCenterColor();
         int defaultColor = colorStateList != null ? colorStateList.getDefaultColor() : 0;
         int defaultColor2 = colorStateList2 != null ? colorStateList2.getDefaultColor() : 0;
         int defaultColor3 = colorStateList3 != null ? colorStateList3.getDefaultColor() : 0;
         if (z && gradientState.mGradientColors[0] != null) {
             defaultColor = gradientState.mGradientColors[0].getDefaultColor();
         }
-        if (hasCenterColor && gradientState.mGradientColors[1] != null) {
+        if (zHasCenterColor && gradientState.mGradientColors[1] != null) {
             defaultColor2 = gradientState.mGradientColors[1].getDefaultColor();
         }
-        if (hasCenterColor && gradientState.mGradientColors[2] != null) {
+        if (zHasCenterColor && gradientState.mGradientColors[2] != null) {
             defaultColor3 = gradientState.mGradientColors[2].getDefaultColor();
         } else if (z && gradientState.mGradientColors[1] != null) {
             defaultColor3 = gradientState.mGradientColors[1].getDefaultColor();
         }
-        if (typedArray.hasValue(8) || hasCenterColor) {
+        if (typedArray.hasValue(8) || zHasCenterColor) {
             gradientState.mGradientColors = new ColorStateList[3];
             ColorStateList[] colorStateListArr = gradientState.mGradientColors;
             if (colorStateList == null) {
@@ -1029,22 +1212,22 @@ public class GradientDrawable extends Drawable {
         } else {
             gradientState.mOrientation = DEFAULT_ORIENTATION;
         }
-        TypedValue peekValue = typedArray.peekValue(7);
-        if (peekValue != null) {
-            if (peekValue.type == 6) {
-                f = peekValue.getFraction(1.0f, 1.0f);
-                if ((peekValue.data & 15) != 1) {
+        TypedValue typedValuePeekValue = typedArray.peekValue(7);
+        if (typedValuePeekValue != null) {
+            if (typedValuePeekValue.type == 6) {
+                dimension = typedValuePeekValue.getFraction(1.0f, 1.0f);
+                if ((typedValuePeekValue.data & 15) != 1) {
                     i = 1;
                 }
             } else {
-                if (peekValue.type == 5) {
-                    f = peekValue.getDimension(resources.getDisplayMetrics());
+                if (typedValuePeekValue.type == 5) {
+                    dimension = typedValuePeekValue.getDimension(resources.getDisplayMetrics());
                 } else {
-                    f = peekValue.getFloat();
+                    dimension = typedValuePeekValue.getFloat();
                 }
                 i = 0;
             }
-            gradientState.mGradientRadius = f;
+            gradientState.mGradientRadius = dimension;
             gradientState.mGradientRadiusType = i;
         }
     }
@@ -1058,8 +1241,8 @@ public class GradientDrawable extends Drawable {
     }
 
     private static float getFloatOrFraction(TypedArray typedArray, int i, float f) {
-        TypedValue peekValue = typedArray.peekValue(i);
-        return peekValue != null ? peekValue.type == 6 ? peekValue.getFraction(1.0f, 1.0f) : peekValue.getFloat() : f;
+        TypedValue typedValuePeekValue = typedArray.peekValue(i);
+        return typedValuePeekValue != null ? typedValuePeekValue.type == 6 ? typedValuePeekValue.getFraction(1.0f, 1.0f) : typedValuePeekValue.getFloat() : f;
     }
 
     @Override // android.graphics.drawable.Drawable
@@ -1108,8 +1291,8 @@ public class GradientDrawable extends Drawable {
                 }
                 Paint paint2 = this.mStrokePaint;
                 float strokeWidth = paint2 == null ? 1.0E-4f : paint2.getStrokeWidth() * 0.5f;
-                float centerY = bounds.centerY();
-                outline.setRect(bounds.left, (int) Math.floor(centerY - strokeWidth), bounds.right, (int) Math.ceil(centerY + strokeWidth));
+                float fCenterY = bounds.centerY();
+                outline.setRect(bounds.left, (int) Math.floor(fCenterY - strokeWidth), bounds.right, (int) Math.ceil(fCenterY + strokeWidth));
                 return;
             }
         }
@@ -1118,12 +1301,12 @@ public class GradientDrawable extends Drawable {
             outline.setPath(this.mPath);
             return;
         }
-        float min = gradientState.mRadius > 0.0f ? Math.min(gradientState.mRadius, Math.min(bounds.width(), bounds.height()) * 0.5f) : 0.0f;
+        float fMin = gradientState.mRadius > 0.0f ? Math.min(gradientState.mRadius, Math.min(bounds.width(), bounds.height()) * 0.5f) : 0.0f;
         if (this.mIsSmoothCorner) {
-            SemViewUtils.getSmoothCornerRectPath(this.mPath, min, bounds.left, bounds.top, bounds.width(), bounds.height());
+            SemViewUtils.getSmoothCornerRectPath(this.mPath, fMin, bounds.left, bounds.top, bounds.width(), bounds.height());
             outline.setPath(this.mPath);
         } else {
-            outline.setRoundRect(bounds, min);
+            outline.setRoundRect(bounds, fMin);
         }
     }
 
@@ -1300,11 +1483,11 @@ public class GradientDrawable extends Drawable {
             this.mAttrStroke = gradientState.mAttrStroke;
             this.mAttrCorners = gradientState.mAttrCorners;
             this.mAttrPadding = gradientState.mAttrPadding;
-            int resolveDensity = Drawable.resolveDensity(resources, gradientState.mDensity);
-            this.mDensity = resolveDensity;
+            int iResolveDensity = Drawable.resolveDensity(resources, gradientState.mDensity);
+            this.mDensity = iResolveDensity;
             int i = gradientState.mDensity;
-            if (i != resolveDensity) {
-                applyDensityScaling(i, resolveDensity);
+            if (i != iResolveDensity) {
+                applyDensityScaling(i, iResolveDensity);
             }
         }
 
@@ -1400,6 +1583,7 @@ public class GradientDrawable extends Drawable {
             return (this.mThemeAttrs == null && this.mAttrSize == null && this.mAttrGradient == null && this.mAttrSolid == null && this.mAttrStroke == null && this.mAttrCorners == null && this.mAttrPadding == null && ((colorStateList = this.mTint) == null || !colorStateList.canApplyTheme()) && (((colorStateList2 = this.mStrokeColors) == null || !colorStateList2.canApplyTheme()) && (((colorStateList3 = this.mSolidColors) == null || !colorStateList3.canApplyTheme()) && !z && !super.canApplyTheme()))) ? false : true;
         }
 
+        /* JADX WARN: Multi-variable type inference failed */
         @Override // android.graphics.drawable.Drawable.ConstantState
         public Drawable newDrawable() {
             return new GradientDrawable(this, null);

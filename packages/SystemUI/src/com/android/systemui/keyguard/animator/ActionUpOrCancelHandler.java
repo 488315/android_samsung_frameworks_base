@@ -22,7 +22,6 @@ import java.util.List;
 import kotlin.collections.CollectionsKt__CollectionsKt;
 import kotlin.collections.CollectionsKt__IterablesKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ActionUpOrCancelHandler extends ActionHandlerType {
     public ActionUpOrCancelHandler(KeyguardTouchAnimator keyguardTouchAnimator) {
@@ -64,9 +63,9 @@ public final class ActionUpOrCancelHandler extends ActionHandlerType {
                 ArrayList arrayList = new ArrayList();
                 Iterator it = list.iterator();
                 while (true) {
-                    boolean hasNext = it.hasNext();
+                    boolean zHasNext = it.hasNext();
                     keyguardTouchAnimator2 = keyguardEditModeAnimatorController3.keyguardTouchAnimator;
-                    if (!hasNext) {
+                    if (!zHasNext) {
                         break;
                     }
                     Object next = it.next();
@@ -102,120 +101,122 @@ public final class ActionUpOrCancelHandler extends ActionHandlerType {
             keyguardEditModeAnimatorController = keyguardEditModeAnimatorController3;
             anonymousClass4 = null;
             i = 1;
-        } else {
-            if (keyguardTouchAnimator3.isMultiTouch || direction == null || direction == KeyguardTouchDymLockInjector.Direction.SWIPE || direction == KeyguardTouchDymLockInjector.Direction.TAP) {
-                float f = keyguardTouchAnimator3.distance;
-                float f2 = keyguardTouchAnimator3.touchSlop;
-                KeyguardClickController keyguardClickController = keyguardTouchAnimator3.keyguardClickController;
-                if (f < f2) {
-                    keyguardTouchAnimator3.resetChildViewVI$frameworks__base__packages__SystemUI__android_common__SystemUI_core(1.0f);
-                    if (actionMasked == 1) {
-                        KeyguardClickControllerImpl keyguardClickControllerImpl2 = (KeyguardClickControllerImpl) keyguardClickController;
-                        if (((Boolean) keyguardClickControllerImpl2.isClickContainerArea.invoke(Integer.valueOf((int) motionEvent.getX()), Integer.valueOf((int) motionEvent.getY()))).booleanValue()) {
-                            int x2 = (int) motionEvent.getX();
-                            int y2 = (int) motionEvent.getY();
-                            keyguardClickControllerImpl2.getClass();
-                            com.android.systemui.keyguard.Log.d("KeyguardClickControllerImpl", "onNPVClicked ");
-                            PluginKeyguardStatusView pluginKeyguardStatusView2 = keyguardClickControllerImpl2.manager.mFaceWidgetPlugin;
-                            if (pluginKeyguardStatusView2 != null) {
-                                pluginKeyguardStatusView2.onClockClicked(x2, y2);
-                            }
+        } else if (keyguardTouchAnimator3.isMultiTouch || direction == null || direction == KeyguardTouchDymLockInjector.Direction.SWIPE || direction == KeyguardTouchDymLockInjector.Direction.TAP) {
+            float f = keyguardTouchAnimator3.distance;
+            float f2 = keyguardTouchAnimator3.touchSlop;
+            KeyguardClickController keyguardClickController = keyguardTouchAnimator3.keyguardClickController;
+            if (f < f2) {
+                keyguardTouchAnimator3.resetChildViewVI$frameworks__base__packages__SystemUI__android_common__SystemUI_core(1.0f);
+                if (actionMasked == 1) {
+                    KeyguardClickControllerImpl keyguardClickControllerImpl2 = (KeyguardClickControllerImpl) keyguardClickController;
+                    if (((Boolean) keyguardClickControllerImpl2.isClickContainerArea.invoke(Integer.valueOf((int) motionEvent.getX()), Integer.valueOf((int) motionEvent.getY()))).booleanValue()) {
+                        int x2 = (int) motionEvent.getX();
+                        int y2 = (int) motionEvent.getY();
+                        keyguardClickControllerImpl2.getClass();
+                        com.android.systemui.keyguard.Log.d("KeyguardClickControllerImpl", "onNPVClicked ");
+                        PluginKeyguardStatusView pluginKeyguardStatusView2 = keyguardClickControllerImpl2.manager.mFaceWidgetPlugin;
+                        if (pluginKeyguardStatusView2 != null) {
+                            pluginKeyguardStatusView2.onClockClicked(x2, y2);
                         }
-                    }
-                    PluginKeyguardStatusView pluginKeyguardStatusView3 = ((KeyguardClickControllerImpl) keyguardClickController).manager.mFaceWidgetPlugin;
-                    if (pluginKeyguardStatusView3 != null) {
-                        pluginKeyguardStatusView3.onEmptyAreaClicked();
-                    }
-                    TapAffordanceViewController tapAffordanceViewController = keyguardTouchAnimator3.tapAffordanceViewController;
-                    tapAffordanceViewController.getClass();
-                    Log.d("KeyguardTouchAnimator", "showTapAffordanceAnimation");
-                    List list2 = tapAffordanceViewController.tapAffordanceViews;
-                    ArrayList arrayList2 = new ArrayList();
-                    Iterator it2 = list2.iterator();
-                    while (true) {
-                        boolean hasNext2 = it2.hasNext();
-                        keyguardTouchAnimator = tapAffordanceViewController.keyguardTouchAnimator;
-                        if (!hasNext2) {
-                            break;
-                        }
-                        Object next2 = it2.next();
-                        if (keyguardTouchAnimator.hasView$frameworks__base__packages__SystemUI__android_common__SystemUI_core(((Number) next2).intValue())) {
-                            arrayList2.add(next2);
-                        }
-                    }
-                    ArrayList arrayList3 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(arrayList2, 10));
-                    int size2 = arrayList2.size();
-                    int i3 = 0;
-                    while (i3 < size2) {
-                        Object obj = arrayList2.get(i3);
-                        i3++;
-                        arrayList3.add(keyguardTouchAnimator.getView$frameworks__base__packages__SystemUI__android_common__SystemUI_core(((Number) obj).intValue()));
-                    }
-                    ArrayList arrayList4 = new ArrayList();
-                    int size3 = arrayList3.size();
-                    int i4 = 0;
-                    while (i4 < size3) {
-                        Object obj2 = arrayList3.get(i4);
-                        i4++;
-                        if (((View) obj2).getVisibility() == 0) {
-                            arrayList4.add(obj2);
-                        }
-                    }
-                    int size4 = arrayList4.size();
-                    int i5 = 0;
-                    int i6 = 0;
-                    while (i6 < size4) {
-                        Object obj3 = arrayList4.get(i6);
-                        i6++;
-                        int i7 = i5 + 1;
-                        if (i5 < 0) {
-                            CollectionsKt__CollectionsKt.throwIndexOverflow();
-                            throw null;
-                        }
-                        View view = (View) obj3;
-                        if (i5 == 0) {
-                            tapAffordanceViewController.isTapAnimationRunning = z;
-                            keyguardEditModeAnimatorController2 = keyguardEditModeAnimatorController3;
-                            keyguardTouchAnimator.getParentView$frameworks__base__packages__SystemUI__android_common__SystemUI_core().postDelayed(tapAffordanceViewController.restoreSpringAnimRunnable, 150L);
-                        } else {
-                            keyguardEditModeAnimatorController2 = keyguardEditModeAnimatorController3;
-                        }
-                        SpringAnimation springAnimation = new SpringAnimation(view, DynamicAnimation.SCALE_X);
-                        springAnimation.mSpring = ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(500.0f, 0.78f);
-                        springAnimation.animateToFinalPosition(1.1f);
-                        ((ArrayList) tapAffordanceViewController.tapSpringAnimationList).add(springAnimation);
-                        SpringAnimation springAnimation2 = new SpringAnimation(view, DynamicAnimation.SCALE_Y);
-                        springAnimation2.mSpring = ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(500.0f, 0.78f);
-                        springAnimation2.animateToFinalPosition(1.1f);
-                        ((ArrayList) tapAffordanceViewController.tapSpringAnimationList).add(springAnimation2);
-                        i5 = i7;
-                        keyguardEditModeAnimatorController3 = keyguardEditModeAnimatorController2;
-                        z = true;
-                    }
-                    keyguardEditModeAnimatorController = keyguardEditModeAnimatorController3;
-                    anonymousClass4 = null;
-                    KeyguardTouchSecurityInjector keyguardTouchSecurityInjector = keyguardTouchAnimator3.securityInjector;
-                    keyguardTouchSecurityInjector.getClass();
-                    if (LsRune.SECURITY_FINGERPRINT_IN_DISPLAY && keyguardTouchSecurityInjector.mFingerprintManager != null && keyguardTouchSecurityInjector.mKeyguardUpdateMonitor.isFingerprintOptionEnabled()) {
-                        keyguardTouchSecurityInjector.mFingerprintManager.semShowUdfpsIcon();
-                    }
-                } else {
-                    keyguardEditModeAnimatorController = keyguardEditModeAnimatorController3;
-                    anonymousClass4 = null;
-                    if (f <= keyguardTouchAnimator3.swipeUnlockRadius || actionMasked == 6 || actionMasked == 3) {
-                        if (actionMasked == 1 && keyguardEditModeAnimatorController.isLongPressed$frameworks__base__packages__SystemUI__android_common__SystemUI_core()) {
-                            Log.d("KeyguardTouchAnimator", "skip because of EM");
-                        } else {
-                            PluginKeyguardStatusView pluginKeyguardStatusView4 = ((KeyguardClickControllerImpl) keyguardClickController).manager.mFaceWidgetPlugin;
-                            if (pluginKeyguardStatusView4 != null) {
-                                pluginKeyguardStatusView4.onEmptyAreaClicked();
-                            }
-                            keyguardTouchAnimator3.restoreChildViewVI$frameworks__base__packages__SystemUI__android_common__SystemUI_core();
-                        }
+                        keyguardEditModeAnimatorController = keyguardEditModeAnimatorController3;
+                        i = 1;
+                        anonymousClass4 = null;
                     }
                 }
-                i = 1;
+                PluginKeyguardStatusView pluginKeyguardStatusView3 = ((KeyguardClickControllerImpl) keyguardClickController).manager.mFaceWidgetPlugin;
+                if (pluginKeyguardStatusView3 != null) {
+                    pluginKeyguardStatusView3.onEmptyAreaClicked();
+                }
+                TapAffordanceViewController tapAffordanceViewController = keyguardTouchAnimator3.tapAffordanceViewController;
+                tapAffordanceViewController.getClass();
+                Log.d("KeyguardTouchAnimator", "showTapAffordanceAnimation");
+                List list2 = tapAffordanceViewController.tapAffordanceViews;
+                ArrayList arrayList2 = new ArrayList();
+                Iterator it2 = list2.iterator();
+                while (true) {
+                    boolean zHasNext2 = it2.hasNext();
+                    keyguardTouchAnimator = tapAffordanceViewController.keyguardTouchAnimator;
+                    if (!zHasNext2) {
+                        break;
+                    }
+                    Object next2 = it2.next();
+                    if (keyguardTouchAnimator.hasView$frameworks__base__packages__SystemUI__android_common__SystemUI_core(((Number) next2).intValue())) {
+                        arrayList2.add(next2);
+                    }
+                }
+                ArrayList arrayList3 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(arrayList2, 10));
+                int size2 = arrayList2.size();
+                int i3 = 0;
+                while (i3 < size2) {
+                    Object obj = arrayList2.get(i3);
+                    i3++;
+                    arrayList3.add(keyguardTouchAnimator.getView$frameworks__base__packages__SystemUI__android_common__SystemUI_core(((Number) obj).intValue()));
+                }
+                ArrayList arrayList4 = new ArrayList();
+                int size3 = arrayList3.size();
+                int i4 = 0;
+                while (i4 < size3) {
+                    Object obj2 = arrayList3.get(i4);
+                    i4++;
+                    if (((View) obj2).getVisibility() == 0) {
+                        arrayList4.add(obj2);
+                    }
+                }
+                int size4 = arrayList4.size();
+                int i5 = 0;
+                int i6 = 0;
+                while (i6 < size4) {
+                    Object obj3 = arrayList4.get(i6);
+                    i6++;
+                    int i7 = i5 + 1;
+                    if (i5 < 0) {
+                        CollectionsKt__CollectionsKt.throwIndexOverflow();
+                        throw null;
+                    }
+                    View view = (View) obj3;
+                    if (i5 == 0) {
+                        tapAffordanceViewController.isTapAnimationRunning = z;
+                        keyguardEditModeAnimatorController2 = keyguardEditModeAnimatorController3;
+                        keyguardTouchAnimator.getParentView$frameworks__base__packages__SystemUI__android_common__SystemUI_core().postDelayed(tapAffordanceViewController.restoreSpringAnimRunnable, 150L);
+                    } else {
+                        keyguardEditModeAnimatorController2 = keyguardEditModeAnimatorController3;
+                    }
+                    SpringAnimation springAnimation = new SpringAnimation(view, DynamicAnimation.SCALE_X);
+                    springAnimation.mSpring = ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(500.0f, 0.78f);
+                    springAnimation.animateToFinalPosition(1.1f);
+                    ((ArrayList) tapAffordanceViewController.tapSpringAnimationList).add(springAnimation);
+                    SpringAnimation springAnimation2 = new SpringAnimation(view, DynamicAnimation.SCALE_Y);
+                    springAnimation2.mSpring = ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(500.0f, 0.78f);
+                    springAnimation2.animateToFinalPosition(1.1f);
+                    ((ArrayList) tapAffordanceViewController.tapSpringAnimationList).add(springAnimation2);
+                    i5 = i7;
+                    keyguardEditModeAnimatorController3 = keyguardEditModeAnimatorController2;
+                    z = true;
+                }
+                keyguardEditModeAnimatorController = keyguardEditModeAnimatorController3;
+                anonymousClass4 = null;
+                KeyguardTouchSecurityInjector keyguardTouchSecurityInjector = keyguardTouchAnimator3.securityInjector;
+                keyguardTouchSecurityInjector.getClass();
+                if (LsRune.SECURITY_FINGERPRINT_IN_DISPLAY && keyguardTouchSecurityInjector.mFingerprintManager != null && keyguardTouchSecurityInjector.mKeyguardUpdateMonitor.isFingerprintOptionEnabled()) {
+                    keyguardTouchSecurityInjector.mFingerprintManager.semShowUdfpsIcon();
+                }
+            } else {
+                keyguardEditModeAnimatorController = keyguardEditModeAnimatorController3;
+                anonymousClass4 = null;
+                if (f <= keyguardTouchAnimator3.swipeUnlockRadius || actionMasked == 6 || actionMasked == 3) {
+                    if (actionMasked == 1 && keyguardEditModeAnimatorController.isLongPressed$frameworks__base__packages__SystemUI__android_common__SystemUI_core()) {
+                        Log.d("KeyguardTouchAnimator", "skip because of EM");
+                    } else {
+                        PluginKeyguardStatusView pluginKeyguardStatusView4 = ((KeyguardClickControllerImpl) keyguardClickController).manager.mFaceWidgetPlugin;
+                        if (pluginKeyguardStatusView4 != null) {
+                            pluginKeyguardStatusView4.onEmptyAreaClicked();
+                        }
+                        keyguardTouchAnimator3.restoreChildViewVI$frameworks__base__packages__SystemUI__android_common__SystemUI_core();
+                    }
+                }
             }
+            i = 1;
+        } else {
             keyguardEditModeAnimatorController = keyguardEditModeAnimatorController3;
             i = 1;
             anonymousClass4 = null;
@@ -241,12 +242,12 @@ public final class ActionUpOrCancelHandler extends ActionHandlerType {
                     PointF pointF2 = keyguardTouchAnimator3.lastMovePos;
                     float f6 = pointF2.x;
                     float f7 = pointF2.y;
-                    StringBuilder m = CubicBezierEasing$$ExternalSyntheticOutline0.m("no operation: (", f4, ",", f5, ") - (");
-                    m.append(f6);
-                    m.append(", ");
-                    m.append(f7);
-                    m.append(")");
-                    Log.d("KeyguardTouchAnimator", m.toString());
+                    StringBuilder sbM = CubicBezierEasing$$ExternalSyntheticOutline0.m("no operation: (", f4, ",", f5, ") - (");
+                    sbM.append(f6);
+                    sbM.append(", ");
+                    sbM.append(f7);
+                    sbM.append(")");
+                    Log.d("KeyguardTouchAnimator", sbM.toString());
                 } else if (keyguardEditModeAnimatorController.isLongPressed$frameworks__base__packages__SystemUI__android_common__SystemUI_core()) {
                     Log.d("KeyguardTouchAnimator", "skip swipe because of edit mode");
                 } else if (keyguardTouchAnimator3.getCanBeUnlock()) {
@@ -254,7 +255,7 @@ public final class ActionUpOrCancelHandler extends ActionHandlerType {
                     Runnable runnable = new Runnable() { // from class: com.android.systemui.keyguard.animator.ActionUpOrCancelHandler$handleMotionEvent$1$3
                         @Override // java.lang.Runnable
                         public final void run() {
-                            NotificationPanelViewController.AnonymousClass4 anonymousClass44 = KeyguardTouchAnimator.this.callback;
+                            NotificationPanelViewController.AnonymousClass4 anonymousClass44 = keyguardTouchAnimator3.callback;
                             if (anonymousClass44 == null) {
                                 anonymousClass44 = null;
                             }

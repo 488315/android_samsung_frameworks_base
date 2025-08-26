@@ -60,10 +60,10 @@ public class HashedStringCache {
         this.mDigester.reset();
         this.mDigester.update(this.mSalt);
         this.mDigester.update(str2.getBytes(UTF_8));
-        byte[] digest = this.mDigester.digest();
-        String encodeToString = Base64.encodeToString(digest, 0, Math.min(8, digest.length), 3);
-        this.mHashes.put(str2, encodeToString);
-        return new HashResult(this, encodeToString, this.mSaltGen);
+        byte[] bArrDigest = this.mDigester.digest();
+        String strEncodeToString = Base64.encodeToString(bArrDigest, 0, Math.min(8, bArrDigest.length), 3);
+        this.mHashes.put(str2, strEncodeToString);
+        return new HashResult(this, strEncodeToString, this.mSaltGen);
     }
 
     private boolean checkNeedsNewSalt(String str, int i, long j) {
@@ -71,8 +71,8 @@ public class HashedStringCache {
             if (i > 100) {
                 i = 100;
             }
-            long currentTimeMillis = System.currentTimeMillis() - j;
-            if (currentTimeMillis < i * 86400000 && currentTimeMillis >= 0) {
+            long jCurrentTimeMillis = System.currentTimeMillis() - j;
+            if (jCurrentTimeMillis < i * 86400000 && jCurrentTimeMillis >= 0) {
                 return false;
             }
         }
@@ -83,15 +83,15 @@ public class HashedStringCache {
         synchronized (this.mPreferenceLock) {
             SharedPreferences hashSharedPreferences = getHashSharedPreferences(context);
             this.mSharedPreferences = hashSharedPreferences;
-            boolean checkNeedsNewSalt = checkNeedsNewSalt(str, i, hashSharedPreferences.getLong(str + HASH_SALT_DATE, 0L));
-            if (checkNeedsNewSalt) {
+            boolean zCheckNeedsNewSalt = checkNeedsNewSalt(str, i, hashSharedPreferences.getLong(str + HASH_SALT_DATE, 0L));
+            if (zCheckNeedsNewSalt) {
                 this.mHashes.evictAll();
             }
-            if (this.mSalt == null || checkNeedsNewSalt) {
+            if (this.mSalt == null || zCheckNeedsNewSalt) {
                 String string = this.mSharedPreferences.getString(str + HASH_SALT, null);
                 int i2 = this.mSharedPreferences.getInt(str + HASH_SALT_GEN, 0);
                 this.mSaltGen = i2;
-                if (string == null || checkNeedsNewSalt) {
+                if (string == null || zCheckNeedsNewSalt) {
                     this.mSaltGen = i2 + 1;
                     byte[] bArr = new byte[16];
                     this.mSecureRandom.nextBytes(bArr);

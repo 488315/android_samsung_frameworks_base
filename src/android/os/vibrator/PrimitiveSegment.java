@@ -109,14 +109,14 @@ public final class PrimitiveSegment extends VibrationEffectSegment {
 
     @Override // android.os.vibrator.VibrationEffectSegment
     public PrimitiveSegment scale(float f) {
-        float scale = VibrationEffect.scale(this.mScale, f);
-        return Float.compare(this.mScale, scale) == 0 ? this : new PrimitiveSegment(this.mPrimitiveId, scale, this.mDelay, this.mDelayType);
+        float fScale = VibrationEffect.scale(this.mScale, f);
+        return Float.compare(this.mScale, fScale) == 0 ? this : new PrimitiveSegment(this.mPrimitiveId, fScale, this.mDelay, this.mDelayType);
     }
 
     @Override // android.os.vibrator.VibrationEffectSegment
     public PrimitiveSegment scaleLinearly(float f) {
-        float scaleLinearly = VibrationEffect.scaleLinearly(this.mScale, f);
-        return Float.compare(this.mScale, scaleLinearly) == 0 ? this : new PrimitiveSegment(this.mPrimitiveId, scaleLinearly, this.mDelay, this.mDelayType);
+        float fScaleLinearly = VibrationEffect.scaleLinearly(this.mScale, f);
+        return Float.compare(this.mScale, fScaleLinearly) == 0 ? this : new PrimitiveSegment(this.mPrimitiveId, fScaleLinearly, this.mDelay, this.mDelayType);
     }
 
     @Override // android.os.vibrator.VibrationEffectSegment

@@ -12,7 +12,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class ModalBottomSheetKt$Scrim$dismissSheet$1$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ Function0 $onDismissRequest;
@@ -52,9 +51,9 @@ final class ModalBottomSheetKt$Scrim$dismissSheet$1$1 extends SuspendLambda impl
 
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj2) {
+                public final Object mo781invoke(Object obj2) {
                     long j = ((Offset) obj2).packedValue;
-                    Function0.this.invoke();
+                    function0.invoke();
                     return Unit.INSTANCE;
                 }
             };

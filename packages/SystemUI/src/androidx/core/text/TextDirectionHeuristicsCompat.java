@@ -3,7 +3,6 @@ package androidx.core.text;
 import android.text.TextUtils;
 import java.util.Locale;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class TextDirectionHeuristicsCompat {
     public static final TextDirectionHeuristicInternal FIRSTSTRONG_LTR;
@@ -11,7 +10,6 @@ public final class TextDirectionHeuristicsCompat {
     public static final TextDirectionHeuristicInternal LTR = new TextDirectionHeuristicInternal(null, false);
     public static final TextDirectionHeuristicInternal RTL = new TextDirectionHeuristicInternal(null, true);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AnyStrong implements TextDirectionAlgorithm {
         public static final AnyStrong INSTANCE_RTL = new AnyStrong(true);
         public final boolean mLookForRtl;
@@ -58,47 +56,49 @@ public final class TextDirectionHeuristicsCompat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class FirstStrong implements TextDirectionAlgorithm {
         public static final FirstStrong INSTANCE = new FirstStrong();
 
         private FirstStrong() {
         }
 
+        /* JADX WARN: Removed duplicated region for block: B:11:0x001e  */
+        /* JADX WARN: Removed duplicated region for block: B:12:0x0020  */
         @Override // androidx.core.text.TextDirectionHeuristicsCompat.TextDirectionAlgorithm
+        /*
+            Code decompiled incorrectly, please refer to instructions dump.
+        */
         public final int checkRtl(int i, CharSequence charSequence) {
             int i2 = 2;
             for (int i3 = 0; i3 < i && i2 == 2; i3++) {
                 byte directionality = Character.getDirectionality(charSequence.charAt(i3));
                 TextDirectionHeuristicInternal textDirectionHeuristicInternal = TextDirectionHeuristicsCompat.LTR;
-                if (directionality != 0) {
-                    if (directionality != 1 && directionality != 2) {
-                        switch (directionality) {
-                            case 14:
-                            case 15:
-                                break;
-                            case 16:
-                            case 17:
-                                break;
-                            default:
-                                i2 = 2;
-                                break;
-                        }
+                if (directionality == 0) {
+                    i2 = 1;
+                } else if (directionality != 1 && directionality != 2) {
+                    switch (directionality) {
+                        case 14:
+                        case 15:
+                            break;
+                        case 16:
+                        case 17:
+                            break;
+                        default:
+                            i2 = 2;
+                            break;
                     }
+                } else {
                     i2 = 0;
                 }
-                i2 = 1;
             }
             return i2;
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface TextDirectionAlgorithm {
         int checkRtl(int i, CharSequence charSequence);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class TextDirectionHeuristicImpl implements TextDirectionHeuristicCompat {
         public final TextDirectionAlgorithm mAlgorithm;
 
@@ -116,18 +116,17 @@ public final class TextDirectionHeuristicsCompat {
             if (textDirectionAlgorithm == null) {
                 return defaultIsRtl();
             }
-            int checkRtl = textDirectionAlgorithm.checkRtl(i, charSequence);
-            if (checkRtl == 0) {
+            int iCheckRtl = textDirectionAlgorithm.checkRtl(i, charSequence);
+            if (iCheckRtl == 0) {
                 return true;
             }
-            if (checkRtl != 1) {
+            if (iCheckRtl != 1) {
                 return defaultIsRtl();
             }
             return false;
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class TextDirectionHeuristicInternal extends TextDirectionHeuristicImpl {
         public final boolean mDefaultIsRtl;
 
@@ -142,7 +141,6 @@ public final class TextDirectionHeuristicsCompat {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class TextDirectionHeuristicLocale extends TextDirectionHeuristicImpl {
         public static final /* synthetic */ int $r8$clinit = 0;
 

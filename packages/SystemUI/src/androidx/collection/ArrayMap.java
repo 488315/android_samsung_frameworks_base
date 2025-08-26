@@ -9,14 +9,12 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class ArrayMap extends SimpleArrayMap implements Map {
     public EntrySet mEntrySet;
     public KeySet mKeySet;
     public ValueCollection mValues;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class EntrySet extends AbstractSet {
         public EntrySet() {
         }
@@ -32,7 +30,6 @@ public class ArrayMap extends SimpleArrayMap implements Map {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class KeyIterator extends IndexBasedArrayIterator {
         public KeyIterator() {
             super(ArrayMap.this.size);
@@ -49,7 +46,6 @@ public class ArrayMap extends SimpleArrayMap implements Map {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class MapIterator implements Iterator, Map.Entry {
         public int mEnd;
         public boolean mEntryValid;
@@ -97,9 +93,9 @@ public class ArrayMap extends SimpleArrayMap implements Map {
             if (!this.mEntryValid) {
                 throw new IllegalStateException("This container does not support retaining Map.Entry objects");
             }
-            Object keyAt = ArrayMap.this.keyAt(this.mIndex);
-            Object valueAt = ArrayMap.this.valueAt(this.mIndex);
-            return (keyAt == null ? 0 : keyAt.hashCode()) ^ (valueAt != null ? valueAt.hashCode() : 0);
+            Object objKeyAt = ArrayMap.this.keyAt(this.mIndex);
+            Object objValueAt = ArrayMap.this.valueAt(this.mIndex);
+            return (objKeyAt == null ? 0 : objKeyAt.hashCode()) ^ (objValueAt != null ? objValueAt.hashCode() : 0);
         }
 
         @Override // java.util.Iterator
@@ -136,7 +132,6 @@ public class ArrayMap extends SimpleArrayMap implements Map {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ValueIterator extends IndexBasedArrayIterator {
         public ValueIterator() {
             super(ArrayMap.this.size);
@@ -234,7 +229,6 @@ public class ArrayMap extends SimpleArrayMap implements Map {
         super(simpleArrayMap);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class KeySet implements Set {
         public KeySet() {
         }
@@ -285,12 +279,12 @@ public class ArrayMap extends SimpleArrayMap implements Map {
 
         @Override // java.util.Set, java.util.Collection
         public final int hashCode() {
-            int i = 0;
-            for (int i2 = ArrayMap.this.size - 1; i2 >= 0; i2--) {
-                Object keyAt = ArrayMap.this.keyAt(i2);
-                i += keyAt == null ? 0 : keyAt.hashCode();
+            int iHashCode = 0;
+            for (int i = ArrayMap.this.size - 1; i >= 0; i--) {
+                Object objKeyAt = ArrayMap.this.keyAt(i);
+                iHashCode += objKeyAt == null ? 0 : objKeyAt.hashCode();
             }
-            return i;
+            return iHashCode;
         }
 
         @Override // java.util.Set, java.util.Collection
@@ -305,11 +299,11 @@ public class ArrayMap extends SimpleArrayMap implements Map {
 
         @Override // java.util.Set, java.util.Collection
         public final boolean remove(Object obj) {
-            int indexOfKey = ArrayMap.this.indexOfKey(obj);
-            if (indexOfKey < 0) {
+            int iIndexOfKey = ArrayMap.this.indexOfKey(obj);
+            if (iIndexOfKey < 0) {
                 return false;
             }
-            ArrayMap.this.removeAt(indexOfKey);
+            ArrayMap.this.removeAt(iIndexOfKey);
             return true;
         }
 
@@ -354,7 +348,6 @@ public class ArrayMap extends SimpleArrayMap implements Map {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class ValueCollection implements Collection {
         public ValueCollection() {
         }
@@ -402,11 +395,11 @@ public class ArrayMap extends SimpleArrayMap implements Map {
 
         @Override // java.util.Collection
         public final boolean remove(Object obj) {
-            int __restricted$indexOfValue = ArrayMap.this.__restricted$indexOfValue(obj);
-            if (__restricted$indexOfValue < 0) {
+            int i__restricted$indexOfValue = ArrayMap.this.__restricted$indexOfValue(obj);
+            if (i__restricted$indexOfValue < 0) {
                 return false;
             }
-            ArrayMap.this.removeAt(__restricted$indexOfValue);
+            ArrayMap.this.removeAt(i__restricted$indexOfValue);
             return true;
         }
 

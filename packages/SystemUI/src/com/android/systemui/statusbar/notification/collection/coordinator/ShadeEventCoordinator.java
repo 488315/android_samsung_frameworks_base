@@ -14,7 +14,6 @@ import com.android.systemui.statusbar.notification.collection.render.NotifShadeE
 import java.util.List;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ShadeEventCoordinator implements Coordinator, NotifShadeEventSource {
     public static final int $stable = 8;
@@ -26,8 +25,8 @@ public final class ShadeEventCoordinator implements Coordinator, NotifShadeEvent
         @Override // com.android.systemui.statusbar.notification.collection.notifcollection.NotifCollectionListener
         public void onEntryRemoved(NotificationEntry notificationEntry, int i) {
             boolean z = true;
-            ShadeEventCoordinator.this.mEntryRemoved = true;
-            ShadeEventCoordinator shadeEventCoordinator = ShadeEventCoordinator.this;
+            this.this$0.mEntryRemoved = true;
+            ShadeEventCoordinator shadeEventCoordinator = this.this$0;
             if (i != 1 && i != 3 && i != 2) {
                 z = false;
             }
@@ -104,7 +103,7 @@ public final class ShadeEventCoordinator implements Coordinator, NotifShadeEvent
     @Override // com.android.systemui.statusbar.notification.collection.coordinator.Coordinator
     public void attach(NotifPipeline notifPipeline) {
         notifPipeline.addCollectionListener(this.mNotifCollectionListener);
-        notifPipeline.addOnBeforeRenderListListener(new OnBeforeRenderListListener() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.ShadeEventCoordinator$attach$1
+        notifPipeline.addOnBeforeRenderListListener(new OnBeforeRenderListListener() { // from class: com.android.systemui.statusbar.notification.collection.coordinator.ShadeEventCoordinator.attach.1
             @Override // com.android.systemui.statusbar.notification.collection.listbuilder.OnBeforeRenderListListener
             public final void onBeforeRenderList(List<? extends PipelineEntry> list) {
                 ShadeEventCoordinator.this.onBeforeRenderList(list);

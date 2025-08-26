@@ -10,7 +10,6 @@ import android.util.Log;
 import com.samsung.android.knox.ex.peripheral.IPeripheralPluginService;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class PeripheralPluginService extends Service {
     public static final String DETECT_DEATH_BINDER = "detectDeathBinder";
@@ -248,7 +247,6 @@ public abstract class PeripheralPluginService extends Service {
     };
     public BinderDeathReceiver mBinderDeathReceiver;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class BinderDeathReceiver implements IBinder.DeathRecipient {
         public IBinder mReceiver;
 
@@ -305,7 +303,7 @@ public abstract class PeripheralPluginService extends Service {
     public abstract boolean isStarted();
 
     @Override // android.app.Service
-    public IBinder onBind(Intent intent) {
+    public IBinder onBind(Intent intent) throws RemoteException {
         IBinder binder;
         Bundle extras = intent.getExtras();
         if (extras != null && (binder = extras.getBinder("detectDeathBinder")) != null) {

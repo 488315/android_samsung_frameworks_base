@@ -129,9 +129,7 @@ public final class FloatingActionMode extends ActionMode {
         this.mFloatingToolbar = floatingToolbar.setMenu(this.mMenu).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() { // from class: com.android.internal.view.FloatingActionMode$$ExternalSyntheticLambda0
             @Override // android.view.MenuItem.OnMenuItemClickListener
             public final boolean onMenuItemClick(MenuItem menuItem) {
-                boolean lambda$setFloatingToolbar$0;
-                lambda$setFloatingToolbar$0 = FloatingActionMode.this.lambda$setFloatingToolbar$0(menuItem);
-                return lambda$setFloatingToolbar$0;
+                return this.f$0.lambda$setFloatingToolbar$0(menuItem);
             }
         });
         FloatingToolbarVisibilityHelper floatingToolbarVisibilityHelper = new FloatingToolbarVisibilityHelper(this.mFloatingToolbar);
@@ -226,15 +224,15 @@ public final class FloatingActionMode extends ActionMode {
         if (j == -1) {
             j = ViewConfiguration.getDefaultActionModeHideDuration();
         }
-        long min = Math.min(3000L, j);
+        long jMin = Math.min(3000L, j);
         this.mOriginatingView.removeCallbacks(this.mHideOff);
-        if (min <= 0) {
+        if (jMin <= 0) {
             this.mHideOff.run();
             return;
         }
         this.mFloatingToolbarVisibilityHelper.setHideRequested(true);
         this.mFloatingToolbarVisibilityHelper.updateToolbarVisibility();
-        this.mOriginatingView.postDelayed(this.mHideOff, min);
+        this.mOriginatingView.postDelayed(this.mHideOff, jMin);
     }
 
     public void setOutsideTouchable(boolean z, PopupWindow.OnDismissListener onDismissListener) {

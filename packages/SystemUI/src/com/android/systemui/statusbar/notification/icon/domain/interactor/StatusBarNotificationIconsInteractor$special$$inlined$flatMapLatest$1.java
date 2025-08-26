@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class StatusBarNotificationIconsInteractor$special$$inlined$flatMapLatest$1 extends SuspendLambda implements Function3 {
     final /* synthetic */ NotificationIconsInteractor $iconsInteractor$inlined;
@@ -39,9 +38,9 @@ public final class StatusBarNotificationIconsInteractor$special$$inlined$flatMap
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             FlowCollector flowCollector = (FlowCollector) this.L$0;
-            FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$2 filteredNotifSet$default = NotificationIconsInteractor.filteredNotifSet$default(this.$iconsInteractor$inlined, ((Boolean) this.L$1).booleanValue(), false, 96);
+            FlowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$2 flowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$2FilteredNotifSet$default = NotificationIconsInteractor.filteredNotifSet$default(this.$iconsInteractor$inlined, ((Boolean) this.L$1).booleanValue(), false, 96);
             this.label = 1;
-            if (FlowKt.emitAll(flowCollector, filteredNotifSet$default, this) == coroutineSingletons) {
+            if (FlowKt.emitAll(flowCollector, flowKt__ZipKt$combine$$inlined$combineUnsafe$FlowKt__ZipKt$2FilteredNotifSet$default, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

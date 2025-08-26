@@ -1444,14 +1444,14 @@ public class AudioSystem {
     }
 
     public static int setDeviceConnectionState(AudioDeviceAttributes audioDeviceAttributes, int i, int i2, boolean z) {
-        android.media.audio.common.AudioPort api2aidl_AudioDeviceAttributes_AudioPort = AidlConversion.api2aidl_AudioDeviceAttributes_AudioPort(audioDeviceAttributes);
-        Parcel obtain = Parcel.obtain();
-        api2aidl_AudioDeviceAttributes_AudioPort.writeToParcel(obtain, 0);
-        obtain.setDataPosition(0);
+        android.media.audio.common.AudioPort audioPortApi2aidl_AudioDeviceAttributes_AudioPort = AidlConversion.api2aidl_AudioDeviceAttributes_AudioPort(audioDeviceAttributes);
+        Parcel parcelObtain = Parcel.obtain();
+        audioPortApi2aidl_AudioDeviceAttributes_AudioPort.writeToParcel(parcelObtain, 0);
+        parcelObtain.setDataPosition(0);
         try {
-            return setDeviceConnectionState(i, obtain, i2, z);
+            return setDeviceConnectionState(i, parcelObtain, i2, z);
         } finally {
-            obtain.recycle();
+            parcelObtain.recycle();
         }
     }
 
@@ -1466,20 +1466,20 @@ public class AudioSystem {
     }
 
     public static int getDeviceMaskFromSet(Set<Integer> set) {
-        int i = 0;
-        int i2 = Integer.MIN_VALUE;
+        int iIntValue = 0;
+        int iIntValue2 = Integer.MIN_VALUE;
         for (Integer num : set) {
             if ((num.intValue() & (num.intValue() - 1) & Integer.MAX_VALUE) == 0 || (num.intValue() & (-536870915)) == 0) {
-                i |= num.intValue();
-                i2 &= num.intValue();
+                iIntValue |= num.intValue();
+                iIntValue2 &= num.intValue();
             } else {
                 Log.v(TAG, "getDeviceMaskFromSet skipping multi-bit device value " + num);
             }
         }
-        if (!set.isEmpty() && i2 != (i & Integer.MIN_VALUE)) {
+        if (!set.isEmpty() && iIntValue2 != (iIntValue & Integer.MIN_VALUE)) {
             Log.e(TAG, "getDeviceMaskFromSet: Invalid set: " + deviceSetToString(set));
         }
-        return i;
+        return iIntValue;
     }
 
     public static String deviceSetToString(Set<Integer> set) {
@@ -1563,24 +1563,24 @@ public class AudioSystem {
         if (list.isEmpty()) {
             return -2;
         }
-        Pair<int[], String[]> populateInputDevicesTypeAndAddress = populateInputDevicesTypeAndAddress(list);
-        return setDevicesRoleForCapturePreset(i, i2, populateInputDevicesTypeAndAddress.first, populateInputDevicesTypeAndAddress.second);
+        Pair<int[], String[]> pairPopulateInputDevicesTypeAndAddress = populateInputDevicesTypeAndAddress(list);
+        return setDevicesRoleForCapturePreset(i, i2, pairPopulateInputDevicesTypeAndAddress.first, pairPopulateInputDevicesTypeAndAddress.second);
     }
 
     public static int addDevicesRoleForCapturePreset(int i, int i2, List<AudioDeviceAttributes> list) {
         if (list.isEmpty()) {
             return -2;
         }
-        Pair<int[], String[]> populateInputDevicesTypeAndAddress = populateInputDevicesTypeAndAddress(list);
-        return addDevicesRoleForCapturePreset(i, i2, populateInputDevicesTypeAndAddress.first, populateInputDevicesTypeAndAddress.second);
+        Pair<int[], String[]> pairPopulateInputDevicesTypeAndAddress = populateInputDevicesTypeAndAddress(list);
+        return addDevicesRoleForCapturePreset(i, i2, pairPopulateInputDevicesTypeAndAddress.first, pairPopulateInputDevicesTypeAndAddress.second);
     }
 
     public static int removeDevicesRoleForCapturePreset(int i, int i2, List<AudioDeviceAttributes> list) {
         if (list.isEmpty()) {
             return -2;
         }
-        Pair<int[], String[]> populateInputDevicesTypeAndAddress = populateInputDevicesTypeAndAddress(list);
-        return removeDevicesRoleForCapturePreset(i, i2, populateInputDevicesTypeAndAddress.first, populateInputDevicesTypeAndAddress.second);
+        Pair<int[], String[]> pairPopulateInputDevicesTypeAndAddress = populateInputDevicesTypeAndAddress(list);
+        return removeDevicesRoleForCapturePreset(i, i2, pairPopulateInputDevicesTypeAndAddress.first, pairPopulateInputDevicesTypeAndAddress.second);
     }
 
     public static ISpatializer getSpatializer(INativeSpatializerCallback iNativeSpatializerCallback) {

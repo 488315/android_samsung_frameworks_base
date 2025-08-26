@@ -35,9 +35,9 @@ public final class MessageSamplingConfig implements Parcelable {
 
     public MessageSamplingConfig(int i, int i2, long j) {
         this.mSampledOpCode = i;
-        AnnotationValidations.validate((Class<IntRange>) IntRange.class, (IntRange) null, i, "from", -1L, "to", 162L);
+        AnnotationValidations.validate((Class<IntRange>) IntRange.class, (IntRange) null, i, "from", -1L, "to", 164L);
         this.mAcceptableLeftDistance = i2;
-        AnnotationValidations.validate((Class<IntRange>) IntRange.class, (IntRange) null, i2, "from", 0L, "to", 162L);
+        AnnotationValidations.validate((Class<IntRange>) IntRange.class, (IntRange) null, i2, "from", 0L, "to", 164L);
         this.mExpirationTimeSinceBootMillis = j;
         AnnotationValidations.validate((Class<IntRange>) IntRange.class, (IntRange) null, j, "from", 0L);
     }
@@ -62,14 +62,14 @@ public final class MessageSamplingConfig implements Parcelable {
     }
 
     MessageSamplingConfig(Parcel parcel) {
-        int readInt = parcel.readInt();
-        int readInt2 = parcel.readInt();
-        long readLong = parcel.readLong();
-        this.mSampledOpCode = readInt;
-        AnnotationValidations.validate((Class<IntRange>) IntRange.class, (IntRange) null, readInt, "from", -1L, "to", 162L);
-        this.mAcceptableLeftDistance = readInt2;
-        AnnotationValidations.validate((Class<IntRange>) IntRange.class, (IntRange) null, readInt2, "from", 0L, "to", 162L);
-        this.mExpirationTimeSinceBootMillis = readLong;
-        AnnotationValidations.validate((Class<IntRange>) IntRange.class, (IntRange) null, readLong, "from", 0L);
+        int i = parcel.readInt();
+        int i2 = parcel.readInt();
+        long j = parcel.readLong();
+        this.mSampledOpCode = i;
+        AnnotationValidations.validate((Class<IntRange>) IntRange.class, (IntRange) null, i, "from", -1L, "to", 164L);
+        this.mAcceptableLeftDistance = i2;
+        AnnotationValidations.validate((Class<IntRange>) IntRange.class, (IntRange) null, i2, "from", 0L, "to", 164L);
+        this.mExpirationTimeSinceBootMillis = j;
+        AnnotationValidations.validate((Class<IntRange>) IntRange.class, (IntRange) null, j, "from", 0L);
     }
 }

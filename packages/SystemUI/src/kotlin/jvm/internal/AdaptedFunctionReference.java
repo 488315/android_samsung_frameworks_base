@@ -4,7 +4,6 @@ import androidx.compose.animation.graphics.vector.PropertyValuesHolder2D$$Extern
 import java.io.Serializable;
 import kotlin.reflect.KDeclarationContainer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class AdaptedFunctionReference implements FunctionBase, Serializable {
     private final int arity;
@@ -49,9 +48,9 @@ public class AdaptedFunctionReference implements FunctionBase, Serializable {
 
     public int hashCode() {
         Object obj = this.receiver;
-        int hashCode = (obj != null ? obj.hashCode() : 0) * 31;
+        int iHashCode = (obj != null ? obj.hashCode() : 0) * 31;
         Class cls = this.owner;
-        return ((((PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(PropertyValuesHolder2D$$ExternalSyntheticOutline0.m((hashCode + (cls != null ? cls.hashCode() : 0)) * 31, 31, this.name), 31, this.signature) + (this.isTopLevel ? 1231 : 1237)) * 31) + this.arity) * 31) + this.flags;
+        return ((((PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(PropertyValuesHolder2D$$ExternalSyntheticOutline0.m((iHashCode + (cls != null ? cls.hashCode() : 0)) * 31, 31, this.name), 31, this.signature) + (this.isTopLevel ? 1231 : 1237)) * 31) + this.arity) * 31) + this.flags;
     }
 
     public String toString() {

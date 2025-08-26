@@ -17,7 +17,6 @@ import com.android.settingslib.RestrictedLockUtils;
 import com.android.systemui.R;
 import java.util.function.Supplier;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class RestrictedPreferenceHelper {
     public final String mAttrUserRestriction;
@@ -29,30 +28,30 @@ public class RestrictedPreferenceHelper {
     public final Preference mPreference;
 
     public RestrictedPreferenceHelper(Context context, Preference preference, AttributeSet attributeSet, String str, int i) {
-        CharSequence charSequence;
+        CharSequence text;
         this.mAttrUserRestriction = null;
         boolean z = false;
         this.mDisabledSummary = false;
         this.mContext = context;
         this.mPreference = preference;
         if (attributeSet != null) {
-            TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.RestrictedPreference);
-            TypedValue peekValue = obtainStyledAttributes.peekValue(1);
-            if (peekValue == null || peekValue.type != 3) {
-                charSequence = null;
+            TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.RestrictedPreference);
+            TypedValue typedValuePeekValue = typedArrayObtainStyledAttributes.peekValue(1);
+            if (typedValuePeekValue == null || typedValuePeekValue.type != 3) {
+                text = null;
             } else {
-                int i2 = peekValue.resourceId;
-                charSequence = i2 != 0 ? context.getText(i2) : peekValue.string;
+                int i2 = typedValuePeekValue.resourceId;
+                text = i2 != 0 ? context.getText(i2) : typedValuePeekValue.string;
             }
-            String charSequence2 = charSequence == null ? null : charSequence.toString();
-            this.mAttrUserRestriction = charSequence2;
-            if (RestrictedLockUtilsInternal.hasBaseUserRestriction(context, charSequence2, UserHandle.myUserId())) {
+            String string = text == null ? null : text.toString();
+            this.mAttrUserRestriction = string;
+            if (RestrictedLockUtilsInternal.hasBaseUserRestriction(context, string, UserHandle.myUserId())) {
                 this.mAttrUserRestriction = null;
                 return;
             }
-            TypedValue peekValue2 = obtainStyledAttributes.peekValue(0);
-            if (peekValue2 != null) {
-                if (peekValue2.type == 18 && peekValue2.data != 0) {
+            TypedValue typedValuePeekValue2 = typedArrayObtainStyledAttributes.peekValue(0);
+            if (typedValuePeekValue2 != null) {
+                if (typedValuePeekValue2.type == 18 && typedValuePeekValue2.data != 0) {
                     z = true;
                 }
                 this.mDisabledSummary = z;
@@ -67,7 +66,7 @@ public class RestrictedPreferenceHelper {
         return ((DevicePolicyManager) this.mContext.getSystemService(DevicePolicyManager.class)).getResources().getString("Settings.CONTROLLED_BY_ADMIN_SUMMARY", new Supplier() { // from class: com.android.settingslib.RestrictedPreferenceHelper$$ExternalSyntheticLambda0
             @Override // java.util.function.Supplier
             public final Object get() {
-                return RestrictedPreferenceHelper.this.mContext.getString(R.string.disabled_by_admin_summary_text);
+                return this.f$0.mContext.getString(R.string.disabled_by_admin_summary_text);
             }
         });
     }
@@ -80,9 +79,9 @@ public class RestrictedPreferenceHelper {
         }
         Context context = this.mContext;
         String str = enforcedAdmin.enforcedRestriction;
-        int myUserId = UserHandle.myUserId();
+        int iMyUserId = UserHandle.myUserId();
         boolean z = RestrictedLockUtilsInternal.DEBUG;
-        if (str == null || (enforcingAdmin = ((DevicePolicyManager) context.getSystemService(DevicePolicyManager.class)).getEnforcingAdmin(myUserId, str)) == null) {
+        if (str == null || (enforcingAdmin = ((DevicePolicyManager) context.getSystemService(DevicePolicyManager.class)).getEnforcingAdmin(iMyUserId, str)) == null) {
             return false;
         }
         UnknownAuthority authority = enforcingAdmin.getAuthority();
@@ -134,12 +133,12 @@ public class RestrictedPreferenceHelper {
         if (enforcedAdmin != null) {
             this.mEnforcedAdmin = new RestrictedLockUtils.EnforcedAdmin(enforcedAdmin);
             z = enforcedAdmin2 == null || !enforcedAdmin2.equals(enforcedAdmin);
-            r2 = true;
+            z = true;
         } else {
             z = false;
         }
-        if (this.mDisabledByAdmin != r2) {
-            this.mDisabledByAdmin = r2;
+        if (this.mDisabledByAdmin != z) {
+            this.mDisabledByAdmin = z;
         } else {
             z2 = z;
         }

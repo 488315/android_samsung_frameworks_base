@@ -40,9 +40,9 @@ public class ClientTransactionalServiceWrapper {
     public void untrackCall(String str) {
         Log.i(TAG, TextUtils.formatSimple("removeCall: with id=[%s]", str));
         if (this.mCallIdToTransactionalCall.containsKey(str)) {
-            TransactionalCall remove = this.mCallIdToTransactionalCall.remove(str);
-            if (remove.getCallControl() != null) {
-                remove.setCallControl(null);
+            TransactionalCall transactionalCallRemove = this.mCallIdToTransactionalCall.remove(str);
+            if (transactionalCallRemove.getCallControl() != null) {
+                transactionalCallRemove.setCallControl(null);
             }
         }
         if (this.mCallIdToTransactionalCall.size() == 0) {
@@ -51,9 +51,9 @@ public class ClientTransactionalServiceWrapper {
     }
 
     public String trackCall(CallAttributes callAttributes, Executor executor, OutcomeReceiver<CallControl, CallException> outcomeReceiver, CallControlCallback callControlCallback, CallEventCallback callEventCallback) {
-        String uuid = UUID.randomUUID().toString();
-        this.mCallIdToTransactionalCall.put(uuid, new TransactionalCall(uuid, callAttributes, executor, outcomeReceiver, callControlCallback, callEventCallback));
-        return uuid;
+        String string = UUID.randomUUID().toString();
+        this.mCallIdToTransactionalCall.put(string, new TransactionalCall(string, callAttributes, executor, outcomeReceiver, callControlCallback, callEventCallback));
+        return string;
     }
 
     public ICallEventCallback getCallEventCallback() {
@@ -106,22 +106,22 @@ public class ClientTransactionalServiceWrapper {
             if (transactionalCall != null) {
                 final CallControlCallback callControlCallback = transactionalCall.getCallControlCallback();
                 final ReceiverWrapper receiverWrapper = new ReceiverWrapper(ClientTransactionalServiceWrapper.this, resultReceiver);
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     try {
                         transactionalCall.getExecutor().execute(new Runnable() { // from class: com.android.internal.telecom.ClientTransactionalServiceWrapper$1$$ExternalSyntheticLambda0
                             @Override // java.lang.Runnable
                             public final void run() {
-                                ClientTransactionalServiceWrapper.AnonymousClass1.this.lambda$handleCallEventCallback$0(str, callControlCallback, receiverWrapper, objArr, str2);
+                                this.f$0.lambda$handleCallEventCallback$0(str, callControlCallback, receiverWrapper, objArr, str2);
                             }
                         });
-                        Binder.restoreCallingIdentity(clearCallingIdentity);
+                        Binder.restoreCallingIdentity(jClearCallingIdentity);
                     } catch (Exception e) {
                         Log.e(ClientTransactionalServiceWrapper.TAG, ClientTransactionalServiceWrapper.EXECUTOR_FAIL_MSG + e);
-                        Binder.restoreCallingIdentity(clearCallingIdentity);
+                        Binder.restoreCallingIdentity(jClearCallingIdentity);
                     }
                 } catch (Throwable th) {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                     throw th;
                 }
             }
@@ -217,7 +217,7 @@ public class ClientTransactionalServiceWrapper {
             if (transactionalCall != null) {
                 final CallEventCallback callStateCallback = transactionalCall.getCallStateCallback();
                 Executor executor = transactionalCall.getExecutor();
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     executor.execute(new Runnable() { // from class: com.android.internal.telecom.ClientTransactionalServiceWrapper$1$$ExternalSyntheticLambda1
                         @Override // java.lang.Runnable
@@ -226,7 +226,7 @@ public class ClientTransactionalServiceWrapper {
                         }
                     });
                 } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
         }
@@ -277,16 +277,16 @@ public class ClientTransactionalServiceWrapper {
             if (transactionalCall != null) {
                 final CallEventCallback callStateCallback = transactionalCall.getCallStateCallback();
                 Executor executor = transactionalCall.getExecutor();
-                long clearCallingIdentity = Binder.clearCallingIdentity();
+                long jClearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     executor.execute(new Runnable() { // from class: com.android.internal.telecom.ClientTransactionalServiceWrapper$1$$ExternalSyntheticLambda2
                         @Override // java.lang.Runnable
                         public final void run() {
-                            CallEventCallback.this.onEvent(str2, bundle);
+                            callStateCallback.onEvent(str2, bundle);
                         }
                     });
                 } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                    Binder.restoreCallingIdentity(jClearCallingIdentity);
                 }
             }
         }

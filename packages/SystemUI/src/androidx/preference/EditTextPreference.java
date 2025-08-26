@@ -11,12 +11,10 @@ import androidx.core.content.res.TypedArrayUtils;
 import androidx.preference.Preference;
 import com.android.systemui.R;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class EditTextPreference extends DialogPreference {
     public String mText;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SimpleSummaryProvider implements Preference.SummaryProvider {
         public static SimpleSummaryProvider sSimpleSummaryProvider;
 
@@ -39,12 +37,12 @@ public class EditTextPreference extends DialogPreference {
 
     public EditTextPreference(Context context, AttributeSet attributeSet, int i, int i2) {
         super(context, attributeSet, i, i2);
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.EditTextPreference, i, i2);
-        if (obtainStyledAttributes.getBoolean(0, obtainStyledAttributes.getBoolean(0, false))) {
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.EditTextPreference, i, i2);
+        if (typedArrayObtainStyledAttributes.getBoolean(0, typedArrayObtainStyledAttributes.getBoolean(0, false))) {
             this.mSummaryProvider = SimpleSummaryProvider.getInstance();
             notifyChanged();
         }
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
     }
 
     @Override // androidx.preference.Preference
@@ -81,12 +79,12 @@ public class EditTextPreference extends DialogPreference {
     }
 
     public final void setText(String str) {
-        boolean shouldDisableDependents = shouldDisableDependents();
+        boolean zShouldDisableDependents = shouldDisableDependents();
         this.mText = str;
         persistString(str);
-        boolean shouldDisableDependents2 = shouldDisableDependents();
-        if (shouldDisableDependents2 != shouldDisableDependents) {
-            notifyDependencyChange(shouldDisableDependents2);
+        boolean zShouldDisableDependents2 = shouldDisableDependents();
+        if (zShouldDisableDependents2 != zShouldDisableDependents) {
+            notifyDependencyChange(zShouldDisableDependents2);
         }
         notifyChanged();
     }
@@ -96,7 +94,6 @@ public class EditTextPreference extends DialogPreference {
         return TextUtils.isEmpty(this.mText) || super.shouldDisableDependents();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class SavedState extends Preference.BaseSavedState {
         public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator() { // from class: androidx.preference.EditTextPreference.SavedState.1
             @Override // android.os.Parcelable.Creator

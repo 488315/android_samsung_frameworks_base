@@ -53,9 +53,9 @@ public interface IDataShareCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IDataShareCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IDataShareCallback)) {
-                return (IDataShareCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IDataShareCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IDataShareCallback)) {
+                return (IDataShareCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -85,9 +85,9 @@ public interface IDataShareCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                IDataShareReadAdapter asInterface = IDataShareReadAdapter.Stub.asInterface(parcel.readStrongBinder());
+                IDataShareReadAdapter iDataShareReadAdapterAsInterface = IDataShareReadAdapter.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                accept(asInterface);
+                accept(iDataShareReadAdapterAsInterface);
             } else if (i == 2) {
                 reject();
             } else {
@@ -114,24 +114,24 @@ public interface IDataShareCallback extends IInterface {
 
             @Override // android.service.contentcapture.IDataShareCallback
             public void accept(IDataShareReadAdapter iDataShareReadAdapter) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDataShareCallback.DESCRIPTOR);
-                    obtain.writeStrongInterface(iDataShareReadAdapter);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDataShareCallback.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iDataShareReadAdapter);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.contentcapture.IDataShareCallback
             public void reject() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IDataShareCallback.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IDataShareCallback.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

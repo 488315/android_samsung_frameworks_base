@@ -126,11 +126,11 @@ public final class WindowManagerGlobal {
         }
         synchronized (WindowManagerGlobal.class) {
             if (sWindowManagerService == null) {
-                IWindowManager asInterface = IWindowManager.Stub.asInterface(ServiceManager.getService(Context.WINDOW_SERVICE));
-                sWindowManagerService = asInterface;
-                if (asInterface != null) {
+                IWindowManager iWindowManagerAsInterface = IWindowManager.Stub.asInterface(ServiceManager.getService(Context.WINDOW_SERVICE));
+                sWindowManagerService = iWindowManagerAsInterface;
+                if (iWindowManagerAsInterface != null) {
                     try {
-                        ValueAnimator.setDurationScale(asInterface.getCurrentAnimatorScale());
+                        ValueAnimator.setDurationScale(iWindowManagerAsInterface.getCurrentAnimatorScale());
                     } catch (RemoteException e) {
                         throw e.rethrowFromSystemServer();
                     }
@@ -198,13 +198,17 @@ public final class WindowManagerGlobal {
                             for (int i2 = 0; i2 < size; i2++) {
                                 View view = this.mViews.get(i2);
                                 WindowManager.LayoutParams layoutParams2 = this.mParams.get(i2);
-                                if (layoutParams.token != view.getWindowToken() || layoutParams2.token != iBinder) {
+                                if (layoutParams.token == view.getWindowToken() && layoutParams2.token == iBinder) {
+                                    arrayList.add(this.mRoots.get(i));
+                                    break;
+                                    break;
                                 }
                             }
                         }
+                    } else {
+                        arrayList.add(this.mRoots.get(i));
+                        break;
                     }
-                    arrayList.add(this.mRoots.get(i));
-                    break;
                 }
             }
         }
@@ -280,10 +284,10 @@ public final class WindowManagerGlobal {
         WindowManager.LayoutParams layoutParams2 = (WindowManager.LayoutParams) layoutParams;
         int i2 = 0;
         if (layoutParams2.type != 3) {
-            long uptimeMillis = SystemClock.uptimeMillis();
+            long jUptimeMillis = SystemClock.uptimeMillis();
             long j = this.mLastAddViewTime + 50;
-            this.mLastAddViewTime = uptimeMillis;
-            if (uptimeMillis < j) {
+            this.mLastAddViewTime = jUptimeMillis;
+            if (jUptimeMillis < j) {
                 int i3 = this.mAddRepeatCount;
                 if (i3 > 4000) {
                     throw new IllegalStateException("Add view repeat count is over!!");
@@ -314,11 +318,11 @@ public final class WindowManagerGlobal {
             layoutParams2.flags |= 16777216;
         }
         if (context != null && layoutParams2.type > 99) {
-            TypedArray obtainStyledAttributes = context.obtainStyledAttributes(R.styleable.Window);
-            if (PhoneWindow.isOptingOutEdgeToEdgeEnforcement(context.getApplicationInfo(), true, obtainStyledAttributes)) {
+            TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(R.styleable.Window);
+            if (PhoneWindow.isOptingOutEdgeToEdgeEnforcement(context.getApplicationInfo(), true, typedArrayObtainStyledAttributes)) {
                 layoutParams2.privateFlags |= 67108864;
             }
-            obtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes.recycle();
         }
         if (layoutParams2.type != 1 && layoutParams2.type != 3) {
             Log.i(TAG, "WindowManagerGlobal#addView, ty=" + layoutParams2.type + ", view=" + view + ", caller=" + Debug.getCallers(3));
@@ -338,15 +342,15 @@ public final class WindowManagerGlobal {
                 this.mSystemPropertyUpdater = runnable;
                 SystemProperties.addChangeCallback(runnable);
             }
-            int findViewLocked = findViewLocked(view, false);
-            if (findViewLocked >= 0) {
+            int iFindViewLocked = findViewLocked(view, false);
+            if (iFindViewLocked >= 0) {
                 if (this.mDyingViews.contains(view)) {
-                    this.mRoots.get(findViewLocked).doDie();
+                    this.mRoots.get(iFindViewLocked).doDie();
                 } else {
                     throw new IllegalStateException("View " + view + " has already been added to the window manager.");
                 }
             }
-            IWindowSession iWindowSession = null;
+            IWindowSession windowSession = null;
             if (layoutParams2.type < 1000 || layoutParams2.type > 1999) {
                 view2 = null;
             } else {
@@ -365,16 +369,16 @@ public final class WindowManagerGlobal {
                     }
                     ViewRootImpl viewRootImpl2 = this.mWindowlessRoots.get(i2);
                     if (viewRootImpl2.getWindowToken() == layoutParams2.token) {
-                        iWindowSession = viewRootImpl2.getWindowSession();
+                        windowSession = viewRootImpl2.getWindowSession();
                         break;
                     }
                     i2++;
                 }
             }
-            if (iWindowSession == null) {
+            if (windowSession == null) {
                 viewRootImpl = new ViewRootImpl(view.getContext(), display);
             } else {
-                viewRootImpl = new ViewRootImpl(view.getContext(), display, iWindowSession, new WindowlessWindowLayout());
+                viewRootImpl = new ViewRootImpl(view.getContext(), display, windowSession, new WindowlessWindowLayout());
             }
             if (ActivityThread.isFixedAppContextDisplay() && display.getDisplayId() != 0) {
                 if (viewRootImpl.mContext.equals(ActivityThread.currentActivityThread().getApplication())) {
@@ -390,11 +394,11 @@ public final class WindowManagerGlobal {
                 this.mWindowViewsListenerGroup.accept(getWindowViews());
             } catch (RuntimeException e) {
                 Log.e(TAG, "Couldn't add view: " + view, e);
-                if (findViewLocked < 0) {
-                    findViewLocked = this.mViews.size() - 1;
+                if (iFindViewLocked < 0) {
+                    iFindViewLocked = this.mViews.size() - 1;
                 }
-                if (findViewLocked >= 0) {
-                    removeViewLocked(findViewLocked, true);
+                if (iFindViewLocked >= 0) {
+                    removeViewLocked(iFindViewLocked, true);
                 }
                 throw e;
             }
@@ -414,10 +418,10 @@ public final class WindowManagerGlobal {
             ((DecorView) view).updateElevationIfNeeded();
         }
         synchronized (this.mLock) {
-            int findViewLocked = findViewLocked(view, true);
-            ViewRootImpl viewRootImpl = this.mRoots.get(findViewLocked);
-            this.mParams.remove(findViewLocked);
-            this.mParams.add(findViewLocked, layoutParams2);
+            int iFindViewLocked = findViewLocked(view, true);
+            ViewRootImpl viewRootImpl = this.mRoots.get(iFindViewLocked);
+            this.mParams.remove(iFindViewLocked);
+            this.mParams.add(iFindViewLocked, layoutParams2);
             viewRootImpl.setLayoutParams(layoutParams2, false);
         }
     }
@@ -427,9 +431,9 @@ public final class WindowManagerGlobal {
             throw new IllegalArgumentException("view must not be null");
         }
         synchronized (this.mLock) {
-            int findViewLocked = findViewLocked(view, true);
-            View view2 = this.mRoots.get(findViewLocked).getView();
-            removeViewLocked(findViewLocked, z);
+            int iFindViewLocked = findViewLocked(view, true);
+            View view2 = this.mRoots.get(iFindViewLocked).getView();
+            removeViewLocked(iFindViewLocked, z);
             if (view2 != view) {
                 throw new IllegalStateException("Calling with view " + view + " but the ViewAncestor is attached to " + view2);
             }
@@ -467,36 +471,36 @@ public final class WindowManagerGlobal {
         if (viewRootImpl != null) {
             viewRootImpl.getImeFocusController().onWindowDismissed();
         }
-        boolean die = viewRootImpl.die(z);
+        boolean zDie = viewRootImpl.die(z);
         if (view != null) {
             view.assignParent(null);
-            if (die) {
+            if (zDie) {
                 this.mDyingViews.add(view);
             }
         }
     }
 
     void doRemoveView(ViewRootImpl viewRootImpl) {
-        boolean isEmpty;
+        boolean zIsEmpty;
         synchronized (this.mLock) {
-            int indexOf = this.mRoots.indexOf(viewRootImpl);
-            if (indexOf >= 0) {
-                this.mRoots.remove(indexOf);
-                this.mParams.remove(indexOf);
-                this.mDyingViews.remove(this.mViews.remove(indexOf));
+            int iIndexOf = this.mRoots.indexOf(viewRootImpl);
+            if (iIndexOf >= 0) {
+                this.mRoots.remove(iIndexOf);
+                this.mParams.remove(iIndexOf);
+                this.mDyingViews.remove(this.mViews.remove(iIndexOf));
             }
-            isEmpty = this.mRoots.isEmpty();
+            zIsEmpty = this.mRoots.isEmpty();
             this.mWindowViewsListenerGroup.accept(getWindowViews());
         }
-        if (isEmpty) {
+        if (zIsEmpty) {
             InsetsAnimationThread.release();
         }
     }
 
     private int findViewLocked(View view, boolean z) {
-        int indexOf = this.mViews.indexOf(view);
-        if (!z || indexOf >= 0) {
-            return indexOf;
+        int iIndexOf = this.mViews.indexOf(view);
+        if (!z || iIndexOf >= 0) {
+            return iIndexOf;
         }
         throw new IllegalArgumentException("View=" + view + " not attached to window manager");
     }
@@ -538,9 +542,9 @@ public final class WindowManagerGlobal {
                 fastPrintWriter.printf("\nTotal %-15s: %d\n", "ViewRootImpl", Integer.valueOf(size));
                 fastPrintWriter.printf("Total %-15s: %d\n", "attached Views", Integer.valueOf(gfxInfo.viewCount));
                 fastPrintWriter.printf("Total %-15s: %.2f kB (used) / %.2f kB (capacity)\n\n", "RenderNode", Float.valueOf(gfxInfo.renderNodeMemoryUsage / 1024.0f), Float.valueOf(gfxInfo.renderNodeMemoryAllocated / 1024.0f));
-                ActivityThread currentActivityThread = ActivityThread.currentActivityThread();
-                if (currentActivityThread != null) {
-                    currentActivityThread.dumpProcessAdjustmentInfo(fastPrintWriter);
+                ActivityThread activityThreadCurrentActivityThread = ActivityThread.currentActivityThread();
+                if (activityThreadCurrentActivityThread != null) {
+                    activityThreadCurrentActivityThread.dumpProcessAdjustmentInfo(fastPrintWriter);
                 }
             }
         } finally {
@@ -577,7 +581,7 @@ public final class WindowManagerGlobal {
                 viewRootImpl2.mHandler.runWithScissors(new Runnable() { // from class: android.view.WindowManagerGlobal$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        ViewRootImpl.this.setWindowStopped(z);
+                        viewRootImpl2.setWindowStopped(z);
                     }
                 }, 0L);
             }
@@ -773,9 +777,9 @@ public final class WindowManagerGlobal {
     InputTransferToken registerBatchedSurfaceControlInputReceiver(InputTransferToken inputTransferToken, SurfaceControl surfaceControl, Choreographer choreographer, final SurfaceControlInputReceiver surfaceControlInputReceiver) {
         Binder binder = new Binder();
         InputTransferToken inputTransferToken2 = new InputTransferToken();
-        InputChannel createInputChannel = createInputChannel(binder, inputTransferToken, surfaceControl, inputTransferToken2);
+        InputChannel inputChannelCreateInputChannel = createInputChannel(binder, inputTransferToken, surfaceControl, inputTransferToken2);
         synchronized (this.mSurfaceControlInputReceivers) {
-            this.mSurfaceControlInputReceivers.put(surfaceControl.getLayerId(), new SurfaceControlInputReceiverInfo(binder, new BatchedInputEventReceiver(this, createInputChannel, choreographer.getLooper(), choreographer) { // from class: android.view.WindowManagerGlobal.3
+            this.mSurfaceControlInputReceivers.put(surfaceControl.getLayerId(), new SurfaceControlInputReceiverInfo(binder, new BatchedInputEventReceiver(this, inputChannelCreateInputChannel, choreographer.getLooper(), choreographer) { // from class: android.view.WindowManagerGlobal.3
                 @Override // android.view.InputEventReceiver
                 public void onInputEvent(InputEvent inputEvent) {
                     finishInputEvent(inputEvent, surfaceControlInputReceiver.onInputEvent(inputEvent));
@@ -788,9 +792,9 @@ public final class WindowManagerGlobal {
     InputTransferToken registerUnbatchedSurfaceControlInputReceiver(InputTransferToken inputTransferToken, SurfaceControl surfaceControl, Looper looper, final SurfaceControlInputReceiver surfaceControlInputReceiver) {
         Binder binder = new Binder();
         InputTransferToken inputTransferToken2 = new InputTransferToken();
-        InputChannel createInputChannel = createInputChannel(binder, inputTransferToken, surfaceControl, inputTransferToken2);
+        InputChannel inputChannelCreateInputChannel = createInputChannel(binder, inputTransferToken, surfaceControl, inputTransferToken2);
         synchronized (this.mSurfaceControlInputReceivers) {
-            this.mSurfaceControlInputReceivers.put(surfaceControl.getLayerId(), new SurfaceControlInputReceiverInfo(binder, new InputEventReceiver(this, createInputChannel, looper) { // from class: android.view.WindowManagerGlobal.4
+            this.mSurfaceControlInputReceivers.put(surfaceControl.getLayerId(), new SurfaceControlInputReceiverInfo(binder, new InputEventReceiver(this, inputChannelCreateInputChannel, looper) { // from class: android.view.WindowManagerGlobal.4
                 @Override // android.view.InputEventReceiver
                 public void onInputEvent(InputEvent inputEvent) {
                     finishInputEvent(inputEvent, surfaceControlInputReceiver.onInputEvent(inputEvent));
@@ -801,15 +805,15 @@ public final class WindowManagerGlobal {
     }
 
     void unregisterSurfaceControlInputReceiver(SurfaceControl surfaceControl) {
-        SurfaceControlInputReceiverInfo removeReturnOld;
+        SurfaceControlInputReceiverInfo surfaceControlInputReceiverInfoRemoveReturnOld;
         synchronized (this.mSurfaceControlInputReceivers) {
-            removeReturnOld = this.mSurfaceControlInputReceivers.removeReturnOld(surfaceControl.getLayerId());
+            surfaceControlInputReceiverInfoRemoveReturnOld = this.mSurfaceControlInputReceivers.removeReturnOld(surfaceControl.getLayerId());
         }
-        if (removeReturnOld == null) {
+        if (surfaceControlInputReceiverInfoRemoveReturnOld == null) {
             Log.w(TAG, "No registered input event receiver with sc: " + surfaceControl);
         } else {
-            removeInputChannel(removeReturnOld.mClientToken);
-            removeReturnOld.mInputEventReceiver.dispose();
+            removeInputChannel(surfaceControlInputReceiverInfoRemoveReturnOld.mClientToken);
+            surfaceControlInputReceiverInfoRemoveReturnOld.mInputEventReceiver.dispose();
         }
     }
 
@@ -866,13 +870,13 @@ public final class WindowManagerGlobal {
         /* JADX INFO: Access modifiers changed from: private */
         public void removeListener(Consumer<Boolean> consumer) {
             synchronized (this.mTplLock) {
-                Pair<Integer, Executor> remove = this.mListeners.remove(consumer);
-                if (remove == null) {
+                Pair<Integer, Executor> pairRemove = this.mListeners.remove(consumer);
+                if (pairRemove == null) {
                     Log.i(WindowManagerGlobal.TAG, "listener " + consumer + " does not exist.");
                     return;
                 }
                 try {
-                    WindowManagerGlobal.getWindowManagerService().unregisterTrustedPresentationListener(this, remove.first.intValue());
+                    WindowManagerGlobal.getWindowManagerService().unregisterTrustedPresentationListener(this, pairRemove.first.intValue());
                 } catch (RemoteException e) {
                     e.rethrowFromSystemServer();
                 }
@@ -907,7 +911,7 @@ public final class WindowManagerGlobal {
                             executor.execute(new Runnable() { // from class: android.view.WindowManagerGlobal$TrustedPresentationListener$$ExternalSyntheticLambda3
                                 @Override // java.lang.Runnable
                                 public final void run() {
-                                    r1.accept(true);
+                                    consumer.accept(true);
                                 }
                             });
                         }
@@ -922,7 +926,7 @@ public final class WindowManagerGlobal {
                             executor.execute(new Runnable() { // from class: android.view.WindowManagerGlobal$TrustedPresentationListener$$ExternalSyntheticLambda4
                                 @Override // java.lang.Runnable
                                 public final void run() {
-                                    r1.accept(false);
+                                    consumer.accept(false);
                                 }
                             });
                         }

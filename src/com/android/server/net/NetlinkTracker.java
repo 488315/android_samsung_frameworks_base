@@ -45,13 +45,13 @@ public class NetlinkTracker extends BaseNetworkObserver {
 
     @Override // com.android.server.net.BaseNetworkObserver, android.net.INetworkManagementEventObserver
     public void addressUpdated(String str, LinkAddress linkAddress) {
-        boolean addLinkAddress;
+        boolean zAddLinkAddress;
         if (this.mInterfaceName.equals(str)) {
             maybeLog("addressUpdated", str, linkAddress);
             synchronized (this) {
-                addLinkAddress = this.mLinkProperties.addLinkAddress(linkAddress);
+                zAddLinkAddress = this.mLinkProperties.addLinkAddress(linkAddress);
             }
-            if (addLinkAddress) {
+            if (zAddLinkAddress) {
                 this.mCallback.update();
             }
         }
@@ -59,13 +59,13 @@ public class NetlinkTracker extends BaseNetworkObserver {
 
     @Override // com.android.server.net.BaseNetworkObserver, android.net.INetworkManagementEventObserver
     public void addressRemoved(String str, LinkAddress linkAddress) {
-        boolean removeLinkAddress;
+        boolean zRemoveLinkAddress;
         if (this.mInterfaceName.equals(str)) {
             maybeLog("addressRemoved", str, linkAddress);
             synchronized (this) {
-                removeLinkAddress = this.mLinkProperties.removeLinkAddress(linkAddress);
+                zRemoveLinkAddress = this.mLinkProperties.removeLinkAddress(linkAddress);
             }
-            if (removeLinkAddress) {
+            if (zRemoveLinkAddress) {
                 this.mCallback.update();
             }
         }
@@ -73,13 +73,13 @@ public class NetlinkTracker extends BaseNetworkObserver {
 
     @Override // com.android.server.net.BaseNetworkObserver, android.net.INetworkManagementEventObserver
     public void routeUpdated(RouteInfo routeInfo) {
-        boolean addRoute;
+        boolean zAddRoute;
         if (this.mInterfaceName.equals(routeInfo.getInterface())) {
             maybeLog("routeUpdated", routeInfo);
             synchronized (this) {
-                addRoute = this.mLinkProperties.addRoute(routeInfo);
+                zAddRoute = this.mLinkProperties.addRoute(routeInfo);
             }
-            if (addRoute) {
+            if (zAddRoute) {
                 this.mCallback.update();
             }
         }
@@ -87,13 +87,13 @@ public class NetlinkTracker extends BaseNetworkObserver {
 
     @Override // com.android.server.net.BaseNetworkObserver, android.net.INetworkManagementEventObserver
     public void routeRemoved(RouteInfo routeInfo) {
-        boolean removeRoute;
+        boolean zRemoveRoute;
         if (this.mInterfaceName.equals(routeInfo.getInterface())) {
             maybeLog("routeRemoved", routeInfo);
             synchronized (this) {
-                removeRoute = this.mLinkProperties.removeRoute(routeInfo);
+                zRemoveRoute = this.mLinkProperties.removeRoute(routeInfo);
             }
-            if (removeRoute) {
+            if (zRemoveRoute) {
                 this.mCallback.update();
             }
         }

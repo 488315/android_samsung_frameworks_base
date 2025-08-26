@@ -76,8 +76,8 @@ public final class DynamicsProcessing extends AudioEffect {
     }
 
     public DynamicsProcessing(int i, int i2, Config config) {
-        super(EFFECT_TYPE_DYNAMICS_PROCESSING, EFFECT_TYPE_NULL, i, i2);
         Config config2;
+        super(EFFECT_TYPE_DYNAMICS_PROCESSING, EFFECT_TYPE_NULL, i, i2);
         this.mChannelCount = 0;
         this.mParamListener = null;
         this.mBaseParamListener = null;
@@ -99,15 +99,15 @@ public final class DynamicsProcessing extends AudioEffect {
 
     public Config getConfig() {
         Number[] numberArr = {0, Float.valueOf(0.0f), 0, 0, 0, 0, 0, 0, 0};
-        byte[] numberArrayToByteArray = numberArrayToByteArray(new Number[]{48});
-        byte[] numberArrayToByteArray2 = numberArrayToByteArray(numberArr);
-        getParameter(numberArrayToByteArray, numberArrayToByteArray2);
-        byteArrayToNumberArray(numberArrayToByteArray2, numberArr);
-        Config build = new Config.Builder(numberArr[0].intValue(), this.mChannelCount, numberArr[2].intValue() > 0, numberArr[3].intValue(), numberArr[4].intValue() > 0, numberArr[5].intValue(), numberArr[6].intValue() > 0, numberArr[7].intValue(), numberArr[8].intValue() > 0).setPreferredFrameDuration(numberArr[1].floatValue()).build();
+        byte[] bArrNumberArrayToByteArray = numberArrayToByteArray(new Number[]{48});
+        byte[] bArrNumberArrayToByteArray2 = numberArrayToByteArray(numberArr);
+        getParameter(bArrNumberArrayToByteArray, bArrNumberArrayToByteArray2);
+        byteArrayToNumberArray(bArrNumberArrayToByteArray2, numberArr);
+        Config configBuild = new Config.Builder(numberArr[0].intValue(), this.mChannelCount, numberArr[2].intValue() > 0, numberArr[3].intValue(), numberArr[4].intValue() > 0, numberArr[5].intValue(), numberArr[6].intValue() > 0, numberArr[7].intValue(), numberArr[8].intValue() > 0).setPreferredFrameDuration(numberArr[1].floatValue()).build();
         for (int i = 0; i < this.mChannelCount; i++) {
-            build.setChannelTo(i, queryEngineByChannelIndex(i));
+            configBuild.setChannelTo(i, queryEngineByChannelIndex(i));
         }
-        return build;
+        return configBuild;
     }
 
     public static class Stage {
@@ -1266,13 +1266,13 @@ public final class DynamicsProcessing extends AudioEffect {
         numberArr[0] = Integer.valueOf(i == 64 ? 64 : 96);
         numberArr[1] = Integer.valueOf(i2);
         Number[] numberArr2 = {0, 0, 0};
-        byte[] numberArrayToByteArray = numberArrayToByteArray(numberArr);
-        byte[] numberArrayToByteArray2 = numberArrayToByteArray(numberArr2);
-        getParameter(numberArrayToByteArray, numberArrayToByteArray2);
-        byteArrayToNumberArray(numberArrayToByteArray2, numberArr2);
-        int intValue = numberArr2[2].intValue();
-        Eq eq = new Eq(numberArr2[0].intValue() > 0, numberArr2[1].intValue() > 0, intValue);
-        for (int i3 = 0; i3 < intValue; i3++) {
+        byte[] bArrNumberArrayToByteArray = numberArrayToByteArray(numberArr);
+        byte[] bArrNumberArrayToByteArray2 = numberArrayToByteArray(numberArr2);
+        getParameter(bArrNumberArrayToByteArray, bArrNumberArrayToByteArray2);
+        byteArrayToNumberArray(bArrNumberArrayToByteArray2, numberArr2);
+        int iIntValue = numberArr2[2].intValue();
+        Eq eq = new Eq(numberArr2[0].intValue() > 0, numberArr2[1].intValue() > 0, iIntValue);
+        for (int i3 = 0; i3 < iIntValue; i3++) {
             eq.setBand(i3, queryEngineEqBandByChannelIndex(i == 64 ? 69 : 101, i2, i3));
         }
         return eq;
@@ -1280,12 +1280,12 @@ public final class DynamicsProcessing extends AudioEffect {
 
     private EqBand queryEngineEqBandByChannelIndex(int i, int i2, int i3) {
         Number[] numberArr = {Integer.valueOf(i), Integer.valueOf(i2), Integer.valueOf(i3)};
-        Float valueOf = Float.valueOf(0.0f);
-        Number[] numberArr2 = {0, valueOf, valueOf};
-        byte[] numberArrayToByteArray = numberArrayToByteArray(numberArr);
-        byte[] numberArrayToByteArray2 = numberArrayToByteArray(numberArr2);
-        getParameter(numberArrayToByteArray, numberArrayToByteArray2);
-        byteArrayToNumberArray(numberArrayToByteArray2, numberArr2);
+        Float fValueOf = Float.valueOf(0.0f);
+        Number[] numberArr2 = {0, fValueOf, fValueOf};
+        byte[] bArrNumberArrayToByteArray = numberArrayToByteArray(numberArr);
+        byte[] bArrNumberArrayToByteArray2 = numberArrayToByteArray(numberArr2);
+        getParameter(bArrNumberArrayToByteArray, bArrNumberArrayToByteArray2);
+        byteArrayToNumberArray(bArrNumberArrayToByteArray2, numberArr2);
         return new EqBand(numberArr2[0].intValue() > 0, numberArr2[1].floatValue(), numberArr2[2].floatValue());
     }
 
@@ -1299,13 +1299,13 @@ public final class DynamicsProcessing extends AudioEffect {
 
     private Mbc queryEngineMbcByChannelIndex(int i) {
         Number[] numberArr = {0, 0, 0};
-        byte[] numberArrayToByteArray = numberArrayToByteArray(new Number[]{80, Integer.valueOf(i)});
-        byte[] numberArrayToByteArray2 = numberArrayToByteArray(numberArr);
-        getParameter(numberArrayToByteArray, numberArrayToByteArray2);
-        byteArrayToNumberArray(numberArrayToByteArray2, numberArr);
-        int intValue = numberArr[2].intValue();
-        Mbc mbc = new Mbc(numberArr[0].intValue() > 0, numberArr[1].intValue() > 0, intValue);
-        for (int i2 = 0; i2 < intValue; i2++) {
+        byte[] bArrNumberArrayToByteArray = numberArrayToByteArray(new Number[]{80, Integer.valueOf(i)});
+        byte[] bArrNumberArrayToByteArray2 = numberArrayToByteArray(numberArr);
+        getParameter(bArrNumberArrayToByteArray, bArrNumberArrayToByteArray2);
+        byteArrayToNumberArray(bArrNumberArrayToByteArray2, numberArr);
+        int iIntValue = numberArr[2].intValue();
+        Mbc mbc = new Mbc(numberArr[0].intValue() > 0, numberArr[1].intValue() > 0, iIntValue);
+        for (int i2 = 0; i2 < iIntValue; i2++) {
             mbc.setBand(i2, queryEngineMbcBandByChannelIndex(i, i2));
         }
         return mbc;
@@ -1313,12 +1313,12 @@ public final class DynamicsProcessing extends AudioEffect {
 
     private MbcBand queryEngineMbcBandByChannelIndex(int i, int i2) {
         Number[] numberArr = {85, Integer.valueOf(i), Integer.valueOf(i2)};
-        Float valueOf = Float.valueOf(0.0f);
-        Number[] numberArr2 = {0, valueOf, valueOf, valueOf, valueOf, valueOf, valueOf, valueOf, valueOf, valueOf, valueOf};
-        byte[] numberArrayToByteArray = numberArrayToByteArray(numberArr);
-        byte[] numberArrayToByteArray2 = numberArrayToByteArray(numberArr2);
-        getParameter(numberArrayToByteArray, numberArrayToByteArray2);
-        byteArrayToNumberArray(numberArrayToByteArray2, numberArr2);
+        Float fValueOf = Float.valueOf(0.0f);
+        Number[] numberArr2 = {0, fValueOf, fValueOf, fValueOf, fValueOf, fValueOf, fValueOf, fValueOf, fValueOf, fValueOf, fValueOf};
+        byte[] bArrNumberArrayToByteArray = numberArrayToByteArray(numberArr);
+        byte[] bArrNumberArrayToByteArray2 = numberArrayToByteArray(numberArr2);
+        getParameter(bArrNumberArrayToByteArray, bArrNumberArrayToByteArray2);
+        byteArrayToNumberArray(bArrNumberArrayToByteArray2, numberArr2);
         return new MbcBand(numberArr2[0].intValue() > 0, numberArr2[1].floatValue(), numberArr2[2].floatValue(), numberArr2[3].floatValue(), numberArr2[4].floatValue(), numberArr2[5].floatValue(), numberArr2[6].floatValue(), numberArr2[7].floatValue(), numberArr2[8].floatValue(), numberArr2[9].floatValue(), numberArr2[10].floatValue());
     }
 
@@ -1340,27 +1340,27 @@ public final class DynamicsProcessing extends AudioEffect {
 
     private Limiter queryEngineLimiterByChannelIndex(int i) {
         Number[] numberArr = {112, Integer.valueOf(i)};
-        Float valueOf = Float.valueOf(0.0f);
-        Number[] numberArr2 = {0, 0, 0, valueOf, valueOf, valueOf, valueOf, valueOf};
-        byte[] numberArrayToByteArray = numberArrayToByteArray(numberArr);
-        byte[] numberArrayToByteArray2 = numberArrayToByteArray(numberArr2);
-        getParameter(numberArrayToByteArray, numberArrayToByteArray2);
-        byteArrayToNumberArray(numberArrayToByteArray2, numberArr2);
+        Float fValueOf = Float.valueOf(0.0f);
+        Number[] numberArr2 = {0, 0, 0, fValueOf, fValueOf, fValueOf, fValueOf, fValueOf};
+        byte[] bArrNumberArrayToByteArray = numberArrayToByteArray(numberArr);
+        byte[] bArrNumberArrayToByteArray2 = numberArrayToByteArray(numberArr2);
+        getParameter(bArrNumberArrayToByteArray, bArrNumberArrayToByteArray2);
+        byteArrayToNumberArray(bArrNumberArrayToByteArray2, numberArr2);
         return new Limiter(numberArr2[0].intValue() > 0, numberArr2[1].intValue() > 0, numberArr2[2].intValue(), numberArr2[3].floatValue(), numberArr2[4].floatValue(), numberArr2[5].floatValue(), numberArr2[6].floatValue(), numberArr2[7].floatValue());
     }
 
     private Channel queryEngineByChannelIndex(int i) {
         float twoFloat = getTwoFloat(32, i);
-        Eq queryEngineEqByChannelIndex = queryEngineEqByChannelIndex(64, i);
-        Mbc queryEngineMbcByChannelIndex = queryEngineMbcByChannelIndex(i);
-        Eq queryEngineEqByChannelIndex2 = queryEngineEqByChannelIndex(96, i);
-        Limiter queryEngineLimiterByChannelIndex = queryEngineLimiterByChannelIndex(i);
-        Channel channel = new Channel(twoFloat, queryEngineEqByChannelIndex.isInUse(), queryEngineEqByChannelIndex.getBandCount(), queryEngineMbcByChannelIndex.isInUse(), queryEngineMbcByChannelIndex.getBandCount(), queryEngineEqByChannelIndex2.isInUse(), queryEngineEqByChannelIndex2.getBandCount(), queryEngineLimiterByChannelIndex.isInUse());
+        Eq eqQueryEngineEqByChannelIndex = queryEngineEqByChannelIndex(64, i);
+        Mbc mbcQueryEngineMbcByChannelIndex = queryEngineMbcByChannelIndex(i);
+        Eq eqQueryEngineEqByChannelIndex2 = queryEngineEqByChannelIndex(96, i);
+        Limiter limiterQueryEngineLimiterByChannelIndex = queryEngineLimiterByChannelIndex(i);
+        Channel channel = new Channel(twoFloat, eqQueryEngineEqByChannelIndex.isInUse(), eqQueryEngineEqByChannelIndex.getBandCount(), mbcQueryEngineMbcByChannelIndex.isInUse(), mbcQueryEngineMbcByChannelIndex.getBandCount(), eqQueryEngineEqByChannelIndex2.isInUse(), eqQueryEngineEqByChannelIndex2.getBandCount(), limiterQueryEngineLimiterByChannelIndex.isInUse());
         channel.setInputGain(twoFloat);
-        channel.setPreEq(queryEngineEqByChannelIndex);
-        channel.setMbc(queryEngineMbcByChannelIndex);
-        channel.setPostEq(queryEngineEqByChannelIndex2);
-        channel.setLimiter(queryEngineLimiterByChannelIndex);
+        channel.setPreEq(eqQueryEngineEqByChannelIndex);
+        channel.setMbc(mbcQueryEngineMbcByChannelIndex);
+        channel.setPostEq(eqQueryEngineEqByChannelIndex2);
+        channel.setLimiter(limiterQueryEngineLimiterByChannelIndex);
         return channel;
     }
 
@@ -1391,16 +1391,16 @@ public final class DynamicsProcessing extends AudioEffect {
             }
             i += 4;
         }
-        ByteBuffer allocate = ByteBuffer.allocate(i);
-        allocate.order(ByteOrder.nativeOrder());
+        ByteBuffer byteBufferAllocate = ByteBuffer.allocate(i);
+        byteBufferAllocate.order(ByteOrder.nativeOrder());
         for (Number number2 : numberArr) {
             if (number2 instanceof Integer) {
-                allocate.putInt(number2.intValue());
+                byteBufferAllocate.putInt(number2.intValue());
             } else if (number2 instanceof Float) {
-                allocate.putFloat(number2.floatValue());
+                byteBufferAllocate.putFloat(number2.floatValue());
             }
         }
-        return allocate.array();
+        return byteBufferAllocate.array();
     }
 
     private void byteArrayToNumberArray(byte[] bArr, Number[] numberArr) {
@@ -1456,12 +1456,12 @@ public final class DynamicsProcessing extends AudioEffect {
                 onParameterChangeListener = DynamicsProcessing.this.mParamListener != null ? DynamicsProcessing.this.mParamListener : null;
             }
             if (onParameterChangeListener != null) {
-                int byteArrayToInt = bArr.length == 4 ? AudioEffect.byteArrayToInt(bArr, 0) : -1;
-                int byteArrayToInt2 = bArr2.length == 4 ? AudioEffect.byteArrayToInt(bArr2, 0) : Integer.MIN_VALUE;
-                if (byteArrayToInt == -1 || byteArrayToInt2 == Integer.MIN_VALUE) {
+                int iByteArrayToInt = bArr.length == 4 ? AudioEffect.byteArrayToInt(bArr, 0) : -1;
+                int iByteArrayToInt2 = bArr2.length == 4 ? AudioEffect.byteArrayToInt(bArr2, 0) : Integer.MIN_VALUE;
+                if (iByteArrayToInt == -1 || iByteArrayToInt2 == Integer.MIN_VALUE) {
                     return;
                 }
-                onParameterChangeListener.onParameterChange(DynamicsProcessing.this, byteArrayToInt, byteArrayToInt2);
+                onParameterChangeListener.onParameterChange(DynamicsProcessing.this, iByteArrayToInt, iByteArrayToInt2);
             }
         }
     }
@@ -1484,40 +1484,40 @@ public final class DynamicsProcessing extends AudioEffect {
         public Settings() {
         }
 
-        public Settings(String str) {
+        public Settings(String str) throws NumberFormatException {
             StringTokenizer stringTokenizer = new StringTokenizer(str, "=;");
             if (stringTokenizer.countTokens() != 3) {
                 throw new IllegalArgumentException("settings: " + str);
             }
-            String nextToken = stringTokenizer.nextToken();
-            if (!nextToken.equals(DynamicsProcessing.TAG)) {
-                throw new IllegalArgumentException("invalid settings for DynamicsProcessing: " + nextToken);
+            String strNextToken = stringTokenizer.nextToken();
+            if (!strNextToken.equals(DynamicsProcessing.TAG)) {
+                throw new IllegalArgumentException("invalid settings for DynamicsProcessing: " + strNextToken);
             }
             try {
-                String nextToken2 = stringTokenizer.nextToken();
-                if (!nextToken2.equals("channelCount")) {
-                    throw new IllegalArgumentException("invalid key name: " + nextToken2);
+                String strNextToken2 = stringTokenizer.nextToken();
+                if (!strNextToken2.equals("channelCount")) {
+                    throw new IllegalArgumentException("invalid key name: " + strNextToken2);
                 }
-                short parseShort = Short.parseShort(stringTokenizer.nextToken());
-                this.channelCount = parseShort;
-                if (parseShort > 32) {
+                short s = Short.parseShort(stringTokenizer.nextToken());
+                this.channelCount = s;
+                if (s > 32) {
                     throw new IllegalArgumentException("too many channels Settings:" + str);
                 }
-                int countTokens = stringTokenizer.countTokens();
+                int iCountTokens = stringTokenizer.countTokens();
                 int i = this.channelCount;
-                if (countTokens != i) {
+                if (iCountTokens != i) {
                     throw new IllegalArgumentException("settings: " + str);
                 }
                 this.inputGain = new float[i];
                 for (int i2 = 0; i2 < this.channelCount; i2++) {
-                    String nextToken3 = stringTokenizer.nextToken();
-                    if (!nextToken3.equals(i2 + "_inputGain")) {
-                        throw new IllegalArgumentException("invalid key name: " + nextToken3);
+                    String strNextToken3 = stringTokenizer.nextToken();
+                    if (!strNextToken3.equals(i2 + "_inputGain")) {
+                        throw new IllegalArgumentException("invalid key name: " + strNextToken3);
                     }
                     this.inputGain[i2] = Float.parseFloat(stringTokenizer.nextToken());
                 }
             } catch (NumberFormatException unused) {
-                throw new IllegalArgumentException("invalid value for key: " + nextToken);
+                throw new IllegalArgumentException("invalid value for key: " + strNextToken);
             }
         }
 

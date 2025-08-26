@@ -61,12 +61,12 @@ public final class AmbientContextDetectionServiceStatus implements Parcelable {
 
     AmbientContextDetectionServiceStatus(Parcel parcel) {
         parcel.readByte();
-        int readInt = parcel.readInt();
-        String readString = parcel.readString();
-        this.mStatusCode = readInt;
-        AnnotationValidations.validate((Class<? extends Annotation>) AmbientContextManager.StatusCode.class, (Annotation) null, readInt);
-        this.mPackageName = readString;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) readString);
+        int i = parcel.readInt();
+        String string = parcel.readString();
+        this.mStatusCode = i;
+        AnnotationValidations.validate((Class<? extends Annotation>) AmbientContextManager.StatusCode.class, (Annotation) null, i);
+        this.mPackageName = string;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) string);
     }
 
     public static final class Builder {

@@ -15,7 +15,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class CommunalEditModeViewModel$communalContent$1 extends SuspendLambda implements Function2 {
     /* synthetic */ Object L$0;
@@ -53,7 +52,7 @@ final class CommunalEditModeViewModel$communalContent$1 extends SuspendLambda im
         Function1 function1 = new Function1() { // from class: com.android.systemui.communal.ui.viewmodel.CommunalEditModeViewModel$communalContent$1$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj2) {
+            public final Object mo781invoke(Object obj2) {
                 switch (i) {
                     case 0:
                         return AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("Content updated: ", ((LogMessage) obj2).getStr1());
@@ -62,13 +61,13 @@ final class CommunalEditModeViewModel$communalContent$1 extends SuspendLambda im
                 }
             }
         };
-        LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.DEBUG, function1, null);
+        LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.DEBUG, function1, null);
         List list2 = list;
         final int i2 = 1;
-        obtain.setStr1(CollectionsKt___CollectionsKt.joinToString$default(list2, null, null, null, new Function1() { // from class: com.android.systemui.communal.ui.viewmodel.CommunalEditModeViewModel$communalContent$1$$ExternalSyntheticLambda0
+        logMessageObtain.setStr1(CollectionsKt___CollectionsKt.joinToString$default(list2, null, null, null, new Function1() { // from class: com.android.systemui.communal.ui.viewmodel.CommunalEditModeViewModel$communalContent$1$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj2) {
+            public final Object mo781invoke(Object obj2) {
                 switch (i2) {
                     case 0:
                         return AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("Content updated: ", ((LogMessage) obj2).getStr1());
@@ -77,7 +76,7 @@ final class CommunalEditModeViewModel$communalContent$1 extends SuspendLambda im
                 }
             }
         }, 31));
-        logger.getBuffer().commit(obtain);
+        logger.getBuffer().commit(logMessageObtain);
         return Unit.INSTANCE;
     }
 }

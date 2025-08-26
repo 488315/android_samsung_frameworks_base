@@ -2,7 +2,6 @@ package android.app.time;
 
 import android.annotation.SystemApi;
 import android.app.time.ITimeZoneDetectorListener;
-import android.app.time.TimeManager;
 import android.app.timedetector.ITimeDetectorService;
 import android.app.timedetector.ManualTimeSuggestion;
 import android.app.timezonedetector.ITimeZoneDetectorService;
@@ -98,7 +97,7 @@ public final class TimeManager {
         executor.execute(new Runnable() { // from class: android.app.time.TimeManager$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                TimeManager.TimeZoneDetectorListener.this.onChange();
+                timeZoneDetectorListener.onChange();
             }
         });
     }

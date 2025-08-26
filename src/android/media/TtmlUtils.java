@@ -46,43 +46,42 @@ final class TtmlUtils {
         double d2;
         Matcher matcher = CLOCK_TIME.matcher(str);
         if (matcher.matches()) {
-            double parseLong = (Long.parseLong(matcher.group(1)) * 3600) + (Long.parseLong(matcher.group(2)) * 60) + Long.parseLong(matcher.group(3));
-            String group = matcher.group(4);
-            double d3 = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
-            double parseDouble = parseLong + (group != null ? Double.parseDouble(group) : 0.0d) + (matcher.group(5) != null ? Long.parseLong(r14) / i : 0.0d);
+            double d3 = (Long.parseLong(matcher.group(1)) * 3600) + (Long.parseLong(matcher.group(2)) * 60) + Long.parseLong(matcher.group(3));
+            String strGroup = matcher.group(4);
+            double d4 = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
+            double d5 = d3 + (strGroup != null ? Double.parseDouble(strGroup) : 0.0d) + (matcher.group(5) != null ? Long.parseLong(r14) / i : 0.0d);
             if (matcher.group(6) != null) {
-                d3 = (Long.parseLong(r14) / i2) / i;
+                d4 = (Long.parseLong(r14) / i2) / i;
             }
-            return (long) ((parseDouble + d3) * 1000.0d);
+            return (long) ((d5 + d4) * 1000.0d);
         }
         Matcher matcher2 = OFFSET_TIME.matcher(str);
         if (matcher2.matches()) {
-            double parseDouble2 = Double.parseDouble(matcher2.group(1));
-            String group2 = matcher2.group(2);
-            if (group2.equals("h")) {
+            double d6 = Double.parseDouble(matcher2.group(1));
+            String strGroup2 = matcher2.group(2);
+            if (strGroup2.equals("h")) {
                 d2 = 3.6E9d;
             } else {
-                if (!group2.equals("m")) {
-                    if (!group2.equals(XmlTags.TAG_SESSION)) {
-                        if (group2.equals("ms")) {
-                            parseDouble2 *= 1000.0d;
-                        } else {
-                            if (group2.equals(FullBackup.FILES_TREE_TOKEN)) {
-                                d = i;
-                            } else if (group2.equals("t")) {
-                                d = i3;
-                            }
-                            parseDouble2 /= d;
+                if (!strGroup2.equals("m")) {
+                    if (strGroup2.equals(XmlTags.TAG_SESSION)) {
+                        d6 *= 1000000.0d;
+                    } else if (strGroup2.equals("ms")) {
+                        d6 *= 1000.0d;
+                    } else {
+                        if (strGroup2.equals(FullBackup.FILES_TREE_TOKEN)) {
+                            d = i;
+                        } else if (strGroup2.equals("t")) {
+                            d = i3;
                         }
-                        return (long) parseDouble2;
+                        d6 /= d;
+                        d6 *= 1000000.0d;
                     }
-                    parseDouble2 *= 1000000.0d;
-                    return (long) parseDouble2;
+                    return (long) d6;
                 }
                 d2 = 6.0E7d;
             }
-            parseDouble2 *= d2;
-            return (long) parseDouble2;
+            d6 *= d2;
+            return (long) d6;
         }
         throw new NumberFormatException("Malformed time expression : " + str);
     }
@@ -92,11 +91,11 @@ final class TtmlUtils {
     }
 
     public static String applySpacePolicy(String str, boolean z) {
-        String replaceAll = str.replaceAll("\n$", "").replaceAll("\r\n", ShaderAssembler.NEWLINE).replaceAll(" *\n *", ShaderAssembler.NEWLINE);
+        String strReplaceAll = str.replaceAll("\n$", "").replaceAll("\r\n", ShaderAssembler.NEWLINE).replaceAll(" *\n *", ShaderAssembler.NEWLINE);
         if (z) {
-            replaceAll = replaceAll.replaceAll(ShaderAssembler.NEWLINE, " ");
+            strReplaceAll = strReplaceAll.replaceAll(ShaderAssembler.NEWLINE, " ");
         }
-        return replaceAll.replaceAll("[ \t\\x0B\f\r]+", " ");
+        return strReplaceAll.replaceAll("[ \t\\x0B\f\r]+", " ");
     }
 
     public static String extractText(TtmlNode ttmlNode, long j, long j2) {
@@ -118,11 +117,11 @@ final class TtmlUtils {
             return;
         }
         if (!ttmlNode.mName.equals(TAG_METADATA) && ttmlNode.isActive(j, j2)) {
-            boolean equals = ttmlNode.mName.equals("p");
+            boolean zEquals = ttmlNode.mName.equals("p");
             int length = sb.length();
             for (int i = 0; i < ttmlNode.mChildren.size(); i++) {
                 TtmlNode ttmlNode2 = ttmlNode.mChildren.get(i);
-                if (equals || z) {
+                if (zEquals || z) {
                     z2 = true;
                     j3 = j2;
                     j4 = j;
@@ -133,7 +132,7 @@ final class TtmlUtils {
                 }
                 extractText(ttmlNode2, j4, j3, sb, z2);
             }
-            if (!equals || length == sb.length()) {
+            if (!zEquals || length == sb.length()) {
                 return;
             }
             sb.append(ShaderAssembler.NEWLINE);

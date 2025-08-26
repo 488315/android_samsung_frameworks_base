@@ -11,7 +11,6 @@ import androidx.compose.ui.unit.Dp;
 import com.samsung.android.knox.custom.IKnoxCustomManager;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class PauseKt$$ExternalSyntheticLambda0 implements Function0 {
     @Override // kotlin.jvm.functions.Function0
@@ -41,7 +40,7 @@ public final /* synthetic */ class PauseKt$$ExternalSyntheticLambda0 implements 
         pathBuilder.curveTo(27.0148f, 30.5669f, 28.1453f, 29.4364f, 28.1453f, 28.0537f);
         pathBuilder.lineTo(28.1453f, 11.9448f);
         pathBuilder.curveTo(28.1453f, 10.5636f, 27.0148f, 9.4331f, 25.6321f, 9.4331f);
-        builder.m565addPathoIyEayM("", pathBuilder._nodes, 0, solidColor, 1.0f, solidColor2, 1.0f, 1.0f, 0, 0, 4.0f, 0.0f, 1.0f, 0.0f);
+        builder.m567addPathoIyEayM("", pathBuilder._nodes, 0, solidColor, 1.0f, solidColor2, 1.0f, 1.0f, 0, 0, 4.0f, 0.0f, 1.0f, 0.0f);
         return builder.build();
     }
 }

@@ -16,7 +16,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class ScreenRecordTileUserActionInteractor$handleInput$2$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ QSTileInput $this_with;
@@ -53,11 +52,11 @@ final class ScreenRecordTileUserActionInteractor$handleInput$2$2 extends Suspend
         final int identifier = qSTileInput.user.getIdentifier();
         int i = ScreenRecordTileUserActionInteractor.$r8$clinit;
         screenRecordTileUserActionInteractor.getClass();
-        final SystemUIDialog createScreenRecordDialog = screenRecordTileUserActionInteractor.recordingController.createScreenRecordDialog(new Runnable() { // from class: com.android.systemui.qs.tiles.impl.screenrecord.domain.interactor.ScreenRecordTileUserActionInteractor$showPrompt$onStartRecordingClicked$1
+        final SystemUIDialog systemUIDialogCreateScreenRecordDialog = screenRecordTileUserActionInteractor.recordingController.createScreenRecordDialog(new Runnable() { // from class: com.android.systemui.qs.tiles.impl.screenrecord.domain.interactor.ScreenRecordTileUserActionInteractor$showPrompt$onStartRecordingClicked$1
             @Override // java.lang.Runnable
             public final void run() {
-                ScreenRecordTileUserActionInteractor.this.dialogTransitionAnimator.disableAllCurrentDialogsExitAnimations();
-                ((PanelInteractorImpl) ScreenRecordTileUserActionInteractor.this.panelInteractor).collapsePanels();
+                screenRecordTileUserActionInteractor.dialogTransitionAnimator.disableAllCurrentDialogsExitAnimations();
+                ((PanelInteractorImpl) screenRecordTileUserActionInteractor.panelInteractor).collapsePanels();
             }
         });
         final boolean z = (expandable == null || screenRecordTileUserActionInteractor.keyguardInteractor.isKeyguardShowing()) ? false : true;
@@ -68,14 +67,14 @@ final class ScreenRecordTileUserActionInteractor$handleInput$2$2 extends Suspend
                 ScreenRecordTileUserActionInteractor screenRecordTileUserActionInteractor2 = screenRecordTileUserActionInteractor;
                 if (z2) {
                     Expandable expandable2 = expandable;
-                    DialogTransitionAnimator.Controller dialogTransitionController = expandable2 != null ? expandable2.dialogTransitionController(new DialogCuj(58, "screen_record")) : null;
-                    if (dialogTransitionController != null) {
-                        screenRecordTileUserActionInteractor2.dialogTransitionAnimator.show(createScreenRecordDialog, dialogTransitionController, true);
+                    DialogTransitionAnimator.Controller controllerDialogTransitionController = expandable2 != null ? expandable2.dialogTransitionController(new DialogCuj(58, "screen_record")) : null;
+                    if (controllerDialogTransitionController != null) {
+                        screenRecordTileUserActionInteractor2.dialogTransitionAnimator.show(systemUIDialogCreateScreenRecordDialog, controllerDialogTransitionController, true);
                     } else {
-                        createScreenRecordDialog.show();
+                        systemUIDialogCreateScreenRecordDialog.show();
                     }
                 } else {
-                    createScreenRecordDialog.show();
+                    systemUIDialogCreateScreenRecordDialog.show();
                 }
                 screenRecordTileUserActionInteractor2.mediaProjectionMetricsLogger.notifyPermissionRequestDisplayed(identifier);
                 return false;

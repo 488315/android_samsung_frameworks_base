@@ -14,7 +14,6 @@ import kotlinx.coroutines.channels.ChannelCoroutine;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class ControlsSettingsRepositoryImpl$makeFlowForSetting$1$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ String $setting;
@@ -58,11 +57,11 @@ final class ControlsSettingsRepositoryImpl$makeFlowForSetting$1$1 extends Suspen
             final ?? r4 = new UserSettingObserver(str, secureSettings, i2) { // from class: com.android.systemui.controls.settings.ControlsSettingsRepositoryImpl$makeFlowForSetting$1$1$observer$1
                 @Override // com.android.systemui.qs.UserSettingObserver
                 public final void handleValueChanged(int i3, boolean z) {
-                    ((ChannelCoroutine) producerScope).mo3456trySendJP2dKIU(Boolean.valueOf(i3 == 1));
+                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(i3 == 1));
                 }
             };
             r4.setListening(true);
-            ((ChannelCoroutine) producerScope).mo3456trySendJP2dKIU(Boolean.valueOf(r4.getValue() == 1));
+            ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(r4.getValue() == 1));
             Function0 function0 = new Function0() { // from class: com.android.systemui.controls.settings.ControlsSettingsRepositoryImpl$makeFlowForSetting$1$1.1
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {

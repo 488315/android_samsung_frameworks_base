@@ -59,12 +59,12 @@ abstract class ResettableTimeout {
 
         @Override // java.lang.Thread, java.lang.Runnable
         public void run() {
-            long uptimeMillis;
+            long jUptimeMillis;
             ResettableTimeout.this.mLock.open();
             while (true) {
                 synchronized (this) {
-                    uptimeMillis = ResettableTimeout.this.mOffAt - SystemClock.uptimeMillis();
-                    if (uptimeMillis <= 0) {
+                    jUptimeMillis = ResettableTimeout.this.mOffAt - SystemClock.uptimeMillis();
+                    if (jUptimeMillis <= 0) {
                         ResettableTimeout.this.mOffCalled = true;
                         ResettableTimeout.this.off();
                         ResettableTimeout.this.mThread = null;
@@ -72,7 +72,7 @@ abstract class ResettableTimeout {
                     }
                 }
                 try {
-                    sleep(uptimeMillis);
+                    sleep(jUptimeMillis);
                 } catch (InterruptedException unused) {
                 }
             }

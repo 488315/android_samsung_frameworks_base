@@ -70,9 +70,9 @@ public class CameraConstrainedHighSpeedCaptureSessionImpl extends CameraConstrai
         Log.v("CameraConstrainedHighSpeedCaptureSessionImpl", "High speed fps ranges: " + Arrays.toString(highSpeedVideoFpsRangesFor));
         int i = Integer.MAX_VALUE;
         for (Range<Integer> range2 : highSpeedVideoFpsRangesFor) {
-            int intValue = range2.getLower().intValue();
-            if (i > intValue) {
-                i = intValue;
+            int iIntValue = ((Integer) range2.getLower()).intValue();
+            if (i > iIntValue) {
+                i = iIntValue;
             }
         }
         if (i != 60 && i != 30) {
@@ -80,11 +80,11 @@ public class CameraConstrainedHighSpeedCaptureSessionImpl extends CameraConstrai
             i = 30;
         }
         Log.v("CameraConstrainedHighSpeedCaptureSessionImpl", "previewFps: " + i);
-        int intValue2 = ((Integer) range.getUpper()).intValue() / i;
+        int iIntValue2 = ((Integer) range.getUpper()).intValue() / i;
         if (((Integer) range.getUpper()).intValue() > ((Integer) range.getLower()).intValue()) {
-            intValue2 = 1;
+            iIntValue2 = 1;
         }
-        Log.v("CameraConstrainedHighSpeedCaptureSessionImpl", "Request list size is: " + intValue2);
+        Log.v("CameraConstrainedHighSpeedCaptureSessionImpl", "Request list size is: " + iIntValue2);
         ArrayList arrayList = new ArrayList();
         CaptureRequest.Builder builder2 = new CaptureRequest.Builder(new CameraMetadataNative(captureRequest.getNativeCopy()), false, -1, captureRequest.getLogicalCameraId(), null);
         builder2.setTag(captureRequest.getTag());
@@ -112,7 +112,7 @@ public class CameraConstrainedHighSpeedCaptureSessionImpl extends CameraConstrai
             builder2.addTarget(next);
             builder = null;
         }
-        for (int i2 = 0; i2 < intValue2; i2++) {
+        for (int i2 = 0; i2 < iIntValue2; i2++) {
             if (i2 == 0 && builder != null) {
                 arrayList.add(builder.build());
             } else {

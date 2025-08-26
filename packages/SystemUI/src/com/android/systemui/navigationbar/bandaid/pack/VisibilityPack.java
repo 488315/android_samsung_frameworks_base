@@ -1,5 +1,6 @@
 package com.android.systemui.navigationbar.bandaid.pack;
 
+import android.content.res.Resources;
 import com.android.systemui.BasicRune;
 import com.android.systemui.navigationbar.bandaid.Band;
 import com.android.systemui.navigationbar.bandaid.BandAid;
@@ -21,7 +22,6 @@ import java.util.List;
 import java.util.function.Function;
 import kotlin.Unit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class VisibilityPack implements BandAidPack {
     public final List allBands;
@@ -37,70 +37,70 @@ public final class VisibilityPack implements BandAidPack {
         builder.moduleDependencies = Collections.singletonList(NavigationBarView.class);
         builder.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.VisibilityPack$1$1
             @Override // java.util.function.Function
-            public final Object apply(Object obj) {
+            public final Object apply(Object obj) throws Resources.NotFoundException {
                 Band.Kit kit = (Band.Kit) obj;
-                NavBarStoreImpl navBarStoreImpl = (NavBarStoreImpl) NavBarStore.this;
+                NavBarStoreImpl navBarStoreImpl = (NavBarStoreImpl) navBarStore;
                 navBarStoreImpl.apply(kit, new NavBarStoreAction.UpdateNavBarGoneStateFlag(new NavBarStoreAction.Action(null, null, null, null, false, 0.0f, null, false, 0.0f, 0, false, false, ((EventTypeFactory.EventType.OnUpdateNavBarVisibility) kit.event).visibility, 0, null, null, false, false, null, 0.0f, 0.0f, 0, 0, 8384511, null)));
                 return navBarStoreImpl;
             }
         };
-        Band.Builder m = ColorPack$$ExternalSyntheticOutline0.m(builder, arrayList);
+        Band.Builder builderM = ColorPack$$ExternalSyntheticOutline0.m(builder, arrayList);
         boolean z = BasicRune.NAVBAR_KNOX_MONITOR;
-        m.runeDependency = z;
+        builderM.runeDependency = z;
         BandAid bandAid = BandAid.VIS_PACK_UPDATE_NAVBAR_VISIBILITY_BY_KNOX;
-        m.bandAidDependency = bandAid;
-        m.targetEvents = Collections.singletonList(EventTypeFactory.EventType.OnNavBarKnoxPolicyChanged.class);
-        m.targetModules = Collections.singletonList(NavBarStoreImpl.class);
-        m.moduleDependencies = Collections.singletonList(NavigationBarView.class);
-        m.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.VisibilityPack$3$1
+        builderM.bandAidDependency = bandAid;
+        builderM.targetEvents = Collections.singletonList(EventTypeFactory.EventType.OnNavBarKnoxPolicyChanged.class);
+        builderM.targetModules = Collections.singletonList(NavBarStoreImpl.class);
+        builderM.moduleDependencies = Collections.singletonList(NavigationBarView.class);
+        builderM.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.VisibilityPack$3$1
             @Override // java.util.function.Function
-            public final Object apply(Object obj) {
+            public final Object apply(Object obj) throws Resources.NotFoundException {
                 Band.Kit kit = (Band.Kit) obj;
-                NavBarStoreImpl navBarStoreImpl = (NavBarStoreImpl) NavBarStore.this;
+                NavBarStoreImpl navBarStoreImpl = (NavBarStoreImpl) navBarStore;
                 navBarStoreImpl.apply(kit, new NavBarStoreAction.SetNavBarVisibility(new NavBarStoreAction.Action(null, null, null, null, false, 0.0f, null, false, 0.0f, 0, false, false, ((NavBarStateManagerImpl) kit.manager).isNavBarHiddenByKnox() ? 8 : 0, 0, null, null, false, false, null, 0.0f, 0.0f, 0, 0, 8384511, null)));
                 return navBarStoreImpl;
             }
         };
-        Band.Builder m2 = ColorPack$$ExternalSyntheticOutline0.m(m, arrayList);
-        m2.runeDependency = z;
-        m2.bandAidDependency = bandAid;
-        m2.targetEvents = Collections.singletonList(EventTypeFactory.EventType.OnNavBarAttachedToWindow.class);
-        m2.targetModules = Collections.singletonList(SamsungNavigationBarView.class);
-        m2.moduleDependencies = Collections.singletonList(NavigationBarView.class);
-        m2.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.VisibilityPack$5$1
+        Band.Builder builderM2 = ColorPack$$ExternalSyntheticOutline0.m(builderM, arrayList);
+        builderM2.runeDependency = z;
+        builderM2.bandAidDependency = bandAid;
+        builderM2.targetEvents = Collections.singletonList(EventTypeFactory.EventType.OnNavBarAttachedToWindow.class);
+        builderM2.targetModules = Collections.singletonList(SamsungNavigationBarView.class);
+        builderM2.moduleDependencies = Collections.singletonList(NavigationBarView.class);
+        builderM2.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.VisibilityPack$5$1
             @Override // java.util.function.Function
-            public final Object apply(Object obj) {
+            public final Object apply(Object obj) throws Resources.NotFoundException {
                 Band.Kit kit = (Band.Kit) obj;
-                NavBarStore navBarStore2 = NavBarStore.this;
+                NavBarStore navBarStore2 = navBarStore;
                 if (((NavBarStateManagerImpl) kit.manager).isNavBarHiddenByKnox()) {
                     ((NavBarStoreImpl) navBarStore2).apply(kit, new NavBarStoreAction.SetNavBarVisibility(new NavBarStoreAction.Action(null, null, null, null, false, 0.0f, null, false, 0.0f, 0, false, false, 8, 0, null, null, false, false, null, 0.0f, 0.0f, 0, 0, 8384511, null)));
                 }
                 return Unit.INSTANCE;
             }
         };
-        Band.Builder m3 = ColorPack$$ExternalSyntheticOutline0.m(m2, arrayList);
-        m3.bandAidDependency = BandAid.VIS_PACK_REEVAULATE_NAVBAR;
-        m3.targetEvents = Collections.singletonList(EventTypeFactory.EventType.OnNavBarIconHintChanged.class);
-        m3.targetModules = Collections.singletonList(NavigationBar.class);
-        m3.moduleDependencies = Collections.singletonList(LightBarController.class);
-        m3.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.VisibilityPack$7$1
+        Band.Builder builderM3 = ColorPack$$ExternalSyntheticOutline0.m(builderM2, arrayList);
+        builderM3.bandAidDependency = BandAid.VIS_PACK_REEVAULATE_NAVBAR;
+        builderM3.targetEvents = Collections.singletonList(EventTypeFactory.EventType.OnNavBarIconHintChanged.class);
+        builderM3.targetModules = Collections.singletonList(NavigationBar.class);
+        builderM3.moduleDependencies = Collections.singletonList(LightBarController.class);
+        builderM3.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.VisibilityPack$7$1
             @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                NavBarStoreImpl navBarStoreImpl = (NavBarStoreImpl) NavBarStore.this;
+            public final Object apply(Object obj) throws Resources.NotFoundException {
+                NavBarStoreImpl navBarStoreImpl = (NavBarStoreImpl) navBarStore;
                 navBarStoreImpl.apply((Band.Kit) obj, new NavBarStoreAction.ReevaluateNavBar(null, 1, null));
                 return navBarStoreImpl;
             }
         };
-        Band.Builder m4 = ColorPack$$ExternalSyntheticOutline0.m(m3, arrayList);
-        m4.bandAidDependency = BandAid.VIS_PACK_UPDATE_SYSTEMUI_STATE_FLAG;
-        m4.targetEvents = Collections.singletonList(EventTypeFactory.EventType.OnUpdateSysUiStateFlag.class);
-        m4.targetModules = Collections.singletonList(LauncherProxyService.class);
-        m4.moduleDependencies = Collections.singletonList(NavigationBarView.class);
-        m4.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.VisibilityPack$9$1
+        Band.Builder builderM4 = ColorPack$$ExternalSyntheticOutline0.m(builderM3, arrayList);
+        builderM4.bandAidDependency = BandAid.VIS_PACK_UPDATE_SYSTEMUI_STATE_FLAG;
+        builderM4.targetEvents = Collections.singletonList(EventTypeFactory.EventType.OnUpdateSysUiStateFlag.class);
+        builderM4.targetModules = Collections.singletonList(LauncherProxyService.class);
+        builderM4.moduleDependencies = Collections.singletonList(NavigationBarView.class);
+        builderM4.patchAction = new Function() { // from class: com.android.systemui.navigationbar.bandaid.pack.VisibilityPack$9$1
             @Override // java.util.function.Function
-            public final Object apply(Object obj) {
+            public final Object apply(Object obj) throws Resources.NotFoundException {
                 Band.Kit kit = (Band.Kit) obj;
-                NavBarStore navBarStore2 = NavBarStore.this;
+                NavBarStore navBarStore2 = navBarStore;
                 NavBarStoreAction.Action action = new NavBarStoreAction.Action(null, null, null, null, false, 0.0f, null, false, 0.0f, 0, false, false, 0, 0, null, null, false, false, null, 0.0f, 0.0f, 0, 0, 8388607, null);
                 NavBarStoreImpl navBarStoreImpl = (NavBarStoreImpl) navBarStore2;
                 action.sysUiFlagInfoList.add(new NavBarStoreAction.SysUiFlagInfo(1099511627776L, ((NavigationBarView) navBarStoreImpl.getModule(NavigationBarView.class, kit.displayId)).getRootView().getVisibility() == 8));
@@ -108,7 +108,7 @@ public final class VisibilityPack implements BandAidPack {
                 return navBarStoreImpl;
             }
         };
-        arrayList.add(m4.build());
+        arrayList.add(builderM4.build());
     }
 
     @Override // com.android.systemui.navigationbar.bandaid.BandAidPack

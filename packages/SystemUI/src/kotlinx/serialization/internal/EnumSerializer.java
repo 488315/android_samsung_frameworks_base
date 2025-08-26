@@ -12,7 +12,6 @@ import kotlinx.serialization.SerializationException;
 import kotlinx.serialization.descriptors.SerialDescriptor;
 import kotlinx.serialization.encoding.AbstractEncoder;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class EnumSerializer implements KSerializer {
     public final Lazy descriptor$delegate;
@@ -27,30 +26,30 @@ public final class EnumSerializer implements KSerializer {
             /* JADX WARN: Type inference failed for: r1v2, types: [kotlinx.serialization.internal.EnumDescriptor, kotlinx.serialization.internal.PluginGeneratedSerialDescriptor] */
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                EnumSerializer enumSerializer = EnumSerializer.this;
-                Object obj = enumSerializer.overriddenDescriptor;
-                if (obj == 0) {
+                EnumSerializer enumSerializer = this.f$0;
+                Object enumDescriptor = enumSerializer.overriddenDescriptor;
+                if (enumDescriptor == 0) {
                     Enum[] enumArr2 = enumSerializer.values;
-                    obj = new EnumDescriptor(str, enumArr2.length);
+                    enumDescriptor = new EnumDescriptor(str, enumArr2.length);
                     for (Enum r0 : enumArr2) {
-                        String name = r0.name();
-                        int i = obj.added + 1;
-                        obj.added = i;
-                        String[] strArr = obj.names;
-                        strArr[i] = name;
-                        obj.elementsOptionality[i] = false;
-                        obj.propertiesAnnotations[i] = null;
-                        if (i == obj.elementsCount - 1) {
-                            HashMap hashMap = new HashMap();
+                        String strName = r0.name();
+                        int i = enumDescriptor.added + 1;
+                        enumDescriptor.added = i;
+                        String[] strArr = enumDescriptor.names;
+                        strArr[i] = strName;
+                        enumDescriptor.elementsOptionality[i] = false;
+                        enumDescriptor.propertiesAnnotations[i] = null;
+                        if (i == enumDescriptor.elementsCount - 1) {
+                            HashMap map = new HashMap();
                             int length = strArr.length;
                             for (int i2 = 0; i2 < length; i2++) {
-                                hashMap.put(strArr[i2], Integer.valueOf(i2));
+                                map.put(strArr[i2], Integer.valueOf(i2));
                             }
-                            obj.indices = hashMap;
+                            enumDescriptor.indices = map;
                         }
                     }
                 }
-                return obj;
+                return enumDescriptor;
             }
         });
     }
@@ -64,10 +63,10 @@ public final class EnumSerializer implements KSerializer {
     public final void serialize(AbstractEncoder abstractEncoder, Object obj) {
         Enum r5 = (Enum) obj;
         Enum[] enumArr = this.values;
-        int indexOf = ArraysKt___ArraysKt.indexOf(enumArr, r5);
-        if (indexOf != -1) {
+        int iIndexOf = ArraysKt___ArraysKt.indexOf(enumArr, r5);
+        if (iIndexOf != -1) {
             getDescriptor();
-            abstractEncoder.encodeValue(Integer.valueOf(indexOf));
+            abstractEncoder.encodeValue(Integer.valueOf(iIndexOf));
             return;
         }
         throw new SerializationException(r5 + " is not a valid enum " + getDescriptor().getSerialName() + ", must be one of " + Arrays.toString(enumArr));

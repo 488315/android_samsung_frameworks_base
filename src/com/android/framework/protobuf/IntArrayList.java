@@ -97,10 +97,10 @@ final class IntArrayList extends AbstractProtobufList<Integer> implements Intern
         if (!(obj instanceof Integer)) {
             return -1;
         }
-        int intValue = ((Integer) obj).intValue();
+        int iIntValue = ((Integer) obj).intValue();
         int size = size();
         for (int i = 0; i < size; i++) {
-            if (this.array[i] == intValue) {
+            if (this.array[i] == iIntValue) {
                 return i;
             }
         }

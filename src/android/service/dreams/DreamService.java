@@ -21,7 +21,6 @@ import android.os.Looper;
 import android.os.PowerManager;
 import android.os.RemoteException;
 import android.os.ServiceManager;
-import android.service.dreams.DreamService;
 import android.service.dreams.IDreamManager;
 import android.service.dreams.IDreamOverlayCallback;
 import android.service.dreams.IDreamService;
@@ -54,6 +53,7 @@ import java.util.function.Consumer;
 
 /* loaded from: classes3.dex */
 public class DreamService extends Service implements Window.Callback {
+    private static final boolean DEBUG = Log.isLoggable("DreamService", 3);
     public static final boolean DEFAULT_SHOW_COMPLICATIONS = false;
     public static final int DREAM_CATEGORY_DEFAULT = 0;
     public static final int DREAM_CATEGORY_HOME_PANEL = 2;
@@ -63,6 +63,7 @@ public class DreamService extends Service implements Window.Callback {
     public static final String DREAM_SERVICE = "dreams";
     static final String EXTRA_DREAM_OVERLAY_COMPONENT = "android.service.dream.DreamService.dream_overlay_component";
     public static final String SERVICE_INTERFACE = "android.service.dreams.DreamService";
+    private static final String TAG = "DreamService";
     private Activity mActivity;
     private boolean mCanDoze;
     private boolean mDebug;
@@ -96,8 +97,6 @@ public class DreamService extends Service implements Window.Callback {
     private boolean mWaking;
     private Window mWindow;
     private boolean mWindowless;
-    private static final String TAG = "DreamService";
-    private static final boolean DEBUG = Log.isLoggable(TAG, 3);
 
     @Retention(RetentionPolicy.SOURCE)
     @interface DreamCategory {
@@ -547,7 +546,7 @@ public class DreamService extends Service implements Window.Callback {
         postIfNeeded(new Runnable() { // from class: android.service.dreams.DreamService$$ExternalSyntheticLambda10
             @Override // java.lang.Runnable
             public final void run() {
-                DreamService.this.lambda$updateDoze$0();
+                this.f$0.lambda$updateDoze$0();
             }
         });
     }
@@ -575,7 +574,7 @@ public class DreamService extends Service implements Window.Callback {
         postIfNeeded(new Runnable() { // from class: android.service.dreams.DreamService$$ExternalSyntheticLambda4
             @Override // java.lang.Runnable
             public final void run() {
-                DreamService.this.lambda$stopDozing$1();
+                this.f$0.lambda$stopDozing$1();
             }
         });
     }
@@ -704,16 +703,16 @@ public class DreamService extends Service implements Window.Callback {
 
         @Override // android.service.dreams.IDreamOverlayCallback
         public void onExitRequested() {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 DreamService.this.postIfNeeded(new Runnable() { // from class: android.service.dreams.DreamService$2$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        DreamService.AnonymousClass2.this.lambda$onExitRequested$0();
+                        this.f$0.lambda$onExitRequested$0();
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
@@ -724,11 +723,11 @@ public class DreamService extends Service implements Window.Callback {
 
         @Override // android.service.dreams.IDreamOverlayCallback
         public void onRedirectWake(boolean z) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 DreamService.this.mRedirectWake = z;
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }
@@ -751,7 +750,7 @@ public class DreamService extends Service implements Window.Callback {
             dreamOverlayConnectionHandler.addConsumer(new Consumer() { // from class: android.service.dreams.DreamService$$ExternalSyntheticLambda3
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    DreamService.this.lambda$onWakeUp$2((IDreamOverlayClient) obj);
+                    this.f$0.lambda$onWakeUp$2((IDreamOverlayClient) obj);
                 }
             });
         } else {
@@ -778,14 +777,14 @@ public class DreamService extends Service implements Window.Callback {
         this.mDreamServiceWrapper = new DreamServiceWrapper(new WeakReference(this));
         ComponentName componentName = (ComponentName) intent.getParcelableExtra(EXTRA_DREAM_OVERLAY_COMPONENT, ComponentName.class);
         if (!this.mWindowless && componentName != null) {
-            DreamOverlayConnectionHandler createOverlayConnection = this.mInjector.createOverlayConnection(componentName, new Runnable() { // from class: android.service.dreams.DreamService$$ExternalSyntheticLambda5
+            DreamOverlayConnectionHandler dreamOverlayConnectionHandlerCreateOverlayConnection = this.mInjector.createOverlayConnection(componentName, new Runnable() { // from class: android.service.dreams.DreamService$$ExternalSyntheticLambda5
                 @Override // java.lang.Runnable
                 public final void run() {
-                    DreamService.this.finish();
+                    this.f$0.finish();
                 }
             });
-            this.mOverlayConnection = createOverlayConnection;
-            if (!createOverlayConnection.bind()) {
+            this.mOverlayConnection = dreamOverlayConnectionHandlerCreateOverlayConnection;
+            if (!dreamOverlayConnectionHandlerCreateOverlayConnection.bind()) {
                 this.mOverlayConnection = null;
             }
         }
@@ -806,7 +805,7 @@ public class DreamService extends Service implements Window.Callback {
         postIfNeeded(new Runnable() { // from class: android.service.dreams.DreamService$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
-                DreamService.this.finishInternal();
+                this.f$0.finishInternal();
             }
         });
     }
@@ -818,7 +817,7 @@ public class DreamService extends Service implements Window.Callback {
             dreamOverlayConnectionHandler.addConsumer(new Consumer() { // from class: android.service.dreams.DreamService$$ExternalSyntheticLambda8
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    DreamService.this.lambda$finishInternal$3((IDreamOverlayClient) obj);
+                    this.f$0.lambda$finishInternal$3((IDreamOverlayClient) obj);
                 }
             });
         }
@@ -874,7 +873,7 @@ public class DreamService extends Service implements Window.Callback {
         postIfNeeded(new Runnable() { // from class: android.service.dreams.DreamService$$ExternalSyntheticLambda6
             @Override // java.lang.Runnable
             public final void run() {
-                DreamService.this.lambda$wakeUp$4();
+                this.f$0.lambda$wakeUp$4();
             }
         });
     }
@@ -888,7 +887,7 @@ public class DreamService extends Service implements Window.Callback {
         dreamOverlayConnectionHandler.addConsumer(new Consumer() { // from class: android.service.dreams.DreamService$$ExternalSyntheticLambda7
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                DreamService.this.lambda$comeToFront$5((IDreamOverlayClient) obj);
+                this.f$0.lambda$comeToFront$5((IDreamOverlayClient) obj);
             }
         });
     }
@@ -915,7 +914,7 @@ public class DreamService extends Service implements Window.Callback {
             this.mOverlayConnection.addConsumer(new Consumer() { // from class: android.service.dreams.DreamService$$ExternalSyntheticLambda2
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    DreamService.this.lambda$wakeUp$6((IDreamOverlayClient) obj);
+                    this.f$0.lambda$wakeUp$6((IDreamOverlayClient) obj);
                 }
             });
             return;
@@ -973,31 +972,31 @@ public class DreamService extends Service implements Window.Callback {
         if (serviceInfo == null) {
             return null;
         }
-        TypedArray extractPackageItemInfoAttributes = packageManager.extractPackageItemInfoAttributes(serviceInfo, DREAM_META_DATA, "dream", R.styleable.Dream);
-        if (extractPackageItemInfoAttributes == null) {
-            if (extractPackageItemInfoAttributes != null) {
-                extractPackageItemInfoAttributes.close();
+        TypedArray typedArrayExtractPackageItemInfoAttributes = packageManager.extractPackageItemInfoAttributes(serviceInfo, DREAM_META_DATA, "dream", R.styleable.Dream);
+        if (typedArrayExtractPackageItemInfoAttributes == null) {
+            if (typedArrayExtractPackageItemInfoAttributes != null) {
+                typedArrayExtractPackageItemInfoAttributes.close();
             }
             return null;
         }
         try {
             try {
-                DreamMetadata dreamMetadata = new DreamMetadata(convertToComponentName(extractPackageItemInfoAttributes.getString(0), serviceInfo, packageManager), extractPackageItemInfoAttributes.getDrawable(1), extractPackageItemInfoAttributes.getBoolean(2, false), extractPackageItemInfoAttributes.getInt(3, 0));
-                if (extractPackageItemInfoAttributes != null) {
-                    extractPackageItemInfoAttributes.close();
+                DreamMetadata dreamMetadata = new DreamMetadata(convertToComponentName(typedArrayExtractPackageItemInfoAttributes.getString(0), serviceInfo, packageManager), typedArrayExtractPackageItemInfoAttributes.getDrawable(1), typedArrayExtractPackageItemInfoAttributes.getBoolean(2, false), typedArrayExtractPackageItemInfoAttributes.getInt(3, 0));
+                if (typedArrayExtractPackageItemInfoAttributes != null) {
+                    typedArrayExtractPackageItemInfoAttributes.close();
                 }
                 return dreamMetadata;
             } catch (Exception e) {
                 Log.e(TAG, "Failed to create read metadata", e);
-                if (extractPackageItemInfoAttributes != null) {
-                    extractPackageItemInfoAttributes.close();
+                if (typedArrayExtractPackageItemInfoAttributes != null) {
+                    typedArrayExtractPackageItemInfoAttributes.close();
                 }
                 return null;
             }
         } catch (Throwable th) {
-            if (extractPackageItemInfoAttributes != null) {
+            if (typedArrayExtractPackageItemInfoAttributes != null) {
                 try {
-                    extractPackageItemInfoAttributes.close();
+                    typedArrayExtractPackageItemInfoAttributes.close();
                 } catch (Throwable th2) {
                     th.addSuppressed(th2);
                 }
@@ -1081,7 +1080,7 @@ public class DreamService extends Service implements Window.Callback {
         Runnable runnable = new Runnable() { // from class: android.service.dreams.DreamService$$ExternalSyntheticLambda9
             @Override // java.lang.Runnable
             public final void run() {
-                DreamService.this.lambda$attach$7(iRemoteCallback);
+                this.f$0.lambda$attach$7(iRemoteCallback);
             }
         };
         this.mDispatchAfterOnAttachedToWindow = runnable;
@@ -1159,7 +1158,7 @@ public class DreamService extends Service implements Window.Callback {
                 this.mDreamStartOverlayConsumer = new Consumer() { // from class: android.service.dreams.DreamService$3$$ExternalSyntheticLambda0
                     @Override // java.util.function.Consumer
                     public final void accept(Object obj) {
-                        DreamService.AnonymousClass3.this.lambda$onViewAttachedToWindow$0((IDreamOverlayClient) obj);
+                        this.f$0.lambda$onViewAttachedToWindow$0((IDreamOverlayClient) obj);
                     }
                 };
                 DreamService.this.mOverlayConnection.addConsumer(this.mDreamStartOverlayConsumer);
@@ -1202,7 +1201,7 @@ public class DreamService extends Service implements Window.Callback {
             this.mDreamAccessibility = new DreamAccessibility(this, window.getDecorView(), new Runnable() { // from class: android.service.dreams.DreamService$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    DreamService.this.wakeUp();
+                    this.f$0.wakeUp();
                 }
             });
         }
@@ -1240,8 +1239,8 @@ public class DreamService extends Service implements Window.Callback {
         if (serviceInfo == null) {
             return null;
         }
-        CharSequence loadLabel = serviceInfo.loadLabel(packageManager);
-        return (!z || loadLabel == null) ? loadLabel : resources.getString(R.string.dream_preview_title, loadLabel);
+        CharSequence charSequenceLoadLabel = serviceInfo.loadLabel(packageManager);
+        return (!z || charSequenceLoadLabel == null) ? charSequenceLoadLabel : resources.getString(R.string.dream_preview_title, charSequenceLoadLabel);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -1263,7 +1262,7 @@ public class DreamService extends Service implements Window.Callback {
         DumpUtils.dumpAsync(this.mInjector.getWakefulHandler().getHandler(), new DumpUtils.Dump() { // from class: android.service.dreams.DreamService$$ExternalSyntheticLambda11
             @Override // com.android.internal.util.DumpUtils.Dump
             public final void dump(PrintWriter printWriter2, String str) {
-                DreamService.this.lambda$dump$8(fileDescriptor, strArr, printWriter2, str);
+                this.f$0.lambda$dump$8(fileDescriptor, strArr, printWriter2, str);
             }
         }, printWriter, "", 1000L);
     }
@@ -1336,22 +1335,22 @@ public class DreamService extends Service implements Window.Callback {
 
         @Override // android.service.dreams.IDreamService
         public void attach(final IBinder iBinder, final boolean z, final boolean z2, final IRemoteCallback iRemoteCallback) {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 post(new Consumer() { // from class: android.service.dreams.DreamService$DreamServiceWrapper$$ExternalSyntheticLambda0
                     @Override // java.util.function.Consumer
                     public final void accept(Object obj) {
-                        ((DreamService) obj).attach(IBinder.this, z, z2, iRemoteCallback);
+                        ((DreamService) obj).attach(iBinder, z, z2, iRemoteCallback);
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
         @Override // android.service.dreams.IDreamService
         public void detach() {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 post(new Consumer() { // from class: android.service.dreams.DreamService$DreamServiceWrapper$$ExternalSyntheticLambda1
                     @Override // java.util.function.Consumer
@@ -1360,13 +1359,13 @@ public class DreamService extends Service implements Window.Callback {
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
         @Override // android.service.dreams.IDreamService
         public void wakeUp() {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 post(new Consumer() { // from class: android.service.dreams.DreamService$DreamServiceWrapper$$ExternalSyntheticLambda4
                     @Override // java.util.function.Consumer
@@ -1375,13 +1374,13 @@ public class DreamService extends Service implements Window.Callback {
                     }
                 });
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
 
         @Override // android.service.dreams.IDreamService
         public void comeToFront() {
-            long clearCallingIdentity = Binder.clearCallingIdentity();
+            long jClearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 if (Flags.dreamHandlesBeingObscured()) {
                     post(new Consumer() { // from class: android.service.dreams.DreamService$DreamServiceWrapper$$ExternalSyntheticLambda2
@@ -1392,7 +1391,7 @@ public class DreamService extends Service implements Window.Callback {
                     });
                 }
             } finally {
-                Binder.restoreCallingIdentity(clearCallingIdentity);
+                Binder.restoreCallingIdentity(jClearCallingIdentity);
             }
         }
     }

@@ -18,7 +18,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class KeyguardBlueprintCommandListener implements CoreStartable {
     public final CommandRegistry commandRegistry;
@@ -26,7 +25,6 @@ public final class KeyguardBlueprintCommandListener implements CoreStartable {
     public final KeyguardBlueprintRepository keyguardBlueprintRepository;
     public final KeyguardLayoutManagerCommand layoutCommand = new KeyguardLayoutManagerCommand();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -36,14 +34,13 @@ public final class KeyguardBlueprintCommandListener implements CoreStartable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class KeyguardLayoutManagerCommand implements Command {
         public KeyguardLayoutManagerCommand() {
         }
 
         @Override // com.android.systemui.statusbar.commandline.Command
         public final void execute(PrintWriter printWriter, List list) {
-            boolean applyBlueprint;
+            boolean zApplyBlueprint;
             int i = 0;
             String str = (String) CollectionsKt___CollectionsKt.getOrNull(0, list);
             KeyguardBlueprintCommandListener keyguardBlueprintCommandListener = KeyguardBlueprintCommandListener.this;
@@ -55,11 +52,11 @@ public final class KeyguardBlueprintCommandListener implements CoreStartable {
                 KeyguardBlueprintInteractor keyguardBlueprintInteractor = keyguardBlueprintCommandListener.keyguardBlueprintInteractor;
                 if (str.equals(((KeyguardBlueprint) keyguardBlueprintInteractor.blueprint.getValue()).getId())) {
                     keyguardBlueprintInteractor.refreshBlueprint(IntraBlueprintTransition.Type.NoTransition);
-                    applyBlueprint = true;
+                    zApplyBlueprint = true;
                 } else {
-                    applyBlueprint = keyguardBlueprintInteractor.keyguardBlueprintRepository.applyBlueprint(str);
+                    zApplyBlueprint = keyguardBlueprintInteractor.keyguardBlueprintRepository.applyBlueprint(str);
                 }
-                if (applyBlueprint) {
+                if (zApplyBlueprint) {
                     printWriter.println("Transition succeeded!");
                     return;
                 } else {
@@ -97,7 +94,7 @@ public final class KeyguardBlueprintCommandListener implements CoreStartable {
         this.commandRegistry.registerCommand("blueprint", new Function0() { // from class: com.android.systemui.keyguard.ui.view.layout.KeyguardBlueprintCommandListener$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                return KeyguardBlueprintCommandListener.this.layoutCommand;
+                return this.f$0.layoutCommand;
             }
         });
     }

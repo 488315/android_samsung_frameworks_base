@@ -101,7 +101,7 @@ public class SemMultiMicManager {
         this.mCameraZoomLevel = f;
     }
 
-    public static boolean isSupported() {
+    public static boolean isSupported() throws NumberFormatException {
         int i;
         try {
             i = Integer.parseInt("08020");
@@ -168,7 +168,7 @@ public class SemMultiMicManager {
         return this.mSoundLocation;
     }
 
-    public static boolean isSupported(int i) {
+    public static boolean isSupported(int i) throws NumberFormatException {
         int i2;
         if (!isValidMode(i)) {
             Log.e(TAG, "Invalid mode " + i + " in isSupported");
@@ -197,8 +197,8 @@ public class SemMultiMicManager {
         if (iAudioService != null) {
             return iAudioService;
         }
-        IAudioService asInterface = IAudioService.Stub.asInterface(ServiceManager.getService("audio"));
-        sService = asInterface;
-        return asInterface;
+        IAudioService iAudioServiceAsInterface = IAudioService.Stub.asInterface(ServiceManager.getService("audio"));
+        sService = iAudioServiceAsInterface;
+        return iAudioServiceAsInterface;
     }
 }

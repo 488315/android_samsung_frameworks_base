@@ -50,14 +50,14 @@ public class ParticlesCreate extends PaintOperation implements VariableSupport {
         }
         this.mParticles = (float[][]) Array.newInstance((Class<?>) Float.TYPE, i2, iArr.length);
         int[] iArr2 = new int[20];
-        int floatToRawIntBits = Float.floatToRawIntBits(AnimatedFloatExpression.VAR1);
+        int iFloatToRawIntBits = Float.floatToRawIntBits(AnimatedFloatExpression.VAR1);
         int i4 = 0;
         for (int i5 = 0; i5 < this.mEquations.length; i5++) {
             int i6 = 0;
             while (true) {
                 float[] fArr5 = this.mEquations[i5];
                 if (i6 < fArr5.length) {
-                    if (Float.isNaN(fArr5[i6]) && Float.floatToRawIntBits(this.mEquations[i5][i6]) == floatToRawIntBits) {
+                    if (Float.isNaN(fArr5[i6]) && Float.floatToRawIntBits(this.mEquations[i5][i6]) == iFloatToRawIntBits) {
                         iArr2[i4] = (this.mEquations.length * i5) + i6;
                         i4++;
                     }
@@ -146,31 +146,31 @@ public class ParticlesCreate extends PaintOperation implements VariableSupport {
     }
 
     public static void read(WireBuffer wireBuffer, List<Operation> list) {
-        int readInt = wireBuffer.readInt();
-        int readInt2 = wireBuffer.readInt();
-        int readInt3 = wireBuffer.readInt();
-        if (readInt3 > 2000) {
-            throw new RuntimeException(readInt3 + " map entries more than max = 2000");
+        int i = wireBuffer.readInt();
+        int i2 = wireBuffer.readInt();
+        int i3 = wireBuffer.readInt();
+        if (i3 > 2000) {
+            throw new RuntimeException(i3 + " map entries more than max = 2000");
         }
-        int[] iArr = new int[readInt3];
-        float[][] fArr = new float[readInt3][];
-        for (int i = 0; i < readInt3; i++) {
-            iArr[i] = wireBuffer.readInt();
-            int readInt4 = wireBuffer.readInt();
-            if (readInt4 > 32) {
-                throw new RuntimeException(readInt4 + " map entries more than max = 2000");
+        int[] iArr = new int[i3];
+        float[][] fArr = new float[i3][];
+        for (int i4 = 0; i4 < i3; i4++) {
+            iArr[i4] = wireBuffer.readInt();
+            int i5 = wireBuffer.readInt();
+            if (i5 > 32) {
+                throw new RuntimeException(i5 + " map entries more than max = 2000");
             }
-            fArr[i] = new float[readInt4];
-            int i2 = 0;
+            fArr[i4] = new float[i5];
+            int i6 = 0;
             while (true) {
-                float[] fArr2 = fArr[i];
-                if (i2 < fArr2.length) {
-                    fArr2[i2] = wireBuffer.readFloat();
-                    i2++;
+                float[] fArr2 = fArr[i4];
+                if (i6 < fArr2.length) {
+                    fArr2[i6] = wireBuffer.readFloat();
+                    i6++;
                 }
             }
         }
-        list.add(new ParticlesCreate(readInt, iArr, fArr, readInt2));
+        list.add(new ParticlesCreate(i, iArr, fArr, i2));
     }
 
     public static void documentation(DocumentationBuilder documentationBuilder) {

@@ -49,13 +49,13 @@ public final class HubInfo implements Parcelable {
 
     private HubInfo(Parcel parcel) {
         this.mId = parcel.readLong();
-        int readInt = parcel.readInt();
-        this.mType = readInt;
-        if (readInt == 0) {
+        int i = parcel.readInt();
+        this.mType = i;
+        if (i == 0) {
             this.mContextHubInfo = ContextHubInfo.CREATOR.createFromParcel(parcel);
             this.mVendorHubInfo = null;
         } else {
-            if (readInt == 1) {
+            if (i == 1) {
                 this.mVendorHubInfo = VendorHubInfo.CREATOR.createFromParcel(parcel);
                 this.mContextHubInfo = null;
                 return;

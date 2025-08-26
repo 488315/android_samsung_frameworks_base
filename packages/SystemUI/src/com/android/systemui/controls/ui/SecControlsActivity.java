@@ -1,16 +1,19 @@
 package com.android.systemui.controls.ui;
 
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Insets;
 import android.graphics.Outline;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Trace;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
@@ -29,18 +32,25 @@ import androidx.fragment.app.FragmentManagerImpl;
 import androidx.lifecycle.LifecycleRegistry;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.android.keyguard.KeyguardFMMViewController$$ExternalSyntheticOutline0;
+import com.android.systemui.Prefs;
 import com.android.systemui.R;
 import com.android.systemui.broadcast.BroadcastDispatcher;
 import com.android.systemui.controls.BaseActivity;
+import com.android.systemui.controls.ControlsServiceInfo;
 import com.android.systemui.controls.controller.ComponentInfo;
 import com.android.systemui.controls.controller.ControlsBindingControllerImpl;
 import com.android.systemui.controls.controller.ControlsController;
 import com.android.systemui.controls.controller.ControlsControllerImpl;
+import com.android.systemui.controls.controller.Favorites;
 import com.android.systemui.controls.controller.SecControlsController;
 import com.android.systemui.controls.management.ControlsAnimations;
 import com.android.systemui.controls.management.ControlsAnimations$observerForAnimations$1;
+import com.android.systemui.controls.management.ControlsListingController;
+import com.android.systemui.controls.management.ControlsListingControllerImpl;
 import com.android.systemui.controls.management.adapter.StatefulControlAdapter;
 import com.android.systemui.controls.management.model.MainComponentModel;
+import com.android.systemui.controls.panels.AuthorizedPanelsRepositoryImpl;
 import com.android.systemui.controls.ui.SelectedItem;
 import com.android.systemui.controls.ui.fragment.ControlsFragmentFactory;
 import com.android.systemui.controls.ui.fragment.MainFragment;
@@ -52,17 +62,26 @@ import com.android.systemui.controls.ui.util.SpanManager;
 import com.android.systemui.controls.util.ControlsUtil;
 import com.android.systemui.controls.util.SALogger;
 import com.android.systemui.settings.UserTracker;
+import com.android.systemui.settings.UserTrackerImpl;
 import com.samsung.systemui.splugins.volume.VolumePanelValues;
+import dagger.Lazy;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Set;
 import java.util.concurrent.Executor;
+import java.util.function.Consumer;
 import kotlin.Unit;
+import kotlin.collections.CollectionsKt__IterablesKt;
 import kotlin.collections.EmptyList;
+import kotlin.collections.EmptySet;
+import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SecControlsActivity extends BaseActivity {
+    public static final /* synthetic */ int $r8$clinit = 0;
     public final AUIFacade auiFacade;
     public final BroadcastDispatcher broadcastDispatcher;
     public final SecControlsActivity$broadcastReceiver$1 broadcastReceiver;
@@ -74,7 +93,6 @@ public final class SecControlsActivity extends BaseActivity {
     public final SecControlsUiController secUiController;
     public final ControlsUiController uiController;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -101,24 +119,24 @@ public final class SecControlsActivity extends BaseActivity {
         this.broadcastReceiver = new BroadcastReceiver() { // from class: com.android.systemui.controls.ui.SecControlsActivity$broadcastReceiver$1
             @Override // android.content.BroadcastReceiver
             public final void onReceive(Context context, Intent intent) {
-                SecControlsActivity.this.getClass();
+                this.this$0.getClass();
                 Log.d("SecControlsActivity", "onReceive intent = " + intent);
-                SecControlsActivity.this.finish();
+                this.this$0.finish();
             }
         };
     }
 
     public static void addView(ViewGroup viewGroup, String str, int i, int i2, boolean z) {
-        View findViewWithTag = viewGroup.findViewWithTag(str);
-        if (findViewWithTag != null) {
+        View viewFindViewWithTag = viewGroup.findViewWithTag(str);
+        if (viewFindViewWithTag != null) {
             Log.d("SecControlsActivity", str.concat(" is already done"));
         } else {
-            findViewWithTag = new View(viewGroup.getContext());
-            findViewWithTag.setTag(str);
-            findViewWithTag.setBackgroundColor(Color.rgb((i >> 16) & 255, (i >> 8) & 255, i & 255));
-            findViewWithTag.setAlpha(z ? ((i >> 24) & 255) / 255.0f : 1.0f);
+            viewFindViewWithTag = new View(viewGroup.getContext());
+            viewFindViewWithTag.setTag(str);
+            viewFindViewWithTag.setBackgroundColor(Color.rgb((i >> 16) & 255, (i >> 8) & 255, i & 255));
+            viewFindViewWithTag.setAlpha(z ? ((i >> 24) & 255) / 255.0f : 1.0f);
         }
-        viewGroup.addView(findViewWithTag, i2);
+        viewGroup.addView(viewFindViewWithTag, i2);
     }
 
     @Override // com.android.systemui.controls.BaseActivity
@@ -174,7 +192,7 @@ public final class SecControlsActivity extends BaseActivity {
     }
 
     @Override // com.android.systemui.controls.BaseActivity, androidx.fragment.app.FragmentActivity, androidx.activity.ComponentActivity, androidx.core.app.ComponentActivity, android.app.Activity
-    public final void onCreate(Bundle bundle) {
+    public final void onCreate(Bundle bundle) throws IllegalArgumentException {
         ActionMenuPresenter.OverflowMenuButton overflowMenuButton;
         Log.d("SecControlsActivity", "onCreate");
         getSupportFragmentManager().mFragmentFactory = this.controlsFragmentFactory;
@@ -223,7 +241,7 @@ public final class SecControlsActivity extends BaseActivity {
             linearLayout.setClipToOutline(true);
             linearLayout.setOutlineProvider(new ViewOutlineProvider() { // from class: com.android.systemui.controls.ui.SecControlsActivity$onCreate$3$1
                 @Override // android.view.ViewOutlineProvider
-                public final void getOutline(View view, Outline outline) {
+                public final void getOutline(View view, Outline outline) throws Resources.NotFoundException {
                     int dimensionPixelSize = linearLayout.getResources().getDimensionPixelSize(R.dimen.basic_interaction_list_radius);
                     outline.setRoundRect(0, -dimensionPixelSize, view.getMeasuredWidth(), view.getMeasuredHeight(), dimensionPixelSize);
                 }
@@ -232,10 +250,14 @@ public final class SecControlsActivity extends BaseActivity {
                 @Override // android.view.View.OnApplyWindowInsetsListener
                 public final WindowInsets onApplyWindowInsets(View view, WindowInsets windowInsets) {
                     Insets insets = windowInsets.getInsets(WindowInsets.Type.systemBars() | WindowInsets.Type.navigationBars());
-                    if (view.getContext().getResources().getConfiguration().orientation == 2) {
-                        view.setPadding(0, 0, insets.right, 0);
-                    } else {
+                    int i = view.getContext().getResources().getConfiguration().smallestScreenWidthDp;
+                    BaseActivity.Companion companion = BaseActivity.Companion;
+                    int i2 = SecControlsActivity.$r8$clinit;
+                    BaseActivity.Companion.getClass();
+                    if (i > BaseActivity.BREAKPOINT_RANGE || view.getContext().getResources().getConfiguration().orientation != 2) {
                         view.setPadding(0, insets.top, 0, insets.bottom);
+                    } else {
+                        view.setPadding(0, 0, insets.right, 0);
                     }
                     return WindowInsets.CONSUMED;
                 }
@@ -301,8 +323,8 @@ public final class SecControlsActivity extends BaseActivity {
         SecRenderInfo.actionIconMap.clear();
         SecRenderInfo.statusIconDrawableMap.clear();
         FragmentManagerImpl fragmentManagerImpl = secControlsUiControllerImpl.fragmentManager;
-        Fragment findFragmentById = fragmentManagerImpl != null ? fragmentManagerImpl.findFragmentById(R.id.frame_layout) : null;
-        new SALogger.Event.QuitDevices(findFragmentById instanceof NoAppFragment ? SALogger.Screen.IntroNoAppsToShow.INSTANCE : findFragmentById instanceof NoFavoriteFragment ? SALogger.Screen.NoDeviceSelected.INSTANCE : SALogger.Screen.MainScreen.INSTANCE).sendEvent(secControlsUiControllerImpl.saLogger.systemUIAnalyticsWrapper);
+        Fragment fragmentFindFragmentById = fragmentManagerImpl != null ? fragmentManagerImpl.findFragmentById(R.id.frame_layout) : null;
+        new SALogger.Event.QuitDevices(fragmentFindFragmentById instanceof NoAppFragment ? SALogger.Screen.IntroNoAppsToShow.INSTANCE : fragmentFindFragmentById instanceof NoFavoriteFragment ? SALogger.Screen.NoDeviceSelected.INSTANCE : SALogger.Screen.MainScreen.INSTANCE).sendEvent(secControlsUiControllerImpl.saLogger.systemUIAnalyticsWrapper);
         secControlsUiControllerImpl.unsubscribeAndUnbindIfNecessary();
         secControlsUiControllerImpl.verificationStructureInfos.clear();
         secControlsUiControllerImpl.allComponentInfo = EmptyList.INSTANCE;
@@ -333,25 +355,218 @@ public final class SecControlsActivity extends BaseActivity {
         ((SecControlsUiControllerImpl) this.secUiController).unsubscribeAndUnbindIfNecessary();
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:17:0x00b6, code lost:
-    
-        if (com.android.systemui.controls.controller.Favorites.getActiveFlag(r5) == false) goto L19;
-     */
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:20:0x0113  */
-    /* JADX WARN: Removed duplicated region for block: B:25:0x011e  */
+    /* JADX WARN: Removed duplicated region for block: B:19:0x00b8  */
     /* JADX WARN: Type inference failed for: r1v2, types: [com.android.systemui.controls.ui.SecControlsActivity$onStart$1$1] */
     @Override // androidx.appcompat.app.AppCompatActivity, androidx.fragment.app.FragmentActivity, android.app.Activity
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public final void onStart() {
-        /*
-            Method dump skipped, instructions count: 359
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.controls.ui.SecControlsActivity.onStart():void");
+        SecControlsUiControllerImpl$createCallback$1 secControlsUiControllerImpl$createCallback$1;
+        Log.d("SecControlsActivity", "onStart");
+        super.onStart();
+        ViewGroup viewGroup = (ViewGroup) requireViewById(R.id.frame_layout);
+        this.parent = viewGroup;
+        if (viewGroup != null) {
+            ?? r1 = new Runnable() { // from class: com.android.systemui.controls.ui.SecControlsActivity$onStart$1$1
+                @Override // java.lang.Runnable
+                public final void run() {
+                    this.this$0.finish();
+                }
+            };
+            Context context = viewGroup.getContext();
+            FragmentManagerImpl supportFragmentManager = getSupportFragmentManager();
+            final SecControlsUiControllerImpl secControlsUiControllerImpl = (SecControlsUiControllerImpl) this.secUiController;
+            secControlsUiControllerImpl.getClass();
+            Log.d("SecControlsUiControllerImpl", "show()");
+            Trace.instant(4096L, "SecControlsUiControllerImpl#show");
+            secControlsUiControllerImpl.parent = viewGroup;
+            secControlsUiControllerImpl.onDismiss = r1;
+            secControlsUiControllerImpl.activityContext = context;
+            secControlsUiControllerImpl.fragmentManager = supportFragmentManager;
+            boolean z = false;
+            secControlsUiControllerImpl.hidden = false;
+            ((ControlActionCoordinatorImpl) secControlsUiControllerImpl.controlActionCoordinator).activityContext = context;
+            Context context2 = secControlsUiControllerImpl.context;
+            secControlsUiControllerImpl.controlsUtil.getClass();
+            if (!Prefs.getBoolean(context2, "ControlsOOBEManageAppsCompleted", false)) {
+                Prefs.putBoolean(secControlsUiControllerImpl.context, "ControlsOOBEManageAppsCompleted", true);
+            }
+            secControlsUiControllerImpl.loadComponentInfo();
+            ControlsController controlsController = (ControlsController) secControlsUiControllerImpl.controlsController.get();
+            final SecControlsUiControllerImpl$show$1 secControlsUiControllerImpl$show$1 = new Consumer() { // from class: com.android.systemui.controls.ui.SecControlsUiControllerImpl$show$1
+                @Override // java.util.function.Consumer
+                public final /* bridge */ /* synthetic */ void accept(Object obj) {
+                }
+            };
+            final ControlsControllerImpl controlsControllerImpl = (ControlsControllerImpl) controlsController;
+            boolean z2 = controlsControllerImpl.seedingInProgress;
+            Lazy lazy = secControlsUiControllerImpl.controlsListingController;
+            if (z2) {
+                controlsControllerImpl.executor.execute(new Runnable() { // from class: com.android.systemui.controls.controller.ControlsControllerImpl$addSeedingFavoritesCallback$1
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        ControlsControllerImpl controlsControllerImpl2 = controlsControllerImpl;
+                        if (!controlsControllerImpl2.seedingInProgress) {
+                            secControlsUiControllerImpl$show$1.accept(Boolean.FALSE);
+                            return;
+                        }
+                        ((ArrayList) controlsControllerImpl2.seedingCallbacks).add(secControlsUiControllerImpl$show$1);
+                    }
+                });
+                final SecControlsUiControllerImpl$show$2 secControlsUiControllerImpl$show$2 = new SecControlsUiControllerImpl$show$2(secControlsUiControllerImpl);
+                secControlsUiControllerImpl$createCallback$1 = new ControlsListingController.ControlsListingCallback() { // from class: com.android.systemui.controls.ui.SecControlsUiControllerImpl$createCallback$1
+                    @Override // com.android.systemui.controls.management.ControlsListingController.ControlsListingCallback
+                    public final void onServicesUpdated(final List list) {
+                        final SecControlsUiControllerImpl secControlsUiControllerImpl2 = secControlsUiControllerImpl;
+                        AuthorizedPanelsRepositoryImpl authorizedPanelsRepositoryImpl = (AuthorizedPanelsRepositoryImpl) secControlsUiControllerImpl2.authorizedPanelsRepository;
+                        Set<String> stringSet = authorizedPanelsRepositoryImpl.instantiateSharedPrefs(((UserTrackerImpl) authorizedPanelsRepositoryImpl.userTracker).getUserHandle()).getStringSet("authorized_panels", EmptySet.INSTANCE);
+                        stringSet.getClass();
+                        final ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(list, 10));
+                        Iterator it = list.iterator();
+                        while (it.hasNext()) {
+                            ControlsServiceInfo controlsServiceInfo = (ControlsServiceInfo) it.next();
+                            int i = controlsServiceInfo.serviceInfo.applicationInfo.uid;
+                            CharSequence charSequenceLoadLabel = controlsServiceInfo.loadLabel();
+                            Drawable drawableLoadIcon = controlsServiceInfo.loadIcon();
+                            ComponentName componentName = controlsServiceInfo.componentName;
+                            arrayList.add(new SecSelectionItem(charSequenceLoadLabel, drawableLoadIcon, componentName, i, stringSet.contains(componentName.getPackageName()) ? controlsServiceInfo.panelActivity : null));
+                        }
+                        final Function2 function2 = secControlsUiControllerImpl$show$2;
+                        secControlsUiControllerImpl2.uiExecutor.execute(new Runnable() { // from class: com.android.systemui.controls.ui.SecControlsUiControllerImpl$createCallback$1$onServicesUpdated$1
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                Function2 function22 = function2;
+                                List list2 = arrayList;
+                                SecControlsUiControllerImpl secControlsUiControllerImpl3 = secControlsUiControllerImpl2;
+                                ControlsUtil controlsUtil = secControlsUiControllerImpl3.controlsUtil;
+                                Context context3 = secControlsUiControllerImpl3.context;
+                                List list3 = list;
+                                controlsUtil.getClass();
+                                function22.invoke(list2, ControlsUtil.getListOfServices(context3, list3));
+                            }
+                        });
+                    }
+                };
+            } else {
+                boolean zIsEmpty = ((ArrayList) ((ControlsListingControllerImpl) ((ControlsListingController) lazy.get())).getCurrentServices()).isEmpty();
+                Lazy lazy2 = secControlsUiControllerImpl.secControlsController;
+                if (!zIsEmpty) {
+                    SelectedItem selectedItem = secControlsUiControllerImpl.selectedItem;
+                    if (!(selectedItem instanceof SelectedItem.ComponentItem) || ((SelectedItem.ComponentItem) selectedItem).hasControls) {
+                        if (selectedItem instanceof SelectedItem.PanelItem) {
+                            SecControlsController secControlsController = (SecControlsController) lazy2.get();
+                            ComponentName componentName = secControlsUiControllerImpl.selectedItem.getComponentName();
+                            ((ControlsControllerImpl) secControlsController).getClass();
+                            Favorites.INSTANCE.getClass();
+                            if (!Favorites.getActiveFlag(componentName)) {
+                                z = true;
+                            }
+                        }
+                        int size = ((ArrayList) ((ControlsListingControllerImpl) ((ControlsListingController) lazy.get())).getCurrentServices()).size();
+                        SelectedItem selectedItem2 = secControlsUiControllerImpl.selectedItem;
+                        SecControlsController secControlsController2 = (SecControlsController) lazy2.get();
+                        ComponentName componentName2 = secControlsUiControllerImpl.selectedItem.getComponentName();
+                        ((ControlsControllerImpl) secControlsController2).getClass();
+                        Favorites.INSTANCE.getClass();
+                        boolean activeFlag = Favorites.getActiveFlag(componentName2);
+                        ComponentName componentName3 = secControlsUiControllerImpl.selectedItem.getComponentName();
+                        StringBuilder sbM = KeyguardFMMViewController$$ExternalSyntheticOutline0.m("needToShowNonMainView ", size, ", service.size = ", z, ", selectedItem = ");
+                        sbM.append(selectedItem2);
+                        sbM.append(", activeFlag = ");
+                        sbM.append(activeFlag);
+                        sbM.append(", componentName = ");
+                        sbM.append(componentName3);
+                        Log.d("SecControlsUiControllerImpl", sbM.toString());
+                        if (z) {
+                            final SecControlsUiControllerImpl$show$3 secControlsUiControllerImpl$show$3 = new SecControlsUiControllerImpl$show$3(secControlsUiControllerImpl);
+                            secControlsUiControllerImpl$createCallback$1 = new ControlsListingController.ControlsListingCallback() { // from class: com.android.systemui.controls.ui.SecControlsUiControllerImpl$createCallback$1
+                                @Override // com.android.systemui.controls.management.ControlsListingController.ControlsListingCallback
+                                public final void onServicesUpdated(final List<? extends ControlsServiceInfo> list) {
+                                    final SecControlsUiControllerImpl secControlsUiControllerImpl2 = secControlsUiControllerImpl;
+                                    AuthorizedPanelsRepositoryImpl authorizedPanelsRepositoryImpl = (AuthorizedPanelsRepositoryImpl) secControlsUiControllerImpl2.authorizedPanelsRepository;
+                                    Set<String> stringSet = authorizedPanelsRepositoryImpl.instantiateSharedPrefs(((UserTrackerImpl) authorizedPanelsRepositoryImpl.userTracker).getUserHandle()).getStringSet("authorized_panels", EmptySet.INSTANCE);
+                                    stringSet.getClass();
+                                    final List<SecSelectionItem> arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(list, 10));
+                                    Iterator it = list.iterator();
+                                    while (it.hasNext()) {
+                                        ControlsServiceInfo controlsServiceInfo = (ControlsServiceInfo) it.next();
+                                        int i = controlsServiceInfo.serviceInfo.applicationInfo.uid;
+                                        CharSequence charSequenceLoadLabel = controlsServiceInfo.loadLabel();
+                                        Drawable drawableLoadIcon = controlsServiceInfo.loadIcon();
+                                        ComponentName componentName4 = controlsServiceInfo.componentName;
+                                        arrayList.add(new SecSelectionItem(charSequenceLoadLabel, drawableLoadIcon, componentName4, i, stringSet.contains(componentName4.getPackageName()) ? controlsServiceInfo.panelActivity : null));
+                                    }
+                                    final Function2 function2 = secControlsUiControllerImpl$show$3;
+                                    secControlsUiControllerImpl2.uiExecutor.execute(new Runnable() { // from class: com.android.systemui.controls.ui.SecControlsUiControllerImpl$createCallback$1$onServicesUpdated$1
+                                        @Override // java.lang.Runnable
+                                        public final void run() {
+                                            Function2 function22 = function2;
+                                            List list2 = arrayList;
+                                            SecControlsUiControllerImpl secControlsUiControllerImpl3 = secControlsUiControllerImpl2;
+                                            ControlsUtil controlsUtil = secControlsUiControllerImpl3.controlsUtil;
+                                            Context context3 = secControlsUiControllerImpl3.context;
+                                            List list3 = list;
+                                            controlsUtil.getClass();
+                                            function22.invoke(list2, ControlsUtil.getListOfServices(context3, list3));
+                                        }
+                                    });
+                                }
+                            };
+                        } else {
+                            final SecControlsUiControllerImpl$show$4 secControlsUiControllerImpl$show$4 = new SecControlsUiControllerImpl$show$4(secControlsUiControllerImpl);
+                            secControlsUiControllerImpl$createCallback$1 = new ControlsListingController.ControlsListingCallback() { // from class: com.android.systemui.controls.ui.SecControlsUiControllerImpl$createCallback$1
+                                @Override // com.android.systemui.controls.management.ControlsListingController.ControlsListingCallback
+                                public final void onServicesUpdated(final List<? extends ControlsServiceInfo> list) {
+                                    final SecControlsUiControllerImpl secControlsUiControllerImpl2 = secControlsUiControllerImpl;
+                                    AuthorizedPanelsRepositoryImpl authorizedPanelsRepositoryImpl = (AuthorizedPanelsRepositoryImpl) secControlsUiControllerImpl2.authorizedPanelsRepository;
+                                    Set<String> stringSet = authorizedPanelsRepositoryImpl.instantiateSharedPrefs(((UserTrackerImpl) authorizedPanelsRepositoryImpl.userTracker).getUserHandle()).getStringSet("authorized_panels", EmptySet.INSTANCE);
+                                    stringSet.getClass();
+                                    final List<SecSelectionItem> arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(list, 10));
+                                    Iterator it = list.iterator();
+                                    while (it.hasNext()) {
+                                        ControlsServiceInfo controlsServiceInfo = (ControlsServiceInfo) it.next();
+                                        int i = controlsServiceInfo.serviceInfo.applicationInfo.uid;
+                                        CharSequence charSequenceLoadLabel = controlsServiceInfo.loadLabel();
+                                        Drawable drawableLoadIcon = controlsServiceInfo.loadIcon();
+                                        ComponentName componentName4 = controlsServiceInfo.componentName;
+                                        arrayList.add(new SecSelectionItem(charSequenceLoadLabel, drawableLoadIcon, componentName4, i, stringSet.contains(componentName4.getPackageName()) ? controlsServiceInfo.panelActivity : null));
+                                    }
+                                    final Function2 function2 = secControlsUiControllerImpl$show$4;
+                                    secControlsUiControllerImpl2.uiExecutor.execute(new Runnable() { // from class: com.android.systemui.controls.ui.SecControlsUiControllerImpl$createCallback$1$onServicesUpdated$1
+                                        @Override // java.lang.Runnable
+                                        public final void run() {
+                                            Function2 function22 = function2;
+                                            List list2 = arrayList;
+                                            SecControlsUiControllerImpl secControlsUiControllerImpl3 = secControlsUiControllerImpl2;
+                                            ControlsUtil controlsUtil = secControlsUiControllerImpl3.controlsUtil;
+                                            Context context3 = secControlsUiControllerImpl3.context;
+                                            List list3 = list;
+                                            controlsUtil.getClass();
+                                            function22.invoke(list2, ControlsUtil.getListOfServices(context3, list3));
+                                        }
+                                    });
+                                }
+                            };
+                        }
+                    }
+                }
+            }
+            secControlsUiControllerImpl.listingCallback = secControlsUiControllerImpl$createCallback$1;
+            ControlsListingController controlsListingController = (ControlsListingController) lazy.get();
+            SecControlsUiControllerImpl$createCallback$1 secControlsUiControllerImpl$createCallback$12 = secControlsUiControllerImpl.listingCallback;
+            if (secControlsUiControllerImpl$createCallback$12 == null) {
+                secControlsUiControllerImpl$createCallback$12 = null;
+            }
+            ControlsListingControllerImpl controlsListingControllerImpl = (ControlsListingControllerImpl) controlsListingController;
+            controlsListingControllerImpl.getClass();
+            controlsListingControllerImpl.addCallback((ControlsListingController.ControlsListingCallback) secControlsUiControllerImpl$createCallback$12);
+        }
+        ControlsAnimations controlsAnimations = ControlsAnimations.INSTANCE;
+        View viewRequireViewById = requireViewById(R.id.activity_root);
+        controlsAnimations.getClass();
+        ControlsAnimations.enterAnimation(viewRequireViewById).start();
     }
 
     @Override // androidx.appcompat.app.AppCompatActivity, androidx.fragment.app.FragmentActivity, android.app.Activity

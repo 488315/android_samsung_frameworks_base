@@ -83,9 +83,9 @@ public interface ICarrierMessagingService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ICarrierMessagingService)) {
-                return (ICarrierMessagingService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ICarrierMessagingService)) {
+                return (ICarrierMessagingService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -126,56 +126,56 @@ public interface ICarrierMessagingService extends IInterface {
             switch (i) {
                 case 1:
                     MessagePdu messagePdu = (MessagePdu) parcel.readTypedObject(MessagePdu.CREATOR);
-                    String readString = parcel.readString();
-                    int readInt = parcel.readInt();
-                    int readInt2 = parcel.readInt();
-                    ICarrierMessagingCallback asInterface = ICarrierMessagingCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string = parcel.readString();
+                    int i3 = parcel.readInt();
+                    int i4 = parcel.readInt();
+                    ICarrierMessagingCallback iCarrierMessagingCallbackAsInterface = ICarrierMessagingCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    filterSms(messagePdu, readString, readInt, readInt2, asInterface);
+                    filterSms(messagePdu, string, i3, i4, iCarrierMessagingCallbackAsInterface);
                     return true;
                 case 2:
-                    String readString2 = parcel.readString();
-                    int readInt3 = parcel.readInt();
-                    String readString3 = parcel.readString();
-                    int readInt4 = parcel.readInt();
-                    ICarrierMessagingCallback asInterface2 = ICarrierMessagingCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string2 = parcel.readString();
+                    int i5 = parcel.readInt();
+                    String string3 = parcel.readString();
+                    int i6 = parcel.readInt();
+                    ICarrierMessagingCallback iCarrierMessagingCallbackAsInterface2 = ICarrierMessagingCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    sendTextSms(readString2, readInt3, readString3, readInt4, asInterface2);
+                    sendTextSms(string2, i5, string3, i6, iCarrierMessagingCallbackAsInterface2);
                     return true;
                 case 3:
-                    byte[] createByteArray = parcel.createByteArray();
-                    int readInt5 = parcel.readInt();
-                    String readString4 = parcel.readString();
-                    int readInt6 = parcel.readInt();
-                    int readInt7 = parcel.readInt();
-                    ICarrierMessagingCallback asInterface3 = ICarrierMessagingCallback.Stub.asInterface(parcel.readStrongBinder());
+                    byte[] bArrCreateByteArray = parcel.createByteArray();
+                    int i7 = parcel.readInt();
+                    String string4 = parcel.readString();
+                    int i8 = parcel.readInt();
+                    int i9 = parcel.readInt();
+                    ICarrierMessagingCallback iCarrierMessagingCallbackAsInterface3 = ICarrierMessagingCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    sendDataSms(createByteArray, readInt5, readString4, readInt6, readInt7, asInterface3);
+                    sendDataSms(bArrCreateByteArray, i7, string4, i8, i9, iCarrierMessagingCallbackAsInterface3);
                     return true;
                 case 4:
-                    ArrayList<String> createStringArrayList = parcel.createStringArrayList();
-                    int readInt8 = parcel.readInt();
-                    String readString5 = parcel.readString();
-                    int readInt9 = parcel.readInt();
-                    ICarrierMessagingCallback asInterface4 = ICarrierMessagingCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ArrayList<String> arrayListCreateStringArrayList = parcel.createStringArrayList();
+                    int i10 = parcel.readInt();
+                    String string5 = parcel.readString();
+                    int i11 = parcel.readInt();
+                    ICarrierMessagingCallback iCarrierMessagingCallbackAsInterface4 = ICarrierMessagingCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    sendMultipartTextSms(createStringArrayList, readInt8, readString5, readInt9, asInterface4);
+                    sendMultipartTextSms(arrayListCreateStringArrayList, i10, string5, i11, iCarrierMessagingCallbackAsInterface4);
                     return true;
                 case 5:
                     Uri uri = (Uri) parcel.readTypedObject(Uri.CREATOR);
-                    int readInt10 = parcel.readInt();
+                    int i12 = parcel.readInt();
                     Uri uri2 = (Uri) parcel.readTypedObject(Uri.CREATOR);
-                    ICarrierMessagingCallback asInterface5 = ICarrierMessagingCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ICarrierMessagingCallback iCarrierMessagingCallbackAsInterface5 = ICarrierMessagingCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    sendMms(uri, readInt10, uri2, asInterface5);
+                    sendMms(uri, i12, uri2, iCarrierMessagingCallbackAsInterface5);
                     return true;
                 case 6:
                     Uri uri3 = (Uri) parcel.readTypedObject(Uri.CREATOR);
-                    int readInt11 = parcel.readInt();
+                    int i13 = parcel.readInt();
                     Uri uri4 = (Uri) parcel.readTypedObject(Uri.CREATOR);
-                    ICarrierMessagingCallback asInterface6 = ICarrierMessagingCallback.Stub.asInterface(parcel.readStrongBinder());
+                    ICarrierMessagingCallback iCarrierMessagingCallbackAsInterface6 = ICarrierMessagingCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    downloadMms(uri3, readInt11, uri4, asInterface6);
+                    downloadMms(uri3, i13, uri4, iCarrierMessagingCallbackAsInterface6);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -200,96 +200,96 @@ public interface ICarrierMessagingService extends IInterface {
 
             @Override // android.service.carrier.ICarrierMessagingService
             public void filterSms(MessagePdu messagePdu, String str, int i, int i2, ICarrierMessagingCallback iCarrierMessagingCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(messagePdu, 0);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeStrongInterface(iCarrierMessagingCallback);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(messagePdu, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeStrongInterface(iCarrierMessagingCallback);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.carrier.ICarrierMessagingService
             public void sendTextSms(String str, int i, String str2, int i2, ICarrierMessagingCallback iCarrierMessagingCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeInt(i);
-                    obtain.writeString(str2);
-                    obtain.writeInt(i2);
-                    obtain.writeStrongInterface(iCarrierMessagingCallback);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str2);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeStrongInterface(iCarrierMessagingCallback);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.carrier.ICarrierMessagingService
             public void sendDataSms(byte[] bArr, int i, String str, int i2, int i3, ICarrierMessagingCallback iCarrierMessagingCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeStrongInterface(iCarrierMessagingCallback);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeStrongInterface(iCarrierMessagingCallback);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.carrier.ICarrierMessagingService
             public void sendMultipartTextSms(List<String> list, int i, String str, int i2, ICarrierMessagingCallback iCarrierMessagingCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStringList(list);
-                    obtain.writeInt(i);
-                    obtain.writeString(str);
-                    obtain.writeInt(i2);
-                    obtain.writeStrongInterface(iCarrierMessagingCallback);
-                    this.mRemote.transact(4, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStringList(list);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeStrongInterface(iCarrierMessagingCallback);
+                    this.mRemote.transact(4, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.carrier.ICarrierMessagingService
             public void sendMms(Uri uri, int i, Uri uri2, ICarrierMessagingCallback iCarrierMessagingCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(uri, 0);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(uri2, 0);
-                    obtain.writeStrongInterface(iCarrierMessagingCallback);
-                    this.mRemote.transact(5, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(uri, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(uri2, 0);
+                    parcelObtain.writeStrongInterface(iCarrierMessagingCallback);
+                    this.mRemote.transact(5, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.service.carrier.ICarrierMessagingService
             public void downloadMms(Uri uri, int i, Uri uri2, ICarrierMessagingCallback iCarrierMessagingCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(uri, 0);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(uri2, 0);
-                    obtain.writeStrongInterface(iCarrierMessagingCallback);
-                    this.mRemote.transact(6, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(uri, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(uri2, 0);
+                    parcelObtain.writeStrongInterface(iCarrierMessagingCallback);
+                    this.mRemote.transact(6, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

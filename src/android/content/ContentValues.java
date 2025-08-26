@@ -5,6 +5,7 @@ import android.os.Parcelable;
 import android.util.ArrayMap;
 import android.util.Log;
 import com.android.internal.util.Preconditions;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -52,13 +53,13 @@ public final class ContentValues implements Parcelable {
     }
 
     @Deprecated
-    private ContentValues(HashMap<String, Object> hashMap) {
+    private ContentValues(HashMap<String, Object> map) {
         ArrayMap<String, Object> arrayMap = new ArrayMap<>();
         this.mMap = arrayMap;
-        arrayMap.putAll(hashMap);
+        arrayMap.putAll(map);
     }
 
-    private ContentValues(Parcel parcel) {
+    private ContentValues(Parcel parcel) throws IllegalAccessException, NoSuchFieldException, ClassNotFoundException, IOException, IllegalArgumentException, NegativeArraySizeException {
         ArrayMap<String, Object> arrayMap = new ArrayMap<>(parcel.readInt());
         this.mMap = arrayMap;
         parcel.readArrayMap(arrayMap, null);
@@ -350,7 +351,7 @@ public final class ContentValues implements Parcelable {
     }
 
     @Override // android.os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
         parcel.writeInt(this.mMap.size());
         parcel.writeArrayMap(this.mMap);
     }

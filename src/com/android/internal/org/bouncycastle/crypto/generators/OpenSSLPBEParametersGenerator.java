@@ -46,8 +46,8 @@ public class OpenSSLPBEParametersGenerator extends PBEParametersGenerator {
     public CipherParameters generateDerivedParameters(int i, int i2) {
         int i3 = i / 8;
         int i4 = i2 / 8;
-        byte[] generateDerivedKey = generateDerivedKey(i3 + i4);
-        return new ParametersWithIV(new KeyParameter(generateDerivedKey, 0, i3), generateDerivedKey, i3, i4);
+        byte[] bArrGenerateDerivedKey = generateDerivedKey(i3 + i4);
+        return new ParametersWithIV(new KeyParameter(bArrGenerateDerivedKey, 0, i3), bArrGenerateDerivedKey, i3, i4);
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.PBEParametersGenerator

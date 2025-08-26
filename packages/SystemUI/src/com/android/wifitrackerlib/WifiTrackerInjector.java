@@ -16,7 +16,6 @@ import com.samsung.android.wifi.SemWifiApCust;
 import com.sec.ims.settings.ImsProfile;
 import java.util.Set;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class WifiTrackerInjector {
     public final ConnectivityManager mConnectivityManager;
@@ -50,9 +49,9 @@ public class WifiTrackerInjector {
             if (i >= 0) {
                 z = i == 1;
             }
-            StringBuilder m = RowView$$ExternalSyntheticOutline0.m("Instant Hotspot isDeviceConfigEnabled ", " rollout:", z);
-            m.append(DeviceConfig.getBoolean(ImsProfile.PDN_WIFI, "shared_connectivity_enabled", false));
-            Log.i("WifiTrackerInjector", m.toString());
+            StringBuilder sbM = RowView$$ExternalSyntheticOutline0.m("Instant Hotspot isDeviceConfigEnabled ", " rollout:", z);
+            sbM.append(DeviceConfig.getBoolean(ImsProfile.PDN_WIFI, "shared_connectivity_enabled", false));
+            Log.i("WifiTrackerInjector", sbM.toString());
         }
         return z;
     }

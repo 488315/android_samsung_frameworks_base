@@ -9,7 +9,6 @@ import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class WidgetState {
     public static final int $stable = 8;
@@ -229,14 +228,14 @@ public final class WidgetState {
         float f3 = this.alpha;
         float f4 = this.scale;
         boolean z = this.gone;
-        StringBuilder m = CubicBezierEasing$$ExternalSyntheticOutline0.m("WidgetState(x=", f, ", y=", f2, ", width=");
-        ViewPager$$ExternalSyntheticOutline0.m(m, i, ", height=", i2, ", measureWidth=");
-        ViewPager$$ExternalSyntheticOutline0.m(m, i3, ", measureHeight=", i4, ", alpha=");
-        m.append(f3);
-        m.append(", scale=");
-        m.append(f4);
-        m.append(", gone=");
-        return MoveResult$$ExternalSyntheticOutline0.m(m, z, ")");
+        StringBuilder sbM = CubicBezierEasing$$ExternalSyntheticOutline0.m("WidgetState(x=", f, ", y=", f2, ", width=");
+        ViewPager$$ExternalSyntheticOutline0.m(sbM, i, ", height=", i2, ", measureWidth=");
+        ViewPager$$ExternalSyntheticOutline0.m(sbM, i3, ", measureHeight=", i4, ", alpha=");
+        sbM.append(f3);
+        sbM.append(", scale=");
+        sbM.append(f4);
+        sbM.append(", gone=");
+        return MoveResult$$ExternalSyntheticOutline0.m(sbM, z, ")");
     }
 
     public WidgetState(float f, float f2, int i, int i2, int i3, int i4, float f3, float f4, boolean z) {

@@ -2,14 +2,12 @@ package com.samsung.android.sdk.routines.v3.data;
 
 import com.android.keyguard.ClockEventController$$ExternalSyntheticOutline0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ActionResult {
     public final int customErrorCode;
     public final ParameterValues outputValues;
     public final ResultCode resultCode;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Default extends ActionResult {
         public Default(ResultCode resultCode, ParameterValues parameterValues) {
             super(resultCode, parameterValues, 0);
@@ -20,7 +18,6 @@ public class ActionResult {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Error extends ActionResult {
         public Error(int i, ParameterValues parameterValues) {
             super(i, parameterValues, 0);
@@ -31,7 +28,6 @@ public class ActionResult {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public enum ResultCode {
         SUCCESS(1),
         /* JADX INFO: Fake field, exist only in values array */

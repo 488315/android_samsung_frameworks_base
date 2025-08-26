@@ -115,7 +115,7 @@ class AudioTask implements Runnable {
         Log.i(this.mTAG, "AudioTask : stop end");
     }
 
-    public void stopBargeInAudioRecord() {
+    public void stopBargeInAudioRecord() throws IllegalStateException {
         Log.i(this.mTAG, "stopBargeInAudioRecord start");
         if (this.rec != null) {
             Log.d(this.mTAG, "Call rec.stop start");
@@ -138,8 +138,8 @@ class AudioTask implements Runnable {
     private int getMMUIRecognitionResult(short[] sArr, int i) {
         MMUIRecognizer mMUIRecognizer;
         MMUIRecognizer mMUIRecognizer2 = this.aMMUIRecognizer;
-        int RECThread = mMUIRecognizer2 != null ? mMUIRecognizer2.RECThread(sArr) : 0;
-        if (RECThread == -2) {
+        int iRECThread = mMUIRecognizer2 != null ? mMUIRecognizer2.RECThread(sArr) : 0;
+        if (iRECThread == -2) {
             if (this.done) {
                 Log.e(this.mTAG, "readByteBlock return -1 : getMMUIRecognitionResult - Section1");
                 return -1;
@@ -155,7 +155,7 @@ class AudioTask implements Runnable {
             Log.e(this.mTAG, "readByteBlock return -1 : getMMUIRecognitionResult - Section2");
             return -1;
         }
-        if (RECThread == 2 && (mMUIRecognizer = this.aMMUIRecognizer) != null) {
+        if (iRECThread == 2 && (mMUIRecognizer = this.aMMUIRecognizer) != null) {
             if (z) {
                 Log.e(this.mTAG, "readByteBlock return -1 : getMMUIRecognitionResult - Section3");
                 return -1;
@@ -221,12 +221,12 @@ class AudioTask implements Runnable {
     }
 
     private void SendHandlerMessage(String[] strArr) {
-        Message obtainMessage = this.handler.obtainMessage();
+        Message messageObtainMessage = this.handler.obtainMessage();
         Bundle bundle = new Bundle();
         bundle.putStringArray("recognition_result", strArr);
-        obtainMessage.setData(bundle);
+        messageObtainMessage.setData(bundle);
         try {
-            this.handler.sendMessage(obtainMessage);
+            this.handler.sendMessage(messageObtainMessage);
         } catch (IllegalStateException e) {
             Log.e(this.mTAG, "IllegalStateException " + e.getMessage());
             stop();
@@ -240,31 +240,31 @@ class AudioTask implements Runnable {
     }
 
     protected AudioRecord getAudioRecord(int i) {
-        AudioRecord audioRecord;
+        AudioRecord audioRecordBuild;
         Log.i(this.mTAG, "getAudioRecord modified by jy");
         try {
-            audioRecord = new AudioRecord.Builder().semSetConcurrentCapture(true).setAudioFormat(new AudioFormat.Builder().setChannelMask(16).setEncoding(2).setSampleRate(16000).build()).setBufferSizeInBytes(8192).build();
-            if (audioRecord != null) {
+            audioRecordBuild = new AudioRecord.Builder().semSetConcurrentCapture(true).setAudioFormat(new AudioFormat.Builder().setChannelMask(16).setEncoding(2).setSampleRate(16000).build()).setBufferSizeInBytes(8192).build();
+            if (audioRecordBuild != null) {
                 try {
-                    if (audioRecord.getState() != 1) {
+                    if (audioRecordBuild.getState() != 1) {
                         Log.d(this.mTAG, "getAudioRecord for " + i + "=false, got !initialized");
-                        audioRecord.release();
+                        audioRecordBuild.release();
                         return null;
                     }
                 } catch (IllegalArgumentException unused) {
                     Log.e(this.mTAG, "getAudioRecord for " + i + "=false, IllegalArgumentException");
                     Log.e(this.mTAG, "got IllegalArgumentException using source=" + i + ", also 16000 16 2 8192");
-                    if (audioRecord != null) {
-                        audioRecord.release();
+                    if (audioRecordBuild != null) {
+                        audioRecordBuild.release();
                     }
                     return null;
                 }
             }
             Log.d(this.mTAG, "got AudioRecord using source=" + i + ", also 16000 16 2 8192");
             Log.i(this.mTAG, "getAudioRecord for " + i + "=true");
-            return audioRecord;
+            return audioRecordBuild;
         } catch (IllegalArgumentException unused2) {
-            audioRecord = null;
+            audioRecordBuild = null;
         }
     }
 
@@ -279,11 +279,7 @@ class AudioTask implements Runnable {
             this.mEmbeddedEngineLanguage = 3;
         } else if (i == 9) {
             this.mEmbeddedEngineLanguage = 1;
-        } else if (i == 13) {
-            this.mEmbeddedEngineLanguage = 2;
-        } else if (i == 12) {
-            this.mEmbeddedEngineLanguage = 2;
-        } else if (i == 14) {
+        } else if (i == 13 || i == 12 || i == 14) {
             this.mEmbeddedEngineLanguage = 2;
         }
         Log.i(this.mTAG, "mEmbeddedEngineLanguage : " + this.mEmbeddedEngineLanguage);

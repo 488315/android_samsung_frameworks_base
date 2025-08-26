@@ -23,7 +23,6 @@ import kotlin.jvm.internal.Intrinsics;
 import kotlin.jvm.internal.Ref$BooleanRef;
 import kotlin.jvm.internal.Ref$ObjectRef;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class DragAndDropNode extends Modifier.Node implements TraversableNode, DragAndDropModifierNode, LayoutAwareModifierNode, DragAndDropTargetModifierNode, DragAndDropTarget {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -34,10 +33,8 @@ public final class DragAndDropNode extends Modifier.Node implements TraversableN
     public DragAndDropTarget thisDragAndDropTarget;
     public final Object traverseKey;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     final class Companion {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         final class DragAndDropTraversableKey {
             public static final DragAndDropTraversableKey INSTANCE = new DragAndDropTraversableKey();
 
@@ -57,12 +54,13 @@ public final class DragAndDropNode extends Modifier.Node implements TraversableN
         new Companion(null);
     }
 
+    /* JADX WARN: Multi-variable type inference failed */
     public DragAndDropNode() {
         this(null, 0 == true ? 1 : 0, 3, 0 == true ? 1 : 0);
     }
 
     /* renamed from: drag-12SF9DM, reason: not valid java name */
-    public final void m356drag12SF9DM(final DragAndDropTransferData dragAndDropTransferData, final long j, final Function1 function1) {
+    public final void m357drag12SF9DM(final DragAndDropTransferData dragAndDropTransferData, final long j, final Function1 function1) {
         if (this.onStartTransfer != null) {
             InlineClassHelperKt.throwIllegalStateException("Check failed.");
         }
@@ -75,10 +73,10 @@ public final class DragAndDropNode extends Modifier.Node implements TraversableN
             @Override // kotlin.jvm.functions.Function2
             public final Object invoke(Object obj, Object obj2) {
                 long j2 = ((Offset) obj2).packedValue;
-                DragAndDropTransferData dragAndDropTransferData2 = DragAndDropTransferData.this;
+                DragAndDropTransferData dragAndDropTransferData2 = dragAndDropTransferData;
                 long j3 = j;
                 AndroidDragAndDropManager$requestDragAndDropTransfer$dragAndDropSourceScope$1 androidDragAndDropManager$requestDragAndDropTransfer$dragAndDropSourceScope$1 = (AndroidDragAndDropManager$requestDragAndDropTransfer$dragAndDropSourceScope$1) ((DragAndDropStartTransferScope) obj);
-                androidDragAndDropManager$requestDragAndDropTransfer$dragAndDropSourceScope$1.$isTransferStarted.element = ((Boolean) androidDragAndDropManager$requestDragAndDropTransfer$dragAndDropSourceScope$1.this$0.startDrag.invoke(dragAndDropTransferData2, Size.m413boximpl(j3), function1)).booleanValue();
+                androidDragAndDropManager$requestDragAndDropTransfer$dragAndDropSourceScope$1.$isTransferStarted.element = ((Boolean) androidDragAndDropManager$requestDragAndDropTransfer$dragAndDropSourceScope$1.this$0.startDrag.invoke(dragAndDropTransferData2, Size.m415boximpl(j3), function1)).booleanValue();
                 return Unit.INSTANCE;
             }
         };
@@ -95,7 +93,7 @@ public final class DragAndDropNode extends Modifier.Node implements TraversableN
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                return Boolean.valueOf(Ref$BooleanRef.this.element);
+                return Boolean.valueOf(ref$BooleanRef.element);
             }
         };
         final InnerNodeCoordinator innerNodeCoordinator = DelegatableNodeKt.requireLayoutNode(this).nodes.innerCoordinator;
@@ -107,7 +105,7 @@ public final class DragAndDropNode extends Modifier.Node implements TraversableN
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 DragAndDropNode dragAndDropNode = (DragAndDropNode) obj;
                 if (!dragAndDropNode.isAttached) {
                     return TraversableNode$Companion$TraverseDescendantsAction.SkipSubtreeAndContinueTraversal;
@@ -119,19 +117,19 @@ public final class DragAndDropNode extends Modifier.Node implements TraversableN
                 long j3 = j2;
                 Offset.Companion.getClass();
                 long j4 = Offset.Unspecified;
-                if (Offset.m396equalsimpl0(j3, j4)) {
-                    function2.invoke(androidDragAndDropManager$requestDragAndDropTransfer$dragAndDropSourceScope$1, Offset.m393boximpl(j4));
+                if (Offset.m398equalsimpl0(j3, j4)) {
+                    function2.invoke(androidDragAndDropManager$requestDragAndDropTransfer$dragAndDropSourceScope$1, Offset.m395boximpl(j4));
                 } else {
-                    long mo612localPositionOfS_NoaFU = DelegatableNodeKt.requireLayoutNode(dragAndDropNode).nodes.innerCoordinator.mo612localPositionOfS_NoaFU(innerNodeCoordinator, j2, true);
-                    if (!SizeKt.m421toRectuvyYCjk(IntSizeKt.m864toSizeozmzZPI(dragAndDropNode.size)).m405containsk4lQ0M(mo612localPositionOfS_NoaFU)) {
+                    long jMo614localPositionOfS_NoaFU = DelegatableNodeKt.requireLayoutNode(dragAndDropNode).nodes.innerCoordinator.mo614localPositionOfS_NoaFU(innerNodeCoordinator, j2, true);
+                    if (!SizeKt.m423toRectuvyYCjk(IntSizeKt.m866toSizeozmzZPI(dragAndDropNode.size)).m407containsk4lQ0M(jMo614localPositionOfS_NoaFU)) {
                         return TraversableNode$Companion$TraverseDescendantsAction.ContinueTraversal;
                     }
-                    function2.invoke(androidDragAndDropManager$requestDragAndDropTransfer$dragAndDropSourceScope$1, Offset.m393boximpl(mo612localPositionOfS_NoaFU));
+                    function2.invoke(androidDragAndDropManager$requestDragAndDropTransfer$dragAndDropSourceScope$1, Offset.m395boximpl(jMo614localPositionOfS_NoaFU));
                 }
                 return ((Boolean) function0.invoke()).booleanValue() ? TraversableNode$Companion$TraverseDescendantsAction.CancelTraversal : TraversableNode$Companion$TraverseDescendantsAction.ContinueTraversal;
             }
         };
-        if (function12.mo779invoke(this) == TraversableNode$Companion$TraverseDescendantsAction.ContinueTraversal) {
+        if (function12.mo781invoke(this) == TraversableNode$Companion$TraverseDescendantsAction.ContinueTraversal) {
             TraversableNodeKt.traverseDescendants(this, function12);
         }
         this.onStartTransfer = null;
@@ -163,28 +161,28 @@ public final class DragAndDropNode extends Modifier.Node implements TraversableN
 
     @Override // androidx.compose.ui.draganddrop.DragAndDropTarget
     public final void onEnded(final DragAndDropEvent dragAndDropEvent) {
-        Function1 function1 = new Function1() { // from class: androidx.compose.ui.draganddrop.DragAndDropNode$onEnded$1
+        Function1 function1 = new Function1() { // from class: androidx.compose.ui.draganddrop.DragAndDropNode.onEnded.1
             {
                 super(1);
             }
 
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
-            public final Object mo779invoke(Object obj) {
+            public final Object mo781invoke(Object obj) {
                 DragAndDropNode dragAndDropNode = (DragAndDropNode) obj;
                 if (!dragAndDropNode.node.isAttached) {
                     return TraversableNode$Companion$TraverseDescendantsAction.SkipSubtreeAndContinueTraversal;
                 }
                 DragAndDropTarget dragAndDropTarget = dragAndDropNode.thisDragAndDropTarget;
                 if (dragAndDropTarget != null) {
-                    dragAndDropTarget.onEnded(DragAndDropEvent.this);
+                    dragAndDropTarget.onEnded(dragAndDropEvent);
                 }
                 dragAndDropNode.thisDragAndDropTarget = null;
                 dragAndDropNode.lastChildDragAndDropModifierNode = null;
                 return TraversableNode$Companion$TraverseDescendantsAction.ContinueTraversal;
             }
         };
-        if (function1.mo779invoke(this) != TraversableNode$Companion$TraverseDescendantsAction.ContinueTraversal) {
+        if (function1.mo781invoke(this) != TraversableNode$Companion$TraverseDescendantsAction.ContinueTraversal) {
             return;
         }
         TraversableNodeKt.traverseDescendants(this, function1);
@@ -221,7 +219,7 @@ public final class DragAndDropNode extends Modifier.Node implements TraversableN
         TraversableNode traversableNode;
         DragAndDropNode dragAndDropNode;
         DragAndDropNode dragAndDropNode2 = this.lastChildDragAndDropModifierNode;
-        if (dragAndDropNode2 == null || !DragAndDropNodeKt.m357access$containsUv8p0NA(dragAndDropNode2, DragAndDrop_androidKt.getPositionInRoot(dragAndDropEvent))) {
+        if (dragAndDropNode2 == null || !DragAndDropNodeKt.m358access$containsUv8p0NA(dragAndDropNode2, DragAndDrop_androidKt.getPositionInRoot(dragAndDropEvent))) {
             if (this.node.isAttached) {
                 final Ref$ObjectRef ref$ObjectRef = new Ref$ObjectRef();
                 TraversableNodeKt.traverseDescendants(this, new Function1() { // from class: androidx.compose.ui.draganddrop.DragAndDropNode$onMoved$$inlined$firstDescendantOrNull$1
@@ -233,16 +231,16 @@ public final class DragAndDropNode extends Modifier.Node implements TraversableN
                     /* JADX WARN: Type inference failed for: r4v1, types: [T, androidx.compose.ui.node.TraversableNode] */
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
-                    public final Object mo779invoke(Object obj) {
+                    public final Object mo781invoke(Object obj) {
                         ?? r4 = (TraversableNode) obj;
                         DragAndDropNode dragAndDropNode3 = (DragAndDropNode) r4;
                         DragAndDropNode dragAndDropNode4 = this;
                         int i = DragAndDropNode.$r8$clinit;
                         dragAndDropNode4.getClass();
-                        if (!((AndroidComposeView) DelegatableNodeKt.requireOwner(dragAndDropNode4)).dragAndDropManager.interestedTargets.contains(dragAndDropNode3) || !DragAndDropNodeKt.m357access$containsUv8p0NA(dragAndDropNode3, DragAndDrop_androidKt.getPositionInRoot(dragAndDropEvent))) {
+                        if (!((AndroidComposeView) DelegatableNodeKt.requireOwner(dragAndDropNode4)).dragAndDropManager.interestedTargets.contains(dragAndDropNode3) || !DragAndDropNodeKt.m358access$containsUv8p0NA(dragAndDropNode3, DragAndDrop_androidKt.getPositionInRoot(dragAndDropEvent))) {
                             return TraversableNode$Companion$TraverseDescendantsAction.ContinueTraversal;
                         }
-                        Ref$ObjectRef.this.element = r4;
+                        ref$ObjectRef.element = r4;
                         return TraversableNode$Companion$TraverseDescendantsAction.CancelTraversal;
                     }
                 });
@@ -289,7 +287,7 @@ public final class DragAndDropNode extends Modifier.Node implements TraversableN
 
     @Override // androidx.compose.ui.node.LayoutAwareModifierNode
     /* renamed from: onRemeasured-ozmzZPI */
-    public final void mo49onRemeasuredozmzZPI(long j) {
+    public final void mo50onRemeasuredozmzZPI(long j) {
         this.size = j;
     }
 

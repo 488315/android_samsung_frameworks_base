@@ -16,21 +16,21 @@ public class SemSmartClipViewHelper {
             Log.e(TAG, "addMetaTag : Invalid metatag");
             return false;
         }
-        SemSmartClipMetaTagArray semGetSmartClipTags = view.semGetSmartClipTags();
-        if (semGetSmartClipTags == null) {
-            semGetSmartClipTags = new SmartClipMetaTagArrayImpl();
-            view.semSetSmartClipTags(semGetSmartClipTags);
+        SemSmartClipMetaTagArray semSmartClipMetaTagArraySemGetSmartClipTags = view.semGetSmartClipTags();
+        if (semSmartClipMetaTagArraySemGetSmartClipTags == null) {
+            semSmartClipMetaTagArraySemGetSmartClipTags = new SmartClipMetaTagArrayImpl();
+            view.semSetSmartClipTags(semSmartClipMetaTagArraySemGetSmartClipTags);
         }
-        semGetSmartClipTags.add(semSmartClipMetaTag);
+        semSmartClipMetaTagArraySemGetSmartClipTags.add(semSmartClipMetaTag);
         return true;
     }
 
     public static int removeMetaTag(View view, String str) {
-        SemSmartClipMetaTagArray semGetSmartClipTags;
-        if (view == null || str == null || (semGetSmartClipTags = view.semGetSmartClipTags()) == null) {
+        SemSmartClipMetaTagArray semSmartClipMetaTagArraySemGetSmartClipTags;
+        if (view == null || str == null || (semSmartClipMetaTagArraySemGetSmartClipTags = view.semGetSmartClipTags()) == null) {
             return 0;
         }
-        return semGetSmartClipTags.removeMetaTags(str);
+        return semSmartClipMetaTagArraySemGetSmartClipTags.removeMetaTags(str);
     }
 
     public static SemSmartClipMetaTagArray getMetaTags(View view) {

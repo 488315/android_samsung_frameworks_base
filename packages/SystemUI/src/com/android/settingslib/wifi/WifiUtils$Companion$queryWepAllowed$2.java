@@ -16,7 +16,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.Dispatchers;
 import kotlinx.coroutines.ExecutorsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class WifiUtils$Companion$queryWepAllowed$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ WifiManager $this_queryWepAllowed;
@@ -59,7 +58,7 @@ final class WifiUtils$Companion$queryWepAllowed$2 extends SuspendLambda implemen
         wifiManager.queryWepAllowed(ExecutorsKt.asExecutor(Dispatchers.Default), new Consumer() { // from class: com.android.settingslib.wifi.WifiUtils$Companion$queryWepAllowed$2$1$1
             @Override // java.util.function.Consumer
             public final void accept(Object obj2) {
-                CancellableContinuation cancellableContinuation = CancellableContinuation.this;
+                CancellableContinuation cancellableContinuation = cancellableContinuationImpl;
                 int i2 = Result.$r8$clinit;
                 cancellableContinuation.resumeWith((Boolean) obj2);
             }

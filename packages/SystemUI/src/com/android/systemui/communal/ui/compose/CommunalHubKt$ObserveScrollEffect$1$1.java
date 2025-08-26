@@ -14,7 +14,6 @@ import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.SafeFlow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class CommunalHubKt$ObserveScrollEffect$1$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ BaseCommunalViewModel $communalViewModel;
@@ -44,22 +43,22 @@ final class CommunalHubKt$ObserveScrollEffect$1$1 extends SuspendLambda implemen
         int i = this.label;
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
-            SafeFlow snapshotFlow = SnapshotStateKt.snapshotFlow(new CommunalHubKt$$ExternalSyntheticLambda8(this.$gridState, 2));
+            SafeFlow safeFlowSnapshotFlow = SnapshotStateKt.snapshotFlow(new CommunalHubKt$$ExternalSyntheticLambda8(this.$gridState, 2));
             final BaseCommunalViewModel baseCommunalViewModel = this.$communalViewModel;
             FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.communal.ui.compose.CommunalHubKt$ObserveScrollEffect$1$1.2
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 public final Object emit(Object obj2, Continuation continuation) {
                     Pair pair = (Pair) obj2;
-                    int intValue = ((Number) pair.getFirst()).intValue();
-                    int intValue2 = ((Number) pair.getSecond()).intValue();
-                    BaseCommunalViewModel baseCommunalViewModel2 = BaseCommunalViewModel.this;
-                    baseCommunalViewModel2.currentScrollIndex = intValue;
-                    baseCommunalViewModel2.currentScrollOffset = intValue2;
+                    int iIntValue = ((Number) pair.getFirst()).intValue();
+                    int iIntValue2 = ((Number) pair.getSecond()).intValue();
+                    BaseCommunalViewModel baseCommunalViewModel2 = baseCommunalViewModel;
+                    baseCommunalViewModel2.currentScrollIndex = iIntValue;
+                    baseCommunalViewModel2.currentScrollOffset = iIntValue2;
                     return Unit.INSTANCE;
                 }
             };
             this.label = 1;
-            if (snapshotFlow.collect(flowCollector, this) == coroutineSingletons) {
+            if (safeFlowSnapshotFlow.collect(flowCollector, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

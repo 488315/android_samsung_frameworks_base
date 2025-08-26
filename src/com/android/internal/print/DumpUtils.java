@@ -13,17 +13,17 @@ import android.provider.Telephony;
 import android.service.print.PrinterCapabilitiesProto;
 import com.android.internal.util.dump.DualDumpOutputStream;
 
-/* loaded from: classes3.dex */
+/* loaded from: classes.dex */
 public class DumpUtils {
     public static void writePrinterId(DualDumpOutputStream dualDumpOutputStream, String str, long j, PrinterId printerId) {
-        long start = dualDumpOutputStream.start(str, j);
+        long jStart = dualDumpOutputStream.start(str, j);
         com.android.internal.util.dump.DumpUtils.writeComponentName(dualDumpOutputStream, "service_name", 1146756268033L, printerId.getServiceName());
         dualDumpOutputStream.write("local_id", 1138166333442L, printerId.getLocalId());
-        dualDumpOutputStream.end(start);
+        dualDumpOutputStream.end(jStart);
     }
 
     public static void writePrinterCapabilities(Context context, DualDumpOutputStream dualDumpOutputStream, String str, long j, PrinterCapabilitiesInfo printerCapabilitiesInfo) {
-        long start = dualDumpOutputStream.start(str, j);
+        long jStart = dualDumpOutputStream.start(str, j);
         writeMargins(dualDumpOutputStream, "min_margins", 1146756268033L, printerCapabilitiesInfo.getMinMargins());
         int size = printerCapabilitiesInfo.getMediaSizes().size();
         for (int i = 0; i < size; i++) {
@@ -48,12 +48,12 @@ public class DumpUtils {
         if ((printerCapabilitiesInfo.getDuplexModes() & 4) != 0) {
             dualDumpOutputStream.write("duplex_modes", PrinterCapabilitiesProto.DUPLEX_MODES, 4);
         }
-        dualDumpOutputStream.end(start);
+        dualDumpOutputStream.end(jStart);
     }
 
     public static void writePrinterInfo(Context context, DualDumpOutputStream dualDumpOutputStream, String str, long j, PrinterInfo printerInfo) {
         DualDumpOutputStream dualDumpOutputStream2;
-        long start = dualDumpOutputStream.start(str, j);
+        long jStart = dualDumpOutputStream.start(str, j);
         writePrinterId(dualDumpOutputStream, "id", 1146756268033L, printerInfo.getId());
         dualDumpOutputStream.write("name", 1138166333442L, printerInfo.getName());
         dualDumpOutputStream.write("status", 1159641169923L, printerInfo.getStatus());
@@ -65,39 +65,39 @@ public class DumpUtils {
         } else {
             dualDumpOutputStream2 = dualDumpOutputStream;
         }
-        dualDumpOutputStream2.end(start);
+        dualDumpOutputStream2.end(jStart);
     }
 
     public static void writeMediaSize(Context context, DualDumpOutputStream dualDumpOutputStream, String str, long j, PrintAttributes.MediaSize mediaSize) {
-        long start = dualDumpOutputStream.start(str, j);
+        long jStart = dualDumpOutputStream.start(str, j);
         dualDumpOutputStream.write("id", 1138166333441L, mediaSize.getId());
         dualDumpOutputStream.write("label", 1138166333442L, mediaSize.getLabel(context.getPackageManager()));
         dualDumpOutputStream.write("height_mils", 1120986464259L, mediaSize.getHeightMils());
         dualDumpOutputStream.write("width_mils", 1120986464260L, mediaSize.getWidthMils());
-        dualDumpOutputStream.end(start);
+        dualDumpOutputStream.end(jStart);
     }
 
     public static void writeResolution(DualDumpOutputStream dualDumpOutputStream, String str, long j, PrintAttributes.Resolution resolution) {
-        long start = dualDumpOutputStream.start(str, j);
+        long jStart = dualDumpOutputStream.start(str, j);
         dualDumpOutputStream.write("id", 1138166333441L, resolution.getId());
         dualDumpOutputStream.write("label", 1138166333442L, resolution.getLabel());
         dualDumpOutputStream.write("horizontal_DPI", 1120986464259L, resolution.getHorizontalDpi());
         dualDumpOutputStream.write("veritical_DPI", 1120986464260L, resolution.getVerticalDpi());
-        dualDumpOutputStream.end(start);
+        dualDumpOutputStream.end(jStart);
     }
 
     public static void writeMargins(DualDumpOutputStream dualDumpOutputStream, String str, long j, PrintAttributes.Margins margins) {
-        long start = dualDumpOutputStream.start(str, j);
+        long jStart = dualDumpOutputStream.start(str, j);
         dualDumpOutputStream.write("top_mils", 1120986464257L, margins.getTopMils());
         dualDumpOutputStream.write("left_mils", 1120986464258L, margins.getLeftMils());
         dualDumpOutputStream.write("right_mils", 1120986464259L, margins.getRightMils());
         dualDumpOutputStream.write("bottom_mils", 1120986464260L, margins.getBottomMils());
-        dualDumpOutputStream.end(start);
+        dualDumpOutputStream.end(jStart);
     }
 
     public static void writePrintAttributes(Context context, DualDumpOutputStream dualDumpOutputStream, String str, long j, PrintAttributes printAttributes) {
         DualDumpOutputStream dualDumpOutputStream2;
-        long start = dualDumpOutputStream.start(str, j);
+        long jStart = dualDumpOutputStream.start(str, j);
         PrintAttributes.MediaSize mediaSize = printAttributes.getMediaSize();
         if (mediaSize != null) {
             dualDumpOutputStream2 = dualDumpOutputStream;
@@ -116,11 +116,11 @@ public class DumpUtils {
         }
         dualDumpOutputStream2.write("color_mode", 1159641169925L, printAttributes.getColorMode());
         dualDumpOutputStream2.write(Telephony.ServiceStateTable.DUPLEX_MODE, 1159641169926L, printAttributes.getDuplexMode());
-        dualDumpOutputStream2.end(start);
+        dualDumpOutputStream2.end(jStart);
     }
 
     public static void writePrintDocumentInfo(DualDumpOutputStream dualDumpOutputStream, String str, long j, PrintDocumentInfo printDocumentInfo) {
-        long start = dualDumpOutputStream.start(str, j);
+        long jStart = dualDumpOutputStream.start(str, j);
         dualDumpOutputStream.write("name", 1138166333441L, printDocumentInfo.getName());
         int pageCount = printDocumentInfo.getPageCount();
         if (pageCount != -1) {
@@ -128,18 +128,18 @@ public class DumpUtils {
         }
         dualDumpOutputStream.write("content_type", 1120986464259L, printDocumentInfo.getContentType());
         dualDumpOutputStream.write("data_size", 1112396529668L, printDocumentInfo.getDataSize());
-        dualDumpOutputStream.end(start);
+        dualDumpOutputStream.end(jStart);
     }
 
     public static void writePageRange(DualDumpOutputStream dualDumpOutputStream, String str, long j, PageRange pageRange) {
-        long start = dualDumpOutputStream.start(str, j);
+        long jStart = dualDumpOutputStream.start(str, j);
         dualDumpOutputStream.write("start", 1120986464257L, pageRange.getStart());
         dualDumpOutputStream.write("end", 1120986464258L, pageRange.getEnd());
-        dualDumpOutputStream.end(start);
+        dualDumpOutputStream.end(jStart);
     }
 
     public static void writePrintJobInfo(Context context, DualDumpOutputStream dualDumpOutputStream, String str, long j, PrintJobInfo printJobInfo) {
-        long start = dualDumpOutputStream.start(str, j);
+        long jStart = dualDumpOutputStream.start(str, j);
         dualDumpOutputStream.write("label", 1138166333441L, printJobInfo.getLabel());
         PrintJobId id = printJobInfo.getId();
         if (id != null) {
@@ -181,6 +181,6 @@ public class DumpUtils {
         if (status != null) {
             dualDumpOutputStream.write("status", 1138166333453L, status.toString());
         }
-        dualDumpOutputStream.end(start);
+        dualDumpOutputStream.end(jStart);
     }
 }

@@ -45,12 +45,12 @@ public class ScreenCapture {
     }
 
     public static ScreenshotHardwareBuffer captureDisplay(DisplayCaptureArgs displayCaptureArgs) {
-        SynchronousScreenCaptureListener createSyncCaptureListener = createSyncCaptureListener();
-        if (captureDisplay(displayCaptureArgs, createSyncCaptureListener) != 0) {
+        SynchronousScreenCaptureListener synchronousScreenCaptureListenerCreateSyncCaptureListener = createSyncCaptureListener();
+        if (captureDisplay(displayCaptureArgs, synchronousScreenCaptureListenerCreateSyncCaptureListener) != 0) {
             return null;
         }
         try {
-            return createSyncCaptureListener.getBuffer();
+            return synchronousScreenCaptureListenerCreateSyncCaptureListener.getBuffer();
         } catch (Exception unused) {
             return null;
         }
@@ -65,12 +65,12 @@ public class ScreenCapture {
     }
 
     public static ScreenshotHardwareBuffer captureLayers(LayerCaptureArgs layerCaptureArgs) {
-        SynchronousScreenCaptureListener createSyncCaptureListener = createSyncCaptureListener();
-        if (nativeCaptureLayers(layerCaptureArgs, createSyncCaptureListener.mNativeObject, Flags.syncScreenCapture()) != 0) {
+        SynchronousScreenCaptureListener synchronousScreenCaptureListenerCreateSyncCaptureListener = createSyncCaptureListener();
+        if (nativeCaptureLayers(layerCaptureArgs, synchronousScreenCaptureListenerCreateSyncCaptureListener.mNativeObject, Flags.syncScreenCapture()) != 0) {
             return null;
         }
         try {
-            return createSyncCaptureListener.getBuffer();
+            return synchronousScreenCaptureListenerCreateSyncCaptureListener.getBuffer();
         } catch (Exception unused) {
             return null;
         }
@@ -136,7 +136,7 @@ public class ScreenCapture {
                 Log.w(ScreenCapture.TAG, "Failed to take screenshot. Null screenshot object");
                 return null;
             }
-            Bitmap wrapHardwareBuffer = Bitmap.wrapHardwareBuffer(hardwareBuffer, this.mColorSpace);
+            Bitmap bitmapWrapHardwareBuffer = Bitmap.wrapHardwareBuffer(hardwareBuffer, this.mColorSpace);
             HardwareBuffer hardwareBuffer2 = this.mGainmap;
             if (hardwareBuffer2 != null) {
                 Gainmap gainmap = new Gainmap(Bitmap.wrapHardwareBuffer(hardwareBuffer2, null));
@@ -148,9 +148,9 @@ public class ScreenCapture {
                 gainmap.setEpsilonHdr(EPSILON, EPSILON, EPSILON);
                 gainmap.setMinDisplayRatioForHdrTransition(1.0f);
                 gainmap.setDisplayRatioForFullHdr(this.mHdrSdrRatio);
-                wrapHardwareBuffer.setGainmap(gainmap);
+                bitmapWrapHardwareBuffer.setGainmap(gainmap);
             }
-            return wrapHardwareBuffer;
+            return bitmapWrapHardwareBuffer;
         }
     }
 
@@ -212,11 +212,11 @@ public class ScreenCapture {
             this.mAllowProtected = parcel.readBoolean();
             this.mUid = parcel.readLong();
             this.mGrayscale = parcel.readBoolean();
-            int readInt = parcel.readInt();
-            if (readInt > 0) {
-                this.mExcludeLayers = new SurfaceControl[readInt];
-                for (int i = 0; i < readInt; i++) {
-                    this.mExcludeLayers[i] = SurfaceControl.CREATOR.createFromParcel(parcel);
+            int i = parcel.readInt();
+            if (i > 0) {
+                this.mExcludeLayers = new SurfaceControl[i];
+                for (int i2 = 0; i2 < i; i2++) {
+                    this.mExcludeLayers[i2] = SurfaceControl.CREATOR.createFromParcel(parcel);
                 }
             } else {
                 this.mExcludeLayers = null;
@@ -277,7 +277,7 @@ public class ScreenCapture {
 
             public T setPixelFormat(int i) {
                 this.mPixelFormat = i;
-                return getThis();
+                return (T) getThis();
             }
 
             public T setSourceCrop(Rect rect) {
@@ -286,55 +286,55 @@ public class ScreenCapture {
                 } else {
                     this.mSourceCrop.set(rect);
                 }
-                return getThis();
+                return (T) getThis();
             }
 
             public T setFrameScale(float f) {
                 this.mFrameScaleX = f;
                 this.mFrameScaleY = f;
-                return getThis();
+                return (T) getThis();
             }
 
             public T setFrameScale(float f, float f2) {
                 this.mFrameScaleX = f;
                 this.mFrameScaleY = f2;
-                return getThis();
+                return (T) getThis();
             }
 
             public T setCaptureSecureLayers(boolean z) {
                 this.mCaptureSecureLayers = z;
-                return getThis();
+                return (T) getThis();
             }
 
             public T setAllowProtected(boolean z) {
                 this.mAllowProtected = z;
-                return getThis();
+                return (T) getThis();
             }
 
             public T setUid(long j) {
                 this.mUid = j;
-                return getThis();
+                return (T) getThis();
             }
 
             public T setGrayscale(boolean z) {
                 this.mGrayscale = z;
-                return getThis();
+                return (T) getThis();
             }
 
             public T setExcludeLayers(SurfaceControl[] surfaceControlArr) {
                 this.mExcludeLayers = surfaceControlArr;
-                return getThis();
+                return (T) getThis();
             }
 
             public T setHintForSeamlessTransition(boolean z) {
                 this.mHintForSeamlessTransition = z;
-                return getThis();
+                return (T) getThis();
             }
 
             public T setIsScreenShotBySystem(boolean z) {
                 this.mIsScreenShotBySystem = z;
                 Log.d(ScreenCapture.TAG, "[Capture_TEST] : setIsScreenShotBySystem " + z);
-                return getThis();
+                return (T) getThis();
             }
         }
 
@@ -510,16 +510,16 @@ public class ScreenCapture {
         }
 
         public ScreenCaptureListener(ObjIntConsumer<ScreenshotHardwareBuffer> objIntConsumer) {
-            long nativeCreateScreenCaptureListener = ScreenCapture.nativeCreateScreenCaptureListener(objIntConsumer);
-            this.mNativeObject = nativeCreateScreenCaptureListener;
-            sRegistry.registerNativeAllocation(this, nativeCreateScreenCaptureListener);
+            long jNativeCreateScreenCaptureListener = ScreenCapture.nativeCreateScreenCaptureListener(objIntConsumer);
+            this.mNativeObject = jNativeCreateScreenCaptureListener;
+            sRegistry.registerNativeAllocation(this, jNativeCreateScreenCaptureListener);
         }
 
         private ScreenCaptureListener(Parcel parcel) {
             if (parcel.readBoolean()) {
-                long nativeReadListenerFromParcel = ScreenCapture.nativeReadListenerFromParcel(parcel);
-                this.mNativeObject = nativeReadListenerFromParcel;
-                sRegistry.registerNativeAllocation(this, nativeReadListenerFromParcel);
+                long jNativeReadListenerFromParcel = ScreenCapture.nativeReadListenerFromParcel(parcel);
+                this.mNativeObject = jNativeReadListenerFromParcel;
+                sRegistry.registerNativeAllocation(this, jNativeReadListenerFromParcel);
                 return;
             }
             this.mNativeObject = 0L;

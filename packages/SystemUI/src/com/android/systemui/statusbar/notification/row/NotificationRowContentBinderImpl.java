@@ -1,12 +1,18 @@
 package com.android.systemui.statusbar.notification.row;
 
 import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.RemoteInput;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.LauncherActivityInfo;
+import android.content.pm.LauncherApps;
 import android.content.pm.PackageManager;
+import android.content.pm.ShortcutInfo;
 import android.content.res.Resources;
+import android.graphics.ColorFilter;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -19,17 +25,22 @@ import android.os.UserHandle;
 import android.service.notification.StatusBarNotification;
 import android.util.ArrayMap;
 import android.util.Log;
+import android.util.Pools;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RemoteViews;
 import android.widget.TextView;
 import androidx.concurrent.futures.AbstractResolvableFuture$$ExternalSyntheticOutline0;
+import androidx.constraintlayout.widget.ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0;
 import androidx.core.os.BundleKt;
 import com.android.app.tracing.TraceUtilsKt;
+import com.android.internal.widget.CachingIconView;
+import com.android.internal.widget.ConversationLayout;
 import com.android.internal.widget.ImageMessageConsumer;
 import com.android.internal.widget.MessagingImageMessage;
 import com.android.internal.widget.MessagingMessage;
+import com.android.internal.widget.NotificationRowIconView;
 import com.android.systemui.Dependency;
 import com.android.systemui.R;
 import com.android.systemui.facewidget.plugin.FaceWidgetNotificationControllerWrapper;
@@ -44,8 +55,12 @@ import com.android.systemui.plugins.statusbar.NotificationMenuRowPlugin;
 import com.android.systemui.statusbar.InflationTask;
 import com.android.systemui.statusbar.NotificationRemoteInputManager;
 import com.android.systemui.statusbar.SmartReplyController;
+import com.android.systemui.statusbar.notification.ConversationNotificationManager;
+import com.android.systemui.statusbar.notification.ConversationNotificationManager$sam$java_util_function_BiFunction$0;
 import com.android.systemui.statusbar.notification.ConversationNotificationProcessor;
+import com.android.systemui.statusbar.notification.ImageTransformState;
 import com.android.systemui.statusbar.notification.InflationException;
+import com.android.systemui.statusbar.notification.NotificationUtils;
 import com.android.systemui.statusbar.notification.NotificationUtilsKt;
 import com.android.systemui.statusbar.notification.collection.NotificationEntry;
 import com.android.systemui.statusbar.notification.people.PeopleNotificationIdentifierImpl;
@@ -59,6 +74,7 @@ import com.android.systemui.statusbar.notification.row.NotificationInlineImageCa
 import com.android.systemui.statusbar.notification.row.NotificationRowContentBinder;
 import com.android.systemui.statusbar.notification.row.NotificationRowContentBinderImpl;
 import com.android.systemui.statusbar.notification.row.RowContentBindStage;
+import com.android.systemui.statusbar.notification.row.RowImageInflater;
 import com.android.systemui.statusbar.notification.row.shared.AsyncGroupHeaderViewInflation;
 import com.android.systemui.statusbar.notification.row.shared.HeadsUpStatusBarModel;
 import com.android.systemui.statusbar.notification.row.shared.NewRemoteViews;
@@ -72,6 +88,8 @@ import com.android.systemui.statusbar.notification.stack.NotificationChildrenCon
 import com.android.systemui.statusbar.phone.ExpandHeadsUpOnInlineReply;
 import com.android.systemui.statusbar.phone.ongoingactivity.OngoingActivityData;
 import com.android.systemui.statusbar.phone.ongoingactivity.OngoingActivityDataHelper;
+import com.android.systemui.statusbar.phone.ongoingactivity.OngoingActivityLayoutUtil;
+import com.android.systemui.statusbar.phone.ongoingactivity.OngoingType;
 import com.android.systemui.statusbar.policy.InflatedSmartReplyState;
 import com.android.systemui.statusbar.policy.InflatedSmartReplyViewHolder;
 import com.android.systemui.statusbar.policy.RemoteInputView;
@@ -82,23 +100,29 @@ import com.android.systemui.statusbar.policy.SmartReplyStateInflater;
 import com.android.systemui.statusbar.policy.SmartReplyStateInflaterImpl;
 import com.android.systemui.statusbar.policy.SmartReplyView;
 import com.android.systemui.util.Assert;
+import com.android.systemui.util.SettingsHelper;
+import com.samsung.android.knox.ucm.core.UniversalCredentialUtil;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import kotlin.Pair;
 import kotlin.Result;
+import kotlin.Unit;
+import kotlin.collections.CollectionsKt__CollectionsKt;
 import kotlin.jvm.functions.Function1;
+import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
+import kotlin.jvm.internal.Reflection;
 import noticolorpicker.NotificationColorPicker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class NotificationRowContentBinderImpl implements NotificationRowContentBinder {
     public static final Companion Companion = new Companion(null);
@@ -114,14 +138,12 @@ public final class NotificationRowContentBinderImpl implements NotificationRowCo
     public final NotifRemoteViewCache remoteViewCache;
     public final SmartReplyStateInflater smartReplyStateInflater;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class ApplyCallback {
         public abstract RemoteViews getRemoteView();
 
         public abstract void setResultView(View view);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AsyncInflationTask extends AsyncTask implements NotificationRowContentBinder.InflationCallback, InflationTask {
         public final NotificationRowContentBinder.BindParams bindParams;
         public final NotificationRowContentBinder.InflationCallback callback;
@@ -141,7 +163,6 @@ public final class NotificationRowContentBinderImpl implements NotificationRowCo
         public final ExpandableNotificationRow row;
         public final SmartReplyStateInflater smartRepliesInflater;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -151,7 +172,6 @@ public final class NotificationRowContentBinderImpl implements NotificationRowCo
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class RtlEnabledContext extends ContextWrapper {
             public RtlEnabledContext(Context context) {
                 super(context);
@@ -190,58 +210,58 @@ public final class NotificationRowContentBinderImpl implements NotificationRowCo
             notificationEntry.mRunningTask = this;
         }
 
-        public static final InflationProgress access$doInBackgroundInternal(AsyncInflationTask asyncInflationTask) {
-            HybridNotificationView hybridNotificationView;
+        public static final InflationProgress access$doInBackgroundInternal(AsyncInflationTask asyncInflationTask) throws Resources.NotFoundException {
+            HybridNotificationView hybridNotificationViewInflatePrivateSingleLineView;
             Set set;
             StatusBarNotification statusBarNotification = asyncInflationTask.entry.mSbn;
             try {
                 Notification.addFieldsFromContext(asyncInflationTask.row.getContext().getPackageManager().getApplicationInfoAsUser(statusBarNotification.getPackageName(), 8192, UserHandle.getUserId(statusBarNotification.getUid())), statusBarNotification.getNotification());
             } catch (PackageManager.NameNotFoundException unused) {
             }
-            Notification.Builder recoverBuilder = Notification.Builder.recoverBuilder(asyncInflationTask.row.getContext(), statusBarNotification.getNotification());
+            Notification.Builder builderRecoverBuilder = Notification.Builder.recoverBuilder(asyncInflationTask.row.getContext(), statusBarNotification.getNotification());
             Context packageContext = statusBarNotification.getPackageContext(asyncInflationTask.row.getContext());
-            Context rtlEnabledContext = recoverBuilder.usesTemplate() ? new RtlEnabledContext(packageContext) : packageContext;
+            Context rtlEnabledContext = builderRecoverBuilder.usesTemplate() ? new RtlEnabledContext(packageContext) : packageContext;
             Companion companion = NotificationRowContentBinderImpl.Companion;
-            InflationProgress access$beginInflationAsync = Companion.access$beginInflationAsync(companion, asyncInflationTask.reInflateFlags, asyncInflationTask.entry, recoverBuilder, asyncInflationTask.bindParams, asyncInflationTask.row.getContext(), rtlEnabledContext, asyncInflationTask.row, asyncInflationTask.notifLayoutInflaterFactoryProvider, asyncInflationTask.headsUpStyleProvider, asyncInflationTask.conversationProcessor, asyncInflationTask.logger);
+            InflationProgress inflationProgressAccess$beginInflationAsync = Companion.access$beginInflationAsync(companion, asyncInflationTask.reInflateFlags, asyncInflationTask.entry, builderRecoverBuilder, asyncInflationTask.bindParams, asyncInflationTask.row.getContext(), rtlEnabledContext, asyncInflationTask.row, asyncInflationTask.notifLayoutInflaterFactoryProvider, asyncInflationTask.headsUpStyleProvider, asyncInflationTask.conversationProcessor, asyncInflationTask.logger);
             asyncInflationTask.logger.logAsyncTaskProgress(asyncInflationTask.row.mLoggingKey, "getting existing smart reply state (on wrong thread!)");
             InflatedSmartReplyState inflatedSmartReplyState = asyncInflationTask.row.mPrivateLayout.mCurrentSmartReplyState;
             asyncInflationTask.logger.logAsyncTaskProgress(NotificationUtilsKt.getLogKey(asyncInflationTask.entry), "inflating smart reply views");
-            Companion.access$inflateSmartReplyViews(companion, access$beginInflationAsync, asyncInflationTask.reInflateFlags, asyncInflationTask.entry, asyncInflationTask.row.getContext(), rtlEnabledContext, inflatedSmartReplyState, asyncInflationTask.smartRepliesInflater, asyncInflationTask.logger);
+            Companion.access$inflateSmartReplyViews(companion, inflationProgressAccess$beginInflationAsync, asyncInflationTask.reInflateFlags, asyncInflationTask.entry, asyncInflationTask.row.getContext(), rtlEnabledContext, inflatedSmartReplyState, asyncInflationTask.smartRepliesInflater, asyncInflationTask.logger);
             asyncInflationTask.logger.logAsyncTaskProgress(NotificationUtilsKt.getLogKey(asyncInflationTask.entry), "inflating single line view");
-            NotificationContentModel notificationContentModel = access$beginInflationAsync.contentModel;
+            NotificationContentModel notificationContentModel = inflationProgressAccess$beginInflationAsync.contentModel;
             SingleLineViewModel singleLineViewModel = notificationContentModel.singleLineViewModel;
-            HybridNotificationView hybridNotificationView2 = null;
+            HybridNotificationView hybridNotificationViewInflatePublicSingleLineView = null;
             if (singleLineViewModel != null) {
-                hybridNotificationView = SingleLineViewInflater.inflatePrivateSingleLineView(singleLineViewModel.conversationData != null, asyncInflationTask.reInflateFlags, asyncInflationTask.entry, asyncInflationTask.row.getContext(), asyncInflationTask.logger);
+                hybridNotificationViewInflatePrivateSingleLineView = SingleLineViewInflater.inflatePrivateSingleLineView(singleLineViewModel.conversationData != null, asyncInflationTask.reInflateFlags, asyncInflationTask.entry, asyncInflationTask.row.getContext(), asyncInflationTask.logger);
             } else {
-                hybridNotificationView = null;
+                hybridNotificationViewInflatePrivateSingleLineView = null;
             }
-            access$beginInflationAsync.inflatedSingleLineView = hybridNotificationView;
+            inflationProgressAccess$beginInflationAsync.inflatedSingleLineView = hybridNotificationViewInflatePrivateSingleLineView;
             asyncInflationTask.logger.logAsyncTaskProgress(NotificationUtilsKt.getLogKey(asyncInflationTask.entry), "inflating public single line view");
             SingleLineViewModel singleLineViewModel2 = notificationContentModel.publicSingleLineViewModel;
             if (singleLineViewModel2 != null) {
-                hybridNotificationView2 = SingleLineViewInflater.inflatePublicSingleLineView(singleLineViewModel2.conversationData != null, asyncInflationTask.reInflateFlags, asyncInflationTask.entry, asyncInflationTask.row.getContext(), asyncInflationTask.logger);
+                hybridNotificationViewInflatePublicSingleLineView = SingleLineViewInflater.inflatePublicSingleLineView(singleLineViewModel2.conversationData != null, asyncInflationTask.reInflateFlags, asyncInflationTask.entry, asyncInflationTask.row.getContext(), asyncInflationTask.logger);
             }
-            access$beginInflationAsync.inflatedPublicSingleLineView = hybridNotificationView2;
+            inflationProgressAccess$beginInflationAsync.inflatedPublicSingleLineView = hybridNotificationViewInflatePublicSingleLineView;
             asyncInflationTask.logger.logAsyncTaskProgress(NotificationUtilsKt.getLogKey(asyncInflationTask.entry), "loading RON images");
-            access$beginInflationAsync.rowImageInflater.getClass();
+            inflationProgressAccess$beginInflationAsync.rowImageInflater.getClass();
             asyncInflationTask.logger.logAsyncTaskProgress(NotificationUtilsKt.getLogKey(asyncInflationTask.entry), "getting row image resolver (on wrong thread!)");
             final NotificationInlineImageResolver notificationInlineImageResolver = asyncInflationTask.row.mImageResolver;
             asyncInflationTask.logger.logAsyncTaskProgress(NotificationUtilsKt.getLogKey(asyncInflationTask.entry), "waiting for preloaded images");
             if (notificationInlineImageResolver.hasCache() && (set = notificationInlineImageResolver.mWantedUriSet) != null) {
-                final long elapsedRealtime = SystemClock.elapsedRealtime() + 1000;
+                final long jElapsedRealtime = SystemClock.elapsedRealtime() + 1000;
                 set.forEach(new Consumer() { // from class: com.android.systemui.statusbar.notification.row.NotificationInlineImageResolver$$ExternalSyntheticLambda1
                     @Override // java.util.function.Consumer
                     public final void accept(Object obj) {
-                        NotificationInlineImageResolver notificationInlineImageResolver2 = NotificationInlineImageResolver.this;
-                        long j = elapsedRealtime;
+                        NotificationInlineImageResolver notificationInlineImageResolver2 = notificationInlineImageResolver;
+                        long j = jElapsedRealtime;
                         int i = NotificationInlineImageResolver.$r8$clinit;
                         notificationInlineImageResolver2.getClass();
                         notificationInlineImageResolver2.loadImageFromCache((Uri) obj, j - SystemClock.elapsedRealtime());
                     }
                 });
             }
-            return access$beginInflationAsync;
+            return inflationProgressAccess$beginInflationAsync;
         }
 
         @Override // com.android.systemui.statusbar.InflationTask
@@ -259,14 +279,14 @@ public final class NotificationRowContentBinderImpl implements NotificationRowCo
 
         @Override // android.os.AsyncTask
         public final /* bridge */ /* synthetic */ Object doInBackground(Object[] objArr) {
-            return Result.m3421boximpl(m3066doInBackgroundIoAF18A());
+            return Result.m3441boximpl(m3083doInBackgroundIoAF18A());
         }
 
         /* renamed from: doInBackground-IoAF18A, reason: not valid java name */
-        public final Object m3066doInBackgroundIoAF18A() {
+        public final Object m3083doInBackgroundIoAF18A() {
             Object failure;
-            boolean isEnabled = Trace.isEnabled();
-            if (isEnabled) {
+            boolean zIsEnabled = Trace.isEnabled();
+            if (zIsEnabled) {
                 TraceUtilsKt.beginSlice("NotificationContentInflater.AsyncInflationTask#doInBackground");
             }
             try {
@@ -280,7 +300,7 @@ public final class NotificationRowContentBinderImpl implements NotificationRowCo
                 }
                 return failure;
             } finally {
-                if (isEnabled) {
+                if (zIsEnabled) {
                     TraceUtilsKt.endSlice();
                 }
             }
@@ -307,13 +327,16 @@ public final class NotificationRowContentBinderImpl implements NotificationRowCo
             handleError$1(exc);
         }
 
+        /* JADX WARN: Removed duplicated region for block: B:121:0x020d  */
         @Override // com.android.systemui.statusbar.notification.row.NotificationRowContentBinder.InflationCallback
-        public final void onAsyncInflationFinished() {
+        /*
+            Code decompiled incorrectly, please refer to instructions dump.
+        */
+        public final void onAsyncInflationFinished() throws Resources.NotFoundException, PackageManager.NameNotFoundException {
             TextView textView;
             TextView textView2;
-            boolean z;
-            View findViewById;
-            View findViewById2;
+            View viewFindViewById;
+            View viewFindViewById2;
             this.entry.mRunningTask = null;
             ExpandableNotificationRow expandableNotificationRow = this.row;
             expandableNotificationRow.getClass();
@@ -340,15 +363,15 @@ public final class NotificationRowContentBinderImpl implements NotificationRowCo
                     View view = notificationContentView.mExpandedChild;
                     if (view != null && (view instanceof ViewGroup)) {
                         ViewGroup viewGroup = (ViewGroup) view;
-                        View findViewById3 = view.findViewById(R.id.media_carousel_layout);
-                        if (findViewById3 != null) {
-                            viewGroup.removeView(findViewById3);
+                        View viewFindViewById3 = view.findViewById(R.id.media_carousel_layout);
+                        if (viewFindViewById3 != null) {
+                            viewGroup.removeView(viewFindViewById3);
                         }
-                        View findViewById4 = notificationContentView.mExpandedChild.findViewById(R.id.ongoing_activity_expand_normal_layout);
-                        if (findViewById4 != null) {
-                            findViewById4.setVisibility(8);
+                        View viewFindViewById4 = notificationContentView.mExpandedChild.findViewById(R.id.ongoing_activity_expand_normal_layout);
+                        if (viewFindViewById4 != null) {
+                            viewFindViewById4.setVisibility(8);
                         }
-                        ViewGroup viewGroup2 = (ViewGroup) notificationContentView.mExpandedChild.findViewById(16909884);
+                        ViewGroup viewGroup2 = (ViewGroup) notificationContentView.mExpandedChild.findViewById(16909885);
                         if (viewGroup2 != null) {
                             int childCount = viewGroup2.getChildCount();
                             for (int i = 0; i < childCount; i++) {
@@ -382,12 +405,12 @@ public final class NotificationRowContentBinderImpl implements NotificationRowCo
                     notificationContentView2.mHeadsUpWrapper.onContentUpdated(expandableNotificationRow2);
                 }
                 if (notificationContentView2.mRemoteInputController != null) {
-                    boolean z2 = notificationContentView2.mNotificationEntry.mSbn.getNotification().findRemoteInputActionPair(true) != null;
+                    boolean z = notificationContentView2.mNotificationEntry.mSbn.getNotification().findRemoteInputActionPair(true) != null;
                     View view2 = notificationContentView2.mExpandedChild;
                     if (view2 != null) {
-                        NotificationContentView.RemoteInputViewData applyRemoteInput = notificationContentView2.applyRemoteInput(view2, notificationContentView2.mNotificationEntry, z2, notificationContentView2.mPreviousExpandedRemoteInputIntent, notificationContentView2.mExpandedWrapper);
-                        notificationContentView2.mExpandedRemoteInput = applyRemoteInput.mView;
-                        RemoteInputViewController remoteInputViewController = applyRemoteInput.mController;
+                        NotificationContentView.RemoteInputViewData remoteInputViewDataApplyRemoteInput = notificationContentView2.applyRemoteInput(view2, notificationContentView2.mNotificationEntry, z, notificationContentView2.mPreviousExpandedRemoteInputIntent, notificationContentView2.mExpandedWrapper);
+                        notificationContentView2.mExpandedRemoteInput = remoteInputViewDataApplyRemoteInput.mView;
+                        RemoteInputViewController remoteInputViewController = remoteInputViewDataApplyRemoteInput.mController;
                         notificationContentView2.mExpandedRemoteInputController = remoteInputViewController;
                         if (remoteInputViewController != null) {
                             RemoteInputViewControllerImpl remoteInputViewControllerImpl = (RemoteInputViewControllerImpl) remoteInputViewController;
@@ -420,8 +443,8 @@ public final class NotificationRowContentBinderImpl implements NotificationRowCo
                     notificationContentView2.getClass();
                     int i2 = ExpandHeadsUpOnInlineReply.$r8$clinit;
                     View view3 = notificationContentView2.mHeadsUpChild;
-                    if (view3 != null && (findViewById = view3.findViewById(android.R.id.overlay_display_window_title)) != null && (findViewById instanceof MessagingImageMessage) && (findViewById2 = notificationContentView2.mHeadsUpChild.findViewById(android.R.id.resolver_empty_state_icon)) != null) {
-                        findViewById2.setMinimumHeight(notificationContentView2.getResources().getDimensionPixelSize(R.dimen.notification_empty_text_area_min_height));
+                    if (view3 != null && (viewFindViewById = view3.findViewById(android.R.id.overlay_display_window_title)) != null && (viewFindViewById instanceof MessagingImageMessage) && (viewFindViewById2 = notificationContentView2.mHeadsUpChild.findViewById(android.R.id.resolver_empty_state_icon)) != null) {
+                        viewFindViewById2.setMinimumHeight(notificationContentView2.getResources().getDimensionPixelSize(R.dimen.notification_empty_text_area_min_height));
                     }
                 }
                 InflatedSmartReplyState inflatedSmartReplyState = notificationContentView2.mCurrentSmartReplyState;
@@ -433,36 +456,29 @@ public final class NotificationRowContentBinderImpl implements NotificationRowCo
                     View view5 = notificationContentView2.mExpandedChild;
                     if (view5 != null) {
                         NotificationContentView.applyExternalSmartReplyState(view5, notificationContentView2.mCurrentSmartReplyState);
-                        SmartReplyView applySmartReplyView = NotificationContentView.applySmartReplyView(notificationContentView2.mExpandedChild, notificationContentView2.mCurrentSmartReplyState, notificationContentView2.mNotificationEntry, notificationContentView2.mExpandedInflatedSmartReplies, false);
-                        notificationContentView2.mExpandedSmartReplyView = applySmartReplyView;
-                        if (applySmartReplyView != null) {
+                        SmartReplyView smartReplyViewApplySmartReplyView = NotificationContentView.applySmartReplyView(notificationContentView2.mExpandedChild, notificationContentView2.mCurrentSmartReplyState, notificationContentView2.mNotificationEntry, notificationContentView2.mExpandedInflatedSmartReplies, false);
+                        notificationContentView2.mExpandedSmartReplyView = smartReplyViewApplySmartReplyView;
+                        if (smartReplyViewApplySmartReplyView != null) {
                             InflatedSmartReplyState inflatedSmartReplyState2 = notificationContentView2.mCurrentSmartReplyState;
                             SmartReplyView.SmartReplies smartReplies = inflatedSmartReplyState2.smartReplies;
                             SmartReplyView.SmartActions smartActions = inflatedSmartReplyState2.smartActions;
                             if (smartReplies != null || smartActions != null) {
                                 int size = smartReplies == null ? 0 : smartReplies.choices.size();
                                 int size2 = smartActions == null ? 0 : smartActions.actions.size();
-                                boolean z3 = smartReplies == null ? smartActions.fromAssistant : smartReplies.fromAssistant;
-                                try {
-                                    if (smartReplies != null) {
-                                        SmartReplyConstants smartReplyConstants = notificationContentView2.mSmartReplyConstants;
-                                        int editChoicesBeforeSending = smartReplies.remoteInput.getEditChoicesBeforeSending();
-                                        smartReplyConstants.getClass();
-                                        if (editChoicesBeforeSending != 1 ? editChoicesBeforeSending != 2 ? smartReplyConstants.mEditChoicesBeforeSending : true : false) {
-                                            z = true;
-                                            SmartReplyController smartReplyController = notificationContentView2.mSmartReplyController;
-                                            NotificationEntry notificationEntry2 = notificationContentView2.mNotificationEntry;
-                                            smartReplyController.getClass();
-                                            smartReplyController.mBarService.onNotificationSmartSuggestionsAdded(notificationEntry2.mSbn.getKey(), size, size2, z3, z);
-                                        }
+                                boolean z2 = smartReplies == null ? smartActions.fromAssistant : smartReplies.fromAssistant;
+                                if (smartReplies != null) {
+                                    SmartReplyConstants smartReplyConstants = notificationContentView2.mSmartReplyConstants;
+                                    int editChoicesBeforeSending = smartReplies.remoteInput.getEditChoicesBeforeSending();
+                                    smartReplyConstants.getClass();
+                                    boolean z3 = editChoicesBeforeSending != 1 ? editChoicesBeforeSending != 2 ? smartReplyConstants.mEditChoicesBeforeSending : true : false;
+                                    SmartReplyController smartReplyController = notificationContentView2.mSmartReplyController;
+                                    NotificationEntry notificationEntry2 = notificationContentView2.mNotificationEntry;
+                                    smartReplyController.getClass();
+                                    try {
+                                        smartReplyController.mBarService.onNotificationSmartSuggestionsAdded(notificationEntry2.mSbn.getKey(), size, size2, z2, z3);
+                                    } catch (RemoteException unused) {
                                     }
-                                    smartReplyController.mBarService.onNotificationSmartSuggestionsAdded(notificationEntry2.mSbn.getKey(), size, size2, z3, z);
-                                } catch (RemoteException unused) {
                                 }
-                                z = false;
-                                SmartReplyController smartReplyController2 = notificationContentView2.mSmartReplyController;
-                                NotificationEntry notificationEntry22 = notificationContentView2.mNotificationEntry;
-                                smartReplyController2.getClass();
                             }
                         }
                     }
@@ -566,16 +582,16 @@ public final class NotificationRowContentBinderImpl implements NotificationRowCo
         public final void onPostExecute(Object obj) {
             AsyncInflationTask asyncInflationTask;
             Trace.endAsyncSection("NotificationRowContentBinderImpl.AsyncInflationTask", System.identityHashCode(this));
-            Object m3423unboximpl = ((Result) obj).m3423unboximpl();
-            if (m3423unboximpl instanceof Result.Failure) {
+            Object objM3443unboximpl = ((Result) obj).m3443unboximpl();
+            if (objM3443unboximpl instanceof Result.Failure) {
                 asyncInflationTask = this;
             } else {
                 asyncInflationTask = this;
-                asyncInflationTask.cancellationSignal = Companion.access$apply(NotificationRowContentBinderImpl.Companion, this.inflationExecutor, this.inflateSynchronously, this.bindParams.isMinimized, (InflationProgress) m3423unboximpl, this.reInflateFlags, this.remoteViewCache, this.entry, this.row, this.remoteViewClickHandler, asyncInflationTask, this.logger, this.faceWidgetNotificationControllerWrapper);
+                asyncInflationTask.cancellationSignal = Companion.access$apply(NotificationRowContentBinderImpl.Companion, this.inflationExecutor, this.inflateSynchronously, this.bindParams.isMinimized, (InflationProgress) objM3443unboximpl, this.reInflateFlags, this.remoteViewCache, this.entry, this.row, this.remoteViewClickHandler, asyncInflationTask, this.logger, this.faceWidgetNotificationControllerWrapper);
             }
-            Throwable m3422exceptionOrNullimpl = Result.m3422exceptionOrNullimpl(m3423unboximpl);
-            if (m3422exceptionOrNullimpl != null) {
-                asyncInflationTask.handleError$1((Exception) m3422exceptionOrNullimpl);
+            Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(objM3443unboximpl);
+            if (thM3442exceptionOrNullimpl != null) {
+                asyncInflationTask.handleError$1((Exception) thM3442exceptionOrNullimpl);
             }
         }
 
@@ -585,10 +601,8 @@ public final class NotificationRowContentBinderImpl implements NotificationRowCo
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class RemoteViewsUpdater {
             public final NotificationEntry entry;
             public final int reInflateFlags;
@@ -606,10 +620,10 @@ public final class NotificationRowContentBinderImpl implements NotificationRowCo
                     NotificationEntry notificationEntry = this.entry;
                     NotifRemoteViewCache notifRemoteViewCache = this.remoteViewCache;
                     if (view != null) {
-                        function1.mo779invoke(view);
+                        function1.mo781invoke(view);
                         ((NotifRemoteViewCacheImpl) notifRemoteViewCache).putCachedView(notificationEntry, i, remoteViews);
                     } else if (z && remoteViews == null) {
-                        function1.mo779invoke(null);
+                        function1.mo781invoke(null);
                         ((NotifRemoteViewCacheImpl) notifRemoteViewCache).removeCachedView(notificationEntry, i);
                     } else {
                         NotifRemoteViewCacheImpl notifRemoteViewCacheImpl = (NotifRemoteViewCacheImpl) notifRemoteViewCache;
@@ -625,7 +639,7 @@ public final class NotificationRowContentBinderImpl implements NotificationRowCo
             this();
         }
 
-        public static final CancellationSignal access$apply(Companion companion, Executor executor, boolean z, boolean z2, final InflationProgress inflationProgress, int i, NotifRemoteViewCache notifRemoteViewCache, final NotificationEntry notificationEntry, final ExpandableNotificationRow expandableNotificationRow, RemoteViews.InteractionHandler interactionHandler, AsyncInflationTask asyncInflationTask, final NotificationRowContentBinderLogger notificationRowContentBinderLogger, FaceWidgetNotificationControllerWrapper faceWidgetNotificationControllerWrapper) {
+        public static final CancellationSignal access$apply(Companion companion, Executor executor, boolean z, boolean z2, final InflationProgress inflationProgress, int i, NotifRemoteViewCache notifRemoteViewCache, final NotificationEntry notificationEntry, final ExpandableNotificationRow expandableNotificationRow, RemoteViews.InteractionHandler interactionHandler, AsyncInflationTask asyncInflationTask, final NotificationRowContentBinderLogger notificationRowContentBinderLogger, FaceWidgetNotificationControllerWrapper faceWidgetNotificationControllerWrapper) throws InflationException {
             NotificationContentView notificationContentView;
             final FaceWidgetNotificationControllerWrapper faceWidgetNotificationControllerWrapper2;
             int i2;
@@ -639,7 +653,7 @@ public final class NotificationRowContentBinderImpl implements NotificationRowCo
             Trace.beginAsyncSection("NotificationRowContentBinderImpl#apply", System.identityHashCode(expandableNotificationRow));
             NotificationContentView notificationContentView3 = expandableNotificationRow.mPrivateLayout;
             NotificationContentView notificationContentView4 = expandableNotificationRow.mPublicLayout;
-            final HashMap<Integer, CancellationSignal> hashMap = new HashMap<>();
+            final HashMap<Integer, CancellationSignal> map = new HashMap<>();
             if ((i & 1) == 0 || (remoteViews3 = inflationProgress.remoteViews.contracted) == null) {
                 notificationContentView = notificationContentView4;
                 faceWidgetNotificationControllerWrapper2 = faceWidgetNotificationControllerWrapper;
@@ -655,7 +669,7 @@ public final class NotificationRowContentBinderImpl implements NotificationRowCo
                     @Override // com.android.systemui.statusbar.notification.row.NotificationRowContentBinderImpl.ApplyCallback
                     public final void setResultView(View view) {
                         NotificationEntry notificationEntry2 = notificationEntry;
-                        NotificationRowContentBinderLogger.this.logAsyncTaskProgress(NotificationUtilsKt.getLogKey(notificationEntry2), "contracted view applied");
+                        notificationRowContentBinderLogger2.logAsyncTaskProgress(NotificationUtilsKt.getLogKey(notificationEntry2), "contracted view applied");
                         inflationProgress.inflatedContentView = view;
                         if (notificationEntry2.isOngoingActivity()) {
                             NotificationRowContentBinderImplKt.setTooltipTextForOA(view);
@@ -664,7 +678,7 @@ public final class NotificationRowContentBinderImpl implements NotificationRowCo
                 };
                 notificationRowContentBinderLogger2.logAsyncTaskProgress(NotificationUtilsKt.getLogKey(notificationEntry), "applying contracted view");
                 notificationContentView = notificationContentView4;
-                companion.applyRemoteView(executor, z, z2, inflationProgress, i, 1, notifRemoteViewCacheImpl, notificationEntry, expandableNotificationRow, z3, interactionHandler, asyncInflationTask, notificationContentView3, notificationContentView3.mContractedChild, notificationContentView3.getVisibleWrapper(0), hashMap, applyCallback, notificationRowContentBinderLogger, faceWidgetNotificationControllerWrapper);
+                companion.applyRemoteView(executor, z, z2, inflationProgress, i, 1, notifRemoteViewCacheImpl, notificationEntry, expandableNotificationRow, z3, interactionHandler, asyncInflationTask, notificationContentView3, notificationContentView3.mContractedChild, notificationContentView3.getVisibleWrapper(0), map, applyCallback, notificationRowContentBinderLogger, faceWidgetNotificationControllerWrapper);
                 notificationRowContentBinderLogger2 = notificationRowContentBinderLogger;
                 faceWidgetNotificationControllerWrapper2 = faceWidgetNotificationControllerWrapper;
             }
@@ -681,9 +695,9 @@ public final class NotificationRowContentBinderImpl implements NotificationRowCo
 
                     @Override // com.android.systemui.statusbar.notification.row.NotificationRowContentBinderImpl.ApplyCallback
                     public final void setResultView(View view) {
-                        View view2;
+                        View viewFromNowBar;
                         NotificationEntry notificationEntry2 = notificationEntry;
-                        NotificationRowContentBinderLogger.this.logAsyncTaskProgress(NotificationUtilsKt.getLogKey(notificationEntry2), "expanded view applied");
+                        notificationRowContentBinderLogger2.logAsyncTaskProgress(NotificationUtilsKt.getLogKey(notificationEntry2), "expanded view applied");
                         OngoingActivityDataHelper ongoingActivityDataHelper = OngoingActivityDataHelper.INSTANCE;
                         String str = notificationEntry2.mKey;
                         ongoingActivityDataHelper.getClass();
@@ -692,21 +706,21 @@ public final class NotificationRowContentBinderImpl implements NotificationRowCo
                             pendingOngoingActivityData = OngoingActivityDataHelper.getOngoingActivityDataByKey(notificationEntry2.mKey);
                         }
                         if (pendingOngoingActivityData == null || pendingOngoingActivityData.mCustomExpandedCardView == null) {
-                            view2 = view;
+                            viewFromNowBar = view;
                         } else {
-                            view2 = faceWidgetNotificationControllerWrapper2.getViewFromNowBar(view, BundleKt.bundleOf(new Pair("type", "ENR")));
+                            viewFromNowBar = faceWidgetNotificationControllerWrapper2.getViewFromNowBar(view, BundleKt.bundleOf(new Pair("type", "ENR")));
                         }
                         if (notificationEntry2.isOngoingActivity()) {
                             NotificationRowContentBinderImplKt.setTooltipTextForOA(view);
                         }
-                        inflationProgress.inflatedExpandedView = view2;
+                        inflationProgress.inflatedExpandedView = viewFromNowBar;
                     }
                 };
                 notificationRowContentBinderLogger2.logAsyncTaskProgress(NotificationUtilsKt.getLogKey(notificationEntry), "applying expanded view");
                 FaceWidgetNotificationControllerWrapper faceWidgetNotificationControllerWrapper3 = faceWidgetNotificationControllerWrapper2;
                 NotificationRowContentBinderLogger notificationRowContentBinderLogger3 = notificationRowContentBinderLogger2;
                 i2 = i;
-                companion.applyRemoteView(executor, z, z2, inflationProgress, i2, 2, notifRemoteViewCacheImpl2, notificationEntry, expandableNotificationRow, z4, interactionHandler, asyncInflationTask, notificationContentView3, notificationContentView3.mExpandedChild, notificationContentView3.getVisibleWrapper(1), hashMap, applyCallback2, notificationRowContentBinderLogger3, faceWidgetNotificationControllerWrapper3);
+                companion.applyRemoteView(executor, z, z2, inflationProgress, i2, 2, notifRemoteViewCacheImpl2, notificationEntry, expandableNotificationRow, z4, interactionHandler, asyncInflationTask, notificationContentView3, notificationContentView3.mExpandedChild, notificationContentView3.getVisibleWrapper(1), map, applyCallback2, notificationRowContentBinderLogger3, faceWidgetNotificationControllerWrapper3);
                 notificationRowContentBinderLogger2 = notificationRowContentBinderLogger3;
                 faceWidgetNotificationControllerWrapper2 = faceWidgetNotificationControllerWrapper3;
             }
@@ -722,9 +736,9 @@ public final class NotificationRowContentBinderImpl implements NotificationRowCo
 
                     @Override // com.android.systemui.statusbar.notification.row.NotificationRowContentBinderImpl.ApplyCallback
                     public final void setResultView(View view) {
-                        View view2;
+                        View viewFromNowBar;
                         NotificationEntry notificationEntry2 = notificationEntry;
-                        NotificationRowContentBinderLogger.this.logAsyncTaskProgress(NotificationUtilsKt.getLogKey(notificationEntry2), "promoted ongoing view applied");
+                        notificationRowContentBinderLogger2.logAsyncTaskProgress(NotificationUtilsKt.getLogKey(notificationEntry2), "promoted ongoing view applied");
                         OngoingActivityDataHelper ongoingActivityDataHelper = OngoingActivityDataHelper.INSTANCE;
                         String str = notificationEntry2.mKey;
                         ongoingActivityDataHelper.getClass();
@@ -733,21 +747,21 @@ public final class NotificationRowContentBinderImpl implements NotificationRowCo
                             pendingOngoingActivityData = OngoingActivityDataHelper.getOngoingActivityDataByKey(notificationEntry2.mKey);
                         }
                         if (pendingOngoingActivityData == null || pendingOngoingActivityData.mCustomExpandedCardView == null) {
-                            view2 = view;
+                            viewFromNowBar = view;
                         } else {
-                            view2 = faceWidgetNotificationControllerWrapper2.getViewFromNowBar(view, BundleKt.bundleOf(new Pair("type", "OA")));
+                            viewFromNowBar = faceWidgetNotificationControllerWrapper2.getViewFromNowBar(view, BundleKt.bundleOf(new Pair("type", "OA")));
                         }
                         if (notificationEntry2.isOngoingActivity()) {
                             NotificationRowContentBinderImplKt.setTooltipTextForOA(view);
                         }
-                        inflationProgress.inflatedPromotedOngoingView = view2;
+                        inflationProgress.inflatedPromotedOngoingView = viewFromNowBar;
                     }
                 };
                 notificationRowContentBinderLogger2.logAsyncTaskProgress(NotificationUtilsKt.getLogKey(notificationEntry), "applying promoted ongoing view");
                 notificationContentView2 = notificationContentView3;
                 NotificationRowContentBinderLogger notificationRowContentBinderLogger4 = notificationRowContentBinderLogger2;
                 companion2 = companion;
-                companion2.applyRemoteView(executor, z, z2, inflationProgress, i2, 256, notifRemoteViewCache, notificationEntry, expandableNotificationRow, true, interactionHandler, asyncInflationTask, null, null, null, hashMap, applyCallback3, notificationRowContentBinderLogger4, faceWidgetNotificationControllerWrapper2);
+                companion2.applyRemoteView(executor, z, z2, inflationProgress, i2, 256, notifRemoteViewCache, notificationEntry, expandableNotificationRow, true, interactionHandler, asyncInflationTask, null, null, null, map, applyCallback3, notificationRowContentBinderLogger4, faceWidgetNotificationControllerWrapper2);
                 notificationRowContentBinderLogger2 = notificationRowContentBinderLogger4;
             }
             if ((i & 4) != 0 && (remoteViews = inflationProgress.remoteViews.headsUp) != null) {
@@ -761,14 +775,14 @@ public final class NotificationRowContentBinderImpl implements NotificationRowCo
 
                     @Override // com.android.systemui.statusbar.notification.row.NotificationRowContentBinderImpl.ApplyCallback
                     public final void setResultView(View view) {
-                        NotificationRowContentBinderLogger.this.logAsyncTaskProgress(NotificationUtilsKt.getLogKey(notificationEntry), "heads up view applied");
+                        notificationRowContentBinderLogger2.logAsyncTaskProgress(NotificationUtilsKt.getLogKey(notificationEntry), "heads up view applied");
                         inflationProgress.inflatedHeadsUpView = view;
                     }
                 };
                 notificationRowContentBinderLogger2.logAsyncTaskProgress(NotificationUtilsKt.getLogKey(notificationEntry), "applying heads up view");
                 NotificationContentView notificationContentView5 = notificationContentView2;
                 NotificationRowContentBinderLogger notificationRowContentBinderLogger5 = notificationRowContentBinderLogger2;
-                companion2.applyRemoteView(executor, z, z2, inflationProgress, i, 4, notifRemoteViewCacheImpl3, notificationEntry, expandableNotificationRow, z5, interactionHandler, asyncInflationTask, notificationContentView5, notificationContentView5.mHeadsUpChild, notificationContentView5.getVisibleWrapper(2), hashMap, applyCallback4, notificationRowContentBinderLogger5, faceWidgetNotificationControllerWrapper);
+                companion2.applyRemoteView(executor, z, z2, inflationProgress, i, 4, notifRemoteViewCacheImpl3, notificationEntry, expandableNotificationRow, z5, interactionHandler, asyncInflationTask, notificationContentView5, notificationContentView5.mHeadsUpChild, notificationContentView5.getVisibleWrapper(2), map, applyCallback4, notificationRowContentBinderLogger5, faceWidgetNotificationControllerWrapper);
                 notificationRowContentBinderLogger2 = notificationRowContentBinderLogger5;
             }
             if ((i & 8) != 0) {
@@ -784,22 +798,22 @@ public final class NotificationRowContentBinderImpl implements NotificationRowCo
 
                     @Override // com.android.systemui.statusbar.notification.row.NotificationRowContentBinderImpl.ApplyCallback
                     public final void setResultView(View view) {
-                        NotificationRowContentBinderLogger.this.logAsyncTaskProgress(NotificationUtilsKt.getLogKey(notificationEntry), "public view applied");
+                        notificationRowContentBinderLogger2.logAsyncTaskProgress(NotificationUtilsKt.getLogKey(notificationEntry), "public view applied");
                         inflationProgress.inflatedPublicView = view;
                     }
                 };
                 notificationRowContentBinderLogger2.logAsyncTaskProgress(NotificationUtilsKt.getLogKey(notificationEntry), "applying public view");
                 NotificationContentView notificationContentView6 = notificationContentView;
-                companion2.applyRemoteView(executor, z, z2, inflationProgress, i, 8, notifRemoteViewCacheImpl4, notificationEntry, expandableNotificationRow, z6, interactionHandler, asyncInflationTask, notificationContentView6, notificationContentView6.mContractedChild, notificationContentView6.getVisibleWrapper(0), hashMap, applyCallback5, notificationRowContentBinderLogger2, faceWidgetNotificationControllerWrapper);
+                companion2.applyRemoteView(executor, z, z2, inflationProgress, i, 8, notifRemoteViewCacheImpl4, notificationEntry, expandableNotificationRow, z6, interactionHandler, asyncInflationTask, notificationContentView6, notificationContentView6.mContractedChild, notificationContentView6.getVisibleWrapper(0), map, applyCallback5, notificationRowContentBinderLogger2, faceWidgetNotificationControllerWrapper);
             }
-            finishIfDone(inflationProgress, i, notifRemoteViewCache, hashMap, asyncInflationTask, notificationEntry, expandableNotificationRow, notificationRowContentBinderLogger);
+            finishIfDone(inflationProgress, i, notifRemoteViewCache, map, asyncInflationTask, notificationEntry, expandableNotificationRow, notificationRowContentBinderLogger);
             CancellationSignal cancellationSignal = new CancellationSignal();
             cancellationSignal.setOnCancelListener(new CancellationSignal.OnCancelListener() { // from class: com.android.systemui.statusbar.notification.row.NotificationRowContentBinderImpl$Companion$apply$1
                 @Override // android.os.CancellationSignal.OnCancelListener
                 public final void onCancel() {
-                    NotificationRowContentBinderLogger.this.logAsyncTaskProgress(NotificationUtilsKt.getLogKey(notificationEntry), "apply cancelled");
+                    notificationRowContentBinderLogger.logAsyncTaskProgress(NotificationUtilsKt.getLogKey(notificationEntry), "apply cancelled");
                     Trace.endAsyncSection("NotificationRowContentBinderImpl#apply", System.identityHashCode(expandableNotificationRow));
-                    hashMap.values().forEach(new Consumer() { // from class: com.android.systemui.statusbar.notification.row.NotificationRowContentBinderImpl$Companion$apply$1.1
+                    map.values().forEach(new Consumer() { // from class: com.android.systemui.statusbar.notification.row.NotificationRowContentBinderImpl$Companion$apply$1.1
                         @Override // java.util.function.Consumer
                         public final void accept(Object obj) {
                             ((CancellationSignal) obj).cancel();
@@ -810,57 +824,388 @@ public final class NotificationRowContentBinderImpl implements NotificationRowCo
             return cancellationSignal;
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:31:0x02e6 A[Catch: all -> 0x023a, TryCatch #0 {all -> 0x023a, blocks: (B:108:0x01f3, B:110:0x020b, B:111:0x0213, B:114:0x021d, B:116:0x0225, B:118:0x022d, B:119:0x022f, B:122:0x023d, B:15:0x027c, B:17:0x0281, B:19:0x0297, B:20:0x029f, B:23:0x02a9, B:25:0x02b3, B:27:0x02c0, B:29:0x02e2, B:31:0x02e6, B:33:0x02fc, B:34:0x0304, B:37:0x030e, B:39:0x0318, B:41:0x0325, B:43:0x0341, B:45:0x0345, B:47:0x035e, B:48:0x0366, B:51:0x0370, B:53:0x037a, B:55:0x0386, B:57:0x038b, B:59:0x0396, B:61:0x03bc, B:63:0x03d0, B:64:0x03dc, B:66:0x03e0, B:67:0x03e7, B:69:0x03eb, B:70:0x03f3, B:72:0x03f7, B:96:0x03af, B:98:0x037f, B:100:0x033c, B:102:0x02cc, B:104:0x02d0, B:105:0x02d9, B:124:0x0247, B:127:0x0253, B:128:0x0260, B:130:0x0264, B:131:0x026b), top: B:107:0x01f3 }] */
-        /* JADX WARN: Removed duplicated region for block: B:45:0x0345 A[Catch: all -> 0x023a, TryCatch #0 {all -> 0x023a, blocks: (B:108:0x01f3, B:110:0x020b, B:111:0x0213, B:114:0x021d, B:116:0x0225, B:118:0x022d, B:119:0x022f, B:122:0x023d, B:15:0x027c, B:17:0x0281, B:19:0x0297, B:20:0x029f, B:23:0x02a9, B:25:0x02b3, B:27:0x02c0, B:29:0x02e2, B:31:0x02e6, B:33:0x02fc, B:34:0x0304, B:37:0x030e, B:39:0x0318, B:41:0x0325, B:43:0x0341, B:45:0x0345, B:47:0x035e, B:48:0x0366, B:51:0x0370, B:53:0x037a, B:55:0x0386, B:57:0x038b, B:59:0x0396, B:61:0x03bc, B:63:0x03d0, B:64:0x03dc, B:66:0x03e0, B:67:0x03e7, B:69:0x03eb, B:70:0x03f3, B:72:0x03f7, B:96:0x03af, B:98:0x037f, B:100:0x033c, B:102:0x02cc, B:104:0x02d0, B:105:0x02d9, B:124:0x0247, B:127:0x0253, B:128:0x0260, B:130:0x0264, B:131:0x026b), top: B:107:0x01f3 }] */
-        /* JADX WARN: Removed duplicated region for block: B:57:0x038b A[Catch: all -> 0x023a, TryCatch #0 {all -> 0x023a, blocks: (B:108:0x01f3, B:110:0x020b, B:111:0x0213, B:114:0x021d, B:116:0x0225, B:118:0x022d, B:119:0x022f, B:122:0x023d, B:15:0x027c, B:17:0x0281, B:19:0x0297, B:20:0x029f, B:23:0x02a9, B:25:0x02b3, B:27:0x02c0, B:29:0x02e2, B:31:0x02e6, B:33:0x02fc, B:34:0x0304, B:37:0x030e, B:39:0x0318, B:41:0x0325, B:43:0x0341, B:45:0x0345, B:47:0x035e, B:48:0x0366, B:51:0x0370, B:53:0x037a, B:55:0x0386, B:57:0x038b, B:59:0x0396, B:61:0x03bc, B:63:0x03d0, B:64:0x03dc, B:66:0x03e0, B:67:0x03e7, B:69:0x03eb, B:70:0x03f3, B:72:0x03f7, B:96:0x03af, B:98:0x037f, B:100:0x033c, B:102:0x02cc, B:104:0x02d0, B:105:0x02d9, B:124:0x0247, B:127:0x0253, B:128:0x0260, B:130:0x0264, B:131:0x026b), top: B:107:0x01f3 }] */
-        /* JADX WARN: Removed duplicated region for block: B:63:0x03d0 A[Catch: all -> 0x023a, TryCatch #0 {all -> 0x023a, blocks: (B:108:0x01f3, B:110:0x020b, B:111:0x0213, B:114:0x021d, B:116:0x0225, B:118:0x022d, B:119:0x022f, B:122:0x023d, B:15:0x027c, B:17:0x0281, B:19:0x0297, B:20:0x029f, B:23:0x02a9, B:25:0x02b3, B:27:0x02c0, B:29:0x02e2, B:31:0x02e6, B:33:0x02fc, B:34:0x0304, B:37:0x030e, B:39:0x0318, B:41:0x0325, B:43:0x0341, B:45:0x0345, B:47:0x035e, B:48:0x0366, B:51:0x0370, B:53:0x037a, B:55:0x0386, B:57:0x038b, B:59:0x0396, B:61:0x03bc, B:63:0x03d0, B:64:0x03dc, B:66:0x03e0, B:67:0x03e7, B:69:0x03eb, B:70:0x03f3, B:72:0x03f7, B:96:0x03af, B:98:0x037f, B:100:0x033c, B:102:0x02cc, B:104:0x02d0, B:105:0x02d9, B:124:0x0247, B:127:0x0253, B:128:0x0260, B:130:0x0264, B:131:0x026b), top: B:107:0x01f3 }] */
-        /* JADX WARN: Removed duplicated region for block: B:66:0x03e0 A[Catch: all -> 0x023a, TryCatch #0 {all -> 0x023a, blocks: (B:108:0x01f3, B:110:0x020b, B:111:0x0213, B:114:0x021d, B:116:0x0225, B:118:0x022d, B:119:0x022f, B:122:0x023d, B:15:0x027c, B:17:0x0281, B:19:0x0297, B:20:0x029f, B:23:0x02a9, B:25:0x02b3, B:27:0x02c0, B:29:0x02e2, B:31:0x02e6, B:33:0x02fc, B:34:0x0304, B:37:0x030e, B:39:0x0318, B:41:0x0325, B:43:0x0341, B:45:0x0345, B:47:0x035e, B:48:0x0366, B:51:0x0370, B:53:0x037a, B:55:0x0386, B:57:0x038b, B:59:0x0396, B:61:0x03bc, B:63:0x03d0, B:64:0x03dc, B:66:0x03e0, B:67:0x03e7, B:69:0x03eb, B:70:0x03f3, B:72:0x03f7, B:96:0x03af, B:98:0x037f, B:100:0x033c, B:102:0x02cc, B:104:0x02d0, B:105:0x02d9, B:124:0x0247, B:127:0x0253, B:128:0x0260, B:130:0x0264, B:131:0x026b), top: B:107:0x01f3 }] */
-        /* JADX WARN: Removed duplicated region for block: B:69:0x03eb A[Catch: all -> 0x023a, TryCatch #0 {all -> 0x023a, blocks: (B:108:0x01f3, B:110:0x020b, B:111:0x0213, B:114:0x021d, B:116:0x0225, B:118:0x022d, B:119:0x022f, B:122:0x023d, B:15:0x027c, B:17:0x0281, B:19:0x0297, B:20:0x029f, B:23:0x02a9, B:25:0x02b3, B:27:0x02c0, B:29:0x02e2, B:31:0x02e6, B:33:0x02fc, B:34:0x0304, B:37:0x030e, B:39:0x0318, B:41:0x0325, B:43:0x0341, B:45:0x0345, B:47:0x035e, B:48:0x0366, B:51:0x0370, B:53:0x037a, B:55:0x0386, B:57:0x038b, B:59:0x0396, B:61:0x03bc, B:63:0x03d0, B:64:0x03dc, B:66:0x03e0, B:67:0x03e7, B:69:0x03eb, B:70:0x03f3, B:72:0x03f7, B:96:0x03af, B:98:0x037f, B:100:0x033c, B:102:0x02cc, B:104:0x02d0, B:105:0x02d9, B:124:0x0247, B:127:0x0253, B:128:0x0260, B:130:0x0264, B:131:0x026b), top: B:107:0x01f3 }] */
-        /* JADX WARN: Removed duplicated region for block: B:72:0x03f7 A[Catch: all -> 0x023a, TRY_LEAVE, TryCatch #0 {all -> 0x023a, blocks: (B:108:0x01f3, B:110:0x020b, B:111:0x0213, B:114:0x021d, B:116:0x0225, B:118:0x022d, B:119:0x022f, B:122:0x023d, B:15:0x027c, B:17:0x0281, B:19:0x0297, B:20:0x029f, B:23:0x02a9, B:25:0x02b3, B:27:0x02c0, B:29:0x02e2, B:31:0x02e6, B:33:0x02fc, B:34:0x0304, B:37:0x030e, B:39:0x0318, B:41:0x0325, B:43:0x0341, B:45:0x0345, B:47:0x035e, B:48:0x0366, B:51:0x0370, B:53:0x037a, B:55:0x0386, B:57:0x038b, B:59:0x0396, B:61:0x03bc, B:63:0x03d0, B:64:0x03dc, B:66:0x03e0, B:67:0x03e7, B:69:0x03eb, B:70:0x03f3, B:72:0x03f7, B:96:0x03af, B:98:0x037f, B:100:0x033c, B:102:0x02cc, B:104:0x02d0, B:105:0x02d9, B:124:0x0247, B:127:0x0253, B:128:0x0260, B:130:0x0264, B:131:0x026b), top: B:107:0x01f3 }] */
-        /* JADX WARN: Removed duplicated region for block: B:81:0x0402  */
-        /* JADX WARN: Removed duplicated region for block: B:84:0x0409  */
-        /* JADX WARN: Removed duplicated region for block: B:87:0x0434  */
-        /* JADX WARN: Removed duplicated region for block: B:93:0x0463  */
-        /* JADX WARN: Removed duplicated region for block: B:94:0x042f  */
-        /* JADX WARN: Removed duplicated region for block: B:95:0x03da  */
-        /* JADX WARN: Removed duplicated region for block: B:97:0x03b8  */
-        /* JADX WARN: Removed duplicated region for block: B:99:0x0384  */
+        /* JADX WARN: Removed duplicated region for block: B:130:0x0337  */
+        /* JADX WARN: Removed duplicated region for block: B:38:0x0111  */
+        /* JADX WARN: Removed duplicated region for block: B:39:0x011a  */
+        /* JADX WARN: Removed duplicated region for block: B:42:0x0137  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public static final com.android.systemui.statusbar.notification.row.NotificationRowContentBinderImpl.InflationProgress access$beginInflationAsync(com.android.systemui.statusbar.notification.row.NotificationRowContentBinderImpl.Companion r27, int r28, final com.android.systemui.statusbar.notification.collection.NotificationEntry r29, final android.app.Notification.Builder r30, com.android.systemui.statusbar.notification.row.NotificationRowContentBinder.BindParams r31, android.content.Context r32, android.content.Context r33, com.android.systemui.statusbar.notification.row.ExpandableNotificationRow r34, com.android.systemui.statusbar.notification.row.NotifLayoutInflaterFactory.Provider r35, com.android.systemui.statusbar.notification.row.HeadsUpStyleProvider r36, com.android.systemui.statusbar.notification.ConversationNotificationProcessor r37, com.android.systemui.statusbar.notification.row.NotificationRowContentBinderLogger r38) {
-            /*
-                Method dump skipped, instructions count: 1170
-                To view this dump change 'Code comments level' option to 'DEBUG'
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.notification.row.NotificationRowContentBinderImpl.Companion.access$beginInflationAsync(com.android.systemui.statusbar.notification.row.NotificationRowContentBinderImpl$Companion, int, com.android.systemui.statusbar.notification.collection.NotificationEntry, android.app.Notification$Builder, com.android.systemui.statusbar.notification.row.NotificationRowContentBinder$BindParams, android.content.Context, android.content.Context, com.android.systemui.statusbar.notification.row.ExpandableNotificationRow, com.android.systemui.statusbar.notification.row.NotifLayoutInflaterFactory$Provider, com.android.systemui.statusbar.notification.row.HeadsUpStyleProvider, com.android.systemui.statusbar.notification.ConversationNotificationProcessor, com.android.systemui.statusbar.notification.row.NotificationRowContentBinderLogger):com.android.systemui.statusbar.notification.row.NotificationRowContentBinderImpl$InflationProgress");
+        public static final InflationProgress access$beginInflationAsync(Companion companion, int i, final NotificationEntry notificationEntry, final Notification.Builder builder, NotificationRowContentBinder.BindParams bindParams, Context context, Context context2, ExpandableNotificationRow expandableNotificationRow, NotifLayoutInflaterFactory.Provider provider, HeadsUpStyleProvider headsUpStyleProvider, ConversationNotificationProcessor conversationNotificationProcessor, NotificationRowContentBinderLogger notificationRowContentBinderLogger) throws Resources.NotFoundException {
+            int i2;
+            RowImageInflaterStub rowImageInflaterStub;
+            Notification.MessagingStyle messagingStyle;
+            NotificationRowContentBinderLogger notificationRowContentBinderLogger2;
+            NotificationRowContentBinder.BindParams bindParams2;
+            RemoteViews remoteViewsAccess$createContentView;
+            RemoteViews remoteViews;
+            RemoteViews remoteViews2;
+            Context context3;
+            RemoteViews remoteViews3;
+            RemoteViews remoteViewsCreateHeadsUpContentView;
+            Context context4;
+            RemoteViews remoteViews4;
+            NotifLayoutInflaterFactory.Provider provider2;
+            SingleLineViewModel singleLineViewModelInflateSingleLineViewModel;
+            Notification.Builder builder2;
+            SingleLineViewModel singleLineViewModelInflatePublicSingleLineViewModel;
+            RemoteViews remoteViewsMakePublicContentView;
+            RemoteViews remoteViewsAccess$createExpandedView;
+            RemoteViews remoteViewsAccess$createExpandedView2;
+            Notification.MessagingStyle messagingStyle2;
+            int i3;
+            companion.getClass();
+            RowImageInflater.Companion companion2 = RowImageInflater.Companion;
+            ImageModelIndex imageModelIndex = expandableNotificationRow.mImageModelIndex;
+            int i4 = i & 1;
+            companion2.getClass();
+            RowImageInflaterStub rowImageInflaterStub2 = RowImageInflaterStub.INSTANCE;
+            PromotedNotificationContentModel.Companion.getClass();
+            if (notificationEntry.mRanking.isConversation()) {
+                conversationNotificationProcessor.getClass();
+                Notification.Style style = builder.getStyle();
+                Notification.MessagingStyle messagingStyle3 = style instanceof Notification.MessagingStyle ? (Notification.MessagingStyle) style : null;
+                if (messagingStyle3 == null) {
+                    i2 = i4;
+                    rowImageInflaterStub = rowImageInflaterStub2;
+                    messagingStyle2 = null;
+                } else {
+                    boolean z = false;
+                    messagingStyle3.setConversationType(notificationEntry.mRanking.getChannel().isImportantConversation() ? 2 : notificationEntry.mRanking.isConversation() ? 1 : 0);
+                    ShortcutInfo conversationShortcutInfo = notificationEntry.mRanking.getConversationShortcutInfo();
+                    if (conversationShortcutInfo != null) {
+                        notificationRowContentBinderLogger.logAsyncTaskProgress(NotificationUtils.logKey(notificationEntry), "getting shortcut icon");
+                        messagingStyle3.setShortcutIcon(conversationNotificationProcessor.launcherApps.getShortcutIcon(conversationShortcutInfo));
+                        CharSequence label = conversationShortcutInfo.getLabel();
+                        if (label != null) {
+                            messagingStyle3.setConversationTitle(label);
+                        }
+                    }
+                    boolean zEquals = notificationEntry.mSbn.getPackageName().equals("com.kakao.talk");
+                    String str = notificationEntry.mKey;
+                    if (zEquals) {
+                        List<Bundle> listSemGetNotificationHistoryForPackage = ((NotificationManager) conversationNotificationProcessor.context.getSystemService(NotificationManager.class)).semGetNotificationHistoryForPackage(conversationNotificationProcessor.context.getPackageName(), conversationNotificationProcessor.context.getAttributionTag(), notificationEntry.mSbn.getUserId(), notificationEntry.mSbn.getPackageName(), notificationEntry.mSbn.getKey(), 5);
+                        ArrayList arrayList = new ArrayList();
+                        if (listSemGetNotificationHistoryForPackage != null) {
+                            int i5 = 0;
+                            for (Bundle bundle : listSemGetNotificationHistoryForPackage) {
+                                i2 = i4;
+                                rowImageInflaterStub = rowImageInflaterStub2;
+                                if (bundle.getBoolean("isChecked", z) || (i3 = i5) == 5) {
+                                    break;
+                                }
+                                arrayList.add(bundle);
+                                i5 = i3 + 1;
+                                rowImageInflaterStub2 = rowImageInflaterStub;
+                                i4 = i2;
+                                z = false;
+                            }
+                            i2 = i4;
+                            rowImageInflaterStub = rowImageInflaterStub2;
+                            String simpleName = Reflection.getOrCreateKotlinClass(ConversationNotificationProcessor.class).getSimpleName();
+                            int size = arrayList.size();
+                            List<Notification.MessagingStyle.Message> messages = messagingStyle3.getMessages();
+                            Integer numValueOf = messages == null ? Integer.valueOf(messages.size()) : null;
+                            StringBuilder sbM890m = ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m890m(size, "addHistory to ", str, " h.size ", "  m.size ");
+                            sbM890m.append(numValueOf);
+                            Log.d(simpleName, sbM890m.toString());
+                            if (arrayList.size() > 1) {
+                                int size2 = arrayList.size();
+                                List<Notification.MessagingStyle.Message> messages2 = messagingStyle3.getMessages();
+                                if (size2 > (messages2 != null ? messages2.size() : 0)) {
+                                    List<Notification.MessagingStyle.Message> messages3 = messagingStyle3.getMessages();
+                                    if (messages3 != null) {
+                                        messages3.clear();
+                                    }
+                                    int size3 = arrayList.size();
+                                    int i6 = 0;
+                                    int i7 = 0;
+                                    while (i6 < size3) {
+                                        Object obj = arrayList.get(i6);
+                                        int i8 = i6 + 1;
+                                        int i9 = i7 + 1;
+                                        if (i7 < 0) {
+                                            CollectionsKt__CollectionsKt.throwIndexOverflow();
+                                            throw null;
+                                        }
+                                        Bundle bundle2 = (Bundle) arrayList.get((arrayList.size() - 1) - i7);
+                                        int i10 = size3;
+                                        messagingStyle3.addMessage(bundle2.getString("text", ""), bundle2.getLong("when", 0L), bundle2.getString(UniversalCredentialUtil.AGENT_TITLE, "").equals("NOUI_2023") ? conversationNotificationProcessor.context.getString(R.string.notification_conversation_history_owner) : bundle2.getString(UniversalCredentialUtil.AGENT_TITLE, ""));
+                                        i7 = i9;
+                                        size3 = i10;
+                                        i6 = i8;
+                                    }
+                                }
+                            }
+                        } else {
+                            i2 = i4;
+                            rowImageInflaterStub = rowImageInflaterStub2;
+                            String simpleName2 = Reflection.getOrCreateKotlinClass(ConversationNotificationProcessor.class).getSimpleName();
+                            int size4 = arrayList.size();
+                            List<Notification.MessagingStyle.Message> messages4 = messagingStyle3.getMessages();
+                            if (messages4 == null) {
+                            }
+                            StringBuilder sbM890m2 = ConstraintSet$WriteJsonEngine$$ExternalSyntheticOutline0.m890m(size4, "addHistory to ", str, " h.size ", "  m.size ");
+                            sbM890m2.append(numValueOf);
+                            Log.d(simpleName2, sbM890m2.toString());
+                            if (arrayList.size() > 1) {
+                            }
+                        }
+                    } else {
+                        i2 = i4;
+                        rowImageInflaterStub = rowImageInflaterStub2;
+                    }
+                    final ConversationNotificationManager conversationNotificationManager = conversationNotificationProcessor.conversationNotificationManager;
+                    Object objCompute = conversationNotificationManager.states.compute(str, new ConversationNotificationManager$sam$java_util_function_BiFunction$0(new Function2() { // from class: com.android.systemui.statusbar.notification.ConversationNotificationManager$$ExternalSyntheticLambda3
+                        @Override // kotlin.jvm.functions.Function2
+                        public final Object invoke(Object obj2, Object obj3) {
+                            int i11 = 1;
+                            Notification.Builder builder3 = builder;
+                            ConversationNotificationManager.ConversationState conversationState = (ConversationNotificationManager.ConversationState) obj3;
+                            int i12 = ConversationNotificationManager.$r8$clinit;
+                            if (conversationState != null) {
+                                ConversationNotificationManager conversationNotificationManager2 = conversationNotificationManager;
+                                conversationNotificationManager2.getClass();
+                                Notification notification2 = conversationState.f134notification;
+                                boolean zAreStyledNotificationsVisiblyDifferent = (notification2.flags & 8) != 0 ? false : Notification.areStyledNotificationsVisiblyDifferent(Notification.Builder.recoverBuilder(conversationNotificationManager2.context, notification2), builder3);
+                                int i13 = conversationState.unreadCount;
+                                if (zAreStyledNotificationsVisiblyDifferent) {
+                                    i13++;
+                                }
+                                i11 = i13;
+                            }
+                            return new ConversationNotificationManager.ConversationState(i11, notificationEntry.mSbn.getNotification());
+                        }
+                    }));
+                    objCompute.getClass();
+                    messagingStyle3.setUnreadMessageCount(((ConversationNotificationManager.ConversationState) objCompute).unreadCount);
+                    messagingStyle2 = messagingStyle3;
+                }
+                messagingStyle = messagingStyle2;
+            } else {
+                i2 = i4;
+                rowImageInflaterStub = rowImageInflaterStub2;
+                messagingStyle = null;
+            }
+            boolean zIsEnabled = Trace.isEnabled();
+            if (zIsEnabled) {
+                TraceUtilsKt.beginSlice("NotificationContentInflater.createRemoteViews");
+            }
+            if (i2 != 0) {
+                try {
+                    notificationRowContentBinderLogger2 = notificationRowContentBinderLogger;
+                    notificationRowContentBinderLogger2.logAsyncTaskProgress(expandableNotificationRow.mLoggingKey, "creating contracted remote view");
+                    OngoingActivityDataHelper ongoingActivityDataHelper = OngoingActivityDataHelper.INSTANCE;
+                    String str2 = expandableNotificationRow.mEntry.mKey;
+                    ongoingActivityDataHelper.getClass();
+                    OngoingActivityData pendingOngoingActivityData = OngoingActivityDataHelper.getPendingOngoingActivityData(str2);
+                    if (pendingOngoingActivityData == null) {
+                        pendingOngoingActivityData = OngoingActivityDataHelper.getOngoingActivityDataByKey(expandableNotificationRow.mEntry.mKey);
+                    }
+                    if (!expandableNotificationRow.mEntry.isOngoingActivity() || pendingOngoingActivityData == null) {
+                        bindParams2 = bindParams;
+                        remoteViewsAccess$createContentView = access$createContentView(NotificationRowContentBinderImpl.Companion, builder, bindParams2.isMinimized);
+                    } else {
+                        String str3 = pendingOngoingActivityData.mPrimaryInfo;
+                        bindParams2 = bindParams;
+                        if (bindParams2.isMinimized) {
+                            if (str3.equals("No primary info")) {
+                                str3 = pendingOngoingActivityData.mAppName;
+                            }
+                            Notification.Builder contentTitle = builder.setContentTitle(str3);
+                            String str4 = pendingOngoingActivityData.mSecondaryInfo;
+                            if (str4 == null) {
+                                str4 = "";
+                            }
+                            contentTitle.setContentText(str4);
+                            remoteViewsAccess$createContentView = builder.makeLowPriorityContentView(false);
+                        } else {
+                            boolean zBooleanValue = expandableNotificationRow.mEntry.mIsRon.booleanValue();
+                            boolean z2 = bindParams2.isMinimized;
+                            if (zBooleanValue) {
+                                builder.setColorized(false);
+                                remoteViewsAccess$createContentView = access$createContentView(NotificationRowContentBinderImpl.Companion, builder, z2);
+                                remoteViewsAccess$createContentView.setInt(16909885, "setBackgroundResource", 0);
+                            } else {
+                                remoteViewsAccess$createContentView = pendingOngoingActivityData.mOngoingCollapsedView;
+                                if (remoteViewsAccess$createContentView == null) {
+                                    remoteViewsAccess$createContentView = access$createContentView(NotificationRowContentBinderImpl.Companion, builder, z2);
+                                }
+                            }
+                        }
+                    }
+                    remoteViews = remoteViewsAccess$createContentView;
+                } catch (Throwable th) {
+                    if (zIsEnabled) {
+                        TraceUtilsKt.endSlice();
+                    }
+                    throw th;
+                }
+            } else {
+                bindParams2 = bindParams;
+                notificationRowContentBinderLogger2 = notificationRowContentBinderLogger;
+                remoteViews = null;
+            }
+            if ((i & 2) != 0) {
+                notificationRowContentBinderLogger2.logAsyncTaskProgress(expandableNotificationRow.mLoggingKey, "creating expanded remote view");
+                OngoingActivityDataHelper ongoingActivityDataHelper2 = OngoingActivityDataHelper.INSTANCE;
+                String str5 = expandableNotificationRow.mEntry.mKey;
+                ongoingActivityDataHelper2.getClass();
+                OngoingActivityData pendingOngoingActivityData2 = OngoingActivityDataHelper.getPendingOngoingActivityData(str5);
+                if (pendingOngoingActivityData2 == null) {
+                    pendingOngoingActivityData2 = OngoingActivityDataHelper.getOngoingActivityDataByKey(expandableNotificationRow.mEntry.mKey);
+                }
+                if (!expandableNotificationRow.mEntry.isOngoingActivity() || pendingOngoingActivityData2 == null) {
+                    remoteViewsAccess$createExpandedView2 = access$createExpandedView(NotificationRowContentBinderImpl.Companion, builder, bindParams2.isMinimized);
+                } else if (expandableNotificationRow.mEntry.mIsRon.booleanValue()) {
+                    builder.setColorized(false);
+                    remoteViewsAccess$createExpandedView2 = access$createExpandedView(NotificationRowContentBinderImpl.Companion, builder, bindParams2.isMinimized);
+                    if (remoteViewsAccess$createExpandedView2 != null) {
+                        remoteViewsAccess$createExpandedView2.setInt(16909885, "setBackgroundResource", 0);
+                        remoteViewsAccess$createExpandedView2.addFlags(1);
+                    }
+                    remoteViews2 = null;
+                } else {
+                    remoteViewsAccess$createExpandedView2 = pendingOngoingActivityData2.mOngoingENRExpandView;
+                    if (remoteViewsAccess$createExpandedView2 == null) {
+                        remoteViewsAccess$createExpandedView2 = access$createContentView(NotificationRowContentBinderImpl.Companion, builder, bindParams2.isMinimized);
+                    }
+                }
+                remoteViews2 = remoteViewsAccess$createExpandedView2;
+            } else {
+                remoteViews2 = null;
+            }
+            if ((i & 256) != 0) {
+                notificationRowContentBinderLogger2.logAsyncTaskProgress(expandableNotificationRow.mLoggingKey, "creating promoted ongoing card view");
+                OngoingActivityDataHelper ongoingActivityDataHelper3 = OngoingActivityDataHelper.INSTANCE;
+                String str6 = expandableNotificationRow.mEntry.mKey;
+                ongoingActivityDataHelper3.getClass();
+                OngoingActivityData pendingOngoingActivityData3 = OngoingActivityDataHelper.getPendingOngoingActivityData(str6);
+                if (pendingOngoingActivityData3 == null) {
+                    pendingOngoingActivityData3 = OngoingActivityDataHelper.getOngoingActivityDataByKey(expandableNotificationRow.mEntry.mKey);
+                }
+                if (!expandableNotificationRow.mEntry.isOngoingActivity() || pendingOngoingActivityData3 == null) {
+                    context3 = context;
+                    remoteViews3 = null;
+                } else {
+                    if (expandableNotificationRow.mEntry.mIsRon.booleanValue()) {
+                        builder.setColorized(false);
+                        remoteViewsAccess$createExpandedView = access$createExpandedView(NotificationRowContentBinderImpl.Companion, builder, bindParams2.isMinimized);
+                        if (remoteViewsAccess$createExpandedView != null) {
+                            remoteViewsAccess$createExpandedView.setInt(16909885, "setBackgroundResource", 0);
+                            OngoingActivityLayoutUtil.INSTANCE.getClass();
+                            context3 = context;
+                            OngoingActivityLayoutUtil.refactorRonLayout(remoteViewsAccess$createExpandedView, pendingOngoingActivityData3, context3);
+                            pendingOngoingActivityData3.mOngoingOAExpandView = remoteViewsAccess$createExpandedView;
+                        }
+                        context3 = context;
+                        remoteViews3 = null;
+                    } else {
+                        context3 = context;
+                        remoteViewsAccess$createExpandedView = pendingOngoingActivityData3.mOngoingOAExpandView;
+                    }
+                    remoteViews3 = remoteViewsAccess$createExpandedView;
+                }
+            }
+            if ((i & 4) != 0) {
+                notificationRowContentBinderLogger2.logAsyncTaskProgress(expandableNotificationRow.mLoggingKey, "creating heads up remote view");
+                headsUpStyleProvider.getClass();
+                OngoingActivityDataHelper ongoingActivityDataHelper4 = OngoingActivityDataHelper.INSTANCE;
+                String str7 = expandableNotificationRow.mEntry.mKey;
+                ongoingActivityDataHelper4.getClass();
+                OngoingActivityData pendingOngoingActivityData4 = OngoingActivityDataHelper.getPendingOngoingActivityData(str7);
+                if (pendingOngoingActivityData4 == null) {
+                    pendingOngoingActivityData4 = OngoingActivityDataHelper.getOngoingActivityDataByKey(expandableNotificationRow.mEntry.mKey);
+                }
+                remoteViewsCreateHeadsUpContentView = (!expandableNotificationRow.mEntry.isOngoingActivity() || pendingOngoingActivityData4 == null || expandableNotificationRow.mEntry.mIsRon.booleanValue()) ? builder.createHeadsUpContentView() : pendingOngoingActivityData4.mOngoingCollapsedView;
+            } else {
+                remoteViewsCreateHeadsUpContentView = null;
+            }
+            if ((i & 8) != 0) {
+                notificationRowContentBinderLogger2.logAsyncTaskProgress(expandableNotificationRow.mLoggingKey, "creating public remote view");
+                if (bindParams2.redactionType == 2) {
+                    context4 = context2;
+                    remoteViewsMakePublicContentView = access$createSensitiveContentMessageNotification(NotificationRowContentBinderImpl.Companion, notificationEntry.mSbn.getNotification(), builder.getStyle(), context3, context4).createContentView();
+                } else {
+                    context4 = context2;
+                    remoteViewsMakePublicContentView = builder.makePublicContentView(bindParams2.isMinimized);
+                }
+                remoteViews4 = remoteViewsMakePublicContentView;
+            } else {
+                context4 = context2;
+                remoteViews4 = null;
+            }
+            Companion companion3 = NotificationRowContentBinderImpl.Companion;
+            NewRemoteViews newRemoteViews = new NewRemoteViews(remoteViews, remoteViewsCreateHeadsUpContentView, remoteViews2, remoteViews4, null, null, remoteViews3);
+            companion3.getClass();
+            RemoteViews remoteViews5 = newRemoteViews.contracted;
+            if (remoteViews5 != null) {
+                provider2 = provider;
+                remoteViews5.setLayoutInflaterFactory(provider2.provide(expandableNotificationRow, 1));
+            } else {
+                provider2 = provider;
+            }
+            RemoteViews remoteViews6 = newRemoteViews.expanded;
+            if (remoteViews6 != null) {
+                remoteViews6.setLayoutInflaterFactory(provider2.provide(expandableNotificationRow, 2));
+            }
+            RemoteViews remoteViews7 = newRemoteViews.headsUp;
+            if (remoteViews7 != null) {
+                remoteViews7.setLayoutInflaterFactory(provider2.provide(expandableNotificationRow, 4));
+            }
+            RemoteViews remoteViews8 = newRemoteViews.f107public;
+            if (remoteViews8 != null) {
+                remoteViews8.setLayoutInflaterFactory(provider2.provide(expandableNotificationRow, 8));
+            }
+            if (zIsEnabled) {
+                TraceUtilsKt.endSlice();
+            }
+            if ((i & 16) != 0) {
+                notificationRowContentBinderLogger2.logAsyncTaskProgress(NotificationUtils.logKey(notificationEntry), "inflating single line view model");
+                singleLineViewModelInflateSingleLineViewModel = SingleLineViewInflater.inflateSingleLineViewModel(notificationEntry.mSbn.getNotification(), messagingStyle, builder, context, false, notificationEntry.mSbn.getNotification().extras.getCharSequence("android.summarization"));
+            } else {
+                singleLineViewModelInflateSingleLineViewModel = null;
+            }
+            if ((i & 128) != 0) {
+                notificationRowContentBinderLogger2.logAsyncTaskProgress(NotificationUtils.logKey(notificationEntry), "inflating public single line view model");
+                if (bindParams2.redactionType == 2) {
+                    singleLineViewModelInflatePublicSingleLineViewModel = SingleLineViewInflater.inflateSingleLineViewModel(notificationEntry.mSbn.getNotification(), messagingStyle, builder, context, true, null);
+                    builder2 = builder;
+                } else {
+                    builder2 = builder;
+                    singleLineViewModelInflatePublicSingleLineViewModel = SingleLineViewInflater.inflatePublicSingleLineViewModel(context, notificationEntry.mRanking.isConversation());
+                }
+            } else {
+                builder2 = builder;
+                singleLineViewModelInflatePublicSingleLineViewModel = null;
+            }
+            return new InflationProgress(context4, rowImageInflaterStub, newRemoteViews, new NotificationContentModel(new HeadsUpStatusBarModel(builder2.getHeadsUpStatusBarText(false), builder2.getHeadsUpStatusBarText(true)), singleLineViewModelInflateSingleLineViewModel, singleLineViewModelInflatePublicSingleLineViewModel), null);
         }
 
         public static final RemoteViews access$createContentView(Companion companion, Notification.Builder builder, boolean z) {
             companion.getClass();
             if (z) {
-                RemoteViews makeLowPriorityContentView = builder.makeLowPriorityContentView(false);
-                makeLowPriorityContentView.getClass();
-                return makeLowPriorityContentView;
+                RemoteViews remoteViewsMakeLowPriorityContentView = builder.makeLowPriorityContentView(false);
+                remoteViewsMakeLowPriorityContentView.getClass();
+                return remoteViewsMakeLowPriorityContentView;
             }
-            RemoteViews createContentView = builder.createContentView();
-            createContentView.getClass();
-            return createContentView;
+            RemoteViews remoteViewsCreateContentView = builder.createContentView();
+            remoteViewsCreateContentView.getClass();
+            return remoteViewsCreateContentView;
         }
 
         public static final RemoteViews access$createExpandedView(Companion companion, Notification.Builder builder, boolean z) {
             companion.getClass();
-            RemoteViews createBigContentView = builder.createBigContentView();
-            if (createBigContentView != null) {
-                return createBigContentView;
+            RemoteViews remoteViewsCreateBigContentView = builder.createBigContentView();
+            if (remoteViewsCreateBigContentView != null) {
+                return remoteViewsCreateBigContentView;
             }
             if (!z) {
                 return null;
             }
-            RemoteViews createContentView = builder.createContentView();
-            Notification.Builder.makeHeaderExpanded(createContentView);
-            return createContentView;
+            RemoteViews remoteViewsCreateContentView = builder.createContentView();
+            Notification.Builder.makeHeaderExpanded(remoteViewsCreateContentView);
+            return remoteViewsCreateContentView;
         }
 
         public static final Notification.Builder access$createSensitiveContentMessageNotification(Companion companion, Notification notification2, Notification.Style style, Context context, Context context2) {
@@ -876,9 +1221,9 @@ public final class NotificationRowContentBinderImpl implements NotificationRowCo
                 messagingStyle2.setConversationType(messagingStyle.getConversationType());
                 messagingStyle2.setShortcutIcon(messagingStyle.getShortcutIcon());
                 messagingStyle2.setBuilder(builder);
-                Notification.MessagingStyle.Message findLatestIncomingMessage = Notification.MessagingStyle.findLatestIncomingMessage(messagingStyle.getMessages());
-                if (findLatestIncomingMessage != null) {
-                    messagingStyle2.addMessage(new Notification.MessagingStyle.Message(string, findLatestIncomingMessage.getTimestamp(), findLatestIncomingMessage.getSenderPerson()));
+                Notification.MessagingStyle.Message messageFindLatestIncomingMessage = Notification.MessagingStyle.findLatestIncomingMessage(messagingStyle.getMessages());
+                if (messageFindLatestIncomingMessage != null) {
+                    messagingStyle2.addMessage(new Notification.MessagingStyle.Message(string, messageFindLatestIncomingMessage.getTimestamp(), messageFindLatestIncomingMessage.getSenderPerson()));
                 }
                 builder.setStyle(messagingStyle2);
             } else {
@@ -915,14 +1260,14 @@ public final class NotificationRowContentBinderImpl implements NotificationRowCo
             }
         }
 
-        public static boolean finishIfDone(InflationProgress inflationProgress, int i, NotifRemoteViewCache notifRemoteViewCache, HashMap hashMap, NotificationRowContentBinder.InflationCallback inflationCallback, NotificationEntry notificationEntry, ExpandableNotificationRow expandableNotificationRow, NotificationRowContentBinderLogger notificationRowContentBinderLogger) {
+        public static boolean finishIfDone(InflationProgress inflationProgress, int i, NotifRemoteViewCache notifRemoteViewCache, HashMap map, NotificationRowContentBinder.InflationCallback inflationCallback, NotificationEntry notificationEntry, ExpandableNotificationRow expandableNotificationRow, NotificationRowContentBinderLogger notificationRowContentBinderLogger) {
             HybridNotificationView hybridNotificationView;
             SingleLineViewModel singleLineViewModel;
             HybridNotificationView hybridNotificationView2;
             SingleLineViewModel singleLineViewModel2;
             View view;
             Assert.isMainThread();
-            if (!hashMap.isEmpty()) {
+            if (!map.isEmpty()) {
                 return false;
             }
             notificationRowContentBinderLogger.logAsyncTaskProgress(expandableNotificationRow.mLoggingKey, "finishing");
@@ -952,9 +1297,9 @@ public final class NotificationRowContentBinderImpl implements NotificationRowCo
             int i3 = remoteViewsUpdater.reInflateFlags;
             if ((i3 & 2) != 0) {
                 if (remoteViews != null) {
-                    notificationRowContentBinderImpl$Companion$setContentViewsFromRemoteViews$3.mo779invoke(inflatedSmartReplyViewHolder);
+                    notificationRowContentBinderImpl$Companion$setContentViewsFromRemoteViews$3.mo781invoke(inflatedSmartReplyViewHolder);
                 } else {
-                    notificationRowContentBinderImpl$Companion$setContentViewsFromRemoteViews$3.mo779invoke(null);
+                    notificationRowContentBinderImpl$Companion$setContentViewsFromRemoteViews$3.mo781invoke(null);
                 }
             }
             if ((i & 2) != 0) {
@@ -972,9 +1317,9 @@ public final class NotificationRowContentBinderImpl implements NotificationRowCo
             NotificationRowContentBinderImpl$Companion$setContentViewsFromRemoteViews$6 notificationRowContentBinderImpl$Companion$setContentViewsFromRemoteViews$6 = new NotificationRowContentBinderImpl$Companion$setContentViewsFromRemoteViews$6(notificationContentView);
             if ((i3 & 4) != 0) {
                 if (remoteViews2 != null) {
-                    notificationRowContentBinderImpl$Companion$setContentViewsFromRemoteViews$6.mo779invoke(inflatedSmartReplyViewHolder2);
+                    notificationRowContentBinderImpl$Companion$setContentViewsFromRemoteViews$6.mo781invoke(inflatedSmartReplyViewHolder2);
                 } else {
-                    notificationRowContentBinderImpl$Companion$setContentViewsFromRemoteViews$6.mo779invoke(null);
+                    notificationRowContentBinderImpl$Companion$setContentViewsFromRemoteViews$6.mo781invoke(null);
                 }
             }
             expandableNotificationRow.mIsCustomHeadsUpNotification = NotificationContentInflater.isCustomNotification(notificationEntry.mSbn.getNotification(), notificationContentView.mHeadsUpChild, notificationEntry.mSbn.getNotification().headsUpContentView);
@@ -997,10 +1342,10 @@ public final class NotificationRowContentBinderImpl implements NotificationRowCo
             return true;
         }
 
-        public static void handleInflationError(HashMap hashMap, Exception exc, ExpandableNotificationRow expandableNotificationRow, NotificationEntry notificationEntry, NotificationRowContentBinder.InflationCallback inflationCallback, NotificationRowContentBinderLogger notificationRowContentBinderLogger, String str) {
+        public static void handleInflationError(HashMap map, Exception exc, ExpandableNotificationRow expandableNotificationRow, NotificationEntry notificationEntry, NotificationRowContentBinder.InflationCallback inflationCallback, NotificationRowContentBinderLogger notificationRowContentBinderLogger, String str) {
             Assert.isMainThread();
             notificationRowContentBinderLogger.logAsyncTaskException(expandableNotificationRow != null ? expandableNotificationRow.mLoggingKey : null, str, exc);
-            hashMap.values().forEach(new Consumer() { // from class: com.android.systemui.statusbar.notification.row.NotificationRowContentBinderImpl$Companion$handleInflationError$1
+            map.values().forEach(new Consumer() { // from class: com.android.systemui.statusbar.notification.row.NotificationRowContentBinderImpl$Companion$handleInflationError$1
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
                     ((CancellationSignal) obj).cancel();
@@ -1011,11 +1356,11 @@ public final class NotificationRowContentBinderImpl implements NotificationRowCo
             }
         }
 
-        public final void applyRemoteView(Executor executor, boolean z, final boolean z2, final InflationProgress inflationProgress, final int i, final int i2, final NotifRemoteViewCache notifRemoteViewCache, final NotificationEntry notificationEntry, final ExpandableNotificationRow expandableNotificationRow, final boolean z3, final RemoteViews.InteractionHandler interactionHandler, final NotificationRowContentBinder.InflationCallback inflationCallback, final ViewGroup viewGroup, final View view, final NotificationViewWrapper notificationViewWrapper, final HashMap<Integer, CancellationSignal> hashMap, final ApplyCallback applyCallback, final NotificationRowContentBinderLogger notificationRowContentBinderLogger, final FaceWidgetNotificationControllerWrapper faceWidgetNotificationControllerWrapper) {
-            CancellationSignal reapplyAsync;
+        public final void applyRemoteView(Executor executor, boolean z, final boolean z2, final InflationProgress inflationProgress, final int i, final int i2, final NotifRemoteViewCache notifRemoteViewCache, final NotificationEntry notificationEntry, final ExpandableNotificationRow expandableNotificationRow, final boolean z3, final RemoteViews.InteractionHandler interactionHandler, final NotificationRowContentBinder.InflationCallback inflationCallback, final ViewGroup viewGroup, final View view, final NotificationViewWrapper notificationViewWrapper, final HashMap<Integer, CancellationSignal> map, final ApplyCallback applyCallback, final NotificationRowContentBinderLogger notificationRowContentBinderLogger, final FaceWidgetNotificationControllerWrapper faceWidgetNotificationControllerWrapper) throws InflationException {
+            CancellationSignal cancellationSignalReapplyAsync;
             final RemoteViews remoteView = applyCallback.getRemoteView();
             if (!z) {
-                RemoteViews.OnViewAppliedListener onViewAppliedListener = new RemoteViews.OnViewAppliedListener(notificationEntry, hashMap, inflationCallback, notificationRowContentBinderLogger, i2, z3, applyCallback, notificationViewWrapper, inflationProgress, z2, i, notifRemoteViewCache, faceWidgetNotificationControllerWrapper, remoteView, viewGroup, interactionHandler, view) { // from class: com.android.systemui.statusbar.notification.row.NotificationRowContentBinderImpl$Companion$applyRemoteView$listener$1
+                RemoteViews.OnViewAppliedListener onViewAppliedListener = new RemoteViews.OnViewAppliedListener(notificationEntry, map, inflationCallback, notificationRowContentBinderLogger, i2, z3, applyCallback, notificationViewWrapper, inflationProgress, z2, i, notifRemoteViewCache, faceWidgetNotificationControllerWrapper, remoteView, viewGroup, interactionHandler, view) { // from class: com.android.systemui.statusbar.notification.row.NotificationRowContentBinderImpl$Companion$applyRemoteView$listener$1
                     public final /* synthetic */ NotificationRowContentBinderImpl.ApplyCallback $applyCallback;
                     public final /* synthetic */ NotificationRowContentBinder.InflationCallback $callback;
                     public final /* synthetic */ NotificationEntry $entry;
@@ -1044,70 +1389,201 @@ public final class NotificationRowContentBinderImpl implements NotificationRowCo
                     }
 
                     public final void onError(Exception exc) {
-                        View view2;
+                        View viewApply;
                         try {
                             if (this.$isNewView) {
-                                view2 = this.$newContentView.apply(this.$result.packageContext, this.$parentLayout, this.$remoteViewClickHandler);
+                                viewApply = this.$newContentView.apply(this.$result.packageContext, this.$parentLayout, this.$remoteViewClickHandler);
                             } else {
                                 this.$newContentView.reapply(this.$result.packageContext, this.$existingView, this.$remoteViewClickHandler);
-                                view2 = this.$existingView;
-                                view2.getClass();
+                                viewApply = this.$existingView;
+                                viewApply.getClass();
                             }
                             Log.wtf("NotifContentInflater", "Async Inflation failed but normal inflation finished normally.", exc);
-                            view2.getClass();
-                            onViewApplied(view2);
+                            viewApply.getClass();
+                            onViewApplied(viewApply);
                         } catch (Exception unused) {
                             this.$runningInflations.remove(Integer.valueOf(this.$inflationId));
                             NotificationRowContentBinderImpl.Companion companion = NotificationRowContentBinderImpl.Companion;
-                            HashMap hashMap2 = this.$runningInflations;
-                            ExpandableNotificationRow expandableNotificationRow2 = ExpandableNotificationRow.this;
+                            HashMap map2 = this.$runningInflations;
+                            ExpandableNotificationRow expandableNotificationRow2 = this.$row;
                             NotificationEntry notificationEntry2 = this.$entry;
                             NotificationRowContentBinder.InflationCallback inflationCallback2 = this.$callback;
                             NotificationRowContentBinderLogger notificationRowContentBinderLogger2 = this.$logger;
                             companion.getClass();
-                            NotificationRowContentBinderImpl.Companion.handleInflationError(hashMap2, exc, expandableNotificationRow2, notificationEntry2, inflationCallback2, notificationRowContentBinderLogger2, "applying view");
+                            NotificationRowContentBinderImpl.Companion.handleInflationError(map2, exc, expandableNotificationRow2, notificationEntry2, inflationCallback2, notificationRowContentBinderLogger2, "applying view");
                         }
                     }
 
-                    /* JADX WARN: Removed duplicated region for block: B:38:0x0192 A[Catch: NameNotFoundException -> 0x0176, TryCatch #0 {NameNotFoundException -> 0x0176, blocks: (B:27:0x0123, B:29:0x015c, B:31:0x0162, B:33:0x016d, B:38:0x0192, B:40:0x01a5, B:42:0x01b3, B:44:0x01b9, B:45:0x01df, B:47:0x01ff, B:48:0x0205, B:50:0x020b, B:51:0x020f, B:53:0x0222, B:55:0x01d4, B:56:0x01db, B:57:0x0226, B:58:0x0179, B:60:0x0181, B:62:0x0189), top: B:26:0x0123 }] */
-                    /* JADX WARN: Removed duplicated region for block: B:40:0x01a5 A[Catch: NameNotFoundException -> 0x0176, TryCatch #0 {NameNotFoundException -> 0x0176, blocks: (B:27:0x0123, B:29:0x015c, B:31:0x0162, B:33:0x016d, B:38:0x0192, B:40:0x01a5, B:42:0x01b3, B:44:0x01b9, B:45:0x01df, B:47:0x01ff, B:48:0x0205, B:50:0x020b, B:51:0x020f, B:53:0x0222, B:55:0x01d4, B:56:0x01db, B:57:0x0226, B:58:0x0179, B:60:0x0181, B:62:0x0189), top: B:26:0x0123 }] */
-                    /* JADX WARN: Removed duplicated region for block: B:57:0x0226 A[Catch: NameNotFoundException -> 0x0176, TRY_LEAVE, TryCatch #0 {NameNotFoundException -> 0x0176, blocks: (B:27:0x0123, B:29:0x015c, B:31:0x0162, B:33:0x016d, B:38:0x0192, B:40:0x01a5, B:42:0x01b3, B:44:0x01b9, B:45:0x01df, B:47:0x01ff, B:48:0x0205, B:50:0x020b, B:51:0x020f, B:53:0x0222, B:55:0x01d4, B:56:0x01db, B:57:0x0226, B:58:0x0179, B:60:0x0181, B:62:0x0189), top: B:26:0x0123 }] */
+                    /* JADX WARN: Removed duplicated region for block: B:34:0x00fc  */
+                    /* JADX WARN: Removed duplicated region for block: B:50:0x017c A[Catch: NameNotFoundException -> 0x0179, TryCatch #0 {NameNotFoundException -> 0x0179, blocks: (B:39:0x0126, B:41:0x015f, B:43:0x0165, B:45:0x0170, B:59:0x0195, B:61:0x01a8, B:63:0x01b6, B:65:0x01bc, B:68:0x01e2, B:70:0x0202, B:72:0x0208, B:74:0x020e, B:75:0x0212, B:77:0x0225, B:66:0x01d7, B:67:0x01de, B:78:0x0229, B:50:0x017c, B:52:0x0184, B:54:0x018c), top: B:95:0x0126 }] */
+                    /* JADX WARN: Removed duplicated region for block: B:59:0x0195 A[Catch: NameNotFoundException -> 0x0179, TryCatch #0 {NameNotFoundException -> 0x0179, blocks: (B:39:0x0126, B:41:0x015f, B:43:0x0165, B:45:0x0170, B:59:0x0195, B:61:0x01a8, B:63:0x01b6, B:65:0x01bc, B:68:0x01e2, B:70:0x0202, B:72:0x0208, B:74:0x020e, B:75:0x0212, B:77:0x0225, B:66:0x01d7, B:67:0x01de, B:78:0x0229, B:50:0x017c, B:52:0x0184, B:54:0x018c), top: B:95:0x0126 }] */
+                    /* JADX WARN: Removed duplicated region for block: B:61:0x01a8 A[Catch: NameNotFoundException -> 0x0179, TryCatch #0 {NameNotFoundException -> 0x0179, blocks: (B:39:0x0126, B:41:0x015f, B:43:0x0165, B:45:0x0170, B:59:0x0195, B:61:0x01a8, B:63:0x01b6, B:65:0x01bc, B:68:0x01e2, B:70:0x0202, B:72:0x0208, B:74:0x020e, B:75:0x0212, B:77:0x0225, B:66:0x01d7, B:67:0x01de, B:78:0x0229, B:50:0x017c, B:52:0x0184, B:54:0x018c), top: B:95:0x0126 }] */
+                    /* JADX WARN: Removed duplicated region for block: B:78:0x0229 A[Catch: NameNotFoundException -> 0x0179, TRY_LEAVE, TryCatch #0 {NameNotFoundException -> 0x0179, blocks: (B:39:0x0126, B:41:0x015f, B:43:0x0165, B:45:0x0170, B:59:0x0195, B:61:0x01a8, B:63:0x01b6, B:65:0x01bc, B:68:0x01e2, B:70:0x0202, B:72:0x0208, B:74:0x020e, B:75:0x0212, B:77:0x0225, B:66:0x01d7, B:67:0x01de, B:78:0x0229, B:50:0x017c, B:52:0x0184, B:54:0x018c), top: B:95:0x0126 }] */
                     /*
                         Code decompiled incorrectly, please refer to instructions dump.
-                        To view partially-correct code enable 'Show inconsistent code' option in preferences
                     */
-                    public final void onViewApplied(android.view.View r13) {
-                        /*
-                            Method dump skipped, instructions count: 685
-                            To view this dump change 'Code comments level' option to 'DEBUG'
-                        */
-                        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.notification.row.NotificationRowContentBinderImpl$Companion$applyRemoteView$listener$1.onViewApplied(android.view.View):void");
+                    public final void onViewApplied(View view2) throws Resources.NotFoundException, PackageManager.NameNotFoundException {
+                        NotificationRowIconView notificationRowIconView;
+                        boolean z4;
+                        String strIsValidView = NotificationRowContentBinderImpl.Companion.isValidView(view2, this.$entry, this.$row.getResources());
+                        if (strIsValidView != null) {
+                            NotificationRowContentBinderImpl.Companion.handleInflationError(this.$runningInflations, new InflationException(strIsValidView), this.$row, this.$entry, this.$callback, this.$logger, "applied invalid view");
+                            this.$runningInflations.remove(Integer.valueOf(this.$inflationId));
+                            return;
+                        }
+                        if (this.$entry.isOngoingActivity() && !this.$entry.mIsRon.booleanValue()) {
+                            OngoingActivityDataHelper ongoingActivityDataHelper = OngoingActivityDataHelper.INSTANCE;
+                            String str = this.$entry.mKey;
+                            ongoingActivityDataHelper.getClass();
+                            OngoingActivityData pendingOngoingActivityData = OngoingActivityDataHelper.getPendingOngoingActivityData(str);
+                            if (pendingOngoingActivityData == null) {
+                                pendingOngoingActivityData = OngoingActivityDataHelper.getOngoingActivityDataByKey(this.$entry.mKey);
+                            }
+                            if (pendingOngoingActivityData != null) {
+                                OngoingActivityLayoutUtil ongoingActivityLayoutUtil = OngoingActivityLayoutUtil.INSTANCE;
+                                Context context = this.$row.getContext();
+                                OngoingType ongoingType = OngoingType.ENR;
+                                ongoingActivityLayoutUtil.getClass();
+                                OngoingActivityLayoutUtil.updateNowbarSports(context, view2, pendingOngoingActivityData, ongoingType);
+                                OngoingActivityLayoutUtil.updateOngoingChronometer(view2, pendingOngoingActivityData, false);
+                                OngoingActivityLayoutUtil.updateOngoingHeader(view2, pendingOngoingActivityData);
+                                OngoingActivityLayoutUtil.updateOngoingDescription(view2);
+                            }
+                        }
+                        if (this.$isNewView) {
+                            this.$applyCallback.setResultView(view2);
+                        } else {
+                            NotificationViewWrapper notificationViewWrapper2 = this.$existingWrapper;
+                            if (notificationViewWrapper2 != null) {
+                                notificationViewWrapper2.onReinflated();
+                            }
+                        }
+                        this.$runningInflations.remove(Integer.valueOf(this.$inflationId));
+                        NotificationRowContentBinderImpl.Companion.finishIfDone(this.$result, this.$reInflateFlags, this.$remoteViewCache, this.$runningInflations, this.$callback, this.$entry, this.$row, this.$logger);
+                        final NotificationColorPicker notificationColorPicker = (NotificationColorPicker) Dependency.sDependency.getDependencyInner(NotificationColorPicker.class);
+                        if (view2.findViewById(android.R.id.icon) instanceof CachingIconView) {
+                            notificationRowIconView = (NotificationRowIconView) view2.findViewById(android.R.id.icon);
+                        } else if (!this.$entry.isOngoingActivity() || this.$entry.isPromotedState()) {
+                            notificationRowIconView = null;
+                        } else if (Intrinsics.areEqual(view2.getTag(), "ongoingCollapsed")) {
+                            notificationRowIconView = (NotificationRowIconView) view2.findViewWithTag("ongoingCollapsedPrimaryIcon");
+                        } else if (Intrinsics.areEqual(view2.getTag(), "ongoingExpand")) {
+                            notificationRowIconView = (NotificationRowIconView) view2.findViewWithTag("ongoingExpandPrimaryIcon");
+                        }
+                        if (notificationRowIconView != null) {
+                            Pools.SimplePool simplePool = ImageTransformState.sInstancePool;
+                            notificationRowIconView.setTag(R.id.image_icon_tag, this.$row.mEntry.mSbn.getNotification().getSmallIcon());
+                            if (((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).isShowNotificationAppIconEnabled()) {
+                                try {
+                                    PackageManager packageManager = this.$row.getContext().getPackageManager();
+                                    String packageName = this.$row.mEntry.mSbn.getPackageName();
+                                    ApplicationInfo applicationInfo = packageManager.getApplicationInfo(packageName, 4202624);
+                                    List<LauncherActivityInfo> activityList = ((LauncherApps) this.$row.getContext().getSystemService(LauncherApps.class)).getActivityList(packageName, UserHandle.getUserHandleForUid(applicationInfo.uid));
+                                    if ((applicationInfo.flags & 129) == 0 || !activityList.isEmpty()) {
+                                        z4 = (Intrinsics.areEqual(packageName, "android") || Intrinsics.areEqual(packageName, "com.android.systemui") || applicationInfo.icon == 0) ? false : true;
+                                        if (z4) {
+                                            z4 = !this.$entry.mSbn.getNotification().extras.getBoolean("android.showSmallIcon");
+                                        }
+                                        if (z4) {
+                                            ((NotificationColorPicker) Dependency.sDependency.getDependencyInner(NotificationColorPicker.class)).updateSmallIcon(view2, this.$row, notificationRowIconView);
+                                        } else {
+                                            Drawable drawableSemGetBadgedIconForIconTray = ((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).isColorThemeAppIconSettingsOn() ? !activityList.isEmpty() ? activityList.get(0).semGetBadgedIconForIconTray(this.$row.getContext().getResources().getDisplayMetrics().densityDpi) : packageManager.semGetApplicationIconForIconTray(applicationInfo, 48) : packageManager.semGetApplicationIconForIconTray(applicationInfo, 1);
+                                            notificationRowIconView.setColorFilter((ColorFilter) null);
+                                            notificationRowIconView.setBackground((Drawable) null);
+                                            notificationRowIconView.setPadding(0, 0, 0, 0);
+                                            int dimensionPixelSize = this.$row.getContext().getResources().getDimensionPixelSize(R.dimen.notification_application_icon_size_squircle);
+                                            int maxDrawableWidth = notificationRowIconView.getMaxDrawableWidth() > 0 ? notificationRowIconView.getMaxDrawableWidth() : dimensionPixelSize;
+                                            if (notificationRowIconView.getMaxDrawableHeight() > 0) {
+                                                dimensionPixelSize = notificationRowIconView.getMaxDrawableHeight();
+                                            }
+                                            notificationRowIconView.setImageDrawable(notificationColorPicker.resizeDrawable(drawableSemGetBadgedIconForIconTray, maxDrawableWidth, dimensionPixelSize));
+                                            notificationRowIconView.setTag(R.id.use_app_icon, Boolean.TRUE);
+                                            if (view2 instanceof ConversationLayout) {
+                                                notificationColorPicker.applyShadow(view2);
+                                            }
+                                        }
+                                    } else {
+                                        packageName.getClass();
+                                        if (packageName.startsWith("com.samsung") || packageName.startsWith("com.sec")) {
+                                        }
+                                        if (z4) {
+                                        }
+                                        if (z4) {
+                                        }
+                                    }
+                                } catch (PackageManager.NameNotFoundException e) {
+                                    e.printStackTrace();
+                                }
+                            } else {
+                                ((NotificationColorPicker) Dependency.sDependency.getDependencyInner(NotificationColorPicker.class)).updateSmallIcon(view2, this.$row, notificationRowIconView);
+                            }
+                        }
+                        ExpandableNotificationRow expandableNotificationRow2 = this.$row;
+                        if (expandableNotificationRow2.mAnimationRunning) {
+                            expandableNotificationRow2.setAnimationRunning(true);
+                        } else {
+                            expandableNotificationRow2.setAnimationRunning(false);
+                        }
+                        Optional optionalOfNullable = Optional.ofNullable(this.$row);
+                        final NotificationRowContentBinderImpl$Companion$applyRemoteView$listener$1$$ExternalSyntheticLambda0 notificationRowContentBinderImpl$Companion$applyRemoteView$listener$1$$ExternalSyntheticLambda0 = new NotificationRowContentBinderImpl$Companion$applyRemoteView$listener$1$$ExternalSyntheticLambda0();
+                        Optional optionalFilter = optionalOfNullable.filter(new Predicate() { // from class: com.android.systemui.statusbar.notification.row.NotificationRowContentBinderImplKt$sam$java_util_function_Predicate$0
+                            @Override // java.util.function.Predicate
+                            public final /* synthetic */ boolean test(Object obj) {
+                                return ((Boolean) notificationRowContentBinderImpl$Companion$applyRemoteView$listener$1$$ExternalSyntheticLambda0.mo781invoke(obj)).booleanValue();
+                            }
+                        });
+                        final Function1 function1 = new Function1() { // from class: com.android.systemui.statusbar.notification.row.NotificationRowContentBinderImpl$Companion$applyRemoteView$listener$1$$ExternalSyntheticLambda1
+                            @Override // kotlin.jvm.functions.Function1
+                            /* renamed from: invoke */
+                            public final Object mo781invoke(Object obj) {
+                                ExpandableNotificationRow expandableNotificationRow3 = (ExpandableNotificationRow) obj;
+                                notificationColorPicker.updateAllTextViewColors(expandableNotificationRow3, expandableNotificationRow3.mDimmed);
+                                return Unit.INSTANCE;
+                            }
+                        };
+                        optionalFilter.ifPresent(new Consumer() { // from class: com.android.systemui.statusbar.notification.row.NotificationRowContentBinderImplKt$sam$java_util_function_Consumer$0
+                            @Override // java.util.function.Consumer
+                            public final /* synthetic */ void accept(Object obj) {
+                                function1.mo781invoke(obj);
+                            }
+                        });
+                        ExpandableNotificationRow expandableNotificationRow3 = this.$row;
+                        notificationColorPicker.getClass();
+                        if (NotificationColorPicker.isNeedToUpdated(expandableNotificationRow3)) {
+                            ExpandableNotificationRow expandableNotificationRow4 = this.$row;
+                            if (expandableNotificationRow4.mDimmed) {
+                                notificationColorPicker.updateBig(view2, notificationColorPicker.getAppPrimaryColor(expandableNotificationRow4), notificationColorPicker.isGrayScaleIcon(this.$row), this.$existingWrapper, true, this.$row);
+                            }
+                        }
+                        if (this.$row.mPinnedStatus.isPinned()) {
+                            this.$row.applyHeadsUpBackground(NotificationColorPicker.isCustom(this.$row));
+                        }
                     }
 
                     public final void onViewInflated(View view2) {
                         if (view2 instanceof ImageMessageConsumer) {
-                            ((ImageMessageConsumer) view2).setImageResolver(ExpandableNotificationRow.this.mImageResolver);
+                            ((ImageMessageConsumer) view2).setImageResolver(this.$row.mImageResolver);
                         }
                     }
                 };
                 if (z3) {
-                    reapplyAsync = remoteView.applyAsync(inflationProgress.packageContext, viewGroup, executor, onViewAppliedListener, interactionHandler);
-                    reapplyAsync.getClass();
+                    cancellationSignalReapplyAsync = remoteView.applyAsync(inflationProgress.packageContext, viewGroup, executor, onViewAppliedListener, interactionHandler);
+                    cancellationSignalReapplyAsync.getClass();
                 } else {
-                    reapplyAsync = remoteView.reapplyAsync(inflationProgress.packageContext, view, executor, onViewAppliedListener, interactionHandler);
-                    reapplyAsync.getClass();
+                    cancellationSignalReapplyAsync = remoteView.reapplyAsync(inflationProgress.packageContext, view, executor, onViewAppliedListener, interactionHandler);
+                    cancellationSignalReapplyAsync.getClass();
                 }
-                hashMap.put(Integer.valueOf(i2), reapplyAsync);
+                map.put(Integer.valueOf(i2), cancellationSignalReapplyAsync);
                 return;
             }
             try {
                 if (z3) {
-                    View apply = remoteView.apply(inflationProgress.packageContext, viewGroup, interactionHandler);
-                    String isValidView = isValidView(apply, notificationEntry, expandableNotificationRow.getResources());
-                    if (isValidView != null) {
-                        throw new InflationException(isValidView);
+                    View viewApply = remoteView.apply(inflationProgress.packageContext, viewGroup, interactionHandler);
+                    String strIsValidView = isValidView(viewApply, notificationEntry, expandableNotificationRow.getResources());
+                    if (strIsValidView != null) {
+                        throw new InflationException(strIsValidView);
                     }
-                    applyCallback.setResultView(apply);
+                    applyCallback.setResultView(viewApply);
                     return;
                 }
                 if (view == null) {
@@ -1117,14 +1593,14 @@ public final class NotificationRowContentBinderImpl implements NotificationRowCo
                     throw new IllegalArgumentException("Required value was null.");
                 }
                 remoteView.reapply(inflationProgress.packageContext, view, interactionHandler);
-                String isValidView2 = isValidView(view, notificationEntry, expandableNotificationRow.getResources());
-                if (isValidView2 != null) {
-                    throw new InflationException(isValidView2);
+                String strIsValidView2 = isValidView(view, notificationEntry, expandableNotificationRow.getResources());
+                if (strIsValidView2 != null) {
+                    throw new InflationException(strIsValidView2);
                 }
                 notificationViewWrapper.onReinflated();
             } catch (Exception e) {
-                handleInflationError(hashMap, e, expandableNotificationRow, notificationEntry, inflationCallback, notificationRowContentBinderLogger, "applying view synchronously");
-                hashMap.put(Integer.valueOf(i2), new CancellationSignal());
+                handleInflationError(map, e, expandableNotificationRow, notificationEntry, inflationCallback, notificationRowContentBinderLogger, "applying view synchronously");
+                map.put(Integer.valueOf(i2), new CancellationSignal());
             }
         }
 
@@ -1136,21 +1612,21 @@ public final class NotificationRowContentBinderImpl implements NotificationRowCo
             if (notificationEntry.targetSdk < 31) {
                 Notification notification2 = notificationEntry.mSbn.getNotification();
                 if (notification2.contentView != null || notification2.bigContentView != null || notification2.headsUpContentView != null) {
-                    boolean isEnabled = Trace.isEnabled();
-                    if (isEnabled) {
+                    boolean zIsEnabled = Trace.isEnabled();
+                    if (zIsEnabled) {
                         TraceUtilsKt.beginSlice("NotificationContentInflater#satisfiesMinHeightRequirement");
                     }
                     try {
                         view.measure(View.MeasureSpec.makeMeasureSpec(resources.getDimensionPixelSize(R.dimen.notification_validation_reference_width), 1073741824), View.MeasureSpec.makeMeasureSpec(0, 0));
-                        r1 = view.getMeasuredHeight() >= resources.getDimensionPixelSize(R.dimen.notification_validation_minimum_allowed_height);
+                        z = view.getMeasuredHeight() >= resources.getDimensionPixelSize(R.dimen.notification_validation_minimum_allowed_height);
                     } finally {
-                        if (isEnabled) {
+                        if (zIsEnabled) {
                             TraceUtilsKt.endSlice();
                         }
                     }
                 }
             }
-            if (!r1) {
+            if (!z) {
                 return "inflated notification does not meet minimum height requirement";
             }
             NotificationCustomContentMemoryVerifier notificationCustomContentMemoryVerifier = NotificationCustomContentMemoryVerifier.INSTANCE;
@@ -1161,7 +1637,6 @@ public final class NotificationRowContentBinderImpl implements NotificationRowCo
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class InflationProgress {
         public final NotificationContentModel contentModel;
         public InflatedSmartReplyViewHolder expandedInflatedSmartReplies;
@@ -1211,11 +1686,11 @@ public final class NotificationRowContentBinderImpl implements NotificationRowCo
         LogLevel logLevel = LogLevel.DEBUG;
         NotificationRowContentBinderLogger$$ExternalSyntheticLambda0 notificationRowContentBinderLogger$$ExternalSyntheticLambda0 = new NotificationRowContentBinderLogger$$ExternalSyntheticLambda0(3);
         LogBuffer logBuffer = notificationRowContentBinderLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("NotificationRowContentBinder", logLevel, notificationRowContentBinderLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("NotificationRowContentBinder", logLevel, notificationRowContentBinderLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = str;
         logMessageImpl.int1 = i;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         StatusBarNotification statusBarNotification = notificationEntry.mSbn;
         final NotificationInlineImageResolver notificationInlineImageResolver = expandableNotificationRow.mImageResolver;
         Notification notification2 = statusBarNotification.getNotification();
@@ -1246,7 +1721,7 @@ public final class NotificationRowContentBinderImpl implements NotificationRowCo
             notificationInlineImageResolver.mWantedUriSet.forEach(new Consumer() { // from class: com.android.systemui.statusbar.notification.row.NotificationInlineImageResolver$$ExternalSyntheticLambda0
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    NotificationInlineImageResolver notificationInlineImageResolver2 = NotificationInlineImageResolver.this;
+                    NotificationInlineImageResolver notificationInlineImageResolver2 = notificationInlineImageResolver;
                     Uri uri = (Uri) obj;
                     if (((NotificationInlineImageCache) notificationInlineImageResolver2.mImageCache).mCache.containsKey(uri)) {
                         return;
@@ -1285,53 +1760,53 @@ public final class NotificationRowContentBinderImpl implements NotificationRowCo
             asyncInflationTask.executeOnExecutor(this.inflationExecutor, new Void[0]);
         } else {
             Void[] voidArr = new Void[0];
-            asyncInflationTask.onPostExecute(Result.m3421boximpl(asyncInflationTask.m3066doInBackgroundIoAF18A()));
+            asyncInflationTask.onPostExecute(Result.m3441boximpl(asyncInflationTask.m3083doInBackgroundIoAF18A()));
         }
     }
 
     @Override // com.android.systemui.statusbar.notification.row.NotificationRowContentBinder
     public final boolean cancelBind(NotificationEntry notificationEntry, ExpandableNotificationRow expandableNotificationRow) {
-        boolean abortTask = notificationEntry.abortTask();
-        if (abortTask) {
+        boolean zAbortTask = notificationEntry.abortTask();
+        if (zAbortTask) {
             String str = expandableNotificationRow.mLoggingKey;
             NotificationRowContentBinderLogger notificationRowContentBinderLogger = this.logger;
             notificationRowContentBinderLogger.getClass();
             LogLevel logLevel = LogLevel.INFO;
             NotificationRowContentBinderLogger$$ExternalSyntheticLambda0 notificationRowContentBinderLogger$$ExternalSyntheticLambda0 = new NotificationRowContentBinderLogger$$ExternalSyntheticLambda0(4);
             LogBuffer logBuffer = notificationRowContentBinderLogger.buffer;
-            LogMessage obtain = logBuffer.obtain("NotificationRowContentBinder", logLevel, notificationRowContentBinderLogger$$ExternalSyntheticLambda0, null);
-            ((LogMessageImpl) obtain).str1 = str;
-            logBuffer.commit(obtain);
+            LogMessage logMessageObtain = logBuffer.obtain("NotificationRowContentBinder", logLevel, notificationRowContentBinderLogger$$ExternalSyntheticLambda0, null);
+            ((LogMessageImpl) logMessageObtain).str1 = str;
+            logBuffer.commit(logMessageObtain);
         }
-        return abortTask;
+        return zAbortTask;
     }
 
-    public final InflationProgress inflateNotificationViews(NotificationEntry notificationEntry, ExpandableNotificationRow expandableNotificationRow, NotificationRowContentBinder.BindParams bindParams, boolean z, int i, Notification.Builder builder, Context context, SmartReplyStateInflater smartReplyStateInflater, PromotedNotificationContentExtractor promotedNotificationContentExtractor) {
-        HybridNotificationView hybridNotificationView;
+    public final InflationProgress inflateNotificationViews(NotificationEntry notificationEntry, ExpandableNotificationRow expandableNotificationRow, NotificationRowContentBinder.BindParams bindParams, boolean z, int i, Notification.Builder builder, Context context, SmartReplyStateInflater smartReplyStateInflater, PromotedNotificationContentExtractor promotedNotificationContentExtractor) throws Resources.NotFoundException, InflationException {
+        HybridNotificationView hybridNotificationViewInflatePrivateSingleLineView;
         Context context2 = expandableNotificationRow.getContext();
         context2.getClass();
         HeadsUpStyleProvider headsUpStyleProvider = this.headsUpStyleProvider;
         ConversationNotificationProcessor conversationNotificationProcessor = this.conversationProcessor;
         Companion companion = Companion;
-        InflationProgress access$beginInflationAsync = Companion.access$beginInflationAsync(companion, i, notificationEntry, builder, bindParams, context2, context, expandableNotificationRow, this.notifLayoutInflaterFactoryProvider, headsUpStyleProvider, conversationNotificationProcessor, this.logger);
-        Companion.access$inflateSmartReplyViews(companion, access$beginInflationAsync, i, notificationEntry, context2, context, expandableNotificationRow.mPrivateLayout.mCurrentSmartReplyState, smartReplyStateInflater, this.logger);
-        NotificationContentModel notificationContentModel = access$beginInflationAsync.contentModel;
+        InflationProgress inflationProgressAccess$beginInflationAsync = Companion.access$beginInflationAsync(companion, i, notificationEntry, builder, bindParams, context2, context, expandableNotificationRow, this.notifLayoutInflaterFactoryProvider, headsUpStyleProvider, conversationNotificationProcessor, this.logger);
+        Companion.access$inflateSmartReplyViews(companion, inflationProgressAccess$beginInflationAsync, i, notificationEntry, context2, context, expandableNotificationRow.mPrivateLayout.mCurrentSmartReplyState, smartReplyStateInflater, this.logger);
+        NotificationContentModel notificationContentModel = inflationProgressAccess$beginInflationAsync.contentModel;
         SingleLineViewModel singleLineViewModel = notificationContentModel.singleLineViewModel;
-        HybridNotificationView hybridNotificationView2 = null;
+        HybridNotificationView hybridNotificationViewInflatePublicSingleLineView = null;
         NotificationRowContentBinderLogger notificationRowContentBinderLogger = this.logger;
         if (singleLineViewModel != null) {
-            hybridNotificationView = SingleLineViewInflater.inflatePrivateSingleLineView(singleLineViewModel.conversationData != null, i, notificationEntry, context2, notificationRowContentBinderLogger);
+            hybridNotificationViewInflatePrivateSingleLineView = SingleLineViewInflater.inflatePrivateSingleLineView(singleLineViewModel.conversationData != null, i, notificationEntry, context2, notificationRowContentBinderLogger);
         } else {
-            hybridNotificationView = null;
+            hybridNotificationViewInflatePrivateSingleLineView = null;
         }
-        access$beginInflationAsync.inflatedSingleLineView = hybridNotificationView;
+        inflationProgressAccess$beginInflationAsync.inflatedSingleLineView = hybridNotificationViewInflatePrivateSingleLineView;
         SingleLineViewModel singleLineViewModel2 = notificationContentModel.publicSingleLineViewModel;
         if (singleLineViewModel2 != null) {
-            hybridNotificationView2 = SingleLineViewInflater.inflatePublicSingleLineView(singleLineViewModel2.conversationData != null, i, notificationEntry, context2, notificationRowContentBinderLogger);
+            hybridNotificationViewInflatePublicSingleLineView = SingleLineViewInflater.inflatePublicSingleLineView(singleLineViewModel2.conversationData != null, i, notificationEntry, context2, notificationRowContentBinderLogger);
         }
-        access$beginInflationAsync.inflatedPublicSingleLineView = hybridNotificationView2;
-        Companion.access$apply(companion, this.inflationExecutor, z, bindParams.isMinimized, access$beginInflationAsync, i, this.remoteViewCache, notificationEntry, expandableNotificationRow, this.remoteInputManager.mInteractionHandler, null, this.logger, this.faceWidgetNotificationControllerWrapper);
-        return access$beginInflationAsync;
+        inflationProgressAccess$beginInflationAsync.inflatedPublicSingleLineView = hybridNotificationViewInflatePublicSingleLineView;
+        Companion.access$apply(companion, this.inflationExecutor, z, bindParams.isMinimized, inflationProgressAccess$beginInflationAsync, i, this.remoteViewCache, notificationEntry, expandableNotificationRow, this.remoteInputManager.mInteractionHandler, null, this.logger, this.faceWidgetNotificationControllerWrapper);
+        return inflationProgressAccess$beginInflationAsync;
     }
 
     @Override // com.android.systemui.statusbar.notification.row.NotificationRowContentBinder
@@ -1347,11 +1822,11 @@ public final class NotificationRowContentBinderImpl implements NotificationRowCo
         LogLevel logLevel = LogLevel.DEBUG;
         NotificationRowContentBinderLogger$$ExternalSyntheticLambda0 notificationRowContentBinderLogger$$ExternalSyntheticLambda0 = new NotificationRowContentBinderLogger$$ExternalSyntheticLambda0(5);
         LogBuffer logBuffer = notificationRowContentBinderLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("NotificationRowContentBinder", logLevel, notificationRowContentBinderLogger$$ExternalSyntheticLambda0, null);
-        LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+        LogMessage logMessageObtain = logBuffer.obtain("NotificationRowContentBinder", logLevel, notificationRowContentBinderLogger$$ExternalSyntheticLambda0, null);
+        LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
         logMessageImpl.str1 = str;
         logMessageImpl.int1 = i;
-        logBuffer.commit(obtain);
+        logBuffer.commit(logMessageObtain);
         int i2 = 1;
         while (i != 0) {
             if ((i & i2) != 0) {
@@ -1359,25 +1834,25 @@ public final class NotificationRowContentBinderImpl implements NotificationRowCo
                     expandableNotificationRow.mPrivateLayout.performWhenContentInactive(0, new Runnable() { // from class: com.android.systemui.statusbar.notification.row.NotificationRowContentBinderImpl$freeNotificationView$1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            ExpandableNotificationRow.this.mPrivateLayout.setContractedChild(null);
+                            expandableNotificationRow.mPrivateLayout.setContractedChild(null);
                             ((NotifRemoteViewCacheImpl) this.remoteViewCache).removeCachedView(notificationEntry, 1);
                         }
                     });
                 } else if (i2 == 2) {
                     expandableNotificationRow.mPrivateLayout.performWhenContentInactive(1, new Runnable() { // from class: com.android.systemui.statusbar.notification.row.NotificationRowContentBinderImpl$freeNotificationView$2
                         @Override // java.lang.Runnable
-                        public final void run() {
-                            ExpandableNotificationRow.this.mPrivateLayout.setExpandedChild(null);
+                        public final void run() throws Resources.NotFoundException {
+                            expandableNotificationRow.mPrivateLayout.setExpandedChild(null);
                             ((NotifRemoteViewCacheImpl) this.remoteViewCache).removeCachedView(notificationEntry, 2);
                         }
                     });
                 } else if (i2 == 4) {
                     expandableNotificationRow.mPrivateLayout.performWhenContentInactive(2, new Runnable() { // from class: com.android.systemui.statusbar.notification.row.NotificationRowContentBinderImpl$freeNotificationView$3
                         @Override // java.lang.Runnable
-                        public final void run() {
-                            ExpandableNotificationRow.this.mPrivateLayout.setHeadsUpChild(null);
+                        public final void run() throws Resources.NotFoundException {
+                            expandableNotificationRow.mPrivateLayout.setHeadsUpChild(null);
                             ((NotifRemoteViewCacheImpl) this.remoteViewCache).removeCachedView(notificationEntry, 4);
-                            NotificationContentView notificationContentView = ExpandableNotificationRow.this.mPrivateLayout;
+                            NotificationContentView notificationContentView = expandableNotificationRow.mPrivateLayout;
                             notificationContentView.mHeadsUpInflatedSmartReplies = null;
                             notificationContentView.mHeadsUpSmartReplyView = null;
                         }
@@ -1386,7 +1861,7 @@ public final class NotificationRowContentBinderImpl implements NotificationRowCo
                     expandableNotificationRow.mPublicLayout.performWhenContentInactive(0, new Runnable() { // from class: com.android.systemui.statusbar.notification.row.NotificationRowContentBinderImpl$freeNotificationView$4
                         @Override // java.lang.Runnable
                         public final void run() {
-                            ExpandableNotificationRow.this.mPublicLayout.setContractedChild(null);
+                            expandableNotificationRow.mPublicLayout.setContractedChild(null);
                             ((NotifRemoteViewCacheImpl) this.remoteViewCache).removeCachedView(notificationEntry, 8);
                         }
                     });
@@ -1394,14 +1869,14 @@ public final class NotificationRowContentBinderImpl implements NotificationRowCo
                     expandableNotificationRow.mPrivateLayout.performWhenContentInactive(3, new Runnable() { // from class: com.android.systemui.statusbar.notification.row.NotificationRowContentBinderImpl$freeNotificationView$5
                         @Override // java.lang.Runnable
                         public final void run() {
-                            ExpandableNotificationRow.this.mPrivateLayout.setSingleLineView(null);
+                            expandableNotificationRow.mPrivateLayout.setSingleLineView(null);
                         }
                     });
                 } else if (i2 == 128) {
                     expandableNotificationRow.mPublicLayout.performWhenContentInactive(3, new Runnable() { // from class: com.android.systemui.statusbar.notification.row.NotificationRowContentBinderImpl$freeNotificationView$6
                         @Override // java.lang.Runnable
                         public final void run() {
-                            ExpandableNotificationRow.this.mPublicLayout.setSingleLineView(null);
+                            expandableNotificationRow.mPublicLayout.setSingleLineView(null);
                         }
                     });
                 }

@@ -15,7 +15,6 @@ import com.android.systemui.R;
 import com.android.wm.shell.shared.TypefaceUtils;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class BubbleBarMenuView extends LinearLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -25,7 +24,6 @@ public class BubbleBarMenuView extends LinearLayout {
     public ViewGroup mBubbleSectionView;
     public TextView mBubbleTitleView;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class MenuAction {
         public final Icon mIcon;
         public final View.OnClickListener mOnClick;
@@ -82,14 +80,14 @@ public class BubbleBarMenuView extends LinearLayout {
 
     public final void updateActions(ArrayList arrayList) {
         this.mActionsSectionView.removeAllViews();
-        LayoutInflater from = LayoutInflater.from(((LinearLayout) this).mContext);
+        LayoutInflater layoutInflaterFrom = LayoutInflater.from(((LinearLayout) this).mContext);
         int size = arrayList.size();
         int i = 0;
         while (i < size) {
             Object obj = arrayList.get(i);
             i++;
             MenuAction menuAction = (MenuAction) obj;
-            BubbleBarMenuItemView bubbleBarMenuItemView = (BubbleBarMenuItemView) from.inflate(R.layout.bubble_bar_menu_item, this.mActionsSectionView, false);
+            BubbleBarMenuItemView bubbleBarMenuItemView = (BubbleBarMenuItemView) layoutInflaterFrom.inflate(R.layout.bubble_bar_menu_item, this.mActionsSectionView, false);
             Icon icon = menuAction.mIcon;
             int i2 = menuAction.mTint;
             if (i2 == 0) {

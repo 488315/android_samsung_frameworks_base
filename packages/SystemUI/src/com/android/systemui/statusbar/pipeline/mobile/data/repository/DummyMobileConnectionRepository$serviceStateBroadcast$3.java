@@ -10,7 +10,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class DummyMobileConnectionRepository$serviceStateBroadcast$3 extends SuspendLambda implements Function2 {
     private /* synthetic */ Object L$0;
@@ -42,10 +41,10 @@ final class DummyMobileConnectionRepository$serviceStateBroadcast$3 extends Susp
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             FlowCollector flowCollector = (FlowCollector) this.L$0;
-            ServiceState semGetServiceState = this.this$0.phone.semGetServiceState(0);
-            Log.d("DummyMobileConnectionRepository", "serviceStateBroadcast flow is started (" + semGetServiceState + ")");
+            ServiceState serviceStateSemGetServiceState = this.this$0.phone.semGetServiceState(0);
+            Log.d("DummyMobileConnectionRepository", "serviceStateBroadcast flow is started (" + serviceStateSemGetServiceState + ")");
             this.label = 1;
-            if (flowCollector.emit(semGetServiceState, this) == coroutineSingletons) {
+            if (flowCollector.emit(serviceStateSemGetServiceState, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

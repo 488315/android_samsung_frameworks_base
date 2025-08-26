@@ -315,10 +315,10 @@ public class InsetsSource implements Parcelable {
         if (getType() == WindowInsets.Type.captionBar()) {
             ArrayList arrayList = new ArrayList();
             for (Rect rect2 : this.mBoundingRects) {
-                int height = frame.height();
+                int iHeight = frame.height();
                 this.mTmpBoundingRect.set(rect2);
                 if (getId() == ID_IME_CAPTION_BAR) {
-                    this.mTmpBoundingRect.offset(0, rect.height() - height);
+                    this.mTmpBoundingRect.offset(0, rect.height() - iHeight);
                 }
                 arrayList.add(new Rect(this.mTmpBoundingRect));
             }
@@ -417,7 +417,7 @@ public class InsetsSource implements Parcelable {
     }
 
     public void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
-        long start = protoOutputStream.start(j);
+        long jStart = protoOutputStream.start(j);
         if (!com.android.internal.hidden_from_bootclasspath.android.os.Flags.androidOsBuildVanillaIceCream()) {
             protoOutputStream.write(1138166333441L, WindowInsets.Type.toString(this.mType));
         }
@@ -428,7 +428,7 @@ public class InsetsSource implements Parcelable {
         }
         protoOutputStream.write(1133871366148L, this.mVisible);
         protoOutputStream.write(1120986464261L, this.mType);
-        protoOutputStream.end(start);
+        protoOutputStream.end(jStart);
     }
 
     public void dump(String str, PrintWriter printWriter) {

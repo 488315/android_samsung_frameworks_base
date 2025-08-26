@@ -34,7 +34,6 @@ import com.android.systemui.qs.tileimpl.QSIconViewImpl;
 import com.android.systemui.qs.tileimpl.SecQSTileBaseView;
 import java.util.ArrayList;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SubscreenTileLayout extends ViewGroup implements QSPanel.QSTileLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -59,14 +58,14 @@ public class SubscreenTileLayout extends ViewGroup implements QSPanel.QSTileLayo
     }
 
     public final void addTile(SubroomQuickSettingsQSPanelBaseView.SubscreenTileRecord subscreenTileRecord, int i) {
-        int min = Math.min(this.mColumns * this.mRows, this.mRecords.size());
-        if (i > min) {
-            i = min;
+        int iMin = Math.min(this.mColumns * this.mRows, this.mRecords.size());
+        if (i > iMin) {
+            i = iMin;
         }
-        StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i, min, "addTile position = ", "total = ", "idx = ");
-        m.append(i);
-        m.append(" spec = ");
-        ExifInterface$$ExternalSyntheticOutline0.m(m, subscreenTileRecord.mTilespec, "withAnimationfalse", "SubscreenTileLayout");
+        StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i, iMin, "addTile position = ", "total = ", "idx = ");
+        sbM.append(i);
+        sbM.append(" spec = ");
+        ExifInterface$$ExternalSyntheticOutline0.m(sbM, subscreenTileRecord.mTilespec, "withAnimationfalse", "SubscreenTileLayout");
         this.mRecords.add(i, subscreenTileRecord);
         QSTileView qSTileView = subscreenTileRecord.tileView;
         if (qSTileView != null) {
@@ -95,11 +94,11 @@ public class SubscreenTileLayout extends ViewGroup implements QSPanel.QSTileLayo
     public final void layoutTileRecords$1(int i, boolean z) {
         boolean z2 = getLayoutDirection() == 1;
         this.mLastTileBottom = 0;
-        int min = Math.min(i, this.mRows * this.mColumns);
+        int iMin = Math.min(i, this.mRows * this.mColumns);
         int i2 = 0;
         int i3 = 0;
         int i4 = 0;
-        while (i2 < min) {
+        while (i2 < iMin) {
             if (i3 == this.mColumns) {
                 i4++;
                 i3 = 0;
@@ -130,7 +129,7 @@ public class SubscreenTileLayout extends ViewGroup implements QSPanel.QSTileLayo
     }
 
     @Override // android.view.View
-    public final void onMeasure(int i, int i2) {
+    public final void onMeasure(int i, int i2) throws Resources.NotFoundException {
         int color;
         int size = this.mRecords.size();
         int size2 = View.MeasureSpec.getSize(i);
@@ -139,9 +138,9 @@ public class SubscreenTileLayout extends ViewGroup implements QSPanel.QSTileLayo
             int i3 = this.mColumns;
             this.mRows = ((size + i3) - 1) / i3;
         }
-        StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(size2, paddingStart, "onMeasure width: ", " availableWidth: ", " mRows: ");
-        ViewPager$$ExternalSyntheticOutline0.m(m, this.mRows, " numTiles: ", size, " mColumns: ");
-        RecyclerView$$ExternalSyntheticOutline0.m(this.mColumns, "SubscreenTileLayout", m);
+        StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(size2, paddingStart, "onMeasure width: ", " availableWidth: ", " mRows: ");
+        ViewPager$$ExternalSyntheticOutline0.m(sbM, this.mRows, " numTiles: ", size, " mColumns: ");
+        RecyclerView$$ExternalSyntheticOutline0.m(this.mColumns, "SubscreenTileLayout", sbM);
         int i4 = this.mTileLayoutHeight;
         if (i4 < this.mMaxCellHeight) {
             this.mCellHeight = ((ViewGroup) this).mContext.getResources().getDimensionPixelSize(R.dimen.sec_qs_tile_height_no_label);
@@ -164,13 +163,13 @@ public class SubscreenTileLayout extends ViewGroup implements QSPanel.QSTileLayo
         } catch (Exception e) {
             e.printStackTrace();
         }
-        int makeMeasureSpec = View.MeasureSpec.makeMeasureSpec(this.mCellHeight, 1073741824);
+        int iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(this.mCellHeight, 1073741824);
         int dimensionPixelSize = ((ViewGroup) this).mContext.getResources().getDimensionPixelSize(R.dimen.subscreen_qs_tile_image_icon_size);
         int dimensionPixelSize2 = ((ViewGroup) this).mContext.getResources().getDimensionPixelSize(R.dimen.subscreen_qs_tile_icon_size);
         ArrayList arrayList = this.mRecords;
         int size3 = arrayList.size();
         boolean z = false;
-        View view = this;
+        View viewUpdateAccessibilityOrder = this;
         int i9 = 0;
         while (i9 < size3) {
             Object obj = arrayList.get(i9);
@@ -211,8 +210,8 @@ public class SubscreenTileLayout extends ViewGroup implements QSPanel.QSTileLayo
                 frameLayout.setImportantForAccessibility(1);
                 ViewCompat.setAccessibilityDelegate(frameLayout, new AccessibilityDelegateCompat() { // from class: com.android.systemui.qp.SubscreenTileLayout.4
                     @Override // androidx.core.view.AccessibilityDelegateCompat
-                    public final void onInitializeAccessibilityNodeInfo(View view2, AccessibilityNodeInfoCompat accessibilityNodeInfoCompat) {
-                        this.mOriginalDelegate.onInitializeAccessibilityNodeInfo(view2, accessibilityNodeInfoCompat.mInfo);
+                    public final void onInitializeAccessibilityNodeInfo(View view, AccessibilityNodeInfoCompat accessibilityNodeInfoCompat) throws Resources.NotFoundException {
+                        this.mOriginalDelegate.onInitializeAccessibilityNodeInfo(view, accessibilityNodeInfoCompat.mInfo);
                         QSPanelControllerBase$TileRecord qSPanelControllerBase$TileRecord2 = qSPanelControllerBase$TileRecord;
                         boolean z2 = qSPanelControllerBase$TileRecord2.tile.getState().state == 2;
                         accessibilityNodeInfoCompat.setClassName(Button.class.getName());
@@ -223,8 +222,8 @@ public class SubscreenTileLayout extends ViewGroup implements QSPanel.QSTileLayo
                 if (tileBackground instanceof RippleDrawable) {
                     ((RippleDrawable) tileBackground).setColor(ColorStateList.valueOf(((ViewGroup) this).mContext.getColor(R.color.subscreen_qs_ripple_background)));
                 }
-                qSTileView.measure(View.MeasureSpec.makeMeasureSpec(this.mCellWidth, 1073741824), makeMeasureSpec);
-                view = qSTileView.updateAccessibilityOrder(view);
+                qSTileView.measure(View.MeasureSpec.makeMeasureSpec(this.mCellWidth, 1073741824), iMakeMeasureSpec);
+                viewUpdateAccessibilityOrder = qSTileView.updateAccessibilityOrder(viewUpdateAccessibilityOrder);
                 dimensionPixelSize = i10;
                 z = false;
             }
@@ -250,29 +249,29 @@ public class SubscreenTileLayout extends ViewGroup implements QSPanel.QSTileLayo
     }
 
     public final void removeTile(SubroomQuickSettingsQSPanelBaseView.SubscreenTileRecord subscreenTileRecord) {
-        int indexOf = indexOf(subscreenTileRecord);
-        ExifInterface$$ExternalSyntheticOutline0.m(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(indexOf, "removeTile index = ", "tile = "), subscreenTileRecord.mTilespec, "SubscreenTileLayout");
-        QSPanelControllerBase$TileRecord qSPanelControllerBase$TileRecord = (QSPanelControllerBase$TileRecord) this.mRecords.get(indexOf);
-        this.mRecords.remove(indexOf);
+        int iIndexOf = indexOf(subscreenTileRecord);
+        ExifInterface$$ExternalSyntheticOutline0.m(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(iIndexOf, "removeTile index = ", "tile = "), subscreenTileRecord.mTilespec, "SubscreenTileLayout");
+        QSPanelControllerBase$TileRecord qSPanelControllerBase$TileRecord = (QSPanelControllerBase$TileRecord) this.mRecords.get(iIndexOf);
+        this.mRecords.remove(iIndexOf);
         removeView(qSPanelControllerBase$TileRecord.tileView);
     }
 
     public final void selectTile(SubroomQuickSettingsQSPanelBaseView.SubscreenTileRecord subscreenTileRecord, boolean z) {
-        int indexOf = indexOf(subscreenTileRecord);
-        if (indexOf < 0) {
+        int iIndexOf = indexOf(subscreenTileRecord);
+        if (iIndexOf < 0) {
             return;
         }
-        if (indexOf >= this.mRecords.size()) {
-            indexOf = this.mRecords.size() - 1;
+        if (iIndexOf >= this.mRecords.size()) {
+            iIndexOf = this.mRecords.size() - 1;
         }
-        QSTileView qSTileView = ((QSPanelControllerBase$TileRecord) this.mRecords.get(indexOf)).tileView;
+        QSTileView qSTileView = ((QSPanelControllerBase$TileRecord) this.mRecords.get(iIndexOf)).tileView;
         if (z) {
             qSTileView.setAlpha(0.0f);
         }
-        ListPopupWindow$$ExternalSyntheticOutline0.m(indexOf, "selectTile position = ", "SubscreenTileLayout");
+        ListPopupWindow$$ExternalSyntheticOutline0.m(iIndexOf, "selectTile position = ", "SubscreenTileLayout");
     }
 
-    public final boolean updateResources() {
+    public final boolean updateResources() throws Resources.NotFoundException {
         Resources resources = ((ViewGroup) this).mContext.getResources();
         this.mCellMarginHorizontal = resources.getDimensionPixelSize(R.dimen.qs_tile_margin_horizontal);
         int dimensionPixelSize = resources.getDimensionPixelSize(R.dimen.qs_tile_margin_vertical);
@@ -310,7 +309,7 @@ public class SubscreenTileLayout extends ViewGroup implements QSPanel.QSTileLayo
         return true;
     }
 
-    public SubscreenTileLayout(Context context, AttributeSet attributeSet) {
+    public SubscreenTileLayout(Context context, AttributeSet attributeSet) throws Resources.NotFoundException {
         super(context, attributeSet);
         this.mRecords = new ArrayList();
         this.mMaxAllowedRows = 1;

@@ -147,22 +147,22 @@ public abstract class Animation implements Cloneable {
     }
 
     public Animation(Context context, AttributeSet attributeSet) {
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.Animation);
-        setDuration(obtainStyledAttributes.getInt(2, 0));
-        setStartOffset(obtainStyledAttributes.getInt(5, 0));
-        setFillEnabled(obtainStyledAttributes.getBoolean(9, this.mFillEnabled));
-        setFillBefore(obtainStyledAttributes.getBoolean(3, this.mFillBefore));
-        setFillAfter(obtainStyledAttributes.getBoolean(4, this.mFillAfter));
-        setRepeatCount(obtainStyledAttributes.getInt(6, this.mRepeatCount));
-        setRepeatMode(obtainStyledAttributes.getInt(7, 1));
-        setZAdjustment(obtainStyledAttributes.getInt(8, 0));
-        setBackdropColor(obtainStyledAttributes.getInt(12, 0));
-        setDetachWallpaper(obtainStyledAttributes.getBoolean(10, false));
-        setShowWallpaper(obtainStyledAttributes.getBoolean(14, false));
-        setHasRoundedCorners(obtainStyledAttributes.getBoolean(13, false));
-        setShowBackdrop(obtainStyledAttributes.getBoolean(11, false));
-        int resourceId = obtainStyledAttributes.getResourceId(1, 0);
-        obtainStyledAttributes.recycle();
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.Animation);
+        setDuration(typedArrayObtainStyledAttributes.getInt(2, 0));
+        setStartOffset(typedArrayObtainStyledAttributes.getInt(5, 0));
+        setFillEnabled(typedArrayObtainStyledAttributes.getBoolean(9, this.mFillEnabled));
+        setFillBefore(typedArrayObtainStyledAttributes.getBoolean(3, this.mFillBefore));
+        setFillAfter(typedArrayObtainStyledAttributes.getBoolean(4, this.mFillAfter));
+        setRepeatCount(typedArrayObtainStyledAttributes.getInt(6, this.mRepeatCount));
+        setRepeatMode(typedArrayObtainStyledAttributes.getInt(7, 1));
+        setZAdjustment(typedArrayObtainStyledAttributes.getInt(8, 0));
+        setBackdropColor(typedArrayObtainStyledAttributes.getInt(12, 0));
+        setDetachWallpaper(typedArrayObtainStyledAttributes.getBoolean(10, false));
+        setShowWallpaper(typedArrayObtainStyledAttributes.getBoolean(14, false));
+        setHasRoundedCorners(typedArrayObtainStyledAttributes.getBoolean(13, false));
+        setShowBackdrop(typedArrayObtainStyledAttributes.getBoolean(11, false));
+        int resourceId = typedArrayObtainStyledAttributes.getResourceId(1, 0);
+        typedArrayObtainStyledAttributes.recycle();
         if (resourceId > 0) {
             setInterpolator(context, resourceId);
         }
@@ -172,7 +172,7 @@ public abstract class Animation implements Cloneable {
     /* JADX INFO: Access modifiers changed from: protected */
     @Override // 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public Animation mo6219clone() throws CloneNotSupportedException {
+    public Animation mo6227clone() throws CloneNotSupportedException {
         Animation animation = (Animation) super.clone();
         animation.mPreviousRegion = new RectF();
         animation.mRegion = new RectF();
@@ -440,23 +440,23 @@ public abstract class Animation implements Cloneable {
     }
 
     public boolean getTransformation(long j, Transformation transformation) {
-        float f;
+        float fMax;
         if (this.mStartTime == -1) {
             this.mStartTime = j;
         }
         long startOffset = getStartOffset();
         long j2 = this.mDuration;
         if (j2 != 0) {
-            f = (j - (this.mStartTime + startOffset)) / j2;
+            fMax = (j - (this.mStartTime + startOffset)) / j2;
         } else {
-            f = j < this.mStartTime ? 0.0f : 1.0f;
+            fMax = j < this.mStartTime ? 0.0f : 1.0f;
         }
-        boolean z = f >= 1.0f || isCanceled();
+        boolean z = fMax >= 1.0f || isCanceled();
         this.mMore = !z;
         if (!this.mFillEnabled) {
-            f = Math.max(Math.min(f, 1.0f), 0.0f);
+            fMax = Math.max(Math.min(fMax, 1.0f), 0.0f);
         }
-        if ((f >= 0.0f || this.mFillBefore) && (f <= 1.0f || this.mFillAfter)) {
+        if ((fMax >= 0.0f || this.mFillBefore) && (fMax <= 1.0f || this.mFillAfter)) {
             if (!this.mStarted) {
                 fireAnimationStart();
                 this.mStarted = true;
@@ -465,12 +465,12 @@ public abstract class Animation implements Cloneable {
                 }
             }
             if (this.mFillEnabled) {
-                f = Math.max(Math.min(f, 1.0f), 0.0f);
+                fMax = Math.max(Math.min(fMax, 1.0f), 0.0f);
             }
             if (this.mCycleFlip) {
-                f = 1.0f - f;
+                fMax = 1.0f - fMax;
             }
-            getTransformationAt(f, transformation);
+            getTransformationAt(fMax, transformation);
         }
         if (z) {
             if (this.mRepeatCount == this.mRepeated || isCanceled()) {

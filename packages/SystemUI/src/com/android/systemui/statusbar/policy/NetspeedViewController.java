@@ -37,7 +37,6 @@ import com.sec.ims.IMSParameter;
 import java.util.Observable;
 import java.util.Observer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class NetspeedViewController extends ViewController implements ConfigurationController.ConfigurationListener {
     public static String sActiveInterface = null;
@@ -60,7 +59,6 @@ public class NetspeedViewController extends ViewController implements Configurat
     public final WakefulnessLifecycle mWakefulnessLifecycle;
     public final AnonymousClass2 mWakefulnessObserver;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.statusbar.policy.NetspeedViewController$3, reason: invalid class name */
     class AnonymousClass3 implements UserTracker.Callback {
         public AnonymousClass3() {
@@ -73,7 +71,6 @@ public class NetspeedViewController extends ViewController implements Configurat
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class NetworkSpeedManager extends Observable {
         public static volatile NetworkSpeedManager sInstance;
         public final AnonymousClass1 mHandler = new Handler() { // from class: com.android.systemui.statusbar.policy.NetspeedViewController.NetworkSpeedManager.1
@@ -110,11 +107,11 @@ public class NetspeedViewController extends ViewController implements Configurat
                     return;
                 }
                 double d = f;
-                String format = d <= 0.0d ? "0\nK/s" : d < 100.0d ? String.format("%.2f\nK/s", Float.valueOf(f)) : d < 1000.0d ? String.format("%.1f\nK/s", Float.valueOf(f)) : d < 102400.0d ? String.format("%.2f\nM/s", Double.valueOf(d / 1024.0d)) : String.format("%.1f\nM/s", Double.valueOf(d / 1024.0d));
+                String str = d <= 0.0d ? "0\nK/s" : d < 100.0d ? String.format("%.2f\nK/s", Float.valueOf(f)) : d < 1000.0d ? String.format("%.1f\nK/s", Float.valueOf(f)) : d < 102400.0d ? String.format("%.2f\nM/s", Double.valueOf(d / 1024.0d)) : String.format("%.1f\nM/s", Double.valueOf(d / 1024.0d));
                 NetworkSpeedManager networkSpeedManager = NetworkSpeedManager.this;
                 if (networkSpeedManager.countObservers() > 0) {
                     networkSpeedManager.setChanged();
-                    networkSpeedManager.notifyObservers(format);
+                    networkSpeedManager.notifyObservers(str);
                     sendEmptyMessageDelayed(2, 3000L);
                 }
             }
@@ -156,7 +153,6 @@ public class NetspeedViewController extends ViewController implements Configurat
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class NetworkStatsThread extends Thread {
         public /* synthetic */ NetworkStatsThread(NetspeedViewController netspeedViewController, int i) {
             this();
@@ -192,7 +188,6 @@ public class NetspeedViewController extends ViewController implements Configurat
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class SettingObserver implements SettingsHelper.OnChangedCallback {
         public final Uri mSettingsValue;
 
@@ -202,7 +197,7 @@ public class NetspeedViewController extends ViewController implements Configurat
 
         @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
         public final void onChanged(Uri uri) {
-            NetspeedViewController.m3087$$Nest$monNetspeedSwitchChange(NetspeedViewController.this);
+            NetspeedViewController.m3104$$Nest$monNetspeedSwitchChange(NetspeedViewController.this);
         }
 
         private SettingObserver() {
@@ -211,7 +206,7 @@ public class NetspeedViewController extends ViewController implements Configurat
     }
 
     /* renamed from: -$$Nest$monNetspeedSwitchChange, reason: not valid java name */
-    public static void m3087$$Nest$monNetspeedSwitchChange(NetspeedViewController netspeedViewController) {
+    public static void m3104$$Nest$monNetspeedSwitchChange(NetspeedViewController netspeedViewController) {
         netspeedViewController.getClass();
         sNetspeedSwitch = ((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).isShowNetworkSpeedInStatusBar();
         StringBuilder sb = new StringBuilder("onNetspeedSwitchChange - sNetspeedSwitch = ");

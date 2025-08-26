@@ -52,9 +52,9 @@ public interface IBrailleDisplayConnection extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IBrailleDisplayConnection.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IBrailleDisplayConnection)) {
-                return (IBrailleDisplayConnection) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IBrailleDisplayConnection.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IBrailleDisplayConnection)) {
+                return (IBrailleDisplayConnection) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -86,9 +86,9 @@ public interface IBrailleDisplayConnection extends IInterface {
             if (i == 1) {
                 disconnect();
             } else if (i == 2) {
-                byte[] createByteArray = parcel.createByteArray();
+                byte[] bArrCreateByteArray = parcel.createByteArray();
                 parcel.enforceNoDataAvail();
-                write(createByteArray);
+                write(bArrCreateByteArray);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -113,24 +113,24 @@ public interface IBrailleDisplayConnection extends IInterface {
 
             @Override // android.accessibilityservice.IBrailleDisplayConnection
             public void disconnect() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IBrailleDisplayConnection.DESCRIPTOR);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IBrailleDisplayConnection.DESCRIPTOR);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.accessibilityservice.IBrailleDisplayConnection
             public void write(byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IBrailleDisplayConnection.DESCRIPTOR);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IBrailleDisplayConnection.DESCRIPTOR);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

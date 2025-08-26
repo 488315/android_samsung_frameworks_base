@@ -1,6 +1,7 @@
 package com.android.wm.shell.recents;
 
 import android.app.ActivityTaskManager;
+import android.content.res.Resources;
 import android.os.RemoteException;
 import android.util.Slog;
 import com.android.internal.protolog.ProtoLogImpl_1771455215;
@@ -9,7 +10,6 @@ import com.android.wm.shell.recents.RecentsTransitionHandler;
 import com.android.wm.shell.transition.Transitions;
 import com.samsung.android.rune.CoreRune;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class RecentsTransitionHandler$$ExternalSyntheticLambda0 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -21,7 +21,7 @@ public final /* synthetic */ class RecentsTransitionHandler$$ExternalSyntheticLa
     }
 
     @Override // java.lang.Runnable
-    public final void run() {
+    public final void run() throws Resources.NotFoundException {
         int i = this.$r8$classId;
         Object obj = this.f$0;
         switch (i) {

@@ -21,16 +21,16 @@ public class DisplayRefreshRate {
     }
 
     public static int getRefreshRate(long j) {
-        long round = Math.round(1.0E9d / j);
-        if (round < 50) {
+        long jRound = Math.round(1.0E9d / j);
+        if (jRound < 50) {
             return 2;
         }
-        if (round < 80) {
+        if (jRound < 80) {
             return 3;
         }
-        if (round < 110) {
+        if (jRound < 110) {
             return 4;
         }
-        return round < 180 ? 5 : 6;
+        return jRound < 180 ? 5 : 6;
     }
 }

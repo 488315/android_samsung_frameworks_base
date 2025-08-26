@@ -11,7 +11,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
     private static final long serialVersionUID = 912559;
@@ -19,13 +18,11 @@ public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
     public transient ImmutableSet keySet;
     public transient ImmutableCollection values;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Builder {
         public Object[] alternatingKeysAndValues;
         public DuplicateKey duplicateKey;
         public int size;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class DuplicateKey {
             public final Object key;
             public final Object value1;
@@ -60,10 +57,10 @@ public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
             if (duplicateKey != null) {
                 throw duplicateKey.exception();
             }
-            RegularImmutableMap create = RegularImmutableMap.create(this.size, this.alternatingKeysAndValues, this);
+            RegularImmutableMap regularImmutableMapCreate = RegularImmutableMap.create(this.size, this.alternatingKeysAndValues, this);
             DuplicateKey duplicateKey2 = this.duplicateKey;
             if (duplicateKey2 == null) {
-                return create;
+                return regularImmutableMapCreate;
             }
             throw duplicateKey2.exception();
         }
@@ -94,7 +91,6 @@ public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class SerializedForm<K, V> implements Serializable {
         private static final long serialVersionUID = 0;
         private final Object keys;
@@ -103,12 +99,12 @@ public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
         public SerializedForm(ImmutableMap<K, V> immutableMap) {
             Object[] objArr = new Object[immutableMap.size()];
             Object[] objArr2 = new Object[immutableMap.size()];
-            ImmutableSet immutableSet = immutableMap.entrySet;
-            if (immutableSet == null) {
-                immutableSet = immutableMap.createEntrySet();
-                immutableMap.entrySet = immutableSet;
+            ImmutableSet immutableSetCreateEntrySet = immutableMap.entrySet;
+            if (immutableSetCreateEntrySet == null) {
+                immutableSetCreateEntrySet = immutableMap.createEntrySet();
+                immutableMap.entrySet = immutableSetCreateEntrySet;
             }
-            UnmodifiableIterator it = immutableSet.iterator();
+            UnmodifiableIterator it = immutableSetCreateEntrySet.iterator();
             int i = 0;
             while (it.hasNext()) {
                 Map.Entry entry = (Map.Entry) it.next();
@@ -167,12 +163,12 @@ public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
 
     @Override // java.util.Map
     public final boolean containsValue(Object obj) {
-        ImmutableCollection immutableCollection = this.values;
-        if (immutableCollection == null) {
-            immutableCollection = createValues();
-            this.values = immutableCollection;
+        ImmutableCollection immutableCollectionCreateValues = this.values;
+        if (immutableCollectionCreateValues == null) {
+            immutableCollectionCreateValues = createValues();
+            this.values = immutableCollectionCreateValues;
         }
-        return immutableCollection.contains(obj);
+        return immutableCollectionCreateValues.contains(obj);
     }
 
     public abstract ImmutableSet createEntrySet();
@@ -187,9 +183,9 @@ public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
         if (immutableSet != null) {
             return immutableSet;
         }
-        ImmutableSet createEntrySet = createEntrySet();
-        this.entrySet = createEntrySet;
-        return createEntrySet;
+        ImmutableSet immutableSetCreateEntrySet = createEntrySet();
+        this.entrySet = immutableSetCreateEntrySet;
+        return immutableSetCreateEntrySet;
     }
 
     @Override // java.util.Map
@@ -214,12 +210,12 @@ public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
 
     @Override // java.util.Map
     public final int hashCode() {
-        ImmutableSet immutableSet = this.entrySet;
-        if (immutableSet == null) {
-            immutableSet = createEntrySet();
-            this.entrySet = immutableSet;
+        ImmutableSet immutableSetCreateEntrySet = this.entrySet;
+        if (immutableSetCreateEntrySet == null) {
+            immutableSetCreateEntrySet = createEntrySet();
+            this.entrySet = immutableSetCreateEntrySet;
         }
-        Iterator<E> it = immutableSet.iterator();
+        Iterator<E> it = immutableSetCreateEntrySet.iterator();
         int i = 0;
         while (it.hasNext()) {
             Object next = it.next();
@@ -239,9 +235,9 @@ public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
         if (immutableSet != null) {
             return immutableSet;
         }
-        ImmutableSet createKeySet = createKeySet();
-        this.keySet = createKeySet;
-        return createKeySet;
+        ImmutableSet immutableSetCreateKeySet = createKeySet();
+        this.keySet = immutableSetCreateKeySet;
+        return immutableSetCreateKeySet;
     }
 
     @Override // java.util.Map
@@ -284,9 +280,9 @@ public abstract class ImmutableMap<K, V> implements Map<K, V>, Serializable {
         if (immutableCollection != null) {
             return immutableCollection;
         }
-        ImmutableCollection createValues = createValues();
-        this.values = createValues;
-        return createValues;
+        ImmutableCollection immutableCollectionCreateValues = createValues();
+        this.values = immutableCollectionCreateValues;
+        return immutableCollectionCreateValues;
     }
 
     public Object writeReplace() {

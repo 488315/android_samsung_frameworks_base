@@ -36,9 +36,9 @@ public final class SystemUpdatePolicy implements Parcelable {
             systemUpdatePolicy.mPolicyType = parcel.readInt();
             systemUpdatePolicy.mMaintenanceWindowStart = parcel.readInt();
             systemUpdatePolicy.mMaintenanceWindowEnd = parcel.readInt();
-            int readInt = parcel.readInt();
-            systemUpdatePolicy.mFreezePeriods.ensureCapacity(readInt);
-            for (int i = 0; i < readInt; i++) {
+            int i = parcel.readInt();
+            systemUpdatePolicy.mFreezePeriods.ensureCapacity(i);
+            for (int i2 = 0; i2 < i; i2++) {
                 systemUpdatePolicy.mFreezePeriods.add(new FreezePeriod(MonthDay.of(parcel.readInt(), parcel.readInt()), MonthDay.of(parcel.readInt(), parcel.readInt())));
             }
             return systemUpdatePolicy;
@@ -247,23 +247,23 @@ public final class SystemUpdatePolicy implements Parcelable {
     private long timeUntilNextFreezePeriod(long j) {
         LocalDate localDate;
         FreezePeriod next;
-        List<FreezePeriod> canonicalizePeriods = FreezePeriod.canonicalizePeriods(this.mFreezePeriods);
-        LocalDate millisToDate = millisToDate(j);
-        Iterator<FreezePeriod> it = canonicalizePeriods.iterator();
+        List<FreezePeriod> listCanonicalizePeriods = FreezePeriod.canonicalizePeriods(this.mFreezePeriods);
+        LocalDate localDateMillisToDate = millisToDate(j);
+        Iterator<FreezePeriod> it = listCanonicalizePeriods.iterator();
         do {
             if (it.hasNext()) {
                 next = it.next();
-                if (next.after(millisToDate)) {
-                    localDate = next.toCurrentOrFutureRealDates(millisToDate).first;
+                if (next.after(localDateMillisToDate)) {
+                    localDate = next.toCurrentOrFutureRealDates(localDateMillisToDate).first;
                 }
             } else {
                 localDate = null;
             }
             if (localDate == null) {
-                localDate = canonicalizePeriods.get(0).toCurrentOrFutureRealDates(millisToDate).first;
+                localDate = listCanonicalizePeriods.get(0).toCurrentOrFutureRealDates(localDateMillisToDate).first;
             }
             return dateToMillis(localDate) - j;
-        } while (!next.contains(millisToDate));
+        } while (!next.contains(localDateMillisToDate));
         throw new IllegalArgumentException("Given date is inside a freeze period");
     }
 
@@ -379,9 +379,7 @@ public final class SystemUpdatePolicy implements Parcelable {
         return String.format("SystemUpdatePolicy (type: %d, windowStart: %d, windowEnd: %d, freezes: [%s])", Integer.valueOf(this.mPolicyType), Integer.valueOf(this.mMaintenanceWindowStart), Integer.valueOf(this.mMaintenanceWindowEnd), this.mFreezePeriods.stream().map(new Function() { // from class: android.app.admin.SystemUpdatePolicy$$ExternalSyntheticLambda0
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                String freezePeriod;
-                freezePeriod = ((FreezePeriod) obj).toString();
-                return freezePeriod;
+                return ((FreezePeriod) obj).toString();
             }
         }).collect(Collectors.joining(",")));
     }

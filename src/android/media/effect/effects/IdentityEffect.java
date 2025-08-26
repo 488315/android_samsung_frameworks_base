@@ -17,11 +17,11 @@ public class IdentityEffect extends FilterEffect {
     @Override // android.media.effect.Effect
     public void apply(int i, int i2, int i3, int i4) {
         beginGLEffect();
-        Frame frameFromTexture = frameFromTexture(i, i2, i3);
-        Frame frameFromTexture2 = frameFromTexture(i4, i2, i3);
-        frameFromTexture2.setDataFromFrame(frameFromTexture);
-        frameFromTexture.release();
-        frameFromTexture2.release();
+        Frame frameFrameFromTexture = frameFromTexture(i, i2, i3);
+        Frame frameFrameFromTexture2 = frameFromTexture(i4, i2, i3);
+        frameFrameFromTexture2.setDataFromFrame(frameFrameFromTexture);
+        frameFrameFromTexture.release();
+        frameFrameFromTexture2.release();
         endGLEffect();
     }
 

@@ -23,7 +23,6 @@ import com.samsung.android.knox.net.nap.NetworkAnalyticsConstants;
 import java.util.Arrays;
 import java.util.concurrent.Executor;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class SubscreenUtil {
     public final Executor mMainExecutor;
@@ -50,11 +49,11 @@ public class SubscreenUtil {
         if (accessibilityManager == null || !accessibilityManager.isEnabled()) {
             return;
         }
-        AccessibilityEvent obtain = AccessibilityEvent.obtain(NetworkAnalyticsConstants.DataPoints.FLAG_SOURCE_PORT);
-        obtain.getText().clear();
-        obtain.getText().add(str);
-        obtain.setPackageName(context.getPackageName());
-        accessibilityManager.sendAccessibilityEvent(obtain);
+        AccessibilityEvent accessibilityEventObtain = AccessibilityEvent.obtain(NetworkAnalyticsConstants.DataPoints.FLAG_SOURCE_PORT);
+        accessibilityEventObtain.getText().clear();
+        accessibilityEventObtain.getText().add(str);
+        accessibilityEventObtain.setPackageName(context.getPackageName());
+        accessibilityManager.sendAccessibilityEvent(accessibilityEventObtain);
     }
 
     public final void closeSubscreenPanel() {
@@ -83,23 +82,23 @@ public class SubscreenUtil {
         Intent intent = new Intent();
         intent.addFlags(268959744);
         intent.setClassName("com.android.systemui", str);
-        ActivityOptions makeBasic = ActivityOptions.makeBasic();
+        ActivityOptions activityOptionsMakeBasic = ActivityOptions.makeBasic();
         ActionBarContextView$$ExternalSyntheticOutline0.m(new StringBuilder("Display is="), LsRune.SUBSCREEN_DEBUG_ACTIVITY_ON_MAIN, "LsRune");
         if (QpRune.QUICK_SUBSCREEN_SETTINGS) {
             if (getSubDisplay(context) == null) {
                 Log.d("SubscreenUtil", "No sub display to start activity");
                 return;
             }
-            makeBasic.setLaunchDisplayId(getSubDisplay(context).getDisplayId());
+            activityOptionsMakeBasic.setLaunchDisplayId(getSubDisplay(context).getDisplayId());
         }
-        makeBasic.setForceLaunchWindowingMode(1);
+        activityOptionsMakeBasic.setForceLaunchWindowingMode(1);
         try {
             if (QpRune.QUICK_SUBSCREEN_PANEL) {
                 SubscreenFlashLightController.getInstance(context).finishFlashLightActivity();
                 this.mMainExecutor.execute(new SubscreenUtil$$ExternalSyntheticLambda2());
                 new Handler().postDelayed(new SubscreenUtil$$ExternalSyntheticLambda1(this, 1), 100L);
             }
-            context.startActivity(intent, makeBasic.toBundle());
+            context.startActivity(intent, activityOptionsMakeBasic.toBundle());
         } catch (ActivityNotFoundException e) {
             e.printStackTrace();
         }

@@ -14,6 +14,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
 import android.os.RemoteException;
+import android.util.ArrayMap;
 import android.util.Log;
 import android.view.IRemoteAnimationFinishedCallback;
 import android.view.IRemoteAnimationRunner;
@@ -32,6 +33,7 @@ import android.window.RemoteTransition;
 import android.window.TransitionFilter;
 import android.window.TransitionInfo;
 import android.window.WindowAnimationState;
+import android.window.WindowContainerTransaction;
 import androidx.compose.foundation.gestures.ContentInViewNode$Request$$ExternalSyntheticOutline0;
 import com.android.app.animation.Interpolators;
 import com.android.internal.policy.ScreenDecorationsUtils;
@@ -41,11 +43,12 @@ import com.android.systemui.animation.ActivityTransitionAnimator;
 import com.android.systemui.animation.RemoteAnimationRunnerCompat;
 import com.android.systemui.animation.TransitionAnimator;
 import com.android.systemui.statusbar.phone.CentralSurfacesImpl;
-import com.android.systemui.statusbar.phone.CentralSurfacesImpl$3$$ExternalSyntheticLambda0;
+import com.android.systemui.statusbar.phone.CentralSurfacesImpl$$ExternalSyntheticLambda1;
 import com.android.systemui.statusbar.policy.KeyguardStateControllerImpl;
 import com.android.wm.shell.common.ExternalInterfaceBinder;
 import com.android.wm.shell.shared.IShellTransitions;
 import com.android.wm.shell.shared.ShellTransitions;
+import com.android.wm.shell.shared.TransitionUtil;
 import com.android.wm.shell.startingsurface.SplashscreenContentDrawer;
 import com.android.wm.shell.startingsurface.StartingWindowController;
 import com.android.wm.shell.transition.Transitions;
@@ -57,9 +60,13 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.concurrent.Executor;
 import kotlin.Pair;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.collections.ArraysKt___ArraysKt;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.ArrayIterator;
@@ -70,7 +77,6 @@ import kotlin.math.MathKt__MathJVMKt;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class ActivityTransitionAnimator {
     public static final long ANIMATION_DELAY_NAV_FADE_IN;
@@ -94,7 +100,6 @@ public final class ActivityTransitionAnimator {
     public final TransitionAnimator transitionAnimator;
     public final TransitionRegister transitionRegister;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class AnimationDelegate {
         public TransitionAnimator.Animation animation;
         public final Callback callback;
@@ -138,10 +143,10 @@ public final class ActivityTransitionAnimator {
             int i3 = rect.top;
             float f5 = (i3 + r10) / 2.0f;
             float f6 = rect.bottom - i3;
-            float max = Math.max(state.getWidth() / (i2 - i), state.getHeight() / f6);
+            float fMax = Math.max(state.getWidth() / (i2 - i), state.getHeight() / f6);
             this.matrix.reset();
-            this.matrix.setScale(max, max, f4, f5);
-            this.matrix.postTranslate(state.getCenterX() - f4, (((f6 * max) - f6) / 2.0f) + (state.top - rect.top));
+            this.matrix.setScale(fMax, fMax, f4, f5);
+            this.matrix.postTranslate(state.getCenterX() - f4, (((f6 * fMax) - f6) / 2.0f) + (state.top - rect.top));
             float f7 = state.left - rect.left;
             float f8 = state.top - rect.top;
             this.windowCropF.set(f7, f8, state.getWidth() + f7, state.getHeight() + f8);
@@ -184,11 +189,11 @@ public final class ActivityTransitionAnimator {
                 companion.getClass();
                 progress = TransitionAnimator.Companion.getProgress(timings3, f, j3, j4);
             }
-            SyncRtSurfaceTransactionApplier.SurfaceParams.Builder withVisibility = new SyncRtSurfaceTransactionApplier.SurfaceParams.Builder(remoteAnimationTarget.leash).withAlpha(controller.isBelowAnimatingWindow() ? controller.isLaunching() ? interpolators.contentAfterFadeInInterpolator.getInterpolation(progress) : 1 - interpolators.contentBeforeFadeOutInterpolator.getInterpolation(progress) : 1.0f).withMatrix(this.matrix).withWindowCrop(this.windowCrop).withCornerRadius(Math.max(state.topCornerRadius, state.bottomCornerRadius) / max).withVisibility(true);
+            SyncRtSurfaceTransactionApplier.SurfaceParams.Builder builderWithVisibility = new SyncRtSurfaceTransactionApplier.SurfaceParams.Builder(remoteAnimationTarget.leash).withAlpha(controller.isBelowAnimatingWindow() ? controller.isLaunching() ? interpolators.contentAfterFadeInInterpolator.getInterpolation(progress) : 1 - interpolators.contentBeforeFadeOutInterpolator.getInterpolation(progress) : 1.0f).withMatrix(this.matrix).withWindowCrop(this.windowCrop).withCornerRadius(Math.max(state.topCornerRadius, state.bottomCornerRadius) / fMax).withVisibility(true);
             if (transaction != null) {
-                withVisibility.withMergeTransaction(transaction);
+                builderWithVisibility.withMergeTransaction(transaction);
             }
-            this.transactionApplier.scheduleApply(new SyncRtSurfaceTransactionApplier.SurfaceParams[]{withVisibility.build()});
+            this.transactionApplier.scheduleApply(new SyncRtSurfaceTransactionApplier.SurfaceParams[]{builderWithVisibility.build()});
         }
 
         public final RemoteAnimationTarget setUpAnimation(RemoteAnimationTarget[] remoteAnimationTargetArr, IRemoteAnimationFinishedCallback iRemoteAnimationFinishedCallback) {
@@ -265,63 +270,63 @@ public final class ActivityTransitionAnimator {
         }
 
         public final void startAnimation(RemoteAnimationTarget remoteAnimationTarget, RemoteAnimationTarget remoteAnimationTarget2, boolean z, WindowAnimationState windowAnimationState, SurfaceControl.Transaction transaction, IRemoteAnimationFinishedCallback iRemoteAnimationFinishedCallback) {
-            TransitionAnimator.State createAnimatorState;
-            int i;
+            TransitionAnimator.State stateCreateAnimatorState;
+            int backgroundColor;
             PointF pointF;
             Rect rect = remoteAnimationTarget.screenSpaceBounds;
             Controller controller = this.controller;
-            boolean isLaunching = controller.isLaunching();
+            boolean zIsLaunching = controller.isLaunching();
             TransitionAnimator transitionAnimator = this.transitionAnimator;
-            if (isLaunching) {
+            if (zIsLaunching) {
                 WindowAnimationState windowAnimatorState = controller.getWindowAnimatorState();
                 if (windowAnimatorState != null) {
                     TransitionAnimator.Companion.getClass();
-                    createAnimatorState = new TransitionAnimator.State(0, 0, 0, 0, 0.0f, 0.0f, 63, null);
+                    stateCreateAnimatorState = new TransitionAnimator.State(0, 0, 0, 0, 0.0f, 0.0f, 63, null);
                     RectF rectF = windowAnimatorState.bounds;
                     if (rectF != null) {
-                        createAnimatorState.top = MathKt__MathJVMKt.roundToInt(rectF.top);
-                        createAnimatorState.left = MathKt__MathJVMKt.roundToInt(rectF.left);
-                        createAnimatorState.bottom = MathKt__MathJVMKt.roundToInt(rectF.bottom);
-                        createAnimatorState.right = MathKt__MathJVMKt.roundToInt(rectF.right);
+                        stateCreateAnimatorState.top = MathKt__MathJVMKt.roundToInt(rectF.top);
+                        stateCreateAnimatorState.left = MathKt__MathJVMKt.roundToInt(rectF.left);
+                        stateCreateAnimatorState.bottom = MathKt__MathJVMKt.roundToInt(rectF.bottom);
+                        stateCreateAnimatorState.right = MathKt__MathJVMKt.roundToInt(rectF.right);
                     }
                     float f = 2;
-                    createAnimatorState.bottomCornerRadius = (windowAnimatorState.bottomLeftRadius + windowAnimatorState.bottomRightRadius) / f;
-                    createAnimatorState.topCornerRadius = (windowAnimatorState.topLeftRadius + windowAnimatorState.topRightRadius) / f;
+                    stateCreateAnimatorState.bottomCornerRadius = (windowAnimatorState.bottomLeftRadius + windowAnimatorState.bottomRightRadius) / f;
+                    stateCreateAnimatorState.topCornerRadius = (windowAnimatorState.topLeftRadius + windowAnimatorState.topRightRadius) / f;
                 } else {
                     TransitionAnimator.State state = new TransitionAnimator.State(rect.top, rect.bottom, rect.left, rect.right, 0.0f, 0.0f, 48, null);
                     float windowCornerRadius = transitionAnimator.isExpandingFullyAbove$frameworks__base__packages__SystemUI__animation__android_common__PlatformAnimationLib(controller.getTransitionContainer(), state) ? ScreenDecorationsUtils.getWindowCornerRadius(this.context) : 0.0f;
                     state.topCornerRadius = windowCornerRadius;
                     state.bottomCornerRadius = windowCornerRadius;
-                    createAnimatorState = state;
+                    stateCreateAnimatorState = state;
                 }
             } else {
-                createAnimatorState = controller.createAnimatorState();
+                stateCreateAnimatorState = controller.createAnimatorState();
             }
             if (remoteAnimationTarget.isTranslucent) {
-                i = 0;
+                backgroundColor = 0;
             } else {
                 ActivityManager.RunningTaskInfo runningTaskInfo = remoteAnimationTarget.taskInfo;
                 if (runningTaskInfo != null) {
                     CentralSurfacesImpl centralSurfacesImpl = CentralSurfacesImpl.this;
                     if (centralSurfacesImpl.mStartingSurfaceOptional.isPresent()) {
-                        i = ((StartingWindowController.StartingSurfaceImpl) centralSurfacesImpl.mStartingSurfaceOptional.get()).getBackgroundColor(runningTaskInfo);
+                        backgroundColor = ((StartingWindowController.StartingSurfaceImpl) centralSurfacesImpl.mStartingSurfaceOptional.get()).getBackgroundColor(runningTaskInfo);
                     } else {
                         Log.w("CentralSurfaces", "No starting surface, defaulting to SystemBGColor");
-                        i = SplashscreenContentDrawer.getSystemBGColor();
+                        backgroundColor = SplashscreenContentDrawer.getSystemBGColor();
                     }
                 } else {
-                    i = remoteAnimationTarget.backgroundColor;
+                    backgroundColor = remoteAnimationTarget.backgroundColor;
                 }
             }
-            int i2 = i;
-            boolean isExpandingFullyAbove$frameworks__base__packages__SystemUI__animation__android_common__PlatformAnimationLib = transitionAnimator.isExpandingFullyAbove$frameworks__base__packages__SystemUI__animation__android_common__PlatformAnimationLib(controller.getTransitionContainer(), createAnimatorState);
+            int i = backgroundColor;
+            boolean zIsExpandingFullyAbove$frameworks__base__packages__SystemUI__animation__android_common__PlatformAnimationLib = transitionAnimator.isExpandingFullyAbove$frameworks__base__packages__SystemUI__animation__android_common__PlatformAnimationLib(controller.getTransitionContainer(), stateCreateAnimatorState);
             WindowAnimationState windowAnimatorState2 = windowAnimationState == null ? controller.getWindowAnimatorState() : windowAnimationState;
             controller.isLaunching();
             ViewRootImpl viewRootImpl = controller.getTransitionContainer().getViewRootImpl();
             if (!this.skipReparentTransaction) {
                 remoteAnimationTarget.leash.isValid();
             }
-            ActivityTransitionAnimator$AnimationDelegate$startAnimation$controller$1 activityTransitionAnimator$AnimationDelegate$startAnimation$controller$1 = new ActivityTransitionAnimator$AnimationDelegate$startAnimation$controller$1(this.controller, this, isExpandingFullyAbove$frameworks__base__packages__SystemUI__animation__android_common__PlatformAnimationLib, windowAnimatorState2, rect, transaction, remoteAnimationTarget, z, viewRootImpl, iRemoteAnimationFinishedCallback, remoteAnimationTarget2);
+            ActivityTransitionAnimator$AnimationDelegate$startAnimation$controller$1 activityTransitionAnimator$AnimationDelegate$startAnimation$controller$1 = new ActivityTransitionAnimator$AnimationDelegate$startAnimation$controller$1(this.controller, this, zIsExpandingFullyAbove$frameworks__base__packages__SystemUI__animation__android_common__PlatformAnimationLib, windowAnimatorState2, rect, transaction, remoteAnimationTarget, z, viewRootImpl, iRemoteAnimationFinishedCallback, remoteAnimationTarget2);
             TransitionAnimator.Companion.getClass();
             if ((windowAnimatorState2 != null ? windowAnimatorState2.velocityPxPerMs : null) != null) {
                 PointF pointF2 = windowAnimatorState2.velocityPxPerMs;
@@ -331,7 +336,7 @@ public final class ActivityTransitionAnimator {
                 pointF = z ? new PointF(0.0f, 0.0f) : null;
             }
             Controller controller2 = activityTransitionAnimator$AnimationDelegate$startAnimation$controller$1.$$delegate_0;
-            this.animation = this.transitionAnimator.startAnimation(activityTransitionAnimator$AnimationDelegate$startAnimation$controller$1, createAnimatorState, i2, !controller2.isBelowAnimatingWindow(), !controller2.isBelowAnimatingWindow(), pointF, windowAnimatorState2 != null ? windowAnimatorState2.timestamp : -1L);
+            this.animation = this.transitionAnimator.startAnimation(activityTransitionAnimator$AnimationDelegate$startAnimation$controller$1, stateCreateAnimatorState, i, !controller2.isBelowAnimatingWindow(), !controller2.isBelowAnimatingWindow(), pointF, windowAnimatorState2 != null ? windowAnimatorState2.timestamp : -1L);
         }
 
         public AnimationDelegate(Executor executor, Controller controller, Callback callback, Listener listener) {
@@ -369,7 +374,7 @@ public final class ActivityTransitionAnimator {
             this.onTimeout = new Runnable() { // from class: com.android.systemui.animation.ActivityTransitionAnimator$AnimationDelegate$onTimeout$1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ActivityTransitionAnimator.AnimationDelegate animationDelegate = ActivityTransitionAnimator.AnimationDelegate.this;
+                    ActivityTransitionAnimator.AnimationDelegate animationDelegate = this.this$0;
                     if (animationDelegate.cancelled) {
                         return;
                     }
@@ -398,11 +403,9 @@ public final class ActivityTransitionAnimator {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Callback {
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -422,7 +425,6 @@ public final class ActivityTransitionAnimator {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class DelegatingAnimationCompletionListener implements Listener {
         public boolean cancelled;
         public final Listener delegate;
@@ -472,7 +474,6 @@ public final class ActivityTransitionAnimator {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class OriginTransition implements IRemoteTransition {
         public final RemoteAnimationRunnerCompat.AnonymousClass1 delegate;
         public final Runner runner;
@@ -500,29 +501,88 @@ public final class ActivityTransitionAnimator {
             this.delegate.startAnimation(iBinder, transitionInfo, transaction, iRemoteTransitionFinishedCallback);
         }
 
-        /* JADX WARN: Code restructure failed: missing block: B:21:0x00a7, code lost:
-        
-            if (r15.topActivityType == 2) goto L27;
-         */
-        /*
-            Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
-        */
-        public final void takeOverAnimation(android.os.IBinder r17, android.window.TransitionInfo r18, android.view.SurfaceControl.Transaction r19, final android.window.IRemoteTransitionFinishedCallback r20, android.window.WindowAnimationState[] r21) {
-            /*
-                Method dump skipped, instructions count: 333
-                To view this dump change 'Code comments level' option to 'DEBUG'
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.animation.ActivityTransitionAnimator.OriginTransition.takeOverAnimation(android.os.IBinder, android.window.TransitionInfo, android.view.SurfaceControl$Transaction, android.window.IRemoteTransitionFinishedCallback, android.window.WindowAnimationState[]):void");
+        public final void takeOverAnimation(IBinder iBinder, TransitionInfo transitionInfo, SurfaceControl.Transaction transaction, final IRemoteTransitionFinishedCallback iRemoteTransitionFinishedCallback, WindowAnimationState[] windowAnimationStateArr) {
+            char c;
+            if (transitionInfo == null || transaction == null) {
+                Log.e("ActivityTransitionAnimator", "Skipping the animation takeover because the required data is missing: info=" + transitionInfo + ", transaction=" + transaction);
+                return;
+            }
+            ArrayList arrayList = new ArrayList();
+            ArrayList arrayList2 = new ArrayList();
+            final ArrayMap arrayMap = new ArrayMap();
+            TransitionUtil.LeafTaskFilter leafTaskFilter = new TransitionUtil.LeafTaskFilter();
+            int size = transitionInfo.getChanges().size();
+            char c2 = 2;
+            int size2 = transitionInfo.getChanges().size() * 2;
+            int size3 = transitionInfo.getChanges().size();
+            int i = 0;
+            while (i < size3) {
+                TransitionInfo.Change change = (TransitionInfo.Change) transitionInfo.getChanges().get(i);
+                if (change != null && change.getTaskInfo() != null) {
+                    ActivityManager.RunningTaskInfo taskInfo = change.getTaskInfo();
+                    if (TransitionUtil.isWallpaper(change)) {
+                        transaction.setAlpha(TransitionUtil.newTarget(change, size - i, false, transitionInfo, transaction, arrayMap).leash, 1.0f);
+                    } else {
+                        if (leafTaskFilter.test(change)) {
+                            int i2 = size - i;
+                            RemoteAnimationTarget remoteAnimationTargetNewTarget = TransitionUtil.newTarget(change, i2, false, transitionInfo, transaction, arrayMap);
+                            arrayList.add(remoteAnimationTargetNewTarget);
+                            arrayList2.add(windowAnimationStateArr[i]);
+                            transaction.setAlpha(remoteAnimationTargetNewTarget.leash, 1.0f);
+                            if (TransitionUtil.isClosingType(change.getMode())) {
+                                if (taskInfo != null) {
+                                    c = 2;
+                                    if (taskInfo.topActivityType == 2) {
+                                    }
+                                } else {
+                                    c = 2;
+                                }
+                                transaction.setLayer(remoteAnimationTargetNewTarget.leash, size2 - i);
+                            } else {
+                                c = 2;
+                            }
+                            if (TransitionUtil.isOpeningType(change.getMode())) {
+                                transaction.setLayer(remoteAnimationTargetNewTarget.leash, i2);
+                            }
+                        } else {
+                            c = c2;
+                            if (TransitionInfo.isIndependent(change, transitionInfo)) {
+                                if (TransitionUtil.isClosingType(change.getMode())) {
+                                    transaction.setLayer(change.getLeash(), size2 - i);
+                                } else if (TransitionUtil.isOpeningType(change.getMode())) {
+                                    transaction.setLayer(change.getLeash(), size - i);
+                                }
+                            } else if (TransitionUtil.isDividerBar(change)) {
+                                arrayList.add(TransitionUtil.newTarget(change, size - i, false, transitionInfo, transaction, arrayMap));
+                                arrayList2.add(windowAnimationStateArr[i]);
+                            }
+                        }
+                        i++;
+                        c2 = c;
+                    }
+                }
+                c = c2;
+                i++;
+                c2 = c;
+            }
+            this.runner.takeOverAnimation((RemoteAnimationTarget[]) arrayList.toArray(new RemoteAnimationTarget[0]), (WindowAnimationState[]) arrayList2.toArray(new WindowAnimationState[0]), transaction, new IRemoteAnimationFinishedCallback.Stub() { // from class: com.android.systemui.animation.ActivityTransitionAnimator$OriginTransition$takeOverAnimation$wrappedCallback$1
+                public final void onAnimationFinished() {
+                    arrayMap.clear();
+                    SurfaceControl.Transaction transaction2 = new SurfaceControl.Transaction();
+                    IRemoteTransitionFinishedCallback iRemoteTransitionFinishedCallback2 = iRemoteTransitionFinishedCallback;
+                    if (iRemoteTransitionFinishedCallback2 != null) {
+                        iRemoteTransitionFinishedCallback2.onTransitionFinished((WindowContainerTransaction) null, transaction2);
+                    }
+                    transaction2.close();
+                }
+            });
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface PendingIntentStarter {
         int startPendingIntent(RemoteAnimationAdapter remoteAnimationAdapter);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TransitionCookie extends Binder {
         public final String cookie;
 
@@ -546,6 +606,50 @@ public final class ActivityTransitionAnimator {
         }
     }
 
+    /* renamed from: com.android.systemui.animation.ActivityTransitionAnimator$createLongLivedRunner$1, reason: invalid class name and case insensitive filesystem */
+    final class C07921 extends SuspendLambda implements Function1 {
+        final /* synthetic */ ControllerFactory $controllerFactory;
+        final /* synthetic */ boolean $forLaunch;
+        int label;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public C07921(ControllerFactory controllerFactory, boolean z, Continuation continuation) {
+            super(1, continuation);
+            this.$controllerFactory = controllerFactory;
+            this.$forLaunch = z;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Continuation continuation) {
+            return new C07921(this.$controllerFactory, this.$forLaunch, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function1
+        /* renamed from: invoke */
+        public final Object mo781invoke(Object obj) {
+            return ((C07921) create((Continuation) obj)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) {
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i != 0) {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+                return obj;
+            }
+            ResultKt.throwOnFailure(obj);
+            ControllerFactory controllerFactory = this.$controllerFactory;
+            boolean z = this.$forLaunch;
+            this.label = 1;
+            Object objCreateController = controllerFactory.createController(z, this);
+            return objCreateController == coroutineSingletons ? coroutineSingletons : objCreateController;
+        }
+    }
+
     static {
         TransitionAnimator.Timings timings = new TransitionAnimator.Timings(500L, 0L, 150L, 150L, 183L);
         TIMINGS = timings;
@@ -566,13 +670,13 @@ public final class ActivityTransitionAnimator {
 
     public final void callOnIntentStartedOnMainThread(final Controller controller, final boolean z) {
         if (!Intrinsics.areEqual(Looper.myLooper(), Looper.getMainLooper())) {
-            this.mainExecutor.execute(new Runnable() { // from class: com.android.systemui.animation.ActivityTransitionAnimator$callOnIntentStartedOnMainThread$1
+            this.mainExecutor.execute(new Runnable() { // from class: com.android.systemui.animation.ActivityTransitionAnimator.callOnIntentStartedOnMainThread.1
                 @Override // java.lang.Runnable
                 public final void run() {
                     ActivityTransitionAnimator activityTransitionAnimator = ActivityTransitionAnimator.this;
-                    ActivityTransitionAnimator.Controller controller2 = controller;
+                    Controller controller2 = controller;
                     boolean z2 = z;
-                    ActivityTransitionAnimator.Companion companion = ActivityTransitionAnimator.Companion;
+                    Companion companion = ActivityTransitionAnimator.Companion;
                     activityTransitionAnimator.callOnIntentStartedOnMainThread(controller2, z2);
                 }
             });
@@ -595,7 +699,7 @@ public final class ActivityTransitionAnimator {
         TransitionAnimator.Companion.getClass();
         CentralSurfacesImpl.AnonymousClass19 anonymousClass19 = this.callback;
         anonymousClass19.getClass();
-        return new Runner(this, coroutineScope, anonymousClass19, this.transitionAnimator, this.lifecycleListener, new ActivityTransitionAnimator$createLongLivedRunner$1(controllerFactory, z, null));
+        return new Runner(this, coroutineScope, anonymousClass19, this.transitionAnimator, this.lifecycleListener, new C07921(controllerFactory, z, null));
     }
 
     public final void register(TransitionCookie transitionCookie, ControllerFactory controllerFactory, CoroutineScope coroutineScope) {
@@ -637,17 +741,15 @@ public final class ActivityTransitionAnimator {
     /* JADX WARN: Type inference failed for: r16v1 */
     /* JADX WARN: Type inference failed for: r16v2 */
     /* JADX WARN: Type inference failed for: r16v3 */
-    /* JADX WARN: Type inference failed for: r25v0, types: [kotlin.jvm.functions.Function1] */
+    /* JADX WARN: Type inference failed for: r24v0, types: [kotlin.jvm.functions.Function1] */
     public final void startIntentWithAnimation(final Controller controller, boolean z, String str, boolean z2, Function1 function1) {
         CentralSurfacesImpl.AnonymousClass19 anonymousClass19;
         boolean z3;
-        int i;
         ?? r16;
         RemoteAnimationAdapter remoteAnimationAdapter;
-        int i2 = 2;
         if (controller == null || !z) {
             Log.i("ActivityTransitionAnimator", "Starting intent with no animation");
-            function1.mo779invoke(null);
+            function1.mo781invoke(null);
             if (controller != null) {
                 callOnIntentStartedOnMainThread(controller, false);
                 return;
@@ -658,14 +760,13 @@ public final class ActivityTransitionAnimator {
         if (anonymousClass192 == null) {
             throw new IllegalStateException("ActivityTransitionAnimator.callback must be set before using this animator");
         }
-        Runner createEphemeralRunner = createEphemeralRunner(controller);
-        AnimationDelegate animationDelegate = createEphemeralRunner.delegate;
+        Runner runnerCreateEphemeralRunner = createEphemeralRunner(controller);
+        AnimationDelegate animationDelegate = runnerCreateEphemeralRunner.delegate;
         CentralSurfacesImpl centralSurfacesImpl = CentralSurfacesImpl.this;
         boolean z4 = ((KeyguardStateControllerImpl) centralSurfacesImpl.mKeyguardStateController).mShowing && !z2;
         if (z4) {
             anonymousClass19 = anonymousClass192;
             z3 = z4;
-            i = 1;
             r16 = 0;
             remoteAnimationAdapter = null;
         } else {
@@ -673,8 +774,7 @@ public final class ActivityTransitionAnimator {
             anonymousClass19 = anonymousClass192;
             r16 = 0;
             z3 = z4;
-            i = 1;
-            remoteAnimationAdapter = new RemoteAnimationAdapter(createEphemeralRunner, j, j - 150);
+            remoteAnimationAdapter = new RemoteAnimationAdapter(runnerCreateEphemeralRunner, j, j - 150);
         }
         if (str != null && remoteAnimationAdapter != null) {
             try {
@@ -686,7 +786,7 @@ public final class ActivityTransitionAnimator {
         if (remoteAnimationAdapter != null && controller.getTransitionCookie() != null) {
             TransitionAnimator.Companion.getClass();
             final Ref$ObjectRef ref$ObjectRef = new Ref$ObjectRef();
-            Runner createEphemeralRunner2 = createEphemeralRunner(new DelegateTransitionAnimatorController(controller) { // from class: com.android.systemui.animation.ActivityTransitionAnimator$registerEphemeralReturnAnimation$returnRunner$1
+            Runner runnerCreateEphemeralRunner2 = createEphemeralRunner(new DelegateTransitionAnimatorController(controller) { // from class: com.android.systemui.animation.ActivityTransitionAnimator$registerEphemeralReturnAnimation$returnRunner$1
                 @Override // com.android.systemui.animation.DelegateTransitionAnimatorController, com.android.systemui.animation.TransitionAnimator.Controller
                 public final boolean isLaunching() {
                     return false;
@@ -715,7 +815,7 @@ public final class ActivityTransitionAnimator {
             });
             TransitionFilter transitionFilter = new TransitionFilter();
             transitionFilter.mTypeSet = new int[]{2, 4};
-            TransitionFilter.Requirement[] requirementArr = new TransitionFilter.Requirement[i];
+            TransitionFilter.Requirement[] requirementArr = new TransitionFilter.Requirement[1];
             TransitionFilter.Requirement requirement = new TransitionFilter.Requirement();
             requirement.mLaunchCookie = controller.getTransitionCookie();
             requirement.mModes = new int[]{2, 4};
@@ -723,7 +823,7 @@ public final class ActivityTransitionAnimator {
             requirementArr[r16] = requirement;
             transitionFilter.mRequirements = requirementArr;
             boolean z5 = RemoteAnimationRunnerCompat.IS_SHELL_TRANSITION_ENABLED;
-            final RemoteTransition remoteTransition = new RemoteTransition(new RemoteAnimationRunnerCompat.AnonymousClass1(createEphemeralRunner2), controller.getTransitionCookie() + "_returnTransition");
+            final RemoteTransition remoteTransition = new RemoteTransition(new RemoteAnimationRunnerCompat.AnonymousClass1(runnerCreateEphemeralRunner2), controller.getTransitionCookie() + "_returnTransition");
             final TransitionRegister transitionRegister = this.transitionRegister;
             if (transitionRegister != null) {
                 transitionRegister.register$frameworks__base__packages__SystemUI__animation__android_common__PlatformAnimationLib(transitionFilter, remoteTransition);
@@ -731,25 +831,25 @@ public final class ActivityTransitionAnimator {
             ref$ObjectRef.element = new Runnable() { // from class: com.android.systemui.animation.ActivityTransitionAnimator$registerEphemeralReturnAnimation$1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ActivityTransitionAnimator.TransitionRegister transitionRegister2 = ActivityTransitionAnimator.TransitionRegister.this;
+                    ActivityTransitionAnimator.TransitionRegister transitionRegister2 = transitionRegister;
                     if (transitionRegister2 != null) {
                         transitionRegister2.unregister$frameworks__base__packages__SystemUI__animation__android_common__PlatformAnimationLib(remoteTransition);
                     }
                 }
             };
         }
-        int intValue = ((Number) function1.mo779invoke(remoteAnimationAdapter)).intValue();
-        boolean z6 = (intValue == 2 || intValue == 0 || (intValue == 3 && z3)) ? true : r16;
-        KeyguardSecPasswordViewController$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m("launchResult=", intValue, " willAnimate=", z6, " hideKeyguardWithAnimation="), z3, "ActivityTransitionAnimator");
+        int iIntValue = ((Number) function1.mo781invoke(remoteAnimationAdapter)).intValue();
+        boolean z6 = (iIntValue == 2 || iIntValue == 0 || (iIntValue == 3 && z3)) ? true : r16;
+        KeyguardSecPasswordViewController$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m("launchResult=", iIntValue, " willAnimate=", z6, " hideKeyguardWithAnimation="), z3, "ActivityTransitionAnimator");
         callOnIntentStartedOnMainThread(controller, z6);
         if (!z6) {
-            ActivityTransitionAnimator.this.mainExecutor.execute(new ActivityTransitionAnimator$Runner$dispose$1(createEphemeralRunner));
+            ActivityTransitionAnimator.this.mainExecutor.execute(new ActivityTransitionAnimator$Runner$dispose$1(runnerCreateEphemeralRunner));
             return;
         }
         TransitionAnimator.Companion.getClass();
-        createEphemeralRunner.postTimeouts();
+        runnerCreateEphemeralRunner.postTimeouts();
         if (z3) {
-            centralSurfacesImpl.mMainExecutor.execute(new CentralSurfacesImpl$3$$ExternalSyntheticLambda0(i2, anonymousClass19, createEphemeralRunner));
+            centralSurfacesImpl.mMainExecutor.execute(new CentralSurfacesImpl$$ExternalSyntheticLambda1(1, anonymousClass19, runnerCreateEphemeralRunner));
         }
     }
 
@@ -772,13 +872,11 @@ public final class ActivityTransitionAnimator {
         this(executor, transitionRegister, null, null, false, false, 60, null);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class TransitionRegister {
         public static final Companion Companion = new Companion(null);
         public final IShellTransitions iShellTransitions;
         public final ShellTransitions shellTransitions;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
                 this();
@@ -828,7 +926,6 @@ public final class ActivityTransitionAnimator {
         this(executor, transitionRegister, transitionAnimator, transitionAnimator2, false, false, 48, null);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class ControllerFactory {
         public final ComponentName component;
         public final TransitionCookie cookie;
@@ -869,7 +966,6 @@ public final class ActivityTransitionAnimator {
         this(executor, shellTransitions, (TransitionAnimator) null, (TransitionAnimator) null, false, 28, (DefaultConstructorMarker) null);
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Runner extends IRemoteAnimationRunner.Stub {
         public static final /* synthetic */ int $r8$clinit = 0;
         public final Callback callback;
@@ -893,59 +989,42 @@ public final class ActivityTransitionAnimator {
             }
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:15:0x0036  */
-        /* JADX WARN: Removed duplicated region for block: B:8:0x0024  */
+        /* JADX WARN: Removed duplicated region for block: B:7:0x0016  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public static final java.lang.Object access$setUp(com.android.systemui.animation.ActivityTransitionAnimator.Runner r4, kotlin.jvm.functions.Function1 r5, kotlin.coroutines.jvm.internal.ContinuationImpl r6) {
-            /*
-                r4.getClass()
-                boolean r0 = r6 instanceof com.android.systemui.animation.ActivityTransitionAnimator$Runner$setUp$1
-                if (r0 == 0) goto L16
-                r0 = r6
-                com.android.systemui.animation.ActivityTransitionAnimator$Runner$setUp$1 r0 = (com.android.systemui.animation.ActivityTransitionAnimator$Runner$setUp$1) r0
-                int r1 = r0.label
-                r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                r3 = r1 & r2
-                if (r3 == 0) goto L16
-                int r1 = r1 - r2
-                r0.label = r1
-                goto L1b
-            L16:
-                com.android.systemui.animation.ActivityTransitionAnimator$Runner$setUp$1 r0 = new com.android.systemui.animation.ActivityTransitionAnimator$Runner$setUp$1
-                r0.<init>(r4, r6)
-            L1b:
-                java.lang.Object r6 = r0.result
-                kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                int r2 = r0.label
-                r3 = 1
-                if (r2 == 0) goto L36
-                if (r2 != r3) goto L2e
-                java.lang.Object r4 = r0.L$0
-                com.android.systemui.animation.ActivityTransitionAnimator$Runner r4 = (com.android.systemui.animation.ActivityTransitionAnimator.Runner) r4
-                kotlin.ResultKt.throwOnFailure(r6)
-                goto L44
-            L2e:
-                java.lang.IllegalStateException r4 = new java.lang.IllegalStateException
-                java.lang.String r5 = "call to 'resume' before 'invoke' with coroutine"
-                r4.<init>(r5)
-                throw r4
-            L36:
-                kotlin.ResultKt.throwOnFailure(r6)
-                r0.L$0 = r4
-                r0.label = r3
-                java.lang.Object r6 = r5.mo779invoke(r0)
-                if (r6 != r1) goto L44
-                return r1
-            L44:
-                com.android.systemui.animation.ActivityTransitionAnimator$Controller r6 = (com.android.systemui.animation.ActivityTransitionAnimator.Controller) r6
-                r4.createDelegate(r6)
-                kotlin.Unit r4 = kotlin.Unit.INSTANCE
-                return r4
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.animation.ActivityTransitionAnimator.Runner.access$setUp(com.android.systemui.animation.ActivityTransitionAnimator$Runner, kotlin.jvm.functions.Function1, kotlin.coroutines.jvm.internal.ContinuationImpl):java.lang.Object");
+        public static final Object access$setUp(Runner runner, Function1 function1, ContinuationImpl continuationImpl) {
+            ActivityTransitionAnimator$Runner$setUp$1 activityTransitionAnimator$Runner$setUp$1;
+            runner.getClass();
+            if (continuationImpl instanceof ActivityTransitionAnimator$Runner$setUp$1) {
+                activityTransitionAnimator$Runner$setUp$1 = (ActivityTransitionAnimator$Runner$setUp$1) continuationImpl;
+                int i = activityTransitionAnimator$Runner$setUp$1.label;
+                if ((i & Integer.MIN_VALUE) != 0) {
+                    activityTransitionAnimator$Runner$setUp$1.label = i - Integer.MIN_VALUE;
+                } else {
+                    activityTransitionAnimator$Runner$setUp$1 = new ActivityTransitionAnimator$Runner$setUp$1(runner, continuationImpl);
+                }
+            }
+            Object objMo781invoke = activityTransitionAnimator$Runner$setUp$1.result;
+            Object obj = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i2 = activityTransitionAnimator$Runner$setUp$1.label;
+            if (i2 == 0) {
+                ResultKt.throwOnFailure(objMo781invoke);
+                activityTransitionAnimator$Runner$setUp$1.L$0 = runner;
+                activityTransitionAnimator$Runner$setUp$1.label = 1;
+                objMo781invoke = function1.mo781invoke(activityTransitionAnimator$Runner$setUp$1);
+                if (objMo781invoke == obj) {
+                    return obj;
+                }
+            } else {
+                if (i2 != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                runner = (Runner) activityTransitionAnimator$Runner$setUp$1.L$0;
+                ResultKt.throwOnFailure(objMo781invoke);
+            }
+            runner.createDelegate((Controller) objMo781invoke);
+            return Unit.INSTANCE;
         }
 
         public final void createDelegate(Controller controller) {
@@ -997,7 +1076,7 @@ public final class ActivityTransitionAnimator {
                 ActivityTransitionAnimator.this.mainExecutor.execute(new Runnable() { // from class: com.android.systemui.animation.ActivityTransitionAnimator$Runner$onAnimationCancelled$1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        ActivityTransitionAnimator.AnimationDelegate animationDelegate2 = ActivityTransitionAnimator.AnimationDelegate.this;
+                        ActivityTransitionAnimator.AnimationDelegate animationDelegate2 = animationDelegate;
                         Handler handler = animationDelegate2.timeoutHandler;
                         if (handler != null) {
                             handler.removeCallbacks(animationDelegate2.onTimeout);
@@ -1042,7 +1121,7 @@ public final class ActivityTransitionAnimator {
 
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
+                public final Object mo781invoke(Object obj) {
                     RemoteAnimationTarget remoteAnimationTarget;
                     RemoteAnimationTarget[] remoteAnimationTargetArr4 = this.f$1;
                     RemoteAnimationTarget[] remoteAnimationTargetArr5 = this.f$3;
@@ -1056,15 +1135,16 @@ public final class ActivityTransitionAnimator {
                             TransitionAnimator.Companion.getClass();
                             controller.isLaunching();
                             animationDelegate.startAnimation(upAnimation, null, false, null, null, iRemoteAnimationFinishedCallback2);
-                        } else {
-                            if (remoteAnimationTargetArr5 != null) {
-                                for (RemoteAnimationTarget remoteAnimationTarget2 : remoteAnimationTargetArr5) {
-                                    if (remoteAnimationTarget2.windowType == 2019) {
-                                        remoteAnimationTarget = remoteAnimationTarget2;
-                                        break;
-                                    }
+                        } else if (remoteAnimationTargetArr5 != null) {
+                            for (RemoteAnimationTarget remoteAnimationTarget2 : remoteAnimationTargetArr5) {
+                                if (remoteAnimationTarget2.windowType == 2019) {
+                                    remoteAnimationTarget = remoteAnimationTarget2;
+                                    break;
                                 }
                             }
+                            remoteAnimationTarget = null;
+                            animationDelegate.startAnimation(upAnimation, remoteAnimationTarget, false, null, null, iRemoteAnimationFinishedCallback2);
+                        } else {
                             remoteAnimationTarget = null;
                             animationDelegate.startAnimation(upAnimation, remoteAnimationTarget, false, null, null, iRemoteAnimationFinishedCallback2);
                         }
@@ -1093,7 +1173,7 @@ public final class ActivityTransitionAnimator {
             initAndRun(iRemoteAnimationFinishedCallback, new Function1() { // from class: com.android.systemui.animation.ActivityTransitionAnimator$Runner$$ExternalSyntheticLambda1
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
-                public final Object mo779invoke(Object obj) {
+                public final Object mo781invoke(Object obj) {
                     RemoteAnimationTarget[] remoteAnimationTargetArr2 = remoteAnimationTargetArr;
                     WindowAnimationState[] windowAnimationStateArr2 = windowAnimationStateArr;
                     SurfaceControl.Transaction transaction2 = transaction;
@@ -1155,7 +1235,7 @@ public final class ActivityTransitionAnimator {
         this.lifecycleListener = new Listener() { // from class: com.android.systemui.animation.ActivityTransitionAnimator$lifecycleListener$1
             @Override // com.android.systemui.animation.ActivityTransitionAnimator.Listener
             public final void onTransitionAnimationCancelled() {
-                Iterator it = new LinkedHashSet(ActivityTransitionAnimator.this.listeners).iterator();
+                Iterator it = new LinkedHashSet(this.this$0.listeners).iterator();
                 while (it.hasNext()) {
                     ((ActivityTransitionAnimator.Listener) it.next()).onTransitionAnimationCancelled();
                 }
@@ -1163,7 +1243,7 @@ public final class ActivityTransitionAnimator {
 
             @Override // com.android.systemui.animation.ActivityTransitionAnimator.Listener
             public final void onTransitionAnimationEnd() {
-                Iterator it = new LinkedHashSet(ActivityTransitionAnimator.this.listeners).iterator();
+                Iterator it = new LinkedHashSet(this.this$0.listeners).iterator();
                 while (it.hasNext()) {
                     ((ActivityTransitionAnimator.Listener) it.next()).onTransitionAnimationEnd();
                 }
@@ -1171,7 +1251,7 @@ public final class ActivityTransitionAnimator {
 
             @Override // com.android.systemui.animation.ActivityTransitionAnimator.Listener
             public final void onTransitionAnimationProgress(float f) {
-                Iterator it = new LinkedHashSet(ActivityTransitionAnimator.this.listeners).iterator();
+                Iterator it = new LinkedHashSet(this.this$0.listeners).iterator();
                 while (it.hasNext()) {
                     ((ActivityTransitionAnimator.Listener) it.next()).onTransitionAnimationProgress(f);
                 }
@@ -1179,7 +1259,7 @@ public final class ActivityTransitionAnimator {
 
             @Override // com.android.systemui.animation.ActivityTransitionAnimator.Listener
             public final void onTransitionAnimationStart() {
-                Iterator it = new LinkedHashSet(ActivityTransitionAnimator.this.listeners).iterator();
+                Iterator it = new LinkedHashSet(this.this$0.listeners).iterator();
                 while (it.hasNext()) {
                     ((ActivityTransitionAnimator.Listener) it.next()).onTransitionAnimationStart();
                 }
@@ -1188,11 +1268,9 @@ public final class ActivityTransitionAnimator {
         this.longLivedTransitions = new HashMap();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Controller extends TransitionAnimator.Controller {
         public static final Companion Companion = Companion.$$INSTANCE;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Companion {
             public static final /* synthetic */ Companion $$INSTANCE = new Companion();
 
@@ -1245,7 +1323,6 @@ public final class ActivityTransitionAnimator {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface Listener {
         void onTransitionAnimationEnd();
 
@@ -1258,127 +1335,36 @@ public final class ActivityTransitionAnimator {
     }
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public /* synthetic */ ActivityTransitionAnimator(java.util.concurrent.Executor r8, com.android.systemui.animation.ActivityTransitionAnimator.TransitionRegister r9, com.android.systemui.animation.TransitionAnimator r10, com.android.systemui.animation.TransitionAnimator r11, boolean r12, boolean r13, int r14, kotlin.jvm.internal.DefaultConstructorMarker r15) {
-        /*
-            r7 = this;
-            r15 = r14 & 2
-            if (r15 == 0) goto L5
-            r9 = 0
-        L5:
-            r2 = r9
-            r9 = r14 & 4
-            com.android.systemui.animation.ActivityTransitionAnimator$Companion r15 = com.android.systemui.animation.ActivityTransitionAnimator.Companion
-            if (r9 == 0) goto L10
-            com.android.systemui.animation.TransitionAnimator r10 = com.android.systemui.animation.ActivityTransitionAnimator.Companion.access$defaultTransitionAnimator(r15, r8)
-        L10:
-            r3 = r10
-            r9 = r14 & 8
-            if (r9 == 0) goto L19
-            com.android.systemui.animation.TransitionAnimator r11 = com.android.systemui.animation.ActivityTransitionAnimator.Companion.access$defaultDialogToAppAnimator(r15, r8)
-        L19:
-            r4 = r11
-            r9 = r14 & 16
-            r10 = 0
-            if (r9 == 0) goto L21
-            r5 = r10
-            goto L22
-        L21:
-            r5 = r12
-        L22:
-            r9 = r14 & 32
-            if (r9 == 0) goto L2a
-            r6 = r10
-        L27:
-            r0 = r7
-            r1 = r8
-            goto L2c
-        L2a:
-            r6 = r13
-            goto L27
-        L2c:
-            r0.<init>(r1, r2, r3, r4, r5, r6)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.animation.ActivityTransitionAnimator.<init>(java.util.concurrent.Executor, com.android.systemui.animation.ActivityTransitionAnimator$TransitionRegister, com.android.systemui.animation.TransitionAnimator, com.android.systemui.animation.TransitionAnimator, boolean, boolean, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+    public /* synthetic */ ActivityTransitionAnimator(Executor executor, TransitionRegister transitionRegister, TransitionAnimator transitionAnimator, TransitionAnimator transitionAnimator2, boolean z, boolean z2, int i, DefaultConstructorMarker defaultConstructorMarker) {
+        TransitionRegister transitionRegister2 = (i & 2) != 0 ? null : transitionRegister;
+        int i2 = i & 4;
+        Companion companion = Companion;
+        this(executor, transitionRegister2, i2 != 0 ? Companion.access$defaultTransitionAnimator(companion, executor) : transitionAnimator, (i & 8) != 0 ? Companion.access$defaultDialogToAppAnimator(companion, executor) : transitionAnimator2, (i & 16) != 0 ? false : z, (i & 32) != 0 ? false : z2);
     }
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public /* synthetic */ ActivityTransitionAnimator(java.util.concurrent.Executor r8, com.android.wm.shell.shared.ShellTransitions r9, com.android.systemui.animation.TransitionAnimator r10, com.android.systemui.animation.TransitionAnimator r11, boolean r12, int r13, kotlin.jvm.internal.DefaultConstructorMarker r14) {
-        /*
-            r7 = this;
-            r14 = r13 & 4
-            com.android.systemui.animation.ActivityTransitionAnimator$Companion r0 = com.android.systemui.animation.ActivityTransitionAnimator.Companion
-            if (r14 == 0) goto La
-            com.android.systemui.animation.TransitionAnimator r10 = com.android.systemui.animation.ActivityTransitionAnimator.Companion.access$defaultTransitionAnimator(r0, r8)
-        La:
-            r4 = r10
-            r10 = r13 & 8
-            if (r10 == 0) goto L13
-            com.android.systemui.animation.TransitionAnimator r11 = com.android.systemui.animation.ActivityTransitionAnimator.Companion.access$defaultDialogToAppAnimator(r0, r8)
-        L13:
-            r5 = r11
-            r10 = r13 & 16
-            if (r10 == 0) goto L19
-            r12 = 0
-        L19:
-            r1 = r7
-            r2 = r8
-            r3 = r9
-            r6 = r12
-            r1.<init>(r2, r3, r4, r5, r6)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.animation.ActivityTransitionAnimator.<init>(java.util.concurrent.Executor, com.android.wm.shell.shared.ShellTransitions, com.android.systemui.animation.TransitionAnimator, com.android.systemui.animation.TransitionAnimator, boolean, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+    public /* synthetic */ ActivityTransitionAnimator(Executor executor, ShellTransitions shellTransitions, TransitionAnimator transitionAnimator, TransitionAnimator transitionAnimator2, boolean z, int i, DefaultConstructorMarker defaultConstructorMarker) {
+        int i2 = i & 4;
+        Companion companion = Companion;
+        this(executor, shellTransitions, i2 != 0 ? Companion.access$defaultTransitionAnimator(companion, executor) : transitionAnimator, (i & 8) != 0 ? Companion.access$defaultDialogToAppAnimator(companion, executor) : transitionAnimator2, (i & 16) != 0 ? false : z);
     }
 
     /* JADX WARN: 'this' call moved to the top of the method (can break code semantics) */
+    /* JADX WARN: Multi-variable type inference failed */
     public ActivityTransitionAnimator(Executor executor, ShellTransitions shellTransitions, TransitionAnimator transitionAnimator, TransitionAnimator transitionAnimator2, boolean z) {
         this(executor, new TransitionRegister(shellTransitions, null, 2, 0 == true ? 1 : 0), transitionAnimator, transitionAnimator2, z, false, 32, null);
         TransitionRegister.Companion.getClass();
     }
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public /* synthetic */ ActivityTransitionAnimator(java.util.concurrent.Executor r8, com.android.wm.shell.shared.IShellTransitions r9, com.android.systemui.animation.TransitionAnimator r10, com.android.systemui.animation.TransitionAnimator r11, boolean r12, int r13, kotlin.jvm.internal.DefaultConstructorMarker r14) {
-        /*
-            r7 = this;
-            r14 = r13 & 4
-            com.android.systemui.animation.ActivityTransitionAnimator$Companion r0 = com.android.systemui.animation.ActivityTransitionAnimator.Companion
-            if (r14 == 0) goto La
-            com.android.systemui.animation.TransitionAnimator r10 = com.android.systemui.animation.ActivityTransitionAnimator.Companion.access$defaultTransitionAnimator(r0, r8)
-        La:
-            r4 = r10
-            r10 = r13 & 8
-            if (r10 == 0) goto L13
-            com.android.systemui.animation.TransitionAnimator r11 = com.android.systemui.animation.ActivityTransitionAnimator.Companion.access$defaultDialogToAppAnimator(r0, r8)
-        L13:
-            r5 = r11
-            r10 = r13 & 16
-            if (r10 == 0) goto L19
-            r12 = 0
-        L19:
-            r1 = r7
-            r2 = r8
-            r3 = r9
-            r6 = r12
-            r1.<init>(r2, r3, r4, r5, r6)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.animation.ActivityTransitionAnimator.<init>(java.util.concurrent.Executor, com.android.wm.shell.shared.IShellTransitions, com.android.systemui.animation.TransitionAnimator, com.android.systemui.animation.TransitionAnimator, boolean, int, kotlin.jvm.internal.DefaultConstructorMarker):void");
+    public /* synthetic */ ActivityTransitionAnimator(Executor executor, IShellTransitions iShellTransitions, TransitionAnimator transitionAnimator, TransitionAnimator transitionAnimator2, boolean z, int i, DefaultConstructorMarker defaultConstructorMarker) {
+        int i2 = i & 4;
+        Companion companion = Companion;
+        this(executor, iShellTransitions, i2 != 0 ? Companion.access$defaultTransitionAnimator(companion, executor) : transitionAnimator, (i & 8) != 0 ? Companion.access$defaultDialogToAppAnimator(companion, executor) : transitionAnimator2, (i & 16) != 0 ? false : z);
     }
 
     /* JADX WARN: 'this' call moved to the top of the method (can break code semantics) */
+    /* JADX WARN: Multi-variable type inference failed */
     public ActivityTransitionAnimator(Executor executor, IShellTransitions iShellTransitions, TransitionAnimator transitionAnimator, TransitionAnimator transitionAnimator2, boolean z) {
         this(executor, new TransitionRegister(null, iShellTransitions, 1, 0 == true ? 1 : 0), transitionAnimator, transitionAnimator2, z, false, 32, null);
         TransitionRegister.Companion.getClass();

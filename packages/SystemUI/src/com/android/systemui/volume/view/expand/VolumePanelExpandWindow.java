@@ -6,28 +6,42 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.res.Resources;
+import android.graphics.drawable.ColorDrawable;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
+import android.view.accessibility.AccessibilityEvent;
+import android.view.animation.LinearInterpolator;
 import android.view.animation.PathInterpolator;
 import android.widget.ImageView;
+import com.android.keyguard.KeyguardSecPatternViewController$$ExternalSyntheticOutline0;
 import com.android.systemui.BasicRune;
 import com.android.systemui.R;
 import com.android.systemui.basic.util.LogWrapper;
 import com.android.systemui.volume.VolumeDependency;
+import com.android.systemui.volume.VolumeDependencyBase;
 import com.android.systemui.volume.config.SystemConfigImpl;
+import com.android.systemui.volume.config.VolumeConfigs;
 import com.android.systemui.volume.store.StoreInteractor;
 import com.android.systemui.volume.store.VolumePanelStore;
 import com.android.systemui.volume.util.BlurEffect;
+import com.android.systemui.volume.util.ContextUtils;
+import com.android.systemui.volume.util.HandlerWrapper;
 import com.android.systemui.volume.view.VolumePanelMotion;
 import com.samsung.systemui.splugins.volume.VolumeObserver;
 import com.samsung.systemui.splugins.volume.VolumePanelAction;
 import com.samsung.systemui.splugins.volume.VolumePanelState;
+import java.util.function.Supplier;
 import kotlin.Lazy;
+import kotlin.LazyKt__LazyJVMKt;
+import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class VolumePanelExpandWindow extends Dialog implements VolumeObserver {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -38,7 +52,6 @@ public final class VolumePanelExpandWindow extends Dialog implements VolumeObser
     public final SystemConfigImpl systemConfig;
     public final VolumeDependency volDeps;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -48,7 +61,6 @@ public final class VolumePanelExpandWindow extends Dialog implements VolumeObser
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -111,16 +123,241 @@ public final class VolumePanelExpandWindow extends Dialog implements VolumeObser
     }
 
     /* JADX WARN: Illegal instructions before constructor call */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public VolumePanelExpandWindow(com.android.systemui.volume.VolumeDependencyBase r11) {
-        /*
-            Method dump skipped, instructions count: 305
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.volume.view.expand.VolumePanelExpandWindow.<init>(com.android.systemui.volume.VolumeDependencyBase):void");
+    public VolumePanelExpandWindow(VolumeDependencyBase volumeDependencyBase) {
+        VolumeDependency volumeDependency = (VolumeDependency) volumeDependencyBase;
+        super((Context) volumeDependency.get(Context.class));
+        this.volDeps = volumeDependency;
+        final int i = 0;
+        this.store$delegate = LazyKt__LazyJVMKt.lazy(new Function0(this) { // from class: com.android.systemui.volume.view.expand.VolumePanelExpandWindow$$ExternalSyntheticLambda0
+            public final /* synthetic */ VolumePanelExpandWindow f$0;
+
+            {
+                this.f$0 = this;
+            }
+
+            @Override // kotlin.jvm.functions.Function0
+            public final Object invoke() {
+                VolumePanelExpandWindow volumePanelExpandWindow = this.f$0;
+                switch (i) {
+                    case 0:
+                        return (VolumePanelStore) volumePanelExpandWindow.volDeps.get(VolumePanelStore.class);
+                    default:
+                        int i2 = VolumePanelExpandWindow.$r8$clinit;
+                        return new StoreInteractor(volumePanelExpandWindow, volumePanelExpandWindow.getStore());
+                }
+            }
+        });
+        final int i2 = 1;
+        Lazy lazy = LazyKt__LazyJVMKt.lazy(new Function0(this) { // from class: com.android.systemui.volume.view.expand.VolumePanelExpandWindow$$ExternalSyntheticLambda0
+            public final /* synthetic */ VolumePanelExpandWindow f$0;
+
+            {
+                this.f$0 = this;
+            }
+
+            @Override // kotlin.jvm.functions.Function0
+            public final Object invoke() {
+                VolumePanelExpandWindow volumePanelExpandWindow = this.f$0;
+                switch (i2) {
+                    case 0:
+                        return (VolumePanelStore) volumePanelExpandWindow.volDeps.get(VolumePanelStore.class);
+                    default:
+                        int i22 = VolumePanelExpandWindow.$r8$clinit;
+                        return new StoreInteractor(volumePanelExpandWindow, volumePanelExpandWindow.getStore());
+                }
+            }
+        });
+        this.storeInteractor$delegate = lazy;
+        SystemConfigImpl systemConfigImpl = (SystemConfigImpl) ((VolumeConfigs) volumeDependency.get(VolumeConfigs.class)).systemConfig$delegate.getValue();
+        this.systemConfig = systemConfigImpl;
+        this.log = (LogWrapper) volumeDependency.get(LogWrapper.class);
+        Window window = getWindow();
+        if (window != null) {
+            window.requestFeature(1);
+            window.setBackgroundDrawable(new ColorDrawable(0));
+            window.clearFlags(2);
+            window.addFlags(17563944);
+            WindowManager.LayoutParams attributes = window.getAttributes();
+            attributes.type = 2020;
+            attributes.format = -3;
+            attributes.setTitle("VolumePanelExpandWindow");
+            attributes.windowAnimations = -1;
+            attributes.accessibilityTitle = window.getContext().getString(R.string.volume_panel_view_title);
+            if (((Boolean) systemConfigImpl.hasCutout$delegate.getValue()).booleanValue()) {
+                attributes.flags |= 67109888;
+                attributes.layoutInDisplayCutoutMode = 0;
+            }
+            window.setAttributes(attributes);
+        }
+        setContentView(R.layout.volume_panel_expand_view);
+        final VolumePanelExpandView volumePanelExpandView = (VolumePanelExpandView) requireViewById(R.id.volume_panel_expand_view);
+        this.panelView = volumePanelExpandView;
+        volumePanelExpandView.dialog = this;
+        volumePanelExpandView.store = (VolumePanelStore) volumeDependency.get(VolumePanelStore.class);
+        volumePanelExpandView.handlerWrapper = (HandlerWrapper) volumeDependency.get(HandlerWrapper.class);
+        volumePanelExpandView.logWrapper = (LogWrapper) volumeDependency.get(LogWrapper.class);
+        volumePanelExpandView.volumePanelMotion = (VolumePanelMotion) volumeDependency.get(VolumePanelMotion.class);
+        volumePanelExpandView.blurEffect = new BlurEffect(volumePanelExpandView.getContext(), volumeDependency);
+        volumePanelExpandView.systemConfig = (SystemConfigImpl) ((VolumeConfigs) volumeDependency.get(VolumeConfigs.class)).systemConfig$delegate.getValue();
+        StoreInteractor storeInteractor = volumePanelExpandView.storeInteractor;
+        VolumePanelStore volumePanelStore = volumePanelExpandView.store;
+        storeInteractor.store = volumePanelStore == null ? null : volumePanelStore;
+        VolumePanelExpandWindow volumePanelExpandWindow = volumePanelExpandView.dialog;
+        Window window2 = (volumePanelExpandWindow == null ? null : volumePanelExpandWindow).getWindow();
+        window2.getClass();
+        window2.getDecorView().setAccessibilityDelegate(new View.AccessibilityDelegate() { // from class: com.android.systemui.volume.view.expand.VolumePanelExpandView$bind$1
+            @Override // android.view.View.AccessibilityDelegate
+            public final boolean onRequestSendAccessibilityEvent(ViewGroup viewGroup, View view, AccessibilityEvent accessibilityEvent) {
+                VolumePanelExpandView$adjustTouchEventForOutsideTouch$1$$ExternalSyntheticOutline0.m(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_SEND_ACCESSIBILITY_EVENT), true, volumePanelExpandView.storeInteractor, true);
+                return super.onRequestSendAccessibilityEvent(viewGroup, view, accessibilityEvent);
+            }
+        });
+        VolumePanelExpandWindow volumePanelExpandWindow2 = volumePanelExpandView.dialog;
+        (volumePanelExpandWindow2 != null ? volumePanelExpandWindow2 : null).setOnShowListener(new DialogInterface.OnShowListener() { // from class: com.android.systemui.volume.view.expand.VolumePanelExpandView$bind$2
+            @Override // android.content.DialogInterface.OnShowListener
+            public final void onShow(DialogInterface dialogInterface) {
+                final Runnable runnable;
+                boolean z = BasicRune.VOLUME_PARTIAL_BLUR;
+                if (z) {
+                    final VolumePanelExpandView volumePanelExpandView2 = volumePanelExpandView;
+                    runnable = new Runnable() { // from class: com.android.systemui.volume.view.expand.VolumePanelExpandView$bind$2$showBlurRunnable$1
+                        @Override // java.lang.Runnable
+                        public final void run() throws Resources.NotFoundException {
+                            VolumePanelExpandView volumePanelExpandView3 = volumePanelExpandView2;
+                            BlurEffect blurEffect = volumePanelExpandView3.blurEffect;
+                            if (blurEffect == null) {
+                                blurEffect = null;
+                            }
+                            ImageView imageView = volumePanelExpandView3.blurView;
+                            ImageView imageView2 = imageView != null ? imageView : null;
+                            int color = volumePanelExpandView3.getContext().getColor(R.color.volume_expand_panel_bg_color_blur);
+                            float dimension = volumePanelExpandView2.getContext().getResources().getDimension(R.dimen.volume_panel_expand_view_radius);
+                            blurEffect.getClass();
+                            BlurEffect.setRealTimeBlur(imageView2, color, dimension, 107);
+                        }
+                    };
+                } else if (BasicRune.VOLUME_CAPTURED_BLUR) {
+                    final VolumePanelExpandView volumePanelExpandView3 = volumePanelExpandView;
+                    runnable = new Runnable() { // from class: com.android.systemui.volume.view.expand.VolumePanelExpandView$bind$2$showBlurRunnable$2
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            final VolumePanelExpandView volumePanelExpandView4 = volumePanelExpandView3;
+                            BlurEffect blurEffect = volumePanelExpandView4.blurEffect;
+                            if (blurEffect == null) {
+                                blurEffect = null;
+                            }
+                            ImageView imageView = volumePanelExpandView4.blurView;
+                            blurEffect.setCapturedBlur(imageView != null ? imageView : null, 107, new Supplier() { // from class: com.android.systemui.volume.view.expand.VolumePanelExpandView$bind$2$showBlurRunnable$2.1
+                                @Override // java.util.function.Supplier
+                                public final Object get() {
+                                    int[] iArr = new int[2];
+                                    ImageView imageView2 = volumePanelExpandView4.blurView;
+                                    if (imageView2 == null) {
+                                        imageView2 = null;
+                                    }
+                                    imageView2.getLocationOnScreen(iArr);
+                                    int i3 = iArr[0];
+                                    ImageView imageView3 = volumePanelExpandView4.blurView;
+                                    if (imageView3 == null) {
+                                        imageView3 = null;
+                                    }
+                                    iArr[0] = i3 - ((int) (imageView3.getWidth() * 0.025d));
+                                    iArr[1] = iArr[1] - ((int) ((volumePanelExpandView4.blurView != null ? r8 : null).getHeight() * 0.025d));
+                                    return iArr;
+                                }
+                            });
+                        }
+                    };
+                } else {
+                    runnable = new Runnable() { // from class: com.android.systemui.volume.view.expand.VolumePanelExpandView$bind$2$showBlurRunnable$3
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                        }
+                    };
+                }
+                VolumePanelExpandView volumePanelExpandView4 = volumePanelExpandView;
+                final VolumePanelMotion volumePanelMotion = volumePanelExpandView4.volumePanelMotion;
+                if (volumePanelMotion == null) {
+                    volumePanelMotion = null;
+                }
+                VolumePanelExpandWindow volumePanelExpandWindow3 = volumePanelExpandView4.dialog;
+                if (volumePanelExpandWindow3 == null) {
+                    volumePanelExpandWindow3 = null;
+                }
+                Window window3 = volumePanelExpandWindow3.getWindow();
+                window3.getClass();
+                final View decorView = window3.getDecorView();
+                volumePanelMotion.getClass();
+                ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(decorView, "alpha", decorView.getAlpha(), 1.0f);
+                objectAnimatorOfFloat.setDuration(200L);
+                objectAnimatorOfFloat.setInterpolator(new LinearInterpolator());
+                objectAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.volume.view.VolumePanelMotion$startShowVolumeExpandAnimation$alphaAnimator$1$1
+                    @Override // android.animation.ValueAnimator.AnimatorUpdateListener
+                    public final void onAnimationUpdate(ValueAnimator valueAnimator) {
+                        if (decorView.getAlpha() <= 0.2f || !BasicRune.VOLUME_PARTIAL_BLUR) {
+                            return;
+                        }
+                        runnable.run();
+                    }
+                });
+                ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(decorView, "scaleX", decorView.getScaleX(), 1.0f);
+                objectAnimatorOfFloat2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.volume.view.VolumePanelMotion$startShowVolumeExpandAnimation$scaleAnimator$1$1
+                    @Override // android.animation.ValueAnimator.AnimatorUpdateListener
+                    public final void onAnimationUpdate(ValueAnimator valueAnimator) {
+                        decorView.setScaleY(((Float) valueAnimator.getAnimatedValue()).floatValue());
+                    }
+                });
+                objectAnimatorOfFloat2.setDuration(400L);
+                KeyguardSecPatternViewController$$ExternalSyntheticOutline0.m(0.22f, 0.25f, 0.0f, 1.0f, objectAnimatorOfFloat2);
+                View viewRequireViewById = decorView.requireViewById(R.id.volume_setting_button);
+                View viewRequireViewById2 = decorView.requireViewById(R.id.volume_title);
+                AnimatorSet animatorSet = new AnimatorSet();
+                animatorSet.playTogether(objectAnimatorOfFloat);
+                animatorSet.playTogether(objectAnimatorOfFloat2);
+                animatorSet.playTogether(VolumePanelMotion.getSettingButtonRotateAnimation(viewRequireViewById, true));
+                Animator[] animatorArr = new Animator[1];
+                Context context = volumePanelMotion.context;
+                if (context == null) {
+                    context = null;
+                }
+                ObjectAnimator objectAnimatorOfFloat3 = ObjectAnimator.ofFloat(viewRequireViewById2, "translationY", ContextUtils.getDimenFloat(R.dimen.volume_panel_expand_title_translation_y, context), 0.0f);
+                objectAnimatorOfFloat3.setDuration(400L);
+                objectAnimatorOfFloat3.setInterpolator(VolumePanelMotion.TITLE_TRANSLATION_INTERPOLATOR);
+                ObjectAnimator objectAnimatorOfFloat4 = ObjectAnimator.ofFloat(viewRequireViewById2, "alpha", 0.0f, 1.0f);
+                objectAnimatorOfFloat4.setDuration(200L);
+                objectAnimatorOfFloat4.setInterpolator(new LinearInterpolator());
+                AnimatorSet animatorSet2 = new AnimatorSet();
+                animatorSet2.playTogether(objectAnimatorOfFloat3);
+                animatorSet2.playTogether(objectAnimatorOfFloat4);
+                animatorSet2.setStartDelay(50L);
+                animatorArr[0] = animatorSet2;
+                animatorSet.playTogether(animatorArr);
+                animatorSet.setStartDelay(250L);
+                animatorSet.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.volume.view.VolumePanelMotion$startShowVolumeExpandAnimation$1$1
+                    @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
+                    public final void onAnimationEnd(Animator animator) {
+                        if (BasicRune.VOLUME_PARTIAL_BLUR) {
+                            runnable.run();
+                        }
+                        volumePanelMotion.storeInteractor.sendAction(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_ANIMATION_FINISHED).build(), true);
+                    }
+
+                    @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
+                    public final void onAnimationStart(Animator animator) {
+                        volumePanelMotion.storeInteractor.sendAction(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_ANIMATION_START).build(), true);
+                    }
+                });
+                animatorSet.start();
+                volumePanelMotion.expandShowAnimation = animatorSet;
+                if (z || !BasicRune.VOLUME_CAPTURED_BLUR) {
+                    return;
+                }
+                runnable.run();
+            }
+        });
+        setCanceledOnTouchOutside(true);
+        ((StoreInteractor) lazy.getValue()).observeStore();
+        volumePanelExpandView.storeInteractor.observeStore();
     }
 
     @Override // android.app.Dialog, android.view.Window.Callback
@@ -162,7 +399,7 @@ public final class VolumePanelExpandWindow extends Dialog implements VolumeObser
                         @Override // java.lang.Runnable
                         public final void run() {
                             if (BasicRune.VOLUME_PARTIAL_BLUR) {
-                                VolumePanelExpandView volumePanelExpandView2 = VolumePanelExpandView.this;
+                                VolumePanelExpandView volumePanelExpandView2 = volumePanelExpandView;
                                 BlurEffect blurEffect = volumePanelExpandView2.blurEffect;
                                 if (blurEffect == null) {
                                     blurEffect = null;
@@ -177,7 +414,7 @@ public final class VolumePanelExpandWindow extends Dialog implements VolumeObser
                     final Runnable runnable2 = new Runnable() { // from class: com.android.systemui.volume.view.expand.VolumePanelExpandView$startDismissAnimation$2
                         @Override // java.lang.Runnable
                         public final void run() {
-                            VolumePanelExpandWindow volumePanelExpandWindow2 = VolumePanelExpandView.this.dialog;
+                            VolumePanelExpandWindow volumePanelExpandWindow2 = volumePanelExpandView.dialog;
                             if (volumePanelExpandWindow2 == null) {
                                 volumePanelExpandWindow2 = null;
                             }
@@ -189,11 +426,11 @@ public final class VolumePanelExpandWindow extends Dialog implements VolumeObser
                         animatorSet.cancel();
                     }
                     volumePanelMotion.expandShowAnimation = null;
-                    View requireViewById = decorView.requireViewById(R.id.volume_setting_button);
-                    ObjectAnimator ofFloat = ObjectAnimator.ofFloat(decorView, "alpha", decorView.getAlpha(), 0.0f);
-                    ofFloat.setDuration(200L);
-                    ofFloat.setInterpolator(new PathInterpolator(0.33f, 0.0f, 0.67f, 1.0f));
-                    ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.volume.view.VolumePanelMotion$startHideVolumeExpandAnimation$alphaAnimator$1$1
+                    View viewRequireViewById = decorView.requireViewById(R.id.volume_setting_button);
+                    ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(decorView, "alpha", decorView.getAlpha(), 0.0f);
+                    objectAnimatorOfFloat.setDuration(200L);
+                    objectAnimatorOfFloat.setInterpolator(new PathInterpolator(0.33f, 0.0f, 0.67f, 1.0f));
+                    objectAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.volume.view.VolumePanelMotion$startHideVolumeExpandAnimation$alphaAnimator$1$1
                         @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                         public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                             if (decorView.getAlpha() >= 0.4f || !BasicRune.VOLUME_PARTIAL_BLUR) {
@@ -202,29 +439,29 @@ public final class VolumePanelExpandWindow extends Dialog implements VolumeObser
                             runnable.run();
                         }
                     });
-                    ObjectAnimator ofFloat2 = ObjectAnimator.ofFloat(decorView, "scaleX", decorView.getScaleX(), 0.9f);
-                    ofFloat2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.volume.view.VolumePanelMotion$startHideVolumeExpandAnimation$scaleAnimator$1$1
+                    ObjectAnimator objectAnimatorOfFloat2 = ObjectAnimator.ofFloat(decorView, "scaleX", decorView.getScaleX(), 0.9f);
+                    objectAnimatorOfFloat2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.volume.view.VolumePanelMotion$startHideVolumeExpandAnimation$scaleAnimator$1$1
                         @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                         public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                             decorView.setScaleY(((Float) valueAnimator.getAnimatedValue()).floatValue());
                         }
                     });
-                    ofFloat2.setDuration(200L);
-                    ofFloat2.setInterpolator(new PathInterpolator(0.33f, 0.0f, 0.67f, 1.0f));
+                    objectAnimatorOfFloat2.setDuration(200L);
+                    objectAnimatorOfFloat2.setInterpolator(new PathInterpolator(0.33f, 0.0f, 0.67f, 1.0f));
                     AnimatorSet animatorSet2 = new AnimatorSet();
-                    animatorSet2.playTogether(ofFloat);
-                    animatorSet2.playTogether(ofFloat2);
-                    animatorSet2.playTogether(VolumePanelMotion.getSettingButtonRotateAnimation(requireViewById, false));
+                    animatorSet2.playTogether(objectAnimatorOfFloat);
+                    animatorSet2.playTogether(objectAnimatorOfFloat2);
+                    animatorSet2.playTogether(VolumePanelMotion.getSettingButtonRotateAnimation(viewRequireViewById, false));
                     animatorSet2.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.volume.view.VolumePanelMotion$startHideVolumeExpandAnimation$1$1
                         @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                         public final void onAnimationEnd(Animator animator) {
                             runnable2.run();
-                            VolumePanelMotion.this.storeInteractor.sendAction(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_ANIMATION_FINISHED).build(), true);
+                            volumePanelMotion.storeInteractor.sendAction(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_ANIMATION_FINISHED).build(), true);
                         }
 
                         @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                         public final void onAnimationStart(Animator animator) {
-                            VolumePanelMotion.this.storeInteractor.sendAction(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_ANIMATION_START).build(), true);
+                            volumePanelMotion.storeInteractor.sendAction(new VolumePanelAction.Builder(VolumePanelAction.ActionType.ACTION_ANIMATION_START).build(), true);
                         }
                     });
                     animatorSet2.start();

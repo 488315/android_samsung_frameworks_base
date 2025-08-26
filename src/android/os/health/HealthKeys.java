@@ -46,14 +46,14 @@ public class HealthKeys {
             for (Field field : declaredFields) {
                 Constant constant = (Constant) field.getAnnotation(Constant.class);
                 if (constant != null) {
-                    int type = constant.type();
-                    if (type >= length2) {
-                        throw new RuntimeException("Unknown Constant type " + type + " on " + field);
+                    int iType = constant.type();
+                    if (iType >= length2) {
+                        throw new RuntimeException("Unknown Constant type " + iType + " on " + field);
                     }
                     try {
-                        sortedIntArrayArr[type].addValue(field.getInt(null));
+                        sortedIntArrayArr[iType].addValue(field.getInt(null));
                     } catch (IllegalAccessException e) {
-                        throw new RuntimeException("Can't read constant value type=" + type + " field=" + field, e);
+                        throw new RuntimeException("Can't read constant value type=" + iType + " field=" + field, e);
                     }
                 }
             }
@@ -71,9 +71,9 @@ public class HealthKeys {
         }
 
         public int getIndex(int i, int i2) {
-            int binarySearch = Arrays.binarySearch(this.mKeys[i], i2);
-            if (binarySearch >= 0) {
-                return binarySearch;
+            int iBinarySearch = Arrays.binarySearch(this.mKeys[i], i2);
+            if (iBinarySearch >= 0) {
+                return iBinarySearch;
             }
             throw new RuntimeException("Unknown Constant " + i2 + " (of type " + i + " )");
         }

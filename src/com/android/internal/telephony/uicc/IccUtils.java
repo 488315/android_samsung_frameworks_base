@@ -110,11 +110,11 @@ public class IccUtils {
         if (str.length() % 2 != 0) {
             str = str + "0";
         }
-        int min = Math.min((bArr.length - i) * 2, str.length());
+        int iMin = Math.min((bArr.length - i) * 2, str.length());
         int i2 = 0;
         while (true) {
             int i3 = i2 + 1;
-            if (i3 >= min) {
+            if (i3 >= iMin) {
                 return;
             }
             bArr[i] = (byte) ((charToByte(str.charAt(i3)) << 4) | charToByte(str.charAt(i2)));
@@ -130,14 +130,14 @@ public class IccUtils {
         byte b = bArr[i];
         byte b2 = bArr[i + 1];
         byte b3 = bArr[i + 2];
-        String bytesToHexString = bytesToHexString(new byte[]{(byte) (((b >> 4) & 15) | (b << 4)), (byte) ((b3 & 15) | (b2 << 4)), (byte) ((b3 & 240) | ((b2 >> 4) & 15))});
-        return bytesToHexString.contains("F") ? bytesToHexString.replaceAll("F", "") : bytesToHexString;
+        String strBytesToHexString = bytesToHexString(new byte[]{(byte) (((b >> 4) & 15) | (b << 4)), (byte) ((b3 & 15) | (b2 << 4)), (byte) ((b3 & 240) | ((b2 >> 4) & 15))});
+        return strBytesToHexString.contains("F") ? strBytesToHexString.replaceAll("F", "") : strBytesToHexString;
     }
 
     public static void stringToBcdPlmn(String str, byte[] bArr, int i) {
-        char charAt = str.length() > 5 ? str.charAt(5) : 'F';
+        char cCharAt = str.length() > 5 ? str.charAt(5) : 'F';
         bArr[i] = (byte) ((charToByte(str.charAt(1)) << 4) | charToByte(str.charAt(0)));
-        bArr[i + 1] = (byte) ((charToByte(charAt) << 4) | charToByte(str.charAt(2)));
+        bArr[i + 1] = (byte) ((charToByte(cCharAt) << 4) | charToByte(str.charAt(2)));
         bArr[i + 2] = (byte) (charToByte(str.charAt(3)) | (charToByte(str.charAt(4)) << 4));
     }
 
@@ -176,10 +176,10 @@ public class IccUtils {
     }
 
     public static byte[] stringToAdnStringField(String str) {
-        int countGsmSeptetsUsingTables = GsmAlphabet.countGsmSeptetsUsingTables(str, false, 0, 0);
-        if (countGsmSeptetsUsingTables != -1) {
-            byte[] bArr = new byte[countGsmSeptetsUsingTables];
-            GsmAlphabet.stringToGsm8BitUnpackedField(str, bArr, 0, countGsmSeptetsUsingTables);
+        int iCountGsmSeptetsUsingTables = GsmAlphabet.countGsmSeptetsUsingTables(str, false, 0, 0);
+        if (iCountGsmSeptetsUsingTables != -1) {
+            byte[] bArr = new byte[iCountGsmSeptetsUsingTables];
+            GsmAlphabet.stringToGsm8BitUnpackedField(str, bArr, 0, iCountGsmSeptetsUsingTables);
             return bArr;
         }
         byte[] bytes = str.getBytes(StandardCharsets.UTF_16BE);
@@ -193,7 +193,7 @@ public class IccUtils {
         int i3;
         char c;
         String str;
-        String str2 = "";
+        String string = "";
         if (i2 == 0) {
             return "";
         }
@@ -254,10 +254,10 @@ public class IccUtils {
             return sb.toString();
         }
         try {
-            str2 = Resources.getSystem().getString(R.string.gsm_alphabet_default_charset);
+            string = Resources.getSystem().getString(R.string.gsm_alphabet_default_charset);
         } catch (Resources.NotFoundException unused) {
         }
-        return GsmAlphabet.gsm8BitUnpackedToString(bArr, i, i2, str2.trim());
+        return GsmAlphabet.gsm8BitUnpackedToString(bArr, i, i2, string.trim());
     }
 
     public static int hexCharToInt(char c) {
@@ -301,21 +301,21 @@ public class IccUtils {
 
     public static String networkNameToString(byte[] bArr, int i, int i2) {
         int i3 = bArr[i];
-        String str = "";
+        String strGsm7BitPackedToString = "";
         if ((i3 & 128) == 128 && i2 >= 1) {
             int i4 = (i3 >>> 4) & 7;
             if (i4 == 0) {
-                str = GsmAlphabet.gsm7BitPackedToString(bArr, i + 1, (((i2 - 1) * 8) - (i3 & 7)) / 7);
+                strGsm7BitPackedToString = GsmAlphabet.gsm7BitPackedToString(bArr, i + 1, (((i2 - 1) * 8) - (i3 & 7)) / 7);
             } else if (i4 == 1) {
                 try {
-                    str = new String(bArr, i + 1, i2 - 1, CharacterSets.MIMENAME_UTF_16);
+                    strGsm7BitPackedToString = new String(bArr, i + 1, i2 - 1, CharacterSets.MIMENAME_UTF_16);
                 } catch (UnsupportedEncodingException e) {
                     Rlog.e(LOG_TAG, "implausible UnsupportedEncodingException", e);
                 }
             }
             byte b = bArr[i];
         }
-        return str;
+        return strGsm7BitPackedToString;
     }
 
     /* JADX WARN: Multi-variable type inference failed */
@@ -348,7 +348,7 @@ public class IccUtils {
     }
 
     public static Bitmap parseToRGB(byte[] bArr, int i, boolean z) {
-        int[] mapToNon2OrderBitColor;
+        int[] iArrMapToNon2OrderBitColor;
         int i2 = bArr[0] & 255;
         int i3 = bArr[1] & 255;
         int i4 = bArr[2] & 255;
@@ -358,77 +358,47 @@ public class IccUtils {
             clut[i5 - 1] = 0;
         }
         if (8 % i4 == 0) {
-            mapToNon2OrderBitColor = mapTo2OrderBitColor(bArr, 6, i2 * i3, clut, i4);
+            iArrMapToNon2OrderBitColor = mapTo2OrderBitColor(bArr, 6, i2 * i3, clut, i4);
         } else {
-            mapToNon2OrderBitColor = mapToNon2OrderBitColor(bArr, 6, i2 * i3, clut, i4);
+            iArrMapToNon2OrderBitColor = mapToNon2OrderBitColor(bArr, 6, i2 * i3, clut, i4);
         }
-        return Bitmap.createBitmap(mapToNon2OrderBitColor, i2, i3, Bitmap.Config.RGB_565);
+        return Bitmap.createBitmap(iArrMapToNon2OrderBitColor, i2, i3, Bitmap.Config.RGB_565);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:16:0x002e  */
+    /* JADX WARN: Removed duplicated region for block: B:13:0x001e  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private static int[] mapTo2OrderBitColor(byte[] r10, int r11, int r12, int[] r13, int r14) {
-        /*
-            r0 = 8
-            int r1 = r0 % r14
-            if (r1 == 0) goto L13
-            java.lang.String r0 = "IccUtils"
-            java.lang.String r1 = "not event number of color"
-            com.android.telephony.Rlog.e(r0, r1)
-            int[] r10 = mapToNon2OrderBitColor(r10, r11, r12, r13, r14)
-            return r10
-        L13:
-            r1 = 1
-            if (r14 == r1) goto L1e
-            r2 = 2
-            if (r14 == r2) goto L26
-            r2 = 4
-            if (r14 == r2) goto L23
-            if (r14 == r0) goto L20
-        L1e:
-            r2 = r1
-            goto L27
-        L20:
-            r2 = 255(0xff, float:3.57E-43)
-            goto L27
-        L23:
-            r2 = 15
-            goto L27
-        L26:
-            r2 = 3
-        L27:
-            int[] r3 = new int[r12]
-            int r0 = r0 / r14
-            r4 = 0
-            r5 = r4
-        L2c:
-            if (r5 >= r12) goto L48
-            int r6 = r11 + 1
-            r11 = r10[r11]
-            r7 = r4
-        L33:
-            if (r7 >= r0) goto L46
-            int r8 = r0 - r7
-            int r8 = r8 - r1
-            int r9 = r5 + 1
-            int r8 = r8 * r14
-            int r8 = r11 >> r8
-            r8 = r8 & r2
-            r8 = r13[r8]
-            r3[r5] = r8
-            int r7 = r7 + 1
-            r5 = r9
-            goto L33
-        L46:
-            r11 = r6
-            goto L2c
-        L48:
-            return r3
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.telephony.uicc.IccUtils.mapTo2OrderBitColor(byte[], int, int, int[], int):int[]");
+    private static int[] mapTo2OrderBitColor(byte[] bArr, int i, int i2, int[] iArr, int i3) {
+        int i4;
+        if (8 % i3 != 0) {
+            Rlog.e(LOG_TAG, "not event number of color");
+            return mapToNon2OrderBitColor(bArr, i, i2, iArr, i3);
+        }
+        if (i3 == 1) {
+            i4 = 1;
+        } else if (i3 == 2) {
+            i4 = 3;
+        } else if (i3 == 4) {
+            i4 = 15;
+        } else if (i3 == 8) {
+            i4 = 255;
+        }
+        int[] iArr2 = new int[i2];
+        int i5 = 8 / i3;
+        int i6 = 0;
+        while (i6 < i2) {
+            int i7 = i + 1;
+            int i8 = bArr[i];
+            int i9 = 0;
+            while (i9 < i5) {
+                iArr2[i6] = iArr[(i8 >> (((i5 - i9) - 1) * i3)) & i4];
+                i9++;
+                i6++;
+            }
+            i = i7;
+        }
+        return iArr2;
     }
 
     private static int[] mapToNon2OrderBitColor(byte[] bArr, int i, int i2, int[] iArr, int i3) {
@@ -533,17 +503,17 @@ public class IccUtils {
     }
 
     private static int intToBytes(int i, byte[] bArr, int i2, boolean z) {
-        int byteNumForInt = byteNumForInt(i, z);
-        if (i2 < 0 || i2 + byteNumForInt > bArr.length) {
-            throw new IndexOutOfBoundsException("Not enough space to write. Required bytes: " + byteNumForInt);
+        int iByteNumForInt = byteNumForInt(i, z);
+        if (i2 < 0 || i2 + iByteNumForInt > bArr.length) {
+            throw new IndexOutOfBoundsException("Not enough space to write. Required bytes: " + iByteNumForInt);
         }
-        int i3 = byteNumForInt - 1;
+        int i3 = iByteNumForInt - 1;
         while (i3 >= 0) {
             bArr[i2 + i3] = (byte) (i & 255);
             i3--;
             i >>>= 8;
         }
-        return byteNumForInt;
+        return iByteNumForInt;
     }
 
     private static int byteNumForInt(int i, boolean z) {
@@ -706,7 +676,7 @@ public class IccUtils {
         return sb.toString();
     }
 
-    public static String mccMncConvert(String str) {
+    public static String mccMncConvert(String str) throws NumberFormatException {
         StringBuilder sb = new StringBuilder(str.length());
         sb.append(str.charAt(1));
         int i = 0;
@@ -907,25 +877,25 @@ public class IccUtils {
             str2 = "";
         }
         str2.replace(',', ' ');
-        String[] split = str4 != null ? str4.split(",") : null;
+        String[] strArrSplit = str4 != null ? str4.split(",") : null;
         if (i >= 0 && i < TelephonyManager.getDefault().getActiveModemCount()) {
             String str5 = "";
             for (int i2 = 0; i2 < i; i2++) {
-                if (split == null || i2 >= split.length) {
+                if (strArrSplit == null || i2 >= strArrSplit.length) {
                     str3 = "";
                 } else {
-                    str3 = split[i2];
+                    str3 = strArrSplit[i2];
                 }
                 str5 = str5 + str3 + ",";
             }
             String str6 = str5 + str2;
-            if (split != null) {
+            if (strArrSplit != null) {
                 while (true) {
                     i++;
-                    if (i >= split.length) {
+                    if (i >= strArrSplit.length) {
                         break;
                     }
-                    str6 = str6 + "," + split[i];
+                    str6 = str6 + "," + strArrSplit[i];
                 }
             }
             int length = str6.length();

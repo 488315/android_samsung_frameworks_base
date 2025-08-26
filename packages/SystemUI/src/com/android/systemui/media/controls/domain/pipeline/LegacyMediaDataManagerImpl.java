@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.drawable.Icon;
 import android.media.MediaDescription;
 import android.media.session.MediaSession;
@@ -66,18 +67,23 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Executor;
 import kotlin.Pair;
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.collections.EmptyList;
 import kotlin.collections.MapsKt___MapsKt;
 import kotlin.comparisons.ComparisonsKt__ComparisonsKt;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
+import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.text.StringsKt__StringsKt;
+import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class LegacyMediaDataManagerImpl implements Dumpable, MediaDataManager {
     public static final int MAX_COMPACT_ACTIONS;
@@ -104,13 +110,79 @@ public final class LegacyMediaDataManagerImpl implements Dumpable, MediaDataMana
     public boolean useMediaResumption;
     public final boolean useQsMediaPlayer;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
         }
 
         private Companion() {
+        }
+    }
+
+    /* renamed from: com.android.systemui.media.controls.domain.pipeline.LegacyMediaDataManagerImpl$addResumptionControls$1, reason: invalid class name */
+    final class AnonymousClass1 extends SuspendLambda implements Function2 {
+        final /* synthetic */ Runnable $action;
+        final /* synthetic */ PendingIntent $appIntent;
+        final /* synthetic */ String $appName;
+        final /* synthetic */ MediaDescription $desc;
+        final /* synthetic */ String $packageName;
+        final /* synthetic */ MediaSession.Token $token;
+        final /* synthetic */ int $userId;
+        int label;
+
+        /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+        public AnonymousClass1(int i, MediaDescription mediaDescription, Runnable runnable, MediaSession.Token token, String str, PendingIntent pendingIntent, String str2, Continuation continuation) {
+            super(2, continuation);
+            this.$userId = i;
+            this.$desc = mediaDescription;
+            this.$action = runnable;
+            this.$token = token;
+            this.$appName = str;
+            this.$appIntent = pendingIntent;
+            this.$packageName = str2;
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Continuation create(Object obj, Continuation continuation) {
+            return LegacyMediaDataManagerImpl.this.new AnonymousClass1(this.$userId, this.$desc, this.$action, this.$token, this.$appName, this.$appIntent, this.$packageName, continuation);
+        }
+
+        @Override // kotlin.jvm.functions.Function2
+        public final Object invoke(Object obj, Object obj2) {
+            return ((AnonymousClass1) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        }
+
+        @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+        public final Object invokeSuspend(Object obj) throws Throwable {
+            Object obj2 = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                LegacyMediaDataManagerImpl legacyMediaDataManagerImpl = LegacyMediaDataManagerImpl.this;
+                int i2 = this.$userId;
+                MediaDescription mediaDescription = this.$desc;
+                Runnable runnable = this.$action;
+                MediaSession.Token token = this.$token;
+                String str = this.$appName;
+                PendingIntent pendingIntent = this.$appIntent;
+                String str2 = this.$packageName;
+                this.label = 1;
+                int i3 = LegacyMediaDataManagerImpl.MAX_COMPACT_ACTIONS;
+                legacyMediaDataManagerImpl.getClass();
+                Object objWithContext = BuildersKt.withContext(legacyMediaDataManagerImpl.backgroundDispatcher, new LegacyMediaDataManagerImpl$loadMediaDataForResumption$2(legacyMediaDataManagerImpl, str2, i2, mediaDescription, runnable, token, str, pendingIntent, null), this);
+                if (objWithContext != obj2) {
+                    objWithContext = Unit.INSTANCE;
+                }
+                if (objWithContext == obj2) {
+                    return obj2;
+                }
+            } else {
+                if (i != 1) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+            }
+            return Unit.INSTANCE;
         }
     }
 
@@ -121,7 +193,7 @@ public final class LegacyMediaDataManagerImpl implements Dumpable, MediaDataMana
         MAX_NOTIFICATION_ACTIONS = MediaViewHolder.genericButtonIds.size();
     }
 
-    public LegacyMediaDataManagerImpl(Context context, Executor executor, CoroutineDispatcher coroutineDispatcher, DelayableExecutor delayableExecutor, CoroutineDispatcher coroutineDispatcher2, CoroutineScope coroutineScope, MediaControllerFactory mediaControllerFactory, BroadcastDispatcher broadcastDispatcher, DumpManager dumpManager, MediaTimeoutListener mediaTimeoutListener, final MediaResumeListener mediaResumeListener, MediaSessionBasedFilter mediaSessionBasedFilter, MediaDeviceManager mediaDeviceManager, MediaDataCombineLatest mediaDataCombineLatest, LegacyMediaDataFilterImpl legacyMediaDataFilterImpl, boolean z, boolean z2, SystemClock systemClock, MediaFlags mediaFlags, MediaUiEventLogger mediaUiEventLogger, KeyguardUpdateMonitor keyguardUpdateMonitor, Lazy lazy, MediaLogger mediaLogger) {
+    public LegacyMediaDataManagerImpl(Context context, Executor executor, CoroutineDispatcher coroutineDispatcher, DelayableExecutor delayableExecutor, CoroutineDispatcher coroutineDispatcher2, CoroutineScope coroutineScope, MediaControllerFactory mediaControllerFactory, BroadcastDispatcher broadcastDispatcher, DumpManager dumpManager, MediaTimeoutListener mediaTimeoutListener, final MediaResumeListener mediaResumeListener, MediaSessionBasedFilter mediaSessionBasedFilter, MediaDeviceManager mediaDeviceManager, MediaDataCombineLatest mediaDataCombineLatest, LegacyMediaDataFilterImpl legacyMediaDataFilterImpl, boolean z, boolean z2, SystemClock systemClock, MediaFlags mediaFlags, MediaUiEventLogger mediaUiEventLogger, KeyguardUpdateMonitor keyguardUpdateMonitor, Lazy lazy, MediaLogger mediaLogger) throws Resources.NotFoundException {
         this.context = context;
         this.backgroundExecutor = executor;
         this.backgroundDispatcher = coroutineDispatcher;
@@ -142,9 +214,9 @@ public final class LegacyMediaDataManagerImpl implements Dumpable, MediaDataMana
         this.themeText = Utils.getColorAttr(R.attr.textColorPrimary, context).getDefaultColor();
         LinkedHashSet linkedHashSet = new LinkedHashSet();
         this.internalListeners = linkedHashSet;
-        Map synchronizedMap = Collections.synchronizedMap(new LinkedHashMap());
-        synchronizedMap.getClass();
-        this.mediaEntries = synchronizedMap;
+        Map mapSynchronizedMap = Collections.synchronizedMap(new LinkedHashMap());
+        mapSynchronizedMap.getClass();
+        this.mediaEntries = mapSynchronizedMap;
         context.getResources().getDimensionPixelSize(R.dimen.conversation_badge_protrusion_group_expanded);
         context.getResources().getDimensionPixelSize(com.android.systemui.R.dimen.qs_media_session_height_expanded);
         this.statusBarManager = (StatusBarManager) context.getSystemService("statusbar");
@@ -155,10 +227,10 @@ public final class LegacyMediaDataManagerImpl implements Dumpable, MediaDataMana
                 String encodedSchemeSpecificPart;
                 String action = intent.getAction();
                 if (action != null) {
-                    int hashCode = action.hashCode();
-                    if (hashCode != -1001645458) {
-                        if (hashCode != -757780528) {
-                            if (hashCode != 525384130 || !action.equals("android.intent.action.PACKAGE_REMOVED")) {
+                    int iHashCode = action.hashCode();
+                    if (iHashCode != -1001645458) {
+                        if (iHashCode != -757780528) {
+                            if (iHashCode != 525384130 || !action.equals("android.intent.action.PACKAGE_REMOVED")) {
                                 return;
                             }
                         } else if (!action.equals("android.intent.action.PACKAGE_RESTARTED")) {
@@ -168,11 +240,11 @@ public final class LegacyMediaDataManagerImpl implements Dumpable, MediaDataMana
                         if (data == null || (encodedSchemeSpecificPart = data.getEncodedSchemeSpecificPart()) == null) {
                             return;
                         }
-                        LegacyMediaDataManagerImpl.access$removeAllForPackage(LegacyMediaDataManagerImpl.this, encodedSchemeSpecificPart);
+                        LegacyMediaDataManagerImpl.access$removeAllForPackage(this.this$0, encodedSchemeSpecificPart);
                         return;
                     }
                     if (action.equals("android.intent.action.PACKAGES_SUSPENDED") && (stringArrayExtra = intent.getStringArrayExtra("android.intent.extra.changed_package_list")) != null) {
-                        LegacyMediaDataManagerImpl legacyMediaDataManagerImpl = LegacyMediaDataManagerImpl.this;
+                        LegacyMediaDataManagerImpl legacyMediaDataManagerImpl = this.this$0;
                         for (String str : stringArrayExtra) {
                             str.getClass();
                             LegacyMediaDataManagerImpl.access$removeAllForPackage(legacyMediaDataManagerImpl, str);
@@ -196,18 +268,18 @@ public final class LegacyMediaDataManagerImpl implements Dumpable, MediaDataMana
         mediaResumeListener.tunerService.addTunable(new TunerService.Tunable() { // from class: com.android.systemui.media.controls.domain.resume.MediaResumeListener$setManager$1
             @Override // com.android.systemui.tuner.TunerService.Tunable
             public final void onTuningChanged(String str, String str2) {
-                MediaResumeListener mediaResumeListener2 = MediaResumeListener.this;
-                boolean useMediaResumption = com.android.systemui.util.Utils.useMediaResumption(mediaResumeListener2.context);
-                mediaResumeListener2.useMediaResumption = useMediaResumption;
+                MediaResumeListener mediaResumeListener2 = mediaResumeListener;
+                boolean zUseMediaResumption = com.android.systemui.util.Utils.useMediaResumption(mediaResumeListener2.context);
+                mediaResumeListener2.useMediaResumption = zUseMediaResumption;
                 LegacyMediaDataManagerImpl legacyMediaDataManagerImpl = mediaResumeListener2.mediaDataManager;
                 if (legacyMediaDataManagerImpl == null) {
                     legacyMediaDataManagerImpl = null;
                 }
-                if (legacyMediaDataManagerImpl.useMediaResumption == useMediaResumption) {
+                if (legacyMediaDataManagerImpl.useMediaResumption == zUseMediaResumption) {
                     return;
                 }
-                legacyMediaDataManagerImpl.useMediaResumption = useMediaResumption;
-                if (useMediaResumption) {
+                legacyMediaDataManagerImpl.useMediaResumption = zUseMediaResumption;
+                if (zUseMediaResumption) {
                     return;
                 }
                 Map map = legacyMediaDataManagerImpl.mediaEntries;
@@ -276,28 +348,28 @@ public final class LegacyMediaDataManagerImpl implements Dumpable, MediaDataMana
         this.mediaDataFilter._listeners.add(listener);
     }
 
-    public final void addResumptionControls(int i, MediaDescription mediaDescription, MediaResumeListener$getResumeAction$1 mediaResumeListener$getResumeAction$1, MediaSession.Token token, String str, PendingIntent pendingIntent, String str2) {
-        int i2;
+    public final void addResumptionControls(int i, MediaDescription mediaDescription, MediaResumeListener$getResumeAction$1 mediaResumeListener$getResumeAction$1, MediaSession.Token token, String str, PendingIntent pendingIntent, String str2) throws PackageManager.NameNotFoundException {
+        int iIntValue;
         String str3 = str2;
         if (!this.mediaEntries.containsKey(str3)) {
             MediaUiEventLogger mediaUiEventLogger = this.logger;
-            InstanceId newInstanceId = mediaUiEventLogger.instanceIdSequence.newInstanceId();
+            InstanceId instanceIdNewInstanceId = mediaUiEventLogger.instanceIdSequence.newInstanceId();
             try {
                 ApplicationInfo applicationInfo = this.context.getPackageManager().getApplicationInfo(str3, 0);
-                Integer valueOf = applicationInfo != null ? Integer.valueOf(applicationInfo.uid) : null;
-                valueOf.getClass();
-                i2 = valueOf.intValue();
+                Integer numValueOf = applicationInfo != null ? Integer.valueOf(applicationInfo.uid) : null;
+                numValueOf.getClass();
+                iIntValue = numValueOf.intValue();
             } catch (PackageManager.NameNotFoundException e) {
                 Log.w("MediaDataManager", "Could not get app UID for " + str3, e);
-                i2 = -1;
+                iIntValue = -1;
             }
-            int i3 = i2;
+            int i2 = iIntValue;
             str3 = str2;
-            this.mediaEntries.put(str3, MediaData.copy$default(LegacyMediaDataManagerImplKt.LOADING, null, null, null, str2, null, null, false, mediaResumeListener$getResumeAction$1, true, null, 0L, this.systemClock.currentTimeMillis(), newInstanceId, i3, 209157119));
-            logSingleVsMultipleMediaAdded$1(i3, str3, newInstanceId);
-            mediaUiEventLogger.logger.logWithInstanceId(MediaUiEvent.RESUME_MEDIA_ADDED, i3, str3, newInstanceId);
+            this.mediaEntries.put(str3, MediaData.copy$default(LegacyMediaDataManagerImplKt.LOADING, null, null, null, str2, null, null, false, mediaResumeListener$getResumeAction$1, true, null, 0L, this.systemClock.currentTimeMillis(), instanceIdNewInstanceId, i2, 209157119));
+            logSingleVsMultipleMediaAdded$1(i2, str3, instanceIdNewInstanceId);
+            mediaUiEventLogger.logger.logWithInstanceId(MediaUiEvent.RESUME_MEDIA_ADDED, i2, str3, instanceIdNewInstanceId);
         }
-        CoroutineTracingKt.launchTraced$default(this.applicationScope, null, null, new LegacyMediaDataManagerImpl$addResumptionControls$1(this, i, mediaDescription, mediaResumeListener$getResumeAction$1, token, str, pendingIntent, str3, null), 7);
+        CoroutineTracingKt.launchTraced$default(this.applicationScope, null, null, new AnonymousClass1(i, mediaDescription, mediaResumeListener$getResumeAction$1, token, str, pendingIntent, str3, null), 7);
     }
 
     public final void convertToResumePlayer$1(MediaData mediaData, String str) {
@@ -317,8 +389,8 @@ public final class LegacyMediaDataManagerImpl implements Dumpable, MediaDataMana
             EmptyList emptyList = EmptyList.INSTANCE;
         }
         Intent launchIntentForPackage = this.context.getPackageManager().getLaunchIntentForPackage(str2);
-        MediaData copy$default = MediaData.copy$default(mediaData, EmptyList.INSTANCE, Collections.singletonList(0), new MediaButton(mediaAction, null, null, null, null, false, false, 126, null), null, launchIntentForPackage != null ? PendingIntent.getActivity(this.context, 0, launchIntentForPackage, 67108864) : null, null, false, null, false, Boolean.FALSE, mediaData.active ? this.systemClock.elapsedRealtime() : mediaData.lastActive, 0L, null, 0, 260940927);
-        boolean z = this.mediaEntries.put(str2, copy$default) == null;
+        MediaData mediaDataCopy$default = MediaData.copy$default(mediaData, EmptyList.INSTANCE, Collections.singletonList(0), new MediaButton(mediaAction, null, null, null, null, false, false, 126, null), null, launchIntentForPackage != null ? PendingIntent.getActivity(this.context, 0, launchIntentForPackage, 67108864) : null, null, false, null, false, Boolean.FALSE, mediaData.active ? this.systemClock.elapsedRealtime() : mediaData.lastActive, 0L, null, 0, 260940927);
+        boolean z = this.mediaEntries.put(str2, mediaDataCopy$default) == null;
         StringBuilder sb = new StringBuilder("migrating? ");
         sb.append(z);
         sb.append(" from ");
@@ -326,12 +398,12 @@ public final class LegacyMediaDataManagerImpl implements Dumpable, MediaDataMana
         sb.append(" -> ");
         ExifInterface$$ExternalSyntheticOutline0.m(sb, str2, "MediaDataManager");
         if (z) {
-            notifyMediaDataLoaded$1(str2, str, copy$default);
+            notifyMediaDataLoaded$1(str2, str, mediaDataCopy$default);
         } else {
             notifyMediaDataRemoved$default(this, str);
-            notifyMediaDataLoaded$1(str2, str2, copy$default);
+            notifyMediaDataLoaded$1(str2, str2, mediaDataCopy$default);
         }
-        mediaUiEventLogger.logger.logWithInstanceId(MediaUiEvent.ACTIVE_TO_RESUME, copy$default.appUid, str2, copy$default.instanceId);
+        mediaUiEventLogger.logger.logWithInstanceId(MediaUiEvent.ACTIVE_TO_RESUME, mediaDataCopy$default.appUid, str2, mediaDataCopy$default.instanceId);
         Map map = this.mediaEntries;
         LinkedHashMap linkedHashMap = new LinkedHashMap();
         for (Map.Entry entry : map.entrySet()) {
@@ -345,9 +417,9 @@ public final class LegacyMediaDataManagerImpl implements Dumpable, MediaDataMana
                 @Override // java.util.Comparator
                 public final int compare(Object obj, Object obj2) {
                     Pair pair2 = (Pair) obj;
-                    Long valueOf = Long.valueOf(((MediaData) pair2.component2()).lastActive);
+                    Long lValueOf = Long.valueOf(((MediaData) pair2.component2()).lastActive);
                     Pair pair3 = (Pair) obj2;
-                    return ComparisonsKt__ComparisonsKt.compareValues(valueOf, Long.valueOf(((MediaData) pair3.component2()).lastActive));
+                    return ComparisonsKt__ComparisonsKt.compareValues(lValueOf, Long.valueOf(((MediaData) pair3.component2()).lastActive));
                 }
             }).subList(0, size - 5)) {
                 String str3 = (String) pair.component1();
@@ -363,7 +435,7 @@ public final class LegacyMediaDataManagerImpl implements Dumpable, MediaDataMana
     @Override // com.android.systemui.media.controls.domain.pipeline.MediaDataManager
     public final boolean dismissMediaData(final String str, long j, final boolean z) {
         boolean z2 = this.mediaEntries.get(str) != null;
-        this.backgroundExecutor.execute(new Runnable() { // from class: com.android.systemui.media.controls.domain.pipeline.LegacyMediaDataManagerImpl$dismissMediaData$1
+        this.backgroundExecutor.execute(new Runnable() { // from class: com.android.systemui.media.controls.domain.pipeline.LegacyMediaDataManagerImpl.dismissMediaData.1
             @Override // java.lang.Runnable
             public final void run() {
                 MediaSession.Token token;
@@ -377,7 +449,7 @@ public final class LegacyMediaDataManagerImpl implements Dumpable, MediaDataMana
                 }
             }
         });
-        this.foregroundExecutor.executeDelayed(new Runnable() { // from class: com.android.systemui.media.controls.domain.pipeline.LegacyMediaDataManagerImpl$dismissMediaData$2
+        this.foregroundExecutor.executeDelayed(new Runnable() { // from class: com.android.systemui.media.controls.domain.pipeline.LegacyMediaDataManagerImpl.dismissMediaData.2
             @Override // java.lang.Runnable
             public final void run() {
                 LegacyMediaDataManagerImpl.removeEntry$default(LegacyMediaDataManagerImpl.this, str, z, 2);
@@ -437,8 +509,8 @@ public final class LegacyMediaDataManagerImpl implements Dumpable, MediaDataMana
     }
 
     public final void onMediaDataLoaded(String str, String str2, MediaData mediaData) {
-        boolean isEnabled = Trace.isEnabled();
-        if (isEnabled) {
+        boolean zIsEnabled = Trace.isEnabled();
+        if (zIsEnabled) {
             TraceUtilsKt.beginSlice("MediaDataManager#onMediaDataLoaded");
         }
         try {
@@ -448,11 +520,11 @@ public final class LegacyMediaDataManagerImpl implements Dumpable, MediaDataMana
                 notifyMediaDataLoaded$1(str, str2, mediaData);
             }
             Unit unit = Unit.INSTANCE;
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
         } catch (Throwable th) {
-            if (isEnabled) {
+            if (zIsEnabled) {
                 TraceUtilsKt.endSlice();
             }
             throw th;
@@ -465,7 +537,7 @@ public final class LegacyMediaDataManagerImpl implements Dumpable, MediaDataMana
         boolean z2;
         if (this.useQsMediaPlayer) {
             MediaDataManager.Companion.getClass();
-            if (statusBarNotification.getNotification().isMediaNotification()) {
+            if (MediaDataManager.Companion.isMediaNotification(statusBarNotification)) {
                 Assert.isMainThread();
                 String packageName = statusBarNotification.getPackageName();
                 String str2 = this.mediaEntries.containsKey(str) ? str : this.mediaEntries.containsKey(packageName) ? packageName : null;
@@ -477,9 +549,9 @@ public final class LegacyMediaDataManagerImpl implements Dumpable, MediaDataMana
                     if (str2.equals(str)) {
                         z = false;
                     } else {
-                        Object remove = this.mediaEntries.remove(str2);
-                        remove.getClass();
-                        this.mediaEntries.put(str, (MediaData) remove);
+                        Object objRemove = this.mediaEntries.remove(str2);
+                        objRemove.getClass();
+                        this.mediaEntries.put(str, (MediaData) objRemove);
                         z = true;
                     }
                     z2 = z;
@@ -498,11 +570,11 @@ public final class LegacyMediaDataManagerImpl implements Dumpable, MediaDataMana
         if (mediaData == null) {
             return;
         }
-        boolean isUserInLockdown = this.keyguardUpdateMonitor.isUserInLockdown(mediaData.userId);
+        boolean zIsUserInLockdown = this.keyguardUpdateMonitor.isUserInLockdown(mediaData.userId);
         MediaUiEventLogger mediaUiEventLogger = this.logger;
         String str2 = mediaData.packageName;
         int i = mediaData.appUid;
-        if (isUserInLockdown) {
+        if (zIsUserInLockdown) {
             mediaUiEventLogger.logMediaRemoved(i, str2, mediaData.instanceId);
             return;
         }
@@ -544,6 +616,12 @@ public final class LegacyMediaDataManagerImpl implements Dumpable, MediaDataMana
             if (z && !z2) {
                 this.logger.logger.logWithInstanceId(MediaUiEvent.MEDIA_TIMEOUT, mediaData.appUid, mediaData.packageName, mediaData.instanceId);
             }
+            if (z) {
+                if (Intrinsics.areEqual(mediaData.isPlaying, Boolean.TRUE)) {
+                    Log.d("MediaDataManager", "setInactive requested timedOut even media is playing");
+                    return;
+                }
+            }
             boolean z3 = mediaData.active;
             boolean z4 = !z;
             if (z3 == z4 && !z2) {
@@ -566,12 +644,12 @@ public final class LegacyMediaDataManagerImpl implements Dumpable, MediaDataMana
                 LogLevel logLevel = LogLevel.DEBUG;
                 MediaLogger$$ExternalSyntheticLambda0 mediaLogger$$ExternalSyntheticLambda0 = new MediaLogger$$ExternalSyntheticLambda0(2);
                 LogBuffer logBuffer = mediaLogger.buffer;
-                LogMessage obtain = logBuffer.obtain("MediaLog", logLevel, mediaLogger$$ExternalSyntheticLambda0, null);
-                ((LogMessageImpl) obtain).str1 = str;
-                LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+                LogMessage logMessageObtain = logBuffer.obtain("MediaLog", logLevel, mediaLogger$$ExternalSyntheticLambda0, null);
+                ((LogMessageImpl) logMessageObtain).str1 = str;
+                LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
                 logMessageImpl.bool1 = z4;
                 logMessageImpl.str2 = callers;
-                logBuffer.commit(obtain);
+                logBuffer.commit(logMessageObtain);
             } catch (Exception e) {
                 KeyguardSecSimPinViewController$$ExternalSyntheticOutline0.m("fail to logging inactive ", e, "MediaDataManager");
             }

@@ -7,7 +7,6 @@ import kotlin.Lazy;
 import kotlin.LazyKt__LazyJVMKt;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class BluetoothVolumeController extends VolumeType {
     public static final int $stable = 8;
@@ -18,9 +17,7 @@ public final class BluetoothVolumeController extends VolumeType {
         this.audioManagerWrapper$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.bixby2.controller.volume.BluetoothVolumeController$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                AudioManagerWrapper audioManagerWrapper_delegate$lambda$0;
-                audioManagerWrapper_delegate$lambda$0 = BluetoothVolumeController.audioManagerWrapper_delegate$lambda$0(context);
-                return audioManagerWrapper_delegate$lambda$0;
+                return BluetoothVolumeController.audioManagerWrapper_delegate$lambda$0(context);
             }
         });
     }

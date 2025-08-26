@@ -10,7 +10,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function4;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class GestureInteractor$topActivityBlocked$1 extends SuspendLambda implements Function4 {
     /* synthetic */ Object L$0;
@@ -31,7 +30,11 @@ final class GestureInteractor$topActivityBlocked$1 extends SuspendLambda impleme
         return gestureInteractor$topActivityBlocked$1.invokeSuspend(Unit.INSTANCE);
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:15:0x003c  */
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final Object invokeSuspend(Object obj) {
         boolean z;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -43,18 +46,20 @@ final class GestureInteractor$topActivityBlocked$1 extends SuspendLambda impleme
         Set set = (Set) this.L$1;
         Set set2 = (Set) this.L$2;
         if (taskInfo != null) {
-            Set plus = SetsKt___SetsKt.plus(set, (Iterable) set2);
-            if (!plus.isEmpty()) {
-                Iterator it = plus.iterator();
+            Set setPlus = SetsKt___SetsKt.plus(set, (Iterable) set2);
+            if (setPlus.isEmpty()) {
+                z = false;
+            } else {
+                Iterator it = setPlus.iterator();
                 while (it.hasNext()) {
                     if (((TaskMatcher) it.next()).matches(taskInfo)) {
                         z = true;
                         break;
                     }
                 }
+                z = false;
             }
         }
-        z = false;
         return Boolean.valueOf(z);
     }
 }

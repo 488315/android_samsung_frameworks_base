@@ -124,20 +124,20 @@ public final class VerifiedKeyEvent extends VerifiedInputEvent implements Parcel
 
     VerifiedKeyEvent(Parcel parcel) {
         super(parcel, 1);
-        int readInt = parcel.readInt();
-        long readLong = parcel.readLong();
-        int readInt2 = parcel.readInt();
-        int readInt3 = parcel.readInt();
-        int readInt4 = parcel.readInt();
-        int readInt5 = parcel.readInt();
-        int readInt6 = parcel.readInt();
-        this.mAction = readInt;
-        AnnotationValidations.validate((Class<? extends Annotation>) KeyEventAction.class, (Annotation) null, readInt);
-        this.mDownTimeNanos = readLong;
-        this.mFlags = readInt2;
-        this.mKeyCode = readInt3;
-        this.mScanCode = readInt4;
-        this.mMetaState = readInt5;
-        this.mRepeatCount = readInt6;
+        int i = parcel.readInt();
+        long j = parcel.readLong();
+        int i2 = parcel.readInt();
+        int i3 = parcel.readInt();
+        int i4 = parcel.readInt();
+        int i5 = parcel.readInt();
+        int i6 = parcel.readInt();
+        this.mAction = i;
+        AnnotationValidations.validate((Class<? extends Annotation>) KeyEventAction.class, (Annotation) null, i);
+        this.mDownTimeNanos = j;
+        this.mFlags = i2;
+        this.mKeyCode = i3;
+        this.mScanCode = i4;
+        this.mMetaState = i5;
+        this.mRepeatCount = i6;
     }
 }

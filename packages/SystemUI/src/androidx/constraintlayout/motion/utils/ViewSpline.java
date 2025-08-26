@@ -1,5 +1,6 @@
 package androidx.constraintlayout.motion.utils;
 
+import android.content.res.Resources;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
@@ -11,11 +12,9 @@ import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class ViewSpline extends SplineSet {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AlphaSet extends ViewSpline {
         @Override // androidx.constraintlayout.motion.utils.ViewSpline
         public final void setProperty(float f, View view) {
@@ -23,7 +22,6 @@ public abstract class ViewSpline extends SplineSet {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CustomSet extends ViewSpline {
         public final SparseArray mConstraintAttributeList;
         public float[] mTempValues;
@@ -39,7 +37,7 @@ public abstract class ViewSpline extends SplineSet {
         }
 
         @Override // androidx.constraintlayout.motion.utils.ViewSpline
-        public final void setProperty(float f, View view) {
+        public final void setProperty(float f, View view) throws IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException {
             this.mCurveFit.getPos(f, this.mTempValues);
             CustomSupport.setInterpolatedValue((ConstraintAttribute) this.mConstraintAttributeList.valueAt(0), view, this.mTempValues);
         }
@@ -47,14 +45,14 @@ public abstract class ViewSpline extends SplineSet {
         @Override // androidx.constraintlayout.core.motion.utils.SplineSet
         public final void setup(int i) {
             int size = this.mConstraintAttributeList.size();
-            int numberOfInterpolatedValues = ((ConstraintAttribute) this.mConstraintAttributeList.valueAt(0)).numberOfInterpolatedValues();
+            int iNumberOfInterpolatedValues = ((ConstraintAttribute) this.mConstraintAttributeList.valueAt(0)).numberOfInterpolatedValues();
             double[] dArr = new double[size];
-            this.mTempValues = new float[numberOfInterpolatedValues];
-            double[][] dArr2 = (double[][]) Array.newInstance((Class<?>) Double.TYPE, size, numberOfInterpolatedValues);
+            this.mTempValues = new float[iNumberOfInterpolatedValues];
+            double[][] dArr2 = (double[][]) Array.newInstance((Class<?>) Double.TYPE, size, iNumberOfInterpolatedValues);
             for (int i2 = 0; i2 < size; i2++) {
-                int keyAt = this.mConstraintAttributeList.keyAt(i2);
+                int iKeyAt = this.mConstraintAttributeList.keyAt(i2);
                 ConstraintAttribute constraintAttribute = (ConstraintAttribute) this.mConstraintAttributeList.valueAt(i2);
-                dArr[i2] = keyAt * 0.01d;
+                dArr[i2] = iKeyAt * 0.01d;
                 constraintAttribute.getValuesToInterpolate(this.mTempValues);
                 int i3 = 0;
                 while (true) {
@@ -68,7 +66,6 @@ public abstract class ViewSpline extends SplineSet {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ElevationSet extends ViewSpline {
         @Override // androidx.constraintlayout.motion.utils.ViewSpline
         public final void setProperty(float f, View view) {
@@ -76,7 +73,6 @@ public abstract class ViewSpline extends SplineSet {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PivotXset extends ViewSpline {
         @Override // androidx.constraintlayout.motion.utils.ViewSpline
         public final void setProperty(float f, View view) {
@@ -84,7 +80,6 @@ public abstract class ViewSpline extends SplineSet {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PivotYset extends ViewSpline {
         @Override // androidx.constraintlayout.motion.utils.ViewSpline
         public final void setProperty(float f, View view) {
@@ -92,12 +87,11 @@ public abstract class ViewSpline extends SplineSet {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ProgressSet extends ViewSpline {
         public boolean mNoMethod = false;
 
         @Override // androidx.constraintlayout.motion.utils.ViewSpline
-        public final void setProperty(float f, View view) {
+        public final void setProperty(float f, View view) throws IllegalAccessException, Resources.NotFoundException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException {
             Method method;
             if (view instanceof MotionLayout) {
                 ((MotionLayout) view).setProgress(get(f));
@@ -124,7 +118,6 @@ public abstract class ViewSpline extends SplineSet {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class RotationSet extends ViewSpline {
         @Override // androidx.constraintlayout.motion.utils.ViewSpline
         public final void setProperty(float f, View view) {
@@ -132,7 +125,6 @@ public abstract class ViewSpline extends SplineSet {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class RotationXset extends ViewSpline {
         @Override // androidx.constraintlayout.motion.utils.ViewSpline
         public final void setProperty(float f, View view) {
@@ -140,7 +132,6 @@ public abstract class ViewSpline extends SplineSet {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class RotationYset extends ViewSpline {
         @Override // androidx.constraintlayout.motion.utils.ViewSpline
         public final void setProperty(float f, View view) {
@@ -148,7 +139,6 @@ public abstract class ViewSpline extends SplineSet {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ScaleXset extends ViewSpline {
         @Override // androidx.constraintlayout.motion.utils.ViewSpline
         public final void setProperty(float f, View view) {
@@ -156,7 +146,6 @@ public abstract class ViewSpline extends SplineSet {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ScaleYset extends ViewSpline {
         @Override // androidx.constraintlayout.motion.utils.ViewSpline
         public final void setProperty(float f, View view) {
@@ -164,7 +153,6 @@ public abstract class ViewSpline extends SplineSet {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class TranslationXset extends ViewSpline {
         @Override // androidx.constraintlayout.motion.utils.ViewSpline
         public final void setProperty(float f, View view) {
@@ -172,7 +160,6 @@ public abstract class ViewSpline extends SplineSet {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class TranslationYset extends ViewSpline {
         @Override // androidx.constraintlayout.motion.utils.ViewSpline
         public final void setProperty(float f, View view) {
@@ -180,7 +167,6 @@ public abstract class ViewSpline extends SplineSet {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class TranslationZset extends ViewSpline {
         @Override // androidx.constraintlayout.motion.utils.ViewSpline
         public final void setProperty(float f, View view) {
@@ -190,7 +176,6 @@ public abstract class ViewSpline extends SplineSet {
 
     public abstract void setProperty(float f, View view);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class PathRotate extends ViewSpline {
         @Override // androidx.constraintlayout.motion.utils.ViewSpline
         public final void setProperty(float f, View view) {

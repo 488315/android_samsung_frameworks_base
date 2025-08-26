@@ -12,7 +12,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class WifiRepositoryImpl$hideDuringMobileSwitching$3 extends SuspendLambda implements Function2 {
     /* synthetic */ boolean Z$0;
@@ -51,11 +50,11 @@ final class WifiRepositoryImpl$hideDuringMobileSwitching$3 extends SuspendLambda
         WifiRepositoryImpl.Companion companion = WifiRepositoryImpl.Companion;
         wifiRepositoryImpl.getClass();
         LogLevel logLevel = LogLevel.DEBUG;
-        WifiRepositoryImpl$$ExternalSyntheticLambda3 wifiRepositoryImpl$$ExternalSyntheticLambda3 = new WifiRepositoryImpl$$ExternalSyntheticLambda3(1);
+        WifiRepositoryImpl$$ExternalSyntheticLambda3 wifiRepositoryImpl$$ExternalSyntheticLambda3 = new WifiRepositoryImpl$$ExternalSyntheticLambda3(2);
         LogBuffer logBuffer = wifiRepositoryImpl.inputLogger;
-        LogMessage obtain = logBuffer.obtain("WifiRepo", logLevel, wifiRepositoryImpl$$ExternalSyntheticLambda3, null);
-        ((LogMessageImpl) obtain).bool1 = z;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("WifiRepo", logLevel, wifiRepositoryImpl$$ExternalSyntheticLambda3, null);
+        ((LogMessageImpl) logMessageObtain).bool1 = z;
+        logBuffer.commit(logMessageObtain);
         return Unit.INSTANCE;
     }
 }

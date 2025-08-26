@@ -5,11 +5,9 @@ import com.android.systemui.keyboard.shortcut.shared.model.ShortcutCategoryType;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public interface ShortcutCustomizationRequestInfo {
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Reset implements ShortcutCustomizationRequestInfo {
         public static final Reset INSTANCE = new Reset();
 
@@ -29,10 +27,8 @@ public interface ShortcutCustomizationRequestInfo {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface SingleShortcutCustomization extends ShortcutCustomizationRequestInfo {
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Add implements SingleShortcutCustomization {
             public final ShortcutCategoryType categoryType;
             public final ShortcutCommand defaultShortcutCommand;
@@ -83,9 +79,9 @@ public interface ShortcutCustomizationRequestInfo {
             }
 
             public final int hashCode() {
-                int m = PropertyValuesHolder2D$$ExternalSyntheticOutline0.m((this.categoryType.hashCode() + (this.label.hashCode() * 31)) * 31, 31, this.subCategoryLabel);
+                int iM = PropertyValuesHolder2D$$ExternalSyntheticOutline0.m((this.categoryType.hashCode() + (this.label.hashCode() * 31)) * 31, 31, this.subCategoryLabel);
                 ShortcutCommand shortcutCommand = this.defaultShortcutCommand;
-                return m + (shortcutCommand == null ? 0 : shortcutCommand.hashCode());
+                return iM + (shortcutCommand == null ? 0 : shortcutCommand.hashCode());
             }
 
             public final String toString() {
@@ -104,7 +100,6 @@ public interface ShortcutCustomizationRequestInfo {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public final class Delete implements SingleShortcutCustomization {
             public final ShortcutCategoryType categoryType;
             public final ShortcutCommand customShortcutCommand;
@@ -158,11 +153,11 @@ public interface ShortcutCustomizationRequestInfo {
             }
 
             public final int hashCode() {
-                int m = PropertyValuesHolder2D$$ExternalSyntheticOutline0.m((this.categoryType.hashCode() + (this.label.hashCode() * 31)) * 31, 31, this.subCategoryLabel);
+                int iM = PropertyValuesHolder2D$$ExternalSyntheticOutline0.m((this.categoryType.hashCode() + (this.label.hashCode() * 31)) * 31, 31, this.subCategoryLabel);
                 ShortcutCommand shortcutCommand = this.defaultShortcutCommand;
-                int hashCode = (m + (shortcutCommand == null ? 0 : shortcutCommand.hashCode())) * 31;
+                int iHashCode = (iM + (shortcutCommand == null ? 0 : shortcutCommand.hashCode())) * 31;
                 ShortcutCommand shortcutCommand2 = this.customShortcutCommand;
-                return hashCode + (shortcutCommand2 != null ? shortcutCommand2.hashCode() : 0);
+                return iHashCode + (shortcutCommand2 != null ? shortcutCommand2.hashCode() : 0);
             }
 
             public final String toString() {

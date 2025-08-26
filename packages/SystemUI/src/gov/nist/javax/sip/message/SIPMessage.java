@@ -18,8 +18,8 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import javax.sip.InvalidArgumentException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public abstract class SIPMessage extends MessageObject implements Cloneable, Serializable {
     public static final String CONTENT_TYPE_LOWERCASE = SIPHeaderNamesCache.toLowerCase("Content-Type");
@@ -60,19 +60,111 @@ public abstract class SIPMessage extends MessageObject implements Cloneable, Ser
         }
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:15:0x0061  */
-    /* JADX WARN: Removed duplicated region for block: B:29:0x0080  */
-    /* JADX WARN: Removed duplicated region for block: B:79:0x0119  */
+    /* JADX WARN: Removed duplicated region for block: B:22:0x0050  */
+    /* JADX WARN: Removed duplicated region for block: B:25:0x0061  */
+    /* JADX WARN: Removed duplicated region for block: B:33:0x0080  */
+    /* JADX WARN: Removed duplicated region for block: B:72:0x0119  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void attachHeader(gov.nist.javax.sip.header.SIPHeader r5) {
-        /*
-            Method dump skipped, instructions count: 289
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: gov.nist.javax.sip.message.SIPMessage.attachHeader(gov.nist.javax.sip.header.SIPHeader):void");
+    public final void attachHeader(SIPHeader sIPHeader) {
+        SIPHeader sIPHeader2;
+        String lowerCase;
+        String lowerCase2;
+        SIPHeaderList sIPHeaderList;
+        SIPHeaderList sIPHeaderList2;
+        Hashtable hashtable = ListMap.headerListTable;
+        if (sIPHeader instanceof SIPHeaderList) {
+            sIPHeader2 = sIPHeader;
+        } else if (ListMap.headerListTable.get(sIPHeader.getClass()) != null && !SIPHeaderList.class.isAssignableFrom(sIPHeader.getClass())) {
+            if (!ListMap.initialized) {
+                ListMap.initializeListMap();
+            }
+            try {
+                SIPHeaderList sIPHeaderList3 = (SIPHeaderList) ((Class) ListMap.headerListTable.get(sIPHeader.getClass())).newInstance();
+                sIPHeaderList3.setHeaderName(sIPHeader.getName());
+                sIPHeaderList2 = sIPHeaderList3;
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+                sIPHeaderList2 = null;
+                sIPHeaderList2.add(sIPHeader);
+                sIPHeader2 = sIPHeaderList2;
+                lowerCase = SIPHeaderNamesCache.toLowerCase(sIPHeader2.getName());
+                if (!this.nameTable.containsKey(lowerCase)) {
+                }
+                lowerCase2 = SIPHeaderNamesCache.toLowerCase(sIPHeader.getName());
+                if (lowerCase2 == null) {
+                }
+            } catch (InstantiationException e2) {
+                e2.printStackTrace();
+                sIPHeaderList2 = null;
+                sIPHeaderList2.add(sIPHeader);
+                sIPHeader2 = sIPHeaderList2;
+                lowerCase = SIPHeaderNamesCache.toLowerCase(sIPHeader2.getName());
+                if (!this.nameTable.containsKey(lowerCase)) {
+                }
+                lowerCase2 = SIPHeaderNamesCache.toLowerCase(sIPHeader.getName());
+                if (lowerCase2 == null) {
+                }
+            }
+            sIPHeaderList2.add(sIPHeader);
+            sIPHeader2 = sIPHeaderList2;
+        }
+        lowerCase = SIPHeaderNamesCache.toLowerCase(sIPHeader2.getName());
+        if (!this.nameTable.containsKey(lowerCase) && !(sIPHeader2 instanceof SIPHeaderList)) {
+            if (sIPHeader2 instanceof ContentLength) {
+                try {
+                    this.contentLengthHeader.setContentLength(((ContentLength) sIPHeader2).getContentLength());
+                    return;
+                } catch (InvalidArgumentException unused) {
+                    return;
+                }
+            }
+            return;
+        }
+        lowerCase2 = SIPHeaderNamesCache.toLowerCase(sIPHeader.getName());
+        if (lowerCase2 == null) {
+            throw new NullPointerException("bad name");
+        }
+        SIPHeader sIPHeaderMo3439getFirst = this.nameTable.get(lowerCase2);
+        if (sIPHeaderMo3439getFirst instanceof SIPHeaderList) {
+            sIPHeaderMo3439getFirst = ((SIPHeaderList) sIPHeaderMo3439getFirst).mo3439getFirst();
+        }
+        if (sIPHeaderMo3439getFirst != null) {
+            Iterator<SIPHeader> it = this.headers.iterator();
+            while (it.hasNext()) {
+                if (it.next().equals(sIPHeaderMo3439getFirst)) {
+                    it.remove();
+                }
+            }
+        }
+        if (!this.nameTable.containsKey(lowerCase)) {
+            this.nameTable.put(lowerCase, sIPHeader2);
+            this.headers.add(sIPHeader2);
+        } else if (!(sIPHeader2 instanceof SIPHeaderList) || (sIPHeaderList = (SIPHeaderList) this.nameTable.get(lowerCase)) == null) {
+            this.nameTable.put(lowerCase, sIPHeader2);
+        } else {
+            sIPHeaderList.addAll((SIPHeaderList) sIPHeader2);
+        }
+        if (sIPHeader2 instanceof From) {
+            this.fromHeader = (From) sIPHeader2;
+            return;
+        }
+        if (sIPHeader2 instanceof ContentLength) {
+            this.contentLengthHeader = (ContentLength) sIPHeader2;
+            return;
+        }
+        if (sIPHeader2 instanceof To) {
+            this.toHeader = (To) sIPHeader2;
+            return;
+        }
+        if (sIPHeader2 instanceof CSeq) {
+            this.cSeqHeader = (CSeq) sIPHeader2;
+        } else if (sIPHeader2 instanceof CallID) {
+            this.callIdHeader = (CallID) sIPHeader2;
+        } else if (sIPHeader2 instanceof MaxForwards) {
+            this.maxForwardsHeader = (MaxForwards) sIPHeader2;
+        }
     }
 
     @Override // gov.nist.core.GenericObject
@@ -93,11 +185,8 @@ public abstract class SIPMessage extends MessageObject implements Cloneable, Ser
                 if (sIPHeader == null) {
                     throw new IllegalArgumentException("null header!");
                 }
-                try {
-                    if (!(sIPHeader instanceof SIPHeaderList) || !((SIPHeaderList) sIPHeader).isEmpty()) {
-                        sIPMessage.attachHeader(sIPHeader);
-                    }
-                } catch (SIPDuplicateHeaderException unused) {
+                if (!(sIPHeader instanceof SIPHeaderList) || !((SIPHeaderList) sIPHeader).isEmpty()) {
+                    sIPMessage.attachHeader(sIPHeader);
                 }
             }
         }
@@ -115,7 +204,7 @@ public abstract class SIPMessage extends MessageObject implements Cloneable, Ser
 
     @Override // gov.nist.core.GenericObject
     public String encode() {
-        String str;
+        String parameter;
         StringBuffer stringBuffer = new StringBuffer();
         Iterator<SIPHeader> it = this.headers.iterator();
         while (it.hasNext()) {
@@ -135,35 +224,30 @@ public abstract class SIPMessage extends MessageObject implements Cloneable, Ser
         if (obj != null) {
             stringBuffer.append(obj.toString());
         } else {
-            String str2 = this.messageContent;
-            if (str2 != null || this.messageContentBytes != null) {
-                if (str2 == null) {
+            String str = this.messageContent;
+            if (str != null || this.messageContentBytes != null) {
+                if (str == null) {
                     try {
                         byte[] bArr = this.messageContentBytes;
-                        String str3 = CONTENT_TYPE_LOWERCASE;
-                        if (str3 == null) {
+                        String str2 = CONTENT_TYPE_LOWERCASE;
+                        if (str2 == null) {
                             throw new NullPointerException("bad name");
                         }
-                        SIPHeader sIPHeader = this.nameTable.get(str3);
-                        if (sIPHeader instanceof SIPHeaderList) {
-                            sIPHeader = ((SIPHeaderList) sIPHeader).mo3419getFirst();
+                        SIPHeader sIPHeaderMo3439getFirst = this.nameTable.get(str2);
+                        if (sIPHeaderMo3439getFirst instanceof SIPHeaderList) {
+                            sIPHeaderMo3439getFirst = ((SIPHeaderList) sIPHeaderMo3439getFirst).mo3439getFirst();
                         }
-                        ContentType contentType = (ContentType) sIPHeader;
-                        if (contentType != null) {
-                            str = contentType.getParameter("charset");
-                            if (str == null) {
-                                str = this.contentEncodingCharset;
-                            }
-                        } else {
-                            str = this.contentEncodingCharset;
+                        ContentType contentType = (ContentType) sIPHeaderMo3439getFirst;
+                        if (contentType == null || (parameter = contentType.getParameter("charset")) == null) {
+                            parameter = this.contentEncodingCharset;
                         }
-                        str2 = new String(bArr, str);
+                        str = new String(bArr, parameter);
                     } catch (UnsupportedEncodingException e) {
                         InternalErrorHandler.handleException(e);
                         throw null;
                     }
                 }
-                stringBuffer.append(str2);
+                stringBuffer.append(str);
             }
         }
         return stringBuffer.toString();

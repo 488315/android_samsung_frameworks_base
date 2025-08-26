@@ -9,7 +9,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function6;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class ShadeInteractorLegacyImpl$shadeExpansion$1 extends SuspendLambda implements Function6 {
     /* synthetic */ float F$0;
@@ -19,7 +18,6 @@ final class ShadeInteractorLegacyImpl$shadeExpansion$1 extends SuspendLambda imp
     /* synthetic */ boolean Z$0;
     int label;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract /* synthetic */ class WhenMappings {
         public static final /* synthetic */ int[] $EnumSwitchMapping$0;
 
@@ -47,16 +45,16 @@ final class ShadeInteractorLegacyImpl$shadeExpansion$1 extends SuspendLambda imp
 
     @Override // kotlin.jvm.functions.Function6
     public final Object invoke(Object obj, Object obj2, Object obj3, Object obj4, Object obj5, Object obj6) {
-        float floatValue = ((Number) obj).floatValue();
-        float floatValue2 = ((Number) obj3).floatValue();
-        float floatValue3 = ((Number) obj4).floatValue();
-        boolean booleanValue = ((Boolean) obj5).booleanValue();
+        float fFloatValue = ((Number) obj).floatValue();
+        float fFloatValue2 = ((Number) obj3).floatValue();
+        float fFloatValue3 = ((Number) obj4).floatValue();
+        boolean zBooleanValue = ((Boolean) obj5).booleanValue();
         ShadeInteractorLegacyImpl$shadeExpansion$1 shadeInteractorLegacyImpl$shadeExpansion$1 = new ShadeInteractorLegacyImpl$shadeExpansion$1((Continuation) obj6);
-        shadeInteractorLegacyImpl$shadeExpansion$1.F$0 = floatValue;
+        shadeInteractorLegacyImpl$shadeExpansion$1.F$0 = fFloatValue;
         shadeInteractorLegacyImpl$shadeExpansion$1.L$0 = (StatusBarState) obj2;
-        shadeInteractorLegacyImpl$shadeExpansion$1.F$1 = floatValue2;
-        shadeInteractorLegacyImpl$shadeExpansion$1.F$2 = floatValue3;
-        shadeInteractorLegacyImpl$shadeExpansion$1.Z$0 = booleanValue;
+        shadeInteractorLegacyImpl$shadeExpansion$1.F$1 = fFloatValue2;
+        shadeInteractorLegacyImpl$shadeExpansion$1.F$2 = fFloatValue3;
+        shadeInteractorLegacyImpl$shadeExpansion$1.Z$0 = zBooleanValue;
         return shadeInteractorLegacyImpl$shadeExpansion$1.invokeSuspend(Unit.INSTANCE);
     }
 

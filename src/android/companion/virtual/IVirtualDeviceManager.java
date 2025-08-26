@@ -166,9 +166,9 @@ public interface IVirtualDeviceManager extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IVirtualDeviceManager.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IVirtualDeviceManager)) {
-                return (IVirtualDeviceManager) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IVirtualDeviceManager.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IVirtualDeviceManager)) {
+                return (IVirtualDeviceManager) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -224,16 +224,16 @@ public interface IVirtualDeviceManager extends IInterface {
             }
             switch (i) {
                 case 1:
-                    IBinder readStrongBinder = parcel.readStrongBinder();
+                    IBinder strongBinder = parcel.readStrongBinder();
                     AttributionSource attributionSource = (AttributionSource) parcel.readTypedObject(AttributionSource.CREATOR);
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     VirtualDeviceParams virtualDeviceParams = (VirtualDeviceParams) parcel.readTypedObject(VirtualDeviceParams.CREATOR);
-                    IVirtualDeviceActivityListener asInterface = IVirtualDeviceActivityListener.Stub.asInterface(parcel.readStrongBinder());
-                    IVirtualDeviceSoundEffectListener asInterface2 = IVirtualDeviceSoundEffectListener.Stub.asInterface(parcel.readStrongBinder());
+                    IVirtualDeviceActivityListener iVirtualDeviceActivityListenerAsInterface = IVirtualDeviceActivityListener.Stub.asInterface(parcel.readStrongBinder());
+                    IVirtualDeviceSoundEffectListener iVirtualDeviceSoundEffectListenerAsInterface = IVirtualDeviceSoundEffectListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    IVirtualDevice createVirtualDevice = createVirtualDevice(readStrongBinder, attributionSource, readInt, virtualDeviceParams, asInterface, asInterface2);
+                    IVirtualDevice iVirtualDeviceCreateVirtualDevice = createVirtualDevice(strongBinder, attributionSource, i3, virtualDeviceParams, iVirtualDeviceActivityListenerAsInterface, iVirtualDeviceSoundEffectListenerAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(createVirtualDevice);
+                    parcel2.writeStrongInterface(iVirtualDeviceCreateVirtualDevice);
                     return true;
                 case 2:
                     List<VirtualDevice> virtualDevices = getVirtualDevices();
@@ -241,35 +241,35 @@ public interface IVirtualDeviceManager extends IInterface {
                     parcel2.writeTypedList(virtualDevices, 1);
                     return true;
                 case 3:
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    VirtualDevice virtualDevice = getVirtualDevice(readInt2);
+                    VirtualDevice virtualDevice = getVirtualDevice(i4);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(virtualDevice, 1);
                     return true;
                 case 4:
-                    IVirtualDeviceListener asInterface3 = IVirtualDeviceListener.Stub.asInterface(parcel.readStrongBinder());
+                    IVirtualDeviceListener iVirtualDeviceListenerAsInterface = IVirtualDeviceListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerVirtualDeviceListener(asInterface3);
+                    registerVirtualDeviceListener(iVirtualDeviceListenerAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 5:
-                    IVirtualDeviceListener asInterface4 = IVirtualDeviceListener.Stub.asInterface(parcel.readStrongBinder());
+                    IVirtualDeviceListener iVirtualDeviceListenerAsInterface2 = IVirtualDeviceListener.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterVirtualDeviceListener(asInterface4);
+                    unregisterVirtualDeviceListener(iVirtualDeviceListenerAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 6:
-                    int readInt3 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int deviceIdForDisplayId = getDeviceIdForDisplayId(readInt3);
+                    int deviceIdForDisplayId = getDeviceIdForDisplayId(i5);
                     parcel2.writeNoException();
                     parcel2.writeInt(deviceIdForDisplayId);
                     return true;
                 case 7:
-                    String readString = parcel.readString();
+                    String string = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    CharSequence displayNameForPersistentDeviceId = getDisplayNameForPersistentDeviceId(readString);
+                    CharSequence displayNameForPersistentDeviceId = getDisplayNameForPersistentDeviceId(string);
                     parcel2.writeNoException();
                     if (displayNameForPersistentDeviceId != null) {
                         parcel2.writeInt(1);
@@ -279,47 +279,47 @@ public interface IVirtualDeviceManager extends IInterface {
                     }
                     return true;
                 case 8:
-                    int readInt4 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isValidVirtualDeviceId = isValidVirtualDeviceId(readInt4);
+                    boolean zIsValidVirtualDeviceId = isValidVirtualDeviceId(i6);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isValidVirtualDeviceId);
+                    parcel2.writeBoolean(zIsValidVirtualDeviceId);
                     return true;
                 case 9:
-                    int readInt5 = parcel.readInt();
-                    int readInt6 = parcel.readInt();
+                    int i7 = parcel.readInt();
+                    int i8 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int devicePolicy = getDevicePolicy(readInt5, readInt6);
+                    int devicePolicy = getDevicePolicy(i7, i8);
                     parcel2.writeNoException();
                     parcel2.writeInt(devicePolicy);
                     return true;
                 case 10:
-                    int readInt7 = parcel.readInt();
+                    int i9 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int audioPlaybackSessionId = getAudioPlaybackSessionId(readInt7);
+                    int audioPlaybackSessionId = getAudioPlaybackSessionId(i9);
                     parcel2.writeNoException();
                     parcel2.writeInt(audioPlaybackSessionId);
                     return true;
                 case 11:
-                    int readInt8 = parcel.readInt();
+                    int i10 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int audioRecordingSessionId = getAudioRecordingSessionId(readInt8);
+                    int audioRecordingSessionId = getAudioRecordingSessionId(i10);
                     parcel2.writeNoException();
                     parcel2.writeInt(audioRecordingSessionId);
                     return true;
                 case 12:
-                    int readInt9 = parcel.readInt();
-                    int readInt10 = parcel.readInt();
+                    int i11 = parcel.readInt();
+                    int i12 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    playSoundEffect(readInt9, readInt10);
+                    playSoundEffect(i11, i12);
                     parcel2.writeNoException();
                     return true;
                 case 13:
-                    int readInt11 = parcel.readInt();
+                    int i13 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean isVirtualDeviceOwnedMirrorDisplay = isVirtualDeviceOwnedMirrorDisplay(readInt11);
+                    boolean zIsVirtualDeviceOwnedMirrorDisplay = isVirtualDeviceOwnedMirrorDisplay(i13);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isVirtualDeviceOwnedMirrorDisplay);
+                    parcel2.writeBoolean(zIsVirtualDeviceOwnedMirrorDisplay);
                     return true;
                 case 14:
                     List<String> allPersistentDeviceIds = getAllPersistentDeviceIds();
@@ -349,227 +349,227 @@ public interface IVirtualDeviceManager extends IInterface {
 
             @Override // android.companion.virtual.IVirtualDeviceManager
             public IVirtualDevice createVirtualDevice(IBinder iBinder, AttributionSource attributionSource, int i, VirtualDeviceParams virtualDeviceParams, IVirtualDeviceActivityListener iVirtualDeviceActivityListener, IVirtualDeviceSoundEffectListener iVirtualDeviceSoundEffectListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDeviceManager.DESCRIPTOR);
-                    obtain.writeStrongBinder(iBinder);
-                    obtain.writeTypedObject(attributionSource, 0);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(virtualDeviceParams, 0);
-                    obtain.writeStrongInterface(iVirtualDeviceActivityListener);
-                    obtain.writeStrongInterface(iVirtualDeviceSoundEffectListener);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IVirtualDevice.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(IVirtualDeviceManager.DESCRIPTOR);
+                    parcelObtain.writeStrongBinder(iBinder);
+                    parcelObtain.writeTypedObject(attributionSource, 0);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(virtualDeviceParams, 0);
+                    parcelObtain.writeStrongInterface(iVirtualDeviceActivityListener);
+                    parcelObtain.writeStrongInterface(iVirtualDeviceSoundEffectListener);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IVirtualDevice.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDeviceManager
             public List<VirtualDevice> getVirtualDevices() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDeviceManager.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(VirtualDevice.CREATOR);
+                    parcelObtain.writeInterfaceToken(IVirtualDeviceManager.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(VirtualDevice.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDeviceManager
             public VirtualDevice getVirtualDevice(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDeviceManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (VirtualDevice) obtain2.readTypedObject(VirtualDevice.CREATOR);
+                    parcelObtain.writeInterfaceToken(IVirtualDeviceManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (VirtualDevice) parcelObtain2.readTypedObject(VirtualDevice.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDeviceManager
             public void registerVirtualDeviceListener(IVirtualDeviceListener iVirtualDeviceListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDeviceManager.DESCRIPTOR);
-                    obtain.writeStrongInterface(iVirtualDeviceListener);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVirtualDeviceManager.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iVirtualDeviceListener);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDeviceManager
             public void unregisterVirtualDeviceListener(IVirtualDeviceListener iVirtualDeviceListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDeviceManager.DESCRIPTOR);
-                    obtain.writeStrongInterface(iVirtualDeviceListener);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVirtualDeviceManager.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iVirtualDeviceListener);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDeviceManager
             public int getDeviceIdForDisplayId(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDeviceManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IVirtualDeviceManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDeviceManager
             public CharSequence getDisplayNameForPersistentDeviceId(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDeviceManager.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (CharSequence) obtain2.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    parcelObtain.writeInterfaceToken(IVirtualDeviceManager.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (CharSequence) parcelObtain2.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDeviceManager
             public boolean isValidVirtualDeviceId(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDeviceManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IVirtualDeviceManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDeviceManager
             public int getDevicePolicy(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDeviceManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IVirtualDeviceManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDeviceManager
             public int getAudioPlaybackSessionId(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDeviceManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IVirtualDeviceManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDeviceManager
             public int getAudioRecordingSessionId(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDeviceManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(IVirtualDeviceManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDeviceManager
             public void playSoundEffect(int i, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDeviceManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IVirtualDeviceManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDeviceManager
             public boolean isVirtualDeviceOwnedMirrorDisplay(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDeviceManager.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(IVirtualDeviceManager.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.companion.virtual.IVirtualDeviceManager
             public List<String> getAllPersistentDeviceIds() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IVirtualDeviceManager.DESCRIPTOR);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createStringArrayList();
+                    parcelObtain.writeInterfaceToken(IVirtualDeviceManager.DESCRIPTOR);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createStringArrayList();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

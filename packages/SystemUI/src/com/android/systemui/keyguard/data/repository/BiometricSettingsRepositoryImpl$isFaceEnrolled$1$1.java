@@ -12,7 +12,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class BiometricSettingsRepositoryImpl$isFaceEnrolled$1$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ AuthController $authController;
@@ -56,23 +55,23 @@ final class BiometricSettingsRepositoryImpl$isFaceEnrolled$1$1 extends SuspendLa
                     if (biometricType == BiometricType.FACE) {
                         ChannelExt channelExt = ChannelExt.INSTANCE;
                         AuthController authController2 = authController;
-                        Boolean valueOf = Boolean.valueOf(authController2.mFaceProps == null ? false : authController2.mFaceEnrolledForUser.get(i2));
+                        Boolean boolValueOf = Boolean.valueOf(authController2.mFaceProps == null ? false : authController2.mFaceEnrolledForUser.get(i2));
                         channelExt.getClass();
-                        ChannelExt.trySendWithFailureLogging(ProducerScope.this, valueOf, "BiometricsRepositoryImpl", "Face enrollment changed");
+                        ChannelExt.trySendWithFailureLogging(producerScope, boolValueOf, "BiometricsRepositoryImpl", "Face enrollment changed");
                     }
                 }
             };
             this.$authController.addCallback(r1);
             ChannelExt channelExt = ChannelExt.INSTANCE;
             AuthController authController2 = this.$authController;
-            Boolean valueOf = Boolean.valueOf(authController2.mFaceProps == null ? false : authController2.mFaceEnrolledForUser.get(this.$selectedUserId));
+            Boolean boolValueOf = Boolean.valueOf(authController2.mFaceProps == null ? false : authController2.mFaceEnrolledForUser.get(this.$selectedUserId));
             channelExt.getClass();
-            ChannelExt.trySendWithFailureLogging(producerScope, valueOf, "BiometricsRepositoryImpl", "Initial value of face auth enrollment");
+            ChannelExt.trySendWithFailureLogging(producerScope, boolValueOf, "BiometricsRepositoryImpl", "Initial value of face auth enrollment");
             final AuthController authController3 = this.$authController;
             Function0 function0 = new Function0() { // from class: com.android.systemui.keyguard.data.repository.BiometricSettingsRepositoryImpl$isFaceEnrolled$1$1.1
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    AuthController.this.removeCallback(r1);
+                    authController3.removeCallback(r1);
                     return Unit.INSTANCE;
                 }
             };

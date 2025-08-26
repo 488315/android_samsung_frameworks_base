@@ -109,9 +109,9 @@ public class ProgressReporter {
     }
 
     private void notifyStarted(int i, Bundle bundle) {
-        for (int beginBroadcast = this.mListeners.beginBroadcast() - 1; beginBroadcast >= 0; beginBroadcast--) {
+        for (int iBeginBroadcast = this.mListeners.beginBroadcast() - 1; iBeginBroadcast >= 0; iBeginBroadcast--) {
             try {
-                this.mListeners.getBroadcastItem(beginBroadcast).onStarted(i, bundle);
+                ((IProgressListener) this.mListeners.getBroadcastItem(iBeginBroadcast)).onStarted(i, bundle);
             } catch (RemoteException unused) {
             }
         }
@@ -119,9 +119,9 @@ public class ProgressReporter {
     }
 
     private void notifyProgress(int i, int i2, Bundle bundle) {
-        for (int beginBroadcast = this.mListeners.beginBroadcast() - 1; beginBroadcast >= 0; beginBroadcast--) {
+        for (int iBeginBroadcast = this.mListeners.beginBroadcast() - 1; iBeginBroadcast >= 0; iBeginBroadcast--) {
             try {
-                this.mListeners.getBroadcastItem(beginBroadcast).onProgress(i, i2, bundle);
+                ((IProgressListener) this.mListeners.getBroadcastItem(iBeginBroadcast)).onProgress(i, i2, bundle);
             } catch (RemoteException unused) {
             }
         }
@@ -129,9 +129,9 @@ public class ProgressReporter {
     }
 
     private void notifyFinished(int i, Bundle bundle) {
-        for (int beginBroadcast = this.mListeners.beginBroadcast() - 1; beginBroadcast >= 0; beginBroadcast--) {
+        for (int iBeginBroadcast = this.mListeners.beginBroadcast() - 1; iBeginBroadcast >= 0; iBeginBroadcast--) {
             try {
-                this.mListeners.getBroadcastItem(beginBroadcast).onFinished(i, bundle);
+                ((IProgressListener) this.mListeners.getBroadcastItem(iBeginBroadcast)).onFinished(i, bundle);
             } catch (RemoteException unused) {
             }
         }

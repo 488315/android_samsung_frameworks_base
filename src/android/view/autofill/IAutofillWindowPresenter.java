@@ -54,9 +54,9 @@ public interface IAutofillWindowPresenter extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IAutofillWindowPresenter)) {
-                return (IAutofillWindowPresenter) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IAutofillWindowPresenter)) {
+                return (IAutofillWindowPresenter) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -88,10 +88,10 @@ public interface IAutofillWindowPresenter extends IInterface {
             if (i == 1) {
                 WindowManager.LayoutParams layoutParams = (WindowManager.LayoutParams) parcel.readTypedObject(WindowManager.LayoutParams.CREATOR);
                 Rect rect = (Rect) parcel.readTypedObject(Rect.CREATOR);
-                boolean readBoolean = parcel.readBoolean();
-                int readInt = parcel.readInt();
+                boolean z = parcel.readBoolean();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                show(layoutParams, rect, readBoolean, readInt);
+                show(layoutParams, rect, z, i3);
             } else if (i == 2) {
                 Rect rect2 = (Rect) parcel.readTypedObject(Rect.CREATOR);
                 parcel.enforceNoDataAvail();
@@ -120,28 +120,28 @@ public interface IAutofillWindowPresenter extends IInterface {
 
             @Override // android.view.autofill.IAutofillWindowPresenter
             public void show(WindowManager.LayoutParams layoutParams, Rect rect, boolean z, int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(layoutParams, 0);
-                    obtain.writeTypedObject(rect, 0);
-                    obtain.writeBoolean(z);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(layoutParams, 0);
+                    parcelObtain.writeTypedObject(rect, 0);
+                    parcelObtain.writeBoolean(z);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.view.autofill.IAutofillWindowPresenter
             public void hide(Rect rect) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(rect, 0);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(rect, 0);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

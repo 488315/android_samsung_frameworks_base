@@ -33,17 +33,17 @@ public class ViewHierarchyEncoder {
         this.mUserPropertiesEnabled = z;
     }
 
-    public void beginObject(Object obj) {
+    public void beginObject(Object obj) throws IOException {
         startPropertyMap();
         addProperty("meta:__name__", obj.getClass().getName());
         addProperty("meta:__hash__", obj.hashCode());
     }
 
-    public void endObject() {
+    public void endObject() throws IOException {
         endPropertyMap();
     }
 
-    public void endStream() {
+    public void endStream() throws IOException {
         startPropertyMap();
         addProperty("__name__", "propertyIndex");
         for (Map.Entry<String, Short> entry : this.mPropertyNames.entrySet()) {
@@ -53,64 +53,64 @@ public class ViewHierarchyEncoder {
         endPropertyMap();
     }
 
-    public void addProperty(String str, boolean z) {
+    public void addProperty(String str, boolean z) throws IOException {
         writeShort(createPropertyIndex(str));
         writeBoolean(z);
     }
 
-    public void addProperty(String str, short s) {
+    public void addProperty(String str, short s) throws IOException {
         writeShort(createPropertyIndex(str));
         writeShort(s);
     }
 
-    public void addProperty(String str, int i) {
+    public void addProperty(String str, int i) throws IOException {
         writeShort(createPropertyIndex(str));
         writeInt(i);
     }
 
-    public void addProperty(String str, float f) {
+    public void addProperty(String str, float f) throws IOException {
         writeShort(createPropertyIndex(str));
         writeFloat(f);
     }
 
-    public void addProperty(String str, String str2) {
+    public void addProperty(String str, String str2) throws IOException {
         writeShort(createPropertyIndex(str));
         writeString(str2);
     }
 
-    public void addUserProperty(String str, String str2) {
+    public void addUserProperty(String str, String str2) throws IOException {
         if (this.mUserPropertiesEnabled) {
             addProperty(str, str2);
         }
     }
 
-    public void addPropertyKey(String str) {
+    public void addPropertyKey(String str) throws IOException {
         writeShort(createPropertyIndex(str));
     }
 
     private short createPropertyIndex(String str) {
-        Short sh = this.mPropertyNames.get(str);
-        if (sh == null) {
+        Short shValueOf = this.mPropertyNames.get(str);
+        if (shValueOf == null) {
             short s = this.mPropertyId;
             this.mPropertyId = (short) (s + 1);
-            sh = Short.valueOf(s);
-            this.mPropertyNames.put(str, sh);
+            shValueOf = Short.valueOf(s);
+            this.mPropertyNames.put(str, shValueOf);
         }
-        return sh.shortValue();
+        return shValueOf.shortValue();
     }
 
-    private void startPropertyMap() {
+    private void startPropertyMap() throws IOException {
         try {
             this.mStream.write(77);
         } catch (IOException unused) {
         }
     }
 
-    private void endPropertyMap() {
+    private void endPropertyMap() throws IOException {
         writeShort((short) 0);
     }
 
-    private void writeBoolean(boolean z) {
+    private void writeBoolean(boolean z) throws IOException {
         try {
             this.mStream.write(90);
             this.mStream.write(z ? 1 : 0);
@@ -118,7 +118,7 @@ public class ViewHierarchyEncoder {
         }
     }
 
-    private void writeShort(short s) {
+    private void writeShort(short s) throws IOException {
         try {
             this.mStream.write(83);
             this.mStream.writeShort(s);
@@ -126,7 +126,7 @@ public class ViewHierarchyEncoder {
         }
     }
 
-    private void writeInt(int i) {
+    private void writeInt(int i) throws IOException {
         try {
             this.mStream.write(73);
             this.mStream.writeInt(i);
@@ -134,7 +134,7 @@ public class ViewHierarchyEncoder {
         }
     }
 
-    private void writeFloat(float f) {
+    private void writeFloat(float f) throws IOException {
         try {
             this.mStream.write(70);
             this.mStream.writeFloat(f);
@@ -142,16 +142,16 @@ public class ViewHierarchyEncoder {
         }
     }
 
-    private void writeString(String str) {
+    private void writeString(String str) throws IOException {
         if (str == null) {
             str = "";
         }
         try {
             this.mStream.write(82);
             byte[] bytes = str.getBytes(this.mCharset);
-            short min = (short) Math.min(bytes.length, 32767);
-            this.mStream.writeShort(min);
-            this.mStream.write(bytes, 0, min);
+            short sMin = (short) Math.min(bytes.length, 32767);
+            this.mStream.writeShort(sMin);
+            this.mStream.write(bytes, 0, sMin);
         } catch (IOException unused) {
         }
     }

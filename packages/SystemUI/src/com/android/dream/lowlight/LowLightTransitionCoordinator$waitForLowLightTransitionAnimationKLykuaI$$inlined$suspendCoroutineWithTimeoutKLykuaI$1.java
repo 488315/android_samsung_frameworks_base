@@ -24,7 +24,6 @@ import kotlinx.coroutines.CancellableContinuation;
 import kotlinx.coroutines.CancellableContinuationImpl;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* renamed from: com.android.dream.lowlight.LowLightTransitionCoordinator$waitForLowLightTransitionAnimation-KLykuaI$$inlined$suspendCoroutineWithTimeout-KLykuaI$1, reason: invalid class name */
 /* loaded from: classes.dex */
 public final class LowLightTransitionCoordinator$waitForLowLightTransitionAnimationKLykuaI$$inlined$suspendCoroutineWithTimeoutKLykuaI$1 extends SuspendLambda implements Function2 {
@@ -77,17 +76,17 @@ public final class LowLightTransitionCoordinator$waitForLowLightTransitionAnimat
             float f = dreamOverlayAnimationsController.mDreamInTranslationYDurationMs;
             long j = dreamOverlayAnimationsController.mDreamInComplicationsAnimDurationMs;
             Map map = dreamOverlayAnimationsController.mCurrentAlphaAtPosition;
-            Float valueOf = Float.valueOf(1.0f);
-            animatorSet.playTogether(DreamOverlayAnimationsController.translationYAnimator$default(dreamOverlayAnimationsController, 0.0f, -dreamOverlayAnimationsController.mDreamInTranslationYDistance, j, new TruncatedInterpolator(interpolator, f, j), 16), DreamOverlayAnimationsController.alphaAnimator$default(dreamOverlayAnimationsController, ((Number) ((LinkedHashMap) map).getOrDefault(2, valueOf)).floatValue(), 0.0f, dreamOverlayAnimationsController.mDreamInComplicationsAnimDurationMs, 2, null, 32), DreamOverlayAnimationsController.alphaAnimator$default(dreamOverlayAnimationsController, ((Number) ((LinkedHashMap) dreamOverlayAnimationsController.mCurrentAlphaAtPosition).getOrDefault(1, valueOf)).floatValue(), 0.0f, dreamOverlayAnimationsController.mDreamInComplicationsAnimDurationMs, 1, null, 32));
+            Float fValueOf = Float.valueOf(1.0f);
+            animatorSet.playTogether(DreamOverlayAnimationsController.translationYAnimator$default(dreamOverlayAnimationsController, 0.0f, -dreamOverlayAnimationsController.mDreamInTranslationYDistance, j, new TruncatedInterpolator(interpolator, f, j), 16), DreamOverlayAnimationsController.alphaAnimator$default(dreamOverlayAnimationsController, ((Number) ((LinkedHashMap) map).getOrDefault(2, fValueOf)).floatValue(), 0.0f, dreamOverlayAnimationsController.mDreamInComplicationsAnimDurationMs, 2, null, 32), DreamOverlayAnimationsController.alphaAnimator$default(dreamOverlayAnimationsController, ((Number) ((LinkedHashMap) dreamOverlayAnimationsController.mCurrentAlphaAtPosition).getOrDefault(1, fValueOf)).floatValue(), 0.0f, dreamOverlayAnimationsController.mDreamInComplicationsAnimDurationMs, 1, null, 32));
             animatorSet.addListener(new Animator.AnimatorListener() { // from class: com.android.systemui.dreams.DreamOverlayAnimationsController$startExitAnimations$lambda$7$$inlined$doOnEnd$1
                 @Override // android.animation.Animator.AnimatorListener
                 public final void onAnimationEnd(Animator animator2) {
-                    DreamOverlayAnimationsController dreamOverlayAnimationsController2 = DreamOverlayAnimationsController.this;
+                    DreamOverlayAnimationsController dreamOverlayAnimationsController2 = dreamOverlayAnimationsController;
                     dreamOverlayAnimationsController2.mAnimator = null;
                     DreamOverlayStateController dreamOverlayStateController = dreamOverlayAnimationsController2.mOverlayStateController;
                     dreamOverlayStateController.getClass();
                     dreamOverlayStateController.modifyState(1, 8);
-                    Logger.d$default(DreamOverlayAnimationsController.this.logger, "Dream overlay exit animations finished.", null, 2, null);
+                    Logger.d$default(dreamOverlayAnimationsController.logger, "Dream overlay exit animations finished.", null, 2, null);
                 }
 
                 @Override // android.animation.Animator.AnimatorListener
@@ -105,7 +104,7 @@ public final class LowLightTransitionCoordinator$waitForLowLightTransitionAnimat
             animatorSet.addListener(new Animator.AnimatorListener() { // from class: com.android.systemui.dreams.DreamOverlayAnimationsController$startExitAnimations$lambda$7$$inlined$doOnCancel$1
                 @Override // android.animation.Animator.AnimatorListener
                 public final void onAnimationCancel(Animator animator2) {
-                    Logger.d$default(DreamOverlayAnimationsController.this.logger, "Dream overlay exit animations canceled.", null, 2, null);
+                    Logger.d$default(dreamOverlayAnimationsController.logger, "Dream overlay exit animations canceled.", null, 2, null);
                 }
 
                 @Override // android.animation.Animator.AnimatorListener
@@ -126,9 +125,9 @@ public final class LowLightTransitionCoordinator$waitForLowLightTransitionAnimat
             dreamOverlayAnimationsController.mOverlayStateController.modifyState(2, 8);
             animator = (AnimatorSet) dreamOverlayAnimationsController.mAnimator;
         } else if (!z && (lowLightClockDreamService = this.this$0.mLowLightExitListener) != null) {
-            Animator provideAnimationOut = lowLightClockDreamService.mAnimationProvider.provideAnimationOut(lowLightClockDreamService.mTextClock, lowLightClockDreamService.mChargingStatusTextView);
-            lowLightClockDreamService.mAnimationOut = provideAnimationOut;
-            provideAnimationOut.start();
+            Animator animatorProvideAnimationOut = lowLightClockDreamService.mAnimationProvider.provideAnimationOut(lowLightClockDreamService.mTextClock, lowLightClockDreamService.mChargingStatusTextView);
+            lowLightClockDreamService.mAnimationOut = animatorProvideAnimationOut;
+            animatorProvideAnimationOut.start();
             animator = lowLightClockDreamService.mAnimationOut;
         }
         if (animator == null) {
@@ -138,12 +137,12 @@ public final class LowLightTransitionCoordinator$waitForLowLightTransitionAnimat
             animator.addListener(new AnimatorListenerAdapter() { // from class: com.android.dream.lowlight.LowLightTransitionCoordinator$waitForLowLightTransitionAnimation$2$listener$1
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public final void onAnimationCancel(Animator animator2) {
-                    CancellableContinuation.this.cancel(null);
+                    cancellableContinuationImpl.cancel(null);
                 }
 
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public final void onAnimationEnd(Animator animator2) {
-                    CancellableContinuation cancellableContinuation = CancellableContinuation.this;
+                    CancellableContinuation cancellableContinuation = cancellableContinuationImpl;
                     int i3 = Result.$r8$clinit;
                     cancellableContinuation.resumeWith(Unit.INSTANCE);
                 }

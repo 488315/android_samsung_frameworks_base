@@ -5,7 +5,6 @@ import dagger.internal.Providers;
 import java.util.concurrent.Executor;
 import kotlinx.coroutines.CoroutineDispatcher;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SysUICoroutinesModule_UiBgDispatcherFactory implements Provider {
     private final SysUICoroutinesModule module;
@@ -21,9 +20,9 @@ public final class SysUICoroutinesModule_UiBgDispatcherFactory implements Provid
     }
 
     public static CoroutineDispatcher uiBgDispatcher(SysUICoroutinesModule sysUICoroutinesModule, Executor executor) {
-        CoroutineDispatcher uiBgDispatcher = sysUICoroutinesModule.uiBgDispatcher(executor);
-        uiBgDispatcher.getClass();
-        return uiBgDispatcher;
+        CoroutineDispatcher coroutineDispatcherUiBgDispatcher = sysUICoroutinesModule.uiBgDispatcher(executor);
+        coroutineDispatcherUiBgDispatcher.getClass();
+        return coroutineDispatcherUiBgDispatcher;
     }
 
     public static SysUICoroutinesModule_UiBgDispatcherFactory create(SysUICoroutinesModule sysUICoroutinesModule, Provider provider) {

@@ -2,6 +2,7 @@ package com.android.systemui.shade;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
@@ -23,7 +24,6 @@ import com.android.systemui.shade.TouchLogger;
 import com.android.systemui.statusbar.phone.datausage.DataUsageLabelManager;
 import com.samsung.android.multiwindow.MultiWindowEdgeDetector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class NotificationPanelView extends FrameLayout {
     public final Paint mAlphaPaint;
@@ -44,7 +44,7 @@ public final class NotificationPanelView extends FrameLayout {
     }
 
     @Override // android.view.ViewGroup, android.view.View
-    public final void dispatchConfigurationChanged(Configuration configuration) {
+    public final void dispatchConfigurationChanged(Configuration configuration) throws Resources.NotFoundException {
         PrivacyDialog privacyDialog;
         super.dispatchConfigurationChanged(configuration);
         int i = SceneContainerFlag.$r8$clinit;
@@ -89,10 +89,10 @@ public final class NotificationPanelView extends FrameLayout {
 
     @Override // android.view.ViewGroup, android.view.View
     public final boolean dispatchTouchEvent(MotionEvent motionEvent) {
-        boolean dispatchTouchEvent = super.dispatchTouchEvent(motionEvent);
+        boolean zDispatchTouchEvent = super.dispatchTouchEvent(motionEvent);
         TouchLogger.Companion.getClass();
-        TouchLogger.Companion.logDispatchTouch(motionEvent, "NPV", dispatchTouchEvent);
-        return dispatchTouchEvent;
+        TouchLogger.Companion.logDispatchTouch(motionEvent, "NPV", zDispatchTouchEvent);
+        return zDispatchTouchEvent;
     }
 
     @Override // android.view.View

@@ -2,6 +2,8 @@ package android.content.pm.parsing;
 
 import android.Manifest;
 import android.app.admin.DeviceAdminReceiver;
+import android.content.pm.PackageInfo;
+import android.content.pm.SharedLibraryInfo;
 import android.content.pm.SigningDetails;
 import android.content.pm.VerifierInfo;
 import android.content.pm.parsing.result.ParseInput;
@@ -9,6 +11,7 @@ import android.content.pm.parsing.result.ParseResult;
 import android.content.res.ApkAssets;
 import android.content.res.XmlResourceParser;
 import android.os.Build;
+import android.os.SystemProperties;
 import android.os.Trace;
 import android.text.TextUtils;
 import android.util.ArrayMap;
@@ -17,16 +20,22 @@ import android.util.AttributeSet;
 import android.util.EmptyArray;
 import android.util.Pair;
 import android.util.Slog;
+import com.android.internal.pm.pkg.component.flags.Flags;
 import com.android.internal.util.ArrayUtils;
+import com.android.internal.util.XmlUtils;
+import com.sec.android.iaft.SmLib_IafdConstant;
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.security.PublicKey;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Objects;
 import java.util.Set;
 import libcore.io.IoUtils;
+import libcore.util.HexEncoding;
 import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes.dex */
@@ -69,11 +78,11 @@ public class ApkLiteParseUtils {
     public static ParseResult<PackageLite> parseMonolithicPackageLite(ParseInput parseInput, File file, int i) {
         Trace.traceBegin(262144L, "parseApkLite");
         try {
-            ParseResult<ApkLite> parseApkLite = parseApkLite(parseInput, file, i);
-            if (parseApkLite.isError()) {
-                return parseInput.error(parseApkLite);
+            ParseResult<ApkLite> apkLite = parseApkLite(parseInput, file, i);
+            if (apkLite.isError()) {
+                return parseInput.error(apkLite);
             }
-            ApkLite result = parseApkLite.getResult();
+            ApkLite result = apkLite.getResult();
             return parseInput.success(new PackageLite(file.getAbsolutePath(), result.getPath(), result, null, null, null, null, null, null, result.getTargetSdkVersion(), null, null));
         } finally {
             Trace.traceEnd(262144L);
@@ -83,67 +92,67 @@ public class ApkLiteParseUtils {
     public static ParseResult<PackageLite> parseMonolithicPackageLite(ParseInput parseInput, FileDescriptor fileDescriptor, String str, int i) {
         Trace.traceBegin(262144L, "parseApkLite");
         try {
-            ParseResult<ApkLite> parseApkLite = parseApkLite(parseInput, fileDescriptor, str, i);
-            if (parseApkLite.isError()) {
-                return parseInput.error(parseApkLite);
+            ParseResult<ApkLite> apkLite = parseApkLite(parseInput, fileDescriptor, str, i);
+            if (apkLite.isError()) {
+                return parseInput.error(apkLite);
             }
-            ApkLite result = parseApkLite.getResult();
+            ApkLite result = apkLite.getResult();
             return parseInput.success(new PackageLite(str, result.getPath(), result, null, null, null, null, null, null, result.getTargetSdkVersion(), null, null));
         } finally {
             Trace.traceEnd(262144L);
         }
     }
 
-    public static ParseResult<PackageLite> parseClusterPackageLite(ParseInput parseInput, File file, int i) {
+    public static ParseResult<PackageLite> parseClusterPackageLite(ParseInput parseInput, File file, int i) throws Throwable {
         long j;
-        File[] listFiles = file.listFiles();
-        if (ArrayUtils.isEmpty(listFiles)) {
+        File[] fileArrListFiles = file.listFiles();
+        if (ArrayUtils.isEmpty(fileArrListFiles)) {
             return parseInput.error(-100, "No packages found in split");
         }
         int i2 = 0;
-        if (listFiles.length == 1 && listFiles[0].isDirectory()) {
-            return parseClusterPackageLite(parseInput, listFiles[0], i);
+        if (fileArrListFiles.length == 1 && fileArrListFiles[0].isDirectory()) {
+            return parseClusterPackageLite(parseInput, fileArrListFiles[0], i);
         }
         ArrayMap arrayMap = new ArrayMap();
         long j2 = 262144;
         Trace.traceBegin(262144L, "parseApkLite");
         try {
-            int length = listFiles.length;
-            int i3 = 0;
-            String str = null;
+            int length = fileArrListFiles.length;
+            int versionCode = 0;
+            String packageName = null;
             while (i2 < length) {
-                File file2 = listFiles[i2];
+                File file2 = fileArrListFiles[i2];
                 if (isApkFile(file2)) {
-                    ParseResult<ApkLite> parseApkLite = parseApkLite(parseInput, file2, i);
-                    if (parseApkLite.isError()) {
-                        ParseResult<PackageLite> error = parseInput.error(parseApkLite);
+                    ParseResult<ApkLite> apkLite = parseApkLite(parseInput, file2, i);
+                    if (apkLite.isError()) {
+                        ParseResult<PackageLite> parseResultError = parseInput.error(apkLite);
                         Trace.traceEnd(j2);
-                        return error;
+                        return parseResultError;
                     }
-                    ApkLite result = parseApkLite.getResult();
-                    if (str == null) {
-                        str = result.getPackageName();
-                        i3 = result.getVersionCode();
+                    ApkLite result = apkLite.getResult();
+                    if (packageName == null) {
+                        packageName = result.getPackageName();
+                        versionCode = result.getVersionCode();
                         j = j2;
                     } else {
                         j = j2;
-                        if (!str.equals(result.getPackageName())) {
-                            ParseResult<PackageLite> error2 = parseInput.error(-101, "Inconsistent package " + result.getPackageName() + " in " + file2 + "; expected " + str);
+                        if (!packageName.equals(result.getPackageName())) {
+                            ParseResult<PackageLite> parseResultError2 = parseInput.error(-101, "Inconsistent package " + result.getPackageName() + " in " + file2 + "; expected " + packageName);
                             Trace.traceEnd(j);
-                            return error2;
+                            return parseResultError2;
                         }
-                        if (i3 != result.getVersionCode()) {
-                            ParseResult<PackageLite> error3 = parseInput.error(-101, "Inconsistent version " + result.getVersionCode() + " in " + file2 + "; expected " + i3);
+                        if (versionCode != result.getVersionCode()) {
+                            ParseResult<PackageLite> parseResultError3 = parseInput.error(-101, "Inconsistent version " + result.getVersionCode() + " in " + file2 + "; expected " + versionCode);
                             Trace.traceEnd(j);
-                            return error3;
+                            return parseResultError3;
                         }
                     }
                     try {
-                        ApkLite apkLite = (ApkLite) arrayMap.put(result.getSplitName(), result);
-                        if (apkLite != null) {
-                            ParseResult<PackageLite> error4 = parseInput.error(-101, "Split name " + result.getSplitName() + " defined more than once; most recent was " + file2 + ", previous was " + apkLite.getPath());
+                        ApkLite apkLite2 = (ApkLite) arrayMap.put(result.getSplitName(), result);
+                        if (apkLite2 != null) {
+                            ParseResult<PackageLite> parseResultError4 = parseInput.error(-101, "Split name " + result.getSplitName() + " defined more than once; most recent was " + file2 + ", previous was " + apkLite2.getPath());
                             Trace.traceEnd(j);
-                            return error4;
+                            return parseResultError4;
                         }
                     } catch (Throwable th) {
                         th = th;
@@ -157,9 +166,9 @@ public class ApkLiteParseUtils {
                 j2 = j;
             }
             long j3 = j2;
-            ApkLite apkLite2 = (ApkLite) arrayMap.remove(null);
+            ApkLite apkLite3 = (ApkLite) arrayMap.remove(null);
             Trace.traceEnd(j3);
-            return composePackageLiteFromApks(parseInput, file, apkLite2, arrayMap);
+            return composePackageLiteFromApks(parseInput, file, apkLite3, arrayMap);
         } catch (Throwable th2) {
             th = th2;
             j = j2;
@@ -243,100 +252,100 @@ public class ApkLiteParseUtils {
         return parseApkLiteInner(parseInput, null, fileDescriptor, str, i);
     }
 
-    private static ParseResult<ApkLite> parseApkLiteInner(ParseInput parseInput, File file, FileDescriptor fileDescriptor, String str, int i) {
-        ApkAssets apkAssets;
-        XmlResourceParser openXml;
-        SigningDetails signingDetails;
+    private static ParseResult<ApkLite> parseApkLiteInner(ParseInput parseInput, File file, FileDescriptor fileDescriptor, String str, int i) throws Throwable {
+        ApkAssets apkAssetsLoadFromFd;
+        XmlResourceParser xmlResourceParserOpenXml;
+        SigningDetails result;
         String absolutePath = fileDescriptor != null ? str : file.getAbsolutePath();
         XmlResourceParser xmlResourceParser = null;
         try {
             try {
                 try {
-                    apkAssets = fileDescriptor != null ? ApkAssets.loadFromFd(fileDescriptor, str, 0, null) : ApkAssets.loadFromPath(absolutePath);
-                } catch (IOException e) {
-                    Slog.w(TAG, "Failed to parse " + absolutePath, e);
-                    ParseResult<ApkLite> error = parseInput.error(-100, "Failed to parse " + absolutePath, e);
-                    IoUtils.closeQuietly((AutoCloseable) null);
-                    return error;
-                }
-            } catch (Throwable th) {
-                th = th;
-                apkAssets = null;
-            }
-        } catch (IOException | RuntimeException | XmlPullParserException e2) {
-            e = e2;
-            apkAssets = null;
-        }
-        try {
-            try {
-                openXml = apkAssets.openXml("AndroidManifest.xml");
-            } catch (IOException | RuntimeException | XmlPullParserException e3) {
-                e = e3;
-            }
-            try {
-                try {
-                    if ((i & 32) != 0) {
-                        boolean z = (i & 16) != 0;
-                        Trace.traceBegin(262144L, "collectCertificates");
+                    apkAssetsLoadFromFd = fileDescriptor != null ? ApkAssets.loadFromFd(fileDescriptor, str, 0, null) : ApkAssets.loadFromPath(absolutePath);
+                    try {
                         try {
-                            ParseResult<SigningDetails> signingDetails2 = FrameworkParsingPackageUtils.getSigningDetails(parseInput, file.getAbsolutePath(), z, false, SigningDetails.UNKNOWN, 0);
-                            if (signingDetails2.isError()) {
-                                parseInput.setPackageNameForAudit(getPackageNameForAudit(openXml));
-                                ParseResult<ApkLite> error2 = parseInput.error(signingDetails2);
-                                IoUtils.closeQuietly(openXml);
-                                if (apkAssets != null) {
+                            xmlResourceParserOpenXml = apkAssetsLoadFromFd.openXml("AndroidManifest.xml");
+                        } catch (Throwable th) {
+                            th = th;
+                        }
+                        try {
+                            try {
+                                if ((i & 32) != 0) {
+                                    boolean z = (i & 16) != 0;
+                                    Trace.traceBegin(262144L, "collectCertificates");
                                     try {
-                                        apkAssets.close();
-                                    } catch (Throwable unused) {
+                                        ParseResult<SigningDetails> signingDetails = FrameworkParsingPackageUtils.getSigningDetails(parseInput, file.getAbsolutePath(), z, false, SigningDetails.UNKNOWN, 0);
+                                        if (signingDetails.isError()) {
+                                            parseInput.setPackageNameForAudit(getPackageNameForAudit(xmlResourceParserOpenXml));
+                                            ParseResult<ApkLite> parseResultError = parseInput.error(signingDetails);
+                                            IoUtils.closeQuietly(xmlResourceParserOpenXml);
+                                            if (apkAssetsLoadFromFd != null) {
+                                                try {
+                                                    apkAssetsLoadFromFd.close();
+                                                } catch (Throwable unused) {
+                                                }
+                                            }
+                                            return parseResultError;
+                                        }
+                                        result = signingDetails.getResult();
+                                        Trace.traceEnd(262144L);
+                                    } finally {
+                                        Trace.traceEnd(262144L);
+                                    }
+                                } else {
+                                    result = SigningDetails.UNKNOWN;
+                                }
+                                ParseResult<ApkLite> apkLite = parseApkLite(parseInput, absolutePath, xmlResourceParserOpenXml, result, i);
+                                IoUtils.closeQuietly(xmlResourceParserOpenXml);
+                                if (apkAssetsLoadFromFd != null) {
+                                    try {
+                                        apkAssetsLoadFromFd.close();
+                                    } catch (Throwable unused2) {
                                     }
                                 }
-                                return error2;
+                                return apkLite;
+                            } catch (IOException | RuntimeException | XmlPullParserException e) {
+                                e = e;
+                                xmlResourceParser = xmlResourceParserOpenXml;
+                                Slog.w(TAG, "Failed to parse " + absolutePath, e);
+                                ParseResult<ApkLite> parseResultError2 = parseInput.error(-102, "Failed to parse " + absolutePath, e);
+                                IoUtils.closeQuietly(xmlResourceParser);
+                                if (apkAssetsLoadFromFd != null) {
+                                    try {
+                                        apkAssetsLoadFromFd.close();
+                                    } catch (Throwable unused3) {
+                                    }
+                                }
+                                return parseResultError2;
                             }
-                            signingDetails = signingDetails2.getResult();
-                            Trace.traceEnd(262144L);
-                        } finally {
-                            Trace.traceEnd(262144L);
+                        } catch (Throwable th2) {
+                            th = th2;
+                            xmlResourceParser = xmlResourceParserOpenXml;
+                            IoUtils.closeQuietly(xmlResourceParser);
+                            if (apkAssetsLoadFromFd != null) {
+                                try {
+                                    apkAssetsLoadFromFd.close();
+                                } catch (Throwable unused4) {
+                                }
+                            }
+                            throw th;
                         }
-                    } else {
-                        signingDetails = SigningDetails.UNKNOWN;
+                    } catch (IOException | RuntimeException | XmlPullParserException e2) {
+                        e = e2;
                     }
-                    ParseResult<ApkLite> parseApkLite = parseApkLite(parseInput, absolutePath, openXml, signingDetails, i);
-                    IoUtils.closeQuietly(openXml);
-                    if (apkAssets != null) {
-                        try {
-                            apkAssets.close();
-                        } catch (Throwable unused2) {
-                        }
-                    }
-                    return parseApkLite;
-                } catch (Throwable th2) {
-                    th = th2;
-                    xmlResourceParser = openXml;
-                    IoUtils.closeQuietly(xmlResourceParser);
-                    if (apkAssets != null) {
-                        try {
-                            apkAssets.close();
-                        } catch (Throwable unused3) {
-                        }
-                    }
-                    throw th;
+                } catch (IOException | RuntimeException | XmlPullParserException e3) {
+                    e = e3;
+                    apkAssetsLoadFromFd = null;
                 }
-            } catch (IOException | RuntimeException | XmlPullParserException e4) {
-                e = e4;
-                xmlResourceParser = openXml;
-                Slog.w(TAG, "Failed to parse " + absolutePath, e);
-                ParseResult<ApkLite> error3 = parseInput.error(-102, "Failed to parse " + absolutePath, e);
-                IoUtils.closeQuietly(xmlResourceParser);
-                if (apkAssets != null) {
-                    try {
-                        apkAssets.close();
-                    } catch (Throwable unused4) {
-                    }
-                }
-                return error3;
+            } catch (Throwable th3) {
+                th = th3;
+                apkAssetsLoadFromFd = null;
             }
-        } catch (Throwable th3) {
-            th = th3;
+        } catch (IOException e4) {
+            Slog.w(TAG, "Failed to parse " + absolutePath, e4);
+            ParseResult<ApkLite> parseResultError3 = parseInput.error(-100, "Failed to parse " + absolutePath, e4);
+            IoUtils.closeQuietly((AutoCloseable) null);
+            return parseResultError3;
         }
     }
 
@@ -360,7 +369,7 @@ public class ApkLiteParseUtils {
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    /* JADX WARN: Code restructure failed: missing block: B:105:0x04c5, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:174:0x04c5, code lost:
     
         r47 = r15;
         r43 = r4;
@@ -379,7 +388,7 @@ public class ApkLiteParseUtils {
         r47 = r11;
         r11 = r57;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:19:0x062b, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:220:0x062b, code lost:
     
         r55 = r4;
         r54 = r8;
@@ -387,32 +396,536 @@ public class ApkLiteParseUtils {
         r57 = r11;
         r58 = r12;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:20:0x063d, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:221:0x063d, code lost:
     
         if ((r66 & 128) != 0) goto L226;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:22:0x0643, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:223:0x0643, code lost:
     
         if (android.content.pm.parsing.FrameworkParsingPackageUtils.checkRequiredSystemProperties(r57, r58) != false) goto L226;
      */
-    /* JADX WARN: Code restructure failed: missing block: B:23:0x0645, code lost:
+    /* JADX WARN: Code restructure failed: missing block: B:224:0x0645, code lost:
     
         r1 = "Skipping target and overlay pair " + r56 + " and " + r63 + ": overlay ignored due to required system property: " + r57 + " with value: " + r58;
         android.util.Slog.i(android.content.pm.parsing.ApkLiteParseUtils.TAG, r1);
      */
+    /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
     /* JADX WARN: Multi-variable type inference failed */
+    /* JADX WARN: Removed duplicated region for block: B:49:0x01d4  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private static android.content.pm.parsing.result.ParseResult<android.content.pm.parsing.ApkLite> parseApkLite(android.content.pm.parsing.result.ParseInput r62, java.lang.String r63, android.content.res.XmlResourceParser r64, android.content.pm.SigningDetails r65, int r66) throws java.io.IOException, org.xmlpull.v1.XmlPullParserException {
-        /*
-            Method dump skipped, instructions count: 1782
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.content.pm.parsing.ApkLiteParseUtils.parseApkLite(android.content.pm.parsing.result.ParseInput, java.lang.String, android.content.res.XmlResourceParser, android.content.pm.SigningDetails, int):android.content.pm.parsing.result.ParseResult");
+    private static ParseResult<ApkLite> parseApkLite(ParseInput parseInput, String str, XmlResourceParser xmlResourceParser, SigningDetails signingDetails, int i) throws XmlPullParserException, IOException, NumberFormatException {
+        Pair<String, String> pair;
+        int i2;
+        ArrayList arrayList;
+        String str2;
+        String str3;
+        String str4;
+        boolean z;
+        String str5;
+        boolean z2;
+        int i3;
+        boolean z3;
+        String[][] strArr;
+        long[] jArr;
+        int i4;
+        boolean z4;
+        int i5;
+        int i6;
+        ParseResult<?> packageSplitNames = parsePackageSplitNames(parseInput, xmlResourceParser);
+        if (packageSplitNames.isError()) {
+            return parseInput.error(packageSplitNames);
+        }
+        Pair<String, String> result = packageSplitNames.getResult();
+        ParseResult<Pair<Set<String>, Set<String>>> requiredSplitTypes = parseRequiredSplitTypes(parseInput, xmlResourceParser);
+        if (requiredSplitTypes.isError()) {
+            return parseInput.error(packageSplitNames);
+        }
+        Pair<Set<String>, Set<String>> result2 = requiredSplitTypes.getResult();
+        int attributeIntValue = xmlResourceParser.getAttributeIntValue("http://schemas.android.com/apk/res/android", "installLocation", -1);
+        int attributeIntValue2 = xmlResourceParser.getAttributeIntValue("http://schemas.android.com/apk/res/android", SmLib_IafdConstant.KEY_VERSION_CODE, 0);
+        int attributeIntValue3 = xmlResourceParser.getAttributeIntValue("http://schemas.android.com/apk/res/android", "versionCodeMajor", 0);
+        int attributeIntValue4 = xmlResourceParser.getAttributeIntValue("http://schemas.android.com/apk/res/android", "revisionCode", 0);
+        boolean attributeBooleanValue = xmlResourceParser.getAttributeBooleanValue(null, "coreApp", false);
+        boolean attributeBooleanValue2 = xmlResourceParser.getAttributeBooleanValue(null, "updatableSystem", true);
+        boolean attributeBooleanValue3 = xmlResourceParser.getAttributeBooleanValue("http://schemas.android.com/apk/res/android", "isolatedSplits", false);
+        boolean attributeBooleanValue4 = xmlResourceParser.getAttributeBooleanValue("http://schemas.android.com/apk/res/android", "isFeatureSplit", false);
+        boolean attributeBooleanValue5 = xmlResourceParser.getAttributeBooleanValue("http://schemas.android.com/apk/res/android", "isSplitRequired", false);
+        String attributeValue = xmlResourceParser.getAttributeValue(null, "configForSplit");
+        String attributeValue2 = xmlResourceParser.getAttributeValue(null, "emergencyInstaller");
+        ArrayList arrayList2 = new ArrayList();
+        String[][] strArr2 = (String[][]) Array.newInstance((Class<?>) String.class, 0, 0);
+        ArrayList arrayList3 = new ArrayList();
+        int i7 = 1;
+        boolean z5 = false;
+        String[][] strArr3 = (String[][]) Array.newInstance((Class<?>) String.class, 0, 0);
+        ArrayList arrayList4 = new ArrayList();
+        int depth = xmlResourceParser.getDepth() + 1;
+        ArrayList arrayList5 = new ArrayList();
+        long[] jArr2 = new long[0];
+        long[] jArr3 = new long[0];
+        boolean attributeBooleanValue6 = true;
+        int iIntValue = 1;
+        boolean attributeBooleanValue7 = false;
+        boolean attributeBooleanValue8 = false;
+        boolean attributeBooleanValue9 = false;
+        int attributeIntValue5 = 0;
+        boolean z6 = false;
+        int iIntValue2 = 0;
+        int attributeIntValue6 = 0;
+        boolean zIsDeviceAdminReceiver = false;
+        boolean z7 = false;
+        boolean z8 = false;
+        int attributeIntValue7 = 0;
+        String[][] strArr4 = strArr3;
+        String[][] strArr5 = strArr2;
+        String attributeValue3 = null;
+        String attributeValue4 = null;
+        String attributeValue5 = null;
+        String attributeValue6 = null;
+        int i8 = 2;
+        boolean attributeBooleanValue10 = false;
+        boolean attributeBooleanValue11 = false;
+        while (true) {
+            int next = xmlResourceParser.next();
+            boolean z9 = attributeBooleanValue5;
+            Pair<Set<String>, Set<String>> pair2 = result2;
+            if (next != i7) {
+                int i9 = 3;
+                if (next == 3) {
+                    if (xmlResourceParser.getDepth() >= depth) {
+                        i9 = 3;
+                    }
+                }
+                if (next != i9 && next != 4 && xmlResourceParser.getDepth() == depth) {
+                    if ("package-verifier".equals(xmlResourceParser.getName())) {
+                        VerifierInfo verifier = parseVerifier(xmlResourceParser);
+                        if (verifier != null) {
+                            arrayList5.add(verifier);
+                        }
+                    } else if ("application".equals(xmlResourceParser.getName())) {
+                        boolean z10 = z5;
+                        attributeBooleanValue8 = xmlResourceParser.getAttributeBooleanValue("http://schemas.android.com/apk/res/android", "debuggable", z10);
+                        attributeBooleanValue7 = xmlResourceParser.getAttributeBooleanValue("http://schemas.android.com/apk/res/android", "multiArch", z10);
+                        attributeBooleanValue10 = xmlResourceParser.getAttributeBooleanValue("http://schemas.android.com/apk/res/android", "use32bitAbi", z10);
+                        attributeBooleanValue6 = xmlResourceParser.getAttributeBooleanValue("http://schemas.android.com/apk/res/android", "extractNativeLibs", true);
+                        String str6 = "useEmbeddedDex";
+                        attributeBooleanValue11 = xmlResourceParser.getAttributeBooleanValue("http://schemas.android.com/apk/res/android", "useEmbeddedDex", false);
+                        int i10 = depth;
+                        attributeIntValue6 = xmlResourceParser.getAttributeIntValue("http://schemas.android.com/apk/res/android", "rollbackDataPolicy", 0);
+                        boolean zEquals = Manifest.permission.BIND_DEVICE_ADMIN.equals(xmlResourceParser.getAttributeValue("http://schemas.android.com/apk/res/android", "permission"));
+                        ArrayList arrayList6 = arrayList5;
+                        attributeIntValue7 = xmlResourceParser.getAttributeIntValue("http://schemas.android.com/apk/res/android", "pageSizeCompat", 0);
+                        int depth2 = xmlResourceParser.getDepth();
+                        Pair<String, String> pair3 = result;
+                        String str7 = attributeValue3;
+                        String str8 = attributeValue4;
+                        String str9 = attributeValue5;
+                        boolean attributeBooleanValue12 = z6;
+                        long[] jArrAppendLong = jArr3;
+                        String[][] strArr6 = strArr5;
+                        long[] jArrAppendLong2 = jArr2;
+                        String[][] strArr7 = strArr4;
+                        while (true) {
+                            int next2 = xmlResourceParser.next();
+                            String[][] strArr8 = strArr6;
+                            if (next2 != 1) {
+                                int i11 = 3;
+                                if (next2 == 3) {
+                                    if (xmlResourceParser.getDepth() > depth2) {
+                                        i11 = 3;
+                                    }
+                                }
+                                if (next2 == i11) {
+                                    str5 = str6;
+                                    z2 = zEquals;
+                                    i3 = depth2;
+                                    z3 = attributeBooleanValue12;
+                                    strArr = strArr8;
+                                    jArr = jArrAppendLong;
+                                } else {
+                                    if (next2 != 4 && xmlResourceParser.getDepth() == depth2 + 1) {
+                                        String name = xmlResourceParser.getName();
+                                        name.hashCode();
+                                        switch (name.hashCode()) {
+                                            case -1803294168:
+                                                if (!name.equals(TAG_SDK_LIBRARY)) {
+                                                    i4 = -1;
+                                                    break;
+                                                } else {
+                                                    i4 = 0;
+                                                    break;
+                                                }
+                                            case -1521117785:
+                                                if (name.equals(TAG_USES_SDK_LIBRARY)) {
+                                                    i4 = 1;
+                                                    break;
+                                                }
+                                                break;
+                                            case -1094759587:
+                                                if (name.equals(TAG_PROCESSES)) {
+                                                    i4 = i8;
+                                                    break;
+                                                }
+                                                break;
+                                            case -1056667556:
+                                                if (name.equals(TAG_STATIC_LIBRARY)) {
+                                                    i4 = 3;
+                                                    break;
+                                                }
+                                                break;
+                                            case -808719889:
+                                                if (name.equals("receiver")) {
+                                                    i4 = 4;
+                                                    break;
+                                                }
+                                                break;
+                                            case 8960125:
+                                                if (name.equals(TAG_USES_STATIC_LIBRARY)) {
+                                                    i4 = 5;
+                                                    break;
+                                                }
+                                                break;
+                                            case 166208699:
+                                                if (name.equals(TAG_LIBRARY)) {
+                                                    i4 = 6;
+                                                    break;
+                                                }
+                                                break;
+                                            case 178070147:
+                                                if (name.equals("profileable")) {
+                                                    i4 = 7;
+                                                    break;
+                                                }
+                                                break;
+                                        }
+                                        i3 = depth2;
+                                        long[] jArr4 = jArrAppendLong;
+                                        switch (i4) {
+                                            case 0:
+                                                z2 = zEquals;
+                                                boolean z11 = attributeBooleanValue12;
+                                                String attributeValue7 = xmlResourceParser.getAttributeValue("http://schemas.android.com/apk/res/android", "name");
+                                                int attributeIntValue8 = xmlResourceParser.getAttributeIntValue("http://schemas.android.com/apk/res/android", "versionMajor", -1);
+                                                if (attributeValue7 == null || attributeIntValue8 < 0) {
+                                                    break;
+                                                } else {
+                                                    str5 = str6;
+                                                    arrayList4.add(new SharedLibraryInfo(attributeValue7, attributeIntValue8, 3));
+                                                    jArrAppendLong = jArr4;
+                                                    strArr6 = strArr8;
+                                                    attributeBooleanValue12 = z11;
+                                                    z7 = true;
+                                                    depth2 = i3;
+                                                    zEquals = z2;
+                                                    str6 = str5;
+                                                }
+                                                break;
+                                            case 1:
+                                                boolean z12 = attributeBooleanValue12;
+                                                String attributeValue8 = xmlResourceParser.getAttributeValue("http://schemas.android.com/apk/res/android", "name");
+                                                z2 = zEquals;
+                                                long jConvertValueToInt = XmlUtils.convertValueToInt(xmlResourceParser.getAttributeValue("http://schemas.android.com/apk/res/android", "versionMajor"), -1);
+                                                String attributeValue9 = xmlResourceParser.getAttributeValue("http://schemas.android.com/apk/res/android", "certDigest");
+                                                if (attributeValue8 == null || attributeValue8.isBlank() || jConvertValueToInt < 0) {
+                                                    break;
+                                                } else if (arrayList2.contains(attributeValue8)) {
+                                                    break;
+                                                } else {
+                                                    arrayList2.add(attributeValue8);
+                                                    jArrAppendLong = ArrayUtils.appendLong(jArr4, jConvertValueToInt, true);
+                                                    String strNormalizeCertDigest = normalizeCertDigest(attributeValue9);
+                                                    if ("".equals(strNormalizeCertDigest)) {
+                                                        strNormalizeCertDigest = SystemProperties.get("debug.pm.uses_sdk_library_default_cert_digest", "");
+                                                        try {
+                                                            HexEncoding.decode(strNormalizeCertDigest, false);
+                                                        } catch (IllegalArgumentException unused) {
+                                                            strNormalizeCertDigest = "";
+                                                        }
+                                                    }
+                                                    strArr6 = (String[][]) ArrayUtils.appendElement(String[].class, strArr8, new String[]{strNormalizeCertDigest}, true);
+                                                    str5 = str6;
+                                                    attributeBooleanValue12 = z12;
+                                                    depth2 = i3;
+                                                    zEquals = z2;
+                                                    str6 = str5;
+                                                }
+                                                break;
+                                            case 2:
+                                                boolean z13 = attributeBooleanValue12;
+                                                int i12 = i8;
+                                                int depth3 = xmlResourceParser.getDepth();
+                                                while (true) {
+                                                    int next3 = xmlResourceParser.next();
+                                                    if (next3 != 1 && (next3 != 3 || xmlResourceParser.getDepth() > depth3)) {
+                                                        if (next3 != 3 && next3 != 4 && xmlResourceParser.getDepth() == depth3 + 1 && xmlResourceParser.getName().equals(TAG_PROCESS) && Flags.enablePerProcessUseEmbeddedDexAttr()) {
+                                                            attributeBooleanValue11 |= xmlResourceParser.getAttributeBooleanValue("http://schemas.android.com/apk/res/android", str6, false);
+                                                        }
+                                                    }
+                                                }
+                                                str5 = str6;
+                                                z2 = zEquals;
+                                                i8 = i12;
+                                                strArr6 = strArr8;
+                                                attributeBooleanValue12 = z13;
+                                                jArrAppendLong = jArr4;
+                                                depth2 = i3;
+                                                zEquals = z2;
+                                                str6 = str5;
+                                                break;
+                                            case 3:
+                                                ArrayList arrayList7 = arrayList4;
+                                                boolean z14 = attributeBooleanValue12;
+                                                String attributeValue10 = xmlResourceParser.getAttributeValue("http://schemas.android.com/apk/res/android", "name");
+                                                int attributeIntValue9 = xmlResourceParser.getAttributeIntValue("http://schemas.android.com/apk/res/android", "version", -1);
+                                                int attributeIntValue10 = xmlResourceParser.getAttributeIntValue("http://schemas.android.com/apk/res/android", "versionMajor", 0);
+                                                if (attributeValue10 == null || attributeIntValue9 < 0) {
+                                                    break;
+                                                } else {
+                                                    arrayList4 = arrayList7;
+                                                    arrayList4.add(new SharedLibraryInfo(attributeValue10, PackageInfo.composeLongVersionCode(attributeIntValue10, attributeIntValue9), i8));
+                                                    str5 = str6;
+                                                    z2 = zEquals;
+                                                    strArr6 = strArr8;
+                                                    attributeBooleanValue12 = z14;
+                                                    jArrAppendLong = jArr4;
+                                                    z8 = true;
+                                                    depth2 = i3;
+                                                    zEquals = z2;
+                                                    str6 = str5;
+                                                }
+                                                break;
+                                            case 4:
+                                                zIsDeviceAdminReceiver |= isDeviceAdminReceiver(xmlResourceParser, zEquals);
+                                                z2 = zEquals;
+                                                strArr6 = strArr8;
+                                                jArrAppendLong = jArr4;
+                                                str5 = str6;
+                                                depth2 = i3;
+                                                zEquals = z2;
+                                                str6 = str5;
+                                            case 5:
+                                                z2 = zEquals;
+                                                String attributeValue11 = xmlResourceParser.getAttributeValue("http://schemas.android.com/apk/res/android", "name");
+                                                ArrayList arrayList8 = arrayList4;
+                                                boolean z15 = attributeBooleanValue12;
+                                                long attributeIntValue11 = xmlResourceParser.getAttributeIntValue("http://schemas.android.com/apk/res/android", "version", -1);
+                                                String attributeValue12 = xmlResourceParser.getAttributeValue("http://schemas.android.com/apk/res/android", "certDigest");
+                                                if (attributeValue11 == null || attributeValue11.isBlank() || attributeIntValue11 < 0 || attributeValue12 == null) {
+                                                    break;
+                                                } else if (arrayList3.contains(attributeValue11)) {
+                                                    break;
+                                                } else {
+                                                    arrayList3.add(attributeValue11);
+                                                    jArrAppendLong2 = ArrayUtils.appendLong(jArrAppendLong2, attributeIntValue11, true);
+                                                    String strNormalizeCertDigest2 = normalizeCertDigest(attributeValue12);
+                                                    ParseResult<String[]> additionalCertificates = parseAdditionalCertificates(parseInput, xmlResourceParser);
+                                                    if (additionalCertificates.isError()) {
+                                                        break;
+                                                    } else {
+                                                        String[] result3 = additionalCertificates.getResult();
+                                                        String[] strArr9 = new String[result3.length + 1];
+                                                        strArr9[0] = strNormalizeCertDigest2;
+                                                        System.arraycopy(result3, 0, strArr9, 1, result3.length);
+                                                        strArr7 = (String[][]) ArrayUtils.appendElement(String[].class, strArr7, strArr9, true);
+                                                        strArr6 = strArr8;
+                                                        attributeBooleanValue12 = z15;
+                                                        jArrAppendLong = jArr4;
+                                                        arrayList4 = arrayList8;
+                                                        str5 = str6;
+                                                        depth2 = i3;
+                                                        zEquals = z2;
+                                                        str6 = str5;
+                                                    }
+                                                }
+                                                break;
+                                            case 6:
+                                                String attributeValue13 = xmlResourceParser.getAttributeValue("http://schemas.android.com/apk/res/android", "name");
+                                                if (attributeValue13 == null) {
+                                                    break;
+                                                } else {
+                                                    z2 = zEquals;
+                                                    arrayList4.add(new SharedLibraryInfo(attributeValue13.intern(), -1L, 1));
+                                                    str5 = str6;
+                                                    strArr6 = strArr8;
+                                                    jArrAppendLong = jArr4;
+                                                    depth2 = i3;
+                                                    zEquals = z2;
+                                                    str6 = str5;
+                                                }
+                                            case 7:
+                                                attributeBooleanValue12 = xmlResourceParser.getAttributeBooleanValue("http://schemas.android.com/apk/res/android", "shell", attributeBooleanValue12);
+                                                str5 = str6;
+                                                z2 = zEquals;
+                                                strArr6 = strArr8;
+                                                jArrAppendLong = jArr4;
+                                                depth2 = i3;
+                                                zEquals = z2;
+                                                str6 = str5;
+                                            default:
+                                                z2 = zEquals;
+                                                str5 = str6;
+                                                strArr6 = strArr8;
+                                                jArrAppendLong = jArr4;
+                                                depth2 = i3;
+                                                zEquals = z2;
+                                                str6 = str5;
+                                        }
+                                        return parseInput.error(packageSplitNames);
+                                    }
+                                    str5 = str6;
+                                    jArr = jArrAppendLong;
+                                    z2 = zEquals;
+                                    i3 = depth2;
+                                    z3 = attributeBooleanValue12;
+                                    strArr = strArr8;
+                                }
+                                jArrAppendLong = jArr;
+                                strArr6 = strArr;
+                                attributeBooleanValue12 = z3;
+                                depth2 = i3;
+                                zEquals = z2;
+                                str6 = str5;
+                            }
+                        }
+                    } else {
+                        pair = result;
+                        i2 = depth;
+                        arrayList = arrayList5;
+                        str2 = attributeValue3;
+                        str3 = attributeValue4;
+                        str4 = attributeValue5;
+                        if ("overlay".equals(xmlResourceParser.getName())) {
+                            attributeValue4 = xmlResourceParser.getAttributeValue("http://schemas.android.com/apk/res/android", "requiredSystemPropertyName");
+                            attributeValue5 = xmlResourceParser.getAttributeValue("http://schemas.android.com/apk/res/android", "requiredSystemPropertyValue");
+                            attributeValue3 = xmlResourceParser.getAttributeValue("http://schemas.android.com/apk/res/android", "targetPackage");
+                            attributeBooleanValue9 = xmlResourceParser.getAttributeBooleanValue("http://schemas.android.com/apk/res/android", "isStatic", false);
+                            attributeIntValue5 = xmlResourceParser.getAttributeIntValue("http://schemas.android.com/apk/res/android", "priority", 0);
+                            z5 = false;
+                            attributeBooleanValue5 = z9;
+                            result2 = pair2;
+                            depth = i2;
+                            arrayList5 = arrayList;
+                            result = pair;
+                        } else {
+                            z = false;
+                            if (!"uses-split".equals(xmlResourceParser.getName())) {
+                                if ("uses-sdk".equals(xmlResourceParser.getName())) {
+                                    String attributeValue14 = xmlResourceParser.getAttributeValue("http://schemas.android.com/apk/res/android", "minSdkVersion");
+                                    String attributeValue15 = xmlResourceParser.getAttributeValue("http://schemas.android.com/apk/res/android", "targetSdkVersion");
+                                    if (TextUtils.isEmpty(attributeValue14)) {
+                                        i7 = 1;
+                                        z4 = false;
+                                        i5 = 1;
+                                        attributeValue14 = null;
+                                    } else {
+                                        try {
+                                            i5 = Integer.parseInt(attributeValue14);
+                                            attributeValue14 = null;
+                                            z4 = true;
+                                            i7 = 1;
+                                        } catch (NumberFormatException unused2) {
+                                            i7 = 1;
+                                            z4 = !TextUtils.isEmpty(attributeValue14);
+                                            i5 = 1;
+                                        }
+                                    }
+                                    if (TextUtils.isEmpty(attributeValue15)) {
+                                        attributeValue15 = attributeValue14;
+                                        i6 = i5;
+                                    } else {
+                                        try {
+                                            i6 = Integer.parseInt(attributeValue15);
+                                            attributeValue15 = null;
+                                        } catch (NumberFormatException unused3) {
+                                            if (!z4) {
+                                                attributeValue14 = attributeValue15;
+                                            }
+                                            i6 = 0;
+                                        }
+                                    }
+                                    boolean z16 = (i & 512) != 0 ? i7 : 0;
+                                    String[] strArr10 = SDK_CODENAMES;
+                                    ParseResult<?> parseResultComputeTargetSdkVersion = FrameworkParsingPackageUtils.computeTargetSdkVersion(i6, attributeValue15, strArr10, parseInput, z16);
+                                    if (parseResultComputeTargetSdkVersion.isError()) {
+                                        return parseInput.error(parseResultComputeTargetSdkVersion);
+                                    }
+                                    iIntValue2 = parseResultComputeTargetSdkVersion.getResult().intValue();
+                                    ParseResult<?> parseResultComputeMinSdkVersion = FrameworkParsingPackageUtils.computeMinSdkVersion(i5, attributeValue14, SDK_VERSION, strArr10, parseInput);
+                                    if (parseResultComputeMinSdkVersion.isError()) {
+                                        return parseInput.error(parseResultComputeMinSdkVersion);
+                                    }
+                                    iIntValue = parseResultComputeMinSdkVersion.getResult().intValue();
+                                }
+                                z5 = z;
+                                attributeBooleanValue5 = z9;
+                                result2 = pair2;
+                                depth = i2;
+                                arrayList5 = arrayList;
+                                result = pair;
+                                attributeValue3 = str2;
+                                attributeValue4 = str3;
+                                attributeValue5 = str4;
+                            } else if (attributeValue6 != null) {
+                                Slog.w(TAG, "Only one <uses-split> permitted. Ignoring others.");
+                            } else {
+                                attributeValue6 = xmlResourceParser.getAttributeValue("http://schemas.android.com/apk/res/android", "name");
+                                if (attributeValue6 == null) {
+                                    return parseInput.error(-108, "<uses-split> tag requires 'android:name' attribute");
+                                }
+                                z5 = false;
+                                attributeBooleanValue5 = z9;
+                                result2 = pair2;
+                                depth = i2;
+                                arrayList5 = arrayList;
+                                result = pair;
+                                attributeValue3 = str2;
+                                attributeValue4 = str3;
+                                attributeValue5 = str4;
+                            }
+                            i7 = 1;
+                            z5 = z;
+                            attributeBooleanValue5 = z9;
+                            result2 = pair2;
+                            depth = i2;
+                            arrayList5 = arrayList;
+                            result = pair;
+                            attributeValue3 = str2;
+                            attributeValue4 = str3;
+                            attributeValue5 = str4;
+                        }
+                        i7 = 1;
+                    }
+                }
+                pair = result;
+                i2 = depth;
+                arrayList = arrayList5;
+                str2 = attributeValue3;
+                str3 = attributeValue4;
+                str4 = attributeValue5;
+                z = z5;
+                i7 = 1;
+                z5 = z;
+                attributeBooleanValue5 = z9;
+                result2 = pair2;
+                depth = i2;
+                arrayList5 = arrayList;
+                result = pair;
+                attributeValue3 = str2;
+                attributeValue4 = str3;
+                attributeValue5 = str4;
+            }
+        }
     }
 
+    /* JADX WARN: Code restructure failed: missing block: B:20:0x0058, code lost:
+    
+        return r4.success(r0);
+     */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     private static ParseResult<String[]> parseAdditionalCertificates(ParseInput parseInput, XmlResourceParser xmlResourceParser) throws XmlPullParserException, IOException {
         String[] strArr = EmptyArray.STRING;
         int depth = xmlResourceParser.getDepth();
@@ -429,7 +942,6 @@ public class ApkLiteParseUtils {
                 strArr = (String[]) ArrayUtils.appendElement(String.class, strArr, normalizeCertDigest(attributeValue));
             }
         }
-        return parseInput.success(strArr);
     }
 
     private static String normalizeCertDigest(String str) {
@@ -455,121 +967,79 @@ public class ApkLiteParseUtils {
         return z2;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:30:0x0096  */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    public static android.content.pm.parsing.result.ParseResult<android.util.Pair<java.lang.String, java.lang.String>> parsePackageSplitNames(android.content.pm.parsing.result.ParseInput r5, android.content.res.XmlResourceParser r6) throws java.io.IOException, org.xmlpull.v1.XmlPullParserException {
-        /*
-        L0:
-            int r0 = r6.next()
-            r1 = 2
-            r2 = 1
-            if (r0 == r1) goto Lb
-            if (r0 == r2) goto Lb
-            goto L0
-        Lb:
-            r3 = -108(0xffffffffffffff94, float:NaN)
-            if (r0 == r1) goto L16
-            java.lang.String r6 = "No start tag found"
-            android.content.pm.parsing.result.ParseResult r5 = r5.error(r3, r6)
-            return r5
-        L16:
-            java.lang.String r0 = r6.getName()
-            java.lang.String r1 = "manifest"
-            boolean r0 = r0.equals(r1)
-            if (r0 != 0) goto L2a
-            java.lang.String r6 = "No <manifest> tag"
-            android.content.pm.parsing.result.ParseResult r5 = r5.error(r3, r6)
-            return r5
-        L2a:
-            java.lang.String r0 = "package"
-            r1 = 0
-            java.lang.String r0 = r6.getAttributeValue(r1, r0)
-            java.lang.String r3 = "android"
-            boolean r3 = r3.equals(r0)
-            r4 = -106(0xffffffffffffff96, float:NaN)
-            if (r3 != 0) goto L5d
-            android.content.pm.parsing.result.ParseResult r2 = android.content.pm.parsing.FrameworkParsingPackageUtils.validateName(r5, r0, r2, r2)
-            boolean r3 = r2.isError()
-            if (r3 == 0) goto L5d
-            java.lang.StringBuilder r6 = new java.lang.StringBuilder
-            java.lang.String r0 = "Invalid manifest package: "
-            r6.<init>(r0)
-            java.lang.String r0 = r2.getErrorMessage()
-            r6.append(r0)
-            java.lang.String r6 = r6.toString()
-            android.content.pm.parsing.result.ParseResult r5 = r5.error(r4, r6)
-            return r5
-        L5d:
-            java.lang.String r2 = "split"
-            java.lang.String r6 = r6.getAttributeValue(r1, r2)
-            if (r6 == 0) goto L8f
-            int r2 = r6.length()
-            if (r2 != 0) goto L6d
-            goto L90
-        L6d:
-            r1 = 0
-            android.content.pm.parsing.result.ParseResult r1 = android.content.pm.parsing.FrameworkParsingPackageUtils.validateName(r5, r6, r1, r1)
-            boolean r2 = r1.isError()
-            if (r2 == 0) goto L8f
-            java.lang.StringBuilder r6 = new java.lang.StringBuilder
-            java.lang.String r0 = "Invalid manifest split: "
-            r6.<init>(r0)
-            java.lang.String r0 = r1.getErrorMessage()
-            r6.append(r0)
-            java.lang.String r6 = r6.toString()
-            android.content.pm.parsing.result.ParseResult r5 = r5.error(r4, r6)
-            return r5
-        L8f:
-            r1 = r6
-        L90:
-            java.lang.String r6 = r0.intern()
-            if (r1 == 0) goto L9a
-            java.lang.String r1 = r1.intern()
-        L9a:
-            android.util.Pair r6 = android.util.Pair.create(r6, r1)
-            android.content.pm.parsing.result.ParseResult r5 = r5.success(r6)
-            return r5
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.content.pm.parsing.ApkLiteParseUtils.parsePackageSplitNames(android.content.pm.parsing.result.ParseInput, android.content.res.XmlResourceParser):android.content.pm.parsing.result.ParseResult");
+    public static ParseResult<Pair<String, String>> parsePackageSplitNames(ParseInput parseInput, XmlResourceParser xmlResourceParser) throws XmlPullParserException, IOException {
+        int next;
+        do {
+            next = xmlResourceParser.next();
+            if (next == 2) {
+                break;
+            }
+        } while (next != 1);
+        if (next != 2) {
+            return parseInput.error(-108, "No start tag found");
+        }
+        if (!xmlResourceParser.getName().equals("manifest")) {
+            return parseInput.error(-108, "No <manifest> tag");
+        }
+        String strIntern = null;
+        String attributeValue = xmlResourceParser.getAttributeValue(null, "package");
+        if (!"android".equals(attributeValue)) {
+            ParseResult parseResultValidateName = FrameworkParsingPackageUtils.validateName(parseInput, attributeValue, true, true);
+            if (parseResultValidateName.isError()) {
+                return parseInput.error(-106, "Invalid manifest package: " + parseResultValidateName.getErrorMessage());
+            }
+        }
+        String attributeValue2 = xmlResourceParser.getAttributeValue(null, "split");
+        if (attributeValue2 == null) {
+            strIntern = attributeValue2;
+        } else if (attributeValue2.length() != 0) {
+            ParseResult parseResultValidateName2 = FrameworkParsingPackageUtils.validateName(parseInput, attributeValue2, false, false);
+            if (parseResultValidateName2.isError()) {
+                return parseInput.error(-106, "Invalid manifest split: " + parseResultValidateName2.getErrorMessage());
+            }
+            strIntern = attributeValue2;
+        }
+        String strIntern2 = attributeValue.intern();
+        if (strIntern != null) {
+            strIntern = strIntern.intern();
+        }
+        return parseInput.success(Pair.create(strIntern2, strIntern));
     }
 
     public static ParseResult<Pair<Set<String>, Set<String>>> parseRequiredSplitTypes(ParseInput parseInput, XmlResourceParser xmlResourceParser) {
-        Set<String> set;
+        Set<String> result;
         String attributeValue = xmlResourceParser.getAttributeValue("http://schemas.android.com/apk/res/android", "requiredSplitTypes");
-        Set<String> set2 = null;
+        Set<String> result2 = null;
         if (TextUtils.isEmpty(attributeValue)) {
-            set = null;
+            result = null;
         } else {
-            ParseResult<Set<String>> separateAndValidateSplitTypes = separateAndValidateSplitTypes(parseInput, attributeValue);
-            if (separateAndValidateSplitTypes.isError()) {
-                return parseInput.error(separateAndValidateSplitTypes);
+            ParseResult<Set<String>> parseResultSeparateAndValidateSplitTypes = separateAndValidateSplitTypes(parseInput, attributeValue);
+            if (parseResultSeparateAndValidateSplitTypes.isError()) {
+                return parseInput.error(parseResultSeparateAndValidateSplitTypes);
             }
-            set = separateAndValidateSplitTypes.getResult();
+            result = parseResultSeparateAndValidateSplitTypes.getResult();
         }
         String attributeValue2 = xmlResourceParser.getAttributeValue("http://schemas.android.com/apk/res/android", "splitTypes");
         if (!TextUtils.isEmpty(attributeValue2)) {
-            ParseResult<Set<String>> separateAndValidateSplitTypes2 = separateAndValidateSplitTypes(parseInput, attributeValue2);
-            if (separateAndValidateSplitTypes2.isError()) {
-                return parseInput.error(separateAndValidateSplitTypes2);
+            ParseResult<Set<String>> parseResultSeparateAndValidateSplitTypes2 = separateAndValidateSplitTypes(parseInput, attributeValue2);
+            if (parseResultSeparateAndValidateSplitTypes2.isError()) {
+                return parseInput.error(parseResultSeparateAndValidateSplitTypes2);
             }
-            set2 = separateAndValidateSplitTypes2.getResult();
+            result2 = parseResultSeparateAndValidateSplitTypes2.getResult();
         }
-        return parseInput.success(Pair.create(set, set2));
+        return parseInput.success(Pair.create(result, result2));
     }
 
     private static ParseResult<Set<String>> separateAndValidateSplitTypes(ParseInput parseInput, String str) {
         ArraySet arraySet = new ArraySet();
         for (String str2 : str.trim().split(",")) {
-            String trim = str2.trim();
-            ParseResult validateName = FrameworkParsingPackageUtils.validateName(parseInput, trim, false, true);
-            if (validateName.isError()) {
-                return parseInput.error(-108, "Invalid manifest split types: " + validateName.getErrorMessage());
+            String strTrim = str2.trim();
+            ParseResult parseResultValidateName = FrameworkParsingPackageUtils.validateName(parseInput, strTrim, false, true);
+            if (parseResultValidateName.isError()) {
+                return parseInput.error(-108, "Invalid manifest split types: " + parseResultValidateName.getErrorMessage());
             }
-            if (!arraySet.add(trim)) {
-                Slog.w(TAG, trim + " was defined multiple times");
+            if (!arraySet.add(strTrim)) {
+                Slog.w(TAG, strTrim + " was defined multiple times");
             }
         }
         return parseInput.success(arraySet);
@@ -582,12 +1052,12 @@ public class ApkLiteParseUtils {
             Slog.i(TAG, "verifier package name was null; skipping");
             return null;
         }
-        PublicKey parsePublicKey = FrameworkParsingPackageUtils.parsePublicKey(attributeValue2);
-        if (parsePublicKey == null) {
+        PublicKey publicKey = FrameworkParsingPackageUtils.parsePublicKey(attributeValue2);
+        if (publicKey == null) {
             Slog.i(TAG, "Unable to parse verifier public key for " + attributeValue);
             return null;
         }
-        return new VerifierInfo(attributeValue, parsePublicKey);
+        return new VerifierInfo(attributeValue, publicKey);
     }
 
     private static class SplitNameComparator implements Comparator<String> {

@@ -163,23 +163,23 @@ public class IUXColorUtils {
         } else {
             float f10 = f9 * 6.0f;
             float f11 = f10 != 6.0f ? f10 : 0.0f;
-            int floor = (int) Math.floor(f11);
+            int iFloor = (int) Math.floor(f11);
             float f12 = (1.0f - f7) * f8;
-            float f13 = f11 - floor;
+            float f13 = f11 - iFloor;
             float f14 = (1.0f - (f7 * f13)) * f8;
             float f15 = (1.0f - (f7 * (1.0f - f13))) * f8;
-            if (floor == 0) {
+            if (iFloor == 0) {
                 f12 = f15;
                 f15 = f12;
-            } else if (floor != 1) {
-                if (floor == 2) {
+            } else if (iFloor != 1) {
+                if (iFloor == 2) {
                     f5 = f12;
                     f12 = f8;
-                } else if (floor == 3) {
+                } else if (iFloor == 3) {
                     f15 = f8;
                     f8 = f12;
                     f12 = f14;
-                } else if (floor != 4) {
+                } else if (iFloor != 4) {
                     f15 = f14;
                 } else {
                     f5 = f15;
@@ -234,9 +234,9 @@ public class IUXColorUtils {
 
     public static float[] interpolateHSV(float[] fArr, float[] fArr2, float f) {
         float f2;
-        float abs = Math.abs(fArr[0] - fArr2[0]);
-        if (abs > 180.0f) {
-            float f3 = (360.0f - abs) * f;
+        float fAbs = Math.abs(fArr[0] - fArr2[0]);
+        if (fAbs > 180.0f) {
+            float f3 = (360.0f - fAbs) * f;
             float f4 = fArr[0];
             if (f4 < fArr2[0]) {
                 f2 = f4 - f3;
@@ -274,9 +274,9 @@ public class IUXColorUtils {
     }
 
     public static double colorDistanceHueFast(float f, float f2) {
-        float cos = IUXMathUtils.cos(f);
-        float sin = IUXMathUtils.sin(f);
-        return Math.toDegrees(Math.acos((cos * IUXMathUtils.cos(f2)) + (sin * IUXMathUtils.sin(f2))));
+        float fCos = IUXMathUtils.cos(f);
+        float fSin = IUXMathUtils.sin(f);
+        return Math.toDegrees(Math.acos((fCos * IUXMathUtils.cos(f2)) + (fSin * IUXMathUtils.sin(f2))));
     }
 
     public static double colorDistance_hue(float[] fArr, float[] fArr2) {
@@ -286,9 +286,9 @@ public class IUXColorUtils {
     public static double hsvDistanceSquare2(float[] fArr, float[] fArr2, float[] fArr3) {
         double[] dArr = {Math.cos(Math.toRadians(fArr[0])), Math.sin(Math.toRadians(fArr[0]))};
         double[] dArr2 = {Math.cos(Math.toRadians(fArr2[0])), Math.sin(Math.toRadians(fArr2[0]))};
-        double acos = Math.acos((dArr[0] * dArr2[0]) + (dArr[1] * dArr2[1])) / 3.141592653589793d;
+        double dAcos = Math.acos((dArr[0] * dArr2[0]) + (dArr[1] * dArr2[1])) / 3.141592653589793d;
         double d = fArr2[1] - fArr[1];
-        double d2 = acos * fArr3[0] * 1.0d;
+        double d2 = dAcos * fArr3[0] * 1.0d;
         double d3 = d * fArr3[1] * 1.0d;
         double d4 = (fArr2[2] - fArr[2]) * fArr3[2] * 1.0d;
         return (d2 * d2) + (d3 * d3) + (d4 * d4);
@@ -297,9 +297,9 @@ public class IUXColorUtils {
     public static double colorDistance_hsv_square2(float[] fArr, float[] fArr2, float[] fArr3) {
         double[] dArr = {Math.cos(Math.toRadians(fArr[0])), Math.sin(Math.toRadians(fArr[0]))};
         double[] dArr2 = {Math.cos(Math.toRadians(fArr2[0])), Math.sin(Math.toRadians(fArr2[0]))};
-        double acos = Math.acos((dArr[0] * dArr2[0]) + (dArr[1] * dArr2[1])) / 3.141592653589793d;
+        double dAcos = Math.acos((dArr[0] * dArr2[0]) + (dArr[1] * dArr2[1])) / 3.141592653589793d;
         double d = fArr2[1] - fArr[1];
-        double d2 = acos * fArr3[0] * 1.0d;
+        double d2 = dAcos * fArr3[0] * 1.0d;
         double d3 = d * fArr3[1] * 1.0d;
         double d4 = (fArr2[2] - fArr[2]) * fArr3[2] * 1.0d;
         return (d2 * d2) + (d3 * d3) + (d4 * d4);
@@ -328,12 +328,12 @@ public class IUXColorUtils {
         float f2 = fArr[2];
         float f3 = fArr[0];
         float f4 = fArr[1] * f2 * f;
-        float cos = IUXMathUtils.cos(f3) * f4;
-        float sin = IUXMathUtils.sin(f3) * f4;
+        float fCos = IUXMathUtils.cos(f3) * f4;
+        float fSin = IUXMathUtils.sin(f3) * f4;
         float f5 = fArr2[2];
         float f6 = fArr2[0];
         float f7 = fArr2[1] * f5 * f;
-        return IUXMathUtils.distanceSqrt2(cos - (IUXMathUtils.cos(f6) * f7), sin - (IUXMathUtils.sin(f6) * f7), f2 - f5);
+        return IUXMathUtils.distanceSqrt2(fCos - (IUXMathUtils.cos(f6) * f7), fSin - (IUXMathUtils.sin(f6) * f7), f2 - f5);
     }
 
     public static float[] getHsvPositionFromCornSpace(float[] fArr, float f) {
@@ -368,12 +368,12 @@ public class IUXColorUtils {
         float f2 = fArr[2];
         float f3 = fArr[0];
         float f4 = fArr[1] * f2 * f;
-        float cos = IUXMathUtils.cos(f3) * f4;
-        float sin = IUXMathUtils.sin(f3) * f4;
+        float fCos = IUXMathUtils.cos(f3) * f4;
+        float fSin = IUXMathUtils.sin(f3) * f4;
         float f5 = fArr2[2];
         float f6 = fArr2[0];
         float f7 = fArr2[1] * f5 * f;
-        return IUXMathUtils.distanceSqrt2(cos - (IUXMathUtils.cos(f6) * f7), sin - (IUXMathUtils.sin(f6) * f7), f2 - f5);
+        return IUXMathUtils.distanceSqrt2(fCos - (IUXMathUtils.cos(f6) * f7), fSin - (IUXMathUtils.sin(f6) * f7), f2 - f5);
     }
 
     public static double[] getHsvPositionFromCornSpaceDouble(float[] fArr, double d) {
@@ -394,14 +394,14 @@ public class IUXColorUtils {
     public static double colorDistanceHSV(float[] fArr, float[] fArr2, float[] fArr3) {
         double[] dArr = {Math.cos(Math.toRadians(fArr[0])), Math.sin(Math.toRadians(fArr[0]))};
         double[] dArr2 = {Math.cos(Math.toRadians(fArr2[0])), Math.sin(Math.toRadians(fArr2[0]))};
-        double acos = Math.acos((dArr[0] * dArr2[0]) + (dArr[1] * dArr2[1])) / 3.141592653589793d;
+        double dAcos = Math.acos((dArr[0] * dArr2[0]) + (dArr[1] * dArr2[1])) / 3.141592653589793d;
         double d = fArr2[1] - fArr[1];
         double d2 = fArr2[2] - fArr[2];
         float f = fArr3[0];
         float f2 = fArr3[1];
         float f3 = fArr3[2];
         double d3 = 1.0f / ((f + f2) + f3);
-        return (acos * f * d3) + (d * f2 * d3) + (d2 * f3 * d3);
+        return (dAcos * f * d3) + (d * f2 * d3) + (d2 * f3 * d3);
     }
 
     public static double colorDistance_hsv(float[] fArr, float[] fArr2, float[] fArr3) {
@@ -521,15 +521,15 @@ public class IUXColorUtils {
     }
 
     public static boolean checkSameHSV(float[] fArr, float[] fArr2, float f) {
-        boolean checkGrayScaleWithSV = checkGrayScaleWithSV(fArr, 0.12f, 0.25f);
-        if (checkGrayScaleWithSV == checkGrayScaleWithSV(fArr2, 0.12f, 0.25f)) {
+        boolean zCheckGrayScaleWithSV = checkGrayScaleWithSV(fArr, 0.12f, 0.25f);
+        if (zCheckGrayScaleWithSV == checkGrayScaleWithSV(fArr2, 0.12f, 0.25f)) {
             float[] fArr3 = {1.0f, 0.35f, 0.65f};
             float f2 = 1.7320508f * f;
             float f3 = f2 * f2;
             float[] fArr4 = {0.0f, 0.0f, 1.0f};
             float f4 = f * 1.0f;
             float f5 = f4 * f4;
-            if (checkGrayScaleWithSV) {
+            if (zCheckGrayScaleWithSV) {
                 f3 = f5;
                 fArr3 = fArr4;
             }
@@ -545,8 +545,8 @@ public class IUXColorUtils {
     }
 
     public static int multipleColorValue(int i, float f) {
-        float min = Math.min(f, 1.0f);
-        return Color.rgb((int) (Color.red(i) * min), (int) (Color.green(i) * min), (int) (Color.blue(i) * min));
+        float fMin = Math.min(f, 1.0f);
+        return Color.rgb((int) (Color.red(i) * fMin), (int) (Color.green(i) * fMin), (int) (Color.blue(i) * fMin));
     }
 
     public static int addColorColor(int i, int i2) {
@@ -599,10 +599,10 @@ public class IUXColorUtils {
         PaintDrawable paintDrawable = new PaintDrawable();
         paintDrawable.setShape(new RectShape());
         paintDrawable.setShaderFactory(shaderFactory);
-        Bitmap createBitmap = Bitmap.createBitmap(i3, i4, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(createBitmap);
+        Bitmap bitmapCreateBitmap = Bitmap.createBitmap(i3, i4, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmapCreateBitmap);
         paintDrawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
         paintDrawable.draw(canvas);
-        return createBitmap;
+        return bitmapCreateBitmap;
     }
 }

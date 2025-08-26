@@ -55,11 +55,11 @@ public class DrawRectFilter extends Filter {
 
     @Override // android.filterfw.core.Filter
     public void process(FilterContext filterContext) {
-        Frame pullInput = pullInput("image");
-        Quad translated = ((Quad) pullInput("box").getObjectValue()).scaled(2.0f).translated(-1.0f, -1.0f);
-        GLFrame gLFrame = (GLFrame) filterContext.getFrameManager().duplicateFrame(pullInput);
+        Frame framePullInput = pullInput("image");
+        Quad quadTranslated = ((Quad) pullInput("box").getObjectValue()).scaled(2.0f).translated(-1.0f, -1.0f);
+        GLFrame gLFrame = (GLFrame) filterContext.getFrameManager().duplicateFrame(framePullInput);
         gLFrame.focus();
-        renderBox(translated);
+        renderBox(quadTranslated);
         pushOutput("image", gLFrame);
         gLFrame.release();
     }

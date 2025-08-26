@@ -111,7 +111,7 @@ public class VideoView extends SurfaceView implements MediaController.MediaPlaye
         };
         this.mPreparedListener = new MediaPlayer.OnPreparedListener() { // from class: android.widget.VideoView.2
             @Override // android.media.MediaPlayer.OnPreparedListener
-            public void onPrepared(MediaPlayer mediaPlayer) {
+            public void onPrepared(MediaPlayer mediaPlayer) throws IllegalStateException {
                 VideoView.this.mCurrentState = 2;
                 Metadata metadata = mediaPlayer.getMetadata(false, false);
                 if (metadata != null) {
@@ -220,7 +220,7 @@ public class VideoView extends SurfaceView implements MediaController.MediaPlaye
         };
         this.mSHCallback = new SurfaceHolder.Callback() { // from class: android.widget.VideoView.7
             @Override // android.view.SurfaceHolder.Callback
-            public void surfaceChanged(SurfaceHolder surfaceHolder, int i3, int i4, int i5) {
+            public void surfaceChanged(SurfaceHolder surfaceHolder, int i3, int i4, int i5) throws IllegalStateException {
                 VideoView.this.mSurfaceWidth = i4;
                 VideoView.this.mSurfaceHeight = i5;
                 boolean z = VideoView.this.mTargetState == 3;
@@ -235,7 +235,7 @@ public class VideoView extends SurfaceView implements MediaController.MediaPlaye
             }
 
             @Override // android.view.SurfaceHolder.Callback
-            public void surfaceCreated(SurfaceHolder surfaceHolder) {
+            public void surfaceCreated(SurfaceHolder surfaceHolder) throws IllegalArgumentException {
                 VideoView.this.mSurfaceHolder = surfaceHolder;
                 VideoView.this.openVideo();
             }
@@ -262,101 +262,65 @@ public class VideoView extends SurfaceView implements MediaController.MediaPlaye
         this.mTargetState = 0;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:26:0x005d, code lost:
-    
-        if (r1 > r6) goto L27;
-     */
     @Override // android.view.SurfaceView, android.view.View
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
-    */
-    protected void onMeasure(int r6, int r7) {
-        /*
-            r5 = this;
-            int r0 = r5.mVideoWidth
-            int r0 = getDefaultSize(r0, r6)
-            int r1 = r5.mVideoHeight
-            int r1 = getDefaultSize(r1, r7)
-            int r2 = r5.mVideoWidth
-            if (r2 <= 0) goto L7a
-            int r2 = r5.mVideoHeight
-            if (r2 <= 0) goto L7a
-            int r0 = android.view.View.MeasureSpec.getMode(r6)
-            int r6 = android.view.View.MeasureSpec.getSize(r6)
-            int r1 = android.view.View.MeasureSpec.getMode(r7)
-            int r7 = android.view.View.MeasureSpec.getSize(r7)
-            r2 = 1073741824(0x40000000, float:2.0)
-            if (r0 != r2) goto L41
-            if (r1 != r2) goto L41
-            int r0 = r5.mVideoWidth
-            int r1 = r0 * r7
-            int r2 = r5.mVideoHeight
-            int r3 = r6 * r2
-            if (r1 >= r3) goto L37
-            int r0 = r0 * r7
-            int r0 = r0 / r2
-            goto L62
-        L37:
-            int r1 = r0 * r7
-            int r3 = r6 * r2
-            if (r1 <= r3) goto L5f
-            int r2 = r2 * r6
-            int r1 = r2 / r0
-            goto L51
-        L41:
-            r3 = -2147483648(0xffffffff80000000, float:-0.0)
-            if (r0 != r2) goto L53
-            int r0 = r5.mVideoHeight
-            int r0 = r0 * r6
-            int r2 = r5.mVideoWidth
-            int r0 = r0 / r2
-            if (r1 != r3) goto L50
-            if (r0 <= r7) goto L50
-            goto L5f
-        L50:
-            r1 = r0
-        L51:
-            r0 = r6
-            goto L7a
-        L53:
-            if (r1 != r2) goto L64
-            int r1 = r5.mVideoWidth
-            int r1 = r1 * r7
-            int r2 = r5.mVideoHeight
-            int r1 = r1 / r2
-            if (r0 != r3) goto L61
-            if (r1 <= r6) goto L61
-        L5f:
-            r0 = r6
-            goto L62
-        L61:
-            r0 = r1
-        L62:
-            r1 = r7
-            goto L7a
-        L64:
-            int r2 = r5.mVideoWidth
-            int r4 = r5.mVideoHeight
-            if (r1 != r3) goto L70
-            if (r4 <= r7) goto L70
-            int r1 = r7 * r2
-            int r1 = r1 / r4
-            goto L72
-        L70:
-            r1 = r2
-            r7 = r4
-        L72:
-            if (r0 != r3) goto L61
-            if (r1 <= r6) goto L61
-            int r4 = r4 * r6
-            int r1 = r4 / r2
-            goto L51
-        L7a:
-            r5.setMeasuredDimension(r0, r1)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.VideoView.onMeasure(int, int):void");
+    protected void onMeasure(int i, int i2) {
+        int i3;
+        int defaultSize = getDefaultSize(this.mVideoWidth, i);
+        int defaultSize2 = getDefaultSize(this.mVideoHeight, i2);
+        if (this.mVideoWidth > 0 && this.mVideoHeight > 0) {
+            int mode = View.MeasureSpec.getMode(i);
+            int size = View.MeasureSpec.getSize(i);
+            int mode2 = View.MeasureSpec.getMode(i2);
+            int size2 = View.MeasureSpec.getSize(i2);
+            if (mode == 1073741824 && mode2 == 1073741824) {
+                int i4 = this.mVideoWidth;
+                int i5 = i4 * size2;
+                int i6 = this.mVideoHeight;
+                if (i5 < size * i6) {
+                    defaultSize = (i4 * size2) / i6;
+                    defaultSize2 = size2;
+                } else {
+                    if (i4 * size2 > size * i6) {
+                        defaultSize2 = (i6 * size) / i4;
+                        defaultSize = size;
+                    }
+                    defaultSize = size;
+                    defaultSize2 = size2;
+                }
+            } else if (mode == 1073741824) {
+                int i7 = (this.mVideoHeight * size) / this.mVideoWidth;
+                if (mode2 != Integer.MIN_VALUE || i7 <= size2) {
+                    defaultSize2 = i7;
+                    defaultSize = size;
+                }
+                defaultSize = size;
+                defaultSize2 = size2;
+            } else {
+                if (mode2 == 1073741824) {
+                    i3 = (this.mVideoWidth * size2) / this.mVideoHeight;
+                    if (mode == Integer.MIN_VALUE && i3 > size) {
+                        defaultSize = size;
+                    }
+                    defaultSize2 = size2;
+                } else {
+                    int i8 = this.mVideoWidth;
+                    int i9 = this.mVideoHeight;
+                    if (mode2 != Integer.MIN_VALUE || i9 <= size2) {
+                        i3 = i8;
+                        size2 = i9;
+                    } else {
+                        i3 = (size2 * i8) / i9;
+                    }
+                    if (mode == Integer.MIN_VALUE && i3 > size) {
+                        defaultSize2 = (i9 * size) / i8;
+                        defaultSize = size;
+                    }
+                }
+                defaultSize = i3;
+                defaultSize2 = size2;
+            }
+        }
+        setMeasuredDimension(defaultSize, defaultSize2);
     }
 
     @Override // android.view.SurfaceView, android.view.View
@@ -368,15 +332,15 @@ public class VideoView extends SurfaceView implements MediaController.MediaPlaye
         return getDefaultSize(i, i2);
     }
 
-    public void setVideoPath(String str) {
+    public void setVideoPath(String str) throws IllegalArgumentException {
         setVideoURI(Uri.parse(str));
     }
 
-    public void setVideoURI(Uri uri) {
+    public void setVideoURI(Uri uri) throws IllegalArgumentException {
         setVideoURI(uri, null);
     }
 
-    public void setVideoURI(Uri uri, Map<String, String> map) {
+    public void setVideoURI(Uri uri, Map<String, String> map) throws IllegalArgumentException {
         this.mUri = uri;
         this.mHeaders = map;
         this.mSeekWhenPrepared = 0;
@@ -412,7 +376,7 @@ public class VideoView extends SurfaceView implements MediaController.MediaPlaye
         }
     }
 
-    public void stopPlayback() {
+    public void stopPlayback() throws IllegalStateException {
         MediaPlayer mediaPlayer = this.mMediaPlayer;
         if (mediaPlayer != null) {
             mediaPlayer.stop();
@@ -425,7 +389,7 @@ public class VideoView extends SurfaceView implements MediaController.MediaPlaye
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void openVideo() {
+    public void openVideo() throws IllegalArgumentException {
         if (this.mUri == null || this.mSurfaceHolder == null) {
             return;
         }
@@ -559,7 +523,7 @@ public class VideoView extends SurfaceView implements MediaController.MediaPlaye
     }
 
     @Override // android.view.View, android.view.KeyEvent.Callback
-    public boolean onKeyDown(int i, KeyEvent keyEvent) {
+    public boolean onKeyDown(int i, KeyEvent keyEvent) throws IllegalStateException {
         boolean z = (i == 4 || i == 24 || i == 25 || i == 164 || i == 82 || i == 5 || i == 6) ? false : true;
         if (isInPlaybackState() && z && this.mMediaController != null) {
             if (i == 79 || i == 85) {
@@ -600,7 +564,7 @@ public class VideoView extends SurfaceView implements MediaController.MediaPlaye
     }
 
     @Override // android.widget.MediaController.MediaPlayerControl
-    public void start() {
+    public void start() throws IllegalStateException {
         if (isInPlaybackState()) {
             this.mMediaPlayer.start();
             this.mCurrentState = 3;
@@ -609,7 +573,7 @@ public class VideoView extends SurfaceView implements MediaController.MediaPlaye
     }
 
     @Override // android.widget.MediaController.MediaPlayerControl
-    public void pause() {
+    public void pause() throws IllegalStateException {
         if (isInPlaybackState() && this.mMediaPlayer.isPlaying()) {
             this.mMediaPlayer.pause();
             this.mCurrentState = 4;
@@ -621,7 +585,7 @@ public class VideoView extends SurfaceView implements MediaController.MediaPlaye
         release(false);
     }
 
-    public void resume() {
+    public void resume() throws IllegalArgumentException {
         openVideo();
     }
 
@@ -642,7 +606,7 @@ public class VideoView extends SurfaceView implements MediaController.MediaPlaye
     }
 
     @Override // android.widget.MediaController.MediaPlayerControl
-    public void seekTo(int i) {
+    public void seekTo(int i) throws IllegalStateException {
         if (isInPlaybackState()) {
             this.mMediaPlayer.seekTo(i);
             this.mSeekWhenPrepared = 0;
@@ -704,7 +668,7 @@ public class VideoView extends SurfaceView implements MediaController.MediaPlaye
     }
 
     @Override // android.view.SurfaceView, android.view.View
-    protected void onDetachedFromWindow() {
+    protected void onDetachedFromWindow() throws Throwable {
         super.onDetachedFromWindow();
         SubtitleTrack.RenderingWidget renderingWidget = this.mSubtitleWidget;
         if (renderingWidget != null) {
@@ -724,10 +688,10 @@ public class VideoView extends SurfaceView implements MediaController.MediaPlaye
     public void draw(Canvas canvas) {
         super.draw(canvas);
         if (this.mSubtitleWidget != null) {
-            int save = canvas.save();
+            int iSave = canvas.save();
             canvas.translate(getPaddingLeft(), getPaddingTop());
             this.mSubtitleWidget.draw(canvas);
-            canvas.restoreToCount(save);
+            canvas.restoreToCount(iSave);
         }
     }
 
@@ -740,10 +704,10 @@ public class VideoView extends SurfaceView implements MediaController.MediaPlaye
         if (this.mSubtitleWidget == renderingWidget) {
             return;
         }
-        boolean isAttachedToWindow = isAttachedToWindow();
+        boolean zIsAttachedToWindow = isAttachedToWindow();
         SubtitleTrack.RenderingWidget renderingWidget2 = this.mSubtitleWidget;
         if (renderingWidget2 != null) {
-            if (isAttachedToWindow) {
+            if (zIsAttachedToWindow) {
                 renderingWidget2.onDetachedFromWindow();
             }
             this.mSubtitleWidget.setOnChangedListener(null);
@@ -760,7 +724,7 @@ public class VideoView extends SurfaceView implements MediaController.MediaPlaye
             }
             setWillNotDraw(false);
             renderingWidget.setOnChangedListener(this.mSubtitlesChangedListener);
-            if (isAttachedToWindow) {
+            if (zIsAttachedToWindow) {
                 renderingWidget.onAttachedToWindow();
                 requestLayout();
             }

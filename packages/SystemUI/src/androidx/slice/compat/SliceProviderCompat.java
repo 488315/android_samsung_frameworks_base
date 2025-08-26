@@ -16,7 +16,6 @@ import androidx.versionedparcelable.VersionedParcelable;
 import java.util.Collections;
 import java.util.Set;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class SliceProviderCompat {
     public final String mCallback;
@@ -32,7 +31,6 @@ public class SliceProviderCompat {
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.slice.compat.SliceProviderCompat$2, reason: invalid class name */
     public class AnonymousClass2 {
         public final /* synthetic */ Context val$context;
@@ -46,18 +44,17 @@ public class SliceProviderCompat {
             if (versionedParcelable instanceof IconCompat) {
                 IconCompat iconCompat = (IconCompat) versionedParcelable;
                 iconCompat.checkResource(this.val$context);
-                int i = iconCompat.mType;
-                if (i == -1) {
-                    i = ((Icon) iconCompat.mObj1).getType();
+                int type = iconCompat.mType;
+                if (type == -1) {
+                    type = ((Icon) iconCompat.mObj1).getType();
                 }
-                if (i == 2 && iconCompat.getResId() == 0) {
+                if (type == 2 && iconCompat.getResId() == 0) {
                     sliceItemHolder.mVersionedParcelable = null;
                 }
             }
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class ProviderHolder implements AutoCloseable {
         public final ContentProviderClient mProvider;
 

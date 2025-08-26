@@ -1256,6 +1256,7 @@
     <string name="delete_blob_text">共有データを削除</string>
     <string name="demo_mode">システム UI デモモード</string>
     <string name="demote_explain_text">%1$s のライブ情報は表示されなくなります。これは [設定] でいつでも変更できます。</string>
+    <string name="desktop_label">デスクトップ%d</string>
     <string name="desktop_mode_a11y_action_maximize_restore">ウィンドウを最大化する、またはウィンドウを元のサイズに戻す</string>
     <string name="desktop_mode_a11y_action_snap_left">アプリ ウィンドウを左側にサイズ変更する</string>
     <string name="desktop_mode_a11y_action_snap_right">アプリ ウィンドウを右側にサイズ変更する</string>
@@ -1310,6 +1311,17 @@
     <string name="dex_touchpad_dialog_how_to_start_touchpad_tablet">タブレットでタッチパッドを開く方法</string>
     <string name="dex_touchpad_dialog_pinch">2本の指でピンチ</string>
     <string name="dex_touchpad_dialog_pinch_desc">拡大または縮小します。</string>
+    <string name="dex_touchpad_dialog_spen_gesture_content">Sペンを使用して、お気に入りのアプリで絵を描いたり、文字を書いたりすることができます。Sペンで端末の画面に触れると、モニター上のカーソルがその位置に移動します。</string>
+    <string name="dex_touchpad_dialog_spen_gesture_content_tablet">Sペンを使用して、お気に入りのアプリで絵を描いたり、文字を書いたりすることができます。Sペンでタブレットの画面に触れると、モニター上のカーソルがその位置に移動します。</string>
+    <string name="dex_touchpad_dialog_spen_gesture_tap_content">項目の選択、アプリの起動、ボタンの有効化などを行います(左クリック)。</string>
+    <string name="dex_touchpad_dialog_spen_gesture_tap_drag_content">任意の方向にスクロールします。</string>
+    <string name="dex_touchpad_dialog_spen_gesture_tap_drag_title">タップしてドラッグ</string>
+    <string name="dex_touchpad_dialog_spen_gesture_tap_title">タップ</string>
+    <string name="dex_touchpad_dialog_spen_gesture_title">Sペンカーソル</string>
+    <string name="dex_touchpad_dialog_spen_gesture_touch_and_hold_title">長押し</string>
+    <string name="dex_touchpad_dialog_spen_gesture_touch_hold_content">画面上の項目を選択します。</string>
+    <string name="dex_touchpad_dialog_spen_gesture_touch_hold_drag_content">画面上の項目を移動したり、テキストを選択したりします。</string>
+    <string name="dex_touchpad_dialog_spen_gesture_touch_hold_drag_title">長押ししてドラッグ</string>
     <string name="dex_touchpad_dialog_swipe">2本の指でスワイプ</string>
     <string name="dex_touchpad_dialog_swipe_desc">任意の方向にスクロールします。</string>
     <string name="dex_touchpad_dialog_swipe_left_right">3本の指で左右にスワイプ</string>
@@ -1351,6 +1363,7 @@
     <string name="disconnect_smart_view">Smart Viewの接続を解除しますか？</string>
     <string name="dismiss_dialog">閉じる</string>
     <string name="dismissible_keyguard_swipe">上にスワイプして継続</string>
+    <string name="display_disconnected_to_change_user">ユーザーを変更するために、ディスプレイとの接続が解除されました。</string>
     <string name="divider_panel_app_pair_to_edge">アプリペアをエッジパネルに追加</string>
     <string name="divider_panel_change_layout">レイアウトを変更</string>
     <string name="divider_panel_rotate_clockwise">時計回りに回転</string>
@@ -1408,6 +1421,7 @@
     <string name="drop_now_to_open_in_fullscreen_view">全画面表示で起動するにはここにドラッグしてください</string>
     <string name="dropdown_menu">プルダウン メニュー</string>
     <string name="durationMinutes">%d分</string>
+    <string name="dw_desktop_disabled_while_smart_view_is_in_use">Smart Viewを使用中は、デスクトップワークスペースは非表示になります。</string>
     <string name="edge_feeds_preview_not_selected_tts">%sは選択されていません。</string>
     <string name="edge_feeds_preview_selected_tts">%sが選択されました。</string>
     <string name="edge_lighting_action_description">Edge lightingｴﾌｪｸﾄを1回使用</string>
@@ -2364,7 +2378,7 @@ PUKが不明な場合は、カスタマーサービスセンターにお越し�
     <string name="kg_power_fully_charged">充電完了</string>
     <string name="kg_power_super_fast_charging">超急速充電: %d%%</string>
     <string name="kg_power_super_fast_charging_20">超急速充電2.0: %d%%</string>
-    <string name="kg_power_super_fast_charging_30">スーパー急速充電3.0: %d%%</string>
+    <string name="kg_power_super_fast_charging_30">超急速充電3.0: %d%%</string>
     <string name="kg_power_time_format_hour">完了まで%d時間</string>
     <string name="kg_power_time_format_hour_minute">完了まで%1$d時間%2$d分</string>
     <string name="kg_power_time_format_minute">完了まで%d分</string>
@@ -2622,6 +2636,7 @@ PUKが不明な場合は、カスタマーサービスセンターにお越し�
     <string name="ksh_group_system_notifications">通知</string>
     <string name="ksh_group_system_popup_view">ポップアップ表示</string>
     <string name="ksh_group_system_recents">履歴</string>
+    <string name="ksh_group_system_running_apps">実行中のアプリ</string>
     <string name="ksh_group_system_screen_off">画面OFF</string>
     <string name="ksh_group_system_show_emojis">絵文字を表示</string>
     <string name="ksh_group_system_show_hanja_input">ハンチャ入力を表示</string>
@@ -3173,9 +3188,13 @@ IT 管理者が、このデバイスに関連付けられている設定、コ�
     <string name="music_share_description_second_line">あなたと友達の両方ともGalaxy Budsを使用している場合、一緒に音楽を聴くことができます。</string>
     <string name="mw_caption_button_text_open_in_browser">ブラウザで開く</string>
     <string name="mw_caption_button_text_remove_from_workspace">Workspaceから削除</string>
+    <string name="mw_caption_button_text_restart_app">アプリを再起動してレイアウトを最適化</string>
     <string name="mw_caption_button_text_send_to_other_display">他のディスプレイに送信</string>
     <string name="mw_caption_button_text_snap_to_left">左にスナップ</string>
     <string name="mw_caption_button_text_snap_to_right">右にスナップ</string>
+    <string name="mw_desktop_drag_handle_blocked_overheat">端末の温度が高すぎるため、デスクトップワークスペースは非表示になっています。温度が下がると再度利用できるようになります。</string>
+    <string name="mw_desktop_drag_handle_blocked_sw_600">画面が拡大されすぎているため、このアプリをデスクトップワークスペースに切り替えることはできません。[画面のズーム]の設定を変更して、再度実行してください。</string>
+    <string name="mw_desktop_drag_handle_blocked_using_smart_view">Smart Viewを使用中は、アプリをデスクトップ表示に変更できません。</string>
     <string name="nav_bar">ナビゲーション バー</string>
     <string name="nav_bar_layout">レイアウト</string>
     <string name="navigation_menu">ナビゲーションメニュー</string>
@@ -3522,6 +3541,7 @@ IT 管理者が、このデバイスに関連付けられている設定、コ�
     <string name="qs_custom_action_move_to_bottom">一番下に移動</string>
     <string name="qs_custom_action_move_to_top">一番上に移動</string>
     <string name="qs_custom_action_move_up">上に移動</string>
+    <string name="qs_custom_action_radio_button">ラジオボタン</string>
     <string name="qs_custom_action_removed_done">[%s]ボタンを削除しました。</string>
     <string name="qs_customizer_settings">パネル設定</string>
     <string name="qs_detail_flashlight_title">ライト</string>
@@ -3616,6 +3636,7 @@ IT 管理者が、このデバイスに関連付けられている設定、コ�
     <string name="qs_record_issue_label">問題を録画</string>
     <string name="qs_record_issue_start">開始</string>
     <string name="qs_record_issue_stop">停止</string>
+    <string name="qs_reset_complete">リセットが完了しました。</string>
     <string name="qs_sensor_privacy_dialog_cancel">キャンセル</string>
     <string name="qs_sensor_privacy_dialog_turn_on">ON</string>
     <string name="qs_sensor_privacy_dialog_unblock">ブロック解除</string>
@@ -3897,7 +3918,6 @@ IT 管理者が、このデバイスに関連付けられている設定、コ�
     <string name="retail_demo_reset_title">パスワード必須</string>
     <string name="retry_face">顔認証を再試行</string>
     <string name="reverse_folding_alert_view_warning_text">端末を開いて左側から折りたたみます。</string>
-    <string name="reverse_folding_order_guide_text">まず左側を折りたたんでください。</string>
     <string name="right_icon">右アイコン</string>
     <string name="right_keycode">右キーコード</string>
     <string name="right_nav_bar_button_type">その他の右ボタンタイプ</string>
@@ -4117,6 +4137,7 @@ IT 管理者が、このデバイスに関連付けられている設定、コ�
     <string name="sec_decor_button_text_caption_pin">オプションメニューを上部に固定</string>
     <string name="sec_decor_button_text_caption_unpin">オプションメニューの固定を解除</string>
     <string name="sec_decor_button_text_close">閉じる</string>
+    <string name="sec_decor_button_text_enter_full_screen">全画面</string>
     <string name="sec_decor_button_text_exit_full_screen">全画面表示を終了</string>
     <string name="sec_decor_button_text_freeform">ポップアップ表示で起動</string>
     <string name="sec_decor_button_text_maximize">最大化</string>
@@ -4133,6 +4154,7 @@ IT 管理者が、このデバイスに関連付けられている設定、コ�
     <string name="sec_decor_button_text_window_unpin">ウィンドウの固定を解除</string>
     <string name="sec_decor_handle_text">"クイック
 オプション"</string>
+    <string name="sec_decor_window_handle">ウィンドウハンドル</string>
     <string name="sec_default_app">標準アプリとして設定中</string>
     <string name="sec_devices_and_media_control">[デバイス操作]と[メディア出力先]のボタン</string>
     <string name="sec_dlg_turn_on">ON</string>

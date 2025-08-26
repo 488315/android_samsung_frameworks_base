@@ -4,10 +4,9 @@ import com.android.systemui.keyguard.animator.KeyguardTouchAnimator;
 import com.android.systemui.statusbar.notification.headsup.HeadsUpManager;
 import com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayoutController;
 import com.android.systemui.statusbar.phone.CentralSurfacesImpl;
-import com.android.systemui.statusbar.phone.CentralSurfacesImpl$$ExternalSyntheticLambda29;
+import com.android.systemui.statusbar.phone.CentralSurfacesImpl$$ExternalSyntheticLambda30;
 import kotlin.NotImplementedError;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class ShadeSurfaceImpl extends ShadeViewControllerEmptyImpl implements ShadeSurface {
     @Override // com.android.systemui.shade.ShadeViewControllerEmptyImpl, com.android.systemui.shade.ShadeViewController
@@ -73,6 +72,6 @@ public final class ShadeSurfaceImpl extends ShadeViewControllerEmptyImpl impleme
     }
 
     @Override // com.android.systemui.shade.ShadeSurface
-    public final void initDependencies(CentralSurfacesImpl centralSurfacesImpl, CentralSurfacesImpl$$ExternalSyntheticLambda29 centralSurfacesImpl$$ExternalSyntheticLambda29, HeadsUpManager headsUpManager) {
+    public final void initDependencies(CentralSurfacesImpl centralSurfacesImpl, CentralSurfacesImpl$$ExternalSyntheticLambda30 centralSurfacesImpl$$ExternalSyntheticLambda30, HeadsUpManager headsUpManager) {
     }
 }

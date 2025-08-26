@@ -259,9 +259,9 @@ public interface IContextHubService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IContextHubService)) {
-                return (IContextHubService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IContextHubService)) {
+                return (IContextHubService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -341,11 +341,11 @@ public interface IContextHubService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    IContextHubCallback asInterface = IContextHubCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IContextHubCallback iContextHubCallbackAsInterface = IContextHubCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    int registerCallback = registerCallback(asInterface);
+                    int iRegisterCallback = registerCallback(iContextHubCallbackAsInterface);
                     parcel2.writeNoException();
-                    parcel2.writeInt(registerCallback);
+                    parcel2.writeInt(iRegisterCallback);
                     return true;
                 case 2:
                     int[] contextHubHandles = getContextHubHandles();
@@ -353,70 +353,70 @@ public interface IContextHubService extends IInterface {
                     parcel2.writeIntArray(contextHubHandles);
                     return true;
                 case 3:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    ContextHubInfo contextHubInfo = getContextHubInfo(readInt);
+                    ContextHubInfo contextHubInfo = getContextHubInfo(i3);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(contextHubInfo, 1);
                     return true;
                 case 4:
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     NanoApp nanoApp = (NanoApp) parcel.readTypedObject(NanoApp.CREATOR);
                     parcel.enforceNoDataAvail();
-                    int loadNanoApp = loadNanoApp(readInt2, nanoApp);
+                    int iLoadNanoApp = loadNanoApp(i4, nanoApp);
                     parcel2.writeNoException();
-                    parcel2.writeInt(loadNanoApp);
+                    parcel2.writeInt(iLoadNanoApp);
                     return true;
                 case 5:
-                    int readInt3 = parcel.readInt();
+                    int i5 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int unloadNanoApp = unloadNanoApp(readInt3);
+                    int iUnloadNanoApp = unloadNanoApp(i5);
                     parcel2.writeNoException();
-                    parcel2.writeInt(unloadNanoApp);
+                    parcel2.writeInt(iUnloadNanoApp);
                     return true;
                 case 6:
-                    int readInt4 = parcel.readInt();
+                    int i6 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    NanoAppInstanceInfo nanoAppInstanceInfo = getNanoAppInstanceInfo(readInt4);
+                    NanoAppInstanceInfo nanoAppInstanceInfo = getNanoAppInstanceInfo(i6);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(nanoAppInstanceInfo, 1);
                     return true;
                 case 7:
-                    int readInt5 = parcel.readInt();
+                    int i7 = parcel.readInt();
                     NanoAppFilter nanoAppFilter = (NanoAppFilter) parcel.readTypedObject(NanoAppFilter.CREATOR);
                     parcel.enforceNoDataAvail();
-                    int[] findNanoAppOnHub = findNanoAppOnHub(readInt5, nanoAppFilter);
+                    int[] iArrFindNanoAppOnHub = findNanoAppOnHub(i7, nanoAppFilter);
                     parcel2.writeNoException();
-                    parcel2.writeIntArray(findNanoAppOnHub);
+                    parcel2.writeIntArray(iArrFindNanoAppOnHub);
                     return true;
                 case 8:
-                    int readInt6 = parcel.readInt();
-                    int readInt7 = parcel.readInt();
+                    int i8 = parcel.readInt();
+                    int i9 = parcel.readInt();
                     ContextHubMessage contextHubMessage = (ContextHubMessage) parcel.readTypedObject(ContextHubMessage.CREATOR);
                     parcel.enforceNoDataAvail();
-                    int sendMessage = sendMessage(readInt6, readInt7, contextHubMessage);
+                    int iSendMessage = sendMessage(i8, i9, contextHubMessage);
                     parcel2.writeNoException();
-                    parcel2.writeInt(sendMessage);
+                    parcel2.writeInt(iSendMessage);
                     return true;
                 case 9:
-                    int readInt8 = parcel.readInt();
-                    IContextHubClientCallback asInterface2 = IContextHubClientCallback.Stub.asInterface(parcel.readStrongBinder());
-                    String readString = parcel.readString();
-                    String readString2 = parcel.readString();
+                    int i10 = parcel.readInt();
+                    IContextHubClientCallback iContextHubClientCallbackAsInterface = IContextHubClientCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string = parcel.readString();
+                    String string2 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    IContextHubClient createClient = createClient(readInt8, asInterface2, readString, readString2);
+                    IContextHubClient iContextHubClientCreateClient = createClient(i10, iContextHubClientCallbackAsInterface, string, string2);
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(createClient);
+                    parcel2.writeStrongInterface(iContextHubClientCreateClient);
                     return true;
                 case 10:
-                    int readInt9 = parcel.readInt();
+                    int i11 = parcel.readInt();
                     PendingIntent pendingIntent = (PendingIntent) parcel.readTypedObject(PendingIntent.CREATOR);
-                    long readLong = parcel.readLong();
-                    String readString3 = parcel.readString();
+                    long j = parcel.readLong();
+                    String string3 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    IContextHubClient createPendingIntentClient = createPendingIntentClient(readInt9, pendingIntent, readLong, readString3);
+                    IContextHubClient iContextHubClientCreatePendingIntentClient = createPendingIntentClient(i11, pendingIntent, j, string3);
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(createPendingIntentClient);
+                    parcel2.writeStrongInterface(iContextHubClientCreatePendingIntentClient);
                     return true;
                 case 11:
                     List<ContextHubInfo> contextHubs = getContextHubs();
@@ -429,42 +429,42 @@ public interface IContextHubService extends IInterface {
                     parcel2.writeTypedList(hubs, 1);
                     return true;
                 case 13:
-                    int readInt10 = parcel.readInt();
-                    IContextHubTransactionCallback asInterface3 = IContextHubTransactionCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i12 = parcel.readInt();
+                    IContextHubTransactionCallback iContextHubTransactionCallbackAsInterface = IContextHubTransactionCallback.Stub.asInterface(parcel.readStrongBinder());
                     NanoAppBinary nanoAppBinary = (NanoAppBinary) parcel.readTypedObject(NanoAppBinary.CREATOR);
                     parcel.enforceNoDataAvail();
-                    loadNanoAppOnHub(readInt10, asInterface3, nanoAppBinary);
+                    loadNanoAppOnHub(i12, iContextHubTransactionCallbackAsInterface, nanoAppBinary);
                     parcel2.writeNoException();
                     return true;
                 case 14:
-                    int readInt11 = parcel.readInt();
-                    IContextHubTransactionCallback asInterface4 = IContextHubTransactionCallback.Stub.asInterface(parcel.readStrongBinder());
-                    long readLong2 = parcel.readLong();
+                    int i13 = parcel.readInt();
+                    IContextHubTransactionCallback iContextHubTransactionCallbackAsInterface2 = IContextHubTransactionCallback.Stub.asInterface(parcel.readStrongBinder());
+                    long j2 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    unloadNanoAppFromHub(readInt11, asInterface4, readLong2);
+                    unloadNanoAppFromHub(i13, iContextHubTransactionCallbackAsInterface2, j2);
                     parcel2.writeNoException();
                     return true;
                 case 15:
-                    int readInt12 = parcel.readInt();
-                    IContextHubTransactionCallback asInterface5 = IContextHubTransactionCallback.Stub.asInterface(parcel.readStrongBinder());
-                    long readLong3 = parcel.readLong();
+                    int i14 = parcel.readInt();
+                    IContextHubTransactionCallback iContextHubTransactionCallbackAsInterface3 = IContextHubTransactionCallback.Stub.asInterface(parcel.readStrongBinder());
+                    long j3 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    enableNanoApp(readInt12, asInterface5, readLong3);
+                    enableNanoApp(i14, iContextHubTransactionCallbackAsInterface3, j3);
                     parcel2.writeNoException();
                     return true;
                 case 16:
-                    int readInt13 = parcel.readInt();
-                    IContextHubTransactionCallback asInterface6 = IContextHubTransactionCallback.Stub.asInterface(parcel.readStrongBinder());
-                    long readLong4 = parcel.readLong();
+                    int i15 = parcel.readInt();
+                    IContextHubTransactionCallback iContextHubTransactionCallbackAsInterface4 = IContextHubTransactionCallback.Stub.asInterface(parcel.readStrongBinder());
+                    long j4 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    disableNanoApp(readInt13, asInterface6, readLong4);
+                    disableNanoApp(i15, iContextHubTransactionCallbackAsInterface4, j4);
                     parcel2.writeNoException();
                     return true;
                 case 17:
-                    int readInt14 = parcel.readInt();
-                    IContextHubTransactionCallback asInterface7 = IContextHubTransactionCallback.Stub.asInterface(parcel.readStrongBinder());
+                    int i16 = parcel.readInt();
+                    IContextHubTransactionCallback iContextHubTransactionCallbackAsInterface5 = IContextHubTransactionCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    queryNanoApps(readInt14, asInterface7);
+                    queryNanoApps(i16, iContextHubTransactionCallbackAsInterface5);
                     parcel2.writeNoException();
                     return true;
                 case 18:
@@ -475,54 +475,54 @@ public interface IContextHubService extends IInterface {
                     parcel2.writeLongArray(preloadedNanoAppIds);
                     return true;
                 case 19:
-                    boolean readBoolean = parcel.readBoolean();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean testMode = setTestMode(readBoolean);
+                    boolean testMode = setTestMode(z);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(testMode);
                     return true;
                 case 20:
-                    long readLong5 = parcel.readLong();
+                    long j5 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    List<HubEndpointInfo> findEndpoints = findEndpoints(readLong5);
+                    List<HubEndpointInfo> listFindEndpoints = findEndpoints(j5);
                     parcel2.writeNoException();
-                    parcel2.writeTypedList(findEndpoints, 1);
+                    parcel2.writeTypedList(listFindEndpoints, 1);
                     return true;
                 case 21:
-                    String readString4 = parcel.readString();
+                    String string4 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    List<HubEndpointInfo> findEndpointsWithService = findEndpointsWithService(readString4);
+                    List<HubEndpointInfo> listFindEndpointsWithService = findEndpointsWithService(string4);
                     parcel2.writeNoException();
-                    parcel2.writeTypedList(findEndpointsWithService, 1);
+                    parcel2.writeTypedList(listFindEndpointsWithService, 1);
                     return true;
                 case 22:
                     HubEndpointInfo hubEndpointInfo = (HubEndpointInfo) parcel.readTypedObject(HubEndpointInfo.CREATOR);
-                    IContextHubEndpointCallback asInterface8 = IContextHubEndpointCallback.Stub.asInterface(parcel.readStrongBinder());
-                    String readString5 = parcel.readString();
-                    String readString6 = parcel.readString();
+                    IContextHubEndpointCallback iContextHubEndpointCallbackAsInterface = IContextHubEndpointCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string5 = parcel.readString();
+                    String string6 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    IContextHubEndpoint registerEndpoint = registerEndpoint(hubEndpointInfo, asInterface8, readString5, readString6);
+                    IContextHubEndpoint iContextHubEndpointRegisterEndpoint = registerEndpoint(hubEndpointInfo, iContextHubEndpointCallbackAsInterface, string5, string6);
                     parcel2.writeNoException();
-                    parcel2.writeStrongInterface(registerEndpoint);
+                    parcel2.writeStrongInterface(iContextHubEndpointRegisterEndpoint);
                     return true;
                 case 23:
-                    long readLong6 = parcel.readLong();
-                    IContextHubEndpointDiscoveryCallback asInterface9 = IContextHubEndpointDiscoveryCallback.Stub.asInterface(parcel.readStrongBinder());
+                    long j6 = parcel.readLong();
+                    IContextHubEndpointDiscoveryCallback iContextHubEndpointDiscoveryCallbackAsInterface = IContextHubEndpointDiscoveryCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerEndpointDiscoveryCallbackId(readLong6, asInterface9);
+                    registerEndpointDiscoveryCallbackId(j6, iContextHubEndpointDiscoveryCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 24:
-                    String readString7 = parcel.readString();
-                    IContextHubEndpointDiscoveryCallback asInterface10 = IContextHubEndpointDiscoveryCallback.Stub.asInterface(parcel.readStrongBinder());
+                    String string7 = parcel.readString();
+                    IContextHubEndpointDiscoveryCallback iContextHubEndpointDiscoveryCallbackAsInterface2 = IContextHubEndpointDiscoveryCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerEndpointDiscoveryCallbackDescriptor(readString7, asInterface10);
+                    registerEndpointDiscoveryCallbackDescriptor(string7, iContextHubEndpointDiscoveryCallbackAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 25:
-                    IContextHubEndpointDiscoveryCallback asInterface11 = IContextHubEndpointDiscoveryCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IContextHubEndpointDiscoveryCallback iContextHubEndpointDiscoveryCallbackAsInterface3 = IContextHubEndpointDiscoveryCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterEndpointDiscoveryCallback(asInterface11);
+                    unregisterEndpointDiscoveryCallback(iContextHubEndpointDiscoveryCallbackAsInterface3);
                     parcel2.writeNoException();
                     return true;
                 case 26:
@@ -551,425 +551,425 @@ public interface IContextHubService extends IInterface {
 
             @Override // android.hardware.location.IContextHubService
             public int registerCallback(IContextHubCallback iContextHubCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iContextHubCallback);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iContextHubCallback);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.location.IContextHubService
             public int[] getContextHubHandles() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createIntArray();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createIntArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.location.IContextHubService
             public ContextHubInfo getContextHubInfo(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ContextHubInfo) obtain2.readTypedObject(ContextHubInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ContextHubInfo) parcelObtain2.readTypedObject(ContextHubInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.location.IContextHubService
             public int loadNanoApp(int i, NanoApp nanoApp) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(nanoApp, 0);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(nanoApp, 0);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.location.IContextHubService
             public int unloadNanoApp(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.location.IContextHubService
             public NanoAppInstanceInfo getNanoAppInstanceInfo(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (NanoAppInstanceInfo) obtain2.readTypedObject(NanoAppInstanceInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (NanoAppInstanceInfo) parcelObtain2.readTypedObject(NanoAppInstanceInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.location.IContextHubService
             public int[] findNanoAppOnHub(int i, NanoAppFilter nanoAppFilter) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(nanoAppFilter, 0);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createIntArray();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(nanoAppFilter, 0);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createIntArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.location.IContextHubService
             public int sendMessage(int i, int i2, ContextHubMessage contextHubMessage) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeTypedObject(contextHubMessage, 0);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeTypedObject(contextHubMessage, 0);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.location.IContextHubService
             public IContextHubClient createClient(int i, IContextHubClientCallback iContextHubClientCallback, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iContextHubClientCallback);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IContextHubClient.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iContextHubClientCallback);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IContextHubClient.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.location.IContextHubService
             public IContextHubClient createPendingIntentClient(int i, PendingIntent pendingIntent, long j, String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(pendingIntent, 0);
-                    obtain.writeLong(j);
-                    obtain.writeString(str);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IContextHubClient.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(pendingIntent, 0);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IContextHubClient.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.location.IContextHubService
             public List<ContextHubInfo> getContextHubs() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(ContextHubInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(ContextHubInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.location.IContextHubService
             public List<HubInfo> getHubs() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(HubInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(HubInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.location.IContextHubService
             public void loadNanoAppOnHub(int i, IContextHubTransactionCallback iContextHubTransactionCallback, NanoAppBinary nanoAppBinary) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iContextHubTransactionCallback);
-                    obtain.writeTypedObject(nanoAppBinary, 0);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iContextHubTransactionCallback);
+                    parcelObtain.writeTypedObject(nanoAppBinary, 0);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.location.IContextHubService
             public void unloadNanoAppFromHub(int i, IContextHubTransactionCallback iContextHubTransactionCallback, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iContextHubTransactionCallback);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iContextHubTransactionCallback);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.location.IContextHubService
             public void enableNanoApp(int i, IContextHubTransactionCallback iContextHubTransactionCallback, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iContextHubTransactionCallback);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iContextHubTransactionCallback);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.location.IContextHubService
             public void disableNanoApp(int i, IContextHubTransactionCallback iContextHubTransactionCallback, long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iContextHubTransactionCallback);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(16, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iContextHubTransactionCallback);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.location.IContextHubService
             public void queryNanoApps(int i, IContextHubTransactionCallback iContextHubTransactionCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeStrongInterface(iContextHubTransactionCallback);
-                    this.mRemote.transact(17, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeStrongInterface(iContextHubTransactionCallback);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.location.IContextHubService
             public long[] getPreloadedNanoAppIds(ContextHubInfo contextHubInfo) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(contextHubInfo, 0);
-                    this.mRemote.transact(18, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createLongArray();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(contextHubInfo, 0);
+                    this.mRemote.transact(18, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createLongArray();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.location.IContextHubService
             public boolean setTestMode(boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(19, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(19, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.location.IContextHubService
             public List<HubEndpointInfo> findEndpoints(long j) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    this.mRemote.transact(20, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(HubEndpointInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    this.mRemote.transact(20, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(HubEndpointInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.location.IContextHubService
             public List<HubEndpointInfo> findEndpointsWithService(String str) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    this.mRemote.transact(21, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.createTypedArrayList(HubEndpointInfo.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    this.mRemote.transact(21, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.createTypedArrayList(HubEndpointInfo.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.location.IContextHubService
             public IContextHubEndpoint registerEndpoint(HubEndpointInfo hubEndpointInfo, IContextHubEndpointCallback iContextHubEndpointCallback, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(hubEndpointInfo, 0);
-                    obtain.writeStrongInterface(iContextHubEndpointCallback);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(22, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return IContextHubEndpoint.Stub.asInterface(obtain2.readStrongBinder());
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(hubEndpointInfo, 0);
+                    parcelObtain.writeStrongInterface(iContextHubEndpointCallback);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(22, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return IContextHubEndpoint.Stub.asInterface(parcelObtain2.readStrongBinder());
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.location.IContextHubService
             public void registerEndpointDiscoveryCallbackId(long j, IContextHubEndpointDiscoveryCallback iContextHubEndpointDiscoveryCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeLong(j);
-                    obtain.writeStrongInterface(iContextHubEndpointDiscoveryCallback);
-                    this.mRemote.transact(23, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeStrongInterface(iContextHubEndpointDiscoveryCallback);
+                    this.mRemote.transact(23, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.location.IContextHubService
             public void registerEndpointDiscoveryCallbackDescriptor(String str, IContextHubEndpointDiscoveryCallback iContextHubEndpointDiscoveryCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeString(str);
-                    obtain.writeStrongInterface(iContextHubEndpointDiscoveryCallback);
-                    this.mRemote.transact(24, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeStrongInterface(iContextHubEndpointDiscoveryCallback);
+                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.location.IContextHubService
             public void unregisterEndpointDiscoveryCallback(IContextHubEndpointDiscoveryCallback iContextHubEndpointDiscoveryCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iContextHubEndpointDiscoveryCallback);
-                    this.mRemote.transact(25, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iContextHubEndpointDiscoveryCallback);
+                    this.mRemote.transact(25, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.hardware.location.IContextHubService
             public void onDiscoveryCallbackFinished() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(26, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(26, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -12,7 +12,6 @@ import com.android.wm.shell.draganddrop.DragAndDropEventLogger;
 import com.android.wm.shell.protolog.ShellProtoLogGroup;
 import java.util.function.Function;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class MimeTypeDropTargetController implements IDropTargetUiController {
     public final DragAndDropController mController;
@@ -86,7 +85,7 @@ public class MimeTypeDropTargetController implements IDropTargetUiController {
                         dragAndDropController.mMainExecutor.execute(new Runnable() { // from class: com.android.wm.shell.draganddrop.MimeTypeDropTargetController$$ExternalSyntheticLambda3
                             @Override // java.lang.Runnable
                             public final void run() {
-                                MimeTypeDropTargetController.this.mInputMethodManager.semForceHideSoftInput();
+                                this.f$0.mInputMethodManager.semForceHideSoftInput();
                                 Log.i("DragAndDropController_Mime", "Hide the Ime when Drag Layout is shown");
                             }
                         });
@@ -97,6 +96,7 @@ public class MimeTypeDropTargetController implements IDropTargetUiController {
                     Slog.d("DragAndDropController_Mime", "Ignore ACTION_DRAG_LOCATION");
                     break;
                 }
+                break;
             case 3:
                 this.mIgnoreActionDragLocation = true;
                 break;
@@ -120,7 +120,7 @@ public class MimeTypeDropTargetController implements IDropTargetUiController {
                     ((DropTargetLayout) perDisplay.dragLayout).hide(new Runnable() { // from class: com.android.wm.shell.draganddrop.MimeTypeDropTargetController$$ExternalSyntheticLambda1
                         @Override // java.lang.Runnable
                         public final void run() {
-                            MimeTypeDropTargetController mimeTypeDropTargetController = MimeTypeDropTargetController.this;
+                            MimeTypeDropTargetController mimeTypeDropTargetController = this.f$0;
                             DragAndDropController.PerDisplay perDisplay2 = perDisplay;
                             mimeTypeDropTargetController.getClass();
                             if (perDisplay2.activeDragCount == 0) {

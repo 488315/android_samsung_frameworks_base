@@ -11,7 +11,6 @@ import com.samsung.android.knox.ContextInfo;
 import com.samsung.android.knox.license.EnterpriseLicenseManager;
 import com.samsung.android.knox.multiuser.IMultiUserManager;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class MultiUserManager {
     public static final String TAG = "MultiUserManager";
@@ -60,9 +59,9 @@ public class MultiUserManager {
         EnterpriseLicenseManager.log(this.mContextInfo, "MultiUserManager.allowMultipleUsers");
         if (getService() != null) {
             try {
-                int allowMultipleUsers = mService.allowMultipleUsers(this.mContextInfo, z);
-                if (-1 != allowMultipleUsers) {
-                    return allowMultipleUsers == 1;
+                int iAllowMultipleUsers = mService.allowMultipleUsers(this.mContextInfo, z);
+                if (-1 != iAllowMultipleUsers) {
+                    return iAllowMultipleUsers == 1;
                 }
                 throw new UnsupportedOperationException("Not Supported in this device");
             } catch (RemoteException e) {
@@ -126,15 +125,17 @@ public class MultiUserManager {
     public final boolean getMuSupportInfo() {
         boolean z;
         synchronized (mSync) {
-            if (!isMuSupportInfoReady && getService() != null) {
+            if (isMuSupportInfoReady || getService() == null) {
+                z = isMuSupported;
+            } else {
                 try {
                     isMuSupported = mService.multipleUsersSupported(this.mContextInfo);
                     isMuSupportInfoReady = true;
                 } catch (RemoteException e) {
                     Log.e(TAG, "Failed talking with multi user service. " + e.getMessage());
                 }
+                z = isMuSupported;
             }
-            z = isMuSupported;
         }
         return z;
     }

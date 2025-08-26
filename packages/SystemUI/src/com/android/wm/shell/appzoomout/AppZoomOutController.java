@@ -3,6 +3,7 @@ package com.android.wm.shell.appzoomout;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.util.Slog;
 import android.window.DisplayAreaInfo;
 import android.window.WindowContainerTransaction;
@@ -14,7 +15,6 @@ import com.android.wm.shell.common.RemoteCallable;
 import com.android.wm.shell.common.ShellExecutor;
 import com.android.wm.shell.sysui.ShellInit;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class AppZoomOutController implements RemoteCallable, ShellTaskOrganizer.FocusListener, DisplayChangeController.OnDisplayChangingListener {
     public final Context mContext;
@@ -52,7 +52,6 @@ public class AppZoomOutController implements RemoteCallable, ShellTaskOrganizer.
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class AppZoomOutImpl {
         public /* synthetic */ AppZoomOutImpl(AppZoomOutController appZoomOutController, int i) {
             this();
@@ -81,7 +80,7 @@ public class AppZoomOutController implements RemoteCallable, ShellTaskOrganizer.
     }
 
     @Override // com.android.wm.shell.common.DisplayChangeController.OnDisplayChangingListener
-    public final void onDisplayChange(int i, int i2, int i3, DisplayAreaInfo displayAreaInfo, WindowContainerTransaction windowContainerTransaction) {
+    public final void onDisplayChange(int i, int i2, int i3, DisplayAreaInfo displayAreaInfo, WindowContainerTransaction windowContainerTransaction) throws Resources.NotFoundException {
         if (i3 != -1) {
             Context context = this.mContext;
             DisplayLayout displayLayout = this.mDisplayAreaOrganizer.mDisplayLayout;

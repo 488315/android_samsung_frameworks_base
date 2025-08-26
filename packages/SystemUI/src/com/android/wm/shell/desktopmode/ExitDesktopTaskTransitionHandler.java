@@ -26,7 +26,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.Supplier;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ExitDesktopTaskTransitionHandler implements Transitions.TransitionHandler {
     public final ArrayList mAnimators;
@@ -41,7 +40,6 @@ public class ExitDesktopTaskTransitionHandler implements Transitions.TransitionH
     public final Supplier mTransactionSupplier;
     public final Transitions mTransitions;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.desktopmode.ExitDesktopTaskTransitionHandler$1, reason: invalid class name */
     public class AnonymousClass1 extends AnimatorListenerAdapter {
         public static final /* synthetic */ int $r8$clinit = 0;
@@ -92,11 +90,11 @@ public class ExitDesktopTaskTransitionHandler implements Transitions.TransitionH
         ActivityManager.RunningTaskInfo taskInfo;
         Iterator it = transitionInfo.getChanges().iterator();
         int i = 0;
-        boolean z = false;
+        boolean zStartChangeTransition = false;
         while (true) {
-            boolean hasNext = it.hasNext();
+            boolean zHasNext = it.hasNext();
             transitions = this.mTransitions;
-            if (!hasNext) {
+            if (!zHasNext) {
                 break;
             }
             TransitionInfo.Change change = (TransitionInfo.Change) it.next();
@@ -104,13 +102,13 @@ public class ExitDesktopTaskTransitionHandler implements Transitions.TransitionH
                 if (CoreRune.DW_SHELL_CHANGE_TRANSITION && ((ArrayList) this.mPendingTransitionTokens).contains(iBinder) && DesktopModeTransitionTypes.isExitDesktopModeTransition(transitionInfo.getType()) && change.getChangeLeash() != null) {
                     Log.d("ExitDesktopTaskTransitionHandler", " buildChangeTransitionIfNeeded: " + change.getLeash());
                     transitions.mChangeTransitProvider.buildChangeTransitionAnimators(this.mAnimators, change, new ExitDesktopTaskTransitionHandler$$ExternalSyntheticLambda1(this, 1), transaction, transitionInfo);
-                    z = true;
+                    zStartChangeTransition = true;
                 } else if (change.getMode() == 6) {
-                    z = startChangeTransition(iBinder, transitionInfo.getType(), change, transaction, transaction2, transitionFinishCallback) | z;
+                    zStartChangeTransition = startChangeTransition(iBinder, transitionInfo.getType(), change, transaction, transaction2, transitionFinishCallback) | zStartChangeTransition;
                 }
             }
         }
-        if (CoreRune.DW_SHELL_CHANGE_TRANSITION && z) {
+        if (CoreRune.DW_SHELL_CHANGE_TRANSITION && zStartChangeTransition) {
             this.mFinishCallback = new ExitDesktopTaskTransitionHandler$$ExternalSyntheticLambda2(0, this, transitionFinishCallback);
             Log.d("ExitDesktopTaskTransitionHandler", "startAllAnimators: num_anim=" + this.mAnimators.size());
             ArrayList arrayList = this.mAnimators;
@@ -123,10 +121,10 @@ public class ExitDesktopTaskTransitionHandler implements Transitions.TransitionH
             transaction.apply();
         }
         ((ArrayList) this.mPendingTransitionTokens).remove(iBinder);
-        if (z) {
+        if (zStartChangeTransition) {
             this.mLatencyTracker.onActionEnd(32);
         }
-        return z;
+        return zStartChangeTransition;
     }
 
     public boolean startChangeTransition(IBinder iBinder, int i, TransitionInfo.Change change, SurfaceControl.Transaction transaction, SurfaceControl.Transaction transaction2, Transitions.TransitionFinishCallback transitionFinishCallback) {
@@ -148,24 +146,24 @@ public class ExitDesktopTaskTransitionHandler implements Transitions.TransitionH
         valueAnimator.setFloatValues(0.0f, 1.0f);
         valueAnimator.setDuration(336L);
         Rect startAbsBounds = change.getStartAbsBounds();
-        final float width = startAbsBounds.width() / i2;
-        final float height = startAbsBounds.height() / i3;
+        final float fMax = Math.max(0.0f, startAbsBounds.width() / i2);
+        final float fMax2 = Math.max(0.0f, startAbsBounds.height() / i3);
         final SurfaceControl.Transaction transaction3 = (SurfaceControl.Transaction) this.mTransactionSupplier.get();
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.desktopmode.ExitDesktopTaskTransitionHandler$$ExternalSyntheticLambda0
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator2) {
-                ExitDesktopTaskTransitionHandler exitDesktopTaskTransitionHandler = ExitDesktopTaskTransitionHandler.this;
-                float f = width;
-                float f2 = height;
+                ExitDesktopTaskTransitionHandler exitDesktopTaskTransitionHandler = this.f$0;
+                float f = fMax;
+                float f2 = fMax2;
                 SurfaceControl.Transaction transaction4 = transaction3;
                 SurfaceControl surfaceControl = leash;
                 exitDesktopTaskTransitionHandler.getClass();
                 float animatedFraction = valueAnimator2.getAnimatedFraction();
-                float m$1 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(1.0f, f, animatedFraction, f);
-                float m$12 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(1.0f, f2, animatedFraction, f2);
+                float fM$1 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(1.0f, f, animatedFraction, f);
+                float fM$12 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(1.0f, f2, animatedFraction, f2);
                 Point point = exitDesktopTaskTransitionHandler.mPosition;
                 float f3 = 1.0f - animatedFraction;
-                transaction4.setPosition(surfaceControl, point.x * f3, point.y * f3).setScale(surfaceControl, m$1, m$12).show(surfaceControl).setFrameTimeline(Choreographer.getInstance().getVsyncId()).apply();
+                transaction4.setPosition(surfaceControl, point.x * f3, point.y * f3).setScale(surfaceControl, fM$1, fM$12).show(surfaceControl).setFrameTimeline(Choreographer.getInstance().getVsyncId()).apply();
             }
         });
         valueAnimator.addListener(new AnonymousClass1(valueAnimator, transitionFinishCallback));

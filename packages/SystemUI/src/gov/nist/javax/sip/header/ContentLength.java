@@ -3,7 +3,6 @@ package gov.nist.javax.sip.header;
 import javax.sip.InvalidArgumentException;
 import javax.sip.header.ContentLengthHeader;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class ContentLength extends SIPHeader implements ContentLengthHeader {
     private static final long serialVersionUID = 1187190542411037027L;
@@ -29,7 +28,7 @@ public class ContentLength extends SIPHeader implements ContentLengthHeader {
         return this.contentLength.intValue();
     }
 
-    public final void setContentLength(int i) {
+    public final void setContentLength(int i) throws InvalidArgumentException {
         if (i < 0) {
             throw new InvalidArgumentException("JAIN-SIP Exception, ContentLength, setContentLength(), the contentLength parameter is <0");
         }

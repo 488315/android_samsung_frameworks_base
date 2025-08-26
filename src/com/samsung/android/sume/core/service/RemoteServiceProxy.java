@@ -76,7 +76,7 @@ public class RemoteServiceProxy implements ServiceProxy {
         this.responseMessenger = new Messenger(new IncomingHandler(new Consumer() { // from class: com.samsung.android.sume.core.service.RemoteServiceProxy$$ExternalSyntheticLambda6
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                RemoteServiceProxy.this.onReceiveResponse((Response) obj);
+                this.f$0.onReceiveResponse((Response) obj);
             }
         }, this.responseHandlerThread.getLooper()));
         this.connection = new ServiceConnection() { // from class: com.samsung.android.sume.core.service.RemoteServiceProxy.1
@@ -107,8 +107,8 @@ public class RemoteServiceProxy implements ServiceProxy {
         };
         this.requestJob = this.requestThreadPool.submit(new Runnable() { // from class: com.samsung.android.sume.core.service.RemoteServiceProxy$$ExternalSyntheticLambda7
             @Override // java.lang.Runnable
-            public final void run() {
-                RemoteServiceProxy.this.m9611x6d765b44();
+            public final void run() throws InterruptedException {
+                this.f$0.m9624x6d765b44();
             }
         });
         Intent intent = new Intent();
@@ -126,19 +126,19 @@ public class RemoteServiceProxy implements ServiceProxy {
     }
 
     /* renamed from: lambda$new$0$com-samsung-android-sume-core-service-RemoteServiceProxy, reason: not valid java name */
-    /* synthetic */ void m9611x6d765b44() {
+    /* synthetic */ void m9624x6d765b44() throws InterruptedException {
         this.mfControllerSync.block();
         while (true) {
             try {
-                Request take = this.requestChannel.take();
+                Request requestTake = this.requestChannel.take();
                 String str = TAG;
-                Log.d(str, "take request: " + take.getCode() + "[id=" + this.mediaFilterControllerId + NavigationBarInflaterView.SIZE_MOD_END);
-                take.put("id", Integer.valueOf(this.mediaFilterControllerId));
-                Message androidMessage = take.toAndroidMessage();
-                if (!take.isOneWay()) {
-                    take.setResponseReceiver(this.responseMessenger);
+                Log.d(str, "take request: " + requestTake.getCode() + "[id=" + this.mediaFilterControllerId + NavigationBarInflaterView.SIZE_MOD_END);
+                requestTake.put("id", Integer.valueOf(this.mediaFilterControllerId));
+                Message androidMessage = requestTake.toAndroidMessage();
+                if (!requestTake.isOneWay()) {
+                    requestTake.setResponseReceiver(this.responseMessenger);
                 }
-                take.setReceiver(this.requestMessenger).post();
+                requestTake.setReceiver(this.requestMessenger).post();
                 Log.d(str, "send message to remote: " + androidMessage);
             } catch (InterruptedException unused) {
                 Log.w(TAG, "request canceled or release");
@@ -153,7 +153,7 @@ public class RemoteServiceProxy implements ServiceProxy {
     }
 
     @Override // com.samsung.android.sume.core.service.ServiceProxy
-    public Future<Response> request(final Request request) {
+    public Future<Response> request(final Request request) throws InterruptedException {
         final ResponseHolder responseHolder = new ResponseHolder(request.getCode());
         this.responseList.add(responseHolder);
         try {
@@ -163,7 +163,7 @@ public class RemoteServiceProxy implements ServiceProxy {
                 request.then(new Consumer() { // from class: com.samsung.android.sume.core.service.RemoteServiceProxy$$ExternalSyntheticLambda0
                     @Override // java.util.function.Consumer
                     public final void accept(Object obj) {
-                        RemoteServiceProxy.lambda$request$1(ResponseHolder.this, (com.samsung.android.sume.core.message.Message) obj);
+                        RemoteServiceProxy.lambda$request$1(responseHolder, (com.samsung.android.sume.core.message.Message) obj);
                     }
                 });
             }
@@ -174,7 +174,7 @@ public class RemoteServiceProxy implements ServiceProxy {
         return this.requestThreadPool.submit(new Callable() { // from class: com.samsung.android.sume.core.service.RemoteServiceProxy$$ExternalSyntheticLambda1
             @Override // java.util.concurrent.Callable
             public final Object call() {
-                return RemoteServiceProxy.this.m9612xface98b3(request, responseHolder);
+                return this.f$0.m9625xface98b3(request, responseHolder);
             }
         });
     }
@@ -185,7 +185,7 @@ public class RemoteServiceProxy implements ServiceProxy {
     }
 
     /* renamed from: lambda$request$2$com-samsung-android-sume-core-service-RemoteServiceProxy, reason: not valid java name */
-    /* synthetic */ Response m9612xface98b3(Request request, ResponseHolder responseHolder) throws Exception {
+    /* synthetic */ Response m9625xface98b3(Request request, ResponseHolder responseHolder) throws Exception {
         ExceptionHandler exceptionHandler;
         String str = TAG;
         Log.d(str, "request: " + request.getCode());
@@ -203,11 +203,11 @@ public class RemoteServiceProxy implements ServiceProxy {
             }
         }
         this.responseList.remove(responseHolder);
-        Response reset = responseHolder.reset();
-        if (reset.getException() == null || ((exceptionHandler = this.exceptionHandler) != null && exceptionHandler.accept(reset.getException()))) {
-            return reset;
+        Response responseReset = responseHolder.reset();
+        if (responseReset.getException() == null || ((exceptionHandler = this.exceptionHandler) != null && exceptionHandler.accept(responseReset.getException()))) {
+            return responseReset;
         }
-        throw reset.getException();
+        throw responseReset.getException();
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -245,7 +245,7 @@ public class RemoteServiceProxy implements ServiceProxy {
         this.responseList.forEach(new Consumer() { // from class: com.samsung.android.sume.core.service.RemoteServiceProxy$$ExternalSyntheticLambda2
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                RemoteServiceProxy.lambda$onWarn$3(Response.this, (ResponseHolder) obj);
+                RemoteServiceProxy.lambda$onWarn$3(response, (ResponseHolder) obj);
             }
         });
     }
@@ -270,7 +270,7 @@ public class RemoteServiceProxy implements ServiceProxy {
             this.responseList.forEach(new Consumer() { // from class: com.samsung.android.sume.core.service.RemoteServiceProxy$$ExternalSyntheticLambda3
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    RemoteServiceProxy.lambda$onError$4(Response.this, exception, (ResponseHolder) obj);
+                    RemoteServiceProxy.lambda$onError$4(response, exception, (ResponseHolder) obj);
                 }
             });
         }

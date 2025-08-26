@@ -82,10 +82,10 @@ public final class LongMultiStateCounter implements Parcelable {
     }
 
     private LongMultiStateCounter(Parcel parcel) {
-        long native_initFromParcel = native_initFromParcel(parcel);
-        this.mNativeObject = native_initFromParcel;
+        long jNative_initFromParcel = native_initFromParcel(parcel);
+        this.mNativeObject = jNative_initFromParcel;
         registerNativeAllocation();
-        this.mStateCount = native_getStateCount(native_initFromParcel);
+        this.mStateCount = native_getStateCount(jNative_initFromParcel);
     }
 
     private void registerNativeAllocation() {
@@ -143,11 +143,11 @@ public final class LongMultiStateCounter implements Parcelable {
     }
 
     public long getTotalCount() {
-        long j = 0;
+        long jNative_getCount = 0;
         for (int i = 0; i < this.mStateCount; i++) {
-            j += native_getCount(this.mNativeObject, i);
+            jNative_getCount += native_getCount(this.mNativeObject, i);
         }
-        return j;
+        return jNative_getCount;
     }
 
     public String toString() {

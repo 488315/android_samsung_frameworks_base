@@ -11,26 +11,25 @@ import java.util.HashMap;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class KeyFrames {
     public static final HashMap sKeyMakers;
     public final HashMap mFramesMap = new HashMap();
 
     static {
-        HashMap hashMap = new HashMap();
-        sKeyMakers = hashMap;
+        HashMap map = new HashMap();
+        sKeyMakers = map;
         try {
             Class[] clsArr = new Class[0];
-            hashMap.put("KeyAttribute", KeyAttributes.class.getConstructor(null));
+            map.put("KeyAttribute", KeyAttributes.class.getConstructor(null));
             Class[] clsArr2 = new Class[0];
-            hashMap.put("KeyPosition", KeyPosition.class.getConstructor(null));
+            map.put("KeyPosition", KeyPosition.class.getConstructor(null));
             Class[] clsArr3 = new Class[0];
-            hashMap.put("KeyCycle", KeyCycle.class.getConstructor(null));
+            map.put("KeyCycle", KeyCycle.class.getConstructor(null));
             Class[] clsArr4 = new Class[0];
-            hashMap.put("KeyTimeCycle", KeyTimeCycle.class.getConstructor(null));
+            map.put("KeyTimeCycle", KeyTimeCycle.class.getConstructor(null));
             Class[] clsArr5 = new Class[0];
-            hashMap.put("KeyTrigger", KeyTrigger.class.getConstructor(null));
+            map.put("KeyTrigger", KeyTrigger.class.getConstructor(null));
         } catch (NoSuchMethodException e) {
             Log.e("KeyFrames", "unable to load", e);
         }
@@ -71,9 +70,13 @@ public class KeyFrames {
         }
     }
 
-    public KeyFrames(Context context, XmlPullParser xmlPullParser) {
-        HashMap hashMap;
-        HashMap hashMap2;
+    /* JADX WARN: Removed duplicated region for block: B:37:0x0079  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
+    public KeyFrames(Context context, XmlPullParser xmlPullParser) throws XmlPullParserException, IOException {
+        HashMap map;
+        HashMap map2;
         char c;
         Key keyAttributes;
         try {
@@ -89,39 +92,36 @@ public class KeyFrames {
                     if (sKeyMakers.containsKey(name)) {
                         switch (name.hashCode()) {
                             case -300573030:
-                                if (name.equals("KeyTimeCycle")) {
+                                if (!name.equals("KeyTimeCycle")) {
+                                    c = 65535;
+                                    break;
+                                } else {
                                     c = 3;
                                     break;
                                 }
-                                c = 65535;
-                                break;
                             case -298435811:
                                 if (name.equals("KeyAttribute")) {
                                     c = 0;
                                     break;
                                 }
-                                c = 65535;
                                 break;
                             case 540053991:
                                 if (name.equals("KeyCycle")) {
                                     c = 2;
                                     break;
                                 }
-                                c = 65535;
                                 break;
                             case 1153397896:
                                 if (name.equals("KeyPosition")) {
                                     c = 1;
                                     break;
                                 }
-                                c = 65535;
                                 break;
                             case 1308496505:
                                 if (name.equals("KeyTrigger")) {
                                     c = 4;
                                     break;
                                 }
-                                c = 65535;
                                 break;
                             default:
                                 c = 65535;
@@ -144,11 +144,11 @@ public class KeyFrames {
                         addKey(keyAttributes);
                         key = keyAttributes;
                     } else if (name.equalsIgnoreCase("CustomAttribute")) {
-                        if (key != null && (hashMap2 = key.mCustomConstraints) != null) {
-                            ConstraintAttribute.parse(context, xmlPullParser, hashMap2);
+                        if (key != null && (map2 = key.mCustomConstraints) != null) {
+                            ConstraintAttribute.parse(context, xmlPullParser, map2);
                         }
-                    } else if (name.equalsIgnoreCase("CustomMethod") && key != null && (hashMap = key.mCustomConstraints) != null) {
-                        ConstraintAttribute.parse(context, xmlPullParser, hashMap);
+                    } else if (name.equalsIgnoreCase("CustomMethod") && key != null && (map = key.mCustomConstraints) != null) {
+                        ConstraintAttribute.parse(context, xmlPullParser, map);
                     }
                 }
                 eventType = xmlPullParser.next();

@@ -13,7 +13,6 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class ConnectivityRepositoryImpl$vcnSubId$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ ConnectivityInputLogger $logger;
@@ -47,14 +46,14 @@ final class ConnectivityRepositoryImpl$vcnSubId$2 extends SuspendLambda implemen
         ResultKt.throwOnFailure(obj);
         Integer num = (Integer) this.L$0;
         ConnectivityInputLogger connectivityInputLogger = this.$logger;
-        int intValue = num != null ? num.intValue() : -2;
+        int iIntValue = num != null ? num.intValue() : -2;
         connectivityInputLogger.getClass();
         LogLevel logLevel = LogLevel.DEBUG;
         ConnectivityInputLogger$$ExternalSyntheticLambda0 connectivityInputLogger$$ExternalSyntheticLambda0 = new ConnectivityInputLogger$$ExternalSyntheticLambda0(0);
         LogBuffer logBuffer = connectivityInputLogger.buffer;
-        LogMessage obtain = logBuffer.obtain("ConnectivityInputLogger", logLevel, connectivityInputLogger$$ExternalSyntheticLambda0, null);
-        ((LogMessageImpl) obtain).int1 = intValue;
-        logBuffer.commit(obtain);
+        LogMessage logMessageObtain = logBuffer.obtain("ConnectivityInputLogger", logLevel, connectivityInputLogger$$ExternalSyntheticLambda0, null);
+        ((LogMessageImpl) logMessageObtain).int1 = iIntValue;
+        logBuffer.commit(logMessageObtain);
         return Unit.INSTANCE;
     }
 }

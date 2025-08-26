@@ -15,7 +15,6 @@ import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class BaseAutoAddableModule_Companion_ProvidesAutoAddableSettingFactory implements Provider {
     public final Provider autoAddableSettingFactoryProvider;
@@ -26,29 +25,29 @@ public final class BaseAutoAddableModule_Companion_ProvidesAutoAddableSettingFac
         this.autoAddableSettingFactoryProvider = provider2;
     }
 
-    public static Set providesAutoAddableSetting(Resources resources, DaggerReferenceGlobalRootComponent.ReferenceSysUIComponentImpl.SwitchingProvider.AnonymousClass156 anonymousClass156) {
+    public static Set providesAutoAddableSetting(Resources resources, DaggerReferenceGlobalRootComponent.ReferenceSysUIComponentImpl.SwitchingProvider.AnonymousClass157 anonymousClass157) throws Resources.NotFoundException {
         BaseAutoAddableModule.Companion.getClass();
         AutoAddableSettingList.INSTANCE.getClass();
         String[] stringArray = resources.getStringArray(R.array.config_quickSettingsAutoAdd);
         ArrayList arrayList = new ArrayList();
         for (String str : stringArray) {
             str.getClass();
-            List split$default = StringsKt__StringsKt.split$default(str, new String[]{":"}, 2, 2);
-            AutoAddableSetting autoAddableSetting = null;
-            if (split$default.size() == 2) {
-                String str2 = (String) split$default.get(0);
-                String str3 = (String) split$default.get(1);
+            List listSplit$default = StringsKt__StringsKt.split$default(str, new String[]{":"}, 2, 2);
+            AutoAddableSetting autoAddableSettingCreate = null;
+            if (listSplit$default.size() == 2) {
+                String str2 = (String) listSplit$default.get(0);
+                String str3 = (String) listSplit$default.get(1);
                 TileSpec.Companion.getClass();
                 if (Intrinsics.areEqual(TileSpec.Companion.create(str3), TileSpec.Invalid.INSTANCE)) {
                     Log.w("AutoAddableSettingList", "Malformed item in array: ".concat(str));
                 } else {
-                    autoAddableSetting = anonymousClass156.create(str2, TileSpec.Companion.create(str3));
+                    autoAddableSettingCreate = anonymousClass157.create(str2, TileSpec.Companion.create(str3));
                 }
             } else {
                 Log.w("AutoAddableSettingList", "Malformed item in array: ".concat(str));
             }
-            if (autoAddableSetting != null) {
-                arrayList.add(autoAddableSetting);
+            if (autoAddableSettingCreate != null) {
+                arrayList.add(autoAddableSettingCreate);
             }
         }
         Set set = CollectionsKt___CollectionsKt.toSet(arrayList);
@@ -58,6 +57,6 @@ public final class BaseAutoAddableModule_Companion_ProvidesAutoAddableSettingFac
 
     @Override // javax.inject.Provider
     public final Object get() {
-        return providesAutoAddableSetting((Resources) this.resourcesProvider.get(), (DaggerReferenceGlobalRootComponent.ReferenceSysUIComponentImpl.SwitchingProvider.AnonymousClass156) this.autoAddableSettingFactoryProvider.get());
+        return providesAutoAddableSetting((Resources) this.resourcesProvider.get(), (DaggerReferenceGlobalRootComponent.ReferenceSysUIComponentImpl.SwitchingProvider.AnonymousClass157) this.autoAddableSettingFactoryProvider.get());
     }
 }

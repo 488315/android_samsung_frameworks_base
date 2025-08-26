@@ -8,7 +8,6 @@ import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class LowLightCondition extends Condition {
     public final AmbientLightModeMonitor ambientLightModeMonitor;
@@ -25,7 +24,7 @@ public final class LowLightCondition extends Condition {
 
     @Override // com.android.systemui.shared.condition.Condition
     public final Object start(Continuation continuation) {
-        new Object(this) { // from class: com.android.systemui.lowlightclock.LowLightCondition$start$2
+        new Object(this) { // from class: com.android.systemui.lowlightclock.LowLightCondition.start.2
         };
         boolean z = AmbientLightModeMonitor.DEBUG;
         AmbientLightModeMonitor ambientLightModeMonitor = this.ambientLightModeMonitor;

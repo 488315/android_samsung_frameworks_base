@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout android:gravity="start|center|top" android:id="@id/conversation_icon_container" android:clipChildren="false" android:clipToPadding="false" android:layout_width="@dimen/notification_2025_content_margin_start" android:layout_height="wrap_content" android:importantForAccessibility="no"
+<FrameLayout android:gravity="start|top" android:id="@id/conversation_icon_container" android:clipChildren="false" android:clipToPadding="false" android:layout_width="@dimen/notification_2025_content_margin_start" android:layout_height="wrap_content" android:importantForAccessibility="no"
   xmlns:android="http://schemas.android.com/apk/res/android">
     <FrameLayout android:layout_gravity="center|top" android:clipChildren="false" android:clipToPadding="false" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/notification_2025_margin" android:layout_marginHorizontal="@dimen/notification_2025_margin">
         <com.android.internal.widget.CachingIconView android:id="@id/conversation_icon" android:background="@drawable/notification_icon_circle" android:layout_width="@dimen/notification_2025_icon_circle_size" android:layout_height="@dimen/notification_2025_icon_circle_size" android:scaleType="centerCrop" android:importantForAccessibility="no" android:clipToOutline="true" />

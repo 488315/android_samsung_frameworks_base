@@ -33,10 +33,10 @@ public abstract class CallScreeningService extends Service {
             SomeArgs someArgs = (SomeArgs) message.obj;
             try {
                 CallScreeningService.this.mCallScreeningAdapter = (ICallScreeningAdapter) someArgs.arg1;
-                Call.Details createFromParcelableCall = Call.Details.createFromParcelableCall((ParcelableCall) someArgs.arg2);
-                CallScreeningService.this.onScreenCall(createFromParcelableCall);
-                if (createFromParcelableCall.getCallDirection() == 1) {
-                    CallScreeningService.this.mCallScreeningAdapter.onScreeningResponse(createFromParcelableCall.getTelecomCallId(), new ComponentName(CallScreeningService.this.getPackageName(), getClass().getName()), null);
+                Call.Details detailsCreateFromParcelableCall = Call.Details.createFromParcelableCall((ParcelableCall) someArgs.arg2);
+                CallScreeningService.this.onScreenCall(detailsCreateFromParcelableCall);
+                if (detailsCreateFromParcelableCall.getCallDirection() == 1) {
+                    CallScreeningService.this.mCallScreeningAdapter.onScreeningResponse(detailsCreateFromParcelableCall.getTelecomCallId(), new ComponentName(CallScreeningService.this.getPackageName(), getClass().getName()), null);
                 }
             } catch (RemoteException e) {
                 Log.w(this, "Exception when screening call: " + e, new Object[0]);
@@ -55,10 +55,10 @@ public abstract class CallScreeningService extends Service {
         @Override // com.android.internal.telecom.ICallScreeningService
         public void screenCall(ICallScreeningAdapter iCallScreeningAdapter, ParcelableCall parcelableCall) {
             Log.v(this, "screenCall", new Object[0]);
-            SomeArgs obtain = SomeArgs.obtain();
-            obtain.arg1 = iCallScreeningAdapter;
-            obtain.arg2 = parcelableCall;
-            CallScreeningService.this.mHandler.obtainMessage(1, obtain).sendToTarget();
+            SomeArgs someArgsObtain = SomeArgs.obtain();
+            someArgsObtain.arg1 = iCallScreeningAdapter;
+            someArgsObtain.arg2 = parcelableCall;
+            CallScreeningService.this.mHandler.obtainMessage(1, someArgsObtain).sendToTarget();
         }
     }
 

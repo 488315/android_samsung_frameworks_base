@@ -7,17 +7,27 @@ import androidx.lifecycle.ViewModel;
 import com.android.systemui.media.mediaoutput.controller.media.DeviceSession;
 import com.android.systemui.media.mediaoutput.controller.media.DeviceSessionController;
 import com.android.systemui.media.mediaoutput.dagger.DeviceSessionControllerFactory;
+import com.android.systemui.media.mediaoutput.entity.EntityString;
 import com.samsung.android.smartthingsmediasdk.mediasdk.SmartThingsMediaSdkManager;
+import com.samsung.android.smartthingsmediasdk.mediasdk.manager.mediasdkoperations.devicestatus.DeviceDomain;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
 import kotlin.ResultKt;
 import kotlin.Unit;
+import kotlin.collections.CollectionsKt__IterablesKt;
+import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.collections.EmptyList;
+import kotlin.collections.MapsKt__MapsJVMKt;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.ContinuationImpl;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.internal.DefaultConstructorMarker;
+import kotlin.jvm.internal.Intrinsics;
+import kotlin.text.StringsKt__StringsKt;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.flow.Flow;
@@ -29,7 +39,6 @@ import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class MediaDeviceViewModel extends ViewModel implements MediaInteraction {
     public static final Companion Companion = new Companion(null);
@@ -42,7 +51,6 @@ public final class MediaDeviceViewModel extends ViewModel implements MediaIntera
     public final ReadonlyStateFlow sessionControllersFlow;
     public final StateFlowImpl updateCurrent;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -58,16 +66,15 @@ public final class MediaDeviceViewModel extends ViewModel implements MediaIntera
         this.dataStore = dataStore;
         this.sessionControllerFactory = deviceSessionControllerFactory;
         this.deviceId = savedStateHandle != null ? (String) savedStateHandle.get("deviceId") : null;
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(EmptyList.INSTANCE);
-        this._sessionControllersFlow = MutableStateFlow;
-        ReadonlyStateFlow asStateFlow = FlowKt.asStateFlow(MutableStateFlow);
-        this.sessionControllersFlow = asStateFlow;
-        StateFlowImpl MutableStateFlow2 = StateFlowKt.MutableStateFlow(0L);
-        this.updateCurrent = MutableStateFlow2;
-        final FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 flowKt__ZipKt$combine$$inlined$unsafeFlow$1 = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(MutableStateFlow2, asStateFlow, new MediaDeviceViewModel$currentSessionController$1(null));
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(EmptyList.INSTANCE);
+        this._sessionControllersFlow = stateFlowImplMutableStateFlow;
+        ReadonlyStateFlow readonlyStateFlowAsStateFlow = FlowKt.asStateFlow(stateFlowImplMutableStateFlow);
+        this.sessionControllersFlow = readonlyStateFlowAsStateFlow;
+        StateFlowImpl stateFlowImplMutableStateFlow2 = StateFlowKt.MutableStateFlow(0L);
+        this.updateCurrent = stateFlowImplMutableStateFlow2;
+        final FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 flowKt__ZipKt$combine$$inlined$unsafeFlow$1 = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(stateFlowImplMutableStateFlow2, readonlyStateFlowAsStateFlow, new MediaDeviceViewModel$currentSessionController$1(null));
         this.currentSessionController = new Flow() { // from class: com.android.systemui.media.mediaoutput.viewmodel.MediaDeviceViewModel$special$$inlined$map$1
 
-            /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
             /* renamed from: com.android.systemui.media.mediaoutput.viewmodel.MediaDeviceViewModel$special$$inlined$map$1$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
                 public final /* synthetic */ FlowCollector $this_unsafeFlow;
@@ -96,82 +103,57 @@ public final class MediaDeviceViewModel extends ViewModel implements MediaIntera
                     this.this$0 = mediaDeviceViewModel;
                 }
 
-                /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
-                /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+                /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
                 @Override // kotlinx.coroutines.flow.FlowCollector
                 /*
                     Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
                 */
-                public final java.lang.Object emit(java.lang.Object r6, kotlin.coroutines.Continuation r7) {
-                    /*
-                        r5 = this;
-                        boolean r0 = r7 instanceof com.android.systemui.media.mediaoutput.viewmodel.MediaDeviceViewModel$special$$inlined$map$1.AnonymousClass2.AnonymousClass1
-                        if (r0 == 0) goto L13
-                        r0 = r7
-                        com.android.systemui.media.mediaoutput.viewmodel.MediaDeviceViewModel$special$$inlined$map$1$2$1 r0 = (com.android.systemui.media.mediaoutput.viewmodel.MediaDeviceViewModel$special$$inlined$map$1.AnonymousClass2.AnonymousClass1) r0
-                        int r1 = r0.label
-                        r2 = -2147483648(0xffffffff80000000, float:-0.0)
-                        r3 = r1 & r2
-                        if (r3 == 0) goto L13
-                        int r1 = r1 - r2
-                        r0.label = r1
-                        goto L18
-                    L13:
-                        com.android.systemui.media.mediaoutput.viewmodel.MediaDeviceViewModel$special$$inlined$map$1$2$1 r0 = new com.android.systemui.media.mediaoutput.viewmodel.MediaDeviceViewModel$special$$inlined$map$1$2$1
-                        r0.<init>(r7)
-                    L18:
-                        java.lang.Object r7 = r0.result
-                        kotlin.coroutines.intrinsics.CoroutineSingletons r1 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                        int r2 = r0.label
-                        r3 = 1
-                        if (r2 == 0) goto L2f
-                        if (r2 != r3) goto L27
-                        kotlin.ResultKt.throwOnFailure(r7)
-                        goto L64
-                    L27:
-                        java.lang.IllegalStateException r5 = new java.lang.IllegalStateException
-                        java.lang.String r6 = "call to 'resume' before 'invoke' with coroutine"
-                        r5.<init>(r6)
-                        throw r5
-                    L2f:
-                        kotlin.ResultKt.throwOnFailure(r7)
-                        java.util.List r6 = (java.util.List) r6
-                        java.lang.Iterable r6 = (java.lang.Iterable) r6
-                        java.util.Iterator r6 = r6.iterator()
-                    L3a:
-                        boolean r7 = r6.hasNext()
-                        if (r7 == 0) goto L58
-                        java.lang.Object r7 = r6.next()
-                        r2 = r7
-                        com.android.systemui.media.mediaoutput.controller.media.DeviceSession r2 = (com.android.systemui.media.mediaoutput.controller.media.DeviceSession) r2
-                        com.android.systemui.media.mediaoutput.controller.media.DeviceSessionController r2 = (com.android.systemui.media.mediaoutput.controller.media.DeviceSessionController) r2
-                        java.lang.String r2 = r2.getId()
-                        com.android.systemui.media.mediaoutput.viewmodel.MediaDeviceViewModel r4 = r5.this$0
-                        java.lang.String r4 = r4.deviceId
-                        boolean r2 = kotlin.jvm.internal.Intrinsics.areEqual(r2, r4)
-                        if (r2 == 0) goto L3a
-                        goto L59
-                    L58:
-                        r7 = 0
-                    L59:
-                        r0.label = r3
-                        kotlinx.coroutines.flow.FlowCollector r5 = r5.$this_unsafeFlow
-                        java.lang.Object r5 = r5.emit(r7, r0)
-                        if (r5 != r1) goto L64
-                        return r1
-                    L64:
-                        kotlin.Unit r5 = kotlin.Unit.INSTANCE
-                        return r5
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.media.mediaoutput.viewmodel.MediaDeviceViewModel$special$$inlined$map$1.AnonymousClass2.emit(java.lang.Object, kotlin.coroutines.Continuation):java.lang.Object");
+                public final Object emit(Object obj, Continuation continuation) {
+                    AnonymousClass1 anonymousClass1;
+                    Object next;
+                    if (continuation instanceof AnonymousClass1) {
+                        anonymousClass1 = (AnonymousClass1) continuation;
+                        int i = anonymousClass1.label;
+                        if ((i & Integer.MIN_VALUE) != 0) {
+                            anonymousClass1.label = i - Integer.MIN_VALUE;
+                        } else {
+                            anonymousClass1 = new AnonymousClass1(continuation);
+                        }
+                    }
+                    Object obj2 = anonymousClass1.result;
+                    CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                    int i2 = anonymousClass1.label;
+                    if (i2 == 0) {
+                        ResultKt.throwOnFailure(obj2);
+                        Iterator it = ((List) obj).iterator();
+                        while (true) {
+                            if (!it.hasNext()) {
+                                next = null;
+                                break;
+                            }
+                            next = it.next();
+                            if (Intrinsics.areEqual(((DeviceSessionController) ((DeviceSession) next)).getId(), this.this$0.deviceId)) {
+                                break;
+                            }
+                        }
+                        anonymousClass1.label = 1;
+                        if (this.$this_unsafeFlow.emit(next, anonymousClass1) == coroutineSingletons) {
+                            return coroutineSingletons;
+                        }
+                    } else {
+                        if (i2 != 1) {
+                            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                        }
+                        ResultKt.throwOnFailure(obj2);
+                    }
+                    return Unit.INSTANCE;
                 }
             }
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object collect = Flow.this.collect(new AnonymousClass2(flowCollector, this), continuation);
-                return collect == CoroutineSingletons.COROUTINE_SUSPENDED ? collect : Unit.INSTANCE;
+                Object objCollect = flowKt__ZipKt$combine$$inlined$unsafeFlow$1.collect(new AnonymousClass2(flowCollector, this), continuation);
+                return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         };
         Log.d("MediaDeviceViewModel", "init()");
@@ -193,7 +175,6 @@ public final class MediaDeviceViewModel extends ViewModel implements MediaIntera
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.media.mediaoutput.viewmodel.MediaDeviceViewModel$1, reason: invalid class name */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         int label;
@@ -218,10 +199,10 @@ public final class MediaDeviceViewModel extends ViewModel implements MediaIntera
             int i = this.label;
             if (i == 0) {
                 ResultKt.throwOnFailure(obj);
-                ChannelFlowTransformLatest transformLatest = FlowKt.transformLatest(FlowKt.asStateFlow(MediaDeviceViewModel.this.mediaSdkManager.supportServiceClientStateManager.mediaSdkSupportServiceClient._serviceConnectedStateFlow), new MediaDeviceViewModel$1$invokeSuspend$$inlined$flatMapLatest$1(null, MediaDeviceViewModel.this));
+                ChannelFlowTransformLatest channelFlowTransformLatestTransformLatest = FlowKt.transformLatest(FlowKt.asStateFlow(MediaDeviceViewModel.this.mediaSdkManager.supportServiceClientStateManager.mediaSdkSupportServiceClient._serviceConnectedStateFlow), new MediaDeviceViewModel$1$invokeSuspend$$inlined$flatMapLatest$1(null, MediaDeviceViewModel.this));
                 AnonymousClass2 anonymousClass2 = new AnonymousClass2(MediaDeviceViewModel.this);
                 this.label = 1;
-                if (transformLatest.collect(anonymousClass2, this) == coroutineSingletons) {
+                if (channelFlowTransformLatestTransformLatest.collect(anonymousClass2, this) == coroutineSingletons) {
                     return coroutineSingletons;
                 }
             } else {
@@ -233,7 +214,6 @@ public final class MediaDeviceViewModel extends ViewModel implements MediaIntera
             return Unit.INSTANCE;
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.media.mediaoutput.viewmodel.MediaDeviceViewModel$1$2, reason: invalid class name */
         public final class AnonymousClass2 implements FlowCollector {
             public final /* synthetic */ MediaDeviceViewModel this$0;
@@ -243,18 +223,102 @@ public final class MediaDeviceViewModel extends ViewModel implements MediaIntera
             }
 
             /* JADX WARN: Multi-variable type inference failed */
-            /* JADX WARN: Removed duplicated region for block: B:15:0x0034  */
-            /* JADX WARN: Removed duplicated region for block: B:8:0x0021  */
+            /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
             /*
                 Code decompiled incorrectly, please refer to instructions dump.
-                To view partially-correct code enable 'Show inconsistent code' option in preferences
             */
-            public final java.lang.Object emit(boolean r14, kotlin.coroutines.Continuation r15) {
-                /*
-                    Method dump skipped, instructions count: 401
-                    To view this dump change 'Code comments level' option to 'DEBUG'
-                */
-                throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.media.mediaoutput.viewmodel.MediaDeviceViewModel.AnonymousClass1.AnonymousClass2.emit(boolean, kotlin.coroutines.Continuation):java.lang.Object");
+            public final Object emit(boolean z, Continuation continuation) {
+                MediaDeviceViewModel$1$2$emit$1 mediaDeviceViewModel$1$2$emit$1;
+                List devices;
+                if (continuation instanceof MediaDeviceViewModel$1$2$emit$1) {
+                    mediaDeviceViewModel$1$2$emit$1 = (MediaDeviceViewModel$1$2$emit$1) continuation;
+                    int i = mediaDeviceViewModel$1$2$emit$1.label;
+                    if ((i & Integer.MIN_VALUE) != 0) {
+                        mediaDeviceViewModel$1$2$emit$1.label = i - Integer.MIN_VALUE;
+                    } else {
+                        mediaDeviceViewModel$1$2$emit$1 = new MediaDeviceViewModel$1$2$emit$1(this, continuation);
+                    }
+                }
+                Object obj = mediaDeviceViewModel$1$2$emit$1.result;
+                CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+                int i2 = mediaDeviceViewModel$1$2$emit$1.label;
+                if (i2 == 0) {
+                    ResultKt.throwOnFailure(obj);
+                    Log.d("MediaDeviceViewModel", "serviceConnected = true");
+                    MediaDeviceViewModel mediaDeviceViewModel = this.this$0;
+                    List list = (List) mediaDeviceViewModel._sessionControllersFlow.getValue();
+                    int iMapCapacity = MapsKt__MapsJVMKt.mapCapacity(CollectionsKt__IterablesKt.collectionSizeOrDefault(list, 10));
+                    if (iMapCapacity < 16) {
+                        iMapCapacity = 16;
+                    }
+                    LinkedHashMap linkedHashMap = new LinkedHashMap(iMapCapacity);
+                    for (Object obj2 : list) {
+                        linkedHashMap.put(((DeviceSessionController) ((DeviceSession) obj2)).getId(), obj2);
+                    }
+                    SmartThingsMediaSdkManager smartThingsMediaSdkManager = mediaDeviceViewModel.mediaSdkManager;
+                    EmptyList emptyList = null;
+                    SmartThingsMediaSdkManager smartThingsMediaSdkManager2 = ((Boolean) FlowKt.asStateFlow(smartThingsMediaSdkManager.supportServiceClientStateManager.mediaSdkSupportServiceClient._serviceConnectedStateFlow).$$delegate_0.getValue()).booleanValue() ? smartThingsMediaSdkManager : null;
+                    if (smartThingsMediaSdkManager2 != null && (devices = smartThingsMediaSdkManager2.mediaSdkOperationManager.deviceStatusOperationImpl.getDevices()) != null) {
+                        List list2 = devices;
+                        Iterator it = list2.iterator();
+                        while (it.hasNext()) {
+                            Log.d("MediaDeviceViewModel", "\t" + ((DeviceDomain) it.next()));
+                        }
+                        ArrayList arrayList = new ArrayList();
+                        for (Object obj3 : list2) {
+                            DeviceDomain deviceDomain = (DeviceDomain) obj3;
+                            if (!z) {
+                                if (smartThingsMediaSdkManager.mediaSdkOperationManager.deviceStatusOperationImpl.isSupported(deviceDomain.deviceId)) {
+                                }
+                            }
+                            arrayList.add(obj3);
+                        }
+                        ArrayList arrayList2 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(arrayList, 10));
+                        int size = arrayList.size();
+                        int i3 = 0;
+                        int i4 = 0;
+                        while (i4 < size) {
+                            Object obj4 = arrayList.get(i4);
+                            i4++;
+                            DeviceDomain deviceDomain2 = (DeviceDomain) obj4;
+                            EntityString entityStringCreate = (DeviceSession) linkedHashMap.get(deviceDomain2.deviceId);
+                            if (entityStringCreate == null) {
+                                entityStringCreate = mediaDeviceViewModel.sessionControllerFactory.create(deviceDomain2);
+                            }
+                            arrayList2.add(entityStringCreate);
+                        }
+                        int size2 = arrayList2.size();
+                        while (i3 < size2) {
+                            Object obj5 = arrayList2.get(i3);
+                            i3++;
+                            Log.d("MediaDeviceViewModel", "\t" + ((DeviceSession) obj5));
+                        }
+                        emptyList = arrayList2;
+                    }
+                    if (emptyList == null) {
+                        emptyList = EmptyList.INSTANCE;
+                    }
+                    String str = mediaDeviceViewModel.deviceId;
+                    if ((str != null && !StringsKt__StringsKt.isBlank(str)) || emptyList.size() > 1) {
+                        smartThingsMediaSdkManager.mediaSdkOperationManager.mediaOutputDeviceOperationImpl.startCloudSync();
+                    }
+                    Iterator it2 = CollectionsKt___CollectionsKt.minus((Iterable) list, (Iterable) CollectionsKt___CollectionsKt.toSet(emptyList)).iterator();
+                    while (it2.hasNext()) {
+                        ((DeviceSessionController) ((DeviceSession) it2.next())).close();
+                    }
+                    mediaDeviceViewModel$1$2$emit$1.L$0 = emptyList;
+                    mediaDeviceViewModel$1$2$emit$1.label = 1;
+                    mediaDeviceViewModel._sessionControllersFlow.setValue(emptyList);
+                    if (Unit.INSTANCE == coroutineSingletons) {
+                        return coroutineSingletons;
+                    }
+                } else {
+                    if (i2 != 1) {
+                        throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                    }
+                    ResultKt.throwOnFailure(obj);
+                }
+                return Unit.INSTANCE;
             }
 
             @Override // kotlinx.coroutines.flow.FlowCollector

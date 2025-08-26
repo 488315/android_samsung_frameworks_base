@@ -12,10 +12,10 @@ public class VideoProfile implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public VideoProfile createFromParcel(Parcel parcel) {
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
+            int i = parcel.readInt();
+            int i2 = parcel.readInt();
             VideoProfile.class.getClassLoader();
-            return new VideoProfile(readInt, readInt2);
+            return new VideoProfile(i, i2);
         }
 
         /* JADX WARN: Can't rename method to resolve collision */

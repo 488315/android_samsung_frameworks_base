@@ -16,7 +16,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class HistoryTracker {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -25,7 +24,6 @@ public class HistoryTracker {
     public final DelayQueue mResults = new DelayQueue();
     public final Set mBeliefListeners = Collections.newSetFromMap(new ConcurrentHashMap());
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CombinedResult implements Delayed {
         public final long mExpiryMs;
         public final double mScore;
@@ -71,14 +69,14 @@ public class HistoryTracker {
         this.mBeliefListeners.forEach(new Consumer() { // from class: com.android.systemui.classifier.HistoryTracker$$ExternalSyntheticLambda5
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
-                HistoryTracker historyTracker = HistoryTracker.this;
+                HistoryTracker historyTracker = this.f$0;
                 int i = HistoryTracker.$r8$clinit;
-                double falseBelief = historyTracker.falseBelief();
+                double dFalseBelief = historyTracker.falseBelief();
                 BrightLineFalsingManager brightLineFalsingManager = ((BrightLineFalsingManager.AnonymousClass2) obj).this$0;
                 brightLineFalsingManager.mHistoryTracker.falseBelief();
                 brightLineFalsingManager.mHistoryTracker.falseConfidence();
                 boolean z = BrightLineFalsingManager.DEBUG;
-                if (falseBelief > 0.9d) {
+                if (dFalseBelief > 0.9d) {
                     ((ArrayList) brightLineFalsingManager.mFalsingBeliefListeners).forEach(new BrightLineFalsingManager$$ExternalSyntheticLambda0(3));
                 }
             }
@@ -91,11 +89,11 @@ public class HistoryTracker {
         if (this.mResults.isEmpty()) {
             return 0.5d;
         }
-        final long uptimeMillis = this.mSystemClock.uptimeMillis();
+        final long jUptimeMillis = this.mSystemClock.uptimeMillis();
         return ((Double) this.mResults.stream().map(new Function() { // from class: com.android.systemui.classifier.HistoryTracker$$ExternalSyntheticLambda3
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                long j = uptimeMillis;
+                long j = jUptimeMillis;
                 HistoryTracker.CombinedResult combinedResult = (HistoryTracker.CombinedResult) obj;
                 int i = HistoryTracker.$r8$clinit;
                 return Double.valueOf((Math.pow(HistoryTracker.HISTORY_DECAY, (10000 - (combinedResult.mExpiryMs - j)) / 100.0d) * (combinedResult.mScore - 0.5d)) + 0.5d);
@@ -109,11 +107,11 @@ public class HistoryTracker {
         if (this.mResults.isEmpty()) {
             return 0.0d;
         }
-        final double doubleValue = ((Double) this.mResults.stream().map(new HistoryTracker$$ExternalSyntheticLambda0()).reduce(Double.valueOf(0.0d), new HistoryTracker$$ExternalSyntheticLambda1(0))).doubleValue() / this.mResults.size();
+        final double dDoubleValue = ((Double) this.mResults.stream().map(new HistoryTracker$$ExternalSyntheticLambda0()).reduce(Double.valueOf(0.0d), new HistoryTracker$$ExternalSyntheticLambda1(0))).doubleValue() / this.mResults.size();
         return 1.0d - Math.sqrt(((Double) this.mResults.stream().map(new Function() { // from class: com.android.systemui.classifier.HistoryTracker$$ExternalSyntheticLambda2
             @Override // java.util.function.Function
             public final Object apply(Object obj) {
-                double d = doubleValue;
+                double d = dDoubleValue;
                 int i = HistoryTracker.$r8$clinit;
                 return Double.valueOf(Math.pow(((HistoryTracker.CombinedResult) obj).mScore - d, 2.0d));
             }

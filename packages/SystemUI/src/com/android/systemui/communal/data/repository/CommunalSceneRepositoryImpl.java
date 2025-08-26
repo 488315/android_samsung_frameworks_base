@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class CommunalSceneRepositoryImpl implements CommunalSceneRepository {
     public final StateFlowImpl _communalContainerOrientation;
@@ -28,13 +27,13 @@ public final class CommunalSceneRepositoryImpl implements CommunalSceneRepositor
         this.currentScene = sceneDataSource.getCurrentScene();
         ObservableTransitionState.Idle idle = new ObservableTransitionState.Idle(CommunalScenes.Default, null, 2, null);
         this.defaultTransitionState = idle;
-        StateFlowImpl MutableStateFlow = StateFlowKt.MutableStateFlow(null);
-        this._transitionState = MutableStateFlow;
-        ChannelFlowTransformLatest transformLatest = FlowKt.transformLatest(MutableStateFlow, new CommunalSceneRepositoryImpl$special$$inlined$flatMapLatest$1(null, this));
+        StateFlowImpl stateFlowImplMutableStateFlow = StateFlowKt.MutableStateFlow(null);
+        this._transitionState = stateFlowImplMutableStateFlow;
+        ChannelFlowTransformLatest channelFlowTransformLatestTransformLatest = FlowKt.transformLatest(stateFlowImplMutableStateFlow, new CommunalSceneRepositoryImpl$special$$inlined$flatMapLatest$1(null, this));
         SharingStarted.Companion.getClass();
-        this.transitionState = FlowKt.stateIn(transformLatest, coroutineScope, SharingStarted.Companion.Lazily, idle);
-        StateFlowImpl MutableStateFlow2 = StateFlowKt.MutableStateFlow(0);
-        this._communalContainerOrientation = MutableStateFlow2;
-        this.communalContainerOrientation = FlowKt.asStateFlow(MutableStateFlow2);
+        this.transitionState = FlowKt.stateIn(channelFlowTransformLatestTransformLatest, coroutineScope, SharingStarted.Companion.Lazily, idle);
+        StateFlowImpl stateFlowImplMutableStateFlow2 = StateFlowKt.MutableStateFlow(0);
+        this._communalContainerOrientation = stateFlowImplMutableStateFlow2;
+        this.communalContainerOrientation = FlowKt.asStateFlow(stateFlowImplMutableStateFlow2);
     }
 }

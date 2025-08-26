@@ -19,8 +19,10 @@ import com.android.internal.org.bouncycastle.operator.OperatorCreationException;
 import com.android.internal.org.bouncycastle.operator.RawContentVerifier;
 import com.android.internal.org.bouncycastle.operator.RuntimeOperatorException;
 import com.android.internal.org.bouncycastle.util.io.TeeOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.security.GeneralSecurityException;
+import java.security.InvalidKeyException;
 import java.security.Provider;
 import java.security.PublicKey;
 import java.security.Signature;
@@ -63,18 +65,18 @@ public class JcaContentVerifierProviderBuilder {
                 }
 
                 @Override // com.android.internal.org.bouncycastle.operator.ContentVerifierProvider
-                public ContentVerifier get(AlgorithmIdentifier algorithmIdentifier) throws OperatorCreationException {
+                public ContentVerifier get(AlgorithmIdentifier algorithmIdentifier) throws OperatorCreationException, IOException, InvalidKeyException {
                     if (algorithmIdentifier.getAlgorithm().equals((ASN1Primitive) MiscObjectIdentifiers.id_alg_composite)) {
                         return JcaContentVerifierProviderBuilder.this.createCompositeVerifier(algorithmIdentifier, x509Certificate.getPublicKey());
                     }
                     try {
-                        Signature createSignature = JcaContentVerifierProviderBuilder.this.helper.createSignature(algorithmIdentifier);
-                        createSignature.initVerify(x509Certificate.getPublicKey());
-                        Signature createRawSig = JcaContentVerifierProviderBuilder.this.createRawSig(algorithmIdentifier, x509Certificate.getPublicKey());
-                        if (createRawSig != null) {
-                            return new RawSigVerifier(algorithmIdentifier, createSignature, createRawSig);
+                        Signature signatureCreateSignature = JcaContentVerifierProviderBuilder.this.helper.createSignature(algorithmIdentifier);
+                        signatureCreateSignature.initVerify(x509Certificate.getPublicKey());
+                        Signature signatureCreateRawSig = JcaContentVerifierProviderBuilder.this.createRawSig(algorithmIdentifier, x509Certificate.getPublicKey());
+                        if (signatureCreateRawSig != null) {
+                            return new RawSigVerifier(algorithmIdentifier, signatureCreateSignature, signatureCreateRawSig);
                         }
-                        return new SigVerifier(algorithmIdentifier, createSignature);
+                        return new SigVerifier(algorithmIdentifier, signatureCreateSignature);
                     } catch (GeneralSecurityException e) {
                         throw new OperatorCreationException("exception on setup: " + e, e);
                     }
@@ -98,7 +100,7 @@ public class JcaContentVerifierProviderBuilder {
             }
 
             @Override // com.android.internal.org.bouncycastle.operator.ContentVerifierProvider
-            public ContentVerifier get(AlgorithmIdentifier algorithmIdentifier) throws OperatorCreationException {
+            public ContentVerifier get(AlgorithmIdentifier algorithmIdentifier) throws OperatorCreationException, IOException, InvalidKeyException {
                 if (algorithmIdentifier.getAlgorithm().equals((ASN1Primitive) MiscObjectIdentifiers.id_alg_composite)) {
                     return JcaContentVerifierProviderBuilder.this.createCompositeVerifier(algorithmIdentifier, publicKey);
                 }
@@ -107,23 +109,23 @@ public class JcaContentVerifierProviderBuilder {
                     List<PublicKey> publicKeys = ((CompositePublicKey) publicKey2).getPublicKeys();
                     for (int i = 0; i != publicKeys.size(); i++) {
                         try {
-                            Signature createSignature = JcaContentVerifierProviderBuilder.this.createSignature(algorithmIdentifier, publicKeys.get(i));
-                            Signature createRawSig = JcaContentVerifierProviderBuilder.this.createRawSig(algorithmIdentifier, publicKeys.get(i));
-                            if (createRawSig != null) {
-                                return new RawSigVerifier(algorithmIdentifier, createSignature, createRawSig);
+                            Signature signatureCreateSignature = JcaContentVerifierProviderBuilder.this.createSignature(algorithmIdentifier, publicKeys.get(i));
+                            Signature signatureCreateRawSig = JcaContentVerifierProviderBuilder.this.createRawSig(algorithmIdentifier, publicKeys.get(i));
+                            if (signatureCreateRawSig != null) {
+                                return new RawSigVerifier(algorithmIdentifier, signatureCreateSignature, signatureCreateRawSig);
                             }
-                            return new SigVerifier(algorithmIdentifier, createSignature);
+                            return new SigVerifier(algorithmIdentifier, signatureCreateSignature);
                         } catch (OperatorCreationException unused) {
                         }
                     }
                     throw new OperatorCreationException("no matching algorithm found for key");
                 }
-                Signature createSignature2 = JcaContentVerifierProviderBuilder.this.createSignature(algorithmIdentifier, publicKey2);
-                Signature createRawSig2 = JcaContentVerifierProviderBuilder.this.createRawSig(algorithmIdentifier, publicKey);
-                if (createRawSig2 != null) {
-                    return new RawSigVerifier(algorithmIdentifier, createSignature2, createRawSig2);
+                Signature signatureCreateSignature2 = JcaContentVerifierProviderBuilder.this.createSignature(algorithmIdentifier, publicKey2);
+                Signature signatureCreateRawSig2 = JcaContentVerifierProviderBuilder.this.createRawSig(algorithmIdentifier, publicKey);
+                if (signatureCreateRawSig2 != null) {
+                    return new RawSigVerifier(algorithmIdentifier, signatureCreateSignature2, signatureCreateRawSig2);
                 }
-                return new SigVerifier(algorithmIdentifier, createSignature2);
+                return new SigVerifier(algorithmIdentifier, signatureCreateSignature2);
             }
         };
     }
@@ -164,24 +166,24 @@ public class JcaContentVerifierProviderBuilder {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public Signature createSignature(AlgorithmIdentifier algorithmIdentifier, PublicKey publicKey) throws OperatorCreationException {
+    public Signature createSignature(AlgorithmIdentifier algorithmIdentifier, PublicKey publicKey) throws OperatorCreationException, IOException, InvalidKeyException {
         try {
-            Signature createSignature = this.helper.createSignature(algorithmIdentifier);
-            createSignature.initVerify(publicKey);
-            return createSignature;
+            Signature signatureCreateSignature = this.helper.createSignature(algorithmIdentifier);
+            signatureCreateSignature.initVerify(publicKey);
+            return signatureCreateSignature;
         } catch (GeneralSecurityException e) {
             throw new OperatorCreationException("exception on setup: " + e, e);
         }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public Signature createRawSig(AlgorithmIdentifier algorithmIdentifier, PublicKey publicKey) {
+    public Signature createRawSig(AlgorithmIdentifier algorithmIdentifier, PublicKey publicKey) throws InvalidKeyException {
         try {
-            Signature createRawSignature = this.helper.createRawSignature(algorithmIdentifier);
-            if (createRawSignature != null) {
-                createRawSignature.initVerify(publicKey);
+            Signature signatureCreateRawSignature = this.helper.createRawSignature(algorithmIdentifier);
+            if (signatureCreateRawSignature != null) {
+                signatureCreateRawSignature.initVerify(publicKey);
             }
-            return createRawSignature;
+            return signatureCreateRawSignature;
         } catch (Exception unused) {
             return null;
         }
@@ -231,7 +233,7 @@ public class JcaContentVerifierProviderBuilder {
         }
 
         @Override // com.android.internal.org.bouncycastle.operator.jcajce.JcaContentVerifierProviderBuilder.SigVerifier, com.android.internal.org.bouncycastle.operator.ContentVerifier
-        public boolean verify(byte[] bArr) {
+        public boolean verify(byte[] bArr) throws SignatureException {
             try {
                 return super.verify(bArr);
             } finally {
@@ -243,7 +245,7 @@ public class JcaContentVerifierProviderBuilder {
         }
 
         @Override // com.android.internal.org.bouncycastle.operator.RawContentVerifier
-        public boolean verify(byte[] bArr, byte[] bArr2) {
+        public boolean verify(byte[] bArr, byte[] bArr2) throws SignatureException {
             try {
                 try {
                     this.rawSignature.update(bArr);

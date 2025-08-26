@@ -13,7 +13,6 @@ import com.android.systemui.touch.TouchInsetManager;
 import com.android.systemui.util.concurrency.DelayableExecutor;
 import java.util.ArrayDeque;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class HideComplicationTouchHandler implements TouchHandler {
     public static final boolean DEBUG = Log.isLoggable("HideComplicationHandler", 3);
@@ -62,9 +61,9 @@ public class HideComplicationTouchHandler implements TouchHandler {
         if (z) {
             Log.d("HideComplicationHandler", "onSessionStart");
         }
-        boolean isBouncerShowing = this.mStatusBarKeyguardViewManager.isBouncerShowing();
+        boolean zIsBouncerShowing = this.mStatusBarKeyguardViewManager.isBouncerShowing();
         if (z) {
-            Log.d("HideComplicationHandler", "not fading. Active session count: " + ((TouchMonitor.TouchSessionImpl) touchSession).mTouchMonitor.mActiveTouchSessions.size() + ". Bouncer showing: " + isBouncerShowing);
+            Log.d("HideComplicationHandler", "not fading. Active session count: " + ((TouchMonitor.TouchSessionImpl) touchSession).mTouchMonitor.mActiveTouchSessions.size() + ". Bouncer showing: " + zIsBouncerShowing);
         }
         ((TouchMonitor.TouchSessionImpl) touchSession).pop();
     }

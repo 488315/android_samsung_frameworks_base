@@ -8,7 +8,6 @@ import android.util.Log;
 import com.android.systemui.highlight.database.InteractionDatabase;
 import org.apache.commons.lang3.StringUtils;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class HighlightContentProvider extends ContentProvider {
     public InteractionDatabase mDbHelper;
@@ -41,8 +40,8 @@ public class HighlightContentProvider extends ContentProvider {
         if (path == null) {
             path = "";
         }
-        String[] split = path.split("/");
-        String str3 = split.length > 1 ? split[split.length - 1] : null;
+        String[] strArrSplit = path.split("/");
+        String str3 = strArrSplit.length > 1 ? strArrSplit[strArrSplit.length - 1] : null;
         Log.d("InteractionContentProvider", "query uri : " + uri + ", table : " + str3);
         if (str3 == null) {
             return null;

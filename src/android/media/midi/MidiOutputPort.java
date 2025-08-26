@@ -37,19 +37,19 @@ public final class MidiOutputPort extends MidiSender implements Closeable {
                 byte[] bArr = new byte[1024];
                 while (true) {
                     try {
-                        int read = MidiOutputPort.this.mInputStream.read(bArr);
-                        if (read < 0) {
+                        int i2 = MidiOutputPort.this.mInputStream.read(bArr);
+                        if (i2 < 0) {
                             return;
                         }
-                        int packetType = MidiPortImpl.getPacketType(bArr, read);
+                        int packetType = MidiPortImpl.getPacketType(bArr, i2);
                         if (packetType == 1) {
-                            MidiOutputPort.this.mDispatcher.send(bArr, MidiPortImpl.getDataOffset(bArr, read), MidiPortImpl.getDataSize(bArr, read), MidiPortImpl.getPacketTimestamp(bArr, read));
+                            MidiOutputPort.this.mDispatcher.send(bArr, MidiPortImpl.getDataOffset(bArr, i2), MidiPortImpl.getDataSize(bArr, i2), MidiPortImpl.getPacketTimestamp(bArr, i2));
                         } else if (packetType == 2) {
                             MidiOutputPort.this.mDispatcher.flush();
                         } else {
                             Log.e(MidiOutputPort.TAG, "Unknown packet type " + packetType);
                         }
-                        MidiOutputPort.this.mTotalBytes.addAndGet(read);
+                        MidiOutputPort.this.mTotalBytes.addAndGet(i2);
                     } catch (IOException unused) {
                         return;
                     } finally {

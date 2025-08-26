@@ -15,7 +15,6 @@ import com.android.systemui.statusbar.notification.collection.notifcollection.Up
 import com.android.systemui.util.Assert;
 import java.util.ArrayDeque;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class NotifCollection$$ExternalSyntheticLambda9 implements Runnable {
     public final /* synthetic */ NotifCollection f$0;
@@ -47,31 +46,31 @@ public final /* synthetic */ class NotifCollection$$ExternalSyntheticLambda9 imp
             LogLevel logLevel = LogLevel.INFO;
             NotifCollectionLogger$$ExternalSyntheticLambda3 notifCollectionLogger$$ExternalSyntheticLambda3 = new NotifCollectionLogger$$ExternalSyntheticLambda3(2);
             LogBuffer logBuffer = notifCollectionLogger.buffer;
-            LogMessage obtain = logBuffer.obtain("NotifCollection", logLevel, notifCollectionLogger$$ExternalSyntheticLambda3, null);
+            LogMessage logMessageObtain = logBuffer.obtain("NotifCollection", logLevel, notifCollectionLogger$$ExternalSyntheticLambda3, null);
             String key = statusBarNotification.getKey();
-            String replace = key != null ? key.replace("\n", "") : null;
-            LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
-            logMessageImpl.str1 = replace;
+            String strReplace = key != null ? key.replace("\n", "") : null;
+            LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
+            logMessageImpl.str1 = strReplace;
             logMessageImpl.str2 = str;
             logMessageImpl.str3 = str2;
-            logBuffer.commit(obtain);
+            logBuffer.commit(logMessageObtain);
             return;
         }
         notifCollectionLogger.getClass();
         LogLevel logLevel2 = LogLevel.INFO;
         NotifCollectionLogger$$ExternalSyntheticLambda3 notifCollectionLogger$$ExternalSyntheticLambda32 = new NotifCollectionLogger$$ExternalSyntheticLambda3(1);
         LogBuffer logBuffer2 = notifCollectionLogger.buffer;
-        LogMessage obtain2 = logBuffer2.obtain("NotifCollection", logLevel2, notifCollectionLogger$$ExternalSyntheticLambda32, null);
-        LogMessageImpl logMessageImpl2 = (LogMessageImpl) obtain2;
+        LogMessage logMessageObtain2 = logBuffer2.obtain("NotifCollection", logLevel2, notifCollectionLogger$$ExternalSyntheticLambda32, null);
+        LogMessageImpl logMessageImpl2 = (LogMessageImpl) logMessageObtain2;
         logMessageImpl2.str1 = NotificationUtils.logKey(notificationEntry);
         logMessageImpl2.str2 = str;
         logMessageImpl2.str3 = str2;
-        logBuffer2.commit(obtain2);
+        logBuffer2.commit(logMessageObtain2);
         notificationEntry.setSbn(statusBarNotification);
         ((ArrayDeque) notifCollection.mEventQueue).add(new BindEntryEvent(notificationEntry, statusBarNotification));
-        LogMessage obtain3 = logBuffer2.obtain("NotifCollection", logLevel2, new NotifCollectionLogger$$ExternalSyntheticLambda3(4), null);
-        ((LogMessageImpl) obtain3).str1 = NotificationUtils.logKey(notificationEntry);
-        logBuffer2.commit(obtain3);
+        LogMessage logMessageObtain3 = logBuffer2.obtain("NotifCollection", logLevel2, new NotifCollectionLogger$$ExternalSyntheticLambda3(4), null);
+        ((LogMessageImpl) logMessageObtain3).str1 = NotificationUtils.logKey(notificationEntry);
+        logBuffer2.commit(logMessageObtain3);
         ((ArrayDeque) notifCollection.mEventQueue).add(new EntryUpdatedEvent(notificationEntry, UpdateSource.SystemUi));
         notifCollection.dispatchEventsAndRebuildList("updateNotificationInternally");
     }

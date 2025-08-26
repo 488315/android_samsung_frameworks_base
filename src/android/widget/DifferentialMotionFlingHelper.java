@@ -46,9 +46,7 @@ public class DifferentialMotionFlingHelper {
         }, new DifferentialVelocityProvider() { // from class: android.widget.DifferentialMotionFlingHelper$$ExternalSyntheticLambda1
             @Override // android.widget.DifferentialMotionFlingHelper.DifferentialVelocityProvider
             public final float getCurrentVelocity(VelocityTracker velocityTracker, MotionEvent motionEvent, int i) {
-                float currentVelocity;
-                currentVelocity = DifferentialMotionFlingHelper.getCurrentVelocity(velocityTracker, motionEvent, i);
-                return currentVelocity;
+                return DifferentialMotionFlingHelper.getCurrentVelocity(velocityTracker, motionEvent, i);
             }
         }, new FeatureFlagsImpl());
     }
@@ -67,23 +65,23 @@ public class DifferentialMotionFlingHelper {
 
     public void onMotionEvent(MotionEvent motionEvent, int i) {
         if (this.mWidgetFeatureFlags.enablePlatformWidgetDifferentialMotionFling()) {
-            boolean calculateFlingVelocityThresholds = calculateFlingVelocityThresholds(motionEvent, i);
+            boolean zCalculateFlingVelocityThresholds = calculateFlingVelocityThresholds(motionEvent, i);
             if (this.mFlingVelocityThresholds[0] == Integer.MAX_VALUE) {
                 recycleVelocityTracker();
                 return;
             }
             float currentVelocity = getCurrentVelocity(motionEvent, i) * this.mTarget.getScaledScrollFactor();
-            float signum = Math.signum(currentVelocity);
-            if (calculateFlingVelocityThresholds || (signum != Math.signum(this.mLastFlingVelocity) && signum != 0.0f)) {
+            float fSignum = Math.signum(currentVelocity);
+            if (zCalculateFlingVelocityThresholds || (fSignum != Math.signum(this.mLastFlingVelocity) && fSignum != 0.0f)) {
                 this.mTarget.stopDifferentialMotionFling();
             }
-            float abs = Math.abs(currentVelocity);
+            float fAbs = Math.abs(currentVelocity);
             int[] iArr = this.mFlingVelocityThresholds;
-            if (abs < iArr[0]) {
+            if (fAbs < iArr[0]) {
                 return;
             }
-            float max = Math.max(-r6, Math.min(currentVelocity, iArr[1]));
-            this.mLastFlingVelocity = this.mTarget.startDifferentialMotionFling(max) ? max : 0.0f;
+            float fMax = Math.max(-r6, Math.min(currentVelocity, iArr[1]));
+            this.mLastFlingVelocity = this.mTarget.startDifferentialMotionFling(fMax) ? fMax : 0.0f;
         }
     }
 

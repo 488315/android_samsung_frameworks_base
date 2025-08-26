@@ -33,8 +33,8 @@ public class TrustManager {
         public void handleMessage(Message message) {
             int i = message.what;
             if (i == 1) {
-                Bundle peekData = message.peekData();
-                ((TrustListener) message.obj).onTrustChanged(message.arg1 != 0, (peekData != null ? peekData.getInt(TrustManager.DATA_NEWLY_UNLOCKED) : 0) != 0, message.arg2, peekData != null ? peekData.getInt(TrustManager.DATA_FLAGS) : 0, message.getData().getStringArrayList(TrustManager.DATA_GRANTED_MESSAGES));
+                Bundle bundlePeekData = message.peekData();
+                ((TrustListener) message.obj).onTrustChanged(message.arg1 != 0, (bundlePeekData != null ? bundlePeekData.getInt(TrustManager.DATA_NEWLY_UNLOCKED) : 0) != 0, message.arg2, bundlePeekData != null ? bundlePeekData.getInt(TrustManager.DATA_FLAGS) : 0, message.getData().getStringArrayList(TrustManager.DATA_GRANTED_MESSAGES));
             } else {
                 if (i == 2) {
                     ((TrustListener) message.obj).onTrustManagedChanged(message.arg1 != 0, message.arg2);
@@ -140,13 +140,13 @@ public class TrustManager {
             ITrustListener.Stub stub = new ITrustListener.Stub() { // from class: android.app.trust.TrustManager.1
                 @Override // android.app.trust.ITrustListener
                 public void onTrustChanged(boolean z, boolean z2, int i, int i2, List<String> list) {
-                    Message obtainMessage = TrustManager.this.mHandler.obtainMessage(1, z ? 1 : 0, i, trustListener);
+                    Message messageObtainMessage = TrustManager.this.mHandler.obtainMessage(1, z ? 1 : 0, i, trustListener);
                     if (i2 != 0) {
-                        obtainMessage.getData().putInt(TrustManager.DATA_FLAGS, i2);
+                        messageObtainMessage.getData().putInt(TrustManager.DATA_FLAGS, i2);
                     }
-                    obtainMessage.getData().putInt(TrustManager.DATA_NEWLY_UNLOCKED, z2 ? 1 : 0);
-                    obtainMessage.getData().putCharSequenceArrayList(TrustManager.DATA_GRANTED_MESSAGES, (ArrayList) list);
-                    obtainMessage.sendToTarget();
+                    messageObtainMessage.getData().putInt(TrustManager.DATA_NEWLY_UNLOCKED, z2 ? 1 : 0);
+                    messageObtainMessage.getData().putCharSequenceArrayList(TrustManager.DATA_GRANTED_MESSAGES, (ArrayList) list);
+                    messageObtainMessage.sendToTarget();
                 }
 
                 @Override // android.app.trust.ITrustListener
@@ -161,9 +161,9 @@ public class TrustManager {
 
                 @Override // android.app.trust.ITrustListener
                 public void onTrustError(CharSequence charSequence) {
-                    Message obtainMessage = TrustManager.this.mHandler.obtainMessage(3, trustListener);
-                    obtainMessage.getData().putCharSequence("message", charSequence);
-                    obtainMessage.sendToTarget();
+                    Message messageObtainMessage = TrustManager.this.mHandler.obtainMessage(3, trustListener);
+                    messageObtainMessage.getData().putCharSequence("message", charSequence);
+                    messageObtainMessage.sendToTarget();
                 }
 
                 @Override // android.app.trust.ITrustListener
@@ -179,10 +179,10 @@ public class TrustManager {
     }
 
     public void unregisterTrustListener(TrustListener trustListener) {
-        ITrustListener remove = this.mTrustListeners.remove(trustListener);
-        if (remove != null) {
+        ITrustListener iTrustListenerRemove = this.mTrustListeners.remove(trustListener);
+        if (iTrustListenerRemove != null) {
             try {
-                this.mService.unregisterTrustListener(remove);
+                this.mService.unregisterTrustListener(iTrustListenerRemove);
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }

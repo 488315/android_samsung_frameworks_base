@@ -46,11 +46,11 @@ public class PlatformRemoteComposeTouchHelper extends ExploreByTouchHelper {
 
     @Override // com.android.internal.widget.ExploreByTouchHelper
     protected void getVisibleVirtualViews(IntArray intArray) {
-        Component findComponentById = this.mRemoteDocA11y.findComponentById(RemoteComposeDocumentAccessibility.RootId.intValue());
-        if (findComponentById == null || !this.mRemoteDocA11y.semanticModifiersForComponent(findComponentById).isEmpty()) {
+        Component componentFindComponentById = this.mRemoteDocA11y.findComponentById(RemoteComposeDocumentAccessibility.RootId.intValue());
+        if (componentFindComponentById == null || !this.mRemoteDocA11y.semanticModifiersForComponent(componentFindComponentById).isEmpty()) {
             intArray.add(RemoteComposeDocumentAccessibility.RootId.intValue());
         }
-        Iterator<Integer> it = this.mRemoteDocA11y.semanticallyRelevantChildComponents(findComponentById, false).iterator();
+        Iterator<Integer> it = this.mRemoteDocA11y.semanticallyRelevantChildComponents(componentFindComponentById, false).iterator();
         while (it.hasNext()) {
             intArray.add(it.next().intValue());
         }
@@ -58,32 +58,32 @@ public class PlatformRemoteComposeTouchHelper extends ExploreByTouchHelper {
 
     @Override // com.android.internal.widget.ExploreByTouchHelper
     public void onPopulateNodeForVirtualView(int i, AccessibilityNodeInfo accessibilityNodeInfo) {
-        Component findComponentById = this.mRemoteDocA11y.findComponentById(i);
-        AccessibleComponent.Mode mergeMode = this.mRemoteDocA11y.mergeMode(findComponentById);
+        Component componentFindComponentById = this.mRemoteDocA11y.findComponentById(i);
+        AccessibleComponent.Mode modeMergeMode = this.mRemoteDocA11y.mergeMode(componentFindComponentById);
         accessibilityNodeInfo.setEnabled(true);
-        if (mergeMode == AccessibleComponent.Mode.MERGE) {
-            Iterator<Integer> it = this.mRemoteDocA11y.semanticallyRelevantChildComponents(findComponentById, true).iterator();
+        if (modeMergeMode == AccessibleComponent.Mode.MERGE) {
+            Iterator<Integer> it = this.mRemoteDocA11y.semanticallyRelevantChildComponents(componentFindComponentById, true).iterator();
             while (it.hasNext()) {
                 onPopulateNodeForVirtualView(it.next().intValue(), accessibilityNodeInfo);
             }
         }
-        this.mApplier.applyComponent(this.mRemoteDocA11y, accessibilityNodeInfo, findComponentById, this.mRemoteDocA11y.semanticModifiersForComponent(findComponentById));
-        if (mergeMode == AccessibleComponent.Mode.SET) {
-            this.mApplier.addChildren(accessibilityNodeInfo, this.mRemoteDocA11y.semanticallyRelevantChildComponents(findComponentById, false));
+        this.mApplier.applyComponent(this.mRemoteDocA11y, accessibilityNodeInfo, componentFindComponentById, this.mRemoteDocA11y.semanticModifiersForComponent(componentFindComponentById));
+        if (modeMergeMode == AccessibleComponent.Mode.SET) {
+            this.mApplier.addChildren(accessibilityNodeInfo, this.mRemoteDocA11y.semanticallyRelevantChildComponents(componentFindComponentById, false));
         }
     }
 
     @Override // com.android.internal.widget.ExploreByTouchHelper
     protected boolean onPerformActionForVirtualView(int i, int i2, Bundle bundle) {
-        Component findComponentById = this.mRemoteDocA11y.findComponentById(i);
-        if (findComponentById == null) {
+        Component componentFindComponentById = this.mRemoteDocA11y.findComponentById(i);
+        if (componentFindComponentById == null) {
             return false;
         }
-        boolean performAction = this.mRemoteDocA11y.performAction(findComponentById, i2, bundle);
-        if (performAction) {
+        boolean zPerformAction = this.mRemoteDocA11y.performAction(componentFindComponentById, i2, bundle);
+        if (zPerformAction) {
             this.mHost.invalidate();
             invalidateRoot();
         }
-        return performAction;
+        return zPerformAction;
     }
 }

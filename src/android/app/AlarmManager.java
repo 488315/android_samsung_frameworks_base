@@ -227,16 +227,16 @@ public class AlarmManager {
                     sWrappers = new WeakHashMap<>();
                 }
                 WeakReference<ListenerWrapper> weakReference = sWrappers.get(onAlarmListener);
-                r2 = weakReference != null ? weakReference.get() : null;
-                if (r2 == null) {
-                    r2 = new ListenerWrapper(onAlarmListener);
-                    sWrappers.put(onAlarmListener, new WeakReference<>(r2));
+                listenerWrapper = weakReference != null ? weakReference.get() : null;
+                if (listenerWrapper == null) {
+                    listenerWrapper = new ListenerWrapper(onAlarmListener);
+                    sWrappers.put(onAlarmListener, new WeakReference<>(listenerWrapper));
                 }
             }
-            r2.setExecutor(executor);
+            listenerWrapper.setExecutor(executor);
         }
         try {
-            this.mService.set(this.mPackageName, i, j4, j2, j3, i2, pendingIntent, r2, str, workSource, alarmClockInfo);
+            this.mService.set(this.mPackageName, i, j4, j2, j3, i2, pendingIntent, listenerWrapper, str, workSource, alarmClockInfo);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -414,13 +414,13 @@ public class AlarmManager {
         }
 
         public void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
-            long start = protoOutputStream.start(j);
+            long jStart = protoOutputStream.start(j);
             protoOutputStream.write(1112396529665L, this.mTriggerTime);
             PendingIntent pendingIntent = this.mShowIntent;
             if (pendingIntent != null) {
                 pendingIntent.dumpDebug(protoOutputStream, 1146756268034L);
             }
-            protoOutputStream.end(start);
+            protoOutputStream.end(jStart);
         }
     }
 }

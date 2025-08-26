@@ -8,18 +8,15 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.UserHandle;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public interface INoteTaskBubblesService extends IInterface {
     boolean areBubblesAvailable();
 
     void showOrHideNoteBubble(Intent intent, UserHandle userHandle, Icon icon, NoteTaskBubbleExpandBehavior noteTaskBubbleExpandBehavior);
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class Stub extends Binder implements INoteTaskBubblesService {
         public static final /* synthetic */ int $r8$clinit = 0;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class Proxy implements INoteTaskBubblesService {
             public final IBinder mRemote;
 
@@ -29,16 +26,16 @@ public interface INoteTaskBubblesService extends IInterface {
 
             @Override // com.android.systemui.notetask.INoteTaskBubblesService
             public final boolean areBubblesAvailable() {
-                Parcel obtain = Parcel.obtain(this.mRemote);
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(this.mRemote);
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.android.systemui.notetask.INoteTaskBubblesService");
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken("com.android.systemui.notetask.INoteTaskBubblesService");
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
@@ -49,19 +46,19 @@ public interface INoteTaskBubblesService extends IInterface {
 
             @Override // com.android.systemui.notetask.INoteTaskBubblesService
             public final void showOrHideNoteBubble(Intent intent, UserHandle userHandle, Icon icon, NoteTaskBubbleExpandBehavior noteTaskBubbleExpandBehavior) {
-                Parcel obtain = Parcel.obtain(this.mRemote);
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(this.mRemote);
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.android.systemui.notetask.INoteTaskBubblesService");
-                    obtain.writeTypedObject(intent, 0);
-                    obtain.writeTypedObject(userHandle, 0);
-                    obtain.writeTypedObject(icon, 0);
-                    obtain.writeTypedObject(noteTaskBubbleExpandBehavior, 0);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("com.android.systemui.notetask.INoteTaskBubblesService");
+                    parcelObtain.writeTypedObject(intent, 0);
+                    parcelObtain.writeTypedObject(userHandle, 0);
+                    parcelObtain.writeTypedObject(icon, 0);
+                    parcelObtain.writeTypedObject(noteTaskBubbleExpandBehavior, 0);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -80,9 +77,9 @@ public interface INoteTaskBubblesService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                boolean areBubblesAvailable = ((NoteTaskBubblesController$NoteTaskBubblesService$onBind$1) this).areBubblesAvailable();
+                boolean zAreBubblesAvailable = ((NoteTaskBubblesController$NoteTaskBubblesService$onBind$1) this).areBubblesAvailable();
                 parcel2.writeNoException();
-                parcel2.writeBoolean(areBubblesAvailable);
+                parcel2.writeBoolean(zAreBubblesAvailable);
             } else {
                 if (i != 2) {
                     return super.onTransact(i, parcel, parcel2, i2);

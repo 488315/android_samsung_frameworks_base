@@ -11,7 +11,6 @@ import com.android.systemui.power.SecBatterySnapshot;
 import com.android.systemui.power.utils.PowerUtils;
 import com.android.systemui.util.NotificationChannels;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class AbnormalPadNotification extends PowerUiNotification {
     public AbnormalPadNotification(Context context) {
@@ -26,9 +25,9 @@ public class AbnormalPadNotification extends PowerUiNotification {
     @Override // com.android.systemui.power.notification.PowerUiNotification
     public final Notification.Builder getBuilder() {
         String string = this.mContext.getString(R.string.abnormal_pad_noti_content);
-        Notification.Builder addAction = getCommonBuilder(NotificationChannels.ALERTS, this.mContext.getString(R.string.abnormal_pad_noti_title), string).setSmallIcon(R.drawable.stat_notify_slowcharging).setShowWhen(false).setOngoing(true).setOnlyAlertOnce(true).setStyle(new Notification.BigTextStyle().bigText(string)).addAction(0, this.mContext.getString(R.string.warning_alert_check), PowerUtils.pendingBroadcast(this.mContext, "PNW.abnormalPadNoThanks"));
-        SystemUIApplication.overrideNotificationAppName(this.mContext, addAction, false);
-        return addAction;
+        Notification.Builder builderAddAction = getCommonBuilder(NotificationChannels.ALERTS, this.mContext.getString(R.string.abnormal_pad_noti_title), string).setSmallIcon(R.drawable.stat_notify_slowcharging).setShowWhen(false).setOngoing(true).setOnlyAlertOnce(true).setStyle(new Notification.BigTextStyle().bigText(string)).addAction(0, this.mContext.getString(R.string.warning_alert_check), PowerUtils.pendingBroadcast(this.mContext, "PNW.abnormalPadNoThanks"));
+        SystemUIApplication.overrideNotificationAppName(this.mContext, builderAddAction, false);
+        return builderAddAction;
     }
 
     @Override // com.android.systemui.power.notification.PowerUiNotification

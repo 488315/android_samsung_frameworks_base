@@ -21,7 +21,6 @@ import com.android.systemui.util.SystemUIAnalytics;
 import com.android.systemui.util.ViewController;
 import java.util.HashMap;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class KeyguardAbsKeyInputViewController extends KeyguardInputViewController {
     public CountDownTimer mCountdownTimer;
@@ -61,9 +60,9 @@ public abstract class KeyguardAbsKeyInputViewController extends KeyguardInputVie
         ((KeyguardAbsKeyInputView) this.mView).setPasswordEntryEnabled(false);
         ((KeyguardAbsKeyInputView) this.mView).setPasswordEntryInputEnabled(false);
         this.mLockedOut = true;
-        long ceil = (long) Math.ceil((j - SystemClock.elapsedRealtime()) / 1000.0d);
-        getKeyguardSecurityCallback().onAttemptLockoutStart(ceil);
-        this.mCountdownTimer = new CountDownTimer(ceil * 1000, 1000L) { // from class: com.android.keyguard.KeyguardAbsKeyInputViewController.2
+        long jCeil = (long) Math.ceil((j - SystemClock.elapsedRealtime()) / 1000.0d);
+        getKeyguardSecurityCallback().onAttemptLockoutStart(jCeil);
+        this.mCountdownTimer = new CountDownTimer(jCeil * 1000, 1000L) { // from class: com.android.keyguard.KeyguardAbsKeyInputViewController.2
             @Override // android.os.CountDownTimer
             public final void onFinish() {
                 KeyguardAbsKeyInputViewController.this.mMessageAreaController.setMessage("", false);
@@ -74,11 +73,11 @@ public abstract class KeyguardAbsKeyInputViewController extends KeyguardInputVie
 
             @Override // android.os.CountDownTimer
             public final void onTick(long j2) {
-                int round = (int) Math.round(j2 / 1000.0d);
-                HashMap hashMap = new HashMap();
-                hashMap.put(SystemUIAnalytics.QPNE_KEY_COUNT, Integer.valueOf(round));
+                int iRound = (int) Math.round(j2 / 1000.0d);
+                HashMap map = new HashMap();
+                map.put(SystemUIAnalytics.QPNE_KEY_COUNT, Integer.valueOf(iRound));
                 KeyguardAbsKeyInputViewController keyguardAbsKeyInputViewController = KeyguardAbsKeyInputViewController.this;
-                keyguardAbsKeyInputViewController.mMessageAreaController.setMessage(PluralsMessageFormatter.format(((KeyguardAbsKeyInputView) ((ViewController) keyguardAbsKeyInputViewController).mView).getResources(), hashMap, R.string.kg_too_many_failed_attempts_countdown), false);
+                keyguardAbsKeyInputViewController.mMessageAreaController.setMessage(PluralsMessageFormatter.format(((KeyguardAbsKeyInputView) ((ViewController) keyguardAbsKeyInputViewController).mView).getResources(), map, R.string.kg_too_many_failed_attempts_countdown), false);
             }
         }.start();
     }
@@ -148,13 +147,13 @@ public abstract class KeyguardAbsKeyInputViewController extends KeyguardInputVie
         keyguardSecMessageAreaController.setMessage("", false);
         final UserActivityNotifier userActivityNotifier = this.mUserActivityNotifier;
         userActivityNotifier.getClass();
-        final long uptimeMillis = SystemClock.uptimeMillis();
+        final long jUptimeMillis = SystemClock.uptimeMillis();
         final int i = 0;
         final int i2 = 0;
         userActivityNotifier.uiBgExecutor.execute(new Runnable() { // from class: com.android.keyguard.UserActivityNotifier$notifyUserActivity$1
             @Override // java.lang.Runnable
             public final void run() {
-                UserActivityNotifier.this.powerManager.userActivity(uptimeMillis, i2, i);
+                userActivityNotifier.powerManager.userActivity(jUptimeMillis, i2, i);
             }
         });
     }

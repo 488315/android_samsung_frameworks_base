@@ -70,9 +70,9 @@ public interface ICamPinService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.cam.ICamPinService");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ICamPinService)) {
-                return (ICamPinService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface("android.media.tv.extension.cam.ICamPinService");
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ICamPinService)) {
+                return (ICamPinService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -108,28 +108,28 @@ public interface ICamPinService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                ICamPinCapabilityListener asInterface = ICamPinCapabilityListener.Stub.asInterface(parcel.readStrongBinder());
+                ICamPinCapabilityListener iCamPinCapabilityListenerAsInterface = ICamPinCapabilityListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                addCamPinCapabilityListener(asInterface);
+                addCamPinCapabilityListener(iCamPinCapabilityListenerAsInterface);
                 parcel2.writeNoException();
             } else if (i == 2) {
-                ICamPinCapabilityListener asInterface2 = ICamPinCapabilityListener.Stub.asInterface(parcel.readStrongBinder());
+                ICamPinCapabilityListener iCamPinCapabilityListenerAsInterface2 = ICamPinCapabilityListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                removeCamPinCapabilityListener(asInterface2);
+                removeCamPinCapabilityListener(iCamPinCapabilityListenerAsInterface2);
                 parcel2.writeNoException();
             } else if (i == 3) {
-                int readInt = parcel.readInt();
-                int[] createIntArray = parcel.createIntArray();
-                ICamPinStatusListener asInterface3 = ICamPinStatusListener.Stub.asInterface(parcel.readStrongBinder());
+                int i3 = parcel.readInt();
+                int[] iArrCreateIntArray = parcel.createIntArray();
+                ICamPinStatusListener iCamPinStatusListenerAsInterface = ICamPinStatusListener.Stub.asInterface(parcel.readStrongBinder());
                 parcel.enforceNoDataAvail();
-                int requestCamPinValidation = requestCamPinValidation(readInt, createIntArray, asInterface3);
+                int iRequestCamPinValidation = requestCamPinValidation(i3, iArrCreateIntArray, iCamPinStatusListenerAsInterface);
                 parcel2.writeNoException();
-                parcel2.writeInt(requestCamPinValidation);
+                parcel2.writeInt(iRequestCamPinValidation);
             } else if (i == 4) {
-                int readInt2 = parcel.readInt();
+                int i4 = parcel.readInt();
                 Bundle bundle = new Bundle();
                 parcel.enforceNoDataAvail();
-                int camPinCapability = getCamPinCapability(readInt2, bundle);
+                int camPinCapability = getCamPinCapability(i4, bundle);
                 parcel2.writeNoException();
                 parcel2.writeInt(camPinCapability);
                 parcel2.writeTypedObject(bundle, 1);
@@ -157,69 +157,69 @@ public interface ICamPinService extends IInterface {
 
             @Override // android.media.tv.extension.cam.ICamPinService
             public void addCamPinCapabilityListener(ICamPinCapabilityListener iCamPinCapabilityListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.cam.ICamPinService");
-                    obtain.writeStrongInterface(iCamPinCapabilityListener);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.cam.ICamPinService");
+                    parcelObtain.writeStrongInterface(iCamPinCapabilityListener);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.cam.ICamPinService
             public void removeCamPinCapabilityListener(ICamPinCapabilityListener iCamPinCapabilityListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.cam.ICamPinService");
-                    obtain.writeStrongInterface(iCamPinCapabilityListener);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.cam.ICamPinService");
+                    parcelObtain.writeStrongInterface(iCamPinCapabilityListener);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.cam.ICamPinService
             public int requestCamPinValidation(int i, int[] iArr, ICamPinStatusListener iCamPinStatusListener) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.cam.ICamPinService");
-                    obtain.writeInt(i);
-                    obtain.writeIntArray(iArr);
-                    obtain.writeStrongInterface(iCamPinStatusListener);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.cam.ICamPinService");
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeIntArray(iArr);
+                    parcelObtain.writeStrongInterface(iCamPinStatusListener);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.tv.extension.cam.ICamPinService
             public int getCamPinCapability(int i, Bundle bundle) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.media.tv.extension.cam.ICamPinService");
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    int readInt = obtain2.readInt();
-                    if (obtain2.readInt() != 0) {
-                        bundle.readFromParcel(obtain2);
+                    parcelObtain.writeInterfaceToken("android.media.tv.extension.cam.ICamPinService");
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    int i2 = parcelObtain2.readInt();
+                    if (parcelObtain2.readInt() != 0) {
+                        bundle.readFromParcel(parcelObtain2);
                     }
-                    return readInt;
+                    return i2;
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

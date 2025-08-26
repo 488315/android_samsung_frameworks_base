@@ -19,7 +19,6 @@ import com.android.keyguard.EmergencyButton$$ExternalSyntheticOutline0;
 import com.android.keyguard.EmergencyButtonController$$ExternalSyntheticOutline0;
 import com.samsung.android.knox.ContextInfo;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class LockscreenOverlayView extends FrameLayout {
     public static final String TAG = "LSO_LockscreenOverlayView";
@@ -45,7 +44,7 @@ public class LockscreenOverlayView extends FrameLayout {
             @Override // android.content.BroadcastReceiver
             public void onReceive(Context context2, Intent intent) {
                 String action = intent.getAction();
-                MotionLayout$$ExternalSyntheticOutline0.m("Received intent: ", action, LockscreenOverlayView.TAG);
+                MotionLayout$$ExternalSyntheticOutline0.m("Received intent: ", action, "LSO_LockscreenOverlayView");
                 if (action == null) {
                     return;
                 }
@@ -84,8 +83,8 @@ public class LockscreenOverlayView extends FrameLayout {
         sb.append(")  : View Size(");
         sb.append(this.mViewDimension.x);
         sb.append(",");
-        EmergencyButtonController$$ExternalSyntheticOutline0.m(sb, this.mViewDimension.y, ")", TAG);
-        Log.d(TAG, "LSOInterface View cannot be displayed as view size is not enough.");
+        EmergencyButtonController$$ExternalSyntheticOutline0.m(sb, this.mViewDimension.y, ")", "LSO_LockscreenOverlayView");
+        Log.d("LSO_LockscreenOverlayView", "LSOInterface View cannot be displayed as view size is not enough.");
         return false;
     }
 
@@ -116,7 +115,7 @@ public class LockscreenOverlayView extends FrameLayout {
         sb.append(",");
         ViewPager$$ExternalSyntheticOutline0.m(sb, this.mParentDimension.y, ")  : From(", i3, ",");
         ViewPager$$ExternalSyntheticOutline0.m(sb, i4, ")  To(", i, ",");
-        EmergencyButtonController$$ExternalSyntheticOutline0.m(sb, i2, ")", TAG);
+        EmergencyButtonController$$ExternalSyntheticOutline0.m(sb, i2, ")", "LSO_LockscreenOverlayView");
         Point point = this.mViewDimension;
         point.x = i;
         point.y = i2;
@@ -146,26 +145,26 @@ public class LockscreenOverlayView extends FrameLayout {
         intentFilter.addAction(LSOConstants.ACTION_LSO_CONFIG_CHANGED_INTERNAL);
         this.mContext.registerReceiver(this.mNotifier, intentFilter);
         this.registered = true;
-        Log.d(TAG, "Registered for Intent: android.intent.action.MEDIA_MOUNTED , com.samsung.android.knox.intent.action.LSO_CONFIG_CHANGED_INTERNAL");
+        Log.d("LSO_LockscreenOverlayView", "Registered for Intent: android.intent.action.MEDIA_MOUNTED , com.samsung.android.knox.intent.action.LSO_CONFIG_CHANGED_INTERNAL");
     }
 
     public final boolean setLayout() {
         removeAllViews();
         LSOAttributeSet preferences = this.lso.getPreferences();
-        float floatValue = (preferences == null || !preferences.containsKey(LSOAttrConst.ATTR_ALPHA)) ? 1.0f : preferences.getAsFloat(LSOAttrConst.ATTR_ALPHA) != null ? preferences.getAsFloat(LSOAttrConst.ATTR_ALPHA).floatValue() : 0.0f;
+        float fFloatValue = (preferences == null || !preferences.containsKey(LSOAttrConst.ATTR_ALPHA)) ? 1.0f : preferences.getAsFloat(LSOAttrConst.ATTR_ALPHA) != null ? preferences.getAsFloat(LSOAttrConst.ATTR_ALPHA).floatValue() : 0.0f;
         boolean z = true;
         for (int i = 1; i <= 3; i++) {
             LSOItemData data = this.lso.getData(i);
             if (data != null) {
                 View layout = setLayout(data);
                 if (layout != null && i != 3) {
-                    layout.setAlpha(floatValue);
+                    layout.setAlpha(fFloatValue);
                 }
                 z = false;
             }
         }
         if (z) {
-            Log.d(TAG, "No Lockscreen Overlay data found.");
+            Log.d("LSO_LockscreenOverlayView", "No Lockscreen Overlay data found.");
         }
         return false;
     }
@@ -188,7 +187,7 @@ public class LockscreenOverlayView extends FrameLayout {
         if (this.registered) {
             this.mContext.unregisterReceiver(this.mNotifier);
             this.registered = false;
-            Log.d(TAG, "Unregistered for Intent: android.intent.action.MEDIA_MOUNTED , com.samsung.android.knox.intent.action.LSO_CONFIG_CHANGED_INTERNAL");
+            Log.d("LSO_LockscreenOverlayView", "Unregistered for Intent: android.intent.action.MEDIA_MOUNTED , com.samsung.android.knox.intent.action.LSO_CONFIG_CHANGED_INTERNAL");
         }
     }
 
@@ -198,7 +197,7 @@ public class LockscreenOverlayView extends FrameLayout {
             addView(lSOContainerView, new FrameLayout.LayoutParams(-1, -1));
             return lSOContainerView;
         } catch (Exception e) {
-            EmergencyButton$$ExternalSyntheticOutline0.m("setLayout() Error while creating views: ", e, TAG);
+            EmergencyButton$$ExternalSyntheticOutline0.m("setLayout() Error while creating views: ", e, "LSO_LockscreenOverlayView");
             return null;
         }
     }

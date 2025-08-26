@@ -42,9 +42,9 @@ public final class VirtualSensorDirectChannelWriter implements AutoCloseable {
 
     public void removeChannel(int i) {
         synchronized (this.mChannelsLock) {
-            SharedMemoryWrapper removeReturnOld = this.mChannels.removeReturnOld(i);
-            if (removeReturnOld != null) {
-                removeReturnOld.close();
+            SharedMemoryWrapper sharedMemoryWrapperRemoveReturnOld = this.mChannels.removeReturnOld(i);
+            if (sharedMemoryWrapperRemoveReturnOld != null) {
+                sharedMemoryWrapperRemoveReturnOld.close();
             }
             for (int i2 = 0; i2 < this.mConfiguredChannels.size(); i2++) {
                 this.mConfiguredChannels.valueAt(i2).remove(i);
@@ -101,12 +101,12 @@ public final class VirtualSensorDirectChannelWriter implements AutoCloseable {
         private int mWriteOffset = 0;
 
         SharedMemoryWrapper(SharedMemory sharedMemory) throws ErrnoException {
-            ByteBuffer allocate = ByteBuffer.allocate(104);
-            this.mEventBuffer = allocate;
+            ByteBuffer byteBufferAllocate = ByteBuffer.allocate(104);
+            this.mEventBuffer = byteBufferAllocate;
             this.mWriteLock = new Object();
             this.mSharedMemory = sharedMemory;
             this.mMemoryMapping = sharedMemory.mapReadWrite();
-            allocate.order(ByteOrder.nativeOrder());
+            byteBufferAllocate.order(ByteOrder.nativeOrder());
         }
 
         void close() {

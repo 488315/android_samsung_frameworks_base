@@ -52,7 +52,6 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public class LongScreenshotActivity extends Activity {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -81,7 +80,6 @@ public class LongScreenshotActivity extends Activity {
     public final UiEventLogger mUiEventLogger;
     public final Executor mUiExecutor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     enum PendingAction {
         SHARE,
         EDIT,
@@ -154,31 +152,31 @@ public class LongScreenshotActivity extends Activity {
         this.mSave.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.screenshot.scroll.LongScreenshotActivity$$ExternalSyntheticLambda1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                LongScreenshotActivity.$r8$lambda$AKhoAjDWW24UTwZdM5QLD3oY6ZA(LongScreenshotActivity.this, view);
+                LongScreenshotActivity.$r8$lambda$AKhoAjDWW24UTwZdM5QLD3oY6ZA(this.f$0, view);
             }
         });
         this.mCancel.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.screenshot.scroll.LongScreenshotActivity$$ExternalSyntheticLambda1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                LongScreenshotActivity.$r8$lambda$AKhoAjDWW24UTwZdM5QLD3oY6ZA(LongScreenshotActivity.this, view);
+                LongScreenshotActivity.$r8$lambda$AKhoAjDWW24UTwZdM5QLD3oY6ZA(this.f$0, view);
             }
         });
         this.mEdit.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.screenshot.scroll.LongScreenshotActivity$$ExternalSyntheticLambda1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                LongScreenshotActivity.$r8$lambda$AKhoAjDWW24UTwZdM5QLD3oY6ZA(LongScreenshotActivity.this, view);
+                LongScreenshotActivity.$r8$lambda$AKhoAjDWW24UTwZdM5QLD3oY6ZA(this.f$0, view);
             }
         });
         this.mShare.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.screenshot.scroll.LongScreenshotActivity$$ExternalSyntheticLambda1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                LongScreenshotActivity.$r8$lambda$AKhoAjDWW24UTwZdM5QLD3oY6ZA(LongScreenshotActivity.this, view);
+                LongScreenshotActivity.$r8$lambda$AKhoAjDWW24UTwZdM5QLD3oY6ZA(this.f$0, view);
             }
         });
         this.mPreview.addOnLayoutChangeListener(new View.OnLayoutChangeListener() { // from class: com.android.systemui.screenshot.scroll.LongScreenshotActivity$$ExternalSyntheticLambda2
             @Override // android.view.View.OnLayoutChangeListener
             public final void onLayoutChange(View view, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8) {
-                LongScreenshotActivity longScreenshotActivity = LongScreenshotActivity.this;
+                LongScreenshotActivity longScreenshotActivity = this.f$0;
                 int i9 = LongScreenshotActivity.$r8$clinit;
                 longScreenshotActivity.updateImageDimensions();
             }
@@ -202,7 +200,7 @@ public class LongScreenshotActivity extends Activity {
                 final File file = this.mSavedImagePath;
                 this.mCacheLoadFuture = CallbackToFutureAdapter.getFuture(new CallbackToFutureAdapter.Resolver() { // from class: com.android.systemui.screenshot.scroll.ImageLoader$$ExternalSyntheticLambda0
                     @Override // androidx.concurrent.futures.CallbackToFutureAdapter.Resolver
-                    public final Object attachCompleter(CallbackToFutureAdapter.Completer completer) {
+                    public final Object attachCompleter(CallbackToFutureAdapter.Completer completer) throws IOException {
                         File file2 = file;
                         try {
                             BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream(file2));
@@ -247,7 +245,7 @@ public class LongScreenshotActivity extends Activity {
             safeFuture.delegate.addListener(new Runnable() { // from class: com.android.systemui.screenshot.scroll.LongScreenshotActivity$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    LongScreenshotActivity longScreenshotActivity = LongScreenshotActivity.this;
+                    LongScreenshotActivity longScreenshotActivity = this.f$0;
                     CallbackToFutureAdapter.SafeFuture safeFuture2 = safeFuture;
                     int i = LongScreenshotActivity.$r8$clinit;
                     Log.d("Screenshot", "cached bitmap load complete");
@@ -289,12 +287,12 @@ public class LongScreenshotActivity extends Activity {
         tiledImageDrawable2.setBounds(0, 0, width, height);
         magnifierView.invalidate();
         Log.i("Screenshot", "Completed: " + longScreenshot);
-        float max = Math.max(0.0f, ((float) (-this.mLongScreenshot.mImageTileSet.getTop())) / ((float) this.mLongScreenshot.mImageTileSet.getHeight()));
-        float min = Math.min(1.0f, 1.0f - (((float) (this.mLongScreenshot.mImageTileSet.mRegion.getBounds().bottom - ((ScrollCaptureClient.SessionWrapper) this.mLongScreenshot.mSession).mBoundsInWindow.height())) / ((float) this.mLongScreenshot.mImageTileSet.getHeight())));
-        Log.i("Screenshot", "topFraction: " + max);
-        Log.i("Screenshot", "bottomFraction: " + min);
+        float fMax = Math.max(0.0f, ((float) (-this.mLongScreenshot.mImageTileSet.getTop())) / ((float) this.mLongScreenshot.mImageTileSet.getHeight()));
+        float fMin = Math.min(1.0f, 1.0f - (((float) (this.mLongScreenshot.mImageTileSet.mRegion.getBounds().bottom - ((ScrollCaptureClient.SessionWrapper) this.mLongScreenshot.mSession).mBoundsInWindow.height())) / ((float) this.mLongScreenshot.mImageTileSet.getHeight())));
+        Log.i("Screenshot", "topFraction: " + fMax);
+        Log.i("Screenshot", "bottomFraction: " + fMin);
         this.mEnterTransitionView.setImageDrawable(tiledImageDrawable);
-        OneShotPreDrawListener.add(this.mEnterTransitionView, new LongScreenshotActivity$$ExternalSyntheticLambda4(this, max, min, 0));
+        OneShotPreDrawListener.add(this.mEnterTransitionView, new LongScreenshotActivity$$ExternalSyntheticLambda4(this, fMax, fMin, 0));
         final Executor executor = this.mBackgroundExecutor;
         final Bitmap bitmap = this.mLongScreenshot.toBitmap();
         final File file = new File(getCacheDir(), "long_screenshot_cache.png");
@@ -307,12 +305,12 @@ public class LongScreenshotActivity extends Activity {
                 final File file2 = file;
                 final Bitmap bitmap2 = bitmap;
                 String str = ImageExporter.mImageFileRelativePath;
-                final ImageExporter imageExporter2 = ImageExporter.this;
+                final ImageExporter imageExporter2 = imageExporter;
                 imageExporter2.getClass();
                 executor2.execute(new Runnable() { // from class: com.android.systemui.screenshot.ImageExporter$$ExternalSyntheticLambda2
                     @Override // java.lang.Runnable
-                    public final void run() {
-                        ImageExporter imageExporter3 = ImageExporter.this;
+                    public final void run() throws IOException {
+                        ImageExporter imageExporter3 = imageExporter2;
                         File file3 = file2;
                         Bitmap bitmap3 = bitmap2;
                         CallbackToFutureAdapter.Completer completer2 = completer;
@@ -341,7 +339,7 @@ public class LongScreenshotActivity extends Activity {
         future.delegate.addListener(new Runnable() { // from class: com.android.systemui.screenshot.scroll.LongScreenshotActivity$$ExternalSyntheticLambda5
             @Override // java.lang.Runnable
             public final void run() {
-                LongScreenshotActivity longScreenshotActivity = LongScreenshotActivity.this;
+                LongScreenshotActivity longScreenshotActivity = this.f$0;
                 int i = LongScreenshotActivity.$r8$clinit;
                 try {
                     longScreenshotActivity.mSavedImagePath = (File) longScreenshotActivity.mCacheSaveFuture.delegate.get();
@@ -402,27 +400,27 @@ public class LongScreenshotActivity extends Activity {
         updateImageDimensions();
         RenderNode renderNode = new RenderNode("Bitmap Export");
         renderNode.setPosition(0, 0, cropBoundaries.width(), cropBoundaries.height());
-        RecordingCanvas beginRecording = renderNode.beginRecording();
-        beginRecording.translate(-cropBoundaries.left, -cropBoundaries.top);
-        beginRecording.clipRect(cropBoundaries);
-        drawable.draw(beginRecording);
+        RecordingCanvas recordingCanvasBeginRecording = renderNode.beginRecording();
+        recordingCanvasBeginRecording.translate(-cropBoundaries.left, -cropBoundaries.top);
+        recordingCanvasBeginRecording.clipRect(cropBoundaries);
+        drawable.draw(recordingCanvasBeginRecording);
         renderNode.endRecording();
         this.mOutputBitmap = HardwareRenderer.createHardwareBitmap(renderNode, cropBoundaries.width(), cropBoundaries.height());
         Executor executor = this.mBackgroundExecutor;
-        UUID randomUUID = UUID.randomUUID();
+        UUID uuidRandomUUID = UUID.randomUUID();
         Bitmap bitmap = this.mOutputBitmap;
-        ZonedDateTime now = ZonedDateTime.now();
+        ZonedDateTime zonedDateTimeNow = ZonedDateTime.now();
         UserHandle userHandle = this.mScreenshotUserHandle;
         ImageExporter imageExporter = this.mImageExporter;
         ContentResolver contentResolver = imageExporter.mResolver;
         Bitmap.CompressFormat compressFormat = imageExporter.mCompressFormat;
-        final CallbackToFutureAdapter.SafeFuture future = CallbackToFutureAdapter.getFuture(new ImageExporter$$ExternalSyntheticLambda0(executor, new ImageExporter.Task(contentResolver, randomUUID, bitmap, now, compressFormat, imageExporter.mQuality, userHandle, ImageExporter.createFilename(now, compressFormat, 0))));
+        final CallbackToFutureAdapter.SafeFuture future = CallbackToFutureAdapter.getFuture(new ImageExporter$$ExternalSyntheticLambda0(executor, new ImageExporter.Task(contentResolver, uuidRandomUUID, bitmap, zonedDateTimeNow, compressFormat, imageExporter.mQuality, userHandle, ImageExporter.createFilename(zonedDateTimeNow, compressFormat, 0))));
         future.delegate.addListener(new Runnable() { // from class: com.android.systemui.screenshot.scroll.LongScreenshotActivity$$ExternalSyntheticLambda6
             /* JADX WARN: Multi-variable type inference failed */
             /* JADX WARN: Type inference failed for: r1v9, types: [com.android.systemui.screenshot.scroll.LongScreenshotActivity$$ExternalSyntheticLambda8] */
             @Override // java.lang.Runnable
             public final void run() {
-                final LongScreenshotActivity longScreenshotActivity = LongScreenshotActivity.this;
+                final LongScreenshotActivity longScreenshotActivity = this.f$0;
                 LongScreenshotActivity.PendingAction pendingAction2 = pendingAction;
                 CallbackToFutureAdapter.SafeFuture safeFuture = future;
                 int i = LongScreenshotActivity.$r8$clinit;
@@ -430,16 +428,16 @@ public class LongScreenshotActivity extends Activity {
                 try {
                     Uri uriWithoutUserId = ContentProvider.getUriWithoutUserId(((ImageExporter.Result) safeFuture.delegate.get()).uri);
                     Log.e("Screenshot", pendingAction2 + " uri=" + uriWithoutUserId);
-                    int ordinal = pendingAction2.ordinal();
+                    int iOrdinal = pendingAction2.ordinal();
                     Bundle bundle = null;
                     ActionIntentCreator actionIntentCreator = longScreenshotActivity.mActionIntentCreator;
-                    if (ordinal == 0) {
+                    if (iOrdinal == 0) {
                         actionIntentCreator.getClass();
                         longScreenshotActivity.mActionExecutor.launchIntentAsync(ActionIntentCreator.createShare(uriWithoutUserId, null, null), longScreenshotActivity.mScreenshotUserHandle);
                         return;
                     }
-                    if (ordinal != 1) {
-                        if (ordinal != 2) {
+                    if (iOrdinal != 1) {
+                        if (iOrdinal != 2) {
                             return;
                         }
                         longScreenshotActivity.finishAndRemoveTask();
@@ -449,7 +447,7 @@ public class LongScreenshotActivity extends Activity {
                         actionIntentCreator.createEdit(uriWithoutUserId, (LongScreenshotActivity$$ExternalSyntheticLambda8) new Consumer() { // from class: com.android.systemui.screenshot.scroll.LongScreenshotActivity$$ExternalSyntheticLambda8
                             @Override // java.util.function.Consumer
                             public final void accept(Object obj) {
-                                LongScreenshotActivity longScreenshotActivity2 = LongScreenshotActivity.this;
+                                LongScreenshotActivity longScreenshotActivity2 = longScreenshotActivity;
                                 UserHandle userHandle2 = longScreenshotActivity2.mScreenshotUserHandle;
                                 longScreenshotActivity2.mActionExecutor.launchIntentAsync((Intent) obj, userHandle2);
                             }
@@ -484,16 +482,16 @@ public class LongScreenshotActivity extends Activity {
             return;
         }
         Rect bounds = drawable.getBounds();
-        float width = bounds.width() / bounds.height();
-        int width2 = (this.mPreview.getWidth() - this.mPreview.getPaddingLeft()) - this.mPreview.getPaddingRight();
+        float fWidth = bounds.width() / bounds.height();
+        int width = (this.mPreview.getWidth() - this.mPreview.getPaddingLeft()) - this.mPreview.getPaddingRight();
         int height = (this.mPreview.getHeight() - this.mPreview.getPaddingTop()) - this.mPreview.getPaddingBottom();
-        float f = width2;
+        float f = width;
         float f2 = height;
         float f3 = f / f2;
         int paddingLeft = this.mPreview.getPaddingLeft();
         int paddingTop = this.mPreview.getPaddingTop();
-        if (width > f3) {
-            int i2 = (int) ((f3 * f2) / width);
+        if (fWidth > f3) {
+            int i2 = (int) ((f3 * f2) / fWidth);
             int i3 = (height - i2) / 2;
             CropView cropView = this.mCropView;
             int paddingTop2 = this.mPreview.getPaddingTop() + i3;
@@ -503,14 +501,14 @@ public class LongScreenshotActivity extends Activity {
             cropView.invalidate();
             paddingTop += i3;
             CropView cropView2 = this.mCropView;
-            cropView2.mImageWidth = width2;
+            cropView2.mImageWidth = width;
             cropView2.invalidate();
             intrinsicHeight = f / this.mPreview.getDrawable().getIntrinsicWidth();
             height = i2;
             i = i3;
         } else {
-            int i4 = (int) ((f * width) / f3);
-            paddingLeft = AbsActionBarView$$ExternalSyntheticOutline0.m(width2, i4, 2, paddingLeft);
+            int i4 = (int) ((f * fWidth) / f3);
+            paddingLeft = AbsActionBarView$$ExternalSyntheticOutline0.m(width, i4, 2, paddingLeft);
             CropView cropView3 = this.mCropView;
             int paddingTop3 = this.mPreview.getPaddingTop();
             int paddingBottom2 = this.mPreview.getPaddingBottom();
@@ -518,13 +516,13 @@ public class LongScreenshotActivity extends Activity {
             cropView3.mExtraBottomPadding = paddingBottom2;
             cropView3.invalidate();
             CropView cropView4 = this.mCropView;
-            cropView4.mImageWidth = (int) (width * f2);
+            cropView4.mImageWidth = (int) (fWidth * f2);
             cropView4.invalidate();
             i = 0;
             intrinsicHeight = f2 / this.mPreview.getDrawable().getIntrinsicHeight();
-            width2 = i4;
+            width = i4;
         }
-        Rect cropBoundaries = this.mCropView.getCropBoundaries(width2, height);
+        Rect cropBoundaries = this.mCropView.getCropBoundaries(width, height);
         this.mTransitionView.setTranslationX(paddingLeft + cropBoundaries.left);
         this.mTransitionView.setTranslationY(paddingTop + cropBoundaries.top);
         ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) this.mTransitionView.getLayoutParams();
@@ -533,15 +531,15 @@ public class LongScreenshotActivity extends Activity {
         this.mTransitionView.setLayoutParams(layoutParams);
         if (this.mLongScreenshot != null) {
             ConstraintLayout.LayoutParams layoutParams2 = (ConstraintLayout.LayoutParams) this.mEnterTransitionView.getLayoutParams();
-            float max = Math.max(0.0f, (-this.mLongScreenshot.mImageTileSet.getTop()) / this.mLongScreenshot.mImageTileSet.getHeight());
+            float fMax = Math.max(0.0f, (-this.mLongScreenshot.mImageTileSet.getTop()) / this.mLongScreenshot.mImageTileSet.getHeight());
             ((ViewGroup.MarginLayoutParams) layoutParams2).width = (int) (drawable.getIntrinsicWidth() * intrinsicHeight);
             ((ViewGroup.MarginLayoutParams) layoutParams2).height = (int) (((ScrollCaptureClient.SessionWrapper) this.mLongScreenshot.mSession).mBoundsInWindow.height() * intrinsicHeight);
             this.mEnterTransitionView.setLayoutParams(layoutParams2);
             Matrix matrix = new Matrix();
             matrix.setScale(intrinsicHeight, intrinsicHeight);
-            matrix.postTranslate(0.0f, (-intrinsicHeight) * drawable.getIntrinsicHeight() * max);
+            matrix.postTranslate(0.0f, (-intrinsicHeight) * drawable.getIntrinsicHeight() * fMax);
             this.mEnterTransitionView.setImageMatrix(matrix);
-            this.mEnterTransitionView.setTranslationY((max * f2) + this.mPreview.getPaddingTop() + i);
+            this.mEnterTransitionView.setTranslationY((fMax * f2) + this.mPreview.getPaddingTop() + i);
         }
     }
 }

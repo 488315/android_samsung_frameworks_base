@@ -8,9 +8,9 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
+import com.android.systemui.surfaceeffects.turbulencenoise.TurbulenceNoiseShader;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class TurbulenceNoiseView extends View {
     public ValueAnimator currentAnimator;
@@ -18,7 +18,6 @@ public final class TurbulenceNoiseView extends View {
     public final Paint paint;
     public TurbulenceNoiseShader turbulenceNoiseShader;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -48,40 +47,24 @@ public final class TurbulenceNoiseView extends View {
         }
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:5:0x000c, code lost:
-    
-        if ((r0 != null ? r0.baseType : null) != r2) goto L8;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:8:0x000e  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void initShader(com.android.systemui.surfaceeffects.turbulencenoise.TurbulenceNoiseShader.Companion.Type r2, com.android.systemui.surfaceeffects.turbulencenoise.TurbulenceNoiseAnimationConfig r3) {
-        /*
-            r1 = this;
-            r1.noiseConfig = r3
-            com.android.systemui.surfaceeffects.turbulencenoise.TurbulenceNoiseShader r0 = r1.turbulenceNoiseShader
-            if (r0 == 0) goto Le
-            if (r0 == 0) goto Lb
-            com.android.systemui.surfaceeffects.turbulencenoise.TurbulenceNoiseShader$Companion$Type r0 = r0.baseType
-            goto Lc
-        Lb:
-            r0 = 0
-        Lc:
-            if (r0 == r2) goto L1a
-        Le:
-            com.android.systemui.surfaceeffects.turbulencenoise.TurbulenceNoiseShader r0 = new com.android.systemui.surfaceeffects.turbulencenoise.TurbulenceNoiseShader
-            r0.<init>(r2)
-            r1.turbulenceNoiseShader = r0
-            android.graphics.Paint r2 = r1.paint
-            r2.setShader(r0)
-        L1a:
-            com.android.systemui.surfaceeffects.turbulencenoise.TurbulenceNoiseShader r1 = r1.turbulenceNoiseShader
-            r1.getClass()
-            r1.applyConfig(r3)
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.surfaceeffects.turbulencenoise.TurbulenceNoiseView.initShader(com.android.systemui.surfaceeffects.turbulencenoise.TurbulenceNoiseShader$Companion$Type, com.android.systemui.surfaceeffects.turbulencenoise.TurbulenceNoiseAnimationConfig):void");
+    public final void initShader(TurbulenceNoiseShader.Companion.Type type, TurbulenceNoiseAnimationConfig turbulenceNoiseAnimationConfig) {
+        this.noiseConfig = turbulenceNoiseAnimationConfig;
+        TurbulenceNoiseShader turbulenceNoiseShader = this.turbulenceNoiseShader;
+        if (turbulenceNoiseShader == null) {
+            TurbulenceNoiseShader turbulenceNoiseShader2 = new TurbulenceNoiseShader(type);
+            this.turbulenceNoiseShader = turbulenceNoiseShader2;
+            this.paint.setShader(turbulenceNoiseShader2);
+        } else {
+            if ((turbulenceNoiseShader != null ? turbulenceNoiseShader.baseType : null) != type) {
+            }
+        }
+        TurbulenceNoiseShader turbulenceNoiseShader3 = this.turbulenceNoiseShader;
+        turbulenceNoiseShader3.getClass();
+        turbulenceNoiseShader3.applyConfig(turbulenceNoiseAnimationConfig);
     }
 
     @Override // android.view.View
@@ -99,24 +82,24 @@ public final class TurbulenceNoiseView extends View {
         turbulenceNoiseAnimationConfig.getClass();
         final TurbulenceNoiseShader turbulenceNoiseShader = this.turbulenceNoiseShader;
         turbulenceNoiseShader.getClass();
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-        ofFloat.setDuration((long) turbulenceNoiseAnimationConfig.maxDuration);
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+        valueAnimatorOfFloat.setDuration((long) turbulenceNoiseAnimationConfig.maxDuration);
         final float f = turbulenceNoiseShader.noiseOffsetX;
         final float f2 = turbulenceNoiseShader.noiseOffsetY;
         final float f3 = turbulenceNoiseShader.noiseOffsetZ;
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.surfaceeffects.turbulencenoise.TurbulenceNoiseView$play$1
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.surfaceeffects.turbulencenoise.TurbulenceNoiseView.play.1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                 float currentPlayTime = valueAnimator.getCurrentPlayTime() * 0.001f;
-                TurbulenceNoiseShader turbulenceNoiseShader2 = TurbulenceNoiseShader.this;
+                TurbulenceNoiseShader turbulenceNoiseShader2 = turbulenceNoiseShader;
                 float f4 = f;
                 TurbulenceNoiseAnimationConfig turbulenceNoiseAnimationConfig2 = turbulenceNoiseAnimationConfig;
                 turbulenceNoiseShader2.setNoiseMove((turbulenceNoiseAnimationConfig2.noiseMoveSpeedX * currentPlayTime) + f4, (turbulenceNoiseAnimationConfig2.noiseMoveSpeedY * currentPlayTime) + f2, (currentPlayTime * turbulenceNoiseAnimationConfig2.noiseMoveSpeedZ) + f3);
-                TurbulenceNoiseShader.this.setOpacity(turbulenceNoiseAnimationConfig.luminosityMultiplier);
+                turbulenceNoiseShader.setOpacity(turbulenceNoiseAnimationConfig.luminosityMultiplier);
                 this.invalidate();
             }
         });
-        ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.surfaceeffects.turbulencenoise.TurbulenceNoiseView$play$2
+        valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.surfaceeffects.turbulencenoise.TurbulenceNoiseView.play.2
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
                 TurbulenceNoiseView.this.currentAnimator = null;
@@ -126,8 +109,8 @@ public final class TurbulenceNoiseView extends View {
                 }
             }
         });
-        ofFloat.start();
-        this.currentAnimator = ofFloat;
+        valueAnimatorOfFloat.start();
+        this.currentAnimator = valueAnimatorOfFloat;
     }
 
     public final void playEaseIn(final Runnable runnable) {
@@ -138,25 +121,25 @@ public final class TurbulenceNoiseView extends View {
         turbulenceNoiseAnimationConfig.getClass();
         final TurbulenceNoiseShader turbulenceNoiseShader = this.turbulenceNoiseShader;
         turbulenceNoiseShader.getClass();
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-        ofFloat.setDuration((long) turbulenceNoiseAnimationConfig.easeInDuration);
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+        valueAnimatorOfFloat.setDuration((long) turbulenceNoiseAnimationConfig.easeInDuration);
         final float f = turbulenceNoiseShader.noiseOffsetX;
         final float f2 = turbulenceNoiseShader.noiseOffsetY;
         final float f3 = turbulenceNoiseShader.noiseOffsetZ;
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.surfaceeffects.turbulencenoise.TurbulenceNoiseView$playEaseIn$1
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.surfaceeffects.turbulencenoise.TurbulenceNoiseView.playEaseIn.1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                 float currentPlayTime = valueAnimator.getCurrentPlayTime() * 0.001f;
-                float floatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
-                TurbulenceNoiseShader turbulenceNoiseShader2 = TurbulenceNoiseShader.this;
+                float fFloatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
+                TurbulenceNoiseShader turbulenceNoiseShader2 = turbulenceNoiseShader;
                 float f4 = f;
                 TurbulenceNoiseAnimationConfig turbulenceNoiseAnimationConfig2 = turbulenceNoiseAnimationConfig;
                 turbulenceNoiseShader2.setNoiseMove((turbulenceNoiseAnimationConfig2.noiseMoveSpeedX * currentPlayTime) + f4, (turbulenceNoiseAnimationConfig2.noiseMoveSpeedY * currentPlayTime) + f2, (currentPlayTime * turbulenceNoiseAnimationConfig2.noiseMoveSpeedZ) + f3);
-                TurbulenceNoiseShader.this.setOpacity(floatValue * turbulenceNoiseAnimationConfig.luminosityMultiplier);
+                turbulenceNoiseShader.setOpacity(fFloatValue * turbulenceNoiseAnimationConfig.luminosityMultiplier);
                 this.invalidate();
             }
         });
-        ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.surfaceeffects.turbulencenoise.TurbulenceNoiseView$playEaseIn$2
+        valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.surfaceeffects.turbulencenoise.TurbulenceNoiseView.playEaseIn.2
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
                 TurbulenceNoiseView.this.currentAnimator = null;
@@ -166,8 +149,8 @@ public final class TurbulenceNoiseView extends View {
                 }
             }
         });
-        ofFloat.start();
-        this.currentAnimator = ofFloat;
+        valueAnimatorOfFloat.start();
+        this.currentAnimator = valueAnimatorOfFloat;
     }
 
     public final void playEaseOut(final Runnable runnable) {
@@ -178,25 +161,25 @@ public final class TurbulenceNoiseView extends View {
         turbulenceNoiseAnimationConfig.getClass();
         final TurbulenceNoiseShader turbulenceNoiseShader = this.turbulenceNoiseShader;
         turbulenceNoiseShader.getClass();
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-        ofFloat.setDuration((long) turbulenceNoiseAnimationConfig.easeOutDuration);
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+        valueAnimatorOfFloat.setDuration((long) turbulenceNoiseAnimationConfig.easeOutDuration);
         final float f = turbulenceNoiseShader.noiseOffsetX;
         final float f2 = turbulenceNoiseShader.noiseOffsetY;
         final float f3 = turbulenceNoiseShader.noiseOffsetZ;
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.surfaceeffects.turbulencenoise.TurbulenceNoiseView$playEaseOut$1
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.surfaceeffects.turbulencenoise.TurbulenceNoiseView.playEaseOut.1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                 float currentPlayTime = valueAnimator.getCurrentPlayTime() * 0.001f;
-                float floatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
-                TurbulenceNoiseShader turbulenceNoiseShader2 = TurbulenceNoiseShader.this;
+                float fFloatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
+                TurbulenceNoiseShader turbulenceNoiseShader2 = turbulenceNoiseShader;
                 float f4 = f;
                 TurbulenceNoiseAnimationConfig turbulenceNoiseAnimationConfig2 = turbulenceNoiseAnimationConfig;
                 turbulenceNoiseShader2.setNoiseMove((turbulenceNoiseAnimationConfig2.noiseMoveSpeedX * currentPlayTime) + f4, (turbulenceNoiseAnimationConfig2.noiseMoveSpeedY * currentPlayTime) + f2, (currentPlayTime * turbulenceNoiseAnimationConfig2.noiseMoveSpeedZ) + f3);
-                TurbulenceNoiseShader.this.setOpacity((1.0f - floatValue) * turbulenceNoiseAnimationConfig.luminosityMultiplier);
+                turbulenceNoiseShader.setOpacity((1.0f - fFloatValue) * turbulenceNoiseAnimationConfig.luminosityMultiplier);
                 this.invalidate();
             }
         });
-        ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.surfaceeffects.turbulencenoise.TurbulenceNoiseView$playEaseOut$2
+        valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.surfaceeffects.turbulencenoise.TurbulenceNoiseView.playEaseOut.2
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
                 TurbulenceNoiseView.this.currentAnimator = null;
@@ -206,8 +189,8 @@ public final class TurbulenceNoiseView extends View {
                 }
             }
         });
-        ofFloat.start();
-        this.currentAnimator = ofFloat;
+        valueAnimatorOfFloat.start();
+        this.currentAnimator = valueAnimatorOfFloat;
     }
 
     public static /* synthetic */ void getCurrentAnimator$annotations() {

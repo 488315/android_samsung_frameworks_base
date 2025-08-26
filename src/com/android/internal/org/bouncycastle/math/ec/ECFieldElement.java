@@ -89,11 +89,11 @@ public abstract class ECFieldElement implements ECConstants {
         BigInteger x;
 
         static BigInteger calculateResidue(BigInteger bigInteger) {
-            int bitLength = bigInteger.bitLength();
-            if (bitLength < 96 || bigInteger.shiftRight(bitLength - 64).longValue() != -1) {
+            int iBitLength = bigInteger.bitLength();
+            if (iBitLength < 96 || bigInteger.shiftRight(iBitLength - 64).longValue() != -1) {
                 return null;
             }
-            return ONE.shiftLeft(bitLength).subtract(bigInteger);
+            return ONE.shiftLeft(iBitLength).subtract(bigInteger);
         }
 
         Fp(BigInteger bigInteger, BigInteger bigInteger2, BigInteger bigInteger3) {
@@ -128,11 +128,11 @@ public abstract class ECFieldElement implements ECConstants {
 
         @Override // com.android.internal.org.bouncycastle.math.ec.ECFieldElement
         public ECFieldElement addOne() {
-            BigInteger add = this.x.add(ECConstants.ONE);
-            if (add.compareTo(this.q) == 0) {
-                add = ECConstants.ZERO;
+            BigInteger bigIntegerAdd = this.x.add(ECConstants.ONE);
+            if (bigIntegerAdd.compareTo(this.q) == 0) {
+                bigIntegerAdd = ECConstants.ZERO;
             }
-            return new Fp(this.q, this.r, add);
+            return new Fp(this.q, this.r, bigIntegerAdd);
         }
 
         @Override // com.android.internal.org.bouncycastle.math.ec.ECFieldElement
@@ -215,37 +215,37 @@ public abstract class ECFieldElement implements ECConstants {
                 throw new RuntimeException("not done yet");
             }
             if (this.q.testBit(1)) {
-                BigInteger add = this.q.shiftRight(2).add(ECConstants.ONE);
+                BigInteger bigIntegerAdd = this.q.shiftRight(2).add(ECConstants.ONE);
                 BigInteger bigInteger = this.q;
-                return checkSqrt(new Fp(bigInteger, this.r, this.x.modPow(add, bigInteger)));
+                return checkSqrt(new Fp(bigInteger, this.r, this.x.modPow(bigIntegerAdd, bigInteger)));
             }
             if (this.q.testBit(2)) {
-                BigInteger modPow = this.x.modPow(this.q.shiftRight(3), this.q);
-                BigInteger modMult = modMult(modPow, this.x);
-                if (modMult(modMult, modPow).equals(ECConstants.ONE)) {
-                    return checkSqrt(new Fp(this.q, this.r, modMult));
+                BigInteger bigIntegerModPow = this.x.modPow(this.q.shiftRight(3), this.q);
+                BigInteger bigIntegerModMult = modMult(bigIntegerModPow, this.x);
+                if (modMult(bigIntegerModMult, bigIntegerModPow).equals(ECConstants.ONE)) {
+                    return checkSqrt(new Fp(this.q, this.r, bigIntegerModMult));
                 }
-                return checkSqrt(new Fp(this.q, this.r, modMult(modMult, ECConstants.TWO.modPow(this.q.shiftRight(2), this.q))));
+                return checkSqrt(new Fp(this.q, this.r, modMult(bigIntegerModMult, ECConstants.TWO.modPow(this.q.shiftRight(2), this.q))));
             }
-            BigInteger shiftRight = this.q.shiftRight(1);
-            if (!this.x.modPow(shiftRight, this.q).equals(ECConstants.ONE)) {
+            BigInteger bigIntegerShiftRight = this.q.shiftRight(1);
+            if (!this.x.modPow(bigIntegerShiftRight, this.q).equals(ECConstants.ONE)) {
                 return null;
             }
             BigInteger bigInteger2 = this.x;
-            BigInteger modDouble = modDouble(modDouble(bigInteger2));
-            BigInteger add2 = shiftRight.add(ECConstants.ONE);
-            BigInteger subtract = this.q.subtract(ECConstants.ONE);
+            BigInteger bigIntegerModDouble = modDouble(modDouble(bigInteger2));
+            BigInteger bigIntegerAdd2 = bigIntegerShiftRight.add(ECConstants.ONE);
+            BigInteger bigIntegerSubtract = this.q.subtract(ECConstants.ONE);
             Random random = new Random();
             while (true) {
                 BigInteger bigInteger3 = new BigInteger(this.q.bitLength(), random);
-                if (bigInteger3.compareTo(this.q) < 0 && modReduce(bigInteger3.multiply(bigInteger3).subtract(modDouble)).modPow(shiftRight, this.q).equals(subtract)) {
-                    BigInteger[] lucasSequence = lucasSequence(bigInteger3, bigInteger2, add2);
-                    BigInteger bigInteger4 = lucasSequence[0];
-                    BigInteger bigInteger5 = lucasSequence[1];
-                    if (modMult(bigInteger5, bigInteger5).equals(modDouble)) {
+                if (bigInteger3.compareTo(this.q) < 0 && modReduce(bigInteger3.multiply(bigInteger3).subtract(bigIntegerModDouble)).modPow(bigIntegerShiftRight, this.q).equals(bigIntegerSubtract)) {
+                    BigInteger[] bigIntegerArrLucasSequence = lucasSequence(bigInteger3, bigInteger2, bigIntegerAdd2);
+                    BigInteger bigInteger4 = bigIntegerArrLucasSequence[0];
+                    BigInteger bigInteger5 = bigIntegerArrLucasSequence[1];
+                    if (modMult(bigInteger5, bigInteger5).equals(bigIntegerModDouble)) {
                         return new Fp(this.q, this.r, modHalfAbs(bigInteger5));
                     }
-                    if (!bigInteger4.equals(ECConstants.ONE) && !bigInteger4.equals(subtract)) {
+                    if (!bigInteger4.equals(ECConstants.ONE) && !bigInteger4.equals(bigIntegerSubtract)) {
                         return null;
                     }
                 }
@@ -260,49 +260,49 @@ public abstract class ECFieldElement implements ECConstants {
         }
 
         private BigInteger[] lucasSequence(BigInteger bigInteger, BigInteger bigInteger2, BigInteger bigInteger3) {
-            int bitLength = bigInteger3.bitLength();
+            int iBitLength = bigInteger3.bitLength();
             int lowestSetBit = bigInteger3.getLowestSetBit();
-            BigInteger bigInteger4 = ECConstants.ONE;
-            BigInteger bigInteger5 = ECConstants.TWO;
-            BigInteger bigInteger6 = ECConstants.ONE;
-            BigInteger bigInteger7 = ECConstants.ONE;
-            BigInteger bigInteger8 = bigInteger;
-            for (int i = bitLength - 1; i >= lowestSetBit + 1; i--) {
-                bigInteger6 = modMult(bigInteger6, bigInteger7);
+            BigInteger bigIntegerModReduce = ECConstants.ONE;
+            BigInteger bigIntegerModReduce2 = ECConstants.TWO;
+            BigInteger bigIntegerModMult = ECConstants.ONE;
+            BigInteger bigIntegerModMult2 = ECConstants.ONE;
+            BigInteger bigIntegerModReduce3 = bigInteger;
+            for (int i = iBitLength - 1; i >= lowestSetBit + 1; i--) {
+                bigIntegerModMult = modMult(bigIntegerModMult, bigIntegerModMult2);
                 if (bigInteger3.testBit(i)) {
-                    bigInteger7 = modMult(bigInteger6, bigInteger2);
-                    bigInteger4 = modMult(bigInteger4, bigInteger8);
-                    bigInteger5 = modReduce(bigInteger8.multiply(bigInteger5).subtract(bigInteger.multiply(bigInteger6)));
-                    bigInteger8 = modReduce(bigInteger8.multiply(bigInteger8).subtract(bigInteger7.shiftLeft(1)));
+                    bigIntegerModMult2 = modMult(bigIntegerModMult, bigInteger2);
+                    bigIntegerModReduce = modMult(bigIntegerModReduce, bigIntegerModReduce3);
+                    bigIntegerModReduce2 = modReduce(bigIntegerModReduce3.multiply(bigIntegerModReduce2).subtract(bigInteger.multiply(bigIntegerModMult)));
+                    bigIntegerModReduce3 = modReduce(bigIntegerModReduce3.multiply(bigIntegerModReduce3).subtract(bigIntegerModMult2.shiftLeft(1)));
                 } else {
-                    bigInteger4 = modReduce(bigInteger4.multiply(bigInteger5).subtract(bigInteger6));
-                    BigInteger modReduce = modReduce(bigInteger8.multiply(bigInteger5).subtract(bigInteger.multiply(bigInteger6)));
-                    bigInteger5 = modReduce(bigInteger5.multiply(bigInteger5).subtract(bigInteger6.shiftLeft(1)));
-                    bigInteger8 = modReduce;
-                    bigInteger7 = bigInteger6;
+                    bigIntegerModReduce = modReduce(bigIntegerModReduce.multiply(bigIntegerModReduce2).subtract(bigIntegerModMult));
+                    BigInteger bigIntegerModReduce4 = modReduce(bigIntegerModReduce3.multiply(bigIntegerModReduce2).subtract(bigInteger.multiply(bigIntegerModMult)));
+                    bigIntegerModReduce2 = modReduce(bigIntegerModReduce2.multiply(bigIntegerModReduce2).subtract(bigIntegerModMult.shiftLeft(1)));
+                    bigIntegerModReduce3 = bigIntegerModReduce4;
+                    bigIntegerModMult2 = bigIntegerModMult;
                 }
             }
-            BigInteger modMult = modMult(bigInteger6, bigInteger7);
-            BigInteger modMult2 = modMult(modMult, bigInteger2);
-            BigInteger modReduce2 = modReduce(bigInteger4.multiply(bigInteger5).subtract(modMult));
-            BigInteger modReduce3 = modReduce(bigInteger8.multiply(bigInteger5).subtract(bigInteger.multiply(modMult)));
-            BigInteger modMult3 = modMult(modMult, modMult2);
+            BigInteger bigIntegerModMult3 = modMult(bigIntegerModMult, bigIntegerModMult2);
+            BigInteger bigIntegerModMult4 = modMult(bigIntegerModMult3, bigInteger2);
+            BigInteger bigIntegerModReduce5 = modReduce(bigIntegerModReduce.multiply(bigIntegerModReduce2).subtract(bigIntegerModMult3));
+            BigInteger bigIntegerModReduce6 = modReduce(bigIntegerModReduce3.multiply(bigIntegerModReduce2).subtract(bigInteger.multiply(bigIntegerModMult3)));
+            BigInteger bigIntegerModMult5 = modMult(bigIntegerModMult3, bigIntegerModMult4);
             for (int i2 = 1; i2 <= lowestSetBit; i2++) {
-                modReduce2 = modMult(modReduce2, modReduce3);
-                modReduce3 = modReduce(modReduce3.multiply(modReduce3).subtract(modMult3.shiftLeft(1)));
-                modMult3 = modMult(modMult3, modMult3);
+                bigIntegerModReduce5 = modMult(bigIntegerModReduce5, bigIntegerModReduce6);
+                bigIntegerModReduce6 = modReduce(bigIntegerModReduce6.multiply(bigIntegerModReduce6).subtract(bigIntegerModMult5.shiftLeft(1)));
+                bigIntegerModMult5 = modMult(bigIntegerModMult5, bigIntegerModMult5);
             }
-            return new BigInteger[]{modReduce2, modReduce3};
+            return new BigInteger[]{bigIntegerModReduce5, bigIntegerModReduce6};
         }
 
         protected BigInteger modAdd(BigInteger bigInteger, BigInteger bigInteger2) {
-            BigInteger add = bigInteger.add(bigInteger2);
-            return add.compareTo(this.q) >= 0 ? add.subtract(this.q) : add;
+            BigInteger bigIntegerAdd = bigInteger.add(bigInteger2);
+            return bigIntegerAdd.compareTo(this.q) >= 0 ? bigIntegerAdd.subtract(this.q) : bigIntegerAdd;
         }
 
         protected BigInteger modDouble(BigInteger bigInteger) {
-            BigInteger shiftLeft = bigInteger.shiftLeft(1);
-            return shiftLeft.compareTo(this.q) >= 0 ? shiftLeft.subtract(this.q) : shiftLeft;
+            BigInteger bigIntegerShiftLeft = bigInteger.shiftLeft(1);
+            return bigIntegerShiftLeft.compareTo(this.q) >= 0 ? bigIntegerShiftLeft.subtract(this.q) : bigIntegerShiftLeft;
         }
 
         protected BigInteger modHalf(BigInteger bigInteger) {
@@ -333,15 +333,15 @@ public abstract class ECFieldElement implements ECConstants {
                 if (z) {
                     bigInteger = bigInteger.abs();
                 }
-                int bitLength = this.q.bitLength();
-                boolean equals = this.r.equals(ECConstants.ONE);
-                while (bigInteger.bitLength() > bitLength + 1) {
-                    BigInteger shiftRight = bigInteger.shiftRight(bitLength);
-                    BigInteger subtract = bigInteger.subtract(shiftRight.shiftLeft(bitLength));
-                    if (!equals) {
-                        shiftRight = shiftRight.multiply(this.r);
+                int iBitLength = this.q.bitLength();
+                boolean zEquals = this.r.equals(ECConstants.ONE);
+                while (bigInteger.bitLength() > iBitLength + 1) {
+                    BigInteger bigIntegerShiftRight = bigInteger.shiftRight(iBitLength);
+                    BigInteger bigIntegerSubtract = bigInteger.subtract(bigIntegerShiftRight.shiftLeft(iBitLength));
+                    if (!zEquals) {
+                        bigIntegerShiftRight = bigIntegerShiftRight.multiply(this.r);
                     }
-                    bigInteger = shiftRight.add(subtract);
+                    bigInteger = bigIntegerShiftRight.add(bigIntegerSubtract);
                 }
                 while (bigInteger.compareTo(this.q) >= 0) {
                     bigInteger = bigInteger.subtract(this.q);
@@ -352,8 +352,8 @@ public abstract class ECFieldElement implements ECConstants {
         }
 
         protected BigInteger modSubtract(BigInteger bigInteger, BigInteger bigInteger2) {
-            BigInteger subtract = bigInteger.subtract(bigInteger2);
-            return subtract.signum() < 0 ? subtract.add(this.q) : subtract;
+            BigInteger bigIntegerSubtract = bigInteger.subtract(bigInteger2);
+            return bigIntegerSubtract.signum() < 0 ? bigIntegerSubtract.add(this.q) : bigIntegerSubtract;
         }
 
         public boolean equals(Object obj) {
@@ -383,37 +383,37 @@ public abstract class ECFieldElement implements ECConstants {
                 throw new IllegalStateException("Half-trace only defined for odd m");
             }
             int i = (fieldSize + 1) >>> 1;
-            int numberOfLeadingZeros = 31 - Integers.numberOfLeadingZeros(i);
-            ECFieldElement eCFieldElement = this;
+            int iNumberOfLeadingZeros = 31 - Integers.numberOfLeadingZeros(i);
+            ECFieldElement eCFieldElementAdd = this;
             int i2 = 1;
-            while (numberOfLeadingZeros > 0) {
-                eCFieldElement = eCFieldElement.squarePow(i2 << 1).add(eCFieldElement);
-                numberOfLeadingZeros--;
-                i2 = i >>> numberOfLeadingZeros;
+            while (iNumberOfLeadingZeros > 0) {
+                eCFieldElementAdd = eCFieldElementAdd.squarePow(i2 << 1).add(eCFieldElementAdd);
+                iNumberOfLeadingZeros--;
+                i2 = i >>> iNumberOfLeadingZeros;
                 if ((i2 & 1) != 0) {
-                    eCFieldElement = eCFieldElement.squarePow(2).add(this);
+                    eCFieldElementAdd = eCFieldElementAdd.squarePow(2).add(this);
                 }
             }
-            return eCFieldElement;
+            return eCFieldElementAdd;
         }
 
         public int trace() {
             int fieldSize = getFieldSize();
-            int numberOfLeadingZeros = 31 - Integers.numberOfLeadingZeros(fieldSize);
-            ECFieldElement eCFieldElement = this;
+            int iNumberOfLeadingZeros = 31 - Integers.numberOfLeadingZeros(fieldSize);
+            ECFieldElement eCFieldElementAdd = this;
             int i = 1;
-            while (numberOfLeadingZeros > 0) {
-                eCFieldElement = eCFieldElement.squarePow(i).add(eCFieldElement);
-                numberOfLeadingZeros--;
-                i = fieldSize >>> numberOfLeadingZeros;
+            while (iNumberOfLeadingZeros > 0) {
+                eCFieldElementAdd = eCFieldElementAdd.squarePow(i).add(eCFieldElementAdd);
+                iNumberOfLeadingZeros--;
+                i = fieldSize >>> iNumberOfLeadingZeros;
                 if ((i & 1) != 0) {
-                    eCFieldElement = eCFieldElement.square().add(this);
+                    eCFieldElementAdd = eCFieldElementAdd.square().add(this);
                 }
             }
-            if (eCFieldElement.isZero()) {
+            if (eCFieldElementAdd.isZero()) {
                 return 0;
             }
-            if (eCFieldElement.isOne()) {
+            if (eCFieldElementAdd.isOne()) {
                 return 1;
             }
             throw new IllegalStateException("Internal error in trace calculation");
@@ -511,14 +511,14 @@ public abstract class ECFieldElement implements ECConstants {
             LongArray longArray2 = ((F2m) eCFieldElement).x;
             LongArray longArray3 = ((F2m) eCFieldElement2).x;
             LongArray longArray4 = ((F2m) eCFieldElement3).x;
-            LongArray multiply = longArray.multiply(longArray2, this.m, this.ks);
-            LongArray multiply2 = longArray3.multiply(longArray4, this.m, this.ks);
-            if (multiply == longArray || multiply == longArray2) {
-                multiply = (LongArray) multiply.clone();
+            LongArray longArrayMultiply = longArray.multiply(longArray2, this.m, this.ks);
+            LongArray longArrayMultiply2 = longArray3.multiply(longArray4, this.m, this.ks);
+            if (longArrayMultiply == longArray || longArrayMultiply == longArray2) {
+                longArrayMultiply = (LongArray) longArrayMultiply.clone();
             }
-            multiply.addShiftedByWords(multiply2, 0);
-            multiply.reduce(this.m, this.ks);
-            return new F2m(this.m, this.ks, multiply);
+            longArrayMultiply.addShiftedByWords(longArrayMultiply2, 0);
+            longArrayMultiply.reduce(this.m, this.ks);
+            return new F2m(this.m, this.ks, longArrayMultiply);
         }
 
         @Override // com.android.internal.org.bouncycastle.math.ec.ECFieldElement
@@ -543,14 +543,14 @@ public abstract class ECFieldElement implements ECConstants {
             LongArray longArray = this.x;
             LongArray longArray2 = ((F2m) eCFieldElement).x;
             LongArray longArray3 = ((F2m) eCFieldElement2).x;
-            LongArray square = longArray.square(this.m, this.ks);
-            LongArray multiply = longArray2.multiply(longArray3, this.m, this.ks);
-            if (square == longArray) {
-                square = (LongArray) square.clone();
+            LongArray longArraySquare = longArray.square(this.m, this.ks);
+            LongArray longArrayMultiply = longArray2.multiply(longArray3, this.m, this.ks);
+            if (longArraySquare == longArray) {
+                longArraySquare = (LongArray) longArraySquare.clone();
             }
-            square.addShiftedByWords(multiply, 0);
-            square.reduce(this.m, this.ks);
-            return new F2m(this.m, this.ks, square);
+            longArraySquare.addShiftedByWords(longArrayMultiply, 0);
+            longArraySquare.reduce(this.m, this.ks);
+            return new F2m(this.m, this.ks, longArraySquare);
         }
 
         @Override // com.android.internal.org.bouncycastle.math.ec.ECFieldElement

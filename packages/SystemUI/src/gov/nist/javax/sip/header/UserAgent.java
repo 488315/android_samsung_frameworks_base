@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.ListIterator;
 import javax.sip.header.Header;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class UserAgent extends SIPHeader implements Header {
     private static final long serialVersionUID = 4561239179796364295L;

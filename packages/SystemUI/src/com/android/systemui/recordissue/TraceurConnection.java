@@ -7,6 +7,7 @@ import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
 import android.os.Messenger;
+import android.os.RemoteException;
 import android.util.Log;
 import com.android.systemui.settings.UserContextProvider;
 import java.util.ArrayList;
@@ -16,13 +17,11 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import kotlin.Unit;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class TraceurConnection extends UserAwareConnection {
     public final Looper bgLooper;
     public final List onBound;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Provider {
         public final Looper bgLooper;
         public final UserContextProvider userContextProvider;
@@ -37,7 +36,7 @@ public final class TraceurConnection extends UserAwareConnection {
         this(userContextProvider, looper);
     }
 
-    public static Object sendMessage$default(final TraceurConnection traceurConnection, int i, Bundle bundle, Messenger messenger, int i2) {
+    public static Object sendMessage$default(final TraceurConnection traceurConnection, int i, Bundle bundle, Messenger messenger, int i2) throws RemoteException {
         if ((i2 & 2) != 0) {
             bundle = new Bundle();
         }
@@ -46,21 +45,21 @@ public final class TraceurConnection extends UserAwareConnection {
         }
         traceurConnection.getClass();
         try {
-            final Message obtain = Message.obtain();
-            obtain.what = i;
-            obtain.setData(bundle);
-            obtain.replyTo = messenger;
+            final Message messageObtain = Message.obtain();
+            messageObtain.what = i;
+            messageObtain.setData(bundle);
+            messageObtain.replyTo = messenger;
             Messenger messenger2 = traceurConnection.binder;
             if (messenger2 != null) {
-                messenger2.send(obtain);
+                messenger2.send(messageObtain);
                 return Unit.INSTANCE;
             }
             return Boolean.valueOf(((CopyOnWriteArrayList) traceurConnection.onBound).add(new Runnable() { // from class: com.android.systemui.recordissue.TraceurConnection$sendMessage$1
                 @Override // java.lang.Runnable
-                public final void run() {
-                    Messenger messenger3 = TraceurConnection.this.binder;
+                public final void run() throws RemoteException {
+                    Messenger messenger3 = this.this$0.binder;
                     messenger3.getClass();
-                    messenger3.send(obtain);
+                    messenger3.send(messageObtain);
                 }
             }));
         } catch (Exception e) {

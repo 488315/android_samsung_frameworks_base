@@ -43,14 +43,14 @@ public class EditTextPreference extends DialogPreference {
     }
 
     public void setText(String str) {
-        boolean equals = TextUtils.equals(this.mText, str);
-        if (equals && this.mTextSet) {
+        boolean zEquals = TextUtils.equals(this.mText, str);
+        if (zEquals && this.mTextSet) {
             return;
         }
         this.mText = str;
         this.mTextSet = true;
         persistString(str);
-        if (equals) {
+        if (zEquals) {
             return;
         }
         notifyDependencyChange(shouldDisableDependents());
@@ -96,9 +96,9 @@ public class EditTextPreference extends DialogPreference {
     protected void onDialogClosed(boolean z) {
         super.onDialogClosed(z);
         if (z) {
-            String editable = this.mEditText.getText().toString();
-            if (callChangeListener(editable)) {
-                setText(editable);
+            String string = this.mEditText.getText().toString();
+            if (callChangeListener(string)) {
+                setText(string);
             }
         }
     }
@@ -124,11 +124,11 @@ public class EditTextPreference extends DialogPreference {
 
     @Override // android.preference.DialogPreference, android.preference.Preference
     protected Parcelable onSaveInstanceState() {
-        Parcelable onSaveInstanceState = super.onSaveInstanceState();
+        Parcelable parcelableOnSaveInstanceState = super.onSaveInstanceState();
         if (isPersistent()) {
-            return onSaveInstanceState;
+            return parcelableOnSaveInstanceState;
         }
-        SavedState savedState = new SavedState(onSaveInstanceState);
+        SavedState savedState = new SavedState(parcelableOnSaveInstanceState);
         savedState.text = getText();
         return savedState;
     }

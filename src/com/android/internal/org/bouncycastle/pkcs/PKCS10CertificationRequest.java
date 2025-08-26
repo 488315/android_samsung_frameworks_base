@@ -155,7 +155,7 @@ public class PKCS10CertificationRequest {
         return this.certificationRequest.getEncoded();
     }
 
-    public boolean isSignatureValid(ContentVerifierProvider contentVerifierProvider) throws PKCSException {
+    public boolean isSignatureValid(ContentVerifierProvider contentVerifierProvider) throws PKCSException, IOException {
         CertificationRequestInfo certificationRequestInfo = this.certificationRequest.getCertificationRequestInfo();
         try {
             ContentVerifier contentVerifier = contentVerifierProvider.get(this.certificationRequest.getSignatureAlgorithm());
@@ -172,7 +172,7 @@ public class PKCS10CertificationRequest {
         return this.isAltRequest;
     }
 
-    public boolean isAltSignatureValid(ContentVerifierProvider contentVerifierProvider) throws PKCSException {
+    public boolean isAltSignatureValid(ContentVerifierProvider contentVerifierProvider) throws PKCSException, IOException {
         if (!this.isAltRequest) {
             throw new IllegalStateException("no alternate public key present");
         }

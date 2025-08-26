@@ -15,7 +15,6 @@ import android.view.animation.Animation;
 import com.android.internal.policy.TransitionAnimation;
 import com.android.wm.shell.transition.Transitions;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class DialogAnimationController {
     public static final AnonymousClass3 DRAWABLE_ALPHA;
@@ -27,7 +26,6 @@ public class DialogAnimationController {
     public final String mTag;
     public final TransitionAnimation mTransitionAnimation;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.compatui.DialogAnimationController$2, reason: invalid class name */
     public class AnonymousClass2 extends AnimatorListenerAdapter {
         public AnonymousClass2() {
@@ -76,23 +74,23 @@ public class DialogAnimationController {
     }
 
     public final Animation loadAnimation(int i) {
-        Animation loadAnimationAttr = this.mTransitionAnimation.loadAnimationAttr(this.mPackageName, this.mAnimStyleResId, i, false);
-        if (loadAnimationAttr == null) {
+        Animation animationLoadAnimationAttr = this.mTransitionAnimation.loadAnimationAttr(this.mPackageName, this.mAnimStyleResId, i, false);
+        if (animationLoadAnimationAttr == null) {
             Log.e(this.mTag, MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Failed to load animation "));
         }
-        return loadAnimationAttr;
+        return animationLoadAnimationAttr;
     }
 
     public final void startEnterAnimation(DialogContainerSupplier dialogContainerSupplier, final Runnable runnable) {
         cancelAnimation();
         final View dialogContainerView = dialogContainerSupplier.getDialogContainerView();
-        Animation loadAnimation = loadAnimation(0);
-        this.mDialogAnimation = loadAnimation;
-        if (loadAnimation == null) {
+        Animation animationLoadAnimation = loadAnimation(0);
+        this.mDialogAnimation = animationLoadAnimation;
+        if (animationLoadAnimation == null) {
             runnable.run();
             return;
         }
-        loadAnimation.setAnimationListener(new AnonymousClass1(this, new Runnable() { // from class: com.android.wm.shell.compatui.DialogAnimationController$$ExternalSyntheticLambda0
+        animationLoadAnimation.setAnimationListener(new AnonymousClass1(this, new Runnable() { // from class: com.android.wm.shell.compatui.DialogAnimationController$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
                 View view = dialogContainerView;
@@ -102,7 +100,7 @@ public class DialogAnimationController {
         }, new Runnable() { // from class: com.android.wm.shell.compatui.DialogAnimationController$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
-                DialogAnimationController dialogAnimationController = DialogAnimationController.this;
+                DialogAnimationController dialogAnimationController = this.f$0;
                 Runnable runnable2 = runnable;
                 dialogAnimationController.mDialogAnimation = null;
                 runnable2.run();
@@ -110,10 +108,10 @@ public class DialogAnimationController {
         }));
         Drawable backgroundDimDrawable = dialogContainerSupplier.getBackgroundDimDrawable();
         long duration = this.mDialogAnimation.getDuration();
-        ObjectAnimator ofInt = ObjectAnimator.ofInt(backgroundDimDrawable, DRAWABLE_ALPHA, 204);
-        ofInt.setDuration(duration);
-        this.mBackgroundDimAnimator = ofInt;
-        ofInt.addListener(new AnonymousClass2());
+        ObjectAnimator objectAnimatorOfInt = ObjectAnimator.ofInt(backgroundDimDrawable, DRAWABLE_ALPHA, 204);
+        objectAnimatorOfInt.setDuration(duration);
+        this.mBackgroundDimAnimator = objectAnimatorOfInt;
+        objectAnimatorOfInt.addListener(new AnonymousClass2());
         Animation animation = this.mDialogAnimation;
         long j = ENTER_ANIM_START_DELAY_MILLIS;
         animation.setStartOffset(j);
@@ -125,16 +123,16 @@ public class DialogAnimationController {
     public final void startExitAnimation(DialogContainerSupplier dialogContainerSupplier, final Runnable runnable) {
         cancelAnimation();
         final View dialogContainerView = dialogContainerSupplier.getDialogContainerView();
-        Animation loadAnimation = loadAnimation(1);
-        this.mDialogAnimation = loadAnimation;
-        if (loadAnimation == null) {
+        Animation animationLoadAnimation = loadAnimation(1);
+        this.mDialogAnimation = animationLoadAnimation;
+        if (animationLoadAnimation == null) {
             runnable.run();
             return;
         }
-        loadAnimation.setAnimationListener(new AnonymousClass1(this, new DialogAnimationController$$ExternalSyntheticLambda2(), new Runnable() { // from class: com.android.wm.shell.compatui.DialogAnimationController$$ExternalSyntheticLambda3
+        animationLoadAnimation.setAnimationListener(new AnonymousClass1(this, new DialogAnimationController$$ExternalSyntheticLambda2(), new Runnable() { // from class: com.android.wm.shell.compatui.DialogAnimationController$$ExternalSyntheticLambda3
             @Override // java.lang.Runnable
             public final void run() {
-                DialogAnimationController dialogAnimationController = DialogAnimationController.this;
+                DialogAnimationController dialogAnimationController = this.f$0;
                 View view = dialogContainerView;
                 Runnable runnable2 = runnable;
                 int i = DialogAnimationController.ENTER_ANIM_START_DELAY_MILLIS;
@@ -146,15 +144,14 @@ public class DialogAnimationController {
         }));
         Drawable backgroundDimDrawable = dialogContainerSupplier.getBackgroundDimDrawable();
         long duration = this.mDialogAnimation.getDuration();
-        ObjectAnimator ofInt = ObjectAnimator.ofInt(backgroundDimDrawable, DRAWABLE_ALPHA, 0);
-        ofInt.setDuration(duration);
-        this.mBackgroundDimAnimator = ofInt;
-        ofInt.addListener(new AnonymousClass2());
+        ObjectAnimator objectAnimatorOfInt = ObjectAnimator.ofInt(backgroundDimDrawable, DRAWABLE_ALPHA, 0);
+        objectAnimatorOfInt.setDuration(duration);
+        this.mBackgroundDimAnimator = objectAnimatorOfInt;
+        objectAnimatorOfInt.addListener(new AnonymousClass2());
         dialogContainerView.startAnimation(this.mDialogAnimation);
         this.mBackgroundDimAnimator.start();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.compatui.DialogAnimationController$1, reason: invalid class name */
     public class AnonymousClass1 implements Animation.AnimationListener {
         public final /* synthetic */ Runnable val$endCallback;

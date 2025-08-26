@@ -42,8 +42,8 @@ public final class PackageSetPolicyValue extends PolicyValue<Set<String>> {
 
     private static Set<String> readValues(Parcel parcel) {
         HashSet hashSet = new HashSet();
-        int readInt = parcel.readInt();
-        for (int i = 0; i < readInt; i++) {
+        int i = parcel.readInt();
+        for (int i2 = 0; i2 < i; i2++) {
             hashSet.add(parcel.readString());
         }
         return hashSet;

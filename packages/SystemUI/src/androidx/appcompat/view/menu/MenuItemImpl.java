@@ -17,7 +17,6 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.internal.view.SupportMenuItem;
 import androidx.core.view.ActionProvider;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class MenuItemImpl implements SupportMenuItem, SeslMenuItem {
     public ActionProvider mActionProvider;
@@ -51,7 +50,6 @@ public final class MenuItemImpl implements SupportMenuItem, SeslMenuItem {
     public int mFlags = 16;
     public boolean mIsActionViewExpanded = false;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: androidx.appcompat.view.menu.MenuItemImpl$1, reason: invalid class name */
     public class AnonymousClass1 {
         public AnonymousClass1() {
@@ -130,9 +128,9 @@ public final class MenuItemImpl implements SupportMenuItem, SeslMenuItem {
         if (actionProvider == null) {
             return null;
         }
-        View onCreateActionView = actionProvider.onCreateActionView(this);
-        this.mActionView = onCreateActionView;
-        return onCreateActionView;
+        View viewOnCreateActionView = actionProvider.onCreateActionView(this);
+        this.mActionView = viewOnCreateActionView;
+        return viewOnCreateActionView;
     }
 
     @Override // androidx.core.internal.view.SupportMenuItem, android.view.MenuItem
@@ -596,11 +594,11 @@ public final class MenuItemImpl implements SupportMenuItem, SeslMenuItem {
     public final MenuItem setActionView(int i) {
         int i2;
         Context context = this.mMenu.mContext;
-        View inflate = LayoutInflater.from(context).inflate(i, (ViewGroup) new LinearLayout(context), false);
-        this.mActionView = inflate;
+        View viewInflate = LayoutInflater.from(context).inflate(i, (ViewGroup) new LinearLayout(context), false);
+        this.mActionView = viewInflate;
         this.mActionProvider = null;
-        if (inflate != null && inflate.getId() == -1 && (i2 = this.mId) > 0) {
-            inflate.setId(i2);
+        if (viewInflate != null && viewInflate.getId() == -1 && (i2 = this.mId) > 0) {
+            viewInflate.setId(i2);
         }
         MenuBuilder menuBuilder = this.mMenu;
         menuBuilder.mIsActionItemsStale = true;

@@ -3,6 +3,7 @@ package com.android.systemui.wallpapers;
 import android.app.WallpaperColors;
 import android.app.WallpaperManager;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.BLASTBufferQueue;
 import android.graphics.Bitmap;
@@ -53,6 +54,7 @@ import androidx.viewpager.widget.ViewPager$$ExternalSyntheticOutline0;
 import com.android.keyguard.ClockEventController$$ExternalSyntheticOutline0;
 import com.android.keyguard.ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardSecPasswordViewController$$ExternalSyntheticOutline0;
+import com.android.keyguard.KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.keyguard.logging.KeyguardUpdateMonitorLogger$$ExternalSyntheticOutline0;
 import com.android.systemui.LsRune;
@@ -75,6 +77,8 @@ import com.android.systemui.wallpaper.PluginWallpaperController;
 import com.android.systemui.wallpaper.WallpaperUtils;
 import com.android.systemui.wallpaper.canvaswallpaper.ImageWallpaperCanvasHelper;
 import com.android.systemui.wallpaper.colors.SystemWallpaperColors;
+import com.android.systemui.wallpaper.effect.ColorDecorFilterHelper;
+import com.android.systemui.wallpaper.effect.HighlightFilterHelper;
 import com.android.systemui.wallpaper.engines.WallpaperEngine;
 import com.android.systemui.wallpaper.engines.WallpaperEngineCallback;
 import com.android.systemui.wallpaper.engines.gif.GifEngine;
@@ -93,8 +97,10 @@ import com.android.systemui.wallpaper.log.WallpaperLoggerImpl;
 import com.android.systemui.wallpaper.utils.IntelligentCropHelper;
 import com.android.systemui.wallpaper.utils.WhichChecker;
 import com.android.systemui.wallpapers.ImageWallpaper;
+import com.android.systemui.wallpapers.ImageWallpaper$CanvasEngine$$ExternalSyntheticLambda1;
 import com.android.systemui.wallpapers.WallpaperLocalColorExtractor;
 import com.android.wm.shell.common.DisplayController;
+import com.samsung.android.wallpaper.Rune;
 import com.samsung.android.wallpaper.live.sdk.data.DisplayState;
 import com.samsung.android.wallpaper.live.sdk.data.ScreenshotOptions;
 import com.samsung.android.wallpaper.live.sdk.data.ScreenshotResults;
@@ -114,7 +120,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class ImageWallpaper extends LiveWallpaperService {
     public static final RectF LOCAL_COLOR_BOUNDS = new RectF(0.0f, 0.0f, 1.0f, 1.0f);
@@ -143,7 +148,7 @@ public class ImageWallpaper extends LiveWallpaperService {
         @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
         public final void onChanged(Uri uri) {
             RectF rectF = ImageWallpaper.LOCAL_COLOR_BOUNDS;
-            ImageWallpaper imageWallpaper = ImageWallpaper.this;
+            ImageWallpaper imageWallpaper = this.f$0;
             if (Settings.System.getUriFor(SettingsHelper.INDEX_DARK_FILTER_WALLPAPER).equals(uri)) {
                 Log.i("ImageWallpaper", " Apply Dark mode option changed");
                 ArrayList engines = LiveWallpaperEngineManager.getInstance(imageWallpaper.getApplicationContext()).getEngines();
@@ -169,7 +174,6 @@ public class ImageWallpaper extends LiveWallpaperService {
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class BaseEngine extends LiveWallpaperService.BaseEngine {
         public int mWhich;
 
@@ -189,7 +193,6 @@ public class ImageWallpaper extends LiveWallpaperService {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class IntegratedEngine extends BaseEngine {
         public static final /* synthetic */ int $r8$clinit = 0;
         public String TAG;
@@ -201,7 +204,6 @@ public class ImageWallpaper extends LiveWallpaperService {
         public WallpaperManager mWallpaperManager;
         public final int mWallpaperType;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.wallpapers.ImageWallpaper$IntegratedEngine$1, reason: invalid class name */
         public class AnonymousClass1 {
             public AnonymousClass1() {
@@ -223,7 +225,7 @@ public class ImageWallpaper extends LiveWallpaperService {
                                 public final Object call() {
                                     int currentPosition;
                                     VideoController.PlayerSession playerSession;
-                                    ImageWallpaper.IntegratedEngine.AnonymousClass1 anonymousClass1 = ImageWallpaper.IntegratedEngine.AnonymousClass1.this;
+                                    ImageWallpaper.IntegratedEngine.AnonymousClass1 anonymousClass1 = this.f$0;
                                     int i2 = this.f$1;
                                     ImageWallpaper.IntegratedEngine integratedEngine2 = ImageWallpaper.IntegratedEngine.this;
                                     int i3 = ImageWallpaper.IntegratedEngine.$r8$clinit;
@@ -235,8 +237,12 @@ public class ImageWallpaper extends LiveWallpaperService {
                                             VideoController videoController = ((VideoEngine) wallpaperEngine).mVideoController;
                                             synchronized (videoController.mLock) {
                                                 try {
-                                                    currentPosition = (videoController.mIsReleased || (playerSession = videoController.mActiveSession) == null) ? 0 : playerSession.getCurrentPosition();
-                                                    Log.i(videoController.TAG, "getCurrentPosition: released");
+                                                    if (videoController.mIsReleased || (playerSession = videoController.mActiveSession) == null) {
+                                                        Log.i(videoController.TAG, "getCurrentPosition: released");
+                                                        currentPosition = 0;
+                                                    } else {
+                                                        currentPosition = playerSession.getCurrentPosition();
+                                                    }
                                                 } finally {
                                                 }
                                             }
@@ -268,7 +274,6 @@ public class ImageWallpaper extends LiveWallpaperService {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.wallpapers.ImageWallpaper$IntegratedEngine$2, reason: invalid class name */
         public class AnonymousClass2 implements WallpaperEngineCallback {
             public BLASTBufferQueue mBbqOfPendingTransactionRequest;
@@ -292,7 +297,7 @@ public class ImageWallpaper extends LiveWallpaperService {
                 };
             }
 
-            public final SurfaceControl getSurfaceControl() {
+            public final SurfaceControl getSurfaceControl() throws NoSuchFieldException {
                 int i = IntegratedEngine.$r8$clinit;
                 IntegratedEngine integratedEngine = IntegratedEngine.this;
                 integratedEngine.getClass();
@@ -308,11 +313,11 @@ public class ImageWallpaper extends LiveWallpaperService {
         }
 
         /* renamed from: -$$Nest$mrecreateSurfaceControl, reason: not valid java name */
-        public static void m3214$$Nest$mrecreateSurfaceControl(IntegratedEngine integratedEngine) {
+        public static void m3231$$Nest$mrecreateSurfaceControl(IntegratedEngine integratedEngine) {
             integratedEngine.getClass();
-            WallpaperService.Engine.SurfaceData semCreateSurface = super.semCreateSurface(true, 1.0f);
-            if (semCreateSurface != null) {
-                ImageWallpaper.this.mMainThreadHandler.postDelayed(new ImageWallpaper$CanvasEngine$$ExternalSyntheticLambda6(integratedEngine, semCreateSurface, 2), 500L);
+            WallpaperService.Engine.SurfaceData surfaceDataSemCreateSurface = super.semCreateSurface(true, 1.0f);
+            if (surfaceDataSemCreateSurface != null) {
+                ImageWallpaper.this.mMainThreadHandler.postDelayed(new ImageWallpaper$CanvasEngine$$ExternalSyntheticLambda6(integratedEngine, surfaceDataSemCreateSurface, 2), 500L);
             }
         }
 
@@ -356,18 +361,22 @@ public class ImageWallpaper extends LiveWallpaperService {
             return super.onCommand(str, i, i2, i3, bundle, z);
         }
 
+        /* JADX WARN: Removed duplicated region for block: B:23:0x00c3  */
         @Override // com.samsung.android.wallpaper.live.sdk.service.LiveWallpaperService.BaseEngine, android.service.wallpaper.WallpaperService.Engine
+        /*
+            Code decompiled incorrectly, please refer to instructions dump.
+        */
         public final void onCreate(SurfaceHolder surfaceHolder) {
-            WallpaperEngine createImageEngine;
+            WallpaperEngine wallpaperEngineCreateImageEngine;
             WallpaperEngine gifEngine;
             super.onCreate(surfaceHolder);
-            int semGetWallpaperFlags = semGetWallpaperFlags();
-            String m = ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(semGetWallpaperFlags, "ImageWallpaper_", "[Integrated]");
-            this.TAG = m;
-            Log.i(m, "onCreate");
+            int iSemGetWallpaperFlags = semGetWallpaperFlags();
+            String strM = ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(iSemGetWallpaperFlags, "ImageWallpaper_", "[Integrated]");
+            this.TAG = strM;
+            Log.i(strM, "onCreate");
             this.mSurfaceHolder = surfaceHolder;
             this.mWallpaperManager = WallpaperManager.getInstance(ImageWallpaper.this.getApplicationContext());
-            if (WhichChecker.isFlagEnabled(semGetWallpaperFlags, 2)) {
+            if (WhichChecker.isFlagEnabled(iSemGetWallpaperFlags, 2)) {
                 KeyguardWallpaper keyguardWallpaper = ImageWallpaper.this.mKeyguardWallpaper;
                 int i = this.mWhich;
                 ((HashMap) ((KeyguardWallpaperController) keyguardWallpaper).mEventListeners).put(Integer.valueOf(WhichChecker.isFlagEnabled(i, 16) ? 1 : 0), this.mKeyguardWallpaperEventListener);
@@ -376,38 +385,35 @@ public class ImageWallpaper extends LiveWallpaperService {
             setFixedSizeAllowed(true);
             int i2 = this.mWallpaperType;
             if (i2 == 0) {
-                createImageEngine = createImageEngine(semGetWallpaperFlags);
-            } else if (i2 != 1) {
-                if (i2 != 3) {
-                    if (i2 != 4) {
-                        if (i2 == 5) {
-                            gifEngine = new GifEngine(new GifSource(ImageWallpaper.this.getBaseContext(), semGetWallpaperFlags, ImageWallpaper.this.mCoverWallpaper), this.mWallpaperEngineCallback);
-                        } else if (i2 == 8) {
-                            ImageWallpaper imageWallpaper = ImageWallpaper.this;
-                            int currentUserId = getCurrentUserId();
-                            ImageWallpaper imageWallpaper2 = ImageWallpaper.this;
-                            gifEngine = new VideoEngine(new VideoSource(imageWallpaper, semGetWallpaperFlags, 1, currentUserId, imageWallpaper2.mCoverWallpaper, imageWallpaper2.mPluginWallpaper), this.mWallpaperEngineCallback, ImageWallpaper.this.mKeyguardUpdateMonitor);
-                        } else if (i2 != 1000) {
-                            Log.e(this.TAG, "createEngine: Unknown wallpaper type = " + this.mWallpaperType);
-                            createImageEngine = createImageEngine(semGetWallpaperFlags);
-                        }
-                        createImageEngine = gifEngine;
-                    } else {
-                        createImageEngine = new AnimatedEngine(ImageWallpaper.this.getBaseContext(), this.mWallpaperEngineCallback);
-                    }
-                }
+                wallpaperEngineCreateImageEngine = createImageEngine(iSemGetWallpaperFlags);
+            } else if (i2 == 1) {
+                wallpaperEngineCreateImageEngine = new MotionEngine(ImageWallpaper.this.getBaseContext(), this.mWallpaperEngineCallback);
+            } else if (i2 == 3) {
                 AnonymousClass2 anonymousClass2 = this.mWallpaperEngineCallback;
-                ImageWallpaper imageWallpaper3 = ImageWallpaper.this;
-                CoverWallpaper coverWallpaper = imageWallpaper3.mCoverWallpaper;
-                PluginWallpaper pluginWallpaper = imageWallpaper3.mPluginWallpaper;
-                SettingsHelper settingsHelper = imageWallpaper3.mSettingsHelper;
-                ImageWallpaper imageWallpaper4 = ImageWallpaper.this;
-                createImageEngine = new MultipackEngine(anonymousClass2, coverWallpaper, pluginWallpaper, settingsHelper, imageWallpaper4.mSystemWallpaperColors, imageWallpaper4.mLongExecutor, imageWallpaper4.mDozeParameters, imageWallpaper4.mKeyguardWallpaper, imageWallpaper4.mKeyguardUpdateMonitor);
+                ImageWallpaper imageWallpaper = ImageWallpaper.this;
+                CoverWallpaper coverWallpaper = imageWallpaper.mCoverWallpaper;
+                PluginWallpaper pluginWallpaper = imageWallpaper.mPluginWallpaper;
+                SettingsHelper settingsHelper = imageWallpaper.mSettingsHelper;
+                ImageWallpaper imageWallpaper2 = ImageWallpaper.this;
+                wallpaperEngineCreateImageEngine = new MultipackEngine(anonymousClass2, coverWallpaper, pluginWallpaper, settingsHelper, imageWallpaper2.mSystemWallpaperColors, imageWallpaper2.mLongExecutor, imageWallpaper2.mDozeParameters, imageWallpaper2.mKeyguardWallpaper, imageWallpaper2.mKeyguardUpdateMonitor);
+            } else if (i2 != 4) {
+                if (i2 == 5) {
+                    gifEngine = new GifEngine(new GifSource(ImageWallpaper.this.getBaseContext(), iSemGetWallpaperFlags, ImageWallpaper.this.mCoverWallpaper), this.mWallpaperEngineCallback);
+                } else if (i2 == 8) {
+                    ImageWallpaper imageWallpaper3 = ImageWallpaper.this;
+                    int currentUserId = getCurrentUserId();
+                    ImageWallpaper imageWallpaper4 = ImageWallpaper.this;
+                    gifEngine = new VideoEngine(new VideoSource(imageWallpaper3, iSemGetWallpaperFlags, 1, currentUserId, imageWallpaper4.mCoverWallpaper, imageWallpaper4.mPluginWallpaper), this.mWallpaperEngineCallback, ImageWallpaper.this.mKeyguardUpdateMonitor);
+                } else if (i2 != 1000) {
+                    Log.e(this.TAG, "createEngine: Unknown wallpaper type = " + this.mWallpaperType);
+                    wallpaperEngineCreateImageEngine = createImageEngine(iSemGetWallpaperFlags);
+                }
+                wallpaperEngineCreateImageEngine = gifEngine;
             } else {
-                createImageEngine = new MotionEngine(ImageWallpaper.this.getBaseContext(), this.mWallpaperEngineCallback);
+                wallpaperEngineCreateImageEngine = new AnimatedEngine(ImageWallpaper.this.getBaseContext(), this.mWallpaperEngineCallback);
             }
-            this.mSubEngine = createImageEngine;
-            createImageEngine.onCreate(surfaceHolder);
+            this.mSubEngine = wallpaperEngineCreateImageEngine;
+            wallpaperEngineCreateImageEngine.onCreate(surfaceHolder);
             if (LsRune.WALLPAPER_SUB_DISPLAY_MODE) {
                 ImageWallpaper.this.mMainThreadHandler.post(new ImageWallpaper$$ExternalSyntheticLambda1(this.mWakefulnessObserver, 1));
             }
@@ -419,20 +425,20 @@ public class ImageWallpaper extends LiveWallpaperService {
             ((HashMap) ((KeyguardWallpaperController) ImageWallpaper.this.mKeyguardWallpaper).mEventListeners).remove(Integer.valueOf(WhichChecker.isFlagEnabled(this.mWhich, 16) ? 1 : 0));
             ImageWallpaper.this.mCanvasEngineList.remove(Integer.valueOf(getDisplayId()), this);
             this.mSubEngine.onDestroy();
-            int semGetWallpaperFlags = semGetWallpaperFlags();
-            if (ImageWallpaper.this.mCoverWallpaper != null && (WhichChecker.isWatchFace(semGetWallpaperFlags) || WhichChecker.isVirtualDisplay(semGetWallpaperFlags))) {
+            int iSemGetWallpaperFlags = semGetWallpaperFlags();
+            if (ImageWallpaper.this.mCoverWallpaper != null && (WhichChecker.isWatchFace(iSemGetWallpaperFlags) || WhichChecker.isVirtualDisplay(iSemGetWallpaperFlags))) {
                 ImageWallpaper.this.mCoverWallpaper.getClass();
             }
-            if (ImageWallpaper.this.mPluginWallpaper != null && WhichChecker.isFlagEnabled(semGetWallpaperFlags, 2)) {
+            if (ImageWallpaper.this.mPluginWallpaper != null && WhichChecker.isFlagEnabled(iSemGetWallpaperFlags, 2)) {
                 PluginWallpaperController pluginWallpaperController = (PluginWallpaperController) ImageWallpaper.this.mPluginWallpaper;
                 pluginWallpaperController.getClass();
-                Log.d("PluginWallpaperController", "onWallpaperDestroyed: which = " + semGetWallpaperFlags);
-                if ((semGetWallpaperFlags & 1) != 1 && !WhichChecker.isFlagEnabled(semGetWallpaperFlags, 8)) {
-                    int screen = PluginWallpaperController.getScreen(semGetWallpaperFlags);
-                    int wallpaperId = pluginWallpaperController.mWallpaperManager.getWallpaperId(WhichChecker.getSourceWhich(semGetWallpaperFlags));
-                    StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(wallpaperId, screen, "onWallpaperDestroyed: wallpaperId = ", ", mWallpaperId[", "] = ");
+                Log.d("PluginWallpaperController", "onWallpaperDestroyed: which = " + iSemGetWallpaperFlags);
+                if ((iSemGetWallpaperFlags & 1) != 1 && !WhichChecker.isFlagEnabled(iSemGetWallpaperFlags, 8)) {
+                    int screen = PluginWallpaperController.getScreen(iSemGetWallpaperFlags);
+                    int wallpaperId = pluginWallpaperController.mWallpaperManager.getWallpaperId(WhichChecker.getSourceWhich(iSemGetWallpaperFlags));
+                    StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(wallpaperId, screen, "onWallpaperDestroyed: wallpaperId = ", ", mWallpaperId[", "] = ");
                     int[] iArr = pluginWallpaperController.mWallpaperId;
-                    RecyclerView$$ExternalSyntheticOutline0.m(iArr[screen], "PluginWallpaperController", m);
+                    RecyclerView$$ExternalSyntheticOutline0.m(iArr[screen], "PluginWallpaperController", sbM);
                     if (wallpaperId != iArr[screen]) {
                         pluginWallpaperController.mWallpaperConsumers.put(screen, null);
                         iArr[screen] = wallpaperId;
@@ -493,17 +499,17 @@ public class ImageWallpaper extends LiveWallpaperService {
         @Override // com.android.systemui.wallpapers.ImageWallpaper.BaseEngine, android.service.wallpaper.WallpaperService.Engine
         public final void onWallpaperFlagsChanged(int i) {
             super.onWallpaperFlagsChanged(i);
-            int semGetWallpaperFlags = semGetWallpaperFlags();
-            String m = ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(semGetWallpaperFlags, "ImageWallpaper_", "[Integrated]");
-            this.TAG = m;
-            Log.i(m, "onWallpaperFlagsChanged: which = " + i + ", semWhich = " + semGetWallpaperFlags);
-            this.mSubEngine.onWhichChanged(semGetWallpaperFlags);
-            if (WhichChecker.isFlagEnabled(semGetWallpaperFlags, 1)) {
-                ((HashMap) ((KeyguardWallpaperController) ImageWallpaper.this.mKeyguardWallpaper).mEventListeners).remove(Integer.valueOf(WhichChecker.isFlagEnabled(semGetWallpaperFlags, 16) ? 1 : 0));
+            int iSemGetWallpaperFlags = semGetWallpaperFlags();
+            String strM = ParcelableSnapshotMutableState$Companion$CREATOR$1$$ExternalSyntheticOutline0.m(iSemGetWallpaperFlags, "ImageWallpaper_", "[Integrated]");
+            this.TAG = strM;
+            Log.i(strM, "onWallpaperFlagsChanged: which = " + i + ", semWhich = " + iSemGetWallpaperFlags);
+            this.mSubEngine.onWhichChanged(iSemGetWallpaperFlags);
+            if (WhichChecker.isFlagEnabled(iSemGetWallpaperFlags, 1)) {
+                ((HashMap) ((KeyguardWallpaperController) ImageWallpaper.this.mKeyguardWallpaper).mEventListeners).remove(Integer.valueOf(WhichChecker.isFlagEnabled(iSemGetWallpaperFlags, 16) ? 1 : 0));
                 return;
             }
             KeyguardWallpaper keyguardWallpaper = ImageWallpaper.this.mKeyguardWallpaper;
-            ((HashMap) ((KeyguardWallpaperController) keyguardWallpaper).mEventListeners).put(Integer.valueOf(WhichChecker.isFlagEnabled(semGetWallpaperFlags, 16) ? 1 : 0), this.mKeyguardWallpaperEventListener);
+            ((HashMap) ((KeyguardWallpaperController) keyguardWallpaper).mEventListeners).put(Integer.valueOf(WhichChecker.isFlagEnabled(iSemGetWallpaperFlags, 16) ? 1 : 0), this.mKeyguardWallpaperEventListener);
         }
 
         public final boolean shouldWaitForEngineShown() {
@@ -546,10 +552,10 @@ public class ImageWallpaper extends LiveWallpaperService {
             i++;
             LiveWallpaperService.BaseEngine baseEngine = (LiveWallpaperService.BaseEngine) obj;
             if ((baseEngine instanceof IntegratedEngine) && !baseEngine.isPreview()) {
-                int convertDisplayIdToMode = WhichChecker.convertDisplayIdToMode(displayId, applicationContext);
-                int semGetWallpaperFlags = baseEngine.semGetWallpaperFlags() & 60;
-                RecyclerView$$ExternalSyntheticOutline0.m(semGetWallpaperFlags, "ImageWallpaper", MutableObjectList$$ExternalSyntheticOutline0.m(displayId, convertDisplayIdToMode, "onConfigurationChanged: displayId = ", ", modeFromDisplayId = ", ", modeFromEngine = "));
-                if (convertDisplayIdToMode == semGetWallpaperFlags) {
+                int iConvertDisplayIdToMode = WhichChecker.convertDisplayIdToMode(displayId, applicationContext);
+                int iSemGetWallpaperFlags = baseEngine.semGetWallpaperFlags() & 60;
+                RecyclerView$$ExternalSyntheticOutline0.m(iSemGetWallpaperFlags, "ImageWallpaper", MutableObjectList$$ExternalSyntheticOutline0.m(displayId, iConvertDisplayIdToMode, "onConfigurationChanged: displayId = ", ", modeFromDisplayId = ", ", modeFromEngine = "));
+                if (iConvertDisplayIdToMode == iSemGetWallpaperFlags) {
                     ((IntegratedEngine) baseEngine).onConfigurationChanged(configuration);
                 }
             }
@@ -596,7 +602,6 @@ public class ImageWallpaper extends LiveWallpaperService {
         return handlerThread != null ? handlerThread.getLooper() : super.onProvideEngineLooper();
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class CanvasEngine extends BaseEngine implements DisplayManager.DisplayListener {
         public static final /* synthetic */ int $r8$clinit = 0;
         static final int MIN_SURFACE_HEIGHT = 128;
@@ -627,14 +632,12 @@ public class ImageWallpaper extends LiveWallpaperService {
         public final WallpaperLocalColorExtractor mWallpaperLocalColorExtractor;
         public WallpaperManager mWallpaperManager;
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.wallpapers.ImageWallpaper$CanvasEngine$3, reason: invalid class name */
         public class AnonymousClass3 implements ImageWallpaperCanvasHelper.Callback {
             public AnonymousClass3() {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.wallpapers.ImageWallpaper$CanvasEngine$4, reason: invalid class name */
         public class AnonymousClass4 implements WakefulnessLifecycle.Observer {
             public AnonymousClass4() {
@@ -648,7 +651,6 @@ public class ImageWallpaper extends LiveWallpaperService {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.wallpapers.ImageWallpaper$CanvasEngine$7, reason: invalid class name */
         public class AnonymousClass7 implements Consumer {
             public AnonymousClass7() {
@@ -663,7 +665,6 @@ public class ImageWallpaper extends LiveWallpaperService {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         /* renamed from: com.android.systemui.wallpapers.ImageWallpaper$CanvasEngine$8, reason: invalid class name */
         public class AnonymousClass8 implements Consumer {
             public AnonymousClass8() {
@@ -678,7 +679,6 @@ public class ImageWallpaper extends LiveWallpaperService {
             }
         }
 
-        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
         public class DrawState {
             public final boolean mDarkModeFilterApplied;
             public final boolean mHighlightFilterApplied;
@@ -711,9 +711,9 @@ public class ImageWallpaper extends LiveWallpaperService {
         }
 
         /* renamed from: -$$Nest$mupdatePluginWallpaper, reason: not valid java name */
-        public static void m3213$$Nest$mupdatePluginWallpaper(CanvasEngine canvasEngine) {
-            int semGetWallpaperFlags = canvasEngine.semGetWallpaperFlags();
-            if (!WhichChecker.isWatchFace(semGetWallpaperFlags)) {
+        public static void m3230$$Nest$mupdatePluginWallpaper(CanvasEngine canvasEngine) {
+            int iSemGetWallpaperFlags = canvasEngine.semGetWallpaperFlags();
+            if (!WhichChecker.isWatchFace(iSemGetWallpaperFlags)) {
                 if (((PluginWallpaperController) ImageWallpaper.this.mPluginWallpaper).isPluginWallpaperRequired(canvasEngine.mWhich)) {
                     ImageWallpaper imageWallpaper = ImageWallpaper.this;
                     if (imageWallpaper.mPluginWallpaperType != ((PluginWallpaperController) imageWallpaper.mPluginWallpaper).getWallpaperType(canvasEngine.mWhich)) {
@@ -726,14 +726,14 @@ public class ImageWallpaper extends LiveWallpaperService {
                     imageWallpaper3.mPluginWallpaperType = ((PluginWallpaperController) imageWallpaper3.mPluginWallpaper).getWallpaperType(canvasEngine.mWhich);
                 }
             } else if (((CoverWallpaperController) ImageWallpaper.this.mCoverWallpaper).getWallpaperType() != 21) {
-                WallpaperManager.getInstance(ImageWallpaper.this.getApplicationContext()).forceRebindWallpaper(semGetWallpaperFlags);
+                WallpaperManager.getInstance(ImageWallpaper.this.getApplicationContext()).forceRebindWallpaper(iSemGetWallpaperFlags);
                 return;
             }
             if (canvasEngine.mSurfaceCreated) {
-                if (canvasEngine.updateSurfaceSizeIfNeed(semGetWallpaperFlags) && WhichChecker.isWatchFace(semGetWallpaperFlags)) {
+                if (canvasEngine.updateSurfaceSizeIfNeed(iSemGetWallpaperFlags) && WhichChecker.isWatchFace(iSemGetWallpaperFlags)) {
                     return;
                 }
-                canvasEngine.drawFrameSynchronized(semGetWallpaperFlags, new Rect(canvasEngine.mSurfaceHolder.getSurfaceFrame()));
+                canvasEngine.drawFrameSynchronized(iSemGetWallpaperFlags, new Rect(canvasEngine.mSurfaceHolder.getSurfaceFrame()));
             }
         }
 
@@ -778,14 +778,14 @@ public class ImageWallpaper extends LiveWallpaperService {
                         ClockEventController$$ExternalSyntheticOutline0.m(displayId, "  getCurrentDisplayRotation failed to get display. displayId=", canvasEngine.TAG);
                     }
                     int i3 = displayInfo.rotation;
-                    long elapsedRealtime = SystemClock.elapsedRealtime() - this.mFixedRotationStartTime;
+                    long jElapsedRealtime = SystemClock.elapsedRealtime() - this.mFixedRotationStartTime;
                     WallpaperLogger wallpaperLogger = ImageWallpaper.this.mLogger;
                     String str = canvasEngine.TAG;
                     StringBuilder sb = new StringBuilder("onFixedRotationFinished mRotation=");
                     ViewPager$$ExternalSyntheticOutline0.m(sb, canvasEngine.mRotation, ", displayRotation=", i3, ", configRotation=");
                     sb.append(configuration.windowConfiguration.getRotation());
                     sb.append(", elapsed=");
-                    sb.append(elapsedRealtime);
+                    sb.append(jElapsedRealtime);
                     sb.append(", ");
                     sb.append(configuration);
                     ((WallpaperLoggerImpl) wallpaperLogger).log(str, sb.toString());
@@ -810,11 +810,11 @@ public class ImageWallpaper extends LiveWallpaperService {
                     CanvasEngine canvasEngine = CanvasEngine.this;
                     WallpaperLogger wallpaperLogger = ImageWallpaper.this.mLogger;
                     String str = canvasEngine.TAG;
-                    StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i2, i3, "onFixedRotationStarted displayId=", ", newRotation=", ", mRotation=");
-                    m.append(canvasEngine.mRotation);
-                    m.append(", ");
-                    m.append(ImageWallpaper.this.getResources().getConfiguration());
-                    ((WallpaperLoggerImpl) wallpaperLogger).log(str, m.toString());
+                    StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i2, i3, "onFixedRotationStarted displayId=", ", newRotation=", ", mRotation=");
+                    sbM.append(canvasEngine.mRotation);
+                    sbM.append(", ");
+                    sbM.append(ImageWallpaper.this.getResources().getConfiguration());
+                    ((WallpaperLoggerImpl) wallpaperLogger).log(str, sbM.toString());
                     this.mFixedRotationStartTime = SystemClock.elapsedRealtime();
                     if (i2 == canvasEngine.getDisplayId()) {
                         canvasEngine.mIsFixedRotationInProgress = true;
@@ -841,9 +841,9 @@ public class ImageWallpaper extends LiveWallpaperService {
                     CanvasEngine canvasEngine = CanvasEngine.this;
                     WallpaperLogger wallpaperLogger = ImageWallpaper.this.mLogger;
                     String str = canvasEngine.TAG;
-                    StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i2, "onRotationChanged: newRotation=", ", mRotation=");
-                    m.append(CanvasEngine.this.mRotation);
-                    ((WallpaperLoggerImpl) wallpaperLogger).log(str, m.toString());
+                    StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i2, "onRotationChanged: newRotation=", ", mRotation=");
+                    sbM.append(CanvasEngine.this.mRotation);
+                    ((WallpaperLoggerImpl) wallpaperLogger).log(str, sbM.toString());
                     CanvasEngine canvasEngine2 = CanvasEngine.this;
                     if (canvasEngine2.mRotation != i2) {
                         ((WallpaperLoggerImpl) ImageWallpaper.this.mLogger).log(canvasEngine2.TAG, "onRotationChanged rotation is changed ");
@@ -934,19 +934,19 @@ public class ImageWallpaper extends LiveWallpaperService {
                 float f = 1.0f / ImageWallpaper.this.mPages;
                 float f2 = (rectF.left % f) / f;
                 float f3 = (rectF.right % f) / f;
-                int floor = (int) Math.floor(rectF.centerX() / f);
+                int iFloor = (int) Math.floor(rectF.centerX() / f);
                 RectF rectF2 = new RectF();
                 if (this.mImgWidth != 0 && (i = this.mImgHeight) != 0 && this.mDisplayWidth > 0 && (i2 = this.mDisplayHeight) > 0) {
                     rectF2.bottom = rectF.bottom;
                     rectF2.top = rectF.top;
-                    float min = this.mDisplayWidth * Math.min(i / i2, 1.0f);
+                    float fMin = this.mDisplayWidth * Math.min(i / i2, 1.0f);
                     int i4 = this.mImgWidth;
-                    float min2 = Math.min(1.0f, i4 > 0 ? min / i4 : 1.0f);
-                    float f4 = floor * ((1.0f - min2) / (ImageWallpaper.this.mPages - 1));
-                    rectF2.left = MathUtils.constrain((f2 * min2) + f4, 0.0f, 1.0f);
-                    float constrain = MathUtils.constrain((f3 * min2) + f4, 0.0f, 1.0f);
-                    rectF2.right = constrain;
-                    if (rectF2.left > constrain) {
+                    float fMin2 = Math.min(1.0f, i4 > 0 ? fMin / i4 : 1.0f);
+                    float f4 = iFloor * ((1.0f - fMin2) / (ImageWallpaper.this.mPages - 1));
+                    rectF2.left = MathUtils.constrain((f2 * fMin2) + f4, 0.0f, 1.0f);
+                    float fConstrain = MathUtils.constrain((f3 * fMin2) + f4, 0.0f, 1.0f);
+                    rectF2.right = fConstrain;
+                    if (rectF2.left > fConstrain) {
                         rectF2.left = 0.0f;
                         rectF2.right = 1.0f;
                     }
@@ -972,191 +972,187 @@ public class ImageWallpaper extends LiveWallpaperService {
 
         public final void determineHighlightFilterAmount() {
             if (TextUtils.isEmpty(this.mHelper.mColorDecorFilterData)) {
-                int convertDisplayIdToMode = WhichChecker.convertDisplayIdToMode(getDisplayId(), ImageWallpaper.this.getApplicationContext());
+                int iConvertDisplayIdToMode = WhichChecker.convertDisplayIdToMode(getDisplayId(), ImageWallpaper.this.getApplicationContext());
                 Boolean bool = Boolean.FALSE;
-                Log.i("HighlightFilterHelper", "canApplyFilterOnHome : elapsed=" + (SystemClock.elapsedRealtime() - SystemClock.elapsedRealtime()) + ", mode=" + convertDisplayIdToMode + ", result=" + bool + ", wait=false");
+                Log.i("HighlightFilterHelper", "canApplyFilterOnHome : elapsed=" + (SystemClock.elapsedRealtime() - SystemClock.elapsedRealtime()) + ", mode=" + iConvertDisplayIdToMode + ", result=" + bool + ", wait=false");
             }
             Log.d(this.TAG, " determineHighlightFilterAmount : -1");
         }
 
         public final DrawState drawFrameOnCanvas(int i, long j, Rect rect, Bitmap bitmap, float f, int i2) {
             long j2;
-            long j3;
-            long j4;
+            long jElapsedRealtime;
+            long jElapsedRealtime2;
             DrawState drawState;
             Rect surfaceFrame;
-            Rect nearestCropHint;
-            Matrix matrix;
-            int width;
-            int height;
-            int width2;
-            int height2;
+            int iWidth;
+            int iHeight;
             float f2;
             float f3;
             Integer dimFilterColor;
             if (!WallpaperUtils.isValidBitmap(bitmap)) {
                 return null;
             }
-            long elapsedRealtime = SystemClock.elapsedRealtime();
+            long jElapsedRealtime3 = SystemClock.elapsedRealtime();
             try {
                 surfaceFrame = this.mSurfaceHolder.getSurfaceFrame();
-                nearestCropHint = IntelligentCropHelper.getNearestCropHint(new Point(surfaceFrame.width(), surfaceFrame.height()), this.mHelper.getIntelligentCropHints(i));
+                Rect nearestCropHint = IntelligentCropHelper.getNearestCropHint(new Point(surfaceFrame.width(), surfaceFrame.height()), this.mHelper.getIntelligentCropHints(i));
                 if (nearestCropHint != null) {
                     try {
                         nearestCropHint = new Rect((int) (nearestCropHint.left * f), (int) (nearestCropHint.top * f), (int) (nearestCropHint.right * f), (int) (nearestCropHint.bottom * f));
                     } catch (Exception e) {
                         e = e;
-                        j3 = elapsedRealtime;
-                        j4 = j3;
-                        j2 = j4;
+                        jElapsedRealtime = jElapsedRealtime3;
+                        jElapsedRealtime2 = jElapsedRealtime;
+                        j2 = jElapsedRealtime2;
                         WallpaperScreenShotProvider$$ExternalSyntheticOutline0.m("drawFrameOnCanvas : failed draw bitmap. e=", e, this.TAG, e);
                         drawState = null;
-                        long elapsedRealtime2 = SystemClock.elapsedRealtime() - j;
+                        long jElapsedRealtime4 = SystemClock.elapsedRealtime() - j;
                         String str = this.TAG;
-                        StringBuilder m = SnapshotStateObserver$$ExternalSyntheticOutline0.m("drawFrameOnCanvas : elapsed=", elapsedRealtime2, ", bmpPrepareDur=");
-                        m.append(j2 - j);
-                        m.append(", filterApplyDur=");
-                        m.append(j4 - j2);
-                        m.append(", drawDur=");
-                        m.append(j3 - j4);
-                        m.append(", drawnState=(");
-                        m.append(drawState);
-                        m.append(")");
-                        Log.i(str, m.toString());
+                        StringBuilder sbM = SnapshotStateObserver$$ExternalSyntheticOutline0.m("drawFrameOnCanvas : elapsed=", jElapsedRealtime4, ", bmpPrepareDur=");
+                        sbM.append(j2 - j);
+                        sbM.append(", filterApplyDur=");
+                        sbM.append(jElapsedRealtime2 - j2);
+                        sbM.append(", drawDur=");
+                        sbM.append(jElapsedRealtime - jElapsedRealtime2);
+                        sbM.append(", drawnState=(");
+                        sbM.append(drawState);
+                        sbM.append(")");
+                        Log.i(str, sbM.toString());
                         return drawState;
                     }
                 }
-                matrix = new Matrix();
-                width = nearestCropHint != null ? nearestCropHint.width() : bitmap.getWidth();
-                height = nearestCropHint != null ? nearestCropHint.height() : bitmap.getHeight();
-                width2 = surfaceFrame.width();
-                j2 = elapsedRealtime;
-            } catch (Exception e2) {
-                e = e2;
-                j2 = elapsedRealtime;
+                Matrix matrix = new Matrix();
+                int iWidth2 = nearestCropHint != null ? nearestCropHint.width() : bitmap.getWidth();
+                int iHeight2 = nearestCropHint != null ? nearestCropHint.height() : bitmap.getHeight();
+                iWidth = surfaceFrame.width();
+                j2 = jElapsedRealtime3;
+                try {
+                    iHeight = surfaceFrame.height();
+                    if (iWidth2 * iHeight > iWidth * iHeight2) {
+                        f2 = iHeight;
+                        f3 = iHeight2;
+                    } else {
+                        f2 = iWidth;
+                        f3 = iWidth2;
+                    }
+                    float f4 = f2 / f3;
+                    float fM = Frame$$ExternalSyntheticOutline0.m(iWidth2, f4, iWidth, 0.5f);
+                    float fM2 = Frame$$ExternalSyntheticOutline0.m(iHeight2, f4, iHeight, 0.5f);
+                    matrix.setScale(f4, f4);
+                    if (nearestCropHint != null) {
+                        matrix.preTranslate(-nearestCropHint.left, -nearestCropHint.top);
+                    }
+                    matrix.postTranslate(Math.round(fM), Math.round(fM2));
+                    determineHighlightFilterAmount();
+                    ImageWallpaperCanvasHelper imageWallpaperCanvasHelper = this.mHelper;
+                    imageWallpaperCanvasHelper.mHighlightFilterAmount = -1;
+                    Bitmap filterAppliedBitmap = imageWallpaperCanvasHelper.getFilterAppliedBitmap(bitmap, i);
+                    dimFilterColor = this.mHelper.getDimFilterColor(i);
+                    if (dimFilterColor != null) {
+                        this.mBitmapPaint.setColorFilter(new PorterDuffColorFilter(dimFilterColor.intValue(), PorterDuff.Mode.SRC_OVER));
+                    } else {
+                        this.mBitmapPaint.setColorFilter(null);
+                    }
+                    jElapsedRealtime2 = SystemClock.elapsedRealtime();
+                    try {
+                        Log.i(this.TAG, "drawFrameOnCanvas : which=" + i + ", bmpW=" + bitmap.getWidth() + ", bmpH=" + bitmap.getHeight() + ", bmpScale=" + f + ", src=" + nearestCropHint + ", dest=" + surfaceFrame + ", highlight=-1, dimColor=" + dimFilterColor + ", drawRepeatCount=" + i2);
+                        for (int i3 = 0; i3 < i2; i3++) {
+                            Surface surface = this.mSurfaceHolder.getSurface();
+                            Canvas canvasLockHardwareWideColorGamutCanvas = this.mHelper.mIsWcgContent ? surface.lockHardwareWideColorGamutCanvas() : surface.lockHardwareCanvas();
+                            if (canvasLockHardwareWideColorGamutCanvas == null) {
+                                Log.e(this.TAG, "drawFrameOnCanvas : canvas is NULL");
+                                throw new RuntimeException("failed to lock the canvas - " + i3);
+                            }
+                            try {
+                                canvasLockHardwareWideColorGamutCanvas.drawBitmap(filterAppliedBitmap, matrix, this.mBitmapPaint);
+                                surface.unlockCanvasAndPost(canvasLockHardwareWideColorGamutCanvas);
+                            } catch (Throwable th) {
+                                surface.unlockCanvasAndPost(canvasLockHardwareWideColorGamutCanvas);
+                                throw th;
+                            }
+                        }
+                        if (filterAppliedBitmap != null && filterAppliedBitmap != bitmap) {
+                            filterAppliedBitmap.recycle();
+                        }
+                        jElapsedRealtime = SystemClock.elapsedRealtime();
+                    } catch (Exception e2) {
+                        e = e2;
+                        jElapsedRealtime = j2;
+                    }
+                } catch (Exception e3) {
+                    e = e3;
+                    jElapsedRealtime = j2;
+                    jElapsedRealtime2 = jElapsedRealtime;
+                    WallpaperScreenShotProvider$$ExternalSyntheticOutline0.m("drawFrameOnCanvas : failed draw bitmap. e=", e, this.TAG, e);
+                    drawState = null;
+                    long jElapsedRealtime42 = SystemClock.elapsedRealtime() - j;
+                    String str2 = this.TAG;
+                    StringBuilder sbM2 = SnapshotStateObserver$$ExternalSyntheticOutline0.m("drawFrameOnCanvas : elapsed=", jElapsedRealtime42, ", bmpPrepareDur=");
+                    sbM2.append(j2 - j);
+                    sbM2.append(", filterApplyDur=");
+                    sbM2.append(jElapsedRealtime2 - j2);
+                    sbM2.append(", drawDur=");
+                    sbM2.append(jElapsedRealtime - jElapsedRealtime2);
+                    sbM2.append(", drawnState=(");
+                    sbM2.append(drawState);
+                    sbM2.append(")");
+                    Log.i(str2, sbM2.toString());
+                    return drawState;
+                }
+            } catch (Exception e4) {
+                e = e4;
+                j2 = jElapsedRealtime3;
             }
             try {
-                height2 = surfaceFrame.height();
-                if (width * height2 > width2 * height) {
-                    f2 = height2;
-                    f3 = height;
-                } else {
-                    f2 = width2;
-                    f3 = width;
-                }
-                float f4 = f2 / f3;
-                float m2 = Frame$$ExternalSyntheticOutline0.m(width, f4, width2, 0.5f);
-                float m3 = Frame$$ExternalSyntheticOutline0.m(height, f4, height2, 0.5f);
-                matrix.setScale(f4, f4);
-                if (nearestCropHint != null) {
-                    matrix.preTranslate(-nearestCropHint.left, -nearestCropHint.top);
-                }
-                matrix.postTranslate(Math.round(m2), Math.round(m3));
-                determineHighlightFilterAmount();
-                ImageWallpaperCanvasHelper imageWallpaperCanvasHelper = this.mHelper;
-                imageWallpaperCanvasHelper.mHighlightFilterAmount = -1;
-                Bitmap filterAppliedBitmap = imageWallpaperCanvasHelper.getFilterAppliedBitmap(bitmap, i);
-                dimFilterColor = this.mHelper.getDimFilterColor(i);
-                if (dimFilterColor != null) {
-                    this.mBitmapPaint.setColorFilter(new PorterDuffColorFilter(dimFilterColor.intValue(), PorterDuff.Mode.SRC_OVER));
-                } else {
-                    this.mBitmapPaint.setColorFilter(null);
-                }
-                j4 = SystemClock.elapsedRealtime();
-                try {
-                    Log.i(this.TAG, "drawFrameOnCanvas : which=" + i + ", bmpW=" + bitmap.getWidth() + ", bmpH=" + bitmap.getHeight() + ", bmpScale=" + f + ", src=" + nearestCropHint + ", dest=" + surfaceFrame + ", highlight=-1, dimColor=" + dimFilterColor + ", drawRepeatCount=" + i2);
-                    for (int i3 = 0; i3 < i2; i3++) {
-                        Surface surface = this.mSurfaceHolder.getSurface();
-                        Canvas lockHardwareWideColorGamutCanvas = this.mHelper.mIsWcgContent ? surface.lockHardwareWideColorGamutCanvas() : surface.lockHardwareCanvas();
-                        if (lockHardwareWideColorGamutCanvas == null) {
-                            Log.e(this.TAG, "drawFrameOnCanvas : canvas is NULL");
-                            throw new RuntimeException("failed to lock the canvas - " + i3);
-                        }
-                        try {
-                            lockHardwareWideColorGamutCanvas.drawBitmap(filterAppliedBitmap, matrix, this.mBitmapPaint);
-                            surface.unlockCanvasAndPost(lockHardwareWideColorGamutCanvas);
-                        } catch (Throwable th) {
-                            surface.unlockCanvasAndPost(lockHardwareWideColorGamutCanvas);
-                            throw th;
-                        }
-                    }
-                    if (filterAppliedBitmap != null && filterAppliedBitmap != bitmap) {
-                        filterAppliedBitmap.recycle();
-                    }
-                    j3 = SystemClock.elapsedRealtime();
-                    try {
-                    } catch (Exception e3) {
-                        e = e3;
-                        WallpaperScreenShotProvider$$ExternalSyntheticOutline0.m("drawFrameOnCanvas : failed draw bitmap. e=", e, this.TAG, e);
-                        drawState = null;
-                        long elapsedRealtime22 = SystemClock.elapsedRealtime() - j;
-                        String str2 = this.TAG;
-                        StringBuilder m4 = SnapshotStateObserver$$ExternalSyntheticOutline0.m("drawFrameOnCanvas : elapsed=", elapsedRealtime22, ", bmpPrepareDur=");
-                        m4.append(j2 - j);
-                        m4.append(", filterApplyDur=");
-                        m4.append(j4 - j2);
-                        m4.append(", drawDur=");
-                        m4.append(j3 - j4);
-                        m4.append(", drawnState=(");
-                        m4.append(drawState);
-                        m4.append(")");
-                        Log.i(str2, m4.toString());
-                        return drawState;
-                    }
-                } catch (Exception e4) {
-                    e = e4;
-                    j3 = j2;
-                }
             } catch (Exception e5) {
                 e = e5;
-                j3 = j2;
-                j4 = j3;
                 WallpaperScreenShotProvider$$ExternalSyntheticOutline0.m("drawFrameOnCanvas : failed draw bitmap. e=", e, this.TAG, e);
                 drawState = null;
-                long elapsedRealtime222 = SystemClock.elapsedRealtime() - j;
+                long jElapsedRealtime422 = SystemClock.elapsedRealtime() - j;
                 String str22 = this.TAG;
-                StringBuilder m42 = SnapshotStateObserver$$ExternalSyntheticOutline0.m("drawFrameOnCanvas : elapsed=", elapsedRealtime222, ", bmpPrepareDur=");
-                m42.append(j2 - j);
-                m42.append(", filterApplyDur=");
-                m42.append(j4 - j2);
-                m42.append(", drawDur=");
-                m42.append(j3 - j4);
-                m42.append(", drawnState=(");
-                m42.append(drawState);
-                m42.append(")");
-                Log.i(str22, m42.toString());
+                StringBuilder sbM22 = SnapshotStateObserver$$ExternalSyntheticOutline0.m("drawFrameOnCanvas : elapsed=", jElapsedRealtime422, ", bmpPrepareDur=");
+                sbM22.append(j2 - j);
+                sbM22.append(", filterApplyDur=");
+                sbM22.append(jElapsedRealtime2 - j2);
+                sbM22.append(", drawDur=");
+                sbM22.append(jElapsedRealtime - jElapsedRealtime2);
+                sbM22.append(", drawnState=(");
+                sbM22.append(drawState);
+                sbM22.append(")");
+                Log.i(str22, sbM22.toString());
                 return drawState;
             }
             if (surfaceFrame.equals(rect)) {
-                drawState = new DrawState(this, i, width2, height2, false, dimFilterColor != null);
-                long elapsedRealtime2222 = SystemClock.elapsedRealtime() - j;
+                drawState = new DrawState(this, i, iWidth, iHeight, false, dimFilterColor != null);
+                long jElapsedRealtime4222 = SystemClock.elapsedRealtime() - j;
                 String str222 = this.TAG;
-                StringBuilder m422 = SnapshotStateObserver$$ExternalSyntheticOutline0.m("drawFrameOnCanvas : elapsed=", elapsedRealtime2222, ", bmpPrepareDur=");
-                m422.append(j2 - j);
-                m422.append(", filterApplyDur=");
-                m422.append(j4 - j2);
-                m422.append(", drawDur=");
-                m422.append(j3 - j4);
-                m422.append(", drawnState=(");
-                m422.append(drawState);
-                m422.append(")");
-                Log.i(str222, m422.toString());
+                StringBuilder sbM222 = SnapshotStateObserver$$ExternalSyntheticOutline0.m("drawFrameOnCanvas : elapsed=", jElapsedRealtime4222, ", bmpPrepareDur=");
+                sbM222.append(j2 - j);
+                sbM222.append(", filterApplyDur=");
+                sbM222.append(jElapsedRealtime2 - j2);
+                sbM222.append(", drawDur=");
+                sbM222.append(jElapsedRealtime - jElapsedRealtime2);
+                sbM222.append(", drawnState=(");
+                sbM222.append(drawState);
+                sbM222.append(")");
+                Log.i(str222, sbM222.toString());
                 return drawState;
             }
             Log.w(this.TAG, "drawFrameOnCanvas : surface size mismatch. curFrame=" + surfaceFrame + ", requestedFrame=" + rect);
             drawState = null;
-            long elapsedRealtime22222 = SystemClock.elapsedRealtime() - j;
+            long jElapsedRealtime42222 = SystemClock.elapsedRealtime() - j;
             String str2222 = this.TAG;
-            StringBuilder m4222 = SnapshotStateObserver$$ExternalSyntheticOutline0.m("drawFrameOnCanvas : elapsed=", elapsedRealtime22222, ", bmpPrepareDur=");
-            m4222.append(j2 - j);
-            m4222.append(", filterApplyDur=");
-            m4222.append(j4 - j2);
-            m4222.append(", drawDur=");
-            m4222.append(j3 - j4);
-            m4222.append(", drawnState=(");
-            m4222.append(drawState);
-            m4222.append(")");
-            Log.i(str2222, m4222.toString());
+            StringBuilder sbM2222 = SnapshotStateObserver$$ExternalSyntheticOutline0.m("drawFrameOnCanvas : elapsed=", jElapsedRealtime42222, ", bmpPrepareDur=");
+            sbM2222.append(j2 - j);
+            sbM2222.append(", filterApplyDur=");
+            sbM2222.append(jElapsedRealtime2 - j2);
+            sbM2222.append(", drawDur=");
+            sbM2222.append(jElapsedRealtime - jElapsedRealtime2);
+            sbM2222.append(", drawnState=(");
+            sbM2222.append(drawState);
+            sbM2222.append(")");
+            Log.i(str2222, sbM2222.toString());
             return drawState;
         }
 
@@ -1173,14 +1169,14 @@ public class ImageWallpaper extends LiveWallpaperService {
                 return;
             }
             Trace.beginSection("ImageWallpaper.CanvasEngine#drawFrame");
-            final long elapsedRealtime = SystemClock.elapsedRealtime();
+            final long jElapsedRealtime = SystemClock.elapsedRealtime();
             updateWallpaperOffset(i, this.mRotation);
             this.mHelper.useWallpaperBitmap(i, new Consumer() { // from class: com.android.systemui.wallpapers.ImageWallpaper$CanvasEngine$$ExternalSyntheticLambda0
                 @Override // java.util.function.Consumer
                 public final void accept(Object obj) {
-                    ImageWallpaper.CanvasEngine canvasEngine = ImageWallpaper.CanvasEngine.this;
+                    ImageWallpaper.CanvasEngine canvasEngine = this.f$0;
                     int i2 = ImageWallpaper.CanvasEngine.$r8$clinit;
-                    canvasEngine.mLastDrawnState = canvasEngine.drawFrameOnCanvas(i, elapsedRealtime, rect, (Bitmap) obj, 1.0f, 1);
+                    canvasEngine.mLastDrawnState = canvasEngine.drawFrameOnCanvas(i, jElapsedRealtime, rect, (Bitmap) obj, 1.0f, 1);
                 }
             });
             Trace.endSection();
@@ -1255,14 +1251,14 @@ public class ImageWallpaper extends LiveWallpaperService {
             ((WindowManagerProviderImpl) windowManagerProvider).getClass();
             Rect bounds = WindowManagerUtils.getWindowManager(displayContext).getCurrentWindowMetrics().getBounds();
             final WallpaperLocalColorExtractor wallpaperLocalColorExtractor = this.mWallpaperLocalColorExtractor;
-            final int width = bounds.width();
-            final int height = bounds.height();
+            final int iWidth = bounds.width();
+            final int iHeight = bounds.height();
             wallpaperLocalColorExtractor.mLongExecutor.execute(new Runnable() { // from class: com.android.systemui.wallpapers.WallpaperLocalColorExtractor$$ExternalSyntheticLambda6
                 @Override // java.lang.Runnable
                 public final void run() {
-                    WallpaperLocalColorExtractor wallpaperLocalColorExtractor2 = WallpaperLocalColorExtractor.this;
-                    int i = width;
-                    int i2 = height;
+                    WallpaperLocalColorExtractor wallpaperLocalColorExtractor2 = wallpaperLocalColorExtractor;
+                    int i = iWidth;
+                    int i2 = iHeight;
                     synchronized (wallpaperLocalColorExtractor2.mLock) {
                         try {
                             if (i == wallpaperLocalColorExtractor2.mDisplayWidth && i2 == wallpaperLocalColorExtractor2.mDisplayHeight) {
@@ -1279,111 +1275,46 @@ public class ImageWallpaper extends LiveWallpaperService {
             });
         }
 
-        /* JADX WARN: Removed duplicated region for block: B:6:0x003a A[RETURN] */
-        /* JADX WARN: Removed duplicated region for block: B:8:0x003b  */
+        /* JADX WARN: Removed duplicated region for block: B:11:0x003a A[RETURN] */
+        /* JADX WARN: Removed duplicated region for block: B:12:0x003b  */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final boolean isFixedOrientationWallpaper(int r9, int r10) {
-            /*
-                r8 = this;
-                com.android.systemui.wallpapers.ImageWallpaper r0 = com.android.systemui.wallpapers.ImageWallpaper.this
-                android.content.Context r0 = r0.getApplicationContext()
-                int r0 = com.android.systemui.wallpaper.utils.WhichChecker.convertDisplayIdToMode(r9, r0)
-                r1 = 0
-                r2 = 1
-                java.lang.String r3 = "ImageWallpaper"
-                if (r0 >= 0) goto L17
-                java.lang.String r10 = "isFixedOrientationWallpaper: incorrect mode. displayId = "
-                com.android.keyguard.ClockEventController$$ExternalSyntheticOutline0.m(r9, r10, r3)
-            L15:
-                r4 = r1
-                goto L38
-            L17:
-                r0 = r0 | r2
-                com.android.systemui.wallpapers.ImageWallpaper r4 = com.android.systemui.wallpapers.ImageWallpaper.this
-                android.app.WallpaperManager r4 = com.android.systemui.wallpapers.ImageWallpaper.access$400(r4)
-                android.os.Bundle r4 = r4.getWallpaperExtras(r0, r10)
-                if (r4 != 0) goto L25
-                goto L15
-            L25:
-                java.lang.String r5 = "isFixedOrientation"
-                boolean r4 = r4.getBoolean(r5)
-                java.lang.String r5 = "isFixedOrientationWallpaper: which="
-                java.lang.String r6 = ", user="
-                java.lang.String r7 = ", fixedOrientation="
-                java.lang.StringBuilder r10 = androidx.collection.MutableObjectList$$ExternalSyntheticOutline0.m(r0, r10, r5, r6, r7)
-                com.android.keyguard.KeyguardSecPasswordViewController$$ExternalSyntheticOutline0.m(r10, r4, r3)
-            L38:
-                if (r4 == 0) goto L3b
-                return r2
-            L3b:
-                com.android.systemui.wallpapers.ImageWallpaper r10 = com.android.systemui.wallpapers.ImageWallpaper.this
-                android.content.Context r10 = r10.getBaseContext()
-                android.content.pm.PackageManager r10 = r10.getPackageManager()
-                if (r10 == 0) goto L51
-                java.lang.String r0 = "com.samsung.feature.device_category_tablet"
-                boolean r10 = r10.hasSystemFeature(r0)
-                if (r10 == 0) goto L51
-                r10 = r2
-                goto L52
-            L51:
-                r10 = r1
-            L52:
-                boolean r0 = com.samsung.android.wallpaper.Rune.SUPPORT_SUB_DISPLAY_MODE
-                if (r0 == 0) goto L64
-                boolean r0 = com.samsung.android.wallpaper.Rune.SUPPORT_COVER_DISPLAY_WATCHFACE
-                if (r0 != 0) goto L64
-                android.app.WallpaperManager r0 = r8.mWallpaperManager
-                int r0 = r0.getLidState()
-                if (r0 != 0) goto L64
-                r0 = r2
-                goto L65
-            L64:
-                r0 = r1
-            L65:
-                com.android.systemui.wallpapers.ImageWallpaper r3 = com.android.systemui.wallpapers.ImageWallpaper.this
-                com.android.systemui.util.SettingsHelper r3 = com.android.systemui.wallpapers.ImageWallpaper.m3212$$Nest$fgetmSettingsHelper(r3)
-                int r3 = r3.getHomescreenWallpaperSource(r0)
-                if (r3 != 0) goto L73
-                r3 = r2
-                goto L74
-            L73:
-                r3 = r1
-            L74:
-                if (r9 != 0) goto L87
-                boolean r9 = com.samsung.android.wallpaper.Rune.WPAPER_SUPPORT_INCONSISTENCY_WALLPAPER
-                if (r9 != 0) goto L7c
-                if (r0 == 0) goto L87
-            L7c:
-                if (r10 != 0) goto L87
-                if (r3 != 0) goto L87
-                boolean r9 = r8.isPreview()
-                if (r9 != 0) goto L87
-                r1 = r2
-            L87:
-                java.lang.String r9 = r8.TAG
-                java.lang.StringBuilder r2 = new java.lang.StringBuilder
-                java.lang.String r4 = "isFixedOrientationWallpaper: feature="
-                r2.<init>(r4)
-                boolean r4 = com.samsung.android.wallpaper.Rune.WPAPER_SUPPORT_INCONSISTENCY_WALLPAPER
-                java.lang.String r5 = ", isTablet="
-                java.lang.String r6 = ", isCoverDisplay="
-                com.android.keyguard.KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(r2, r4, r5, r10, r6)
-                java.lang.String r10 = ", isCustomWallpaper="
-                java.lang.String r4 = ", isPreview="
-                com.android.keyguard.KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(r2, r0, r10, r3, r4)
-                boolean r8 = r8.isPreview()
-                r2.append(r8)
-                java.lang.String r8 = ", isFixedOrientation="
-                r2.append(r8)
-                r2.append(r1)
-                java.lang.String r8 = r2.toString()
-                android.util.Log.i(r9, r8)
-                return r1
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.wallpapers.ImageWallpaper.CanvasEngine.isFixedOrientationWallpaper(int, int):boolean");
+        public final boolean isFixedOrientationWallpaper(int i, int i2) {
+            boolean z;
+            int iConvertDisplayIdToMode = WhichChecker.convertDisplayIdToMode(i, ImageWallpaper.this.getApplicationContext());
+            boolean z2 = false;
+            if (iConvertDisplayIdToMode >= 0) {
+                int i3 = iConvertDisplayIdToMode | 1;
+                Bundle wallpaperExtras = ((WallpaperService) ImageWallpaper.this).mWallpaperManager.getWallpaperExtras(i3, i2);
+                if (wallpaperExtras != null) {
+                    z = wallpaperExtras.getBoolean("isFixedOrientation");
+                    KeyguardSecPasswordViewController$$ExternalSyntheticOutline0.m(MutableObjectList$$ExternalSyntheticOutline0.m(i3, i2, "isFixedOrientationWallpaper: which=", ", user=", ", fixedOrientation="), z, "ImageWallpaper");
+                }
+                if (!z) {
+                    return true;
+                }
+                PackageManager packageManager = ImageWallpaper.this.getBaseContext().getPackageManager();
+                boolean z3 = packageManager != null && packageManager.hasSystemFeature("com.samsung.feature.device_category_tablet");
+                boolean z4 = Rune.SUPPORT_SUB_DISPLAY_MODE && !Rune.SUPPORT_COVER_DISPLAY_WATCHFACE && this.mWallpaperManager.getLidState() == 0;
+                boolean z5 = ImageWallpaper.this.mSettingsHelper.getHomescreenWallpaperSource(z4) == 0;
+                if (i == 0 && ((Rune.WPAPER_SUPPORT_INCONSISTENCY_WALLPAPER || z4) && !z3 && !z5 && !isPreview())) {
+                    z2 = true;
+                }
+                String str = this.TAG;
+                StringBuilder sb = new StringBuilder("isFixedOrientationWallpaper: feature=");
+                KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sb, Rune.WPAPER_SUPPORT_INCONSISTENCY_WALLPAPER, ", isTablet=", z3, ", isCoverDisplay=");
+                KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(sb, z4, ", isCustomWallpaper=", z5, ", isPreview=");
+                sb.append(isPreview());
+                sb.append(", isFixedOrientation=");
+                sb.append(z2);
+                Log.i(str, sb.toString());
+                return z2;
+            }
+            ClockEventController$$ExternalSyntheticOutline0.m(i, "isFixedOrientationWallpaper: incorrect mode. displayId = ", "ImageWallpaper");
+            z = false;
+            if (!z) {
+            }
         }
 
         @Override // android.service.wallpaper.WallpaperService.Engine
@@ -1410,9 +1341,9 @@ public class ImageWallpaper extends LiveWallpaperService {
             WallpaperManager wallpaperManager = (WallpaperManager) getDisplayContext().getSystemService(WallpaperManager.class);
             this.mWallpaperManager = wallpaperManager;
             this.mSurfaceHolder = surfaceHolder;
-            Rect peekBitmapDimensions = wallpaperManager.peekBitmapDimensions(getWallpaperFlags() != 2 ? 1 : 2, true);
-            if (peekBitmapDimensions != null) {
-                this.mSurfaceHolder.setFixedSize(Math.max(128, peekBitmapDimensions.width()), Math.max(128, peekBitmapDimensions.height()));
+            Rect rectPeekBitmapDimensions = wallpaperManager.peekBitmapDimensions(getWallpaperFlags() != 2 ? 1 : 2, true);
+            if (rectPeekBitmapDimensions != null) {
+                this.mSurfaceHolder.setFixedSize(Math.max(128, rectPeekBitmapDimensions.width()), Math.max(128, rectPeekBitmapDimensions.height()));
             }
             ((DisplayManager) getDisplayContext().getSystemService(DisplayManager.class)).registerDisplayListener(this, null);
             getDisplaySizeAndUpdateColorExtractor();
@@ -1423,11 +1354,11 @@ public class ImageWallpaper extends LiveWallpaperService {
             int displayId2 = getDisplayId();
             ImageWallpaper imageWallpaper = ImageWallpaper.this;
             this.mHelper = new ImageWallpaperCanvasHelper(displayContext, displayId2, imageWallpaper.mLogger, imageWallpaper.mSystemWallpaperColors, imageWallpaper.mCoverWallpaper, imageWallpaper.mPluginWallpaper, this.mIntelligentCropHelper, anonymousClass3);
-            int semGetWallpaperFlags = semGetWallpaperFlags();
-            if (WhichChecker.isSystemAndLock(semGetWallpaperFlags)) {
-                semGetWallpaperFlags = (semGetWallpaperFlags & 60) | 1;
+            int iSemGetWallpaperFlags = semGetWallpaperFlags();
+            if (WhichChecker.isSystemAndLock(iSemGetWallpaperFlags)) {
+                iSemGetWallpaperFlags = (iSemGetWallpaperFlags & 60) | 1;
             }
-            updateSurfaceSize(semGetWallpaperFlags);
+            updateSurfaceSize(iSemGetWallpaperFlags);
             this.mHelper.mBitmapUpdateConsumer = new ImageWallpaper$CanvasEngine$$ExternalSyntheticLambda1(this, 1);
             if (LsRune.WALLPAPER_SUB_DISPLAY_MODE) {
                 ImageWallpaper.this.mMainThreadHandler.post(new ImageWallpaper$$ExternalSyntheticLambda1(this.mWakefulnessObserver, 1));
@@ -1459,7 +1390,7 @@ public class ImageWallpaper extends LiveWallpaperService {
             wallpaperLocalColorExtractor.mLongExecutor.execute(new Runnable() { // from class: com.android.systemui.wallpapers.WallpaperLocalColorExtractor$$ExternalSyntheticLambda2
                 @Override // java.lang.Runnable
                 public final void run() {
-                    WallpaperLocalColorExtractor wallpaperLocalColorExtractor2 = WallpaperLocalColorExtractor.this;
+                    WallpaperLocalColorExtractor wallpaperLocalColorExtractor2 = wallpaperLocalColorExtractor;
                     synchronized (wallpaperLocalColorExtractor2.mLock) {
                         try {
                             Bitmap bitmap = wallpaperLocalColorExtractor2.mMiniBitmap;
@@ -1520,11 +1451,11 @@ public class ImageWallpaper extends LiveWallpaperService {
                 imageWallpaperCanvasHelper.mIsSmartCropAllowed = z;
                 this.mLastWallpaperYOffset = f2;
             }
-            int round = (f3 <= 0.0f || f3 > 1.0f) ? 1 : Math.round(1.0f / f3) + 1;
-            if (round == ImageWallpaper.this.mPages && ImageWallpaper.this.mPagesComputed) {
+            int iRound = (f3 <= 0.0f || f3 > 1.0f) ? 1 : Math.round(1.0f / f3) + 1;
+            if (iRound == ImageWallpaper.this.mPages && ImageWallpaper.this.mPagesComputed) {
                 return;
             }
-            ImageWallpaper.this.mPages = round;
+            ImageWallpaper.this.mPages = iRound;
             ImageWallpaper imageWallpaper = ImageWallpaper.this;
             imageWallpaper.mPagesComputed = true;
             WallpaperLocalColorExtractor wallpaperLocalColorExtractor = this.mWallpaperLocalColorExtractor;
@@ -1542,98 +1473,61 @@ public class ImageWallpaper extends LiveWallpaperService {
                 Trace.beginSection("ImageWallpaper#onSurfaceCreated");
                 final ImageWallpaperCanvasHelper imageWallpaperCanvasHelper = this.mHelper;
                 final int currentWhich = imageWallpaperCanvasHelper.getCurrentWhich();
-                StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(currentWhich, "onSurfaceCreated: which=", ", disp=");
-                m.append(imageWallpaperCanvasHelper.mDisplayId);
-                m.append(", colorDecor=");
-                m.append(!TextUtils.isEmpty(imageWallpaperCanvasHelper.mColorDecorFilterData));
-                m.append(", highlightAmount=");
-                m.append(imageWallpaperCanvasHelper.mHighlightFilterAmount);
-                Log.i(imageWallpaperCanvasHelper.TAG, m.toString());
+                StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(currentWhich, "onSurfaceCreated: which=", ", disp=");
+                sbM.append(imageWallpaperCanvasHelper.mDisplayId);
+                sbM.append(", colorDecor=");
+                sbM.append(!TextUtils.isEmpty(imageWallpaperCanvasHelper.mColorDecorFilterData));
+                sbM.append(", highlightAmount=");
+                sbM.append(imageWallpaperCanvasHelper.mHighlightFilterAmount);
+                Log.i(imageWallpaperCanvasHelper.TAG, sbM.toString());
                 imageWallpaperCanvasHelper.useWallpaperBitmap(currentWhich, new Consumer() { // from class: com.android.systemui.wallpaper.canvaswallpaper.ImageWallpaperCanvasHelper$$ExternalSyntheticLambda0
-                    /* JADX WARN: Removed duplicated region for block: B:12:0x0047  */
                     @Override // java.util.function.Consumer
-                    /*
-                        Code decompiled incorrectly, please refer to instructions dump.
-                        To view partially-correct code enable 'Show inconsistent code' option in preferences
-                    */
-                    public final void accept(java.lang.Object r8) {
-                        /*
-                            r7 = this;
-                            com.android.systemui.wallpaper.canvaswallpaper.ImageWallpaperCanvasHelper r0 = com.android.systemui.wallpaper.canvaswallpaper.ImageWallpaperCanvasHelper.this
-                            int r7 = r2
-                            android.graphics.Bitmap r8 = (android.graphics.Bitmap) r8
-                            r0.getClass()
-                            boolean r1 = com.android.systemui.wallpaper.WallpaperUtils.isValidBitmap(r8)
-                            if (r1 != 0) goto L18
-                            java.lang.String r1 = r0.TAG
-                            java.lang.String r2 = "reload texture failed!"
-                            android.util.Log.w(r1, r2)
-                            goto L1f
-                        L18:
-                            com.android.systemui.wallpapers.ImageWallpaper$CanvasEngine$$ExternalSyntheticLambda1 r1 = r0.mBitmapUpdateConsumer
-                            if (r1 == 0) goto L1f
-                            r1.accept(r8)
-                        L1f:
-                            boolean r1 = com.android.systemui.wallpaper.WallpaperUtils.isValidBitmap(r8)
-                            r2 = 0
-                            r3 = 1
-                            if (r1 == 0) goto L40
-                            java.lang.String r1 = r0.mColorDecorFilterData
-                            boolean r1 = android.text.TextUtils.isEmpty(r1)
-                            if (r1 != 0) goto L37
-                            java.lang.String r1 = r0.mColorDecorFilterData
-                            android.graphics.Bitmap r8 = com.android.systemui.wallpaper.effect.ColorDecorFilterHelper.createFilteredBitmap(r1, r8)
-                        L35:
-                            r1 = r3
-                            goto L41
-                        L37:
-                            int r1 = r0.mHighlightFilterAmount
-                            if (r1 < 0) goto L40
-                            android.graphics.Bitmap r8 = com.android.systemui.wallpaper.effect.HighlightFilterHelper.createFilteredBitmap(r8, r1)
-                            goto L35
-                        L40:
-                            r1 = r2
-                        L41:
-                            boolean r4 = com.android.systemui.wallpaper.WallpaperUtils.isValidBitmap(r8)
-                            if (r4 == 0) goto L7b
-                            int r4 = r0.mDisplayId
-                            r5 = 2
-                            if (r4 != r5) goto L4d
-                            goto L51
-                        L4d:
-                            boolean r4 = r0.mIsVirtualDisplay
-                            if (r4 == 0) goto L53
-                        L51:
-                            r4 = r3
-                            goto L54
-                        L53:
-                            r4 = r2
-                        L54:
-                            com.android.systemui.wallpaper.glwallpaper.ImageSmartCropper r5 = r0.mImageSmartCropper
-                            if (r5 == 0) goto L7b
-                            if (r4 != 0) goto L7b
-                            int r4 = r0.mCurrentUserId
-                            r5.updateSmartCropRectIfNeeded(r8, r7, r4)
-                            android.graphics.Rect r7 = new android.graphics.Rect
-                            int r4 = r8.getWidth()
-                            int r6 = r8.getHeight()
-                            r7.<init>(r2, r2, r4, r6)
-                            android.graphics.Rect r2 = r5.mCropResult
-                            if (r2 != 0) goto L76
-                            android.app.WallpaperManager r0 = r0.mWallpaperManager
-                            r0.semSetSmartCropRect(r3, r7, r7)
-                            goto L7b
-                        L76:
-                            android.app.WallpaperManager r0 = r0.mWallpaperManager
-                            r0.semSetSmartCropRect(r3, r7, r2)
-                        L7b:
-                            if (r1 == 0) goto L82
-                            if (r8 == 0) goto L82
-                            r8.recycle()
-                        L82:
-                            return
-                        */
-                        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.wallpaper.canvaswallpaper.ImageWallpaperCanvasHelper$$ExternalSyntheticLambda0.accept(java.lang.Object):void");
+                    public final void accept(Object obj) {
+                        boolean z;
+                        ImageWallpaperCanvasHelper imageWallpaperCanvasHelper2 = imageWallpaperCanvasHelper;
+                        int i = currentWhich;
+                        Bitmap bitmapCreateFilteredBitmap = (Bitmap) obj;
+                        imageWallpaperCanvasHelper2.getClass();
+                        if (WallpaperUtils.isValidBitmap(bitmapCreateFilteredBitmap)) {
+                            ImageWallpaper$CanvasEngine$$ExternalSyntheticLambda1 imageWallpaper$CanvasEngine$$ExternalSyntheticLambda1 = imageWallpaperCanvasHelper2.mBitmapUpdateConsumer;
+                            if (imageWallpaper$CanvasEngine$$ExternalSyntheticLambda1 != null) {
+                                imageWallpaper$CanvasEngine$$ExternalSyntheticLambda1.accept(bitmapCreateFilteredBitmap);
+                            }
+                        } else {
+                            Log.w(imageWallpaperCanvasHelper2.TAG, "reload texture failed!");
+                        }
+                        if (WallpaperUtils.isValidBitmap(bitmapCreateFilteredBitmap)) {
+                            if (TextUtils.isEmpty(imageWallpaperCanvasHelper2.mColorDecorFilterData)) {
+                                int i2 = imageWallpaperCanvasHelper2.mHighlightFilterAmount;
+                                if (i2 >= 0) {
+                                    bitmapCreateFilteredBitmap = HighlightFilterHelper.createFilteredBitmap(bitmapCreateFilteredBitmap, i2);
+                                }
+                                z = false;
+                            } else {
+                                bitmapCreateFilteredBitmap = ColorDecorFilterHelper.createFilteredBitmap(imageWallpaperCanvasHelper2.mColorDecorFilterData, bitmapCreateFilteredBitmap);
+                            }
+                            z = true;
+                        } else {
+                            z = false;
+                        }
+                        if (WallpaperUtils.isValidBitmap(bitmapCreateFilteredBitmap)) {
+                            boolean z2 = imageWallpaperCanvasHelper2.mDisplayId == 2 || imageWallpaperCanvasHelper2.mIsVirtualDisplay;
+                            ImageSmartCropper imageSmartCropper = imageWallpaperCanvasHelper2.mImageSmartCropper;
+                            if (imageSmartCropper != null && !z2) {
+                                imageSmartCropper.updateSmartCropRectIfNeeded(bitmapCreateFilteredBitmap, i, imageWallpaperCanvasHelper2.mCurrentUserId);
+                                Rect rect = new Rect(0, 0, bitmapCreateFilteredBitmap.getWidth(), bitmapCreateFilteredBitmap.getHeight());
+                                Rect rect2 = imageSmartCropper.mCropResult;
+                                if (rect2 == null) {
+                                    imageWallpaperCanvasHelper2.mWallpaperManager.semSetSmartCropRect(1, rect, rect);
+                                } else {
+                                    imageWallpaperCanvasHelper2.mWallpaperManager.semSetSmartCropRect(1, rect, rect2);
+                                }
+                            }
+                        }
+                        if (!z || bitmapCreateFilteredBitmap == null) {
+                            return;
+                        }
+                        bitmapCreateFilteredBitmap.recycle();
                     }
                 });
                 Trace.endSection();
@@ -1663,13 +1557,13 @@ public class ImageWallpaper extends LiveWallpaperService {
             int currentWhich = this.mHelper.getCurrentWhich();
             Rect rect = new Rect(this.mSurfaceHolder.getSurfaceFrame());
             String str = this.TAG;
-            StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(currentWhich, "onSurfaceRedrawNeeded: curWhich=", ", isFixedRotationInProgress=");
-            m.append(this.mIsFixedRotationInProgress);
-            m.append(", mRotation=");
-            m.append(this.mRotation);
-            m.append(", surfaceFrame=");
-            m.append(rect);
-            Log.i(str, m.toString());
+            StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(currentWhich, "onSurfaceRedrawNeeded: curWhich=", ", isFixedRotationInProgress=");
+            sbM.append(this.mIsFixedRotationInProgress);
+            sbM.append(", mRotation=");
+            sbM.append(this.mRotation);
+            sbM.append(", surfaceFrame=");
+            sbM.append(rect);
+            Log.i(str, sbM.toString());
             if (!this.mHelper.hasIntelligentCropHints(currentWhich)) {
                 updateWallpaperOffset(currentWhich, this.mRotation);
             }
@@ -1724,7 +1618,7 @@ public class ImageWallpaper extends LiveWallpaperService {
                     ImageWallpaper.this.mWorker.getThreadHandler().postDelayed(new Runnable() { // from class: com.android.systemui.wallpapers.ImageWallpaper$CanvasEngine$$ExternalSyntheticLambda5
                         @Override // java.lang.Runnable
                         public final void run() {
-                            ImageWallpaper.CanvasEngine canvasEngine = ImageWallpaper.CanvasEngine.this;
+                            ImageWallpaper.CanvasEngine canvasEngine = this.f$0;
                             boolean z2 = z;
                             int i = ImageWallpaper.CanvasEngine.$r8$clinit;
                             canvasEngine.updateOnSwitchDisplayChanged(z2);
@@ -1740,9 +1634,9 @@ public class ImageWallpaper extends LiveWallpaperService {
         public final void onVisibilityChanged(boolean z) {
             super.onVisibilityChanged(z);
             String str = this.TAG;
-            StringBuilder m = RowView$$ExternalSyntheticOutline0.m(" onVisibilityChanged: visible=", " , displayId=", z);
-            m.append(getDisplayId());
-            Log.i(str, m.toString());
+            StringBuilder sbM = RowView$$ExternalSyntheticOutline0.m(" onVisibilityChanged: visible=", " , displayId=", z);
+            sbM.append(getDisplayId());
+            Log.i(str, sbM.toString());
         }
 
         public void recomputeColorExtractorMiniBitmap() {
@@ -1805,8 +1699,8 @@ public class ImageWallpaper extends LiveWallpaperService {
             if (bitmap == null) {
                 return;
             }
-            int min = Math.min(bitmap.getWidth(), bitmap.getHeight());
-            float f = min > 128 ? 128.0f / min : 1.0f;
+            int iMin = Math.min(bitmap.getWidth(), bitmap.getHeight());
+            float f = iMin > 128 ? 128.0f / iMin : 1.0f;
             this.mImgHeight = bitmap.getHeight();
             this.mImgWidth = bitmap.getWidth();
             ImageWallpaper.this.mMiniBitmap = Bitmap.createScaledBitmap(bitmap, (int) Math.max(bitmap.getWidth() * f, 1.0f), (int) Math.max(f * bitmap.getHeight(), 1.0f), false);
@@ -1821,14 +1715,14 @@ public class ImageWallpaper extends LiveWallpaperService {
                 ImageWallpaperCanvasHelper imageWallpaperCanvasHelper = this.mHelper;
                 imageWallpaperCanvasHelper.getClass();
                 if (z2) {
-                    StringBuilder m = RowView$$ExternalSyntheticOutline0.m(" onFolderStateChanged: isFolded=", ", WallMgr=", z);
-                    m.append(ImageWallpaperCanvasHelper.convertLidStateToString(imageWallpaperCanvasHelper.mWallpaperManager.getLidState()));
-                    m.append(", mLidState=");
-                    m.append(ImageWallpaperCanvasHelper.convertLidStateToString(imageWallpaperCanvasHelper.mLidState));
-                    String sb = m.toString();
+                    StringBuilder sbM = RowView$$ExternalSyntheticOutline0.m(" onFolderStateChanged: isFolded=", ", WallMgr=", z);
+                    sbM.append(ImageWallpaperCanvasHelper.convertLidStateToString(imageWallpaperCanvasHelper.mWallpaperManager.getLidState()));
+                    sbM.append(", mLidState=");
+                    sbM.append(ImageWallpaperCanvasHelper.convertLidStateToString(imageWallpaperCanvasHelper.mLidState));
+                    String string = sbM.toString();
                     WallpaperLoggerImpl wallpaperLoggerImpl = (WallpaperLoggerImpl) imageWallpaperCanvasHelper.mLoggerWrapper;
                     String str = imageWallpaperCanvasHelper.TAG;
-                    wallpaperLoggerImpl.log(str, sb);
+                    wallpaperLoggerImpl.log(str, string);
                     imageWallpaperCanvasHelper.mIsFolded = z;
                     if (z) {
                         PowerManager powerManager = imageWallpaperCanvasHelper.mPm;
@@ -1848,19 +1742,19 @@ public class ImageWallpaper extends LiveWallpaperService {
                     getSurfaceHolder().setFixedSize(-1, -1);
                     return;
                 }
-                Size reportSurfaceSize = this.mHelper.reportSurfaceSize(currentWhich);
+                Size sizeReportSurfaceSize = this.mHelper.reportSurfaceSize(currentWhich);
                 Rect surfaceFrame = getSurfaceHolder().getSurfaceFrame();
-                if (reportSurfaceSize.getHeight() == surfaceFrame.height() && reportSurfaceSize.getWidth() == surfaceFrame.width()) {
+                if (sizeReportSurfaceSize.getHeight() == surfaceFrame.height() && sizeReportSurfaceSize.getWidth() == surfaceFrame.width()) {
                     updateRendering(currentWhich);
                     return;
                 }
-                int max = Math.max(128, reportSurfaceSize.getWidth());
-                int max2 = Math.max(128, reportSurfaceSize.getHeight());
+                int iMax = Math.max(128, sizeReportSurfaceSize.getWidth());
+                int iMax2 = Math.max(128, sizeReportSurfaceSize.getHeight());
                 String str2 = this.TAG;
-                StringBuilder m2 = MutableObjectList$$ExternalSyntheticOutline0.m(currentWhich, max, "updateOnSwitchDisplayChanged: change surface size. which=", ", width=", ", height=");
-                m2.append(max2);
-                Log.i(str2, m2.toString());
-                getSurfaceHolder().setFixedSize(max, max2);
+                StringBuilder sbM2 = MutableObjectList$$ExternalSyntheticOutline0.m(currentWhich, iMax, "updateOnSwitchDisplayChanged: change surface size. which=", ", width=", ", height=");
+                sbM2.append(iMax2);
+                Log.i(str2, sbM2.toString());
+                getSurfaceHolder().setFixedSize(iMax, iMax2);
             }
         }
 
@@ -1875,94 +1769,94 @@ public class ImageWallpaper extends LiveWallpaperService {
         public final void updateSurfaceSize(int i) {
             Trace.beginSection("ImageWallpaper#updateSurfaceSize");
             SurfaceHolder surfaceHolder = getSurfaceHolder();
-            Size reportSurfaceSize = this.mHelper.reportSurfaceSize(i);
-            int max = Math.max(128, reportSurfaceSize.getWidth());
-            int max2 = Math.max(128, reportSurfaceSize.getHeight());
+            Size sizeReportSurfaceSize = this.mHelper.reportSurfaceSize(i);
+            int iMax = Math.max(128, sizeReportSurfaceSize.getWidth());
+            int iMax2 = Math.max(128, sizeReportSurfaceSize.getHeight());
             String str = this.TAG;
-            StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(max, max2, " updateSurfaceSize: width = ", ", height = ", ", isVisible = ");
-            m.append(isVisible());
-            Log.i(str, m.toString());
+            StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(iMax, iMax2, " updateSurfaceSize: width = ", ", height = ", ", isVisible = ");
+            sbM.append(isVisible());
+            Log.i(str, sbM.toString());
             if (this.mHelper.hasIntelligentCropHints(i)) {
                 surfaceHolder.setFixedSize(-1, -1);
             } else {
-                surfaceHolder.setFixedSize(max, max2);
+                surfaceHolder.setFixedSize(iMax, iMax2);
             }
             Trace.endSection();
         }
 
         public final boolean updateSurfaceSizeIfNeed(int i) {
-            Size reportSurfaceSize = this.mHelper.reportSurfaceSize(i);
+            Size sizeReportSurfaceSize = this.mHelper.reportSurfaceSize(i);
             Rect surfaceFrame = getSurfaceHolder().getSurfaceFrame();
-            if (reportSurfaceSize.getHeight() == surfaceFrame.height() && reportSurfaceSize.getWidth() == surfaceFrame.width()) {
+            if (sizeReportSurfaceSize.getHeight() == surfaceFrame.height() && sizeReportSurfaceSize.getWidth() == surfaceFrame.width()) {
                 return false;
             }
-            Log.i(this.TAG, "  updateSurfaceSizeIfNeed frame  " + reportSurfaceSize + " surfaceFrame : " + surfaceFrame);
+            Log.i(this.TAG, "  updateSurfaceSizeIfNeed frame  " + sizeReportSurfaceSize + " surfaceFrame : " + surfaceFrame);
             updateSurfaceSize(i);
             finishRendering();
             return true;
         }
 
         public final void updateWallpaperOffset(int i, int i2) {
-            int min;
+            int iMin;
+            int iMax;
             int i3;
-            int i4;
             IBinder windowTokenAsBinder = super.getWindowTokenAsBinder();
             if (windowTokenAsBinder != null) {
                 ImageWallpaperCanvasHelper imageWallpaperCanvasHelper = this.mHelper;
-                int i5 = imageWallpaperCanvasHelper.mDisplayId;
+                int i4 = imageWallpaperCanvasHelper.mDisplayId;
                 String str = imageWallpaperCanvasHelper.TAG;
-                if (i5 == 2 || (LsRune.WALLPAPER_VIRTUAL_DISPLAY && imageWallpaperCanvasHelper.mIsVirtualDisplay)) {
+                if (i4 == 2 || (LsRune.WALLPAPER_VIRTUAL_DISPLAY && imageWallpaperCanvasHelper.mIsVirtualDisplay)) {
                     TooltipPopup$$ExternalSyntheticOutline0.m(imageWallpaperCanvasHelper.mDisplayId, str, new StringBuilder(" ignore updateWallpaperOffset "));
                     return;
                 }
                 WallpaperManager wallpaperManager = imageWallpaperCanvasHelper.mWallpaperManager;
                 if (wallpaperManager != null) {
-                    int i6 = imageWallpaperCanvasHelper.mSmartCropYOffset;
-                    int semGetWallpaperType = wallpaperManager.semGetWallpaperType(i);
+                    int i5 = imageWallpaperCanvasHelper.mSmartCropYOffset;
+                    int iSemGetWallpaperType = wallpaperManager.semGetWallpaperType(i);
                     StringBuilder sb = new StringBuilder();
                     sb.append("updateWallpaperOffset " + imageWallpaperCanvasHelper.mDisplayId);
-                    sb.append(" lastCropOffset " + i6 + " , wp Type " + semGetWallpaperType + " , rotation " + i2 + " , allowed " + imageWallpaperCanvasHelper.mIsSmartCropAllowed);
+                    sb.append(" lastCropOffset " + i5 + " , wp Type " + iSemGetWallpaperType + " , rotation " + i2 + " , allowed " + imageWallpaperCanvasHelper.mIsSmartCropAllowed);
                     ImageSmartCropper imageSmartCropper = imageWallpaperCanvasHelper.mImageSmartCropper;
-                    if (imageSmartCropper != null && imageWallpaperCanvasHelper.mIsSmartCropAllowed && imageSmartCropper.needToSmartCrop() && ((i2 == 1 || i2 == 3) && semGetWallpaperType == 0 && !imageWallpaperCanvasHelper.hasIntelligentCropHints(i))) {
+                    if (imageSmartCropper != null && imageWallpaperCanvasHelper.mIsSmartCropAllowed && imageSmartCropper.needToSmartCrop() && ((i2 == 1 || i2 == 3) && iSemGetWallpaperType == 0 && !imageWallpaperCanvasHelper.hasIntelligentCropHints(i))) {
                         if (((Rect) WallpaperUtils.sCachedSmartCroppedRect.get(i)) == null) {
                             sb.append(" Error Smart rect is Null " + imageWallpaperCanvasHelper.mSmartCropYOffset);
-                            i4 = 0;
+                            i3 = 0;
                         } else {
                             Display display = ((DisplayManager) imageWallpaperCanvasHelper.mContext.getSystemService("display")).getDisplay(imageWallpaperCanvasHelper.mDisplayId);
                             if (display != null) {
                                 DisplayInfo displayInfo = new DisplayInfo();
                                 display.getDisplayInfo(displayInfo);
-                                i3 = Math.max(displayInfo.logicalWidth, displayInfo.logicalHeight);
-                                min = Math.min(displayInfo.logicalWidth, displayInfo.logicalHeight);
+                                iMax = Math.max(displayInfo.logicalWidth, displayInfo.logicalHeight);
+                                iMin = Math.min(displayInfo.logicalWidth, displayInfo.logicalHeight);
                             } else {
                                 Log.e(str, " getDisplaySize use configuration to recognize the screen size");
                                 Rect bounds = imageWallpaperCanvasHelper.mContext.getResources().getConfiguration().windowConfiguration.getBounds();
-                                int width = bounds.width();
-                                int height = bounds.height();
-                                int max = Math.max(width, height);
-                                min = Math.min(width, height);
-                                i3 = max;
+                                int iWidth = bounds.width();
+                                int iHeight = bounds.height();
+                                int iMax2 = Math.max(iWidth, iHeight);
+                                iMin = Math.min(iWidth, iHeight);
+                                iMax = iMax2;
                             }
-                            Size size = new Size(i3, min);
-                            int width2 = size.getWidth();
-                            int height2 = size.getHeight();
-                            float f = height2;
-                            float height3 = imageWallpaperCanvasHelper.mSurfaceSize.height() * Math.max(width2 / imageWallpaperCanvasHelper.mSurfaceSize.width(), f / imageWallpaperCanvasHelper.mSurfaceSize.height());
-                            float height4 = r0.top / imageWallpaperCanvasHelper.mDimensions.height();
-                            float f2 = height4 * height3;
+                            Size size = new Size(iMax, iMin);
+                            int width = size.getWidth();
+                            int height = size.getHeight();
+                            float f = height;
+                            float fHeight = imageWallpaperCanvasHelper.mSurfaceSize.height() * Math.max(width / imageWallpaperCanvasHelper.mSurfaceSize.width(), f / imageWallpaperCanvasHelper.mSurfaceSize.height());
+                            float fHeight2 = r0.top / imageWallpaperCanvasHelper.mDimensions.height();
+                            float f2 = fHeight2 * fHeight;
                             float f3 = (f * 0.5f) + f2;
                             float f4 = imageWallpaperCanvasHelper.mYOffset;
-                            int i7 = (int) (height3 * f4);
-                            sb.append(MutableVectorKt$$ExternalSyntheticOutline0.m(width2, height2, ", screenSize=(", ", ", ")"));
-                            sb.append(", origTopPos " + height4 + " , calcTopPos " + f2);
-                            sb.append(", scaledHeight " + height3 + " , " + i7 + " , " + f4 + " , smartCropCenterY " + f3);
-                            i4 = (int) (((float) i7) - f3);
+                            int i6 = (int) (fHeight * f4);
+                            sb.append(MutableVectorKt$$ExternalSyntheticOutline0.m(width, height, ", screenSize=(", ", ", ")"));
+                            sb.append(", origTopPos " + fHeight2 + " , calcTopPos " + f2);
+                            sb.append(", scaledHeight " + fHeight + " , " + i6 + " , " + f4 + " , smartCropCenterY " + f3);
+                            i3 = (int) (((float) i6) - f3);
                         }
-                        imageWallpaperCanvasHelper.mSmartCropYOffset = i4;
+                        imageWallpaperCanvasHelper.mSmartCropYOffset = i3;
                     } else {
                         imageWallpaperCanvasHelper.mSmartCropYOffset = 0;
                     }
-                    if (i6 == imageWallpaperCanvasHelper.mSmartCropYOffset) {
+                    if (i5 == imageWallpaperCanvasHelper.mSmartCropYOffset) {
                         sb.append(" Do not change Display offset " + imageWallpaperCanvasHelper.mSmartCropYOffset);
                     } else {
                         sb.append(" : Set Display offset " + imageWallpaperCanvasHelper.mSmartCropYOffset);
@@ -2029,14 +1923,14 @@ public class ImageWallpaper extends LiveWallpaperService {
                         ClockEventController$$ExternalSyntheticOutline0.m(displayId, "  getCurrentDisplayRotation failed to get display. displayId=", canvasEngine.TAG);
                     }
                     int i3 = displayInfo.rotation;
-                    long elapsedRealtime = SystemClock.elapsedRealtime() - this.mFixedRotationStartTime;
+                    long jElapsedRealtime = SystemClock.elapsedRealtime() - this.mFixedRotationStartTime;
                     WallpaperLogger wallpaperLogger = ImageWallpaper.this.mLogger;
                     String str = canvasEngine.TAG;
                     StringBuilder sb = new StringBuilder("onFixedRotationFinished mRotation=");
                     ViewPager$$ExternalSyntheticOutline0.m(sb, canvasEngine.mRotation, ", displayRotation=", i3, ", configRotation=");
                     sb.append(configuration.windowConfiguration.getRotation());
                     sb.append(", elapsed=");
-                    sb.append(elapsedRealtime);
+                    sb.append(jElapsedRealtime);
                     sb.append(", ");
                     sb.append(configuration);
                     ((WallpaperLoggerImpl) wallpaperLogger).log(str, sb.toString());
@@ -2061,11 +1955,11 @@ public class ImageWallpaper extends LiveWallpaperService {
                     CanvasEngine canvasEngine = CanvasEngine.this;
                     WallpaperLogger wallpaperLogger = ImageWallpaper.this.mLogger;
                     String str = canvasEngine.TAG;
-                    StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(i2, i3, "onFixedRotationStarted displayId=", ", newRotation=", ", mRotation=");
-                    m.append(canvasEngine.mRotation);
-                    m.append(", ");
-                    m.append(ImageWallpaper.this.getResources().getConfiguration());
-                    ((WallpaperLoggerImpl) wallpaperLogger).log(str, m.toString());
+                    StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(i2, i3, "onFixedRotationStarted displayId=", ", newRotation=", ", mRotation=");
+                    sbM.append(canvasEngine.mRotation);
+                    sbM.append(", ");
+                    sbM.append(ImageWallpaper.this.getResources().getConfiguration());
+                    ((WallpaperLoggerImpl) wallpaperLogger).log(str, sbM.toString());
                     this.mFixedRotationStartTime = SystemClock.elapsedRealtime();
                     if (i2 == canvasEngine.getDisplayId()) {
                         canvasEngine.mIsFixedRotationInProgress = true;
@@ -2092,9 +1986,9 @@ public class ImageWallpaper extends LiveWallpaperService {
                     CanvasEngine canvasEngine = CanvasEngine.this;
                     WallpaperLogger wallpaperLogger = ImageWallpaper.this.mLogger;
                     String str = canvasEngine.TAG;
-                    StringBuilder m = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i2, "onRotationChanged: newRotation=", ", mRotation=");
-                    m.append(CanvasEngine.this.mRotation);
-                    ((WallpaperLoggerImpl) wallpaperLogger).log(str, m.toString());
+                    StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i2, "onRotationChanged: newRotation=", ", mRotation=");
+                    sbM.append(CanvasEngine.this.mRotation);
+                    ((WallpaperLoggerImpl) wallpaperLogger).log(str, sbM.toString());
                     CanvasEngine canvasEngine2 = CanvasEngine.this;
                     if (canvasEngine2.mRotation != i2) {
                         ((WallpaperLoggerImpl) ImageWallpaper.this.mLogger).log(canvasEngine2.TAG, "onRotationChanged rotation is changed ");

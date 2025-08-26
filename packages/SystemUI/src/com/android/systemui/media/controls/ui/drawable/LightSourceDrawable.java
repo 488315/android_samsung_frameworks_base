@@ -24,7 +24,6 @@ import com.android.systemui.res.R$styleable;
 import kotlin.Unit;
 import org.xmlpull.v1.XmlPullParser;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class LightSourceDrawable extends Drawable {
     public static final int $stable = 8;
@@ -44,42 +43,36 @@ public final class LightSourceDrawable extends Drawable {
             animator.cancel();
         }
         AnimatorSet animatorSet = new AnimatorSet();
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(1.0f, 0.0f);
-        ofFloat.setStartDelay(133L);
-        ofFloat.setDuration(800 - ofFloat.getStartDelay());
+        ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(1.0f, 0.0f);
+        valueAnimatorOfFloat.setStartDelay(133L);
+        valueAnimatorOfFloat.setDuration(800 - valueAnimatorOfFloat.getStartDelay());
         Interpolator interpolator = Interpolators.LINEAR_OUT_SLOW_IN;
-        ofFloat.setInterpolator(interpolator);
-        ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.media.controls.ui.drawable.LightSourceDrawable$illuminate$1$1$1
+        valueAnimatorOfFloat.setInterpolator(interpolator);
+        valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.media.controls.ui.drawable.LightSourceDrawable$illuminate$1$1$1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                RippleData rippleData;
-                rippleData = LightSourceDrawable.this.rippleData;
-                rippleData.alpha = ((Float) valueAnimator.getAnimatedValue()).floatValue();
-                LightSourceDrawable.this.invalidateSelf();
+                this.this$0.rippleData.alpha = ((Float) valueAnimator.getAnimatedValue()).floatValue();
+                this.this$0.invalidateSelf();
             }
         });
         Unit unit = Unit.INSTANCE;
-        ValueAnimator ofFloat2 = ValueAnimator.ofFloat(this.rippleData.progress, 1.0f);
-        ofFloat2.setDuration(800L);
-        ofFloat2.setInterpolator(interpolator);
-        ofFloat2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.media.controls.ui.drawable.LightSourceDrawable$illuminate$1$2$1
+        ValueAnimator valueAnimatorOfFloat2 = ValueAnimator.ofFloat(this.rippleData.progress, 1.0f);
+        valueAnimatorOfFloat2.setDuration(800L);
+        valueAnimatorOfFloat2.setInterpolator(interpolator);
+        valueAnimatorOfFloat2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.media.controls.ui.drawable.LightSourceDrawable$illuminate$1$2$1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                RippleData rippleData;
-                rippleData = LightSourceDrawable.this.rippleData;
-                rippleData.progress = ((Float) valueAnimator.getAnimatedValue()).floatValue();
-                LightSourceDrawable.this.invalidateSelf();
+                this.this$0.rippleData.progress = ((Float) valueAnimator.getAnimatedValue()).floatValue();
+                this.this$0.invalidateSelf();
             }
         });
-        animatorSet.playTogether(ofFloat, ofFloat2);
+        animatorSet.playTogether(valueAnimatorOfFloat, valueAnimatorOfFloat2);
         animatorSet.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.media.controls.ui.drawable.LightSourceDrawable$illuminate$1$3
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator2) {
-                RippleData rippleData;
-                rippleData = LightSourceDrawable.this.rippleData;
-                rippleData.progress = 0.0f;
-                LightSourceDrawable.this.rippleAnimation = null;
-                LightSourceDrawable.this.invalidateSelf();
+                this.this$0.rippleData.progress = 0.0f;
+                this.this$0.rippleAnimation = null;
+                this.this$0.invalidateSelf();
             }
         });
         animatorSet.start();
@@ -104,19 +97,17 @@ public final class LightSourceDrawable extends Drawable {
             if (animator2 != null) {
                 animator2.cancel();
             }
-            ValueAnimator ofFloat = ValueAnimator.ofFloat(this.rippleData.alpha, 0.0f);
-            ofFloat.setDuration(200L);
-            ofFloat.setInterpolator(Interpolators.LINEAR_OUT_SLOW_IN);
-            ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.media.controls.ui.drawable.LightSourceDrawable$active$1$1
+            ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(this.rippleData.alpha, 0.0f);
+            valueAnimatorOfFloat.setDuration(200L);
+            valueAnimatorOfFloat.setInterpolator(Interpolators.LINEAR_OUT_SLOW_IN);
+            valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.media.controls.ui.drawable.LightSourceDrawable$active$1$1
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener
                 public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                    RippleData rippleData2;
-                    rippleData2 = LightSourceDrawable.this.rippleData;
-                    rippleData2.alpha = ((Float) valueAnimator.getAnimatedValue()).floatValue();
-                    LightSourceDrawable.this.invalidateSelf();
+                    this.this$0.rippleData.alpha = ((Float) valueAnimator.getAnimatedValue()).floatValue();
+                    this.this$0.invalidateSelf();
                 }
             });
-            ofFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.media.controls.ui.drawable.LightSourceDrawable$active$1$2
+            valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.media.controls.ui.drawable.LightSourceDrawable$active$1$2
                 public boolean cancelled;
 
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
@@ -126,21 +117,17 @@ public final class LightSourceDrawable extends Drawable {
 
                 @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                 public final void onAnimationEnd(Animator animator3) {
-                    RippleData rippleData2;
-                    RippleData rippleData3;
                     if (this.cancelled) {
                         return;
                     }
-                    rippleData2 = LightSourceDrawable.this.rippleData;
-                    rippleData2.progress = 0.0f;
-                    rippleData3 = LightSourceDrawable.this.rippleData;
-                    rippleData3.alpha = 0.0f;
-                    LightSourceDrawable.this.rippleAnimation = null;
-                    LightSourceDrawable.this.invalidateSelf();
+                    this.this$0.rippleData.progress = 0.0f;
+                    this.this$0.rippleData.alpha = 0.0f;
+                    this.this$0.rippleAnimation = null;
+                    this.this$0.invalidateSelf();
                 }
             });
-            ofFloat.start();
-            this.rippleAnimation = ofFloat;
+            valueAnimatorOfFloat.start();
+            this.rippleAnimation = valueAnimatorOfFloat;
         }
         invalidateSelf();
     }
@@ -162,9 +149,9 @@ public final class LightSourceDrawable extends Drawable {
         super.applyTheme(theme);
         int[] iArr = this.themeAttrs;
         if (iArr != null) {
-            TypedArray resolveAttributes = theme.resolveAttributes(iArr, R$styleable.IlluminationDrawable);
-            updateStateFromTypedArray(resolveAttributes);
-            resolveAttributes.recycle();
+            TypedArray typedArrayResolveAttributes = theme.resolveAttributes(iArr, R$styleable.IlluminationDrawable);
+            updateStateFromTypedArray(typedArrayResolveAttributes);
+            typedArrayResolveAttributes.recycle();
         }
     }
 
@@ -183,23 +170,23 @@ public final class LightSourceDrawable extends Drawable {
     @Override // android.graphics.drawable.Drawable
     public void draw(Canvas canvas) {
         RippleData rippleData = this.rippleData;
-        float lerp = MathUtils.lerp(rippleData.minSize, rippleData.maxSize, rippleData.progress);
+        float fLerp = MathUtils.lerp(rippleData.minSize, rippleData.maxSize, rippleData.progress);
         int alphaComponent = ColorUtils.setAlphaComponent(this.highlightColor, (int) (this.rippleData.alpha * 255));
         Paint paint = this.paint;
         RippleData rippleData2 = this.rippleData;
-        paint.setShader(new RadialGradient(rippleData2.x, rippleData2.y, lerp, new int[]{alphaComponent, 0}, LightSourceDrawableKt.GRADIENT_STOPS, Shader.TileMode.CLAMP));
+        paint.setShader(new RadialGradient(rippleData2.x, rippleData2.y, fLerp, new int[]{alphaComponent, 0}, LightSourceDrawableKt.GRADIENT_STOPS, Shader.TileMode.CLAMP));
         RippleData rippleData3 = this.rippleData;
-        canvas.drawCircle(rippleData3.x, rippleData3.y, lerp, this.paint);
+        canvas.drawCircle(rippleData3.x, rippleData3.y, fLerp, this.paint);
     }
 
     @Override // android.graphics.drawable.Drawable
     public Rect getDirtyBounds() {
         RippleData rippleData = this.rippleData;
-        float lerp = MathUtils.lerp(rippleData.minSize, rippleData.maxSize, rippleData.progress);
+        float fLerp = MathUtils.lerp(rippleData.minSize, rippleData.maxSize, rippleData.progress);
         RippleData rippleData2 = this.rippleData;
         float f = rippleData2.x;
         float f2 = rippleData2.y;
-        Rect rect = new Rect((int) (f - lerp), (int) (f2 - lerp), (int) (f + lerp), (int) (f2 + lerp));
+        Rect rect = new Rect((int) (f - fLerp), (int) (f2 - fLerp), (int) (f + fLerp), (int) (f2 + fLerp));
         rect.union(super.getDirtyBounds());
         return rect;
     }
@@ -220,10 +207,10 @@ public final class LightSourceDrawable extends Drawable {
 
     @Override // android.graphics.drawable.Drawable
     public void inflate(Resources resources, XmlPullParser xmlPullParser, AttributeSet attributeSet, Resources.Theme theme) {
-        TypedArray obtainAttributes = Drawable.obtainAttributes(resources, theme, attributeSet, R$styleable.IlluminationDrawable);
-        this.themeAttrs = obtainAttributes.extractThemeAttrs();
-        updateStateFromTypedArray(obtainAttributes);
-        obtainAttributes.recycle();
+        TypedArray typedArrayObtainAttributes = Drawable.obtainAttributes(resources, theme, attributeSet, R$styleable.IlluminationDrawable);
+        this.themeAttrs = typedArrayObtainAttributes.extractThemeAttrs();
+        updateStateFromTypedArray(typedArrayObtainAttributes);
+        typedArrayObtainAttributes.recycle();
     }
 
     @Override // android.graphics.drawable.Drawable
@@ -238,7 +225,7 @@ public final class LightSourceDrawable extends Drawable {
 
     @Override // android.graphics.drawable.Drawable
     public boolean onStateChange(int[] iArr) {
-        boolean onStateChange = super.onStateChange(iArr);
+        boolean zOnStateChange = super.onStateChange(iArr);
         boolean z = this.pressed;
         boolean z2 = false;
         this.pressed = false;
@@ -268,7 +255,7 @@ public final class LightSourceDrawable extends Drawable {
         if (z && !this.pressed) {
             illuminate();
         }
-        return onStateChange;
+        return zOnStateChange;
     }
 
     @Override // android.graphics.drawable.Drawable

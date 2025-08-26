@@ -10,7 +10,6 @@ import defpackage.MoveResult$$ExternalSyntheticOutline0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class SizeInfo {
     public final long cellSize;
@@ -31,7 +30,7 @@ public final class SizeInfo {
             SizeInfo sizeInfo = (SizeInfo) obj;
             long j = sizeInfo.cellSize;
             DpSize.Companion companion = DpSize.Companion;
-            if (this.cellSize == j && Dp.m836equalsimpl0(this.verticalArrangement, sizeInfo.verticalArrangement) && IntSize.m861equalsimpl0(this.gridSize, sizeInfo.gridSize) && Intrinsics.areEqual(this.contentPadding, sizeInfo.contentPadding) && Dp.m836equalsimpl0(this.maxHeight, sizeInfo.maxHeight)) {
+            if (this.cellSize == j && Dp.m838equalsimpl0(this.verticalArrangement, sizeInfo.verticalArrangement) && IntSize.m863equalsimpl0(this.gridSize, sizeInfo.gridSize) && Intrinsics.areEqual(this.contentPadding, sizeInfo.contentPadding) && Dp.m838equalsimpl0(this.maxHeight, sizeInfo.maxHeight)) {
                 return true;
             }
         }
@@ -40,26 +39,26 @@ public final class SizeInfo {
 
     public final int hashCode() {
         DpSize.Companion companion = DpSize.Companion;
-        int hashCode = Long.hashCode(this.cellSize) * 31;
+        int iHashCode = Long.hashCode(this.cellSize) * 31;
         Dp.Companion companion2 = Dp.Companion;
-        int m = FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.verticalArrangement, hashCode, 31);
+        int iM = FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.verticalArrangement, iHashCode, 31);
         IntSize.Companion companion3 = IntSize.Companion;
-        return Float.hashCode(this.maxHeight) + ((this.contentPadding.hashCode() + MoveResult$$ExternalSyntheticOutline0.m(m, 31, this.gridSize)) * 31);
+        return Float.hashCode(this.maxHeight) + ((this.contentPadding.hashCode() + MoveResult$$ExternalSyntheticOutline0.m(iM, 31, this.gridSize)) * 31);
     }
 
     public final String toString() {
-        String m846toStringimpl = DpSize.m846toStringimpl(this.cellSize);
-        String m837toStringimpl = Dp.m837toStringimpl(this.verticalArrangement);
-        String m862toStringimpl = IntSize.m862toStringimpl(this.gridSize);
-        String m837toStringimpl2 = Dp.m837toStringimpl(this.maxHeight);
-        StringBuilder m = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("SizeInfo(cellSize=", m846toStringimpl, ", verticalArrangement=", m837toStringimpl, ", gridSize=");
-        m.append(m862toStringimpl);
-        m.append(", contentPadding=");
-        m.append(this.contentPadding);
-        m.append(", maxHeight=");
-        m.append(m837toStringimpl2);
-        m.append(")");
-        return m.toString();
+        String strM848toStringimpl = DpSize.m848toStringimpl(this.cellSize);
+        String strM839toStringimpl = Dp.m839toStringimpl(this.verticalArrangement);
+        String strM864toStringimpl = IntSize.m864toStringimpl(this.gridSize);
+        String strM839toStringimpl2 = Dp.m839toStringimpl(this.maxHeight);
+        StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("SizeInfo(cellSize=", strM848toStringimpl, ", verticalArrangement=", strM839toStringimpl, ", gridSize=");
+        sbM.append(strM864toStringimpl);
+        sbM.append(", contentPadding=");
+        sbM.append(this.contentPadding);
+        sbM.append(", maxHeight=");
+        sbM.append(strM839toStringimpl2);
+        sbM.append(")");
+        return sbM.toString();
     }
 
     private SizeInfo(long j, float f, long j2, PaddingValues paddingValues, float f2) {

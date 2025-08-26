@@ -19,7 +19,6 @@ import kotlinx.coroutines.Dispatchers;
 import kotlinx.coroutines.SupervisorJobImpl;
 import kotlinx.coroutines.SupervisorKt;
 import kotlinx.coroutines.channels.BufferedChannel;
-import kotlinx.coroutines.channels.Channel;
 import kotlinx.coroutines.channels.ChannelKt;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.SafeFlow;
@@ -29,7 +28,6 @@ import kotlinx.coroutines.internal.ContextScope;
 import kotlinx.coroutines.internal.MainDispatcherLoader;
 import kotlinx.coroutines.scheduling.DefaultScheduler;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public abstract class WindowRecomposer_androidKt {
     public static final Map animationScale = new LinkedHashMap();
@@ -41,24 +39,24 @@ public abstract class WindowRecomposer_androidKt {
         synchronized (map) {
             try {
                 LinkedHashMap linkedHashMap = (LinkedHashMap) map;
-                Object obj = linkedHashMap.get(context);
-                if (obj == null) {
+                Object objStateIn = linkedHashMap.get(context);
+                if (objStateIn == null) {
                     ContentResolver contentResolver = context.getContentResolver();
                     Uri uriFor = Settings.Global.getUriFor(SettingsHelper.INDEX_GLOBAL_ANIMATOR_DURATION_SCALE);
-                    final BufferedChannel Channel$default = ChannelKt.Channel$default(-1, null, null, 6);
-                    final Handler createAsync = Handler.createAsync(Looper.getMainLooper());
-                    SafeFlow safeFlow = new SafeFlow(new WindowRecomposer_androidKt$getAnimationScaleFlowFor$1$1$1(contentResolver, uriFor, new ContentObserver(createAsync) { // from class: androidx.compose.ui.platform.WindowRecomposer_androidKt$getAnimationScaleFlowFor$1$1$contentObserver$1
+                    final BufferedChannel bufferedChannelChannel$default = ChannelKt.Channel$default(-1, null, null, 6);
+                    final Handler handlerCreateAsync = Handler.createAsync(Looper.getMainLooper());
+                    SafeFlow safeFlow = new SafeFlow(new WindowRecomposer_androidKt$getAnimationScaleFlowFor$1$1$1(contentResolver, uriFor, new ContentObserver(handlerCreateAsync) { // from class: androidx.compose.ui.platform.WindowRecomposer_androidKt$getAnimationScaleFlowFor$1$1$contentObserver$1
                         @Override // android.database.ContentObserver
                         public final void onChange(boolean z, Uri uri) {
-                            Channel.this.mo3456trySendJP2dKIU(Unit.INSTANCE);
+                            bufferedChannelChannel$default.mo3476trySendJP2dKIU(Unit.INSTANCE);
                         }
-                    }, Channel$default, context, null));
-                    SupervisorJobImpl SupervisorJob$default = SupervisorKt.SupervisorJob$default();
+                    }, bufferedChannelChannel$default, context, null));
+                    SupervisorJobImpl supervisorJobImplSupervisorJob$default = SupervisorKt.SupervisorJob$default();
                     DefaultScheduler defaultScheduler = Dispatchers.Default;
-                    obj = FlowKt.stateIn(safeFlow, new ContextScope(CoroutineContext.DefaultImpls.plus(SupervisorJob$default, MainDispatcherLoader.dispatcher)), SharingStarted.Companion.WhileSubscribed$default(SharingStarted.Companion, 3), Float.valueOf(Settings.Global.getFloat(context.getContentResolver(), SettingsHelper.INDEX_GLOBAL_ANIMATOR_DURATION_SCALE, 1.0f)));
-                    linkedHashMap.put(context, obj);
+                    objStateIn = FlowKt.stateIn(safeFlow, new ContextScope(CoroutineContext.DefaultImpls.plus(supervisorJobImplSupervisorJob$default, MainDispatcherLoader.dispatcher)), SharingStarted.Companion.WhileSubscribed$default(SharingStarted.Companion, 3), Float.valueOf(Settings.Global.getFloat(context.getContentResolver(), SettingsHelper.INDEX_GLOBAL_ANIMATOR_DURATION_SCALE, 1.0f)));
+                    linkedHashMap.put(context, objStateIn);
                 }
-                stateFlow = (StateFlow) obj;
+                stateFlow = (StateFlow) objStateIn;
             } catch (Throwable th) {
                 throw th;
             }

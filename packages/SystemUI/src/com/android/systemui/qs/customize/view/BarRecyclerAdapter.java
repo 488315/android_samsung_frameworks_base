@@ -28,7 +28,6 @@ import kotlin.collections.CollectionsKt__CollectionsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class BarRecyclerAdapter extends RecyclerView.Adapter {
     public static final Interpolator DOWN_INTERPOLATOR;
@@ -36,7 +35,6 @@ public final class BarRecyclerAdapter extends RecyclerView.Adapter {
     public final CustomActionManager customActionManager;
     public final FullChunkResizeableFrame tileLayoutContainer;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class BorderOutlineViewHolder extends RecyclerView.ViewHolder {
         public final FrameLayout barView;
         public final ValueAnimator downAnimator;
@@ -55,7 +53,6 @@ public final class BarRecyclerAdapter extends RecyclerView.Adapter {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -78,10 +75,10 @@ public final class BarRecyclerAdapter extends RecyclerView.Adapter {
         int size = this.barItems.size();
         ViewGroup viewGroup = borderOutlineViewHolder.parentView;
         borderOutlineViewHolder.barView.setContentDescription(viewGroup.getContext().getString(R.string.quick_settings_row_of, Integer.valueOf(i + 1), Integer.valueOf(size)) + ", " + viewGroup.getContext().getString(R.string.qs_edit_double_tab_and_hold_then_drag_to_reorder));
-        List asList = i == 0 ? Arrays.asList(CustomActionId.MOVE_ITEM_DOWN, CustomActionId.MOVE_ITEM_TO_BOTTOM) : i == size + (-1) ? Arrays.asList(CustomActionId.MOVE_ITEM_UP, CustomActionId.MOVE_ITEM_TO_TOP) : Arrays.asList(CustomActionId.MOVE_ITEM_UP, CustomActionId.MOVE_ITEM_TO_TOP, CustomActionId.MOVE_ITEM_DOWN, CustomActionId.MOVE_ITEM_TO_BOTTOM);
+        List listAsList = i == 0 ? Arrays.asList(CustomActionId.MOVE_ITEM_DOWN, CustomActionId.MOVE_ITEM_TO_BOTTOM) : i == size + (-1) ? Arrays.asList(CustomActionId.MOVE_ITEM_UP, CustomActionId.MOVE_ITEM_TO_TOP) : Arrays.asList(CustomActionId.MOVE_ITEM_UP, CustomActionId.MOVE_ITEM_TO_TOP, CustomActionId.MOVE_ITEM_DOWN, CustomActionId.MOVE_ITEM_TO_BOTTOM);
         CustomActionManager customActionManager = this.customActionManager;
         if (customActionManager != null) {
-            CustomActionListDelegate customActionListDelegate = new CustomActionListDelegate(asList);
+            CustomActionListDelegate customActionListDelegate = new CustomActionListDelegate(listAsList);
             customActionListDelegate.customActionManager = customActionManager;
             viewGroup.setAccessibilityDelegate(customActionListDelegate);
         }
@@ -115,7 +112,7 @@ public final class BarRecyclerAdapter extends RecyclerView.Adapter {
                 @Override // android.view.View.OnTouchListener
                 public final boolean onTouch(View view, MotionEvent motionEvent) {
                     ValueAnimator valueAnimator;
-                    BarRecyclerAdapter barRecyclerAdapter = BarRecyclerAdapter.this;
+                    BarRecyclerAdapter barRecyclerAdapter = this.this$0;
                     motionEvent.getClass();
                     BarRecyclerAdapter.BorderOutlineViewHolder borderOutlineViewHolder2 = borderOutlineViewHolder;
                     Interpolator interpolator = BarRecyclerAdapter.DOWN_INTERPOLATOR;
@@ -150,7 +147,7 @@ public final class BarRecyclerAdapter extends RecyclerView.Adapter {
             pair = new Pair(clonedBarView, Boolean.TRUE);
         }
         View view = (View) pair.component1();
-        boolean booleanValue = ((Boolean) pair.component2()).booleanValue();
+        boolean zBooleanValue = ((Boolean) pair.component2()).booleanValue();
         if (view != null) {
             ViewParent parent2 = view.getParent();
             ViewGroup viewGroup3 = parent2 instanceof ViewGroup ? (ViewGroup) parent2 : null;
@@ -158,7 +155,7 @@ public final class BarRecyclerAdapter extends RecyclerView.Adapter {
                 viewGroup3.removeView(view);
             }
             frameLayout.addView(view);
-            if (booleanValue) {
+            if (zBooleanValue) {
                 FrameLayout frameLayout3 = new FrameLayout(frameLayout.getContext());
                 frameLayout3.setLayoutParams(new FrameLayout.LayoutParams(-1, -1));
                 frameLayout3.setDescendantFocusability(393216);
@@ -166,7 +163,7 @@ public final class BarRecyclerAdapter extends RecyclerView.Adapter {
                     @Override // android.view.View.OnTouchListener
                     public final boolean onTouch(View view2, MotionEvent motionEvent) {
                         ValueAnimator valueAnimator;
-                        BarRecyclerAdapter barRecyclerAdapter = BarRecyclerAdapter.this;
+                        BarRecyclerAdapter barRecyclerAdapter = this.this$0;
                         motionEvent.getClass();
                         BarRecyclerAdapter.BorderOutlineViewHolder borderOutlineViewHolder2 = borderOutlineViewHolder;
                         Interpolator interpolator = BarRecyclerAdapter.DOWN_INTERPOLATOR;

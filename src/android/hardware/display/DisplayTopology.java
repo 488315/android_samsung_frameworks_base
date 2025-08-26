@@ -2,6 +2,7 @@ package android.hardware.display;
 
 import android.graphics.PointF;
 import android.graphics.RectF;
+import android.hardware.display.DisplayTopology;
 import android.hardware.display.DisplayTopologyGraph;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -104,15 +105,15 @@ public final class DisplayTopology implements Parcelable {
     }
 
     public boolean updateDisplay(int i, float f, float f2) {
-        TreeNode findDisplay = findDisplay(i, this.mRoot);
-        if (findDisplay == null) {
+        TreeNode treeNodeFindDisplay = findDisplay(i, this.mRoot);
+        if (treeNodeFindDisplay == null) {
             return false;
         }
-        if (floatEquals(findDisplay.mWidth, f) && floatEquals(findDisplay.mHeight, f2)) {
+        if (floatEquals(treeNodeFindDisplay.mWidth, f) && floatEquals(treeNodeFindDisplay.mHeight, f2)) {
             return false;
         }
-        findDisplay.mWidth = f;
-        findDisplay.mHeight = f2;
+        treeNodeFindDisplay.mWidth = f;
+        treeNodeFindDisplay.mHeight = f2;
         normalize();
         Slog.i(TAG, "Display with ID " + i + " updated, new width: " + f + ", new height: " + f2);
         return true;
@@ -157,18 +158,18 @@ public final class DisplayTopology implements Parcelable {
         }
         ArrayList arrayList = new ArrayList();
         arrayList.addLast(this.mRoot);
-        Map<Integer, TreeNode> allNodesIdMap = allNodesIdMap();
-        if (allNodesIdMap.size() != map.size()) {
+        Map<Integer, TreeNode> mapAllNodesIdMap = allNodesIdMap();
+        if (mapAllNodesIdMap.size() != map.size()) {
             throw new IllegalArgumentException("newPos has wrong number of entries: " + map);
         }
         this.mRoot.mChildren.clear();
-        Iterator<TreeNode> it = allNodesIdMap.values().iterator();
+        Iterator<TreeNode> it = mapAllNodesIdMap.values().iterator();
         while (it.hasNext()) {
             it.next().mChildren.clear();
         }
-        allNodesIdMap.remove(Integer.valueOf(this.mRoot.mDisplayId));
-        while (!allNodesIdMap.isEmpty()) {
-            Iterator<TreeNode> it2 = allNodesIdMap.values().iterator();
+        mapAllNodesIdMap.remove(Integer.valueOf(this.mRoot.mDisplayId));
+        while (!mapAllNodesIdMap.isEmpty()) {
+            Iterator<TreeNode> it2 = mapAllNodesIdMap.values().iterator();
             TreeNode treeNode = null;
             double d = Double.POSITIVE_INFINITY;
             TreeNode treeNode2 = null;
@@ -185,10 +186,10 @@ public final class DisplayTopology implements Parcelable {
                     Iterator<TreeNode> it4 = it2;
                     float height2 = pointF2.y + treeNode3.getHeight();
                     TreeNode treeNode4 = treeNode;
-                    float min = Math.min(width2, width) - Math.max(pointF2.x, pointF.x);
-                    float min2 = Math.min(height2, height) - Math.max(pointF2.y, pointF.y);
-                    if (min > min2) {
-                        float min3 = Math.min(next.getWidth(), treeNode3.getWidth()) - min;
+                    float fMin = Math.min(width2, width) - Math.max(pointF2.x, pointF.x);
+                    float fMin2 = Math.min(height2, height) - Math.max(pointF2.y, pointF.y);
+                    if (fMin > fMin2) {
+                        float fMin3 = Math.min(next.getWidth(), treeNode3.getWidth()) - fMin;
                         if (pointF.y < pointF2.y) {
                             f5 = height - pointF2.y;
                             i2 = 1;
@@ -199,9 +200,9 @@ public final class DisplayTopology implements Parcelable {
                         f2 = pointF.x - pointF2.x;
                         i = i2;
                         f4 = f5;
-                        f3 = min3;
+                        f3 = fMin3;
                     } else {
-                        float min4 = Math.min(next.getHeight(), treeNode3.getHeight()) - min2;
+                        float fMin4 = Math.min(next.getHeight(), treeNode3.getHeight()) - fMin2;
                         if (pointF.x < pointF2.x) {
                             f = width - pointF2.x;
                             i = 0;
@@ -211,15 +212,15 @@ public final class DisplayTopology implements Parcelable {
                         }
                         f2 = pointF.y - pointF2.y;
                         f3 = f;
-                        f4 = min4;
+                        f4 = fMin4;
                     }
                     double d2 = d;
                     TreeNode treeNode5 = treeNode2;
                     double d3 = f3;
                     PointF pointF3 = pointF;
                     float f6 = width;
-                    double hypot = Math.hypot(d3, f4);
-                    if (hypot >= d2) {
+                    double dHypot = Math.hypot(d3, f4);
+                    if (dHypot >= d2) {
                         pointF = pointF3;
                         width = f6;
                         it2 = it4;
@@ -233,13 +234,13 @@ public final class DisplayTopology implements Parcelable {
                         width = f6;
                         treeNode = treeNode3;
                         it2 = it4;
-                        d = hypot;
+                        d = dHypot;
                         treeNode2 = next;
                     }
                 }
             }
             treeNode.addChild(treeNode2);
-            if (allNodesIdMap.remove(Integer.valueOf(treeNode2.mDisplayId)) == null) {
+            if (mapAllNodesIdMap.remove(Integer.valueOf(treeNode2.mDisplayId)) == null) {
                 throw new IllegalStateException("child not in pending set! " + treeNode2);
             }
             arrayList.add(treeNode2);
@@ -247,39 +248,169 @@ public final class DisplayTopology implements Parcelable {
         normalize();
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:56:0x0177, code lost:
-    
-        if (r9.left < (r14.right + 1.0E-4f)) goto L74;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:57:0x018e, code lost:
-    
-        r7 = true;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:86:0x018c, code lost:
-    
-        if (r9.top < (r14.bottom + 1.0E-4f)) goto L74;
-     */
-    /* JADX WARN: Removed duplicated region for block: B:60:0x0194  */
-    /* JADX WARN: Removed duplicated region for block: B:75:0x01d0 A[SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:100:0x01d0 A[SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:74:0x018e A[PHI: r0
+      0x018e: PHI (r0v13 int) = (r0v6 int), (r0v15 int) binds: [B:73:0x018c, B:68:0x0177] A[DONT_GENERATE, DONT_INLINE]] */
+    /* JADX WARN: Removed duplicated region for block: B:75:0x0190 A[PHI: r0
+      0x0190: PHI (r0v7 int) = (r0v6 int), (r0v6 int), (r0v15 int), (r0v15 int) binds: [B:71:0x0182, B:73:0x018c, B:66:0x016d, B:68:0x0177] A[DONT_GENERATE, DONT_INLINE]] */
+    /* JADX WARN: Removed duplicated region for block: B:78:0x0194  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
     public void normalize() {
-        /*
-            Method dump skipped, instructions count: 499
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.hardware.display.DisplayTopology.normalize():void");
+        TreeNode treeNode;
+        boolean zFloatEquals;
+        int i;
+        boolean z;
+        float f;
+        float f2;
+        float f3;
+        float f4;
+        TreeNode treeNode2 = this.mRoot;
+        if (treeNode2 == null) {
+            return;
+        }
+        clampOffsets(treeNode2);
+        final HashMap map = new HashMap();
+        final HashMap map2 = new HashMap();
+        HashMap map3 = new HashMap();
+        getInfo(map, map2, map3, this.mRoot, 0.0f, 0.0f, 0);
+        Comparator comparator = new Comparator() { // from class: android.hardware.display.DisplayTopology$$ExternalSyntheticLambda1
+            @Override // java.util.Comparator
+            public final int compare(Object obj, Object obj2) {
+                return DisplayTopology.lambda$normalize$0(map2, map, (DisplayTopology.TreeNode) obj, (DisplayTopology.TreeNode) obj2);
+            }
+        };
+        ArrayList arrayList = new ArrayList(map.keySet());
+        arrayList.sort(comparator);
+        int i2 = 1;
+        int i3 = 1;
+        while (i3 < arrayList.size()) {
+            TreeNode treeNode3 = (TreeNode) arrayList.get(i3);
+            TreeNode treeNode4 = null;
+            float f5 = 0.0f;
+            float f6 = 0.0f;
+            int i4 = 0;
+            while (true) {
+                if (i4 >= i3) {
+                    break;
+                }
+                TreeNode treeNode5 = (TreeNode) arrayList.get(i4);
+                RectF rectF = (RectF) map.get(treeNode5);
+                RectF rectF2 = (RectF) map.get(treeNode3);
+                if (RectF.intersects(rectF, rectF2)) {
+                    if (rectF2.left >= 0.0f) {
+                        f = rectF.right;
+                        f2 = rectF2.left;
+                    } else {
+                        f = rectF.left;
+                        f2 = rectF2.right;
+                    }
+                    float f7 = f - f2;
+                    if (rectF2.top >= 0.0f) {
+                        f3 = rectF.bottom;
+                        f4 = rectF2.top;
+                    } else {
+                        f3 = rectF.top;
+                        f4 = rectF2.bottom;
+                    }
+                    float f8 = f3 - f4;
+                    if (Math.abs(f7) <= Math.abs(f8)) {
+                        rectF2.left += f7;
+                        rectF2.right += f7;
+                        if (treeNode3.mPosition == i2 || treeNode3.mPosition == 3) {
+                            treeNode3.mOffset += f7;
+                        }
+                        f6 = 0.0f;
+                        f5 = f7;
+                    } else {
+                        rectF2.top += f8;
+                        rectF2.bottom += f8;
+                        if (treeNode3.mPosition == 0 || treeNode3.mPosition == 2) {
+                            treeNode3.mOffset += f8;
+                        }
+                        f6 = f8;
+                        f5 = 0.0f;
+                    }
+                    treeNode4 = treeNode5;
+                }
+                i4++;
+            }
+            if (treeNode4 != null && (treeNode = (TreeNode) map3.get(treeNode3)) != treeNode4) {
+                RectF rectF3 = (RectF) map.get(treeNode3);
+                RectF rectF4 = (RectF) map.get(treeNode);
+                int i5 = treeNode3.mPosition;
+                if (i5 == 0) {
+                    zFloatEquals = floatEquals(rectF4.left, rectF3.right);
+                } else if (i5 == i2) {
+                    zFloatEquals = floatEquals(rectF4.top, rectF3.bottom);
+                } else if (i5 == 2) {
+                    zFloatEquals = floatEquals(rectF4.right, rectF3.left);
+                } else if (i5 == 3) {
+                    zFloatEquals = floatEquals(rectF4.bottom, rectF3.top);
+                } else {
+                    throw new IllegalStateException("Unexpected value: " + treeNode3.mPosition);
+                }
+                int i6 = treeNode3.mPosition;
+                if (i6 == 0) {
+                    i = 3;
+                    z = rectF3.bottom + 1.0E-4f <= rectF4.top && rectF3.top < rectF4.bottom + 1.0E-4f;
+                    if (!(z & zFloatEquals)) {
+                        treeNode.mChildren.remove(treeNode3);
+                        RectF rectF5 = (RectF) map.get(treeNode4);
+                        treeNode4.mChildren.add(treeNode3);
+                        if (f5 != 0.0f) {
+                            treeNode3.mPosition = f5 <= 0.0f ? 0 : 2;
+                            treeNode3.mOffset = rectF3.top - rectF5.top;
+                        } else if (f6 != 0.0f) {
+                            treeNode3.mPosition = f6 > 0.0f ? i : 1;
+                            treeNode3.mOffset = rectF3.left - rectF5.left;
+                        }
+                    }
+                } else {
+                    if (i6 != i2) {
+                        if (i6 != 2) {
+                            i = 3;
+                            if (i6 != 3) {
+                                throw new IllegalStateException("Unexpected value: " + treeNode3.mPosition);
+                            }
+                        }
+                        i = 3;
+                        if (rectF3.bottom + 1.0E-4f <= rectF4.top) {
+                        }
+                        if (!(z & zFloatEquals)) {
+                        }
+                    } else {
+                        i = 3;
+                    }
+                    if (rectF3.right + 1.0E-4f <= rectF4.left || rectF3.left >= rectF4.right + 1.0E-4f) {
+                    }
+                    if (!(z & zFloatEquals)) {
+                    }
+                }
+            }
+            i3++;
+            i2 = 1;
+        }
+        Comparator comparator2 = new Comparator() { // from class: android.hardware.display.DisplayTopology$$ExternalSyntheticLambda2
+            @Override // java.util.Comparator
+            public final int compare(Object obj, Object obj2) {
+                return Integer.compare(((DisplayTopology.TreeNode) obj).mDisplayId, ((DisplayTopology.TreeNode) obj2).mDisplayId);
+            }
+        };
+        Iterator it = arrayList.iterator();
+        while (it.hasNext()) {
+            ((TreeNode) it.next()).mChildren.sort(comparator2);
+        }
     }
 
     static /* synthetic */ int lambda$normalize$0(Map map, Map map2, TreeNode treeNode, TreeNode treeNode2) {
         if (treeNode == treeNode2) {
             return 0;
         }
-        int compare = Integer.compare(((Integer) map.get(treeNode)).intValue(), ((Integer) map.get(treeNode2)).intValue());
-        if (compare != 0) {
-            return compare;
+        int iCompare = Integer.compare(((Integer) map.get(treeNode)).intValue(), ((Integer) map.get(treeNode2)).intValue());
+        if (iCompare != 0) {
+            return iCompare;
         }
         RectF rectF = (RectF) map2.get(treeNode);
         RectF rectF2 = (RectF) map2.get(treeNode2);
@@ -292,10 +423,10 @@ public final class DisplayTopology implements Parcelable {
     }
 
     public SparseArray<RectF> getAbsoluteBounds() {
-        HashMap hashMap = new HashMap();
-        getInfo(hashMap, null, null, this.mRoot, 0.0f, 0.0f, 0);
+        HashMap map = new HashMap();
+        getInfo(map, null, null, this.mRoot, 0.0f, 0.0f, 0);
         SparseArray<RectF> sparseArray = new SparseArray<>();
-        for (Map.Entry entry : hashMap.entrySet()) {
+        for (Map.Entry entry : map.entrySet()) {
             sparseArray.append(((TreeNode) entry.getKey()).mDisplayId, (RectF) entry.getValue());
         }
         return sparseArray;
@@ -345,19 +476,19 @@ public final class DisplayTopology implements Parcelable {
             int i = treeNode2.mPosition;
             if (i == 0) {
                 f2 = f - treeNode.mWidth;
-            } else {
-                if (i != 1) {
-                    if (i == 2) {
-                        f2 = treeNode2.mWidth + f;
-                    } else if (i != 3) {
-                        throw new IllegalStateException("Unexpected value: " + treeNode2.mPosition);
-                    }
+            } else if (i == 1) {
+                f2 = (f - treeNode.mWidth) + treeNode2.mOffset + treeNode2.mWidth;
+            } else if (i != 2) {
+                if (i != 3) {
+                    throw new IllegalStateException("Unexpected value: " + treeNode2.mPosition);
                 }
                 f2 = (f - treeNode.mWidth) + treeNode2.mOffset + treeNode2.mWidth;
+            } else {
+                f2 = treeNode2.mWidth + f;
             }
-            Pair<TreeNode, Float> findRightMostDisplay = findRightMostDisplay(treeNode2, f2);
-            if (findRightMostDisplay.second.floatValue() > pair.second.floatValue()) {
-                pair = new Pair<>(findRightMostDisplay.first, findRightMostDisplay.second);
+            Pair<TreeNode, Float> pairFindRightMostDisplay = findRightMostDisplay(treeNode2, f2);
+            if (pairFindRightMostDisplay.second.floatValue() > pair.second.floatValue()) {
+                pair = new Pair<>(pairFindRightMostDisplay.first, pairFindRightMostDisplay.second);
             }
         }
         return pair;
@@ -372,9 +503,9 @@ public final class DisplayTopology implements Parcelable {
         }
         Iterator it = treeNode.mChildren.iterator();
         while (it.hasNext()) {
-            TreeNode findDisplay = findDisplay(i, (TreeNode) it.next());
-            if (findDisplay != null) {
-                return findDisplay;
+            TreeNode treeNodeFindDisplay = findDisplay(i, (TreeNode) it.next());
+            if (treeNodeFindDisplay != null) {
+                return treeNodeFindDisplay;
             }
         }
         return null;
@@ -448,7 +579,7 @@ public final class DisplayTopology implements Parcelable {
         Comparator comparator = new Comparator() { // from class: android.hardware.display.DisplayTopology$$ExternalSyntheticLambda0
             @Override // java.util.Comparator
             public final int compare(Object obj, Object obj2) {
-                return DisplayTopology.lambda$getGraph$2(SparseArray.this, (Integer) obj, (Integer) obj2);
+                return DisplayTopology.lambda$getGraph$2(absoluteBounds, (Integer) obj, (Integer) obj2);
             }
         };
         ArrayList arrayList2 = new ArrayList(absoluteBounds.size());
@@ -459,18 +590,18 @@ public final class DisplayTopology implements Parcelable {
         SparseArray sparseArray2 = new SparseArray();
         Iterator it = arrayList2.iterator();
         while (it.hasNext()) {
-            int intValue = ((Integer) it.next()).intValue();
-            if (sparseIntArray.get(intValue) == 0) {
-                Slog.e(TAG, "Cannot construct graph, no density for display " + intValue);
+            int iIntValue = ((Integer) it.next()).intValue();
+            if (sparseIntArray.get(iIntValue) == 0) {
+                Slog.e(TAG, "Cannot construct graph, no density for display " + iIntValue);
                 return null;
             }
-            sparseArray2.append(intValue, new ArrayList(Math.min(10, arrayList2.size())));
+            sparseArray2.append(iIntValue, new ArrayList(Math.min(10, arrayList2.size())));
         }
         int i2 = 0;
         while (i2 < arrayList2.size()) {
-            int intValue2 = ((Integer) arrayList2.get(i2)).intValue();
-            RectF rectF = absoluteBounds.get(intValue2);
-            List list = (List) sparseArray2.get(intValue2);
+            int iIntValue2 = ((Integer) arrayList2.get(i2)).intValue();
+            RectF rectF = absoluteBounds.get(iIntValue2);
+            List list = (List) sparseArray2.get(iIntValue2);
             i2++;
             int i3 = i2;
             while (true) {
@@ -479,20 +610,20 @@ public final class DisplayTopology implements Parcelable {
                     arrayList = arrayList2;
                     break;
                 }
-                int intValue3 = ((Integer) arrayList2.get(i3)).intValue();
-                RectF rectF2 = absoluteBounds.get(intValue3);
-                List list2 = (List) sparseArray2.get(intValue3);
-                List<Pair<Integer, Float>> findDisplayPlacements = findDisplayPlacements(rectF, rectF2);
-                List<Pair<Integer, Float>> findDisplayPlacements2 = findDisplayPlacements(rectF2, rectF);
-                for (Pair<Integer, Float> pair : findDisplayPlacements) {
-                    list.add(new DisplayTopologyGraph.AdjacentDisplay(intValue3, pair.first.intValue(), pair.second.floatValue()));
+                int iIntValue3 = ((Integer) arrayList2.get(i3)).intValue();
+                RectF rectF2 = absoluteBounds.get(iIntValue3);
+                List list2 = (List) sparseArray2.get(iIntValue3);
+                List<Pair<Integer, Float>> listFindDisplayPlacements = findDisplayPlacements(rectF, rectF2);
+                List<Pair<Integer, Float>> listFindDisplayPlacements2 = findDisplayPlacements(rectF2, rectF);
+                for (Pair<Integer, Float> pair : listFindDisplayPlacements) {
+                    list.add(new DisplayTopologyGraph.AdjacentDisplay(iIntValue3, pair.first.intValue(), pair.second.floatValue()));
                     absoluteBounds = absoluteBounds;
                     arrayList2 = arrayList2;
                 }
                 sparseArray = absoluteBounds;
                 arrayList = arrayList2;
-                for (Pair<Integer, Float> pair2 : findDisplayPlacements2) {
-                    list2.add(new DisplayTopologyGraph.AdjacentDisplay(intValue2, pair2.first.intValue(), pair2.second.floatValue()));
+                for (Pair<Integer, Float> pair2 : listFindDisplayPlacements2) {
+                    list2.add(new DisplayTopologyGraph.AdjacentDisplay(iIntValue2, pair2.first.intValue(), pair2.second.floatValue()));
                 }
                 if (rectF2.left >= rectF.right + 1.0E-4f) {
                     break;
@@ -507,8 +638,8 @@ public final class DisplayTopology implements Parcelable {
         int size = sparseArray2.size();
         DisplayTopologyGraph.DisplayNode[] displayNodeArr = new DisplayTopologyGraph.DisplayNode[size];
         for (int i4 = 0; i4 < size; i4++) {
-            int keyAt = sparseArray2.keyAt(i4);
-            displayNodeArr[i4] = new DisplayTopologyGraph.DisplayNode(keyAt, sparseIntArray.get(keyAt), (DisplayTopologyGraph.AdjacentDisplay[]) ((List) sparseArray2.valueAt(i4)).toArray(new DisplayTopologyGraph.AdjacentDisplay[0]));
+            int iKeyAt = sparseArray2.keyAt(i4);
+            displayNodeArr[i4] = new DisplayTopologyGraph.DisplayNode(iKeyAt, sparseIntArray.get(iKeyAt), (DisplayTopologyGraph.AdjacentDisplay[]) ((List) sparseArray2.valueAt(i4)).toArray(new DisplayTopologyGraph.AdjacentDisplay[0]));
         }
         return new DisplayTopologyGraph(this.mPrimaryDisplayId, displayNodeArr);
     }
@@ -516,8 +647,8 @@ public final class DisplayTopology implements Parcelable {
     static /* synthetic */ int lambda$getGraph$2(SparseArray sparseArray, Integer num, Integer num2) {
         RectF rectF = (RectF) sparseArray.get(num.intValue());
         RectF rectF2 = (RectF) sparseArray.get(num2.intValue());
-        int compare = Float.compare(rectF.left, rectF2.left);
-        return compare != 0 ? compare : Float.compare(rectF.top, rectF2.top);
+        int iCompare = Float.compare(rectF.left, rectF2.left);
+        return iCompare != 0 ? iCompare : Float.compare(rectF.top, rectF2.top);
     }
 
     private static boolean floatEquals(float f, float f2) {
@@ -529,14 +660,14 @@ public final class DisplayTopology implements Parcelable {
 
     private Map<Integer, TreeNode> allNodesIdMap() {
         ArrayDeque arrayDeque = new ArrayDeque();
-        HashMap hashMap = new HashMap();
+        HashMap map = new HashMap();
         arrayDeque.push(this.mRoot);
         do {
             TreeNode treeNode = (TreeNode) arrayDeque.pop();
-            hashMap.put(Integer.valueOf(treeNode.mDisplayId), treeNode);
+            map.put(Integer.valueOf(treeNode.mDisplayId), treeNode);
             arrayDeque.addAll(treeNode.mChildren);
         } while (!arrayDeque.isEmpty());
-        return hashMap;
+        return map;
     }
 
     private void clampOffsets(TreeNode treeNode) {

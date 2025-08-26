@@ -35,7 +35,6 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class GenericVpnService extends Service {
     public static final String SERVICE_INTERFACE = "android.net.VpnService";
@@ -43,7 +42,6 @@ public class GenericVpnService extends Service {
     public static final String TAG = "GenericVpnService";
     public static String mVpnProfileName;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Callback extends Binder {
         public /* synthetic */ Callback(GenericVpnService genericVpnService, int i) {
             this();
@@ -109,12 +107,12 @@ public class GenericVpnService extends Service {
             return null;
         }
         mVpnProfileName = str;
-        boolean isMetaEnabled = ((GenericVpnContext) context).isMetaEnabled();
+        boolean zIsMetaEnabled = ((GenericVpnContext) context).isMetaEnabled();
         if (z2) {
             return null;
         }
         try {
-            if (getService().prepareEnterpriseVpnExt(str, isMetaEnabled)) {
+            if (getService().prepareEnterpriseVpnExt(str, zIsMetaEnabled)) {
                 return null;
             }
         } catch (Exception e) {
@@ -177,7 +175,6 @@ public class GenericVpnService extends Service {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class Builder {
         public final List<LinkAddress> mAddresses;
         public final VpnConfig mConfig;

@@ -14,7 +14,6 @@ import java.util.Collections;
 import java.util.List;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 @CoordinatorScope
 /* loaded from: classes3.dex */
 public class ColorizedFgsCoordinator implements Coordinator {
@@ -41,8 +40,8 @@ public class ColorizedFgsCoordinator implements Coordinator {
             if (notificationEntry == null) {
                 return Integer.MAX_VALUE;
             }
-            int indexOf = ColorizedFgsCoordinator.this.mOrderedPromotedNotifKeys.indexOf(notificationEntry.mKey);
-            return indexOf >= 0 ? indexOf : ColorizedFgsCoordinator.isPromotedOngoing(notificationEntry) ? 2147483646 : Integer.MAX_VALUE;
+            int iIndexOf = ColorizedFgsCoordinator.this.mOrderedPromotedNotifKeys.indexOf(notificationEntry.mKey);
+            return iIndexOf >= 0 ? iIndexOf : ColorizedFgsCoordinator.isPromotedOngoing(notificationEntry) ? 2147483646 : Integer.MAX_VALUE;
         }
 
         @Override // com.android.systemui.statusbar.notification.collection.listbuilder.pluggable.NotifSectioner

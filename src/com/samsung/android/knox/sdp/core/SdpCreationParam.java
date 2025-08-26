@@ -3,6 +3,7 @@ package com.samsung.android.knox.sdp.core;
 import android.os.Parcel;
 import android.os.Parcelable;
 import com.samsung.android.graphics.imagefilter.ShaderAssembler;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -70,7 +71,7 @@ public class SdpCreationParam implements Parcelable {
     }
 
     @Override // android.os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int i) throws IOException {
         parcel.writeString(this.mAlias);
         parcel.writeInt(this.mFlags);
         parcel.writeSerializable(this.mPrivilegedApps);

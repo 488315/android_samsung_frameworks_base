@@ -10,7 +10,6 @@ import android.os.ParcelableException;
 import android.os.RemoteCallback;
 import android.os.RemoteException;
 import android.service.resumeonreboot.IResumeOnRebootService;
-import android.service.resumeonreboot.ResumeOnRebootService;
 import com.android.internal.os.BackgroundThread;
 import java.io.IOException;
 
@@ -38,7 +37,7 @@ public abstract class ResumeOnRebootService extends Service {
             ResumeOnRebootService.this.mHandler.post(new Runnable() { // from class: android.service.resumeonreboot.ResumeOnRebootService$1$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ResumeOnRebootService.AnonymousClass1.this.lambda$wrapSecret$0(bArr, j, remoteCallback);
+                    this.f$0.lambda$wrapSecret$0(bArr, j, remoteCallback);
                 }
             });
         }
@@ -46,9 +45,9 @@ public abstract class ResumeOnRebootService extends Service {
         /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$wrapSecret$0(byte[] bArr, long j, RemoteCallback remoteCallback) {
             try {
-                byte[] onWrap = ResumeOnRebootService.this.onWrap(bArr, j);
+                byte[] bArrOnWrap = ResumeOnRebootService.this.onWrap(bArr, j);
                 Bundle bundle = new Bundle();
-                bundle.putByteArray(ResumeOnRebootService.WRAPPED_BLOB_KEY, onWrap);
+                bundle.putByteArray(ResumeOnRebootService.WRAPPED_BLOB_KEY, bArrOnWrap);
                 remoteCallback.sendResult(bundle);
             } catch (Throwable th) {
                 Bundle bundle2 = new Bundle();
@@ -62,7 +61,7 @@ public abstract class ResumeOnRebootService extends Service {
             ResumeOnRebootService.this.mHandler.post(new Runnable() { // from class: android.service.resumeonreboot.ResumeOnRebootService$1$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ResumeOnRebootService.AnonymousClass1.this.lambda$unwrap$1(bArr, remoteCallback);
+                    this.f$0.lambda$unwrap$1(bArr, remoteCallback);
                 }
             });
         }
@@ -70,9 +69,9 @@ public abstract class ResumeOnRebootService extends Service {
         /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$unwrap$1(byte[] bArr, RemoteCallback remoteCallback) {
             try {
-                byte[] onUnwrap = ResumeOnRebootService.this.onUnwrap(bArr);
+                byte[] bArrOnUnwrap = ResumeOnRebootService.this.onUnwrap(bArr);
                 Bundle bundle = new Bundle();
-                bundle.putByteArray(ResumeOnRebootService.UNWRAPPED_BLOB_KEY, onUnwrap);
+                bundle.putByteArray(ResumeOnRebootService.UNWRAPPED_BLOB_KEY, bArrOnUnwrap);
                 remoteCallback.sendResult(bundle);
             } catch (Throwable th) {
                 Bundle bundle2 = new Bundle();

@@ -13,7 +13,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function5;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class PromptCredentialInteractor$prompt$1 extends SuspendLambda implements Function5 {
     /* synthetic */ Object L$0;
@@ -54,28 +53,28 @@ final class PromptCredentialInteractor$prompt$1 extends SuspendLambda implements
             return null;
         }
         if (Intrinsics.areEqual(promptKind, PromptKind.Pin.INSTANCE)) {
-            BiometricUserInfo access$userInfo = PromptCredentialInteractor.access$userInfo(this.this$0, num.intValue(), promptInfo.shouldUseParentProfileForDeviceCredential());
+            BiometricUserInfo biometricUserInfoAccess$userInfo = PromptCredentialInteractor.access$userInfo(this.this$0, num.intValue(), promptInfo.shouldUseParentProfileForDeviceCredential());
             PromptCredentialInteractor promptCredentialInteractor = this.this$0;
-            long longValue = l.longValue();
+            long jLongValue = l.longValue();
             promptCredentialInteractor.getClass();
-            return new BiometricPromptRequest.Credential.Pin(promptInfo, access$userInfo, new BiometricOperationInfo(longValue));
+            return new BiometricPromptRequest.Credential.Pin(promptInfo, biometricUserInfoAccess$userInfo, new BiometricOperationInfo(jLongValue));
         }
         if (!Intrinsics.areEqual(promptKind, PromptKind.Pattern.INSTANCE)) {
             if (!Intrinsics.areEqual(promptKind, PromptKind.Password.INSTANCE)) {
                 return null;
             }
-            BiometricUserInfo access$userInfo2 = PromptCredentialInteractor.access$userInfo(this.this$0, num.intValue(), promptInfo.shouldUseParentProfileForDeviceCredential());
+            BiometricUserInfo biometricUserInfoAccess$userInfo2 = PromptCredentialInteractor.access$userInfo(this.this$0, num.intValue(), promptInfo.shouldUseParentProfileForDeviceCredential());
             PromptCredentialInteractor promptCredentialInteractor2 = this.this$0;
-            long longValue2 = l.longValue();
+            long jLongValue2 = l.longValue();
             promptCredentialInteractor2.getClass();
-            return new BiometricPromptRequest.Credential.Password(promptInfo, access$userInfo2, new BiometricOperationInfo(longValue2));
+            return new BiometricPromptRequest.Credential.Password(promptInfo, biometricUserInfoAccess$userInfo2, new BiometricOperationInfo(jLongValue2));
         }
-        BiometricUserInfo access$userInfo3 = PromptCredentialInteractor.access$userInfo(this.this$0, num.intValue(), promptInfo.shouldUseParentProfileForDeviceCredential());
+        BiometricUserInfo biometricUserInfoAccess$userInfo3 = PromptCredentialInteractor.access$userInfo(this.this$0, num.intValue(), promptInfo.shouldUseParentProfileForDeviceCredential());
         PromptCredentialInteractor promptCredentialInteractor3 = this.this$0;
-        long longValue3 = l.longValue();
+        long jLongValue3 = l.longValue();
         promptCredentialInteractor3.getClass();
-        BiometricOperationInfo biometricOperationInfo = new BiometricOperationInfo(longValue3);
+        BiometricOperationInfo biometricOperationInfo = new BiometricOperationInfo(jLongValue3);
         CredentialInteractor credentialInteractor = this.this$0.credentialInteractor;
-        return new BiometricPromptRequest.Credential.Pattern(promptInfo, access$userInfo3, biometricOperationInfo, !((CredentialInteractorImpl) credentialInteractor).lockPatternUtils.isVisiblePatternEnabled(num.intValue()));
+        return new BiometricPromptRequest.Credential.Pattern(promptInfo, biometricUserInfoAccess$userInfo3, biometricOperationInfo, !((CredentialInteractorImpl) credentialInteractor).lockPatternUtils.isVisiblePatternEnabled(num.intValue()));
     }
 }

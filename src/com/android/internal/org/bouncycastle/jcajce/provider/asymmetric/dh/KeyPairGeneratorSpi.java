@@ -50,9 +50,9 @@ public class KeyPairGeneratorSpi extends KeyPairGenerator {
             throw new InvalidAlgorithmParameterException("parameter object not a DHParameterSpec");
         }
         try {
-            DHKeyGenerationParameters convertParams = convertParams(secureRandom, (DHParameterSpec) algorithmParameterSpec);
-            this.param = convertParams;
-            this.engine.init(convertParams);
+            DHKeyGenerationParameters dHKeyGenerationParametersConvertParams = convertParams(secureRandom, (DHParameterSpec) algorithmParameterSpec);
+            this.param = dHKeyGenerationParametersConvertParams;
+            this.engine.init(dHKeyGenerationParametersConvertParams);
             this.initialised = true;
         } catch (IllegalArgumentException e) {
             throw new InvalidAlgorithmParameterException(e.getMessage(), e);
@@ -66,24 +66,24 @@ public class KeyPairGeneratorSpi extends KeyPairGenerator {
     @Override // java.security.KeyPairGenerator, java.security.KeyPairGeneratorSpi
     public KeyPair generateKeyPair() {
         if (!this.initialised) {
-            Integer valueOf = Integers.valueOf(this.strength);
-            if (params.containsKey(valueOf)) {
-                this.param = (DHKeyGenerationParameters) params.get(valueOf);
+            Integer numValueOf = Integers.valueOf(this.strength);
+            if (params.containsKey(numValueOf)) {
+                this.param = (DHKeyGenerationParameters) params.get(numValueOf);
             } else {
                 DHParameterSpec dHDefaultParameters = BouncyCastleProvider.CONFIGURATION.getDHDefaultParameters(this.strength);
                 if (dHDefaultParameters != null) {
                     this.param = convertParams(this.random, dHDefaultParameters);
                 } else {
                     synchronized (lock) {
-                        if (params.containsKey(valueOf)) {
-                            this.param = (DHKeyGenerationParameters) params.get(valueOf);
+                        if (params.containsKey(numValueOf)) {
+                            this.param = (DHKeyGenerationParameters) params.get(numValueOf);
                         } else {
                             DHParametersGenerator dHParametersGenerator = new DHParametersGenerator();
                             int i = this.strength;
                             dHParametersGenerator.init(i, PrimeCertaintyCalculator.getDefaultCertainty(i), this.random);
                             DHKeyGenerationParameters dHKeyGenerationParameters = new DHKeyGenerationParameters(this.random, dHParametersGenerator.generateParameters());
                             this.param = dHKeyGenerationParameters;
-                            params.put(valueOf, dHKeyGenerationParameters);
+                            params.put(numValueOf, dHKeyGenerationParameters);
                         }
                     }
                 }
@@ -91,7 +91,7 @@ public class KeyPairGeneratorSpi extends KeyPairGenerator {
             this.engine.init(this.param);
             this.initialised = true;
         }
-        AsymmetricCipherKeyPair generateKeyPair = this.engine.generateKeyPair();
-        return new KeyPair(new BCDHPublicKey((DHPublicKeyParameters) generateKeyPair.getPublic()), new BCDHPrivateKey((DHPrivateKeyParameters) generateKeyPair.getPrivate()));
+        AsymmetricCipherKeyPair asymmetricCipherKeyPairGenerateKeyPair = this.engine.generateKeyPair();
+        return new KeyPair(new BCDHPublicKey((DHPublicKeyParameters) asymmetricCipherKeyPairGenerateKeyPair.getPublic()), new BCDHPrivateKey((DHPrivateKeyParameters) asymmetricCipherKeyPairGenerateKeyPair.getPrivate()));
     }
 }

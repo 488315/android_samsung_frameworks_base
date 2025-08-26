@@ -9,7 +9,6 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function3;
 import kotlinx.coroutines.flow.FlowCollector;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 final class ColoredBGHelper$requestUpdateColoredBackground$1 extends SuspendLambda implements Function3 {
     /* synthetic */ int I$0;
@@ -22,10 +21,10 @@ final class ColoredBGHelper$requestUpdateColoredBackground$1 extends SuspendLamb
 
     @Override // kotlin.jvm.functions.Function3
     public final Object invoke(Object obj, Object obj2, Object obj3) {
-        int intValue = ((Number) obj2).intValue();
+        int iIntValue = ((Number) obj2).intValue();
         ColoredBGHelper$requestUpdateColoredBackground$1 coloredBGHelper$requestUpdateColoredBackground$1 = new ColoredBGHelper$requestUpdateColoredBackground$1((Continuation) obj3);
         coloredBGHelper$requestUpdateColoredBackground$1.L$0 = (FlowCollector) obj;
-        coloredBGHelper$requestUpdateColoredBackground$1.I$0 = intValue;
+        coloredBGHelper$requestUpdateColoredBackground$1.I$0 = iIntValue;
         return coloredBGHelper$requestUpdateColoredBackground$1.invokeSuspend(Unit.INSTANCE);
     }
 

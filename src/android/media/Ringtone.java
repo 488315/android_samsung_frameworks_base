@@ -1,5 +1,8 @@
 package android.media;
 
+import android.app.jank.AppJankStats;
+import android.content.ContentProvider;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.AssetFileDescriptor;
 import android.content.res.Resources;
@@ -22,6 +25,7 @@ import android.util.Log;
 import com.android.internal.R;
 import com.android.internal.hidden_from_bootclasspath.android.media.audio.Flags;
 import com.samsung.android.audio.Rune;
+import com.samsung.android.audio.SoundTheme;
 import com.samsung.android.common.AsPackageName;
 import com.samsung.android.media.AudioTag;
 import java.io.IOException;
@@ -280,45 +284,192 @@ public class Ringtone {
         return title;
     }
 
-    /* JADX WARN: Code restructure failed: missing block: B:28:0x0093, code lost:
-    
-        if (r7 != null) goto L43;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:29:0x0095, code lost:
-    
-        r7.close();
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:30:0x0098, code lost:
-    
-        r7 = r10;
-     */
-    /* JADX WARN: Code restructure failed: missing block: B:50:0x00a7, code lost:
-    
-        if (r7 == null) goto L44;
-     */
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:14:? A[RETURN, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:32:0x00d4  */
-    /* JADX WARN: Removed duplicated region for block: B:53:0x00ae A[Catch: all -> 0x00bb, TRY_ENTER, TRY_LEAVE, TryCatch #5 {all -> 0x00bb, blocks: (B:34:0x005d, B:36:0x0064, B:38:0x006d, B:39:0x0072, B:42:0x0078, B:43:0x007d, B:53:0x00ae, B:58:0x00c2), top: B:4:0x0018 }] */
-    /* JADX WARN: Removed duplicated region for block: B:56:0x00cf  */
-    /* JADX WARN: Removed duplicated region for block: B:57:0x00c2 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:61:0x00bf  */
-    /* JADX WARN: Removed duplicated region for block: B:81:0x00c9  */
-    /* JADX WARN: Removed duplicated region for block: B:83:? A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:9:0x00e2  */
+    /* JADX WARN: Removed duplicated region for block: B:43:0x0095 A[PHI: r1 r7 r10
+      0x0095: PHI (r1v10 android.net.Uri) = (r1v7 android.net.Uri), (r1v12 android.net.Uri) binds: [B:51:0x00a7, B:42:0x0093] A[DONT_GENERATE, DONT_INLINE]
+      0x0095: PHI (r7v14 android.database.Cursor) = (r7v10 android.database.Cursor), (r7v15 android.database.Cursor) binds: [B:51:0x00a7, B:42:0x0093] A[DONT_GENERATE, DONT_INLINE]
+      0x0095: PHI (r10v6 java.lang.String) = (r10v4 java.lang.String), (r10v8 java.lang.String) binds: [B:51:0x00a7, B:42:0x0093] A[DONT_GENERATE, DONT_INLINE]] */
+    /* JADX WARN: Removed duplicated region for block: B:56:0x00ae A[Catch: all -> 0x00bb, TRY_ENTER, TRY_LEAVE, TryCatch #5 {all -> 0x00bb, blocks: (B:23:0x005d, B:25:0x0064, B:27:0x006d, B:28:0x0072, B:31:0x0078, B:32:0x007d, B:56:0x00ae, B:62:0x00c2), top: B:83:0x0018 }] */
+    /* JADX WARN: Removed duplicated region for block: B:60:0x00bf  */
+    /* JADX WARN: Removed duplicated region for block: B:65:0x00c9  */
+    /* JADX WARN: Removed duplicated region for block: B:68:0x00cf  */
+    /* JADX WARN: Removed duplicated region for block: B:70:0x00d4  */
+    /* JADX WARN: Removed duplicated region for block: B:73:0x00e2  */
+    /* JADX WARN: Removed duplicated region for block: B:80:0x00c2 A[EXC_TOP_SPLITTER, SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:90:? A[SYNTHETIC] */
+    /* JADX WARN: Removed duplicated region for block: B:91:? A[RETURN, SYNTHETIC] */
     /* JADX WARN: Type inference failed for: r7v4 */
     /* JADX WARN: Type inference failed for: r7v5 */
     /* JADX WARN: Type inference failed for: r7v6, types: [android.database.Cursor] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static java.lang.String getTitle(android.content.Context r9, android.net.Uri r10, boolean r11, boolean r12, boolean r13) {
-        /*
-            Method dump skipped, instructions count: 235
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: android.media.Ringtone.getTitle(android.content.Context, android.net.Uri, boolean, boolean, boolean):java.lang.String");
+    public static String getTitle(Context context, Uri uri, boolean z, boolean z2, boolean z3) throws Throwable {
+        String string;
+        Throwable th;
+        Uri uri2;
+        Cursor cursorQuery;
+        RuntimeException runtimeException;
+        IRingtonePlayer ringtonePlayer;
+        String string2;
+        String[] strArr;
+        ContentResolver contentResolver = context.getContentResolver();
+        if (uri != null) {
+            String authorityWithoutUserId = ContentProvider.getAuthorityWithoutUserId(uri.getAuthority());
+            ?? r7 = 0;
+            string = null;
+            string = null;
+            titleIncludingTheme = null;
+            String titleIncludingTheme = null;
+            cursor = null;
+            cursor = null;
+            string = null;
+            Cursor cursor = null;
+            try {
+                try {
+                    if (!"settings".equals(authorityWithoutUserId)) {
+                        try {
+                            try {
+                                if (AppJankStats.WIDGET_CATEGORY_MEDIA.equals(authorityWithoutUserId)) {
+                                    String str = z2 ? null : MEDIA_SELECTION;
+                                    if (Rune.SEC_AUDIO_SUPPORT_SOUND_THEME) {
+                                        try {
+                                            strArr = SoundTheme.SOUND_THEME_MEDIA_COLUMNS;
+                                        } catch (IllegalArgumentException | IllegalStateException | UnsupportedOperationException e) {
+                                            runtimeException = e;
+                                            uri2 = uri;
+                                            string2 = context.getString(R.string.ringtone_unknown);
+                                            runtimeException.printStackTrace();
+                                            if (cursor != null) {
+                                            }
+                                            string = string2;
+                                            if (string == null) {
+                                            }
+                                            if (string == null) {
+                                            }
+                                        }
+                                    } else {
+                                        strArr = MEDIA_COLUMNS;
+                                    }
+                                    uri2 = uri;
+                                    try {
+                                        cursorQuery = contentResolver.query(uri2, strArr, str, null, null);
+                                        if (cursorQuery != null) {
+                                            try {
+                                                if (cursorQuery.getCount() == 1) {
+                                                    cursorQuery.moveToFirst();
+                                                    if (isOpenThemeRingtone(cursorQuery)) {
+                                                        titleIncludingTheme = changeThemeTitle(context, uri2);
+                                                    } else if (Rune.SEC_AUDIO_SUPPORT_SOUND_THEME && z3) {
+                                                        titleIncludingTheme = SoundTheme.getTitleIncludingTheme(context, cursorQuery);
+                                                    } else {
+                                                        String string3 = cursorQuery.getString(1);
+                                                        if (cursorQuery != null) {
+                                                            cursorQuery.close();
+                                                        }
+                                                        return string3;
+                                                    }
+                                                }
+                                            } catch (IllegalArgumentException | IllegalStateException | UnsupportedOperationException e2) {
+                                                runtimeException = e2;
+                                                cursor = cursorQuery;
+                                                string2 = context.getString(R.string.ringtone_unknown);
+                                                runtimeException.printStackTrace();
+                                                if (cursor != null) {
+                                                }
+                                                string = string2;
+                                                if (string == null) {
+                                                }
+                                                if (string == null) {
+                                                }
+                                            } catch (SecurityException unused) {
+                                                if (!z2) {
+                                                }
+                                                if (ringtonePlayer != null) {
+                                                }
+                                                if (cursorQuery != null) {
+                                                }
+                                                if (string == null) {
+                                                }
+                                                if (string == null) {
+                                                }
+                                            }
+                                        }
+                                        String str2 = titleIncludingTheme;
+                                        cursor = cursorQuery;
+                                        string2 = str2;
+                                    } catch (IllegalArgumentException | IllegalStateException | UnsupportedOperationException e3) {
+                                        e = e3;
+                                        runtimeException = e;
+                                        string2 = context.getString(R.string.ringtone_unknown);
+                                        runtimeException.printStackTrace();
+                                        if (cursor != null) {
+                                        }
+                                        string = string2;
+                                        if (string == null) {
+                                        }
+                                        if (string == null) {
+                                        }
+                                    } catch (SecurityException unused2) {
+                                        cursorQuery = null;
+                                        ringtonePlayer = !z2 ? ((AudioManager) context.getSystemService("audio")).getRingtonePlayer() : null;
+                                        if (ringtonePlayer != null) {
+                                            try {
+                                                string = ringtonePlayer.getTitle(uri2);
+                                            } catch (RemoteException unused3) {
+                                            }
+                                        }
+                                        if (cursorQuery != null) {
+                                            cursorQuery.close();
+                                        }
+                                        if (string == null) {
+                                        }
+                                        if (string == null) {
+                                        }
+                                    }
+                                } else {
+                                    uri2 = uri;
+                                    string2 = null;
+                                }
+                            } catch (SecurityException unused4) {
+                                uri2 = uri;
+                            }
+                        } catch (IllegalArgumentException | IllegalStateException | UnsupportedOperationException e4) {
+                            e = e4;
+                            uri2 = uri;
+                        }
+                        if (cursor != null) {
+                            cursor.close();
+                        }
+                        string = string2;
+                        if (string == null) {
+                            string = uri2.getLastPathSegment();
+                        }
+                    } else if (z) {
+                        string = context.getString(R.string.ringtone_default_with_actual, getTitle(context, RingtoneManager.getActualDefaultRingtoneUri(context, RingtoneManager.getDefaultType(uri)), false, z2, z3));
+                    }
+                } catch (Throwable th2) {
+                    th = th2;
+                    if (r7 == 0) {
+                        r7.close();
+                        throw th;
+                    }
+                    throw th;
+                }
+            } catch (Throwable th3) {
+                th = th3;
+                r7 = uri;
+                if (r7 == 0) {
+                }
+            }
+        } else {
+            string = context.getString(R.string.sec_ringtone_silent);
+        }
+        if (string == null) {
+            return string;
+        }
+        String string4 = context.getString(R.string.ringtone_unknown);
+        return string4 == null ? "" : string4;
     }
 
     public void setUri(Uri uri) {
@@ -337,10 +488,10 @@ public class Ringtone {
             destroyLocalPlayer();
         }
         if (Flags.enableRingtoneHapticsCustomization() && this.mRingtoneVibrationSupported && (uri2 = this.mUri) != null) {
-            VibrationEffect parseVibrationEffect = Utils.parseVibrationEffect(this.mVibrator, Utils.getVibrationUri(uri2));
-            this.mVibrationEffect = parseVibrationEffect;
-            if (parseVibrationEffect != null) {
-                this.mVibrationEffect = parseVibrationEffect.applyRepeatingIndefinitely(true, 200);
+            VibrationEffect vibrationEffect = Utils.parseVibrationEffect(this.mVibrator, Utils.getVibrationUri(uri2));
+            this.mVibrationEffect = vibrationEffect;
+            if (vibrationEffect != null) {
+                this.mVibrationEffect = vibrationEffect.applyRepeatingIndefinitely(true, 200);
             }
         }
         int highlightOffset = getHighlightOffset(this.mUri);
@@ -454,7 +605,7 @@ public class Ringtone {
         }
     }
 
-    private void startLocalPlayer() {
+    private void startLocalPlayer() throws IllegalStateException {
         if (this.mLocalPlayer == null) {
             return;
         }
@@ -492,7 +643,7 @@ public class Ringtone {
         return false;
     }
 
-    private boolean playFallbackRingtone() {
+    private boolean playFallbackRingtone() throws IllegalStateException, IllegalArgumentException {
         if (this.mAudioManager.getStreamVolume(AudioAttributes.toLegacyStreamType(this.mAudioAttributes)) == 0) {
             return false;
         }
@@ -502,20 +653,20 @@ public class Ringtone {
             return false;
         }
         try {
-            AssetFileDescriptor openRawResourceFd = this.mContext.getResources().openRawResourceFd(R.raw.fallbackring);
+            AssetFileDescriptor assetFileDescriptorOpenRawResourceFd = this.mContext.getResources().openRawResourceFd(R.raw.fallbackring);
             if (this.mAudioAttributes.getUsage() != 6) {
                 Log.d("Ringtone", "play playFallbackRingtone: fallbacknoti");
-                openRawResourceFd = this.mContext.getResources().openRawResourceFd(R.raw.fallbacknoti);
+                assetFileDescriptorOpenRawResourceFd = this.mContext.getResources().openRawResourceFd(R.raw.fallbacknoti);
             }
-            if (openRawResourceFd == null) {
+            if (assetFileDescriptorOpenRawResourceFd == null) {
                 Log.e("Ringtone", "Could not load fallback ringtone");
                 return false;
             }
             this.mLocalPlayer = new MediaPlayer();
-            if (openRawResourceFd.getDeclaredLength() < 0) {
-                this.mLocalPlayer.setDataSource(openRawResourceFd.getFileDescriptor());
+            if (assetFileDescriptorOpenRawResourceFd.getDeclaredLength() < 0) {
+                this.mLocalPlayer.setDataSource(assetFileDescriptorOpenRawResourceFd.getFileDescriptor());
             } else {
-                this.mLocalPlayer.setDataSource(openRawResourceFd.getFileDescriptor(), openRawResourceFd.getStartOffset(), openRawResourceFd.getDeclaredLength());
+                this.mLocalPlayer.setDataSource(assetFileDescriptorOpenRawResourceFd.getFileDescriptor(), assetFileDescriptorOpenRawResourceFd.getStartOffset(), assetFileDescriptorOpenRawResourceFd.getDeclaredLength());
             }
             this.mLocalPlayer.setAudioAttributes(this.mAudioAttributes);
             synchronized (this.mPlaybackSettingsLock) {
@@ -527,7 +678,7 @@ public class Ringtone {
             }
             this.mLocalPlayer.prepare();
             startLocalPlayer();
-            openRawResourceFd.close();
+            assetFileDescriptorOpenRawResourceFd.close();
             return true;
         } catch (Resources.NotFoundException unused) {
             Log.e("Ringtone", "Fallback ringtone does not exist");
@@ -583,7 +734,7 @@ public class Ringtone {
         }
     }
 
-    private boolean isValidUri(Uri uri) {
+    private boolean isValidUri(Uri uri) throws Throwable {
         if (uri == null) {
             return false;
         }
@@ -596,20 +747,20 @@ public class Ringtone {
             return true;
         }
         try {
-            Cursor query = this.mContext.getContentResolver().query(uri2, new String[]{"_id"}, null, null, null);
-            if (query != null) {
+            Cursor cursorQuery = this.mContext.getContentResolver().query(uri2, new String[]{"_id"}, null, null, null);
+            if (cursorQuery != null) {
                 try {
-                    if (query.getCount() != 0) {
-                        if (query != null) {
-                            query.close();
+                    if (cursorQuery.getCount() != 0) {
+                        if (cursorQuery != null) {
+                            cursorQuery.close();
                         }
                         return true;
                     }
                 } finally {
                 }
             }
-            if (query != null) {
-                query.close();
+            if (cursorQuery != null) {
+                cursorQuery.close();
             }
         } catch (Exception unused) {
         }
@@ -672,17 +823,17 @@ public class Ringtone {
 
     public void fadeoutRingtone(int i, float f) {
         IRingtonePlayer iRingtonePlayer;
-        VolumeShaper.Configuration build = new VolumeShaper.Configuration.Builder().setCurve(new float[]{0.0f, 1.0f}, new float[]{1.0f, f}).setInterpolatorType(1).setOptionFlags(2).setDuration(i).build();
-        VolumeShaper.Operation build2 = new VolumeShaper.Operation.Builder(VolumeShaper.Operation.PLAY).createIfNeeded().build();
+        VolumeShaper.Configuration configurationBuild = new VolumeShaper.Configuration.Builder().setCurve(new float[]{0.0f, 1.0f}, new float[]{1.0f, f}).setInterpolatorType(1).setOptionFlags(2).setDuration(i).build();
+        VolumeShaper.Operation operationBuild = new VolumeShaper.Operation.Builder(VolumeShaper.Operation.PLAY).createIfNeeded().build();
         if (this.mLocalPlayer != null) {
             VolumeShaper volumeShaper = this.mCustomShaper;
             if (volumeShaper != null) {
                 volumeShaper.close();
             }
             try {
-                VolumeShaper createVolumeShaper = this.mLocalPlayer.createVolumeShaper(build);
-                this.mCustomShaper = createVolumeShaper;
-                createVolumeShaper.apply(build2);
+                VolumeShaper volumeShaperCreateVolumeShaper = this.mLocalPlayer.createVolumeShaper(configurationBuild);
+                this.mCustomShaper = volumeShaperCreateVolumeShaper;
+                volumeShaperCreateVolumeShaper.apply(operationBuild);
                 return;
             } catch (IllegalArgumentException | IllegalStateException e) {
                 Log.w("Ringtone", "mLocalPlayer :: fadeout error", e);

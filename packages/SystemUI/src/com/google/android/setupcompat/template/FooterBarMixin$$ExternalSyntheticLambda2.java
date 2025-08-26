@@ -8,7 +8,6 @@ import com.google.android.setupcompat.partnerconfig.PartnerConfigHelper;
 import com.google.android.setupcompat.util.Logger;
 import com.google.android.setupcompat.view.ButtonBarLayout;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final /* synthetic */ class FooterBarMixin$$ExternalSyntheticLambda2 implements Runnable {
     public final /* synthetic */ FooterBarMixin f$0;
@@ -40,9 +39,9 @@ public final /* synthetic */ class FooterBarMixin$$ExternalSyntheticLambda2 impl
         int i = ((measuredWidth - footerBarMixin.footerBarPaddingStart) - footerBarMixin.footerBarPaddingEnd) - footerBarMixin.footerBarButtonMiddleSpacing;
         int i2 = i / 2;
         boolean z2 = button != null && button.getVisibility() == 0;
-        String m = KeyguardUpdateMonitorLogger$$ExternalSyntheticOutline0.m("isTertiaryButtonVisible=", z2);
+        String strM = KeyguardUpdateMonitorLogger$$ExternalSyntheticOutline0.m("isTertiaryButtonVisible=", z2);
         Logger logger = FooterBarMixin.LOG;
-        logger.atDebug(m);
+        logger.atDebug(strM);
         if (z2 && FooterBarMixin.isBothButtons(primaryButtonView, secondaryButtonView)) {
             LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) primaryButtonView.getLayoutParams();
             LinearLayout.LayoutParams layoutParams2 = (LinearLayout.LayoutParams) secondaryButtonView.getLayoutParams();

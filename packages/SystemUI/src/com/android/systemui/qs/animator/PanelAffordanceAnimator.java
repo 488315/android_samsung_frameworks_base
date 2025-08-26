@@ -46,7 +46,6 @@ import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class PanelAffordanceAnimator extends SecQSImplAnimatorBase {
     public static final AnimHelper.AnimProperty HIDE_GLOW_ANIM_ALPHA_PROPERTY;
@@ -85,22 +84,20 @@ public final class PanelAffordanceAnimator extends SecQSImplAnimatorBase {
     public final PanelAffordanceAnimator$broadcastReceiver$1 broadcastReceiver = new BroadcastReceiver() { // from class: com.android.systemui.qs.animator.PanelAffordanceAnimator$broadcastReceiver$1
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, Intent intent) {
-            if (PanelAffordanceAnimator.this.isThereNoView() || PanelAffordanceAnimator.this.isNotVisible()) {
+            if (this.this$0.isThereNoView() || this.this$0.isNotVisible()) {
                 return;
             }
-            PanelAffordanceAnimator.this.hiding(200);
+            this.this$0.hiding(200);
         }
     };
     private SettingsHelper.OnChangedCallback settingsListener = new SettingsHelper.OnChangedCallback() { // from class: com.android.systemui.qs.animator.PanelAffordanceAnimator$settingsListener$1
         @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
         public final void onChanged(Uri uri) {
-            SettingsHelper settingsHelper;
             if (Intrinsics.areEqual(Settings.Secure.getUriFor(SettingsHelper.INDEX_SPLIT_QUICK_PANEL_REVERSED), uri)) {
-                PanelAffordanceAnimator panelAffordanceAnimator = PanelAffordanceAnimator.this;
-                settingsHelper = panelAffordanceAnimator.settingsHelper;
-                boolean isPanelSplitReversed = settingsHelper.isPanelSplitReversed();
-                panelAffordanceAnimator.reversed = isPanelSplitReversed;
-                Log.d("PanelAffordanceAnimator", "OnChangedCallback reversed = " + isPanelSplitReversed);
+                PanelAffordanceAnimator panelAffordanceAnimator = this.this$0;
+                boolean zIsPanelSplitReversed = panelAffordanceAnimator.settingsHelper.isPanelSplitReversed();
+                panelAffordanceAnimator.reversed = zIsPanelSplitReversed;
+                Log.d("PanelAffordanceAnimator", "OnChangedCallback reversed = " + zIsPanelSplitReversed);
                 panelAffordanceAnimator.loadView();
                 panelAffordanceAnimator.clearAnimationState();
             }
@@ -109,15 +106,15 @@ public final class PanelAffordanceAnimator extends SecQSImplAnimatorBase {
     public final PanelAffordanceAnimator$configurationListener$1 configurationListener = new ConfigurationController.ConfigurationListener() { // from class: com.android.systemui.qs.animator.PanelAffordanceAnimator$configurationListener$1
         @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
         public final void onConfigChanged(Configuration configuration) {
-            PanelAffordanceAnimator panelAffordanceAnimator = PanelAffordanceAnimator.this;
+            PanelAffordanceAnimator panelAffordanceAnimator = this.this$0;
             if (configuration == null) {
                 AnimHelper.AnimationType[] animationTypeArr = PanelAffordanceAnimator.INIT_PROPERTY_FIELDS;
                 panelAffordanceAnimator.getClass();
                 return;
             }
-            StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(panelAffordanceAnimator.lastOrientation, configuration.orientation, "onConfigChange lastOrientation = ", ", orientation = ", ", isIfNeedReloadView, newConfig = ");
-            m.append(configuration);
-            Log.d("PanelAffordanceAnimator", m.toString());
+            StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(panelAffordanceAnimator.lastOrientation, configuration.orientation, "onConfigChange lastOrientation = ", ", orientation = ", ", isIfNeedReloadView, newConfig = ");
+            sbM.append(configuration);
+            Log.d("PanelAffordanceAnimator", sbM.toString());
             if (panelAffordanceAnimator.lastDensityDpi == configuration.densityDpi && panelAffordanceAnimator.lastOrientation == configuration.orientation && panelAffordanceAnimator.lastLayoutDirection == configuration.getLayoutDirection() && !panelAffordanceAnimator.isIfNeedReloadView) {
                 return;
             }
@@ -133,7 +130,6 @@ public final class PanelAffordanceAnimator extends SecQSImplAnimatorBase {
         }
     };
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
@@ -201,14 +197,14 @@ public final class PanelAffordanceAnimator extends SecQSImplAnimatorBase {
             @Override // com.android.systemui.keyguard.DisplayLifecycle.Observer
             public final void onFolderStateChanged(boolean z) {
                 EmergencyButtonController$$ExternalSyntheticOutline0.m("onFolderStateChanged isOpened = ", "PanelAffordanceAnimator", z);
-                PanelAffordanceAnimator.this.isIfNeedReloadView = true;
+                this.this$0.isIfNeedReloadView = true;
             }
         };
         this.hideGlowRunnable = new Runnable() { // from class: com.android.systemui.qs.animator.PanelAffordanceAnimator$hideGlowRunnable$1
             @Override // java.lang.Runnable
             public final void run() {
                 Log.d("PanelAffordanceAnimator", "hiding waiting 3s");
-                PanelAffordanceAnimator.this.hiding(200);
+                this.this$0.hiding(200);
             }
         };
     }
@@ -263,11 +259,7 @@ public final class PanelAffordanceAnimator extends SecQSImplAnimatorBase {
         animProperty2.setFromValue(translationY);
         animProperty2.setToValue(this.context.getResources().getDimensionPixelSize(R.dimen.qs_affordance_glow_height) * 0.8f);
         animProperty2.setDuration(i);
-        AnimatorSet makeAnimSet = animHelper.makeAnimSet(new AnimHelper.AnimPairSet[]{animPairSet, new AnimHelper.AnimPairSet(view2, animProperty2)}, this.hideAnimList, new AnimHelper.BaseAnimatorListener() { // from class: com.android.systemui.qs.animator.PanelAffordanceAnimator$hiding$3
-            {
-                super("PanelAffordanceAnimator", "Hide", false);
-            }
-
+        AnimatorSet animatorSetMakeAnimSet = animHelper.makeAnimSet(new AnimHelper.AnimPairSet[]{animPairSet, new AnimHelper.AnimPairSet(view2, animProperty2)}, this.hideAnimList, new AnimHelper.BaseAnimatorListener() { // from class: com.android.systemui.qs.animator.PanelAffordanceAnimator.hiding.3
             @Override // com.android.systemui.util.AnimHelper.BaseAnimatorListener, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
                 super.onAnimationEnd(animator);
@@ -276,10 +268,10 @@ public final class PanelAffordanceAnimator extends SecQSImplAnimatorBase {
                 panelAffordanceAnimator.panelOnceFullySlidden = false;
             }
         });
-        this.hideAnimSet = makeAnimSet;
+        this.hideAnimSet = animatorSetMakeAnimSet;
         this.isGlowShowing = false;
-        if (makeAnimSet != null) {
-            makeAnimSet.start();
+        if (animatorSetMakeAnimSet != null) {
+            animatorSetMakeAnimSet.start();
         }
     }
 
@@ -315,8 +307,8 @@ public final class PanelAffordanceAnimator extends SecQSImplAnimatorBase {
             f2 = 0.328f;
         }
         layoutParams.width = (int) (f * f2);
-        layoutParams.height = r2;
-        layoutParams.topMargin = -r2;
+        layoutParams.height = dimensionPixelSize;
+        layoutParams.topMargin = -dimensionPixelSize;
         layoutParams.gravity = this.reversed ? 8388659 : 8388661;
         AnimHelper animHelper = AnimHelper.INSTANCE;
         View[] viewArr = new View[1];
@@ -396,9 +388,9 @@ public final class PanelAffordanceAnimator extends SecQSImplAnimatorBase {
         this.reversed = this.settingsHelper.isPanelSplitReversed();
         ((ConfigurationControllerImpl) this.configurationController).addCallback(this.configurationListener);
         this.qsExpansionStateInteractor.qsStateListener = this.secQSStateListener;
-        IntentFilter m = AppCompatDelegateImpl$AutoBatteryNightModeManager$$ExternalSyntheticOutline0.m("android.intent.action.SCREEN_OFF");
+        IntentFilter intentFilterM = AppCompatDelegateImpl$AutoBatteryNightModeManager$$ExternalSyntheticOutline0.m("android.intent.action.SCREEN_OFF");
         Unit unit = Unit.INSTANCE;
-        BroadcastDispatcher.registerReceiver$default(this.broadcastDispatcher, this.broadcastReceiver, m, null, UserHandle.ALL, 0, null, 48);
+        BroadcastDispatcher.registerReceiver$default(this.broadcastDispatcher, this.broadcastReceiver, intentFilterM, null, UserHandle.ALL, 0, null, 48);
     }
 
     public final void showing() {
@@ -420,11 +412,11 @@ public final class PanelAffordanceAnimator extends SecQSImplAnimatorBase {
         AnimHelper.AnimProperty animProperty2 = SHOW_ANIM_GLOW_TRANSLATION_Y_PROPERTY;
         animProperty2.setFromValue(translationY);
         animProperty2.setToValue(this.context.getResources().getDimensionPixelSize(R.dimen.qs_affordance_glow_height));
-        AnimatorSet makeAnimSet = animHelper.makeAnimSet(new AnimHelper.AnimPairSet[]{animPairSet, new AnimHelper.AnimPairSet(view2, animProperty2)}, this.showAnimList, new AnimHelper.BaseAnimatorListener("PanelAffordanceAnimator", "Show", false));
-        this.showAnimSet = makeAnimSet;
+        AnimatorSet animatorSetMakeAnimSet = animHelper.makeAnimSet(new AnimHelper.AnimPairSet[]{animPairSet, new AnimHelper.AnimPairSet(view2, animProperty2)}, this.showAnimList, new AnimHelper.BaseAnimatorListener("PanelAffordanceAnimator", "Show", false));
+        this.showAnimSet = animatorSetMakeAnimSet;
         this.isGlowShowing = true;
-        if (makeAnimSet != null) {
-            makeAnimSet.start();
+        if (animatorSetMakeAnimSet != null) {
+            animatorSetMakeAnimSet.start();
         }
         this.hideHandler.postDelayed(this.hideGlowRunnable, 2500L);
     }
@@ -434,8 +426,8 @@ public final class PanelAffordanceAnimator extends SecQSImplAnimatorBase {
         if (isThereNoView()) {
             return;
         }
-        boolean isReversed = ((SecPanelSplitHelper) this.secPanelSplitHelper$delegate.getValue()).isReversed();
-        boolean z = isReversed && ((StatusBarStateController) this.statusBarStateController$delegate.getValue()).getState() == 1;
+        boolean zIsReversed = ((SecPanelSplitHelper) this.secPanelSplitHelper$delegate.getValue()).isReversed();
+        boolean z = zIsReversed && ((StatusBarStateController) this.statusBarStateController$delegate.getValue()).getState() == 1;
         boolean z2 = !z ? i != 0 : i != 1;
         int i2 = this.targetState;
         if (i2 != i) {
@@ -447,7 +439,7 @@ public final class PanelAffordanceAnimator extends SecQSImplAnimatorBase {
         if (f == 0.0f) {
             clearAnimationState();
         } else if (f == 1.0f) {
-            if (isReversed) {
+            if (zIsReversed) {
                 int i3 = this.mPanelState;
                 if ((i3 == 0 && i == 1 && this.targetState == 1) || (i3 == 0 && i == 0 && this.targetState == 0)) {
                     this.panelOnceFullySlidden = true;

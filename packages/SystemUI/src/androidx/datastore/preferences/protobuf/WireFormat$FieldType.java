@@ -10,7 +10,6 @@ jadx.core.utils.exceptions.JadxRuntimeException: Init of enum field 'INT64' uses
 	at jadx.core.dex.visitors.EnumVisitor.visit(EnumVisitor.java:100)
  */
 /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public class WireFormat$FieldType {
     public static final /* synthetic */ WireFormat$FieldType[] $VALUES;

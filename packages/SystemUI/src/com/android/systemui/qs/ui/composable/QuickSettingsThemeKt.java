@@ -1,76 +1,89 @@
 package com.android.systemui.qs.ui.composable;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+import android.content.Context;
+import android.view.ContextThemeWrapper;
+import androidx.compose.runtime.Composer;
+import androidx.compose.runtime.ComposerImpl;
+import androidx.compose.runtime.ComposerKt;
+import androidx.compose.runtime.CompositionLocalKt;
+import androidx.compose.runtime.RecomposeScopeImpl;
+import androidx.compose.runtime.RecomposeScopeImplKt;
+import androidx.compose.runtime.StaticProvidableCompositionLocal;
+import androidx.compose.runtime.internal.ComposableLambdaImpl;
+import androidx.compose.runtime.internal.ComposableLambdaKt;
+import androidx.compose.ui.platform.AndroidCompositionLocals_androidKt;
+import com.android.systemui.R;
+import kotlin.Unit;
+import kotlin.jvm.functions.Function2;
+
 /* loaded from: classes2.dex */
 public abstract class QuickSettingsThemeKt {
-    /* JADX WARN: Code restructure failed: missing block: B:18:0x0042, code lost:
-    
-        if (r3 == androidx.compose.runtime.Composer.Companion.Empty) goto L15;
-     */
+    /* JADX WARN: Removed duplicated region for block: B:15:0x0044  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static final void QuickSettingsTheme(final androidx.compose.runtime.internal.ComposableLambdaImpl r4, androidx.compose.runtime.Composer r5, final int r6) {
-        /*
-            androidx.compose.runtime.ComposerImpl r5 = (androidx.compose.runtime.ComposerImpl) r5
-            r0 = 500179343(0x1dd0218f, float:5.509184E-21)
-            r5.startRestartGroup(r0)
-            r0 = r6 & 3
-            r1 = 2
-            if (r0 != r1) goto L18
-            boolean r0 = r5.getSkipping()
-            if (r0 != 0) goto L14
-            goto L18
-        L14:
-            r5.skipToGroupEnd()
-            goto L73
-        L18:
-            boolean r0 = androidx.compose.runtime.ComposerKt.isTraceInProgress()
-            if (r0 == 0) goto L23
-            java.lang.String r0 = "com.android.systemui.qs.ui.composable.QuickSettingsTheme (QuickSettingsTheme.kt:26)"
-            androidx.compose.runtime.ComposerKt.traceEventStart(r0)
-        L23:
-            androidx.compose.runtime.StaticProvidableCompositionLocal r0 = androidx.compose.ui.platform.AndroidCompositionLocals_androidKt.LocalContext
-            java.lang.Object r1 = r5.consume(r0)
-            android.content.Context r1 = (android.content.Context) r1
-            r2 = 792583397(0x2f3ddce5, float:1.7267927E-10)
-            r5.startReplaceGroup(r2)
-            boolean r2 = r5.changed(r1)
-            java.lang.Object r3 = r5.rememberedValue()
-            if (r2 != 0) goto L44
-            androidx.compose.runtime.Composer$Companion r2 = androidx.compose.runtime.Composer.Companion
-            r2.getClass()
-            androidx.compose.runtime.Composer$Companion$Empty$1 r2 = androidx.compose.runtime.Composer.Companion.Empty
-            if (r3 != r2) goto L4f
-        L44:
-            android.view.ContextThemeWrapper r3 = new android.view.ContextThemeWrapper
-            r2 = 2132018953(0x7f140709, float:1.9676227E38)
-            r3.<init>(r1, r2)
-            r5.updateRememberedValue(r3)
-        L4f:
-            android.view.ContextThemeWrapper r3 = (android.view.ContextThemeWrapper) r3
-            r1 = 0
-            r5.end(r1)
-            androidx.compose.runtime.ProvidedValue r0 = r0.defaultProvidedValue$runtime_release(r3)
-            com.android.systemui.qs.ui.composable.QuickSettingsThemeKt$QuickSettingsTheme$1 r1 = new com.android.systemui.qs.ui.composable.QuickSettingsThemeKt$QuickSettingsTheme$1
-            r1.<init>()
-            r2 = -980863793(0xffffffffc58934cf, float:-4390.601)
-            androidx.compose.runtime.internal.ComposableLambdaImpl r1 = androidx.compose.runtime.internal.ComposableLambdaKt.rememberComposableLambda(r2, r1, r5)
-            r2 = 56
-            androidx.compose.runtime.CompositionLocalKt.CompositionLocalProvider(r0, r1, r5, r2)
-            boolean r0 = androidx.compose.runtime.ComposerKt.isTraceInProgress()
-            if (r0 == 0) goto L73
-            androidx.compose.runtime.ComposerKt.traceEventEnd()
-        L73:
-            androidx.compose.runtime.RecomposeScopeImpl r5 = r5.endRestartGroup()
-            if (r5 == 0) goto L80
-            com.android.systemui.qs.ui.composable.QuickSettingsThemeKt$$ExternalSyntheticLambda0 r0 = new com.android.systemui.qs.ui.composable.QuickSettingsThemeKt$$ExternalSyntheticLambda0
-            r0.<init>(r6)
-            r5.block = r0
-        L80:
-            return
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.qs.ui.composable.QuickSettingsThemeKt.QuickSettingsTheme(androidx.compose.runtime.internal.ComposableLambdaImpl, androidx.compose.runtime.Composer, int):void");
+    public static final void QuickSettingsTheme(final ComposableLambdaImpl composableLambdaImpl, Composer composer, final int i) {
+        ComposerImpl composerImpl = (ComposerImpl) composer;
+        composerImpl.startRestartGroup(500179343);
+        if ((i & 3) == 2 && composerImpl.getSkipping()) {
+            composerImpl.skipToGroupEnd();
+        } else {
+            if (ComposerKt.isTraceInProgress()) {
+                ComposerKt.traceEventStart("com.android.systemui.qs.ui.composable.QuickSettingsTheme (QuickSettingsTheme.kt:26)");
+            }
+            StaticProvidableCompositionLocal staticProvidableCompositionLocal = AndroidCompositionLocals_androidKt.LocalContext;
+            Context context = (Context) composerImpl.consume(staticProvidableCompositionLocal);
+            composerImpl.startReplaceGroup(792583397);
+            boolean zChanged = composerImpl.changed(context);
+            Object objRememberedValue = composerImpl.rememberedValue();
+            if (!zChanged) {
+                Composer.Companion.getClass();
+                if (objRememberedValue == Composer.Companion.Empty) {
+                    objRememberedValue = new ContextThemeWrapper(context, R.style.Theme_SystemUI_QuickSettings);
+                    composerImpl.updateRememberedValue(objRememberedValue);
+                }
+                composerImpl.end(false);
+                CompositionLocalKt.CompositionLocalProvider(staticProvidableCompositionLocal.defaultProvidedValue$runtime_release((ContextThemeWrapper) objRememberedValue), ComposableLambdaKt.rememberComposableLambda(-980863793, new Function2() { // from class: com.android.systemui.qs.ui.composable.QuickSettingsThemeKt.QuickSettingsTheme.1
+                    /* JADX WARN: Removed duplicated region for block: B:8:0x001b  */
+                    @Override // kotlin.jvm.functions.Function2
+                    /*
+                        Code decompiled incorrectly, please refer to instructions dump.
+                    */
+                    public final Object invoke(Object obj, Object obj2) {
+                        Composer composer2 = (Composer) obj;
+                        if ((((Number) obj2).intValue() & 3) == 2) {
+                            ComposerImpl composerImpl2 = (ComposerImpl) composer2;
+                            if (composerImpl2.getSkipping()) {
+                                composerImpl2.skipToGroupEnd();
+                            } else {
+                                if (ComposerKt.isTraceInProgress()) {
+                                    ComposerKt.traceEventStart("com.android.systemui.qs.ui.composable.QuickSettingsTheme.<anonymous> (QuickSettingsTheme.kt:30)");
+                                }
+                                composableLambdaImpl.invoke(composer2, 0);
+                                if (ComposerKt.isTraceInProgress()) {
+                                    ComposerKt.traceEventEnd();
+                                }
+                            }
+                        }
+                        return Unit.INSTANCE;
+                    }
+                }, composerImpl), composerImpl, 56);
+                if (ComposerKt.isTraceInProgress()) {
+                    ComposerKt.traceEventEnd();
+                }
+            }
+        }
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new Function2(i) { // from class: com.android.systemui.qs.ui.composable.QuickSettingsThemeKt$$ExternalSyntheticLambda0
+                @Override // kotlin.jvm.functions.Function2
+                public final Object invoke(Object obj, Object obj2) {
+                    ((Integer) obj2).getClass();
+                    int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(7);
+                    QuickSettingsThemeKt.QuickSettingsTheme(this.f$0, (Composer) obj, iUpdateChangedFlags);
+                    return Unit.INSTANCE;
+                }
+            };
+        }
     }
 }

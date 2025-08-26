@@ -1,20 +1,26 @@
 package com.google.android.setupdesign.items;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewOutlineProvider;
 import androidx.recyclerview.widget.RecyclerView;
 import com.android.keyguard.KeyguardSecurityContainer$UserSwitcherViewMode$2$$ExternalSyntheticOutline0;
+import com.android.systemui.R;
 import com.google.android.setupcompat.partnerconfig.PartnerConfig;
 import com.google.android.setupcompat.partnerconfig.PartnerConfigHelper;
 import com.google.android.setupdesign.R$styleable;
+import com.google.android.setupdesign.util.PartnerStyleHelper;
+import com.google.android.setupdesign.view.HeaderRecyclerView;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class RecyclerItemAdapter extends RecyclerView.Adapter {
     public final boolean applyPartnerHeavyThemeResource;
@@ -22,7 +28,6 @@ public class RecyclerItemAdapter extends RecyclerView.Adapter {
     public RecyclerView recyclerView;
     public final boolean useFullDynamicColor;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     class PatchedLayerDrawable extends LayerDrawable {
         public PatchedLayerDrawable(Drawable[] drawableArr) {
             super(drawableArr);
@@ -74,45 +79,141 @@ public class RecyclerItemAdapter extends RecyclerView.Adapter {
         return false;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:21:0x011b  */
+    /* JADX WARN: Removed duplicated region for block: B:28:0x011b  */
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void onBindViewHolder(androidx.recyclerview.widget.RecyclerView.ViewHolder r12, int r13) {
-        /*
-            Method dump skipped, instructions count: 472
-            To view this dump change 'Code comments level' option to 'DEBUG'
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.google.android.setupdesign.items.RecyclerItemAdapter.onBindViewHolder(androidx.recyclerview.widget.RecyclerView$ViewHolder, int):void");
+    public final void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int i) throws Resources.NotFoundException {
+        Drawable drawable;
+        float f;
+        ItemViewHolder itemViewHolder = (ItemViewHolder) viewHolder;
+        AbstractItem item = getItem();
+        boolean zIsEnabled = item.isEnabled();
+        itemViewHolder.isEnabled = zIsEnabled;
+        itemViewHolder.itemView.setClickable(zIsEnabled);
+        itemViewHolder.itemView.setEnabled(zIsEnabled);
+        itemViewHolder.itemView.setFocusable(zIsEnabled);
+        itemViewHolder.item = item;
+        if (!itemViewHolder.isRecyclable()) {
+            itemViewHolder.setIsRecyclable(true);
+        }
+        if (PartnerConfigHelper.isGlifExpressiveEnabled(itemViewHolder.itemView.getContext())) {
+            View view = itemViewHolder.itemView;
+            if (!"noBackground".equals(view.getTag())) {
+                getItem();
+                float dimension = PartnerConfigHelper.get(view.getContext()).getDimension(view.getContext(), PartnerConfig.CONFIG_ITEMS_GROUP_CORNER_RADIUS, 0.0f);
+                TypedArray typedArrayObtainStyledAttributes = view.getContext().getTheme().obtainStyledAttributes(new int[]{R.attr.sudItemCornerRadius});
+                float dimension2 = typedArrayObtainStyledAttributes.getDimension(0, 0.0f);
+                typedArrayObtainStyledAttributes.recycle();
+                Drawable background = view.getBackground();
+                if (background instanceof LayerDrawable) {
+                    LayerDrawable layerDrawable = (LayerDrawable) background;
+                    if (layerDrawable.getNumberOfLayers() >= 2) {
+                        Drawable drawable2 = layerDrawable.getDrawable(1);
+                        if (i != 0) {
+                            getItem();
+                        } else {
+                            if (isLastItemOfGroup(i)) {
+                                Context context = view.getContext();
+                                getItem();
+                                TypedArray typedArrayObtainStyledAttributes2 = context.getTheme().obtainStyledAttributes(new int[]{R.attr.sudItemBackgroundSingle});
+                                drawable = typedArrayObtainStyledAttributes2.getDrawable(0);
+                                typedArrayObtainStyledAttributes2.recycle();
+                            }
+                            if (drawable instanceof GradientDrawable) {
+                                if (i != 0) {
+                                    getItem();
+                                    f = dimension2;
+                                } else {
+                                    f = dimension;
+                                }
+                                if (!isLastItemOfGroup(i)) {
+                                    dimension = dimension2;
+                                }
+                                GradientDrawable gradientDrawable = (GradientDrawable) drawable;
+                                gradientDrawable.setCornerRadii(new float[]{f, f, f, f, dimension, dimension, dimension, dimension});
+                                view.setBackgroundDrawable(new PatchedLayerDrawable(new Drawable[]{gradientDrawable, drawable2}));
+                                view.setClipToOutline(true);
+                                view.setOutlineProvider(ViewOutlineProvider.BACKGROUND);
+                            }
+                        }
+                        if (i != 0) {
+                            getItem();
+                            if (isLastItemOfGroup(i)) {
+                                Context context2 = view.getContext();
+                                getItem();
+                                TypedArray typedArrayObtainStyledAttributes3 = context2.getTheme().obtainStyledAttributes(new int[]{R.attr.sudItemBackgroundLast});
+                                drawable = typedArrayObtainStyledAttributes3.getDrawable(0);
+                                typedArrayObtainStyledAttributes3.recycle();
+                            } else {
+                                Context context3 = view.getContext();
+                                getItem();
+                                TypedArray typedArrayObtainStyledAttributes4 = context3.getTheme().obtainStyledAttributes(new int[]{R.attr.sudItemBackground});
+                                drawable = typedArrayObtainStyledAttributes4.getDrawable(0);
+                                typedArrayObtainStyledAttributes4.recycle();
+                            }
+                        } else {
+                            Context context4 = view.getContext();
+                            getItem();
+                            TypedArray typedArrayObtainStyledAttributes5 = context4.getTheme().obtainStyledAttributes(new int[]{R.attr.sudItemBackgroundFirst});
+                            drawable = typedArrayObtainStyledAttributes5.getDrawable(0);
+                            typedArrayObtainStyledAttributes5.recycle();
+                        }
+                        if (drawable instanceof GradientDrawable) {
+                        }
+                    }
+                }
+            }
+            View view2 = itemViewHolder.itemView;
+            RecyclerView recyclerView = this.recyclerView;
+            if (recyclerView instanceof HeaderRecyclerView ? ((HeaderRecyclerView) recyclerView).shouldApplyAdditionalMargin : false) {
+                Context context5 = view2.getContext();
+                PartnerConfigHelper partnerConfigHelper = PartnerConfigHelper.get(context5);
+                PartnerConfig partnerConfig = PartnerConfig.CONFIG_LAYOUT_MARGIN_START;
+                boolean zIsPartnerConfigAvailable = partnerConfigHelper.isPartnerConfigAvailable(partnerConfig);
+                PartnerConfigHelper partnerConfigHelper2 = PartnerConfigHelper.get(context5);
+                PartnerConfig partnerConfig2 = PartnerConfig.CONFIG_LAYOUT_MARGIN_END;
+                boolean zIsPartnerConfigAvailable2 = partnerConfigHelper2.isPartnerConfigAvailable(partnerConfig2);
+                if (PartnerStyleHelper.shouldApplyPartnerResource(view2) && ((zIsPartnerConfigAvailable || zIsPartnerConfigAvailable2) && (view2.getLayoutParams() instanceof ViewGroup.MarginLayoutParams))) {
+                    ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) view2.getLayoutParams();
+                    marginLayoutParams.setMargins(zIsPartnerConfigAvailable ? (int) PartnerConfigHelper.get(context5).getDimension(context5, partnerConfig, 0.0f) : marginLayoutParams.leftMargin, marginLayoutParams.topMargin, zIsPartnerConfigAvailable2 ? (int) PartnerConfigHelper.get(context5).getDimension(context5, partnerConfig2, 0.0f) : marginLayoutParams.rightMargin, marginLayoutParams.bottomMargin);
+                }
+            } else {
+                ViewGroup.MarginLayoutParams marginLayoutParams2 = (ViewGroup.MarginLayoutParams) view2.getLayoutParams();
+                marginLayoutParams2.setMarginStart(0);
+                marginLayoutParams2.setMarginEnd(0);
+                view2.setLayoutParams(marginLayoutParams2);
+            }
+        }
+        item.onBindView(itemViewHolder.itemView);
     }
 
     @Override // androidx.recyclerview.widget.RecyclerView.Adapter
     public final RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         Drawable background;
-        View m = KeyguardSecurityContainer$UserSwitcherViewMode$2$$ExternalSyntheticOutline0.m(viewGroup, i, viewGroup, false);
-        final ItemViewHolder itemViewHolder = new ItemViewHolder(m);
-        if (!"noBackground".equals(m.getTag())) {
-            TypedArray obtainStyledAttributes = viewGroup.getContext().obtainStyledAttributes(R$styleable.SudRecyclerItemAdapter);
-            Drawable drawable = obtainStyledAttributes.getDrawable(1);
+        View viewM = KeyguardSecurityContainer$UserSwitcherViewMode$2$$ExternalSyntheticOutline0.m(viewGroup, i, viewGroup, false);
+        final ItemViewHolder itemViewHolder = new ItemViewHolder(viewM);
+        if (!"noBackground".equals(viewM.getTag())) {
+            TypedArray typedArrayObtainStyledAttributes = viewGroup.getContext().obtainStyledAttributes(R$styleable.SudRecyclerItemAdapter);
+            Drawable drawable = typedArrayObtainStyledAttributes.getDrawable(1);
             if (drawable == null) {
-                drawable = obtainStyledAttributes.getDrawable(2);
+                drawable = typedArrayObtainStyledAttributes.getDrawable(2);
                 background = null;
             } else {
-                background = m.getBackground();
+                background = viewM.getBackground();
                 if (background == null) {
-                    background = (!this.applyPartnerHeavyThemeResource || this.useFullDynamicColor) ? obtainStyledAttributes.getDrawable(0) : new ColorDrawable(PartnerConfigHelper.get(m.getContext()).getColor(m.getContext(), PartnerConfig.CONFIG_LAYOUT_BACKGROUND_COLOR));
+                    background = (!this.applyPartnerHeavyThemeResource || this.useFullDynamicColor) ? typedArrayObtainStyledAttributes.getDrawable(0) : new ColorDrawable(PartnerConfigHelper.get(viewM.getContext()).getColor(viewM.getContext(), PartnerConfig.CONFIG_LAYOUT_BACKGROUND_COLOR));
                 }
             }
             if (drawable == null || background == null) {
                 Log.e("RecyclerItemAdapter", "Cannot resolve required attributes. selectableItemBackground=" + drawable + " background=" + background);
             } else {
-                m.setBackgroundDrawable(new PatchedLayerDrawable(new Drawable[]{background, drawable}));
+                viewM.setBackgroundDrawable(new PatchedLayerDrawable(new Drawable[]{background, drawable}));
             }
-            obtainStyledAttributes.recycle();
+            typedArrayObtainStyledAttributes.recycle();
         }
-        m.setOnClickListener(new View.OnClickListener() { // from class: com.google.android.setupdesign.items.RecyclerItemAdapter.1
+        viewM.setOnClickListener(new View.OnClickListener() { // from class: com.google.android.setupdesign.items.RecyclerItemAdapter.1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
                 AbstractItem abstractItem = itemViewHolder.item;

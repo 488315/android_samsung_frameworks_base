@@ -56,6 +56,11 @@ public interface IMediaProjection extends IInterface {
         }
 
         @Override // android.media.projection.IMediaProjection
+        public boolean isRecordingOverlay() throws RemoteException {
+            return false;
+        }
+
+        @Override // android.media.projection.IMediaProjection
         public boolean isValid() throws RemoteException {
             return false;
         }
@@ -70,6 +75,10 @@ public interface IMediaProjection extends IInterface {
 
         @Override // android.media.projection.IMediaProjection
         public void setLaunchCookie(ActivityOptions.LaunchCookie launchCookie) throws RemoteException {
+        }
+
+        @Override // android.media.projection.IMediaProjection
+        public void setRecordingOverlay(boolean z) throws RemoteException {
         }
 
         @Override // android.media.projection.IMediaProjection
@@ -103,6 +112,8 @@ public interface IMediaProjection extends IInterface {
 
     int getTaskId() throws RemoteException;
 
+    boolean isRecordingOverlay() throws RemoteException;
+
     boolean isValid() throws RemoteException;
 
     void notifyVirtualDisplayCreated(int i) throws RemoteException;
@@ -110,6 +121,8 @@ public interface IMediaProjection extends IInterface {
     void registerCallback(IMediaProjectionCallback iMediaProjectionCallback) throws RemoteException;
 
     void setLaunchCookie(ActivityOptions.LaunchCookie launchCookie) throws RemoteException;
+
+    void setRecordingOverlay(boolean z) throws RemoteException;
 
     void setTaskId(int i) throws RemoteException;
 
@@ -125,14 +138,16 @@ public interface IMediaProjection extends IInterface {
         static final int TRANSACTION_canProjectAudio = 3;
         static final int TRANSACTION_canProjectSecureVideo = 5;
         static final int TRANSACTION_canProjectVideo = 4;
-        static final int TRANSACTION_getDisplayId = 11;
+        static final int TRANSACTION_getDisplayId = 12;
         static final int TRANSACTION_getLaunchCookie = 9;
         static final int TRANSACTION_getTaskId = 10;
-        static final int TRANSACTION_isValid = 14;
-        static final int TRANSACTION_notifyVirtualDisplayCreated = 15;
+        static final int TRANSACTION_isRecordingOverlay = 11;
+        static final int TRANSACTION_isValid = 16;
+        static final int TRANSACTION_notifyVirtualDisplayCreated = 17;
         static final int TRANSACTION_registerCallback = 7;
-        static final int TRANSACTION_setLaunchCookie = 12;
-        static final int TRANSACTION_setTaskId = 13;
+        static final int TRANSACTION_setLaunchCookie = 13;
+        static final int TRANSACTION_setRecordingOverlay = 15;
+        static final int TRANSACTION_setTaskId = 14;
         static final int TRANSACTION_start = 1;
         static final int TRANSACTION_stop = 2;
         static final int TRANSACTION_unregisterCallback = 8;
@@ -145,7 +160,7 @@ public interface IMediaProjection extends IInterface {
 
         @Override // android.os.Binder
         public int getMaxTransactionId() {
-            return 14;
+            return 16;
         }
 
         public Stub(PermissionEnforcer permissionEnforcer) {
@@ -165,9 +180,9 @@ public interface IMediaProjection extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IMediaProjection)) {
-                return (IMediaProjection) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IMediaProjection)) {
+                return (IMediaProjection) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -195,14 +210,18 @@ public interface IMediaProjection extends IInterface {
                 case 10:
                     return "getTaskId";
                 case 11:
-                    return "getDisplayId";
+                    return "isRecordingOverlay";
                 case 12:
-                    return "setLaunchCookie";
+                    return "getDisplayId";
                 case 13:
-                    return "setTaskId";
+                    return "setLaunchCookie";
                 case 14:
-                    return "isValid";
+                    return "setTaskId";
                 case 15:
+                    return "setRecordingOverlay";
+                case 16:
+                    return "isValid";
+                case 17:
                     return "notifyVirtualDisplayCreated";
                 default:
                     return null;
@@ -225,49 +244,49 @@ public interface IMediaProjection extends IInterface {
             }
             switch (i) {
                 case 1:
-                    IMediaProjectionCallback asInterface = IMediaProjectionCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IMediaProjectionCallback iMediaProjectionCallbackAsInterface = IMediaProjectionCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    start(asInterface);
+                    start(iMediaProjectionCallbackAsInterface);
                     parcel2.writeNoException();
                     return true;
                 case 2:
-                    int readInt = parcel.readInt();
+                    int i3 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    stop(readInt);
+                    stop(i3);
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    boolean canProjectAudio = canProjectAudio();
+                    boolean zCanProjectAudio = canProjectAudio();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(canProjectAudio);
+                    parcel2.writeBoolean(zCanProjectAudio);
                     return true;
                 case 4:
-                    boolean canProjectVideo = canProjectVideo();
+                    boolean zCanProjectVideo = canProjectVideo();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(canProjectVideo);
+                    parcel2.writeBoolean(zCanProjectVideo);
                     return true;
                 case 5:
-                    boolean canProjectSecureVideo = canProjectSecureVideo();
+                    boolean zCanProjectSecureVideo = canProjectSecureVideo();
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(canProjectSecureVideo);
+                    parcel2.writeBoolean(zCanProjectSecureVideo);
                     return true;
                 case 6:
-                    int readInt2 = parcel.readInt();
+                    int i4 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    int applyVirtualDisplayFlags = applyVirtualDisplayFlags(readInt2);
+                    int iApplyVirtualDisplayFlags = applyVirtualDisplayFlags(i4);
                     parcel2.writeNoException();
-                    parcel2.writeInt(applyVirtualDisplayFlags);
+                    parcel2.writeInt(iApplyVirtualDisplayFlags);
                     return true;
                 case 7:
-                    IMediaProjectionCallback asInterface2 = IMediaProjectionCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IMediaProjectionCallback iMediaProjectionCallbackAsInterface2 = IMediaProjectionCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    registerCallback(asInterface2);
+                    registerCallback(iMediaProjectionCallbackAsInterface2);
                     parcel2.writeNoException();
                     return true;
                 case 8:
-                    IMediaProjectionCallback asInterface3 = IMediaProjectionCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IMediaProjectionCallback iMediaProjectionCallbackAsInterface3 = IMediaProjectionCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
-                    unregisterCallback(asInterface3);
+                    unregisterCallback(iMediaProjectionCallbackAsInterface3);
                     parcel2.writeNoException();
                     return true;
                 case 9:
@@ -281,31 +300,42 @@ public interface IMediaProjection extends IInterface {
                     parcel2.writeInt(taskId);
                     return true;
                 case 11:
+                    boolean zIsRecordingOverlay = isRecordingOverlay();
+                    parcel2.writeNoException();
+                    parcel2.writeBoolean(zIsRecordingOverlay);
+                    return true;
+                case 12:
                     int displayId = getDisplayId();
                     parcel2.writeNoException();
                     parcel2.writeInt(displayId);
                     return true;
-                case 12:
+                case 13:
                     ActivityOptions.LaunchCookie launchCookie2 = (ActivityOptions.LaunchCookie) parcel.readTypedObject(ActivityOptions.LaunchCookie.CREATOR);
                     parcel.enforceNoDataAvail();
                     setLaunchCookie(launchCookie2);
                     parcel2.writeNoException();
                     return true;
-                case 13:
-                    int readInt3 = parcel.readInt();
-                    parcel.enforceNoDataAvail();
-                    setTaskId(readInt3);
-                    parcel2.writeNoException();
-                    return true;
                 case 14:
-                    boolean isValid = isValid();
+                    int i5 = parcel.readInt();
+                    parcel.enforceNoDataAvail();
+                    setTaskId(i5);
                     parcel2.writeNoException();
-                    parcel2.writeBoolean(isValid);
                     return true;
                 case 15:
-                    int readInt4 = parcel.readInt();
+                    boolean z = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    notifyVirtualDisplayCreated(readInt4);
+                    setRecordingOverlay(z);
+                    parcel2.writeNoException();
+                    return true;
+                case 16:
+                    boolean zIsValid = isValid();
+                    parcel2.writeNoException();
+                    parcel2.writeBoolean(zIsValid);
+                    return true;
+                case 17:
+                    int i6 = parcel.readInt();
+                    parcel.enforceNoDataAvail();
+                    notifyVirtualDisplayCreated(i6);
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -331,227 +361,257 @@ public interface IMediaProjection extends IInterface {
 
             @Override // android.media.projection.IMediaProjection
             public void start(IMediaProjectionCallback iMediaProjectionCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iMediaProjectionCallback);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iMediaProjectionCallback);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.projection.IMediaProjection
             public void stop(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(2, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(2, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.projection.IMediaProjection
             public boolean canProjectAudio() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(3, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.projection.IMediaProjection
             public boolean canProjectVideo() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.projection.IMediaProjection
             public boolean canProjectSecureVideo() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(5, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(5, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.projection.IMediaProjection
             public int applyVirtualDisplayFlags(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(6, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(6, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.projection.IMediaProjection
             public void registerCallback(IMediaProjectionCallback iMediaProjectionCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iMediaProjectionCallback);
-                    this.mRemote.transact(7, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iMediaProjectionCallback);
+                    this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.projection.IMediaProjection
             public void unregisterCallback(IMediaProjectionCallback iMediaProjectionCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeStrongInterface(iMediaProjectionCallback);
-                    this.mRemote.transact(8, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeStrongInterface(iMediaProjectionCallback);
+                    this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.projection.IMediaProjection
             public ActivityOptions.LaunchCookie getLaunchCookie() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(9, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (ActivityOptions.LaunchCookie) obtain2.readTypedObject(ActivityOptions.LaunchCookie.CREATOR);
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (ActivityOptions.LaunchCookie) parcelObtain2.readTypedObject(ActivityOptions.LaunchCookie.CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.projection.IMediaProjection
             public int getTaskId() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(10, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
+                }
+            }
+
+            @Override // android.media.projection.IMediaProjection
+            public boolean isRecordingOverlay() throws RemoteException {
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
+                try {
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(11, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
+                } finally {
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.projection.IMediaProjection
             public int getDisplayId() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(11, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readInt();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(12, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readInt();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.projection.IMediaProjection
             public void setLaunchCookie(ActivityOptions.LaunchCookie launchCookie) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeTypedObject(launchCookie, 0);
-                    this.mRemote.transact(12, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeTypedObject(launchCookie, 0);
+                    this.mRemote.transact(13, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.projection.IMediaProjection
             public void setTaskId(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(13, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(14, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
+                }
+            }
+
+            @Override // android.media.projection.IMediaProjection
+            public void setRecordingOverlay(boolean z) throws RemoteException {
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
+                try {
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(15, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                } finally {
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.projection.IMediaProjection
             public boolean isValid() throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    this.mRemote.transact(14, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return obtain2.readBoolean();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(16, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return parcelObtain2.readBoolean();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.media.projection.IMediaProjection
             public void notifyVirtualDisplayCreated(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(15, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(17, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }
@@ -568,11 +628,19 @@ public interface IMediaProjection extends IInterface {
             this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_MEDIA_PROJECTION, getCallingPid(), getCallingUid());
         }
 
+        protected void isRecordingOverlay_enforcePermission() throws SecurityException {
+            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_MEDIA_PROJECTION, getCallingPid(), getCallingUid());
+        }
+
         protected void setLaunchCookie_enforcePermission() throws SecurityException {
             this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_MEDIA_PROJECTION, getCallingPid(), getCallingUid());
         }
 
         protected void setTaskId_enforcePermission() throws SecurityException {
+            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_MEDIA_PROJECTION, getCallingPid(), getCallingUid());
+        }
+
+        protected void setRecordingOverlay_enforcePermission() throws SecurityException {
             this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_MEDIA_PROJECTION, getCallingPid(), getCallingUid());
         }
 

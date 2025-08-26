@@ -12,7 +12,6 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.flow.EmptyFlow;
 import kotlinx.coroutines.flow.Flow;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 final class MobileIconsInteractorKairosAdapter$getMobileConnectionInteractorForSubId$1$latest$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ Function1 $block;
@@ -48,6 +47,6 @@ final class MobileIconsInteractorKairosAdapter$getMobileConnectionInteractorForS
         }
         ResultKt.throwOnFailure(obj);
         MobileIconInteractor mobileIconInteractor = (MobileIconInteractor) CommunalWidgetRepositoryLocalImpl$restoreWidgets$1$$ExternalSyntheticOutline0.m(this.$subId, (Map) this.L$0);
-        return (mobileIconInteractor == null || (flow = (Flow) this.$block.mo779invoke(mobileIconInteractor)) == null) ? EmptyFlow.INSTANCE : flow;
+        return (mobileIconInteractor == null || (flow = (Flow) this.$block.mo781invoke(mobileIconInteractor)) == null) ? EmptyFlow.INSTANCE : flow;
     }
 }

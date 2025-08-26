@@ -13,12 +13,12 @@ class SmartClipDataRootElement extends SmartClipDataElementImpl {
     public String collectPlainTextTag() {
         StringBuilder sb = new StringBuilder();
         Rect rect = new Rect();
-        SmartClipDataElementImpl smartClipDataElementImpl = this;
-        while (smartClipDataElementImpl != null) {
+        SmartClipDataElementImpl smartClipDataElementImplTraverseNextElement = this;
+        while (smartClipDataElementImplTraverseNextElement != null) {
             StringBuilder sb2 = new StringBuilder();
-            SemSmartClipMetaTagArray tags = smartClipDataElementImpl.getTags(SemSmartClipMetaTagType.PLAIN_TEXT);
+            SemSmartClipMetaTagArray tags = smartClipDataElementImplTraverseNextElement.getTags(SemSmartClipMetaTagType.PLAIN_TEXT);
             int size = tags.size();
-            Rect metaAreaRect = smartClipDataElementImpl.getMetaAreaRect();
+            Rect metaAreaRect = smartClipDataElementImplTraverseNextElement.getMetaAreaRect();
             for (int i = 0; i < size; i++) {
                 String value = tags.get(i).getValue();
                 if (value != null && !TextUtils.isEmpty(value)) {
@@ -36,12 +36,12 @@ class SmartClipDataRootElement extends SmartClipDataElementImpl {
                     rect = metaAreaRect;
                 }
             }
-            smartClipDataElementImpl = smartClipDataElementImpl.traverseNextElement(this);
+            smartClipDataElementImplTraverseNextElement = smartClipDataElementImplTraverseNextElement.traverseNextElement(this);
         }
-        String trim = sb.toString().trim();
-        if (TextUtils.isEmpty(trim)) {
+        String strTrim = sb.toString().trim();
+        if (TextUtils.isEmpty(strTrim)) {
             return null;
         }
-        return trim;
+        return strTrim;
     }
 }

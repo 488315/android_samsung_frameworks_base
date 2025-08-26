@@ -91,14 +91,14 @@ public final class AuthenticationSucceededInfo implements Parcelable {
     AuthenticationSucceededInfo(Parcel parcel) {
         boolean z = (parcel.readByte() & 4) != 0;
         BiometricSourceType biometricSourceType = (BiometricSourceType) parcel.readTypedObject(BiometricSourceType.CREATOR);
-        int readInt = parcel.readInt();
-        int readInt2 = parcel.readInt();
+        int i = parcel.readInt();
+        int i2 = parcel.readInt();
         this.mBiometricSourceType = biometricSourceType;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) biometricSourceType);
-        this.mRequestReason = readInt;
-        AnnotationValidations.validate((Class<? extends Annotation>) BiometricRequestConstants.RequestReason.class, (Annotation) null, readInt);
+        this.mRequestReason = i;
+        AnnotationValidations.validate((Class<? extends Annotation>) BiometricRequestConstants.RequestReason.class, (Annotation) null, i);
         this.mIsStrongBiometric = z;
-        this.mUserId = readInt2;
+        this.mUserId = i2;
     }
 
     public static final class Builder {

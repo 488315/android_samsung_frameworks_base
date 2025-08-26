@@ -6,7 +6,6 @@ import com.android.systemui.BasicRune;
 import com.samsung.systemui.splugins.volume.VolumePanelValues;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class SoundPoolWrapper {
     public static final String[] HOME_HUB_FILES;
@@ -17,7 +16,6 @@ public final class SoundPoolWrapper {
     public final int[] soundIDs;
     public SoundPool soundPool;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();

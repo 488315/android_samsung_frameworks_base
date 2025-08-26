@@ -4,7 +4,6 @@ import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.FunctionReferenceImpl;
 import kotlinx.coroutines.channels.ChannelResult;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 final /* synthetic */ class BufferedChannel$onReceiveCatching$2 extends FunctionReferenceImpl implements Function3 {
     public static final BufferedChannel$onReceiveCatching$2 INSTANCE = new BufferedChannel$onReceiveCatching$2();
@@ -21,10 +20,10 @@ final /* synthetic */ class BufferedChannel$onReceiveCatching$2 extends Function
             ChannelResult.Companion companion = ChannelResult.Companion;
             Throwable closeCause = bufferedChannel.getCloseCause();
             companion.getClass();
-            obj3 = ChannelResult.Companion.m3460closedJP2dKIU(closeCause);
+            obj3 = ChannelResult.Companion.m3480closedJP2dKIU(closeCause);
         } else {
             ChannelResult.Companion.getClass();
         }
-        return ChannelResult.m3457boximpl(obj3);
+        return ChannelResult.m3477boximpl(obj3);
     }
 }

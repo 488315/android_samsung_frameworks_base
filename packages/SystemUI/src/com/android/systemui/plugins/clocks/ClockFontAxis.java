@@ -10,7 +10,6 @@ import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class ClockFontAxis {
     public static final int $stable = 0;
@@ -23,20 +22,19 @@ public final class ClockFontAxis {
     private final String name;
     private final AxisType type;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();
         }
 
         public final List<ClockFontAxis> merge(List<ClockFontAxis> list, ClockAxisStyle clockAxisStyle) {
-            ClockFontAxis copy$default;
+            ClockFontAxis clockFontAxisCopy$default;
             List<ClockFontAxis> list2 = list;
             ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(list2, 10));
             for (ClockFontAxis clockFontAxis : list2) {
                 Float f = clockAxisStyle.get(clockFontAxis.getKey());
-                if (f != null && (copy$default = ClockFontAxis.copy$default(clockFontAxis, null, null, 0.0f, 0.0f, f.floatValue(), null, null, 111, null)) != null) {
-                    clockFontAxis = copy$default;
+                if (f != null && (clockFontAxisCopy$default = ClockFontAxis.copy$default(clockFontAxis, null, null, 0.0f, 0.0f, f.floatValue(), null, null, 111, null)) != null) {
+                    clockFontAxis = clockFontAxisCopy$default;
                 }
                 arrayList.add(clockFontAxis);
             }

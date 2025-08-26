@@ -131,7 +131,7 @@ public class CMSSignedData implements Encodable {
         return this.signedData.getVersion().intValueExact();
     }
 
-    public SignerInformationStore getSignerInfos() {
+    public SignerInformationStore getSignerInfos() throws IllegalArgumentException {
         Map map;
         Object algorithm;
         if (this.signerInfoStore == null) {
@@ -211,8 +211,8 @@ public class CMSSignedData implements Encodable {
 
     public static CMSSignedData addDigestAlgorithm(CMSSignedData cMSSignedData, AlgorithmIdentifier algorithmIdentifier, DigestAlgorithmIdentifierFinder digestAlgorithmIdentifierFinder) {
         Set<AlgorithmIdentifier> digestAlgorithmIDs = cMSSignedData.getDigestAlgorithmIDs();
-        AlgorithmIdentifier fixDigestAlgID = HELPER.fixDigestAlgID(algorithmIdentifier, digestAlgorithmIdentifierFinder);
-        if (digestAlgorithmIDs.contains(fixDigestAlgID)) {
+        AlgorithmIdentifier algorithmIdentifierFixDigestAlgID = HELPER.fixDigestAlgID(algorithmIdentifier, digestAlgorithmIdentifierFinder);
+        if (digestAlgorithmIDs.contains(algorithmIdentifierFixDigestAlgID)) {
             return cMSSignedData;
         }
         CMSSignedData cMSSignedData2 = new CMSSignedData(cMSSignedData);
@@ -221,12 +221,12 @@ public class CMSSignedData implements Encodable {
         while (it.hasNext()) {
             hashSet.add(HELPER.fixDigestAlgID(it.next(), digestAlgorithmIdentifierFinder));
         }
-        hashSet.add(fixDigestAlgID);
-        ASN1Set convertToDlSet = CMSUtils.convertToDlSet(hashSet);
+        hashSet.add(algorithmIdentifierFixDigestAlgID);
+        ASN1Set aSN1SetConvertToDlSet = CMSUtils.convertToDlSet(hashSet);
         ASN1Sequence aSN1Sequence = (ASN1Sequence) cMSSignedData.signedData.toASN1Primitive();
         ASN1EncodableVector aSN1EncodableVector = new ASN1EncodableVector(aSN1Sequence.size());
         aSN1EncodableVector.add(aSN1Sequence.getObjectAt(0));
-        aSN1EncodableVector.add(convertToDlSet);
+        aSN1EncodableVector.add(aSN1SetConvertToDlSet);
         for (int i = 2; i != aSN1Sequence.size(); i++) {
             aSN1EncodableVector.add(aSN1Sequence.getObjectAt(i));
         }
@@ -249,12 +249,12 @@ public class CMSSignedData implements Encodable {
             CMSUtils.addDigestAlgs(hashSet, signerInformation, digestAlgorithmIdentifierFinder);
             aSN1EncodableVector.add(signerInformation.toASN1Structure());
         }
-        ASN1Set convertToDlSet = CMSUtils.convertToDlSet(hashSet);
+        ASN1Set aSN1SetConvertToDlSet = CMSUtils.convertToDlSet(hashSet);
         DLSet dLSet = new DLSet(aSN1EncodableVector);
         ASN1Sequence aSN1Sequence = (ASN1Sequence) cMSSignedData.signedData.toASN1Primitive();
         ASN1EncodableVector aSN1EncodableVector2 = new ASN1EncodableVector(aSN1Sequence.size());
         aSN1EncodableVector2.add(aSN1Sequence.getObjectAt(0));
-        aSN1EncodableVector2.add(convertToDlSet);
+        aSN1EncodableVector2.add(aSN1SetConvertToDlSet);
         for (int i = 2; i != aSN1Sequence.size() - 1; i++) {
             aSN1EncodableVector2.add(aSN1Sequence.getObjectAt(i));
         }
@@ -264,64 +264,32 @@ public class CMSSignedData implements Encodable {
         return cMSSignedData2;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:6:0x0030  */
+    /* JADX WARN: Removed duplicated region for block: B:13:0x002d  */
+    /* JADX WARN: Removed duplicated region for block: B:18:0x0040  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
-        To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static com.android.internal.org.bouncycastle.cms.CMSSignedData replaceCertificatesAndCRLs(com.android.internal.org.bouncycastle.cms.CMSSignedData r8, com.android.internal.org.bouncycastle.util.Store r9, com.android.internal.org.bouncycastle.util.Store r10, com.android.internal.org.bouncycastle.util.Store r11) throws com.android.internal.org.bouncycastle.cms.CMSException {
-        /*
-            com.android.internal.org.bouncycastle.cms.CMSSignedData r0 = new com.android.internal.org.bouncycastle.cms.CMSSignedData
-            r0.<init>(r8)
-            r1 = 0
-            if (r9 != 0) goto La
-            if (r10 == 0) goto L2d
-        La:
-            java.util.ArrayList r2 = new java.util.ArrayList
-            r2.<init>()
-            if (r9 == 0) goto L18
-            java.util.List r9 = com.android.internal.org.bouncycastle.cms.CMSUtils.getCertificatesFromStore(r9)
-            r2.addAll(r9)
-        L18:
-            if (r10 == 0) goto L21
-            java.util.List r9 = com.android.internal.org.bouncycastle.cms.CMSUtils.getAttributeCertificatesFromStore(r10)
-            r2.addAll(r9)
-        L21:
-            com.android.internal.org.bouncycastle.asn1.ASN1Set r9 = com.android.internal.org.bouncycastle.cms.CMSUtils.createBerSetFromList(r2)
-            int r10 = r9.size()
-            if (r10 == 0) goto L2d
-            r5 = r9
-            goto L2e
-        L2d:
-            r5 = r1
-        L2e:
-            if (r11 == 0) goto L40
-            java.util.List r9 = com.android.internal.org.bouncycastle.cms.CMSUtils.getCRLsFromStore(r11)
-            com.android.internal.org.bouncycastle.asn1.ASN1Set r9 = com.android.internal.org.bouncycastle.cms.CMSUtils.createBerSetFromList(r9)
-            int r10 = r9.size()
-            if (r10 == 0) goto L40
-            r6 = r9
-            goto L41
-        L40:
-            r6 = r1
-        L41:
-            com.android.internal.org.bouncycastle.asn1.cms.SignedData r2 = new com.android.internal.org.bouncycastle.asn1.cms.SignedData
-            com.android.internal.org.bouncycastle.asn1.cms.SignedData r9 = r8.signedData
-            com.android.internal.org.bouncycastle.asn1.ASN1Set r3 = r9.getDigestAlgorithms()
-            com.android.internal.org.bouncycastle.asn1.cms.SignedData r9 = r8.signedData
-            com.android.internal.org.bouncycastle.asn1.cms.ContentInfo r4 = r9.getEncapContentInfo()
-            com.android.internal.org.bouncycastle.asn1.cms.SignedData r8 = r8.signedData
-            com.android.internal.org.bouncycastle.asn1.ASN1Set r7 = r8.getSignerInfos()
-            r2.<init>(r3, r4, r5, r6, r7)
-            r0.signedData = r2
-            com.android.internal.org.bouncycastle.asn1.cms.ContentInfo r8 = new com.android.internal.org.bouncycastle.asn1.cms.ContentInfo
-            com.android.internal.org.bouncycastle.asn1.cms.ContentInfo r9 = r0.contentInfo
-            com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier r9 = r9.getContentType()
-            com.android.internal.org.bouncycastle.asn1.cms.SignedData r10 = r0.signedData
-            r8.<init>(r9, r10)
-            r0.contentInfo = r8
-            return r0
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.org.bouncycastle.cms.CMSSignedData.replaceCertificatesAndCRLs(com.android.internal.org.bouncycastle.cms.CMSSignedData, com.android.internal.org.bouncycastle.util.Store, com.android.internal.org.bouncycastle.util.Store, com.android.internal.org.bouncycastle.util.Store):com.android.internal.org.bouncycastle.cms.CMSSignedData");
+    public static CMSSignedData replaceCertificatesAndCRLs(CMSSignedData cMSSignedData, Store store, Store store2, Store store3) throws CMSException {
+        ASN1Set aSN1Set;
+        ASN1Set aSN1Set2;
+        CMSSignedData cMSSignedData2 = new CMSSignedData(cMSSignedData);
+        if (store != null || store2 != null) {
+            ArrayList arrayList = new ArrayList();
+            if (store != null) {
+                arrayList.addAll(CMSUtils.getCertificatesFromStore(store));
+            }
+            if (store2 != null) {
+                arrayList.addAll(CMSUtils.getAttributeCertificatesFromStore(store2));
+            }
+            ASN1Set aSN1SetCreateBerSetFromList = CMSUtils.createBerSetFromList(arrayList);
+            aSN1Set = aSN1SetCreateBerSetFromList.size() != 0 ? aSN1SetCreateBerSetFromList : null;
+        }
+        if (store3 != null) {
+            ASN1Set aSN1SetCreateBerSetFromList2 = CMSUtils.createBerSetFromList(CMSUtils.getCRLsFromStore(store3));
+            aSN1Set2 = aSN1SetCreateBerSetFromList2.size() != 0 ? aSN1SetCreateBerSetFromList2 : null;
+        }
+        cMSSignedData2.signedData = new SignedData(cMSSignedData.signedData.getDigestAlgorithms(), cMSSignedData.signedData.getEncapContentInfo(), aSN1Set, aSN1Set2, cMSSignedData.signedData.getSignerInfos());
+        cMSSignedData2.contentInfo = new ContentInfo(cMSSignedData2.contentInfo.getContentType(), cMSSignedData2.signedData);
+        return cMSSignedData2;
     }
 }

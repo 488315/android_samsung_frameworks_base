@@ -93,7 +93,7 @@ public class QuickAccessWalletClientImpl implements QuickAccessWalletClient, Ser
             executor.execute(new Runnable() { // from class: android.service.quickaccesswallet.QuickAccessWalletClientImpl$$ExternalSyntheticLambda3
                 @Override // java.lang.Runnable
                 public final void run() {
-                    QuickAccessWalletClient.OnWalletCardsRetrievedCallback.this.onWalletCardRetrievalError(new GetWalletCardsError(null, null));
+                    onWalletCardsRetrievedCallback.onWalletCardRetrievalError(new GetWalletCardsError(null, null));
                 }
             });
         } else {
@@ -131,7 +131,7 @@ public class QuickAccessWalletClientImpl implements QuickAccessWalletClient, Ser
             executor.execute(new Runnable() { // from class: android.service.quickaccesswallet.QuickAccessWalletClientImpl$1$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    QuickAccessWalletClient.OnWalletCardsRetrievedCallback.this.onWalletCardsRetrieved(getWalletCardsResponse);
+                    onWalletCardsRetrievedCallback.onWalletCardsRetrieved(getWalletCardsResponse);
                 }
             });
         }
@@ -143,7 +143,7 @@ public class QuickAccessWalletClientImpl implements QuickAccessWalletClient, Ser
             executor.execute(new Runnable() { // from class: android.service.quickaccesswallet.QuickAccessWalletClientImpl$1$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    QuickAccessWalletClient.OnWalletCardsRetrievedCallback.this.onWalletCardRetrievalError(getWalletCardsError);
+                    onWalletCardsRetrievedCallback.onWalletCardRetrievalError(getWalletCardsError);
                 }
             });
         }
@@ -185,9 +185,9 @@ public class QuickAccessWalletClientImpl implements QuickAccessWalletClient, Ser
             executeApiCall(new ApiCaller("registerListener") { // from class: android.service.quickaccesswallet.QuickAccessWalletClientImpl.6
                 @Override // android.service.quickaccesswallet.QuickAccessWalletClientImpl.ApiCaller
                 public void performApiCall(IQuickAccessWalletService iQuickAccessWalletService) throws RemoteException {
-                    String uuid = UUID.randomUUID().toString();
-                    WalletServiceEventListenerRequest walletServiceEventListenerRequest = new WalletServiceEventListenerRequest(uuid);
-                    QuickAccessWalletClientImpl.this.mEventListeners.put(walletServiceEventListener, uuid);
+                    String string = UUID.randomUUID().toString();
+                    WalletServiceEventListenerRequest walletServiceEventListenerRequest = new WalletServiceEventListenerRequest(string);
+                    QuickAccessWalletClientImpl.this.mEventListeners.put(walletServiceEventListener, string);
                     iQuickAccessWalletService.registerWalletServiceEventListener(walletServiceEventListenerRequest, anonymousClass5);
                 }
             });
@@ -213,7 +213,7 @@ public class QuickAccessWalletClientImpl implements QuickAccessWalletClient, Ser
             executor.execute(new Runnable() { // from class: android.service.quickaccesswallet.QuickAccessWalletClientImpl$5$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    QuickAccessWalletClient.WalletServiceEventListener.this.onWalletServiceEvent(walletServiceEvent);
+                    walletServiceEventListener.onWalletServiceEvent(walletServiceEvent);
                 }
             });
         }
@@ -250,18 +250,18 @@ public class QuickAccessWalletClientImpl implements QuickAccessWalletClient, Ser
         this.mHandler.post(new Runnable() { // from class: android.service.quickaccesswallet.QuickAccessWalletClientImpl$$ExternalSyntheticLambda9
             @Override // java.lang.Runnable
             public final void run() {
-                QuickAccessWalletClientImpl.this.lambda$disconnect$1();
+                this.f$0.lambda$disconnect$1();
             }
         });
     }
 
     @Override // android.service.quickaccesswallet.QuickAccessWalletClient
     public Intent createWalletIntent() {
-        QuickAccessWalletServiceInfo ensureServiceInfo = ensureServiceInfo();
-        if (ensureServiceInfo == null) {
+        QuickAccessWalletServiceInfo quickAccessWalletServiceInfoEnsureServiceInfo = ensureServiceInfo();
+        if (quickAccessWalletServiceInfoEnsureServiceInfo == null) {
             return null;
         }
-        return createIntent(ensureServiceInfo.getWalletActivity(), ensureServiceInfo.getComponentName().getPackageName(), ensureServiceInfo.getUserId(), QuickAccessWalletService.ACTION_VIEW_WALLET);
+        return createIntent(quickAccessWalletServiceInfoEnsureServiceInfo.getWalletActivity(), quickAccessWalletServiceInfoEnsureServiceInfo.getComponentName().getPackageName(), quickAccessWalletServiceInfoEnsureServiceInfo.getUserId(), QuickAccessWalletService.ACTION_VIEW_WALLET);
     }
 
     /* renamed from: android.service.quickaccesswallet.QuickAccessWalletClientImpl$8, reason: invalid class name */
@@ -283,7 +283,7 @@ public class QuickAccessWalletClientImpl implements QuickAccessWalletClient, Ser
             executor.execute(new Runnable() { // from class: android.service.quickaccesswallet.QuickAccessWalletClientImpl$8$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    QuickAccessWalletClient.WalletPendingIntentCallback.this.onWalletPendingIntentRetrieved(pendingIntent);
+                    walletPendingIntentCallback.onWalletPendingIntentRetrieved(pendingIntent);
                 }
             });
         }
@@ -320,7 +320,7 @@ public class QuickAccessWalletClientImpl implements QuickAccessWalletClient, Ser
                 executor.execute(new Runnable() { // from class: android.service.quickaccesswallet.QuickAccessWalletClientImpl$10$$ExternalSyntheticLambda0
                     @Override // java.lang.Runnable
                     public final void run() {
-                        QuickAccessWalletClient.GesturePendingIntentCallback.this.onGesturePendingIntentRetrieved(pendingIntent);
+                        gesturePendingIntentCallback.onGesturePendingIntentRetrieved(pendingIntent);
                     }
                 });
             }
@@ -340,11 +340,11 @@ public class QuickAccessWalletClientImpl implements QuickAccessWalletClient, Ser
 
     @Override // android.service.quickaccesswallet.QuickAccessWalletClient
     public Intent createWalletSettingsIntent() {
-        QuickAccessWalletServiceInfo ensureServiceInfo = ensureServiceInfo();
-        if (ensureServiceInfo == null) {
+        QuickAccessWalletServiceInfo quickAccessWalletServiceInfoEnsureServiceInfo = ensureServiceInfo();
+        if (quickAccessWalletServiceInfoEnsureServiceInfo == null) {
             return null;
         }
-        return createIntent(ensureServiceInfo.getSettingsActivity(), ensureServiceInfo.getComponentName().getPackageName(), UserHandle.myUserId(), QuickAccessWalletService.ACTION_VIEW_WALLET_SETTINGS);
+        return createIntent(quickAccessWalletServiceInfoEnsureServiceInfo.getSettingsActivity(), quickAccessWalletServiceInfoEnsureServiceInfo.getComponentName().getPackageName(), UserHandle.myUserId(), QuickAccessWalletService.ACTION_VIEW_WALLET_SETTINGS);
     }
 
     private Intent createIntent(String str, String str2, int i, String str3) {
@@ -363,11 +363,11 @@ public class QuickAccessWalletClientImpl implements QuickAccessWalletClient, Ser
     }
 
     private static String queryActivityForAction(PackageManager packageManager, String str, String str2) {
-        ResolveInfo resolveActivity = packageManager.resolveActivity(new Intent(str2).setPackage(str), 0);
-        if (resolveActivity == null || resolveActivity.activityInfo == null || !resolveActivity.activityInfo.exported) {
+        ResolveInfo resolveInfoResolveActivity = packageManager.resolveActivity(new Intent(str2).setPackage(str), 0);
+        if (resolveInfoResolveActivity == null || resolveInfoResolveActivity.activityInfo == null || !resolveInfoResolveActivity.activityInfo.exported) {
             return null;
         }
-        return resolveActivity.activityInfo.name;
+        return resolveInfoResolveActivity.activityInfo.name;
     }
 
     private static boolean isActivityEnabled(PackageManager packageManager, ComponentName componentName) {
@@ -387,71 +387,71 @@ public class QuickAccessWalletClientImpl implements QuickAccessWalletClient, Ser
 
     @Override // android.service.quickaccesswallet.QuickAccessWalletClient
     public Drawable getLogo() {
-        QuickAccessWalletServiceInfo ensureServiceInfo = ensureServiceInfo();
-        if (ensureServiceInfo == null) {
+        QuickAccessWalletServiceInfo quickAccessWalletServiceInfoEnsureServiceInfo = ensureServiceInfo();
+        if (quickAccessWalletServiceInfoEnsureServiceInfo == null) {
             return null;
         }
-        return ensureServiceInfo.getWalletLogo(this.mContext);
+        return quickAccessWalletServiceInfoEnsureServiceInfo.getWalletLogo(this.mContext);
     }
 
     @Override // android.service.quickaccesswallet.QuickAccessWalletClient
     public Drawable getTileIcon() {
-        QuickAccessWalletServiceInfo ensureServiceInfo = ensureServiceInfo();
-        if (ensureServiceInfo == null) {
+        QuickAccessWalletServiceInfo quickAccessWalletServiceInfoEnsureServiceInfo = ensureServiceInfo();
+        if (quickAccessWalletServiceInfoEnsureServiceInfo == null) {
             return null;
         }
-        return ensureServiceInfo.getTileIcon();
+        return quickAccessWalletServiceInfoEnsureServiceInfo.getTileIcon();
     }
 
     @Override // android.service.quickaccesswallet.QuickAccessWalletClient
     public UserHandle getUser() {
-        QuickAccessWalletServiceInfo ensureServiceInfo = ensureServiceInfo();
-        if (ensureServiceInfo == null) {
+        QuickAccessWalletServiceInfo quickAccessWalletServiceInfoEnsureServiceInfo = ensureServiceInfo();
+        if (quickAccessWalletServiceInfoEnsureServiceInfo == null) {
             return null;
         }
-        return UserHandle.of(ensureServiceInfo.getUserId());
+        return UserHandle.of(quickAccessWalletServiceInfoEnsureServiceInfo.getUserId());
     }
 
     @Override // android.service.quickaccesswallet.QuickAccessWalletClient
     public CharSequence getServiceLabel() {
-        QuickAccessWalletServiceInfo ensureServiceInfo = ensureServiceInfo();
-        if (ensureServiceInfo == null) {
+        QuickAccessWalletServiceInfo quickAccessWalletServiceInfoEnsureServiceInfo = ensureServiceInfo();
+        if (quickAccessWalletServiceInfoEnsureServiceInfo == null) {
             return null;
         }
-        return ensureServiceInfo.getServiceLabel(this.mContext);
+        return quickAccessWalletServiceInfoEnsureServiceInfo.getServiceLabel(this.mContext);
     }
 
     @Override // android.service.quickaccesswallet.QuickAccessWalletClient
     public CharSequence getShortcutShortLabel() {
-        QuickAccessWalletServiceInfo ensureServiceInfo = ensureServiceInfo();
-        if (ensureServiceInfo == null) {
+        QuickAccessWalletServiceInfo quickAccessWalletServiceInfoEnsureServiceInfo = ensureServiceInfo();
+        if (quickAccessWalletServiceInfoEnsureServiceInfo == null) {
             return null;
         }
-        return ensureServiceInfo.getShortcutShortLabel(this.mContext);
+        return quickAccessWalletServiceInfoEnsureServiceInfo.getShortcutShortLabel(this.mContext);
     }
 
     @Override // android.service.quickaccesswallet.QuickAccessWalletClient
     public CharSequence getShortcutLongLabel() {
-        QuickAccessWalletServiceInfo ensureServiceInfo = ensureServiceInfo();
-        if (ensureServiceInfo == null) {
+        QuickAccessWalletServiceInfo quickAccessWalletServiceInfoEnsureServiceInfo = ensureServiceInfo();
+        if (quickAccessWalletServiceInfoEnsureServiceInfo == null) {
             return null;
         }
-        return ensureServiceInfo.getShortcutLongLabel(this.mContext);
+        return quickAccessWalletServiceInfoEnsureServiceInfo.getShortcutLongLabel(this.mContext);
     }
 
     private void connect() {
         this.mHandler.post(new Runnable() { // from class: android.service.quickaccesswallet.QuickAccessWalletClientImpl$$ExternalSyntheticLambda2
             @Override // java.lang.Runnable
             public final void run() {
-                QuickAccessWalletClientImpl.this.connectInternal();
+                this.f$0.connectInternal();
             }
         });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     public void connectInternal() {
-        QuickAccessWalletServiceInfo ensureServiceInfo = ensureServiceInfo();
-        if (ensureServiceInfo == null) {
+        QuickAccessWalletServiceInfo quickAccessWalletServiceInfoEnsureServiceInfo = ensureServiceInfo();
+        if (quickAccessWalletServiceInfoEnsureServiceInfo == null) {
             Log.w(TAG, "Wallet service unavailable");
             return;
         }
@@ -460,20 +460,20 @@ public class QuickAccessWalletClientImpl implements QuickAccessWalletClient, Ser
         }
         this.mIsConnected = true;
         final Intent intent = new Intent(QuickAccessWalletService.SERVICE_INTERFACE);
-        intent.setComponent(ensureServiceInfo.getComponentName());
+        intent.setComponent(quickAccessWalletServiceInfoEnsureServiceInfo.getComponentName());
         final int i = 33;
         if (this.mServiceInfo == null) {
             this.mLifecycleExecutor.execute(new Runnable() { // from class: android.service.quickaccesswallet.QuickAccessWalletClientImpl$$ExternalSyntheticLambda7
                 @Override // java.lang.Runnable
                 public final void run() {
-                    QuickAccessWalletClientImpl.this.lambda$connectInternal$2(intent, i);
+                    this.f$0.lambda$connectInternal$2(intent, i);
                 }
             });
         } else {
             this.mLifecycleExecutor.execute(new Runnable() { // from class: android.service.quickaccesswallet.QuickAccessWalletClientImpl$$ExternalSyntheticLambda8
                 @Override // java.lang.Runnable
                 public final void run() {
-                    QuickAccessWalletClientImpl.this.lambda$connectInternal$3(intent, i);
+                    this.f$0.lambda$connectInternal$3(intent, i);
                 }
             });
         }
@@ -512,7 +512,7 @@ public class QuickAccessWalletClientImpl implements QuickAccessWalletClient, Ser
         this.mHandler.postDelayed(new Runnable() { // from class: android.service.quickaccesswallet.QuickAccessWalletClientImpl$$ExternalSyntheticLambda5
             @Override // java.lang.Runnable
             public final void run() {
-                QuickAccessWalletClientImpl.this.lambda$resetServiceConnectionTimeout$4();
+                this.f$0.lambda$resetServiceConnectionTimeout$4();
             }
         }, 5, 60000L);
     }
@@ -535,7 +535,7 @@ public class QuickAccessWalletClientImpl implements QuickAccessWalletClient, Ser
             this.mHandler.post(new Runnable() { // from class: android.service.quickaccesswallet.QuickAccessWalletClientImpl$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    QuickAccessWalletClientImpl.this.lambda$disconnectInternal$5();
+                    this.f$0.lambda$disconnectInternal$5();
                 }
             });
             return;
@@ -544,7 +544,7 @@ public class QuickAccessWalletClientImpl implements QuickAccessWalletClient, Ser
         this.mLifecycleExecutor.execute(new Runnable() { // from class: android.service.quickaccesswallet.QuickAccessWalletClientImpl$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
-                QuickAccessWalletClientImpl.this.lambda$disconnectInternal$6();
+                this.f$0.lambda$disconnectInternal$6();
             }
         });
         this.mService = null;
@@ -566,7 +566,7 @@ public class QuickAccessWalletClientImpl implements QuickAccessWalletClient, Ser
         this.mHandler.post(new Runnable() { // from class: android.service.quickaccesswallet.QuickAccessWalletClientImpl$$ExternalSyntheticLambda4
             @Override // java.lang.Runnable
             public final void run() {
-                QuickAccessWalletClientImpl.this.lambda$executeApiCall$7(apiCaller);
+                this.f$0.lambda$executeApiCall$7(apiCaller);
             }
         });
     }
@@ -615,11 +615,11 @@ public class QuickAccessWalletClientImpl implements QuickAccessWalletClient, Ser
 
     @Override // android.content.ServiceConnection
     public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-        final IQuickAccessWalletService asInterface = IQuickAccessWalletService.Stub.asInterface(iBinder);
+        final IQuickAccessWalletService iQuickAccessWalletServiceAsInterface = IQuickAccessWalletService.Stub.asInterface(iBinder);
         this.mHandler.post(new Runnable() { // from class: android.service.quickaccesswallet.QuickAccessWalletClientImpl$$ExternalSyntheticLambda6
             @Override // java.lang.Runnable
             public final void run() {
-                QuickAccessWalletClientImpl.this.lambda$onServiceConnected$8(asInterface);
+                this.f$0.lambda$onServiceConnected$8(iQuickAccessWalletServiceAsInterface);
             }
         });
     }

@@ -9,7 +9,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import sun.misc.Unsafe;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public final class UnsafeUtil {
     public static final long BYTE_ARRAY_BASE_OFFSET;
@@ -20,11 +19,10 @@ public final class UnsafeUtil {
     public static final Class MEMORY_CLASS;
     public static final Unsafe UNSAFE;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.google.protobuf.UnsafeUtil$1, reason: invalid class name */
     public class AnonymousClass1 implements PrivilegedExceptionAction {
         @Override // java.security.PrivilegedExceptionAction
-        public final Object run() {
+        public final Object run() throws IllegalAccessException, IllegalArgumentException {
             for (Field field : Unsafe.class.getDeclaredFields()) {
                 field.setAccessible(true);
                 Object obj = field.get(null);
@@ -36,7 +34,6 @@ public final class UnsafeUtil {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Android32MemoryAccessor extends MemoryAccessor {
         public Android32MemoryAccessor(Unsafe unsafe) {
             super(unsafe);
@@ -91,7 +88,6 @@ public final class UnsafeUtil {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Android64MemoryAccessor extends MemoryAccessor {
         public Android64MemoryAccessor(Unsafe unsafe) {
             super(unsafe);
@@ -146,7 +142,6 @@ public final class UnsafeUtil {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public abstract class MemoryAccessor {
         public final Unsafe unsafe;
 
@@ -188,7 +183,7 @@ public final class UnsafeUtil {
     static {
         Unsafe unsafe;
         boolean z;
-        MemoryAccessor memoryAccessor = null;
+        MemoryAccessor android32MemoryAccessor = null;
         try {
             unsafe = (Unsafe) AccessController.doPrivileged(new AnonymousClass1());
         } catch (Throwable unused) {
@@ -196,21 +191,21 @@ public final class UnsafeUtil {
         }
         UNSAFE = unsafe;
         MEMORY_CLASS = Android.MEMORY_CLASS;
-        boolean determineAndroidSupportByAddressSize = determineAndroidSupportByAddressSize(Long.TYPE);
-        boolean determineAndroidSupportByAddressSize2 = determineAndroidSupportByAddressSize(Integer.TYPE);
+        boolean zDetermineAndroidSupportByAddressSize = determineAndroidSupportByAddressSize(Long.TYPE);
+        boolean zDetermineAndroidSupportByAddressSize2 = determineAndroidSupportByAddressSize(Integer.TYPE);
         if (unsafe != null) {
-            if (determineAndroidSupportByAddressSize) {
-                memoryAccessor = new Android64MemoryAccessor(unsafe);
-            } else if (determineAndroidSupportByAddressSize2) {
-                memoryAccessor = new Android32MemoryAccessor(unsafe);
+            if (zDetermineAndroidSupportByAddressSize) {
+                android32MemoryAccessor = new Android64MemoryAccessor(unsafe);
+            } else if (zDetermineAndroidSupportByAddressSize2) {
+                android32MemoryAccessor = new Android32MemoryAccessor(unsafe);
             }
         }
-        MEMORY_ACCESSOR = memoryAccessor;
-        HAS_UNSAFE_BYTEBUFFER_OPERATIONS = memoryAccessor == null ? false : memoryAccessor.supportsUnsafeByteBufferOperations();
-        if (memoryAccessor == null) {
+        MEMORY_ACCESSOR = android32MemoryAccessor;
+        HAS_UNSAFE_BYTEBUFFER_OPERATIONS = android32MemoryAccessor == null ? false : android32MemoryAccessor.supportsUnsafeByteBufferOperations();
+        if (android32MemoryAccessor == null) {
             z = false;
         } else {
-            Unsafe unsafe2 = memoryAccessor.unsafe;
+            Unsafe unsafe2 = android32MemoryAccessor.unsafe;
             z = false;
             if (unsafe2 != null) {
                 try {
@@ -245,9 +240,9 @@ public final class UnsafeUtil {
         arrayIndexScale(double[].class);
         arrayBaseOffset(Object[].class);
         arrayIndexScale(Object[].class);
-        Field bufferAddressField = bufferAddressField();
-        if (bufferAddressField != null && memoryAccessor != null) {
-            memoryAccessor.unsafe.objectFieldOffset(bufferAddressField);
+        Field fieldBufferAddressField = bufferAddressField();
+        if (fieldBufferAddressField != null && android32MemoryAccessor != null) {
+            android32MemoryAccessor.unsafe.objectFieldOffset(fieldBufferAddressField);
         }
         IS_BIG_ENDIAN = ByteOrder.nativeOrder() == ByteOrder.BIG_ENDIAN;
     }
@@ -281,26 +276,26 @@ public final class UnsafeUtil {
     }
 
     public static Field bufferAddressField() {
-        Field field;
-        Field field2;
+        Field declaredField;
+        Field declaredField2;
         Class cls = Android.MEMORY_CLASS;
         try {
-            field = Buffer.class.getDeclaredField("effectiveDirectAddress");
+            declaredField = Buffer.class.getDeclaredField("effectiveDirectAddress");
         } catch (Throwable unused) {
-            field = null;
+            declaredField = null;
         }
-        if (field != null) {
-            return field;
+        if (declaredField != null) {
+            return declaredField;
         }
         try {
-            field2 = Buffer.class.getDeclaredField("address");
+            declaredField2 = Buffer.class.getDeclaredField("address");
         } catch (Throwable unused2) {
-            field2 = null;
+            declaredField2 = null;
         }
-        if (field2 == null || field2.getType() != Long.TYPE) {
+        if (declaredField2 == null || declaredField2.getType() != Long.TYPE) {
             return null;
         }
-        return field2;
+        return declaredField2;
     }
 
     /* JADX WARN: Multi-variable type inference failed */

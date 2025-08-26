@@ -14,10 +14,10 @@ public class DH {
     private static final Map<String, String> generalDhAttributes;
 
     static {
-        HashMap hashMap = new HashMap();
-        generalDhAttributes = hashMap;
-        hashMap.put("SupportedKeyClasses", "javax.crypto.interfaces.DHPublicKey|javax.crypto.interfaces.DHPrivateKey");
-        hashMap.put("SupportedKeyFormats", "PKCS#8|X.509");
+        HashMap map = new HashMap();
+        generalDhAttributes = map;
+        map.put("SupportedKeyClasses", "javax.crypto.interfaces.DHPublicKey|javax.crypto.interfaces.DHPrivateKey");
+        map.put("SupportedKeyFormats", "PKCS#8|X.509");
     }
 
     public static class Mappings extends AsymmetricAlgorithmProvider {

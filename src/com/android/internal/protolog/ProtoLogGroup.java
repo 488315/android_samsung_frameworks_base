@@ -2,7 +2,7 @@ package com.android.internal.protolog;
 
 import com.android.internal.protolog.common.IProtoLogGroup;
 
-/* loaded from: classes3.dex */
+/* loaded from: classes4.dex */
 public class ProtoLogGroup implements IProtoLogGroup {
     private final boolean mEnabled;
     private boolean mLogToLogcat;

@@ -10,17 +10,17 @@ public final class GeofenceHardwareRequestParcelable implements Parcelable {
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public GeofenceHardwareRequestParcelable createFromParcel(Parcel parcel) {
-            int readInt = parcel.readInt();
-            if (readInt != 0) {
-                throw new BadParcelableException("Invalid Geofence type: " + readInt);
+            int i = parcel.readInt();
+            if (i != 0) {
+                throw new BadParcelableException("Invalid Geofence type: " + i);
             }
-            GeofenceHardwareRequest createCircularGeofence = GeofenceHardwareRequest.createCircularGeofence(parcel.readDouble(), parcel.readDouble(), parcel.readDouble());
-            createCircularGeofence.setLastTransition(parcel.readInt());
-            createCircularGeofence.setMonitorTransitions(parcel.readInt());
-            createCircularGeofence.setUnknownTimer(parcel.readInt());
-            createCircularGeofence.setNotificationResponsiveness(parcel.readInt());
-            createCircularGeofence.setSourceTechnologies(parcel.readInt());
-            return new GeofenceHardwareRequestParcelable(parcel.readInt(), createCircularGeofence);
+            GeofenceHardwareRequest geofenceHardwareRequestCreateCircularGeofence = GeofenceHardwareRequest.createCircularGeofence(parcel.readDouble(), parcel.readDouble(), parcel.readDouble());
+            geofenceHardwareRequestCreateCircularGeofence.setLastTransition(parcel.readInt());
+            geofenceHardwareRequestCreateCircularGeofence.setMonitorTransitions(parcel.readInt());
+            geofenceHardwareRequestCreateCircularGeofence.setUnknownTimer(parcel.readInt());
+            geofenceHardwareRequestCreateCircularGeofence.setNotificationResponsiveness(parcel.readInt());
+            geofenceHardwareRequestCreateCircularGeofence.setSourceTechnologies(parcel.readInt());
+            return new GeofenceHardwareRequestParcelable(parcel.readInt(), geofenceHardwareRequestCreateCircularGeofence);
         }
 
         /* JADX WARN: Can't rename method to resolve collision */

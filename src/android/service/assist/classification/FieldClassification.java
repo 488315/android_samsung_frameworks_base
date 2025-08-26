@@ -95,13 +95,13 @@ public final class FieldClassification implements Parcelable {
 
     FieldClassification(Parcel parcel) {
         AutofillId autofillId = (AutofillId) parcel.readTypedObject(AutofillId.CREATOR);
-        Set<String> unparcelHints = unparcelHints(parcel);
-        Set<String> unparcelGroupHints = unparcelGroupHints(parcel);
+        Set<String> setUnparcelHints = unparcelHints(parcel);
+        Set<String> setUnparcelGroupHints = unparcelGroupHints(parcel);
         this.mAutofillId = autofillId;
         AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) autofillId);
-        this.mHints = unparcelHints;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) unparcelHints);
-        this.mGroupHints = unparcelGroupHints;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) unparcelGroupHints);
+        this.mHints = setUnparcelHints;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) setUnparcelHints);
+        this.mGroupHints = setUnparcelGroupHints;
+        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) setUnparcelGroupHints);
     }
 }

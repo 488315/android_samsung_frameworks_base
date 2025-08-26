@@ -105,21 +105,21 @@ public class PreferenceManager {
     }
 
     PreferenceScreen inflateFromIntent(Intent intent, PreferenceScreen preferenceScreen) {
-        List<ResolveInfo> queryIntentActivities = queryIntentActivities(intent);
+        List<ResolveInfo> listQueryIntentActivities = queryIntentActivities(intent);
         HashSet hashSet = new HashSet();
-        for (int size = queryIntentActivities.size() - 1; size >= 0; size--) {
-            ActivityInfo activityInfo = queryIntentActivities.get(size).activityInfo;
+        for (int size = listQueryIntentActivities.size() - 1; size >= 0; size--) {
+            ActivityInfo activityInfo = listQueryIntentActivities.get(size).activityInfo;
             Bundle bundle = activityInfo.metaData;
             if (bundle != null && bundle.containsKey(METADATA_KEY_PREFERENCES)) {
                 String str = activityInfo.packageName + ":" + activityInfo.metaData.getInt(METADATA_KEY_PREFERENCES);
                 if (!hashSet.contains(str)) {
                     hashSet.add(str);
                     try {
-                        Context createPackageContext = this.mContext.createPackageContext(activityInfo.packageName, 0);
-                        PreferenceInflater preferenceInflater = new PreferenceInflater(createPackageContext, this);
-                        XmlResourceParser loadXmlMetaData = activityInfo.loadXmlMetaData(createPackageContext.getPackageManager(), METADATA_KEY_PREFERENCES);
-                        preferenceScreen = (PreferenceScreen) preferenceInflater.inflate((XmlPullParser) loadXmlMetaData, (XmlResourceParser) preferenceScreen, true);
-                        loadXmlMetaData.close();
+                        Context contextCreatePackageContext = this.mContext.createPackageContext(activityInfo.packageName, 0);
+                        PreferenceInflater preferenceInflater = new PreferenceInflater(contextCreatePackageContext, this);
+                        XmlResourceParser xmlResourceParserLoadXmlMetaData = activityInfo.loadXmlMetaData(contextCreatePackageContext.getPackageManager(), METADATA_KEY_PREFERENCES);
+                        preferenceScreen = (PreferenceScreen) preferenceInflater.inflate((XmlPullParser) xmlResourceParserLoadXmlMetaData, (XmlResourceParser) preferenceScreen, true);
+                        xmlResourceParserLoadXmlMetaData.close();
                     } catch (PackageManager.NameNotFoundException e) {
                         Log.w(TAG, "Could not create context for " + activityInfo.packageName + ": " + Log.getStackTraceString(e));
                     }
@@ -201,20 +201,20 @@ public class PreferenceManager {
     }
 
     public SharedPreferences getSharedPreferences() {
-        Context createDeviceProtectedStorageContext;
+        Context contextCreateDeviceProtectedStorageContext;
         if (this.mPreferenceDataStore != null) {
             return null;
         }
         if (this.mSharedPreferences == null) {
             int i = this.mStorage;
             if (i == 1) {
-                createDeviceProtectedStorageContext = this.mContext.createDeviceProtectedStorageContext();
+                contextCreateDeviceProtectedStorageContext = this.mContext.createDeviceProtectedStorageContext();
             } else if (i == 2) {
-                createDeviceProtectedStorageContext = this.mContext.createCredentialProtectedStorageContext();
+                contextCreateDeviceProtectedStorageContext = this.mContext.createCredentialProtectedStorageContext();
             } else {
-                createDeviceProtectedStorageContext = this.mContext;
+                contextCreateDeviceProtectedStorageContext = this.mContext;
             }
-            this.mSharedPreferences = createDeviceProtectedStorageContext.getSharedPreferences(this.mSharedPreferencesName, this.mSharedPreferencesMode);
+            this.mSharedPreferences = contextCreateDeviceProtectedStorageContext.getSharedPreferences(this.mSharedPreferencesName, this.mSharedPreferencesMode);
         }
         return this.mSharedPreferences;
     }
@@ -258,11 +258,11 @@ public class PreferenceManager {
             preferenceManager.setSharedPreferencesName(str);
             preferenceManager.setSharedPreferencesMode(i);
             preferenceManager.inflateFromResource(context, i2, null);
-            SharedPreferences.Editor putBoolean = sharedPreferences.edit().putBoolean(KEY_HAS_SET_DEFAULT_VALUES, true);
+            SharedPreferences.Editor editorPutBoolean = sharedPreferences.edit().putBoolean(KEY_HAS_SET_DEFAULT_VALUES, true);
             try {
-                putBoolean.apply();
+                editorPutBoolean.apply();
             } catch (AbstractMethodError unused) {
-                putBoolean.commit();
+                editorPutBoolean.commit();
             }
         }
     }

@@ -37,7 +37,6 @@ import java.util.List;
 import java.util.Set;
 import kotlinx.coroutines.BuildersKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final /* synthetic */ class HearingDevicesDialogDelegate$$ExternalSyntheticLambda3 implements Runnable {
     public final /* synthetic */ int $r8$classId;
@@ -101,8 +100,8 @@ public final /* synthetic */ class HearingDevicesDialogDelegate$$ExternalSynthet
                 hearingDevicesDialogDelegate3.mLocalBluetoothManager.mEventManager.registerCallback(hearingDevicesDialogDelegate3);
                 hearingDevicesDialogDelegate3.mMainExecutor.execute(new Runnable() { // from class: com.android.systemui.accessibility.hearingaid.HearingDevicesDialogDelegate$$ExternalSyntheticLambda4
                     @Override // java.lang.Runnable
-                    public final void run() {
-                        final HearingDevicesDialogDelegate hearingDevicesDialogDelegate4 = HearingDevicesDialogDelegate.this;
+                    public final void run() throws Resources.NotFoundException {
+                        final HearingDevicesDialogDelegate hearingDevicesDialogDelegate4 = hearingDevicesDialogDelegate3;
                         final SystemUIDialog systemUIDialog2 = systemUIDialog;
                         List list3 = hearingDeviceItemList;
                         CachedBluetoothDevice cachedBluetoothDevice = activeHearingDevice2;
@@ -120,7 +119,7 @@ public final /* synthetic */ class HearingDevicesDialogDelegate$$ExternalSynthet
                             button.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.accessibility.hearingaid.HearingDevicesDialogDelegate$$ExternalSyntheticLambda5
                                 @Override // android.view.View.OnClickListener
                                 public final void onClick(View view) {
-                                    HearingDevicesDialogDelegate hearingDevicesDialogDelegate5 = HearingDevicesDialogDelegate.this;
+                                    HearingDevicesDialogDelegate hearingDevicesDialogDelegate5 = hearingDevicesDialogDelegate4;
                                     SystemUIDialog systemUIDialog3 = systemUIDialog2;
                                     String str4 = HearingDevicesDialogDelegate.ACTION_BLUETOOTH_DEVICE_DETAILS;
                                     hearingDevicesDialogDelegate5.getClass();
@@ -183,7 +182,7 @@ public final /* synthetic */ class HearingDevicesDialogDelegate$$ExternalSynthet
                                 hearingDevicesPresetsController4.mSelectedPresetIndex = index;
                                 BluetoothDevice bluetoothDevice = cachedBluetoothDevice3.mDevice;
                                 BluetoothHapClient bluetoothHapClient = hapClientProfile.mService;
-                                boolean supportsSynchronizedPresets = bluetoothHapClient == null ? false : bluetoothHapClient.supportsSynchronizedPresets(bluetoothDevice);
+                                boolean zSupportsSynchronizedPresets = bluetoothHapClient == null ? false : bluetoothHapClient.supportsSynchronizedPresets(bluetoothDevice);
                                 HapClientProfile hapClientProfile2 = hearingDevicesPresetsController4.mHapClientProfile;
                                 BluetoothDevice bluetoothDevice2 = hearingDevicesPresetsController4.mDevice.mDevice;
                                 BluetoothHapClient bluetoothHapClient2 = hapClientProfile2.mService;
@@ -193,7 +192,7 @@ public final /* synthetic */ class HearingDevicesDialogDelegate$$ExternalSynthet
                                 } else {
                                     hapGroup = bluetoothHapClient2.getHapGroup(bluetoothDevice2);
                                 }
-                                if (!supportsSynchronizedPresets) {
+                                if (!zSupportsSynchronizedPresets) {
                                     hearingDevicesPresetsController4.selectPresetIndependently(index);
                                     return;
                                 }
@@ -205,9 +204,9 @@ public final /* synthetic */ class HearingDevicesDialogDelegate$$ExternalSynthet
                                 if (hearingDevicesPresetsController4.mDevice == null || hearingDevicesPresetsController4.mHapClientProfile == null) {
                                     return;
                                 }
-                                StringBuilder m = MutableObjectList$$ExternalSyntheticOutline0.m(index, hapGroup, "selectPresetSynchronously, presetIndex: ", ", groupId: ", ", device: ");
-                                m.append(hearingDevicesPresetsController4.mDevice.mDevice.getAddress());
-                                Log.d("HearingDevicesPresetsController", m.toString());
+                                StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(index, hapGroup, "selectPresetSynchronously, presetIndex: ", ", groupId: ", ", device: ");
+                                sbM.append(hearingDevicesPresetsController4.mDevice.mDevice.getAddress());
+                                Log.d("HearingDevicesPresetsController", sbM.toString());
                                 BluetoothHapClient bluetoothHapClient3 = hearingDevicesPresetsController4.mHapClientProfile.mService;
                                 if (bluetoothHapClient3 == null) {
                                     Log.w("HapClientProfile", "Proxy not attached to service. Cannot select preset for group.");
@@ -220,13 +219,13 @@ public final /* synthetic */ class HearingDevicesDialogDelegate$$ExternalSynthet
                             public final void onNothingSelected(AdapterView adapterView) {
                             }
                         });
-                        View requireViewById = systemUIDialog2.requireViewById(R.id.preset_layout);
-                        hearingDevicesDialogDelegate42.mPresetLayout = requireViewById;
-                        requireViewById.setVisibility(hearingDevicesDialogDelegate42.mPresetController.isPresetControlAvailable() ? 0 : 8);
+                        View viewRequireViewById = systemUIDialog2.requireViewById(R.id.preset_layout);
+                        hearingDevicesDialogDelegate42.mPresetLayout = viewRequireViewById;
+                        viewRequireViewById.setVisibility(hearingDevicesDialogDelegate42.mPresetController.isPresetControlAvailable() ? 0 : 8);
                         hearingDevicesDialogDelegate42.mBgExecutor.execute(new HearingDevicesDialogDelegate$$ExternalSyntheticLambda2(hearingDevicesDialogDelegate42, 2));
-                        HearingDevicesInputRoutingController create = hearingDevicesDialogDelegate42.mInputRoutingControllerFactory.create(systemUIDialog2.getContext());
-                        hearingDevicesDialogDelegate42.mInputRoutingController = create;
-                        create.cachedDevice = cachedBluetoothDevice;
+                        HearingDevicesInputRoutingController hearingDevicesInputRoutingControllerCreate = hearingDevicesDialogDelegate42.mInputRoutingControllerFactory.create(systemUIDialog2.getContext());
+                        hearingDevicesDialogDelegate42.mInputRoutingController = hearingDevicesInputRoutingControllerCreate;
+                        hearingDevicesInputRoutingControllerCreate.cachedDevice = cachedBluetoothDevice;
                         hearingDevicesDialogDelegate42.mInputRoutingSpinner = (Spinner) systemUIDialog2.requireViewById(R.id.input_routing_spinner);
                         HearingDevicesSpinnerAdapter hearingDevicesSpinnerAdapter2 = new HearingDevicesSpinnerAdapter(systemUIDialog2.getContext());
                         hearingDevicesDialogDelegate42.mInputRoutingAdapter = hearingDevicesSpinnerAdapter2;
@@ -245,10 +244,10 @@ public final /* synthetic */ class HearingDevicesDialogDelegate$$ExternalSynthet
                             }
                         });
                         CachedBluetoothDevice cachedBluetoothDevice3 = hearingDevicesDialogDelegate42.mInputRoutingController.cachedDevice;
-                        int ordinal = cachedBluetoothDevice3 == null ? HearingDevicesInputRoutingController.InputRoutingValue.HEARING_DEVICE.ordinal() : cachedBluetoothDevice3.mDevice.isMicrophonePreferredForCalls() ? HearingDevicesInputRoutingController.InputRoutingValue.HEARING_DEVICE.ordinal() : HearingDevicesInputRoutingController.InputRoutingValue.BUILTIN_MIC.ordinal();
-                        hearingDevicesDialogDelegate42.mInputRoutingSpinner.setSelection(ordinal, false);
+                        int iOrdinal = (cachedBluetoothDevice3 == null || cachedBluetoothDevice3.mDevice.isMicrophonePreferredForCalls()) ? HearingDevicesInputRoutingController.InputRoutingValue.HEARING_DEVICE.ordinal() : HearingDevicesInputRoutingController.InputRoutingValue.BUILTIN_MIC.ordinal();
+                        hearingDevicesDialogDelegate42.mInputRoutingSpinner.setSelection(iOrdinal, false);
                         HearingDevicesSpinnerAdapter hearingDevicesSpinnerAdapter3 = hearingDevicesDialogDelegate42.mInputRoutingAdapter;
-                        hearingDevicesSpinnerAdapter3.mSelectedPosition = ordinal;
+                        hearingDevicesSpinnerAdapter3.mSelectedPosition = iOrdinal;
                         hearingDevicesSpinnerAdapter3.notifyDataSetChanged();
                         hearingDevicesDialogDelegate42.mInputRoutingSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { // from class: com.android.systemui.accessibility.hearingaid.HearingDevicesDialogDelegate.5
                             public AnonymousClass5() {
@@ -318,31 +317,31 @@ public final /* synthetic */ class HearingDevicesDialogDelegate$$ExternalSynthet
                         LinearLayout linearLayout = (LinearLayout) systemUIDialog2.requireViewById(R.id.tools_container);
                         for (int i2 = 0; i2 < arrayList.size(); i2++) {
                             ToolItem toolItem2 = (ToolItem) arrayList.get(i2);
-                            final View inflate = LayoutInflater.from(context2).inflate(R.layout.hearing_tool_item, (ViewGroup) linearLayout, false);
-                            ImageView imageView = (ImageView) inflate.requireViewById(R.id.tool_icon);
-                            TextView textView = (TextView) inflate.requireViewById(R.id.tool_name);
-                            inflate.setContentDescription(toolItem2.toolName);
+                            final View viewInflate = LayoutInflater.from(context2).inflate(R.layout.hearing_tool_item, (ViewGroup) linearLayout, false);
+                            ImageView imageView = (ImageView) viewInflate.requireViewById(R.id.tool_icon);
+                            TextView textView = (TextView) viewInflate.requireViewById(R.id.tool_name);
+                            viewInflate.setContentDescription(toolItem2.toolName);
                             imageView.setImageDrawable(toolItem2.toolIcon);
                             if (toolItem2.isCustomIcon) {
                                 imageView.getDrawable().mutate().setTint(context2.getColor(android.R.color.resolver_text_color_secondary_dark));
                             }
                             textView.setText(toolItem2.toolName);
                             final Intent intent2 = toolItem2.toolIntent;
-                            inflate.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.accessibility.hearingaid.HearingDevicesDialogDelegate$$ExternalSyntheticLambda6
+                            viewInflate.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.accessibility.hearingaid.HearingDevicesDialogDelegate$$ExternalSyntheticLambda6
                                 @Override // android.view.View.OnClickListener
                                 public final void onClick(View view) {
-                                    String str4;
-                                    HearingDevicesDialogDelegate hearingDevicesDialogDelegate5 = HearingDevicesDialogDelegate.this;
+                                    String strFlattenToString;
+                                    HearingDevicesDialogDelegate hearingDevicesDialogDelegate5 = hearingDevicesDialogDelegate42;
                                     Intent intent3 = intent2;
-                                    View view2 = inflate;
-                                    String str5 = HearingDevicesDialogDelegate.ACTION_BLUETOOTH_DEVICE_DETAILS;
+                                    View view2 = viewInflate;
+                                    String str4 = HearingDevicesDialogDelegate.ACTION_BLUETOOTH_DEVICE_DETAILS;
                                     hearingDevicesDialogDelegate5.getClass();
                                     if (intent3.getComponent() != null) {
-                                        str4 = intent3.getComponent().flattenToString();
+                                        strFlattenToString = intent3.getComponent().flattenToString();
                                     } else {
-                                        str4 = intent3.getPackage() + "/" + intent3.getAction();
+                                        strFlattenToString = intent3.getPackage() + "/" + intent3.getAction();
                                     }
-                                    hearingDevicesDialogDelegate5.mUiEventLogger.log(HearingDevicesUiEvent.HEARING_DEVICES_RELATED_TOOL_CLICK, hearingDevicesDialogDelegate5.mLaunchSourceId, str4);
+                                    hearingDevicesDialogDelegate5.mUiEventLogger.log(HearingDevicesUiEvent.HEARING_DEVICES_RELATED_TOOL_CLICK, hearingDevicesDialogDelegate5.mLaunchSourceId, strFlattenToString);
                                     SystemUIDialog systemUIDialog3 = hearingDevicesDialogDelegate5.mDialog;
                                     if (systemUIDialog3 != null) {
                                         systemUIDialog3.dismiss();
@@ -352,7 +351,7 @@ public final /* synthetic */ class HearingDevicesDialogDelegate$$ExternalSynthet
                                     hearingDevicesDialogDelegate5.mActivityStarter.postStartActivityDismissingKeyguard(intent3, 0, DialogTransitionAnimator.createActivityTransitionController$default(dialogTransitionAnimator, view2));
                                 }
                             });
-                            linearLayout.addView(inflate);
+                            linearLayout.addView(viewInflate);
                             if (i2 != arrayList.size() - 1) {
                                 int dimensionPixelSize = context2.getResources().getDimensionPixelSize(R.dimen.hearing_devices_layout_margin);
                                 Space space = new Space(context2);

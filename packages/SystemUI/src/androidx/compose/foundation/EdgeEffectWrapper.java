@@ -5,7 +5,6 @@ import android.widget.EdgeEffect;
 import androidx.compose.foundation.gestures.Orientation;
 import androidx.compose.ui.unit.IntSize;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class EdgeEffectWrapper {
     public EdgeEffect bottomEffect;
@@ -56,7 +55,7 @@ final class EdgeEffectWrapper {
         edgeEffect.setColor(this.glowColor);
         long j = this.size;
         IntSize.Companion.getClass();
-        if (!IntSize.m861equalsimpl0(j, 0L)) {
+        if (!IntSize.m863equalsimpl0(j, 0L)) {
             if (orientation == Orientation.Vertical) {
                 long j2 = this.size;
                 edgeEffect.setSize((int) (j2 >> 32), (int) (j2 & 4294967295L));
@@ -73,9 +72,9 @@ final class EdgeEffectWrapper {
         if (edgeEffect != null) {
             return edgeEffect;
         }
-        EdgeEffect createEdgeEffect = createEdgeEffect(Orientation.Vertical);
-        this.bottomEffect = createEdgeEffect;
-        return createEdgeEffect;
+        EdgeEffect edgeEffectCreateEdgeEffect = createEdgeEffect(Orientation.Vertical);
+        this.bottomEffect = edgeEffectCreateEdgeEffect;
+        return edgeEffectCreateEdgeEffect;
     }
 
     public final EdgeEffect getOrCreateLeftEffect() {
@@ -83,9 +82,9 @@ final class EdgeEffectWrapper {
         if (edgeEffect != null) {
             return edgeEffect;
         }
-        EdgeEffect createEdgeEffect = createEdgeEffect(Orientation.Horizontal);
-        this.leftEffect = createEdgeEffect;
-        return createEdgeEffect;
+        EdgeEffect edgeEffectCreateEdgeEffect = createEdgeEffect(Orientation.Horizontal);
+        this.leftEffect = edgeEffectCreateEdgeEffect;
+        return edgeEffectCreateEdgeEffect;
     }
 
     public final EdgeEffect getOrCreateRightEffect() {
@@ -93,9 +92,9 @@ final class EdgeEffectWrapper {
         if (edgeEffect != null) {
             return edgeEffect;
         }
-        EdgeEffect createEdgeEffect = createEdgeEffect(Orientation.Horizontal);
-        this.rightEffect = createEdgeEffect;
-        return createEdgeEffect;
+        EdgeEffect edgeEffectCreateEdgeEffect = createEdgeEffect(Orientation.Horizontal);
+        this.rightEffect = edgeEffectCreateEdgeEffect;
+        return edgeEffectCreateEdgeEffect;
     }
 
     public final EdgeEffect getOrCreateTopEffect() {
@@ -103,8 +102,8 @@ final class EdgeEffectWrapper {
         if (edgeEffect != null) {
             return edgeEffect;
         }
-        EdgeEffect createEdgeEffect = createEdgeEffect(Orientation.Vertical);
-        this.topEffect = createEdgeEffect;
-        return createEdgeEffect;
+        EdgeEffect edgeEffectCreateEdgeEffect = createEdgeEffect(Orientation.Vertical);
+        this.topEffect = edgeEffectCreateEdgeEffect;
+        return edgeEffectCreateEdgeEffect;
     }
 }

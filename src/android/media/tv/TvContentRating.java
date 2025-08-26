@@ -35,17 +35,17 @@ public final class TvContentRating {
         if (TextUtils.isEmpty(str)) {
             throw new IllegalArgumentException("ratingString cannot be empty");
         }
-        String[] split = str.split(DELIMITER);
-        if (split.length < 3) {
+        String[] strArrSplit = str.split(DELIMITER);
+        if (strArrSplit.length < 3) {
             throw new IllegalArgumentException("Invalid rating string: " + str);
         }
-        if (split.length > 3) {
-            int length = split.length - 3;
+        if (strArrSplit.length > 3) {
+            int length = strArrSplit.length - 3;
             String[] strArr = new String[length];
-            System.arraycopy(split, 3, strArr, 0, length);
-            return new TvContentRating(split[0], split[1], split[2], strArr);
+            System.arraycopy(strArrSplit, 3, strArr, 0, length);
+            return new TvContentRating(strArrSplit[0], strArrSplit[1], strArrSplit[2], strArr);
         }
-        return new TvContentRating(split[0], split[1], split[2], null);
+        return new TvContentRating(strArrSplit[0], strArrSplit[1], strArrSplit[2], null);
     }
 
     private TvContentRating(String str, String str2, String str3, String[] strArr) {

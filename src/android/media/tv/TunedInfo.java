@@ -65,8 +65,8 @@ public final class TunedInfo implements Parcelable {
 
     private TunedInfo(Parcel parcel) {
         this.mInputId = parcel.readString();
-        String readString = parcel.readString();
-        this.mChannelUri = readString == null ? null : Uri.parse(readString);
+        String string = parcel.readString();
+        this.mChannelUri = string == null ? null : Uri.parse(string);
         this.mIsRecordingSession = parcel.readInt() == 1;
         this.mIsVisible = parcel.readInt() == 1;
         this.mIsMainSession = parcel.readInt() == 1;

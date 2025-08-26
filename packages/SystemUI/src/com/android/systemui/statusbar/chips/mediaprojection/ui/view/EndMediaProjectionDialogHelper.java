@@ -6,14 +6,12 @@ import com.android.systemui.animation.DialogTransitionAnimator;
 import com.android.systemui.statusbar.phone.SystemUIDialog;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class EndMediaProjectionDialogHelper {
     public final SystemUIDialog.Factory dialogFactory;
     public final DialogTransitionAnimator dialogTransitionAnimator;
     public final PackageManager packageManager;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public final class Companion {
         public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
             this();

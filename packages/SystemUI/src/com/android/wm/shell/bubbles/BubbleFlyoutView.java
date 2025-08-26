@@ -28,7 +28,6 @@ import com.android.wm.shell.shared.TypefaceUtils;
 import com.android.wm.shell.shared.animation.Interpolators;
 import com.sec.ims.volte2.data.VolteConstants;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class BubbleFlyoutView extends FrameLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
@@ -68,7 +67,7 @@ public class BubbleFlyoutView extends FrameLayout {
     public float mTranslationXWhenDot;
     public float mTranslationYWhenDot;
 
-    public BubbleFlyoutView(Context context, BubblePositioner bubblePositioner) {
+    public BubbleFlyoutView(Context context, BubblePositioner bubblePositioner) throws Resources.NotFoundException {
         super(context);
         this.mBgPaint = new Paint(3);
         this.mArgbEvaluator = new ArgbEvaluator();
@@ -99,10 +98,10 @@ public class BubbleFlyoutView extends FrameLayout {
         this.mBubbleElevation = resources.getDimensionPixelSize(R.dimen.bubble_elevation);
         int dimensionPixelSize = resources.getDimensionPixelSize(R.dimen.bubble_flyout_elevation);
         this.mFlyoutElevation = dimensionPixelSize;
-        TypedArray obtainStyledAttributes = ((FrameLayout) this).mContext.obtainStyledAttributes(new int[]{android.R.attr.dialogCornerRadius});
+        TypedArray typedArrayObtainStyledAttributes = ((FrameLayout) this).mContext.obtainStyledAttributes(new int[]{android.R.attr.dialogCornerRadius});
         this.mFloatingBackgroundColor = getContext().getResources().getColor(R.color.sec_bubble_flyout_color);
         this.mCornerRadius = getContext().getResources().getDimensionPixelSize(R.dimen.sec_noti_bubble_flyout_radius);
-        obtainStyledAttributes.recycle();
+        typedArrayObtainStyledAttributes.recycle();
         setPadding(0, 0, 0, 0);
         setWillNotDraw(false);
         setClipChildren(true);
@@ -139,12 +138,12 @@ public class BubbleFlyoutView extends FrameLayout {
         setTranslationX(this.mRestingTranslationX);
         updateDot(pointF, z2);
         animate().alpha(z ? 1.0f : 0.0f).setDuration(z ? 250L : 150L).setInterpolator(z ? Interpolators.ALPHA_IN : Interpolators.ALPHA_OUT);
-        ViewPropertyAnimator animate = animate();
+        ViewPropertyAnimator viewPropertyAnimatorAnimate = animate();
         float f2 = this.mFlyoutY;
         if (!z) {
             f2 -= 40.0f;
         }
-        animate.translationY(f2).setDuration(z ? 250L : 150L).setInterpolator(z ? Interpolators.ALPHA_IN : Interpolators.ALPHA_OUT).withEndAction(runnable);
+        viewPropertyAnimatorAnimate.translationY(f2).setDuration(z ? 250L : 150L).setInterpolator(z ? Interpolators.ALPHA_IN : Interpolators.ALPHA_OUT).withEndAction(runnable);
     }
 
     @Override // android.view.View
@@ -167,7 +166,7 @@ public class BubbleFlyoutView extends FrameLayout {
         float f = this.mFlyoutToDotHeightDelta;
         float f2 = this.mPercentTransitionedToDot;
         float f3 = height - (f * f2);
-        float m$1 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(1.0f, f2, this.mCornerRadius, this.mNewDotRadius * f2);
+        float fM$1 = DrawerArrowDrawable$$ExternalSyntheticOutline0.m$1(1.0f, f2, this.mCornerRadius, this.mNewDotRadius * f2);
         this.mBgTranslationX = this.mTranslationXWhenDot * f2;
         this.mBgTranslationY = this.mTranslationYWhenDot * f2;
         RectF rectF = this.mBgRect;
@@ -176,7 +175,7 @@ public class BubbleFlyoutView extends FrameLayout {
         this.mBgPaint.setColor(((Integer) this.mArgbEvaluator.evaluate(this.mPercentTransitionedToDot, Integer.valueOf(this.mFloatingBackgroundColor), Integer.valueOf(this.mDotColor))).intValue());
         canvas.save();
         canvas.translate(this.mBgTranslationX, this.mBgTranslationY);
-        canvas.drawRoundRect(this.mBgRect, m$1, m$1, this.mBgPaint);
+        canvas.drawRoundRect(this.mBgRect, fM$1, fM$1, this.mBgPaint);
         canvas.restore();
         invalidateOutline();
         super.onDraw(canvas);
@@ -186,17 +185,17 @@ public class BubbleFlyoutView extends FrameLayout {
         if (Float.isNaN(f)) {
             return;
         }
-        float max = Math.max(0.0f, Math.min(f, 1.0f));
-        this.mPercentTransitionedToDot = max;
-        this.mPercentStillFlyout = 1.0f - max;
-        float width = max * (this.mArrowPointingLeft ? -getWidth() : getWidth());
-        float min = Math.min(1.0f, Math.max(0.0f, (this.mPercentStillFlyout - 0.75f) / 0.25f));
+        float fMax = Math.max(0.0f, Math.min(f, 1.0f));
+        this.mPercentTransitionedToDot = fMax;
+        this.mPercentStillFlyout = 1.0f - fMax;
+        float width = fMax * (this.mArrowPointingLeft ? -getWidth() : getWidth());
+        float fMin = Math.min(1.0f, Math.max(0.0f, (this.mPercentStillFlyout - 0.75f) / 0.25f));
         this.mMessageText.setTranslationX(width);
-        this.mMessageText.setAlpha(min);
+        this.mMessageText.setAlpha(fMin);
         this.mSenderText.setTranslationX(width);
-        this.mSenderText.setAlpha(min);
+        this.mSenderText.setAlpha(fMin);
         this.mSenderAvatar.setTranslationX(width);
-        this.mSenderAvatar.setAlpha(min);
+        this.mSenderAvatar.setAlpha(fMin);
         setTranslationZ(this.mFlyoutElevation - ((r5 - this.mBubbleElevation) * this.mPercentTransitionedToDot));
         invalidate();
     }
@@ -227,16 +226,16 @@ public class BubbleFlyoutView extends FrameLayout {
             this.mSenderAvatar.setVisibility(0);
             this.mSenderAvatar.setImageDrawable(drawable);
         }
-        int max = ((int) (this.mPositioner.mDeviceConfig.isLargeScreen ? Math.max(r0.mScreenRect.width() * 0.3f, r0.mMinimumFlyoutWidthLargeScreen) : r0.mScreenRect.width() * 0.42f)) - (this.mFlyoutPadding * 2);
+        int iMax = ((int) (this.mPositioner.mDeviceConfig.isLargeScreen ? Math.max(r0.mScreenRect.width() * 0.3f, r0.mMinimumFlyoutWidthLargeScreen) : r0.mScreenRect.width() * 0.42f)) - (this.mFlyoutPadding * 2);
         if (TextUtils.isEmpty(flyoutMessage.senderName)) {
             this.mSenderText.setVisibility(8);
         } else {
-            this.mSenderText.setMaxWidth(max);
+            this.mSenderText.setMaxWidth(iMax);
             this.mSenderText.setText(flyoutMessage.senderName);
             this.mSenderText.setTypeface(Typeface.create(Typeface.create("sec", 0), VolteConstants.ErrorCode.BUSY_EVERYWHERE, false));
             this.mSenderText.setVisibility(0);
         }
-        this.mMessageText.setMaxWidth(max);
+        this.mMessageText.setMaxWidth(iMax);
         this.mMessageText.setText(flyoutMessage.message);
         this.mMessageText.setTypeface(Typeface.create(Typeface.create("sec", 0), 400, false));
         updateFontSize();

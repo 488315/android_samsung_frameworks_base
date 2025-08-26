@@ -6,7 +6,6 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.view.RemoteAnimationDefinition;
 import android.window.ITaskFragmentOrganizer;
-import android.window.TaskFragmentOrganizer;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -166,7 +165,7 @@ public class TaskFragmentOrganizer extends WindowOrganizer {
             TaskFragmentOrganizer.this.mExecutor.execute(new Runnable() { // from class: android.window.TaskFragmentOrganizer$1$$ExternalSyntheticLambda0
                 @Override // java.lang.Runnable
                 public final void run() {
-                    TaskFragmentOrganizer.AnonymousClass1.this.lambda$onTransactionReady$0(taskFragmentTransaction);
+                    this.f$0.lambda$onTransactionReady$0(taskFragmentTransaction);
                 }
             });
         }

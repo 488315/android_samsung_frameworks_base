@@ -45,10 +45,9 @@ public class ParcelableListBinder<T extends Parcelable> extends Binder {
                 if (size >= this.mCount || parcel.readInt() == 0) {
                     break;
                 }
-                Parcelable readParcelable = parcel.readParcelable(null);
-                if (this.mListElementsClass.isAssignableFrom(readParcelable.getClass())) {
-                    Parcelable parcelable = readParcelable;
-                    this.mList.add(readParcelable);
+                Parcelable parcelable = parcel.readParcelable(null);
+                if (this.mListElementsClass.isAssignableFrom(parcelable.getClass())) {
+                    this.mList.add(parcelable);
                 }
                 size++;
             }
@@ -67,22 +66,22 @@ public class ParcelableListBinder<T extends Parcelable> extends Binder {
         int size = list.size();
         int i = 0;
         do {
-            Parcel obtain = Parcel.obtain();
-            Parcel obtain2 = Parcel.obtain();
+            Parcel parcelObtain = Parcel.obtain();
+            Parcel parcelObtain2 = Parcel.obtain();
             if (i == 0) {
-                obtain.writeInt(size);
+                parcelObtain.writeInt(size);
             }
-            while (i < size && obtain.dataSize() < SUGGESTED_MAX_IPC_SIZE) {
-                obtain.writeInt(1);
-                obtain.writeParcelable(list.get(i), 0);
+            while (i < size && parcelObtain.dataSize() < SUGGESTED_MAX_IPC_SIZE) {
+                parcelObtain.writeInt(1);
+                parcelObtain.writeParcelable(list.get(i), 0);
                 i++;
             }
             if (i < size) {
-                obtain.writeInt(0);
+                parcelObtain.writeInt(0);
             }
-            iBinder.transact(1, obtain, obtain2, 0);
-            obtain2.recycle();
-            obtain.recycle();
+            iBinder.transact(1, parcelObtain, parcelObtain2, 0);
+            parcelObtain2.recycle();
+            parcelObtain.recycle();
         } while (i < size);
     }
 }

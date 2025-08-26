@@ -71,9 +71,9 @@ public interface ICellBroadcastService extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ICellBroadcastService.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ICellBroadcastService)) {
-                return (ICellBroadcastService) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(ICellBroadcastService.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof ICellBroadcastService)) {
+                return (ICellBroadcastService) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -109,27 +109,27 @@ public interface ICellBroadcastService extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                byte[] createByteArray = parcel.createByteArray();
+                int i3 = parcel.readInt();
+                byte[] bArrCreateByteArray = parcel.createByteArray();
                 parcel.enforceNoDataAvail();
-                handleGsmCellBroadcastSms(readInt, createByteArray);
+                handleGsmCellBroadcastSms(i3, bArrCreateByteArray);
             } else if (i == 2) {
-                int readInt2 = parcel.readInt();
-                byte[] createByteArray2 = parcel.createByteArray();
-                int readInt3 = parcel.readInt();
+                int i4 = parcel.readInt();
+                byte[] bArrCreateByteArray2 = parcel.createByteArray();
+                int i5 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                handleCdmaCellBroadcastSms(readInt2, createByteArray2, readInt3);
+                handleCdmaCellBroadcastSms(i4, bArrCreateByteArray2, i5);
             } else if (i == 3) {
-                int readInt4 = parcel.readInt();
-                ArrayList createTypedArrayList = parcel.createTypedArrayList(CdmaSmsCbProgramData.CREATOR);
-                String readString = parcel.readString();
+                int i6 = parcel.readInt();
+                ArrayList arrayListCreateTypedArrayList = parcel.createTypedArrayList(CdmaSmsCbProgramData.CREATOR);
+                String string = parcel.readString();
                 RemoteCallback remoteCallback = (RemoteCallback) parcel.readTypedObject(RemoteCallback.CREATOR);
                 parcel.enforceNoDataAvail();
-                handleCdmaScpMessage(readInt4, createTypedArrayList, readString, remoteCallback);
+                handleCdmaScpMessage(i6, arrayListCreateTypedArrayList, string, remoteCallback);
             } else if (i == 4) {
-                int readInt5 = parcel.readInt();
+                int i7 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                CharSequence cellBroadcastAreaInfo = getCellBroadcastAreaInfo(readInt5);
+                CharSequence cellBroadcastAreaInfo = getCellBroadcastAreaInfo(i7);
                 parcel2.writeNoException();
                 if (cellBroadcastAreaInfo != null) {
                     parcel2.writeInt(1);
@@ -161,59 +161,59 @@ public interface ICellBroadcastService extends IInterface {
 
             @Override // android.telephony.ICellBroadcastService
             public void handleGsmCellBroadcastSms(int i, byte[] bArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICellBroadcastService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeByteArray(bArr);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICellBroadcastService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByteArray(bArr);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ICellBroadcastService
             public void handleCdmaCellBroadcastSms(int i, byte[] bArr, int i2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICellBroadcastService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeByteArray(bArr);
-                    obtain.writeInt(i2);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICellBroadcastService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeByteArray(bArr);
+                    parcelObtain.writeInt(i2);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ICellBroadcastService
             public void handleCdmaScpMessage(int i, List<CdmaSmsCbProgramData> list, String str, RemoteCallback remoteCallback) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(ICellBroadcastService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedList(list, 0);
-                    obtain.writeString(str);
-                    obtain.writeTypedObject(remoteCallback, 0);
-                    this.mRemote.transact(3, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(ICellBroadcastService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedList(list, 0);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeTypedObject(remoteCallback, 0);
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.telephony.ICellBroadcastService
             public CharSequence getCellBroadcastAreaInfo(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(ICellBroadcastService.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(4, obtain, obtain2, 0);
-                    obtain2.readException();
-                    return (CharSequence) obtain2.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    parcelObtain.writeInterfaceToken(ICellBroadcastService.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(4, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
+                    return (CharSequence) parcelObtain2.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

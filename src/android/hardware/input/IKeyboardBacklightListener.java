@@ -44,9 +44,9 @@ public interface IKeyboardBacklightListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IKeyboardBacklightListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IKeyboardBacklightListener)) {
-                return (IKeyboardBacklightListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IKeyboardBacklightListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IKeyboardBacklightListener)) {
+                return (IKeyboardBacklightListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -73,11 +73,11 @@ public interface IKeyboardBacklightListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 IKeyboardBacklightState iKeyboardBacklightState = (IKeyboardBacklightState) parcel.readTypedObject(IKeyboardBacklightState.CREATOR);
-                boolean readBoolean = parcel.readBoolean();
+                boolean z = parcel.readBoolean();
                 parcel.enforceNoDataAvail();
-                onBrightnessChanged(readInt, iKeyboardBacklightState, readBoolean);
+                onBrightnessChanged(i3, iKeyboardBacklightState, z);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -101,15 +101,15 @@ public interface IKeyboardBacklightListener extends IInterface {
 
             @Override // android.hardware.input.IKeyboardBacklightListener
             public void onBrightnessChanged(int i, IKeyboardBacklightState iKeyboardBacklightState, boolean z) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IKeyboardBacklightListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeTypedObject(iKeyboardBacklightState, 0);
-                    obtain.writeBoolean(z);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IKeyboardBacklightListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeTypedObject(iKeyboardBacklightState, 0);
+                    parcelObtain.writeBoolean(z);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

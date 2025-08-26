@@ -46,14 +46,14 @@ public final class CellInfoNr extends CellInfo {
     }
 
     private CellInfoNr(CellInfoNr cellInfoNr, boolean z) {
+        CellIdentityNr cellIdentityNrSanitizeLocationInfo;
         super(cellInfoNr);
-        CellIdentityNr cellIdentityNr;
         if (z) {
-            cellIdentityNr = cellInfoNr.mCellIdentity.sanitizeLocationInfo();
+            cellIdentityNrSanitizeLocationInfo = cellInfoNr.mCellIdentity.sanitizeLocationInfo();
         } else {
-            cellIdentityNr = cellInfoNr.mCellIdentity;
+            cellIdentityNrSanitizeLocationInfo = cellInfoNr.mCellIdentity;
         }
-        this.mCellIdentity = cellIdentityNr;
+        this.mCellIdentity = cellIdentityNrSanitizeLocationInfo;
         this.mCellSignalStrength = cellInfoNr.mCellSignalStrength;
     }
 

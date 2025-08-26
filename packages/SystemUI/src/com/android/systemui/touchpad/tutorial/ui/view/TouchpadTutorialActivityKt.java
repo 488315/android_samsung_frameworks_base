@@ -27,7 +27,6 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function2;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class TouchpadTutorialActivityKt {
     public static final void TouchpadTutorialScreen(final TouchpadTutorialViewModel touchpadTutorialViewModel, final BackGestureScreenViewModel backGestureScreenViewModel, final HomeGestureScreenViewModel homeGestureScreenViewModel, final RecentAppsGestureScreenViewModel recentAppsGestureScreenViewModel, final SwitchAppsGestureScreenViewModel switchAppsGestureScreenViewModel, final EasterEggGestureViewModel easterEggGestureViewModel, final Function0 function0, Composer composer, final int i) {
@@ -40,26 +39,26 @@ public abstract class TouchpadTutorialActivityKt {
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventStart("com.android.systemui.touchpad.tutorial.ui.view.TouchpadTutorialScreen (TouchpadTutorialActivity.kt:118)");
             }
-            MutableState collectAsStateWithLifecycle = FlowExtKt.collectAsStateWithLifecycle(touchpadTutorialViewModel.screen, Lifecycle.State.STARTED, composerImpl, 48);
+            MutableState mutableStateCollectAsStateWithLifecycle = FlowExtKt.collectAsStateWithLifecycle(touchpadTutorialViewModel.screen, Lifecycle.State.STARTED, composerImpl, 48);
             composerImpl.startReplaceGroup(-757657423);
-            Object rememberedValue = composerImpl.rememberedValue();
+            Object objRememberedValue = composerImpl.rememberedValue();
             Composer.Companion.getClass();
             Composer$Companion$Empty$1 composer$Companion$Empty$1 = Composer.Companion.Empty;
-            if (rememberedValue == composer$Companion$Empty$1) {
-                rememberedValue = SnapshotStateKt.mutableStateOf$default(Screen.TUTORIAL_SELECTION);
-                composerImpl.updateRememberedValue(rememberedValue);
+            if (objRememberedValue == composer$Companion$Empty$1) {
+                objRememberedValue = SnapshotStateKt.mutableStateOf$default(Screen.TUTORIAL_SELECTION);
+                composerImpl.updateRememberedValue(objRememberedValue);
             }
-            final MutableState mutableState = (MutableState) rememberedValue;
+            final MutableState mutableState = (MutableState) objRememberedValue;
             composerImpl.end(false);
-            Enum r2 = (Enum) collectAsStateWithLifecycle.getValue();
+            Enum r2 = (Enum) mutableStateCollectAsStateWithLifecycle.getValue();
             if (r2 == Screen.TUTORIAL_SELECTION) {
                 composerImpl.startReplaceGroup(-757652963);
                 composerImpl.startReplaceGroup(-757651563);
-                boolean changedInstance = composerImpl.changedInstance(touchpadTutorialViewModel);
-                Object rememberedValue2 = composerImpl.rememberedValue();
-                if (changedInstance || rememberedValue2 == composer$Companion$Empty$1) {
+                boolean zChangedInstance = composerImpl.changedInstance(touchpadTutorialViewModel);
+                Object objRememberedValue2 = composerImpl.rememberedValue();
+                if (zChangedInstance || objRememberedValue2 == composer$Companion$Empty$1) {
                     final int i3 = 0;
-                    rememberedValue2 = new Function0() { // from class: com.android.systemui.touchpad.tutorial.ui.view.TouchpadTutorialActivityKt$$ExternalSyntheticLambda0
+                    objRememberedValue2 = new Function0() { // from class: com.android.systemui.touchpad.tutorial.ui.view.TouchpadTutorialActivityKt$$ExternalSyntheticLambda0
                         @Override // kotlin.jvm.functions.Function0
                         public final Object invoke() {
                             switch (i3) {
@@ -87,16 +86,16 @@ public abstract class TouchpadTutorialActivityKt {
                             return Unit.INSTANCE;
                         }
                     };
-                    composerImpl.updateRememberedValue(rememberedValue2);
+                    composerImpl.updateRememberedValue(objRememberedValue2);
                 }
-                Function0 function02 = (Function0) rememberedValue2;
+                Function0 function02 = (Function0) objRememberedValue2;
                 composerImpl.end(false);
                 composerImpl.startReplaceGroup(-757646539);
-                boolean changedInstance2 = composerImpl.changedInstance(touchpadTutorialViewModel);
-                Object rememberedValue3 = composerImpl.rememberedValue();
-                if (changedInstance2 || rememberedValue3 == composer$Companion$Empty$1) {
+                boolean zChangedInstance2 = composerImpl.changedInstance(touchpadTutorialViewModel);
+                Object objRememberedValue3 = composerImpl.rememberedValue();
+                if (zChangedInstance2 || objRememberedValue3 == composer$Companion$Empty$1) {
                     final int i4 = 1;
-                    rememberedValue3 = new Function0() { // from class: com.android.systemui.touchpad.tutorial.ui.view.TouchpadTutorialActivityKt$$ExternalSyntheticLambda0
+                    objRememberedValue3 = new Function0() { // from class: com.android.systemui.touchpad.tutorial.ui.view.TouchpadTutorialActivityKt$$ExternalSyntheticLambda0
                         @Override // kotlin.jvm.functions.Function0
                         public final Object invoke() {
                             switch (i4) {
@@ -124,16 +123,16 @@ public abstract class TouchpadTutorialActivityKt {
                             return Unit.INSTANCE;
                         }
                     };
-                    composerImpl.updateRememberedValue(rememberedValue3);
+                    composerImpl.updateRememberedValue(objRememberedValue3);
                 }
-                Function0 function03 = (Function0) rememberedValue3;
+                Function0 function03 = (Function0) objRememberedValue3;
                 composerImpl.end(false);
                 composerImpl.startReplaceGroup(-757641309);
-                boolean changedInstance3 = composerImpl.changedInstance(touchpadTutorialViewModel);
-                Object rememberedValue4 = composerImpl.rememberedValue();
-                if (changedInstance3 || rememberedValue4 == composer$Companion$Empty$1) {
+                boolean zChangedInstance3 = composerImpl.changedInstance(touchpadTutorialViewModel);
+                Object objRememberedValue4 = composerImpl.rememberedValue();
+                if (zChangedInstance3 || objRememberedValue4 == composer$Companion$Empty$1) {
                     final int i5 = 2;
-                    rememberedValue4 = new Function0() { // from class: com.android.systemui.touchpad.tutorial.ui.view.TouchpadTutorialActivityKt$$ExternalSyntheticLambda0
+                    objRememberedValue4 = new Function0() { // from class: com.android.systemui.touchpad.tutorial.ui.view.TouchpadTutorialActivityKt$$ExternalSyntheticLambda0
                         @Override // kotlin.jvm.functions.Function0
                         public final Object invoke() {
                             switch (i5) {
@@ -161,16 +160,16 @@ public abstract class TouchpadTutorialActivityKt {
                             return Unit.INSTANCE;
                         }
                     };
-                    composerImpl.updateRememberedValue(rememberedValue4);
+                    composerImpl.updateRememberedValue(objRememberedValue4);
                 }
-                Function0 function04 = (Function0) rememberedValue4;
+                Function0 function04 = (Function0) objRememberedValue4;
                 composerImpl.end(false);
                 composerImpl.startReplaceGroup(-757635645);
-                boolean changedInstance4 = composerImpl.changedInstance(touchpadTutorialViewModel);
-                Object rememberedValue5 = composerImpl.rememberedValue();
-                if (changedInstance4 || rememberedValue5 == composer$Companion$Empty$1) {
+                boolean zChangedInstance4 = composerImpl.changedInstance(touchpadTutorialViewModel);
+                Object objRememberedValue5 = composerImpl.rememberedValue();
+                if (zChangedInstance4 || objRememberedValue5 == composer$Companion$Empty$1) {
                     final int i6 = 3;
-                    rememberedValue5 = new Function0() { // from class: com.android.systemui.touchpad.tutorial.ui.view.TouchpadTutorialActivityKt$$ExternalSyntheticLambda0
+                    objRememberedValue5 = new Function0() { // from class: com.android.systemui.touchpad.tutorial.ui.view.TouchpadTutorialActivityKt$$ExternalSyntheticLambda0
                         @Override // kotlin.jvm.functions.Function0
                         public final Object invoke() {
                             switch (i6) {
@@ -198,20 +197,20 @@ public abstract class TouchpadTutorialActivityKt {
                             return Unit.INSTANCE;
                         }
                     };
-                    composerImpl.updateRememberedValue(rememberedValue5);
+                    composerImpl.updateRememberedValue(objRememberedValue5);
                 }
                 composerImpl.end(false);
-                TutorialSelectionScreenKt.TutorialSelectionScreen(function02, function03, function04, (Function0) rememberedValue5, function0, (Screen) mutableState.getValue(), composerImpl, (i2 >> 6) & 57344);
+                TutorialSelectionScreenKt.TutorialSelectionScreen(function02, function03, function04, (Function0) objRememberedValue5, function0, (Screen) mutableState.getValue(), composerImpl, (i2 >> 6) & 57344);
                 composerImpl = composerImpl;
                 composerImpl.end(false);
             } else if (r2 == Screen.BACK_GESTURE) {
                 composerImpl.startReplaceGroup(-757626884);
                 composerImpl.startReplaceGroup(-757622431);
-                boolean changedInstance5 = composerImpl.changedInstance(touchpadTutorialViewModel);
-                Object rememberedValue6 = composerImpl.rememberedValue();
-                if (changedInstance5 || rememberedValue6 == composer$Companion$Empty$1) {
+                boolean zChangedInstance5 = composerImpl.changedInstance(touchpadTutorialViewModel);
+                Object objRememberedValue6 = composerImpl.rememberedValue();
+                if (zChangedInstance5 || objRememberedValue6 == composer$Companion$Empty$1) {
                     final int i7 = 5;
-                    rememberedValue6 = new Function0() { // from class: com.android.systemui.touchpad.tutorial.ui.view.TouchpadTutorialActivityKt$$ExternalSyntheticLambda1
+                    objRememberedValue6 = new Function0() { // from class: com.android.systemui.touchpad.tutorial.ui.view.TouchpadTutorialActivityKt$$ExternalSyntheticLambda1
                         @Override // kotlin.jvm.functions.Function0
                         public final Object invoke() {
                             switch (i7) {
@@ -243,16 +242,16 @@ public abstract class TouchpadTutorialActivityKt {
                             return Unit.INSTANCE;
                         }
                     };
-                    composerImpl.updateRememberedValue(rememberedValue6);
+                    composerImpl.updateRememberedValue(objRememberedValue6);
                 }
-                Function0 function05 = (Function0) rememberedValue6;
+                Function0 function05 = (Function0) objRememberedValue6;
                 composerImpl.end(false);
                 composerImpl.startReplaceGroup(-757620575);
-                boolean changedInstance6 = composerImpl.changedInstance(touchpadTutorialViewModel);
-                Object rememberedValue7 = composerImpl.rememberedValue();
-                if (changedInstance6 || rememberedValue7 == composer$Companion$Empty$1) {
+                boolean zChangedInstance6 = composerImpl.changedInstance(touchpadTutorialViewModel);
+                Object objRememberedValue7 = composerImpl.rememberedValue();
+                if (zChangedInstance6 || objRememberedValue7 == composer$Companion$Empty$1) {
                     final int i8 = 6;
-                    rememberedValue7 = new Function0() { // from class: com.android.systemui.touchpad.tutorial.ui.view.TouchpadTutorialActivityKt$$ExternalSyntheticLambda1
+                    objRememberedValue7 = new Function0() { // from class: com.android.systemui.touchpad.tutorial.ui.view.TouchpadTutorialActivityKt$$ExternalSyntheticLambda1
                         @Override // kotlin.jvm.functions.Function0
                         public final Object invoke() {
                             switch (i8) {
@@ -284,19 +283,19 @@ public abstract class TouchpadTutorialActivityKt {
                             return Unit.INSTANCE;
                         }
                     };
-                    composerImpl.updateRememberedValue(rememberedValue7);
+                    composerImpl.updateRememberedValue(objRememberedValue7);
                 }
                 composerImpl.end(false);
-                BackGestureTutorialScreenKt.BackGestureTutorialScreen(backGestureScreenViewModel, easterEggGestureViewModel, function05, (Function0) rememberedValue7, null, composerImpl, ((i2 >> 3) & 14) | ((i2 >> 12) & 112), 16);
+                BackGestureTutorialScreenKt.BackGestureTutorialScreen(backGestureScreenViewModel, easterEggGestureViewModel, function05, (Function0) objRememberedValue7, null, composerImpl, ((i2 >> 3) & 14) | ((i2 >> 12) & 112), 16);
                 composerImpl.end(false);
             } else if (r2 == Screen.HOME_GESTURE) {
                 composerImpl.startReplaceGroup(-757617700);
                 composerImpl.startReplaceGroup(-757613247);
-                boolean changedInstance7 = composerImpl.changedInstance(touchpadTutorialViewModel);
-                Object rememberedValue8 = composerImpl.rememberedValue();
-                if (changedInstance7 || rememberedValue8 == composer$Companion$Empty$1) {
+                boolean zChangedInstance7 = composerImpl.changedInstance(touchpadTutorialViewModel);
+                Object objRememberedValue8 = composerImpl.rememberedValue();
+                if (zChangedInstance7 || objRememberedValue8 == composer$Companion$Empty$1) {
                     final int i9 = 7;
-                    rememberedValue8 = new Function0() { // from class: com.android.systemui.touchpad.tutorial.ui.view.TouchpadTutorialActivityKt$$ExternalSyntheticLambda1
+                    objRememberedValue8 = new Function0() { // from class: com.android.systemui.touchpad.tutorial.ui.view.TouchpadTutorialActivityKt$$ExternalSyntheticLambda1
                         @Override // kotlin.jvm.functions.Function0
                         public final Object invoke() {
                             switch (i9) {
@@ -328,16 +327,16 @@ public abstract class TouchpadTutorialActivityKt {
                             return Unit.INSTANCE;
                         }
                     };
-                    composerImpl.updateRememberedValue(rememberedValue8);
+                    composerImpl.updateRememberedValue(objRememberedValue8);
                 }
-                Function0 function06 = (Function0) rememberedValue8;
+                Function0 function06 = (Function0) objRememberedValue8;
                 composerImpl.end(false);
                 composerImpl.startReplaceGroup(-757611391);
-                boolean changedInstance8 = composerImpl.changedInstance(touchpadTutorialViewModel);
-                Object rememberedValue9 = composerImpl.rememberedValue();
-                if (changedInstance8 || rememberedValue9 == composer$Companion$Empty$1) {
+                boolean zChangedInstance8 = composerImpl.changedInstance(touchpadTutorialViewModel);
+                Object objRememberedValue9 = composerImpl.rememberedValue();
+                if (zChangedInstance8 || objRememberedValue9 == composer$Companion$Empty$1) {
                     final int i10 = 1;
-                    rememberedValue9 = new Function0() { // from class: com.android.systemui.touchpad.tutorial.ui.view.TouchpadTutorialActivityKt$$ExternalSyntheticLambda1
+                    objRememberedValue9 = new Function0() { // from class: com.android.systemui.touchpad.tutorial.ui.view.TouchpadTutorialActivityKt$$ExternalSyntheticLambda1
                         @Override // kotlin.jvm.functions.Function0
                         public final Object invoke() {
                             switch (i10) {
@@ -369,19 +368,19 @@ public abstract class TouchpadTutorialActivityKt {
                             return Unit.INSTANCE;
                         }
                     };
-                    composerImpl.updateRememberedValue(rememberedValue9);
+                    composerImpl.updateRememberedValue(objRememberedValue9);
                 }
                 composerImpl.end(false);
-                HomeGestureTutorialScreenKt.HomeGestureTutorialScreen(homeGestureScreenViewModel, easterEggGestureViewModel, function06, (Function0) rememberedValue9, null, composerImpl, ((i2 >> 6) & 14) | ((i2 >> 12) & 112), 16);
+                HomeGestureTutorialScreenKt.HomeGestureTutorialScreen(homeGestureScreenViewModel, easterEggGestureViewModel, function06, (Function0) objRememberedValue9, null, composerImpl, ((i2 >> 6) & 14) | ((i2 >> 12) & 112), 16);
                 composerImpl.end(false);
             } else if (r2 == Screen.RECENT_APPS_GESTURE) {
                 composerImpl.startReplaceGroup(-757608280);
                 composerImpl.startReplaceGroup(-757603455);
-                boolean changedInstance9 = composerImpl.changedInstance(touchpadTutorialViewModel);
-                Object rememberedValue10 = composerImpl.rememberedValue();
-                if (changedInstance9 || rememberedValue10 == composer$Companion$Empty$1) {
+                boolean zChangedInstance9 = composerImpl.changedInstance(touchpadTutorialViewModel);
+                Object objRememberedValue10 = composerImpl.rememberedValue();
+                if (zChangedInstance9 || objRememberedValue10 == composer$Companion$Empty$1) {
                     final int i11 = 2;
-                    rememberedValue10 = new Function0() { // from class: com.android.systemui.touchpad.tutorial.ui.view.TouchpadTutorialActivityKt$$ExternalSyntheticLambda1
+                    objRememberedValue10 = new Function0() { // from class: com.android.systemui.touchpad.tutorial.ui.view.TouchpadTutorialActivityKt$$ExternalSyntheticLambda1
                         @Override // kotlin.jvm.functions.Function0
                         public final Object invoke() {
                             switch (i11) {
@@ -413,16 +412,16 @@ public abstract class TouchpadTutorialActivityKt {
                             return Unit.INSTANCE;
                         }
                     };
-                    composerImpl.updateRememberedValue(rememberedValue10);
+                    composerImpl.updateRememberedValue(objRememberedValue10);
                 }
-                Function0 function07 = (Function0) rememberedValue10;
+                Function0 function07 = (Function0) objRememberedValue10;
                 composerImpl.end(false);
                 composerImpl.startReplaceGroup(-757601599);
-                boolean changedInstance10 = composerImpl.changedInstance(touchpadTutorialViewModel);
-                Object rememberedValue11 = composerImpl.rememberedValue();
-                if (changedInstance10 || rememberedValue11 == composer$Companion$Empty$1) {
+                boolean zChangedInstance10 = composerImpl.changedInstance(touchpadTutorialViewModel);
+                Object objRememberedValue11 = composerImpl.rememberedValue();
+                if (zChangedInstance10 || objRememberedValue11 == composer$Companion$Empty$1) {
                     final int i12 = 3;
-                    rememberedValue11 = new Function0() { // from class: com.android.systemui.touchpad.tutorial.ui.view.TouchpadTutorialActivityKt$$ExternalSyntheticLambda1
+                    objRememberedValue11 = new Function0() { // from class: com.android.systemui.touchpad.tutorial.ui.view.TouchpadTutorialActivityKt$$ExternalSyntheticLambda1
                         @Override // kotlin.jvm.functions.Function0
                         public final Object invoke() {
                             switch (i12) {
@@ -454,20 +453,20 @@ public abstract class TouchpadTutorialActivityKt {
                             return Unit.INSTANCE;
                         }
                     };
-                    composerImpl.updateRememberedValue(rememberedValue11);
+                    composerImpl.updateRememberedValue(objRememberedValue11);
                 }
                 composerImpl.end(false);
-                RecentAppsGestureTutorialScreenKt.RecentAppsGestureTutorialScreen(recentAppsGestureScreenViewModel, easterEggGestureViewModel, function07, (Function0) rememberedValue11, composerImpl, ((i2 >> 12) & 112) | ((i2 >> 9) & 14));
+                RecentAppsGestureTutorialScreenKt.RecentAppsGestureTutorialScreen(recentAppsGestureScreenViewModel, easterEggGestureViewModel, function07, (Function0) objRememberedValue11, composerImpl, ((i2 >> 12) & 112) | ((i2 >> 9) & 14));
                 composerImpl = composerImpl;
                 composerImpl.end(false);
             } else if (r2 == Screen.SWITCH_APPS_GESTURE) {
                 composerImpl.startReplaceGroup(-757598482);
                 composerImpl.startReplaceGroup(-757593471);
-                boolean changedInstance11 = composerImpl.changedInstance(touchpadTutorialViewModel);
-                Object rememberedValue12 = composerImpl.rememberedValue();
-                if (changedInstance11 || rememberedValue12 == composer$Companion$Empty$1) {
+                boolean zChangedInstance11 = composerImpl.changedInstance(touchpadTutorialViewModel);
+                Object objRememberedValue12 = composerImpl.rememberedValue();
+                if (zChangedInstance11 || objRememberedValue12 == composer$Companion$Empty$1) {
                     final int i13 = 0;
-                    rememberedValue12 = new Function0() { // from class: com.android.systemui.touchpad.tutorial.ui.view.TouchpadTutorialActivityKt$$ExternalSyntheticLambda1
+                    objRememberedValue12 = new Function0() { // from class: com.android.systemui.touchpad.tutorial.ui.view.TouchpadTutorialActivityKt$$ExternalSyntheticLambda1
                         @Override // kotlin.jvm.functions.Function0
                         public final Object invoke() {
                             switch (i13) {
@@ -499,16 +498,16 @@ public abstract class TouchpadTutorialActivityKt {
                             return Unit.INSTANCE;
                         }
                     };
-                    composerImpl.updateRememberedValue(rememberedValue12);
+                    composerImpl.updateRememberedValue(objRememberedValue12);
                 }
-                Function0 function08 = (Function0) rememberedValue12;
+                Function0 function08 = (Function0) objRememberedValue12;
                 composerImpl.end(false);
                 composerImpl.startReplaceGroup(-757591615);
-                boolean changedInstance12 = composerImpl.changedInstance(touchpadTutorialViewModel);
-                Object rememberedValue13 = composerImpl.rememberedValue();
-                if (changedInstance12 || rememberedValue13 == composer$Companion$Empty$1) {
+                boolean zChangedInstance12 = composerImpl.changedInstance(touchpadTutorialViewModel);
+                Object objRememberedValue13 = composerImpl.rememberedValue();
+                if (zChangedInstance12 || objRememberedValue13 == composer$Companion$Empty$1) {
                     final int i14 = 4;
-                    rememberedValue13 = new Function0() { // from class: com.android.systemui.touchpad.tutorial.ui.view.TouchpadTutorialActivityKt$$ExternalSyntheticLambda1
+                    objRememberedValue13 = new Function0() { // from class: com.android.systemui.touchpad.tutorial.ui.view.TouchpadTutorialActivityKt$$ExternalSyntheticLambda1
                         @Override // kotlin.jvm.functions.Function0
                         public final Object invoke() {
                             switch (i14) {
@@ -540,10 +539,10 @@ public abstract class TouchpadTutorialActivityKt {
                             return Unit.INSTANCE;
                         }
                     };
-                    composerImpl.updateRememberedValue(rememberedValue13);
+                    composerImpl.updateRememberedValue(objRememberedValue13);
                 }
                 composerImpl.end(false);
-                SwitchAppsGestureTutorialScreenKt.SwitchAppsGestureTutorialScreen(switchAppsGestureScreenViewModel, easterEggGestureViewModel, function08, (Function0) rememberedValue13, composerImpl, (i2 >> 12) & 126);
+                SwitchAppsGestureTutorialScreenKt.SwitchAppsGestureTutorialScreen(switchAppsGestureScreenViewModel, easterEggGestureViewModel, function08, (Function0) objRememberedValue13, composerImpl, (i2 >> 12) & 126);
                 composerImpl = composerImpl;
                 composerImpl.end(false);
             } else {
@@ -554,9 +553,9 @@ public abstract class TouchpadTutorialActivityKt {
                 ComposerKt.traceEventEnd();
             }
         }
-        RecomposeScopeImpl endRestartGroup = composerImpl.endRestartGroup();
-        if (endRestartGroup != null) {
-            endRestartGroup.block = new Function2(backGestureScreenViewModel, homeGestureScreenViewModel, recentAppsGestureScreenViewModel, switchAppsGestureScreenViewModel, easterEggGestureViewModel, function0, i) { // from class: com.android.systemui.touchpad.tutorial.ui.view.TouchpadTutorialActivityKt$$ExternalSyntheticLambda3
+        RecomposeScopeImpl recomposeScopeImplEndRestartGroup = composerImpl.endRestartGroup();
+        if (recomposeScopeImplEndRestartGroup != null) {
+            recomposeScopeImplEndRestartGroup.block = new Function2(backGestureScreenViewModel, homeGestureScreenViewModel, recentAppsGestureScreenViewModel, switchAppsGestureScreenViewModel, easterEggGestureViewModel, function0, i) { // from class: com.android.systemui.touchpad.tutorial.ui.view.TouchpadTutorialActivityKt$$ExternalSyntheticLambda3
                 public final /* synthetic */ BackGestureScreenViewModel f$1;
                 public final /* synthetic */ HomeGestureScreenViewModel f$2;
                 public final /* synthetic */ RecentAppsGestureScreenViewModel f$3;
@@ -567,10 +566,10 @@ public abstract class TouchpadTutorialActivityKt {
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj, Object obj2) {
                     ((Integer) obj2).getClass();
-                    int updateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(1);
+                    int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(1);
                     EasterEggGestureViewModel easterEggGestureViewModel2 = this.f$5;
                     Function0 function09 = this.f$6;
-                    TouchpadTutorialActivityKt.TouchpadTutorialScreen(TouchpadTutorialViewModel.this, this.f$1, this.f$2, this.f$3, this.f$4, easterEggGestureViewModel2, function09, (Composer) obj, updateChangedFlags);
+                    TouchpadTutorialActivityKt.TouchpadTutorialScreen(this.f$0, this.f$1, this.f$2, this.f$3, this.f$4, easterEggGestureViewModel2, function09, (Composer) obj, iUpdateChangedFlags);
                     return Unit.INSTANCE;
                 }
             };

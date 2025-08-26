@@ -2,7 +2,7 @@ package com.android.internal.protolog;
 
 import java.io.PrintWriter;
 
-/* loaded from: classes3.dex */
+/* loaded from: classes4.dex */
 public interface ProtoLogConfigurationService extends IProtoLogConfigurationService {
     void disableProtoLogToLogcat(PrintWriter printWriter, String... strArr);
 

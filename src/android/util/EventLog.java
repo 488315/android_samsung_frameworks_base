@@ -57,9 +57,9 @@ public class EventLog {
         private Exception mLastWtf;
 
         Event(byte[] bArr) {
-            ByteBuffer wrap = ByteBuffer.wrap(bArr);
-            this.mBuffer = wrap;
-            wrap.order(ByteOrder.nativeOrder());
+            ByteBuffer byteBufferWrap = ByteBuffer.wrap(bArr);
+            this.mBuffer = byteBufferWrap;
+            byteBufferWrap.order(ByteOrder.nativeOrder());
         }
 
         public int getProcessId() {
@@ -117,17 +117,17 @@ public class EventLog {
             }
         }
 
-        public Event withNewData(Object obj) {
-            byte[] encodeObject = encodeObject(obj);
-            if (encodeObject.length > 65531) {
+        public Event withNewData(Object obj) throws UnsupportedEncodingException {
+            byte[] bArrEncodeObject = encodeObject(obj);
+            if (bArrEncodeObject.length > 65531) {
                 throw new IllegalArgumentException("Payload too long");
             }
             int headerSize = getHeaderSize() + 4;
-            byte[] bArr = new byte[encodeObject.length + headerSize];
+            byte[] bArr = new byte[bArrEncodeObject.length + headerSize];
             System.arraycopy(this.mBuffer.array(), 0, bArr, 0, headerSize);
-            System.arraycopy(encodeObject, 0, bArr, headerSize, encodeObject.length);
+            System.arraycopy(bArrEncodeObject, 0, bArr, headerSize, bArrEncodeObject.length);
             Event event = new Event(bArr);
-            event.mBuffer.putShort(0, (short) (encodeObject.length + 4));
+            event.mBuffer.putShort(0, (short) (bArrEncodeObject.length + 4));
             return event;
         }
 
@@ -142,9 +142,9 @@ public class EventLog {
             if (b == 2) {
                 try {
                     int i = this.mBuffer.getInt();
-                    int position = this.mBuffer.position();
-                    this.mBuffer.position(position + i);
-                    return new String(this.mBuffer.array(), position, i, "UTF-8");
+                    int iPosition = this.mBuffer.position();
+                    this.mBuffer.position(iPosition + i);
+                    return new String(this.mBuffer.array(), iPosition, i, "UTF-8");
                 } catch (UnsupportedEncodingException e) {
                     Log.wtf(EventLog.TAG, "UTF-8 is not supported", e);
                     this.mLastWtf = e;
@@ -168,8 +168,8 @@ public class EventLog {
             return objArr;
         }
 
-        private static byte[] encodeObject(Object obj) {
-            byte[] bArr;
+        private static byte[] encodeObject(Object obj) throws UnsupportedEncodingException {
+            byte[] bytes;
             if (obj == null) {
                 return new byte[0];
             }
@@ -184,29 +184,29 @@ public class EventLog {
             }
             if (obj instanceof String) {
                 try {
-                    bArr = ((String) obj).getBytes("UTF-8");
+                    bytes = ((String) obj).getBytes("UTF-8");
                 } catch (UnsupportedEncodingException unused) {
-                    bArr = new byte[0];
+                    bytes = new byte[0];
                 }
-                return ByteBuffer.allocate(bArr.length + 5).order(ByteOrder.nativeOrder()).put((byte) 2).putInt(bArr.length).put(bArr).array();
+                return ByteBuffer.allocate(bytes.length + 5).order(ByteOrder.nativeOrder()).put((byte) 2).putInt(bytes.length).put(bytes).array();
             }
             if (obj instanceof Object[]) {
                 Object[] objArr = (Object[]) obj;
                 if (objArr.length > 255) {
                     throw new IllegalArgumentException("Object array too long");
                 }
-                byte[][] bArr2 = new byte[objArr.length][];
-                int i = 0;
+                byte[][] bArr = new byte[objArr.length][];
+                int length = 0;
+                for (int i = 0; i < objArr.length; i++) {
+                    byte[] bArrEncodeObject = encodeObject(objArr[i]);
+                    bArr[i] = bArrEncodeObject;
+                    length += bArrEncodeObject.length;
+                }
+                ByteBuffer byteBufferPut = ByteBuffer.allocate(length + 2).order(ByteOrder.nativeOrder()).put((byte) 3).put((byte) objArr.length);
                 for (int i2 = 0; i2 < objArr.length; i2++) {
-                    byte[] encodeObject = encodeObject(objArr[i2]);
-                    bArr2[i2] = encodeObject;
-                    i += encodeObject.length;
+                    byteBufferPut.put(bArr[i2]);
                 }
-                ByteBuffer put = ByteBuffer.allocate(i + 2).order(ByteOrder.nativeOrder()).put((byte) 3).put((byte) objArr.length);
-                for (int i3 = 0; i3 < objArr.length; i3++) {
-                    put.put(bArr2[i3]);
-                }
-                return put.array();
+                return byteBufferPut.array();
             }
             throw new IllegalArgumentException("Unknown object type " + obj);
         }
@@ -216,8 +216,8 @@ public class EventLog {
         }
 
         public byte[] getBytes() {
-            byte[] array = this.mBuffer.array();
-            return Arrays.copyOf(array, array.length);
+            byte[] bArrArray = this.mBuffer.array();
+            return Arrays.copyOf(bArrArray, bArrArray.length);
         }
 
         public Exception getLastError() {
@@ -258,66 +258,66 @@ public class EventLog {
     }
 
     private static synchronized void readTagsFile() {
-        String readLine;
-        synchronized (EventLog.class) {
-            if (sTagCodes != null && sTagNames != null) {
-                return;
-            }
+        String line;
+        if (sTagCodes == null || sTagNames == null) {
             sTagCodes = new HashMap<>();
             sTagNames = new HashMap<>();
-            Pattern compile = Pattern.compile(COMMENT_PATTERN);
-            Pattern compile2 = Pattern.compile(TAG_PATTERN);
+            Pattern patternCompile = Pattern.compile(COMMENT_PATTERN);
+            Pattern patternCompile2 = Pattern.compile(TAG_PATTERN);
             BufferedReader bufferedReader = null;
             BufferedReader bufferedReader2 = null;
             try {
                 try {
-                    BufferedReader bufferedReader3 = new BufferedReader(new FileReader(TAGS_FILE), 256);
-                    while (true) {
-                        try {
-                            readLine = bufferedReader3.readLine();
-                            if (readLine == null) {
-                                break;
-                            }
-                            if (!compile.matcher(readLine).matches()) {
-                                Matcher matcher = compile2.matcher(readLine);
-                                if (!matcher.matches()) {
-                                    Log.wtf(TAG, "Bad entry in /system/etc/event-log-tags: " + readLine);
-                                } else {
-                                    try {
-                                        registerTagLocked(Integer.parseInt(matcher.group(1)), matcher.group(2));
-                                    } catch (NumberFormatException e) {
-                                        Log.wtf(TAG, "Error in /system/etc/event-log-tags: " + readLine, e);
+                    try {
+                        BufferedReader bufferedReader3 = new BufferedReader(new FileReader(TAGS_FILE), 256);
+                        while (true) {
+                            try {
+                                line = bufferedReader3.readLine();
+                                if (line == null) {
+                                    break;
+                                }
+                                if (!patternCompile.matcher(line).matches()) {
+                                    Matcher matcher = patternCompile2.matcher(line);
+                                    if (!matcher.matches()) {
+                                        Log.wtf(TAG, "Bad entry in /system/etc/event-log-tags: " + line);
+                                    } else {
+                                        try {
+                                            registerTagLocked(Integer.parseInt(matcher.group(1)), matcher.group(2));
+                                        } catch (NumberFormatException e) {
+                                            Log.wtf(TAG, "Error in /system/etc/event-log-tags: " + line, e);
+                                        }
                                     }
                                 }
-                            }
-                        } catch (IOException e2) {
-                            e = e2;
-                            bufferedReader2 = bufferedReader3;
-                            Log.wtf(TAG, "Error reading /system/etc/event-log-tags", e);
-                            bufferedReader = bufferedReader2;
-                            if (bufferedReader2 != null) {
-                                bufferedReader2.close();
+                            } catch (IOException e2) {
+                                e = e2;
+                                bufferedReader2 = bufferedReader3;
+                                Log.wtf(TAG, "Error reading /system/etc/event-log-tags", e);
                                 bufferedReader = bufferedReader2;
-                            }
-                        } catch (Throwable th) {
-                            th = th;
-                            bufferedReader = bufferedReader3;
-                            if (bufferedReader != null) {
-                                try {
-                                    bufferedReader.close();
-                                } catch (IOException unused) {
+                                if (bufferedReader2 != null) {
+                                    bufferedReader2.close();
+                                    bufferedReader = bufferedReader2;
                                 }
+                            } catch (Throwable th) {
+                                th = th;
+                                bufferedReader = bufferedReader3;
+                                if (bufferedReader != null) {
+                                    try {
+                                        bufferedReader.close();
+                                    } catch (IOException unused) {
+                                    }
+                                }
+                                throw th;
                             }
-                            throw th;
                         }
+                        bufferedReader3.close();
+                        bufferedReader = line;
+                    } catch (Throwable th2) {
+                        th = th2;
                     }
-                    bufferedReader3.close();
-                    bufferedReader = readLine;
                 } catch (IOException e3) {
                     e = e3;
                 }
-            } catch (Throwable th2) {
-                th = th2;
+            } catch (IOException unused2) {
             }
         }
     }
@@ -328,12 +328,10 @@ public class EventLog {
     }
 
     private static synchronized void readTagsFile$ravenwood() {
-        synchronized (EventLog.class) {
-            sTagCodes = new HashMap<>();
-            sTagNames = new HashMap<>();
-            registerTagLocked(524288, "sysui_action");
-            registerTagLocked(524290, "sysui_count");
-            registerTagLocked(com.android.internal.logging.EventLogTags.SYSUI_HISTOGRAM, "sysui_histogram");
-        }
+        sTagCodes = new HashMap<>();
+        sTagNames = new HashMap<>();
+        registerTagLocked(524288, "sysui_action");
+        registerTagLocked(524290, "sysui_count");
+        registerTagLocked(com.android.internal.logging.EventLogTags.SYSUI_HISTOGRAM, "sysui_histogram");
     }
 }

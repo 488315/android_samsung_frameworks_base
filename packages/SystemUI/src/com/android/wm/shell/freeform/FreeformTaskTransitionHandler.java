@@ -26,7 +26,6 @@ import java.util.ArrayList;
 import java.util.List;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public class FreeformTaskTransitionHandler implements Transitions.TransitionHandler, FreeformTaskTransitionStarter {
     public final ShellExecutor mAnimExecutor;
@@ -37,7 +36,6 @@ public class FreeformTaskTransitionHandler implements Transitions.TransitionHand
     public final List mPendingTransitionTokens = new ArrayList();
     public final ArrayMap mAnimations = new ArrayMap();
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.wm.shell.freeform.FreeformTaskTransitionHandler$1, reason: invalid class name */
     public class AnonymousClass1 extends AnimatorListenerAdapter {
         public static final /* synthetic */ int $r8$clinit = 0;
@@ -76,7 +74,7 @@ public class FreeformTaskTransitionHandler implements Transitions.TransitionHand
         if (arrayList == null) {
             return;
         }
-        this.mAnimExecutor.execute(new FreeformTaskTransitionHandler$$ExternalSyntheticLambda0(arrayList, 0));
+        this.mAnimExecutor.execute(new FreeformTaskTransitionHandler$$ExternalSyntheticLambda0(0, arrayList));
     }
 
     @Override // com.android.wm.shell.transition.Transitions.TransitionHandler
@@ -106,10 +104,10 @@ public class FreeformTaskTransitionHandler implements Transitions.TransitionHand
                                     arrayList.add(MinimizeAnimator.create(displayContext, change, transaction3, new Function1() { // from class: com.android.wm.shell.freeform.FreeformTaskTransitionHandler$$ExternalSyntheticLambda4
                                         @Override // kotlin.jvm.functions.Function1
                                         /* renamed from: invoke */
-                                        public final Object mo779invoke(Object obj) {
+                                        public final Object mo781invoke(Object obj) {
                                             ArrayList arrayList2 = arrayList;
                                             FreeformTaskTransitionHandler$$ExternalSyntheticLambda1 freeformTaskTransitionHandler$$ExternalSyntheticLambda12 = freeformTaskTransitionHandler$$ExternalSyntheticLambda1;
-                                            FreeformTaskTransitionHandler freeformTaskTransitionHandler = FreeformTaskTransitionHandler.this;
+                                            FreeformTaskTransitionHandler freeformTaskTransitionHandler = this.f$0;
                                             freeformTaskTransitionHandler.getClass();
                                             freeformTaskTransitionHandler.mMainExecutor.execute(new FreeformTaskTransitionHandler$$ExternalSyntheticLambda6(arrayList2, (Animator) obj, freeformTaskTransitionHandler$$ExternalSyntheticLambda12));
                                             return null;
@@ -172,7 +170,7 @@ public class FreeformTaskTransitionHandler implements Transitions.TransitionHand
         }
         this.mAnimations.put(iBinder, arrayList);
         transaction.apply();
-        this.mAnimExecutor.execute(new FreeformTaskTransitionHandler$$ExternalSyntheticLambda0(arrayList, 1));
+        this.mAnimExecutor.execute(new FreeformTaskTransitionHandler$$ExternalSyntheticLambda0(1, arrayList));
         freeformTaskTransitionHandler$$ExternalSyntheticLambda1.run();
         ((ArrayList) this.mPendingTransitionTokens).remove(iBinder);
         return true;
@@ -185,23 +183,23 @@ public class FreeformTaskTransitionHandler implements Transitions.TransitionHand
 
     @Override // com.android.wm.shell.freeform.FreeformTaskTransitionStarter
     public final IBinder startMinimizedModeTransition(int i, WindowContainerTransaction windowContainerTransaction, boolean z) {
-        IBinder startTransition = this.mTransitions.startTransition(1020, windowContainerTransaction, this);
-        ((ArrayList) this.mPendingTransitionTokens).add(startTransition);
-        return startTransition;
+        IBinder iBinderStartTransition = this.mTransitions.startTransition(1020, windowContainerTransaction, this);
+        ((ArrayList) this.mPendingTransitionTokens).add(iBinderStartTransition);
+        return iBinderStartTransition;
     }
 
     @Override // com.android.wm.shell.freeform.FreeformTaskTransitionStarter
     public final IBinder startPipTransition(WindowContainerTransaction windowContainerTransaction) {
-        IBinder startTransition = this.mTransitions.startTransition(10, windowContainerTransaction, null);
-        ((ArrayList) this.mPendingTransitionTokens).add(startTransition);
-        return startTransition;
+        IBinder iBinderStartTransition = this.mTransitions.startTransition(10, windowContainerTransaction, null);
+        ((ArrayList) this.mPendingTransitionTokens).add(iBinderStartTransition);
+        return iBinderStartTransition;
     }
 
     @Override // com.android.wm.shell.freeform.FreeformTaskTransitionStarter
     public final IBinder startRemoveTransition(WindowContainerTransaction windowContainerTransaction) {
-        IBinder startTransition = this.mTransitions.startTransition(2, windowContainerTransaction, this);
-        ((ArrayList) this.mPendingTransitionTokens).add(startTransition);
-        return startTransition;
+        IBinder iBinderStartTransition = this.mTransitions.startTransition(2, windowContainerTransaction, this);
+        ((ArrayList) this.mPendingTransitionTokens).add(iBinderStartTransition);
+        return iBinderStartTransition;
     }
 
     @Override // com.android.wm.shell.freeform.FreeformTaskTransitionStarter

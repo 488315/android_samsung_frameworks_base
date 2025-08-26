@@ -17,13 +17,13 @@ final class ExtensionRegistryFactory {
     }
 
     public static ExtensionRegistryLite create() {
-        ExtensionRegistryLite invokeSubclassFactory = invokeSubclassFactory("newInstance");
-        return invokeSubclassFactory != null ? invokeSubclassFactory : new ExtensionRegistryLite();
+        ExtensionRegistryLite extensionRegistryLiteInvokeSubclassFactory = invokeSubclassFactory("newInstance");
+        return extensionRegistryLiteInvokeSubclassFactory != null ? extensionRegistryLiteInvokeSubclassFactory : new ExtensionRegistryLite();
     }
 
     public static ExtensionRegistryLite createEmpty() {
-        ExtensionRegistryLite invokeSubclassFactory = invokeSubclassFactory("getEmptyRegistry");
-        return invokeSubclassFactory != null ? invokeSubclassFactory : ExtensionRegistryLite.EMPTY_REGISTRY_LITE;
+        ExtensionRegistryLite extensionRegistryLiteInvokeSubclassFactory = invokeSubclassFactory("getEmptyRegistry");
+        return extensionRegistryLiteInvokeSubclassFactory != null ? extensionRegistryLiteInvokeSubclassFactory : ExtensionRegistryLite.EMPTY_REGISTRY_LITE;
     }
 
     static boolean isFullRegistry(ExtensionRegistryLite extensionRegistryLite) {

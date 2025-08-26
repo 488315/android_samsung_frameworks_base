@@ -95,10 +95,10 @@ public final class InputEventConsistencyVerifier {
                 int source = keyEvent.getSource();
                 int keyCode = keyEvent.getKeyCode();
                 if (action == 0) {
-                    KeyState findKeyState = findKeyState(deviceId, source, keyCode, false);
-                    if (findKeyState != null) {
-                        if (findKeyState.unhandled) {
-                            findKeyState.unhandled = false;
+                    KeyState keyStateFindKeyState = findKeyState(deviceId, source, keyCode, false);
+                    if (keyStateFindKeyState != null) {
+                        if (keyStateFindKeyState.unhandled) {
+                            keyStateFindKeyState.unhandled = false;
                         } else if ((this.mFlags & 1) == 0 && keyEvent.getRepeatCount() == 0) {
                             problem("ACTION_DOWN but key is already down and this event is not a key repeat.");
                         }
@@ -106,11 +106,11 @@ public final class InputEventConsistencyVerifier {
                         addKeyState(deviceId, source, keyCode);
                     }
                 } else if (action == 1) {
-                    KeyState findKeyState2 = findKeyState(deviceId, source, keyCode, true);
-                    if (findKeyState2 == null) {
+                    KeyState keyStateFindKeyState2 = findKeyState(deviceId, source, keyCode, true);
+                    if (keyStateFindKeyState2 == null) {
                         problem("ACTION_UP but key was not down.");
                     } else {
-                        findKeyState2.recycle();
+                        keyStateFindKeyState2.recycle();
                     }
                 } else if (action != 2) {
                     problem("Invalid action " + KeyEvent.actionToString(action) + " for key event.");
@@ -202,9 +202,9 @@ public final class InputEventConsistencyVerifier {
                     this.mTouchEventStreamPointers = 0;
                     this.mTouchEventStreamIsTainted = false;
                 } else if (action == 2) {
-                    int bitCount = Integer.bitCount(this.mTouchEventStreamPointers);
-                    if (pointerCount != bitCount) {
-                        problem("ACTION_MOVE contained " + pointerCount + " pointers but there are currently " + bitCount + " pointers down.");
+                    int iBitCount = Integer.bitCount(this.mTouchEventStreamPointers);
+                    if (pointerCount != iBitCount) {
+                        problem("ACTION_MOVE contained " + pointerCount + " pointers but there are currently " + iBitCount + " pointers down.");
                         this.mTouchEventStreamIsTainted = true;
                     }
                 } else if (action == 3) {
@@ -225,7 +225,10 @@ public final class InputEventConsistencyVerifier {
                             problem("ACTION_POINTER_DOWN but no other pointers were down.");
                             this.mTouchEventStreamIsTainted = true;
                         }
-                        if (actionIndex >= 0 && actionIndex < pointerCount) {
+                        if (actionIndex < 0 || actionIndex >= pointerCount) {
+                            problem("ACTION_POINTER_DOWN index is " + actionIndex + " but the pointer count is " + pointerCount + MediaMetrics.SEPARATOR);
+                            this.mTouchEventStreamIsTainted = true;
+                        } else {
                             int pointerId = motionEvent.getPointerId(actionIndex);
                             int i3 = 1 << pointerId;
                             int i4 = this.mTouchEventStreamPointers;
@@ -235,13 +238,13 @@ public final class InputEventConsistencyVerifier {
                             } else {
                                 this.mTouchEventStreamPointers = i4 | i3;
                             }
-                            ensureHistorySizeIsZeroForThisAction(motionEvent);
                         }
-                        problem("ACTION_POINTER_DOWN index is " + actionIndex + " but the pointer count is " + pointerCount + MediaMetrics.SEPARATOR);
-                        this.mTouchEventStreamIsTainted = true;
                         ensureHistorySizeIsZeroForThisAction(motionEvent);
                     } else if (actionMasked == 6) {
-                        if (actionIndex >= 0 && actionIndex < pointerCount) {
+                        if (actionIndex < 0 || actionIndex >= pointerCount) {
+                            problem("ACTION_POINTER_UP index is " + actionIndex + " but the pointer count is " + pointerCount + MediaMetrics.SEPARATOR);
+                            this.mTouchEventStreamIsTainted = true;
+                        } else {
                             int pointerId2 = motionEvent.getPointerId(actionIndex);
                             int i5 = 1 << pointerId2;
                             int i6 = this.mTouchEventStreamPointers;
@@ -251,10 +254,7 @@ public final class InputEventConsistencyVerifier {
                             } else {
                                 this.mTouchEventStreamPointers = (~i5) & i6;
                             }
-                            ensureHistorySizeIsZeroForThisAction(motionEvent);
                         }
-                        problem("ACTION_POINTER_UP index is " + actionIndex + " but the pointer count is " + pointerCount + MediaMetrics.SEPARATOR);
-                        this.mTouchEventStreamIsTainted = true;
                         ensureHistorySizeIsZeroForThisAction(motionEvent);
                     } else {
                         problem("Invalid action " + MotionEvent.actionToString(action) + " for touch event.");
@@ -355,9 +355,9 @@ public final class InputEventConsistencyVerifier {
         }
         if (inputEvent instanceof KeyEvent) {
             KeyEvent keyEvent = (KeyEvent) inputEvent;
-            KeyState findKeyState = findKeyState(keyEvent.getDeviceId(), keyEvent.getSource(), keyEvent.getKeyCode(), false);
-            if (findKeyState != null) {
-                findKeyState.unhandled = true;
+            KeyState keyStateFindKeyState = findKeyState(keyEvent.getDeviceId(), keyEvent.getSource(), keyEvent.getKeyCode(), false);
+            if (keyStateFindKeyState != null) {
+                keyStateFindKeyState.unhandled = true;
                 return;
             }
             return;
@@ -374,9 +374,9 @@ public final class InputEventConsistencyVerifier {
     }
 
     private void ensureMetaStateIsNormalized(int i) {
-        int normalizeMetaState = KeyEvent.normalizeMetaState(i);
-        if (normalizeMetaState != i) {
-            problem(String.format("Metastate not normalized.  Was 0x%08x but expected 0x%08x.", Integer.valueOf(i), Integer.valueOf(normalizeMetaState)));
+        int iNormalizeMetaState = KeyEvent.normalizeMetaState(i);
+        if (iNormalizeMetaState != i) {
+            problem(String.format("Metastate not normalized.  Was 0x%08x but expected 0x%08x.", Integer.valueOf(i), Integer.valueOf(iNormalizeMetaState)));
         }
     }
 
@@ -508,9 +508,9 @@ public final class InputEventConsistencyVerifier {
     }
 
     private void addKeyState(int i, int i2, int i3) {
-        KeyState obtain = KeyState.obtain(i, i2, i3);
-        obtain.next = this.mKeyStateList;
-        this.mKeyStateList = obtain;
+        KeyState keyStateObtain = KeyState.obtain(i, i2, i3);
+        keyStateObtain.next = this.mKeyStateList;
+        this.mKeyStateList = keyStateObtain;
     }
 
     private static final class KeyState {

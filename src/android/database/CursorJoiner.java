@@ -51,14 +51,14 @@ public final class CursorJoiner implements Iterator<Result>, Iterable<Result> {
         if (!this.mCompareResultIsValid) {
             return (this.mCursorLeft.isAfterLast() && this.mCursorRight.isAfterLast()) ? false : true;
         }
-        int ordinal = this.mCompareResult.ordinal();
-        if (ordinal == 0) {
+        int iOrdinal = this.mCompareResult.ordinal();
+        if (iOrdinal == 0) {
             return (this.mCursorLeft.isAfterLast() && this.mCursorRight.isLast()) ? false : true;
         }
-        if (ordinal == 1) {
+        if (iOrdinal == 1) {
             return (this.mCursorLeft.isLast() && this.mCursorRight.isAfterLast()) ? false : true;
         }
-        if (ordinal == 2) {
+        if (iOrdinal == 2) {
             return (this.mCursorLeft.isLast() && this.mCursorRight.isLast()) ? false : true;
         }
         throw new IllegalStateException("bad value for mCompareResult, " + this.mCompareResult);
@@ -71,20 +71,20 @@ public final class CursorJoiner implements Iterator<Result>, Iterable<Result> {
             throw new IllegalStateException("you must only call next() when hasNext() is true");
         }
         incrementCursors();
-        boolean isAfterLast = this.mCursorLeft.isAfterLast();
-        boolean isAfterLast2 = this.mCursorRight.isAfterLast();
-        if (!isAfterLast && !isAfterLast2) {
+        boolean zIsAfterLast = this.mCursorLeft.isAfterLast();
+        boolean zIsAfterLast2 = this.mCursorRight.isAfterLast();
+        if (!zIsAfterLast && !zIsAfterLast2) {
             populateValues(this.mValues, this.mCursorLeft, this.mColumnsLeft, 0);
             populateValues(this.mValues, this.mCursorRight, this.mColumnsRight, 1);
-            int compareStrings = compareStrings(this.mValues);
-            if (compareStrings == -1) {
+            int iCompareStrings = compareStrings(this.mValues);
+            if (iCompareStrings == -1) {
                 this.mCompareResult = Result.LEFT;
-            } else if (compareStrings == 0) {
+            } else if (iCompareStrings == 0) {
                 this.mCompareResult = Result.BOTH;
-            } else if (compareStrings == 1) {
+            } else if (iCompareStrings == 1) {
                 this.mCompareResult = Result.RIGHT;
             }
-        } else if (!isAfterLast) {
+        } else if (!zIsAfterLast) {
             this.mCompareResult = Result.LEFT;
         } else {
             this.mCompareResult = Result.RIGHT;
@@ -106,12 +106,12 @@ public final class CursorJoiner implements Iterator<Result>, Iterable<Result> {
 
     private void incrementCursors() {
         if (this.mCompareResultIsValid) {
-            int ordinal = this.mCompareResult.ordinal();
-            if (ordinal == 0) {
+            int iOrdinal = this.mCompareResult.ordinal();
+            if (iOrdinal == 0) {
                 this.mCursorRight.moveToNext();
-            } else if (ordinal == 1) {
+            } else if (iOrdinal == 1) {
                 this.mCursorLeft.moveToNext();
-            } else if (ordinal == 2) {
+            } else if (iOrdinal == 2) {
                 this.mCursorLeft.moveToNext();
                 this.mCursorRight.moveToNext();
             }
@@ -134,9 +134,9 @@ public final class CursorJoiner implements Iterator<Result>, Iterable<Result> {
                 if (str2 == null) {
                     return 1;
                 }
-                int compareTo = str.compareTo(str2);
-                if (compareTo != 0) {
-                    return compareTo < 0 ? -1 : 1;
+                int iCompareTo = str.compareTo(str2);
+                if (iCompareTo != 0) {
+                    return iCompareTo < 0 ? -1 : 1;
                 }
             }
         }

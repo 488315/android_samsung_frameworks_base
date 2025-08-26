@@ -1,5 +1,6 @@
 package android.net;
 
+import android.system.ErrnoException;
 import java.io.Closeable;
 import java.io.FileDescriptor;
 import java.io.IOException;
@@ -10,7 +11,7 @@ public class LocalServerSocket implements Closeable {
     private final LocalSocketImpl impl;
     private final LocalSocketAddress localAddress;
 
-    public LocalServerSocket(String str) throws IOException {
+    public LocalServerSocket(String str) throws IOException, ErrnoException {
         LocalSocketImpl localSocketImpl = new LocalSocketImpl();
         this.impl = localSocketImpl;
         localSocketImpl.create(2);
@@ -20,7 +21,7 @@ public class LocalServerSocket implements Closeable {
         localSocketImpl.listen(50);
     }
 
-    public LocalServerSocket(FileDescriptor fileDescriptor) throws IOException {
+    public LocalServerSocket(FileDescriptor fileDescriptor) throws IOException, ErrnoException {
         LocalSocketImpl localSocketImpl = new LocalSocketImpl(fileDescriptor);
         this.impl = localSocketImpl;
         localSocketImpl.listen(50);

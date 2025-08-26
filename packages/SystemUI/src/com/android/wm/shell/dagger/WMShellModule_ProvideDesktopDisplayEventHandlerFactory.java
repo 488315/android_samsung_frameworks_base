@@ -17,7 +17,6 @@ import dagger.internal.Provider;
 import java.util.Optional;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class WMShellModule_ProvideDesktopDisplayEventHandlerFactory implements Provider {
     public final Provider desksOrganizerProvider;
@@ -49,9 +48,9 @@ public final class WMShellModule_ProvideDesktopDisplayEventHandlerFactory implem
     }
 
     public static Optional provideDesktopDisplayEventHandler(ShellInit shellInit, CoroutineScope coroutineScope, ShellController shellController, DisplayController displayController, RootTaskDisplayAreaOrganizer rootTaskDisplayAreaOrganizer, DesksOrganizer desksOrganizer, Optional optional, Optional optional2, Optional optional3, DesktopRepositoryInitializer desktopRepositoryInitializer, Optional optional4, DesktopState desktopState) {
-        Optional empty = !((DesktopStateImpl) desktopState).canEnterDesktopMode ? Optional.empty() : Optional.of(new DesktopDisplayEventHandler(shellInit, coroutineScope, shellController, displayController, rootTaskDisplayAreaOrganizer, desksOrganizer, desktopRepositoryInitializer, (DesktopUserRepositories) optional.get(), (DesktopTasksController) optional2.get(), (DesktopDisplayModeController) optional3.get(), (DesksTransitionObserver) optional4.get(), desktopState));
-        empty.getClass();
-        return empty;
+        Optional optionalEmpty = !((DesktopStateImpl) desktopState).canEnterDesktopMode ? Optional.empty() : Optional.of(new DesktopDisplayEventHandler(shellInit, coroutineScope, shellController, displayController, rootTaskDisplayAreaOrganizer, desksOrganizer, desktopRepositoryInitializer, (DesktopUserRepositories) optional.get(), (DesktopTasksController) optional2.get(), (DesktopDisplayModeController) optional3.get(), (DesksTransitionObserver) optional4.get(), desktopState));
+        optionalEmpty.getClass();
+        return optionalEmpty;
     }
 
     @Override // javax.inject.Provider

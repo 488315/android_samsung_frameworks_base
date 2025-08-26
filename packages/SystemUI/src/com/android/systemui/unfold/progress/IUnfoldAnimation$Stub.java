@@ -5,7 +5,6 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class IUnfoldAnimation$Stub extends Binder implements IInterface {
     public IUnfoldAnimation$Stub() {
@@ -25,12 +24,12 @@ public abstract class IUnfoldAnimation$Stub extends Binder implements IInterface
         if (i != 1) {
             return super.onTransact(i, parcel, parcel2, i2);
         }
-        IBinder readStrongBinder = parcel.readStrongBinder();
-        if (readStrongBinder == null) {
+        IBinder strongBinder = parcel.readStrongBinder();
+        if (strongBinder == null) {
             iUnfoldTransitionListener$Stub$Proxy = null;
         } else {
-            IInterface queryLocalInterface = readStrongBinder.queryLocalInterface("com.android.systemui.unfold.progress.IUnfoldTransitionListener");
-            iUnfoldTransitionListener$Stub$Proxy = (queryLocalInterface == null || !(queryLocalInterface instanceof IUnfoldTransitionListener$Stub$Proxy)) ? new IUnfoldTransitionListener$Stub$Proxy(readStrongBinder) : (IUnfoldTransitionListener$Stub$Proxy) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = strongBinder.queryLocalInterface("com.android.systemui.unfold.progress.IUnfoldTransitionListener");
+            iUnfoldTransitionListener$Stub$Proxy = (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IUnfoldTransitionListener$Stub$Proxy)) ? new IUnfoldTransitionListener$Stub$Proxy(strongBinder) : (IUnfoldTransitionListener$Stub$Proxy) iInterfaceQueryLocalInterface;
         }
         parcel.enforceNoDataAvail();
         ((UnfoldTransitionProgressForwarder) this).remoteListener = iUnfoldTransitionListener$Stub$Proxy;

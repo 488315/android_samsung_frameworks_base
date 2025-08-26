@@ -6,13 +6,13 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.core.util.Pools$SynchronizedPool;
 import java.util.concurrent.ArrayBlockingQueue;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 public final class AsyncLayoutInflater {
     public final Handler mHandler;
@@ -20,7 +20,6 @@ public final class AsyncLayoutInflater {
     public final InflateThread mInflateThread;
     public final BasicInflater mInflater;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class BasicInflater extends LayoutInflater {
         public static final String[] sClassPrefixList = {"android.widget.", "android.webkit.", "android.app."};
 
@@ -34,23 +33,22 @@ public final class AsyncLayoutInflater {
         }
 
         @Override // android.view.LayoutInflater
-        public final View onCreateView(String str, AttributeSet attributeSet) {
-            View createView;
+        public final View onCreateView(String str, AttributeSet attributeSet) throws InflateException, ClassNotFoundException {
+            View viewCreateView;
             String[] strArr = sClassPrefixList;
             for (int i = 0; i < 3; i++) {
                 try {
-                    createView = createView(str, strArr[i], attributeSet);
+                    viewCreateView = createView(str, strArr[i], attributeSet);
                 } catch (ClassNotFoundException unused) {
                 }
-                if (createView != null) {
-                    return createView;
+                if (viewCreateView != null) {
+                    return viewCreateView;
                 }
             }
             return super.onCreateView(str, attributeSet);
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class InflateRequest {
         public OnInflateFinishedListener callback;
         public Handler mHandler;
@@ -60,7 +58,6 @@ public final class AsyncLayoutInflater {
         public View view;
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public class InflateThread extends Thread {
         public static final InflateThread sInstance;
         public final ArrayBlockingQueue mQueue = new ArrayBlockingQueue(10);
@@ -95,7 +92,6 @@ public final class AsyncLayoutInflater {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     public interface OnInflateFinishedListener {
         void onInflateFinished(int i, View view, ViewGroup viewGroup);
     }
@@ -128,7 +124,7 @@ public final class AsyncLayoutInflater {
         this.mInflateThread = InflateThread.sInstance;
     }
 
-    public final void inflateInternal(int i, ViewGroup viewGroup, OnInflateFinishedListener onInflateFinishedListener, BasicInflater basicInflater) {
+    public final void inflateInternal(int i, ViewGroup viewGroup, OnInflateFinishedListener onInflateFinishedListener, BasicInflater basicInflater) throws InterruptedException {
         InflateThread inflateThread = this.mInflateThread;
         InflateRequest inflateRequest = (InflateRequest) inflateThread.mRequestPool.acquire();
         if (inflateRequest == null) {

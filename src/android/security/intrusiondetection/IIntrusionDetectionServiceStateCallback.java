@@ -50,9 +50,9 @@ public interface IIntrusionDetectionServiceStateCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IIntrusionDetectionServiceStateCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IIntrusionDetectionServiceStateCallback)) {
-                return (IIntrusionDetectionServiceStateCallback) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IIntrusionDetectionServiceStateCallback.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IIntrusionDetectionServiceStateCallback)) {
+                return (IIntrusionDetectionServiceStateCallback) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -79,9 +79,9 @@ public interface IIntrusionDetectionServiceStateCallback extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                onStateChange(readInt);
+                onStateChange(i3);
                 return true;
             }
             return super.onTransact(i, parcel, parcel2, i2);
@@ -105,13 +105,13 @@ public interface IIntrusionDetectionServiceStateCallback extends IInterface {
 
             @Override // android.security.intrusiondetection.IIntrusionDetectionServiceStateCallback
             public void onStateChange(int i) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IIntrusionDetectionServiceStateCallback.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    this.mRemote.transact(1, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IIntrusionDetectionServiceStateCallback.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    this.mRemote.transact(1, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

@@ -18,7 +18,6 @@ import kotlinx.coroutines.flow.SharedFlowKt;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes2.dex */
 public final class KeyguardBlueprintRepository {
 
@@ -37,8 +36,8 @@ public final class KeyguardBlueprintRepository {
         this.logger = new Logger(logBuffer, "KeyguardBlueprintRepository");
         TreeMap treeMap = new TreeMap();
         Set<KeyguardBlueprint> set2 = set;
-        int mapCapacity = MapsKt__MapsJVMKt.mapCapacity(CollectionsKt__IterablesKt.collectionSizeOrDefault(set2, 10));
-        LinkedHashMap linkedHashMap = new LinkedHashMap(mapCapacity < 16 ? 16 : mapCapacity);
+        int iMapCapacity = MapsKt__MapsJVMKt.mapCapacity(CollectionsKt__IterablesKt.collectionSizeOrDefault(set2, 10));
+        LinkedHashMap linkedHashMap = new LinkedHashMap(iMapCapacity < 16 ? 16 : iMapCapacity);
         for (Object obj : set2) {
             linkedHashMap.put(((KeyguardBlueprint) obj).getId(), obj);
         }
@@ -62,9 +61,9 @@ public final class KeyguardBlueprintRepository {
         }
         Logger logger = this.logger;
         KeyguardBlueprintRepository$$ExternalSyntheticLambda0 keyguardBlueprintRepository$$ExternalSyntheticLambda0 = new KeyguardBlueprintRepository$$ExternalSyntheticLambda0(0);
-        LogMessage obtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.ERROR, keyguardBlueprintRepository$$ExternalSyntheticLambda0, null);
-        obtain.setStr1(str);
-        logger.getBuffer().commit(obtain);
+        LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.ERROR, keyguardBlueprintRepository$$ExternalSyntheticLambda0, null);
+        logMessageObtain.setStr1(str);
+        logger.getBuffer().commit(logMessageObtain);
         return false;
     }
 

@@ -45,9 +45,9 @@ public interface IZtdListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IZtdListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IZtdListener)) {
-                return (IZtdListener) queryLocalInterface;
+            IInterface iInterfaceQueryLocalInterface = iBinder.queryLocalInterface(IZtdListener.DESCRIPTOR);
+            if (iInterfaceQueryLocalInterface != null && (iInterfaceQueryLocalInterface instanceof IZtdListener)) {
+                return (IZtdListener) iInterfaceQueryLocalInterface;
             }
             return new Proxy(iBinder);
         }
@@ -77,23 +77,23 @@ public interface IZtdListener extends IInterface {
                 return true;
             }
             if (i == 1) {
-                int readInt = parcel.readInt();
-                int readInt2 = parcel.readInt();
-                String[] createStringArray = parcel.createStringArray();
+                int i3 = parcel.readInt();
+                int i4 = parcel.readInt();
+                String[] strArrCreateStringArray = parcel.createStringArray();
                 parcel.enforceNoDataAvail();
-                onSysDataTraced(readInt, readInt2, createStringArray);
+                onSysDataTraced(i3, i4, strArrCreateStringArray);
                 parcel2.writeNoException();
             } else if (i == 2) {
-                int readInt3 = parcel.readInt();
-                int readInt4 = parcel.readInt();
-                int readInt5 = parcel.readInt();
-                long readLong = parcel.readLong();
-                int readInt6 = parcel.readInt();
-                int readInt7 = parcel.readInt();
-                String readString = parcel.readString();
-                String readString2 = parcel.readString();
+                int i5 = parcel.readInt();
+                int i6 = parcel.readInt();
+                int i7 = parcel.readInt();
+                long j = parcel.readLong();
+                int i8 = parcel.readInt();
+                int i9 = parcel.readInt();
+                String string = parcel.readString();
+                String string2 = parcel.readString();
                 parcel.enforceNoDataAvail();
-                onUnauthorizedAccessDetected(readInt3, readInt4, readInt5, readLong, readInt6, readInt7, readString, readString2);
+                onUnauthorizedAccessDetected(i5, i6, i7, j, i8, i9, string, string2);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -118,37 +118,37 @@ public interface IZtdListener extends IInterface {
 
             @Override // android.os.IZtdListener
             public void onSysDataTraced(int i, int i2, String[] strArr) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
-                Parcel obtain2 = Parcel.obtain();
+                Parcel parcelObtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken(IZtdListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeStringArray(strArr);
-                    this.mRemote.transact(1, obtain, obtain2, 0);
-                    obtain2.readException();
+                    parcelObtain.writeInterfaceToken(IZtdListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeStringArray(strArr);
+                    this.mRemote.transact(1, parcelObtain, parcelObtain2, 0);
+                    parcelObtain2.readException();
                 } finally {
-                    obtain2.recycle();
-                    obtain.recycle();
+                    parcelObtain2.recycle();
+                    parcelObtain.recycle();
                 }
             }
 
             @Override // android.os.IZtdListener
             public void onUnauthorizedAccessDetected(int i, int i2, int i3, long j, int i4, int i5, String str, String str2) throws RemoteException {
-                Parcel obtain = Parcel.obtain(asBinder());
+                Parcel parcelObtain = Parcel.obtain(asBinder());
                 try {
-                    obtain.writeInterfaceToken(IZtdListener.DESCRIPTOR);
-                    obtain.writeInt(i);
-                    obtain.writeInt(i2);
-                    obtain.writeInt(i3);
-                    obtain.writeLong(j);
-                    obtain.writeInt(i4);
-                    obtain.writeInt(i5);
-                    obtain.writeString(str);
-                    obtain.writeString(str2);
-                    this.mRemote.transact(2, obtain, null, 1);
+                    parcelObtain.writeInterfaceToken(IZtdListener.DESCRIPTOR);
+                    parcelObtain.writeInt(i);
+                    parcelObtain.writeInt(i2);
+                    parcelObtain.writeInt(i3);
+                    parcelObtain.writeLong(j);
+                    parcelObtain.writeInt(i4);
+                    parcelObtain.writeInt(i5);
+                    parcelObtain.writeString(str);
+                    parcelObtain.writeString(str2);
+                    this.mRemote.transact(2, parcelObtain, null, 1);
                 } finally {
-                    obtain.recycle();
+                    parcelObtain.recycle();
                 }
             }
         }

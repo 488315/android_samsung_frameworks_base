@@ -17,7 +17,6 @@ import com.android.wm.shell.shared.bubbles.BubbleBarLocation;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public abstract class IBubbles$Stub extends Binder implements IInterface {
     public IBubbles$Stub() {
@@ -36,38 +35,38 @@ public abstract class IBubbles$Stub extends Binder implements IInterface {
         }
         switch (i) {
             case 2:
-                IBinder readStrongBinder = parcel.readStrongBinder();
-                if (readStrongBinder == null) {
+                IBinder strongBinder = parcel.readStrongBinder();
+                if (strongBinder == null) {
                     iInterface = null;
                 } else {
-                    IInterface queryLocalInterface = readStrongBinder.queryLocalInterface("com.android.wm.shell.bubbles.IBubblesListener");
-                    iInterface = (queryLocalInterface == null || !(queryLocalInterface instanceof IBubblesListener$Stub$Proxy)) ? new IInterface(readStrongBinder) { // from class: com.android.wm.shell.bubbles.IBubblesListener$Stub$Proxy
+                    IInterface iInterfaceQueryLocalInterface = strongBinder.queryLocalInterface("com.android.wm.shell.bubbles.IBubblesListener");
+                    iInterface = (iInterfaceQueryLocalInterface == null || !(iInterfaceQueryLocalInterface instanceof IBubblesListener$Stub$Proxy)) ? new IInterface(strongBinder) { // from class: com.android.wm.shell.bubbles.IBubblesListener$Stub$Proxy
                         public final IBinder mRemote;
 
                         {
-                            this.mRemote = readStrongBinder;
+                            this.mRemote = strongBinder;
                         }
 
                         @Override // android.os.IInterface
                         public final IBinder asBinder() {
                             return this.mRemote;
                         }
-                    } : (IBubblesListener$Stub$Proxy) queryLocalInterface;
+                    } : (IBubblesListener$Stub$Proxy) iInterfaceQueryLocalInterface;
                 }
                 parcel.enforceNoDataAvail();
                 BubbleController.IBubblesImpl iBubblesImpl = (BubbleController.IBubblesImpl) this;
                 BubbleController.this.mMainExecutor.execute(new BubbleController$$ExternalSyntheticLambda14(8, iBubblesImpl, iInterface));
                 return true;
             case 3:
-                IBinder readStrongBinder2 = parcel.readStrongBinder();
-                if (readStrongBinder2 != null) {
-                    IInterface queryLocalInterface2 = readStrongBinder2.queryLocalInterface("com.android.wm.shell.bubbles.IBubblesListener");
-                    if (queryLocalInterface2 == null || !(queryLocalInterface2 instanceof IBubblesListener$Stub$Proxy)) {
-                        new IInterface(readStrongBinder2) { // from class: com.android.wm.shell.bubbles.IBubblesListener$Stub$Proxy
+                IBinder strongBinder2 = parcel.readStrongBinder();
+                if (strongBinder2 != null) {
+                    IInterface iInterfaceQueryLocalInterface2 = strongBinder2.queryLocalInterface("com.android.wm.shell.bubbles.IBubblesListener");
+                    if (iInterfaceQueryLocalInterface2 == null || !(iInterfaceQueryLocalInterface2 instanceof IBubblesListener$Stub$Proxy)) {
+                        new IInterface(strongBinder2) { // from class: com.android.wm.shell.bubbles.IBubblesListener$Stub$Proxy
                             public final IBinder mRemote;
 
                             {
-                                this.mRemote = readStrongBinder2;
+                                this.mRemote = strongBinder2;
                             }
 
                             @Override // android.os.IInterface
@@ -85,24 +84,24 @@ public abstract class IBubbles$Stub extends Binder implements IInterface {
                 shellExecutor.execute(new BubbleController$6$$ExternalSyntheticLambda0(singleInstanceRemoteListener, 2));
                 return true;
             case 4:
-                String readString = parcel.readString();
-                int readInt = parcel.readInt();
+                String string = parcel.readString();
+                int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
                 BubbleController.IBubblesImpl iBubblesImpl3 = (BubbleController.IBubblesImpl) this;
-                BubbleController.this.mMainExecutor.execute(new BubbleController$BubblesImpl$$ExternalSyntheticLambda0(iBubblesImpl3, readString, readInt, 2));
+                BubbleController.this.mMainExecutor.execute(new BubbleController$BubblesImpl$$ExternalSyntheticLambda0(iBubblesImpl3, string, i3, 2));
                 return true;
             case 5:
-                final String readString2 = parcel.readString();
-                final long readLong = parcel.readLong();
+                final String string2 = parcel.readString();
+                final long j = parcel.readLong();
                 parcel.enforceNoDataAvail();
                 final BubbleController.IBubblesImpl iBubblesImpl4 = (BubbleController.IBubblesImpl) this;
                 BubbleController.this.mMainExecutor.execute(new Runnable() { // from class: com.android.wm.shell.bubbles.BubbleController$IBubblesImpl$$ExternalSyntheticLambda3
                     @Override // java.lang.Runnable
                     public final void run() {
                         BubbleTransitions.BubbleTransition bubbleTransition;
-                        BubbleController.IBubblesImpl iBubblesImpl5 = BubbleController.IBubblesImpl.this;
-                        String str = readString2;
-                        long j = readLong;
+                        BubbleController.IBubblesImpl iBubblesImpl5 = iBubblesImpl4;
+                        String str = string2;
+                        long j2 = j;
                         BubbleController bubbleController = iBubblesImpl5.mController;
                         BubbleData bubbleData = bubbleController.mBubbleData;
                         BubbleViewProvider bubbleViewProvider = bubbleData.mSelectedBubble;
@@ -111,7 +110,7 @@ public abstract class IBubbles$Stub extends Binder implements IInterface {
                         BubbleLogger bubbleLogger = bubbleController.mLogger;
                         if (anyBubbleWithKey != null) {
                             Bubble bubbleInStackWithKey = bubbleData.getBubbleInStackWithKey(str);
-                            if (bubbleInStackWithKey == null || Math.max(bubbleInStackWithKey.mLastUpdated, bubbleInStackWithKey.mLastAccessed) <= j) {
+                            if (bubbleInStackWithKey == null || Math.max(bubbleInStackWithKey.mLastUpdated, bubbleInStackWithKey.mLastAccessed) <= j2) {
                                 bubbleData.doRemove(18, str);
                                 bubbleData.dispatchPendingChanges();
                             }
@@ -142,47 +141,47 @@ public abstract class IBubbles$Stub extends Binder implements IInterface {
                 BubbleController.this.mMainExecutor.execute(new BubbleController$IBubblesImpl$$ExternalSyntheticLambda2(iBubblesImpl6, 1));
                 return true;
             case 8:
-                String readString3 = parcel.readString();
+                String string3 = parcel.readString();
                 parcel.enforceNoDataAvail();
                 BubbleController.IBubblesImpl iBubblesImpl7 = (BubbleController.IBubblesImpl) this;
-                BubbleController.this.mMainExecutor.execute(new BubbleController$$ExternalSyntheticLambda14(7, iBubblesImpl7, readString3));
+                BubbleController.this.mMainExecutor.execute(new BubbleController$$ExternalSyntheticLambda14(7, iBubblesImpl7, string3));
                 return true;
             case 9:
-                final int readInt2 = parcel.readInt();
-                final int readInt3 = parcel.readInt();
+                final int i4 = parcel.readInt();
+                final int i5 = parcel.readInt();
                 parcel.enforceNoDataAvail();
                 final BubbleController.IBubblesImpl iBubblesImpl8 = (BubbleController.IBubblesImpl) this;
                 BubbleController.this.mMainExecutor.execute(new Runnable() { // from class: com.android.wm.shell.bubbles.BubbleController$IBubblesImpl$$ExternalSyntheticLambda12
                     @Override // java.lang.Runnable
                     public final void run() {
-                        BubbleController.IBubblesImpl iBubblesImpl9 = BubbleController.IBubblesImpl.this;
-                        int i3 = readInt2;
-                        int i4 = readInt3;
+                        BubbleController.IBubblesImpl iBubblesImpl9 = iBubblesImpl8;
+                        int i6 = i4;
+                        int i7 = i5;
                         BubbleController bubbleController = iBubblesImpl9.mController;
-                        new Point(i3, i4);
+                        new Point(i6, i7);
                         bubbleController.getClass();
                     }
                 });
                 return true;
             case 10:
                 BubbleBarLocation bubbleBarLocation = (BubbleBarLocation) parcel.readTypedObject(BubbleBarLocation.CREATOR);
-                int readInt4 = parcel.readInt();
+                int i6 = parcel.readInt();
                 parcel.enforceNoDataAvail();
                 BubbleController.IBubblesImpl iBubblesImpl9 = (BubbleController.IBubblesImpl) this;
-                BubbleController.this.mMainExecutor.execute(new BubbleController$IBubblesImpl$$ExternalSyntheticLambda2(iBubblesImpl9, bubbleBarLocation, readInt4));
+                BubbleController.this.mMainExecutor.execute(new BubbleController$IBubblesImpl$$ExternalSyntheticLambda2(iBubblesImpl9, bubbleBarLocation, i6));
                 return true;
             case 11:
-                int readInt5 = parcel.readInt();
+                int i7 = parcel.readInt();
                 parcel.enforceNoDataAvail();
                 BubbleController.IBubblesImpl iBubblesImpl10 = (BubbleController.IBubblesImpl) this;
-                BubbleController.this.mMainExecutor.execute(new BubbleController$BubblesImpl$$ExternalSyntheticLambda15(iBubblesImpl10, readInt5, 1));
+                BubbleController.this.mMainExecutor.execute(new BubbleController$BubblesImpl$$ExternalSyntheticLambda15(iBubblesImpl10, i7, 1));
                 return true;
             case 12:
                 BubbleBarLocation bubbleBarLocation2 = (BubbleBarLocation) parcel.readTypedObject(BubbleBarLocation.CREATOR);
-                int readInt6 = parcel.readInt();
+                int i8 = parcel.readInt();
                 parcel.enforceNoDataAvail();
                 BubbleController.IBubblesImpl iBubblesImpl11 = (BubbleController.IBubblesImpl) this;
-                BubbleController.this.mMainExecutor.execute(new BubbleController$BubblesImpl$$ExternalSyntheticLambda0(iBubblesImpl11, bubbleBarLocation2, readInt6, 1));
+                BubbleController.this.mMainExecutor.execute(new BubbleController$BubblesImpl$$ExternalSyntheticLambda0(iBubblesImpl11, bubbleBarLocation2, i8, 1));
                 return true;
             case 13:
                 ShortcutInfo shortcutInfo = (ShortcutInfo) parcel.readTypedObject(ShortcutInfo.CREATOR);
@@ -204,18 +203,18 @@ public abstract class IBubbles$Stub extends Binder implements IInterface {
                 BubbleController.this.mMainExecutor.execute(new BubbleController$IBubblesImpl$$ExternalSyntheticLambda2(iBubblesImpl14, 4));
                 return true;
             case 16:
-                boolean readBoolean = parcel.readBoolean();
+                boolean z = parcel.readBoolean();
                 BubbleBarLocation bubbleBarLocation5 = (BubbleBarLocation) parcel.readTypedObject(BubbleBarLocation.CREATOR);
                 parcel.enforceNoDataAvail();
                 BubbleController.IBubblesImpl iBubblesImpl15 = (BubbleController.IBubblesImpl) this;
-                BubbleController.this.mMainExecutor.execute(new BubbleController$BubblesImpl$$ExternalSyntheticLambda10(iBubblesImpl15, readBoolean, bubbleBarLocation5));
+                BubbleController.this.mMainExecutor.execute(new BubbleController$BubblesImpl$$ExternalSyntheticLambda10(iBubblesImpl15, z, bubbleBarLocation5));
                 return true;
             case 17:
-                String readString4 = parcel.readString();
+                String string4 = parcel.readString();
                 Point point = (Point) parcel.readTypedObject(Point.CREATOR);
                 parcel.enforceNoDataAvail();
                 BubbleController.IBubblesImpl iBubblesImpl16 = (BubbleController.IBubblesImpl) this;
-                BubbleController.this.mMainExecutor.execute(new BubbleController$$ExternalSyntheticLambda13(iBubblesImpl16, readString4, 2, point));
+                BubbleController.this.mMainExecutor.execute(new BubbleController$$ExternalSyntheticLambda13(iBubblesImpl16, string4, 2, point));
                 return true;
             default:
                 return super.onTransact(i, parcel, parcel2, i2);

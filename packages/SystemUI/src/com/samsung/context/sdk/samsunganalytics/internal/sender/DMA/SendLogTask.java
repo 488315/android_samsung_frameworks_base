@@ -6,7 +6,6 @@ import com.samsung.context.sdk.samsunganalytics.internal.util.Debug;
 import com.sec.android.diagmonagent.common.util.executor.AsyncTaskClient;
 import com.sec.android.diagmonagent.sa.IDMAInterface;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes4.dex */
 public class SendLogTask implements AsyncTaskClient {
     public final Configuration configuration;

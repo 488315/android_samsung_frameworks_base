@@ -7,7 +7,6 @@ import androidx.compose.ui.unit.Constraints;
 import androidx.compose.ui.unit.ConstraintsKt;
 import androidx.compose.ui.unit.InlineClassHelperKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class IntrinsicHeightNode extends IntrinsicSizeModifier {
     public boolean enforceIncoming;
@@ -20,16 +19,16 @@ final class IntrinsicHeightNode extends IntrinsicSizeModifier {
 
     @Override // androidx.compose.foundation.layout.IntrinsicSizeModifier
     /* renamed from: calculateContentConstraints-l58MMJ0, reason: not valid java name */
-    public final long mo113calculateContentConstraintsl58MMJ0(Measurable measurable, long j) {
-        int minIntrinsicHeight = this.height == IntrinsicSize.Min ? measurable.minIntrinsicHeight(Constraints.m821getMaxWidthimpl(j)) : measurable.maxIntrinsicHeight(Constraints.m821getMaxWidthimpl(j));
-        if (minIntrinsicHeight < 0) {
-            minIntrinsicHeight = 0;
+    public final long mo114calculateContentConstraintsl58MMJ0(Measurable measurable, long j) {
+        int iMinIntrinsicHeight = this.height == IntrinsicSize.Min ? measurable.minIntrinsicHeight(Constraints.m823getMaxWidthimpl(j)) : measurable.maxIntrinsicHeight(Constraints.m823getMaxWidthimpl(j));
+        if (iMinIntrinsicHeight < 0) {
+            iMinIntrinsicHeight = 0;
         }
         Constraints.Companion.getClass();
-        if (minIntrinsicHeight < 0) {
+        if (iMinIntrinsicHeight < 0) {
             InlineClassHelperKt.throwIllegalArgumentException("height must be >= 0");
         }
-        return ConstraintsKt.createConstraints(0, Integer.MAX_VALUE, minIntrinsicHeight, minIntrinsicHeight);
+        return ConstraintsKt.createConstraints(0, Integer.MAX_VALUE, iMinIntrinsicHeight, iMinIntrinsicHeight);
     }
 
     @Override // androidx.compose.foundation.layout.IntrinsicSizeModifier

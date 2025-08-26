@@ -94,16 +94,16 @@ public class HeavyWeightSwitcherActivity extends Activity {
     /* JADX WARN: Type inference failed for: r8v2, types: [java.lang.CharSequence] */
     /* JADX WARN: Type inference failed for: r9v2, types: [java.lang.CharSequence] */
     void setIconAndText(int i, int i2, int i3, String str, String str2, int i4, int i5) {
-        Drawable drawable = null;
+        Drawable drawableLoadIcon = null;
         if (str != 0) {
             try {
                 ApplicationInfo applicationInfo = getPackageManager().getApplicationInfo(str, 0);
                 str = applicationInfo.loadLabel(getPackageManager());
-                drawable = applicationInfo.loadIcon(getPackageManager());
+                drawableLoadIcon = applicationInfo.loadIcon(getPackageManager());
             } catch (PackageManager.NameNotFoundException unused) {
             }
         }
-        setDrawable(i, drawable);
+        setDrawable(i, drawableLoadIcon);
         setText(i2, getString(i4, str));
         if (i3 != 0) {
             if (str2 != 0) {

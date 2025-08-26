@@ -1,5 +1,6 @@
 package com.android.systemui.util.kotlin;
 
+import kotlin.ResultKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
@@ -12,13 +13,11 @@ import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.internal.CombineKt;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes3.dex */
 public final class FlowKt$combine$$inlined$combine$1 implements Flow {
     final /* synthetic */ Flow[] $flows$inlined;
     final /* synthetic */ Function7 $transform$inlined$1;
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.util.kotlin.FlowKt$combine$$inlined$combine$1$2, reason: invalid class name */
     public final class AnonymousClass2 implements Function0 {
         final /* synthetic */ Flow[] $flows;
@@ -33,7 +32,6 @@ public final class FlowKt$combine$$inlined$combine$1 implements Flow {
         }
     }
 
-    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
     /* renamed from: com.android.systemui.util.kotlin.FlowKt$combine$$inlined$combine$1$3, reason: invalid class name */
     public final class AnonymousClass3 extends SuspendLambda implements Function3 {
         final /* synthetic */ Function7 $transform$inlined;
@@ -47,83 +45,50 @@ public final class FlowKt$combine$$inlined$combine$1 implements Flow {
             this.$transform$inlined = function7;
         }
 
-        /* JADX WARN: Code restructure failed: missing block: B:13:0x0054, code lost:
+        /* JADX WARN: Code restructure failed: missing block: B:14:0x0054, code lost:
         
             if (r1.emit(r13, r11) == r0) goto L15;
-         */
-        /* JADX WARN: Code restructure failed: missing block: B:14:0x0056, code lost:
-        
-            return r0;
-         */
-        /* JADX WARN: Code restructure failed: missing block: B:16:0x0048, code lost:
-        
-            if (r13 == r0) goto L15;
          */
         @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
         /*
             Code decompiled incorrectly, please refer to instructions dump.
-            To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final java.lang.Object invokeSuspend(java.lang.Object r13) {
-            /*
-                r12 = this;
-                kotlin.coroutines.intrinsics.CoroutineSingletons r0 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
-                int r1 = r12.label
-                r2 = 2
-                r3 = 1
-                if (r1 == 0) goto L21
-                if (r1 == r3) goto L18
-                if (r1 != r2) goto L10
-                kotlin.ResultKt.throwOnFailure(r13)
-                goto L57
-            L10:
-                java.lang.IllegalStateException r12 = new java.lang.IllegalStateException
-                java.lang.String r13 = "call to 'resume' before 'invoke' with coroutine"
-                r12.<init>(r13)
-                throw r12
-            L18:
-                java.lang.Object r1 = r12.L$0
-                kotlinx.coroutines.flow.FlowCollector r1 = (kotlinx.coroutines.flow.FlowCollector) r1
-                kotlin.ResultKt.throwOnFailure(r13)
-                r11 = r12
-                goto L4b
-            L21:
-                kotlin.ResultKt.throwOnFailure(r13)
-                java.lang.Object r13 = r12.L$0
-                r1 = r13
-                kotlinx.coroutines.flow.FlowCollector r1 = (kotlinx.coroutines.flow.FlowCollector) r1
-                java.lang.Object r13 = r12.L$1
-                java.lang.Object[] r13 = (java.lang.Object[]) r13
-                kotlin.jvm.functions.Function7 r4 = r12.$transform$inlined
-                r5 = 0
-                r5 = r13[r5]
-                r6 = r13[r3]
-                r7 = r13[r2]
-                r8 = 3
-                r8 = r13[r8]
-                r9 = 4
-                r9 = r13[r9]
-                r10 = 5
-                r10 = r13[r10]
-                r12.L$0 = r1
-                r12.label = r3
-                r11 = r12
-                java.lang.Object r13 = r4.invoke(r5, r6, r7, r8, r9, r10, r11)
-                if (r13 != r0) goto L4b
-                goto L56
-            L4b:
-                r12 = 0
-                r11.L$0 = r12
-                r11.label = r2
-                java.lang.Object r12 = r1.emit(r13, r11)
-                if (r12 != r0) goto L57
-            L56:
-                return r0
-            L57:
-                kotlin.Unit r12 = kotlin.Unit.INSTANCE
-                return r12
-            */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.util.kotlin.FlowKt$combine$$inlined$combine$1.AnonymousClass3.invokeSuspend(java.lang.Object):java.lang.Object");
+        public final Object invokeSuspend(Object obj) {
+            FlowCollector flowCollector;
+            AnonymousClass3 anonymousClass3;
+            CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+            int i = this.label;
+            if (i == 0) {
+                ResultKt.throwOnFailure(obj);
+                flowCollector = (FlowCollector) this.L$0;
+                Object[] objArr = (Object[]) this.L$1;
+                Function7 function7 = this.$transform$inlined;
+                Object obj2 = objArr[0];
+                Object obj3 = objArr[1];
+                Object obj4 = objArr[2];
+                Object obj5 = objArr[3];
+                Object obj6 = objArr[4];
+                Object obj7 = objArr[5];
+                this.L$0 = flowCollector;
+                this.label = 1;
+                anonymousClass3 = this;
+                obj = function7.invoke(obj2, obj3, obj4, obj5, obj6, obj7, anonymousClass3);
+                if (obj != coroutineSingletons) {
+                }
+                return coroutineSingletons;
+            }
+            if (i != 1) {
+                if (i != 2) {
+                    throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+                }
+                ResultKt.throwOnFailure(obj);
+                return Unit.INSTANCE;
+            }
+            flowCollector = (FlowCollector) this.L$0;
+            ResultKt.throwOnFailure(obj);
+            anonymousClass3 = this;
+            anonymousClass3.L$0 = null;
+            anonymousClass3.label = 2;
         }
 
         public final Object invokeSuspend$$forInline(Object obj) {
@@ -150,8 +115,8 @@ public final class FlowKt$combine$$inlined$combine$1 implements Flow {
     @Override // kotlinx.coroutines.flow.Flow
     public Object collect(FlowCollector flowCollector, Continuation continuation) {
         Flow[] flowArr = this.$flows$inlined;
-        Object combineInternal = CombineKt.combineInternal(flowArr, new AnonymousClass2(flowArr), new AnonymousClass3(null, this.$transform$inlined$1), flowCollector, continuation);
-        return combineInternal == CoroutineSingletons.COROUTINE_SUSPENDED ? combineInternal : Unit.INSTANCE;
+        Object objCombineInternal = CombineKt.combineInternal(flowArr, new AnonymousClass2(flowArr), new AnonymousClass3(null, this.$transform$inlined$1), flowCollector, continuation);
+        return objCombineInternal == CoroutineSingletons.COROUTINE_SUSPENDED ? objCombineInternal : Unit.INSTANCE;
     }
 
     public Object collect$$forInline(FlowCollector flowCollector, Continuation continuation) {

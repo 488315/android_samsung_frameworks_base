@@ -10,7 +10,6 @@ import androidx.compose.ui.Modifier;
 import androidx.compose.ui.node.ModifierNodeElement;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
 /* loaded from: classes.dex */
 final class ScrollingContainerElement extends ModifierNodeElement<ScrollingContainerNode> {
     public final BringIntoViewSpec bringIntoViewSpec;
@@ -52,15 +51,15 @@ final class ScrollingContainerElement extends ModifierNodeElement<ScrollingConta
     }
 
     public final int hashCode() {
-        int m = TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m((this.orientation.hashCode() + (this.state.hashCode() * 31)) * 31, 31, this.enabled), 31, this.reverseScrolling);
+        int iM = TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m((this.orientation.hashCode() + (this.state.hashCode() * 31)) * 31, 31, this.enabled), 31, this.reverseScrolling);
         FlingBehavior flingBehavior = this.flingBehavior;
-        int hashCode = (m + (flingBehavior != null ? flingBehavior.hashCode() : 0)) * 31;
+        int iHashCode = (iM + (flingBehavior != null ? flingBehavior.hashCode() : 0)) * 31;
         MutableInteractionSource mutableInteractionSource = this.interactionSource;
-        int hashCode2 = (hashCode + (mutableInteractionSource != null ? mutableInteractionSource.hashCode() : 0)) * 31;
+        int iHashCode2 = (iHashCode + (mutableInteractionSource != null ? mutableInteractionSource.hashCode() : 0)) * 31;
         BringIntoViewSpec bringIntoViewSpec = this.bringIntoViewSpec;
-        int m2 = TransitionData$$ExternalSyntheticOutline0.m((hashCode2 + (bringIntoViewSpec != null ? bringIntoViewSpec.hashCode() : 0)) * 31, 31, this.useLocalOverscrollFactory);
+        int iM2 = TransitionData$$ExternalSyntheticOutline0.m((iHashCode2 + (bringIntoViewSpec != null ? bringIntoViewSpec.hashCode() : 0)) * 31, 31, this.useLocalOverscrollFactory);
         OverscrollEffect overscrollEffect = this.overscrollEffect;
-        return m2 + (overscrollEffect != null ? overscrollEffect.hashCode() : 0);
+        return iM2 + (overscrollEffect != null ? overscrollEffect.hashCode() : 0);
     }
 
     @Override // androidx.compose.ui.node.ModifierNodeElement
